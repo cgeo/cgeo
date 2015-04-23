@@ -885,9 +885,6 @@
   <string name="user_menu_open_contact">Open contactkaart</string>
   <string name="navigation">Navigatie</string>
   <string name="compass_title">Kompas</string>
-  <string name="compass_sensors">Actieve sensoren</string>
-  <string name="use_gps">Gebruik alleen GPS</string>
-  <string name="use_compass">Gebruik GPS en kompas</string>
   <string name="destination_select">Selecteer bestemming</string>
   <string name="navigation_direct_navigation">Directe navigatie</string>
   <string name="navigation_target">Doel</string>

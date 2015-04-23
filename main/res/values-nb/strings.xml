@@ -884,9 +884,6 @@
   <string name="user_menu_open_contact">Åpne kontaktinfo</string>
   <string name="navigation">Navigasjon</string>
   <string name="compass_title">Kompass</string>
-  <string name="compass_sensors">Aktive sensorer</string>
-  <string name="use_gps">Bruk GPS</string>
-  <string name="use_compass">Bruk kompass</string>
   <string name="destination_select">Velg destinasjon</string>
   <string name="navigation_direct_navigation">Direkte navigering</string>
   <string name="navigation_target">Mål</string>

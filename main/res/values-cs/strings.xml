@@ -73,6 +73,9 @@
   <string name="log_tb_visit">Navštíveno</string>
   <string name="log_tb_drop">Nechat zde</string>
   <string name="log_tb_changeall">Změnit vše</string>
+  <string name="log_tb_note">Poznámka</string>
+  <string name="log_tb_discovered">Spatřen</string>
+  <string name="log_tb_archived">Archivován</string>
   <string name="log_save">Uložit offline</string>
   <string name="log_saving">Odesílání Logu…</string>
   <string name="log_saving_and_uploading">Odesílání Logu a nahrávání obrázku…</string>
@@ -191,11 +194,11 @@
   <string name="warn_no_keyword">Nenalezena žádná klíčová slova</string>
   <string name="warn_no_username">Nenalezeno žádné uživatelské jméno</string>
   <string name="warn_search_help_title">Potřebuješ pomoct?</string>
-  <string name="warn_search_help_address">Zadej adresu nebo název oblasti. Například použij název ulice \"Radlicka 100, Praha, Ceska republika\", název města \"Berlín\" nebo název místa \"Yellowstone Park\".</string>
-  <string name="warn_search_help_gccode">Zadej kód keše. Například \"GC1VCAZ\".</string>
+  <string name="warn_search_help_address">Zadej adresu nebo název oblasti. Můžeš použít například název ulice „Radlicka 100, Praha, Ceska republika“, název města „Berlín“ nebo název místa „Yellowstone Park“.</string>
+  <string name="warn_search_help_gccode">Zadej kód keše. Například „GC1VCAZ“.</string>
   <string name="warn_search_help_keyword">Zadej slovo, které je použito v názvu keše, kterou se pokoušíš najít.</string>
   <string name="warn_search_help_user">Zadej jméno uživatele z Geocaching.com.</string>
-  <string name="warn_search_help_tb">Zadej kód sledovatelného předmětu. Například \"TB29QMZ\".</string>
+  <string name="warn_search_help_tb">Zadej kód sledovatelného předmětu. Například „TB29QMZ“.</string>
   <string name="warn_log_text_fill">Prosím, vyplň nějaký text do Logu.</string>
   <string name="warn_load_images">c:geo nedokázalo načíst obrázky.</string>
   <string name="warn_invalid_mapfile">Vybraný mapový soubor není platným mapovým podkladem verze 0.3.0 mapového souboru.\nOffline mapy nejsou dostupné.</string>
@@ -493,8 +496,8 @@
   <string name="init_maptrail">Zobrazovat trasu cesty</string>
   <string name="init_summary_maptrail">Zobrazovat na mapě trasu cesty</string>
   <string name="init_share_after_export">Po exportování GPX otevřít menu sdílení</string>
-  <string name="init_trackautovisit">Nastavit TB na \"Navštíveno\"</string>
-  <string name="init_summary_trackautovisit">Nastavit sledovatelné předměty na \"Navštíveno\" jako výchozí</string>
+  <string name="init_trackautovisit">Nastavit TB na „Navštíveno“</string>
+  <string name="init_summary_trackautovisit">Nastavit sledovatelné předměty na „Navštíveno“ jako výchozí</string>
   <string name="init_sigautoinsert">Vkládat podpis automaticky</string>
   <string name="init_loaddirectionimg">V případě potřeby stahovat směrový obrázek (pouze Běžní členové)</string>
   <string name="init_summary_loaddirectionimg">V případě potřeby stáhnout směrový obrázek (pouze Běžní členové)</string>
@@ -676,6 +679,7 @@
   <string name="cache_menu_map_static">Statické mapy</string>
   <string name="cache_menu_download_map_static">Stáhnout statické mapy</string>
   <string name="cache_menu_rmaps">Rmaps</string>
+  <string name="cache_menu_map_ext">Další externí aplikace</string>
   <string name="cache_menu_streetview">Street View</string>
   <string name="cache_menu_browser">Otevřít v prohlížečí</string>
   <string name="cache_menu_visit">Zalogovat návštěvu</string>
@@ -896,9 +900,6 @@
   <string name="user_menu_open_contact">Otevřít kartu kontaktu</string>
   <string name="navigation">Navigace</string>
   <string name="compass_title">Kompas</string>
-  <string name="compass_sensors">Aktivovat senzory</string>
-  <string name="use_gps">Použít GPS</string>
-  <string name="use_compass">Použít kompas</string>
   <string name="destination_select">Vyber cíl</string>
   <string name="navigation_direct_navigation">Přímá navigace</string>
   <string name="navigation_target">Cíl</string>
@@ -927,6 +928,8 @@
   <string name="helper_google_translate_description">Pokud si v aplikaci Překladač Google stáhneš překladový balíček, můžeš jednoduše překládat popisy keší v c:geu dlouhým podržením textu (a to bez připojení k Internetu).</string>
   <string name="addon_missing_title">Chybějící modul</string>
   <string name="addon_download_prompt">Získat nyní z Google Play.</string>
+  <string name="export">Export</string>
+  <string name="export_progress">Export: %1$s</string>
   <string name="export_exportedto">Exportováno do</string>
   <string name="export_failed">Export selhal</string>
   <string name="export_fieldnotes">Poznámky z terénu</string>
@@ -1175,7 +1178,6 @@
   <string name="about_twitter">Má <b>c:geo</b> publikovat nový status na Twitteru vždy, když zaloguješ keš?</string>
   <string name="faq_title">FAQ</string>
   <string name="status_new_release" tools:ignore="UnusedResources">Dostupné nové vydání.\nKlepni pro instalaci.</string>
-  <string name="status_new_nightly" tools:ignore="UnusedResources">Dostupné nové \"noční sestavení\"\nKlepni pro instalaci.</string>
   <string name="status_new_rc" tools:ignore="UnusedResources">Dostupný nový kandidát na vydání.\nKlepni pro instalaci.</string>
   <string name="status_geocaching_change" tools:ignore="UnusedResources">Nedávné změny na geocaching.com rozbily c:geo.\nPracujeme na opravě, proveď kontrolu později.</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Nedávné změny na geocaching.com rozbily Aktivní mapu c:geo.\nPracujeme na opravě, proveď kontrolu později.</string>
@@ -1244,7 +1246,12 @@
   <string name="init_summary_geokrety">Povolit sledovatelné předměty z GeoKrety.org</string>
   <string name="init_summary_geokrety_cache">Zlepšení rychlosti načítání.</string>
   <string name="init_summary_geokrety_account">Účet nebyl nastaven.</string>
+  <string name="init_summary_geokrety_not_anonymous">Přihlášení ke službě GeoKrety z aplikace c:geo nemůže být anonymní. Prosím, zaregistruj se.</string>
   <string name="init_geokrety_register_ok">Přihlášení bylo úspěšné</string>
   <string name="init_geokrety_register_fail">Přihlášení selhalo</string>
+  <string name="init_geokrety_get_secid">Získat API klíč</string>
+  <string name="init_geokrety_description">Ulož svůj API klíč v c:geu pro snadné přihlášení do služby GeoKrety</string>
   <string name="init_geokrety_cache_description">GeoKretyMap.org poskytuje informace o sledovatelných předmětech služby Geokrety. Data nemusí být aktuální!\nPozice: ~30 min\nPopisy: ~24 h.</string>
+  <string name="init_geokrety_cache">Používat přednačtená data</string>
+  <string name="init_geokrety_userid">ID uživatele: %s</string>
 </resources>

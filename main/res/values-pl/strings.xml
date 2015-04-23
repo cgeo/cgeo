@@ -877,9 +877,6 @@
   <string name="user_menu_open_contact">Otwórz wizytówkę kontaktu</string>
   <string name="navigation">Nawigacja</string>
   <string name="compass_title">Kompas</string>
-  <string name="compass_sensors">Aktywne sensory</string>
-  <string name="use_gps">Użyj tylko GPS</string>
-  <string name="use_compass">Użyj GPS i kompasu</string>
   <string name="destination_select">Wybierz cel</string>
   <string name="navigation_direct_navigation">Bezpośrednia nawigacja</string>
   <string name="navigation_target">Cel</string>

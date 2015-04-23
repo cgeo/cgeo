@@ -83,7 +83,7 @@
   <string name="log_saving_and_uploading">A enviar o registo e a imagem…</string>
   <string name="log_clear">Limpar</string>
   <string name="log_post_not_possible">A carregar página de registo…</string>
-  <string name="log_post_geocode_missing">Geocodigo em falta...</string>
+  <string name="log_post_geocode_missing">Geocodigo em falta…</string>
   <string name="log_date_future_not_allowed">Registos com datas futuras não são permitidos.</string>
   <string name="log_add">Adicionar</string>
   <string name="log_repeat">Repetir último registo</string>
@@ -888,9 +888,6 @@
   <string name="user_menu_open_contact">Abrir contacto</string>
   <string name="navigation">Navegação</string>
   <string name="compass_title">Bússola</string>
-  <string name="compass_sensors">Sensores ativos</string>
-  <string name="use_gps">Utilizar GPS</string>
-  <string name="use_compass">Utilizar Bússola</string>
   <string name="destination_select">Seleccionar destino</string>
   <string name="navigation_direct_navigation">Navegação directa</string>
   <string name="navigation_target">Destino</string>

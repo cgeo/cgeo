@@ -885,9 +885,6 @@
   <string name="user_menu_open_contact">Otvoriť kartu kontaktu</string>
   <string name="navigation">Navigácia</string>
   <string name="compass_title">Kompas</string>
-  <string name="compass_sensors">Aktívne senzory</string>
-  <string name="use_gps">Použiť iba GPS</string>
-  <string name="use_compass">Použiť GPS a kompas</string>
   <string name="destination_select">Vyberte cieľ</string>
   <string name="navigation_direct_navigation">Priama navigácia</string>
   <string name="navigation_target">Cieľ</string>

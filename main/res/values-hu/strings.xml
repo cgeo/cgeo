@@ -880,9 +880,6 @@
   <string name="user_menu_open_contact">Névjegy megnyitása</string>
   <string name="navigation">Navigáció</string>
   <string name="compass_title">Iránytű</string>
-  <string name="compass_sensors">Aktív szenzorok</string>
-  <string name="use_gps">GPS használata</string>
-  <string name="use_compass">Iránytű használata</string>
   <string name="destination_select">Cél kiválasztása</string>
   <string name="navigation_direct_navigation">Közvetlen navigáció</string>
   <string name="navigation_target">Célpont</string>

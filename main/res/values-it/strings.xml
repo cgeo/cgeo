@@ -884,9 +884,6 @@
   <string name="user_menu_open_contact">Aprire scheda contatto</string>
   <string name="navigation">Navigazione</string>
   <string name="compass_title">Bussola</string>
-  <string name="compass_sensors">Sensori attivi</string>
-  <string name="use_gps">Usa Nord solo da GPS</string>
-  <string name="use_compass">Usa Nord da GPS e bussola</string>
   <string name="destination_select">Scegli destinazione</string>
   <string name="navigation_direct_navigation">Navigazione diretta</string>
   <string name="navigation_target">Destinazione</string>
@@ -1226,7 +1223,6 @@
   <string name="init_summary_geokrety">Abilitare le trackablee da GeoKrety.org</string>
   <string name="init_summary_geokrety_cache">Migliorare la velocità di caricamento.</string>
   <string name="init_summary_geokrety_account">Nessun account configurato.</string>
-  <string name="init_geokrety_register_ok">Il login è avvenuto con successo</string>
   <string name="init_geokrety_register_fail">Login fallito</string>
   <string name="init_geokrety_get_secid">Recupera la chiave API</string>
   <string name="init_geokrety_description">Memorizza la tua chiave API su c:geo per facilitare la registrazione su GeoKrety</string>

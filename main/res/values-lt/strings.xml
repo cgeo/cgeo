@@ -887,9 +887,8 @@
   <string name="user_menu_open_contact">Atidaryti kontakto kortelę</string>
   <string name="navigation">Navigacija</string>
   <string name="compass_title">Kompasas</string>
-  <string name="compass_sensors">Aktyvuoti sensorius</string>
-  <string name="use_gps">Naudoti tik GPS</string>
-  <string name="use_compass">Naudoti GPS ir kompasą</string>
+  <string name="use_gps">Naudojamas tik GPS</string>
+  <string name="use_compass">Naudojamas GPS ir magnetinis kompasas</string>
   <string name="destination_select">Pasirinkite tikslą</string>
   <string name="navigation_direct_navigation">Tiesioginė navigacija</string>
   <string name="navigation_target">Tikslas</string>
@@ -918,7 +917,8 @@
   <string name="helper_google_translate_description">Atsisiuntę vertimo paketą Google Translate programai galėsite lengvai išversti slėptuvės aprašymus ilgai paspaudę ant slėptuvės aprašymo teksto (tam nereikės interneto ryšio).</string>
   <string name="addon_missing_title">Trūksta įskiepio</string>
   <string name="addon_download_prompt">Parsisiųsti iš Google Play dabar.</string>
-  <string name="export">Eksportuoti: %1$s</string>
+  <string name="export">Eksportuoti</string>
+  <string name="export_progress">Eksportuojama: %1$s</string>
   <string name="export_exportedto">eksportuota į</string>
   <string name="export_failed">Eksportuoti nepavyko</string>
   <string name="export_fieldnotes">Lauko užrašai</string>
@@ -1236,10 +1236,11 @@
   <string name="init_summary_geokrety_cache">Padidina užkrovimo greitį.</string>
   <string name="init_summary_geokrety_account">Nesukonfigūruota paskyra.</string>
   <string name="init_summary_geokrety_not_anonymous">GeoKrety registracija iš c:geo negali būti anoniminė. Prašome registruotis.</string>
-  <string name="init_geokrety_register_ok">Prisijungta sėkmingai</string>
+  <string name="init_geokrety_register_ok">Prisijungimas sėkmingas</string>
   <string name="init_geokrety_register_fail">Nepavyko prisijungti</string>
   <string name="init_geokrety_get_secid">Gauti API raktą</string>
   <string name="init_geokrety_description">Išsaugokite savo API raktą c:geo programoje, tai palengvina prisijungimą prie GeoKrety</string>
   <string name="init_geokrety_cache_description">GeoKretyMap.org suteikia duomenis apie GeoKrety keliauninkus. Duomenis gali būti ne patys naujausi! \nPadėtis: ~ 30min. \nAprašymai: ~ 24h.</string>
   <string name="init_geokrety_cache">Naudoti duomenis iš podėlio</string>
+  <string name="init_geokrety_userid">Vartotojo Id: %s</string>
 </resources>

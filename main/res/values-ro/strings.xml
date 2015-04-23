@@ -882,9 +882,6 @@
   <string name="user_menu_open_contact">Deschide pagina contactului</string>
   <string name="navigation">Navigare</string>
   <string name="compass_title">Busolă</string>
-  <string name="compass_sensors">Senzori activi</string>
-  <string name="use_gps">Foloseşte doar GPS-ul</string>
-  <string name="use_compass">Foloseşte GPS-ul şi busola</string>
   <string name="destination_select">Alege destinaţia</string>
   <string name="navigation_direct_navigation">Navigare directă</string>
   <string name="navigation_target">Ţintă</string>

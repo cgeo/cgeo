@@ -887,9 +887,6 @@
   <string name="user_menu_open_contact">Obre targeta del contacte</string>
   <string name="navigation">Navegació</string>
   <string name="compass_title">Brúixola</string>
-  <string name="compass_sensors">Sensors actius</string>
-  <string name="use_gps">Usa només el GPS</string>
-  <string name="use_compass">Usa el GPS i la brúixola</string>
   <string name="destination_select">Tria destinació</string>
   <string name="navigation_direct_navigation">Navegació directa</string>
   <string name="navigation_target">Objectiu</string>
