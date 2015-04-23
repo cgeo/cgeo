@@ -83,7 +83,7 @@
   <string name="log_saving_and_uploading">Pieraksta nosūtīšana un bildes augšupielāde…</string>
   <string name="log_clear">Notīrīt</string>
   <string name="log_post_not_possible">Ielādē apmeklējuma ierasta lapu…</string>
-  <string name="log_post_geocode_missing">Pietrūkst geo kods...</string>
+  <string name="log_post_geocode_missing">Pietrūkst geo kods…</string>
   <string name="log_date_future_not_allowed">Nākotnē veikti ieraksti nav atļauti.</string>
   <string name="log_add">Pievienot</string>
   <string name="log_repeat">Atkārtot iepriekšējo reģistrēšanos</string>
@@ -609,7 +609,7 @@
   <string name="cache_dialog_offline_drop_title">Bezsaistes režīmā</string>
   <string name="cache_dialog_offline_drop_message">Notiek slēpņa izdzēšana no ierīces atmiņas…</string>
   <string name="cache_dialog_refresh_title">Atjaunot</string>
-  <string name="cache_dialog_refresh_message">Pārlādē slēpņa informāciju...</string>
+  <string name="cache_dialog_refresh_message">Pārlādē slēpņa informāciju…</string>
   <string name="cache_dialog_watchlist_add_title">Saraksts ar novērojamajiem</string>
   <string name="cache_dialog_watchlist_add_message">Notiek slēpņa pievienošana novērojamo slēpņu sarakstam…</string>
   <string name="cache_dialog_watchlist_remove_title">Saraksts ar novērojamajiem</string>
@@ -774,7 +774,7 @@
   <string name="search_address_result">Atrastās vietas</string>
   <string name="search_own_caches">Meklēt manus slēpņus</string>
   <string name="trackable">Ceļotājs</string>
-  <string name="trackable_details_loading">Ielādē  ceļotāja informāciju...</string>
+  <string name="trackable_details_loading">Ielādē  ceļotāja informāciju…</string>
   <string name="trackable_log_touch">Ierakstīt par saskarsmi</string>
   <string name="trackable_browser_open">Atvērt pārlūkprogrammā</string>
   <string name="trackable_goal">Mērķis</string>
@@ -794,9 +794,6 @@
   <string name="user_menu_send_message">Nosūtīt ziņu</string>
   <string name="navigation">Navigācija</string>
   <string name="compass_title">Kompass</string>
-  <string name="compass_sensors">Aktīvie sensori</string>
-  <string name="use_gps">Izmantot tikai GPS</string>
-  <string name="use_compass">Izmantot GPS un kompasu</string>
   <string name="destination_select">Izvēlieties galamērķi</string>
   <string name="navigation_target">Mērķis</string>
   <string name="err_nav_no_coordinates">Nevar sākt navigāciju bez koordinātēm</string>

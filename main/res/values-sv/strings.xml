@@ -895,9 +895,6 @@
   <string name="user_menu_open_contact">Öppna kontakt</string>
   <string name="navigation">Navigering</string>
   <string name="compass_title">Kompass</string>
-  <string name="compass_sensors">Aktiva sensorer</string>
-  <string name="use_gps">Använd enbart GPS</string>
-  <string name="use_compass">Använd GPS och kompass</string>
   <string name="destination_select">Välj målpunkt</string>
   <string name="navigation_direct_navigation">Direkt navigering</string>
   <string name="navigation_target">Mål</string>
@@ -1233,7 +1230,6 @@
   <string name="init_summary_geokrety">Aktivera trackables från GeoKrety.org</string>
   <string name="init_summary_geokrety_cache">Förbättra laddningshastighet.</string>
   <string name="init_summary_geokrety_account">Inget konto har konfigurerats.</string>
-  <string name="init_geokrety_register_ok">Inloggningen lyckades</string>
   <string name="init_geokrety_register_fail">Inloggningen misslyckades</string>
   <string name="init_geokrety_get_secid">Hämta API-nyckel</string>
   <string name="init_geokrety_description">Lagra din API-nyckel i c:geo för att underlätta loggning av GeoKrety</string>

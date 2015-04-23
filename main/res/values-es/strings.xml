@@ -885,8 +885,7 @@
   <string name="user_menu_open_contact">Abriendo contacto</string>
   <string name="navigation">Navegación</string>
   <string name="compass_title">Brújula</string>
-  <string name="compass_sensors">Sensores activos</string>
-  <string name="use_gps">Solo usar GPS</string>
+  <string name="use_gps">Usar sólo GPS</string>
   <string name="use_compass">Usar GPS y brújula</string>
   <string name="destination_select">Seleccionar destino</string>
   <string name="navigation_direct_navigation">Navegación directa</string>
@@ -916,6 +915,7 @@
   <string name="helper_google_translate_description">Si descargas paquetes de idiomas en la app Traductor de Google, puedes traducir las descripciones de los cachés en c:geo pulsando de forma larga en el texto del caché (sin conexión a internet).</string>
   <string name="addon_missing_title">No se encuentra el complemento</string>
   <string name="addon_download_prompt">Obtenlo ahora desde Google Play.</string>
+  <string name="export">Exportar</string>
   <string name="export_exportedto">exportado a</string>
   <string name="export_failed">Error en la exportación</string>
   <string name="export_fieldnotes">Notas de campo</string>
@@ -1227,7 +1227,6 @@
   <string name="init_summary_geokrety_cache">Mejorar la velocidad de carga.</string>
   <string name="init_summary_geokrety_account">No hay cuenta configurada.</string>
   <string name="init_summary_geokrety_not_anonymous">No puedes registrar un GeoKrety desde c:geo de manera anónima. Por favor, identifícate.</string>
-  <string name="init_geokrety_register_ok">Se ha iniciado sesión</string>
   <string name="init_geokrety_register_fail">Fallo al iniciar sesión</string>
   <string name="init_geokrety_get_secid">Recuperar clave API</string>
   <string name="init_geokrety_description">Guarda tu clave API en c:geo para iniciar sesión en GeoKrety más fácilmente</string>

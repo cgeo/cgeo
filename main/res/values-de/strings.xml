@@ -900,8 +900,8 @@
   <string name="user_menu_open_contact">Kontakt öffnen</string>
   <string name="navigation">Navigation</string>
   <string name="compass_title">Kompass</string>
-  <string name="use_gps">Nur GPS verwendet</string>
-  <string name="use_compass">GPS und Magnetkompass verwendet</string>
+  <string name="use_gps">Nur GPS</string>
+  <string name="use_compass">GPS und Magnetkompass</string>
   <string name="destination_select">Ziel auswählen</string>
   <string name="navigation_direct_navigation">Direkte Navigation</string>
   <string name="navigation_target">Ziel</string>

@@ -844,9 +844,6 @@
   <string name="user_menu_open_contact">Odpri vizitko kontakta</string>
   <string name="navigation">Navigacija</string>
   <string name="compass_title">Kompas</string>
-  <string name="compass_sensors">Aktivni senzorji</string>
-  <string name="use_gps">Uporabi samo GPS</string>
-  <string name="use_compass">Uporabi GPS in kompas</string>
   <string name="destination_select">Izbira destinacije</string>
   <string name="navigation_direct_navigation">Direktna navigacija</string>
   <string name="navigation_target">Cilj</string>

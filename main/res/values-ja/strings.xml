@@ -759,8 +759,6 @@
   <string name="user_menu_open_contact">連絡先を開く</string>
   <string name="navigation">ナビゲーション</string>
   <string name="compass_title">コンパス</string>
-  <string name="use_gps">GPSのみ使用</string>
-  <string name="use_compass">GPSとコンパスを使用</string>
   <string name="destination_select">目的地を選択</string>
   <string name="navigation_direct_navigation">Direct Navigation</string>
   <string name="navigation_target">Target</string>
