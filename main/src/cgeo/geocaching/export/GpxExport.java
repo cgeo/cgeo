@@ -93,20 +93,13 @@ public class GpxExport extends AbstractExport {
         text.setText(activity.getString(R.string.export_confirm_message, Settings.getGpxExportDir(), fileName));
 
         final CheckBox shareOption = ButterKnife.findById(layout, R.id.share);
-
         shareOption.setChecked(Settings.getShareAfterExport());
-
-        shareOption.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(final View v) {
-                Settings.setShareAfterExport(shareOption.isChecked());
-            }
-        });
 
         builder.setPositiveButton(R.string.export, new DialogInterface.OnClickListener() {
 
             @Override
             public void onClick(final DialogInterface dialog, final int which) {
+                Settings.setShareAfterExport(shareOption.isChecked());
                 dialog.dismiss();
                 new ExportTask(activity).execute(geocodes);
             }
