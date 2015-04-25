@@ -27,11 +27,18 @@ import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.LogTemplateProvider;
 import cgeo.geocaching.utils.LogTemplateProvider.LogContext;
+import cgeo.geocaching.utils.RxUtils;
 
 import com.github.amlcurran.showcaseview.targets.ActionItemTarget;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+
+import rx.Observable;
+import rx.android.app.AppObservable;
+import rx.functions.Action0;
+import rx.functions.Action1;
+import rx.functions.Func1;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -41,8 +48,6 @@ import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.LoaderManager.LoaderCallbacks;
-import android.support.v4.content.Loader;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -64,7 +69,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class LogCacheActivity extends AbstractLoggingActivity implements DateDialog.DateDialogParent, LoaderCallbacks<List<TrackableLog>> {
+public class LogCacheActivity extends AbstractLoggingActivity implements DateDialog.DateDialogParent {
 
     private static final String SAVED_STATE_RATING = "cgeo.geocaching.saved_state_rating";
     private static final String SAVED_STATE_TYPE = "cgeo.geocaching.saved_state_type";
@@ -87,7 +92,6 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     private SparseArray<TrackableLog> actionButtons;
 
     private ILoggingManager loggingManager;
-    private List<TrackableConnector> trackablesConnectors;
 
     // Data to be saved while reconfiguring
     private float rating;
@@ -97,28 +101,6 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     private String imageDescription;
     private Uri imageUri;
     private boolean sendButtonEnabled;
-
-    @Override
-    public Loader<List<TrackableLog>> onCreateLoader(final int id, final Bundle bundle) {
-        for (final TrackableConnector connector: trackablesConnectors) {
-            if (id == connector.getInventoryLoaderId()) {
-                return connector.getInventoryLoader(app);
-            }
-        }
-        return null;
-    }
-
-    @Override
-    public void onLoadFinished(final Loader<List<TrackableLog>> listLoader, final List<TrackableLog> trackableList) {
-        trackables.addAll(trackableList);
-        initializeTrackablesAction();
-        updateTrackablesList();
-    }
-
-    @Override
-    public void onLoaderReset(final Loader<List<TrackableLog>> listLoader) {
-        // nothing
-    }
 
     public void onLoadFinished() {
         if (loggingManager.hasLoaderError()) {
@@ -328,12 +310,31 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         loggingManager = cache.getLoggingManager(this);
         loggingManager.init();
 
-        trackablesConnectors = ConnectorFactory.getGenericTrackablesConnectors();
-        for (final TrackableConnector connector: trackablesConnectors) {
-            if (connector.isRegistered()) {
-                getSupportLoaderManager().initLoader(connector.getInventoryLoaderId(), null, this).forceLoad();
+        // Load Generic Trackables
+        AppObservable.bindActivity(this,
+            // Obtain the actives connectors
+            Observable.from(ConnectorFactory.getGenericTrackablesConnectors())
+            .subscribeOn(RxUtils.networkScheduler)
+            .flatMap(new Func1<TrackableConnector, Observable<TrackableLog>>() {
+                @Override
+                public Observable<TrackableLog> call(final TrackableConnector trackableConnector) {
+                    return trackableConnector.trackableLogInventory();
+                }
+            })
+        // Store trackables
+        ).doOnNext(new Action1<TrackableLog>() {
+            @Override
+            public void call(final TrackableLog trackableLog) {
+                trackables.add(trackableLog);
             }
-        }
+        // Update the UI
+        }).doOnTerminate(new Action0() {
+            @Override
+            public void call() {
+                initializeTrackablesAction();
+                updateTrackablesList();
+            }
+        }).subscribe();
 
         requestKeyboardForLogging();
     }
@@ -495,7 +496,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
                         }
                     }
 
-                    for (final TrackableConnector connector: trackablesConnectors) {
+                    for (final TrackableConnector connector: ConnectorFactory.getGenericTrackablesConnectors()) {
                         final TrackableLoggingManager manager = connector.getTrackableLoggingManager((AbstractLoggingActivity) activity);
                         if (manager != null) {
                             for (final TrackableLog trackableLog : trackables) {
