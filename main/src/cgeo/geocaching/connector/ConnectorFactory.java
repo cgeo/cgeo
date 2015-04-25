@@ -8,6 +8,7 @@ import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.connector.capability.ISearchByCenter;
 import cgeo.geocaching.connector.capability.ISearchByFinder;
 import cgeo.geocaching.connector.capability.ISearchByKeyword;
+import cgeo.geocaching.connector.capability.ISearchByNextPage;
 import cgeo.geocaching.connector.capability.ISearchByOwner;
 import cgeo.geocaching.connector.capability.ISearchByViewPort;
 import cgeo.geocaching.connector.ec.ECConnector;
@@ -89,6 +90,9 @@ public final class ConnectorFactory {
     private static final Collection<ISearchByCenter> searchByCenterConns = getMatchingConnectors(ISearchByCenter.class);
 
     @NonNull
+    private static final Collection<ISearchByNextPage> searchByNextPageConns = getMatchingConnectors(ISearchByNextPage.class);
+
+    @NonNull
     private static final Collection<ISearchByKeyword> searchByKeywordConns = getMatchingConnectors(ISearchByKeyword.class);
 
     @NonNull
@@ -117,6 +121,11 @@ public final class ConnectorFactory {
     @NonNull
     public static Collection<ISearchByCenter> getSearchByCenterConnectors() {
         return searchByCenterConns;
+    }
+
+    @NonNull
+    public static Collection<ISearchByNextPage> getSearchByNextPageConnectors() {
+        return searchByNextPageConns;
     }
 
     @NonNull
