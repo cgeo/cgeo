@@ -31,6 +31,7 @@ public class GC3XX5J extends MockedCache {
         return 1.5f;
     }
 
+    @NonNull
     @Override
     public String getGeocode() {
         return "GC3XX5J";
