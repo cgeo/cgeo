@@ -109,6 +109,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     @Override
     public void onLoadFinished(final Loader<List<TrackableLog>> listLoader, final List<TrackableLog> trackableList) {
         trackables.addAll(trackableList);
+        initializeTrackablesAction();
         updateTrackablesList();
     }
 
