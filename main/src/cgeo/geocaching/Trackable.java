@@ -6,6 +6,7 @@ import cgeo.geocaching.connector.trackable.TrackableConnector;
 import cgeo.geocaching.enumerations.LogTypeTrackable;
 import cgeo.geocaching.utils.ImageUtils;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -14,6 +15,7 @@ import android.text.Html;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -46,6 +48,52 @@ public class Trackable implements ILogable {
     private String trackingcode = null;
     private TrackableBrand brand = null;
     private TrackableConnector trackableConnector = null;
+
+    /**
+     * Merge data from another Trackable.
+     * Squeeze existing data from the new one.
+     *
+     * @param newTrackable from which to pull informations
+     */
+    public void mergeTrackable(final Trackable newTrackable) {
+        guid = StringUtils.defaultIfEmpty(newTrackable.guid, guid);
+        geocode = StringUtils.defaultIfEmpty(newTrackable.geocode, geocode);
+        iconUrl = StringUtils.defaultIfEmpty(newTrackable.iconUrl, iconUrl);
+        name = StringUtils.defaultIfEmpty(newTrackable.name, name);
+
+        type = ObjectUtils.defaultIfNull(newTrackable.type, type);
+        released = ObjectUtils.defaultIfNull(newTrackable.released, released);
+        distance = newTrackable.distance == -1 ? distance : newTrackable.distance;
+        origin = ObjectUtils.defaultIfNull(newTrackable.origin, origin);
+        owner = ObjectUtils.defaultIfNull(newTrackable.owner, owner);
+        ownerGuid = ObjectUtils.defaultIfNull(newTrackable.ownerGuid, ownerGuid);
+        spottedName = ObjectUtils.defaultIfNull(newTrackable.spottedName, spottedName);
+        spottedType = newTrackable.spottedType == SPOTTED_UNSET ? spottedType : newTrackable.spottedType;
+        spottedGuid = ObjectUtils.defaultIfNull(newTrackable.spottedGuid, spottedGuid);
+        goal = ObjectUtils.defaultIfNull(newTrackable.goal, goal);
+        details = ObjectUtils.defaultIfNull(newTrackable.details, details);
+        image = ObjectUtils.defaultIfNull(newTrackable.image, image);
+        mergeLogEntry(newTrackable.logs);
+        trackingcode = ObjectUtils.defaultIfNull(newTrackable.trackingcode, trackingcode);
+        brand = ObjectUtils.defaultIfNull(newTrackable.brand, brand);
+        trackableConnector = ObjectUtils.defaultIfNull(newTrackable.trackableConnector, trackableConnector);
+    }
+
+    /**
+     * Merge another logEntry list into current logs list.
+     * No duplicates.
+     * LogEntry are then sorted by date.
+     *
+     * @param newLogs to merge
+     */
+    public void mergeLogEntry(final List<LogEntry> newLogs) {
+        for (final LogEntry newLog : newLogs){
+           if (!logs.contains(newLog)) {
+               logs.add(newLog);
+           }
+        }
+        Collections.sort(logs, LogEntry.DESCENDING_DATE_COMPARATOR);
+    }
 
     /**
      * Check whether this trackable has a corresponding URL.

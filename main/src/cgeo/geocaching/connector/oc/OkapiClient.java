@@ -400,7 +400,7 @@ final class OkapiClient {
             //cache.setLicense(response.getString("attribution_note"));
             cache.setWaypoints(parseWaypoints((ArrayNode) response.path(CACHE_WPTS)), false);
 
-            cache.setInventory(parseTrackables((ArrayNode) response.path(CACHE_TRACKABLES)));
+            cache.mergeInventory(parseTrackables((ArrayNode) response.path(CACHE_TRACKABLES)));
 
             if (response.has(CACHE_IS_WATCHED)) {
                 cache.setOnWatchlist(response.get(CACHE_IS_WATCHED).asBoolean());
@@ -435,7 +435,7 @@ final class OkapiClient {
         cache.setDifficulty((float) response.get(CACHE_DIFFICULTY).asDouble());
         cache.setTerrain((float) response.get(CACHE_TERRAIN).asDouble());
 
-        cache.setInventoryItems(response.get(CACHE_TRACKABLES_COUNT).asInt());
+        cache.mergeInventory(parseTrackables((ArrayNode) response.path(CACHE_TRACKABLES)));
 
         if (response.has(CACHE_IS_FOUND)) {
             cache.setFound(response.get(CACHE_IS_FOUND).asBoolean());

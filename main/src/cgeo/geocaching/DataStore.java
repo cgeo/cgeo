@@ -1667,12 +1667,7 @@ public class DataStore {
                 if (loadFlags.contains(LoadFlag.INVENTORY)) {
                     final List<Trackable> inventory = loadInventory(cache.getGeocode());
                     if (CollectionUtils.isNotEmpty(inventory)) {
-                        if (cache.getInventory() == null) {
-                            cache.setInventory(new ArrayList<Trackable>());
-                        } else {
-                            cache.getInventory().clear();
-                        }
-                        cache.getInventory().addAll(inventory);
+                        cache.setInventory(inventory);
                     }
                 }
 

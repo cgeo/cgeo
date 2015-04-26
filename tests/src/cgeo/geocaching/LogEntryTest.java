@@ -6,6 +6,10 @@ import cgeo.CGeoTestCase;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.settings.Settings;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 /**
  * LogEntry unit tests
  */
@@ -93,5 +97,18 @@ public class LogEntryTest extends CGeoTestCase {
         assertThat(logEntry1.isOwn()).isFalse();
         assertThat(logEntry2.isOwn()).isTrue();
         assertThat(logEntry3.isOwn()).isTrue();
+    }
+
+    public static void testComparator() {
+        final LogEntry logEntry1 = new LogEntry(100, LogType.FOUND_IT, "logEntry1 is older than logEntry2");
+        final LogEntry logEntry2 = new LogEntry(200, LogType.FOUND_IT, "logEntry2 is more recent than logEntry1");
+
+        final List<LogEntry> logList = new ArrayList<>(2);
+        logList.add(logEntry1);
+        logList.add(logEntry2);
+
+        Collections.sort(logList, LogEntry.DESCENDING_DATE_COMPARATOR);
+
+        assertThat(logList).containsExactly(logEntry2, logEntry1);
     }
 }

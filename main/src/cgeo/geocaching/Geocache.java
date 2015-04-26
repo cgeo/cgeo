@@ -68,6 +68,7 @@ import java.util.Date;
 import java.util.EnumMap;
 import java.util.EnumSet;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -778,10 +779,6 @@ public class Geocache implements IWaypoint {
         return attributes.getUnderlyingList();
     }
 
-    public List<Trackable> getInventory() {
-        return inventory;
-    }
-
     public void addSpoiler(final Image spoiler) {
         if (spoilers == null) {
             spoilers = new ArrayList<>();
@@ -958,12 +955,103 @@ public class Geocache implements IWaypoint {
         this.myVote = myVote;
     }
 
+    /**
+     * Get the current inventory count
+     *
+     * @return the inventory size
+     */
     public int getInventoryItems() {
         return inventoryItems;
     }
 
+    /**
+     * Set the current inventory count
+     *
+     * @param inventoryItems the new inventory size
+     */
     public void setInventoryItems(final int inventoryItems) {
         this.inventoryItems = inventoryItems;
+    }
+
+    /**
+     * Get the current inventory
+     *
+     * @return the Geocache inventory
+     */
+    public List<Trackable> getInventory() {
+        return inventory;
+    }
+
+    /**
+     * Replace the inventory with new content.
+     * No check are performed.
+     *
+     * @param newInventory to set on Geocache
+     */
+    public void setInventory(final List<Trackable> newInventory) {
+        inventory = newInventory;
+        inventoryItems = CollectionUtils.size(inventory);
+    }
+
+    /**
+     * Add new Trackables to inventory safely.
+     * This take care of removing old items if they are from the same brand.
+     * If items are present, data are merged, not duplicated.
+     *
+     * @param newTrackables to be added to the Geocache
+     */
+    public void mergeInventory(final List<Trackable> newTrackables) {
+        if (inventory != null) {
+            // Remove non existing Trackable from the same Brand
+            final Iterator<Trackable> iterator = inventory.iterator();
+            while (iterator.hasNext()) {
+                final Trackable trackable = iterator.next();
+                Boolean removeTrackable = true;
+                Boolean hasBrand = false;
+                for (final Trackable newTrackable : newTrackables) {
+                    if (trackable.getBrand() == newTrackable.getBrand()) {
+                        hasBrand = true;
+                        if (trackable.getUniqueID().equals(newTrackable.getUniqueID())) {
+                            removeTrackable = false;
+                            break;
+                        }
+                    }
+                }
+                if (hasBrand && removeTrackable) {
+                    iterator.remove();
+                }
+            }
+        }
+        // Add new trackables
+        for (final Trackable newTrackable : newTrackables) {
+            addInventoryItem(newTrackable);
+        }
+        inventoryItems = CollectionUtils.size(inventory);
+    }
+
+    /**
+     * Add new Trackable to inventory safely.
+     * If items are present, data are merged, not duplicated.
+     *
+     * @param newTrackable to be added to the Geocache
+     */
+    public void addInventoryItem(final Trackable newTrackable) {
+        if (inventory == null) {
+            inventory = new ArrayList<>();
+        }
+        Boolean foundTrackable = false;
+        for (final Trackable trackable: inventory) {
+            if (trackable.getUniqueID().equals(newTrackable.getUniqueID())) {
+                // Trackable already present, merge data
+                foundTrackable = true;
+                trackable.mergeTrackable(newTrackable);
+                break;
+            }
+        }
+        if (!foundTrackable) {
+            inventory.add(newTrackable);
+        }
+        inventoryItems = inventory.size();
     }
 
     /**
@@ -1131,10 +1219,6 @@ public class Geocache implements IWaypoint {
 
     public void setSpoilers(final List<Image> spoilers) {
         this.spoilers = spoilers;
-    }
-
-    public void setInventory(final List<Trackable> inventory) {
-        this.inventory = inventory;
     }
 
     public void setLogCounts(final Map<LogType, Integer> logCounts) {
