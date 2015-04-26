@@ -305,17 +305,28 @@ public class SearchResult implements Parcelable {
         }
     }
 
+    /**
+     * execute the given connector request in parallel on all active connectors
+     * 
+     * @param connectors
+     *            connectors to be considered in request
+     * @param func
+     *            connector request
+     */
     public static <C extends IConnector> SearchResult parallelCombineActive(final Collection<C> connectors,
                                                                             final Func1<C, SearchResult> func) {
         return Observable.from(connectors).flatMap(new Func1<C, Observable<SearchResult>>() {
             @Override
             public Observable<SearchResult> call(final C connector) {
-                return connector.isActive() ? Observable.defer(new Func0<Observable<SearchResult>>() {
+                if (!connector.isActive()) {
+                    return Observable.<SearchResult> empty();
+                }
+                return Observable.defer(new Func0<Observable<SearchResult>>() {
                     @Override
                     public Observable<SearchResult> call() {
                         return Observable.just(func.call(connector));
                     }
-                }).subscribeOn(RxUtils.networkScheduler) : Observable.<SearchResult>empty();
+                }).subscribeOn(RxUtils.networkScheduler);
             }
         }).reduce(new SearchResult(), new Func2<SearchResult, SearchResult, SearchResult>() {
             @Override
