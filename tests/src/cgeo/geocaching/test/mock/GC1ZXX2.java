@@ -30,6 +30,7 @@ public class GC1ZXX2 extends MockedCache {
         return 3.0f;
     }
 
+    @NonNull
     @Override
     public String getGeocode() {
         return "GC1ZXX2";
