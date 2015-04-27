@@ -1027,8 +1027,20 @@ public class Settings {
         }
     }
 
+    /**
+     * @return true if plain textlog wanted
+     */
     public static boolean getPlainLogs() {
         return getBoolean(R.string.pref_plainLogs, false);
+    }
+
+    /**
+     * Force set the plain textlog preference
+     *
+     * @param plainLogs wanted or not
+     */
+    public static void setPlainLogs(final Boolean plainLogs) {
+        putBoolean(R.string.pref_plainLogs, plainLogs);
     }
 
     public static boolean getUseNativeUa() {
