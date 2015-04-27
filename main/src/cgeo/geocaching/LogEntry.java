@@ -34,10 +34,26 @@ public final class LogEntry {
     public String cacheName = ""; // used for trackables
     public String cacheGuid = ""; // used for trackables
 
+    /**
+     * Construct a LogEntry Object usable for logging Geocaches.
+     * Username field is automatically taken from the current configured user on geocaching.com connector.
+     *
+     * @param dateInMilliSeconds of log
+     * @param type of log
+     * @param text message of log
+     */
     public LogEntry(final long dateInMilliSeconds, final LogType type, final String text) {
         this(Settings.getUsername(), dateInMilliSeconds, type, text);
     }
 
+    /**
+     * Construct a LogEntry Object usable for logging Geocaches.
+     *
+     * @param author of log
+     * @param dateInMilliSeconds of log
+     * @param type of log
+     * @param text message of log
+     */
     public LogEntry(final String author, final long dateInMilliSeconds, final LogType type, final String text) {
         this.author = author;
         this.date = dateInMilliSeconds;
@@ -45,11 +61,22 @@ public final class LogEntry {
         this.log = text;
     }
 
+    /**
+     * Get the hashCode of a LogDate Object.
+     *
+     * @return the object's hash code
+     */
     @Override
     public int hashCode() {
         return (int) date * type.hashCode() * author.hashCode() * log.hashCode();
     }
 
+    /**
+     * Return True if passed LogDate Object is equal to the current LogDate Object.
+     * Object are also detected as equal if date, LogType, author and log are the same.
+     *
+     * @return true if objects are identical
+     */
     @Override
     public boolean equals(final Object obj) {
         if (this == obj) {
@@ -65,6 +92,11 @@ public final class LogEntry {
                 log.compareTo(otherLog.log) == 0;
     }
 
+    /**
+     * Add a new Image to the logEntry.
+     *
+     * @param image to be added to the LogEntry
+     */
     public void addLogImage(final Image image) {
         if (logImages == null) {
             logImages = new ArrayList<>();
@@ -82,10 +114,21 @@ public final class LogEntry {
         return logImages;
     }
 
+    /**
+     * Check if current LogType has Images.
+     *
+     * @return True if LogType has images
+     */
     public boolean hasLogImages() {
         return CollectionUtils.isNotEmpty(logImages);
     }
 
+    /**
+     * Get the Images Titles separated by commas.
+     * If no titles are present, display a 'default title'
+     *
+     * @return Images Titles separated by commas or 'default title'
+     */
     public CharSequence getImageTitles() {
         final List<String> titles = new ArrayList<>(5);
         for (final Image image : getLogImages()) {
@@ -101,6 +144,8 @@ public final class LogEntry {
 
     /**
      * Get the log text to be displayed. Depending on the settings, color tags might be removed.
+     *
+     * @return log text
      */
     public String getDisplayText() {
         if (Settings.getPlainLogs()) {
@@ -110,6 +155,11 @@ public final class LogEntry {
         return log;
     }
 
+    /**
+     * Check if the LogEntry is owned by the current configured user on geocaching.com connector.
+     *
+     * @return True if LogEntry is from current user
+     */
     public boolean isOwn() {
         return author.equalsIgnoreCase(Settings.getUsername());
     }
