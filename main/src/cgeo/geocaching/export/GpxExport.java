@@ -41,7 +41,7 @@ import java.util.Locale;
 
 public class GpxExport extends AbstractExport {
 
-    private String fileName;
+    private String fileName = "geocache.gpx"; // used in tests
 
     public GpxExport() {
         super(R.string.export_gpx);
@@ -49,8 +49,8 @@ public class GpxExport extends AbstractExport {
 
     @Override
     public void export(final List<Geocache> caches, final Activity activity) {
-        calculateFileName(caches);
         final String[] geocodes = getGeocodes(caches);
+        calculateFileName(geocodes);
         if (null == activity) {
             // No activity given, so no user interaction possible.
             // Start export with default parameters.
@@ -62,10 +62,10 @@ public class GpxExport extends AbstractExport {
         }
     }
 
-    private void calculateFileName(final List<Geocache> caches) {
-        if (caches.size() == 1) {
+    private void calculateFileName(final String[] geocodes) {
+        if (geocodes.length == 1) {
             // geocode as file name
-            fileName = caches.get(0).getGeocode() + ".gpx";
+            fileName = geocodes[0] + ".gpx";
         }
         else {
             // date and time as file name
