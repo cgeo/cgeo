@@ -435,7 +435,7 @@ final class OkapiClient {
         cache.setDifficulty((float) response.get(CACHE_DIFFICULTY).asDouble());
         cache.setTerrain((float) response.get(CACHE_TERRAIN).asDouble());
 
-        cache.mergeInventory(parseTrackables((ArrayNode) response.path(CACHE_TRACKABLES)));
+        cache.setInventoryItems(response.get(CACHE_TRACKABLES_COUNT).asInt());
 
         if (response.has(CACHE_IS_FOUND)) {
             cache.setFound(response.get(CACHE_IS_FOUND).asBoolean());
