@@ -460,7 +460,7 @@ public class SettingsActivity extends PreferenceActivity {
         getPreference(R.string.pref_lowpowermode).setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(final Preference preference, final Object newValue) {
-                final Boolean useLowPower = (Boolean) newValue;
+                final boolean useLowPower = ((Boolean) newValue).booleanValue();
                 sensors.setupGeoDataObservables(Settings.useGooglePlayServices(), useLowPower);
                 sensors.setupDirectionObservable(useLowPower);
                 return true;

@@ -1028,18 +1028,19 @@ public class Settings {
     }
 
     /**
-     * @return true if plain textlog wanted
+     * @return true if plain text log wanted
      */
     public static boolean getPlainLogs() {
         return getBoolean(R.string.pref_plainLogs, false);
     }
 
     /**
-     * Force set the plain textlog preference
+     * Force set the plain text log preference
      *
-     * @param plainLogs wanted or not
+     * @param plainLogs
+     *            wanted or not
      */
-    public static void setPlainLogs(final Boolean plainLogs) {
+    public static void setPlainLogs(final boolean plainLogs) {
         putBoolean(R.string.pref_plainLogs, plainLogs);
     }
 

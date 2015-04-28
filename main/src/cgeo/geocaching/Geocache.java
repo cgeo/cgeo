@@ -1006,8 +1006,8 @@ public class Geocache implements IWaypoint {
             final Iterator<Trackable> iterator = inventory.iterator();
             while (iterator.hasNext()) {
                 final Trackable trackable = iterator.next();
-                Boolean removeTrackable = true;
-                Boolean hasBrand = false;
+                boolean removeTrackable = true;
+                boolean hasBrand = false;
                 for (final Trackable newTrackable : newTrackables) {
                     if (trackable.getBrand() == newTrackable.getBrand()) {
                         hasBrand = true;
@@ -1039,7 +1039,7 @@ public class Geocache implements IWaypoint {
         if (inventory == null) {
             inventory = new ArrayList<>();
         }
-        Boolean foundTrackable = false;
+        boolean foundTrackable = false;
         for (final Trackable trackable: inventory) {
             if (trackable.getUniqueID().equals(newTrackable.getUniqueID())) {
                 // Trackable already present, merge data

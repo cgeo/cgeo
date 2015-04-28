@@ -43,7 +43,7 @@ public class GeokretyParser {
         private static final SynchronizedDateFormat DATE_FORMAT = new SynchronizedDateFormat("yyyy-MM-dd kk:mm:ss", TimeZone.getTimeZone("UTC"), Locale.US);
         private final List<Trackable> trackables = new ArrayList<>();
         private Trackable trackable;
-        private Boolean isMessage = false;
+        private boolean isMessage = false;
         private String content;
 
         @NonNull
