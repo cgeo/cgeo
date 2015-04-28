@@ -7,7 +7,7 @@ import cgeo.geocaching.utils.OOMDumpingUncaughtExceptionHandler;
 import cgeo.geocaching.utils.RxUtils;
 
 import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.android.gms.common.GoogleApiAvailability;
 
 import org.eclipse.jdt.annotation.NonNull;
 
@@ -76,7 +76,7 @@ public class CgeoApplication extends Application {
         DataStore.getLists();
 
         // Check if Google Play services is available
-        if (GooglePlayServicesUtil.isGooglePlayServicesAvailable(this) == ConnectionResult.SUCCESS) {
+        if (GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(this) == ConnectionResult.SUCCESS) {
             isGooglePlayServicesAvailable = true;
         }
         Log.i("Google Play services are " + (isGooglePlayServicesAvailable ? "" : "not ") + "available");
