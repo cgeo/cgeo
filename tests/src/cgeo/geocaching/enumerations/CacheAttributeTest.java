@@ -9,19 +9,19 @@ import android.test.AndroidTestCase;
 public class CacheAttributeTest extends AndroidTestCase {
 
     public static void testTrimAttributeName() {
-        for (CacheAttribute attribute : CacheAttribute.values()) {
+        for (final CacheAttribute attribute : CacheAttribute.values()) {
             final String rawName = attribute.rawName;
             assertThat(CacheAttribute.trimAttributeName(rawName)).as("attribute name").isEqualTo(rawName);
         }
     }
 
     public static void testIds() {
-        for (CacheAttribute attribute : CacheAttribute.values()) {
+        for (final CacheAttribute attribute : CacheAttribute.values()) {
             if (attribute != CacheAttribute.UNKNOWN) {
                 assertThat(StringUtils.isNotEmpty(attribute.rawName)).isTrue();
-                assertThat(attribute.drawableId != 0).isTrue();
-                assertThat(attribute.stringIdYes != 0).isTrue();
-                assertThat(attribute.stringIdNo != 0).isTrue();
+                assertThat(attribute.drawableId).isNotEqualTo(0);
+                assertThat(attribute.stringIdYes).isNotEqualTo(0);
+                assertThat(attribute.stringIdNo).isNotEqualTo(0);
             }
         }
     }

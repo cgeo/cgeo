@@ -179,7 +179,7 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         assertThat(log.log).isEqualTo("Sehr schöne Runde und wir haben wieder etwas Neues über Hockenheim gelernt. Super Tarnung.\nTFTC, Geoteufel");
         assertThat(log.isOwn()).isFalse();
         assertThat(log.getDisplayText()).isEqualTo(log.log);
-        assertThat(CalendarUtils.daysSince(log.date) > 700).isTrue();
+        assertThat(CalendarUtils.daysSince(log.date)).isGreaterThan(700);
 
         // following info is not contained in pocket query gpx file
         assertThat(cache.getAttributes()).isEmpty();
@@ -275,8 +275,7 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         for (final Geocache cache : caches) {
             codes.add(cache.getGeocode());
         }
-        assertThat(codes.contains("GC2KN6K")).isTrue();
-        assertThat(codes.contains("GC1T3MK")).isTrue();
+        assertThat(codes).contains("GC2KN6K", "GC1T3MK");
     }
 
     public void testLazyLogLoading() throws IOException, ParserException {

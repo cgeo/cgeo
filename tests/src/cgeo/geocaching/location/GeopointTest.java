@@ -3,8 +3,6 @@ package cgeo.geocaching.location;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.offset;
 
-import cgeo.geocaching.location.Geopoint;
-
 import android.os.Build;
 import android.os.Bundle;
 import android.test.AndroidTestCase;
@@ -120,7 +118,7 @@ public class GeopointTest extends AndroidTestCase {
         checkTolerance(gp4, gp4a, 5e-5);
     }
 
-    private static void checkDDD(Geopoint gp, char latDir, int latDeg, int latDegFrac, char lonDir, int lonDeg, int lonDegFrac) {
+    private static void checkDDD(final Geopoint gp, final char latDir, final int latDeg, final int latDegFrac, final char lonDir, final int lonDeg, final int lonDegFrac) {
         assertThat(gp.getLatDir()).isEqualTo(latDir);
         assertThat(gp.getLatDeg()).isEqualTo(latDeg);
         assertThat(gp.getLatDegFrac()).isEqualTo(latDegFrac);
@@ -129,9 +127,9 @@ public class GeopointTest extends AndroidTestCase {
         assertThat(gp.getLonDegFrac()).isEqualTo(lonDegFrac);
     }
 
-    private static void checkTolerance(Geopoint gp1, Geopoint gp2, double tolerance) {
-        assertThat(Math.abs(gp1.getLatitude() - gp2.getLatitude()) <= tolerance).isTrue();
-        assertThat(Math.abs(gp1.getLongitude() - gp2.getLongitude()) <= tolerance).isTrue();
+    private static void checkTolerance(final Geopoint gp1, final Geopoint gp2, final double tolerance) {
+        assertThat(Math.abs(gp1.getLatitude() - gp2.getLatitude())).isLessThanOrEqualTo(tolerance);
+        assertThat(Math.abs(gp1.getLongitude() - gp2.getLongitude())).isLessThanOrEqualTo(tolerance);
     }
 
     public static void testDMM() {
@@ -176,7 +174,7 @@ public class GeopointTest extends AndroidTestCase {
         checkTolerance(gp4, gp4a, 5e-5);
     }
 
-    private static void checkDMM(Geopoint gp, char latDir, int latDeg, int latMin, int latMinFrac, char lonDir, int lonDeg, int lonMin, int lonMinFrac) {
+    private static void checkDMM(final Geopoint gp, final char latDir, final int latDeg, final int latMin, final int latMinFrac, final char lonDir, final int lonDeg, final int lonMin, final int lonMinFrac) {
         assertThat(gp.getLatDir()).isEqualTo(latDir);
         assertThat(gp.getLatDeg()).isEqualTo(latDeg);
         assertThat(gp.getLatMin()).isEqualTo(latMin);
@@ -229,7 +227,7 @@ public class GeopointTest extends AndroidTestCase {
         checkTolerance(gp4, gp4a, 5e-6);
     }
 
-    private static void checkDMS(Geopoint gp, char latDir, int latDeg, int latMin, int latSec, int latSecFrac, char lonDir, int lonDeg, int lonMin, int lonSec, int lonSecFrac) {
+    private static void checkDMS(final Geopoint gp, final char latDir, final int latDeg, final int latMin, final int latSec, final int latSecFrac, final char lonDir, final int lonDeg, final int lonMin, final int lonSec, final int lonSecFrac) {
         assertThat(gp.getLatDir()).isEqualTo(latDir);
         assertThat(gp.getLatDeg()).isEqualTo(latDeg);
         assertThat(gp.getLatMin()).isEqualTo(latMin);
@@ -242,11 +240,11 @@ public class GeopointTest extends AndroidTestCase {
         assertThat(gp.getLonSecFrac()).isEqualTo(lonSecFrac);
     }
 
-    private static void assertParseException(Runnable runnable) {
+    private static void assertParseException(final Runnable runnable) {
         try {
             runnable.run();
             fail("Should have thrown Geopoint.ParseException");
-        } catch (Geopoint.ParseException e) {
+        } catch (final Geopoint.ParseException e) {
             //success
         }
     }

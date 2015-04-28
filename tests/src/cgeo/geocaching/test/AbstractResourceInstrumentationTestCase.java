@@ -34,18 +34,18 @@ public abstract class AbstractResourceInstrumentationTestCase extends Instrument
         DataStore.removeCache(geocode, flags);
     }
 
-    protected InputStream getResourceStream(int resourceId) {
+    protected InputStream getResourceStream(final int resourceId) {
         final Resources res = getInstrumentation().getContext().getResources();
         return res.openRawResource(resourceId);
     }
 
-    protected String getFileContent(int resourceId) {
+    protected String getFileContent(final int resourceId) {
         Scanner scanner = null;
         try {
             final InputStream ins = getResourceStream(resourceId);
             scanner = new Scanner(ins);
             return scanner.useDelimiter("\\A").next();
-        } catch (Exception e) {
+        } catch (final Exception e) {
             e.printStackTrace();
         } finally {
             if (scanner != null) {
@@ -55,7 +55,7 @@ public abstract class AbstractResourceInstrumentationTestCase extends Instrument
         return null;
     }
 
-    protected void copyResourceToFile(int resourceId, File file) throws IOException {
+    protected void copyResourceToFile(final int resourceId, final File file) throws IOException {
         final InputStream is = getResourceStream(resourceId);
         final FileOutputStream os = new FileOutputStream(file);
 
@@ -75,8 +75,8 @@ public abstract class AbstractResourceInstrumentationTestCase extends Instrument
     protected void setUp() throws Exception {
         super.setUp();
         temporaryListId = DataStore.createList("Temporary unit testing");
-        assertThat(temporaryListId != StoredList.TEMPORARY_LIST.id).isTrue();
-        assertThat(temporaryListId != StoredList.STANDARD_LIST_ID).isTrue();
+        assertThat(temporaryListId).isNotEqualTo(StoredList.TEMPORARY_LIST.id);
+        assertThat(temporaryListId).isNotEqualTo(StoredList.STANDARD_LIST_ID);
     }
 
     @Override
@@ -92,11 +92,11 @@ public abstract class AbstractResourceInstrumentationTestCase extends Instrument
         return temporaryListId;
     }
 
-    final protected Geocache loadCacheFromResource(int resourceId) throws IOException, ParserException {
+    final protected Geocache loadCacheFromResource(final int resourceId) throws IOException, ParserException {
         final InputStream instream = getResourceStream(resourceId);
         try {
-            GPX10Parser parser = new GPX10Parser(StoredList.TEMPORARY_LIST.id);
-            Collection<Geocache> caches = parser.parse(instream, null);
+            final GPX10Parser parser = new GPX10Parser(StoredList.TEMPORARY_LIST.id);
+            final Collection<Geocache> caches = parser.parse(instream, null);
             assertThat(caches).isNotNull();
             assertThat(caches.isEmpty()).isFalse();
             return caches.iterator().next();
@@ -105,8 +105,8 @@ public abstract class AbstractResourceInstrumentationTestCase extends Instrument
         }
     }
 
-    protected Uri getResourceURI(int resId) {
-        Resources resources = getInstrumentation().getContext().getResources();
+    protected Uri getResourceURI(final int resId) {
+        final Resources resources = getInstrumentation().getContext().getResources();
         return Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + resources.getResourcePackageName(resId) + '/' + resources.getResourceTypeName(resId) + '/' + resources.getResourceEntryName(resId));
     }
 }

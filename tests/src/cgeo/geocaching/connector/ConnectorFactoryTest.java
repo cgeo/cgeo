@@ -25,27 +25,27 @@ public class ConnectorFactoryTest extends AbstractResourceInstrumentationTestCas
     }
 
     public static void testGeocodeOpenCaching() {
-        assertThat(ConnectorFactory.getConnector("OZ12345") instanceof OCConnector).isTrue(); // opencaching CZ
-        assertThat(ConnectorFactory.getConnector("OC12345") instanceof OCConnector).isTrue(); // opencaching DE
-        assertThat(ConnectorFactory.getConnector("OU12345") instanceof OCConnector).isTrue(); // opencaching US
-        assertThat(ConnectorFactory.getConnector("OK12345") instanceof OCConnector).isTrue(); // opencaching UK
-        assertThat(ConnectorFactory.getConnector("OJ12345") instanceof OCConnector).isTrue(); // opencaching JP
-        assertThat(ConnectorFactory.getConnector("OS12345") instanceof OCConnector).isTrue(); // opencaching NO
-        assertThat(ConnectorFactory.getConnector("OB12345") instanceof OCConnector).isTrue(); // opencaching NL
-        assertThat(ConnectorFactory.getConnector("OP12345") instanceof OCConnector).isTrue(); // opencaching PL
+        assertThat(ConnectorFactory.getConnector("OZ12345")).isInstanceOf(OCConnector.class); // opencaching CZ
+        assertThat(ConnectorFactory.getConnector("OC12345")).isInstanceOf(OCConnector.class); // opencaching DE
+        assertThat(ConnectorFactory.getConnector("OU12345")).isInstanceOf(OCConnector.class); // opencaching US
+        assertThat(ConnectorFactory.getConnector("OK12345")).isInstanceOf(OCConnector.class); // opencaching UK
+        assertThat(ConnectorFactory.getConnector("OJ12345")).isInstanceOf(OCConnector.class); // opencaching JP
+        assertThat(ConnectorFactory.getConnector("OS12345")).isInstanceOf(OCConnector.class); // opencaching NO
+        assertThat(ConnectorFactory.getConnector("OB12345")).isInstanceOf(OCConnector.class); // opencaching NL
+        assertThat(ConnectorFactory.getConnector("OP12345")).isInstanceOf(OCConnector.class); // opencaching PL
     }
 
     public static void testGeocodeInvalidFormat() {
         // all codes are invalid
-        assertThat(ConnectorFactory.getConnector("GC") instanceof UnknownConnector).isTrue();
-        assertThat(ConnectorFactory.getConnector("OC") instanceof UnknownConnector).isTrue();
-        assertThat(ConnectorFactory.getConnector("OX") instanceof UnknownConnector).isTrue();
-        assertThat(ConnectorFactory.getConnector("GC 1234") instanceof UnknownConnector).isTrue();
-        assertThat(ConnectorFactory.getConnector("OC 1234") instanceof UnknownConnector).isTrue();
-        assertThat(ConnectorFactory.getConnector("OX 1234") instanceof UnknownConnector).isTrue();
-        assertThat(ConnectorFactory.getConnector("GC-1234") instanceof UnknownConnector).isTrue();
-        assertThat(ConnectorFactory.getConnector("OC-1234") instanceof UnknownConnector).isTrue();
-        assertThat(ConnectorFactory.getConnector("OX-1234") instanceof UnknownConnector).isTrue();
+        assertThat(ConnectorFactory.getConnector("GC")).isInstanceOf(UnknownConnector.class);
+        assertThat(ConnectorFactory.getConnector("OC")).isInstanceOf(UnknownConnector.class);
+        assertThat(ConnectorFactory.getConnector("OX")).isInstanceOf(UnknownConnector.class);
+        assertThat(ConnectorFactory.getConnector("GC 1234")).isInstanceOf(UnknownConnector.class);
+        assertThat(ConnectorFactory.getConnector("OC 1234")).isInstanceOf(UnknownConnector.class);
+        assertThat(ConnectorFactory.getConnector("OX 1234")).isInstanceOf(UnknownConnector.class);
+        assertThat(ConnectorFactory.getConnector("GC-1234")).isInstanceOf(UnknownConnector.class);
+        assertThat(ConnectorFactory.getConnector("OC-1234")).isInstanceOf(UnknownConnector.class);
+        assertThat(ConnectorFactory.getConnector("OX-1234")).isInstanceOf(UnknownConnector.class);
     }
 
     public static void testGetConnectorCgCache() {
@@ -59,8 +59,8 @@ public class ConnectorFactoryTest extends AbstractResourceInstrumentationTestCas
     }
 
     public static void testTrim() {
-        assertThat(ConnectorFactory.getConnector("   OZ12345   ") instanceof OCConnector).isTrue(); // opencaching CZ
-        assertThat(ConnectorFactory.getConnector("   OZ 12345   ") instanceof UnknownConnector).isTrue();
+        assertThat(ConnectorFactory.getConnector("   OZ12345   ")).isInstanceOf(OCConnector.class); // opencaching CZ
+        assertThat(ConnectorFactory.getConnector("   OZ 12345   ")).isInstanceOf(UnknownConnector.class);
     }
 
     public static void testGetGeocodeFromUrl() {

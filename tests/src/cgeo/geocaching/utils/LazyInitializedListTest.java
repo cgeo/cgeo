@@ -18,12 +18,12 @@ public class LazyInitializedListTest extends TestCase {
 
     public static void testAccess() {
         final LazyInitializedList<String> list = new MockedLazyInitializedList();
-        assertThat(list.isEmpty()).isTrue();
+        assertThat(list).isEmpty();
         list.add("Test");
-        assertThat(list.isEmpty()).isFalse();
+        assertThat(list).isNotEmpty();
         assertThat(list).hasSize(1);
         int iterations = 0;
-        for (String element : list) {
+        for (final String element : list) {
             assertThat(element).isEqualTo("Test");
             iterations++;
         }

@@ -186,7 +186,7 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
         final List<Waypoint> waypoints = cache.getWaypoints();
         assertThat(waypoints).hasSize(expected.length);
         for (int i = 0; i < expected.length; i++) {
-            assertThat(expected[i].equals(waypoints.get(i).getCoords())).isTrue();
+            assertThat(waypoints.get(i).getCoords()).isEqualTo(expected[i]);
         }
     }
 

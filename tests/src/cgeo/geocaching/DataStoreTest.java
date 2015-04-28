@@ -39,10 +39,10 @@ public class DataStoreTest extends CGeoTestCase {
 
             // create lists
             listId1 = DataStore.createList("DataStore Test");
-            assertThat(listId1 > StoredList.STANDARD_LIST_ID).isTrue();
+            assertThat(listId1).isGreaterThan(StoredList.STANDARD_LIST_ID);
             listId2 = DataStore.createList("DataStoreTest");
-            assertThat(listId2 > StoredList.STANDARD_LIST_ID).isTrue();
-            assertThat(DataStore.getLists().size() >= 2).isTrue();
+            assertThat(listId2).isGreaterThan(StoredList.STANDARD_LIST_ID);
+            assertThat(DataStore.getLists().size()).isGreaterThanOrEqualTo(2);
 
             cache1.setDetailed(true);
             cache1.setListId(listId1);
@@ -52,7 +52,7 @@ public class DataStoreTest extends CGeoTestCase {
             // save caches to DB (cache1=listId1, cache2=listId1)
             DataStore.saveCache(cache1, LoadFlags.SAVE_ALL);
             DataStore.saveCache(cache2, LoadFlags.SAVE_ALL);
-            assertThat(DataStore.getAllCachesCount() >= 2).isTrue();
+            assertThat(DataStore.getAllCachesCount()).isGreaterThanOrEqualTo(2);
 
             // rename list (cache1=listId1, cache2=listId1)
             assertEquals(1, DataStore.renameList(listId1, "DataStore Test (renamed)"));
@@ -173,8 +173,8 @@ public class DataStoreTest extends CGeoTestCase {
     public static void testLoadCacheHistory() {
         int sumCaches = 0;
         int allCaches = 0;
-        for (CacheType cacheType : CacheType.values()) {
-            SearchResult historyOfType = DataStore.getHistoryOfCaches(false, cacheType);
+        for (final CacheType cacheType : CacheType.values()) {
+            final SearchResult historyOfType = DataStore.getHistoryOfCaches(false, cacheType);
             assertThat(historyOfType).isNotNull();
             if (cacheType != CacheType.ALL) {
                 sumCaches += historyOfType.getCount();
@@ -221,13 +221,9 @@ public class DataStoreTest extends CGeoTestCase {
 
         final SearchResult search = new SearchResult(main);
 
-        Set<String> filteredGeoCodes = DataStore.getCachedMissingFromSearch(search, tiles, GCConnector.getInstance(), Tile.ZOOMLEVEL_MIN_PERSONALIZED - 1);
+        final Set<String> filteredGeoCodes = DataStore.getCachedMissingFromSearch(search, tiles, GCConnector.getInstance(), Tile.ZOOMLEVEL_MIN_PERSONALIZED - 1);
 
-        assertThat(filteredGeoCodes.contains(inTileLowZoom.getGeocode())).isTrue();
-        assertThat(filteredGeoCodes.contains(inTileHighZoom.getGeocode())).isFalse();
-        assertThat(filteredGeoCodes.contains(otherConnector.getGeocode())).isFalse();
-        assertThat(filteredGeoCodes.contains(outTile.getGeocode())).isFalse();
-        assertThat(filteredGeoCodes.contains(main.getGeocode())).isFalse();
-
+        assertThat(filteredGeoCodes).contains(inTileLowZoom.getGeocode());
+        assertThat(filteredGeoCodes).doesNotContain(inTileHighZoom.getGeocode(), otherConnector.getGeocode(), outTile.getGeocode(), main.getGeocode());
     }
 }

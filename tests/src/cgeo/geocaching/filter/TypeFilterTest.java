@@ -41,8 +41,7 @@ public class TypeFilterTest extends CGeoTestCase {
         assertThat(list).hasSize(2);
 
         traditionalFilter.filter(list);
-        assertThat(list).hasSize(1);
-        assertThat(list.contains(traditional)).isTrue();
+        assertThat(list).containsExactly(traditional);
 
     }
 

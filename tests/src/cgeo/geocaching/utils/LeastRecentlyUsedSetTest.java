@@ -4,9 +4,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import cgeo.geocaching.Geocache;
 
+import android.test.AndroidTestCase;
+
 import java.util.Set;
 
-public class LeastRecentlyUsedSetTest extends AbstractLRUTest {
+public class LeastRecentlyUsedSetTest extends AndroidTestCase {
 
     public static void testLruMode() {
         final Set<String> set = new LeastRecentlyUsedSet<String>(5);
@@ -14,17 +16,17 @@ public class LeastRecentlyUsedSetTest extends AbstractLRUTest {
         set.add("two");
         set.add("three");
         // read does not change anything
-        assertThat(set.contains("one")).isTrue();
+        assertThat(set).contains("one");
         set.add("four");
         // re-put should update the order
         set.add("three");
         set.add("five");
         // read does not change anything
-        assertThat(set.contains("one")).isTrue();
+        assertThat(set).contains("one");
         set.add("six");
         set.add("seven");
 
-        assertEquals("four, three, five, six, seven", colToStr(set));
+        assertThat(set).containsExactly("four", "three", "five", "six", "seven");
     }
 
     public static void testRemoveEldestEntry() {
@@ -37,9 +39,7 @@ public class LeastRecentlyUsedSetTest extends AbstractLRUTest {
         second.setGeocode("2");
         assertThat(caches.add(second)).isTrue();
 
-        assertThat(caches).hasSize(2);
-        assertThat(caches.contains(first)).isTrue();
-        assertThat(caches.contains(second)).isTrue();
+        assertThat(caches).contains(first, second);
 
         // adding first cache again does not change set
         assertThat(caches.add(first)).isFalse();
@@ -51,9 +51,7 @@ public class LeastRecentlyUsedSetTest extends AbstractLRUTest {
             assertThat(caches.add(cache)).isTrue();
         }
 
-        assertThat(caches).hasSize(10);
-        assertThat(caches.contains(first)).isTrue();
-        assertThat(caches.contains(second)).isTrue();
+        assertThat(caches).hasSize(10).contains(first, second);
 
         final Geocache c11 = new Geocache();
         c11.setGeocode("11");
@@ -62,7 +60,6 @@ public class LeastRecentlyUsedSetTest extends AbstractLRUTest {
         assertThat(caches).hasSize(10);
 
         // first was used again, there second is the oldest and has been overwritten by 11
-        assertThat(caches.contains(first)).isTrue();
-        assertThat(caches.contains(second)).isFalse();
+        assertThat(caches).contains(first).doesNotContain(second);
     }
 }

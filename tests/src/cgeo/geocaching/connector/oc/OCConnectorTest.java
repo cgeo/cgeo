@@ -20,7 +20,7 @@ public class OCConnectorTest extends TestCase {
 
     private static IConnector getOcDeConnector() {
         final IConnector ocConnector = ConnectorFactory.getConnector("OCXXX");
-        assertThat(ocConnector.getHost().contains(".de")).isTrue();
+        assertThat(ocConnector.getHost()).contains(".de");
         return ocConnector;
     }
 

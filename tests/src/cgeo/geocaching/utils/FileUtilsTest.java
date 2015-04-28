@@ -41,10 +41,10 @@ public class FileUtilsTest extends TestCase {
 
     public void testCreateRemoveDirectories() {
         FileUtils.deleteDirectory(testDir);
-        assertThat(testDir.exists()).isFalse();
+        assertThat(testDir).doesNotExist();
         FileUtils.mkdirs(testDir);
-        assertThat(testDir.exists()).isTrue();
+        assertThat(testDir).exists();
         FileUtils.deleteDirectory(testDir);
-        assertThat(testDir.exists()).isFalse();
+        assertThat(testDir).doesNotExist();
     }
 }

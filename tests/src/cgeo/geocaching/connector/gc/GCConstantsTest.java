@@ -50,7 +50,7 @@ public class GCConstantsTest extends AndroidTestCase {
         GCLogin.getInstance().logout();
         GCLogin.getInstance().setActualCachesFound(0);
         GCLogin.getInstance().login();
-        assertThat(GCLogin.getInstance().getActualCachesFound() > 0).isTrue();
+        assertThat(GCLogin.getInstance().getActualCachesFound()).isGreaterThan(0);
     }
 
     public static void testConstants() {

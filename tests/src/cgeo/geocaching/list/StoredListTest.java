@@ -28,6 +28,6 @@ public class StoredListTest extends TestCase {
     }
 
     public static void testTitleAndCountContainsTitle() {
-        assertThat(getStandardList().getTitleAndCount().startsWith(getStandardList().getTitle())).isTrue();
+        assertThat(getStandardList().getTitleAndCount()).startsWith(getStandardList().getTitle());
     }
 }

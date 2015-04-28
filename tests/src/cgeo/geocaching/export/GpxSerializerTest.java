@@ -63,7 +63,7 @@ public class GpxSerializerTest extends AbstractResourceInstrumentationTestCase {
 
         final String gpxFirst = getGPXFromCache(geocode);
 
-        assertThat(gpxFirst.length() > 0).isTrue();
+        assertThat(gpxFirst.length()).isGreaterThan(0);
 
         final GPX10Parser parser = new GPX10Parser(StoredList.TEMPORARY_LIST.id);
 

@@ -10,6 +10,6 @@ public class EmulatorStateTest extends TestCase {
 
     public static void testWritableMedia() {
         // check the emulator running our tests
-        assertThat(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)).isTrue();
+        assertThat(Environment.getExternalStorageState()).isEqualTo(Environment.MEDIA_MOUNTED);
     }
 }

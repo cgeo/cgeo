@@ -31,7 +31,7 @@ public class GCConnectorTest extends AbstractResourceInstrumentationTestCase {
                 final SearchResult searchResult = ConnectorFactory.searchByViewport(viewport, tokens);
                 assertThat(searchResult).isNotNull();
                 assertThat(searchResult.isEmpty()).isFalse();
-                assertThat(searchResult.getGeocodes().contains("GC4ER5H")).isTrue();
+                assertThat(searchResult.getGeocodes()).contains("GC4ER5H");
                 // 22.10.13: Changed from GC211WG (archived) to GC4ER5H  in same area
             }
 
@@ -39,7 +39,7 @@ public class GCConnectorTest extends AbstractResourceInstrumentationTestCase {
                 final Viewport viewport = new Viewport(new Geopoint("N 52° 24.000 E 9° 34.500"), new Geopoint("N 52° 26.000 E 9° 38.500"));
                 final SearchResult searchResult = ConnectorFactory.searchByViewport(viewport, tokens);
                 assertThat(searchResult).isNotNull();
-                assertThat(searchResult.getGeocodes().contains("GC4ER5H")).isTrue();
+                assertThat(searchResult.getGeocodes()).contains("GC4ER5H");
             }
         } finally {
             // restore user settings

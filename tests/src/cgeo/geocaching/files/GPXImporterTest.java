@@ -28,8 +28,8 @@ import java.util.Iterator;
 import java.util.List;
 
 public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
-    private TestHandler importStepHandler = new TestHandler();
-    private TestHandler progressHandler = new TestHandler();
+    private final TestHandler importStepHandler = new TestHandler();
+    private final TestHandler progressHandler = new TestHandler();
     private int listId;
     private File tempDir;
     private boolean importCacheStaticMaps;
@@ -43,10 +43,10 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
                 "1234567-wpts.GPX", "gpx.gpx-wpts.gpx", "-wpts.gpx",
                 "1234567_query-wpts.gpx", "123-wpts-4.gpx", "123-wpts(5).gpx" };
         for (int i = 0; i < gpxFiles.length; i++) {
-            String gpxFileName = gpxFiles[i];
-            String wptsFileName = wptsFiles[i];
-            File gpx = new File(tempDir, gpxFileName);
-            File wpts = new File(tempDir, wptsFileName);
+            final String gpxFileName = gpxFiles[i];
+            final String wptsFileName = wptsFiles[i];
+            final File gpx = new File(tempDir, gpxFileName);
+            final File wpts = new File(tempDir, wptsFileName);
             // the files need to exist - we create them
             assertThat(gpx.createNewFile()).isTrue();
             assertThat(wpts.createNewFile()).isTrue();
@@ -82,7 +82,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         assertThat(cache).isNotNull();
         assertCacheProperties(cache);
 
-        assertThat(cache.getWaypoints().isEmpty()).isTrue();
+        assertThat(cache.getWaypoints()).isEmpty();
     }
 
     public void testImportOcGpx() throws IOException {
@@ -110,11 +110,11 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         assertThat(cache.getWaypoints()).as("Number of imported waypoints").hasSize(4);
     }
 
-    private void runImportThread(GPXImporter.ImportThread importThread) {
+    private void runImportThread(final GPXImporter.ImportThread importThread) {
         importThread.start();
         try {
             importThread.join();
-        } catch (InterruptedException e) {
+        } catch (final InterruptedException e) {
             Log.e("GPXImporterTest.runImportThread", e);
         }
         importStepHandler.waitForCompletion();
@@ -174,7 +174,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         assertCacheProperties(cache);
     }
 
-    private static void assertCacheProperties(Geocache cache) {
+    private static void assertCacheProperties(final Geocache cache) {
         assertThat(cache).isNotNull();
         assertThat(cache.getLocation().startsWith(",")).isFalse();
         assertThat(cache.isReliableLatLon()).isTrue();
@@ -217,7 +217,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         assertThat(cache).isNotNull();
         assertCacheProperties(cache);
 
-        assertThat(cache.getWaypoints().isEmpty()).isTrue();
+        assertThat(cache.getWaypoints()).isEmpty();
     }
 
     public void testImportGpxZip() throws IOException {
@@ -272,7 +272,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         private long lastMessage = System.currentTimeMillis();
 
         @Override
-        public synchronized void handleRegularMessage(Message msg) {
+        public synchronized void handleRegularMessage(final Message msg) {
             final Message msg1 = Message.obtain();
             msg1.copyFrom(msg);
             messages.add(msg1);
@@ -285,13 +285,13 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
                 while (System.currentTimeMillis() - lastMessage <= milliseconds && !hasTerminatingMessage()) {
                     wait(milliseconds);
                 }
-            } catch (InterruptedException e) {
+            } catch (final InterruptedException e) {
                 // intentionally left blank
             }
         }
 
         private boolean hasTerminatingMessage() {
-            Message recentMessage = messages.get(messages.size() - 1);
+            final Message recentMessage = messages.get(messages.size() - 1);
             return recentMessage.what == GPXImporter.IMPORT_STEP_CANCELED || recentMessage.what == GPXImporter.IMPORT_STEP_FINISHED || recentMessage.what == GPXImporter.IMPORT_STEP_FINISHED_WITH_ERROR;
         }
 

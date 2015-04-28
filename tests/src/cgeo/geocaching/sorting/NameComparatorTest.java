@@ -56,10 +56,10 @@ public class NameComparatorTest extends AndroidTestCase {
     }
 
     private void assertSorted(final Geocache cache1, final Geocache cache2) {
-        assertThat(comp.compare(cache1, cache2) < 0).isTrue();
+        assertThat(comp.compare(cache1, cache2)).isLessThan(0);
     }
 
     private void assertNotSorted(final Geocache cache1, final Geocache cache2) {
-        assertThat(comp.compare(cache1, cache2) > 0).isTrue();
+        assertThat(comp.compare(cache1, cache2)).isGreaterThan(0);
     }
 }

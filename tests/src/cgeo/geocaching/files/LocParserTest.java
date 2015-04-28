@@ -16,14 +16,14 @@ import java.util.Collection;
 import java.util.List;
 
 public class LocParserTest extends AbstractResourceInstrumentationTestCase {
-    private List<Geocache> readLoc(int resourceId) throws IOException, ParserException {
+    private List<Geocache> readLoc(final int resourceId) throws IOException, ParserException {
         final LocParser parser = new LocParser(getTemporaryListId());
         Collection<Geocache> caches = null;
         final InputStream instream = getResourceStream(resourceId);
         try {
             caches = parser.parse(instream, null);
             assertThat(caches).isNotNull();
-            assertThat(caches.size() > 0).isTrue();
+            assertThat(caches).isNotEmpty();
         } finally {
             instream.close();
         }

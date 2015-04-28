@@ -115,8 +115,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
         final SearchResult search = Geocache.searchByGeocode(geocode, null, 0, true, null);
         assertThat(search).isNotNull();
         if (Settings.isGCPremiumMember() || search.getError() == null) {
-            assertThat(search.getGeocodes()).hasSize(1);
-            assertThat(search.getGeocodes()).contains(geocode);
+            assertThat(search.getGeocodes()).containsExactly(geocode);
             return DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
         }
         assertThat(search.getGeocodes()).isEmpty();
@@ -167,8 +166,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
 
                 SearchResult search = Geocache.searchByGeocode(cache.getGeocode(), null, StoredList.TEMPORARY_LIST.id, true, null);
                 assertThat(search).isNotNull();
-                assertThat(search.getGeocodes()).hasSize(1);
-                assertThat(search.getGeocodes().contains(cache.getGeocode())).isTrue();
+                assertThat(search.getGeocodes()).containsExactly(cache.getGeocode());
                 final Geocache searchedCache = search.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
                 // coords must be null if the user is not logged in
                 assertThat(searchedCache).isNotNull();
@@ -241,8 +239,8 @@ public class CgeoApplicationTest extends CGeoTestCase {
             public void run() {
                 final SearchResult search = GCParser.searchByCoords(new Geopoint("N 50° 06.654 E 008° 39.777"), CacheType.MYSTERY, false, null);
                 assertThat(search).isNotNull();
-                assertThat(20 <= search.getGeocodes().size()).isTrue();
-                assertThat(search.getGeocodes().contains("GC1HBMY")).isTrue();
+                assertThat(search.getGeocodes().size()).isGreaterThanOrEqualTo(20);
+                assertThat(search.getGeocodes()).contains("GC1HBMY");
             }
         });
     }
@@ -259,7 +257,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
                 final SearchResult search = GCParser.searchByOwner("blafoo", CacheType.MYSTERY, false, null);
                 assertThat(search).isNotNull();
                 assertThat(search.getGeocodes()).hasSize(3);
-                assertThat(search.getGeocodes().contains("GC36RT6")).isTrue();
+                assertThat(search.getGeocodes()).contains("GC36RT6");
             }
         });
     }
@@ -276,7 +274,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
                 final SearchResult search = GCParser.searchByUsername("blafoo", CacheType.WEBCAM, false, null);
                 assertThat(search).isNotNull();
                 assertThat(search.getTotalCountGC()).isEqualTo(5);
-                assertThat(search.getGeocodes().contains("GCP0A9")).isTrue();
+                assertThat(search.getGeocodes()).contains("GCP0A9");
             }
         });
     }
@@ -309,7 +307,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
                     Settings.setLiveMapStrategy(LivemapStrategy.DETAILED);
                     SearchResult search = ConnectorFactory.searchByViewport(viewport, tokens);
                     assertThat(search).isNotNull();
-                    assertThat(search.getGeocodes().contains(mockedCache.getGeocode())).isTrue();
+                    assertThat(search.getGeocodes()).contains(mockedCache.getGeocode());
                     Geocache parsedCache = DataStore.loadCache(mockedCache.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
                     assert parsedCache != null;
                     assertThat(parsedCache).isNotNull();
@@ -323,7 +321,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
 
                     search = ConnectorFactory.searchByViewport(viewport, tokens);
                     assertThat(search).isNotNull();
-                    assertThat(search.getGeocodes().contains(mockedCache.getGeocode())).isTrue();
+                    assertThat(search.getGeocodes()).contains(mockedCache.getGeocode());
                     parsedCache = DataStore.loadCache(mockedCache.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
                     assert parsedCache != null;
                     assertThat(parsedCache).isNotNull();
@@ -366,7 +364,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
                     SearchResult search = ConnectorFactory.searchByViewport(viewport, INVALID_TOKEN);
 
                     assertThat(search).isNotNull();
-                    assertThat(search.getGeocodes().contains(cache.getGeocode())).isTrue();
+                    assertThat(search.getGeocodes()).contains(cache.getGeocode());
                     // coords differ
                     final Geocache cacheFromViewport = DataStore.loadCache(cache.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
                     assert cacheFromViewport != null;
@@ -386,7 +384,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
 
                     assertThat(search).isNotNull();
                     // In the meantime, premium-member caches are also shown on map when not logged in
-                    assertThat(search.getGeocodes().contains(cache.getGeocode())).isTrue();
+                    assertThat(search.getGeocodes()).contains(cache.getGeocode());
 
                 } finally {
                     Settings.setLiveMapStrategy(strategy);

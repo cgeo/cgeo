@@ -38,8 +38,8 @@ public class WaypointTest extends AndroidTestCase {
         assertOrdered(parking, trailhead);
     }
 
-    private static void assertOrdered(Waypoint first, Waypoint second) {
-        assertThat(Waypoint.WAYPOINT_COMPARATOR.compare(first, second) < 0).isTrue();
+    private static void assertOrdered(final Waypoint first, final Waypoint second) {
+        assertThat(Waypoint.WAYPOINT_COMPARATOR.compare(first, second)).isLessThan(0);
     }
 
     public static void testGeocode() {
@@ -61,7 +61,7 @@ public class WaypointTest extends AndroidTestCase {
                 "M 7\n" +
                 "N 5\n" +
                 "5 IFG 257";
-        assertThat(Waypoint.parseWaypointsFromNote(note).isEmpty()).isTrue();
+        assertThat(Waypoint.parseWaypointsFromNote(note)).isEmpty();
     }
 
     public static void testParseWaypointFromNote() {

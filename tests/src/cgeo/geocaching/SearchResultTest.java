@@ -16,7 +16,7 @@ public class SearchResultTest extends AndroidTestCase {
         final SearchResult searchResult = new SearchResult(geocodes);
         assertThat(searchResult.getCount()).isEqualTo(2);
         assertThat(searchResult.getTotalCountGC()).isEqualTo(2);
-        assertThat(searchResult.getGeocodes().contains("GC12345")).isTrue();
+        assertThat(searchResult.getGeocodes()).contains("GC12345");
     }
 
     public static void testParcel() {
@@ -30,7 +30,7 @@ public class SearchResultTest extends AndroidTestCase {
         geocodes.add("GC56789");
         search.addFilteredGeocodes(geocodes);
 
-        Parcel parcel = Parcel.obtain();
+        final Parcel parcel = Parcel.obtain();
         search.writeToParcel(parcel, 0);
         // reset to ready for reading
         parcel.setDataPosition(0);
@@ -42,11 +42,9 @@ public class SearchResultTest extends AndroidTestCase {
         assertThat(receive.getCount()).isEqualTo(3);
         assertThat(receive.getFilteredGeocodes()).hasSize(2);
 
-        assertThat(receive.getGeocodes().contains("GC12345")).isTrue();
-        assertThat(receive.getGeocodes().contains("GC45678")).isFalse();
+        assertThat(receive.getGeocodes()).contains("GC12345").doesNotContain("GC45678");
 
-        assertThat(receive.getFilteredGeocodes().contains("GC12345")).isFalse();
-        assertThat(receive.getFilteredGeocodes().contains("GC45678")).isTrue();
+        assertThat(receive.getFilteredGeocodes()).contains("GC45678").doesNotContain("GC12345");
     }
 
     public static void testAddSearchResult() {
@@ -67,11 +65,8 @@ public class SearchResultTest extends AndroidTestCase {
         assertThat(newSearch.getCount()).isEqualTo(4);
         assertThat(newSearch.getFilteredGeocodes()).hasSize(2);
 
-        assertThat(newSearch.getGeocodes().contains("GC12345")).isTrue();
-        assertThat(newSearch.getGeocodes().contains("GC01234")).isTrue();
-        assertThat(newSearch.getGeocodes().contains("GC45678")).isFalse();
+        assertThat(newSearch.getGeocodes()).contains("GC12345", "GC01234").doesNotContain("GC45678");
 
-        assertThat(newSearch.getFilteredGeocodes().contains("GC12345")).isFalse();
-        assertThat(newSearch.getFilteredGeocodes().contains("GC45678")).isTrue();
+        assertThat(newSearch.getFilteredGeocodes()).contains("GC45678").doesNotContain("GC12345");
     }
 }

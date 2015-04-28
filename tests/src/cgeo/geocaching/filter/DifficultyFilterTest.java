@@ -21,6 +21,6 @@ public class DifficultyFilterTest extends CGeoTestCase {
     }
 
     public static void testAllFilters() {
-        assertThat(new DifficultyFilter.Factory().getFilters().size() == 5).isTrue(); // difficulty ranges from 1 to 5
+        assertThat(new DifficultyFilter.Factory().getFilters()).hasSize(5); // difficulty ranges from 1 to 5
     }
 }
