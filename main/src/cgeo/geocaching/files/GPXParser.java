@@ -736,10 +736,7 @@ public abstract class GPXParser extends FileParser {
                 @Override
                 public void end() {
                     if (StringUtils.isNotBlank(trackable.getGeocode()) && StringUtils.isNotBlank(trackable.getName())) {
-                        if (cache.getInventory() == null) {
-                            cache.setInventory(new ArrayList<Trackable>());
-                        }
-                        cache.getInventory().add(trackable);
+                        cache.addInventoryItem(trackable);
                     }
                 }
             });

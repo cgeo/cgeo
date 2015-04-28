@@ -138,10 +138,8 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.EnumSet;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 import java.util.regex.Pattern;
 
 /**
@@ -1833,18 +1831,14 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             // TODO: fix layout, then switch back to Android-resource and delete copied one
             // this copy is modified to respect the text color
             final TrackableListAdapter adapterTrackables = new TrackableListAdapter(CacheDetailActivity.this);
-            final Map<String, Trackable> trackables = new HashMap<>();
-            if (cache.getInventory() != null) {
-                for (final Trackable trackable: cache.getInventory()) {
-                    trackables.put(trackable.getUniqueID(), trackable);
-                }
+            cache.mergeInventory(genericTrackables);
+
+            // Todo: don't hesitate to use addAll() on adapter, once API Level reach 11 (as of today level is 9)
+            //adapterTrackables.addAll(cache.getInventory());
+            for (final Trackable trackable : cache.getInventory()) {
+                adapterTrackables.add(trackable);
             }
-            for (final Trackable trackable : genericTrackables) {
-                trackables.put(trackable.getUniqueID(), trackable);
-            }
-            for (final Map.Entry<String, Trackable> trackable: trackables.entrySet()) {
-                adapterTrackables.add(trackable.getValue());
-            }
+
             view.setAdapter(adapterTrackables);
             view.setOnItemClickListener(new OnItemClickListener() {
                 @Override

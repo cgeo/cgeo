@@ -643,14 +643,8 @@ public final class GCParser {
 
         // cache inventory
         try {
-            cache.setInventoryItems(0);
-
             final MatcherWrapper matcherInventory = new MatcherWrapper(GCConstants.PATTERN_INVENTORY, page);
             if (matcherInventory.find()) {
-                if (cache.getInventory() == null) {
-                    cache.setInventory(new ArrayList<Trackable>());
-                }
-
                 if (matcherInventory.groupCount() > 1) {
                     final String inventoryPre = matcherInventory.group(2);
 
@@ -664,8 +658,7 @@ public final class GCParser {
                                 inventoryItem.setGuid(matcherInventoryInside.group(1));
                                 inventoryItem.setName(matcherInventoryInside.group(2));
 
-                                cache.getInventory().add(inventoryItem);
-                                cache.setInventoryItems(cache.getInventoryItems() + 1);
+                                cache.addInventoryItem(inventoryItem);
                             }
                         }
                     }

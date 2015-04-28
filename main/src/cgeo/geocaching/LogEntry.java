@@ -10,6 +10,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -70,6 +71,16 @@ public final class LogEntry {
     public int hashCode() {
         return (int) date * type.hashCode() * author.hashCode() * log.hashCode();
     }
+
+    /**
+     * LogEntry Comparator by descending date
+     */
+    public static final Comparator<LogEntry> DESCENDING_DATE_COMPARATOR = new Comparator<LogEntry>() {
+        @Override
+        public int compare(final LogEntry logEntry1, final LogEntry logEntry2) {
+            return (int) (logEntry2.date - logEntry1.date);
+        }
+    };
 
     /**
      * Return True if passed LogDate Object is equal to the current LogDate Object.
