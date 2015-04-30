@@ -82,7 +82,7 @@ public class LeastRecentlyUsedMapTest extends AndroidTestCase {
         assertThat(cache).containsKey("1");
 
         // second has been overwritten by 11
-        assertThat(cache).containsKey("2");
+        assertThat(cache).doesNotContainKey("2");
         assertThat(cache).containsKey("11");
     }
 
