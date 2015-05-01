@@ -474,10 +474,12 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
                 boolean showTimeSpan = true;
                 switch (trackable.getSpottedType()) {
                     case Trackable.SPOTTED_CACHE:
-                        text = new StringBuilder(res.getString(R.string.trackable_spotted_in_cache) + ' ' + Html.fromHtml(trackable.getSpottedName()).toString());
+                        // TODO: the whole sentence fragment should not be constructed, but taken from the resources
+                        text = new StringBuilder(res.getString(R.string.trackable_spotted_in_cache)).append(' ').append(Html.fromHtml(trackable.getSpottedName()));
                         break;
                     case Trackable.SPOTTED_USER:
-                        text = new StringBuilder(res.getString(R.string.trackable_spotted_at_user) + ' ' + Html.fromHtml(trackable.getSpottedName()).toString());
+                        // TODO: the whole sentence fragment should not be constructed, but taken from the resources
+                        text = new StringBuilder(res.getString(R.string.trackable_spotted_at_user)).append(' ').append(Html.fromHtml(trackable.getSpottedName()));
                         break;
                     case Trackable.SPOTTED_UNKNOWN:
                         text = new StringBuilder(res.getString(R.string.trackable_spotted_unknown_location));
