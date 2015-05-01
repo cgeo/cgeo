@@ -99,8 +99,9 @@ public class MapQuestGeocoder {
                 address.setAddressLine(index++, addressComponent);
             }
         }
-        address.setLatitude(mapquestAddress.get("latLng").get("lat").asDouble());
-        address.setLongitude(mapquestAddress.get("latLng").get("lng").asDouble());
+        final JsonNode latLng = mapquestAddress.get("latLng");
+        address.setLatitude(latLng.get("lat").asDouble());
+        address.setLongitude(latLng.get("lng").asDouble());
         return address;
     }
 
