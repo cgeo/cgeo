@@ -5,7 +5,6 @@ import cgeo.geocaching.apps.cache.navi.NavigationAppFactory.NavigationAppsEnum;
 import cgeo.geocaching.ui.AbstractMenuActionProvider;
 
 import android.app.Activity;
-import android.content.Context;
 import android.support.v4.view.ActionProvider;
 import android.support.v4.view.MenuItemCompat;
 import android.view.Menu;
@@ -21,9 +20,9 @@ public class NavigationSelectionActionProvider extends AbstractMenuActionProvide
     private Geocache geocache;
     private final Activity activity;
 
-    public NavigationSelectionActionProvider(final Context context) {
-        super(context);
-        activity = (Activity) context;
+    public NavigationSelectionActionProvider(final Activity activity) {
+        super(activity);
+        this.activity = activity;
     }
 
     public void setTarget(final Geocache cache) {
