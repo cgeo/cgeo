@@ -16,6 +16,7 @@ import rx.functions.Action1;
 import rx.functions.Func0;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.preference.Preference;
@@ -23,12 +24,12 @@ import android.util.AttributeSet;
 
 public abstract class AbstractCheckCredentialsPreference extends AbstractClickablePreference {
 
-    public AbstractCheckCredentialsPreference(final SettingsActivity activity, final AttributeSet attrs) {
-        super(activity, attrs);
+    public AbstractCheckCredentialsPreference(final Context context, final AttributeSet attrs) {
+        super(context, attrs);
     }
 
-    public AbstractCheckCredentialsPreference(final SettingsActivity activity, final AttributeSet attrs, final int defStyle) {
-        super(activity, attrs, defStyle);
+    public AbstractCheckCredentialsPreference(final Context context, final AttributeSet attrs, final int defStyle) {
+        super(context, attrs, defStyle);
     }
 
     @Override
@@ -51,7 +52,7 @@ public abstract class AbstractCheckCredentialsPreference extends AbstractClickab
         final private SettingsActivity settingsActivity;
 
         LoginCheckClickListener(final SettingsActivity activity) {
-            settingsActivity = activity;
+            this.settingsActivity = activity;
         }
 
         @Override

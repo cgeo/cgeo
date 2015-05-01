@@ -1,5 +1,6 @@
 package cgeo.geocaching.settings;
 
+import android.content.Context;
 import android.preference.Preference;
 import android.util.AttributeSet;
 import android.view.View;
@@ -9,14 +10,14 @@ abstract class AbstractClickablePreference extends Preference {
 
     final SettingsActivity activity;
 
-    public AbstractClickablePreference(final SettingsActivity activity, final AttributeSet attrs) {
-        super(activity, attrs);
-        this.activity = activity;
+    public AbstractClickablePreference(final Context context, final AttributeSet attrs) {
+        super(context, attrs);
+        activity = (SettingsActivity) context;
     }
 
-    public AbstractClickablePreference(final SettingsActivity activity, final AttributeSet attrs, final int defStyle) {
-        super(activity, attrs, defStyle);
-        this.activity = activity;
+    public AbstractClickablePreference(final Context context, final AttributeSet attrs, final int defStyle) {
+        super(context, attrs, defStyle);
+        activity = (SettingsActivity) context;
     }
 
     @Override

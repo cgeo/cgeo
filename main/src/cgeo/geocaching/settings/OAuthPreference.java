@@ -7,6 +7,7 @@ import cgeo.geocaching.connector.oc.OCAuthParams;
 import cgeo.geocaching.connector.oc.OCAuthorizationActivity;
 import cgeo.geocaching.twitter.TwitterAuthorizationActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.preference.Preference;
 import android.util.AttributeSet;
@@ -48,14 +49,14 @@ public class OAuthPreference extends AbstractClickablePreference {
         return OAuthActivityMapping.NONE;
     }
 
-    public OAuthPreference(final SettingsActivity activity, final AttributeSet attrs) {
-        super(activity, attrs);
-        oAuthMapping = getAuthorization();
+    public OAuthPreference(final Context context, final AttributeSet attrs) {
+        super(context, attrs);
+        this.oAuthMapping = getAuthorization();
     }
 
-    public OAuthPreference(final SettingsActivity activity, final AttributeSet attrs, final int defStyle) {
-        super(activity, attrs, defStyle);
-        oAuthMapping = getAuthorization();
+    public OAuthPreference(final Context context, final AttributeSet attrs, final int defStyle) {
+        super(context, attrs, defStyle);
+        this.oAuthMapping = getAuthorization();
     }
 
     @Override

@@ -3,6 +3,7 @@ package cgeo.geocaching.loaders;
 import cgeo.geocaching.Trackable;
 import cgeo.geocaching.TrackableLog;
 import cgeo.geocaching.connector.trackable.GeokretyConnector;
+import cgeo.geocaching.connector.trackable.TrackableConnector;
 import cgeo.geocaching.utils.Log;
 
 import android.content.Context;
@@ -14,9 +15,9 @@ public class GeokretyInventoryLoader extends AbstractInventoryLoader {
     private final GeokretyConnector connector;
     private final List<TrackableLog> trackables = new ArrayList<>();
 
-    public GeokretyInventoryLoader(final Context context, final GeokretyConnector connector) {
+    public GeokretyInventoryLoader(final Context context, final TrackableConnector connector) {
         super(context);
-        this.connector = connector;
+        this.connector = (GeokretyConnector) connector;
     }
 
     @Override
