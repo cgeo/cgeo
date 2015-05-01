@@ -7,8 +7,9 @@ import cgeo.geocaching.utils.RxUtils;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 
 import rx.Observable;
@@ -27,7 +28,7 @@ import android.os.Bundle;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class LocationProvider implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
+public class LocationProvider extends LocationCallback implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     private static final LocationRequest LOCATION_REQUEST =
             LocationRequest.create().setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY).setInterval(2000).setFastestInterval(250);
@@ -146,7 +147,8 @@ public class LocationProvider implements GoogleApiClient.ConnectionCallbacks, Go
     }
 
     @Override
-    public void onLocationChanged(final Location location) {
+    public void onLocationResult(final LocationResult result) {
+        final Location location = result.getLastLocation();
         if (Settings.useLowPowerMode()) {
             location.setProvider(GeoData.LOW_POWER_PROVIDER);
         }
