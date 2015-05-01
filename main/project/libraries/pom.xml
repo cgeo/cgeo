@@ -16,7 +16,7 @@
 	</description>
 
 	<properties>
-		<AndroidAnnotationsVersion>3.2</AndroidAnnotationsVersion>
+		<AndroidAnnotationsVersion>3.3</AndroidAnnotationsVersion>
 
 		<ButterKnifeVersion>6.1.0</ButterKnifeVersion>
 
@@ -26,9 +26,9 @@
 
 		<FindbugsAnnotationsVersion>3.0.0</FindbugsAnnotationsVersion>
 
-		<JacksonAnnotationsVersion>2.5.2</JacksonAnnotationsVersion>
-		<JacksonCoreVersion>2.5.2</JacksonCoreVersion>
-		<JacksonDatabindVersion>2.5.2</JacksonDatabindVersion>
+		<JacksonAnnotationsVersion>2.5.3</JacksonAnnotationsVersion>
+		<JacksonCoreVersion>2.5.3</JacksonCoreVersion>
+		<JacksonDatabindVersion>2.5.3</JacksonDatabindVersion>
 
 		<RXAndroidVersion>0.24.0</RXAndroidVersion>
 		<RXJavaVersion>1.0.10</RXJavaVersion>

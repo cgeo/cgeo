@@ -26,12 +26,12 @@ gradle connectedCheck
 //Testing guide : http://tools.android.com/tech-docs/new-build-system/user-guide#TOC-Testing
 //https://github.com/stephanenicolas/Quality-Tools-for-Android
 
-def AAVersion = '3.2'
+def AAVersion = '3.3'
 def RXJavaVersion = '1.0.10'
 def RXAndroidVersion = '0.24.0'
-def JacksonCoreVersion = '2.5.2'
-def JacksonDatabindVersion = '2.5.2'
-def JacksonAnnotationsVersion = '2.5.2'
+def JacksonCoreVersion = '2.5.3'
+def JacksonDatabindVersion = '2.5.3'
+def JacksonAnnotationsVersion = '2.5.3'
 def CommonsCollections4Version = '4.0'
 def CommonsLang3Version = '3.4'
 def CommonsIoVersion = '2.4'
@@ -157,7 +157,7 @@ dependencies {
     compile files('libs/mapsforge-map-0.3.0-jar-with-dependencies.jar')
 
     compile 'com.android.support:appcompat-v7:19.1.0'
-    compile 'com.google.android.gms:play-services:6.5.+'
+    compile 'com.google.android.gms:play-services:7.3.+'
 
     compile 'com.jakewharton:butterknife:6.1.0'
     compile "org.apache.commons:commons-collections4:$CommonsCollections4Version"
@@ -173,7 +173,7 @@ dependencies {
     compile "com.fasterxml.jackson.core:jackson-annotations:$JacksonAnnotationsVersion"
 
     //TEST
-    //compile files('compile-libs/androidannotations-3.2.jar')
+    //compile files('compile-libs/androidannotations-3.3.jar')
     //compile files('compile-libs/findbugs-ant.jar')
     //compile files('compile-libs/findbugs-jsr305.jar')  //CheckForNull conflict with com.google.code.findbugs:annotations
     compile files('compile-libs/org.eclipse.jdt.annotation_1.1.0.v20130513-1648.jar')
