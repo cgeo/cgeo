@@ -1696,14 +1696,15 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
      *
      */
     private CharSequence getCurrentSubtitle() {
-        final ArrayList<String> numbers = new ArrayList<>();
+        if (search == null) {
+            return getCacheNumberString(getResources(), 0);
+        }
+        final StringBuilder result = new StringBuilder();
         if (adapter.isFiltered()) {
-            numbers.add(getCacheNumberString(getResources(), adapter.getCount()));
+            result.append(adapter.getCount()).append('/');
         }
-        if (search != null) {
-            numbers.add(getCacheNumberString(getResources(), search.getCount()));
-        }
-        return numbers.isEmpty() ? null : StringUtils.join(numbers, '/');
+        result.append(getCacheNumberString(getResources(), search.getCount()));
+        return result.toString();
     }
 
     @Override
