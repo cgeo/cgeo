@@ -3,12 +3,12 @@ apply plugin: 'android-library'
 android {
 
   // Define these properties in the gradle.properties file in the root project folder
-  compileSdkVersion propTargetSdkVersion.toInteger()
-  buildToolsVersion propBuildToolsVersion
+  compileSdkVersion 19
+  buildToolsVersion "22.0.1"
 
   defaultConfig {
-    minSdkVersion propMinSdkVersion.toInteger()
-    targetSdkVersion propTargetSdkVersion.toInteger()
+    minSdkVersion 9
+    targetSdkVersion 19
   }
 
   sourceSets.main {
