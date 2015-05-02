@@ -161,7 +161,6 @@ public final class StoredList extends AbstractList {
                     new StoredList(newId, listName, 0);
 
                     if (newId >= DataStore.customListIdOffset) {
-                        ActivityMixin.showToast(activity, res.getString(R.string.list_dialog_create_ok));
                         runAfterwards.call(newId);
                     } else {
                         ActivityMixin.showToast(activity, res.getString(R.string.list_dialog_create_err));

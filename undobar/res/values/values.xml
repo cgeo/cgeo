@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- From: file:/Users/jenzz/Developer/Android-UndoBar/library/src/main/res/values/bools.xml -->
+    <eat-comment/>
+    <bool name="is_align_bottom_possible">true</bool>
+    <!-- From: file:/Users/jenzz/Developer/Android-UndoBar/library/src/main/res/values/dimens.xml -->
+    <eat-comment/>
+    <dimen name="undo_bar_height_holo">64dp</dimen>
+    <dimen name="undo_bar_height_kitkat">48dp</dimen>
+    <dimen name="undo_bar_height_lollipop">48dp</dimen>
+    <dimen name="undo_bar_max_width_lollipop">@null</dimen>
+    <!-- From: file:/Users/jenzz/Developer/Android-UndoBar/library/src/main/res/values/layouts.xml -->
+    <eat-comment/>
+    <item name="undo_bar" type="layout">@layout/undo_bar_holo</item>
+    <!-- From: file:/Users/jenzz/Developer/Android-UndoBar/library/src/main/res/values/strings.xml -->
+    <eat-comment/>
+    <string name="undo">@string/undo_english</string>
+    <string name="undo_english">UNDO</string>
+    <!-- From: file:/Users/jenzz/Developer/Android-UndoBar/library/src/main/res/values/styles.xml -->
+    <eat-comment/>
+    <style name="Button"/>
+    <!-- From: file:/Users/jenzz/Developer/Android-UndoBar/library/src/main/res/values/styles_holo.xml -->
+    <eat-comment/>
+    <style name="Button.Holo">
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingRight">16dp</item>
+        <item name="android:drawableLeft">@drawable/ic_undo</item>
+        <item name="android:drawablePadding">12dp</item>
+        <item name="android:textAppearance">?android:textAppearanceSmall</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">#acacac</item>
+        <item name="android:background">@drawable/button_background_holo</item>
+    </style>
+    <!-- From: file:/Users/jenzz/Developer/Android-UndoBar/library/src/main/res/values/styles_kitkat.xml -->
+    <eat-comment/>
+    <style name="Button.KitKat">
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingRight">16dp</item>
+        <item name="android:drawableLeft">@drawable/ic_undo</item>
+        <item name="android:drawablePadding">12dp</item>
+        <item name="android:textAppearance">?android:textAppearanceSmall</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">#acacac</item>
+        <item name="android:background">@drawable/button_background_kitkat</item>
+    </style>
+    <!-- From: file:/Users/jenzz/Developer/Android-UndoBar/library/src/main/res/values/styles_lollipop.xml -->
+    <eat-comment/>
+    <style name="Button.Lollipop">
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingRight">16dp</item>
+        <item name="android:textAppearance">?android:textAppearanceMedium</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:background">@drawable/button_background_lollipop</item>
+    </style>
+    <!-- From: file:/Users/jenzz/Developer/Android-UndoBar/library/src/main/res/values/styles.xml -->
+    <eat-comment/>
+    <style name="Message"/>
+    <!-- From: file:/Users/jenzz/Developer/Android-UndoBar/library/src/main/res/values/styles_holo.xml -->
+    <eat-comment/>
+    <style name="Message.Holo">
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingRight">16dp</item>
+        <item name="android:textAppearance">?android:textAppearanceMedium</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+    <!-- From: file:/Users/jenzz/Developer/Android-UndoBar/library/src/main/res/values/styles_kitkat.xml -->
+    <eat-comment/>
+    <style name="Message.KitKat">
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingRight">16dp</item>
+        <item name="android:textAppearance">?android:textAppearanceMedium</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+    <!-- From: file:/Users/jenzz/Developer/Android-UndoBar/library/src/main/res/values/styles_lollipop.xml -->
+    <eat-comment/>
+    <style name="Message.Lollipop">
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingRight">16dp</item>
+        <item name="android:textAppearance">?android:textAppearanceMedium</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+    <!-- From: file:/Users/jenzz/Developer/Android-UndoBar/library/src/main/res/values/styles.xml -->
+    <eat-comment/>
+    <style name="Root"/>
+    <!-- From: file:/Users/jenzz/Developer/Android-UndoBar/library/src/main/res/values/styles_holo.xml -->
+    <eat-comment/>
+    <style name="Root.Holo">
+        <item name="android:layout_gravity">bottom|center_horizontal</item>
+        <item name="android:layout_marginLeft">24dp</item>
+        <item name="android:layout_marginRight">24dp</item>
+        <item name="android:layout_marginBottom">24dp</item>
+        <item name="android:maxWidth">500dp</item>
+        <item name="android:background">@drawable/root_background_holo</item>
+    </style>
+    <!-- From: file:/Users/jenzz/Developer/Android-UndoBar/library/src/main/res/values/styles_kitkat.xml -->
+    <eat-comment/>
+    <style name="Root.KitKat">
+        <item name="android:layout_gravity">bottom|center_horizontal</item>
+        <item name="android:layout_marginLeft">24dp</item>
+        <item name="android:layout_marginRight">24dp</item>
+        <item name="android:layout_marginBottom">24dp</item>
+        <item name="android:maxWidth">500dp</item>
+        <item name="android:background">@drawable/root_background_kitkat</item>
+    </style>
+    <!-- From: file:/Users/jenzz/Developer/Android-UndoBar/library/src/main/res/values/styles_lollipop.xml -->
+    <eat-comment/>
+    <style name="Root.Lollipop">
+        <item name="android:layout_gravity">bottom|center_horizontal</item>
+        <item name="android:layout_marginLeft">24dp</item>
+        <item name="android:layout_marginRight">24dp</item>
+        <item name="android:layout_marginBottom">24dp</item>
+        <item name="android:maxWidth">@dimen/undo_bar_max_width_lollipop</item>
+        <item name="android:background">@drawable/root_background_lollipop</item>
+    </style>
+</resources>

@@ -1377,4 +1377,17 @@
     <string name="settings_summary_map_direction">Show a direction line to the navigation target</string>
     <string name="map_direction">Show direction</string>
     
+    <string name="command_move_caches_progress">Moving caches to list %1s</string>
+    <plurals name="command_move_caches_result">
+        <item quantity="one">Moved %d cache</item>
+        <item quantity="other">Moved %d caches</item>
+    </plurals>
+    <string name="command_delete_caches_progress">Deleting caches</string>
+    <plurals name="command_delete_caches_result">
+        <item quantity="one">Deleted %d cache</item>
+        <item quantity="other">Deleted %d caches</item>
+    </plurals>
+    <string name="command_rename_list_result">Renamed list</string>
+    <string name="command_delete_list_result">Deleted list</string>
+    
 </resources>

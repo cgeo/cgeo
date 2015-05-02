@@ -12,6 +12,10 @@ import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.apps.cachelist.CacheListApp;
 import cgeo.geocaching.apps.cachelist.CacheListApps;
 import cgeo.geocaching.apps.cachelist.ListNavigationSelectionActionProvider;
+import cgeo.geocaching.command.DeleteCachesCommand;
+import cgeo.geocaching.command.DeleteListCommand;
+import cgeo.geocaching.command.MoveToListCommand;
+import cgeo.geocaching.command.RenameListCommand;
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.connector.gc.RecaptchaHandler;
 import cgeo.geocaching.enumerations.CacheListType;
@@ -55,7 +59,6 @@ import cgeo.geocaching.ui.LoggingUI;
 import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AngleUtils;
-import cgeo.geocaching.utils.AsyncTaskWithProgress;
 import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.Log;
@@ -112,8 +115,9 @@ import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -714,7 +718,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 invalidateOptionsMenuCompatible();
                 return true;
             case R.id.menu_drop_caches:
-                dropStored();
+                deleteCachesWithConformation();
                 invalidateOptionsMenuCompatible();
                 return true;
             case R.id.menu_import_gpx:
@@ -731,7 +735,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 invalidateOptionsMenuCompatible();
                 return true;
             case R.id.menu_drop_list:
-                removeList(false);
+                removeList();
                 invalidateOptionsMenuCompatible();
                 return true;
             case R.id.menu_rename_list:
@@ -758,7 +762,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 invalidateOptionsMenuCompatible();
                 return true;
             case R.id.menu_move_to_list:
-                moveCachesToOtherList();
+                moveCachesToOtherList(adapter.getCheckedOrAllCaches());
                 invalidateOptionsMenuCompatible();
                 return true;
             case R.id.menu_delete_events:
@@ -797,7 +801,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 deletion.add(cache);
             }
         }
-        new DropDetailsTask(0).execute(deletion.toArray(new Geocache[deletion.size()]));
+        deleteCachesInternal(deletion);
     }
 
     private void clearOfflineLogs() {
@@ -859,17 +863,16 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         LoggingUI.onPrepareOptionsMenu(menu, cache);
     }
 
-    private void moveCachesToOtherList() {
-        new StoredList.UserInterface(this).promptForListSelection(R.string.cache_menu_move_list, new Action1<Integer>() {
+    private void moveCachesToOtherList(final Collection<Geocache> caches) {
+        new MoveToListCommand(this, caches, listId) {
 
             @Override
-            public void call(final Integer newListId) {
-                DataStore.moveToList(adapter.getCheckedOrAllCaches(), newListId);
+            protected void onFinished() {
                 adapter.setSelectMode(false);
-
                 refreshCurrentList();
             }
-        }, true, listId);
+
+        }.execute();
     }
 
     @Override
@@ -908,26 +911,10 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 CacheDetailActivity.startActivity(this, cache.getGeocode(), cache.getName());
                 break;
             case R.id.menu_drop_cache:
-                final int lastListPosition = getListView().getFirstVisiblePosition();
-                cache.drop(new Handler() {
-                    @Override
-                    public void handleMessage(final Message msg) {
-                        adapter.notifyDataSetChanged();
-                        refreshCurrentList();
-                        getListView().setSelection(lastListPosition);
-                    }
-                });
+                deleteCachesInternal(Collections.singletonList(cache));
                 break;
             case R.id.menu_move_to_list:
-                new StoredList.UserInterface(this).promptForListSelection(R.string.cache_menu_move_list, new Action1<Integer>() {
-
-                    @Override
-                    public void call(final Integer newListId) {
-                        DataStore.moveToList(Collections.singletonList(cache), newListId);
-                        adapter.setSelectMode(false);
-                        refreshCurrentList();
-                    }
-                }, true, listId, listNameMemento);
+                moveCachesToOtherList(Collections.singletonList(cache));
                 break;
             case R.id.menu_store_cache:
             case R.id.menu_refresh:
@@ -1186,7 +1173,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         Send2CgeoDownloader.loadFromWeb(downloadFromWebHandler, listId);
     }
 
-    private void dropStored() {
+    private void deleteCachesWithConformation() {
         final int titleId = (adapter.getCheckedCount() > 0) ? R.string.caches_remove_selected : R.string.caches_remove_all;
         final int count = adapter.getCheckedOrAllCount();
         final String message = res.getQuantityString(adapter.getCheckedCount() > 0 ? R.plurals.caches_remove_selected_confirm : R.plurals.caches_remove_all_confirm, count, count);
@@ -1194,12 +1181,14 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
             @Override
             public void onClick(final DialogInterface dialog, final int id) {
-                final List<Geocache> selected = adapter.getCheckedOrAllCaches();
-                final int lastListPosition = getListView().getFirstVisiblePosition();
-                new DropDetailsTask(lastListPosition).execute(selected.toArray(new Geocache[selected.size()]));
+                deleteCachesInternal(adapter.getCheckedOrAllCaches());
                 dialog.cancel();
             }
         });
+    }
+
+    private void deleteCachesInternal(final @NonNull Collection<Geocache> caches) {
+        new DeleteCachesFromListCommand(CacheListActivity.this, caches).execute();
     }
 
     /**
@@ -1259,26 +1248,26 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         handler.unsubscribeIfCancelled(new CompositeSubscription(generator, loaded.subscribe()));
     }
 
-    private class DropDetailsTask extends AsyncTaskWithProgress<Geocache, Void> {
+    private static final class DeleteCachesFromListCommand extends DeleteCachesCommand {
+
+        private final WeakReference<CacheListActivity> activityRef;
         private final int lastListPosition;
 
-        public DropDetailsTask(final int lastListPosition) {
-            super(CacheListActivity.this, null, res.getString(R.string.caches_remove_progress), true);
-            this.lastListPosition = lastListPosition;
+        public DeleteCachesFromListCommand(@NonNull final CacheListActivity context, final Collection<Geocache> caches) {
+            super(context, caches);
+            lastListPosition = context.getListView().getFirstVisiblePosition();
+            activityRef = new WeakReference<>(context);
         }
 
         @Override
-        protected Void doInBackgroundInternal(final Geocache[] caches) {
-            DataStore.markDropped(Arrays.asList(caches));
-            return null;
-        }
-
-        @Override
-        protected void onPostExecuteInternal(final Void result) {
-            adapter.setSelectMode(false);
-            refreshCurrentList();
-            replaceCacheListFromSearch();
-            getListView().setSelection(lastListPosition);
+        public void onFinished() {
+            final CacheListActivity activity = activityRef.get();
+            if (activity != null) {
+                activity.adapter.setSelectMode(false);
+                activity.refreshCurrentList();
+                activity.replaceCacheListFromSearch();
+                activity.getListView().setSelection(lastListPosition);
+            }
         }
 
     }
@@ -1360,29 +1349,49 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     private void renameList() {
-        new StoredList.UserInterface(this).promptForListRename(listId, new Runnable() {
+        (new RenameListCommand(this, listId) {
 
             @Override
-            public void run() {
+            protected void onFinished() {
                 refreshCurrentList();
             }
-        });
+        }).execute();
     }
 
     private void removeListInternal() {
-        if (DataStore.removeList(listId)) {
-            showToast(res.getString(R.string.list_dialog_remove_ok));
-            refreshSpinnerAdapter();
-            switchListById(StoredList.STANDARD_LIST_ID);
-        } else {
-            showToast(res.getString(R.string.list_dialog_remove_err));
-        }
+        new DeleteListCommand(this, listId) {
+
+            private String oldListName;
+
+            @Override
+            protected boolean canExecute() {
+                oldListName = DataStore.getList(listId).getTitle();
+                return super.canExecute();
+            }
+
+            @Override
+            protected void onFinished() {
+                refreshSpinnerAdapter();
+                switchListById(StoredList.STANDARD_LIST_ID);
+            }
+
+            @Override
+            protected void onFinishedUndo() {
+                refreshSpinnerAdapter();
+                for (final StoredList list : DataStore.getLists()) {
+                    if (oldListName.equals(list.getTitle())) {
+                        switchListById(list.id);
+                    }
+                }
+            }
+
+        }.execute();
     }
 
-    private void removeList(final boolean askForConfirmation) {
+    private void removeList() {
         // if there are no caches on this list, don't bother the user with questions.
         // there is no harm in deleting the list, he could recreate it easily
-        if (!askForConfirmation && CollectionUtils.isEmpty(cacheList)) {
+        if (CollectionUtils.isEmpty(cacheList)) {
             removeListInternal();
             return;
         }

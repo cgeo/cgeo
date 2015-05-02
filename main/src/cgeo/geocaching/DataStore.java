@@ -30,6 +30,16 @@ import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
+import rx.Observable;
+import rx.Observable.OnSubscribe;
+import rx.Subscriber;
+import rx.android.app.AppObservable;
+import rx.functions.Action0;
+import rx.functions.Action1;
+import rx.functions.Func0;
+import rx.functions.Func1;
+import rx.schedulers.Schedulers;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
@@ -66,16 +76,6 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
-
-import rx.Observable;
-import rx.Observable.OnSubscribe;
-import rx.Subscriber;
-import rx.android.app.AppObservable;
-import rx.functions.Action0;
-import rx.functions.Action1;
-import rx.functions.Func0;
-import rx.functions.Func1;
-import rx.schedulers.Schedulers;
 
 public class DataStore {
 
@@ -2720,7 +2720,7 @@ public class DataStore {
         moveToList(Collections.singletonList(cache), listId);
     }
 
-    public static void moveToList(final List<Geocache> caches, final int listId) {
+    public static void moveToList(final Collection<Geocache> caches, final int listId) {
         final AbstractList list = AbstractList.getListById(listId);
         if (list == null) {
             return;
@@ -2956,7 +2956,7 @@ public class DataStore {
         setVisitDate(Collections.singletonList(geocode), System.currentTimeMillis());
     }
 
-    public static void markDropped(final List<Geocache> caches) {
+    public static void markDropped(final Collection<Geocache> caches) {
         moveToList(caches, StoredList.TEMPORARY_LIST.id);
     }
 

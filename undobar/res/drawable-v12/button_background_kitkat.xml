@@ -1,0 +1,19 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <solid android:color="#858585" />
+
+            <corners android:bottomRightRadius="24dp" android:topRightRadius="24dp" />
+        </shape>
+    </item>
+    <item android:state_focused="true">
+        <shape android:shape="rectangle">
+            <solid android:color="#858585" />
+
+            <corners android:bottomRightRadius="24dp" android:topRightRadius="24dp" />
+        </shape>
+    </item>
+    <item android:drawable="@android:color/transparent" />
+
+</selector><!-- From: file:/Users/jenzz/Developer/Android-UndoBar/library/src/main/res/drawable-v12/button_background_kitkat.xml -->
