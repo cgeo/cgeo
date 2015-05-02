@@ -590,7 +590,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
             @Override
             public void onListNavigationSelected(final CacheListApp app) {
-                final ArrayList<Geocache> cachesWithCoords = new ArrayList<>(cacheList.size());
+                final List<Geocache> cachesWithCoords = new ArrayList<>(cacheList.size());
                 for (final Geocache geocache : cacheList) {
                     if (geocache.getCoords() != null) {
                         cachesWithCoords.add(geocache);
