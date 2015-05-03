@@ -5,6 +5,7 @@ import butterknife.ButterKnife;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
+import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.network.AndroidBeam;
 import cgeo.geocaching.network.Cookies;
@@ -209,7 +210,7 @@ public abstract class AbstractActivity extends ActionBarActivity implements IAbs
             setTitle(StringUtils.isNotBlank(geocode) ? geocode : res.getString(R.string.cache));
         }
         if (type != null) {
-            getSupportActionBar().setIcon(getResources().getDrawable(type.markerId));
+            getSupportActionBar().setIcon(Compatibility.getDrawable(getResources(), type.markerId));
         } else {
             getSupportActionBar().setIcon(android.R.color.transparent);
         }

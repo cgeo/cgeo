@@ -5,6 +5,7 @@ import butterknife.InjectView;
 import cgeo.geocaching.CacheDetailActivity;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
+import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.filter.IFilter;
@@ -131,13 +132,13 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
         this.cacheListType = cacheListType;
         checkEvents();
 
-        final Drawable modifiedCoordinatesMarker = activity.getResources().getDrawable(R.drawable.marker_usermodifiedcoords);
+        final Drawable modifiedCoordinatesMarker = Compatibility.getDrawable(activity.getResources(), R.drawable.marker_usermodifiedcoords);
         for (final CacheType cacheType : CacheType.values()) {
             // unmodified icon
-            gcIconDrawables.put(getIconHashCode(cacheType, false), activity.getResources().getDrawable(cacheType.markerId));
+            gcIconDrawables.put(getIconHashCode(cacheType, false), Compatibility.getDrawable(activity.getResources(), cacheType.markerId));
             // icon with flag for user modified coordinates
             final Drawable[] layers = new Drawable[2];
-            layers[0] = activity.getResources().getDrawable(cacheType.markerId);
+            layers[0] = Compatibility.getDrawable(activity.getResources(), cacheType.markerId);
             layers[1] = modifiedCoordinatesMarker;
             final LayerDrawable ld = new LayerDrawable(layers);
             ld.setLayerInset(1,

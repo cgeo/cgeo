@@ -4,6 +4,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
+import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Units;
 import cgeo.geocaching.sensors.GeoData;
@@ -75,7 +76,7 @@ public class WaypointPopupFragment extends AbstractDialogFragment {
             }
 
 
-            actionBarTitle.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(waypoint.getWaypointType().markerId), null, null, null);
+            actionBarTitle.setCompoundDrawablesWithIntrinsicBounds(Compatibility.getDrawable(getResources(), waypoint.getWaypointType().markerId), null, null, null);
 
             //getSupportActionBar().setIcon(getResources().getDrawable(waypoint.getWaypointType().markerId));
 

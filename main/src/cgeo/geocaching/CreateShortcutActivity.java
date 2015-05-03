@@ -1,6 +1,7 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActionBarActivity;
+import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.list.PseudoList;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.maps.MapActivity;
@@ -131,7 +132,7 @@ public class CreateShortcutActivity extends AbstractActionBarActivity {
 
     private Bitmap createOverlay(final int drawableResourceId) {
         final LayerDrawable layerDrawable = new LayerDrawable(new Drawable[] {
-                res.getDrawable(drawableResourceId), res.getDrawable(R.drawable.cgeo) });
+                Compatibility.getDrawable(res, drawableResourceId), Compatibility.getDrawable(res, R.drawable.cgeo) });
         layerDrawable.setLayerInset(0, 0, 0, 10, 10);
         layerDrawable.setLayerInset(1, 50, 50, 0, 0);
         return ImageUtils.convertToBitmap(layerDrawable);

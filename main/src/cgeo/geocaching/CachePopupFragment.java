@@ -4,6 +4,7 @@ import butterknife.ButterKnife;
 
 import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
+import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.network.Network;
@@ -95,7 +96,7 @@ public class CachePopupFragment extends AbstractDialogFragment {
             }
 
             final TextView titleView = ButterKnife.findById(getView(), R.id.actionbar_title);
-            titleView.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(cache.getType().markerId), null, null, null);
+            titleView.setCompoundDrawablesWithIntrinsicBounds(Compatibility.getDrawable(getResources(), cache.getType().markerId), null, null, null);
 
             final LinearLayout layout = ButterKnife.findById(getView(), R.id.details_list);
             details = new CacheDetailsCreator(getActivity(), layout);

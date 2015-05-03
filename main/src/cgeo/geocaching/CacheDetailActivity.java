@@ -11,6 +11,7 @@ import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.apps.cache.navi.NavigationSelectionActionProvider;
 import cgeo.geocaching.apps.cachelist.MapsWithMeCacheListApp;
+import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.capability.IgnoreCapability;
@@ -1805,13 +1806,13 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             final Drawable icon;
             if (wpt.isVisited()) {
                 final LayerDrawable ld = new LayerDrawable(new Drawable[] {
-                        res.getDrawable(waypointType.markerId),
-                        res.getDrawable(R.drawable.tick) });
+                        Compatibility.getDrawable(res, waypointType.markerId),
+                        Compatibility.getDrawable(res, R.drawable.tick) });
                 ld.setLayerInset(0, 0, 0, visitedInset, visitedInset);
                 ld.setLayerInset(1, visitedInset, visitedInset, 0, 0);
                 icon = ld;
             } else {
-                icon = res.getDrawable(waypointType.markerId);
+                icon = Compatibility.getDrawable(res, waypointType.markerId);
             }
             nameView.setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null);
         }

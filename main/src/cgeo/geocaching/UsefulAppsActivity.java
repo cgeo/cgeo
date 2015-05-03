@@ -4,6 +4,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 import cgeo.geocaching.activity.AbstractActionBarActivity;
+import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.ui.AbstractViewHolder;
 import cgeo.geocaching.utils.ProcessUtils;
 
@@ -87,7 +88,7 @@ public class UsefulAppsActivity extends AbstractActionBarActivity {
 
             private void fillViewHolder(final ViewHolder holder, final HelperApp app) {
                 holder.title.setText(res.getString(app.titleId));
-                holder.image.setImageDrawable(res.getDrawable(app.iconId));
+                holder.image.setImageDrawable(Compatibility.getDrawable(res, app.iconId));
                 holder.description.setText(Html.fromHtml(res.getString(app.descriptionId)));
             }
         });

@@ -3,6 +3,7 @@ package cgeo.geocaching.utils;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.Waypoint;
+import cgeo.geocaching.compatibility.Compatibility;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
@@ -78,10 +79,10 @@ public final class MapUtils {
     }
 
     private static LayerDrawable createWaypointMarker(final Resources res, final Waypoint waypoint) {
-        final Drawable marker = res.getDrawable(!waypoint.isVisited() ? R.drawable.marker : R.drawable.marker_transparent);
+        final Drawable marker = Compatibility.getDrawable(res, !waypoint.isVisited() ? R.drawable.marker : R.drawable.marker_transparent);
         final Drawable[] layers = {
                 marker,
-                res.getDrawable(waypoint.getWaypointType().markerId)
+                Compatibility.getDrawable(res, waypoint.getWaypointType().markerId)
         };
         final LayerDrawable drawable = new LayerDrawable(layers);
         final int resolution = calculateResolution(marker);
@@ -104,43 +105,43 @@ public final class MapUtils {
         final List<int[]> insets = new ArrayList<>(8);
 
         // background: disabled or not
-        final Drawable marker = res.getDrawable(cache.getMapMarkerId());
+        final Drawable marker = Compatibility.getDrawable(res, cache.getMapMarkerId());
         layers.add(marker);
         final int resolution = calculateResolution(marker);
         // reliable or not
         if (!cache.isReliableLatLon()) {
             insets.add(INSET_RELIABLE[resolution]);
-            layers.add(res.getDrawable(R.drawable.marker_notreliable));
+            layers.add(Compatibility.getDrawable(res, R.drawable.marker_notreliable));
         }
         // cache type
-        layers.add(res.getDrawable(cache.getType().markerId));
+        layers.add(Compatibility.getDrawable(res, cache.getType().markerId));
         insets.add(INSET_TYPE[resolution]);
         // own
         if (cache.isOwner()) {
-            layers.add(res.getDrawable(R.drawable.marker_own));
+            layers.add(Compatibility.getDrawable(res, R.drawable.marker_own));
             insets.add(INSET_OWN[resolution]);
             // if not, checked if stored
         } else if (cache.getListId() > 0) {
-            layers.add(res.getDrawable(R.drawable.marker_stored));
+            layers.add(Compatibility.getDrawable(res, R.drawable.marker_stored));
             insets.add(INSET_OWN[resolution]);
         }
         // found
         if (cache.isFound()) {
-            layers.add(res.getDrawable(R.drawable.marker_found));
+            layers.add(Compatibility.getDrawable(res, R.drawable.marker_found));
             insets.add(INSET_FOUND[resolution]);
             // if not, perhaps logged offline
         } else if (cache.isLogOffline()) {
-            layers.add(res.getDrawable(R.drawable.marker_found_offline));
+            layers.add(Compatibility.getDrawable(res, R.drawable.marker_found_offline));
             insets.add(INSET_FOUND[resolution]);
         }
         // user modified coords
         if (cache.hasUserModifiedCoords()) {
-            layers.add(res.getDrawable(R.drawable.marker_usermodifiedcoords));
+            layers.add(Compatibility.getDrawable(res, R.drawable.marker_usermodifiedcoords));
             insets.add(INSET_USERMODIFIEDCOORDS[resolution]);
         }
         // personal note
         if (cache.getPersonalNote() != null) {
-            layers.add(res.getDrawable(R.drawable.marker_personalnote));
+            layers.add(Compatibility.getDrawable(res, R.drawable.marker_personalnote));
             insets.add(INSET_PERSONALNOTE[resolution]);
         }
 

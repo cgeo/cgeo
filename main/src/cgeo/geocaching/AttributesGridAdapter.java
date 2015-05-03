@@ -1,5 +1,6 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.enumerations.CacheAttribute;
 
 import android.content.Context;
@@ -60,16 +61,16 @@ public class AttributesGridAdapter extends BaseAdapter {
         final boolean strikeThrough = !CacheAttribute.isEnabled(attributeName);
         final CacheAttribute attrib = CacheAttribute.getByRawName(CacheAttribute.trimAttributeName(attributeName));
         if (attrib != null) {
-            imageView.setImageDrawable(resources.getDrawable(attrib.drawableId));
+            imageView.setImageDrawable(Compatibility.getDrawable(resources, attrib.drawableId));
             if (strikeThrough) {
                 // generate strike through image with same properties as attribute image
                 final ImageView strikeThroughImage = new ImageView(context);
                 strikeThroughImage.setLayoutParams(imageView.getLayoutParams());
-                strikeThroughImage.setImageDrawable(resources.getDrawable(R.drawable.attribute__strikethru));
+                strikeThroughImage.setImageDrawable(Compatibility.getDrawable(resources, R.drawable.attribute__strikethru));
                 attributeLayout.addView(strikeThroughImage);
             }
         } else {
-            imageView.setImageDrawable(resources.getDrawable(R.drawable.attribute_unknown));
+            imageView.setImageDrawable(Compatibility.getDrawable(resources, R.drawable.attribute_unknown));
         }
     }
 

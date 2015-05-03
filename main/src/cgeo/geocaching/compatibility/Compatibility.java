@@ -3,7 +3,9 @@ package cgeo.geocaching.compatibility;
 import org.eclipse.jdt.annotation.NonNull;
 
 import android.app.Activity;
+import android.content.res.Resources;
 import android.graphics.Point;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.widget.TextView;
 
@@ -39,5 +41,11 @@ public final class Compatibility {
 
     public static void setTextIsSelectable(final TextView textView, final boolean selectable) {
         LEVEL_11.setTextIsSelectable(textView, selectable);
+    }
+
+    @SuppressWarnings("deprecation")
+    // the non replacement method is only available on level 21, therefore we ignore this deprecation
+    public static Drawable getDrawable(final Resources resources, final int markerId) {
+        return resources.getDrawable(markerId);
     }
 }

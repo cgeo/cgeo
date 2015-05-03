@@ -1,6 +1,7 @@
 package cgeo.geocaching.ui;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.compatibility.Compatibility;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -23,7 +24,7 @@ public abstract class AbstractImageAdapter extends BaseAdapter {
         this.context = context;
         this.imageIds = imageIds;
 
-        final Drawable drawable = context.getResources().getDrawable(imageIds.get(0));
+        final Drawable drawable = Compatibility.getDrawable(context.getResources(), imageIds.get(0));
         imageWidth = drawable.getIntrinsicWidth();
 
         // fix the column width, now that we know the images
