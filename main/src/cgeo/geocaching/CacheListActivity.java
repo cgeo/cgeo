@@ -174,29 +174,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             showFooterMoreCaches();
 
             if (search != null && search.getError() == StatusCode.UNAPPROVED_LICENSE) {
-                final AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-                dialog.setTitle(res.getString(R.string.license));
-                dialog.setMessage(res.getString(R.string.err_license));
-                dialog.setCancelable(true);
-                dialog.setNegativeButton(res.getString(R.string.license_dismiss), new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(final DialogInterface dialog, final int id) {
-                        Cookies.clearCookies();
-                        dialog.cancel();
-                    }
-                });
-                dialog.setPositiveButton(res.getString(R.string.license_show), new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(final DialogInterface dialog, final int id) {
-                        Cookies.clearCookies();
-                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.geocaching.com/software/agreement.aspx?ID=0")));
-                    }
-                });
-
-                final AlertDialog alert = dialog.create();
-                alert.show();
+                showLicenseConfirmationDialog();
             } else if (search != null && search.getError() != null) {
                 showToast(res.getString(R.string.err_download_fail) + ' ' + search.getError().getErrorString(res) + '.');
 
@@ -227,6 +205,32 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         }
 
         adapter.setSelectMode(false);
+    }
+
+    private void showLicenseConfirmationDialog() {
+        final AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setTitle(res.getString(R.string.license));
+        dialog.setMessage(res.getString(R.string.err_license));
+        dialog.setCancelable(true);
+        dialog.setNegativeButton(res.getString(R.string.license_dismiss), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(final DialogInterface dialog, final int id) {
+                Cookies.clearCookies();
+                dialog.cancel();
+            }
+        });
+        dialog.setPositiveButton(res.getString(R.string.license_show), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(final DialogInterface dialog, final int id) {
+                Cookies.clearCookies();
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.geocaching.com/software/agreement.aspx?ID=0")));
+            }
+        });
+
+        final AlertDialog alert = dialog.create();
+        alert.show();
     }
 
     private final Handler loadCachesHandler = new LoadCachesHandler(this);
