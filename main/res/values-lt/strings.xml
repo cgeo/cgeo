@@ -357,6 +357,7 @@
   <string name="about_help">Pagalba</string>
   <string name="about_system_include">Pridėkite papildomą sisteminę informaciją, kai siunčiate klaidos pranešimą arba norite gauti daugiau informacijos apie c:geo:</string>
   <string name="changelog_github">Pakeitimų sąrašas</string>
+  <string name="settings_title_open_settings">Atidaryti parametrus?</string>
   <string name="settings_title_services">Paslaugos</string>
   <string name="settings_summary_services">Nustatyk naudotojo paskyros informaciją ir prieiga prie pasirinktinų paslaugų.</string>
   <string name="settings_title_appearance">Išvaizda</string>
@@ -412,6 +413,8 @@
   <string name="init_login_popup_not_authorized">Prisijungimas neleistinas</string>
   <string name="init_login_popup_invalid_timestamp">Neteisingas vietinis laikas, nustatykite prietaiso laiką</string>
   <string name="init_login_popup_invalid_token">Blogas prisijungimo leidimas, leiskite prisijungti dar kartą</string>
+  <string name="init_authorization_credential_username">Vartotojo vardas</string>
+  <string name="init_authorization_credential_password">Slaptažodis</string>
   <string name="settings_service_active">Aktyvuota</string>
   <string name="init_signature">Parašas</string>
   <string name="init_template_help">Tokie kodai kaip [NAME] bus vėliau išskleidžiami, kai juos panaudosite įrašuose.</string>
@@ -536,6 +539,7 @@
   <string name="settings_open_geokretymap_website">Atidaryti GeoKretyMap.org svetainę</string>
   <string name="settings_settings">Nustatymai</string>
   <string name="settings_information">Informacija</string>
+  <string name="settings_advanced">Išplėstiniai parametrai</string>
   <string name="settings_twitter_cache_message">Rastos slėptuvės žinutė</string>
   <string name="settings_twitter_trackable_message">Rasto keliauninko žinutė</string>
   <string name="init_ec_icons">Žemėlapio ikonos</string>
@@ -576,8 +580,13 @@
   <string name="auth_dialog_waiting">Laukiama %s…</string>
   <string name="auth_explain_short">Šie veiksmai <b>c:geo</b> programai leis naudotis %s.</string>
   <string name="auth_explain_long">Registracija bus pradėta paspaudus mygtuką \"Pradėti registraciją\". Šis procesas naršyklėje atvers %s puslapį. Prisijunkite prie savo paskyros ir leiskite <b>c:geo</b> ja naudotis.</string>
+  <string name="auth_token_register">Sukurti paskyrą</string>
+  <string name="auth_token_explain_short">Šie veiksmai <b>c:geo</b> programai leis naudotis %s.</string>
   <string name="auth_dialog_completed_twitter">c:geo priregistruota ir jai leidžiama rašyti Twitter paskyroje.</string>
   <string name="auth_dialog_completed_oc">c:geo dabar registruota ir leidžiama naudotis %s.</string>
+  <string name="auth_dialog_completed_geokrety">c:geo dabar registruota ir leidžiama naudotis %s.</string>
+  <string name="err_auth_geokrety_bad_password">Netinkamas Jūsų vartotojo vardas/slaptažodis.</string>
+  <string name="err_auth_geokrety_unknown">%1$s gražinta: %2$s.</string>
   <plurals name="cache_counts">
     <item quantity="one">%1$d slėptuvė</item>
     <item quantity="few">%1$d slėptuvės</item>
@@ -931,6 +940,8 @@
   <string name="export_gpx">GPX</string>
   <string name="export_gpx_info">GPX failas bus eksportuotas į %1$s su dabartine data ir laiku failo pavadinime.</string>
   <string name="export_gpx_to">Siųsti eksportuotą GPX</string>
+  <string name="export_confirm_title">Eksportuojama %1$s</string>
+  <string name="export_confirm_message">Maršrutas: %1$s\nFailo vardas: %2$s</string>
   <string name="attribute_dogs_yes">Galima su šunimi</string>
   <string name="attribute_dogs_no">Negalima su šunimi</string>
   <string name="attribute_bicycles_yes">Galima su dviračiu</string>
@@ -1229,18 +1240,18 @@
   <string name="showcase_compass_hint_text">Šis naujas meniu punktas gali suteikti jums idėja kur rasti slėptuvę - jis rodo užuominas, jei tokios yra.</string>
   <string name="confirm_log_title">Neįprastas įrašo tipas</string>
   <string name="confirm_log_message">Norite registruoti \'%s\'. Ar tikrai?</string>
+  <string name="settings_activate_geokrety">Aktyvuoti</string>
   <string name="init_geokrety">Geokrety.org</string>
-  <string name="init_geokrety_login">Prisijungti prie GeoKrety.org</string>
   <string name="init_connectorGeokretyActive">Geokrety Keliauninkai</string>
   <string name="init_summary_geokrety">Įjungti keliauninkus iš GeoKrety.org</string>
-  <string name="init_summary_geokrety_cache">Padidina užkrovimo greitį.</string>
   <string name="init_summary_geokrety_account">Nesukonfigūruota paskyra.</string>
-  <string name="init_summary_geokrety_not_anonymous">GeoKrety registracija iš c:geo negali būti anoniminė. Prašome registruotis.</string>
   <string name="init_geokrety_register_ok">Prisijungimas sėkmingas</string>
   <string name="init_geokrety_register_fail">Nepavyko prisijungti</string>
-  <string name="init_geokrety_get_secid">Gauti API raktą</string>
-  <string name="init_geokrety_description">Išsaugokite savo API raktą c:geo programoje, tai palengvina prisijungimą prie GeoKrety</string>
-  <string name="init_geokrety_cache_description">GeoKretyMap.org suteikia duomenis apie GeoKrety keliauninkus. Duomenis gali būti ne patys naujausi! \nPadėtis: ~ 30min. \nAprašymai: ~ 24h.</string>
-  <string name="init_geokrety_cache">Naudoti duomenis iš podėlio</string>
+  <string name="init_geokrety_description">Leiskite c:geo prisijungti prie GeoKrety.org tam, kad galėtumėt registruoti GeoKrety keliauninkus.</string>
+  <string name="init_geokrety_cache_description">GeokretyMap.org suteikia duomenis apie GeoKrety keliauninkus.\nPrieinami duomenys turi daugiau GeoKrety informacijos kaip \"aprašymas\" arba \"dingusių\" būsena.\n\nDuomenys nėra patys naujausi! \nPadėtis: ~ 30 min. \nAprašymai: ~ 24 h.</string>
+  <string name="init_geokrety_cache">Naudoti GeoKretyMap.org</string>
   <string name="init_geokrety_userid">Vartotojo Id: %s</string>
+  <string name="settings_map_direction">Rodyti kryptį</string>
+  <string name="settings_summary_map_direction">Rodyti krypties linija į tikslą</string>
+  <string name="map_direction">Rodyti kryptį</string>
 </resources>

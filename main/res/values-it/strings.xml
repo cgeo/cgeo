@@ -1218,14 +1218,7 @@
   <string name="confirm_log_title">Tipo di Log non usuale</string>
   <string name="confirm_log_message">Si desidera registrare \'%s\'. Sei sicuro?</string>
   <string name="init_geokrety">GeoKrety.org</string>
-  <string name="init_geokrety_login">Fai login su Geokrety.org</string>
-  <string name="init_connectorGeokretyActive">Trackable GeoKrety</string>
   <string name="init_summary_geokrety">Abilitare le trackablee da GeoKrety.org</string>
-  <string name="init_summary_geokrety_cache">Migliorare la velocità di caricamento.</string>
   <string name="init_summary_geokrety_account">Nessun account configurato.</string>
   <string name="init_geokrety_register_fail">Login fallito</string>
-  <string name="init_geokrety_get_secid">Recupera la chiave API</string>
-  <string name="init_geokrety_description">Memorizza la tua chiave API su c:geo per facilitare la registrazione su GeoKrety</string>
-  <string name="init_geokrety_cache_description">GeoKretyMap.org fornisce dati memorizzati nella cache per trackable Geokrety. I dati non possono essere aggiornati! \nPosizione: ~ 30 min\nDescrizione: ~ 24h.</string>
-  <string name="init_geokrety_cache">Utilizzare i dati memorizzati nella cache</string>
 </resources>

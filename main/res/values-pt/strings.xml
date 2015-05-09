@@ -1221,9 +1221,5 @@
   <string name="confirm_log_title">Tipo de registo invulgar</string>
   <string name="confirm_log_message">Quer fazer o registo \'%s\'. Tem a certeza?</string>
   <string name="init_geokrety">GeoKrety.org</string>
-  <string name="init_geokrety_login">Iniciar sessão em GeoKrety.org</string>
-  <string name="init_connectorGeokretyActive">GeoKrety Trackables</string>
   <string name="init_summary_geokrety">Habilitar trackables de GeoKrety.org</string>
-  <string name="init_geokrety_cache_description">GeoKretyMap.org fornece dados em cache para trackables Geokrety. Os dados podem não estar actualizados! \nPosições: ~ 30 min. \nDescrições: ~ 24h.</string>
-  <string name="init_geokrety_cache">Usar dados em cache</string>
 </resources>

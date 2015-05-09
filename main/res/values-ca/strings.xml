@@ -1221,7 +1221,5 @@
   <string name="confirm_log_title">Tipus de registre poc habitual</string>
   <string name="confirm_log_message">Voleu registrar \'%s\'. N\'esteu segurs?</string>
   <string name="init_geokrety">GeoKrety.org</string>
-  <string name="init_geokrety_login">Iniciar sessió a GeoKrety.org</string>
-  <string name="init_connectorGeokretyActive">GeoKrety Trackables</string>
   <string name="init_summary_geokrety">Habilitar traçables de GeoKrety.org</string>
 </resources>

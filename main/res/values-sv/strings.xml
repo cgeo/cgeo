@@ -1225,14 +1225,7 @@
   <string name="confirm_log_title">Ovanlig loggtyp</string>
   <string name="confirm_log_message">Du vill logga \'%s\'. Är du säker?</string>
   <string name="init_geokrety">GeoKrety.org</string>
-  <string name="init_geokrety_login">Logga in på GeoKrety.org</string>
-  <string name="init_connectorGeokretyActive">Spårbara GeoKrety</string>
   <string name="init_summary_geokrety">Aktivera trackables från GeoKrety.org</string>
-  <string name="init_summary_geokrety_cache">Förbättra laddningshastighet.</string>
   <string name="init_summary_geokrety_account">Inget konto har konfigurerats.</string>
   <string name="init_geokrety_register_fail">Inloggningen misslyckades</string>
-  <string name="init_geokrety_get_secid">Hämta API-nyckel</string>
-  <string name="init_geokrety_description">Lagra din API-nyckel i c:geo för att underlätta loggning av GeoKrety</string>
-  <string name="init_geokrety_cache_description">GeoKretyMap.org innehåller lagrade data för spårbara Geokrety. Data är kanske inte uppdaterade!\nPositioner: ~30min.\nBeskrivningar: ~24timmar.</string>
-  <string name="init_geokrety_cache">Använd lagrade data</string>
 </resources>

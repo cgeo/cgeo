@@ -1208,5 +1208,4 @@
   <string name="confirm_log_title">Különleges logtípus</string>
   <string name="confirm_log_message">Logod a következő: \'%s\'. Biztosan ezt akarod?</string>
   <string name="init_geokrety">GeoKrety.org</string>
-  <string name="init_connectorGeokretyActive">GeoKrety Trackables</string>
 </resources>
