@@ -1210,6 +1210,5 @@
   <string name="confirm_log_title">Uvanlig loggtype</string>
   <string name="confirm_log_message">Du vil logge \'%s\'. Er du sikker?</string>
   <string name="init_geokrety">GeoKrety.org</string>
-  <string name="init_connectorGeokretyActive">GeoKrety Trackables</string>
   <string name="init_summary_geokrety">Aktiver trackables fra GeoKrety.org</string>
 </resources>

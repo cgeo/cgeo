@@ -1217,5 +1217,4 @@
   <string name="confirm_log_title">Niezwykły typ wpisu</string>
   <string name="confirm_log_message">Chcesz wpisać \'%s\'. Czy jesteś pewien?</string>
   <string name="init_geokrety">GeoKrety.org</string>
-  <string name="init_connectorGeokretyActive">GeoKrety Trackables</string>
 </resources>

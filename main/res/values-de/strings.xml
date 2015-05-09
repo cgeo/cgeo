@@ -219,6 +219,8 @@
   <string name="info_stored_image">Neues Foto gespeichert nach:</string>
   <string name="info_storing_static_maps">Versuche, statische Karten zu speichern</string>
   <string name="info_cache_saved">Der Cache wurde gespeichert</string>
+  <string name="err_trackable_log_not_anonymous">Loggen von %1$s aus c:geo kann nicht anonym erfolgen. Möchtest du die Einstellungen öffnen um deine Anmeldeinformation für %2$s einzugeben?</string>
+  <string name="err_trackable_no_preference_activity">Tut mir leid, es kann kein geeignetes Einstellungs-Menü gefunden werden.</string>
   <string name="loc_last">Letzte Position</string>
   <string name="loc_net">Netzwerk</string>
   <string name="loc_fused">Kombiniert</string>
@@ -354,6 +356,7 @@
   <string name="about_help">Hilfe</string>
   <string name="about_system_include">Bitte die folgende Systeminformation bei jedem Fehlerbericht oder bei Informationsanfragen zu c:geo mitsenden:</string>
   <string name="changelog_github">Liste aller Änderungen</string>
+  <string name="settings_title_open_settings">Öffne Einstellungen?</string>
   <string name="settings_title_services">Dienste</string>
   <string name="settings_summary_services">Konfiguriere Zugangsdaten und den Zugriff auf optionale Dienste.</string>
   <string name="settings_title_appearance">Erscheinungsbild</string>
@@ -419,6 +422,8 @@
   <string name="init_login_popup_not_authorized">Nicht autorisiert</string>
   <string name="init_login_popup_invalid_timestamp">Lokale Zeit ungültig, Gerätezeit einstellen</string>
   <string name="init_login_popup_invalid_token">Genehmigung ungültig, Neu aktivieren</string>
+  <string name="init_authorization_credential_username">Benutzername</string>
+  <string name="init_authorization_credential_password">Passwort</string>
   <string name="settings_service_active">Aktiv</string>
   <string name="init_signature">Signatur</string>
   <string name="init_template_help">Platzhalter-Zeichenfolgen wie [NAME] werden später erweitert, wenn diese Vorlage verwendet wird.</string>
@@ -543,6 +548,7 @@
   <string name="settings_open_geokretymap_website">Öffne GeoKretyMap.org Webseite</string>
   <string name="settings_settings">Einstellungen</string>
   <string name="settings_information">Information</string>
+  <string name="settings_advanced">Erweiterte Einstellungen</string>
   <string name="settings_twitter_cache_message">Nachricht für gefundenen Cache</string>
   <string name="settings_twitter_trackable_message">Nachricht für gefundenen Trackable</string>
   <string name="init_ec_icons">Kartensymbole</string>
@@ -583,6 +589,9 @@
   <string name="auth_dialog_waiting">Warte auf %s…</string>
   <string name="auth_explain_short">Der folgende Prozess erlaubt es <b>c:geo</b> auf %s zuzugreifen.</string>
   <string name="auth_explain_long">\"Starte Autorisierung\" öffnet die Webseite von %s. Bitte dort anmelden und <b>c:geo</b> Zugriff auf den Account erlauben. Das ist alles.</string>
+  <string name="auth_token_register">Nutzerkonto erstellen</string>
+  <string name="auth_token_explain_short">Der folgende Prozess erlaubt es <b>c:geo</b>  auf %s zuzugreifen.</string>
+  <string name="auth_token_explain_long">Nach Eingabe der Anmeldeinformation \"Starte Autorisierung\" auswählen um den Prozess zu starten. Dieser Prozess verbindet mit %s und ruft einen Authentifizierungstoken ab. Das ist alles.</string>
   <string name="auth_dialog_completed_twitter">c:geo ist nun autorisiert, Tweets bei Twitter zu erstellen.</string>
   <string name="auth_ocde">opencaching.de</string>
   <string name="auth_ocpl">opencaching.pl</string>
@@ -591,6 +600,9 @@
   <string name="auth_ocro">opencaching.ro</string>
   <string name="auth_ocuk">opencaching.org.uk</string>
   <string name="auth_dialog_completed_oc">c:geo ist nun autorisiert, Caches zu laden und auf %s zu loggen.</string>
+  <string name="auth_dialog_completed_geokrety">c:geo ist nun autorisiert mit %s zu kommunizieren.</string>
+  <string name="err_auth_geokrety_bad_password">Dein Benutzername/Passwort scheint ungültig zu sein.</string>
+  <string name="err_auth_geokrety_unknown">%1$s antwortet: %2$s.</string>
   <plurals name="cache_counts">
     <item quantity="one">Ein Cache</item>
     <item quantity="other">%1$d Caches</item>
@@ -944,6 +956,8 @@
   <string name="export_gpx">GPX</string>
   <string name="export_gpx_info">GPX-Datei wird nach %1$s mit aktuellem Datum und Zeit als Dateiname exportiert.</string>
   <string name="export_gpx_to">Exportierte GPX-Datei senden an</string>
+  <string name="export_confirm_title">Exportiere %1$s</string>
+  <string name="export_confirm_message">Pfad: %1$s\nDateiname: %2$s</string>
   <string name="attribute_dogs_yes">Hunde erlaubt</string>
   <string name="attribute_dogs_no">Hunde nicht erlaubt</string>
   <string name="attribute_bicycles_yes">Fahrräder erlaubt</string>
@@ -1237,18 +1251,18 @@
   <string name="showcase_compass_hint_text">Diese neue Option könnte dir helfen den Cache zu finden - sie zeigt den Hint an, wenn es einen gibt.</string>
   <string name="confirm_log_title">Ungewöhnlicher Log-Typ</string>
   <string name="confirm_log_message">Du möchtest \'%s\' loggen. Bist du dir sicher?</string>
+  <string name="settings_activate_geokrety">Aktivieren</string>
   <string name="init_geokrety">GeoKrety.org</string>
-  <string name="init_geokrety_login">Einloggen auf GeoKrety.org</string>
   <string name="init_connectorGeokretyActive">GeoKrety Trackables</string>
   <string name="init_summary_geokrety">Lädt Trackables von GeoKrety.org</string>
-  <string name="init_summary_geokrety_cache">Verbessert die Ladezeit.</string>
   <string name="init_summary_geokrety_account">Kein Konto konfiguriert.</string>
-  <string name="init_summary_geokrety_not_anonymous">Das Loggen von GeoKrets aus c:geo kann nicht anonym erfolgen. Bitte registrieren.</string>
   <string name="init_geokrety_register_ok">Login OK</string>
   <string name="init_geokrety_register_fail">Login fehlgeschlagen</string>
-  <string name="init_geokrety_get_secid">API-Schlüssel abrufen</string>
-  <string name="init_geokrety_description">Speichere deinen API-Schlüssel in c:geo um das Loggen von GeoKrets zu vereinfachen</string>
-  <string name="init_geokrety_cache_description">GeoKretyMap.org stellt zwischengespeicherte Daten für GeoKrety-Trackables zur Verfügung. Die Daten sind möglichweise nicht auf dem neuesten Stand!\nPositionen:  ~30min.\nBeschreibungen: ~24h.</string>
-  <string name="init_geokrety_cache">Nutze Zwischenspeicherung</string>
+  <string name="init_geokrety_description">Autorisiere c:geo  auf GeoKrety.org zuzugreifen um GeoKrety Trackables zu loggen.</string>
+  <string name="init_geokrety_cache_description">GeoKretyMap.org stellt zwischengespeicherte Daten für GeoKrety Trackables zur Verfügung.\nDie Daten enthalten mehr Infos zu GeoKretys wie z.B. \'Beschreibung\' oder \'Vermisst\'-Status.\n\nDie Daten sind nicht immer aktuell!\nPositionen: ~30min.\nBeschreibungen: ~24h.</string>
+  <string name="init_geokrety_cache">Benutze GeoKretyMap.org</string>
   <string name="init_geokrety_userid">Nutzer-ID: %s</string>
+  <string name="settings_map_direction">Zeige Richtungslinie</string>
+  <string name="settings_summary_map_direction">Zeigt eine Richtungslinie zum Navigationsziel</string>
+  <string name="map_direction">Zeige Richtungslinie</string>
 </resources>

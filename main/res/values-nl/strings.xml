@@ -83,6 +83,7 @@
   <string name="log_saving_and_uploading">Verzenden van log en uploaden foto…</string>
   <string name="log_clear">Wissen</string>
   <string name="log_post_not_possible">Laden Log Pagina…</string>
+  <string name="log_post_geocode_missing">Geocode ontbreekt…</string>
   <string name="log_date_future_not_allowed">Log datums in de toekomst zijn niet toegestaan.</string>
   <string name="log_add">Toevoegen</string>
   <string name="log_repeat">Herhaal laatste log</string>
@@ -128,6 +129,7 @@
   <string name="err_parse">Login pagina verwerken mislukt</string>
   <string name="err_server">Verbinding met Geocaching.com mislukt (geen verbinding of server niet bereikbaar)</string>
   <string name="err_server_ec">Verbinding maken met Extremcaching.com is mislukt (geen verbinding of server niet bereikbaar).</string>
+  <string name="err_server_gk">Niet mogelijk om GeoKrety.org te bereiken. De website kan offline zijn of je internetverbinding werkt niet goed.</string>
   <string name="err_login">Geen login informatie opgeslagen</string>
   <string name="err_login_failed_toast">Sorry, c:geo kan niet inloggen. c:geo werkt in offline modus. Controleer je gebruikersnaam en wachtwoord en/of zet de internetverbinding aan.</string>
   <string name="err_unknown">Onbekende fout</string>
@@ -166,6 +168,7 @@
   <string name="err_acquire_image_failed">Verwerven van een foto is mislukt.</string>
   <string name="err_tb_display">Sorry, c:geo kan de gezochte trackable niet weergeven. Is het wel een trackable?</string>
   <string name="err_tb_details_open">Sorry, c:geo kan de trackable details niet laden.</string>
+  <string name="err_tb_not_loggable">Deze Trackable kan je niet loggen.</string>
   <string name="err_tb_find">Sorry, c:geo kan de trackable niet vinden</string>
   <string name="err_tb_find_that">Sorry, c:geo kan die trackable niet vinden.</string>
   <string name="err_waypoint_cache_unknown">Sorry, c:geo weet niet aan welke cache je een waypoint wil toevoegen.</string>
@@ -178,6 +181,8 @@
   <string name="err_log_load_data">Sorry, c:geo kan data om bezoek te loggen niet laden.</string>
   <string name="err_log_load_data_again">Sorry, c:geo kan data om bezoek te loggen niet laden. Bezig nogmaals te proberen.</string>
   <string name="err_log_load_data_still">c:geo is nog steeds bezig om data te laden om bezoek te loggen. Graag nog even geduld.</string>
+  <string name="err_log_post_missing_tracking_code">Tracking code ontbreekt.</string>
+  <string name="err_log_post_missing_coordinates">Coördinaten ontbreken.</string>
   <string name="err_log_post_failed">Het lijkt erop dat je log niet werd gepost. Controleer het op de cache webpagina.</string>
   <string name="err_log_post_failed_ec">Het lijkt erop dat uw log niet werd gepost. Controleer het op Extremcaching.com.</string>
   <string name="err_log_post_failed_gk">Het lijkt erop dat uw log niet werd gepost. Controleer het op GeoKrety.org.</string>
@@ -214,6 +219,8 @@
   <string name="info_stored_image">Nieuwe foto opgeslagen in:</string>
   <string name="info_storing_static_maps">Proberen statische kaarten op te slaan</string>
   <string name="info_cache_saved">De cache is lokaal opgeslagen</string>
+  <string name="err_trackable_log_not_anonymous">Loggen van %1$s in c:geo kan niet anoniem worden gedaan. Wilt u de instellingen openen om uw referenties van %2$s in te vullen?</string>
+  <string name="err_trackable_no_preference_activity">Sorry, kan geen geschikt voorkeuren scherm vinden.</string>
   <string name="loc_last">Laatst bekende</string>
   <string name="loc_net">Netwerk</string>
   <string name="loc_fused">Gecombineerd</string>
@@ -341,6 +348,7 @@
   <string name="about_help">Help</string>
   <string name="about_system_include">Voeg volgende systeem informatie toe wanneer je een bug report stuurt of vraagt om meer informatie over c:geo:</string>
   <string name="changelog_github">Lijst met alle wijzigingen</string>
+  <string name="settings_title_open_settings">Instellingen openen?</string>
   <string name="settings_title_services">Diensten</string>
   <string name="settings_summary_services">Gebruikersaccount informatie en toegang tot optionele services configureren.</string>
   <string name="settings_title_appearance">Uiterlijk</string>
@@ -406,6 +414,8 @@
   <string name="init_login_popup_not_authorized">Niet geautoriseerd</string>
   <string name="init_login_popup_invalid_timestamp">Lokale tijd ongeldig, pas apparaat tijd aan</string>
   <string name="init_login_popup_invalid_token">Autorisatie ongeldig, opnieuw autoriseren</string>
+  <string name="init_authorization_credential_username">Gebruikersnaam</string>
+  <string name="init_authorization_credential_password">Wachtwoord</string>
   <string name="settings_service_active">Actief</string>
   <string name="init_signature">Handtekening</string>
   <string name="init_template_help">Samenvoeg velden zoals [NAME] worden later ingevuld bij gebruik van deze sjabloon.</string>
@@ -526,8 +536,11 @@
   <string name="init_hardware_acceleration_note">Hardware acceleratie maakt grafische elementen op het scherm sneller. Echter op sommige apparaten bevat het Android besturingssysteem bugs en sommige tekst kan wazig lijken (met name vette karakters). Schakel hardwareacceleratie uit als dit bij u gebeurt.</string>
   <string name="init_hardware_acceleration">Schakel hardware acceleratie in</string>
   <string name="settings_open_website">Open website</string>
+  <string name="settings_open_geokrety_register">Open de GeoKrety.org registratie-pagina</string>
+  <string name="settings_open_geokretymap_website">Open de GeoKretyMap.org website</string>
   <string name="settings_settings">Instellingen</string>
   <string name="settings_information">Informatie</string>
+  <string name="settings_advanced">Geavanceerde instellingen</string>
   <string name="settings_twitter_cache_message">Bericht voor een gevonden cache</string>
   <string name="settings_twitter_trackable_message">Bericht voor een gevonden trackable</string>
   <string name="init_ec_icons">Kaartpictogrammen</string>
@@ -568,6 +581,9 @@
   <string name="auth_dialog_waiting">Wachten op %s…</string>
   <string name="auth_explain_short">Het volgende proces zal <b>c:geo</b> toegang geven tot %s.</string>
   <string name="auth_explain_long">Druk op de knop \"Autoriseer c:geo\" om het proces te starten. Dit proces zal een webbrowser met een pagina voor %s. Log in op deze pagina om <b>c:geo</b> toegang te geven tot je account. Dat is alles.</string>
+  <string name="auth_token_register">Een account aanmaken</string>
+  <string name="auth_token_explain_short">Het volgende proces zal <b>c:geo</b> toegang geven tot %s.</string>
+  <string name="auth_token_explain_long">Het vullen van uw referenties en drukken op de \"c:geo machtigen\" knop zal het proces starten. Dit proces zal verbinden met %s en een authenticatie token ophalen. Dat is alles.</string>
   <string name="auth_dialog_completed_twitter">c:geo is nu gekoppeld met Twitter.</string>
   <string name="auth_ocde">opencaching.de</string>
   <string name="auth_ocpl">opencaching.pl</string>
@@ -576,6 +592,9 @@
   <string name="auth_ocro">opencaching.ro</string>
   <string name="auth_ocuk">opencaching.org.uk</string>
   <string name="auth_dialog_completed_oc">c:geo is nu gekoppeld met %s.</string>
+  <string name="auth_dialog_completed_geokrety">c:geo is nu geautoriseerd om met %s te communiceren.</string>
+  <string name="err_auth_geokrety_bad_password">Je gebruikersnaam/wachtwoord lijkt ongeldig.</string>
+  <string name="err_auth_geokrety_unknown">%1$s antwoord: %2$s.</string>
   <plurals name="cache_counts">
     <item quantity="one">Een cache</item>
     <item quantity="other">%1$d Caches</item>
@@ -885,6 +904,8 @@
   <string name="user_menu_open_contact">Open contactkaart</string>
   <string name="navigation">Navigatie</string>
   <string name="compass_title">Kompas</string>
+  <string name="use_gps">Alleen GPS gebruikt</string>
+  <string name="use_compass">GPS en magnetisch kompas gebruikt</string>
   <string name="destination_select">Selecteer bestemming</string>
   <string name="navigation_direct_navigation">Directe navigatie</string>
   <string name="navigation_target">Doel</string>
@@ -913,6 +934,8 @@
   <string name="helper_google_translate_description">Als je vertaal pakketten in de Google Translate app download, kan je eenvoudig een cache omschrijving vertalen in c:geo door een lange tik op deze omschrijvingstekst (zonder een internet verbinding).</string>
   <string name="addon_missing_title">Add-On ontbreekt</string>
   <string name="addon_download_prompt">Haal de add-on nu op van Google Play.</string>
+  <string name="export">Exporteren</string>
+  <string name="export_progress">Exporteer: %1$s</string>
   <string name="export_exportedto">Geexporteerd naar</string>
   <string name="export_failed">Exporteren mislukt</string>
   <string name="export_fieldnotes">Veld-notities</string>
@@ -925,6 +948,8 @@
   <string name="export_gpx">GPX</string>
   <string name="export_gpx_info">Het GPX bestand word geëxporteerd naar %1$s met huidige datum en tijd als bestandsnaam.</string>
   <string name="export_gpx_to">Verstuur geëxporteerde GPX naar</string>
+  <string name="export_confirm_title">Bezig met exporteren van %1$s</string>
+  <string name="export_confirm_message">Naar pad: %1$s\nBestandsnaam: %2$s</string>
   <string name="attribute_dogs_yes">Honden toegestaan</string>
   <string name="attribute_dogs_no">Honden niet toegestaan</string>
   <string name="attribute_bicycles_yes">Fietsen toegestaan</string>
@@ -1218,8 +1243,18 @@
   <string name="showcase_compass_hint_text">Dit nieuwe menu-item kan een idee geven waar de cache gevonden kan worden - het toont de hint, indien beschikbaar.</string>
   <string name="confirm_log_title">Ongebruikelijk logtype</string>
   <string name="confirm_log_message">Je wilt \'%s\' loggen. Weet je het zeker?</string>
+  <string name="settings_activate_geokrety">Activeren</string>
   <string name="init_geokrety">GeoKrety.org</string>
-  <string name="init_geokrety_login">Login op GeoKrety.org</string>
   <string name="init_connectorGeokretyActive">GeoKrety Trackables</string>
+  <string name="init_summary_geokrety">Trackables van GeoKrety.org inschakelen</string>
+  <string name="init_summary_geokrety_account">Geen account geconfigureerd.</string>
+  <string name="init_geokrety_register_ok">Inloggen succesvol</string>
   <string name="init_geokrety_register_fail">Inloggen mislukt</string>
+  <string name="init_geokrety_description">C:geo autoriseren om op GeoKrety.org GeoKrety trackables te loggen.</string>
+  <string name="init_geokrety_cache_description">GeokretyMap.org voorziet in de data van GeoKrety trackables.\nBeschikbare data bevat overige GeoKrety informatie zoals \'beschrijving\' of \'ontbreekt\' status.\n\nData is niet live! \nPosities: ~ 30 min. \nOmschrijvingen: ~ 24 h.</string>
+  <string name="init_geokrety_cache">Gebruik GeoKretyMap.org</string>
+  <string name="init_geokrety_userid">Gebruikers-id: %s</string>
+  <string name="settings_map_direction">Toon richting</string>
+  <string name="settings_summary_map_direction">Toon een richtingslijn naar het navigatiedoel</string>
+  <string name="map_direction">Toon richting</string>
 </resources>

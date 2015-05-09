@@ -1192,5 +1192,4 @@
   <string name="confirm_log_title">Tip neobişnuit de însemnare</string>
   <string name="confirm_log_message">Vrei să scrii o însemnare pentru \'%s\'. Eşti sigur?</string>
   <string name="init_geokrety">GeoKrety.org</string>
-  <string name="init_connectorGeokretyActive">GeoKrety Trackables</string>
 </resources>

@@ -411,6 +411,8 @@
   <string name="init_login_popup_not_authorized">No autorizado</string>
   <string name="init_login_popup_invalid_timestamp">Hora local inválida, ajuste la hora de nuevo</string>
   <string name="init_login_popup_invalid_token">Autorización inválida, volver a autorizar</string>
+  <string name="init_authorization_credential_username">Usuario</string>
+  <string name="init_authorization_credential_password">Contraseña</string>
   <string name="settings_service_active">Activo</string>
   <string name="init_signature">Firma</string>
   <string name="init_template_help">Cadenas de comandos como [NAME] se expanderán más tarde cuando se usen estas plantillas.</string>
@@ -535,6 +537,7 @@
   <string name="settings_open_geokretymap_website">Abrir el sitio web GeoKretyMap.org</string>
   <string name="settings_settings">Ajustes</string>
   <string name="settings_information">Información</string>
+  <string name="settings_advanced">Opciones avanzadas</string>
   <string name="settings_twitter_cache_message">Mensaje para caché encontrado</string>
   <string name="settings_twitter_trackable_message">Mensaje para rastreable encontrado</string>
   <string name="init_ec_icons">Iconos del mapa</string>
@@ -575,6 +578,7 @@
   <string name="auth_dialog_waiting">Esperando a %s…</string>
   <string name="auth_explain_short">El siguiente proceso permitirá a <b>c:geo</b> acceder a %s.</string>
   <string name="auth_explain_long">Presionando el botón \"Autorizar c:geo\" comenzará el proceso. Este proceso abrirá el navegador web con una página %s. Registrate en esta página y permite a <b>c:geo</b> acceder a tu cuenta. Eso es todo.</string>
+  <string name="auth_token_register">Crear una cuenta</string>
   <string name="auth_dialog_completed_twitter">c:geo está autorizado ahora a publicar en Twitter.</string>
   <string name="auth_ocde">Opencaching.de</string>
   <string name="auth_dialog_completed_oc">c:geo está autorizado a interactuar con %s.</string>
@@ -1221,15 +1225,10 @@
   <string name="confirm_log_title">Tipo de registro inusual</string>
   <string name="confirm_log_message">Vas a registrar \'%s\'. ¿Estás seguro?</string>
   <string name="init_geokrety">GeoKrety.org</string>
-  <string name="init_geokrety_login">Iniciar sesión en GeoKrety.org</string>
-  <string name="init_connectorGeokretyActive">Rastreables de GeoKrety</string>
   <string name="init_summary_geokrety">Habilitar rastreables de GeoKrety.org</string>
-  <string name="init_summary_geokrety_cache">Mejorar la velocidad de carga.</string>
   <string name="init_summary_geokrety_account">No hay cuenta configurada.</string>
-  <string name="init_summary_geokrety_not_anonymous">No puedes registrar un GeoKrety desde c:geo de manera anónima. Por favor, identifícate.</string>
   <string name="init_geokrety_register_fail">Fallo al iniciar sesión</string>
-  <string name="init_geokrety_get_secid">Recuperar clave API</string>
-  <string name="init_geokrety_description">Guarda tu clave API en c:geo para iniciar sesión en GeoKrety más fácilmente</string>
-  <string name="init_geokrety_cache_description">GeoKretyMap.org proporciona datos almacenados para rastreables de GeoKrety. ¡Los datos pueden no estar actualizados!\nUbicaciones: ~30min.\nDescripciones: ~24h.</string>
-  <string name="init_geokrety_cache">Usar datos almacenados</string>
+  <string name="init_geokrety_cache">Usar GeoKretyMap.org</string>
+  <string name="settings_summary_map_direction">Muestra una línea de dirección al objetivo de la navegación</string>
+  <string name="map_direction">Mostrar dirección</string>
 </resources>

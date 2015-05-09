@@ -1213,8 +1213,5 @@
   <string name="confirm_log_title">Usædvanlig logtype</string>
   <string name="confirm_log_message">Du er ved at logge \"%s\". Er du sikker?</string>
   <string name="init_geokrety">GeoKrety.org</string>
-  <string name="init_geokrety_login">Login på GeoKrety.org</string>
-  <string name="init_connectorGeokretyActive">GeoKrety Trackables</string>
   <string name="init_summary_geokrety">Aktivér trackables fra GeoKrety.org</string>
-  <string name="init_geokrety_cache_description">GeoKretyMap.org giver lagrede data for Geokrety trackables. Data er muligvis ikke opdaterede! \nPositioner: ~ 30min. \nBeskrivelser: ~ 24h.</string>
 </resources>

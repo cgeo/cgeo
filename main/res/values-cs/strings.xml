@@ -179,6 +179,7 @@
   <string name="err_log_load_data_again">c:geo nemůže načíst data požadovaná k zalogování návštěvy. Zkouší to znovu.</string>
   <string name="err_log_load_data_still">c:geo stále načítá data požadovaná k odeslání Logu. Prosím, počkej ještě chvíli.</string>
   <string name="err_log_post_missing_tracking_code">Chybí identifikační kód.</string>
+  <string name="err_log_post_missing_coordinates">Chybí souřadnice.</string>
   <string name="err_log_post_failed">Zdá se, že tvůj log nebyl správně zveřejněn. Prosím, zkontroluj ho přímo na webové stránce keše.</string>
   <string name="err_log_post_failed_ec">Zdá se, že tvůj Log nebyl odeslán. Prosím, zkontroluj to na Extremcaching.com.</string>
   <string name="err_log_post_failed_gk">Zdá se, že tvůj Log nebyl odeslán. Prosím, zkontroluj to na GeoKrety.org.</string>
@@ -353,6 +354,7 @@
   <string name="about_help">Nápověda</string>
   <string name="about_system_include">Při odesílání hlášení o chybě nebo žádosti o další informace uveďte prosím následující systémové informace:</string>
   <string name="changelog_github">Seznam všech změn</string>
+  <string name="settings_title_open_settings">Otevřít nastavení?</string>
   <string name="settings_title_services">Služby</string>
   <string name="settings_summary_services">Nastavení uživatelského účtu a přístupu k volitelným službám.</string>
   <string name="settings_title_appearance">Vzhled</string>
@@ -418,6 +420,8 @@
   <string name="init_login_popup_not_authorized">Neautorizováno</string>
   <string name="init_login_popup_invalid_timestamp">Místní čas je neplatný, nastav systémový čas</string>
   <string name="init_login_popup_invalid_token">Neplatná autorizace, opakuj akci</string>
+  <string name="init_authorization_credential_username">Uživatelské jméno</string>
+  <string name="init_authorization_credential_password">Heslo</string>
   <string name="settings_service_active">Aktivní</string>
   <string name="init_signature">Podpis</string>
   <string name="init_template_help">Zástupné řetězce jako [NAME] budou po použití šablony nahrazeny.</string>
@@ -542,6 +546,7 @@
   <string name="settings_open_geokretymap_website">Otevřít stránku GeoKretyMap.org</string>
   <string name="settings_settings">Nastavení</string>
   <string name="settings_information">Informace</string>
+  <string name="settings_advanced">Pokročilé nastavení</string>
   <string name="settings_twitter_cache_message">Zpráva pro nalezení keše</string>
   <string name="settings_twitter_trackable_message">Zpráva pro nalezení sledovatelného předmětu</string>
   <string name="init_ec_icons">Mapové ikony</string>
@@ -582,6 +587,7 @@
   <string name="auth_dialog_waiting">Čekání na %s…</string>
   <string name="auth_explain_short">Následující proces umožní <b>c:geu</b> přístup k %s.</string>
   <string name="auth_explain_long">Stisknutím tlačítka „Autorizovat c:geo“ bude proces zahájen. Tento proces otevře webový prohlížeč se stránkou %s. Na této stránce se přihlaš a povol <b>c:geu</b> přistupovat k tvému účtu. To je vše.</string>
+  <string name="auth_token_register">Vytvořit účet</string>
   <string name="auth_dialog_completed_twitter">c:geo nyní může posílat zprávy na Tvůj Twitter.</string>
   <string name="auth_ocde">Opencaching.de</string>
   <string name="auth_ocpl">opencaching.pl</string>
@@ -670,8 +676,8 @@
   <string name="cache_dialog_favorite_remove_title">Oblíbené</string>
   <string name="cache_dialog_favorite_remove_message">Odstraňování keše z Oblíbených…</string>
   <string name="cache_menu_navigate">Navigovat</string>
-  <string name="cache_menu_navigation_drive">Navigace (Řízení)</string>
-  <string name="cache_menu_navigation_walk">Navigace (Chůze)</string>
+  <string name="cache_menu_navigation_drive">Navigace (řízení)</string>
+  <string name="cache_menu_navigation_walk">Navigace (chůze)</string>
   <string name="cache_menu_navigation_bike">Navigace (kolo)</string>
   <string name="cache_menu_maps_directions">Směry podle Google Maps</string>
   <string name="cache_menu_radar">Radar</string>
@@ -814,13 +820,13 @@
   <string name="visit_tweet">Oznámit nález na Twitteru</string>
   <string name="map_map">Mapa</string>
   <string name="map_live">Aktivní mapa</string>
-  <string name="map_view_map">Vybrat typ mapy</string>
-  <string name="map_modes">Režimy mapy</string>
+  <string name="map_view_map">Typ mapy…</string>
+  <string name="map_modes">Režim mapy…</string>
   <string name="map_trail_show">Zobrazit záznam trasy</string>
   <string name="map_circles_show">Zobrazit kruhy</string>
-  <string name="map_mycaches_hide">Skrývat vlastní/nalezené keše</string>
+  <string name="map_mycaches_hide">Skrýt vlastní/nalezené keše</string>
   <string name="map_theme_builtin">Výchozí</string>
-  <string name="map_theme_select">Vyber téma mapy</string>
+  <string name="map_theme_select">Styl mapy…</string>
   <string name="map_live_enable">Povolit aktivní mapu</string>
   <string name="map_live_disable">Zakázat aktivní mapu</string>
   <string name="map_static_title">Statické mapy</string>
@@ -1240,18 +1246,11 @@
   <string name="showcase_compass_hint_text">Tato nová položka ti může poradit, kde kešku hledat - zobrazuje nápovědu, pokud je k dispozici.</string>
   <string name="confirm_log_title">Neobvyklý typ logu</string>
   <string name="confirm_log_message">Opravdu chceš zalogovat „%s“?</string>
+  <string name="settings_activate_geokrety">Aktivovat</string>
   <string name="init_geokrety">GeoKrety.org</string>
-  <string name="init_geokrety_login">Přihlášení na GeoKrety.org</string>
-  <string name="init_connectorGeokretyActive">Sledovatelné předměty GeoKrety</string>
   <string name="init_summary_geokrety">Povolit sledovatelné předměty z GeoKrety.org</string>
-  <string name="init_summary_geokrety_cache">Zlepšení rychlosti načítání.</string>
   <string name="init_summary_geokrety_account">Účet nebyl nastaven.</string>
-  <string name="init_summary_geokrety_not_anonymous">Přihlášení ke službě GeoKrety z aplikace c:geo nemůže být anonymní. Prosím, zaregistruj se.</string>
   <string name="init_geokrety_register_ok">Přihlášení bylo úspěšné</string>
   <string name="init_geokrety_register_fail">Přihlášení selhalo</string>
-  <string name="init_geokrety_get_secid">Získat API klíč</string>
-  <string name="init_geokrety_description">Ulož svůj API klíč v c:geu pro snadné přihlášení do služby GeoKrety</string>
-  <string name="init_geokrety_cache_description">GeoKretyMap.org poskytuje informace o sledovatelných předmětech služby Geokrety. Data nemusí být aktuální!\nPozice: ~30 min\nPopisy: ~24 h.</string>
-  <string name="init_geokrety_cache">Používat přednačtená data</string>
   <string name="init_geokrety_userid">ID uživatele: %s</string>
 </resources>
