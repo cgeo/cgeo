@@ -1669,10 +1669,12 @@ public final class GCParser {
     }
 
     /**
-     * Extract special logs (friends, own) through seperate request.
+     * Extract special logs (friends, own) through separate request.
      *
-     * @param userToken the user token extracted from the web page
-     * @param logType the logType to request
+     * @param userToken
+     *            the user token extracted from the web page
+     * @param logType
+     *            the logType to request
      * @return Observable<LogEntry> The logs
      */
     private static Observable<LogEntry> getLogs(final String userToken, final Logs logType) {

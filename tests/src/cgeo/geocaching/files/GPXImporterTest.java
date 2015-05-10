@@ -66,7 +66,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         final File gc31j2h = new File(tempDir, "gc31j2h.gpx");
         copyResourceToFile(R.raw.gc31j2h, gc31j2h);
 
-        final GPXImporter.ImportGpxFileThread importThread = new GPXImporter.ImportGpxFileThread(gc31j2h, listId, importStepHandler, progressHandler);
+        final ImportGpxFileThread importThread = new ImportGpxFileThread(gc31j2h, listId, importStepHandler, progressHandler);
         runImportThread(importThread);
 
         assertThat(importStepHandler.messages).hasSize(4);
@@ -91,7 +91,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         final File ocddd2 = new File(tempDir, "ocddd2.gpx");
         copyResourceToFile(R.raw.ocddd2, ocddd2);
 
-        final GPXImporter.ImportGpxFileThread importThread = new GPXImporter.ImportGpxFileThread(ocddd2, listId, importStepHandler, progressHandler);
+        final ImportGpxFileThread importThread = new ImportGpxFileThread(ocddd2, listId, importStepHandler, progressHandler);
         runImportThread(importThread);
 
         assertThat(importStepHandler.messages).hasSize(4);
@@ -110,7 +110,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         assertThat(cache.getWaypoints()).as("Number of imported waypoints").hasSize(4);
     }
 
-    private void runImportThread(final GPXImporter.ImportThread importThread) {
+    private void runImportThread(final AbstractImportThread importThread) {
         importThread.start();
         try {
             importThread.join();
@@ -125,7 +125,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         copyResourceToFile(R.raw.gc31j2h, gc31j2h);
         copyResourceToFile(R.raw.gc31j2h_wpts, new File(tempDir, "gc31j2h-wpts.gpx"));
 
-        final GPXImporter.ImportGpxFileThread importThread = new GPXImporter.ImportGpxFileThread(gc31j2h, listId, importStepHandler, progressHandler);
+        final ImportGpxFileThread importThread = new ImportGpxFileThread(gc31j2h, listId, importStepHandler, progressHandler);
         runImportThread(importThread);
 
         assertImportStepMessages(GPXImporter.IMPORT_STEP_START, GPXImporter.IMPORT_STEP_READ_FILE, GPXImporter.IMPORT_STEP_READ_WPT_FILE, GPXImporter.IMPORT_STEP_STORE_STATIC_MAPS, GPXImporter.IMPORT_STEP_FINISHED);
@@ -142,7 +142,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         final File tc2012 = new File(tempDir, "tc2012.gpx");
         copyResourceToFile(R.raw.tc2012, tc2012);
 
-        final GPXImporter.ImportGpxFileThread importThread = new GPXImporter.ImportGpxFileThread(tc2012, listId, importStepHandler, progressHandler);
+        final ImportGpxFileThread importThread = new ImportGpxFileThread(tc2012, listId, importStepHandler, progressHandler);
         runImportThread(importThread);
 
         assertImportStepMessages(GPXImporter.IMPORT_STEP_START, GPXImporter.IMPORT_STEP_READ_FILE, GPXImporter.IMPORT_STEP_STORE_STATIC_MAPS, GPXImporter.IMPORT_STEP_FINISHED);
@@ -164,7 +164,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         final File oc5952 = new File(tempDir, "oc5952.loc");
         copyResourceToFile(R.raw.oc5952_loc, oc5952);
 
-        final GPXImporter.ImportLocFileThread importThread = new GPXImporter.ImportLocFileThread(oc5952, listId, importStepHandler, progressHandler);
+        final ImportLocFileThread importThread = new ImportLocFileThread(oc5952, listId, importStepHandler, progressHandler);
         runImportThread(importThread);
 
         assertImportStepMessages(GPXImporter.IMPORT_STEP_START, GPXImporter.IMPORT_STEP_READ_FILE, GPXImporter.IMPORT_STEP_STORE_STATIC_MAPS, GPXImporter.IMPORT_STEP_FINISHED);
@@ -184,7 +184,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         final File gc31j2h = new File(tempDir, "gc31j2h.gpx");
         copyResourceToFile(R.raw.gc31j2h_err, gc31j2h);
 
-        final GPXImporter.ImportGpxFileThread importThread = new GPXImporter.ImportGpxFileThread(gc31j2h, listId, importStepHandler, progressHandler);
+        final ImportGpxFileThread importThread = new ImportGpxFileThread(gc31j2h, listId, importStepHandler, progressHandler);
         runImportThread(importThread);
 
         assertImportStepMessages(GPXImporter.IMPORT_STEP_START, GPXImporter.IMPORT_STEP_READ_FILE, GPXImporter.IMPORT_STEP_READ_FILE, GPXImporter.IMPORT_STEP_FINISHED_WITH_ERROR);
@@ -195,7 +195,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         copyResourceToFile(R.raw.gc31j2h, gc31j2h);
 
         progressHandler.cancel();
-        final GPXImporter.ImportGpxFileThread importThread = new GPXImporter.ImportGpxFileThread(gc31j2h, listId, importStepHandler, progressHandler);
+        final ImportGpxFileThread importThread = new ImportGpxFileThread(gc31j2h, listId, importStepHandler, progressHandler);
         runImportThread(importThread);
 
         assertImportStepMessages(GPXImporter.IMPORT_STEP_START, GPXImporter.IMPORT_STEP_READ_FILE, GPXImporter.IMPORT_STEP_CANCELED);
@@ -206,7 +206,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         removeCacheCompletely(geocode);
         final Uri uri = Uri.parse("android.resource://cgeo.geocaching.test/raw/gc31j2h");
 
-        final GPXImporter.ImportGpxAttachmentThread importThread = new GPXImporter.ImportGpxAttachmentThread(uri, getInstrumentation().getContext().getContentResolver(), listId, importStepHandler, progressHandler);
+        final ImportGpxAttachmentThread importThread = new ImportGpxAttachmentThread(uri, getInstrumentation().getContext().getContentResolver(), listId, importStepHandler, progressHandler);
         runImportThread(importThread);
 
         assertImportStepMessages(GPXImporter.IMPORT_STEP_START, GPXImporter.IMPORT_STEP_READ_FILE, GPXImporter.IMPORT_STEP_STORE_STATIC_MAPS, GPXImporter.IMPORT_STEP_FINISHED);
@@ -226,7 +226,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         final File pq7545915 = new File(tempDir, "7545915.zip");
         copyResourceToFile(R.raw.pq7545915, pq7545915);
 
-        final GPXImporter.ImportGpxZipFileThread importThread = new GPXImporter.ImportGpxZipFileThread(pq7545915, listId, importStepHandler, progressHandler);
+        final ImportGpxZipFileThread importThread = new ImportGpxZipFileThread(pq7545915, listId, importStepHandler, progressHandler);
         runImportThread(importThread);
 
         assertImportStepMessages(GPXImporter.IMPORT_STEP_START, GPXImporter.IMPORT_STEP_READ_FILE, GPXImporter.IMPORT_STEP_READ_WPT_FILE, GPXImporter.IMPORT_STEP_STORE_STATIC_MAPS, GPXImporter.IMPORT_STEP_FINISHED);
@@ -243,7 +243,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         final File pqError = new File(tempDir, "pq_error.zip");
         copyResourceToFile(R.raw.pq_error, pqError);
 
-        final GPXImporter.ImportGpxZipFileThread importThread = new GPXImporter.ImportGpxZipFileThread(pqError, listId, importStepHandler, progressHandler);
+        final ImportGpxZipFileThread importThread = new ImportGpxZipFileThread(pqError, listId, importStepHandler, progressHandler);
         runImportThread(importThread);
 
         assertImportStepMessages(GPXImporter.IMPORT_STEP_START, GPXImporter.IMPORT_STEP_FINISHED_WITH_ERROR);
@@ -254,7 +254,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         removeCacheCompletely(geocode);
         final Uri uri = Uri.parse("android.resource://cgeo.geocaching.test/raw/pq7545915");
 
-        final GPXImporter.ImportGpxZipAttachmentThread importThread = new GPXImporter.ImportGpxZipAttachmentThread(uri, getInstrumentation().getContext().getContentResolver(), listId, importStepHandler, progressHandler);
+        final ImportGpxZipAttachmentThread importThread = new ImportGpxZipAttachmentThread(uri, getInstrumentation().getContext().getContentResolver(), listId, importStepHandler, progressHandler);
         runImportThread(importThread);
 
         assertImportStepMessages(GPXImporter.IMPORT_STEP_START, GPXImporter.IMPORT_STEP_READ_FILE, GPXImporter.IMPORT_STEP_READ_WPT_FILE, GPXImporter.IMPORT_STEP_STORE_STATIC_MAPS, GPXImporter.IMPORT_STEP_FINISHED);

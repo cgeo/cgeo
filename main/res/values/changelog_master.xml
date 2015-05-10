@@ -4,6 +4,7 @@
   <string name="changelog_master" translatable="false">
     <b>Next feature release:</b>\n
     · New: Undo available for some actions\n
+    · New: Catch more http links to GPX files from the browser\n
     · New: Menu in cache details to put cache on ignore list (but not to remove)\n
     · New: Full support of GeoKrety (Use: Menu - Services - GeoKrety)\n
     · New: Improved waypoint editor design (Save button now in title bar)\n

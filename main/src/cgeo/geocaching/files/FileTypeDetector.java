@@ -38,7 +38,9 @@ public class FileTypeDetector {
 			type = detectHeader(reader);
             reader.close();
         } catch (final IOException e) {
-			Log.e("FileTypeDetector", e);
+            if (!uri.toString().startsWith("http")) {
+                Log.e("FileTypeDetector", e);
+            }
         } finally {
             IOUtils.closeQuietly(reader);
             IOUtils.closeQuietly(is);
