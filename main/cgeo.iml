@@ -65,6 +65,7 @@
     <orderEntry type="module" module-name="android-support-v7-appcompat" exported="" />
     <orderEntry type="module" module-name="play-services-base" exported="" />
     <orderEntry type="module" module-name="play-services-location" exported="" />
+    <orderEntry type="module" module-name="undobar" exported="" />
   </component>
   <component name="org.twodividedbyzero.idea.findbugs">
     <option name="_basePreferences">
