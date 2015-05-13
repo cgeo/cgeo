@@ -6,6 +6,7 @@
     · Fix: Wrong log count shown after logging something else than a found\n
     · Fix: Copy to clipboard not possible on Android 5.1\n
     · Fix: Cache links in Groundspeaks weekly mails not opening\n
+    · Fix: Heading line had wrong target when started from compass\n
     \n
     \n
     <b>Known Limitations/Bugs:</b>\n
