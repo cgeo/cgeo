@@ -1265,4 +1265,16 @@
   <string name="settings_map_direction">Zeige Richtungslinie</string>
   <string name="settings_summary_map_direction">Zeigt eine Richtungslinie zum Navigationsziel</string>
   <string name="map_direction">Zeige Richtungslinie</string>
+  <string name="command_move_caches_progress">Verschiebe Caches zu Liste %1s</string>
+  <plurals name="command_move_caches_result">
+    <item quantity="one">%d Cache verschoben</item>
+    <item quantity="other">%d Caches verschoben</item>
+  </plurals>
+  <string name="command_delete_caches_progress">Lösche Caches</string>
+  <plurals name="command_delete_caches_result">
+    <item quantity="one">%d Cache gelöscht</item>
+    <item quantity="other">%d Caches gelöscht</item>
+  </plurals>
+  <string name="command_rename_list_result">Liste umbenannt</string>
+  <string name="command_delete_list_result">Liste gelöscht</string>
 </resources>
