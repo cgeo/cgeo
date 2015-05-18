@@ -31,16 +31,21 @@ import cgeo.geocaching.utils.LogTemplateProvider.LogTemplate;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
+import android.R.string;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.os.Build.VERSION;
+import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.view.ContextMenu;
+import android.view.ContextThemeWrapper;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -83,6 +88,11 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
 
     TrackableConnector connector;
     private AbstractTrackableLoggingManager loggingManager;
+
+    /**
+     * How many times the warning popup for geocode not set should be displayed
+     */
+    public static int MAX_SHOWN_POPUP_TRACKABLE_WITHOUT_GEOCODE = 3;
 
     final public static int LOG_TRACKABLE = 1;
 
@@ -488,6 +498,9 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Do form validation then post the Log
+     */
     private void sendLog() {
         // Can logging?
         if (!postReady) {
@@ -511,7 +524,21 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
             }
         }
 
-        // Post Log in Background
+        // Some Trackable connectors recommend logging with a Geocode.
+        // Note: Currently, counter is shared between all connectors recommending Geocode.
+        if (LogTypeTrackable.isCoordinatesNeeded(typeSelected) && loggingManager.canLogCoordinates() &&
+                connector.recommendLogWithGeocode() && geocacheEditText.getText().toString().isEmpty() &&
+                Settings.getLogTrackableWithoutGeocodeShowCount() < MAX_SHOWN_POPUP_TRACKABLE_WITHOUT_GEOCODE) {
+            new LogTrackableWithoutGeocodeBuilder().create(this).show();
+        } else {
+            postLog();
+        }
+    }
+
+    /**
+     * Post Log in Background
+     */
+    private void postLog() {
         new Poster(this, res.getString(R.string.log_saving)).execute(logEditText.getText().toString());
         Settings.setLastTrackableLog(logEditText.getText().toString());
     }
@@ -530,6 +557,60 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
     @Override
     protected String getLastLog() {
         return Settings.getLastTrackableLog();
+    }
+
+    /**
+     * This will display a popup for confirming if Trackable Log should be send without a geocode.
+     * It will be displayed only MAX_SHOWN_POPUP_TRACKABLE_WITHOUT_GEOCODE times. A "Do not ask me again"
+     * checkbox is also added.
+     */
+    public class LogTrackableWithoutGeocodeBuilder {
+
+        private CheckBox doNotAskAgain;
+
+        public AlertDialog create(final Activity activity) {
+            final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+            builder.setTitle(R.string.trackable_title_log_without_geocode);
+
+            final Context themedContext;
+            themedContext = Settings.isLightSkin() && VERSION.SDK_INT < VERSION_CODES.HONEYCOMB ? new ContextThemeWrapper(activity, R.style.dark) : activity;
+
+            final View layout = View.inflate(themedContext, R.layout.logtrackable_without_geocode, null);
+            builder.setView(layout);
+
+            doNotAskAgain = (CheckBox) layout.findViewById(R.id.logtrackable_do_not_ask_me_again);
+
+            final int showCount = Settings.getLogTrackableWithoutGeocodeShowCount();
+            Settings.setLogTrackableWithoutGeocodeShowCount(showCount + 1);
+
+            builder.setPositiveButton(string.yes, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(final DialogInterface dialog, final int which) {
+                    checkDoNotAskAgain();
+                    dialog.dismiss();
+                }
+            });
+            builder.setNegativeButton(string.no, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(final DialogInterface dialog, final int which) {
+                    checkDoNotAskAgain();
+                    dialog.dismiss();
+                    // Post the log
+                    postLog();
+                }
+            });
+            return builder.create();
+        }
+
+        /**
+         * Verify if doNotAskAgain is checked.
+         * If true, set the counter to MAX_SHOWN_POPUP_TRACKABLE_WITHOUT_GEOCODE
+         */
+        private void checkDoNotAskAgain() {
+            if (doNotAskAgain.isChecked()) {
+                Settings.setLogTrackableWithoutGeocodeShowCount(MAX_SHOWN_POPUP_TRACKABLE_WITHOUT_GEOCODE);
+            }
+        }
     }
 
 }

@@ -1372,6 +1372,9 @@
     <string name="init_geokrety_cache_description">GeokretyMap.org provides cached datas for GeoKrety trackables.\nAvailable datas contains more GeoKrety informations like \'description\' or \'missing\' status.\n\nDatas are not live!\nPositions: ~30min.\nDescriptions: ~24h.</string>
     <string name="init_geokrety_cache">Use GeoKretyMap.org</string>
     <string name="init_geokrety_userid">User Id: %s</string>
+    <string name="trackable_title_log_without_geocode">Geocode not set</string>
+    <string name="trackable_log_without_geocode">You\'re about to send a log without a Geocode. It\'s encouraged to set one. Do you want to add it now?</string>
+    <string name="do_not_ask_me_again">Do not ask me again</string>
     
     <string name="settings_map_direction">Show direction</string>
     <string name="settings_summary_map_direction">Show a direction line to the navigation target</string>
@@ -1389,5 +1392,5 @@
     </plurals>
     <string name="command_rename_list_result">Renamed list</string>
     <string name="command_delete_list_result">Deleted list</string>
-    
+
 </resources>

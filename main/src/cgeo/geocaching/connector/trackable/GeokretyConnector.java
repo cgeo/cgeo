@@ -196,6 +196,11 @@ public class GeokretyConnector extends AbstractTrackableConnector {
     }
 
     @Override
+    public boolean recommendLogWithGeocode() {
+        return true;
+    }
+
+    @Override
     public int getInventoryLoaderId() {
         return Loaders.INVENTORY_GEOKRETY.getLoaderId();
     }

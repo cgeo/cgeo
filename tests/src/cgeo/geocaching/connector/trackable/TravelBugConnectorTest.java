@@ -53,4 +53,8 @@ public class TravelBugConnectorTest extends TestCase {
         assertThat(TravelBugConnector.getInstance().getTrackableCodeFromUrl("http://coord.info/GC1234")).isNull();
         assertThat(TravelBugConnector.getInstance().getTrackableCodeFromUrl("http://www.coord.info/GC1234")).isNull();
     }
+
+    public static void testRecommendGeocode() throws Exception {
+        assertThat(getConnector().recommendLogWithGeocode()).isFalse();
+    }
 }

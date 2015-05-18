@@ -150,6 +150,13 @@ public interface TrackableConnector {
      */
     public boolean isRegistered();
 
+    /**
+     * Tell if the connector recommend logging a Trackable with Geocode.
+     *
+     * @return True if connector recommend Geocode.
+     */
+    public boolean recommendLogWithGeocode();
+
     public int getInventoryLoaderId();
 
     public int getCacheInventoryLoaderId();

@@ -41,4 +41,8 @@ public class UnknownTrackableConnectorTest extends TestCase {
         assertThat(getConnector().getUserActions()).isEmpty();
     }
 
+    public static void testRecommendGeocode() throws Exception {
+        assertThat(getConnector().recommendLogWithGeocode()).isFalse();
+    }
+
 }

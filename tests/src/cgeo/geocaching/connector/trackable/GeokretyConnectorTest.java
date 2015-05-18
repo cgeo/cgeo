@@ -75,4 +75,12 @@ public class GeokretyConnectorTest extends AbstractResourceInstrumentationTestCa
     public void testGetTrackableLoggingManager() throws Exception {
         // how to test?
     }
+
+    private static GeokretyConnector getConnector() {
+        return new GeokretyConnector();
+    }
+
+    public static void testRecommendGeocode() throws Exception {
+        assertThat(getConnector().recommendLogWithGeocode()).isTrue();
+    }
 }

@@ -26,4 +26,12 @@ public class SwaggieConnectorTest extends TestCase {
         assertThat(new SwaggieConnector().getUrl(trackable)).isEqualTo("http://geocaching.com.au/swaggie/SW0017");
     }
 
+    private static SwaggieConnector getConnector() {
+        return new SwaggieConnector();
+    }
+
+    public static void testRecommendGeocode() throws Exception {
+        assertThat(getConnector().recommendLogWithGeocode()).isFalse();
+    }
+
 }

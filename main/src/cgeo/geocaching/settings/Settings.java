@@ -598,6 +598,24 @@ public class Settings {
         return getGeokretySecId() != null;
     }
 
+    /**
+     * Retrieve showed popup counter for warning about logging Trackable recommend Geocode
+     *
+     * @return number of times the popup has appeared
+     */
+    public static int getLogTrackableWithoutGeocodeShowCount() {
+        return getInt(R.string.pref_logtrackablewithoutgeocodeshowcount, 0);
+    }
+
+    /**
+     * Store showed popup counter for warning about logging Trackable recommend Geocode
+     *
+     * @param showCount the count to save
+     */
+    public static void setLogTrackableWithoutGeocodeShowCount(final int showCount) {
+        putInt(R.string.pref_logtrackablewithoutgeocodeshowcount, showCount);
+    }
+
     public static boolean isFriendLogsWanted() {
         if (!hasGCCredentials()) {
             // don't show a friends log if the user is anonymous

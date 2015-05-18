@@ -78,6 +78,11 @@ public abstract class AbstractTrackableConnector implements TrackableConnector {
     }
 
     @Override
+    public boolean recommendLogWithGeocode() {
+        return false;
+    }
+
+    @Override
     public int getInventoryLoaderId() {
         return 0;
     }
