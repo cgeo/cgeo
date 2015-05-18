@@ -518,7 +518,7 @@
   <string name="init_summary_use_native_ua">Identificarse como usuario Android. Resuelve algunos problemas de acceso cuando se usan ciertos proveedores de red.</string>
   <string name="init_rendertheme_folder">Directorio de temas para mapas</string>
   <string name="init_maintenance">Mantenimiento</string>
-  <string name="init_maintenance_directories_note">c:Geo almacena imágenes, registro de imágenes y otros archivos relacionados con una memoria caché en un directorio separado. En algunos casos (como importar/exportar la base de datos) este directorio puede contener archivos obsoletos, que aquí se pueden eliminar.</string>
+  <string name="init_maintenance_directories_note">c:geo almacena imágenes de cachés y de registros, así como otros archivos relacionados con los cachés en un directorio separado. En algunos casos (como importar/exportar la base de datos) este directorio puede contener archivos obsoletos, que aquí se pueden eliminar.</string>
   <string name="init_maintenance_directories">Eliminar archivos huérfanos</string>
   <string name="init_location">Geolocalización</string>
   <string name="init_location_note">En dispositivos equipados con los servicios Google Play, c:geo puede usar el mejor proveedor de geolocalización de manera automática. Sin embargo, esto impide el uso de un receptor externo de GPS por Bluetooth.</string>
@@ -579,6 +579,7 @@
   <string name="auth_explain_short">El siguiente proceso permitirá a <b>c:geo</b> acceder a %s.</string>
   <string name="auth_explain_long">Presionando el botón \"Autorizar c:geo\" comenzará el proceso. Este proceso abrirá el navegador web con una página %s. Registrate en esta página y permite a <b>c:geo</b> acceder a tu cuenta. Eso es todo.</string>
   <string name="auth_token_register">Crear una cuenta</string>
+  <string name="auth_token_explain_short">El siguiente proceso permitirá a <b>c:geo</b> acceder a %s.</string>
   <string name="auth_dialog_completed_twitter">c:geo está autorizado ahora a publicar en Twitter.</string>
   <string name="auth_ocde">Opencaching.de</string>
   <string name="auth_dialog_completed_oc">c:geo está autorizado a interactuar con %s.</string>
@@ -920,6 +921,7 @@
   <string name="addon_missing_title">No se encuentra el complemento</string>
   <string name="addon_download_prompt">Obtenlo ahora desde Google Play.</string>
   <string name="export">Exportar</string>
+  <string name="export_progress">Exportar: %1$s</string>
   <string name="export_exportedto">exportado a</string>
   <string name="export_failed">Error en la exportación</string>
   <string name="export_fieldnotes">Notas de campo</string>
@@ -932,6 +934,9 @@
   <string name="export_gpx">GPX</string>
   <string name="export_gpx_info">El archivo GPX será exportado a %1$s con la fecha y hora actual como su nombre de archivo.</string>
   <string name="export_gpx_to">Enviar GPX exportado a</string>
+  <string name="export_confirm_title">Exportando %1$s</string>
+  <string name="export_confirm_message">Directorio: %1$s\n
+Nombre de archivo:%2$s</string>
   <string name="attribute_dogs_yes">Perros permitidos</string>
   <string name="attribute_dogs_no">Perros no permitidos</string>
   <string name="attribute_bicycles_yes">Bicicletas permitidas</string>
@@ -1224,11 +1229,23 @@
   <string name="showcase_compass_hint_text">Este nuevo elemento del menú puede darte una idea de dónde encontrar el caché - muestra la pista, si está disponible.</string>
   <string name="confirm_log_title">Tipo de registro inusual</string>
   <string name="confirm_log_message">Vas a registrar \'%s\'. ¿Estás seguro?</string>
+  <string name="settings_activate_geokrety">Activar</string>
   <string name="init_geokrety">GeoKrety.org</string>
   <string name="init_summary_geokrety">Habilitar rastreables de GeoKrety.org</string>
   <string name="init_summary_geokrety_account">No hay cuenta configurada.</string>
   <string name="init_geokrety_register_fail">Fallo al iniciar sesión</string>
   <string name="init_geokrety_cache">Usar GeoKretyMap.org</string>
+  <string name="settings_map_direction">Mostrar dirección</string>
   <string name="settings_summary_map_direction">Muestra una línea de dirección al objetivo de la navegación</string>
   <string name="map_direction">Mostrar dirección</string>
+  <string name="command_move_caches_progress">Moviendo cachés a la lista %1s</string>
+  <plurals name="command_move_caches_result">
+    <item quantity="one">%d caché movido</item>
+    <item quantity="other">%d cachés movidos</item>
+  </plurals>
+  <string name="command_delete_caches_progress">Eliminando cachés</string>
+  <plurals name="command_delete_caches_result">
+    <item quantity="one">%d caché eliminado</item>
+    <item quantity="other">%d cachés eliminados</item>
+  </plurals>
 </resources>

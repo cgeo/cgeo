@@ -885,7 +885,7 @@
   <string name="trackable_name">Name</string>
   <string name="trackable_type">Typ</string>
   <string name="trackable_owner">Eigentümer</string>
-  <string name="trackable_spotted">Zuletzt gesehen</string>
+  <string name="trackable_spotted">Gesehen</string>
   <string name="trackable_spotted_in_cache">In</string>
   <string name="trackable_spotted_at_user">Bei</string>
   <string name="trackable_spotted_unknown_location">Unbekannter Ort</string>
