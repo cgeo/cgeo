@@ -2,6 +2,7 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.gc.Tile;
+import cgeo.geocaching.connector.trackable.TrackableBrand;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
@@ -153,7 +154,7 @@ public class DataStore {
      */
     private static final CacheCache cacheCache = new CacheCache();
     private static SQLiteDatabase database = null;
-    private static final int dbVersion = 68;
+    private static final int dbVersion = 69;
     public static final int customListIdOffset = 10;
     private static final @NonNull String dbName = "data";
     private static final @NonNull String dbTableCaches = "cg_caches";
@@ -299,7 +300,8 @@ public class DataStore {
             + "released long, "
             + "goal text, "
             + "description text, "
-            + "geocode text "
+            + "geocode text, "
+            + "brand integer "
             + "); ";
 
     private static final String dbCreateSearchDestinationHistory = ""
@@ -804,6 +806,15 @@ public class DataStore {
                             db.execSQL("alter table " + dbTableCaches + " add column logPasswordRequired integer default 0");
                         } catch (final Exception e) {
                             Log.e("Failed to upgrade to ver. 68", e);
+
+                        }
+                    }
+                    // Introduces trackableBrand
+                    if (oldVersion < 69) {
+                        try {
+                            db.execSQL("alter table " + dbTableTrackables + " add column brand integer default 0");
+                        } catch (final Exception e) {
+                            Log.e("Failed to upgrade to ver. 69", e);
 
                         }
                     }
@@ -1515,6 +1526,7 @@ public class DataStore {
                 }
                 values.put("goal", trackable.getGoal());
                 values.put("description", trackable.getDetails());
+                values.put("brand", trackable.getBrand().getId());
 
                 database.insert(dbTableTrackables, null, values);
 
@@ -1991,7 +2003,7 @@ public class DataStore {
 
         final Cursor cursor = database.query(
                 dbTableTrackables,
-                new String[]{"_id", "updated", "tbcode", "guid", "title", "owner", "released", "goal", "description"},
+                new String[]{"_id", "updated", "tbcode", "guid", "title", "owner", "released", "goal", "description", "brand"},
                 "geocode = ?",
                 new String[]{geocode},
                 null,
@@ -2018,7 +2030,7 @@ public class DataStore {
 
         final Cursor cursor = database.query(
                 dbTableTrackables,
-                new String[]{"updated", "tbcode", "guid", "title", "owner", "released", "goal", "description"},
+                new String[]{"updated", "tbcode", "guid", "title", "owner", "released", "goal", "description", "brand"},
                 "tbcode = ?",
                 new String[]{geocode},
                 null,
@@ -2051,6 +2063,7 @@ public class DataStore {
         }
         trackable.setGoal(cursor.getString(cursor.getColumnIndex("goal")));
         trackable.setDetails(cursor.getString(cursor.getColumnIndex("description")));
+        trackable.forceSetBrand(TrackableBrand.getById(cursor.getInt(cursor.getColumnIndex("brand"))));
         trackable.setLogs(loadLogs(trackable.getGeocode()));
         return trackable;
     }
