@@ -92,7 +92,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
     /**
      * How many times the warning popup for geocode not set should be displayed
      */
-    public static int MAX_SHOWN_POPUP_TRACKABLE_WITHOUT_GEOCODE = 3;
+    final public static int MAX_SHOWN_POPUP_TRACKABLE_WITHOUT_GEOCODE = 3;
 
     final public static int LOG_TRACKABLE = 1;
 
