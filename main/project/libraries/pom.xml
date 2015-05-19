@@ -16,7 +16,7 @@
 	</description>
 
 	<properties>
-		<AndroidAnnotationsVersion>3.3</AndroidAnnotationsVersion>
+		<AndroidAnnotationsVersion>3.3.1</AndroidAnnotationsVersion>
 
 		<ButterKnifeVersion>6.1.0</ButterKnifeVersion>
 
@@ -108,7 +108,7 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>versions-maven-plugin</artifactId>
-				<version>2.1</version>
+				<version>2.2</version>
 				<executions>
 					<execution>
 						<id>display-property-updates</id>

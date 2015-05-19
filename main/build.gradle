@@ -22,7 +22,7 @@ gradle connectedCheck
 //Testing guide : http://tools.android.com/tech-docs/new-build-system/user-guide#TOC-Testing
 //https://github.com/stephanenicolas/Quality-Tools-for-Android
 
-def AAVersion = '3.3'
+def AAVersion = '3.3.1'
 def RXJavaVersion = '1.0.10'
 def RXAndroidVersion = '0.24.0'
 def JacksonCoreVersion = '2.5.3'
@@ -178,7 +178,7 @@ dependencies {
     compile "com.fasterxml.jackson.core:jackson-annotations:$JacksonAnnotationsVersion"
 
     //TEST
-    //compile files('compile-libs/androidannotations-3.3.jar')
+    //compile files("compile-libs/androidannotations-$AAVersion.jar")
     //compile files('compile-libs/findbugs-ant.jar')
     //compile files('compile-libs/findbugs-jsr305.jar')  //CheckForNull conflict with com.google.code.findbugs:annotations
 
