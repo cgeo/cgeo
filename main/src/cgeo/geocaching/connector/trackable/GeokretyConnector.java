@@ -30,6 +30,7 @@ import org.xml.sax.InputSource;
 import android.content.Context;
 
 import java.io.InputStream;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -104,7 +105,7 @@ public class GeokretyConnector extends AbstractTrackableConnector {
     public List<Trackable> searchTrackables(final String geocode) {
         Log.d("GeokretyConnector.searchTrackables: wpt=" + geocode);
         try {
-            final InputStream response = Network.getResponseStream(Network.getRequest(getUrlCache() + "/export2.php?wpt=" + geocode));
+            final InputStream response = Network.getResponseStream(Network.getRequest(getUrlCache() + "/export2.php?wpt=" + URLEncoder.encode(geocode, "utf-8")));
             if (response == null) {
                 Log.e("GeokretyConnector.searchTrackable: No data from server");
                 return Collections.emptyList();
