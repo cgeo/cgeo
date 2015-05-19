@@ -157,12 +157,16 @@ public class Trackable implements ILogable {
 
     public TrackableBrand getBrand() {
         if (brand == null) {
+            // Only TravelBug have a guid
+            if (StringUtils.isNotEmpty(guid)) {
+                brand = TrackableBrand.TRAVELBUG;
+                return brand;
+            }
+            // Consult all other Trackable connectors
             if (StringUtils.isNotEmpty(geocode)) {
                 final TrackableConnector connector = ConnectorFactory.getTrackableConnector(geocode);
-                    if (connector != ConnectorFactory.UNKNOWN_TRACKABLE_CONNECTOR) {
-                    brand = connector.getBrand();
-                    return brand;
-                }
+                brand = connector.getBrand();
+                return brand;
             }
             // Fallback to Unkwown
             brand = TrackableBrand.UNKNOWN;
