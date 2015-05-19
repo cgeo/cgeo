@@ -114,4 +114,27 @@ public class GeokretyParserTest extends AbstractResourceInstrumentationTestCase 
                 "<br />" +
                 "Bitte ignorieren.");
     }
+
+    public void testMissing() throws Exception {
+        final List<Trackable> trackables1 = GeokretyParser.parse(new InputSource(getResourceStream(R.raw.geokret145_xml)));
+        assertThat(trackables1).hasSize(1);
+        final Trackable trackable1 = trackables1.get(0);
+        assertThat(trackable1).isNotNull();
+        assertThat(trackable1.isMissing()).isTrue();
+
+        final List<Trackable> trackables2 = GeokretyParser.parse(new InputSource(getResourceStream(R.raw.geokret146_xml)));
+        assertThat(trackables2).hasSize(1);
+        final Trackable trackable2 = trackables2.get(0);
+        assertThat(trackable2).isNotNull();
+        assertThat(trackable2.isMissing()).isFalse();
+
+        final List<Trackable> trackables3 = GeokretyParser.parse(new InputSource(getResourceStream(R.raw.geokret141_xml)));
+        assertThat(trackables3).hasSize(2);
+        final Trackable trackable3 = trackables3.get(0);
+        assertThat(trackable3).isNotNull();
+        assertThat(trackable3.isMissing()).isFalse();
+        final Trackable trackable4 = trackables3.get(1);
+        assertThat(trackable4).isNotNull();
+        assertThat(trackable4.isMissing()).isTrue();
+    }
 }

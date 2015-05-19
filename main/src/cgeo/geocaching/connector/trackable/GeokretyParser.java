@@ -92,6 +92,10 @@ public class GeokretyParser {
                     if (StringUtils.isNotBlank(ownerId)) {
                         trackable.setOwner(CgeoApplication.getInstance().getString(R.string.init_geokrety_userid, ownerId));
                     }
+                    final String missing = attributes.getValue("missing");
+                    if (StringUtils.isNotBlank(missing)) {
+                        trackable.setMissing("1".equalsIgnoreCase(missing));
+                    }
                 }
                 if (localName.equalsIgnoreCase("owner")) {
                     final String ownerId = attributes.getValue("id");
@@ -154,10 +158,9 @@ public class GeokretyParser {
                 if (StringUtils.isNotBlank(content) && localName.equalsIgnoreCase("state")) {
                     trackable.setSpottedType(Integer.parseInt(content));
                 }
-                // TODO: Can be parsed but not supported in c:geo, yet...
-                //if (StringUtils.isNotBlank(content) && localName.equalsIgnoreCase("missing")) {
-                //    trackable.setMissing(Boolean.parseBoolean(content));
-                //}
+                if (StringUtils.isNotBlank(content) && localName.equalsIgnoreCase("missing")) {
+                    trackable.setMissing("1".equalsIgnoreCase(content));
+                }
                 if (StringUtils.isNotBlank(content) && localName.equalsIgnoreCase("waypoint")) {
                     trackable.setSpottedName(content);
                     trackable.setSpottedType(Trackable.SPOTTED_CACHE);

@@ -75,6 +75,7 @@ public class TrackableTest extends AndroidTestCase {
         trackable2.setLogs(logEntryList2);
         trackable2.setTrackingcode("trackingcode");
         trackable2.forceSetBrand(TrackableBrand.GEOKRETY);
+        trackable2.setMissing(true);
 
         trackable1.mergeTrackable(trackable2);
 
@@ -94,6 +95,7 @@ public class TrackableTest extends AndroidTestCase {
         assertThat(trackable1.getImage()).isEqualTo(trackable2.getImage());
         assertThat(trackable1.getTrackingcode()).isEqualTo(trackable2.getTrackingcode());
         assertThat(trackable1.getBrand()).isEqualTo(trackable2.getBrand());
+        assertThat(trackable1.isMissing()).isEqualTo(trackable2.isMissing());
 
         assertThat(trackable1.getLogs()).hasSize(2);
         assertThat(trackable1.getLogs().get(0)).isEqualTo(logEntry2);

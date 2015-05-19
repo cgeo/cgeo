@@ -6,6 +6,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.Trackable;
 
 import android.app.Activity;
+import android.graphics.Paint;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,6 +50,9 @@ public class TrackableListAdapter extends ArrayAdapter<Trackable> {
 
         holder.imageBrand.setImageResource(trackable.getIconBrand());
         holder.name.setText(Html.fromHtml(trackable.getName()).toString());
+        if (trackable.isMissing()) {
+            holder.name.setPaintFlags(holder.name.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+        }
 
         return view;
     }

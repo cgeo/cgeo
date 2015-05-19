@@ -48,6 +48,7 @@ public class Trackable implements ILogable {
     private String trackingcode = null;
     private TrackableBrand brand = null;
     private TrackableConnector trackableConnector = null;
+    private Boolean missing = null;
 
     /**
      * Merge data from another Trackable.
@@ -77,6 +78,7 @@ public class Trackable implements ILogable {
         trackingcode = ObjectUtils.defaultIfNull(newTrackable.trackingcode, trackingcode);
         brand = ObjectUtils.defaultIfNull(newTrackable.brand, brand);
         trackableConnector = ObjectUtils.defaultIfNull(newTrackable.trackableConnector, trackableConnector);
+        missing = ObjectUtils.defaultIfNull(newTrackable.missing, missing);
     }
 
     /**
@@ -290,6 +292,26 @@ public class Trackable implements ILogable {
 
     public void setImage(final String image) {
         this.image = image;
+    }
+
+    /**
+     * Get the trackable missing status.
+     * False if missing status is unknonwn.
+     *
+     * @return true if missing from cache
+     */
+    public Boolean isMissing() {
+        return missing == null ? false : missing;
+    }
+
+    /**
+     * Set the trackable missing status
+     *
+     * @param missing
+     *          the new missing status
+     */
+    public void setMissing(final Boolean missing) {
+        this.missing = missing;
     }
 
     @NonNull
