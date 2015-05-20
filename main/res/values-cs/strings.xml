@@ -216,6 +216,7 @@
   <string name="info_stored_image">Nový obrázek uložen do:</string>
   <string name="info_storing_static_maps">Pokus o uložení statických map</string>
   <string name="info_cache_saved">Keš uložena pro lokální použití</string>
+  <string name="err_trackable_no_preference_activity">Omlouváme se, požadovanou obrazovku nastavení nelze nalézt.</string>
   <string name="loc_last">Poslední známá</string>
   <string name="loc_net">Síť</string>
   <string name="loc_fused">Kombinovaný</string>
@@ -588,6 +589,8 @@
   <string name="auth_explain_short">Následující proces umožní <b>c:geu</b> přístup k %s.</string>
   <string name="auth_explain_long">Stisknutím tlačítka „Autorizovat c:geo“ bude proces zahájen. Tento proces otevře webový prohlížeč se stránkou %s. Na této stránce se přihlaš a povol <b>c:geu</b> přistupovat k tvému účtu. To je vše.</string>
   <string name="auth_token_register">Vytvořit účet</string>
+  <string name="auth_token_explain_short">Následující proces umožní <b>c:geu</b> přístup k %s.</string>
+  <string name="auth_token_explain_long">Vyplněním přihlašovacích údajů a stisknutím tlačítka „Autorizovat c:geo“ bude proces zahájen. Poté bude navázáno spojení s %s a načten ověřovací token. To je vše.</string>
   <string name="auth_dialog_completed_twitter">c:geo nyní může posílat zprávy na Tvůj Twitter.</string>
   <string name="auth_ocde">Opencaching.de</string>
   <string name="auth_ocpl">opencaching.pl</string>
@@ -596,6 +599,9 @@
   <string name="auth_ocro">opencaching.ro</string>
   <string name="auth_ocuk">opencaching.org.uk</string>
   <string name="auth_dialog_completed_oc">c:geo je nyní autorizováno pro interakce s %s.</string>
+  <string name="auth_dialog_completed_geokrety">c:geo je nyní autorizováno pro interakce s %s.</string>
+  <string name="err_auth_geokrety_bad_password">Zdá se, že tvé uživatelské jméno nebo heslo není správné.</string>
+  <string name="err_auth_geokrety_unknown">%1$s hlásí: %2$s.</string>
   <plurals name="cache_counts">
     <item quantity="one">Jedna keš</item>
     <item quantity="few">%1$d keše</item>
@@ -1253,4 +1259,10 @@
   <string name="init_geokrety_register_ok">Přihlášení bylo úspěšné</string>
   <string name="init_geokrety_register_fail">Přihlášení selhalo</string>
   <string name="init_geokrety_userid">ID uživatele: %s</string>
+  <string name="command_move_caches_progress">Přesouvání keší do seznamu %1s</string>
+  <plurals name="command_move_caches_result">
+    <item quantity="one">Přesunuta %d keš</item>
+    <item quantity="few">Přesunuty %d keše</item>
+    <item quantity="other">Přesunuto %d keší</item>
+  </plurals>
 </resources>

@@ -1257,4 +1257,16 @@
   <string name="settings_map_direction">Toon richting</string>
   <string name="settings_summary_map_direction">Toon een richtingslijn naar het navigatiedoel</string>
   <string name="map_direction">Toon richting</string>
+  <string name="command_move_caches_progress">Caches verplaatsen naar lijst %1s</string>
+  <plurals name="command_move_caches_result">
+    <item quantity="one">%d Cache verplaatst</item>
+    <item quantity="other">%d Caches verplaatst</item>
+  </plurals>
+  <string name="command_delete_caches_progress">Bezig met verwijderen caches</string>
+  <plurals name="command_delete_caches_result">
+    <item quantity="one">%d Cache verwijderd</item>
+    <item quantity="other">%d Caches verwijderd</item>
+  </plurals>
+  <string name="command_rename_list_result">Lijst hernoemd</string>
+  <string name="command_delete_list_result">Lijst verwijderd</string>
 </resources>
