@@ -344,6 +344,7 @@
                 <data android:host="www.geocaching.com" />
                 <data android:pathPrefix="/seek/cache_details.aspx" />
                 <data android:pathPrefix="/geocache/GC" />
+                <data android:pathPrefix="/geocache/gc" />
             </intent-filter>
 
             <!-- opencaching.CZ -->
@@ -359,6 +360,7 @@
                 <data android:host="opencaching.cz" />
                 <data android:host="www.opencaching.cz" />
                 <data android:pathPrefix="/OZ" />
+                <data android:pathPrefix="/oz" />
                 <data android:pathPrefix="/viewcache.php" />
             </intent-filter>
 
@@ -374,6 +376,7 @@
                 <data android:host="opencaching.de" />
                 <data android:host="www.opencaching.de" />
                 <data android:pathPrefix="/OC" />
+                <data android:pathPrefix="/oc" />
                 <data android:pathPrefix="/viewcache.php" />
             </intent-filter>
 
@@ -389,6 +392,7 @@
                 <data android:host="opencachingspain.es" />
                 <data android:host="www.opencachingspain.es" />
                 <data android:pathPrefix="/OC" />
+                <data android:pathPrefix="/oc" />
                 <data android:pathPrefix="/viewcache.php" />
             </intent-filter>
 
@@ -404,6 +408,7 @@
                 <data android:host="opencaching.fr" />
                 <data android:host="www.opencaching.fr" />
                 <data android:pathPrefix="/OC" />
+                <data android:pathPrefix="/oc" />
                 <data android:pathPrefix="/viewcache.php" />
             </intent-filter>
 
@@ -419,6 +424,7 @@
                 <data android:host="opencaching.it" />
                 <data android:host="www.opencaching.it" />
                 <data android:pathPrefix="/OC" />
+                <data android:pathPrefix="/oc" />
                 <data android:pathPrefix="/viewcache.php" />
             </intent-filter>
 
@@ -434,6 +440,7 @@
                 <data android:host="opencaching.no" />
                 <data android:host="www.opencaching.no" />
                 <data android:pathPrefix="/OC" />
+                <data android:pathPrefix="/oc" />
                 <data android:pathPrefix="/viewcache.php" />
             </intent-filter>
 
@@ -449,6 +456,7 @@
                 <data android:host="opencaching.nl" />
                 <data android:host="www.opencaching.nl" />
                 <data android:pathPrefix="/OB" />
+                <data android:pathPrefix="/ob" />
                 <data android:pathPrefix="/viewcache.php" />
             </intent-filter>
 
@@ -464,6 +472,7 @@
                 <data android:host="opencaching.pl" />
                 <data android:host="www.opencaching.pl" />
                 <data android:pathPrefix="/OP" />
+                <data android:pathPrefix="/op" />
                 <data android:pathPrefix="/viewcache.php" />
             </intent-filter>
 
@@ -479,6 +488,7 @@
                 <data android:host="opencaching.org.uk" />
                 <data android:host="www.opencaching.org.uk" />
                 <data android:pathPrefix="/OK" />
+                <data android:pathPrefix="/ok" />
                 <data android:pathPrefix="/viewcache.php" />
             </intent-filter>
 
@@ -494,6 +504,7 @@
                 <data android:host="opencaching.ro" />
                 <data android:host="www.opencaching.ro" />
                 <data android:pathPrefix="/OR" />
+                <data android:pathPrefix="/or" />
                 <data android:pathPrefix="/viewcache.php" />
             </intent-filter>
 
@@ -509,6 +520,7 @@
                 <data android:host="opencaching.us" />
                 <data android:host="www.opencaching.us" />
                 <data android:pathPrefix="/OU" />
+                <data android:pathPrefix="/ou" />
                 <data android:pathPrefix="/viewcache.php" />
             </intent-filter>
         </activity>
@@ -559,9 +571,10 @@
 
                 <data android:scheme="http" />
                 <data android:scheme="https" />
-                <data
-                    android:host="geocaching.com.au"
-                    android:pathPrefix="/swaggie/sw" />
+                <data android:host="geocaching.com.au" />
+                <data android:host="www.geocaching.com.au" />
+                <data android:pathPrefix="/swaggie/sw" />
+                <data android:pathPrefix="/swaggie/SW" />
             </intent-filter>
 
             <!-- GeoKrety.org -->
