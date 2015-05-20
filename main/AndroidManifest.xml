@@ -309,25 +309,12 @@
 
                 <data android:scheme="http" />
                 <data android:scheme="https" />
-                <data
-                    android:host="extremcaching.com"
-                    android:pathPrefix="/index.php/output-2/" />
+                <data android:host="extremcaching.com" />
+                <data android:host="www.extremcaching.com" />
+                <data android:pathPrefix="/index.php/output-2/" />
             </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
 
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data android:scheme="http" />
-                <data android:scheme="https" />
-                <data
-                    android:host="www.extremcaching.com"
-                    android:pathPrefix="/index.php/output-2/" />
-            </intent-filter>
-            
-            <!-- geocaching.com -->
+            <!-- geocaching.com URL via coord.info redirection -->
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <action android:name="android.nfc.action.NDEF_DISCOVERED" />
@@ -342,6 +329,8 @@
                 <data android:pathPrefix="/GC" />
                 <data android:pathPrefix="/gc" />
             </intent-filter>
+
+            <!-- geocaching.com -->
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <action android:name="android.nfc.action.NDEF_DISCOVERED" />
@@ -351,37 +340,12 @@
 
                 <data android:scheme="http" />
                 <data android:scheme="https" />
-                <data
-                    android:host="www.geocaching.com"
-                    android:pathPrefix="/geocache/GC" />
+                <data android:host="geocaching.com" />
+                <data android:host="www.geocaching.com" />
+                <data android:pathPrefix="/seek/cache_details.aspx" />
+                <data android:pathPrefix="/geocache/GC" />
             </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
 
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data android:scheme="http" />
-                <data android:scheme="https" />
-                <data
-                    android:host="geocaching.com"
-                    android:pathPrefix="/seek/cache_details.aspx" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data android:scheme="http" />
-                <data android:scheme="https" />
-                <data
-                    android:host="www.geocaching.com"
-                    android:pathPrefix="/seek/cache_details.aspx" />
-            </intent-filter>
-            
             <!-- opencaching.CZ -->
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -392,37 +356,12 @@
 
                 <data android:scheme="http" />
                 <data android:scheme="https" />
-                <data
-                    android:host="opencaching.cz"
-                    android:pathPrefix="/OZ" />
+                <data android:host="opencaching.cz" />
+                <data android:host="www.opencaching.cz" />
+                <data android:pathPrefix="/OZ" />
+                <data android:pathPrefix="/viewcache.php" />
             </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
 
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data android:scheme="http" />
-                <data android:scheme="https" />
-                <data
-                    android:host="www.opencaching.cz"
-                    android:pathPrefix="/OZ" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data android:scheme="http" />
-                <data android:scheme="https" />
-                <data
-                    android:host="www.opencaching.cz"
-                    android:pathPrefix="/viewcache.php" />
-            </intent-filter>
-            
             <!-- opencaching.DE -->
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -431,36 +370,13 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
-                <data
-                    android:host="opencaching.de"
-                    android:pathPrefix="/OC"
-                    android:scheme="http" />
+                <data android:scheme="http" />
+                <data android:host="opencaching.de" />
+                <data android:host="www.opencaching.de" />
+                <data android:pathPrefix="/OC" />
+                <data android:pathPrefix="/viewcache.php" />
             </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
 
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data
-                    android:host="www.opencaching.de"
-                    android:pathPrefix="/OC"
-                    android:scheme="http" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data
-                    android:host="www.opencaching.de"
-                    android:pathPrefix="/viewcache.php"
-                    android:scheme="http" />
-            </intent-filter>
-            
             <!-- opencaching.ES -->
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -469,36 +385,13 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
-                <data
-                    android:host="opencachingspain.es"
-                    android:pathPrefix="/OC"
-                    android:scheme="http" />
+                <data android:scheme="http" />
+                <data android:host="opencachingspain.es" />
+                <data android:host="www.opencachingspain.es" />
+                <data android:pathPrefix="/OC" />
+                <data android:pathPrefix="/viewcache.php" />
             </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
 
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data
-                    android:host="www.opencachingspain.es"
-                    android:pathPrefix="/OC"
-                    android:scheme="http" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data
-                    android:host="www.opencachingspain.es"
-                    android:pathPrefix="/viewcache.php"
-                    android:scheme="http" />
-            </intent-filter>
-            
             <!-- opencaching.FR -->
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -507,36 +400,13 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
-                <data
-                    android:host="opencaching.fr"
-                    android:pathPrefix="/OC"
-                    android:scheme="http" />
+                <data android:scheme="http" />
+                <data android:host="opencaching.fr" />
+                <data android:host="www.opencaching.fr" />
+                <data android:pathPrefix="/OC" />
+                <data android:pathPrefix="/viewcache.php" />
             </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
 
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data
-                    android:host="www.opencaching.fr"
-                    android:pathPrefix="/OC"
-                    android:scheme="http" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data
-                    android:host="www.opencaching.fr"
-                    android:pathPrefix="/viewcache.php"
-                    android:scheme="http" />
-            </intent-filter>
-            
             <!-- opencaching.IT -->
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -545,36 +415,13 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
-                <data
-                    android:host="opencaching.it"
-                    android:pathPrefix="/OC"
-                    android:scheme="http" />
+                <data android:scheme="http" />
+                <data android:host="opencaching.it" />
+                <data android:host="www.opencaching.it" />
+                <data android:pathPrefix="/OC" />
+                <data android:pathPrefix="/viewcache.php" />
             </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
 
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data
-                    android:host="www.opencaching.it"
-                    android:pathPrefix="/OC"
-                    android:scheme="http" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data
-                    android:host="www.opencaching.it"
-                    android:pathPrefix="/viewcache.php"
-                    android:scheme="http" />
-            </intent-filter>
-            
             <!-- opencaching.NO -->
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -583,36 +430,13 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
-                <data
-                    android:host="opencaching.no"
-                    android:pathPrefix="/OC"
-                    android:scheme="http" />
+                <data android:scheme="http" />
+                <data android:host="opencaching.no" />
+                <data android:host="www.opencaching.no" />
+                <data android:pathPrefix="/OC" />
+                <data android:pathPrefix="/viewcache.php" />
             </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
 
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data
-                    android:host="www.opencaching.no"
-                    android:pathPrefix="/OC"
-                    android:scheme="http" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data
-                    android:host="www.opencaching.no"
-                    android:pathPrefix="/viewcache.php"
-                    android:scheme="http" />
-            </intent-filter>
-            
             <!-- opencaching.NL -->
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -621,36 +445,13 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
-                <data
-                    android:host="opencaching.nl"
-                    android:pathPrefix="/OB"
-                    android:scheme="http" />
+                <data android:scheme="http" />
+                <data android:host="opencaching.nl" />
+                <data android:host="www.opencaching.nl" />
+                <data android:pathPrefix="/OB" />
+                <data android:pathPrefix="/viewcache.php" />
             </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
 
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data
-                    android:host="www.opencaching.nl"
-                    android:pathPrefix="/OB"
-                    android:scheme="http" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data
-                    android:host="www.opencaching.nl"
-                    android:pathPrefix="/viewcache.php"
-                    android:scheme="http" />
-            </intent-filter>
-            
             <!-- opencaching.PL -->
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -659,36 +460,13 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
-                <data
-                    android:host="opencaching.pl"
-                    android:pathPrefix="/OP"
-                    android:scheme="http" />
+                <data android:scheme="http" />
+                <data android:host="opencaching.pl" />
+                <data android:host="www.opencaching.pl" />
+                <data android:pathPrefix="/OP" />
+                <data android:pathPrefix="/viewcache.php" />
             </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
 
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data
-                    android:host="www.opencaching.pl"
-                    android:pathPrefix="/OP"
-                    android:scheme="http" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data
-                    android:host="www.opencaching.pl"
-                    android:pathPrefix="/viewcache.php"
-                    android:scheme="http" />
-            </intent-filter>
-            
             <!-- opencaching.ORG.UK -->
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -697,34 +475,11 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
-                <data
-                    android:host="opencaching.org.uk"
-                    android:pathPrefix="/OK"
-                    android:scheme="http" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data
-                    android:host="www.opencaching.org.uk"
-                    android:pathPrefix="/OK"
-                    android:scheme="http" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data
-                    android:host="www.opencaching.org.uk"
-                    android:pathPrefix="/viewcache.php"
-                    android:scheme="http" />
+                <data android:scheme="http" />
+                <data android:host="opencaching.org.uk" />
+                <data android:host="www.opencaching.org.uk" />
+                <data android:pathPrefix="/OK" />
+                <data android:pathPrefix="/viewcache.php" />
             </intent-filter>
 
             <!-- opencaching.RO -->
@@ -735,36 +490,13 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
-                <data
-                    android:host="opencaching.ro"
-                    android:pathPrefix="/OR"
-                    android:scheme="http" />
+                <data android:scheme="http" />
+                <data android:host="opencaching.ro" />
+                <data android:host="www.opencaching.ro" />
+                <data android:pathPrefix="/OR" />
+                <data android:pathPrefix="/viewcache.php" />
             </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
 
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data
-                    android:host="www.opencaching.ro"
-                    android:pathPrefix="/OR"
-                    android:scheme="http" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data
-                    android:host="www.opencaching.ro"
-                    android:pathPrefix="/viewcache.php"
-                    android:scheme="http" />
-            </intent-filter>
-            
             <!-- opencaching.US -->
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -773,34 +505,11 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
-                <data
-                    android:host="opencaching.us"
-                    android:pathPrefix="/OU"
-                    android:scheme="http" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data
-                    android:host="www.opencaching.us"
-                    android:pathPrefix="/OU"
-                    android:scheme="http" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data
-                    android:host="www.opencaching.us"
-                    android:pathPrefix="/viewcache.php"
-                    android:scheme="http" />
+                <data android:scheme="http" />
+                <data android:host="opencaching.us" />
+                <data android:host="www.opencaching.us" />
+                <data android:pathPrefix="/OU" />
+                <data android:pathPrefix="/viewcache.php" />
             </intent-filter>
         </activity>
 
@@ -835,22 +544,9 @@
 
                 <data android:scheme="http" />
                 <data android:scheme="https" />
-                <data
-                    android:host="geocaching.com"
-                    android:pathPrefix="/track/details.aspx" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data android:scheme="http" />
-                <data android:scheme="https" />
-                <data
-                    android:host="www.geocaching.com"
-                    android:pathPrefix="/track/details.aspx" />
+                <data android:host="geocaching.com" />
+                <data android:host="www.geocaching.com" />
+                <data android:pathPrefix="/track/details.aspx" />
             </intent-filter>
 
             <!-- geocaching.com.au swaggies -->
@@ -867,7 +563,7 @@
                     android:host="geocaching.com.au"
                     android:pathPrefix="/swaggie/sw" />
             </intent-filter>
-            
+
             <!-- GeoKrety.org -->
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -878,22 +574,9 @@
 
                 <data android:scheme="http" />
                 <data android:scheme="https" />
-                <data
-                    android:host="geokrety.org"
-                    android:pathPrefix="/konkret.php" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data android:scheme="http" />
-                <data android:scheme="https" />
-                <data
-                    android:host="www.geokrety.org"
-                    android:pathPrefix="/konkret.php" />
+                <data android:host="geokrety.org" />
+                <data android:host="www.geokrety.org" />
+                <data android:pathPrefix="/konkret.php" />
             </intent-filter>
 
             <!-- GeoKretyMap.org -->
@@ -906,22 +589,10 @@
 
                 <data android:scheme="http" />
                 <data android:scheme="https" />
-                <data
-                    android:host="geokretymap.org"
-                    android:pathPrefix="/" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data android:scheme="http" />
-                <data android:scheme="https" />
-                <data
-                    android:host="www.geokretymap.org"
-                    android:pathPrefix="/" />
+                <data android:host="geokretymap.org" />
+                <data android:host="www.geokretymap.org" />
+                <data android:pathPrefix="/GK" />
+                <data android:pathPrefix="/gk" />
             </intent-filter>
 
         </activity>
