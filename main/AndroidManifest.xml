@@ -913,10 +913,11 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
+                <data android:scheme="http" />
+                <data android:scheme="https" />
                 <data
                     android:host="geokretymap.org"
-                    android:pathPrefix="/"
-                    android:scheme="http" />
+                    android:pathPrefix="/" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -925,10 +926,11 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
+                <data android:scheme="http" />
+                <data android:scheme="https" />
                 <data
                     android:host="www.geokretymap.org"
-                    android:pathPrefix="/"
-                    android:scheme="http" />
+                    android:pathPrefix="/" />
             </intent-filter>
 
         </activity>
