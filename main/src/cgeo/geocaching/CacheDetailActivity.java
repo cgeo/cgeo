@@ -550,7 +550,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         LoggingUI.onPrepareOptionsMenu(menu, cache);
         menu.findItem(R.id.menu_store).setVisible(cache != null && !cache.isOffline());
         menu.findItem(R.id.menu_delete).setVisible(cache != null && cache.isOffline());
-        menu.findItem(R.id.menu_refresh).setVisible(cache != null && cache.isOffline());
+        menu.findItem(R.id.menu_refresh).setVisible(cache != null);
         menu.findItem(R.id.menu_gcvote).setVisible(cache != null && GCVote.isVotingPossible(cache));
         menu.findItem(R.id.menu_checker).setVisible(cache != null && StringUtils.isNotEmpty(CheckerUtils.getCheckerUrl(cache)));
         if (cache != null) {
