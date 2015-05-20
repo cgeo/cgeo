@@ -335,9 +335,10 @@
 
                 <data android:scheme="http" />
                 <data android:scheme="https" />
-                <data
-                    android:host="coord.info"
-                    android:pathPrefix="/GC" />
+                <data android:host="coord.info" />
+                <data android:host="www.coord.info" />
+                <data android:pathPrefix="/GC" />
+                <data android:pathPrefix="/gc" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -816,22 +817,10 @@
 
                 <data android:scheme="http" />
                 <data android:scheme="https" />
-                <data
-                    android:host="coord.info"
-                    android:pathPrefix="/TB" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data android:scheme="http" />
-                <data android:scheme="https" />
-                <data
-                    android:host="www.coord.info"
-                    android:pathPrefix="/TB" />
+                <data android:host="coord.info" />
+                <data android:host="www.coord.info" />
+                <data android:pathPrefix="/TB" />
+                <data android:pathPrefix="/tb" />
             </intent-filter>
 
             <!-- TravelBug URL tracking page -->
