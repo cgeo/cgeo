@@ -1262,6 +1262,9 @@
   <string name="init_geokrety_cache_description">GeoKretyMap.org stellt zwischengespeicherte Daten für GeoKrety Trackables zur Verfügung.\nDie Daten enthalten mehr Infos zu GeoKretys wie z.B. \'Beschreibung\' oder \'Vermisst\'-Status.\n\nDie Daten sind nicht immer aktuell!\nPositionen: ~30min.\nBeschreibungen: ~24h.</string>
   <string name="init_geokrety_cache">Benutze GeoKretyMap.org</string>
   <string name="init_geokrety_userid">Nutzer-ID: %s</string>
+  <string name="trackable_title_log_without_geocode">Geocode nicht gesetzt</string>
+  <string name="trackable_log_without_geocode">Du bist gerade dabei, ein Log ohne Geocode zu senden. Es wird empfohlen, immer einen Geocode anzugeben. Möchtest du einen hinzufügen?</string>
+  <string name="do_not_ask_me_again">Nicht wieder nachfragen</string>
   <string name="settings_map_direction">Zeige Richtungslinie</string>
   <string name="settings_summary_map_direction">Zeigt eine Richtungslinie zum Navigationsziel</string>
   <string name="map_direction">Zeige Richtungslinie</string>
