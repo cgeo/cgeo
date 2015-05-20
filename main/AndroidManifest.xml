@@ -333,10 +333,11 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
+                <data android:scheme="http" />
+                <data android:scheme="https" />
                 <data
                     android:host="coord.info"
-                    android:pathPrefix="/GC"
-                    android:scheme="http" />
+                    android:pathPrefix="/GC" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -345,10 +346,11 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
+                <data android:scheme="http" />
+                <data android:scheme="https" />
                 <data
                     android:host="www.geocaching.com"
-                    android:pathPrefix="/geocache/GC"
-                    android:scheme="http" />
+                    android:pathPrefix="/geocache/GC" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -357,10 +359,11 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
+                <data android:scheme="http" />
+                <data android:scheme="https" />
                 <data
                     android:host="geocaching.com"
-                    android:pathPrefix="/seek/cache_details.aspx"
-                    android:scheme="http" />
+                    android:pathPrefix="/seek/cache_details.aspx" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -369,10 +372,11 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
+                <data android:scheme="http" />
+                <data android:scheme="https" />
                 <data
                     android:host="www.geocaching.com"
-                    android:pathPrefix="/seek/cache_details.aspx"
-                    android:scheme="http" />
+                    android:pathPrefix="/seek/cache_details.aspx" />
             </intent-filter>
             
             <!-- opencaching.CZ -->
@@ -807,10 +811,11 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
+                <data android:scheme="http" />
+                <data android:scheme="https" />
                 <data
                     android:host="coord.info"
-                    android:pathPrefix="/TB"
-                    android:scheme="http" />
+                    android:pathPrefix="/TB" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -819,10 +824,11 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
+                <data android:scheme="http" />
+                <data android:scheme="https" />
                 <data
                     android:host="www.coord.info"
-                    android:pathPrefix="/TB"
-                    android:scheme="http" />
+                    android:pathPrefix="/TB" />
             </intent-filter>
 
             <!-- TravelBug URL tracking page -->
@@ -833,10 +839,11 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
+                <data android:scheme="http" />
+                <data android:scheme="https" />
                 <data
                     android:host="geocaching.com"
-                    android:pathPrefix="/track/details.aspx"
-                    android:scheme="http" />
+                    android:pathPrefix="/track/details.aspx" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -845,10 +852,11 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
+                <data android:scheme="http" />
+                <data android:scheme="https" />
                 <data
                     android:host="www.geocaching.com"
-                    android:pathPrefix="/track/details.aspx"
-                    android:scheme="http" />
+                    android:pathPrefix="/track/details.aspx" />
             </intent-filter>
 
             <!-- geocaching.com.au swaggies -->
