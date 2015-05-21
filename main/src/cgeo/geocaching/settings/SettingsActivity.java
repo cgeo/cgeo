@@ -625,11 +625,9 @@ public class SettingsActivity extends PreferenceActivity {
      */
     private static final Preference.OnPreferenceChangeListener VALUE_CHANGE_LISTENER = new Preference.OnPreferenceChangeListener() {
 
-        private PreferenceManager preferenceManager;
-
         @Override
         public boolean onPreferenceChange(final Preference preference, final Object value) {
-            preferenceManager = preference.getPreferenceManager();
+            final PreferenceManager preferenceManager = preference.getPreferenceManager();
             final String stringValue = value.toString();
 
             if (isPreference(preference, R.string.pref_mapsource)) {
@@ -701,11 +699,11 @@ public class SettingsActivity extends PreferenceActivity {
                 }
                 preference.setSummary(text);
             } else if (isPreference(preference, R.string.pref_ratingwanted)) {
-                findPreference(R.string.preference_screen_gcvote).setSummary(getServiceSummary((Boolean) value));
-                redrawScreen(findPreference(R.string.preference_screen_services));
+                preferenceManager.findPreference(getKey(R.string.preference_screen_gcvote)).setSummary(getServiceSummary((Boolean) value));
+                redrawScreen(preferenceManager.findPreference(getKey(R.string.preference_screen_services)));
             } else if (isPreference(preference, R.string.pref_connectorGeokretyActive)) {
-                findPreference(R.string.preference_screen_geokrety).setSummary(getServiceSummary((Boolean) value));
-                redrawScreen(findPreference(R.string.preference_screen_services));
+                preferenceManager.findPreference(getKey(R.string.preference_screen_geokrety)).setSummary(getServiceSummary((Boolean) value));
+                redrawScreen(preferenceManager.findPreference(getKey(R.string.preference_screen_services)));
             } else {
                 // For all other preferences, set the summary to the value's
                 // simple string representation.
@@ -717,10 +715,6 @@ public class SettingsActivity extends PreferenceActivity {
                 CgeoApplication.getInstance().forceRelog();
             }
             return true;
-        }
-
-        private Preference findPreference(final int preferenceKeyResourceId) {
-            return preferenceManager.findPreference(getKey(preferenceKeyResourceId));
         }
 
     };
