@@ -614,13 +614,13 @@
     <string name="init_sendToCgeo">Send to c:geo</string>
     <string name="settings_info_send2cgeo_title">Info on send2cgeo</string>
     <string name="init_sendToCgeo_name">Your device name</string>
-    <string name="init_sendToCgeo_description"><b>Send2c:geo</b> allows you to send caches to your Android device directly from geocaching.com using a special plugin for Firefox or Chrome. Before registering, please see <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. You only need to register if you want to use send2c:geo. c:geo will work normally without registering your device.</string>
+    <string name="init_sendToCgeo_description"><b>Send2cgeo</b> allows you to send caches to your Android device directly from geocaching.com using a special plugin for Firefox or Chrome. Before registering, please see <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. You only need to register if you want to use send2cgeo. c:geo will work normally without registering your device.</string>
     <string name="init_sendToCgeo_register">Request Registration</string>
-    <string name="init_sendToCgeo_registering">Registering your device for Send2c:geo…</string>
+    <string name="init_sendToCgeo_registering">Registering your device for send2cgeo…</string>
     <string name="init_sendToCgeo_register_ok">Registration successful. PIN code is ####. Use it on the c:geo website to connect this device to your browser.</string>
     <string name="init_sendToCgeo_register_fail">Registration failed.</string>
-    <string name="sendToCgeo_download_fail">c:geo failed to download caches. No internet connection, or send2c:geo is down.</string>
-    <string name="sendToCgeo_no_registration">c:geo failed to download caches. Registration for send2c:geo expired. Please register in settings.</string>
+    <string name="sendToCgeo_download_fail">c:geo failed to download caches. No internet connection, or send2cgeo is down.</string>
+    <string name="sendToCgeo_no_registration">c:geo failed to download caches. Registration for send2cgeo expired. Please register in settings.</string>
 
     <!-- auth generic -->
     <string name="auth_twitter">Twitter</string>
