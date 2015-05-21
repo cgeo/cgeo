@@ -16,5 +16,12 @@
         android:visible="false"
         app:showAsAction="ifRoom|withText">
     </item>
+    <item
+        android:id="@+id/menu_refresh_trackable"
+        android:icon="@drawable/ic_menu_refresh"
+        android:title="@string/trackable_refresh"
+        android:visible="false"
+        app:showAsAction="ifRoom|withText">
+    </item>
 
 </menu>

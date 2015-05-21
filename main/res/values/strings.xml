@@ -957,6 +957,7 @@
     <string name="trackable_details_loading">Loading trackable details…</string>
     <string name="trackable_log_touch">Log touch</string>
     <string name="trackable_browser_open">Open in Browser</string>
+    <string name="trackable_refresh">Refresh</string>
     <string name="trackable_goal">Goal</string>
     <string name="trackable_details">Details</string>
     <string name="trackable_image">Image</string>

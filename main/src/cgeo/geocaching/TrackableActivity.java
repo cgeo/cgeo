@@ -239,6 +239,9 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
             case R.id.menu_browser_trackable:
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(trackable.getUrl())));
                 return true;
+            case R.id.menu_refresh_trackable:
+                refreshTrackable(StringUtils.defaultIfBlank(trackable.getName(), trackable.getGeocode()));
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -248,6 +251,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
         if (trackable != null) {
             menu.findItem(R.id.menu_log_touch).setVisible(StringUtils.isNotBlank(geocode) && trackable.isLoggable());
             menu.findItem(R.id.menu_browser_trackable).setVisible(trackable.hasUrl());
+            menu.findItem(R.id.menu_refresh_trackable).setVisible(true);
         }
         return super.onPrepareOptionsMenu(menu);
     }
