@@ -559,13 +559,13 @@
   <string name="init_sendToCgeo">Send to c:geo</string>
   <string name="settings_info_send2cgeo_title">Informazioni su send2cgeo</string>
   <string name="init_sendToCgeo_name">Nome dispositivo</string>
-  <string name="init_sendToCgeo_description">\"Send to c:geo\" permette di ricevere cache direttamente dal sito geocaching.com tramite un plugin speciale per Firefox o Chrome. Prima della registrazione leggere <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. È necessario registrare questo dispositivo solo se intendi usare send2cgeo. C:geo funzionerà anche senza questa registrazione e senza send2cgeo.</string>
+  <string name="init_sendToCgeo_description"><b>Send2cgeo</b> permette di ricevere cache direttamente dal sito geocaching.com tramite un plugin speciale per Firefox o Chrome. Prima della registrazione leggere <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. È necessario registrare questo dispositivo solo se intendi usare send2cgeo. c:geo funzionerà anche senza questa registrazione e senza send2cgeo.</string>
   <string name="init_sendToCgeo_register">Richiedi registrazione</string>
-  <string name="init_sendToCgeo_registering">Registrazione in corso a \"Send to c:geo\"…</string>
+  <string name="init_sendToCgeo_registering">Registrazione in corso a send2cgeo…</string>
   <string name="init_sendToCgeo_register_ok">Registrazione terminata. Il tuo PIN code è ####. Usalo sul sito di c:geo per aggiungere il dispositivo al tuo browser Firefox o Chrome.</string>
   <string name="init_sendToCgeo_register_fail">Registrazione fallita.</string>
-  <string name="sendToCgeo_download_fail">c:geo non riesce a scaricare cache. Nessuna connessione internet o server send2c:geo non attivo.</string>
-  <string name="sendToCgeo_no_registration">c:geo non riesce a scaricare cache. La registrazione a send2c:geo è scaduta. Si prega di ripeterla nelle impostazioni.</string>
+  <string name="sendToCgeo_download_fail">c:geo non riesce a scaricare cache. Nessuna connessione internet o server send2cgeo non attivo.</string>
+  <string name="sendToCgeo_no_registration">c:geo non riesce a scaricare cache. La registrazione a send2cgeo è scaduta. Si prega di ripeterla nelle impostazioni.</string>
   <string name="auth_twitter">Twitter</string>
   <string name="auth_authorize">Autorizza c:geo</string>
   <string name="auth_start">Avvia autorizzazione</string>

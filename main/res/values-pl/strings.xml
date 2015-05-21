@@ -83,6 +83,7 @@
   <string name="log_saving_and_uploading">Zapisuję w dzienniku i wysyłam zdjęcie…</string>
   <string name="log_clear">Wyczyść</string>
   <string name="log_post_not_possible">Ładuję dziennik…</string>
+  <string name="log_post_geocode_missing">Brak kodu GC skrzynki…</string>
   <string name="log_date_future_not_allowed">Wpisy z przyszłą datą nie są dozwolone.</string>
   <string name="log_add">Dodaj</string>
   <string name="log_repeat">Powtórz ostatni wpis</string>
@@ -128,6 +129,7 @@
   <string name="err_parse">Nieudany odczyt strony logowania.</string>
   <string name="err_server">Nieudane połączenie z Geocaching.com. Strona albo Twoje połączenie internetowe nie działa.</string>
   <string name="err_server_ec">Nieudane połączenie z Extremcaching.com. Strona albo Twoje połączenie internetowe nie działa.</string>
+  <string name="err_server_gk">Nie można nawiązać połączenia ze stroną GeoKrety.org. Strona może nie działać albo nie masz połączenia z internetem.</string>
   <string name="err_login">Brak danych do logowania.</string>
   <string name="err_login_failed_toast">c:geo nie może zalogować się. c:geo pracuje offline z zapisanymi skrzynkami. Sprawdź ustawienia logowania i połączenie z internetem.</string>
   <string name="err_unknown">Nieznany błąd</string>
@@ -166,6 +168,7 @@
   <string name="err_acquire_image_failed">Nie można pobrać obrazu.</string>
   <string name="err_tb_display">c:geo nie może pokazać przedmiotów podróżnych. Czy to naprawdę jest przedmiot podróżny?</string>
   <string name="err_tb_details_open">c:geo nie może otworzyć szczegółów przedmiotu podróżnego.</string>
+  <string name="err_tb_not_loggable">Ten przedmiot podróżny nie jest do logowania.</string>
   <string name="err_tb_find">c:geo nie może znaleźć przedmiotu podróżnego.</string>
   <string name="err_tb_find_that">c:geo nie może znaleźć tego przedmiotu podróżnego.</string>
   <string name="err_waypoint_cache_unknown">c:geo nie wie, do której skrzynki chcesz dodać punkt nawigacji.</string>
@@ -178,6 +181,8 @@
   <string name="err_log_load_data">c:geo nie może załadować danych wymaganych do wpisania wizyty.</string>
   <string name="err_log_load_data_again">c:geo nie może załadować danych wymaganych do wpisania wizyty. Próbuję ponownie.</string>
   <string name="err_log_load_data_still">Nadal trwa ładowanie danych wymaganych do wpisu w dzienniku. Proszę czekać…</string>
+  <string name="err_log_post_missing_tracking_code">Brak kodu przedmiotu podróżnego.</string>
+  <string name="err_log_post_missing_coordinates">Brak współrzędnych.</string>
   <string name="err_log_post_failed">Wygląda na to, że wpis nie został dodany. Proszę sprawdzić to na stronie internetowej skrzynki.</string>
   <string name="err_log_post_failed_ec">Wygląda na to, że Twój wpis nie został wysłany. Proszę sprawdź na Extremcaching.com.</string>
   <string name="err_log_post_failed_gk">Wygląda na to, że Twój wpis nie został wysłany. Proszę sprawdź na GeoKrety.org.</string>
@@ -214,6 +219,8 @@
   <string name="info_stored_image">Nowy obraz zapisany w:</string>
   <string name="info_storing_static_maps">Próbuję zapisać mapy statyczne</string>
   <string name="info_cache_saved">Skrzynka jest przechowywana lokalnie</string>
+  <string name="err_trackable_log_not_anonymous">Zalogowanie %1$s poprzez c:geo nie może być wykonane anonimowo. Czy chcesz otworzyć ustawienia, aby uzupełnić swoje dane do %2$s?</string>
+  <string name="err_trackable_no_preference_activity">Przepraszamy, brak odpowiedniego ekranu preferencji.</string>
   <string name="loc_last">Ostatnia pozycja</string>
   <string name="loc_net">Sieć</string>
   <string name="loc_fused">Połączona</string>
@@ -279,7 +286,17 @@
   <string name="caches_nearby">Najbliższe</string>
   <string name="caches_manage">Zarządzaj</string>
   <string name="caches_remove_all">Usuń wszystkie</string>
+  <plurals name="caches_remove_all_confirm">
+    <item quantity="one">Czy chcesz usunąć wybraną skrzynkę z obecnej listy?</item>
+    <item quantity="few">Czy chcesz usunąć wszystkie %d skrzynki z obecnej listy?</item>
+    <item quantity="other">Czy chcesz usunąć wszystkie %d skrzynek z obecnej listy?</item>
+  </plurals>
   <string name="caches_remove_selected">Usuń wybrane</string>
+  <plurals name="caches_remove_selected_confirm">
+    <item quantity="one">Czy chcesz usunąć wybraną skrzynkę z urządzenia?</item>
+    <item quantity="few">Czy chcesz usunąć %d zaznaczone skrzynki z urządzenia?</item>
+    <item quantity="other">Czy chcesz usunąć %d zaznaczonych skrzynek z urządzenia?</item>
+  </plurals>
   <string name="caches_remove_progress">Usuwanie skrzynek</string>
   <string name="caches_delete_events">Usuń minione wydarzenia</string>
   <string name="caches_refresh_selected">Odśwież wybrane</string>
@@ -342,6 +359,7 @@
   <string name="about_help">Pomoc</string>
   <string name="about_system_include">Proszę załączyć następujące informacje o systemie podczas przesyłania raportu błędu albo podczas prośby o więcej informacji odnośnie c:geo:</string>
   <string name="changelog_github">Lista wszystkich zmian</string>
+  <string name="settings_title_open_settings">Otworzyć ustawienia?</string>
   <string name="settings_title_services">Usługi</string>
   <string name="settings_summary_services">Konfigurowanie informacji o koncie użytkownika i dostęp do usług opcjonalnych.</string>
   <string name="settings_title_appearance">Wygląd</string>
@@ -403,6 +421,8 @@
   <string name="init_login_popup_not_authorized">Brak autoryzacji</string>
   <string name="init_login_popup_invalid_timestamp">Czas lokalny nieprawidłowy, ustaw właściwy czas urządzenia</string>
   <string name="init_login_popup_invalid_token">Autoryzacja nieprawidłowa, spróbuj ponownie</string>
+  <string name="init_authorization_credential_username">Nazwa użytkownia</string>
+  <string name="init_authorization_credential_password">Hasło</string>
   <string name="settings_service_active">Aktywna</string>
   <string name="init_signature">Podpis</string>
   <string name="init_template_help">Tagi jak np. [NAZWA] będą używane w przyszłości.</string>
@@ -523,8 +543,11 @@
   <string name="init_hardware_acceleration_note">Akceleracja sprzętowa renderuje elementy graficzne szybciej na ekranie. Jednakże na niektórych urządzeniach z systemem Android może powodować błędy i część tekstu może być niewyraźna (zwłaszcza pogrubione znaki). Jeśli tak się stanie, należy wyłączyć akcelerację sprzętową.</string>
   <string name="init_hardware_acceleration">Włącz akcelerację sprzętową</string>
   <string name="settings_open_website">Otwórz stronę</string>
+  <string name="settings_open_geokrety_register">Otwórz stronę rejestracyjną GeoKrety.org</string>
+  <string name="settings_open_geokretymap_website">Otwórz stronę GeoKretyMap.org</string>
   <string name="settings_settings">Ustawienia</string>
   <string name="settings_information">Informacje</string>
+  <string name="settings_advanced">Ustawienia zaawansowane</string>
   <string name="settings_twitter_cache_message">Wiadomość o znalezieniu skrzynki</string>
   <string name="settings_twitter_trackable_message">Wiadomość o znalezieniu przedmiotu podróżnego</string>
   <string name="init_ec_icons">Ikony mapy</string>
@@ -551,13 +574,13 @@
   <string name="init_sendToCgeo">Wyślij do c:geo</string>
   <string name="settings_info_send2cgeo_title">Informacje o send2cgeo</string>
   <string name="init_sendToCgeo_name">Nazwa urządzenia</string>
-  <string name="init_sendToCgeo_description"><b>Wyślij do c:geo</b> pozwala Tobie odbierać skrzynki bezpośrednio ze strony geocaching.com za pomocą specjalnego pluginu do przeglądarki Firefox lub Chrome. Przed rejestracją prosimy o zapoznanie się z <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Rejestracja jest wymagana tylko jeśli będziesz używać send2cgeo. c:geo będzie normalnie działał również bez rejestracji urządzenia.</string>
+  <string name="init_sendToCgeo_description"><b>Send2cgeo</b> pozwala Tobie odbierać skrzynki bezpośrednio ze strony geocaching.com za pomocą specjalnego pluginu do przeglądarki Firefox lub Chrome. Przed rejestracją prosimy o zapoznanie się z <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Rejestracja jest wymagana tylko jeśli będziesz używać send2cgeo. c:geo będzie normalnie działał również bez rejestracji urządzenia.</string>
   <string name="init_sendToCgeo_register">Poproś o rejestrację</string>
-  <string name="init_sendToCgeo_registering">Rejestruję Twoje urządzenie do \"Wyślij do c:geo\"…</string>
+  <string name="init_sendToCgeo_registering">Rejestruję Twoje urządzenie do send2cgeo…</string>
   <string name="init_sendToCgeo_register_ok">Rejestracja udana. Kod PIN to ####. Użyj go na stronie c:geo, aby dodać urządzenie do przeglądarki.</string>
   <string name="init_sendToCgeo_register_fail">Rejestracja nie powiodła się.</string>
-  <string name="sendToCgeo_download_fail">c:geo nie może pobrać skrzynek. Brak połączenia z internetem lub narzędzie send2c:geo jest wyłączone.</string>
-  <string name="sendToCgeo_no_registration">c:geo nie może pobrać skrzynek. Rejestracja do send2c:geo wygasła. Proszę zarejestrować urządzenie w Ustawieniach.</string>
+  <string name="sendToCgeo_download_fail">c:geo nie może pobrać skrzynek. Brak połączenia z internetem lub narzędzie send2cgeo jest wyłączone.</string>
+  <string name="sendToCgeo_no_registration">c:geo nie może pobrać skrzynek. Rejestracja do send2cgeo wygasła. Proszę zarejestrować urządzenie w Ustawieniach.</string>
   <string name="auth_twitter">Twitter</string>
   <string name="auth_authorize">Autoryzacja c:geo</string>
   <string name="auth_start">Rozpoczynam autoryzację</string>
@@ -565,10 +588,16 @@
   <string name="auth_dialog_waiting">Czekanie na %s…</string>
   <string name="auth_explain_short">Wybrany proces pozwoli na dostęp <b>c:geo</b> do %s.</string>
   <string name="auth_explain_long">Naciśnięcie \"autoryzuj c:geo\" rozpocznie proces autoryzacji. Zostanie otwarte okno przeglądarki ze stroną %s. Zaloguj się na tej stronie i zezwól <b>c:geo</b> na dostęp do konta.</string>
+  <string name="auth_token_register">Utwórz konto</string>
+  <string name="auth_token_explain_short">Następujący proces umożliwi <b>c:geo</b> na dostęp do %s.</string>
+  <string name="auth_token_explain_long">Po uzupełnieniu danych użytkownika i naciśnięciu przycisku \"authorize c:geo\" proces uwierzytelnienia zostanie rozpoczęty. Aplikacja połączy się z %s i otrzyma token uwierzytelniający. To wszytko.</string>
   <string name="auth_dialog_completed_twitter">c:geo jest teraz autoryzowane do zamieszczania postów na Twitterze.</string>
   <string name="auth_ocde">opencaching.de</string>
   <string name="auth_ocpl">opencaching.pl</string>
   <string name="auth_dialog_completed_oc">c:geo został zautoryzowany by komunikować się z %s.</string>
+  <string name="auth_dialog_completed_geokrety">Aplikacja c:geo jest teraz upoważniona do interakcji z %s.</string>
+  <string name="err_auth_geokrety_bad_password">Nazwa użytkownika lub hasło wygląda na nieprawidłowe.</string>
+  <string name="err_auth_geokrety_unknown">%1$s zwrócił: %2$s.</string>
   <plurals name="cache_counts">
     <item quantity="one">Jedna skrzynka</item>
     <item quantity="few">%1$d skrzynki</item>
@@ -658,6 +687,7 @@
   <string name="cache_menu_map_static">Mapa statyczna</string>
   <string name="cache_menu_download_map_static">Pobierz mapę statyczną</string>
   <string name="cache_menu_rmaps">Rmaps</string>
+  <string name="cache_menu_map_ext">Inne aplikacje zewnętrzne</string>
   <string name="cache_menu_streetview">Street View</string>
   <string name="cache_menu_browser">Otwórz w przeglądarce</string>
   <string name="cache_menu_visit">Wpisz wizytę</string>
@@ -847,6 +877,7 @@
   <string name="trackable_goal">Cel</string>
   <string name="trackable_details">Szczegóły</string>
   <string name="trackable_image">Zdjęcie</string>
+  <string name="trackable_code">Kod przedmiotu podróżnego</string>
   <string name="trackable_name">Nazwa</string>
   <string name="trackable_type">Typ</string>
   <string name="trackable_owner">Właściciel</string>
@@ -877,6 +908,8 @@
   <string name="user_menu_open_contact">Otwórz wizytówkę kontaktu</string>
   <string name="navigation">Nawigacja</string>
   <string name="compass_title">Kompas</string>
+  <string name="use_gps">Tylko GPS</string>
+  <string name="use_compass">GPS i kompas magnetyczny</string>
   <string name="destination_select">Wybierz cel</string>
   <string name="navigation_direct_navigation">Bezpośrednia nawigacja</string>
   <string name="navigation_target">Cel</string>
@@ -905,6 +938,8 @@
   <string name="helper_google_translate_description">Jeśli pobierzesz paczki tłumaczeń w aplikacji Google Tłumacz, będziesz mógł łatwo tłumaczyć opisy skrzynek przytrzymując na nich palcem chwilę dłużej (bez połączenia z internetem).</string>
   <string name="addon_missing_title">Brakujący dodatek</string>
   <string name="addon_download_prompt">Pobierz teraz z Google Play.</string>
+  <string name="export">Eksport</string>
+  <string name="export_progress">Eksportowanie: %1$s</string>
   <string name="export_exportedto">wyeksportowano do</string>
   <string name="export_failed">Eksport nie powiódł się</string>
   <string name="export_fieldnotes">Notatki</string>
@@ -917,6 +952,8 @@
   <string name="export_gpx">GPX</string>
   <string name="export_gpx_info">Plik GPX będzie wyeksportowany do %1$s z obecną datą i czasem jako nazwą pliku.</string>
   <string name="export_gpx_to">Wyślij wyeksportowany GPX do</string>
+  <string name="export_confirm_title">Eksportowanie %1$s</string>
+  <string name="export_confirm_message">Ścieżka: %1$s\nNazwa pliku: %2$s</string>
   <string name="attribute_dogs_yes">Psy dozwolone</string>
   <string name="attribute_dogs_no">Psy niedozwolone</string>
   <string name="attribute_bicycles_yes">Rowery dozwolone</string>
@@ -1216,5 +1253,18 @@
   <string name="showcase_compass_hint_text">Ten nowy element menu może Ci pomóc przy szukaniu skrzynki - pokazuje podpowiedź, o ile jest dostępna.</string>
   <string name="confirm_log_title">Niezwykły typ wpisu</string>
   <string name="confirm_log_message">Chcesz wpisać \'%s\'. Czy jesteś pewien?</string>
+  <string name="settings_activate_geokrety">Aktywuj</string>
   <string name="init_geokrety">GeoKrety.org</string>
+  <string name="init_connectorGeokretyActive">Geokrety</string>
+  <string name="init_summary_geokrety">Włącz przedmioty podróżne z GeoKrety.org</string>
+  <string name="init_summary_geokrety_account">Brak skonfigurowanego konta.</string>
+  <string name="init_geokrety_register_ok">Zalogowano</string>
+  <string name="init_geokrety_register_fail">Logowanie nieudane</string>
+  <string name="init_geokrety_description">Zezwól c:geo na logowanie GeoKretów na GeoKrety.org.</string>
+  <string name="init_geokrety_cache_description">GeokretyMap.org dostarcza informacji o GeoKretach.\nDostępne dane zawierają więcej informacji o GeoKretach takich jak \'opis\' lub status \'zagubiony\' .\n\nDane nie są aktualizowane na bieżąco!\nPozycja: ~30min.\nOpis: ~24h.</string>
+  <string name="init_geokrety_cache">Używaj GeoKretyMap.org</string>
+  <string name="init_geokrety_userid">ID użytkownika: %s</string>
+  <string name="settings_map_direction">Pokazuj kierunek</string>
+  <string name="settings_summary_map_direction">Pokazuj linię kierunku do punktu nawigacyjnego</string>
+  <string name="map_direction">Pokaż kierunek</string>
 </resources>

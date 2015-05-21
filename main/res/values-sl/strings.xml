@@ -530,7 +530,7 @@
   <string name="init_sendToCgeo_name">Ime naprave:</string>
   <string name="init_sendToCgeo_description"><b>Send2cgeo</b> vam omogoča prenos zakladov direktno iz spletne strani Geocaching.com. Potrebujete še razširitev za brskalnik Firefox ali Chrome. Pred registracijo preberite<a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Registracijo potrebujete samo če želite uporabljati možnost send2cgeo. c:geo bo normalno deloval tudi brez registracije naprave.</string>
   <string name="init_sendToCgeo_register">Zahtevaj registracijo</string>
-  <string name="init_sendToCgeo_registering">Registriramo vašo napravo za \"send2cgeo\"…</string>
+  <string name="init_sendToCgeo_registering">Registriramo vašo napravo za send2cgeo…</string>
   <string name="init_sendToCgeo_register_ok">Registracija je uspela. PIN koda je ####. Uporabite jo na spletni strani c:geo, da dodate kodo v vaš brskalnik.</string>
   <string name="init_sendToCgeo_register_fail">Registration ni uspela.</string>
   <string name="sendToCgeo_download_fail">c:geo ni uspel prenesti zakladov. Vaša povezava z internetom morda ne deluje, ali pa ne deluje spletna stran send2cgeo.</string>

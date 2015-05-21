@@ -74,11 +74,16 @@
   <string name="log_tb_visit">Besøgt</string>
   <string name="log_tb_drop">Læg her</string>
   <string name="log_tb_changeall">Ændr alle</string>
+  <string name="log_tb_grabbed">Taget fra andet sted</string>
+  <string name="log_tb_note">Note</string>
+  <string name="log_tb_discovered">Set</string>
+  <string name="log_tb_archived">Arkiveret</string>
   <string name="log_save">Gem offline</string>
   <string name="log_saving">Sender logbesked…</string>
   <string name="log_saving_and_uploading">Sender logbesked og billede…</string>
   <string name="log_clear">Fjern</string>
   <string name="log_post_not_possible">Indlæser logside…</string>
+  <string name="log_post_geocode_missing">Geocode mangler…</string>
   <string name="log_date_future_not_allowed">Logdatoer, der ligger i fremtiden, er ikke tilladt.</string>
   <string name="log_add">Tilføj</string>
   <string name="log_repeat">Gentag sidste logbesked</string>
@@ -163,6 +168,7 @@
   <string name="err_acquire_image_failed">Optagelse af et billede mislykkedes.</string>
   <string name="err_tb_display">c:geo kan ikke vise den forespurgte Trackable. Er det virkelig en Trackable?</string>
   <string name="err_tb_details_open">c:geo kan ikke åbne Trackable-detaljer.</string>
+  <string name="err_tb_not_loggable">Denne trackable kan ikke logges.</string>
   <string name="err_tb_find">c:geo kan ikke finde den forespurgte Trackable</string>
   <string name="err_tb_find_that">c:geo kan ikke finde den forespurgte Trackable.</string>
   <string name="err_waypoint_cache_unknown">c: geo ved ikke hvilken cache, du ønsker at tilføje et waypoint til.</string>
@@ -175,7 +181,10 @@
   <string name="err_log_load_data">c: geo kan ikke indlæse de data, der kræves for at logge besøget.</string>
   <string name="err_log_load_data_again">c: geo kan ikke indlæse de data, der kræves for at logge besøget. Forsøger igen.</string>
   <string name="err_log_load_data_still">c:geo forsøger stadig at indlæse de data, som kræves for at sende logbeskeden. Vent venligst.</string>
+  <string name="err_log_post_missing_tracking_code">Trackingkoden mangler.</string>
+  <string name="err_log_post_missing_coordinates">Koordinaterne mangler.</string>
   <string name="err_log_post_failed">Din logbesked blev muligvis ikke uploadet. Kontrollér logbeskeden på geocachens hjemmeside.</string>
+  <string name="err_log_post_failed_ec">Din logbesked blev muligvis ikke blev gemt korrekt. Kontrollér venligst på extremecaching.com.</string>
   <string name="err_log_post_failed_gk">Det lader til, at din log ikke er blevet gemt. Check det venligst på GeoKrety.org.</string>
   <string name="err_logimage_post_failed">Dit logbillede blev muligvis ikke uploadet korrekt. Kontrollér billedet på geocachens hjemmeside.</string>
   <string name="err_search_address_forgot">c: geo glemte den adresse, du forsøgte at finde.</string>
@@ -210,6 +219,8 @@
   <string name="info_stored_image">Nyt billede gemt til:</string>
   <string name="info_storing_static_maps">Forsøger at gemme statiske kort</string>
   <string name="info_cache_saved">Cachen blev gemt lokalt</string>
+  <string name="err_trackable_log_not_anonymous">Logning af %1$s kan ikke udføres anonymt fra c:geo. Ønsker du at konfigurere dine legitimationsoplysninger til %2$s?</string>
+  <string name="err_trackable_no_preference_activity">Der findes ingen egnet indstillingsskærm.</string>
   <string name="loc_last">Sidst kendte</string>
   <string name="loc_net">Netværk</string>
   <string name="loc_fused">Kombineret</string>
@@ -279,6 +290,10 @@
     <item quantity="other">Ønsker du at fjerne alle %d cacher fra den aktuelle liste?</item>
   </plurals>
   <string name="caches_remove_selected">Fjern valgte</string>
+  <plurals name="caches_remove_selected_confirm">
+    <item quantity="one">Vil du fjerne denne cache fra enheden?</item>
+    <item quantity="other">Vil du slette de valgte %d caches fra din enhed?</item>
+  </plurals>
   <string name="caches_remove_progress">Fjerner cacher</string>
   <string name="caches_delete_events">Slet tidligere begivenheder</string>
   <string name="caches_refresh_selected">Genindlæs valgte</string>
@@ -341,6 +356,7 @@
   <string name="about_help">Hjælp</string>
   <string name="about_system_include">Vedhæft følgende systemoplysninger når du sender en fejlrapport eller beder om yderligere oplysninger om c:geo:</string>
   <string name="changelog_github">Liste over alle ændringer</string>
+  <string name="settings_title_open_settings">Åbn indstillinger?</string>
   <string name="settings_title_services">Tjenester</string>
   <string name="settings_summary_services">Konfigurér oplysninger om brugerkonto og adgang til valgfrie tjenester.</string>
   <string name="settings_title_appearance">Udseende</string>
@@ -406,6 +422,8 @@
   <string name="init_login_popup_not_authorized">Ikke godkendt</string>
   <string name="init_login_popup_invalid_timestamp">Din enheds ur er ikke korrekt indstillet. Du skal indstille enhedens ur</string>
   <string name="init_login_popup_invalid_token">Godkendelse ikke gyldig. Godkend igen.</string>
+  <string name="init_authorization_credential_username">Brugernavn</string>
+  <string name="init_authorization_credential_password">Adgangskode</string>
   <string name="settings_service_active">Aktiv</string>
   <string name="init_signature">Signatur</string>
   <string name="init_template_help">Pladsholdere, som for eksempel [NAME], vil blive erstattet når skabelonen bliver anvendt.</string>
@@ -530,6 +548,7 @@
   <string name="settings_open_geokretymap_website">Åbn GeoKretyMap.org hjemmeside</string>
   <string name="settings_settings">Indstillinger</string>
   <string name="settings_information">Information</string>
+  <string name="settings_advanced">Avancerede indstillinger</string>
   <string name="settings_twitter_cache_message">Besked for funden cache</string>
   <string name="settings_twitter_trackable_message">Besked for funden Trackable</string>
   <string name="init_ec_icons">Kortsymboler</string>
@@ -556,13 +575,13 @@
   <string name="init_sendToCgeo">Send2c:geo</string>
   <string name="settings_info_send2cgeo_title">Beskrivelse af send2c:geo</string>
   <string name="init_sendToCgeo_name">Din enheds navn</string>
-  <string name="init_sendToCgeo_description"><b>Send2c:geo</b> (send til c:geo) giver dig mulighed for at sende cacher til din Android-enhed direkte fra geocaching.com ved hjælp af en plugin til Firefox eller Chrome. Læs venligst <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a> før du registrerer din enhed. Det er kun nødvendigt at registrere din enhed hvis du ønsker at bruge send2c:geo. c:geo vil fungere normalt uden denne registrering.</string>
+  <string name="init_sendToCgeo_description"><b>Send2cgeo</b> (send til c:geo) giver dig mulighed for at sende cacher til din Android-enhed direkte fra geocaching.com ved hjælp af en plugin til Firefox eller Chrome. Læs venligst <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a> før du registrerer din enhed. Det er kun nødvendigt at registrere din enhed hvis du ønsker at bruge send2cgeo. c:geo vil fungere normalt uden denne registrering.</string>
   <string name="init_sendToCgeo_register">Anmod om registrering</string>
-  <string name="init_sendToCgeo_registering">Registrér din enhed til brug sammen med send2c:geo…</string>
+  <string name="init_sendToCgeo_registering">Registrér din enhed til brug sammen med send2cgeo…</string>
   <string name="init_sendToCgeo_register_ok">Registrering lykkedes. PIN-koden er ####. Brug koden på c:geo websitet for at oprette forbindelse mellem denne enhed og din browser.</string>
   <string name="init_sendToCgeo_register_fail">Registrering mislykkedes.</string>
-  <string name="sendToCgeo_download_fail">c:geo kunne ikke indlæse cacher. Der er ingen Internetforbindelse eller send2c:geo-websitet svarer ikke.</string>
-  <string name="sendToCgeo_no_registration">c:geo kunne ikke indlæse cacher. Registrering af send2c:geo er udløbet. Registrér venligst under Indstillinger.</string>
+  <string name="sendToCgeo_download_fail">c:geo kunne ikke indlæse cacher. Der er ingen Internetforbindelse eller send2cgeo-websitet svarer ikke.</string>
+  <string name="sendToCgeo_no_registration">c:geo kunne ikke indlæse cacher. Registrering af send2cgeo er udløbet. Registrér venligst under Indstillinger.</string>
   <string name="auth_twitter">Twitter</string>
   <string name="auth_authorize">Godkend c:geo</string>
   <string name="auth_start">Start godkendelse</string>
@@ -570,6 +589,9 @@
   <string name="auth_dialog_waiting">Venter på %s…</string>
   <string name="auth_explain_short">Den følgende proces vil give <b>c:geo</b> tilladelse til at tilgå %s.</string>
   <string name="auth_explain_long">Når du trykker på \"Godkend c:geo\" vil du starten en godkendelsesprocedure. En browser vil blive åbnet med en %s-side, som du skal logge ind på for at godkende at <b>c:geo</b> kan tilgå din konto.</string>
+  <string name="auth_token_register">Opret en konto</string>
+  <string name="auth_token_explain_short">Ved at gennemføre denne opsætning, tillader du at <b>c:geo</b> kan få adgang til %s.</string>
+  <string name="auth_token_explain_long">Ved at udfylde dine legitimationsoplysninger og aktivere \"Autorisér c:geo\"-knappen starter opsætningen. Under opsætningen vil der blive hentet et autentifikationsobjekt fra %s.</string>
   <string name="auth_dialog_completed_twitter">c:geo er nu godkendt til at lave opslag på Twitter.</string>
   <string name="auth_ocde">opencaching.de</string>
   <string name="auth_ocpl">opencaching.pl</string>
@@ -578,6 +600,9 @@
   <string name="auth_ocro">opencaching.ro</string>
   <string name="auth_ocuk">opencaching.org.uk</string>
   <string name="auth_dialog_completed_oc">c:geo er nu godkendt til at arbejde sammen med %s.</string>
+  <string name="auth_dialog_completed_geokrety">c:geo er nu autoriseret til at interagere med %s.</string>
+  <string name="err_auth_geokrety_bad_password">Brugernavn og adgangskode er muligvis ikke korrekte.</string>
+  <string name="err_auth_geokrety_unknown">%1$s svarede: %2$s.</string>
   <plurals name="cache_counts">
     <item quantity="one">En cache</item>
     <item quantity="other">%1$d cacher</item>
@@ -665,6 +690,7 @@
   <string name="cache_menu_map_static">Statiske kort</string>
   <string name="cache_menu_download_map_static">Indlæs statiske kort</string>
   <string name="cache_menu_rmaps">Rmaps</string>
+  <string name="cache_menu_map_ext">Andre eksterne apps</string>
   <string name="cache_menu_streetview">Street View</string>
   <string name="cache_menu_browser">Åbn i browser</string>
   <string name="cache_menu_visit">Log besøg</string>
@@ -853,6 +879,7 @@
   <string name="trackable_goal">Mål</string>
   <string name="trackable_details">Detaljer</string>
   <string name="trackable_image">Billede</string>
+  <string name="trackable_code">Sporingskode</string>
   <string name="trackable_name">Navn</string>
   <string name="trackable_type">Type</string>
   <string name="trackable_owner">Ejer</string>
@@ -883,6 +910,8 @@
   <string name="user_menu_open_contact">Åbn kontaktdetaljer</string>
   <string name="navigation">Navigation</string>
   <string name="compass_title">Kompas</string>
+  <string name="use_gps">GPS i brug</string>
+  <string name="use_compass">GPS og magnetisk kompas i brug</string>
   <string name="destination_select">Vælg destination</string>
   <string name="navigation_direct_navigation">Direkte navigation</string>
   <string name="navigation_target">Mål</string>
@@ -911,6 +940,8 @@
   <string name="helper_google_translate_description">Hvis du har downloadet oversættelsespakker til Google Oversæt appen, kan du let oversætte cachebeskrivelser i c:geo ved at trykke lang tid på teksten (kræver ikke Internetforbindelse).</string>
   <string name="addon_missing_title">Manglende plugin</string>
   <string name="addon_download_prompt">Hent fra Google Play nu.</string>
+  <string name="export">Eksportér</string>
+  <string name="export_progress">Eksportér: %1$s</string>
   <string name="export_exportedto">eksporteret til</string>
   <string name="export_failed">Eksport fejlede</string>
   <string name="export_fieldnotes">Feltnoter</string>
@@ -923,6 +954,8 @@
   <string name="export_gpx">GPX</string>
   <string name="export_gpx_info">GPX-filen vil blive eksporteret til %1$s med den aktuelle dato og tidspunkt som filnavn.</string>
   <string name="export_gpx_to">Send eksporteret GPX-fil til</string>
+  <string name="export_confirm_title">Eksporterer %1$s</string>
+  <string name="export_confirm_message">Sti: %1$s\nFilnavn: %2$s</string>
   <string name="attribute_dogs_yes">Hunde tilladt</string>
   <string name="attribute_dogs_no">Hunde ikke tilladt</string>
   <string name="attribute_bicycles_yes">Cykler tilladt</string>
@@ -1194,6 +1227,10 @@
   <string name="tts_one_oclock">klokken et</string>
   <string name="tts_oclock">klokken %s</string>
   <string name="clipboard_copy_ok">Kopieret til udklipsholder</string>
+  <plurals name="days_ago">
+    <item quantity="one">i går</item>
+    <item quantity="other">for %d dage siden</item>
+  </plurals>
   <plurals name="favorite_points">
     <item quantity="one">%s favorit</item>
     <item quantity="other">%s favoritter</item>
@@ -1212,6 +1249,29 @@
   <string name="showcase_compass_hint_text">Dette nye menupunkt kan give dig en idé om hvor man kan finde cachen - det viser tippet, hvis det er tilgængelig.</string>
   <string name="confirm_log_title">Usædvanlig logtype</string>
   <string name="confirm_log_message">Du er ved at logge \"%s\". Er du sikker?</string>
+  <string name="settings_activate_geokrety">Aktivér</string>
   <string name="init_geokrety">GeoKrety.org</string>
+  <string name="init_connectorGeokretyActive">Geokrety Trackables</string>
   <string name="init_summary_geokrety">Aktivér trackables fra GeoKrety.org</string>
+  <string name="init_summary_geokrety_account">Ingen konto er konfigureret.</string>
+  <string name="init_geokrety_register_ok">Login fuldført</string>
+  <string name="init_geokrety_register_fail">Login fejlede</string>
+  <string name="init_geokrety_description">Autorisér c:geo til at logge GeoKrety trackables på GeoKrety.org.</string>
+  <string name="init_geokrety_cache">Brug GeoKretyMap.org</string>
+  <string name="init_geokrety_userid">Brugerid: %s</string>
+  <string name="settings_map_direction">Vis retning</string>
+  <string name="settings_summary_map_direction">Vis pejlelinie til navigationsmål</string>
+  <string name="map_direction">Vis retning</string>
+  <string name="command_move_caches_progress">Flytter cacher til liste %1s</string>
+  <plurals name="command_move_caches_result">
+    <item quantity="one">Flyttede %d cache</item>
+    <item quantity="other">Flyttede %d cacher</item>
+  </plurals>
+  <string name="command_delete_caches_progress">Sletter cacher</string>
+  <plurals name="command_delete_caches_result">
+    <item quantity="one">Slettede %d cache</item>
+    <item quantity="other">Slettede %d cacher</item>
+  </plurals>
+  <string name="command_rename_list_result">Liste omdøbt</string>
+  <string name="command_delete_list_result">Listen blev slettet</string>
 </resources>

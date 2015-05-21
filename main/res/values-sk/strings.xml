@@ -560,13 +560,13 @@
   <string name="init_sendToCgeo">Poslať do c:geo</string>
   <string name="settings_info_send2cgeo_title">Info o send2cgeo</string>
   <string name="init_sendToCgeo_name">Názov vášho zariadenia</string>
-  <string name="init_sendToCgeo_description">Poslanie do c:geo umožní prijímanie skrýš priamo z geocaching.com použitím špeciálneho rozšírenia do Firefoxu či Chrome. Pred registráciou si prosím prečítajte <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Registrácia je potrebná, iba keď chcete používať send2cgeo. c:geo bude fungovať i bez registrovaného zariadenia.</string>
+  <string name="init_sendToCgeo_description"><b>Send2cgeo</b> umožní prijímanie skrýš priamo z geocaching.com použitím špeciálneho rozšírenia do Firefoxu či Chrome. Pred registráciou si prosím prečítajte <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Registrácia je potrebná, iba keď chcete používať send2cgeo. c:geo bude fungovať i bez registrovaného zariadenia.</string>
   <string name="init_sendToCgeo_register">Žiadosť o registráciu</string>
-  <string name="init_sendToCgeo_registering">Registrácia zariadenia pre Send2c:geo…</string>
+  <string name="init_sendToCgeo_registering">Registrácia zariadenia pre send2cgeo…</string>
   <string name="init_sendToCgeo_register_ok">Registrácia úspešná. PIN kód je ####. Použite ho na stránkach c:geo pre pridanie tohto zariadenia do vášho prehliadača.</string>
   <string name="init_sendToCgeo_register_fail">Registrácia zlyhala.</string>
-  <string name="sendToCgeo_download_fail">c:geo sa nepodarilo stiahnuť skrýše. Nie je dostupné pripojenie k Internetu alebo send2c:geo je nefunkčné.</string>
-  <string name="sendToCgeo_no_registration">c:geo sa nepodarilo stiahnuť skrýše. Registrácia send2c:geo expirovala. Zaregistrujte sa, prosím, v nastaveniach.</string>
+  <string name="sendToCgeo_download_fail">c:geo sa nepodarilo stiahnuť skrýše. Nie je dostupné pripojenie k Internetu alebo send2cgeo je nefunkčné.</string>
+  <string name="sendToCgeo_no_registration">c:geo sa nepodarilo stiahnuť skrýše. Registrácia send2cgeo expirovala. Zaregistrujte sa, prosím, v nastaveniach.</string>
   <string name="auth_twitter">Twitter</string>
   <string name="auth_authorize">Autorizovať c:geo</string>
   <string name="auth_start">Zahájiť autorizáciu</string>
