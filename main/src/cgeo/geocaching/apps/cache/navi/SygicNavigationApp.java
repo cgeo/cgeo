@@ -11,8 +11,7 @@ import android.content.Intent;
 import android.net.Uri;
 
 /**
- * http://help.sygic.com/entries/22207668-developers-only-sygic-implementation-to-your-app-android-sdk-iphone-sdk-url-
- * handler
+ * http://developers.sygic.com/documentation.php?action=customurl_android
  *
  */
 class SygicNavigationApp extends AbstractPointNavigationApp {
@@ -34,7 +33,7 @@ class SygicNavigationApp extends AbstractPointNavigationApp {
 
     @Override
     public void navigate(final @NonNull Activity activity, final @NonNull Geopoint coords) {
-        final String str = "http://com.sygic.aura/coordinate|" + coords.getLongitude() + "|" + coords.getLatitude() + "|show";
+        final String str = "com.sygic.aura://coordinate|" + coords.getLongitude() + "|" + coords.getLatitude() + "|show";
         activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(str)));
     }
 
