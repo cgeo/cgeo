@@ -10,8 +10,6 @@ import ch.boye.httpclientandroidlib.HttpResponse;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.Nullable;
 
-import android.os.Bundle;
-
 import java.util.regex.Pattern;
 
 public class GeokretyAuthorizationActivity extends TokenAuthorizationActivity {
@@ -24,11 +22,6 @@ public class GeokretyAuthorizationActivity extends TokenAuthorizationActivity {
             "http://geokrety.org/adduser.php",
             "login",
             "password");
-
-    @Override
-    public void onCreate(final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
 
     @Override
     protected void setToken(final String token) {
