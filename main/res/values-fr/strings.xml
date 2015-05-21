@@ -575,13 +575,13 @@
   <string name="init_sendToCgeo">Envoyer vers c:geo</string>
   <string name="settings_info_send2cgeo_title">Informations sur send2cgeo</string>
   <string name="init_sendToCgeo_name">Le nom de votre appareil</string>
-  <string name="init_sendToCgeo_description"><b>Envoyer vers c:geo</b> permet de recevoir les caches directement depuis le site Geocaching.com en utilisant une extension pour Firefox ou Chrome. Après votre inscription, veuillez lire <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Pour utiliser send2cgeo, vous avez juste besoin de vous inscrire. c:geo fonctionnera aussi sans enregistrer votre appareil.</string>
+  <string name="init_sendToCgeo_description"><b>Send2cgeo</b> permet de recevoir les caches directement depuis le site Geocaching.com en utilisant une extension pour Firefox ou Chrome. Après votre inscription, veuillez lire <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Pour utiliser send2cgeo, vous avez juste besoin de vous inscrire. c:geo fonctionnera aussi sans enregistrer votre appareil.</string>
   <string name="init_sendToCgeo_register">Demande d\'enregistrement</string>
-  <string name="init_sendToCgeo_registering">Enregistrez votre appareil pour \"Send to c:geo\"…</string>
+  <string name="init_sendToCgeo_registering">Enregistrez votre appareil pour send2cgeo…</string>
   <string name="init_sendToCgeo_register_ok">Enregistrement réussi. Le code PIN est ####. Utiliser le sur le site de c:geo pour ajouter votre appareil dans votre navigateur.</string>
   <string name="init_sendToCgeo_register_fail">Échec de l\'enregistrement.</string>
-  <string name="sendToCgeo_download_fail">c:geo n\'a pas pu charger les caches. Pas de connexion Internet ou problème avec le site send2c:geo.</string>
-  <string name="sendToCgeo_no_registration">c:geo n\'a pas pu charger les caches. L\'abonnement à send2c:geo a expiré. Merci de vous réenregistrer dans les Paramètres.</string>
+  <string name="sendToCgeo_download_fail">c:geo n\'a pas pu charger les caches. Absence de connexion Internet ou problème avec le site send2cgeo.</string>
+  <string name="sendToCgeo_no_registration">c:geo n\'a pas pu charger les caches. L\'enregistrement sur send2cgeo a expiré. Merci de vous réenregistrer en allant dans les Paramètres.</string>
   <string name="auth_twitter">twitter</string>
   <string name="auth_authorize">autorisation de c:geo</string>
   <string name="auth_start">début d\'autorisation</string>
@@ -591,7 +591,7 @@
   <string name="auth_explain_long">L\'appui sur \"Autoriser c:geo\" démarrera le processus. Un navigateur web ouvrira la page de %s. Vous pourrez vous connecter sur votre compte et en autoriser l\'accès à <b>c:geo</b>. C\'est tout.</string>
   <string name="auth_token_register">Créer un compte</string>
   <string name="auth_token_explain_short">Vous êtes sur le point d\'autoriser <b>c:geo</b> à accéder à %s.</string>
-  <string name="auth_token_explain_long">Saisissez vos informations d\'identification puis appuyez sur \"Autoriser c:geo\" ... nous allons nous connecter à %s avec vos identifiants et récupérer un jeton d\'authentification. C\'est tout ;-).</string>
+  <string name="auth_token_explain_long">Saisissez vos informations d\'identification puis appuyez sur \"Autoriser c:geo\" … nous allons nous connecter à %s avec vos identifiants et récupérer un jeton d\'authentification. C\'est tout.</string>
   <string name="auth_dialog_completed_twitter">c:geo est maintenant autorisé à poster sur Twitter.</string>
   <string name="auth_ocde">opencaching.de</string>
   <string name="auth_ocpl">opencaching.pl</string>
@@ -777,8 +777,8 @@
   <string name="gpx_import_select_list_title">Importer GPX dans la liste</string>
   <string name="gpx_import_android">Import depuis Android</string>
   <string name="map_file_select_title">Choisir un fichier carte</string>
-  <string name="web_import_title">Import depuis le web</string>
-  <string name="web_import_waiting">En attente de nouvelles caches depuis le web…</string>
+  <string name="web_import_title">Importer avec send2cgeo</string>
+  <string name="web_import_waiting">En attente des caches envoyées par send2cgeo…</string>
   <string name="web_downloading">Téléchargement</string>
   <string name="web_downloaded">Téléchargé</string>
   <string name="popup_more">Plus de détails</string>
@@ -846,8 +846,8 @@
   <string name="map_strategy_auto">En fonction du déplacement</string>
   <string name="map_strategy_detailed">Détaillée</string>
   <string name="live_map_notification">Lors de l\'affichage de la carte temps-réel, les coordonnées de certaines caches peuvent être imprécises, elles sont alors entourées d\'un cercle orange.\nConsultez les détails d\'une cache ou enregistrez-la pour une utilisation hors-ligne afin d\'obtenir ses coordonnées exactes.\n\nVous trouverez plus d\'informations sur la page d\'aide accessible depuis \"À propos de c:geo\".</string>
-  <string name="search_bar_hint">Recherche de caches</string>
-  <string name="search_bar_desc">Caches (code, mot-clé), Objets voyageurs (code TB)</string>
+  <string name="search_bar_hint">Recherche globale</string>
+  <string name="search_bar_desc">Caches (géocode, mot-clé), Objets voyageurs (code TB)</string>
   <string name="search_coordinates">Coordonnées de départ</string>
   <string name="search_coordinates_button">Rechercher par Coordonnées</string>
   <string name="search_address">Adresse</string>
@@ -933,9 +933,9 @@
   <string name="helper_gpsstatus_title">Etat GPS</string>
   <string name="helper_gpsstatus_description">Vous pouvez utiliser le radar de cette application dans c:geo. Il gère des informations supplémentaires relatives au GPS.</string>
   <string name="helper_bluetoothgps_title">GPS Bluetooth</string>
-  <string name="helper_bluetoothgps_description">Vous permet d\'utiliser un GPS externe pour une meilleure réception, plus précis et économise la batterie.</string>
+  <string name="helper_bluetoothgps_description">Vous permet d\'utiliser un GPS externe pour une localisation plus précise tout en économisant la batterie de votre appareil Android.</string>
   <string name="helper_barcode_title">Lecteur de code barre</string>
-  <string name="helper_barcode_description">Il existe des programmes et des sites web permettant de générer un QR code correspondant à un géocode. En installant cette application, vous pourrez lire des QR codes et ouvrir les caches correspondantes dans c:geo.</string>
+  <string name="helper_barcode_description">Il existe des programmes et des sites web permettant de générer un QR code contenant un géocode. En installant cette application, vous pourrez lire des QR codes et ouvrir les caches correspondantes dans c:geo.</string>
   <string name="helper_pocketquery_title">Pocket Query Creator</string>
   <string name="helper_pocketquery_description">Permet la création facile et le téléchargement de Pocket Queries centrées sur votre position actuelle ou un point sélectionné sur la carte. Nécessite un compte Premium Geocaching.com.</string>
   <string name="helper_google_translate_title">Google Traduction</string>
@@ -1259,10 +1259,25 @@
   <string name="init_geokrety_register_ok">Connexion réussie</string>
   <string name="init_geokrety_register_fail">Erreur de connexion</string>
   <string name="init_geokrety_description">Autoriser c:geo à ouvrir une session sur GeoKrety.org pour les objets voyageurs GeoKrets.</string>
-  <string name="init_geokrety_cache_description">GeokretyMap.org fournit des données pour les objets voyageurs GeoKrets.\nCes données sont par exemple la Description, la Position ou le Statut de l\'objet (disparu ...).\n\nATTENTION : il ne s\'agit pas de données temps réel !\n Fréquence d\'actualisation des positions :  ~30 min.\nFréquence d\'actualisation des descriptions : ~ 24 h.</string>
+  <string name="init_geokrety_cache_description">GeokretyMap.org fournit des données pour les objets voyageurs GeoKrets.\nCes données sont par exemple la Description, la Position ou le Statut de l\'objet (disparu…).\n\nATTENTION : il ne s\'agit pas de données temps réel !\n Fréquence d\'actualisation des positions :  ~30 min.\nFréquence d\'actualisation des descriptions : ~ 24 h.</string>
   <string name="init_geokrety_cache">Utiliser GeoKretyMap.org</string>
   <string name="init_geokrety_userid">Utilisateur : %s</string>
+  <string name="trackable_title_log_without_geocode">Géocode non renseigné</string>
+  <string name="trackable_log_without_geocode">Vous êtes sur le point d\'envoyer une visite sans géocode. Il est fortement recommandé d\'indiquer un géocode. Voulez-vous l\'ajouter maintenant ?</string>
+  <string name="do_not_ask_me_again">Ne plus demander</string>
   <string name="settings_map_direction">Afficher la direction</string>
   <string name="settings_summary_map_direction">Trace une ligne droite entre votre position et la destination</string>
   <string name="map_direction">Afficher la direction</string>
+  <string name="command_move_caches_progress">Déplacement des caches vers la liste %1s</string>
+  <plurals name="command_move_caches_result">
+    <item quantity="one">%d cache déplacée</item>
+    <item quantity="other">%d caches déplacées</item>
+  </plurals>
+  <string name="command_delete_caches_progress">Suppression des caches</string>
+  <plurals name="command_delete_caches_result">
+    <item quantity="one">%d cache supprimée</item>
+    <item quantity="other">%d caches supprimées</item>
+  </plurals>
+  <string name="command_rename_list_result">Liste renommée</string>
+  <string name="command_delete_list_result">Liste supprimée</string>
 </resources>

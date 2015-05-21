@@ -572,15 +572,15 @@
   <string name="map_source_osm_cyclemap">OSM: Cyklomapa</string>
   <string name="map_source_osm_offline">Offline</string>
   <string name="init_sendToCgeo">Poslat do c:geo</string>
-  <string name="settings_info_send2cgeo_title">Info o funkci send2c:geo</string>
+  <string name="settings_info_send2cgeo_title">Info o funkci send2cgeo</string>
   <string name="init_sendToCgeo_name">Název tvého zařízení</string>
-  <string name="init_sendToCgeo_description">Funkce <b>send2c:geo</b> umožňuje stahovat keše přímo ze stránky Geocaching.com pomocí speciálního doplňku pro webové prohlížeče. Pokud chceš používat funkci send2c:geo, musíš se zaregistrovat. Před registrací navštiv stránku <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Aplikace c:geo může samozřejmě pracovat normálně i bez registrace této funkce.</string>
+  <string name="init_sendToCgeo_description">Funkce <b>send2cgeo</b> umožňuje stahovat keše přímo ze stránky Geocaching.com pomocí speciálního doplňku pro webové prohlížeče. Pokud chceš používat funkci send2cgeo, musíš se zaregistrovat. Před registrací navštiv stránku <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Aplikace c:geo může samozřejmě pracovat normálně i bez registrace této funkce.</string>
   <string name="init_sendToCgeo_register">Požádat o registraci</string>
-  <string name="init_sendToCgeo_registering">Registrace tvého zařízení pro funkci Poslat do c:geo…</string>
+  <string name="init_sendToCgeo_registering">Registrace tvého zařízení pro funkci Poslat do send2cgeo…</string>
   <string name="init_sendToCgeo_register_ok">Registrace úspěšně dokončena. PIN kód je ####. Použij ho na stránce c:geo pro přidání zařízení do tvého prohlížeče.</string>
   <string name="init_sendToCgeo_register_fail">Registrace selhala.</string>
-  <string name="sendToCgeo_download_fail">c:geo selhalo při stahování keší. Nefunguje internetové připojení nebo je služba send2c:geo vypnutá.</string>
-  <string name="sendToCgeo_no_registration">c:geo selhalo při stahování keší. Registrace pro send2c:geo vypršela. Prosím, registruj se znova v nastavení.</string>
+  <string name="sendToCgeo_download_fail">c:geo selhalo při stahování keší. Nefunguje internetové připojení nebo je služba send2cgeo vypnutá.</string>
+  <string name="sendToCgeo_no_registration">c:geo selhalo při stahování keší. Registrace pro send2cgeo vypršela. Prosím, registruj se znova v nastavení.</string>
   <string name="auth_twitter">Twitter</string>
   <string name="auth_authorize">Autorizovat c:geo</string>
   <string name="auth_start">Zahájit autorizaci</string>
@@ -925,7 +925,7 @@
   <string name="helper_sendtocgeo_title">Poslat do c:geo</string>
   <string name="helper_contacts_title">c:geo - Kontakty (doplněk)</string>
   <string name="helper_contacts_description">Umožňuje otevřít vizitku (z tvého seznamu kontaktů) přímo z logu keše, můžeš tak snadněji kontaktovat kamarády o pomoc.</string>
-  <string name="helper_sendtocgeo_description">Poslat do c:geo (Send2c:geo) je rozšíření prohlížeče <strong>pro tvůj počítač</strong>. Umožňuje zaslání keše do tvého mobilního zařízení jediným klepnutím, přímo z prohlížeče, při procházení webu Geocaching.com.</string>
+  <string name="helper_sendtocgeo_description">Poslat do c:geo je rozšíření prohlížeče <strong>pro tvůj počítač</strong>. Umožňuje zaslání keše do tvého mobilního zařízení jediným klepnutím, přímo z prohlížeče, při procházení webu Geocaching.com.</string>
   <string name="helper_locus_title">Locus</string>
   <string name="helper_locus_description">Outdoorová navigace pro telefon či tablet. Prohlížení offline topo map, záznam trasy, lov geokeší, hlasová navigace a mnohem více.</string>
   <string name="helper_gpsstatus_title">GPS Status</string>

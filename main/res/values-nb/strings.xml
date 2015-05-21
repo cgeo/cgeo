@@ -83,6 +83,7 @@
   <string name="log_saving_and_uploading">Sender logg og laster opp bilde…</string>
   <string name="log_clear">Tøm</string>
   <string name="log_post_not_possible">Laster loggsiden…</string>
+  <string name="log_post_geocode_missing">GC-kode mangler…</string>
   <string name="log_date_future_not_allowed">Fremtidige loggdatoer er ikke tillatt.</string>
   <string name="log_add">Legg til</string>
   <string name="log_repeat">Gjenta siste logg</string>
@@ -128,6 +129,7 @@
   <string name="err_parse">Klarte ikke å lese innloggingssiden</string>
   <string name="err_server">Klarte ikke å koble til Geocaching.com (server eller tilkobling nede?)</string>
   <string name="err_server_ec">Får ikke kontakt med Extremcaching.com. Nettstedet kan være nede eller Internettilkoblingen fungerer ikke.</string>
+  <string name="err_server_gk">Får ikke kontakt med GeoKrety.org. Nettstedet kan være nede eller Internett-tilkoblingen din fungerer ikke.</string>
   <string name="err_login">Ingen innloggingsopplysninger lagret</string>
   <string name="err_login_failed_toast">c:geo kan ikke logge inn. c:geo fungerer offline med cacher du har lagret. Sjekk innloggingsinnstillinger eller aktiver internettforbindelsen.</string>
   <string name="err_unknown">Ukjent feil</string>
@@ -166,6 +168,7 @@
   <string name="err_acquire_image_failed">Henting av bilde mislyktes.</string>
   <string name="err_tb_display">\"Beklager, c:geo klarte ikke å finne den sporbare du etterspurte. Er det virkelig en sporbar (trackable)?</string>
   <string name="err_tb_details_open">Beklager, c:geo klarte ikke å åpne detaljerene til den sporbare.</string>
+  <string name="err_tb_not_loggable">Denne sporbare er ikke mulig å logge.</string>
   <string name="err_tb_find">Beklager, c:geo klarte ikke å finne noen sporbare</string>
   <string name="err_tb_find_that">Beklager, c:geo finner ikke den sporbare.</string>
   <string name="err_waypoint_cache_unknown">c:geo vet ikke hvilken cache du vil legge til et veipunkt for.</string>
@@ -178,6 +181,8 @@
   <string name="err_log_load_data">Beklager, c:geo klarte ikke å laste den nødvendige informasjonen for å logge funnet.</string>
   <string name="err_log_load_data_again">Beklager, c:geo klarte ikke å laste den nødvendige informasjonen for å logge funnet. c:geo prøver på nytt.</string>
   <string name="err_log_load_data_still">c:geo laster fortsatt informasjonen som er nødvendig for å logge funnet. Vennligst vent.</string>
+  <string name="err_log_post_missing_tracking_code">Sporingskode mangler.</string>
+  <string name="err_log_post_missing_coordinates">Koordinatene mangler.</string>
   <string name="err_log_post_failed">Det ser ut som loggen din ikke ble registrert. Du bør sjekke dette på cachens nettside.</string>
   <string name="err_log_post_failed_ec">Din logg ble trolig ikke lastet opp. Du bør sjekke det på Extremcaching.com.</string>
   <string name="err_log_post_failed_gk">Din logg ble trolig ikke lastet opp. Du bør sjekke det på GeoKrety.org.</string>
@@ -214,6 +219,8 @@
   <string name="info_stored_image">Nytt bilde lagret til:</string>
   <string name="info_storing_static_maps">Forsøker å lagre statisk kart</string>
   <string name="info_cache_saved">Cachen er nå lagret lokalt</string>
+  <string name="err_trackable_log_not_anonymous">Logging av %1$s fra c:geo kan ikke gjøres anonymt. Vil du åpne innstillinger for å fylle inn påloggingsopplysningene fra %2$s?</string>
+  <string name="err_trackable_no_preference_activity">Beklager, finner ikke innstilling-skjermen som hører til.</string>
   <string name="loc_last">Sist sett</string>
   <string name="loc_net">Nettverk</string>
   <string name="loc_fused">Kombinert</string>
@@ -349,6 +356,7 @@
   <string name="about_help">Hjelp</string>
   <string name="about_system_include">Inkluder den følgende informasjonen når du sender en feilrapport eller ber om mer informasjon fra c:geo:</string>
   <string name="changelog_github">Liste over alle endringer</string>
+  <string name="settings_title_open_settings">Åpne innstillinger?</string>
   <string name="settings_title_services">Tjenester</string>
   <string name="settings_summary_services">Konfigurer kontoinformasjon og tilgang til tilleggstjenester.</string>
   <string name="settings_title_appearance">Utseende</string>
@@ -414,6 +422,8 @@
   <string name="init_login_popup_not_authorized">Ikke godkjent</string>
   <string name="init_login_popup_invalid_timestamp">Lokal tid er ugyldig. Still klokken på enheten</string>
   <string name="init_login_popup_invalid_token">Godkjenning ugyldig, prøv å godkjenn på nytt</string>
+  <string name="init_authorization_credential_username">Brukernavn</string>
+  <string name="init_authorization_credential_password">Passord</string>
   <string name="settings_service_active">Aktiv</string>
   <string name="init_signature">Signatur</string>
   <string name="init_template_help">Autotekst, slik som [NAME], vil bli erstattet med navnet på cachen når denne malen blir brukt i en logg.</string>
@@ -534,8 +544,11 @@
   <string name="init_hardware_acceleration_note">Maskinvare-akselerasjon gjengir grafikkelementer raskere på skjermen. Men på noen Android telefoners operativsystem er det noen feil, og noe av teksten kan komme fram som uklare  Deaktiver maskinvare-akselerasjonen hvis dette skjer med deg.</string>
   <string name="init_hardware_acceleration">Aktivere maskinvareakselerasjonen</string>
   <string name="settings_open_website">Åpne nettside</string>
+  <string name="settings_open_geokrety_register">Åpne registreringssiden til GeoKrety.org</string>
+  <string name="settings_open_geokretymap_website">Åpne nettsiden til GeoKretyMap.org</string>
   <string name="settings_settings">Innstillinger</string>
   <string name="settings_information">Informasjon</string>
+  <string name="settings_advanced">Avanserte innstillinger</string>
   <string name="settings_twitter_cache_message">Tekst ved funn av cache</string>
   <string name="settings_twitter_trackable_message">Tekst ved funn av sporbare</string>
   <string name="init_ec_icons">Kartikoner</string>
@@ -562,13 +575,13 @@
   <string name="init_sendToCgeo">Send til c:geo</string>
   <string name="settings_info_send2cgeo_title">Informasjon om send2cgeo</string>
   <string name="init_sendToCgeo_name">Navn på enheten</string>
-  <string name="init_sendToCgeo_description">Med <b>Send2c:geo</b> kan du sende cacher til din Android-enhet direkte fra geocaching.com ved hjelp av en plugin i Firefox eller Chrome. Les her før registrering: <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Du trenger bare registrere deg om du ønsker å bruke send2c:geo. c:geo vil fungere som normalt uten registrering.</string>
+  <string name="init_sendToCgeo_description">Med <b>Send2cgeo</b> kan du sende cacher til din Android-enhet direkte fra geocaching.com ved hjelp av en plugin i Firefox eller Chrome. Les her før registrering: <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Du trenger bare registrere deg om du ønsker å bruke send2cgeo. c:geo vil fungere som normalt uten registrering.</string>
   <string name="init_sendToCgeo_register">Registrer din enhet</string>
-  <string name="init_sendToCgeo_registering">Registrerer din enhet for Send2c:geo…</string>
+  <string name="init_sendToCgeo_registering">Registrerer din enhet for send2cgeo…</string>
   <string name="init_sendToCgeo_register_ok">Registreringen var vellykket. PIN-kode er ####. Bruk denne på nettsiden til c:geo for å koble denne enheten til nettleseren.</string>
   <string name="init_sendToCgeo_register_fail">Registrering mislyktes.</string>
-  <string name="sendToCgeo_download_fail">c:geo kunne ikke laste ned cacher. Ingen Internettilkobling, eller send2c:geo er nede.</string>
-  <string name="sendToCgeo_no_registration">c:geo kunne ikke laste ned cacher. Registrering for send2c:geo har utløpt. Registrer deg på nytt i innstillingene.</string>
+  <string name="sendToCgeo_download_fail">c:geo kunne ikke laste ned cacher. Ingen Internettilkobling, eller send2cgeo er nede.</string>
+  <string name="sendToCgeo_no_registration">c:geo kunne ikke laste ned cacher. Registrering for send2cgeo har utløpt. Registrer deg på nytt i innstillingene.</string>
   <string name="auth_twitter">Twitter</string>
   <string name="auth_authorize">Godkjenn c:geo</string>
   <string name="auth_start">Start autorisasjon</string>
@@ -576,9 +589,15 @@
   <string name="auth_dialog_waiting">Venter på %s…</string>
   <string name="auth_explain_short">Følgende prosess vil gi <b>c:geo</b> tilgang til %s.</string>
   <string name="auth_explain_long">Når du trykker på knappen \"Godkjenn c:geo\" starter prosessen. Nettleseren åpner siden til %s. Logg inn på denne siden og tillat at <b>c:geo</b> får tilgang til din brukerkonto. Så enkelt er det!</string>
+  <string name="auth_token_register">Opprett en konto</string>
+  <string name="auth_token_explain_short">Følgende prosess vil gi <b>c:geo</b> tilgang til %s.</string>
+  <string name="auth_token_explain_long">Du starter prosessen ved å fylle inn brukernavn og passord og trykke \"Godkjenne c:geo\". Denne prosessen vil koble til %s og hente et token for godkjenning. Verre er det ikke.</string>
   <string name="auth_dialog_completed_twitter">c:geo har nå fått godkjenning til å kvitre på Twitter.</string>
   <string name="auth_ocde">opencaching.de</string>
   <string name="auth_dialog_completed_oc">c:geo har nå fått godkjenning til å kommunisere med %s.</string>
+  <string name="auth_dialog_completed_geokrety">c:geo har nå fått godkjenning til å kommunisere med %s.</string>
+  <string name="err_auth_geokrety_bad_password">Brukernavn og/eller passord ser ut til å være feil.</string>
+  <string name="err_auth_geokrety_unknown">%1$s returnerte: %2$s.</string>
   <plurals name="cache_counts">
     <item quantity="one">En cache</item>
     <item quantity="other">%1$d cacher</item>
@@ -666,6 +685,7 @@
   <string name="cache_menu_map_static">Statisk kart</string>
   <string name="cache_menu_download_map_static">Last ned statiske kart</string>
   <string name="cache_menu_rmaps">Rmaps</string>
+  <string name="cache_menu_map_ext">Andre eksterne apper</string>
   <string name="cache_menu_streetview">Gatevisning</string>
   <string name="cache_menu_browser">Åpne i nettleseren</string>
   <string name="cache_menu_visit">Logg funn</string>
@@ -854,6 +874,7 @@
   <string name="trackable_goal">Mål</string>
   <string name="trackable_details">Detailjer</string>
   <string name="trackable_image">Bilde</string>
+  <string name="trackable_code">Sporingskode</string>
   <string name="trackable_name">Navn</string>
   <string name="trackable_type">Type</string>
   <string name="trackable_owner">Eier</string>
@@ -884,6 +905,8 @@
   <string name="user_menu_open_contact">Åpne kontaktinfo</string>
   <string name="navigation">Navigasjon</string>
   <string name="compass_title">Kompass</string>
+  <string name="use_gps">Kun GPS i bruk</string>
+  <string name="use_compass">GPS og magnetisk kompass i bruk</string>
   <string name="destination_select">Velg destinasjon</string>
   <string name="navigation_direct_navigation">Direkte navigering</string>
   <string name="navigation_target">Mål</string>
@@ -912,6 +935,8 @@
   <string name="helper_google_translate_description">Hvis du laster ned oversettelsespakker i Google Oversetter-appen kan du enkelt oversette cachebeskrivelsen i c:geo ved å trykke lenge på teksten (uten å ha tilgang til Internett).</string>
   <string name="addon_missing_title">Manglende tillegg</string>
   <string name="addon_download_prompt">Last ned nå fra Google Play.</string>
+  <string name="export">Eksporter</string>
+  <string name="export_progress">Eksporter: %1$s</string>
   <string name="export_exportedto">eksportert til</string>
   <string name="export_failed">Eksporteringen mislyktes</string>
   <string name="export_fieldnotes">Feltnotater</string>
@@ -924,6 +949,8 @@
   <string name="export_gpx">GPX</string>
   <string name="export_gpx_info">GPX-filen blir eksportert til %1$s med dato og tidspunkt som filnavn.</string>
   <string name="export_gpx_to">Send eksportert GPX til</string>
+  <string name="export_confirm_title">Eksporterer %1$s</string>
+  <string name="export_confirm_message">Bane: %1$s\nFilnavn: %2$s</string>
   <string name="attribute_dogs_yes">Hunder tillatt</string>
   <string name="attribute_dogs_no">Hunder ikke tillatt</string>
   <string name="attribute_bicycles_yes">Sykler tillatt</string>
@@ -1209,6 +1236,12 @@
   <string name="showcase_compass_hint_text">Denne nye menyen kan gi deg hjelp til å finne cachen - her vises hintet, hvis det er tilgjengelig.</string>
   <string name="confirm_log_title">Uvanlig loggtype</string>
   <string name="confirm_log_message">Du vil logge \'%s\'. Er du sikker?</string>
+  <string name="settings_activate_geokrety">Aktiver</string>
   <string name="init_geokrety">GeoKrety.org</string>
+  <string name="init_connectorGeokretyActive">Geokrety Trackables</string>
   <string name="init_summary_geokrety">Aktiver trackables fra GeoKrety.org</string>
+  <string name="init_summary_geokrety_account">Ingen konto konfigurert.</string>
+  <string name="init_geokrety_register_ok">Du er logget inn</string>
+  <string name="init_geokrety_register_fail">Innlogging mislyktes</string>
+  <string name="init_geokrety_userid">Brukernavn: %s</string>
 </resources>

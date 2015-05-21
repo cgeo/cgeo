@@ -219,6 +219,8 @@
   <string name="info_stored_image">Nueva imagen guardada en:</string>
   <string name="info_storing_static_maps">Intentando almacenar los mapas estáticos</string>
   <string name="info_cache_saved">El caché se ha guardado en el disco local</string>
+  <string name="err_trackable_log_not_anonymous">No puedes registrar %1$s desde c:geo de manera anónima. ¿Quieres abrir los ajustes para rellenar tu identificación desde %2$s?</string>
+  <string name="err_trackable_no_preference_activity">Disculpa, no se ha encontrado una pantalla de preferencia adecuada.</string>
   <string name="loc_last">Última conocida</string>
   <string name="loc_net">Red</string>
   <string name="loc_fused">Combinado</string>
@@ -354,6 +356,7 @@
   <string name="about_help">Ayuda</string>
   <string name="about_system_include">Por favor, incluya la siguiente información del sistema cuando envíe un informe de error o pida más información sobre c:geo:</string>
   <string name="changelog_github">Lista de todos los cambios</string>
+  <string name="settings_title_open_settings">¿Abrir ajustes?</string>
   <string name="settings_title_services">Servicios</string>
   <string name="settings_summary_services">Configura la información de la cuenta de usuario y accede a servicios opcionales.</string>
   <string name="settings_title_appearance">Aspecto</string>
@@ -564,13 +567,13 @@
   <string name="init_sendToCgeo">Enviar a c:geo</string>
   <string name="settings_info_send2cgeo_title">Sobre Enviar a c:geo</string>
   <string name="init_sendToCgeo_name">Nombre de tu dispositivo</string>
-  <string name="init_sendToCgeo_description"><b>Send2c:geo</b> te permite recibir cachés automáticamente desde la web de geocaching usando un complemento especial para Firefox o Chrome. Antes de registrarte, te sugerimos que leas <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Sólo necesitas registarte si vas a usar send2cgeo. c:geo funciona sin tener que registrar tu dispositivo.</string>
+  <string name="init_sendToCgeo_description"><b>Send2cgeo</b> te permite recibir cachés automáticamente desde la web de geocaching usando un complemento especial para Firefox o Chrome. Antes de registrarte, te sugerimos que leas <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Sólo necesitas registarte si vas a usar send2cgeo. c:geo funciona sin tener que registrar tu dispositivo.</string>
   <string name="init_sendToCgeo_register">Solicitar registro</string>
-  <string name="init_sendToCgeo_registering">Registrando \"Enviar a c:geo\"…</string>
+  <string name="init_sendToCgeo_registering">Registrando send2cgeo…</string>
   <string name="init_sendToCgeo_register_ok">Registro finalizado. Tu código PIN ####. Úsalo en la web de c:geo para añadir este dispositivo a tu navegador.</string>
   <string name="init_sendToCgeo_register_fail">Error al registrarse.</string>
-  <string name="sendToCgeo_download_fail">c:geo no ha podido descargar cachés. No hay conexión a internet o  send2c:geo no está disponible.</string>
-  <string name="sendToCgeo_no_registration">c:geo no ha podido descargar cachés. El registro en send2c:geo ha expirado. Por favor registrate en ajustes.</string>
+  <string name="sendToCgeo_download_fail">c:geo no ha podido descargar cachés. No hay conexión a internet o  send2cgeo no está disponible.</string>
+  <string name="sendToCgeo_no_registration">c:geo no ha podido descargar cachés. El registro en send2cgeo ha expirado. Por favor registrate en ajustes.</string>
   <string name="auth_twitter">Twitter</string>
   <string name="auth_authorize">Autorizar c:geo</string>
   <string name="auth_start">Iniciar autorización</string>
@@ -580,9 +583,13 @@
   <string name="auth_explain_long">Presionando el botón \"Autorizar c:geo\" comenzará el proceso. Este proceso abrirá el navegador web con una página %s. Registrate en esta página y permite a <b>c:geo</b> acceder a tu cuenta. Eso es todo.</string>
   <string name="auth_token_register">Crear una cuenta</string>
   <string name="auth_token_explain_short">El siguiente proceso permitirá a <b>c:geo</b> acceder a %s.</string>
+  <string name="auth_token_explain_long">Rellenando tus datos y presionando el botón \"autorizar a c:geo\" comenzarará el proceso. Este proceso conectará con %s y obtendrá una autorización. Eso es todo.</string>
   <string name="auth_dialog_completed_twitter">c:geo está autorizado ahora a publicar en Twitter.</string>
   <string name="auth_ocde">Opencaching.de</string>
   <string name="auth_dialog_completed_oc">c:geo está autorizado a interactuar con %s.</string>
+  <string name="auth_dialog_completed_geokrety">c:geo está autorizado a interactuar con %s.</string>
+  <string name="err_auth_geokrety_bad_password">Tu usuario/contraseña no es correcto.</string>
+  <string name="err_auth_geokrety_unknown">%1$s ha devuelto: %2$s.</string>
   <plurals name="cache_counts">
     <item quantity="one">Un caché</item>
     <item quantity="other">%1$d cachés</item>
@@ -1231,10 +1238,15 @@ Nombre de archivo:%2$s</string>
   <string name="confirm_log_message">Vas a registrar \'%s\'. ¿Estás seguro?</string>
   <string name="settings_activate_geokrety">Activar</string>
   <string name="init_geokrety">GeoKrety.org</string>
+  <string name="init_connectorGeokretyActive">Rastreables de Geokrety</string>
   <string name="init_summary_geokrety">Habilitar rastreables de GeoKrety.org</string>
   <string name="init_summary_geokrety_account">No hay cuenta configurada.</string>
+  <string name="init_geokrety_register_ok">Se ha iniciado sesión</string>
   <string name="init_geokrety_register_fail">Fallo al iniciar sesión</string>
+  <string name="init_geokrety_description">Autorizar a c:geo en GeoKrety.org para registrar rastreables.</string>
+  <string name="init_geokrety_cache_description">GeokretyMap.org proporciona datos almacenados para rastreables GeoKrety.\nLos datos disponibles contienen más información sobre GeoKrety como \'descripción\' o estado \'desaparecido\'.\n\n¡Los datos no se actualizan en vivo!\nPosiciones: ~30min.\nDescripciones: ~24h.</string>
   <string name="init_geokrety_cache">Usar GeoKretyMap.org</string>
+  <string name="init_geokrety_userid">Usuario: %s</string>
   <string name="settings_map_direction">Mostrar dirección</string>
   <string name="settings_summary_map_direction">Muestra una línea de dirección al objetivo de la navegación</string>
   <string name="map_direction">Mostrar dirección</string>
@@ -1248,4 +1260,6 @@ Nombre de archivo:%2$s</string>
     <item quantity="one">%d caché eliminado</item>
     <item quantity="other">%d cachés eliminados</item>
   </plurals>
+  <string name="command_rename_list_result">Lista renombrada</string>
+  <string name="command_delete_list_result">Lista borrada</string>
 </resources>

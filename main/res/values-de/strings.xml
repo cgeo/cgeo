@@ -575,13 +575,13 @@
   <string name="init_sendToCgeo">Send to c:geo</string>
   <string name="settings_info_send2cgeo_title">Info zu send2:cgeo</string>
   <string name="init_sendToCgeo_name">Name des Endgerätes</string>
-  <string name="init_sendToCgeo_description">Send to c:geo erlaubt es, mit einem speziellen Plugin für Firefox oder Chrome, Caches direkt von der Geocachingseite zu empfangen. Bitte dazu die Details vor einer Registrierung auf <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a> durchlesen.</string>
+  <string name="init_sendToCgeo_description"><b>Send2cgeo</b> erlaubt es, mit einem speziellen Plugin für Firefox oder Chrome, Caches direkt von der Geocachingseite zu empfangen. Bitte dazu die Details vor einer Registrierung auf <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a> durchlesen. Eine Registrierung ist nur erforderlich, wenn auch send2cgeo genutzt werden soll. c:geo wird auch ohne Registrierung normal funktionieren.</string>
   <string name="init_sendToCgeo_register">Registrierung anfordern</string>
-  <string name="init_sendToCgeo_registering">Das Gerät wird für \"Send to c:geo\" registriert…</string>
+  <string name="init_sendToCgeo_registering">Das Gerät wird für send2cgeo registriert…</string>
   <string name="init_sendToCgeo_register_ok">Registrierung erfolgreich. Der PIN Code ist ####. Bitte diesen auf der c:geo Website angeben, um das Endgerät im Browser hinzuzufügen.</string>
   <string name="init_sendToCgeo_register_fail">Registrierung fehlgeschlagen.</string>
-  <string name="sendToCgeo_download_fail">c:geo konnte Caches nicht laden. Entweder besteht keine Internetverbindung oder send2c:geo funktioniert nicht.</string>
-  <string name="sendToCgeo_no_registration">c:geo konnte Caches nicht laden. Registrierung für send2c:geo ungültig. Bitte in Einstellungen neu registrieren.</string>
+  <string name="sendToCgeo_download_fail">c:geo konnte die Caches nicht laden. Entweder besteht keine Internetverbindung oder send2cgeo funktioniert nicht.</string>
+  <string name="sendToCgeo_no_registration">c:geo konnte die Caches nicht laden. Die Registrierung für send2cgeo ist ungültig. Bitte in den Einstellungen neu registrieren.</string>
   <string name="auth_twitter">Twitter</string>
   <string name="auth_authorize">c:geo autorisieren</string>
   <string name="auth_start">Starte Autorisierung</string>

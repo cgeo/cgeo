@@ -565,13 +565,13 @@
   <string name="init_sendToCgeo">Skicka till c:geo (Send2cgeo)</string>
   <string name="settings_info_send2cgeo_title">Info om send2cgeo</string>
   <string name="init_sendToCgeo_name">Namnet på din enhet</string>
-  <string name="init_sendToCgeo_description">Skicka till c:geo (send2cgeo) gör det möjligt att ta emot cacher direkt från geocaching hemsidan genom att använda en speciell plugin till Firefox eller Chrome. Läs detta innan registrering: <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Du behöver bara registrera din enhet om du kommer att använda send2cgeo. C:geo fungerar även utan registrering.</string>
+  <string name="init_sendToCgeo_description"><b>Send2cgeo</b> gör det möjligt att ta emot cacher direkt från geocaching hemsidan genom att använda en speciell plugin till Firefox eller Chrome. Läs detta innan registrering: <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Du behöver bara registrera din enhet om du kommer att använda send2cgeo. C:geo fungerar även utan registrering.</string>
   <string name="init_sendToCgeo_register">Registrera din enhet</string>
-  <string name="init_sendToCgeo_registering">Registrerar din enhet för \"send2cgeo\"…</string>
+  <string name="init_sendToCgeo_registering">Registrerar din enhet för send2cgeo…</string>
   <string name="init_sendToCgeo_register_ok">Registreringen lyckades. PIN koden är ####. Använd den på c:geos hemsida för att lägga till enheten i den webbläsare.</string>
   <string name="init_sendToCgeo_register_fail">Registreringen misslyckades.</string>
-  <string name="sendToCgeo_download_fail">c:geo misslyckades med att hämta cacher. Internetanslutning saknas eller send2c:geo är inte tillgänglig.</string>
-  <string name="sendToCgeo_no_registration">c:geo misslyckades med att hämta cacher. Registreringen för send2c:geo har upphört att gälla. Vänligen registrera dig på nytt i inställningarna.</string>
+  <string name="sendToCgeo_download_fail">c:geo misslyckades med att hämta cacher. Internetanslutning saknas eller send2cgeo är inte tillgänglig.</string>
+  <string name="sendToCgeo_no_registration">c:geo misslyckades med att hämta cacher. Registreringen för send2cgeo har upphört att gälla. Vänligen registrera dig på nytt i inställningarna.</string>
   <string name="auth_twitter">Twitter</string>
   <string name="auth_authorize">Koppla c:geo mot Twitter</string>
   <string name="auth_start">Påbörja koppling mot Twitter</string>

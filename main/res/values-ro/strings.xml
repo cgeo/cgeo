@@ -564,13 +564,13 @@
   <string name="init_sendToCgeo">Send to c:geo</string>
   <string name="settings_info_send2cgeo_title">Info despre send2cgeo</string>
   <string name="init_sendToCgeo_name">Numele dispozitivului tău</string>
-  <string name="init_sendToCgeo_description"><b>Send2c:geo</b> îţi permite să încarci cutii în dispozitivul tău Android direct de pe geocaching.com folosind o extensie pentru Firefox sau Chrome. Înainte să te înregistrezi, citeşte aici: <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Trebuie să te înregistrezi numai daca vrei să foloseşti send2c:geo. c:geo va funcţiona normal şi fără să îţi înregistrezi dispozitivul.</string>
+  <string name="init_sendToCgeo_description"><b>Send2cgeo</b> îţi permite să încarci cutii în dispozitivul tău Android direct de pe geocaching.com folosind o extensie pentru Firefox sau Chrome. Înainte să te înregistrezi, citeşte aici: <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Trebuie să te înregistrezi numai daca vrei să foloseşti send2cgeo. c:geo va funcţiona normal şi fără să îţi înregistrezi dispozitivul.</string>
   <string name="init_sendToCgeo_register">Cere Înregistrare</string>
-  <string name="init_sendToCgeo_registering">Dispozitivul tău se înregistrează pentru Send2c:geo…</string>
+  <string name="init_sendToCgeo_registering">Dispozitivul tău se înregistrează pentru send2cgeo…</string>
   <string name="init_sendToCgeo_register_ok">Înregistrare reuţită. Codul PIN este ####. Foloseşte-l pe internet pe pagina c:geo pentru a conecta acest dispozitiv cu browser-ul tău.</string>
   <string name="init_sendToCgeo_register_fail">Înregistrare eşuată.</string>
-  <string name="sendToCgeo_download_fail">c:geo nu a putut descărca cutiile. Lipsă conexiune internet sau send2c:geo nu funcţionează.</string>
-  <string name="sendToCgeo_no_registration">c:geo nu a putut descărca cutiile. Înregistrarea pentru send2c:geo a expirat. Te rog înregistrează la opţiuni.</string>
+  <string name="sendToCgeo_download_fail">c:geo nu a putut descărca cutiile. Lipsă conexiune internet sau send2cgeo nu funcţionează.</string>
+  <string name="sendToCgeo_no_registration">c:geo nu a putut descărca cutiile. Înregistrarea pentru send2cgeo a expirat. Te rog înregistrează la opţiuni.</string>
   <string name="auth_twitter">Twitter</string>
   <string name="auth_authorize">Autorizează c:geo</string>
   <string name="auth_start">Începe autorizarea</string>

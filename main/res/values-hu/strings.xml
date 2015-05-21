@@ -555,13 +555,13 @@
   <string name="init_sendToCgeo">Küldés c:geo-nak</string>
   <string name="settings_info_send2cgeo_title">Információk a \'Küldés c:geo-nak\'-ról</string>
   <string name="init_sendToCgeo_name">Készüléked neve</string>
-  <string name="init_sendToCgeo_description">A <b>send2c:geo</b> segítségével közvetlenül a geocaching weboldalról tölthetsz le ládákat egy Firefox vagy Chrome modul segítségével. Regisztráció előtt olvasd el a leírást <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Csak akkor kell regisztrálnod, ha a send2c:geo modult használni akarod. A c:geo a regisztráció nélkül is működik.</string>
+  <string name="init_sendToCgeo_description">A <b>send2cgeo</b> segítségével közvetlenül a geocaching weboldalról tölthetsz le ládákat egy Firefox vagy Chrome modul segítségével. Regisztráció előtt olvasd el a leírást <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Csak akkor kell regisztrálnod, ha a send2cgeo modult használni akarod. A c:geo a regisztráció nélkül is működik.</string>
   <string name="init_sendToCgeo_register">Regisztráció kérése</string>
-  <string name="init_sendToCgeo_registering">Készüléked regisztrációja a send2c:geo modulhoz…</string>
+  <string name="init_sendToCgeo_registering">Készüléked regisztrációja a send2cgeo modulhoz…</string>
   <string name="init_sendToCgeo_register_ok">A regisztráció sikeres. A PIN kód ####. Használd ezt a kódot a c:geo weboldalán, hogy hozzáadd ezt a készüléket a böngészőhöz.</string>
   <string name="init_sendToCgeo_register_fail">Regisztráció sikertelen.</string>
-  <string name="sendToCgeo_download_fail">A c:geo nem tudta letölteni a ládákat. Nincs internetkapcsolat vagy a send2c:geo leállt.</string>
-  <string name="sendToCgeo_no_registration">A c:geo nem tudta letölteni a ládákat. A send2c:geo regisztrációd lejárt. Kérlek, regisztrálj a beállításoknál.</string>
+  <string name="sendToCgeo_download_fail">A c:geo nem tudta letölteni a ládákat. Nincs internetkapcsolat vagy a send2cgeo leállt.</string>
+  <string name="sendToCgeo_no_registration">A c:geo nem tudta letölteni a ládákat. A send2cgeo regisztrációd lejárt. Kérlek, regisztrálj a beállításoknál.</string>
   <string name="auth_twitter">Twitter</string>
   <string name="auth_authorize">Hozzáférés engedélyezése a c:geo-nak</string>
   <string name="auth_start">Engedélyezés indítása</string>

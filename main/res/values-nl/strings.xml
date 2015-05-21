@@ -565,15 +565,15 @@
   <string name="map_source_osm_cyclemap">OSM: Cyclemap</string>
   <string name="map_source_osm_offline">Offline</string>
   <string name="init_sendToCgeo">Verstuur naar c:geo</string>
-  <string name="settings_info_send2cgeo_title">Informatie over send2c:geo</string>
+  <string name="settings_info_send2cgeo_title">Informatie over send2cgeo</string>
   <string name="init_sendToCgeo_name">Jouw apparaatnaam</string>
-  <string name="init_sendToCgeo_description"><b>Send2c:geo</b> zorgt ervoor dat je caches direct vanaf de geocaching website kan ontvangen door middel van een plugin in je webbrowser (Chrome of Firefox). Lees het volgende voordat je registreert <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Registratie is alleen nodig als je send2cgeo wil gebruiken. c:geo werkt ook zonder het registreren van je apparaat.</string>
+  <string name="init_sendToCgeo_description"><b>Send2cgeo</b> zorgt ervoor dat je caches direct vanaf de geocaching website kan ontvangen door middel van een plugin in je webbrowser (Chrome of Firefox). Lees het volgende voordat je registreert <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Registratie is alleen nodig als je send2cgeo wil gebruiken. c:geo werkt ook zonder het registreren van je apparaat.</string>
   <string name="init_sendToCgeo_register">Verstuur registratieverzoek</string>
-  <string name="init_sendToCgeo_registering">Bezig met het registreren voor \"Send2c:geo\"…</string>
+  <string name="init_sendToCgeo_registering">Bezig met het registreren voor send2cgeo…</string>
   <string name="init_sendToCgeo_register_ok">Registratie gelukt. PIN code is ####. Gebruik dit op de c:geo website om dit apparaat aan je browser toe te voegen.</string>
   <string name="init_sendToCgeo_register_fail">Registratie is niet gelukt.</string>
-  <string name="sendToCgeo_download_fail">Het is c:geo niet gelukt om de caches te downloaden. Geen internetverbinding beschikbaar of send2c:geo is niet bereikbaar.</string>
-  <string name="sendToCgeo_no_registration">Het is c:geo niet gelukt om de caches te downloaden. De registratie van send2c:geo is verlopen. Registreer s.v.p. in de instellingen.</string>
+  <string name="sendToCgeo_download_fail">Het is c:geo niet gelukt om de caches te downloaden. Geen internetverbinding beschikbaar of send2cgeo is niet bereikbaar.</string>
+  <string name="sendToCgeo_no_registration">Het is c:geo niet gelukt om de caches te downloaden. De registratie van send2cgeo is verlopen. Registreer s.v.p. in de instellingen.</string>
   <string name="auth_twitter">Twitter</string>
   <string name="auth_authorize">c:geo Autoriseren</string>
   <string name="auth_start">Start autorisatie</string>

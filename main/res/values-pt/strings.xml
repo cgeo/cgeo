@@ -219,6 +219,8 @@
   <string name="info_stored_image">Nova imagem guardada em:</string>
   <string name="info_storing_static_maps">A tentar arquivar mapas estáticos.</string>
   <string name="info_cache_saved">A cache foi armazenada localmente</string>
+  <string name="err_trackable_log_not_anonymous">Logar %1$s a partir do c:geo não pode ser feito de forma anónima. Quer abrir as configurações para preencher as suas credenciais de %2$s?</string>
+  <string name="err_trackable_no_preference_activity">Desculpa, não posso encontrar uma tela de preferência apropriada.</string>
   <string name="loc_last">Último conhecido</string>
   <string name="loc_net">Rede</string>
   <string name="loc_fused">Combinados</string>
@@ -288,6 +290,10 @@
     <item quantity="other">Quer remover todas as %d caches da lista actual?</item>
   </plurals>
   <string name="caches_remove_selected">Remover selecionadas</string>
+  <plurals name="caches_remove_selected_confirm">
+    <item quantity="one">Quer remover esta cache do seu dispositivo?</item>
+    <item quantity="other">Quer remover as %d caches seleccionadas do seu dispositivo?</item>
+  </plurals>
   <string name="caches_remove_progress">A remover caches</string>
   <string name="caches_delete_events">Eliminar eventos passados</string>
   <string name="caches_refresh_selected">Actualizar seleccionada</string>
@@ -350,6 +356,7 @@
   <string name="about_help">Ajuda</string>
   <string name="about_system_include">Por favor inclua as seguintes informações de sistema ao enviar um relatório de bug ou ao pedir mais informações sobre c:geo:</string>
   <string name="changelog_github">Lista de todas as alterações</string>
+  <string name="settings_title_open_settings">Abrir configurações?</string>
   <string name="settings_title_services">Serviços</string>
   <string name="settings_summary_services">Configure a informação da conta de utilizador e o acesso a serviços opcionais.</string>
   <string name="settings_title_appearance">Aparência</string>
@@ -414,6 +421,8 @@
   <string name="init_login_popup_not_authorized">Não autorizado</string>
   <string name="init_login_popup_invalid_timestamp">Hora local inválida, altere a hora do aparelho</string>
   <string name="init_login_popup_invalid_token">Autorização inválida, re-autorizar</string>
+  <string name="init_authorization_credential_username">Utilizador</string>
+  <string name="init_authorization_credential_password">Senha</string>
   <string name="settings_service_active">Activo</string>
   <string name="init_signature">Assinatura</string>
   <string name="init_template_help">Sequências de caracteres como [nome] serão expandidas mais tarde quando este formato for usado.</string>
@@ -538,6 +547,7 @@
   <string name="settings_open_geokretymap_website">Abrir a página web GeoKretyMap.org</string>
   <string name="settings_settings">Definições</string>
   <string name="settings_information">Informações</string>
+  <string name="settings_advanced">Configurações avançadas</string>
   <string name="settings_twitter_cache_message">Mensagem para cache encontrada</string>
   <string name="settings_twitter_trackable_message">Mensagem para trackable encontrado</string>
   <string name="init_ec_icons">Ícones do mapa</string>
@@ -564,13 +574,13 @@
   <string name="init_sendToCgeo">Enviar para o c:geo</string>
   <string name="settings_info_send2cgeo_title">Informação sobre send2cgeo</string>
   <string name="init_sendToCgeo_name">Nome do seu dispositivo</string>
-  <string name="init_sendToCgeo_description">Enviar para o c: geo permite-lhe receber caches directamente do site Geocaching.com, utilizando um plugin especial para o Firefox ou Chrome. Antes de se registar, por favor leia <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Apenas necessita de registar, se pretender utilizar o send2cgeo. O c:geo irá funcionar mesmo sem este registo.</string>
+  <string name="init_sendToCgeo_description"><b>Send2cgeo</b> permite-lhe receber caches directamente do site Geocaching.com, utilizando um plugin especial para o Firefox ou Chrome. Antes de se registar, por favor leia <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Apenas necessita de registar, se pretender utilizar o send2cgeo. O c:geo irá funcionar mesmo sem este registo.</string>
   <string name="init_sendToCgeo_register">Solicitar registo</string>
-  <string name="init_sendToCgeo_registering">Registando o seu dispositivo para \"Enviar para o c:geo\"…</string>
+  <string name="init_sendToCgeo_registering">Registando o seu dispositivo para send2cgeo…</string>
   <string name="init_sendToCgeo_register_ok">Registo bem sucedido. O código PIN é ####. Use-o no site do c:geo para adicionar este dispositivo ao seu browser.</string>
   <string name="init_sendToCgeo_register_fail">O registo falhou.</string>
-  <string name="sendToCgeo_download_fail">c:geo falhou o download das caches. Sem ligação à internet ou send2c:geo está em baixo.</string>
-  <string name="sendToCgeo_no_registration">c:geo falhou o download das caches. Registo do send2c:geo expirou. Faça o registo nas definições.</string>
+  <string name="sendToCgeo_download_fail">c:geo falhou o download das caches. Sem ligação à internet ou send2cgeo está em baixo.</string>
+  <string name="sendToCgeo_no_registration">c:geo falhou o download das caches. Registo do send2cgeo expirou. Faça o registo nas definições.</string>
   <string name="auth_twitter">Twitter</string>
   <string name="auth_authorize">Autorizar c:geo</string>
   <string name="auth_start">Iniciar autorização</string>
@@ -578,10 +588,16 @@
   <string name="auth_dialog_waiting">Esperando por %s…</string>
   <string name="auth_explain_short">O processo a seguir permitirá que <b>c:geo</b> acesse o %s.</string>
   <string name="auth_explain_long">Pressionar o botão \"autorizar c:geo\" vai iniciar o processo. Este processo vai abrir um navegador web com uma página %s. Entre nesta página e permita que o <b>c:geo</b> tenha acesso à sua conta. E já está.</string>
+  <string name="auth_token_register">Criar uma conta</string>
+  <string name="auth_token_explain_short">O processo a seguir permitirá que o <b>c:geo</b> aceda %s.</string>
+  <string name="auth_token_explain_long">Preenchendo a credencial e premindo o botão \"autorizar c:geo\" inicia o processo. Este processo vai conectar a %s e obtem um token de autenticação. É isso.</string>
   <string name="auth_dialog_completed_twitter">O c:geo está agora autorizado a publicar no Twitter.</string>
   <string name="auth_ocde">opencaching.de</string>
   <string name="auth_ocpl">Opencaching.pl</string>
   <string name="auth_dialog_completed_oc">c:geo está agora autorizado a interagir com %s.</string>
+  <string name="auth_dialog_completed_geokrety">c:geo está agora autorizado a interagir com %s.</string>
+  <string name="err_auth_geokrety_bad_password">O utilizador/senha parecem inválidos.</string>
+  <string name="err_auth_geokrety_unknown">%1$s retornou: %2$s.</string>
   <plurals name="cache_counts">
     <item quantity="one">Uma cache</item>
     <item quantity="other">%1$d Caches</item>
@@ -669,6 +685,7 @@
   <string name="cache_menu_map_static">Mapas estáticos</string>
   <string name="cache_menu_download_map_static">Descarregar os mapas estáticos</string>
   <string name="cache_menu_rmaps">Rmaps</string>
+  <string name="cache_menu_map_ext">Outras aplicações externas</string>
   <string name="cache_menu_streetview">Vista de rua</string>
   <string name="cache_menu_browser">Abrir no browser</string>
   <string name="cache_menu_visit">Registar visita</string>
@@ -858,6 +875,7 @@
   <string name="trackable_goal">Objectivo</string>
   <string name="trackable_details">Detalhes</string>
   <string name="trackable_image">Imagem</string>
+  <string name="trackable_code">Código de acompanhamento</string>
   <string name="trackable_name">Nome</string>
   <string name="trackable_type">Tipo</string>
   <string name="trackable_owner">Dono</string>
@@ -888,6 +906,8 @@
   <string name="user_menu_open_contact">Abrir contacto</string>
   <string name="navigation">Navegação</string>
   <string name="compass_title">Bússola</string>
+  <string name="use_gps">apenas GPS</string>
+  <string name="use_compass">GPS e Bússola Magnética</string>
   <string name="destination_select">Seleccionar destino</string>
   <string name="navigation_direct_navigation">Navegação directa</string>
   <string name="navigation_target">Destino</string>
@@ -916,6 +936,8 @@
   <string name="helper_google_translate_description">Se fizer o download dos pacotes de tradução na app Google Translate, pode facilmente traduzir as descrições da cache no c:geo com um toque longo sobre o texto da descrição da cache (mesmo sem ligação à Internet).</string>
   <string name="addon_missing_title">Add-On em falta</string>
   <string name="addon_download_prompt">Obter agora a partir de Google Play.</string>
+  <string name="export">Exportar</string>
+  <string name="export_progress">Exportar: %1$s</string>
   <string name="export_exportedto">exportado para</string>
   <string name="export_failed">Exportação falhou</string>
   <string name="export_fieldnotes">Notas de campo</string>
@@ -928,6 +950,8 @@
   <string name="export_gpx">GPX</string>
   <string name="export_gpx_info">O ficheiro GPX vai ser exportado para %1$s com a data e a hora actual como nome de ficheiro.</string>
   <string name="export_gpx_to">Enviar GPX exportado para</string>
+  <string name="export_confirm_title">Exportar %1$s</string>
+  <string name="export_confirm_message">Para: %1$s\nNome de ficheiro: %2$s</string>
   <string name="attribute_dogs_yes">Cães permitidos</string>
   <string name="attribute_dogs_no">Cães não permitidos</string>
   <string name="attribute_bicycles_yes">Bicicletas permitidas</string>
@@ -1218,8 +1242,21 @@
   <string name="showcase_cachelist_title">A trocar de listas</string>
   <string name="showcase_cachelist_text">Pode alternar entre listas de caches clicando no título da lista.</string>
   <string name="showcase_compass_hint_title">Mostrar a dica</string>
+  <string name="showcase_compass_hint_text">Este novo item do menu pode dar-te uma ideia onde encontrar a cache - Mostra a dica, caso disponível.</string>
   <string name="confirm_log_title">Tipo de registo invulgar</string>
   <string name="confirm_log_message">Quer fazer o registo \'%s\'. Tem a certeza?</string>
+  <string name="settings_activate_geokrety">Activar</string>
   <string name="init_geokrety">GeoKrety.org</string>
+  <string name="init_connectorGeokretyActive">Geokrety Trackables</string>
   <string name="init_summary_geokrety">Habilitar trackables de GeoKrety.org</string>
+  <string name="init_summary_geokrety_account">Nenhuma conta configurada.</string>
+  <string name="init_geokrety_register_ok">Inicio de sessão com sucesso</string>
+  <string name="init_geokrety_register_fail">Falha ao iniciar sessão</string>
+  <string name="init_geokrety_description">Autorize c:geo com GeoKrety.org para registar GeoKrety trackables.</string>
+  <string name="init_geokrety_cache_description">GeokretyMap.org fornece dados em cache para GeoKrety trackables.\nDados disponíveis contém mais informações GeoKrety como estado \'descrição\' ou \'perdido\'.\n\nDados não são ao vivo! \nPositions: ~ 30 min. \nDescriptions: ~ 24 h.</string>
+  <string name="init_geokrety_cache">Use GeoKretyMap.org</string>
+  <string name="init_geokrety_userid">Id de utilizador: %s</string>
+  <string name="settings_map_direction">Mostrar a direcção</string>
+  <string name="settings_summary_map_direction">Mostrar uma linha de direcção para o destino de navegação</string>
+  <string name="map_direction">Mostrar a direcção</string>
 </resources>
