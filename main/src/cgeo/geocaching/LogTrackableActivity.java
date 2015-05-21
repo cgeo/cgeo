@@ -1,5 +1,8 @@
 package cgeo.geocaching;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+
 import cgeo.geocaching.activity.Keyboard;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.LogResult;
@@ -58,9 +61,6 @@ import android.widget.LinearLayout;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-
-import butterknife.ButterKnife;
-import butterknife.InjectView;
 
 public class LogTrackableActivity extends AbstractLoggingActivity implements DateDialogParent, TimeDialogParent, CoordinateUpdate, LoaderManager.LoaderCallbacks<List<LogTypeTrackable>> {
 
@@ -314,7 +314,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
         }
 
         // show/hide Tracking Code Field for note type
-        if (typeSelected != LogTypeTrackable.NOTE || typeSelected == LogTypeTrackable.NOTE && loggingManager.isTrackingCodeNeededToPostNote()) {
+        if (typeSelected != LogTypeTrackable.NOTE || loggingManager.isTrackingCodeNeededToPostNote()) {
             trackingEditText.setVisibility(View.VISIBLE);
         } else {
             trackingEditText.setVisibility(View.GONE);
