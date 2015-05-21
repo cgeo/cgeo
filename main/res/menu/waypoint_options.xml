@@ -11,6 +11,10 @@
         android:title="@string/waypoint_edit">
     </item>
     <item
+        android:id="@+id/menu_waypoint_copy_coordinates"
+        android:title="@string/waypoint_copy_coordinates">
+    </item>
+    <item
         android:id="@+id/menu_waypoint_duplicate"
         android:title="@string/waypoint_duplicate">
     </item>

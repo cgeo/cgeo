@@ -861,6 +861,7 @@
     <string name="waypoint_distance">Distance</string>
     <string name="waypoint_name">Name</string>
     <string name="waypoint_edit">Edit</string>
+    <string name="waypoint_copy_coordinates">Copy coordinates</string>
     <string name="waypoint_delete">Delete</string>
     <string name="waypoint_edit_title">Edit waypoint</string>
     <string name="waypoint_add_title">Add waypoint</string>

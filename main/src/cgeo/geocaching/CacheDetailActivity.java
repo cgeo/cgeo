@@ -52,6 +52,7 @@ import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.logs.CacheLogsViewCreator;
 import cgeo.geocaching.utils.CheckerUtils;
+import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.CryptUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.ImageUtils;
@@ -453,6 +454,12 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     ensureSaved();
                     EditWaypointActivity.startActivityEditWaypoint(this, cache, selectedWaypoint.getId());
                     refreshOnResume = true;
+                }
+                return true;
+            case R.id.menu_waypoint_copy_coordinates:
+                if (selectedWaypoint != null) {
+                    ClipboardUtils.copyToClipboard(selectedWaypoint.getCoords().toString());
+                    showToast(getResources().getString(R.string.clipboard_copy_ok));
                 }
                 return true;
             case R.id.menu_waypoint_duplicate:
