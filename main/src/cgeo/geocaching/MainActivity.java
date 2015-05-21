@@ -100,6 +100,7 @@ public class MainActivity extends AbstractActionBarActivity {
      * view of the action bar search
      */
     private SearchView searchView;
+    private MenuItem searchItem;
     private Geopoint addCoords = null;
     private boolean initialized = false;
     private ConnectivityChangeReceiver connectivityChangeReceiver;
@@ -289,7 +290,7 @@ public class MainActivity extends AbstractActionBarActivity {
     public boolean onCreateOptionsMenu(final Menu menu) {
         getMenuInflater().inflate(R.menu.main_activity_options, menu);
         final SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        final MenuItem searchItem = menu.findItem(R.id.menu_gosearch);
+        searchItem = menu.findItem(R.id.menu_gosearch);
         searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
         hideKeyboardOnSearchClick(searchItem);
@@ -730,6 +731,7 @@ public class MainActivity extends AbstractActionBarActivity {
         // back may exit the app instead of closing the search action bar
         if (searchView != null && !searchView.isIconified()) {
             searchView.setIconified(true);
+            MenuItemCompat.collapseActionView(searchItem);
         }
         else {
             super.onBackPressed();
