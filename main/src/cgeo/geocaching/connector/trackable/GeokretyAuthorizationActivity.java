@@ -7,6 +7,9 @@ import cgeo.geocaching.settings.Settings;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
 
+import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.Nullable;
+
 import android.os.Bundle;
 
 import java.util.regex.Pattern;
@@ -64,8 +67,8 @@ public class GeokretyAuthorizationActivity extends TokenAuthorizationActivity {
     }
 
     @Override
-    protected String getExtendedErrorMsg(final String response) {
-        if (response.equals("1")) {
+    protected String getExtendedErrorMsg(final @Nullable String response) {
+        if (StringUtils.equals(response, "1")) {
             return res.getString(R.string.err_auth_geokrety_bad_password);
         }
 
