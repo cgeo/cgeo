@@ -41,6 +41,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.lang.ref.WeakReference;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -367,11 +368,11 @@ public final class ImageUtils {
         };
 
         private Drawable drawable;
-        final protected TextView view;
+        final protected WeakReference<TextView> viewRef;
 
         @SuppressWarnings("deprecation")
         public ContainerDrawable(@NonNull final TextView view, final Observable<? extends Drawable> drawableObservable) {
-            this.view = view;
+            viewRef = new WeakReference<>(view);
             drawable = null;
             setBounds(0, 0, 0, 0);
             drawableObservable.subscribe(this);
@@ -402,10 +403,15 @@ public final class ImageUtils {
          *
          * @param newDrawable the new drawable
          * @return the view to update
+         * @throws IllegalStateException if the view does not exist anymore
          */
         protected TextView updateDrawable(final Drawable newDrawable) {
             setBounds(0, 0, newDrawable.getIntrinsicWidth(), newDrawable.getIntrinsicHeight());
             drawable = newDrawable;
+            final TextView view = viewRef.get();
+            if (view == null) {
+                throw new IllegalStateException("text view has been deleted while its images are still in use");
+            }
             return view;
         }
 
@@ -440,7 +446,7 @@ public final class ImageUtils {
 
         @Override
         protected TextView updateDrawable(final Drawable newDrawable) {
-            super.updateDrawable(newDrawable);
+            final TextView view = super.updateDrawable(newDrawable);
             setBounds(scaleImageToLineHeight(newDrawable, view));
             return view;
         }
