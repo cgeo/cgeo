@@ -10,6 +10,8 @@ import cgeo.geocaching.apps.cache.WhereYouGoApp;
 import cgeo.geocaching.apps.cache.navi.GoogleNavigationApp.GoogleNavigationBikeApp;
 import cgeo.geocaching.apps.cache.navi.GoogleNavigationApp.GoogleNavigationDrivingApp;
 import cgeo.geocaching.apps.cache.navi.GoogleNavigationApp.GoogleNavigationWalkingApp;
+import cgeo.geocaching.apps.cache.navi.SygicNavigationApp.SygicNavigationDrivingApp;
+import cgeo.geocaching.apps.cache.navi.SygicNavigationApp.SygicNavigationWalkingApp;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.settings.Settings;
 
@@ -56,8 +58,10 @@ public final class NavigationAppFactory {
         ORUX_MAPS(new OruxMapsApp(), 9, R.string.pref_navigation_menu_oruxmaps),
         /** The external navigon app */
         NAVIGON(new NavigonApp(), 10, R.string.pref_navigation_menu_navigon),
-        /** The external Sygic app */
-        SYGIC(new SygicNavigationApp(), 11, R.string.pref_navigation_menu_sygic),
+        /** The external Sygic app in walking mode */
+        SYGIC_WALKING(new SygicNavigationWalkingApp(), 11, R.string.pref_navigation_menu_sygic_walking),
+        /** The external Sygic app in walking mode */
+        SYGIC_DRIVING(new SygicNavigationDrivingApp(), 23, R.string.pref_navigation_menu_sygic_driving),
         /**
          * Google Navigation in walking mode
          */

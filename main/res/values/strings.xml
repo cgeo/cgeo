@@ -739,6 +739,8 @@
     <string name="cache_menu_navigation_walk">Navigation (Walking)</string>
     <string name="cache_menu_navigation_bike">Navigation (Bike)</string>
     <string name="cache_menu_maps_directions">Google Maps Directions</string>
+    <string name="cache_menu_sygic_walk">Sygic (Walking)</string>
+    <string name="cache_menu_sygic_drive">Sygic (Driving)</string>
     <string name="cache_menu_radar">Radar</string>
     <string name="cache_menu_map">Map</string>
     <string name="cache_menu_map_static">Static Maps</string>

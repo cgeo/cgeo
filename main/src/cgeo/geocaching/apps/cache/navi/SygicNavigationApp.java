@@ -14,7 +14,9 @@ import android.net.Uri;
  * http://developers.sygic.com/documentation.php?action=customurl_android
  *
  */
-class SygicNavigationApp extends AbstractPointNavigationApp {
+abstract class SygicNavigationApp extends AbstractPointNavigationApp {
+
+    private final String mode;
 
     private static final String PACKAGE_NORMAL = "com.sygic.aura";
     /**
@@ -22,8 +24,9 @@ class SygicNavigationApp extends AbstractPointNavigationApp {
      */
     private static final String PACKAGE_VOUCHER = "com.sygic.aura_voucher";
 
-    SygicNavigationApp() {
-        super(getString(R.string.cache_menu_sygic), null, PACKAGE_NORMAL);
+    private SygicNavigationApp(final int nameResourceId, final String mode) {
+        super(getString(nameResourceId), null, PACKAGE_NORMAL);
+        this.mode = mode;
     }
 
     @Override
@@ -33,8 +36,19 @@ class SygicNavigationApp extends AbstractPointNavigationApp {
 
     @Override
     public void navigate(final @NonNull Activity activity, final @NonNull Geopoint coords) {
-        final String str = "com.sygic.aura://coordinate|" + coords.getLongitude() + "|" + coords.getLatitude() + "|show";
+        final String str = "com.sygic.aura://coordinate|" + coords.getLongitude() + "|" + coords.getLatitude() + "|" + mode;
         activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(str)));
     }
 
+    static class SygicNavigationWalkingApp extends SygicNavigationApp {
+        SygicNavigationWalkingApp() {
+            super(R.string.cache_menu_sygic_walk, "walk");
+        }
+    }
+
+    static class SygicNavigationDrivingApp extends SygicNavigationApp {
+        SygicNavigationDrivingApp() {
+            super(R.string.cache_menu_sygic_drive, "drive");
+        }
+    }
 }

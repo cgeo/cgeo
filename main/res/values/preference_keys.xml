@@ -141,7 +141,8 @@
     <string name="pref_navigation_menu_google_streetview">navigationStreetView</string>
     <string name="pref_navigation_menu_oruxmaps">navigationOruxmaps</string>
     <string name="pref_navigation_menu_navigon">navigationNavigon</string>
-    <string name="pref_navigation_menu_sygic">navigationSygic</string>
+    <string name="pref_navigation_menu_sygic_walking">navigationSygicWalking</string>
+    <string name="pref_navigation_menu_sygic_driving">navigationSygicDriving</string>
     <string name="pref_navigation_menu_google_walk">navigationGoogleWalk</string>
     <string name="pref_navigation_menu_google_bike">navigationGoogleBike</string>
     <string name="pref_navigation_menu_google_maps_directions">navigationMapsDirections</string>

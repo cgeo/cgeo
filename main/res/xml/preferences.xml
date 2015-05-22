@@ -721,8 +721,13 @@
                 <CheckBoxPreference
                     android:defaultValue="true"
                     android:enabled="false"
-                    android:key="@string/pref_navigation_menu_sygic"
-                    android:title="@string/cache_menu_sygic" />
+                    android:key="@string/pref_navigation_menu_sygic_walking"
+                    android:title="@string/cache_menu_sygic_walk" />
+                <CheckBoxPreference
+                    android:defaultValue="true"
+                    android:enabled="false"
+                    android:key="@string/pref_navigation_menu_sygic_driving"
+                    android:title="@string/cache_menu_sygic_drive" />
                 <CheckBoxPreference
                     android:defaultValue="true"
                     android:enabled="false"
