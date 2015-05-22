@@ -60,6 +60,7 @@ public class GeokretyParser {
                 trackable = new Trackable();
                 trackable.forceSetBrand(TrackableBrand.GEOKRETY);
                 trackables.add(trackable);
+                trackable.setSpottedType(Trackable.SPOTTED_OWNER);
             }
             try {
                 if (localName.equalsIgnoreCase("geokret")) {
@@ -79,10 +80,13 @@ public class GeokretyParser {
                     if (StringUtils.isNotBlank(kretyType)) {
                         trackable.setType(getType(Integer.parseInt(kretyType)));
                     }
+                    final String kretyState = attributes.getValue("state");
+                    if (StringUtils.isNotBlank(kretyState)) {
+                        trackable.setSpottedType(getSpottedType(Integer.parseInt(kretyState)));
+                    }
                     final String waypointCode = attributes.getValue("waypoint");
                     if (StringUtils.isNotBlank(waypointCode)) {
                         trackable.setSpottedName(waypointCode);
-                        trackable.setSpottedType(Trackable.SPOTTED_CACHE);
                     }
                     final String imageName = attributes.getValue("image");
                     if (StringUtils.isNotBlank(imageName)) {
@@ -132,8 +136,15 @@ public class GeokretyParser {
         public final void endElement(final String uri, final String localName, final String qName)
                 throws SAXException {
             try {
-                if (localName.equalsIgnoreCase("geokret") && StringUtils.isNotEmpty(content)) {
-                    trackable.setName(content);
+                if (localName.equalsIgnoreCase("geokret")) {
+                    if (StringUtils.isNotEmpty(content)) {
+                        trackable.setName(content);
+                    }
+
+                    // This is a special case. Deal it at the end of the "geokret" parsing (xml close)
+                    if (trackable.getSpottedType() == Trackable.SPOTTED_TRAVELLING && trackable.getDistance() == 0) {
+                        trackable.setSpottedType(Trackable.SPOTTED_OWNER);
+                    }
                 }
                 if (localName.equalsIgnoreCase("name")) {
                     trackable.setName(content);
@@ -156,14 +167,13 @@ public class GeokretyParser {
                     trackable.setImage("http://geokrety.org/obrazki/" + content);
                 }
                 if (StringUtils.isNotBlank(content) && localName.equalsIgnoreCase("state")) {
-                    trackable.setSpottedType(Integer.parseInt(content));
+                    trackable.setSpottedType(getSpottedType(Integer.parseInt(content)));
                 }
                 if (StringUtils.isNotBlank(content) && localName.equalsIgnoreCase("missing")) {
                     trackable.setMissing("1".equalsIgnoreCase(content));
                 }
                 if (StringUtils.isNotBlank(content) && localName.equalsIgnoreCase("waypoint")) {
                     trackable.setSpottedName(content);
-                    trackable.setSpottedType(Trackable.SPOTTED_CACHE);
                 }
             } catch (final ParseException | NumberFormatException e) {
                 Log.e("Parsing GeoKret", e);
@@ -277,6 +287,29 @@ public class GeokretyParser {
                 return CgeoApplication.getInstance().getString(R.string.geokret_type_post);
         }
         return null;
+    }
+
+    /**
+     * Convert states from GK to c:geo spotted types. See: http://geokrety.org/api.php
+     *
+     * @param state
+     *          the GK state read from xml
+     * @return
+     *          The spotted types as defined in Trackables
+     */
+    private static int getSpottedType(final int state) {
+        switch (state) {
+            case 0: // Dropped
+            case 3: // Seen in
+                return Trackable.SPOTTED_CACHE;
+            case 1: // Grabbed from
+            case 5: // Visiting
+                return Trackable.SPOTTED_TRAVELLING;
+            case 4: // Archived
+                return Trackable.SPOTTED_ARCHIVED;
+            //case 2: // A comment (however this case doesn't exists in db)
+        }
+        return Trackable.SPOTTED_UNKNOWN;
     }
 
     @Nullable

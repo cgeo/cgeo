@@ -479,7 +479,9 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
             // trackable spotted
             if (StringUtils.isNotBlank(trackable.getSpottedName()) ||
                     trackable.getSpottedType() == Trackable.SPOTTED_UNKNOWN ||
-                    trackable.getSpottedType() == Trackable.SPOTTED_OWNER) {
+                    trackable.getSpottedType() == Trackable.SPOTTED_OWNER ||
+                    trackable.getSpottedType() == Trackable.SPOTTED_ARCHIVED ||
+                    trackable.getSpottedType() == Trackable.SPOTTED_TRAVELLING) {
 
                 final StringBuilder text;
                 boolean showTimeSpan = true;
@@ -497,6 +499,12 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
                         break;
                     case Trackable.SPOTTED_OWNER:
                         text = new StringBuilder(res.getString(R.string.trackable_spotted_owner));
+                        break;
+                    case Trackable.SPOTTED_ARCHIVED:
+                        text = new StringBuilder(res.getString(R.string.trackable_spotted_archived));
+                        break;
+                    case Trackable.SPOTTED_TRAVELLING:
+                        text = new StringBuilder(res.getString(R.string.trackable_spotted_travelling));
                         break;
                     default:
                         text = new StringBuilder("N/A");

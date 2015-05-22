@@ -971,6 +971,8 @@
     <string name="trackable_spotted_at_user">In the hands of</string>
     <string name="trackable_spotted_unknown_location">Unknown location</string>
     <string name="trackable_spotted_owner">In the hands of its owner</string>
+    <string name="trackable_spotted_archived">Archived</string>
+    <string name="trackable_spotted_travelling">Travelling</string>
     <string name="trackable_origin">Origin</string>
     <string name="trackable_unknown">Unknown</string>
     <string name="trackable_released">Released</string>

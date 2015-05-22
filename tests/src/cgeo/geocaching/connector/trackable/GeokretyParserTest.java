@@ -93,7 +93,7 @@ public class GeokretyParserTest extends AbstractResourceInstrumentationTestCase 
         assertThat(trackable1.getReleased()).isNull();
         assertThat(trackable1.getDistance()).isEqualTo(-1.0f);
         assertThat(trackable1.getImage()).isNull();
-        assertThat(trackable1.getSpottedType()).isEqualTo(0);
+        assertThat(trackable1.getSpottedType()).isEqualTo(Trackable.SPOTTED_OWNER);
         assertThat(trackable1.getSpottedName()).isNull();
         assertThat(trackable1.getType()).isEqualTo(app.getString(cgeo.geocaching.R.string.geokret_type_traditional));
     }
