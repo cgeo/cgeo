@@ -320,6 +320,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                         if (CollectionUtils.isNotEmpty(result)) {
                             cacheList.clear();
                             cacheList.addAll(result);
+                            adapter.reFilter();
                         }
                         setAdapterCurrentCoordinates(false);
 
