@@ -4,9 +4,11 @@ import cgeo.geocaching.Geocache;
 
 import org.eclipse.jdt.annotation.NonNull;
 
+import android.os.Parcelable;
+
 import java.util.List;
 
-public interface IFilter {
+public interface IFilter extends Parcelable {
 
     @NonNull
     String getName();

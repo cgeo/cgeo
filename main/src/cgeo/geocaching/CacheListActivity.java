@@ -130,6 +130,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     private static final int REQUEST_CODE_IMPORT_GPX = 1;
 
+    private static final String STATE_FILTER = "currentFilter";
+
     private CacheListType type = null;
     private Geopoint coords = null;
     private SearchResult search = null;
@@ -402,7 +404,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
         setTheme();
 
         setContentView(R.layout.cacheslist_activity);
@@ -427,6 +428,12 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         }
 
         setTitle(title);
+
+        // Check whether we're recreating a previously destroyed instance
+        if (savedInstanceState != null) {
+            // Restore value of members from saved state
+            currentFilter = savedInstanceState.getParcelable(STATE_FILTER);
+        }
 
         initAdapter();
 
@@ -454,6 +461,15 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         else {
             presentShowcase();
         }
+    }
+
+    @Override
+    public void onSaveInstanceState(final Bundle savedInstanceState) {
+        // Save the current Filter
+        savedInstanceState.putParcelable(STATE_FILTER, currentFilter);
+
+        // Always call the superclass so it can save the view hierarchy state
+        super.onSaveInstanceState(savedInstanceState);
     }
 
     /**
