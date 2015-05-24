@@ -239,7 +239,7 @@
   <string name="menu_filter">Filtro</string>
   <string name="menu_scan_geo">Escánear geocódigo</string>
   <string name="menu_pocket_queries">Pocket Queries</string>
-  <string name="menu_scan_description">c:geo puede escanear geocódigos que están impresos como código QR. La aplicación necesaria no está instalada. ¿Quiere abrir Google Play para instalarlo?</string>
+  <string name="menu_scan_description">c:geo puede escanear geocódigos que están impresos como códigos QR. La aplicación necesaria no está instalada. ¿Quiere abrir Google Play para instalarla?</string>
   <string name="live_map_button">Mapa</string>
   <string name="caches_nearby_button">Cercanos</string>
   <string name="advanced_search_button">Buscar</string>
@@ -556,7 +556,7 @@
   <string name="feature_search_keyword">Buscar por palabra clave</string>
   <string name="feature_search_live_map">Mapa en vivo</string>
   <string name="feature_search_center">Búsqueda por posición</string>
-  <string name="feature_search_geocode">Buscar por geocódigo</string>
+  <string name="feature_search_geocode">Buscar por código GC</string>
   <string name="feature_search_owner">Búsqueda por dueño</string>
   <string name="feature_search_finder">Buscar por quien lo ha encontrado</string>
   <string name="map_source_google_map">Google: Mapa</string>
@@ -672,6 +672,8 @@
   <string name="cache_menu_navigation_walk">Navegación (A Pie)</string>
   <string name="cache_menu_navigation_bike">Navegación (Bici)</string>
   <string name="cache_menu_maps_directions">Direcciones de Google Maps</string>
+  <string name="cache_menu_sygic_walk">Sygic (A pie)</string>
+  <string name="cache_menu_sygic_drive">Sygic (Coche)</string>
   <string name="cache_menu_radar">Radar</string>
   <string name="cache_menu_map">Ver en mapa</string>
   <string name="cache_menu_map_static">Mapas estáticos</string>
@@ -775,6 +777,7 @@
   <string name="waypoint_distance">Distancia</string>
   <string name="waypoint_name">Nombre</string>
   <string name="waypoint_edit">Editar</string>
+  <string name="waypoint_copy_coordinates">Copiar coordenadas</string>
   <string name="waypoint_delete">Borrar</string>
   <string name="waypoint_edit_title">Editar waypoint</string>
   <string name="waypoint_add_title">Añadir waypoint</string>
@@ -863,6 +866,7 @@
   <string name="trackable_details_loading">Cargando detalles del rastreable…</string>
   <string name="trackable_log_touch">Registrar contacto</string>
   <string name="trackable_browser_open">Abrir en navegador</string>
+  <string name="trackable_refresh">Actualizar</string>
   <string name="trackable_goal">Objetivo</string>
   <string name="trackable_details">Detalles</string>
   <string name="trackable_image">Imagen</string>
@@ -875,6 +879,7 @@
   <string name="trackable_spotted_at_user">En manos de</string>
   <string name="trackable_spotted_unknown_location">Ubicación desconocida</string>
   <string name="trackable_spotted_owner">En manos del propietario</string>
+  <string name="trackable_spotted_archived">Archivado</string>
   <string name="trackable_origin">Origen</string>
   <string name="trackable_unknown">Desconocido</string>
   <string name="trackable_released">Activado</string>
@@ -1247,6 +1252,7 @@ Nombre de archivo:%2$s</string>
   <string name="init_geokrety_cache_description">GeokretyMap.org proporciona datos almacenados para rastreables GeoKrety.\nLos datos disponibles contienen más información sobre GeoKrety como \'descripción\' o estado \'desaparecido\'.\n\n¡Los datos no se actualizan en vivo!\nPosiciones: ~30min.\nDescripciones: ~24h.</string>
   <string name="init_geokrety_cache">Usar GeoKretyMap.org</string>
   <string name="init_geokrety_userid">Usuario: %s</string>
+  <string name="do_not_ask_me_again">No preguntar de nuevo</string>
   <string name="settings_map_direction">Mostrar dirección</string>
   <string name="settings_summary_map_direction">Muestra una línea de dirección al objetivo de la navegación</string>
   <string name="map_direction">Mostrar dirección</string>
