@@ -9,11 +9,13 @@ import cgeo.geocaching.sensors.Sensors;
 
 import org.eclipse.jdt.annotation.NonNull;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 class DistanceFilter extends AbstractFilter {
-    private final GeoData geo;
+    private transient GeoData geo;
     private final int minDistance;
     private final int maxDistance;
 
@@ -21,6 +23,11 @@ class DistanceFilter extends AbstractFilter {
         super(name);
         this.minDistance = minDistance;
         this.maxDistance = maxDistance;
+        geo = Sensors.getInstance().currentGeo();
+    }
+
+    private void readObject(final ObjectInputStream in) throws IOException, ClassNotFoundException {
+        in.defaultReadObject();
         geo = Sensors.getInstance().currentGeo();
     }
 

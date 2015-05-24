@@ -12,7 +12,9 @@ import android.content.Context;
 import android.location.Location;
 import android.location.LocationManager;
 
-public class GeoData extends Location {
+import java.io.Serializable;
+
+public class GeoData extends Location implements Serializable {
 
     private static final String INITIAL_PROVIDER = "initial";
     private static final String HOME_PROVIDER = "home";
