@@ -8,6 +8,7 @@ import cgeo.geocaching.location.Geopoint;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 

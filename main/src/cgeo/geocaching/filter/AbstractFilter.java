@@ -12,7 +12,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-abstract class AbstractFilter implements IFilter, Serializable, Parcelable {
+abstract class AbstractFilter implements IFilter, Serializable {
     @NonNull
     private final String name;
 
@@ -70,8 +70,8 @@ abstract class AbstractFilter implements IFilter, Serializable, Parcelable {
       * @return An AbstractFilter
       */
         public AbstractFilter createFromParcel(final Parcel in) {
-          // Read serialized concrete Filter from parcel
-          return (AbstractFilter) in.readSerializable();
+            // Read serialized concrete Filter from parcel
+            return (AbstractFilter) in.readSerializable();
         }
 
         /**

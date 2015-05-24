@@ -22,7 +22,7 @@ public class OriginFilter extends AbstractFilter {
 
     @Override
     public final boolean accepts(@NonNull final Geocache cache) {
-        return ConnectorFactory.getConnector(cache) == connector;
+        return ConnectorFactory.getConnector(cache).getName().equalsIgnoreCase(connector.getName());
     }
 
     public static final class Factory implements IFilterFactory {
