@@ -69,6 +69,7 @@ public final class ConnectorFactory {
             new OXConnector(),
             new GeocachingAustraliaConnector(),
             new GeopeitusConnector(),
+            new TerraCachingConnector(),
             new WaymarkingConnector(),
             UNKNOWN_CONNECTOR // the unknown connector MUST be the last one
     ));

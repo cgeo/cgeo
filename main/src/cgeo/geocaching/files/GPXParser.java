@@ -431,7 +431,10 @@ public abstract class GPXParser extends FileParser {
                 if (StringUtils.startsWithIgnoreCase(content, "GCEC") && StringUtils.containsIgnoreCase(scriptUrl, "extremcaching")) {
                     content = content.substring(2);
                 }
-                cache.setName(content);
+
+                if (StringUtils.containsIgnoreCase(scriptUrl, "")) {
+                    cache.setName(content);
+                }
 
                 findGeoCode(cache.getName());
             }
@@ -519,7 +522,7 @@ public abstract class GPXParser extends FileParser {
         final Element cacheParent = getCacheParent(waypoint);
 
         registerGsakExtensions(cacheParent);
-
+        registerTerraCachingExtensions(cacheParent);
         registerCgeoExtensions(cacheParent);
 
         // 3 different versions of the GC schema
@@ -920,6 +923,40 @@ public abstract class GPXParser extends FileParser {
         }
     }
 
+    /**
+     * Add listeners for TerraCaching extensions
+     *
+     */
+    private void registerTerraCachingExtensions(final Element cacheParent) {
+        final String terraNamespace = "http://www.TerraCaching.com/GPX/1/0";
+        final Element terraCache = cacheParent.getChild(terraNamespace, "terracache");
+
+        terraCache.getChild(terraNamespace, "name").setEndTextElementListener(new EndTextElementListener() {
+
+            @Override
+            public void end(final String name) {
+                cache.setName(StringUtils.trim(name));
+            }
+        });
+
+        terraCache.getChild(terraNamespace, "owner").setEndTextElementListener(new EndTextElementListener() {
+
+            @Override
+            public void end(final String ownerName) {
+                cache.setOwnerDisplayName(validate(ownerName));
+            }
+        });
+
+        terraCache.getChild(terraNamespace, "size").setEndTextElementListener(new EndTextElementListener() {
+
+            @Override
+            public void end(final String size) {
+                cache.setSize(CacheSize.getById(size));
+            }
+        });
+
+    }
+
     protected void addOriginalCoordinates() {
         if (StringUtils.isNotEmpty(originalLat) && StringUtils.isNotEmpty(originalLon)) {
             final Waypoint waypoint = new Waypoint(CgeoApplication.getInstance().getString(R.string.cache_coordinates_original), WaypointType.ORIGINAL, false);
@@ -1054,6 +1091,7 @@ public abstract class GPXParser extends FileParser {
         return ((type == null && sym == null)
                 || StringUtils.contains(type, "geocache")
                 || StringUtils.contains(sym, "geocache")
-                || StringUtils.containsIgnoreCase(sym, "waymark"));
+                || StringUtils.containsIgnoreCase(sym, "waymark")
+                || StringUtils.containsIgnoreCase(sym, "terracache"));
     }
 }

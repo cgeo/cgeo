@@ -10,6 +10,7 @@
     · New: Catch more http links to GPX files from the browser\n
     · New: Menu in cache details to put cache on ignore list (but not to remove)\n
     · New: Only turn off GPS in some views if \"Low power mode\" is active in settings\n
+    · New: Can import TerraCaching.com GPX files\n
     · Fix: Close search bar when selecting a cache\n
     \n
   </string>
