@@ -6,6 +6,8 @@ import cgeo.geocaching.R;
 import org.eclipse.jdt.annotation.NonNull;
 
 class TrackablesFilter extends AbstractFilter {
+    private static final long serialVersionUID = 2280421779859292315L;
+
     public TrackablesFilter() {
         super(R.string.caches_filter_track);
     }

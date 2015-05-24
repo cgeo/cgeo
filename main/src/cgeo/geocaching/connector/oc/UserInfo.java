@@ -7,6 +7,8 @@ import java.io.Serializable;
 
 public class UserInfo implements Serializable {
 
+    private static final long serialVersionUID = 891569280239587363L;
+
     public enum UserInfoStatus {
         NOT_RETRIEVED(R.string.init_login_popup_working),
         SUCCESSFUL(R.string.init_login_popup_ok),

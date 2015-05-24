@@ -8,6 +8,8 @@ import org.eclipse.jdt.annotation.Nullable;
 
 class WaymarkingConnector extends AbstractConnector {
 
+    private static final long serialVersionUID = 7294592601900227991L;
+
     @Override
     @NonNull
     public String getName() {

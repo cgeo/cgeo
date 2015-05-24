@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 abstract class AbstractFilter implements IFilter, Serializable {
+    private static final long serialVersionUID = -5918429378818997180L;
     @NonNull
     private final String name;
 

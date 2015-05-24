@@ -10,6 +10,8 @@ import java.util.List;
 
 class TerrainFilter extends AbstractRangeFilter {
 
+    private static final long serialVersionUID = 860373316999710938L;
+
     public TerrainFilter(final int terrain) {
         super(R.string.cache_terrain, terrain);
     }
@@ -21,6 +23,7 @@ class TerrainFilter extends AbstractRangeFilter {
     }
 
     public static class Factory implements IFilterFactory {
+        private static final long serialVersionUID = 9030252058035089041L;
         private static final int TERRAIN_MIN = 1;
         private static final int TERRAIN_MAX = 7;
 

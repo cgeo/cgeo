@@ -13,6 +13,7 @@ import java.util.List;
 
 public class OriginFilter extends AbstractFilter {
 
+    private static final long serialVersionUID = -226131408218792315L;
     private final IConnector connector;
 
     public OriginFilter(@NonNull final IConnector connector) {

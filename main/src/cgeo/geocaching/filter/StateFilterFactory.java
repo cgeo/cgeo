@@ -12,6 +12,8 @@ import java.util.List;
 
 class StateFilterFactory implements IFilterFactory {
 
+    private static final long serialVersionUID = -4915854201507009125L;
+
     @Override
     @NonNull
     public List<? extends IFilter> getFilters() {
@@ -41,6 +43,8 @@ class StateFilterFactory implements IFilterFactory {
 
     static class StateFoundFilter extends AbstractFilter {
 
+        private static final long serialVersionUID = -3767242360632349788L;
+
         public StateFoundFilter() {
             super(R.string.cache_status_found);
         }
@@ -54,6 +58,8 @@ class StateFilterFactory implements IFilterFactory {
 
     static class StateNotFoundFilter extends AbstractFilter {
 
+        private static final long serialVersionUID = 19776079495156351L;
+
         public StateNotFoundFilter() {
             super(R.string.cache_not_status_found);
         }
@@ -66,6 +72,8 @@ class StateFilterFactory implements IFilterFactory {
     }
 
     static class StateArchivedFilter extends AbstractFilter {
+        private static final long serialVersionUID = -4272399405273124686L;
+
         public StateArchivedFilter() {
             super(R.string.cache_status_archived);
         }
@@ -77,6 +85,8 @@ class StateFilterFactory implements IFilterFactory {
     }
 
     static class StateDisabledFilter extends AbstractFilter {
+        private static final long serialVersionUID = -3027505042498459672L;
+
         public StateDisabledFilter() {
             super(R.string.cache_status_disabled);
         }
@@ -88,6 +98,8 @@ class StateFilterFactory implements IFilterFactory {
     }
 
     static class StatePremiumFilter extends AbstractFilter {
+        private static final long serialVersionUID = -4086779915486623739L;
+
         public StatePremiumFilter() {
             super(R.string.cache_status_premium);
         }
@@ -99,6 +111,8 @@ class StateFilterFactory implements IFilterFactory {
     }
 
     static class StateNonPremiumFilter extends AbstractFilter {
+        private static final long serialVersionUID = 6427819310603779646L;
+
         public StateNonPremiumFilter() {
             super(R.string.cache_status_not_premium);
         }
@@ -110,6 +124,8 @@ class StateFilterFactory implements IFilterFactory {
     }
 
     private static class StateOfflineLogFilter extends AbstractFilter {
+        private static final long serialVersionUID = -6076510706828408970L;
+
         public StateOfflineLogFilter() {
             super(R.string.cache_status_offline_log);
         }
@@ -121,6 +137,8 @@ class StateFilterFactory implements IFilterFactory {
     }
 
     static class StateStoredFilter extends AbstractFilter {
+        private static final long serialVersionUID = -2455064686291969386L;
+
         public StateStoredFilter() {
             super(R.string.cache_status_stored);
         }
@@ -132,6 +150,8 @@ class StateFilterFactory implements IFilterFactory {
     }
 
     static class StateNotStoredFilter extends AbstractFilter {
+        private static final long serialVersionUID = 1774243798304092972L;
+
         public StateNotStoredFilter() {
             super(R.string.cache_status_not_stored);
         }

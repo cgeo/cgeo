@@ -13,6 +13,8 @@ import org.eclipse.jdt.annotation.NonNull;
  */
 public class RatingFilter extends AbstractFilter {
 
+    private static final long serialVersionUID = -5316005528335584968L;
+
     protected RatingFilter() {
         super(R.string.caches_filter_rating);
     }

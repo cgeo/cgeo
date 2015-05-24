@@ -8,6 +8,8 @@ import org.eclipse.jdt.annotation.Nullable;
 
 class UnknownConnector extends AbstractConnector {
 
+    private static final long serialVersionUID = -812361106797562631L;
+
     @Override
     @NonNull
     public String getName() {

@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 class DistanceFilter extends AbstractFilter {
+    private static final long serialVersionUID = -4110173222670364694L;
     private transient GeoData geo;
     private final int minDistance;
     private final int maxDistance;
@@ -46,6 +47,7 @@ class DistanceFilter extends AbstractFilter {
 
     public static class Factory implements IFilterFactory {
 
+        private static final long serialVersionUID = 1461003608933602211L;
         private static final int[] KILOMETERS = { 0, 2, 5, 10, 20, 50 };
 
         @Override

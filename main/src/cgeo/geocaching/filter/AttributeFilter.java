@@ -13,6 +13,7 @@ import java.util.List;
 
 class AttributeFilter extends AbstractFilter {
 
+    private static final long serialVersionUID = -992613104646128606L;
     private final String attribute;
 
     public AttributeFilter(@NonNull final String name, final String attribute) {
@@ -32,6 +33,8 @@ class AttributeFilter extends AbstractFilter {
     }
 
     public static class Factory implements IFilterFactory {
+
+        private static final long serialVersionUID = -6719278112259482848L;
 
         @Override
         @NonNull

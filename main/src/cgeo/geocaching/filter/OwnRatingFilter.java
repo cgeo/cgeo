@@ -16,6 +16,8 @@ import java.util.List;
  */
 public class OwnRatingFilter extends AbstractFilter implements IFilterFactory {
 
+    private static final long serialVersionUID = -6442192261392930821L;
+
     protected OwnRatingFilter() {
         super(R.string.caches_filter_own_rating);
     }

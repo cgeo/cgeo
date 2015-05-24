@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 class PopularityFilter extends AbstractFilter {
+    private static final long serialVersionUID = -8620115571186207865L;
     private final int minFavorites;
     private final int maxFavorites;
 
@@ -26,6 +27,7 @@ class PopularityFilter extends AbstractFilter {
 
     public static class Factory implements IFilterFactory {
 
+        private static final long serialVersionUID = 6709810849476663825L;
         private static final int[] FAVORITES = { 10, 20, 50, 100, 200, 500 };
 
         @Override

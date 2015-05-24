@@ -7,6 +7,8 @@ import java.util.List;
 
 public class PersonalDataFilterFactory implements IFilterFactory {
 
+    private static final long serialVersionUID = -3170575777061178786L;
+
     @Override
     @NonNull
     public List<? extends IFilter> getFilters() {

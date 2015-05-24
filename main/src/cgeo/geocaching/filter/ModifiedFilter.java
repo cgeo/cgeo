@@ -10,6 +10,8 @@ import java.util.List;
 
 class ModifiedFilter extends AbstractFilter implements IFilterFactory {
 
+    private static final long serialVersionUID = 8209964082957501589L;
+
     public ModifiedFilter() {
         super(R.string.caches_filter_modified);
     }

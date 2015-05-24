@@ -9,6 +9,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 class SizeFilter extends AbstractFilter {
+    private static final long serialVersionUID = -2338070360641435415L;
     private final CacheSize cacheSize;
 
     public SizeFilter(@NonNull final CacheSize cacheSize) {
@@ -28,6 +29,8 @@ class SizeFilter extends AbstractFilter {
     }
 
     public static class Factory implements IFilterFactory {
+
+        private static final long serialVersionUID = 5375423577550361483L;
 
         @Override
         @NonNull

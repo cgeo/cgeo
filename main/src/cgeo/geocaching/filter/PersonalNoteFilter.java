@@ -14,6 +14,8 @@ import java.util.List;
  */
 public class PersonalNoteFilter extends AbstractFilter implements IFilterFactory {
 
+    private static final long serialVersionUID = -6029553939024693792L;
+
     protected PersonalNoteFilter() {
         super(R.string.caches_filter_personal_note);
     }

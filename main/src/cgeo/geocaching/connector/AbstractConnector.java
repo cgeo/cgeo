@@ -30,6 +30,8 @@ import java.util.List;
 
 public abstract class AbstractConnector implements IConnector, Serializable {
 
+    private static final long serialVersionUID = 6247021667515396675L;
+
     @Override
     public boolean canHandle(@NonNull final String geocode) {
         return false;

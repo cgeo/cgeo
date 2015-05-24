@@ -15,6 +15,7 @@ import java.util.List;
  * filters caches by popularity ratio (favorites per find in %).
  */
 class PopularityRatioFilter extends AbstractFilter {
+    private static final long serialVersionUID = -7606725476655532150L;
     private final int minRatio;
     private final int maxRatio;
 
@@ -50,6 +51,7 @@ class PopularityRatioFilter extends AbstractFilter {
 
     public static class Factory implements IFilterFactory {
 
+        private static final long serialVersionUID = -1304677116891707226L;
         private static final int[] RATIOS = { 10, 20, 30, 40, 50, 75 };
 
         @Override
