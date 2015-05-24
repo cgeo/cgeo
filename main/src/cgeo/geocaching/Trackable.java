@@ -302,7 +302,7 @@ public class Trackable implements ILogable {
      *
      * @return true if missing from cache
      */
-    public Boolean isMissing() {
+    public boolean isMissing() {
         return missing == null ? false : missing;
     }
 
