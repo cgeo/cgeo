@@ -685,6 +685,8 @@
   <string name="cache_menu_navigation_walk">Navigation (Gehen)</string>
   <string name="cache_menu_navigation_bike">Navigation (Fahrrad)</string>
   <string name="cache_menu_maps_directions">Google Maps Route</string>
+  <string name="cache_menu_sygic_walk">Sygic (Gehen)</string>
+  <string name="cache_menu_sygic_drive">Sygic (Fahren)</string>
   <string name="cache_menu_radar">Radar</string>
   <string name="cache_menu_map">Karte</string>
   <string name="cache_menu_map_static">Statische Karten</string>
@@ -790,6 +792,7 @@
   <string name="waypoint_distance">Entfernung</string>
   <string name="waypoint_name">Name</string>
   <string name="waypoint_edit">Bearbeiten</string>
+  <string name="waypoint_copy_coordinates">Kopiere Koordinaten</string>
   <string name="waypoint_delete">Löschen</string>
   <string name="waypoint_edit_title">Wegpunkt bearbeiten</string>
   <string name="waypoint_add_title">Wegpunkt hinzufügen</string>
@@ -878,6 +881,7 @@
   <string name="trackable_details_loading">Lade Details des Trackable…</string>
   <string name="trackable_log_touch">Logge Fund</string>
   <string name="trackable_browser_open">Im Browser öffnen</string>
+  <string name="trackable_refresh">Aktualisieren</string>
   <string name="trackable_goal">Derzeitiges Ziel</string>
   <string name="trackable_details">Über diesen Trackable</string>
   <string name="trackable_image">Foto</string>
@@ -890,6 +894,8 @@
   <string name="trackable_spotted_at_user">Bei</string>
   <string name="trackable_spotted_unknown_location">Unbekannter Ort</string>
   <string name="trackable_spotted_owner">Beim Besitzer</string>
+  <string name="trackable_spotted_archived">Archiviert</string>
+  <string name="trackable_spotted_travelling">Unterwegs</string>
   <string name="trackable_origin">Ursprungsort</string>
   <string name="trackable_unknown">Unbekannt</string>
   <string name="trackable_released">Ausgesetzt</string>

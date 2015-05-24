@@ -221,7 +221,7 @@
   <string name="info_cache_saved">La cache a été enregistrée en local</string>
   <string name="err_trackable_log_not_anonymous">S\'identifier sur %1$s depuis c:geo ne peut se faire anonymement. Souhaitez-vous ouvrir les paramètres et remplir vos informations d\'identification pour %2$s ?</string>
   <string name="err_trackable_no_preference_activity">Désolé, impossible de trouver l\'écran de préférences.</string>
-  <string name="loc_last">Aucun</string>
+  <string name="loc_last">Dernière position</string>
   <string name="loc_net">Réseau</string>
   <string name="loc_fused">Fusionné</string>
   <string name="loc_low_power">Éco</string>
@@ -317,7 +317,7 @@
   <string name="caches_filter_origin">Site web d\'origine</string>
   <string name="caches_filter_distance">Distance</string>
   <string name="caches_filter_personal_note">Avec une note personnelle</string>
-  <string name="caches_filter_popularity">Nombre de favoris</string>
+  <string name="caches_filter_popularity">Favoris [nombre]</string>
   <string name="caches_filter_popularity_ratio">Favoris [%]</string>
   <string name="caches_filter_personal_data">Avec des données personnelles</string>
   <string name="caches_filter_rating">Ayant reçu une évaluation</string>
@@ -584,7 +584,7 @@
   <string name="sendToCgeo_no_registration">c:geo n\'a pas pu charger les caches. L\'enregistrement sur send2cgeo a expiré. Merci de vous réenregistrer en allant dans les Paramètres.</string>
   <string name="auth_twitter">twitter</string>
   <string name="auth_authorize">autorisation de c:geo</string>
-  <string name="auth_start">début d\'autorisation</string>
+  <string name="auth_start">Demander l\'autorisation</string>
   <string name="auth_again">redémarre</string>
   <string name="auth_dialog_waiting">En attente de %s…</string>
   <string name="auth_explain_short">Le processus suivant autorisera <b>c:geo</b> à accéder à %s.</string>
