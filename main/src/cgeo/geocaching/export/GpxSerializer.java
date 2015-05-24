@@ -227,12 +227,13 @@ public final class GpxSerializer {
             gpx.startTag(PREFIX_GPX, "wpt");
             gpx.attribute("", "lat", Double.toString(coords.getLatitude()));
             gpx.attribute("", "lon", Double.toString(coords.getLongitude()));
+            final String waypointTypeGpx = wp.getWaypointType().gpx;
             XmlUtils.multipleTexts(gpx, PREFIX_GPX,
                     "name", wp.getGpxId(),
                     "cmt", wp.getNote(),
                     "desc", wp.getName(),
-                    "sym", wp.getWaypointType().toString(), //TODO: Correct identifier string
-                    "type", "Waypoint|" + wp.getWaypointType().toString()); //TODO: Correct identifier string
+                    "sym", waypointTypeGpx,
+                    "type", "Waypoint|" + waypointTypeGpx);
             // add parent reference the GSAK-way
             gpx.startTag(PREFIX_GSAK, "wptExtension");
             gpx.startTag(PREFIX_GSAK, "Parent");
@@ -333,7 +334,7 @@ public final class GpxSerializer {
         gpx.endTag(PREFIX_GROUNDSPEAK, "attributes");
     }
 
-    public static String getState(final Geocache cache) {
+    protected static String getState(final Geocache cache) {
         return getLocationPart(cache, 0);
     }
 
@@ -348,7 +349,7 @@ public final class GpxSerializer {
         return StringUtils.EMPTY;
     }
 
-    public static String getCountry(final Geocache cache) {
+    protected static String getCountry(final Geocache cache) {
         final String country = getLocationPart(cache, 1);
         if (StringUtils.isNotEmpty(country)) {
             return country;

@@ -2,7 +2,11 @@ package cgeo.geocaching.export;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import cgeo.geocaching.DataStore;
 import cgeo.geocaching.Geocache;
+import cgeo.geocaching.Waypoint;
+import cgeo.geocaching.enumerations.LoadFlags;
+import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.files.GPX10Parser;
 import cgeo.geocaching.files.ParserException;
 import cgeo.geocaching.list.StoredList;
@@ -115,6 +119,21 @@ public class GpxSerializerTest extends AbstractResourceInstrumentationTestCase {
         final Geocache cache = new Geocache();
         cache.setLocation(location);
         return cache;
+    }
+
+    public void testWaypointSym() throws IOException, ParserException {
+        final String geocode = "GC1BKP3";
+        try {
+            final int cacheResource = R.raw.gc1bkp3_gpx101;
+            final Geocache cache = loadCacheFromResource(cacheResource);
+            final Waypoint waypoint = new Waypoint("WP", WaypointType.PARKING, false);
+            waypoint.setCoords(cache.getCoords());
+            cache.addOrChangeWaypoint(waypoint, true);
+
+            assertThat(getGPXFromCache(geocode)).contains("<sym>Parking Area</sym>").contains("<type>Waypoint|Parking Area</type>");
+        } finally {
+            DataStore.removeCache(geocode, LoadFlags.REMOVE_ALL);
+        }
     }
 
 }

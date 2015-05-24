@@ -133,22 +133,6 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         assertThat(caches).isEmpty();
     }
 
-    public static void testConvertWaypointSym2Type() {
-        assertThat(GPXParser.convertWaypointSym2Type("unknown sym")).isEqualTo(WaypointType.WAYPOINT);
-
-        assertThat(GPXParser.convertWaypointSym2Type("Parking area")).isEqualTo(WaypointType.PARKING);
-        assertThat(GPXParser.convertWaypointSym2Type("Stages of a multicache")).isEqualTo(WaypointType.STAGE);
-        assertThat(GPXParser.convertWaypointSym2Type("Question to answer")).isEqualTo(WaypointType.PUZZLE);
-        assertThat(GPXParser.convertWaypointSym2Type("Trailhead")).isEqualTo(WaypointType.TRAILHEAD);
-        assertThat(GPXParser.convertWaypointSym2Type("Final location")).isEqualTo(WaypointType.FINAL);
-        assertThat(GPXParser.convertWaypointSym2Type("Reference point")).isEqualTo(WaypointType.WAYPOINT);
-
-        assertThat(GPXParser.convertWaypointSym2Type(WaypointType.PARKING.getL10n())).isEqualTo(WaypointType.PARKING);
-        // new names of multi and mystery stages
-        assertThat(GPXParser.convertWaypointSym2Type("Physical Stage")).isEqualTo(WaypointType.STAGE);
-        assertThat(GPXParser.convertWaypointSym2Type("Virtual Stage")).isEqualTo(WaypointType.PUZZLE);
-    }
-
     private static void assertGc31j2h(final Geocache cache) {
         assertThat(cache.getGeocode()).isEqualTo("GC31J2H");
         assertThat(cache.getName()).isEqualTo("Hockenheimer City-Brunnen");

@@ -98,7 +98,7 @@ public abstract class AbstractResourceInstrumentationTestCase extends Instrument
             final GPX10Parser parser = new GPX10Parser(StoredList.TEMPORARY_LIST.id);
             final Collection<Geocache> caches = parser.parse(instream, null);
             assertThat(caches).isNotNull();
-            assertThat(caches.isEmpty()).isFalse();
+            assertThat(caches).isNotEmpty();
             return caches.iterator().next();
         } finally {
             instream.close();

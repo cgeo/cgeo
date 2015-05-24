@@ -379,7 +379,7 @@ public abstract class GPXParser extends FileParser {
                     // lookup cache for waypoint in already parsed caches
                     final Geocache cacheForWaypoint = DataStore.loadCache(parentCacheCode, LoadFlags.LOAD_CACHE_OR_DB);
                     if (cacheForWaypoint != null) {
-                        final Waypoint waypoint = new Waypoint(cache.getShortDescription(), convertWaypointSym2Type(sym), false);
+                        final Waypoint waypoint = new Waypoint(cache.getShortDescription(), WaypointType.fromGPXString(sym), false);
                         if (wptUserDefined) {
                             waypoint.setUserDefined();
                         }
@@ -978,41 +978,6 @@ public abstract class GPXParser extends FileParser {
             return "";
         }
         return input.trim();
-    }
-
-    static WaypointType convertWaypointSym2Type(final String sym) {
-        if ("parking area".equalsIgnoreCase(sym)) {
-            return WaypointType.PARKING;
-        }
-        if ("stages of a multicache".equalsIgnoreCase(sym)) {
-            return WaypointType.STAGE;
-        }
-        if ("question to answer".equalsIgnoreCase(sym)) {
-            return WaypointType.PUZZLE;
-        }
-        if ("trailhead".equalsIgnoreCase(sym)) {
-            return WaypointType.TRAILHEAD;
-        }
-        if ("final location".equalsIgnoreCase(sym)) {
-            return WaypointType.FINAL;
-        }
-        // renamed waypoint types
-        if ("Physical Stage".equalsIgnoreCase(sym)) {
-            return WaypointType.STAGE;
-        }
-        if ("Virtual Stage".equalsIgnoreCase(sym)) {
-            return WaypointType.PUZZLE;
-        }
-        // this is not fully correct, but lets also look for localized waypoint types
-        for (final WaypointType waypointType : WaypointType.ALL_TYPES_EXCEPT_OWN_AND_ORIGINAL) {
-            final String localized = waypointType.getL10n();
-            if (StringUtils.isNotEmpty(localized)) {
-                if (localized.equalsIgnoreCase(sym)) {
-                    return waypointType;
-                }
-            }
-        }
-        return WaypointType.WAYPOINT;
     }
 
     private void findGeoCode(final String input) {
