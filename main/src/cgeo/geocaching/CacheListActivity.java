@@ -131,6 +131,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private static final int REQUEST_CODE_IMPORT_GPX = 1;
 
     private static final String STATE_FILTER = "currentFilter";
+    private static final String STATE_INVERSE_SORT = "currentInverseSort";
 
     private CacheListType type = null;
     private Geopoint coords = null;
@@ -433,6 +434,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         if (savedInstanceState != null) {
             // Restore value of members from saved state
             currentFilter = savedInstanceState.getParcelable(STATE_FILTER);
+            currentInverseSort = savedInstanceState.getBoolean(STATE_INVERSE_SORT);
         }
 
         initAdapter();
@@ -467,6 +469,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     public void onSaveInstanceState(final Bundle savedInstanceState) {
         // Save the current Filter
         savedInstanceState.putParcelable(STATE_FILTER, currentFilter);
+        savedInstanceState.putBoolean(STATE_INVERSE_SORT, adapter.getInverseSort());
 
         // Always call the superclass so it can save the view hierarchy state
         super.onSaveInstanceState(savedInstanceState);
@@ -481,6 +484,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
      * remember current filter when switching between lists, so it can be re-applied afterwards
      */
     private IFilter currentFilter = null;
+    private boolean currentInverseSort = false;
 
     private SortActionProvider sortProvider;
 
@@ -597,8 +601,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 // selecting the same sorting twice will toggle the order
                 if (selectedComparator != null && oldComparator != null && selectedComparator.getClass().equals(oldComparator.getClass())) {
                     adapter.toggleInverseSort();
-                }
-                else {
+                } else {
                     // always reset the inversion for a new sorting criteria
                     adapter.resetInverseSort();
                 }
@@ -1002,6 +1005,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             listView.addFooterView(listFooter);
         }
         setListAdapter(adapter);
+
+        adapter.setInverseSort(currentInverseSort);
         adapter.forceSort();
     }
 

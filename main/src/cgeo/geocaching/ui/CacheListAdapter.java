@@ -173,6 +173,26 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
         inverseSort = !inverseSort;
     }
 
+    /**
+     * Set the inverseSort order.
+     *
+     * @param inverseSort
+     *          True if sort is inverted
+     */
+    public void setInverseSort(final boolean inverseSort) {
+        this.inverseSort = inverseSort;
+    }
+
+    /**
+     * Obtain the current inverseSort order.
+     *
+     * @return
+     *          True if sort is inverted
+     */
+    public boolean getInverseSort() {
+        return inverseSort;
+    }
+
     public CacheComparator getCacheComparator() {
         if (isHistory()) {
             return VisitComparator.singleton;
