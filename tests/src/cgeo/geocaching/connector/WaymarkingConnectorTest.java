@@ -18,4 +18,12 @@ public class WaymarkingConnectorTest extends TestCase {
         assertThat(wmConnector.getGeocodeFromUrl("http://coord.info/GC12ABC")).isNull();
         assertThat(wmConnector.getGeocodeFromUrl("http://coord.info/TB1234")).isNull();
     }
+
+    public static void testCanHandle() {
+        final IConnector wmConnector = ConnectorFactory.getConnector("WM1234");
+        assertThat(wmConnector).isNotNull();
+
+        assertThat(wmConnector.canHandle("WM1234")).isTrue();
+        assertThat(wmConnector.canHandle("GC1234")).isFalse();
+    }
 }
