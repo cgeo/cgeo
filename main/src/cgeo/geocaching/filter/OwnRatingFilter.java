@@ -6,6 +6,9 @@ import cgeo.geocaching.gcvote.GCVote;
 
 import org.eclipse.jdt.annotation.NonNull;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -16,10 +19,12 @@ import java.util.List;
  */
 public class OwnRatingFilter extends AbstractFilter implements IFilterFactory {
 
-    private static final long serialVersionUID = -6442192261392930821L;
-
     protected OwnRatingFilter() {
         super(R.string.caches_filter_own_rating);
+    }
+
+    protected OwnRatingFilter(final Parcel in) {
+        super(in);
     }
 
     @Override
@@ -33,4 +38,17 @@ public class OwnRatingFilter extends AbstractFilter implements IFilterFactory {
         return Collections.singletonList(this);
     }
 
+    public static final Creator<OwnRatingFilter> CREATOR
+            = new Parcelable.Creator<OwnRatingFilter>() {
+
+        @Override
+        public OwnRatingFilter createFromParcel(final Parcel in) {
+            return new OwnRatingFilter(in);
+        }
+
+        @Override
+        public OwnRatingFilter[] newArray(final int size) {
+            return new OwnRatingFilter[size];
+        }
+    };
 }

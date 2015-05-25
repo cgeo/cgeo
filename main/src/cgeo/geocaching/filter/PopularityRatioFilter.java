@@ -8,6 +8,9 @@ import cgeo.geocaching.enumerations.LogType;
 
 import org.eclipse.jdt.annotation.NonNull;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +18,6 @@ import java.util.List;
  * filters caches by popularity ratio (favorites per find in %).
  */
 class PopularityRatioFilter extends AbstractFilter {
-    private static final long serialVersionUID = -7606725476655532150L;
     private final int minRatio;
     private final int maxRatio;
 
@@ -23,6 +25,12 @@ class PopularityRatioFilter extends AbstractFilter {
         super(name);
         this.minRatio = minRatio;
         this.maxRatio = maxRatio;
+    }
+
+    protected PopularityRatioFilter(final Parcel in) {
+        super(in);
+        minRatio = in.readInt();
+        maxRatio = in.readInt();
     }
 
     @Override
@@ -51,7 +59,6 @@ class PopularityRatioFilter extends AbstractFilter {
 
     public static class Factory implements IFilterFactory {
 
-        private static final long serialVersionUID = -1304677116891707226L;
         private static final int[] RATIOS = { 10, 20, 30, 40, 50, 75 };
 
         @Override
@@ -65,6 +72,26 @@ class PopularityRatioFilter extends AbstractFilter {
             }
             return filters;
         }
-
     }
+
+    @Override
+    public void writeToParcel(final Parcel dest, final int flags) {
+        super.writeToParcel(dest, flags);
+        dest.writeInt(minRatio);
+        dest.writeInt(maxRatio);
+    }
+
+    public static final Creator<PopularityRatioFilter> CREATOR
+            = new Parcelable.Creator<PopularityRatioFilter>() {
+
+        @Override
+        public PopularityRatioFilter createFromParcel(final Parcel in) {
+            return new PopularityRatioFilter(in);
+        }
+
+        @Override
+        public PopularityRatioFilter[] newArray(final int size) {
+            return new PopularityRatioFilter[size];
+        }
+    };
 }

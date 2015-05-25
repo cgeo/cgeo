@@ -51,8 +51,6 @@ import java.util.regex.Pattern;
 
 public class GCConnector extends AbstractConnector implements ISearchByGeocode, ISearchByCenter, ISearchByNextPage, ISearchByViewPort, ISearchByKeyword, ILogin, ICredentials, ISearchByOwner, ISearchByFinder, FieldNotesCapability, IgnoreCapability {
 
-    private static final long serialVersionUID = 3246646812479458224L;
-
     @NonNull
     private static final String CACHE_URL_SHORT = "http://coord.info/";
     // Double slash is used to force open in browser

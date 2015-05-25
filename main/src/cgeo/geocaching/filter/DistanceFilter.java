@@ -9,14 +9,14 @@ import cgeo.geocaching.sensors.Sensors;
 
 import org.eclipse.jdt.annotation.NonNull;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 import java.util.List;
 
 class DistanceFilter extends AbstractFilter {
-    private static final long serialVersionUID = -4110173222670364694L;
-    private transient GeoData geo;
+    private final GeoData geo;
     private final int minDistance;
     private final int maxDistance;
 
@@ -27,8 +27,10 @@ class DistanceFilter extends AbstractFilter {
         geo = Sensors.getInstance().currentGeo();
     }
 
-    private void readObject(final ObjectInputStream in) throws IOException, ClassNotFoundException {
-        in.defaultReadObject();
+    protected DistanceFilter(final Parcel in) {
+        super(in);
+        minDistance = in.readInt();
+        maxDistance = in.readInt();
         geo = Sensors.getInstance().currentGeo();
     }
 
@@ -47,7 +49,6 @@ class DistanceFilter extends AbstractFilter {
 
     public static class Factory implements IFilterFactory {
 
-        private static final long serialVersionUID = 1461003608933602211L;
         private static final int[] KILOMETERS = { 0, 2, 5, 10, 20, 50 };
 
         @Override
@@ -69,6 +70,26 @@ class DistanceFilter extends AbstractFilter {
             }
             return filters;
         }
-
     }
+
+    @Override
+    public void writeToParcel(final Parcel dest, final int flags) {
+        super.writeToParcel(dest, flags);
+        dest.writeInt(minDistance);
+        dest.writeInt(maxDistance);
+    }
+
+    public static final Creator<DistanceFilter> CREATOR
+            = new Parcelable.Creator<DistanceFilter>() {
+
+        @Override
+        public DistanceFilter createFromParcel(final Parcel in) {
+            return new DistanceFilter(in);
+        }
+
+        @Override
+        public DistanceFilter[] newArray(final int size) {
+            return new DistanceFilter[size];
+        }
+    };
 }

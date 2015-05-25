@@ -6,6 +6,9 @@ import cgeo.geocaching.R;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -14,10 +17,12 @@ import java.util.List;
  */
 public class PersonalNoteFilter extends AbstractFilter implements IFilterFactory {
 
-    private static final long serialVersionUID = -6029553939024693792L;
-
     protected PersonalNoteFilter() {
         super(R.string.caches_filter_personal_note);
+    }
+
+    protected PersonalNoteFilter(final Parcel in) {
+        super(in);
     }
 
     @Override
@@ -31,4 +36,17 @@ public class PersonalNoteFilter extends AbstractFilter implements IFilterFactory
         return Collections.singletonList(this);
     }
 
+    public static final Creator<PersonalNoteFilter> CREATOR
+            = new Parcelable.Creator<PersonalNoteFilter>() {
+
+        @Override
+        public PersonalNoteFilter createFromParcel(final Parcel in) {
+            return new PersonalNoteFilter(in);
+        }
+
+        @Override
+        public PersonalNoteFilter[] newArray(final int size) {
+            return new PersonalNoteFilter[size];
+        }
+    };
 }

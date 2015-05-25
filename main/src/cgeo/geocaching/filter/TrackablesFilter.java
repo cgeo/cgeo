@@ -5,11 +5,17 @@ import cgeo.geocaching.R;
 
 import org.eclipse.jdt.annotation.NonNull;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 class TrackablesFilter extends AbstractFilter {
-    private static final long serialVersionUID = 2280421779859292315L;
 
     public TrackablesFilter() {
         super(R.string.caches_filter_track);
+    }
+
+    protected TrackablesFilter(final Parcel in) {
+        super(in);
     }
 
     @Override
@@ -17,4 +23,17 @@ class TrackablesFilter extends AbstractFilter {
         return cache.hasTrackables();
     }
 
+    public static final Creator<TrackablesFilter> CREATOR
+            = new Parcelable.Creator<TrackablesFilter>() {
+
+        @Override
+        public TrackablesFilter createFromParcel(final Parcel in) {
+            return new TrackablesFilter(in);
+        }
+
+        @Override
+        public TrackablesFilter[] newArray(final int size) {
+            return new TrackablesFilter[size];
+        }
+    };
 }

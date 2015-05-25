@@ -3,11 +3,7 @@ package cgeo.geocaching.connector.oc;
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.oc.OkapiError.OkapiErrors;
 
-import java.io.Serializable;
-
-public class UserInfo implements Serializable {
-
-    private static final long serialVersionUID = 891569280239587363L;
+public class UserInfo {
 
     public enum UserInfoStatus {
         NOT_RETRIEVED(R.string.init_login_popup_working),

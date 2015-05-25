@@ -20,11 +20,9 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
 import java.io.IOException;
-import java.io.Serializable;
 
-public class ECLogin extends AbstractLogin implements Serializable {
+public class ECLogin extends AbstractLogin {
 
-    private static final long serialVersionUID = 4004108045549370174L;
     private final CgeoApplication app = CgeoApplication.getInstance();
     private String sessionId = null;
 

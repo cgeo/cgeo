@@ -5,14 +5,15 @@ import cgeo.geocaching.R;
 
 import org.eclipse.jdt.annotation.NonNull;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
 class StateFilterFactory implements IFilterFactory {
-
-    private static final long serialVersionUID = -4915854201507009125L;
 
     @Override
     @NonNull
@@ -43,10 +44,12 @@ class StateFilterFactory implements IFilterFactory {
 
     static class StateFoundFilter extends AbstractFilter {
 
-        private static final long serialVersionUID = -3767242360632349788L;
-
         public StateFoundFilter() {
             super(R.string.cache_status_found);
+        }
+
+        protected StateFoundFilter(final Parcel in) {
+            super(in);
         }
 
         @Override
@@ -54,14 +57,29 @@ class StateFilterFactory implements IFilterFactory {
             return cache.isFound();
         }
 
+        public static final Creator<StateFoundFilter> CREATOR
+                = new Parcelable.Creator<StateFoundFilter>() {
+
+            @Override
+            public StateFoundFilter createFromParcel(final Parcel in) {
+                return new StateFoundFilter(in);
+            }
+
+            @Override
+            public StateFoundFilter[] newArray(final int size) {
+                return new StateFoundFilter[size];
+            }
+        };
     }
 
     static class StateNotFoundFilter extends AbstractFilter {
 
-        private static final long serialVersionUID = 19776079495156351L;
-
         public StateNotFoundFilter() {
             super(R.string.cache_not_status_found);
+        }
+
+        protected StateNotFoundFilter(final Parcel in) {
+            super(in);
         }
 
         @Override
@@ -69,97 +87,229 @@ class StateFilterFactory implements IFilterFactory {
             return !cache.isFound();
         }
 
+        public static final Creator<StateNotFoundFilter> CREATOR
+                = new Parcelable.Creator<StateNotFoundFilter>() {
+
+            @Override
+            public StateNotFoundFilter createFromParcel(final Parcel in) {
+                return new StateNotFoundFilter(in);
+            }
+
+            @Override
+            public StateNotFoundFilter[] newArray(final int size) {
+                return new StateNotFoundFilter[size];
+            }
+        };
     }
 
     static class StateArchivedFilter extends AbstractFilter {
-        private static final long serialVersionUID = -4272399405273124686L;
 
         public StateArchivedFilter() {
             super(R.string.cache_status_archived);
+        }
+
+        protected StateArchivedFilter(final Parcel in) {
+            super(in);
         }
 
         @Override
         public boolean accepts(@NonNull final Geocache cache) {
             return cache.isArchived();
         }
+
+        public static final Creator<StateArchivedFilter> CREATOR
+                = new Parcelable.Creator<StateArchivedFilter>() {
+
+            @Override
+            public StateArchivedFilter createFromParcel(final Parcel in) {
+                return new StateArchivedFilter(in);
+            }
+
+            @Override
+            public StateArchivedFilter[] newArray(final int size) {
+                return new StateArchivedFilter[size];
+            }
+        };
     }
 
     static class StateDisabledFilter extends AbstractFilter {
-        private static final long serialVersionUID = -3027505042498459672L;
 
         public StateDisabledFilter() {
             super(R.string.cache_status_disabled);
+        }
+
+        protected StateDisabledFilter(final Parcel in) {
+            super(in);
         }
 
         @Override
         public boolean accepts(@NonNull final Geocache cache) {
             return cache.isDisabled();
         }
+
+        public static final Creator<StateDisabledFilter> CREATOR
+                = new Parcelable.Creator<StateDisabledFilter>() {
+
+            @Override
+            public StateDisabledFilter createFromParcel(final Parcel in) {
+                return new StateDisabledFilter(in);
+            }
+
+            @Override
+            public StateDisabledFilter[] newArray(final int size) {
+                return new StateDisabledFilter[size];
+            }
+        };
     }
 
     static class StatePremiumFilter extends AbstractFilter {
-        private static final long serialVersionUID = -4086779915486623739L;
 
         public StatePremiumFilter() {
             super(R.string.cache_status_premium);
+        }
+
+        protected StatePremiumFilter(final Parcel in) {
+            super(in);
         }
 
         @Override
         public boolean accepts(@NonNull final Geocache cache) {
             return cache.isPremiumMembersOnly();
         }
+
+        public static final Creator<StatePremiumFilter> CREATOR
+                = new Parcelable.Creator<StatePremiumFilter>() {
+
+            @Override
+            public StatePremiumFilter createFromParcel(final Parcel in) {
+                return new StatePremiumFilter(in);
+            }
+
+            @Override
+            public StatePremiumFilter[] newArray(final int size) {
+                return new StatePremiumFilter[size];
+            }
+        };
     }
 
     static class StateNonPremiumFilter extends AbstractFilter {
-        private static final long serialVersionUID = 6427819310603779646L;
 
         public StateNonPremiumFilter() {
             super(R.string.cache_status_not_premium);
+        }
+
+        protected StateNonPremiumFilter(final Parcel in) {
+            super(in);
         }
 
         @Override
         public boolean accepts(@NonNull final Geocache cache) {
             return !cache.isPremiumMembersOnly();
         }
+
+        public static final Creator<StateNonPremiumFilter> CREATOR
+                = new Parcelable.Creator<StateNonPremiumFilter>() {
+
+            @Override
+            public StateNonPremiumFilter createFromParcel(final Parcel in) {
+                return new StateNonPremiumFilter(in);
+            }
+
+            @Override
+            public StateNonPremiumFilter[] newArray(final int size) {
+                return new StateNonPremiumFilter[size];
+            }
+        };
     }
 
     private static class StateOfflineLogFilter extends AbstractFilter {
-        private static final long serialVersionUID = -6076510706828408970L;
 
         public StateOfflineLogFilter() {
             super(R.string.cache_status_offline_log);
+        }
+
+        protected StateOfflineLogFilter(final Parcel in) {
+            super(in);
         }
 
         @Override
         public boolean accepts(@NonNull final Geocache cache) {
             return cache.isLogOffline();
         }
+
+        public static final Creator<StateOfflineLogFilter> CREATOR
+                = new Parcelable.Creator<StateOfflineLogFilter>() {
+
+            @Override
+            public StateOfflineLogFilter createFromParcel(final Parcel in) {
+                return new StateOfflineLogFilter(in);
+            }
+
+            @Override
+            public StateOfflineLogFilter[] newArray(final int size) {
+                return new StateOfflineLogFilter[size];
+            }
+        };
     }
 
     static class StateStoredFilter extends AbstractFilter {
-        private static final long serialVersionUID = -2455064686291969386L;
 
         public StateStoredFilter() {
             super(R.string.cache_status_stored);
+        }
+
+        protected StateStoredFilter(final Parcel in) {
+            super(in);
         }
 
         @Override
         public boolean accepts(@NonNull final Geocache cache) {
             return cache.isOffline();
         }
+
+        public static final Creator<StateStoredFilter> CREATOR
+                = new Parcelable.Creator<StateStoredFilter>() {
+
+            @Override
+            public StateStoredFilter createFromParcel(final Parcel in) {
+                return new StateStoredFilter(in);
+            }
+
+            @Override
+            public StateStoredFilter[] newArray(final int size) {
+                return new StateStoredFilter[size];
+            }
+        };
     }
 
     static class StateNotStoredFilter extends AbstractFilter {
-        private static final long serialVersionUID = 1774243798304092972L;
 
         public StateNotStoredFilter() {
             super(R.string.cache_status_not_stored);
+        }
+
+        protected StateNotStoredFilter(final Parcel in) {
+            super(in);
         }
 
         @Override
         public boolean accepts(@NonNull final Geocache cache) {
             return !cache.isOffline();
         }
+
+        public static final Creator<StateNotStoredFilter> CREATOR
+                = new Parcelable.Creator<StateNotStoredFilter>() {
+
+            @Override
+            public StateNotStoredFilter createFromParcel(final Parcel in) {
+                return new StateNotStoredFilter(in);
+            }
+
+            @Override
+            public StateNotStoredFilter[] newArray(final int size) {
+                return new StateNotStoredFilter[size];
+            }
+        };
     }
 
 }

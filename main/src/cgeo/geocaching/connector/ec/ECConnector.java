@@ -36,8 +36,6 @@ import java.util.regex.Pattern;
 
 public class ECConnector extends AbstractConnector implements ISearchByGeocode, ISearchByCenter, ISearchByViewPort, ILogin, ICredentials {
 
-    private static final long serialVersionUID = -6877180120192235960L;
-
     @NonNull
     private static final String CACHE_URL = "http://extremcaching.com/index.php/output-2/";
 

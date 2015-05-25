@@ -5,15 +5,20 @@ import cgeo.geocaching.R;
 
 import org.eclipse.jdt.annotation.NonNull;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.Collections;
 import java.util.List;
 
 class ModifiedFilter extends AbstractFilter implements IFilterFactory {
 
-    private static final long serialVersionUID = 8209964082957501589L;
-
     public ModifiedFilter() {
         super(R.string.caches_filter_modified);
+    }
+
+    protected ModifiedFilter(final Parcel in) {
+        super(in);
     }
 
     @Override
@@ -27,4 +32,18 @@ class ModifiedFilter extends AbstractFilter implements IFilterFactory {
     public List<ModifiedFilter> getFilters() {
         return Collections.singletonList(this);
     }
+
+    public static final Creator<ModifiedFilter> CREATOR
+            = new Parcelable.Creator<ModifiedFilter>() {
+
+        @Override
+        public ModifiedFilter createFromParcel(final Parcel in) {
+            return new ModifiedFilter(in);
+        }
+
+        @Override
+        public ModifiedFilter[] newArray(final int size) {
+            return new ModifiedFilter[size];
+        }
+    };
 }

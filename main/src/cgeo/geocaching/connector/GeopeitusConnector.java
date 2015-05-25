@@ -7,8 +7,6 @@ import org.eclipse.jdt.annotation.NonNull;
 
 class GeopeitusConnector extends AbstractConnector {
 
-    private static final long serialVersionUID = 5158580104945089127L;
-
     @Override
     @NonNull
     public String getName() {

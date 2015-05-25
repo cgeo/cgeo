@@ -23,14 +23,11 @@ import org.eclipse.jdt.annotation.Nullable;
 
 import rx.functions.Action1;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public abstract class AbstractConnector implements IConnector, Serializable {
-
-    private static final long serialVersionUID = 6247021667515396675L;
+public abstract class AbstractConnector implements IConnector {
 
     @Override
     public boolean canHandle(@NonNull final String geocode) {

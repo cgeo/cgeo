@@ -27,7 +27,6 @@ import java.util.regex.Pattern;
  */
 public class OXConnector extends AbstractConnector implements ISearchByCenter, ISearchByGeocode, ISearchByViewPort, ISearchByKeyword {
 
-    private static final long serialVersionUID = -3989764719239446663L;
     private static final Pattern PATTERN_GEOCODE = Pattern.compile("OX[A-Z0-9]+", Pattern.CASE_INSENSITIVE);
 
     @Override

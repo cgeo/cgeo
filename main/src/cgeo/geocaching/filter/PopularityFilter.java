@@ -6,11 +6,13 @@ import cgeo.geocaching.R;
 
 import org.eclipse.jdt.annotation.NonNull;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 import java.util.List;
 
 class PopularityFilter extends AbstractFilter {
-    private static final long serialVersionUID = -8620115571186207865L;
     private final int minFavorites;
     private final int maxFavorites;
 
@@ -20,6 +22,12 @@ class PopularityFilter extends AbstractFilter {
         this.maxFavorites = maxFavorites;
     }
 
+    protected PopularityFilter(final Parcel in) {
+        super(in);
+        minFavorites = in.readInt();
+        maxFavorites = in.readInt();
+    }
+
     @Override
     public boolean accepts(@NonNull final Geocache cache) {
         return (cache.getFavoritePoints() > minFavorites) && (cache.getFavoritePoints() <= maxFavorites);
@@ -27,7 +35,6 @@ class PopularityFilter extends AbstractFilter {
 
     public static class Factory implements IFilterFactory {
 
-        private static final long serialVersionUID = 6709810849476663825L;
         private static final int[] FAVORITES = { 10, 20, 50, 100, 200, 500 };
 
         @Override
@@ -42,6 +49,26 @@ class PopularityFilter extends AbstractFilter {
             }
             return filters;
         }
-
     }
+
+    @Override
+    public void writeToParcel(final Parcel dest, final int flags) {
+        super.writeToParcel(dest, flags);
+        dest.writeInt(minFavorites);
+        dest.writeInt(maxFavorites);
+    }
+
+    public static final Creator<PopularityFilter> CREATOR
+            = new Parcelable.Creator<PopularityFilter>() {
+
+        @Override
+        public PopularityFilter createFromParcel(final Parcel in) {
+            return new PopularityFilter(in);
+        }
+
+        @Override
+        public PopularityFilter[] newArray(final int size) {
+            return new PopularityFilter[size];
+        }
+    };
 }

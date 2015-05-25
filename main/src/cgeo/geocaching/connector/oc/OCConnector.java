@@ -15,7 +15,6 @@ import java.util.regex.Pattern;
 
 public class OCConnector extends AbstractConnector {
 
-    private static final long serialVersionUID = -5082967274866303551L;
     private final String host;
     private final String name;
     private final Pattern codePattern;

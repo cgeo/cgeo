@@ -7,8 +7,6 @@ import org.eclipse.jdt.annotation.NonNull;
 
 class GeocachingAustraliaConnector extends AbstractConnector {
 
-    private static final long serialVersionUID = 1610009200588682532L;
-
     @Override
     @NonNull
     public String getName() {

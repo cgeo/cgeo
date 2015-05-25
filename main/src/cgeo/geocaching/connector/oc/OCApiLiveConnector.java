@@ -29,7 +29,6 @@ import android.os.Handler;
 
 public class OCApiLiveConnector extends OCApiConnector implements ISearchByCenter, ISearchByViewPort, ILogin, ISearchByKeyword, ISearchByOwner, ISearchByFinder {
 
-    private static final long serialVersionUID = -4840623212163137408L;
     private final String cS;
     private final int isActivePrefKeyId;
     private final int tokenPublicPrefKeyId;

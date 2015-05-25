@@ -6,14 +6,11 @@ import cgeo.geocaching.Geocache;
 import org.eclipse.jdt.annotation.NonNull;
 
 import android.os.Parcel;
-import android.os.Parcelable;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-abstract class AbstractFilter implements IFilter, Serializable {
-    private static final long serialVersionUID = -5918429378818997180L;
+abstract class AbstractFilter implements IFilter {
     @NonNull
     private final String name;
 
@@ -23,6 +20,10 @@ abstract class AbstractFilter implements IFilter, Serializable {
 
     protected AbstractFilter(@NonNull final String name) {
         this.name = name;
+    }
+
+    protected AbstractFilter(final Parcel in) {
+        name = in.readString();
     }
 
     @Override
@@ -59,30 +60,6 @@ abstract class AbstractFilter implements IFilter, Serializable {
 
     @Override
     public void writeToParcel(final Parcel dest, final int flags) {
-        dest.writeSerializable(this);
+        dest.writeString(name);
     }
-
-    public static final Creator<AbstractFilter> CREATOR
-            = new Parcelable.Creator<AbstractFilter>() {
-
-      /**
-      * Read the serialized concrete Filter from the parcel.
-      * @param in The parcel to read from
-      * @return An AbstractFilter
-      */
-        @Override
-        public AbstractFilter createFromParcel(final Parcel in) {
-            // Read serialized concrete Filter from parcel
-            return (AbstractFilter) in.readSerializable();
-        }
-
-        /**
-         * Required by Creator
-         */
-        @Override
-        public AbstractFilter[] newArray(final int size) {
-            return new AbstractFilter[size];
-        }
-    };
-
 }
