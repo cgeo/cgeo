@@ -80,5 +80,21 @@
     -->
     <!-- version-tag: custom -->
     <import file="${sdk.dir}/tools/ant/build.xml" />
+    <target name="watchdog-tests" depends="debug" description="Run website tests">
+        <property name="test.runner" value="android.test.InstrumentationTestRunner" />
+        <echo level="info">Running website tests ...</echo>
+        <exec executable="${adb}" failonerror="true">
+            <arg line="${adb.device.arg}" />
+            <arg value="shell" />
+            <arg value="am" />
+            <arg value="instrument" />
+            <arg value="-w" />
+            <arg value="-e" />
+            <arg value="package" />
+            <arg value="cgeo.watchdog" />
+            <arg value="${project.app.package}/${test.runner}" />
+        </exec>
+        <fail message="One or more test cases failed" if="test.failure"/>
+    </target>
 
 </project>
