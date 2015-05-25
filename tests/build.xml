@@ -80,7 +80,7 @@
     -->
     <!-- version-tag: custom -->
     <import file="${sdk.dir}/tools/ant/build.xml" />
-    <target name="watchdog-tests" depends="debug" description="Run website tests">
+    <target name="watchdog-tests" depends="-test-project-check" description="Run website tests">
         <property name="test.runner" value="android.test.InstrumentationTestRunner" />
         <echo level="info">Running website tests ...</echo>
         <exec executable="${adb}" failonerror="true">
