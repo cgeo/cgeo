@@ -28,6 +28,8 @@ public class OriginFilter extends AbstractFilter {
 
     public static final class Factory implements IFilterFactory {
 
+        private static final long serialVersionUID = -7117455106869294095L;
+
         @Override
         @NonNull
         public List<OriginFilter> getFilters() {

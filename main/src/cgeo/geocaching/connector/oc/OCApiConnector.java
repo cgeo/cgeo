@@ -13,6 +13,8 @@ import org.eclipse.jdt.annotation.Nullable;
 
 public class OCApiConnector extends OCConnector implements ISearchByGeocode {
 
+    private static final long serialVersionUID = 5846386436165971078L;
+
     // Levels of Okapi we support
     // oldapi is around rev 500
     // current is from rev 798 onwards

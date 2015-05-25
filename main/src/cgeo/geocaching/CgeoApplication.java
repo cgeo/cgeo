@@ -26,6 +26,7 @@ import java.util.Locale;
 
 public class CgeoApplication extends Application implements Serializable {
 
+    private static final long serialVersionUID = -521799146221365143L;
     private boolean forceRelog = false; // c:geo needs to log into cache providers
     public boolean showLoginToast = true; //login toast shown just once.
     private boolean liveMapHintShownInThisSession = false; // livemap hint has been shown

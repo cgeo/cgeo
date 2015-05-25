@@ -70,6 +70,7 @@ abstract class AbstractFilter implements IFilter, Serializable {
       * @param in The parcel to read from
       * @return An AbstractFilter
       */
+        @Override
         public AbstractFilter createFromParcel(final Parcel in) {
             // Read serialized concrete Filter from parcel
             return (AbstractFilter) in.readSerializable();
@@ -78,6 +79,7 @@ abstract class AbstractFilter implements IFilter, Serializable {
         /**
          * Required by Creator
          */
+        @Override
         public AbstractFilter[] newArray(final int size) {
             return new AbstractFilter[size];
         }
