@@ -82,7 +82,7 @@
   <string name="log_saving">Log wird gesendet…</string>
   <string name="log_saving_and_uploading">Log und Bild werden gesendet…</string>
   <string name="log_clear">Leeren</string>
-  <string name="log_post_not_possible">Lade Log-Seite…</string>
+  <string name="log_post_not_possible">Daten werden heruntergeladen…\nBitte in ein paar Sekunden noch einmal versuchen, oder die Internetverbindung prüfen.</string>
   <string name="log_post_geocode_missing">Geocode fehlt…</string>
   <string name="log_date_future_not_allowed">Logs in der Zukunft sind nicht erlaubt.</string>
   <string name="log_add">Hinzufügen</string>
@@ -946,6 +946,8 @@
   <string name="helper_pocketquery_description">Ermöglicht das einfache Erzeugen und Herunterladen von Pocket Queries basierend auf der aktuellen Position oder einem auf der Karte gewählten Punkt. Setzt eine Premium-Mitgliedschaft bei geocaching.com voraus.</string>
   <string name="helper_google_translate_title">Google Übersetzer</string>
   <string name="helper_google_translate_description">Wenn Sie Übersetzungspakete mit der Google Übersetzer-App herunterladen, können Sie Cache-Beschreibungen in c:geo durch langes Drücken auf den Cache-Beschreibungstext übersetzen (ohne Internetverbindung) .</string>
+  <string name="helper_wear_title">c:geo Wear</string>
+  <string name="helper_wear_description">c:geo Wear ist eine Erweiterung für c:geo, mit der du mit deiner Android Wear Smartwatch zu Geocaches navigieren kannst.</string>
   <string name="addon_missing_title">Fehlendes Plugin</string>
   <string name="addon_download_prompt">Jetzt im Google Play Store herunterladen</string>
   <string name="export">Exportieren</string>

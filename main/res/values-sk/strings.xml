@@ -82,7 +82,6 @@
   <string name="log_saving">Ukladanie logu…</string>
   <string name="log_saving_and_uploading">Odosielanie logu a nahrávanie obrázku…</string>
   <string name="log_clear">Vyčistiť</string>
-  <string name="log_post_not_possible">Načítanie stránky s logmi…</string>
   <string name="log_date_future_not_allowed">Log s budúcim dátumom nie je povolený.</string>
   <string name="log_add">Pridať</string>
   <string name="log_repeat">Zopakovať posledný log</string>

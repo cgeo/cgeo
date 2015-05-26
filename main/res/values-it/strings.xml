@@ -80,7 +80,6 @@
   <string name="log_saving">Invio log…</string>
   <string name="log_saving_and_uploading">Invio log e immagine…</string>
   <string name="log_clear">Azzera</string>
-  <string name="log_post_not_possible">Connessione…</string>
   <string name="log_post_geocode_missing">Geocode mancante…</string>
   <string name="log_date_future_not_allowed">Non sono ammesse date future per i log.</string>
   <string name="log_add">Aggiungi</string>

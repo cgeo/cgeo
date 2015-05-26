@@ -82,7 +82,6 @@
   <string name="log_saving">Apmeklējuma ieraksta nosūtīšana…</string>
   <string name="log_saving_and_uploading">Pieraksta nosūtīšana un bildes augšupielāde…</string>
   <string name="log_clear">Notīrīt</string>
-  <string name="log_post_not_possible">Ielādē apmeklējuma ierasta lapu…</string>
   <string name="log_post_geocode_missing">Pietrūkst geo kods…</string>
   <string name="log_date_future_not_allowed">Nākotnē veikti ieraksti nav atļauti.</string>
   <string name="log_add">Pievienot</string>

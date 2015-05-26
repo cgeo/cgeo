@@ -82,7 +82,6 @@
   <string name="log_saving">Enviando registro…</string>
   <string name="log_saving_and_uploading">Enviando registro y subiendo imagen…</string>
   <string name="log_clear">Limpiar</string>
-  <string name="log_post_not_possible">Cargando página de registro…</string>
   <string name="log_post_geocode_missing">Falta el geocódigo…</string>
   <string name="log_date_future_not_allowed">No se permiten registros con fechas futuras.</string>
   <string name="log_add">Añadir</string>

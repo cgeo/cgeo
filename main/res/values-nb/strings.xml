@@ -82,7 +82,6 @@
   <string name="log_saving">Lagrer logg…</string>
   <string name="log_saving_and_uploading">Sender logg og laster opp bilde…</string>
   <string name="log_clear">Tøm</string>
-  <string name="log_post_not_possible">Laster loggsiden…</string>
   <string name="log_post_geocode_missing">GC-kode mangler…</string>
   <string name="log_date_future_not_allowed">Fremtidige loggdatoer er ikke tillatt.</string>
   <string name="log_add">Legg til</string>

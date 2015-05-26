@@ -82,7 +82,6 @@
   <string name="log_saving">Enregistrement en cours…</string>
   <string name="log_saving_and_uploading">Envoi de la visite et de l\'image…</string>
   <string name="log_clear">Effacer</string>
-  <string name="log_post_not_possible">Chargement de la page…</string>
   <string name="log_post_geocode_missing">Géocode manquant…</string>
   <string name="log_date_future_not_allowed">Les visites dans le futur sont interdites.</string>
   <string name="log_add">Ajouter</string>
@@ -416,7 +415,7 @@
   <string name="init_login">Vérifier les identifiants</string>
   <string name="init_login_popup">Authentification</string>
   <string name="init_login_popup_working">Connexion…</string>
-  <string name="init_login_popup_ok">Identification OK</string>
+  <string name="init_login_popup_ok">Connecté</string>
   <string name="init_login_popup_failed">Erreur de connexion</string>
   <string name="init_login_popup_failed_reason">Erreur de connexion :</string>
   <string name="init_login_popup_not_authorized">Non autorisé</string>
@@ -685,6 +684,8 @@
   <string name="cache_menu_navigation_walk">Navigation (piéton)</string>
   <string name="cache_menu_navigation_bike">Navigation (vélo)</string>
   <string name="cache_menu_maps_directions">Directions Google Maps</string>
+  <string name="cache_menu_sygic_walk">Sygic (à pied)</string>
+  <string name="cache_menu_sygic_drive">Sygic (en voiture)</string>
   <string name="cache_menu_radar">Radar</string>
   <string name="cache_menu_map">Carte</string>
   <string name="cache_menu_map_static">Cartes statiques</string>
@@ -790,6 +791,7 @@
   <string name="waypoint_distance">Distance</string>
   <string name="waypoint_name">Nom</string>
   <string name="waypoint_edit">Modifier</string>
+  <string name="waypoint_copy_coordinates">Copier les coordonnées</string>
   <string name="waypoint_delete">Supprimer</string>
   <string name="waypoint_edit_title">Modifier l\'étape</string>
   <string name="waypoint_add_title">Ajouter une étape</string>
@@ -878,6 +880,7 @@
   <string name="trackable_details_loading">Chargement des détails d\'un objet voyageur…</string>
   <string name="trackable_log_touch">Marquer comme découvert</string>
   <string name="trackable_browser_open">Ouvrir dans un navigateur</string>
+  <string name="trackable_refresh">Actualiser</string>
   <string name="trackable_goal">But</string>
   <string name="trackable_details">Détails</string>
   <string name="trackable_image">Image</string>
@@ -890,6 +893,7 @@
   <string name="trackable_spotted_at_user">Entre les mains de </string>
   <string name="trackable_spotted_unknown_location">Position inconnue</string>
   <string name="trackable_spotted_owner">Entre les mains du propriétaire</string>
+  <string name="trackable_spotted_archived">Archivé</string>
   <string name="trackable_origin">Origine</string>
   <string name="trackable_unknown">Inconnu</string>
   <string name="trackable_released">Libéré le</string>
