@@ -82,7 +82,6 @@
   <string name="log_saving">Log mentése…</string>
   <string name="log_saving_and_uploading">Log beküldése és kép feltöltése…</string>
   <string name="log_clear">Törlés</string>
-  <string name="log_post_not_possible">Log oldal betöltése…</string>
   <string name="log_add">Hozzáadás</string>
   <string name="log_repeat">Utolsó log ismétlése</string>
   <string name="log_no_rating">Nincs értékelés</string>

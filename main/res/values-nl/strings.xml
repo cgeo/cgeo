@@ -82,7 +82,6 @@
   <string name="log_saving">Log opslaan…</string>
   <string name="log_saving_and_uploading">Verzenden van log en uploaden foto…</string>
   <string name="log_clear">Wissen</string>
-  <string name="log_post_not_possible">Laden Log Pagina…</string>
   <string name="log_post_geocode_missing">Geocode ontbreekt…</string>
   <string name="log_date_future_not_allowed">Log datums in de toekomst zijn niet toegestaan.</string>
   <string name="log_add">Toevoegen</string>

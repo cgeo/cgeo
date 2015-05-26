@@ -82,7 +82,6 @@
   <string name="log_saving">A gravar o registo…</string>
   <string name="log_saving_and_uploading">A enviar o registo e a imagem…</string>
   <string name="log_clear">Limpar</string>
-  <string name="log_post_not_possible">A carregar página de registo…</string>
   <string name="log_post_geocode_missing">Geocodigo em falta…</string>
   <string name="log_date_future_not_allowed">Registos com datas futuras não são permitidos.</string>
   <string name="log_add">Adicionar</string>

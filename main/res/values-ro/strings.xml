@@ -82,7 +82,6 @@
   <string name="log_saving">Trimitere jurnal…</string>
   <string name="log_saving_and_uploading">Trimitre jurnal şi încarcare poze…</string>
   <string name="log_clear">Şterge</string>
-  <string name="log_post_not_possible">Încărcare pagină însemnări…</string>
   <string name="log_date_future_not_allowed">Nu sunt permise însemnări datate în viitor.</string>
   <string name="log_add">Adaugă</string>
   <string name="log_repeat">Repetă ultima însemnare</string>

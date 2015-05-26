@@ -73,6 +73,7 @@
   <string name="log_tb_visit">Navštíveno</string>
   <string name="log_tb_drop">Nechat zde</string>
   <string name="log_tb_changeall">Změnit vše</string>
+  <string name="log_tb_grabbed">Převzat</string>
   <string name="log_tb_note">Poznámka</string>
   <string name="log_tb_discovered">Spatřen</string>
   <string name="log_tb_archived">Archivován</string>
@@ -80,7 +81,7 @@
   <string name="log_saving">Odesílání Logu…</string>
   <string name="log_saving_and_uploading">Odesílání Logu a nahrávání obrázku…</string>
   <string name="log_clear">Vyčistit</string>
-  <string name="log_post_not_possible">Načítání stránky s Logovacím formulářem…</string>
+  <string name="log_post_geocode_missing">Geokód chybí…</string>
   <string name="log_date_future_not_allowed">Log s nadcházejícím datem není povolen.</string>
   <string name="log_add">Přidat</string>
   <string name="log_repeat">Opakovat poslední log</string>
@@ -216,6 +217,7 @@
   <string name="info_stored_image">Nový obrázek uložen do:</string>
   <string name="info_storing_static_maps">Pokus o uložení statických map</string>
   <string name="info_cache_saved">Keš uložena pro lokální použití</string>
+  <string name="err_trackable_log_not_anonymous">Zalogování %1$s v c:geu nelze provést anonymně. Chceš otevřít nastavení a vyplnit přihlašovací údaje z %2$s?</string>
   <string name="err_trackable_no_preference_activity">Omlouváme se, požadovanou obrazovku nastavení nelze nalézt.</string>
   <string name="loc_last">Poslední známá</string>
   <string name="loc_net">Síť</string>
@@ -686,6 +688,8 @@
   <string name="cache_menu_navigation_walk">Navigace (chůze)</string>
   <string name="cache_menu_navigation_bike">Navigace (kolo)</string>
   <string name="cache_menu_maps_directions">Směry podle Google Maps</string>
+  <string name="cache_menu_sygic_walk">Sygic (chůze)</string>
+  <string name="cache_menu_sygic_drive">Sygic (řízení)</string>
   <string name="cache_menu_radar">Radar</string>
   <string name="cache_menu_map">Zobrazit na mapě</string>
   <string name="cache_menu_map_static">Statické mapy</string>
@@ -708,6 +712,7 @@
   <string name="cache_menu_oruxmaps">OruxMaps</string>
   <string name="cache_menu_navigon">Navigon</string>
   <string name="cache_menu_pebble">Pebble</string>
+  <string name="cache_menu_android_wear">Android Wear</string>
   <string name="cache_menu_vote">Hlasovat</string>
   <string name="cache_menu_checker">Otevřít Geocheck</string>
   <string name="cache_menu_ignore">Ignorovat keš</string>
@@ -790,6 +795,7 @@
   <string name="waypoint_distance">Vzdálenost</string>
   <string name="waypoint_name">Název</string>
   <string name="waypoint_edit">Upravit</string>
+  <string name="waypoint_copy_coordinates">Kopírovat souřadnice</string>
   <string name="waypoint_delete">Smazat</string>
   <string name="waypoint_edit_title">Upravit bod trasy</string>
   <string name="waypoint_add_title">Přidat bod trasy</string>
@@ -878,6 +884,7 @@
   <string name="trackable_details_loading">Načítání detailů…</string>
   <string name="trackable_log_touch">Hlášení zahlédnutí</string>
   <string name="trackable_browser_open">Otevřít v prohlížeči</string>
+  <string name="trackable_refresh">Obnovit</string>
   <string name="trackable_goal">Cíl</string>
   <string name="trackable_details">Detaily</string>
   <string name="trackable_image">Obrázek</string>
@@ -890,6 +897,7 @@
   <string name="trackable_spotted_at_user">V rukou</string>
   <string name="trackable_spotted_unknown_location">Neznámé umístění</string>
   <string name="trackable_spotted_owner">V rukou vlastníka</string>
+  <string name="trackable_spotted_archived">Archivován</string>
   <string name="trackable_origin">Původ</string>
   <string name="trackable_unknown">Neznámý</string>
   <string name="trackable_released">Vypuštění</string>
@@ -912,6 +920,8 @@
   <string name="user_menu_open_contact">Otevřít kartu kontaktu</string>
   <string name="navigation">Navigace</string>
   <string name="compass_title">Kompas</string>
+  <string name="use_gps">Použita pouze GPS</string>
+  <string name="use_compass">Použita GPS a kompas</string>
   <string name="destination_select">Vyber cíl</string>
   <string name="navigation_direct_navigation">Přímá navigace</string>
   <string name="navigation_target">Cíl</string>
@@ -954,6 +964,8 @@
   <string name="export_gpx">GPX</string>
   <string name="export_gpx_info">GPX soubor bude exportován do %1$s s názvem souboru podle aktuálního data a času.</string>
   <string name="export_gpx_to">Odeslat GPX</string>
+  <string name="export_confirm_title">Exportovat %1$s</string>
+  <string name="export_confirm_message">Umístění: %1$s\nNázev souboru: %2$s</string>
   <string name="attribute_dogs_yes">Vstup se psy povolen</string>
   <string name="attribute_dogs_no">Vstup se psy zakázán</string>
   <string name="attribute_bicycles_yes">Jízdní kola povolena</string>
@@ -1190,6 +1202,7 @@
   <string name="about_twitter">Má <b>c:geo</b> publikovat nový status na Twitteru vždy, když zaloguješ keš?</string>
   <string name="faq_title">FAQ</string>
   <string name="status_new_release" tools:ignore="UnusedResources">Dostupné nové vydání.\nKlepni pro instalaci.</string>
+  <string name="status_new_nightly" tools:ignore="UnusedResources">Dostupné nové „noční sestavení“.\nKlepni pro instalaci.</string>
   <string name="status_new_rc" tools:ignore="UnusedResources">Dostupný nový kandidát na vydání.\nKlepni pro instalaci.</string>
   <string name="status_geocaching_change" tools:ignore="UnusedResources">Nedávné změny na geocaching.com rozbily c:geo.\nPracujeme na opravě, proveď kontrolu později.</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Nedávné změny na geocaching.com rozbily Aktivní mapu c:geo.\nPracujeme na opravě, proveď kontrolu později.</string>
@@ -1254,15 +1267,33 @@
   <string name="confirm_log_message">Opravdu chceš zalogovat „%s“?</string>
   <string name="settings_activate_geokrety">Aktivovat</string>
   <string name="init_geokrety">GeoKrety.org</string>
+  <string name="init_connectorGeokretyActive">Sledovatelné předměty Geokrety</string>
   <string name="init_summary_geokrety">Povolit sledovatelné předměty z GeoKrety.org</string>
   <string name="init_summary_geokrety_account">Účet nebyl nastaven.</string>
   <string name="init_geokrety_register_ok">Přihlášení bylo úspěšné</string>
   <string name="init_geokrety_register_fail">Přihlášení selhalo</string>
+  <string name="init_geokrety_description">Autorizovat c:geo pro logování sledovatelných předmětů služby Geokrety.org.</string>
+  <string name="init_geokrety_cache_description">GeokretyMap.org poskytuje informace o sledovatelných předmětech služby Geokrety.\nDostupné informace jsou např. „popis“ a nebo „ztracený“ stav.\n\nData nemusí být aktuální!\nPozice: ~30 min\nPopisy: ~24 h</string>
+  <string name="init_geokrety_cache">Použít GeoKretyMap.org</string>
   <string name="init_geokrety_userid">ID uživatele: %s</string>
+  <string name="trackable_title_log_without_geocode">Geokód nenastaven</string>
+  <string name="trackable_log_without_geocode">Chystáš se odeslat log bez geokódu. Je doporučeno alespoň jeden nastavit, chceš ho nyní přidat?</string>
+  <string name="do_not_ask_me_again">Již se neptat</string>
+  <string name="settings_map_direction">Zobrazovat směr</string>
+  <string name="settings_summary_map_direction">Zobrazovat směrovou čáru k cíli</string>
+  <string name="map_direction">Zobrazovat směr</string>
   <string name="command_move_caches_progress">Přesouvání keší do seznamu %1s</string>
   <plurals name="command_move_caches_result">
     <item quantity="one">Přesunuta %d keš</item>
     <item quantity="few">Přesunuty %d keše</item>
     <item quantity="other">Přesunuto %d keší</item>
   </plurals>
+  <string name="command_delete_caches_progress">Odstraňování keší</string>
+  <plurals name="command_delete_caches_result">
+    <item quantity="one">Odstraněna %d keš</item>
+    <item quantity="few">Odstraněny %d keše</item>
+    <item quantity="other">Odstraněno %d keší</item>
+  </plurals>
+  <string name="command_rename_list_result">Seznam přejmenován</string>
+  <string name="command_delete_list_result">Seznam odstraněn</string>
 </resources>
