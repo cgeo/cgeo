@@ -129,6 +129,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     private static final String STATE_FILTER = "currentFilter";
     private static final String STATE_INVERSE_SORT = "currentInverseSort";
+    private static final String STATE_LIST_TYPE = "currentListType";
+    private static final String STATE_LIST_ID = "currentListId";
 
     private CacheListType type = null;
     private Geopoint coords = null;
@@ -432,6 +434,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             // Restore value of members from saved state
             currentFilter = savedInstanceState.getParcelable(STATE_FILTER);
             currentInverseSort = savedInstanceState.getBoolean(STATE_INVERSE_SORT);
+            type = CacheListType.values()[savedInstanceState.getInt(STATE_LIST_TYPE, type.ordinal())];
+            listId = savedInstanceState.getInt(STATE_LIST_ID);
         }
 
         initAdapter();
@@ -464,12 +468,14 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     @Override
     public void onSaveInstanceState(final Bundle savedInstanceState) {
+        // Always call the superclass so it can save the view hierarchy state
+        super.onSaveInstanceState(savedInstanceState);
+
         // Save the current Filter
         savedInstanceState.putParcelable(STATE_FILTER, currentFilter);
         savedInstanceState.putBoolean(STATE_INVERSE_SORT, adapter.getInverseSort());
-
-        // Always call the superclass so it can save the view hierarchy state
-        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.putInt(STATE_LIST_TYPE, type.ordinal());
+        savedInstanceState.putInt(STATE_LIST_ID, listId);
     }
 
     /**
@@ -1322,31 +1328,31 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         }
 
         if (id == PseudoList.HISTORY_LIST.id) {
-            startActivity(getHistoryIntent(this));
-            finish();
-            return;
-        }
-
-        if (id == PseudoList.ALL_LIST.id) {
-            listId = id;
-            title = res.getString(R.string.list_all_lists);
+            type = CacheListType.HISTORY;
+            getSupportLoaderManager().destroyLoader(CacheListType.OFFLINE.getLoaderId());
+            currentLoader = (AbstractSearchLoader) getSupportLoaderManager().restartLoader(CacheListType.HISTORY.getLoaderId(), null, this);
         } else {
-            final StoredList list = DataStore.getList(id);
-            listId = list.id;
-            title = list.title;
-        }
-        type = CacheListType.OFFLINE;
+            if (id == PseudoList.ALL_LIST.id) {
+                listId = id;
+                title = res.getString(R.string.list_all_lists);
+            } else {
+                final StoredList list = DataStore.getList(id);
+                listId = list.id;
+                title = list.title;
+            }
+            type = CacheListType.OFFLINE;
 
-        Settings.saveLastList(listId);
+            getSupportLoaderManager().destroyLoader(CacheListType.HISTORY.getLoaderId());
+            currentLoader = (OfflineGeocacheListLoader) getSupportLoaderManager().restartLoader(CacheListType.OFFLINE.getLoaderId(), OfflineGeocacheListLoader.getBundleForList(listId), this);
+
+            Settings.saveLastList(listId);
+        }
 
         initAdapter();
 
         showProgress(true);
         showFooterLoadingCaches();
         adapter.setSelectMode(false);
-
-        currentLoader = (OfflineGeocacheListLoader) getSupportLoaderManager().restartLoader(CacheListType.OFFLINE.getLoaderId(), OfflineGeocacheListLoader.getBundleForList(listId), this);
-
         invalidateOptionsMenuCompatible();
     }
 
@@ -1659,10 +1665,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             final Set<Geocache> cachesFromSearchResult = searchIn.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
             cacheList.addAll(cachesFromSearchResult);
             search = searchIn;
-            adapter.reFilter();
-            adapter.checkEvents();
-            adapter.forceSort();
-            adapter.notifyDataSetChanged();
+            updateAdapter();
             updateTitle();
             showFooterMoreCaches();
         }
