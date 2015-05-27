@@ -5,12 +5,17 @@ import cgeo.geocaching.R;
 
 import org.eclipse.jdt.annotation.NonNull;
 
-public class OfflineLogFilter extends AbstractFilter {
+import android.os.Parcel;
+import android.os.Parcelable;
 
-    private static final long serialVersionUID = -1770444119861730428L;
+public class OfflineLogFilter extends AbstractFilter {
 
     protected OfflineLogFilter() {
         super(R.string.caches_filter_offline_log);
+    }
+
+    protected OfflineLogFilter(final Parcel in) {
+        super(in);
     }
 
     @Override
@@ -18,4 +23,17 @@ public class OfflineLogFilter extends AbstractFilter {
         return cache.isLogOffline();
     }
 
+    public static final Creator<OfflineLogFilter> CREATOR
+            = new Parcelable.Creator<OfflineLogFilter>() {
+
+        @Override
+        public OfflineLogFilter createFromParcel(final Parcel in) {
+            return new OfflineLogFilter(in);
+        }
+
+        @Override
+        public OfflineLogFilter[] newArray(final int size) {
+            return new OfflineLogFilter[size];
+        }
+    };
 }

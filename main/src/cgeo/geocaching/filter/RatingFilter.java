@@ -6,6 +6,9 @@ import cgeo.geocaching.gcvote.GCVote;
 
 import org.eclipse.jdt.annotation.NonNull;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Filter {@link Geocache}s if they have a locally stored {@link GCVote} rating. This filter will not do any network
  * request to find potentially missing local votes.
@@ -13,10 +16,12 @@ import org.eclipse.jdt.annotation.NonNull;
  */
 public class RatingFilter extends AbstractFilter {
 
-    private static final long serialVersionUID = -5316005528335584968L;
-
     protected RatingFilter() {
         super(R.string.caches_filter_rating);
+    }
+
+    protected RatingFilter(final Parcel in) {
+        super(in);
     }
 
     @Override
@@ -24,4 +29,17 @@ public class RatingFilter extends AbstractFilter {
         return cache.getRating() > 0;
     }
 
+    public static final Creator<RatingFilter> CREATOR
+            = new Parcelable.Creator<RatingFilter>() {
+
+        @Override
+        public RatingFilter createFromParcel(final Parcel in) {
+            return new RatingFilter(in);
+        }
+
+        @Override
+        public RatingFilter[] newArray(final int size) {
+            return new RatingFilter[size];
+        }
+    };
 }

@@ -5,15 +5,20 @@ import cgeo.geocaching.R;
 
 import org.eclipse.jdt.annotation.NonNull;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 import java.util.List;
 
 class TerrainFilter extends AbstractRangeFilter {
 
-    private static final long serialVersionUID = 860373316999710938L;
-
     public TerrainFilter(final int terrain) {
         super(R.string.cache_terrain, terrain);
+    }
+
+    protected TerrainFilter(final Parcel in) {
+        super(in);
     }
 
     @Override
@@ -23,7 +28,6 @@ class TerrainFilter extends AbstractRangeFilter {
     }
 
     public static class Factory implements IFilterFactory {
-        private static final long serialVersionUID = 9030252058035089041L;
         private static final int TERRAIN_MIN = 1;
         private static final int TERRAIN_MAX = 7;
 
@@ -38,4 +42,17 @@ class TerrainFilter extends AbstractRangeFilter {
         }
     }
 
+    public static final Creator<TerrainFilter> CREATOR
+            = new Parcelable.Creator<TerrainFilter>() {
+
+        @Override
+        public TerrainFilter createFromParcel(final Parcel in) {
+            return new TerrainFilter(in);
+        }
+
+        @Override
+        public TerrainFilter[] newArray(final int size) {
+            return new TerrainFilter[size];
+        }
+    };
 }

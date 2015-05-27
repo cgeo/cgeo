@@ -77,7 +77,7 @@ public final class ConnectorFactory {
     @NonNull public static final UnknownTrackableConnector UNKNOWN_TRACKABLE_CONNECTOR = new UnknownTrackableConnector();
 
     @NonNull
- private static final Collection<TrackableConnector> TRACKABLE_CONNECTORS = Collections.unmodifiableCollection(Arrays.<TrackableConnector> asList(
+    private static final Collection<TrackableConnector> TRACKABLE_CONNECTORS = Collections.unmodifiableCollection(Arrays.<TrackableConnector> asList(
             new GeokretyConnector(),
             new SwaggieConnector(),
             TravelBugConnector.getInstance(), // travel bugs last, as their secret codes overlap with other connectors
@@ -212,6 +212,26 @@ public final class ConnectorFactory {
         }
         for (final IConnector connector : CONNECTORS) {
             if (connector.canHandle(geocode)) {
+                return connector;
+            }
+        }
+        // in case of errors, take UNKNOWN to avoid null checks everywhere
+        return UNKNOWN_CONNECTOR;
+    }
+
+    /**
+     * Obtain the connector by it's name.
+     * If connector is not found, return UNKNOWN_CONNECTOR.
+     *
+     * @param connectorName
+     *          connector name String
+     * @return
+     *          The connector matching name
+     */
+    @NonNull
+    public static IConnector getConnectorByName(final String connectorName) {
+        for (final IConnector connector : CONNECTORS) {
+            if (StringUtils.equals(connectorName, connector.getName())) {
                 return connector;
             }
         }

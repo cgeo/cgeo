@@ -5,16 +5,23 @@ import cgeo.geocaching.enumerations.CacheType;
 
 import org.eclipse.jdt.annotation.NonNull;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.LinkedList;
 import java.util.List;
 
 class TypeFilter extends AbstractFilter {
-    private static final long serialVersionUID = 7077448921857694356L;
     private final CacheType cacheType;
 
     public TypeFilter(@NonNull final CacheType cacheType) {
         super(cacheType.id);
         this.cacheType = cacheType;
+    }
+
+    protected TypeFilter(final Parcel in) {
+        super(in);
+        cacheType = CacheType.values()[in.readInt()];
     }
 
     @Override
@@ -30,8 +37,6 @@ class TypeFilter extends AbstractFilter {
 
     public static class Factory implements IFilterFactory {
 
-        private static final long serialVersionUID = 147622536084847359L;
-
         @Override
         @NonNull
         public List<IFilter> getFilters() {
@@ -44,7 +49,25 @@ class TypeFilter extends AbstractFilter {
             }
             return filters;
         }
-
     }
 
+    @Override
+    public void writeToParcel(final Parcel dest, final int flags) {
+        super.writeToParcel(dest, flags);
+        dest.writeInt(cacheType.ordinal());
+    }
+
+    public static final Creator<TypeFilter> CREATOR
+            = new Parcelable.Creator<TypeFilter>() {
+
+        @Override
+        public TypeFilter createFromParcel(final Parcel in) {
+            return new TypeFilter(in);
+        }
+
+        @Override
+        public TypeFilter[] newArray(final int size) {
+            return new TypeFilter[size];
+        }
+    };
 }

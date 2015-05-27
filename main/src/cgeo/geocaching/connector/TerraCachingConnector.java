@@ -9,7 +9,6 @@ import java.util.regex.Pattern;
 
 class TerraCachingConnector extends AbstractConnector {
 
-    private static final long serialVersionUID = -26645945616788719L;
     @NonNull private final static Pattern PATTERN_GEOCODE = Pattern.compile("TC[0-9A-Z]{1,3}", Pattern.CASE_INSENSITIVE);
 
     @Override

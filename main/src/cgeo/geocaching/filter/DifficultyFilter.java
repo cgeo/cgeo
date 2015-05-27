@@ -5,15 +5,20 @@ import cgeo.geocaching.R;
 
 import org.eclipse.jdt.annotation.NonNull;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 import java.util.List;
 
 class DifficultyFilter extends AbstractRangeFilter {
 
-    private static final long serialVersionUID = -5154908510447657327L;
-
     public DifficultyFilter(final int difficulty) {
         super(R.string.cache_difficulty, difficulty);
+    }
+
+    protected DifficultyFilter(final Parcel in) {
+        super(in);
     }
 
     @Override
@@ -24,7 +29,6 @@ class DifficultyFilter extends AbstractRangeFilter {
 
     public static class Factory implements IFilterFactory {
 
-        private static final long serialVersionUID = -3207858180443543737L;
         private static final int DIFFICULTY_MIN = 1;
         private static final int DIFFICULTY_MAX = 5;
 
@@ -37,6 +41,19 @@ class DifficultyFilter extends AbstractRangeFilter {
             }
             return filters;
         }
-
     }
+
+    public static final Creator<DifficultyFilter> CREATOR
+            = new Parcelable.Creator<DifficultyFilter>() {
+
+        @Override
+        public DifficultyFilter createFromParcel(final Parcel in) {
+            return new DifficultyFilter(in);
+        }
+
+        @Override
+        public DifficultyFilter[] newArray(final int size) {
+            return new DifficultyFilter[size];
+        }
+    };
 }

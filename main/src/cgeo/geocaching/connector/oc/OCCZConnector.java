@@ -8,7 +8,6 @@ import org.eclipse.jdt.annotation.Nullable;
 
 public class OCCZConnector extends OCConnector {
 
-    private static final long serialVersionUID = 6471034894452607120L;
     private static final String GEOCODE_PREFIX = "OZ";
 
     public OCCZConnector() {

@@ -6,6 +6,9 @@ import cgeo.geocaching.connector.IConnector;
 
 import org.eclipse.jdt.annotation.NonNull;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -13,12 +16,16 @@ import java.util.List;
 
 public class OriginFilter extends AbstractFilter {
 
-    private static final long serialVersionUID = -226131408218792315L;
     private final IConnector connector;
 
     public OriginFilter(@NonNull final IConnector connector) {
         super(connector.getName());
         this.connector = connector;
+    }
+
+    protected OriginFilter(final Parcel in) {
+        super(in);
+        connector = ConnectorFactory.getConnectorByName(in.readString());
     }
 
     @Override
@@ -27,8 +34,6 @@ public class OriginFilter extends AbstractFilter {
     }
 
     public static final class Factory implements IFilterFactory {
-
-        private static final long serialVersionUID = -7117455106869294095L;
 
         @Override
         @NonNull
@@ -51,4 +56,24 @@ public class OriginFilter extends AbstractFilter {
         }
 
     }
+
+    @Override
+    public void writeToParcel(final Parcel dest, final int flags) {
+        super.writeToParcel(dest, flags);
+        dest.writeString(connector.getName()); // Do not parcell the full Connector Object
+    }
+
+    public static final Creator<OriginFilter> CREATOR
+            = new Parcelable.Creator<OriginFilter>() {
+
+        @Override
+        public OriginFilter createFromParcel(final Parcel in) {
+            return new OriginFilter(in);
+        }
+
+        @Override
+        public OriginFilter[] newArray(final int size) {
+            return new OriginFilter[size];
+        }
+    };
 }
