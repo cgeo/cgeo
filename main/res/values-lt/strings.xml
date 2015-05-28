@@ -670,6 +670,8 @@
   <string name="cache_menu_navigation_walk">Navigacija (pėsčiomis)</string>
   <string name="cache_menu_navigation_bike">Navigacija (dviračiu)</string>
   <string name="cache_menu_maps_directions">Google Maps nuorodos</string>
+  <string name="cache_menu_sygic_walk">Sygic (pėsčiomis)</string>
+  <string name="cache_menu_sygic_drive">Sygic (vairuoti)</string>
   <string name="cache_menu_radar">Radaras</string>
   <string name="cache_menu_map">Žemėlapis</string>
   <string name="cache_menu_map_static">Statinis žemėlapis</string>
@@ -773,6 +775,7 @@
   <string name="waypoint_distance">Atstumas</string>
   <string name="waypoint_name">Pavadinimas</string>
   <string name="waypoint_edit">Redaguoti</string>
+  <string name="waypoint_copy_coordinates">Kopijuoti koordinates</string>
   <string name="waypoint_delete">Ištrinti</string>
   <string name="waypoint_edit_title">Redaguoti papildomą tašką</string>
   <string name="waypoint_add_title">Pridėti papildomą tašką</string>
@@ -861,6 +864,7 @@
   <string name="trackable_details_loading">Įkeliama keliauninko informacija…</string>
   <string name="trackable_log_touch">Registruoti</string>
   <string name="trackable_browser_open">Atidaryti naršyklėje</string>
+  <string name="trackable_refresh">Atnaujinti</string>
   <string name="trackable_goal">Tikslas</string>
   <string name="trackable_details">Informacija</string>
   <string name="trackable_image">Nuotrauka</string>
@@ -873,6 +877,7 @@
   <string name="trackable_spotted_at_user">Rankose</string>
   <string name="trackable_spotted_unknown_location">Vieta nežinoma</string>
   <string name="trackable_spotted_owner">Savininko rankose</string>
+  <string name="trackable_spotted_archived">Suarchyvuota</string>
   <string name="trackable_origin">Kilmė</string>
   <string name="trackable_unknown">Nenurodyta</string>
   <string name="trackable_released">Išleistas</string>
@@ -1250,7 +1255,23 @@
   <string name="init_geokrety_cache_description">GeokretyMap.org suteikia duomenis apie GeoKrety keliauninkus.\nPrieinami duomenys turi daugiau GeoKrety informacijos kaip \"aprašymas\" arba \"dingusių\" būsena.\n\nDuomenys nėra patys naujausi! \nPadėtis: ~ 30 min. \nAprašymai: ~ 24 h.</string>
   <string name="init_geokrety_cache">Naudoti GeoKretyMap.org</string>
   <string name="init_geokrety_userid">Vartotojo Id: %s</string>
+  <string name="trackable_title_log_without_geocode">Nenurodytas geokodas</string>
+  <string name="do_not_ask_me_again">Neklausti manęs dar kartą</string>
   <string name="settings_map_direction">Rodyti kryptį</string>
   <string name="settings_summary_map_direction">Rodyti krypties linija į tikslą</string>
   <string name="map_direction">Rodyti kryptį</string>
+  <string name="command_move_caches_progress">Perkelti slėptuves į %1s sąrašą</string>
+  <plurals name="command_move_caches_result">
+    <item quantity="one">Perkelta %d slėptuvė</item>
+    <item quantity="few">Perkeltos %d slėptuvės</item>
+    <item quantity="other">Perkelta %d slėptuvių</item>
+  </plurals>
+  <string name="command_delete_caches_progress">Ištrinamos slėptuvės</string>
+  <plurals name="command_delete_caches_result">
+    <item quantity="one">Ištrinta %d slėptuvė</item>
+    <item quantity="few">Ištrintos %d slėptuvės</item>
+    <item quantity="other">Ištrinta %d slėptuvių</item>
+  </plurals>
+  <string name="command_rename_list_result">Pervadinti sąrašą</string>
+  <string name="command_delete_list_result">Sąrašas ištrintas</string>
 </resources>
