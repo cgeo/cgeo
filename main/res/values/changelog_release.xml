@@ -2,7 +2,25 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-    <b>next bugfix release</b>\n
+    <b>Next feature release:</b>\n
+    · New: Improved waypoint editor design (Save button now in title bar)\n
+    · New: Full support of GeoKrety (Use: Menu - Services - GeoKrety)\n
+    · New: Optionally disable direction line in maps\n
+    · New: Undo available for some actions\n
+    · New: Copy coords from waypoints to clipboard\n 
+    · New: Catch more http links to GPX files from the browser\n
+    · New: Menu in cache details to put cache on ignore list (but not to remove)\n
+    · New: Only turn off GPS in some views if \"Low power mode\" is active in settings\n
+    · New: Refresh menu option for trackables\n
+    · New: Can import TerraCaching.com GPX files\n
+    · New: Also offer c:geo for opening https cache links\n
+    · Fix: Close search bar when selecting a cache\n
+    · Fix: List filter sometimes lost when returning to list\n
+    · Fix: Sygic navigation working again\n
+    · Fix: Don\'t automove marked caches when switching lists\n
+    · Fix: Waypoint type naming on GPX export corrected\n
+    · Fix: Improved refresh button size in cache details\n
+    · Fix: Fixed some possible memory leaks\n
     · Fix: Wrong log count shown after logging something else than a found\n
     · Fix: Copy to clipboard not possible on Android 5.1\n
     · Fix: Cache links in Groundspeaks weekly mails not opening\n
