@@ -82,6 +82,7 @@
   <string name="log_saving">Enviando registro…</string>
   <string name="log_saving_and_uploading">Enviando registro y subiendo imagen…</string>
   <string name="log_clear">Limpiar</string>
+  <string name="log_post_not_possible">Descargando datos…\nPor favor, inténtalo de nuevo en unos segundos o comprueba tu conexión a internet.</string>
   <string name="log_post_geocode_missing">Falta el geocódigo…</string>
   <string name="log_date_future_not_allowed">No se permiten registros con fechas futuras.</string>
   <string name="log_add">Añadir</string>
@@ -929,6 +930,7 @@
   <string name="helper_pocketquery_description">Permite crear y descargar de manera sencilla Pocket Queries centrados en tu posición actual o un punto seleecionado en el mapa. Requiere cuenta Premium en geocaching.com.</string>
   <string name="helper_google_translate_title">Traductor de Google</string>
   <string name="helper_google_translate_description">Si descargas paquetes de idiomas en la app Traductor de Google, puedes traducir las descripciones de los cachés en c:geo pulsando de forma larga en el texto del caché (sin conexión a internet).</string>
+  <string name="helper_wear_title">c:geo Wear</string>
   <string name="addon_missing_title">No se encuentra el complemento</string>
   <string name="addon_download_prompt">Obtenlo ahora desde Google Play.</string>
   <string name="export">Exportar</string>
