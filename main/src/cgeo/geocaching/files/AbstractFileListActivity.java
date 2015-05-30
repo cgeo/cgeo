@@ -4,6 +4,7 @@ import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractListActivity;
 import cgeo.geocaching.list.StoredList;
+import cgeo.geocaching.utils.EnvironmentUtils;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
 
@@ -156,7 +157,7 @@ public abstract class AbstractFileListActivity<T extends ArrayAdapter<File>> ext
             final List<File> list = new ArrayList<>();
 
             try {
-                if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+                if (EnvironmentUtils.isExternalStorageAvailable()) {
                     boolean loaded = false;
                     for (final File dir : getExistingBaseFolders()) {
                         FileUtils.listDir(list, dir, selector, changeWaitDialogHandler);

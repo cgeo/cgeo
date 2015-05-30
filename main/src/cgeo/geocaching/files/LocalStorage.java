@@ -2,6 +2,7 @@ package cgeo.geocaching.files;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.utils.CryptUtils;
+import cgeo.geocaching.utils.EnvironmentUtils;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
 
@@ -72,7 +73,7 @@ public final class LocalStorage {
     }
 
     private static File getStorageSpecific(final boolean secondary) {
-        return Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED) ^ secondary ?
+        return EnvironmentUtils.isExternalStorageAvailable() ^ secondary ?
                 getExternalStorageBase() :
                 new File(getInternalStorageBase(), CACHE_DIRNAME);
     }
@@ -361,7 +362,7 @@ public final class LocalStorage {
      * @return true if the external media is properly mounted
      */
     public static boolean isExternalStorageAvailable() {
-        return Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED);
+        return EnvironmentUtils.isExternalStorageAvailable();
     }
 
     /**

@@ -8,6 +8,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.AsyncTaskWithProgress;
+import cgeo.geocaching.utils.EnvironmentUtils;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ShareUtils;
@@ -21,7 +22,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
-import android.os.Environment;
 import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.CheckBox;
@@ -133,7 +133,7 @@ public class GpxExport extends AbstractExport {
         @Override
         protected File doInBackgroundInternal(final String[] geocodes) {
             // quick check for being able to write the GPX file
-            if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+            if (!EnvironmentUtils.isExternalStorageAvailable()) {
                 return null;
             }
 
