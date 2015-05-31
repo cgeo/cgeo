@@ -314,8 +314,13 @@
     <string name="caches_manage">Manage</string>
     <string name="caches_remove_all">Remove all</string>
     <plurals name="caches_remove_all_confirm">
+<<<<<<< HEAD
+        <item quantity="one">Do you want to remove all %s cache from current list?</item>
+        <item quantity="other">Do you want to remove all %s caches from current list?</item>
+=======
         <item quantity="one">Do you want to remove this cache from current list?</item>
         <item quantity="other">Do you want to remove all %d caches from current list?</item>
+>>>>>>> upstream/master
     </plurals>
     <string name="caches_remove_selected">Remove selected</string>
     <plurals name="caches_remove_selected_confirm">

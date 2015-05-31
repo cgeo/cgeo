@@ -1201,8 +1201,14 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     private void deleteCachesWithConformation() {
         final int titleId = (adapter.getCheckedCount() > 0) ? R.string.caches_remove_selected : R.string.caches_remove_all;
+<<<<<<< HEAD
+        final int count= adapter.getCheckedOrAllCount();
+        final String message = (adapter.getCheckedCount() > 0) ?
+                getString(R.string.caches_remove_selected_confirm, count) : res.getQuantityString(R.plurals.caches_remove_all_confirm,count,count);
+=======
         final int count = adapter.getCheckedOrAllCount();
         final String message = res.getQuantityString(adapter.getCheckedCount() > 0 ? R.plurals.caches_remove_selected_confirm : R.plurals.caches_remove_all_confirm, count, count);
+>>>>>>> upstream/master
         Dialogs.confirmYesNo(this, titleId, message, new DialogInterface.OnClickListener() {
 
             @Override
