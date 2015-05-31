@@ -62,10 +62,6 @@
                     </PreferenceScreen>
                 </PreferenceCategory>
                 <PreferenceCategory android:title="@string/settings_information" >
-                    <cgeo.geocaching.settings.CapabilitiesPreference
-                        android:title="@string/settings_features"
-                        app:connector="GC" />
-
                     <cgeo.geocaching.settings.InfoPreference
                         android:text="@string/settings_info_facebook_login"
                         android:title="@string/settings_info_facebook_login_title"
@@ -75,6 +71,10 @@
                     <Preference
                         android:key="@string/pref_fakekey_gc_website"
                         android:title="@string/settings_open_website" />
+
+                    <cgeo.geocaching.settings.CapabilitiesPreference
+                        android:title="@string/settings_features"
+                        app:connector="GC" />
                 </PreferenceCategory>
             </PreferenceScreen>
             <PreferenceScreen
@@ -96,13 +96,13 @@
                         android:key="@string/pref_fakekey_ocde_authorization" />
                 </PreferenceCategory>
                 <PreferenceCategory android:title="@string/settings_information" >
-                    <cgeo.geocaching.settings.CapabilitiesPreference
-                        android:title="@string/settings_features"
-                        app:connector="OC" />
-
                     <Preference
                         android:key="@string/pref_fakekey_ocde_website"
                         android:title="@string/settings_open_website" />
+
+                    <cgeo.geocaching.settings.CapabilitiesPreference
+                        android:title="@string/settings_features"
+                        app:connector="OC" />
                 </PreferenceCategory>
             </PreferenceScreen>
             <PreferenceScreen
@@ -124,13 +124,13 @@
                         android:key="@string/pref_fakekey_ocpl_authorization" />
                 </PreferenceCategory>
                 <PreferenceCategory android:title="@string/settings_information" >
-                    <cgeo.geocaching.settings.CapabilitiesPreference
-                        android:title="@string/settings_features"
-                        app:connector="OP" />
-
                     <Preference
                         android:key="@string/pref_fakekey_ocpl_website"
                         android:title="@string/settings_open_website" />
+
+                    <cgeo.geocaching.settings.CapabilitiesPreference
+                        android:title="@string/settings_features"
+                        app:connector="OP" />
                 </PreferenceCategory>
             </PreferenceScreen>
             <PreferenceScreen
@@ -152,13 +152,13 @@
                         android:key="@string/pref_fakekey_ocnl_authorization" />
                 </PreferenceCategory>
                 <PreferenceCategory android:title="@string/settings_information" >
-                    <cgeo.geocaching.settings.CapabilitiesPreference
-                        android:title="@string/settings_features"
-                        app:connector="OB" />
-
                     <Preference
                         android:key="@string/pref_fakekey_ocnl_website"
                         android:title="@string/settings_open_website" />
+
+                    <cgeo.geocaching.settings.CapabilitiesPreference
+                        android:title="@string/settings_features"
+                        app:connector="OB" />
                 </PreferenceCategory>
             </PreferenceScreen>
             <PreferenceScreen
@@ -180,13 +180,13 @@
                         android:key="@string/pref_fakekey_ocus_authorization" />
                 </PreferenceCategory>
                 <PreferenceCategory android:title="@string/settings_information" >
-                    <cgeo.geocaching.settings.CapabilitiesPreference
-                        android:title="@string/settings_features"
-                        app:connector="OU" />
-
                     <Preference
                         android:key="@string/pref_fakekey_ocus_website"
                         android:title="@string/settings_open_website" />
+
+                    <cgeo.geocaching.settings.CapabilitiesPreference
+                        android:title="@string/settings_features"
+                        app:connector="OU" />
                 </PreferenceCategory>
             </PreferenceScreen>
             <PreferenceScreen
@@ -208,13 +208,13 @@
                         android:key="@string/pref_fakekey_ocro_authorization" />
                 </PreferenceCategory>
                 <PreferenceCategory android:title="@string/settings_information" >
-                    <cgeo.geocaching.settings.CapabilitiesPreference
-                        android:title="@string/settings_features"
-                        app:connector="OR" />
-
                     <Preference
                         android:key="@string/pref_fakekey_ocro_website"
                         android:title="@string/settings_open_website" />
+
+                    <cgeo.geocaching.settings.CapabilitiesPreference
+                        android:title="@string/settings_features"
+                        app:connector="OR" />
                 </PreferenceCategory>
             </PreferenceScreen>
             <PreferenceScreen
@@ -236,13 +236,13 @@
                         android:key="@string/pref_fakekey_ocuk_authorization" />
                 </PreferenceCategory>
                 <PreferenceCategory android:title="@string/settings_information" >
-                    <cgeo.geocaching.settings.CapabilitiesPreference
-                        android:title="@string/settings_features"
-                        app:connector="OK" />
-
                     <Preference
                         android:key="@string/pref_fakekey_ocuk_website"
                         android:title="@string/settings_open_website" />
+
+                    <cgeo.geocaching.settings.CapabilitiesPreference
+                        android:title="@string/settings_features"
+                        app:connector="OK" />
                 </PreferenceCategory>
             </PreferenceScreen>
             <PreferenceScreen
@@ -288,13 +288,13 @@
                         android:title="@string/init_ec_icons" />
                 </PreferenceCategory>
                 <PreferenceCategory android:title="@string/settings_information" >
-                    <cgeo.geocaching.settings.CapabilitiesPreference
-                        android:title="@string/settings_features"
-                        app:connector="EC" />
-
                     <Preference
                         android:key="@string/pref_fakekey_ec_website"
                         android:title="@string/settings_open_website" />
+
+                    <cgeo.geocaching.settings.CapabilitiesPreference
+                        android:title="@string/settings_features"
+                        app:connector="EC" />
                 </PreferenceCategory>
             </PreferenceScreen>
             <PreferenceScreen
@@ -307,13 +307,13 @@
                         android:title="@string/settings_activate_ox" />
                 </PreferenceCategory>
                 <PreferenceCategory android:title="@string/settings_information" >
-                    <cgeo.geocaching.settings.CapabilitiesPreference
-                        android:title="@string/settings_features"
-                        app:connector="OX" />
-
                     <Preference
                         android:key="@string/pref_fakekey_ox_website"
                         android:title="@string/settings_open_website" />
+
+                    <cgeo.geocaching.settings.CapabilitiesPreference
+                        android:title="@string/settings_features"
+                        app:connector="OX" />
                 </PreferenceCategory>
             </PreferenceScreen>
             <PreferenceScreen
