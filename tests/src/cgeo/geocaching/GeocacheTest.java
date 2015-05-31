@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
+import java.util.EnumSet;
 import java.util.List;
 
 public class GeocacheTest extends CGeoTestCase {
@@ -380,17 +381,20 @@ public class GeocacheTest extends CGeoTestCase {
 
         final List<Trackable> inventory1 = new ArrayList<>(4);
 
-        // TB to be updated
+        // TB to be cleared
         final Trackable trackable1 = new Trackable();
         trackable1.setGeocode("TB1234");
         trackable1.setName("TB 1234");
+        trackable1.setTrackingcode("TRACK 1");
         trackable1.forceSetBrand(TrackableBrand.TRAVELBUG);
         inventory1.add(trackable1);
 
         // TB to be updated
         final Trackable trackable2 = new Trackable();
-        trackable2.setGeocode("GK1234");
-        trackable2.setName("GK 1234");
+        trackable2.setGeocode("GK1234"); // must be kept intact
+        trackable2.setName("GK 1234 OLD NAME"); // must be overridden
+        trackable2.setDistance(100F); // must be overridden
+        trackable2.setTrackingcode("TRACK 2"); // must be kept intact
         trackable2.forceSetBrand(TrackableBrand.GEOKRETY);
         inventory1.add(trackable2);
 
@@ -410,8 +414,16 @@ public class GeocacheTest extends CGeoTestCase {
         assertThat(cache.getInventory()).hasSize(4);
         assertThat(cache.getInventoryItems()).isEqualTo(4);
 
-        // new TB
+        final EnumSet<TrackableBrand> processedBrands = EnumSet.noneOf(TrackableBrand.class);
+        processedBrands.add(TrackableBrand.SWAGGIE);
+        processedBrands.add(TrackableBrand.GEOKRETY);
+        // This brand must be cleared from result as it don't appear in "inventory2"
+        processedBrands.add(TrackableBrand.TRAVELBUG);
+        //deliberatly not declare TrackableBrand.UNKNOWN. They must not be removed from merge result
+
         final List<Trackable> inventory2 = new ArrayList<>(3);
+
+        // new TB
         final Trackable trackable5 = new Trackable();
         trackable5.setGeocode("SW1234");
         trackable5.setName("SW 1234");
@@ -422,6 +434,7 @@ public class GeocacheTest extends CGeoTestCase {
         // TB updater
         final Trackable trackable6 = new Trackable();
         trackable6.setGeocode("GK1234");
+        trackable2.setName("GK 1234 _NEW_ NAME");
         trackable6.setDistance(200F);
         trackable6.forceSetBrand(TrackableBrand.GEOKRETY);
         inventory2.add(trackable6);
@@ -434,45 +447,56 @@ public class GeocacheTest extends CGeoTestCase {
         trackable7.forceSetBrand(TrackableBrand.GEOKRETY);
         inventory2.add(trackable7);
 
-        cache.mergeInventory(inventory2);
+        cache.mergeInventory(inventory2, processedBrands);
 
-        assertThat(cache.getInventory()).hasSize(5);
-        assertThat(cache.getInventoryItems()).isEqualTo(5);
+        assertThat(cache.getInventory()).hasSize(4);
+        assertThat(cache.getInventoryItems()).isEqualTo(4);
 
-        assertThat(cache.getInventory().get(0)).isEqualTo(trackable1);
-        assertThat(cache.getInventory().get(0).getGeocode()).isEqualTo("TB1234");
-        assertThat(cache.getInventory().get(0).getName()).isEqualTo("TB 1234");
-        assertThat(cache.getInventory().get(0).getDistance()).isEqualTo(-1F);
+        assertThat(cache.getInventory().get(0)).isEqualTo(trackable5);
+        assertThat(cache.getInventory().get(0).getGeocode()).isEqualTo("SW1234");
+        assertThat(cache.getInventory().get(0).getName()).isEqualTo("SW 1234");
+        assertThat(cache.getInventory().get(0).getDistance()).isEqualTo(100F);
         assertThat(cache.getInventory().get(0).getOwner()).isNull();
-        assertThat(cache.getInventory().get(0).getBrand()).isEqualTo(TrackableBrand.TRAVELBUG);
+        assertThat(cache.getInventory().get(0).getBrand()).isEqualTo(TrackableBrand.SWAGGIE);
 
         assertThat(cache.getInventory().get(1)).isEqualTo(trackable2);
         assertThat(cache.getInventory().get(1).getGeocode()).isEqualTo("GK1234");
-        assertThat(cache.getInventory().get(1).getName()).isEqualTo("GK 1234");
+        assertThat(cache.getInventory().get(1).getName()).isEqualTo("GK 1234 _NEW_ NAME");
         assertThat(cache.getInventory().get(1).getDistance()).isEqualTo(200F);
+        assertThat(cache.getInventory().get(1).getTrackingcode()).isEqualTo("TRACK 2");
         assertThat(cache.getInventory().get(1).getOwner()).isNull();
         assertThat(cache.getInventory().get(1).getBrand()).isEqualTo(TrackableBrand.GEOKRETY);
 
-        assertThat(cache.getInventory().get(2)).isEqualTo(trackable4);
-        assertThat(cache.getInventory().get(2).getGeocode()).isEqualTo("UN0000");
-        assertThat(cache.getInventory().get(2).getName()).isEqualTo("");
-        assertThat(cache.getInventory().get(2).getDistance()).isEqualTo(-1F);
+        assertThat(cache.getInventory().get(2)).isEqualTo(trackable7);
+        assertThat(cache.getInventory().get(2).getGeocode()).isEqualTo("GK4321");
+        assertThat(cache.getInventory().get(2).getName()).isEqualTo("GK 4321");
+        assertThat(cache.getInventory().get(2).getDistance()).isEqualTo(300F);
         assertThat(cache.getInventory().get(2).getOwner()).isNull();
-        assertThat(cache.getInventory().get(2).getBrand()).isEqualTo(TrackableBrand.UNKNOWN);
+        assertThat(cache.getInventory().get(2).getBrand()).isEqualTo(TrackableBrand.GEOKRETY);
 
-        assertThat(cache.getInventory().get(3)).isEqualTo(trackable5);
-        assertThat(cache.getInventory().get(3).getGeocode()).isEqualTo("SW1234");
-        assertThat(cache.getInventory().get(3).getName()).isEqualTo("SW 1234");
-        assertThat(cache.getInventory().get(3).getDistance()).isEqualTo(100F);
+        assertThat(cache.getInventory().get(3)).isEqualTo(trackable4);
+        assertThat(cache.getInventory().get(3).getGeocode()).isEqualTo("UN0000");
+        assertThat(cache.getInventory().get(3).getName()).isEqualTo("");
+        assertThat(cache.getInventory().get(3).getDistance()).isEqualTo(-1F);
         assertThat(cache.getInventory().get(3).getOwner()).isNull();
-        assertThat(cache.getInventory().get(3).getBrand()).isEqualTo(TrackableBrand.SWAGGIE);
+        assertThat(cache.getInventory().get(3).getBrand()).isEqualTo(TrackableBrand.UNKNOWN);
 
-        assertThat(cache.getInventory().get(4)).isEqualTo(trackable7);
-        assertThat(cache.getInventory().get(4).getGeocode()).isEqualTo("GK4321");
-        assertThat(cache.getInventory().get(4).getName()).isEqualTo("GK 4321");
-        assertThat(cache.getInventory().get(4).getDistance()).isEqualTo(300F);
-        assertThat(cache.getInventory().get(4).getOwner()).isNull();
-        assertThat(cache.getInventory().get(4).getBrand()).isEqualTo(TrackableBrand.GEOKRETY);
+        // test null inventory
+        final Geocache cache1 = new Geocache();
+        final List<Trackable> inventory3 = Collections.singletonList(trackable1);
+        assertThat(cache1.getInventory()).isNull();
+
+        cache1.mergeInventory(inventory3, EnumSet.of(TrackableBrand.TRAVELBUG));
+
+        assertThat(cache1.getInventory()).hasSize(1);
+        assertThat(cache1.getInventoryItems()).isEqualTo(1);
+
+        assertThat(cache1.getInventory().get(0)).isEqualTo(trackable1);
+        assertThat(cache1.getInventory().get(0).getGeocode()).isEqualTo("TB1234");
+        assertThat(cache1.getInventory().get(0).getName()).isEqualTo("TB 1234");
+        assertThat(cache1.getInventory().get(0).getDistance()).isEqualTo(-1F);
+        assertThat(cache1.getInventory().get(0).getOwner()).isNull();
+        assertThat(cache1.getInventory().get(0).getBrand()).isEqualTo(TrackableBrand.TRAVELBUG);
     }
 
     public static void testAddInventoryItem() {

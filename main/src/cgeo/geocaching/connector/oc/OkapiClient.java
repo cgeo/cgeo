@@ -15,6 +15,7 @@ import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.oc.OCApiConnector.ApiSupport;
 import cgeo.geocaching.connector.oc.OCApiConnector.OAuthLevel;
 import cgeo.geocaching.connector.oc.UserInfo.UserInfoStatus;
+import cgeo.geocaching.connector.trackable.TrackableBrand;
 import cgeo.geocaching.enumerations.CacheAttribute;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
@@ -400,7 +401,7 @@ final class OkapiClient {
             //cache.setLicense(response.getString("attribution_note"));
             cache.setWaypoints(parseWaypoints((ArrayNode) response.path(CACHE_WPTS)), false);
 
-            cache.mergeInventory(parseTrackables((ArrayNode) response.path(CACHE_TRACKABLES)));
+            cache.mergeInventory(parseTrackables((ArrayNode) response.path(CACHE_TRACKABLES)), EnumSet.of(TrackableBrand.GEOKRETY));
 
             if (response.has(CACHE_IS_WATCHED)) {
                 cache.setOnWatchlist(response.get(CACHE_IS_WATCHED).asBoolean());
