@@ -45,8 +45,10 @@ public class WatchdogTest extends CGeoTestCase {
 
     private static void downloadOpenCaching(final String geocode) {
         final OCApiConnector connector = (OCApiConnector) ConnectorFactory.getConnector(geocode);
+        assertThat(connector).overridingErrorMessage("Did not find c:geo connector for %s", geocode).isNotNull();
         final SearchResult searchResult = connector.searchByGeocode(geocode, null, null);
-        assertThat(searchResult.getCount()).overridingErrorMessage("Failed to download from " + connector.getName()).isNotNull();
+        assertThat(searchResult).overridingErrorMessage("Failed to get response from %s", connector.getName()).isNotNull();
+        assertThat(searchResult.getCount()).overridingErrorMessage("Failed to download %s from %s", geocode, connector.getName()).isGreaterThan(0);
 
         final Geocache geocache = searchResult.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
         assertThat(geocache).isNotNull();
