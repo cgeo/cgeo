@@ -82,6 +82,7 @@
   <string name="log_saving">Zapisuję w dzienniku…</string>
   <string name="log_saving_and_uploading">Zapisuję w dzienniku i wysyłam zdjęcie…</string>
   <string name="log_clear">Wyczyść</string>
+  <string name="log_post_not_possible">Pobieranie danych w toku…\nProszę spróbować za parę sekund albo sprawdzić połączenie z internetem.</string>
   <string name="log_post_geocode_missing">Brak kodu GC skrzynki…</string>
   <string name="log_date_future_not_allowed">Wpisy z przyszłą datą nie są dozwolone.</string>
   <string name="log_add">Dodaj</string>
@@ -681,6 +682,8 @@
   <string name="cache_menu_navigation_walk">Nawigacja (pieszo)</string>
   <string name="cache_menu_navigation_bike">Nawigacja (rower)</string>
   <string name="cache_menu_maps_directions">Kierunki map Google</string>
+  <string name="cache_menu_sygic_walk">Sygic (pieszo)</string>
+  <string name="cache_menu_sygic_drive">Sygic (jazda)</string>
   <string name="cache_menu_radar">Radar</string>
   <string name="cache_menu_map">Pokaż na mapie</string>
   <string name="cache_menu_map_static">Mapa statyczna</string>
@@ -785,6 +788,7 @@
   <string name="waypoint_distance">Odległość</string>
   <string name="waypoint_name">Nazwa</string>
   <string name="waypoint_edit">Edytuj</string>
+  <string name="waypoint_copy_coordinates">Kopiuj współrzędne</string>
   <string name="waypoint_delete">Usuń</string>
   <string name="waypoint_edit_title">Edytuj punkt nawigacji</string>
   <string name="waypoint_add_title">Dodaj punkt nawigacji</string>
@@ -873,6 +877,7 @@
   <string name="trackable_details_loading">Ładuje szczegóły przedmiotu podróżnego…</string>
   <string name="trackable_log_touch">Wpisz odkrycie</string>
   <string name="trackable_browser_open">Otwórz w przeglądarce</string>
+  <string name="trackable_refresh">Odśwież</string>
   <string name="trackable_goal">Cel</string>
   <string name="trackable_details">Szczegóły</string>
   <string name="trackable_image">Zdjęcie</string>
@@ -885,6 +890,8 @@
   <string name="trackable_spotted_at_user">W rękach</string>
   <string name="trackable_spotted_unknown_location">Nieznana lokalizacja</string>
   <string name="trackable_spotted_owner">U właściciela</string>
+  <string name="trackable_spotted_archived">Zarchiwizowany</string>
+  <string name="trackable_spotted_travelling">W podróży</string>
   <string name="trackable_origin">Pochodzenie</string>
   <string name="trackable_unknown">Nieznany</string>
   <string name="trackable_released">Wydany</string>
@@ -935,6 +942,8 @@
   <string name="helper_pocketquery_description">Pozwala na łatwe tworzenie i pobieranie Pocket Queries wyśrodkowanych w Twoim aktualnym położeniu lub wybranym punkcie mapy. Wymaga konta Premium w Geocaching.com.</string>
   <string name="helper_google_translate_title">Tłumacz Google</string>
   <string name="helper_google_translate_description">Jeśli pobierzesz paczki tłumaczeń w aplikacji Google Tłumacz, będziesz mógł łatwo tłumaczyć opisy skrzynek przytrzymując na nich palcem chwilę dłużej (bez połączenia z internetem).</string>
+  <string name="helper_wear_title">c:geo Wear</string>
+  <string name="helper_wear_description">c:geo Wear to dodatek do c:geo, który pozwala na nawigację do skrzynki bezpośrednio z zegarka Android Wear.</string>
   <string name="addon_missing_title">Brakujący dodatek</string>
   <string name="addon_download_prompt">Pobierz teraz z Google Play.</string>
   <string name="export">Eksport</string>
@@ -1263,7 +1272,24 @@
   <string name="init_geokrety_cache_description">GeokretyMap.org dostarcza informacji o GeoKretach.\nDostępne dane zawierają więcej informacji o GeoKretach takich jak \'opis\' lub status \'zagubiony\' .\n\nDane nie są aktualizowane na bieżąco!\nPozycja: ~30min.\nOpis: ~24h.</string>
   <string name="init_geokrety_cache">Używaj GeoKretyMap.org</string>
   <string name="init_geokrety_userid">ID użytkownika: %s</string>
+  <string name="trackable_title_log_without_geocode">Geokod nie jest ustawiony</string>
+  <string name="trackable_log_without_geocode">Masz zamiar wysłać wpis bez Geokodu, ale nie jest to rekomendowane. Czy chciałbyś go dodać teraz?</string>
+  <string name="do_not_ask_me_again">Nie pytaj ponownie</string>
   <string name="settings_map_direction">Pokazuj kierunek</string>
   <string name="settings_summary_map_direction">Pokazuj linię kierunku do punktu nawigacyjnego</string>
   <string name="map_direction">Pokaż kierunek</string>
+  <string name="command_move_caches_progress">Przenoszę skrzynki do listy %1s</string>
+  <plurals name="command_move_caches_result">
+    <item quantity="one">Przeniesiono %d skrzynkę</item>
+    <item quantity="few">Przeniesiono %d skrzynki</item>
+    <item quantity="other">Przeniesiono %d skrzynek</item>
+  </plurals>
+  <string name="command_delete_caches_progress">Usuwanie skrzynek</string>
+  <plurals name="command_delete_caches_result">
+    <item quantity="one">Usunięto %d skrzynkę</item>
+    <item quantity="few">Usunięto %d skrzynki</item>
+    <item quantity="other">Usunięto %d skrzynek</item>
+  </plurals>
+  <string name="command_rename_list_result">Zmieniono nazwę listy</string>
+  <string name="command_delete_list_result">Usunięto listę</string>
 </resources>

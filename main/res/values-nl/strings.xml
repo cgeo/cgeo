@@ -82,6 +82,7 @@
   <string name="log_saving">Log opslaan…</string>
   <string name="log_saving_and_uploading">Verzenden van log en uploaden foto…</string>
   <string name="log_clear">Wissen</string>
+  <string name="log_post_not_possible">Bezig met downloaden van gegevens...\nProbeer a.u.b. over enkele seconden nogmaals of controleer de internetvervindig.</string>
   <string name="log_post_geocode_missing">Geocode ontbreekt…</string>
   <string name="log_date_future_not_allowed">Log datums in de toekomst zijn niet toegestaan.</string>
   <string name="log_add">Toevoegen</string>
@@ -676,6 +677,8 @@
   <string name="cache_menu_navigation_walk">Navigeer (lopen)</string>
   <string name="cache_menu_navigation_bike">Navigeer (fiets)</string>
   <string name="cache_menu_maps_directions">Google Maps aanwijzigen</string>
+  <string name="cache_menu_sygic_walk">Sygic (wandelen)</string>
+  <string name="cache_menu_sygic_drive">Sygic (rijden)</string>
   <string name="cache_menu_radar">Radar</string>
   <string name="cache_menu_map">Toon op kaart</string>
   <string name="cache_menu_map_static">Statische kaarten</string>
@@ -781,6 +784,7 @@
   <string name="waypoint_distance">Afstand</string>
   <string name="waypoint_name">Naam</string>
   <string name="waypoint_edit">Bewerken</string>
+  <string name="waypoint_copy_coordinates">Coördinaten kopiëren</string>
   <string name="waypoint_delete">Verwijderen</string>
   <string name="waypoint_edit_title">Waypoint bewerken</string>
   <string name="waypoint_add_title">Waypoint toevoegen</string>
@@ -869,6 +873,7 @@
   <string name="trackable_details_loading">Bezig met laden van trackable details…</string>
   <string name="trackable_log_touch">Log aanraking</string>
   <string name="trackable_browser_open">Openen in Browser</string>
+  <string name="trackable_refresh">Verversen</string>
   <string name="trackable_goal">Doel</string>
   <string name="trackable_details">Details</string>
   <string name="trackable_image">Afbeelding</string>
@@ -881,6 +886,8 @@
   <string name="trackable_spotted_at_user">In de handen van</string>
   <string name="trackable_spotted_unknown_location">Onbekende locatie</string>
   <string name="trackable_spotted_owner">In de handen van de eigenaar</string>
+  <string name="trackable_spotted_archived">Gearchiveerd</string>
+  <string name="trackable_spotted_travelling">Reizen</string>
   <string name="trackable_origin">Oorsprong</string>
   <string name="trackable_unknown">Onbekend</string>
   <string name="trackable_released">Uitgebracht</string>
@@ -931,6 +938,8 @@
   <string name="helper_pocketquery_description">Makkelijk Pocket Query\'s maken en downloaden gericht op uw huidige positie of een punt geselecteerd van een kaart. Vereist een Premium account van Geocaching.com.</string>
   <string name="helper_google_translate_title">Google Translate</string>
   <string name="helper_google_translate_description">Als je vertaal pakketten in de Google Translate app download, kan je eenvoudig een cache omschrijving vertalen in c:geo door een lange tik op deze omschrijvingstekst (zonder een internet verbinding).</string>
+  <string name="helper_wear_title">c:geo Wear</string>
+  <string name="helper_wear_description">c:geo Wear is een plugin voor c:geo waarmee je naar geocaches kunt navigeren met behulp van een Android Wear smartwatch.</string>
   <string name="addon_missing_title">Add-On ontbreekt</string>
   <string name="addon_download_prompt">Haal de add-on nu op van Google Play.</string>
   <string name="export">Exporteren</string>
@@ -1253,6 +1262,9 @@
   <string name="init_geokrety_cache_description">GeokretyMap.org voorziet in de data van GeoKrety trackables.\nBeschikbare data bevat overige GeoKrety informatie zoals \'beschrijving\' of \'ontbreekt\' status.\n\nData is niet live! \nPosities: ~ 30 min. \nOmschrijvingen: ~ 24 h.</string>
   <string name="init_geokrety_cache">Gebruik GeoKretyMap.org</string>
   <string name="init_geokrety_userid">Gebruikers-id: %s</string>
+  <string name="trackable_title_log_without_geocode">Geocode niet ingesteld</string>
+  <string name="trackable_log_without_geocode">Je gaat een log zonder Geocode verzenden. Het wordt aanbevolen een Geocode in te stellen. Wil je nu een Geocode toevoegen?</string>
+  <string name="do_not_ask_me_again">Vraag mij niet meer</string>
   <string name="settings_map_direction">Toon richting</string>
   <string name="settings_summary_map_direction">Toon een richtingslijn naar het navigatiedoel</string>
   <string name="map_direction">Toon richting</string>

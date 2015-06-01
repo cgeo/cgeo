@@ -74,12 +74,15 @@
   <string name="log_tb_visit">Visitato</string>
   <string name="log_tb_drop">Lasciato</string>
   <string name="log_tb_changeall">Cambia tutto</string>
+  <string name="log_tb_grabbed">Preso da qualche parte</string>
   <string name="log_tb_note">Nota</string>
+  <string name="log_tb_discovered">Scoperto</string>
   <string name="log_tb_archived">Archiviato</string>
   <string name="log_save">Salva offline</string>
   <string name="log_saving">Invio log…</string>
   <string name="log_saving_and_uploading">Invio log e immagine…</string>
   <string name="log_clear">Azzera</string>
+  <string name="log_post_not_possible">Download dei dati in corso...\nRiprovare tra alcuni secondi o controllare la connessione a internet.</string>
   <string name="log_post_geocode_missing">Geocode mancante…</string>
   <string name="log_date_future_not_allowed">Non sono ammesse date future per i log.</string>
   <string name="log_add">Aggiungi</string>
@@ -216,6 +219,8 @@
   <string name="info_stored_image">Nuova immagine salvata su:</string>
   <string name="info_storing_static_maps">Tento di salvare le mappe statiche</string>
   <string name="info_cache_saved">Il cache è stato salvato localmente</string>
+  <string name="err_trackable_log_not_anonymous">Log di %1$s da c:geo non può essere fatto in forma anonima. Si desidera aprire le impostazioni per completare le credenziali da %2$s?</string>
+  <string name="err_trackable_no_preference_activity">La pagina di configurazione del servizio associato al trackable non è disponibile.</string>
   <string name="loc_last">Ultima nota</string>
   <string name="loc_net">Network</string>
   <string name="loc_fused">Combinato</string>
@@ -280,6 +285,10 @@
   <string name="caches_nearby">Qui vicino</string>
   <string name="caches_manage">Gestisci</string>
   <string name="caches_remove_all">Elimina tutti</string>
+  <plurals name="caches_remove_all_confirm">
+    <item quantity="one">Desideri rimuovere questo cache dalla lista corrente?</item>
+    <item quantity="other">Vuoi rimuovere tutti i %d cache dalla lista corrente?</item>
+  </plurals>
   <string name="caches_remove_selected">Elimina selezionati</string>
   <plurals name="caches_remove_selected_confirm">
     <item quantity="one">Si desidera rimuovere questo cache dal tuo dispositivo?</item>
@@ -347,6 +356,7 @@
   <string name="about_help">Guida</string>
   <string name="about_system_include">Si prega di includere le seguenti informazioni di sistema quando si invia una segnalazione di bug o per chiedere ulteriori informazioni su c:geo:</string>
   <string name="changelog_github">Elenco di tutte le modifiche</string>
+  <string name="settings_title_open_settings">Apri le impostazioni?</string>
   <string name="settings_title_services">Servizi</string>
   <string name="settings_summary_services">Configura le informazioni utente dell\'account ed accede a servizi opzionali.</string>
   <string name="settings_title_appearance">Aspetto</string>
@@ -408,6 +418,8 @@
   <string name="init_login_popup_not_authorized">Non autorizzato</string>
   <string name="init_login_popup_invalid_timestamp">Ora locale non valida, regolare l\'orologio del dispositivo</string>
   <string name="init_login_popup_invalid_token">Autorizzazione non valida, ri-autorizzare</string>
+  <string name="init_authorization_credential_username">Utente</string>
+  <string name="init_authorization_credential_password">Password</string>
   <string name="settings_service_active">Attiva</string>
   <string name="init_signature">Firma</string>
   <string name="init_template_help">Stringhe segnaposto come [NAME] saranno espanse più tardi, quando verrà utilizzato questo modello.</string>
@@ -532,6 +544,7 @@
   <string name="settings_open_geokretymap_website">Apri il sito di GeoKretyMap.org</string>
   <string name="settings_settings">Impostazioni</string>
   <string name="settings_information">Informazioni</string>
+  <string name="settings_advanced">Opzioni avanzate</string>
   <string name="settings_twitter_cache_message">Messaggio per cache trovato</string>
   <string name="settings_twitter_trackable_message">Messaggio per Trackable trovato</string>
   <string name="init_ec_icons">Icone Mappa</string>
@@ -572,10 +585,16 @@
   <string name="auth_dialog_waiting">In attesa di %s…</string>
   <string name="auth_explain_short">Il processo seguente permetterà a <b>c:geo</b> di accedere a %s.</string>
   <string name="auth_explain_long">Premendo il pulsante \"autorizza c:geo\" avrà inizio il processo. Verrà aperto un browser web con la pagina %s. Effettuare login alla pagina e lasciare che <b>c:geo</b> acceda al tuo account.</string>
+  <string name="auth_token_register">Crea un Account</string>
+  <string name="auth_token_explain_short">Il processo seguente permetterà a <b>c:geo</b> di accedere a %s.</string>
+  <string name="auth_token_explain_long">Completando le credenziali e premendo il pulsante \"autorizza c:geo\" avvierà la connessione a %s per recuperare un token di autenticazione.</string>
   <string name="auth_dialog_completed_twitter">c:geo è ora autorizzato a postare su Twitter.</string>
   <string name="auth_ocde">opencaching.de</string>
   <string name="auth_ocpl">opencaching.pl</string>
   <string name="auth_dialog_completed_oc">c:geo è ora autorizzato ad accedere a %s.</string>
+  <string name="auth_dialog_completed_geokrety">c:geo è ora autorizzato ad interagire con %s.</string>
+  <string name="err_auth_geokrety_bad_password">Il tuo nome utente o password non sembrano validi.</string>
+  <string name="err_auth_geokrety_unknown">%1$s ha risposto: %2$s.</string>
   <plurals name="cache_counts">
     <item quantity="one">Un cache</item>
     <item quantity="other">%1$d cache</item>
@@ -658,11 +677,14 @@
   <string name="cache_menu_navigation_walk">Naviga (a piedi)</string>
   <string name="cache_menu_navigation_bike">Naviga (in moto)</string>
   <string name="cache_menu_maps_directions">Direzioni su Google Maps</string>
+  <string name="cache_menu_sygic_walk">Sygic (a piedi)</string>
+  <string name="cache_menu_sygic_drive">Sygic (guida)</string>
   <string name="cache_menu_radar">Radar</string>
   <string name="cache_menu_map">Mappa c:geo</string>
   <string name="cache_menu_map_static">Mappe statiche</string>
   <string name="cache_menu_download_map_static">Scarica mappe statiche</string>
   <string name="cache_menu_rmaps">Rmaps</string>
+  <string name="cache_menu_map_ext">Altre applicazioni esterne</string>
   <string name="cache_menu_streetview">Street View</string>
   <string name="cache_menu_browser">Apri nel browser</string>
   <string name="cache_menu_visit">Scrivi Log</string>
@@ -761,6 +783,7 @@
   <string name="waypoint_distance">Distanza</string>
   <string name="waypoint_name">Nome</string>
   <string name="waypoint_edit">Modifica</string>
+  <string name="waypoint_copy_coordinates">Copia le coordinate</string>
   <string name="waypoint_delete">Elimina</string>
   <string name="waypoint_edit_title">Modifica waypoint</string>
   <string name="waypoint_add_title">Aggiungi waypoint</string>
@@ -849,6 +872,7 @@
   <string name="trackable_details_loading">Caricamento dettagli Trackable…</string>
   <string name="trackable_log_touch">Documenta il contatto</string>
   <string name="trackable_browser_open">Apri nel Browser</string>
+  <string name="trackable_refresh">Aggiorna</string>
   <string name="trackable_goal">Obiettivo</string>
   <string name="trackable_details">Dettagli</string>
   <string name="trackable_image">Immagine</string>
@@ -861,6 +885,8 @@
   <string name="trackable_spotted_at_user">Nelle mani di</string>
   <string name="trackable_spotted_unknown_location">Posizione sconosciuta</string>
   <string name="trackable_spotted_owner">Nelle mani del proprietario</string>
+  <string name="trackable_spotted_archived">Archiviato</string>
+  <string name="trackable_spotted_travelling">In viaggio</string>
   <string name="trackable_origin">Origine</string>
   <string name="trackable_unknown">Sconosciuto</string>
   <string name="trackable_released">Rilasciato</string>
@@ -883,6 +909,8 @@
   <string name="user_menu_open_contact">Aprire scheda contatto</string>
   <string name="navigation">Navigazione</string>
   <string name="compass_title">Bussola</string>
+  <string name="use_gps">Usa solo GPS</string>
+  <string name="use_compass">Usa GPS e bussola magnetica</string>
   <string name="destination_select">Scegli destinazione</string>
   <string name="navigation_direct_navigation">Navigazione diretta</string>
   <string name="navigation_target">Destinazione</string>
@@ -909,8 +937,12 @@
   <string name="helper_pocketquery_description">Consente di creare facilmente Pocket Queries centrate sulla tua posizione attuale o un punto scelto dalla mappa. Richiede un account premium su Geocaching.com.</string>
   <string name="helper_google_translate_title">Google Traduttore</string>
   <string name="helper_google_translate_description">Se si scaricano anche le lingue offline dell\'applicazione Google Traduttore, puoi facilmente tradurre le descrizioni dei cache in c:geo toccando e tenendo premuto sul testo (senza bisogno di una connessione Internet).</string>
+  <string name="helper_wear_title">c:geo Wear</string>
+  <string name="helper_wear_description">c:geo Wear è un plugin per c:geo che ti permette di cercare geocaches utilizzando un orologio compatibile Android Wear.</string>
   <string name="addon_missing_title">Add-On mancante</string>
   <string name="addon_download_prompt">Scaricalo ora da Google Play.</string>
+  <string name="export">Esportazione</string>
+  <string name="export_progress">Esporta: %1$s</string>
   <string name="export_exportedto">esportato in</string>
   <string name="export_failed">Esportazione fallita</string>
   <string name="export_fieldnotes">Field Note</string>
@@ -923,6 +955,8 @@
   <string name="export_gpx">GPX</string>
   <string name="export_gpx_info">Il file GPX sarà esportato in %1$s con data ed ora correnti nel nome file.</string>
   <string name="export_gpx_to">Invia il GPX esportato a</string>
+  <string name="export_confirm_title">Esportazione di %1$s</string>
+  <string name="export_confirm_message">Percorso: %1$s\nNome file: %2$s</string>
   <string name="attribute_dogs_yes">Cani permessi</string>
   <string name="attribute_dogs_no">Cani NON permessi</string>
   <string name="attribute_bicycles_yes">Biciclette permesse</string>
@@ -1216,8 +1250,33 @@
   <string name="showcase_compass_hint_text">Questo nuovo menu potrebbe darti un\'idea di dove si trova il cache. Mostra l\'hint, se disponibile.</string>
   <string name="confirm_log_title">Tipo di Log non usuale</string>
   <string name="confirm_log_message">Si desidera registrare \'%s\'. Sei sicuro?</string>
+  <string name="settings_activate_geokrety">Attiva</string>
   <string name="init_geokrety">GeoKrety.org</string>
+  <string name="init_connectorGeokretyActive">Trackable Geokrety</string>
   <string name="init_summary_geokrety">Abilitare le trackablee da GeoKrety.org</string>
   <string name="init_summary_geokrety_account">Nessun account configurato.</string>
+  <string name="init_geokrety_register_ok">Login effettuato</string>
   <string name="init_geokrety_register_fail">Login fallito</string>
+  <string name="init_geokrety_description">Autorizza c:geo su GeoKrety.org per loggare trackables GeoKrety.</string>
+  <string name="init_geokrety_cache_description">GeokretyMap.org fornisce dati su GeoKrety trackables.\nI dati disponibili contengono ulteriori informazioni di GeoKrety come \'Descrizione\' o stato di \'mancante\'.\n\nI dati non sono live! \nPosizioni: ~30 min\nDescrizioni: ~24 h.</string>
+  <string name="init_geokrety_cache">Use GeoKretyMap.org</string>
+  <string name="init_geokrety_userid">Id utente: %s</string>
+  <string name="trackable_title_log_without_geocode">Geocode non impostato</string>
+  <string name="trackable_log_without_geocode">Stai per inviare un log senza un Geocode. Si consiglia di impostarne uno. Desideri aggiungerlo ora?</string>
+  <string name="do_not_ask_me_again">Non chiedere più</string>
+  <string name="settings_map_direction">Mostra direzione</string>
+  <string name="settings_summary_map_direction">Visualizza una linea di direzione verso la destinazione</string>
+  <string name="map_direction">Mostra direzione</string>
+  <string name="command_move_caches_progress">Spostamento dei cache alla lista %1s</string>
+  <plurals name="command_move_caches_result">
+    <item quantity="one">Spostato %d cache</item>
+    <item quantity="other">Spostati %d cache</item>
+  </plurals>
+  <string name="command_delete_caches_progress">Cancellazione cache</string>
+  <plurals name="command_delete_caches_result">
+    <item quantity="one">Cancellato %d cache</item>
+    <item quantity="other">Cancellato %d cache</item>
+  </plurals>
+  <string name="command_rename_list_result">Lista rinominata</string>
+  <string name="command_delete_list_result">Lista eliminata</string>
 </resources>

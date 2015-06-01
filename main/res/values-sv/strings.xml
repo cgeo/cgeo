@@ -82,6 +82,7 @@
   <string name="log_saving">Sparar logg…</string>
   <string name="log_saving_and_uploading">Sparar logg och laddar upp bild…</string>
   <string name="log_clear">Rensa</string>
+  <string name="log_post_not_possible">Nerladdning av data pågår…\nFörsök igen om några sekunder eller kontrollera din Internetanslutning.</string>
   <string name="log_post_geocode_missing">Geocode saknas…</string>
   <string name="log_date_future_not_allowed">Framtida loggdatum är inte tillåtna.</string>
   <string name="log_add">Lägg till</string>
@@ -218,6 +219,8 @@
   <string name="info_stored_image">Ny bild sparad som:</string>
   <string name="info_storing_static_maps">Försöker ladda ner statiska kartor</string>
   <string name="info_cache_saved">Cachen har lagrats lokalt</string>
+  <string name="err_trackable_log_not_anonymous">Loggning av %1$s från c:geo kan inte göras anonymt. Vill du öppna inställningarna för att fylla i din inloggningsinformation från %2$s?</string>
+  <string name="err_trackable_no_preference_activity">Tyvärr kan inte en lämplig inställningsskärm hittas.</string>
   <string name="loc_last">Senast kända</string>
   <string name="loc_net">Nätverk</string>
   <string name="loc_fused">Kombinerad</string>
@@ -287,6 +290,10 @@
     <item quantity="other">Vill du radera dessa %d cacher från den här listan?</item>
   </plurals>
   <string name="caches_remove_selected">Ta bort valda</string>
+  <plurals name="caches_remove_selected_confirm">
+    <item quantity="one">Vill du radera den här cachen från din enhet?</item>
+    <item quantity="other">Vill du radera de här %d cacherna från din enhet?</item>
+  </plurals>
   <string name="caches_remove_progress">Tar bort cacher</string>
   <string name="caches_delete_events">Ta bort gamla event</string>
   <string name="caches_refresh_selected">Uppdatera valda</string>
@@ -349,6 +356,7 @@
   <string name="about_help">Hjälp</string>
   <string name="about_system_include">Vänligen inkludera följande systeminformation när du skickar en felrapport eller ber om mer information om c:geo:</string>
   <string name="changelog_github">Lista över alla ändringar</string>
+  <string name="settings_title_open_settings">Öppna inställningar?</string>
   <string name="settings_title_services">Tjänster</string>
   <string name="settings_summary_services">Ställ in kontoinformation och tillgång till valbara tjänster.</string>
   <string name="settings_title_appearance">Utseende</string>
@@ -414,6 +422,8 @@
   <string name="init_login_popup_not_authorized">Ej godkänd</string>
   <string name="init_login_popup_invalid_timestamp">Lokal tid ogiltig, justera enhetens tid</string>
   <string name="init_login_popup_invalid_token">Tillstånd misslyckades, försök igen</string>
+  <string name="init_authorization_credential_username">Användarnamn</string>
+  <string name="init_authorization_credential_password">Lösenord</string>
   <string name="settings_service_active">Aktiv</string>
   <string name="init_signature">Signatur</string>
   <string name="init_template_help">Markörer som [NAME] kommer att utvidgas senare när mallen används.</string>
@@ -538,6 +548,7 @@
   <string name="settings_open_geokretymap_website">Öppna GeoKretyMap.org hemsida</string>
   <string name="settings_settings">Inställningar</string>
   <string name="settings_information">Information</string>
+  <string name="settings_advanced">Avancerade inställningar</string>
   <string name="settings_twitter_cache_message">Meddelande för hittad cache</string>
   <string name="settings_twitter_trackable_message">Meddelande för hittad trackable</string>
   <string name="init_ec_icons">Kartikoner</string>
@@ -578,6 +589,9 @@
   <string name="auth_dialog_waiting">Väntar på %s…</string>
   <string name="auth_explain_short">Följande process kommer att tillåta <b>c:geo</b> att få tillgång till %s.</string>
   <string name="auth_explain_long">Genom att trycka på knappen \"tillåt c:geo\" kommer processen att startas. Denna process kommer att öppna en webbläsare med %s sida. Logga in på den här sidan och låt <b>c:geo</b> komma åt ditt konto. Det är allt.</string>
+  <string name="auth_token_register">Skapa ett konto</string>
+  <string name="auth_token_explain_short">Följande process kommer ge <b>c:geo</b> tillgång till %s.</string>
+  <string name="auth_token_explain_long">Genom att fylla i dina uppgifter och trycka på \"tillåta c:geo\" kommer processen att startas. Denna process kommer att ansluta till %s och hämta ett inloggningshandtag. Det är allt.</string>
   <string name="auth_dialog_completed_twitter">c:geo är nu godkänd att posta på Twitter.</string>
   <string name="auth_ocde">opencaching.de</string>
   <string name="auth_ocpl">opencaching.pl</string>
@@ -586,6 +600,9 @@
   <string name="auth_ocro">opencaching.ro</string>
   <string name="auth_ocuk">opencaching.org.uk</string>
   <string name="auth_dialog_completed_oc">c:geo är nu godkänd för att kommunicera med %s.</string>
+  <string name="auth_dialog_completed_geokrety">c:geo är nu godkänd för att kommunicera med %s.</string>
+  <string name="err_auth_geokrety_bad_password">Ditt användarnamn/lösenord verkar felaktigt.</string>
+  <string name="err_auth_geokrety_unknown">%1$s meddelande: %2$s.</string>
   <plurals name="cache_counts">
     <item quantity="one">En cache</item>
     <item quantity="other">%1$d cacher</item>
@@ -668,11 +685,14 @@
   <string name="cache_menu_navigation_walk">Navigering (till fots)</string>
   <string name="cache_menu_navigation_bike">Navigering (med cykel)</string>
   <string name="cache_menu_maps_directions">Google Maps Navigering</string>
+  <string name="cache_menu_sygic_walk">Sygic (vandring)</string>
+  <string name="cache_menu_sygic_drive">Sygic (körning)</string>
   <string name="cache_menu_radar">Radar</string>
   <string name="cache_menu_map">Visa på karta</string>
   <string name="cache_menu_map_static">Sparade kartor</string>
   <string name="cache_menu_download_map_static">Spara kartor</string>
   <string name="cache_menu_rmaps">Rmaps</string>
+  <string name="cache_menu_map_ext">Andra externa program</string>
   <string name="cache_menu_streetview">Gatuvy</string>
   <string name="cache_menu_browser">Öppna i webbläsare</string>
   <string name="cache_menu_visit">Logga besök</string>
@@ -772,6 +792,7 @@
   <string name="waypoint_distance">Avstånd</string>
   <string name="waypoint_name">Namn</string>
   <string name="waypoint_edit">Redigera</string>
+  <string name="waypoint_copy_coordinates">Kopiera koordinater</string>
   <string name="waypoint_delete">Ta bort</string>
   <string name="waypoint_edit_title">Redigera punkt</string>
   <string name="waypoint_add_title">Lägg till punkt</string>
@@ -860,6 +881,7 @@
   <string name="trackable_details_loading">Laddar detaljer om trackable…</string>
   <string name="trackable_log_touch">Logga</string>
   <string name="trackable_browser_open">Öppna i webbläsare</string>
+  <string name="trackable_refresh">Uppdatera</string>
   <string name="trackable_goal">Uppdrag</string>
   <string name="trackable_details">Detaljer</string>
   <string name="trackable_image">Bild</string>
@@ -872,6 +894,8 @@
   <string name="trackable_spotted_at_user">I händerna på</string>
   <string name="trackable_spotted_unknown_location">Okänd</string>
   <string name="trackable_spotted_owner">Hos ägaren</string>
+  <string name="trackable_spotted_archived">Arkiverad</string>
+  <string name="trackable_spotted_travelling">Reser</string>
   <string name="trackable_origin">Ursprung</string>
   <string name="trackable_unknown">Okänd</string>
   <string name="trackable_released">Släppt</string>
@@ -894,6 +918,8 @@
   <string name="user_menu_open_contact">Öppna kontakt</string>
   <string name="navigation">Navigering</string>
   <string name="compass_title">Kompass</string>
+  <string name="use_gps">Enbart GPS används</string>
+  <string name="use_compass">GPS och magnetisk kompass används</string>
   <string name="destination_select">Välj målpunkt</string>
   <string name="navigation_direct_navigation">Direkt navigering</string>
   <string name="navigation_target">Mål</string>
@@ -920,8 +946,12 @@
   <string name="helper_pocketquery_description">Gör det enkelt att skapa och ladda ner Pocket Queries baserade på din position eller plats som väljs på kartan. Kräver Premium konto hos Geocaching.com.</string>
   <string name="helper_google_translate_title">Google Översätt</string>
   <string name="helper_google_translate_description">Om du hämtar översättningspaket i Google Translate appen, kan du enkelt översätta cachebeskrivningar i c:geo med en lång tryckning på cache-beskrivningstexten (även utan Internet-anslutning).</string>
+  <string name="helper_wear_title">c:geo Wear</string>
+  <string name="helper_wear_description">c:geo Wear är en plugin till c:geo som låter dig navigera till geocacher med din Android Wear smartwatch.</string>
   <string name="addon_missing_title">Tillägg saknas</string>
   <string name="addon_download_prompt">Hämta det nu från Google Play.</string>
+  <string name="export">Exportera</string>
+  <string name="export_progress">Exportera: %1$s</string>
   <string name="export_exportedto">exporterat till</string>
   <string name="export_failed">Exporteringen misslyckades</string>
   <string name="export_fieldnotes">Field Notes</string>
@@ -934,6 +964,8 @@
   <string name="export_gpx">GPX</string>
   <string name="export_gpx_info">GPX filen kommer att exporteras till %1$s med datum och tid i filnamnet.</string>
   <string name="export_gpx_to">Skicka exporterad GPX till</string>
+  <string name="export_confirm_title">Exporterar %1$s</string>
+  <string name="export_confirm_message">Till katalog: %1$s\nFilnamn: %2$s</string>
   <string name="attribute_dogs_yes">Hundar tillåtna</string>
   <string name="attribute_dogs_no">Hundar är inte tillåtna</string>
   <string name="attribute_bicycles_yes">Cyklar tillåtna</string>
@@ -1209,6 +1241,10 @@
     <item quantity="one">igår</item>
     <item quantity="other">%d dagar sedan</item>
   </plurals>
+  <plurals name="favorite_points">
+    <item quantity="one">%s favorit</item>
+    <item quantity="other">%s favoriter</item>
+  </plurals>
   <string name="more_than_percent_favorite_points">&gt; %d%% favoriter</string>
   <string name="cgeo_shortcut">c:geo genväg</string>
   <string name="create_shortcut">Skapa genväg</string>
@@ -1223,8 +1259,33 @@
   <string name="showcase_compass_hint_text">Det här nya menyalternativet kan ge dig en idé var du kan hitta cachen - det visar tipset, om något sådant finns.</string>
   <string name="confirm_log_title">Ovanlig loggtyp</string>
   <string name="confirm_log_message">Du vill logga \'%s\'. Är du säker?</string>
+  <string name="settings_activate_geokrety">Aktivera</string>
   <string name="init_geokrety">GeoKrety.org</string>
+  <string name="init_connectorGeokretyActive">Geokrety Trackables</string>
   <string name="init_summary_geokrety">Aktivera trackables från GeoKrety.org</string>
   <string name="init_summary_geokrety_account">Inget konto har konfigurerats.</string>
+  <string name="init_geokrety_register_ok">Inloggning lyckades</string>
   <string name="init_geokrety_register_fail">Inloggningen misslyckades</string>
+  <string name="init_geokrety_description">Tillåt c:geo att kommunicera med GeoKrety.org för att logga GeoKrety trackables.</string>
+  <string name="init_geokrety_cache_description">GeokretyMap.org tillhandahåller lagrad data för GeoKrety trackables.\nTillgänglig data innehåller mer GeoKrety information som \'beskrivning\' eller \'saknad\' status.\n\nData är inte live!\nPositioner: ~30min.\nBeskrivningar: ~24h.</string>
+  <string name="init_geokrety_cache">Använd GeoKretyMap.org</string>
+  <string name="init_geokrety_userid">Användarid: %s</string>
+  <string name="trackable_title_log_without_geocode">Geocode saknas</string>
+  <string name="trackable_log_without_geocode">Du kommer nu att skicka en logg utan en Geocode. Det rekommenderas att ange en. Vill du lägga till det nu?</string>
+  <string name="do_not_ask_me_again">Fråga mig inte igen</string>
+  <string name="settings_map_direction">Visa riktning</string>
+  <string name="settings_summary_map_direction">Visa en riktningslinje till målet för navigeringen</string>
+  <string name="map_direction">Visa riktning</string>
+  <string name="command_move_caches_progress">Flytta cacher till listan %1s</string>
+  <plurals name="command_move_caches_result">
+    <item quantity="one">Flyttade %d cache</item>
+    <item quantity="other">Flyttade %d cacher</item>
+  </plurals>
+  <string name="command_delete_caches_progress">Tar bort cacher</string>
+  <plurals name="command_delete_caches_result">
+    <item quantity="one">Tog bort %d cache</item>
+    <item quantity="other">Tog bort %d cacher</item>
+  </plurals>
+  <string name="command_rename_list_result">Namn ändrat på lista</string>
+  <string name="command_delete_list_result">Lista borttagen</string>
 </resources>

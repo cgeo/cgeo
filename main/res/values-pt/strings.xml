@@ -82,6 +82,7 @@
   <string name="log_saving">A gravar o registo…</string>
   <string name="log_saving_and_uploading">A enviar o registo e a imagem…</string>
   <string name="log_clear">Limpar</string>
+  <string name="log_post_not_possible">Download de dados em progresso...\n Por favor tente novamente dentro de alguns segundos ou verifique sua conexão de internet.</string>
   <string name="log_post_geocode_missing">Geocodigo em falta…</string>
   <string name="log_date_future_not_allowed">Registos com datas futuras não são permitidos.</string>
   <string name="log_add">Adicionar</string>
@@ -679,6 +680,8 @@
   <string name="cache_menu_navigation_walk">Navegar (Caminhar)</string>
   <string name="cache_menu_navigation_bike">Navegar (Andar de bicicleta)</string>
   <string name="cache_menu_maps_directions">Direcções pelo Google Maps</string>
+  <string name="cache_menu_sygic_walk">Sygic (caminhar)</string>
+  <string name="cache_menu_sygic_drive">Sygic (conduzir)</string>
   <string name="cache_menu_radar">Radar</string>
   <string name="cache_menu_map">Mostrar no mapa</string>
   <string name="cache_menu_map_static">Mapas estáticos</string>
@@ -783,6 +786,7 @@
   <string name="waypoint_distance">Distância</string>
   <string name="waypoint_name">Nome</string>
   <string name="waypoint_edit">Editar</string>
+  <string name="waypoint_copy_coordinates">Copiar coordenadas</string>
   <string name="waypoint_delete">Apagar</string>
   <string name="waypoint_edit_title">Editar ponto de referência</string>
   <string name="waypoint_add_title">Adicionar ponto de referência</string>
@@ -871,6 +875,7 @@
   <string name="trackable_details_loading">A carregar os detalhes trackable…</string>
   <string name="trackable_log_touch">Registar toque</string>
   <string name="trackable_browser_open">Abrir no browser</string>
+  <string name="trackable_refresh">Actualizar</string>
   <string name="trackable_goal">Objectivo</string>
   <string name="trackable_details">Detalhes</string>
   <string name="trackable_image">Imagem</string>
@@ -883,6 +888,8 @@
   <string name="trackable_spotted_at_user">Nas mãos de</string>
   <string name="trackable_spotted_unknown_location">Localização desconhecida</string>
   <string name="trackable_spotted_owner">Nas mãos do dono</string>
+  <string name="trackable_spotted_archived">Arquivada</string>
+  <string name="trackable_spotted_travelling">Viajar</string>
   <string name="trackable_origin">Origem</string>
   <string name="trackable_unknown">Desconhecido</string>
   <string name="trackable_released">Criado</string>
@@ -933,6 +940,8 @@
   <string name="helper_pocketquery_description">Permite a fácil criação de consultas e download de Pocket Query centrado na sua posição actual ou um ponto selecionado a partir de um mapa. Requer uma conta premium em Geocaching.com.</string>
   <string name="helper_google_translate_title">Tradutor Google</string>
   <string name="helper_google_translate_description">Se fizer o download dos pacotes de tradução na app Google Translate, pode facilmente traduzir as descrições da cache no c:geo com um toque longo sobre o texto da descrição da cache (mesmo sem ligação à Internet).</string>
+  <string name="helper_wear_title">c:geo Wear</string>
+  <string name="helper_wear_description">c:geo Wear é um plugin para o c:geo que permite que você navegue para geocaches usando seu smartwatch Android Wear.</string>
   <string name="addon_missing_title">Add-On em falta</string>
   <string name="addon_download_prompt">Obter agora a partir de Google Play.</string>
   <string name="export">Exportar</string>
@@ -1255,7 +1264,22 @@
   <string name="init_geokrety_cache_description">GeokretyMap.org fornece dados em cache para GeoKrety trackables.\nDados disponíveis contém mais informações GeoKrety como estado \'descrição\' ou \'perdido\'.\n\nDados não são ao vivo! \nPositions: ~ 30 min. \nDescriptions: ~ 24 h.</string>
   <string name="init_geokrety_cache">Use GeoKretyMap.org</string>
   <string name="init_geokrety_userid">Id de utilizador: %s</string>
+  <string name="trackable_title_log_without_geocode">Geocodigo não definido</string>
+  <string name="trackable_log_without_geocode">Você está prestes a enviar um log sem um geocódigo. É aconselhado a definir um. Você quer adicioná-lo agora?</string>
+  <string name="do_not_ask_me_again">Não perguntar novamente</string>
   <string name="settings_map_direction">Mostrar a direcção</string>
   <string name="settings_summary_map_direction">Mostrar uma linha de direcção para o destino de navegação</string>
   <string name="map_direction">Mostrar a direcção</string>
+  <string name="command_move_caches_progress">Movendo as caches para a lista %1s</string>
+  <plurals name="command_move_caches_result">
+    <item quantity="one">%d cache movida</item>
+    <item quantity="other">%d caches movidas</item>
+  </plurals>
+  <string name="command_delete_caches_progress">A apagar caches</string>
+  <plurals name="command_delete_caches_result">
+    <item quantity="one">Apagada %d cache</item>
+    <item quantity="other">Apagadas %d caches</item>
+  </plurals>
+  <string name="command_rename_list_result">Lista renomeada</string>
+  <string name="command_delete_list_result">Lista apagada</string>
 </resources>

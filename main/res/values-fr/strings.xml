@@ -441,8 +441,8 @@
   <string name="init_summary_ratingwanted">Charger l\'évaluation de la cache depuis GCvote.com</string>
   <string name="init_friends_and_own_logs_wanted">Afficher vos visites / visites amis</string>
   <string name="init_summary_friends_and_own_logs_wanted">Afficher une page de carnet supplémentaire avec vos visites et celles de vos amis</string>
-  <string name="init_openlastdetailspage">Réouvrir les détails à la dernière page ouverte</string>
-  <string name="init_summary_openlastdetailspage">Réouvrir les détails à la dernière page ouverte</string>
+  <string name="init_openlastdetailspage">Afficher les détails à la dernière page ouverte</string>
+  <string name="init_summary_openlastdetailspage">A l\'ouverture des détails d\'une cache afficher le dernier onglet consulté</string>
   <string name="init_autoload">Descriptions longues</string>
   <string name="init_summary_autoload">Toujours afficher les descriptions longues</string>
   <string name="init_skin">Fond blanc</string>
@@ -544,8 +544,8 @@
   <string name="init_hardware_acceleration_note">L\'accélération matérielle permet de dessiner les éléments graphiques plus rapidement à l\'écran. Toutefois, sur certains appareils, le système Android contient des erreurs et certains textes peuvent apparaitre flous, notamment les caractères gras. Dans ce cas, il suffit de désactiver l\'accélération graphique.</string>
   <string name="init_hardware_acceleration">Activer l\'accélération graphique</string>
   <string name="settings_open_website">Ouvrir le site dans un navigateur</string>
-  <string name="settings_open_geokrety_register">Ouvrir la page d\'inscription GeoKrety.org</string>
-  <string name="settings_open_geokretymap_website">Ouvrir le site web GeoKrety.org</string>
+  <string name="settings_open_geokrety_register">S\'inscrire sur GeoKrety.org</string>
+  <string name="settings_open_geokretymap_website">Accéder au site GeoKretyMap.org</string>
   <string name="settings_settings">Paramètres</string>
   <string name="settings_information">Information</string>
   <string name="settings_advanced">Paramètres avancés</string>
@@ -1267,7 +1267,7 @@
   <string name="init_geokrety_register_ok">Connexion réussie</string>
   <string name="init_geokrety_register_fail">Erreur de connexion</string>
   <string name="init_geokrety_description">Autoriser c:geo à ouvrir une session sur GeoKrety.org pour les objets voyageurs GeoKrets.</string>
-  <string name="init_geokrety_cache_description">GeokretyMap.org fournit des données pour les objets voyageurs GeoKrets.\nCes données sont par exemple la Description, la Position ou le Statut de l\'objet (disparu…).\n\nATTENTION : il ne s\'agit pas de données temps réel !\n Fréquence d\'actualisation des positions :  ~30 min.\nFréquence d\'actualisation des descriptions : ~ 24 h.</string>
+  <string name="init_geokrety_cache_description">GeokretyMap.org fournit des données pour les objets voyageurs GeoKrets.\nCes données sont par exemple la Description, la Position ou le Statut de l\'objet (disparu…).\n\nATTENTION : il ne s\'agit pas de données temps réel :\n- Les positions sont actualisées toutes les ~30 min.\n- Les descriptions sont actualisées toutes les ~24 h.</string>
   <string name="init_geokrety_cache">Utiliser GeoKretyMap.org</string>
   <string name="init_geokrety_userid">Utilisateur : %s</string>
   <string name="trackable_title_log_without_geocode">Géocode non renseigné</string>

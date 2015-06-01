@@ -82,6 +82,8 @@
   <string name="log_saving">Ukladanie logu…</string>
   <string name="log_saving_and_uploading">Odosielanie logu a nahrávanie obrázku…</string>
   <string name="log_clear">Vyčistiť</string>
+  <string name="log_post_not_possible">Prebieha sťahovanie dát…\nProsím, skúste to o chvíľu znova alebo skontrolujte internetové pripojenie.</string>
+  <string name="log_post_geocode_missing">Geokód chýba…</string>
   <string name="log_date_future_not_allowed">Log s budúcim dátumom nie je povolený.</string>
   <string name="log_add">Pridať</string>
   <string name="log_repeat">Zopakovať posledný log</string>
@@ -127,6 +129,7 @@
   <string name="err_parse">Zlyhalo čítanie prihlasovacej stránky.</string>
   <string name="err_server">Zlyhalo pripojenie k serveru Geocaching.com. Nefunguje internetové pripojenie alebo server nie je funkčný.</string>
   <string name="err_server_ec">Zlyhalo pripojenie k serveru Extremcaching.com. Nefunguje internetové pripojenie alebo server nie je funkčný.</string>
+  <string name="err_server_gk">Nedá sa pripojiť na GeoKrety.org. Stránka nie je dostupná alebo nie ste pripojení na internet.</string>
   <string name="err_login">Nie sú uložené žiadne prihlasovacie údaje.</string>
   <string name="err_login_failed_toast">Prepáčte, c:geo sa nepodarilo prihlásiť. c:geo funguje v offline režime. Skontrolujte vaše prihlasovacie údaje v nastaveniach alebo povoľte pripojenie k Internetu.</string>
   <string name="err_unknown">Neznáma chyba</string>
@@ -165,6 +168,7 @@
   <string name="err_acquire_image_failed">Získavanie obrázku zlyhalo.</string>
   <string name="err_tb_display">Prepáčte, c:geo nemôže zobraziť trasovateľný predmet. Je to naozaj trasovateľný predmet?</string>
   <string name="err_tb_details_open">Prepáčte, c:geo nemôže otvoriť podrobnosti k trasovateľnému predmetu.</string>
+  <string name="err_tb_not_loggable">Tento TB sa nedá zalogovať.</string>
   <string name="err_tb_find">c:geo nemôže nájsť trasovateľný predmet.</string>
   <string name="err_tb_find_that">c:geo nemôže nájsť tento trasovateľný predmet.</string>
   <string name="err_waypoint_cache_unknown">c:geo nevie, ku ktorej skrýši chcete pridať bod trasy.</string>
@@ -910,6 +914,8 @@
   <string name="helper_pocketquery_description">Umožňuje ľahké vytváranie a sťahovanie Pocket Query zamerané na vašu aktuálnu polohu alebo bod vybraný na mape. Vyžaduje Premium účet na Geocaching.com.</string>
   <string name="helper_google_translate_title">Google Translate</string>
   <string name="helper_google_translate_description">Ak prevezmete balíky prekladov v aplikácii Google Translate, môžete ľahko preložiť popisy skrýš v c:geo dlhým kliknutím na text s popisom skrýše (aj bez pripojenia k internetu).</string>
+  <string name="helper_wear_title">c:geo Wear</string>
+  <string name="helper_wear_description">c:geo Wear je plugin pre c:geo ktorý ťa naviguje ku kešiam cez Android Wear smartwatch.</string>
   <string name="addon_missing_title">Chýbajúci doplnok</string>
   <string name="addon_download_prompt">Získať doplnok teraz z Google Play.</string>
   <string name="export_exportedto">exportované do</string>
@@ -1224,4 +1230,9 @@
   <string name="confirm_log_title">Nezvyčajný typ logu</string>
   <string name="confirm_log_message">Chceš zalogovať \'%s\'. Určite?</string>
   <string name="init_geokrety">GeoKrety.org</string>
+  <plurals name="command_move_caches_result">
+    <item quantity="one">Presunutá %d keš</item>
+    <item quantity="few">Presunuté %d keše</item>
+    <item quantity="other">Presunutých %d keší</item>
+  </plurals>
 </resources>
