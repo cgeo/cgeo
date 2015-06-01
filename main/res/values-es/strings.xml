@@ -880,6 +880,7 @@
   <string name="trackable_spotted_unknown_location">Ubicación desconocida</string>
   <string name="trackable_spotted_owner">En manos del propietario</string>
   <string name="trackable_spotted_archived">Archivado</string>
+  <string name="trackable_spotted_travelling">De viaje</string>
   <string name="trackable_origin">Origen</string>
   <string name="trackable_unknown">Desconocido</string>
   <string name="trackable_released">Activado</string>
@@ -931,6 +932,7 @@
   <string name="helper_google_translate_title">Traductor de Google</string>
   <string name="helper_google_translate_description">Si descargas paquetes de idiomas en la app Traductor de Google, puedes traducir las descripciones de los cachés en c:geo pulsando de forma larga en el texto del caché (sin conexión a internet).</string>
   <string name="helper_wear_title">c:geo Wear</string>
+  <string name="helper_wear_description">c:geo Wear es un complemento para c:geo que te permite navegar a los cachés usando tu smartwatch Android Wear.</string>
   <string name="addon_missing_title">No se encuentra el complemento</string>
   <string name="addon_download_prompt">Obtenlo ahora desde Google Play.</string>
   <string name="export">Exportar</string>
@@ -1253,6 +1255,8 @@ Nombre de archivo:%2$s</string>
   <string name="init_geokrety_cache_description">GeokretyMap.org proporciona datos almacenados para rastreables GeoKrety.\nLos datos disponibles contienen más información sobre GeoKrety como \'descripción\' o estado \'desaparecido\'.\n\n¡Los datos no se actualizan en vivo!\nPosiciones: ~30min.\nDescripciones: ~24h.</string>
   <string name="init_geokrety_cache">Usar GeoKretyMap.org</string>
   <string name="init_geokrety_userid">Usuario: %s</string>
+  <string name="trackable_title_log_without_geocode">Geocódigo no establecido</string>
+  <string name="trackable_log_without_geocode">Estás a punto de enviar un registro sin Geocódigo. Recomendamos establecer uno. ¿Quieres añadirlo ahora?</string>
   <string name="do_not_ask_me_again">No preguntar de nuevo</string>
   <string name="settings_map_direction">Mostrar dirección</string>
   <string name="settings_summary_map_direction">Muestra una línea de dirección al objetivo de la navegación</string>
