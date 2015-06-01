@@ -82,6 +82,7 @@
   <string name="log_saving">Sender logbesked…</string>
   <string name="log_saving_and_uploading">Sender logbesked og billede…</string>
   <string name="log_clear">Fjern</string>
+  <string name="log_post_not_possible">Download af data er i gang...\nPrøv venligst igen om nogle sekunder eller kontrollér din internetforbindelse.</string>
   <string name="log_post_geocode_missing">Geocode mangler…</string>
   <string name="log_date_future_not_allowed">Logdatoer, der ligger i fremtiden, er ikke tilladt.</string>
   <string name="log_add">Tilføj</string>
@@ -291,7 +292,7 @@
   <string name="caches_remove_selected">Fjern valgte</string>
   <plurals name="caches_remove_selected_confirm">
     <item quantity="one">Vil du fjerne denne cache fra enheden?</item>
-    <item quantity="other">Vil du slette de valgte %d caches fra din enhed?</item>
+    <item quantity="other">Vil du slette de %d valgte cacher fra din enhed?</item>
   </plurals>
   <string name="caches_remove_progress">Fjerner cacher</string>
   <string name="caches_delete_events">Slet tidligere begivenheder</string>
@@ -684,6 +685,8 @@
   <string name="cache_menu_navigation_walk">Navigation (til fods)</string>
   <string name="cache_menu_navigation_bike">Navigation (cykel)</string>
   <string name="cache_menu_maps_directions">Google Maps rutevejledning</string>
+  <string name="cache_menu_sygic_walk">Sygic (til fods)</string>
+  <string name="cache_menu_sygic_drive">Sygic (kørsel)</string>
   <string name="cache_menu_radar">Radar</string>
   <string name="cache_menu_map">Vis på kort</string>
   <string name="cache_menu_map_static">Statiske kort</string>
@@ -787,6 +790,7 @@
   <string name="waypoint_distance">Afstand</string>
   <string name="waypoint_name">Navn</string>
   <string name="waypoint_edit">Rediger</string>
+  <string name="waypoint_copy_coordinates">Kopiér koordinater</string>
   <string name="waypoint_delete">Slet</string>
   <string name="waypoint_edit_title">Rediger waypoint</string>
   <string name="waypoint_add_title">Tilføj waypoint</string>
@@ -875,6 +879,7 @@
   <string name="trackable_details_loading">Indlæser detaljer om Trackable…</string>
   <string name="trackable_log_touch">Log Trackable</string>
   <string name="trackable_browser_open">Åbn i browser</string>
+  <string name="trackable_refresh">Opdatér</string>
   <string name="trackable_goal">Mål</string>
   <string name="trackable_details">Detaljer</string>
   <string name="trackable_image">Billede</string>
@@ -887,6 +892,8 @@
   <string name="trackable_spotted_at_user">Hos</string>
   <string name="trackable_spotted_unknown_location">Ukendt sted</string>
   <string name="trackable_spotted_owner">Hos ejer</string>
+  <string name="trackable_spotted_archived">Arkiveret</string>
+  <string name="trackable_spotted_travelling">Rejsende</string>
   <string name="trackable_origin">Oprindelsessted</string>
   <string name="trackable_unknown">Ukendt</string>
   <string name="trackable_released">Frigivet</string>
@@ -937,6 +944,8 @@
   <string name="helper_pocketquery_description">Giver mulighed for let at oprette og downloade Pocket Queries baseret på din position eller et valgt punkt på et kort. Kræver Premium-medlemskab på geocaching.com.</string>
   <string name="helper_google_translate_title">Google Oversæt</string>
   <string name="helper_google_translate_description">Hvis du har downloadet oversættelsespakker til Google Oversæt appen, kan du let oversætte cachebeskrivelser i c:geo ved at trykke lang tid på teksten (kræver ikke Internetforbindelse).</string>
+  <string name="helper_wear_title">c:geo Wear</string>
+  <string name="helper_wear_description">c:geo Wear er et plugin til c:geo, der lader dig navigere til geocacher ved hjælp af din Android Wear smartwatch.</string>
   <string name="addon_missing_title">Manglende plugin</string>
   <string name="addon_download_prompt">Hent fra Google Play nu.</string>
   <string name="export">Eksportér</string>
@@ -1256,8 +1265,12 @@
   <string name="init_geokrety_register_ok">Login fuldført</string>
   <string name="init_geokrety_register_fail">Login fejlede</string>
   <string name="init_geokrety_description">Autorisér c:geo til at logge GeoKrety trackables på GeoKrety.org.</string>
+  <string name="init_geokrety_cache_description">GeokretyMap.org leverer cachelagerede data for GeoKrety trackables.\nTilgængelige data indeholder flere GeoKrety informationer som \'beskrivelse\' eller \'mangler\' status.\n\nData er ikke live!\nPositioner: ~30min.\nBeskrivelser: ~24h.</string>
   <string name="init_geokrety_cache">Brug GeoKretyMap.org</string>
   <string name="init_geokrety_userid">Brugerid: %s</string>
+  <string name="trackable_title_log_without_geocode">Geokode ikke sendt</string>
+  <string name="trackable_log_without_geocode">Du er ved at sende en logbesked uden en geokode. Det anbefales at du inkluderer en geokode. Vil du tilføje en geokode?</string>
+  <string name="do_not_ask_me_again">Spørg mig ikke igen</string>
   <string name="settings_map_direction">Vis retning</string>
   <string name="settings_summary_map_direction">Vis pejlelinie til navigationsmål</string>
   <string name="map_direction">Vis retning</string>
