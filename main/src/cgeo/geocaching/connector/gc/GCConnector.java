@@ -491,7 +491,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
 
     @Override
     public boolean canIgnoreCache(@NonNull final Geocache cache) {
-        return StringUtils.isNotEmpty(cache.getType().wptTypeId);
+        return StringUtils.isNotEmpty(cache.getType().wptTypeId) && Settings.isGCPremiumMember();
     }
 
     @Override
