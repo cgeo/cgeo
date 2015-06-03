@@ -566,9 +566,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         if (cache != null) {
             final IConnector connector = ConnectorFactory.getConnector(cache);
             if (connector instanceof IgnoreCapability) {
-                // for release only
-                // menu.findItem(R.id.menu_ignore).setVisible(((IgnoreCapability) connector).canIgnoreCache(cache));
-                menu.findItem(R.id.menu_ignore).setVisible(false);
+                menu.findItem(R.id.menu_ignore).setVisible(((IgnoreCapability) connector).canIgnoreCache(cache));
             }
         }
         return super.onPrepareOptionsMenu(menu);
@@ -621,10 +619,16 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     }
 
     private void ignoreCache() {
-        RxUtils.networkScheduler.createWorker().schedule(new Action0() {
+        Dialogs.confirm(this, R.string.ignore_confirm_title, R.string.ignore_confirm_message, new DialogInterface.OnClickListener() {
+
             @Override
-            public void call() {
-                ((IgnoreCapability) ConnectorFactory.getConnector(cache)).ignoreCache(cache);
+            public void onClick(final DialogInterface dialog, final int which) {
+                RxUtils.networkScheduler.createWorker().schedule(new Action0() {
+                    @Override
+                    public void call() {
+                        ((IgnoreCapability) ConnectorFactory.getConnector(cache)).ignoreCache(cache);
+                    }
+                });
             }
         });
     }
