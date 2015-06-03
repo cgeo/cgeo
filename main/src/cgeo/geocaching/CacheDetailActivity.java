@@ -566,7 +566,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         if (cache != null) {
             final IConnector connector = ConnectorFactory.getConnector(cache);
             if (connector instanceof IgnoreCapability) {
-                menu.findItem(R.id.menu_ignore).setVisible(((IgnoreCapability) connector).canIgnoreCache(cache));
+                // for release only
+                // menu.findItem(R.id.menu_ignore).setVisible(((IgnoreCapability) connector).canIgnoreCache(cache));
+                menu.findItem(R.id.menu_ignore).setVisible(false);
             }
         }
         return super.onPrepareOptionsMenu(menu);
