@@ -17,6 +17,7 @@ import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.capability.IgnoreCapability;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.gc.GCConstants;
+import cgeo.geocaching.connector.trackable.TrackableBrand;
 import cgeo.geocaching.connector.trackable.TrackableConnector;
 import cgeo.geocaching.enumerations.CacheAttribute;
 import cgeo.geocaching.enumerations.LoadFlags;
@@ -196,6 +197,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     private Subscription geoDataSubscription = Subscriptions.empty();
 
     private List<TrackableConnector> trackablesConnectors;
+    private final EnumSet<TrackableBrand> processedBrands = EnumSet.noneOf(TrackableBrand.class);
 
     @Override
     public Loader<List<Trackable>> onCreateLoader(final int id, final Bundle bundle) {
@@ -343,6 +345,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         // Load Generic trackables connectors Async
         trackablesConnectors = ConnectorFactory.getGenericTrackablesConnectors();
         for (final TrackableConnector connector: trackablesConnectors) {
+            processedBrands.add(connector.getBrand());
             getSupportLoaderManager().initLoader(connector.getCacheInventoryLoaderId(), null, this).forceLoad();
         }
 
@@ -563,7 +566,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         if (cache != null) {
             final IConnector connector = ConnectorFactory.getConnector(cache);
             if (connector instanceof IgnoreCapability) {
-                menu.findItem(R.id.menu_ignore).setVisible(((IgnoreCapability) connector).canIgnoreCache(cache));
+                // for release only
+                // menu.findItem(R.id.menu_ignore).setVisible(((IgnoreCapability) connector).canIgnoreCache(cache));
+                menu.findItem(R.id.menu_ignore).setVisible(false);
             }
         }
         return super.onPrepareOptionsMenu(menu);
@@ -1839,7 +1844,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             // TODO: fix layout, then switch back to Android-resource and delete copied one
             // this copy is modified to respect the text color
             final TrackableListAdapter adapterTrackables = new TrackableListAdapter(CacheDetailActivity.this);
-            cache.mergeInventory(genericTrackables);
+            cache.mergeInventory(genericTrackables, processedBrands);
 
             // Todo: don't hesitate to use addAll() on adapter, once API Level reach 11 (as of today level is 9)
             //adapterTrackables.addAll(cache.getInventory());

@@ -12,6 +12,7 @@ import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.gc.GCConstants;
 import cgeo.geocaching.connector.gc.Tile;
 import cgeo.geocaching.connector.gc.UncertainProperty;
+import cgeo.geocaching.connector.trackable.TrackableBrand;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
@@ -68,9 +69,9 @@ import java.util.Date;
 import java.util.EnumMap;
 import java.util.EnumSet;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
@@ -343,8 +344,7 @@ public class Geocache implements IWaypoint {
             // "don't know" or "0 items". Since we cannot distinguish
             // them here, only populate inventoryItems from
             // old data when we have to do it for inventory.
-            inventory = other.inventory;
-            inventoryItems = other.inventoryItems;
+            setInventory(other.inventory);
         }
         if (logCounts.isEmpty()) {
             logCounts = other.logCounts;
@@ -1000,33 +1000,27 @@ public class Geocache implements IWaypoint {
      *
      * @param newTrackables to be added to the Geocache
      */
-    public void mergeInventory(final List<Trackable> newTrackables) {
-        if (inventory != null) {
-            // Remove non existing Trackable from the same Brand
-            final Iterator<Trackable> iterator = inventory.iterator();
-            while (iterator.hasNext()) {
-                final Trackable trackable = iterator.next();
-                boolean removeTrackable = true;
-                boolean hasBrand = false;
-                for (final Trackable newTrackable : newTrackables) {
-                    if (trackable.getBrand() == newTrackable.getBrand()) {
-                        hasBrand = true;
-                        if (trackable.getUniqueID().equals(newTrackable.getUniqueID())) {
-                            removeTrackable = false;
-                            break;
-                        }
+    public void mergeInventory(final List<Trackable> newTrackables, final EnumSet<TrackableBrand> processedBrands) {
+
+        final List<Trackable> mergedTrackables = new ArrayList<>(newTrackables);
+
+        for (final Trackable trackable : ListUtils.emptyIfNull(inventory)) {
+            if (processedBrands.contains(trackable.getBrand())) {
+                final ListIterator<Trackable> iterator = mergedTrackables.listIterator();
+                while (iterator.hasNext()) {
+                    final Trackable newTrackable = iterator.next();
+                    if (trackable.getUniqueID().equals(newTrackable.getUniqueID())) {
+                        // Respect the merge order. New Values replace existing values.
+                        trackable.mergeTrackable(newTrackable);
+                        iterator.set(trackable);
+                        break;
                     }
                 }
-                if (hasBrand && removeTrackable) {
-                    iterator.remove();
-                }
+            } else {
+                mergedTrackables.add(trackable);
             }
         }
-        // Add new trackables
-        for (final Trackable newTrackable : newTrackables) {
-            addInventoryItem(newTrackable);
-        }
-        inventoryItems = CollectionUtils.size(inventory);
+        setInventory(mergedTrackables);
     }
 
     /**

@@ -648,6 +648,7 @@ public final class GCParser {
                 if (matcherInventory.groupCount() > 1) {
                     final String inventoryPre = matcherInventory.group(2);
 
+                    final ArrayList<Trackable> inventory = new ArrayList<>();
                     if (StringUtils.isNotBlank(inventoryPre)) {
                         final MatcherWrapper matcherInventoryInside = new MatcherWrapper(GCConstants.PATTERN_INVENTORYINSIDE, inventoryPre);
 
@@ -658,10 +659,11 @@ public final class GCParser {
                                 inventoryItem.setGuid(matcherInventoryInside.group(1));
                                 inventoryItem.setName(matcherInventoryInside.group(2));
 
-                                cache.addInventoryItem(inventoryItem);
+                                inventory.add(inventoryItem);
                             }
                         }
                     }
+                    cache.mergeInventory(inventory, EnumSet.of(TrackableBrand.TRAVELBUG));
                 }
             }
         } catch (final RuntimeException e) {
