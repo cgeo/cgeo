@@ -544,8 +544,14 @@ final class OkapiClient {
         if ("Archived".equalsIgnoreCase(logType)) {
             return LogType.ARCHIVE;
         }
+        if ("Locked".equalsIgnoreCase(logType)) {
+            return LogType.ARCHIVE;
+        }
         if ("Needs maintenance".equalsIgnoreCase(logType)) {
             return LogType.NEEDS_MAINTENANCE;
+        }
+        if ("Maintenance performed".equalsIgnoreCase(logType)) {
+            return LogType.OWNER_MAINTENANCE;
         }
         if ("Moved".equalsIgnoreCase(logType)) {
             return LogType.UPDATE_COORDINATES;
