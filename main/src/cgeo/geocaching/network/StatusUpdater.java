@@ -42,7 +42,7 @@ public class StatusUpdater {
         }
 
         final static public Status CLOSEOUT_STATUS =
-                new Status("", "status_closeout_warning", "attribute_abandonedbuilding", "http://faq.cgeo.org/#7_69");
+                new Status("", "status_closeout_warning", "attribute_abandonedbuilding", "http://faq.cgeo.org/#legacy");
 
         final static public Status defaultStatus(final Status upToDate) {
             if (upToDate != null && upToDate.message != null) {
