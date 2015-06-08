@@ -454,7 +454,8 @@
     <PreferenceScreen
         android:icon="?attr/settings_eye"
         android:key="@string/pref_appearance"
-        android:title="@string/settings_title_appearance" >
+        android:title="@string/settings_title_appearance"
+        android:summary="@string/settings_summary_appearance" >
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="@string/pref_skin"
@@ -483,7 +484,8 @@
     </PreferenceScreen>
     <PreferenceScreen
         android:icon="?attr/settings_details"
-        android:title="@string/settings_title_cachedetails" >
+        android:title="@string/settings_title_cachedetails"
+        android:summary="@string/settings_summary_cachedetails" >
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="@string/pref_autoloaddesc"
@@ -517,7 +519,8 @@
     </PreferenceScreen>
     <PreferenceScreen
         android:icon="?attr/settings_map"
-        android:title="@string/settings_title_map" >
+        android:title="@string/settings_title_map"
+        android:summary="@string/settings_summary_map" >
         <PreferenceCategory android:title="@string/settings_title_map_data" >
             <ListPreference
                 android:defaultValue="0"
@@ -575,7 +578,8 @@
     </PreferenceScreen>
     <PreferenceScreen
         android:icon="?attr/settings_pen"
-        android:title="@string/settings_title_logging" >
+        android:title="@string/settings_title_logging"
+        android:summary="@string/settings_summary_logging" >
         <PreferenceCategory android:title="@string/init_signature" >
             <cgeo.geocaching.settings.TemplateTextPreference
                 android:key="@string/pref_signature"
@@ -601,7 +605,8 @@
     </PreferenceScreen>
     <PreferenceScreen
         android:icon="?attr/settings_sdcard"
-        android:title="@string/settings_title_offlinedata" >
+        android:title="@string/settings_title_offlinedata"
+        android:summary="@string/settings_summary_offlinedata" >
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="@string/pref_offlinemaps"
@@ -625,7 +630,8 @@
     </PreferenceScreen>
     <PreferenceScreen
         android:icon="?attr/settings_arrow"
-        android:title="@string/settings_title_navigation" >
+        android:title="@string/settings_title_navigation"
+        android:summary="@string/settings_summary_navigation" >
         <PreferenceCategory android:title="@string/init_default_navigation_tool" >
             <cgeo.geocaching.settings.TextPreference
                 android:layout="@layout/text_preference"
@@ -768,7 +774,8 @@
     </PreferenceScreen>
     <PreferenceScreen
         android:icon="?attr/settings_nut"
-        android:title="@string/settings_title_system" >
+        android:title="@string/settings_title_system"
+        android:summary="@string/settings_summary_system" >
         <PreferenceCategory android:title="@string/settings_title_gpx" >
             <Preference
                 android:key="@string/pref_gpxExportDir"
