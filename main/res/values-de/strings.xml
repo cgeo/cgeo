@@ -221,6 +221,7 @@
   <string name="info_cache_saved">Der Cache wurde gespeichert</string>
   <string name="err_trackable_log_not_anonymous">Loggen von %1$s aus c:geo kann nicht anonym erfolgen. Möchtest du die Einstellungen öffnen um deine Anmeldeinformation für %2$s einzugeben?</string>
   <string name="err_trackable_no_preference_activity">Tut mir leid, es kann kein geeignetes Einstellungs-Menü gefunden werden.</string>
+  <string name="warn_discard_changes">Wegpunktänderungen verworfen!</string>
   <string name="loc_last">Letzte Position</string>
   <string name="loc_net">Netzwerk</string>
   <string name="loc_fused">Kombiniert</string>
