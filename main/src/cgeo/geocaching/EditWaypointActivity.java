@@ -26,6 +26,7 @@ import org.androidannotations.annotations.Extra;
 import org.androidannotations.annotations.InstanceState;
 import org.androidannotations.annotations.ViewById;
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.NonNull;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -221,11 +222,11 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
                 finish();
                 return true;
             case R.id.menu_edit_waypoint_save:
-                saveWaypoint();
+                saveWaypoint(getActivityData());
                 finish();
                 return true;
             case android.R.id.home:
-                saveWaypoint();
+                toastOnChanged();
                 break;
         }
 
@@ -234,7 +235,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
 
     @Override
     public void onBackPressed() {
-        saveWaypoint();
+        toastOnChanged();
         super.onBackPressed();
     }
 
@@ -399,7 +400,17 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
     public static final int UPLOAD_SUCCESS = 4;
     public static final int SAVE_ERROR = 5;
 
-    private void saveWaypoint() {
+    private void toastOnChanged() {
+        final ActivityData currentState = getActivityData();
+
+        if (currentState != null && isWaypointChanged(currentState)) {
+            ActivityMixin.showToast(this, R.string.warn_discard_changes);
+        }
+    }
+
+    private ActivityData getActivityData() {
+
+        final ActivityData currentState = new ActivityData();
 
         final String bearingText = bearing.getText().toString();
         // combine distance from EditText and distanceUnit saved from Spinner
@@ -410,7 +421,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         if (StringUtils.isBlank(bearingText) && StringUtils.isBlank(distanceText)
                 && StringUtils.isBlank(latText) && StringUtils.isBlank(lonText)) {
             Dialogs.message(EditWaypointActivity.this, R.string.err_point_no_position_given_title, R.string.err_point_no_position_given);
-            return;
+            return null;
         }
 
         Geopoint coords;
@@ -420,7 +431,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
                 coords = new Geopoint(latText, lonText);
             } catch (final Geopoint.ParseException e) {
                 showToast(res.getString(e.resource));
-                return;
+                return null;
             }
         } else {
             coords = Sensors.getInstance().currentGeo().getCoords();
@@ -433,7 +444,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
                 bearing = Double.parseDouble(bearingText);
             } catch (final NumberFormatException ignored) {
                 Dialogs.message(EditWaypointActivity.this, R.string.err_point_bear_and_dist_title, R.string.err_point_bear_and_dist);
-                return;
+                return null;
             }
 
             final double distance;
@@ -442,25 +453,45 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
                         !Settings.useImperialUnits());
             } catch (final NumberFormatException ignored) {
                 showToast(res.getString(R.string.err_parse_dist));
-                return;
+                return null;
             }
 
             coords = coords.project(bearing, distance);
         }
 
+        currentState.coords = coords;
+
         final String givenName = waypointName.getText().toString().trim();
-        final String name = StringUtils.defaultIfBlank(givenName, getDefaultWaypointName(getSelectedWaypointType()));
-        final String noteText = note.getText().toString().trim();
-        final Geopoint coordsToSave = coords;
-        final WaypointType type = getSelectedWaypointType();
-        final boolean visited = visitedCheckBox.isChecked();
+        currentState.name = StringUtils.defaultIfBlank(givenName, getDefaultWaypointName(getSelectedWaypointType()));
+        currentState.noteText = note.getText().toString().trim();
+        currentState.type = getSelectedWaypointType();
+        currentState.visited = visitedCheckBox.isChecked();
+
+        return currentState;
+    }
+
+    private boolean isWaypointChanged(final @NonNull ActivityData currentState) {
+        if (waypoint == null
+                || currentState.coords != waypoint.getCoords()
+                || !StringUtils.equals(currentState.name, waypoint.getName())
+                || !StringUtils.equals(currentState.noteText, waypoint.getNote())
+                || currentState.visited != waypoint.isVisited()
+                || currentState.type != waypoint.getWaypointType()) {
+            return true;
+        }
+
+        return false;
+    }
+
+    private void saveWaypoint(final ActivityData currentState) {
+
         final Handler finishHandler = new SimpleHandler(this, null) {
 
             @Override
             public void handleMessage(final Message msg) {
                 switch (msg.what) {
                     case UPLOAD_SUCCESS:
-                        ActivityMixin.showApplicationToast(getString(R.string.waypoint_coordinates_has_been_modified_on_website, coordsToSave));
+                        ActivityMixin.showApplicationToast(getString(R.string.waypoint_coordinates_has_been_modified_on_website, currentState.coords));
                         break;
                     case SUCCESS:
                         break;
@@ -485,13 +516,13 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
 
             @Override
             protected Void doInBackground(final Void... params) {
-                final Waypoint waypoint = new Waypoint(name, type, own);
+                final Waypoint waypoint = new Waypoint(currentState.name, currentState.type, own);
                 waypoint.setGeocode(geocode);
                 waypoint.setPrefix(prefix);
                 waypoint.setLookup(lookup);
-                waypoint.setCoords(coordsToSave);
-                waypoint.setNote(noteText);
-                waypoint.setVisited(visited);
+                waypoint.setCoords(currentState.coords);
+                waypoint.setNote(currentState.noteText);
+                waypoint.setVisited(currentState.visited);
                 waypoint.setId(waypointId);
 
                 final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_WAYPOINTS);
@@ -544,6 +575,14 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
             }
         }
         new SaveWptTask().execute();
+    }
+
+    private static class ActivityData {
+        public String name;
+        public WaypointType type;
+        public Geopoint coords;
+        public String noteText;
+        public boolean visited;
     }
 
     private static boolean uploadModifiedCoords(final Geocache cache, final Geopoint waypointUploaded) {
