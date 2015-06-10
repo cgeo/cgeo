@@ -1863,7 +1863,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     final Object selection = arg0.getItemAtPosition(arg2);
                     if (selection instanceof Trackable) {
                         final Trackable trackable = (Trackable) selection;
-                        TrackableActivity.startActivity(CacheDetailActivity.this, trackable.getGuid(), trackable.getGeocode(), trackable.getName(), cache.getGeocode());
+                        TrackableActivity.startActivity(CacheDetailActivity.this, trackable.getGuid(), trackable.getGeocode(), trackable.getName(), cache.getGeocode(), trackable.getBrand().getId());
                     }
                 }
             });
