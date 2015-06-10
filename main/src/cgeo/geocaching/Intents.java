@@ -24,6 +24,7 @@ public class Intents {
     public static final String EXTRA_GEOCODE = PREFIX + "geocode";
     public static final String EXTRA_GEOCACHE = PREFIX + "geocache";
     public static final String EXTRA_GUID = PREFIX + "guid";
+    public static final String EXTRA_BRAND = PREFIX + "brand";
     public static final String EXTRA_IMAGES = PREFIX + "images";
     public static final String EXTRA_ID = PREFIX + "id";
     public static final String EXTRA_KEYWORD = PREFIX + "keyword";

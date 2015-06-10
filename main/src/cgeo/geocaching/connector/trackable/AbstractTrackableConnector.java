@@ -27,6 +27,15 @@ public abstract class AbstractTrackableConnector implements TrackableConnector {
         return false;
     }
 
+
+    @Override
+    public boolean canHandleTrackable(final String geocode, final TrackableBrand brand) {
+        if (brand != null && brand != TrackableBrand.UNKNOWN) {
+            return brand == getBrand() && canHandleTrackable(geocode);
+        }
+        return canHandleTrackable(geocode);
+    }
+
     @Override
     public boolean hasTrackableUrls() {
         return true;
