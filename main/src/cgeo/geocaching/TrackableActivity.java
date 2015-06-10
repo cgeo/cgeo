@@ -6,6 +6,7 @@ import butterknife.InjectView;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.AbstractViewPagerActivity;
 import cgeo.geocaching.connector.ConnectorFactory;
+import cgeo.geocaching.connector.trackable.TrackableBrand;
 import cgeo.geocaching.connector.trackable.TrackableConnector;
 import cgeo.geocaching.connector.trackable.TravelBugConnector;
 import cgeo.geocaching.enumerations.LogType;
@@ -94,6 +95,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
     private String guid = null;
     private String id = null;
     private String geocache = null;
+    private TrackableBrand brand = null;
     private LayoutInflater inflater = null;
     private ProgressDialog waitDialog = null;
     private CharSequence clickedItemText = null;
@@ -130,6 +132,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
             guid = extras.getString(Intents.EXTRA_GUID);
             id = extras.getString(Intents.EXTRA_ID);
             geocache = extras.getString(Intents.EXTRA_GEOCACHE);
+            brand = TrackableBrand.getById(extras.getInt(Intents.EXTRA_BRAND));
         }
 
         // try to get data from URI
@@ -209,7 +212,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
 
     private void refreshTrackable(final String message) {
         waitDialog = ProgressDialog.show(this, message, res.getString(R.string.trackable_details_loading), true, true);
-        createSubscriptions.add(AppObservable.bindActivity(this, loadTrackable(geocode, guid, id)).singleOrDefault(null).subscribe(new Action1<Trackable>() {
+        createSubscriptions.add(AppObservable.bindActivity(this, loadTrackable(geocode, guid, id, brand)).singleOrDefault(null).subscribe(new Action1<Trackable>() {
             @Override
             public void call(final Trackable trackable) {
                 TrackableActivity.this.trackable = trackable;
@@ -256,7 +259,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
         return super.onPrepareOptionsMenu(menu);
     }
 
-    private static Observable<Trackable> loadTrackable(final String geocode, final String guid, final String id) {
+    private static Observable<Trackable> loadTrackable(final String geocode, final String guid, final String id, final TrackableBrand brand) {
         if (StringUtils.isEmpty(geocode)) {
             // Only solution is GC search by uid
             return RxUtils.deferredNullable(new Func0<Trackable>() {
@@ -275,7 +278,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
                 Observable.from(ConnectorFactory.getTrackableConnectors()).filter(new Func1<TrackableConnector, Boolean>() {
                     @Override
                     public Boolean call(final TrackableConnector trackableConnector) {
-                        return trackableConnector.canHandleTrackable(geocode);
+                        return trackableConnector.canHandleTrackable(geocode, brand);
                     }
                 }).flatMap(new Func1<TrackableConnector, Observable<Trackable>>() {
                     @Override
@@ -359,12 +362,13 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
     }
 
     public static void startActivity(final AbstractActivity fromContext,
-            final String guid, final String geocode, final String name, final String geocache) {
+            final String guid, final String geocode, final String name, final String geocache, final int brandId) {
         final Intent trackableIntent = new Intent(fromContext, TrackableActivity.class);
         trackableIntent.putExtra(Intents.EXTRA_GUID, guid);
         trackableIntent.putExtra(Intents.EXTRA_GEOCODE, geocode);
         trackableIntent.putExtra(Intents.EXTRA_NAME, name);
         trackableIntent.putExtra(Intents.EXTRA_GEOCACHE, geocache);
+        trackableIntent.putExtra(Intents.EXTRA_BRAND, brandId);
         fromContext.startActivity(trackableIntent);
     }
 

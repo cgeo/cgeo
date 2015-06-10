@@ -8,6 +8,7 @@ import cgeo.geocaching.activity.ShowcaseViewBuilder;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.capability.ISearchByGeocode;
+import cgeo.geocaching.connector.trackable.TrackableBrand;
 import cgeo.geocaching.connector.trackable.TrackableConnector;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointFormatter;
@@ -79,7 +80,7 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
 
         // search suggestion for a trackable
         if (Intents.ACTION_TRACKABLE.equals(intent.getAction())) {
-            TrackableActivity.startActivity(this, null, intent.getStringExtra(SearchManager.QUERY), null, null);
+            TrackableActivity.startActivity(this, null, intent.getStringExtra(SearchManager.QUERY), null, null, TrackableBrand.UNKNOWN.getId());
             finish();
             return;
         }

@@ -29,6 +29,8 @@ public interface TrackableConnector {
 
     public boolean canHandleTrackable(final String geocode);
 
+    public boolean canHandleTrackable(final String geocode, final TrackableBrand brand);
+
     /**
      * Return the Title of the service the connector is attached to.
      * Title may be used in messages given to the user, like to say which connector need to
