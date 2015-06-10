@@ -38,7 +38,7 @@
   <string name="cache_size_unknown">Neznámá</string>
   <string name="cache_size_nano">Nano</string>
   <string name="cache_size_very_large">Velmi velká</string>
-  <string name="wp_final">Cíl</string>
+  <string name="wp_final">Finální souřadnice</string>
   <string name="wp_stage">Část multi-keše</string>
   <string name="wp_puzzle">Otázka</string>
   <string name="wp_pkg">Parkoviště</string>
@@ -171,7 +171,7 @@
   <string name="err_tb_find">c:geo nemůže najít sledovatelný předmět.</string>
   <string name="err_tb_find_that">c:geo nemůže najít tento sledovatelný předmět.</string>
   <string name="err_waypoint_cache_unknown">c:geo neví k jaké keši chceš přidat bod trasy.</string>
-  <string name="err_waypoint_add_failed">c:geo nemůže přidat tvůj Bod trasy.</string>
+  <string name="err_waypoint_add_failed">c:geo nemůže přidat tvůj bod trasy.</string>
   <string name="err_point_unknown_position">c:geo nedokáže zjistit tvou polohu.</string>
   <string name="err_point_no_position_given_title">Popis je vyžadován</string>
   <string name="err_point_no_position_given">Vyplň alespoň zeměpisnou šířku a délku nebo vzdálenost a směr. Můžeš také vyplnit všechna čtyři pole.</string>
@@ -653,10 +653,10 @@
   <string name="cache_waypoints">Body trasy</string>
   <plurals name="waypoints">
     <item quantity="one">1 bod trasy</item>
-    <item quantity="few">%d bodů trasy</item>
-    <item quantity="other">%d body trasy</item>
+    <item quantity="few">%d body trasy</item>
+    <item quantity="other">%d bodů trasy</item>
   </plurals>
-  <string name="cache_waypoints_add">Přidat Bod trasy</string>
+  <string name="cache_waypoints_add">Přidat bod trasy</string>
   <string name="cache_hint">Nápověda</string>
   <string name="cache_hint_not_available">Nápověda není dostupná</string>
   <string name="cache_logs">Logbook</string>
@@ -765,7 +765,7 @@
   <string name="simple_dir_chooser_current_path">Cesta:</string>
   <string name="simple_dir_chooser_invalid_path">Chybná cesta</string>
   <string name="gpx_import_loading_caches">Nahrávání keší z .GPX souboru</string>
-  <string name="gpx_import_loading_waypoints">Načítání souboru s Body trasy</string>
+  <string name="gpx_import_loading_waypoints">Načítání souboru s body trasy</string>
   <string name="gpx_import_store_static_maps">Ukládání statických map</string>
   <string name="gpx_import_caches_imported">Keše importovány</string>
   <string name="gpx_import_static_maps_skipped">Stažení statických map zrušeno</string>
@@ -792,7 +792,7 @@
   <string name="waypoint_cache_coordinates">Souřadnice keše</string>
   <string name="waypoint_custom">Vlastní</string>
   <string name="waypoint_my_coordinates">Moje souřadnice</string>
-  <string name="waypoint_bearing">Směr</string>
+  <string name="waypoint_bearing">Azimut [°]</string>
   <string name="waypoint_distance">Vzdálenost</string>
   <string name="waypoint_name">Název</string>
   <string name="waypoint_edit">Upravit</string>
