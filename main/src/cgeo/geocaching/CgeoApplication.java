@@ -61,6 +61,7 @@ public class CgeoApplication extends Application {
 
     @Override
     public void onCreate() {
+        super.onCreate();
         try {
             final ViewConfiguration config = ViewConfiguration.get(this);
             final Field menuKeyField = ViewConfiguration.class.getDeclaredField("sHasPermanentMenuKey");
