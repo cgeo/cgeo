@@ -10,6 +10,7 @@ import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.activity.ShowcaseViewBuilder;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.apps.cachelist.CacheListApp;
+import cgeo.geocaching.apps.cachelist.CacheListAppUtils;
 import cgeo.geocaching.apps.cachelist.CacheListApps;
 import cgeo.geocaching.apps.cachelist.ListNavigationSelectionActionProvider;
 import cgeo.geocaching.command.DeleteCachesCommand;
@@ -614,13 +615,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
             @Override
             public void onListNavigationSelected(final CacheListApp app) {
-                final List<Geocache> cachesWithCoords = new ArrayList<>(cacheList.size());
-                for (final Geocache geocache : cacheList) {
-                    if (geocache.getCoords() != null) {
-                        cachesWithCoords.add(geocache);
-                    }
-                }
-                app.invoke(cachesWithCoords, CacheListActivity.this, getFilteredSearch());
+                app.invoke(CacheListAppUtils.filterCoords(cacheList), CacheListActivity.this, getFilteredSearch());
             }
         });
 
@@ -799,7 +794,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 return true;
             case R.id.menu_cache_list_app:
                 if (cacheToShow()) {
-                    CacheListApps.getActiveApps().get(0).invoke(cacheList, this, getFilteredSearch());
+                    CacheListApps.getActiveApps().get(0).invoke(CacheListAppUtils.filterCoords(cacheList), this, getFilteredSearch());
                 }
                 return true;
         }
