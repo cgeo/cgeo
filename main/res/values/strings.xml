@@ -470,6 +470,7 @@
     <string name="init_authorization_credential_username">Username</string>
     <string name="init_authorization_credential_password">Password</string>
     <string name="settings_service_active">Active</string>
+    <string name="settings_navigation_disabled">This app seems not to be installed</string>
     <string name="init_signature">Signature</string>
     <string name="init_template_help">Placeholder strings like [NAME] will be expanded later when this template is used.</string>
     <string name="init_signature_template_button">Insert Template</string>
