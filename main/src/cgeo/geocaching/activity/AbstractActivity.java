@@ -176,6 +176,9 @@ public abstract class AbstractActivity extends ActionBarActivity implements IAbs
     }
 
     protected boolean onClipboardItemSelected(@NonNull final ActionMode actionMode, final MenuItem item, final CharSequence clickedItemText) {
+        if (clickedItemText == null) {
+            return false;
+        }
         switch (item.getItemId()) {
             // detail fields
             case R.id.menu_copy:
