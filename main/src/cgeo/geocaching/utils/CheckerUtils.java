@@ -12,7 +12,7 @@ import android.util.Patterns;
 import java.util.regex.Matcher;
 
 public final class CheckerUtils {
-    private static final String[] CHECKERS = { "geocheck.org", "geochecker.com", "certitudes.org" };
+    private static final String[] CHECKERS = { "geocheck.org/geo_inputchkcoord.php?", "geochecker.com/index.php?", "certitudes.org/certitude?" };
 
     private CheckerUtils() {
         // utility class
