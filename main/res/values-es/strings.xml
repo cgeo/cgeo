@@ -221,6 +221,7 @@
   <string name="info_cache_saved">El caché se ha guardado en el disco local</string>
   <string name="err_trackable_log_not_anonymous">No puedes registrar %1$s desde c:geo de manera anónima. ¿Quieres abrir los ajustes para rellenar tu identificación desde %2$s?</string>
   <string name="err_trackable_no_preference_activity">Disculpa, no se ha encontrado una pantalla de preferencia adecuada.</string>
+  <string name="warn_discard_changes">¡Cambios no guardados en el waypoint descartados!</string>
   <string name="loc_last">Última conocida</string>
   <string name="loc_net">Red</string>
   <string name="loc_fused">Combinado</string>
