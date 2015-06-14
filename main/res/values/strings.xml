@@ -1047,6 +1047,8 @@
     <string name="helper_google_translate_description">If you download translation packages in the Google Translate app, then you can easily translate cache descriptions in c:geo by a long tap on the cache description text (without an Internet connection).</string>
     <string name="helper_wear_title">c:geo Wear</string>
     <string name="helper_wear_description">c:geo Wear is a plugin for c:geo that lets you navigate to geocaches using your Android Wear smartwatch.</string>
+    <string name="helper_where_you_go_title">WhereYouGo</string>
+    <string name="helper_where_you_go_description">WhereYouGo allows playing and searching geocaches of type Whereigo. c:geo can automatically trigger the download of cartridges within this app.</string>
     
     <!-- add-ons -->
     <string name="addon_missing_title">Missing plugin</string>
