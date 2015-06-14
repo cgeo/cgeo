@@ -249,7 +249,6 @@
   <string name="caches_no_cache">Aucune cache</string>
   <string name="caches_more_caches">Rechercher d\'autres caches</string>
   <string name="caches_more_caches_no">Pas d\'autres caches</string>
-  <string name="caches_more_caches_loading">Recherche des caches…</string>
   <string name="caches_more_caches_currently">trouvées</string>
   <string name="caches_downloading">Téléchargement des caches…\nRestant : </string>
   <string name="caches_eta_ltm">Moins d\'une minute</string>
