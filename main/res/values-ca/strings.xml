@@ -74,10 +74,16 @@
   <string name="log_tb_visit">Visitat</string>
   <string name="log_tb_drop">Deixat</string>
   <string name="log_tb_changeall">Canvia-ho tot</string>
+  <string name="log_tb_grabbed">Agafat d\'algun lloc</string>
+  <string name="log_tb_note">Nota</string>
+  <string name="log_tb_discovered">Descobert</string>
+  <string name="log_tb_archived">Arxivat</string>
   <string name="log_save">Guarda-ho  fora de línia</string>
   <string name="log_saving">S\'està enviant el registre…</string>
   <string name="log_saving_and_uploading">S\'està enviant el registre i pujant la imatge…</string>
   <string name="log_clear">Esborra</string>
+  <string name="log_post_not_possible">Descàrrega de dades en procés...\nProva una altra vegada en uns segons o comprova la connexió a internet.</string>
+  <string name="log_post_geocode_missing">Falta el geocodi...</string>
   <string name="log_date_future_not_allowed">No estan permesos els registres amb data futura.</string>
   <string name="log_add">Afegeix</string>
   <string name="log_repeat">Repeteix l\'últim registre</string>
@@ -162,6 +168,7 @@
   <string name="err_acquire_image_failed">S\'ha produït un error a l\'adquirir una imatge.</string>
   <string name="err_tb_display">El c:geo no pot mostrar el traçable que volíeu. És realment un traçable?</string>
   <string name="err_tb_details_open">El c:geo no pot obrir els detalls del traçable.</string>
+  <string name="err_tb_not_loggable">Aquest traçable no es pot registrar.</string>
   <string name="err_tb_find">El c:geo no pot trobar el traçable</string>
   <string name="err_tb_find_that">El c:geo no pot trobar aquest traçable.</string>
   <string name="err_waypoint_cache_unknown">El c:geo no sap a quin catxé voleu afegir la fita.</string>
@@ -174,7 +181,10 @@
   <string name="err_log_load_data">El c:geo no pot carregar les dades necessàries per registrar la visita.</string>
   <string name="err_log_load_data_again">El c:geo no pot carregar les dades necessàries per registrar la visita. Torneu a intentar-ho.</string>
   <string name="err_log_load_data_still">El c:geo encara està carregant les dades necessàries per enviar el registre. Si us plau, espereu una estona més.</string>
+  <string name="err_log_post_missing_tracking_code">Falta el codi traçable.</string>
+  <string name="err_log_post_missing_coordinates">Falten les coordenades.</string>
   <string name="err_log_post_failed">El registre no s\'ha publicat. Comproveu la memòria del lloc web d\'origen.</string>
+  <string name="err_log_post_failed_ec">Sembla que el seu registre no ha estat publicat. Si us plau comprovi-ho a Extremcaching.com.</string>
   <string name="err_log_post_failed_gk">Sembla que el seu registre no ha estat publicat. Si us plau comproviu a GeoKrety.org.</string>
   <string name="err_logimage_post_failed">La imatge de registre no s\'ha pujat. Comproveu la memòria del lloc web d\'origen.</string>
   <string name="err_search_address_forgot">El c:geo ha oblidat l\'adreça que intentaves trobar.</string>
@@ -209,6 +219,9 @@
   <string name="info_stored_image">La nova imatge s\'ha desat a:</string>
   <string name="info_storing_static_maps">S\'està intentant desar els mapes estàtics</string>
   <string name="info_cache_saved">El catxé ha estat desat localment</string>
+  <string name="err_trackable_log_not_anonymous">Entreu %1$s des de c:geo no es pot fer anònimament. Voleu obrir la configuració per omplir les vostres credencials de %2$s?</string>
+  <string name="err_trackable_no_preference_activity">No es troba la pantalla indicada de preferència.</string>
+  <string name="warn_discard_changes">Descartat els canvis del punt de referència!</string>
   <string name="loc_last">Última coneguda</string>
   <string name="loc_net">Xarxa</string>
   <string name="loc_fused">Combinat</string>
@@ -344,6 +357,7 @@
   <string name="about_help">Ajuda</string>
   <string name="about_system_include">Si us plau incloure la següent informació de sistema quan envieu un informe d\'error o demanar més informació sobre c:geo:</string>
   <string name="changelog_github">Llista de tots els canvis</string>
+  <string name="settings_title_open_settings">Obrir la configuració?</string>
   <string name="settings_title_services">Serveis</string>
   <string name="settings_summary_services">Configureu la informació del compte d\'usuari i l\'accés a serveis opcionals.</string>
   <string name="settings_title_appearance">Aparença</string>
@@ -409,6 +423,8 @@
   <string name="init_login_popup_not_authorized">La connexió no ha estat autoritzada</string>
   <string name="init_login_popup_invalid_timestamp">L\'hora local és incorrecta, ajusta l\'hora del teu dispositiu</string>
   <string name="init_login_popup_invalid_token">L\'autorització no és vàlida, torneu a autoritzar</string>
+  <string name="init_authorization_credential_username">Nom d\'usuari</string>
+  <string name="init_authorization_credential_password">Contrasenya</string>
   <string name="settings_service_active">Actiu</string>
   <string name="init_signature">Signatura</string>
   <string name="init_template_help">Les cadenes de marcadors de posició com [NAME] s\'expandiran més tard quan feu servir aquesta plantilla.</string>
@@ -533,6 +549,7 @@
   <string name="settings_open_geokretymap_website">Obrir la pàgina web de GeoKretyMap.org</string>
   <string name="settings_settings">Configuració</string>
   <string name="settings_information">Informació</string>
+  <string name="settings_advanced">Configuració avançada</string>
   <string name="settings_twitter_cache_message">Missatge per un catxé trobat</string>
   <string name="settings_twitter_trackable_message">Missatge per un traçable trobat</string>
   <string name="init_ec_icons">Icones del mapa</string>
@@ -557,6 +574,7 @@
   <string name="map_source_osm_cyclemap">OSM: Cyclemap</string>
   <string name="map_source_osm_offline">Fora de línia</string>
   <string name="init_sendToCgeo">Send to c:geo</string>
+  <string name="settings_info_send2cgeo_title">Informació sobre send2cgeo</string>
   <string name="init_sendToCgeo_name">El nom del teu dispositiu</string>
   <string name="init_sendToCgeo_description"><b>Send2cgeo</b> us permet enviar els catxés al vostre aparell Android directament des de Geocaching.com utilitzant un complement especial per al Firefox o pel Chrome. Abans de registrar-vos veieu <a href="http://send2.cgeo.org/"> http://send2.cgeo.org/</a>. Només cal que us registreu si voleu utilitzar el send2cgeo.</string>
   <string name="init_sendToCgeo_register">Sol·licita registre</string>
@@ -572,6 +590,9 @@
   <string name="auth_dialog_waiting">Esperant %s…</string>
   <string name="auth_explain_short">El següent procés permetrà al <b>c:geo</b> accedir a %s.</string>
   <string name="auth_explain_long">Prement el botó \"Autoritza al c:geo\"  s\'iniciarà el procés. Aquest procés obrirà el navegador web amb una pàgina %s. Registreu-vos a aquesta pàgina i permeteu al <b>c:geo</b> a accedir al vostre compte.</string>
+  <string name="auth_token_register">Crea un compte</string>
+  <string name="auth_token_explain_short">El següent procés permetrà al <b>c:geo</b> accedir a %s.</string>
+  <string name="auth_token_explain_long">Emplena la credencial, prem al boto \"autoritzar c:geo\" i començarà el procés. Aquest procés es connecta a %s i recupera la fitxa d\'autenticació.</string>
   <string name="auth_dialog_completed_twitter">El c:geo ara està autoritzat a publicar al Twitter.</string>
   <string name="auth_ocde">opencaching.de</string>
   <string name="auth_ocpl">opencaching.pl</string>
@@ -579,6 +600,9 @@
   <string name="auth_ocus">opencaching.us</string>
   <string name="auth_ocro">opencaching.ro</string>
   <string name="auth_dialog_completed_oc">El c:geo ara està autoritzat a interactuar amb %s.</string>
+  <string name="auth_dialog_completed_geokrety">El c:geo ara està autoritzat a interactuar amb %s.</string>
+  <string name="err_auth_geokrety_bad_password">El seu nom d\'usuari/contrasenya no és correcte.</string>
+  <string name="err_auth_geokrety_unknown">%1$s torna a: %2$s.</string>
   <plurals name="cache_counts">
     <item quantity="one">Un catxé</item>
     <item quantity="other">%1$d catxés</item>
@@ -661,11 +685,14 @@
   <string name="cache_menu_navigation_walk">Navegació (caminant)</string>
   <string name="cache_menu_navigation_bike">Navegació (bicicleta)</string>
   <string name="cache_menu_maps_directions">Direccions del Google Maps</string>
+  <string name="cache_menu_sygic_walk">Sygic (a peu)</string>
+  <string name="cache_menu_sygic_drive">Sygic (Conduir)</string>
   <string name="cache_menu_radar">Radar</string>
   <string name="cache_menu_map">Mapa</string>
   <string name="cache_menu_map_static">Mapes estàtics</string>
   <string name="cache_menu_download_map_static">Baixa els mapes estàtics</string>
   <string name="cache_menu_rmaps">Rmaps</string>
+  <string name="cache_menu_map_ext">Altres aplicacions externes</string>
   <string name="cache_menu_streetview">Street View</string>
   <string name="cache_menu_browser">Obre al navegador</string>
   <string name="cache_menu_visit">Registra visita</string>
@@ -764,6 +791,7 @@
   <string name="waypoint_distance">Distància</string>
   <string name="waypoint_name">Nom</string>
   <string name="waypoint_edit">Edita</string>
+  <string name="waypoint_copy_coordinates">Copiar coordenades</string>
   <string name="waypoint_delete">Esborra</string>
   <string name="waypoint_edit_title">Edita fita</string>
   <string name="waypoint_add_title">Afegeix fita</string>
@@ -852,9 +880,11 @@
   <string name="trackable_details_loading">Carregant les dades del traçable…</string>
   <string name="trackable_log_touch">Registra el contacte</string>
   <string name="trackable_browser_open">Obre al navegador</string>
+  <string name="trackable_refresh">Actualitza</string>
   <string name="trackable_goal">Objectiu</string>
   <string name="trackable_details">Detalls</string>
   <string name="trackable_image">Imatge</string>
+  <string name="trackable_code">Codi traçable</string>
   <string name="trackable_name">Nom</string>
   <string name="trackable_type">Tipus</string>
   <string name="trackable_owner">Propietari</string>
@@ -863,6 +893,8 @@
   <string name="trackable_spotted_at_user">En mans de</string>
   <string name="trackable_spotted_unknown_location">Ubicació desconeguda</string>
   <string name="trackable_spotted_owner">En mans del seu propietari</string>
+  <string name="trackable_spotted_archived">Arxivat</string>
+  <string name="trackable_spotted_travelling">Viatjar</string>
   <string name="trackable_origin">Origen</string>
   <string name="trackable_unknown">Desconegut</string>
   <string name="trackable_released">Publicat</string>
@@ -885,6 +917,8 @@
   <string name="user_menu_open_contact">Obre targeta del contacte</string>
   <string name="navigation">Navegació</string>
   <string name="compass_title">Brúixola</string>
+  <string name="use_gps">Utilitzar només el GPS</string>
+  <string name="use_compass">Utilitzar el GPS i la brúixola magnètica</string>
   <string name="destination_select">Tria destinació</string>
   <string name="navigation_direct_navigation">Navegació directa</string>
   <string name="navigation_target">Objectiu</string>
@@ -911,8 +945,12 @@
   <string name="helper_pocketquery_description">Permet la fàcil creació i descàrrega de pocket queries centrats en la posició actual o en un punt seleccionat al mapa. Requereix un compte Premium de Geocaching.com.</string>
   <string name="helper_google_translate_title">Google Translate</string>
   <string name="helper_google_translate_description">Si descarregueu paquets de traducció a l\'app Google Translate, llavors podeu traduir fàcilment les descripcions dels catxés al c:geo tocant uns segons sobre el text de la descripció del catxé (sense connexió a Internet).</string>
+  <string name="helper_wear_title">c:geo Wear</string>
+  <string name="helper_wear_description">c:geo Wear és un complement per c:geo que et permet cercar catxés fent servir el teu smartwatch Android Wear.</string>
   <string name="addon_missing_title">No es troba el complement</string>
   <string name="addon_download_prompt">Baixa-te\'l de Google Play.</string>
+  <string name="export">Exporta</string>
+  <string name="export_progress">Exporta: %1$s</string>
   <string name="export_exportedto">exportat a</string>
   <string name="export_failed">S\'ha produït un error en l\'exportació</string>
   <string name="export_fieldnotes">Notes de camp</string>
@@ -925,6 +963,8 @@
   <string name="export_gpx">GPX</string>
   <string name="export_gpx_info">El fitxer GPX s\'exportarà a %1$s amb la data i hora actuals com a nom de fitxer.</string>
   <string name="export_gpx_to">Envia el GPX exportat a</string>
+  <string name="export_confirm_title">Exportant %1$s</string>
+  <string name="export_confirm_message">Camí: %1$s\n Nom arxiu: %2$s</string>
   <string name="attribute_dogs_yes">Els gossos hi són admesos</string>
   <string name="attribute_dogs_no">No s\'admeten els gossos</string>
   <string name="attribute_bicycles_yes">Les bicicletes hi són permeses</string>
@@ -1218,6 +1258,33 @@
   <string name="showcase_compass_hint_text">Aquest element de menú nou podria donar una idea on trobar l\'amagatall - li mostra la pista, si està disponible.</string>
   <string name="confirm_log_title">Tipus de registre poc habitual</string>
   <string name="confirm_log_message">Voleu registrar \'%s\'. N\'esteu segurs?</string>
+  <string name="settings_activate_geokrety">Activa</string>
   <string name="init_geokrety">GeoKrety.org</string>
+  <string name="init_connectorGeokretyActive">Geokrety Traçables</string>
   <string name="init_summary_geokrety">Habilitar traçables de GeoKrety.org</string>
+  <string name="init_summary_geokrety_account">No hi ha cap compte configurat.</string>
+  <string name="init_geokrety_register_ok">Inici de sessió correcte</string>
+  <string name="init_geokrety_register_fail">S\'ha produït un error a l\'accedir</string>
+  <string name="init_geokrety_description">Autorizar c:geo a GeoKrety.org per registrar traçables.</string>
+  <string name="init_geokrety_cache_description">GeokretyMap.org proporciona dades als catxés per a GeoKrety trackables.\n Les dades contenent informació dels GeoKrety com \'Descripció\' o \'misió\'.\n\nLes Dades no són en directe! \nLa Posició: ~ 30 min. \nDescripcions: ~ 24 h.</string>
+  <string name="init_geokrety_cache">Utilitzar GeoKretyMap.org</string>
+  <string name="init_geokrety_userid">Usuari: %s</string>
+  <string name="trackable_title_log_without_geocode">El Geocodi no es troba</string>
+  <string name="trackable_log_without_geocode">Estàs a punt d\'enviar un registre sense un Geocodi. Voleu afegir-lo ara?</string>
+  <string name="do_not_ask_me_again">No m\'ho tornis a preguntar</string>
+  <string name="settings_map_direction">Mostra la direcció</string>
+  <string name="settings_summary_map_direction">Mostra una línia de direcció a la navegació</string>
+  <string name="map_direction">Mostra la direcció</string>
+  <string name="command_move_caches_progress">Movent catxés a la llista %1s</string>
+  <plurals name="command_move_caches_result">
+    <item quantity="one">%d catxé mogut</item>
+    <item quantity="other">%d catxés moguts</item>
+  </plurals>
+  <string name="command_delete_caches_progress">Eliminant catxés</string>
+  <plurals name="command_delete_caches_result">
+    <item quantity="one">%d catxé eliminat</item>
+    <item quantity="other">%d catxés eliminats</item>
+  </plurals>
+  <string name="command_rename_list_result">Canvia el nom de la llista</string>
+  <string name="command_delete_list_result">Llista suprimida</string>
 </resources>
