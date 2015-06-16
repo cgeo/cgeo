@@ -2,7 +2,7 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-    <b>Next feature release:</b>\n
+    <b>2015.06.15:</b>\n
     · New: Improved waypoint editor design (Save button now in title bar)\n
     · New: Full support of GeoKrety (Use: Menu - Services - GeoKrety)\n
     · New: Optionally disable direction line in maps\n
