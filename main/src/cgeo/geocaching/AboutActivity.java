@@ -1,5 +1,8 @@
 package cgeo.geocaching;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+
 import cgeo.geocaching.activity.AbstractViewPagerActivity;
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.ui.AbstractCachingPageViewCreator;
@@ -31,9 +34,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-import butterknife.ButterKnife;
-import butterknife.InjectView;
-
 public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page> {
 
     private static final String EXTRA_ABOUT_STARTPAGE = "cgeo.geocaching.extra.about.startpage";
@@ -60,8 +60,11 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
                 scanner = new Scanner(ins, CharEncoding.UTF_8);
                 return scanner.useDelimiter("\\A").next();
             } finally {
-                IOUtils.closeQuietly(scanner);
                 IOUtils.closeQuietly(ins);
+                // Scanner does not implement Closeable on Android 4.1, so closeQuietly leads to crash there
+                if (scanner != null) {
+                    scanner.close();
+                }
             }
         }
 
