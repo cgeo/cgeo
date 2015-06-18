@@ -26,12 +26,12 @@
 
 		<FindbugsAnnotationsVersion>3.0.0</FindbugsAnnotationsVersion>
 
-		<JacksonAnnotationsVersion>2.5.3</JacksonAnnotationsVersion>
-		<JacksonCoreVersion>2.5.3</JacksonCoreVersion>
-		<JacksonDatabindVersion>2.5.3</JacksonDatabindVersion>
+		<JacksonAnnotationsVersion>2.5.4</JacksonAnnotationsVersion>
+		<JacksonCoreVersion>2.5.4</JacksonCoreVersion>
+		<JacksonDatabindVersion>2.5.4</JacksonDatabindVersion>
 
 		<RXAndroidVersion>0.24.0</RXAndroidVersion>
-		<RXJavaVersion>1.0.11</RXJavaVersion>
+		<RXJavaVersion>1.0.12</RXJavaVersion>
 	</properties>
 
 	<dependencies>
