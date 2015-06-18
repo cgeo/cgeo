@@ -2,6 +2,10 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
+    <b>Next bugfix release:</b>\n
+    · Fix: Crash in \"About c:geo\" on Android 4.1\n
+    \n
+    \n
     <b>2015.06.15:</b>\n
     · New: Improved waypoint editor design (Save button now in title bar)\n
     · New: Full support of GeoKrety (Use: Menu - Services - GeoKrety)\n
