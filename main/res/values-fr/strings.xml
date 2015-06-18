@@ -23,7 +23,7 @@
   <string name="webcam">Webcam</string>
   <string name="virtual">Virtuelle</string>
   <string name="wherigo">Wherigo</string>
-  <string name="lostfound">Événement perdue &amp; trouvée</string>
+  <string name="lostfound">Événement perdu &amp; trouvé</string>
   <string name="ape">Project ape cache</string>
   <string name="gchq">Siège de Groundspeak</string>
   <string name="gps">GPS Adventures Exhibit</string>
@@ -249,6 +249,7 @@
   <string name="caches_no_cache">Aucune cache</string>
   <string name="caches_more_caches">Rechercher d\'autres caches</string>
   <string name="caches_more_caches_no">Pas d\'autres caches</string>
+  <string name="caches_more_caches_loading">Recherche de caches…</string>
   <string name="caches_more_caches_currently">trouvées</string>
   <string name="caches_downloading">Téléchargement des caches…\nRestant : </string>
   <string name="caches_eta_ltm">Moins d\'une minute</string>
