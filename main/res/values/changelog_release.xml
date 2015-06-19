@@ -4,6 +4,8 @@
   <string name="changelog_release" translatable="false">\n
     <b>Next bugfix release:</b>\n
     · Fix: Crash in \"About c:geo\" on Android 4.1\n
+    · Fix: Crash when starting map on some devices\n
+    · Fix: Try to allocate more memory on Android 3 and above to avoid crashes on memory intense operations\n
     \n
     \n
     <b>2015.06.15:</b>\n
