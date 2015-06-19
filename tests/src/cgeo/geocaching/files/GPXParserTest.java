@@ -435,4 +435,14 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         assertThat(ConnectorFactory.getConnector(lab)).isSameAs(unknownConnector);
     }
 
+    public void testGSAKGeocode() throws IOException, ParserException {
+        final List<Geocache> caches = readGPX10(R.raw.liptov_gpx);
+        assertThat(caches).hasSize(1);
+
+        final Geocache cache = caches.get(0);
+
+        // make sure we get the right geocode, even though the name seems to start with a code, too
+        assertThat(cache.getGeocode()).isEqualTo("GC3A5N1");
+    }
+
 }

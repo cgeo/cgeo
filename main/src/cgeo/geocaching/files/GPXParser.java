@@ -920,6 +920,16 @@ public abstract class GPXParser extends FileParser {
                 }
             });
 
+            gsak.getChild(gsakNamespace, "Code").setEndTextElementListener(new EndTextElementListener() {
+
+                @Override
+                public void end(final String geocode) {
+                    if (StringUtils.isNotBlank(geocode)) {
+                        cache.setGeocode(StringUtils.trim(geocode));
+                    }
+                }
+            });
+
         }
     }
 
