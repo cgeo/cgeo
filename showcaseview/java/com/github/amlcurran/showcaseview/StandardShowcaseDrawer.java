@@ -35,7 +35,8 @@ class StandardShowcaseDrawer implements ShowcaseDrawer {
     private final float showcaseRadius;
     protected int backgroundColour;
 
-    public StandardShowcaseDrawer(Resources resources) {
+    @SuppressWarnings("deprecation")
+	public StandardShowcaseDrawer(Resources resources) {
         PorterDuffXfermode xfermode = new PorterDuffXfermode(PorterDuff.Mode.MULTIPLY);
         eraserPaint = new Paint();
         eraserPaint.setColor(0xFFFFFF);
