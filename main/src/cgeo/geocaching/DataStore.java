@@ -1049,6 +1049,28 @@ public class DataStore {
         return null;
     }
 
+    @Nullable
+    public static String getGeocodeForTitle(@NonNull final String title) {
+        if (StringUtils.isBlank(title)) {
+            return null;
+        }
+        init();
+
+        try {
+            final SQLiteStatement sqlStatement = PreparedStatement.GEOCODE_FROM_TITLE.getStatement();
+            synchronized (sqlStatement) {
+                sqlStatement.bindString(1, title);
+                return sqlStatement.simpleQueryForString();
+            }
+        } catch (final SQLiteDoneException ignored) {
+            // Do nothing, it only means we have no information on the cache
+        } catch (final Exception e) {
+            Log.e("DataStore.getGeocodeForGuid", e);
+        }
+
+        return null;
+    }
+
     /**
      * Save/store a cache to the CacheCache
      *
@@ -2905,6 +2927,7 @@ public class DataStore {
         LIST_ID_OF_GEOCODE("SELECT reason FROM " + dbTableCaches + " WHERE geocode = ?"),
         LIST_ID_OF_GUID("SELECT reason FROM " + dbTableCaches + " WHERE guid = ?"),
         GEOCODE_OF_GUID("SELECT geocode FROM " + dbTableCaches + " WHERE guid = ?"),
+        GEOCODE_FROM_TITLE("SELECT geocode FROM " + dbTableCaches + " WHERE title = ?"),
         INSERT_SEARCH_DESTINATION("INSERT INTO " + dbTableSearchDestinationHistory + " (date, latitude, longitude) VALUES (?, ?, ?)"),
         COUNT_TYPE_ALL_LIST("SELECT COUNT(_id) FROM " + dbTableCaches + " WHERE detailed = 1 AND type = ? AND reason > 0"), // See use of COUNT_TYPE_LIST for synchronization
         COUNT_ALL_TYPES_ALL_LIST("SELECT COUNT(_id) FROM " + dbTableCaches + " WHERE detailed = 1 AND reason > 0"), // See use of COUNT_TYPE_LIST for synchronization

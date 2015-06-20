@@ -376,8 +376,7 @@ public abstract class GPXParser extends FileParser {
                             parentCacheCode = "GC" + cache.getName().substring(2).toUpperCase(Locale.US);
                         }
                     }
-                    // lookup cache for waypoint in already parsed caches
-                    final Geocache cacheForWaypoint = DataStore.loadCache(parentCacheCode, LoadFlags.LOAD_CACHE_OR_DB);
+                    final Geocache cacheForWaypoint = findParentCache();
                     if (cacheForWaypoint != null) {
                         final Waypoint waypoint = new Waypoint(cache.getShortDescription(), WaypointType.fromGPXString(sym), false);
                         if (wptUserDefined) {
@@ -403,6 +402,7 @@ public abstract class GPXParser extends FileParser {
                     }
                 }
             }
+
         });
 
         // waypoint.time
@@ -1103,5 +1103,22 @@ public abstract class GPXParser extends FileParser {
                 || StringUtils.contains(sym, "geocache")
                 || StringUtils.containsIgnoreCase(sym, "waymark")
                 || StringUtils.containsIgnoreCase(sym, "terracache"));
+    }
+
+    @Nullable
+    private Geocache findParentCache() {
+        if (StringUtils.isBlank(parentCacheCode)) {
+            return null;
+        }
+        // first match by geocode only
+        Geocache cacheForWaypoint = DataStore.loadCache(parentCacheCode, LoadFlags.LOAD_CACHE_OR_DB);
+        if (cacheForWaypoint == null) {
+            // then match by title
+            final String geocode = DataStore.getGeocodeForTitle(parentCacheCode);
+            if (StringUtils.isNotBlank(geocode)) {
+                cacheForWaypoint = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+            }
+        }
+        return cacheForWaypoint;
     }
 }
