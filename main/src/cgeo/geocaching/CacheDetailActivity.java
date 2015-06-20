@@ -629,6 +629,8 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                         ((IgnoreCapability) ConnectorFactory.getConnector(cache)).ignoreCache(cache);
                     }
                 });
+                // for consistency, remove also the local cache immediately
+                dropCache();
             }
         });
     }
