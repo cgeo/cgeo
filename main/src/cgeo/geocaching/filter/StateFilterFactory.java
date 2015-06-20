@@ -222,7 +222,7 @@ class StateFilterFactory implements IFilterFactory {
         };
     }
 
-    private static class StateOfflineLogFilter extends AbstractFilter {
+    static class StateOfflineLogFilter extends AbstractFilter {
 
         public StateOfflineLogFilter() {
             super(R.string.cache_status_offline_log);
