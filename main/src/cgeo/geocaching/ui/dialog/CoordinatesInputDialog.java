@@ -36,6 +36,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.lang.ref.WeakReference;
+import java.util.Arrays;
+import java.util.List;
 
 public class CoordinatesInputDialog extends DialogFragment {
 
@@ -51,10 +53,11 @@ public class CoordinatesInputDialog extends DialogFragment {
     private TextView tLonSep1, tLonSep2, tLonSep3;
 
     private CoordInputFormatEnum currentFormat = null;
+    private List<EditText> orderedInputs;
 
 
     private static final String GEOPOINT_ARG = "GEOPOINT";
-    private static final String GEOPOINT_INTIAL_ARG = "GEOPOINT_INITIAL";
+    private static final String GEOPOINT_INITIAL_ARG = "GEOPOINT_INITIAL";
     private static final String CACHECOORDS_ARG = "CACHECOORDS";
 
 
@@ -69,7 +72,7 @@ public class CoordinatesInputDialog extends DialogFragment {
         }
 
         if (geo !=null) {
-            args.putParcelable(GEOPOINT_INTIAL_ARG, geo.getCoords());
+            args.putParcelable(GEOPOINT_INITIAL_ARG, geo.getCoords());
         }
 
         if (cache != null) {
@@ -85,7 +88,7 @@ public class CoordinatesInputDialog extends DialogFragment {
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         gp = getArguments().getParcelable(GEOPOINT_ARG);
-        gpinitial = getArguments().getParcelable(GEOPOINT_INTIAL_ARG);
+        gpinitial = getArguments().getParcelable(GEOPOINT_INITIAL_ARG);
         cacheCoords = getArguments().getParcelable(CACHECOORDS_ARG);
 
         if (savedInstanceState != null && savedInstanceState.getParcelable(GEOPOINT_ARG)!=null) {
@@ -145,23 +148,12 @@ public class CoordinatesInputDialog extends DialogFragment {
         tLonSep2 = ButterKnife.findById(v, R.id.LonSeparator2);
         tLonSep3 = ButterKnife.findById(v, R.id.LonSeparator3);
 
-        eLatDeg.addTextChangedListener(new CoordinatesTextWatcher(eLatDeg));
-        eLatMin.addTextChangedListener(new CoordinatesTextWatcher(eLatMin));
-        eLatSec.addTextChangedListener(new CoordinatesTextWatcher(eLatSec));
-        eLatSub.addTextChangedListener(new CoordinatesTextWatcher(eLatSub));
-        eLonDeg.addTextChangedListener(new CoordinatesTextWatcher(eLonDeg));
-        eLonMin.addTextChangedListener(new CoordinatesTextWatcher(eLonMin));
-        eLonSec.addTextChangedListener(new CoordinatesTextWatcher(eLonSec));
-        eLonSub.addTextChangedListener(new CoordinatesTextWatcher(eLonSub));
+        orderedInputs = Arrays.asList(eLatDeg, eLatMin, eLatSec, eLatSub, eLonDeg, eLonMin, eLonSec, eLonSub);
 
-        EditUtils.disableSuggestions(eLatDeg);
-        EditUtils.disableSuggestions(eLatMin);
-        EditUtils.disableSuggestions(eLatSec);
-        EditUtils.disableSuggestions(eLatSub);
-        EditUtils.disableSuggestions(eLonDeg);
-        EditUtils.disableSuggestions(eLonMin);
-        EditUtils.disableSuggestions(eLonSec);
-        EditUtils.disableSuggestions(eLonSub);
+        for (final EditText editText : orderedInputs) {
+            editText.addTextChangedListener(new CoordinatesTextWatcher(editText));
+            EditUtils.disableSuggestions(editText);
+        }
 
         bLat.setOnClickListener(new ButtonClickListener());
         bLon.setOnClickListener(new ButtonClickListener());
@@ -295,14 +287,10 @@ public class CoordinatesInputDialog extends DialogFragment {
                 eLonSub.setText(addZeros(gp.getLonSecFrac(), 3));
                 break;
         }
-        setSize(eLatDeg);
-        setSize(eLatMin);
-        setSize(eLatSec);
-        setSize(eLatSub);
-        setSize(eLonDeg);
-        setSize(eLonMin);
-        setSize(eLonSec);
-        setSize(eLonSub);
+
+        for (final EditText editText : orderedInputs) {
+            setSize(editText);
+        }
     }
 
     private void setSize(final EditText someEditText) {
@@ -361,16 +349,6 @@ public class CoordinatesInputDialog extends DialogFragment {
 
         @Override
         public void afterTextChanged(final Editable s) {
-            /*
-             * Max lengths, depending on currentFormat
-             *
-             * formatPlain = disabled
-             * DEG MIN SEC SUB
-             * formatDeg 2/3 5 - -
-             * formatMin 2/3 2 3 -
-             * formatSec 2/3 2 2 3
-             */
-
             if (currentFormat == CoordInputFormatEnum.Plain) {
                 return;
             }
@@ -380,42 +358,18 @@ public class CoordinatesInputDialog extends DialogFragment {
                 return;
             }
 
-            final int maxLength = getMaxLengthFromCurrentField(editText);
-            if (s.length() == maxLength) {
-                if (editText == eLatDeg) {
-                    eLatMin.requestFocus();
-                } else if (editText == eLatMin) {
-                    if (eLatSec.getVisibility() == View.GONE) {
-                        eLonDeg.requestFocus();
-                    } else {
-                        eLatSec.requestFocus();
-                    }
-                } else if (editText == eLatSec) {
-                    if (eLatSub.getVisibility() == View.GONE) {
-                        eLonDeg.requestFocus();
-                    } else {
-                        eLatSub.requestFocus();
-                    }
-                } else if (editText == eLatSub) {
-                    eLonDeg.requestFocus();
-                } else if (editText == eLonDeg) {
-                    eLonMin.requestFocus();
-                } else if (editText == eLonMin) {
-                    if (eLonSec.getVisibility() == View.GONE) {
-                        eLatDeg.requestFocus();
-                    } else {
-                        eLonSec.requestFocus();
-                    }
-                } else if (editText == eLonSec) {
-                    if (eLonSub.getVisibility() == View.GONE) {
-                        eLatDeg.requestFocus();
-                    } else {
-                        eLonSub.requestFocus();
-                    }
-                } else if (editText == eLonSub) {
-                    eLatDeg.requestFocus();
-                }
+            if (s.length() == getMaxLengthFromCurrentField(editText)) {
+                focusNextVisibleInput(editText);
             }
+        }
+
+        private void focusNextVisibleInput(final EditText editText) {
+            int index = orderedInputs.indexOf(editText);
+            do {
+                index = (index + 1) % orderedInputs.size();
+            } while (orderedInputs.get(index).getVisibility() == View.GONE);
+
+            orderedInputs.get(index).requestFocus();
         }
 
         @Override
@@ -485,6 +439,16 @@ public class CoordinatesInputDialog extends DialogFragment {
     private static String padZerosRight(final String value, final int len) {
         return StringUtils.rightPad(value, len, '0');
     }
+
+    /**
+     * Max lengths, depending on currentFormat
+     *
+     * formatPlain = disabled
+     * DEG MIN SEC SUB
+     * formatDeg 2/3 5 - -
+     * formatMin 2/3 2 3 -
+     * formatSec 2/3 2 2 3
+     */
 
     public int getMaxLengthFromCurrentField(final EditText editText) {
         if (editText == eLonDeg || editText == eLatSub || editText == eLonSub) {
