@@ -857,8 +857,8 @@
 
     <!-- theme file select -->
     <!-- import -->
-    <string name="web_import_title">Import from web</string>
-    <string name="web_import_waiting">Waiting for new caches from web…</string>
+    <string name="web_import_title">Import from send2cgeo</string>
+    <string name="web_import_waiting">Waiting for new caches from send2cgeo…</string>
     <string name="web_downloading">Downloading</string>
     <string name="web_downloaded">Downloaded</string>
 
