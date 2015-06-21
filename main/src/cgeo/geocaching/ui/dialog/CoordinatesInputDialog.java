@@ -35,6 +35,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.lang.ref.WeakReference;
+
 public class CoordinatesInputDialog extends DialogFragment {
 
     private Geopoint gp;
@@ -143,14 +145,14 @@ public class CoordinatesInputDialog extends DialogFragment {
         tLonSep2 = ButterKnife.findById(v, R.id.LonSeparator2);
         tLonSep3 = ButterKnife.findById(v, R.id.LonSeparator3);
 
-        eLatDeg.addTextChangedListener(new TextChanged(eLatDeg));
-        eLatMin.addTextChangedListener(new TextChanged(eLatMin));
-        eLatSec.addTextChangedListener(new TextChanged(eLatSec));
-        eLatSub.addTextChangedListener(new TextChanged(eLatSub));
-        eLonDeg.addTextChangedListener(new TextChanged(eLonDeg));
-        eLonMin.addTextChangedListener(new TextChanged(eLonMin));
-        eLonSec.addTextChangedListener(new TextChanged(eLonSec));
-        eLonSub.addTextChangedListener(new TextChanged(eLonSub));
+        eLatDeg.addTextChangedListener(new CoordinatesTextWatcher(eLatDeg));
+        eLatMin.addTextChangedListener(new CoordinatesTextWatcher(eLatMin));
+        eLatSec.addTextChangedListener(new CoordinatesTextWatcher(eLatSec));
+        eLatSub.addTextChangedListener(new CoordinatesTextWatcher(eLatSub));
+        eLonDeg.addTextChangedListener(new CoordinatesTextWatcher(eLonDeg));
+        eLonMin.addTextChangedListener(new CoordinatesTextWatcher(eLonMin));
+        eLonSec.addTextChangedListener(new CoordinatesTextWatcher(eLonSec));
+        eLonSub.addTextChangedListener(new CoordinatesTextWatcher(eLonSub));
 
         EditUtils.disableSuggestions(eLatDeg);
         EditUtils.disableSuggestions(eLatMin);
@@ -346,12 +348,15 @@ public class CoordinatesInputDialog extends DialogFragment {
         }
     }
 
-    private class TextChanged implements TextWatcher {
+    private class CoordinatesTextWatcher implements TextWatcher {
 
-        private final EditText editText;
+        /**
+         * weak reference, such that garbage collector can do its work
+         */
+        private final WeakReference<EditText> editTextRef;
 
-        public TextChanged(final EditText editText) {
-            this.editText = editText;
+        public CoordinatesTextWatcher(final EditText editText) {
+            this.editTextRef = new WeakReference<>(editText);
         }
 
         @Override
@@ -367,6 +372,11 @@ public class CoordinatesInputDialog extends DialogFragment {
              */
 
             if (currentFormat == CoordInputFormatEnum.Plain) {
+                return;
+            }
+
+            final EditText editText = editTextRef.get();
+            if (editText == null) {
                 return;
             }
 
@@ -410,10 +420,12 @@ public class CoordinatesInputDialog extends DialogFragment {
 
         @Override
         public void beforeTextChanged(final CharSequence s, final int start, final int count, final int after) {
+            // nothing to do
         }
 
         @Override
         public void onTextChanged(final CharSequence s, final int start, final int before, final int count) {
+            // nothing to do
         }
 
     }
