@@ -2,6 +2,10 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
+    <b>Next bugfix release:</b>\n
+    · Fix: Alphabetical sorting of trackables in log window\n
+    \n
+    \n
     <b>2015.06.19:</b>\n
     · Fix: Crash in \"About c:geo\" on Android 4.1\n
     · Fix: Crash when starting map on some devices\n
