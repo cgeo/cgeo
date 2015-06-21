@@ -293,6 +293,21 @@ public class CoordinatesInputDialog extends DialogFragment {
                 eLonSub.setText(addZeros(gp.getLonSecFrac(), 3));
                 break;
         }
+        setSize(eLatDeg);
+        setSize(eLatMin);
+        setSize(eLatSec);
+        setSize(eLatSub);
+        setSize(eLonDeg);
+        setSize(eLonMin);
+        setSize(eLonSec);
+        setSize(eLonSub);
+    }
+
+    private void setSize(final EditText someEditText) {
+        if (someEditText.getVisibility() == View.GONE) {
+            return;
+        }
+        someEditText.setMinEms(getMaxLengthFromCurrentField(someEditText));
     }
 
     private static String addZeros(final int value, final int len) {
