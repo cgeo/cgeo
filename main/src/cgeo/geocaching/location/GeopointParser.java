@@ -57,6 +57,18 @@ class GeopointParser {
      *             if lat or lon could not be parsed
      */
     public static Geopoint parse(@NonNull final String text) {
+        // first try if these are simply 2 double values
+        try {
+            final String[] parts = StringUtils.split(StringUtils.trim(text));
+            if (parts.length == 2) {
+                final double lat = Double.parseDouble(parts[0]);
+                final double lon = Double.parseDouble(parts[1]);
+                return new Geopoint(lat, lon);
+            }
+        } catch (final NumberFormatException e) {
+            // ignore and continue parsing textual formats
+        }
+
         final ResultWrapper latitudeWrapper = parseHelper(text, LatLon.LAT);
         // cut away the latitude part when parsing the longitude
         final ResultWrapper longitudeWrapper = parseHelper(text.substring(latitudeWrapper.matcherPos + latitudeWrapper.matcherLength), LatLon.LON);

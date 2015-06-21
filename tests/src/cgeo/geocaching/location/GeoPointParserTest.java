@@ -1,6 +1,7 @@
 package cgeo.geocaching.location;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.offset;
 
 import cgeo.geocaching.utils.Formatter;
 
@@ -122,4 +123,18 @@ public class GeoPointParserTest extends AndroidTestCase {
     public static void testEquatorMeridian() {
         assertThat(GeopointParser.parse("00° 00.000 00° 00.000")).isEqualTo(Geopoint.ZERO);
     }
+
+    public static void testFloatingPointLatitude() {
+        assertThat(GeopointParser.parseLatitude("47.648883")).isEqualTo(GeopointParser.parseLatitude("N 47° 38.933"), offset(1e-6));
+    }
+
+    public static void testFloatingPointNegativeLatitudeMeansSouth() {
+        assertThat(GeopointParser.parseLatitude("-47.648883")).isEqualTo(GeopointParser.parseLatitude("S 47° 38.933"), offset(1e-6));
+    }
+
+    public static void testFloatingPointBoth() {
+        assertEquals(GeopointParser.parse("47.648883  122.348067"), GeopointParser.parse("N 47° 38.933 E 122° 20.884"), 1e-4f);
+        assertEquals(GeopointParser.parse("47.648883  -122.348067"), GeopointParser.parse("N 47° 38.933 W 122° 20.884"), 1e-4f);
+    }
+
 }
