@@ -57,6 +57,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -174,7 +176,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         final LinearLayout inventoryView = ButterKnife.findById(this, R.id.inventory);
         inventoryView.removeAllViews();
 
-        for (final TrackableLog tb : trackables) {
+        for (final TrackableLog tb : getSortedTrackables()) {
             final LinearLayout inventoryItem = (LinearLayout) inflater.inflate(R.layout.logcache_trackable_item, inventoryView, false);
 
             final ImageView brandView = ButterKnife.findById(inventoryItem, R.id.trackable_image_brand);
@@ -227,6 +229,18 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
 
             inventoryChangeAllView.setVisibility(View.VISIBLE);
         }
+    }
+
+    private ArrayList<TrackableLog> getSortedTrackables() {
+        final ArrayList<TrackableLog> sortedTrackables = new ArrayList<>(trackables);
+        Collections.sort(sortedTrackables, new Comparator<TrackableLog>() {
+
+            @Override
+            public int compare(final TrackableLog lhs, final TrackableLog rhs) {
+                return lhs.name.compareToIgnoreCase(rhs.name);
+            }
+        });
+        return sortedTrackables;
     }
 
     private void enablePostButton(final boolean enabled) {
