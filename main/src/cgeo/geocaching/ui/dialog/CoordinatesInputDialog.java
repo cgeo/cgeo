@@ -26,6 +26,7 @@ import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnFocusChangeListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
@@ -55,11 +56,9 @@ public class CoordinatesInputDialog extends DialogFragment {
     private CoordInputFormatEnum currentFormat = null;
     private List<EditText> orderedInputs;
 
-
     private static final String GEOPOINT_ARG = "GEOPOINT";
     private static final String GEOPOINT_INITIAL_ARG = "GEOPOINT_INITIAL";
     private static final String CACHECOORDS_ARG = "CACHECOORDS";
-
 
     public static CoordinatesInputDialog getInstance(final Geocache cache, final Geopoint gp, final GeoData geo) {
 
@@ -71,7 +70,7 @@ public class CoordinatesInputDialog extends DialogFragment {
             args.putParcelable(GEOPOINT_ARG, geo != null ? geo.getCoords() : Geopoint.ZERO);
         }
 
-        if (geo !=null) {
+        if (geo != null) {
             args.putParcelable(GEOPOINT_INITIAL_ARG, geo.getCoords());
         }
 
@@ -91,7 +90,7 @@ public class CoordinatesInputDialog extends DialogFragment {
         gpinitial = getArguments().getParcelable(GEOPOINT_INITIAL_ARG);
         cacheCoords = getArguments().getParcelable(CACHECOORDS_ARG);
 
-        if (savedInstanceState != null && savedInstanceState.getParcelable(GEOPOINT_ARG)!=null) {
+        if (savedInstanceState != null && savedInstanceState.getParcelable(GEOPOINT_ARG) != null) {
             gp = savedInstanceState.getParcelable(GEOPOINT_ARG);
         }
 
@@ -151,7 +150,8 @@ public class CoordinatesInputDialog extends DialogFragment {
         orderedInputs = Arrays.asList(eLatDeg, eLatMin, eLatSec, eLatSub, eLonDeg, eLonMin, eLonSec, eLonSub);
 
         for (final EditText editText : orderedInputs) {
-            editText.addTextChangedListener(new CoordinatesTextWatcher(editText));
+            editText.addTextChangedListener(new SwitchToNextFieldWatcher(editText));
+            editText.setOnFocusChangeListener(new PadZerosOnFocusLostListener());
             EditUtils.disableSuggestions(editText);
         }
 
@@ -189,7 +189,6 @@ public class CoordinatesInputDialog extends DialogFragment {
         }
         return true;
     }
-
 
     private void updateGUI() {
         if (gp == null) {
@@ -336,14 +335,14 @@ public class CoordinatesInputDialog extends DialogFragment {
         }
     }
 
-    private class CoordinatesTextWatcher implements TextWatcher {
+    private class SwitchToNextFieldWatcher implements TextWatcher {
 
         /**
          * weak reference, such that garbage collector can do its work
          */
         private final WeakReference<EditText> editTextRef;
 
-        public CoordinatesTextWatcher(final EditText editText) {
+        public SwitchToNextFieldWatcher(final EditText editText) {
             this.editTextRef = new WeakReference<>(editText);
         }
 
@@ -355,6 +354,9 @@ public class CoordinatesInputDialog extends DialogFragment {
 
             final EditText editText = editTextRef.get();
             if (editText == null) {
+                return;
+            }
+            if (!editText.hasFocus()) {
                 return;
             }
 
@@ -386,40 +388,39 @@ public class CoordinatesInputDialog extends DialogFragment {
 
     private boolean areCurrentCoordinatesValid(final boolean signalError) {
         try {
-            Geopoint current = null;
-            if (currentFormat == CoordInputFormatEnum.Plain) {
-                current = new Geopoint(eLat.getText().toString(), eLon.getText().toString());
-            } else {
-                final String latDir = bLat.getText().toString();
-                final String lonDir = bLon.getText().toString();
-                final String latDeg = eLatDeg.getText().toString();
-                final String lonDeg = eLonDeg.getText().toString();
-                // right-pad decimal fraction
-                final String latDegFrac = padZerosRight(eLatMin.getText().toString(), 5);
-                final String lonDegFrac = padZerosRight(eLonMin.getText().toString(), 5);
-                final String latMin = eLatMin.getText().toString();
-                final String lonMin = eLonMin.getText().toString();
-                final String latMinFrac = eLatSec.getText().toString();
-                final String lonMinFrac = eLonSec.getText().toString();
-                final String latSec = eLatSec.getText().toString();
-                final String lonSec = eLonSec.getText().toString();
-                // right-pad seconds fraction
-                final String latSecFrac = padZerosRight(eLatSub.getText().toString(), 3);
-                final String lonSecFrac = padZerosRight(eLonSub.getText().toString(), 3);
+            // first normalize all the text fields
+            final String latDir = bLat.getText().toString();
+            final String lonDir = bLon.getText().toString();
+            final String latDeg = eLatDeg.getText().toString();
+            final String lonDeg = eLonDeg.getText().toString();
+            // right-pad decimal fraction
+            final String latDegFrac = padZerosRight(eLatMin.getText().toString(), 5);
+            final String lonDegFrac = padZerosRight(eLonMin.getText().toString(), 5);
+            final String latMin = eLatMin.getText().toString();
+            final String lonMin = eLonMin.getText().toString();
+            final String latMinFrac = eLatSec.getText().toString();
+            final String lonMinFrac = eLonSec.getText().toString();
+            final String latSec = eLatSec.getText().toString();
+            final String lonSec = eLonSec.getText().toString();
+            // right-pad seconds fraction
+            final String latSecFrac = padZerosRight(eLatSub.getText().toString(), 3);
+            final String lonSecFrac = padZerosRight(eLonSub.getText().toString(), 3);
 
-                switch (currentFormat) {
-                    case Deg:
-                        current = new Geopoint(latDir, latDeg, latDegFrac, lonDir, lonDeg, lonDegFrac);
-                        break;
-                    case Min:
-                        current = new Geopoint(latDir, latDeg, latMin, latMinFrac, lonDir, lonDeg, lonMin, lonMinFrac);
-                        break;
-                    case Sec:
-                        current = new Geopoint(latDir, latDeg, latMin, latSec, latSecFrac, lonDir, lonDeg, lonMin, lonSec, lonSecFrac);
-                        break;
-                    case Plain:
-                        // This case has been handled above
-                }
+            // then convert text to geopoint
+            Geopoint current = null;
+            switch (currentFormat) {
+                case Deg:
+                    current = new Geopoint(latDir, latDeg, latDegFrac, lonDir, lonDeg, lonDegFrac);
+                    break;
+                case Min:
+                    current = new Geopoint(latDir, latDeg, latMin, latMinFrac, lonDir, lonDeg, lonMin, lonMinFrac);
+                    break;
+                case Sec:
+                    current = new Geopoint(latDir, latDeg, latMin, latSec, latSecFrac, lonDir, lonDeg, lonMin, lonSec, lonSecFrac);
+                    break;
+                case Plain:
+                    current = new Geopoint(eLat.getText().toString(), eLon.getText().toString());
+                    break;
             }
             // The null check is necessary to keep FindBugs happy
             if (current != null && current.isValid()) {
@@ -484,10 +485,14 @@ public class CoordinatesInputDialog extends DialogFragment {
             currentFormat = CoordInputFormatEnum.fromInt(pos);
             Settings.setCoordInputFormat(currentFormat);
             updateGUI();
+
+            // select first field
+            orderedInputs.get(0).requestFocus();
         }
 
         @Override
         public void onNothingSelected(final AdapterView<?> arg0) {
+            // do nothing
         }
 
     }
@@ -550,6 +555,25 @@ public class CoordinatesInputDialog extends DialogFragment {
 
     public interface CoordinateUpdate {
         public void updateCoordinates(final Geopoint gp);
+    }
+
+    private class PadZerosOnFocusLostListener implements OnFocusChangeListener {
+
+        @Override
+        public void onFocusChange(final View v, final boolean hasFocus) {
+            if (!hasFocus) {
+                final EditText editText = (EditText) v;
+                final int maxLength = getMaxLengthFromCurrentField(editText);
+                if (editText.length() < maxLength) {
+                    if ((editText.getGravity() & Gravity.HORIZONTAL_GRAVITY_MASK) == Gravity.RIGHT) {
+                        editText.setText(StringUtils.leftPad(editText.getText().toString(), maxLength, '0'));
+                    }
+                    else {
+                        editText.setText(StringUtils.rightPad(editText.getText().toString(), maxLength, '0'));
+                    }
+                }
+            }
+        }
     }
 
 }
