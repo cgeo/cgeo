@@ -76,7 +76,7 @@ s.textContent =  '(' + function() {
 
     map.innerHTML = map.innerHTML.replace('Log Visit</span>', html);
   } else if(document.getElementById('searchResultsTable') != null){
-    // geocaching.com seach
+    // geocaching.com search
     
     $("#searchResultsTable th").first().after('<th class="mobile-show"><a class="outbound-link">Send to c:geo</a></th>');
     $("#searchResultsTable col").first().after('<col></col>');
@@ -90,7 +90,7 @@ s.textContent =  '(' + function() {
         var html = '<td class="mobile-show" >'
              + '<a href="https://send2.cgeo.org/add.html?cache=' + GCCode + '" '
              + 'onclick="window.s2geo(\'' + GCCode + '\'); return false;">'
-             + '<img height="50" src="http://send2.cgeo.org/content/images/send2cgeo.png" '
+             + '<img height="50" src="https://send2.cgeo.org/content/images/send2cgeo.png" '
              + 'border="0"> '
              + '</a></td>';
 
