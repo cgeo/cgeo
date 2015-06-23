@@ -844,6 +844,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     private void setComparator(final CacheComparator comparator) {
         adapter.setComparator(comparator);
+        currentInverseSort = adapter.getInverseSort();
     }
 
     @Override
