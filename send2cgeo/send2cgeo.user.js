@@ -12,7 +12,7 @@
 // @icon           http://send2.cgeo.org/content/images/logo.png
 // @downloadURL    https://send2.cgeo.org/send2cgeo.user.js
 // @updateURL      https://send2.cgeo.org/send2cgeo.user.js
-// @version        0.30
+// @version        0.31
 // ==/UserScript==
 
 // Inserts javascript that will be called by the s2cgeo button. The closure
