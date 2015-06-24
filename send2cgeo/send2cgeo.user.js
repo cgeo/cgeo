@@ -90,7 +90,7 @@ s.textContent =  '(' + function() {
         var html = '<td class="mobile-show" >'
              + '<a href="https://send2.cgeo.org/add.html?cache=' + GCCode + '" '
              + 'onclick="window.s2geo(\'' + GCCode + '\'); return false;">'
-             + '<img height="50" src="https://send2.cgeo.org/content/images/send2cgeo.png" '
+             + '<img height="50" src=" https://send2.cgeo.org/send2cgeo.png" '
              + 'border="0"> '
              + '</a></td>';
 
