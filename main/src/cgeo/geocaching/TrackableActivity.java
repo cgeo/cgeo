@@ -187,10 +187,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
         createViewPager(0, new OnPageSelectedListener() {
             @Override
             public void onPageSelected(final int position) {
-                // Lazy loading of trackable images
-                if (getPage(position) == Page.IMAGES) {
-                    loadTrackableImages();
-                }
+                lazyLoadTrackableImages();
             }
         });
         refreshTrackable(message);
@@ -217,6 +214,9 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
             public void call(final Trackable trackable) {
                 TrackableActivity.this.trackable = trackable;
                 displayTrackable();
+                // reset imagelist
+                imagesList = null;
+                lazyLoadTrackableImages();
             }
         }));
     }
@@ -408,6 +408,15 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
         }
         imagesList = new ImagesList(this, trackable.getGeocode());
         createSubscriptions.add(imagesList.loadImages(imageView, trackable.getImages(), false));
+    }
+
+    /**
+     * Start loading images only when on images tab
+     */
+    private void lazyLoadTrackableImages() {
+        if (isCurrentPage(Page.IMAGES)) {
+            loadTrackableImages();
+        }
     }
 
     @Override
