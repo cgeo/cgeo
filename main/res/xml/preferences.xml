@@ -331,6 +331,15 @@
                         android:layout="@layout/text_preference"
                         android:text="@string/init_gcvote_password_description" />
 
+                    <EditTextPreference
+                        android:dependency="@string/pref_ratingwanted"
+                        android:dialogTitle="@string/init_username"
+                        android:hint="@string/init_username"
+                        android:imeOptions="actionDone"
+                        android:key="@string/pref_user_vote"
+                        android:singleLine="true"
+                        android:title="@string/init_username"/>
+
                     <cgeo.geocaching.settings.EditPasswordPreference
                         android:dependency="@string/pref_ratingwanted"
                         android:dialogTitle="@string/init_password"
@@ -340,6 +349,10 @@
                         android:key="@string/pref_pass_vote"
                         android:singleLine="true"
                         android:title="@string/init_password" />
+
+                    <cgeo.geocaching.settings.CheckGCVoteCredentialsPreference
+                        android:dependency="@string/pref_ratingwanted"
+                        android:title="@string/init_login"/>
                 </PreferenceCategory>
                 <PreferenceCategory android:title="@string/settings_information" >
                     <Preference
