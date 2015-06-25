@@ -1,1 +1,0 @@
-../../../send2cgeo.user.js
