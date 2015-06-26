@@ -3,6 +3,7 @@ package cgeo.geocaching.gcvote;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
+import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.settings.Settings;
@@ -40,6 +41,46 @@ public final class GCVote {
 
     private GCVote() {
         // utility class
+    }
+
+    public static StatusCode login() {
+        final ImmutablePair<String, String> login = Settings.getGCVoteLogin();
+
+        if (login == null) {
+            Log.e("Credentials can't be retreived");
+            return StatusCode.NO_LOGIN_INFO_STORED;
+        }
+
+        final Parameters params = new Parameters("version", "cgeo", "userName", login.left, "password", login.right);
+
+        final InputStream response = Network.getResponseStream(Network.getRequest("http://gcvote.com/getVotes.php", params));
+
+        try {
+            final XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
+            final XmlPullParser xpp = factory.newPullParser();
+            xpp.setInput(response, Charsets.UTF_8.name());
+            int eventType = xpp.getEventType();
+            while (eventType != XmlPullParser.END_DOCUMENT) {
+                if (eventType == XmlPullParser.START_TAG) {
+                    final String tagName = xpp.getName();
+                    if (StringUtils.equals(tagName, "votes")) {
+                        if (StringUtils.equals(xpp.getAttributeValue(null, "loggedIn"), "true")) {
+                            Log.i("Successfully logged in gcvote.com as " + login.left);
+                            return StatusCode.NO_ERROR;
+                        } else {
+                            Log.e("Username or password is wrong");
+                            return StatusCode.WRONG_LOGIN_DATA;
+                        }
+                    }
+                }
+                eventType = xpp.next();
+            }
+        } catch (final Exception e) {
+            Log.e("Cannot parse GCVote result", e);
+            return StatusCode.UNKNOWN_ERROR;
+        }
+
+        return StatusCode.UNKNOWN_ERROR;
     }
 
     /**

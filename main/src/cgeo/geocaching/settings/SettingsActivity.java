@@ -155,6 +155,7 @@ public class SettingsActivity extends PreferenceActivity {
                 R.string.pref_ecusername, R.string.pref_ecpassword, R.string.pref_ec_icons }) {
             bindSummaryToStringValue(k);
         }
+        bindGeocachingUserToGCVoteuser();
     }
 
     private void initNavigationMenuPreferences() {
@@ -759,6 +760,18 @@ public class SettingsActivity extends PreferenceActivity {
                 .getString(pref.getKey(), "");
 
         bindSummaryToValue(pref, value);
+    }
+
+    private void bindGeocachingUserToGCVoteuser() {
+
+        if (!Settings.hasGCCredentials()) {
+            return;
+        }
+
+        final String value = Settings.getGcCredentials().getLeft();
+        getPreference(R.string.pref_user_vote).setSummary(value);
+        final Preference prefvote = getPreference(R.string.pref_user_vote);
+        bindSummaryToValue(prefvote, value);
     }
 
     @SuppressWarnings("deprecation")

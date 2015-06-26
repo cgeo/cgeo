@@ -46,6 +46,7 @@
     <string name="pref_connectorOXActive">connectorOXActive</string>
     <string name="pref_connectorGeokretyActive">connectorGeokretyActive</string>
     <string name="pref_geokrety_cache">geokretycache</string>
+    <string name="pref_user_vote">user-vote</string>
     <string name="pref_pass_vote">pass-vote</string>
     <string name="pref_twitter">twitter</string>
     <string name="pref_webDeviceName">webDeviceName</string>
