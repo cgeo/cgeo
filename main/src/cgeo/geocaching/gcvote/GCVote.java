@@ -67,10 +67,9 @@ public final class GCVote {
                         if (StringUtils.equals(xpp.getAttributeValue(null, "loggedIn"), "true")) {
                             Log.i("Successfully logged in gcvote.com as " + login.left);
                             return StatusCode.NO_ERROR;
-                        } else {
-                            Log.e("Username or password is wrong");
-                            return StatusCode.WRONG_LOGIN_DATA;
                         }
+                        Log.e("Username or password is wrong");
+                        return StatusCode.WRONG_LOGIN_DATA;
                     }
                 }
                 eventType = xpp.next();

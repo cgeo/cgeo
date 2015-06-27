@@ -13,18 +13,20 @@ import rx.Observable;
 
 public class CheckGCVoteCredentialsPreference extends AbstractCheckCredentialsPreference {
 
-    public CheckGCVoteCredentialsPreference(Context context, AttributeSet attrs) {
+    public CheckGCVoteCredentialsPreference(final Context context, final AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public CheckGCVoteCredentialsPreference(Context context, AttributeSet attrs, int defStyle) {
+    public CheckGCVoteCredentialsPreference(final Context context, final AttributeSet attrs, final int defStyle) {
         super(context, attrs, defStyle);
     }
 
+    @Override
     protected ImmutablePair<String, String> getCredentials() {
         return Settings.getGCVoteLogin();
     }
 
+    @Override
     protected ImmutablePair<StatusCode, Observable<Drawable>> login() {
         return new ImmutablePair<>(GCVote.login(), null);
     }
