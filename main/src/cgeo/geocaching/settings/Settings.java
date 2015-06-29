@@ -68,7 +68,10 @@ public class Settings {
             StringUtils.equals(Build.MODEL, "GT-S7580")  ||    // Samsung Galaxy Trend Plus
             StringUtils.equals(Build.MODEL, "GT-I9105P") ||    // Samsung Galaxy SII Plus
             StringUtils.equals(Build.MODEL, "ST25i")     ||    // Sony Xperia U
-            StringUtils.equals(Build.MODEL, "bq Aquaris 5");   // bq Aquaris 5
+            StringUtils.equals(Build.MODEL, "bq Aquaris 5") || // bq Aquaris 5
+            StringUtils.equals(Build.MODEL, "A1-810")    ||    // Unknown A1-810
+            StringUtils.equals(Build.MODEL, "GT-I9195")  ||    // Samsung S4 mini
+            StringUtils.equals(Build.MODEL, "GT-I8200N");      // Samsung S3 mini
 
     // twitter api keys
     private final static @NonNull String TWITTER_KEY_CONSUMER_PUBLIC = CryptUtils.rot13("ESnsCvAv3kEupF1GCR3jGj");
