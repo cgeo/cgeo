@@ -1,6 +1,6 @@
 package cgeo.geocaching.activity;
 
-import butterknife.InjectView;
+import butterknife.Bind;
 
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
@@ -59,9 +59,9 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
     @NonNull private String callback = StringUtils.EMPTY;
     private String OAtoken = null;
     private String OAtokenSecret = null;
-    @InjectView(R.id.start) protected Button startButton;
-    @InjectView(R.id.auth_1) protected TextView auth_1;
-    @InjectView(R.id.auth_2) protected TextView auth_2;
+    @Bind(R.id.start) protected Button startButton;
+    @Bind(R.id.auth_1) protected TextView auth_1;
+    @Bind(R.id.auth_2) protected TextView auth_2;
     private ProgressDialog requestTokenDialog = null;
     private ProgressDialog changeTokensDialog = null;
 

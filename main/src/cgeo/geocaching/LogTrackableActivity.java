@@ -1,7 +1,7 @@
 package cgeo.geocaching;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+import butterknife.Bind;
 
 import cgeo.geocaching.activity.Keyboard;
 import cgeo.geocaching.connector.ConnectorFactory;
@@ -64,15 +64,15 @@ import java.util.List;
 
 public class LogTrackableActivity extends AbstractLoggingActivity implements DateDialogParent, TimeDialogParent, CoordinateUpdate, LoaderManager.LoaderCallbacks<List<LogTypeTrackable>> {
 
-    @InjectView(R.id.type) protected Button typeButton;
-    @InjectView(R.id.date) protected Button dateButton;
-    @InjectView(R.id.time) protected Button timeButton;
-    @InjectView(R.id.geocode) protected EditText geocacheEditText;
-    @InjectView(R.id.coordinates) protected Button coordinatesButton;
-    @InjectView(R.id.tracking) protected EditText trackingEditText;
-    @InjectView(R.id.log) protected EditText logEditText;
-    @InjectView(R.id.tweet) protected CheckBox tweetCheck;
-    @InjectView(R.id.tweet_box) protected LinearLayout tweetBox;
+    @Bind(R.id.type) protected Button typeButton;
+    @Bind(R.id.date) protected Button dateButton;
+    @Bind(R.id.time) protected Button timeButton;
+    @Bind(R.id.geocode) protected EditText geocacheEditText;
+    @Bind(R.id.coordinates) protected Button coordinatesButton;
+    @Bind(R.id.tracking) protected EditText trackingEditText;
+    @Bind(R.id.log) protected EditText logEditText;
+    @Bind(R.id.tweet) protected CheckBox tweetCheck;
+    @Bind(R.id.tweet_box) protected LinearLayout tweetBox;
 
     private List<LogTypeTrackable> possibleLogTypesTrackable = new ArrayList<>();
     private String geocode = null;

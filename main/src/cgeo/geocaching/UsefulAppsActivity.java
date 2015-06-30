@@ -1,7 +1,7 @@
 package cgeo.geocaching;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+import butterknife.Bind;
 
 import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.compatibility.Compatibility;
@@ -23,12 +23,12 @@ import android.widget.TextView;
 
 public class UsefulAppsActivity extends AbstractActionBarActivity {
 
-    @InjectView(R.id.apps_list) protected ListView list;
+    @Bind(R.id.apps_list) protected ListView list;
 
     protected static class ViewHolder extends AbstractViewHolder {
-        @InjectView(R.id.title) protected TextView title;
-        @InjectView(R.id.image) protected ImageView image;
-        @InjectView(R.id.description) protected TextView description;
+        @Bind(R.id.title) protected TextView title;
+        @Bind(R.id.image) protected ImageView image;
+        @Bind(R.id.description) protected TextView description;
 
         public ViewHolder(final View rowView) {
             super(rowView);

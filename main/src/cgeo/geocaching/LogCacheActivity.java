@@ -1,7 +1,7 @@
 package cgeo.geocaching;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+import butterknife.Bind;
 
 import cgeo.geocaching.activity.ShowcaseViewBuilder;
 import cgeo.geocaching.connector.ConnectorFactory;
@@ -81,9 +81,9 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     private String text = null;
     private List<LogType> possibleLogTypes = new ArrayList<>();
     private final Set<TrackableLog> trackables = new HashSet<>();
-    protected @InjectView(R.id.tweet) CheckBox tweetCheck;
-    protected @InjectView(R.id.tweet_box) LinearLayout tweetBox;
-    protected @InjectView(R.id.log_password_box) LinearLayout logPasswordBox;
+    protected @Bind(R.id.tweet) CheckBox tweetCheck;
+    protected @Bind(R.id.tweet_box) LinearLayout tweetBox;
+    protected @Bind(R.id.log_password_box) LinearLayout logPasswordBox;
     private SparseArray<TrackableLog> actionButtons;
 
     private ILoggingManager loggingManager;

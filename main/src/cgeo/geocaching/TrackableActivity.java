@@ -1,7 +1,7 @@
 package cgeo.geocaching;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+import butterknife.Bind;
 
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.AbstractViewPagerActivity;
@@ -439,13 +439,13 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
 
     public class DetailsViewCreator extends AbstractCachingPageViewCreator<ScrollView> {
 
-        @InjectView(R.id.goal_box) protected LinearLayout goalBox;
-        @InjectView(R.id.goal) protected TextView goalTextView;
-        @InjectView(R.id.details_box) protected LinearLayout detailsBox;
-        @InjectView(R.id.details) protected TextView detailsTextView;
-        @InjectView(R.id.image_box) protected LinearLayout imageBox;
-        @InjectView(R.id.details_list) protected LinearLayout detailsList;
-        @InjectView(R.id.image) protected LinearLayout imageView;
+        @Bind(R.id.goal_box) protected LinearLayout goalBox;
+        @Bind(R.id.goal) protected TextView goalTextView;
+        @Bind(R.id.details_box) protected LinearLayout detailsBox;
+        @Bind(R.id.details) protected TextView detailsTextView;
+        @Bind(R.id.image_box) protected LinearLayout imageBox;
+        @Bind(R.id.details_list) protected LinearLayout detailsList;
+        @Bind(R.id.image) protected LinearLayout imageView;
 
         @Override
         public ScrollView getDispatchedView(final ViewGroup parentView) {

@@ -17,7 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+import butterknife.Bind;
 import rx.Subscription;
 import rx.android.app.AppObservable;
 import rx.functions.Action1;
@@ -25,8 +25,8 @@ import rx.subscriptions.Subscriptions;
 
 public class StatusFragment extends Fragment {
 
-    protected @InjectView(R.id.status_icon) ImageView statusIcon;
-    protected @InjectView(R.id.status_message) TextView statusMessage;
+    protected @Bind(R.id.status_icon) ImageView statusIcon;
+    protected @Bind(R.id.status_message) TextView statusMessage;
 
     private Subscription statusSubscription = Subscriptions.empty();
 

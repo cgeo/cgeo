@@ -1,7 +1,7 @@
 package cgeo.geocaching;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+import butterknife.Bind;
 
 import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.activity.ShowcaseViewBuilder;
@@ -45,16 +45,16 @@ import android.widget.ToggleButton;
 
 public class CompassActivity extends AbstractActionBarActivity {
 
-    @InjectView(R.id.nav_type) protected TextView navType;
-    @InjectView(R.id.nav_accuracy) protected TextView navAccuracy;
-    @InjectView(R.id.nav_satellites) protected TextView navSatellites;
-    @InjectView(R.id.nav_location) protected TextView navLocation;
-    @InjectView(R.id.distance) protected TextView distanceView;
-    @InjectView(R.id.heading) protected TextView headingView;
-    @InjectView(R.id.rose) protected CompassView compassView;
-    @InjectView(R.id.destination) protected TextView destinationTextView;
-    @InjectView(R.id.cacheinfo) protected TextView cacheInfoView;
-    @InjectView(R.id.use_compass) protected ToggleButton useCompassSwitch;
+    @Bind(R.id.nav_type) protected TextView navType;
+    @Bind(R.id.nav_accuracy) protected TextView navAccuracy;
+    @Bind(R.id.nav_satellites) protected TextView navSatellites;
+    @Bind(R.id.nav_location) protected TextView navLocation;
+    @Bind(R.id.distance) protected TextView distanceView;
+    @Bind(R.id.heading) protected TextView headingView;
+    @Bind(R.id.rose) protected CompassView compassView;
+    @Bind(R.id.destination) protected TextView destinationTextView;
+    @Bind(R.id.cacheinfo) protected TextView cacheInfoView;
+    @Bind(R.id.use_compass) protected ToggleButton useCompassSwitch;
 
     /**
      * Destination cache, may be null

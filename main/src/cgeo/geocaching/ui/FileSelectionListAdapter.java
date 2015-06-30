@@ -1,6 +1,6 @@
 package cgeo.geocaching.ui;
 
-import butterknife.InjectView;
+import butterknife.Bind;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.files.IFileSelectionView;
@@ -80,8 +80,8 @@ public class FileSelectionListAdapter extends ArrayAdapter<File> {
     }
 
     protected static final class ViewHolder extends AbstractViewHolder {
-        @InjectView(R.id.mapfilepath) protected TextView filepath;
-        @InjectView(R.id.mapfilename) protected TextView filename;
+        @Bind(R.id.mapfilepath) protected TextView filepath;
+        @Bind(R.id.mapfilename) protected TextView filename;
 
         public ViewHolder(final View view) {
             super(view);

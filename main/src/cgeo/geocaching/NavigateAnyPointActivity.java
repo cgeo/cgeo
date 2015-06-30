@@ -1,9 +1,5 @@
 package cgeo.geocaching;
 
-import butterknife.ButterKnife;
-import butterknife.InjectView;
-import butterknife.Optional;
-
 import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.activity.INavigationSource;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
@@ -24,9 +20,6 @@ import cgeo.geocaching.utils.RxUtils;
 
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.Nullable;
-
-import rx.functions.Action0;
-import rx.schedulers.Schedulers;
 
 import android.app.Activity;
 import android.content.Context;
@@ -53,17 +46,22 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import rx.functions.Action0;
+import rx.schedulers.Schedulers;
+
 public class NavigateAnyPointActivity extends AbstractActionBarActivity implements CoordinatesInputDialog.CoordinateUpdate, INavigationSource {
 
-    @InjectView(R.id.historyList) protected ListView historyListView;
+    @Bind(R.id.historyList) protected ListView historyListView;
 
     // list header fields are optional, due to being expanded later than the list itself
-    @Optional @InjectView(R.id.buttonLatitude) protected Button latButton;
-    @Optional @InjectView(R.id.buttonLongitude) protected Button lonButton;
-    @Optional @InjectView(R.id.distance) protected EditText distanceEditText;
-    @Optional @InjectView(R.id.distanceUnit) protected Spinner distanceUnitSelector;
-    @Optional @InjectView(R.id.current) protected Button buttonCurrent;
-    @Optional @InjectView(R.id.bearing) protected EditText bearingEditText;
+    @Nullable @Bind(R.id.buttonLatitude) protected Button latButton;
+    @Nullable @Bind(R.id.buttonLongitude) protected Button lonButton;
+    @Nullable @Bind(R.id.distance) protected EditText distanceEditText;
+    @Nullable @Bind(R.id.distanceUnit) protected Spinner distanceUnitSelector;
+    @Nullable @Bind(R.id.current) protected Button buttonCurrent;
+    @Nullable @Bind(R.id.bearing) protected EditText bearingEditText;
 
     private boolean changed = false;
     private List<Destination> historyOfSearchedLocations;
@@ -79,9 +77,9 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity implemen
     private String distanceUnit = StringUtils.EMPTY;
 
     protected static class ViewHolder extends AbstractViewHolder {
-        @InjectView(R.id.simple_way_point_longitude) protected TextView longitude;
-        @InjectView(R.id.simple_way_point_latitude) protected TextView latitude;
-        @InjectView(R.id.date) protected TextView date;
+        @Bind(R.id.simple_way_point_longitude) protected TextView longitude;
+        @Bind(R.id.simple_way_point_latitude) protected TextView latitude;
+        @Bind(R.id.date) protected TextView date;
 
         public ViewHolder(final View rowView) {
             super(rowView);
@@ -200,8 +198,8 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity implemen
             case CONTEXT_MENU_EDIT_WAYPOINT:
                 if (destination instanceof Destination) {
                     final Geopoint gp = ((Destination) destination).getCoords();
-                    latButton.setText(gp.format(GeopointFormatter.Format.LAT_DECMINUTE));
-                    lonButton.setText(gp.format(GeopointFormatter.Format.LON_DECMINUTE));
+                    getLatButton().setText(gp.format(GeopointFormatter.Format.LAT_DECMINUTE));
+                    getLonButton().setText(gp.format(GeopointFormatter.Format.LON_DECMINUTE));
                 }
                 return true;
             default:
@@ -248,19 +246,19 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity implemen
     }
 
     private void init() {
-        latButton.setOnClickListener(new CoordDialogListener());
-        lonButton.setOnClickListener(new CoordDialogListener());
+        getLatButton().setOnClickListener(new CoordDialogListener());
+        getLonButton().setOnClickListener(new CoordDialogListener());
 
         final Geopoint coords = Settings.getAnyCoordinates();
         if (coords != null) {
-            latButton.setText(coords.format(GeopointFormatter.Format.LAT_DECMINUTE));
-            lonButton.setText(coords.format(GeopointFormatter.Format.LON_DECMINUTE));
+            getLatButton().setText(coords.format(GeopointFormatter.Format.LAT_DECMINUTE));
+            getLonButton().setText(coords.format(GeopointFormatter.Format.LON_DECMINUTE));
         }
 
-        buttonCurrent.setOnClickListener(new CurrentListener());
+        getButtonCurrent().setOnClickListener(new CurrentListener());
 
         getDestionationHistoryAdapter().notifyDataSetChanged();
-        disableSuggestions(distanceEditText);
+        disableSuggestions(getDistanceEditText());
 
         initializeDistanceUnitSelector();
     }
@@ -268,15 +266,15 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity implemen
     private void initializeDistanceUnitSelector() {
         if (StringUtils.isBlank(distanceUnit)) {
             if (Settings.useImperialUnits()) {
-                distanceUnitSelector.setSelection(2); // ft
+                getDistanceUnitSelector().setSelection(2); // ft
                 distanceUnit = res.getStringArray(R.array.distance_units)[2];
             } else {
-                distanceUnitSelector.setSelection(0); // m
+                getDistanceUnitSelector().setSelection(0); // m
                 distanceUnit = res.getStringArray(R.array.distance_units)[0];
             }
         }
 
-        distanceUnitSelector.setOnItemSelectedListener(new ChangeDistanceUnit(this));
+        getDistanceUnitSelector().setOnItemSelectedListener(new ChangeDistanceUnit(this));
     }
 
     private class CoordDialogListener implements View.OnClickListener {
@@ -284,8 +282,8 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity implemen
         @Override
         public void onClick(final View arg0) {
             Geopoint gp = null;
-            if (latButton.getText().length() > 0 && lonButton.getText().length() > 0) {
-                gp = new Geopoint(latButton.getText().toString() + " " + lonButton.getText().toString());
+            if (getLatButton().getText().length() > 0 && getLonButton().getText().length() > 0) {
+                gp = new Geopoint(getLatButton().getText().toString() + " " + getLonButton().getText().toString());
             }
             final CoordinatesInputDialog coordsDialog = CoordinatesInputDialog.getInstance(null, gp, Sensors.getInstance().currentGeo());
             coordsDialog.setCancelable(true);
@@ -295,8 +293,8 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity implemen
     }
     @Override
     public void updateCoordinates(final Geopoint gp) {
-        latButton.setText(gp.format(GeopointFormatter.Format.LAT_DECMINUTE));
-        lonButton.setText(gp.format(GeopointFormatter.Format.LON_DECMINUTE));
+        getLatButton().setText(gp.format(GeopointFormatter.Format.LAT_DECMINUTE));
+        getLonButton().setText(gp.format(GeopointFormatter.Format.LON_DECMINUTE));
         changed = true;
     }
 
@@ -466,8 +464,8 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity implemen
         @Override
         public void updateGeoData(final GeoData geo) {
             try {
-                latButton.setHint(geo.getCoords().format(GeopointFormatter.Format.LAT_DECMINUTE_RAW));
-                lonButton.setHint(geo.getCoords().format(GeopointFormatter.Format.LON_DECMINUTE_RAW));
+                getLatButton().setHint(geo.getCoords().format(GeopointFormatter.Format.LAT_DECMINUTE_RAW));
+                getLonButton().setHint(geo.getCoords().format(GeopointFormatter.Format.LON_DECMINUTE_RAW));
             } catch (final RuntimeException e) {
                 Log.w("Failed to update location", e);
             }
@@ -479,18 +477,18 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity implemen
         @Override
         public void onClick(final View arg0) {
             final Geopoint coords = Sensors.getInstance().currentGeo().getCoords();
-            latButton.setText(coords.format(GeopointFormatter.Format.LAT_DECMINUTE));
-            lonButton.setText(coords.format(GeopointFormatter.Format.LON_DECMINUTE));
+            getLatButton().setText(coords.format(GeopointFormatter.Format.LAT_DECMINUTE));
+            getLonButton().setText(coords.format(GeopointFormatter.Format.LON_DECMINUTE));
             changed = false;
         }
     }
 
     private Geopoint getDestination() {
-        final String bearingText = bearingEditText.getText().toString();
+        final String bearingText = getBearingEditText().getText().toString();
         // combine distance from EditText and distanceUnit saved from Spinner
-        final String distanceText = distanceEditText.getText().toString() + distanceUnit;
-        final String latText = latButton.getText().toString();
-        final String lonText = lonButton.getText().toString();
+        final String distanceText = getDistanceEditText().getText().toString() + distanceUnit;
+        final String latText = getLatButton().getText().toString();
+        final String lonText = getLonButton().getText().toString();
 
         if (StringUtils.isBlank(bearingText) && StringUtils.isBlank(distanceText)
                 && StringUtils.isBlank(latText) && StringUtils.isBlank(lonText)) {
@@ -555,4 +553,29 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity implemen
     public void startDefaultNavigation2() {
         NavigationAppFactory.startDefaultNavigationApplication(2, this, getDestinationAndAddToHistory());
     }
+
+    private Button getLatButton() {
+        return latButton;
+    }
+
+    private Button getLonButton() {
+        return lonButton;
+    }
+
+    private EditText getDistanceEditText() {
+        return distanceEditText;
+    }
+
+    private Spinner getDistanceUnitSelector() {
+        return distanceUnitSelector;
+    }
+
+    private Button getButtonCurrent() {
+        return buttonCurrent;
+    }
+
+    private EditText getBearingEditText() {
+        return bearingEditText;
+    }
+
 }

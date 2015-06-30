@@ -1,6 +1,6 @@
 package cgeo.geocaching.ui;
 
-import butterknife.InjectView;
+import butterknife.Bind;
 
 import cgeo.geocaching.CacheDetailActivity;
 import cgeo.geocaching.Geocache;
@@ -107,15 +107,15 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
      *
      */
     protected static class ViewHolder extends AbstractViewHolder {
-        @InjectView(R.id.checkbox) protected CheckBox checkbox;
-        @InjectView(R.id.log_status_mark) protected ImageView logStatusMark;
-        @InjectView(R.id.text) protected TextView text;
-        @InjectView(R.id.distance) protected DistanceView distance;
-        @InjectView(R.id.favorite) protected TextView favorite;
-        @InjectView(R.id.info) protected TextView info;
-        @InjectView(R.id.inventory) protected TextView inventory;
-        @InjectView(R.id.direction) protected CompassMiniView direction;
-        @InjectView(R.id.dirimg) protected ImageView dirImg;
+        @Bind(R.id.checkbox) protected CheckBox checkbox;
+        @Bind(R.id.log_status_mark) protected ImageView logStatusMark;
+        @Bind(R.id.text) protected TextView text;
+        @Bind(R.id.distance) protected DistanceView distance;
+        @Bind(R.id.favorite) protected TextView favorite;
+        @Bind(R.id.info) protected TextView info;
+        @Bind(R.id.inventory) protected TextView inventory;
+        @Bind(R.id.direction) protected CompassMiniView direction;
+        @Bind(R.id.dirimg) protected ImageView dirImg;
         public Geocache cache = null;
 
         public ViewHolder(final View view) {

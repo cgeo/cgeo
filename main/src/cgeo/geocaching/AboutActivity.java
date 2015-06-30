@@ -1,8 +1,5 @@
 package cgeo.geocaching;
 
-import butterknife.ButterKnife;
-import butterknife.InjectView;
-
 import cgeo.geocaching.activity.AbstractViewPagerActivity;
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.ui.AbstractCachingPageViewCreator;
@@ -34,14 +31,17 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page> {
 
     private static final String EXTRA_ABOUT_STARTPAGE = "cgeo.geocaching.extra.about.startpage";
 
     class LicenseViewCreator extends AbstractCachingPageViewCreator<ScrollView> {
 
-        @InjectView(R.id.license) protected TextView licenseLink;
-        @InjectView(R.id.license_text) protected TextView licenseText;
+        @Bind(R.id.license) protected TextView licenseLink;
+        @Bind(R.id.license_text) protected TextView licenseText;
 
         @Override
         public ScrollView getDispatchedView(final ViewGroup parentView) {
@@ -72,7 +72,7 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
 
     class ContributorsViewCreator extends AbstractCachingPageViewCreator<ScrollView> {
 
-        @InjectView(R.id.contributors) protected TextView contributors;
+        @Bind(R.id.contributors) protected TextView contributors;
 
         @Override
         public ScrollView getDispatchedView(final ViewGroup parentView) {
@@ -86,9 +86,9 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
 
     class ChangeLogViewCreator extends AbstractCachingPageViewCreator<ScrollView> {
 
-        @InjectView(R.id.changelog_master) protected TextView changeLogMaster;
-        @InjectView(R.id.changelog_release) protected TextView changeLogRelease;
-        @InjectView(R.id.changelog_github) protected TextView changeLogLink;
+        @Bind(R.id.changelog_master) protected TextView changeLogMaster;
+        @Bind(R.id.changelog_release) protected TextView changeLogRelease;
+        @Bind(R.id.changelog_github) protected TextView changeLogLink;
 
         @Override
         public ScrollView getDispatchedView(final ViewGroup parentView) {
@@ -115,8 +115,8 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
 
     class SystemViewCreator extends AbstractCachingPageViewCreator<ScrollView> {
 
-        @InjectView(R.id.system) protected TextView system;
-        @InjectView(R.id.copy) protected Button copy;
+        @Bind(R.id.system) protected TextView system;
+        @Bind(R.id.copy) protected Button copy;
 
         @Override
         public ScrollView getDispatchedView(final ViewGroup parentView) {
@@ -139,12 +139,12 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
 
     class HelpViewCreator extends AbstractCachingPageViewCreator<ScrollView> {
 
-        @InjectView(R.id.support) protected TextView support;
-        @InjectView(R.id.website) protected TextView website;
-        @InjectView(R.id.facebook) protected TextView facebook;
-        @InjectView(R.id.twitter) protected TextView twitter;
-        @InjectView(R.id.market) protected TextView market;
-        @InjectView(R.id.faq) protected TextView faq;
+        @Bind(R.id.support) protected TextView support;
+        @Bind(R.id.website) protected TextView website;
+        @Bind(R.id.facebook) protected TextView facebook;
+        @Bind(R.id.twitter) protected TextView twitter;
+        @Bind(R.id.market) protected TextView market;
+        @Bind(R.id.faq) protected TextView faq;
 
         @Override
         public ScrollView getDispatchedView(final ViewGroup parentView) {
@@ -170,8 +170,8 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
 
     class VersionViewCreator extends AbstractCachingPageViewCreator<ScrollView> {
 
-        @InjectView(R.id.about_version_string) protected TextView version;
-        @InjectView(R.id.donate) protected TextView donateButton;
+        @Bind(R.id.about_version_string) protected TextView version;
+        @Bind(R.id.donate) protected TextView donateButton;
 
         @Override
         public ScrollView getDispatchedView(final ViewGroup parentView) {

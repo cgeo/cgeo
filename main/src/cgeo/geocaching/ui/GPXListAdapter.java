@@ -1,6 +1,6 @@
 package cgeo.geocaching.ui;
 
-import butterknife.InjectView;
+import butterknife.Bind;
 
 import cgeo.geocaching.GpxFileListActivity;
 import cgeo.geocaching.R;
@@ -25,8 +25,8 @@ public class GPXListAdapter extends ArrayAdapter<File> {
     private final LayoutInflater inflater;
 
     protected static class ViewHolder extends AbstractViewHolder {
-        @InjectView(R.id.filepath) protected TextView filepath;
-        @InjectView(R.id.filename) protected TextView filename;
+        @Bind(R.id.filepath) protected TextView filepath;
+        @Bind(R.id.filename) protected TextView filename;
 
         public ViewHolder(final View view) {
             super(view);

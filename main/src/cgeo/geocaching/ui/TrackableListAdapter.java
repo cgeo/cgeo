@@ -1,6 +1,6 @@
 package cgeo.geocaching.ui;
 
-import butterknife.InjectView;
+import butterknife.Bind;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.Trackable;
@@ -20,8 +20,8 @@ public class TrackableListAdapter extends ArrayAdapter<Trackable> {
     final private LayoutInflater inflater;
 
     protected static final class ViewHolder extends AbstractViewHolder {
-        @InjectView(R.id.trackable_image_brand) protected ImageView imageBrand;
-        @InjectView(R.id.trackable_name) protected TextView name;
+        @Bind(R.id.trackable_image_brand) protected ImageView imageBrand;
+        @Bind(R.id.trackable_name) protected TextView name;
 
         public ViewHolder(final View view) {
             super(view);

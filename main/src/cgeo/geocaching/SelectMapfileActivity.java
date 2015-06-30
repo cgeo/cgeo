@@ -1,7 +1,7 @@
 package cgeo.geocaching;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+import butterknife.Bind;
 
 import cgeo.geocaching.files.AbstractFileListActivity;
 import cgeo.geocaching.files.IFileSelectionView;
@@ -29,7 +29,7 @@ public class SelectMapfileActivity extends AbstractFileListActivity<FileSelectio
         super("map");
     }
 
-    @InjectView(R.id.select_dir) protected Button selectDirectory;
+    @Bind(R.id.select_dir) protected Button selectDirectory;
 
     private String mapFile;
 

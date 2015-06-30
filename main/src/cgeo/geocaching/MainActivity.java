@@ -1,7 +1,7 @@
 package cgeo.geocaching;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+import butterknife.Bind;
 
 import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.activity.ShowcaseViewBuilder;
@@ -79,19 +79,19 @@ import java.util.Comparator;
 import java.util.List;
 
 public class MainActivity extends AbstractActionBarActivity {
-    @InjectView(R.id.nav_satellites) protected TextView navSatellites;
-    @InjectView(R.id.filter_button_title) protected TextView filterTitle;
-    @InjectView(R.id.map) protected ImageView findOnMap;
-    @InjectView(R.id.search_offline) protected ImageView findByOffline;
-    @InjectView(R.id.advanced_button) protected ImageView advanced;
-    @InjectView(R.id.any_button) protected ImageView any;
-    @InjectView(R.id.filter_button) protected ImageView filter;
-    @InjectView(R.id.nearest) protected ImageView nearestView;
-    @InjectView(R.id.nav_type) protected TextView navType;
-    @InjectView(R.id.nav_accuracy) protected TextView navAccuracy;
-    @InjectView(R.id.nav_location) protected TextView navLocation;
-    @InjectView(R.id.offline_count) protected TextView countBubble;
-    @InjectView(R.id.info_area) protected LinearLayout infoArea;
+    @Bind(R.id.nav_satellites) protected TextView navSatellites;
+    @Bind(R.id.filter_button_title) protected TextView filterTitle;
+    @Bind(R.id.map) protected ImageView findOnMap;
+    @Bind(R.id.search_offline) protected ImageView findByOffline;
+    @Bind(R.id.advanced_button) protected ImageView advanced;
+    @Bind(R.id.any_button) protected ImageView any;
+    @Bind(R.id.filter_button) protected ImageView filter;
+    @Bind(R.id.nearest) protected ImageView nearestView;
+    @Bind(R.id.nav_type) protected TextView navType;
+    @Bind(R.id.nav_accuracy) protected TextView navAccuracy;
+    @Bind(R.id.nav_location) protected TextView navLocation;
+    @Bind(R.id.offline_count) protected TextView countBubble;
+    @Bind(R.id.info_area) protected LinearLayout infoArea;
 
     public static final int SETTINGS_ACTIVITY_REQUEST_CODE = 1;
     public static final int SEARCH_REQUEST_CODE = 2;

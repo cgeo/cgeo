@@ -1,7 +1,7 @@
 package cgeo.geocaching;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+import butterknife.Bind;
 
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.compatibility.Compatibility;
@@ -24,10 +24,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class WaypointPopupFragment extends AbstractDialogFragment {
-    @InjectView(R.id.actionbar_title) protected TextView actionBarTitle;
-    @InjectView(R.id.waypoint_details_list) protected LinearLayout waypointDetailsLayout;
-    @InjectView(R.id.edit) protected Button buttonEdit;
-    @InjectView(R.id.details_list) protected LinearLayout cacheDetailsLayout;
+    @Bind(R.id.actionbar_title) protected TextView actionBarTitle;
+    @Bind(R.id.waypoint_details_list) protected LinearLayout waypointDetailsLayout;
+    @Bind(R.id.edit) protected Button buttonEdit;
+    @Bind(R.id.details_list) protected LinearLayout cacheDetailsLayout;
 
     private int waypointId = 0;
     private Waypoint waypoint = null;

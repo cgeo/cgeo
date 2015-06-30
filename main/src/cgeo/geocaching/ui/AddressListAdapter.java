@@ -1,6 +1,6 @@
 package cgeo.geocaching.ui;
 
-import butterknife.InjectView;
+import butterknife.Bind;
 
 import cgeo.geocaching.CacheListActivity;
 import cgeo.geocaching.R;
@@ -28,8 +28,8 @@ public class AddressListAdapter extends ArrayAdapter<Address> {
     @NonNull final private Geopoint location;
 
     protected static final class ViewHolder extends AbstractViewHolder {
-        @InjectView(R.id.label) protected TextView label;
-        @InjectView(R.id.distance) protected TextView distance;
+        @Bind(R.id.label) protected TextView label;
+        @Bind(R.id.distance) protected TextView distance;
 
         public ViewHolder(final View view) {
             super(view);

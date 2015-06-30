@@ -1,7 +1,7 @@
 package cgeo.geocaching;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+import butterknife.Bind;
 
 import cgeo.calendar.CalendarAddon;
 import cgeo.geocaching.activity.AbstractActivity;
@@ -1391,11 +1391,11 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
     protected class DescriptionViewCreator extends AbstractCachingPageViewCreator<ScrollView> {
 
-        @InjectView(R.id.personalnote) protected TextView personalNoteView;
-        @InjectView(R.id.shortdesc) protected IndexOutOfBoundsAvoidingTextView shortDescView;
-        @InjectView(R.id.longdesc) protected IndexOutOfBoundsAvoidingTextView longDescView;
-        @InjectView(R.id.show_description) protected Button showDesc;
-        @InjectView(R.id.loading) protected View loadingView;
+        @Bind(R.id.personalnote) protected TextView personalNoteView;
+        @Bind(R.id.shortdesc) protected IndexOutOfBoundsAvoidingTextView shortDescView;
+        @Bind(R.id.longdesc) protected IndexOutOfBoundsAvoidingTextView longDescView;
+        @Bind(R.id.show_description) protected Button showDesc;
+        @Bind(R.id.loading) protected View loadingView;
 
         @Override
         public ScrollView getDispatchedView(final ViewGroup parentView) {

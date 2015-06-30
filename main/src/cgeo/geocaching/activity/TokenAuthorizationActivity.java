@@ -1,6 +1,6 @@
 package cgeo.geocaching.activity;
 
-import butterknife.InjectView;
+import butterknife.Bind;
 
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
@@ -47,12 +47,12 @@ public abstract class TokenAuthorizationActivity extends AbstractActivity {
     @NonNull private String fieldUsername = StringUtils.EMPTY;
     @NonNull private String fieldPassword = StringUtils.EMPTY;
 
-    @InjectView(R.id.start) protected Button startButton;
-    @InjectView(R.id.register) protected Button registerButton;
-    @InjectView(R.id.auth_1) protected TextView auth1;
-    @InjectView(R.id.auth_2) protected TextView auth2;
-    @InjectView(R.id.username) protected EditText usernameEditText;
-    @InjectView(R.id.password) protected EditText passwordEditText;
+    @Bind(R.id.start) protected Button startButton;
+    @Bind(R.id.register) protected Button registerButton;
+    @Bind(R.id.auth_1) protected TextView auth1;
+    @Bind(R.id.auth_2) protected TextView auth2;
+    @Bind(R.id.username) protected EditText usernameEditText;
+    @Bind(R.id.password) protected EditText passwordEditText;
 
     private ProgressDialog requestTokenDialog = null;
 

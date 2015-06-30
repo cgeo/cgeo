@@ -1,7 +1,7 @@
 package cgeo.geocaching;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+import butterknife.Bind;
 
 import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.files.LocalStorage;
@@ -40,14 +40,14 @@ import java.io.OutputStream;
 
 public class ImageSelectActivity extends AbstractActionBarActivity {
 
-    @InjectView(R.id.caption) protected EditText captionView;
-    @InjectView(R.id.description) protected EditText descriptionView;
-    @InjectView(R.id.logImageScale) protected Spinner scaleView;
-    @InjectView(R.id.camera) protected Button cameraButton;
-    @InjectView(R.id.stored) protected Button storedButton;
-    @InjectView(R.id.save) protected Button saveButton;
-    @InjectView(R.id.cancel) protected Button clearButton;
-    @InjectView(R.id.image_preview) protected ImageView imagePreview;
+    @Bind(R.id.caption) protected EditText captionView;
+    @Bind(R.id.description) protected EditText descriptionView;
+    @Bind(R.id.logImageScale) protected Spinner scaleView;
+    @Bind(R.id.camera) protected Button cameraButton;
+    @Bind(R.id.stored) protected Button storedButton;
+    @Bind(R.id.save) protected Button saveButton;
+    @Bind(R.id.cancel) protected Button clearButton;
+    @Bind(R.id.image_preview) protected ImageView imagePreview;
 
     private static final String SAVED_STATE_IMAGE_CAPTION = "cgeo.geocaching.saved_state_image_caption";
     private static final String SAVED_STATE_IMAGE_DESCRIPTION = "cgeo.geocaching.saved_state_image_description";

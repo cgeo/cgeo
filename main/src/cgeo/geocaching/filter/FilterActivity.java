@@ -1,7 +1,7 @@
 package cgeo.geocaching.filter;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+import butterknife.Bind;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractActionBarActivity;
@@ -41,8 +41,8 @@ public class FilterActivity extends AbstractActionBarActivity {
     private static final String KEY_FILTER_NAME = "filterName";
     private static final String KEY_FILTER_GROUP_NAME = "filterGroupName";
 
-    @InjectView(R.id.filterList) protected ExpandableListView filterList;
-    @InjectView(R.id.filters) protected LinearLayout filtersContainer;
+    @Bind(R.id.filterList) protected ExpandableListView filterList;
+    @Bind(R.id.filters) protected LinearLayout filtersContainer;
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
