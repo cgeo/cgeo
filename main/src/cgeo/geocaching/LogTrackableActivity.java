@@ -140,7 +140,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.logtrackable_activity);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
 
         // get parameters
         final Bundle extras = getIntent().getExtras();

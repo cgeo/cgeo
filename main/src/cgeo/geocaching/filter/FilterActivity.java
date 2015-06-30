@@ -47,7 +47,7 @@ public class FilterActivity extends AbstractActionBarActivity {
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.filter_activity);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
 
         createListAdapter();
     }

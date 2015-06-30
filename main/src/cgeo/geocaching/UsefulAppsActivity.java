@@ -69,7 +69,7 @@ public class UsefulAppsActivity extends AbstractActionBarActivity {
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.usefulapps_activity);
 
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
 
         list.setAdapter(new ArrayAdapter<HelperApp>(this, R.layout.usefulapps_item, HELPER_APPS) {
             @Override

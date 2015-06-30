@@ -1405,7 +1405,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             }
 
             view = (ScrollView) getLayoutInflater().inflate(R.layout.cachedetail_description_page, parentView, false);
-            ButterKnife.inject(this, view);
+            ButterKnife.bind(this, view);
 
             // cache short description
             if (StringUtils.isNotBlank(cache.getShortDescription())) {

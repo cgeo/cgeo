@@ -38,7 +38,7 @@ public class SelectMapfileActivity extends AbstractFileListActivity<FileSelectio
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
 
         mapFile = Settings.getMapFile();
 

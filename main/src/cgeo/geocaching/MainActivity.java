@@ -207,7 +207,7 @@ public class MainActivity extends AbstractActionBarActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
         setContentView(R.layout.main_activity);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
 
         if ((getIntent().getFlags() & Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT) != 0) {
             // If we had been open already, start from the last used activity.

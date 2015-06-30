@@ -108,7 +108,7 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
         // set title in code, as the activity needs a hard coded title due to the intent filters
         setTitle(res.getString(R.string.search));
 
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
         init();
     }
 

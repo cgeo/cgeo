@@ -71,7 +71,7 @@ public class CompassActivity extends AbstractActionBarActivity {
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         onCreate(savedInstanceState, R.layout.compass_activity);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
 
         // get parameters
         final Bundle extras = getIntent().getExtras();
@@ -146,7 +146,7 @@ public class CompassActivity extends AbstractActionBarActivity {
         super.onConfigurationChanged(newConfig);
 
         setContentView(R.layout.compass_activity);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
         setTarget(dstCoords, description);
 
         forceRefresh();

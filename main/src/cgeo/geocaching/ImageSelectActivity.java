@@ -66,7 +66,7 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.imageselect_activity);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
 
         scaleChoiceIndex = Settings.getLogImageScale();
         imageCaption = "";

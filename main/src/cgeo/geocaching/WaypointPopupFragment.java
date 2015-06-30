@@ -37,7 +37,7 @@ public class WaypointPopupFragment extends AbstractDialogFragment {
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
         final View  v = inflater.inflate(R.layout.waypoint_popup, container, false);
         initCustomActionBar(v);
-        ButterKnife.inject(this,v);
+        ButterKnife.bind(this,v);
 
         return v;
     }

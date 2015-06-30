@@ -18,7 +18,7 @@
 	<properties>
 		<AndroidAnnotationsVersion>3.3.1</AndroidAnnotationsVersion>
 
-		<ButterKnifeVersion>6.1.0</ButterKnifeVersion>
+		<ButterKnifeVersion>7.0.0</ButterKnifeVersion>
 
 		<CommonsCollections4Version>4.0</CommonsCollections4Version>
 		<CommonsIoVersion>2.4</CommonsIoVersion>
@@ -26,11 +26,11 @@
 
 		<FindbugsAnnotationsVersion>3.0.0</FindbugsAnnotationsVersion>
 
-		<JacksonAnnotationsVersion>2.5.4</JacksonAnnotationsVersion>
-		<JacksonCoreVersion>2.5.4</JacksonCoreVersion>
-		<JacksonDatabindVersion>2.5.4</JacksonDatabindVersion>
+		<JacksonAnnotationsVersion>2.6.0-rc3</JacksonAnnotationsVersion>
+		<JacksonCoreVersion>2.6.0-rc3</JacksonCoreVersion>
+		<JacksonDatabindVersion>2.6.0-rc3</JacksonDatabindVersion>
 
-		<RXAndroidVersion>0.24.0</RXAndroidVersion>
+		<RXAndroidVersion>0.25.0</RXAndroidVersion>
 		<RXJavaVersion>1.0.12</RXJavaVersion>
 	</properties>
 

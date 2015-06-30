@@ -46,7 +46,7 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
         @Override
         public ScrollView getDispatchedView(final ViewGroup parentView) {
             final ScrollView view = (ScrollView) getLayoutInflater().inflate(R.layout.about_license_page, parentView, false);
-            ButterKnife.inject(this, view);
+            ButterKnife.bind(this, view);
             setClickListener(licenseLink, "http://www.apache.org/licenses/LICENSE-2.0.html");
             licenseText.setText(getRawResourceString(R.raw.license));
             return view;
@@ -77,7 +77,7 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
         @Override
         public ScrollView getDispatchedView(final ViewGroup parentView) {
             final ScrollView view = (ScrollView) getLayoutInflater().inflate(R.layout.about_contributors_page, parentView, false);
-            ButterKnife.inject(this, view);
+            ButterKnife.bind(this, view);
             contributors.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
             return view;
         }
@@ -93,7 +93,7 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
         @Override
         public ScrollView getDispatchedView(final ViewGroup parentView) {
             final ScrollView view = (ScrollView) getLayoutInflater().inflate(R.layout.about_changes_page, parentView, false);
-            ButterKnife.inject(this, view);
+            ButterKnife.bind(this, view);
             changeLogRelease.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
             final String changeLogMasterString = getString(R.string.changelog_master);
             if (StringUtils.isBlank(changeLogMasterString)) {
@@ -121,7 +121,7 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
         @Override
         public ScrollView getDispatchedView(final ViewGroup parentView) {
             final ScrollView view = (ScrollView) getLayoutInflater().inflate(R.layout.about_system_page, parentView, false);
-            ButterKnife.inject(this, view);
+            ButterKnife.bind(this, view);
             final String systemInfo = SystemInformation.getSystemInformation(AboutActivity.this);
             system.setText(systemInfo);
             system.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
@@ -149,7 +149,7 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
         @Override
         public ScrollView getDispatchedView(final ViewGroup parentView) {
             final ScrollView view = (ScrollView) getLayoutInflater().inflate(R.layout.about_help_page, parentView, false);
-            ButterKnife.inject(this, view);
+            ButterKnife.bind(this, view);
             setClickListener(support, "mailto:support@cgeo.org?subject=" + Uri.encode("cgeo " + Version.getVersionName(AboutActivity.this)) +
                     "&body=" + Uri.encode(SystemInformation.getSystemInformation(AboutActivity.this)) + "\n");
             setClickListener(website, "http://www.cgeo.org/");
@@ -176,7 +176,7 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
         @Override
         public ScrollView getDispatchedView(final ViewGroup parentView) {
             final ScrollView view = (ScrollView) getLayoutInflater().inflate(R.layout.about_version_page, parentView, false);
-            ButterKnife.inject(this, view);
+            ButterKnife.bind(this, view);
             version.setText(Version.getVersionName(AboutActivity.this));
             setClickListener(donateButton, "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=AQBS7UP76CXW2");
             return view;

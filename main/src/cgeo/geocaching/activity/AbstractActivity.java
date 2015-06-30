@@ -136,7 +136,7 @@ public abstract class AbstractActivity extends ActionBarActivity implements IAbs
         setContentView(resourceLayoutID);
 
         // create view variables
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
     }
 
     private void initializeCommonFields() {

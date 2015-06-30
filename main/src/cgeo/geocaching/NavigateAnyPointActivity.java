@@ -135,7 +135,7 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity implemen
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.navigateanypoint_activity);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
 
         createHistoryView();
         init();
@@ -146,7 +146,7 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity implemen
         historyListView.addHeaderView(pointControls, null, false);
 
         // inject a second time to also find the dynamically expanded views above
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
 
         if (getHistoryOfSearchedLocations().isEmpty()) {
             historyListView.addFooterView(getEmptyHistoryFooter(), null, false);

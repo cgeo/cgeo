@@ -450,7 +450,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
         @Override
         public ScrollView getDispatchedView(final ViewGroup parentView) {
             view = (ScrollView) getLayoutInflater().inflate(R.layout.trackable_details_view, parentView, false);
-            ButterKnife.inject(this, view);
+            ButterKnife.bind(this, view);
 
             final CacheDetailsCreator details = new CacheDetailsCreator(TrackableActivity.this, detailsList);
 
