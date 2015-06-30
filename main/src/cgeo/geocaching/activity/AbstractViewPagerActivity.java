@@ -299,6 +299,27 @@ public abstract class AbstractViewPagerActivity<Page extends Enum<Page>> extends
     }
 
     /**
+     * Insert page at the position it should be.
+     * If page has no position, page is not added.
+     *
+     * @param page
+     *          the page to add.
+     */
+    protected final void insertPage(final Page page) {
+        if (getPageIndex(page) > -1) {
+            // page already present
+            return;
+        }
+        final int position = getOrderedPages().getLeft().indexOf(page);
+        if (position < 0) {
+            // page should not be inserted
+            return;
+        }
+        pageOrder.add(position, page);
+        viewPagerAdapter.notifyDataSetChanged();
+    }
+
+    /**
      * @return the currently available list of ordered pages, together with the index of the default page
      */
     protected abstract Pair<List<? extends Page>, Integer> getOrderedPages();
