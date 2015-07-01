@@ -221,6 +221,7 @@
   <string name="info_cache_saved">Cachen har lagrats lokalt</string>
   <string name="err_trackable_log_not_anonymous">Loggning av %1$s från c:geo kan inte göras anonymt. Vill du öppna inställningarna för att fylla i din inloggningsinformation från %2$s?</string>
   <string name="err_trackable_no_preference_activity">Tyvärr kan inte en lämplig inställningsskärm hittas.</string>
+  <string name="warn_discard_changes">Ej sparade ändringar av punkt slängdes!</string>
   <string name="loc_last">Senast kända</string>
   <string name="loc_net">Nätverk</string>
   <string name="loc_fused">Kombinerad</string>
@@ -360,16 +361,20 @@
   <string name="settings_title_services">Tjänster</string>
   <string name="settings_summary_services">Ställ in kontoinformation och tillgång till valbara tjänster.</string>
   <string name="settings_title_appearance">Utseende</string>
+  <string name="settings_summary_appearance">Ställ in enheter för avstånd, språk och färger i appen.</string>
   <string name="settings_title_cachedetails">Cachedetaljer</string>
+  <string name="settings_summary_cachedetails">Anpassa utseende på cacheinformation.</string>
   <string name="settings_title_offlinedata">Offlinedata</string>
   <string name="settings_title_logging">Loggning</string>
   <string name="settings_title_map">Karta</string>
+  <string name="settings_summary_map">Inställningar för kartkälla, offline kartor och kartdetaljer.</string>
   <string name="settings_title_map_data">Kartdata</string>
   <string name="settings_title_map_content">Kartinnehåll</string>
   <string name="settings_title_gpx">GPX</string>
   <string name="settings_title_basicmembers">Inställningar för Basic Members</string>
   <string name="settings_title_navigation">Navigering</string>
   <string name="settings_title_system">System</string>
+  <string name="settings_summary_system">Ta backup eller återställ, konfigurera sökvägar och andra systeminställningar.</string>
   <string name="settings_title_navigation_menu">Navigeringsmeny</string>
   <string name="settings_category_browser">Webbläsare</string>
   <string name="settings_category_geocaching">Geocaching</string>
@@ -425,6 +430,7 @@
   <string name="init_authorization_credential_username">Användarnamn</string>
   <string name="init_authorization_credential_password">Lösenord</string>
   <string name="settings_service_active">Aktiv</string>
+  <string name="settings_navigation_disabled">Appen verkar inte vara installerad</string>
   <string name="init_signature">Signatur</string>
   <string name="init_template_help">Markörer som [NAME] kommer att utvidgas senare när mallen används.</string>
   <string name="init_signature_template_button">Infoga makro</string>
@@ -713,6 +719,7 @@
   <string name="cache_menu_vote">Rösta</string>
   <string name="cache_menu_checker">Öppna Geochecker</string>
   <string name="cache_menu_ignore">Ignorera cache</string>
+  <string name="ignore_confirm_title">Var försiktig</string>
   <string name="cache_status">Status</string>
   <string name="cache_status_offline_log">Sparad logg</string>
   <string name="cache_status_found">Hittad</string>
@@ -779,8 +786,8 @@
   <string name="gpx_import_select_list_title">Importera GPX till lista</string>
   <string name="gpx_import_android">Importera från Android</string>
   <string name="map_file_select_title">Välj kartfil</string>
-  <string name="web_import_title">Importerar från webben</string>
-  <string name="web_import_waiting">Väntar på nya cacher från webben…</string>
+  <string name="web_import_title">Importera från send2cgeo</string>
+  <string name="web_import_waiting">Väntar på nya cacher från send2cgeo…</string>
   <string name="web_downloading">Laddar ner</string>
   <string name="web_downloaded">Nerladdat</string>
   <string name="popup_more">Mer information</string>
@@ -948,6 +955,7 @@
   <string name="helper_google_translate_description">Om du hämtar översättningspaket i Google Translate appen, kan du enkelt översätta cachebeskrivningar i c:geo med en lång tryckning på cache-beskrivningstexten (även utan Internet-anslutning).</string>
   <string name="helper_wear_title">c:geo Wear</string>
   <string name="helper_wear_description">c:geo Wear är en plugin till c:geo som låter dig navigera till geocacher med din Android Wear smartwatch.</string>
+  <string name="helper_where_you_go_title">WhereYouGo</string>
   <string name="addon_missing_title">Tillägg saknas</string>
   <string name="addon_download_prompt">Hämta det nu från Google Play.</string>
   <string name="export">Exportera</string>

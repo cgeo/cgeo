@@ -699,8 +699,6 @@
   <string name="gpx_import_select_list_title">Tuo GPX listaukseen</string>
   <string name="gpx_import_android">Tuon Androidilta</string>
   <string name="map_file_select_title">Valitse karttatiedosto</string>
-  <string name="web_import_title">Tuo Webistä</string>
-  <string name="web_import_waiting">Odotetaan uusia kätköjä webistä…</string>
   <string name="web_downloading">Ladataan</string>
   <string name="web_downloaded">Ladattu</string>
   <string name="popup_more">Lisätietoja</string>

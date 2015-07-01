@@ -777,8 +777,6 @@
   <string name="gpx_import_select_list_title">Importér GPX til liste</string>
   <string name="gpx_import_android">Importér fra Android</string>
   <string name="map_file_select_title">Vælg kortfil</string>
-  <string name="web_import_title">Importér fra Internettet</string>
-  <string name="web_import_waiting">Venter på nye cacher fra Internettet…</string>
   <string name="web_downloading">Indlæser</string>
   <string name="web_downloaded">Indlæst</string>
   <string name="popup_more">Flere detaljer</string>
