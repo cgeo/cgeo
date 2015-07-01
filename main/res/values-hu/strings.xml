@@ -780,8 +780,6 @@
   <string name="gpx_import_select_list_title">Ládalista betöltése GPX-ből</string>
   <string name="gpx_import_android">Ládalista betöltése Android-ból</string>
   <string name="map_file_select_title">Térkép fájl kiválasztása</string>
-  <string name="web_import_title">Importálás webről</string>
-  <string name="web_import_waiting">Várakozás új ládákra webről…</string>
   <string name="web_downloading">Letöltés</string>
   <string name="web_downloaded">Letöltve</string>
   <string name="popup_more">Több részlet</string>

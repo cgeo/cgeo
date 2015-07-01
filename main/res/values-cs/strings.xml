@@ -784,8 +784,6 @@
   <string name="gpx_import_select_list_title">Import GPX do seznamu</string>
   <string name="gpx_import_android">Import z Androidu</string>
   <string name="map_file_select_title">Vyber soubor map</string>
-  <string name="web_import_title">Import z webu</string>
-  <string name="web_import_waiting">Čekání na nové keše z webu…</string>
   <string name="web_downloading">Stahování</string>
   <string name="web_downloaded">Staženo</string>
   <string name="popup_more">Více detailů</string>

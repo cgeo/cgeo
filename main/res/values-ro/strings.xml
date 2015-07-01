@@ -747,8 +747,6 @@
   <string name="gpx_import_select_list_title">Importă GPX în listă</string>
   <string name="gpx_import_android">Importă din Android</string>
   <string name="map_file_select_title">Format greşit sau fişier defect</string>
-  <string name="web_import_title">Importă din internet</string>
-  <string name="web_import_waiting">Aştept cutii noi de pe internet…</string>
   <string name="web_downloading">Descărcare</string>
   <string name="web_downloaded">Descărcat</string>
   <string name="popup_more">Mai multe detalii</string>
