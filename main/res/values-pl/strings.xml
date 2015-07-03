@@ -221,6 +221,7 @@
   <string name="info_cache_saved">Skrzynka jest przechowywana lokalnie</string>
   <string name="err_trackable_log_not_anonymous">Zalogowanie %1$s poprzez c:geo nie może być wykonane anonimowo. Czy chcesz otworzyć ustawienia, aby uzupełnić swoje dane do %2$s?</string>
   <string name="err_trackable_no_preference_activity">Przepraszamy, brak odpowiedniego ekranu preferencji.</string>
+  <string name="warn_discard_changes">Niezapisane zmiany punktu nawigacji zostały odrzucone!</string>
   <string name="loc_last">Ostatnia pozycja</string>
   <string name="loc_net">Sieć</string>
   <string name="loc_fused">Połączona</string>
@@ -363,16 +364,23 @@
   <string name="settings_title_services">Usługi</string>
   <string name="settings_summary_services">Konfigurowanie informacji o koncie użytkownika i dostęp do usług opcjonalnych.</string>
   <string name="settings_title_appearance">Wygląd</string>
+  <string name="settings_summary_appearance">Skonfiguruj jednostki długości, język i kolory aplikacji.</string>
   <string name="settings_title_cachedetails">Szczegóły skrzynki</string>
+  <string name="settings_summary_cachedetails">Ustaw sposób wyświetlania informacji o skrzynce. </string>
   <string name="settings_title_offlinedata">Dane offline</string>
+  <string name="settings_summary_offlinedata">Skonfiguruj mapy statyczne i inne miejsca przechowywania danych offline.</string>
   <string name="settings_title_logging">Logowanie</string>
+  <string name="settings_summary_logging">Skonfiguruj swój podpis i ustaw opcje logowania.</string>
   <string name="settings_title_map">Mapa</string>
+  <string name="settings_summary_map">Ustaw źródło mapy, ustawienia mapy offline oraz szczegóły mapy.</string>
   <string name="settings_title_map_data">Dane mapy</string>
   <string name="settings_title_map_content">Zawartość mapy</string>
   <string name="settings_title_gpx">GPX</string>
   <string name="settings_title_basicmembers">Opcje dla użytkowników Basic</string>
   <string name="settings_title_navigation">Nawigacja</string>
+  <string name="settings_summary_navigation">Wybierz preferowane metody nawigacji i zewnętrzne aplikacje nawigacyjne.</string>
   <string name="settings_title_system">System</string>
+  <string name="settings_summary_system">Wykonaj kopię zapasową i przywracanie, konfiguruj katalog z aplikacjami i inne ustawienia systemowe.</string>
   <string name="settings_title_navigation_menu">Menu nawigacji</string>
   <string name="settings_category_browser">Przeglądarka</string>
   <string name="settings_category_geocaching">Geocaching</string>
@@ -424,6 +432,7 @@
   <string name="init_authorization_credential_username">Nazwa użytkownia</string>
   <string name="init_authorization_credential_password">Hasło</string>
   <string name="settings_service_active">Aktywna</string>
+  <string name="settings_navigation_disabled">Wygląda, że ta aplikacja nie jest zainstalowana</string>
   <string name="init_signature">Podpis</string>
   <string name="init_template_help">Tagi jak np. [NAZWA] będą używane w przyszłości.</string>
   <string name="init_signature_template_button">Wstaw szablon</string>
@@ -709,6 +718,8 @@
   <string name="cache_menu_vote">Głosuj</string>
   <string name="cache_menu_checker">Otwórz Geochecker\'a</string>
   <string name="cache_menu_ignore">Ignoruj skrzynkę</string>
+  <string name="ignore_confirm_title">Ostrożnie</string>
+  <string name="ignore_confirm_message">Zignorowanie tej skrzynki oznacza, że nie pojawi się ona ponownie podczas ładowania danych z geocaching.com. Będziesz w stanie widzieć skrzynkę ponownie jedynie kiedy usuniesz ignorowanie na stronie.</string>
   <string name="cache_status">Status</string>
   <string name="cache_status_offline_log">Zapamiętany wpis</string>
   <string name="cache_status_found">Znaleziona</string>
@@ -775,6 +786,8 @@
   <string name="gpx_import_select_list_title">Importuj GPX do listy</string>
   <string name="gpx_import_android">Import z Androida</string>
   <string name="map_file_select_title">Wybierz plik z mapą</string>
+  <string name="web_import_title">Import z send2cgeo</string>
+  <string name="web_import_waiting">Czekam na nowe skrzynki z send2cgeo…</string>
   <string name="web_downloading">Ściąganie</string>
   <string name="web_downloaded">Ściągnięte</string>
   <string name="popup_more">Więcej szczegółów</string>
@@ -942,6 +955,8 @@
   <string name="helper_google_translate_description">Jeśli pobierzesz paczki tłumaczeń w aplikacji Google Tłumacz, będziesz mógł łatwo tłumaczyć opisy skrzynek przytrzymując na nich palcem chwilę dłużej (bez połączenia z internetem).</string>
   <string name="helper_wear_title">c:geo Wear</string>
   <string name="helper_wear_description">c:geo Wear to dodatek do c:geo, który pozwala na nawigację do skrzynki bezpośrednio z zegarka Android Wear.</string>
+  <string name="helper_where_you_go_title">WhereYouGo</string>
+  <string name="helper_where_you_go_description">WhereYouGo pozwala na poszukiwanie skrzynek typu Whereigo. c:geo może automatycznie pobierać kardridże dzięki tej aplikacji.</string>
   <string name="addon_missing_title">Brakujący dodatek</string>
   <string name="addon_download_prompt">Pobierz teraz z Google Play.</string>
   <string name="export">Eksport</string>
