@@ -31,6 +31,7 @@ def JacksonAnnotationsVersion = '2.5.4'
 def CommonsCollections4Version = '4.0'
 def CommonsLang3Version = '3.4'
 def CommonsIoVersion = '2.4'
+def ButterKnifeVersion = '7.0.1'
 group = 'cgeo.geocaching'
 version = '0.0.1'
 
@@ -160,7 +161,7 @@ dependencies {
     compile 'com.google.android.gms:play-services:7.3.0'
 
     // Annotations for View injection
-    compile 'com.jakewharton:butterknife:7.0.0'
+    compile "com.jakewharton:butterknife:$ButterKnifeVersion"
 
     // Apache Commons
     compile "org.apache.commons:commons-collections4:$CommonsCollections4Version"
