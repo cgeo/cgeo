@@ -1,8 +1,16 @@
 package cgeo.geocaching;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 import cgeo.geocaching.network.StatusUpdater;
 import cgeo.geocaching.network.StatusUpdater.Status;
 import cgeo.geocaching.utils.Log;
+
+import rx.Subscription;
+import rx.android.app.AppObservable;
+import rx.functions.Action1;
+import rx.subscriptions.Subscriptions;
 
 import android.content.Intent;
 import android.content.res.Resources;
@@ -16,13 +24,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import butterknife.ButterKnife;
-import butterknife.Bind;
-import rx.Subscription;
-import rx.android.app.AppObservable;
-import rx.functions.Action1;
-import rx.subscriptions.Subscriptions;
-
 public class StatusFragment extends Fragment {
 
     protected @Bind(R.id.status_icon) ImageView statusIcon;
@@ -35,7 +36,7 @@ public class StatusFragment extends Fragment {
         super.onCreateView(inflater, container, savedInstanceState);
         final ViewGroup statusGroup = (ViewGroup) inflater.inflate(R.layout.status, container, false);
         ButterKnife.bind(this, statusGroup);
-        statusSubscription = AppObservable.bindFragment(this, StatusUpdater.LATEST_STATUS)
+        statusSubscription = AppObservable.bindSupportFragment(this, StatusUpdater.LATEST_STATUS)
                 .subscribe(new Action1<Status>() {
                     @Override
                     public void call(final Status status) {
