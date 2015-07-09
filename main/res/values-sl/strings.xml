@@ -715,8 +715,6 @@
   <string name="gpx_import_select_list_title">Uvozi GPX datoteko v seznam</string>
   <string name="gpx_import_android">Uvozi iz Androida</string>
   <string name="map_file_select_title">Izbiranje datoteke z zemljevidi</string>
-  <string name="web_import_title">Uvozi iz send2cgeo</string>
-  <string name="web_import_waiting">Čakanje na zaklade iz send2cgeo…</string>
   <string name="web_downloading">Nalaganje</string>
   <string name="web_downloaded">naložen</string>
   <string name="popup_more">Več informacij</string>

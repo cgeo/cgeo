@@ -61,8 +61,9 @@ class GeopointParser {
         try {
             final String[] parts = StringUtils.split(StringUtils.trim(text));
             if (parts.length == 2) {
-                final double lat = Double.parseDouble(parts[0]);
-                final double lon = Double.parseDouble(parts[1]);
+                // strip space, tab and &nbsp;
+                final double lat = Double.parseDouble(StringUtils.strip(parts[0], " \t\u00a0"));
+                final double lon = Double.parseDouble(StringUtils.strip(parts[1], " \t\u00a0"));
                 return new Geopoint(lat, lon);
             }
         } catch (final NumberFormatException e) {

@@ -18,7 +18,7 @@
 	<properties>
 		<AndroidAnnotationsVersion>3.3.1</AndroidAnnotationsVersion>
 
-		<ButterKnifeVersion>7.0.0</ButterKnifeVersion>
+		<ButterKnifeVersion>7.0.1</ButterKnifeVersion>
 
 		<CommonsCollections4Version>4.0</CommonsCollections4Version>
 		<CommonsIoVersion>2.4</CommonsIoVersion>

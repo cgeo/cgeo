@@ -770,8 +770,6 @@
   <string name="gpx_import_select_list_title">Importa GPX nella lista</string>
   <string name="gpx_import_android">Importazione da Android</string>
   <string name="map_file_select_title">Seleziona il file mappa</string>
-  <string name="web_import_title">Importa dal web</string>
-  <string name="web_import_waiting">In attesa di nuovi cache dal web…</string>
   <string name="web_downloading">Download in corso</string>
   <string name="web_downloaded">Download terminato</string>
   <string name="popup_more">Altri dettagli</string>

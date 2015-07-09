@@ -762,8 +762,6 @@
   <string name="gpx_import_select_list_title">Importuoti GPX į sąrašą</string>
   <string name="gpx_import_android">Importuoti iš Android</string>
   <string name="map_file_select_title">Pasirinkite žemėlapio failą</string>
-  <string name="web_import_title">Importuoti iš interneto</string>
-  <string name="web_import_waiting">Laukiama naujų slėptuvių iš interneto…</string>
   <string name="web_downloading">Atsisiunčiama</string>
   <string name="web_downloaded">Atsisiųsta</string>
   <string name="popup_more">Daugiau informacijos</string>

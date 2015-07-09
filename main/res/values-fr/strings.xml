@@ -585,10 +585,10 @@
   <string name="auth_twitter">twitter</string>
   <string name="auth_authorize">autorisation de c:geo</string>
   <string name="auth_start">Demander l\'autorisation</string>
-  <string name="auth_again">redémarre</string>
+  <string name="auth_again">Autoriser à nouveau</string>
   <string name="auth_dialog_waiting">En attente de %s…</string>
   <string name="auth_explain_short">Le processus suivant autorisera <b>c:geo</b> à accéder à %s.</string>
-  <string name="auth_explain_long">L\'appui sur \"Autoriser c:geo\" démarrera le processus. Un navigateur web ouvrira la page de %s. Vous pourrez vous connecter sur votre compte et en autoriser l\'accès à <b>c:geo</b>. C\'est tout.</string>
+  <string name="auth_explain_long">L\'appui sur \"Autoriser c:geo\" lancera le processus (la page web %s sera ouverte dans un navigateur, après avoir renseigné les informations d\'authentification, <b>c:geo</b> sera autorisé à accéder à votre compte).</string>
   <string name="auth_token_register">Créer un compte</string>
   <string name="auth_token_explain_short">Vous êtes sur le point d\'autoriser <b>c:geo</b> à accéder à %s.</string>
   <string name="auth_token_explain_long">Saisissez vos informations d\'identification puis appuyez sur \"Autoriser c:geo\" … nous allons nous connecter à %s avec vos identifiants et récupérer un jeton d\'authentification. C\'est tout.</string>
@@ -779,8 +779,6 @@
   <string name="gpx_import_select_list_title">Importer GPX dans la liste</string>
   <string name="gpx_import_android">Import depuis Android</string>
   <string name="map_file_select_title">Choisir un fichier carte</string>
-  <string name="web_import_title">Importer avec send2cgeo</string>
-  <string name="web_import_waiting">En attente des caches envoyées par send2cgeo…</string>
   <string name="web_downloading">Téléchargement</string>
   <string name="web_downloaded">Téléchargé</string>
   <string name="popup_more">Plus de détails</string>

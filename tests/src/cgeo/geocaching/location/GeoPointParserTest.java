@@ -137,4 +137,8 @@ public class GeoPointParserTest extends AndroidTestCase {
         assertEquals(GeopointParser.parse("47.648883  -122.348067"), GeopointParser.parse("N 47° 38.933 W 122° 20.884"), 1e-4f);
     }
 
+    public static void testFloatingPointNbsp() {
+        assertEquals(GeopointParser.parse("47.648883  122.348067\u00a0"), GeopointParser.parse("N 47° 38.933 E 122° 20.884"), 1e-4f);
+    }
+
 }

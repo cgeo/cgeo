@@ -2,13 +2,14 @@
 #
 
 RXJAVA=1.0.12
-RXANDROID=0.24.0
+RXANDROID=0.25.0
 JACKSONCORE=2.5.4
 JACKSONDATABIND=2.5.4
 JACKSONANNOTATIONS=2.5.4
 COMMONSCOLLECTIONS4=4.0
 COMMONSLANG3=3.4
 COMMONSIO=2.4
+BUTTERKNIFE=7.0.1
 
 cd $(git rev-parse --show-toplevel)/main/libs
 
@@ -52,3 +53,6 @@ updatelib org/apache/commons commons-lang3 $COMMONSLANG3
 fixgradle CommonsLang3Version $COMMONSLANG3
 updatelib commons-io commons-io $COMMONSIO
 fixgradle CommonsIoVersion $COMMONSIO
+
+updatelib com/jakewharton butterknife $BUTTERKNIFE
+fixgradle ButterKnifeVersion $BUTTERKNIFE

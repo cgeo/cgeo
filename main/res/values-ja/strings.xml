@@ -721,8 +721,6 @@
   <string name="gpx_import_select_list_title">GPXファイルをリストへインポート</string>
   <string name="gpx_import_android">アンドロイド端末からインポート</string>
   <string name="map_file_select_title">地図ファイルの選択</string>
-  <string name="web_import_title">Webからインポート(Send 2 c:geo経由)</string>
-  <string name="web_import_waiting">Webから新しいキャッシュ情報を確認中…</string>
   <string name="web_downloading">ダウンロード中</string>
   <string name="web_downloaded">ダウンロード完了</string>
   <string name="popup_more">詳細を見る</string>

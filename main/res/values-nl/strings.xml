@@ -771,8 +771,6 @@
   <string name="gpx_import_select_list_title">Importeer GPX naar lijst</string>
   <string name="gpx_import_android">Importeer van Android</string>
   <string name="map_file_select_title">Selecteer mapbestand</string>
-  <string name="web_import_title">Importeer van web</string>
-  <string name="web_import_waiting">Aan het wachten voor nieuwe caches van het web…</string>
   <string name="web_downloading">Downloaden…</string>
   <string name="web_downloaded">Gedownload</string>
   <string name="popup_more">Meer details</string>

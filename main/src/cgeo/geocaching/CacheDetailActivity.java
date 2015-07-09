@@ -212,7 +212,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     @Override
     public void onLoadFinished(final Loader<List<Trackable>> listLoader, final List<Trackable> trackables) {
         genericTrackables.addAll(trackables);
-        insertPage(Page.INVENTORY);
+        notifyDataSetChanged();
     }
 
     @Override
