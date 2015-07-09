@@ -285,19 +285,44 @@ public class GeocacheTest extends CGeoTestCase {
 
     public static void testGuessEventTime() {
         assertTime("text 14:20 text", 14, 20);
+
+        // illegal minute/hour values
         assertNoTime("text 30:40 text");
         assertNoTime("text 14:90 text");
+
         final String timeHours = CgeoApplication.getInstance().getString(R.string.cache_time_full_hours);
+
+        // full hour only
         assertTime("text 16 " + timeHours, 16, 0);
+
+        // full hour, lower case
         assertTime("text 16 " + StringUtils.lowerCase(timeHours), 16, 0);
+
+        // hour and minutes, different separators
         assertTime("text 16:00 " + timeHours, 16, 0);
         assertTime("text 16.00 " + timeHours, 16, 0);
+
+        // at the end of a sentence
         assertTime("text 14:20.", 14, 20);
+
+        // including formatting
         assertTime("<b>14:20</b>", 14, 20);
+
+        // time ranges
         assertTime("<u><em>Uhrzeit:</em></u> 17-20 " + timeHours + "</span></strong>", 17, 00);
         assertTime("von 11 bis 13 " + timeHours, 11, 00);
         assertTime("from 11 to 13 " + timeHours, 11, 00);
         assertTime("von 19.15 " + timeHours + " bis ca.20.30 " + timeHours + " statt", 19, 15);
+
+        // same without space between time and time string
+        assertTime("text 16" + timeHours, 16, 0);
+        assertTime("text 16" + StringUtils.lowerCase(timeHours), 16, 0);
+        assertTime("text 16:00" + timeHours, 16, 0);
+        assertTime("text 16.00" + timeHours, 16, 0);
+        assertTime("<u><em>Uhrzeit:</em></u> 17-20" + timeHours + "</span></strong>", 17, 00);
+        assertTime("von 11 bis 13" + timeHours, 11, 00);
+        assertTime("from 11 to 13" + timeHours, 11, 00);
+        assertTime("von 19.15" + timeHours + " bis ca.20.30 " + timeHours + " statt", 19, 15);
     }
 
     public static void testGuessEventTimeShortDescription() {

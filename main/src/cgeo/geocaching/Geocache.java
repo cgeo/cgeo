@@ -35,8 +35,6 @@ import cgeo.geocaching.utils.LogTemplateProvider.LogContext;
 import cgeo.geocaching.utils.MatcherWrapper;
 import cgeo.geocaching.utils.RxUtils;
 
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.ListUtils;
 import org.apache.commons.lang3.BooleanUtils;
@@ -44,11 +42,6 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-
-import rx.Scheduler;
-import rx.Subscription;
-import rx.functions.Action0;
-import rx.schedulers.Schedulers;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -75,6 +68,12 @@ import java.util.ListIterator;
 import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
+
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import rx.Scheduler;
+import rx.Subscription;
+import rx.functions.Action0;
+import rx.schedulers.Schedulers;
 
 /**
  * Internal representation of a "cache"
@@ -1725,10 +1724,12 @@ public class Geocache implements IWaypoint {
         // 12:34
         patterns.add(Pattern.compile("\\b(\\d{1,2})\\:(\\d\\d)\\b"));
         if (StringUtils.isNotBlank(hourLocalized)) {
+            // 12:34o'clock
+            patterns.add(Pattern.compile("\\b(\\d{1,2})\\:(\\d\\d)" + Pattern.quote(hourLocalized), Pattern.CASE_INSENSITIVE));
             // 17 - 20 o'clock
-            patterns.add(Pattern.compile("\\b(\\d{1,2})(?:\\.00)?" + "\\s*(?:-|[a-z]+)\\s*" + "(?:\\d{1,2})(?:\\.00)?" + "\\s+" + Pattern.quote(hourLocalized), Pattern.CASE_INSENSITIVE));
+            patterns.add(Pattern.compile("\\b(\\d{1,2})(?:\\.00)?" + "\\s*(?:-|[a-z]+)\\s?" + "(?:\\d{1,2})(?:\\.00)?" + "\\s?" + Pattern.quote(hourLocalized), Pattern.CASE_INSENSITIVE));
             // 12 o'clock, 12.00 o'clock
-            patterns.add(Pattern.compile("\\b(\\d{1,2})(?:\\.(00|15|30|45))?\\s+" + Pattern.quote(hourLocalized), Pattern.CASE_INSENSITIVE));
+            patterns.add(Pattern.compile("\\b(\\d{1,2})(?:\\.(00|15|30|45))?\\s?" + Pattern.quote(hourLocalized), Pattern.CASE_INSENSITIVE));
         }
 
         final String searchText = getShortDescription() + ' ' + getDescription();
