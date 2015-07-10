@@ -2,8 +2,9 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-    <b>Next bugfix release:</b>\n
+    <b>2015.07.08:</b>\n
     · Fix: Alphabetical sorting of trackables in log window\n
+    · Fix: Adapting to geocaching.com changes (waypoint coordinate format)\n
     \n
     \n
     <b>2015.06.19:</b>\n

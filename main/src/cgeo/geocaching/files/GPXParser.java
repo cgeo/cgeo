@@ -432,9 +432,7 @@ public abstract class GPXParser extends FileParser {
                     content = content.substring(2);
                 }
 
-                if (StringUtils.containsIgnoreCase(scriptUrl, "")) {
-                    cache.setName(content);
-                }
+                cache.setName(content);
 
                 findGeoCode(cache.getName());
             }
