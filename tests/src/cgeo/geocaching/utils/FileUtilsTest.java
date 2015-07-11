@@ -24,7 +24,7 @@ public class FileUtilsTest extends TestCase {
             assertThat(FileUtils.getUniqueNamedFile(baseFile)).isEqualTo(baseFile);
             assertThat(baseFile.createNewFile()).isTrue();
             assertThat(FileUtils.getUniqueNamedFile(baseFile)).isEqualTo(alternative1);
-            alternative1.createNewFile();
+            assertThat(alternative1.createNewFile()).isTrue();
             assertThat(FileUtils.getUniqueNamedFile(baseFile)).isEqualTo(alternative2);
             assertThat(FileUtils.getUniqueNamedFile(baseFile)).isEqualTo(alternative2);
         } finally {

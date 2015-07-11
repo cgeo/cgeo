@@ -9,8 +9,11 @@ import org.eclipse.jdt.annotation.NonNull;
 import android.app.Activity;
 import android.content.Intent;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 abstract class AbstractGeneralApp extends AbstractApp implements CacheNavigationApp {
 
+    @SuppressFBWarnings("NP_METHOD_PARAMETER_TIGHTENS_ANNOTATION")
     protected AbstractGeneralApp(@NonNull final String name, @NonNull final String packageName) {
         super(name, null, packageName);
     }

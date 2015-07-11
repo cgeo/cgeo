@@ -8,14 +8,6 @@ import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.utils.SynchronizedDateFormat;
 
-import menion.android.locus.LocusDataStorageProvider;
-import menion.android.locus.addon.publiclib.DisplayData;
-import menion.android.locus.addon.publiclib.LocusUtils;
-import menion.android.locus.addon.publiclib.geoData.Point;
-import menion.android.locus.addon.publiclib.geoData.PointGeocachingData;
-import menion.android.locus.addon.publiclib.geoData.PointGeocachingDataWaypoint;
-import menion.android.locus.addon.publiclib.geoData.PointsData;
-
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
@@ -27,6 +19,15 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import menion.android.locus.LocusDataStorageProvider;
+import menion.android.locus.addon.publiclib.DisplayData;
+import menion.android.locus.addon.publiclib.LocusUtils;
+import menion.android.locus.addon.publiclib.geoData.Point;
+import menion.android.locus.addon.publiclib.geoData.PointGeocachingData;
+import menion.android.locus.addon.publiclib.geoData.PointGeocachingDataWaypoint;
+import menion.android.locus.addon.publiclib.geoData.PointsData;
+
 /**
  * for the Locus API:
  *
@@ -35,6 +36,7 @@ import java.util.Locale;
 public abstract class AbstractLocusApp extends AbstractApp {
     private static final SynchronizedDateFormat ISO8601DATE = new SynchronizedDateFormat("yyyy-MM-dd'T'", Locale.US);
 
+    @SuppressFBWarnings("NP_METHOD_PARAMETER_TIGHTENS_ANNOTATION")
     protected AbstractLocusApp(@NonNull final String text, @NonNull final String intent) {
         super(text, intent);
     }

@@ -14,6 +14,7 @@ import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.LoadFlag;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.sorting.GeocodeComparator;
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 import cgeo.geocaching.test.R;
 import cgeo.geocaching.utils.CalendarUtils;
@@ -25,7 +26,6 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.List;
@@ -325,13 +325,7 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         final List<Geocache> caches = readGPX11(R.raw.terracaching_gpx);
         assertThat(caches).hasSize(55);
 
-        Collections.sort(caches, new Comparator<Geocache>() {
-
-            @Override
-            public int compare(final Geocache lhs, final Geocache rhs) {
-                return lhs.getGeocode().compareTo(rhs.getGeocode());
-            }
-        });
+        Collections.sort(caches, new GeocodeComparator());
 
         final Geocache cache = caches.get(0);
         assertThat(cache.getGeocode()).isEqualTo("TC2JP");

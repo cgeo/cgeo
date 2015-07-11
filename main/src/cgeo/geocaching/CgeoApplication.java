@@ -23,6 +23,8 @@ import android.view.ViewConfiguration;
 import java.lang.reflect.Field;
 import java.util.Locale;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 public class CgeoApplication extends Application {
 
     private boolean forceRelog = false; // c:geo needs to log into cache providers
@@ -158,6 +160,7 @@ public class CgeoApplication extends Application {
     /**
      * Kill and restart the application.
      */
+    @SuppressFBWarnings("DM_EXIT")
     public void restartApplication() {
         final Intent launchIntent = new Intent(this, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         final PendingIntent intent= PendingIntent.getActivity(this, 0, launchIntent, 0);

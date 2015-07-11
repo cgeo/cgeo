@@ -41,7 +41,7 @@ public class LeastRecentlyUsedMapTest extends AndroidTestCase {
         map.put("three", "3");
         map.put("five", "5");
         // read does not change anything
-        map.get("one");
+        assertThat(map.get("one")).isEqualTo("1");
         map.put("six", "6");
         map.put("seven", "7");
 

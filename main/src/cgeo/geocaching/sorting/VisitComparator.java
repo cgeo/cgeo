@@ -12,6 +12,14 @@ public class VisitComparator extends AbstractCacheComparator {
 
     @Override
     protected int compareCaches(final Geocache cache1, final Geocache cache2) {
-        return Long.valueOf(cache2.getVisitedDate()).compareTo(cache1.getVisitedDate());
+        return compare(cache2.getVisitedDate(), cache1.getVisitedDate());
     }
+
+    /**
+     * copy of Long#compare to avoid boxing
+     */
+    public static int compare(final long lhs, final long rhs) {
+        return lhs < rhs ? -1 : (lhs == rhs ? 0 : 1);
+    }
+
 }
