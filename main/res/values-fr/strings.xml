@@ -86,7 +86,7 @@
   <string name="log_post_geocode_missing">Géocode manquant…</string>
   <string name="log_date_future_not_allowed">Les visites dans le futur sont interdites.</string>
   <string name="log_add">Ajouter</string>
-  <string name="log_repeat">Recopier la dernière entrée</string>
+  <string name="log_repeat">Recopier la dernière visite</string>
   <string name="log_no_rating">Aucune évaluation</string>
   <string name="log_stars_1_description">faible</string>
   <string name="log_stars_15_description">Plutôt faible</string>
@@ -221,6 +221,7 @@
   <string name="info_cache_saved">La cache a été enregistrée en local</string>
   <string name="err_trackable_log_not_anonymous">S\'identifier sur %1$s depuis c:geo ne peut se faire anonymement. Souhaitez-vous ouvrir les paramètres et remplir vos informations d\'identification pour %2$s ?</string>
   <string name="err_trackable_no_preference_activity">Désolé, impossible de trouver l\'écran de préférences.</string>
+  <string name="warn_discard_changes">Étape non enregistrée, vos modifications seront perdues !</string>
   <string name="loc_last">Dernière position</string>
   <string name="loc_net">Réseau</string>
   <string name="loc_fused">Fusionné</string>
@@ -360,16 +361,23 @@
   <string name="settings_title_services">Services</string>
   <string name="settings_summary_services">Configurez vos comptes pour les différents services en ligne</string>
   <string name="settings_title_appearance">Apparence</string>
+  <string name="settings_summary_appearance">Configurer les unités de distance, la langue et les couleurs.</string>
   <string name="settings_title_cachedetails">Détails de la cache</string>
+  <string name="settings_summary_cachedetails">Personnaliser l\'affichage des informations de la cache. </string>
   <string name="settings_title_offlinedata">Données hors-ligne</string>
+  <string name="settings_summary_offlinedata">Configurer les cartes statiques et le stockage des autres données hors connexion.</string>
   <string name="settings_title_logging">Visites</string>
+  <string name="settings_summary_logging">Configurer votre signature et les options des visites.</string>
   <string name="settings_title_map">Carte</string>
+  <string name="settings_summary_map">Définir le type, les paramètres hors connexion et les détails pour la carte.</string>
   <string name="settings_title_map_data">Données cartographiques</string>
   <string name="settings_title_map_content">Contenu de la carte</string>
   <string name="settings_title_gpx">GPX</string>
   <string name="settings_title_basicmembers">Options pour les membres non-premium</string>
   <string name="settings_title_navigation">Navigation</string>
+  <string name="settings_summary_navigation">Sélectionner les méthodes de navigation préférées et les applications de navigation externe.</string>
   <string name="settings_title_system">Système</string>
+  <string name="settings_summary_system">Sauvegarder et restaurer, configurer les répertoires et autres paramètres systèmes.</string>
   <string name="settings_title_navigation_menu">Menu de navigation</string>
   <string name="settings_category_browser">Navigateur</string>
   <string name="settings_category_geocaching">Geocaching</string>
@@ -425,6 +433,7 @@
   <string name="init_authorization_credential_username">Nom d\'utilisateur</string>
   <string name="init_authorization_credential_password">Mot de passe</string>
   <string name="settings_service_active">Activé</string>
+  <string name="settings_navigation_disabled">Cette application ne semble ne pas être installée</string>
   <string name="init_signature">Signature</string>
   <string name="init_template_help">Les signets comme [NAME] seront évalués lors de l\'insertion de la signature.</string>
   <string name="init_signature_template_button">Ajouter un signet</string>
@@ -608,7 +617,7 @@
     <item quantity="other">%1$d caches</item>
   </plurals>
   <string name="cache_offline">Hors-ligne</string>
-  <string name="cache_offline_refresh">Recharger</string>
+  <string name="cache_offline_refresh">Actualiser</string>
   <string name="cache_offline_drop">Supprimer</string>
   <string name="cache_offline_store">Enregistrer</string>
   <string name="cache_offline_stored">Enregistrée</string>
@@ -670,7 +679,7 @@
   <string name="cache_dialog_offline_save_message">Enregistrement pour une utilisation hors-ligne…</string>
   <string name="cache_dialog_offline_drop_title">Hors-ligne</string>
   <string name="cache_dialog_offline_drop_message">Suppression des caches de la mémoire…</string>
-  <string name="cache_dialog_refresh_title">Recharger</string>
+  <string name="cache_dialog_refresh_title">Actualiser</string>
   <string name="cache_dialog_refresh_message">Rechargement des détails…</string>
   <string name="cache_dialog_watchlist_add_title">Liste de suivi</string>
   <string name="cache_dialog_watchlist_add_message">Ajout de la cache à votre liste de suivi…</string>
@@ -702,7 +711,7 @@
   <string name="around">Autour de %s</string>
   <string name="cache_menu_event">Ajouter à l\'agenda</string>
   <string name="cache_menu_details">Détails</string>
-  <string name="cache_menu_refresh">Recharger</string>
+  <string name="cache_menu_refresh"> Actualiser</string>
   <string name="cache_menu_share">Partager la cache</string>
   <string name="cache_menu_move_list">Déplacer dans une autre liste</string>
   <string name="cache_menu_whereyougo">WhereYouGo</string>
@@ -713,6 +722,8 @@
   <string name="cache_menu_vote">Voter</string>
   <string name="cache_menu_checker">Ouvrir le geovérificateur</string>
   <string name="cache_menu_ignore">Ignorer la cache</string>
+  <string name="ignore_confirm_title">Soyez prudent</string>
+  <string name="ignore_confirm_message">Ignorer une cache signifie que cette cache n\'apparaîtra plus lors du chargement de données depuis geocaching.com. Pour voir à nouveau cette cache : réactivez-la sur le site Web.</string>
   <string name="cache_status">Statut</string>
   <string name="cache_status_offline_log">Visite enregistrée hors-ligne</string>
   <string name="cache_status_found">Trouvée</string>
@@ -779,6 +790,8 @@
   <string name="gpx_import_select_list_title">Importer GPX dans la liste</string>
   <string name="gpx_import_android">Import depuis Android</string>
   <string name="map_file_select_title">Choisir un fichier carte</string>
+  <string name="web_import_title">Importer à partir de send2cgeo</string>
+  <string name="web_import_waiting">En attente de nouvelles caches envoyées par send2cgeo…</string>
   <string name="web_downloading">Téléchargement</string>
   <string name="web_downloaded">Téléchargé</string>
   <string name="popup_more">Plus de détails</string>
@@ -946,6 +959,8 @@
   <string name="helper_google_translate_description">Si vous téléchargez des modules de traduction dans l\'application Google Traduction, vous pourrez facilement traduire les descriptions des caches dans c:geo par un appui long sur le texte de la description (même sans connexion Internet).</string>
   <string name="helper_wear_title">c:geo Wear</string>
   <string name="helper_wear_description">c:geo Wear vous permet de naviguer vers les caches en utilisant  votre smartwatch Android.</string>
+  <string name="helper_where_you_go_title">WhereYouGo</string>
+  <string name="helper_where_you_go_description">WhereYouGo permet de rechercher et de jouer avec les caches de type Whereigo. c:geo peut automatiquement lancer le téléchargement de cartouches utilisables ensuite dans l\'application WhereYouGo.</string>
   <string name="addon_missing_title">Module complémentaire manquant</string>
   <string name="addon_download_prompt">Le télécharger sur Google Play.</string>
   <string name="export">Exporter</string>
