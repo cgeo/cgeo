@@ -1,15 +1,16 @@
-package cgeo.geocaching.connector;
+package cgeo.geocaching.connector.tc;
 
 import cgeo.geocaching.Geocache;
+import cgeo.geocaching.connector.AbstractConnector;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
 import java.util.regex.Pattern;
 
-class TerraCachingConnector extends AbstractConnector {
+public class TerraCachingConnector extends AbstractConnector {
 
-    @NonNull private final static Pattern PATTERN_GEOCODE = Pattern.compile("TC[0-9A-Z]{1,3}", Pattern.CASE_INSENSITIVE);
+    @NonNull private final static Pattern PATTERN_GEOCODE = Pattern.compile("TC[0-9A-Z]{1,3}|CC[0-9A-Z]{4}", Pattern.CASE_INSENSITIVE);
 
     @Override
     @NonNull
@@ -20,7 +21,7 @@ class TerraCachingConnector extends AbstractConnector {
     @Override
     @Nullable
     public String getCacheUrl(@NonNull final Geocache cache) {
-        return null;
+        return getCacheUrlPrefix() + cache.getGeocode();
     }
 
     @Override
@@ -37,7 +38,7 @@ class TerraCachingConnector extends AbstractConnector {
     @Override
     @NonNull
     protected String getCacheUrlPrefix() {
-        return "http://www.TerraCaching.com/viewcache.cgi?C=";
+        return "http://www.terracaching.com/Cache/";
     }
 
     @Override

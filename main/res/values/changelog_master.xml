@@ -5,6 +5,7 @@
     <b>Next feature release:</b>\n
     · New: Menu in cache details to put cache on ignore list (but not to remove)\n
     · New: Function to check your login for gcvote.com\n
+    · New: Almost full support for TerraCaching GPX files\n
     · Fix: Adjustments in size and resizing of coordinate input fields\n
     \n
   </string>
