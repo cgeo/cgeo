@@ -365,7 +365,9 @@
   <string name="settings_title_cachedetails">Cachedetaljer</string>
   <string name="settings_summary_cachedetails">Anpassa utseende på cacheinformation.</string>
   <string name="settings_title_offlinedata">Offlinedata</string>
+  <string name="settings_summary_offlinedata">Konfigurera statiska kartor och annan offline datalagring.</string>
   <string name="settings_title_logging">Loggning</string>
+  <string name="settings_summary_logging">Konfigurera din signatur och andra loggningsinställningar.</string>
   <string name="settings_title_map">Karta</string>
   <string name="settings_summary_map">Inställningar för kartkälla, offline kartor och kartdetaljer.</string>
   <string name="settings_title_map_data">Kartdata</string>
@@ -373,6 +375,7 @@
   <string name="settings_title_gpx">GPX</string>
   <string name="settings_title_basicmembers">Inställningar för Basic Members</string>
   <string name="settings_title_navigation">Navigering</string>
+  <string name="settings_summary_navigation">Välj standardmetoder för navigering och välj externa navigationsappar.</string>
   <string name="settings_title_system">System</string>
   <string name="settings_summary_system">Ta backup eller återställ, konfigurera sökvägar och andra systeminställningar.</string>
   <string name="settings_title_navigation_menu">Navigeringsmeny</string>
@@ -720,6 +723,7 @@
   <string name="cache_menu_checker">Öppna Geochecker</string>
   <string name="cache_menu_ignore">Ignorera cache</string>
   <string name="ignore_confirm_title">Var försiktig</string>
+  <string name="ignore_confirm_message">Genom att ignorera en cache så kommer den aldrig mer visas när data laddas ned från geocaching.com. Det enda sätt att visa den igen är genom att ändra inställningar på cachens webbsida.</string>
   <string name="cache_status">Status</string>
   <string name="cache_status_offline_log">Sparad logg</string>
   <string name="cache_status_found">Hittad</string>
@@ -956,6 +960,7 @@
   <string name="helper_wear_title">c:geo Wear</string>
   <string name="helper_wear_description">c:geo Wear är en plugin till c:geo som låter dig navigera till geocacher med din Android Wear smartwatch.</string>
   <string name="helper_where_you_go_title">WhereYouGo</string>
+  <string name="helper_where_you_go_description">Appen WhereYouGo gör att du kan spela och leta efter cacher av typen Wherigo. c:geo kan påbörja nedladdningar av spelfiler, s.k. cartridges, i denna app.</string>
   <string name="addon_missing_title">Tillägg saknas</string>
   <string name="addon_download_prompt">Hämta det nu från Google Play.</string>
   <string name="export">Exportera</string>
