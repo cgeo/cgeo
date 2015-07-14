@@ -3,9 +3,12 @@ package cgeo.geocaching.connector.oc;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import cgeo.geocaching.connector.ConnectorFactory;
+import cgeo.geocaching.connector.ConnectorFactoryTest;
 import cgeo.geocaching.connector.IConnector;
 
 import junit.framework.TestCase;
+
+import java.util.Set;
 
 public class OCConnectorTest extends TestCase {
 
@@ -20,6 +23,7 @@ public class OCConnectorTest extends TestCase {
 
     private static IConnector getOcDeConnector() {
         final IConnector ocConnector = ConnectorFactory.getConnector("OCXXX");
+        assertThat(ocConnector).isNotNull();
         assertThat(ocConnector.getHost()).contains(".de");
         return ocConnector;
     }
@@ -35,4 +39,8 @@ public class OCConnectorTest extends TestCase {
         assertThat(connector.getGeocodeFromUrl("http://www.opencaching.us/viewcache.php?wp=OU07A0")).isEqualTo("OU07A0");
     }
 
+    public static void testHandledGeocodes() {
+        Set<String> geocodes = ConnectorFactoryTest.getGeocodeSample();
+        assertThat(getOcDeConnector().handledGeocodes(geocodes)).containsOnly("OC1234", "OC5678");
+    }
 }

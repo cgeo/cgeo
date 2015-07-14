@@ -25,13 +25,26 @@ import rx.functions.Action1;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public abstract class AbstractConnector implements IConnector {
 
     @Override
     public boolean canHandle(@NonNull final String geocode) {
         return false;
+    }
+
+    @Override
+    public Set<String> handledGeocodes(@NonNull final Set<String> geocodes) {
+        final Set<String> strippedList = new HashSet<>();
+        for (final String geocode: geocodes) {
+            if (canHandle(geocode)) {
+                strippedList.add(geocode);
+            }
+        }
+        return strippedList;
     }
 
     @Override

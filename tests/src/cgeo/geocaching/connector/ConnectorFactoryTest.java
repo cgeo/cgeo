@@ -8,6 +8,8 @@ import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 import cgeo.geocaching.test.mock.GC1ZXX2;
 
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 public class ConnectorFactoryTest extends AbstractResourceInstrumentationTestCase {
 
@@ -95,5 +97,30 @@ public class ConnectorFactoryTest extends AbstractResourceInstrumentationTestCas
         // cache URLs
         assertThat(ConnectorFactory.getTrackableFromURL("http://coord.info/GC1234")).isNull();
         assertThat(ConnectorFactory.getTrackableFromURL("http://www.coord.info/GC1234")).isNull();
+    }
+
+    public static Set<String> getGeocodeSample() {
+        Set<String> geocodes = new HashSet<>(18);
+        geocodes.add("GC1234");
+        geocodes.add("OC1234");
+        geocodes.add("OX1234");
+        geocodes.add("EC1234");
+        geocodes.add("TCABC");
+        geocodes.add("WM1234");
+        geocodes.add("GE1234");
+        geocodes.add("GA1234");
+        geocodes.add("TP1234");
+
+        geocodes.add("GC5678");
+        geocodes.add("OC5678");
+        geocodes.add("OX5678");
+        geocodes.add("EC5678");
+        geocodes.add("TC2JP");
+        geocodes.add("WM5678");
+        geocodes.add("GE5678");
+        geocodes.add("GA5678");
+        geocodes.add("TP5678");
+
+        return geocodes;
     }
 }

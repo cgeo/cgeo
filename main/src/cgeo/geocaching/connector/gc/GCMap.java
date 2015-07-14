@@ -51,7 +51,11 @@ public class GCMap {
     public static SearchResult searchByGeocodes(final Set<String> geocodes) {
         final SearchResult result = new SearchResult();
 
-        final String geocodeList = StringUtils.join(geocodes.toArray(), "|");
+        final Set<String> filteredGeocodes = GCConnector.getInstance().handledGeocodes(geocodes);
+        if (filteredGeocodes.isEmpty()) {
+            return result;
+        }
+        final String geocodeList = StringUtils.join(filteredGeocodes.toArray(), "|");
 
         try {
             final Parameters params = new Parameters("i", geocodeList, "_", String.valueOf(System.currentTimeMillis()));

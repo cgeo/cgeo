@@ -3,11 +3,20 @@ package cgeo.geocaching.connector.tc;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import cgeo.geocaching.connector.ConnectorFactory;
+import cgeo.geocaching.connector.ConnectorFactoryTest;
 import cgeo.geocaching.connector.IConnector;
 
 import junit.framework.TestCase;
 
+import java.util.Set;
+
 public class TerraCachingConnectorTest extends TestCase {
+
+    private static IConnector getTerraCachingConnector() {
+        final IConnector tcConnector = ConnectorFactory.getConnector("TCABC");
+        assertThat(tcConnector).isNotNull();
+        return tcConnector;
+    }
 
     public static void testHandleTerraCaches() {
         final IConnector tcConnector = getTerraCachingConnector();
@@ -29,10 +38,8 @@ public class TerraCachingConnectorTest extends TestCase {
         assertThat(tcConnector.canHandle("CC9")).isFalse();
     }
 
-    private static IConnector getTerraCachingConnector() {
-        final IConnector tcConnector = ConnectorFactory.getConnector("TCABC");
-        assertThat(tcConnector).isNotNull();
-        return tcConnector;
+    public static void testHandledGeocodes() {
+        Set<String> geocodes = ConnectorFactoryTest.getGeocodeSample();
+        assertThat(getTerraCachingConnector().handledGeocodes(geocodes)).containsOnly("TCABC", "TC2JP");
     }
-
 }
