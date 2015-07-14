@@ -16,8 +16,7 @@
 	</description>
 
 	<properties>
-		<AndroidAnnotationsVersion>3.3.1</AndroidAnnotationsVersion>
-
+		<!-- AndroidAnnotations no longer included, because we need the AndroidAnnotations-bundle, but Maven does not deliver this easily -->
 		<ButterKnifeVersion>7.0.1</ButterKnifeVersion>
 
 		<CommonsCollections4Version>4.0</CommonsCollections4Version>
@@ -26,26 +25,15 @@
 
 		<FindbugsAnnotationsVersion>3.0.0</FindbugsAnnotationsVersion>
 
-		<JacksonAnnotationsVersion>2.6.0-rc3</JacksonAnnotationsVersion>
-		<JacksonCoreVersion>2.6.0-rc3</JacksonCoreVersion>
-		<JacksonDatabindVersion>2.6.0-rc3</JacksonDatabindVersion>
+		<JacksonAnnotationsVersion>2.5.4</JacksonAnnotationsVersion>
+		<JacksonCoreVersion>2.5.4</JacksonCoreVersion>
+		<JacksonDatabindVersion>2.5.4</JacksonDatabindVersion>
 
 		<RXAndroidVersion>0.25.0</RXAndroidVersion>
 		<RXJavaVersion>1.0.12</RXJavaVersion>
 	</properties>
 
 	<dependencies>
-		<dependency>
-			<groupId>org.androidannotations</groupId>
-			<artifactId>androidannotations</artifactId>
-			<version>${AndroidAnnotationsVersion}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.androidannotations</groupId>
-			<artifactId>androidannotations-api</artifactId>
-			<version>${AndroidAnnotationsVersion}</version>
-		</dependency>
-
 		<dependency>
 			<groupId>com.jakewharton</groupId>
 			<artifactId>butterknife</artifactId>

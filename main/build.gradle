@@ -22,7 +22,7 @@ gradle connectedCheck
 //Testing guide : http://tools.android.com/tech-docs/new-build-system/user-guide#TOC-Testing
 //https://github.com/stephanenicolas/Quality-Tools-for-Android
 
-def AAVersion = '3.3.1'
+def AAVersion = '3.3.2'
 def RXJavaVersion = '1.0.12'
 def RXAndroidVersion = '0.25.0'
 def JacksonCoreVersion = '2.5.4'
@@ -269,10 +269,10 @@ dependencies {
     unitTestCompile 'junit:junit:4.8.2'
     unitTestCompile 'com.google.android:android-test:4.1.1.4'
 
-    unitTestCompile 'com.googlecode.androidannotations:androidannotations-api:$AAVersion'
-    unitTestCompile 'com.jakewharton:butterknife:7.0.0'
-    unitTestCompile 'org.apache.commons:commons-collections4:4.0'
-    unitTestCompile 'commons-io:commons-io:2.4'
+    unitTestCompile "org.androidannotations:androidannotations-api:$AAVersion"
+    unitTestCompile "com.jakewharton:butterknife:$ButterKnifeVersion"
+    unitTestCompile "org.apache.commons:commons-collections4:$CommonsCollections4Version"
+    unitTestCompile "commons-io:commons-io:$CommonsIoVersion"
     unitTestCompile 'org.apache.commons:commons-lang3:$CommonsLang3Version'
     unitTestCompile 'com.google.code.findbugs:annotations:3.0.0'
     unitTestCompile 'com.netflix.rxjava:rxjava-core:$RXVersion'
