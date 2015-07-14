@@ -10,6 +10,7 @@ import org.eclipse.jdt.annotation.Nullable;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 public interface IConnector {
     /**
@@ -27,6 +28,15 @@ public interface IConnector {
      * @return return {@code true}, if this connector is responsible for the cache
      */
     public boolean canHandle(final @NonNull String geocode);
+
+    /**
+     * Return a new geocodes list, with only geocodes for which this connector is responsible.
+     *
+     * @param geocodes
+     *            list of geocodes of a cache
+     * @return return a new stripped list
+     */
+    public Set<String> handledGeocodes(final @NonNull Set<String> geocodes);
 
     /**
      * Get the browser URL for the given cache.

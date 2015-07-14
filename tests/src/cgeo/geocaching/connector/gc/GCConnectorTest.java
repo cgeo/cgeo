@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.ConnectorFactory;
+import cgeo.geocaching.connector.ConnectorFactoryTest;
 import cgeo.geocaching.connector.trackable.TravelBugConnector;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.location.Geopoint;
@@ -11,6 +12,8 @@ import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.TestSettings;
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
+
+import java.util.Set;
 
 public class GCConnectorTest extends AbstractResourceInstrumentationTestCase {
 
@@ -101,5 +104,10 @@ public class GCConnectorTest extends AbstractResourceInstrumentationTestCase {
 
         // uppercase is managed in ConnectorFactory
         assertThat(GCConnector.getInstance().getGeocodeFromUrl("http://coord.info/gc77")).isEqualTo("gc77");
+    }
+
+    public static void testHandledGeocodes() {
+        Set<String> geocodes = ConnectorFactoryTest.getGeocodeSample();
+        assertThat(GCConnector.getInstance().handledGeocodes(geocodes)).containsOnly("GC1234", "GC5678");
     }
 }

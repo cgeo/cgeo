@@ -3,10 +3,12 @@ package cgeo.geocaching.connector.ec;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import cgeo.geocaching.Geocache;
+import cgeo.geocaching.connector.ConnectorFactoryTest;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LogType;
 
 import java.util.List;
+import java.util.Set;
 
 import junit.framework.TestCase;
 
@@ -36,4 +38,8 @@ public class ECConnectorTest extends TestCase {
         assertThat(ECConnector.getInstance().getGeocodeFromUrl("http://extremcaching.com/index.php/output-2/738")).isEqualTo("EC738");
     }
 
+    public static void testHandledGeocodes() {
+        Set<String> geocodes = ConnectorFactoryTest.getGeocodeSample();
+        assertThat(ECConnector.getInstance().handledGeocodes(geocodes)).containsOnly("EC1234", "EC5678");
+    }
 }
