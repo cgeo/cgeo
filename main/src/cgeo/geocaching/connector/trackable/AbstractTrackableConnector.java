@@ -2,15 +2,14 @@ package cgeo.geocaching.connector.trackable;
 
 import cgeo.geocaching.AbstractLoggingActivity;
 import cgeo.geocaching.Trackable;
+import cgeo.geocaching.TrackableLog;
 import cgeo.geocaching.connector.AbstractConnector;
 import cgeo.geocaching.connector.UserAction;
-import cgeo.geocaching.loaders.AbstractCacheInventoryLoader;
-import cgeo.geocaching.loaders.AbstractInventoryLoader;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
-import android.content.Context;
+import rx.Observable;
 
 import java.util.Collections;
 import java.util.List;
@@ -92,28 +91,14 @@ public abstract class AbstractTrackableConnector implements TrackableConnector {
     }
 
     @Override
-    public int getInventoryLoaderId() {
-        return 0;
-    }
-
-    @Override
-    public int getCacheInventoryLoaderId() {
-        return 0;
+    @NonNull
+    public Observable<TrackableLog> trackableLogInventory() {
+        return Observable.empty();
     }
 
     @Override
     public int getTrackableLoggingManagerLoaderId() {
         return 0;
-    }
-
-    @Override
-    public AbstractInventoryLoader getInventoryLoader(final Context context) {
-        return null;
-    }
-
-    @Override
-    public AbstractCacheInventoryLoader getCacheInventoryLoader(final Context context, final String geocode) {
-        return null;
     }
 
     @Override

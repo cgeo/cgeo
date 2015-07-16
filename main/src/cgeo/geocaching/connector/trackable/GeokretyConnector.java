@@ -7,13 +7,8 @@ import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.Trackable;
 import cgeo.geocaching.TrackableLog;
-import cgeo.geocaching.enumerations.Loaders;
 import cgeo.geocaching.enumerations.LogTypeTrackable;
 import cgeo.geocaching.enumerations.StatusCode;
-import cgeo.geocaching.loaders.AbstractCacheInventoryLoader;
-import cgeo.geocaching.loaders.AbstractInventoryLoader;
-import cgeo.geocaching.loaders.GeokretyCacheInventoryLoader;
-import cgeo.geocaching.loaders.GeokretyInventoryLoader;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.settings.Settings;
@@ -26,6 +21,9 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.xml.sax.InputSource;
+
+import rx.Observable;
+import rx.functions.Func1;
 
 import android.content.Context;
 
@@ -149,6 +147,24 @@ public class GeokretyConnector extends AbstractTrackableConnector {
         }
     }
 
+    @Override
+    @NonNull
+    public Observable<TrackableLog> trackableLogInventory() {
+        return Observable.from(loadInventory(0)).map(new Func1<Trackable, TrackableLog>() {
+            @Override
+            public TrackableLog call(final Trackable trackable) {
+                return new TrackableLog(
+                        trackable.getGeocode(),
+                        trackable.getTrackingcode(),
+                        trackable.getName(),
+                        getId(trackable.getGeocode()),
+                        0,
+                        trackable.getBrand()
+                );
+            }
+        });
+    }
+
     public static int getId(final String geocode) {
         try {
             final String hex = geocode.substring(2);
@@ -199,26 +215,6 @@ public class GeokretyConnector extends AbstractTrackableConnector {
     @Override
     public boolean recommendLogWithGeocode() {
         return true;
-    }
-
-    @Override
-    public int getInventoryLoaderId() {
-        return Loaders.INVENTORY_GEOKRETY.getLoaderId();
-    }
-
-    @Override
-    public int getCacheInventoryLoaderId() {
-        return Loaders.CACHE_INVENTORY_GEOKRETY.getLoaderId();
-    }
-
-    @Override
-    public AbstractInventoryLoader getInventoryLoader(final Context context) {
-        return new GeokretyInventoryLoader(context, this);
-    }
-
-    @Override
-    public AbstractCacheInventoryLoader getCacheInventoryLoader(final Context context, final String geocode) {
-        return new GeokretyCacheInventoryLoader(context, this, geocode);
     }
 
     @Override

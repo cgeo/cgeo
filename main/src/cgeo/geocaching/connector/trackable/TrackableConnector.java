@@ -2,14 +2,13 @@ package cgeo.geocaching.connector.trackable;
 
 import cgeo.geocaching.AbstractLoggingActivity;
 import cgeo.geocaching.Trackable;
+import cgeo.geocaching.TrackableLog;
 import cgeo.geocaching.connector.UserAction;
-import cgeo.geocaching.loaders.AbstractCacheInventoryLoader;
-import cgeo.geocaching.loaders.AbstractInventoryLoader;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
-import android.content.Context;
+import rx.Observable;
 
 import java.util.List;
 
@@ -159,13 +158,15 @@ public interface TrackableConnector {
      */
     public boolean recommendLogWithGeocode();
 
-    public int getInventoryLoaderId();
-
-    public int getCacheInventoryLoaderId();
-
     public int getTrackableLoggingManagerLoaderId();
 
-    public AbstractInventoryLoader getInventoryLoader(final Context context);
-
-    public AbstractCacheInventoryLoader getCacheInventoryLoader(final Context context, final String geocode);
+    /**
+     * Return list of Trackables in user's inventory converted to TrackableLog object.
+     * TrackableLog are used for posting a Trackable Log, they contains necessary
+     * informations to post the Trackable Log.
+     *
+     * @return the TrackableLog corresponding to trackables in user's inventory as Observable.
+     */
+    @NonNull
+    public Observable<TrackableLog> trackableLogInventory();
 }
