@@ -36,8 +36,8 @@ import org.apache.commons.lang3.StringUtils;
 
 import rx.Observable;
 import rx.android.app.AppObservable;
-import rx.functions.Action0;
 import rx.functions.Action1;
+import rx.functions.Func0;
 import rx.functions.Func1;
 
 import android.app.Activity;
@@ -314,27 +314,27 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         AppObservable.bindActivity(this,
             // Obtain the actives connectors
             Observable.from(ConnectorFactory.getGenericTrackablesConnectors())
-            .subscribeOn(RxUtils.networkScheduler)
             .flatMap(new Func1<TrackableConnector, Observable<TrackableLog>>() {
                 @Override
                 public Observable<TrackableLog> call(final TrackableConnector trackableConnector) {
-                    return trackableConnector.trackableLogInventory();
+                    return Observable.defer(new Func0<Observable<TrackableLog>>() {
+                        @Override
+                        public Observable<TrackableLog> call() {
+                            return trackableConnector.trackableLogInventory();
+                        }
+                    }).subscribeOn(RxUtils.networkScheduler);
                 }
-            })
-        // Store trackables
-        ).doOnNext(new Action1<TrackableLog>() {
+            }).toList()
+        ).subscribe(new Action1<List<TrackableLog>>() {
             @Override
-            public void call(final TrackableLog trackableLog) {
-                trackables.add(trackableLog);
-            }
-        // Update the UI
-        }).doOnTerminate(new Action0() {
-            @Override
-            public void call() {
+            public void call(final List<TrackableLog> trackableLogs) {
+                // Store trackables
+                trackables.addAll(trackableLogs);
+                // Update the UI
                 initializeTrackablesAction();
                 updateTrackablesList();
             }
-        }).subscribe();
+        });
 
         requestKeyboardForLogging();
     }

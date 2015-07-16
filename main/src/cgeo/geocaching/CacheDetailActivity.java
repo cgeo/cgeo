@@ -80,6 +80,7 @@ import rx.Subscription;
 import rx.android.app.AppObservable;
 import rx.functions.Action0;
 import rx.functions.Action1;
+import rx.functions.Func0;
 import rx.functions.Func1;
 import rx.subscriptions.CompositeSubscription;
 import rx.subscriptions.Subscriptions;
@@ -321,31 +322,32 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
         // Load Generic Trackables
         AppObservable.bindActivity(this,
-            // Obtain the actives connectors
+            // Obtain the active connectors and load trackables in parallel.
             Observable.from(ConnectorFactory.getGenericTrackablesConnectors())
-            .subscribeOn(RxUtils.networkScheduler)
             .flatMap(new Func1<TrackableConnector, Observable<Trackable>>() {
                 @Override
                 public Observable<Trackable> call(final TrackableConnector trackableConnector) {
                     processedBrands.add(trackableConnector.getBrand());
-                    return Observable.from(trackableConnector.searchTrackables(geocode));
+                    return Observable.defer(new Func0<Observable<Trackable>>() {
+                        @Override
+                        public Observable<Trackable> call() {
+                            return Observable.from(trackableConnector.searchTrackables(geocode));
+                        }
+                    }).subscribeOn(RxUtils.networkScheduler);
                 }
-            })
-        // Store trackables
-        ).doOnNext(new Action1<Trackable>() {
+            }).toList()
+        ).subscribe(new Action1<List<Trackable>>() {
             @Override
-            public void call(final Trackable trackable) {
-                // Todo: this is not really a good method, it may lead to duplicates ; ie: in OC connectors
-                // Store trackables
-                genericTrackables.add(trackable);
+            public void call(final List<Trackable> trackables) {
+                // Todo: this is not really a good method, it may lead to duplicates ; ie: in OC connectors.
+                // Store trackables.
+                genericTrackables.addAll(trackables);
+                if (!trackables.isEmpty()) {
+                    // Update the UI if any trackables were found.
+                    notifyDataSetChanged();
+                }
             }
-        // Update the UI
-        }).doOnTerminate(new Action0() {
-            @Override
-            public void call() {
-                notifyDataSetChanged();
-            }
-        }).subscribe();
+        });
 
         locationUpdater = new CacheDetailsGeoDirHandler(this);
 
