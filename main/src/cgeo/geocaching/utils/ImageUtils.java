@@ -402,17 +402,12 @@ public final class ImageUtils {
          * Update the container with the new drawable. Called on the UI thread.
          *
          * @param newDrawable the new drawable
-         * @return the view to update
-         * @throws IllegalStateException if the view does not exist anymore
+         * @return the view to update or <tt>null</tt> if the view is not alive anymore
          */
         protected TextView updateDrawable(final Drawable newDrawable) {
             setBounds(0, 0, newDrawable.getIntrinsicWidth(), newDrawable.getIntrinsicHeight());
             drawable = newDrawable;
-            final TextView view = viewRef.get();
-            if (view == null) {
-                throw new IllegalStateException("text view has been deleted while its images are still in use");
-            }
-            return view;
+            return viewRef.get();
         }
 
         private static void redrawQueuedDrawables() {
@@ -425,7 +420,10 @@ public final class ImageUtils {
                     REDRAW_QUEUE.drainTo(toRedraw);
                 }
                 for (final ImmutablePair<ContainerDrawable, Drawable> redrawable : toRedraw) {
-                    VIEWS.add(redrawable.left.updateDrawable(redrawable.right));
+                    final TextView view = redrawable.left.updateDrawable(redrawable.right);
+                    if (view != null) {
+                        VIEWS.add(view);
+                    }
                 }
                 for (final TextView view : VIEWS) {
                     view.setText(view.getText());
@@ -447,7 +445,9 @@ public final class ImageUtils {
         @Override
         protected TextView updateDrawable(final Drawable newDrawable) {
             final TextView view = super.updateDrawable(newDrawable);
-            setBounds(scaleImageToLineHeight(newDrawable, view));
+            if (view != null) {
+                setBounds(scaleImageToLineHeight(newDrawable, view));
+            }
             return view;
         }
     }
