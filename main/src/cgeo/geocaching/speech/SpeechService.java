@@ -44,8 +44,14 @@ public class SpeechService extends Service implements OnInitListener {
     protected Geopoint position;
 
     final GeoDirHandler geoDirHandler = new GeoDirHandler() {
+
         @Override
         public void updateGeoDir(final GeoData newGeo, final float newDirection) {
+            // We might receive a location update before the target has been set. In this case, do nothing.
+            if (target == null) {
+                return;
+            }
+
             position = newGeo.getCoords();
             direction = newDirection;
             // avoid any calculation, if the delay since the last output is not long enough
