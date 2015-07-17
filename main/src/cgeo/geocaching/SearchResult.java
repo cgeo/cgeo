@@ -37,7 +37,7 @@ public class SearchResult implements Parcelable {
     final private Set<String> filteredGeocodes;
     private StatusCode error = null;
     private String url = "";
-    public String[] viewstates = null;
+    private String[] viewstates = null;
     /**
      * Overall number of search results matching our search on geocaching.com. If this number is higher than 20, we have
      * to fetch multiple pages to get all caches.

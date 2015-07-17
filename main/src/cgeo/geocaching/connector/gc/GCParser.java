@@ -104,7 +104,7 @@ public final class GCParser {
 
         final SearchResult searchResult = new SearchResult();
         searchResult.setUrl(url);
-        searchResult.viewstates = GCLogin.getViewstates(page);
+        searchResult.setViewstates(GCLogin.getViewstates(page));
 
         // recaptcha
         if (showCaptcha) {
@@ -322,7 +322,7 @@ public final class GCParser {
                 final Parameters params = new Parameters(
                         "__EVENTTARGET", "",
                         "__EVENTARGUMENT", "");
-                GCLogin.putViewstates(params, searchResult.viewstates);
+                GCLogin.putViewstates(params, searchResult.getViewstates());
                 for (final String cid : cids) {
                     params.put("CID", cid);
                 }
@@ -841,7 +841,7 @@ public final class GCParser {
 
         // save to application
         search.setError(searchResult.getError());
-        search.setViewstates(searchResult.viewstates);
+        search.setViewstates(searchResult.getViewstates());
         for (final String geocode : searchResult.getGeocodes()) {
             search.addGeocode(geocode);
         }
