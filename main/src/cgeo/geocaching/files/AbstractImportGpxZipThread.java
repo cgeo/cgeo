@@ -27,6 +27,8 @@ abstract class AbstractImportGpxZipThread extends AbstractImportGpxThread {
         Collection<Geocache> caches = Collections.emptySet();
         // can't assume that GPX file comes before waypoint file in zip -> so we need two passes
         // 1. parse GPX files
+        int ignoredFiles = 0;
+        int acceptedFiles = 0;
         final ZipInputStream zisPass1 = new ZipInputStream(new BufferedInputStream(getInputStream()));
         try {
             for (ZipEntry zipEntry = zisPass1.getNextEntry(); zipEntry != null; zipEntry = zisPass1.getNextEntry()) {
@@ -34,11 +36,15 @@ abstract class AbstractImportGpxZipThread extends AbstractImportGpxThread {
                     if (!StringUtils.endsWithIgnoreCase(zipEntry.getName(), GPXImporter.WAYPOINTS_FILE_SUFFIX_AND_EXTENSION)) {
                         importStepHandler.sendMessage(importStepHandler.obtainMessage(GPXImporter.IMPORT_STEP_READ_FILE, R.string.gpx_import_loading_caches, (int) zipEntry.getSize()));
                         caches = parser.parse(new NoCloseInputStream(zisPass1), progressHandler);
+                        acceptedFiles++;
                     }
                 } else {
-                    throw new ParserException("Imported zip is not a GPX zip file.");
+                    ignoredFiles++;
                 }
                 zisPass1.closeEntry();
+            }
+            if (ignoredFiles > 0 && acceptedFiles == 0) {
+                throw new ParserException("Imported ZIP does not contain a GPX file.");
             }
         } finally {
             zisPass1.close();

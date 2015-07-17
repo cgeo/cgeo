@@ -240,6 +240,46 @@
                 <data android:pathPattern=".*\\..*\\..*\\..*\\.gpx" />
                 <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.gpx" />
             </intent-filter>
+            
+            <!-- intent filter for local ggz files -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.ALTERNATIVE" />
+                <category android:name="android.intent.category.SELECTED_ALTERNATIVE" />
+                
+                <data android:mimeType="*/*" />
+                <data android:scheme="file" />
+                <data android:host="*" />
+                <data android:pathPattern=".*\\.ggz" />
+                <!-- path pattern does not match dots correctly: http://stackoverflow.com/q/3400072/44089 -->
+                <data android:pathPattern=".*\\..*\\.ggz" />
+                <data android:pathPattern=".*\\..*\\..*\\.ggz" />
+                <data android:pathPattern=".*\\..*\\..*\\..*\\.ggz" />
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.ggz" />
+            </intent-filter>
+            
+            <!-- intent filter for GGZ links, independent of mime types -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                
+                <data android:scheme="http" />
+                <data android:scheme="https" />
+                <data android:host="*" />
+                <data android:pathPattern=".*\\.ggz" />
+                <data android:pathPattern=".*\\..*\\.ggz" />
+                <data android:pathPattern=".*\\..*\\..*\\.ggz" />
+                <data android:pathPattern=".*\\..*\\..*\\..*\\.ggz" />
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.ggz" />
+            </intent-filter>
+            
+
+            <!-- intent filter for ZIP files -->
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -257,6 +297,7 @@
                 <data android:mimeType="application/octet-stream" />
                 <data android:pathPattern=".*\\.gpx" />
                 <data android:pathPattern=".*\\.zip" />
+                <data android:pathPattern=".*\\.ggz" />
             </intent-filter>
         </activity>
         <activity

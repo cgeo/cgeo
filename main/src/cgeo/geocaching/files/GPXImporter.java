@@ -38,6 +38,7 @@ public class GPXImporter {
     public static final String GPX_FILE_EXTENSION = ".gpx";
     public static final String LOC_FILE_EXTENSION = ".loc";
     public static final String ZIP_FILE_EXTENSION = ".zip";
+    public static final String COMPRESSED_GPX_FILE_EXTENSION = ".ggz";
     public static final String WAYPOINTS_FILE_SUFFIX = "-wpts";
     public static final String WAYPOINTS_FILE_SUFFIX_AND_EXTENSION = WAYPOINTS_FILE_SUFFIX + GPX_FILE_EXTENSION;
 
@@ -59,7 +60,7 @@ public class GPXImporter {
     }
 
     /**
-     * Import GPX file. Currently supports *.gpx, *.zip (containing gpx files, e.g. PQ queries) or *.loc files.
+     * Import GPX file. Currently supports *.gpx, *.zip (containing gpx files, e.g. PQ queries), *.ggz or *.loc files.
      *
      * @param file
      *            the file to import
@@ -67,7 +68,7 @@ public class GPXImporter {
     public void importGPX(final File file) {
         if (StringUtils.endsWithIgnoreCase(file.getName(), GPX_FILE_EXTENSION)) {
             new ImportGpxFileThread(file, listId, importStepHandler, progressHandler).start();
-        } else if (StringUtils.endsWithIgnoreCase(file.getName(), ZIP_FILE_EXTENSION)) {
+        } else if (StringUtils.endsWithIgnoreCase(file.getName(), ZIP_FILE_EXTENSION) || StringUtils.endsWithIgnoreCase(file.getName(), COMPRESSED_GPX_FILE_EXTENSION)) {
             new ImportGpxZipFileThread(file, listId, importStepHandler, progressHandler).start();
         } else {
             new ImportLocFileThread(file, listId, importStepHandler, progressHandler).start();
