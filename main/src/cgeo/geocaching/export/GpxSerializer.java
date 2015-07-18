@@ -30,12 +30,28 @@ import java.util.Set;
 
 public final class GpxSerializer {
 
+
+
+
     private static final SynchronizedDateFormat dateFormatZ = new SynchronizedDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US);
-    public static final String PREFIX_XSI = "http://www.w3.org/2001/XMLSchema-instance";
-    public static final String PREFIX_GPX = "http://www.topografix.com/GPX/1/0";
-    public static final String PREFIX_GROUNDSPEAK = "http://www.groundspeak.com/cache/1/0";
-    public static final String PREFIX_GSAK = "http://www.gsak.net/xmlv1/6";
-    public static final String PREFIX_CGEO = "http://www.cgeo.org/wptext/1/0";
+
+    private static final String PREFIX_XSI = "xsi";
+    private static final String NS_XSI = "http://www.w3.org/2001/XMLSchema-instance";
+
+    private static final String PREFIX_GPX = "";
+    private static final String NS_GPX = "http://www.topografix.com/GPX/1/0";
+    private static final String GPX_SCHEMA = NS_GPX + "/gpx.xsd";
+
+    private static final String PREFIX_GROUNDSPEAK = "groundspeak";
+    private static final String NS_GROUNDSPEAK = "http://www.groundspeak.com/cache/1/0/1";
+    private static final String GROUNDSPEAK_SCHEMA = NS_GROUNDSPEAK + "/cache.xsd";
+
+    private static final String PREFIX_GSAK = "gsak";
+    private static final String NS_GSAK = "http://www.gsak.net/xmlv1/6";
+    private static final String GSAK_SCHEMA = NS_GSAK + "/gsak.xsd";
+
+    private static final String PREFIX_CGEO = "cgeo";
+    private static final String NS_CGEO = "http://www.cgeo.org/wptext/1/0";
 
     /**
      * During the export, only this number of geocaches is fully loaded into memory.
@@ -63,18 +79,16 @@ public final class GpxSerializer {
         gpx.setOutput(writer);
 
         gpx.startDocument(CharEncoding.UTF_8, true);
-        gpx.setPrefix("", PREFIX_GPX);
-        gpx.setPrefix("xsi", PREFIX_XSI);
-        gpx.setPrefix("groundspeak", PREFIX_GROUNDSPEAK);
-        gpx.setPrefix("gsak", PREFIX_GSAK);
-        gpx.setPrefix("cgeo", PREFIX_CGEO);
-        gpx.startTag(PREFIX_GPX, "gpx");
+        gpx.setPrefix(PREFIX_GPX, NS_GPX);
+        gpx.setPrefix(PREFIX_XSI, NS_XSI);
+        gpx.setPrefix(PREFIX_GROUNDSPEAK, NS_GROUNDSPEAK);
+        gpx.setPrefix(PREFIX_GSAK, NS_GSAK);
+        gpx.setPrefix(PREFIX_CGEO, NS_CGEO);
+
+        gpx.startTag(NS_GPX, "gpx");
         gpx.attribute("", "version", "1.0");
         gpx.attribute("", "creator", "c:geo - http://www.cgeo.org/");
-        gpx.attribute(PREFIX_XSI, "schemaLocation",
-                PREFIX_GPX + " http://www.topografix.com/GPX/1/0/gpx.xsd " +
-                        PREFIX_GROUNDSPEAK + " http://www.groundspeak.com/cache/1/0/1/cache.xsd " +
-                        PREFIX_GSAK + " http://www.gsak.net/xmlv1/6/gsak.xsd");
+        gpx.attribute(NS_XSI, "schemaLocation", NS_GPX + " " + GPX_SCHEMA + " " + NS_GROUNDSPEAK + " " + GROUNDSPEAK_SCHEMA + " " + NS_GSAK + " " + GSAK_SCHEMA);
 
         // Split the overall set of geocodes into small chunks. That is a compromise between memory efficiency (because
         // we don't load all caches fully into memory) and speed (because we don't query each cache separately).
@@ -84,7 +98,7 @@ public final class GpxSerializer {
             batch.clear();
         }
 
-        gpx.endTag(PREFIX_GPX, "gpx");
+        gpx.endTag(NS_GPX, "gpx");
         gpx.endDocument();
     }
 
@@ -99,16 +113,16 @@ public final class GpxSerializer {
                 // Export would be invalid without coordinates.
                 continue;
             }
-            gpx.startTag(PREFIX_GPX, "wpt");
+            gpx.startTag(NS_GPX, "wpt");
             gpx.attribute("", "lat", Double.toString(coords.getLatitude()));
             gpx.attribute("", "lon", Double.toString(coords.getLongitude()));
 
             final Date hiddenDate = cache.getHiddenDate();
             if (hiddenDate != null) {
-                XmlUtils.simpleText(gpx, PREFIX_GPX, "time", dateFormatZ.format(hiddenDate));
+                XmlUtils.simpleText(gpx, NS_GPX, "time", dateFormatZ.format(hiddenDate));
             }
 
-            XmlUtils.multipleTexts(gpx, PREFIX_GPX,
+            XmlUtils.multipleTexts(gpx, NS_GPX,
                     "name", cache.getGeocode(),
                     "desc", cache.getName(),
                     "url", cache.getUrl(),
@@ -116,43 +130,46 @@ public final class GpxSerializer {
                     "sym", cache.isFound() ? "Geocache Found" : "Geocache",
                     "type", "Geocache|" + cache.getType().pattern);
 
-            gpx.startTag(PREFIX_GROUNDSPEAK, "cache");
+            gpx.startTag(NS_GROUNDSPEAK, "cache");
             gpx.attribute("", "id", cache.getCacheId());
             gpx.attribute("", "available", !cache.isDisabled() ? "True" : "False");
             gpx.attribute("", "archived", cache.isArchived() ? "True" : "False");
 
-            XmlUtils.multipleTexts(gpx, PREFIX_GROUNDSPEAK,
+            XmlUtils.multipleTexts(gpx, NS_GROUNDSPEAK,
                     "name", cache.getName(),
                     "placed_by", cache.getOwnerDisplayName(),
                     "owner", cache.getOwnerUserId(),
                     "type", cache.getType().pattern,
-                    "container", cache.getSize().id,
-                    "difficulty", Float.toString(cache.getDifficulty()),
-                    "terrain", Float.toString(cache.getTerrain()),
-                    "country", getCountry(cache),
-                    "state", getState(cache),
-                    "encoded_hints", cache.getHint());
+ "container", cache.getSize().id);
 
             writeAttributes(cache);
 
-            gpx.startTag(PREFIX_GROUNDSPEAK, "short_description");
+            XmlUtils.multipleTexts(gpx, NS_GROUNDSPEAK,
+                    "difficulty", Float.toString(cache.getDifficulty()),
+                    "terrain", Float.toString(cache.getTerrain()),
+                    "country", getCountry(cache),
+ "state", getState(cache));
+
+            gpx.startTag(NS_GROUNDSPEAK, "short_description");
             gpx.attribute("", "html", TextUtils.containsHtml(cache.getShortDescription()) ? "True" : "False");
             gpx.text(cache.getShortDescription());
-            gpx.endTag(PREFIX_GROUNDSPEAK, "short_description");
+            gpx.endTag(NS_GROUNDSPEAK, "short_description");
 
-            gpx.startTag(PREFIX_GROUNDSPEAK, "long_description");
+            gpx.startTag(NS_GROUNDSPEAK, "long_description");
             gpx.attribute("", "html", TextUtils.containsHtml(cache.getDescription()) ? "True" : "False");
             gpx.text(cache.getDescription());
-            gpx.endTag(PREFIX_GROUNDSPEAK, "long_description");
+            gpx.endTag(NS_GROUNDSPEAK, "long_description");
+
+            XmlUtils.simpleText(gpx, NS_GROUNDSPEAK, "encoded_hints", cache.getHint());
 
             writeLogs(cache);
             writeTravelBugs(cache);
 
-            gpx.endTag(PREFIX_GROUNDSPEAK, "cache");
+            gpx.endTag(NS_GROUNDSPEAK, "cache");
 
-            writeGSAK(cache);
+            writeGsakExtensions(cache);
 
-            gpx.endTag(PREFIX_GPX, "wpt");
+            gpx.endTag(NS_GPX, "wpt");
 
             writeWaypoints(cache);
 
@@ -163,14 +180,14 @@ public final class GpxSerializer {
         }
     }
 
-    private void writeGSAK(final Geocache cache) throws IOException {
-        gpx.startTag(PREFIX_GSAK, "wptExtension");
-        XmlUtils.multipleTexts(gpx, PREFIX_GSAK,
+    private void writeGsakExtensions(final Geocache cache) throws IOException {
+        gpx.startTag(NS_GSAK, "wptExtension");
+        XmlUtils.multipleTexts(gpx, NS_GSAK,
+ "Watch", gpxBoolean(cache.isOnWatchlist()),
                 "IsPremium", gpxBoolean(cache.isPremiumMembersOnly()),
                 "FavPoints", Integer.toString(cache.getFavoritePoints()),
-                "Watch", gpxBoolean(cache.isOnWatchlist()),
                 "GcNote", StringUtils.trimToEmpty(cache.getPersonalNote()));
-        gpx.endTag(PREFIX_GSAK, "wptExtension");
+        gpx.endTag(NS_GSAK, "wptExtension");
     }
 
     /**
@@ -224,33 +241,34 @@ public final class GpxSerializer {
         final Geopoint coords = wp.getCoords();
         // TODO: create some extension to GPX to include waypoint without coords
         if (coords != null) {
-            gpx.startTag(PREFIX_GPX, "wpt");
+            gpx.startTag(NS_GPX, "wpt");
             gpx.attribute("", "lat", Double.toString(coords.getLatitude()));
             gpx.attribute("", "lon", Double.toString(coords.getLongitude()));
             final String waypointTypeGpx = wp.getWaypointType().gpx;
-            XmlUtils.multipleTexts(gpx, PREFIX_GPX,
+            XmlUtils.multipleTexts(gpx, NS_GPX,
                     "name", wp.getGpxId(),
                     "cmt", wp.getNote(),
                     "desc", wp.getName(),
                     "sym", waypointTypeGpx,
                     "type", "Waypoint|" + waypointTypeGpx);
             // add parent reference the GSAK-way
-            gpx.startTag(PREFIX_GSAK, "wptExtension");
-            gpx.startTag(PREFIX_GSAK, "Parent");
+            gpx.startTag(NS_GSAK, "wptExtension");
+            gpx.startTag(NS_GSAK, "Parent");
             gpx.text(wp.getGeocode());
-            gpx.endTag(PREFIX_GSAK, "Parent");
-            gpx.endTag(PREFIX_GSAK, "wptExtension");
+            gpx.endTag(NS_GSAK, "Parent");
+            gpx.endTag(NS_GSAK, "wptExtension");
+
             if (wp.isVisited()) {
-                gpx.startTag(PREFIX_CGEO, "visited");
+                gpx.startTag(NS_CGEO, "visited");
                 gpx.text("true");
-                gpx.endTag(PREFIX_CGEO, "visited");
+                gpx.endTag(NS_CGEO, "visited");
             }
             if (wp.isUserDefined()) {
-                gpx.startTag(PREFIX_CGEO, "userdefined");
+                gpx.startTag(NS_CGEO, "userdefined");
                 gpx.text("true");
-                gpx.endTag(PREFIX_CGEO, "userdefined");
+                gpx.endTag(NS_CGEO, "userdefined");
             }
-            gpx.endTag(PREFIX_GPX, "wpt");
+            gpx.endTag(NS_GPX, "wpt");
         }
     }
 
@@ -259,22 +277,22 @@ public final class GpxSerializer {
         if (logs.isEmpty()) {
             return;
         }
-        gpx.startTag(PREFIX_GROUNDSPEAK, "logs");
+        gpx.startTag(NS_GROUNDSPEAK, "logs");
 
         for (final LogEntry log : logs) {
-            gpx.startTag(PREFIX_GROUNDSPEAK, "log");
+            gpx.startTag(NS_GROUNDSPEAK, "log");
             gpx.attribute("", "id", Integer.toString(log.id));
 
-            XmlUtils.multipleTexts(gpx, PREFIX_GROUNDSPEAK,
+            XmlUtils.multipleTexts(gpx, NS_GROUNDSPEAK,
                     "date", dateFormatZ.format(new Date(log.date)),
                     "type", log.type.type);
 
-            gpx.startTag(PREFIX_GROUNDSPEAK, "finder");
+            gpx.startTag(NS_GROUNDSPEAK, "finder");
             gpx.attribute("", "id", "");
             gpx.text(log.author);
-            gpx.endTag(PREFIX_GROUNDSPEAK, "finder");
+            gpx.endTag(NS_GROUNDSPEAK, "finder");
 
-            gpx.startTag(PREFIX_GROUNDSPEAK, "text");
+            gpx.startTag(NS_GROUNDSPEAK, "text");
             gpx.attribute("", "encoded", "False");
             try {
                 gpx.text(log.log);
@@ -282,12 +300,12 @@ public final class GpxSerializer {
                 Log.e("GpxSerializer.writeLogs: cannot write log " + log.id + " for cache " + cache.getGeocode(), e);
                 gpx.text(" [end of log omitted due to an invalid character]");
             }
-            gpx.endTag(PREFIX_GROUNDSPEAK, "text");
+            gpx.endTag(NS_GROUNDSPEAK, "text");
 
-            gpx.endTag(PREFIX_GROUNDSPEAK, "log");
+            gpx.endTag(NS_GROUNDSPEAK, "log");
         }
 
-        gpx.endTag(PREFIX_GROUNDSPEAK, "logs");
+        gpx.endTag(NS_GROUNDSPEAK, "logs");
     }
 
     private void writeTravelBugs(final Geocache cache) throws IOException {
@@ -295,19 +313,19 @@ public final class GpxSerializer {
         if (CollectionUtils.isEmpty(inventory)) {
             return;
         }
-        gpx.startTag(PREFIX_GROUNDSPEAK, "travelbugs");
+        gpx.startTag(NS_GROUNDSPEAK, "travelbugs");
 
         for (final Trackable trackable : inventory) {
-            gpx.startTag(PREFIX_GROUNDSPEAK, "travelbug");
+            gpx.startTag(NS_GROUNDSPEAK, "travelbug");
 
             // in most cases the geocode will be empty (only the guid is known). those travel bugs cannot be imported again!
             gpx.attribute("", "ref", trackable.getGeocode());
-            XmlUtils.simpleText(gpx, PREFIX_GROUNDSPEAK, "name", trackable.getName());
+            XmlUtils.simpleText(gpx, NS_GROUNDSPEAK, "name", trackable.getName());
 
-            gpx.endTag(PREFIX_GROUNDSPEAK, "travelbug");
+            gpx.endTag(NS_GROUNDSPEAK, "travelbug");
         }
 
-        gpx.endTag(PREFIX_GROUNDSPEAK, "travelbugs");
+        gpx.endTag(NS_GROUNDSPEAK, "travelbugs");
     }
 
     private void writeAttributes(final Geocache cache) throws IOException {
@@ -315,7 +333,7 @@ public final class GpxSerializer {
             return;
         }
         //TODO: Attribute conversion required: English verbose name, gpx-id
-        gpx.startTag(PREFIX_GROUNDSPEAK, "attributes");
+        gpx.startTag(NS_GROUNDSPEAK, "attributes");
 
         for (final String attribute : cache.getAttributes()) {
             final CacheAttribute attr = CacheAttribute.getByRawName(CacheAttribute.trimAttributeName(attribute));
@@ -324,14 +342,14 @@ public final class GpxSerializer {
             }
             final boolean enabled = CacheAttribute.isEnabled(attribute);
 
-            gpx.startTag(PREFIX_GROUNDSPEAK, "attribute");
+            gpx.startTag(NS_GROUNDSPEAK, "attribute");
             gpx.attribute("", "id", Integer.toString(attr.gcid));
             gpx.attribute("", "inc", enabled ? "1" : "0");
             gpx.text(attr.getL10n(enabled));
-            gpx.endTag(PREFIX_GROUNDSPEAK, "attribute");
+            gpx.endTag(NS_GROUNDSPEAK, "attribute");
         }
 
-        gpx.endTag(PREFIX_GROUNDSPEAK, "attributes");
+        gpx.endTag(NS_GROUNDSPEAK, "attributes");
     }
 
     protected static String getState(final Geocache cache) {
