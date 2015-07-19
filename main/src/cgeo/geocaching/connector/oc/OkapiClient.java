@@ -309,6 +309,38 @@ final class OkapiClient {
         return new LogResult(StatusCode.LOG_POST_ERROR, "");
     }
 
+    public static boolean UploadPersonalNotes(final OCApiConnector connector, final Geocache cache) {
+        Log.d("Uploading personal note for opencaching");
+
+        final Parameters notesparam = new Parameters("cache_code", cache.getGeocode(), "fields", CACHE_MY_NOTES);
+        final ObjectNode notesdata = request(connector, OkapiService.SERVICE_CACHE, notesparam).data;
+
+        String prevnote = "";
+
+        if (notesdata != null && notesdata.get(CACHE_MY_NOTES) != null) {
+            prevnote = notesdata.get(CACHE_MY_NOTES).asText();
+        }
+
+        String currentnote = "";
+
+        if (cache.getPersonalNote() != null) {
+            currentnote = cache.getPersonalNote();
+        }
+
+        final Parameters params = new Parameters("cache_code", cache.getGeocode(), "new_value", currentnote, "old_value", prevnote);
+        final ObjectNode data = request(connector, OkapiService.SERVICE_UPLOAD_PERSONAL_NOTE, params).data;
+
+        if (data == null) {
+            return false;
+        }
+
+        if (data.get("replaced").asBoolean()) {
+            Log.d("Successfully uploaded");
+            return true;
+        }
+        return false;
+    }
+
     private static List<Geocache> parseCaches(final ObjectNode response) {
         try {
             // Check for empty result
