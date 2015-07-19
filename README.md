@@ -55,7 +55,7 @@ If the workspace directory name contains a space and leads to errors in the -dex
 4. copy `./main/templates/local.properties` to `./tests/`
 5. edit `local.properties` (see comments in the file)
 6. copy `local.properties` to all other projects (currently android-support-v7-appcompat, google-play-services_lib, mapswithme-api, showcaseview)
-7. copy `local.properties` to cgeo-calender and cgeo-contacts if you plan to hack on the plugins
+7. copy `local.properties` to cgeo-calendar and cgeo-contacts if you plan to hack on the plugins
 6. copy `./main/templates/keys.xml` to `./main/res/values/`
 7. edit `./main/res/values/keys.xml` and insert several keys (see comments in the file)
   * Google Maps API v1 key (you can leave it empty, but then Google Maps don't work - Google doesn't hand out new keys for Google Maps v1, you have to use an existing one)
