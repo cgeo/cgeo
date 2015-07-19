@@ -2,6 +2,11 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
+    <b>Next bugfix release:</b>\n
+    · Fix: Possible crash while editing personal notes\n
+    · Fix: Waypoints of caches may be missing on GPX import\n
+    \n
+    \n
     <b>2015.07.08:</b>\n
     · Fix: Alphabetical sorting of trackables in log window\n
     · Fix: Adapting to geocaching.com changes (waypoint coordinate format)\n
