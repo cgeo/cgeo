@@ -9,7 +9,8 @@ enum OkapiService {
     SERVICE_MARK_CACHE("/okapi/services/caches/mark", OAuthLevel.Level3),
     SERVICE_SUBMIT_LOG("/okapi/services/logs/submit", OAuthLevel.Level3),
     SERVICE_USER("/okapi/services/users/user", OAuthLevel.Level1),
-    SERVICE_USER_BY_USERNAME("/okapi/services/users/by_username", OAuthLevel.Level1);
+    SERVICE_USER_BY_USERNAME("/okapi/services/users/by_username", OAuthLevel.Level1),
+    SERVICE_UPLOAD_PERSONAL_NOTE("/okapi/services/caches/save_personal_notes",OAuthLevel.Level3);
 
     final String methodName;
     final OAuthLevel level;

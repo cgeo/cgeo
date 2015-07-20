@@ -186,4 +186,23 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByCente
         return StringUtils.equalsIgnoreCase(username, getUserName());
     }
 
+    public boolean supportsPersonalNote() {
+        if (this.getApiSupport() == ApiSupport.current && isActive()) {
+            return true;
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean uploadPersonalNote(@NonNull final Geocache cache) {
+        final boolean status = OkapiClient.UploadPersonalNotes(this, cache);
+
+        if (status) {
+            return true;
+        }
+
+        return false;
+    }
+
 }
