@@ -221,6 +221,7 @@
   <string name="info_cache_saved">De cache is lokaal opgeslagen</string>
   <string name="err_trackable_log_not_anonymous">Loggen van %1$s in c:geo kan niet anoniem worden gedaan. Wilt u de instellingen openen om uw referenties van %2$s in te vullen?</string>
   <string name="err_trackable_no_preference_activity">Sorry, kan geen geschikt voorkeuren scherm vinden.</string>
+  <string name="warn_discard_changes">Niet opgeslagen waypoint wijzigingen werden verwijderd!</string>
   <string name="loc_last">Laatst bekende</string>
   <string name="loc_net">Netwerk</string>
   <string name="loc_fused">Gecombineerd</string>
@@ -285,7 +286,15 @@
   <string name="caches_nearby">Nabij</string>
   <string name="caches_manage">Beheer</string>
   <string name="caches_remove_all">Verwijder alles</string>
+  <plurals name="caches_remove_all_confirm">
+    <item quantity="one">Wil je deze cache verwijderen uit de huidige lijst?</item>
+    <item quantity="other">Wil je alle %d caches uit de huidige lijst verwijderen?</item>
+  </plurals>
   <string name="caches_remove_selected">Selectie verwijderen</string>
+  <plurals name="caches_remove_selected_confirm">
+    <item quantity="one">Wil je de geselecteerde cache verwijderen van je apparaat?</item>
+    <item quantity="other">Wil je de geselecteerde %d caches verwijderen van je apparaat?</item>
+  </plurals>
   <string name="caches_remove_progress">Caches worden verwijderd</string>
   <string name="caches_delete_events">Verwijder afgelopen evenementen</string>
   <string name="caches_refresh_selected">Ververs geselecteerden</string>
@@ -938,6 +947,8 @@
   <string name="helper_google_translate_description">Als je vertaal pakketten in de Google Translate app download, kan je eenvoudig een cache omschrijving vertalen in c:geo door een lange tik op deze omschrijvingstekst (zonder een internet verbinding).</string>
   <string name="helper_wear_title">c:geo Wear</string>
   <string name="helper_wear_description">c:geo Wear is een plugin voor c:geo waarmee je naar geocaches kunt navigeren met behulp van een Android Wear smartwatch.</string>
+  <string name="helper_where_you_go_title">WhereYouGo</string>
+  <string name="helper_where_you_go_description">Met WhereYouGo kan je spelen en geocaches zoeken van het type Whereigo. c:geo kan automatisch cartridges downloaden binnen deze app.</string>
   <string name="addon_missing_title">Add-On ontbreekt</string>
   <string name="addon_download_prompt">Haal de add-on nu op van Google Play.</string>
   <string name="export">Exporteren</string>
