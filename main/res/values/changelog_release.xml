@@ -6,6 +6,7 @@
     · Fix: Possible crash while editing personal notes\n
     · Fix: Waypoints of caches may be missing on GPX import\n
     · Fix: Crash if talking compass is started without target\n
+    · Fix: Request to gc.com tile server sent for caches from unknown sources\n
     \n
     \n
     <b>2015.07.08:</b>\n
