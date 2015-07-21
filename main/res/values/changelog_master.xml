@@ -4,6 +4,7 @@
   <string name="changelog_master" translatable="false">
     <b>Next feature release:</b>\n
     · New: Menu in cache details to put cache on ignore list (but not to remove)\n
+    · New: Support upload of personal note to Opencaching platforms\n
     · New: Function to check your login for gcvote.com\n
     · New: Import Garmin GGZ files\n
     · New: Almost full support for TerraCaching GPX files\n
