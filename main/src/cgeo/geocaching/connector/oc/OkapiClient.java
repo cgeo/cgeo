@@ -36,8 +36,6 @@ import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.SynchronizedDateFormat;
 
-import ch.boye.httpclientandroidlib.HttpResponse;
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
@@ -63,6 +61,8 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
 import java.util.regex.Pattern;
+
+import ch.boye.httpclientandroidlib.HttpResponse;
 
 /**
  * Client for the OpenCaching API (Okapi).
@@ -309,25 +309,21 @@ final class OkapiClient {
         return new LogResult(StatusCode.LOG_POST_ERROR, "");
     }
 
-    public static boolean UploadPersonalNotes(final OCApiConnector connector, final Geocache cache) {
+    public static boolean uploadPersonalNotes(final OCApiConnector connector, final Geocache cache) {
         Log.d("Uploading personal note for opencaching");
 
-        final Parameters notesparam = new Parameters("cache_code", cache.getGeocode(), "fields", CACHE_MY_NOTES);
-        final ObjectNode notesdata = request(connector, OkapiService.SERVICE_CACHE, notesparam).data;
+        final Parameters notesParam = new Parameters("cache_code", cache.getGeocode(), "fields", CACHE_MY_NOTES);
+        final ObjectNode notesData = request(connector, OkapiService.SERVICE_CACHE, notesParam).data;
 
-        String prevnote = "";
+        String prevNote = StringUtils.EMPTY;
 
-        if (notesdata != null && notesdata.get(CACHE_MY_NOTES) != null) {
-            prevnote = notesdata.get(CACHE_MY_NOTES).asText();
+        if (notesData != null && notesData.get(CACHE_MY_NOTES) != null) {
+            prevNote = notesData.get(CACHE_MY_NOTES).asText();
         }
 
-        String currentnote = "";
+        final String currentNote = StringUtils.defaultString(cache.getPersonalNote());
 
-        if (cache.getPersonalNote() != null) {
-            currentnote = cache.getPersonalNote();
-        }
-
-        final Parameters params = new Parameters("cache_code", cache.getGeocode(), "new_value", currentnote, "old_value", prevnote);
+        final Parameters params = new Parameters("cache_code", cache.getGeocode(), "new_value", currentNote, "old_value", prevNote);
         final ObjectNode data = request(connector, OkapiService.SERVICE_UPLOAD_PERSONAL_NOTE, params).data;
 
         if (data == null) {
