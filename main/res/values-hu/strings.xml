@@ -391,7 +391,7 @@
   <string name="settings_activate_ec">Aktiválás</string>
   <string name="settings_activate_ox">Aktiválás</string>
   <string name="settings_gc_legal_note">A geocaching.com használatával elfogadja a Groundspeak Felhasználási Feltételeit.</string>
-  <string name="settings_info_facebook_login_title">Facebook Bejelentkezés</string>
+  <string name="settings_info_facebook_login_title">Facebook-os bejelentkezés</string>
   <string name="settings_info_facebook_login">Facebook-os azonosítóval nem hajtható végre c:geo-os bejelentkezés a geocaching.com-ra. De van egy egyszerű megoldás…</string>
   <string name="settings_authorize">c:geo engedélyezése</string>
   <string name="settings_reauthorize">c:geo újraengedélyezése</string>
@@ -980,7 +980,7 @@
   <string name="export_confirm_title">%1$s exportálása</string>
   <string name="export_confirm_message">Elérési út: %1$s\nFájl név: %2$s</string>
   <string name="attribute_dogs_yes">Kutyák engedélyezettek</string>
-  <string name="attribute_dogs_no">Kutyát nem engedélyezettek</string>
+  <string name="attribute_dogs_no">Kutyák nem engedélyezettek</string>
   <string name="attribute_bicycles_yes">Bicikli engedélyezett</string>
   <string name="attribute_bicycles_no">Bicikli nem engedélyezett</string>
   <string name="attribute_motorcycles_yes">Motor engedélyezett</string>
@@ -1044,7 +1044,7 @@
   <string name="attribute_frontyard_yes">Magánterület</string>
   <string name="attribute_frontyard_no">Nem magánterület</string>
   <string name="attribute_teamwork_yes">Csapatmunka szükséges</string>
-  <string name="attribute_teamwork_no">Nem szükséges csapatmunka</string>
+  <string name="attribute_teamwork_no">Csapatmunka nem szükséges</string>
   <string name="attribute_landf_yes">Elveszett és megtalált túra</string>
   <string name="attribute_landf_no">Nem Elveszett és megtalált túra</string>
   <string name="attribute_partnership_yes">Társasági láda</string>
@@ -1075,8 +1075,8 @@
   <string name="attribute_poisonoak_no">Nincsenek mérgező növények</string>
   <string name="attribute_dangerousanimals_yes">Veszélyes állatok</string>
   <string name="attribute_dangerousanimals_no">Nincsenek veszélyes állatok</string>
-  <string name="attribute_ticks_yes">Kullancsok</string>
-  <string name="attribute_ticks_no">Nincs kullancs</string>
+  <string name="attribute_ticks_yes">Kullancsveszély</string>
+  <string name="attribute_ticks_no">Nincs kullancsveszély</string>
   <string name="attribute_mine_yes">Elhagyott bányák</string>
   <string name="attribute_mine_no">Nincs elhagyott bánya</string>
   <string name="attribute_cliff_yes">Szakadék / leeső sziklák</string>
