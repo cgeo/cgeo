@@ -1,6 +1,7 @@
 package cgeo.geocaching.filter;
 
 import cgeo.geocaching.Geocache;
+import cgeo.geocaching.LogEntry;
 import cgeo.geocaching.R;
 
 import org.eclipse.jdt.annotation.NonNull;
@@ -21,6 +22,7 @@ class StateFilterFactory implements IFilterFactory {
         final List<AbstractFilter> filters = new ArrayList<>(6);
         filters.add(new StateFoundFilter());
         filters.add(new StateNotFoundFilter());
+        filters.add(new StateNeverFoundFilter());
         filters.add(new StateArchivedFilter());
         filters.add(new StateDisabledFilter());
         filters.add(new StatePremiumFilter());
@@ -98,6 +100,43 @@ class StateFilterFactory implements IFilterFactory {
             @Override
             public StateNotFoundFilter[] newArray(final int size) {
                 return new StateNotFoundFilter[size];
+            }
+        };
+    }
+
+    static class StateNeverFoundFilter extends AbstractFilter {
+
+        public StateNeverFoundFilter() {
+            super(R.string.cache_never_found);
+        }
+
+        protected StateNeverFoundFilter(final Parcel in) {
+            super(in);
+        }
+
+        @Override
+        public boolean accepts(@NonNull final Geocache cache) {
+            if (cache.getFindsCount() > 0) {
+                return false;
+            }
+            for (final LogEntry log : cache.getLogs()) {
+                if (log.type.isFoundLog()) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public static final Creator<StateNeverFoundFilter> CREATOR = new Parcelable.Creator<StateNeverFoundFilter>() {
+
+            @Override
+            public StateNeverFoundFilter createFromParcel(final Parcel in) {
+                return new StateNeverFoundFilter(in);
+            }
+
+            @Override
+            public StateNeverFoundFilter[] newArray(final int size) {
+                return new StateNeverFoundFilter[size];
             }
         };
     }
