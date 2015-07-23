@@ -119,6 +119,7 @@ class StateFilterFactory implements IFilterFactory {
             if (cache.getFindsCount() > 0) {
                 return false;
             }
+            // find counts don't exist for every connector, so we also check the logs
             for (final LogEntry log : cache.getLogs()) {
                 if (log.type.isFoundLog()) {
                     return false;
