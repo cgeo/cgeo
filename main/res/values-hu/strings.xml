@@ -82,7 +82,7 @@
   <string name="log_saving">Log mentése…</string>
   <string name="log_saving_and_uploading">Log beküldése és kép feltöltése…</string>
   <string name="log_clear">Törlés</string>
-  <string name="log_post_not_possible">Az adatok letöltése folyamatban van...\nKérlek próbáld újra néhány másodperc múlva vagy ellenőrizd az internetkapcsolatodat.</string>
+  <string name="log_post_not_possible">Az adatok letöltése folyamatban van...\nKérlek, próbáld újra néhány másodperc múlva vagy ellenőrizd az internetkapcsolatodat!</string>
   <string name="log_post_geocode_missing">Hiányzó geokód…</string>
   <string name="log_date_future_not_allowed">Jövőbeli log dátum nem lehetséges.</string>
   <string name="log_add">Hozzáadás</string>
@@ -157,12 +157,12 @@
   <string name="err_application_no">A c:geo nem talál megfelelő alkalmazást.</string>
   <string name="err_auth_initialize">Sajnáljuk, a c:geo nem tudta elindítani az engedélyezési eljárást.</string>
   <string name="err_auth_process">Az engedélyezési eljárás sikertelen.</string>
-  <string name="err_cannot_log_visit">A c:geo-nak nincs elég információja a láda logolásához. Kérlek, logold a ládát a láda teljes leírásánál.</string>
+  <string name="err_cannot_log_visit">A c:geo-nak nincs elég információja a láda logolásához. Kérlek, logold a ládát a láda teljes leírásánál!</string>
   <string name="err_download_fail">Sajnáljuk, a c:geo nem tudja letölteni a ládákat, mert </string>
   <string name="err_dwld_details_failed">Sajnáljuk, a c:geo nem tudja letölteni a láda adatait.</string>
   <string name="err_load_descr_failed">Sajnáljuk, a c:geo nem tudja betölteni a leírást.</string>
   <string name="err_location_unknown">A c:geo nem ismeri a láda helyét.</string>
-  <string name="err_missing_device_name">Kérlek, regisztráció előtt adj meg egy készüléknevet.</string>
+  <string name="err_missing_device_name">Kérlek, regisztráció előtt adj meg egy készüléknevet!</string>
   <string name="err_favorite_failed">Kedvenc állapotmódosítása nem sikerült.</string>
   <string name="err_select_logimage_failed">Kép kiválasztása sikertelen.</string>
   <string name="err_acquire_image_failed">A kép készítése nem sikerült.</string>
@@ -183,10 +183,10 @@
   <string name="err_log_load_data_still">A c:geo még tölti a logoláshoz szükséges adatokat. Kérlek, várj még egy kicsit!</string>
   <string name="err_log_post_missing_tracking_code">A követő kód hiányzik.</string>
   <string name="err_log_post_missing_coordinates">A koordináták hiányoznak.</string>
-  <string name="err_log_post_failed">Úgy tűnik, hogy a logod nem ment át. Kérlek, ellenőrizd a láda eredeti oldalát.</string>
-  <string name="err_log_post_failed_ec">Úgy tűnik, hogy a logod nem került hozzáadásra. Kérlek, ellenőrizd a extremcaching.com-on.</string>
-  <string name="err_log_post_failed_gk">Úgy tűnik, hogy a logod nem került hozzáadásra. Kérlek, ellenőrizd a GeoKrety.org-on.</string>
-  <string name="err_logimage_post_failed">Úgy tűnik, hogy a logfotóid nem mentek át. Kérlek, ellenőrizd a láda eredeti oldalát.</string>
+  <string name="err_log_post_failed">Úgy tűnik, hogy a logod nem ment át. Kérlek, ellenőrizd a láda eredeti oldalát!</string>
+  <string name="err_log_post_failed_ec">Úgy tűnik, hogy a logod nem került hozzáadásra. Kérlek, ellenőrizd a extremcaching.com-on!</string>
+  <string name="err_log_post_failed_gk">Úgy tűnik, hogy a logod nem került hozzáadásra. Kérlek, ellenőrizd a GeoKrety.org-on!</string>
+  <string name="err_logimage_post_failed">Úgy tűnik, hogy a logfotóid nem mentek át. Kérlek, ellenőrizd a láda eredeti oldalát!</string>
   <string name="err_search_address_forgot">Sajnáljuk, a c:geo elfelejtette a keresett címet.</string>
   <string name="err_parse_lat">Sajnáljuk, a c:geo nem tudja értelmezni a szélességet.</string>
   <string name="err_parse_lon">Sajnáljuk, a c:geo nem tudja értelmezni a hosszúságot.</string>
@@ -203,7 +203,7 @@
   <string name="warn_search_help_keyword">Írj be néhány szót a keresett láda nevéből.</string>
   <string name="warn_search_help_user">Írd be a felhasználó nevét a geocaching.com oldalról.</string>
   <string name="warn_search_help_tb">Írd be a követhető tárgy kódját. Például \"TB29QMZ\".</string>
-  <string name="warn_log_text_fill">Kérlek, írj szöveget a bejegyzéshez.</string>
+  <string name="warn_log_text_fill">Kérlek, írj szöveget a bejegyzéshez!</string>
   <string name="warn_load_images">Sajnáljuk, a c:geo nem tudta betölteni a képeket.</string>
   <string name="warn_invalid_mapfile">A kiválasztott térképfájl nem felel meg a mapsforge v0.3.0 formátumnak.\nAz offline térképek nem elérhetőék.</string>
   <string name="warn_deprecated_mapfile">0.2.4-es verziójú térképfájlt használsz.\nFontold meg a 0.3.0 verziójú térképre váltást.\nA következő kiadás már nem fogja támogatni a 0.2.4-es verziót.</string>
@@ -304,7 +304,7 @@
   <string name="caches_map_locus">Locus</string>
   <string name="caches_map_locus_export">Exportálás Locusba</string>
   <string name="caches_recaptcha_title">reCAPTCHA</string>
-  <string name="caches_recaptcha_explanation">Kérlek, írd be a szöveget a képről. Ez szükséges a ládák koordinátáinak letöltéséhez. Kikapcsolható a beállításoknál.</string>
+  <string name="caches_recaptcha_explanation">Kérlek, írd be a szöveget a képről! Ez szükséges a ládák koordinátáinak letöltéséhez. Kikapcsolható a beállításoknál.</string>
   <string name="caches_recaptcha_hint">Szöveg a képről</string>
   <string name="caches_recaptcha_continue">Folytatás</string>
   <string name="caches_filter">Szűrő</string>
@@ -355,7 +355,7 @@
   <string name="about_license">Licensz</string>
   <string name="about_apache_license"><a href=""> Apache License, 2.0 verzió</a></string>
   <string name="about_help">Segítség</string>
-  <string name="about_system_include">Kérlek, csatold a következő rendszerinformációt, ha hibajelentést küldesz, vagy további információt kérsz a c:geo-ról:</string>
+  <string name="about_system_include">Kérlek, csatold az alábbi rendszerinformációkat, ha hibajelentést küldesz, vagy további információt kérsz a c:geo-ról:</string>
   <string name="changelog_github">Összes változtatás listázása</string>
   <string name="settings_title_open_settings">Beállítások megnyitása?</string>
   <string name="settings_title_services">Szolgáltatások</string>
@@ -728,6 +728,7 @@
   <string name="cache_status_offline_log">Mentett bejegyzés</string>
   <string name="cache_status_found">Megtalált</string>
   <string name="cache_not_status_found">Nem található</string>
+  <string name="cache_never_found">Szűz láda</string>
   <string name="cache_status_archived">Archiválva</string>
   <string name="cache_status_disabled">Letiltott</string>
   <string name="cache_status_premium">Csak prémium tagoknak</string>

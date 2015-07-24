@@ -728,6 +728,7 @@
   <string name="cache_status_offline_log">Gespeicherter Log</string>
   <string name="cache_status_found">Gefunden</string>
   <string name="cache_not_status_found">Nicht gefunden</string>
+  <string name="cache_never_found">Noch kein Fund</string>
   <string name="cache_status_archived">Archiviert</string>
   <string name="cache_status_disabled">Deaktiviert</string>
   <string name="cache_status_premium">Nur für Premium-Mitglieder</string>
