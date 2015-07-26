@@ -1,4 +1,4 @@
-package cgeo.geocaching.apps.cache.navi;
+package cgeo.geocaching.apps.navi;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.location.Geopoint;

@@ -1,4 +1,4 @@
-package cgeo.geocaching.apps.cache.navi;
+package cgeo.geocaching.apps.navi;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.Geocache;
@@ -7,11 +7,11 @@ import cgeo.geocaching.Waypoint;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.apps.App;
 import cgeo.geocaching.apps.cache.WhereYouGoApp;
-import cgeo.geocaching.apps.cache.navi.GoogleNavigationApp.GoogleNavigationBikeApp;
-import cgeo.geocaching.apps.cache.navi.GoogleNavigationApp.GoogleNavigationDrivingApp;
-import cgeo.geocaching.apps.cache.navi.GoogleNavigationApp.GoogleNavigationWalkingApp;
-import cgeo.geocaching.apps.cache.navi.SygicNavigationApp.SygicNavigationDrivingApp;
-import cgeo.geocaching.apps.cache.navi.SygicNavigationApp.SygicNavigationWalkingApp;
+import cgeo.geocaching.apps.navi.GoogleNavigationApp.GoogleNavigationBikeApp;
+import cgeo.geocaching.apps.navi.GoogleNavigationApp.GoogleNavigationDrivingApp;
+import cgeo.geocaching.apps.navi.GoogleNavigationApp.GoogleNavigationWalkingApp;
+import cgeo.geocaching.apps.navi.SygicNavigationApp.SygicNavigationDrivingApp;
+import cgeo.geocaching.apps.navi.SygicNavigationApp.SygicNavigationWalkingApp;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.settings.Settings;
 

@@ -1,7 +1,7 @@
-package cgeo.geocaching.apps.cache.navi;
+package cgeo.geocaching.apps.navi;
 
 import cgeo.geocaching.Geocache;
-import cgeo.geocaching.apps.cache.navi.NavigationAppFactory.NavigationAppsEnum;
+import cgeo.geocaching.apps.navi.NavigationAppFactory.NavigationAppsEnum;
 import cgeo.geocaching.ui.AbstractMenuActionProvider;
 
 import android.app.Activity;

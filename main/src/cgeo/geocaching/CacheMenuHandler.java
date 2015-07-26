@@ -1,8 +1,8 @@
 package cgeo.geocaching;
 
 import cgeo.calendar.CalendarAddon;
-import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
-import cgeo.geocaching.apps.cache.navi.NavigationSelectionActionProvider;
+import cgeo.geocaching.apps.navi.NavigationAppFactory;
+import cgeo.geocaching.apps.navi.NavigationSelectionActionProvider;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.AbstractUIFactory;
 

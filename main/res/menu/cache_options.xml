@@ -13,7 +13,7 @@
         android:id="@+id/menu_navigate"
         android:icon="@drawable/ic_menu_goto"
         android:title="@string/cache_menu_navigate"
-        app:actionProviderClass="cgeo.geocaching.apps.cache.navi.NavigationSelectionActionProvider"
+        app:actionProviderClass="cgeo.geocaching.apps.navi.NavigationSelectionActionProvider"
         app:showAsAction="ifRoom">
     </item>
     <item

@@ -1,4 +1,4 @@
-package cgeo.geocaching.apps.cache.navi;
+package cgeo.geocaching.apps.navi;
 
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
@@ -8,29 +8,29 @@ import org.eclipse.jdt.annotation.NonNull;
 
 import android.app.Activity;
 
-class StaticMapApp extends AbstractStaticMapsApp {
+class DownloadStaticMapsApp extends AbstractStaticMapsApp {
 
-    StaticMapApp() {
-        super(getString(R.string.cache_menu_map_static));
+    DownloadStaticMapsApp() {
+        super(getString(R.string.cache_menu_download_map_static));
     }
 
     @Override
     public boolean isEnabled(final @NonNull Geocache cache) {
-        return cache.isOffline() && cache.hasStaticMap();
+        return cache.isOffline() && !cache.hasStaticMap();
     }
 
     @Override
     public boolean isEnabled(final @NonNull Waypoint waypoint) {
-        return hasStaticMap(waypoint);
+        return !hasStaticMap(waypoint);
     }
 
     @Override
     public void navigate(final @NonNull Activity activity, final @NonNull Geocache cache) {
-        invokeStaticMaps(activity, cache, null, false);
+        invokeStaticMaps(activity, cache, null, true);
     }
 
     @Override
     public void navigate(final @NonNull Activity activity, final @NonNull Waypoint waypoint) {
-        invokeStaticMaps(activity, null, waypoint, false);
+        invokeStaticMaps(activity, null, waypoint, true);
     }
 }

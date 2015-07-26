@@ -3,7 +3,7 @@ package cgeo.geocaching;
 import butterknife.ButterKnife;
 
 import cgeo.geocaching.activity.Progress;
-import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
+import cgeo.geocaching.apps.navi.NavigationAppFactory;
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;

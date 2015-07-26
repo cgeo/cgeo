@@ -2,7 +2,7 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.activity.INavigationSource;
-import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
+import cgeo.geocaching.apps.navi.NavigationAppFactory;
 import cgeo.geocaching.location.DistanceParser;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointFormatter;

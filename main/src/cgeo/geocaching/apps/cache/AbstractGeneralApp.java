@@ -2,7 +2,7 @@ package cgeo.geocaching.apps.cache;
 
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.apps.AbstractApp;
-import cgeo.geocaching.apps.cache.navi.CacheNavigationApp;
+import cgeo.geocaching.apps.navi.CacheNavigationApp;
 
 import org.eclipse.jdt.annotation.NonNull;
 

@@ -1,8 +1,8 @@
-package cgeo.geocaching.apps.cache.navi;
+package cgeo.geocaching.apps.navi;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import cgeo.geocaching.apps.cache.navi.NavigationAppFactory.NavigationAppsEnum;
+import cgeo.geocaching.apps.navi.NavigationAppFactory.NavigationAppsEnum;
 
 import java.util.HashSet;
 
