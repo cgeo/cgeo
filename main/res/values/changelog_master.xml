@@ -11,6 +11,7 @@
     · New: Filter for never found caches\n
     · Fix: GPX files no longer violate XSD\n
     · Fix: Adjustments in size and resizing of coordinate input fields\n
+    · Fix: Maximum terrain stars displayed correctly for extremcaching.com\n
     \n
   </string>
 </resources>

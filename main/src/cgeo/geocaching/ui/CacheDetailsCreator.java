@@ -1,7 +1,5 @@
 package cgeo.geocaching.ui;
 
-import butterknife.ButterKnife;
-
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.ICoordinates;
 import cgeo.geocaching.R;
@@ -26,6 +24,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import butterknife.ButterKnife;
 
 // TODO The suppression of this lint finding is bad. But to fix it, someone needs to rework the layout of the cache
 // details also, not just only change the code here.
@@ -77,6 +77,7 @@ public final class CacheDetailsCreator {
         lastValueView.setText(String.format("%.1f", value) + ' ' + activity.getResources().getString(R.string.cache_rating_of) + " " + String.format("%d", max));
 
         final RatingBar layoutStars = ButterKnife.findById(layout, R.id.stars);
+        layoutStars.setNumStars(max);
         layoutStars.setRating(value);
         layoutStars.setVisibility(View.VISIBLE);
 

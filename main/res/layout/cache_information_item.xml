@@ -44,6 +44,7 @@
         android:layout_toRightOf="@+id/value"
         android:baselineAligned="false"
         android:gravity="center_vertical"
+        android:numStars="5"
         android:visibility="gone" />
 
     <TextView
