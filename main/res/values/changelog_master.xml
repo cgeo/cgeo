@@ -9,6 +9,7 @@
     · New: Import Garmin GGZ files\n
     · New: Almost full support of TerraCaching GPX files\n
     · New: Filter for never found caches\n
+    · New: Maps.me shows waypoints of cache\n
     · Fix: GPX files no longer violate XSD\n
     · Fix: Adjustments in size and resizing of coordinate input fields\n
     · Fix: Maximum terrain stars displayed correctly for extremcaching.com\n

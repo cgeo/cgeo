@@ -5,11 +5,15 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.Waypoint;
 import cgeo.geocaching.location.Geopoint;
 
+import com.mapswithme.maps.api.MWMPoint;
 import com.mapswithme.maps.api.MapsWithMeApi;
 
 import org.eclipse.jdt.annotation.NonNull;
 
 import android.app.Activity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 class MapsWithMeApp extends AbstractPointNavigationApp {
 
@@ -24,7 +28,22 @@ class MapsWithMeApp extends AbstractPointNavigationApp {
 
     @Override
     public void navigate(final @NonNull Activity activity, final @NonNull Geocache cache) {
-        navigate(activity, cache.getCoords(), cache.getName());
+        final List<Waypoint> waypoints = cache.getWaypoints();
+        if (waypoints.isEmpty()) {
+            navigate(activity, cache.getCoords(), cache.getName());
+        } else {
+            navigateWithWaypoints(activity, cache);
+        }
+    }
+
+    private static void navigateWithWaypoints(final Activity activity, final Geocache cache) {
+        final ArrayList<MWMPoint> points = new ArrayList<>();
+        points.add(new MWMPoint(cache.getCoords().getLatitude(), cache.getCoords().getLongitude(), cache.getName()));
+        for (final Waypoint waypoint : cache.getWaypoints()) {
+            points.add(new MWMPoint(waypoint.getCoords().getLatitude(), waypoint.getCoords().getLongitude(), waypoint.getName(), waypoint.getGeocode()));
+        }
+        final MWMPoint[] pointsArray = points.toArray(new MWMPoint[points.size()]);
+        MapsWithMeApi.showPointsOnMap(activity, cache.getName(), pointsArray);
     }
 
     private static void navigate(final Activity activity, final Geopoint coords, final String label) {
