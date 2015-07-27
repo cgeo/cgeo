@@ -15,9 +15,9 @@ import android.app.Activity;
 import java.util.ArrayList;
 import java.util.List;
 
-class MapsWithMeApp extends AbstractPointNavigationApp {
+class MapsMeApp extends AbstractPointNavigationApp {
 
-    protected MapsWithMeApp() {
+    protected MapsMeApp() {
         super(getString(R.string.cache_menu_mapswithme), null);
     }
 

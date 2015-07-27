@@ -20,9 +20,9 @@ import android.content.Intent;
 
 import java.util.List;
 
-public class MapsWithMeCacheListApp extends AbstractApp implements CacheListApp {
+public class MapsMeCacheListApp extends AbstractApp implements CacheListApp {
 
-    protected MapsWithMeCacheListApp() {
+    protected MapsMeCacheListApp() {
         super(getString(R.string.caches_map_mapswithme), Intent.ACTION_VIEW);
     }
 

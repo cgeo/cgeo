@@ -8,7 +8,7 @@ import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.AbstractViewPagerActivity;
 import cgeo.geocaching.activity.INavigationSource;
 import cgeo.geocaching.activity.Progress;
-import cgeo.geocaching.apps.cachelist.MapsWithMeCacheListApp;
+import cgeo.geocaching.apps.cachelist.MapsMeCacheListApp;
 import cgeo.geocaching.apps.navi.NavigationAppFactory;
 import cgeo.geocaching.apps.navi.NavigationSelectionActionProvider;
 import cgeo.geocaching.compatibility.Compatibility;
@@ -220,7 +220,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
         // When clicking a cache in MapsWithMe, we get back a PendingIntent
         if (StringUtils.isEmpty(geocode)) {
-            geocode = MapsWithMeCacheListApp.getCacheFromMapsWithMe(this, getIntent());
+            geocode = MapsMeCacheListApp.getCacheFromMapsWithMe(this, getIntent());
         }
 
         if (geocode == null && uri != null) {
