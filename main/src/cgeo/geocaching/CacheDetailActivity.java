@@ -1,8 +1,5 @@
 package cgeo.geocaching;
 
-import butterknife.ButterKnife;
-import butterknife.Bind;
-
 import cgeo.calendar.CalendarAddon;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.AbstractViewPagerActivity;
@@ -73,18 +70,6 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
-import rx.Observable;
-import rx.Observable.OnSubscribe;
-import rx.Subscriber;
-import rx.Subscription;
-import rx.android.app.AppObservable;
-import rx.functions.Action0;
-import rx.functions.Action1;
-import rx.functions.Func0;
-import rx.functions.Func1;
-import rx.subscriptions.CompositeSubscription;
-import rx.subscriptions.Subscriptions;
-
 import android.R.color;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -144,6 +129,20 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.regex.Pattern;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import rx.Observable;
+import rx.Observable.OnSubscribe;
+import rx.Subscriber;
+import rx.Subscription;
+import rx.android.app.AppObservable;
+import rx.functions.Action0;
+import rx.functions.Action1;
+import rx.functions.Func0;
+import rx.functions.Func1;
+import rx.subscriptions.CompositeSubscription;
+import rx.subscriptions.Subscriptions;
 
 /**
  * Activity to handle all single-cache-stuff.
@@ -560,7 +559,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         LoggingUI.onPrepareOptionsMenu(menu, cache);
         menu.findItem(R.id.menu_store).setVisible(cache != null && !cache.isOffline());
         menu.findItem(R.id.menu_delete).setVisible(cache != null && cache.isOffline());
-        menu.findItem(R.id.menu_refresh).setVisible(cache != null);
+        menu.findItem(R.id.menu_refresh).setVisible(cache != null && cache.supportsRefresh());
         menu.findItem(R.id.menu_gcvote).setVisible(cache != null && GCVote.isVotingPossible(cache));
         menu.findItem(R.id.menu_checker).setVisible(cache != null && StringUtils.isNotEmpty(CheckerUtils.getCheckerUrl(cache)));
         if (cache != null) {
