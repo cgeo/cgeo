@@ -290,6 +290,9 @@ public abstract class GPXParser extends FileParser {
     @Override
     @NonNull
     public Collection<Geocache> parse(@NonNull final InputStream stream, @Nullable final CancellableHandler progressHandler) throws IOException, ParserException {
+        // when importing a ZIP, reset the child waypoint state
+        terraChildWaypoint = false;
+
         resetCache();
         final RootElement root = new RootElement(namespace, "gpx");
         final Element waypoint = root.getChild(namespace, "wpt");
