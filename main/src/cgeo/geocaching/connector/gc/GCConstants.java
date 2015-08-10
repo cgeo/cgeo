@@ -55,7 +55,7 @@ public final class GCConstants {
     final static Pattern PATTERN_FAVORITECOUNT = Pattern.compile("<span class=\"favorite-value\">\\D*([0-9]+?)\\D*</span>");
     final static Pattern PATTERN_COUNTLOGS = Pattern.compile("<span id=\"ctl00_ContentBody_lblFindCounts\"><p(.+?)</p></span>");
     /** Two groups ! */
-    final static Pattern PATTERN_COUNTLOG = Pattern.compile("<img src=\"/images/logtypes/([0-9]+)\\.png\"[^>]+> (\\d*[,.]?\\d+)");
+    final static Pattern PATTERN_COUNTLOG = Pattern.compile("logtypes/([0-9]+)\\.[^>]+>\\s*([0-9,.]+)");
     static final Pattern PATTERN_PREMIUMMEMBERS = Pattern.compile("<p class=\"Warning NoBottomSpacing\">This is a Premium Member Only cache.</p>");
     final static Pattern PATTERN_ATTRIBUTES = Pattern.compile("Attributes\\s*</h3>[^<]*<div class=\"WidgetBody\">((?:[^<]*<img src=\"[^\"]+\" alt=\"[^\"]+\"[^>]*>)+?)[^<]*<p");
     /** Two groups ! */
