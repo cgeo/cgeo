@@ -93,6 +93,11 @@
     <string name="log_save">Save offline</string>
     <string name="log_saving">Sending log…</string>
     <string name="log_saving_and_uploading">Sending log and uploading image…</string>
+    <string name="log_posting_log">Posting log…</string>
+    <string name="log_posting_twitter">Posting tweet…</string>
+    <string name="log_posting_gcvote">Posting GCVote…</string>
+    <string name="log_posting_image">Posting image…</string>
+    <string name="log_posting_generic_trackable">Posting %1$s %2$s/%3$s</string>
     <string name="log_clear">Clear</string>
     <string name="log_post_not_possible">Download of data in progress…\nPlease try again in some seconds or check your internet connection.</string>
     <string name="log_post_geocode_missing">Geocode missing…</string>

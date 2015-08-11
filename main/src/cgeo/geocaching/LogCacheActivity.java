@@ -21,7 +21,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.twitter.Twitter;
 import cgeo.geocaching.ui.dialog.DateDialog;
 import cgeo.geocaching.ui.dialog.Dialogs;
-import cgeo.geocaching.utils.AsyncTaskWithProgress;
+import cgeo.geocaching.utils.AsyncTaskWithProgressText;
 import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
@@ -448,12 +448,12 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         }
     }
 
-    private class Poster extends AsyncTaskWithProgress<String, StatusCode> {
+    private class Poster extends AsyncTaskWithProgressText<String, StatusCode> {
 
         final Activity activity;
 
         public Poster(final Activity activity, final String progressMessage) {
-            super(activity, null, progressMessage, true);
+            super(activity, res.getString(R.string.log_posting_log), progressMessage);
             this.activity = activity;
         }
 
@@ -461,6 +461,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         protected StatusCode doInBackgroundInternal(final String[] logTexts) {
             final String log = logTexts[0];
             final String logPwd = logTexts.length > 1 ? logTexts[1] : null;
+
             try {
                 final LogResult logResult = loggingManager.postLog(typeSelected, date, log, logPwd, new ArrayList<>(trackables));
 
@@ -484,11 +485,13 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
 
                     if (typeSelected == LogType.FOUND_IT) {
                         if (tweetCheck.isChecked() && tweetBox.getVisibility() == View.VISIBLE) {
+                            publishProgress(res.getString(R.string.log_posting_twitter));
                             Twitter.postTweetCache(geocode, logNow);
                         }
                     }
                     if (GCVote.isValidRating(rating) && GCVote.isVotingPossible(cache)) {
                         if (GCVote.setRating(cache, rating)) {
+                            publishProgress(res.getString(R.string.log_posting_gcvote));
                             cache.setMyVote(rating);
                             DataStore.saveChangedCache(cache);
                         } else {
@@ -496,16 +499,30 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
                         }
                     }
 
+                    // Posting Generic Trackables
                     for (final TrackableConnector connector: ConnectorFactory.getGenericTrackablesConnectors()) {
                         final TrackableLoggingManager manager = connector.getTrackableLoggingManager((AbstractLoggingActivity) activity);
                         if (manager != null) {
+                            // Filter trackables logs by action and brand
+                            final Set<TrackableLog> trackablesMoved = new HashSet<>();
                             for (final TrackableLog trackableLog : trackables) {
+                                if (trackableLog.action != LogTypeTrackable.DO_NOTHING && trackableLog.brand == connector.getBrand()) {
+                                    trackablesMoved.add(trackableLog);
+                                }
+                            }
+
+                            // Posting trackables logs
+                            int trackableLogcounter = 1;
+                            for (final TrackableLog trackableLog : trackablesMoved) {
+                                publishProgress(res.getString(R.string.log_posting_generic_trackable, trackableLog.brand, trackableLogcounter, trackablesMoved.size()));
                                 manager.postLog(cache, trackableLog, date, log);
+                                trackableLogcounter++;
                             }
                         }
                     }
 
                     if (StringUtils.isNotBlank(imageUri.getPath())) {
+                        publishProgress(res.getString(R.string.log_posting_image));
                         final ImageResult imageResult = loggingManager.postLogImage(logResult.getLogId(), imageCaption, imageDescription, imageUri);
                         final String uploadedImageUrl = imageResult.getImageUri();
                         if (StringUtils.isNotEmpty(uploadedImageUrl)) {
