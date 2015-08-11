@@ -197,7 +197,7 @@ public class FieldnoteExport extends AbstractExport {
         }
 
         @Override
-        protected void onProgressUpdateInternal(final int status) {
+        protected void onProgressUpdateInternal(final Integer status) {
             if (null != activity) {
                 setMessage(activity.getString(STATUS_UPLOAD == status ? R.string.export_fieldnotes_uploading : R.string.export_fieldnotes_creating) + " (" + fieldNotesCount + ')');
             }
