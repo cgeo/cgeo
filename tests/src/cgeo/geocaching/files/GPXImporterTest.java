@@ -5,6 +5,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import cgeo.geocaching.DataStore;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.SearchResult;
+import cgeo.geocaching.connector.ConnectorFactory;
+import cgeo.geocaching.connector.gc.GCConnector;
+import cgeo.geocaching.connector.gc.GCConstants;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.settings.Settings;
@@ -178,6 +181,9 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         assertThat(cache).isNotNull();
         assertThat(cache.getLocation().startsWith(",")).isFalse();
         assertThat(cache.isReliableLatLon()).isTrue();
+        if (GCConnector.getInstance().equals(ConnectorFactory.getConnector(cache))) {
+            assertThat(String.valueOf(GCConstants.gccodeToGCId(cache.getGeocode()))).isEqualTo(cache.getCacheId());
+        }
     }
 
     public void testImportGpxError() throws IOException {

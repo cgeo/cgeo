@@ -1,6 +1,9 @@
 package cgeo.geocaching.files;
 
 import cgeo.geocaching.Geocache;
+import cgeo.geocaching.connector.ConnectorFactory;
+import cgeo.geocaching.connector.gc.GCConnector;
+import cgeo.geocaching.connector.gc.GCConstants;
 import cgeo.geocaching.utils.CancellableHandler;
 
 import org.apache.commons.io.IOUtils;
@@ -84,5 +87,10 @@ public abstract class FileParser {
         final long time = System.currentTimeMillis();
         cache.setUpdated(time);
         cache.setDetailedUpdate(time);
+
+        // fix potentially bad cache id
+        if (GCConnector.getInstance().equals(ConnectorFactory.getConnector(cache))) {
+            cache.setCacheId(String.valueOf(GCConstants.gccodeToGCId(cache.getGeocode())));
+        }
     }
 }

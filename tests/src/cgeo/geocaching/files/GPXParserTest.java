@@ -8,6 +8,7 @@ import cgeo.geocaching.LogEntry;
 import cgeo.geocaching.Waypoint;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
+import cgeo.geocaching.connector.gc.GCConstants;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
@@ -328,6 +329,17 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
     public void testGCTour() throws Exception {
         final List<Geocache> caches = readGPX10(R.raw.gctour_gpx);
         assertThat(caches).hasSize(54);
+    }
+
+    /**
+     * fake GPX with bad cache id, must be detected by GPX import
+     */
+    public void testGDAKBadCacheId() throws Exception {
+        final List<Geocache> caches = readGPX10(R.raw.gc31j2h2_bad_cacheid);
+        assertThat(caches).hasSize(1);
+        final Geocache cache = caches.get(0);
+
+        assertThat(String.valueOf(GCConstants.gccodeToGCId(cache.getGeocode()))).isEqualTo(cache.getCacheId());
     }
 
     public void testOX() throws IOException, ParserException {
