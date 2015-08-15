@@ -140,9 +140,6 @@ public final class Formatter {
         if (cache.isPremiumMembersOnly()) {
             infos.add(CgeoApplication.getInstance().getString(R.string.cache_premium));
         }
-        if (cacheListType != CacheListType.OFFLINE && cacheListType != CacheListType.HISTORY && cache.getListId() > 0) {
-            infos.add(CgeoApplication.getInstance().getString(R.string.cache_offline));
-        }
         return StringUtils.join(infos, SEPARATOR);
     }
 
