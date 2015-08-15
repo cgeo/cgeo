@@ -22,6 +22,7 @@ import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.MapUtils;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -455,7 +456,8 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
         else {
             holder.text.setText(cache.getName());
         }
-        holder.text.setCompoundDrawablesWithIntrinsicBounds(getCacheIcon(cache), null, null, null);
+        holder.text.setCompoundDrawablesWithIntrinsicBounds(MapUtils.getCacheMarker(res, cache, cacheListType), null, null, null);
+
 
         final int inventorySize = cache.getInventoryItems();
         if (inventorySize > 0) {

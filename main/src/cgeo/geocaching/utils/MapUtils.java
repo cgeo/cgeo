@@ -4,12 +4,14 @@ import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.Waypoint;
 import cgeo.geocaching.compatibility.Compatibility;
+import cgeo.geocaching.enumerations.CacheListType;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
+import android.support.annotation.Nullable;
 import android.util.SparseArray;
 
 import java.util.ArrayList;
@@ -32,13 +34,35 @@ public final class MapUtils {
     }
 
     /**
-     * Build the drawable for a given cache.
+     * Obtain the drawable for a given cache, with background circle.
      *
-     * @param res the resources to use
-     * @param cache the cache to build the drawable for
-     * @return a drawable representing the current cache status
+     * @param res
+     *          the resources to use
+     * @param cache
+     *          the cache to build the drawable for
+     * @return
+     *          a drawable representing the current cache status
      */
     public static LayerDrawable getCacheMarker(final Resources res, final Geocache cache) {
+        return getCacheMarker(res, cache, null);
+    }
+
+    /**
+     * Obtain the drawable for a given cache.
+     * Return a drawable from the cache, if a similar drawable was already generated.
+     *
+     * cacheListType should be Null if the requesting activity is Map.
+     *
+     * @param res
+     *          the resources to use
+     * @param cache
+     *          the cache to build the drawable for
+     * @param cacheListType
+     *          the current CacheListType or Null
+     * @return
+     *          a drawable representing the current cache status
+     */
+    public static LayerDrawable getCacheMarker(final Resources res, final Geocache cache, @Nullable final CacheListType cacheListType) {
         final int hashcode = new HashCodeBuilder()
                 .append(cache.isReliableLatLon())
                 .append(cache.getType().id)
@@ -50,18 +74,31 @@ public final class MapUtils {
                 .append(cache.getPersonalNote())
                 .append(cache.isLogOffline())
                 .append(cache.getListId() > 0)
+                .append(showBackground(cacheListType))
+                .append(showFloppyOverlay(cacheListType))
                 .toHashCode();
 
         synchronized (overlaysCache) {
             LayerDrawable drawable = overlaysCache.get(hashcode);
             if (drawable == null) {
-                drawable = createCacheMarker(res, cache);
+                drawable = createCacheMarker(res, cache, cacheListType);
                 overlaysCache.put(hashcode, drawable);
             }
             return drawable;
         }
     }
 
+    /**
+     * Obtain the drawable for a given waypoint.
+     * Return a drawable from the cache, if a similar drawable was already generated.
+     *
+     * @param res
+     *          the resources to use
+     * @param waypoint
+     *          the waypoint to build the drawable for
+     * @return
+     *          a drawable representing the current waypoint status
+     */
     public static LayerDrawable getWaypointMarker(final Resources res, final Waypoint waypoint) {
         final int hashcode = new HashCodeBuilder()
         .append(waypoint.isVisited())
@@ -78,6 +115,16 @@ public final class MapUtils {
         }
     }
 
+    /**
+     * Build the drawable for a given waypoint.
+     *
+     * @param res
+     *          the resources to use
+     * @param waypoint
+     *          the waypoint to build the drawable for
+     * @return
+     *          a drawable representing the current waypoint status
+     */
     private static LayerDrawable createWaypointMarker(final Resources res, final Waypoint waypoint) {
         final Drawable marker = Compatibility.getDrawable(res, !waypoint.isVisited() ? R.drawable.marker : R.drawable.marker_transparent);
         final Drawable[] layers = {
@@ -99,14 +146,29 @@ public final class MapUtils {
         }
     }
 
-    private static LayerDrawable createCacheMarker(final Resources res, final Geocache cache) {
+    /**
+     * Build the drawable for a given cache.
+     *
+     * @param res
+     *          the resources to use
+     * @param cache
+     *          the cache to build the drawable for
+     * @param cacheListType
+     *          the current CacheListType or Null
+     * @return
+     *          a drawable representing the current cache status
+     */
+    private static LayerDrawable createCacheMarker(final Resources res, final Geocache cache, @Nullable final CacheListType cacheListType) {
         // Set initial capacities to the maximum of layers and insets to avoid dynamic reallocation
         final List<Drawable> layers = new ArrayList<>(9);
         final List<int[]> insets = new ArrayList<>(8);
 
         // background: disabled or not
         final Drawable marker = Compatibility.getDrawable(res, cache.getMapMarkerId());
-        layers.add(marker);
+        // Show the background circle only on map
+        if (showBackground(cacheListType)) {
+            layers.add(marker);
+        }
         final int resolution = calculateResolution(marker);
         // reliable or not
         if (!cache.isReliableLatLon()) {
@@ -121,7 +183,7 @@ public final class MapUtils {
             layers.add(Compatibility.getDrawable(res, R.drawable.marker_own));
             insets.add(INSET_OWN[resolution]);
             // if not, checked if stored
-        } else if (cache.getListId() > 0) {
+        } else if (cache.getListId() > 0 && showFloppyOverlay(cacheListType)) {
             layers.add(Compatibility.getDrawable(res, R.drawable.marker_stored));
             insets.add(INSET_OWN[resolution]);
         }
@@ -147,7 +209,7 @@ public final class MapUtils {
 
         final LayerDrawable ld = new LayerDrawable(layers.toArray(new Drawable[layers.size()]));
 
-        int index = 1;
+        int index = showBackground(cacheListType) ? 1 : 0;
         for (final int[] inset : insets) {
             ld.setLayerInset(index++, inset[0], inset[1], inset[2], inset[3]);
         }
@@ -155,7 +217,39 @@ public final class MapUtils {
         return ld;
     }
 
+    /**
+     * Get the resolution index used for positionning the overlays elements.
+     *
+     * @param marker
+     *          The Drawable reference
+     * @return
+     *          an index for the overlays positions
+     */
     private static int calculateResolution(final Drawable marker) {
         return marker.getIntrinsicWidth() > 40 ? (marker.getIntrinsicWidth() > 50 ? (marker.getIntrinsicWidth() > 70 ? (marker.getIntrinsicWidth() > 100 ? 4 : 3) : 2) : 1) : 0;
+    }
+
+    /**
+     * Conditionnal expression to choose if we need the background circle or not.
+     *
+     * @param cacheListType
+     *          The cache list currently used
+     * @return
+     *          True if the background circle should be displayed
+     */
+    private static boolean showBackground(final CacheListType cacheListType) {
+        return cacheListType == null;
+    }
+
+    /**
+     * Conditionnal expression to choose if we need the floppy overlay or not.
+     *
+     * @param cacheListType
+     *          The cache list currently used
+     * @return
+     *          True if the floppy overlay should be displayed
+     */
+    private static boolean showFloppyOverlay(final CacheListType cacheListType) {
+        return cacheListType == null || cacheListType != CacheListType.OFFLINE;
     }
 }
