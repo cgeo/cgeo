@@ -696,10 +696,12 @@
   <string name="cache_menu_vote">Balsuoti</string>
   <string name="cache_menu_checker">Atidaryti Geochecker</string>
   <string name="cache_menu_ignore">Ignoruoti slėptuvę</string>
+  <string name="ignore_confirm_title">Būk atsargus</string>
   <string name="cache_status">Būsena</string>
   <string name="cache_status_offline_log">Išsaugotas įrašas</string>
   <string name="cache_status_found">Rasta</string>
   <string name="cache_not_status_found">Nerasta</string>
+  <string name="cache_never_found">Niekada nesurastos</string>
   <string name="cache_status_archived">Suarchyvuota</string>
   <string name="cache_status_disabled">Išjungta</string>
   <string name="cache_status_premium">Tik Premium nariams</string>
@@ -762,6 +764,7 @@
   <string name="gpx_import_select_list_title">Importuoti GPX į sąrašą</string>
   <string name="gpx_import_android">Importuoti iš Android</string>
   <string name="map_file_select_title">Pasirinkite žemėlapio failą</string>
+  <string name="web_import_title">Importuoti iš send2cgeo</string>
   <string name="web_downloading">Atsisiunčiama</string>
   <string name="web_downloaded">Atsisiųsta</string>
   <string name="popup_more">Daugiau informacijos</string>

@@ -361,15 +361,20 @@
   <string name="settings_title_services">Servicios</string>
   <string name="settings_summary_services">Configura la información de la cuenta de usuario y accede a servicios opcionales.</string>
   <string name="settings_title_appearance">Aspecto</string>
+  <string name="settings_summary_appearance">Configurar unidades de distancia, idioma y colores de la app.</string>
   <string name="settings_title_cachedetails">Detalles del caché</string>
+  <string name="settings_summary_cachedetails">Personaliza la pantalla de información de los cachés. </string>
   <string name="settings_title_offlinedata">Datos sin conexión</string>
+  <string name="settings_summary_offlinedata">Configura los mapas estáticos y otros datos almacenados sin conexión.</string>
   <string name="settings_title_logging">Registro</string>
+  <string name="settings_summary_logging">Configura tu firma y las opciones de registro.</string>
   <string name="settings_title_map">Mapa</string>
   <string name="settings_title_map_data">Datos del mapa</string>
   <string name="settings_title_map_content">Contenido del mapa</string>
   <string name="settings_title_basicmembers">Opciones para miembros básicos</string>
   <string name="settings_title_navigation">Navegación</string>
   <string name="settings_title_system">Sistema</string>
+  <string name="settings_summary_system">Realiza y restaura copias de seguridad, configura los directorios de la aplicación y otros ajustes del sistema.</string>
   <string name="settings_title_navigation_menu">Menú de navegación</string>
   <string name="settings_category_browser">Navegador</string>
   <string name="settings_category_social">Redes sociales</string>
@@ -566,7 +571,7 @@
   <string name="map_source_osm_cyclemap">OSM: Cyclemap</string>
   <string name="map_source_osm_offline">Offline</string>
   <string name="init_sendToCgeo">Enviar a c:geo</string>
-  <string name="settings_info_send2cgeo_title">Sobre Enviar a c:geo</string>
+  <string name="settings_info_send2cgeo_title">Sobre send2cgeo</string>
   <string name="init_sendToCgeo_name">Nombre de tu dispositivo</string>
   <string name="init_sendToCgeo_description"><b>Send2cgeo</b> te permite recibir cachés automáticamente desde la web de geocaching usando un complemento especial para Firefox o Chrome. Antes de registrarte, te sugerimos que leas <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Sólo necesitas registarte si vas a usar send2cgeo. c:geo funciona sin tener que registrar tu dispositivo.</string>
   <string name="init_sendToCgeo_register">Solicitar registro</string>
@@ -765,6 +770,7 @@
   <string name="gpx_import_select_list_title">Importar GPX a la lista</string>
   <string name="gpx_import_android">Importar desde Android</string>
   <string name="map_file_select_title">Selecciona un mapa</string>
+  <string name="web_import_title">Importar desde send2cgeo</string>
   <string name="web_downloading">Descargando</string>
   <string name="web_downloaded">Descargados</string>
   <string name="popup_more">Más detalles</string>
@@ -932,6 +938,7 @@
   <string name="helper_google_translate_description">Si descargas paquetes de idiomas en la app Traductor de Google, puedes traducir las descripciones de los cachés en c:geo pulsando de forma larga en el texto del caché (sin conexión a internet).</string>
   <string name="helper_wear_title">c:geo Wear</string>
   <string name="helper_wear_description">c:geo Wear es un complemento para c:geo que te permite navegar a los cachés usando tu smartwatch Android Wear.</string>
+  <string name="helper_where_you_go_title">WhereYouGo</string>
   <string name="addon_missing_title">No se encuentra el complemento</string>
   <string name="addon_download_prompt">Obtenlo ahora desde Google Play.</string>
   <string name="export">Exportar</string>

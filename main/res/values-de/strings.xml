@@ -81,6 +81,11 @@
   <string name="log_save">Offline speichern</string>
   <string name="log_saving">Log wird gesendet…</string>
   <string name="log_saving_and_uploading">Log und Bild werden gesendet…</string>
+  <string name="log_posting_log">Sende log…</string>
+  <string name="log_posting_twitter">Sende tweet…</string>
+  <string name="log_posting_gcvote">Sende Bewertung…</string>
+  <string name="log_posting_image">Sende Bild…</string>
+  <string name="log_posting_generic_trackable">Sende %1$s%2$s/%3$s</string>
   <string name="log_clear">Leeren</string>
   <string name="log_post_not_possible">Daten werden heruntergeladen…\nBitte in ein paar Sekunden noch einmal versuchen, oder die Internetverbindung prüfen.</string>
   <string name="log_post_geocode_missing">Geocode fehlt…</string>
