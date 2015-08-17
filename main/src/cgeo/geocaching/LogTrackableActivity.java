@@ -390,7 +390,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
     private class LoadGeocacheListener implements OnFocusChangeListener {
         @Override
         public void onFocusChange(final View view, final boolean hasFocus) {
-            if (!hasFocus && !geocodeEditText.getText().toString().isEmpty()) {
+            if (!hasFocus && StringUtils.isNotBlank(geocodeEditText.getText())) {
                 final Geocache tmpGeocache = DataStore.loadCache(geocodeEditText.getText().toString(), LoadFlags.LOAD_CACHE_OR_DB);
                 if (tmpGeocache == null) {
                     geocache.setGeocode(geocodeEditText.getText().toString());
