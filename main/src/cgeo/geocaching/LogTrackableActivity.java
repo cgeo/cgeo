@@ -322,20 +322,28 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
         typeSelected = type;
         typeButton.setText(typeSelected.getLabel());
 
+        // show/hide Tracking Code Field for note type
+        if (typeSelected != LogTypeTrackable.NOTE || loggingManager.isTrackingCodeNeededToPostNote()) {
+            trackingEditText.setVisibility(View.VISIBLE);
+            // Request focus if field is empty
+            if (StringUtils.isBlank(trackingEditText.getText())) {
+                trackingEditText.requestFocus();
+            }
+        } else {
+            trackingEditText.setVisibility(View.GONE);
+        }
+
         // show/hide Coordinate fields as Trackable needs
         if (LogTypeTrackable.isCoordinatesNeeded(typeSelected) && loggingManager.canLogCoordinates()) {
             geocodeEditText.setVisibility(View.VISIBLE);
             coordinatesButton.setVisibility(View.VISIBLE);
+            // Request focus if field is empty
+            if (StringUtils.isBlank(geocodeEditText.getText())) {
+                geocodeEditText.requestFocus();
+            }
         } else {
             geocodeEditText.setVisibility(View.GONE);
             coordinatesButton.setVisibility(View.GONE);
-        }
-
-        // show/hide Tracking Code Field for note type
-        if (typeSelected != LogTypeTrackable.NOTE || loggingManager.isTrackingCodeNeededToPostNote()) {
-            trackingEditText.setVisibility(View.VISIBLE);
-        } else {
-            trackingEditText.setVisibility(View.GONE);
         }
     }
 
