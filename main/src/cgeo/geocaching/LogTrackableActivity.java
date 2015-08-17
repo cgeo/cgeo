@@ -13,6 +13,7 @@ import cgeo.geocaching.enumerations.Loaders;
 import cgeo.geocaching.enumerations.LogTypeTrackable;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.search.AutoCompleteAdapter;
 import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
@@ -34,6 +35,9 @@ import cgeo.geocaching.utils.LogTemplateProvider.LogTemplate;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
+import rx.functions.Func1;
+
+import android.R.layout;
 import android.R.string;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -53,6 +57,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnFocusChangeListener;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -67,7 +72,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
     @Bind(R.id.type) protected Button typeButton;
     @Bind(R.id.date) protected Button dateButton;
     @Bind(R.id.time) protected Button timeButton;
-    @Bind(R.id.geocode) protected EditText geocodeEditText;
+    @Bind(R.id.geocode) protected AutoCompleteTextView geocodeEditText;
     @Bind(R.id.coordinates) protected Button coordinatesButton;
     @Bind(R.id.tracking) protected EditText trackingEditText;
     @Bind(R.id.log) protected EditText logEditText;
@@ -285,6 +290,20 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
         }
 
         disableSuggestions(trackingEditText);
+        initGeocodeSuggestions();
+    }
+
+    /**
+     * Link the geocodeEditText to the SuggestionsGeocode.
+     */
+    private void initGeocodeSuggestions() {
+        geocodeEditText.setAdapter(new AutoCompleteAdapter(geocodeEditText.getContext(), layout.simple_dropdown_item_1line, new Func1<String, String[]>() {
+
+            @Override
+            public String[] call(final String input) {
+                return DataStore.getSuggestionsGeocode(input);
+            }
+        }));
     }
 
     @Override

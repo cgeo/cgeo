@@ -50,7 +50,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal" >
 
-            <EditText
+            <AutoCompleteTextView
                 android:id="@+id/geocode"
                 style="@style/edittext"
                 android:hint="@string/cache_geocode"
