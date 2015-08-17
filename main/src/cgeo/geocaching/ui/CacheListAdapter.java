@@ -535,13 +535,6 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
         return v;
     }
 
-    private static Drawable getCacheIcon(final Geocache cache) {
-        final boolean userModifiedOrFinal = cache.hasUserModifiedCoords() || cache.hasFinalDefined();
-        // Fallback to mystery icon if the drawable is right icon type is not found
-        final Drawable drawable = gcIconDrawables.get(getIconHashCode(cache.getType(), userModifiedOrFinal));
-        return drawable != null ? drawable : gcIconDrawables.get(getIconHashCode(CacheType.MYSTERY, userModifiedOrFinal));
-    }
-
     @Override
     public void notifyDataSetChanged() {
         super.notifyDataSetChanged();
