@@ -67,7 +67,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
     @Bind(R.id.type) protected Button typeButton;
     @Bind(R.id.date) protected Button dateButton;
     @Bind(R.id.time) protected Button timeButton;
-    @Bind(R.id.geocode) protected EditText geocacheEditText;
+    @Bind(R.id.geocode) protected EditText geocodeEditText;
     @Bind(R.id.coordinates) protected Button coordinatesButton;
     @Bind(R.id.tracking) protected EditText trackingEditText;
     @Bind(R.id.log) protected EditText logEditText;
@@ -272,8 +272,8 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
 
         // Register Coordinates Listener
         if (loggingManager.canLogCoordinates()) {
-            geocacheEditText.setOnFocusChangeListener(new LoadGeocacheListener());
-            geocacheEditText.setText(geocache.getGeocode());
+            geocodeEditText.setOnFocusChangeListener(new LoadGeocacheListener());
+            geocodeEditText.setText(geocache.getGeocode());
             updateCoordinates(geocache.getCoords());
             coordinatesButton.setOnClickListener(new CoordinatesListener());
         }
@@ -290,7 +290,6 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
     @Override
     public void setDate(final Calendar dateIn) {
         date = dateIn;
-
         dateButton.setText(Formatter.formatShortDateVerbally(date.getTime().getTime()));
     }
 
@@ -306,10 +305,10 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
 
         // show/hide Coordinate fields as Trackable needs
         if (LogTypeTrackable.isCoordinatesNeeded(typeSelected) && loggingManager.canLogCoordinates()) {
-            geocacheEditText.setVisibility(View.VISIBLE);
+            geocodeEditText.setVisibility(View.VISIBLE);
             coordinatesButton.setVisibility(View.VISIBLE);
         } else {
-            geocacheEditText.setVisibility(View.GONE);
+            geocodeEditText.setVisibility(View.GONE);
             coordinatesButton.setVisibility(View.GONE);
         }
 
@@ -372,10 +371,10 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
     private class LoadGeocacheListener implements OnFocusChangeListener {
         @Override
         public void onFocusChange(final View view, final boolean hasFocus) {
-            if (!hasFocus && !geocacheEditText.getText().toString().isEmpty()) {
-                final Geocache tmpGeocache = DataStore.loadCache(geocacheEditText.getText().toString(), LoadFlags.LOAD_CACHE_OR_DB);
+            if (!hasFocus && !geocodeEditText.getText().toString().isEmpty()) {
+                final Geocache tmpGeocache = DataStore.loadCache(geocodeEditText.getText().toString(), LoadFlags.LOAD_CACHE_OR_DB);
                 if (tmpGeocache == null) {
-                    geocache.setGeocode(geocacheEditText.getText().toString());
+                    geocache.setGeocode(geocodeEditText.getText().toString());
                 } else {
                     geocache = tmpGeocache;
                     updateCoordinates(geocache.getCoords());
@@ -527,7 +526,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
         // Some Trackable connectors recommend logging with a Geocode.
         // Note: Currently, counter is shared between all connectors recommending Geocode.
         if (LogTypeTrackable.isCoordinatesNeeded(typeSelected) && loggingManager.canLogCoordinates() &&
-                connector.recommendLogWithGeocode() && geocacheEditText.getText().toString().isEmpty() &&
+                connector.recommendLogWithGeocode() && geocodeEditText.getText().toString().isEmpty() &&
                 Settings.getLogTrackableWithoutGeocodeShowCount() < MAX_SHOWN_POPUP_TRACKABLE_WITHOUT_GEOCODE) {
             new LogTrackableWithoutGeocodeBuilder().create(this).show();
         } else {
