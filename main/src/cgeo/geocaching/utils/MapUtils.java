@@ -15,6 +15,7 @@ import android.support.annotation.Nullable;
 import android.util.SparseArray;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public final class MapUtils {
@@ -199,12 +200,12 @@ public final class MapUtils {
         // user modified coords
         if (cache.hasUserModifiedCoords()) {
             layers.add(Compatibility.getDrawable(res, R.drawable.marker_usermodifiedcoords));
-            insets.add(INSET_USERMODIFIEDCOORDS[resolution]);
+            insets.add(driftBottomItems(INSET_USERMODIFIEDCOORDS, resolution, cacheListType));
         }
         // personal note
         if (cache.getPersonalNote() != null) {
             layers.add(Compatibility.getDrawable(res, R.drawable.marker_personalnote));
-            insets.add(INSET_PERSONALNOTE[resolution]);
+            insets.add(driftBottomItems(INSET_PERSONALNOTE, resolution, cacheListType));
         }
 
         final LayerDrawable ld = new LayerDrawable(layers.toArray(new Drawable[layers.size()]));
@@ -227,6 +228,29 @@ public final class MapUtils {
      */
     private static int calculateResolution(final Drawable marker) {
         return marker.getIntrinsicWidth() > 40 ? (marker.getIntrinsicWidth() > 50 ? (marker.getIntrinsicWidth() > 70 ? (marker.getIntrinsicWidth() > 100 ? 4 : 3) : 2) : 1) : 0;
+    }
+
+    /**
+     * Calculate a new position for the bottom line overlay items, when there is no background circle.
+     *
+     * @param inset
+     *          Original inset position
+     * @param resolution
+     *          The current item resolution
+     * @param cacheListType
+     *          The current CacheListType
+     * @return
+     *          The new drifted inset position
+     */
+    private static int[] driftBottomItems(final int[][] inset, final int resolution, @Nullable final CacheListType cacheListType) {
+        // Do not drift in when background is displayed
+        if (showBackground(cacheListType)) {
+            return inset[resolution];
+        }
+        final int[] newPosition = Arrays.copyOf(inset[resolution], 4);
+        newPosition[1] -= INSET_TYPE[resolution][3];
+        newPosition[3] += INSET_TYPE[resolution][3];
+        return newPosition;
     }
 
     /**
