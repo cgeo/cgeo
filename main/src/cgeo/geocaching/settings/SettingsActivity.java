@@ -22,9 +22,6 @@ import cgeo.geocaching.utils.RxUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.openintents.intents.FileManagerIntents;
 
-import rx.functions.Action0;
-import rx.schedulers.Schedulers;
-
 import android.app.ProgressDialog;
 import android.app.backup.BackupManager;
 import android.content.ActivityNotFoundException;
@@ -48,6 +45,9 @@ import android.widget.ListAdapter;
 import java.io.File;
 import java.util.List;
 import java.util.Locale;
+
+import rx.functions.Action0;
+import rx.schedulers.Schedulers;
 
 /**
  * A {@link PreferenceActivity} that presents a set of application settings. On
@@ -182,10 +182,6 @@ public class SettingsActivity extends PreferenceActivity {
         getPreference(R.string.pref_connectorGCActive).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
         setWebsite(R.string.pref_fakekey_gc_website, GCConnector.getInstance().getHost());
         getPreference(R.string.preference_screen_gc).setSummary(getServiceSummary(Settings.isGCConnectorActive()));
-
-        getPreference(R.string.pref_connectorOXActive).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
-        setWebsite(R.string.pref_fakekey_ox_website, "opencaching.com");
-        getPreference(R.string.preference_screen_ox).setSummary(getServiceSummary(Settings.isOXConnectorActive()));
 
         getPreference(R.string.pref_connectorECActive).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
         setWebsite(R.string.pref_fakekey_ec_website, "extremcaching.com");
@@ -665,7 +661,6 @@ public class SettingsActivity extends PreferenceActivity {
                     || isPreference(preference, R.string.pref_connectorOCROActive)
                     || isPreference(preference, R.string.pref_connectorOCUKActive)
                     || isPreference(preference, R.string.pref_connectorGCActive)
-                    || isPreference(preference, R.string.pref_connectorOXActive)
                     || isPreference(preference, R.string.pref_connectorECActive)) {
                 // update summary
                 final boolean boolVal = (Boolean) value;
@@ -675,8 +670,6 @@ public class SettingsActivity extends PreferenceActivity {
                     preference.getPreferenceManager().findPreference(getKey(prefKey.prefScreenId)).setSummary(summary);
                 } else if (isPreference(preference, R.string.pref_connectorGCActive)) {
                     preference.getPreferenceManager().findPreference(getKey(R.string.preference_screen_gc)).setSummary(summary);
-                } else if (isPreference(preference, R.string.pref_connectorOXActive)) {
-                    preference.getPreferenceManager().findPreference(getKey(R.string.preference_screen_ox)).setSummary(summary);
                 } else if (isPreference(preference, R.string.pref_connectorECActive)) {
                     preference.getPreferenceManager().findPreference(getKey(R.string.preference_screen_ec)).setSummary(summary);
                 }

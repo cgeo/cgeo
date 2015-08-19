@@ -342,10 +342,6 @@ public class Settings {
         return getBoolean(R.string.pref_connectorECActive, false);
     }
 
-    public static boolean isOXConnectorActive() {
-        return getBoolean(R.string.pref_connectorOXActive, false);
-    }
-
     public static boolean isGCPremiumMember() {
         final String memberStatus = getGCMemberStatus();
         return StringUtils.equalsIgnoreCase(memberStatus, GCConstants.MEMBER_STATUS_PREMIUM) ||
