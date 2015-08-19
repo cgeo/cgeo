@@ -61,6 +61,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.SearchView;
+import android.support.v7.widget.SearchView.OnQueryTextListener;
 import android.support.v7.widget.SearchView.OnSuggestionListener;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -311,6 +312,21 @@ public class MainActivity extends AbstractActionBarActivity {
                 MenuItemCompat.collapseActionView(searchItem);
                 searchView.setIconified(true);
                 // return false to invoke standard behavior of launching the intent for the search result
+                return false;
+            }
+        });
+
+        // Used to collapse searchBar on submit from virtual keyboard
+        searchView.setOnQueryTextListener(new OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(final String s) {
+                MenuItemCompat.collapseActionView(searchItem);
+                searchView.setIconified(true);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(final String s) {
                 return false;
             }
         });
