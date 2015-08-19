@@ -24,8 +24,8 @@ public final class MapUtils {
     private static final int[][] INSET_TYPE = { { 5, 8, 6, 10 }, { 4, 4, 4, 11 }, { 6, 6, 6, 14 }, { 9, 9, 9, 21 }, { 12, 12, 12, 28 } }; // center, 22x22 / 36x36
     private static final int[][] INSET_OWN = { { 21, 0, 0, 28 }, { 29, 0, 0, 35 }, { 40, 0, 0, 48 }, { 58, 0, 0, 70 }, { 80, 0, 0, 96 } }; // top right, 12x12 / 16x16 / 20x20 / 32x32 / 40x40
     private static final int[][] INSET_FOUND = { { 0, 0, 21, 28 }, { 0, 0, 29, 35 }, { 0, 0, 40, 48 }, { 0, 0, 58, 70 }, { 0, 0, 80, 96 } }; // top left, 12x12 / 16x16 / 20x20 / 32x32 / 40x40
-    private static final int[][] INSET_USERMODIFIEDCOORDS = { { 21, 28, 0, 0 }, { 19, 25, 0, 0 }, { 25, 33, 0, 0 }, { 38, 50, 0, 0 }, { 50, 66, 0, 0 } }; // bottom right, 12x12 / 26x26 / 35x35 / 52x52 / 70x70
-    private static final int[][] INSET_PERSONALNOTE = { { 0, 28, 21, 0 }, { 0, 25, 19, 0 }, { 0, 33, 25, 0 }, { 0, 50, 38, 0 }, { 0, 66, 50, 0 } }; // bottom left, 12x12 / 26x26 / 35x35 / 52x52 / 70x70
+    private static final int[][] INSET_USERMODIFIEDCOORDS = { { 21, 28, 0, 0 }, { 29, 35, 0, 0 }, { 40, 48, 0, 0 }, { 58, 70, 0, 0 }, { 80, 96, 0, 0 } }; // bottom right, 12x12 / 16x16 / 20x20 / 32x32 / 40x40
+    private static final int[][] INSET_PERSONALNOTE = { { 0, 28, 21, 0 }, { 0, 35, 29, 0 }, { 0, 48, 40, 0 }, { 0, 70, 58, 0 }, { 0, 96, 80, 0 } }; // bottom left, 12x12 / 16x16 / 20x20 / 32x32 / 40x40
 
     private static final SparseArray<LayerDrawable> overlaysCache = new SparseArray<>();
 
