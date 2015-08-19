@@ -2,6 +2,10 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
+    <b>Next release:</b>\n
+    · Fix: opencaching.com officially shut down\n
+    \n
+    \n
     <b>2015.08.03:</b>\n
     · Fix: Possible crash while editing personal notes\n
     · Fix: Waypoints of caches may be missing on GPX import\n
