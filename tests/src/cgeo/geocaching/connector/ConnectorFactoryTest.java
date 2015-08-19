@@ -68,7 +68,6 @@ public class ConnectorFactoryTest extends AbstractResourceInstrumentationTestCas
     public static void testGetGeocodeFromUrl() {
         assertThat(ConnectorFactory.getGeocodeFromURL("http://coord.info/GC34PLO")).isEqualTo("GC34PLO");
         assertThat(ConnectorFactory.getGeocodeFromURL("http://www.coord.info/GC34PLO")).isEqualTo("GC34PLO");
-        assertThat(ConnectorFactory.getGeocodeFromURL("http://www.opencaching.com/#!geocache/OX1234")).isEqualTo("OX1234");
 
         assertThat(GCConnector.getInstance().getGeocodeFromUrl("http://coord.info/GC12ABC")).isEqualTo("GC12ABC");
         assertThat(GCConnector.getInstance().getGeocodeFromUrl("http://www.coord.info/GC12ABC")).isEqualTo("GC12ABC");
@@ -100,10 +99,9 @@ public class ConnectorFactoryTest extends AbstractResourceInstrumentationTestCas
     }
 
     public static Set<String> getGeocodeSample() {
-        Set<String> geocodes = new HashSet<>(18);
+        final Set<String> geocodes = new HashSet<>(18);
         geocodes.add("GC1234");
         geocodes.add("OC1234");
-        geocodes.add("OX1234");
         geocodes.add("EC1234");
         geocodes.add("TCABC");
         geocodes.add("WM1234");
@@ -113,7 +111,6 @@ public class ConnectorFactoryTest extends AbstractResourceInstrumentationTestCas
 
         geocodes.add("GC5678");
         geocodes.add("OC5678");
-        geocodes.add("OX5678");
         geocodes.add("EC5678");
         geocodes.add("TC2JP");
         geocodes.add("WM5678");

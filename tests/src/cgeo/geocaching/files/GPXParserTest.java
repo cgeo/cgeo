@@ -342,25 +342,6 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         assertThat(String.valueOf(GCConstants.gccodeToGCId(cache.getGeocode()))).isEqualTo(cache.getCacheId());
     }
 
-    public void testOX() throws IOException, ParserException {
-        final List<Geocache> caches = readGPX10(R.raw.ox1ry0y_gpx);
-        assertThat(caches).hasSize(1);
-        final Geocache cache = caches.get(0);
-        assertThat(cache.getGeocode()).isEqualTo("OX1RY0Y");
-        assertThat(cache.getType()).isEqualTo(CacheType.TRADITIONAL);
-        assertThat(cache.isArchived()).isEqualTo(false);
-        assertThat(cache.isDisabled()).isEqualTo(false);
-        assertThat(cache.getName()).isEqualTo("Kornwestheim und die Römer");
-        assertThat(cache.getOwnerDisplayName()).isEqualTo("Thomas&Dani");
-        assertThat(cache.getSize()).isEqualTo(CacheSize.SMALL);
-        assertThat(cache.getDifficulty()).isEqualTo(1.5f);
-        assertThat(cache.getTerrain()).isEqualTo(1.0f);
-        assertThat(cache.getDescription().startsWith("Dieses sind die Reste einer in Kornwestheim gefundenen")).isTrue();
-        assertThat(cache.getCoords()).isEqualTo(new Geopoint(48.8642167, 9.1836));
-        assertThat(cache.isReliableLatLon()).isTrue();
-        assertThat(cache.getHint()).isEqualTo("Wasserleitung");
-    }
-
     private Geocache getFirstCache(final int gpxResourceId) throws IOException, ParserException {
         final List<Geocache> caches = readGPX10(gpxResourceId);
         assertThat(caches).isNotNull();

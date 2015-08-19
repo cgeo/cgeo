@@ -18,7 +18,6 @@ import cgeo.geocaching.connector.oc.OCApiConnector.ApiSupport;
 import cgeo.geocaching.connector.oc.OCApiLiveConnector;
 import cgeo.geocaching.connector.oc.OCCZConnector;
 import cgeo.geocaching.connector.oc.OCConnector;
-import cgeo.geocaching.connector.ox.OXConnector;
 import cgeo.geocaching.connector.tc.TerraCachingConnector;
 import cgeo.geocaching.connector.trackable.GeokretyConnector;
 import cgeo.geocaching.connector.trackable.SwaggieConnector;
@@ -31,13 +30,13 @@ import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
-import rx.functions.Func1;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+
+import rx.functions.Func1;
 
 public final class ConnectorFactory {
     @NonNull private static final UnknownConnector UNKNOWN_CONNECTOR = new UnknownConnector();
@@ -67,7 +66,6 @@ public final class ConnectorFactory {
             new OCApiLiveConnector("opencaching.ro", "www.opencaching.ro", "OR", "CC BY-SA 3.0",
                     R.string.oc_ro_okapi_consumer_key, R.string.oc_ro_okapi_consumer_secret,
                     R.string.pref_connectorOCROActive, R.string.pref_ocro_tokenpublic, R.string.pref_ocro_tokensecret, ApiSupport.current),
-            new OXConnector(),
             new GeocachingAustraliaConnector(),
             new GeopeitusConnector(),
             new TerraCachingConnector(),
