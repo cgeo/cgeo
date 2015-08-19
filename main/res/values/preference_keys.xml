@@ -17,7 +17,6 @@
     <string name="preference_screen_ocro">preference_screen_ocro</string>
     <string name="preference_screen_ocuk">preference_screen_ocuk</string>
     <string name="preference_screen_ec">preference_screen_ec</string>
-    <string name="preference_screen_ox">preference_screen_ox</string>
     <string name="preference_screen_twitter">preference_screen_twitter</string>
     <string name="preference_screen_navigation_menu">fakekey_navigation_menu_screen</string>
     <string name="preference_screen_sendtocgeo">preference_screen_sendtocgeo</string>
@@ -43,7 +42,6 @@
     <string name="pref_ecusername">ecusername</string>
     <string name="pref_ecpassword">ecpassword</string>
     <string name="pref_connectorECActive">connectorECActive</string>
-    <string name="pref_connectorOXActive">connectorOXActive</string>
     <string name="pref_connectorGeokretyActive">connectorGeokretyActive</string>
     <string name="pref_geokrety_cache">geokretycache</string>
     <string name="pref_pass_vote">pass-vote</string>
@@ -178,7 +176,6 @@
     <string name="pref_fakekey_ocro_website">fakekey_ocro_website</string>
     <string name="pref_fakekey_ocuk_website">fakekey_ocuk_website</string>
     <string name="pref_fakekey_ec_website">fakekey_ec_website</string>
-    <string name="pref_fakekey_ox_website">fakekey_ox_website</string>
     <string name="pref_fakekey_gcvote_website">fakekey_gcvote_website</string>
     <string name="pref_fakekey_geokrety_website">fakekey_geokrety_website</string>
     <string name="pref_fakekey_geokrety_register">fakekey_geokrety_register</string>
