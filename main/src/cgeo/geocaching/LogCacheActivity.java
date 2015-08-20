@@ -31,6 +31,7 @@ import com.github.amlcurran.showcaseview.targets.ActionItemTarget;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
+import android.R.string;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -548,7 +549,30 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
                 showToast(res.getString(R.string.info_log_saved));
                 finish();
             } else {
-                showToast(status.getErrorString(res));
+                Dialogs.confirmPositiveNegativeNeutral(activity, R.string.info_log_post_failed,
+                    res.getString(R.string.info_log_post_failed_reason, status.getErrorString(res)),
+                    R.string.info_log_post_retry, // Positive Button
+                    string.cancel,                // Negative Button
+                    R.string.info_log_post_save,  // Neutral Button
+                    // Positive button: Retry
+                    new OnClickListener() {
+
+                        @Override
+                        public void onClick(final DialogInterface dialog, final int which) {
+                            sendLogInternal();
+                        }
+                    },
+                    // Negative button: dismiss popup
+                    null,
+                    // Neutral Button: SaveLog
+                    new OnClickListener() {
+
+                        @Override
+                        public void onClick(final DialogInterface dialogInterface, final int i) {
+                            saveLog(true);
+                            finish();
+                        }
+                });
             }
         }
     }

@@ -215,6 +215,50 @@ public final class Dialogs {
         return confirm(context, getString(title), getString(msg), okayListener);
     }
 
+    /**
+     * Confirm using three configurable buttons "Positive", "Negative" and "Neutral". Buttons text are configurable.
+     *
+     * @param context
+     *            activity hosting the dialog
+     * @param title
+     *            dialog title
+     * @param msg
+     *            dialog message
+     * @param positiveTextButton
+     *            Text for the positive button
+     * @param negativeTextButton
+     *            Text for the negative button
+     * @param neutralTextButton
+     *            Text for the neutral button
+     * @param positiveListener
+     *            listener of the positive button
+     * @param negativeListener
+     *            listener of the negative button
+     * @param neutralListener
+     *            listener of the neutral button
+     */
+    public static AlertDialog.Builder confirmPositiveNegativeNeutral(final Activity context,
+                                                                     final int title,
+                                                                     final String msg,
+                                                                     final int positiveTextButton,
+                                                                     final int negativeTextButton,
+                                                                     final int neutralTextButton,
+                                                                     final OnClickListener positiveListener,
+                                                                     final OnClickListener negativeListener,
+                                                                     final OnClickListener neutralListener) {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        final AlertDialog dialog = builder.setTitle(title)
+                .setCancelable(true)
+                .setMessage(msg)
+                .setPositiveButton(positiveTextButton, positiveListener)
+                .setNegativeButton(negativeTextButton, negativeListener)
+                .setNeutralButton(neutralTextButton, neutralListener)
+                .create();
+        dialog.setOwnerActivity(context);
+        dialog.show();
+        return builder;
+    }
+
     private static String getString(final int resourceId) {
         return CgeoApplication.getInstance().getString(resourceId);
     }
