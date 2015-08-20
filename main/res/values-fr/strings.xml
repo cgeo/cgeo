@@ -230,7 +230,7 @@
   <string name="loc_gps">Gps</string>
   <string name="loc_sat">Satellites</string>
   <string name="loc_trying">Localisation en cours…</string>
-  <string name="loc_no_addr">Adresse inconnue</string>
+  <string name="loc_no_addr">Position inconnue</string>
   <string name="loc_gps_disabled">GPS désactivé</string>
   <string name="menu_centerposition">Centrer sur ma position</string>
   <string name="menu_about">À propos de c:geo</string>
@@ -728,6 +728,7 @@
   <string name="cache_status_offline_log">Visite enregistrée hors-ligne</string>
   <string name="cache_status_found">Trouvée</string>
   <string name="cache_not_status_found">Non trouvée</string>
+  <string name="cache_never_found">Jamais trouvé</string>
   <string name="cache_status_archived">Archivée</string>
   <string name="cache_status_disabled">Désactivée</string>
   <string name="cache_status_premium">Membres Premium seulement</string>
