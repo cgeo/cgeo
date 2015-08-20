@@ -1,7 +1,5 @@
 package cgeo.geocaching.export;
 
-import butterknife.ButterKnife;
-
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
@@ -38,6 +36,8 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+
+import butterknife.ButterKnife;
 
 public class GpxExport extends AbstractExport {
 
@@ -113,7 +113,6 @@ public class GpxExport extends AbstractExport {
     }
 
     protected class ExportTask extends AsyncTaskWithProgress<String, File> {
-        private final Activity activity;
 
         /**
          * Instantiates and configures the task for exporting field notes.
@@ -123,7 +122,6 @@ public class GpxExport extends AbstractExport {
          */
         public ExportTask(final Activity activity) {
             super(activity, getProgressTitle());
-            this.activity = activity;
         }
 
         private File getExportFile() {
@@ -178,14 +176,15 @@ public class GpxExport extends AbstractExport {
 
         @Override
         protected void onPostExecuteInternal(final File exportFile) {
-            if (null != activity) {
+            final Activity activityLocal = activity;
+            if (null != activityLocal) {
                 if (exportFile != null) {
-                    ActivityMixin.showToast(activity, getName() + ' ' + activity.getString(R.string.export_exportedto) + ": " + exportFile.toString());
+                    ActivityMixin.showToast(activityLocal, getName() + ' ' + activityLocal.getString(R.string.export_exportedto) + ": " + exportFile.toString());
                     if (Settings.getShareAfterExport()) {
-                        ShareUtils.share(activity, exportFile, "application/xml", R.string.export_gpx_to);
+                        ShareUtils.share(activityLocal, exportFile, "application/xml", R.string.export_gpx_to);
                     }
                 } else {
-                    ActivityMixin.showToast(activity, activity.getString(R.string.export_failed));
+                    ActivityMixin.showToast(activityLocal, activityLocal.getString(R.string.export_failed));
                 }
             }
         }

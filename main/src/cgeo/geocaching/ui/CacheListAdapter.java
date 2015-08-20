@@ -1,7 +1,5 @@
 package cgeo.geocaching.ui;
 
-import butterknife.Bind;
-
 import cgeo.geocaching.CacheDetailActivity;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
@@ -28,9 +26,6 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.eclipse.jdt.annotation.NonNull;
-
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -60,6 +55,10 @@ import java.util.Comparator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+
+import butterknife.Bind;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
 
 public class CacheListAdapter extends ArrayAdapter<Geocache> {
 
@@ -529,7 +528,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
         if (isHistory() && cache.getVisitedDate() > 0) {
             holder.info.setText(Formatter.formatCacheInfoHistory(cache));
         } else {
-            holder.info.setText(Formatter.formatCacheInfoLong(cache, cacheListType));
+            holder.info.setText(Formatter.formatCacheInfoLong(cache));
         }
 
         return v;

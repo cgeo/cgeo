@@ -1,8 +1,5 @@
 package cgeo.geocaching;
 
-import butterknife.ButterKnife;
-import butterknife.Bind;
-
 import cgeo.geocaching.activity.ShowcaseViewBuilder;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.ILoggingManager;
@@ -34,12 +31,6 @@ import com.github.amlcurran.showcaseview.targets.ActionItemTarget;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
-import rx.Observable;
-import rx.android.app.AppObservable;
-import rx.functions.Action1;
-import rx.functions.Func0;
-import rx.functions.Func1;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -68,6 +59,14 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import rx.Observable;
+import rx.android.app.AppObservable;
+import rx.functions.Action1;
+import rx.functions.Func0;
+import rx.functions.Func1;
 
 public class LogCacheActivity extends AbstractLoggingActivity implements DateDialog.DateDialogParent {
 
@@ -450,11 +449,8 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
 
     private class Poster extends AsyncTaskWithProgressText<String, StatusCode> {
 
-        final Activity activity;
-
         public Poster(final Activity activity, final String progressMessage) {
             super(activity, res.getString(R.string.log_posting_log), progressMessage);
-            this.activity = activity;
         }
 
         @Override

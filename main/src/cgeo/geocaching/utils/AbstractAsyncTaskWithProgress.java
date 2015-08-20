@@ -2,6 +2,9 @@ package cgeo.geocaching.utils;
 
 import cgeo.geocaching.activity.Progress;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+
 import android.app.Activity;
 import android.os.AsyncTask;
 
@@ -14,8 +17,8 @@ import android.os.AsyncTask;
  */
 public abstract class AbstractAsyncTaskWithProgress<Params, T, Result> extends AsyncTask<Params, T, Result> {
 
-    protected final Progress progress = new Progress();
-    protected final Activity activity;
+    @NonNull protected final Progress progress = new Progress();
+    @Nullable protected final Activity activity;
     protected final String progressTitle;
     protected final String progressMessage;
 
@@ -23,7 +26,7 @@ public abstract class AbstractAsyncTaskWithProgress<Params, T, Result> extends A
      * Creates an AsyncTask with progress dialog.
      *
      */
-    public AbstractAsyncTaskWithProgress(final Activity activity, final String progressTitle, final String progressMessage) {
+    public AbstractAsyncTaskWithProgress(@Nullable final Activity activity, final String progressTitle, final String progressMessage) {
         this.activity = activity;
         this.progressTitle = progressTitle;
         this.progressMessage = progressMessage;
@@ -33,7 +36,7 @@ public abstract class AbstractAsyncTaskWithProgress<Params, T, Result> extends A
      * Creates an AsyncTask with progress dialog.
      *
      */
-    public AbstractAsyncTaskWithProgress(final Activity activity, final String progressTitle) {
+    public AbstractAsyncTaskWithProgress(@Nullable final Activity activity, final String progressTitle) {
         this(activity, progressTitle, null);
     }
 
@@ -100,7 +103,7 @@ public abstract class AbstractAsyncTaskWithProgress<Params, T, Result> extends A
      * @param status
      *          The new progress status
      */
-    protected void onProgressUpdateInternal(@SuppressWarnings("unused") final T status) {
+    protected void onProgressUpdateInternal(final T status) {
         // empty by default
     }
 

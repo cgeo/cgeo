@@ -1,7 +1,5 @@
 package cgeo.geocaching.export;
 
-import butterknife.ButterKnife;
-
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.DataStore;
 import cgeo.geocaching.Geocache;
@@ -36,6 +34,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+
+import butterknife.ButterKnife;
 
 /**
  * Exports offline logs in the Groundspeak Field Note format.
@@ -107,7 +107,6 @@ public class FieldnoteExport extends AbstractExport {
     }
 
     private class ExportTask extends AsyncTaskWithProgress<Geocache, Boolean> {
-        @Nullable private final Activity activity;
         private final boolean upload;
         private final boolean onlyNew;
         private File exportFile;
@@ -126,7 +125,6 @@ public class FieldnoteExport extends AbstractExport {
          */
         public ExportTask(@Nullable final Activity activity, final boolean upload, final boolean onlyNew) {
             super(activity, getProgressTitle(), CgeoApplication.getInstance().getString(R.string.export_fieldnotes_creating), true);
-            this.activity = activity;
             this.upload = upload;
             this.onlyNew = onlyNew;
         }
