@@ -119,11 +119,68 @@ public enum LogType {
         return CgeoApplication.getInstance().getBaseContext().getResources().getString(stringId);
     }
 
+
+    /**
+     * Check if the Offline Log is about Archiving.
+     *
+     * @return
+     *          True if the Offline LogEntry is about Archiving
+     */
+    public final boolean isArchiveLog() {
+        return this == ARCHIVE || this == NEEDS_ARCHIVE;
+    }
+
+
+    /**
+     * Check if the Offline Log is a Found Log.
+     *
+     * @return
+     *          True if the Offline LogEntry is a Found
+     */
     public final boolean isFoundLog() {
         return this == FOUND_IT || this == ATTENDED || this == WEBCAM_PHOTO_TAKEN;
     }
 
+
+    /**
+     * Check if the Offline Log is a *strictly* Not Found Log.
+     *
+     * @return
+     *          True if the Offline LogEntry is a Not Found
+     */
+    public final boolean isNotFoundLog() {
+        return this == DIDNT_FIND_IT;
+    }
+
+
+    /**
+     * Check if the Offline Log is about maintenance.
+     *
+     * @return
+     *          True if the Offline LogEntry is about maintenance
+     */
+    public final boolean isMaintenanceLog() {
+        return this == NEEDS_MAINTENANCE || this == OWNER_MAINTENANCE || this == UPDATE_COORDINATES;
+    }
+
+
+    /**
+     * Check if the Offline Log is a Note Log.
+     *
+     * @return
+     *          True if the Offline LogEntry is a Note
+     */
+    public final boolean isNoteLog() {
+        return this == NOTE;
+    }
+
+    /**
+     * Check if the LogType is unusual. May lead to user confirmation.
+     *
+     * @return
+     *          True if user must confirm Log
+     */
     public boolean mustConfirmLog() {
-        return this == ARCHIVE || this == NEEDS_ARCHIVE;
+        return isArchiveLog();
     }
 }

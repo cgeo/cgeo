@@ -157,6 +157,7 @@ public class Geocache implements IWaypoint {
     private final EnumSet<StorageLocation> storageLocation = EnumSet.of(StorageLocation.HEAP);
     private boolean finalDefined = false;
     private boolean logPasswordRequired = false;
+    private LogEntry offlineLogs = null;
 
     private static final Pattern NUMBER_PATTERN = Pattern.compile("\\d+");
 
@@ -477,6 +478,37 @@ public class Geocache implements IWaypoint {
         }
     }
 
+    /**
+     * Get the Offline Log entry if any.
+     *
+     * @return
+     *          The Offline LogEntry
+     */
+    @Nullable
+    public LogEntry getOfflineLog() {
+        if (isLogOffline() && offlineLogs == null) {
+            offlineLogs = DataStore.loadLogOffline(geocode);
+        }
+        return offlineLogs;
+    }
+
+    /**
+     * Get the Offline Log entry if any.
+     *
+     * @return
+     *          The Offline LogEntry else Null
+     */
+    @Nullable
+    public LogType getOfflineLogType() {
+        if (getOfflineLog() == null) {
+            return null;
+        }
+        return getOfflineLog().type;
+    }
+
+    /**
+     * Drop offline log for a given geocode.
+     */
     public void clearOfflineLog() {
         DataStore.clearLogOffline(geocode);
         notifyChange();

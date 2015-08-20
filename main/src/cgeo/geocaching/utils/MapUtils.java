@@ -75,6 +75,7 @@ public final class MapUtils {
                 .append(cache.getPersonalNote())
                 .append(cache.isLogOffline())
                 .append(cache.getListId() > 0)
+                .append(cache.getOfflineLogType())
                 .append(showBackground(cacheListType))
                 .append(showFloppyOverlay(cacheListType))
                 .toHashCode();
@@ -194,7 +195,20 @@ public final class MapUtils {
             insets.add(INSET_FOUND[resolution]);
             // if not, perhaps logged offline
         } else if (cache.isLogOffline()) {
-            layers.add(Compatibility.getDrawable(res, R.drawable.marker_found_offline));
+            if (cache.getOfflineLogType() == null || cache.getOfflineLogType().isFoundLog()) {
+                // Default, backward compatible
+                layers.add(Compatibility.getDrawable(res, R.drawable.marker_found_offline));
+            } else if (cache.getOfflineLogType().isArchiveLog()) {
+                layers.add(Compatibility.getDrawable(res, R.drawable.marker_archive));
+            } else if (cache.getOfflineLogType().isMaintenanceLog()) {
+                layers.add(Compatibility.getDrawable(res, R.drawable.marker_maintenance));
+            } else if (cache.getOfflineLogType().isNoteLog()) {
+                layers.add(Compatibility.getDrawable(res, R.drawable.marker_note));
+            } else if (cache.getOfflineLogType().isNotFoundLog()) {
+                layers.add(Compatibility.getDrawable(res, R.drawable.marker_not_found_offline));
+            } else {
+                layers.add(Compatibility.getDrawable(res, R.drawable.marker_unknown_offline));
+            }
             insets.add(INSET_FOUND[resolution]);
         }
         // user modified coords
