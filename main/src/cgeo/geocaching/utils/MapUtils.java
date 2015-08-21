@@ -5,6 +5,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.Waypoint;
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.enumerations.CacheListType;
+import cgeo.geocaching.enumerations.LogType;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
@@ -195,19 +196,12 @@ public final class MapUtils {
             insets.add(INSET_FOUND[resolution]);
             // if not, perhaps logged offline
         } else if (cache.isLogOffline()) {
-            if (cache.getOfflineLogType() == null || cache.getOfflineLogType().isFoundLog()) {
+            final LogType offlineLogType = cache.getOfflineLogType();
+            if (offlineLogType == null) {
                 // Default, backward compatible
                 layers.add(Compatibility.getDrawable(res, R.drawable.marker_found_offline));
-            } else if (cache.getOfflineLogType().isArchiveLog()) {
-                layers.add(Compatibility.getDrawable(res, R.drawable.marker_archive));
-            } else if (cache.getOfflineLogType().isMaintenanceLog()) {
-                layers.add(Compatibility.getDrawable(res, R.drawable.marker_maintenance));
-            } else if (cache.getOfflineLogType().isNoteLog()) {
-                layers.add(Compatibility.getDrawable(res, R.drawable.marker_note));
-            } else if (cache.getOfflineLogType().isNotFoundLog()) {
-                layers.add(Compatibility.getDrawable(res, R.drawable.marker_not_found_offline));
             } else {
-                layers.add(Compatibility.getDrawable(res, R.drawable.marker_unknown_offline));
+                layers.add(Compatibility.getDrawable(res, offlineLogType.getOfflineLogOverlay()));
             }
             insets.add(INSET_FOUND[resolution]);
         }
