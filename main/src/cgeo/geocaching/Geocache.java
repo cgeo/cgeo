@@ -500,10 +500,11 @@ public class Geocache implements IWaypoint {
      */
     @Nullable
     public LogType getOfflineLogType() {
-        if (getOfflineLog() == null) {
+        final LogEntry offlineLog = getOfflineLog();
+        if (offlineLog == null) {
             return null;
         }
-        return getOfflineLog().type;
+        return offlineLog.type;
     }
 
     /**
