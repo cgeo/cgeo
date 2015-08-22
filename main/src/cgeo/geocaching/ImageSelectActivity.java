@@ -61,7 +61,7 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState, R.layout.imageselect_activity);
+        onCreate(savedInstanceState, R.layout.imageselect_activity);
         ButterKnife.bind(this);
 
         scaleChoiceIndex = Settings.getLogImageScale();
@@ -276,7 +276,7 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
         }
 
         if (requestCode == SELECT_NEW_IMAGE) {
-            showToast(getResources().getString(R.string.info_stored_image) + "\n" + image.getUrl());
+            showToast(getResources().getString(R.string.info_stored_image) + '\n' + image.getUrl());
         }
 
         loadImagePreview();
