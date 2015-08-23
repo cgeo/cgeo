@@ -1,20 +1,16 @@
 package cgeo.geocaching.ui.dialog;
 
-import butterknife.ButterKnife;
-
-import cgeo.geocaching.R;
-
+import android.app.Dialog;
+import android.app.TimePickerDialog;
+import android.app.TimePickerDialog.OnTimeSetListener;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.text.format.DateFormat;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TimePicker;
 
 import java.util.Calendar;
 
-public class TimeDialog extends DialogFragment {
+public class TimeDialog extends DialogFragment implements OnTimeSetListener {
 
     public interface TimeDialogParent {
         abstract public void setTime(final Calendar date);
@@ -31,34 +27,24 @@ public class TimeDialog extends DialogFragment {
     }
 
     @Override
-    public void onCreate(final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setStyle(DialogFragment.STYLE_NO_TITLE, 0);
+    public Dialog onCreateDialog(final Bundle savedInstanceState) {
+
         final Bundle args = getArguments();
         date = (Calendar) args.getSerializable("date");
+
+        final int hour = date.get(Calendar.HOUR_OF_DAY);
+        final int minute = date.get(Calendar.MINUTE);
+
+        // Create a new instance of TimePickerDialog and return it
+        return new TimePickerDialog(getActivity(), this, hour, minute,
+                DateFormat.is24HourFormat(getActivity()));
     }
 
     @Override
-    public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.time, container, false);
+    public void onTimeSet(final TimePicker view, final int hourOfDay, final int minute) {
+        date.set(Calendar.HOUR_OF_DAY, hourOfDay);
+        date.set(Calendar.MINUTE, minute);
 
-        final TimePicker picker = ButterKnife.findById(view, R.id.picker);
-        picker.setCurrentHour(date.get(Calendar.HOUR_OF_DAY));
-        picker.setCurrentMinute(date.get(Calendar.MINUTE));
-        picker.setOnTimeChangedListener(new TimePickerListener());
-        picker.setIs24HourView(DateFormat.is24HourFormat(getActivity()));
-        return view;
-    }
-
-    private class TimePickerListener implements TimePicker.OnTimeChangedListener {
-
-        @Override
-        public void onTimeChanged(final TimePicker picker, final int hour, final int minutes) {
-            date.set(Calendar.HOUR_OF_DAY, hour);
-            date.set(Calendar.MINUTE, minutes);
-
-            ((TimeDialogParent) getActivity()).setTime(date);
-
-        }
+        ((TimeDialogParent) getActivity()).setTime(date);
     }
 }
