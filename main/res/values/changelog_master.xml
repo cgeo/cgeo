@@ -3,16 +3,25 @@
   <!-- changelog for the master branch -->
   <string name="changelog_master" translatable="false">
     <b>Next feature release:</b>\n
+    · New: Cache icons in lists now shown with same indicators as on the map\n
+    · New: Progress indication while posting a log\n
     · New: Menu in cache details to put cache on ignore list (but not to remove)\n
     · New: Upload personal note to Opencaching platforms\n
     · New: Function to check your login for gcvote.com\n
+    · New: Improved feedback to user and more options when a log can not be posted\n
     · New: Import Garmin GGZ files\n
     · New: Almost full support of TerraCaching GPX files\n
     · New: Filter for never found caches\n
     · New: Maps.me shows waypoints of cache\n
+    · New: Auto complete geocode in Geokrety logging view\n
     · Fix: GPX files no longer violate XSD\n
+    · Fix: Detect wrong cache IDs in GPX import to avoid posting logs for wrong caches\n
     · Fix: Adjustments in size and resizing of coordinate input fields\n
     · Fix: Maximum terrain stars displayed correctly for extremcaching.com\n
+    · Fix: Visual indication for long press function behind \"Stored\" and \"Filter\" icons in main menu\n
+    · Fix: Contents of cache lists might get inconsistent if active list is changed\n
+    · Fix: Close keyboard when starting search\n
+    · Fix: Close search field when returning from search\n
     \n
   </string>
 </resources>
