@@ -282,7 +282,7 @@
   <string name="caches_sort_date_hidden">Rejtés dátuma</string>
   <string name="caches_sort_date_logged">Logolás dátuma</string>
   <string name="caches_sort_finds">Találatok száma</string>
-  <string name="caches_sort_state">állapot</string>
+  <string name="caches_sort_state">Állapot</string>
   <string name="caches_sort_storage">Készüléken tárolásának dátuma</string>
   <string name="caches_sort_eventdate">Esemény dátuma</string>
   <string name="caches_select_mode">Kiválasztó mód</string>
@@ -651,8 +651,8 @@
   <string name="cache_description_table_note">A leírás táblázatot is tartalmaz. Lehetséges, hogy csak a %s jeleníti meg azt helyesen.</string>
   <string name="cache_watchlist_on">Ez a láda a figyelőlistádon van.</string>
   <string name="cache_watchlist_not_on">Ez a láda nincs a figyelőlistádon.</string>
-  <string name="cache_watchlist_add">Hozzáadás</string>
-  <string name="cache_watchlist_remove">Eltávolítás</string>
+  <string name="cache_watchlist_add">Hozzáadás a figy.</string>
+  <string name="cache_watchlist_remove">Eltávolítás a figy.</string>
   <string name="cache_favpoint_on">Ez a láda a kedvenceid egyike.</string>
   <string name="cache_favpoint_not_on">Ez a láda nem szerepel a kedvenceid között.</string>
   <string name="cache_favpoint_add">Hozzáadás</string>

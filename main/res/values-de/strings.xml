@@ -218,6 +218,10 @@
   <string name="warn_no_pocket_query_found">Kein Pocket Query online gefunden</string>
   <string name="info_log_posted">Log erfolgreich gesendet.</string>
   <string name="info_log_saved">Log erfolgreich gespeichert.</string>
+  <string name="info_log_post_failed">Das Senden des Logs ist fehlgeschlagen.</string>
+  <string name="info_log_post_failed_reason">Ursache: %s</string>
+  <string name="info_log_post_retry">Wiederholen</string>
+  <string name="info_log_post_save">Offline speichern</string>
   <string name="info_log_cleared">Log wurde geleert.</string>
   <string name="info_log_type_changed">Logtyp wurde verändert!</string>
   <string name="info_select_logimage_cancelled">Fotoauswahl oder -erstellung abgebrochen.</string>
