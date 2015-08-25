@@ -52,7 +52,6 @@ import org.eclipse.jdt.annotation.Nullable;
 import android.net.Uri;
 import android.text.Html;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.Collator;
@@ -633,7 +632,7 @@ public final class GCParser {
                 if (matcherSpoilersInside.group(4) != null) {
                     description = matcherSpoilersInside.group(4);
                 }
-                cache.addSpoiler(new Image(url, title, description));
+                cache.addSpoiler(new Image.Builder(url, title, description).build());
             }
         } catch (final RuntimeException e) {
             // failed to parse cache spoilers
@@ -1190,15 +1189,11 @@ public final class GCParser {
      *
      * @param logId
      *            the ID of the log to upload the image to. Found on page returned when log is uploaded
-     * @param caption
-     *            of the image; max 50 chars
-     * @param description
-     *            of the image; max 250 chars
-     * @param imageUri
-     *            the URI for the image to be uploaded
+     * @param image
+     *            The Image Object
      * @return status code to indicate success or failure
      */
-    static ImmutablePair<StatusCode, String> uploadLogImage(final String logId, final String caption, final String description, final Uri imageUri) {
+    static ImmutablePair<StatusCode, String> uploadLogImage(final String logId, @NonNull final Image image) {
         final String uri = new Uri.Builder().scheme("http").authority("www.geocaching.com").path("/seek/upload.aspx").encodedQuery("LID=" + logId).build().toString();
 
         final String page = GCLogin.getInstance().getRequestLogged(uri, null);
@@ -1213,13 +1208,12 @@ public final class GCParser {
         final Parameters uploadParams = new Parameters(
                 "__EVENTTARGET", "",
                 "__EVENTARGUMENT", "",
-                "ctl00$ContentBody$ImageUploadControl1$uxFileCaption", caption,
-                "ctl00$ContentBody$ImageUploadControl1$uxFileDesc", description,
+                "ctl00$ContentBody$ImageUploadControl1$uxFileCaption", image.getTitle(),
+                "ctl00$ContentBody$ImageUploadControl1$uxFileDesc", image.getDescription(),
                 "ctl00$ContentBody$ImageUploadControl1$uxUpload", "Upload");
         GCLogin.putViewstates(uploadParams, viewstates);
 
-        final File image = new File(imageUri.getPath());
-        final String response = Network.getResponseData(Network.postRequest(uri, uploadParams, "ctl00$ContentBody$ImageUploadControl1$uxFileUpload", "image/jpeg", image));
+        final String response = Network.getResponseData(Network.postRequest(uri, uploadParams, "ctl00$ContentBody$ImageUploadControl1$uxFileUpload", "image/jpeg", image.getFile()));
 
         if (response == null) {
             Log.e("GCParser.uploadLogIMage: didn't get response for image upload");
@@ -1626,7 +1620,7 @@ public final class GCParser {
                  * 2. Image title
                  */
                 while (matcherLogImages.find()) {
-                    final Image logImage = new Image(matcherLogImages.group(1), matcherLogImages.group(2));
+                    final Image logImage = new Image.Builder(matcherLogImages.group(1), matcherLogImages.group(2)).build();
                     logDone.addLogImage(logImage);
                 }
 
@@ -1762,7 +1756,7 @@ public final class GCParser {
                         for (final JsonNode image: images) {
                             final String url = "http://imgcdn.geocaching.com/cache/log/large/" + image.path("FileName").asText();
                             final String title = TextUtils.removeControlCharacters(image.path("Name").asText());
-                            final Image logImage = new Image(url, title);
+                            final Image logImage = new Image.Builder(url, title).build();
                             logDone.addLogImage(logImage);
                         }
 

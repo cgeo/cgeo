@@ -38,7 +38,6 @@ import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
@@ -74,9 +73,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     private static final String SAVED_STATE_RATING = "cgeo.geocaching.saved_state_rating";
     private static final String SAVED_STATE_TYPE = "cgeo.geocaching.saved_state_type";
     private static final String SAVED_STATE_DATE = "cgeo.geocaching.saved_state_date";
-    private static final String SAVED_STATE_IMAGE_CAPTION = "cgeo.geocaching.saved_state_image_caption";
-    private static final String SAVED_STATE_IMAGE_DESCRIPTION = "cgeo.geocaching.saved_state_image_description";
-    private static final String SAVED_STATE_IMAGE_URI = "cgeo.geocaching.saved_state_image_uri";
+    private static final String SAVED_STATE_IMAGE = "cgeo.geocaching.saved_state_image";
 
     private static final int SELECT_IMAGE = 101;
 
@@ -97,9 +94,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     private float rating;
     private LogType typeSelected;
     private Calendar date;
-    private String imageCaption;
-    private String imageDescription;
-    private Uri imageUri;
+    private Image image;
     private boolean sendButtonEnabled;
 
     public void onLoadFinished() {
@@ -231,7 +226,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState, R.layout.logcache_activity);
+        onCreate(savedInstanceState, R.layout.logcache_activity);
 
         // Get parameters from intent and basic cache information from database
         final Bundle extras = getIntent().getExtras();
@@ -265,9 +260,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
             rating = savedInstanceState.getFloat(SAVED_STATE_RATING);
             typeSelected = LogType.getById(savedInstanceState.getInt(SAVED_STATE_TYPE));
             date.setTimeInMillis(savedInstanceState.getLong(SAVED_STATE_DATE));
-            imageCaption = savedInstanceState.getString(SAVED_STATE_IMAGE_CAPTION);
-            imageDescription = savedInstanceState.getString(SAVED_STATE_IMAGE_DESCRIPTION);
-            imageUri = Uri.parse(savedInstanceState.getString(SAVED_STATE_IMAGE_URI));
+            image = savedInstanceState.getParcelable(SAVED_STATE_IMAGE);
         } else {
             // If log had been previously saved, load it now, otherwise initialize signature as needed
             final LogEntry log = DataStore.loadLogOffline(geocode);
@@ -280,6 +273,9 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
                     && StringUtils.isBlank(currentLogText())) {
                 insertIntoLog(LogTemplateProvider.applyTemplates(Settings.getSignature(), new LogContext(cache, null)), false);
             }
+        }
+        if (image == null) {
+            image = Image.NONE;
         }
         enablePostButton(false);
 
@@ -360,9 +356,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
             date.setTime(cache.getHiddenDate());
         }
         text = null;
-        imageCaption = StringUtils.EMPTY;
-        imageDescription = StringUtils.EMPTY;
-        imageUri = Uri.EMPTY;
+        image = Image.NONE;
     }
 
     private void clearLog() {
@@ -399,9 +393,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         outState.putDouble(SAVED_STATE_RATING, rating);
         outState.putInt(SAVED_STATE_TYPE, typeSelected.id);
         outState.putLong(SAVED_STATE_DATE, date.getTimeInMillis());
-        outState.putString(SAVED_STATE_IMAGE_URI, imageUri.getPath());
-        outState.putString(SAVED_STATE_IMAGE_CAPTION, imageCaption);
-        outState.putString(SAVED_STATE_IMAGE_DESCRIPTION, imageDescription);
+        outState.putParcelable(SAVED_STATE_IMAGE, image);
     }
 
     @Override
@@ -518,12 +510,13 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
                         }
                     }
 
-                    if (StringUtils.isNotBlank(imageUri.getPath())) {
+                    if (!image.isEmpty()) {
                         publishProgress(res.getString(R.string.log_posting_image));
-                        final ImageResult imageResult = loggingManager.postLogImage(logResult.getLogId(), imageCaption, imageDescription, imageUri);
+                        final ImageResult imageResult = loggingManager.postLogImage(logResult.getLogId(), image);
                         final String uploadedImageUrl = imageResult.getImageUri();
                         if (StringUtils.isNotEmpty(uploadedImageUrl)) {
-                            logNow.addLogImage(new Image(uploadedImageUrl, imageCaption, imageDescription));
+                            image = new Image.Builder(uploadedImageUrl).build();
+                            logNow.addLogImage(image);
                             DataStore.saveLogs(cache.getGeocode(), newLogs);
                         }
                         return imageResult.getPostResult();
@@ -677,9 +670,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
 
     private void selectImage() {
         final Intent selectImageIntent = new Intent(this, ImageSelectActivity.class);
-        selectImageIntent.putExtra(Intents.EXTRA_CAPTION, imageCaption);
-        selectImageIntent.putExtra(Intents.EXTRA_DESCRIPTION, imageDescription);
-        selectImageIntent.putExtra(Intents.EXTRA_URI_AS_STRING, imageUri.toString());
+        selectImageIntent.putExtra(Intents.EXTRA_IMAGE, image);
 
         startActivityForResult(selectImageIntent, SELECT_IMAGE);
     }
@@ -688,9 +679,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         if (requestCode == SELECT_IMAGE) {
             if (resultCode == RESULT_OK) {
-                imageCaption = data.getStringExtra(Intents.EXTRA_CAPTION);
-                imageDescription = data.getStringExtra(Intents.EXTRA_DESCRIPTION);
-                imageUri = Uri.parse(data.getStringExtra(Intents.EXTRA_URI_AS_STRING));
+                image = data.getParcelableExtra(Intents.EXTRA_IMAGE);
             } else if (resultCode != RESULT_CANCELED) {
                 // Image capture failed, advise user
                 showToast(getResources().getString(R.string.err_select_logimage_failed));
@@ -745,7 +734,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     }
 
     private void sendLogInternal() {
-        final String message = res.getString(StringUtils.isBlank(imageUri.getPath()) ?
+        final String message = res.getString(image.isEmpty() ?
                 R.string.log_saving :
                 R.string.log_saving_and_uploading);
         new Poster(this, message).execute(currentLogText(), currentLogPassword());

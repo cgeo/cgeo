@@ -2,6 +2,7 @@ package cgeo.geocaching.connector.trackable;
 
 import cgeo.geocaching.AbstractLoggingActivity;
 import cgeo.geocaching.Geocache;
+import cgeo.geocaching.Image;
 import cgeo.geocaching.R;
 import cgeo.geocaching.TrackableLog;
 import cgeo.geocaching.activity.ActivityMixin;
@@ -16,8 +17,6 @@ import cgeo.geocaching.utils.Log;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-
-import android.net.Uri;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -86,7 +85,7 @@ public class TravelBugLoggingManager extends AbstractTrackableLoggingManager {
 
     @Override
     @Nullable
-    public ImageResult postLogImage(final String logId, final String imageCaption, final String imageDescription, final Uri imageUri) {
+    public ImageResult postLogImage(final String logId, final Image image) {
         return null;
     }
 

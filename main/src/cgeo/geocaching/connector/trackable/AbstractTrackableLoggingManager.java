@@ -1,5 +1,7 @@
 package cgeo.geocaching.connector.trackable;
 
+import cgeo.geocaching.Image;
+import cgeo.geocaching.connector.ImageResult;
 import cgeo.geocaching.enumerations.LogTypeTrackable;
 
 import android.content.Context;
@@ -16,6 +18,12 @@ public abstract class AbstractTrackableLoggingManager extends AsyncTaskLoader<Li
     @Override
     public boolean isTrackingCodeNeededToPostNote() {
         return false;
+    }
+
+    @Override
+    public ImageResult postLogImage(final String logId, final Image image) {
+        // No support for images
+        return null;
     }
 
 }

@@ -336,7 +336,7 @@ public final class ImageUtils {
                 @Override
                 public Drawable getDrawable(final String source) {
                     if (!urls.contains(source) && canBeOpenedExternally(source)) {
-                        images.add(new Image(source, StringUtils.defaultString(geocode)));
+                        images.add(new Image.Builder(source, StringUtils.defaultString(geocode)).build());
                         urls.add(source);
                     }
                     return null;

@@ -420,7 +420,7 @@ final class OkapiClient {
                     final String title = imageResponse.get(CACHE_IMAGE_CAPTION).asText();
                     final String url = absoluteUrl(imageResponse.get(CACHE_IMAGE_URL).asText(), cache.getGeocode());
                     // all images are added as spoiler images, although OKAPI has spoiler and non spoiler images
-                    cache.addSpoiler(new Image(url, title));
+                    cache.addSpoiler(new Image.Builder(url, title).build());
                 }
             }
 

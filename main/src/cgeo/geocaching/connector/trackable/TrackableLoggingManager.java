@@ -1,6 +1,7 @@
 package cgeo.geocaching.connector.trackable;
 
 import cgeo.geocaching.Geocache;
+import cgeo.geocaching.Image;
 import cgeo.geocaching.TrackableLog;
 import cgeo.geocaching.connector.ImageResult;
 import cgeo.geocaching.connector.LogResult;
@@ -8,8 +9,6 @@ import cgeo.geocaching.enumerations.LogTypeTrackable;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-
-import android.net.Uri;
 
 import java.util.Calendar;
 import java.util.List;
@@ -26,9 +25,7 @@ public interface TrackableLoggingManager {
 
     @Nullable
     ImageResult postLogImage(String logId,
-                             String imageCaption,
-                             String imageDescription,
-                             Uri imageUri);
+                             Image image);
 
     @NonNull
     public List<LogTypeTrackable> getPossibleLogTypesTrackable();

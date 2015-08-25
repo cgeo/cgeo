@@ -354,7 +354,7 @@ public class Trackable implements ILogable {
     public Collection<Image> getImages() {
         final List<Image> images = new LinkedList<>();
         if (StringUtils.isNotBlank(image)) {
-            images.add(new Image(image, StringUtils.defaultIfBlank(name, geocode)));
+            images.add(new Image.Builder(image, StringUtils.defaultIfBlank(name, geocode)).build());
         }
         ImageUtils.addImagesFromHtml(images, geocode, getDetails());
         for (final LogEntry log : getLogs()) {
