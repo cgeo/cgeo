@@ -1,9 +1,13 @@
 package cgeo.geocaching.sensors;
 
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.RxUtils.LooperCallbacks;
+import cgeo.geocaching.utils.RxUtils;
 
 import rx.Observable;
+import rx.Observable.OnSubscribe;
+import rx.Subscriber;
+import rx.functions.Action0;
+import rx.subscriptions.Subscriptions;
 
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -12,31 +16,67 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 
-public class RotationProvider extends LooperCallbacks<Float> implements SensorEventListener {
+public class RotationProvider {
 
-    private final SensorManager sensorManager;
-    private final Sensor rotationSensor;
-    private final float[] rotationMatrix = new float[16];
-    private final float[] orientation = new float[4];
-    private final float[] values = new float[4];
+    private RotationProvider() {
+        // Utility class, not to be instantiated
+    }
 
     @TargetApi(19)
-    protected RotationProvider(final Context context, final boolean lowPower) {
-        sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
-        // The geomagnetic rotation vector introduced in Android 4.4 (API 19) requires less power. Favour it
-        // even if it is more sensible to noise in low-power settings.
-        final Sensor sensor = lowPower ? sensorManager.getDefaultSensor(Sensor.TYPE_GEOMAGNETIC_ROTATION_VECTOR) : null;
-        if (sensor != null) {
-            rotationSensor = sensor;
-            Log.d("RotationProvider: geomagnetic (low-power) sensor found");
-        } else {
-            rotationSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);
-            if (rotationSensor != null) {
-                Log.d("RotationProvider: sensor found");
-            } else {
-                Log.w("RotationProvider: no rotation sensor on this device");
-            }
+    public static Observable<Float> create(final Context context, final boolean lowPower) {
+        final SensorManager sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
+        final Sensor preferredSensor = lowPower ? sensorManager.getDefaultSensor(Sensor.TYPE_GEOMAGNETIC_ROTATION_VECTOR) : null;
+        final Sensor rotationSensor = preferredSensor != null ? preferredSensor : sensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);
+        if (rotationSensor == null) {
+            Log.w("RotationProvider: no rotation sensor on this device");
+            return Observable.error(new RuntimeException("no rotation sensor"));
         }
+        Log.d(preferredSensor == null ? "RotationProvider: sensor found" : "RotationProvider: geomagnetic (low-power) sensor found");
+        final Observable<Float> observable = Observable.create(new OnSubscribe<Float>() {
+            private final float[] rotationMatrix = new float[16];
+            private final float[] orientation = new float[4];
+            private final float[] values = new float[4];
+
+            @Override
+            public void call(final Subscriber<? super Float> subscriber) {
+                final SensorEventListener listener = new SensorEventListener() {
+                    @Override
+                    public void onSensorChanged(final SensorEvent event) {
+                        // On some Samsung devices, SensorManager#getRotationMatrixFromVector throws an exception if the rotation
+                        // vector has more than 4 elements. Since only the four first elements are used, we can truncate the vector
+                        // without losing precision.
+                        if (event.values.length > 4) {
+                            System.arraycopy(event.values, 0, values, 0, 4);
+                            SensorManager.getRotationMatrixFromVector(rotationMatrix, values);
+                        } else {
+                            SensorManager.getRotationMatrixFromVector(rotationMatrix, event.values);
+                        }
+                        SensorManager.getOrientation(rotationMatrix, orientation);
+                        subscriber.onNext((float) (orientation[0] * 180 / Math.PI));
+                    }
+
+                    @Override
+                    public void onAccuracyChanged(final Sensor sensor, final int accuracy) {
+                    }
+
+                };
+                Log.d("RotationProvider: registering listener");
+                sensorManager.registerListener(listener, rotationSensor, SensorManager.SENSOR_DELAY_NORMAL);
+                subscriber.add(Subscriptions.create(new Action0() {
+                    @Override
+                    public void call() {
+                        RxUtils.looperCallbacksWorker.schedule(new Action0() {
+                            @Override
+                            public void call() {
+                                Log.d("RotationProvider: unregistering listener");
+                                sensorManager.unregisterListener(listener, rotationSensor);
+                            }
+                        });
+                    }
+                }));
+            }
+        });
+        return observable.subscribeOn(RxUtils.looperCallbacksScheduler).share().onBackpressureLatest();
     }
 
     public static boolean hasRotationSensor(final Context context) {
@@ -46,52 +86,6 @@ public class RotationProvider extends LooperCallbacks<Float> implements SensorEv
     @TargetApi(19)
     public static boolean hasGeomagneticRotationSensor(final Context context) {
         return ((SensorManager) context.getSystemService(Context.SENSOR_SERVICE)).getDefaultSensor(Sensor.TYPE_GEOMAGNETIC_ROTATION_VECTOR) != null;
-    }
-
-    @Override
-    public void onSensorChanged(final SensorEvent event) {
-        // On some Samsung devices, SensorManager#getRotationMatrixFromVector throws an exception if the rotation
-        // vector has more than 4 elements. Since only the four first elements are used, we can truncate the vector
-        // without losing precision.
-        if (event.values.length > 4) {
-            System.arraycopy(event.values, 0, values, 0, 4);
-            SensorManager.getRotationMatrixFromVector(rotationMatrix, values);
-        } else {
-            SensorManager.getRotationMatrixFromVector(rotationMatrix, event.values);
-        }
-        SensorManager.getOrientation(rotationMatrix, orientation);
-        subject.onNext((float) (orientation[0] * 180 / Math.PI));
-    }
-
-    @Override
-    public void onAccuracyChanged(final Sensor sensor, final int accuracy) {
-    }
-
-    @Override
-    public void onStart() {
-        if (rotationSensor != null) {
-            Log.d("RotationProvider: starting the rotation provider");
-            try {
-                sensorManager.registerListener(this, rotationSensor, SensorManager.SENSOR_DELAY_NORMAL);
-            } catch (final Exception e) {
-                Log.w("RotationProvider: unable to register listener", e);
-                subject.onError(e);
-            }
-        } else {
-            subject.onError(new RuntimeException("rotation sensor is absent on this device"));
-        }
-    }
-
-    @Override
-    public void onStop() {
-        if (rotationSensor != null) {
-            Log.d("RotationProvider: stopping the rotation provider");
-            sensorManager.unregisterListener(this);
-        }
-    }
-
-    public static Observable<Float> create(final Context context, final boolean lowPower) {
-        return Observable.create(new RotationProvider(context, lowPower)).onBackpressureDrop();
     }
 
 }
