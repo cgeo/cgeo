@@ -48,88 +48,6 @@ public class Image implements Parcelable {
         }
 
         /**
-         * Create a new Image from Url.
-         *
-         * @param url
-         *          The image url
-         * @param title
-         *          The image title
-         * @param description
-         *          The image description
-         */
-        public Builder(@Nullable final String url, @Nullable final String title, @Nullable final String description) {
-            uri = url == null ? Uri.EMPTY : Uri.parse(url);
-            this.title = title;
-            this.description = description;
-        }
-
-        /**
-         * Create a new Image from Url without description.
-         *
-         * @param url
-         *          The image url
-         * @param title
-         *          The image title
-         */
-        public Builder(@Nullable final String url, @Nullable final String title) {
-            this(url, title, null);
-        }
-
-        /**
-         * Create a new Image from Uri without title and description.
-         *
-         * @param url
-         *          The image Uri
-         */
-        public Builder(@Nullable final String url) {
-            uri = StringUtils.isBlank(url) ? Uri.EMPTY : Uri.parse(url);
-            title = null;
-            description = null;
-        }
-
-        /**
-         * Create a new Image from a File.
-         * Set the filename as a title. No description.
-         *
-         * @param file
-         *          The File image
-         */
-        public Builder(@Nullable final File file) {
-            if (file == null) {
-                uri = Uri.EMPTY;
-                title = null;
-            } else {
-                uri = Uri.fromFile(file);
-                title = file.getName();
-            }
-            description = null;
-        }
-
-        /**
-         * Create a new Image from Uri without title and description.
-         *
-         * @param uri
-         *          The image Uri
-         */
-        public Builder(@Nullable final Uri uri) {
-            this.uri = uri == null ? Uri.EMPTY : uri;
-            title = null;
-            description = null;
-        }
-
-        /**
-         * Create a new Image from Image.
-         *
-         * @param image
-         *          The image Image
-         */
-        public Builder(@NonNull final Image image) {
-            uri = image.uri;
-            title = image.title;
-            description = image.description;
-        }
-
-        /**
          * Set image url from String.
          *
          */
@@ -144,8 +62,10 @@ public class Image implements Parcelable {
          * @param url
          *          The image url from String
          */
-        public void setUrl(final String url) {
+        @NonNull
+        public Builder setUrl(@NonNull final String url) {
             uri = Uri.parse(url);
+            return this;
         }
 
         /**
@@ -154,8 +74,10 @@ public class Image implements Parcelable {
          * @param uri
          *          The image url from Uri
          */
-        public void setUrl(final Uri uri) {
+        @NonNull
+        public Builder setUrl(@NonNull final Uri uri) {
             this.uri = uri;
+            return this;
         }
 
         /**
@@ -164,8 +86,22 @@ public class Image implements Parcelable {
          * @param file
          *          The image url from File
          */
-        public void setUrl(final File file) {
+        @NonNull
+        public Builder setUrl(@NonNull final File file) {
             uri = Uri.fromFile(file);
+            return this;
+        }
+
+        /**
+         * Set image from Image.
+         *
+         * @param image
+         *          The image url from Image
+         */
+        @NonNull
+        public Builder setUrl(@NonNull final Image image) {
+            uri = image.uri;
+            return this;
         }
 
         /**
@@ -174,8 +110,10 @@ public class Image implements Parcelable {
          * @param title
          *          The image title
          */
-        public void setTitle(@Nullable final String title) {
+        @NonNull
+        public Builder setTitle(@NonNull final String title) {
             this.title = title;
+            return this;
         }
 
         /**
@@ -184,8 +122,10 @@ public class Image implements Parcelable {
          * @param description
          *          The image description
          */
-        public void setDescription(@Nullable final String description) {
+        @NonNull
+        public Builder setDescription(@NonNull final String description) {
             this.description = description;
+            return this;
         }
     }
 
@@ -204,13 +144,13 @@ public class Image implements Parcelable {
      * @param description
      *          The image description
      */
-    public Image(@NonNull final Uri uri, @Nullable final String title, @Nullable final String description) {
+    private Image(@NonNull final Uri uri, @Nullable final String title, @Nullable final String description) {
         this.uri = uri;
         this.title = title;
         this.description = description;
     }
 
-    public Image(@NonNull final Parcel in) {
+    private Image(@NonNull final Parcel in) {
         uri = in.readParcelable(Uri.class.getClassLoader());
         title = in.readString();
         description = in.readString();

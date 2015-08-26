@@ -515,7 +515,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
                         final ImageResult imageResult = loggingManager.postLogImage(logResult.getLogId(), image);
                         final String uploadedImageUrl = imageResult.getImageUri();
                         if (StringUtils.isNotEmpty(uploadedImageUrl)) {
-                            image = new Image.Builder(uploadedImageUrl).build();
+                            image = new Image.Builder().setUrl(uploadedImageUrl).build();
                             logNow.addLogImage(image);
                             DataStore.saveLogs(cache.getGeocode(), newLogs);
                         }

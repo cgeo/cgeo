@@ -1885,7 +1885,11 @@ public class DataStore {
                 new Func1<Cursor, Image>() {
                     @Override
                     public Image call(final Cursor cursor) {
-                        return new Image.Builder(cursor.getString(0), cursor.getString(1), cursor.getString(2)).build();
+                        return new Image.Builder()
+                                .setUrl(cursor.getString(0))
+                                .setTitle(cursor.getString(1))
+                                .setDescription(cursor.getString(2))
+                                .build();
                     }
                 });
     }
@@ -1963,7 +1967,7 @@ public class DataStore {
                 logs.add(log);
             }
             if (!cursor.isNull(7)) {
-                log.addLogImage(new Image.Builder(cursor.getString(10), cursor.getString(9)).build());
+                log.addLogImage(new Image.Builder().setUrl(cursor.getString(10)).setTitle(cursor.getString(9)).build());
             }
         }
 

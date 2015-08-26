@@ -160,7 +160,7 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
                 @Override
                 protected void onPostExecute(final String filename) {
                     if (filename != null) {
-                        image = new Image.Builder(filename).build();
+                        image = new Image.Builder().setUrl(filename).build();
                         final Intent intent = new Intent();
                         syncEditTexts();
                         intent.putExtra(Intents.EXTRA_IMAGE, image);
@@ -180,10 +180,12 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
     }
 
     private void syncEditTexts() {
-        final Image.Builder imageBuilder = new Image.Builder(image);
-        imageBuilder.setTitle(captionView.getText().toString());
-        imageBuilder.setDescription(descriptionView.getText().toString());
-        image = imageBuilder.build();
+        image = new Image.Builder()
+                .setUrl(image.uri)
+                .setTitle(captionView.getText().toString())
+                .setDescription(descriptionView.getText().toString())
+                .build();
+
         scaleChoiceIndex = scaleView.getSelectedItemPosition();
     }
 
@@ -191,7 +193,7 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
         // create Intent to take a picture and return control to the calling application
         final Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
-        image = new Image.Builder(ImageUtils.getOutputImageFileUri()).build();
+        image = new Image.Builder().setUrl(ImageUtils.getOutputImageFileUri()).build();
 
         if (image.isEmpty()) {
             showFailure();
@@ -246,7 +248,7 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
                         showFailure();
                         return;
                     }
-                    image = new Image.Builder(filePath).build();
+                    image = new Image.Builder().setUrl(filePath).build();
                 } catch (final Exception e) {
                     Log.e("ImageSelectActivity.onActivityResult", e);
                     showFailure();
@@ -265,7 +267,7 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
                     final File outputFile = ImageUtils.getOutputImageFile();
                     output = new FileOutputStream(outputFile);
                     LocalStorage.copy(input, output);
-                    image = new Image.Builder(outputFile).build();
+                    image = new Image.Builder().setUrl(outputFile).build();
                 } catch (final FileNotFoundException e) {
                     Log.e("ImageSelectActivity.onStartResult", e);
                 } finally {

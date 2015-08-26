@@ -632,7 +632,7 @@ public final class GCParser {
                 if (matcherSpoilersInside.group(4) != null) {
                     description = matcherSpoilersInside.group(4);
                 }
-                cache.addSpoiler(new Image.Builder(url, title, description).build());
+                cache.addSpoiler(new Image.Builder().setUrl(url).setTitle(title).setDescription(description).build());
             }
         } catch (final RuntimeException e) {
             // failed to parse cache spoilers
@@ -1620,7 +1620,10 @@ public final class GCParser {
                  * 2. Image title
                  */
                 while (matcherLogImages.find()) {
-                    final Image logImage = new Image.Builder(matcherLogImages.group(1), matcherLogImages.group(2)).build();
+                    final Image logImage = new Image.Builder()
+                            .setUrl(matcherLogImages.group(1))
+                            .setTitle(matcherLogImages.group(2))
+                            .build();
                     logDone.addLogImage(logImage);
                 }
 
@@ -1756,7 +1759,7 @@ public final class GCParser {
                         for (final JsonNode image: images) {
                             final String url = "http://imgcdn.geocaching.com/cache/log/large/" + image.path("FileName").asText();
                             final String title = TextUtils.removeControlCharacters(image.path("Name").asText());
-                            final Image logImage = new Image.Builder(url, title).build();
+                            final Image logImage = new Image.Builder().setUrl(url).setTitle(title).build();
                             logDone.addLogImage(logImage);
                         }
 

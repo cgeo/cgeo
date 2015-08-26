@@ -34,7 +34,7 @@ public class LogEntryTest extends CGeoTestCase {
 
     public static void testGetAddLogImage() {
         final LogEntry logEntry = new LogEntry(100, LogType.FOUND_IT, "LOGENTRY");
-        final Image mockedImage = new Image(null, null, null);
+        final Image mockedImage = Image.NONE;
         logEntry.addLogImage(mockedImage);
 
         assertThat(logEntry.getLogImages()).hasSize(1);
@@ -49,15 +49,15 @@ public class LogEntryTest extends CGeoTestCase {
         assertThat(logEntry.getLogImages()).hasSize(0);
         assertThat(logEntry.getImageTitles()).isEqualTo(defaultTitle);
 
-        final Image mockedImage1 = new Image(null, null, null);
+        final Image mockedImage1 = Image.NONE;
         logEntry.addLogImage(mockedImage1);
 
         assertThat(logEntry.getLogImages()).hasSize(1);
         assertThat(logEntry.getImageTitles()).isEqualTo(defaultTitle);
 
-        final Image mockedImage2 = new Image(null, "TITLE 1", null);
+        final Image mockedImage2 = new Image.Builder().setTitle("TITLE 1").build();
         logEntry.addLogImage(mockedImage2);
-        final Image mockedImage3 = new Image(null, "TITLE 2", null);
+        final Image mockedImage3 = new Image.Builder().setTitle("TITLE 2").build();
         logEntry.addLogImage(mockedImage3);
 
         assertThat(logEntry.getLogImages()).hasSize(3);

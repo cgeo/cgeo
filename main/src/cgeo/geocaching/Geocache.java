@@ -1818,7 +1818,10 @@ public class Geocache implements IWaypoint {
             final File[] files = finalDir.listFiles();
             if (files != null) {
                 for (final File image : files) {
-                    spoilers.add(new Image.Builder("file://" + image.getAbsolutePath(), image.getName()).build());
+                    spoilers.add(new Image.Builder()
+                            .setUrl("file://" + image.getAbsolutePath())
+                            .setTitle(image.getName())
+                            .build());
                 }
             }
         }
