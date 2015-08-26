@@ -4,7 +4,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
 import rx.Observable;
-import rx.Observable.OnSubscribe;
+import rx.Observable.Operator;
 import rx.Scheduler;
 import rx.Scheduler.Worker;
 import rx.Subscriber;
@@ -15,9 +15,7 @@ import rx.functions.Func0;
 import rx.functions.Func1;
 import rx.internal.util.RxThreadFactory;
 import rx.observables.BlockingObservable;
-import rx.observers.Subscribers;
 import rx.schedulers.Schedulers;
-import rx.subjects.PublishSubject;
 import rx.subscriptions.Subscriptions;
 
 import android.os.Handler;
@@ -29,7 +27,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class RxUtils {
@@ -61,59 +58,6 @@ public class RxUtils {
 
     public static void waitForCompletion(final Observable<?>... observables) {
         waitForCompletion(Observable.merge(observables).toBlocking());
-    }
-
-    /**
-     * Subscribe function whose subscription and unsubscription take place on a looper thread.
-     *
-     * @param <T>
-     *         the type of the observable
-     */
-    public static abstract class LooperCallbacks<T> implements OnSubscribe<T> {
-
-        final AtomicInteger counter = new AtomicInteger(0);
-        final long stopDelay;
-        final TimeUnit stopDelayUnit;
-        final protected PublishSubject<T> subject = PublishSubject.create();
-
-        public LooperCallbacks(final long stopDelay, final TimeUnit stopDelayUnit) {
-            this.stopDelay = stopDelay;
-            this.stopDelayUnit = stopDelayUnit;
-        }
-
-        public LooperCallbacks() {
-            this(0, TimeUnit.SECONDS);
-        }
-
-        @Override
-        final public void call(final Subscriber<? super T> subscriber) {
-            subscriber.add(subject.subscribe(Subscribers.from(subscriber)));
-            looperCallbacksWorker.schedule(new Action0() {
-                @Override
-                public void call() {
-                    if (counter.getAndIncrement() == 0) {
-                        onStart();
-                    }
-                    subscriber.add(Subscriptions.create(new Action0() {
-                        @Override
-                        public void call() {
-                            looperCallbacksWorker.schedule(new Action0() {
-                                @Override
-                                public void call() {
-                                    if (counter.decrementAndGet() == 0) {
-                                        onStop();
-                                    }
-                                }
-                            }, stopDelay, stopDelayUnit);
-                        }
-                    }));
-                }
-            });
-        }
-
-        abstract protected void onStart();
-
-        abstract protected void onStop();
     }
 
     public static<T> Observable<T> rememberLast(final Observable<T> observable, final T initialValue) {
@@ -221,6 +165,57 @@ public class RxUtils {
                 return fromNullable(func.call());
             }
         });
+    }
+
+    public static class DelayedUnsubscription<T> implements Operator<T, T> {
+
+        final private long time;
+        final private TimeUnit unit;
+
+        public DelayedUnsubscription(final long time, final TimeUnit unit) {
+            this.time = time;
+            this.unit = unit;
+        }
+
+        @Override
+        public Subscriber<? super T> call(final Subscriber<? super T> subscriber) {
+            final Subscriber<T> transformed = new Subscriber<T>(subscriber, false) {
+
+                @Override
+                public void onCompleted() {
+                    if (!subscriber.isUnsubscribed()) {
+                        subscriber.onCompleted();
+                    }
+                }
+
+                @Override
+                public void onError(final Throwable e) {
+                    if (!subscriber.isUnsubscribed()) {
+                        subscriber.onError(e);
+                    }
+                }
+
+                @Override
+                public void onNext(final T t) {
+                    if (!subscriber.isUnsubscribed()) {
+                        subscriber.onNext(t);
+                    }
+                }
+            };
+            subscriber.add(Subscriptions.create(new Action0() {
+                @Override
+                public void call() {
+                    Schedulers.computation().createWorker().schedule(new Action0() {
+                        @Override
+                        public void call() {
+                            transformed.unsubscribe();
+                        }
+                    }, time, unit);
+                }
+            }));
+            transformed.add(subscriber);
+            return transformed;
+        }
     }
 
 }

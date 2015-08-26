@@ -1,9 +1,16 @@
 package cgeo.geocaching.sensors;
 
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.RxUtils.LooperCallbacks;
+import cgeo.geocaching.utils.RxUtils;
+import cgeo.geocaching.utils.RxUtils.DelayedUnsubscription;
 
 import org.apache.commons.lang3.StringUtils;
+
+import rx.Observable;
+import rx.Observable.OnSubscribe;
+import rx.Subscriber;
+import rx.functions.Action0;
+import rx.subscriptions.Subscriptions;
 
 import android.content.Context;
 import android.location.Location;
@@ -12,70 +19,71 @@ import android.location.LocationManager;
 import android.os.Bundle;
 
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicReference;
 
-import rx.Observable;
+public class GeoDataProvider {
 
-public class GeoDataProvider extends LooperCallbacks<GeoData> {
-
-    private final Context context;
-    private final LocationManager geoManager;
-    private Location latestGPSLocation = null;
-    private final Listener networkListener = new Listener();
-    private final Listener gpsListener = new Listener();
-
-    /**
-     * Build a new geo data provider object.
-     * <p/>
-     * There is no need to instantiate more than one such object in an application, as observers can be added
-     * at will.
-     *
-     * @param context the context used to retrieve the system services
-     */
-    protected GeoDataProvider(final Context context) {
-        super(2500, TimeUnit.MILLISECONDS);
-        this.context = context.getApplicationContext();
-        geoManager = (LocationManager) this.context.getSystemService(Context.LOCATION_SERVICE);
+    private GeoDataProvider() {
+        // Utility class, not to be instantiated
     }
 
     public static Observable<GeoData> create(final Context context) {
-        return Observable.create(new GeoDataProvider(context)).onBackpressureDrop();
+        final LocationManager geoManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+        final AtomicReference<Location> latestGPSLocation = new AtomicReference<>(null);
+        final Observable<GeoData> observable = Observable.create(new OnSubscribe<GeoData>() {
+            @Override
+            public void call(final Subscriber<? super GeoData> subscriber) {
+                final Listener networkListener = new Listener(subscriber, latestGPSLocation);
+                final Listener gpsListener = new Listener(subscriber, latestGPSLocation);
+                final GeoData initialLocation = GeoData.getInitialLocation(context);
+                if (initialLocation != null) {
+                    subscriber.onNext(initialLocation);
+                }
+                Log.d("GeoDataProvider: starting the GPS and network listeners");
+                try {
+                    geoManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, gpsListener);
+                } catch (final Exception e) {
+                    Log.w("Unable to create GPS location provider: " + e.getMessage());
+                }
+                try {
+                    geoManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, networkListener);
+                } catch (final Exception e) {
+                    Log.w("Unable to create network location provider: " + e.getMessage());
+                }
+                subscriber.add(Subscriptions.create(new Action0() {
+                    @Override
+                    public void call() {
+                        RxUtils.looperCallbacksWorker.schedule(new Action0() {
+                            @Override
+                            public void call() {
+                                geoManager.removeUpdates(networkListener);
+                                geoManager.removeUpdates(gpsListener);
+                            }
+                        });
+                    }
+                }));
+            }
+        });
+        return observable.subscribeOn(RxUtils.looperCallbacksScheduler).share().lift(new DelayedUnsubscription<GeoData>(2500, TimeUnit.MILLISECONDS));
     }
 
-    @Override
-    public void onStart() {
-        final GeoData initialLocation = GeoData.getInitialLocation(context);
-        if (initialLocation != null) {
-            subject.onNext(initialLocation);
-        }
-        Log.d("GeoDataProvider: starting the GPS and network listeners");
-        try {
-            geoManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, gpsListener);
-        } catch (final Exception e) {
-            Log.w("Unable to create GPS location provider: " + e.getMessage());
-        }
-        try {
-            geoManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, networkListener);
-        } catch (final Exception e) {
-            Log.w("Unable to create network location provider: " + e.getMessage());
-        }
-    }
+    private static class Listener implements LocationListener {
 
-    @Override
-    protected void onStop() {
-        Log.d("GeoDataProvider: stopping the GPS and network listeners");
-        geoManager.removeUpdates(networkListener);
-        geoManager.removeUpdates(gpsListener);
-    }
+        final Subscriber<? super GeoData> subscriber;
+        final AtomicReference<Location> latestGPSLocation;
 
-    private class Listener implements LocationListener {
+        public Listener(final Subscriber<? super GeoData> subscriber, final AtomicReference<Location> latestGPSLocation) {
+            this.subscriber = subscriber;
+            this.latestGPSLocation = latestGPSLocation;
+        }
 
         @Override
         public void onLocationChanged(final Location location) {
             if (StringUtils.equals(location.getProvider(), LocationManager.GPS_PROVIDER)) {
-                latestGPSLocation = location;
-                assign(latestGPSLocation);
+                latestGPSLocation.set(location);
+                assign(latestGPSLocation.get());
             } else {
-                assign(GeoData.best(latestGPSLocation, location));
+                assign(GeoData.best(latestGPSLocation.get(), location));
             }
         }
 
@@ -97,7 +105,7 @@ public class GeoDataProvider extends LooperCallbacks<GeoData> {
         private void assign(final Location location) {
             // We do not necessarily get signaled when satellites go to 0/0.
             final GeoData current = new GeoData(location);
-            subject.onNext(current);
+            subscriber.onNext(current);
         }
 
     }
