@@ -23,7 +23,7 @@ public class Sensors {
     private Observable<GeoData> geoDataObservable;
     private Observable<GeoData> geoDataObservableLowPower;
     private Observable<Float> directionObservable;
-    private Observable<Status> gpsStatusObservable;
+    private final Observable<Status> gpsStatusObservable;
     @NonNull private volatile GeoData currentGeo = GeoData.DUMMY_LOCATION;
     private volatile float currentDirection = 0.0f;
     private volatile boolean hasValidLocation = false;
@@ -50,7 +50,7 @@ public class Sensors {
     };
 
     private Sensors() {
-        gpsStatusObservable = GpsStatusProvider.create(app).replay(1).refCount();
+        gpsStatusObservable = GpsStatusProvider.create(app).replay(1).refCount().onBackpressureLatest();
         final Context context = CgeoApplication.getInstance().getApplicationContext();
         hasCompassCapabilities = RotationProvider.hasRotationSensor(context) || OrientationProvider.hasOrientationSensor(context);
     }
@@ -138,9 +138,6 @@ public class Sensors {
     }
 
     public Observable<Status> gpsStatusObservable() {
-        if (gpsStatusObservable == null) {
-            gpsStatusObservable = GpsStatusProvider.create(app).share();
-        }
         return gpsStatusObservable;
     }
 

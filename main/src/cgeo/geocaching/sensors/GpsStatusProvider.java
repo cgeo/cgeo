@@ -1,17 +1,24 @@
 package cgeo.geocaching.sensors;
 
-import cgeo.geocaching.sensors.GpsStatusProvider.Status;
-import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.RxUtils.LooperCallbacks;
+import cgeo.geocaching.utils.RxUtils;
 
 import rx.Observable;
+import rx.Observable.OnSubscribe;
+import rx.Subscriber;
+import rx.functions.Action0;
+import rx.subscriptions.Subscriptions;
 
 import android.content.Context;
 import android.location.GpsSatellite;
 import android.location.GpsStatus;
+import android.location.GpsStatus.Listener;
 import android.location.LocationManager;
 
-public class GpsStatusProvider extends LooperCallbacks<Status> {
+public class GpsStatusProvider {
+
+    private GpsStatusProvider() {
+        // Utility class, not to be instantiated
+    }
 
     public static class Status {
         final public boolean gpsEnabled;
@@ -25,75 +32,64 @@ public class GpsStatusProvider extends LooperCallbacks<Status> {
         }
     }
 
-    private final LocationManager geoManager;
-    private final GpsStatus.Listener gpsStatusListener = new GpsStatusListener();
-    private Status latest = new Status(false, 0, 0);
-
     private static final Status NO_GPS = new Status(false, 0, 0);
 
-    /**
-     * Build a new gps status provider object.
-     * <p/>
-     * There is no need to instantiate more than one such object in an application, as observers can be added
-     * at will.
-     *
-     * @param context the context used to retrieve the system services
-     */
-    protected GpsStatusProvider(final Context context) {
-        geoManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
-    }
-
     public static Observable<Status> create(final Context context) {
-        return Observable.create(new GpsStatusProvider(context));
-    }
+        final Observable<Status> observable = Observable.create(new OnSubscribe<Status>() {
+            @Override
+            public void call(final Subscriber<? super Status> subscriber) {
+                final LocationManager geoManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+                final Listener listener = new Listener() {
+                    Status latest = new Status(false, 0, 0);
 
-    @Override
-    protected void onStart() {
-        Log.d("GpsStatusProvider: starting the GPS status listener");
-        subject.onNext(NO_GPS);
-        geoManager.addGpsStatusListener(gpsStatusListener);
-    }
-
-    @Override
-    protected void onStop() {
-        Log.d("GpsStatusProvider: stopping the GPS status listener");
-        geoManager.removeGpsStatusListener(gpsStatusListener);
-    }
-
-    private final class GpsStatusListener implements GpsStatus.Listener {
-
-        @Override
-        public void onGpsStatusChanged(final int event) {
-            switch (event) {
-                case GpsStatus.GPS_EVENT_FIRST_FIX:
-                case GpsStatus.GPS_EVENT_SATELLITE_STATUS: {
-                    final GpsStatus status = geoManager.getGpsStatus(null);
-                    int visible = 0;
-                    int fixed = 0;
-                    for (final GpsSatellite satellite : status.getSatellites()) {
-                        if (satellite.usedInFix()) {
-                            fixed++;
+                    @Override
+                    public void onGpsStatusChanged(final int event) {
+                        switch (event) {
+                            case GpsStatus.GPS_EVENT_FIRST_FIX:
+                            case GpsStatus.GPS_EVENT_SATELLITE_STATUS: {
+                                final GpsStatus status = geoManager.getGpsStatus(null);
+                                int visible = 0;
+                                int fixed = 0;
+                                for (final GpsSatellite satellite : status.getSatellites()) {
+                                    if (satellite.usedInFix()) {
+                                        fixed++;
+                                    }
+                                    visible++;
+                                }
+                                if (visible == latest.satellitesVisible && fixed == latest.satellitesFixed) {
+                                    return;
+                                }
+                                latest = new Status(true, visible, fixed);
+                                break;
+                            }
+                            case GpsStatus.GPS_EVENT_STARTED:
+                                latest = new Status(true, 0, 0);
+                                break;
+                            case GpsStatus.GPS_EVENT_STOPPED:
+                                latest = new Status(false, 0, 0);
+                                break;
+                            default:
+                                subscriber.onError(new IllegalStateException());
+                                return;
                         }
-                        visible++;
+                        subscriber.onNext(latest);
                     }
-                    if (visible == latest.satellitesVisible && fixed == latest.satellitesFixed) {
-                        return;
+                };
+                subscriber.onNext(NO_GPS);
+                geoManager.addGpsStatusListener(listener);
+                subscriber.add(Subscriptions.create(new Action0() {
+                    @Override
+                    public void call() {
+                        RxUtils.looperCallbacksWorker.schedule(new Action0() {
+                            @Override
+                            public void call() {
+                                geoManager.removeGpsStatusListener(listener);
+                            }
+                        });
                     }
-                    latest = new Status(true, visible, fixed);
-                    break;
-                }
-                case GpsStatus.GPS_EVENT_STARTED:
-                    latest = new Status(true, 0, 0);
-                    break;
-                case GpsStatus.GPS_EVENT_STOPPED:
-                    latest = new Status(false, 0, 0);
-                    break;
-                default:
-                    throw new IllegalStateException();
+                }));
             }
-
-            subject.onNext(latest);
-        }
+        });
+        return observable.subscribeOn(RxUtils.looperCallbacksScheduler);
     }
-
 }
