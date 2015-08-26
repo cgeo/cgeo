@@ -23,15 +23,14 @@ public class RotationProvider {
     }
 
     @TargetApi(19)
-    public static Observable<Float> create(final Context context, final boolean lowPower) {
+    public static Observable<Float> create(final Context context) {
         final SensorManager sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
-        final Sensor preferredSensor = lowPower ? sensorManager.getDefaultSensor(Sensor.TYPE_GEOMAGNETIC_ROTATION_VECTOR) : null;
-        final Sensor rotationSensor = preferredSensor != null ? preferredSensor : sensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);
+        final Sensor rotationSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);
         if (rotationSensor == null) {
             Log.w("RotationProvider: no rotation sensor on this device");
             return Observable.error(new RuntimeException("no rotation sensor"));
         }
-        Log.d(preferredSensor == null ? "RotationProvider: sensor found" : "RotationProvider: geomagnetic (low-power) sensor found");
+        Log.d("RotationProvider: sensor found");
         final Observable<Float> observable = Observable.create(new OnSubscribe<Float>() {
             private final float[] rotationMatrix = new float[16];
             private final float[] orientation = new float[4];
@@ -81,11 +80,6 @@ public class RotationProvider {
 
     public static boolean hasRotationSensor(final Context context) {
         return ((SensorManager) context.getSystemService(Context.SENSOR_SERVICE)).getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR) != null;
-    }
-
-    @TargetApi(19)
-    public static boolean hasGeomagneticRotationSensor(final Context context) {
-        return ((SensorManager) context.getSystemService(Context.SENSOR_SERVICE)).getDefaultSensor(Sensor.TYPE_GEOMAGNETIC_ROTATION_VECTOR) != null;
     }
 
 }

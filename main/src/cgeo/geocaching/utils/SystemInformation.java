@@ -37,7 +37,6 @@ public final class SystemInformation {
                 .append("\nLow power mode: ").append(Settings.useLowPowerMode() ? "active" : "inactive")
                 .append("\nCompass capabilities: ").append(Sensors.getInstance().hasCompassCapabilities() ? "yes" : "no")
                 .append("\nRotation sensor: ").append(presence(RotationProvider.hasRotationSensor(context)))
-                .append("\nGeomagnetic rotation sensor: ").append(presence(RotationProvider.hasGeomagneticRotationSensor(context)))
                 .append("\nOrientation sensor: ").append(presence(OrientationProvider.hasOrientationSensor(context)))
                 .append("\nHide own/found: ").append(Settings.isExcludeMyCaches())
                 .append("\nMap strategy: ").append(Settings.getLiveMapStrategy().toString().toLowerCase(Locale.getDefault()))

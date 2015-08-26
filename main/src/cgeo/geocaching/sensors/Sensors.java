@@ -102,8 +102,7 @@ public class Sensors {
 
         // On some devices, the orientation sensor (Xperia and S4 running Lollipop) seems to have been deprecated for real.
         // Use the rotation sensor if it is available.
-        final boolean useRotationSensor = RotationProvider.hasRotationSensor(app);
-        final Observable<Float> sensorDirectionObservable = useRotationSensor ? RotationProvider.create(app, useLowPower) : OrientationProvider.create(app);
+        final Observable<Float> sensorDirectionObservable = RotationProvider.hasRotationSensor(app) ? RotationProvider.create(app) : OrientationProvider.create(app);
         final Observable<Float> magneticDirectionObservable = sensorDirectionObservable.onErrorResumeNext(new Func1<Throwable, Observable<? extends Float>>() {
             @Override
             public Observable<? extends Float> call(final Throwable throwable) {
