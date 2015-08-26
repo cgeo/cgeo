@@ -50,12 +50,6 @@ public class GeokretyLoggingManager extends AbstractTrackableLoggingManager {
     }
 
     @Override
-    public ImageResult postLogImage(final String logId, final String imageCaption, final String imageDescription, final Uri imageUri) {
-        // No support for images
-        return null;
-    }
-
-    @Override
     @NonNull
     public List<LogTypeTrackable> getPossibleLogTypesTrackable() {
         final List<LogTypeTrackable> list = new ArrayList<>();

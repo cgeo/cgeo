@@ -2,6 +2,7 @@ package cgeo.geocaching.connector.gc;
 
 import cgeo.geocaching.DataStore;
 import cgeo.geocaching.Geocache;
+import cgeo.geocaching.Image;
 import cgeo.geocaching.LogCacheActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.TrackableLog;
@@ -23,7 +24,6 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
@@ -119,11 +119,11 @@ class GCLoggingManager extends AbstractLoggingManager implements LoaderManager.L
 
     @Override
     @NonNull
-    public ImageResult postLogImage(final String logId, final String imageCaption, final String imageDescription, final Uri imageUri) {
+    public ImageResult postLogImage(final String logId, final Image image) {
 
-        if (StringUtils.isNotBlank(imageUri.getPath())) {
+        if (!image.isEmpty()) {
 
-            final ImmutablePair<StatusCode, String> imageResult = GCParser.uploadLogImage(logId, imageCaption, imageDescription, imageUri);
+            final ImmutablePair<StatusCode, String> imageResult = GCParser.uploadLogImage(logId, image);
 
             return new ImageResult(imageResult.left, imageResult.right);
         }

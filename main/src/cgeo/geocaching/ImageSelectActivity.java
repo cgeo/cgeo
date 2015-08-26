@@ -49,45 +49,38 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
     @Bind(R.id.cancel) protected Button clearButton;
     @Bind(R.id.image_preview) protected ImageView imagePreview;
 
-    private static final String SAVED_STATE_IMAGE_CAPTION = "cgeo.geocaching.saved_state_image_caption";
-    private static final String SAVED_STATE_IMAGE_DESCRIPTION = "cgeo.geocaching.saved_state_image_description";
-    private static final String SAVED_STATE_IMAGE_URI = "cgeo.geocaching.saved_state_image_uri";
+    private static final String SAVED_STATE_IMAGE = "cgeo.geocaching.saved_state_image";
     private static final String SAVED_STATE_IMAGE_SCALE = "cgeo.geocaching.saved_state_image_scale";
 
     private static final int SELECT_NEW_IMAGE = 1;
     private static final int SELECT_STORED_IMAGE = 2;
 
     // Data to be saved while reconfiguring
-    private String imageCaption;
-    private String imageDescription;
+    private Image image;
     private int scaleChoiceIndex;
-    private Uri imageUri;
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState, R.layout.imageselect_activity);
+        onCreate(savedInstanceState, R.layout.imageselect_activity);
         ButterKnife.bind(this);
 
         scaleChoiceIndex = Settings.getLogImageScale();
-        imageCaption = "";
-        imageDescription = "";
-        imageUri = Uri.EMPTY;
 
         // Get parameters from intent and basic cache information from database
         final Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            imageCaption = extras.getString(Intents.EXTRA_CAPTION);
-            imageDescription = extras.getString(Intents.EXTRA_DESCRIPTION);
-            imageUri = Uri.parse(extras.getString(Intents.EXTRA_URI_AS_STRING));
+            image = extras.getParcelable(Intents.EXTRA_IMAGE);
             scaleChoiceIndex = extras.getInt(Intents.EXTRA_SCALE, scaleChoiceIndex);
         }
 
         // Restore previous state
         if (savedInstanceState != null) {
-            imageCaption = savedInstanceState.getString(SAVED_STATE_IMAGE_CAPTION);
-            imageDescription = savedInstanceState.getString(SAVED_STATE_IMAGE_DESCRIPTION);
-            imageUri = Uri.parse(savedInstanceState.getString(SAVED_STATE_IMAGE_URI));
+            image = savedInstanceState.getParcelable(SAVED_STATE_IMAGE);
             scaleChoiceIndex = savedInstanceState.getInt(SAVED_STATE_IMAGE_SCALE);
+        }
+
+        if (image == null) {
+            image = Image.NONE;
         }
 
         cameraButton.setOnClickListener(new View.OnClickListener() {
@@ -106,13 +99,13 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
             }
         });
 
-        if (StringUtils.isNotBlank(imageCaption)) {
-            captionView.setText(imageCaption);
+        if (image.hasTitle()) {
+            captionView.setText(image.getTitle());
             Dialogs.moveCursorToEnd(captionView);
         }
 
-        if (StringUtils.isNotBlank(imageDescription)) {
-            descriptionView.setText(imageDescription);
+        if (image.hasDescription()) {
+            descriptionView.setText(image.getDescription());
             Dialogs.moveCursorToEnd(captionView);
         }
 
@@ -152,9 +145,7 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
     protected void onSaveInstanceState(final Bundle outState) {
         super.onSaveInstanceState(outState);
         syncEditTexts();
-        outState.putString(SAVED_STATE_IMAGE_CAPTION, imageCaption);
-        outState.putString(SAVED_STATE_IMAGE_DESCRIPTION, imageDescription);
-        outState.putString(SAVED_STATE_IMAGE_URI, imageUri != null ? imageUri.getPath() : StringUtils.EMPTY);
+        outState.putParcelable(SAVED_STATE_IMAGE, image);
         outState.putInt(SAVED_STATE_IMAGE_SCALE, scaleChoiceIndex);
     }
 
@@ -163,18 +154,16 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
             new AsyncTask<Void, Void, String>() {
                 @Override
                 protected String doInBackground(final Void... params) {
-                    return writeScaledImage(imageUri.getPath());
+                    return writeScaledImage(image.getPath());
                 }
 
                 @Override
                 protected void onPostExecute(final String filename) {
                     if (filename != null) {
-                        imageUri = Uri.parse(filename);
+                        image = new Image.Builder(filename).build();
                         final Intent intent = new Intent();
                         syncEditTexts();
-                        intent.putExtra(Intents.EXTRA_CAPTION, imageCaption);
-                        intent.putExtra(Intents.EXTRA_DESCRIPTION, imageDescription);
-                        intent.putExtra(Intents.EXTRA_URI_AS_STRING, imageUri.toString());
+                        intent.putExtra(Intents.EXTRA_IMAGE, image);
                         intent.putExtra(Intents.EXTRA_SCALE, scaleChoiceIndex);
                         setResult(RESULT_OK, intent);
                     } else {
@@ -191,8 +180,10 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
     }
 
     private void syncEditTexts() {
-        imageCaption = captionView.getText().toString();
-        imageDescription = descriptionView.getText().toString();
+        final Image.Builder imageBuilder = new Image.Builder(image);
+        imageBuilder.setTitle(captionView.getText().toString());
+        imageBuilder.setDescription(descriptionView.getText().toString());
+        image = imageBuilder.build();
         scaleChoiceIndex = scaleView.getSelectedItemPosition();
     }
 
@@ -200,12 +191,13 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
         // create Intent to take a picture and return control to the calling application
         final Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
-        imageUri = ImageUtils.getOutputImageFileUri(); // create a file to save the image
-        if (imageUri == null) {
+        image = new Image.Builder(ImageUtils.getOutputImageFileUri()).build();
+
+        if (image.isEmpty()) {
             showFailure();
             return;
         }
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri); // set the image file name
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, image.getUri()); // set the image file name
 
         // start the image capture Intent
         startActivityForResult(intent, SELECT_NEW_IMAGE);
@@ -254,7 +246,7 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
                         showFailure();
                         return;
                     }
-                    imageUri = Uri.parse(filePath);
+                    image = new Image.Builder(filePath).build();
                 } catch (final Exception e) {
                     Log.e("ImageSelectActivity.onActivityResult", e);
                     showFailure();
@@ -273,7 +265,7 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
                     final File outputFile = ImageUtils.getOutputImageFile();
                     output = new FileOutputStream(outputFile);
                     LocalStorage.copy(input, output);
-                    imageUri = Uri.fromFile(outputFile);
+                    image = new Image.Builder(outputFile).build();
                 } catch (final FileNotFoundException e) {
                     Log.e("ImageSelectActivity.onStartResult", e);
                 } finally {
@@ -284,7 +276,7 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
         }
 
         if (requestCode == SELECT_NEW_IMAGE) {
-            showToast(getResources().getString(R.string.info_stored_image) + "\n" + imageUri);
+            showToast(getResources().getString(R.string.info_stored_image) + '\n' + image.getUrl());
         }
 
         loadImagePreview();
@@ -310,10 +302,10 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
     }
 
     private void loadImagePreview() {
-        if (imageUri == null || imageUri.getPath() == null) {
+        if (image.isEmpty()) {
             return;
         }
-        if (!new File(imageUri.getPath()).exists()) {
+        if (!image.existsLocal()) {
             Log.i("Image does not exist");
             return;
         }
@@ -321,7 +313,7 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
         new AsyncTask<Void, Void, Bitmap>() {
             @Override
             protected Bitmap doInBackground(final Void... params) {
-                return ImageUtils.readAndScaleImageToFitDisplay(imageUri.getPath());
+                return ImageUtils.readAndScaleImageToFitDisplay(image.getPath());
             }
 
             @Override

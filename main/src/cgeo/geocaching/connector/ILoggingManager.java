@@ -1,5 +1,6 @@
 package cgeo.geocaching.connector;
 
+import cgeo.geocaching.Image;
 import cgeo.geocaching.TrackableLog;
 import cgeo.geocaching.enumerations.LogType;
 
@@ -28,9 +29,7 @@ public interface ILoggingManager {
 
     @NonNull
     ImageResult postLogImage(String logId,
-            String imageCaption,
-            String imageDescription,
-            Uri imageUri);
+            Image image);
 
     public boolean hasLoaderError();
 

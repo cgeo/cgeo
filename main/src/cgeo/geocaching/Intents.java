@@ -25,14 +25,13 @@ public class Intents {
     public static final String EXTRA_GEOCACHE = PREFIX + "geocache";
     public static final String EXTRA_GUID = PREFIX + "guid";
     public static final String EXTRA_BRAND = PREFIX + "brand";
+    public static final String EXTRA_IMAGE = PREFIX + "image";
     public static final String EXTRA_IMAGES = PREFIX + "images";
     public static final String EXTRA_ID = PREFIX + "id";
     public static final String EXTRA_KEYWORD = PREFIX + "keyword";
     public static final String EXTRA_KEYWORD_SEARCH = PREFIX + "keyword_search";
     public static final String EXTRA_LIST_ID = PREFIX + "list_id";
-    public static final String EXTRA_CAPTION = PREFIX + "caption";
-    public static final String EXTRA_DESCRIPTION = PREFIX + "description";
-    public static final String EXTRA_URI_AS_STRING = PREFIX + "uri";
+    public static final String EXTRA_COORD_DESCRIPTION = PREFIX + "coord_description";
     public static final String EXTRA_SCALE = PREFIX + "scale";
 
     public static final String EXTRA_WPTTYPE = PREFIX + "wpttype";
