@@ -64,7 +64,7 @@ public class GeoDataProvider {
                 }));
             }
         });
-        return observable.subscribeOn(RxUtils.looperCallbacksScheduler).share().lift(new DelayedUnsubscription<GeoData>(2500, TimeUnit.MILLISECONDS));
+        return observable.subscribeOn(RxUtils.looperCallbacksScheduler).share().lift(new DelayedUnsubscription<GeoData>(2500, TimeUnit.MILLISECONDS)).onBackpressureLatest();
     }
 
     private static class Listener implements LocationListener {
