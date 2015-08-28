@@ -14,6 +14,7 @@
     · New: Filter for never found caches\n
     · New: Maps.me shows waypoints of cache\n
     · New: Auto complete geocode in Geokrety logging view\n
+    · New: Add Google Maps transit mode\n
     · Fix: GPX files no longer violate XSD\n
     · Fix: Detect wrong cache IDs in GPX import to avoid posting logs for wrong caches\n
     · Fix: Adjustments in size and resizing of coordinate input fields\n
