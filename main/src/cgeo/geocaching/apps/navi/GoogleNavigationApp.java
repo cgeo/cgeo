@@ -44,7 +44,7 @@ abstract class GoogleNavigationApp extends AbstractPointNavigationApp {
 
     static class GoogleNavigationTransitApp extends GoogleNavigationApp {
         GoogleNavigationTransitApp() {
-            super(R.string.cache_menu_navigation_transit, "t");
+            super(R.string.cache_menu_navigation_transit, "r");
         }
     }
 
