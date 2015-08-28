@@ -9,6 +9,7 @@ import cgeo.geocaching.apps.App;
 import cgeo.geocaching.apps.cache.WhereYouGoApp;
 import cgeo.geocaching.apps.navi.GoogleNavigationApp.GoogleNavigationBikeApp;
 import cgeo.geocaching.apps.navi.GoogleNavigationApp.GoogleNavigationDrivingApp;
+import cgeo.geocaching.apps.navi.GoogleNavigationApp.GoogleNavigationTransitApp;
 import cgeo.geocaching.apps.navi.GoogleNavigationApp.GoogleNavigationWalkingApp;
 import cgeo.geocaching.apps.navi.SygicNavigationApp.SygicNavigationDrivingApp;
 import cgeo.geocaching.apps.navi.SygicNavigationApp.SygicNavigationWalkingApp;
@@ -62,17 +63,13 @@ public final class NavigationAppFactory {
         SYGIC_WALKING(new SygicNavigationWalkingApp(), 11, R.string.pref_navigation_menu_sygic_walking),
         /** The external Sygic app in walking mode */
         SYGIC_DRIVING(new SygicNavigationDrivingApp(), 23, R.string.pref_navigation_menu_sygic_driving),
-        /**
-         * Google Navigation in walking mode
-         */
+        /** Google Navigation in walking mode */
         GOOGLE_NAVIGATION_WALK(new GoogleNavigationWalkingApp(), 12, R.string.pref_navigation_menu_google_walk),
-        /**
-         * Google Navigation in walking mode
-         */
+        /** Google Navigation in bike mode */
         GOOGLE_NAVIGATION_BIKE(new GoogleNavigationBikeApp(), 21, R.string.pref_navigation_menu_google_bike),
-        /**
-         * Google Maps Directions
-         */
+        /** Google Navigation in transit mode */
+        GOOGLE_NAVIGATION_TRANSIT(new GoogleNavigationTransitApp(), 14, R.string.pref_navigation_menu_google_transit),
+        /** Google Maps Directions */
         GOOGLE_MAPS_DIRECTIONS(new GoogleMapsDirectionApp(), 13, R.string.pref_navigation_menu_google_maps_directions),
 
         WHERE_YOU_GO(new WhereYouGoApp(), 16, R.string.pref_navigation_menu_where_you_go),

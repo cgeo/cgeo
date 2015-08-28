@@ -736,6 +736,11 @@
                 <CheckBoxPreference
                     android:defaultValue="true"
                     android:enabled="false"
+                    android:key="@string/pref_navigation_menu_google_transit"
+                    android:title="@string/cache_menu_navigation_transit" />
+                <CheckBoxPreference
+                    android:defaultValue="true"
+                    android:enabled="false"
                     android:key="@string/pref_navigation_menu_google_bike"
                     android:title="@string/cache_menu_navigation_bike" />
                 <CheckBoxPreference
