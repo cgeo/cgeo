@@ -443,7 +443,9 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     private class Poster extends AsyncTaskWithProgressText<String, StatusCode> {
 
         public Poster(final Activity activity, final String progressMessage) {
-            super(activity, res.getString(R.string.log_posting_log), progressMessage);
+            super(activity, res.getString(image.isEmpty() ?
+                    R.string.log_posting_log :
+                    R.string.log_saving_and_uploading), progressMessage);
         }
 
         @Override
@@ -734,10 +736,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     }
 
     private void sendLogInternal() {
-        final String message = res.getString(image.isEmpty() ?
-                R.string.log_saving :
-                R.string.log_saving_and_uploading);
-        new Poster(this, message).execute(currentLogText(), currentLogPassword());
+        new Poster(this, res.getString(R.string.log_saving)).execute(currentLogText(), currentLogPassword());
         Settings.setLastCacheLog(currentLogText());
     }
 

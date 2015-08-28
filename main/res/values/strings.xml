@@ -92,7 +92,7 @@
     <string name="log_tb_archived">Archived</string>
     <string name="log_save">Save offline</string>
     <string name="log_saving">Sending log…</string>
-    <string name="log_saving_and_uploading">Sending log and uploading image…</string>
+    <string name="log_saving_and_uploading">Posting log and uploading image…</string>
     <string name="log_posting_log">Posting log…</string>
     <string name="log_posting_twitter">Posting tweet…</string>
     <string name="log_posting_gcvote">Posting GCVote…</string>
