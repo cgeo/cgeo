@@ -23,7 +23,7 @@ gradle connectedCheck
 //https://github.com/stephanenicolas/Quality-Tools-for-Android
 
 def AAVersion = '3.3.2'
-def RXJavaVersion = '1.0.13'
+def RXJavaVersion = '1.0.14'
 def RXAndroidVersion = '0.25.0'
 def JacksonCoreVersion = '2.6.1'
 def JacksonDatabindVersion = '2.6.1'
