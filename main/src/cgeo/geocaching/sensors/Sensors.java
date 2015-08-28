@@ -26,7 +26,6 @@ public class Sensors {
     private final Observable<Status> gpsStatusObservable;
     @NonNull private volatile GeoData currentGeo = GeoData.DUMMY_LOCATION;
     private volatile float currentDirection = 0.0f;
-    private volatile boolean hasValidLocation = false;
     private final boolean hasCompassCapabilities;
     private final CgeoApplication app = CgeoApplication.getInstance();
 
@@ -38,7 +37,6 @@ public class Sensors {
         @Override
         public void call(final GeoData geoData) {
             currentGeo = geoData;
-            hasValidLocation = true;
         }
     };
 
@@ -144,10 +142,6 @@ public class Sensors {
     @NonNull
     public GeoData currentGeo() {
         return currentGeo;
-    }
-
-    public boolean hasValidLocation() {
-        return hasValidLocation;
     }
 
     public float currentDirection() {
