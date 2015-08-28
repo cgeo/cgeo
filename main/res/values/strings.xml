@@ -592,6 +592,9 @@
     <string name="init_low_power">Low-power mode</string>
     <string name="init_low_power_note">The low-power mode avoids using the GPS and the gyroscope when a highly accurate location is not strictly necessary, at the cost of longer fixing times.</string>
     <string name="init_low_power_mode">Activate low-power mode</string>
+    <string name="init_force_orientation_sensor_title">Orientation sensor</string>
+    <string name="init_force_orientation_sensor_note">On some devices, the regular rotation vector sensor behaves erratically, giving the wrong direction. In this case, an alternate sensor (the rotation sensor) may provide better results.</string>
+    <string name="init_force_orientation_sensor">Force use of orientation sensor</string>
     <string name="init_create_memory_dump">Create memory dump</string>
     <string name="init_memory_dump">Memory dump</string>
     <string name="init_memory_dumped">Memory dumped to %s</string>

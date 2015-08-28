@@ -86,6 +86,7 @@
     <string name="pref_fakekey_preference_maintenance_directories">pref_fakekey_preference_maintenance_directories</string>
     <string name="pref_dbonsdcard">dbonsdcard</string>
     <string name="pref_debug">debug</string>
+    <string name="pref_force_orientation_sensor">forceOrientationSensort</string>
     <!-- preferences used internally -->
     <string name="pref_temp_twitter_token_secret">temp-token-secret</string>
     <string name="pref_temp_twitter_token_public">temp-token-public</string>

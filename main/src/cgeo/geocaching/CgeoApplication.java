@@ -85,7 +85,7 @@ public class CgeoApplication extends Application {
         Log.i("Google Play services are " + (isGooglePlayServicesAvailable ? "" : "not ") + "available");
         final Sensors sensors = Sensors.getInstance();
         sensors.setupGeoDataObservables(Settings.useGooglePlayServices(), Settings.useLowPowerMode());
-        sensors.setupDirectionObservable(Settings.useLowPowerMode());
+        sensors.setupDirectionObservable();
 
         // Attempt to acquire an initial location before any real activity happens.
         sensors.geoDataObservable(true).subscribeOn(RxUtils.looperCallbacksScheduler).first().subscribe();

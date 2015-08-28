@@ -89,7 +89,7 @@ public class Sensors {
         }
     };
 
-    public void setupDirectionObservable(final boolean useLowPower) {
+    public void setupDirectionObservable() {
         // If we have no magnetic sensor, there is no point in trying to setup any, we will always get the direction from the GPS.
         if (!hasCompassCapabilities) {
             Log.i("No compass capabilities, using only the GPS for the orientation");
@@ -101,11 +101,11 @@ public class Sensors {
         final AtomicBoolean useDirectionFromGps = new AtomicBoolean(false);
 
         // On some devices, the orientation sensor (Xperia and S4 running Lollipop) seems to have been deprecated for real.
-        // Use the rotation sensor if it is available.
-        final Observable<Float> sensorDirectionObservable = RotationProvider.hasRotationSensor(app) ? RotationProvider.create(app) : OrientationProvider.create(app);
-        final Observable<Float> magneticDirectionObservable = sensorDirectionObservable.onErrorResumeNext(new Func1<Throwable, Observable<? extends Float>>() {
+        // Use the rotation sensor if it is available unless the orientatation sensor is forced by the user.
+        final Observable<Float> sensorDirectionObservable = Settings.useOrientationSensor(app) ? OrientationProvider.create(app) : RotationProvider.create(app);
+        final Observable<Float> magneticDirectionObservable = sensorDirectionObservable.onErrorResumeNext(new Func1<Throwable, Observable<Float>>() {
             @Override
-            public Observable<? extends Float> call(final Throwable throwable) {
+            public Observable<Float> call(final Throwable throwable) {
                 Log.e("Device orientation is not available due to sensors error, disabling compass", throwable);
                 Settings.setUseCompass(false);
                 return Observable.<Float>never().startWith(0.0f);

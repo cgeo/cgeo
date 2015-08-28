@@ -19,6 +19,8 @@ import cgeo.geocaching.maps.interfaces.MapProvider;
 import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider;
 import cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider.OfflineMapSource;
+import cgeo.geocaching.sensors.OrientationProvider;
+import cgeo.geocaching.sensors.RotationProvider;
 import cgeo.geocaching.utils.CryptUtils;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.FileUtils.FileSelector;
@@ -1191,5 +1193,13 @@ public class Settings {
 
     public static void setHomeLocation(@NonNull final String homeLocation) {
         putString(R.string.pref_home_location, homeLocation);
+    }
+
+    public static void setForceOrientationSensor(final boolean forceOrientationSensor) {
+        putBoolean(R.string.pref_force_orientation_sensor, forceOrientationSensor);
+    }
+
+    public static boolean useOrientationSensor(final Context context) {
+        return OrientationProvider.hasOrientationSensor(context) && (getBoolean(R.string.pref_force_orientation_sensor, false) || !RotationProvider.hasRotationSensor(context));
     }
 }

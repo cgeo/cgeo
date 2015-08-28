@@ -1,5 +1,6 @@
 package cgeo.geocaching.sensors;
 
+import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.RxUtils;
 
 import rx.Observable;
@@ -32,6 +33,7 @@ public class OrientationProvider {
         if (orientationSensor == null) {
             return Observable.error(new RuntimeException("no orientation sensor"));
         }
+        Log.d("OrientationProvider: sensor found");
         final Observable<Float> observable = Observable.create(new OnSubscribe<Float>() {
             @Override
             public void call(final Subscriber<? super Float> subscriber) {
@@ -51,6 +53,7 @@ public class OrientationProvider {
                          */
                     }
                 };
+                Log.d("OrientationProvider: registering listener");
                 sensorManager.registerListener(listener, orientationSensor, SensorManager.SENSOR_DELAY_NORMAL);
                 subscriber.add(Subscriptions.create(new Action0() {
                     @Override
@@ -58,6 +61,7 @@ public class OrientationProvider {
                         RxUtils.looperCallbacksWorker.schedule(new Action0() {
                             @Override
                             public void call() {
+                                Log.d("OrientationProvider: unregistering listener");
                                 sensorManager.unregisterListener(listener, orientationSensor);
                             }
                         });

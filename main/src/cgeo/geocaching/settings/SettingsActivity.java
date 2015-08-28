@@ -13,6 +13,8 @@ import cgeo.geocaching.files.SimpleDirChooser;
 import cgeo.geocaching.maps.MapProviderFactory;
 import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.network.AndroidBeam;
+import cgeo.geocaching.sensors.OrientationProvider;
+import cgeo.geocaching.sensors.RotationProvider;
 import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.utils.DatabaseBackupUtils;
 import cgeo.geocaching.utils.DebugUtils;
@@ -21,6 +23,9 @@ import cgeo.geocaching.utils.RxUtils;
 
 import org.apache.commons.lang3.StringUtils;
 import org.openintents.intents.FileManagerIntents;
+
+import rx.functions.Action0;
+import rx.schedulers.Schedulers;
 
 import android.app.ProgressDialog;
 import android.app.backup.BackupManager;
@@ -45,9 +50,6 @@ import android.widget.ListAdapter;
 import java.io.File;
 import java.util.List;
 import java.util.Locale;
-
-import rx.functions.Action0;
-import rx.schedulers.Schedulers;
 
 /**
  * A {@link PreferenceActivity} that presents a set of application settings. On
@@ -138,6 +140,7 @@ public class SettingsActivity extends PreferenceActivity {
         initDbLocationPreference();
         initGeoDirPreferences();
         initDebugPreference();
+        initForceOrientationSensorPreference();
         initBasicMemberPreferences();
         initSend2CgeoPreferences();
         initServicePreferences();
@@ -436,6 +439,20 @@ public class SettingsActivity extends PreferenceActivity {
         });
     }
 
+    private void initForceOrientationSensorPreference() {
+        final Preference p = getPreference(R.string.pref_force_orientation_sensor);
+        p.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(final Preference preference, final Object newValue) {
+                final boolean useOrientationSensor = (Boolean) newValue;
+                Settings.setForceOrientationSensor(useOrientationSensor);
+                Sensors.getInstance().setupDirectionObservable();
+                return true;
+            }
+        });
+        p.setEnabled(OrientationProvider.hasOrientationSensor(this) && RotationProvider.hasRotationSensor(this));
+    }
+
     private void initLanguagePreferences() {
         final Preference p = getPreference(R.string.pref_useenglish);
         p.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
@@ -463,7 +480,7 @@ public class SettingsActivity extends PreferenceActivity {
             public boolean onPreferenceChange(final Preference preference, final Object newValue) {
                 final boolean useLowPower = ((Boolean) newValue).booleanValue();
                 sensors.setupGeoDataObservables(Settings.useGooglePlayServices(), useLowPower);
-                sensors.setupDirectionObservable(useLowPower);
+                sensors.setupDirectionObservable();
                 return true;
             }
         });
