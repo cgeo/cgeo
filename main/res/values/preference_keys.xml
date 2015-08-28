@@ -143,6 +143,7 @@
     <string name="pref_navigation_menu_sygic_walking">navigationSygicWalking</string>
     <string name="pref_navigation_menu_sygic_driving">navigationSygicDriving</string>
     <string name="pref_navigation_menu_google_walk">navigationGoogleWalk</string>
+    <string name="pref_navigation_menu_google_transit">navigationGoogleTransit</string>
     <string name="pref_navigation_menu_google_bike">navigationGoogleBike</string>
     <string name="pref_navigation_menu_google_maps_directions">navigationMapsDirections</string>
     <string name="pref_navigation_menu_where_you_go">navigationWhereYouGo</string>
