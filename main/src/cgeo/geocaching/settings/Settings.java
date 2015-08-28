@@ -7,7 +7,6 @@ import cgeo.geocaching.connector.capability.ICredentials;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.gc.GCConstants;
 import cgeo.geocaching.enumerations.CacheType;
-import cgeo.geocaching.enumerations.LogTypeTrackable;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.maps.CGeoMap.MapMode;
@@ -995,14 +994,6 @@ public class Settings {
 
     public static void setShareAfterExport(final boolean shareAfterExport) {
         putBoolean(R.string.pref_shareafterexport, shareAfterExport);
-    }
-
-    public static int getTrackableAction() {
-        return getInt(R.string.pref_trackableaction, LogTypeTrackable.RETRIEVED_IT.id);
-    }
-
-    public static void setTrackableAction(final int trackableAction) {
-        putInt(R.string.pref_trackableaction, trackableAction);
     }
 
     private static String getCustomRenderThemeBaseFolder() {

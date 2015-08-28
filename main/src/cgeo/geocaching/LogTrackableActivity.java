@@ -88,7 +88,8 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
      */
     private boolean postReady = true;
     private Calendar date = Calendar.getInstance();
-    private LogTypeTrackable typeSelected = LogTypeTrackable.getById(Settings.getTrackableAction());
+    private LogTypeTrackable typeSelected = LogTypeTrackable.RETRIEVED_IT;
+
     private Trackable trackable;
 
     TrackableConnector connector;
