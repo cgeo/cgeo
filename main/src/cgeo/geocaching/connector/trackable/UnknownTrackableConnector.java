@@ -42,6 +42,6 @@ public class UnknownTrackableConnector extends AbstractTrackableConnector {
     @Override
     @NonNull
     public List<UserAction> getUserActions() {
-        return Collections.EMPTY_LIST;
+        return Collections.emptyList();
     }
 }
