@@ -81,6 +81,11 @@
   <string name="log_save">Enregistrer hors-ligne</string>
   <string name="log_saving">Enregistrement en cours…</string>
   <string name="log_saving_and_uploading">Envoi de la visite et de l\'image…</string>
+  <string name="log_posting_log">Envoi de la visite…</string>
+  <string name="log_posting_twitter">Envoi du Tweet…</string>
+  <string name="log_posting_gcvote">Envoi sur GCVote…</string>
+  <string name="log_posting_image">Envoi de l\'image…</string>
+  <string name="log_posting_generic_trackable">Envoi de %1$s %2$s/%3$s</string>
   <string name="log_clear">Effacer</string>
   <string name="log_post_not_possible">Téléchargement des données en cours...\nRé-essayez à nouveau dans quelques secondes ou vérifiez votre connexion à Internet.</string>
   <string name="log_post_geocode_missing">Géocode manquant…</string>
@@ -213,6 +218,10 @@
   <string name="warn_no_pocket_query_found">Aucune Pocket Query trouvée en ligne.</string>
   <string name="info_log_posted">Envoi de la visite réussi.</string>
   <string name="info_log_saved">Enregistrement de la visite réussie.</string>
+  <string name="info_log_post_failed">L\'envoi de la visite a échoué.</string>
+  <string name="info_log_post_failed_reason">Raison : %s</string>
+  <string name="info_log_post_retry">Réessayer</string>
+  <string name="info_log_post_save">Sauver hors-ligne</string>
   <string name="info_log_cleared">La visite a été effacée.</string>
   <string name="info_log_type_changed">Le type de visite a été modifié !</string>
   <string name="info_select_logimage_cancelled">La sélection ou l\'acquisition de l\'image a été annulée.</string>
@@ -692,6 +701,7 @@
   <string name="cache_menu_navigate">Navigation</string>
   <string name="cache_menu_navigation_drive">Navigation (voiture)</string>
   <string name="cache_menu_navigation_walk">Navigation (piéton)</string>
+  <string name="cache_menu_navigation_transit">Navigation (transports publics)</string>
   <string name="cache_menu_navigation_bike">Navigation (vélo)</string>
   <string name="cache_menu_maps_directions">Directions Google Maps</string>
   <string name="cache_menu_sygic_walk">Sygic (à pied)</string>
