@@ -11,12 +11,6 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
-import rx.Observable;
-import rx.Scheduler.Worker;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action0;
-import rx.functions.Action1;
-
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -53,6 +47,12 @@ import java.util.Locale;
 import java.util.Set;
 import java.util.concurrent.LinkedBlockingQueue;
 
+import rx.Observable;
+import rx.Scheduler.Worker;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action0;
+import rx.functions.Action1;
+
 public final class ImageUtils {
     private static final int[] ORIENTATIONS = {
             ExifInterface.ORIENTATION_ROTATE_90,
@@ -78,6 +78,7 @@ public final class ImageUtils {
      *            The image Bitmap representation to scale
      * @return BitmapDrawable The scaled image
      */
+    @NonNull
     public static BitmapDrawable scaleBitmapToFitDisplay(@NonNull final Bitmap image) {
         final Point displaySize = Compatibility.getDisplaySize();
         final int maxWidth = displaySize.x - 25;
@@ -316,6 +317,7 @@ public final class ImageUtils {
         }
     }
 
+    @NonNull
     public static BitmapDrawable getTransparent1x1Drawable(final Resources res) {
         return new BitmapDrawable(res, BitmapFactory.decodeResource(res, R.drawable.image_no_placement));
     }
@@ -459,12 +461,14 @@ public final class ImageUtils {
         return !containsPattern(source, NO_EXTERNAL);
     }
 
+    @NonNull
     public static Rect scaleImageToLineHeight(final Drawable drawable, final TextView view) {
         final int lineHeight = (int) (view.getLineHeight() * 0.8);
         final int width = drawable.getIntrinsicWidth() * lineHeight / drawable.getIntrinsicHeight();
         return new Rect(0, 0, width, lineHeight);
     }
 
+    @Nullable
     public static Bitmap convertToBitmap(final Drawable drawable) {
         if (drawable instanceof BitmapDrawable) {
             return ((BitmapDrawable) drawable).getBitmap();

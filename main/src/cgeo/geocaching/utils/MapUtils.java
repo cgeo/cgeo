@@ -8,6 +8,7 @@ import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.LogType;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.eclipse.jdt.annotation.NonNull;
 
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
@@ -45,6 +46,7 @@ public final class MapUtils {
      * @return
      *          a drawable representing the current cache status
      */
+    @NonNull
     public static LayerDrawable getCacheMarker(final Resources res, final Geocache cache) {
         return getCacheMarker(res, cache, null);
     }
@@ -64,6 +66,7 @@ public final class MapUtils {
      * @return
      *          a drawable representing the current cache status
      */
+    @NonNull
     public static LayerDrawable getCacheMarker(final Resources res, final Geocache cache, @Nullable final CacheListType cacheListType) {
         final int hashcode = new HashCodeBuilder()
                 .append(cache.isReliableLatLon())
@@ -102,6 +105,7 @@ public final class MapUtils {
      * @return
      *          a drawable representing the current waypoint status
      */
+    @NonNull
     public static LayerDrawable getWaypointMarker(final Resources res, final Waypoint waypoint) {
         final int hashcode = new HashCodeBuilder()
         .append(waypoint.isVisited())
@@ -128,6 +132,7 @@ public final class MapUtils {
      * @return
      *          a drawable representing the current waypoint status
      */
+    @NonNull
     private static LayerDrawable createWaypointMarker(final Resources res, final Waypoint waypoint) {
         final Drawable marker = Compatibility.getDrawable(res, !waypoint.isVisited() ? R.drawable.marker : R.drawable.marker_transparent);
         final Drawable[] layers = {
@@ -161,6 +166,7 @@ public final class MapUtils {
      * @return
      *          a drawable representing the current cache status
      */
+    @NonNull
     private static LayerDrawable createCacheMarker(final Resources res, final Geocache cache, @Nullable final CacheListType cacheListType) {
         // Set initial capacities to the maximum of layers and insets to avoid dynamic reallocation
         final List<Drawable> layers = new ArrayList<>(9);
@@ -227,12 +233,12 @@ public final class MapUtils {
     }
 
     /**
-     * Get the resolution index used for positionning the overlays elements.
+     * Get the resolution index used for positioning the overlays elements.
      *
      * @param marker
-     *          The Drawable reference
+     *            The Drawable reference
      * @return
-     *          an index for the overlays positions
+     *         an index for the overlays positions
      */
     private static int calculateResolution(final Drawable marker) {
         return marker.getIntrinsicWidth() > 40 ? (marker.getIntrinsicWidth() > 50 ? (marker.getIntrinsicWidth() > 70 ? (marker.getIntrinsicWidth() > 100 ? 4 : 3) : 2) : 1) : 0;
@@ -262,24 +268,24 @@ public final class MapUtils {
     }
 
     /**
-     * Conditionnal expression to choose if we need the background circle or not.
+     * Conditional expression to choose if we need the background circle or not.
      *
      * @param cacheListType
-     *          The cache list currently used
+     *            The cache list currently used
      * @return
-     *          True if the background circle should be displayed
+     *         True if the background circle should be displayed
      */
     private static boolean showBackground(final CacheListType cacheListType) {
         return cacheListType == null;
     }
 
     /**
-     * Conditionnal expression to choose if we need the floppy overlay or not.
+     * Conditional expression to choose if we need the floppy overlay or not.
      *
      * @param cacheListType
-     *          The cache list currently used
+     *            The cache list currently used
      * @return
-     *          True if the floppy overlay should be displayed
+     *         True if the floppy overlay should be displayed
      */
     private static boolean showFloppyOverlay(final CacheListType cacheListType) {
         return cacheListType == null || cacheListType != CacheListType.OFFLINE;

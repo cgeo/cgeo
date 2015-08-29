@@ -8,6 +8,8 @@ import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.WaypointType;
 
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 import android.content.Context;
 import android.text.format.DateUtils;
@@ -37,6 +39,7 @@ public final class Formatter {
      *            milliseconds since the epoch
      * @return the formatted string
      */
+    @NonNull
     public static String formatTime(final long date) {
         return DateUtils.formatDateTime(context, date, DateUtils.FORMAT_SHOW_TIME);
     }
@@ -49,6 +52,7 @@ public final class Formatter {
      *            milliseconds since the epoch
      * @return the formatted string
      */
+    @NonNull
     public static String formatDate(final long date) {
         return DateUtils.formatDateTime(context, date, DateUtils.FORMAT_SHOW_DATE);
     }
@@ -62,6 +66,7 @@ public final class Formatter {
      *            milliseconds since the epoch
      * @return the formatted string
      */
+    @NonNull
     public static String formatFullDate(final long date) {
         return DateUtils.formatDateTime(context, date, DateUtils.FORMAT_SHOW_DATE
                 | DateUtils.FORMAT_SHOW_YEAR);
@@ -75,6 +80,7 @@ public final class Formatter {
      *            milliseconds since the epoch
      * @return the formatted string
      */
+    @NonNull
     public static String formatShortDate(final long date) {
         final DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(context);
         return dateFormat.format(date);
@@ -92,6 +98,7 @@ public final class Formatter {
      *            milliseconds since the epoch
      * @return the formatted string
      */
+    @NonNull
     public static String formatShortDateVerbally(final long date) {
         final int diff = CalendarUtils.daysSince(date);
         switch (diff) {
@@ -112,6 +119,7 @@ public final class Formatter {
      *            milliseconds since the epoch
      * @return the formatted string
      */
+    @NonNull
     public static String formatShortDateTime(final long date) {
         return DateUtils.formatDateTime(context, date, DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_ABBREV_ALL);
     }
@@ -124,10 +132,12 @@ public final class Formatter {
      *            milliseconds since the epoch
      * @return the formatted string
      */
+    @NonNull
     public static String formatDateTime(final long date) {
         return DateUtils.formatDateTime(context, date, DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_TIME);
     }
 
+    @NonNull
     public static String formatCacheInfoLong(final Geocache cache) {
         final List<String> infos = new ArrayList<>();
         if (StringUtils.isNotBlank(cache.getGeocode())) {
@@ -142,6 +152,7 @@ public final class Formatter {
         return StringUtils.join(infos, SEPARATOR);
     }
 
+    @NonNull
     public static String formatCacheInfoShort(final Geocache cache) {
         final List<String> infos = new ArrayList<>();
         addShortInfos(cache, infos);
@@ -171,6 +182,7 @@ public final class Formatter {
         return String.format(Locale.getDefault(), "%.1f", value);
     }
 
+    @NonNull
     public static String formatCacheInfoHistory(final Geocache cache) {
         final List<String> infos = new ArrayList<>(3);
         infos.add(StringUtils.upperCase(cache.getGeocode()));
@@ -179,6 +191,7 @@ public final class Formatter {
         return StringUtils.join(infos, SEPARATOR);
     }
 
+    @NonNull
     public static String formatWaypointInfo(final Waypoint waypoint) {
         final List<String> infos = new ArrayList<>(3);
         final WaypointType waypointType = waypoint.getWaypointType();
@@ -198,6 +211,7 @@ public final class Formatter {
         return StringUtils.join(infos, SEPARATOR);
     }
 
+    @NonNull
     public static String formatDaysAgo(final long date) {
         final int days = CalendarUtils.daysSince(date);
         switch (days) {
@@ -215,6 +229,7 @@ public final class Formatter {
      *
      * @return {@code null} or hidden date of the cache (or event date of the cache) in human readable format
      */
+    @Nullable
     public static String formatHiddenDate(final Geocache cache) {
         final Date hiddenDate = cache.getHiddenDate();
         if (hiddenDate == null) {
@@ -231,6 +246,7 @@ public final class Formatter {
         return dateString;
     }
 
+    @NonNull
     public static String formatMapSubtitle(final Geocache cache) {
         return "D " + formatDT(cache.getDifficulty()) + SEPARATOR + "T " + formatDT(cache.getTerrain()) + SEPARATOR + cache.getGeocode();
     }
