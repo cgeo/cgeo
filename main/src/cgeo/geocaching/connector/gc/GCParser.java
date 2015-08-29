@@ -632,7 +632,7 @@ public final class GCParser {
                 if (matcherSpoilersInside.group(4) != null) {
                     description = matcherSpoilersInside.group(4);
                 }
-                if (title != null && description != null) {
+                if (title != null) {
                     cache.addSpoiler(new Image.Builder().setUrl(url).setTitle(title).setDescription(description).build());
                 }
             }
