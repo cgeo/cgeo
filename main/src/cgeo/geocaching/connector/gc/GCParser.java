@@ -632,7 +632,9 @@ public final class GCParser {
                 if (matcherSpoilersInside.group(4) != null) {
                     description = matcherSpoilersInside.group(4);
                 }
-                cache.addSpoiler(new Image.Builder().setUrl(url).setTitle(title).setDescription(description).build());
+                if (title != null && description != null) {
+                    cache.addSpoiler(new Image.Builder().setUrl(url).setTitle(title).setDescription(description).build());
+                }
             }
         } catch (final RuntimeException e) {
             // failed to parse cache spoilers
