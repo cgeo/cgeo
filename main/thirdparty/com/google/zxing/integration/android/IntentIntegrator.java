@@ -242,6 +242,7 @@ public class IntentIntegrator {
    * @return the {@link AlertDialog} that was shown to the user prompting them to download the app
    *   if a prompt was needed, or null otherwise
    */
+  @SuppressWarnings("deprecated")
   public final AlertDialog initiateScan(Collection<String> desiredBarcodeFormats) {
     Intent intentScan = new Intent(BS_PACKAGE + ".SCAN");
     intentScan.addCategory(Intent.CATEGORY_DEFAULT);
@@ -371,6 +372,7 @@ public class IntentIntegrator {
    * @return the {@link AlertDialog} that was shown to the user prompting them to download the app
    *   if a prompt was needed, or null otherwise
    */
+  @SuppressWarnings("deprecated")
   public final AlertDialog shareText(CharSequence text, CharSequence type) {
     Intent intent = new Intent();
     intent.addCategory(Intent.CATEGORY_DEFAULT);
