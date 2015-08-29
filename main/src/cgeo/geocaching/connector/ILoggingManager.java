@@ -7,8 +7,6 @@ import cgeo.geocaching.enumerations.LogType;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
-import android.net.Uri;
-
 import java.util.Calendar;
 import java.util.List;
 

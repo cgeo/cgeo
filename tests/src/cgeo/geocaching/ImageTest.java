@@ -20,13 +20,13 @@ public class ImageTest extends CGeoTestCase {
     private static final String FILE1 = "file:///dev/null";
     private static final String FILE2 = "file:///tmp/image.png";
 
-    public void testNullConstructor() throws Exception {
+    public static void testNullConstructor() throws Exception {
         final Image nullImage1 = new Image.Builder().build();
 
         assertThat(nullImage1).isEqualTo(Image.NONE);
     }
 
-    public void testStringConstructor() throws Exception {
+    public static void testStringConstructor() throws Exception {
         final Image image1 = new Image.Builder().setUrl("").build();
         final Image image2 = new Image.Builder().setUrl(FILE1).build();
         final Image image3 = new Image.Builder().setUrl(URL1).build();
@@ -36,7 +36,7 @@ public class ImageTest extends CGeoTestCase {
         assertThat(image3).isNotEqualTo(Image.NONE);
     }
 
-    public void testUriConstructor() throws Exception {
+    public static void testUriConstructor() throws Exception {
         final Image image1 = new Image.Builder().setUrl(Uri.parse(URL1)).build();
         final Image image2 = new Image.Builder().setUrl(Uri.parse(URL2)).build();
 
@@ -45,7 +45,7 @@ public class ImageTest extends CGeoTestCase {
         assertThat(image2.getUrl()).isEqualTo(URL2);
     }
 
-    public void testFileConstructor() throws Exception {
+    public static void testFileConstructor() throws Exception {
         final Image image1 = new Image.Builder().setUrl(FileUtils.urlToFile(FILE1)).build();
         final Image image2 = new Image.Builder().setUrl(FileUtils.urlToFile(FILE2)).build();
 
@@ -56,7 +56,7 @@ public class ImageTest extends CGeoTestCase {
         assertThat(image2.getUrl()).isEqualTo(FILE2);
     }
 
-    public void testTitle() throws Exception {
+    public static void testTitle() throws Exception {
         final Image image1 = new Image.Builder().setTitle("Title").build();
 
         assertThat(image1).isNotEqualTo(Image.NONE);
@@ -64,7 +64,7 @@ public class ImageTest extends CGeoTestCase {
         assertThat(image1.getDescription()).isNull();
     }
 
-    public void testDescription() throws Exception {
+    public static void testDescription() throws Exception {
         final Image image1 = new Image.Builder().setDescription("Description").build();
 
         assertThat(image1).isNotEqualTo(Image.NONE);
@@ -72,7 +72,7 @@ public class ImageTest extends CGeoTestCase {
         assertThat(image1.getDescription()).isEqualTo("Description");
     }
 
-    public void testIsEmpty() throws Exception {
+    public static void testIsEmpty() throws Exception {
         final Image image1 = new Image.Builder().build();
         final Image image2 = new Image.Builder().setUrl("").build();
         final Image image3 = new Image.Builder().setUrl(FILE1).build();
@@ -84,7 +84,7 @@ public class ImageTest extends CGeoTestCase {
         assertThat(image4.isEmpty()).isFalse();
     }
 
-    public void testIsLocalFile() throws Exception {
+    public static void testIsLocalFile() throws Exception {
         final Image image1 = new Image.Builder().build();
         final Image image2 = new Image.Builder().setUrl("").build();
         final Image image3 = new Image.Builder().setUrl(FILE1).build();
@@ -96,13 +96,13 @@ public class ImageTest extends CGeoTestCase {
         assertThat(image4.isLocalFile()).isFalse();
     }
 
-    public void testLocalFile() throws Exception {
+    public static void testLocalFile() throws Exception {
         final Image image1 = new Image.Builder().setUrl(FILE1).build();
 
         assertThat(image1.localFile()).isEqualTo(FileUtils.urlToFile(FILE1));
     }
 
-    public void testGetUrl() throws Exception {
+    public static void testGetUrl() throws Exception {
         final Image image1 = new Image.Builder().build();
         final Image image2 = new Image.Builder().setUrl("").build();
         final Image image3 = new Image.Builder().setUrl(FILE1).build();
@@ -116,7 +116,7 @@ public class ImageTest extends CGeoTestCase {
         assertThat(image5.getUrl()).isEqualTo(URL2);
     }
 
-    public void testGetPath() throws Exception {
+    public static void testGetPath() throws Exception {
         final Image image1 = new Image.Builder().build();
         final Image image2 = new Image.Builder().setUrl("").build();
         final Image image3 = new Image.Builder().setUrl(FILE1).build();
@@ -132,19 +132,19 @@ public class ImageTest extends CGeoTestCase {
         assertThat(image6.getPath()).isEqualTo("");
     }
 
-    public void testGetTitle() throws Exception {
+    public static void testGetTitle() throws Exception {
         final Image image1 = new Image.Builder().setTitle("Title").build();
 
         assertThat(image1.getTitle()).isEqualTo("Title");
     }
 
-    public void testGetDescription() throws Exception {
+    public static void testGetDescription() throws Exception {
         final Image image1 = new Image.Builder().setDescription("Description").build();
 
         assertThat(image1.getDescription()).isEqualTo("Description");
     }
 
-    public void testGetFile() throws Exception {
+    public static void testGetFile() throws Exception {
         final Image image1 = new Image.Builder().build();
         final Image image2 = new Image.Builder().setUrl(FILE1).build();
 
@@ -152,7 +152,7 @@ public class ImageTest extends CGeoTestCase {
         assertThat(image2.getFile()).isEqualTo(new File(FILE1));
     }
 
-    public void testEquals() throws Exception {
+    public static void testEquals() throws Exception {
         final Image image1 = new Image.Builder().setUrl(FILE1).setTitle("Title1").setDescription("Description1").build();
         final Image image2 = new Image.Builder().build();
         final Image image3 = new Image.Builder().setTitle("Title1").setDescription("Description1").build();
@@ -176,14 +176,14 @@ public class ImageTest extends CGeoTestCase {
         assertThat(image6).isNotEqualTo(image7);
     }
 
-    public void testParcel() throws Exception {
+    public static void testParcel() throws Exception {
         final Image image1 = new Image.Builder().setUrl(FILE1).setTitle("Title1").setDescription("Description1").build();
 
         final Parcel parcel = Parcel.obtain();
         image1.writeToParcel(parcel, 0);
         parcel.setDataPosition(0);
 
-        Image image2 = Image.CREATOR.createFromParcel(parcel);
+        final Image image2 = Image.CREATOR.createFromParcel(parcel);
 
         assertThat(image1).isEqualTo(image2);
     }
