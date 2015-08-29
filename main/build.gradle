@@ -178,6 +178,9 @@ dependencies {
     compile "com.fasterxml.jackson.core:jackson-databind:$JacksonDatabindVersion"
     compile "com.fasterxml.jackson.core:jackson-annotations:$JacksonAnnotationsVersion"
 
+    // Zxing integration
+    compile "com.google.zxing:android-integration:3.2.1"
+
     //TEST
     //compile files("compile-libs/androidannotations-$AAVersion.jar")
     //compile files('compile-libs/findbugs-ant.jar')
@@ -275,8 +278,8 @@ dependencies {
     unitTestCompile "commons-io:commons-io:$CommonsIoVersion"
     unitTestCompile 'org.apache.commons:commons-lang3:$CommonsLang3Version'
     unitTestCompile 'com.google.code.findbugs:annotations:3.0.0'
-    unitTestCompile 'com.netflix.rxjava:rxjava-core:$RXVersion'
-    unitTestCompile 'com.netflix.rxjava:rxjava-android:$RXVersion'
+    unitTestCompile 'io.reactivex:rxjava-core:$RXVersion'
+    unitTestCompile 'io.reactivex:rxjava-android:$RXVersion'
 }
 
 // extend the runtime
