@@ -402,8 +402,9 @@ public class Settings {
         return new ImmutablePair<>(username, password);
     }
 
+    @NonNull
     public static String getSignature() {
-        return getString(R.string.pref_signature, StringUtils.EMPTY);
+        return StringUtils.defaultString(getString(R.string.pref_signature, StringUtils.EMPTY));
     }
 
     public static void setCookieStore(final String cookies) {
@@ -1067,12 +1068,14 @@ public class Settings {
         return getBoolean(R.string.pref_nativeUa, false);
     }
 
+    @NonNull
     public static String getCacheTwitterMessage() {
-        return getString(R.string.pref_twitter_cache_message, "I found [NAME] ([URL]).");
+        return StringUtils.defaultString(getString(R.string.pref_twitter_cache_message, "I found [NAME] ([URL])."));
     }
 
+    @NonNull
     public static String getTrackableTwitterMessage() {
-        return getString(R.string.pref_twitter_trackable_message, "I touched [NAME] ([URL]).");
+        return StringUtils.defaultString(getString(R.string.pref_twitter_trackable_message, "I touched [NAME] ([URL])."));
     }
 
     public static int getLogImageScale() {
