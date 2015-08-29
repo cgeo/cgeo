@@ -288,9 +288,9 @@ public class SettingsActivity extends PreferenceActivity {
                 new OnPreferenceClickListener() {
                     @Override
                     public boolean onPreferenceClick(final Preference preference) {
-                        final Intent i = new Intent(SettingsActivity.this,
+                        final Intent intent = new Intent(SettingsActivity.this,
                                 SelectMapfileActivity.class);
-                        startActivityForResult(i, R.string.pref_mapDirectory);
+                        startActivityForResult(intent, R.string.pref_mapDirectory);
                         return false;
                     }
                 });
