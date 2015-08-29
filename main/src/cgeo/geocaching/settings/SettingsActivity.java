@@ -348,7 +348,7 @@ public class SettingsActivity extends PreferenceActivity {
 
                     @Override
                     public void run() {
-                        VALUE_CHANGE_LISTENER.onPreferenceChange(SettingsActivity.this.getPreference(R.string.pref_fakekey_preference_backup_info), "");
+                        VALUE_CHANGE_LISTENER.onPreferenceChange(getPreference(R.string.pref_fakekey_preference_backup_info), "");
                     }
                 });
                 return true;
