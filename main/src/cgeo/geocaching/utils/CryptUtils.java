@@ -83,7 +83,6 @@ public final class CryptUtils {
         return result.toString();
     }
 
-    @NonNull
     public static String md5(final String text) {
         try {
             final MessageDigest digest = MessageDigest.getInstance("MD5");
@@ -96,8 +95,8 @@ public final class CryptUtils {
         return StringUtils.EMPTY;
     }
 
-    @NonNull
     public static byte[] hashHmac(final String text, final String salt) {
+
         try {
             final SecretKeySpec secretKeySpec = new SecretKeySpec(salt.getBytes(CharEncoding.UTF_8), "HmacSHA1");
             final Mac mac = Mac.getInstance("HmacSHA1");
@@ -109,7 +108,6 @@ public final class CryptUtils {
         }
     }
 
-    @NonNull
     public static CharSequence rot13(final Spannable span) {
         // I needed to re-implement the rot13(String) encryption here because we must work on
         // a SpannableStringBuilder instead of the pure text and we must replace each character inline.
@@ -125,7 +123,6 @@ public final class CryptUtils {
         return buffer;
     }
 
-    @NonNull
     public static String base64Encode(final byte[] in) {
         final int iLen = in.length;
         final int oDataLen = (iLen * 4 + 2) / 3; // output length without padding

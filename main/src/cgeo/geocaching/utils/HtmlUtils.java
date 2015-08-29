@@ -2,7 +2,6 @@ package cgeo.geocaching.utils;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
-import org.eclipse.jdt.annotation.NonNull;
 
 import android.text.Html;
 import android.text.Spanned;
@@ -24,7 +23,6 @@ public final class HtmlUtils {
      * removes the embedded images instead of replacing them by a small rectangular representation character.
      *
      */
-    @NonNull
     public static String extractText(final CharSequence html) {
         if (StringUtils.isBlank(html)) {
             return StringUtils.EMPTY;
@@ -62,7 +60,6 @@ public final class HtmlUtils {
         return Html.fromHtml(result).toString().trim();
     }
 
-    @NonNull
     public static String removeExtraParagraph(final String htmlIn) {
         final String html = StringUtils.trim(htmlIn);
         if (StringUtils.startsWith(html, "<p>") && StringUtils.endsWith(html, "</p>")) {

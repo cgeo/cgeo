@@ -31,18 +31,18 @@ public final class DistanceParser {
         }
 
         final float value = Float.parseFloat(matcher.group(1).replace(',', '.'));
-        final String unit = StringUtils.lowerCase(matcher.group(2), Locale.US);
+        final String unit = matcher.group(2).toLowerCase(Locale.US);
 
-        if ("m".equals(unit) || (StringUtils.isEmpty(unit) && metricUnit)) {
+        if (unit.equals("m") || (StringUtils.isEmpty(unit) && metricUnit)) {
             return value / 1000;
         }
-        if ("km".equals(unit)) {
+        if (unit.equals("km")) {
             return value;
         }
-        if ("yd".equals(unit)) {
+        if (unit.equals("yd")) {
             return value * IConversion.YARDS_TO_KILOMETER;
         }
-        if ("mi".equals(unit)) {
+        if (unit.equals("mi")) {
             return value * IConversion.MILES_TO_KILOMETER;
         }
         return value * IConversion.FEET_TO_KILOMETER;

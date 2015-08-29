@@ -123,7 +123,7 @@ public class Image implements Parcelable {
          *          The image description
          */
         @NonNull
-        public Builder setDescription(@Nullable final String description) {
+        public Builder setDescription(@NonNull final String description) {
             this.description = description;
             return this;
         }

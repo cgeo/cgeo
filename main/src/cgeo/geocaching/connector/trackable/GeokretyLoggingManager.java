@@ -3,6 +3,7 @@ package cgeo.geocaching.connector.trackable;
 import cgeo.geocaching.AbstractLoggingActivity;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.TrackableLog;
+import cgeo.geocaching.connector.ImageResult;
 import cgeo.geocaching.connector.LogResult;
 import cgeo.geocaching.enumerations.LogTypeTrackable;
 import cgeo.geocaching.enumerations.StatusCode;
@@ -11,6 +12,8 @@ import cgeo.geocaching.utils.Log;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.eclipse.jdt.annotation.NonNull;
+
+import android.net.Uri;
 
 import java.util.ArrayList;
 import java.util.Calendar;

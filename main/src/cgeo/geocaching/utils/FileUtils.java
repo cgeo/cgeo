@@ -110,7 +110,6 @@ public final class FileUtils {
      * </ul>
      * which does not yet exist.
      */
-    @NonNull
     public static File getUniqueNamedFile(final File file) {
         if (!file.exists()) {
             return file;
@@ -198,7 +197,6 @@ public final class FileUtils {
      * @param file a local file name
      * @return an URL with the <tt>file</tt> scheme
      */
-    @NonNull
     public static String fileToUrl(final File file) {
         return FILE_PROTOCOL + file.getAbsolutePath();
     }
@@ -208,7 +206,6 @@ public final class FileUtils {
      *
      * @return the local file
      */
-    @NonNull
     public static File urlToFile(final String url) {
         return new File(StringUtils.substring(url, FILE_PROTOCOL.length()));
     }

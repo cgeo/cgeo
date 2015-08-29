@@ -10,8 +10,6 @@ import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.settings.Settings;
 
 import org.apache.commons.lang3.StringUtils;
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -95,8 +93,7 @@ public final class LogTemplateProvider {
             return template;
         }
 
-        @NonNull
-        private final String apply(@NonNull final String input, final LogContext context) {
+        private final String apply(final String input, final LogContext context) {
             final String bracketedTemplate = "[" + template + "]";
 
             // check containment first to not unconditionally call the getValue(...) method
@@ -110,7 +107,6 @@ public final class LogTemplateProvider {
     /**
      * @return all templates, but not the signature template itself
      */
-    @NonNull
     public static List<LogTemplate> getTemplatesWithoutSignature() {
         final List<LogTemplate> templates = new ArrayList<>();
         templates.add(new LogTemplate("DATE", R.string.init_signature_template_date) {
@@ -241,13 +237,12 @@ public final class LogTemplateProvider {
     /**
      * @return all templates, including the signature template
      */
-    @NonNull
     public static List<LogTemplate> getTemplatesWithSignature() {
         final List<LogTemplate> templates = getTemplatesWithoutSignature();
         templates.add(new LogTemplate("SIGNATURE", R.string.init_signature) {
             @Override
             public String getValue(final LogContext context) {
-                final String nestedTemplate = Settings.getSignature();
+                final String nestedTemplate = StringUtils.defaultString(Settings.getSignature());
                 if (StringUtils.contains(nestedTemplate, "SIGNATURE")) {
                     return "invalid signature template";
                 }
@@ -257,7 +252,6 @@ public final class LogTemplateProvider {
         return templates;
     }
 
-    @Nullable
     public static LogTemplate getTemplate(final int itemId) {
         for (final LogTemplate template : getTemplatesWithSignature()) {
             if (template.getItemId() == itemId) {
@@ -267,7 +261,10 @@ public final class LogTemplateProvider {
         return null;
     }
 
-    public static String applyTemplates(@NonNull final String signature, final LogContext context) {
+    public static String applyTemplates(final String signature, final LogContext context) {
+        if (signature == null) {
+            return StringUtils.EMPTY;
+        }
         String result = signature;
         for (final LogTemplate template : getTemplatesWithSignature()) {
             result = template.apply(result, context);

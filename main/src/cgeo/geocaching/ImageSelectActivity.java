@@ -1,5 +1,8 @@
 package cgeo.geocaching;
 
+import butterknife.ButterKnife;
+import butterknife.Bind;
+
 import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.files.LocalStorage;
 import cgeo.geocaching.settings.Settings;
@@ -34,9 +37,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
-
-import butterknife.Bind;
-import butterknife.ButterKnife;
 
 public class ImageSelectActivity extends AbstractActionBarActivity {
 
@@ -193,12 +193,7 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
         // create Intent to take a picture and return control to the calling application
         final Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
-        final Uri imageUri = ImageUtils.getOutputImageFileUri();
-        if (imageUri == null) {
-            showFailure();
-            return;
-        }
-        image = new Image.Builder().setUrl(imageUri).build();
+        image = new Image.Builder().setUrl(ImageUtils.getOutputImageFileUri()).build();
 
         if (image.isEmpty()) {
             showFailure();
@@ -270,11 +265,9 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
                 try {
                     input = getContentResolver().openInputStream(selectedImage);
                     final File outputFile = ImageUtils.getOutputImageFile();
-                    if (outputFile != null) {
-                        output = new FileOutputStream(outputFile);
-                        LocalStorage.copy(input, output);
-                        image = new Image.Builder().setUrl(outputFile).build();
-                    }
+                    output = new FileOutputStream(outputFile);
+                    LocalStorage.copy(input, output);
+                    image = new Image.Builder().setUrl(outputFile).build();
                 } catch (final FileNotFoundException e) {
                     Log.e("ImageSelectActivity.onStartResult", e);
                 } finally {
