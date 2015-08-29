@@ -186,5 +186,6 @@ public class ImageTest extends CGeoTestCase {
         final Image image2 = Image.CREATOR.createFromParcel(parcel);
 
         assertThat(image1).isEqualTo(image2);
+        parcel.recycle();
     }
 }
