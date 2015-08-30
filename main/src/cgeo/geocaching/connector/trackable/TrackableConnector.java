@@ -24,11 +24,11 @@ public interface TrackableConnector {
      *
      * @return the service ID corresponding to the preference activity for the connector
      */
-    public int getPreferenceActivity();
+    int getPreferenceActivity();
 
-    public boolean canHandleTrackable(final String geocode);
+    boolean canHandleTrackable(@Nullable final String geocode);
 
-    public boolean canHandleTrackable(final String geocode, final TrackableBrand brand);
+    boolean canHandleTrackable(@Nullable final String geocode, @Nullable final TrackableBrand brand);
 
     /**
      * Return the Title of the service the connector is attached to.
@@ -38,14 +38,14 @@ public interface TrackableConnector {
      * @return the service TITLE corresponding to this connector
      */
     @NonNull
-    public String getServiceTitle();
+    String getServiceTitle();
 
     /**
      * Check whether the connector has URLs corresponding the the trackable.
      *
      * @return <tt>true</tt> if the connector handles URLs, <tt>false</tt> otherwise
      */
-    public boolean hasTrackableUrls();
+    boolean hasTrackableUrls();
 
     /**
      * Return the URL for a trackable. Might throw {@link IllegalStateException} if called
@@ -56,14 +56,14 @@ public interface TrackableConnector {
      * @return the URL corresponding to this trackable
      */
     @NonNull
-    public String getUrl(@NonNull final Trackable trackable);
+    String getUrl(@NonNull final Trackable trackable);
 
     /**
      * Tell if the trackable has logging capabilities.
      *
      * @return True if trackable is loggable.
      */
-    public boolean isLoggable();
+    boolean isLoggable();
 
     /**
      * Return a Trackable corresponding to the Tracable Geocode (Tracking Code) or Guid.
@@ -75,7 +75,7 @@ public interface TrackableConnector {
      * @return the Trackable object.
      */
     @Nullable
-    public Trackable searchTrackable(final String geocode, final String guid, final String id);
+    Trackable searchTrackable(final String geocode, final String guid, final String id);
 
     /**
      * Return a Trackable corresponding to the Tracable Geocode.
@@ -84,7 +84,7 @@ public interface TrackableConnector {
      * @return the Trackable object.
      */
     @NonNull
-    public List<Trackable> searchTrackables(final String geocode);
+    List<Trackable> searchTrackables(final String geocode);
 
     /**
      * Return a Trackable id from an url.
@@ -93,7 +93,7 @@ public interface TrackableConnector {
      * @return the Trackable Geocode.
      */
     @Nullable
-    public String getTrackableCodeFromUrl(final @NonNull String url);
+    String getTrackableCodeFromUrl(final @NonNull String url);
 
     /**
      * Return available user actions for the trackable.
@@ -101,7 +101,7 @@ public interface TrackableConnector {
      * @return the List of available user action.
      */
     @NonNull
-    public List<UserAction> getUserActions();
+    List<UserAction> getUserActions();
 
     /**
      * Return the Brand object for the Trackable.
@@ -110,7 +110,7 @@ public interface TrackableConnector {
      * @return the Trackable Brand object.
      */
     @NonNull
-    public TrackableBrand getBrand();
+    TrackableBrand getBrand();
 
     /**
      * Return a list of Trackable in user's inventory.
@@ -119,7 +119,7 @@ public interface TrackableConnector {
      * @return the Trackable list.
      */
     @NonNull
-    public List<Trackable> loadInventory();
+    List<Trackable> loadInventory();
 
     /**
      * Return the Trackable Logging Manager for the Trackable.
@@ -128,7 +128,7 @@ public interface TrackableConnector {
      * @return the Trackable logging manager.
      */
     @Nullable
-    public AbstractTrackableLoggingManager getTrackableLoggingManager(final AbstractLoggingActivity activity);
+    AbstractTrackableLoggingManager getTrackableLoggingManager(final AbstractLoggingActivity activity);
 
     /**
      * Tell if the trackable is loggable via a generic Trackable Connector.
@@ -149,16 +149,16 @@ public interface TrackableConnector {
      *
      * @return True if user is connected to service.
      */
-    public boolean isRegistered();
+    boolean isRegistered();
 
     /**
      * Tell if the connector recommend logging a Trackable with Geocode.
      *
      * @return True if connector recommend Geocode.
      */
-    public boolean recommendLogWithGeocode();
+    boolean recommendLogWithGeocode();
 
-    public int getTrackableLoggingManagerLoaderId();
+    int getTrackableLoggingManagerLoaderId();
 
     /**
      * Return list of Trackables in user's inventory converted to TrackableLog object.
@@ -168,5 +168,5 @@ public interface TrackableConnector {
      * @return the TrackableLog corresponding to trackables in user's inventory as Observable.
      */
     @NonNull
-    public Observable<TrackableLog> trackableLogInventory();
+    Observable<TrackableLog> trackableLogInventory();
 }
