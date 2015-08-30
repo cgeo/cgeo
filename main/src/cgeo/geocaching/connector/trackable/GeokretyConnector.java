@@ -29,7 +29,6 @@ import android.content.Context;
 
 import java.io.InputStream;
 import java.net.URLEncoder;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
@@ -143,7 +142,7 @@ public class GeokretyConnector extends AbstractTrackableConnector {
             return GeokretyParser.parse(is);
         } catch (final Exception e) {
             Log.w("GeokretyConnector.loadInventory", e);
-            return new ArrayList<>();
+            return Collections.emptyList();
         }
     }
 
