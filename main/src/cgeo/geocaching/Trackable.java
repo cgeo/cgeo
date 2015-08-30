@@ -150,13 +150,12 @@ public class Trackable implements ILogable {
         return iconUrl;
     }
 
-
     public int getIconBrand() {
         return getBrand().getIconResource();
     }
 
     public void forceSetBrand(final TrackableBrand trackableBrand) {
-        this.brand = trackableBrand;
+        brand = trackableBrand;
     }
 
     public TrackableBrand getBrand() {
@@ -208,12 +207,7 @@ public class Trackable implements ILogable {
     }
 
     public void setReleased(@Nullable final Date released) {
-        if (released == null) {
-            this.released = null;
-        }
-        else {
-            this.released = new Date(released.getTime()); // avoid storing external reference in this object
-        }
+        this.released = released == null ? null : new Date(released.getTime()); // avoid storing external reference in this object
     }
 
     public float getDistance() {

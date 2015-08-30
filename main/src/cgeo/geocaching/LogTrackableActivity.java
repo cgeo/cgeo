@@ -658,8 +658,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
             final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
             builder.setTitle(R.string.trackable_title_log_without_geocode);
 
-            final Context themedContext;
-            themedContext = Settings.isLightSkin() && VERSION.SDK_INT < VERSION_CODES.HONEYCOMB ? new ContextThemeWrapper(activity, R.style.dark) : activity;
+            final Context themedContext = Settings.isLightSkin() && VERSION.SDK_INT < VERSION_CODES.HONEYCOMB ? new ContextThemeWrapper(activity, R.style.dark) : activity;
 
             final View layout = View.inflate(themedContext, R.layout.logtrackable_without_geocode, null);
             builder.setView(layout);
