@@ -7,12 +7,14 @@ import cgeo.geocaching.activity.Keyboard;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.LogResult;
 import cgeo.geocaching.connector.trackable.AbstractTrackableLoggingManager;
+import cgeo.geocaching.connector.trackable.TrackableBrand;
 import cgeo.geocaching.connector.trackable.TrackableConnector;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.Loaders;
 import cgeo.geocaching.enumerations.LogTypeTrackable;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.network.AndroidBeam;
 import cgeo.geocaching.search.AutoCompleteAdapter;
 import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
@@ -35,17 +37,22 @@ import cgeo.geocaching.utils.LogTemplateProvider.LogTemplate;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
+import rx.android.app.AppObservable;
+import rx.functions.Action1;
 import rx.functions.Func1;
+import rx.subscriptions.CompositeSubscription;
 
 import android.R.layout;
 import android.R.string;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.net.Uri;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
@@ -66,6 +73,7 @@ import android.widget.LinearLayout;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 public class LogTrackableActivity extends AbstractLoggingActivity implements DateDialogParent, TimeDialogParent, CoordinateUpdate, LoaderManager.LoaderCallbacks<List<LogTypeTrackable>> {
 
@@ -79,6 +87,9 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
     @Bind(R.id.tweet) protected CheckBox tweetCheck;
     @Bind(R.id.tweet_box) protected LinearLayout tweetBox;
 
+    private CompositeSubscription createSubscriptions;
+    private ProgressDialog waitDialog = null;
+
     private List<LogTypeTrackable> possibleLogTypesTrackable = new ArrayList<>();
     private String geocode = null;
     private Geopoint geopoint;
@@ -90,6 +101,8 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
     private Calendar date = Calendar.getInstance();
     private LogTypeTrackable typeSelected = LogTypeTrackable.getById(Settings.getTrackableAction());
     private Trackable trackable;
+    private TrackableBrand brand;
+    String trackingCode;
 
     TrackableConnector connector;
     private AbstractTrackableLoggingManager loggingManager;
@@ -144,11 +157,14 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState, R.layout.logtrackable_activity);
+        onCreate(savedInstanceState, R.layout.logtrackable_activity);
         ButterKnife.bind(this);
+        createSubscriptions = new CompositeSubscription();
 
         // get parameters
         final Bundle extras = getIntent().getExtras();
+        final Uri uri = AndroidBeam.getUri(getIntent());
+
         if (extras != null) {
             geocode = extras.getString(Intents.EXTRA_GEOCODE);
 
@@ -159,55 +175,98 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
                     geocache = tmpGeocache;
                 }
             }
-            // Display tracking code if we have, and move cursor next
+            // Load Tracking Code
             if (StringUtils.isNotBlank(extras.getString(Intents.EXTRA_TRACKING_CODE))) {
-                trackingEditText.setText(extras.getString(Intents.EXTRA_TRACKING_CODE));
-                Dialogs.moveCursorToEnd(trackingEditText);
+                trackingCode = extras.getString(Intents.EXTRA_TRACKING_CODE);
             }
         }
 
-        // Load Trackable from internal
-        trackable = DataStore.loadTrackable(geocode);
+        // try to get data from URI
+        if (geocode == null && uri != null) {
+            geocode = ConnectorFactory.getTrackableFromURL(uri.toString());
+            trackingCode = ConnectorFactory.getTrackableTrackingCodeFromURL(uri.toString());
 
+            final String uriHost = uri.getHost().toLowerCase(Locale.US);
+            if (uriHost.endsWith("geokrety.org")) {
+                brand = TrackableBrand.GEOKRETY;
+                if (geocode == null && trackingCode != null) {
+                    geocode = trackingCode;
+                }
+            }
+        }
+
+        // no given data
+        if (geocode == null) {
+            showToast(res.getString(R.string.err_tb_display));
+            finish();
+            return;
+        }
+
+        refreshTrackable(geocode);
+    }
+
+    private void refreshTrackable(final String message) {
+        waitDialog = ProgressDialog.show(this, message, res.getString(R.string.trackable_details_loading), true, true);
+
+        // create trackable connector
+        connector = ConnectorFactory.getTrackableConnector(geocode, brand);
+
+        createSubscriptions.add(AppObservable.bindActivity(this, ConnectorFactory.loadTrackable(geocode, null, null, brand)).singleOrDefault(null).subscribe(new Action1<Trackable>() {
+            @Override
+            public void call(final Trackable newTrackable) {
+                if (newTrackable != null && trackingCode != null) {
+                    newTrackable.setTrackingcode(trackingCode);
+                }
+                trackable = newTrackable;
+                // Start loading in background
+                getSupportLoaderManager().initLoader(connector.getTrackableLoggingManagerLoaderId(), null, LogTrackableActivity.this).forceLoad();
+                displayTrackable();
+            }
+        }));
+    }
+
+    private void displayTrackable() {
         if (trackable == null) {
             Log.e("LogTrackableActivity.onCreate, cannot load trackable: " + geocode);
+            if (waitDialog != null) {
+                waitDialog.dismiss();
+            }
+
+            if (StringUtils.isNotBlank(geocode)) {
+                showToast(res.getString(R.string.err_tb_find) + ' ' + geocode + '.');
+            } else {
+                showToast(res.getString(R.string.err_tb_find_that));
+            }
+
             setResult(RESULT_CANCELED);
             finish();
             return;
         }
 
-        if (StringUtils.isNotBlank(trackable.getName())) {
-            setTitle(res.getString(R.string.trackable_touch) + ": " + trackable.getName());
-        } else {
-            setTitle(res.getString(R.string.trackable_touch) + ": " + trackable.getGeocode());
-        }
-
         // We're in LogTrackableActivity, so trackable must be loggable ;)
         if (!trackable.isLoggable()) {
+            if (waitDialog != null) {
+                waitDialog.dismiss();
+            }
             showToast(res.getString(R.string.err_tb_not_loggable));
             finish();
             return;
         }
 
-        // create trackable connector
-        connector = ConnectorFactory.getTrackableConnector(geocode);
+        setTitle(res.getString(R.string.trackable_touch) + ": " + StringUtils.defaultIfBlank(trackable.getGeocode(), trackable.getName()));
 
-        // Start loading in background
-        getSupportLoaderManager().initLoader(connector.getTrackableLoggingManagerLoaderId(), null, this).forceLoad();
-
-        // Show retrieved infos
-        displayTrackable();
-        init();
-        requestKeyboardForLogging();
-    }
-
-    private void displayTrackable() {
-
-        if (StringUtils.isNotBlank(trackable.getName())) {
-            setTitle(res.getString(R.string.trackable_touch) + ": " + trackable.getName());
-        } else {
-            setTitle(res.getString(R.string.trackable_touch) + ": " + trackable.getGeocode());
+        // Display tracking code if we have, and move cursor next
+        if (trackingCode != null) {
+            trackingEditText.setText(trackingCode);
+            Dialogs.moveCursorToEnd(trackingEditText);
         }
+        init();
+
+        if (waitDialog != null) {
+            waitDialog.dismiss();
+        }
+
+        requestKeyboardForLogging();
     }
 
     @Override
