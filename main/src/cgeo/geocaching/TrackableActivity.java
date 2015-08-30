@@ -95,6 +95,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
     private String guid = null;
     private String id = null;
     private String geocache = null;
+    private String trackingCode = null;
     private TrackableBrand brand = null;
     private LayoutInflater inflater = null;
     private ProgressDialog waitDialog = null;
@@ -133,6 +134,8 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
             id = extras.getString(Intents.EXTRA_ID);
             geocache = extras.getString(Intents.EXTRA_GEOCACHE);
             brand = TrackableBrand.getById(extras.getInt(Intents.EXTRA_BRAND));
+            trackingCode = extras.getString(Intents.EXTRA_TRACKING_CODE);
+
         }
 
         // try to get data from URI
@@ -212,6 +215,9 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
         createSubscriptions.add(AppObservable.bindActivity(this, loadTrackable(geocode, guid, id, brand)).singleOrDefault(null).subscribe(new Action1<Trackable>() {
             @Override
             public void call(final Trackable trackable) {
+                if (trackable != null && trackingCode != null) {
+                    trackable.setTrackingcode(trackingCode);
+                }
                 TrackableActivity.this.trackable = trackable;
                 displayTrackable();
                 // reset imagelist
