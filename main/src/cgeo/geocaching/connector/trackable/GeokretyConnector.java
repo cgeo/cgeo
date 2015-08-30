@@ -46,7 +46,7 @@ public class GeokretyConnector extends AbstractTrackableConnector {
     }
 
     @Override
-    public boolean canHandleTrackable(final String geocode) {
+    public boolean canHandleTrackable(@Nullable final String geocode) {
         return geocode != null && PATTERN_GK_CODE.matcher(geocode).matches();
     }
 
