@@ -7,8 +7,6 @@ import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.AbstractViewPagerActivity;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.trackable.TrackableBrand;
-import cgeo.geocaching.connector.trackable.TrackableConnector;
-import cgeo.geocaching.connector.trackable.TravelBugConnector;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.location.Units;
 import cgeo.geocaching.network.AndroidBeam;
@@ -26,7 +24,6 @@ import cgeo.geocaching.ui.logs.TrackableLogsViewCreator;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.HtmlUtils;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.RxUtils;
 import cgeo.geocaching.utils.UnknownTagsHandler;
 
 import org.apache.commons.collections4.CollectionUtils;
@@ -35,15 +32,11 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 import org.eclipse.jdt.annotation.Nullable;
 
-import rx.Observable;
 import rx.Subscription;
 import rx.android.app.AppObservable;
 import rx.android.view.OnClickEvent;
 import rx.android.view.ViewObservable;
 import rx.functions.Action1;
-import rx.functions.Func0;
-import rx.functions.Func1;
-import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
 import rx.subscriptions.Subscriptions;
 
@@ -212,7 +205,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
 
     private void refreshTrackable(final String message) {
         waitDialog = ProgressDialog.show(this, message, res.getString(R.string.trackable_details_loading), true, true);
-        createSubscriptions.add(AppObservable.bindActivity(this, loadTrackable(geocode, guid, id, brand)).singleOrDefault(null).subscribe(new Action1<Trackable>() {
+        createSubscriptions.add(AppObservable.bindActivity(this, ConnectorFactory.loadTrackable(geocode, guid, id, brand)).singleOrDefault(null).subscribe(new Action1<Trackable>() {
             @Override
             public void call(final Trackable trackable) {
                 if (trackable != null && trackingCode != null) {
@@ -263,49 +256,6 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
             menu.findItem(R.id.menu_refresh_trackable).setVisible(true);
         }
         return super.onPrepareOptionsMenu(menu);
-    }
-
-    private static Observable<Trackable> loadTrackable(final String geocode, final String guid, final String id, final TrackableBrand brand) {
-        if (StringUtils.isEmpty(geocode)) {
-            // Only solution is GC search by uid
-            return RxUtils.deferredNullable(new Func0<Trackable>() {
-                @Override
-                public Trackable call() {
-                    return TravelBugConnector.getInstance().searchTrackable(geocode, guid, id);
-                }
-            }).subscribeOn(RxUtils.networkScheduler);
-        }
-
-        // We query all the connectors that can handle the trackable in parallel as well as the local storage.
-        // We return the first positive result coming from a connector, or, if none, the result of loading from
-        // the local storage.
-
-        final Observable<Trackable> fromNetwork =
-                Observable.from(ConnectorFactory.getTrackableConnectors()).filter(new Func1<TrackableConnector, Boolean>() {
-                    @Override
-                    public Boolean call(final TrackableConnector trackableConnector) {
-                        return trackableConnector.canHandleTrackable(geocode, brand);
-                    }
-                }).flatMap(new Func1<TrackableConnector, Observable<Trackable>>() {
-                    @Override
-                    public Observable<Trackable> call(final TrackableConnector trackableConnector) {
-                        return RxUtils.deferredNullable(new Func0<Trackable>() {
-                            @Override
-                            public Trackable call() {
-                                return trackableConnector.searchTrackable(geocode, guid, id);
-                            }
-                        }).subscribeOn(RxUtils.networkScheduler);
-                    }
-                });
-
-        final Observable<Trackable> fromLocalStorage = RxUtils.deferredNullable(new Func0<Trackable>() {
-            @Override
-            public Trackable call() {
-                return DataStore.loadTrackable(geocode);
-            }
-        }).subscribeOn(Schedulers.io());
-
-        return fromNetwork.concatWith(fromLocalStorage).take(1);
     }
 
     public void displayTrackable() {
