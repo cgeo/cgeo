@@ -632,6 +632,7 @@
                 <data android:host="geokrety.org" />
                 <data android:host="www.geokrety.org" />
                 <data android:pathPrefix="/konkret.php" />
+                <data android:pathPrefix="/m/qr.php" />
             </intent-filter>
 
             <!-- GeoKretyMap.org -->
