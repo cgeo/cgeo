@@ -79,7 +79,11 @@
   <string name="log_tb_archived">Archivován</string>
   <string name="log_save">Uložit offline</string>
   <string name="log_saving">Odesílání Logu…</string>
-  <string name="log_saving_and_uploading">Odesílání Logu a nahrávání obrázku…</string>
+  <string name="log_posting_log">Odesílání logu…</string>
+  <string name="log_posting_twitter">Odesílání tweetu…</string>
+  <string name="log_posting_gcvote">Odesílání GCVote…</string>
+  <string name="log_posting_image">Odesílání obrázku…</string>
+  <string name="log_posting_generic_trackable">Odesílání %1$s %2$s/%3$s</string>
   <string name="log_clear">Vyčistit</string>
   <string name="log_post_not_possible">Probíhá stahování dat…\nProsím, zkus to znovu za chvíli nebo zkontroluj připojení k Internetu.</string>
   <string name="log_post_geocode_missing">Geokód chybí…</string>
@@ -212,6 +216,10 @@
   <string name="warn_no_pocket_query_found">V síti nebyl nalezen žádný Databázový požadavek.</string>
   <string name="info_log_posted">c:geo úspěšně zaslalo tvůj Log.</string>
   <string name="info_log_saved">c:geo úspěšně uložilo tvůj Log.</string>
+  <string name="info_log_post_failed">Odeslání logu se nezdařilo.</string>
+  <string name="info_log_post_failed_reason">Důvod: %s</string>
+  <string name="info_log_post_retry">Opakovat</string>
+  <string name="info_log_post_save">Uložit offline</string>
   <string name="info_log_cleared">Zápis byl vyprázdněn.</string>
   <string name="info_log_type_changed">Typ Logu byl změněn!</string>
   <string name="info_select_logimage_cancelled">Výběr nebo focení obrázku pro Log bylo zrušeno.</string>
@@ -696,6 +704,7 @@
   <string name="cache_menu_navigate">Navigovat</string>
   <string name="cache_menu_navigation_drive">Navigace (řízení)</string>
   <string name="cache_menu_navigation_walk">Navigace (chůze)</string>
+  <string name="cache_menu_navigation_transit">Navigace (Transit)</string>
   <string name="cache_menu_navigation_bike">Navigace (kolo)</string>
   <string name="cache_menu_maps_directions">Směry podle Google Maps</string>
   <string name="cache_menu_sygic_walk">Sygic (chůze)</string>

@@ -80,7 +80,6 @@
   <string name="log_tb_archived">Gearchiveerd</string>
   <string name="log_save">Off line opslaan</string>
   <string name="log_saving">Log opslaan…</string>
-  <string name="log_saving_and_uploading">Verzenden van log en uploaden foto…</string>
   <string name="log_posting_log">Posten log…</string>
   <string name="log_posting_twitter">Posten tweet…</string>
   <string name="log_posting_gcvote">Posten GCVote…</string>

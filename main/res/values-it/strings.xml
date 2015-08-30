@@ -80,7 +80,6 @@
   <string name="log_tb_archived">Archiviato</string>
   <string name="log_save">Salva offline</string>
   <string name="log_saving">Invio log…</string>
-  <string name="log_saving_and_uploading">Invio log e immagine…</string>
   <string name="log_clear">Azzera</string>
   <string name="log_post_not_possible">Download dei dati in corso...\nRiprovare tra alcuni secondi o controllare la connessione a internet.</string>
   <string name="log_post_geocode_missing">Geocode mancante…</string>

@@ -80,7 +80,11 @@
   <string name="log_tb_archived">Archivado</string>
   <string name="log_save">Guardar sin conexión</string>
   <string name="log_saving">Enviando registro…</string>
-  <string name="log_saving_and_uploading">Enviando registro y subiendo imagen…</string>
+  <string name="log_posting_log">Publicando registro…</string>
+  <string name="log_posting_twitter">Publicando tweet…</string>
+  <string name="log_posting_gcvote">Publicando GCVote…</string>
+  <string name="log_posting_image">Publicando imagen…</string>
+  <string name="log_posting_generic_trackable">Publicando %1$s %2$s/%3$s</string>
   <string name="log_clear">Limpiar</string>
   <string name="log_post_not_possible">Descargando datos…\nPor favor, inténtalo de nuevo en unos segundos o comprueba tu conexión a internet.</string>
   <string name="log_post_geocode_missing">Falta el geocódigo…</string>
@@ -213,6 +217,9 @@
   <string name="warn_no_pocket_query_found">No se ha encontrado ninguna Pocket Query en Geocaching.com.</string>
   <string name="info_log_posted">c:geo envió el registro sin problemas.</string>
   <string name="info_log_saved">c:geo guardó el registro sin problemas.</string>
+  <string name="info_log_post_failed">Fallo al publicar tu registro.</string>
+  <string name="info_log_post_retry">Reintentar</string>
+  <string name="info_log_post_save">Guardar sin conexión</string>
   <string name="info_log_cleared">Registro borrado.</string>
   <string name="info_log_type_changed">¡El tipo de registro ha sido cambiado!</string>
   <string name="info_select_logimage_cancelled">La selección de imagen  o captura ha sido cancelada.</string>
@@ -369,10 +376,12 @@
   <string name="settings_title_logging">Registro</string>
   <string name="settings_summary_logging">Configura tu firma y las opciones de registro.</string>
   <string name="settings_title_map">Mapa</string>
+  <string name="settings_summary_map">Elige proveedor de mapas, detalles, y opciones de mapas sin conexión.</string>
   <string name="settings_title_map_data">Datos del mapa</string>
   <string name="settings_title_map_content">Contenido del mapa</string>
   <string name="settings_title_basicmembers">Opciones para miembros básicos</string>
   <string name="settings_title_navigation">Navegación</string>
+  <string name="settings_summary_navigation">Elige tus métodos de navegación preferidos y apps de navegación externas.</string>
   <string name="settings_title_system">Sistema</string>
   <string name="settings_summary_system">Realiza y restaura copias de seguridad, configura los directorios de la aplicación y otros ajustes del sistema.</string>
   <string name="settings_title_navigation_menu">Menú de navegación</string>
@@ -423,6 +432,7 @@
   <string name="init_authorization_credential_username">Usuario</string>
   <string name="init_authorization_credential_password">Contraseña</string>
   <string name="settings_service_active">Activo</string>
+  <string name="settings_navigation_disabled">Esta app no se encuentra instalada</string>
   <string name="init_signature">Firma</string>
   <string name="init_template_help">Cadenas de comandos como [NAME] se expanderán más tarde cuando se usen estas plantillas.</string>
   <string name="init_signature_template_button">Insertar plantilla</string>
@@ -704,6 +714,7 @@
   <string name="cache_menu_vote">Votar</string>
   <string name="cache_menu_checker">Abrir Geochecker</string>
   <string name="cache_menu_ignore">Ignorar caché</string>
+  <string name="ignore_confirm_message">Ignorar un caché significa que este caché no aparecerá más cuando cargues datos de geocaching.com. Sólo podrás verlo de nuevo si dejas de ignorarlo desde la página web.</string>
   <string name="cache_status">Estado</string>
   <string name="cache_status_offline_log">Registro guardado</string>
   <string name="cache_status_found">Encontrado</string>
@@ -939,6 +950,7 @@
   <string name="helper_wear_title">c:geo Wear</string>
   <string name="helper_wear_description">c:geo Wear es un complemento para c:geo que te permite navegar a los cachés usando tu smartwatch Android Wear.</string>
   <string name="helper_where_you_go_title">WhereYouGo</string>
+  <string name="helper_where_you_go_description">WhereYouGo te permite ejecutar y buscar cachés de tipo Whereigo. c:geo puede iniciar directamente la descarga de los cartuchos a esta aplicación.</string>
   <string name="addon_missing_title">No se encuentra el complemento</string>
   <string name="addon_download_prompt">Obtenlo ahora desde Google Play.</string>
   <string name="export">Exportar</string>

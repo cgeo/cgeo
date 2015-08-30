@@ -80,8 +80,7 @@
   <string name="log_tb_archived">Archiviert</string>
   <string name="log_save">Offline speichern</string>
   <string name="log_saving">Log wird gesendet…</string>
-  <string name="log_saving_and_uploading">Log und Bild werden gesendet…</string>
-  <string name="log_posting_log">Sende log…</string>
+  <string name="log_posting_log">Sende Log…</string>
   <string name="log_posting_twitter">Sende tweet…</string>
   <string name="log_posting_gcvote">Sende Bewertung…</string>
   <string name="log_posting_image">Sende Bild…</string>
@@ -701,6 +700,7 @@
   <string name="cache_menu_navigate">Navigieren</string>
   <string name="cache_menu_navigation_drive">Navigation (Fahren)</string>
   <string name="cache_menu_navigation_walk">Navigation (Gehen)</string>
+  <string name="cache_menu_navigation_transit">Navigation (ÖPNV)</string>
   <string name="cache_menu_navigation_bike">Navigation (Fahrrad)</string>
   <string name="cache_menu_maps_directions">Google Maps Route</string>
   <string name="cache_menu_sygic_walk">Sygic (Gehen)</string>

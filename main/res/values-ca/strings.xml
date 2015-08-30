@@ -80,7 +80,6 @@
   <string name="log_tb_archived">Arxivat</string>
   <string name="log_save">Guarda-ho  fora de línia</string>
   <string name="log_saving">S\'està enviant el registre…</string>
-  <string name="log_saving_and_uploading">S\'està enviant el registre i pujant la imatge…</string>
   <string name="log_clear">Esborra</string>
   <string name="log_post_not_possible">Descàrrega de dades en procés...\nProva una altra vegada en uns segons o comprova la connexió a internet.</string>
   <string name="log_post_geocode_missing">Falta el geocodi...</string>

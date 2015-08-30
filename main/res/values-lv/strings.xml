@@ -80,7 +80,6 @@
   <string name="log_tb_archived">Arhivēts</string>
   <string name="log_save">Saglabāt bezsaistes režīmā</string>
   <string name="log_saving">Apmeklējuma ieraksta nosūtīšana…</string>
-  <string name="log_saving_and_uploading">Pieraksta nosūtīšana un bildes augšupielāde…</string>
   <string name="log_clear">Notīrīt</string>
   <string name="log_post_not_possible">Datu lejupielādēšana ir procesā...\nPlease mēģiniet vēlreiz pēc dažām sekundēm vai pārbaudiet interneta savienojumu.</string>
   <string name="log_post_geocode_missing">Pietrūkst geo kods…</string>

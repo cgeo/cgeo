@@ -80,7 +80,6 @@
   <string name="log_tb_archived">Arkiverad</string>
   <string name="log_save">Spara offline</string>
   <string name="log_saving">Sparar logg…</string>
-  <string name="log_saving_and_uploading">Sparar logg och laddar upp bild…</string>
   <string name="log_clear">Rensa</string>
   <string name="log_post_not_possible">Nerladdning av data pågår…\nFörsök igen om några sekunder eller kontrollera din Internetanslutning.</string>
   <string name="log_post_geocode_missing">Geocode saknas…</string>

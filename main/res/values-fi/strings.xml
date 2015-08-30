@@ -79,7 +79,6 @@
   <string name="log_tb_archived">Arkistoitu</string>
   <string name="log_save">Offline tallennus</string>
   <string name="log_saving">Lähetetään merkintää…</string>
-  <string name="log_saving_and_uploading">Lähetetään merkintää ja kuvaa…</string>
   <string name="log_clear">Tyhjennä</string>
   <string name="log_add">Lisää</string>
   <string name="log_repeat">Toista edellinen loki</string>
