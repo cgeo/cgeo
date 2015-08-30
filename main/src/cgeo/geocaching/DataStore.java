@@ -1425,9 +1425,9 @@ public class DataStore {
                 insertSpoiler.bindString(1, geocode);
                 insertSpoiler.bindLong(2, timestamp);
                 insertSpoiler.bindString(3, spoiler.getUrl());
-                insertSpoiler.bindString(4, spoiler.getTitle());
+                insertSpoiler.bindString(4, StringUtils.defaultIfBlank(spoiler.title, ""));
                 final String description = spoiler.getDescription();
-                if (description != null) {
+                if (StringUtils.isNotBlank(description)) {
                     insertSpoiler.bindString(5, description);
                 } else {
                     insertSpoiler.bindNull(5);
@@ -1467,7 +1467,7 @@ public class DataStore {
                 final SQLiteStatement insertImage = PreparedStatement.INSERT_LOG_IMAGE.getStatement();
                 for (final Image img : log.getLogImages()) {
                     insertImage.bindLong(1, logId);
-                    insertImage.bindString(2, img.getTitle());
+                    insertImage.bindString(2, StringUtils.defaultIfBlank(img.title, ""));
                     insertImage.bindString(3, img.getUrl());
                     insertImage.executeInsert();
                 }
