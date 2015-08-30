@@ -182,6 +182,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
                 public void onClick(final View view) {
                     final Intent trackablesIntent = new Intent(LogCacheActivity.this, TrackableActivity.class);
                     trackablesIntent.putExtra(Intents.EXTRA_GEOCODE, tbCode);
+                    trackablesIntent.putExtra(Intents.EXTRA_BRAND, tb.brand.getId());
                     startActivity(trackablesIntent);
                 }
             });
