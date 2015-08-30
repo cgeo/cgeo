@@ -323,6 +323,21 @@
             android:name=".LogTrackableActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/trackable_touch" >
+
+            <!-- GeoKrety.org QRCode-->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="http" />
+                <data android:scheme="https" />
+                <data android:host="geokrety.org" />
+                <data android:host="www.geokrety.org" />
+                <data android:pathPrefix="/m/qr.php" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".ImagesActivity"
