@@ -114,7 +114,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState, R.layout.viewpager_activity);
+        onCreate(savedInstanceState, R.layout.viewpager_activity);
         createSubscriptions = new CompositeSubscription();
 
         // set title in code, as the activity needs a hard coded title due to the intent filters
@@ -217,11 +217,11 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
         waitDialog = ProgressDialog.show(this, message, res.getString(R.string.trackable_details_loading), true, true);
         createSubscriptions.add(AppObservable.bindActivity(this, ConnectorFactory.loadTrackable(geocode, guid, id, brand)).singleOrDefault(null).subscribe(new Action1<Trackable>() {
             @Override
-            public void call(final Trackable trackable) {
-                if (trackable != null && trackingCode != null) {
-                    trackable.setTrackingcode(trackingCode);
+            public void call(final Trackable newTrackable) {
+                if (newTrackable != null && trackingCode != null) {
+                    newTrackable.setTrackingcode(trackingCode);
                 }
-                TrackableActivity.this.trackable = trackable;
+                trackable = newTrackable;
                 displayTrackable();
                 // reset imagelist
                 imagesList = null;
@@ -428,12 +428,12 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
             }
 
             // trackable name
-            final TextView name = details.add(R.string.trackable_name, StringUtils.isNotBlank(trackable.getName()) ? Html.fromHtml(trackable.getName()).toString() : res.getString(R.string.trackable_unknown)).right;
-            addContextMenu(name);
+            final TextView nameTxtView = details.add(R.string.trackable_name, StringUtils.isNotBlank(trackable.getName()) ? Html.fromHtml(trackable.getName()).toString() : res.getString(R.string.trackable_unknown)).right;
+            addContextMenu(nameTxtView);
 
             // missing status
             if (trackable.isMissing()) {
-                name.setPaintFlags(name.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+                nameTxtView.setPaintFlags(nameTxtView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
             }
 
             // trackable type
