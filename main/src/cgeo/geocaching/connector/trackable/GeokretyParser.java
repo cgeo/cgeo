@@ -186,6 +186,29 @@ public class GeokretyParser {
             final String text = StringUtils.trim(new String(ch, start, length));
             content = isMessage ? StringUtils.join(content, text) : text;
         }
+
+        /**
+         * Convert states from GK to c:geo spotted types. See: http://geokrety.org/api.php
+         *
+         * @param state
+         *          the GK state read from xml
+         * @return
+         *          The spotted types as defined in Trackables
+         */
+        private static int getSpottedType(final int state) {
+            switch (state) {
+                case 0: // Dropped
+                case 3: // Seen in
+                    return Trackable.SPOTTED_CACHE;
+                case 1: // Grabbed from
+                case 5: // Visiting
+                    return Trackable.SPOTTED_TRAVELLING;
+                case 4: // Archived
+                    return Trackable.SPOTTED_ARCHIVED;
+                //case 2: // A comment (however this case doesn't exists in db)
+            }
+            return Trackable.SPOTTED_UNKNOWN;
+        }
     }
 
     @NonNull
@@ -287,29 +310,6 @@ public class GeokretyParser {
                 return CgeoApplication.getInstance().getString(R.string.geokret_type_post);
         }
         return null;
-    }
-
-    /**
-     * Convert states from GK to c:geo spotted types. See: http://geokrety.org/api.php
-     *
-     * @param state
-     *          the GK state read from xml
-     * @return
-     *          The spotted types as defined in Trackables
-     */
-    private static int getSpottedType(final int state) {
-        switch (state) {
-            case 0: // Dropped
-            case 3: // Seen in
-                return Trackable.SPOTTED_CACHE;
-            case 1: // Grabbed from
-            case 5: // Visiting
-                return Trackable.SPOTTED_TRAVELLING;
-            case 4: // Archived
-                return Trackable.SPOTTED_ARCHIVED;
-            //case 2: // A comment (however this case doesn't exists in db)
-        }
-        return Trackable.SPOTTED_UNKNOWN;
     }
 
     @Nullable
