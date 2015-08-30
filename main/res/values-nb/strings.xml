@@ -80,7 +80,6 @@
   <string name="log_tb_archived">Arkivert</string>
   <string name="log_save">Lagre offline</string>
   <string name="log_saving">Lagrer logg…</string>
-  <string name="log_saving_and_uploading">Sender logg og laster opp bilde…</string>
   <string name="log_clear">Tøm</string>
   <string name="log_post_not_possible">Nedlastning pågår…\nPrøv igjen i noen sekunder eller kontroller Internett-tilkoblingen.</string>
   <string name="log_post_geocode_missing">GC-kode mangler…</string>

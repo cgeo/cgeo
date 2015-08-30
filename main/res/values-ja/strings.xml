@@ -80,7 +80,6 @@
   <string name="log_tb_archived">アーカイブされた</string>
   <string name="log_save">オフライン保存</string>
   <string name="log_saving">ログを送信中…</string>
-  <string name="log_saving_and_uploading">ログと画像を送信中…</string>
   <string name="log_clear">消去</string>
   <string name="log_date_future_not_allowed">ログに将来の日付けを選べません</string>
   <string name="log_add">挿入</string>

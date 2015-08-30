@@ -80,7 +80,6 @@
   <string name="log_tb_archived">Archivé</string>
   <string name="log_save">Enregistrer hors-ligne</string>
   <string name="log_saving">Enregistrement en cours…</string>
-  <string name="log_saving_and_uploading">Envoi de la visite et de l\'image…</string>
   <string name="log_posting_log">Envoi de la visite…</string>
   <string name="log_posting_twitter">Envoi du Tweet…</string>
   <string name="log_posting_gcvote">Envoi sur GCVote…</string>

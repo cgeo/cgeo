@@ -50,7 +50,7 @@
   <string name="log_dnf">Nem találtam meg</string>
   <string name="log_note">Megjegyzés</string>
   <string name="log_published">Publikálva</string>
-  <string name="log_enabled">Engedélyezve</string>
+  <string name="log_enabled">Engedélyezés</string>
   <string name="log_disabled">Letiltás</string>
   <string name="log_attend">Részt veszek</string>
   <string name="log_attended">Részt vettem</string>
@@ -80,7 +80,6 @@
   <string name="log_tb_archived">Archiválva</string>
   <string name="log_save">Offline mentés</string>
   <string name="log_saving">Log mentése…</string>
-  <string name="log_saving_and_uploading">Log beküldése és kép feltöltése…</string>
   <string name="log_posting_log">Log küldése…</string>
   <string name="log_posting_twitter">Twittelés…</string>
   <string name="log_posting_gcvote">Értékelés küldése…</string>
@@ -133,7 +132,7 @@
   <string name="err_none">Ok</string>
   <string name="err_parse">Hiba a belépőoldalon</string>
   <string name="err_server">Hiba a kapcsolatban a geocaching.com-mal (a szerver vagy a kapcsolat nem működik?)</string>
-  <string name="err_server_ec">Hiba a kapcsolatban a geocaching.com-mal (a szerver vagy a kapcsolat nem működik).</string>
+  <string name="err_server_ec">Hiba a kapcsolatban az extremcaching.com-mal (a szerver vagy a kapcsolat nem működik?)</string>
   <string name="err_server_gk">Nem lehet kapcsolódni a GeoKrety.org-hoz. A weboldal ideglenesen nem elérhető vagy az internetkapcsolatod nem működik.</string>
   <string name="err_login">Nincs mentett belépési adat</string>
   <string name="err_login_failed_toast">Sajnos a c:geo nem tud belépni. A c:geo hálózat nélküli módban fut. Ellenőrizd a belépési adataid a beállításoknál vagy engedélyezd az internetkapcsolatot.</string>
@@ -143,7 +142,7 @@
   <string name="err_missing_auth">Nincs megadva belépési név és/vagy jelszó.</string>
   <string name="err_wrong">Rossz belépési adatok</string>
   <string name="err_maintenance">A geocaching.com karbantartás miatt elérhetetlen. A c:geo offline módban működik mentett ládákkal.</string>
-  <string name="err_license">Nem fogadtad el a geocaching.com licenszmegállapodását, így a c:geo nem tudja betölteni a ládák koordinátáit.</string>
+  <string name="err_license">Nem fogadtad el a geocaching.com licencmegállapodását, így a c:geo nem tudja betölteni a ládák koordinátáit.</string>
   <string name="err_unvalidated_account">Előbb aktiválnod kell a fiókod a geocaching.com honlapján.</string>
   <string name="err_unpublished">A kért geoládát eltávolították.</string>
   <string name="err_premium_only">Ez a láda csak a geocaching.com prémium felhasználói számára hozzáférhető.</string>
@@ -171,11 +170,11 @@
   <string name="err_favorite_failed">Kedvenc állapotmódosítása nem sikerült.</string>
   <string name="err_select_logimage_failed">Kép kiválasztása sikertelen.</string>
   <string name="err_acquire_image_failed">A kép készítése nem sikerült.</string>
-  <string name="err_tb_display">Sajnáljuk, a c:geo nem tudja megjeleníteni a követhető tárgyat. Biztos, hogy ez egy követhető tárgy?</string>
-  <string name="err_tb_details_open">Sajnáljuk, a c:geo nem tudja megnyitni a követhető tárgy leírását.</string>
-  <string name="err_tb_not_loggable">Ezt a követhető elemet nem lehet logolni.</string>
-  <string name="err_tb_find">Sajnáljuk, a c:geo nem találja a követhető tárgyat.</string>
-  <string name="err_tb_find_that">Sajnáljuk, a c:geo nem találja azt a követhető tárgyat.</string>
+  <string name="err_tb_display">Sajnáljuk, a c:geo nem tudja megjeleníteni az utazót. Biztos, hogy ez egy utazó?</string>
+  <string name="err_tb_details_open">Sajnáljuk, a c:geo nem tudja megnyitni az utazó leírását.</string>
+  <string name="err_tb_not_loggable">Ezt az utazót nem lehet logolni.</string>
+  <string name="err_tb_find">Sajnáljuk, a c:geo nem találja az utazót.</string>
+  <string name="err_tb_find_that">Sajnáljuk, a c:geo nem találja azt az utazót.</string>
   <string name="err_waypoint_cache_unknown">Sajnáljuk, a c:geo nem tudja melyik ládához szeretnéd hozzáadni az útpontot.</string>
   <string name="err_waypoint_add_failed">Sajnáljuk, a c:geo nem tudta hozzáadni az útpontodat.</string>
   <string name="err_point_unknown_position">Sajnáljuk, a c:geo nem tudja felismerni hol vagy.</string>
@@ -207,7 +206,7 @@
   <string name="warn_search_help_gccode">Írd be a láda kódját! Például \"GC1VCAZ\".</string>
   <string name="warn_search_help_keyword">Írj be néhány szót a keresett láda nevéből!</string>
   <string name="warn_search_help_user">Írd be a felhasználó nevét a geocaching.com oldalról!</string>
-  <string name="warn_search_help_tb">Írd be a követhető tárgy kódját! Például \"TB29QMZ\".</string>
+  <string name="warn_search_help_tb">Írd be az utazó kódját! Például \"TB29QMZ\".</string>
   <string name="warn_log_text_fill">Kérlek, írj szöveget a bejegyzéshez!</string>
   <string name="warn_load_images">Sajnáljuk, a c:geo nem tudta betölteni a képeket.</string>
   <string name="warn_invalid_mapfile">A kiválasztott térképfájl nem felel meg a mapsforge v0.3.0 formátumnak.\nAz offline térképek nem elérhetőék.</string>
@@ -320,7 +319,7 @@
   <string name="caches_filter_title">Szűrés eszerint</string>
   <string name="caches_filter_size">Méret</string>
   <string name="caches_filter_type">Típus</string>
-  <string name="caches_filter_track">Követhető tárgyak</string>
+  <string name="caches_filter_track">Utazók a ládában</string>
   <string name="caches_filter_clear">Szűrők törlése</string>
   <string name="caches_filter_modified">Módosított koordináták</string>
   <string name="caches_filter_offline_log">Offline log</string>
@@ -330,7 +329,7 @@
   <string name="caches_filter_popularity">Kedvencek</string>
   <string name="caches_filter_popularity_ratio">Kedvencek [%]</string>
   <string name="caches_filter_personal_data">Személyes adatok</string>
-  <string name="caches_filter_rating">Értékelés</string>
+  <string name="caches_filter_rating">Értékelték</string>
   <string name="caches_filter_own_rating">Saját értékelés</string>
   <string name="caches_removing_from_history">Eltávolítás a Előzményekből…</string>
   <string name="caches_clear_offlinelogs">Offline logok törlése</string>
@@ -361,8 +360,8 @@
   <string name="about_donate">Adományozás</string>
   <string name="about_donation_more">Adomány\na fejlesztéshez</string>
   <string name="about_contributors">Közreműködők</string>
-  <string name="about_license">Licensz</string>
-  <string name="about_apache_license"><a href=""> Apache License, 2.0 verzió</a></string>
+  <string name="about_license">Licenc</string>
+  <string name="about_apache_license"><a href="">Apache licenc, 2.0 verzió</a></string>
   <string name="about_help">Segítség</string>
   <string name="about_system_include">Kérlek, csatold az alábbi rendszerinformációkat, ha hibajelentést küldesz, vagy további információt kérsz a c:geo-ról:</string>
   <string name="changelog_github">Összes változtatás listázása</string>
@@ -425,7 +424,7 @@
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_gcvote_password_description">Ládák értékeléséhez itt add meg a GCVote jelszavad és kövesd az utasításokat a GCVote.com-on!</string>
   <string name="err_gcvote_send_rating">Az értélkelés elküldése sikertelen. Ellenőrizd a GCVote jelszavad a beállításoknál! Próbálkozz a törlésével!</string>
-  <string name="gcvote_sent">Az értékelés sikeresen elment</string>
+  <string name="gcvote_sent">Értékelés sikeresen elküldve</string>
   <string name="init_twitter">Twitter</string>
   <string name="settings_activate_twitter">Aktiválás</string>
   <string name="init_username">Felhasználónév</string>
@@ -520,8 +519,8 @@
   <string name="init_maptrail">A nyomvonal mutatása a térképen</string>
   <string name="init_summary_maptrail">A nyomvonal mutatása a térképen</string>
   <string name="init_share_after_export">A megosztás menü megnyitása GPX exportálás után</string>
-  <string name="init_trackautovisit">Követhető tárgyak logolása</string>
-  <string name="init_summary_trackautovisit">A követhető tárgyak automatikus \"Látogatás\" logolása</string>
+  <string name="init_trackautovisit">Utazók logolása</string>
+  <string name="init_summary_trackautovisit">Utazók automatikus \"Látogatás\" logolása</string>
   <string name="init_sigautoinsert">Aláírás automatikus beillesztése</string>
   <string name="init_loaddirectionimg">Irányjelzős kép betöltése</string>
   <string name="init_summary_loaddirectionimg">Irányjelzős kép betöltése, ha szükséges</string>
@@ -568,7 +567,7 @@
   <string name="settings_information">További információk</string>
   <string name="settings_advanced">Haladó beállítások</string>
   <string name="settings_twitter_cache_message">Twitter üzenet megtalált ládához</string>
-  <string name="settings_twitter_trackable_message">Twitter üzenet megtalált követhető tárgyhoz</string>
+  <string name="settings_twitter_trackable_message">Twitter üzenet megtalált utazóhoz</string>
   <string name="init_ec_icons">Térkép ikonok</string>
   <string name="settings_ec_icons_other">Saját stílus</string>
   <string name="settings_ec_icons_oc">OC stílusú ládajelölők</string>
@@ -701,6 +700,7 @@
   <string name="cache_menu_navigate">Navigáció</string>
   <string name="cache_menu_navigation_drive">Autós navigáció</string>
   <string name="cache_menu_navigation_walk">Gyalogos navigáció</string>
+  <string name="cache_menu_navigation_transit">Tömegközlekedés</string>
   <string name="cache_menu_navigation_bike">Biciklis navigáció</string>
   <string name="cache_menu_maps_directions">Google Térkép Útvonalak</string>
   <string name="cache_menu_sygic_walk">Sygic (séta)</string>
@@ -735,8 +735,8 @@
   <string name="ignore_confirm_message">Egy láda mellőzése azt jelenti, hogy a láda soha többé nem fog letöltődni a geocaching.com-ról. Csak akkor láthatod ismét ezt a ládát, ha visszavonod a mellőzését a geocaching.com-on.</string>
   <string name="cache_status">Állapot</string>
   <string name="cache_status_offline_log">Mentett bejegyzés</string>
-  <string name="cache_status_found">Megtalált</string>
-  <string name="cache_not_status_found">Nem talált</string>
+  <string name="cache_status_found">Megtaláltam</string>
+  <string name="cache_not_status_found">Nem találtam meg</string>
   <string name="cache_never_found">Szűz láda</string>
   <string name="cache_status_archived">Archivált</string>
   <string name="cache_status_disabled">Letiltott</string>
@@ -766,7 +766,7 @@
   <string name="cache_coordinates_no">Ennek a ládának nincsenek koordinátái.</string>
   <string name="cache_clear_history">Előzmények törlése</string>
   <string name="cache_remove_from_history">Eltávolítás az előzményekből</string>
-  <string name="cache_license">Licensz</string>
+  <string name="cache_license">Licenc</string>
   <string name="cache_image">Kép</string>
   <string name="cache_image_open_file">Megnyitás fájlként</string>
   <string name="cache_image_open_browser">Megnyitás böngészőben</string>
@@ -871,7 +871,7 @@
   <string name="map_strategy_detailed">Részletes</string>
   <string name="live_map_notification">A koordináták pontatlanok lehetnek az élő térképen. A vélhetően pontatlan koordinátákat narancssárga kör jelöli.\nA láda részleteinek megnyitása vagy a láda offline mentése mindig pontos koordinátákkal történik.\n\nTovábbi információ található az alkalmazás \"A c:geo-ról\" oldalán.</string>
   <string name="search_bar_hint">Ládák keresése</string>
-  <string name="search_bar_desc">Ládák (geokód, kulcsszó), Követhető tárgyak (TB-kód)</string>
+  <string name="search_bar_desc">Ládák (geokód, kulcsszó), utazók (követőkód)</string>
   <string name="search_coordinates">Koordináták</string>
   <string name="search_coordinates_button">Keresés koordinátákkal</string>
   <string name="search_address">Cím</string>
@@ -887,9 +887,9 @@
   <string name="search_hbu">Tulajdonos</string>
   <string name="search_hbu_prefill">Tulajdonos</string>
   <string name="search_hbu_button">Keresés tulajdonos neve alapján</string>
-  <string name="search_tb">Követhető tárgy</string>
-  <string name="search_tb_hint">Követhető tárgy azonosítója</string>
-  <string name="search_tb_button">Követhető tárgy keresése</string>
+  <string name="search_tb">Utazó</string>
+  <string name="search_tb_hint">Utazó azonosítója</string>
+  <string name="search_tb_button">Utazó keresése</string>
   <string name="search_destination">Cél</string>
   <string name="search_direction_rel">Innen</string>
   <string name="search_address_started">Helyek keresése</string>
@@ -898,8 +898,8 @@
   <string name="search_pocket_title">Pocket lekérdezés</string>
   <string name="search_pocket_loading">Pocket lekérdezések listájának betöltése</string>
   <string name="search_pocket_select">Válassz pocket lekérdezést</string>
-  <string name="trackable">Követhető tárgy</string>
-  <string name="trackable_details_loading">Tárgy adatainak betöltése…</string>
+  <string name="trackable">Utazó</string>
+  <string name="trackable_details_loading">Utazó adatainak betöltése…</string>
   <string name="trackable_log_touch">Felfedezés bejelentése</string>
   <string name="trackable_browser_open">Megnyitás böngészőben</string>
   <string name="trackable_refresh">Frissítés</string>
@@ -922,7 +922,7 @@
   <string name="trackable_released">Indítás ideje</string>
   <string name="trackable_distance">Megtett táv</string>
   <string name="trackable_touch">Bejegyzés</string>
-  <string name="trackable_not_activated">Nem aktivált követhető tárgy</string>
+  <string name="trackable_not_activated">Nem aktivált utazó</string>
   <string name="trackable_travelbug">Travelbug</string>
   <string name="trackable_geokrety">GeoKrety</string>
   <string name="trackable_swaggie">Swaggie</string>
@@ -945,8 +945,8 @@
   <string name="navigation_direct_navigation">Közvetlen navigáció</string>
   <string name="navigation_target">Célpont</string>
   <string name="err_nav_no_coordinates">Koordináták hiányában nem lehet a navigációt indítani</string>
-  <string name="license">Licensz</string>
-  <string name="license_show">Licensz mutatása</string>
+  <string name="license">Licenc</string>
+  <string name="license_show">Licenc mutatása</string>
   <string name="license_dismiss">Elutasítás</string>
   <string name="helper_calendar_title">c:geo naptár add-on</string>
   <string name="helper_calendar_missing">c:geo naptár add-on nincs telepítve.</string>
@@ -1284,13 +1284,13 @@
   <string name="confirm_log_message">Logod a következő: \'%s\'. Biztosan ezt akarod?</string>
   <string name="settings_activate_geokrety">Aktiválás</string>
   <string name="init_geokrety">GeoKrety.org</string>
-  <string name="init_connectorGeokretyActive">Geokrety követhető tárgyak</string>
-  <string name="init_summary_geokrety">A GeoKrety.org követhető tárgyainak engedélyezése</string>
+  <string name="init_connectorGeokretyActive">GeoKrety utazók</string>
+  <string name="init_summary_geokrety">GeoKrety utazók engedélyezése</string>
   <string name="init_summary_geokrety_account">Nincs fiók konfigurálva.</string>
   <string name="init_geokrety_register_ok">Sikeres belépés</string>
   <string name="init_geokrety_register_fail">Sikertelen belépés</string>
   <string name="init_geokrety_description">A c:geo engedélyezése, hogy GeoKrety tárgyakat is logolhasson.</string>
-  <string name="init_geokrety_cache_description">A GeokretyMap.org a GeoKrety követhető tárgyakhoz biztosít adatokat.\nAz elérhető adatok több információt tartalmaznak, mint pl. leírás vagy státuszadatok.\n\nNem élő adatok!\nPoziciók: ~30 perc.\nLeírások: ~24 óra.</string>
+  <string name="init_geokrety_cache_description">A geokretymap.org a GeoKrety utazókhoz biztosít adatokat.\nAz elérhető adatok több információt tartalmaznak, mint pl. leírás vagy státuszadatok.\n\nNem élő adatok!\nPoziciók: ~30 perc.\nLeírások: ~24 óra.</string>
   <string name="init_geokrety_cache">GeoKretyMap.org használata</string>
   <string name="init_geokrety_userid">Felhasználói azonosító: %s</string>
   <string name="trackable_title_log_without_geocode">A geokód nincs beállítva</string>

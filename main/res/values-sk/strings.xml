@@ -80,7 +80,6 @@
   <string name="log_tb_archived">Archivácia</string>
   <string name="log_save">Uložiť offline</string>
   <string name="log_saving">Ukladanie logu…</string>
-  <string name="log_saving_and_uploading">Odosielanie logu a nahrávanie obrázku…</string>
   <string name="log_clear">Vyčistiť</string>
   <string name="log_post_not_possible">Prebieha sťahovanie dát…\nProsím, skúste to o chvíľu znova alebo skontrolujte internetové pripojenie.</string>
   <string name="log_post_geocode_missing">Geokód chýba…</string>
