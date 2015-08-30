@@ -152,7 +152,7 @@ public class GeokretyConnector extends AbstractTrackableConnector {
     @Override
     @NonNull
     public Observable<TrackableLog> trackableLogInventory() {
-        return Observable.from(loadInventory(0)).map(new Func1<Trackable, TrackableLog>() {
+        return Observable.from(loadInventory()).map(new Func1<Trackable, TrackableLog>() {
             @Override
             public TrackableLog call(final Trackable trackable) {
                 return new TrackableLog(
