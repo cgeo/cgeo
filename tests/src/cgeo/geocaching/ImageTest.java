@@ -60,18 +60,38 @@ public class ImageTest extends CGeoTestCase {
 
     public static void testTitle() throws Exception {
         final Image image1 = new Image.Builder().setTitle("Title").build();
+        final Image image2 = new Image.Builder().setTitle("").build();
+        final Image image3 = new Image.Builder().setTitle(null).build();
 
         assertThat(image1).isNotEqualTo(Image.NONE);
         assertThat(image1.getTitle()).isEqualTo("Title");
         assertThat(image1.getDescription()).isNull();
+
+        assertThat(image2).isNotEqualTo(Image.NONE);
+        assertThat(image2.getTitle()).isEqualTo("");
+        assertThat(image2.getDescription()).isNull();
+
+        assertThat(image3).isEqualTo(Image.NONE);
+        assertThat(image3.getTitle()).isNull();
+        assertThat(image3.getDescription()).isNull();
     }
 
     public static void testDescription() throws Exception {
         final Image image1 = new Image.Builder().setDescription("Description").build();
+        final Image image2 = new Image.Builder().setDescription("").build();
+        final Image image3 = new Image.Builder().setDescription(null).build();
 
         assertThat(image1).isNotEqualTo(Image.NONE);
         assertThat(image1.getTitle()).isNull();
         assertThat(image1.getDescription()).isEqualTo("Description");
+
+        assertThat(image2).isNotEqualTo(Image.NONE);
+        assertThat(image2.getTitle()).isNull();
+        assertThat(image2.getDescription()).isEqualTo("");
+
+        assertThat(image3).isEqualTo(Image.NONE);
+        assertThat(image3.getTitle()).isNull();
+        assertThat(image3.getDescription()).isNull();
     }
 
     public static void testIsEmpty() throws Exception {
@@ -160,6 +180,16 @@ public class ImageTest extends CGeoTestCase {
         assertThat(image2.getFile()).isEqualTo(new File("/dev/null"));
         assertThat(image3.getFile()).isEqualTo(new File("/tmp/image.png"));
         assertThat(image4.getFile()).isEqualTo(new File("/tmp/image.png"));
+    }
+
+    public static void testBuildUppon() throws Exception {
+        final Image image1 = new Image.Builder().setUrl(FILE1).setTitle("Title1").setDescription("Description1").build();
+        final Image image2 = image1.buildUpon().build();
+        final Image image3 = image1.buildUpon().setTitle("New Title").build();
+
+        assertThat(image1).isEqualTo(image2);
+        assertThat(image1).isNotEqualTo(image3);
+        assertThat(image3.title).isEqualTo("New Title");
     }
 
     public static void testEquals() throws Exception {

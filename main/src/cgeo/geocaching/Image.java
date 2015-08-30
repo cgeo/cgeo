@@ -30,7 +30,9 @@ public class Image implements Parcelable {
     public static final Image NONE = new Image(Uri.EMPTY, null, null);
 
     /**
-     * Image builder class.
+     * Helper class for building or manipulating Image references.
+     *
+     * Use #buildUpon() to obtain a builder representing an existing Image.
      */
     public static class Builder {
         @NonNull private Uri uri;
@@ -121,7 +123,7 @@ public class Image implements Parcelable {
          *          The image title
          */
         @NonNull
-        public Builder setTitle(@NonNull final String title) {
+        public Builder setTitle(@Nullable final String title) {
             this.title = title;
             return this;
         }
@@ -189,6 +191,19 @@ public class Image implements Parcelable {
             return new Image[size];
         }
     };
+
+    /**
+     * Constructs a new builder, copying the attributes from this Image.
+     *
+     * @return
+     *          A new Image Builder
+     */
+    public Builder buildUpon() {
+        return new Builder()
+                .setUrl(uri)
+                .setTitle(title)
+                .setDescription(description);
+    }
 
     /**
      * Get image title.
