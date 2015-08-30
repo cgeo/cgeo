@@ -20,14 +20,22 @@ import cgeo.geocaching.connector.oc.OCCZConnector;
 import cgeo.geocaching.connector.oc.OCConnector;
 import cgeo.geocaching.connector.tc.TerraCachingConnector;
 import cgeo.geocaching.connector.trackable.GeokretyConnector;
+import cgeo.geocaching.connector.trackable.TrackableBrand;
 import cgeo.geocaching.connector.trackable.TrackableConnector;
 import cgeo.geocaching.connector.trackable.TravelBugConnector;
 import cgeo.geocaching.connector.trackable.UnknownTrackableConnector;
 import cgeo.geocaching.location.Viewport;
+import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.RxUtils;
 
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+
+import rx.Observable;
+import rx.functions.Func0;
+import rx.schedulers.Schedulers;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -294,4 +302,60 @@ public final class ConnectorFactory {
         return null;
     }
 
+    /**
+     * Load a trackable.
+     *
+     * We query all the connectors that can handle the trackable in parallel as well as the local storage.
+     * We return the first positive result coming from a connector, or, if none, the result of loading from
+     * the local storage.
+     *
+     * @param geocode
+     *          trackable geocode
+     * @param guid
+     *          trackable guid
+     * @param id
+     *          trackable id
+     * @param brand
+     *          trackable brand
+     * @return
+     *          The Trackable observable
+     */
+    public static Observable<Trackable> loadTrackable(final String geocode, final String guid, final String id, final TrackableBrand brand) {
+        if (StringUtils.isEmpty(geocode)) {
+            // Only solution is GC search by uid
+            return RxUtils.deferredNullable(new Func0<Trackable>() {
+                @Override
+                public Trackable call() {
+                    return TravelBugConnector.getInstance().searchTrackable(geocode, guid, id);
+                }
+            }).subscribeOn(AndroidRxUtils.networkScheduler);
+        }
+
+        final Observable<Trackable> fromNetwork =
+                Observable.from(getTrackableConnectors()).filter(new Func1<TrackableConnector, Boolean>() {
+                    @Override
+                    public Boolean call(final TrackableConnector trackableConnector) {
+                        return trackableConnector.canHandleTrackable(geocode, brand);
+                    }
+                }).flatMap(new Func1<TrackableConnector, Observable<Trackable>>() {
+                    @Override
+                    public Observable<Trackable> call(final TrackableConnector trackableConnector) {
+                        return RxUtils.deferredNullable(new Func0<Trackable>() {
+                            @Override
+                            public Trackable call() {
+                                return trackableConnector.searchTrackable(geocode, guid, id);
+                            }
+                        }).subscribeOn(AndroidRxUtils.networkScheduler);
+                    }
+                });
+
+        final Observable<Trackable> fromLocalStorage = RxUtils.deferredNullable(new Func0<Trackable>() {
+            @Override
+            public Trackable call() {
+                return DataStore.loadTrackable(geocode);
+            }
+        }).subscribeOn(Schedulers.io());
+
+        return fromNetwork.concatWith(fromLocalStorage).take(1);
+    }
 }
