@@ -273,9 +273,10 @@ public final class ConnectorFactory {
     }
 
     /**
-     * Get the geocode of a trackable from a URL.
+     * Get trackable's geocode from an URL.
      *
-     * @return {@code null} if the URL cannot be decoded
+     * @return
+     *          the geocode, {@code null} if the URL cannot be decoded
      */
     @Nullable
     public static String getTrackableFromURL(final String url) {
