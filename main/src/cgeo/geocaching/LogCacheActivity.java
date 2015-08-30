@@ -505,7 +505,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
                             // Posting trackables logs
                             int trackableLogcounter = 1;
                             for (final TrackableLog trackableLog : trackablesMoved) {
-                                publishProgress(res.getString(R.string.log_posting_generic_trackable, trackableLog.brand, trackableLogcounter, trackablesMoved.size()));
+                                publishProgress(res.getString(R.string.log_posting_generic_trackable, trackableLog.brand.getLabel(), trackableLogcounter, trackablesMoved.size()));
                                 manager.postLog(cache, trackableLog, date, log);
                                 trackableLogcounter++;
                             }
