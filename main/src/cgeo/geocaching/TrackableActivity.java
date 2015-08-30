@@ -133,12 +133,12 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
             geocache = extras.getString(Intents.EXTRA_GEOCACHE);
             brand = TrackableBrand.getById(extras.getInt(Intents.EXTRA_BRAND));
             trackingCode = extras.getString(Intents.EXTRA_TRACKING_CODE);
-
         }
 
         // try to get data from URI
         if (geocode == null && guid == null && id == null && uri != null) {
             geocode = ConnectorFactory.getTrackableFromURL(uri.toString());
+            trackingCode = ConnectorFactory.getTrackableTrackingCodeFromURL(uri.toString());
 
             final String uriHost = uri.getHost().toLowerCase(Locale.US);
             if (uriHost.endsWith("geocaching.com")) {
@@ -162,6 +162,11 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
                     showToast(res.getString(R.string.err_tb_details_open));
                     finish();
                     return;
+                }
+            } else if (uriHost.endsWith("geokrety.org")) {
+                brand = TrackableBrand.GEOKRETY;
+                if (geocode == null && trackingCode != null) {
+                    geocode = trackingCode;
                 }
             }
         }

@@ -191,8 +191,13 @@ public final class ConnectorFactory {
 
     @NonNull
     public static TrackableConnector getTrackableConnector(final String geocode) {
+        return getTrackableConnector(geocode, TrackableBrand.UNKNOWN);
+    }
+
+    @NonNull
+    public static TrackableConnector getTrackableConnector(final String geocode, final TrackableBrand brand) {
         for (final TrackableConnector connector : TRACKABLE_CONNECTORS) {
-            if (connector.canHandleTrackable(geocode)) {
+            if (connector.canHandleTrackable(geocode, brand)) {
                 return connector;
             }
         }
@@ -283,7 +288,7 @@ public final class ConnectorFactory {
     }
 
     /**
-     * Get trackable's geocode from an URL.
+     * Get trackable geocode from an URL.
      *
      * @return
      *          the geocode, {@code null} if the URL cannot be decoded
@@ -297,6 +302,26 @@ public final class ConnectorFactory {
             final String geocode = connector.getTrackableCodeFromUrl(url);
             if (StringUtils.isNotBlank(geocode)) {
                 return geocode;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Get trackable Tracking Code from an URL.
+     *
+     * @return
+     *          the tracking code, {@code null} if the URL cannot be decoded
+     */
+    @Nullable
+    public static String getTrackableTrackingCodeFromURL(final String url) {
+        if (url == null) {
+            return null;
+        }
+        for (final TrackableConnector connector : TRACKABLE_CONNECTORS) {
+            final String trackableCode = connector.getTrackableTrackingCodeFromUrl(url);
+            if (StringUtils.isNotBlank(trackableCode)) {
+                return trackableCode;
             }
         }
         return null;

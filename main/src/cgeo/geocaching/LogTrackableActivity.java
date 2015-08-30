@@ -175,7 +175,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
         trackable = DataStore.loadTrackable(geocode);
 
         if (trackable == null) {
-            Log.e("LogTrackableActivity.onCreate: cannot load trackable " + geocode);
+            Log.e("LogTrackableActivity.onCreate, cannot load trackable: " + geocode);
             setResult(RESULT_CANCELED);
             finish();
             return;
