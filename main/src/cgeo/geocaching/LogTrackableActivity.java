@@ -566,6 +566,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
      */
     private void postLog() {
         new Poster(this, res.getString(R.string.log_saving)).execute(logEditText.getText().toString());
+        Settings.setTrackableAction(typeSelected.id);
         Settings.setLastTrackableLog(logEditText.getText().toString());
     }
 

@@ -998,10 +998,22 @@ public class Settings {
         putBoolean(R.string.pref_shareafterexport, shareAfterExport);
     }
 
+    /**
+     * Obtain Trackable action from the last Trackable log.
+     *
+     * @return
+     *          The last Trackable Action or RETRIEVED_IT
+     */
     public static int getTrackableAction() {
         return getInt(R.string.pref_trackableaction, LogTypeTrackable.RETRIEVED_IT.id);
     }
 
+    /**
+     * Save Trackable action from the last Trackable log.
+     *
+     * @param trackableAction
+     *          The Trackable Action to remember
+     */
     public static void setTrackableAction(final int trackableAction) {
         putInt(R.string.pref_trackableaction, trackableAction);
     }
