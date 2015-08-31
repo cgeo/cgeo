@@ -80,6 +80,7 @@
   <string name="log_tb_archived">Archivado</string>
   <string name="log_save">Guardar sin conexión</string>
   <string name="log_saving">Enviando registro…</string>
+  <string name="log_saving_and_uploading">Publicando registro y subiendo imagen…</string>
   <string name="log_posting_log">Publicando registro…</string>
   <string name="log_posting_twitter">Publicando tweet…</string>
   <string name="log_posting_gcvote">Publicando GCVote…</string>
@@ -545,6 +546,8 @@
   <string name="init_low_power">Modo ahorro energía</string>
   <string name="init_low_power_note">El modo de ahorro de energía evita el uso del GPS y del giroscopio cuando no es necesaria una ubicación muy precisa, a costa de aumentar el tiempo para fijar los satélites.</string>
   <string name="init_low_power_mode">Activar ahorro de energía</string>
+  <string name="init_force_orientation_sensor_title">Sensor de orientación</string>
+  <string name="init_force_orientation_sensor">Forzar el uso del sensor de orientación</string>
   <string name="init_create_memory_dump">Crear volcado de memoria</string>
   <string name="init_memory_dump">Volcado de memoria</string>
   <string name="init_memory_dumped">Memoria volcada a %s</string>

@@ -80,8 +80,9 @@
   <string name="log_tb_archived">Archiviert</string>
   <string name="log_save">Offline speichern</string>
   <string name="log_saving">Log wird gesendet…</string>
+  <string name="log_saving_and_uploading">Sende Log und lade Bild hoch…</string>
   <string name="log_posting_log">Sende Log…</string>
-  <string name="log_posting_twitter">Sende tweet…</string>
+  <string name="log_posting_twitter">Sende Tweet…</string>
   <string name="log_posting_gcvote">Sende Bewertung…</string>
   <string name="log_posting_image">Sende Bild…</string>
   <string name="log_posting_generic_trackable">Sende %1$s %2$s/%3$s</string>
@@ -554,6 +555,9 @@
   <string name="init_low_power">Energiesparmodus</string>
   <string name="init_low_power_note">Der Energiesparmodus vermeidet die Verwendung von GPS und Gyroskop, wenn eine hochgenaue Position nicht unbedingt notwendig ist. Nachteil ist eine längere Zeit bis zum GPS-Fix.</string>
   <string name="init_low_power_mode">Energiesparmodus aktivieren</string>
+  <string name="init_force_orientation_sensor_title">Orientierungssensor</string>
+  <string name="init_force_orientation_sensor_note">Auf einigen Geräten verhält sich der Rotationssensor fehlerhaft und zeigt die falsche Richtung an. In diesem Fall kann ein alternativer Sensor (der Orientierungssensor) bessere Ergebnisse liefern.</string>
+  <string name="init_force_orientation_sensor">Erzwinge die Benutzung des Orientierungssensors</string>
   <string name="init_create_memory_dump">Erzeuge ein Speicherabbild</string>
   <string name="init_memory_dump">Speicherabbild</string>
   <string name="init_memory_dumped">Speicherabbild in %s gespeichert</string>
