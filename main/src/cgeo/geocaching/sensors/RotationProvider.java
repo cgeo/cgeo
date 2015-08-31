@@ -32,13 +32,15 @@ public class RotationProvider {
         }
         Log.d("RotationProvider: sensor found");
         final Observable<Float> observable = Observable.create(new OnSubscribe<Float>() {
-            private final float[] rotationMatrix = new float[16];
-            private final float[] orientation = new float[4];
-            private final float[] values = new float[4];
 
             @Override
             public void call(final Subscriber<? super Float> subscriber) {
                 final SensorEventListener listener = new SensorEventListener() {
+
+                    private final float[] rotationMatrix = new float[16];
+                    private final float[] orientation = new float[4];
+                    private final float[] values = new float[4];
+
                     @Override
                     public void onSensorChanged(final SensorEvent event) {
                         // On some Samsung devices, SensorManager#getRotationMatrixFromVector throws an exception if the rotation
