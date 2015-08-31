@@ -217,6 +217,7 @@
   <string name="warn_no_pocket_query_found">Geen Pocket query online gevonden.</string>
   <string name="info_log_posted">c:geo heeft log succesvol gepost.</string>
   <string name="info_log_saved">c:geo heeft log succesvol opgeslagen.</string>
+  <string name="info_log_post_save">Off line opslaan</string>
   <string name="info_log_cleared">Log is gewist.</string>
   <string name="info_log_type_changed">Type log is gewijzigd!</string>
   <string name="info_select_logimage_cancelled">Foto selectie of opname is geannuleerd.</string>

@@ -80,6 +80,7 @@
   <string name="log_tb_archived">Archiválva</string>
   <string name="log_save">Offline mentés</string>
   <string name="log_saving">Log mentése…</string>
+  <string name="log_saving_and_uploading">Log küldése és kép feltöltése…</string>
   <string name="log_posting_log">Log küldése…</string>
   <string name="log_posting_twitter">Twittelés…</string>
   <string name="log_posting_gcvote">Értékelés küldése…</string>
@@ -319,7 +320,7 @@
   <string name="caches_filter_title">Szűrés eszerint</string>
   <string name="caches_filter_size">Méret</string>
   <string name="caches_filter_type">Típus</string>
-  <string name="caches_filter_track">Utazók a ládában</string>
+  <string name="caches_filter_track">Utazó a ládában</string>
   <string name="caches_filter_clear">Szűrők törlése</string>
   <string name="caches_filter_modified">Módosított koordináták</string>
   <string name="caches_filter_offline_log">Offline log</string>
@@ -329,7 +330,7 @@
   <string name="caches_filter_popularity">Kedvencek</string>
   <string name="caches_filter_popularity_ratio">Kedvencek [%]</string>
   <string name="caches_filter_personal_data">Személyes adatok</string>
-  <string name="caches_filter_rating">Értékelték</string>
+  <string name="caches_filter_rating">Értékelve</string>
   <string name="caches_filter_own_rating">Saját értékelés</string>
   <string name="caches_removing_from_history">Eltávolítás a Előzményekből…</string>
   <string name="caches_clear_offlinelogs">Offline logok törlése</string>
@@ -554,6 +555,9 @@
   <string name="init_low_power">Takarékos üzemmód</string>
   <string name="init_low_power_note">A takarékos üzemmód nem használja a GPS-t és a giroszkópot, emiatt a helymeghatározás lassabb és pontatlanabb.</string>
   <string name="init_low_power_mode">Takarékos üzemmód indítása</string>
+  <string name="init_force_orientation_sensor_title">Tájolásérzékelő</string>
+  <string name="init_force_orientation_sensor_note">Egyes eszközökön a szabványos forgatási vektor érzékelő működése kiszámíthatatlan, így rossz irányt szolgáltat. Ebben az esetben egy alternatív érzékelő (a tájolásérzékelő) jobb megoldásnak bizonyulhat.</string>
+  <string name="init_force_orientation_sensor">A tájolásérzékelő kényszerített használata</string>
   <string name="init_create_memory_dump">Memóriatartalom mentése</string>
   <string name="init_memory_dump">Memóriatartalom</string>
   <string name="init_memory_dumped">Memóriatartalom mentve a %s-n</string>
@@ -700,7 +704,7 @@
   <string name="cache_menu_navigate">Navigáció</string>
   <string name="cache_menu_navigation_drive">Autós navigáció</string>
   <string name="cache_menu_navigation_walk">Gyalogos navigáció</string>
-  <string name="cache_menu_navigation_transit">Tömegközlekedés</string>
+  <string name="cache_menu_navigation_transit">Tömegközlekedési navigáció</string>
   <string name="cache_menu_navigation_bike">Biciklis navigáció</string>
   <string name="cache_menu_maps_directions">Google Térkép Útvonalak</string>
   <string name="cache_menu_sygic_walk">Sygic (séta)</string>
@@ -738,12 +742,12 @@
   <string name="cache_status_found">Megtaláltam</string>
   <string name="cache_not_status_found">Nem találtam meg</string>
   <string name="cache_never_found">Szűz láda</string>
-  <string name="cache_status_archived">Archivált</string>
-  <string name="cache_status_disabled">Letiltott</string>
+  <string name="cache_status_archived">Archiválva</string>
+  <string name="cache_status_disabled">Letiltva</string>
   <string name="cache_status_premium">Csak prémium tagoknak</string>
   <string name="cache_status_not_premium">Minden tag számára</string>
-  <string name="cache_status_stored">Mentett</string>
-  <string name="cache_status_not_stored">Nem mentett</string>
+  <string name="cache_status_stored">Tárolva</string>
+  <string name="cache_status_not_stored">Nincs tárolva</string>
   <string name="cache_geocode">Geokód</string>
   <string name="cache_name">Név</string>
   <string name="cache_type">Típus</string>
