@@ -14,7 +14,7 @@ public final class SwaggieConnector extends AbstractTrackableConnector {
     private static final Pattern PATTERN_SW_CODE = Pattern.compile("SW[0-9]{4}");
 
     @Override
-    public boolean canHandleTrackable(final String geocode) {
+    public boolean canHandleTrackable(@Nullable final String geocode) {
         return geocode != null && PATTERN_SW_CODE.matcher(geocode).matches();
     }
 

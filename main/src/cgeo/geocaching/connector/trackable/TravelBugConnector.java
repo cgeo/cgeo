@@ -32,7 +32,7 @@ public class TravelBugConnector extends AbstractTrackableConnector {
     }
 
     @Override
-    public boolean canHandleTrackable(final String geocode) {
+    public boolean canHandleTrackable(@Nullable final String geocode) {
         return PATTERN_TB_CODE.matcher(geocode).matches() && !StringUtils.startsWithIgnoreCase(geocode, "GC");
     }
 

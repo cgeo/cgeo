@@ -12,7 +12,7 @@ import java.util.List;
 public class UnknownTrackableConnector extends AbstractTrackableConnector {
 
     @Override
-    public boolean canHandleTrackable(final String geocode) {
+    public boolean canHandleTrackable(@Nullable final String geocode) {
         return false;
     }
 
