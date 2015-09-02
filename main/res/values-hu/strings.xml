@@ -142,7 +142,7 @@
   <string name="err_comm">Ismeretlen kommunikációs hiba</string>
   <string name="err_missing_auth">Nincs megadva belépési név és/vagy jelszó.</string>
   <string name="err_wrong">Rossz belépési adatok</string>
-  <string name="err_maintenance">A geocaching.com karbantartás miatt elérhetetlen. A c:geo offline módban működik mentett ládákkal.</string>
+  <string name="err_maintenance">A geocaching.com karbantartás miatt elérhetetlen. A c:geo offline módban működik elmentett ládákkal.</string>
   <string name="err_license">Nem fogadtad el a geocaching.com licencmegállapodását, így a c:geo nem tudja betölteni a ládák koordinátáit.</string>
   <string name="err_unvalidated_account">Előbb aktiválnod kell a fiókod a geocaching.com honlapján.</string>
   <string name="err_unpublished">A kért geoládát eltávolították.</string>
@@ -246,7 +246,7 @@
   <string name="menu_helpers">Segédprogramok</string>
   <string name="menu_settings">Beállítások</string>
   <string name="menu_history">Előzmények</string>
-  <string name="menu_filter">Szűrő</string>
+  <string name="menu_filter">Szűrés</string>
   <string name="menu_scan_geo">Geokód szkennelése</string>
   <string name="menu_pocket_queries">Pocket lekérdezések</string>
   <string name="menu_scan_description">A c:geo QR formátumú geokódokat is be tud olvasni, de az ehhez szükséges alkalmazás nincs telepítve. Meg szeretnéd nyitni a Google Play-t, hogy telepítsd?</string>
@@ -287,7 +287,7 @@
   <string name="caches_sort_date_logged">Logolás dátuma</string>
   <string name="caches_sort_finds">Találatok száma</string>
   <string name="caches_sort_state">Állapot</string>
-  <string name="caches_sort_storage">Készüléken tárolásának dátuma</string>
+  <string name="caches_sort_storage">Mentés dátuma</string>
   <string name="caches_sort_eventdate">Esemény dátuma</string>
   <string name="caches_select_mode">Kiválasztó mód</string>
   <string name="caches_select_mode_exit">Kilépés a kiválasztó módból</string>
@@ -316,12 +316,12 @@
   <string name="caches_recaptcha_explanation">Kérlek, írd be a szöveget a képről! Ez szükséges a ládák koordinátáinak letöltéséhez. Kikapcsolható a beállításoknál.</string>
   <string name="caches_recaptcha_hint">Szöveg a képről</string>
   <string name="caches_recaptcha_continue">Folytatás</string>
-  <string name="caches_filter">Szűrő</string>
+  <string name="caches_filter">Szűrés</string>
   <string name="caches_filter_title">Szűrés eszerint</string>
   <string name="caches_filter_size">Méret</string>
   <string name="caches_filter_type">Típus</string>
   <string name="caches_filter_track">Utazó a ládában</string>
-  <string name="caches_filter_clear">Szűrők törlése</string>
+  <string name="caches_filter_clear">Szűrés törlése</string>
   <string name="caches_filter_modified">Módosított koordináták</string>
   <string name="caches_filter_offline_log">Offline log</string>
   <string name="caches_filter_origin">Származás</string>
@@ -364,7 +364,7 @@
   <string name="about_license">Licenc</string>
   <string name="about_apache_license"><a href="">Apache licenc, 2.0 verzió</a></string>
   <string name="about_help">Segítség</string>
-  <string name="about_system_include">Kérlek, csatold az alábbi rendszerinformációkat, ha hibajelentést küldesz, vagy további információt kérsz a c:geo-ról:</string>
+  <string name="about_system_include">Kérlek, csatold az alábbi rendszeradatokat, ha hibajelentést küldesz, vagy további információt kérsz a c:geo-ról:</string>
   <string name="changelog_github">Összes változtatás listázása</string>
   <string name="settings_title_open_settings">Beállítások megnyitása?</string>
   <string name="settings_title_services">Szolgáltatások</string>
@@ -557,7 +557,7 @@
   <string name="init_low_power_mode">Takarékos üzemmód indítása</string>
   <string name="init_force_orientation_sensor_title">Tájolásérzékelő</string>
   <string name="init_force_orientation_sensor_note">Egyes eszközökön a szabványos forgatási vektor érzékelő működése kiszámíthatatlan, így rossz irányt szolgáltat. Ebben az esetben egy alternatív érzékelő (a tájolásérzékelő) jobb megoldásnak bizonyulhat.</string>
-  <string name="init_force_orientation_sensor">A tájolásérzékelő kényszerített használata</string>
+  <string name="init_force_orientation_sensor">Tájolásérzékelő használata</string>
   <string name="init_create_memory_dump">Memóriatartalom mentése</string>
   <string name="init_memory_dump">Memóriatartalom</string>
   <string name="init_memory_dumped">Memóriatartalom mentve a %s-n</string>
@@ -631,10 +631,10 @@
   <string name="cache_offline">Offline</string>
   <string name="cache_offline_refresh">Frissítés</string>
   <string name="cache_offline_drop">Törlés</string>
-  <string name="cache_offline_store">Tárolás</string>
-  <string name="cache_offline_stored">Tárolva az eszközön</string>
+  <string name="cache_offline_store">Mentés</string>
+  <string name="cache_offline_stored">Elmentve az eszközre</string>
   <string name="cache_offline_not_ready">Nem érhető el offline</string>
-  <string name="cache_offline_time_about">Információ mentve</string>
+  <string name="cache_offline_time_about"> </string>
   <string name="cache_offline_time_mins">perccel ezelőtt</string>
   <string name="cache_offline_time_mins_few">néhány perccel ezelőtt</string>
   <string name="cache_offline_time_hour">egy órával ezelőtt</string>
@@ -746,8 +746,8 @@
   <string name="cache_status_disabled">Letiltva</string>
   <string name="cache_status_premium">Csak prémium tagoknak</string>
   <string name="cache_status_not_premium">Minden tag számára</string>
-  <string name="cache_status_stored">Tárolva</string>
-  <string name="cache_status_not_stored">Nincs tárolva</string>
+  <string name="cache_status_stored">Elmentve</string>
+  <string name="cache_status_not_stored">Nincs elmentve</string>
   <string name="cache_geocode">Geokód</string>
   <string name="cache_name">Név</string>
   <string name="cache_type">Típus</string>
