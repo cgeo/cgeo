@@ -41,10 +41,6 @@ public class GeocoderTest extends CGeoTestCase {
         }
     }
 
-    public static void testGCGeocoder() {
-        testGeocoder(GCGeocoder.getFromLocationName(TEST_ADDRESS), "GC", false);
-    }
-
     public static void testMapQuestGeocoder() {
         final Locale locale = Locale.getDefault();
         try {
