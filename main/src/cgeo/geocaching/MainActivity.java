@@ -13,7 +13,6 @@ import cgeo.geocaching.list.PseudoList;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.AndroidGeocoder;
 import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.location.MapQuestGeocoder;
 import cgeo.geocaching.location.Units;
 import cgeo.geocaching.maps.CGeoMap;
 import cgeo.geocaching.network.Network;
@@ -627,8 +626,7 @@ public class MainActivity extends AbstractActionBarActivity {
                 }
                 if (addCoords == null || (currentCoords.distanceTo(addCoords) > 0.5)) {
                     addCoords = currentCoords;
-                    final Observable<String> address = (new AndroidGeocoder(MainActivity.this).getFromLocation(currentCoords)
-                            .onErrorResumeNext(MapQuestGeocoder.getFromLocation(currentCoords))).map(new Func1<Address, String>() {
+                    final Observable<String> address = (new AndroidGeocoder(MainActivity.this).getFromLocation(currentCoords)).map(new Func1<Address, String>() {
                         @Override
                         public String call(final Address address) {
                             return formatAddress(address);
