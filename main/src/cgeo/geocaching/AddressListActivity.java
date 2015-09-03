@@ -2,7 +2,6 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractListActivity;
 import cgeo.geocaching.location.AndroidGeocoder;
-import cgeo.geocaching.location.GCGeocoder;
 import cgeo.geocaching.location.MapQuestGeocoder;
 import cgeo.geocaching.ui.AddressListAdapter;
 
@@ -34,8 +33,7 @@ public class AddressListActivity extends AbstractListActivity {
 
     private void lookupAddressInBackground(final String keyword, final AddressListAdapter adapter, final ProgressDialog waitDialog) {
         final Observable<Address> geocoderObservable = new AndroidGeocoder(this).getFromLocationName(keyword)
-                .onErrorResumeNext(MapQuestGeocoder.getFromLocationName(keyword))
-                .onErrorResumeNext(GCGeocoder.getFromLocationName(keyword));
+                .onErrorResumeNext(MapQuestGeocoder.getFromLocationName(keyword));
         AppObservable.bindActivity(this, geocoderObservable.toList()).subscribe(new Action1<List<Address>>() {
             @Override
             public void call(final List<Address> addresses) {
