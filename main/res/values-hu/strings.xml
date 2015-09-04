@@ -450,7 +450,7 @@
   <string name="init_signature_template_time">Idő</string>
   <string name="init_signature_template_datetime">Dátum &amp; Idő</string>
   <string name="init_signature_template_user">Felhasználó</string>
-  <string name="init_signature_template_number">Szám</string>
+  <string name="init_signature_template_number">Találatszám</string>
   <string name="init_signature_template_owner">Tulajdonos</string>
   <string name="init_signature_template_name">Név</string>
   <string name="init_signature_template_url">URL</string>
@@ -686,7 +686,7 @@
   <string name="cache_dialog_loading_details_status_waypoints">Útpontok feldolgozása</string>
   <string name="cache_dialog_loading_details_status_gcvote">A GCVote betöltése</string>
   <string name="cache_dialog_loading_details_status_cache">Láda adatai</string>
-  <string name="cache_dialog_loading_details_status_render">Render nézet</string>
+  <string name="cache_dialog_loading_details_status_render">Nézet betöltése</string>
   <string name="cache_dialog_offline_save_title">Offline</string>
   <string name="cache_dialog_offline_save_message">Láda mentése offline használathoz…</string>
   <string name="cache_dialog_offline_drop_title">Offline</string>
@@ -738,7 +738,7 @@
   <string name="ignore_confirm_title">Légy óvatos</string>
   <string name="ignore_confirm_message">Egy láda mellőzése azt jelenti, hogy a láda soha többé nem fog letöltődni a geocaching.com-ról. Csak akkor láthatod ismét ezt a ládát, ha visszavonod a mellőzését a geocaching.com-on.</string>
   <string name="cache_status">Állapot</string>
-  <string name="cache_status_offline_log">Mentett bejegyzés</string>
+  <string name="cache_status_offline_log">Mentett log</string>
   <string name="cache_status_found">Megtaláltam</string>
   <string name="cache_not_status_found">Nem találtam meg</string>
   <string name="cache_never_found">Szűz láda</string>

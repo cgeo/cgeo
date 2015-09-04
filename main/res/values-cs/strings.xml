@@ -79,6 +79,7 @@
   <string name="log_tb_archived">Archivován</string>
   <string name="log_save">Uložit offline</string>
   <string name="log_saving">Odesílání Logu…</string>
+  <string name="log_saving_and_uploading">Odesílání logu a nahrávání obrázků…</string>
   <string name="log_posting_log">Odesílání logu…</string>
   <string name="log_posting_twitter">Odesílání tweetu…</string>
   <string name="log_posting_gcvote">Odesílání GCVote…</string>
@@ -556,6 +557,8 @@
   <string name="init_low_power">Režim nízké spotřeby</string>
   <string name="init_low_power_note">Režim nízké spotřeby zamezí používání GPS a gyroskopu, pokud není nezbytně vyžadována přesná detekce polohy. Zaměření však bude trvat o trochu déle.</string>
   <string name="init_low_power_mode">Aktivovat režim nízké spotřeby</string>
+  <string name="init_force_orientation_sensor_title">Senzor orientace</string>
+  <string name="init_force_orientation_sensor">Vynutit použití orientačního senzoru</string>
   <string name="init_create_memory_dump">Vytvořit výpis paměti</string>
   <string name="init_memory_dump">Výpis stavu paměti</string>
   <string name="init_memory_dumped">Paměť vypsána do %s</string>

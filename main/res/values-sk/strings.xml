@@ -80,6 +80,12 @@
   <string name="log_tb_archived">Archivácia</string>
   <string name="log_save">Uložiť offline</string>
   <string name="log_saving">Ukladanie logu…</string>
+  <string name="log_saving_and_uploading">Odosielanie logu a obrázka…</string>
+  <string name="log_posting_log">Odosielanie logu…</string>
+  <string name="log_posting_twitter">Odosielanie tweetu…</string>
+  <string name="log_posting_gcvote">Odosielanie GCVote…</string>
+  <string name="log_posting_image">Odosielanie obrázka…</string>
+  <string name="log_posting_generic_trackable">Odosielanie %1$s %2$s/%3$s</string>
   <string name="log_clear">Vyčistiť</string>
   <string name="log_post_not_possible">Prebieha sťahovanie dát…\nProsím, skúste to o chvíľu znova alebo skontrolujte internetové pripojenie.</string>
   <string name="log_post_geocode_missing">Geokód chýba…</string>
@@ -212,6 +218,10 @@
   <string name="warn_no_pocket_query_found">Na webe sa nenašlo žiadne Pocket query.</string>
   <string name="info_log_posted">c:geo úspešne zaslalo log.</string>
   <string name="info_log_saved">c:geo úspešne uložilo log.</string>
+  <string name="info_log_post_failed">Odoslanie logu zlyhalo.</string>
+  <string name="info_log_post_failed_reason">Dôvod: %s</string>
+  <string name="info_log_post_retry">Opakovať</string>
+  <string name="info_log_post_save">Uložiť offline</string>
   <string name="info_log_cleared">Log bol vyprázdnený.</string>
   <string name="info_log_type_changed">Typ logu bol zmenený!</string>
   <string name="info_select_logimage_cancelled">Výber obrázka alebo fotenie bolo zrušené.</string>
@@ -548,6 +558,9 @@
   <string name="init_low_power">Režim nízkej spotreby</string>
   <string name="init_low_power_note">Režim nízkeho výkonu sa vyhýba používaniu GPS a gyroskopu, keď nie je nutná vysoká presnosť geolokácie, za cenu dlhšieho času pre učenie polohy.</string>
   <string name="init_low_power_mode">Aktivácia režimu nízkej spotreby</string>
+  <string name="init_force_orientation_sensor_title">Senzor orientácie</string>
+  <string name="init_force_orientation_sensor_note">Na niektorých zariadeniach se bežný senzor otáčania chová nevypočítateľne a poskytuje zlý smer. V takom prípade môže alternatívny senzor (senzor orientácie) poskytnúť lepšie výsledky.</string>
+  <string name="init_force_orientation_sensor">Vynútiť použitie senzoru orientácie</string>
   <string name="init_create_memory_dump">Vytvorenie výpisu pamäte</string>
   <string name="init_memory_dump">Výpis pamäte</string>
   <string name="init_memory_dumped">Výpis pamäte uložený do %s</string>
@@ -696,6 +709,7 @@
   <string name="cache_menu_navigate">Navigovať</string>
   <string name="cache_menu_navigation_drive">Navigácia (auto)</string>
   <string name="cache_menu_navigation_walk">Navigácia (pešo)</string>
+  <string name="cache_menu_navigation_transit">Navigácia (Tranzit)</string>
   <string name="cache_menu_navigation_bike">Navigácia (bicykel)</string>
   <string name="cache_menu_maps_directions">Navigovanie na Google mape</string>
   <string name="cache_menu_sygic_walk">Sygic (chôdza)</string>
@@ -731,6 +745,7 @@
   <string name="cache_status_offline_log">Uložený log</string>
   <string name="cache_status_found">Nájdená</string>
   <string name="cache_not_status_found">Nebol nájdený</string>
+  <string name="cache_never_found">Doteraz nenájdené</string>
   <string name="cache_status_archived">Archivovaná</string>
   <string name="cache_status_disabled">Deaktivovaná</string>
   <string name="cache_status_premium">Iba pre platiacich používateľov</string>
