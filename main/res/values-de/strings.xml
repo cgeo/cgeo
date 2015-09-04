@@ -557,7 +557,7 @@
   <string name="init_low_power_mode">Energiesparmodus aktivieren</string>
   <string name="init_force_orientation_sensor_title">Orientierungssensor</string>
   <string name="init_force_orientation_sensor_note">Auf einigen Geräten verhält sich der Rotationssensor fehlerhaft und zeigt die falsche Richtung an. In diesem Fall kann ein alternativer Sensor (der Orientierungssensor) bessere Ergebnisse liefern.</string>
-  <string name="init_force_orientation_sensor">Erzwinge die Benutzung des Orientierungssensors</string>
+  <string name="init_force_orientation_sensor">Orientierungssensor nutzen</string>
   <string name="init_create_memory_dump">Erzeuge ein Speicherabbild</string>
   <string name="init_memory_dump">Speicherabbild</string>
   <string name="init_memory_dumped">Speicherabbild in %s gespeichert</string>

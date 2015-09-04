@@ -80,6 +80,7 @@
   <string name="log_tb_archived">Archivé</string>
   <string name="log_save">Enregistrer hors-ligne</string>
   <string name="log_saving">Enregistrement en cours…</string>
+  <string name="log_saving_and_uploading">Envoi de visite et d\'image…</string>
   <string name="log_posting_log">Envoi de la visite…</string>
   <string name="log_posting_twitter">Envoi du Tweet…</string>
   <string name="log_posting_gcvote">Envoi sur GCVote…</string>
@@ -235,7 +236,7 @@
   <string name="loc_fused">Fusionné</string>
   <string name="loc_low_power">Éco</string>
   <string name="loc_home">Domicile</string>
-  <string name="loc_gps">Gps</string>
+  <string name="loc_gps">GPS</string>
   <string name="loc_sat">Satellites</string>
   <string name="loc_trying">Localisation en cours…</string>
   <string name="loc_no_addr">Position inconnue</string>
@@ -554,6 +555,9 @@
   <string name="init_low_power">Mode économie d\'énergie</string>
   <string name="init_low_power_note">Le mode économie d\'énergie permet d\'éviter l\'utilisation du GPS et du gyroscope lorsqu\'une localisation précise n\'est pas indispensable mais augmente le délai d\'obtention de la première position.</string>
   <string name="init_low_power_mode">Activer le mode économie d\'énergie</string>
+  <string name="init_force_orientation_sensor_title">Capteur d\'orientation</string>
+  <string name="init_force_orientation_sensor_note">Sur certains appareils le capteur de rotation vectorielle utilisé par défaut se comporte de manière erratique et indique la mauvaise direction. Dans ce cas, un capteur alternatif (le capteur d\'orientation) peut donner de meilleurs résultats.</string>
+  <string name="init_force_orientation_sensor">Forcer l\'utilisation du capteur d\'orientation</string>
   <string name="init_create_memory_dump">Créer une image mémoire</string>
   <string name="init_memory_dump">Image mémoire</string>
   <string name="init_memory_dumped">Mémoire copiée dans %s</string>

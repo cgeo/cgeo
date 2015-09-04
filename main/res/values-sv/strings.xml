@@ -80,6 +80,12 @@
   <string name="log_tb_archived">Arkiverad</string>
   <string name="log_save">Spara offline</string>
   <string name="log_saving">Sparar logg…</string>
+  <string name="log_saving_and_uploading">Skickar logg och laddar upp bild…</string>
+  <string name="log_posting_log">Skickar logg…</string>
+  <string name="log_posting_twitter">Skickar tweet…</string>
+  <string name="log_posting_gcvote">Skickar GCVote…</string>
+  <string name="log_posting_image">Skickar bild…</string>
+  <string name="log_posting_generic_trackable">Skickar %1$s %2$s/%3$s</string>
   <string name="log_clear">Rensa</string>
   <string name="log_post_not_possible">Nerladdning av data pågår…\nFörsök igen om några sekunder eller kontrollera din Internetanslutning.</string>
   <string name="log_post_geocode_missing">Geocode saknas…</string>
@@ -212,6 +218,10 @@
   <string name="warn_no_pocket_query_found">Ingen Pocket query hittades på nätet.</string>
   <string name="info_log_posted">c:geo har postat din logg.</string>
   <string name="info_log_saved">c:geo har sparat din logg.</string>
+  <string name="info_log_post_failed">Misslyckades skicka logg.</string>
+  <string name="info_log_post_failed_reason">Orsak: %s</string>
+  <string name="info_log_post_retry">Försök igen</string>
+  <string name="info_log_post_save">Spara offline</string>
   <string name="info_log_cleared">Loggen har rensats.</string>
   <string name="info_log_type_changed">Typen av logg har ändrats!</string>
   <string name="info_select_logimage_cancelled">Val av bild avbröts.</string>
@@ -545,6 +555,7 @@
   <string name="init_low_power">Strömsparläge</string>
   <string name="init_low_power_note">Strömsparläget undviker att använda GPS och gyroskop när exakt position inte är absolut nödvändigt. Detta sker på bekostnad av längre tid för positionering.</string>
   <string name="init_low_power_mode">Aktivera strömsparläge</string>
+  <string name="init_force_orientation_sensor">Tvinga användning av riktningsgivare</string>
   <string name="init_create_memory_dump">Skapa minnesdump</string>
   <string name="init_memory_dump">Minnesdump</string>
   <string name="init_memory_dumped">Minnet sparat till %s</string>
@@ -727,6 +738,7 @@
   <string name="cache_status_offline_log">Sparad logg</string>
   <string name="cache_status_found">Hittad</string>
   <string name="cache_not_status_found">Ej hittad</string>
+  <string name="cache_never_found">Aldrig hittad</string>
   <string name="cache_status_archived">Arkiverad</string>
   <string name="cache_status_disabled">Inaktiverad</string>
   <string name="cache_status_premium">Enbart för Premium medlemmar</string>

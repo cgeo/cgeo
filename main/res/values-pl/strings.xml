@@ -80,6 +80,12 @@
   <string name="log_tb_archived">Zarchiwizowana</string>
   <string name="log_save">Zapisz offline</string>
   <string name="log_saving">Zapisuję w dzienniku…</string>
+  <string name="log_saving_and_uploading">Wysyłanie wpisu i obrazu…</string>
+  <string name="log_posting_log">Wysyłanie wpisu…</string>
+  <string name="log_posting_twitter">Wysyłanie tweetu…</string>
+  <string name="log_posting_gcvote">Wysyłanie GCVote…</string>
+  <string name="log_posting_image">Wysyłanie obrazka…</string>
+  <string name="log_posting_generic_trackable">Wysyłanie %1$s %2$s/%3$s</string>
   <string name="log_clear">Wyczyść</string>
   <string name="log_post_not_possible">Pobieranie danych w toku…\nProszę spróbować za parę sekund albo sprawdzić połączenie z internetem.</string>
   <string name="log_post_geocode_missing">Brak kodu GC skrzynki…</string>
@@ -212,6 +218,10 @@
   <string name="warn_no_pocket_query_found">Nie znaleziono Pocket query online.</string>
   <string name="info_log_posted">Wpis został wysłany.</string>
   <string name="info_log_saved">Wpis został zapisany.</string>
+  <string name="info_log_post_failed">Wysyłanie wpisu zakończone niepowodzeniem.</string>
+  <string name="info_log_post_failed_reason">Powód: %s</string>
+  <string name="info_log_post_retry">Spróbuj ponownie</string>
+  <string name="info_log_post_save">Zapisz offline</string>
   <string name="info_log_cleared">Wpis został usunięty.</string>
   <string name="info_log_type_changed">Rodzaj wpisu w dzienniku został zmieniony!</string>
   <string name="info_select_logimage_cancelled">Wybór obrazu został anulowany.</string>
@@ -544,6 +554,9 @@
   <string name="init_low_power">Tryb niskiego zużycia energii</string>
   <string name="init_low_power_note">Tryb niskiego zużycia energii pozwala na uniknięcie używania GPS i żyroskopu kiedy bardzo dokładna pozycja nie jest ściśle potrzebna, kosztem dłuższego ustalania pozycji.</string>
   <string name="init_low_power_mode">Aktywuj tryb niskiego zużycia energii</string>
+  <string name="init_force_orientation_sensor_title">Czujnik orientacji</string>
+  <string name="init_force_orientation_sensor_note">Na niektórych urządzeniach, standardowy czujnik obrotu nie działa poprawnie, zwracając zły kierunek. W tej sytuacji, alternatywny czujnik (czujnik orientacji) może działać lepiej.</string>
+  <string name="init_force_orientation_sensor">Wymuś użycie czujnika orientacji</string>
   <string name="init_create_memory_dump">Wykonaj zrzut pamięci</string>
   <string name="init_memory_dump">Zrzut pamięci</string>
   <string name="init_memory_dumped">Pamięć zrzucona do %s</string>
@@ -688,6 +701,7 @@
   <string name="cache_menu_navigate">Nawiguj</string>
   <string name="cache_menu_navigation_drive">Nawigacja (jazda)</string>
   <string name="cache_menu_navigation_walk">Nawigacja (pieszo)</string>
+  <string name="cache_menu_navigation_transit">Nawigacja (Tranzyt)</string>
   <string name="cache_menu_navigation_bike">Nawigacja (rower)</string>
   <string name="cache_menu_maps_directions">Kierunki map Google</string>
   <string name="cache_menu_sygic_walk">Sygic (pieszo)</string>
@@ -723,6 +737,7 @@
   <string name="cache_status_offline_log">Zapamiętany wpis</string>
   <string name="cache_status_found">Znaleziona</string>
   <string name="cache_not_status_found">Nie znaleziono</string>
+  <string name="cache_never_found">Nigdy nie znaleziona</string>
   <string name="cache_status_archived">Zarchiwizowana</string>
   <string name="cache_status_disabled">Niedostępna</string>
   <string name="cache_status_premium">Tylko dla użytkowników Premium</string>

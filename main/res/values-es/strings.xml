@@ -547,6 +547,7 @@
   <string name="init_low_power_note">El modo de ahorro de energía evita el uso del GPS y del giroscopio cuando no es necesaria una ubicación muy precisa, a costa de aumentar el tiempo para fijar los satélites.</string>
   <string name="init_low_power_mode">Activar ahorro de energía</string>
   <string name="init_force_orientation_sensor_title">Sensor de orientación</string>
+  <string name="init_force_orientation_sensor_note">En algunos dispositivos, el sensor de vectores de rotación estándar se comporta de manera errática, dando la dirección equivocada. En este caso, un sensor alternativo (el sensor de orientación) puede proporcionar mejores resultados.</string>
   <string name="init_force_orientation_sensor">Forzar el uso del sensor de orientación</string>
   <string name="init_create_memory_dump">Crear volcado de memoria</string>
   <string name="init_memory_dump">Volcado de memoria</string>
@@ -689,6 +690,7 @@
   <string name="cache_menu_navigate">Navegar</string>
   <string name="cache_menu_navigation_drive">Navegación (Coche)</string>
   <string name="cache_menu_navigation_walk">Navegación (A Pie)</string>
+  <string name="cache_menu_navigation_transit">Navegación (Trans. público)</string>
   <string name="cache_menu_navigation_bike">Navegación (Bici)</string>
   <string name="cache_menu_maps_directions">Direcciones de Google Maps</string>
   <string name="cache_menu_sygic_walk">Sygic (A pie)</string>
