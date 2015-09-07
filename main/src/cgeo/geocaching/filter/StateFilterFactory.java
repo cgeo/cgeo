@@ -27,7 +27,6 @@ class StateFilterFactory implements IFilterFactory {
         filters.add(new StateDisabledFilter());
         filters.add(new StatePremiumFilter());
         filters.add(new StateNonPremiumFilter());
-        filters.add(new StateOfflineLogFilter());
         filters.add(new StateStoredFilter());
         filters.add(new StateNotStoredFilter());
         filters.add(new RatingFilter());
@@ -258,36 +257,6 @@ class StateFilterFactory implements IFilterFactory {
             @Override
             public StateNonPremiumFilter[] newArray(final int size) {
                 return new StateNonPremiumFilter[size];
-            }
-        };
-    }
-
-    static class StateOfflineLogFilter extends AbstractFilter {
-
-        public StateOfflineLogFilter() {
-            super(R.string.cache_status_offline_log);
-        }
-
-        protected StateOfflineLogFilter(final Parcel in) {
-            super(in);
-        }
-
-        @Override
-        public boolean accepts(@NonNull final Geocache cache) {
-            return cache.isLogOffline();
-        }
-
-        public static final Creator<StateOfflineLogFilter> CREATOR
-                = new Parcelable.Creator<StateOfflineLogFilter>() {
-
-            @Override
-            public StateOfflineLogFilter createFromParcel(final Parcel in) {
-                return new StateOfflineLogFilter(in);
-            }
-
-            @Override
-            public StateOfflineLogFilter[] newArray(final int size) {
-                return new StateOfflineLogFilter[size];
             }
         };
     }
