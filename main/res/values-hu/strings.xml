@@ -219,7 +219,7 @@
   <string name="info_log_posted">A c:geo sikeresen elküldte a bejegyzést.</string>
   <string name="info_log_saved">A c:geo sikeresen elmentette a bejegyzést.</string>
   <string name="info_log_post_failed">Log küldése sikertelen.</string>
-  <string name="info_log_post_failed_reason">Ok: %s</string>
+  <string name="info_log_post_failed_reason">Oka: %s</string>
   <string name="info_log_post_retry">Újra</string>
   <string name="info_log_post_save">Offline mentés</string>
   <string name="info_log_cleared">A bejegyzés törölve.</string>
@@ -261,13 +261,13 @@
   <string name="caches_more_caches_no">Ez az összes. Nincs több láda.</string>
   <string name="caches_more_caches_loading">Ládák betöltése…</string>
   <string name="caches_more_caches_currently">jelenleg</string>
-  <string name="caches_downloading">Ládák letöltése…\nkb.: </string>
+  <string name="caches_downloading">Ládák letöltése…\n</string>
   <string name="caches_eta_ltm">Kevesebb mint egy perc</string>
   <plurals name="caches_eta_mins">
     <item quantity="one">%d perc</item>
     <item quantity="other">%d perc</item>
   </plurals>
-  <string name="caches_store_offline">Offline mentés</string>
+  <string name="caches_store_offline">Összes mentése</string>
   <string name="caches_store_selected">Kijelöltek mentése</string>
   <string name="caches_history">Előzmények</string>
   <string name="caches_on_map">Mutasd meg térképen</string>
@@ -329,7 +329,7 @@
   <string name="caches_filter_personal_note">Személyes megjegyzés</string>
   <string name="caches_filter_popularity">Kedvencek</string>
   <string name="caches_filter_popularity_ratio">Kedvencek [%]</string>
-  <string name="caches_filter_personal_data">Személyes adatok</string>
+  <string name="caches_filter_personal_data">Személyes</string>
   <string name="caches_filter_rating">Értékelve</string>
   <string name="caches_filter_own_rating">Saját értékelés</string>
   <string name="caches_removing_from_history">Eltávolítás a Előzményekből…</string>
@@ -992,7 +992,7 @@
   <string name="export_gpx_info">A GPX fájl ide lesz exportálva: %1$s a jelenlegi dátummal és időponttal a fájl nevében.</string>
   <string name="export_gpx_to">Az exportált GPX küldése ide</string>
   <string name="export_confirm_title">%1$s exportálása</string>
-  <string name="export_confirm_message">Elérési út: %1$s\nFájl név: %2$s</string>
+  <string name="export_confirm_message">Mappa: %1$s\nFájl: %2$s</string>
   <string name="attribute_dogs_yes">Kutyák engedélyezettek</string>
   <string name="attribute_dogs_no">Kutyák nem engedélyezettek</string>
   <string name="attribute_bicycles_yes">Bicikli engedélyezett</string>
