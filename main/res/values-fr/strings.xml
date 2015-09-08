@@ -189,9 +189,9 @@
   <string name="err_log_post_missing_tracking_code">Le code de suivi est absent.</string>
   <string name="err_log_post_missing_coordinates">Les coordonnées sont absentes.</string>
   <string name="err_log_post_failed">Il semble que votre visite n\'ait pas été enregistrée. Veuillez vérifier sur le site web d\'origine de la cache.</string>
-  <string name="err_log_post_failed_ec">Il semble que votre visite n\'a pas été enregistrée. Veuillez vérifier sur le site Extremcaching.com.</string>
-  <string name="err_log_post_failed_gk">Il semble que votre visite n\'a pas été enregistrée. Veuillez vérifier sur le site GeoKrety.org.</string>
-  <string name="err_logimage_post_failed">Il semble que l\'envoi de l\'image ai échoué. Veuillez vérifier sur le site web d\'origine de la cache.</string>
+  <string name="err_log_post_failed_ec">Il semble que votre visite n\'ait pas été enregistrée. Veuillez vérifier sur le site Extremcaching.com.</string>
+  <string name="err_log_post_failed_gk">Il semble que votre visite n\'ait pas été enregistrée. Veuillez vérifier sur le site GeoKrety.org.</string>
+  <string name="err_logimage_post_failed">Il semble que l\'envoi de l\'image ait échoué. Veuillez vérifier sur le site web d\'origine de la cache.</string>
   <string name="err_search_address_forgot">c:geo a oublié l\'adresse recherchée.</string>
   <string name="err_parse_lat">c:geo n\'arrive pas à lire la latitude.</string>
   <string name="err_parse_lon">c:geo n\'arrive pas à lire la longitude.</string>
@@ -200,7 +200,7 @@
   <string name="warn_save_nothing">Il n\'y a rien à enregistrer.</string>
   <string name="warn_no_cache_coord">Il n\'y pas de caches avec les coordonnées associées.</string>
   <string name="warn_no_coordinates">Aucune coordonnée associée.</string>
-  <string name="warn_no_keyword">Pas de mot clé.</string>
+  <string name="warn_no_keyword">Aucun mot-clé saisi.</string>
   <string name="warn_no_username">Pas de nom d\'utilisateur.</string>
   <string name="warn_search_help_title">Besoin d\'aide?</string>
   <string name="warn_search_help_address">Veuillez remplir l\'adresse ou le lieu. Par exemple l\'adresse \"100 Avenue Montaigne, Paris, France\", nom de la ville \"Berlin\" ou simplement \"Parc Yellowstone\".</string>
@@ -865,7 +865,7 @@
   <string name="map_live_disable">Désactiver Temps réel</string>
   <string name="map_static_title">Cartes statiques</string>
   <string name="map_static_loading">Chargement des cartes statiques…</string>
-  <string name="map_token_err">Depuis que c:geo est capable de télécharger des données partielles, les coordonnées des caches peuvent être inexactes.</string>
+  <string name="map_token_err">Étant donné que c:geo est seulement capable de télécharger des données partielles, les coordonnées des caches peuvent être approximatives.</string>
   <string name="map_as_list">Lister les caches</string>
   <string name="map_strategy">Stratégie</string>
   <string name="map_strategy_title">Stratégie de carte active</string>
@@ -883,7 +883,7 @@
   <string name="search_geo">Code de la cache</string>
   <string name="search_geo_button">Rechercher la cache</string>
   <string name="search_kw">Mots-clés</string>
-  <string name="search_kw_prefill">Mot clé</string>
+  <string name="search_kw_prefill">Mot-clé</string>
   <string name="search_kw_button">Rechercher par Mot-clé</string>
   <string name="search_fbu">Trouvées par un utilisateur</string>
   <string name="search_fbu_prefill">Nom d\'utilisateur</string>
@@ -986,7 +986,7 @@
   <string name="export_fieldnotes_upload">Envoyer vers Geocaching.com</string>
   <string name="export_fieldnotes_uploading">Envoi en cours…</string>
   <string name="export_fieldnotes_upload_success">Envoi effectué avec succès</string>
-  <string name="export_fieldnotes_onlynew">Uniquement les notes crées ou modifiées depuis le dernier export</string>
+  <string name="export_fieldnotes_onlynew">Uniquement les notes créées ou modifiées depuis le dernier export</string>
   <string name="export_fieldnotes_creating">Création des notes de terrain…</string>
   <string name="export_gpx">GPX</string>
   <string name="export_gpx_info">Le fichier GPX sera exporté dans %1$s avec la date et l\'heure courantes comme nom de fichier.</string>

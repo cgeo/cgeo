@@ -80,6 +80,12 @@
   <string name="log_tb_archived">Arkivert</string>
   <string name="log_save">Lagre offline</string>
   <string name="log_saving">Lagrer logg…</string>
+  <string name="log_saving_and_uploading">Laster opp logg og bilde…</string>
+  <string name="log_posting_log">Laster opp logg…</string>
+  <string name="log_posting_twitter">Laster opp tweet…</string>
+  <string name="log_posting_gcvote">Laster opp GCVote…</string>
+  <string name="log_posting_image">Laster opp bilde…</string>
+  <string name="log_posting_generic_trackable">Logger %1$s %2$s/%3$s</string>
   <string name="log_clear">Tøm</string>
   <string name="log_post_not_possible">Nedlastning pågår…\nPrøv igjen i noen sekunder eller kontroller Internett-tilkoblingen.</string>
   <string name="log_post_geocode_missing">GC-kode mangler…</string>
@@ -212,6 +218,10 @@
   <string name="warn_no_pocket_query_found">Ingen pocket query ble funnet på geocaching.com.</string>
   <string name="info_log_posted">c:geo lyktes i å logge funnet.</string>
   <string name="info_log_saved">c:geo lyktes i å lagre loggen.</string>
+  <string name="info_log_post_failed">Opplastning av logg mislyktes.</string>
+  <string name="info_log_post_failed_reason">Grunn: %s</string>
+  <string name="info_log_post_retry">Prøv på nytt</string>
+  <string name="info_log_post_save">Lagre offline</string>
   <string name="info_log_cleared">Loggen ble slettet.</string>
   <string name="info_log_type_changed">Logg-typen har blitt forandret!</string>
   <string name="info_select_logimage_cancelled">Valg av bilde ble avbrutt.</string>
@@ -220,6 +230,7 @@
   <string name="info_cache_saved">Cachen er nå lagret lokalt</string>
   <string name="err_trackable_log_not_anonymous">Logging av %1$s fra c:geo kan ikke gjøres anonymt. Vil du åpne innstillinger for å fylle inn påloggingsopplysningene fra %2$s?</string>
   <string name="err_trackable_no_preference_activity">Beklager, finner ikke innstilling-skjermen som hører til.</string>
+  <string name="warn_discard_changes">Ikke-lagrede endringer på veipunkt er forkastet.</string>
   <string name="loc_last">Sist sett</string>
   <string name="loc_net">Nettverk</string>
   <string name="loc_fused">Kombinert</string>
@@ -359,16 +370,22 @@
   <string name="settings_title_services">Tjenester</string>
   <string name="settings_summary_services">Konfigurer kontoinformasjon og tilgang til tilleggstjenester.</string>
   <string name="settings_title_appearance">Utseende</string>
+  <string name="settings_summary_appearance">Endre avstandsenheter, språk og fargetema i appen.</string>
   <string name="settings_title_cachedetails">Cache-detaljer</string>
+  <string name="settings_summary_cachedetails">Tilpass visningen av cacheinformasjon. </string>
   <string name="settings_title_offlinedata">Offline-data</string>
   <string name="settings_title_logging">Logging</string>
+  <string name="settings_summary_logging">Endre signatur og loggingsalternativer.</string>
   <string name="settings_title_map">Vis på kartet</string>
+  <string name="settings_summary_map">Angi kartkilde, instillinger for offline-kart og kartdetaljer.</string>
   <string name="settings_title_map_data">Kartdata</string>
   <string name="settings_title_map_content">Kartinnhold</string>
   <string name="settings_title_gpx">GPX</string>
   <string name="settings_title_basicmembers">Alternativer for Basic-medlemmer</string>
   <string name="settings_title_navigation">Navigasjon</string>
+  <string name="settings_summary_navigation">Velg navigasjonsmetode og velg eksterne navigasjonsapper.</string>
   <string name="settings_title_system">System</string>
+  <string name="settings_summary_system">Utfør sikkerhetskopiering og gjenoppretting, endre mapper og andre systeminnstillinger.</string>
   <string name="settings_title_navigation_menu">Navigasjonsmenyen</string>
   <string name="settings_category_browser">Nettleser</string>
   <string name="settings_category_geocaching">Geocaching</string>
@@ -424,6 +441,7 @@
   <string name="init_authorization_credential_username">Brukernavn</string>
   <string name="init_authorization_credential_password">Passord</string>
   <string name="settings_service_active">Aktiv</string>
+  <string name="settings_navigation_disabled">Denne app synes ikke å være installert</string>
   <string name="init_signature">Signatur</string>
   <string name="init_template_help">Autotekst, slik som [NAME], vil bli erstattet med navnet på cachen når denne malen blir brukt i en logg.</string>
   <string name="init_signature_template_button">Sett inn autotekst</string>
@@ -536,6 +554,9 @@
   <string name="init_low_power">Strømsparingsmodus</string>
   <string name="init_low_power_note">Strømsparingsmodus unngår GPS og gyroskop når en svært nøyaktig plassering ikke er strengt nødvendig, men det gir lengere behandlingstid.</string>
   <string name="init_low_power_mode">Aktivere strømsparingsmodus</string>
+  <string name="init_force_orientation_sensor_title">Retningssensor</string>
+  <string name="init_force_orientation_sensor_note">På noen enheter vil den normale retningssensoren feilaktig endre retning. Isåfall kan en alternativ sensor (orienteringssensor) gi bedre resultat.</string>
+  <string name="init_force_orientation_sensor">Tving bruk at orienteringssensor</string>
   <string name="init_create_memory_dump">Opprett minnedump</string>
   <string name="init_memory_dump">Minnedump</string>
   <string name="init_memory_dumped">Minne dumpet til %s</string>
@@ -705,10 +726,13 @@
   <string name="cache_menu_vote">Avgi stemme</string>
   <string name="cache_menu_checker">Åpne Geochecker</string>
   <string name="cache_menu_ignore">Ignorer cache</string>
+  <string name="ignore_confirm_title">Vær forsiktig</string>
+  <string name="ignore_confirm_message">Hvis du ignorerer en cache, betyr det at den aldri vil bli med blant data som hentes fra geocaching.com igjen. Du må fjerne den fra ignoreringslista på nettsiden for å kunne hente den på nytt.</string>
   <string name="cache_status">Status</string>
   <string name="cache_status_offline_log">Logg lagret</string>
   <string name="cache_status_found">Funnet</string>
   <string name="cache_not_status_found">Ikke funnet</string>
+  <string name="cache_never_found">Aldri funnet</string>
   <string name="cache_status_archived">Arkivert</string>
   <string name="cache_status_disabled">Deaktivert</string>
   <string name="cache_status_premium">Kun for premium-medlemmer</string>
@@ -771,6 +795,8 @@
   <string name="gpx_import_select_list_title">Importer GPX til liste</string>
   <string name="gpx_import_android">Importer fra Android</string>
   <string name="map_file_select_title">Velg kartfil</string>
+  <string name="web_import_title">Importer fra send2cgeo</string>
+  <string name="web_import_waiting">Venter på nye cacher fra send2cgeo…</string>
   <string name="web_downloading">Laster ned</string>
   <string name="web_downloaded">Lastet ned</string>
   <string name="popup_more">Mer detaljer</string>
@@ -938,6 +964,8 @@
   <string name="helper_google_translate_description">Hvis du laster ned oversettelsespakker i Google Oversetter-appen kan du enkelt oversette cachebeskrivelsen i c:geo ved å trykke lenge på teksten (uten å ha tilgang til Internett).</string>
   <string name="helper_wear_title">c:geo Wear</string>
   <string name="helper_wear_description">c:geo Wear er et tillegg til c:geo som lar deg navigere til geocacher ved hjelp av Android Wear smartklokke.</string>
+  <string name="helper_where_you_go_title">WhereYouGo</string>
+  <string name="helper_where_you_go_description">Med WhereYouGo kan du lete etter Whereigo-geocacher. C:geo kan automatisk laste ned Wherigo-kassetter for deg.</string>
   <string name="addon_missing_title">Manglende tillegg</string>
   <string name="addon_download_prompt">Last ned nå fra Google Play.</string>
   <string name="export">Eksporter</string>
@@ -1205,7 +1233,15 @@
   <string name="tts_stopped">Stoppet tale</string>
   <string name="err_tts_lang_not_supported">Dette språket er ikke støttet av text-to-speech.</string>
   <string name="tts_one_kilometer">en kilometer</string>
+  <plurals name="tts_kilometers">
+    <item quantity="one">%s kilometer</item>
+    <item quantity="other">%s kilometer</item>
+  </plurals>
   <string name="tts_one_meter">en meter</string>
+  <plurals name="tts_meters">
+    <item quantity="one">%s meter</item>
+    <item quantity="other">%s meter</item>
+  </plurals>
   <string name="tts_one_mile">En enkelsk mil</string>
   <plurals name="tts_miles">
     <item quantity="one">%s engelsk mil</item>
