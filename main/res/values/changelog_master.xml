@@ -25,6 +25,7 @@
     · Fix: Contents of cache lists might get inconsistent if active list is changed\n
     · Fix: Close keyboard when starting search\n
     · Fix: Close search field when returning from search\n
+    · Fix: Remove duplicate filter for offline logs\n
     \n
   </string>
 </resources>
