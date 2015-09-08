@@ -555,6 +555,8 @@
   <string name="init_low_power">Strömsparläge</string>
   <string name="init_low_power_note">Strömsparläget undviker att använda GPS och gyroskop när exakt position inte är absolut nödvändigt. Detta sker på bekostnad av längre tid för positionering.</string>
   <string name="init_low_power_mode">Aktivera strömsparläge</string>
+  <string name="init_force_orientation_sensor_title">Riktningsgivare</string>
+  <string name="init_force_orientation_sensor_note">På vissa enheter uppför sig rotationsgivaren illa och visar fel riktning. Om detta händer kan en alternativ givare (riktningsgivare) ge ett bättre resultat.</string>
   <string name="init_force_orientation_sensor">Tvinga användning av riktningsgivare</string>
   <string name="init_create_memory_dump">Skapa minnesdump</string>
   <string name="init_memory_dump">Minnesdump</string>
@@ -702,6 +704,7 @@
   <string name="cache_menu_navigate">Navigera</string>
   <string name="cache_menu_navigation_drive">Navigering (med bil)</string>
   <string name="cache_menu_navigation_walk">Navigering (till fots)</string>
+  <string name="cache_menu_navigation_transit">Navigering (kollektivt)</string>
   <string name="cache_menu_navigation_bike">Navigering (med cykel)</string>
   <string name="cache_menu_maps_directions">Google Maps Navigering</string>
   <string name="cache_menu_sygic_walk">Sygic (vandring)</string>
