@@ -119,7 +119,7 @@
   <string name="log_password_title">Láda jelszó logoláshoz:</string>
   <string name="log_hint_log_password">Írd be a láda (log) jelszavát</string>
   <string name="log_oc_team_comment">OC csapat kommentje</string>
-  <string name="log_your_saved_log">Mentett logod</string>
+  <string name="log_your_saved_log">Offline logod</string>
   <string-array name="log_image_scales">
     <item>Nincs átméretezés</item>
     <item>512 px</item>
@@ -144,7 +144,7 @@
   <string name="err_wrong">Rossz belépési adatok</string>
   <string name="err_maintenance">A geocaching.com karbantartás miatt elérhetetlen. A c:geo offline módban működik elmentett ládákkal.</string>
   <string name="err_license">Nem fogadtad el a geocaching.com licencmegállapodását, így a c:geo nem tudja betölteni a ládák koordinátáit.</string>
-  <string name="err_unvalidated_account">Előbb aktiválnod kell a fiókod a geocaching.com honlapján.</string>
+  <string name="err_unvalidated_account">Előbb aktiválnod kell a fiókod a geocaching.com weboldalon.</string>
   <string name="err_unpublished">A kért geoládát eltávolították.</string>
   <string name="err_premium_only">Ez a láda csak a geocaching.com prémium felhasználói számára hozzáférhető.</string>
   <string name="err_detail_open">Sajnáljuk, a c:geo nem tudja megnyitni a láda adatait.</string>
@@ -188,10 +188,10 @@
   <string name="err_log_load_data_still">A c:geo még tölti a logoláshoz szükséges adatokat. Kérlek, várj még egy kicsit!</string>
   <string name="err_log_post_missing_tracking_code">A követőkód hiányzik.</string>
   <string name="err_log_post_missing_coordinates">A koordináták hiányoznak.</string>
-  <string name="err_log_post_failed">Úgy tűnik, hogy a logod nem ment át. Kérlek, ellenőrizd a láda eredeti oldalát!</string>
+  <string name="err_log_post_failed">Úgy tűnik, hogy a logod nem ment át. Kérlek, ellenőrizd a láda weboldalát!</string>
   <string name="err_log_post_failed_ec">Úgy tűnik, hogy a logod nem került hozzáadásra. Kérlek, ellenőrizd a extremcaching.com-on!</string>
   <string name="err_log_post_failed_gk">Úgy tűnik, hogy a logod nem került hozzáadásra. Kérlek, ellenőrizd a GeoKrety.org-on!</string>
-  <string name="err_logimage_post_failed">Úgy tűnik, hogy a logfotóid nem mentek át. Kérlek, ellenőrizd a láda eredeti oldalát!</string>
+  <string name="err_logimage_post_failed">Úgy tűnik, hogy a logfotóid nem mentek át. Kérlek, ellenőrizd a láda weboldalát!</string>
   <string name="err_search_address_forgot">Sajnáljuk, a c:geo elfelejtette a keresett címet.</string>
   <string name="err_parse_lat">Sajnáljuk, a c:geo nem tudja értelmezni a szélességet.</string>
   <string name="err_parse_lon">Sajnáljuk, a c:geo nem tudja értelmezni a hosszúságot.</string>
@@ -230,7 +230,7 @@
   <string name="info_cache_saved">Láda adati letöltve</string>
   <string name="err_trackable_log_not_anonymous">%1$s logolása a c:geo-ból nem végezhető el névtelenül. Meg akarod nyitni a beállításokat, hogy kitöltsd a %2$s-ra vonatkozó adatokat?</string>
   <string name="err_trackable_no_preference_activity">Sajnáljuk, de nem található megfelelő beállítási képernyő.</string>
-  <string name="warn_discard_changes">A nem mentett útvonal pont változtatások nincsenek elmentve!</string>
+  <string name="warn_discard_changes">Nem mentett útpontmódosítások elvetve!</string>
   <string name="loc_last">Utolsó ismert</string>
   <string name="loc_net">Hálózat</string>
   <string name="loc_fused">Kombinált</string>
@@ -530,7 +530,7 @@
   <string name="init_default_navigation_tool_description">Itt választhatod ki az elsődleges navigációs eszközödet.</string>
   <string name="init_default_navigation_tool_select">Eszköz kiválasztása</string>
   <string name="init_default_navigation_tool_2_description">Itt választhatod ki a másodlagos navigációs eszközödet. A láda neve melletti navigációs ikon hosszabb megnyomásával aktiválhatod.</string>
-  <string name="init_navigation_menu_description">Itt adhatod meg, hogy mely navigációs lehetőségek jelenjenek meg egy láda vagy útpont számára a navigációs menüben. A letiltott eszközök nincsenek telepítve.</string>
+  <string name="init_navigation_menu_description">Itt adhatod meg, hogy mely navigációs lehetőségek jelenjenek meg egy láda vagy útpont számára a navigációs menüben. A letiltott alkalmazások nincsenek telepítve.</string>
   <string name="init_debug_title">Hibakeresési információ</string>
   <string name="init_debug_note">A c:geo nagy mennyiségű hibakeresési információt képes generálni. Ez az információ általában hasznavehetetlen a felhasználók számára, de a fejlesztőknek szükségük lehet rá hibák felderítéséhez. Ha szükséges, meg fogunk kérni, hogy jelöld be a lenti jelölőnégyzetet és küld el nekünk a keletkező logfájlt.</string>
   <string name="init_debug">Hibakeresési napló aktiválása</string>
@@ -594,7 +594,7 @@
   <string name="map_source_osm_cyclemap">OSM: Biciklis térkép</string>
   <string name="map_source_osm_offline">Offline</string>
   <string name="init_sendToCgeo">Send2cgeo</string>
-  <string name="settings_info_send2cgeo_title">Információk a \'send2cgeo\'-ról</string>
+  <string name="settings_info_send2cgeo_title">Információ a send2cgeo-ról</string>
   <string name="init_sendToCgeo_name">Készüléked neve</string>
   <string name="init_sendToCgeo_description">A <b>send2cgeo</b> segítségével közvetlenül a geocaching weboldalról tölthetsz le ládákat egy Firefox vagy Chrome modul segítségével. Regisztráció előtt olvasd el a leírást: <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>! Csak akkor kell regisztrálnod, ha a send2cgeo modult használni akarod. A c:geo e regisztráció nélkül is működik.</string>
   <string name="init_sendToCgeo_register">Regisztráció kérése</string>
@@ -738,7 +738,7 @@
   <string name="ignore_confirm_title">Légy óvatos</string>
   <string name="ignore_confirm_message">Egy láda mellőzése azt jelenti, hogy a láda soha többé nem fog letöltődni a geocaching.com-ról. Csak akkor láthatod ismét ezt a ládát, ha visszavonod a mellőzését a geocaching.com-on.</string>
   <string name="cache_status">Állapot</string>
-  <string name="cache_status_offline_log">Mentett log</string>
+  <string name="cache_status_offline_log">Offline log</string>
   <string name="cache_status_found">Megtaláltam</string>
   <string name="cache_not_status_found">Nem találtam meg</string>
   <string name="cache_never_found">Szűz láda</string>
@@ -837,7 +837,7 @@
   <string name="waypoint_reset_local_and_remote_cache_coords">Visszaállítás a c:geo-ban és a weboldalon</string>
   <string name="waypoint_being_saved">Útpont mentése…</string>
   <string name="waypoint_coordinates_couldnt_be_modified_on_website">A weboldal nem támogatja a ládakoordináták módosítását.</string>
-  <string name="waypoint_coordinates_upload_error">Hiba történt a koordináták honlapon történő módosítása közben.</string>
+  <string name="waypoint_coordinates_upload_error">Hiba történt a koordináták weboldalon történő módosítása közben.</string>
   <string name="waypoint_coordinates_uploading_to_website">Koordináták feltöltése %s weboldalra.</string>
   <string name="waypoint_coordinates_has_been_modified_on_website">A %s koordinátáinak módosítása megtörtént a weboldalon.</string>
   <string name="waypoint_done">Kész</string>
@@ -935,7 +935,7 @@
   <string name="geokret_type_human">Humán</string>
   <string name="geokret_type_coin">Érme</string>
   <string name="geokret_type_post">Mail</string>
-  <string name="user_menu_title">Információ</string>
+  <string name="user_menu_title"> </string>
   <string name="user_menu_view_hidden">Ládák száma</string>
   <string name="user_menu_view_found">Megtalálások száma</string>
   <string name="user_menu_open_browser">Profil megnyitása a böngészőben</string>
@@ -962,7 +962,7 @@
   <string name="helper_locus_title">Locus</string>
   <string name="helper_locus_description">Telefonon, tableten használható szabadtéri navigációs program. Offline térképek használata, útvonalkövetés, ládavadászat, hangos útikalauz, stb.</string>
   <string name="helper_gpsstatus_title">GPS Status</string>
-  <string name="helper_gpsstatus_description">A programban található radart a c:geo-hoz is használhatod. Sok egyéb GPS-el kapcsolatos információt is megmutat.</string>
+  <string name="helper_gpsstatus_description">A programban található radart a c:geo-hoz is használhatod. Sok egyéb GPS-szel kapcsolatos információt is megmutat.</string>
   <string name="helper_bluetoothgps_title">Bluetooth GPS</string>
   <string name="helper_bluetoothgps_description">Ez a program külső GPS vevők használatát teszi lehetővé, amelyek segítségével jobb vételt és pontosabb koordinátákat kaphatsz. Külső GPS használatával a telefonod akkumulátora is tovább bírja.</string>
   <string name="helper_barcode_title">Vonalkódolvasó</string>

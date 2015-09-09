@@ -80,6 +80,12 @@
   <string name="log_tb_archived">Archiviato</string>
   <string name="log_save">Salva offline</string>
   <string name="log_saving">Invio log…</string>
+  <string name="log_saving_and_uploading">Pubblicazione log e caricamento immagine…</string>
+  <string name="log_posting_log">Caricamento log…</string>
+  <string name="log_posting_twitter">Caricamento tweet…</string>
+  <string name="log_posting_gcvote">Caricamento GCVote…</string>
+  <string name="log_posting_image">Caricamento immagine…</string>
+  <string name="log_posting_generic_trackable">Caricamento %1$s %2$s/%3$s</string>
   <string name="log_clear">Azzera</string>
   <string name="log_post_not_possible">Download dei dati in corso...\nRiprovare tra alcuni secondi o controllare la connessione a internet.</string>
   <string name="log_post_geocode_missing">Geocode mancante…</string>
@@ -212,6 +218,10 @@
   <string name="warn_no_pocket_query_found">Nessuna Pocket query trovata online.</string>
   <string name="info_log_posted">c:geo ha inviato il log con successo.</string>
   <string name="info_log_saved">c:geo ha salvato il log.</string>
+  <string name="info_log_post_failed">Caricamento log fallito.</string>
+  <string name="info_log_post_failed_reason">Motivo: %s</string>
+  <string name="info_log_post_retry">Riprova</string>
+  <string name="info_log_post_save">Salva offline</string>
   <string name="info_log_cleared">Il log è stato azzerato.</string>
   <string name="info_log_type_changed">Il tipo di log è cambiato!</string>
   <string name="info_select_logimage_cancelled">Selezione o cattura immagine annulata.</string>
@@ -541,6 +551,9 @@
   <string name="init_low_power">Risparmio energetico</string>
   <string name="init_low_power_note">Questa modalità evita di utilizzare il GPS ed il giroscopio quando una posizione molto precisa non è strettamente necessaria. Può richiedere un tempo più lungo di sincronizzazione GPS.</string>
   <string name="init_low_power_mode">Attiva il risparmio energetico</string>
+  <string name="init_force_orientation_sensor_title">Sensore di orientamento</string>
+  <string name="init_force_orientation_sensor_note">Su alcuni dispositivi, il sensore standard di rotazione si comporta in modo errato, dando la direzione sbagliata. In questo caso, un sensore alternativo (il sensore di orientamento) può fornire risultati migliori.</string>
+  <string name="init_force_orientation_sensor">Forza uso del sensore di orientamento</string>
   <string name="init_create_memory_dump">Salva un memory dump della situazione attuale</string>
   <string name="init_memory_dump">Salvataggio memoria</string>
   <string name="init_memory_dumped">Memoria salvata in %s</string>
@@ -683,6 +696,7 @@
   <string name="cache_menu_navigate">Naviga</string>
   <string name="cache_menu_navigation_drive">Naviga (in auto)</string>
   <string name="cache_menu_navigation_walk">Naviga (a piedi)</string>
+  <string name="cache_menu_navigation_transit">Navigazione (trasporti pubblici)</string>
   <string name="cache_menu_navigation_bike">Naviga (in moto)</string>
   <string name="cache_menu_maps_directions">Direzioni su Google Maps</string>
   <string name="cache_menu_sygic_walk">Sygic (a piedi)</string>
