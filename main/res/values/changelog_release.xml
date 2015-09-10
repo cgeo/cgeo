@@ -3,7 +3,8 @@
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
     <b>Next release:</b>\n
-    · New: Cache icons in lists now shown with same indicators as on the map\n
+    · New: Redesign of cache overlay icons\n
+    · New: Alignment of cache icons on list and map\n
     · New: Progress indication while posting a log\n
     · New: Menu in cache details to put cache on ignore list (but not to remove)\n
     · New: Upload personal note to Opencaching platforms\n
@@ -15,6 +16,7 @@
     · New: Maps.me shows waypoints of cache\n
     · New: Auto complete geocode in Geokrety logging view\n
     · New: Add Google Maps transit mode\n
+    · Fix: Compass problems on some Sony Xperia devices\n
     · Fix: opencaching.com officially shut down\n
     · Fix: Last log type for TB logs now remembered correctly\n
     · Fix: Don\´t accidentally bother geocaching.com for GK trackables\n
