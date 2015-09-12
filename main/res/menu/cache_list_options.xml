@@ -26,31 +26,38 @@
     <item
         android:id="@+id/menu_switch_select_mode"
         android:icon="@drawable/ic_menu_agenda"
-        android:title="@string/caches_select_mode">
+        android:title="@string/caches_select_mode"
+        app:showAsAction="ifRoom|withText">
     </item>
     <item
         android:id="@+id/menu_invert_selection"
         android:icon="@drawable/ic_menu_mark"
-        android:title="@string/caches_select_invert">
+        android:title="@string/caches_select_invert"
+        app:showAsAction="ifRoom|withText">
     </item>
     <item
         android:id="@+id/menu_refresh_stored"
         android:icon="@drawable/ic_menu_set_as"
-        android:title="@string/cache_offline_refresh">
+        android:title="@string/cache_offline_refresh"
+        app:showAsAction="ifRoom|withText">
     </item>
     <item
         android:id="@+id/menu_move_to_list"
-        android:title="@string/cache_menu_move_list">
+        android:title="@string/cache_menu_move_list"
+        app:showAsAction="ifRoom|withText">
     </item>
     <item
         android:id="@+id/menu_drop_caches"
-        android:title="@string/caches_remove_all">
+        android:icon="@drawable/ic_menu_delete"
+        android:title="@string/caches_remove_all"
+        app:showAsAction="ifRoom|withText">
     </item>
     <item
         android:id="@+id/menu_cache_list_app"
         android:icon="@drawable/ic_menu_goto"
         android:title="@null"
-        android:visible="false">
+        android:visible="false"
+        app:showAsAction="ifRoom|withText">
     </item>
     <item
         android:id="@+id/menu_cache_list_app_provider"
@@ -58,19 +65,25 @@
         android:icon="@drawable/ic_menu_goto"
         android:title="@string/caches_on_map"
         android:visible="false"
-        app:actionProviderClass="cgeo.geocaching.apps.cachelist.ListNavigationSelectionActionProvider">
+        app:actionProviderClass="cgeo.geocaching.apps.cachelist.ListNavigationSelectionActionProvider"
+        app:showAsAction="ifRoom|withText">
     </item>
     <item
         android:id="@+id/menu_create_list"
-        android:title="@string/list_menu_create">
+        android:icon="@drawable/ic_menu_add"
+        android:title="@string/list_menu_create"
+        app:showAsAction="ifRoom|withText">
     </item>
     <item
         android:id="@+id/menu_drop_list"
-        android:title="@string/list_menu_drop">
+        android:icon="@drawable/ic_menu_delete"
+        android:title="@string/list_menu_drop"
+        app:showAsAction="ifRoom|withText">
     </item>
     <item
         android:id="@+id/menu_rename_list"
-        android:title="@string/list_menu_rename">
+        android:title="@string/list_menu_rename"
+        app:showAsAction="ifRoom|withText">
     </item>
     <item
         android:id="@+id/menu_import"
@@ -109,17 +122,20 @@
     <item
         android:id="@+id/menu_delete_events"
         android:title="@string/caches_delete_events"
-        android:visible="false">
+        android:visible="false"
+        app:showAsAction="never|withText">
     </item>
     <item
         android:id="@+id/menu_clear_offline_logs"
         android:title="@string/caches_clear_offlinelogs"
-        android:visible="false">
+        android:visible="false"
+        app:showAsAction="never|withText">
     </item>
     <item
         android:id="@+id/menu_remove_from_history"
         android:title="@string/cache_clear_history"
-        android:visible="false">
+        android:visible="false"
+        app:showAsAction="never|withText">
     </item>
 
 </menu>

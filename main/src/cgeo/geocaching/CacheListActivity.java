@@ -1,7 +1,5 @@
 package cgeo.geocaching;
 
-import butterknife.ButterKnife;
-
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.AbstractListActivity;
 import cgeo.geocaching.activity.ActivityMixin;
@@ -73,15 +71,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
-import rx.Observable;
-import rx.Observable.OnSubscribe;
-import rx.Subscriber;
-import rx.Subscription;
-import rx.functions.Action0;
-import rx.functions.Action1;
-import rx.functions.Func1;
-import rx.schedulers.Schedulers;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -120,6 +109,16 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
+
+import butterknife.ButterKnife;
+import rx.Observable;
+import rx.Observable.OnSubscribe;
+import rx.Subscriber;
+import rx.Subscription;
+import rx.functions.Action0;
+import rx.functions.Action1;
+import rx.functions.Func1;
+import rx.schedulers.Schedulers;
 
 public class CacheListActivity extends AbstractListActivity implements FilteredActivity, LoaderManager.LoaderCallbacks<SearchResult> {
 
@@ -647,6 +646,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             }
             menu.findItem(R.id.menu_invert_selection).setVisible(adapter.isSelectMode());
 
+            setVisible(menu, R.id.menu_show_on_map, !isEmpty);
+            setVisible(menu, R.id.menu_filter, search != null && search.getCount() > 0);
             setVisible(menu, R.id.menu_switch_select_mode, !isEmpty);
             setVisible(menu, R.id.menu_create_list, isOffline);
 
@@ -683,8 +684,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             menu.findItem(R.id.menu_import_android).setVisible(Compatibility.isStorageAccessFrameworkAvailable() && isOffline);
 
             final List<CacheListApp> listNavigationApps = CacheListApps.getActiveApps();
-            menu.findItem(R.id.menu_cache_list_app_provider).setVisible(listNavigationApps.size() > 1);
-            menu.findItem(R.id.menu_cache_list_app).setVisible(listNavigationApps.size() == 1);
+            menu.findItem(R.id.menu_cache_list_app_provider).setVisible(!isEmpty && listNavigationApps.size() > 1);
+            menu.findItem(R.id.menu_cache_list_app).setVisible(!isEmpty && listNavigationApps.size() == 1);
 
         } catch (final RuntimeException e) {
             Log.e("CacheListActivity.onPrepareOptionsMenu", e);
