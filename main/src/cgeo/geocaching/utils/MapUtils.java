@@ -24,11 +24,11 @@ public final class MapUtils {
 
     // data for overlays
     private static final int[][] INSET_RELIABLE = { { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 } }; // center, 33x40 / 45x51 / 60x68 / 90x102 / 120x136
-    private static final int[][] INSET_TYPE = { { 5, 8, 6, 10 }, { 4, 4, 4, 11 }, { 6, 6, 6, 14 }, { 9, 9, 9, 21 }, { 12, 12, 12, 28 } }; // center, 22x22 / 36x36
-    private static final int[][] INSET_OWN = { { 21, 0, 0, 28 }, { 29, 0, 0, 35 }, { 40, 0, 0, 48 }, { 58, 0, 0, 70 }, { 80, 0, 0, 96 } }; // top right, 12x12 / 16x16 / 20x20 / 32x32 / 40x40
-    private static final int[][] INSET_FOUND = { { 0, 0, 21, 28 }, { 0, 0, 29, 35 }, { 0, 0, 40, 48 }, { 0, 0, 58, 70 }, { 0, 0, 80, 96 } }; // top left, 12x12 / 16x16 / 20x20 / 32x32 / 40x40
-    private static final int[][] INSET_USERMODIFIEDCOORDS = { { 21, 28, 0, 0 }, { 29, 35, 0, 0 }, { 40, 48, 0, 0 }, { 58, 70, 0, 0 }, { 80, 96, 0, 0 } }; // bottom right, 12x12 / 16x16 / 20x20 / 32x32 / 40x40
-    private static final int[][] INSET_PERSONALNOTE = { { 0, 28, 21, 0 }, { 0, 35, 29, 0 }, { 0, 48, 40, 0 }, { 0, 70, 58, 0 }, { 0, 96, 80, 0 } }; // bottom left, 12x12 / 16x16 / 20x20 / 32x32 / 40x40
+    private static final int[][] INSET_TYPE = { { 1, 1, 1, 4 }, { 2, 2, 2, 6 }, { 3, 3, 3, 9 }, { 4, 4, 4, 12 }, { 6, 6, 6, 18 } }; // center, 22x22 / 36x36
+    private static final int[][] INSET_OWN = { { 16, 0, 0, 19 }, { 22, 0, 0, 26 }, { 33, 0, 0, 39 }, { 45, 0, 0, 53 }, { 67, 0, 0, 79 } }; // top right, 12x12 / 16x16 / 20x20 / 32x32 / 40x40
+    private static final int[][] INSET_FOUND = { { 0, 0, 16, 19 }, { 0, 0, 22, 26 }, { 0, 0, 33, 39 }, { 0, 0, 45, 53 }, { 0, 0, 67, 79 } }; // top left, 12x12 / 16x16 / 20x20 / 32x32 / 40x40
+    private static final int[][] INSET_USERMODIFIEDCOORDS = { { 16, 19, 0, 0 }, { 22, 26, 0, 0 }, { 33, 39, 0, 0 }, { 45, 53, 0, 0 }, { 67, 79, 0, 0 } }; // bottom right, 12x12 / 16x16 / 20x20 / 32x32 / 40x40
+    private static final int[][] INSET_PERSONALNOTE = { { 0, 19, 16, 0 }, { 0, 26, 22, 0 }, { 0, 39, 33, 0 }, { 0, 53, 45, 0 }, { 0, 79, 67, 0 } }; // bottom left, 12x12 / 16x16 / 20x20 / 32x32 / 40x40
 
     private static final SparseArray<LayerDrawable> overlaysCache = new SparseArray<>();
 
@@ -174,11 +174,12 @@ public final class MapUtils {
 
         // background: disabled or not
         final Drawable marker = Compatibility.getDrawable(res, cache.getMapMarkerId());
+        final int resolution = calculateResolution(marker);
         // Show the background circle only on map
         if (showBackground(cacheListType)) {
             layers.add(marker);
+            insets.add(INSET_RELIABLE[resolution]);
         }
-        final int resolution = calculateResolution(marker);
         // reliable or not
         if (!cache.isReliableLatLon() && showUnreliableLatLon(cacheListType)) {
             insets.add(INSET_RELIABLE[resolution]);
@@ -224,7 +225,7 @@ public final class MapUtils {
 
         final LayerDrawable ld = new LayerDrawable(layers.toArray(new Drawable[layers.size()]));
 
-        int index = showBackground(cacheListType) ? 1 : 0;
+        int index = 0;
         for (final int[] inset : insets) {
             ld.setLayerInset(index++, inset[0], inset[1], inset[2], inset[3]);
         }
@@ -241,7 +242,7 @@ public final class MapUtils {
      *         an index for the overlays positions
      */
     private static int calculateResolution(final Drawable marker) {
-        return marker.getIntrinsicWidth() > 40 ? (marker.getIntrinsicWidth() > 50 ? (marker.getIntrinsicWidth() > 70 ? (marker.getIntrinsicWidth() > 100 ? 4 : 3) : 2) : 1) : 0;
+        return marker.getIntrinsicWidth() >= 30 ? (marker.getIntrinsicWidth() >= 45 ? (marker.getIntrinsicWidth() >= 60 ? (marker.getIntrinsicWidth() >= 90 ? 4 : 3) : 2) : 1) : 0;
     }
 
     /**
@@ -262,8 +263,8 @@ public final class MapUtils {
             return inset[resolution];
         }
         final int[] newPosition = Arrays.copyOf(inset[resolution], 4);
-        newPosition[1] -= INSET_TYPE[resolution][3];
-        newPosition[3] += INSET_TYPE[resolution][3];
+        newPosition[1] -= INSET_TYPE[resolution][3] * 3/2;
+        newPosition[3] += INSET_TYPE[resolution][3] * 3/2;
         return newPosition;
     }
 
