@@ -180,7 +180,7 @@ public final class MapUtils {
         }
         final int resolution = calculateResolution(marker);
         // reliable or not
-        if (!cache.isReliableLatLon()) {
+        if (!cache.isReliableLatLon() && showUnreliableLatLon(cacheListType)) {
             insets.add(INSET_RELIABLE[resolution]);
             layers.add(Compatibility.getDrawable(res, R.drawable.marker_notreliable));
         }
@@ -275,7 +275,21 @@ public final class MapUtils {
      * @return
      *         True if the background circle should be displayed
      */
-    private static boolean showBackground(final CacheListType cacheListType) {
+    private static boolean showBackground(@Nullable final CacheListType cacheListType) {
+        return cacheListType == null;
+    }
+
+    /**
+     * Conditional expression to choose if we need the orange circle or not.
+     * The orange circle indicate an approximative cache position.
+     *
+     * @param cacheListType
+     *          The cache list currently used
+     * @return
+     *          True if the background circle should be displayed
+     */
+    private static boolean showUnreliableLatLon(@Nullable final CacheListType cacheListType) {
+        // Show only on map
         return cacheListType == null;
     }
 
@@ -287,7 +301,7 @@ public final class MapUtils {
      * @return
      *         True if the floppy overlay should be displayed
      */
-    private static boolean showFloppyOverlay(final CacheListType cacheListType) {
+    private static boolean showFloppyOverlay(@Nullable final CacheListType cacheListType) {
         return cacheListType == null || cacheListType != CacheListType.OFFLINE;
     }
 }
