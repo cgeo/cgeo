@@ -149,6 +149,9 @@ public final class Formatter {
         if (cache.isPremiumMembersOnly()) {
             infos.add(CgeoApplication.getInstance().getString(R.string.cache_premium));
         }
+        if (cache.isOffline()) {
+            infos.add(CgeoApplication.getInstance().getString(R.string.cache_offline));
+        }
         return StringUtils.join(infos, SEPARATOR);
     }
 
