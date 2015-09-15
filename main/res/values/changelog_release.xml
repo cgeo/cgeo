@@ -2,7 +2,7 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-    <b>Next release:</b>\n
+    <b>2015.09.15:</b>\n
     · New: Redesign of cache overlay icons\n
     · New: Alignment of cache icons on list and map\n
     · New: Progress indication while posting a log\n
@@ -29,49 +29,6 @@
     · Fix: Close keyboard when starting search\n
     · Fix: Close search field when returning from search\n
     · Fix: Remove duplicate filter for offline logs\n
-    \n
-    \n
-    <b>2015.08.03:</b>\n
-    · Fix: Possible crash while editing personal notes\n
-    · Fix: Waypoints of caches may be missing on GPX import\n
-    · Fix: Crash if talking compass is started without target\n
-    · Fix: Request to gc.com tile server sent for caches from unknown sources\n
-    \n
-    \n
-    <b>2015.07.08:</b>\n
-    · Fix: Alphabetical sorting of trackables in log window\n
-    · Fix: Adapting to geocaching.com changes (waypoint coordinate format)\n
-    \n
-    \n
-    <b>2015.06.19:</b>\n
-    · Fix: Crash in \"About c:geo\" on Android 4.1\n
-    · Fix: Crash when starting map on some devices\n
-    · Fix: Try to allocate more memory on Android 3 and above to avoid crashes on memory intense operations\n
-    \n
-    \n
-    <b>2015.06.15:</b>\n
-    · New: Improved waypoint editor design (Save button now in title bar)\n
-    · New: Full support of GeoKrety (Use: Menu - Services - GeoKrety)\n
-    · New: Optionally disable direction line in maps\n
-    · New: Undo available for some actions\n
-    · New: Copy coords from waypoints to clipboard\n 
-    · New: Catch more http links to GPX files from the browser\n
-    · New: Only turn off GPS in some views if \"Low power mode\" is active in settings\n
-    · New: Refresh menu option for trackables\n
-    · New: Can import TerraCaching.com GPX files\n
-    · New: Also offer c:geo for opening https cache links\n
-    · Fix: Close search bar when selecting a cache\n
-    · Fix: List filter sometimes lost when returning to list\n
-    · Fix: Sygic navigation working again\n
-    · Fix: Don\'t automove marked caches when switching lists\n
-    · Fix: Waypoint type naming on GPX export corrected\n
-    · Fix: Improved refresh button size in cache details\n
-    · Fix: Fixed some possible memory leaks\n
-    · Fix: Wrong log count shown after logging something else than a found\n
-    · Fix: Copy to clipboard not possible on Android 5.1\n
-    · Fix: Cache links in Groundspeaks weekly mails not opening\n
-    · Fix: Heading line had wrong target when started from compass\n
-    · Fix: Crash opening geochecker from cache\n
     \n
     \n
     <b>Known Limitations/Bugs:</b>\n
