@@ -6,9 +6,9 @@ import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.ConnectorFactoryTest;
 import cgeo.geocaching.connector.IConnector;
 
-import junit.framework.TestCase;
-
 import java.util.Set;
+
+import junit.framework.TestCase;
 
 public class OCConnectorTest extends TestCase {
 
@@ -34,13 +34,18 @@ public class OCConnectorTest extends TestCase {
         assertThat(connector.getGeocodeFromUrl("http://www.opencaching.de/OC0028")).isEqualTo("OC0028");
     }
 
+    public static void testGetGeocodeFromInternalId() {
+        final IConnector connector = ConnectorFactory.getConnector("OC0028");
+        assertThat(connector.getGeocodeFromUrl("http://www.opencaching.de/viewcache.php?cacheid=151223")).isEqualTo("OCBBFE");
+    }
+
     public static void testGetGeocodeFromUrlUs() throws Exception {
         final IConnector connector = ConnectorFactory.getConnector("OU07A0");
         assertThat(connector.getGeocodeFromUrl("http://www.opencaching.us/viewcache.php?wp=OU07A0")).isEqualTo("OU07A0");
     }
 
     public static void testHandledGeocodes() {
-        Set<String> geocodes = ConnectorFactoryTest.getGeocodeSample();
+        final Set<String> geocodes = ConnectorFactoryTest.getGeocodeSample();
         assertThat(getOcDeConnector().handledGeocodes(geocodes)).containsOnly("OC1234", "OC5678");
     }
 }

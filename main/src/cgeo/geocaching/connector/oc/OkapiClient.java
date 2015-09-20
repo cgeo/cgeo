@@ -909,4 +909,24 @@ final class OkapiClient {
             data.putObject("error").put("developer_message", errorMessage);
         }
     }
+
+    /**
+     * extract the geocode from an URL, by using a backward mapping on the server
+     */
+    @Nullable
+    public static String getGeocodeByUrl(final OCApiConnector connector, final String url) {
+        final Parameters params = new Parameters("urls", url);
+        final ObjectNode data = request(connector, OkapiService.SERVICE_RESOLVE_URL, params).data;
+
+        if (data == null) {
+            return null;
+        }
+
+        if (data.has("results")) {
+            final ArrayNode results = (ArrayNode) data.path("results");
+            return results.get(0).asText();
+        }
+
+        return null;
+    }
 }

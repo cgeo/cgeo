@@ -6,10 +6,14 @@ import cgeo.geocaching.connector.capability.ISearchByGeocode;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.CryptUtils;
+import cgeo.geocaching.utils.RxUtils;
 
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+
+import rx.Observable;
+import rx.functions.Func0;
 
 public class OCApiConnector extends OCConnector implements ISearchByGeocode {
 
@@ -108,4 +112,29 @@ public class OCApiConnector extends OCConnector implements ISearchByGeocode {
     public boolean isSearchForMyCaches(final String username) {
         return false;
     }
+
+    @Override
+    @Nullable
+    public String getGeocodeFromUrl(@NonNull final String url) {
+        final String shortHost = StringUtils.remove(getHost(), "www.");
+
+        // host.tld/viewcache.php?cacheid
+        final String id = StringUtils.trim(StringUtils.substringAfter(url, shortHost + "/viewcache.php?cacheid="));
+        if (StringUtils.isNotBlank(id)) {
+
+            final String geocode = Observable.defer(new Func0<Observable<String>>() {
+                @Override
+                public Observable<String> call() {
+                    return Observable.just(OkapiClient.getGeocodeByUrl(OCApiConnector.this, url));
+                }
+            }).subscribeOn(RxUtils.networkScheduler).toBlocking().first();
+
+            if (geocode != null && canHandle(geocode)) {
+                return geocode;
+            }
+        }
+
+        return super.getGeocodeFromUrl(url);
+    }
+
 }
