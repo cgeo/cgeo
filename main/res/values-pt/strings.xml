@@ -80,6 +80,7 @@
   <string name="log_tb_archived">Arquivado</string>
   <string name="log_save">Guardar offline</string>
   <string name="log_saving">A gravar o registo…</string>
+  <string name="log_posting_log">A publicar log…</string>
   <string name="log_clear">Limpar</string>
   <string name="log_post_not_possible">Download de dados em progresso...\n Por favor tente novamente dentro de alguns segundos ou verifique sua conexão de internet.</string>
   <string name="log_post_geocode_missing">Geocodigo em falta…</string>
