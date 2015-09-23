@@ -1,11 +1,11 @@
 package cgeo.geocaching.ui;
 
+import butterknife.Bind;
+
 import cgeo.geocaching.CacheDetailActivity;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
-import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.enumerations.CacheListType;
-import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.filter.IFilter;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.sensors.GeoData;
@@ -24,20 +24,19 @@ import cgeo.geocaching.utils.MapUtils;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.eclipse.jdt.annotation.NonNull;
+
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.res.Resources;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.LayerDrawable;
 import android.text.Spannable;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StrikethroughSpan;
-import android.util.SparseArray;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -55,10 +54,6 @@ import java.util.Comparator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
-
-import butterknife.Bind;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
 
 public class CacheListAdapter extends ArrayAdapter<Geocache> {
 
@@ -83,7 +78,6 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
 
     private static final int SWIPE_MIN_DISTANCE = 60;
     private static final int SWIPE_MAX_OFF_PATH = 100;
-    private static final SparseArray<Drawable> gcIconDrawables = new SparseArray<>();
     /**
      * time in milliseconds after which the list may be resorted due to position updates
      */
@@ -131,29 +125,6 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
         this.list = list;
         this.cacheListType = cacheListType;
         checkEvents();
-
-        final Drawable modifiedCoordinatesMarker = Compatibility.getDrawable(activity.getResources(), R.drawable.marker_usermodifiedcoords);
-        for (final CacheType cacheType : CacheType.values()) {
-            // unmodified icon
-            gcIconDrawables.put(getIconHashCode(cacheType, false), Compatibility.getDrawable(activity.getResources(), cacheType.markerId));
-            // icon with flag for user modified coordinates
-            final Drawable[] layers = new Drawable[2];
-            layers[0] = Compatibility.getDrawable(activity.getResources(), cacheType.markerId);
-            layers[1] = modifiedCoordinatesMarker;
-            final LayerDrawable ld = new LayerDrawable(layers);
-            ld.setLayerInset(1,
-                    layers[0].getIntrinsicWidth() - layers[1].getIntrinsicWidth(),
-                    layers[0].getIntrinsicHeight() - layers[1].getIntrinsicHeight(),
-                    0, 0);
-            gcIconDrawables.put(getIconHashCode(cacheType, true), ld);
-        }
-    }
-
-    private static int getIconHashCode(final CacheType cacheType, final boolean userModifiedOrFinal) {
-        return new HashCodeBuilder()
-                .append(cacheType)
-                .append(userModifiedOrFinal)
-                .toHashCode();
     }
 
     /**
