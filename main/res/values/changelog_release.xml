@@ -2,7 +2,7 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-    <b>2015.09.15:</b>\n
+    <b>2015.09.23:</b>\n
     · New: Redesign of cache overlay icons\n
     · New: Alignment of cache icons on list and map\n
     · New: Progress indication while posting a log\n
@@ -29,6 +29,7 @@
     · Fix: Close keyboard when starting search\n
     · Fix: Close search field when returning from search\n
     · Fix: Remove duplicate filter for offline logs\n
+    · Fix: Incorrect size of cache overlays\n
     \n
     \n
     <b>Known Limitations/Bugs:</b>\n
