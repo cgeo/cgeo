@@ -119,7 +119,7 @@
   <string name="log_password_title">Adgangskode til log:</string>
   <string name="log_hint_log_password">Skriv adgangskode til log</string>
   <string name="log_oc_team_comment">OC Hold-meddelelse</string>
-  <string name="log_your_saved_log">Dine gemte log</string>
+  <string name="log_your_saved_log">Din gemte log</string>
   <string-array name="log_image_scales">
     <item>Ingen skalering</item>
     <item>512 px</item>
@@ -378,6 +378,7 @@
   <string name="settings_title_logging">Logning</string>
   <string name="settings_summary_logging">Konfigurér signatur og indstillinger for logbeskeder.</string>
   <string name="settings_title_map">Kort</string>
+  <string name="settings_summary_map">Vælg kortkilde samt offline kortindstillinger og -detaljer.</string>
   <string name="settings_title_map_data">Kortdata</string>
   <string name="settings_title_map_content">Kortindhold</string>
   <string name="settings_title_gpx">GPX</string>
@@ -441,6 +442,7 @@
   <string name="init_authorization_credential_username">Brugernavn</string>
   <string name="init_authorization_credential_password">Adgangskode</string>
   <string name="settings_service_active">Aktiv</string>
+  <string name="settings_navigation_disabled">Denne app er muligvis ikke installeret</string>
   <string name="init_signature">Signatur</string>
   <string name="init_template_help">Pladsholdere, som for eksempel [NAME], vil blive erstattet når skabelonen bliver anvendt.</string>
   <string name="init_signature_template_button">Indsæt skabelon</string>
