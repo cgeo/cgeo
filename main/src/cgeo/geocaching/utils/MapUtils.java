@@ -17,18 +17,22 @@ import android.support.annotation.Nullable;
 import android.util.SparseArray;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public final class MapUtils {
 
     // data for overlays
-    private static final int[][] INSET_RELIABLE = { { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 } }; // center, 33x40 / 45x51 / 60x68 / 90x102 / 120x136
-    private static final int[][] INSET_TYPE = { { 1, 1, 1, 4 }, { 2, 2, 2, 6 }, { 3, 3, 3, 9 }, { 4, 4, 4, 12 }, { 6, 6, 6, 18 } }; // center, 22x22 / 36x36
-    private static final int[][] INSET_OWN = { { 16, 0, 0, 19 }, { 22, 0, 0, 26 }, { 33, 0, 0, 39 }, { 45, 0, 0, 53 }, { 67, 0, 0, 79 } }; // top right, 12x12 / 16x16 / 20x20 / 32x32 / 40x40
-    private static final int[][] INSET_FOUND = { { 0, 0, 16, 19 }, { 0, 0, 22, 26 }, { 0, 0, 33, 39 }, { 0, 0, 45, 53 }, { 0, 0, 67, 79 } }; // top left, 12x12 / 16x16 / 20x20 / 32x32 / 40x40
-    private static final int[][] INSET_USERMODIFIEDCOORDS = { { 16, 19, 0, 0 }, { 22, 26, 0, 0 }, { 33, 39, 0, 0 }, { 45, 53, 0, 0 }, { 67, 79, 0, 0 } }; // bottom right, 12x12 / 16x16 / 20x20 / 32x32 / 40x40
-    private static final int[][] INSET_PERSONALNOTE = { { 0, 19, 16, 0 }, { 0, 26, 22, 0 }, { 0, 39, 33, 0 }, { 0, 53, 45, 0 }, { 0, 79, 67, 0 } }; // bottom left, 12x12 / 16x16 / 20x20 / 32x32 / 40x40
+    private static final int[][] INSET_RELIABLE = { { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 } }; // center, 25x30 / 33x40 / 45x51 / 60x68 / 90x102 / 120x136
+    private static final int[][] INSET_TYPE = { { 3, 6, 4, 7 }, { 5, 8, 6, 10 }, { 4, 4, 5, 11 }, { 5, 5, 6, 14 }, { 8, 8, 10, 22 }, { 10, 10, 13, 29 } };
+    private static final int[][] INSET_TYPE_LIST = { { 1, 1, 1, 1 }, { 2, 2, 2, 2 }, { 3, 3, 3, 3 }, { 4, 4, 4, 4 }, { 6, 6, 6, 6 }, { 8, 8, 8, 8 } };
+    private static final int[][] INSET_OWN = { { 15, 0, 0, 21 }, { 21, 0, 0, 28 }, { 27, 0, 0, 33 }, { 36, 0, 0, 44 }, { 54, 0, 0, 66 }, { 72, 0, 0, 88 } };
+    private static final int[][] INSET_OWN_LIST = { { 16, 0, 0, 16 }, { 22, 0, 0, 22 }, { 33, 0, 0, 33 }, { 44, 0, 0, 44 }, { 66, 0, 0, 66 }, { 88, 0, 0, 88 } };
+    private static final int[][] INSET_FOUND = { { 0, 0, 15, 21 }, { 0, 0, 21, 28 }, { 0, 0, 27, 33 }, { 0, 0, 36, 44 }, { 0, 0, 54, 66 }, { 0, 0, 72, 88 } };
+    private static final int[][] INSET_FOUND_LIST = { { 0, 0, 16, 16 }, { 0, 0, 22, 22 }, { 0, 0, 33, 33 }, { 0, 0, 44, 44 }, { 0, 0, 66, 66 }, { 0, 0, 88, 88 } };
+    private static final int[][] INSET_USERMODIFIEDCOORDS = { { 12, 17, 0, 0 }, { 16, 23, 0, 0 }, { 19, 25, 0, 0 }, { 26, 34, 0, 0 }, { 39, 51, 0, 0 }, { 52, 68, 0, 0 } };
+    private static final int[][] INSET_USERMODIFIEDCOORDS_LIST = { { 16, 14, 0, 2 }, { 22, 19, 0, 3 }, { 33, 28, 0, 4 }, { 44, 38, 0, 6 }, { 66, 57, 0, 9 }, { 88, 76, 0, 12 } };
+    private static final int[][] INSET_PERSONALNOTE = { { 0, 17, 12, 0 }, { 0, 23, 16, 0 }, { 0, 25, 19, 0 }, { 0, 34, 26, 0 }, { 0, 51, 39, 0 }, { 0, 68, 52, 0 } };
+    private static final int[][] INSET_PERSONALNOTE_LIST = { { 0, 14, 16, 2 }, { 0, 19, 22, 3 }, { 0, 28, 33, 4 }, { 0, 38, 44, 6 }, { 0, 57, 66, 9 }, { 0, 76, 88, 12 } };
 
     private static final SparseArray<LayerDrawable> overlaysCache = new SparseArray<>();
 
@@ -187,20 +191,20 @@ public final class MapUtils {
         }
         // cache type
         layers.add(Compatibility.getDrawable(res, cache.getType().markerId));
-        insets.add(INSET_TYPE[resolution]);
+        insets.add(getTypeInset(cacheListType)[resolution]);
         // own
         if (cache.isOwner()) {
             layers.add(Compatibility.getDrawable(res, R.drawable.marker_own));
-            insets.add(INSET_OWN[resolution]);
+            insets.add(getOwnInset(cacheListType)[resolution]);
             // if not, checked if stored
         } else if (cache.getListId() > 0 && showFloppyOverlay(cacheListType)) {
             layers.add(Compatibility.getDrawable(res, R.drawable.marker_stored));
-            insets.add(INSET_OWN[resolution]);
+            insets.add(getOwnInset(cacheListType)[resolution]);
         }
         // found
         if (cache.isFound()) {
             layers.add(Compatibility.getDrawable(res, R.drawable.marker_found));
-            insets.add(INSET_FOUND[resolution]);
+            insets.add(getFoundInset(cacheListType)[resolution]);
             // if not, perhaps logged offline
         } else if (cache.isLogOffline()) {
             final LogType offlineLogType = cache.getOfflineLogType();
@@ -210,17 +214,17 @@ public final class MapUtils {
             } else {
                 layers.add(Compatibility.getDrawable(res, offlineLogType.getOfflineLogOverlay()));
             }
-            insets.add(INSET_FOUND[resolution]);
+            insets.add(getFoundInset(cacheListType)[resolution]);
         }
         // user modified coords
         if (cache.hasUserModifiedCoords()) {
             layers.add(Compatibility.getDrawable(res, R.drawable.marker_usermodifiedcoords));
-            insets.add(driftBottomItems(INSET_USERMODIFIEDCOORDS, resolution, cacheListType));
+            insets.add(getUMCInset(cacheListType)[resolution]);
         }
         // personal note
         if (cache.getPersonalNote() != null) {
             layers.add(Compatibility.getDrawable(res, R.drawable.marker_personalnote));
-            insets.add(driftBottomItems(INSET_PERSONALNOTE, resolution, cacheListType));
+            insets.add(getPNInset(cacheListType)[resolution]);
         }
 
         final LayerDrawable ld = new LayerDrawable(layers.toArray(new Drawable[layers.size()]));
@@ -242,30 +246,7 @@ public final class MapUtils {
      *         an index for the overlays positions
      */
     private static int calculateResolution(final Drawable marker) {
-        return marker.getIntrinsicWidth() >= 30 ? (marker.getIntrinsicWidth() >= 45 ? (marker.getIntrinsicWidth() >= 60 ? (marker.getIntrinsicWidth() >= 90 ? 4 : 3) : 2) : 1) : 0;
-    }
-
-    /**
-     * Calculate a new position for the bottom line overlay items, when there is no background circle.
-     *
-     * @param inset
-     *          Original inset position
-     * @param resolution
-     *          The current item resolution
-     * @param cacheListType
-     *          The current CacheListType
-     * @return
-     *          The new drifted inset position
-     */
-    private static int[] driftBottomItems(final int[][] inset, final int resolution, @Nullable final CacheListType cacheListType) {
-        // Do not drift in when background is displayed
-        if (showBackground(cacheListType)) {
-            return inset[resolution];
-        }
-        final int[] newPosition = Arrays.copyOf(inset[resolution], 4);
-        newPosition[1] -= INSET_TYPE[resolution][3] * 3/2;
-        newPosition[3] += INSET_TYPE[resolution][3] * 3/2;
-        return newPosition;
+        return marker.getIntrinsicWidth() >= 30 ? (marker.getIntrinsicWidth() >= 40 ? (marker.getIntrinsicWidth() >= 50 ? (marker.getIntrinsicWidth() >= 70 ? (marker.getIntrinsicWidth() >= 100 ? 5 : 4) : 3) : 2) : 1) : 0;
     }
 
     /**
@@ -304,5 +285,35 @@ public final class MapUtils {
      */
     private static boolean showFloppyOverlay(@Nullable final CacheListType cacheListType) {
         return cacheListType == null || cacheListType != CacheListType.OFFLINE;
+    }
+
+    private static int[][] getTypeInset(@Nullable final CacheListType cacheListType) {
+        return cacheListType == null ?
+                INSET_TYPE :
+                INSET_TYPE_LIST;
+    }
+
+    private static int[][] getOwnInset(@Nullable final CacheListType cacheListType) {
+        return cacheListType == null ?
+                INSET_OWN :
+                INSET_OWN_LIST;
+    }
+
+    private static int[][] getFoundInset(@Nullable final CacheListType cacheListType) {
+        return cacheListType == null ?
+                INSET_FOUND :
+                INSET_FOUND_LIST;
+    }
+
+    private static int[][] getUMCInset(@Nullable final CacheListType cacheListType) {
+        return cacheListType == null ?
+                INSET_USERMODIFIEDCOORDS :
+                INSET_USERMODIFIEDCOORDS_LIST;
+    }
+
+    private static int[][] getPNInset(@Nullable final CacheListType cacheListType) {
+        return cacheListType == null ?
+                INSET_PERSONALNOTE :
+                INSET_PERSONALNOTE_LIST;
     }
 }
