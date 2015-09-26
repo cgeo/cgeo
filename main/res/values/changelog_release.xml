@@ -2,6 +2,10 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
+    <b>Next release</b>\n
+    · Fix: Crash invoking Maps.me with waypoints without coordinates\n
+    \n
+    \n
     <b>2015.09.23:</b>\n
     · New: Redesign of cache overlay icons\n
     · New: Alignment of cache icons on list and map\n
