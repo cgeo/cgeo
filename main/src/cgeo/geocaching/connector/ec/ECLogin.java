@@ -6,6 +6,7 @@ import cgeo.geocaching.connector.AbstractLogin;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
+import cgeo.geocaching.settings.Credentials;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.Log;
@@ -15,7 +16,6 @@ import ch.boye.httpclientandroidlib.HttpResponse;
 import com.fasterxml.jackson.databind.JsonNode;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
@@ -43,9 +43,9 @@ public class ECLogin extends AbstractLogin {
     @Override
     @NonNull
     protected StatusCode login(final boolean retry) {
-        final ImmutablePair<String, String> login = Settings.getCredentials(ECConnector.getInstance());
+        final Credentials login = Settings.getCredentials(ECConnector.getInstance());
 
-        if (StringUtils.isEmpty(login.left) || StringUtils.isEmpty(login.right)) {
+        if (StringUtils.isEmpty(login.getUsername()) || StringUtils.isEmpty(login.getPassword())) {
             clearLoginInfo();
             Log.e("ECLogin.login: No login information stored");
             return StatusCode.NO_LOGIN_INFO_STORED;
@@ -53,7 +53,7 @@ public class ECLogin extends AbstractLogin {
 
         setActualStatus(app.getString(R.string.init_login_popup_working));
 
-        final Parameters params = new Parameters("user", login.left, "pass", login.right);
+        final Parameters params = new Parameters("user", login.getUsername(), "pass", login.getPassword());
         final HttpResponse loginResponse = Network.postRequest("https://extremcaching.com/exports/apilogin.php", params);
 
         final String loginData = Network.getResponseData(loginResponse);
@@ -66,17 +66,17 @@ public class ECLogin extends AbstractLogin {
         assert loginData != null;
 
         if (loginData.contains("Wrong username or password")) { // hardcoded in English
-            Log.i("Failed to log in Extremcaching.com as " + login.left + " because of wrong username/password");
+            Log.i("Failed to log in Extremcaching.com as " + login.getUsername() + " because of wrong username/password");
             return StatusCode.WRONG_LOGIN_DATA; // wrong login
         }
 
         if (getLoginStatus(loginData)) {
-            Log.i("Successfully logged in Extremcaching.com as " + login.left);
+            Log.i("Successfully logged in Extremcaching.com as " + login.getUsername());
 
             return StatusCode.NO_ERROR; // logged in
         }
 
-        Log.i("Failed to log in Extremcaching.com as " + login.left + " for some unknown reason");
+        Log.i("Failed to log in Extremcaching.com as " + login.getUsername() + " for some unknown reason");
         if (retry) {
             return login(false);
         }
@@ -88,7 +88,7 @@ public class ECLogin extends AbstractLogin {
     /**
      * Check if the user has been logged in when he retrieved the data.
      *
-     * @return <code>true</code> if user is logged in, <code>false</code> otherwise
+     * @return {@code true} if user is logged in, {@code false} otherwise
      */
     private boolean getLoginStatus(@Nullable final String data) {
         if (StringUtils.isBlank(data) || StringUtils.equals(data, "[]")) {

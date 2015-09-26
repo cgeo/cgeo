@@ -4,6 +4,7 @@ import cgeo.geocaching.connector.gc.GCLogin;
 import cgeo.geocaching.enumerations.StatusCode;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.eclipse.jdt.annotation.NonNull;
 
 import rx.Observable;
 
@@ -22,7 +23,8 @@ public class CheckGcCredentialsPreference extends AbstractCheckCredentialsPrefer
     }
 
     @Override
-    protected ImmutablePair<String, String> getCredentials() {
+    @NonNull
+    protected Credentials getCredentials() {
         return Settings.getGcCredentials();
     }
 

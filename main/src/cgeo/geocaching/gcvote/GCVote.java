@@ -6,6 +6,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
+import cgeo.geocaching.settings.Credentials;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.LeastRecentlyUsedMap;
 import cgeo.geocaching.utils.Log;
@@ -15,7 +16,6 @@ import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.io.Charsets;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.eclipse.jdt.annotation.NonNull;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -44,14 +44,14 @@ public final class GCVote {
     }
 
     public static StatusCode login() {
-        final ImmutablePair<String, String> login = Settings.getGCVoteLogin();
+        final Credentials login = Settings.getGCVoteLogin();
 
-        if (login == null) {
+        if (login.isInvalid()) {
             Log.e("Credentials can't be retreived");
             return StatusCode.NO_LOGIN_INFO_STORED;
         }
 
-        final Parameters params = new Parameters("version", "cgeo", "userName", login.left, "password", login.right);
+        final Parameters params = new Parameters("version", "cgeo", "userName", login.getUsername(), "password", login.getPassword());
 
         final InputStream response = Network.getResponseStream(Network.getRequest("http://gcvote.com/getVotes.php", params));
 
@@ -65,7 +65,7 @@ public final class GCVote {
                     final String tagName = xpp.getName();
                     if (StringUtils.equals(tagName, "votes")) {
                         if (StringUtils.equals(xpp.getAttributeValue(null, "loggedIn"), "true")) {
-                            Log.i("Successfully logged in gcvote.com as " + login.left);
+                            Log.i("Successfully logged in gcvote.com as " + login.getUsername());
                             return StatusCode.NO_ERROR;
                         }
                         Log.e("Username or password is wrong");
@@ -109,9 +109,9 @@ public final class GCVote {
         }
 
         final Parameters params = new Parameters("version", "cgeo");
-        final ImmutablePair<String, String> login = Settings.getGCVoteLogin();
-        if (login != null) {
-            params.put("userName", login.left, "password", login.right);
+        final Credentials login = Settings.getGCVoteLogin();
+        if (login.isValid()) {
+            params.put("userName", login.getUsername(), "password", login.getPassword());
         }
 
         // use guid or gccode for lookup
@@ -180,14 +180,14 @@ public final class GCVote {
             throw new IllegalArgumentException("invalid rating " + rating);
         }
 
-        final ImmutablePair<String, String> login = Settings.getGCVoteLogin();
-        if (login == null) {
+        final Credentials login = Settings.getGCVoteLogin();
+        if (login.isInvalid()) {
             Log.e("GCVote.setRating: cannot find credentials");
             return false;
         }
         final Parameters params = new Parameters(
-                "userName", login.left,
-                "password", login.right,
+                "userName", login.getUsername(),
+                "password", login.getPassword(),
                 "cacheId", cache.getGuid(),
                 "waypoint", cache.getGeocode(),
                 "voteUser", String.format(Locale.US, "%.1f", rating),
@@ -249,7 +249,7 @@ public final class GCVote {
     }
 
     public static boolean isVotingPossible(@NonNull final Geocache cache) {
-        return Settings.isGCVoteLogin() && StringUtils.isNotBlank(cache.getGuid()) && cache.supportsGCVote();
+        return Settings.isGCVoteLoginValid() && StringUtils.isNotBlank(cache.getGuid()) && cache.supportsGCVote();
     }
 
     static String getDescription(final float rating) {

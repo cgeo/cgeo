@@ -301,10 +301,7 @@ public class Settings {
     }
 
     public static boolean hasGCCredentials() {
-        final String preUsername = getString(R.string.pref_username, null);
-        final String prePassword = getString(R.string.pref_password, null);
-
-        return !StringUtils.isBlank(preUsername) && !StringUtils.isBlank(prePassword);
+        return getGcCredentials().isValid();
     }
 
     /**
@@ -312,24 +309,21 @@ public class Settings {
      *
      * @return a pair either with (login, password) or (empty, empty) if no valid information is stored
      */
-    public static ImmutablePair<String, String> getGcCredentials() {
+    public static Credentials getGcCredentials() {
         return getCredentials(GCConnector.getInstance());
     }
 
     /**
      * Get login and password information.
      *
-     * @return a pair either with (login, password) or (empty, empty) if no valid information is stored
+     * @param connector the connector to retrieve the login information from
+     * @return the credential information
      */
-    public static ImmutablePair<String, String> getCredentials(final @NonNull ICredentials connector) {
+    @NonNull
+    public static Credentials getCredentials(final @NonNull ICredentials connector) {
         final String username = getString(connector.getUsernamePreferenceKey(), null);
         final String password = getString(connector.getPasswordPreferenceKey(), null);
-
-        if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
-            return new ImmutablePair<>(StringUtils.EMPTY, StringUtils.EMPTY);
-        }
-
-        return new ImmutablePair<>(username, password);
+        return new Credentials(username, password);
     }
 
     public static String getUsername() {
@@ -387,19 +381,15 @@ public class Settings {
                 && StringUtils.isNotBlank(getString(tokenSecretPrefKeyId, ""));
     }
 
-    public static boolean isGCVoteLogin() {
-        return getGCVoteLogin() != null;
+    public static boolean isGCVoteLoginValid() {
+        return getGCVoteLogin().isValid();
     }
 
-    public static ImmutablePair<String, String> getGCVoteLogin() {
+    @NonNull
+    public static Credentials getGCVoteLogin() {
         final String username = getString(R.string.pref_username, null);
         final String password = getString(R.string.pref_pass_vote, null);
-
-        if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
-            return null;
-        }
-
-        return new ImmutablePair<>(username, password);
+        return new Credentials(username, password);
     }
 
     @NonNull

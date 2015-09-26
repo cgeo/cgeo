@@ -17,6 +17,7 @@ import cgeo.geocaching.loaders.RecaptchaReceiver;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.LivemapStrategy;
+import cgeo.geocaching.settings.Credentials;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.TestSettings;
 import cgeo.geocaching.test.RegExPerformanceTest;
@@ -27,8 +28,6 @@ import cgeo.geocaching.test.mock.MockedCache;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.Log;
 import cgeo.test.Compare;
-
-import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import android.test.suitebuilder.annotation.MediumTest;
 import android.test.suitebuilder.annotation.SmallTest;
@@ -137,14 +136,14 @@ public class CgeoApplicationTest extends CGeoTestCase {
      *
      */
     private static void withMockedLoginDo(final Runnable runnable) {
-        final ImmutablePair<String, String> login = Settings.getGcCredentials();
+        final Credentials credentials = Settings.getGcCredentials();
         final String memberStatus = Settings.getGCMemberStatus();
 
         try {
             runnable.run();
         } finally {
             // restore user and password
-            TestSettings.setLogin(login.left, login.right);
+            TestSettings.setLogin(credentials);
             Settings.setGCMemberStatus(memberStatus);
             GCLogin.getInstance().login();
         }
@@ -427,7 +426,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
 
         GCLogin.getInstance().logout();
         // Modify login data to avoid an automatic login again
-        TestSettings.setLogin("c:geo", "c:geo");
+        TestSettings.setLogin(new Credentials("c:geo", "c:geo"));
         Settings.setGCMemberStatus("Basic member");
     }
 
