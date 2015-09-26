@@ -4,12 +4,13 @@ import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.gcvote.GCVote;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.eclipse.jdt.annotation.NonNull;
+
+import rx.Observable;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
-
-import rx.Observable;
 
 public class CheckGCVoteCredentialsPreference extends AbstractCheckCredentialsPreference {
 
@@ -22,7 +23,8 @@ public class CheckGCVoteCredentialsPreference extends AbstractCheckCredentialsPr
     }
 
     @Override
-    protected ImmutablePair<String, String> getCredentials() {
+    @NonNull
+    protected Credentials getCredentials() {
         return Settings.getGCVoteLogin();
     }
 

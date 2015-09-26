@@ -8,6 +8,7 @@ import cgeo.geocaching.network.Cookies;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
+import cgeo.geocaching.settings.Credentials;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
@@ -18,7 +19,6 @@ import ch.boye.httpclientandroidlib.HttpResponse;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
@@ -60,15 +60,16 @@ public class GCLogin extends AbstractLogin {
     @Override
     @NonNull
     protected StatusCode login(final boolean retry) {
-        final ImmutablePair<String, String> credentials = Settings.getGcCredentials();
-        final String username = credentials.left;
-        final String password = credentials.right;
+        final Credentials credentials = Settings.getGcCredentials();
 
-        if (StringUtils.isEmpty(username) || StringUtils.isEmpty(password)) {
+        if (credentials.isInvalid()) {
             clearLoginInfo();
             Log.e("Login.login: No login information stored");
             return resetGcCustomDate(StatusCode.NO_LOGIN_INFO_STORED);
         }
+
+        final String username = credentials.getUsername();
+        final String password = credentials.getPassword();
 
         setActualStatus(CgeoApplication.getInstance().getString(R.string.init_login_popup_working));
         final HttpResponse tryLoggedInResponse = Network.getRequest("https://www.geocaching.com/login/default.aspx");
@@ -170,7 +171,7 @@ public class GCLogin extends AbstractLogin {
     /**
      * Check if the user has been logged in when he retrieved the data.
      *
-     * @return <code>true</code> if user is logged in, <code>false</code> otherwise
+     * @return {@code true} if user is logged in, {@code false} otherwise
      */
     boolean getLoginStatus(@Nullable final String page) {
         if (StringUtils.isBlank(page)) {
@@ -215,7 +216,7 @@ public class GCLogin extends AbstractLogin {
      * Ensure that the web site is in English.
      *
      * @param previousPage the content of the last loaded page
-     * @return <code>true</code> if a switch was necessary and succesfully performed (non-English -> English)
+     * @return {@code true} if a switch was necessary and succesfully performed (non-English -> English)
      */
     private boolean switchToEnglish(final String previousPage) {
         if (previousPage != null && previousPage.contains(ENGLISH)) {

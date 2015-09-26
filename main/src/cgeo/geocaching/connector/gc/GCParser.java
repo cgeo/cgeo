@@ -38,6 +38,8 @@ import cgeo.geocaching.utils.RxUtils;
 import cgeo.geocaching.utils.SynchronizedDateFormat;
 import cgeo.geocaching.utils.TextUtils;
 
+import ch.boye.httpclientandroidlib.HttpResponse;
+
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -48,6 +50,14 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+
+import rx.Observable;
+import rx.Observable.OnSubscribe;
+import rx.Subscriber;
+import rx.functions.Action1;
+import rx.functions.Func0;
+import rx.functions.Func2;
+import rx.schedulers.Schedulers;
 
 import android.net.Uri;
 import android.text.Html;
@@ -66,15 +76,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 import java.util.regex.Pattern;
-
-import ch.boye.httpclientandroidlib.HttpResponse;
-import rx.Observable;
-import rx.Observable.OnSubscribe;
-import rx.Subscriber;
-import rx.functions.Action1;
-import rx.functions.Func0;
-import rx.functions.Func2;
-import rx.schedulers.Schedulers;
 
 public final class GCParser {
     @NonNull
@@ -410,7 +411,7 @@ public final class GCParser {
      * @param handler
      *            the handler to send the progress notifications to
      * @return a pair, with a {@link StatusCode} on the left, and a non-null cache object on the right
-     *         iff the status code is {@link cgeo.geocaching.enumerations.StatusCode#NO_ERROR}.
+     *         iff the status code is {@link StatusCode#NO_ERROR}.
      */
     @NonNull
     static private ImmutablePair<StatusCode, Geocache> parseCacheFromText(final String pageIn, @Nullable final CancellableHandler handler) {
@@ -914,7 +915,7 @@ public final class GCParser {
     }
 
     private static boolean isSearchForMyCaches(final String userName) {
-        if (userName.equalsIgnoreCase(Settings.getGcCredentials().left)) {
+        if (userName.equalsIgnoreCase(Settings.getGcCredentials().getUsername())) {
             Log.i("Overriding users choice because of self search, downloading all caches.");
             return true;
         }
@@ -1667,7 +1668,7 @@ public final class GCParser {
         }
 
         private String getParamName() {
-            return this.paramName;
+            return paramName;
         }
     }
 

@@ -7,8 +7,8 @@ import cgeo.geocaching.network.Cookies;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.RxUtils;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.eclipse.jdt.annotation.NonNull;
 
 import rx.Observable;
 import rx.android.app.AppObservable;
@@ -37,7 +37,8 @@ public abstract class AbstractCheckCredentialsPreference extends AbstractClickab
         return new LoginCheckClickListener(activity);
     }
 
-    protected abstract ImmutablePair<String, String> getCredentials();
+    @NonNull
+    protected abstract Credentials getCredentials();
 
     /**
      * Try to login.
@@ -52,17 +53,16 @@ public abstract class AbstractCheckCredentialsPreference extends AbstractClickab
         final private SettingsActivity settingsActivity;
 
         LoginCheckClickListener(final SettingsActivity activity) {
-            this.settingsActivity = activity;
+            settingsActivity = activity;
         }
 
         @Override
         public boolean onPreferenceClick(final Preference preference) {
             final Resources res = settingsActivity.getResources();
-            final ImmutablePair<String, String> credentials = getCredentials();
+            final Credentials credentials = getCredentials();
 
             // check credentials for validity
-            if (StringUtils.isBlank(credentials.getLeft())
-                    || StringUtils.isBlank(credentials.getRight())) {
+            if (credentials.isInvalid()) {
                 ActivityMixin.showToast(settingsActivity, R.string.err_missing_auth);
                 return false;
             }

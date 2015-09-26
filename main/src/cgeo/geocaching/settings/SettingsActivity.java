@@ -27,6 +27,7 @@ import org.openintents.intents.FileManagerIntents;
 import rx.functions.Action0;
 import rx.schedulers.Schedulers;
 
+import android.R.string;
 import android.app.ProgressDialog;
 import android.app.backup.BackupManager;
 import android.content.ActivityNotFoundException;
@@ -316,7 +317,7 @@ public class SettingsActivity extends PreferenceActivity {
             dirChooser.putExtra(FileManagerIntents.EXTRA_TITLE,
                     getString(R.string.simple_dir_chooser_title));
             dirChooser.putExtra(FileManagerIntents.EXTRA_BUTTON_TEXT,
-                    getString(android.R.string.ok));
+                    getString(string.ok));
             startActivityForResult(dirChooser, dct.requestCode);
         } catch (final ActivityNotFoundException ignored) {
             // OI file manager not available
@@ -725,7 +726,7 @@ public class SettingsActivity extends PreferenceActivity {
                 preference.setSummary(stringValue);
             }
             // TODO: do not special case geocaching.com here
-            if ((isPreference(preference, R.string.pref_username) && !stringValue.equals(Settings.getUsername())) || (isPreference(preference, R.string.pref_password) && !stringValue.equals(Settings.getGcCredentials().getRight()))) {
+            if ((isPreference(preference, R.string.pref_username) && !stringValue.equals(Settings.getUsername())) || (isPreference(preference, R.string.pref_password) && !stringValue.equals(Settings.getGcCredentials().getPasswordRaw()))) {
                 // reset log-in if gc user or password is changed
                 CgeoApplication.getInstance().forceRelog();
             }
@@ -778,7 +779,7 @@ public class SettingsActivity extends PreferenceActivity {
             return;
         }
 
-        final String value = Settings.getGcCredentials().getLeft();
+        final String value = Settings.getGcCredentials().getUsername();
         getPreference(R.string.pref_user_vote).setSummary(value);
         final Preference prefvote = getPreference(R.string.pref_user_vote);
         bindSummaryToValue(prefvote, value);
