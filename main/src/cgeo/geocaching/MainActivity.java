@@ -1,8 +1,5 @@
 package cgeo.geocaching;
 
-import butterknife.ButterKnife;
-import butterknife.Bind;
-
 import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.activity.ShowcaseViewBuilder;
 import cgeo.geocaching.connector.ConnectorFactory;
@@ -36,13 +33,6 @@ import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
 import org.apache.commons.lang3.StringUtils;
-
-import rx.Observable;
-import rx.android.app.AppObservable;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action0;
-import rx.functions.Action1;
-import rx.functions.Func1;
 
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -78,6 +68,15 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import rx.Observable;
+import rx.android.app.AppObservable;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action0;
+import rx.functions.Action1;
+import rx.functions.Func1;
+
 public class MainActivity extends AbstractActionBarActivity {
     @Bind(R.id.nav_satellites) protected TextView navSatellites;
     @Bind(R.id.filter_button_title) protected TextView filterTitle;
@@ -111,7 +110,10 @@ public class MainActivity extends AbstractActionBarActivity {
 
         @Override
         public void handleMessage(final Message msg) {
+            updateAccountInfo();
+        }
 
+        private void updateAccountInfo() {
             // Get active connectors with login status
             final ILogin[] loginConns = ConnectorFactory.getActiveLiveConnectors();
 
@@ -135,6 +137,13 @@ public class MainActivity extends AbstractActionBarActivity {
                 userInfo.append(conn.getLoginStatusString());
 
                 connectorInfo.setText(userInfo);
+                connectorInfo.setOnClickListener(new OnClickListener() {
+
+                    @Override
+                    public void onClick(final View v) {
+                        SettingsActivity.openForScreen(R.string.preference_screen_services, MainActivity.this);
+                    }
+                });
             }
         }
     };
