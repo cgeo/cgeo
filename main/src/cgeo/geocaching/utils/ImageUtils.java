@@ -11,6 +11,12 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
+import rx.Observable;
+import rx.Scheduler.Worker;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action0;
+import rx.functions.Action1;
+
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -46,12 +52,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 import java.util.concurrent.LinkedBlockingQueue;
-
-import rx.Observable;
-import rx.Scheduler.Worker;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action0;
-import rx.functions.Action1;
 
 public final class ImageUtils {
     private static final int[] ORIENTATIONS = {
@@ -363,7 +363,7 @@ public final class ImageUtils {
     public static class ContainerDrawable extends BitmapDrawable implements Action1<Drawable> {
         final private static Object lock = new Object(); // Used to lock the queue to determine if a refresh needs to be scheduled
         final private static LinkedBlockingQueue<ImmutablePair<ContainerDrawable, Drawable>> REDRAW_QUEUE = new LinkedBlockingQueue<>();
-        final private static Set<TextView> VIEWS = new HashSet<>();  // Modified only on the UI thread
+        final private static Set<TextView> VIEWS = new HashSet<>();  // Modified only on the UI thread, from redrawQueuedDrawables
         final private static Worker UI_WORKER = AndroidSchedulers.mainThread().createWorker();
         final private static Action0 REDRAW_QUEUED_DRAWABLES = new Action0() {
             @Override
@@ -431,6 +431,7 @@ public final class ImageUtils {
                     }
                 }
                 for (final TextView view : VIEWS) {
+                    // This forces the relayout of the text around the updated images.
                     view.setText(view.getText());
                 }
                 VIEWS.clear();
