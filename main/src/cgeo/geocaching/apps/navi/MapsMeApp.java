@@ -40,7 +40,10 @@ class MapsMeApp extends AbstractPointNavigationApp {
         final ArrayList<MWMPoint> points = new ArrayList<>();
         points.add(new MWMPoint(cache.getCoords().getLatitude(), cache.getCoords().getLongitude(), cache.getName()));
         for (final Waypoint waypoint : cache.getWaypoints()) {
-            points.add(new MWMPoint(waypoint.getCoords().getLatitude(), waypoint.getCoords().getLongitude(), waypoint.getName(), waypoint.getGeocode()));
+            final Geopoint coords = waypoint.getCoords();
+            if (coords != null) {
+                points.add(new MWMPoint(coords.getLatitude(), coords.getLongitude(), waypoint.getName(), waypoint.getGeocode()));
+            }
         }
         final MWMPoint[] pointsArray = points.toArray(new MWMPoint[points.size()]);
         MapsWithMeApi.showPointsOnMap(activity, cache.getName(), pointsArray);
