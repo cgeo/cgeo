@@ -5,6 +5,7 @@
     <b>Next release</b>\n
     · Fix: Crash invoking Maps.me with waypoints without coordinates\n
     · Fix: spoiler image descriptions were missing\n
+    · Fix: Prevent wrong requests to geokrety.org\n
     \n
     \n
     <b>2015.09.23:</b>\n

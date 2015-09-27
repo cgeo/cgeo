@@ -312,6 +312,12 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         AppObservable.bindActivity(this,
             // Obtain the actives connectors
             Observable.from(ConnectorFactory.getGenericTrackablesConnectors())
+            .filter(new Func1<TrackableConnector, Boolean>() {
+                @Override
+                public Boolean call(final TrackableConnector trackableConnector) {
+                    return trackableConnector.isRegistered();
+                }
+            })
             .flatMap(new Func1<TrackableConnector, Observable<TrackableLog>>() {
                 @Override
                 public Observable<TrackableLog> call(final TrackableConnector trackableConnector) {
