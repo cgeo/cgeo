@@ -200,8 +200,11 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         assertThat(wp.getName()).isEqualTo("Parkplatz");
         assertThat(wp.getNote()).isEqualTo("Kostenfreies Parken (je nach Parkreihe Parkscheibe erforderlich)");
         assertThat(wp.getWaypointType()).isEqualTo(WaypointType.PARKING);
-        assertEquals(49.317517, wp.getCoords().getLatitude(), 0.000001);
-        assertEquals(8.545083, wp.getCoords().getLongitude(), 0.000001);
+        final Geopoint waypointCoords = wp.getCoords();
+        assertThat(waypointCoords).isNotNull();
+        assert waypointCoords != null; // eclipse null analysis
+        assertEquals(49.317517, waypointCoords.getLatitude(), 0.000001);
+        assertEquals(8.545083, waypointCoords.getLongitude(), 0.000001);
 
         wp = cache.getWaypoints().get(1);
         assertThat(wp.getGeocode()).isEqualTo("GC31J2H");
@@ -210,8 +213,8 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         assertThat(wp.getName()).isEqualTo("Station 1");
         assertThat(wp.getNote()).isEqualTo("Ein zweiter Wegpunkt, der nicht wirklich existiert sondern nur zum Testen gedacht ist.");
         assertThat(wp.getWaypointType()).isEqualTo(WaypointType.STAGE);
-        assertEquals(49.317500, wp.getCoords().getLatitude(), 0.000001);
-        assertEquals(8.545100, wp.getCoords().getLongitude(), 0.000001);
+        assertEquals(49.317500, waypointCoords.getLatitude(), 0.000001);
+        assertEquals(8.545100, waypointCoords.getLongitude(), 0.000001);
     }
 
     private List<Geocache> readGPX10(final int... resourceIds) throws IOException, ParserException {

@@ -1,8 +1,5 @@
 package cgeo.geocaching;
 
-import butterknife.ButterKnife;
-import butterknife.Bind;
-
 import cgeo.geocaching.apps.navi.NavigationAppFactory;
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.location.Geopoint;
@@ -22,6 +19,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 public class WaypointPopupFragment extends AbstractDialogFragment {
     @Bind(R.id.actionbar_title) protected TextView actionBarTitle;
@@ -50,9 +50,12 @@ public class WaypointPopupFragment extends AbstractDialogFragment {
 
     @Override
     protected void onUpdateGeoData(final GeoData geo) {
-        if (waypoint != null && waypoint.getCoords() != null) {
-            waypointDistance.setText(Units.getDistanceFromKilometers(geo.getCoords().distanceTo(waypoint.getCoords())));
-            waypointDistance.bringToFront();
+        if (waypoint != null) {
+            final Geopoint coordinates = waypoint.getCoords();
+            if (coordinates != null) {
+                waypointDistance.setText(Units.getDistanceFromKilometers(geo.getCoords().distanceTo(coordinates)));
+                waypointDistance.bringToFront();
+            }
         }
     }
 

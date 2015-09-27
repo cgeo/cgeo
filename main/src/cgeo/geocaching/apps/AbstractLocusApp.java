@@ -6,6 +6,7 @@ import cgeo.geocaching.Waypoint;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.WaypointType;
+import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.utils.SynchronizedDateFormat;
 
 import org.eclipse.jdt.annotation.NonNull;
@@ -160,9 +161,10 @@ public abstract class AbstractLocusApp extends AbstractApp {
                     wp.type = locusWpId;
                 }
 
-                if (waypoint.getCoords() != null) {
-                    wp.lat = waypoint.getCoords().getLatitude();
-                    wp.lon = waypoint.getCoords().getLongitude();
+                final Geopoint waypointCoords = waypoint.getCoords();
+                if (waypointCoords != null) {
+                    wp.lat = waypointCoords.getLatitude();
+                    wp.lon = waypointCoords.getLongitude();
                 }
                 pg.waypoints.add(wp);
             }
@@ -188,14 +190,18 @@ public abstract class AbstractLocusApp extends AbstractApp {
      */
     @Nullable
     private static Point getWaypointPoint(final Waypoint waypoint) {
-        if (waypoint == null || waypoint.getCoords() == null) {
+        if (waypoint == null) {
+            return null;
+        }
+        final Geopoint coordinates = waypoint.getCoords();
+        if (coordinates == null) {
             return null;
         }
 
         // create one simple point with location
         final Location loc = new Location("cgeo");
-        loc.setLatitude(waypoint.getCoords().getLatitude());
-        loc.setLongitude(waypoint.getCoords().getLongitude());
+        loc.setLatitude(coordinates.getLatitude());
+        loc.setLongitude(coordinates.getLongitude());
 
         final Point p = new Point(waypoint.getName(), loc);
         p.setDescription("<a href=\"" + waypoint.getUrl() + "\">"

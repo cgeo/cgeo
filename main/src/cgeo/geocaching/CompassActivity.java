@@ -1,8 +1,5 @@
 package cgeo.geocaching;
 
-import butterknife.ButterKnife;
-import butterknife.Bind;
-
 import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.activity.ShowcaseViewBuilder;
 import cgeo.geocaching.enumerations.LoadFlags;
@@ -28,9 +25,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -42,6 +36,11 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
 import android.widget.ToggleButton;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
 
 public class CompassActivity extends AbstractActionBarActivity {
 
@@ -245,7 +244,10 @@ public class CompassActivity extends AbstractActionBarActivity {
 
     private void setTarget(final @NonNull Waypoint waypointIn) {
         waypoint = waypointIn;
-        setTarget(waypointIn.getCoords(), waypointIn.getName());
+        final Geopoint coordinates = waypointIn.getCoords();
+        if (coordinates != null) { // handled by WaypointSelectionActionProvider, but the compiler doesn't know
+            setTarget(coordinates, waypointIn.getName());
+        }
     }
 
     private void setTarget(final Geocache cache) {

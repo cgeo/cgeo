@@ -2,6 +2,7 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.files.LocalStorage;
+import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointFormatter.Format;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
@@ -179,10 +180,11 @@ public final class StaticMapsProvider {
             Log.e("storeWaypointStaticMap - missing input parameter waypoint");
             return Observable.empty();
         }
-        if (waypoint.getCoords() == null) {
+        Geopoint coordinates = waypoint.getCoords();
+        if (coordinates == null) {
             return Observable.empty();
         }
-        final String wpLatlonMap = waypoint.getCoords().format(Format.LAT_LON_DECDEGREE_COMMA);
+        final String wpLatlonMap = coordinates.format(Format.LAT_LON_DECDEGREE_COMMA);
         final String wpMarkerUrl = getWpMarkerUrl(waypoint);
         if (!hasAllStaticMapsForWaypoint(geocode, waypoint)) {
             // download map images in separate background thread for higher performance
@@ -201,11 +203,12 @@ public final class StaticMapsProvider {
         final String latlonMap = cache.getCoords().format(Format.LAT_LON_DECDEGREE_COMMA);
         final Parameters waypoints = new Parameters();
         for (final Waypoint waypoint : cache.getWaypoints()) {
-            if (waypoint.getCoords() == null) {
+            Geopoint coordinates = waypoint.getCoords();
+            if (coordinates == null) {
                 continue;
             }
             final String wpMarkerUrl = getWpMarkerUrl(waypoint);
-            waypoints.put("markers", "icon:" + wpMarkerUrl + '|' + waypoint.getCoords().format(Format.LAT_LON_DECDEGREE_COMMA));
+            waypoints.put("markers", "icon:" + wpMarkerUrl + '|' + coordinates.format(Format.LAT_LON_DECDEGREE_COMMA));
         }
         // download map images in separate background thread for higher performance
         final String cacheMarkerUrl = getCacheMarkerUrl(cache);

@@ -7,6 +7,7 @@ import cgeo.geocaching.utils.MatcherWrapper;
 
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 import java.util.Collection;
 import java.util.Comparator;
@@ -192,6 +193,7 @@ public class Waypoint implements IWaypoint {
         this.name = name;
     }
 
+    @Nullable
     @Override
     public Geopoint getCoords() {
         return coords;

@@ -108,9 +108,10 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
 
                     if (initViews) {
                         visitedCheckBox.setChecked(waypoint.isVisited());
-                        if (waypoint.getCoords() != null) {
-                            buttonLat.setText(waypoint.getCoords().format(GeopointFormatter.Format.LAT_DECMINUTE));
-                            buttonLon.setText(waypoint.getCoords().format(GeopointFormatter.Format.LON_DECMINUTE));
+                        Geopoint coordinates = waypoint.getCoords();
+                        if (coordinates != null) {
+                            buttonLat.setText(coordinates.format(GeopointFormatter.Format.LAT_DECMINUTE));
+                            buttonLon.setText(coordinates.format(GeopointFormatter.Format.LON_DECMINUTE));
                         }
                         waypointName.setText(Html.fromHtml(StringUtils.trimToEmpty(waypoint.getName())).toString());
                         Dialogs.moveCursorToEnd(waypointName);

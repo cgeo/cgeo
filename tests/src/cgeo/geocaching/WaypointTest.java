@@ -69,6 +69,8 @@ public class WaypointTest extends AndroidTestCase {
         final Collection<Waypoint> waypoints = Waypoint.parseWaypointsFromNote(note);
         assertThat(waypoints).hasSize(1);
         final Geopoint coords = waypoints.iterator().next().getCoords();
+        assertThat(coords).isNotNull();
+        assert coords != null; // eclipse null analysis
         assertThat(coords.getLatDeg()).isEqualTo(45);
         assertThat(coords.getLatMinRaw()).isEqualTo(3.5);
         assertThat(coords.getLonDeg()).isEqualTo(27);

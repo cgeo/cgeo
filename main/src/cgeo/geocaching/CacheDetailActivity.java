@@ -25,6 +25,7 @@ import cgeo.geocaching.export.GpxExport;
 import cgeo.geocaching.gcvote.GCVote;
 import cgeo.geocaching.gcvote.GCVoteDialog;
 import cgeo.geocaching.list.StoredList;
+import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Units;
 import cgeo.geocaching.network.AndroidBeam;
 import cgeo.geocaching.network.HtmlImage;
@@ -438,6 +439,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 defaultNavigationMenu.setTitle(NavigationAppFactory.getDefaultNavigationApplication().getName());
                 menu.findItem(R.id.menu_waypoint_navigate).setVisible(hasCoords);
                 menu.findItem(R.id.menu_waypoint_caches_around).setVisible(hasCoords);
+                menu.findItem(R.id.menu_waypoint_copy_coordinates).setVisible(hasCoords);
                 break;
             default:
                 if (imagesList != null) {
@@ -460,8 +462,11 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 return true;
             case R.id.menu_waypoint_copy_coordinates:
                 if (selectedWaypoint != null) {
-                    ClipboardUtils.copyToClipboard(selectedWaypoint.getCoords().toString());
-                    showToast(getResources().getString(R.string.clipboard_copy_ok));
+                    final Geopoint coordinates = selectedWaypoint.getCoords();
+                    if (coordinates != null) {
+                        ClipboardUtils.copyToClipboard(coordinates.toString());
+                        showToast(getResources().getString(R.string.clipboard_copy_ok));
+                    }
                 }
                 return true;
             case R.id.menu_waypoint_duplicate:
@@ -516,7 +521,10 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 return true;
             case R.id.menu_waypoint_caches_around:
                 if (selectedWaypoint != null) {
-                    CacheListActivity.startActivityCoordinates(this, selectedWaypoint.getCoords(), selectedWaypoint.getName());
+                    final Geopoint coordinates = selectedWaypoint.getCoords();
+                    if (coordinates != null) {
+                        CacheListActivity.startActivityCoordinates(this, coordinates, selectedWaypoint.getName());
+                    }
                 }
                 return true;
             case R.id.menu_waypoint_reset_cache_coords:
@@ -1725,9 +1733,10 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         protected void fillViewHolder(final View rowView, final WaypointViewHolder holder, final Waypoint wpt) {
             // coordinates
             final TextView coordinatesView = holder.coordinatesView;
-            if (null != wpt.getCoords()) {
-                coordinatesView.setOnClickListener(new CoordinatesFormatSwitcher(wpt.getCoords()));
-                coordinatesView.setText(wpt.getCoords().toString());
+            final Geopoint coordinates = wpt.getCoords();
+            if (null != coordinates) {
+                coordinatesView.setOnClickListener(new CoordinatesFormatSwitcher(coordinates));
+                coordinatesView.setText(coordinates.toString());
                 coordinatesView.setVisibility(View.VISIBLE);
             }
             else {
@@ -1749,8 +1758,8 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             final TextView nameView = holder.nameView;
             if (StringUtils.isNotBlank(wpt.getName())) {
                 nameView.setText(StringEscapeUtils.unescapeHtml4(wpt.getName()));
-            } else if (null != wpt.getCoords()) {
-                nameView.setText(wpt.getCoords().toString());
+            } else if (null != coordinates) {
+                nameView.setText(coordinates.toString());
             } else {
                 nameView.setText(res.getString(R.string.waypoint));
             }
