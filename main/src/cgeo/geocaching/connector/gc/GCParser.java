@@ -625,12 +625,12 @@ public final class GCParser {
                 final String url = matcherSpoilersInside.group(1).replace("/display", "");
 
                 String title = null;
-                if (matcherSpoilersInside.group(3) != null) {
-                    title = matcherSpoilersInside.group(3);
+                if (matcherSpoilersInside.group(2) != null) {
+                    title = matcherSpoilersInside.group(2);
                 }
                 String description = null;
-                if (matcherSpoilersInside.group(4) != null) {
-                    description = matcherSpoilersInside.group(4);
+                if (matcherSpoilersInside.group(3) != null) {
+                    description = matcherSpoilersInside.group(3);
                 }
                 if (title != null) {
                     cache.addSpoiler(new Image.Builder().setUrl(url).setTitle(title).setDescription(description).build());
