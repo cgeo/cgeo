@@ -26,6 +26,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -102,14 +104,18 @@ public abstract class TokenAuthorizationActivity extends AbstractActivity {
         auth2.setText(getAuthExplainLong());
 
         startButton.setText(getAuthAuthorize());
-        startButton.setEnabled(true);
         startButton.setOnClickListener(new StartListener());
+        enableStartButtonIfReady();
 
         registerButton.setText(getAuthRegister());
         registerButton.setEnabled(true);
         registerButton.setOnClickListener(new RegisterListener());
 
         startButton.setText(StringUtils.isBlank(getToken()) ? getAuthStart() : getAuthAgain());
+
+        final EnableStartButtonWatcher enableStartButtonWatcher = new EnableStartButtonWatcher();
+        usernameEditText.addTextChangedListener(enableStartButtonWatcher);
+        passwordEditText.addTextChangedListener(enableStartButtonWatcher);
     }
 
     @Override
@@ -272,6 +278,33 @@ public abstract class TokenAuthorizationActivity extends AbstractActivity {
 
     protected String getAuthRegister() {
         return res.getString(R.string.auth_token_register, getAuthTitle());
+    }
+
+    /**
+     * Enable or diable the start button depending on login/password field.
+     * If both fields are not empty, button is enabled.
+     *
+     */
+    protected void enableStartButtonIfReady() {
+        startButton.setEnabled(StringUtils.isNotEmpty(usernameEditText.getText().toString()) &&
+                StringUtils.isNotEmpty(passwordEditText.getText().toString()));
+    }
+
+    /**
+     * A TextWatcher to monitor changes on usernameEditText and passwordEditText for enabling start button
+     * dynamically.
+     */
+    private class EnableStartButtonWatcher implements TextWatcher {
+        @Override
+        public void beforeTextChanged(final CharSequence s, final int start, final int count, final int after) {}
+
+        @Override
+        public void onTextChanged(final CharSequence s, final int start, final int before, final int count) {}
+
+        @Override
+        public void afterTextChanged(final Editable s) {
+            enableStartButtonIfReady();
+        }
     }
 
     public static class TokenAuthParameters {
