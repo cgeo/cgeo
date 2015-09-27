@@ -289,6 +289,7 @@ public class GeokretyParser {
 
             } catch (XmlPullParserException | IOException e) {
                 Log.e("GeokretyRuchyXmlParser: Error Parsing geokret", e);
+                errors.add(CgeoApplication.getInstance().getString(R.string.geokrety_parsing_failed));
             }
 
             return errors;
