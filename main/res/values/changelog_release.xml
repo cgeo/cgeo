@@ -4,6 +4,7 @@
   <string name="changelog_release" translatable="false">\n
     <b>Next release</b>\n
     · Fix: Crash invoking Maps.me with waypoints without coordinates\n
+    · Fix: spoiler image descriptions were missing\n
     \n
     \n
     <b>2015.09.23:</b>\n
