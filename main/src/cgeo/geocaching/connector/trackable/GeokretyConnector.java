@@ -130,6 +130,9 @@ public class GeokretyConnector extends AbstractTrackableConnector {
                 // retrieve someone inventory
                 params.put("userid", String.valueOf(userid));
             } else {
+                if (StringUtils.isBlank(Settings.getGeokretySecId())) {
+                    return Collections.emptyList();
+                }
                 // Retrieve inventory, with tracking codes
                 params.put("secid", Settings.getGeokretySecId());
             }
