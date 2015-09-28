@@ -13,6 +13,7 @@ import rx.Observable;
 
 import android.location.Address;
 import android.location.Geocoder;
+import android.test.suitebuilder.annotation.Suppress;
 
 import java.util.Locale;
 
@@ -41,6 +42,7 @@ public class GeocoderTest extends CGeoTestCase {
         }
     }
 
+    @Suppress // Do not run test on MapQuest, quotas are very low and exhaust easily.
     public static void testMapQuestGeocoder() {
         final Locale locale = Locale.getDefault();
         try {

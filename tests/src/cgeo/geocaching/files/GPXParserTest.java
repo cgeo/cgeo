@@ -200,7 +200,7 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         assertThat(wp.getName()).isEqualTo("Parkplatz");
         assertThat(wp.getNote()).isEqualTo("Kostenfreies Parken (je nach Parkreihe Parkscheibe erforderlich)");
         assertThat(wp.getWaypointType()).isEqualTo(WaypointType.PARKING);
-        final Geopoint waypointCoords = wp.getCoords();
+        Geopoint waypointCoords = wp.getCoords();
         assertThat(waypointCoords).isNotNull();
         assert waypointCoords != null; // eclipse null analysis
         assertEquals(49.317517, waypointCoords.getLatitude(), 0.000001);
@@ -213,6 +213,9 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         assertThat(wp.getName()).isEqualTo("Station 1");
         assertThat(wp.getNote()).isEqualTo("Ein zweiter Wegpunkt, der nicht wirklich existiert sondern nur zum Testen gedacht ist.");
         assertThat(wp.getWaypointType()).isEqualTo(WaypointType.STAGE);
+        waypointCoords = wp.getCoords();
+        assertThat(waypointCoords).isNotNull();
+        assert waypointCoords != null; // eclipse null analysis
         assertEquals(49.317500, waypointCoords.getLatitude(), 0.000001);
         assertEquals(8.545100, waypointCoords.getLongitude(), 0.000001);
     }
