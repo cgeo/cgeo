@@ -2,10 +2,11 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-    <b>Next release</b>\n
+    <b>2015.09.28:</b>\n
     · Fix: Crash invoking Maps.me with waypoints without coordinates\n
-    · Fix: spoiler image descriptions were missing\n
+    · Fix: Spoiler image descriptions were missing\n
     · Fix: Prevent wrong requests to geokrety.org\n
+    · Fix: Prevent checking validity of non-existent login information\n
     \n
     \n
     <b>2015.09.23:</b>\n
