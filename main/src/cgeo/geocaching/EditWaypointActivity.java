@@ -517,6 +517,11 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
 
             @Override
             protected Void doInBackground(final Void... params) {
+                // currentState might be null here if there is a problem with the waypoints data
+                if (currentState == null) {
+                    finishHandler.sendEmptyMessage(SAVE_ERROR);
+                    return null;
+                }
                 final Waypoint waypoint = new Waypoint(currentState.name, currentState.type, own);
                 waypoint.setGeocode(geocode);
                 waypoint.setPrefix(prefix);
