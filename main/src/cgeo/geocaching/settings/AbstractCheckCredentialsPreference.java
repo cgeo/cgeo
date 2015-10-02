@@ -9,6 +9,7 @@ import cgeo.geocaching.utils.RxUtils;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.eclipse.jdt.annotation.NonNull;
 
 import rx.Observable;
 import rx.android.app.AppObservable;
@@ -37,6 +38,7 @@ public abstract class AbstractCheckCredentialsPreference extends AbstractClickab
         return new LoginCheckClickListener(activity);
     }
 
+    @NonNull
     protected abstract ImmutablePair<String, String> getCredentials();
 
     /**

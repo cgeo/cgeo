@@ -321,6 +321,7 @@ public class Settings {
      *
      * @return a pair either with (login, password) or (empty, empty) if no valid information is stored
      */
+    @NonNull
     public static ImmutablePair<String, String> getCredentials(final @NonNull ICredentials connector) {
         final String username = getString(connector.getUsernamePreferenceKey(), null);
         final String password = getString(connector.getPasswordPreferenceKey(), null);
@@ -388,7 +389,7 @@ public class Settings {
     }
 
     public static boolean isGCVoteLogin() {
-        return getGCVoteLogin() != null;
+        return StringUtils.isNotBlank(getGCVoteLogin().left);
     }
 
     public static ImmutablePair<String, String> getGCVoteLogin() {
@@ -396,7 +397,7 @@ public class Settings {
         final String password = getString(R.string.pref_pass_vote, null);
 
         if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
-            return null;
+            return new ImmutablePair<>(StringUtils.EMPTY, StringUtils.EMPTY);
         }
 
         return new ImmutablePair<>(username, password);

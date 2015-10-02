@@ -46,7 +46,7 @@ public final class GCVote {
     public static StatusCode login() {
         final ImmutablePair<String, String> login = Settings.getGCVoteLogin();
 
-        if (login == null) {
+        if (StringUtils.isBlank(login.left)) {
             Log.e("Credentials can't be retreived");
             return StatusCode.NO_LOGIN_INFO_STORED;
         }
@@ -110,7 +110,7 @@ public final class GCVote {
 
         final Parameters params = new Parameters("version", "cgeo");
         final ImmutablePair<String, String> login = Settings.getGCVoteLogin();
-        if (login != null) {
+        if (StringUtils.isNotBlank(login.left)) {
             params.put("userName", login.left, "password", login.right);
         }
 
@@ -181,7 +181,7 @@ public final class GCVote {
         }
 
         final ImmutablePair<String, String> login = Settings.getGCVoteLogin();
-        if (login == null) {
+        if (StringUtils.isBlank(login.left)) {
             Log.e("GCVote.setRating: cannot find credentials");
             return false;
         }
