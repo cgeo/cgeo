@@ -1,5 +1,8 @@
 package cgeo.geocaching;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.files.LocalStorage;
 import cgeo.geocaching.settings.Settings;
@@ -34,9 +37,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
-
-import butterknife.Bind;
-import butterknife.ButterKnife;
 
 public class ImageSelectActivity extends AbstractActionBarActivity {
 
@@ -235,52 +235,59 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
         // camera application.
         if (data != null) {
             final Uri selectedImage = data.getData();
-            if (Build.VERSION.SDK_INT < VERSION_CODES.KITKAT) {
-                final String[] filePathColumn = { MediaColumns.DATA };
+            // In principal can selectedImage be null
+            if (selectedImage != null) {
+                if (Build.VERSION.SDK_INT < VERSION_CODES.KITKAT) {
+                    final String[] filePathColumn = { MediaColumns.DATA };
 
-                Cursor cursor = null;
-                try {
-                    cursor = getContentResolver().query(selectedImage, filePathColumn, null, null, null);
-                    if (cursor == null) {
-                        showFailure();
-                        return;
-                    }
-                    cursor.moveToFirst();
+                    Cursor cursor = null;
+                    try {
+                        cursor = getContentResolver().query(selectedImage, filePathColumn, null, null, null);
+                        if (cursor == null) {
+                            showFailure();
+                            return;
+                        }
+                        cursor.moveToFirst();
 
-                    final int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-                    final String filePath = cursor.getString(columnIndex);
-                    if (StringUtils.isBlank(filePath)) {
+                        final int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                        final String filePath = cursor.getString(columnIndex);
+                        if (StringUtils.isBlank(filePath)) {
+                            showFailure();
+                            return;
+                        }
+                        image = new Image.Builder().setUrl(filePath).build();
+                    } catch (final Exception e) {
+                        Log.e("ImageSelectActivity.onActivityResult", e);
                         showFailure();
-                        return;
+                    } finally {
+                        if (cursor != null) {
+                            cursor.close();
+                        }
                     }
-                    image = new Image.Builder().setUrl(filePath).build();
-                } catch (final Exception e) {
-                    Log.e("ImageSelectActivity.onActivityResult", e);
-                    showFailure();
-                } finally {
-                    if (cursor != null) {
-                        cursor.close();
+
+                    Log.d("SELECT IMAGE data = " + data.toString());
+                } else {
+                    InputStream input = null;
+                    OutputStream output = null;
+                    try {
+                        input = getContentResolver().openInputStream(selectedImage);
+                        final File outputFile = ImageUtils.getOutputImageFile();
+                        if (outputFile != null) {
+                            output = new FileOutputStream(outputFile);
+                            LocalStorage.copy(input, output);
+                            image = new Image.Builder().setUrl(outputFile).build();
+                        }
+                    } catch (final FileNotFoundException e) {
+                        Log.e("ImageSelectActivity.onStartResult", e);
+                    } finally {
+                        IOUtils.closeQuietly(input);
+                        IOUtils.closeQuietly(output);
                     }
                 }
-
-                Log.d("SELECT IMAGE data = " + data.toString());
             } else {
-                InputStream input = null;
-                OutputStream output = null;
-                try {
-                    input = getContentResolver().openInputStream(selectedImage);
-                    final File outputFile = ImageUtils.getOutputImageFile();
-                    if (outputFile != null) {
-                        output = new FileOutputStream(outputFile);
-                        LocalStorage.copy(input, output);
-                        image = new Image.Builder().setUrl(outputFile).build();
-                    }
-                } catch (final FileNotFoundException e) {
-                    Log.e("ImageSelectActivity.onStartResult", e);
-                } finally {
-                    IOUtils.closeQuietly(input);
-                    IOUtils.closeQuietly(output);
-                }
+                // Image capture failed, advise user
+                showFailure();
+                return;
             }
         }
 
