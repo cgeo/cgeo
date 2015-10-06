@@ -161,10 +161,6 @@ public abstract class AbstractActivity extends ActionBarActivity implements IAbs
         new Keyboard(this).hide();
     }
 
-    public void showKeyboard(final View view) {
-        new Keyboard(this).show(view);
-    }
-
     protected void buildDetailsContextMenu(final ActionMode actionMode, final Menu menu, final CharSequence fieldTitle, final boolean copyOnly) {
         actionMode.setTitle(fieldTitle);
         menu.findItem(R.id.menu_translate_to_sys_lang).setVisible(!copyOnly);
