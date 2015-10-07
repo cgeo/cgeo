@@ -140,7 +140,8 @@ public class DataStore {
                     "cg_caches._id,"                +    // 38
                     "cg_caches.inventorycoins,"     +    // 39
                     "cg_caches.inventorytags,"      +    // 40
-                    "cg_caches.logPasswordRequired";     // 41
+                    "cg_caches.logPasswordRequired," +  //  41
+                    "cg_caches.watchlistCount";          // 42
 
     /** The list of fields needed for mapping. */
     private static final String[] WAYPOINT_COLUMNS = { "_id", "geocode", "updated", "type", "prefix", "lookup", "name", "latitude", "longitude", "note", "own", "visited" };
@@ -211,7 +212,8 @@ public class DataStore {
             + "onWatchlist integer default 0, "
             + "coordsChanged integer default 0, "
             + "finalDefined integer default 0, "
-            + "logPasswordRequired integer default 0"
+            + "logPasswordRequired integer default 0,"
+            + "watchlistCount integer default -1"
             + "); ";
     private static final String dbCreateLists = ""
             + "create table " + dbTableLists + " ("
@@ -1196,6 +1198,7 @@ public class DataStore {
         values.put("coordsChanged", cache.hasUserModifiedCoords() ? 1 : 0);
         values.put("finalDefined", cache.hasFinalDefined() ? 1 : 0);
         values.put("logPasswordRequired", cache.isLogPasswordRequired() ? 1 : 0);
+        values.put("watchlistCount",cache.getWatchlistCount());
 
         init();
 
@@ -1782,6 +1785,8 @@ public class DataStore {
         cache.setCoords(getCoords(cursor, 35, 36));
         cache.setFinalDefined(cursor.getInt(37) > 0);
         cache.setLogPasswordRequired(cursor.getInt(41) > 0);
+        cache.setWatchlistCount(cursor.getInt(42));
+
 
         Log.d("Loading " + cache.toString() + " (" + cache.getListId() + ") from DB");
 
