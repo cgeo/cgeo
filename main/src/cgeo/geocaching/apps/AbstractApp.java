@@ -1,82 +1,67 @@
 package cgeo.geocaching.apps;
 
-import cgeo.geocaching.cgSettings;
-import cgeo.geocaching.utils.CollectionUtils;
+import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.Geocache;
+import cgeo.geocaching.utils.ProcessUtils;
 
-import android.app.Activity;
-import android.content.Context;
+import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
-
-import java.util.List;
 
 public abstract class AbstractApp implements App {
 
-    protected String packageName;
+    @Nullable private final String packageName;
+    @Nullable private final String intent;
+    @NonNull
+    private final String name;
 
-    private String intent;
-    private String name;
-
-    protected AbstractApp(final String name, final String intent,
-            final String packageName) {
+    protected AbstractApp(@NonNull final String name, @Nullable final String intent,
+            @Nullable final String packageName) {
         this.name = name;
         this.intent = intent;
         this.packageName = packageName;
     }
 
-    protected AbstractApp(final String name, final String intent) {
+    protected AbstractApp(@NonNull final String name, @Nullable final String intent) {
         this(name, intent, null);
     }
 
-    protected Intent getLaunchIntent(Context context) {
-        if (packageName == null) {
-            return null;
-        }
-        PackageManager packageManager = context.getPackageManager();
-        try {
-            // This can throw an exception where the exception type is only defined on API Level > 3
-            // therefore surround with try-catch
-            Intent intent = packageManager.getLaunchIntentForPackage(packageName);
-            return intent;
-        } catch (Exception e) {
-            return null;
-        }
-    }
-
-    public boolean isInstalled(final Context context) {
-        if (getLaunchIntent(context) != null) {
+    @Override
+    public boolean isInstalled() {
+        if (StringUtils.isNotEmpty(packageName) && ProcessUtils.isLaunchable(packageName)) {
             return true;
         }
-        return isIntentAvailable(context, intent);
+        if (intent == null) {
+            return false;
+        }
+        assert intent != null; // eclipse issue
+        return ProcessUtils.isIntentAvailable(intent);
     }
 
-    private static boolean isIntentAvailable(Context context, String action) {
-        final Intent intent = new Intent(action);
-
-        return isIntentAvailable(context, intent);
-    }
-
-    protected static boolean isIntentAvailable(Context context, Intent intent) {
-        final PackageManager packageManager = context.getPackageManager();
-        final List<ResolveInfo> list = packageManager.queryIntentActivities(
-                intent, PackageManager.MATCH_DEFAULT_ONLY);
-
-        return (CollectionUtils.isNotEmpty(list));
+    @Nullable
+    protected Intent getLaunchIntent() {
+        return ProcessUtils.getLaunchIntent(packageName);
     }
 
     @Override
+    public boolean isUsableAsDefaultNavigationApp() {
+        return true;
+    }
+
+    @Override
+    @NonNull
     public String getName() {
         return name;
     }
 
-    @Override
-    public int getId() {
-        return getName().hashCode();
+    protected static String getString(final int ressourceId) {
+        return CgeoApplication.getInstance().getString(ressourceId);
     }
 
-    protected static cgSettings getSettings(Activity activity) {
-        return new cgSettings(activity,
-                activity.getSharedPreferences(cgSettings.preferences, Context.MODE_PRIVATE));
+    @Override
+    public boolean isEnabled(final @NonNull Geocache cache) {
+        return true;
     }
 }

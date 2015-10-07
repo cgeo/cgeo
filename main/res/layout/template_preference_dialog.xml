@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="8dp"
+    tools:context=".settings.TemplateTextPreference" >
+
+    <EditText
+        android:id="@+id/signature_dialog_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="top|left"
+        android:inputType="textMultiLine|textCapSentences"
+        android:minLines="3"
+        android:singleLine="false" />
+
+    <Button
+        android:id="@+id/signature_templates"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:paddingTop="8dp"
+        android:text="@string/init_signature_template_button" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="8dp"
+        android:text="@string/init_template_help"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+</LinearLayout>

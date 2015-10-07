@@ -1,0 +1,2640 @@
+<!--
+
+This is the list of all geocache attributes supported by OKAPI. It should
+include any attribute used by at least one of the Opencaching installations.
+
+If you'd like to get the write access to our repository (to submit your
+translations), contact us: Submit a new issue in our issue tracker. 
+
+
+NOTES FOR EXTERNAL APP DEVELOPERS
+=================================
+
+DO NOT read or parse this file in your apps! It is NOT guaranteed to stay
+backward-compatible. Use public OKAPI methods instead.
+
+
+NOTES FOR OC/OKAPI DEVELOPERS
+=============================
+
+Every OC installation has its own set of internal attributes. This file
+allows them to be merged with other attributes from other OC installations.
+
+This file defines the mapping between:
+
+- Internal attribute IDs of various Opencaching nodes (the "schema" attribute
+  must match the ORIGIN_URL used in the node).
+- Groundspeak's attribute IDs (used by geocaching.com).
+- OKAPI's attribute IDs (used in all OKAPI installations globally).
+
+It also defines attribute names and descriptions in several languages.
+
+-->
+
+<xml>
+	<!--
+	NOTICE: Categories are currently NOT implemented. The "categories=..."
+	attribute is currently ignored. See issue 70.
+	-->
+
+	<attr acode="A1" categories="de-listing">
+		<opencaching schema="http://www.opencaching.de/" id="6"/>
+		<opencaching schema="http://www.opencaching.nl/" id="6"/>
+		<lang id="en">
+			<name>Listed at Opencaching only</name>
+			<desc>
+				This geocache is listed at Opencaching only. It is not listed
+				on any other geocaching site.
+			</desc>
+		</lang>
+		<lang id="pl">
+			<name>Dostępna tylko na Opencaching</name>
+			<desc>
+				Skrzynka "jednosystemowa", dostępna jedynie poprzez serwis Opencaching.
+			</desc>
+		</lang>
+		<lang id="de">
+			<name>nur bei Opencaching logbar</name>
+			<desc>
+				Der Geocache ist nur bei Opencaching gelistet. Benutzer anderer
+				Geocache-Datenbanken haben so einen schnellen Überblick, welche Geocaches
+				es sich lohnt näher anzusehen.
+			</desc>
+		</lang>
+		<lang id="nl">
+			<name>Alleen te loggen op Opencaching</name>
+			<desc>
+				Deze cache is alleen beschikbaar en te loggen op opencaching.
+			</desc>
+		</lang>
+		<lang id="es">
+			<name>Solo loggeable en Opencaching</name>
+			<desc>
+				Este geocachee esta publicado sólo en Opencaching. Este atributo permite
+				a los usuarios de otras plataformas encontrar rápidamente caches
+				interesantes de calidad OC geocaching.
+			</desc>
+		</lang>
+		<lang id="it">
+			<name>Loggabile solo su Opencaching</name>
+			<desc>
+				Questa geocache è pubblicata solo su Opencaching. Questo attributo permette
+				agli utenti di altre piattaforme di geocaching di trovare velocemente
+				interessanti cache OC di qualità.
+			</desc>
+		</lang>
+
+	</attr>
+
+	<attr acode="A2" categories="de-cache-types">
+		<opencaching schema="http://opencaching.pl/" id="54" />
+		<opencaching schema="http://www.opencaching.nl/" id="61" />
+		<lang id="en">
+			<name>Near a Survey Marker</name>
+			<desc>
+				The cache is hidden in near proximity of a survey marker (also known
+				as geodetic marks).
+			</desc>
+		</lang>
+		<lang id="pl">
+			<name>W pobliżu punktu geodezyjnego</name>
+			<desc>
+				Skrzynka ukryta w pobliżu punktu geodezyjnego.
+				<a href="http://wiki.opencaching.pl/index.php/Benchmark">Więcej informacji</a>.
+			</desc>
+		</lang>
+		<lang id="de">
+			<name>an einem Vermessungspunkt</name>
+			<desc>
+				Der Cache ist in der Nähe eines festen Vermessungspunktes versteckt.
+			</desc>
+		</lang>
+		<lang id="nl">
+			<name>Meetpunt</name>
+			<desc>
+				Deze cache heeft te maken met een meetpunt of geodetisch punt.
+			</desc>
+		</lang>
+	</attr>
+
+	<attr acode="A3" categories="de-cache-types">
+		<opencaching schema="http://opencaching.pl/" id="55" />
+		<lang id="en">
+			<name>Wherigo Cache</name>
+			<desc>
+				Cache description includes a file - the Whereigo cartridge. In order to
+				find the cache, you need to download the file and install it on
+				a proper compatible device.
+			</desc>
+		</lang>
+		<lang id="pl">
+			<name>Wherigo Cache</name>
+			<desc>
+				Opis skrzynki zawiera scenariusz Wherigo (w Polsce znany również pod
+				skrótem WIGO). Aby móc zdobyć skrzynkę należy pobrać scenariusz i
+				wgrać go do kompatybilnego z nim urządzenia.
+				<a href="http://wiki.opencaching.pl/index.php/Wherigo_czyli_Scenariusze_WIGO">Więcej informacji</a>.
+			</desc>
+		</lang>
+		<lang id="de">
+			<name>Wherigo-Cache</name>
+			<desc>
+				Zur Cachebeschreibung gehört eine Datei, die „Wherigo-Cartridge“. Sie muss
+				heruntergeladen und auf ein Gerät mit einer entsprechenden Abspielsoftware
+				installiert werden. Der Inhalt der Cartridge führt dich durch den Cache.
+			</desc>
+		</lang>
+	</attr>
+
+	<attr acode="A4" categories="de-cache-types">
+		<opencaching schema="http://opencaching.pl/" id="56" />
+		<opencaching schema="http://www.opencaching.de/" id="8" />
+		<opencaching schema="http://www.opencaching.nl/" id="56" />
+		<lang id="en">
+			<name>Letterbox Cache</name>
+			<desc>
+				There is a stamp in the cache for stamping your personal logbook, and the
+				cache’s logbook will be stamped with your personal stamp. Take care not
+				to mix up stamps and to leave the cache’s stamp in the cache!
+			</desc>
+		</lang>
+		<lang id="pl">
+			<name>Skrzynka typu Letterbox</name>
+			<desc>
+				W skrzynce znajduje się pieczątka, której nie można zabrać ze sobą.
+				Możesz jej użyć do ostemplowania swojego osobistego dziennika.
+				Logbook skrzynki powinien z kolei zostać ostemplowany Twoją własną
+				pieczątką.
+				<a href="http://wiki.opencaching.pl/index.php/Letterboxing">Więcej informacji</a>.
+			</desc>
+		</lang>
+		<lang id="de">
+			<name>Letterbox (benötigt Stempel)</name>
+			<desc>
+				In dem Behälter vor Ort befindet sich ein Stempel, mit dem man sein
+				persönliches Logbuch abstempeln kann. Das Logbuch im Geocache wird
+				ebenfalls mit einem persönlichen Stempel signiert. Bitte achte unbedingt
+				darauf, dass du den Stempel aus dem Geocache nicht mitnimmst oder tauschst!
+				<a href="http://wiki.opencaching.de/index.php/Letterboxing">Weitere Informationen</a>.
+			</desc>
+		</lang>
+		<lang id="nl">
+			<name>Letterbox (een stempel nodig)</name>
+			<desc>
+				Er bevind sich een stempel in de cache waarmee je een in een eigen logboek 
+				kan stempelen. Met een eigen stempel kun je het logboek in de cache stempelen. 
+				Let op om niet per ongeluk de stempels te verwisselen!
+			</desc>
+		</lang>
+		<lang id="es">
+			<name>Letterbox (necesita un estampador)</name>
+			<desc>
+				Hay un sello en el cache para estamparlo en su libro de registro personal,
+				y el libro de registro del cache será sellada con su sello personal.
+				!Tenga cuidado de no mezclar los sellos!
+			</desc>
+		</lang>
+		<lang id="it">
+			<name>Letterbox (richiede un timbro)</name>
+			<desc>
+				C'e un timbro nella cache per timbrare il tuo quaderno personale,
+				e il log della cache verra timbrato con il tuo timbro personale.
+				Fate attenzione a non confondere i timbri e a lasciare il timbro della
+				cache nella cache!
+			</desc>
+		</lang>
+	</attr>
+
+	<attr acode="A5" categories="de-cache-types">
+		<opencaching schema="http://opencaching.pl/" id="43" />
+		<opencaching schema="http://www.opencaching.nl/" id="43" />
+		<lang id="en">
+			<name>GeoHotel Cache</name>
+			<desc>
+				Primary purpose of the "GeoHotel" caches is to exchange trackables
+				(TravelBugs, GeoKrets, etc.).
+			</desc>
+		</lang>
+		<lang id="pl">
+			<name>GeoHotel Cache</name>
+			<desc>
+				Atrybut ten oznacza skrzynki których głównym celem jest lokowanie
+				w tej skrzynce różnych wędrujących rzeczy np GeoKrety, GeoLutins,
+				GeoFish itp.
+			</desc>
+		</lang>
+		<lang id="de">
+			<name>Geohotel-Cache</name>
+			<desc>
+				Der Cache dient vor allem zum Austausch von Reisenden (GeoKrets,
+				TravelBugs etc.).
+			</desc>
+		</lang>
+		<lang id="nl">
+			<name>GeoHotel</name>
+			<desc>
+				Deze cache is speciaal voor reizende items zoals: GeoKrets,
+				TravelBugs enz.
+			</desc>
+		</lang>
+	</attr>
+
+	<attr acode="A6" categories="de-cache-types">
+		<opencaching schema="http://opencaching.pl/" id="49" />
+		<opencaching schema="http://www.opencaching.nl/" id="49" />
+		<lang id="en">
+			<name>Magnetic Cache</name>
+			<desc>
+				This geocache is attached with a magnet.
+			</desc>
+		</lang>
+		<lang id="pl">
+			<name>Przyczepiona magnesem</name>
+			<desc>
+				Skrzynka zawiera magnes i przymocowana jest za jego pomocą.
+			</desc>
+		</lang>
+		<lang id="de">
+			<name>magnetischer Cache</name>
+			<desc>
+				Der Geocache ist mit einem Magneten angebracht.
+			</desc>
+		</lang>
+		<lang id="nl">
+			<name>Bevestigd met magneet</name>
+			<desc>
+				Deze cache is met een magneet bevestigt.
+			</desc>
+		</lang>
+	</attr>
+
+	<attr acode="A7" categories="de-cache-types">
+		<opencaching schema="http://opencaching.pl/" id="50" />
+		<opencaching schema="http://www.opencaching.nl/" id="50" />
+		<lang id="en">
+			<name>Description contains an audio file</name>
+			<desc>
+				In order to find this cache, you must listen to an audio recording
+				(e.g. MP3 file), which is attached to the cache description.
+			</desc>
+		</lang>
+		<lang id="pl">
+			<name>Opis zawiera plik audio</name>
+			<desc>
+				Aby odnaleźć skrzynkę, należy odsłuchać plik dźwiękowy zawarty w
+				opisie skrzynki (np. w formacie MP3). Może on zawierać zakodowane
+				informacje, dźwięki otoczenia, opis dotarcia do skrzynki.
+			</desc>
+		</lang>
+		<lang id="de">
+			<name>Audio-Cache</name>
+			<desc>
+				Um diesen Cache zu finden musst du eine Tonaufnahme anhören,
+				die der Cachbeschreibung beigefügt ist.
+			</desc>
+		</lang>
+		<lang id="nl">
+			<name>Beschrijving bevat een audio bestand</name>
+			<desc>
+				Om deze cache te vinden moeten instructies via een audio bestand
+				(bijv. MP3) beluisterd worden welke in de cachebeschrijving te vinden is.
+			</desc>
+		</lang>
+	</attr>
+
+	<attr acode="A8" categories="de-cache-types">
+		<opencaching schema="http://opencaching.pl/" id="51" />
+		<lang id="en">
+			<name>Offset cache</name>
+			<desc>
+				A specific type of a MultiCache. The coordinates point to a starting
+				point. The description contains simple instructions to follow
+				once you are in the starting point (usually, an azimuth and a
+				distance).
+			</desc>
+		</lang>
+		<lang id="pl">
+			<name>Offset cache</name>
+			<desc>
+				Szczególny przypadek skrzynki typu multicache, składający się z
+				punktu startowego (określonego współrzędnymi) oraz jasnych
+				informacjami o sposobie dotarcia do finału (np. azymutu i
+				odległości).
+			</desc>
+		</lang>
+		<lang id="de">
+			<name>Peilungscache</name>
+			<desc>
+				Die Koordinaten zeigen auf einen Startpunkt, von dem aus eine
+				Peilung zum Ziel führt, meist anhand einer Entfernungsangabe
+				und eines Winkels (Azimut).
+			</desc>
+		</lang>
+	</attr>
+
+	<attr acode="A9" categories="de-cache-types">
+		<groundspeak id="60" inc="true" name="Wireless Beacon" />
+		<opencaching schema="http://opencaching.pl/" id="52" />
+		<opencaching schema="http://www.opencaching.nl/" id="52" />
+		<lang id="en">
+			<name>Garmin's wireless beacon</name>
+			<desc>
+				Contains Garmin's wireless chirp beacon.
+			</desc>
+		</lang>
+		<lang id="pl">
+			<name>Beacon - Garmin Chirp</name>
+			<desc>
+				Skrzynka zawiera Beacon Garmin chirp.
+			</desc>
+		</lang>
+		<lang id="de">
+			<name>Funksignal – Garmin Chirp</name>
+			<desc>
+				Zusammen mit dem Cache sind ein oder mehrere Garmin-Funksender
+				versteckt. Um den Cache zu finden, müssen die Funksignale empfangen
+				werden. Dazu wird ein passender Empfänger benötigt.
+			</desc>
+		</lang>
+		<lang id="nl">
+			<name>Beacon - Garmin chirp</name>
+			<desc>
+				Deze cache is gemaakt met 1 of meer Garmins chirp draadloze zenders.
+			</desc>
+		</lang>
+	</attr>
+
+	<attr acode="A10" categories="de-cache-types">
+		<opencaching schema="http://opencaching.pl/" id="53" />
+		<opencaching schema="http://www.opencaching.nl/" id="53" />
+		<lang id="en">
+			<name>Dead Drop USB cache</name>
+			<desc>
+				The cache consists of an unmovable USB mass storage device, e.g.
+				fixed into a wall, curb etc. The device contains readme.txt file
+				with cache description and a logbook.txt file where you can log
+				your visit.
+			</desc>
+		</lang>
+		<lang id="pl">
+			<name>Dead Drop USB skrzynka</name>
+			<desc>
+				Skrzynka typu USB Dead Drop. Pen-drive przymocowany lub wmurowany
+				w ścianę, budynek, krawiężnik itp. Aby zalogować znalezienie, należy
+				wpisać się do pliku logbook.txt znajdującego się w pamięci urządzenia.
+				<a href="http://wiki.opencaching.pl/index.php/Skrzynka_Dead_Drop">Wiecej informacji</a>.
+			</desc>
+		</lang>
+		<lang id="de">
+			<name>Dead Drop USB-Cache</name>
+			<desc>
+				Der Cache besteht aus einem fest angebrachten USB-Stick. Er enthält
+				eine readme.txt-Datei mit Erläuterungen zum Cache und eine Datei
+				logbook.txt zum Loggen.
+			</desc>
+		</lang>
+		<lang id="nl">
+			<name>Dead Drop USB cache</name>
+			<desc>
+				Deze cache bestaat uit een vast gemonteerde USB stick, zoals in een
+				muur of paal enz. Deze bevat een readme.txt bestand met de cache 
+				beschrijving en een logboek.txt bestand om je bezoek te kunnen loggen.
+				<a href="http://wiki.opencaching.nl/index.php/Dead_Drop_Caches">Voor informatie</a>.
+			</desc>
+		</lang>
+	</attr>
+
+	<attr acode="A11" categories="de-cache-types">
+		<opencaching schema="http://www.opencaching.de/" id="31" />
+		<lang id="en">
+			<name>Has a moving target</name>
+			<desc>
+				This geocache is moving around. For example, the owner might regularly
+				move the cache from one place to another, or the finders will do this
+				task and post new coordinates in their log entries. The owner must
+				update coordinates in the cache description after each move.
+			</desc>
+		</lang>
+		<lang id="de">
+			<name>bewegliches Ziel</name>
+			<desc>
+				Der Geocache verändert seine Position und ist deshalb nicht immer am
+				gleichen Ort zu finden. Es gibt Varianten, bei denen der Geocache-Besitzer
+				den Geocache regelmäßig an anderen Orten versteckt, oder der Finder den
+				Geocache an einem neuen Ort versteckt. Danach muss der Besitzer jeweils
+				die Beschreibung aktualisieren.
+			</desc>
+		</lang>
+		<lang id="es">
+			<name>Objetivo en movimiento</name>
+			<desc>
+				Este geocache está en movimiento. Por ejemplo, el propietario podía mover
+				la caché periódicamente de un lugar a otro, o un geobuscador podría hacer
+				esto y ofrecer nuevos detalles en su registro. El propietario debe
+				actualizar las coordenadas en la descripción del cache después de cada
+				movimiento.
+			</desc>
+		</lang>
+		<lang id="it">
+			<name>Oggetto in movimento</name>
+			<desc>
+				Questa geocache e in muovimento. Per esempio, il proprietario potrebbe
+				spostare regolarmente la cache da un luogo ad un altro, o i cacher
+				potrebbero eseguire questa operazione e indicare nuove coordinate nel
+				loro log. Il proprietario deve aggiornare le coordinate nella descrizione
+				della cache dopo ogni mossa.
+			</desc>
+		</lang>
+	</attr>
+
+	<attr acode="A12" categories="de-cache-types">
+		<opencaching schema="http://www.opencaching.de/" id="32" />
+		<lang id="en">
+			<name>a webcam is involved</name>
+			<desc>
+				There is a webcam at the target location. You must record a webcam
+				picture of your visit and include it in your 'found' log entry. There
+				may be additional requirements like a geocaching banner on the photo.
+				The webcam’s address is included in the cache description.
+			</desc>
+		</lang>
+		<lang id="de">
+			<name>Webcam</name>
+			<desc>
+				Am Ziel befindet sich eine Webcam, und für einen Fund muss man das Bild
+				der Webcam von sich selbst aufnehmen, um nachzuweisen, dass man vor Ort
+				war. Manche Webcam-Caches setzen auch weitere Bedingungen, z.B. einen
+				Geocaching-Banner auf dem Bild. Die Webadresse der Webcam ist in der
+				Beschreibung angegeben.
+			</desc>
+		</lang>
+		<lang id="es">
+			<name>Webcam Cache</name>
+			<desc>
+				Hay una webcam en el lugar de destino. necesidad a alguien para registrar
+				con un pantallazo de la imagen de la webcam de su visita e incluirlo en
+				el registro. Puede haber requisitos adicionales como un signo de
+				geocaching en la imagen. La dirección de la webcam está incluido en la
+				descripción de la cache.
+			</desc>
+		</lang>
+		<lang id="it">
+			<name>Webcam Cache</name>
+			<desc>
+				C'e una webcam nella posizione di destinazione. E' necessario registrare
+				una foto con la webcam della vostra visita e includerla nel log. Ci
+				possono essere requisiti addizionali come un segnale di geocaching sulla
+				foto. L'indirizzo della webcam e incluso nella descrizione della cache.
+			</desc>
+		</lang>
+	</attr>
+
+	<attr acode="A13" categories="de-cache-types">
+		<opencaching schema="http://www.opencaching.de/" id="57" />
+		<lang id="en">
+			<name>Other cache type</name>
+			<desc>
+				This is none of the standard, pre-defined types of cache.
+				Use this attribute for special, unusual caches.
+			</desc>
+		</lang>
+		<lang id="de">
+			<name>sonstiger Cachetyp</name>
+			<desc>
+				Dieser Cache passt in keine der üblichen Kategorien von Caches (Cachearten).
+			</desc>
+		</lang>
+		<lang id="es">
+			<name>Otro tipo de cache</name>
+			<desc>
+				Este es un cache que no pertenece a ninguna de las categorías predefinicas
+				- estándar.
+			</desc>
+		</lang>
+		<lang id="it">
+			<name>Altro tipo di cache</name>
+			<desc>
+				Questa e una cache che non appartiene a nessuna delle categorie standard
+				perdefinite. Usa questo attributo per cache speciali e inusuali.
+			</desc>
+		</lang>
+	</attr>
+
+	<attr acode="A14" categories="de-preconditions">
+		<opencaching schema="http://www.opencaching.de/" id="54" />
+		<lang id="en">
+			<name>Investigation required</name>
+			<desc>
+				You must investigate additional information before you can seek this cache.
+			</desc>
+		</lang>
+		<lang id="de">
+			<name>Recherche</name>
+			<desc>
+				Für diesen Cache muss vorab nach Informationen gesucht werden.
+			</desc>
+		</lang>
+		<lang id="es">
+			<name>Investigación</name>
+			<desc>
+				Necesitas encontrar más información antes de poder buscar este cache.
+			</desc>
+		</lang>
+		<lang id="it">
+			<name>Ricerca</name>
+			<desc>
+				E necessario trovare ulteriori informazioni prima di poter cercare
+				questa cache.
+			</desc>
+		</lang>
+	</attr>
+
+	<attr acode="A15" categories="de-preconditions">
+		<groundspeak id="47" inc="true" name="Field puzzle" />
+		<opencaching schema="http://www.opencaching.de/" id="55" />
+		<lang id="en">
+			<name>Puzzle / Mystery</name>
+			<desc>
+				Puzzles or mysteries have to be solved before or while seeking this cache.
+			</desc>
+		</lang>
+		<lang id="de">
+			<name>Rätsel</name>
+			<desc>
+				Bei diesem Cache sind als Vorarbeit oder während der Suche Rätsel zu lösen.
+			</desc>
+		</lang>
+		<lang id="es">
+			<name>Puzzle / Misterio</name>
+			<desc>
+				Misterio o Puzzle para ser resuelto antes o durante la búsqueda de este cache.
+			</desc>
+		</lang>
+		<lang id="it">
+			<name>Puzzle / Mystery</name>
+			<desc>
+				Puzzle o Mystery devono essere risolti prima o durante la ricerca di
+				questa cache.
+			</desc>
+		</lang>
+	</attr>
+
+	<attr acode="A16" categories="de-preconditions">
+		<opencaching schema="http://www.opencaching.de/" id="56" />
+		<lang id="en">
+			<name>Arithmetical problem</name>
+			<desc>
+				Before or while seeking this cache, arithmetical problems must be solved
+				which go beyond very basic calculations.
+			</desc>
+		</lang>
+		<lang id="de">
+			<name>Rechenaufgabe</name>
+			<desc>
+				Es müssen vorab oder während der Suche Rechenaufgaben gelöst werden, die
+				über das kleine Geocacher-1x1 hinausgehen, zum Beispiel
+				Mittelpunktberechnungen oder Peilungen.
+			</desc>
+		</lang>
+		<lang id="es">
+			<name>Problema matemático</name>
+			<desc>
+				Antes o durante la búsqueda de este cache, resolver problemas matemáticos
+				sencillos más difícil a los cálculos de la base.
+			</desc>
+		</lang>
+		<lang id="it">
+			<name>Problema matematico</name>
+			<desc>
+				Prima o durante la ricerca di questa cache, devono essere risolti problemi
+				matematici piu difficili di semplici calcoli base.
+			</desc>
+		</lang>
+	</attr>
+
+	<attr acode="A17" categories="de-preconditions">
+		<opencaching schema="http://www.opencaching.de/" id="58" />
+		<lang id="en">
+			<name>Ask owner for start conditions</name>
+			<desc>
+				Before doing this cache, you must ask the owner for the starting conditions.
+				E.g. the cache may be linked to certain events at varying dates.
+			</desc>
+		</lang>
+		<lang id="de">
+			<name>Startbedingungen beim Owner erfragen</name>
+			<desc>
+				Bei diesem Cache ist es nötig, sich vor dem Angehen des Caches beim
+				Eigentümer über die Bedingungen zum Angehen zu informieren.
+			</desc>
+		</lang>
+		<lang id="es">
+			<name>Ask owner for start conditions</name>
+			<desc>
+				Pregunte a los propietarios por las condiciones iniciales
+			</desc>
+		</lang>
+		<lang id="it">
+			<name>Ask owner for start conditions</name>
+			<desc>
+				Chiedere al proprietario per le condizioni di partenza
+			</desc>
+		</lang>
+	</attr>
+
+	<attr acode="A18" categories="de-accessibility">
+		<groundspeak id="24" inc="true" name="Wheelchair accessible" />
+		<opencaching schema="http://opencaching.pl/" id="44" />
+		<opencaching schema="http://www.opencaching.nl/" id="44" />
+		<lang id="en">
+			<name>Wheelchair accessible</name>
+			<desc>
+				The cache is hidden in a way which makes it possible to be found
+				when moving on a wheelchair.
+			</desc>
+		</lang>
+		<lang id="pl">
+			<name>Dostępna dla niepełnosprawnych</name>
+			<desc>
+				Skrzynka ukryta w sposób umożliwiający jej znalezienie osobom
+				poruszającym się na wózku inwalidzkim. Dotyczy to zarówno
+				lokalizacji (np. dojazd alejką pod samą skrzynkę), jak i sposobu
+				ukrycia.
+			</desc>
+		</lang>
+		<lang id="de">
+			<name>rollstuhltauglich</name>
+		</lang>
+		<lang id="nl">
+			<name>Rolstoel toegankelijk</name>
+			<desc>
+				Deze cache is zo gemaakt dat de cache ook met de rolstoel te vinden 
+				en te loggen is.
+			</desc>
+		</lang>
+	</attr>
+
+	<attr acode="A19" categories="de-accessibility">
+		<groundspeak id="53" inc="true" name="Park and grab" />
+		<opencaching schema="http://www.opencaching.de/" id="24" />
+		<lang id="en">
+			<name>Near the parking area</name>
+			<desc>
+				The geocache is located close to a parking area, only a few steps away.
+			</desc>
+		</lang>
+		<lang id="de">
+			<name>nahe beim Auto</name>
+			<desc>
+				Der Parkplatz befindet sich in unmittelbarer Nähe zum Geocache.
+				Es sind nicht mehr als einige Schritte notwendig, um den Geocache zu finden.
+			</desc>
+		</lang>
+		<lang id="es">
+			<name>Cerca de un Parking</name>
+			<desc>
+				El geocache se encuentra cerca de un parking, a poca distancia.
+			</desc>
+		</lang>
+		<lang id="it">
+			<name>Vicino all'area di parcheggio</name>
+			<desc>
+				La geocache e posta vicino ad un'area di parcheggio, solo poco distante.
+			</desc>
+		</lang>
+	</attr>
+	
+	<attr acode="A20" categories="de-accessibility">
+		<opencaching schema="http://opencaching.pl/" id="84" />
+		<opencaching schema="http://www.opencaching.nl/" id="84" />
+		<lang id="en">
+			<name>Access only by walk</name>
+			<desc>
+				The cache is accessible by walk only.
+			</desc>
+		</lang>
+		<lang id="pl">
+			<name>Dostępna tylko pieszo</name>
+			<desc>
+				Skrzynka dostępna tylko pieszo.
+			</desc>
+		</lang>
+		<lang id="de">
+			<name>nur per Fußweg</name>
+			<desc>
+				Der Cache ist nur zu Fuß erreichbar.
+			</desc>
+		</lang>
+	</attr>
+
+	<attr acode="A21" categories="de-accessibility">
+		<groundspeak id="9" inc="true" name="Significant Hike" />
+		<opencaching schema="http://www.opencaching.de/" id="25" />
+		<opencaching schema="http://www.opencaching.nl/" id="25" />
+		<lang id="en">
+			<name>Long walk</name>
+			<desc>
+				This cache requires a long walk - more than 5 km round trip. In the
+				mountains and other steep areas, the distance for a 'long walk' may be
+				shorter. Walking shoes and appropriate equipment are recommended.
+			</desc>
+		</lang>
+		<lang id="de">
+			<name>längere Wanderung</name>
+			<desc>
+				Bei diesem Cache erwartet euch eine Wanderung von mehr als 5 Kilometer,
+				vom Ausgangspunkt bis zum Cache und wieder zurück. Im Gebirge und bei
+				entsprechenden Steigungen kann das Attribut auch bei kürzeren Wegstrecken
+				gesetzt sein. Gute Wanderschuhe und entsprechende Ausrüstung empfehlen sich.
+			</desc>
+		</lang>
+		<lang id="es">
+			<name>Larga caminata</name>
+			<desc>
+				Esta cache requiere una larga caminata - más de 5 kilometros de ida y
+				vuelta. En las montanas escarpadas o en otras áreas. Recomendados calzado
+				para caminar y equipo adecuado.
+			</desc>
+		</lang>
+		<lang id="it">
+			<name>Lunga camminata</name>
+			<desc>
+				Questa cache richiede una lunga camminata - piu di 5 km tra andata e
+				ritorno. In montagna o in altre aree ripide, la distanza per una cache
+				del genere puo essere minore. Sono raccomandati scarpe da escursione ed
+				equipaggiamento adeguato.
+			</desc>
+		</lang>
+		<lang id="nl">
+			<name>Lange wandeling</name>
+		</lang>
+	</attr>
+
+	<attr acode="A22" categories="de-accessibility">
+		<groundspeak id="11" inc="true" name="May require wading" />
+		<opencaching schema="http://www.opencaching.de/" id="26" />
+		<lang id="en">
+			<name>Swamp, marsh or wading</name>
+			<desc>
+				This cache requires passing swampy or marshy ground our wading throuh
+				shallow water. Wear appropriate clothes. After rainfall, the terrain
+				may be very demanding or not passable at all.
+			</desc>
+		</lang>
+		<lang id="de">
+			<name>sumpfiges/matschiges Gelände / waten</name>
+			<desc>
+				Bei diesem Cache geht es durch sumpfiges oder matschiges Gelände oder
+				es muss durch flaches Wasser gewatet werden. Entsprechende Kleidung
+				wird empfohlen. Nach Regenfällen kann das Gelände wesentlich schwerer
+				oder überhaupt nicht begehbar sein.
+			</desc>
+		</lang>
+		<lang id="es">
+			<name>Pantano / terreno fangoso</name>
+			<desc>
+				Esta cache requiere la superación de pantanos. Usar ropa apropiada.
+				Después de la lluvia, el suelo puede ser difícil o no factible.
+			</desc>
+		</lang>
+		<lang id="it">
+			<name>Palude o marcita</name>
+			<desc>
+				Questa cache richiede il superamento di terreno paludoso o
+				acquitrinoso. Indossare un abbigliamento adeguato. Dopo la pioggia,
+				il terreno puo essere molto impegnativo o non praticabile a tutti.
+			</desc>
+		</lang>
+	</attr>
+
+	<attr acode="A23" categories="de-accessibility">
+		<opencaching schema="http://www.opencaching.de/" id="27" />
+		<lang id="en">
+			<name>Hilly area</name>
+			<desc>
+				One or more ascents lie between you and the cache.
+			</desc>
+		</lang>
+		<lang id="de">
+			<name>hügeliges Gelände</name>
+			<desc>
+				Auf dem Weg zum Geocache bzw. während der Cachesuche sind eine oder
+				mehrere Steigungen zu überwinden.
+			</desc>
+		</lang>
+		<lang id="es">
+			<name>Terreno montanoso</name>
+			<desc>
+				Una o más pendientes para acceder al cache.
+			</desc>
+		</lang>
+		<lang id="it">
+			<name>Area collinare</name>
+			<desc>
+				Una o piu salite si trovano tra voi e la cache.
+			</desc>
+		</lang>
+	</attr>
+
+	<attr acode="A24" categories="de-accessibility">
+		<groundspeak id="10" inc="true" name="Difficult climbing" />
+		<opencaching schema="http://www.opencaching.de/" id="28" />
+		<lang id="en">
+			<name>Some climbing (no gear needed)</name>
+			<desc>
+				This cache requires some climbing and you may have to use your hands,
+				but you won’t need climbing gear. Be very careful during rainy weather
+				or before thunderstorms!
+			</desc>
+		</lang>
+		<lang id="de">
+			<name>leichtes Klettern (ohne Ausrüstung)</name>
+			<desc>
+				Während der Cachesuche ist leichtes Klettern notwendig, bei dem man sich
+				z.B. mit den Händen festhalten muss. Gute Trittsicherheit und
+				Schwindelfreiheit empfehlen sich. Es ist jedoch keine Spezialausrüstung
+				notwendig wie z.B. Sicherungsseil, Klettersteigset oder Steigeisen.
+				Besonders bei feuchter Witterung oder vor Gewittern sollte man  mit der
+				entsprechenden Vorsicht handeln.
+			</desc>
+		</lang>
+		<lang id="es">
+			<name>fácil de subir (sin equipo)</name>
+			<desc>
+				Esta cache requiere un poco de escalada y puede ser necesario usar las
+				manos, pero no es necesario material de montana. !Tenga mucho cuidado
+				durante la temporada de lluvias.!
+			</desc>
+		</lang>
+		<lang id="it">
+			<name>Arrampicata (attrezzatura non necessaria)</name>
+			<desc>
+				Questa cache richiede un po' di arrampicata e potrebbe essere necessario
+				usare le mani, ma non c'e bisogno di attrezzatura da arrampicata.
+				Prestare molta attenzione durante la stagione delle piogge o prima dei
+				temporali!
+			</desc>
+		</lang>
+	</attr>
+
+	<attr acode="A25" categories="de-accessibility">
+		<groundspeak id="12" inc="true" name="May require swimming" />
+		<opencaching schema="http://www.opencaching.de/" id="29" />
+		<lang id="en">
+			<name>Swimming required</name>
+			<desc>
+				This cache requires crossing a river or a lake. The water can be steep.
+			</desc>
+		</lang>
+		<lang id="de">
+			<name>Schwimmen erforderlich</name>
+			<desc>
+				Auf dem Weg zum Geocache muss ein Fluss oder See überquert werden.
+				Das Wasser ist tief genug um zu schwimmen. Je nach Örtlichkeit kann auch
+				ein Schlauchboot, Kajak oder ähnliches verwendet werden (näheres ist
+				in der Beschreibung zum Geocache zu finden). Die Entfernung ist aber ohne
+				besondere Ausdauer noch zu schwimmen.
+			</desc>
+		</lang>
+		<lang id="es">
+			<name>Requiere nadar</name>
+			<desc>
+				Esta cache requiere cruzar un río o un lago. El agua es lo suficientemente
+				profundo para nadar. Puede utilizar un barco, pero la distancia es lo
+				suficientemente corto como para ser asequible para un nadador.
+			</desc>
+		</lang>
+		<lang id="it">
+			<name>Nuoto necessario</name>
+			<desc>
+				Questa cache richiede l'attraversamento di un fiume o un lago. L'acqua e
+				abbastanza profonda per nuotare. E possibile utilizzare una barca, ma la
+				distanza e abbastanza breve per essere alla portata di un nuotatore medio.
+			</desc>
+		</lang>
+	</attr>
+
+	<attr acode="A26" categories="de-accessibility">
+		<groundspeak id="2" inc="true" name="Access or parking fee" />
+		<opencaching schema="http://www.opencaching.de/" id="36" />
+		<lang id="en">
+			<name>Access or parking fee</name>
+			<desc>
+				You must pay an access or parking fee to access this cache.
+			</desc>
+		</lang>
+		<lang id="de">
+			<name>Zugangs- bzw. Parkentgelt</name>
+			<desc>
+				Um zum Cache zu gelangen, müsst ihr entweder einen Eintritt oder eine
+				Parkgebühr bezahlen.
+			</desc>
+		</lang>
+		<lang id="es">
+			<name>Acceso o parking pagando</name>
+			<desc>
+				Deberas pagar un acceso o estacionamiento para acceder a esta cache.
+			</desc>
+		</lang>
+		<lang id="it">
+			<name>Tassa di ingresso o di parcheggio</name>
+			<desc>
+				Devi pagare un accesso o parcheggio a pagamento per accedere a questa cache.
+			</desc>
+		</lang>
+	</attr>
+
+	<attr acode="A27" categories="de-accessibility">
+		<groundspeak id="32" inc="true" name="Bicycles" />
+		<opencaching schema="http://opencaching.pl/" id="85" />
+		<opencaching schema="http://www.opencaching.nl/" id="85" />
+		<lang id="en">
+			<name>Bikes allowed</name>
+			<desc>
+				You can reach the cache by bike.
+			</desc>
+		</lang>
+		<lang id="pl">
+			<name>Dostępna rowerem</name>
+			<desc>
+				Można dojechać do skrzynki rowerem.
+			</desc>
+		</lang>
+		<lang id="de">
+			<name>Fahrräder erlaubt</name>
+			<desc>
+				Der Cache ist mit dem Fahrrad erreichbar.
+			</desc>
+		</lang>
+		<lang id="nl">
+			<name>Fietsen toegestaan</name>
+			<desc>
+				Deze cache is ook met de fiets te doen.
+			</desc>
+		</lang>
+	</attr>
+
+	<attr acode="A28" categories="de-location">
+		<opencaching schema="http://opencaching.pl/" id="60" />
+		<opencaching schema="http://www.opencaching.nl/" id="60" />
+		<lang id="en">
+			<name>Hidden in natural surroundings (forests, mountains, etc.)</name>
+			<desc>
+				The cache is hidden in a remote and quick place - a forest, wild
+				meadow, a swamp, etc.
+			</desc>
+		</lang>
+		<lang id="pl">
+			<name>Umiejscowiona na łonie natury (lasy, góry, itp.)</name>
+			<desc>
+				Umiejscowiona na łonie natury, z dala od cywilizacji - las, dzika
+				łąka, mokradła.
+			</desc>
+		</lang>
+		<lang id="de">
+			<name>in der Natur</name>
+			<desc>
+				Der Cache ist abseits der Zivilisation in natürlicher Umgebung
+				versteckt – in einem Wald oder einer Wiese, einem Sumpf etc.
+			</desc>
+		</lang>
+		<lang id="nl">
+			<name>Cache met veel natuur</name>
+			<desc>
+				Deze cache loopt door de natuur. Zoals bossen, heide, moerasgebieden enz.
+			</desc>
+		</lang>
+	</attr>
+
+	<attr acode="A29" categories="de-location">
+		<opencaching schema="http://opencaching.pl/" id="61" />
+		<lang id="en">
+			<name>Historic site</name>
+			<desc>
+				The cache is hidden near a historic site - a castle, battleplace,
+				cementary, old bunkers, etc.
+			</desc>
+		</lang>
+		<lang id="pl">
+			<name>Miejsce historyczne</name>
+			<desc>
+				W sąsiedztwie miejsca historycznego - zamku, pałacu, pola bitwy,
+				cmentarza, ale także fortów czy bunkrów.
+			</desc>
+		</lang>
+		<lang id="de">
+			<name>historischer Ort</name>
+			<desc>
+				Der Cache ist an einem historisch bedeutsamen Ort versteckt –
+				einer Burg, einem Friedhof, einer ehemaligem Militäranlage etc.
+			</desc>
+		</lang>
+	</attr>
+
+	<attr acode="A30" categories="de-location">
+		<opencaching schema="http://www.opencaching.de/" id="30" />
+		<opencaching schema="http://www.opencaching.nl/" id="30" />
+		<lang id="en">
+			<name>Point of interest</name>
+			<desc>
+				There is a point of interest at the cache, like a nice scenic view
+				or a larger castle ruin. This place is worth visiting it even
+				without a geocache nearby.
+			</desc>
+		</lang>
+		<lang id="de">
+			<name>interessanter Ort</name>
+			<desc>
+				Der Geocache ist in unmittelbarer Nähe zu einer Sehenswürdigkeit
+				versteckt. Das kann ein z.B. schöner Aussichtspunkt oder eine größere
+				Burgruine sein. Ein Besuch würde sich auch ohne besonderen Anlass
+				(den Geocache) lohnen.
+			</desc>
+		</lang>
+		<lang id="es">
+			<name>Punto de interes</name>
+			<desc>
+				Hay un monumento cerca del cache, como un paisaje hermoso o un castillo
+				en ruinas. Este lugar es digno de visitar, incluso sin un geocache cerca.
+			</desc>
+		</lang>
+		<lang id="it">
+			<name>Punto di interesse</name>
+			<desc>
+				C'e un punto di interesse alla cache, come un bel panorama o di un
+				castello in rovina. Questo luogo merita una visita anche senza una
+				geocache vicina.
+			</desc>
+		</lang>
+		<lang id="nl">
+			<name>Interesante plek</name>
+		</lang>
+	</attr>
+
+	<attr acode="A31" categories="de-location">
+		<opencaching schema="http://www.opencaching.de/" id="33" />
+		<lang id="en">
+			<name>Hidden wihin enclosed rooms (caves, buildings etc.)</name>
+			<desc>
+				This geocache is not hidden in the open air, but within a building,
+				a cave or similar.
+			</desc>
+		</lang>
+		<lang id="de">
+			<name>in geschlossenen Räumen (Höhle, Gebäude, etc.)</name>
+			<desc>
+				Das Ziel des Geocaches liegt nicht im Freien, sondern zum Beispiel in
+				einem Gebäude oder einer Höhle.
+			</desc>
+		</lang>
+		<lang id="es">
+			<name>en espacios confinados (cuevas, edificios, etc)</name>
+			<desc>
+				Este geocache no está al aire libre, esta oculto dentro de un edificio,
+				una cueva o similares.
+			</desc>
+		</lang>
+		<lang id="it">
+			<name>All'interno di stanze chiuse (caverne, edifici, ecc.)</name>
+			<desc>
+				Questa geocache non e nascosta all'aria aperta ma all'interno di un
+				edificio, di una grotta o simili.
+			</desc>
+		</lang>
+	</attr>
+
+	<attr acode="A32" categories="de-location">
+		<opencaching schema="http://www.opencaching.de/" id="34" />
+		<lang id="en">
+			<name>Hidden under water</name>
+			<desc>
+				This cache or one of the stages is placed underwater.
+				You will get wet when doing this cache.
+			</desc>
+		</lang>
+		<lang id="de">
+			<name>im Wasser versteckt</name>
+			<desc>
+				Der Geocache oder eine der Stationen ist im Wasser versteckt. Um die
+				Aufgabe zu lösen muss man ggf. das Wasser betreten, schwimmen oder tauchen.
+			</desc>
+		</lang>
+		<lang id="es">
+			<name>En el agua</name>
+			<desc>
+				Esta cache o una de sus etapas se encuentran bajo el agua. Usted debe
+				entrar en el agua, nadar o zambullirse.
+			</desc>
+		</lang>
+		<lang id="it">
+			<name>Nell'acqua</name>
+			<desc>
+				Questa cache o uno dei suoi stadi sono posizionati sott'acqua. Devi
+				entrare in acqua, nuotare o fare una immersione.
+			</desc>
+		</lang>
+	</attr>
+
+	<attr acode="A33" categories="de-facilities">
+		<groundspeak id="25" inc="true" name="Parking available" />
+		<opencaching schema="http://www.opencaching.de/" id="18" />
+		<opencaching schema="http://www.opencaching.nl/" id="18" />
+		<lang id="en">
+			<name>Parking area nearby</name>
+			<desc>
+				A nearby parking area is situated as starting point for doing this cache.
+			</desc>
+		</lang>
+		<lang id="de">
+			<name>Parkplatz in der Nähe</name>
+			<desc>
+				Es gibt in der Nähe einen Parklplatz, der sich als Startpunkt für die
+				Cachesuche eignet.
+			</desc>
+		</lang>
+		<lang id="es">
+			<name>Parking cercano</name>
+			<desc>
+				Una zona de aparcamiento se encuentra cerca del punto de partida de
+				este cache.
+			</desc>
+		</lang>
+		<lang id="it">
+			<name>Parcheggio nei pressi</name>
+			<desc>
+				Una area di parcheggio e situata nei pressi del punto di partenza di
+				questa cache.
+			</desc>
+		</lang>
+		<lang id="nl">
+			<name>Parkeerplaats vlakbij</name>
+			<desc>
+				Er is een parkeerplaats vlak bij om deze cache te beginnen.
+			</desc>
+		</lang>
+	</attr>
+
+	<attr acode="A34" categories="de-facilities">
+		<groundspeak id="26" inc="true" name="Public transportation" />
+		<opencaching schema="http://www.opencaching.de/" id="19" />
+		<lang id="en">
+			<name>Public transportation</name>
+			<desc>
+				This cache is located outside of urban areas and has a public
+				transport station nearby.
+			</desc>
+		</lang>
+		<lang id="de">
+			<name>erreichbar mit ÖVM</name>
+			<desc>
+				Dieser Cache lässt sich mit Hilfe von öffentlichen Verkehrsmitteln erreichen
+				und liegt außerhalb von Städten.
+			</desc>
+		</lang>
+		<lang id="es">
+			<name>Transporte Público</name>
+			<desc>
+				Este cache se encuentra también fuera de las zonas urbanas y una
+				estación de transporte público.
+			</desc>
+		</lang>
+		<lang id="it">
+			<name>Trasporto pubblico</name>
+			<desc>
+				Questa cache e situata al difuori di aree urbane e ha una stazione di
+				trasporto pubblico nelle vicinanze.
+			</desc>
+		</lang>
+	</attr>
+
+	<attr acode="A35" categories="de-facilities">
+		<groundspeak id="27" inc="true" name="Drinking water nearby" />
+		<opencaching schema="http://www.opencaching.de/" id="20" />
+		<lang id="en">
+			<name>Drinking water nearby</name>
+			<desc>
+				There is drinking water along the trail or near the cache. This may be
+				useful especially especially when doing event caches, longer hikes or
+				caches at probably dirty locations.
+			</desc>
+		</lang>
+		<lang id="de">
+			<name>Trinkwasser in der Nähe</name>
+			<desc>
+				Während der Cachetour oder in der Nähe des Geocaches ist Trinkwasser
+				verfügbar. Besonders bei Event-Caches, längeren Multicaches und bei
+				Geocaches, wo man vermutlich schmutzig wird, kann dies hilfreich sein.
+			</desc>
+		</lang>
+		<lang id="es">
+			<name>Agua potable en las cercanias</name>
+			<desc>
+				Hay agua potable a lo largo de la ruta o cerca de la cache. Este
+				atributo es especialmente útil en la planificación de Eventos,
+				o caches con viajes largos a lugares como las cuevas o minas
+				probablemente esté sucio.
+			</desc>
+		</lang>
+		<lang id="it">
+			<name>Acqua potabile nei pressi</name>
+			<desc>
+				C'e acqua potabile lungo il percorso o nelle vicinanze della cache.
+				Questo attributo e utile soprattutto nella pianificazione di cache
+				evento, di lunghe escursioni o di cache in luoghi probabilmente
+				sporchi come le grotte o le miniere.
+			</desc>
+		</lang>
+	</attr>
+
+	<attr acode="A36" categories="de-facilities">
+		<groundspeak id="28" inc="true" name="Public restrooms nearby" />
+		<opencaching schema="http://www.opencaching.de/" id="21" />
+		<lang id="en">
+			<name>Public restrooms nearby</name>
+			<desc>
+				There are public restrooms along the way or near the cache.
+			</desc>
+		</lang>
+		<lang id="de">
+			<name>öffentliche Toilette in der Nähe</name>
+			<desc>
+				Während der Cachetour oder in der Nähe des Geocaches ist eine öffentliche
+				Toilette verfügbar. 
+			</desc>
+		</lang>
+		<lang id="es">
+			<name>Aseos públicos cercanos</name>
+			<desc>
+				Hay banos públicos a lo largo de la carretera o en las proximidades
+				del cache.
+			</desc>
+		</lang>
+		<lang id="it">
+			<name>Bagni pubblici nei pressi</name>
+			<desc>
+				Ci sono WC pubblici lungo la strada o nelle vicinanze della cache.
+			</desc>
+		</lang>
+	</attr>
+
+	<attr acode="A37" categories="de-facilities">
+		<groundspeak id="29" inc="true" name="Telephone nearby" />
+		<opencaching schema="http://www.opencaching.de/" id="22" />
+		<lang id="en">
+			<name>Public phone nearby</name>
+			<desc>
+				There is a public phone along the way or near the cache.
+			</desc>
+		</lang>
+		<lang id="de">
+			<name>Telefon in der Nähe</name>
+			<desc>
+				Während der Cachetour oder in der Nähe des Geocaches gibt es ein
+				öffentliches Telefon.
+			</desc>
+		</lang>
+		<lang id="es">
+			<name>Teléfono Público en las cercanias</name>
+			<desc>
+				Hay teléfonos públicos en la carretera o en las proximidades del cache.
+			</desc>
+		</lang>
+		<lang id="it">
+			<name>Telefono pubblico nei pressi</name>
+			<desc>
+				Ci sono telefoni pubblici lungo la strada o nelle vicinanze della cache.
+			</desc>
+		</lang>
+	</attr>
+
+	<attr acode="A38" categories="de-facilities">
+		<opencaching schema="http://www.opencaching.de/" id="23" />
+		<lang id="en">
+			<name>First aid available</name>
+			<desc>
+				There is a first aid station, call box, mountain rescue or similar
+				arrangement near the cache.
+			</desc>
+		</lang>
+		<lang id="de">
+			<name>Erste Hilfe verfügbar</name>
+			<desc>
+				In der Nähe des Caches findet ihr eine Erste Hilfe-Station, Notrufsäule,
+				Bergwacht oder entsprechende Einrichtung.
+			</desc>
+		</lang>
+		<lang id="es">
+			<name>Disponible socorro rapido</name>
+			<desc>
+				Hay un punto de socorro, un teléfono para pedir ayuda, un centro de
+				rescate de montana o similar cerca del cache.
+			</desc>
+		</lang>
+		<lang id="it">
+			<name>Disponibile pronto soccorso</name>
+			<desc>
+				C'e un pronto soccorso, un telefono per chiamate di soccorso, un centro
+				di soccorso alpino o simili nelle vicinanze della cache.
+			</desc>
+		</lang>
+	</attr>
+
+	<attr acode="A39" categories="de-time-and-seasons">
+		<groundspeak id="13" inc="true" name="Available at all times" />
+		<opencaching schema="http://www.opencaching.de/" id="38" />
+		<lang id="en">
+			<name>Available 24/7</name>
+			<desc>
+				This cache can be found at any time of day or week.
+			</desc>
+		</lang>
+		<lang id="de">
+			<name>rund um die Uhr machbar</name>
+			<desc>
+				Dieser Cache ist jederzeit machbar, sowohl am Tage als auch in der Nacht.
+			</desc>
+		</lang>
+		<lang id="es">
+			<name>Disponible las 24 horas</name>
+			<desc>
+				Esta cache se puede encontrar tanto de día como de noche.
+			</desc>
+		</lang>
+		<lang id="it">
+			<name>Disponibile 24 ore</name>
+			<desc>
+				Questa cache puo essere trovata sia di giorno che di notte.
+			</desc>
+		</lang>
+	</attr>
+
+	<attr acode="A40" categories="de-time-and-seasons">
+		<groundspeak id="13" inc="false" name="Available at all times" />
+		<opencaching schema="http://www.opencaching.de/" id="39" />
+		<lang id="en">
+			<name>Not 24/7</name>
+			<desc>
+				This cache can only be done at certain times of day or week - see the cache
+				description for more details. For example, the cache may be placed in an
+				area with restricted opening hours.
+			</desc>
+		</lang>
+		<lang id="pl">
+			<name>Dostępna w określonych godzinach</name>
+			<desc>
+				Dostępna w określonych dniach, godzinach, często wstęp płatny.
+				Często będzie to muzeum lub skansen. Szczegółowe informacje o
+				dostępności powinny znajdować się w opisie skrzynki.
+			</desc>
+		</lang>
+		<lang id="de">
+			<name>nur zu bestimmten Uhrzeiten</name>
+			<desc>
+				Dieser Cache lässt sich nur zu bestimmten Tageszeiten absolvieren.
+				Nähere Angaben sind in der Beschreibung des Caches zu finden.
+			</desc>
+		</lang>
+		<lang id="es">
+			<name>Sólo disponible a ciertas horas</name>
+			<desc>
+				Esta cache se puede hacer solamente en ciertos momentos del día -
+				véase la descripción de caché para obtener más detalles.
+			</desc>
+		</lang>
+		<lang id="it">
+			<name>Disponibile solo in certi orari</name>
+			<desc>
+				Questa cache puo essere cercata solo a certe ore del giorno -
+				vedi la descrizione per ulteriori informazioni.
+			</desc>
+		</lang>
+	</attr>
+
+	<attr acode="A41" categories="de-time-and-seasons">
+		<groundspeak id="14" inc="false" name="Recommended at night" />
+		<opencaching schema="http://www.opencaching.de/" id="40" />
+		<lang id="en">
+			<name>Not recommended at night</name>
+			<desc>
+				Searching for this cache is not recommended by night. It might be
+				dangerous, or the cache may be hidden in an area where flashlights
+				may attract unwanted attention.
+			</desc>
+		</lang>
+		<lang id="de">
+			<name>nur tagsüber</name>
+			<desc>
+				Dieser Cache lässt sich nur tagsüber angehen, zum Beispiel weil das Gelände
+				gefährlich ist oder die Suche mit Taschenlampen in einem Wohngebiet negativ
+				auffallen würde.
+			</desc>
+		</lang>
+		<lang id="es">
+			<name>solo por el día</name>
+			<desc>
+				Deberas encontrar este cache sólo durante el día. Por ejemplo, el área pued
+				ser peligroso y contienen rocas o abismos. O bien, el uso de linternas puede
+				ser imposible porque sería sospechoso en una zona residencial.
+			</desc>
+		</lang>
+		<lang id="it">
+			<name>solo di giorno</name>
+			<desc>
+				Si dovrebbe cercare questa cache solamente durante il giorno. Ad esempio,
+				l'area puo essere pericolosa e contenere scogliere o abissi. Oppure,
+				l'utilizzo di torce elettriche potrebbe essere impossibile perché
+				risulterebbe sospetto all'interno di una zona residenziale.
+			</desc>
+		</lang>
+	</attr>
+
+	<attr acode="A42" categories="de-time-and-seasons">
+		<groundspeak id="14" inc="true" name="Recommended at night" />
+		<opencaching schema="http://opencaching.pl/" id="91" />
+		<opencaching schema="http://www.opencaching.nl/" id="91" />
+		<lang id="en">
+			<name>Recommended at night</name>
+			<desc>
+				It is recommended to search for this cache by night. I.e. there
+				might be some light-reflecting surfaces involved which are usually
+				invisible during daylight.
+			</desc>
+		</lang>
+		<lang id="pl">
+			<name>Zalecane szukanie nocą</name>
+			<desc>
+				Aby znaleźć skrzynkę zalecane jest poszukiwanie jej nocą, ze
+				względu na miejsce ukrycia lub użyte elementy odblaskowe, których
+				oświetlenie umożliwia odnalezienie skrzynki.
+			</desc>
+		</lang>
+		<lang id="de">
+			<name>am besten nachts findbar</name>
+			<desc>
+				Es wird empfohlen, den Cache nachts zu suchen. Es können zum
+				Beispiel Reflektoren vorhanden sein, die tagsüber schwer oder gar 
+				nicht erkennbar sind.
+			</desc>
+		</lang>
+	</attr>
+
+	<attr acode="A43" categories="de-time-and-seasons">
+		<groundspeak id="52" inc="true" name="Night Cache" />
+		<opencaching schema="http://www.opencaching.de/" id="1" />
+		<lang id="en">
+			<name>Only at night</name>
+			<desc>
+				This geocache can be found at night only - it is a so-called night cache.
+				There may be reflectors which have to be flashlighted and will point 
+				to the hiding place, or other special night-caching mechanisms.
+			</desc>
+		</lang>
+		<lang id="de">
+			<name>nur bei Nacht</name>
+			<desc>
+				Der Geocache kann nur bei Nacht gelöst werden und wird deshalb Nachtcache
+				genannt. Zum Beispiel müssen Reflektoren mit einer Taschenlampe 
+				angeleuchtet werden, die dann den Weg zum Versteck zeigen.
+			</desc>
+		</lang>
+		<lang id="es">
+			<name>Sólo por la noche</name>
+			<desc>
+				Esta cache se puede encontrar solamente por la noche - tienes que
+				considerar cache notturna. Puede haber placas reflectantes que
+				brillaran y te llevaran al cache, o otros mecanismo especiales para
+				caches nocturnos.
+			</desc>
+		</lang>
+		<lang id="it">
+			<name>Solo di notte</name>
+			<desc>
+				Questa cache puo essere trovata solo di notte - e una cosiddetta
+				cache notturna. Ci possono essere targhette riflettenti che devono
+				essere illuminate e ti conducono al nascondiglio, o altri speciali
+				meccanismi di caching notturno.
+			</desc>
+		</lang>
+	</attr>
+
+	<attr acode="A44" categories="de-time-and-seasons">
+		<groundspeak id="62" inc="false" name="Seasonal access" />
+		<opencaching schema="http://www.opencaching.de/" id="42" />
+		<lang id="en">
+			<name>All seasons</name>
+			<desc>
+				This cache can be found the whole year round, while difficulty may
+				depend on seasons.
+			</desc>
+		</lang>
+		<lang id="de">
+			<name>ganzjährig zugänglich</name>
+			<desc>
+				Dieser Cache lässt sich während des gesamten Jahres finden, wobei je
+				nach Jahreszeit die Schwierigkeit bei der Suche schwanken kann.
+			</desc>
+		</lang>
+		<lang id="es">
+			<name>Todas las temporadas</name>
+			<desc>
+				Esta cache se encuentrar durante todo el ano, mientras que la dificultad
+				puede depender de las estaciones.
+			</desc>
+		</lang>
+		<lang id="it">
+			<name>Tutte le stagioni</name>
+			<desc>
+				Questa cache si trova tutto l'anno, mentre la difficolta puo dipendere
+				dalle stagioni.
+			</desc>
+		</lang>
+	</attr>
+
+	<attr acode="A45" categories="de-time-and-seasons">
+		<groundspeak id="62" inc="true" name="Seasonal access" />
+		<opencaching schema="http://www.opencaching.de/" id="60" />
+		<lang id="en">
+			<name>Only available during specified seasons</name>
+			<desc>
+				This cache can be done at certain seasons only - see the cache
+				description for more details.
+			</desc>
+		</lang>
+		<lang id="de">
+			<name>nur zu bestimmten Zeiten im Jahr</name>
+			<desc>
+				Dieser Cache lässt sich nur zu bestimmten Zeite im Jahr absolvieren.
+				Näheres ist in der Cachebeschreibung angegeben.
+			</desc>
+		</lang>
+		<lang id="es">
+			<name>Sólo disponible durante las estaciones especificadas</name>
+			<desc>
+				Esta cache se puede hacer en ciertas épocas del ano solamente - vea la
+				descripción de cache para obtener más detalles.
+			</desc>
+		</lang>
+		<lang id="it">
+			<name>Disponibile solo in certe stagioni</name>
+			<desc>
+				Questa cache puo essere cercata solo in certe stagioni - vedi la
+				descrizione per ulteriori informazioni.
+			</desc>
+		</lang>
+	</attr>
+
+	<attr acode="A46" categories="de-time-and-seasons">
+		<opencaching schema="http://www.opencaching.de/" id="43" />
+		<lang id="en">
+			<name>Breeding season / protected nature</name>
+			<desc>
+				Don’t seek this cache during animal breeding season! See the cache
+				description on which time of year must be avoided. Also, pay
+				attention to the local terms and signs regarding nature protection.
+			</desc>
+		</lang>
+		<lang id="de">
+			<name>Brutsaison / Naturschutz</name>
+			<desc>
+				Dieser Cache sollte in der Brutsaison nicht absolviert werden. In der
+				Beschreibung sollte angegeben sein, welche Jahreszeit davon betroffen ist.
+				Achte bitte auch auf die örtliche Beschilderung zum Naturschutz.
+			</desc>
+		</lang>
+		<lang id="es">
+			<name>Temporada de reproducción / protección de la naturaleza</name>
+			<desc>
+				!No intente esta cache durante la temporada de cría de los animales!
+				Vvéase la descripción del cache de la época del ano debe ser evitado.
+				Preste atención también a las condiciones o signos en cuanto al respeto
+				por la naturaleza.
+			</desc>
+		</lang>
+		<lang id="it">
+			<name>Stagione di riproduzione / natura protetta</name>
+			<desc>
+				Non cercare questa cache durante il periodo riproduttivo degli animali!
+				Vedi descrizione della cache quale periodo dell'anno debba essere evitato.
+				Prestate anche attenzione alle condizioni o ai cartelli riguardo il
+				rispetto della natura.
+			</desc>
+		</lang>
+	</attr>
+
+	<attr acode="A47" categories="de-time-and-seasons">
+		<groundspeak id="15" inc="true" name="Available during winter" />
+		<opencaching schema="http://www.opencaching.de/" id="44" />
+		<lang id="en">
+			<name>Available during winter</name>
+			<desc>
+				This cache can be found even after heavy snowing. All stages and the
+				geocache are hidden in a snow-safe way: they will not be covered by
+				fallen snow, or ice, etc.
+			</desc>
+		</lang>
+		<lang id="de">
+			<name>schneesicheres Versteck</name>
+			<desc>
+				Dieser Cache lässt sich auch nach starkem Schneefall suchen. Die einzelnen
+				Stationen und der Geocache sind so versteckt, dass sie nicht von Schnee
+				verdeckt werden, bzw. von Schneehaufen, die durch Räumfahrzeuge entstehen.
+			</desc>
+		</lang>
+		<lang id="es">
+			<name>Nieve en el escondite</name>
+			<desc>
+				Este cache también se puede encontrar después de fuertes nevadas. Todas
+				las fases y geocaches se esconde en lugares seguros para la caída de la
+				nieve, no será cubierto por acumulaciones de nieve.
+			</desc>
+		</lang>
+		<lang id="it">
+			<name>Luogo a prova di neve</name>
+			<desc>
+				Questa cache puo essere trovata anche dopo forti nevicate. Tutte le fasi
+				e la geocache sono nascosti in luoghi sicuri per la neve: non saranno
+				coperti da neve caduta né da cumuli di neve creati ad esempio da veicoli
+				spalaneve.
+			</desc>
+		</lang>
+	</attr>
+
+	<attr acode="A48" categories="de-time-and-seasons">
+		<opencaching schema="http://www.opencaching.de/" id="41" />
+		<lang id="en">
+			<name>Not at high water level</name>
+			<desc>
+				This cache can be done only at low or normal water level. It is
+				inaccessible during flood.
+			</desc>
+		</lang>
+		<lang id="de">
+			<name>nicht bei Hochwasser oder Flut</name>
+			<desc>
+				Der Geocache kann nur bei bei niedrigem oder normalem Wasserstand
+				bzw. bei Ebbe gesucht werden. Bei Hochwasser oder Flut ist er
+				unzugänglich.
+			</desc>
+		</lang>
+	</attr>
+
+	<attr acode="A49" categories="de-tools">
+		<opencaching schema="http://opencaching.pl/" id="47" />
+		<opencaching schema="http://www.opencaching.de/" id="47" />
+		<opencaching schema="http://www.opencaching.nl/" id="47" />
+		<lang id="en">
+			<name>Compass required</name>
+			<desc>
+				A compass is required.
+			</desc>
+		</lang>
+		<lang id="pl">
+			<name>Potrzebny kompas</name>
+			<desc>
+				Kompas może okazać się niezbędny aby dotrzeć do wskazanego miejsca
+				skrzynki.
+			</desc>
+		</lang>
+		<lang id="de">
+			<name>Kompass</name>
+			<desc>
+				Für diesen Cache braucht ihr einen funktionierenden Kompass für Peilungen
+				oder Orientierungen.
+			</desc>
+		</lang>
+		<lang id="es">
+			<name>Brújula</name>
+			<desc>
+				Se necesita una brújula.
+			</desc>
+		</lang>
+		<lang id="it">
+			<name>Bussola</name>
+			<desc>
+				E' necessaria una bussola.
+			</desc>
+		</lang>
+		<lang id="nl">
+			<name>Kompas nodig</name>
+		</lang>
+	</attr>
+
+	<attr acode="A50" categories="de-tools">
+		<opencaching schema="http://opencaching.pl/" id="48" />
+		<opencaching schema="http://www.opencaching.nl/" id="48" />
+		<lang id="en">
+			<name>Take something to write</name>
+			<desc>
+				There is no pencil in the cache. Take something to write with.
+			</desc>
+		</lang>
+		<lang id="pl">
+			<name>Weź coś do pisania</name>
+			<desc>
+				Skrzynka nie zawiera ołówka, weź ze sobą coś do pisania.
+			</desc>
+		</lang>
+		<lang id="de">
+			<name>Stift wird benötigt</name>
+			<desc>
+				Es ist kein Stift zum Loggen im Cache; bringe bitte einen eigenen mit.
+			</desc>
+		</lang>
+		<lang id="nl">
+			<name>Neem iets mee om te schrijven</name>
+		</lang>
+	</attr>
+
+	<attr acode="A51" categories="de-tools">
+		<opencaching schema="http://opencaching.pl/" id="81" />
+		<opencaching schema="http://www.opencaching.nl/" id="81" />
+		<lang id="en">
+			<name>You may need a shovel</name>
+			<desc>
+				The cache may require more digging. A shovel might come in handy.
+			</desc>
+		</lang>
+		<lang id="pl">
+			<name>Potrzebna łopatka</name>
+			<desc>
+				Skrzynka jest zakopana w ziemi.
+			</desc>
+		</lang>
+		<lang id="de">
+			<name>Schaufel / vergrabener Cache</name>
+			<desc>
+				Der Cache ist vergraben. Wahrscheinlich benötigst du eine Schaufel,
+				um ihn zu heben.
+			</desc>
+		</lang>
+	</attr>
+
+	<attr acode="A52" categories="de-tools">
+		<groundspeak id="44" inc="true" name="Flashlight required" />
+		<opencaching schema="http://opencaching.pl/" id="82" />
+		<opencaching schema="http://www.opencaching.de/" id="48" />
+		<opencaching schema="http://www.opencaching.nl/" id="82" />
+		<lang id="en">
+			<name>Flashlight required</name>
+			<desc>
+				You will need a flashlight to find this cache.
+			</desc>
+		</lang>
+		<lang id="pl">
+			<name>Potrzebna latarka</name>
+			<desc>
+				Przy poszukiwaniach tej skrzynki potrzebna jest latarka.
+			</desc>
+		</lang>
+		<lang id="de">
+			<name>Taschenlampe</name>
+			<desc>
+				Um diesen Cache anzugehen, benötigt ihr eine funktionstüchtige
+				Taschenlampe. Denkt auch an Ersatzbatterien.
+			</desc>
+		</lang>
+		<lang id="es">
+			<name>Linterna</name>
+			<desc>
+				Es necesario una linterna para encontrar este cache. !No se olvide de las
+				baterías de repuesto!
+			</desc>
+		</lang>
+		<lang id="it">
+			<name>Lampada tascabile</name>
+			<desc>
+				E' necessaria una torcia portatile per trovare questa cache. Non
+				dimenticate le batterie di riserva!
+			</desc>
+		</lang>
+	</attr>
+
+	<attr acode="A53" categories="de-tools">
+		<groundspeak id="3" inc="true" name="Climbing gear" />
+		<opencaching schema="http://www.opencaching.de/" id="49" />
+		<lang id="en">
+			<name>Climbing gear required</name>
+			<desc>
+				For this cache, you will need climbing equipment and the knowledge
+				how to use it properly. If you are a beginner, don’t do it alone but
+				use the support of an experienced climber or mountaineer.
+			</desc>
+		</lang>
+		<lang id="de">
+			<name>Kletterzeug</name>
+			<desc>
+				Um diesen Cache absolvieren zu können, benötigt ihr neben der normalen
+				Ausrüstung auch noch Kletterausrüstung, und entsprechendes Wissen um
+				deren Handhabung und ums Klettern. Laien sollten sich auf jeden Fall
+				von einem erfahrenen Kletterer oder Bergsteiger unterstützen lassen.
+			</desc>
+		</lang>
+		<lang id="es">
+			<name>Equipo de escalada</name>
+			<desc>
+				Para este cache, tendrá que utilizar los equipos y saber cómo utilizarlo
+				correctamente. Si usted es un principiante, no lo haga solos, sino que
+				utiliza el apoyo de un experimentado escalador o alpinista.
+			</desc>
+		</lang>
+		<lang id="it">
+			<name>Attrezzatura per arrampicata</name>
+			<desc>
+				Per questa cache, avrete bisogno di materiale da arrampicata e di saperlo
+				usare correttamente. Se sei un principiante, non farlo da solo, ma
+				utilizza il sostegno di uno scalatore esperto o un alpinista.
+			</desc>
+		</lang>
+	</attr>
+
+	<attr acode="A54" categories="de-tools">
+		<opencaching schema="http://www.opencaching.de/" id="50" />
+		<lang id="en">
+			<name>Cave equipment required</name>
+			<desc>
+				This geocache is hidden in a cave, and you should use appropriate
+				equipment to access it. Beware: Even small caves may confront you with
+				unforeseen problems and dangers, like thunder storms (water!) or a
+				sprained ankle. Have advice first from cave-experienced people! Also
+				take care of protected nature; e.g. bat places must not be disturbed.
+			</desc>
+		</lang>
+		<lang id="de">
+			<name>Höhlenzeug</name>
+			<desc>
+				Der Geocache ist in einer Höhle versteckt und man sollte entsprechende
+				Ausrüstung mitbringen. Vorsicht: Bereits kleinste Höhlensysteme können
+				bei unvorhergesehenen Problemen, z.B. Gewittern (Wasser!) oder einem
+				verstauchten Knöchel, sehr gefährlich werden! Ihr solltet euch vorab
+				gründlich bei erfahreren Höhlengehern informieren. Beachtet auch den
+				Naturschutz – Fledermausquartiere dürfen nicht gestört werden!
+			</desc>
+		</lang>
+		<lang id="es">
+			<name>Equipación para cuevas</name>
+			<desc>
+				Este geocache está escondido en una cueva, y se debe utilizar el equipo
+				adecuado para acceder a ella. Tenga en cuenta que incluso las pequenas
+				cuevas pueden prever los problemas imprevistos y peligros, como durante
+				las tormentas o con un esguince de tobillo. !Acceda con personas
+				experimentadas en cuevas! También debe protegerse la naturaleza sobre
+				todo en esos lugares donde los murciélagos no deben  ser molestados.
+			</desc>
+		</lang>
+		<lang id="it">
+			<name>Attrezzatura per grotta</name>
+			<desc>
+				Questa geocache e nascosta in una grotta, e si dovrebbe utilizzare
+				attrezzature adeguate per accedervi. Attenzione: anche piccole grotte
+				possono prevedere problemi imprevisti e pericoli, come in caso di
+				temporali (acqua!) o una caviglia slogata. Consigliatevi prima con
+				persone che abbiano esperienza di grotte! Abbiate anche cura della
+				natura protetta, ad esempio dei luoghi dove i pipistrelli non devono
+				essere disturbati.
+			</desc>
+		</lang>
+	</attr>
+
+	<attr acode="A55" categories="de-tools">
+		<groundspeak id="5" inc="true" name="Scuba gear" />
+		<opencaching schema="http://www.opencaching.de/" id="51" />
+		<lang id="en">
+			<name>Diving equipment required</name>
+			<desc>
+				You will need diving equipment to find this geocache. The water depth
+				of the cache location is specified in the description. Please note that
+				secure diving requires special training. Without diving experience,
+				you may search this cache in company of a diving teacher.
+			</desc>
+		</lang>
+		<lang id="de">
+			<name>Taucherausrüstung</name>
+			<desc>
+				Um den Geocache zu finden benötigt ihr eine Tauchausrüstung. In welcher
+				Tiefe der Geocache liegt, ist in der Beschreibung angegeben. Bitte beachtet,
+				dass Ihr für einen sicheren Tauchgang eine entsprechende Ausbildung
+				benötigt. Als Nicht-Taucher könnt ihr den Geocache evtl. zusammen mit
+				einem Tauchlehrer suchen.
+			</desc>
+		</lang>
+		<lang id="es">
+			<name>Diving equipment</name>
+			<desc>
+				Necesitará un equipo de buceo para encontrar este geocache. La
+				profundidad del agua en la ubicación de la cache se especifica en la
+				descripción. Tenga en cuenta que el buceo requiere un entrenamiento
+				especial. Sin experiencia de buceo, puedes buscar por el caché, junto
+				con un buceador experimentado.
+			</desc>
+		</lang>
+		<lang id="it">
+			<name>Equipo de buceo</name>
+			<desc>
+				Avrete bisogno di attrezzatura subacquea per trovare questa geocache.
+				La profondita d'acqua nella posizione della cache viene specificata nella
+				descrizione. Si prega di notare che l'immersione in tutta sicurezza
+				richiede una formazione specifica. Senza esperienza di immersioni, e
+				possibile cercare questa cache in compagnia di un insegnante di sub.
+			</desc>
+		</lang>
+	</attr>
+
+	<attr acode="A56" categories="de-tools">
+		<groundspeak id="51" inc="true" name="Special tool required" />
+		<opencaching schema="http://opencaching.pl/" id="83" />
+		<opencaching schema="http://www.opencaching.de/" id="46" />
+		<opencaching schema="http://www.opencaching.nl/" id="83" />
+		<lang id="en">
+			<name>Special tools required</name>
+			<desc>
+				You will need special equipment which is not specified by other attributes.
+				See the cache description on what tools are required.
+			</desc>
+		</lang>
+		<lang id="pl">
+			<name>Wymagany dodatkowy sprzęt</name>
+			<desc>
+				Niezbędny jest dodatkowy, niestandardowy sprzęt - może to być np.
+				kajak, sprzęt wspinaczkowy, ale również kalkulator, kalosze itp.
+				Ogólnie przedmioty, które nie należą do standardowego wyposażenia
+				poszukiwacza.
+			</desc>
+		</lang>
+		<lang id="de">
+			<name>spezielle Ausrüstung</name>
+			<desc>
+				Für diesen Cache benötigst du weitere Ausrüstung, die nicht durch die
+				anderen Attribute angegeben ist und nicht zur Standardausrüstung eines
+				Geocachers gehört. Was genau du benötigst, ist in der Beschreibung
+				angegeben.
+			</desc>
+		</lang>
+		<lang id="es">
+			<name>Equipamiento especial</name>
+			<desc>
+				Necesitarás un equipo especial no especificado por otros atributos.
+			</desc>
+		</lang>
+		<lang id="it">
+			<name>Equipaggiamento speciale</name>
+			<desc>
+				Avrete bisogno di attrezzature speciali non specificate da altri attributi.
+			</desc>
+		</lang>
+	</attr>
+
+	<attr acode="A57" categories="de-tools">
+		<groundspeak id="4" inc="true" name="Boat" />
+		<opencaching schema="http://opencaching.pl/" id="86" />
+		<opencaching schema="http://www.opencaching.de/" id="52" />
+		<opencaching schema="http://www.opencaching.nl/" id="86" />
+		<lang id="en">
+			<name>Requires a boat</name>
+			<desc>
+				This cache can usually be found only when using a watercraft.
+				Swimming is difficult or impossible because of the distance or currents.
+				See the cache description for more details.
+			</desc>
+		</lang>
+		<lang id="pl">
+			<name>Wymaga sprzętu pływającego</name>
+			<desc>
+				Skrzynka z tym atrybutem najczęściej może być zdobyta jedynie przy
+				użyciu sprzętu pływającego (łodzi, pontonu, kajaka itp.) Dopłynięcie
+				wpław jest trudne lub niemożliwe, ze względu na dystans, silne
+				prądy itp.
+			</desc>
+		</lang>
+		<lang id="de">
+			<name>Wasserfahrzeug</name>
+			<desc>
+				Der Geocache kann – normalerweise – nicht ohne ein Wasserfahrzeug gefunden
+				werden. Zum Geocache kann wegen der Entfernung oder Strömung nicht
+				geschwommen werden. Details dazu sind in der Beschreibung des Geocaches
+				angegeben.
+			</desc>
+		</lang>
+		<lang id="es">
+			<name>Barca</name>
+			<desc>
+				Este cache por lo general sólo se puede encontrar con una moto de agua.
+				Nadando es imposible debido a la distancia o la corriente. Véase la
+				descripción del cache para obtener más detalles.
+			</desc>
+		</lang>
+		<lang id="it">
+			<name>Barca</name>
+			<desc>
+				Questa cache di solito puo essere trovata solo con una moto d'acqua. Il
+				nuoto e impossibile a causa della distanza o delle correnti. Vedi la
+				descrizione della cache per maggiori dettagli.
+			</desc>
+		</lang>
+	</attr>
+
+	<attr acode="A58" categories="de-tools">
+		<opencaching schema="http://www.opencaching.de/" id="35" />
+		<lang id="en">
+			<name>No GPS required</name>
+			<desc>
+				This cache can be found without a GPS device. No additional coordinates
+				are used besides of the starting coordinates.
+			</desc>
+		</lang>
+		<lang id="de">
+			<name>ohne GPS findbar</name>
+			<desc>
+				Dieser Cache lässt sich auch ohne GPS-Empfänger finden. Die Aufgaben
+				sind so gestellt, dass man außer den Startkoordinaten keine weiteren
+				Koordinaten verwenden muss.
+			</desc>
+		</lang>
+		<lang id="es">
+			<name>Sin GPS</name>
+			<desc>
+				Esta cache se puede encuentra sin un dispositivo GPS. Detalles adicionales
+				no se utilizan, además de las coordenadas iniciales.
+			</desc>
+		</lang>
+		<lang id="it">
+			<name>Senza GPS</name>
+			<desc>
+				Questa cache puo essere trovata senza un dispositivo GPS. Non sono
+				utilizzate coordinate addizionali oltre alle coordinate iniziali.
+			</desc>
+		</lang>
+	</attr>
+
+	<attr acode="A59" categories="de-dangers">
+		<groundspeak id="23" inc="true" name="Dangerous area" />
+		<opencaching schema="http://www.opencaching.de/" id="9" />
+		<opencaching schema="http://opencaching.pl/" id="90" />
+		<opencaching schema="http://www.opencaching.nl/" id="90" />
+		<lang id="en">
+			<name>Dangerous area</name>
+			<desc>
+				The cache is located within a dangerous area, and danges may not be
+				obvious, e.g. like high-traffic roads, steep ground or falling rocks.
+				Safety measures should be taken, especially when geocaching with
+				children, large groups of people or during bad weather conditions.
+			</desc>
+		</lang>
+		<lang id="pl">
+			<name>Skrzynka niebezpieczna</name>
+			<desc>
+				Skrzynka jest ukryta w niebezpiecznym terenie. Jej poszukiwania mogą
+				narazić na niebezpieczeństwo wypadku lub urazu.
+			</desc>
+		</lang>
+		<lang id="de">
+			<name>gefährliches Gebiet</name>
+			<desc>
+				In dem Gebiet, wo der Geocache versteckt wurde, ist mit Gefahren zu
+				rechnen, die unter Umständen nicht auf den ersten Blick erkennbar sind.
+				Das können z.B. stark befahrene Straßen, steile Abhänge oder Steinschlag
+				sein. Deshalb sollte man bei Geocaching-Touren mit Kindern oder größeren
+				Gruppen entsprechende Vorsichtsmaßnahmen ergreifen und je nachdem auch
+				auf die Witterung achten (z.B. Regen bei steilen Abhängen).
+				Näheres zu den Gefahren ist in der Cachebeschreibung erläutert.
+			</desc>
+		</lang>
+		<lang id="es">
+			<name>Zona Peligrosa</name>
+			<desc>
+				El cache está situado en una zona peligrosa, como tales como carreteras
+				con mucho tráfico, terreno empinado o caída de rocas. Usted debe tomar
+				medidas de seguridad o evitar ir a buscar el caché, sobre todo con ninos,
+				con grupos grandes o en condiciones meteorológicas adversas.
+			</desc>
+		</lang>
+		<lang id="it">
+			<name>Area pericolosa</name>
+			<desc>
+				La cache e situata in un'area pericolosa come strade ad alto traffico,
+				terreno ripido o caduta sassi. Si dovrebbero adottare misure di sicurezza
+				o evitare di andare a cercare la cache, in particolare nel geocaching con
+				bambini, con gruppi numerosi o in condizioni climatiche sfavorevoli.
+			</desc>
+		</lang>
+	</attr>
+
+	<attr acode="A60" categories="de-dangers">
+		<opencaching schema="http://www.opencaching.de/" id="10" />
+		<lang id="en">
+			<name>Active railway nearby</name>
+			<desc>
+				There are active railroads nearby. Please be careful, keep a safe
+				distance and cross the rails only at level crossings etc.!
+			</desc>
+		</lang>
+		<lang id="de">
+			<name>aktive Eisenbahnlinie in der Nähe</name>
+			<desc>
+				In der Nähe dieses Caches gibt es genutzte Eisenbahnlinien. Bitte seid
+				entsprechend vorsichtig und achtet darauf, abseits von Bahnübergängen keine
+				Gleise zu betreten.
+			</desc>
+		</lang>
+		<lang id="es">
+			<name>Cerca del ferrocarril activo</name>
+			<desc>
+				!Hay ferrocarriles activos en las proximidades. Por favor, tenga
+				cuidado, manteniendo una distancia segura y cruzar los rieles sólo
+				en los cruces de ferrocarril, etc.!
+			</desc>
+		</lang>
+		<lang id="it">
+			<name>Ferrovia attiva nei pressi</name>
+			<desc>
+				Ci sono ferrovie attive nelle vicinanze. Per favore usate cautela,
+				tenendo una distanza di sicurezza e attraversando le rotaie solo ai
+				passaggi a livello ecc.!
+			</desc>
+		</lang>
+	</attr>
+
+	<attr acode="A61" categories="de-dangers">
+		<groundspeak id="21" inc="true" name="Cliff / falling rocks" />
+		<opencaching schema="http://www.opencaching.de/" id="11" />
+		<lang id="en">
+			<name>Cliff / Rocks</name>
+			<desc>
+				There are cliffs or dangerous rocks nearby. Beware of falling rocks
+				at the lower side, and be careful at the upper side of cliffs -
+				especially with children and while mountain biking. It can be very
+				dangerous to take a steep slope towards a cliff, because you may not
+				notice in time where the former ends and the latter starts.
+			</desc>
+		</lang>
+		<lang id="de">
+			<name>Klippen / Felsen</name>
+			<desc>
+				In der Nähe des Caches gibt es Klippen oder Felsen. Unterhalb von
+				Felsen sollte man auf Steinschlag achten, von der Oberseite der Klippen
+				sollte man sich entsprechend vorsichtig nähern (insbesondere mit Kindern
+				oder Mountainbikes). Besonders gefährlich - und nicht immer erkennbar -
+				ist es, sich über einen Steilhang von oben an eine Klippe zu nähern.
+			</desc>
+		</lang>
+		<lang id="es">
+			<name>Acantilado / Rocas</name>
+			<desc>
+				Hay acantilados o rocas peligrososas en las cercanas. Tenga cuidado
+				cuando esté bajo las piedras caídas, y tenga cuidado cuando esté sobre
+				el acantilado - especialmente con los ninos y el ciclismo. Puede ser
+				muy peligroso tomar un camino empinado para subir el acantilado porque
+				no se puede saber de antemano cuando el primero termina y comienza otra.
+			</desc>
+		</lang>
+		<lang id="it">
+			<name>Scogliera / Rocce</name>
+			<desc>
+				Ci sono scogliere o rocce pericolose nelle vicinanze. Fate attenzione
+				alla caduta pietre quando siete sotto, e siate cauti quando siete sopra
+				la scogliera - specialmente con bambini e in bicicletta. Puo essere molto
+				pericoloso prendere un sentiero ripido per salire la scogliera, poiché
+				non potete sapere in anticipo quando la prima termina e inizia l'altra.
+			</desc>
+		</lang>
+	</attr>
+
+	<attr acode="A62" categories="de-dangers">
+		<groundspeak id="22" inc="true" name="Hunting" />
+		<opencaching schema="http://www.opencaching.de/" id="12" />
+		<opencaching schema="http://www.opencaching.nl/" id="12" />
+		<lang id="en">
+			<name>Hunting grounds</name>
+			<desc>
+				The geocache is placed within a hunting ground. At twilight and in the
+				dark, a flashlight or headlight should always be used for security
+				reasons. Be considerate when meeting hunters.
+			</desc>
+		</lang>
+		<lang id="de">
+			<name>Jagdgebiet</name>
+			<desc>
+				Der Geocache liegt in einem Jagdgebiet. Bei Dämmerung oder Dunkelheit
+				sollte man aus Sicherheitsgründen immer eine Taschenlampe oder
+				Stirnlampe verwenden. Bei Begegnungen mit Jägern ist gegenseitige
+				Rücksichtnahme angebracht.
+			</desc>
+		</lang>
+		<lang id="es">
+			<name>Zona de Caza</name>
+			<desc>
+				El geocache se coloca dentro de un coto de caza. Al caer la tarde y en
+				la oscuridad, una linterna o faro siempre debe utilizarse por razones
+				de seguridad.
+			</desc>
+		</lang>
+		<lang id="it">
+			<name>Caccia</name>
+			<desc>
+				La geocache e situata nei pressi di una area di caccia. Al crepuscolo
+				e al buio, dovrebbe sempre essere usata una torcia portatile o frontale
+				per ragioni di sicurezza. Incontrando i cacciatori e opportuna una
+				reciproca gentilezza.
+			</desc>
+		</lang>
+		<lang id="nl">
+			<name>Let op: jachtgebied</name>
+		</lang>
+	</attr>
+
+	<attr acode="A63" categories="de-dangers">
+		<groundspeak id="39" inc="true" name="Thorns" />
+		<opencaching schema="http://www.opencaching.de/" id="13" />
+		<opencaching schema="http://www.opencaching.nl/" id="13" />
+		<lang id="en">
+			<name>Look out for thorns</name>
+			<desc>
+				There are thorns near the cache. Wear appropriate clothes.
+			</desc>
+		</lang>
+		<lang id="de">
+			<name>Dornen</name>
+			<desc>
+				In er Nähe des Geocaches gibt es Dornen. Entsprechende Kleidung und
+				evtl. Handschuhe sind zu empfehlen.
+			</desc>
+		</lang>
+		<lang id="es">
+			<name>Espinas</name>
+			<desc>
+				Hay espinas cerca de la caché. Use ropa apropiada.
+			</desc>
+		</lang>
+		<lang id="it">
+			<name>Spine</name>
+			<desc>
+				Ci sono spine nei pressi della cache. Indossare indumenti appropriati.
+			</desc>
+		</lang>
+		<lang id="nl">
+			<name>Let op: doornen</name>
+			<desc>
+				Er kunnen doornen bij de cache zijn. Draag beschermende kleding.
+			</desc>
+		</lang>
+	</attr>
+
+	<attr acode="A64" categories="de-dangers">
+		<groundspeak id="19" inc="true" name="Ticks" />
+		<opencaching schema="http://www.opencaching.de/" id="14" />
+		<opencaching schema="http://www.opencaching.nl/" id="14" />
+		<lang id="en">
+			<name>Look out for ticks</name>
+			<desc>
+				There are seasonably many ticks in this area. It is recommended to wear
+				long trousers and to check yourself for ticks after geocaching.
+				There are regional risk maps for <i>tick-borne encephalitis</i> on the
+				internet.
+			</desc>
+		</lang>
+		<lang id="de">
+			<name>Zecken</name>
+			<desc>
+				Je nach Saison gibt es in dem Gebiet besonders viele Zecken. Es wird
+				daher empfohlen, entsprechend lange Kleidung zu tragen und nach der
+				Cachetour nach Zecken Ausschau zu halten. FSME-Risikogebiete und
+				weitere Informationen zum Thema Zecken könnt ihr z.B. auf
+				<a href="http://www.meningitis.de">www.meningitis.de</a> nachsehen.
+			</desc>
+		</lang>
+		<lang id="es">
+			<name>Garrapatas</name>
+			<desc>
+				Cada temporada hay un montón de garrapatas en este lubar. Y es
+				recomendable llevar pantalón largo y examinarse en busca de garrapatas
+				después de encontrar el cache.
+			</desc>
+		</lang>
+		<lang id="it">
+			<name>Zecche</name>
+			<desc>
+				Stagionalmente ci sono molte zecche in questa area. E' raccomandabile
+				indossare pantaloni lunghi e ispezionarsi alla ricerca di zecche dopo
+				il geocaching. In internet ci sono mappe di rischio per <i>encefalite
+				e borelliosi da morso di zecca</i>.
+			</desc>
+		</lang>
+		<lang id="nl">
+			<name>Let op: teken</name>
+			<desc>
+				In dit gebied zouden teken voorkomen. Neem voorzorgen om geen teken 
+				op te lopen door beschermende kleding te dragen. Vor meer informatie 
+				kijk op <a href="http://nl.wikipedia.org/wiki/Teken_%28dieren%29">www.meningitis.de</a>
+			</desc>
+		</lang>
+	</attr>
+
+	<attr acode="A65" categories="de-dangers">
+		<groundspeak id="20" inc="true" name="Abandoned mines" />
+		<opencaching schema="http://www.opencaching.de/" id="15" />
+		<lang id="en">
+			<name>Abandoned mines</name>
+			<desc>
+				This cache leads into a (former) mining area. There may be dangers by
+				collapsing adits, or you may need to enter adits. Be careful and use
+				appropriate equipment, especially in the dark. Old mines may be covered
+				by historic preservation.
+			</desc>
+		</lang>
+		<lang id="de">
+			<name>Folgen des Bergbaus</name>
+			<desc>
+				Der Cache führt in eine (ehemalige) Bergbauregion. Möglicherweise
+				bestehen Gefahren durch verstürzte Stollenmundlöcher oder es müssen
+				Stollen betreten werden. Entsprechende Ausrüstung und Vorsicht,
+				besonders bei Dunkelheit, wird empfohlen. Historische Bergwerke stehen
+				möglicherweise unter Denkmalschutz.
+			</desc>
+		</lang>
+		<lang id="es">
+			<name>Mina abandonada</name>
+			<desc>
+				Esta cache le llevará a un área de la mina (abandonado). Puede haber
+				peligro con el colapso de túneles o galerías que puede ser necesario para
+				cruzar. Tenga cuidado y use de equipo adecuado, especialmente en la
+				oscuridad. Las minas antiguas pueden ser objeto de preservación histórica.
+			</desc>
+		</lang>
+		<lang id="it">
+			<name>Miniere abbandonate</name>
+			<desc>
+				Questa cache vi porta in una area di miniera (abbandonata). Ci possono
+				essere pericoli per crollo di gallerie, o potrebbe essere necessario
+				attraversare gallerie. Fare attenzione e utilizzate attrezzature adeguate,
+				soprattutto al buio. Le vecchie miniere possono essere oggetto di
+				conservazione storica.
+			</desc>
+		</lang>
+	</attr>
+
+	<attr acode="A66" categories="de-dangers">
+		<groundspeak id="17" inc="true" name="Poisonous plants" />
+		<opencaching schema="http://www.opencaching.de/" id="16" />
+		<lang id="en">
+			<name>Poisonous plants</name>
+			<desc>
+				There are poisonous plants near the cache. Take care and prevent
+				children and dogs from touching or eating them.
+			</desc>
+		</lang>
+		<lang id="de">
+			<name>giftige Pflanzen</name>
+			<desc>
+				In der Nähe des Caches gibt es giftige Pflanzen. Achtet also insbesondere
+				darauf, dass Kinder und Hunde diese nicht anfassen oder essen.
+			</desc>
+		</lang>
+		<lang id="es">
+			<name>Planta venenosa</name>
+			<desc>
+				Hay plantas venenosas en las cercanías. Tenga cuidado y asegúrese de que
+				los ninos o los perros no las toquen ni tragarlas.
+			</desc>
+		</lang>
+		<lang id="it">
+			<name>Piante velenose</name>
+			<desc>
+				Ci sono piante velenose nelle vicinanze. Fate attenzione e controllate
+				che bambini o cani non le tocchino o le ingoino.
+			</desc>
+		</lang>
+	</attr>
+
+	<attr acode="A67" categories="de-dangers">
+		<groundspeak id="18" inc="true" name="Dangerous animals" />
+		<opencaching schema="http://www.opencaching.de/" id="17" />
+		<lang id="en">
+			<name>Dangerous animals</name>
+			<desc>
+				The area is inhabited by possibly dangerous animals, e.g. rabies areas,
+				venomous snakes, scorpions or bears.
+			</desc>
+		</lang>
+		<lang id="de">
+			<name>giftige/gefährliche Tiere</name>
+			<desc>
+				In dem Gebiet sind Wildtiere angesiedelt, die für Menschen eine Gefahr
+				darstellen können, z.B. Tollwutgebiete, giftige Schlangen, Skorpione
+				oder Bären.
+			</desc>
+		</lang>
+		<lang id="es">
+			<name>Animales Peligrosos</name>
+			<desc>
+				Esta zona es frecuentada por los animales potencialmente peligrosos,
+				por ejemplo. zorros rabiosos, serpientes venenosas, escorpiones, osos.
+			</desc>
+		</lang>
+		<lang id="it">
+			<name>Animali pericolosi</name>
+			<desc>
+				Quest area e frequentata da animali potenzialmente pericolosi, ad es.
+				volpi rabide, serpenti velenosi, scorpioni, orsi.
+			</desc>
+		</lang>
+	</attr>
+
+	<attr acode="A68" categories="de-rating">
+		<opencaching schema="http://opencaching.pl/" id="40" />
+		<opencaching schema="http://www.opencaching.nl/" id="40" />
+		<lang id="en">
+			<name>Quick cache</name>
+			<desc>
+				It shouldn't take more than 15 minutes to find this cache. Also,
+				there should be a parking nearby.
+			</desc>
+		</lang>
+		<lang id="pl">
+			<name>Szybka skrzynka</name>
+			<desc>
+				Jej znalezienie nie powinno zająć więcej niż 15 minut oraz jest
+				łatwy dojazd w pobliże skrzynki samochodem.
+			</desc>
+		</lang>
+		<lang id="de">
+			<name>schnell zu finden</name>
+			<desc>
+				Der Cache ist üblicherweise in maximal 15 Minuten zu finden.
+				In der Nähe sollte auch ein Parkplatz sein.
+			</desc>
+		</lang>
+		<lang id="nl">
+			<name>Een snelle oppikker</name>
+		</lang>
+	</attr>
+
+	<attr acode="A69" categories="de-rating">
+		<opencaching schema="http://www.opencaching.de/" id="37" />
+		<lang id="en">
+			<name>Overnight stay necessary</name>
+			<desc>
+				This cache cannot be done within a single day or a single night.
+				You will have to visit the location for more than one time,
+				or you must stay overnight. Preparation time is not included in this
+				calculation, but only the time on site.
+			</desc>
+		</lang>
+		<lang id="de">
+			<name>Übernachtung erforderlich</name>
+			<desc>
+				Der Geocache kann nicht mit einer einzigen Tages- oder Nachttour gelöst
+				werden. Er muss entweder mehrmals angefahren werden oder es muss vor Ort
+				übernachtet werden. Zeit für Recherchen vorab sind dabei nicht
+				berücksichtigt, sondern nur die Zeit vor Ort.
+			</desc>
+		</lang>
+		<lang id="es">
+			<name>Necesario pernoctar</name>
+			<desc>
+				No puedrá encontrar este cache en un solo día o durante la noche. Usted
+				tendrá que visitar el lugar más de una vez, o necesitará pasar la noche.
+				El tiempo de preparación no está incluido en este cálculo, sólo el tiempo
+				en el sitio.
+			</desc>
+		</lang>
+		<lang id="it">
+			<name>Necessario pernottamento</name>
+			<desc>
+				Non e possibile trovare questa cache in un solo giorno o una sola notte.
+				Dovrete visitare il percorso per piu di una volta, oppure e necessario il
+				pernottamento. Il tempo di preparazione non e incluso in questo calcolo,
+				ma solo il tempo sul sito.
+			</desc>
+		</lang>
+	</attr>
+
+	<attr acode="A70" categories="de-rating">
+		<groundspeak id="6" inc="true" name="Recommended for kids" />
+		<opencaching schema="http://opencaching.pl/" id="41" />
+		<opencaching schema="http://www.opencaching.nl/" id="41" />
+		<lang id="en">
+			<name>Take your children</name>
+			<desc>
+				This search if simple and safe. It's okay to take small children
+				with you.
+			</desc>
+		</lang>
+		<lang id="pl">
+			<name>Można zabrać dzieci</name>
+			<desc>
+				Jej poszukiwanie jest przyjemne, bezpieczne i można bez obaw
+				wybrać się z małymi dziećmi.
+			</desc>
+		</lang>
+		<lang id="de">
+			<name>für kleine Kinder geeignet</name>
+			<desc>
+				Der Cache ist einfach und – nach Einschätzung des Besitzers –
+				ohne besondere Gefahren findbar.
+			</desc>
+		</lang>
+		<lang id="nl">
+			<name>Kindvriendelijke cache</name>
+			<desc>
+				Dit is een makkelijke en veilige cache. De kleine kinderen
+				kunnen ook aan deze cache deelnemen.
+			</desc>
+		</lang>
+	</attr>
+
+	<attr acode="A71" categories="de-rating">
+		<groundspeak id="6" inc="true" name="Recommended for kids" />
+		<opencaching schema="http://www.opencaching.de/" id="59" />
+		<lang id="en">
+			<name>Suited for children (10-12 yo)</name>
+			<desc>
+				This geocache is suitable for children. All challenges can be solved by
+				child in the age of 10 to 12 years and the terrain has no risks
+				(like highways, abysms). There should be a large geocache container with
+				trading items inside and the challenges be interesting.
+			</desc>
+		</lang>
+		<lang id="de">
+			<name>kindgerecht (10-12 Jahre)</name>
+			<desc>
+				Der Geocache ist kindgerecht aufgebaut: Alle Aufgaben sind von Kindern
+				im Alter von 10 bis 12 Jahren selbstständig lösbar und das Gelände ist
+				nicht gefährlich (keine Haupstraßen, Klippen o.ä.). Am Ende des
+				Geocaches sollte sich eine Box mit Tauschgegenständen befinden, und
+				die Aufgaben sollten interessant aufgebaut sein. 
+			</desc>
+		</lang>
+		<lang id="es">
+			<name>Apto para ninos (10-12 anos)</name>
+			<desc>
+				Este geocache se creó para los ninos. Todas las tareas se puede
+				completar por los ninos entre los anos 10 y 12 y el terrno no está
+				exenta de riesgo (tales como carreteras, acantilados). Hay un gra
+				contenedor con intercambio final y las tareas son interesantes.
+			</desc>
+		</lang>
+		<lang id="it">
+			<name>Suited for children (10-12 anni)</name>
+			<desc>
+				Questa geocache e stata creata per i bambini. Tutte i compiti possono
+				essere portati a termine da bambini tra 10 e 12 anni e il terreno non
+				presenta rischi (come autostrade, abissi). C'e un grande contenitore
+				finale con oggetti di scambio e i compiti sono interessanti.
+			</desc>
+		</lang>
+	</attr>
+
+	<attr acode="A72" categories="de-cache-types">
+		<opencaching schema="http://www.opencaching.de/" id="61" />
+		<lang id="en">
+			<name>Reverse Cache</name>
+			<desc>
+				This geocache can be found at different places. The places to look for
+				are explained in the cache description. They must be  located "away from
+				home" and exist for a considerable period of time, so that it can be
+				re-visited later. There is no container and no logbook; instead the
+				find must be documented by a photo and noting the coordinates.
+			</desc>
+		</lang>
+		<lang id="de">
+			<name>Safari-Cache</name>
+			<desc>
+				Dieser Geocache kann an verschiedenen Orten gefunden werden. Die
+				gesuchten Orte sind in der Cachebeschreibung erläutert. Sie müssen
+				sich „außer Haus“ befinden und über längere Zeit Bestand haben,
+				sodass man sie nach einiger Zeit wieder besuchen kann. Es gibt keinen
+				Behälter und kein Logbuch, sondern der Fund ist mit einem Foto und
+				den Koordinaten des Ortes zu dokumentieren.
+			</desc>
+		</lang>
+	</attr>
+
+	<attr acode="A73" categories="de-time-and-seasons">
+		<groundspeak id="13" inc="false" name="Available at all times" />
+		<opencaching schema="http://opencaching.pl/" id="80" />
+		<lang id="en">
+			<name>Available at specified hours (may require access fee)</name>
+			<desc>
+				This cache can only be done at certain times of day or week - see the cache
+				description for more details. For example, the cache may be placed in an
+				area with restricted opening hours. Also, you may be required to pay a fee
+				in order to enter - see the cache description for details.
+			</desc>
+		</lang>
+		<lang id="pl">
+			<name>Dostępna w określonych godzinach lub płatna</name>
+			<desc>
+				Dostępna w określonych dniach, godzinach, często wstęp płatny.
+				Często będzie to muzeum lub skansen. Szczegółowe informacje o
+				dostępności powinny znajdować się w opisie skrzynki.
+			</desc>
+		</lang>
+		<lang id="de">
+			<name>nur zu bestimmten Uhrzeiten, Eintrittsgeld</name>
+			<desc>
+				Der Cache kann nur zu bestimmten Uhrzeiten oder an bestimmten Wochentagen
+				gefunden werden; mehr dazu in der Cachebeschreibung. Häufig handelt es
+				sich um Caches in Museen etc., die Eintrittsgeld verlangen.
+			</desc>
+		</lang>
+	</attr>
+</xml>

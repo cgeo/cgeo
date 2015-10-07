@@ -1,150 +1,216 @@
 package cgeo.geocaching.activity;
 
+import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.MainActivity;
 import cgeo.geocaching.R;
-import cgeo.geocaching.cgBase;
-import cgeo.geocaching.cgCache;
-import cgeo.geocaching.cgSettings;
-import cgeo.geocaching.cgeo;
+import cgeo.geocaching.settings.Settings;
 
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.NonNull;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Resources;
+import android.os.Build.VERSION;
+import android.os.Build.VERSION_CODES;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.NavUtils;
+import android.support.v4.app.TaskStackBuilder;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
+import android.view.ContextThemeWrapper;
 import android.view.Gravity;
-import android.view.Menu;
-import android.view.SubMenu;
-import android.view.View;
-import android.widget.ProgressBar;
-import android.widget.TextView;
+import android.view.Window;
+import android.view.WindowManager;
+import android.view.WindowManager.LayoutParams;
+import android.widget.EditText;
 import android.widget.Toast;
 
-import gnu.android.app.appmanualclient.AppManualReaderClient;
-
-import java.util.List;
-
 public final class ActivityMixin {
-    private static final int MENU_ICON_LOG_VISIT = android.R.drawable.ic_menu_edit;
 
-    public final static void goHome(final Activity fromActivity) {
-        final Intent intent = new Intent(fromActivity, cgeo.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
-        fromActivity.startActivity(intent);
-        fromActivity.finish();
-    }
-
-    public final static void goManual(final Context context, final String helpTopic) {
-        if (StringUtils.isBlank(helpTopic)) {
-            return;
-        }
-        try {
-            AppManualReaderClient.openManual(
-                    "c-geo",
-                    helpTopic,
-                    context,
-                    "http://manual.cgeo.org/");
-        } catch (Exception e) {
-            // nothing
-        }
-    }
-
-    public final static void setTitle(final Activity activity, final String text) {
+    public static void setTitle(final Activity activity, final CharSequence text) {
         if (StringUtils.isBlank(text)) {
             return;
         }
 
-        final TextView title = (TextView) activity.findViewById(R.id.actionbar_title);
-        if (title != null) {
-            title.setText(text);
+        if (activity instanceof ActionBarActivity) {
+            final ActionBar actionBar = ((ActionBarActivity) activity).getSupportActionBar();
+            if (actionBar != null) {
+                actionBar.setTitle(text);
+            }
         }
     }
 
-    public final static void showProgress(final Activity activity, final boolean show) {
+    public static void showProgress(final ActionBarActivity activity, final boolean show) {
         if (activity == null) {
             return;
         }
 
-        final ProgressBar progress = (ProgressBar) activity.findViewById(R.id.actionbar_progress);
-        if (show) {
-            progress.setVisibility(View.VISIBLE);
-        } else {
-            progress.setVisibility(View.GONE);
-        }
+        activity.setSupportProgressBarIndeterminateVisibility(show);
+
     }
 
-    public final static void setTheme(final Activity activity) {
-        cgSettings settings = new cgSettings(activity, activity.getSharedPreferences(cgSettings.preferences, Context.MODE_PRIVATE));
-        if (settings.skin == 1) {
-            activity.setTheme(R.style.light);
-        } else {
-            activity.setTheme(R.style.dark);
+    private static int getThemeId() {
+        if (Settings.isLightSkin()) {
+            return R.style.light;
         }
+        return R.style.dark;
     }
 
-    public final static void showToast(final Activity activity, final String text) {
+    public static void setTheme(final Activity activity) {
+        activity.setTheme(getThemeId());
+    }
+
+    public static int getDialogTheme() {
+        // Light theme dialogs don't work on Android Api < 11
+        if (Settings.isLightSkin() && VERSION.SDK_INT >= VERSION_CODES.HONEYCOMB) {
+            return R.style.popup_light;
+        }
+        return R.style.popup_dark;
+    }
+
+    /**
+     * Show a long toast message to the user. This can be called from any thread.
+     *
+     * @param activity the activity the user is facing
+     * @param resId the message
+     */
+    public static void showToast(final Activity activity, final int resId) {
+        showToast(activity, activity.getString(resId));
+    }
+
+    private static void showCgeoToast(final Context context, final String text, final int toastDuration) {
+        final Toast toast = Toast.makeText(context, text, toastDuration);
+        toast.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM, 0, 100);
+        toast.show();
+    }
+
+    private static void postShowToast(final Activity activity, final String text, final int toastDuration) {
         if (StringUtils.isNotBlank(text)) {
-            Toast toast = Toast.makeText(activity, text, Toast.LENGTH_LONG);
-
-            toast.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM, 0, 100);
-            toast.show();
-        }
-    }
-
-    public final static void showShortToast(final Activity activity, final String text) {
-        if (StringUtils.isNotBlank(text)) {
-            Toast toast = Toast.makeText(activity, text, Toast.LENGTH_SHORT);
-
-            toast.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM, 0, 100);
-            toast.show();
-        }
-    }
-
-    public static final void helpDialog(final Activity activity, final String title, final String message) {
-        if (StringUtils.isBlank(message)) {
-            return;
-        }
-
-        AlertDialog.Builder dialog = new AlertDialog.Builder(activity);
-        dialog.setTitle(title);
-        dialog.setMessage(message);
-        dialog.setCancelable(true);
-        dialog.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                dialog.cancel();
-            }
-        });
-
-        AlertDialog alert = dialog.create();
-        alert.show();
-    }
-
-    protected static void addVisitMenu(IAbstractActivity activity, Menu menu, cgCache cache) {
-        if (cache == null) {
-            return;
-        }
-        if (!cache.supportsLogging()) {
-            return;
-        }
-        cgSettings settings = activity.getSettings();
-        Resources res = ((Activity) activity).getResources();
-        if (settings.isLogin()) {
-            if (settings.getLogOffline()) {
-                SubMenu logMenu = menu.addSubMenu(1, IAbstractActivity.MENU_LOG_VISIT_OFFLINE, 0, res.getString(R.string.cache_menu_visit_offline)).setIcon(MENU_ICON_LOG_VISIT);
-                List<Integer> logTypes = cache.getPossibleLogTypes(settings);
-                for (Integer logType : logTypes) {
-                    String label = cgBase.logTypes2.get(logType);
-                    logMenu.add(1, IAbstractActivity.MENU_LOG_VISIT_OFFLINE + logType, 0, label);
+            activity.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    showCgeoToast(activity, text, toastDuration);
                 }
-                logMenu.add(1, IAbstractActivity.MENU_LOG_VISIT, 0, res.getString(R.string.cache_menu_visit));
-            }
-            else {
-                menu.add(1, IAbstractActivity.MENU_LOG_VISIT, 0, res.getString(R.string.cache_menu_visit)).setIcon(MENU_ICON_LOG_VISIT);
-            }
+
+            });
         }
     }
 
+    /**
+     * Show a (long) toast message in application context (e.g. from background threads)
+     */
+    public static void showApplicationToast(final String message) {
+        final Context context = new ContextThemeWrapper(CgeoApplication.getInstance().getApplicationContext(), getThemeId());
+        showCgeoToast(context, message, Toast.LENGTH_LONG);
+    }
+
+    /**
+     * Show a long toast message to the user. This can be called from any thread.
+     *
+     * @param activity the activity the user is facing
+     * @param text the message
+     */
+    public static void showToast(final Activity activity, final String text) {
+        postShowToast(activity, text, Toast.LENGTH_LONG);
+    }
+
+    /**
+     * Show a short toast message to the user. This can be called from any thread.
+     *
+     * @param activity the activity the user is facing
+     * @param text the message
+     */
+    public static void showShortToast(final Activity activity, final String text) {
+        postShowToast(activity, text, Toast.LENGTH_SHORT);
+    }
+
+    public static void onCreate(final Activity abstractActivity, final boolean keepScreenOn) {
+        final Window window = abstractActivity.getWindow();
+        if (keepScreenOn) {
+            window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        }
+        if (Settings.useHardwareAcceleration()) {
+            enableHardwareAcceleration(window);
+        }
+    }
+
+    @TargetApi(VERSION_CODES.HONEYCOMB)
+    private static void enableHardwareAcceleration(final Window window) {
+        window.addFlags(LayoutParams.FLAG_HARDWARE_ACCELERATED);
+    }
+
+    public static void invalidateOptionsMenu(final Activity activity) {
+        if (activity instanceof ActionBarActivity) {
+            ((ActionBarActivity) activity).supportInvalidateOptionsMenu();
+        }
+        else {
+            ActivityCompat.invalidateOptionsMenu(activity);
+        }
+    }
+
+    /**
+     * insert text into the EditText at the current cursor position
+     *
+     * @param moveCursor
+     *            place the cursor after the inserted text
+     */
+    public static void insertAtPosition(final EditText editText, final String insertText, final boolean moveCursor) {
+        final int selectionStart = editText.getSelectionStart();
+        final int selectionEnd = editText.getSelectionEnd();
+        final int start = Math.min(selectionStart, selectionEnd);
+        final int end = Math.max(selectionStart, selectionEnd);
+
+        final String content = editText.getText().toString();
+        final String completeText;
+        if (start > 0 && !Character.isWhitespace(content.charAt(start - 1))) {
+            completeText = " " + insertText;
+        } else {
+            completeText = insertText;
+        }
+
+        editText.getText().replace(start, end, completeText);
+        final int newCursor = moveCursor ? start + completeText.length() : start;
+        editText.setSelection(newCursor);
+    }
+
+    public static boolean navigateUp(@NonNull final Activity activity) {
+        // first check if there is a parent declared in the manifest
+        Intent upIntent = NavUtils.getParentActivityIntent(activity);
+        // if there is no parent, and if this was not a new task, then just go back to simulate going to a parent
+        if (upIntent == null && !activity.isTaskRoot()) {
+            activity.finish();
+            return true;
+        }
+        // use the main activity, if there was no back stack and no manifest based parent
+        if (upIntent == null) {
+            upIntent = new Intent(CgeoApplication.getInstance(), MainActivity.class);
+        }
+        if (NavUtils.shouldUpRecreateTask(activity, upIntent) || activity.isTaskRoot()) {
+            // This activity is NOT part of this app's task, so create a new task
+            // when navigating up, with a synthesized back stack.
+            TaskStackBuilder.create(activity)
+                    // Add all of this activity's parents to the back stack
+                    .addNextIntentWithParentStack(upIntent)
+                    // Navigate up to the closest parent
+                    .startActivities();
+        } else {
+            // This activity is part of this app's task, so simply
+            // navigate up to the logical parent activity.
+            NavUtils.navigateUpTo(activity, upIntent);
+        }
+        return true;
+    }
+
+    public static void presentShowcase(final IAbstractActivity activity) {
+        if (VERSION.SDK_INT < 14) {
+            return;
+        }
+        final ShowcaseViewBuilder builder = activity.getShowcase();
+        if (builder != null) {
+            builder.setStyle(R.style.ShowcaseView);
+            builder.build();
+        }
+    }
 }

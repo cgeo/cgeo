@@ -1,0 +1,15 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <solid android:color="#474747" />
+        </shape>
+    </item>
+    <item android:state_focused="true">
+        <shape android:shape="rectangle">
+            <solid android:color="#474747" />
+        </shape>
+    </item>
+    <item android:drawable="@android:color/transparent" />
+
+</selector><!-- From: file:/Users/jenzz/Developer/Android-UndoBar/library/src/main/res/drawable/button_background_lollipop.xml -->

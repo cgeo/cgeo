@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <!-- changelog for the master branch -->
+  <string name="changelog_master" translatable="false">
+    <b>Next feature release:</b>\n
+    · Support opencaching links using their internal id\n
+    · Change geocaching platform quickly by clicking info on main screen\n
+    · Put new things there\n
+    \n
+  </string>
+</resources>

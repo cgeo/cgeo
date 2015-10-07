@@ -1,25 +1,20 @@
 package cgeo.geocaching.sorting;
 
-import cgeo.geocaching.cgCache;
+import cgeo.geocaching.Geocache;
 
 /**
  * sorts caches by difficulty
  *
  */
-public class DifficultyComparator extends AbstractCacheComparator {
+class DifficultyComparator extends AbstractCacheComparator {
 
     @Override
-    protected boolean canCompare(cgCache cache1, cgCache cache2) {
-        return cache1.difficulty != null && cache2.difficulty != null;
+    protected boolean canCompare(final Geocache cache) {
+        return cache.getDifficulty() != 0.0;
     }
 
     @Override
-    protected int compareCaches(final cgCache cache1, final cgCache cache2) {
-        if (cache1.difficulty > cache2.difficulty) {
-            return 1;
-        } else if (cache2.difficulty > cache1.difficulty) {
-            return -1;
-        }
-        return 0;
+    protected int compareCaches(final Geocache cache1, final Geocache cache2) {
+        return Float.compare(cache1.getDifficulty(), cache2.getDifficulty());
     }
 }

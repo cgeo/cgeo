@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/android-support-v7-appcompat/android-support-v7-appcompat.iml" filepath="$PROJECT_DIR$/android-support-v7-appcompat/android-support-v7-appcompat.iml" />
+      <module fileurl="file://$PROJECT_DIR$/main/cgeo.iml" filepath="$PROJECT_DIR$/main/cgeo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cgeo-calendar/cgeo-calendar.iml" filepath="$PROJECT_DIR$/cgeo-calendar/cgeo-calendar.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cgeo-contacts/cgeo-contacts.iml" filepath="$PROJECT_DIR$/cgeo-contacts/cgeo-contacts.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mapswithme-api/mapswithme-api.iml" filepath="$PROJECT_DIR$/mapswithme-api/mapswithme-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/nine-old-androids/nine-old-androids.iml" filepath="$PROJECT_DIR$/nine-old-androids/nine-old-androids.iml" />
+      <module fileurl="file://$PROJECT_DIR$/play-services-base/play-services-base.iml" filepath="$PROJECT_DIR$/play-services-base/play-services-base.iml" />
+      <module fileurl="file://$PROJECT_DIR$/play-services-location/play-services-location.iml" filepath="$PROJECT_DIR$/play-services-location/play-services-location.iml" />
+      <module fileurl="file://$PROJECT_DIR$/showcaseview/showcaseview.iml" filepath="$PROJECT_DIR$/showcaseview/showcaseview.iml" />
+      <module fileurl="file://$PROJECT_DIR$/tests/tests.iml" filepath="$PROJECT_DIR$/tests/tests.iml" />
+      <module fileurl="file://$PROJECT_DIR$/undobar/undobar.iml" filepath="$PROJECT_DIR$/undobar/undobar.iml" />
+    </modules>
+  </component>
+</project>
+

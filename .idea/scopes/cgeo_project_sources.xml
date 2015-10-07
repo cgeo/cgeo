@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="cgeo project sources" pattern="src[cgeo]:cgeo.calendar..*||src[cgeo]:cgeo.contacts..*||src[cgeo]:cgeo.geocaching..*||file[cgeo]:res//*||file[cgeo]:AndroidManifest.xml" />
+</component>

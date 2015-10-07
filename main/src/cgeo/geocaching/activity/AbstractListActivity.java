@@ -1,43 +1,27 @@
 package cgeo.geocaching.activity;
 
-import cgeo.geocaching.cgBase;
-import cgeo.geocaching.cgCache;
-import cgeo.geocaching.cgSettings;
-import cgeo.geocaching.cgeoapplication;
+import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.network.AndroidBeam;
 
-import android.app.ListActivity;
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.View;
+import android.view.MenuItem;
+import android.view.Window;
 
-public abstract class AbstractListActivity extends ListActivity implements
+public abstract class AbstractListActivity extends ActionBarListActivity implements
         IAbstractActivity {
 
-    private String helpTopic;
+    private boolean keepScreenOn = false;
 
-    protected cgeoapplication app = null;
+    protected CgeoApplication app = null;
     protected Resources res = null;
-    protected cgSettings settings = null;
-    protected cgBase base = null;
-    protected SharedPreferences prefs = null;
 
     protected AbstractListActivity() {
-        this(null);
+        this(false);
     }
 
-    protected AbstractListActivity(final String helpTopic) {
-        this.helpTopic = helpTopic;
-    }
-
-    final public void goHome(View view) {
-        ActivityMixin.goHome(this);
-    }
-
-    public void goManual(View view) {
-        ActivityMixin.goManual(this, helpTopic);
+    protected AbstractListActivity(final boolean keepScreenOn) {
+        this.keepScreenOn = keepScreenOn;
     }
 
     final public void showProgress(final boolean show) {
@@ -48,40 +32,80 @@ public abstract class AbstractListActivity extends ListActivity implements
         ActivityMixin.setTheme(this);
     }
 
-    public final void showToast(String text) {
+    @Override
+    public final void showToast(final String text) {
         ActivityMixin.showToast(this, text);
     }
 
-    public final void showShortToast(String text) {
+    @Override
+    public final void showShortToast(final String text) {
         ActivityMixin.showShortToast(this, text);
     }
 
-    public final void helpDialog(String title, String message) {
-        ActivityMixin.helpDialog(this, title, message);
+    @Override
+    public void onCreate(final Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        supportRequestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+
+        initializeCommonFields();
+        initUpAction();
+        AndroidBeam.disable(this);
+    }
+
+    protected void initUpAction() {
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        // init
-        res = this.getResources();
-        app = (cgeoapplication) this.getApplication();
-        prefs = getSharedPreferences(cgSettings.preferences, Context.MODE_PRIVATE);
-        settings = new cgSettings(this, prefs);
-        base = new cgBase(app, settings, prefs);
+    public boolean onOptionsItemSelected(final MenuItem item) {
+        if (item.getItemId()== android.R.id.home) {
+            return ActivityMixin.navigateUp(this);
+        }
+        return super.onOptionsItemSelected(item);
     }
 
-    final public void setTitle(final String title) {
+    private void initializeCommonFields() {
+        // init
+        res = this.getResources();
+        app = (CgeoApplication) this.getApplication();
+
+        ActivityMixin.onCreate(this, keepScreenOn);
+    }
+
+    final protected void setTitle(final String title) {
         ActivityMixin.setTitle(this, title);
     }
 
-    final public cgSettings getSettings() {
-        return settings;
+    @Override
+    public void invalidateOptionsMenuCompatible() {
+        ActivityMixin.invalidateOptionsMenu(this);
     }
 
-    public void addVisitMenu(Menu menu, cgCache cache) {
-        ActivityMixin.addVisitMenu(this, menu, cache);
+    public void onCreate(final Bundle savedInstanceState, final int resourceLayoutID) {
+        super.onCreate(savedInstanceState);
+        initializeCommonFields();
+
+        setTheme();
+        setContentView(resourceLayoutID);
+    }
+
+    @Override
+    public void setContentView(final int layoutResID) {
+        super.setContentView(layoutResID);
+
+        // initialize action bar title with activity title
+        ActivityMixin.setTitle(this, getTitle());
+    }
+
+    @Override
+    public final void presentShowcase() {
+        ActivityMixin.presentShowcase(this);
+    }
+
+    @Override
+    public ShowcaseViewBuilder getShowcase() {
+        // do nothing by default
+        return null;
     }
 
 }

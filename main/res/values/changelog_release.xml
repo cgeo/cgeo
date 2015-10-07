@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <!-- changelog for the release branch -->
+  <string name="changelog_release" translatable="false">\n
+    <b>2015.09.28:</b>\n
+    · Fix: Crash invoking Maps.me with waypoints without coordinates\n
+    · Fix: Spoiler image descriptions were missing\n
+    · Fix: Prevent wrong requests to geokrety.org\n
+    · Fix: Prevent checking validity of non-existent login information\n
+    \n
+    \n
+    <b>2015.09.23:</b>\n
+    · New: Redesign of cache overlay icons\n
+    · New: Alignment of cache icons on list and map\n
+    · New: Progress indication while posting a log\n
+    · New: Menu in cache details to put cache on ignore list (but not to remove)\n
+    · New: Upload personal note to Opencaching platforms\n
+    · New: Function to check your login for gcvote.com\n
+    · New: Improved feedback to user and more options when a log can not be posted\n
+    · New: Import Garmin GGZ files\n
+    · New: Almost full support of TerraCaching GPX files\n
+    · New: Filter for never found caches\n
+    · New: Maps.me shows waypoints of cache\n
+    · New: Auto complete geocode in Geokrety logging view\n
+    · New: Add Google Maps transit mode\n
+    · Fix: Compass problems on some Sony Xperia devices\n
+    · Fix: opencaching.com officially shut down\n
+    · Fix: Last log type for TB logs now remembered correctly\n
+    · Fix: Don\´t accidentally bother geocaching.com for GK trackables\n
+    · Fix: GPX files no longer violate XSD\n
+    · Fix: Detect wrong cache IDs in GPX import to avoid posting logs for wrong caches\n
+    · Fix: Adjustments in size and resizing of coordinate input fields\n
+    · Fix: Maximum terrain stars displayed correctly for extremcaching.com\n
+    · Fix: Visual indication for long press function behind \"Stored\" and \"Filter\" icons in main menu\n
+    · Fix: Contents of cache lists might get inconsistent if active list is changed\n
+    · Fix: Close keyboard when starting search\n
+    · Fix: Close search field when returning from search\n
+    · Fix: Remove duplicate filter for offline logs\n
+    · Fix: Incorrect size of cache overlays\n
+    \n
+    \n
+    <b>Known Limitations/Bugs:</b>\n
+    · Device menu button not working on map popup\n
+      Please use the three dot button instead\n
+    · Live map:\n
+      Approximated coords due to limitations on the GC-website\n
+      Be aware: If navigation is started directly from live map it may also use the approximated coords!\n
+      In fast mode the cache type might be wrong in rare cases\n
+      On low zoom owned/found caches may not be hidden anymore\n
+</string>
+</resources>

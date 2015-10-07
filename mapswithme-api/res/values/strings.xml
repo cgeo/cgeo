@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string  name="mwm_should_be_installed">Offline maps are required to proceed. We have partnered with MAPS.ME to provide you with offline maps of the entire world.\nTo continue please download the app:</string>
+    <string  name="down_pro">Download MAPS.ME</string>
+    <string  name="url_pro">http://maps.me/get</string>
+</resources>

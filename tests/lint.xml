@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+    <issue id="Assert" severity="ignore" />
+    <issue id="IconMissingDensityFolder" severity="ignore" />
+    <issue id="InvalidPackage">
+        <ignore path="libs/espresso-1.1-bundled.jar" />
+    </issue>
+</lint>

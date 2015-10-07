@@ -1,5 +1,29 @@
+# generated code
 bin/
 gen/
-/main/local.properties
-/main/private.properties
+annotation_gen/
+generated/
+
+# vm crash logs
+hs_err_pid*.log
+
+# annotation processor log files
+androidannotations.log
+
+# developer specific settings and credentials
+local.properties
+private.properties
+/crowdin/credentials
 /main/res/values/mapsapikey.xml
+
+/main/project/localization/*.missing
+/main/project/attributes/drawable-mdpi/
+/main/project/attributes/iconlist1res.html
+/main/project/settings/drawable-mdpi/
+.directory
+.gradle/
+.idea/libraries/
+main/build/
+mapswithme-api/build/
+build
+main/usage.txt

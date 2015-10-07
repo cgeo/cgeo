@@ -1,28 +1,21 @@
 package cgeo.geocaching.sorting;
 
-import cgeo.geocaching.cgCache;
-
-import org.apache.commons.lang3.StringUtils;
+import cgeo.geocaching.Geocache;
 
 /**
- * sorts caches by GC code, therefore effectively sorting by cache age
+ * sorts caches by geo code, therefore effectively sorting by cache age
  *
  */
 public class GeocodeComparator extends AbstractCacheComparator {
 
     @Override
-    protected boolean canCompare(cgCache cache1, cgCache cache2) {
-        return StringUtils.isNotBlank(cache1.geocode)
-                && StringUtils.isNotBlank(cache2.geocode);
+    protected boolean canCompare(final Geocache cache) {
+        // This will fall back to geocode comparisons.
+        return false;
     }
 
     @Override
-    protected int compareCaches(cgCache cache1, cgCache cache2) {
-        if (cache1.geocode.length() > cache2.geocode.length()) {
-            return 1;
-        } else if (cache2.geocode.length() > cache1.geocode.length()) {
-            return -1;
-        }
-        return cache1.geocode.compareToIgnoreCase(cache2.geocode);
+    protected int compareCaches(final Geocache cache1, final Geocache cache2) {
+        throw new RuntimeException("should never be called");
     }
 }

@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   sodipodi:docname="marker_maintenance.svg"
+   inkscape:version="0.91 r13725"
+   sodipodi:version="0.32"
+   id="svg4376"
+   height="38.588593"
+   width="90.7136"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape"
+   version="1.1"
+   inkscape:export-filename="/home/kumy/Bureau/Android2/cgeo-bis/main/res/drawable-xhdpi/marker_maintenance.png"
+   inkscape:export-xdpi="51.310001"
+   inkscape:export-ydpi="51.310001">
+  <defs
+     id="defs3">
+    <linearGradient
+       id="linearGradient3290">
+      <stop
+         style="stop-color:#fffcde;stop-opacity:1.0000000;"
+         offset="0.0000000"
+         id="stop4168" />
+      <stop
+         id="stop4170"
+         offset="0.64485979"
+         style="stop-color:#f6e76a;stop-opacity:1.0000000;" />
+      <stop
+         style="stop-color:#ffb738;stop-opacity:1.0000000;"
+         offset="1.0000000"
+         id="stop4172" />
+    </linearGradient>
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 24 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="48 : 24 : 1"
+       inkscape:persp3d-origin="24 : 16 : 1"
+       id="perspective39" />
+    <linearGradient
+       id="linearGradient4174">
+      <stop
+         id="stop3292"
+         offset="0.0000000"
+         style="stop-color:#fffcde;stop-opacity:1.0000000;" />
+      <stop
+         style="stop-color:#f6e76a;stop-opacity:1.0000000;"
+         offset="0.64485979"
+         id="stop3294" />
+      <stop
+         id="stop3296"
+         offset="1.0000000"
+         style="stop-color:#006c29;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient2509">
+      <stop
+         style="stop-color:#fffbd5;stop-opacity:1.0000000;"
+         offset="0.0000000"
+         id="stop2511" />
+      <stop
+         style="stop-color:#edd400;stop-opacity:1.0000000;"
+         offset="1.0000000"
+         id="stop2513" />
+    </linearGradient>
+    <radialGradient
+       gradientTransform="matrix(1.25,0,0,1.25,-6.479446,-13.37211)"
+       id="aigrd2"
+       cx="25.0527"
+       cy="39.5928"
+       r="15.7572"
+       fx="25.0527"
+       fy="39.5928"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         offset="0.0000000"
+         style="stop-color:#777777;stop-opacity:1.0000000;"
+         id="stop8602" />
+      <stop
+         offset="1"
+         style="stop-color:#000000"
+         id="stop8604" />
+    </radialGradient>
+    <linearGradient
+       id="linearGradient3824">
+      <stop
+         id="stop3826"
+         offset="0"
+         style="stop-color:#ffffff;stop-opacity:1;" />
+      <stop
+         id="stop3828"
+         offset="1.0000000"
+         style="stop-color:#c9c9c9;stop-opacity:1.0000000;" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3800">
+      <stop
+         id="stop3802"
+         offset="0.0000000"
+         style="stop-color:#ffeed6;stop-opacity:1.0000000;" />
+      <stop
+         style="stop-color:#e49c2f;stop-opacity:1.0000000;"
+         offset="0.50000000"
+         id="stop8664" />
+      <stop
+         id="stop3804"
+         offset="1.0000000"
+         style="stop-color:#ffc66c;stop-opacity:1.0000000;" />
+    </linearGradient>
+  </defs>
+  <sodipodi:namedview
+     inkscape:window-y="24"
+     inkscape:window-x="1745"
+     inkscape:window-height="1056"
+     inkscape:window-width="1855"
+     inkscape:showpageshadow="false"
+     inkscape:document-units="px"
+     inkscape:grid-bbox="true"
+     showgrid="false"
+     inkscape:current-layer="layer1"
+     inkscape:cy="22.567469"
+     inkscape:cx="45.158445"
+     inkscape:zoom="7.9999995"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     borderopacity="0.19607843"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     id="base"
+     fill="#edd400"
+     inkscape:window-maximized="1"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
+  <metadata
+     id="metadata4">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+        <dc:subject>
+          <rdf:Bag>
+            <rdf:li>emoticon</rdf:li>
+            <rdf:li>emote</rdf:li>
+            <rdf:li>smiley</rdf:li>
+            <rdf:li>happy</rdf:li>
+            <rdf:li>:)</rdf:li>
+            <rdf:li>:-)</rdf:li>
+          </rdf:Bag>
+        </dc:subject>
+        <cc:license
+           rdf:resource="http://creativecommons.org/publicdomain/zero/1.0/" />
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>Jakub Steiner</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:source>http://jimmac.musichall.cz</dc:source>
+      </cc:Work>
+      <cc:License
+         rdf:about="http://creativecommons.org/publicdomain/zero/1.0/">
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Reproduction" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Distribution" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#DerivativeWorks" />
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:groupmode="layer"
+     inkscape:label="Layer 1"
+     id="layer1"
+     transform="translate(-4.7057037,-4.7057037)">
+    <g
+       id="g4221"
+       inkscape:export-filename="/home/kumy/Bureau/Android2/cgeo-bis/main/res/drawable-xhdpi/marker_owner_maintenance.png"
+       inkscape:export-xdpi="51.310001"
+       inkscape:export-ydpi="51.310001">
+      <circle
+         style="color:#000000;display:inline;overflow:visible;visibility:visible;opacity:1;fill:#09a244;fill-opacity:1;fill-rule:evenodd;stroke:#0b4317;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;marker-start:none;marker-mid:none;marker-end:none"
+         id="path4320"
+         cx="24"
+         cy="24"
+         r="18.044296" />
+      <g
+         id="g4217">
+        <rect
+           style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.88700002;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+           id="rect4194"
+           width="8.937501"
+           height="23.062502"
+           x="19.53125"
+           y="12.468749" />
+        <rect
+           style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.88700002;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+           id="rect4194-7"
+           width="8.937501"
+           height="23.062502"
+           x="-28.46875"
+           y="12.468749"
+           transform="matrix(0,-1,1,0,0,0)" />
+      </g>
+    </g>
+    <g
+       id="g4258"
+       inkscape:export-filename="/home/kumy/Bureau/Android2/cgeo-bis/main/res/drawable-xhdpi/marker_maintenance.png"
+       inkscape:export-xdpi="51"
+       inkscape:export-ydpi="51">
+      <circle
+         style="color:#000000;display:inline;overflow:visible;visibility:visible;opacity:1;fill:#dc000d;fill-opacity:1;fill-rule:evenodd;stroke:#6d0018;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;marker-start:none;marker-mid:none;marker-end:none"
+         id="path4320-9"
+         cx="76.125008"
+         cy="24"
+         r="18.044296" />
+      <g
+         transform="translate(52.125005,0)"
+         id="g4217-3">
+        <rect
+           style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.88700002;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+           id="rect4194-2"
+           width="8.937501"
+           height="23.062502"
+           x="19.53125"
+           y="12.468749" />
+        <rect
+           style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.88700002;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+           id="rect4194-7-2"
+           width="8.937501"
+           height="23.062502"
+           x="-28.46875"
+           y="12.468749"
+           transform="matrix(0,-1,1,0,0,0)" />
+      </g>
+    </g>
+  </g>
+</svg>

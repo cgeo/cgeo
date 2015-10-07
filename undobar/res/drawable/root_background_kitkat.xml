@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <solid android:color="#db555555" />
+
+    <corners android:radius="24dp" />
+
+</shape><!-- From: file:/Users/jenzz/Developer/Android-UndoBar/library/src/main/res/drawable/root_background_kitkat.xml -->

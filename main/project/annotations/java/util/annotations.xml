@@ -1,0 +1,7 @@
+<root>
+  <item name='java.util.List java.lang.Object[] toArray()'>
+    <annotation name='org.jetbrains.annotations.Contract'>
+      <val val="&quot;-&gt;!null&quot;" />
+    </annotation>
+  </item>
+</root>

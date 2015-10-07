@@ -1,46 +1,61 @@
 package cgeo.geocaching.sorting;
 
-import cgeo.geocaching.cgCache;
-import cgeo.geocaching.cgSettings;
+import cgeo.geocaching.Geocache;
+import cgeo.geocaching.utils.Log;
 
-import android.util.Log;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * abstract super implementation for all cache comparators
  *
  */
-public abstract class AbstractCacheComparator implements CacheComparator {
+abstract class AbstractCacheComparator implements CacheComparator {
 
     @Override
-    public final int compare(cgCache cache1, cgCache cache2) {
+    public final int compare(final Geocache cache1, final Geocache cache2) {
         try {
-            // first check that we have all necessary data for the comparison
-            if (!canCompare(cache1, cache2)) {
-                return 0;
+            final boolean canCompare1 = canCompare(cache1);
+            final boolean canCompare2 = canCompare(cache2);
+            if (!canCompare1) {
+                return canCompare2 ? 1 : fallbackToGeocode(cache1, cache2);
             }
-            return compareCaches(cache1, cache2);
-        } catch (Exception e) {
-            Log.e(cgSettings.tag, "AbstractCacheComparator.compare: " + e.toString());
+            return canCompare2 ? compareCaches(cache1, cache2) : -1;
+        } catch (final Exception e) {
+            Log.e("AbstractCacheComparator.compare", e);
+            // This may violate the Comparator interface if the exception is not systematic.
+            return fallbackToGeocode(cache1, cache2);
         }
-        return 0;
+    }
+
+    private static int fallbackToGeocode(final Geocache cache1, final Geocache cache2) {
+        return StringUtils.defaultString(cache1.getGeocode()).compareToIgnoreCase(StringUtils.defaultString(cache2.getGeocode()));
     }
 
     /**
-     * check necessary preconditions (like missing fields) before running the comparison itself
+     * Check necessary preconditions (like missing fields) before running the comparison itself.
+     * Caches not filling the conditions will be placed last, sorted by Geocode.
      *
-     * @param cache1
-     * @param cache2
-     * @return
+     * The default implementation returns <code>true</code> and can be overridden if needed in sub classes.
+     * 
+     * @param cache
+     *            the cache to be sorted
+     *
+     * @return <code>true</code> if the cache holds the necessary data to be compared meaningfully
      */
-    protected abstract boolean canCompare(final cgCache cache1, final cgCache cache2);
+    @SuppressWarnings("static-method")
+    protected boolean canCompare(final Geocache cache) {
+        return true;
+    }
 
     /**
-     * compares two caches. Logging and exception handling is implemented outside this method already.
+     * Compares two caches. Logging and exception handling is implemented outside this method already.
+     * <p/>
+     * A cache is smaller than another cache if it is desirable to show it first when presented to the user.
+     * For example, a highly rated cache must be considered smaller than a poorly rated one.
      *
-     * @param cache1
-     * @param cache2
      * @return an integer < 0 if cache1 is less than cache2, 0 if they are equal, and > 0 if cache1 is greater than
      *         cache2.
      */
-    protected abstract int compareCaches(final cgCache cache1, final cgCache cache2);
+    protected abstract int compareCaches(final Geocache cache1, final Geocache cache2);
+
 }

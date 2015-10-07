@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="?attr/spinnerDropDownItemStyle"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/dropdownListPreferredItemHeight"
+    android:layout_gravity="left|center_vertical"
+    android:minHeight="?attr/dropdownListPreferredItemHeight"
+    android:orientation="vertical"
+    tools:context=".CacheListSpinnerAdapter" >
+
+    <TextView
+        android:id="@android:id/text1"
+        tools:text="This is the title"
+        android:singleLine="true"
+        android:ellipsize="marquee"
+        android:layout_width="match_parent"
+        style="?attr/titleTextStyle"
+        android:layout_height="wrap_content" />
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:ellipsize="marquee"
+        style="?attr/subtitleTextStyle"
+        tools:text="This is the subtitle"
+        android:id="@android:id/text2" />
+
+</LinearLayout>

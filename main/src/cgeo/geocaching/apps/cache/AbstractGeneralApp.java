@@ -1,34 +1,29 @@
 package cgeo.geocaching.apps.cache;
 
-import cgeo.geocaching.cgCache;
+import cgeo.geocaching.Geocache;
 import cgeo.geocaching.apps.AbstractApp;
+import cgeo.geocaching.apps.navi.CacheNavigationApp;
+
+import org.eclipse.jdt.annotation.NonNull;
 
 import android.app.Activity;
 import android.content.Intent;
 
-abstract class AbstractGeneralApp extends AbstractApp implements GeneralApp {
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
-    protected AbstractGeneralApp(String name, String packageName) {
-        super(name, null);
-        this.packageName = packageName;
+abstract class AbstractGeneralApp extends AbstractApp implements CacheNavigationApp {
+
+    @SuppressFBWarnings("NP_METHOD_PARAMETER_TIGHTENS_ANNOTATION")
+    protected AbstractGeneralApp(@NonNull final String name, @NonNull final String packageName) {
+        super(name, null, packageName);
     }
 
     @Override
-    public boolean isEnabled(cgCache cache) {
-        return true;
-    }
-
-    @Override
-    public boolean invoke(Activity activity, cgCache cache) {
-        if (packageName == null) {
-            return false;
-        }
-        Intent intent = getLaunchIntent(activity);
+    public void navigate(final @NonNull Activity activity, final @NonNull Geocache cache) {
+        final Intent intent = getLaunchIntent();
         if (intent != null) {
             intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
             activity.startActivity(intent);
-            return true;
         }
-        return false;
     }
 }

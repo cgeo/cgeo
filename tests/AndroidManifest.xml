@@ -1,12 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-      package="cgeo.geocaching.test"
-      android:versionCode="1"
-      android:versionName="1.0">
-    <uses-sdk android:minSdkVersion="3" />
-    <instrumentation android:targetPackage="cgeo.geocaching" android:name="android.test.InstrumentationTestRunner" />
-    <application android:icon="@drawable/icon" android:label="@string/app_name">
+    package="cgeo.geocaching.test"
+    android:versionCode="1"
+    android:versionName="1.0" >
 
-    <uses-library android:name="android.test.runner" />
+    <uses-sdk
+        android:minSdkVersion="9"
+        android:targetSdkVersion="19" />
+
+    <uses-feature
+        android:name="android.hardware.screen.portrait"
+        android:required="false" />
+
+    <instrumentation
+        android:name="cgeo.junit.CgeoTestRunner"
+        android:targetPackage="cgeo.geocaching" />
+
+    <application
+        android:allowBackup="false"
+        android:icon="@drawable/icon"
+        android:label="@string/app_name" >
+        <uses-library android:name="android.test.runner" />
+
+        <activity android:name="CgeoTestsActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
+
 </manifest>

@@ -1,0 +1,10 @@
+package cgeo.geocaching.apps.cachelist;
+
+
+final class LocusExportCacheListApp extends AbstractLocusCacheListApp {
+
+    public LocusExportCacheListApp() {
+        super(true);
+    }
+
+}

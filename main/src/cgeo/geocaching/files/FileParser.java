@@ -1,53 +1,96 @@
 package cgeo.geocaching.files;
 
-import cgeo.geocaching.cgBase;
-import cgeo.geocaching.cgCache;
-import cgeo.geocaching.cgSearch;
+import cgeo.geocaching.Geocache;
+import cgeo.geocaching.connector.ConnectorFactory;
+import cgeo.geocaching.connector.gc.GCConnector;
+import cgeo.geocaching.connector.gc.GCConstants;
+import cgeo.geocaching.utils.CancellableHandler;
 
-import android.os.Handler;
-import android.os.Message;
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.CharEncoding;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.Date;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.Collection;
+import java.util.concurrent.CancellationException;
 
 public abstract class FileParser {
-    protected static StringBuilder readFile(File file)
-            throws FileNotFoundException, IOException {
-        StringBuilder buffer = new StringBuilder();
-        BufferedReader input = new BufferedReader(new FileReader(file));
+    /**
+     * Parses caches from input stream.
+     *
+     * @param stream
+     *         the input stream
+     * @param progressHandler
+     *         for reporting parsing progress (in bytes read from input stream)
+     * @return collection of caches
+     * @throws IOException
+     *         if the input stream can't be read
+     * @throws ParserException
+     *         if the input stream contains data not matching the file format of the parser
+     */
+    @NonNull
+    public abstract Collection<Geocache> parse(@NonNull final InputStream stream, @Nullable final CancellableHandler progressHandler) throws IOException, ParserException;
+
+    /**
+     * Convenience method for parsing a file.
+     */
+    @NonNull
+    public Collection<Geocache> parse(final File file, final CancellableHandler progressHandler) throws IOException, ParserException {
+        final BufferedInputStream stream = new BufferedInputStream(new FileInputStream(file));
         try {
-            String line = null;
+            return parse(stream, progressHandler);
+        } finally {
+            IOUtils.closeQuietly(stream);
+        }
+    }
+
+    @NonNull
+    protected static StringBuilder readStream(@NonNull final InputStream is, @Nullable final CancellableHandler progressHandler) throws IOException {
+        final StringBuilder buffer = new StringBuilder();
+        final ProgressInputStream progressInputStream = new ProgressInputStream(is);
+        final BufferedReader input = new BufferedReader(new InputStreamReader(progressInputStream, CharEncoding.UTF_8));
+
+        try {
+            String line;
             while ((line = input.readLine()) != null) {
                 buffer.append(line);
+                showProgressMessage(progressHandler, progressInputStream.getProgress());
             }
+            return buffer;
         } finally {
-            input.close();
+            IOUtils.closeQuietly(input);
         }
-        return buffer;
     }
 
-    static void showFinishedMessage(Handler handler, cgSearch search) {
+    protected static void showProgressMessage(@Nullable final CancellableHandler handler, final int bytesRead) {
         if (handler != null) {
-            final Message msg = new Message();
-            msg.obj = search.getCount();
-            handler.sendMessage(msg);
+            if (handler.isCancelled()) {
+                throw new CancellationException();
+            }
+            handler.sendMessage(handler.obtainMessage(0, bytesRead, 0));
         }
     }
 
-    protected static void fixCache(cgCache cache) {
-        cache.latitudeString = cgBase.formatLatitude(cache.coords.getLatitude(), true);
-        cache.longitudeString = cgBase.formatLongitude(cache.coords.getLongitude(), true);
-        if (cache.inventory != null) {
-            cache.inventoryItems = cache.inventory.size();
+    protected static void fixCache(final Geocache cache) {
+        if (cache.getInventory() != null) {
+            cache.setInventoryItems(cache.getInventory().size());
         } else {
-            cache.inventoryItems = 0;
+            cache.setInventoryItems(0);
         }
-        cache.updated = new Date().getTime();
-        cache.detailedUpdate = new Date().getTime();
-    }
+        final long time = System.currentTimeMillis();
+        cache.setUpdated(time);
+        cache.setDetailedUpdate(time);
 
+        // fix potentially bad cache id
+        if (GCConnector.getInstance().equals(ConnectorFactory.getConnector(cache))) {
+            cache.setCacheId(String.valueOf(GCConstants.gccodeToGCId(cache.getGeocode())));
+        }
+    }
 }

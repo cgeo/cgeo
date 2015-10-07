@@ -1,0 +1,11 @@
+--- trunk/mapsforge-map/src/main/java/org/mapsforge/android/maps/mapgenerator/InMemoryTileCache.java
++++ trunk/mapsforge-map/src/main/java/org/mapsforge/android/maps/mapgenerator/InMemoryTileCache.java
+@@ -138,7 +138,7 @@
+ 			}
+ 
+ 			Bitmap pooledBitmap = this.bitmapPool.remove(this.bitmapPool.size() - 1);
+-
++      this.byteBuffer.rewind();
+ 			bitmap.copyPixelsToBuffer(this.byteBuffer);
+ 			this.byteBuffer.rewind();
+ 			pooledBitmap.copyPixelsFromBuffer(this.byteBuffer);

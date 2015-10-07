@@ -1,72 +1,51 @@
 package cgeo.geocaching.compatibility;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 import android.app.Activity;
-import android.content.res.Configuration;
-import android.net.Uri;
+import android.content.res.Resources;
+import android.graphics.Point;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.view.Display;
-import android.view.Surface;
+import android.widget.TextView;
 
 public final class Compatibility {
 
-    private static AndroidLevel8 level8;
-    private static boolean initialized = false;
+    private static final int SDK_VERSION = Build.VERSION.SDK_INT;
 
-    private static AndroidLevel8 getLevel8() {
-        if (!initialized) {
-            try {
-                final int sdk = Integer.valueOf(Build.VERSION.SDK).intValue();
-                if (sdk >= 8) {
-                    level8 = new AndroidLevel8();
-                }
-            } catch (Exception e) {
-                // nothing
-            }
-            initialized = true;
-        }
-        return level8;
+    private static final AndroidLevel11Interface LEVEL_11;
+    private static final AndroidLevel13Interface LEVEL_13;
+    private static final AndroidLevel19Interface LEVEL_19;
+
+    static {
+        LEVEL_11 = SDK_VERSION >= 11 ? new AndroidLevel11() : new AndroidLevel11Emulation();
+        LEVEL_13 = SDK_VERSION >= 13 ? new AndroidLevel13() : new AndroidLevel13Emulation();
+        LEVEL_19 = SDK_VERSION >= 19 ? new AndroidLevel19() : new AndroidLevel19Emulation();
     }
 
-    public static Float getDirectionNow(final Float directionNowPre,
-            final Activity activity) {
-        AndroidLevel8 level8 = getLevel8();
-
-        if (level8 != null) {
-            final int rotation = level8.getRotation(activity);
-            if (rotation == Surface.ROTATION_90) {
-                return directionNowPre + 90;
-            } else if (rotation == Surface.ROTATION_180) {
-                return directionNowPre + 180;
-            } else if (rotation == Surface.ROTATION_270) {
-                return directionNowPre + 270;
-            }
-        } else {
-            final Display display = activity.getWindowManager()
-                    .getDefaultDisplay();
-            final int rotation = display.getOrientation();
-            if (rotation == Configuration.ORIENTATION_LANDSCAPE) {
-                return directionNowPre + 90;
-            }
-        }
-        return directionNowPre;
+    private Compatibility() {
+        // utility class
     }
 
-    public static Uri getCalendarProviderURI() {
-        final int sdk = Integer.valueOf(Build.VERSION.SDK).intValue();
-        if (sdk >= 8) {
-            return Uri.parse("content://com.android.calendar/calendars");
-        } else {
-            return Uri.parse("content://calendar/calendars");
-        }
+    public static Point getDisplaySize() {
+        return LEVEL_13.getDisplaySize();
     }
 
-    public static Uri getCalenderEventsProviderURI() {
-        final int sdk = Integer.valueOf(Build.VERSION.SDK).intValue();
-        if (sdk >= 8) {
-            return Uri.parse("content://com.android.calendar/events");
-        } else {
-            return Uri.parse("content://calendar/events");
-        }
+    public static void importGpxFromStorageAccessFramework(final @NonNull Activity activity, final int requestCodeImportGpx) {
+        LEVEL_19.importGpxFromStorageAccessFramework(activity, requestCodeImportGpx);
     }
 
+    public static boolean isStorageAccessFrameworkAvailable() {
+        return SDK_VERSION >= 19;
+    }
+
+    public static void setTextIsSelectable(final TextView textView, final boolean selectable) {
+        LEVEL_11.setTextIsSelectable(textView, selectable);
+    }
+
+    @SuppressWarnings("deprecation")
+    // the non replacement method is only available on level 21, therefore we ignore this deprecation
+    public static Drawable getDrawable(final Resources resources, final int markerId) {
+        return resources.getDrawable(markerId);
+    }
 }

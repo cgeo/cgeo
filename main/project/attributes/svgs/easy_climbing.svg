@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generator: Adobe Illustrator 14.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 43363)  -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.0"
+   id="Layer_1"
+   x="0px"
+   y="0px"
+   width="96.114998"
+   height="94.002548"
+   viewBox="0 0 96.114999 94.002552"
+   enable-background="new 0 0 99.572 99.993"
+   xml:space="preserve"
+   inkscape:version="0.48.3.1 r9886"
+   sodipodi:docname="easy_climbing.svg"><metadata
+   id="metadata2876"><rdf:RDF><cc:Work
+       rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /></cc:Work></rdf:RDF></metadata><defs
+   id="defs2874"><inkscape:perspective
+     sodipodi:type="inkscape:persp3d"
+     inkscape:vp_x="0 : 49.996498 : 1"
+     inkscape:vp_y="0 : 1000 : 0"
+     inkscape:vp_z="99.571999 : 49.996498 : 1"
+     inkscape:persp3d-origin="49.785999 : 33.330999 : 1"
+     id="perspective2878" /></defs><sodipodi:namedview
+   pagecolor="#009674"
+   bordercolor="#666666"
+   borderopacity="1"
+   objecttolerance="10"
+   gridtolerance="10"
+   guidetolerance="10"
+   inkscape:pageopacity="1"
+   inkscape:pageshadow="2"
+   inkscape:window-width="1317"
+   inkscape:window-height="744"
+   id="namedview2872"
+   showgrid="false"
+   inkscape:zoom="3.3377778"
+   inkscape:cx="46.452495"
+   inkscape:cy="45.214888"
+   inkscape:window-x="49"
+   inkscape:window-y="24"
+   inkscape:window-maximized="1"
+   inkscape:current-layer="Layer_1"
+   fit-margin-top="0"
+   fit-margin-left="0"
+   fit-margin-right="0"
+   fit-margin-bottom="0" />
+
+<path
+   d="m 77.215999,51.217552 7.57,-1.002 6.642,-27.295 4.687,0.25 0,66.571 c 0,2.356 -1.904,4.261003 -4.26,4.261003 L 2.1299988,93.927555 -1.1822193e-6,84.804552 23.584999,79.566552 l 3.685,-8.748 21.756,-7.77 16.636,7.369 6.392,-2.081 5.162,-17.119 z"
+   id="path2866"
+   style="fill:#ffffff"
+   inkscape:connector-curvature="0" />
+<g
+   id="g2986"
+   transform="matrix(0.74143286,0,0,0.74143286,0.25199462,0)"><path
+     style="fill:#ffffff"
+     id="path2864"
+     d="m 11.271,42.81 c -0.451,0.927 -0.777,1.955 -0.952,3.058 -0.075,0.552 -0.126,1.103 -0.126,1.654 l 0.401,25.259 -8.723,18.798 c -0.301,0.552 -0.526,1.203 -0.626,1.88 -0.477,3.107 1.654,5.99 4.762,6.467 2.406,0.376 4.712,-0.853 5.815,-2.883 l 9.6,-20.553 c 0.2,-0.477 0.376,-0.978 0.451,-1.529 0.024,-0.25 0.05,-0.525 0.05,-0.776 l -0.075,-15.608 14.738,6.435 2.381,15.265 c 0.477,2.23 2.306,4.01 4.688,4.386 3.107,0.451 5.99,-1.679 6.466,-4.763 0.075,-0.525 0.075,-1.053 0.025,-1.553 L 47.238,59.93 c -0.352,-1.78 -1.529,-3.309 -3.184,-4.086 l -13.184,-5.865 8.396,-14.613 4.161,5.289 c 0.426,0.477 0.977,0.877 1.604,1.128 l 15.866,4.637 c 2.105,0.451 4.261,-0.652 5.088,-2.682 0.928,-2.306 -0.176,-4.913 -2.456,-5.84 -0.075,-0.025 -0.15,-0.05 -0.226,-0.075 L 49.517,33.762 39.143,21.305 C 37.588,19.651 35.508,18.473 33.102,18.097 28.891,17.47 24.906,19.475 22.8,22.884 L 11.271,42.81 z"
+     inkscape:connector-curvature="0" /><path
+     style="fill:#ffffff"
+     id="path2868"
+     d="m 38.24,16.994 c 4.687,0 8.496,-3.81 8.496,-8.497 C 46.736,3.81 42.927,0 38.24,0 c -4.688,0 -8.497,3.81 -8.497,8.497 0,4.687 3.81,8.497 8.497,8.497 z"
+     inkscape:connector-curvature="0" /></g>
+
+<g
+   transform="matrix(0.44375412,0,0,0.44375412,51.851618,11.258457)"
+   id="g2986-6"><path
+     inkscape:connector-curvature="0"
+     style="fill:#ffffff"
+     id="path2864-9"
+     d="m 11.271,42.81 c -0.451,0.927 -0.777,1.955 -0.952,3.058 -0.075,0.552 -0.126,1.103 -0.126,1.654 l 0.401,25.259 -8.723,18.798 c -0.301,0.552 -0.526,1.203 -0.626,1.88 -0.477,3.107 1.654,5.99 4.762,6.467 2.406,0.376 4.712,-0.853 5.815,-2.883 l 9.6,-20.553 c 0.2,-0.477 0.376,-0.978 0.451,-1.529 0.024,-0.25 0.05,-0.525 0.05,-0.776 l -0.075,-15.608 14.738,6.435 2.381,15.265 c 0.477,2.23 2.306,4.01 4.688,4.386 3.107,0.451 5.99,-1.679 6.466,-4.763 0.075,-0.525 0.075,-1.053 0.025,-1.553 L 47.238,59.93 c -0.352,-1.78 -1.529,-3.309 -3.184,-4.086 l -13.184,-5.865 8.396,-14.613 4.161,5.289 c 0.426,0.477 0.977,0.877 1.604,1.128 l 15.866,4.637 c 2.105,0.451 4.261,-0.652 5.088,-2.682 0.928,-2.306 -0.176,-4.913 -2.456,-5.84 -0.075,-0.025 -0.15,-0.05 -0.226,-0.075 L 49.517,33.762 39.143,21.305 C 37.588,19.651 35.508,18.473 33.102,18.097 28.891,17.47 24.906,19.475 22.8,22.884 L 11.271,42.81 z" /><path
+     inkscape:connector-curvature="0"
+     style="fill:#ffffff"
+     id="path2868-3"
+     d="m 38.24,16.994 c 4.687,0 8.496,-3.81 8.496,-8.497 C 46.736,3.81 42.927,0 38.24,0 c -4.688,0 -8.497,3.81 -8.497,8.497 0,4.687 3.81,8.497 8.497,8.497 z" /></g></svg>

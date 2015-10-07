@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/action_bar" >
+
+    <!-- Add the up chevron to the icon -->
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:src="@drawable/abc_ic_ab_back_holo_dark" />
+
+    <ImageView
+        style="@style/action_bar_action"
+        android:layout_marginLeft="-13dp"
+        android:onClick="navigateUp" />
+
+    <View style="@style/action_bar_separator" />
+
+    <TextView
+        android:id="@+id/actionbar_title"
+        style="@style/action_bar_title"
+        tools:ignore="InconsistentLayout" />
+
+    <ProgressBar
+        android:id="@+id/actionbar_progress"
+        style="@style/action_bar_progress"
+        android:visibility="gone"
+        tools:ignore="InconsistentLayout" />
+
+    <View style="@style/action_bar_separator" />
+
+    <FrameLayout style="@style/action_bar_action" >
+
+        <CheckBox
+            android:id="@+id/my_position"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:button="@drawable/ic_menu_myposition"
+            android:checked="false"
+            tools:ignore="InconsistentLayout" />
+    </FrameLayout>
+
+    <!--
+    No overflow (...) button here since this menu is only shown on Gingerbread, which never
+    features an overflow menu
+    -->
+
+</LinearLayout>

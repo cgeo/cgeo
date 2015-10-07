@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.jensdriller.libs.undobar.UndoBarView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/undoBar"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/undo_bar_height_holo"
+    style="@style/Root.Holo">
+
+    <TextView
+        android:id="@+id/message"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toLeftOf="@+id/divider"
+        style="@style/Message.Holo" />
+
+    <View
+        android:id="@id/divider"
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:layout_toLeftOf="@+id/button"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="#afafaf" />
+
+    <TextView
+        android:id="@id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        style="@style/Button.Holo" />
+
+</com.jensdriller.libs.undobar.UndoBarView><!-- From: file:/Users/jenzz/Developer/Android-UndoBar/library/src/main/res/layout/undo_bar_holo.xml -->

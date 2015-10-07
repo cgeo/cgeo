@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="waypoint_coordinate_formats" translatable="false">
+        <item>@string/waypoint_coordinate_formats_plain</item>
+        <item>DDD.DDDDD°</item>
+        <item>DDD°MM.MMM\'</item>
+        <item>DDD°MM\'SS.SSS\"</item>
+    </string-array>
+
+    <!-- distance units -->
+    <string name="unit_m" translatable="false">m</string>
+    <string name="unit_km" translatable="false">km</string>
+    <string name="unit_ft" translatable="false">ft</string>
+    <string name="unit_yd" translatable="false">yd</string>
+    <string name="unit_mi" translatable="false">mi</string>
+
+    <!-- distance units -->
+    <string-array name="distance_units" translatable="false">
+        <item>@string/unit_m</item>
+        <item>@string/unit_km</item>
+        <item>@string/unit_ft</item>
+        <item>@string/unit_yd</item>
+        <item>@string/unit_mi</item>
+    </string-array>
+
+    <!-- upload image scaling -->
+    <integer-array name="log_image_scale_values">
+        <item>-1</item>
+        <item>512</item>
+        <item>640</item>
+        <item>800</item>
+        <item>1024</item>
+    </integer-array>
+    
+    <string name="settings_gc_legal_note_url" translatable="false">http://www.geocaching.com/about/termsofuse.aspx</string>
+    <string name="settings_offline_maps_url" translatable="false">http://faq.cgeo.org/#osm-get-maps</string>
+    <string name="settings_themes_url" translatable="false">http://faq.cgeo.org/#osm-use-themes</string>
+    <string name="settings_send2cgeo_url" translatable="false">http://send2.cgeo.org/</string>
+    <string name="settings_facebook_login_url" translatable="false">http://faq.cgeo.org/#facebook-login</string>
+
+    <!-- contributors -->
+    <string name="contributors" translatable="false">
+    · carnero as the father of c:geo\n
+    \n
+    · Arne Schwabe (code)\n
+    · Bananeweizen (code)\n
+    · blafoo (code)\n
+    · campbeb (code)\n
+    · Eisbehr (code)\n
+    · Filipe C. (code)\n
+    · Iiro Jäppinen (graphic)\n
+    · <a href="http://www.jaytech.cz/">Jan Žatecký</a> (graphic)\n
+    · <a href="http://joachim-wilke.de/">JoWi24</a> (code)\n
+    · <a href="http://github.com/koem">Karsten Priegnitz</a> (code, artwork computation)\n
+    · <a href="http://www.geocaching.com/profile/?guid=231070d8-b6f4-4d14-8d5a-b8bdcb19b78e">KiwiStone</a> (code)\n
+    · <a href="http://www.geocaching.com/email/?guid=d11a3e3d-7db0-4d43-87f2-7893238844a6">Lineflyer</a> (tester, support)\n
+    · marco-dev (code)\n
+    · Mathieu Alorent (code)\n
+    · MichielK (code)\n
+    · mucek4 (code, open source project leader)\n
+    · ncorreia (code)\n
+    · Pavol Babinčák (code)\n
+    · <a href="https://github.com/Portree-Kid">Portree Kid</a> (code)\n
+    · Rainer S. (code)\n
+    · Ray (code)\n
+    · RoadRunner- (code)\n
+    · <a href="http://www.sammyshp.de/">SammysHP</a> (code)\n
+    · <a href="http://www.rfc1149.net/sam.html">Samuel Tardieu</a> (code)\n
+    · stephanme/Geoteufel (code)\n
+    · thiasB (code)\n
+    · YraFyra (code)\n
+    · zenobios (code)\n
+    \n
+    · Special thanks to all our translation contributors on <a href="https://crowdin.net/project/cgeo">Crowdin.net</a>!\n
+    \n
+    · <a href="http://code.google.com/p/mapsforge/">Mapsforge</a> (OSM-rendering)\n
+    · <a href="http://thenounproject.com/">The Noun Project</a> (basis for attribute icons):\n
+    &#160;&#160;&#160;· USB by Kenneth Von Alt from The Noun Project\n
+    &#160;&#160;&#160;· new-idea by Artem Korotkikh from The Noun Project\n
+    · <a href="http://commons.apache.org/">The Apache Commons Project</a>\n
+    · <a href="http://androidicons.com/">Android Icons</a> (<a href="https://creativecommons.org/licenses/by/3.0/">CC-BY 3.0</a>)\n
+    · <a href="http://rrze-icon-set.berlios.de/index.html">RRZE Icon set</a> (<a href="http://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA 3.0</a>)\n
+    · <a href="http://iconfindr.com/1mNr3rl">Layers icon by Cole Bemis</a> (<a href="http://creativecommons.org/licenses/by/3.0/">CC-BY 3.0</a>)\n
+    · <a href="https://github.com/amlcurran/Showcaseview">ShowcaseView by Alex Curran</a> (<a href="http://www.apache.org/licenses/LICENSE-2.0.html">Apache License 2.0</a>)\n
+    · <a href="http://www.mapquest.com/">Geocoding courtesy of MapQuest</a>\n
+    · <a href="http://www.openstreetmap.org/">Geocoding data from OpenStreetMap</a>\n
+    · The <a href="http://tango.freedesktop.org/Tango_Desktop_Project">Tango! Desktop Project</a> (Public Domain)\n
+	</string>
+
+    <!-- cache menu -->
+    <string name="caches_map_mapswithme" translatable="false">Maps.me</string>
+    <string name="cache_menu_mapswithme" translatable="false">Maps.me</string>
+    <string name="faq_link"><a href="">faq.cgeo.org</a></string>
+    <string name="website_link"><a href="">cgeo.org</a></string>
+    <string name="twitter_link"><a href="">@android_GC</a></string>
+    <string name="support_link"><a href="">support@cgeo.org</a></string>
+    
+
+</resources>

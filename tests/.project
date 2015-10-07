@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>cgeo-os-test</name>
+	<name>cgeo-test</name>
 	<comment></comment>
 	<projects>
-		<project>cgeo-os</project>
+		<project>cgeo</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

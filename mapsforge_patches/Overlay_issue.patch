@@ -1,0 +1,13 @@
+Index: mapsforge/src/org/mapsforge/android/maps/Overlay.java
+===================================================================
+--- mapsforge/src/org/mapsforge/android/maps/Overlay.java	(revision 1216)
++++ mapsforge/src/org/mapsforge/android/maps/Overlay.java	(working copy)
+@@ -375,6 +375,8 @@
+ 					this.internalMapView.getHeight(), Bitmap.Config.ARGB_8888);
+ 			this.overlayBitmap2 = Bitmap.createBitmap(this.internalMapView.getWidth(),
+ 					this.internalMapView.getHeight(), Bitmap.Config.ARGB_8888);
++			// Canvas bug workaround
++			this.overlayCanvas.setMatrix(this.overlayCanvas.getMatrix());
+ 			this.redraw = true;
+ 			this.hasValidDimensions = true;
+ 		} else {

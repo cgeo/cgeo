@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.cgeo.org/wptext/1/0" elementFormDefault="qualified">
+<xsd:annotation><xsd:documentation>
+This schema defines additional properties c:geo needs to store in a waypoint in a gpx file.
+The root element is intended to be used in the appropriate extension point in the gpx waypoint type
+(see http://www.topografix.com/GPX/1/0/gpx.xsd or http://www.topografix.com/GPX/1/1/gpx.xsd for details)
+Currently two items are defined: visited and userdefined. 
+</xsd:documentation></xsd:annotation>
+<xsd:element name="cgeo">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="visited" type="xsd:boolean" />
+<xsd:element name="userdefined" type="xsd:boolean" />
+</xsd:sequence>
+</xsd:complexType></xsd:element>
+</xsd:schema>

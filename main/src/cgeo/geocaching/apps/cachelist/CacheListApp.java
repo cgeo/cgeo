@@ -1,19 +1,18 @@
 package cgeo.geocaching.apps.cachelist;
 
-import cgeo.geocaching.cgCache;
-import cgeo.geocaching.cgGeo;
+import cgeo.geocaching.Geocache;
+import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.apps.App;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 import android.app.Activity;
-import android.content.res.Resources;
 
 import java.util.List;
-import java.util.UUID;
 
-interface CacheListApp extends App {
+public interface CacheListApp extends App {
 
-    boolean invoke(final cgGeo geo, final List<cgCache> caches,
-            final Activity activity, final Resources res,
-            final UUID searchId);
+    boolean invoke(final @NonNull List<Geocache> caches,
+            final @NonNull Activity activity, @NonNull final SearchResult search);
 
 }

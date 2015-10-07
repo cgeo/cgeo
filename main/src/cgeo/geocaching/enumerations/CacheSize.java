@@ -1,42 +1,97 @@
 package cgeo.geocaching.enumerations;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 
-import java.util.Collections;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 /**
  * Enum listing cache sizes
- *
- * @author koem
  */
 public enum CacheSize {
-    MICRO("micro", 1, R.string.cache_size_micro),
-    SMALL("small", 2, R.string.cache_size_small),
-    REGULAR("regular", 3, R.string.cache_size_regular),
-    LARGE("large", 4, R.string.cache_size_large),
-    VIRTUAL("virtual", 0, R.string.cache_size_virtual),
-    NOT_CHOSEN("not chosen", 0, R.string.cache_size_notchosen),
-    OTHER("other", 0, R.string.cache_size_other);
+    NANO("Nano", 0, R.string.cache_size_nano, "nano"), // used by OC only
+    MICRO("Micro", 1, R.string.cache_size_micro, "micro"),
+    SMALL("Small", 2, R.string.cache_size_small, "small"),
+    REGULAR("Regular", 3, R.string.cache_size_regular, "regular"),
+    LARGE("Large", 4, R.string.cache_size_large, "large"),
+    VERY_LARGE("Very large", 5, R.string.cache_size_very_large, "xlarge"), // used by OC only
+    NOT_CHOSEN("Not chosen", 6, R.string.cache_size_notchosen, ""),
+    VIRTUAL("Virtual", 7, R.string.cache_size_virtual, "none"),
+    OTHER("Other", 8, R.string.cache_size_other, "other"),
+    UNKNOWN("Unknown", -1, R.string.cache_size_unknown, ""); // CacheSize not init. yet
 
+    @NonNull
     public final String id;
     public final int comparable;
-    public final int stringId;
+    private final int stringId;
+    /**
+     * lookup for OC JSON requests (the numeric size is deprecated for OC)
+     */
+    private final String ocSize2;
 
-    private CacheSize(String id, int comparable, int stringId) {
+    CacheSize(@NonNull final String id, final int comparable, final int stringId, final String ocSize2) {
         this.id = id;
         this.comparable = comparable;
         this.stringId = stringId;
+        this.ocSize2 = ocSize2;
     }
 
-    final public static Map<String, CacheSize> FIND_BY_ID;
+    @NonNull
+    final private static Map<String, CacheSize> FIND_BY_ID = new HashMap<>();
     static {
-        final HashMap<String, CacheSize> mapping = new HashMap<String, CacheSize>();
-        for (CacheSize cs : values()) {
-            mapping.put(cs.id, cs);
+        for (final CacheSize cs : values()) {
+            FIND_BY_ID.put(cs.id.toLowerCase(Locale.US), cs);
+            FIND_BY_ID.put(cs.ocSize2.toLowerCase(Locale.US), cs);
         }
-        FIND_BY_ID = Collections.unmodifiableMap(mapping);
+        // add medium as additional string for Regular
+        FIND_BY_ID.put("medium", REGULAR);
     }
 
+    @NonNull
+    public static CacheSize getById(@Nullable final String id) {
+        if (id == null) {
+            return UNKNOWN;
+        }
+        // avoid String operations for performance reasons
+        final CacheSize result = FIND_BY_ID.get(id);
+        if (result != null) {
+            return result;
+        }
+        // only if String was not found, normalize it
+        final CacheSize resultNormalized = FIND_BY_ID.get(id.toLowerCase(Locale.US).trim());
+        if (resultNormalized != null) {
+            return resultNormalized;
+        }
+        return getByNumber(id);
+    }
+
+    /**
+     * Bad GPX files can contain the container size encoded as number.
+     */
+    @NonNull
+    private static CacheSize getByNumber(final String id) {
+        try {
+            final int numerical = Integer.parseInt(id);
+            if (numerical != 0) {
+                for (final CacheSize size : CacheSize.values()) {
+                    if (size.comparable == numerical) {
+                        return size;
+                    }
+                }
+            }
+        } catch (final NumberFormatException ignored) {
+            // ignore, as this might be a number or not
+        }
+        return UNKNOWN;
+    }
+
+    @NonNull
+    public final String getL10n() {
+        return CgeoApplication.getInstance().getBaseContext().getResources().getString(stringId);
+    }
 }

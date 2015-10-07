@@ -1,0 +1,8 @@
+#! /bin/sh
+#
+
+cd $(dirname $0)/../res/raw
+for i in tb?????.htm* trackable_tb*.htm*; do
+  tbcode=$(echo $i | sed -e 's/^.*\(tb[a-z0-9]*\)\..*$/\1/')
+  curl "http://www.geocaching.com/track/details.aspx?tracker=$tbcode" > $i
+done

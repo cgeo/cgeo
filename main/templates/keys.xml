@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Google Maps -->
+    <string name="maps_api_key" translatable="false">@maps.api.key@</string>
+
+    <!-- Opencaching.de -->
+    <string name="oc_de_okapi_consumer_key" translatable="false">@ocde.okapi.consumer.key@</string>
+    <string name="oc_de_okapi_consumer_secret" translatable="false">@ocde.okapi.consumer.secret@</string>
+
+    <!-- Opencaching.pl -->
+    <string name="oc_pl_okapi_consumer_key" translatable="false">@ocpl.okapi.consumer.key@</string>
+    <string name="oc_pl_okapi_consumer_secret" translatable="false">@ocpl.okapi.consumer.secret@</string>
+
+    <!-- Opencaching.us -->
+    <string name="oc_us_okapi_consumer_key" translatable="false">@ocus.okapi.consumer.key@</string>
+    <string name="oc_us_okapi_consumer_secret" translatable="false">@ocus.okapi.consumer.secret@</string>
+
+    <!-- Opencaching.nl -->
+    <string name="oc_nl_okapi_consumer_key" translatable="false">@ocnl.okapi.consumer.key@</string>
+    <string name="oc_nl_okapi_consumer_secret" translatable="false">@ocnl.okapi.consumer.secret@</string>
+
+    <!-- Opencaching.ro -->
+    <string name="oc_ro_okapi_consumer_key" translatable="false">@ocro.okapi.consumer.key@</string>
+    <string name="oc_ro_okapi_consumer_secret" translatable="false">@ocro.okapi.consumer.secret@</string>
+
+    <!-- Opencaching.org.uk -->
+    <string name="oc_uk_okapi_consumer_key" translatable="false">@ocuk.okapi.consumer.key@</string>
+    <string name="oc_uk_okapi_consumer_secret" translatable="false">@ocuk.okapi.consumer.secret@</string>
+</resources>

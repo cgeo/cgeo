@@ -1,36 +1,25 @@
 package cgeo.geocaching.activity;
 
-import cgeo.geocaching.cgCache;
-import cgeo.geocaching.cgSettings;
-
-import android.view.Menu;
-import android.view.View;
 
 public interface IAbstractActivity {
-    static final int MENU_LOG_VISIT = 100;
-    static final int MENU_LOG_VISIT_OFFLINE = 101;
-
-    public void goHome(View view);
-
-    public void goManual(View view);
-
-    public void showProgress(final boolean show);
-
-    public void setTheme();
 
     public void showToast(String text);
 
     public void showShortToast(String text);
 
-    public void helpDialog(String title, String message);
-
-    public void setTitle(final String title);
+    public void invalidateOptionsMenuCompatible();
 
     /**
-     * TODO: remove after settings are a singleton
+     * Override this method to create a showcase view highlighting the most important UI element.
+     *
      */
-    public cgSettings getSettings();
+    public ShowcaseViewBuilder getShowcase();
 
-    void addVisitMenu(Menu menu, cgCache cache);
+    /**
+     * Call this method to actually present a showcase. The right time to invoke this method depends on the showcase
+     * target. I.e. if the showcase target is an action bar item, this method can only be invoked after that item has
+     * been created in onCreateOptionsMenu.
+     */
+    public void presentShowcase();
 
 }

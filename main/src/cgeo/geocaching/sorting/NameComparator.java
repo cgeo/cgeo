@@ -1,22 +1,27 @@
 package cgeo.geocaching.sorting;
 
-import cgeo.geocaching.cgCache;
+import cgeo.geocaching.Geocache;
+import cgeo.geocaching.utils.TextUtils;
 
 import org.apache.commons.lang3.StringUtils;
+
+import java.text.Collator;
 
 /**
  * sorts caches by name
  *
  */
-public class NameComparator extends AbstractCacheComparator {
+class NameComparator extends AbstractCacheComparator {
+
+    private final Collator collator = TextUtils.getCollator();
 
     @Override
-    protected boolean canCompare(cgCache cache1, cgCache cache2) {
-        return StringUtils.isNotBlank(cache1.name) && StringUtils.isNotBlank(cache2.name);
+    protected boolean canCompare(final Geocache cache) {
+        return StringUtils.isNotBlank(cache.getName());
     }
 
     @Override
-    protected int compareCaches(cgCache cache1, cgCache cache2) {
-        return cache1.name.compareToIgnoreCase(cache2.name);
+    protected int compareCaches(final Geocache cache1, final Geocache cache2) {
+        return collator.compare(cache1.getNameForSorting(), cache2.getNameForSorting());
     }
 }

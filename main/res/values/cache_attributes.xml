@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+
+    <string-array name="attribute_ids" translatable="false">
+        <item>dogs_yes</item>
+        <item>dogs_no</item>
+        <item>bicycles_yes</item>
+        <item>bicycles_no</item>
+        <item>motorcycles_yes</item>
+        <item>motorcycles_no</item>
+        <item>quads_yes</item>
+        <item>quads_no</item>
+        <item>jeeps_yes</item>
+        <item>jeeps_no</item>
+        <item>snowmobiles_yes</item>
+        <item>snowmobiles_no</item>
+        <item>horses_yes</item>
+        <item>horses_no</item>
+        <item>campfires_yes</item>
+        <item>campfires_no</item>
+        <item>rv_yes</item>
+        <item>rv_no</item>
+
+        <!-- attributes (conditions -> yes, no) -->
+        <item>kids_yes</item>
+        <item>kids_no</item>
+        <item>onehour_yes</item>
+        <item>onehour_no</item>
+        <item>scenic_yes</item>
+        <item>scenic_no</item>
+        <item>hiking_yes</item>
+        <item>hiking_no</item>
+        <item>climbing_yes</item>
+        <item>climbing_no</item>
+        <item>wading_yes</item>
+        <item>wading_no</item>
+        <item>swimming_yes</item>
+        <item>swimming_no</item>
+        <item>available_yes</item>
+        <item>available_no</item>
+        <item>night_yes</item>
+        <item>night_no</item>
+        <item>winter_yes</item>
+        <item>winter_no</item>
+        <item>stealth_yes</item>
+        <item>stealth_no</item>
+        <item>firstaid_yes</item>
+        <item>firstaid_no</item>
+        <item>cow_yes</item>
+        <item>cow_no</item>
+        <item>field_puzzle_yes</item>
+        <item>field_puzzle_no</item>
+        <item>nightcache_yes</item>
+        <item>nightcache_no</item>
+        <item>parkngrab_yes</item>
+        <item>parkngrab_no</item>
+        <item>abandonedbuilding_yes</item>
+        <item>abandonedbuilding_no</item>
+        <item>hike_short_yes</item>
+        <item>hike_short_no</item>
+        <item>hike_med_yes</item>
+        <item>hike_med_no</item>
+        <item>hike_long_yes</item>
+        <item>hike_long_no</item>
+        <item>seasonal_yes</item>
+        <item>seasonal_no</item>
+        <item>touristok_yes</item>
+        <item>touristok_no</item>
+        <item>frontyard_yes</item>
+        <item>frontyard_no</item>
+        <item>teamwork_yes</item>
+        <item>teamwork_no</item>
+
+        <!-- attributes (specials -> yes, no) -->
+        <item>landf_yes</item>
+        <item>landf_no</item>
+        <item>partnership_yes</item>
+        <item>partnership_no</item>
+        <item>geotour_yes</item>
+        <item>geotour_no</item>
+
+        <!-- attributes (equipment -> required, not required) -->
+        <item>fee_yes</item>
+        <item>fee_no</item>
+        <item>rappelling_yes</item>
+        <item>rappelling_no</item>
+        <item>boat_yes</item>
+        <item>boat_no</item>
+        <item>scuba_yes</item>
+        <item>scuba_no</item>
+        <item>flashlight_yes</item>
+        <item>flashlight_no</item>
+        <item>uv_yes</item>
+        <item>uv_no</item>
+        <item>snowshoes_yes</item>
+        <item>snowshoes_no</item>
+        <item>skiis_yes</item>
+        <item>skiis_no</item>
+        <item>s_tool_yes</item>
+        <item>s_tool_no</item>
+        <item>wirelessbeacon_yes</item>
+        <item>wirelessbeacon_no</item>
+        <item>treeclimbing_yes</item>
+        <item>treeclimbing_no</item>
+
+        <!-- attributes (hazards -> present, not present) -->
+        <item>poisonoak_yes</item>
+        <item>poisonoak_no</item>
+        <item>dangerousanimals_yes</item>
+        <item>dangerousanimals_no</item>
+        <item>ticks_yes</item>
+        <item>ticks_no</item>
+        <item>mine_yes</item>
+        <item>mine_no</item>
+        <item>cliff_yes</item>
+        <item>cliff_no</item>
+        <item>hunting_yes</item>
+        <item>hunting_no</item>
+        <item>danger_yes</item>
+        <item>danger_no</item>
+        <item>thorn_yes</item>
+        <item>thorn_no</item>
+
+        <!-- attributes (facilities -> yes, no) -->
+        <item>wheelchair_yes</item>
+        <item>wheelchair_no</item>
+        <item>parking_yes</item>
+        <item>parking_no</item>
+        <item>public_yes</item>
+        <item>public_no</item>
+        <item>water_yes</item>
+        <item>water_no</item>
+        <item>restrooms_yes</item>
+        <item>restrooms_no</item>
+        <item>phone_yes</item>
+        <item>phone_no</item>
+        <item>picnic_yes</item>
+        <item>picnic_no</item>
+        <item>camping_yes</item>
+        <item>camping_no</item>
+        <item>stroller_yes</item>
+        <item>stroller_no</item>
+        <item>fuel_yes</item>
+        <item>fuel_no</item>
+        <item>food_yes</item>
+        <item>food_no</item>
+    </string-array>
+
+</resources>

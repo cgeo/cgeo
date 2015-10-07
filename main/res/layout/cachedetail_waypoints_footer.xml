@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Button xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/add_waypoint"
+    style="@style/button_full"
+    android:layout_margin="10dip"
+    android:clickable="true"
+    android:padding="10dip"
+    android:text="@string/cache_waypoints_add"
+    tools:context=".CacheDetailActivity$WaypointsViewCreator" />

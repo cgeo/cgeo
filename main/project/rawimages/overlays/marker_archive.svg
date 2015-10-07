@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="11.288889mm"
+   height="11.288889mm"
+   viewBox="0 0 40 40"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   inkscape:export-filename="/home/kumy/Bureau/Android2/cgeo-bis/main/res/drawable-mdpi/marker_archive.png"
+   inkscape:export-xdpi="27"
+   inkscape:export-ydpi="27"
+   sodipodi:docname="marker_archive.svg">
+  <defs
+     id="defs4">
+    <marker
+       inkscape:stockid="TriangleOutL"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="TriangleOutL"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path4842"
+         d="m 5.77,0 -8.65,5 0,-10 8.65,5 z"
+         style="fill:#269301;fill-opacity:1;fill-rule:evenodd;stroke:#1a6800;stroke-width:1pt;stroke-opacity:1"
+         transform="scale(0.8,0.8)"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Lstart"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Lstart"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path4718"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#fa0606;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="matrix(1.1,0,0,1.1,1.1,0)"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Lend"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path4721"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#fa0606;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="matrix(-1.1,0,0,-1.1,-1.1,0)"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Lend"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path4703"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lstart"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Lstart"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path4700"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         inkscape:connector-curvature="0" />
+    </marker>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="11.313709"
+     inkscape:cx="18.539686"
+     inkscape:cy="20.280472"
+     inkscape:document-units="px"
+     inkscape:current-layer="g4621"
+     showgrid="false"
+     showguides="true"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:window-width="1615"
+     inkscape:window-height="1026"
+     inkscape:window-x="65"
+     inkscape:window-y="54"
+     inkscape:window-maximized="1"
+     inkscape:guide-bbox="true">
+    <sodipodi:guide
+       position="20.000371,17.415767"
+       orientation="-0.70710678,0.70710678"
+       id="guide8865"
+       inkscape:label=""
+       inkscape:color="rgb(0,0,255)" />
+    <sodipodi:guide
+       position="20.000371,17.415767"
+       orientation="0.70710678,0.70710678"
+       id="guide8915"
+       inkscape:label=""
+       inkscape:color="rgb(0,0,255)" />
+    <sodipodi:guide
+       position="27.023371,27.305189"
+       orientation="0,1"
+       id="guide8917" />
+    <sodipodi:guide
+       position="20.000371,38.406752"
+       orientation="0,1"
+       id="guide8923" />
+    <sodipodi:guide
+       position="23.529215,38.406752"
+       orientation="1,0"
+       id="guide8925" />
+    <sodipodi:guide
+       position="16.679118,38.406752"
+       orientation="1,0"
+       id="guide8927" />
+    <sodipodi:guide
+       position="20.000371,17.415767"
+       orientation="1,0"
+       id="guide8931" />
+    <sodipodi:guide
+       position="23.529215,13.886923"
+       orientation="0,1"
+       id="guide8939" />
+    <sodipodi:guide
+       position="7.7960893,1.5942523"
+       orientation="0,1"
+       id="guide8941" />
+    <sodipodi:guide
+       position="4.1783708,1.5942523"
+       orientation="-0.8660254,0.5"
+       id="guide8943"
+       inkscape:label=""
+       inkscape:color="rgb(0,0,255)" />
+    <sodipodi:guide
+       position="35.822371,1.5942523"
+       orientation="0.8660254,0.5"
+       id="guide8945"
+       inkscape:label=""
+       inkscape:color="rgb(0,0,255)" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Calque 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-521.34232,-860.44361)">
+    <g
+       id="g4621"
+       transform="translate(-50.558135,-35.355339)"
+       inkscape:export-filename="/home/kumy/Bureau/Android2/cgeo-bis/main/res/drawable-xhdpi/marker_archive.png"
+       inkscape:export-xdpi="49.376854"
+       inkscape:export-ydpi="49.376854">
+      <rect
+         style="opacity:1;fill:none;fill-opacity:1;stroke:none;stroke-width:1.86992466;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         id="rect8949"
+         width="40"
+         height="40"
+         x="571.90045"
+         y="895.79895"
+         ry="0"
+         rx="0" />
+      <path
+         style="fill:#269301;fill-opacity:1;fill-rule:evenodd;stroke:#1a6800;stroke-width:2.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m 582.01139,908.49376 9.88942,9.88943 9.88942,-9.88943 -6.36058,0 0,-11.10156 -6.85009,0 0,11.10156 z"
+         id="path8935"
+         inkscape:connector-curvature="0" />
+      <path
+         style="fill:#804000;fill-opacity:1;fill-rule:evenodd;stroke:#351a00;stroke-width:2.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m 583.17599,921.91203 17.44964,0 7.09718,12.29267 -31.64466,10e-4 z"
+         id="path8947"
+         inkscape:connector-curvature="0" />
+    </g>
+  </g>
+</svg>

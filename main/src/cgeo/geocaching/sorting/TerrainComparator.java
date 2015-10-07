@@ -1,25 +1,20 @@
 package cgeo.geocaching.sorting;
 
-import cgeo.geocaching.cgCache;
+import cgeo.geocaching.Geocache;
 
 /**
  * sorts caches by terrain rating
  *
  */
-public class TerrainComparator extends AbstractCacheComparator {
+class TerrainComparator extends AbstractCacheComparator {
 
     @Override
-    protected boolean canCompare(cgCache cache1, cgCache cache2) {
-        return cache1.terrain != null && cache2.terrain != null;
+    protected boolean canCompare(final Geocache cache) {
+        return cache.getTerrain() != 0.0;
     }
 
     @Override
-    protected int compareCaches(cgCache cache1, cgCache cache2) {
-        if (cache1.terrain > cache2.terrain) {
-            return 1;
-        } else if (cache2.terrain > cache1.terrain) {
-            return -1;
-        }
-        return 0;
+    protected int compareCaches(final Geocache cache1, final Geocache cache2) {
+        return Float.compare(cache1.getTerrain(), cache2.getTerrain());
     }
 }
