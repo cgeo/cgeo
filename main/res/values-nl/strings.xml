@@ -80,6 +80,7 @@
   <string name="log_tb_archived">Gearchiveerd</string>
   <string name="log_save">Off line opslaan</string>
   <string name="log_saving">Log opslaan…</string>
+  <string name="log_saving_and_uploading">De log wordt gepost en de afbeelding geüpload…</string>
   <string name="log_posting_log">Posten log…</string>
   <string name="log_posting_twitter">Posten tweet…</string>
   <string name="log_posting_gcvote">Posten GCVote…</string>
@@ -217,6 +218,9 @@
   <string name="warn_no_pocket_query_found">Geen Pocket query online gevonden.</string>
   <string name="info_log_posted">c:geo heeft log succesvol gepost.</string>
   <string name="info_log_saved">c:geo heeft log succesvol opgeslagen.</string>
+  <string name="info_log_post_failed">Het posten van de log is mislukt.</string>
+  <string name="info_log_post_failed_reason">Reden: %s</string>
+  <string name="info_log_post_retry">Probeer opnieuw</string>
   <string name="info_log_post_save">Off line opslaan</string>
   <string name="info_log_cleared">Log is gewist.</string>
   <string name="info_log_type_changed">Type log is gewijzigd!</string>
@@ -551,6 +555,9 @@
   <string name="init_low_power">Energiebesparende modus</string>
   <string name="init_low_power_note">De spaarstand vermijdt het gebruik van de GPS en de gyroscoop wanneer een zeer nauwkeurige locatie niet strikt noodzakelijk is, dit gaat ten koste van een snelle gps-fix.</string>
   <string name="init_low_power_mode">Energiebesparende modus activeren</string>
+  <string name="init_force_orientation_sensor_title">Oriëntatie-sensor</string>
+  <string name="init_force_orientation_sensor_note">Op sommige apparaten werkt het kompas niet juist, waardoor de verkeerde richting wordt aangegeven. In dit geval kan de GPS-sensor een beter resultaat geven.</string>
+  <string name="init_force_orientation_sensor">Forceer gebruik van oriëntatiesensor</string>
   <string name="init_create_memory_dump">Geheugendump maken</string>
   <string name="init_memory_dump">Geheugendump</string>
   <string name="init_memory_dumped">Geheugen gedumpt naar %s</string>
@@ -697,6 +704,7 @@
   <string name="cache_menu_navigate">Navigeer</string>
   <string name="cache_menu_navigation_drive">Navigeer (rijden)</string>
   <string name="cache_menu_navigation_walk">Navigeer (lopen)</string>
+  <string name="cache_menu_navigation_transit">Navigatie (Onderweg)</string>
   <string name="cache_menu_navigation_bike">Navigeer (fiets)</string>
   <string name="cache_menu_maps_directions">Google Maps aanwijzigen</string>
   <string name="cache_menu_sygic_walk">Sygic (wandelen)</string>
