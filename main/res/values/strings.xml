@@ -712,6 +712,7 @@
     <string name="cache_watchlist_not_on">This cache is not on your watchlist.</string>
     <string name="cache_watchlist_add">Add to Watchlist</string>
     <string name="cache_watchlist_remove">Remove from Watchlist</string>
+    <string name="cache_watchlist_in_total">in total</string>
     <string name="cache_favpoint_on">This cache is one of your favorites.</string>
     <string name="cache_favpoint_not_on">This cache is not one of your favorites.</string>
     <string name="cache_favpoint_add">Add</string>
