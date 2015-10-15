@@ -32,7 +32,7 @@ public class SensorsTest extends ActivityInstrumentationTestCase2<MainActivity> 
 
     private static <T> void testDataAvailability(final Observable<T> observable) {
         try {
-            observable.timeout(200, TimeUnit.MILLISECONDS).first().toBlocking().single();
+            observable.timeout(2, TimeUnit.SECONDS).first().toBlocking().single();
         } catch (final Exception ignored) {
             fail("timeout while waiting for sensor data");
         }
