@@ -153,7 +153,7 @@ public class DataStore {
      */
     private static final CacheCache cacheCache = new CacheCache();
     private static SQLiteDatabase database = null;
-    private static final int dbVersion = 68;
+    private static final int dbVersion = 69;
     public static final int customListIdOffset = 10;
     private static final @NonNull String dbName = "data";
     private static final @NonNull String dbTableCaches = "cg_caches";
@@ -277,7 +277,8 @@ public class DataStore {
             + "_id integer primary key autoincrement, "
             + "log_id integer not null, "
             + "title text not null, "
-            + "url text not null"
+            + "url text not null, "
+            + "description text "
             + "); ";
     private static final String dbCreateLogsOffline = ""
             + "create table " + dbTableLogsOffline + " ("
@@ -804,6 +805,15 @@ public class DataStore {
                             db.execSQL("alter table " + dbTableCaches + " add column logPasswordRequired integer default 0");
                         } catch (final Exception e) {
                             Log.e("Failed to upgrade to ver. 68", e);
+
+                        }
+                    }
+                    // description for log Images
+                    if (oldVersion < 69) {
+                        try {
+                            db.execSQL("alter table " + dbTableLogImages + " add column description text");
+                        } catch (final Exception e) {
+                            Log.e("Failed to upgrade to ver. 69", e);
 
                         }
                     }
@@ -1469,6 +1479,7 @@ public class DataStore {
                     insertImage.bindLong(1, logId);
                     insertImage.bindString(2, StringUtils.defaultIfBlank(img.title, ""));
                     insertImage.bindString(3, img.getUrl());
+                    insertImage.bindString(4, StringUtils.defaultIfBlank(img.getDescription(), ""));
                     insertImage.executeInsert();
                 }
             }
@@ -1948,8 +1959,8 @@ public class DataStore {
         init();
 
         final Cursor cursor = database.rawQuery(
-                //                           0       1      2      3    4      5      6                                                7       8      9     10
-                "SELECT cg_logs._id as cg_logs_id, type, author, log, date, found, friend, " + dbTableLogImages + "._id as cg_logImages_id, log_id, title, url"
+                //                           0       1      2      3    4      5      6                                                7       8      9     10     11
+                "SELECT cg_logs._id as cg_logs_id, type, author, log, date, found, friend, " + dbTableLogImages + "._id as cg_logImages_id, log_id, title, url, description"
                         + " FROM " + dbTableLogs + " LEFT OUTER JOIN " + dbTableLogImages
                         + " ON ( cg_logs._id = log_id ) WHERE geocode = ?  ORDER BY date desc, cg_logs._id asc", new String[]{geocode});
 
@@ -1967,7 +1978,7 @@ public class DataStore {
                 logs.add(log);
             }
             if (!cursor.isNull(7)) {
-                log.addLogImage(new Image.Builder().setUrl(cursor.getString(10)).setTitle(cursor.getString(9)).build());
+                log.addLogImage(new Image.Builder().setUrl(cursor.getString(10)).setTitle(cursor.getString(9)).setDescription(cursor.getString(11)).build());
             }
         }
 
@@ -2920,7 +2931,7 @@ public class DataStore {
         MOVE_TO_STANDARD_LIST("UPDATE " + dbTableCaches + " SET reason = " + StoredList.STANDARD_LIST_ID + " WHERE reason = ?"),
         MOVE_TO_LIST("UPDATE " + dbTableCaches + " SET reason = ? WHERE geocode = ?"),
         UPDATE_VISIT_DATE("UPDATE " + dbTableCaches + " SET visiteddate = ? WHERE geocode = ?"),
-        INSERT_LOG_IMAGE("INSERT INTO " + dbTableLogImages + " (log_id, title, url) VALUES (?, ?, ?)"),
+        INSERT_LOG_IMAGE("INSERT INTO " + dbTableLogImages + " (log_id, title, url, description) VALUES (?, ?, ?, ?)"),
         INSERT_LOG_COUNTS("INSERT INTO " + dbTableLogCount + " (geocode, updated, type, count) VALUES (?, ?, ?, ?)"),
         INSERT_SPOILER("INSERT INTO " + dbTableSpoilers + " (geocode, updated, url, title, description) VALUES (?, ?, ?, ?, ?)"),
         LOG_COUNT_OF_GEOCODE("SELECT count(_id) FROM " + dbTableLogsOffline + " WHERE geocode = ?"),
