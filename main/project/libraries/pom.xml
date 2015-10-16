@@ -25,9 +25,9 @@
 
 		<FindbugsAnnotationsVersion>3.0.0</FindbugsAnnotationsVersion>
 
-		<JacksonAnnotationsVersion>2.6.2</JacksonAnnotationsVersion>
-		<JacksonCoreVersion>2.6.2</JacksonCoreVersion>
-		<JacksonDatabindVersion>2.6.2</JacksonDatabindVersion>
+		<JacksonAnnotationsVersion>2.6.3</JacksonAnnotationsVersion>
+		<JacksonCoreVersion>2.6.3</JacksonCoreVersion>
+		<JacksonDatabindVersion>2.6.3</JacksonDatabindVersion>
 
 		<RXAndroidVersion>0.25.0</RXAndroidVersion>
 		<RXJavaVersion>1.0.14</RXJavaVersion>
