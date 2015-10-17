@@ -130,6 +130,11 @@ public class CoordinatesInputDialog extends DialogFragment {
                 title.setText(R.string.cache_coordinates);
                 title.setVisibility(View.VISIBLE);
             }
+            final ImageButton cancel = ButterKnife.findById(v, R.id.coords_input_cancel);
+            if (cancel != null) {
+                cancel.setOnClickListener(new InputCancelListener());
+                cancel.setVisibility(View.VISIBLE);
+            }
             final ImageButton done = ButterKnife.findById(v, R.id.coords_input_done);
             if (done != null) {
                 done.setOnClickListener(inputdone);
@@ -569,6 +574,14 @@ public class CoordinatesInputDialog extends DialogFragment {
             if (gp != null) {
                 ((CoordinateUpdate) getActivity()).updateCoordinates(gp);
             }
+            dismiss();
+        }
+    }
+
+    private class InputCancelListener implements View.OnClickListener {
+
+        @Override
+        public void onClick(final View v) {
             dismiss();
         }
     }

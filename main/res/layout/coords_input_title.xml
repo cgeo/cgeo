@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp"
     style="@style/action_bar">
 
     <TextView
@@ -11,9 +16,18 @@
         android:visibility="gone"/>
     
     <ImageButton
+        android:id="@+id/coords_input_cancel"
+        style="@style/action_bar_action"
+        android:src="@drawable/ic_menu_cancel_holo_dark"
+        android:visibility="gone" />
+    
+	<View style="@style/action_bar_separator" 
+        android:visibility="gone"/>
+    
+    <ImageButton
         android:id="@+id/coords_input_done"
         style="@style/action_bar_action"
-        android:src="@drawable/abc_ic_go"
+        android:src="@drawable/ic_menu_done_holo_dark"
         android:visibility="gone" />
 
 </LinearLayout>
