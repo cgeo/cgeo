@@ -814,7 +814,6 @@ public class DataStore {
                             db.execSQL("alter table " + dbTableLogImages + " add column description text");
                         } catch (final Exception e) {
                             Log.e("Failed to upgrade to ver. 69", e);
-
                         }
                     }
                 }
