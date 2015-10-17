@@ -17,6 +17,7 @@ import cgeo.geocaching.utils.EditUtils;
 
 import org.apache.commons.lang3.StringUtils;
 
+import android.app.Dialog;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
@@ -28,11 +29,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnFocusChangeListener;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -114,9 +117,26 @@ public class CoordinatesInputDialog extends DialogFragment {
 
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
-        getDialog().setTitle(R.string.cache_coordinates);
+        final Dialog dialog = getDialog();
+        final boolean noTitle = dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         final View v = inflater.inflate(R.layout.coordinatesinput_dialog, container, false);
+        final InputDoneListener inputdone = new InputDoneListener();
+        if (!noTitle) {
+            dialog.setTitle(R.string.cache_coordinates);
+        } else {
+            final TextView title = ButterKnife.findById(v, R.id.coords_input_title);
+            if (title != null) {
+                title.setText(R.string.cache_coordinates);
+                title.setVisibility(View.VISIBLE);
+            }
+            final ImageButton done = ButterKnife.findById(v, R.id.coords_input_done);
+            if (done != null) {
+                done.setOnClickListener(inputdone);
+                done.setVisibility(View.VISIBLE);
+            }
+        }
+
         final Spinner spinner = ButterKnife.findById(v, R.id.spinnerCoordinateFormats);
         final ArrayAdapter<CharSequence> adapter =
                 ArrayAdapter.createFromResource(getActivity(),
@@ -175,7 +195,7 @@ public class CoordinatesInputDialog extends DialogFragment {
         }
 
         final Button buttonDone = ButterKnife.findById(v, R.id.done);
-        buttonDone.setOnClickListener(new InputDoneListener());
+        buttonDone.setOnClickListener(inputdone);
 
         return v;
     }
