@@ -79,7 +79,7 @@ public final class MapUtils {
                 .append(cache.getMapMarkerId())
                 .append(cache.isOwner())
                 .append(cache.isFound())
-                .append(cache.hasUserModifiedCoords())
+                .append(showUserModifiedCoords(cache, cacheListType))
                 .append(cache.getPersonalNote())
                 .append(cache.isLogOffline())
                 .append(cache.getListId() > 0)
@@ -217,7 +217,7 @@ public final class MapUtils {
             insets.add(getFoundInset(cacheListType)[resolution]);
         }
         // user modified coords
-        if (cache.hasUserModifiedCoords() || cache.hasFinalDefined() && cacheListType != null) {
+        if (showUserModifiedCoords(cache, cacheListType)) {
             layers.add(Compatibility.getDrawable(res, R.drawable.marker_usermodifiedcoords));
             insets.add(getUMCInset(cacheListType)[resolution]);
         }
@@ -273,6 +273,21 @@ public final class MapUtils {
     private static boolean showUnreliableLatLon(@Nullable final CacheListType cacheListType) {
         // Show only on map
         return cacheListType == null;
+    }
+
+    /**
+     * Conditional expression to choose if we need the UserModifiedCoords flag or not.
+     *
+     * @param cache
+     *            The cache currently used
+     * @param cacheListType
+     *            The cache list currently used
+     * @return
+     *         True if the UserModifiedCoords flag should be displayed
+     */
+    private static boolean showUserModifiedCoords(final Geocache cache, @Nullable final CacheListType cacheListType) {
+
+        return cache.hasUserModifiedCoords() || cache.hasFinalDefined() && cacheListType != null;
     }
 
     /**
