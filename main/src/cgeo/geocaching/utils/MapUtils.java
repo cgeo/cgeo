@@ -217,7 +217,7 @@ public final class MapUtils {
             insets.add(getFoundInset(cacheListType)[resolution]);
         }
         // user modified coords
-        if (cache.hasUserModifiedCoords()) {
+        if (cache.hasUserModifiedCoords() || cache.hasFinalDefined() && cacheListType != null) {
             layers.add(Compatibility.getDrawable(res, R.drawable.marker_usermodifiedcoords));
             insets.add(getUMCInset(cacheListType)[resolution]);
         }
