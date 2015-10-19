@@ -200,8 +200,11 @@ public class CoordinatesInputDialog extends DialogFragment {
         }
 
         final Button buttonDone = ButterKnife.findById(v, R.id.done);
-        buttonDone.setOnClickListener(inputdone);
-
+        if (noTitle) {
+            buttonDone.setVisibility(View.GONE);
+        } else {
+            buttonDone.setOnClickListener(inputdone);
+        }
         return v;
     }
 
