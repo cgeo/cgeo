@@ -80,8 +80,8 @@
   <string name="log_tb_archived">Archivado</string>
   <string name="log_save">Guardar sin conexión</string>
   <string name="log_saving">Enviando registro…</string>
-  <string name="log_saving_and_uploading">Publicando registro y subiendo imagen…</string>
-  <string name="log_posting_log">Publicando registro…</string>
+  <string name="log_saving_and_uploading">Enviando registro y subiendo imagen…</string>
+  <string name="log_posting_log">Enviando registro…</string>
   <string name="log_posting_twitter">Publicando tweet…</string>
   <string name="log_posting_gcvote">Publicando GCVote…</string>
   <string name="log_posting_image">Publicando imagen…</string>
@@ -369,7 +369,7 @@
   <string name="settings_title_services">Servicios</string>
   <string name="settings_summary_services">Configura la información de la cuenta de usuario y accede a servicios opcionales.</string>
   <string name="settings_title_appearance">Aspecto</string>
-  <string name="settings_summary_appearance">Configurar unidades de distancia, idioma y colores de la app.</string>
+  <string name="settings_summary_appearance">Configura unidades de distancia, idioma y colores de la app.</string>
   <string name="settings_title_cachedetails">Detalles del caché</string>
   <string name="settings_summary_cachedetails">Personaliza la pantalla de información de los cachés. </string>
   <string name="settings_title_offlinedata">Datos sin conexión</string>
@@ -584,7 +584,7 @@
   <string name="map_source_osm_mapnik">OSM: Mapnik</string>
   <string name="map_source_osm_cyclemap">OSM: Cyclemap</string>
   <string name="map_source_osm_offline">Offline</string>
-  <string name="init_sendToCgeo">Enviar a c:geo</string>
+  <string name="init_sendToCgeo">Send to c:geo</string>
   <string name="settings_info_send2cgeo_title">Sobre send2cgeo</string>
   <string name="init_sendToCgeo_name">Nombre de tu dispositivo</string>
   <string name="init_sendToCgeo_description"><b>Send2cgeo</b> te permite recibir cachés automáticamente desde la web de geocaching usando un complemento especial para Firefox o Chrome. Antes de registrarte, te sugerimos que leas <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Sólo necesitas registarte si vas a usar send2cgeo. c:geo funciona sin tener que registrar tu dispositivo.</string>
@@ -939,7 +939,7 @@
   <string name="helper_sendtocgeo_title">Send to c:geo</string>
   <string name="helper_contacts_title">Complemento de contactos de c:geo</string>
   <string name="helper_contacts_description">Permite abrir un contacto (de tu libreta de contactos) directamente desde un registro, para que puedas pedir ayuda a tus amigos más fácilmente.</string>
-  <string name="helper_sendtocgeo_description">\'Enviar a c:geo\' es una extensión <strong>para tu PC</strong>. Cuando navegues por geocaching.com, puedes enviar cachés a tu smartphone haciendo clic directamente desde tu navegador.</string>
+  <string name="helper_sendtocgeo_description">\'Send to c:geo\' es una extensión <strong>para tu PC</strong>. Cuando navegues por geocaching.com, puedes enviar cachés a tu smartphone haciendo clic directamente desde tu navegador.</string>
   <string name="helper_locus_title">Locus</string>
   <string name="helper_locus_description">App de navegación exterior para tu móvil o tableta. Puede visualizar mapas Topo sin conexión, marcar tu ruta, buscar geocachés, usar una guía de voz y mucho más.</string>
   <string name="helper_gpsstatus_title">GPS Status</string>
@@ -1257,7 +1257,7 @@ Nombre de archivo:%2$s</string>
   <string name="cgeo_shortcut">Atajo de c:geo</string>
   <string name="create_shortcut">Crear atajo</string>
   <string name="send">Enviar</string>
-  <string name="showcase_logcache_title">Enviar el registro</string>
+  <string name="showcase_logcache_title">Enviando el registro</string>
   <string name="showcase_logcache_text">Recuerda, muchos de los comandos están ahora en la barra de título. Allí encontrarás el botón para enviar el registro terminado.</string>
   <string name="showcase_main_title">Menús nuevos</string>
   <string name="showcase_main_text">c:geo coloca ahora los elementos del menú en la barra de título como otras apps modernas. Algunos elementos se esconden detrás del símbolo de puntos. Presiona de manera larga para ver su descripción.</string>

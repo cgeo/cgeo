@@ -258,7 +258,7 @@
   <string name="unknown_scan">Nessun geocode trovato nello scan.</string>
   <string name="caches_no_cache">Non ci sono cache</string>
   <string name="caches_more_caches">Carica altri cache</string>
-  <string name="caches_more_caches_no">Nessun\'altro cache</string>
+  <string name="caches_more_caches_no">Nessun altro cache</string>
   <string name="caches_more_caches_loading">Caricamento dei cache…</string>
   <string name="caches_more_caches_currently">attualmente</string>
   <string name="caches_downloading">Download cache in corso…\nETA: </string>
