@@ -75,6 +75,32 @@
             </LinearLayout>
 
             <include layout="@layout/gcvote_rating_bar"  android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+            <LinearLayout
+                android:id="@+id/favorite_box"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dip"
+                android:layout_marginLeft="10dip"
+                android:layout_marginRight="10dip"
+                android:orientation="horizontal"
+                android:visibility="gone">
+                <CheckBox
+                    android:id="@+id/favorite_check"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:gravity="center"
+                    android:padding="2sp"/>
+                <TextView
+                    android:id="@+id/favorite_remaining"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="left"
+                    android:padding="2sp"
+                    android:textColor="?text_color"
+                    android:textSize="14sp"/>
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/tweet_box"

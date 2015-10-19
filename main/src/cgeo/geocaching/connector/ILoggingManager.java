@@ -38,4 +38,6 @@ public interface ILoggingManager {
     public List<LogType> getPossibleLogTypes();
 
     public void init();
+
+    public int getPremFavoritePoints();
 }

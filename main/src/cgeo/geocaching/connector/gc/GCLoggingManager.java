@@ -1,5 +1,6 @@
 package cgeo.geocaching.connector.gc;
 
+import butterknife.Bind;
 import cgeo.geocaching.DataStore;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.Image;
@@ -27,6 +28,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.widget.CheckBox;
 
 import java.util.Calendar;
 import java.util.Collections;
@@ -41,6 +43,7 @@ class GCLoggingManager extends AbstractLoggingManager implements LoaderManager.L
     @NonNull private List<TrackableLog> trackables = Collections.emptyList();
     private List<LogType> possibleLogTypes;
     private boolean hasLoaderError = true;
+    private int premFavcount;
 
     GCLoggingManager(final LogCacheActivity activity, final Geocache cache) {
         this.activity = activity;
@@ -76,7 +79,7 @@ class GCLoggingManager extends AbstractLoggingManager implements LoaderManager.L
                     Log.w("Could not acquire GUID from log page for " + cache.getGeocode());
                 }
             }
-
+            premFavcount = GCParser.getFavoritePoints(page);
             hasLoaderError = possibleLogTypes.isEmpty();
         }
 
@@ -98,9 +101,10 @@ class GCLoggingManager extends AbstractLoggingManager implements LoaderManager.L
     public LogResult postLog(@NonNull final LogType logType, @NonNull final Calendar date, @NonNull final String log, @Nullable final String logPassword, @NonNull final List<TrackableLog> trackableLogs) {
 
         try {
+            final CheckBox fav_check = (CheckBox) activity.findViewById(R.id.favorite_check);
             final ImmutablePair<StatusCode, String> postResult = GCParser.postLog(cache.getGeocode(), cache.getCacheId(), viewstates, logType,
                     date.get(Calendar.YEAR), (date.get(Calendar.MONTH) + 1), date.get(Calendar.DATE),
-                    log, trackableLogs);
+                    log, trackableLogs, fav_check.isChecked());
 
             if (postResult.left == StatusCode.NO_ERROR) {
                 if (logType == LogType.TEMP_DISABLE_LISTING) {
@@ -152,6 +156,10 @@ class GCLoggingManager extends AbstractLoggingManager implements LoaderManager.L
             return Collections.emptyList();
         }
         return possibleLogTypes;
+    }
+
+    public int getPremFavoritePoints() {
+        return hasLoaderError ? 0 : premFavcount;
     }
 
 }

@@ -74,6 +74,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     private static final String SAVED_STATE_TYPE = "cgeo.geocaching.saved_state_type";
     private static final String SAVED_STATE_DATE = "cgeo.geocaching.saved_state_date";
     private static final String SAVED_STATE_IMAGE = "cgeo.geocaching.saved_state_image";
+    private static final String SAVED_STATE_FAVPOINTS = "cgeo.geocaching.saved_state_favpoints";
 
     private static final int SELECT_IMAGE = 101;
 
@@ -86,6 +87,8 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     protected @Bind(R.id.tweet) CheckBox tweetCheck;
     protected @Bind(R.id.tweet_box) LinearLayout tweetBox;
     protected @Bind(R.id.log_password_box) LinearLayout logPasswordBox;
+    protected @Bind(R.id.favorite_box) LinearLayout favBox;
+    protected @Bind(R.id.favorite_remaining) TextView favRemaining;
     private SparseArray<TrackableLog> actionButtons;
 
     private ILoggingManager loggingManager;
@@ -96,6 +99,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     private Calendar date;
     private Image image;
     private boolean sendButtonEnabled;
+    private int premFavPoints;
 
     public void onLoadFinished() {
         if (loggingManager.hasLoaderError()) {
@@ -105,6 +109,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
 
         trackables.addAll(loggingManager.getTrackables());
         possibleLogTypes = loggingManager.getPossibleLogTypes();
+        premFavPoints = loggingManager.getPremFavoritePoints();
 
         if (possibleLogTypes.isEmpty()) {
             showErrorLoadingData();
@@ -124,6 +129,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
 
         initializeTrackablesAction();
         updateTrackablesList();
+        initializeFavoriteCheck();
 
         showProgress(false);
     }
@@ -263,6 +269,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
             typeSelected = LogType.getById(savedInstanceState.getInt(SAVED_STATE_TYPE));
             date.setTimeInMillis(savedInstanceState.getLong(SAVED_STATE_DATE));
             image = savedInstanceState.getParcelable(SAVED_STATE_IMAGE);
+            premFavPoints = savedInstanceState.getInt(SAVED_STATE_FAVPOINTS);
         } else {
             // If log had been previously saved, load it now, otherwise initialize signature as needed
             final LogEntry log = DataStore.loadLogOffline(geocode);
@@ -355,6 +362,17 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         }
     }
 
+    private void initializeFavoriteCheck() {
+        if (ConnectorFactory.getConnector(cache).supportsAddToFavorite(cache, typeSelected)) {
+            if (premFavPoints > 0) {
+                favBox.setVisibility(View.VISIBLE);
+                favRemaining.setText(getString(R.string.fav_points_remaining, premFavPoints));
+            }
+        } else {
+            favBox.setVisibility(View.GONE);
+        }
+    }
+
     private void setDefaultValues() {
         date = Calendar.getInstance();
         rating = GCVote.NO_RATING;
@@ -402,6 +420,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         outState.putInt(SAVED_STATE_TYPE, typeSelected.id);
         outState.putLong(SAVED_STATE_DATE, date.getTimeInMillis());
         outState.putParcelable(SAVED_STATE_IMAGE, image);
+        outState.putInt(SAVED_STATE_FAVPOINTS, premFavPoints);
     }
 
     @Override
@@ -420,6 +439,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
 
         updateTweetBox(type);
         updateLogPasswordBox(type);
+        initializeFavoriteCheck();
     }
 
     private void updateTweetBox(final LogType type) {

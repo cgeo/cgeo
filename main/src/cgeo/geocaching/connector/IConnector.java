@@ -236,4 +236,15 @@ public interface IConnector {
 
     @NonNull
     public List<UserAction> getUserActions();
+
+    /**
+     * Check cache is eligible for adding to favorite
+     *
+     * @param cache
+     *         a cache that this connector must be able to handle
+     * @param type
+     *         a log type selected by the user
+     * @return true, when cache can be added to favorite
+     */
+    public boolean supportsAddToFavorite(final Geocache cache, final LogType type);
 }
