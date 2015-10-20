@@ -2,6 +2,12 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
+    <b>Next bugfix release:</b>\n
+    · Fix: Fixed crashes when selecting log image\n
+    · Fix: Fixed crashes when checking credentials in settings\n
+    · Fix: Final flag not shown in lists when cache has self defined final waypoint\n
+    \n
+    \n
     <b>2015.09.28:</b>\n
     · Fix: Crash invoking Maps.me with waypoints without coordinates\n
     · Fix: Spoiler image descriptions were missing\n
