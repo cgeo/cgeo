@@ -3,9 +3,10 @@
   <!-- changelog for the master branch -->
   <string name="changelog_master" translatable="false">
     <b>Next feature release:</b>\n
-    · Support opencaching links using their internal id\n
-    · Change geocaching platform quickly by clicking info on main screen\n
-    · Put new things there\n
+    · New: Support opencaching links using their internal ID\n
+    · New: Change geocaching platform quickly by clicking info on main screen\n
+    · New: Improved Done and Cancel buttons for coordinate input \n
+    \n
     \n
   </string>
 </resources>
