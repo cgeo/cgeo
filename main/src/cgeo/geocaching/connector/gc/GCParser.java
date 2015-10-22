@@ -1045,8 +1045,8 @@ public final class GCParser {
     }).subscribeOn(RxUtils.networkScheduler);
 
     static ImmutablePair<StatusCode, String> postLog(final String geocode, final String cacheid, final String[] viewstates,
-            final LogType logType, final int year, final int month, final int day,
-            final String log, final List<TrackableLog> trackables) {
+                                                     final LogType logType, final int year, final int month, final int day,
+                                                     final String log, final List<TrackableLog> trackables,final boolean addToFavorites) {
         if (GCLogin.isEmpty(viewstates)) {
             Log.e("GCParser.postLog: No viewstate given");
             return new ImmutablePair<>(StatusCode.LOG_POST_ERROR, "");
@@ -1081,6 +1081,11 @@ public final class GCParser {
                 "ctl00$ContentBody$LogBookPanel1$btnSubmitLog", "Submit Log Entry",
                 "ctl00$ContentBody$LogBookPanel1$uxLogCreationSource", "Old",
                 "ctl00$ContentBody$uxVistOtherListingGC", "");
+
+        if (addToFavorites) {
+            params.put("ctl00$ContentBody$LogBookPanel1$chkAddToFavorites", "on");
+        }
+
         GCLogin.putViewstates(params, viewstates);
         if (trackables != null && !trackables.isEmpty()) { //  we have some trackables to proceed
             final StringBuilder hdnSelected = new StringBuilder();
@@ -2042,5 +2047,15 @@ public final class GCParser {
         final String response = Network.getResponseData(Network.postRequest(uri, params));
 
         return StringUtils.contains(response, "<p class=\"Success\">");
+    }
+
+    public static int getFavoritePoints(final String page) {
+        if (page != null) {
+            final String favCount = TextUtils.getMatch(page, GCConstants.PATTERN_SEARCH_FAVORITE_COUNT, false, 1, null, true);
+            if (favCount != null) {
+                return Integer.parseInt(favCount);
+            }
+        }
+        return 0;
     }
 }

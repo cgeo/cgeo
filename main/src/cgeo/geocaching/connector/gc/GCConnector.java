@@ -21,6 +21,7 @@ import cgeo.geocaching.connector.capability.ISearchByNextPage;
 import cgeo.geocaching.connector.capability.ISearchByOwner;
 import cgeo.geocaching.connector.capability.ISearchByViewPort;
 import cgeo.geocaching.connector.capability.IgnoreCapability;
+import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.loaders.RecaptchaReceiver;
 import cgeo.geocaching.location.Geopoint;
@@ -303,6 +304,11 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     @Override
     public boolean supportsFavoritePoints(@NonNull final Geocache cache) {
         return !cache.getType().isEvent();
+    }
+
+    @Override
+    public boolean supportsAddToFavorite(final Geocache cache, final LogType type) {
+        return cache.supportsFavoritePoints() && Settings.isGCPremiumMember() && !cache.isOwner() && type == LogType.FOUND_IT;
     }
 
     @Override

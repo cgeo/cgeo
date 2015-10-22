@@ -20,4 +20,7 @@ public abstract class AbstractLoggingManager implements ILoggingManager {
         return Collections.emptyList();
     }
 
+    public int getPremFavoritePoints() {
+        return 0;
+    }
 }

@@ -106,6 +106,11 @@ public abstract class AbstractConnector implements IConnector {
     }
 
     @Override
+    public boolean supportsAddToFavorite(final Geocache cache, final LogType type) {
+        return false;
+    }
+
+    @Override
     public boolean canLog(@NonNull final Geocache cache) {
         return false;
     }
