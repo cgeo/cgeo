@@ -1,6 +1,5 @@
 package cgeo.geocaching.connector.gc;
 
-import butterknife.Bind;
 import cgeo.geocaching.DataStore;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.Image;
@@ -158,6 +157,7 @@ class GCLoggingManager extends AbstractLoggingManager implements LoaderManager.L
         return possibleLogTypes;
     }
 
+    @Override
     public int getPremFavoritePoints() {
         return hasLoaderError ? 0 : premFavcount;
     }
