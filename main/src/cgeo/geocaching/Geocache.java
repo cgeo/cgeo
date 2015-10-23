@@ -472,6 +472,7 @@ public class Geocache implements IWaypoint {
             DataStore.saveVisitDate(geocode);
             logOffline = Boolean.TRUE;
 
+            offlineLogs = DataStore.loadLogOffline(geocode);
             notifyChange();
         } else {
             ActivityMixin.showToast(fromActivity, res.getString(R.string.err_log_post_failed));
@@ -512,6 +513,7 @@ public class Geocache implements IWaypoint {
      */
     public void clearOfflineLog() {
         DataStore.clearLogOffline(geocode);
+        setLogOffline(false);
         notifyChange();
     }
 

@@ -110,6 +110,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
         @Bind(R.id.inventory) protected TextView inventory;
         @Bind(R.id.direction) protected CompassMiniView direction;
         @Bind(R.id.dirimg) protected ImageView dirImg;
+        private CacheListType cacheListType;
         public Geocache cache = null;
 
         public ViewHolder(final View view) {
@@ -354,6 +355,22 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
         }
     }
 
+    public static void updateViewHolder(final ViewHolder holder, final Geocache cache, final Resources res) {
+        if (cache.isFound() && cache.isLogOffline()) {
+            holder.logStatusMark.setImageResource(R.drawable.mark_green_orange);
+            holder.logStatusMark.setVisibility(View.VISIBLE);
+        } else if (cache.isFound()) {
+            holder.logStatusMark.setImageResource(R.drawable.mark_green_more);
+            holder.logStatusMark.setVisibility(View.VISIBLE);
+        } else if (cache.isLogOffline()) {
+            holder.logStatusMark.setImageResource(R.drawable.mark_orange);
+            holder.logStatusMark.setVisibility(View.VISIBLE);
+        } else {
+            holder.logStatusMark.setVisibility(View.GONE);
+        }
+        holder.text.setCompoundDrawablesWithIntrinsicBounds(MapUtils.getCacheMarker(res, cache, holder.cacheListType), null, null, null);
+    }
+
     @Override
     public View getView(final int position, final View rowView, final ViewGroup parent) {
         if (inflater == null) {
@@ -395,19 +412,6 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
         compasses.add(holder.direction);
         holder.direction.setTargetCoords(cache.getCoords());
 
-        if (cache.isFound() && cache.isLogOffline()) {
-            holder.logStatusMark.setImageResource(R.drawable.mark_green_orange);
-            holder.logStatusMark.setVisibility(View.VISIBLE);
-        } else if (cache.isFound()) {
-            holder.logStatusMark.setImageResource(R.drawable.mark_green_more);
-            holder.logStatusMark.setVisibility(View.VISIBLE);
-        } else if (cache.isLogOffline()) {
-            holder.logStatusMark.setImageResource(R.drawable.mark_orange);
-            holder.logStatusMark.setVisibility(View.VISIBLE);
-        } else {
-            holder.logStatusMark.setVisibility(View.GONE);
-        }
-
         Spannable spannable = null;
         if (cache.isDisabled() || cache.isArchived() || CalendarUtils.isPastEvent(cache)) { // strike
             spannable = Spannable.Factory.getInstance().newSpannable(cache.getName());
@@ -426,8 +430,8 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
         else {
             holder.text.setText(cache.getName());
         }
-        holder.text.setCompoundDrawablesWithIntrinsicBounds(MapUtils.getCacheMarker(res, cache, cacheListType), null, null, null);
-
+        holder.cacheListType = cacheListType;
+        updateViewHolder(holder, cache, res);
 
         final int inventorySize = cache.getInventoryItems();
         if (inventorySize > 0) {
