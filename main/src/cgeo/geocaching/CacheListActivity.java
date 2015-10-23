@@ -883,7 +883,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         menu.findItem(R.id.menu_refresh).setVisible(isOffline);
         menu.findItem(R.id.menu_store_cache).setVisible(!isOffline);
 
-        LoggingUI.onPrepareOptionsMenu(menu, cache);
+        LoggingUI.onPrepareOptionsMenu(menu, cache, adapterInfo.targetView);
     }
 
     private void moveCachesToOtherList(final Collection<Geocache> caches) {
