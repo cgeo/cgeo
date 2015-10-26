@@ -75,12 +75,12 @@ public class EditNoteDialog extends DialogFragment {
         final AlertDialog dialog = builder.create();
 
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        final TextView title = ButterKnife.findById(view, R.id.coords_input_title);
+        final TextView title = ButterKnife.findById(view, R.id.dialog_title_title);
         if (title != null) {
             title.setText(R.string.cache_personal_note);
             title.setVisibility(View.VISIBLE);
         }
-        final ImageButton cancel = ButterKnife.findById(view, R.id.coords_input_cancel);
+        final ImageButton cancel = ButterKnife.findById(view, R.id.dialog_title_cancel);
         if (cancel != null) {
             cancel.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -90,7 +90,7 @@ public class EditNoteDialog extends DialogFragment {
             });
             cancel.setVisibility(View.VISIBLE);
         }
-        final ImageButton done = ButterKnife.findById(view, R.id.coords_input_done);
+        final ImageButton done = ButterKnife.findById(view, R.id.dialog_title_done);
         if (done != null) {
             done.setOnClickListener(new View.OnClickListener() {
                 @Override
