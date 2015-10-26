@@ -741,6 +741,8 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             return;
         }
 
+        final ScrollView scroll = ButterKnife.findById(this, R.id.detailScroll);
+
         cache = search.getFirstCacheFromResult(LoadFlags.LOAD_ALL_DB_ONLY);
 
         if (cache == null) {
@@ -764,6 +766,17 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         progress.dismiss();
 
         Settings.addCacheToHistory(cache.getGeocode());
+        final ScrollView scrollNew = ButterKnife.findById(this, R.id.detailScroll);
+        if ((scroll != null) && (scrollNew != null)) {
+            final int lastScrollPos = scroll.getScrollY();
+            scrollNew.post(new Runnable() {
+            @Override
+            public void run() {
+                scrollNew.scrollTo(0, lastScrollPos);
+            }
+        });
+
+        }
     }
 
     /**
