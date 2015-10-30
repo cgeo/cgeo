@@ -1765,7 +1765,7 @@ public final class GCParser {
 
                         final ArrayNode images = (ArrayNode) entry.get("Images");
                         for (final JsonNode image: images) {
-                            final String url = "http://imgcdn.geocaching.com/cache/log/large/" + image.path("FileName").asText();
+                            final String url = "https://imgcdn.geocaching.com/cache/log/large/" + image.path("FileName").asText();
                             final String title = TextUtils.removeControlCharacters(image.path("Name").asText());
                             final String description = image.path("Descr").asText();
                             final Image logImage = new Image.Builder().setUrl(url).setTitle(title).setDescription(description).build();
