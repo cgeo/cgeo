@@ -22,7 +22,7 @@ public class TravelBugConnectorTest extends TestCase {
     public static void testGetUrl() {
         final Trackable trackable = new Trackable();
         trackable.setGeocode("TB2345");
-        assertThat(getConnector().getUrl(trackable)).isEqualTo("http://www.geocaching.com//track/details.aspx?tracker=TB2345");
+        assertThat(getConnector().getUrl(trackable)).isEqualTo("https://www.geocaching.com//track/details.aspx?tracker=TB2345");
     }
 
     public static void testOnlineSearchBySecretCode() {
@@ -47,7 +47,7 @@ public class TravelBugConnectorTest extends TestCase {
         assertThat(TravelBugConnector.getInstance().getTrackableCodeFromUrl("http://coord.info/TB1234")).isEqualTo("TB1234");
         assertThat(TravelBugConnector.getInstance().getTrackableCodeFromUrl("http://www.coord.info/TB1234")).isEqualTo("TB1234");
         assertThat(TravelBugConnector.getInstance().getTrackableCodeFromUrl("http://geocaching.com/track/details.aspx?tracker=TB1234")).isEqualTo("TB1234");
-        assertThat(TravelBugConnector.getInstance().getTrackableCodeFromUrl("http://www.geocaching.com/track/details.aspx?tracker=TB1234")).isEqualTo("TB1234");
+        assertThat(TravelBugConnector.getInstance().getTrackableCodeFromUrl("https://www.geocaching.com/track/details.aspx?tracker=TB1234")).isEqualTo("TB1234");
 
         // do not match coord.info URLs of caches
         assertThat(TravelBugConnector.getInstance().getTrackableCodeFromUrl("http://coord.info/GC1234")).isNull();

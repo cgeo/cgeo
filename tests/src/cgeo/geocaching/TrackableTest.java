@@ -33,7 +33,7 @@ public class TrackableTest extends AndroidTestCase {
 
     public static void testTrackableUrl() {
         final Trackable trackable = createTrackable("TB1234");
-        assertThat(trackable.getUrl()).isEqualTo("http://www.geocaching.com//track/details.aspx?tracker=TB1234");
+        assertThat(trackable.getUrl()).isEqualTo("https://www.geocaching.com//track/details.aspx?tracker=TB1234");
     }
 
     public static void testGeokretUrl() {

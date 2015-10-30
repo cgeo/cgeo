@@ -85,7 +85,7 @@ public class TrackablesTest extends AbstractResourceInstrumentationTestCase {
         final String goal = trackable.getGoal();
         assertThat(goal).isNotNull();
         assertThat(goal).doesNotContain("..");
-        assertThat(goal).contains("href=\"http://www.geocaching.com/seek/cache_details.aspx?wp=GC3B7PD#\"");
+        assertThat(goal).contains("href=\"https://www.geocaching.com/seek/cache_details.aspx?wp=GC3B7PD#\"");
     }
 
     public void testParseSpeedManagerCompressedTrackable() {

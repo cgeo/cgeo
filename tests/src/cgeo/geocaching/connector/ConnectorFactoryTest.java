@@ -71,7 +71,7 @@ public class ConnectorFactoryTest extends AbstractResourceInstrumentationTestCas
 
         assertThat(GCConnector.getInstance().getGeocodeFromUrl("http://coord.info/GC12ABC")).isEqualTo("GC12ABC");
         assertThat(GCConnector.getInstance().getGeocodeFromUrl("http://www.coord.info/GC12ABC")).isEqualTo("GC12ABC");
-        assertThat(GCConnector.getInstance().getGeocodeFromUrl("http://www.geocaching.com/geocache/GC12ABC_die-muhlen-im-schondratal-muhle-munchau")).isEqualTo("GC12ABC");
+        assertThat(GCConnector.getInstance().getGeocodeFromUrl("https://www.geocaching.com/geocache/GC12ABC_die-muhlen-im-schondratal-muhle-munchau")).isEqualTo("GC12ABC");
         assertThat(GCConnector.getInstance().getGeocodeFromUrl("http://geocaching.com/geocache/GC12ABC_die-muhlen-im-schondratal-muhle-munchau")).isEqualTo("GC12ABC");
 
         // trackable URLs
@@ -91,7 +91,7 @@ public class ConnectorFactoryTest extends AbstractResourceInstrumentationTestCas
         assertThat(ConnectorFactory.getTrackableFromURL("http://coord.info/TB1234")).isEqualTo("TB1234");
         assertThat(ConnectorFactory.getTrackableFromURL("http://www.coord.info/TB1234")).isEqualTo("TB1234");
         assertThat(ConnectorFactory.getTrackableFromURL("http://geocaching.com/track/details.aspx?tracker=TB1234")).isEqualTo("TB1234");
-        assertThat(ConnectorFactory.getTrackableFromURL("http://www.geocaching.com/track/details.aspx?tracker=TB1234")).isEqualTo("TB1234");
+        assertThat(ConnectorFactory.getTrackableFromURL("https://www.geocaching.com/track/details.aspx?tracker=TB1234")).isEqualTo("TB1234");
 
         // cache URLs
         assertThat(ConnectorFactory.getTrackableFromURL("http://coord.info/GC1234")).isNull();
