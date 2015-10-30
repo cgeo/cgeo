@@ -54,7 +54,7 @@ class GCLoggingManager extends AbstractLoggingManager implements LoaderManager.L
             ActivityMixin.showToast(activity, activity.getResources().getString(R.string.err_login));
             return null;
         }
-        return new UrlLoader(activity.getBaseContext(), "http://www.geocaching.com/seek/log.aspx", new Parameters("ID", cache.getCacheId()));
+        return new UrlLoader(activity.getBaseContext(), "https://www.geocaching.com/seek/log.aspx", new Parameters("ID", cache.getCacheId()));
     }
 
     @Override

@@ -45,11 +45,11 @@ public class TravelBugConnector extends AbstractTrackableConnector {
     @Override
     @NonNull
     public String getUrl(@NonNull final Trackable trackable) {
-        return "http://www.geocaching.com//track/details.aspx?tracker=" + trackable.getGeocode();
+        return "https://www.geocaching.com//track/details.aspx?tracker=" + trackable.getGeocode();
     }
 
     static String getTravelbugViewstates(final String guid) {
-        return Network.getResponseData(Network.getRequest("http://www.geocaching.com/track/log.aspx", new Parameters("wid", guid)));
+        return Network.getResponseData(Network.getRequest("https://www.geocaching.com/track/log.aspx", new Parameters("wid", guid)));
     }
 
     @Override

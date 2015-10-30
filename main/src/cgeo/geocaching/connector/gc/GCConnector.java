@@ -55,7 +55,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     private static final String CACHE_URL_SHORT = "http://coord.info/";
     // Double slash is used to force open in browser
     @NonNull
-    private static final String CACHE_URL_LONG = "http://www.geocaching.com/seek/cache_details.aspx?wp=";
+    private static final String CACHE_URL_LONG = "https://www.geocaching.com/seek/cache_details.aspx?wp=";
     /**
      * Pocket queries downloaded from the website use a numeric prefix. The pocket query creator Android app adds a
      * verbatim "pocketquery" prefix.
@@ -425,7 +425,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
 
             @Override
             public void call(final cgeo.geocaching.connector.UserAction.Context context) {
-                context.activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.geocaching.com/profile/?u=" + Network.encode(context.userName))));
+                context.activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.geocaching.com/profile/?u=" + Network.encode(context.userName))));
             }
         }));
         actions.add(new UserAction(R.string.user_menu_send_message, new Action1<UserAction.Context>() {
@@ -433,7 +433,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
             @Override
             public void call(final cgeo.geocaching.connector.UserAction.Context context) {
                 try {
-                    context.activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.geocaching.com/email/?u=" + Network.encode(context.userName))));
+                    context.activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.geocaching.com/email/?u=" + Network.encode(context.userName))));
                 } catch (final ActivityNotFoundException e) {
                     Log.e("Cannot find suitable activity", e);
                     ActivityMixin.showToast(context.activity, R.string.err_application_no);
@@ -463,7 +463,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
             }
         }
 
-        final String uri = "http://www.geocaching.com/my/uploadfieldnotes.aspx";
+        final String uri = "https://www.geocaching.com/my/uploadfieldnotes.aspx";
         final String page = GCLogin.getInstance().getRequestLogged(uri, null);
 
         if (StringUtils.isBlank(page)) {

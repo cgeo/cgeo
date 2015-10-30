@@ -38,7 +38,7 @@ public class GCLogin extends AbstractLogin {
 
     private final static String ENGLISH = "<a href=\"#\">English</a>";
 
-    private static final String LANGUAGE_CHANGE_URI = "http://www.geocaching.com/my/souvenirs.aspx";
+    private static final String LANGUAGE_CHANGE_URI = "https://www.geocaching.com/my/souvenirs.aspx";
 
     private GCLogin() {
         // singleton
@@ -221,7 +221,7 @@ public class GCLogin extends AbstractLogin {
         if (previousPage != null && previousPage.contains(ENGLISH)) {
             Log.i("Geocaching.com language already set to English");
             // get find count
-            getLoginStatus(Network.getResponseData(Network.getRequest("http://www.geocaching.com/email/")));
+            getLoginStatus(Network.getResponseData(Network.getRequest("https://www.geocaching.com/email/")));
         } else {
             final String page = Network.getResponseData(Network.getRequest(LANGUAGE_CHANGE_URI));
             getLoginStatus(page);
@@ -244,7 +244,7 @@ public class GCLogin extends AbstractLogin {
 
     public Observable<Drawable> downloadAvatar() {
         try {
-            final String responseData = StringUtils.defaultString(Network.getResponseData(Network.getRequest("http://www.geocaching.com/my/")));
+            final String responseData = StringUtils.defaultString(Network.getResponseData(Network.getRequest("https://www.geocaching.com/my/")));
             final String profile = TextUtils.replaceWhitespace(responseData);
 
             setActualCachesFound(Integer.parseInt(removeDotAndComma(TextUtils.getMatch(profile, GCConstants.PATTERN_CACHES_FOUND, true, "-1"))));
