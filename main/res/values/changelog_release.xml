@@ -2,7 +2,8 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-    <b>Next bugfix release:</b>\n
+    <b>2015.10.30:</b>\n
+    · Fix: Fix cache logging problem on geocaching.com due to web site change\n
     · Fix: Fixed crashes when selecting log image\n
     · Fix: Fixed crashes when checking credentials in settings\n
     · Fix: Final flag not shown in lists when cache has self defined final waypoint\n
