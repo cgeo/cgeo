@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
 public final class GCConstants {
 
     static final String GC_URL = "https://www.geocaching.com/";
-    private static final String GC_TILE_URL = "http://tiles.geocaching.com/";
+    private static final String GC_TILE_URL = "https://tiles.geocaching.com/";
     /** Live Map */
     final static @NonNull String URL_LIVE_MAP = GC_URL + "map/default.aspx";
     /** Live Map pop-up */

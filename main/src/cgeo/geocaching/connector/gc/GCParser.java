@@ -38,6 +38,8 @@ import cgeo.geocaching.utils.RxUtils;
 import cgeo.geocaching.utils.SynchronizedDateFormat;
 import cgeo.geocaching.utils.TextUtils;
 
+import ch.boye.httpclientandroidlib.HttpResponse;
+
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -48,6 +50,14 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+
+import rx.Observable;
+import rx.Observable.OnSubscribe;
+import rx.Subscriber;
+import rx.functions.Action1;
+import rx.functions.Func0;
+import rx.functions.Func2;
+import rx.schedulers.Schedulers;
 
 import android.net.Uri;
 import android.text.Html;
@@ -66,15 +76,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 import java.util.regex.Pattern;
-
-import ch.boye.httpclientandroidlib.HttpResponse;
-import rx.Observable;
-import rx.Observable.OnSubscribe;
-import rx.Subscriber;
-import rx.functions.Action1;
-import rx.functions.Func0;
-import rx.functions.Func2;
-import rx.schedulers.Schedulers;
 
 public final class GCParser {
     @NonNull
@@ -1759,7 +1760,7 @@ public final class GCParser {
 
                         final ArrayNode images = (ArrayNode) entry.get("Images");
                         for (final JsonNode image: images) {
-                            final String url = "http://imgcdn.geocaching.com/cache/log/large/" + image.path("FileName").asText();
+                            final String url = "https://imgcdn.geocaching.com/cache/log/large/" + image.path("FileName").asText();
                             final String title = TextUtils.removeControlCharacters(image.path("Name").asText());
                             final Image logImage = new Image.Builder().setUrl(url).setTitle(title).build();
                             logDone.addLogImage(logImage);
