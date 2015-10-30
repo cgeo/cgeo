@@ -33,7 +33,7 @@
         <item>1024</item>
     </integer-array>
     
-    <string name="settings_gc_legal_note_url" translatable="false">http://www.geocaching.com/about/termsofuse.aspx</string>
+    <string name="settings_gc_legal_note_url" translatable="false">https://www.geocaching.com/about/termsofuse.aspx</string>
     <string name="settings_offline_maps_url" translatable="false">http://faq.cgeo.org/#osm-get-maps</string>
     <string name="settings_themes_url" translatable="false">http://faq.cgeo.org/#osm-use-themes</string>
     <string name="settings_send2cgeo_url" translatable="false">http://send2.cgeo.org/</string>
@@ -53,8 +53,8 @@
     · <a href="http://www.jaytech.cz/">Jan Žatecký</a> (graphic)\n
     · <a href="http://joachim-wilke.de/">JoWi24</a> (code)\n
     · <a href="http://github.com/koem">Karsten Priegnitz</a> (code, artwork computation)\n
-    · <a href="http://www.geocaching.com/profile/?guid=231070d8-b6f4-4d14-8d5a-b8bdcb19b78e">KiwiStone</a> (code)\n
-    · <a href="http://www.geocaching.com/email/?guid=d11a3e3d-7db0-4d43-87f2-7893238844a6">Lineflyer</a> (tester, support)\n
+    · <a href="https://www.geocaching.com/profile/?guid=231070d8-b6f4-4d14-8d5a-b8bdcb19b78e">KiwiStone</a> (code)\n
+    · <a href="https://www.geocaching.com/email/?guid=d11a3e3d-7db0-4d43-87f2-7893238844a6">Lineflyer</a> (tester, support)\n
     · marco-dev (code)\n
     · Mathieu Alorent (code)\n
     · MichielK (code)\n

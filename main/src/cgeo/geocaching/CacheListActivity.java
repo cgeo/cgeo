@@ -226,7 +226,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             @Override
             public void onClick(final DialogInterface dialog, final int id) {
                 Cookies.clearCookies();
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.geocaching.com/software/agreement.aspx?ID=0")));
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.geocaching.com/software/agreement.aspx?ID=0")));
             }
         });
 

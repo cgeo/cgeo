@@ -340,7 +340,7 @@ public final class GCParser {
                     Log.w("Loc download url not found");
                 } else {
 
-                    final String coordinates = Network.getResponseData(Network.postRequest("http://www.geocaching.com/seek/" + queryUrl, params), false);
+                    final String coordinates = Network.getResponseData(Network.postRequest("https://www.geocaching.com/seek/" + queryUrl, params), false);
 
                     if (StringUtils.contains(coordinates, "You have not agreed to the license agreement. The license agreement is required before you can start downloading GPX or LOC files from Geocaching.com")) {
                         Log.i("User has not agreed to the license agreement. Can\'t download .loc file.");
@@ -875,7 +875,7 @@ public final class GCParser {
     private static SearchResult searchByAny(@NonNull final CacheType cacheType, final boolean my, final boolean showCaptcha, final Parameters params, final RecaptchaReceiver recaptchaReceiver) {
         insertCacheType(params, cacheType);
 
-        final String uri = "http://www.geocaching.com/seek/nearest.aspx";
+        final String uri = "https://www.geocaching.com/seek/nearest.aspx";
         final Parameters paramsWithF = addFToParams(params, my);
         final String fullUri = uri + "?" + paramsWithF;
         final String page = GCLogin.getInstance().getRequestLogged(uri, paramsWithF);
@@ -973,7 +973,7 @@ public final class GCParser {
             params.put("id", id);
         }
 
-        final String page = GCLogin.getInstance().getRequestLogged("http://www.geocaching.com/track/details.aspx", params);
+        final String page = GCLogin.getInstance().getRequestLogged("https://www.geocaching.com/track/details.aspx", params);
 
         if (StringUtils.isBlank(page)) {
             Log.e("GCParser.searchTrackable: No data from server");
@@ -999,7 +999,7 @@ public final class GCParser {
         public Observable<List<PocketQueryList>> call() {
             final Parameters params = new Parameters();
 
-            final String page = GCLogin.getInstance().getRequestLogged("http://www.geocaching.com/pocket/default.aspx", params);
+            final String page = GCLogin.getInstance().getRequestLogged("https://www.geocaching.com/pocket/default.aspx", params);
 
             if (StringUtils.isBlank(page)) {
                 Log.e("GCParser.searchPocketQueryList: No data from server");
@@ -1102,7 +1102,7 @@ public final class GCParser {
                     "ctl00$ContentBody$LogBookPanel1$uxTrackables$hdnCurrentFilter", "");
         }
 
-        final String uri = new Uri.Builder().scheme("http").authority("www.geocaching.com").path("/seek/log.aspx").encodedQuery("ID=" + cacheid).build().toString();
+        final String uri = new Uri.Builder().scheme("https").authority("www.geocaching.com").path("/seek/log.aspx").encodedQuery("ID=" + cacheid).build().toString();
         final GCLogin gcLogin = GCLogin.getInstance();
         String page = gcLogin.postRequestLogged(uri, params);
         if (!gcLogin.getLoginStatus(page)) {
@@ -1202,7 +1202,7 @@ public final class GCParser {
      * @return status code to indicate success or failure
      */
     static ImmutablePair<StatusCode, String> uploadLogImage(final String logId, @NonNull final Image image) {
-        final String uri = new Uri.Builder().scheme("http").authority("www.geocaching.com").path("/seek/upload.aspx").encodedQuery("LID=" + logId).build().toString();
+        final String uri = new Uri.Builder().scheme("https").authority("www.geocaching.com").path("/seek/upload.aspx").encodedQuery("LID=" + logId).build().toString();
 
         final String page = GCLogin.getInstance().getRequestLogged(uri, null);
         if (StringUtils.isBlank(page)) {
@@ -1289,7 +1289,7 @@ public final class GCParser {
                 "ctl00$ContentBody$LogBookPanel1$LogButton", "Submit Log Entry",
                 "ctl00$ContentBody$uxVistOtherListingGC", "");
 
-        final String uri = new Uri.Builder().scheme("http").authority("www.geocaching.com").path("/track/log.aspx").encodedQuery("wid=" + tbid).build().toString();
+        final String uri = new Uri.Builder().scheme("https").authority("www.geocaching.com").path("/track/log.aspx").encodedQuery("wid=" + tbid).build().toString();
         final String page = GCLogin.getInstance().postRequestLogged(uri, params);
         if (!GCLogin.getInstance().getLoginStatus(page)) {
             Log.e("GCParser.postLogTrackable: Cannot log in geocaching");
@@ -1319,7 +1319,7 @@ public final class GCParser {
      * @return <code>false</code> if an error occurred, <code>true</code> otherwise
      */
     static boolean addToWatchlist(final Geocache cache) {
-        final String uri = "http://www.geocaching.com/my/watchlist.aspx?w=" + cache.getCacheId();
+        final String uri = "https://www.geocaching.com/my/watchlist.aspx?w=" + cache.getCacheId();
         final String page = GCLogin.getInstance().postRequestLogged(uri, null);
 
         if (StringUtils.isBlank(page)) {
@@ -1345,7 +1345,7 @@ public final class GCParser {
      * @return <code>false</code> if an error occurred, <code>true</code> otherwise
      */
     static boolean removeFromWatchlist(final Geocache cache) {
-        final String uri = "http://www.geocaching.com/my/watchlist.aspx?ds=1&action=rem&id=" + cache.getCacheId();
+        final String uri = "https://www.geocaching.com/my/watchlist.aspx?ds=1&action=rem&id=" + cache.getCacheId();
         String page = GCLogin.getInstance().postRequestLogged(uri, null);
 
         if (StringUtils.isBlank(page)) {
@@ -1397,7 +1397,7 @@ public final class GCParser {
         params.put("log", log);
         params.put("numlogs", "0");
 
-        return GCLogin.getInstance().getRequestLogged("http://www.geocaching.com/seek/cache_details.aspx", params);
+        return GCLogin.getInstance().getRequestLogged("https://www.geocaching.com/seek/cache_details.aspx", params);
     }
 
     /**
@@ -1419,7 +1419,7 @@ public final class GCParser {
             return false;
         }
 
-        final String uri = "http://www.geocaching.com/datastore/favorites.svc/update?u=" + userToken + "&f=" + Boolean.toString(add);
+        final String uri = "https://www.geocaching.com/datastore/favorites.svc/update?u=" + userToken + "&f=" + Boolean.toString(add);
 
         final HttpResponse response = Network.postRequest(uri, null);
 
@@ -1703,7 +1703,7 @@ public final class GCParser {
                 if (logType != Logs.ALL) {
                     params.add(logType.getParamName(), Boolean.toString(Boolean.TRUE));
                 }
-                final HttpResponse response = Network.getRequest("http://www.geocaching.com/seek/geocache.logbook", params);
+                final HttpResponse response = Network.getRequest("https://www.geocaching.com/seek/geocache.logbook", params);
                 if (response == null) {
                     Log.e("GCParser.loadLogsFromDetails: cannot log logs, response is null");
                     return Observable.empty();
@@ -1992,7 +1992,7 @@ public final class GCParser {
 
         final String uriSuffix = wpt != null ? "SetUserCoordinate" : "ResetUserCoordinate";
 
-        final String uriPrefix = "http://www.geocaching.com/seek/cache_details.aspx/";
+        final String uriPrefix = "https://www.geocaching.com/seek/cache_details.aspx/";
         final HttpResponse response = Network.postJsonRequest(uriPrefix + uriSuffix, jo);
 
         if (response != null && response.getStatusLine().getStatusCode() == 200) {
@@ -2015,7 +2015,7 @@ public final class GCParser {
 
         final String uriSuffix = "SetUserCacheNote";
 
-        final String uriPrefix = "http://www.geocaching.com/seek/cache_details.aspx/";
+        final String uriPrefix = "https://www.geocaching.com/seek/cache_details.aspx/";
         final HttpResponse response = Network.postJsonRequest(uriPrefix + uriSuffix, jo);
 
         if (response != null && response.getStatusLine().getStatusCode() == 200) {
@@ -2028,7 +2028,7 @@ public final class GCParser {
     }
 
     static boolean ignoreCache(@NonNull final Geocache cache) {
-        final String uri = "http://www.geocaching.com/bookmarks/ignore.aspx?guid=" + cache.getGuid() + "&WptTypeID=" + cache.getType().wptTypeId;
+        final String uri = "https://www.geocaching.com/bookmarks/ignore.aspx?guid=" + cache.getGuid() + "&WptTypeID=" + cache.getType().wptTypeId;
         final String page = GCLogin.getInstance().postRequestLogged(uri, null);
 
         if (StringUtils.isBlank(page)) {
