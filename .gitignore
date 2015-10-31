@@ -27,3 +27,4 @@ main/build/
 mapswithme-api/build/
 build
 main/usage.txt
+main/gradle.properties
