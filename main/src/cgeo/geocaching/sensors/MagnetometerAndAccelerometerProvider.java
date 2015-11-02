@@ -1,0 +1,96 @@
+package cgeo.geocaching.sensors;
+
+import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.RxUtils;
+
+import rx.Observable;
+import rx.Observable.OnSubscribe;
+import rx.Subscriber;
+import rx.functions.Action0;
+import rx.subscriptions.Subscriptions;
+
+import android.content.Context;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
+
+public class MagnetometerAndAccelerometerProvider {
+
+    private MagnetometerAndAccelerometerProvider() {
+        // Utility class, not to be instantiated
+    }
+
+    public static Observable<Float> create(final Context context) {
+
+        final SensorManager sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
+        final Sensor accelerometerSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        final Sensor magenetometerSensor = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
+        if (magenetometerSensor == null || accelerometerSensor == null) {
+            return Observable.error(new RuntimeException("no magenetic or accelerometer sensor"));
+        }
+        Log.d("MagnetometerAndAccelerometerProvider: sensors found");
+        final Observable<Float> observable = Observable.create(new OnSubscribe<Float>() {
+            private final float[] lastAccelerometer = new float[3];
+            private final float[] lastMagnetometer = new float[3];
+            private boolean lastAccelerometerSet = false;
+            private boolean lastMagnetometerSet = false;
+            private final float[] rotateMatrix = new float[9];
+            private final float[] orientation = new float[3];
+            @Override
+            public void call(final Subscriber<? super Float> subscriber) {
+                final SensorEventListener listener = new SensorEventListener() {
+                    @Override
+                    public void onSensorChanged(final SensorEvent sensorEvent) {
+
+                        if(sensorEvent.sensor.equals(accelerometerSensor)) {
+                            System.arraycopy(sensorEvent.values, 0, lastAccelerometer, 0, sensorEvent.values.length);
+                            lastAccelerometerSet = true;
+                        } else if(sensorEvent.sensor.equals(magenetometerSensor)){
+                            System.arraycopy(sensorEvent.values, 0, lastMagnetometer, 0, sensorEvent.values.length);
+                            lastMagnetometerSet = true;
+                        }
+                        if(lastAccelerometerSet && lastMagnetometerSet) {
+                            SensorManager.getRotationMatrix(rotateMatrix, null, lastAccelerometer, lastMagnetometer);
+                            SensorManager.getOrientation(rotateMatrix, orientation);
+                            subscriber.onNext((float) (orientation[0] * 180 / Math.PI));
+                        }
+                    }
+
+                    @Override
+                    public void onAccuracyChanged(final Sensor sensor, final int i) {
+                        /*
+                         * There is a bug in Android, which apparently causes this method to be called every
+                         * time the sensor _value_ changed, even if the _accuracy_ did not change. Do not have any code in here.
+                         *
+                         * See for example https://code.google.com/p/android/issues/detail?id=14792
+                         */
+                    }
+                };
+                Log.d("MagnetometerAndAccelerometerProvider: registering listener");
+                sensorManager.registerListener(listener, accelerometerSensor, SensorManager.SENSOR_DELAY_NORMAL);
+                sensorManager.registerListener(listener, magenetometerSensor, SensorManager.SENSOR_DELAY_NORMAL);
+                subscriber.add(Subscriptions.create(new Action0() {
+                    @Override
+                    public void call() {
+                        RxUtils.looperCallbacksWorker.schedule(new Action0() {
+                            @Override
+                            public void call() {
+                                Log.d("MagnetometerAndAccelerometerProvider: unregistering listener");
+                                sensorManager.unregisterListener(listener, accelerometerSensor);
+                                sensorManager.unregisterListener(listener, magenetometerSensor);
+                            }
+                        });
+                    }
+                }));
+            }
+        });
+        return observable.subscribeOn(RxUtils.looperCallbacksScheduler).share().onBackpressureLatest();
+    }
+
+    public static boolean hasMagnetometerAndAccelerometerSensors(final Context context) {
+        final SensorManager sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
+        return (sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD) != null) &&
+                (sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER) != null);
+    }
+}
