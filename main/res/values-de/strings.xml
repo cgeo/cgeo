@@ -1316,4 +1316,5 @@
   </plurals>
   <string name="command_rename_list_result">Liste umbenannt</string>
   <string name="command_delete_list_result">Liste gelöscht</string>
+  <string name="fav_points_remaining">"Füge den Cache zu Favoriten hinzu (%s verfügbar)"</string>
 </resources>

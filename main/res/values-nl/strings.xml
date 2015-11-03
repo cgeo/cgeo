@@ -1300,6 +1300,7 @@
   <string name="trackable_title_log_without_geocode">Geocode niet ingesteld</string>
   <string name="trackable_log_without_geocode">Je gaat een log zonder Geocode verzenden. Het wordt aanbevolen een Geocode in te stellen. Wil je nu een Geocode toevoegen?</string>
   <string name="do_not_ask_me_again">Vraag mij niet meer</string>
+  <string name="geokrety_parsing_failed">Niet gelukt om het GeoKrety antwoord te verwerken.</string>
   <string name="settings_map_direction">Toon richting</string>
   <string name="settings_summary_map_direction">Toon een richtingslijn naar het navigatiedoel</string>
   <string name="map_direction">Toon richting</string>
