@@ -102,9 +102,9 @@ public class Sensors {
 
         // On some devices, the orientation sensor (Xperia and S4 running Lollipop) seems to have been deprecated for real.
         // Use the rotation sensor if it is available unless the orientatation sensor is forced by the user.
-        // after updating Moto G there is no rotation sensor anymore. Use magnetic field and accelerometer instead.
+        // After updating Moto G there is no rotation sensor anymore. Use magnetic field and accelerometer instead.
         final Observable<Float> sensorDirectionObservable;
-        if(Settings.useOrientationSensor(app)) {
+        if (Settings.useOrientationSensor(app)) {
             sensorDirectionObservable = OrientationProvider.create(app);
         } else if (RotationProvider.hasRotationSensor(app)) {
             sensorDirectionObservable = RotationProvider.create(app);

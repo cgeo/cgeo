@@ -25,8 +25,8 @@ public class MagnetometerAndAccelerometerProvider {
 
         final SensorManager sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
         final Sensor accelerometerSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-        final Sensor magenetometerSensor = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
-        if (magenetometerSensor == null || accelerometerSensor == null) {
+        final Sensor magnetometerSensor = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
+        if (magnetometerSensor == null || accelerometerSensor == null) {
             return Observable.error(new RuntimeException("no magenetic or accelerometer sensor"));
         }
         Log.d("MagnetometerAndAccelerometerProvider: sensors found");
@@ -43,14 +43,14 @@ public class MagnetometerAndAccelerometerProvider {
                     @Override
                     public void onSensorChanged(final SensorEvent sensorEvent) {
 
-                        if(sensorEvent.sensor.equals(accelerometerSensor)) {
+                        if (sensorEvent.sensor.equals(accelerometerSensor)) {
                             System.arraycopy(sensorEvent.values, 0, lastAccelerometer, 0, sensorEvent.values.length);
                             lastAccelerometerSet = true;
-                        } else if(sensorEvent.sensor.equals(magenetometerSensor)){
+                        } else if (sensorEvent.sensor.equals(magnetometerSensor)){
                             System.arraycopy(sensorEvent.values, 0, lastMagnetometer, 0, sensorEvent.values.length);
                             lastMagnetometerSet = true;
                         }
-                        if(lastAccelerometerSet && lastMagnetometerSet) {
+                        if (lastAccelerometerSet && lastMagnetometerSet) {
                             SensorManager.getRotationMatrix(rotateMatrix, null, lastAccelerometer, lastMagnetometer);
                             SensorManager.getOrientation(rotateMatrix, orientation);
                             subscriber.onNext((float) (orientation[0] * 180 / Math.PI));
@@ -69,7 +69,7 @@ public class MagnetometerAndAccelerometerProvider {
                 };
                 Log.d("MagnetometerAndAccelerometerProvider: registering listener");
                 sensorManager.registerListener(listener, accelerometerSensor, SensorManager.SENSOR_DELAY_NORMAL);
-                sensorManager.registerListener(listener, magenetometerSensor, SensorManager.SENSOR_DELAY_NORMAL);
+                sensorManager.registerListener(listener, magnetometerSensor, SensorManager.SENSOR_DELAY_NORMAL);
                 subscriber.add(Subscriptions.create(new Action0() {
                     @Override
                     public void call() {
@@ -78,7 +78,7 @@ public class MagnetometerAndAccelerometerProvider {
                             public void call() {
                                 Log.d("MagnetometerAndAccelerometerProvider: unregistering listener");
                                 sensorManager.unregisterListener(listener, accelerometerSensor);
-                                sensorManager.unregisterListener(listener, magenetometerSensor);
+                                sensorManager.unregisterListener(listener, magnetometerSensor);
                             }
                         });
                     }
