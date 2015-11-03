@@ -50,7 +50,9 @@ public class Sensors {
     private Sensors() {
         gpsStatusObservable = GpsStatusProvider.create(app).replay(1).refCount().onBackpressureLatest();
         final Context context = CgeoApplication.getInstance().getApplicationContext();
-        hasCompassCapabilities = RotationProvider.hasRotationSensor(context) || OrientationProvider.hasOrientationSensor(context);
+        hasCompassCapabilities = RotationProvider.hasRotationSensor(context) ||
+                                OrientationProvider.hasOrientationSensor(context) ||
+                                MagnetometerAndAccelerometerProvider.hasMagnetometerAndAccelerometerSensors(context);
     }
 
     public static final Sensors getInstance() {
@@ -100,7 +102,16 @@ public class Sensors {
 
         // On some devices, the orientation sensor (Xperia and S4 running Lollipop) seems to have been deprecated for real.
         // Use the rotation sensor if it is available unless the orientatation sensor is forced by the user.
-        final Observable<Float> sensorDirectionObservable = Settings.useOrientationSensor(app) ? OrientationProvider.create(app) : RotationProvider.create(app);
+        // After updating Moto G there is no rotation sensor anymore. Use magnetic field and accelerometer instead.
+        final Observable<Float> sensorDirectionObservable;
+        if (Settings.useOrientationSensor(app)) {
+            sensorDirectionObservable = OrientationProvider.create(app);
+        } else if (RotationProvider.hasRotationSensor(app)) {
+            sensorDirectionObservable = RotationProvider.create(app);
+        } else {
+            sensorDirectionObservable = MagnetometerAndAccelerometerProvider.create(app);
+        }
+
         final Observable<Float> magneticDirectionObservable = sensorDirectionObservable.onErrorResumeNext(new Func1<Throwable, Observable<Float>>() {
             @Override
             public Observable<Float> call(final Throwable throwable) {
