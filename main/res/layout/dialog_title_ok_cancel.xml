@@ -2,13 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:paddingLeft="5dp"
     android:paddingRight="5dp"
     style="@style/action_bar">
 
     <TextView
-        android:id="@+id/coords_input_title"
+        android:id="@+id/dialog_title_title"
         style="@style/action_bar_title"
         android:visibility="gone" />
 
@@ -16,7 +16,7 @@
         android:visibility="gone"/>
     
     <ImageButton
-        android:id="@+id/coords_input_cancel"
+        android:id="@+id/dialog_title_cancel"
         style="@style/action_bar_action"
         android:src="@drawable/ic_menu_cancel_holo_dark"
         android:visibility="gone" />
@@ -25,7 +25,7 @@
         android:visibility="gone"/>
     
     <ImageButton
-        android:id="@+id/coords_input_done"
+        android:id="@+id/dialog_title_done"
         style="@style/action_bar_action"
         android:src="@drawable/ic_menu_done_holo_dark"
         android:visibility="gone" />

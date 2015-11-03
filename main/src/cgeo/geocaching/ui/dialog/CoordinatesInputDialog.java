@@ -125,17 +125,17 @@ public class CoordinatesInputDialog extends DialogFragment {
         if (!noTitle) {
             dialog.setTitle(R.string.cache_coordinates);
         } else {
-            final TextView title = ButterKnife.findById(v, R.id.coords_input_title);
+            final TextView title = ButterKnife.findById(v, R.id.dialog_title_title);
             if (title != null) {
                 title.setText(R.string.cache_coordinates);
                 title.setVisibility(View.VISIBLE);
             }
-            final ImageButton cancel = ButterKnife.findById(v, R.id.coords_input_cancel);
+            final ImageButton cancel = ButterKnife.findById(v, R.id.dialog_title_cancel);
             if (cancel != null) {
                 cancel.setOnClickListener(new InputCancelListener());
                 cancel.setVisibility(View.VISIBLE);
             }
-            final ImageButton done = ButterKnife.findById(v, R.id.coords_input_done);
+            final ImageButton done = ButterKnife.findById(v, R.id.dialog_title_done);
             if (done != null) {
                 done.setOnClickListener(inputdone);
                 done.setVisibility(View.VISIBLE);

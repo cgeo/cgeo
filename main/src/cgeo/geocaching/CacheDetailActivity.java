@@ -612,6 +612,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             case R.id.menu_export_fieldnotes:
                 new FieldnoteExport().export(Collections.singletonList(cache), this);
                 return true;
+            case R.id.menu_edit_fieldnote:
+                editPersonalNote(cache, CacheDetailActivity.this);
+                return true;
             default:
                 if (NavigationAppFactory.onMenuItemSelected(item, this, cache)) {
                     return true;
@@ -738,6 +741,8 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             return;
         }
 
+        final ScrollView scroll = ButterKnife.findById(this, R.id.detailScroll);
+
         cache = search.getFirstCacheFromResult(LoadFlags.LOAD_ALL_DB_ONLY);
 
         if (cache == null) {
@@ -761,6 +766,17 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         progress.dismiss();
 
         Settings.addCacheToHistory(cache.getGeocode());
+        final ScrollView scrollNew = ButterKnife.findById(this, R.id.detailScroll);
+        if ((scroll != null) && (scrollNew != null)) {
+            final int lastScrollPos = scroll.getScrollY();
+            scrollNew.post(new Runnable() {
+            @Override
+            public void run() {
+                scrollNew.scrollTo(0, lastScrollPos);
+            }
+        });
+
+        }
     }
 
     /**
@@ -2293,11 +2309,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 cache.parseWaypointsFromNote();
                 DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
                 return null;
-            }
-
-            @Override
-            protected void onPostExecute(final Void v) {
-                notifyDataSetChanged();
             }
         }.execute();
     }
