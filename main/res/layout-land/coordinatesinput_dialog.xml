@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical" >
 
+        <include layout="@layout/dialog_title_ok_cancel" />
         <include layout="@layout/coordinates_input" />
 
         <LinearLayout
