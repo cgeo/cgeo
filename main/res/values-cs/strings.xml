@@ -1328,4 +1328,5 @@
   </plurals>
   <string name="command_rename_list_result">Seznam přejmenován</string>
   <string name="command_delete_list_result">Seznam odstraněn</string>
+  <string name="fav_points_remaining">"Přidat tuto keš do oblíbených (zbývá %s)"</string>
 </resources>
