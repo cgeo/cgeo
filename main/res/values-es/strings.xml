@@ -281,7 +281,7 @@
   <string name="caches_sort_geocode">Código GC</string>
   <string name="caches_sort_rating">Valoración</string>
   <string name="caches_sort_vote">Votos (valoración propia)</string>
-  <string name="caches_sort_inventory">Recuento de inventario</string>
+  <string name="caches_sort_inventory">Número de rastreables</string>
   <string name="caches_sort_date_hidden">Fecha escondido</string>
   <string name="caches_sort_date_logged">Fecha de registro</string>
   <string name="caches_sort_finds">Encontrados</string>
@@ -907,7 +907,7 @@
   <string name="trackable_released">Activado</string>
   <string name="trackable_distance">Recorrido</string>
   <string name="trackable_touch">Contacto</string>
-  <string name="trackable_not_activated">Rasteable no activado</string>
+  <string name="trackable_not_activated">Rastreable no activado</string>
   <string name="trackable_travelbug">Travel bug</string>
   <string name="trackable_geokrety">GeoKrety</string>
   <string name="trackable_swaggie">Swaggie</string>
@@ -1059,8 +1059,8 @@ Nombre de archivo:%2$s</string>
   <string name="attribute_uv_no">Luz ultavioleta no requerida</string>
   <string name="attribute_snowshoes_yes">Raquetas de nieve necesarias</string>
   <string name="attribute_snowshoes_no">Raquetas de nieve no necesarias</string>
-  <string name="attribute_skiis_yes">Skís necesarios</string>
-  <string name="attribute_skiis_no">Skís no necesarios</string>
+  <string name="attribute_skiis_yes">Esquís necesarios</string>
+  <string name="attribute_skiis_no">Esquís no necesarios</string>
   <string name="attribute_s_tool_yes">Herramientas especiales requeridas</string>
   <string name="attribute_s_tool_no">Herramientas especiales no requeridas</string>
   <string name="attribute_wirelessbeacon_yes">Baliza inalámbrica requerida</string>
