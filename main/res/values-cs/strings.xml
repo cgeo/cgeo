@@ -1310,6 +1310,7 @@
   <string name="trackable_title_log_without_geocode">Geokód nenastaven</string>
   <string name="trackable_log_without_geocode">Chystáš se odeslat log bez geokódu. Je doporučeno alespoň jeden nastavit, chceš ho nyní přidat?</string>
   <string name="do_not_ask_me_again">Již se neptat</string>
+  <string name="geokrety_parsing_failed">Odpověď služby GeoKrety se nepodařilo zpracovat.</string>
   <string name="settings_map_direction">Zobrazovat směr</string>
   <string name="settings_summary_map_direction">Zobrazovat směrovou čáru k cíli</string>
   <string name="map_direction">Zobrazovat směr</string>
@@ -1327,4 +1328,5 @@
   </plurals>
   <string name="command_rename_list_result">Seznam přejmenován</string>
   <string name="command_delete_list_result">Seznam odstraněn</string>
+  <string name="fav_points_remaining">"Přidat tuto keš do oblíbených (zbývá %s)"</string>
 </resources>
