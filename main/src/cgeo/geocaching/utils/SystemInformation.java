@@ -6,6 +6,7 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.capability.ILogin;
+import cgeo.geocaching.sensors.MagnetometerAndAccelerometerProvider;
 import cgeo.geocaching.sensors.OrientationProvider;
 import cgeo.geocaching.sensors.RotationProvider;
 import cgeo.geocaching.sensors.Sensors;
@@ -32,6 +33,14 @@ public final class SystemInformation {
     @NonNull
     public static String getSystemInformation(@NonNull final Context context) {
         final boolean googlePlayServicesAvailable = CgeoApplication.getInstance().isGooglePlayServicesAvailable();
+        final String usedDirectionSensor;
+        if (Settings.useOrientationSensor(context)) {
+            usedDirectionSensor = "orientation";
+        } else if (RotationProvider.hasRotationSensor(context)) {
+            usedDirectionSensor = "rotation vector";
+        } else {
+            usedDirectionSensor = "magnetometer & accelerometer";
+        }
         final StringBuilder body = new StringBuilder("--- System information ---")
                 .append("\nDevice: ").append(Build.MODEL).append(" (").append(Build.PRODUCT).append(", ").append(Build.BRAND).append(')')
                 .append("\nAndroid version: ").append(VERSION.RELEASE)
@@ -42,7 +51,8 @@ public final class SystemInformation {
                 .append("\nCompass capabilities: ").append(Sensors.getInstance().hasCompassCapabilities() ? "yes" : "no")
                 .append("\nRotation vector sensor: ").append(presence(RotationProvider.hasRotationSensor(context)))
                 .append("\nOrientation sensor: ").append(presence(OrientationProvider.hasOrientationSensor(context)))
-                .append("\nDirection sensor used: ").append(Settings.useOrientationSensor(context) ? "orientation" : "rotation vector")
+                .append("\nMagnetometer & Accelerometer sensor: ").append(presence(MagnetometerAndAccelerometerProvider.hasMagnetometerAndAccelerometerSensors(context)))
+                .append("\nDirection sensor used: ").append(usedDirectionSensor)
                 .append("\nHide own/found: ").append(Settings.isExcludeMyCaches())
                 .append("\nMap strategy: ").append(Settings.getLiveMapStrategy().toString().toLowerCase(Locale.getDefault()))
                 .append("\nHW acceleration: ").append(Settings.useHardwareAcceleration() ? "enabled" : "disabled")

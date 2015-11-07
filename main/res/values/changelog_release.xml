@@ -2,6 +2,10 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
+   <b>Next bugfix release:</b>\n
+    · Fix:\n
+    \n
+    \n
     <b>2015.10.30:</b>\n
     · Fix: Fix cache logging problem on geocaching.com due to web site change\n
     · Fix: Fixed crashes when selecting log image\n
