@@ -2,16 +2,23 @@
 
 defaultTasks 'cgeoHelp'
 
+apply plugin: 'com.github.ben-manes.versions'
+
 buildscript {
     repositories {
         jcenter()
     }
     dependencies {
 		// these dependencies are used by gradle plugins, not by our projects
+		
+		// check for updates of these dependencies
+		classpath 'com.github.ben-manes:gradle-versions-plugin:0.11.3'
 	
         classpath 'com.android.tools.build:gradle:1.1.0'
-        // the latest version of the android-apt plugin
+    
+    // the latest version of the android-apt plugin
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.1'
+
         //gradle-properties
        // classpath 'net.saliman:gradle-properties-plugin:1.2.0'
     }
@@ -35,12 +42,18 @@ task cgeoHelp << {
 	println ''
 	println 'cleaning all generated artifacts:'
 	println '    gradlew clean'
+	println ''
 	println 'build and test:'
 	println '    gradlew assembleDebug connectedAndroidTest'
+	println ''
 	println 'debug:'
 	println '    gradlew connectedAndroidTest --debug --stacktrace'
-	println 'check gradle dependencies for updates:'
+	println ''
+	println 'check project dependencies for updates:'
 	println '    gradlew dependencies main:dependencies'
+	println ''
+	println 'check gradle dependencies for updates:'
+	println '    gradlew dependencyUpdates'
 	println ''
 	println 'Use "gradlew tasks" for more available tasks.'
 	
