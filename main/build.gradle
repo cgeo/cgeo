@@ -55,6 +55,9 @@ android {
 
         //testHandlingProfiling true
         testFunctionalTest true
+        
+        // by convention, the folder name "main" is used for the APK file name. we want cgeo instead
+        archivesBaseName = "cgeo"
     }
 
     //Conditional signing
