@@ -88,6 +88,7 @@ public final class CacheMenuHandler extends AbstractUIFactory {
             return;
         }
         final boolean hasCoords = cache.getCoords() != null;
+        menu.findItem(R.id.menu_edit_fieldnote).setVisible(true);
         menu.findItem(R.id.menu_default_navigation).setVisible(hasCoords);
         menu.findItem(R.id.menu_navigate).setVisible(hasCoords);
         menu.findItem(R.id.menu_caches_around).setVisible(hasCoords && cache.supportsCachesAround());

@@ -110,5 +110,10 @@
             </item>
         </menu>
     </item>
-    
+    <item
+        android:id="@+id/menu_edit_fieldnote"
+        android:icon="@drawable/ic_menu_rotate"
+        android:title="@string/cache_personal_note"
+        app:showAsAction="ifRoom">
+    </item>
 </menu>
