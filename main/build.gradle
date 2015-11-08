@@ -6,17 +6,17 @@ apply plugin: 'findbugs'
 Usage :
 
 check dependencies :
-gradle dependencies main:dependencies
+gradlew dependencies main:dependencies
 
 build & test:
-gradle clean assembleDebug connectedAndroidTest
+gradlew clean assembleDebug connectedAndroidTest
 
 debug:
-gradle  connectedAndroidTest --debug --stacktrace
+gradlew connectedAndroidTest --debug --stacktrace
 
 for CI? :
-gradle deviceCheck
-gradle connectedCheck
+gradlew deviceCheck
+gradlew connectedCheck
 
  */
 //Testing guide : http://tools.android.com/tech-docs/new-build-system/user-guide#TOC-Testing
