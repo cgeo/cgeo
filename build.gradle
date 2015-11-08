@@ -1,10 +1,14 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
+// top level build file where you can add configuration options common to all modules
+
+defaultTasks 'cgeoHelp'
 
 buildscript {
     repositories {
         jcenter()
     }
     dependencies {
+		// these dependencies are used by gradle plugins, not by our projects
+	
         classpath 'com.android.tools.build:gradle:1.1.0'
         // the latest version of the android-apt plugin
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.1'
@@ -25,3 +29,22 @@ allprojects {
     }
 }
 
+task cgeoHelp << {
+	println ''
+	println 'These are some of the available commands for building cgeo.'
+	println ''
+	println 'cleaning all generated artifacts:'
+	println '    gradlew clean'
+	println 'build and test:'
+	println '    gradlew assembleDebug connectedAndroidTest'
+	println 'debug:'
+	println '    gradlew connectedAndroidTest --debug --stacktrace'
+	println 'check gradle dependencies for updates:'
+	println '    gradlew dependencies main:dependencies'
+	println ''
+	println 'Use "gradlew tasks" for more available tasks.'
+	
+	// for CI? :
+	// gradlew deviceCheck
+	// gradlew connectedCheck
+}

@@ -1,24 +1,10 @@
+/*
+Run "gradlew" or "gradlew cgeoHelp" in the parent directory for a help of how to use this build file.
+*/
 apply plugin: 'com.android.application'
 apply plugin: 'android-apt'
 apply plugin: 'findbugs'
 
-/*
-Usage :
-
-check dependencies :
-gradlew dependencies main:dependencies
-
-build & test:
-gradlew clean assembleDebug connectedAndroidTest
-
-debug:
-gradlew connectedAndroidTest --debug --stacktrace
-
-for CI? :
-gradlew deviceCheck
-gradlew connectedCheck
-
- */
 //Testing guide : http://tools.android.com/tech-docs/new-build-system/user-guide#TOC-Testing
 //https://github.com/stephanenicolas/Quality-Tools-for-Android
 
@@ -37,10 +23,9 @@ version = '0.0.1'
 
 android {
     compileSdkVersion "Google Inc.:Google APIs:22"
-    //compileSdkVersion 19
     buildToolsVersion "22.0.1"
 
-     compileOptions {
+    compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_7
         targetCompatibility JavaVersion.VERSION_1_7
     }
@@ -49,6 +34,7 @@ android {
     versionProps.load(new FileInputStream(file('version.properties')))
 
     packagingOptions {
+    	// license files of libs are not needed in our APK
         exclude 'META-INF/DEPENDENCIES'
         exclude 'META-INF/NOTICE'
         exclude 'META-INF/LICENSE'
