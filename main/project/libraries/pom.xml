@@ -23,7 +23,7 @@
 		<CommonsIoVersion>2.4</CommonsIoVersion>
 		<CommonsLang3Version>3.4</CommonsLang3Version>
 
-		<FindbugsAnnotationsVersion>3.0.0</FindbugsAnnotationsVersion>
+		<FindbugsAnnotationsVersion>3.0.1u2</FindbugsAnnotationsVersion>
 
 		<JacksonAnnotationsVersion>2.6.3</JacksonAnnotationsVersion>
 		<JacksonCoreVersion>2.6.3</JacksonCoreVersion>

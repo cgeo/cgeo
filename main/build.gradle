@@ -167,7 +167,7 @@ dependencies {
     compile "org.apache.commons:commons-collections4:$CommonsCollections4Version"
     compile "org.apache.commons:commons-lang3:$CommonsLang3Version"
     compile "commons-io:commons-io:$CommonsIoVersion"
-    compile 'com.google.code.findbugs:annotations:3.0.0'
+    compile 'com.google.code.findbugs:annotations:3.0.1u2'
 
     // Reactive extensions
     compile "io.reactivex:rxjava:$RXJavaVersion"
@@ -277,7 +277,7 @@ dependencies {
     unitTestCompile "org.apache.commons:commons-collections4:$CommonsCollections4Version"
     unitTestCompile "commons-io:commons-io:$CommonsIoVersion"
     unitTestCompile 'org.apache.commons:commons-lang3:$CommonsLang3Version'
-    unitTestCompile 'com.google.code.findbugs:annotations:3.0.0'
+    unitTestCompile 'com.google.code.findbugs:annotations:3.0.1u2'
     unitTestCompile 'io.reactivex:rxjava-core:$RXVersion'
     unitTestCompile 'io.reactivex:rxjava-android:$RXVersion'
 }
