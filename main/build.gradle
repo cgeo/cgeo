@@ -108,10 +108,11 @@ android {
     }
 
     lintOptions {
-        //checkReleaseBuilds false
-        // Or, if you prefer, you can continue to check for errors in release builds,
-        // but continue the build even when errors are found:
+    	// generally we accept lint errors when building 
         abortOnError false
+        
+    	// abort release builds in case of FATAL errors
+        checkReleaseBuilds true
     }
 
 }
@@ -138,6 +139,7 @@ dependencies {
     compile project(":mapswithme-api")
 
     // Showcase view
+    // TODO replace by repository dependency. however, there is a conflict in min sdk, which needs to be solved then
     compile project(":showcaseview")
 
     compile files('libs/httpclientandroidlib-1.1.2.jar')
