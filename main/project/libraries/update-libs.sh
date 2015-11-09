@@ -32,7 +32,7 @@ updatelib () {
 fixgradle() {
   var="$1"
   version="$2"
-  sed -i "/def $var =/s/.*/def $var = '$version'/" ../build.gradle
+  sed -i "/def $var =/s/.*/def $var = '$version'/" ../../build.gradle
 }
 
 updatelib io/reactivex rxjava $RXJAVA

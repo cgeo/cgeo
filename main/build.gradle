@@ -8,17 +8,6 @@ apply plugin: 'findbugs'
 //Testing guide : http://tools.android.com/tech-docs/new-build-system/user-guide#TOC-Testing
 //https://github.com/stephanenicolas/Quality-Tools-for-Android
 
-def AAVersion = '3.3.2'
-def RXJavaVersion = '1.0.14'
-def RXAndroidVersion = '0.25.0'
-def JacksonCoreVersion = '2.6.3'
-def JacksonDatabindVersion = '2.6.3'
-def JacksonAnnotationsVersion = '2.6.3'
-def CommonsCollections4Version = '4.0'
-def CommonsLang3Version = '3.4'
-def CommonsIoVersion = '2.4'
-def ButterKnifeVersion = '7.0.1'
-
 android {
     compileSdkVersion "Google Inc.:Google APIs:22"
     buildToolsVersion "23.0.2"
@@ -112,23 +101,21 @@ android {
 
 }
 
-if (project.hasProperty('key.store') &&
-        project.hasProperty('key.store.password') &&
-        project.hasProperty('key.alias.password')) {
-     android.signingConfigs.release.storeFile = file(project.property('key.store'))
-     android.signingConfigs.release.storePassword = property('key.store.password')
-     android.signingConfigs.release.keyPassword = property('key.alias.password')
-     android.signingConfigs.release.keyAlias = property('key.alias')
+if (project.hasProperty('key.store') && project.hasProperty('key.store.password') && project.hasProperty('key.alias.password')) {
+	android.signingConfigs.release.storeFile = file(project.property('key.store'))
+	android.signingConfigs.release.storePassword = property('key.store.password')
+	android.signingConfigs.release.keyPassword = property('key.alias.password')
+	android.signingConfigs.release.keyAlias = property('key.alias')
 } else {
-   android.buildTypes.release.signingConfig = null
+	android.buildTypes.release.signingConfig = null
 }
 
 dependencies {
     // Android annotations
-    apt( "org.androidannotations:androidannotations:$AAVersion"){
+    apt( "org.androidannotations:androidannotations:$AndroidAnnotationsVersion"){
         exclude module:'androidannotations-api'
     }
-    compile "org.androidannotations:androidannotations-api:$AAVersion"
+    compile "org.androidannotations:androidannotations-api:$AndroidAnnotationsVersion"
 
     // Maps.ME integration
     compile project(":mapswithme-api")
