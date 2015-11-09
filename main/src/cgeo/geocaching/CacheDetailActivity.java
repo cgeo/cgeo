@@ -741,8 +741,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             return;
         }
 
-        final ScrollView scroll = ButterKnife.findById(this, R.id.detailScroll);
-
         cache = search.getFirstCacheFromResult(LoadFlags.LOAD_ALL_DB_ONLY);
 
         if (cache == null) {
@@ -756,6 +754,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         cache.setChangeNotificationHandler(new ChangeNotificationHandler(this, progress));
 
         setCacheTitleBar(cache);
+        final ScrollView scroll = ButterKnife.findById(this, R.id.detailScroll);
 
         // reset imagesList so Images view page will be redrawn
         imagesList = null;
@@ -766,16 +765,15 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         progress.dismiss();
 
         Settings.addCacheToHistory(cache.getGeocode());
-        final ScrollView scrollNew = ButterKnife.findById(this, R.id.detailScroll);
-        if ((scroll != null) && (scrollNew != null)) {
+        if (scroll != null) {
             final int lastScrollPos = scroll.getScrollY();
+            final ScrollView scrollNew = ButterKnife.findById(this, R.id.detailScroll);
             scrollNew.post(new Runnable() {
-            @Override
-            public void run() {
-                scrollNew.scrollTo(0, lastScrollPos);
-            }
-        });
-
+                @Override
+                public void run() {
+                    scrollNew.scrollTo(0, lastScrollPos);
+                }
+            });
         }
     }
 

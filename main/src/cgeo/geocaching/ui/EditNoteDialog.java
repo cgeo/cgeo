@@ -76,31 +76,28 @@ public class EditNoteDialog extends DialogFragment {
 
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         final TextView title = ButterKnife.findById(view, R.id.dialog_title_title);
-        if (title != null) {
-            title.setText(R.string.cache_personal_note);
-            title.setVisibility(View.VISIBLE);
-        }
+        title.setText(R.string.cache_personal_note);
+        title.setVisibility(View.VISIBLE);
+        
         final ImageButton cancel = ButterKnife.findById(view, R.id.dialog_title_cancel);
-        if (cancel != null) {
-            cancel.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(final View view) {
-                    dialog.dismiss();
-                }
-            });
-            cancel.setVisibility(View.VISIBLE);
-        }
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View view) {
+                dialog.dismiss();
+            }
+        });
+        cancel.setVisibility(View.VISIBLE);
+        
         final ImageButton done = ButterKnife.findById(view, R.id.dialog_title_done);
-        if (done != null) {
-            done.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(final View view) {
-                    ((EditNoteDialogListener) getActivity()).onFinishEditNoteDialog(mEditText.getText().toString());
-                    dialog.dismiss();
-                }
-            });
-            done.setVisibility(View.VISIBLE);
-        }
+        done.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View view) {
+                ((EditNoteDialogListener) getActivity()).onFinishEditNoteDialog(mEditText.getText().toString());
+                dialog.dismiss();
+            }
+        });
+        done.setVisibility(View.VISIBLE);
+        
         new Keyboard(activity).showDelayed(mEditText);
         return dialog;
     }
