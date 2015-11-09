@@ -2,9 +2,12 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 19
-    buildToolsVersion "21.1.2"
+    buildToolsVersion "23.0.2"
 
-
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
 
     defaultConfig {
         minSdkVersion 9
@@ -34,6 +37,6 @@ android {
 dependencies {
     compile 'org.apache.commons:commons-lang3:3.3.2'
     compile files('../main/compile-libs/org.eclipse.jdt.annotation_1.1.0.v20130513-1648.jar')
-    // The depency to the ICalnder interface from the main project is missing
+    // The depency to the IContacts interface from the main project is missing
     // compile(:main) is not right
 }
