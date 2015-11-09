@@ -1279,17 +1279,17 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             final int watchListCount = cache.getWatchlistCount();
             String watchListCountString = "";
             if (watchListCount != -1) {
-                watchListCountString = " (" + watchListCount + ' ' + getString(R.string.cache_watchlist_in_total) + ')';
+                watchListCountString = '(' + getString(R.string.cache_watchlist_count, watchListCount) + ')';
             }
 
             if (cache.isOnWatchlist() || cache.isOwner()) {
                 buttonAdd.setVisibility(View.GONE);
                 buttonRemove.setVisibility(View.VISIBLE);
-                text.setText(res.getString(R.string.cache_watchlist_on) + watchListCountString);
+                text.setText(res.getString(R.string.cache_watchlist_on, watchListCountString));
             } else {
                 buttonAdd.setVisibility(View.VISIBLE);
                 buttonRemove.setVisibility(View.GONE);
-                text.setText(res.getString(R.string.cache_watchlist_not_on) + watchListCountString);
+                text.setText(res.getString(R.string.cache_watchlist_not_on, watchListCountString));
             }
 
             // the owner of a cache has it always on his watchlist. Adding causes an error
