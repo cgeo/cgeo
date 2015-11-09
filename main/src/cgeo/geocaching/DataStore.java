@@ -154,7 +154,7 @@ public class DataStore {
      */
     private static final CacheCache cacheCache = new CacheCache();
     private static SQLiteDatabase database = null;
-    private static final int dbVersion = 68;
+    private static final int dbVersion = 69;
     public static final int customListIdOffset = 10;
     private static final @NonNull String dbName = "data";
     private static final @NonNull String dbTableCaches = "cg_caches";
@@ -806,6 +806,15 @@ public class DataStore {
                             db.execSQL("alter table " + dbTableCaches + " add column logPasswordRequired integer default 0");
                         } catch (final Exception e) {
                             Log.e("Failed to upgrade to ver. 68", e);
+
+                        }
+                    }
+                    // Introduces watchListCount
+                    if (oldVersion < 69) {
+                        try {
+                            db.execSQL("alter table " + dbTableCaches + " add column watchlistCount integer default -1");
+                        } catch (final Exception e) {
+                            Log.e("Failed to upgrade to ver. 69", e);
 
                         }
                     }
