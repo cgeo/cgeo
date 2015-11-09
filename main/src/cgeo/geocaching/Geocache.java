@@ -1097,14 +1097,18 @@ public class Geocache implements IWaypoint {
      * Set the number of users watching this geocache
      * @param watchlistCount Number of users watching this geocache
      */
-    public void setWatchlistCount(final int watchlistCount) {this.watchlistCount = watchlistCount;}
+    public void setWatchlistCount(final int watchlistCount) {
+        this.watchlistCount = watchlistCount;
+    }
 
     /**
      *
      * get the number of users watching this geocache
      * @return watchlistCount Number of users watching this geocache
      */
-    public int getWatchlistCount() {return this.watchlistCount;}
+    public int getWatchlistCount() {
+        return watchlistCount;
+    }
 
     /**
      * return an immutable list of waypoints.

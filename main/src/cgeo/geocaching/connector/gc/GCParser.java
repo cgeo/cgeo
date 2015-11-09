@@ -462,8 +462,7 @@ public final class GCParser {
         cache.setGuid(TextUtils.getMatch(page, GCConstants.PATTERN_GUID, true, cache.getGuid()));
 
         // cache watchlistcount
-        int watchListCount = getWatchListCount(page);
-        cache.setWatchlistCount(watchListCount);
+        cache.setWatchlistCount(getWatchListCount(page));
 
         // name
         cache.setName(cacheName);
@@ -1345,17 +1344,16 @@ public final class GCParser {
      */
     static int getWatchListCount(final String page)
     {
-        int count;
-        String sCount = TextUtils.getMatch(page, GCConstants.PATTERN_WATCHLIST_COUNT, true, 1, "notFound", false);
-        if (sCount.equals("notFound")) return -1;
-        try {
-            count = Integer.parseInt(sCount);
-        } catch(NumberFormatException nfe) {
-            Log.i("Could not parse " + nfe);
+        final String sCount = TextUtils.getMatch(page, GCConstants.PATTERN_WATCHLIST_COUNT, true, 1, "notFound", false);
+        if (sCount.equals("notFound")) {
             return -1;
         }
-
-        return count;
+        try {
+            return Integer.parseInt(sCount);
+        } catch(final NumberFormatException nfe) {
+            Log.e("Could not parse", nfe);
+            return -1;
+        }
     }
 
     /**

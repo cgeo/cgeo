@@ -1278,8 +1278,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
             final int watchListCount = cache.getWatchlistCount();
             String watchListCountString = "";
-            if (watchListCount != -1)
-            {
+            if (watchListCount != -1) {
                 watchListCountString = " (" + watchListCount + ' ' + getString(R.string.cache_watchlist_in_total) + ')';
             }
 
