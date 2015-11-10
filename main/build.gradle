@@ -142,6 +142,24 @@ dependencies {
 
 
 /*
+ * verify existence of the necessary keys for compilation, instead of waiting for a compile error
+ */
+
+project.afterEvaluate{
+    preBuild.dependsOn("verifyKeys")
+}
+
+task verifyKeys {
+	doFirst {
+		def keysFile = new File("main/res/values/keys.xml")
+		if (!keysFile.exists()) {
+			throw new InvalidUserDataException("You must provide keys in main/res/values/keys.xml for cgeo to compile successfully.")
+		}
+	}
+}
+
+
+/*
  * cgeo library dependencies. add gradle plugin related dependencies in another section!
  */
 dependencies {
