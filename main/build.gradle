@@ -1,11 +1,12 @@
 /*
  * Run "gradlew" or "gradlew cgeoHelp" in the parent directory for a help of how to use this build file.
  */
-apply plugin: 'com.android.application'
-apply plugin: 'android-apt'
 
-//Testing guide : http://tools.android.com/tech-docs/new-build-system/user-guide#TOC-Testing
-//https://github.com/stephanenicolas/Quality-Tools-for-Android
+
+/* 
+ * Android plugin, http://developer.android.com/tools/building/plugin-for-gradle.html
+ */
+apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion "Google Inc.:Google APIs:22"
@@ -56,7 +57,9 @@ android {
             debuggable true
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt'
-            versionNameSuffix "-" + gitCommitId().substring(0, 7)
+            
+            // debug build name contains git commit for better reproduction of bugs
+            versionNameSuffix "-" + gitCommitId().substring(0, 7) + " developer build"
         }
         release {
             debuggable true
@@ -109,13 +112,39 @@ if (project.hasProperty('key.store') && project.hasProperty('key.store.password'
 	android.buildTypes.release.signingConfig = null
 }
 
+
+/*
+ * AndroidAnnotations, https://github.com/excilys/androidannotations/wiki/building-project-gradle
+ */
+apply plugin: 'android-apt'
+
+apt {
+    arguments {
+        androidManifestFile variant.outputs[0].processResources.manifestFile
+    }
+}
+
 dependencies {
-    // Android annotations
     apt( "org.androidannotations:androidannotations:$AndroidAnnotationsVersion"){
         exclude module:'androidannotations-api'
     }
     compile "org.androidannotations:androidannotations-api:$AndroidAnnotationsVersion"
+}
 
+
+/*
+ * ButterKnife view injection, https://github.com/JakeWharton/butterknife
+ */
+
+dependencies {
+    compile "com.jakewharton:butterknife:$ButterKnifeVersion"
+} 
+
+
+/*
+ * cgeo library dependencies. add gradle plugin related dependencies in another section!
+ */
+dependencies {
     // Maps.ME integration
     compile project(":mapswithme-api")
 
@@ -132,9 +161,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:20.0.0'
     compile 'com.google.android.gms:play-services:7.3.0'
 
-    // Annotations for View injection
-    compile "com.jakewharton:butterknife:$ButterKnifeVersion"
-
     // Apache Commons
     compile "org.apache.commons:commons-collections4:$CommonsCollections4Version"
     compile "org.apache.commons:commons-lang3:$CommonsLang3Version"
@@ -150,7 +176,7 @@ dependencies {
     compile "com.fasterxml.jackson.core:jackson-databind:$JacksonDatabindVersion"
     compile "com.fasterxml.jackson.core:jackson-annotations:$JacksonAnnotationsVersion"
 
-    // Zxing integration
+    // Zxing barcode reader integration
     compile "com.google.zxing:android-integration:3.2.1"
 
     //TEST
@@ -171,31 +197,49 @@ dependencies {
     androidTestCompile files('../tests/libs/android-junit-report-1.5.8.jar')
 }
 
+
 /*
- ANDROID ANNOTATIONS
+ * version number from the current date
  */
+def versionCodeFromDate() {
+    def date = new Date()
+    def formattedDate = date.format('yyyyMMdd')
+    return Integer.valueOf(formattedDate)
+}
 
-apt {
-    arguments {
-        androidManifestFile variant.outputs[0].processResources.manifestFile
-        resourcePackageName 'cgeo.geocaching'
-
-        // If you're using Android NBS flavors you should use the following line instead of hard-coded packageName
-        // resourcePackageName android.defaultConfig.packageName
-
-        // You can set optional annotation processing options here, like these commented options:
-        // logLevel 'INFO'
-        // logFile '/var/log/aa.log'
-    }
+/* 
+ * version name based on current date
+ */ 
+def versionNameFromDate() {
+    def date = new Date()
+    def formattedDate = date.format('yyyy.MM.dd')
+    return formattedDate
 }
 
 /*
-*
-*
-* END of useful build
-* Following task are for samples
-*
+ * get the most recent git commit ID
  */
+def gitCommitId() {
+    def stdout = new ByteArrayOutputStream()
+    exec {
+        commandLine 'git', 'rev-parse', 'HEAD'
+        standardOutput = stdout
+    }
+    return stdout.toString().trim()
+}
+
+
+/*
+ *
+ *
+ * END of useful build
+ * Following task are for samples
+ *
+ */
+//Testing guide : http://tools.android.com/tech-docs/new-build-system/user-guide#TOC-Testing
+//https://github.com/stephanenicolas/Quality-Tools-for-Android
+
+
 
 task logInfo {
     logging.captureStandardOutput LogLevel.INFO
@@ -333,35 +377,3 @@ task addTest {
 gradle.projectsEvaluated {
     preBuild.dependsOn(addTest)
 }*/
-
-
-/*
- * version number from the current date
- */
-def versionCodeFromDate() {
-    def date = new Date()
-    def formattedDate = date.format('yyyyMMdd')
-    return Integer.valueOf(formattedDate)
-}
-
-/* 
- * version name based on current date
- */ 
-def versionNameFromDate() {
-    def date = new Date()
-    def formattedDate = date.format('yyyy.MM.dd')
-    return formattedDate
-}
-
-/*
- * get the most recent git commit ID
- */
-def gitCommitId() {
-    def stdout = new ByteArrayOutputStream()
-    exec {
-        commandLine 'git', 'rev-parse', 'HEAD'
-        standardOutput = stdout
-    }
-    return stdout.toString().trim()
-}
-
