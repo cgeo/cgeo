@@ -1,3 +1,7 @@
+/*
+ * cgeo contacts addon
+ */
+
 apply plugin: 'com.android.application'
 
 android {
@@ -19,7 +23,12 @@ android {
     sourceSets {
         main {
             manifest.srcFile 'AndroidManifest.xml'
-            java.srcDirs = ['src']
+            java {
+            	srcDirs = ['src', '../main/src']
+            	exclude 'cgeo/geocaching/**'
+            	exclude 'cgeo/calendar/**'
+            	exclude 'cgeo/contacts/ContactsAddon.java'
+            }
             res.srcDirs = ['res']
             assets.srcDirs = ['assets']
         }
@@ -34,9 +43,11 @@ android {
     }
 }
 
+
 dependencies {
-    compile 'org.apache.commons:commons-lang3:3.3.2'
-    compile files('../main/compile-libs/org.eclipse.jdt.annotation_1.1.0.v20130513-1648.jar')
-    // The depency to the IContacts interface from the main project is missing
-    // compile(:main) is not right
+    // Apache Commons
+    compile "org.apache.commons:commons-lang3:$CommonsLang3Version"
+
+    // Null annotations
+    compile 'org.eclipse.jdt:org.eclipse.jdt.annotation:1.1.0'
 }

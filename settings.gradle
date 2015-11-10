@@ -1,7 +1,5 @@
 include ':mapswithme-api'
 include ':showcaseview'
 include ':main'
-
-// dependencies from plugins to their application interface not yet solved
-// include ':cgeo-calendar'
-// include ':cgeo-contacts'
+include ':cgeo-calendar'
+include ':cgeo-contacts'

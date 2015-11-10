@@ -1,3 +1,7 @@
+/*
+ * cgeo calendar addon
+ */
+
 apply plugin: 'com.android.application'
 
 android {
@@ -16,10 +20,24 @@ android {
         versionCode 3
     }
 
+    packagingOptions {
+    	// license files of libs are not needed in our APK
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+    }
+
     sourceSets {
         main {
             manifest.srcFile 'AndroidManifest.xml'
-            java.srcDirs = ['src']
+            java {
+            	srcDirs = ['src', '../main/src']
+            	exclude 'cgeo/geocaching/**'
+            	exclude 'cgeo/contacts/**'
+            	exclude 'cgeo/calendar/CalendarAddon.java'
+           	}
             res.srcDirs = ['res']
             assets.srcDirs = ['assets']
         }
@@ -34,7 +52,11 @@ android {
     }
 }
 
+
 dependencies {
-    // The dependency to the ICalendar interface from the main project is missing
-    // compile project(":main") is not working
+    // Apache Commons
+    compile "org.apache.commons:commons-lang3:$CommonsLang3Version"
+
+    // Null annotations
+    compile 'org.eclipse.jdt:org.eclipse.jdt.annotation:1.1.0'
 }
