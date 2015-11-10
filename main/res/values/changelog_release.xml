@@ -3,7 +3,7 @@
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
    <b>Next bugfix release:</b>\n
-    · Fix:\n
+    · Fix: Ignored cache would persist in database if it has been stored previously\n
     \n
     \n
     <b>2015.10.30:</b>\n
