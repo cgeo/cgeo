@@ -13,6 +13,7 @@ android {
     buildToolsVersion "23.0.2"
 
     compileOptions {
+    	// use the diamond operator and some other goodies in Android
         sourceCompatibility JavaVersion.VERSION_1_7
         targetCompatibility JavaVersion.VERSION_1_7
     }
@@ -50,23 +51,22 @@ android {
         release 
     }
 
-
     buildTypes {
         debug {
-            //zipAlign = true
-            debuggable true
-            minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt'
-            
             // debug build name contains git commit for better reproduction of bugs
             versionNameSuffix "-" + gitCommitId().substring(0, 7) + " developer build"
         }
         release {
-            debuggable true
-            minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt'
             signingConfig signingConfigs.release
         }
+    }
+    
+    buildTypes.all { buildType ->
+        // enable proguard
+        buildType.minifyEnabled true
+
+		// proguard rules
+        buildType.proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt'
     }
 
     testBuildType "debug" //the default BuildType
