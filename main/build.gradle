@@ -3,7 +3,6 @@
  */
 apply plugin: 'com.android.application'
 apply plugin: 'android-apt'
-apply plugin: 'findbugs'
 
 //Testing guide : http://tools.android.com/tech-docs/new-build-system/user-guide#TOC-Testing
 //https://github.com/stephanenicolas/Quality-Tools-for-Android
@@ -188,28 +187,6 @@ apt {
         // logLevel 'INFO'
         // logFile '/var/log/aa.log'
     }
-}
-
-/*
- FINDBUGS
-
- Usage : gradle check
-
- */
-
-//http://www.gradle.org/docs/current/dsl/org.gradle.api.plugins.quality.FindBugsExtension.html
-findbugs {
-    toolVersion = "3.0.1"
-    //sourceSets = [sourceSets.main]
-    ignoreFailures = true
-    reportsDir = file("$project.buildDir/reports")
-    effort = "max"
-    reportLevel = "high"
-    //visitors = ["FindSqlInjection", "SwitchFallthrough"]
-    //omitVisitors = ["FindNonShortCircuit"]
-    //includeFilter = file("$rootProject.projectDir/project/findbugs/inclusions.xml")
-    excludeFilter = file("$rootProject.projectDir/project/findbugs/exclusions.xml")
-
 }
 
 /*
