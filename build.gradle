@@ -1,51 +1,8 @@
-// top level build file where you can add configuration options common to all modules
-
+/*
+ * Just run this script using "gradlew", and it will show you typical examples of how to use it.
+ */
+ 
 defaultTasks 'cgeoHelp'
-
-apply plugin: 'com.github.ben-manes.versions'
-
-buildscript {
-    repositories {
-        jcenter()
-    }
-    dependencies {
-		// these dependencies are used by gradle plugins, not by our projects
-		
-		// check for updates of gradle plugin dependencies
-		classpath 'com.github.ben-manes:gradle-versions-plugin:0.11.3'
-	
-		// Android gradle plugin
-        classpath 'com.android.tools.build:gradle:1.3.1'
-    
-		// Android annotation processor
-        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
-    }
-}
-
-allprojects {
-    repositories {
-        jcenter()
-    }
-
-    // ant.properties : java.compilerargs=-Xlint
-    tasks.withType(JavaCompile) {
-        options.compilerArgs << "-Xlint"
-    }
-}
-
-// define globally used properties for all projects
-ext {
-	AndroidAnnotationsVersion = '3.3.2'
-	RXJavaVersion = '1.0.14'
-	RXAndroidVersion = '0.25.0'
-	JacksonCoreVersion = '2.6.3'
-	JacksonDatabindVersion = '2.6.3'
-	JacksonAnnotationsVersion = '2.6.3'
-	CommonsCollections4Version = '4.0'
-	CommonsLang3Version = '3.4'
-	CommonsIoVersion = '2.4'
-	ButterKnifeVersion = '7.0.1'
-}
 
 task cgeoHelp << {
 	println ''
@@ -74,4 +31,78 @@ task cgeoHelp << {
 	// for CI? :
 	// gradlew deviceCheck
 	// gradlew connectedCheck
+}
+
+
+/*
+ * update check for all components in this gradle script
+ */
+apply plugin: 'com.github.ben-manes.versions'
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+		// these dependencies are used by gradle plugins, not by our projects
+		
+		// check for updates of gradle plugin dependencies
+		classpath 'com.github.ben-manes:gradle-versions-plugin:0.11.3'
+	
+		// Android gradle plugin
+        classpath 'com.android.tools.build:gradle:1.3.1'
+    
+		// Android annotation processor
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
+    }
+}
+
+// filter out non release version updates
+allprojects {
+	configurations {
+		all {
+			resolutionStrategy {
+				componentSelection {
+					all { ComponentSelection selection ->
+						boolean rejected = ['alpha', 'beta', 'rc', 'cr', 'm'].any { qualifier ->
+							selection.candidate.version ==~ /(?i).*[.-]${qualifier}[.\d-]*/
+						}
+						if (rejected) {
+							selection.reject('Release candidate')
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+
+/*
+ * common configuration for the Java projects
+ */
+ 
+subprojects {
+    repositories {
+        jcenter()
+    }
+
+    // ant.properties : java.compilerargs=-Xlint
+    tasks.withType(JavaCompile) {
+        options.compilerArgs << "-Xlint"
+    }
+
+	// define globally used properties for all projects
+	ext {
+		AndroidAnnotationsVersion = '3.3.2'
+		RXJavaVersion = '1.0.14'
+		RXAndroidVersion = '0.25.0'
+		JacksonCoreVersion = '2.6.3'
+		JacksonDatabindVersion = '2.6.3'
+		JacksonAnnotationsVersion = '2.6.3'
+		CommonsCollections4Version = '4.0'
+		CommonsLang3Version = '3.4'
+		CommonsIoVersion = '2.4'
+		ButterKnifeVersion = '7.0.1'
+	}
 }
