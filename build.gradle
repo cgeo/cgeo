@@ -87,9 +87,9 @@ subprojects {
         jcenter()
     }
 
-    // ant.properties : java.compilerargs=-Xlint
+    // disable warning of annotation processor about annotation types with no registered processor (like @NonNull)
     tasks.withType(JavaCompile) {
-        options.compilerArgs << "-Xlint"
+        options.compilerArgs << "-Xlint:-processing"
     }
 
 	// define globally used properties for all projects

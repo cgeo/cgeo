@@ -121,6 +121,8 @@ apply plugin: 'android-apt'
 apt {
     arguments {
         androidManifestFile variant.outputs[0].processResources.manifestFile
+        // suppress verbose output of the annotation processor
+        logLevel 'error'
     }
 }
 
