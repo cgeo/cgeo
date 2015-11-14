@@ -57,7 +57,7 @@ buildscript {
     }
 }
 
-// filter out non release version updates
+// filter out non release version updates and other updates we cannot use
 allprojects {
 	configurations {
 		all {
@@ -69,6 +69,12 @@ allprojects {
 						}
 						if (rejected) {
 							selection.reject('Release candidate')
+						}
+						if (selection.candidate.group == 'org.assertj' && selection.candidate.module == 'assertj-core' && selection.candidate.version.startsWith('3')) {
+							selection.reject("assertj 3.x requires Java 8")
+						}
+						if (selection.candidate.group == 'org.eclipse.jdt' && selection.candidate.module == 'org.eclipse.jdt.annotation' && selection.candidate.version.startsWith('2')) {
+							selection.reject("jdt.annotations 2.x requires Java 8")
 						}
 					}
 				}
