@@ -106,7 +106,7 @@ subprojects {
 	// define globally used properties for all projects
 	ext {
 		AndroidAnnotationsVersion = '3.3.2'
-		RXJavaVersion = '1.0.15'
+		RXJavaVersion = '1.0.16'
 		RXAndroidVersion = '0.25.0'
 		JacksonCoreVersion = '2.6.3'
 		JacksonDatabindVersion = '2.6.3'
