@@ -18,15 +18,6 @@ android {
         targetCompatibility JavaVersion.VERSION_1_7
     }
 
-    packagingOptions {
-    	// license files of libs are not needed in our APK
-        exclude 'META-INF/DEPENDENCIES'
-        exclude 'META-INF/NOTICE'
-        exclude 'META-INF/LICENSE'
-        exclude 'META-INF/LICENSE.txt'
-        exclude 'META-INF/NOTICE.txt'
-    }
-
     defaultConfig {
         minSdkVersion 9
         targetSdkVersion 19
@@ -38,7 +29,9 @@ android {
 
         //testHandlingProfiling true
         testFunctionalTest true
-        
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
         // by convention, the folder name "main" is used for the APK file name. we want cgeo instead
         archivesBaseName = "cgeo"
     }
@@ -101,8 +94,27 @@ android {
         
     	// abort release builds in case of FATAL errors
         checkReleaseBuilds true
+
+        // recommended by ButterKnife, http://jakewharton.github.io/butterknife/
+        disable 'InvalidPackage'
     }
 
+    packagingOptions {
+        // license files of libs are not needed in our APK
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/dependencies'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/notice'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/license'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/notice.txt'
+        exclude 'COPYING'
+        exclude 'COPYING.LESSER'
+        exclude '.readme'
+    }
 }
 
 if (project.hasProperty('key.store') && project.hasProperty('key.store.password') && project.hasProperty('key.alias.password')) {
@@ -186,7 +198,8 @@ dependencies {
     compile files('libs/mapsforge-map-0.3.0-jar-with-dependencies.jar')
 
     compile 'com.android.support:appcompat-v7:20.0.0'
-    compile 'com.google.android.gms:play-services:7.3.0'
+    compile 'com.google.android.gms:play-services-maps:8.3.0'
+    compile 'com.google.android.gms:play-services-location:8.3.0'
 
     // Apache Commons
     compile "org.apache.commons:commons-collections4:$CommonsCollections4Version"
