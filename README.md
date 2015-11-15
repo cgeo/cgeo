@@ -10,13 +10,12 @@ Perfect! Please **tell us in the [issue tracker](https://github.com/cgeo/cgeo/is
 [![Build Status](http://ci.cgeo.org/job/c-geo/badge/icon)](http://ci.cgeo.org/job/c-geo/)<br>
 [![Issue Stats](http://issuestats.com/github/cgeo/cgeo/badge/pr)](http://issuestats.com/github/cgeo/cgeo)<br>
 [![Issue Stats](http://issuestats.com/github/cgeo/cgeo/badge/issue)](http://issuestats.com/github/cgeo/cgeo)<br>
-[![Dependency Status](https://www.versioneye.com/user/projects/552eb65710e71412110008bb/badge.svg?style=flat)](https://www.versioneye.com/user/projects/552eb65710e71412110008bb)
 
 ## Get the source
 
 Fork the [project source code](https://github.com/cgeo/cgeo), make changes to your clone and [create a pull request](https://help.github.com/articles/using-pull-requests) afterwards.
 
-### Branches ###
+### Branches
 
 - **master** is for development of new features. Nightly builds are created from this branch.
 - **release** is for all bug fixes of already existing features. So if a bug is reported in released version, it should be fixed on this branch (and merged to master afterwards).
@@ -24,30 +23,45 @@ Fork the [project source code](https://github.com/cgeo/cgeo), make changes to yo
 A more complex bugfix can be first tested against the `master` branch and integrated in the nightly builds, while kept compatible with the `release` branch for a later integration.
 Such a procedure is [described in the wiki](https://github.com/cgeo/cgeo/wiki/How-to-get-a-bug-fix-into-the-release).
 
-## Set up Eclipse
+## Setting up an IDE
 
+### Eclipse
 - Install an Eclipse distribution for your OS from http://eclipse.org/downloads/ (you may choose the Java developers distribution).
 - Start Eclipse, choose any directory as workspace. Close the welcome screen, if it appears.
 - After the workbench has started, select File | Import | Install | Install Software Items From File and select a locally downloaded copy of https://github.com/cgeo/cgeo/tree/master/main/project/eclipse%20installation/cgeo%20eclipse%20components.p2f. This way you can easily install all necessary plugins.
 - After forking the project you should import the Eclipse projects in your workspace with File | Import | Projects from Git.
 
+Please be warned, we might remove the support for development in Eclipse, once we switch to a gradle based build.
+
+### Android Studio (or IntelliJ IDEA)
+- Install Android Studio from https://developer.android.com/sdk/index.html
+- On first start, choose to clone a project from version control, and choose github afterwards. Supply your credentials.
+- Android Studio should detect that gradle is used for building cgeo. If it complains that this is not a gradle project, then close the project. Choose "Import project" and select the `build.gradle` or `gradle.settings` in the root directory of the git repository.
+
 ## Build
 
-### Prerequisites ###
+### Prerequisites
 
-- [Android SDK](http://developer.android.com/sdk) (latest version) including Google APIs V19
-- [Ant](http://ant.apache.org) 1.6.0+ for building c:geo on the command line (not necessary when using only Eclipse)
+- [Android SDK](http://developer.android.com/sdk) (latest version) including Google APIs V19 and Google support repository
 - If you use Microsoft Windows, [Google USB Driver](http://developer.android.com/sdk/win-usb.html) to install the application on the smartphone
+- You need to provide several API keys for compiling the app. See next section for details.
 
-### Structure ###
+### API keys
+Copy `[main/templates/keys.xml](https://github.com/cgeo/cgeo/blob/master/main/templates/keys.xml)` to `main/res/values/`. Then edit `main/res/values/keys.xml` and insert several keys (see comments in the file). Most important is the Google Maps API v1 key. You can leave it empty, but then Google Maps doesn't work. Google doesn't hand out new keys for Google Maps v1, you have to use an existing one.
 
-c:geo sources and executables are located in the `main` directory. Tests are located in the `tests` directory.
+Request your personal API key for the various [OpenCaching](http://www.opencaching.eu/) sites we support. If you leave these blank, then those networks will remain disabled.
+* [opencaching.de OKAPI signup](http://www.opencaching.de/okapi/signup.html)
+* [opencaching.pl OKAPI signup](http://www.opencaching.pl/okapi/signup.html)
+* [opencaching.ro OKAPI signup](http://www.opencaching.ro/okapi/signup.html)
+* [opencaching.nl OKAPI signup](http://www.opencaching.nl/okapi/signup.html)
+* [opencaching.us OKAPI signup](http://www.opencaching.us/okapi/signup.html)
+* [opencaching.org.uk OKAPI signup](http://www.opencaching.org.uk/okapi/signup.html)
 
-### Known limitations ###
+### Building with gradle
 
-If the workspace directory name contains a space and leads to errors in the -dex Ant target, then you need to set the property "basedir" in your `local.properties` to the 8.3 name of the directory where this script is located on your disk.
+Run `gradlew` from the root directory of the git repository. That will install the necessary build framework and display how to build cgeo.
 
-### Configuration ###
+### Building with Ant (deprecated)
 
 1. copy `./main/templates/private.properties` to `./main/`
 2. edit `private.properties` (see comments in the file)
@@ -56,18 +70,6 @@ If the workspace directory name contains a space and leads to errors in the -dex
 5. edit `local.properties` (see comments in the file)
 6. copy `local.properties` to all other projects (currently android-support-v7-appcompat, google-play-services_lib, mapswithme-api, showcaseview)
 7. copy `local.properties` to cgeo-calendar and cgeo-contacts if you plan to hack on the plugins
-6. copy `./main/templates/keys.xml` to `./main/res/values/`
-7. edit `./main/res/values/keys.xml` and insert several keys (see comments in the file)
-  * Google Maps API v1 key (you can leave it empty, but then Google Maps don't work - Google doesn't hand out new keys for Google Maps v1, you have to use an existing one)
-  * request your personal consumer key and secret for the various opencaching nodes we support:
-    * [opencaching.de OKAPI signup](http://www.opencaching.de/okapi/signup.html)
-    * [opencaching.pl OKAPI signup](http://www.opencaching.pl/okapi/signup.html)
-    * [opencaching.ro OKAPI signup](http://www.opencaching.ro/okapi/signup.html)
-    * [opencaching.nl OKAPI signup](http://www.opencaching.nl/okapi/signup.html)
-    * [opencaching.us OKAPI signup](http://www.opencaching.us/okapi/signup.html)
-    * [opencaching.org.uk OKAPI signup](http://www.opencaching.org.uk/okapi/signup.html)
-
-### Building with Ant ###
 
 Run one of the following commands in `./main`
 
@@ -78,13 +80,13 @@ Run one of the following commands in `./main`
 
 or use the Ant view of Eclipse
 
-### Debugging ###
+### Debugging
 
 In Eclipse, create a Debug Configuration for an Android Application using the menu Run | Debug Configurations
 
-### Testing ###
+### Testing
 
-The Test classes can be found in the project cgeo-os-test. Test classes should be located in the same package as
+The Test classes can be found in the project test. Test classes should be located in the same package as
 the class under test.
 Every class can be "Run As" (or "Debug As") an [Android JUnit Test](http://developer.android.com/guide/topics/testing/testing_android.html) from Eclipse.
 To run all tests use the same "Run As" menu item from the context menu of the test project.
