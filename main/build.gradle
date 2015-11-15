@@ -19,8 +19,10 @@ android {
     }
 
     defaultConfig {
+        // TODO fill this section and remove the values from AndroidManifest only after the full switch to gradle
+        // As these values override the manifest, we might otherwise use different values in gradle and non-gradle builds.
         minSdkVersion 9
-        targetSdkVersion 19
+        targetSdkVersion 21
         versionName versionNameFromDate()
         versionCode versionCodeFromDate()
 
@@ -135,7 +137,7 @@ apply plugin: 'android-apt'
 apt {
     arguments {
         androidManifestFile variant.outputs[0].processResources.manifestFile
-        // suppress verbose output of the annotation processor
+        // suppress verbose output of the AndroidAnnotations processor
         logLevel 'error'
     }
 }

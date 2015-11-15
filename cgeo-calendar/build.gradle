@@ -14,10 +14,8 @@ android {
     }
 
     defaultConfig {
-        minSdkVersion 9
-        targetSdkVersion 19
-        versionName "1.2"
-        versionCode 3
+        // TODO fill this section and remove the values from AndroidManifest only after the full switch to gradle
+        // As these values override the manifest, we might otherwise use different values in gradle and non-gradle builds.
     }
 
     packagingOptions {
