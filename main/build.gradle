@@ -150,16 +150,21 @@ dependencies {
  */
 
 project.afterEvaluate{
-    preBuild.dependsOn("verifyKeys")
+    preBuild.dependsOn("verifyCgeoKeys")
 }
 
-task verifyKeys {
+task verifyCgeoKeys {
 	doFirst {
 		def keysFile = new File("main/res/values/keys.xml")
 		if (!keysFile.exists()) {
 			throw new InvalidUserDataException("You must provide keys in main/res/values/keys.xml for cgeo to compile successfully.")
 		}
 	}
+}
+
+configure (verifyCgeoKeys) {
+    group = 'verification'
+    description = 'Checks for the existence of keys.xml to successfully compile cgeo.'
 }
 
 

@@ -33,6 +33,11 @@ task cgeoHelp << {
 	// gradlew connectedCheck
 }
 
+configure(cgeoHelp) {
+    group = 'help'
+    description = 'Displays help for building cgeo.'
+}
+
 
 /*
  * update check for all components in this gradle script
