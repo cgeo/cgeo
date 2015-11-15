@@ -561,7 +561,6 @@ public class TitlePageIndicator extends View implements PageIndicator {
      * Calculate views bounds and scroll them according to the current index
      *
      * @param paint
-     * @param currentIndex
      * @return
      */
     private ArrayList<RectF> calculateAllBounds(final Paint paint) {
@@ -609,6 +608,7 @@ public class TitlePageIndicator extends View implements PageIndicator {
             throw new IllegalStateException("ViewPager adapter must implement TitleProvider to be used with TitlePageIndicator.");
         }
         mViewPager = view;
+        // TODO replace deprecated code after completely switching to gradle build
         mViewPager.setOnPageChangeListener(this);
         mTitleProvider = (TitleProvider)adapter;
         invalidate();
