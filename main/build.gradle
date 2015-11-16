@@ -142,22 +142,6 @@ apt {
     }
 }
 
-dependencies {
-    apt( "org.androidannotations:androidannotations:$AndroidAnnotationsVersion"){
-        exclude module:'androidannotations-api'
-    }
-    compile "org.androidannotations:androidannotations-api:$AndroidAnnotationsVersion"
-}
-
-
-/*
- * ButterKnife view injection, https://github.com/JakeWharton/butterknife
- */
-
-dependencies {
-    compile "com.jakewharton:butterknife:$ButterKnifeVersion"
-} 
-
 
 /*
  * verify existence of the necessary keys for compilation, instead of waiting for a compile error
@@ -182,10 +166,10 @@ configure (verifyCgeoKeys) {
 }
 
 
-/*
- * cgeo library dependencies. add gradle plugin related dependencies in another section!
- */
 dependencies {
+/*
+ * cgeo library dependencies. add gradle plugin related dependencies further down below
+ */
     // Maps.ME integration
     compile project(":mapswithme-api")
 
@@ -233,7 +217,22 @@ dependencies {
     
     // AssertJ for testing
     androidTestCompile 'org.assertj:assertj-core:2.2.0'
+
+/*
+ * AndroidAnnotations, https://github.com/excilys/androidannotations/wiki/building-project-gradle
+ */
+    apt( "org.androidannotations:androidannotations:$AndroidAnnotationsVersion"){
+        exclude module:'androidannotations-api'
+    }
+    compile "org.androidannotations:androidannotations-api:$AndroidAnnotationsVersion"
+
+/*
+ * ButterKnife view injection, https://github.com/JakeWharton/butterknife
+ */
+    compile "com.jakewharton:butterknife:$ButterKnifeVersion"
 }
+
+
 
 
 /*
