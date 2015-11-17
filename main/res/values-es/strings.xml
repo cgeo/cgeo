@@ -787,6 +787,7 @@
   <string name="gpx_import_android">Importar desde Android</string>
   <string name="map_file_select_title">Selecciona un mapa</string>
   <string name="web_import_title">Importar desde send2cgeo</string>
+  <string name="web_import_waiting">Esperando nuevos cachés desde send2cgeo…</string>
   <string name="web_downloading">Descargando</string>
   <string name="web_downloaded">Descargados</string>
   <string name="popup_more">Más detalles</string>
@@ -1281,6 +1282,7 @@ Nombre de archivo:%2$s</string>
   <string name="trackable_title_log_without_geocode">Geocódigo no establecido</string>
   <string name="trackable_log_without_geocode">Estás a punto de enviar un registro sin Geocódigo. Recomendamos establecer uno. ¿Quieres añadirlo ahora?</string>
   <string name="do_not_ask_me_again">No preguntar de nuevo</string>
+  <string name="geokrety_parsing_failed">Error al procesar la respuesta de GeoKrety.</string>
   <string name="settings_map_direction">Mostrar dirección</string>
   <string name="settings_summary_map_direction">Muestra una línea de dirección al objetivo de la navegación</string>
   <string name="map_direction">Mostrar dirección</string>

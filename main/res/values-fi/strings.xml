@@ -330,7 +330,7 @@
   <string name="list_not_available">Lista ei saatavilla, vaihdetaan standardi listaan</string>
   <string name="about_version">Versio</string>
   <string name="about_changelog">Muutoshistoria</string>
-  <string name="about_system">Järjestelemä</string>
+  <string name="about_system">Järjestelmä</string>
   <string name="about_donate">Lahjoita</string>
   <string name="about_donation_more">Lahjoita\nkehitykseen</string>
   <string name="about_contributors">Avustajat</string>
