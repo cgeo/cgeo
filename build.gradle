@@ -46,6 +46,7 @@ configure(cgeoHelp) {
  * update check for all components in this gradle script
  */
 apply plugin: 'com.github.ben-manes.versions'
+apply plugin: 'idea'
 
 buildscript {
     repositories {
@@ -119,4 +120,9 @@ subprojects {
 		CommonsIoVersion = '2.4'
 		ButterKnifeVersion = '7.0.1'
 	}
+
+    idea.module {
+        downloadJavadoc = true
+        downloadSources = true
+    }
 }
