@@ -275,7 +275,7 @@ android.applicationVariants.all { variant ->
 }
 
 /*
- * signing of release APK, use a properties file like in main/templates/private.properties
+ * signing of release APK, use a properties file like in templates/private.properties
  */
 
 // dynamically load the signing values from private.properties
@@ -297,7 +297,7 @@ if (privatePropertiesFile.exists()) {
 // check existence of private properties, show an error message
 task verifyPrivateProperties << {
     if (!rootProject.file('private.properties').exists()) {
-        throw new InvalidUserDataException("For signing the release build you must provide a file private.properties in the root directory. Copy main/templates/private.properties and change the values.")
+        throw new InvalidUserDataException("For signing the release build you must provide a file private.properties in the root directory. Copy templates/private.properties and change the values.")
     }
 }
 

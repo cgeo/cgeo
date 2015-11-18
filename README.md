@@ -63,7 +63,7 @@ Run `gradlew` from the root directory of the git repository. That will install t
 
 ### Building with Ant (deprecated)
 
-1. copy `./main/templates/private.properties` to `./main/`
+1. copy `./templates/private.properties` to `./`
 2. edit `private.properties` (see comments in the file)
 3. copy `./main/templates/local.properties` to `./main/`
 4. copy `./main/templates/local.properties` to `./tests/`
