@@ -17,6 +17,9 @@ task cgeoHelp << {
 	println 'install on connected device/emulator:'
 	println '    gradlew installDebug'
 	println ''
+	println 'run app on connected device/emulator:'
+	println '    gradlew runDebug'
+	println ''
 	println 'test on connected device/emulator:'
 	println '    gradlew connectedDebugAndroidTest'
 	println ''
@@ -34,7 +37,7 @@ task cgeoHelp << {
 }
 
 configure(cgeoHelp) {
-    group = 'help'
+    group = 'cgeo'
     description = 'Displays help for building cgeo.'
 }
 
