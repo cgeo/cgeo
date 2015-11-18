@@ -38,10 +38,9 @@ android {
         archivesBaseName = "cgeo"
     }
 
-    //Conditional signing
-    //Uncomment and set the 4 key properties (#key.store, ...) in gradle.properties
+    // signing is handled via private.properties
     signingConfigs {
-        release 
+        release
     }
 
     buildTypes {
@@ -119,16 +118,6 @@ android {
     }
 }
 
-if (project.hasProperty('key.store') && project.hasProperty('key.store.password') && project.hasProperty('key.alias.password')) {
-	android.signingConfigs.release.storeFile = file(project.property('key.store'))
-	android.signingConfigs.release.storePassword = property('key.store.password')
-	android.signingConfigs.release.keyPassword = property('key.alias.password')
-	android.signingConfigs.release.keyAlias = property('key.alias')
-} else {
-	android.buildTypes.release.signingConfig = null
-}
-
-
 /*
  * AndroidAnnotations, https://github.com/excilys/androidannotations/wiki/building-project-gradle
  */
@@ -140,29 +129,6 @@ apt {
         // suppress verbose output of the AndroidAnnotations processor
         logLevel 'error'
     }
-}
-
-
-/*
- * verify existence of the necessary keys for compilation, instead of waiting for a compile error
- */
-
-project.afterEvaluate{
-    preBuild.dependsOn("verifyCgeoKeys")
-}
-
-task verifyCgeoKeys {
-	doFirst {
-		def keysFile = new File("main/res/values/keys.xml")
-		if (!keysFile.exists()) {
-			throw new InvalidUserDataException("You must provide keys in main/res/values/keys.xml for cgeo to compile successfully.")
-		}
-	}
-}
-
-configure (verifyCgeoKeys) {
-    group = 'verification'
-    description = 'Checks for the existence of keys.xml to successfully compile cgeo.'
 }
 
 
@@ -231,6 +197,27 @@ dependencies {
 }
 
 
+/*
+ * verify existence of the necessary keys for compilation, instead of waiting for a compile error
+ */
+
+project.afterEvaluate{
+    preBuild.dependsOn("verifyCgeoKeys")
+}
+
+task verifyCgeoKeys {
+    doFirst {
+        def keysFile = new File("main/res/values/keys.xml")
+        if (!keysFile.exists()) {
+            throw new InvalidUserDataException("You must provide keys in main/res/values/keys.xml for cgeo to compile successfully. You can copy from main/templates/keys.xml and just add the necessary values.")
+        }
+    }
+}
+
+configure (verifyCgeoKeys) {
+    group = 'verification'
+    description = 'Checks for the existence of keys.xml to successfully compile cgeo.'
+}
 
 
 /*
@@ -264,7 +251,7 @@ def gitCommitId() {
 }
 
 /*
- * have a run task for our builds
+ * have a run task for our builds to launch the app directly from gradle
  */
 android.applicationVariants.all { variant ->
     if (variant.install) {
@@ -284,5 +271,39 @@ android.applicationVariants.all { variant ->
                 }
             }
         }
+    }
+}
+
+/*
+ * signing of release APK, use a properties file like in main/templates/private.properties
+ */
+
+// dynamically load the signing values from private.properties
+File privatePropertiesFile = rootProject.file('private.properties')
+if (privatePropertiesFile.exists()) {
+    Properties properties = new Properties()
+    properties.load(new FileInputStream(privatePropertiesFile))
+    android.signingConfigs {
+        release {
+            storeFile file(properties.getProperty('key.store'))
+            storePassword properties.getProperty('key.store.password')
+            keyAlias properties.getProperty('key.alias')
+            keyPassword properties.getProperty('key.alias.password')
+        }
+    }
+    android.buildTypes.release.signingConfig android.signingConfigs.release
+}
+
+// check existence of private properties, show an error message
+task verifyPrivateProperties << {
+    if (!rootProject.file('private.properties').exists()) {
+        throw new InvalidUserDataException("For signing the release build you must provide a file private.properties in the root directory. Copy main/templates/private.properties and change the values.")
+    }
+}
+
+// only verify the existence of private.properties, when the file is really needed
+tasks.whenTaskAdded { theTask ->
+    if (theTask.name.equals("packageRelease")) {
+        theTask.dependsOn "verifyPrivateProperties"
     }
 }
