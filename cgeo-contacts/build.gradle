@@ -21,12 +21,7 @@ android {
     sourceSets {
         main {
             manifest.srcFile 'AndroidManifest.xml'
-            java {
-            	srcDirs = ['src', '../main/src']
-            	exclude 'cgeo/geocaching/**'
-            	exclude 'cgeo/calendar/**'
-            	exclude 'cgeo/contacts/ContactsAddon.java'
-            }
+            java.srcDirs = ['src', '../common/src']
             res.srcDirs = ['res']
             assets.srcDirs = ['assets']
         }
