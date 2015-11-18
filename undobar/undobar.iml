@@ -1,31 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module type="JAVA_MODULE" version="4">
-  <component name="FacetManager">
-    <facet type="android" name="Android">
-      <configuration>
-        <option name="LIBRARY_PROJECT" value="true" />
-        <option name="UPDATE_PROPERTY_FILES" value="false" />
-      </configuration>
-    </facet>
-  </component>
+<module version="4">
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
-    <content url="file://$MODULE_DIR$">
-      <sourceFolder url="file://$MODULE_DIR$/gen" isTestSource="false" generated="true" />
-    </content>
-    <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="nine-old-androids" exported="" />
-    <orderEntry type="module-library" exported="" scope="PROVIDED">
-      <library>
-        <CLASSES>
-          <root url="file://$MODULE_DIR$/libs" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-        <jarDirectory url="file://$MODULE_DIR$/libs" recursive="false" />
-      </library>
-    </orderEntry>
   </component>
   <component name="org.twodividedbyzero.idea.findbugs">
     <option name="_basePreferences">
@@ -72,6 +49,7 @@
         <entry key="BuildStringPassthruGraph" value="true" />
         <entry key="CallToUnsupportedMethod" value="false" />
         <entry key="CalledMethods" value="true" />
+        <entry key="CharsetIssues" value="true" />
         <entry key="CheckCalls" value="false" />
         <entry key="CheckExpectedWarnings" value="false" />
         <entry key="CheckImmutableAnnotation" value="true" />
@@ -90,6 +68,7 @@
         <entry key="CommonsStringBuilderToString" value="true" />
         <entry key="ComparatorIdiom" value="true" />
         <entry key="CompareClassNameEquals" value="true" />
+        <entry key="ConflatingResourcesAndFiles" value="true" />
         <entry key="ConflictingTimeUnits" value="true" />
         <entry key="ConfusedInheritance" value="true" />
         <entry key="ConfusingArrayAsList" value="true" />
@@ -97,6 +76,8 @@
         <entry key="ConfusingFunctionSemantics" value="true" />
         <entry key="ConfusionBetweenInheritedAndOuterMethod" value="true" />
         <entry key="ConstantListIndex" value="true" />
+        <entry key="ConstantPasswordDetector" value="true" />
+        <entry key="ContainsBasedConditional" value="true" />
         <entry key="ContraVariantArrayAssignment" value="true" />
         <entry key="CookieDetector" value="true" />
         <entry key="CopiedOverriddenMethod" value="true" />
@@ -308,6 +289,7 @@
         <entry key="SluggishGui" value="true" />
         <entry key="SpoiledChildInterfaceImplementor" value="true" />
         <entry key="SpringMvcEndpointDetector" value="true" />
+        <entry key="SpringOAuthSecretDetector" value="true" />
         <entry key="SpuriousThreadStates" value="true" />
         <entry key="SqlInjectionDetector" value="true" />
         <entry key="StartInConstructor" value="true" />
@@ -325,6 +307,7 @@
         <entry key="SuspiciousComparatorReturnValues" value="true" />
         <entry key="SuspiciousGetterSetterUse" value="true" />
         <entry key="SuspiciousJDKVersionUse" value="true" />
+        <entry key="SuspiciousLoopSearch" value="true" />
         <entry key="SuspiciousNullGuard" value="true" />
         <entry key="SuspiciousThreadInterrupted" value="true" />
         <entry key="SuspiciousUninitializedArray" value="true" />

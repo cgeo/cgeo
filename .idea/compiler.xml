@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <option name="DEFAULT_COMPILER" value="Javac" />
-    <excludeFromCompile>
-      <directory url="file://$PROJECT_DIR$/tests/gen" includeSubdirectories="true" />
-      <directory url="file://$PROJECT_DIR$/cgeo-calendar/gen" includeSubdirectories="true" />
-      <directory url="file://$PROJECT_DIR$/main/gen" includeSubdirectories="true" />
-    </excludeFromCompile>
     <resourceExtensions />
     <wildcardResourcePatterns>
       <entry name="?*.properties" />
@@ -21,13 +15,9 @@
       <entry name="?*.ftl" />
     </wildcardResourcePatterns>
     <annotationProcessing>
-      <profile default="true" name="Default" enabled="true">
-        <outputRelativeToContentRoot value="true" />
-        <processorPath useClasspath="true">
-          <entry name="$PROJECT_DIR$/main/compile-libs" />
-        </processorPath>
+      <profile default="true" name="Default" enabled="false">
+        <processorPath useClasspath="true" />
       </profile>
     </annotationProcessing>
   </component>
 </project>
-
