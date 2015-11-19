@@ -152,22 +152,22 @@ dependencies {
     compile 'com.google.android.gms:play-services-location:8.3.0'
 
     // Apache Commons
-    compile "org.apache.commons:commons-collections4:$CommonsCollections4Version"
-    compile "org.apache.commons:commons-lang3:$CommonsLang3Version"
-    compile "commons-io:commons-io:$CommonsIoVersion"
+    compile 'org.apache.commons:commons-collections4:4.0'
+    compile 'org.apache.commons:commons-lang3:3.4'
+    compile 'commons-io:commons-io:2.4'
     compile 'com.google.code.findbugs:annotations:3.0.1u2'
 
     // Reactive extensions
-    compile "io.reactivex:rxjava:$RXJavaVersion"
-    compile "io.reactivex:rxandroid:$RXAndroidVersion"
+    compile 'io.reactivex:rxjava:1.0.16'
+    compile 'io.reactivex:rxandroid:0.25.0'
 
     // Jackson XML processing
-    compile "com.fasterxml.jackson.core:jackson-core:$JacksonCoreVersion"
-    compile "com.fasterxml.jackson.core:jackson-databind:$JacksonDatabindVersion"
-    compile "com.fasterxml.jackson.core:jackson-annotations:$JacksonAnnotationsVersion"
+    compile 'com.fasterxml.jackson.core:jackson-core:2.6.3'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.6.3'
+    compile 'com.fasterxml.jackson.core:jackson-annotations:2.6.3'
 
     // Zxing barcode reader integration
-    compile "com.google.zxing:android-integration:3.2.1"
+    compile 'com.google.zxing:android-integration:3.2.1'
 
     // Null annotations
     compile 'org.eclipse.jdt:org.eclipse.jdt.annotation:1.1.0'
@@ -185,15 +185,15 @@ dependencies {
 /*
  * AndroidAnnotations, https://github.com/excilys/androidannotations/wiki/building-project-gradle
  */
-    apt( "org.androidannotations:androidannotations:$AndroidAnnotationsVersion"){
+    apt( 'org.androidannotations:androidannotations:3.3.2'){
         exclude module:'androidannotations-api'
     }
-    compile "org.androidannotations:androidannotations-api:$AndroidAnnotationsVersion"
+    compile 'org.androidannotations:androidannotations-api:3.3.2'
 
 /*
  * ButterKnife view injection, https://github.com/JakeWharton/butterknife
  */
-    compile "com.jakewharton:butterknife:$ButterKnifeVersion"
+    compile 'com.jakewharton:butterknife:7.0.1'
 }
 
 
