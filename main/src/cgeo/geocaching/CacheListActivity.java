@@ -131,6 +131,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private static final String STATE_LIST_TYPE = "currentListType";
     private static final String STATE_LIST_ID = "currentListId";
 
+    private static final String BUNDLE_ACTION_KEY ="afterLoadAction";
+
     private CacheListType type = null;
     private Geopoint coords = null;
     private SearchResult search = null;
@@ -804,6 +806,19 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         return super.onOptionsItemSelected(item);
     }
 
+    private void checkIfEmptyAndRemoveAfterConfirm() {
+        final boolean isNonDefaultList = isConcreteList() && listId != StoredList.STANDARD_LIST_ID;
+        if (isNonDefaultList && CollectionUtils.isEmpty(cacheList)) {
+            // ask user, if he wants to delete the now empty list
+            Dialogs.confirmYesNo(this, R.string.list_dialog_remove_title, R.string.list_dialog_remove_nowempty, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(final DialogInterface dialog, final int whichButton) {
+                    removeListInternal();
+                }
+            });
+        }
+    }
+
     private boolean cacheToShow() {
         if (search == null || CollectionUtils.isEmpty(cacheList)) {
             showToast(res.getString(R.string.warn_no_cache_coord));
@@ -892,7 +907,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             @Override
             protected void onFinished() {
                 adapter.setSelectMode(false);
-                refreshCurrentList();
+                refreshCurrentList(AfterLoadAction.CHECK_IF_EMPTY);
             }
 
         }.execute();
@@ -1274,7 +1289,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             final CacheListActivity activity = activityRef.get();
             if (activity != null) {
                 activity.adapter.setSelectMode(false);
-                activity.refreshCurrentList();
+                activity.refreshCurrentList(AfterLoadAction.CHECK_IF_EMPTY);
                 activity.replaceCacheListFromSearch();
                 activity.getListView().setSelection(lastListPosition);
             }
@@ -1324,14 +1339,21 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     private void switchListById(final int id) {
+        switchListById(id, AfterLoadAction.NO_ACTION);
+    }
+
+    private void switchListById(final int id, @NonNull final AfterLoadAction action) {
         if (id < 0) {
             return;
         }
 
+        final Bundle extras = new Bundle();
+        extras.putSerializable(BUNDLE_ACTION_KEY, action);
+
         if (id == PseudoList.HISTORY_LIST.id) {
             type = CacheListType.HISTORY;
             getSupportLoaderManager().destroyLoader(CacheListType.OFFLINE.getLoaderId());
-            currentLoader = (AbstractSearchLoader) getSupportLoaderManager().restartLoader(CacheListType.HISTORY.getLoaderId(), null, this);
+            currentLoader = (AbstractSearchLoader) getSupportLoaderManager().restartLoader(CacheListType.HISTORY.getLoaderId(), extras, this);
         } else {
             if (id == PseudoList.ALL_LIST.id) {
                 listId = id;
@@ -1344,7 +1366,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             type = CacheListType.OFFLINE;
 
             getSupportLoaderManager().destroyLoader(CacheListType.HISTORY.getLoaderId());
-            currentLoader = (OfflineGeocacheListLoader) getSupportLoaderManager().restartLoader(CacheListType.OFFLINE.getLoaderId(), OfflineGeocacheListLoader.getBundleForList(listId), this);
+            extras.putAll(OfflineGeocacheListLoader.getBundleForList(listId));
+            currentLoader = (OfflineGeocacheListLoader) getSupportLoaderManager().restartLoader(CacheListType.OFFLINE.getLoaderId(), extras, this);
 
             Settings.saveLastList(listId);
         }
@@ -1425,8 +1448,12 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     private void refreshCurrentList() {
+        refreshCurrentList(AfterLoadAction.NO_ACTION);
+    }
+
+    private void refreshCurrentList(@NonNull final AfterLoadAction action) {
         refreshSpinnerAdapter();
-        switchListById(listId);
+        switchListById(listId, action);
     }
 
     public static void startActivityOffline(final Context context) {
@@ -1647,6 +1674,10 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         if (extras != null && StringUtils.isNotBlank(extras.getString(Intents.EXTRA_TITLE))) {
             title = extras.getString(Intents.EXTRA_TITLE);
         }
+        if (loader != null && extras != null && extras.getSerializable(BUNDLE_ACTION_KEY) != null) {
+            final AfterLoadAction action = (AfterLoadAction) extras.getSerializable(BUNDLE_ACTION_KEY);
+            loader.setAfterLoadAction(action);
+        }
         updateTitle();
         showProgress(true);
         showFooterLoadingCaches();
@@ -1673,6 +1704,15 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         showProgress(false);
         hideLoading();
         invalidateOptionsMenuCompatible();
+        if (arg0 instanceof AbstractSearchLoader) {
+            switch (((AbstractSearchLoader) arg0).getAfterLoadAction()) {
+                case CHECK_IF_EMPTY:
+                    checkIfEmptyAndRemoveAfterConfirm();
+                    break;
+                case NO_ACTION:
+                default:
+            }
+        }
     }
 
     @Override
@@ -1721,5 +1761,15 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                     .setContent(R.string.showcase_cachelist_title, R.string.showcase_cachelist_text);
         }
         return null;
+    }
+
+    /**
+     * Used to indicate if an action should be taken after the AbstractSearchLoader has finished
+     */
+    public enum AfterLoadAction {
+        /** Take no action */
+        NO_ACTION,
+        /** Check if the list is empty and prompt for deletion */
+        CHECK_IF_EMPTY
     }
 }

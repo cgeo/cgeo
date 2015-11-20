@@ -1,5 +1,6 @@
 package cgeo.geocaching.loaders;
 
+import cgeo.geocaching.CacheListActivity;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.gc.GCConstants;
 import cgeo.geocaching.connector.gc.RecaptchaHandler;
@@ -43,6 +44,7 @@ public abstract class AbstractSearchLoader extends AsyncTaskLoader<SearchResult>
     private SearchResult search;
     private boolean loading;
     private final CountDownLatch latch = new CountDownLatch(1);
+    private CacheListActivity.AfterLoadAction afterLoadAction = CacheListActivity.AfterLoadAction.NO_ACTION;
 
     public AbstractSearchLoader(final Context context) {
         super(context);
@@ -138,5 +140,13 @@ public abstract class AbstractSearchLoader extends AsyncTaskLoader<SearchResult>
     public void reset() {
         super.reset();
         search = null;
+    }
+
+    public CacheListActivity.AfterLoadAction getAfterLoadAction() {
+        return afterLoadAction;
+    }
+
+    public void setAfterLoadAction(final CacheListActivity.AfterLoadAction afterLoadAction) {
+        this.afterLoadAction = afterLoadAction;
     }
 }
