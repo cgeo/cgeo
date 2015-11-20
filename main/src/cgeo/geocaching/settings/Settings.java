@@ -19,6 +19,7 @@ import cgeo.geocaching.maps.interfaces.MapProvider;
 import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider;
 import cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider.OfflineMapSource;
+import cgeo.geocaching.sensors.MagnetometerAndAccelerometerProvider;
 import cgeo.geocaching.sensors.OrientationProvider;
 import cgeo.geocaching.sensors.RotationProvider;
 import cgeo.geocaching.utils.CryptUtils;
@@ -1216,6 +1217,9 @@ public class Settings {
     }
 
     public static boolean useOrientationSensor(final Context context) {
-        return OrientationProvider.hasOrientationSensor(context) && (getBoolean(R.string.pref_force_orientation_sensor, false) || !RotationProvider.hasRotationSensor(context));
+        return OrientationProvider.hasOrientationSensor(context) &&
+                (getBoolean(R.string.pref_force_orientation_sensor, false) ||
+                    !(RotationProvider.hasRotationSensor(context) || MagnetometerAndAccelerometerProvider.hasMagnetometerAndAccelerometerSensors(context))
+                );
     }
 }
