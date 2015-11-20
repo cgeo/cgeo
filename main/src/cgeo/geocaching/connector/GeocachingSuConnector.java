@@ -5,7 +5,7 @@ import cgeo.geocaching.Geocache;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 
-class GeocachingRuConnector extends AbstractConnector {
+class GeocachingSuConnector extends AbstractConnector {
 
     private static final CharSequence PREFIX_MULTISTEP_VIRTUAL = "MV";
     private static final CharSequence PREFIX_TRADITIONAL = "TR";
@@ -17,7 +17,7 @@ class GeocachingRuConnector extends AbstractConnector {
     @Override
     @NonNull
     public String getName() {
-        return "Geocaching.ru";
+        return "Geocaching.su";
     }
 
     @Override
