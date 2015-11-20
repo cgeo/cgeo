@@ -57,8 +57,11 @@ android {
     }
     
     buildTypes.all { buildType ->
-        // enable proguard
+        // enable proguard and remove unused code
         buildType.minifyEnabled true
+
+        // remove unused resources in addition to unused code
+        shrinkResources true
 
 		// proguard rules
         buildType.proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt'
