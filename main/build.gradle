@@ -115,8 +115,11 @@ android {
         exclude 'COPYING'
         exclude 'COPYING.LESSER'
         exclude '.readme'
+        // findbugs
         exclude 'META-INF/maven/com.google.code.findbugs/jsr305/pom.properties'
         exclude 'META-INF/maven/com.google.code.findbugs/jsr305/pom.xml'
+        // httpclientandroidlib
+        exclude 'ch/boye/httpclientandroidlib/impl/conn/tsccm/doc-files/tsccm-structure.png'
     }
 }
 
