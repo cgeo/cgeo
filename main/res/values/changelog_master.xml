@@ -5,7 +5,8 @@
     <b>Next feature release:</b>\n
     · New: Support opencaching links using their internal ID\n
     · New: Change geocaching platform quickly by clicking info on main screen\n
-    · New: Improved Done and Cancel buttons for coordinate input \n
+    · New: Improved Done and Cancel buttons for coordinate input\n
+    · New: Parse GPX files of Geocaching.Ru\n
     \n
     \n
   </string>

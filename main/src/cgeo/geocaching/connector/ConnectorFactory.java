@@ -70,6 +70,7 @@ public final class ConnectorFactory {
             new GeopeitusConnector(),
             new TerraCachingConnector(),
             new WaymarkingConnector(),
+            new GeocachingRuConnector(),
             UNKNOWN_CONNECTOR // the unknown connector MUST be the last one
     ));
 

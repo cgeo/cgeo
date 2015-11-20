@@ -78,6 +78,12 @@ public enum CacheType {
         FIND_BY_PATTERN.put("Traditional Geocache".toLowerCase(Locale.US), TRADITIONAL);
         // map lab caches to the virtual type for the time being
         FIND_BY_PATTERN.put("Lab Cache".toLowerCase(Locale.US), VIRTUAL);
+
+        // Geocaching.ru
+        FIND_BY_PATTERN.put("Multistep Traditional cache".toLowerCase(Locale.US), MULTI);
+        FIND_BY_PATTERN.put("Multistep Virtual cache".toLowerCase(Locale.US), MYSTERY);
+        FIND_BY_PATTERN.put("Contest".toLowerCase(Locale.US), EVENT);
+        FIND_BY_PATTERN.put("Event".toLowerCase(Locale.US), EVENT);
     }
 
     @NonNull
@@ -92,10 +98,10 @@ public enum CacheType {
     @NonNull
     public static CacheType getByPattern(final String pattern) {
         final CacheType result = (pattern != null) ? FIND_BY_PATTERN.get(pattern.toLowerCase(Locale.US).trim()) : null;
-        if (result == null) {
-            return UNKNOWN;
+        if (result != null) {
+            return result;
         }
-        return result;
+        return UNKNOWN;
     }
 
     @NonNull
