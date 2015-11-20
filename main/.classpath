@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="common"/>
 	<classpathentry kind="src" path="gen">
 		<attributes>
 			<attribute name="ignore_optional_problems" value="true"/>
