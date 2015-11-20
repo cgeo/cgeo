@@ -380,6 +380,7 @@
     <string name="list_dialog_create_err">c:geo failed to create the new list</string>
     <string name="list_dialog_remove_title">Remove list</string>
     <string name="list_dialog_remove_description">Do you want to remove the current list? All caches remaining in the list will be moved to \"Stored\".</string>
+    <string name="list_dialog_remove_nowempty">List is empty. Do you want to remove the current list?</string>
     <string name="list_dialog_remove">Remove</string>
     <string name="list_dialog_remove_ok">The list was removed</string>
     <string name="list_dialog_remove_err">c:geo failed to remove the current list</string>
