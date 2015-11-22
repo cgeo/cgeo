@@ -31,6 +31,7 @@ class StateFilterFactory implements IFilterFactory {
         filters.add(new StateNotStoredFilter());
         filters.add(new RatingFilter());
         filters.add(new TrackablesFilter());
+        filters.add(new MultiListingFilter());
 
         Collections.sort(filters, new Comparator<AbstractFilter>() {
 
