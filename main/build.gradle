@@ -83,9 +83,9 @@ android {
             java.srcDirs = ['../tests/src']
             resources.srcDirs = ['../tests/src']
             res.srcDirs = ['../tests/res']
+            // map tests to the Eclipse style test project
+            setRoot("../tests")
         }
-        // map tests to the Eclipse style test project
-        androidTest.setRoot('../tests')
     }
 
     testOptions {
