@@ -48,8 +48,8 @@ android {
             // debug build name contains git commit for better reproduction of bugs
             versionNameSuffix "-" + gitCommitId().substring(0, 7) + " developer build"
 
-            // additional proguard rules just for the test code in 'proguard-testing.txt'
-			testProguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt', 'proguard-testing.txt'
+            // additional proguard rules just for the test code
+			testProguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt', '../tests/proguard-project.txt'
         }
         release {
             signingConfig signingConfigs.release
@@ -79,12 +79,12 @@ android {
         }
         // device/emulator based instrumentation tests in source set "androidTest"
         androidTest{
-            manifest.srcFile '../tests/AndroidManifest.xml'
-            java.srcDirs = ['../tests/src']
-            resources.srcDirs = ['../tests/src']
-            res.srcDirs = ['../tests/res']
             // map tests to the Eclipse style test project
             setRoot("../tests")
+            manifest.srcFile '../tests/AndroidManifest.xml'
+            java.srcDirs = ['../tests/src', 'src']
+            resources.srcDirs = ['../tests/src']
+            res.srcDirs = ['../tests/res']
         }
     }
 
@@ -164,6 +164,7 @@ dependencies {
     compile 'org.apache.commons:commons-lang3:3.4'
     compile 'commons-io:commons-io:2.4'
     compile 'com.google.code.findbugs:annotations:3.0.1u2'
+    androidTestCompile 'com.google.code.findbugs:annotations:3.0.1u2'
 
     // Reactive extensions
     compile 'io.reactivex:rxjava:1.0.16'
@@ -188,7 +189,10 @@ dependencies {
     androidTestCompile files('../tests/libs/android-junit-report-1.5.8.jar')
     
     // AssertJ for testing
-    androidTestCompile 'org.assertj:assertj-core:2.2.0'
+    androidTestCompile 'org.assertj:assertj-core:1.7.0'
+
+    // Espresso
+    androidTestCompile 'com.jakewharton.espresso:espresso:1.1-r3'
 
 /*
  * AndroidAnnotations, https://github.com/excilys/androidannotations/wiki/building-project-gradle
