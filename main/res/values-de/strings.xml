@@ -332,6 +332,7 @@
   <string name="caches_filter_personal_data">Mit eigenen Informationen</string>
   <string name="caches_filter_rating">Mit Bewertung</string>
   <string name="caches_filter_own_rating">Mit eigener Bewertung</string>
+  <string name="caches_filter_multi_listing">Mehrfach gelistet mit unterschiedlichem Status</string>
   <string name="caches_removing_from_history">Lösche aus Verlauf…</string>
   <string name="caches_clear_offlinelogs">Offline-Logs löschen</string>
   <string name="caches_clear_offlinelogs_message">Möchtest du die Offline-Logs löschen?</string>
