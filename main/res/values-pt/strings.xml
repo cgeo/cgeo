@@ -80,7 +80,12 @@
   <string name="log_tb_archived">Arquivado</string>
   <string name="log_save">Guardar offline</string>
   <string name="log_saving">A gravar o registo…</string>
+  <string name="log_saving_and_uploading">A enviar o registo e a efetuar upload da imagem…</string>
   <string name="log_posting_log">A publicar log…</string>
+  <string name="log_posting_twitter">A publicar tweet…</string>
+  <string name="log_posting_gcvote">A publicar GCVote…</string>
+  <string name="log_posting_image">A publicar imagem…</string>
+  <string name="log_posting_generic_trackable">A publicar %1$s %2$s/%3$s</string>
   <string name="log_clear">Limpar</string>
   <string name="log_post_not_possible">Download de dados em progresso...\n Por favor tente novamente dentro de alguns segundos ou verifique sua conexão de internet.</string>
   <string name="log_post_geocode_missing">Geocodigo em falta…</string>
@@ -213,6 +218,10 @@
   <string name="warn_no_pocket_query_found">Nenhuma pocket query encontrada on-line.</string>
   <string name="info_log_posted">O c:geo publicou o registo com sucesso.</string>
   <string name="info_log_saved">O c:geo gravou o registo com sucesso.</string>
+  <string name="info_log_post_failed">Falha ao publicar registo.</string>
+  <string name="info_log_post_failed_reason">Motivo: %s</string>
+  <string name="info_log_post_retry">Tentar novamente</string>
+  <string name="info_log_post_save">Guardar offline</string>
   <string name="info_log_cleared">O registo foi limpo.</string>
   <string name="info_log_type_changed">O tipo de registo foi alterado!</string>
   <string name="info_select_logimage_cancelled">A selecção ou captura de imagem foi cancelada.</string>
@@ -221,6 +230,7 @@
   <string name="info_cache_saved">A cache foi armazenada localmente</string>
   <string name="err_trackable_log_not_anonymous">Logar %1$s a partir do c:geo não pode ser feito de forma anónima. Quer abrir as configurações para preencher as suas credenciais de %2$s?</string>
   <string name="err_trackable_no_preference_activity">Desculpa, não posso encontrar uma tela de preferência apropriada.</string>
+  <string name="warn_discard_changes">As alterações ao waypoint não salvas foram descartadas!</string>
   <string name="loc_last">Último conhecido</string>
   <string name="loc_net">Rede</string>
   <string name="loc_fused">Combinados</string>
@@ -360,16 +370,23 @@
   <string name="settings_title_services">Serviços</string>
   <string name="settings_summary_services">Configure a informação da conta de utilizador e o acesso a serviços opcionais.</string>
   <string name="settings_title_appearance">Aparência</string>
+  <string name="settings_summary_appearance">Configurar unidades de distância, idioma e cores da Aplicação.</string>
   <string name="settings_title_cachedetails">Detalhos da Cache</string>
+  <string name="settings_summary_cachedetails">Personalizar a exibição de informações da cache. </string>
   <string name="settings_title_offlinedata">Dados Offline</string>
+  <string name="settings_summary_offlinedata">Configurar mapas estáticos e outros dados de armazenamento offline.</string>
   <string name="settings_title_logging">A fazer o registo</string>
+  <string name="settings_summary_logging">Configure a sua assinatura e as suas contas.</string>
   <string name="settings_title_map">Mapa</string>
+  <string name="settings_summary_map">Selecione o tipo de mapa, configurações de mapa offline e detalhes do mapa.</string>
   <string name="settings_title_map_data">Dados do Mapa</string>
   <string name="settings_title_map_content">Conteúdo do Mapa</string>
   <string name="settings_title_gpx">GPX</string>
   <string name="settings_title_basicmembers">Opções para Membros Básicos</string>
   <string name="settings_title_navigation">Navegação</string>
+  <string name="settings_summary_navigation">Escolher métodos de navegação preferidos e selecione aplicações de navegação externa.</string>
   <string name="settings_title_system">Sistema</string>
+  <string name="settings_summary_system">Fazer backup e restaurar, configurar diretórios da aplicação e outras configurações específicas do sistema.</string>
   <string name="settings_title_navigation_menu">Menu de navegação</string>
   <string name="settings_category_browser">Browser</string>
   <string name="settings_category_geocaching">Geocaching</string>
@@ -424,6 +441,7 @@
   <string name="init_authorization_credential_username">Utilizador</string>
   <string name="init_authorization_credential_password">Senha</string>
   <string name="settings_service_active">Activo</string>
+  <string name="settings_navigation_disabled">Esta aplicação parece não estar instalada</string>
   <string name="init_signature">Assinatura</string>
   <string name="init_template_help">Sequências de caracteres como [nome] serão expandidas mais tarde quando este formato for usado.</string>
   <string name="init_signature_template_button">Inserir modelo</string>
@@ -536,6 +554,9 @@
   <string name="init_low_power">Modo de baixo consumo de energia</string>
   <string name="init_low_power_note">O modo de baixo consumo de energia evita usar o GPS e o giroscópio quando não é necessária uma localização muito precisa, à custa de tempos de fixação mais longos.</string>
   <string name="init_low_power_mode">Ativar modo de baixo consumo de energia</string>
+  <string name="init_force_orientation_sensor_title">Sensor de orientação</string>
+  <string name="init_force_orientation_sensor_note">Em alguns dispositivos, o sensor normal de rotação vectorial tem um comportamento errático, dando a direcção errada. Neste caso, um sensor alternativo (o sensor de orientação) pode proporcionar melhores resultados.</string>
+  <string name="init_force_orientation_sensor">Forçar uso do sensor de orientação</string>
   <string name="init_create_memory_dump">criar dump de memória</string>
   <string name="init_memory_dump">dump de memória</string>
   <string name="init_memory_dumped">dump de memória em %s</string>
@@ -678,6 +699,7 @@
   <string name="cache_menu_navigate">Navegar</string>
   <string name="cache_menu_navigation_drive">Navegar (Conduzir)</string>
   <string name="cache_menu_navigation_walk">Navegar (Caminhar)</string>
+  <string name="cache_menu_navigation_transit">Navegação (Transportes)</string>
   <string name="cache_menu_navigation_bike">Navegar (Andar de bicicleta)</string>
   <string name="cache_menu_maps_directions">Direcções pelo Google Maps</string>
   <string name="cache_menu_sygic_walk">Sygic (caminhar)</string>
@@ -707,10 +729,13 @@
   <string name="cache_menu_vote">Voto</string>
   <string name="cache_menu_checker">Abrir Geochecker</string>
   <string name="cache_menu_ignore">Ignorar a cache</string>
+  <string name="ignore_confirm_title">Tenha Cuidado</string>
+  <string name="ignore_confirm_message">Ignorar uma cache significa que essa cache nunca aparecerá novamente ao consultar dados de geocaching.com. Só será capaz de ver novamente a cache reativando-a no site.</string>
   <string name="cache_status">Estado</string>
   <string name="cache_status_offline_log">Registo gravado</string>
   <string name="cache_status_found">Encontrada</string>
   <string name="cache_not_status_found">Não encontrado</string>
+  <string name="cache_never_found">Nunca encontrada</string>
   <string name="cache_status_archived">Arquivada</string>
   <string name="cache_status_disabled">Desactivada</string>
   <string name="cache_status_premium">Apenas membros premium</string>
@@ -773,6 +798,8 @@
   <string name="gpx_import_select_list_title">Importar GPX para lista</string>
   <string name="gpx_import_android">Importar do Android</string>
   <string name="map_file_select_title">Seleccione ficheiro de mapa</string>
+  <string name="web_import_title">Importar de send2cgeo</string>
+  <string name="web_import_waiting">A aguardar novas caches de send2cgeo…</string>
   <string name="web_downloading">A transferir</string>
   <string name="web_downloaded">Transferido</string>
   <string name="popup_more">Mais detalhes</string>
@@ -940,6 +967,8 @@
   <string name="helper_google_translate_description">Se fizer o download dos pacotes de tradução na app Google Translate, pode facilmente traduzir as descrições da cache no c:geo com um toque longo sobre o texto da descrição da cache (mesmo sem ligação à Internet).</string>
   <string name="helper_wear_title">c:geo Wear</string>
   <string name="helper_wear_description">c:geo Wear é um plugin para o c:geo que permite que você navegue para geocaches usando seu smartwatch Android Wear.</string>
+  <string name="helper_where_you_go_title">WhereYouGo</string>
+  <string name="helper_where_you_go_description">WhereYouGo permite jogar e pesquisar geocaches do tipo Whereigo. c:Geo pode acionar o download automático dos cartuchos nesta aplicação.</string>
   <string name="addon_missing_title">Add-On em falta</string>
   <string name="addon_download_prompt">Obter agora a partir de Google Play.</string>
   <string name="export">Exportar</string>
@@ -1265,6 +1294,7 @@
   <string name="trackable_title_log_without_geocode">Geocodigo não definido</string>
   <string name="trackable_log_without_geocode">Você está prestes a enviar um log sem um geocódigo. É aconselhado a definir um. Você quer adicioná-lo agora?</string>
   <string name="do_not_ask_me_again">Não perguntar novamente</string>
+  <string name="geokrety_parsing_failed">Falha ao analisar a resposta GeoKrety.</string>
   <string name="settings_map_direction">Mostrar a direcção</string>
   <string name="settings_summary_map_direction">Mostrar uma linha de direcção para o destino de navegação</string>
   <string name="map_direction">Mostrar a direcção</string>
@@ -1280,4 +1310,5 @@
   </plurals>
   <string name="command_rename_list_result">Lista renomeada</string>
   <string name="command_delete_list_result">Lista apagada</string>
+  <string name="fav_points_remaining">"Adiciona esta cache aos favoritos (%s restantes)"</string>
 </resources>
