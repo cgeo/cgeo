@@ -111,7 +111,7 @@ public final class ContactsActivity extends Activity {
 
     @NonNull
     private List<Pair<Integer, String>> getContacts(final @NonNull String searchName, final Uri uri, final @NonNull String idColumnName, final @NonNull String selectionColumnName, final boolean like) {
-        final String[] projection = new String[] { idColumnName, selectionColumnName };
+        final String[] projection = new String[] { idColumnName, selectionColumnName, ContactsContract.Contacts.DISPLAY_NAME };
         final String selection = selectionColumnName + (like ? " LIKE" : " =") + " ? COLLATE NOCASE";
         final String[] selectionArgs = new String[] { like ? "%" + searchName + "%" : searchName };
         Cursor cursor = null;
@@ -122,7 +122,9 @@ public final class ContactsActivity extends Activity {
             while (cursor != null && cursor.moveToNext()) {
                 final int foundId = cursor.getInt(0);
                 final String foundName = cursor.getString(1);
-                result.add(new Pair<>(foundId, foundName));
+                final String displayName = cursor.getString(2);
+                result.add(new Pair<>(foundId, StringUtils.isNotEmpty(displayName) &&
+                        !StringUtils.equalsIgnoreCase(foundName, displayName) ? foundName + " (" + displayName + ")" : foundName));
             }
         } catch (final Exception e) {
             Log.e(LOG_TAG, "ContactsActivity.getContactId", e);
