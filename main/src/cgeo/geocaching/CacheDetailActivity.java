@@ -1277,10 +1277,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             final TextView text = ButterKnife.findById(view, R.id.watchlist_text);
 
             final int watchListCount = cache.getWatchlistCount();
-            String watchListCountString = "";
-            if (watchListCount != -1) {
-                watchListCountString = '(' + getString(R.string.cache_watchlist_count, watchListCount) + ')';
-            }
+            final String watchListCountString = watchListCount != -1 ? '(' + getString(R.string.cache_watchlist_count, watchListCount) + ')' : "";
 
             if (cache.isOnWatchlist() || cache.isOwner()) {
                 buttonAdd.setVisibility(View.GONE);
