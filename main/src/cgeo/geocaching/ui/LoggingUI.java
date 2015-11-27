@@ -119,11 +119,10 @@ public final class LoggingUI extends AbstractUIFactory {
                     cache.logOffline(activity, logTypeEntry.logType);
                 }
                 if (selectedView != null) {
-                    final ViewHolder holder;
-                    holder = (ViewHolder) selectedView.getTag();
-					if (holder != null) {
-                    	CacheListAdapter.updateViewHolder(holder, cache, res);
-					}
+                    final ViewHolder holder = (ViewHolder) selectedView.getTag();
+                    if (holder != null) {
+                        CacheListAdapter.updateViewHolder(holder, cache, res);
+                    }
                 }
             }
         });
