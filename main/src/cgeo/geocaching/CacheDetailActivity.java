@@ -612,6 +612,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             case R.id.menu_export_fieldnotes:
                 new FieldnoteExport().export(Collections.singletonList(cache), this);
                 return true;
+            case R.id.menu_edit_fieldnote:
+                editPersonalNote(cache, CacheDetailActivity.this);
+                return true;
             default:
                 if (NavigationAppFactory.onMenuItemSelected(item, this, cache)) {
                     return true;
@@ -751,6 +754,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         cache.setChangeNotificationHandler(new ChangeNotificationHandler(this, progress));
 
         setCacheTitleBar(cache);
+        final ScrollView scroll = ButterKnife.findById(this, R.id.detailScroll);
 
         // reset imagesList so Images view page will be redrawn
         imagesList = null;
@@ -761,6 +765,16 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         progress.dismiss();
 
         Settings.addCacheToHistory(cache.getGeocode());
+        if (scroll != null) {
+            final int lastScrollPos = scroll.getScrollY();
+            final ScrollView scrollNew = ButterKnife.findById(this, R.id.detailScroll);
+            scrollNew.post(new Runnable() {
+                @Override
+                public void run() {
+                    scrollNew.scrollTo(0, lastScrollPos);
+                }
+            });
+        }
     }
 
     /**
@@ -2293,11 +2307,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 cache.parseWaypointsFromNote();
                 DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
                 return null;
-            }
-
-            @Override
-            protected void onPostExecute(final Void v) {
-                notifyDataSetChanged();
             }
         }.execute();
     }

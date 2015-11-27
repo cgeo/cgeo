@@ -12,7 +12,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
@@ -20,7 +19,10 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.view.ContextThemeWrapper;
 import android.view.View;
+import android.view.Window;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 public class EditNoteDialog extends DialogFragment {
 
@@ -69,24 +71,33 @@ public class EditNoteDialog extends DialogFragment {
         }
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-        builder.setTitle(R.string.cache_personal_note);
         builder.setView(view);
-        builder.setPositiveButton(android.R.string.ok,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(final DialogInterface dialog, final int whichButton) {
-                        ((EditNoteDialogListener) getActivity()).onFinishEditNoteDialog(mEditText.getText().toString());
-                        dialog.dismiss();
-                    }
-                });
-        builder.setNegativeButton(android.R.string.cancel,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(final DialogInterface dialog, final int whichButton) {
-                        dialog.dismiss();
-                    }
-                });
         final AlertDialog dialog = builder.create();
+
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        final TextView title = ButterKnife.findById(view, R.id.dialog_title_title);
+        title.setText(R.string.cache_personal_note);
+        title.setVisibility(View.VISIBLE);
+        
+        final ImageButton cancel = ButterKnife.findById(view, R.id.dialog_title_cancel);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View view) {
+                dialog.dismiss();
+            }
+        });
+        cancel.setVisibility(View.VISIBLE);
+        
+        final ImageButton done = ButterKnife.findById(view, R.id.dialog_title_done);
+        done.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View view) {
+                ((EditNoteDialogListener) getActivity()).onFinishEditNoteDialog(mEditText.getText().toString());
+                dialog.dismiss();
+            }
+        });
+        done.setVisibility(View.VISIBLE);
+        
         new Keyboard(activity).showDelayed(mEditText);
         return dialog;
     }
