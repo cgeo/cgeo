@@ -82,12 +82,12 @@
   <string name="log_saving">Sender logbesked…</string>
   <string name="log_saving_and_uploading">Sender logbesked og billede…</string>
   <string name="log_posting_log">Sender logbesked…</string>
-  <string name="log_posting_twitter">Sender tweet...</string>
+  <string name="log_posting_twitter">Sender tweet…</string>
   <string name="log_posting_gcvote">Sender GCVote…</string>
   <string name="log_posting_image">Sender billede…</string>
   <string name="log_posting_generic_trackable">Sender %1$s %2$s/%3$s</string>
   <string name="log_clear">Fjern</string>
-  <string name="log_post_not_possible">Download af data er i gang...\nPrøv venligst igen om nogle sekunder eller kontrollér din internetforbindelse.</string>
+  <string name="log_post_not_possible">Download af data er i gang…\nPrøv venligst igen om nogle sekunder eller kontrollér din internetforbindelse.</string>
   <string name="log_post_geocode_missing">Geocode mangler…</string>
   <string name="log_date_future_not_allowed">Logdatoer, der ligger i fremtiden, er ikke tilladt.</string>
   <string name="log_add">Tilføj</string>
