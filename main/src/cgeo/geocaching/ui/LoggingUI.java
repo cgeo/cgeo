@@ -6,12 +6,14 @@ import cgeo.geocaching.LogEntry;
 import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.ui.CacheListAdapter.ViewHolder;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
 
 import java.util.ArrayList;
@@ -22,6 +24,8 @@ public final class LoggingUI extends AbstractUIFactory {
     private LoggingUI() {
         // utility class
     }
+
+    private static View selectedView;
 
     public static class LogTypeEntry {
         private final LogType logType;
@@ -114,6 +118,12 @@ public final class LoggingUI extends AbstractUIFactory {
                 } else {
                     cache.logOffline(activity, logTypeEntry.logType);
                 }
+                if (selectedView != null) {
+                    final ViewHolder holder = (ViewHolder) selectedView.getTag();
+                    if (holder != null) {
+                        CacheListAdapter.updateViewHolder(holder, cache, res);
+                    }
+                }
             }
         });
 
@@ -130,6 +140,11 @@ public final class LoggingUI extends AbstractUIFactory {
 
         final MenuItem itemOffline = menu.findItem(R.id.menu_log_visit_offline);
         itemOffline.setVisible(cache.supportsLogging() && Settings.getLogOffline());
+    }
+
+    public static void onPrepareOptionsMenu(final Menu menu, final Geocache cache, final View view) {
+        onPrepareOptionsMenu(menu, cache);
+        selectedView = view;
     }
 
     public static void addMenuItems(final Activity activity, final Menu menu, final Geocache cache) {
