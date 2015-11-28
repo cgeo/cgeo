@@ -82,7 +82,6 @@ public class CgeoApplication extends Application {
         if (GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(this) == ConnectionResult.SUCCESS) {
             isGooglePlayServicesAvailable = true;
         }
-        Log.i("Google Play services are " + (isGooglePlayServicesAvailable ? "" : "not ") + "available");
         final Sensors sensors = Sensors.getInstance();
         sensors.setupGeoDataObservables(Settings.useGooglePlayServices(), Settings.useLowPowerMode());
         sensors.setupDirectionObservable();

@@ -33,7 +33,6 @@ public class OrientationProvider {
         if (orientationSensor == null) {
             return Observable.error(new RuntimeException("no orientation sensor"));
         }
-        Log.d("OrientationProvider: sensor found");
         final Observable<Float> observable = Observable.create(new OnSubscribe<Float>() {
             @Override
             public void call(final Subscriber<? super Float> subscriber) {

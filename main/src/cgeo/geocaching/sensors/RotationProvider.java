@@ -42,7 +42,6 @@ public class RotationProvider {
             Log.w("RotationProvider: no rotation sensor on this device");
             return Observable.error(new RuntimeException("no rotation sensor"));
         }
-        Log.d("RotationProvider: sensor found");
         final Observable<Float> observable = Observable.create(new OnSubscribe<Float>() {
 
             @Override

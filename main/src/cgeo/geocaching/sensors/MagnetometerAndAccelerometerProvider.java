@@ -29,7 +29,6 @@ public class MagnetometerAndAccelerometerProvider {
         if (magnetometerSensor == null || accelerometerSensor == null) {
             return Observable.error(new RuntimeException("no magenetic or accelerometer sensor"));
         }
-        Log.d("MagnetometerAndAccelerometerProvider: sensors found");
         final Observable<Float> observable = Observable.create(new OnSubscribe<Float>() {
             private final float[] lastAccelerometer = new float[3];
             private final float[] lastMagnetometer = new float[3];
