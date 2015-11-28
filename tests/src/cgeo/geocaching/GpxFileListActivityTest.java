@@ -3,14 +3,23 @@ package cgeo.geocaching;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import android.annotation.TargetApi;
+import android.os.Looper;
 import android.test.ActivityInstrumentationTestCase2;
 
 @TargetApi(8)
 public class GpxFileListActivityTest extends ActivityInstrumentationTestCase2<GpxFileListActivity> {
-    private final GpxFileListActivity importGpxActivity = new GpxFileListActivity();
+    private final GpxFileListActivity importGpxActivity;
 
     public GpxFileListActivityTest() {
         super(GpxFileListActivity.class);
+        // This is necessary because the GpxFileListActivity class creates Handler instances (although
+        // we will never give them a chance to run).
+        try {
+            Looper.prepare();
+        } catch (final RuntimeException ignored) {
+            // Looper has already been created for this thread.
+        }
+        importGpxActivity = new GpxFileListActivity();
     }
 
     public void testPocketQueryCreator() {
