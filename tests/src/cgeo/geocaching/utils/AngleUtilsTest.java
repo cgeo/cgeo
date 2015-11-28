@@ -17,16 +17,16 @@ public class AngleUtilsTest extends AndroidTestCase {
     }
 
     public static void testDifference() {
-        assertEquals(0.0f, AngleUtils.difference(12, 12));
-        assertEquals(0.0f, AngleUtils.difference(372, 12));
-        assertEquals(0.0f, AngleUtils.difference(12, 372));
-        assertEquals(10.0f, AngleUtils.difference(10, 20));
-        assertEquals(10.0f, AngleUtils.difference(355, 5));
-        assertEquals(10.0f, AngleUtils.difference(715, -715));
-        assertEquals(-10.0f, AngleUtils.difference(20, 10));
-        assertEquals(-10.0f, AngleUtils.difference(5, 355));
-        assertEquals(-10.0f, AngleUtils.difference(-715, 715));
-        assertEquals(-180.0f, AngleUtils.difference(-90, 90));
-        assertEquals(-180.0f, AngleUtils.difference(90, -90));
+        assertThat(AngleUtils.difference(12, 12)).isEqualTo(0.0f);
+        assertThat(AngleUtils.difference(372, 12)).isEqualTo(0.0f);
+        assertThat(AngleUtils.difference(12, 372)).isEqualTo(0.0f);
+        assertThat(AngleUtils.difference(10, 20)).isEqualTo(10.0f);
+        assertThat(AngleUtils.difference(355, 5)).isEqualTo(10.0f);
+        assertThat(AngleUtils.difference(715, -715)).isEqualTo(10.0f);
+        assertThat(AngleUtils.difference(20, 10)).isEqualTo(-10.0f);
+        assertThat(AngleUtils.difference(5, 355)).isEqualTo(-10.0f);
+        assertThat(AngleUtils.difference(-715, 715)).isEqualTo(-10.0f);
+        assertThat(AngleUtils.difference(-90, 90)).isEqualTo(-180.0f);
+        assertThat(AngleUtils.difference(90, -90)).isEqualTo(-180.0f);
     }
 }

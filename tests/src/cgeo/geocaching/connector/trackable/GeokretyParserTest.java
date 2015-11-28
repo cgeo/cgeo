@@ -60,23 +60,21 @@ public class GeokretyParserTest extends AbstractResourceInstrumentationTestCase 
         final ImmutablePair<Integer, List<String>> response3 = GeokretyParser.parseResponse(getFileContent(R.raw.geokret144_xml));
         assertThat(response3).isNotNull();
         assert response3 != null;
-        assertThat(response3.getLeft()).isNotNull();
-        assertThat(response3.getLeft()).isEqualTo(0);
-        assertThat(response3.getRight()).isNotNull();
-        assertThat(response3.getRight()).hasSize(2);
+        assertThat(response3.getLeft()).isNotNull().isEqualTo(0);
+        assertThat(response3.getRight()).isNotNull().hasSize(2);
         assertThat(response3.getRight().get(0)).isEqualTo("Wrong secid");
-        assertThat(response3.getRight().get(1)).isEqualTo("Wrond date or time");
+        assertThat(response3.getRight().get(1)).isEqualTo("Wrond date or time"); // sic
     }
 
     public static void testGetType() throws Exception {
         final CgeoApplication app = CgeoApplication.getInstance();
-        assertEquals(GeokretyParser.getType(0), app.getString(cgeo.geocaching.R.string.geokret_type_traditional));
-        assertEquals(GeokretyParser.getType(1), app.getString(cgeo.geocaching.R.string.geokret_type_book_or_media));
-        assertEquals(GeokretyParser.getType(2), app.getString(cgeo.geocaching.R.string.geokret_type_human));
-        assertEquals(GeokretyParser.getType(3), app.getString(cgeo.geocaching.R.string.geokret_type_coin));
-        assertEquals(GeokretyParser.getType(4), app.getString(cgeo.geocaching.R.string.geokret_type_post));
-        assertNull(GeokretyParser.getType(5));
-        assertNull(GeokretyParser.getType(42));
+        assertThat(GeokretyParser.getType(0)).isEqualTo(app.getString(cgeo.geocaching.R.string.geokret_type_traditional));
+        assertThat(GeokretyParser.getType(1)).isEqualTo(app.getString(cgeo.geocaching.R.string.geokret_type_book_or_media));
+        assertThat(GeokretyParser.getType(2)).isEqualTo(app.getString(cgeo.geocaching.R.string.geokret_type_human));
+        assertThat(GeokretyParser.getType(3)).isEqualTo(app.getString(cgeo.geocaching.R.string.geokret_type_coin));
+        assertThat(GeokretyParser.getType(4)).isEqualTo(app.getString(cgeo.geocaching.R.string.geokret_type_post));
+        assertThat(GeokretyParser.getType(5)).isNull();
+        assertThat(GeokretyParser.getType(42)).isNull();
     }
 
     public void testParseNoValueFields() throws Exception {

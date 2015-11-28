@@ -14,7 +14,7 @@ public class OkapiClientTest extends CGeoTestCase {
         final String geoCode = "OU0331";
         Geocache cache = OkapiClient.getCache(geoCode);
         assertThat(cache).as("Cache from OKAPI").isNotNull();
-        assertEquals("Unexpected geo code", geoCode, cache.getGeocode());
+        assertThat(cache.getGeocode()).isEqualTo(geoCode);
         assertThat(cache.getName()).isEqualTo("Oshkosh Municipal Tank");
         assertThat(cache.isDetailed()).isTrue();
         // cache should be stored to DB (to listID 0) when loaded above

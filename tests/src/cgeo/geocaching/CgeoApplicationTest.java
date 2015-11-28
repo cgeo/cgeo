@@ -52,7 +52,8 @@ public class CgeoApplicationTest extends CGeoTestCase {
     @SuppressWarnings("static-method")
     @SmallTest
     public void testPreconditions() {
-        assertEquals("Login to Geocaching.com failed", StatusCode.NO_ERROR, GCLogin.getInstance().login());
+        assertThat(GCLogin.getInstance().login()).as("User and password must be provided").isEqualTo(StatusCode.NO_ERROR);
+        assertThat(Settings.isGCPremiumMember()).as("User must be premium member for some of the tests to succeed").isTrue();
     }
 
     /**
