@@ -1,5 +1,8 @@
 package cgeo.geocaching;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 import cgeo.calendar.CalendarAddon;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.AbstractViewPagerActivity;
@@ -70,6 +73,17 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import rx.Observable;
+import rx.Observable.OnSubscribe;
+import rx.Subscriber;
+import rx.Subscription;
+import rx.android.app.AppObservable;
+import rx.functions.Action0;
+import rx.functions.Action1;
+import rx.functions.Func0;
+import rx.functions.Func1;
+import rx.subscriptions.CompositeSubscription;
+import rx.subscriptions.Subscriptions;
 
 import android.R.color;
 import android.app.AlertDialog;
@@ -130,20 +144,6 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.regex.Pattern;
-
-import butterknife.Bind;
-import butterknife.ButterKnife;
-import rx.Observable;
-import rx.Observable.OnSubscribe;
-import rx.Subscriber;
-import rx.Subscription;
-import rx.android.app.AppObservable;
-import rx.functions.Action0;
-import rx.functions.Action1;
-import rx.functions.Func0;
-import rx.functions.Func1;
-import rx.subscriptions.CompositeSubscription;
-import rx.subscriptions.Subscriptions;
 
 /**
  * Activity to handle all single-cache-stuff.
@@ -1299,7 +1299,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             final TextView text = ButterKnife.findById(view, R.id.watchlist_text);
 
             final int watchListCount = cache.getWatchlistCount();
-            final String watchListCountString = watchListCount != -1 ? '(' + getString(R.string.cache_watchlist_count, watchListCount) + ')' : "";
+            final String watchListCountString = watchListCount != -1 ? " (" + getString(R.string.cache_watchlist_count, watchListCount) + ')' : "";
 
             if (cache.isOnWatchlist() || cache.isOwner()) {
                 buttonAdd.setVisibility(View.GONE);

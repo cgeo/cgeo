@@ -642,8 +642,6 @@
   <string name="cache_description">Descripción</string>
   <string name="cache_description_long">Descripción larga</string>
   <string name="cache_description_table_note">La descripción contiene formato de tabla que puede necesitar ser vista en %s para mostrarse correctamente.</string>
-  <string name="cache_watchlist_on">Este caché está en tu Lista de seguimiento.</string>
-  <string name="cache_watchlist_not_on">Este caché no está en tu Lista de seguimiento.</string>
   <string name="cache_watchlist_add">Añadir a Lista de seguimiento</string>
   <string name="cache_watchlist_remove">Borrar de la Lista de seguimiento</string>
   <string name="cache_favpoint_on">Este caché es uno de tus favoritos.</string>

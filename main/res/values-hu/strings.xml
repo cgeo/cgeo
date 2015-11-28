@@ -656,8 +656,6 @@
   <string name="cache_description">Leírás</string>
   <string name="cache_description_long">Hosszú leírás</string>
   <string name="cache_description_table_note">A leírás táblázatot is tartalmaz. Lehetséges, hogy csak a %s jeleníti meg azt helyesen.</string>
-  <string name="cache_watchlist_on">Ez a láda a figyelőlistádon van.</string>
-  <string name="cache_watchlist_not_on">Ez a láda nincs a figyelőlistádon.</string>
   <string name="cache_watchlist_add">Hozzáadás</string>
   <string name="cache_watchlist_remove">Eltávolítás</string>
   <string name="cache_favpoint_on">Ez a láda a kedvenceid egyike.</string>

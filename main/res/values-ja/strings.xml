@@ -585,8 +585,6 @@
   <string name="cache_description">説明</string>
   <string name="cache_description_long">全て表示</string>
   <string name="cache_description_table_note">キャッシュ情報の説明にはhtmlを使ったテーブル表が含まれています。正しく表示するには%sで開く必要があるかもしれません。</string>
-  <string name="cache_watchlist_on">このキャッシュはウォッチリストに登録されています。</string>
-  <string name="cache_watchlist_not_on">このキャッシュはウォッチリストに登録されていません。</string>
   <string name="cache_watchlist_add">ウォッチリストに追加</string>
   <string name="cache_watchlist_remove">ウォッチリストから削除</string>
   <string name="cache_favpoint_on">このキャッシュはあなたのお気に入りに登録されています。</string>

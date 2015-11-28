@@ -650,8 +650,6 @@
   <string name="cache_description">Beskrivelse</string>
   <string name="cache_description_long">Full beskrivelse</string>
   <string name="cache_description_table_note">Beskrivelsen inneholder tabellformatering og må åpnes på %s for å vises riktig.</string>
-  <string name="cache_watchlist_on">Denne cachen er på din overvåkningsliste.</string>
-  <string name="cache_watchlist_not_on">Denne cachen er ikke på din overvåkningsliste.</string>
   <string name="cache_watchlist_add">Legg til overvåkningsliste</string>
   <string name="cache_watchlist_remove">Fjern fra overvåkningsliste</string>
   <string name="cache_favpoint_on">Denne cachen er en av dine favoritter.</string>

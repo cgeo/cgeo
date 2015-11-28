@@ -656,8 +656,6 @@
   <string name="cache_description">Description</string>
   <string name="cache_description_long">Description longue</string>
   <string name="cache_description_table_note">La description peut contenir des mises en forme riches. Consultez le site %s pour visualiser toute la description.</string>
-  <string name="cache_watchlist_on">Cette cache est dans votre liste de suivi.</string>
-  <string name="cache_watchlist_not_on">Cette cache n\'est pas dans votre liste de suivi.</string>
   <string name="cache_watchlist_add">Suivre</string>
   <string name="cache_watchlist_remove">Retirer du suivi</string>
   <string name="cache_favpoint_on">Cette cache est dans vos favoris.</string>

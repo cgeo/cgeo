@@ -659,8 +659,6 @@
   <string name="cache_description">Popis</string>
   <string name="cache_description_long">Dlouhý popis</string>
   <string name="cache_description_table_note">Popis obsahuje tabulkové formátování, které je pravděpodobně nutné prohlížet na %s, aby bylo správně zobrazené.</string>
-  <string name="cache_watchlist_on">Tato keš je v tvém Watchlistu.</string>
-  <string name="cache_watchlist_not_on">Tato keš není v tvém Watchlistu.</string>
   <string name="cache_watchlist_add">Přidat na Watchlist</string>
   <string name="cache_watchlist_remove">Odstranit z Watchlistu</string>
   <string name="cache_favpoint_on">Tato keš je jedna z tvých Oblíbených.</string>
