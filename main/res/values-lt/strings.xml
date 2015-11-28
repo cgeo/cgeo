@@ -618,6 +618,8 @@
   <string name="cache_description">Aprašymas</string>
   <string name="cache_description_long">Ilgas aprašymas</string>
   <string name="cache_description_table_note">Aprašymas turi lentelės formatavimą ir norint pamatyti jį atvaizduotą teisingai gali tekti apsilankyti %s.</string>
+  <string name="cache_watchlist_on">Ši slėptuvė yra stebimų slėptuvių sąraše.</string>
+  <string name="cache_watchlist_not_on">Šios slėptuvės nėra stebimų slėptuvių sąraše.</string>
   <string name="cache_watchlist_add">Stebėti</string>
   <string name="cache_watchlist_remove">Nebestebėti</string>
   <string name="cache_favpoint_on">Ši slėptuvė yra viena iš Jūsų mėgiamų slėptuvių.</string>

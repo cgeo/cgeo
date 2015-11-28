@@ -661,6 +661,8 @@
   <string name="cache_description">Popis</string>
   <string name="cache_description_long">Dlhý popis</string>
   <string name="cache_description_table_note">Popis obsahuje formátovanie tabuľky. Pre správne zobrazenie bude možno potrebné otvoriť popis v %s.</string>
+  <string name="cache_watchlist_on">Skrýša je vo vašom zozname sledovaných.</string>
+  <string name="cache_watchlist_not_on">Skrýša nie je vo vašom zozname sledovaných.</string>
   <string name="cache_watchlist_add">Sledovať</string>
   <string name="cache_watchlist_remove">Prestať sledovať</string>
   <string name="cache_favpoint_on">Skrýša patrí medzi vaše obľúbené.</string>

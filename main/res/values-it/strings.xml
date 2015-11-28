@@ -648,6 +648,8 @@
   <string name="cache_description">Descrizione</string>
   <string name="cache_description_long">Descrizione estesa</string>
   <string name="cache_description_table_note">La descrizione contiene una tabella formattata in modo tale che potresti aver bisogno di andare su %s per vederla correttamente.</string>
+  <string name="cache_watchlist_on">Questo cache è nella tua watchlist.</string>
+  <string name="cache_watchlist_not_on">Questo cache non è nella tua watchlist.</string>
   <string name="cache_watchlist_add">Aggiungi alla watchlist</string>
   <string name="cache_watchlist_remove">Rimuovi dalla watchlist</string>
   <string name="cache_favpoint_on">Questo cache è uno dei tuoi favoriti.</string>

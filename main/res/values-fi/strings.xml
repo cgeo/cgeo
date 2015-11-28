@@ -562,6 +562,8 @@
   <string name="cache_personal_note_upload_done">Oma muistiinpano ladattu</string>
   <string name="cache_personal_note_upload_cancelled">Oman muistiinpanon lataaminen peruttu</string>
   <string name="cache_description">Kuvaus</string>
+  <string name="cache_watchlist_on">Tämä kätkö on seurantalistallasi.</string>
+  <string name="cache_watchlist_not_on">Tämä kätkö ei ole seurantalistallasi.</string>
   <string name="cache_watchlist_add">Lisää seurantalistalle</string>
   <string name="cache_watchlist_remove">Poista seurantalistalta</string>
   <string name="cache_favpoint_on">Tämä kätkö on yksi suosikeistasi.</string>

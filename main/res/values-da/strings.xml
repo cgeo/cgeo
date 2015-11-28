@@ -656,6 +656,8 @@
   <string name="cache_description">Beskrivelse</string>
   <string name="cache_description_long">Lang beskrivelse</string>
   <string name="cache_description_table_note">Beskrivelsen indeholder tabeller som måske kun kan vises korrekt på %s.</string>
+  <string name="cache_watchlist_on">Denne cache er på din overvågningsliste.</string>
+  <string name="cache_watchlist_not_on">Denne cache er ikke på din overvågningsliste.</string>
   <string name="cache_watchlist_add">Tilføj til overvågningsliste</string>
   <string name="cache_watchlist_remove">Fjern fra overvågningsliste</string>
   <string name="cache_favpoint_on">Dette er en favoritcache.</string>

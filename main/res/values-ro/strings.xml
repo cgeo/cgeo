@@ -660,6 +660,8 @@
   <string name="cache_description">Descriere</string>
   <string name="cache_description_long">Descriere completă</string>
   <string name="cache_description_table_note">Descrierea conţine tabele sau formatări care ar trebui vizualizate aici %s pentru a fi afişate corect.</string>
+  <string name="cache_watchlist_on">Aceasta cutie se află în lista ta de cutii urmărite.</string>
+  <string name="cache_watchlist_not_on">Această cutie nu se află în lista ta de cutii urmărite.</string>
   <string name="cache_watchlist_add">Adaugă în lista de cutii urmărite</string>
   <string name="cache_watchlist_remove">Şterge din lista de cutii urmărite</string>
   <string name="cache_favpoint_on">Această cutie e una din favoritele tale.</string>

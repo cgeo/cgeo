@@ -645,6 +645,8 @@
   <string name="cache_description">Apraksts</string>
   <string name="cache_description_long">Garš apraksts</string>
   <string name="cache_description_table_note">Apraksts satur tabulas formatējumu, kuru, iespējams, vajadzēs apskatīt %s, lai redzētu pareizi.</string>
+  <string name="cache_watchlist_on">Jūs novērojat šo slēpni</string>
+  <string name="cache_watchlist_not_on">Šis slēpnis nav tavā sarakstā ar novērojamajiem slēpņiem.</string>
   <string name="cache_watchlist_add">Pievienot sarakstam ar novērojamajiem</string>
   <string name="cache_watchlist_remove">Noņemt no saraksta ar novērojamajiem</string>
   <string name="cache_favpoint_on">Šis slēpnis ir viens no taviem favorītiem.</string>
