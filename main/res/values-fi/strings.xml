@@ -169,7 +169,7 @@
   <string name="err_point_no_position_given_title">Tiedot tarvitaan</string>
   <string name="err_point_no_position_given">Täytä ainakin leveys- ja pituusaste tai etäisyy ja suunta. Voit myös täyttää kaikki neljä kenttää.</string>
   <string name="err_point_bear_and_dist_title">Tarvitsetko apua?</string>
-  <string name="err_point_bear_and_dist">Täytä sekä suunta että matka. Suunta on 0-360 asteen kulma suhteessa pohjoiseen. Matka ei vaadi yksikköä.</string>
+  <string name="err_point_bear_and_dist">Täytä sekä suunta että matka. Suunta on 0–360 asteen kulma suhteessa pohjoiseen. Matka ei vaadi yksikköä.</string>
   <string name="err_log_load_data">c:geo ei voi ladata kirjaamiseen tarvittavia tietoja.</string>
   <string name="err_log_load_data_again">c:geo ei voi ladata lokiin tarvittavaa dataa. Yritetään uudestaan</string>
   <string name="err_log_load_data_still">c:geo lataa edelleen lokiin tarvittavia tietoja. Odotathan vielä hetken.</string>
@@ -330,7 +330,7 @@
   <string name="list_not_available">Lista ei saatavilla, vaihdetaan standardi listaan</string>
   <string name="about_version">Versio</string>
   <string name="about_changelog">Muutoshistoria</string>
-  <string name="about_system">Järjestelemä</string>
+  <string name="about_system">Järjestelmä</string>
   <string name="about_donate">Lahjoita</string>
   <string name="about_donation_more">Lahjoita\nkehitykseen</string>
   <string name="about_contributors">Avustajat</string>
@@ -355,7 +355,7 @@
   <string name="settings_category_browser">Selain</string>
   <string name="settings_category_social">Sosiaalinen media</string>
   <string name="settings_category_logging_other">Muut lokkaus asetukset</string>
-  <string name="settings_goto_url_button">Lisää...</string>
+  <string name="settings_goto_url_button">Lisää…</string>
   <string name="settings_title_ec">Extremcaching.com</string>
   <string name="settings_activate_gc">Aktivoi</string>
   <string name="settings_activate_ec">Aktivoi</string>

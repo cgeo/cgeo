@@ -87,7 +87,7 @@
   <string name="log_posting_image">Envoi de l\'image…</string>
   <string name="log_posting_generic_trackable">Envoi de %1$s %2$s/%3$s</string>
   <string name="log_clear">Effacer</string>
-  <string name="log_post_not_possible">Téléchargement des données en cours...\nRé-essayez à nouveau dans quelques secondes ou vérifiez votre connexion à Internet.</string>
+  <string name="log_post_not_possible">Téléchargement des données en cours…\nRé-essayez à nouveau dans quelques secondes ou vérifiez votre connexion à Internet.</string>
   <string name="log_post_geocode_missing">Géocode manquant…</string>
   <string name="log_date_future_not_allowed">Les visites dans le futur sont interdites.</string>
   <string name="log_add">Ajouter</string>
@@ -332,6 +332,7 @@
   <string name="caches_filter_personal_data">Avec des données personnelles</string>
   <string name="caches_filter_rating">Ayant reçu une évaluation</string>
   <string name="caches_filter_own_rating">Ayant reçu une évaluation de votre part</string>
+  <string name="caches_filter_multi_listing">Listing multi-états</string>
   <string name="caches_removing_from_history">Suppression de l\'historique…</string>
   <string name="caches_clear_offlinelogs">Supprimer les visites hors-ligne</string>
   <string name="caches_clear_offlinelogs_message">Supprimer toutes les visites hors-ligne ?</string>
@@ -349,6 +350,7 @@
   <string name="list_dialog_create_err">c:geo n\'a pas pu créer la liste</string>
   <string name="list_dialog_remove_title">Supprimer la liste</string>
   <string name="list_dialog_remove_description">Voulez-vous supprimer la liste courante ? Toutes les caches restantes seront déplacées dans \"Enregistrées\".</string>
+  <string name="list_dialog_remove_nowempty">La liste est vide. Voulez vous la supprimer ?</string>
   <string name="list_dialog_remove">Supprimer</string>
   <string name="list_dialog_remove_ok">Liste supprimée</string>
   <string name="list_dialog_remove_err">c:geo n\'a pas réussi à supprimer la liste courante</string>
@@ -657,7 +659,9 @@
   <string name="cache_description_long">Description longue</string>
   <string name="cache_description_table_note">La description peut contenir des mises en forme riches. Consultez le site %s pour visualiser toute la description.</string>
   <string name="cache_watchlist_on">Cette cache est dans votre liste de suivi.</string>
+  <string name="cache_watchlist_on_extra">Cette cache est dans votre liste de suivi (total : %1d).</string>
   <string name="cache_watchlist_not_on">Cette cache n\'est pas dans votre liste de suivi.</string>
+  <string name="cache_watchlist_not_on_extra">Cette cache n\'est pas dans votre liste de suivi (total : %1d).</string>
   <string name="cache_watchlist_add">Suivre</string>
   <string name="cache_watchlist_remove">Retirer du suivi</string>
   <string name="cache_favpoint_on">Cette cache est dans vos favoris.</string>
@@ -1300,6 +1304,7 @@
   <string name="trackable_title_log_without_geocode">Géocode non renseigné</string>
   <string name="trackable_log_without_geocode">Vous êtes sur le point d\'envoyer une visite sans géocode. Il est fortement recommandé d\'indiquer un géocode. Voulez-vous l\'ajouter maintenant ?</string>
   <string name="do_not_ask_me_again">Ne plus demander</string>
+  <string name="geokrety_parsing_failed">Impossible d\'analyser la réponse de GeoKrety.</string>
   <string name="settings_map_direction">Afficher la direction</string>
   <string name="settings_summary_map_direction">Trace une ligne droite entre votre position et la destination</string>
   <string name="map_direction">Afficher la direction</string>
@@ -1315,4 +1320,5 @@
   </plurals>
   <string name="command_rename_list_result">Liste renommée</string>
   <string name="command_delete_list_result">Liste supprimée</string>
+  <string name="fav_points_remaining">"Ajouter aux favoris (restant : %s)"</string>
 </resources>

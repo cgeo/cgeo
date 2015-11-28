@@ -332,6 +332,7 @@
   <string name="caches_filter_personal_data">Mit eigenen Informationen</string>
   <string name="caches_filter_rating">Mit Bewertung</string>
   <string name="caches_filter_own_rating">Mit eigener Bewertung</string>
+  <string name="caches_filter_multi_listing">Mehrfach gelistet mit unterschiedlichem Status</string>
   <string name="caches_removing_from_history">Lösche aus Verlauf…</string>
   <string name="caches_clear_offlinelogs">Offline-Logs löschen</string>
   <string name="caches_clear_offlinelogs_message">Möchtest du die Offline-Logs löschen?</string>
@@ -349,6 +350,7 @@
   <string name="list_dialog_create_err">c:geo konnte die neue Liste nicht erstellen</string>
   <string name="list_dialog_remove_title">Liste entfernen</string>
   <string name="list_dialog_remove_description">Soll die aktuelle Liste gelöscht werden? Alle Caches dieser Liste werden in die Standardliste verschoben.</string>
+  <string name="list_dialog_remove_nowempty">Die Liste ist leer. Soll sie gelöscht werden?</string>
   <string name="list_dialog_remove">Entfernen</string>
   <string name="list_dialog_remove_ok">Liste wurde gelöscht</string>
   <string name="list_dialog_remove_err">c:geo konnte die Liste nicht löschen</string>

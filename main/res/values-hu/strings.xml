@@ -168,7 +168,7 @@
   <string name="err_load_descr_failed">Sajnáljuk, a c:geo nem tudja betölteni a leírást.</string>
   <string name="err_location_unknown">A c:geo nem ismeri a láda helyét.</string>
   <string name="err_missing_device_name">Kérlek, regisztráció előtt adj meg egy készüléknevet!</string>
-  <string name="err_favorite_failed">Kedvenc állapotmódosítása nem sikerült.</string>
+  <string name="err_favorite_failed">Az állapotmódosítás sikertelen.</string>
   <string name="err_select_logimage_failed">Kép kiválasztása sikertelen.</string>
   <string name="err_acquire_image_failed">A kép készítése nem sikerült.</string>
   <string name="err_tb_display">Sajnáljuk, a c:geo nem tudja megjeleníteni az utazót. Biztos, hogy ez egy utazó?</string>
@@ -733,7 +733,7 @@
   <string name="cache_menu_pebble">Pebble (okosóra)</string>
   <string name="cache_menu_android_wear">Android Wear</string>
   <string name="cache_menu_vote">Értékelés</string>
-  <string name="cache_menu_checker">Nyílt Geochecker</string>
+  <string name="cache_menu_checker">Geochecker megnyitása</string>
   <string name="cache_menu_ignore">Láda mellőzése</string>
   <string name="ignore_confirm_title">Légy óvatos</string>
   <string name="ignore_confirm_message">Egy láda mellőzése azt jelenti, hogy a láda soha többé nem fog letöltődni a geocaching.com-ról. Csak akkor láthatod ismét ezt a ládát, ha visszavonod a mellőzését a geocaching.com-on.</string>
@@ -808,7 +808,7 @@
   <string name="web_import_waiting">Várakozás új ládákra a send2cgeo-tól…</string>
   <string name="web_downloading">Letöltés</string>
   <string name="web_downloaded">Letöltve</string>
-  <string name="popup_more">Több részlet</string>
+  <string name="popup_more">További részletek</string>
   <string name="waypoint">Útpont</string>
   <string name="waypoint_cache_coordinates">A láda koordinátái</string>
   <string name="waypoint_custom">Egyedi</string>
@@ -1316,4 +1316,5 @@
   </plurals>
   <string name="command_rename_list_result">Átnevezett lista</string>
   <string name="command_delete_list_result">Törölt lista</string>
+  <string name="fav_points_remaining">"Hozzáadás a kedvencekhez (%s pontod maradt)"</string>
 </resources>

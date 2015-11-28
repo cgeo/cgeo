@@ -80,7 +80,7 @@
   <string name="log_tb_archived">Arxivat</string>
   <string name="log_save">Guarda-ho  fora de línia</string>
   <string name="log_saving">S\'està enviant el registre…</string>
-  <string name="log_saving_and_uploading">Publicant registre i carregant la imatge...</string>
+  <string name="log_saving_and_uploading">Publicant registre i carregant la imatge…</string>
   <string name="log_posting_log">Publicant registre…</string>
   <string name="log_posting_twitter">Publicant Tweet…</string>
   <string name="log_posting_gcvote">Publicant GCvote…</string>
@@ -88,7 +88,7 @@
   <string name="log_posting_generic_trackable">Publicant %1$s%2$s/%3$s</string>
   <string name="log_clear">Esborra</string>
   <string name="log_post_not_possible">Descàrrega de dades en procés...\nProva una altra vegada en uns segons o comprova la connexió a internet.</string>
-  <string name="log_post_geocode_missing">Falta el geocodi...</string>
+  <string name="log_post_geocode_missing">Falta el geocodi…</string>
   <string name="log_date_future_not_allowed">No estan permesos els registres amb data futura.</string>
   <string name="log_add">Afegeix</string>
   <string name="log_repeat">Repeteix l\'últim registre</string>
@@ -803,7 +803,7 @@
   <string name="gpx_import_android">Importa des de l\'Android</string>
   <string name="map_file_select_title">Selecciona el fitxer del mapa</string>
   <string name="web_import_title">Importa des de send2cgeo</string>
-  <string name="web_import_waiting">Esperant nous catxés de send2cgeo...</string>
+  <string name="web_import_waiting">Esperant nous catxés de send2cgeo…</string>
   <string name="web_downloading">Descarregant</string>
   <string name="web_downloaded">Descarregat</string>
   <string name="popup_more">Més detalls</string>

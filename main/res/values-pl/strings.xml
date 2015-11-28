@@ -1302,6 +1302,7 @@
   <string name="trackable_title_log_without_geocode">Geokod nie jest ustawiony</string>
   <string name="trackable_log_without_geocode">Masz zamiar wysłać wpis bez Geokodu, ale nie jest to rekomendowane. Czy chciałbyś go dodać teraz?</string>
   <string name="do_not_ask_me_again">Nie pytaj ponownie</string>
+  <string name="geokrety_parsing_failed">Nie udało się odczytać odpowiedzi GeoKrety.</string>
   <string name="settings_map_direction">Pokazuj kierunek</string>
   <string name="settings_summary_map_direction">Pokazuj linię kierunku do punktu nawigacyjnego</string>
   <string name="map_direction">Pokaż kierunek</string>
@@ -1319,4 +1320,5 @@
   </plurals>
   <string name="command_rename_list_result">Zmieniono nazwę listy</string>
   <string name="command_delete_list_result">Usunięto listę</string>
+  <string name="fav_points_remaining">"Dodaj tę skrzynkę do ulubionych (pozostało %s)"</string>
 </resources>
