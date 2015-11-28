@@ -350,6 +350,7 @@
   <string name="list_dialog_create_err">c:geo konnte die neue Liste nicht erstellen</string>
   <string name="list_dialog_remove_title">Liste entfernen</string>
   <string name="list_dialog_remove_description">Soll die aktuelle Liste gelöscht werden? Alle Caches dieser Liste werden in die Standardliste verschoben.</string>
+  <string name="list_dialog_remove_nowempty">Die Liste ist leer. Soll sie gelöscht werden?</string>
   <string name="list_dialog_remove">Entfernen</string>
   <string name="list_dialog_remove_ok">Liste wurde gelöscht</string>
   <string name="list_dialog_remove_err">c:geo konnte die Liste nicht löschen</string>
