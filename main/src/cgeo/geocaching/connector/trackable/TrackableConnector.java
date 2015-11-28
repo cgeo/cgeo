@@ -93,7 +93,16 @@ public interface TrackableConnector {
      * @return the Trackable Geocode.
      */
     @Nullable
-    String getTrackableCodeFromUrl(final @NonNull String url);
+    String getTrackableCodeFromUrl(@NonNull final String url);
+
+    /**
+     * Return a Trackable Tracking Code from an url.
+     *
+     * @param url for one trackable
+     * @return the Trackable Tracking Code, {@code null} if the URL cannot be decoded.
+     */
+    @Nullable
+    String getTrackableTrackingCodeFromUrl(@NonNull final String url);
 
     /**
      * Return available user actions for the trackable.

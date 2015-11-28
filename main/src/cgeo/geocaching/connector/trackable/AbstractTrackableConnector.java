@@ -26,7 +26,6 @@ public abstract class AbstractTrackableConnector implements TrackableConnector {
         return false;
     }
 
-
     @Override
     public boolean canHandleTrackable(@Nullable final String geocode, @Nullable final TrackableBrand brand) {
         if (brand != null && brand != TrackableBrand.UNKNOWN) {
@@ -43,6 +42,12 @@ public abstract class AbstractTrackableConnector implements TrackableConnector {
     @Override
     @Nullable
     public String getTrackableCodeFromUrl(@NonNull final String url) {
+        return null;
+    }
+
+    @Override
+    @Nullable
+    public String getTrackableTrackingCodeFromUrl(@NonNull final String url) {
         return null;
     }
 
