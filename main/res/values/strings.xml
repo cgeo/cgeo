@@ -710,11 +710,12 @@
     <string name="cache_description">Description</string>
     <string name="cache_description_long">Long Description</string>
     <string name="cache_description_table_note">Description contains table formatting which may need to be viewed at %s to be seen correctly.</string>
-    <string name="cache_watchlist_on">This cache is on your watchlist.%1s</string>
-    <string name="cache_watchlist_not_on">This cache is not on your watchlist.%1s</string>
+    <string name="cache_watchlist_on">This cache is on your watchlist.</string>
+    <string name="cache_watchlist_on_extra">This cache is on your watchlist (total: %1d).</string>
+    <string name="cache_watchlist_not_on">This cache is not on your watchlist.</string>
+    <string name="cache_watchlist_not_on_extra">This cache is not on your watchlist (total: %1d).</string>
     <string name="cache_watchlist_add">Add to Watchlist</string>
     <string name="cache_watchlist_remove">Remove from Watchlist</string>
-    <string name="cache_watchlist_count">%1d in total</string>
     <string name="cache_favpoint_on">This cache is one of your favorites.</string>
     <string name="cache_favpoint_not_on">This cache is not one of your favorites.</string>
     <string name="cache_favpoint_add">Add</string>

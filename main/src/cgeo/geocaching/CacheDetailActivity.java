@@ -1299,16 +1299,23 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             final TextView text = ButterKnife.findById(view, R.id.watchlist_text);
 
             final int watchListCount = cache.getWatchlistCount();
-            final String watchListCountString = watchListCount != -1 ? " (" + getString(R.string.cache_watchlist_count, watchListCount) + ')' : "";
 
             if (cache.isOnWatchlist() || cache.isOwner()) {
                 buttonAdd.setVisibility(View.GONE);
                 buttonRemove.setVisibility(View.VISIBLE);
-                text.setText(res.getString(R.string.cache_watchlist_on, watchListCountString));
+                if (watchListCount != -1) {
+                    text.setText(res.getString(R.string.cache_watchlist_on_extra, watchListCount));
+                } else {
+                    text.setText(R.string.cache_watchlist_on);
+                }
             } else {
                 buttonAdd.setVisibility(View.VISIBLE);
                 buttonRemove.setVisibility(View.GONE);
-                text.setText(res.getString(R.string.cache_watchlist_not_on, watchListCountString));
+                if (watchListCount != -1) {
+                    text.setText(res.getString(R.string.cache_watchlist_not_on_extra, watchListCount));
+                } else {
+                    text.setText(R.string.cache_watchlist_not_on);
+                }
             }
 
             // the owner of a cache has it always on his watchlist. Adding causes an error
