@@ -128,6 +128,7 @@ public class Geocache implements IWaypoint {
     private Boolean favorite = null;
     private Boolean onWatchlist = null;
     private Boolean logOffline = null;
+    private int watchlistCount = -1; // valid numbers are larger than -1
     private int favoritePoints = 0;
     private float rating = 0; // valid ratings are larger than zero
     private int votes = 0;
@@ -1089,6 +1090,24 @@ public class Geocache implements IWaypoint {
 
     public void setOnWatchlist(final boolean onWatchlist) {
         this.onWatchlist = onWatchlist;
+    }
+
+    /**
+     *
+     * Set the number of users watching this geocache
+     * @param watchlistCount Number of users watching this geocache
+     */
+    public void setWatchlistCount(final int watchlistCount) {
+        this.watchlistCount = watchlistCount;
+    }
+
+    /**
+     *
+     * get the number of users watching this geocache
+     * @return watchlistCount Number of users watching this geocache
+     */
+    public int getWatchlistCount() {
+        return watchlistCount;
     }
 
     /**

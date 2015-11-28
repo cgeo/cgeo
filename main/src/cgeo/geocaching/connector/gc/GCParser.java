@@ -462,6 +462,9 @@ public final class GCParser {
         // cache guid
         cache.setGuid(TextUtils.getMatch(page, GCConstants.PATTERN_GUID, true, cache.getGuid()));
 
+        // cache watchlistcount
+        cache.setWatchlistCount(getWatchListCount(page));
+
         // name
         cache.setName(cacheName);
 
@@ -1334,7 +1337,29 @@ public final class GCParser {
         } else {
             Log.e("GCParser.addToWatchlist: cache is not on watchlist");
         }
+        // WatchListCount
+        final String watchListPage = GCLogin.getInstance().postRequestLogged(cache.getLongUrl(), null);
+        cache.setWatchlistCount(getWatchListCount(watchListPage));
         return guidOnPage; // on watchlist (=added) / else: error
+    }
+
+    /**
+     * This method extracts the amount of people watching on a geocache out of the HTMl website passed to it
+     * @param page Page containing the information about howm many people watching on geocache
+     * @return Number of people watching geocache, -1 when error
+     */
+    static int getWatchListCount(final String page)
+    {
+        final String sCount = TextUtils.getMatch(page, GCConstants.PATTERN_WATCHLIST_COUNT, true, 1, "notFound", false);
+        if (sCount.equals("notFound")) {
+            return -1;
+        }
+        try {
+            return Integer.parseInt(sCount);
+        } catch(final NumberFormatException nfe) {
+            Log.e("Could not parse", nfe);
+            return -1;
+        }
     }
 
     /**
@@ -1368,6 +1393,10 @@ public final class GCParser {
         } else {
             Log.e("GCParser.removeFromWatchlist: cache not removed from watchlist");
         }
+
+        // WatchListCount
+        final String watchListPage = GCLogin.getInstance().postRequestLogged(cache.getLongUrl(), null);
+        cache.setWatchlistCount(getWatchListCount(watchListPage));
         return !guidOnPage; // on watch list (=error) / not on watch list
     }
 
