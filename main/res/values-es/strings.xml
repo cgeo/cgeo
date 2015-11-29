@@ -943,7 +943,6 @@
   <string name="helper_sendtocgeo_description">\'Send to c:geo\' es una extensión <strong>para tu PC</strong>. Cuando navegues por geocaching.com, puedes enviar cachés a tu smartphone haciendo clic directamente desde tu navegador.</string>
   <string name="helper_locus_title">Locus</string>
   <string name="helper_locus_description">App de navegación exterior para tu móvil o tableta. Puede visualizar mapas Topo sin conexión, marcar tu ruta, buscar geocachés, usar una guía de voz y mucho más.</string>
-  <string name="helper_gpsstatus_title">GPS Status</string>
   <string name="helper_gpsstatus_description">Puedes usar el radar de esta aplicación con c:geo. Además ofrece un montón de información relacionada con el GPS.</string>
   <string name="helper_bluetoothgps_title">Bluetooth GPS</string>
   <string name="helper_bluetoothgps_description">Te permite usar un GPS externo para tener mejor señal, más precisa y ahorrar batería en tu dispositivo.</string>
@@ -956,7 +955,6 @@
   <string name="helper_wear_title">c:geo Wear</string>
   <string name="helper_wear_description">c:geo Wear es un complemento para c:geo que te permite navegar a los cachés usando tu smartwatch Android Wear.</string>
   <string name="helper_where_you_go_title">WhereYouGo</string>
-  <string name="helper_where_you_go_description">WhereYouGo te permite ejecutar y buscar cachés de tipo Whereigo. c:geo puede iniciar directamente la descarga de los cartuchos a esta aplicación.</string>
   <string name="addon_missing_title">No se encuentra el complemento</string>
   <string name="addon_download_prompt">Obtenlo ahora desde Google Play.</string>
   <string name="export">Exportar</string>

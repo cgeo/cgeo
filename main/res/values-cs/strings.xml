@@ -965,7 +965,6 @@
   <string name="helper_sendtocgeo_description">Poslat do c:geo je rozšíření prohlížeče <strong>pro tvůj počítač</strong>. Umožňuje zaslání keše do tvého mobilního zařízení jediným klepnutím, přímo z prohlížeče, při procházení webu Geocaching.com.</string>
   <string name="helper_locus_title">Locus</string>
   <string name="helper_locus_description">Outdoorová navigace pro telefon či tablet. Prohlížení offline topo map, záznam trasy, lov geokeší, hlasová navigace a mnohem více.</string>
-  <string name="helper_gpsstatus_title">GPS Status</string>
   <string name="helper_gpsstatus_description">Můžeš použít radar z této aplikace pro c:geo. Také podporuje další funkce spojené s používáním GPS.</string>
   <string name="helper_bluetoothgps_title">Bluetooth GPS</string>
   <string name="helper_bluetoothgps_description">Umožňuje použít externí GPS přijímač pro přesnější lokalizaci a možná tak i ušetřit nějakou energii.</string>
@@ -978,7 +977,6 @@
   <string name="helper_wear_title">c:geo Wear</string>
   <string name="helper_wear_description">c:geo Wear je doplněk pro c:geo, který umožňuje hledání keší pomocí chytrých hodinek Android Wear.</string>
   <string name="helper_where_you_go_title">WhereYouGo</string>
-  <string name="helper_where_you_go_description">WhereYouGo umožňuje hledání keší typu Whereigo. S touto aplikací může c:geo automaticky stahovat údaje potřebné pro hru.</string>
   <string name="addon_missing_title">Chybějící modul</string>
   <string name="addon_download_prompt">Získat nyní z Google Play.</string>
   <string name="export">Export</string>

@@ -952,7 +952,6 @@
   <string name="helper_sendtocgeo_description">Send til c:geo (send2c:geo) er en nettleserutvidelse <strong>for din pc</strong>. På geocaching.com kan du sende cacher til din smarttelefon ved hjelp av en egen knapp i nettleseren.</string>
   <string name="helper_locus_title">Locus</string>
   <string name="helper_locus_description">App for utendørs navigasjon til din mobil eller tablet. I appen kan du se topo-kart offline, spore ruten din, lete etter turbokser, bruke en stemmeguide og mye annet.</string>
-  <string name="helper_gpsstatus_title">GPS Status</string>
   <string name="helper_gpsstatus_description">Du kan bruke radaren i denne appen sammen med c:geo. Den gir mye GPS-relatert informasjon.</string>
   <string name="helper_bluetoothgps_title">Blåtann-GPS</string>
   <string name="helper_bluetoothgps_description">Lar deg bruke ekstern GPS-mottaker for å få mer nøyaktig posisjon og kan spare batteri på enheten.</string>
@@ -965,7 +964,6 @@
   <string name="helper_wear_title">c:geo Wear</string>
   <string name="helper_wear_description">c:geo Wear er et tillegg til c:geo som lar deg navigere til geocacher ved hjelp av Android Wear smartklokke.</string>
   <string name="helper_where_you_go_title">WhereYouGo</string>
-  <string name="helper_where_you_go_description">Med WhereYouGo kan du lete etter Whereigo-geocacher. C:geo kan automatisk laste ned Wherigo-kassetter for deg.</string>
   <string name="addon_missing_title">Manglende tillegg</string>
   <string name="addon_download_prompt">Last ned nå fra Google Play.</string>
   <string name="export">Eksporter</string>

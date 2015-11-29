@@ -967,7 +967,6 @@
   <string name="helper_sendtocgeo_description">Poslať do c:geo je rozšírenie prehliadača <strong>pre vaše PC</strong>. Pri browsovaní geocaching.com, môžete poslať cache do vášho smartphone kliknutím na tlačidlo priamo v prehliadači.</string>
   <string name="helper_locus_title">Locus</string>
   <string name="helper_locus_description">Navigačná aplikácia pre tvoj mobil alebo tablet. Zmapuj okolie cez offline topografické mapy, zaznamenávaj svoju cestu, hľadaj geocache, používaj hlasovú navigáciu a rob ešte oveľa viac.</string>
-  <string name="helper_gpsstatus_title">GPS Status</string>
   <string name="helper_gpsstatus_description">Radar z tejto aplikácie môžete použiť v c:geo. Poskytuje tiež mnoho iných informácií súvisiacich s GPS.</string>
   <string name="helper_bluetoothgps_title">Bluetooth GPS</string>
   <string name="helper_bluetoothgps_description">Umožňuje použitie externého GPS zariadenia pre lepší príjem, presnejšie umiestnenie a zníži využitie batérie vášho telefónu.</string>
@@ -980,7 +979,6 @@
   <string name="helper_wear_title">c:geo Wear</string>
   <string name="helper_wear_description">c:geo Wear je plugin pre c:geo, ktorý vás naviguje ku skrýšam cez Android Wear smartwatch.</string>
   <string name="helper_where_you_go_title">WhereYouGo</string>
-  <string name="helper_where_you_go_description">WhereYouGo umožňuje hľadať skrýše typu Wherigo. c:geo môže automaticky spustiť sťahovanie súborov (cartridge) cez túto aplikáciu.</string>
   <string name="addon_missing_title">Chýbajúci doplnok</string>
   <string name="addon_download_prompt">Získať doplnok teraz z Google Play.</string>
   <string name="export">Export</string>

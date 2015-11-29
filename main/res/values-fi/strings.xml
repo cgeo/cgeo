@@ -942,7 +942,6 @@
   <string name="helper_sendtocgeo_description">Lähetä c:geo on selaimen laajennus <strong>tietokoneellesi</strong>. Geocaching.com sivua selattaessa kätköt voi lähettää älypuhelimeen napin painalluksella suoraan selaimesta.</string>
   <string name="helper_locus_title">Locus</string>
   <string name="helper_locus_description">Navigointisovellus puhelimeen tai tablettiin. Katso topo-karttoja offline-tilassa, reititä, etsi geokätköjä, käytä ääni-opastusta ja paljon muuta.</string>
-  <string name="helper_gpsstatus_title">GPS-tila</string>
   <string name="helper_gpsstatus_description">Voit käyttää GPS Status sovellusta yhdessä c:geon kanssa. Se tarjoaa paljon GPS-tarkkuuteen liittyviä tietoja.</string>
   <string name="helper_bluetoothgps_title">Bluetooth GPS</string>
   <string name="helper_bluetoothgps_description">Voit käyttää ulkoista GPS-vastaanotinta saadaksesi tarkempia sijaintitietoja ja säästääksesi laitteen akkua.</string>
@@ -955,7 +954,6 @@
   <string name="helper_wear_title">c:geo Wear</string>
   <string name="helper_wear_description">c:geo Wear on plugin c:geoon, jonka avulla voit navigoida käyttäen Android Wear älykelloa.</string>
   <string name="helper_where_you_go_title">WhereYouGo</string>
-  <string name="helper_where_you_go_description">WhereYouGo-sovelluksen avulla pystyy pelaamaan ja etsimään Wherigo-kätköjä. c:geo osaa ladata suoraan Wherigo-kasetit tämän sovelluksen avulla.</string>
   <string name="addon_missing_title">Puuttuva plugin</string>
   <string name="addon_download_prompt">Hanki se nyt Google Playsta.</string>
   <string name="export">Vienti</string>
