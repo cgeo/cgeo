@@ -1,22 +1,21 @@
 package cgeo.geocaching.enumerations;
 
-import org.apache.commons.lang3.StringUtils;
-import org.junit.Test;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class CacheAttributeTest {
+import org.apache.commons.lang3.StringUtils;
 
-    @Test
-    public void testTrimAttributeName() {
+import android.test.AndroidTestCase;
+
+public class CacheAttributeTest extends AndroidTestCase {
+
+    public static void testTrimAttributeName() {
         for (final CacheAttribute attribute : CacheAttribute.values()) {
             final String rawName = attribute.rawName;
             assertThat(CacheAttribute.trimAttributeName(rawName)).as("attribute name").isEqualTo(rawName);
         }
     }
 
-    @Test
-    public void testIds() {
+    public static void testIds() {
         for (final CacheAttribute attribute : CacheAttribute.values()) {
             if (attribute != CacheAttribute.UNKNOWN) {
                 assertThat(StringUtils.isNotEmpty(attribute.rawName)).isTrue();
@@ -27,8 +26,7 @@ public class CacheAttributeTest {
         }
     }
 
-    @Test
-    public void testGetL10n() {
+    public static void testGetL10n() {
         final CacheAttribute attribute = CacheAttribute.HIKING;
         // This test is language dependent. It does not make sense to test it
         // with every attribute. We just want to know if getL10n works
@@ -36,8 +34,7 @@ public class CacheAttributeTest {
         assertThat(attribute.getL10n(true)).isNotEqualTo(attribute.getL10n(false));
     }
 
-    @Test
-    public void testGetBy() {
+    public static void testGetBy() {
         final CacheAttribute attribute = CacheAttribute.HIKING; // an attribute that is present in GC and OC
         assertThat(attribute.gcid).overridingErrorMessage("Test cannot be run with this attribute").isGreaterThanOrEqualTo(0);
         assertThat(attribute.ocacode).overridingErrorMessage("Test cannot be run with this attribute").isGreaterThanOrEqualTo(0);
@@ -45,8 +42,7 @@ public class CacheAttributeTest {
         assertThat(attribute).isSameAs(CacheAttribute.getByOcACode(attribute.ocacode));
     }
 
-    @Test
-    public void testIsEnabled() {
+    public static void testIsEnabled() {
         final String hiking_yes = "hiking_yes";
         final String hiking_no = "hiking_no";
         assertThat(CacheAttribute.isEnabled(hiking_yes)).isTrue();

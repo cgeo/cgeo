@@ -1,16 +1,14 @@
 package cgeo.geocaching.files;
 
-import junit.framework.TestCase;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import org.apache.commons.io.IOUtils;
-import org.junit.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import junit.framework.TestCase;
 
 public class ProgressInputStreamTest extends TestCase {
 
-    @Test
-    public void testRead() throws Exception {
+    public static void testRead() throws Exception {
         ProgressInputStream stream = new ProgressInputStream(IOUtils.toInputStream("test"));
         assertThat(stream.getProgress()).isEqualTo(0);
 

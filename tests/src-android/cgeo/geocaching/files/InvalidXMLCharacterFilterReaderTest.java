@@ -1,30 +1,28 @@
 package cgeo.geocaching.files;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import android.sax.EndTextElementListener;
 import android.sax.RootElement;
+import android.test.AndroidTestCase;
 import android.util.Xml;
-
-import org.junit.Test;
 
 import java.io.StringReader;
 import java.util.concurrent.atomic.AtomicReference;
 
-import static org.assertj.core.api.Assertions.assertThat;
+public class InvalidXMLCharacterFilterReaderTest extends AndroidTestCase {
 
-public class InvalidXMLCharacterFilterReaderTest  {
-
-    @Test
-    public void testFilterInvalid() throws Exception {
+    public static void testFilterInvalid() throws Exception {
         final RootElement root = new RootElement("desc");
         final AtomicReference<String> description = new AtomicReference<String>();
         root.setEndTextElementListener(new EndTextElementListener() {
 
             @Override
-            public void end(String body) {
+            public void end(final String body) {
                 description.set(body);
             }
         });
-        StringReader reader = new StringReader("<?xml version=\"1.0\" encoding=\"utf-8\"?><desc>Invalid&#xB;description</desc>");
+        final StringReader reader = new StringReader("<?xml version=\"1.0\" encoding=\"utf-8\"?><desc>Invalid&#xB;description</desc>");
         Xml.parse(new InvalidXMLCharacterFilterReader(reader), root.getContentHandler());
         assertThat(description.get()).isEqualTo("Invaliddescription");
     }

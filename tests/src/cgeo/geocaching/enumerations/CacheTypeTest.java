@@ -1,33 +1,30 @@
 package cgeo.geocaching.enumerations;
 
-import org.junit.Test;
-
-import java.util.Locale;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import cgeo.geocaching.Geocache;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import android.test.AndroidTestCase;
 
-public class CacheTypeTest {
+import java.util.Locale;
 
-    @Test
-    public void testGetById() {
+public class CacheTypeTest extends AndroidTestCase {
+
+    public static void testGetById() {
         assertThat(CacheType.getById("")).isEqualTo(CacheType.UNKNOWN);
         assertThat(CacheType.getById(null)).isEqualTo(CacheType.UNKNOWN);
         assertThat(CacheType.getById("random garbage")).isEqualTo(CacheType.UNKNOWN);
         assertThat(CacheType.getById("wherigo")).isEqualTo(CacheType.WHERIGO);
     }
 
-    @Test
-    public void testGetByPattern() {
+    public static void testGetByPattern() {
         assertThat(CacheType.getByPattern("")).isEqualTo(CacheType.UNKNOWN);
         assertThat(CacheType.getByPattern(null)).isEqualTo(CacheType.UNKNOWN);
         assertThat(CacheType.getByPattern("random garbage")).isEqualTo(CacheType.UNKNOWN);
         assertThat(CacheType.getByPattern("cache in trash out event")).isEqualTo(CacheType.CITO);
     }
 
-    @Test
-    public void testGetByIdComplete() {
+    public static void testGetByIdComplete() {
         for (CacheType type : CacheType.values()) {
             assertThat(CacheType.getById(type.id)).isEqualTo(type);
             assertThat(CacheType.getById(type.id.toLowerCase(Locale.US))).isEqualTo(type);
@@ -35,8 +32,7 @@ public class CacheTypeTest {
         }
     }
 
-    @Test
-    public void testGetByPatternComplete() {
+    public static void testGetByPatternComplete() {
         for (CacheType type : CacheType.values()) {
             assertThat(CacheType.getByPattern(type.pattern)).isEqualTo(type);
             assertThat(CacheType.getByPattern(type.pattern.toLowerCase(Locale.US))).isEqualTo(type);
@@ -44,8 +40,7 @@ public class CacheTypeTest {
         }
     }
 
-    @Test
-    public void testContainsCache() {
+    public static void testContainsCache() {
         final Geocache traditional = new Geocache();
         traditional.setType(CacheType.TRADITIONAL);
 
@@ -54,8 +49,7 @@ public class CacheTypeTest {
         assertThat(CacheType.MYSTERY.contains(traditional)).isFalse();
     }
 
-    @Test
-    public void testEventCacheTypes() throws Exception {
+    public static void testEventCacheTypes() throws Exception {
         assertThat(CacheType.EVENT.isEvent()).isTrue();
         assertThat(CacheType.MEGA_EVENT.isEvent()).isTrue();
         assertThat(CacheType.GIGA_EVENT.isEvent()).isTrue();

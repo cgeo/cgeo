@@ -1,18 +1,16 @@
 package cgeo.geocaching.enumerations;
 
-import org.junit.Test;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class WaypointTypeTest {
+import android.test.AndroidTestCase;
 
-    @Test
-    public void testFindById() {
+public class WaypointTypeTest extends AndroidTestCase {
+
+    public static void testFindById() {
         assertThat(WaypointType.findById("random garbage")).isEqualTo(WaypointType.WAYPOINT);
     }
 
-    @Test
-    public void testConvertWaypointSym2Type() {
+    public static void testConvertWaypointSym2Type() {
         assertThat(WaypointType.fromGPXString("unknown sym")).isEqualTo(WaypointType.WAYPOINT);
 
         assertThat(WaypointType.fromGPXString("Parking area")).isEqualTo(WaypointType.PARKING);
