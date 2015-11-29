@@ -97,6 +97,10 @@ abstract class AbstractCommand implements Command {
         task.execute(new Void[] {});
     }
 
+    public final void setProgressMessage(final String progressMessage) {
+        this.progressMessage = progressMessage;
+    }
+
     private final class ActionAsyncTask extends AsyncTaskWithProgress<Void, Void> implements Listener {
         private ActionAsyncTask(final Activity activity, final String progressTitle, final String progressMessage, final boolean indeterminate) {
             super(activity, progressTitle, progressMessage, indeterminate);
