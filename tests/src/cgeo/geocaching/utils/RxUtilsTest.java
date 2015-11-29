@@ -2,23 +2,20 @@ package cgeo.geocaching.utils;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
+
 import junit.framework.TestCase;
-import org.junit.Test;
 import rx.Observable;
 import rx.Subscription;
 import rx.functions.Action0;
 import rx.functions.Func0;
 import rx.functions.Func1;
 import rx.subjects.PublishSubject;
-import rx.subjects.ReplaySubject;
-
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class RxUtilsTest extends TestCase {
 
-    @Test
     public static void testRememberLast() {
         final PublishSubject<String> rawObservable = PublishSubject.create();
         final Observable<String> observable = RxUtils.rememberLast(rawObservable, "initial");
@@ -40,7 +37,6 @@ public class RxUtilsTest extends TestCase {
         assertThat(observable.toBlocking().first()).isEqualTo("first");
     }
 
-    @Test
     public static void testFromNullable() {
         final Observable<String> fromNull = RxUtils.fromNullable(null);
         assertThat(fromNull.toBlocking().getIterator().hasNext()).isFalse();
@@ -49,7 +45,6 @@ public class RxUtilsTest extends TestCase {
         assertThat(fromNonNull.toBlocking().single()).isEqualTo("foo");
     }
 
-    @Test
     public static void testDeferredNullable() {
         final Observable<String> fromNull = RxUtils.deferredNullable(new Func0<String>() {
             @Override
@@ -68,7 +63,6 @@ public class RxUtilsTest extends TestCase {
         assertThat(fromNonNull.toBlocking().single()).isEqualTo("foo");
     }
 
-    @Test
     public static void testWaitForCompletion() {
         final PublishSubject<String> observable = PublishSubject.create();
         final AtomicBoolean terminated = new AtomicBoolean(false);
@@ -91,7 +85,6 @@ public class RxUtilsTest extends TestCase {
         assertThat(terminated.get()).isTrue();
     }
 
-    @Test
     public static void testObservableCache() {
         final AtomicInteger counter = new AtomicInteger(0);
         final RxUtils.ObservableCache<String, Integer> cache = new RxUtils.ObservableCache<String, Integer>(new Func1<String, Observable<Integer>>() {
@@ -113,7 +106,6 @@ public class RxUtilsTest extends TestCase {
         assertThat(counter.get()).isEqualTo(2);
     }
 
-    @Test
     public static void testDelayedUnsubscription() {
         final AtomicBoolean unsubscribed = new AtomicBoolean(false);
         Observable.never().doOnUnsubscribe(new Action0() {
@@ -126,6 +118,7 @@ public class RxUtilsTest extends TestCase {
         try {
             Thread.sleep(200);
         } catch (final InterruptedException ignored) {
+            // ignore for tests
         }
         assertThat(unsubscribed.get()).isTrue();
     }

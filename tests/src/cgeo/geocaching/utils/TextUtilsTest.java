@@ -5,11 +5,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import cgeo.geocaching.connector.gc.GCConstants;
 import cgeo.geocaching.test.mock.MockedCache;
 
-import android.test.AndroidTestCase;
+import java.util.regex.Pattern;
 
 import junit.framework.TestCase;
-
-import java.util.regex.Pattern;
 
 public class TextUtilsTest extends TestCase {
     public static void testRegEx() {
