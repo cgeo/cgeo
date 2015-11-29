@@ -13,7 +13,7 @@
         android:required="false" />
 
     <instrumentation
-        android:name="cgeo.junit.CgeoTestRunner"
+        android:name="android.test.InstrumentationTestRunner"
         android:targetPackage="cgeo.geocaching" />
 
     <application

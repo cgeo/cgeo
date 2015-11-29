@@ -1,21 +1,21 @@
 package cgeo.geocaching.activity.waypoint;
 
-import cgeo.geocaching.R;
-
 import static com.google.android.apps.common.testing.ui.espresso.Espresso.onView;
-
 import static com.google.android.apps.common.testing.ui.espresso.assertion.ViewAssertions.matches;
-
 import static com.google.android.apps.common.testing.ui.espresso.matcher.ViewMatchers.withChild;
 import static com.google.android.apps.common.testing.ui.espresso.matcher.ViewMatchers.withId;
 import static com.google.android.apps.common.testing.ui.espresso.matcher.ViewMatchers.withText;
-
 import static org.assertj.core.api.Assertions.assertThat;
+
+import cgeo.geocaching.R;
+
+import android.test.suitebuilder.annotation.Suppress;
 
 public class EditWaypointActivityTest extends AbstractEditWaypointActivityTest {
 
+    @Suppress
     public void testFieldsAreNotEmpty() {
-        String name = getWaypoint().getName();
+        final String name = getWaypoint().getName();
         assertThat(name).isNotEmpty();
         onView(withId(R.id.name)).check(matches(withText(name)));
 

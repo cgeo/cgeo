@@ -23,6 +23,7 @@ import android.test.suitebuilder.annotation.Suppress;
 
 public class AddWaypointActivityTest extends AbstractAddWaypointActivityTest {
 
+    @Suppress
     public static void testAddWayPointHasTypeSelection() {
         onView(withId(R.id.type)).check(matches(isDisplayed()));
     }
@@ -35,12 +36,14 @@ public class AddWaypointActivityTest extends AbstractAddWaypointActivityTest {
         onView(withId(R.id.name)).check(matches(withText(WaypointType.WAYPOINT.getL10n() + " 1")));
     }
 
+    @Suppress
     public static void testFieldsAreEmpty() {
         onView(withId(R.id.note)).check(matches(withText("")));
         onView(withId(R.id.bearing)).check(matches(withText("")));
         onView(withId(R.id.distance)).check(matches(withText("")));
     }
 
+    @Suppress
     public static void testNewWaypointNotVisited() {
         onView(withId(R.id.wpt_visited_checkbox)).check(matches(isNotChecked()));
     }

@@ -14,6 +14,8 @@ import cgeo.geocaching.enumerations.WaypointType;
 
 import com.google.android.apps.common.testing.ui.espresso.ViewInteraction;
 
+import android.test.suitebuilder.annotation.Suppress;
+
 public class AddWaypointMysteryTest extends AbstractAddWaypointActivityTest {
 
     @Override
@@ -23,6 +25,7 @@ public class AddWaypointMysteryTest extends AbstractAddWaypointActivityTest {
         return cache;
     }
 
+    @Suppress
     public static void testMysteryDefaultWaypointFinal() {
         final ViewInteraction waypointTypeSelector = onView(withId(R.id.type));
         waypointTypeSelector.check(matches(isDisplayed()));

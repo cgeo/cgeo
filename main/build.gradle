@@ -104,8 +104,6 @@ android {
                 // TODO: this one fails consistently when running from gradle, needs to be investigated
                 exclude '**/GPXImporterTest.java'
 
-                // TODO: delete the test runner and this line after full migration to gradle
-                exclude '**/CgeoTestRunner.java'
                 // TODO: remove after migration to gradle. not sure if this is currently used anywhere
                 exclude '**/CgeoTestSuite.java'
             }
