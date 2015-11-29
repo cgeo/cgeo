@@ -639,6 +639,18 @@
   <string name="cache_offline_time_about">vor etwa</string>
   <string name="cache_offline_time_mins">Minuten</string>
   <string name="cache_offline_time_mins_few">vor ein paar Minuten</string>
+  <plurals name="cache_offline_about_time_mins">
+    <item quantity="one">vor etwa %d Minute</item>
+    <item quantity="other">vor etwa %d Minuten</item>
+  </plurals>
+  <plurals name="cache_offline_about_time_hours">
+    <item quantity="one">vor etwa %d Stunde</item>
+    <item quantity="other">vor etwa %d Stunden</item>
+  </plurals>
+  <plurals name="cache_offline_about_time_days">
+    <item quantity="one">vor etwa %d Tag</item>
+    <item quantity="other">vor etwa %d Tagen</item>
+  </plurals>
   <string name="cache_offline_time_hour">einer Stunde</string>
   <string name="cache_offline_time_hours">Stunden</string>
   <string name="cache_offline_time_days">Tagen</string>
@@ -659,9 +671,9 @@
   <string name="cache_description_long">Ausführliche Beschreibung</string>
   <string name="cache_description_table_note">Diese Beschreibung enthält Tabellenelemente, die evtl. nur auf %s korrekt angezeigt werden.</string>
   <string name="cache_watchlist_on">Dieser Cache ist auf deiner Watchlist.</string>
-  <string name="cache_watchlist_on_extra">Dieser Cache ist auf deiner Watchliste (Gesamt: %1d).</string>
+  <string name="cache_watchlist_on_extra">Dieser Cache ist auf deiner Watchlist (Beobachter: %1d).</string>
   <string name="cache_watchlist_not_on">Dieser Cache ist nicht auf deiner Watchlist.</string>
-  <string name="cache_watchlist_not_on_extra">Dieser Cache ist nicht auf deiner Watchliste (Gesamt: %1d).</string>
+  <string name="cache_watchlist_not_on_extra">Dieser Cache ist nicht auf deiner Watchlist (Beobachter: %1d).</string>
   <string name="cache_watchlist_add">Hinzufügen</string>
   <string name="cache_watchlist_remove">Entfernen</string>
   <string name="cache_favpoint_on">Dieser Cache ist ein Favorit.</string>
@@ -965,7 +977,7 @@
   <string name="helper_sendtocgeo_description">Send to c:geo ist eine Browsererweiterung <strong>für Ihren PC</strong>. Beim Durchsuchen von geocaching.com können Sie Caches mit einem Klick im Browser direkt an Ihr Smartphone übermitteln.</string>
   <string name="helper_locus_title">Locus</string>
   <string name="helper_locus_description">Outdoor Navigations-App für dein Handy oder Tablet. Verwende topografische Karten offline, zeichne Tracks von deinen Touren auf, suche Geocaches, benutze Sprachführung und vieles mehr.</string>
-  <string name="helper_gpsstatus_title">GPS-Status</string>
+  <string name="helper_gpsstatus_title">GPS Status &amp; Toolbox</string>
   <string name="helper_gpsstatus_description">Das Radar dieser App kann in c:geo verwendet und zusätzlich viele GPS-bezogene Informationen abgerufen werden.</string>
   <string name="helper_bluetoothgps_title">Bluetooth GPS</string>
   <string name="helper_bluetoothgps_description">Ermöglicht ein externes GPS zu verwenden, um die Standortgenauigkeit zu erhöhen und die Batterie zu schonen.</string>
@@ -978,7 +990,7 @@
   <string name="helper_wear_title">c:geo Wear</string>
   <string name="helper_wear_description">c:geo Wear ist eine Erweiterung für c:geo, mit der du mit deiner Android Wear Smartwatch zu Geocaches navigieren kannst.</string>
   <string name="helper_where_you_go_title">WhereYouGo</string>
-  <string name="helper_where_you_go_description">Mit WhereYouGo kannst du Caches vom Typ Whereigo suchen. c:geo kann das Herunterladen von Cartridges in WhereYouGo automatisch starten.</string>
+  <string name="helper_where_you_go_description">Mit WhereYouGo kannst du Caches vom Typ Wherigo suchen. c:geo kann das Herunterladen von Cartridges in WhereYouGo automatisch starten.</string>
   <string name="addon_missing_title">Fehlendes Plugin</string>
   <string name="addon_download_prompt">Jetzt im Google Play Store herunterladen</string>
   <string name="export">Exportieren</string>

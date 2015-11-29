@@ -658,9 +658,7 @@
   <string name="cache_description_long">Lång beskrivning</string>
   <string name="cache_description_table_note">Beskrivningen innehåller tabellformatering som eventuellt behöver läsas på %s för att se korrekt ut.</string>
   <string name="cache_watchlist_on">Den här cachen finns i din watchlist.</string>
-  <string name="cache_watchlist_on_extra">Den här cachen är i din watchlist (totalt: %1d).</string>
   <string name="cache_watchlist_not_on">Den här cachen finns inte i din watchlist.</string>
-  <string name="cache_watchlist_not_on_extra">Den här cachen är inte i din watchlist (totalt: %1d).</string>
   <string name="cache_watchlist_add">Lägg till i watchlist</string>
   <string name="cache_watchlist_remove">Ta bort från watchlist</string>
   <string name="cache_favpoint_on">Den här cachen är en av dina favoriter.</string>
@@ -964,7 +962,6 @@
   <string name="helper_sendtocgeo_description">Skicka till c:geo är ett tillägg till webbläsaren <strong>för din PC</strong>. När du bläddrar geocaching.com, kan du skicka cacher till din telefon med en knapptryckning i webbläsaren.</string>
   <string name="helper_locus_title">Locus</string>
   <string name="helper_locus_description">App för navigering utomhus med telefon eller tablet. Visa topo-kartor offline, spåra din rutt, leta geocacher, använd guideröst och mycket mer.</string>
-  <string name="helper_gpsstatus_title">GPS Status</string>
   <string name="helper_gpsstatus_description">Erbjuder många GPS-relaterade funktioner. Radar-funktionen i detta program kan användas i c:geo.</string>
   <string name="helper_bluetoothgps_title">Bluetooth GPS</string>
   <string name="helper_bluetoothgps_description">Gör det möjligt att använda en extern GPS enhet för att få mer exakt position och även spara på enhetens batteri.</string>
@@ -977,7 +974,6 @@
   <string name="helper_wear_title">c:geo Wear</string>
   <string name="helper_wear_description">c:geo Wear är en plugin till c:geo som låter dig navigera till geocacher med din Android Wear smartwatch.</string>
   <string name="helper_where_you_go_title">WhereYouGo</string>
-  <string name="helper_where_you_go_description">Appen WhereYouGo gör att du kan spela och leta efter cacher av typen Wherigo. c:geo kan påbörja nedladdningar av spelfiler, s.k. cartridges, i denna app.</string>
   <string name="addon_missing_title">Tillägg saknas</string>
   <string name="addon_download_prompt">Hämta det nu från Google Play.</string>
   <string name="export">Exportera</string>

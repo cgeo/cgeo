@@ -959,7 +959,6 @@
   <string name="helper_sendtocgeo_description">Send2c:geo (send til c:geo) er en browserudvidelse <strong>til din PC</strong>. Med send2c:geo kan du sende cacher direkte fra din browser til c:geo på din Android-enhed ved blot at klikke på en knap i din browser.</string>
   <string name="helper_locus_title">Locus</string>
   <string name="helper_locus_description">Udendørs navigationsapp til din telefon eller tablet. Vis topografiske kort offline, track din rute, find geocacher, brug stemmeguide og meget mere.</string>
-  <string name="helper_gpsstatus_title">GPS-status</string>
   <string name="helper_gpsstatus_description">Du kan bruger radaren i denne app sammen med c:geo. Appen giver desuden en mængde GPS-relateret information.</string>
   <string name="helper_bluetoothgps_title">Bluetooth GPS</string>
   <string name="helper_bluetoothgps_description">Giver dig mulighed for at bruge en ekstern GPS-modtager som giver en mere præcis positionsbestemmelse og kan forlænge batteritiden på din enhed.</string>
@@ -972,7 +971,6 @@
   <string name="helper_wear_title">c:geo Wear</string>
   <string name="helper_wear_description">c:geo Wear er et plugin til c:geo, der lader dig navigere til geocacher ved hjælp af din Android Wear smartwatch.</string>
   <string name="helper_where_you_go_title">WhereYouGo</string>
-  <string name="helper_where_you_go_description">WhereYouGo giver mulighed for at afspille og søge efter geocacher af typen Whereigo. c:geo kan automatisk starte download af cartridges i denne app.</string>
   <string name="addon_missing_title">Manglende plugin</string>
   <string name="addon_download_prompt">Hent fra Google Play nu.</string>
   <string name="export">Eksportér</string>
