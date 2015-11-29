@@ -323,12 +323,13 @@ android.applicationVariants.all { variant ->
             }
         }
 
-        // run device and non device tests together with one task. also fixes the bug that gradle optimizes tests away in repeated runs
-        tasks.create(name: "test${variant.name.capitalize()}", dependsOn: [ "clean", "test${variant.name.capitalize()}UnitTest", "connected${variant.name.capitalize()}AndroidTest" ]) {
-            group 'cgeo'
-            description "Tests the ${variant.description} both with device-dependent and device-independent tests."
-        }
     }
+}
+
+// run device and non device tests together with one task. also fixes the bug that gradle optimizes tests away in repeated runs
+tasks.create(name: "testDebug", dependsOn: [ "testDebugUnitTest", "connectedDebugAndroidTest" ]) {
+    group 'cgeo'
+    description "Tests the debug build both with device-dependent and device-independent tests."
 }
 
 /*
