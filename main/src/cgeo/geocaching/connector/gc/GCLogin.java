@@ -12,7 +12,7 @@ import cgeo.geocaching.settings.Credentials;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
-import cgeo.geocaching.utils.RxUtils;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.TextUtils;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
@@ -270,7 +270,7 @@ public class GCLogin extends AbstractLogin {
     }
 
     private static void setHomeLocation() {
-        RxUtils.networkScheduler.createWorker().schedule(new Action0() {
+        AndroidRxUtils.networkScheduler.createWorker().schedule(new Action0() {
             @Override
             public void call() {
                 final String homeLocationStr = retrieveHomeLocation();
@@ -284,7 +284,7 @@ public class GCLogin extends AbstractLogin {
     }
 
     private static void refreshMemberStatus() {
-        RxUtils.networkScheduler.createWorker().schedule(new Action0() {
+        AndroidRxUtils.networkScheduler.createWorker().schedule(new Action0() {
             @Override
             public void call() {
                 final String page = StringUtils.defaultString(Network.getResponseData(Network.getRequest("https://www.geocaching.com/account/settings/membership")));

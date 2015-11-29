@@ -1,7 +1,7 @@
 package cgeo.geocaching.sensors;
 
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.RxUtils;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.RxUtils.DelayedUnsubscription;
 
 import org.apache.commons.lang3.StringUtils;
@@ -53,7 +53,7 @@ public class GeoDataProvider {
                 subscriber.add(Subscriptions.create(new Action0() {
                     @Override
                     public void call() {
-                        RxUtils.looperCallbacksWorker.schedule(new Action0() {
+                        AndroidRxUtils.looperCallbacksWorker.schedule(new Action0() {
                             @Override
                             public void call() {
                                 geoManager.removeUpdates(networkListener);
@@ -64,7 +64,7 @@ public class GeoDataProvider {
                 }));
             }
         });
-        return observable.subscribeOn(RxUtils.looperCallbacksScheduler).share().lift(new DelayedUnsubscription<GeoData>(2500, TimeUnit.MILLISECONDS)).onBackpressureLatest();
+        return observable.subscribeOn(AndroidRxUtils.looperCallbacksScheduler).share().lift(new DelayedUnsubscription<GeoData>(2500, TimeUnit.MILLISECONDS)).onBackpressureLatest();
     }
 
     private static class Listener implements LocationListener {

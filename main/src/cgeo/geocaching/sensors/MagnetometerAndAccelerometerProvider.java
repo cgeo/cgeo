@@ -1,7 +1,7 @@
 package cgeo.geocaching.sensors;
 
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.RxUtils;
+import cgeo.geocaching.utils.AndroidRxUtils;
 
 import rx.Observable;
 import rx.Observable.OnSubscribe;
@@ -72,7 +72,7 @@ public class MagnetometerAndAccelerometerProvider {
                 subscriber.add(Subscriptions.create(new Action0() {
                     @Override
                     public void call() {
-                        RxUtils.looperCallbacksWorker.schedule(new Action0() {
+                        AndroidRxUtils.looperCallbacksWorker.schedule(new Action0() {
                             @Override
                             public void call() {
                                 Log.d("MagnetometerAndAccelerometerProvider: unregistering listener");
@@ -84,7 +84,7 @@ public class MagnetometerAndAccelerometerProvider {
                 }));
             }
         });
-        return observable.subscribeOn(RxUtils.looperCallbacksScheduler).share().onBackpressureLatest();
+        return observable.subscribeOn(AndroidRxUtils.looperCallbacksScheduler).share().onBackpressureLatest();
     }
 
     public static boolean hasMagnetometerAndAccelerometerSensors(final Context context) {

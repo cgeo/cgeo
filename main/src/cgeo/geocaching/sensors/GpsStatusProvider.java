@@ -1,6 +1,6 @@
 package cgeo.geocaching.sensors;
 
-import cgeo.geocaching.utils.RxUtils;
+import cgeo.geocaching.utils.AndroidRxUtils;
 
 import rx.Observable;
 import rx.Observable.OnSubscribe;
@@ -80,7 +80,7 @@ public class GpsStatusProvider {
                 subscriber.add(Subscriptions.create(new Action0() {
                     @Override
                     public void call() {
-                        RxUtils.looperCallbacksWorker.schedule(new Action0() {
+                        AndroidRxUtils.looperCallbacksWorker.schedule(new Action0() {
                             @Override
                             public void call() {
                                 geoManager.removeGpsStatusListener(listener);
@@ -90,6 +90,6 @@ public class GpsStatusProvider {
                 }));
             }
         });
-        return observable.subscribeOn(RxUtils.looperCallbacksScheduler);
+        return observable.subscribeOn(AndroidRxUtils.looperCallbacksScheduler);
     }
 }

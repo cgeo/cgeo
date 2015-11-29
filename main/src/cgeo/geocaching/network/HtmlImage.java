@@ -11,7 +11,7 @@ import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.ImageUtils.ContainerDrawable;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.RxUtils;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.RxUtils.ObservableCache;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
@@ -208,7 +208,7 @@ public class HtmlImage implements Html.ImageGetter {
                     final Bitmap bitmap = loadCachedImage(FileUtils.urlToFile(url), true).left;
                     return bitmap != null ? Observable.just(ImageUtils.scaleBitmapToFitDisplay(bitmap)) : Observable.<BitmapDrawable>empty();
                 }
-            }).subscribeOn(RxUtils.computationScheduler);
+            }).subscribeOn(AndroidRxUtils.computationScheduler);
         }
 
         final boolean shared = url.contains("/images/icons/icon_");
@@ -218,7 +218,7 @@ public class HtmlImage implements Html.ImageGetter {
             @Override
             public void call(final Subscriber<? super BitmapDrawable> subscriber) {
                 subscription.add(subscriber);
-                subscriber.add(RxUtils.computationScheduler.createWorker().schedule(new Action0() {
+                subscriber.add(AndroidRxUtils.computationScheduler.createWorker().schedule(new Action0() {
                     @Override
                     public void call() {
                         final ImmutablePair<BitmapDrawable, Boolean> loaded = loadFromDisk();
@@ -231,7 +231,7 @@ public class HtmlImage implements Html.ImageGetter {
                         if (bitmap != null && !onlySave) {
                             subscriber.onNext(bitmap);
                         }
-                        RxUtils.networkScheduler.createWorker().schedule(new Action0() {
+                        AndroidRxUtils.networkScheduler.createWorker().schedule(new Action0() {
                             @Override public void call() {
                                 downloadAndSave(subscriber);
                             }
@@ -264,7 +264,7 @@ public class HtmlImage implements Html.ImageGetter {
                     subscriber.onCompleted();
                     return;
                 }
-                RxUtils.computationScheduler.createWorker().schedule(new Action0() {
+                AndroidRxUtils.computationScheduler.createWorker().schedule(new Action0() {
                     @Override
                     public void call() {
                         final ImmutablePair<BitmapDrawable, Boolean> loaded = loadFromDisk();

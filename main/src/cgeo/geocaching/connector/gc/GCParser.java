@@ -34,6 +34,7 @@ import cgeo.geocaching.utils.HtmlUtils;
 import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.RxUtils;
 import cgeo.geocaching.utils.SynchronizedDateFormat;
 import cgeo.geocaching.utils.TextUtils;
@@ -1045,7 +1046,7 @@ public final class GCParser {
 
             return Observable.just(list);
         }
-    }).subscribeOn(RxUtils.networkScheduler);
+    }).subscribeOn(AndroidRxUtils.networkScheduler);
 
     static ImmutablePair<StatusCode, String> postLog(final String geocode, final String cacheid, final String[] viewstates,
                                                      final LogType logType, final int year, final int month, final int day,
@@ -1749,7 +1750,7 @@ public final class GCParser {
                 }
                 return parseLogs(logType != Logs.ALL, responseStream);
             }
-        }).subscribeOn(RxUtils.networkScheduler);
+        }).subscribeOn(AndroidRxUtils.networkScheduler);
     }
 
     private static Observable<LogEntry> parseLogs(final boolean markAsFriendsLog, final InputStream responseStream) {

@@ -61,7 +61,7 @@ import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.RxUtils;
+import cgeo.geocaching.utils.AndroidRxUtils;
 
 import com.github.amlcurran.showcaseview.targets.ActionViewTarget;
 import com.github.amlcurran.showcaseview.targets.ActionViewTarget.Type;
@@ -1262,7 +1262,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                         handler.obtainMessage(DownloadProgress.MSG_LOADED, cache).sendToTarget();
                         subscriber.onCompleted();
                     }
-                }).subscribeOn(RxUtils.refreshScheduler);
+                }).subscribeOn(AndroidRxUtils.refreshScheduler);
             }
         }).doOnCompleted(new Action0() {
             @Override

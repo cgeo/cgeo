@@ -11,7 +11,7 @@ import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.utils.BundleUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
-import cgeo.geocaching.utils.RxUtils;
+import cgeo.geocaching.utils.AndroidRxUtils;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
 import ch.boye.httpclientandroidlib.ParseException;
@@ -274,7 +274,7 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
             startButton.setOnClickListener(null);
 
             setTempTokens(null, null);
-            RxUtils.networkScheduler.createWorker().schedule(new Action0() {
+            AndroidRxUtils.networkScheduler.createWorker().schedule(new Action0() {
                 @Override
                 public void call() {
                     requestToken();
@@ -291,7 +291,7 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
         }
         changeTokensDialog.show();
 
-        RxUtils.networkScheduler.createWorker().schedule(new Action0() {
+        AndroidRxUtils.networkScheduler.createWorker().schedule(new Action0() {
             @Override
             public void call() {
                 changeToken(verifier);

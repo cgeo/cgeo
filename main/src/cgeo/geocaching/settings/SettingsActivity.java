@@ -19,7 +19,7 @@ import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.utils.DatabaseBackupUtils;
 import cgeo.geocaching.utils.DebugUtils;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.RxUtils;
+import cgeo.geocaching.utils.AndroidRxUtils;
 
 import org.apache.commons.lang3.StringUtils;
 import org.openintents.intents.FileManagerIntents;
@@ -377,7 +377,7 @@ public class SettingsActivity extends PreferenceActivity {
                 final Resources res = getResources();
                 final SettingsActivity activity = SettingsActivity.this;
                 final ProgressDialog dialog = ProgressDialog.show(activity, res.getString(R.string.init_maintenance), res.getString(R.string.init_maintenance_directories), true, false);
-                RxUtils.andThenOnUi(Schedulers.io(), new Action0() {
+                AndroidRxUtils.andThenOnUi(Schedulers.io(), new Action0() {
                     @Override
                     public void call() {
                         DataStore.removeObsoleteCacheDirectories();

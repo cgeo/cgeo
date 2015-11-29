@@ -9,7 +9,7 @@ import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.utils.BundleUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
-import cgeo.geocaching.utils.RxUtils;
+import cgeo.geocaching.utils.AndroidRxUtils;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
 
@@ -184,7 +184,7 @@ public abstract class TokenAuthorizationActivity extends AbstractActivity {
             final String username = usernameEditText.getText().toString();
             final String password = passwordEditText.getText().toString();
 
-            RxUtils.networkScheduler.createWorker().schedule(new Action0() {
+            AndroidRxUtils.networkScheduler.createWorker().schedule(new Action0() {
                 @Override
                 public void call() {
                     requestToken(username, password);

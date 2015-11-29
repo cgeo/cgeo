@@ -6,7 +6,7 @@ import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.RxUtils;
+import cgeo.geocaching.utils.AndroidRxUtils;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
 
@@ -79,7 +79,7 @@ public class RegisterSend2CgeoPreference extends AbstractClickablePreference {
 
                         return Observable.empty();
                     }
-                }).firstOrDefault(0)).subscribeOn(RxUtils.networkScheduler).subscribe(new Action1<Integer>() {
+                }).firstOrDefault(0)).subscribeOn(AndroidRxUtils.networkScheduler).subscribe(new Action1<Integer>() {
                     @Override
                     public void call(final Integer pin) {
                         progressDialog.dismiss();

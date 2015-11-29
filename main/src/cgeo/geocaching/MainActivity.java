@@ -24,7 +24,7 @@ import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.DatabaseBackupUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.RxUtils;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.Version;
 
@@ -259,7 +259,7 @@ public class MainActivity extends AbstractActionBarActivity {
 
         for (final ILogin conn : ConnectorFactory.getActiveLiveConnectors()) {
             if (mustLogin || !conn.isLoggedIn()) {
-                RxUtils.networkScheduler.createWorker().schedule(new Action0() {
+                AndroidRxUtils.networkScheduler.createWorker().schedule(new Action0() {
                     @Override
                     public void call() {
                         if (mustLogin) {
@@ -642,7 +642,7 @@ public class MainActivity extends AbstractActionBarActivity {
                         }
                     }).onErrorResumeNext(Observable.just(currentCoords.toString()));
                     AppObservable.bindActivity(MainActivity.this, address)
-                            .subscribeOn(RxUtils.networkScheduler)
+                            .subscribeOn(AndroidRxUtils.networkScheduler)
                             .subscribe(new Action1<String>() {
                                 @Override
                                 public void call(final String address) {

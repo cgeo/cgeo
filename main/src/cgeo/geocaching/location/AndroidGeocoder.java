@@ -1,7 +1,7 @@
 package cgeo.geocaching.location;
 
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.RxUtils;
+import cgeo.geocaching.utils.AndroidRxUtils;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.eclipse.jdt.annotation.NonNull;
@@ -47,7 +47,7 @@ public class AndroidGeocoder {
                     return Observable.error(e);
                 }
             }
-        }).subscribeOn(RxUtils.networkScheduler);
+        }).subscribeOn(AndroidRxUtils.networkScheduler);
     }
 
     /**
@@ -70,7 +70,7 @@ public class AndroidGeocoder {
                     return Observable.error(e);
                 }
             }
-        }).subscribeOn(RxUtils.networkScheduler).first();
+        }).subscribeOn(AndroidRxUtils.networkScheduler).first();
     }
 
     private static Observable<Address> addressesToObservable(final List<Address> addresses) {

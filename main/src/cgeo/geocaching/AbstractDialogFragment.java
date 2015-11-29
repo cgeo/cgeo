@@ -15,6 +15,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.ui.LoggingUI;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.RxUtils;
 
 import rx.Subscription;
@@ -191,7 +192,7 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
             public GCVoteRating call() {
                 return GCVote.getRating(cache.getGuid(), geocode);
             }
-        })).subscribeOn(RxUtils.networkScheduler).subscribe(new Action1<GCVoteRating>() {
+        })).subscribeOn(AndroidRxUtils.networkScheduler).subscribe(new Action1<GCVoteRating>() {
             @Override
             public void call(final GCVoteRating rating) {
                 cache.setRating(rating.getRating());

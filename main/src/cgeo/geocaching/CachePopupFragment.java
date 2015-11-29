@@ -12,7 +12,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.RxUtils;
+import cgeo.geocaching.utils.AndroidRxUtils;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -149,7 +149,7 @@ public class CachePopupFragment extends AbstractDialogFragment {
             final StoreCacheHandler storeCacheHandler = new StoreCacheHandler(R.string.cache_dialog_offline_save_message);
             final FragmentActivity activity = getActivity();
             progress.show(activity, res.getString(R.string.cache_dialog_offline_save_title), res.getString(R.string.cache_dialog_offline_save_message), true, storeCacheHandler.cancelMessage());
-            RxUtils.andThenOnUi(Schedulers.io(), new Action0() {
+            AndroidRxUtils.andThenOnUi(Schedulers.io(), new Action0() {
                 @Override
                 public void call() {
                     cache.store(listId, storeCacheHandler);
@@ -178,7 +178,7 @@ public class CachePopupFragment extends AbstractDialogFragment {
 
             final StoreCacheHandler refreshCacheHandler = new StoreCacheHandler(R.string.cache_dialog_offline_save_message);
             progress.show(getActivity(), res.getString(R.string.cache_dialog_refresh_title), res.getString(R.string.cache_dialog_refresh_message), true, refreshCacheHandler.cancelMessage());
-            cache.refresh(refreshCacheHandler, RxUtils.networkScheduler);
+            cache.refresh(refreshCacheHandler, AndroidRxUtils.networkScheduler);
         }
     }
 

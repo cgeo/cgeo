@@ -6,7 +6,7 @@ import cgeo.geocaching.connector.capability.ISearchByGeocode;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.CryptUtils;
-import cgeo.geocaching.utils.RxUtils;
+import cgeo.geocaching.utils.AndroidRxUtils;
 
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
@@ -127,7 +127,7 @@ public class OCApiConnector extends OCConnector implements ISearchByGeocode {
                 public Observable<String> call() {
                     return Observable.just(OkapiClient.getGeocodeByUrl(OCApiConnector.this, url));
                 }
-            }).subscribeOn(RxUtils.networkScheduler).toBlocking().first();
+            }).subscribeOn(AndroidRxUtils.networkScheduler).toBlocking().first();
 
             if (geocode != null && canHandle(geocode)) {
                 return geocode;

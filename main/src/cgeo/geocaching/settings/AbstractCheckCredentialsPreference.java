@@ -5,7 +5,7 @@ import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.network.Cookies;
 import cgeo.geocaching.ui.dialog.Dialogs;
-import cgeo.geocaching.utils.RxUtils;
+import cgeo.geocaching.utils.AndroidRxUtils;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.eclipse.jdt.annotation.NonNull;
@@ -78,7 +78,7 @@ public abstract class AbstractCheckCredentialsPreference extends AbstractClickab
                 public Observable<ImmutablePair<StatusCode, Observable<Drawable>>> call() {
                     return Observable.just(login());
                 }
-            })).subscribeOn(RxUtils.networkScheduler).subscribe(new Action1<ImmutablePair<StatusCode, Observable<Drawable>>>() {
+            })).subscribeOn(AndroidRxUtils.networkScheduler).subscribe(new Action1<ImmutablePair<StatusCode, Observable<Drawable>>>() {
                 @Override
                 public void call(final ImmutablePair<StatusCode, Observable<Drawable>> loginInfo) {
                     loginDialog.dismiss();

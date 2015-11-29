@@ -60,6 +60,7 @@ import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.RxUtils;
 import cgeo.geocaching.utils.SimpleCancellableHandler;
 import cgeo.geocaching.utils.SimpleHandler;
@@ -312,7 +313,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
         final String realGeocode = geocode;
         final String realGuid = guid;
-        RxUtils.networkScheduler.createWorker().schedule(new Action0() {
+        AndroidRxUtils.networkScheduler.createWorker().schedule(new Action0() {
             @Override
             public void call() {
                 search = Geocache.searchByGeocode(realGeocode, StringUtils.isBlank(realGeocode) ? realGuid : null, 0, false, loadCacheHandler);
@@ -333,7 +334,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                         public Observable<Trackable> call() {
                             return Observable.from(trackableConnector.searchTrackables(geocode));
                         }
-                    }).subscribeOn(RxUtils.networkScheduler);
+                    }).subscribeOn(AndroidRxUtils.networkScheduler);
                 }
             }).toList()
         ).subscribe(new Action1<List<Trackable>>() {
@@ -633,7 +634,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
             @Override
             public void onClick(final DialogInterface dialog, final int which) {
-                RxUtils.networkScheduler.createWorker().schedule(new Action0() {
+                AndroidRxUtils.networkScheduler.createWorker().schedule(new Action0() {
                     @Override
                     public void call() {
                         ((IgnoreCapability) ConnectorFactory.getConnector(cache)).ignoreCache(cache);
@@ -874,7 +875,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
         progress.show(this, res.getString(R.string.cache_dialog_refresh_title), res.getString(R.string.cache_dialog_refresh_message), true, refreshCacheHandler.cancelMessage());
 
-        cache.refresh(refreshCacheHandler, RxUtils.refreshScheduler);
+        cache.refresh(refreshCacheHandler, AndroidRxUtils.refreshScheduler);
     }
 
     private void dropCache() {
@@ -925,7 +926,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             view = (ScrollView) getLayoutInflater().inflate(R.layout.cachedetail_details_page, parentView, false);
 
             // Start loading preview map
-            AppObservable.bindActivity(CacheDetailActivity.this, previewMap).subscribeOn(RxUtils.networkScheduler)
+            AppObservable.bindActivity(CacheDetailActivity.this, previewMap).subscribeOn(AndroidRxUtils.networkScheduler)
                     .subscribe(new Action1<BitmapDrawable>() {
                         @Override
                         public void call(final BitmapDrawable image) {
@@ -1139,7 +1140,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     return;
                 }
                 progress.show(CacheDetailActivity.this, res.getString(titleId), res.getString(messageId), true, null);
-                RxUtils.networkScheduler.createWorker().schedule(new Action0() {
+                AndroidRxUtils.networkScheduler.createWorker().schedule(new Action0() {
                     @Override
                     public void call() {
                         action.call(handler);
@@ -1548,7 +1549,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             final Message cancelMessage = myHandler.cancelMessage(res.getString(R.string.cache_personal_note_upload_cancelled));
             progress.show(CacheDetailActivity.this, res.getString(R.string.cache_personal_note_uploading), res.getString(R.string.cache_personal_note_uploading), true, cancelMessage);
 
-            myHandler.unsubscribeIfCancelled(RxUtils.networkScheduler.createWorker().schedule(new Action0() {
+            myHandler.unsubscribeIfCancelled(AndroidRxUtils.networkScheduler.createWorker().schedule(new Action0() {
                 @Override
                 public void call() {
                     final IConnector con = ConnectorFactory.getConnector(cache);
@@ -2082,7 +2083,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     }
 
     private void resetCoords(final Geocache cache, final Handler handler, final Waypoint wpt, final boolean local, final boolean remote, final ProgressDialog progress) {
-        RxUtils.networkScheduler.createWorker().schedule(new Action0() {
+        AndroidRxUtils.networkScheduler.createWorker().schedule(new Action0() {
             @Override
             public void call() {
                 if (local) {
@@ -2290,7 +2291,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
     protected void storeCache(final int listId, final StoreCacheHandler storeCacheHandler) {
         progress.show(this, res.getString(R.string.cache_dialog_offline_save_title), res.getString(R.string.cache_dialog_offline_save_message), true, storeCacheHandler.cancelMessage());
-        RxUtils.networkScheduler.createWorker().schedule(new Action0() {
+        AndroidRxUtils.networkScheduler.createWorker().schedule(new Action0() {
             @Override
             public void call() {
                 cache.store(listId, storeCacheHandler);

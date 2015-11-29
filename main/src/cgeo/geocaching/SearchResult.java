@@ -8,7 +8,7 @@ import cgeo.geocaching.enumerations.LoadFlags.LoadFlag;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.gcvote.GCVote;
-import cgeo.geocaching.utils.RxUtils;
+import cgeo.geocaching.utils.AndroidRxUtils;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -326,7 +326,7 @@ public class SearchResult implements Parcelable {
                     public Observable<SearchResult> call() {
                         return Observable.just(func.call(connector));
                     }
-                }).subscribeOn(RxUtils.networkScheduler);
+                }).subscribeOn(AndroidRxUtils.networkScheduler);
             }
         }).reduce(new SearchResult(), new Func2<SearchResult, SearchResult, SearchResult>() {
             @Override

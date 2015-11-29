@@ -7,7 +7,7 @@ import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.utils.LeastRecentlyUsedSet;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.RxUtils;
+import cgeo.geocaching.utils.AndroidRxUtils;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
 
@@ -241,7 +241,7 @@ public class Tile {
             public Observable<String> call() {
                 return Observable.just(Network.getResponseData(response));
             }
-        }).subscribeOn(RxUtils.networkScheduler);
+        }).subscribeOn(AndroidRxUtils.networkScheduler);
     }
 
     /** Request .png image for a tile. Return as soon as the request has been made, before the answer has been
@@ -261,7 +261,7 @@ public class Tile {
                     return Observable.just(null);
                 }
             }
-        }).subscribeOn(RxUtils.computationScheduler);
+        }).subscribeOn(AndroidRxUtils.computationScheduler);
     }
 
     public boolean containsPoint(final @NonNull ICoordinates point) {

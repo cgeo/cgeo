@@ -24,7 +24,7 @@ import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.LogTemplateProvider;
 import cgeo.geocaching.utils.LogTemplateProvider.LogContext;
-import cgeo.geocaching.utils.RxUtils;
+import cgeo.geocaching.utils.AndroidRxUtils;
 
 import com.github.amlcurran.showcaseview.targets.ActionItemTarget;
 
@@ -333,7 +333,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
                         public Observable<TrackableLog> call() {
                             return trackableConnector.trackableLogInventory();
                         }
-                    }).subscribeOn(RxUtils.networkScheduler);
+                    }).subscribeOn(AndroidRxUtils.networkScheduler);
                 }
             }).toList()
         ).subscribe(new Action1<List<TrackableLog>>() {

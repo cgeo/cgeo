@@ -26,6 +26,7 @@ import cgeo.geocaching.ui.logs.TrackableLogsViewCreator;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.HtmlUtils;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.RxUtils;
 import cgeo.geocaching.utils.UnknownTagsHandler;
 
@@ -273,7 +274,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
                 public Trackable call() {
                     return TravelBugConnector.getInstance().searchTrackable(geocode, guid, id);
                 }
-            }).subscribeOn(RxUtils.networkScheduler);
+            }).subscribeOn(AndroidRxUtils.networkScheduler);
         }
 
         // We query all the connectors that can handle the trackable in parallel as well as the local storage.
@@ -294,7 +295,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
                             public Trackable call() {
                                 return trackableConnector.searchTrackable(geocode, guid, id);
                             }
-                        }).subscribeOn(RxUtils.networkScheduler);
+                        }).subscribeOn(AndroidRxUtils.networkScheduler);
                     }
                 });
 

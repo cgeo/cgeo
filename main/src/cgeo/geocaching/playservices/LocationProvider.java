@@ -3,7 +3,7 @@ package cgeo.geocaching.playservices;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.RxUtils;
+import cgeo.geocaching.utils.AndroidRxUtils;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -51,10 +51,10 @@ public class LocationProvider extends LocationCallback implements GoogleApiClien
         if (locationClient.isConnected()) {
             if (mostPreciseCount.get() > 0) {
                 Log.d("LocationProvider: requesting most precise locations");
-                LocationServices.FusedLocationApi.requestLocationUpdates(locationClient, LOCATION_REQUEST, this, RxUtils.looperCallbacksLooper);
+                LocationServices.FusedLocationApi.requestLocationUpdates(locationClient, LOCATION_REQUEST, this, AndroidRxUtils.looperCallbacksLooper);
             } else if (lowPowerCount.get() > 0) {
                 Log.d("LocationProvider: requesting low-power locations");
-                LocationServices.FusedLocationApi.requestLocationUpdates(locationClient, LOCATION_REQUEST_LOW_POWER, this, RxUtils.looperCallbacksLooper);
+                LocationServices.FusedLocationApi.requestLocationUpdates(locationClient, LOCATION_REQUEST_LOW_POWER, this, AndroidRxUtils.looperCallbacksLooper);
             } else {
                 Log.d("LocationProvider: stopping location requests");
                 LocationServices.FusedLocationApi.removeLocationUpdates(locationClient, this);
@@ -73,7 +73,7 @@ public class LocationProvider extends LocationCallback implements GoogleApiClien
                 subscriber.add(Subscriptions.create(new Action0() {
                     @Override
                     public void call() {
-                        RxUtils.looperCallbacksWorker.schedule(new Action0() {
+                        AndroidRxUtils.looperCallbacksWorker.schedule(new Action0() {
                             @Override
                             public void call() {
                                 if (reference.decrementAndGet() == 0) {

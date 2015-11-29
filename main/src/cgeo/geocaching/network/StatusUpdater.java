@@ -1,7 +1,7 @@
 package cgeo.geocaching.network;
 
 import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.utils.RxUtils;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Version;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -55,7 +55,7 @@ public class StatusUpdater {
     final static public BehaviorSubject<Status> LATEST_STATUS = BehaviorSubject.create(Status.defaultStatus(null));
 
     static {
-        RxUtils.networkScheduler.createWorker().schedulePeriodically(new Action0() {
+        AndroidRxUtils.networkScheduler.createWorker().schedulePeriodically(new Action0() {
             @Override
             public void call() {
                 final ObjectNode response =

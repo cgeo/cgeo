@@ -9,7 +9,7 @@ import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.RxUtils;
+import cgeo.geocaching.utils.AndroidRxUtils;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
 
@@ -123,7 +123,7 @@ public final class StaticMapsProvider {
                 }
                 return Observable.just(prefix);
             }
-        }).subscribeOn(RxUtils.networkScheduler));
+        }).subscribeOn(AndroidRxUtils.networkScheduler));
     }
 
     public static Observable<String> downloadMaps(final Geocache cache) {

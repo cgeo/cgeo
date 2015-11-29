@@ -3,7 +3,7 @@ package cgeo.geocaching.location;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.RxUtils;
+import cgeo.geocaching.utils.AndroidRxUtils;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -82,7 +82,7 @@ public class MapQuestGeocoder {
                     }
                 });
             }
-        }).subscribeOn(RxUtils.networkScheduler);
+        }).subscribeOn(AndroidRxUtils.networkScheduler);
     }
 
     private static Address mapquestToAddress(final JsonNode mapquestAddress) {
