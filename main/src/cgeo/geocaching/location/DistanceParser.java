@@ -11,6 +11,10 @@ public final class DistanceParser {
 
     private static final Pattern pattern = Pattern.compile("^([0-9.,]+)[ ]*(m|km|ft|yd|mi|)?$", Pattern.CASE_INSENSITIVE);
 
+    private DistanceParser() {
+        // utility class
+    }
+
     /**
      * Parse a distance string composed by a number and an optional suffix
      * (such as "1.2km").

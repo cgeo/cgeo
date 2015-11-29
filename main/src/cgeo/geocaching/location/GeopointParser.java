@@ -13,6 +13,10 @@ import java.util.regex.Pattern;
  */
 class GeopointParser {
 
+    private GeopointParser() {
+        // utility class
+    }
+
     private static class ResultWrapper {
         final double result;
         final int matcherPos;

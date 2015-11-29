@@ -11,6 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OAuth {
+    private OAuth() {
+        // utility class
+    }
+
     public static void signOAuth(final String host,
             final String path,
             final String method,

@@ -31,6 +31,10 @@ public class MapProviderFactory {
         MapsforgeMapProvider.getInstance();
     }
 
+    private MapProviderFactory() {
+        // utility class
+    }
+
     public static boolean isGoogleMapsInstalled() {
         // Check if API key is available
         final String mapsKey = CgeoApplication.getInstance().getString(R.string.maps_api_key);

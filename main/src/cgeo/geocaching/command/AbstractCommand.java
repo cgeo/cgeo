@@ -94,7 +94,7 @@ abstract class AbstractCommand implements Command {
             return;
         }
         final AsyncTaskWithProgress<Void, Void> task = new ActionAsyncTask(context, null, progressMessage, true);
-        task.execute(new Void[] {});
+        task.execute();
     }
 
     private final class ActionAsyncTask extends AsyncTaskWithProgress<Void, Void> implements Listener {

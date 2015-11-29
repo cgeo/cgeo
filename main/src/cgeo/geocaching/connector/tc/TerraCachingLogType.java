@@ -7,6 +7,10 @@ import cgeo.geocaching.enumerations.LogType;
  */
 public final class TerraCachingLogType {
 
+    private TerraCachingLogType() {
+        // utility class
+    }
+
     public static LogType getLogType(final String logtype) {
         switch (logtype) {
             case "Found it!":

@@ -319,7 +319,7 @@ public class SearchResult implements Parcelable {
             @Override
             public Observable<SearchResult> call(final C connector) {
                 if (!connector.isActive()) {
-                    return Observable.<SearchResult> empty();
+                    return Observable.empty();
                 }
                 return Observable.defer(new Func0<Observable<SearchResult>>() {
                     @Override

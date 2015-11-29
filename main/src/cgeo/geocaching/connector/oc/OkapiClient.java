@@ -148,6 +148,10 @@ final class OkapiClient {
 
     private static final Pattern PATTERN_TIMEZONE = Pattern.compile("([+-][01][0-9]):([03])0");
 
+    private OkapiClient() {
+        // utility class
+    }
+
     public static Geocache getCache(final String geoCode) {
         final Parameters params = new Parameters("cache_code", geoCode);
         final IConnector connector = ConnectorFactory.getConnector(geoCode);

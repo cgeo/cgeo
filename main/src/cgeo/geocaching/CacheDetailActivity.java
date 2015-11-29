@@ -614,7 +614,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 new FieldnoteExport().export(Collections.singletonList(cache), this);
                 return true;
             case R.id.menu_edit_fieldnote:
-                editPersonalNote(cache, CacheDetailActivity.this);
+                editPersonalNote(cache, this);
                 return true;
             default:
                 if (NavigationAppFactory.onMenuItemSelected(item, this, cache)) {

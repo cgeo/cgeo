@@ -21,7 +21,7 @@ public class TextUtilsTest extends TestCase {
 
     public static void testControlCharactersCleanup() {
         final Pattern patternAll = Pattern.compile("(.*)", Pattern.DOTALL);
-        assertThat(TextUtils.getMatch("some" + "\u001C" + "control" + (char) 0x1D + "characters removed", patternAll, "")).isEqualTo("some control characters removed");
+        assertThat(TextUtils.getMatch("some" + '\u001C' + "control" + (char) 0x1D + "characters removed", patternAll, "")).isEqualTo("some control characters removed");
         assertThat(TextUtils.getMatch("newline\nalso\nremoved", patternAll, "")).isEqualTo("newline also removed");
     }
 

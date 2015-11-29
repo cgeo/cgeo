@@ -421,7 +421,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
 
         if (StringUtils.isBlank(bearingText) && StringUtils.isBlank(distanceText)
                 && StringUtils.isBlank(latText) && StringUtils.isBlank(lonText)) {
-            Dialogs.message(EditWaypointActivity.this, R.string.err_point_no_position_given_title, R.string.err_point_no_position_given);
+            Dialogs.message(this, R.string.err_point_no_position_given_title, R.string.err_point_no_position_given);
             return null;
         }
 
@@ -444,7 +444,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
             try {
                 bearing = Double.parseDouble(bearingText);
             } catch (final NumberFormatException ignored) {
-                Dialogs.message(EditWaypointActivity.this, R.string.err_point_bear_and_dist_title, R.string.err_point_bear_and_dist);
+                Dialogs.message(this, R.string.err_point_bear_and_dist_title, R.string.err_point_bear_and_dist);
                 return null;
             }
 

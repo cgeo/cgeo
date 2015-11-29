@@ -15,6 +15,10 @@ import android.view.View;
 
 public class LiveMapInfoDialogBuilder {
 
+    private LiveMapInfoDialogBuilder() {
+        // utility class
+    }
+
     public static AlertDialog create(final Activity activity) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 

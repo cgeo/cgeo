@@ -8,6 +8,10 @@ import java.util.Locale;
 
 public class Units {
 
+    private Units() {
+        // utility class
+    }
+
     public static ImmutablePair<Double, String> scaleDistance(final double distanceKilometers) {
         double distance;
         final String units;

@@ -21,6 +21,10 @@ import java.util.Locale;
  * on unit expressions.
  */
 public class TextFactory {
+    private TextFactory() {
+        // utility class
+    }
+
     public static String getText(final Geopoint position, final Geopoint target, final float direction) {
         if (position == null || target == null) {
             return null;

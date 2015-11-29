@@ -1228,7 +1228,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     private void deleteCachesInternal(final @NonNull Collection<Geocache> caches) {
-        new DeleteCachesFromListCommand(CacheListActivity.this, caches).execute();
+        new DeleteCachesFromListCommand(this, caches).execute();
     }
 
     /**
@@ -1710,7 +1710,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                     checkIfEmptyAndRemoveAfterConfirm();
                     break;
                 case NO_ACTION:
-                default:
+                    break;
             }
         }
     }

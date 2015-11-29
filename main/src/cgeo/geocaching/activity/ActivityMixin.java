@@ -29,6 +29,10 @@ import android.widget.Toast;
 
 public final class ActivityMixin {
 
+    private ActivityMixin() {
+        // utility class
+    }
+
     public static void setTitle(final Activity activity, final CharSequence text) {
         if (StringUtils.isBlank(text)) {
             return;

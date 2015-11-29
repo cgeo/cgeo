@@ -102,6 +102,10 @@ public final class ConnectorFactory {
     @NonNull
     private static final Collection<ISearchByFinder> SEARCH_BY_FINDER_CONNECTORS = getMatchingConnectors(ISearchByFinder.class);
 
+    private ConnectorFactory() {
+        // utility class
+    }
+
     @NonNull
     @SuppressWarnings("unchecked")
     private static <T extends IConnector> Collection<T> getMatchingConnectors(final Class<T> clazz) {

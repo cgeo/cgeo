@@ -6,6 +6,10 @@ import android.os.Bundle;
 
 public class BundleUtils {
 
+    private BundleUtils() {
+        // utility class
+    }
+
     @NonNull
     public static String getString(final Bundle bundle, @NonNull final String key, @NonNull final String defaultValue) {
         final String res = bundle.getString(key);

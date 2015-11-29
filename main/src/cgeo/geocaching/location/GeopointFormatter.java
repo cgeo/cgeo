@@ -6,6 +6,10 @@ import java.util.Locale;
  * Formatting of Geopoint.
  */
 public class GeopointFormatter {
+    private GeopointFormatter() {
+        // utility class
+    }
+
     /**
      * Predefined formats.
      */

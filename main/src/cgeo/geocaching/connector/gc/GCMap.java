@@ -48,6 +48,10 @@ import java.util.Set;
 public class GCMap {
     private static Viewport lastSearchViewport = null;
 
+    private GCMap() {
+        // utility class
+    }
+
     public static SearchResult searchByGeocodes(final Set<String> geocodes) {
         final SearchResult result = new SearchResult();
 

@@ -348,7 +348,7 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
         startActivity(addressesIntent);
     }
 
-    private final void findByFinderFn() {
+    private void findByFinderFn() {
         final String usernameText = StringUtils.trim(finderNameEditText.getText().toString());
 
         if (StringUtils.isBlank(usernameText)) {

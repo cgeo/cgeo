@@ -10,6 +10,10 @@ package cgeo.geocaching.utils;
 
 public class ApplicationSettings {
 
+    private ApplicationSettings() {
+        // utility class
+    }
+
     /**
      * Get the name of the preferences file.
      *

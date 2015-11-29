@@ -4,6 +4,11 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
 public class GCSmiliesProvider {
+
+    private GCSmiliesProvider() {
+        // utility class
+    }
+
     public enum Smiley {
         SMILE(":)"),
         BIG_SMILE(":D"),

@@ -11,7 +11,7 @@ public enum CacheListApps {
 
     private final CacheListApp app;
 
-    private CacheListApps(final CacheListApp app) {
+    CacheListApps(final CacheListApp app) {
         this.app = app;
     }
 

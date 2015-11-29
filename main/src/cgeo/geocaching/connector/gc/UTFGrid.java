@@ -12,6 +12,10 @@ final class UTFGrid {
     static final int GRID_MAXX = 63;
     static final int GRID_MAXY = 63;
 
+    private UTFGrid() {
+        // utility class
+    }
+
     /** Calculate from a list of positions (x/y) the coords */
     static UTFGridPosition getPositionInGrid(final List<UTFGridPosition> positions) {
         int minX = GRID_MAXX;

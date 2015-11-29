@@ -11,6 +11,10 @@ public class DirectionImage {
 
     static final private HtmlImage HTML_IMAGE = new HtmlImage(HtmlImage.SHARED, false, StoredList.STANDARD_LIST_ID, false);
 
+    private DirectionImage() {
+        // utility class
+    }
+
     /**
      * Retrieve the direction image corresponding to the direction code.
      *
