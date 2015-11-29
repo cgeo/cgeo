@@ -25,4 +25,9 @@ class ImportGpxZipAttachmentThread extends AbstractImportGpxZipThread {
     protected InputStream getInputStream() throws IOException {
         return contentResolver.openInputStream(uri);
     }
+
+    @Override
+    protected String getSourceDisplayName() {
+        return uri.getLastPathSegment();
+    }
 }

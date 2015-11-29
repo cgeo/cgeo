@@ -61,4 +61,9 @@ public class ImportGpxAttachmentThread extends AbstractImportGpxThread {
         }
         return null;
     }
+
+    @Override
+    protected String getSourceDisplayName() {
+        return uri.getLastPathSegment();
+    }
 }
