@@ -2,7 +2,7 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-   <b>Next bugfix release:</b>\n
+   <b>2015.11.29:</b>\n
     · Fix: Compass fails on Moto G due to absence of system sensor\n
     · Fix: Ignored cache would persist in database if it has been stored previously\n
     · Fix: TB missing in inventory if the name contains special characters\n

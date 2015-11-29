@@ -349,6 +349,7 @@
   <string name="list_dialog_create_err">c:geo misslyckades med att skapa den nya listan</string>
   <string name="list_dialog_remove_title">Ta bort lista</string>
   <string name="list_dialog_remove_description">Vill du ta bort den här listan? Alla cacher som finns i listan kommer att flyttas till \"Sparade\".</string>
+  <string name="list_dialog_remove_nowempty">Listan är tom. Vill du ta bort den aktuella listan?</string>
   <string name="list_dialog_remove">Ta bort</string>
   <string name="list_dialog_remove_ok">Listan har tagits bort</string>
   <string name="list_dialog_remove_err">c:geo misslyckades med att ta bort listan</string>
@@ -657,7 +658,9 @@
   <string name="cache_description_long">Lång beskrivning</string>
   <string name="cache_description_table_note">Beskrivningen innehåller tabellformatering som eventuellt behöver läsas på %s för att se korrekt ut.</string>
   <string name="cache_watchlist_on">Den här cachen finns i din watchlist.</string>
+  <string name="cache_watchlist_on_extra">Den här cachen är i din watchlist (totalt: %1d).</string>
   <string name="cache_watchlist_not_on">Den här cachen finns inte i din watchlist.</string>
+  <string name="cache_watchlist_not_on_extra">Den här cachen är inte i din watchlist (totalt: %1d).</string>
   <string name="cache_watchlist_add">Lägg till i watchlist</string>
   <string name="cache_watchlist_remove">Ta bort från watchlist</string>
   <string name="cache_favpoint_on">Den här cachen är en av dina favoriter.</string>
