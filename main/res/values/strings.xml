@@ -691,6 +691,18 @@
     <string name="cache_offline_time_about">about</string>
     <string name="cache_offline_time_mins">minutes ago</string>
     <string name="cache_offline_time_mins_few">a few minutes ago</string>
+    <plurals name="cache_offline_about_time_mins">
+		<item quantity="one">about %d minute ago</item>
+		<item quantity="other">about %d minutes ago</item>
+    </plurals>
+    <plurals name="cache_offline_about_time_hours">
+		<item quantity="one">about %d hour ago</item>
+		<item quantity="other">about %d hours ago</item>
+    </plurals>
+    <plurals name="cache_offline_about_time_days">
+		<item quantity="one">about %d day ago</item>
+		<item quantity="other">about %d days ago</item>
+    </plurals>
     <string name="cache_offline_time_hour">one hour ago</string>
     <string name="cache_offline_time_hours">hours ago</string>
     <string name="cache_offline_time_days">days ago</string>
