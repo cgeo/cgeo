@@ -33,6 +33,8 @@ public abstract class MoveToListCommand extends AbstractCachesCommand {
             @Override
             public void call(final Integer newListId) {
                 MoveToListCommand.this.newListId = newListId;
+                final String newListName = StoredList.getListById(newListId).getTitle();
+                MoveToListCommand.super.setProgressMessage(getContext().getString(R.string.command_move_caches_progress, newListName));
                 MoveToListCommand.super.execute();
             }
         }, true, currentListId);
