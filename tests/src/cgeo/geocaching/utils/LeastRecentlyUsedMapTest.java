@@ -1,14 +1,14 @@
 package cgeo.geocaching.utils;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-import cgeo.geocaching.Geocache;
-
-import android.test.AndroidTestCase;
+import junit.framework.TestCase;
 
 import java.util.Map;
 
-public class LeastRecentlyUsedMapTest extends AndroidTestCase {
+import cgeo.geocaching.Geocache;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+public class LeastRecentlyUsedMapTest extends TestCase {
 
     public static void testLruMode() {
         final Map<String, String> map = new LeastRecentlyUsedMap.LruCache<String, String>(4);

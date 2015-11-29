@@ -1,15 +1,15 @@
 package cgeo.geocaching.sorting;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-import cgeo.geocaching.Geocache;
-
-import android.test.AndroidTestCase;
+import junit.framework.TestCase;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class NameComparatorTest extends AndroidTestCase {
+import cgeo.geocaching.Geocache;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+public class NameComparatorTest extends TestCase {
 
     private static class NamedCache extends Geocache {
 

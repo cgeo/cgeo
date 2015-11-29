@@ -1,10 +1,10 @@
 package cgeo.geocaching.utils;
 
+import junit.framework.TestCase;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
-import android.test.AndroidTestCase;
-
-public class AngleUtilsTest extends AndroidTestCase {
+public class AngleUtilsTest extends TestCase {
 
     public static void testNormalize() {
         assertThat(AngleUtils.normalize(0)).isEqualTo(0.0f);

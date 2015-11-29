@@ -1,13 +1,14 @@
 package cgeo.geocaching.location;
 
+import android.os.Build;
+import android.os.Bundle;
+
+import junit.framework.TestCase;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.offset;
 
-import android.os.Build;
-import android.os.Bundle;
-import android.test.AndroidTestCase;
-
-public class GeopointTest extends AndroidTestCase {
+public class GeopointTest extends TestCase {
 
     public static void testCreation() {
         final Geopoint gp = new Geopoint(48.2, 3.5);

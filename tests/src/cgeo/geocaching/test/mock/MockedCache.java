@@ -17,6 +17,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -27,6 +28,11 @@ public abstract class MockedCache extends Geocache {
     final protected Geopoint coords;
     private final String data;
     private String mockedDataUser;
+
+    public final static List<MockedCache> MOCKED_CACHES;
+    static {
+        MOCKED_CACHES = Collections.unmodifiableList(Arrays.asList(new GC2CJPF(), new GC1ZXX2(), new GC2JVEH(), new GC3XX5J()));
+    }
 
     protected MockedCache(final Geopoint coords) {
         this.coords = coords;

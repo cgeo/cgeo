@@ -1,7 +1,8 @@
 package cgeo.geocaching.network;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import junit.framework.TestCase;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class NetworkTest extends TestCase {
 

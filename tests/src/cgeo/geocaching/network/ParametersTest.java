@@ -1,12 +1,12 @@
 package cgeo.geocaching.network;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-import android.test.AndroidTestCase;
+import junit.framework.TestCase;
 
 import java.security.InvalidParameterException;
 
-public class ParametersTest extends AndroidTestCase {
+import static org.assertj.core.api.Assertions.assertThat;
+
+public class ParametersTest extends TestCase {
 
     public static void testException() {
         try {

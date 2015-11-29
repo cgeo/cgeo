@@ -1,13 +1,13 @@
 package cgeo.geocaching.location;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.offset;
+import junit.framework.TestCase;
 
 import cgeo.geocaching.utils.Formatter;
 
-import android.test.AndroidTestCase;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.offset;
 
-public class GeoPointParserTest extends AndroidTestCase {
+public class GeoPointParserTest extends TestCase {
 
     private static final double refLongitude = 8.0 + 38.564 / 60.0;
     private static final double refLatitude = 49.0 + 56.031 / 60.0;

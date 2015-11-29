@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 
 /**
  * These patterns have been optimized for speed. Improve them only if you can prove
- * that *YOUR* pattern is faster. Use RegExRealPerformanceTest to show.
+ * that *YOUR* pattern is faster.
  *
  * For further information about patterns have a look at
  * http://download.oracle.com/javase/1.4.2/docs/api/java/util/regex/Pattern.html

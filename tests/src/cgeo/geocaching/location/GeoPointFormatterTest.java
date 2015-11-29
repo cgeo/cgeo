@@ -1,14 +1,12 @@
 package cgeo.geocaching.location;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import junit.framework.TestCase;
 
-import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.utils.Formatter;
 
-import android.test.AndroidTestCase;
+import static org.assertj.core.api.Assertions.assertThat;
 
-public class GeoPointFormatterTest extends AndroidTestCase {
+public class GeoPointFormatterTest extends TestCase {
 
     public static void testConfluence() {
         // From issue #2624: coordinate is wrong near to a confluence point

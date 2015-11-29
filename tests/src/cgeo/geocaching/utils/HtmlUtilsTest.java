@@ -1,10 +1,10 @@
 package cgeo.geocaching.utils;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import junit.framework.TestCase;
 
 import org.apache.commons.lang3.StringUtils;
 
-import junit.framework.TestCase;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class HtmlUtilsTest extends TestCase {
 

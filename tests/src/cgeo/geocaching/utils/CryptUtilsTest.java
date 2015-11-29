@@ -1,10 +1,10 @@
 package cgeo.geocaching.utils;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import junit.framework.TestCase;
 
 import cgeo.geocaching.connector.gc.GCConstants;
 
-import junit.framework.TestCase;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class CryptUtilsTest extends TestCase {
     public static void testROT13() {

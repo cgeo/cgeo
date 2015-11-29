@@ -1,11 +1,11 @@
 package cgeo.geocaching.utils;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import junit.framework.TestCase;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import junit.framework.TestCase;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class LazyInitializedListTest extends TestCase {
 

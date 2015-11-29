@@ -20,8 +20,14 @@ task cgeoHelp << {
 	println 'run app on connected device/emulator:'
 	println '    gradlew runDebug'
 	println ''
-	println 'test on connected device/emulator:'
+	println 'instrumentation tests on connected device/emulator:'
 	println '    gradlew connectedDebugAndroidTest'
+	println ''
+	println 'pure unit tests WITHOUT device'
+	println '    gradlew testDebugUnitTest'
+	println ''
+	println 'all unit tests (pure and instrumentation)'
+	println '    gradlew testDebug'
 	println ''
 	println 'check project dependencies for updates:'
 	println '    gradlew dependencies main:dependencies'
@@ -63,6 +69,9 @@ buildscript {
     
 		// Android annotation processor
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
+
+		// un-mocking of portable Android classes
+		classpath 'de.mobilej.unmock:UnMockPlugin:0.3.6'
     }
 }
 

@@ -1,8 +1,6 @@
 package cgeo.geocaching.utils;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-import cgeo.org.kxml2.io.KXmlSerializer;
+import junit.framework.TestCase;
 
 import org.apache.commons.lang3.CharEncoding;
 import org.xmlpull.v1.XmlSerializer;
@@ -10,7 +8,9 @@ import org.xmlpull.v1.XmlSerializer;
 import java.io.IOException;
 import java.io.StringWriter;
 
-import junit.framework.TestCase;
+import cgeo.org.kxml2.io.KXmlSerializer;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class XmlUtilsTest extends TestCase {
 

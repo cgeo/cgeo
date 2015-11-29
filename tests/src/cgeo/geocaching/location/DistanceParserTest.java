@@ -1,8 +1,8 @@
 package cgeo.geocaching.location;
 
-import android.test.AndroidTestCase;
+import junit.framework.TestCase;
 
-public class DistanceParserTest extends AndroidTestCase {
+public class DistanceParserTest extends TestCase {
 
     static private final double MM = 1e-6; // 1mm, in kilometers
 

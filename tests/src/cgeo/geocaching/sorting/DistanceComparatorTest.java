@@ -1,15 +1,15 @@
 package cgeo.geocaching.sorting;
 
-import cgeo.geocaching.Geocache;
-import cgeo.geocaching.location.Geopoint;
-
-import android.test.AndroidTestCase;
+import junit.framework.TestCase;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class DistanceComparatorTest extends AndroidTestCase {
+import cgeo.geocaching.Geocache;
+import cgeo.geocaching.location.Geopoint;
+
+public class DistanceComparatorTest extends TestCase {
 
     public static void testCompareCaches() {
         final List<Geocache> caches = new ArrayList<Geocache>();
