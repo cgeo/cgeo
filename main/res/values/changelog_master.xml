@@ -4,8 +4,9 @@
   <string name="changelog_master" translatable="false">
     <b>Next feature release:</b>\n
     · New: Support opencaching links using their internal ID\n
-    · New: Change geocaching platform quickly by clicking info on main screen\n
     · New: Improved Done and Cancel buttons for coordinate input\n
+    · New: Change geocaching platform quickly by clicking info on main screen\n
+    · New: Show amount of people watching a cache listing\n
     · New: Parse GPX files of Geocaching.su\n
     · New: Filter for multi platform listings with different found state\n
     · New: Show amount of people having a cache on their watchlist\n
