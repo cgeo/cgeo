@@ -385,6 +385,7 @@
   <string name="settings_summary_map">Uzstādiet karšu avotu, bezsaistes karšu uzstādījumus un karšu detaļas.</string>
   <string name="settings_title_map_data">Karšu dati</string>
   <string name="settings_title_map_content">Kartes saturs</string>
+  <string name="settings_title_gpx">GPX</string>
   <string name="settings_title_basicmembers">Iestatījumi bezmaksas lietotājiem</string>
   <string name="settings_title_navigation">Navigācija</string>
   <string name="settings_summary_navigation">Izvēlieties vēlamo navigācijas metodi un izvēlieties ārējās navigācijas aplikācijas.</string>
@@ -392,9 +393,11 @@
   <string name="settings_summary_system">Veikt dublēšanu un atjaunošanu, konfigurējiet aplikācijas katalogus un citus īpašos sistēmas iestatījumus.</string>
   <string name="settings_title_navigation_menu">Navigācijas izvēlne</string>
   <string name="settings_category_browser">Pārlūkprogramma</string>
+  <string name="settings_category_geocaching">Geocaching</string>
   <string name="settings_category_social">Social media</string>
   <string name="settings_category_logging_other">Citi pierakstīšanās iestatījumi</string>
   <string name="settings_goto_url_button">vairāk…</string>
+  <string name="settings_title_gc">Geocaching.com</string>
   <string name="settings_title_ec">Extremcaching.com</string>
   <string name="settings_activate_gc">Aktivizēt</string>
   <string name="settings_activate_ec">Aktivizēt</string>
@@ -977,6 +980,8 @@
   <string name="export_fieldnotes_onlynew">Tikai kopš pēdējās eksportēšanas</string>
   <string name="export_fieldnotes_creating">Lauka piezīmju izveidošana…</string>
   <string name="export_gpx">GPX</string>
+  <string name="export_gpx_info">GPX fails tiks eksportēts ar pašreizējo datumu un laiku, kā faila nosaukumu %1$s.</string>
+  <string name="export_gpx_to">Nosūtīt eksportēto GPX uz</string>
   <string name="export_confirm_title">Eksportē %1$s</string>
   <string name="export_confirm_message">Direktorijs: %1$s\nFaila nosaukums: %2$s</string>
   <string name="attribute_dogs_yes">Suņi atļauti</string>
@@ -1063,8 +1068,19 @@
   <string name="attribute_uv_no">Nav neepieciešama UV gaisma</string>
   <string name="attribute_snowshoes_yes">Nepieciešami sniega zābaki</string>
   <string name="attribute_snowshoes_no">Nav nepieciešami sniega zābaki</string>
+  <string name="attribute_skiis_yes">Nepieciešamas distanču slēpes</string>
+  <string name="attribute_skiis_no">Nav nepieciešamas distanču slēpes</string>
   <string name="attribute_s_tool_yes">Nepieciešami speciāli rīki</string>
   <string name="attribute_s_tool_no">Nav nepieciešami speciāli rīki</string>
+  <string name="attribute_wirelessbeacon_yes">Bezvadu raidītājs</string>
+  <string name="attribute_wirelessbeacon_no">Nav bezvadu raidītājs</string>
+  <string name="attribute_treeclimbing_yes">Nepieciešams kāpt kokā</string>
+  <string name="attribute_treeclimbing_no">Nav nepieciešams kāpt kokā</string>
+  <string name="attribute_poisonoak_yes">Indīgi augi</string>
+  <string name="attribute_poisonoak_no">Nav indīgu augu</string>
+  <string name="attribute_dangerousanimals_yes">Bīstami dzīvnieki</string>
+  <string name="attribute_dangerousanimals_no">Nav bīstamu dzīvnieku</string>
+  <string name="attribute_ticks_yes">Ērces</string>
   <string name="attribute_ticks_no">Nav kaitīgu kukaiņu</string>
   <string name="attribute_mine_yes">Pamestas raktuves</string>
   <string name="attribute_mine_no">Nav pamestu raktuvju</string>
@@ -1076,6 +1092,10 @@
   <string name="attribute_danger_no">Nav bīstama zona</string>
   <string name="attribute_thorn_yes">Ērkšķi</string>
   <string name="attribute_thorn_no">Nav ērkšķu</string>
+  <string name="attribute_wheelchair_yes">Pieejams ratiņkrēslā</string>
+  <string name="attribute_wheelchair_no">Nav pieejams ratiņkrēslā</string>
+  <string name="attribute_parking_yes">Pieejams stāvlaukums</string>
+  <string name="attribute_parking_no">Nav pieejams stāvlaukums</string>
   <string name="attribute_public_yes">Pieejams sabiedriskais transports</string>
   <string name="attribute_public_no">Nav pieejams sabiedriskais transports</string>
   <string name="attribute_water_yes">Tuvumā dzeramais ūdens</string>
@@ -1160,6 +1180,35 @@
   <string name="attribute_kids_2_no">Neņemt līdzi bērnus</string>
   <string name="attribute_historic_site_yes">Vēsturiska vieta</string>
   <string name="attribute_historic_site_no">Nav vēsturiska vieta</string>
+  <string name="attribute_magnetic_yes">Magnētisks</string>
+  <string name="attribute_magnetic_no">Nav magnētisks</string>
+  <string name="attribute_usb_cache_yes">USB krātuves slēpnis</string>
+  <string name="attribute_usb_cache_no">Nav USB krātuves slēpnis</string>
+  <string name="attribute_shovel_yes">Vajadzīga lāpsta</string>
+  <string name="attribute_shovel_no">Nav nepieciešama lāpsta</string>
+  <string name="attribute_specific_access_yes">Pieejams norādītajā laikā (iespējams maksas)</string>
+  <string name="attribute_specific_access_no">Pieejams vienmēr</string>
+  <string name="attribute_pedestrian_only_yes">Pieeja tikai ejot</string>
+  <string name="attribute_pedestrian_only_no">Pieeja ne tikai ejot</string>
+  <string name="attribute_nature_cache_yes">Noslēpts dabiskā vidē (meži, kalni, utt.)</string>
+  <string name="attribute_nature_cache_no">Nav noslēpts dabiskā vidē</string>
+  <string name="attribute_byop_yes">Paņemt savu rakstāmo</string>
+  <string name="attribute_byop_no">Savs rakstāmais nav nepieciešams</string>
+  <string name="attribute_safari_cache_yes">Bez vietas slēpnis</string>
+  <string name="attribute_safari_cache_no">Nav bez vietas slēpnis</string>
+  <string name="attribute_quick_cache_yes">Ātrais slēpnis</string>
+  <string name="attribute_quick_cache_no">Nav ātrais slēpnis</string>
+  <string name="attribute_wherigo_yes">Wherigo slēpnis</string>
+  <string name="attribute_wherigo_no">Nav Wherigo slēpnis</string>
+  <string name="attribute_audio_cache_yes">Apraksts satur audio failu</string>
+  <string name="attribute_audio_cache_no">Apraksts nesatur audio failu</string>
+  <string name="attribute_geohotel_yes">GeoHotel slēpnis</string>
+  <string name="attribute_geohotel_no">Nav GeoHotel slēpnis</string>
+  <string name="attribute_survey_marker_yes">Tuvumā ģeodēziskajai zīmei</string>
+  <string name="attribute_survey_marker_no">Nav tuvumā ģeodēziskajai zīmei</string>
+  <string name="attribute_offset_cache_yes">Offset slēpnis</string>
+  <string name="attribute_offset_cache_no">Nav offset slēpnis</string>
+  <string name="quote">Lai padarītu slēpņošanu vieglāku un slēpņotāju slinkāku.</string>
   <string name="support_title">Asistēšana</string>
   <string name="website_title">Mājas lapa</string>
   <string name="facebook_title">Facebook</string>
@@ -1169,6 +1218,25 @@
   <string name="market_link"><a href="">c:geo iekš Google Play</a></string>
   <string name="about_twitter">Vai <b>c:geo</b> publicēt jaunu statusu vietnē Twitter pēc katra atrastā slēpņa?</string>
   <string name="faq_title">BUJ</string>
+  <string name="status_new_release" tools:ignore="UnusedResources">Jauna versija pieejama. \nSpied lai instalētu.</string>
+  <string name="status_new_nightly" tools:ignore="UnusedResources">Jauna \"nightly build\" programmas versija.\nNospiest, lai instalētu.</string>
+  <string name="status_new_rc" tools:ignore="UnusedResources">Jauna \"release candidate\" programmas versija.\nNospiest, lai instalētu.</string>
+  <string name="status_geocaching_change" tools:ignore="UnusedResources">Nesenās izmaiņas geocaching.com lapā \"salauza\" c:geo.\nMēs strādājam lai to salabotu, pārbaudiet pēc brīža.</string>
+  <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Dēļ izmaiņām geocaching.com lapā, traucēta tiešsaistes karšu darbība. \nMēs strādājam lai to salabotu, pārbaudiet pēc brīža.</string>
+  <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com tiek atjaunots. \nYou.Jūs varat saskarties ar dažādām nepilnībām.</string>
+  <string name="status_closeout_warning" tools:ignore="UnusedResources">Izskatās ka izmantojot vecāku versiju par Android 2.1. Turpmākās c:geo izlaides vairs var nebūt pieejamas Jūsu ierīcē.</string>
+  <string name="tts_service">Runājošais kompass</string>
+  <string name="tts_start">Sākt runu</string>
+  <string name="tts_stop">Beigt runu</string>
+  <string name="tts_started">Sākta runa</string>
+  <string name="tts_stopped">Beigta runa</string>
+  <string name="err_tts_lang_not_supported">Pašreizējā valoda neatbalsta text-to-speech iespēju.</string>
+  <string name="tts_one_kilometer">viens kilometrs</string>
+  <plurals name="tts_kilometers">
+    <item quantity="zero">%s kilometrs</item>
+    <item quantity="one">%s kilometrs</item>
+    <item quantity="other">%s kilometri</item>
+  </plurals>
   <string name="tts_one_meter">viens metrs</string>
   <plurals name="tts_meters">
     <item quantity="zero">%s m</item>
@@ -1222,11 +1290,13 @@
   <string name="init_geokrety_register_ok">Pieteikšanās izdevās</string>
   <string name="init_geokrety_register_fail">Pieteikšanās neizdevās</string>
   <string name="init_geokrety_description">Autorizē c:geo ar GeoKrety.org, lai reģistrētu GeoKrety ceļotāju.</string>
+  <string name="init_geokrety_cache_description">GeokretyMap.org sniedz informāciju par GeoKrety ceļotājiem.\nPieejamie dati satur vairāk GeoKrety informācijas, tādus kā \"apraksts\", vai \"pazudis\" statuss.\n\nDati nav reāllaika! \nVietas: ~ 30 min. \nApraksti: ~ 24 h.</string>
   <string name="init_geokrety_cache">Izmantot GeoKretyMap.org</string>
   <string name="init_geokrety_userid">Lietotāja ID: %s</string>
   <string name="trackable_title_log_without_geocode">Nav ievadīts Geokods</string>
   <string name="trackable_log_without_geocode">Tiks nosūtīts ieraksts bez Geokoda. Ieteicams to ievadīt. Vai pievienot kodu?</string>
   <string name="do_not_ask_me_again">Nevaicāt vairs</string>
+  <string name="geokrety_parsing_failed">Neizdevās apstrādāt GeoKrety atbildi.</string>
   <string name="settings_map_direction">Rādīt virzienu</string>
   <string name="settings_summary_map_direction">Rādīt virziena līniju uz mērķi</string>
   <string name="map_direction">Rādīt virzienu</string>
