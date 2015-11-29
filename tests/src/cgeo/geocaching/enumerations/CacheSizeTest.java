@@ -1,12 +1,12 @@
 package cgeo.geocaching.enumerations;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-import android.test.AndroidTestCase;
+import junit.framework.TestCase;
 
 import java.util.Locale;
 
-public class CacheSizeTest extends AndroidTestCase {
+import static org.assertj.core.api.Assertions.assertThat;
+
+public class CacheSizeTest extends TestCase {
 
     public static void testOrder() {
         assertThat(CacheSize.MICRO.comparable).isLessThan(CacheSize.SMALL.comparable);

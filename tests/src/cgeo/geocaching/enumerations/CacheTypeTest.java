@@ -1,14 +1,14 @@
 package cgeo.geocaching.enumerations;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-import cgeo.geocaching.Geocache;
-
-import android.test.AndroidTestCase;
+import junit.framework.TestCase;
 
 import java.util.Locale;
 
-public class CacheTypeTest extends AndroidTestCase {
+import cgeo.geocaching.Geocache;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+public class CacheTypeTest extends TestCase {
 
     public static void testGetById() {
         assertThat(CacheType.getById("")).isEqualTo(CacheType.UNKNOWN);

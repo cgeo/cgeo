@@ -1,10 +1,10 @@
 package cgeo.geocaching.enumerations;
 
+import junit.framework.TestCase;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
-import android.test.AndroidTestCase;
-
-public class LogTypeTest extends AndroidTestCase {
+public class LogTypeTest extends TestCase {
 
     public static void testGetById() {
         assertThat(LogType.getById(0)).isEqualTo(LogType.UNKNOWN);
