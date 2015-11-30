@@ -4,8 +4,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import cgeo.geocaching.connector.trackable.TrackableBrand;
 import cgeo.geocaching.enumerations.LogType;
-import cgeo.geocaching.models.LogEntry;
-import cgeo.geocaching.models.Trackable;
 
 import android.test.AndroidTestCase;
 

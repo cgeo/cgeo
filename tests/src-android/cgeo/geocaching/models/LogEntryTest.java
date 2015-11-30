@@ -6,8 +6,6 @@ import cgeo.CGeoTestCase;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.LogType;
-import cgeo.geocaching.models.Image;
-import cgeo.geocaching.models.LogEntry;
 import cgeo.geocaching.settings.Settings;
 
 import java.util.ArrayList;

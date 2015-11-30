@@ -4,7 +4,7 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.connector.ConnectorFactory;
-import cgeo.geocaching.files.LocalStorage;
+import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.FileUtils;

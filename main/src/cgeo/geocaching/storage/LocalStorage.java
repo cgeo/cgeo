@@ -1,4 +1,4 @@
-package cgeo.geocaching.files;
+package cgeo.geocaching.storage;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.utils.CryptUtils;

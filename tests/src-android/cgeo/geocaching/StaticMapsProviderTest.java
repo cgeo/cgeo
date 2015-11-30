@@ -3,7 +3,7 @@ package cgeo.geocaching;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import cgeo.geocaching.enumerations.WaypointType;
-import cgeo.geocaching.files.LocalStorage;
+import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;

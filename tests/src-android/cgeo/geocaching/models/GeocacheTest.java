@@ -10,9 +10,6 @@ import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.models.Trackable;
-import cgeo.geocaching.models.Waypoint;
 
 import org.apache.commons.lang3.StringUtils;
 

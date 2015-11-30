@@ -4,8 +4,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import cgeo.geocaching.connector.gc.GCConstants;
 import cgeo.geocaching.list.StoredList;
-import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.models.PersonalNote;
 
 import org.apache.commons.lang3.StringUtils;
 

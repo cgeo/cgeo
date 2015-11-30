@@ -3,7 +3,6 @@ package cgeo.geocaching.location;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import cgeo.CGeoTestCase;
-import cgeo.geocaching.location.Units;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.TestSettings;
 

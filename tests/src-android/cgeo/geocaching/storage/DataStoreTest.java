@@ -15,7 +15,6 @@ import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.LogEntry;
 import cgeo.geocaching.models.Trackable;
-import cgeo.geocaching.storage.DataStore;
 
 import org.apache.commons.lang3.StringUtils;
 

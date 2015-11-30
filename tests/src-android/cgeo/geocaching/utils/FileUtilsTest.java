@@ -5,7 +5,7 @@ import junit.framework.TestCase;
 import java.io.File;
 import java.io.IOException;
 
-import cgeo.geocaching.files.LocalStorage;
+import cgeo.geocaching.storage.LocalStorage;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

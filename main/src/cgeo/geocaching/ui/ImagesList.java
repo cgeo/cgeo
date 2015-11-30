@@ -4,7 +4,7 @@ import butterknife.ButterKnife;
 
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.R;
-import cgeo.geocaching.files.LocalStorage;
+import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.utils.Log;

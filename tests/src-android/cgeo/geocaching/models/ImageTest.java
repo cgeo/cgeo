@@ -3,7 +3,6 @@ package cgeo.geocaching.models;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import cgeo.CGeoTestCase;
-import cgeo.geocaching.models.Image;
 import cgeo.geocaching.utils.FileUtils;
 
 import android.net.Uri;

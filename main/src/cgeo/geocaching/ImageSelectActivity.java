@@ -4,7 +4,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 import cgeo.geocaching.activity.AbstractActionBarActivity;
-import cgeo.geocaching.files.LocalStorage;
+import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.dialog.Dialogs;
