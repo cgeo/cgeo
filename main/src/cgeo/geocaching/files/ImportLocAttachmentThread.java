@@ -9,6 +9,8 @@ import android.content.ContentResolver;
 import android.net.Uri;
 import android.os.Handler;
 
+import org.apache.commons.io.IOUtils;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collection;
@@ -32,7 +34,12 @@ class ImportLocAttachmentThread extends AbstractImportThread {
         try {
             return parser.parse(is, progressHandler);
         } finally {
-            is.close();
+            IOUtils.closeQuietly(is);
         }
+    }
+
+    @Override
+    protected String getSourceDisplayName() {
+        return uri.getLastPathSegment();
     }
 }

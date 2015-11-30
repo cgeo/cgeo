@@ -36,4 +36,9 @@ class ImportGpxFileThread extends AbstractImportGpxThread {
         }
         return caches;
     }
+
+    @Override
+    protected String getSourceDisplayName() {
+        return cacheFile.getName();
+    }
 }

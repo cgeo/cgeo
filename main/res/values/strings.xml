@@ -867,6 +867,7 @@
     <string name="gpx_import_loading_waypoints">Loading waypoints file</string>
     <string name="gpx_import_store_static_maps">Storing static maps</string>
     <string name="gpx_import_caches_imported">caches imported</string>
+    <string name="gpx_import_caches_imported_with_filename">%1$d caches imported from %2$s</string>
     <string name="gpx_import_static_maps_skipped">Download of static maps aborted</string>
     <string name="gpx_import_title_static_maps">Store static maps</string>
     <string name="gpx_import_title_reading_file">Reading file</string>
@@ -877,6 +878,7 @@
     <string name="gpx_import_error_parser">Bad File format</string>
     <string name="gpx_import_error_unexpected">Unexpected error</string>
     <string name="gpx_import_canceled">GPX import was canceled</string>
+    <string name="gpx_import_canceled_with_filename">GPX import from %1$s was canceled</string>
     <string name="gpx_import_delete_title">Delete file</string>
     <string name="gpx_import_delete_message">Do you want to delete %s?</string>
     <string name="gpx_import_select_list_title">Import GPX to list</string>

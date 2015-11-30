@@ -26,4 +26,9 @@ class ImportLocFileThread extends AbstractImportThread {
         final LocParser parser = new LocParser(listId);
         return parser.parse(file, progressHandler);
     }
+
+    @Override
+    protected String getSourceDisplayName() {
+        return file.getName();
+    }
 }
