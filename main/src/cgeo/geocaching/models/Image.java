@@ -1,5 +1,6 @@
-package cgeo.geocaching;
+package cgeo.geocaching.models;
 
+import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
@@ -142,8 +143,8 @@ public class Image implements Parcelable {
     }
 
 
-    @NonNull final Uri uri;
-    @Nullable final String title;
+    @NonNull public final Uri uri;
+    @Nullable public final String title;
     @Nullable final String description;
 
     /**

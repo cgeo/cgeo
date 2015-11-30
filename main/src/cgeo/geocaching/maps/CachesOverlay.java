@@ -1,9 +1,9 @@
 package cgeo.geocaching.maps;
 
 import cgeo.geocaching.CachePopup;
-import cgeo.geocaching.DataStore;
-import cgeo.geocaching.Geocache;
-import cgeo.geocaching.IWaypoint;
+import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.IWaypoint;
 import cgeo.geocaching.R;
 import cgeo.geocaching.WaypointPopup;
 import cgeo.geocaching.activity.Progress;

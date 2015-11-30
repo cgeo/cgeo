@@ -1,10 +1,10 @@
 package cgeo.geocaching.export;
 
-import cgeo.geocaching.DataStore;
-import cgeo.geocaching.Geocache;
-import cgeo.geocaching.LogEntry;
-import cgeo.geocaching.Trackable;
-import cgeo.geocaching.Waypoint;
+import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.LogEntry;
+import cgeo.geocaching.models.Trackable;
+import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.enumerations.CacheAttribute;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.location.Geopoint;

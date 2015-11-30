@@ -1,6 +1,6 @@
 package cgeo.geocaching.connector.tc;
 
-import cgeo.geocaching.Geocache;
+import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.connector.AbstractConnector;
 
 import org.eclipse.jdt.annotation.NonNull;

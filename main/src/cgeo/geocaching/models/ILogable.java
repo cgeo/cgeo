@@ -1,7 +1,7 @@
 /**
  *
  */
-package cgeo.geocaching;
+package cgeo.geocaching.models;
 
 public interface ILogable {
 

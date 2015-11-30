@@ -1,6 +1,6 @@
 package cgeo.geocaching.connector.gc;
 
-import cgeo.geocaching.Geocache;
+import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.test.mock.GC2CJPFAndroid;

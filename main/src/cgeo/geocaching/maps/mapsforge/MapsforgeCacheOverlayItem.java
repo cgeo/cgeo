@@ -1,6 +1,6 @@
 package cgeo.geocaching.maps.mapsforge;
 
-import cgeo.geocaching.IWaypoint;
+import cgeo.geocaching.models.IWaypoint;
 import cgeo.geocaching.maps.interfaces.CachesOverlayItemImpl;
 
 import org.mapsforge.android.maps.overlay.OverlayItem;

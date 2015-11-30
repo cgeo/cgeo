@@ -1,7 +1,7 @@
 package cgeo.geocaching.settings;
 
 import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.DataStore;
+import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SelectMapfileActivity;

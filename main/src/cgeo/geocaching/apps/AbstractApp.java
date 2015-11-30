@@ -1,7 +1,7 @@
 package cgeo.geocaching.apps;
 
 import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.Geocache;
+import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.utils.ProcessUtils;
 
 import org.apache.commons.lang3.StringUtils;

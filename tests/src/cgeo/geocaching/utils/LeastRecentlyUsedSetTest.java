@@ -4,7 +4,7 @@ import junit.framework.TestCase;
 
 import java.util.Set;
 
-import cgeo.geocaching.Geocache;
+import cgeo.geocaching.models.Geocache;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

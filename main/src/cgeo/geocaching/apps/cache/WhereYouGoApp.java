@@ -1,6 +1,6 @@
 package cgeo.geocaching.apps.cache;
 
-import cgeo.geocaching.Geocache;
+import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.utils.TextUtils;

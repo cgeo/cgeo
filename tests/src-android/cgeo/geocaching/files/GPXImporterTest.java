@@ -2,8 +2,8 @@ package cgeo.geocaching.files;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import cgeo.geocaching.DataStore;
-import cgeo.geocaching.Geocache;
+import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.gc.GCConnector;

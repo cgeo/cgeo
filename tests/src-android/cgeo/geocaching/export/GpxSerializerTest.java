@@ -2,9 +2,9 @@ package cgeo.geocaching.export;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import cgeo.geocaching.DataStore;
-import cgeo.geocaching.Geocache;
-import cgeo.geocaching.Waypoint;
+import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.files.GPX10Parser;

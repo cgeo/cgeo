@@ -1,10 +1,10 @@
 package cgeo.geocaching.connector.trackable;
 
 import cgeo.geocaching.AbstractLoggingActivity;
-import cgeo.geocaching.Geocache;
-import cgeo.geocaching.Image;
+import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.Image;
 import cgeo.geocaching.R;
-import cgeo.geocaching.TrackableLog;
+import cgeo.geocaching.models.TrackableLog;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.ImageResult;
 import cgeo.geocaching.connector.LogResult;

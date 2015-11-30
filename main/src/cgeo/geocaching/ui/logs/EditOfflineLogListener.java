@@ -1,7 +1,7 @@
 package cgeo.geocaching.ui.logs;
 
 import cgeo.geocaching.CacheDetailActivity;
-import cgeo.geocaching.Geocache;
+import cgeo.geocaching.models.Geocache;
 
 import android.view.View;
 import android.view.View.OnClickListener;

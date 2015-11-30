@@ -1,4 +1,4 @@
-package cgeo.geocaching;
+package cgeo.geocaching.models;
 
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.trackable.TrackableBrand;

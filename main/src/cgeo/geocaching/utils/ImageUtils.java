@@ -1,7 +1,7 @@
 package cgeo.geocaching.utils;
 
 import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.Image;
+import cgeo.geocaching.models.Image;
 import cgeo.geocaching.R;
 import cgeo.geocaching.compatibility.Compatibility;
 

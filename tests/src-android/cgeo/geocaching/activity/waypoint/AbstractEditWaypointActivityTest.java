@@ -1,7 +1,7 @@
 package cgeo.geocaching.activity.waypoint;
 
 import cgeo.geocaching.EditWaypointActivity_;
-import cgeo.geocaching.Waypoint;
+import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.enumerations.WaypointType;
 
 public abstract class AbstractEditWaypointActivityTest extends AbstractWaypointActivityTest {

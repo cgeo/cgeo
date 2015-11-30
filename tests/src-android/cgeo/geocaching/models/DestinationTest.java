@@ -1,8 +1,9 @@
-package cgeo.geocaching;
+package cgeo.geocaching.models;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.models.Destination;
 
 import android.test.AndroidTestCase;
 

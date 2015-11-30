@@ -1,6 +1,6 @@
 package cgeo.geocaching.apps.cache;
 
-import cgeo.geocaching.Geocache;
+import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.apps.AbstractApp;
 import cgeo.geocaching.apps.navi.CacheNavigationApp;
 

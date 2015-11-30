@@ -1,7 +1,7 @@
 package cgeo.geocaching.ui;
 
-import cgeo.geocaching.Geocache;
-import cgeo.geocaching.Trackable;
+import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.connector.ConnectorFactory;
 
 import android.view.View;

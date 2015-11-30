@@ -1,7 +1,7 @@
 package cgeo.geocaching.test.mock;
 
-import cgeo.geocaching.Image;
-import cgeo.geocaching.Trackable;
+import cgeo.geocaching.models.Image;
+import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.connector.gc.GCLogin;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;

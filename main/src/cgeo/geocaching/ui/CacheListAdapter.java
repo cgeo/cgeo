@@ -3,7 +3,7 @@ package cgeo.geocaching.ui;
 import butterknife.Bind;
 
 import cgeo.geocaching.CacheDetailActivity;
-import cgeo.geocaching.Geocache;
+import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.filter.IFilter;

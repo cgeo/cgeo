@@ -1,8 +1,8 @@
 package cgeo.geocaching.utils;
 
-import cgeo.geocaching.Geocache;
+import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.R;
-import cgeo.geocaching.Waypoint;
+import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.LogType;

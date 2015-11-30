@@ -1,8 +1,8 @@
 package cgeo.geocaching.connector.trackable;
 
 import cgeo.geocaching.AbstractLoggingActivity;
-import cgeo.geocaching.Trackable;
-import cgeo.geocaching.TrackableLog;
+import cgeo.geocaching.models.Trackable;
+import cgeo.geocaching.models.TrackableLog;
 import cgeo.geocaching.connector.UserAction;
 
 import org.eclipse.jdt.annotation.NonNull;

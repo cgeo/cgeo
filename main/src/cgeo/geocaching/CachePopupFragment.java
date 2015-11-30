@@ -7,6 +7,7 @@ import cgeo.geocaching.apps.navi.NavigationAppFactory;
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.CacheDetailsCreator;
@@ -209,7 +210,7 @@ public class CachePopupFragment extends AbstractDialogFragment {
 
 
     /**
-     * Tries to navigate to the {@link cgeo.geocaching.Geocache} of this activity.
+     * Tries to navigate to the {@link Geocache} of this activity.
      */
     @Override
     protected void startDefaultNavigation2() {

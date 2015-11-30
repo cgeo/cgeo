@@ -3,7 +3,7 @@ package cgeo.geocaching.ui;
 import butterknife.Bind;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.Trackable;
+import cgeo.geocaching.models.Trackable;
 
 import android.app.Activity;
 import android.graphics.Paint;

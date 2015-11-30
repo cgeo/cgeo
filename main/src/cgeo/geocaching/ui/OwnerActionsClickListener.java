@@ -1,6 +1,6 @@
 package cgeo.geocaching.ui;
 
-import cgeo.geocaching.Geocache;
+import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.connector.ConnectorFactory;
 
 import org.apache.commons.lang3.StringUtils;

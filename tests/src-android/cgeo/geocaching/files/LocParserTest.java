@@ -2,7 +2,7 @@ package cgeo.geocaching.files;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import cgeo.geocaching.Geocache;
+import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.location.Geopoint;

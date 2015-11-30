@@ -1,7 +1,7 @@
 package cgeo.geocaching.list;
 
 import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.DataStore;
+import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.ui.dialog.Dialogs;

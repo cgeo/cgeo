@@ -1,6 +1,6 @@
 package cgeo.geocaching.files;
 
-import cgeo.geocaching.Geocache;
+import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.utils.CancellableHandler;
 
 import android.os.Handler;

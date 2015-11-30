@@ -1,6 +1,6 @@
 package cgeo.geocaching.connector.gc;
 
-import cgeo.geocaching.ICoordinates;
+import cgeo.geocaching.models.ICoordinates;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.network.Network;

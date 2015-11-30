@@ -1,9 +1,10 @@
-package cgeo.geocaching;
+package cgeo.geocaching.storage;
 
-import cgeo.geocaching.DataStore.StorageLocation;
+import cgeo.geocaching.storage.DataStore.StorageLocation;
 import cgeo.geocaching.connector.gc.Tile;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.location.Viewport;
+import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.utils.LeastRecentlyUsedMap;
 import cgeo.geocaching.utils.LeastRecentlyUsedMap.RemoveHandler;
 import cgeo.geocaching.utils.Log;

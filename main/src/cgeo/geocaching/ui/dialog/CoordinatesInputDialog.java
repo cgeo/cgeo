@@ -2,7 +2,7 @@ package cgeo.geocaching.ui.dialog;
 
 import butterknife.ButterKnife;
 
-import cgeo.geocaching.Geocache;
+import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.Keyboard;

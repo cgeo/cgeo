@@ -2,9 +2,9 @@ package cgeo.geocaching.test.mock;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import cgeo.geocaching.Geocache;
-import cgeo.geocaching.Image;
-import cgeo.geocaching.Trackable;
+import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.Image;
+import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.connector.gc.GCConstants;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.utils.TextUtils;

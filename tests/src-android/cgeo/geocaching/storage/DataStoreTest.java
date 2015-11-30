@@ -1,8 +1,9 @@
-package cgeo.geocaching;
+package cgeo.geocaching.storage;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import cgeo.CGeoTestCase;
+import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.gc.Tile;
 import cgeo.geocaching.enumerations.CacheType;
@@ -11,6 +12,10 @@ import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
+import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.LogEntry;
+import cgeo.geocaching.models.Trackable;
+import cgeo.geocaching.storage.DataStore;
 
 import org.apache.commons.lang3.StringUtils;
 

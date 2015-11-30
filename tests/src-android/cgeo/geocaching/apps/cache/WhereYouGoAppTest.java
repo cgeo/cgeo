@@ -2,7 +2,7 @@ package cgeo.geocaching.apps.cache;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import cgeo.geocaching.Geocache;
+import cgeo.geocaching.models.Geocache;
 
 import junit.framework.TestCase;
 

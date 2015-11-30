@@ -2,7 +2,7 @@ package cgeo.geocaching.connector.ec;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import cgeo.geocaching.Geocache;
+import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.connector.ConnectorFactoryTest;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LogType;

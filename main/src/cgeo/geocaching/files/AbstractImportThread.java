@@ -1,7 +1,7 @@
 package cgeo.geocaching.files;
 
-import cgeo.geocaching.DataStore;
-import cgeo.geocaching.Geocache;
+import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.StaticMapsProvider;

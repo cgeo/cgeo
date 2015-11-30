@@ -1,4 +1,4 @@
-package cgeo.geocaching;
+package cgeo.geocaching.models;
 
 import cgeo.geocaching.enumerations.WaypointType;
 

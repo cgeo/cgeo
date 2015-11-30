@@ -1,9 +1,9 @@
 package cgeo.geocaching.ui;
 
-import cgeo.geocaching.Geocache;
-import cgeo.geocaching.ICoordinates;
+import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.ICoordinates;
 import cgeo.geocaching.R;
-import cgeo.geocaching.Waypoint;
+import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.location.Units;
 import cgeo.geocaching.sensors.Sensors;

@@ -1,6 +1,6 @@
 package cgeo.geocaching.command;
 
-import cgeo.geocaching.Geocache;
+import cgeo.geocaching.models.Geocache;
 
 import org.eclipse.jdt.annotation.NonNull;
 

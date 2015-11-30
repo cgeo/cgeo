@@ -2,9 +2,9 @@ package cgeo.geocaching.twitter;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import cgeo.geocaching.Geocache;
-import cgeo.geocaching.LogEntry;
-import cgeo.geocaching.Trackable;
+import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.LogEntry;
+import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.TestSettings;

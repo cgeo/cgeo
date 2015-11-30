@@ -1,8 +1,8 @@
 package cgeo.geocaching.ui.logs;
 
 import cgeo.geocaching.CacheDetailActivity;
-import cgeo.geocaching.LogEntry;
-import cgeo.geocaching.Trackable;
+import cgeo.geocaching.models.LogEntry;
+import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.TrackableActivity;
 import cgeo.geocaching.ui.UserActionsClickListener;
 

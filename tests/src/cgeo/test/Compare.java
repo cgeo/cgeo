@@ -2,7 +2,7 @@ package cgeo.test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import cgeo.geocaching.Geocache;
+import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.utils.CryptUtils;
 

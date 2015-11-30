@@ -1,13 +1,18 @@
-package cgeo.geocaching;
+package cgeo.geocaching.models;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import cgeo.CGeoTestCase;
+import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.R;
 import cgeo.geocaching.connector.trackable.TrackableBrand;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.Trackable;
+import cgeo.geocaching.models.Waypoint;
 
 import org.apache.commons.lang3.StringUtils;
 

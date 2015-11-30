@@ -1,7 +1,7 @@
 package cgeo.geocaching.ui.logs;
 
 import cgeo.geocaching.ImagesActivity;
-import cgeo.geocaching.LogEntry;
+import cgeo.geocaching.models.LogEntry;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.network.SmileyImage;

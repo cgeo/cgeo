@@ -1,7 +1,7 @@
 package cgeo.geocaching.connector;
 
-import cgeo.geocaching.Image;
-import cgeo.geocaching.TrackableLog;
+import cgeo.geocaching.models.Image;
+import cgeo.geocaching.models.TrackableLog;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.StatusCode;
 

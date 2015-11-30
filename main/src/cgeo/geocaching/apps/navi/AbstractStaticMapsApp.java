@@ -1,12 +1,12 @@
 package cgeo.geocaching.apps.navi;
 
-import cgeo.geocaching.DataStore;
-import cgeo.geocaching.Geocache;
-import cgeo.geocaching.ILogable;
+import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.ILogable;
 import cgeo.geocaching.R;
 import cgeo.geocaching.StaticMapsActivity_;
 import cgeo.geocaching.StaticMapsProvider;
-import cgeo.geocaching.Waypoint;
+import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.apps.AbstractApp;
 

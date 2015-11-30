@@ -2,6 +2,7 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.enumerations.CacheAttribute;
+import cgeo.geocaching.models.Geocache;
 
 import android.content.Context;
 import android.content.res.Resources;

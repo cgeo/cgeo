@@ -1,6 +1,6 @@
 package cgeo.geocaching.apps.cachelist;
 
-import cgeo.geocaching.Geocache;
+import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.apps.App;
 

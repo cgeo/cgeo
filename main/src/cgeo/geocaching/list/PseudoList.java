@@ -1,7 +1,7 @@
 package cgeo.geocaching.list;
 
 import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.DataStore;
+import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.R;
 
 public abstract class PseudoList extends AbstractList {

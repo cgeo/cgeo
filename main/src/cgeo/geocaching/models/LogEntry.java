@@ -1,5 +1,7 @@
-package cgeo.geocaching;
+package cgeo.geocaching.models;
 
+import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.HtmlUtils;

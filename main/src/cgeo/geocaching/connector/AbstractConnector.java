@@ -3,7 +3,7 @@ package cgeo.geocaching.connector;
 import cgeo.contacts.ContactsAddon;
 import cgeo.geocaching.CacheListActivity;
 import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.Geocache;
+import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.LogCacheActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.UserAction.Context;

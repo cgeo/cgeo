@@ -1,9 +1,9 @@
 package cgeo.geocaching.connector.ec;
 
-import cgeo.geocaching.Geocache;
-import cgeo.geocaching.Image;
+import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.Image;
 import cgeo.geocaching.LogCacheActivity;
-import cgeo.geocaching.TrackableLog;
+import cgeo.geocaching.models.TrackableLog;
 import cgeo.geocaching.connector.AbstractLoggingManager;
 import cgeo.geocaching.connector.ImageResult;
 import cgeo.geocaching.connector.LogResult;

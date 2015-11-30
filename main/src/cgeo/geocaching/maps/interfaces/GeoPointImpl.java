@@ -1,6 +1,6 @@
 package cgeo.geocaching.maps.interfaces;
 
-import cgeo.geocaching.ICoordinates;
+import cgeo.geocaching.models.ICoordinates;
 
 /**
  * Defines the common functions of the provider-specific

@@ -3,11 +3,11 @@ package cgeo.geocaching.connector.gc;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.Geocache;
-import cgeo.geocaching.Image;
+import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.Image;
 import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.Trackable;
-import cgeo.geocaching.Waypoint;
+import cgeo.geocaching.models.Trackable;
+import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.enumerations.WaypointType;

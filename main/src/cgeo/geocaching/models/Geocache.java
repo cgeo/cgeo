@@ -1,6 +1,12 @@
-package cgeo.geocaching;
+package cgeo.geocaching.models;
 
-import cgeo.geocaching.DataStore.StorageLocation;
+import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.storage.DataStore.StorageLocation;
+import cgeo.geocaching.LogCacheActivity;
+import cgeo.geocaching.R;
+import cgeo.geocaching.SearchResult;
+import cgeo.geocaching.StaticMapsProvider;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.SimpleWebviewActivity;
 import cgeo.geocaching.connector.ConnectorFactory;
@@ -35,6 +41,7 @@ import cgeo.geocaching.utils.LogTemplateProvider.LogContext;
 import cgeo.geocaching.utils.MatcherWrapper;
 import cgeo.geocaching.utils.RxUtils;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.ListUtils;
 import org.apache.commons.lang3.BooleanUtils;
@@ -42,6 +49,10 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import rx.Scheduler;
+import rx.Subscription;
+import rx.functions.Action0;
+import rx.schedulers.Schedulers;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -68,12 +79,6 @@ import java.util.ListIterator;
 import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
-
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-import rx.Scheduler;
-import rx.Subscription;
-import rx.functions.Action0;
-import rx.schedulers.Schedulers;
 
 /**
  * Internal representation of a "cache"
@@ -461,7 +466,7 @@ public class Geocache implements IWaypoint {
         logOffline(fromActivity, initial, Calendar.getInstance(), logType);
     }
 
-    void logOffline(final Activity fromActivity, final String log, final Calendar date, final LogType logType) {
+    public void logOffline(final Activity fromActivity, final String log, final Calendar date, final LogType logType) {
         if (logType == LogType.UNKNOWN) {
             return;
         }

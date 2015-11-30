@@ -1,6 +1,6 @@
 package cgeo.geocaching.connector.trackable;
 
-import cgeo.geocaching.Trackable;
+import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.utils.TextUtils;
 
 import org.apache.commons.lang3.StringUtils;

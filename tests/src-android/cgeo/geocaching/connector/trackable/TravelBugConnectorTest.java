@@ -2,7 +2,7 @@ package cgeo.geocaching.connector.trackable;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import cgeo.geocaching.Trackable;
+import cgeo.geocaching.models.Trackable;
 
 import junit.framework.TestCase;
 

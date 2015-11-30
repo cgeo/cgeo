@@ -1,7 +1,7 @@
 package cgeo.geocaching.filter;
 
-import cgeo.geocaching.Geocache;
-import cgeo.geocaching.LogEntry;
+import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.LogEntry;
 import cgeo.geocaching.R;
 
 import org.eclipse.jdt.annotation.NonNull;

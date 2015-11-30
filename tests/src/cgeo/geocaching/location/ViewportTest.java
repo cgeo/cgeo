@@ -11,7 +11,7 @@ import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
 
-import cgeo.geocaching.ICoordinates;
+import cgeo.geocaching.models.ICoordinates;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

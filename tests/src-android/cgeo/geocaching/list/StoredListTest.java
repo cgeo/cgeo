@@ -2,7 +2,7 @@ package cgeo.geocaching.list;
 
 import junit.framework.TestCase;
 
-import cgeo.geocaching.DataStore;
+import cgeo.geocaching.storage.DataStore;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

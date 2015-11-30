@@ -1,9 +1,9 @@
 package cgeo.geocaching.apps.navi;
 
 import cgeo.geocaching.CompassActivity;
-import cgeo.geocaching.Geocache;
+import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.R;
-import cgeo.geocaching.Waypoint;
+import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.location.Geopoint;
 
 import org.eclipse.jdt.annotation.NonNull;

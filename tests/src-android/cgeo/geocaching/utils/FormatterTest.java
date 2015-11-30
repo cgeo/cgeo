@@ -4,7 +4,7 @@ import junit.framework.TestCase;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
-import cgeo.geocaching.Waypoint;
+import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.enumerations.WaypointType;
 
 import static org.assertj.core.api.Assertions.assertThat;

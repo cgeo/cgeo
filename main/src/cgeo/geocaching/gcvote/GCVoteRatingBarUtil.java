@@ -2,7 +2,7 @@ package cgeo.geocaching.gcvote;
 
 import butterknife.ButterKnife;
 
-import cgeo.geocaching.Geocache;
+import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.R;
 
 import org.eclipse.jdt.annotation.Nullable;

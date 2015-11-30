@@ -1,6 +1,6 @@
 package cgeo.geocaching.connector.oc;
 
-import cgeo.geocaching.Geocache;
+import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.AbstractConnector;
 import cgeo.geocaching.enumerations.LogType;

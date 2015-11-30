@@ -1,6 +1,6 @@
 package cgeo.geocaching.filter;
 
-import cgeo.geocaching.Geocache;
+import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.enumerations.CacheType;
 
 import org.eclipse.jdt.annotation.NonNull;

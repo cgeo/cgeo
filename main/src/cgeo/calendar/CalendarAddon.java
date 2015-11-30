@@ -1,6 +1,6 @@
 package cgeo.calendar;
 
-import cgeo.geocaching.Geocache;
+import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.network.Parameters;

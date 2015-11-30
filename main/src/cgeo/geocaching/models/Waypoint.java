@@ -1,5 +1,8 @@
-package cgeo.geocaching;
+package cgeo.geocaching.models;
 
+import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.location.Geopoint;

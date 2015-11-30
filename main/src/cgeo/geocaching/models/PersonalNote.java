@@ -1,4 +1,4 @@
-package cgeo.geocaching;
+package cgeo.geocaching.models;
 
 import org.apache.commons.lang3.StringUtils;
 

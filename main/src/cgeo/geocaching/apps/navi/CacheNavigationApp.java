@@ -1,6 +1,6 @@
 package cgeo.geocaching.apps.navi;
 
-import cgeo.geocaching.Geocache;
+import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.apps.App;
 
 import org.eclipse.jdt.annotation.NonNull;

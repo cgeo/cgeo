@@ -1,6 +1,6 @@
 package cgeo.geocaching.location;
 
-import cgeo.geocaching.ICoordinates;
+import cgeo.geocaching.models.ICoordinates;
 import cgeo.geocaching.R;
 
 import org.apache.commons.lang3.StringUtils;

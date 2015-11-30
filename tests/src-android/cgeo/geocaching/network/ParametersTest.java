@@ -1,8 +1,6 @@
-package cgeo.geocaching;
+package cgeo.geocaching.network;
 
 import static org.assertj.core.api.Assertions.assertThat;
-
-import cgeo.geocaching.network.Parameters;
 
 import android.test.AndroidTestCase;
 

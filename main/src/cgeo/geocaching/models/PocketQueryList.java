@@ -1,5 +1,6 @@
-package cgeo.geocaching;
+package cgeo.geocaching.models;
 
+import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.gc.GCParser;
 

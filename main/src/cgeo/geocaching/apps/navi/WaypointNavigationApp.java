@@ -1,6 +1,6 @@
 package cgeo.geocaching.apps.navi;
 
-import cgeo.geocaching.Waypoint;
+import cgeo.geocaching.models.Waypoint;
 
 import org.eclipse.jdt.annotation.NonNull;
 

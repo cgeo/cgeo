@@ -1,6 +1,6 @@
 package cgeo.geocaching.connector.trackable;
 
-import cgeo.geocaching.Image;
+import cgeo.geocaching.models.Image;
 import cgeo.geocaching.connector.ImageResult;
 import cgeo.geocaching.enumerations.LogTypeTrackable;
 

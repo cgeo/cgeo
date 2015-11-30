@@ -2,9 +2,9 @@ package cgeo.geocaching.activity.waypoint;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import cgeo.geocaching.DataStore;
+import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.EditWaypointActivity_;
-import cgeo.geocaching.Geocache;
+import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.activity.AbstractEspressoTest;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;

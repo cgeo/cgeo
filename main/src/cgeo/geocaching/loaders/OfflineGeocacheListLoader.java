@@ -1,6 +1,6 @@
 package cgeo.geocaching.loaders;
 
-import cgeo.geocaching.DataStore;
+import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.location.Geopoint;
