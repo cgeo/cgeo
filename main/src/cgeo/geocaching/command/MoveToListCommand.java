@@ -1,18 +1,19 @@
 package cgeo.geocaching.command;
 
-import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.R;
+import cgeo.geocaching.list.AbstractList;
 import cgeo.geocaching.list.StoredList;
+import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.storage.DataStore;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
-import rx.functions.Action1;
-
 import android.app.Activity;
 
 import java.util.Collection;
+
+import rx.functions.Action1;
 
 public abstract class MoveToListCommand extends AbstractCachesCommand {
 
@@ -33,9 +34,12 @@ public abstract class MoveToListCommand extends AbstractCachesCommand {
             @Override
             public void call(final Integer newListId) {
                 MoveToListCommand.this.newListId = newListId;
-                final String newListName = StoredList.getListById(newListId).getTitle();
-                setProgressMessage(getContext().getString(R.string.command_move_caches_progress, newListName));
-                MoveToListCommand.super.execute();
+                final AbstractList list = AbstractList.getListById(newListId);
+                if (list != null) {
+                    final String newListName = list.getTitle();
+                    setProgressMessage(getContext().getString(R.string.command_move_caches_progress, newListName));
+                    MoveToListCommand.super.execute();
+                }
             }
         }, true, currentListId);
     }
