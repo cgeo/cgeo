@@ -4,9 +4,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import cgeo.geocaching.location.Geopoint;
 
-import android.test.AndroidTestCase;
+import junit.framework.TestCase;
 
-public class DestinationTest extends AndroidTestCase {
+public class DestinationTest extends TestCase {
 
     private Destination dest = null;
 

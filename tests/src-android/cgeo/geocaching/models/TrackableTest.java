@@ -5,13 +5,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 import cgeo.geocaching.connector.trackable.TrackableBrand;
 import cgeo.geocaching.enumerations.LogType;
 
-import android.test.AndroidTestCase;
+import junit.framework.TestCase;
 
 import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class TrackableTest extends AndroidTestCase {
+public class TrackableTest extends TestCase {
 
     public static void testGetGeocode() {
         final Trackable trackable = createTrackable("tb1234");

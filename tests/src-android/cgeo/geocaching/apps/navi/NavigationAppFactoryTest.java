@@ -5,13 +5,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 import cgeo.geocaching.apps.navi.NavigationAppFactory.NavigationAppsEnum;
 
 import java.util.HashSet;
+import java.util.Set;
 
 import junit.framework.TestCase;
 
 public class NavigationAppFactoryTest extends TestCase {
 
     public static void testUniqueNavigationAppIds() throws Exception {
-        final HashSet<Integer> idSet = new HashSet<Integer>();
+        final Set<Integer> idSet = new HashSet<Integer>();
         for (NavigationAppsEnum navigationApp : NavigationAppsEnum.values()) {
             idSet.add(navigationApp.id);
         }

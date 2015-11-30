@@ -16,7 +16,7 @@ public class ConnectorFactoryTest extends AbstractResourceInstrumentationTestCas
     public static void testGetConnectors() {
         final Collection<IConnector> connectors = ConnectorFactory.getConnectors();
         assertThat(connectors).isNotNull();
-        assertThat(connectors.isEmpty()).isFalse(); // unknown connector must exist
+        assertThat(connectors).isNotEmpty(); // unknown connector must exist
     }
 
     public static void testCanHandle() {
