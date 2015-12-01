@@ -39,7 +39,7 @@ import java.util.List;
 import rx.functions.Func1;
 
 public final class ConnectorFactory {
-    @NonNull private static final UnknownConnector UNKNOWN_CONNECTOR = new UnknownConnector();
+    @NonNull public static final UnknownConnector UNKNOWN_CONNECTOR = new UnknownConnector();
     @NonNull private static final Collection<IConnector> CONNECTORS = Collections.unmodifiableCollection(Arrays.<IConnector> asList(
             GCConnector.getInstance(),
             ECConnector.getInstance(),
@@ -52,7 +52,6 @@ public final class ConnectorFactory {
                     R.string.pref_connectorOCUKActive, R.string.pref_ocuk_tokenpublic, R.string.pref_ocuk_tokensecret, ApiSupport.oldapi),
             new OCConnector("OpenCaching.ES", "www.opencachingspain.es", "OC"),
             new OCConnector("OpenCaching.IT", "www.opencaching.it", "OC"),
-            new OCConnector("OpenCaching.JP", "www.opencaching.jp", "OJ"),
             new OCConnector("OpenCaching.NO/SE", "www.opencaching.se", "OS"),
             new OCApiLiveConnector("opencaching.nl", "www.opencaching.nl", "OB", "CC BY-SA 3.0",
                     R.string.oc_nl_okapi_consumer_key, R.string.oc_nl_okapi_consumer_secret,
