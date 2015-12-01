@@ -29,14 +29,14 @@ public class GeocacheTest extends CGeoTestCase {
         }
     }
 
-    public static void testCanBeAddedToCalendar() {
+    public static void testIsPastEvent() {
         final Date today = new Date();
         final Geocache cacheToday = new MockedEventCache(today);
-        assertThat(cacheToday.canBeAddedToCalendar()).isTrue();
+        assertThat(cacheToday.isPastEvent()).isFalse();
 
         final Date yesterday = new Date(today.getTime() - 86400 * 1000);
         final MockedEventCache cacheYesterday = new MockedEventCache(yesterday);
-        assertThat(cacheYesterday.canBeAddedToCalendar()).isFalse();
+        assertThat(cacheYesterday.isPastEvent()).isTrue();
     }
 
     public static void testEquality() {
