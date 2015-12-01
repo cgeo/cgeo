@@ -21,6 +21,7 @@ import cgeo.geocaching.connector.trackable.TrackableBrand;
 import cgeo.geocaching.connector.trackable.TrackableConnector;
 import cgeo.geocaching.enumerations.CacheAttribute;
 import cgeo.geocaching.enumerations.LoadFlags;
+import cgeo.geocaching.enumerations.LoadFlags.RemoveFlag;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.export.FieldnoteExport;
@@ -645,8 +646,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                         ((IgnoreCapability) ConnectorFactory.getConnector(cache)).ignoreCache(cache);
                     }
                 });
-                // for consistency, remove also the local cache immediately
+                // For consistency, remove also the local cache immediately from memory cache and database
                 dropCache();
+                DataStore.removeCache(cache.getGeocode(), EnumSet.of(RemoveFlag.DB));
             }
         });
     }
