@@ -80,6 +80,10 @@
   <string name="log_tb_archived">Archyvuota</string>
   <string name="log_save">Išsaugoti neprisijungus</string>
   <string name="log_saving">Siunčiamas įrašas…</string>
+  <string name="log_saving_and_uploading">Talpinamas įrašas ir įkeliamas paveiksliukas…</string>
+  <string name="log_posting_log">Talpinamas įrašas…</string>
+  <string name="log_posting_image">Talpinamas vaizdas…</string>
+  <string name="log_posting_generic_trackable">Talpinama %1$s %2$s %3$s</string>
   <string name="log_clear">Išvalyti</string>
   <string name="log_post_geocode_missing">Trūksta geo kodo…</string>
   <string name="log_date_future_not_allowed">Būsimos datos įrašai negalimi.</string>
@@ -211,6 +215,9 @@
   <string name="warn_no_pocket_query_found">Internete nerastas Kišeninis sąrašas.</string>
   <string name="info_log_posted">c:geo įrašą pateikė sėkmingai.</string>
   <string name="info_log_saved">c:geo įrašas sėkmingai išsaugotas.</string>
+  <string name="info_log_post_failed_reason">Priežastis: %s</string>
+  <string name="info_log_post_retry">Kartoti</string>
+  <string name="info_log_post_save">Išsaugoti neprisijungus</string>
   <string name="info_log_cleared">Įrašas išvalytas.</string>
   <string name="info_log_type_changed">Įrašo tipas buvo pakeistas!</string>
   <string name="info_select_logimage_cancelled">Nuotraukos pasirinkimas ar fotografavimas buvo atšauktas.</string>
@@ -359,6 +366,7 @@
   <string name="settings_title_services">Paslaugos</string>
   <string name="settings_summary_services">Nustatyk naudotojo paskyros informaciją ir prieiga prie pasirinktinų paslaugų.</string>
   <string name="settings_title_appearance">Išvaizda</string>
+  <string name="settings_summary_appearance">Konfigūruoti atstumo vienetus, kalbą ir programos spalvas.</string>
   <string name="settings_title_cachedetails">Slėptuvės informacija</string>
   <string name="settings_title_offlinedata">Duomenys darbui neprisijungus</string>
   <string name="settings_title_logging">Registravimas</string>
@@ -526,6 +534,7 @@
   <string name="init_low_power">Energijos taupymo režimas</string>
   <string name="init_low_power_note">Energijos taupymo režimas išvengia GPS ir giroskopo naudojimo kai labai tiksli vieta nėra būtina, bet truputėli pailgina vietos nustatymo laiką.</string>
   <string name="init_low_power_mode">Aktyvinti energijos taupymo režimą</string>
+  <string name="init_force_orientation_sensor_title">Krypties jutiklis</string>
   <string name="init_create_memory_dump">Sukurti atminties turinio failą</string>
   <string name="init_memory_dump">Atminties turinio failas</string>
   <string name="init_memory_dumped">Atminties turinio failas išsaugotas %s</string>
@@ -927,6 +936,7 @@
   <string name="helper_pocketquery_description">Leidžia lengvai sukurti ir atsisiųsti Kišeninius sąrašus pagal jūsų buvimo vietą arba pasirinktą tašką žemėlapyje. Būtina Premium narystė Geocaching.com.</string>
   <string name="helper_google_translate_title">\"Google\" vertėjas</string>
   <string name="helper_google_translate_description">Atsisiuntę vertimo paketą Google Translate programai galėsite lengvai išversti slėptuvės aprašymus ilgai paspaudę ant slėptuvės aprašymo teksto (tam nereikės interneto ryšio).</string>
+  <string name="helper_where_you_go_description">WhereYouGo leidžia žaisti ir ieškoti geocaches tipo Wherigo. c:Geo automatiškai gali sukelti kasetės per šią programą atsisiųsti.</string>
   <string name="addon_missing_title">Trūksta įskiepio</string>
   <string name="addon_download_prompt">Parsisiųsti iš Google Play dabar.</string>
   <string name="export">Eksportuoti</string>

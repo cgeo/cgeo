@@ -969,6 +969,7 @@
   <string name="helper_wear_title">c:geo Wear</string>
   <string name="helper_wear_description">c:geo Wear to dodatek do c:geo, który pozwala na nawigację do skrzynki bezpośrednio z zegarka Android Wear.</string>
   <string name="helper_where_you_go_title">WhereYouGo</string>
+  <string name="helper_where_you_go_description">WhereYouGo pozwala na poszukiwanie skrzynek typu Wherigo. c:geo może automatycznie pobierać kardridże dzięki tej aplikacji.</string>
   <string name="addon_missing_title">Brakujący dodatek</string>
   <string name="addon_download_prompt">Pobierz teraz z Google Play.</string>
   <string name="export">Eksport</string>

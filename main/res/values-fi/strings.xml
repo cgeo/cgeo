@@ -954,6 +954,7 @@
   <string name="helper_wear_title">c:geo Wear</string>
   <string name="helper_wear_description">c:geo Wear on plugin c:geoon, jonka avulla voit navigoida käyttäen Android Wear älykelloa.</string>
   <string name="helper_where_you_go_title">WhereYouGo</string>
+  <string name="helper_where_you_go_description">WhereYouGo-sovelluksen avulla pystyy pelaamaan ja etsimään Wherigo-kätköjä. c:geo osaa ladata suoraan Wherigo-kasetit tämän sovelluksen avulla.</string>
   <string name="addon_missing_title">Puuttuva plugin</string>
   <string name="addon_download_prompt">Hanki se nyt Google Playsta.</string>
   <string name="export">Vienti</string>

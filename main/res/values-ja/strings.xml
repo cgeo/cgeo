@@ -873,6 +873,8 @@
   <string name="helper_google_translate_title">Google 翻訳</string>
   <string name="helper_google_translate_description">キャッシュの詳細でロングタップすればGoogle翻訳アプリで簡単に翻訳できます。
 Google翻訳アプリで各言語の辞書をダウンロードしておけばオフラインでも使用できます。</string>
+  <string name="helper_where_you_go_title">WhereYouGo</string>
+  <string name="helper_where_you_go_description">WhereYouGo は、再生型 Wherigo のジオキャッシュを検索ことができます。c:geo は、このアプリ内でカートリッジのダウンロードを自動的にトリガーできます。</string>
   <string name="addon_missing_title">アドオンが見つかりません</string>
   <string name="addon_download_prompt">Google Playからインストールしますか?</string>
   <string name="export_exportedto">にエクスポートしました</string>

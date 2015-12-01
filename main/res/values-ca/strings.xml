@@ -971,6 +971,7 @@
   <string name="helper_wear_title">c:geo Wear</string>
   <string name="helper_wear_description">c:geo Wear és un complement per c:geo que et permet cercar catxés fent servir el teu smartwatch Android Wear.</string>
   <string name="helper_where_you_go_title">WhereYouGo</string>
+  <string name="helper_where_you_go_description">WhereYouGo permet jugar i buscar catxés de tipus Wherigo. El c:geo pot descarregar automàticament els cartutxos dins d\'aquest aplicació.</string>
   <string name="addon_missing_title">No es troba el complement</string>
   <string name="addon_download_prompt">Baixa-te\'l de Google Play.</string>
   <string name="export">Exporta</string>

@@ -971,6 +971,7 @@
   <string name="helper_wear_title">c:geo Wear</string>
   <string name="helper_wear_description">c:geo Wear er et plugin til c:geo, der lader dig navigere til geocacher ved hjælp af din Android Wear smartwatch.</string>
   <string name="helper_where_you_go_title">WhereYouGo</string>
+  <string name="helper_where_you_go_description">WhereYouGo giver mulighed for at afspille og søge efter geocacher af typen Wherigo. c:geo kan automatisk starte download af cartridges i denne app.</string>
   <string name="addon_missing_title">Manglende plugin</string>
   <string name="addon_download_prompt">Hent fra Google Play nu.</string>
   <string name="export">Eksportér</string>

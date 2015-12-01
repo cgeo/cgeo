@@ -332,6 +332,7 @@
   <string name="caches_filter_personal_data">Személyes</string>
   <string name="caches_filter_rating">Értékelve</string>
   <string name="caches_filter_own_rating">Saját értékelés</string>
+  <string name="caches_filter_multi_listing">Különböző állapotú multik listázása</string>
   <string name="caches_removing_from_history">Eltávolítás a Előzményekből…</string>
   <string name="caches_clear_offlinelogs">Offline logok törlése</string>
   <string name="caches_clear_offlinelogs_message">Szeretnéd törölni az offline logokat?</string>
@@ -349,6 +350,7 @@
   <string name="list_dialog_create_err">A c:geo-nak nem sikerült az új lista létrehozása</string>
   <string name="list_dialog_remove_title">Lista eltávolítása</string>
   <string name="list_dialog_remove_description">Szeretnéd eltávolítani a jelenlegi listát? A listáról minden láda a Mentettek közé fog kerülni.</string>
+  <string name="list_dialog_remove_nowempty">A lista üres. El akarod távolítani a jelenlegi listát?</string>
   <string name="list_dialog_remove">Eltávolítás</string>
   <string name="list_dialog_remove_ok">A lista el lett távolítva</string>
   <string name="list_dialog_remove_err">A c:geo-nak nem sikerült a jelenlegi lista eltávolítása</string>
@@ -973,6 +975,7 @@
   <string name="helper_wear_title">c:geo Wear</string>
   <string name="helper_wear_description">A c:geo Wear egy c:geo plugin Android Wear okosórához, amellyel a ládákhoz tudsz navigálni.</string>
   <string name="helper_where_you_go_title">WhereYouGo</string>
+  <string name="helper_where_you_go_description">A WhereYouGo lehetővé teszi Wherigo ládák keresését és játszását. A c:geo képes automatikusan elindítani a cartridge fájlok létöltését a programon belül.</string>
   <string name="addon_missing_title">Hiányzó add-on</string>
   <string name="addon_download_prompt">Töltsd le most a Google Play-ről.</string>
   <string name="export">Exportálás</string>
