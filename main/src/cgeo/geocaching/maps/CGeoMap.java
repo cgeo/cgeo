@@ -5,12 +5,9 @@ import butterknife.ButterKnife;
 import cgeo.geocaching.CacheListActivity;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.CompassActivity;
-import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.connector.ConnectorFactory;
@@ -33,27 +30,35 @@ import cgeo.geocaching.maps.interfaces.MapProvider;
 import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
 import cgeo.geocaching.maps.interfaces.OnMapDragListener;
+import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.network.AndroidBeam;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.dialog.LiveMapInfoDialogBuilder;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.LeastRecentlyUsedSet;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapUtils;
+import cgeo.geocaching.utils.RxUtils;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-
+import rx.Observable;
 import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action0;
 import rx.functions.Action1;
+import rx.functions.Func0;
+import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.Subscriptions;
 
@@ -593,11 +598,17 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         super.onResume();
         resumeSubscription = Subscriptions.from(geoDirUpdate.start(GeoDirHandler.UPDATE_GEODIR), startTimer());
 
-        if (!CollectionUtils.isEmpty(dirtyCaches)) {
-            new AsyncTask<Void, Void, Void>() {
+        final List<String> toRefresh;
+        synchronized (dirtyCaches) {
+            toRefresh = new ArrayList<>(dirtyCaches);
+            dirtyCaches.clear();
+        }
+
+        if (!toRefresh.isEmpty()) {
+            AndroidRxUtils.refreshScheduler.createWorker().schedule(new Action0() {
                 @Override
-                public Void doInBackground(final Void... params) {
-                    for (final String geocode : dirtyCaches) {
+                public void call() {
+                    for (final String geocode: toRefresh) {
                         final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_WAYPOINTS);
                         if (cache != null) {
                             // new collection type needs to remove first
@@ -606,16 +617,9 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
                             caches.add(cache);
                         }
                     }
-                    return null;
-                }
-
-                @Override
-                public void onPostExecute(final Void result) {
-                    dirtyCaches.clear();
-                    // Update display
                     displayExecutor.execute(new DisplayRunnable(CGeoMap.this));
                 }
-            }.execute();
+            });
         }
     }
 
@@ -1746,7 +1750,9 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
     }
 
     public static void markCacheAsDirty(final String geocode) {
-        dirtyCaches.add(geocode);
+        synchronized(dirtyCaches) {
+            dirtyCaches.add(geocode);
+        }
     }
 
     private CachesOverlayItemImpl getCacheItem(final Geocache cache) {
