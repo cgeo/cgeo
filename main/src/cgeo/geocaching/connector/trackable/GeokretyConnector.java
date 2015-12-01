@@ -2,16 +2,16 @@ package cgeo.geocaching.connector.trackable;
 
 import cgeo.geocaching.AbstractLoggingActivity;
 import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.R;
-import cgeo.geocaching.models.Trackable;
-import cgeo.geocaching.models.TrackableLog;
 import cgeo.geocaching.enumerations.LogTypeTrackable;
 import cgeo.geocaching.enumerations.StatusCode;
+import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.Trackable;
+import cgeo.geocaching.models.TrackableLog;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.Version;
 
@@ -22,9 +22,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.xml.sax.InputSource;
 
-import rx.Observable;
-import rx.functions.Func1;
-
 import android.content.Context;
 
 import java.io.InputStream;
@@ -33,6 +30,9 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 import java.util.regex.Pattern;
+
+import rx.Observable;
+import rx.functions.Func1;
 
 public class GeokretyConnector extends AbstractTrackableConnector {
 
@@ -59,7 +59,7 @@ public class GeokretyConnector extends AbstractTrackableConnector {
     @Override
     @NonNull
     public String getUrl(@NonNull final Trackable trackable) {
-        return "http://geokrety.org/konkret.php?id=" + getId(trackable.getGeocode());
+        return "http://" + getHost() + "/konkret.php?id=" + getId(trackable.getGeocode());
     }
 
     @Override
@@ -302,5 +302,11 @@ public class GeokretyConnector extends AbstractTrackableConnector {
             Log.w("GeokretyConnector.searchTrackable", e);
             return new ImmutablePair<>(StatusCode.LOG_POST_ERROR_GK, Collections.<String> emptyList());
         }
+    }
+
+    @Override
+    @NonNull
+    public String getHost() {
+        return "geokrety.org";
     }
 }

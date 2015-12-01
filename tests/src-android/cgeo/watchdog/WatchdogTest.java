@@ -3,11 +3,14 @@ package cgeo.watchdog;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import cgeo.CGeoTestCase;
-import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.ConnectorFactory;
+import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.oc.OCApiConnector;
+import cgeo.geocaching.connector.trackable.TrackableConnector;
 import cgeo.geocaching.enumerations.LoadFlags;
+import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.network.Network;
 
 /**
  * This test is intended to run regularly on our CI server, to verify the availability of several geocaching websites
@@ -54,6 +57,28 @@ public class WatchdogTest extends CGeoTestCase {
         assertThat(geocache).isNotNull();
         assert geocache != null; // Eclipse null analysis weakness
         assertThat(geocache.getGeocode()).isEqualTo(geocode);
+    }
+
+    private static void checkWebsite(final String connectorName, final String host) {
+        final String url = "http://" + host + "/";
+        final String page = Network.getResponseData(Network.getRequest(url));
+        assertThat(page).overridingErrorMessage("Failed to get response from " + connectorName).isNotEmpty();
+    }
+
+    public static void testTrackableWebsites() {
+        for (final TrackableConnector trackableConnector : ConnectorFactory.getTrackableConnectors()) {
+            if (trackableConnector != ConnectorFactory.UNKNOWN_TRACKABLE_CONNECTOR) {
+                checkWebsite("trackable website " + trackableConnector.getHost(), trackableConnector.getHost());
+            }
+        }
+    }
+
+    public static void testGeocachingWebsites() {
+        for (final IConnector connector : ConnectorFactory.getConnectors()) {
+            if (connector != ConnectorFactory.UNKNOWN_CONNECTOR) {
+                checkWebsite("geocaching website " + connector.getName(), connector.getHost());
+            }
+        }
     }
 
 }

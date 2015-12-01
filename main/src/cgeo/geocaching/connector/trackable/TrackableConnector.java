@@ -1,16 +1,16 @@
 package cgeo.geocaching.connector.trackable;
 
 import cgeo.geocaching.AbstractLoggingActivity;
+import cgeo.geocaching.connector.UserAction;
 import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.models.TrackableLog;
-import cgeo.geocaching.connector.UserAction;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
-import rx.Observable;
-
 import java.util.List;
+
+import rx.Observable;
 
 /**
  * Methods to be implemented by any connector for handling trackables
@@ -169,4 +169,10 @@ public interface TrackableConnector {
      */
     @NonNull
     Observable<TrackableLog> trackableLogInventory();
+
+    /**
+     * Get host name of the connector server for dynamic loading of data.
+     */
+    @NonNull
+    String getHost();
 }

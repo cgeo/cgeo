@@ -1,7 +1,7 @@
 package cgeo.geocaching.connector.trackable;
 
-import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.connector.UserAction;
+import cgeo.geocaching.models.Trackable;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -43,5 +43,11 @@ public class UnknownTrackableConnector extends AbstractTrackableConnector {
     @NonNull
     public List<UserAction> getUserActions() {
         return Collections.emptyList();
+    }
+
+    @Override
+    @NonNull
+    public String getHost() {
+        throw new IllegalStateException("Unknown trackable connector does not have a host.");
     }
 }

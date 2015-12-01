@@ -3,11 +3,11 @@ package cgeo.geocaching.connector.trackable;
 import cgeo.geocaching.AbstractLoggingActivity;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
-import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.connector.UserAction;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.gc.GCParser;
 import cgeo.geocaching.enumerations.Loaders;
+import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.settings.Settings;
@@ -45,7 +45,7 @@ public class TravelBugConnector extends AbstractTrackableConnector {
     @Override
     @NonNull
     public String getUrl(@NonNull final Trackable trackable) {
-        return "https://www.geocaching.com//track/details.aspx?tracker=" + trackable.getGeocode();
+        return "https://" + getHost() + "//track/details.aspx?tracker=" + trackable.getGeocode();
     }
 
     static String getTravelbugViewstates(final String guid) {
@@ -119,5 +119,11 @@ public class TravelBugConnector extends AbstractTrackableConnector {
     @Override
     public AbstractTrackableLoggingManager getTrackableLoggingManager(final AbstractLoggingActivity activity) {
         return new TravelBugLoggingManager(activity);
+    }
+
+    @Override
+    @NonNull
+    public String getHost() {
+        return "www.geocaching.com";
     }
 }

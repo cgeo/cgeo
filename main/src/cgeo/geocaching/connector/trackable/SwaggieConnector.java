@@ -50,13 +50,19 @@ public final class SwaggieConnector extends AbstractTrackableConnector {
         return null;
     }
 
-    private static String getUrl(final String geocode) {
-        return "http://geocaching.com.au/swaggie/" + geocode;
+    private String getUrl(final String geocode) {
+        return "http://" + getHost() + "/swaggie/" + geocode;
     }
 
     @Override
     @NonNull
     public TrackableBrand getBrand() {
         return TrackableBrand.SWAGGIE;
+    }
+
+    @Override
+    @NonNull
+    public String getHost() {
+        return "geocaching.com.au";
     }
 }
