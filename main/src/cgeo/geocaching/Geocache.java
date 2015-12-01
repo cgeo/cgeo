@@ -1581,7 +1581,7 @@ public class Geocache implements IWaypoint {
 
     public void dropSynchronous() {
         DataStore.markDropped(Collections.singletonList(this));
-        DataStore.removeCache(getGeocode(), EnumSet.of(RemoveFlag.CACHE, RemoveFlag.DB));
+        DataStore.removeCache(getGeocode(), EnumSet.of(RemoveFlag.CACHE));
     }
 
     private void warnIncorrectParsingIf(final boolean incorrect, final String field) {
