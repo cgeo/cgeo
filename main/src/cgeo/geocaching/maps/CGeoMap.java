@@ -1188,7 +1188,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
                 if (moved || !viewportNow.equals(previousViewport)) {
                     map.updateMapTitle();
                 }
-                previousZoom = zoomNow;
 
                 // save new values
                 if (moved) {
@@ -1198,6 +1197,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
                     if (1000 < (currentTime - map.loadThreadRun)) {
                         previousViewport = viewportNow;
+                        previousZoom = zoomNow;
                         loadExecutor.execute(new LoadRunnable(map));
                     }
                 }
@@ -1211,7 +1211,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
      * get if map is loading something
      *
      */
-    public boolean isLoading() {
+    private boolean isLoading() {
         return !loadTimer.isUnsubscribed() &&
                 (loadExecutor.getActiveCount() > 0 ||
                         downloadExecutor.getActiveCount() > 0 ||
