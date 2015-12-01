@@ -3,6 +3,6 @@
 <resources>
   <string name="app_name">c:geo - календарь (дополнение)</string>
   <string name="calendars">Календари</string>
-  <string name="event_success">Событие, добавленные в календарь</string>
+  <string name="event_success">События, добавленные в календарь</string>
   <string name="event_fail">Не удалось добавить событие в календарь</string>
 </resources>

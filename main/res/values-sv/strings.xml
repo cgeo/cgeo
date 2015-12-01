@@ -332,6 +332,7 @@
   <string name="caches_filter_personal_data">Med personlig info</string>
   <string name="caches_filter_rating">Med betyg</string>
   <string name="caches_filter_own_rating">Med eget betyg</string>
+  <string name="caches_filter_multi_listing">Listade på flera sajter men inte loggad på alla</string>
   <string name="caches_removing_from_history">Tar bort från historik…</string>
   <string name="caches_clear_offlinelogs">Rensa offline loggar</string>
   <string name="caches_clear_offlinelogs_message">Vill du rensa offline loggarna?</string>
@@ -638,6 +639,18 @@
   <string name="cache_offline_time_about">för</string>
   <string name="cache_offline_time_mins">minuter sedan</string>
   <string name="cache_offline_time_mins_few">för några minuter sedan</string>
+  <plurals name="cache_offline_about_time_mins">
+    <item quantity="one">för ca %d minut sedan</item>
+    <item quantity="other">för ca %d minuter sedan</item>
+  </plurals>
+  <plurals name="cache_offline_about_time_hours">
+    <item quantity="one">för ca %d timme sedan</item>
+    <item quantity="other">för ca %d timmar sedan</item>
+  </plurals>
+  <plurals name="cache_offline_about_time_days">
+    <item quantity="one">för ca %d dag sedan</item>
+    <item quantity="other">för ca %d dagar sedan</item>
+  </plurals>
   <string name="cache_offline_time_hour">en timme sedan</string>
   <string name="cache_offline_time_hours">timmar sedan</string>
   <string name="cache_offline_time_days">dagar sedan</string>
@@ -658,7 +671,9 @@
   <string name="cache_description_long">Lång beskrivning</string>
   <string name="cache_description_table_note">Beskrivningen innehåller tabellformatering som eventuellt behöver läsas på %s för att se korrekt ut.</string>
   <string name="cache_watchlist_on">Den här cachen finns i din watchlist.</string>
+  <string name="cache_watchlist_on_extra">Denna cache är på din bevakningslista. (Bevakare: %1d)</string>
   <string name="cache_watchlist_not_on">Den här cachen finns inte i din watchlist.</string>
+  <string name="cache_watchlist_not_on_extra">Denna cache är inte på din bevakningslista. (Bevakare: %1d)</string>
   <string name="cache_watchlist_add">Lägg till i watchlist</string>
   <string name="cache_watchlist_remove">Ta bort från watchlist</string>
   <string name="cache_favpoint_on">Den här cachen är en av dina favoriter.</string>
@@ -962,6 +977,7 @@
   <string name="helper_sendtocgeo_description">Skicka till c:geo är ett tillägg till webbläsaren <strong>för din PC</strong>. När du bläddrar geocaching.com, kan du skicka cacher till din telefon med en knapptryckning i webbläsaren.</string>
   <string name="helper_locus_title">Locus</string>
   <string name="helper_locus_description">App för navigering utomhus med telefon eller tablet. Visa topo-kartor offline, spåra din rutt, leta geocacher, använd guideröst och mycket mer.</string>
+  <string name="helper_gpsstatus_title">GPS Status &amp; Toolbox</string>
   <string name="helper_gpsstatus_description">Erbjuder många GPS-relaterade funktioner. Radar-funktionen i detta program kan användas i c:geo.</string>
   <string name="helper_bluetoothgps_title">Bluetooth GPS</string>
   <string name="helper_bluetoothgps_description">Gör det möjligt att använda en extern GPS enhet för att få mer exakt position och även spara på enhetens batteri.</string>
@@ -974,6 +990,7 @@
   <string name="helper_wear_title">c:geo Wear</string>
   <string name="helper_wear_description">c:geo Wear är en plugin till c:geo som låter dig navigera till geocacher med din Android Wear smartwatch.</string>
   <string name="helper_where_you_go_title">WhereYouGo</string>
+  <string name="helper_where_you_go_description">Appen WhereYouGo gör att du kan spela och leta efter cacher av typen Wherigo. c:geo kan påbörja nedladdningar av spelfiler, s.k. cartridges, i denna app.</string>
   <string name="addon_missing_title">Tillägg saknas</string>
   <string name="addon_download_prompt">Hämta det nu från Google Play.</string>
   <string name="export">Exportera</string>
@@ -1299,6 +1316,7 @@
   <string name="trackable_title_log_without_geocode">Geocode saknas</string>
   <string name="trackable_log_without_geocode">Du kommer nu att skicka en logg utan en Geocode. Det rekommenderas att ange en. Vill du lägga till det nu?</string>
   <string name="do_not_ask_me_again">Fråga mig inte igen</string>
+  <string name="geokrety_parsing_failed">Förstod inte svaret från GeoKrety.</string>
   <string name="settings_map_direction">Visa riktning</string>
   <string name="settings_summary_map_direction">Visa en riktningslinje till målet för navigeringen</string>
   <string name="map_direction">Visa riktning</string>

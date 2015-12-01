@@ -964,6 +964,7 @@
   <string name="helper_wear_title">c:geo Wear</string>
   <string name="helper_wear_description">c:geo Wear ir spraudnis priekš c:geo, kas ļauj navigēt uz slēpni, izmantojot tavu Android Wear viedpulksteni.</string>
   <string name="helper_where_you_go_title">WhereYouGo</string>
+  <string name="helper_where_you_go_description">WhereYouGo ļauj spēlēt un meklēt Wherigo tipa slēpņus. c:geo automātiski ļauj lejupielādēt kārtridžus caur šo aplikāciju.</string>
   <string name="addon_missing_title">Trūkst spraudnis</string>
   <string name="addon_download_prompt">Saņemt tagad no Google Play.</string>
   <string name="export">Eksportēt</string>

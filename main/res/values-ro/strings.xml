@@ -978,6 +978,7 @@
   <string name="helper_wear_title">c:geo Wear</string>
   <string name="helper_wear_description">c:geo Wear este un modul pentru c:geo care îţi permite să navighezi către geocutii folosindu-ţi Smartwatch Android Wear.</string>
   <string name="helper_where_you_go_title">WhereYouGo</string>
+  <string name="helper_where_you_go_description">WhereYouGo este o aplicaţie pentru a juca aventuri de tip Wherigo. c:geo poate declanşa automat descărcarea cartuşului în această aplicaţie.</string>
   <string name="addon_missing_title">Extensie lipsă</string>
   <string name="addon_download_prompt">Ia acum de pe Google Play.</string>
   <string name="export">Exportă</string>

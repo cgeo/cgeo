@@ -805,6 +805,7 @@
   <string name="gpx_import_loading_waypoints">Lade Wegpunkte aus GPX-Datei</string>
   <string name="gpx_import_store_static_maps">Schreibe statische Karten</string>
   <string name="gpx_import_caches_imported">Caches importiert</string>
+  <string name="gpx_import_caches_imported_with_filename">%1$d Caches von %2$s importiert</string>
   <string name="gpx_import_static_maps_skipped">Download statischer Karten abgebrochen</string>
   <string name="gpx_import_title_static_maps">Speichern statischer Karten</string>
   <string name="gpx_import_title_reading_file">Lese Datei</string>
@@ -815,6 +816,7 @@
   <string name="gpx_import_error_parser">Dateiformat nicht ok</string>
   <string name="gpx_import_error_unexpected">Unerwarteter Fehler</string>
   <string name="gpx_import_canceled">Der GPX-Import wurde abgebrochen</string>
+  <string name="gpx_import_canceled_with_filename">Der GPX Import von %1$s wurde abgebrochen</string>
   <string name="gpx_import_delete_title">Datei löschen</string>
   <string name="gpx_import_delete_message">Datei %s löschen?</string>
   <string name="gpx_import_select_list_title">Importiere GPX nach</string>
