@@ -437,7 +437,10 @@ public class Geocache implements IWaypoint {
         if (hidden == null) {
             return false;
         }
-        // is not in the past?
+        return true;
+    }
+
+    public boolean isPastEvent() {
         final Calendar cal = Calendar.getInstance();
         cal.setTime(new Date());
         cal.set(Calendar.HOUR_OF_DAY, 0);
@@ -445,7 +448,7 @@ public class Geocache implements IWaypoint {
         cal.set(Calendar.SECOND, 0);
         cal.set(Calendar.MILLISECOND, 0);
         assert hidden != null; // Eclipse compiler issue
-        return hidden.compareTo(cal.getTime()) >= 0;
+        return hidden.compareTo(cal.getTime()) < 0;
     }
 
     public boolean isEventCache() {
