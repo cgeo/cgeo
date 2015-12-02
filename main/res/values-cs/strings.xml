@@ -276,8 +276,8 @@
   <string name="caches_sort_difficulty">Obtížnosti</string>
   <string name="caches_sort_terrain">Terénu</string>
   <string name="caches_sort_size">Velikosti</string>
-  <string name="caches_sort_favorites">Oblíbené</string>
-  <string name="caches_sort_favorites_ratio">Oblíbené [%]</string>
+  <string name="caches_sort_favorites">Oblíbenosti</string>
+  <string name="caches_sort_favorites_ratio">Oblíbenosti [%]</string>
   <string name="caches_sort_name">Jména</string>
   <string name="caches_sort_geocode">Geokódu</string>
   <string name="caches_sort_rating">Hodnocení</string>
@@ -329,8 +329,8 @@
   <string name="caches_filter_origin">Původ keše</string>
   <string name="caches_filter_distance">Vzdálenost</string>
   <string name="caches_filter_personal_note">S osobní poznámkou</string>
-  <string name="caches_filter_popularity">Oblíbené</string>
-  <string name="caches_filter_popularity_ratio">Oblíbené [%]</string>
+  <string name="caches_filter_popularity">Oblíbenost</string>
+  <string name="caches_filter_popularity_ratio">Oblíbenost [%]</string>
   <string name="caches_filter_personal_data">S osobními údaji</string>
   <string name="caches_filter_rating">S hodnocením</string>
   <string name="caches_filter_own_rating">S vlastním hodnocením</string>
@@ -745,7 +745,7 @@
   <string name="cache_status_offline_log">Připravený Log</string>
   <string name="cache_status_found">Nalezena</string>
   <string name="cache_not_status_found">Nenalezeno</string>
-  <string name="cache_never_found">Nikdy nenalezeno</string>
+  <string name="cache_never_found">Nikdy nenalezena</string>
   <string name="cache_status_archived">Archivována</string>
   <string name="cache_status_disabled">Deaktivována</string>
   <string name="cache_status_premium">Pouze pro prémiové uživatele</string>
@@ -933,7 +933,6 @@
   <string name="trackable_not_activated">Sledovatelný předmět není aktivován</string>
   <string name="trackable_travelbug">Travelbug</string>
   <string name="trackable_geokrety">GeoKrety</string>
-  <string name="trackable_swaggie">Swaggie</string>
   <string name="geokret_type_traditional">Tradiční</string>
   <string name="geokret_type_book_or_media">Kniha nebo elektronická média</string>
   <string name="geokret_type_human">Člověk</string>

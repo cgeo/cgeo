@@ -258,7 +258,7 @@
   <string name="caches_no_cache">Здесь тайников нет</string>
   <string name="caches_more_caches">Загрузить больше тайников</string>
   <string name="caches_more_caches_no">Тайников больше нет</string>
-  <string name="caches_more_caches_loading">Загрузка тайников...</string>
+  <string name="caches_more_caches_loading">Загрузка тайников…</string>
   <string name="caches_more_caches_currently">Отображено</string>
   <string name="caches_downloading">Загружаю тайники…\nETA: </string>
   <string name="caches_eta_ltm">меньше минуты</string>
@@ -395,7 +395,7 @@
   <string name="settings_category_browser">Браузер</string>
   <string name="settings_category_social">Социальные сети</string>
   <string name="settings_category_logging_other">Остальные параметры</string>
-  <string name="settings_goto_url_button">Подробнее...</string>
+  <string name="settings_goto_url_button">Подробнее…</string>
   <string name="settings_title_ec">Extremcaching.com</string>
   <string name="settings_activate_gc">Активировать</string>
   <string name="settings_activate_ec">Активировать</string>
@@ -699,7 +699,7 @@
   <string name="cache_dialog_offline_save_message">Сохранение тайника для оффлайнового использования…</string>
   <string name="cache_dialog_offline_drop_title">Удаление</string>
   <string name="cache_dialog_offline_drop_message">Удаление тайника из памяти устройства…</string>
-  <string name="cache_dialog_refresh_title">Обновить</string>
+  <string name="cache_dialog_refresh_title">Обновление</string>
   <string name="cache_dialog_refresh_message">Обновление деталей тайника…</string>
   <string name="cache_dialog_watchlist_add_title">Список Отслеживаемых</string>
   <string name="cache_dialog_watchlist_add_message">Добавление тайника в список Отслеживаемых…</string>
@@ -795,6 +795,7 @@
   <string name="gpx_import_loading_waypoints">Загрузка файла точек</string>
   <string name="gpx_import_store_static_maps">Сохранение статических карт</string>
   <string name="gpx_import_caches_imported">тайника (-ов) импортировано</string>
+  <string name="gpx_import_caches_imported_with_filename">%1$d тайника (-ов) импортировано из %2$s</string>
   <string name="gpx_import_static_maps_skipped">Загрузка статических карт прервана</string>
   <string name="gpx_import_title_static_maps">Сохранить статические карты</string>
   <string name="gpx_import_title_reading_file">Чтение файла</string>
@@ -805,6 +806,7 @@
   <string name="gpx_import_error_parser">Неправильный формат файла</string>
   <string name="gpx_import_error_unexpected">Неожиданная ошибка</string>
   <string name="gpx_import_canceled">Импорт GPX был отменен</string>
+  <string name="gpx_import_canceled_with_filename">Импорт GPX из %1$s был отменен</string>
   <string name="gpx_import_delete_title">Удалить файл</string>
   <string name="gpx_import_delete_message">Вы действительно хотите удалить %s?</string>
   <string name="gpx_import_select_list_title">Импортировать GPX в список</string>
@@ -935,7 +937,6 @@
   <string name="trackable_not_activated">Трекабл не активирован</string>
   <string name="trackable_travelbug">Travelbug</string>
   <string name="trackable_geokrety">ГеоКрот</string>
-  <string name="trackable_swaggie">Swaggie</string>
   <string name="geokret_type_traditional">Традиционный</string>
   <string name="geokret_type_book_or_media">Книга, CD или DVD</string>
   <string name="geokret_type_human">Человек</string>

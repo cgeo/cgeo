@@ -87,7 +87,7 @@
   <string name="log_posting_image">A publicar imagem…</string>
   <string name="log_posting_generic_trackable">A publicar %1$s %2$s/%3$s</string>
   <string name="log_clear">Limpar</string>
-  <string name="log_post_not_possible">Download de dados em progresso...\n Por favor tente novamente dentro de alguns segundos ou verifique sua conexão de internet.</string>
+  <string name="log_post_not_possible">Download de dados em progresso…\n Por favor tente novamente dentro de alguns segundos ou verifique sua conexão de internet.</string>
   <string name="log_post_geocode_missing">Geocodigo em falta…</string>
   <string name="log_date_future_not_allowed">Registos com datas futuras não são permitidos.</string>
   <string name="log_add">Adicionar</string>
@@ -923,7 +923,6 @@
   <string name="trackable_not_activated">Trackable não activado</string>
   <string name="trackable_travelbug">Travelbug</string>
   <string name="trackable_geokrety">GeoKrety</string>
-  <string name="trackable_swaggie">Swaggie</string>
   <string name="geokret_type_traditional">Tradicional</string>
   <string name="geokret_type_book_or_media">Livro ou média electrónica</string>
   <string name="geokret_type_human">Humano</string>

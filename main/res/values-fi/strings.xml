@@ -910,7 +910,6 @@
   <string name="trackable_not_activated">Reissaaja ei ole aktivoitu</string>
   <string name="trackable_travelbug">Matkalainen</string>
   <string name="trackable_geokrety">GeoKrety</string>
-  <string name="trackable_swaggie">Swaggie</string>
   <string name="geokret_type_traditional">Perinteinen</string>
   <string name="geokret_type_book_or_media">Kirja tai sähköinen media</string>
   <string name="geokret_type_human">Ihminen</string>
@@ -1027,7 +1026,7 @@
   <string name="attribute_abandonedbuilding_no">Ei hylätty rakennelma</string>
   <string name="attribute_hike_short_yes">Lyhyt vaellus (alle 1 km)</string>
   <string name="attribute_hike_short_no">Ei lyhyt vaellus</string>
-  <string name="attribute_hike_med_yes">Keskitasoinen vaellus (1-10 km)</string>
+  <string name="attribute_hike_med_yes">Keskitasoinen vaellus (1–10 km)</string>
   <string name="attribute_hike_med_no">Ei keskitasoinen vaellus</string>
   <string name="attribute_hike_long_yes">Pitkä vaellus (yli 10 km)</string>
   <string name="attribute_hike_long_no">Ei pitkä vaellus</string>

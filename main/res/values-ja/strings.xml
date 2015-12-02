@@ -835,7 +835,6 @@
   <string name="trackable_touch">見つけた</string>
   <string name="trackable_not_activated">有効化されていないトラッカブル</string>
   <string name="trackable_geokrety">GeoKrety</string>
-  <string name="trackable_swaggie">Swaggie</string>
   <string name="geokret_type_traditional">トラディショナル</string>
   <string name="geokret_type_book_or_media">本または電子メディア</string>
   <string name="geokret_type_human">人</string>

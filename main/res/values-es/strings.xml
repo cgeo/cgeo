@@ -348,6 +348,7 @@
   <string name="list_dialog_create_err">c:geo no ha podido crear la lista</string>
   <string name="list_dialog_remove_title">Borrar lista</string>
   <string name="list_dialog_remove_description">¿Quieres borrar la lista actual? Todos los cachés de la lista serán movidos a \"Guardados\".</string>
+  <string name="list_dialog_remove_nowempty">La lista está vacía. ¿Quieres borrarla?</string>
   <string name="list_dialog_remove">Borrar</string>
   <string name="list_dialog_remove_ok">La lista ha sido borrada</string>
   <string name="list_dialog_remove_err">c:geo no ha podido borrar la lista actual</string>
@@ -623,6 +624,18 @@
   <string name="cache_offline_time_about">desde</string>
   <string name="cache_offline_time_mins">minutos atrás</string>
   <string name="cache_offline_time_mins_few">hace unos minutos</string>
+  <plurals name="cache_offline_about_time_mins">
+    <item quantity="one">hace %d minuto</item>
+    <item quantity="other">hace %d minutos</item>
+  </plurals>
+  <plurals name="cache_offline_about_time_hours">
+    <item quantity="one">hace %d hora</item>
+    <item quantity="other">hace %d horas</item>
+  </plurals>
+  <plurals name="cache_offline_about_time_days">
+    <item quantity="one">hace %d día</item>
+    <item quantity="other">hace %d días</item>
+  </plurals>
   <string name="cache_offline_time_hour">hace una hora</string>
   <string name="cache_offline_time_hours">horas atrás</string>
   <string name="cache_offline_time_days">días atrás</string>
@@ -771,6 +784,7 @@
   <string name="gpx_import_loading_waypoints">Cargando archivo de waypoints</string>
   <string name="gpx_import_store_static_maps">Almacenando mapas estáticos</string>
   <string name="gpx_import_caches_imported">cachés importados</string>
+  <string name="gpx_import_caches_imported_with_filename">%1$d cachés importados de %2$s</string>
   <string name="gpx_import_static_maps_skipped">Descarga de mapas estáticos abortada</string>
   <string name="gpx_import_title_static_maps">Almacenar mapas estáticos</string>
   <string name="gpx_import_title_reading_file">Leyendo archivo</string>
@@ -911,7 +925,6 @@
   <string name="trackable_not_activated">Rastreable no activado</string>
   <string name="trackable_travelbug">Travel bug</string>
   <string name="trackable_geokrety">GeoKrety</string>
-  <string name="trackable_swaggie">Swaggie</string>
   <string name="geokret_type_traditional">Tradicional</string>
   <string name="geokret_type_book_or_media">Libro o medio electrónicos</string>
   <string name="geokret_type_human">Humano</string>

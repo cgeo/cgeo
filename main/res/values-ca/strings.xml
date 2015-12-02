@@ -87,7 +87,7 @@
   <string name="log_posting_image">Publicant imatge…</string>
   <string name="log_posting_generic_trackable">Publicant %1$s%2$s/%3$s</string>
   <string name="log_clear">Esborra</string>
-  <string name="log_post_not_possible">Descàrrega de dades en procés...\nProva una altra vegada en uns segons o comprova la connexió a internet.</string>
+  <string name="log_post_not_possible">Descàrrega de dades en procés…\nProva una altra vegada en uns segons o comprova la connexió a internet.</string>
   <string name="log_post_geocode_missing">Falta el geocodi…</string>
   <string name="log_date_future_not_allowed">No estan permesos els registres amb data futura.</string>
   <string name="log_add">Afegeix</string>
@@ -927,7 +927,6 @@
   <string name="trackable_not_activated">Traçable no activat</string>
   <string name="trackable_travelbug">Travelbug</string>
   <string name="trackable_geokrety">GeoKrety</string>
-  <string name="trackable_swaggie">Swaggie</string>
   <string name="geokret_type_traditional">Tradicional</string>
   <string name="geokret_type_book_or_media">Llibre o mitjans electrònics</string>
   <string name="geokret_type_human">Humà</string>
