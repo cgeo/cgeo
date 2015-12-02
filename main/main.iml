@@ -60,7 +60,7 @@
       <sourceFolder url="file://$MODULE_DIR$/thirdparty" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/jni" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/rs" isTestSource="false" />
-      <excludeFolder url="file://$MODULE_DIR$/build/build" />
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/assets" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/bundles" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/classes" />
@@ -68,6 +68,8 @@
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/dependency-cache" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/dex" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/dex-cache" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.android.support.test/exposed-instrumentation-api-publish/0.4.1/jars" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.android.support.test/runner/0.4.1/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.android.support/appcompat-v7/20.0.0/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.0/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.github.jenzz.undobar/library/1.3/api8Release/jars" />
@@ -89,6 +91,7 @@
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/symbols" />
       <excludeFolder url="file://$MODULE_DIR$/build/outputs" />
       <excludeFolder url="file://$MODULE_DIR$/build/reports" />
+      <excludeFolder url="file://$MODULE_DIR$/build/source" />
       <excludeFolder url="file://$MODULE_DIR$/build/test-results" />
       <excludeFolder url="file://$MODULE_DIR$/build/tmp" />
     </content>
@@ -98,20 +101,20 @@
     <content url="file://$MODULE_DIR$/../tests/assets">
       <sourceFolder url="file://$MODULE_DIR$/../tests/assets" type="java-test-resource" />
     </content>
-    <content url="file://$MODULE_DIR$/../tests/java">
-      <sourceFolder url="file://$MODULE_DIR$/../tests/java" isTestSource="true" />
-    </content>
     <content url="file://$MODULE_DIR$/../tests/jni">
       <sourceFolder url="file://$MODULE_DIR$/../tests/jni" isTestSource="true" />
     </content>
     <content url="file://$MODULE_DIR$/../tests/res">
       <sourceFolder url="file://$MODULE_DIR$/../tests/res" type="java-test-resource" />
     </content>
-    <content url="file://$MODULE_DIR$/../tests/resources">
-      <sourceFolder url="file://$MODULE_DIR$/../tests/resources" type="java-test-resource" />
-    </content>
     <content url="file://$MODULE_DIR$/../tests/rs">
       <sourceFolder url="file://$MODULE_DIR$/../tests/rs" isTestSource="true" />
+    </content>
+    <content url="file://$MODULE_DIR$/../tests/src">
+      <sourceFolder url="file://$MODULE_DIR$/../tests/src" type="java-test-resource" />
+    </content>
+    <content url="file://$MODULE_DIR$/../tests/src-android">
+      <sourceFolder url="file://$MODULE_DIR$/../tests/src-android" isTestSource="true" />
     </content>
     <orderEntry type="jdk" jdkName="Android 5.1 Google APIs" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
@@ -122,14 +125,16 @@
     <orderEntry type="library" exported="" name="android-integration-3.2.1" level="project" />
     <orderEntry type="library" exported="" name="jsr305-3.0.1" level="project" />
     <orderEntry type="library" exported="" name="play-services-base-8.3.0" level="project" />
-    <orderEntry type="library" exported="" name="support-annotations-22.2.0" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="assertj-core-1.7.1" level="project" />
     <orderEntry type="library" exported="" name="locus-api-4.0" level="project" />
     <orderEntry type="library" exported="" name="jackson-annotations-2.6.3" level="project" />
     <orderEntry type="library" exported="" name="commons-lang3-3.4" level="project" />
-    <orderEntry type="library" exported="" name="commons-collections4-4.0" level="project" />
+    <orderEntry type="library" exported="" name="commons-collections4-4.1" level="project" />
+    <orderEntry type="library" exported="" name="support-annotations-23.0.1" level="project" />
     <orderEntry type="library" exported="" name="jackson-core-2.6.3" level="project" />
     <orderEntry type="library" exported="" name="annotations-3.0.1u2" level="project" />
     <orderEntry type="library" exported="" name="library-2.4.0" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="runner-0.4.1" level="project" />
     <orderEntry type="library" exported="" name="jcip-annotations-1.0" level="project" />
     <orderEntry type="library" exported="" name="httpclientandroidlib-1.1.2" level="project" />
     <orderEntry type="library" exported="" name="rxandroid-0.25.0" level="project" />
@@ -137,13 +142,14 @@
     <orderEntry type="library" exported="" name="jackson-databind-2.6.3" level="project" />
     <orderEntry type="library" exported="" name="appcompat-v7-20.0.0" level="project" />
     <orderEntry type="library" exported="" name="androidannotations-api-3.3.2" level="project" />
-    <orderEntry type="library" exported="" name="play-services-maps-8.3.0" level="project" />
     <orderEntry type="library" exported="" name="play-services-basement-8.3.0" level="project" />
+    <orderEntry type="library" exported="" name="play-services-maps-8.3.0" level="project" />
     <orderEntry type="library" exported="" name="library-1.3" level="project" />
-    <orderEntry type="library" exported="" scope="TEST" name="assertj-core-2.2.0" level="project" />
     <orderEntry type="library" exported="" name="rxjava-1.0.16" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="hamcrest-core-1.3" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="exposed-instrumentation-api-publish-0.4.1" level="project" />
     <orderEntry type="library" exported="" name="org.eclipse.jdt.annotation-1.1.0" level="project" />
-    <orderEntry type="library" exported="" scope="TEST" name="android-junit-report-1.5.8" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="junit-4.12" level="project" />
     <orderEntry type="module" module-name="mapswithme-api" exported="" />
     <orderEntry type="module" module-name="showcaseview" exported="" />
   </component>
