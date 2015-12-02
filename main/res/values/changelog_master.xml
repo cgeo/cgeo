@@ -13,6 +13,7 @@
     · Fix: Update found status in list after one-click-offline-log\n
     · New: Show names of contacts if more than one match found\n
     · New: Suggest to remove list if empty\n
+    · Removed: Swaggie trackables support has been removed as they are deprecated\n
     \n
     \n
   </string>
