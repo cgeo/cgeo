@@ -315,7 +315,7 @@ android.applicationVariants.all { variant ->
                 def launchClass = "${variant.applicationId}/${classpath}.MainActivity"
                 try {
                     project.exec {
-                        executable = 'adb'
+                        executable = project.android.getAdbExe().toString()
                         args = ['shell', 'am', 'start', '-n', launchClass]
                     }
                 }
