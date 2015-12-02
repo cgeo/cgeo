@@ -796,7 +796,7 @@
   <string name="gpx_import_android">Importēt no Android</string>
   <string name="map_file_select_title">Atlasiet kartes (map) failu</string>
   <string name="web_import_title">Importēt no send2cgeo</string>
-  <string name="web_import_waiting">Gaida jaunus slēpņus no send2cgeo...</string>
+  <string name="web_import_waiting">Gaida jaunus slēpņus no send2cgeo…</string>
   <string name="web_downloading">Lejupielādē</string>
   <string name="web_downloaded">Lejupielādēts</string>
   <string name="popup_more">Vairāk informācijas</string>
@@ -920,7 +920,6 @@
   <string name="trackable_not_activated">Ceļotājs nav aktivizēts</string>
   <string name="trackable_travelbug">Ceļotājs</string>
   <string name="trackable_geokrety">GeoKrety</string>
-  <string name="trackable_swaggie">Swaggie</string>
   <string name="geokret_type_traditional">Tradicionālais</string>
   <string name="geokret_type_book_or_media">Grāmata vai elektronisks līdzeklis</string>
   <string name="geokret_type_human">Cilvēks</string>
@@ -1139,7 +1138,7 @@
   <string name="attribute_inside_no">Nav iekštelpās</string>
   <string name="attribute_in_water_yes">Ūdenī</string>
   <string name="attribute_in_water_no">Nav ūdenī</string>
-  <string name="attribute_no_gps_yes">Bez GPS (letterbox tipa slēpņi, kompasa izmantošana un tml ...)</string>
+  <string name="attribute_no_gps_yes">Bez GPS (letterbox tipa slēpņi, kompasa izmantošana un tml …)</string>
   <string name="attribute_no_gps_no">Ar GPS</string>
   <string name="attribute_overnight_yes">Nepieciešams nakšņot</string>
   <string name="attribute_overnight_no">Nav nepieciešams nakšņot</string>
