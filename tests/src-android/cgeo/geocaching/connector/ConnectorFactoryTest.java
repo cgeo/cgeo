@@ -31,7 +31,6 @@ public class ConnectorFactoryTest extends AbstractResourceInstrumentationTestCas
         assertThat(ConnectorFactory.getConnector("OC12345")).isInstanceOf(OCConnector.class); // opencaching DE
         assertThat(ConnectorFactory.getConnector("OU12345")).isInstanceOf(OCConnector.class); // opencaching US
         assertThat(ConnectorFactory.getConnector("OK12345")).isInstanceOf(OCConnector.class); // opencaching UK
-        assertThat(ConnectorFactory.getConnector("OJ12345")).isInstanceOf(OCConnector.class); // opencaching JP
         assertThat(ConnectorFactory.getConnector("OS12345")).isInstanceOf(OCConnector.class); // opencaching NO
         assertThat(ConnectorFactory.getConnector("OB12345")).isInstanceOf(OCConnector.class); // opencaching NL
         assertThat(ConnectorFactory.getConnector("OP12345")).isInstanceOf(OCConnector.class); // opencaching PL
