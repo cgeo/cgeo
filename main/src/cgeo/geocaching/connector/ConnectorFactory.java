@@ -20,7 +20,6 @@ import cgeo.geocaching.connector.oc.OCCZConnector;
 import cgeo.geocaching.connector.oc.OCConnector;
 import cgeo.geocaching.connector.tc.TerraCachingConnector;
 import cgeo.geocaching.connector.trackable.GeokretyConnector;
-import cgeo.geocaching.connector.trackable.SwaggieConnector;
 import cgeo.geocaching.connector.trackable.TrackableConnector;
 import cgeo.geocaching.connector.trackable.TravelBugConnector;
 import cgeo.geocaching.connector.trackable.UnknownTrackableConnector;
@@ -78,7 +77,6 @@ public final class ConnectorFactory {
     @NonNull
     private static final Collection<TrackableConnector> TRACKABLE_CONNECTORS = Collections.unmodifiableCollection(Arrays.<TrackableConnector> asList(
             new GeokretyConnector(),
-            new SwaggieConnector(),
             TravelBugConnector.getInstance(), // travel bugs last, as their secret codes overlap with other connectors
             UNKNOWN_TRACKABLE_CONNECTOR // must be last
     ));

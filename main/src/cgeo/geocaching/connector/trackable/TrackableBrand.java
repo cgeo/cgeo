@@ -8,7 +8,6 @@ import org.eclipse.jdt.annotation.NonNull;
 public enum TrackableBrand {
     TRAVELBUG(1, R.drawable.trackable_travelbug, R.string.trackable_travelbug),
     GEOKRETY(2, R.drawable.trackable_geokrety, R.string.trackable_geokrety),
-    SWAGGIE(3, R.drawable.trackable_swaggie, R.string.trackable_swaggie),
     UNKNOWN(0, R.drawable.trackable_all, R.string.trackable_unknown); // Trackable not initialized yet
 
     private final int id;
