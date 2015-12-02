@@ -442,7 +442,6 @@ public class GeocacheTest extends CGeoTestCase {
         assertThat(cache.getInventoryItems()).isEqualTo(4);
 
         final EnumSet<TrackableBrand> processedBrands = EnumSet.noneOf(TrackableBrand.class);
-        processedBrands.add(TrackableBrand.SWAGGIE);
         processedBrands.add(TrackableBrand.GEOKRETY);
         // This brand must be cleared from result as it don't appear in "inventory2"
         processedBrands.add(TrackableBrand.TRAVELBUG);
@@ -455,7 +454,7 @@ public class GeocacheTest extends CGeoTestCase {
         trackable5.setGeocode("SW1234");
         trackable5.setName("SW 1234");
         trackable5.setDistance(100F);
-        trackable5.forceSetBrand(TrackableBrand.SWAGGIE);
+        trackable5.forceSetBrand(TrackableBrand.UNKNOWN);
         inventory2.add(trackable5);
 
         // TB updater
@@ -484,7 +483,7 @@ public class GeocacheTest extends CGeoTestCase {
         assertThat(cache.getInventory().get(0).getName()).isEqualTo("SW 1234");
         assertThat(cache.getInventory().get(0).getDistance()).isEqualTo(100F);
         assertThat(cache.getInventory().get(0).getOwner()).isNull();
-        assertThat(cache.getInventory().get(0).getBrand()).isEqualTo(TrackableBrand.SWAGGIE);
+        assertThat(cache.getInventory().get(0).getBrand()).isEqualTo(TrackableBrand.UNKNOWN);
 
         assertThat(cache.getInventory().get(1)).isEqualTo(trackable2);
         assertThat(cache.getInventory().get(1).getGeocode()).isEqualTo("GK1234");
