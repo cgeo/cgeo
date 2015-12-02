@@ -313,9 +313,14 @@ android.applicationVariants.all { variant ->
                     classpath -= "${variant.buildType.applicationIdSuffix}"
                 }
                 def launchClass = "${variant.applicationId}/${classpath}.MainActivity"
-                project.exec {
-                    executable = 'adb'
-                    args = ['shell', 'am', 'start', '-n', launchClass]
+                try {
+                    project.exec {
+                        executable = 'adb'
+                        args = ['shell', 'am', 'start', '-n', launchClass]
+                    }
+                }
+                catch (RuntimeException e) {
+                    throw new IllegalStateException("Cannot execute 'adb'. Please add %ANDROID_HOME%\\platform-tools to the PATH environment variable and restart your IDE", e)
                 }
             }
         }
