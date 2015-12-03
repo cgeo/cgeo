@@ -639,6 +639,18 @@
   <string name="cache_offline_time_about"> </string>
   <string name="cache_offline_time_mins">perccel ezelőtt</string>
   <string name="cache_offline_time_mins_few">néhány perccel ezelőtt</string>
+  <plurals name="cache_offline_about_time_mins">
+    <item quantity="one">%d perccel ezelőtt</item>
+    <item quantity="other">%d perccel ezelőtt</item>
+  </plurals>
+  <plurals name="cache_offline_about_time_hours">
+    <item quantity="one">%d órával ezelőtt</item>
+    <item quantity="other">%d órával ezelőtt</item>
+  </plurals>
+  <plurals name="cache_offline_about_time_days">
+    <item quantity="one">%d nappal ezelőtt</item>
+    <item quantity="other">%d nappal ezelőtt</item>
+  </plurals>
   <string name="cache_offline_time_hour">egy órával ezelőtt</string>
   <string name="cache_offline_time_hours">órával ezelőtt</string>
   <string name="cache_offline_time_days">nappal ezelőtt</string>
@@ -659,7 +671,9 @@
   <string name="cache_description_long">Hosszú leírás</string>
   <string name="cache_description_table_note">A leírás táblázatot is tartalmaz. Lehetséges, hogy csak a %s jeleníti meg azt helyesen.</string>
   <string name="cache_watchlist_on">Ez a láda a figyelőlistádon van.</string>
+  <string name="cache_watchlist_on_extra">Ez a láda a figyelőlistádon van (figyelők: %1d).</string>
   <string name="cache_watchlist_not_on">Ez a láda nincs a figyelőlistádon.</string>
+  <string name="cache_watchlist_not_on_extra">Ez a láda nincs a figyelőlistádon (figyelők: %1d).</string>
   <string name="cache_watchlist_add">Hozzáadás</string>
   <string name="cache_watchlist_remove">Eltávolítás</string>
   <string name="cache_favpoint_on">Ez a láda a kedvenceid egyike.</string>
@@ -791,6 +805,7 @@
   <string name="gpx_import_loading_waypoints">Útpontfájl betöltése</string>
   <string name="gpx_import_store_static_maps">Statikus térképek mentése</string>
   <string name="gpx_import_caches_imported">láda importálva</string>
+  <string name="gpx_import_caches_imported_with_filename">%1$d láda importálva %2$s fájlból</string>
   <string name="gpx_import_static_maps_skipped">A statikus térképek letöltése megszakítva.</string>
   <string name="gpx_import_title_static_maps">Statikus térképek mentése</string>
   <string name="gpx_import_title_reading_file">Fájl olvasása</string>
@@ -801,6 +816,7 @@
   <string name="gpx_import_error_parser">Rossz fájlformátum</string>
   <string name="gpx_import_error_unexpected">Váratlan hiba</string>
   <string name="gpx_import_canceled">A GPX importálás megszakítva</string>
+  <string name="gpx_import_canceled_with_filename">Importálás %1$s fájlból megszakítva</string>
   <string name="gpx_import_delete_title">Fájl törlése</string>
   <string name="gpx_import_delete_message">Szeretnéd törölni ezt: %s?</string>
   <string name="gpx_import_select_list_title">Ládalista betöltése GPX-ből</string>
@@ -956,6 +972,8 @@
   <string name="helper_calendar_title">c:geo naptár add-on</string>
   <string name="helper_calendar_missing">c:geo naptár add-on nincs telepítve.</string>
   <string name="helper_calendar_description">Események exportálása a készüléked naptárába.</string>
+  <string name="helper_calendar_pastevent_title">Múltbéli esemény</string>
+  <string name="helper_calendar_pastevent_question">Az esemény időpontja már elmúlt. Mégis hozzáadod?</string>
   <string name="helper_sendtocgeo_title">Send2cgeo</string>
   <string name="helper_contacts_title">c:geo kapcsolatok add-on</string>
   <string name="helper_contacts_description">Lehetővé teszi egy névjegy közvetlen megnyitását a log bejegyzésekből, így könnyebben segítséget tudsz kérni.</string>
