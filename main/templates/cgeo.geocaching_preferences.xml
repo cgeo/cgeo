@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8' standalone='yes' ?>
+<!-- copy this file into the main directory, and insert your geocaching.com user and password. -->
+<map>
+    <string name="username">username</string>
+    <string name="password">password</string>
+    <int name="settingsversion" value="2" />
+</map>

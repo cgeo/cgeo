@@ -376,9 +376,26 @@ task verifyPrivateProperties << {
     }
 }
 
-// only verify the existence of private.properties, when the file is really needed
+// copy preferences containing user and password to the device
+task copyDefaultPreferencesToAndroid(dependsOn: 'installDebug') {
+    doFirst {
+        def preferences = file('cgeo.geocaching_preferences.xml')
+        if (preferences.exists()) {
+            project.exec {
+                executable = project.android.getAdbExe().toString()
+                args = ['push', 'cgeo.geocaching_preferences.xml', '/data/data/cgeo.geocaching/shared_prefs/cgeo.geocaching_preferences.xml']
+            }
+        }
+    }
+}
+
 tasks.whenTaskAdded { theTask ->
+    // only verify the existence of private.properties, when the file is really needed
     if (theTask.name.equals("packageRelease")) {
         theTask.dependsOn "verifyPrivateProperties"
+    }
+    // copy default preferences before starting the app
+    if (theTask.name.equals("runDebug") || theTask.name.equals("connectedDebugAndroidTest")) {
+        theTask.dependsOn "copyDefaultPreferencesToAndroid"
     }
 }
