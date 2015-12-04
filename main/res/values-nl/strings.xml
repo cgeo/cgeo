@@ -332,6 +332,7 @@
   <string name="caches_filter_personal_data">Met persoonlijke gegevens</string>
   <string name="caches_filter_rating">Met rating</string>
   <string name="caches_filter_own_rating">Met eigen rating</string>
+  <string name="caches_filter_multi_listing">Meerdere listings met verschillende status</string>
   <string name="caches_removing_from_history">Verwijderen uit geschiedenis…</string>
   <string name="caches_clear_offlinelogs">Verwijderen offline logs</string>
   <string name="caches_clear_offlinelogs_message">Wil je de offline logs wissen?</string>
@@ -349,6 +350,7 @@
   <string name="list_dialog_create_err">c:geo kon geen nieuwe lijst aanmaken</string>
   <string name="list_dialog_remove_title">Verwijder lijst</string>
   <string name="list_dialog_remove_description">Wil je de huidige lijst van caches verwijderen? Alle overgebleven caches zullen worden verplaatst naar \"Opgeslagen\".</string>
+  <string name="list_dialog_remove_nowempty">Lijst is leeg. Wilt je de huidige lijst verwijderen?</string>
   <string name="list_dialog_remove">Verwijder</string>
   <string name="list_dialog_remove_ok">Lijst is verwijderd</string>
   <string name="list_dialog_remove_err">c:geo kon de huidige lijst niet verwijderen</string>
@@ -637,6 +639,18 @@
   <string name="cache_offline_time_about">ongeveer</string>
   <string name="cache_offline_time_mins">minuten geleden</string>
   <string name="cache_offline_time_mins_few">paar minuten geleden</string>
+  <plurals name="cache_offline_about_time_mins">
+    <item quantity="one">ongeveer %d minuut geleden</item>
+    <item quantity="other">ongeveer %d minuten geleden</item>
+  </plurals>
+  <plurals name="cache_offline_about_time_hours">
+    <item quantity="one">ongeveer %d uur geleden</item>
+    <item quantity="other">ongeveer %d uren geleden</item>
+  </plurals>
+  <plurals name="cache_offline_about_time_days">
+    <item quantity="one">over %d dag geleden</item>
+    <item quantity="other">over %d dagen geleden</item>
+  </plurals>
   <string name="cache_offline_time_hour">een uur geleden</string>
   <string name="cache_offline_time_hours">uren geleden</string>
   <string name="cache_offline_time_days">dagen geleden</string>
@@ -657,7 +671,9 @@
   <string name="cache_description_long">Lange omschrijving</string>
   <string name="cache_description_table_note">Omschrijving bevat een tabel-layout welke misschien op %s bekeken moet worden.</string>
   <string name="cache_watchlist_on">Deze cache komt voor op je watchlist.</string>
+  <string name="cache_watchlist_on_extra">Deze cache staat op jouw volglijst (Watchers: %1d).</string>
   <string name="cache_watchlist_not_on">Deze cache komt niet voor op je watchlist.</string>
+  <string name="cache_watchlist_not_on_extra">Deze cache staat niet op jouw watchlist (Volgers: %1d).</string>
   <string name="cache_watchlist_add">Voeg aan watchlist toe</string>
   <string name="cache_watchlist_remove">Verwijder van watchlist</string>
   <string name="cache_favpoint_on">Deze cache staat op jouw favorieten-lijst.</string>
@@ -789,6 +805,7 @@
   <string name="gpx_import_loading_waypoints">Waypoints laden van .gpx bestand</string>
   <string name="gpx_import_store_static_maps">Opslaan statische kaarten</string>
   <string name="gpx_import_caches_imported">Caches geïmporteerd</string>
+  <string name="gpx_import_caches_imported_with_filename">%1$d caches geïmporteerd uit %2$s</string>
   <string name="gpx_import_static_maps_skipped">Downloaden van statische kaarten afgebroken</string>
   <string name="gpx_import_title_static_maps">Sla statische kaarten op</string>
   <string name="gpx_import_title_reading_file">Bestand lezen</string>
@@ -799,6 +816,7 @@
   <string name="gpx_import_error_parser">Bestandsformaat onjuist</string>
   <string name="gpx_import_error_unexpected">Onverwachte fout</string>
   <string name="gpx_import_canceled">GPX import is afgebroken</string>
+  <string name="gpx_import_canceled_with_filename">GPX-import van %1$s werd geannuleerd</string>
   <string name="gpx_import_delete_title">Verwijder bestand</string>
   <string name="gpx_import_delete_message">Weet je zeker dat je %s wil verwijderen?</string>
   <string name="gpx_import_select_list_title">Importeer GPX naar lijst</string>
@@ -954,6 +972,8 @@
   <string name="helper_calendar_title">c:geo kalender add-on</string>
   <string name="helper_calendar_missing">c:geo kalender add-on niet geïnstalleerd.</string>
   <string name="helper_calendar_description">Maakt het mogelijk om Geocaching events in je kalender op te slaan.</string>
+  <string name="helper_calendar_pastevent_title">Event in het verleden</string>
+  <string name="helper_calendar_pastevent_question">De Eventdatum is in het verleden. Toch toevoegen?</string>
   <string name="helper_sendtocgeo_title">Verzend naar c:geo</string>
   <string name="helper_contacts_title">c:geo contacten-plug-in</string>
   <string name="helper_contacts_description">Maakt het mogelijk een contactpersoon (uit je adresboek) te openen rechtstreeks vanuit een log, zodat je vrienden makkelijker om hulp kunt vragen.</string>
@@ -1314,4 +1334,5 @@
   </plurals>
   <string name="command_rename_list_result">Lijst hernoemd</string>
   <string name="command_delete_list_result">Lijst verwijderd</string>
+  <string name="fav_points_remaining">"Deze cache toevoegen aan favorieten (%s resterend)"</string>
 </resources>
