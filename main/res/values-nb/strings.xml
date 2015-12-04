@@ -332,6 +332,7 @@
   <string name="caches_filter_personal_data">Med personlige data</string>
   <string name="caches_filter_rating">Med vurdering</string>
   <string name="caches_filter_own_rating">Med egen vurdering</string>
+  <string name="caches_filter_multi_listing">Oppført på flere sider, men ikke logget på alle</string>
   <string name="caches_removing_from_history">Fjerner fra historikken…</string>
   <string name="caches_clear_offlinelogs">Fjern offline-logger</string>
   <string name="caches_clear_offlinelogs_message">Vil du fjerne offline-loggene?</string>
@@ -349,6 +350,7 @@
   <string name="list_dialog_create_err">c:geo kunne ikke opprette ny liste</string>
   <string name="list_dialog_remove_title">Fjern liste</string>
   <string name="list_dialog_remove_description">Vil du slette den gjeldende listen? Alle gjenværende cacher i listen blir flyttet til \"Lagret\".</string>
+  <string name="list_dialog_remove_nowempty">Listen er tom. Vil du slette denne listen?</string>
   <string name="list_dialog_remove">Fjern</string>
   <string name="list_dialog_remove_ok">Listen ble slettet</string>
   <string name="list_dialog_remove_err">c:geo mislykte å fjerne gjeldende liste</string>
@@ -374,6 +376,7 @@
   <string name="settings_title_cachedetails">Cache-detaljer</string>
   <string name="settings_summary_cachedetails">Tilpass visningen av cacheinformasjon. </string>
   <string name="settings_title_offlinedata">Offline-data</string>
+  <string name="settings_summary_offlinedata">Endre lagringssted for statiske kart og andre offline-data.</string>
   <string name="settings_title_logging">Logging</string>
   <string name="settings_summary_logging">Endre signatur og loggingsalternativer.</string>
   <string name="settings_title_map">Vis på kartet</string>
@@ -631,6 +634,18 @@
   <string name="cache_offline_time_about">omtrent</string>
   <string name="cache_offline_time_mins">minutter siden</string>
   <string name="cache_offline_time_mins_few">en liten stund siden</string>
+  <plurals name="cache_offline_about_time_mins">
+    <item quantity="one">for ca %d minutt siden</item>
+    <item quantity="other">for ca %d minutter siden</item>
+  </plurals>
+  <plurals name="cache_offline_about_time_hours">
+    <item quantity="one">for ca %d time siden</item>
+    <item quantity="other">for ca %d timer siden</item>
+  </plurals>
+  <plurals name="cache_offline_about_time_days">
+    <item quantity="one">for ca %d dag siden</item>
+    <item quantity="other">for ca %d dager siden</item>
+  </plurals>
   <string name="cache_offline_time_hour">én time siden</string>
   <string name="cache_offline_time_hours">timer siden</string>
   <string name="cache_offline_time_days">dager siden</string>
@@ -651,7 +666,9 @@
   <string name="cache_description_long">Full beskrivelse</string>
   <string name="cache_description_table_note">Beskrivelsen inneholder tabellformatering og må åpnes på %s for å vises riktig.</string>
   <string name="cache_watchlist_on">Denne cachen er på din overvåkningsliste.</string>
+  <string name="cache_watchlist_on_extra">Cachen er på din overvåkningsliste (Overvåkere: %1d).</string>
   <string name="cache_watchlist_not_on">Denne cachen er ikke på din overvåkningsliste.</string>
+  <string name="cache_watchlist_not_on_extra">Cachen er ikke på din overvåkningsliste (Overvåkere: %1d).</string>
   <string name="cache_watchlist_add">Legg til overvåkningsliste</string>
   <string name="cache_watchlist_remove">Fjern fra overvåkningsliste</string>
   <string name="cache_favpoint_on">Denne cachen er en av dine favoritter.</string>
@@ -698,6 +715,7 @@
   <string name="cache_menu_navigate">Navigér</string>
   <string name="cache_menu_navigation_drive">Navigasjon (kjøring)</string>
   <string name="cache_menu_navigation_walk">Navigasjon (gående)</string>
+  <string name="cache_menu_navigation_transit">Navigasjon (Transit)</string>
   <string name="cache_menu_navigation_bike">Navigasjon (sykkel)</string>
   <string name="cache_menu_maps_directions">Google Maps-veibeskrivelse</string>
   <string name="cache_menu_sygic_walk">Sygic (Gå)</string>
@@ -780,6 +798,7 @@
   <string name="gpx_import_loading_waypoints">Laster veipunktfil</string>
   <string name="gpx_import_store_static_maps">Lagrer statisk kart</string>
   <string name="gpx_import_caches_imported">Cacher importert</string>
+  <string name="gpx_import_caches_imported_with_filename">%1$d cacher importert fra %2$s</string>
   <string name="gpx_import_static_maps_skipped">Nedlasting av statiske kart er avbrutt</string>
   <string name="gpx_import_title_static_maps">Lagre statiske kart</string>
   <string name="gpx_import_title_reading_file">Leser fil</string>
@@ -790,6 +809,7 @@
   <string name="gpx_import_error_parser">Ugyldig filformat</string>
   <string name="gpx_import_error_unexpected">Uventet feil</string>
   <string name="gpx_import_canceled">Importering av GPX ble avbrutt</string>
+  <string name="gpx_import_canceled_with_filename">GPX-importering fra %1$s ble avbrutt</string>
   <string name="gpx_import_delete_title">Slett fil</string>
   <string name="gpx_import_delete_message">Vil du slette %s?</string>
   <string name="gpx_import_select_list_title">Importer GPX til liste</string>
@@ -945,6 +965,8 @@
   <string name="helper_calendar_title">c:geo kalender-tillegg</string>
   <string name="helper_calendar_missing">Kalendertillegget i c:geo er ikke installert.</string>
   <string name="helper_calendar_description">Gjør det mulig å eksportere eventcacher til kalenderen på enheten din.</string>
+  <string name="helper_calendar_pastevent_title">Tidligere eventer</string>
+  <string name="helper_calendar_pastevent_question">Eventdatoen har allerede vært. Legge til likevel?</string>
   <string name="helper_sendtocgeo_title">Send til c:geo</string>
   <string name="helper_contacts_title">c:geo - kontakttillegg</string>
   <string name="helper_contacts_description">Gjør det mulig å åpne en kontakt (i telefonens adressebok) direkte fra en logg så du enklere kan be om hjelp fra dine venner.</string>
@@ -1289,6 +1311,7 @@
   <string name="trackable_title_log_without_geocode">Geokode ikke angitt</string>
   <string name="trackable_log_without_geocode">Du prøver å sende en logg uten en Geokode. Du oppfordres til å angi en. Vil du legge til en Geokode nå?</string>
   <string name="do_not_ask_me_again">Ikke spør meg igjen</string>
+  <string name="geokrety_parsing_failed">Kunne ikke analysere GeoKrety svar.</string>
   <string name="settings_map_direction">Vis retning</string>
   <string name="settings_summary_map_direction">Vis retning som en linje mot målet</string>
   <string name="map_direction">Vis retning</string>
@@ -1304,4 +1327,5 @@
   </plurals>
   <string name="command_rename_list_result">Endret listenavn</string>
   <string name="command_delete_list_result">Slettet listen</string>
+  <string name="fav_points_remaining">"Legg cachen til favoritter (%s igjen)"</string>
 </resources>
