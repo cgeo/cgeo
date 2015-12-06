@@ -178,8 +178,10 @@ apply plugin: 'android-apt'
 
 apt {
     arguments {
+        // AndroidAnnotations needs to know the manifest of the current flavor
         androidManifestFile variant.outputs[0]?.processResources?.manifestFile
-        // suppress verbose output of the AndroidAnnotations processor
+
+        // suppress verbose output of the AndroidAnnotations processor during build
         logLevel 'error'
     }
 }
@@ -247,9 +249,7 @@ dependencies {
 /*
  * AndroidAnnotations, https://github.com/excilys/androidannotations/wiki/building-project-gradle
  */
-    apt( 'org.androidannotations:androidannotations:3.3.2'){
-        exclude module:'androidannotations-api'
-    }
+    apt 'org.androidannotations:androidannotations:3.3.2'
     compile 'org.androidannotations:androidannotations-api:3.3.2'
 
 /*
