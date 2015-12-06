@@ -72,6 +72,20 @@
             android:textSize="14sp"
             android:textStyle="bold" />
 
+        <TextView
+            android:id="@+id/about_special_build"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginBottom="5dip"
+            android:layout_marginLeft="10dip"
+            android:layout_marginRight="10dip"
+            android:textColor="?text_color"
+            android:textIsSelectable="true"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:visibility="gone"/>
+
         <RelativeLayout style="@style/separator_horizontal_layout" >
 
             <View style="@style/separator_horizontal" />

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- this is the manifest of the NOJIT version. it is merged with the main manifest during build -->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <application
+        android:vmSafeMode="true">
+    </application>
+</manifest>

@@ -149,6 +149,26 @@ android {
         // httpclientandroidlib has some documentation image in the library
         exclude 'ch/boye/httpclientandroidlib/impl/conn/tsccm/doc-files/tsccm-structure.png'
     }
+
+    productFlavors {
+        // make sure to not have any flavour lexicographically smaller than "basic". Android Studio takes the first alphabetical flavor in new installations.
+        basic {
+            buildConfigField "String", "SPECIAL_BUILD", '""'
+        }
+
+        nojit {
+            buildConfigField "String", "SPECIAL_BUILD", '"Disabled JIT"'
+        }
+    }
+
+    // remove the "-basic" flavour name from the generated APK, have the flavor remain only for special builds
+    applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            output.outputFile = new File(
+                    output.outputFile.parent,
+                    output.outputFile.name.replace('-basic-', '-'))
+        }
+    }
 }
 
 /*
@@ -344,7 +364,7 @@ android.applicationVariants.all { variant ->
 }
 
 // run device and non device tests together with one task. also fixes the bug that gradle optimizes tests away in repeated runs
-tasks.create(name: "testDebug", dependsOn: [ "testDebugUnitTest", "connectedDebugAndroidTest" ]) {
+tasks.create(name: "testDebug", dependsOn: [ "testBasicDebugUnitTest", "connectedBasicDebugAndroidTest" ]) {
     group 'cgeo'
     description "Tests the debug build both with device-dependent and device-independent tests."
 }
@@ -377,7 +397,7 @@ task verifyPrivateProperties << {
 }
 
 // copy preferences containing user and password to the device
-task copyDefaultPreferencesToAndroid(dependsOn: 'installDebug') {
+task copyDefaultPreferencesToAndroid(dependsOn: 'installBasicDebug') {
     doFirst {
         def preferences = file('cgeo.geocaching_preferences.xml')
         if (preferences.exists()) {
@@ -395,7 +415,7 @@ tasks.whenTaskAdded { theTask ->
         theTask.dependsOn "verifyPrivateProperties"
     }
     // copy default preferences before starting the app
-    if (theTask.name.equals("runDebug") || theTask.name.equals("connectedDebugAndroidTest")) {
+    if (theTask.name.equals("runBasicDebug") || theTask.name.equals("connectedBasicDebugAndroidTest")) {
         theTask.dependsOn "copyDefaultPreferencesToAndroid"
     }
 }

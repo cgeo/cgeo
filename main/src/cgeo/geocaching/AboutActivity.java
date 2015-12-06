@@ -1,20 +1,5 @@
 package cgeo.geocaching;
 
-import cgeo.geocaching.activity.AbstractViewPagerActivity;
-import cgeo.geocaching.compatibility.Compatibility;
-import cgeo.geocaching.ui.AbstractCachingPageViewCreator;
-import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
-import cgeo.geocaching.utils.ClipboardUtils;
-import cgeo.geocaching.utils.ProcessUtils;
-import cgeo.geocaching.utils.SystemInformation;
-import cgeo.geocaching.utils.Version;
-
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.CharEncoding;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.apache.commons.lang3.tuple.Pair;
-
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -26,6 +11,12 @@ import android.widget.Button;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.CharEncoding;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
+
 import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;
@@ -33,6 +24,14 @@ import java.util.Scanner;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import cgeo.geocaching.activity.AbstractViewPagerActivity;
+import cgeo.geocaching.compatibility.Compatibility;
+import cgeo.geocaching.ui.AbstractCachingPageViewCreator;
+import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
+import cgeo.geocaching.utils.ClipboardUtils;
+import cgeo.geocaching.utils.ProcessUtils;
+import cgeo.geocaching.utils.SystemInformation;
+import cgeo.geocaching.utils.Version;
 
 public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page> {
 
@@ -171,6 +170,7 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
     class VersionViewCreator extends AbstractCachingPageViewCreator<ScrollView> {
 
         @Bind(R.id.about_version_string) protected TextView version;
+        @Bind(R.id.about_special_build) protected TextView specialBuild;
         @Bind(R.id.donate) protected TextView donateButton;
 
         @Override
@@ -179,6 +179,10 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
             ButterKnife.bind(this, view);
             version.setText(Version.getVersionName(AboutActivity.this));
             setClickListener(donateButton, "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=AQBS7UP76CXW2");
+            if (StringUtils.isNotEmpty(BuildConfig.SPECIAL_BUILD)) {
+                specialBuild.setText(BuildConfig.SPECIAL_BUILD);
+                specialBuild.setVisibility(View.VISIBLE);
+            }
             return view;
         }
     }
