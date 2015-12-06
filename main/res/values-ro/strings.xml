@@ -335,6 +335,7 @@
   <string name="caches_filter_personal_data">Cu date personalizate</string>
   <string name="caches_filter_rating">Cu voturi</string>
   <string name="caches_filter_own_rating">Cu votul tău</string>
+  <string name="caches_filter_multi_listing">Afişare multiplă cu statut diferit</string>
   <string name="caches_removing_from_history">Şterge din istoric…</string>
   <string name="caches_clear_offlinelogs">Şterge însemnări stocate local</string>
   <string name="caches_clear_offlinelogs_message">Vrei să ştergi însemnările stocate local?</string>
@@ -352,6 +353,7 @@
   <string name="list_dialog_create_err">c:geo nu a putut crea lista</string>
   <string name="list_dialog_remove_title">Şterge listă</string>
   <string name="list_dialog_remove_description">Vrei să ştergi lista curentă? Toate cutiile din listă vor fi mutate în lista \"Salvate\".</string>
+  <string name="list_dialog_remove_nowempty">Lista este goală. Vrei să o ştergi?</string>
   <string name="list_dialog_remove">Şterge</string>
   <string name="list_dialog_remove_ok">Lista a fost ştearsă</string>
   <string name="list_dialog_remove_err">c:geo nu a putut şterge lista curentă</string>
@@ -641,6 +643,21 @@
   <string name="cache_offline_time_about">despre</string>
   <string name="cache_offline_time_mins">minute în urmă</string>
   <string name="cache_offline_time_mins_few">câteva minute în urmă</string>
+  <plurals name="cache_offline_about_time_mins">
+    <item quantity="one">acum un minut</item>
+    <item quantity="few">acum %d minute</item>
+    <item quantity="other">acum %d minute</item>
+  </plurals>
+  <plurals name="cache_offline_about_time_hours">
+    <item quantity="one">acum o oră</item>
+    <item quantity="few">acum %d ore</item>
+    <item quantity="other">acum %d ore</item>
+  </plurals>
+  <plurals name="cache_offline_about_time_days">
+    <item quantity="one">acum o zi</item>
+    <item quantity="few">acum %d zile</item>
+    <item quantity="other">acum %d zile</item>
+  </plurals>
   <string name="cache_offline_time_hour">o oră în urmă</string>
   <string name="cache_offline_time_hours">ore în urmă</string>
   <string name="cache_offline_time_days">zile în urmă</string>
@@ -661,7 +678,9 @@
   <string name="cache_description_long">Descriere completă</string>
   <string name="cache_description_table_note">Descrierea conţine tabele sau formatări care ar trebui vizualizate aici %s pentru a fi afişate corect.</string>
   <string name="cache_watchlist_on">Aceasta cutie se află în lista ta de cutii urmărite.</string>
+  <string name="cache_watchlist_on_extra">Urmăreşti acestă geocutie (urmărită de %1d).</string>
   <string name="cache_watchlist_not_on">Această cutie nu se află în lista ta de cutii urmărite.</string>
+  <string name="cache_watchlist_not_on_extra">Nu urmăreşti acestă geocutie (urmărită de %1d).</string>
   <string name="cache_watchlist_add">Adaugă în lista de cutii urmărite</string>
   <string name="cache_watchlist_remove">Şterge din lista de cutii urmărite</string>
   <string name="cache_favpoint_on">Această cutie e una din favoritele tale.</string>
@@ -794,6 +813,7 @@
   <string name="gpx_import_loading_waypoints">Încărcare fişier cu puncte</string>
   <string name="gpx_import_store_static_maps">Salvare hărţi statice</string>
   <string name="gpx_import_caches_imported">cutii importate</string>
+  <string name="gpx_import_caches_imported_with_filename">%1$d geocutii importate din %2$s</string>
   <string name="gpx_import_static_maps_skipped">Descărcarea hărţilor statice a fost anulată</string>
   <string name="gpx_import_title_static_maps">Salvează hărţile statice</string>
   <string name="gpx_import_title_reading_file">Citire fişier</string>
@@ -804,6 +824,7 @@
   <string name="gpx_import_error_parser">Fişier defect sau format greşit</string>
   <string name="gpx_import_error_unexpected">Eroare neașteptată</string>
   <string name="gpx_import_canceled">Importul de fişier GPX a fost anulat</string>
+  <string name="gpx_import_canceled_with_filename">A fost anulat importul GPX din %1$s</string>
   <string name="gpx_import_delete_title">Şterge fişier</string>
   <string name="gpx_import_delete_message">Vrei să ştergi fişierul %s?</string>
   <string name="gpx_import_select_list_title">Importă GPX în listă</string>
@@ -959,12 +980,15 @@
   <string name="helper_calendar_title">Extensia c:geo calendar</string>
   <string name="helper_calendar_missing">Extensia \"c:geo - calendar\" nu este instalată.</string>
   <string name="helper_calendar_description">Permite exportul evenimentelor către aplicaţia calendar a dispozitivului.</string>
+  <string name="helper_calendar_pastevent_title">Eveniment trecut</string>
+  <string name="helper_calendar_pastevent_question">Data evenimentului este în trecut. Adaugă-l oricum?</string>
   <string name="helper_sendtocgeo_title">Trimite la c:geo</string>
   <string name="helper_contacts_title">c:geo - contacte (extensie)</string>
   <string name="helper_contacts_description">Permite să afişezi contacte (din agenda de contacte) direct din formularul pentru însemnări, astfel încţt să ăti poţi întreba mai uşor prietenii.</string>
   <string name="helper_sendtocgeo_description">Send to c:geo este o extensie pentru browser-ul <strong>de pe PC</strong>. Când vizitezi geocaching.com, poţi trimite geocutii direct către dispozitivul tău apăsând un simplu buton.</string>
   <string name="helper_locus_title">Locus</string>
   <string name="helper_locus_description">Aplicaţie de navigare pentru telefon sau tabletă. Vezi hărţi salvate, urmăreşte-ţi traseul, caută geocutii, foloseşte ghidare vocală şi multe altele.</string>
+  <string name="helper_gpsstatus_title">GPS Status &amp; Toolbox</string>
   <string name="helper_gpsstatus_description">Poţi folosi ecranul Radar din această aplicaţie împreună cu c:geo. Oferă şi multe alte informaţii legate de GPS.</string>
   <string name="helper_bluetoothgps_title">GPS prin Bluetooth</string>
   <string name="helper_bluetoothgps_description">Permite utilizarea unui GPS extern pentru informaţii de poziţie mai precise, totodată conservă din autonomia bateriei dispozitivului tău.</string>
@@ -1309,6 +1333,7 @@
   <string name="trackable_title_log_without_geocode">Lipseşte geocodul</string>
   <string name="trackable_log_without_geocode">Eşti pe cale să trimiţi o însemnare fără Geocod. Te încurajăm să setezi unul. Vrei să adaugi acum?</string>
   <string name="do_not_ask_me_again">Nu mă mai întreba</string>
+  <string name="geokrety_parsing_failed">Răspunsul primit de la GeoKrety nu a putut fi interpretat.</string>
   <string name="settings_map_direction">Arată direcţia</string>
   <string name="settings_summary_map_direction">Arată o linie directă până la destinaţie</string>
   <string name="map_direction">Arată direcţia</string>
@@ -1326,4 +1351,5 @@
   </plurals>
   <string name="command_rename_list_result">Lista a fost redenumită</string>
   <string name="command_delete_list_result">Lista a fost ştearsă</string>
+  <string name="fav_points_remaining">"Adaugă această geocutie la favorite (au mai rămas %s)"</string>
 </resources>
