@@ -10,10 +10,13 @@
     · New: Parse GPX files of Geocaching.su\n
     · New: Filter for multi platform listings with different found state\n
     · New: Show amount of people having a cache on their watchlist\n
+    · New: Russian translation\n
     · Fix: Update found status in list after one-click-offline-log\n
     · New: Show names of contacts if more than one match found\n
     · New: Suggest to remove list if empty\n
     · Removed: Swaggie trackables support has been removed as they are deprecated\n
+    · Fix: Avoid crash when loading caches from different sources\n
+    · Fix: Allow to add past events\n
     \n
     \n
   </string>
