@@ -1,3 +1,5 @@
+import org.apache.tools.ant.filters.ReplaceTokens
+
 /*
  * Run "gradlew" or "gradlew cgeoHelp" in the parent directory for a help of how to use this build file.
  */
@@ -287,7 +289,7 @@ task verifyCgeoKeys {
                     propertiesFile.withInputStream {
                         properties.load(it);
                     }
-                    filter(org.apache.tools.ant.filters.ReplaceTokens, tokens: properties)
+                    filter(ReplaceTokens, tokens: properties)
                 }
             }
         }
