@@ -29,7 +29,6 @@
     </item>
     <item
         android:id="@+id/menu_select_destination"
-        android:actionProviderClass="cgeo.geocaching.ui.WaypointSelectionActionProvider"
         android:icon="@drawable/ic_menu_myplaces"
         android:orderInCategory="999"
         android:title="@string/destination_select"

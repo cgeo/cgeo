@@ -16,7 +16,6 @@
     </item>
     <item
         android:id="@+id/menu_sort"
-        android:actionProviderClass="cgeo.geocaching.sorting.SortActionProvider"
         android:icon="@drawable/ic_menu_sort_alphabetically"
         android:showAsAction="always"
         android:title="@string/caches_sort"
@@ -61,7 +60,6 @@
     </item>
     <item
         android:id="@+id/menu_cache_list_app_provider"
-        android:actionProviderClass="cgeo.geocaching.apps.cachelist.ListNavigationSelectionActionProvider"
         android:icon="@drawable/ic_menu_goto"
         android:title="@string/caches_on_map"
         android:visible="false"
