@@ -811,7 +811,10 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     private void checkIfEmptyAndRemoveAfterConfirm() {
         final boolean isNonDefaultList = isConcreteList() && listId != StoredList.STANDARD_LIST_ID;
-        if (isNonDefaultList && CollectionUtils.isEmpty(cacheList)) {
+        // Check local cacheList first, and Datastore only if needed (because of filtered lists)
+        // Checking is done in this order for performance reasons
+        if (isNonDefaultList && CollectionUtils.isEmpty(cacheList)
+                && DataStore.getAllStoredCachesCount(CacheType.ALL, listId) == 0) {
             // ask user, if he wants to delete the now empty list
             Dialogs.confirmYesNo(this, R.string.list_dialog_remove_title, R.string.list_dialog_remove_nowempty, new DialogInterface.OnClickListener() {
                 @Override
