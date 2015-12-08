@@ -1,5 +1,7 @@
 package cgeo.geocaching.maps;
 
+import butterknife.ButterKnife;
+
 import cgeo.geocaching.CacheListActivity;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.CompassActivity;
@@ -49,8 +51,14 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import rx.Subscription;
+import rx.functions.Action0;
+import rx.functions.Action1;
+import rx.schedulers.Schedulers;
+import rx.subscriptions.Subscriptions;
 
 import android.annotation.TargetApi;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -89,13 +97,6 @@ import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
-
-import butterknife.ButterKnife;
-import rx.Subscription;
-import rx.functions.Action0;
-import rx.functions.Action1;
-import rx.schedulers.Schedulers;
-import rx.subscriptions.Subscriptions;
 
 /**
  * Class representing the Map in c:geo
@@ -319,13 +320,21 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
     }
 
     @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+    @NonNull
+    private ActionBar getActionBar() {
+        final ActionBar actionBar = activity.getActionBar();
+        assert actionBar != null;
+        return getActionBar();
+    }
+
+    @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     private void setTitleIceCreamSandwich(final String title) {
-        activity.getActionBar().setTitle(title);
+        getActionBar().setTitle(title);
     }
 
     @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     private void setSubtitleIceCreamSandwich(final String subtitle) {
-        activity.getActionBar().setSubtitle(subtitle);
+        getActionBar().setSubtitle(subtitle);
     }
 
     /** Updates the progress. */
@@ -432,7 +441,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         outState.putParcelableArrayList(BUNDLE_TRAIL_HISTORY, overlayPositionAndScale.getHistory());
     }
 
-    @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -490,7 +498,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         // set layout
         ActivityMixin.setTheme(activity);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
-            activity.getActionBar().setDisplayHomeAsUpEnabled(true);
+            getActionBar().setDisplayHomeAsUpEnabled(true);
         }
         activity.setContentView(mapProvider.getMapLayoutId());
         setTitle();
