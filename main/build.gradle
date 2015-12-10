@@ -218,9 +218,9 @@ dependencies {
     compile 'io.reactivex:rxandroid:0.25.0'
 
     // Jackson XML processing
-    compile 'com.fasterxml.jackson.core:jackson-core:2.6.3'
-    compile 'com.fasterxml.jackson.core:jackson-databind:2.6.3'
-    compile 'com.fasterxml.jackson.core:jackson-annotations:2.6.3'
+    compile 'com.fasterxml.jackson.core:jackson-core:2.6.4'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.6.4'
+    compile 'com.fasterxml.jackson.core:jackson-annotations:2.6.4'
 
     // Zxing barcode reader integration
     compile 'com.google.zxing:android-integration:3.2.1'
