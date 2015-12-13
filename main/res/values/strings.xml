@@ -1449,4 +1449,11 @@
     <string name="command_delete_list_result">Deleted list</string>
     <string name="fav_points_remaining">"Add this cache to favorites (%s remaining)"</string>
 
+    <!-- distance units -->
+    <string name="unit_m">m</string>
+    <string name="unit_km">km</string>
+    <string name="unit_ft">ft</string>
+    <string name="unit_yd">yd</string>
+    <string name="unit_mi">mi</string>
+
 </resources>
