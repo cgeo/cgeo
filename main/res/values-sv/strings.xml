@@ -1332,4 +1332,9 @@
   <string name="command_rename_list_result">Namn ändrat på lista</string>
   <string name="command_delete_list_result">Lista borttagen</string>
   <string name="fav_points_remaining">"Lägg till denna cache till dina favoriter (%s återstår)"</string>
+  <string name="unit_m">m</string>
+  <string name="unit_km">km</string>
+  <string name="unit_ft">ft</string>
+  <string name="unit_yd">yd</string>
+  <string name="unit_mi">mi</string>
 </resources>
