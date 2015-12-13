@@ -726,10 +726,13 @@ public class SettingsActivity extends PreferenceActivity {
                 preference.setSummary(stringValue);
             }
             // TODO: do not special case geocaching.com here
-            if ((isPreference(preference, R.string.pref_username) && !stringValue.equals(Settings.getUsername())) || (isPreference(preference, R.string.pref_password) && !stringValue.equals(Settings.getGcCredentials().getPasswordRaw()))) {
+            if ((isPreference(preference, R.string.pref_username) && !stringValue.equals(Settings.getUsername())) ||
+                    (isPreference(preference, R.string.pref_password) && !stringValue.equals(Settings.getGcCredentials().getPasswordRaw()))) {
                 // reset log-in if gc user or password is changed
                 CgeoApplication.getInstance().forceRelog();
-                preferenceManager.findPreference(getKey(R.string.pref_user_vote)).setSummary(stringValue);
+                if (isPreference(preference, R.string.pref_username)) {
+                    preferenceManager.findPreference(getKey(R.string.pref_user_vote)).setSummary(stringValue);
+                }
             }
             return true;
         }
