@@ -86,7 +86,7 @@ In Eclipse, create a Debug Configuration for an Android Application using the me
 
 ### Testing
 
-The Test classes can be found in the project/module called "test". Test classes should be located in the same package as the class under test.
+The test classes can be found in the project/module called "test". Test classes should be located in the same package as the class under test.
 Every class can be "Run As" (or "Debug As") an [Android JUnit Test](http://developer.android.com/guide/topics/testing/testing_android.html) from Eclipse.
 To run all tests use the same "Run As" menu item from the context menu of the test project.
 
