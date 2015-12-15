@@ -1335,4 +1335,9 @@
   <string name="command_rename_list_result">Átnevezett lista</string>
   <string name="command_delete_list_result">Törölt lista</string>
   <string name="fav_points_remaining">"Hozzáadás a kedvencekhez (%s pontod maradt)"</string>
+  <string name="unit_m">m</string>
+  <string name="unit_km">km</string>
+  <string name="unit_ft">ft</string>
+  <string name="unit_yd">yd</string>
+  <string name="unit_mi">mi</string>
 </resources>
