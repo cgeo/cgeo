@@ -261,7 +261,7 @@
   <string name="caches_more_caches_loading">Načítání keší…</string>
   <string name="caches_more_caches_currently">aktuálně</string>
   <string name="caches_downloading">Stahování keší…\nETA:</string>
-  <string name="caches_eta_ltm">Méně než minutu</string>
+  <string name="caches_eta_ltm">Méně než minuta</string>
   <plurals name="caches_eta_mins">
     <item quantity="one">%d minuta</item>
     <item quantity="few">%d minuty</item>
