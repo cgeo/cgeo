@@ -298,7 +298,7 @@
     <item quantity="one">¿Quieres eliminar este caché de la lista actual?</item>
     <item quantity="other">¿Quieres eliminar los %d cachés de la lista actual?</item>
   </plurals>
-  <string name="caches_remove_selected">Eliminar los seleccionados</string>
+  <string name="caches_remove_selected">Eliminar seleccionados</string>
   <plurals name="caches_remove_selected_confirm">
     <item quantity="one">¿Quieres eliminar este caché del dispositivo?</item>
     <item quantity="other">¿Quieres eliminar los %d cachés seleccionados del dispositivo?</item>
