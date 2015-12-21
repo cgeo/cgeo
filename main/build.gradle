@@ -204,7 +204,7 @@ dependencies {
     compile files('libs/mapsforge-map-0.3.0-jar-with-dependencies.jar')
 
     compile 'com.android.support:appcompat-v7:20.0.0'
-    compile 'com.google.android.gms:play-services-location:8.3.0'
+    compile 'com.google.android.gms:play-services-location:8.4.0'
 
     // Apache Commons
     compile 'org.apache.commons:commons-collections4:4.1'
