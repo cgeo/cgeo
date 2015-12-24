@@ -1282,4 +1282,9 @@
   </plurals>
   <string name="command_rename_list_result">Pervadinti sąrašą</string>
   <string name="command_delete_list_result">Sąrašas ištrintas</string>
+  <string name="unit_m">m</string>
+  <string name="unit_km">km</string>
+  <string name="unit_ft">pėdos</string>
+  <string name="unit_yd">jardai</string>
+  <string name="unit_mi">mylios</string>
 </resources>

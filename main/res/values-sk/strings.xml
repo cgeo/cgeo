@@ -353,6 +353,7 @@
   <string name="list_dialog_create_err">c:geo sa nepodarilo vytvoriť nový zoznam</string>
   <string name="list_dialog_remove_title">Odstrániť zoznam</string>
   <string name="list_dialog_remove_description">Chcete odstrániť aktuálny zoznam skrýš? Všetky skrýše, ktoré sa nachádzajú v zozname budú presunuté do „Uložené“.</string>
+  <string name="list_dialog_remove_nowempty">Zoznam je prázdny. Chcete odstrániť aktuálny zoznam?</string>
   <string name="list_dialog_remove">Odstrániť</string>
   <string name="list_dialog_remove_ok">Zoznam bol odstránený</string>
   <string name="list_dialog_remove_err">c:geo sa nepodarilo odstrániť aktuálny zoznam</string>
@@ -642,6 +643,21 @@
   <string name="cache_offline_time_about">približne pred</string>
   <string name="cache_offline_time_mins">minútami</string>
   <string name="cache_offline_time_mins_few">niekoľkými minútami</string>
+  <plurals name="cache_offline_about_time_mins">
+    <item quantity="one">pred %d min.</item>
+    <item quantity="few">pred %d min.</item>
+    <item quantity="other">pred %d min.</item>
+  </plurals>
+  <plurals name="cache_offline_about_time_hours">
+    <item quantity="one">pred %d h.</item>
+    <item quantity="few">pred %d h.</item>
+    <item quantity="other">pred %d h.</item>
+  </plurals>
+  <plurals name="cache_offline_about_time_days">
+    <item quantity="one">pred %d dňom</item>
+    <item quantity="few">pred %d dňami</item>
+    <item quantity="other">pred %d dňami</item>
+  </plurals>
   <string name="cache_offline_time_hour">hodinou</string>
   <string name="cache_offline_time_hours">hodinami</string>
   <string name="cache_offline_time_days">dňami</string>
@@ -662,7 +678,9 @@
   <string name="cache_description_long">Dlhý popis</string>
   <string name="cache_description_table_note">Popis obsahuje formátovanie tabuľky. Pre správne zobrazenie bude možno potrebné otvoriť popis v %s.</string>
   <string name="cache_watchlist_on">Skrýša je vo vašom zozname sledovaných.</string>
+  <string name="cache_watchlist_on_extra">Táto skrýša je vo vašom Zozname sledovaných (sledujúci: %1d).</string>
   <string name="cache_watchlist_not_on">Skrýša nie je vo vašom zozname sledovaných.</string>
+  <string name="cache_watchlist_not_on_extra">Táto skrýša nie je vo vašom Zozname sledovaných (sledujúci: %1d).</string>
   <string name="cache_watchlist_add">Sledovať</string>
   <string name="cache_watchlist_remove">Prestať sledovať</string>
   <string name="cache_favpoint_on">Skrýša patrí medzi vaše obľúbené.</string>
@@ -795,6 +813,7 @@
   <string name="gpx_import_loading_waypoints">Načítanie bodov trasy z .gpx súboru\nNačítané:</string>
   <string name="gpx_import_store_static_maps">Ukladanie statických máp</string>
   <string name="gpx_import_caches_imported">skrýše importované</string>
+  <string name="gpx_import_caches_imported_with_filename">Počet skrýš importovaných z %2$s: %1$d</string>
   <string name="gpx_import_static_maps_skipped">Preberanie statických máp zrušené</string>
   <string name="gpx_import_title_static_maps">Uloženie statických máp</string>
   <string name="gpx_import_title_reading_file">Čítanie súboru</string>
@@ -805,6 +824,7 @@
   <string name="gpx_import_error_parser">Nie je v poriadku formát súboru</string>
   <string name="gpx_import_error_unexpected">Neočakávaná chyba</string>
   <string name="gpx_import_canceled">Import GPX bol zrušený</string>
+  <string name="gpx_import_canceled_with_filename">Import GPX z %1$s bol zrušený</string>
   <string name="gpx_import_delete_title">Vymazať súbor</string>
   <string name="gpx_import_delete_message">Chcete zmazať %s?</string>
   <string name="gpx_import_select_list_title">Importovať GPX do zoznamu</string>
@@ -960,6 +980,8 @@
   <string name="helper_calendar_title">Doplnok c:geo calendar</string>
   <string name="helper_calendar_missing">Doplnok c:geo calendar nie je nainštalovaný</string>
   <string name="helper_calendar_description">Umožní vám exportovať Event cache do kalendára na vašom zariadení.</string>
+  <string name="helper_calendar_pastevent_title">Minulá udalosť</string>
+  <string name="helper_calendar_pastevent_question">Dátum udalosti je v minulosti. Pridať napriek tomu?</string>
   <string name="helper_sendtocgeo_title">Poslať do c:geo</string>
   <string name="helper_contacts_title">Doplnok c:geo kontakty</string>
   <string name="helper_contacts_description">Umožňuje otvorenie karty kontaktu (z adresára) priamo z logbooku, takže môžete ľahko požiadať priateľov o pomoc.</string>
@@ -1329,4 +1351,9 @@
   <string name="command_rename_list_result">Zoznam premenovaný</string>
   <string name="command_delete_list_result">Zoznam vymazaný</string>
   <string name="fav_points_remaining">"Pridať túto kešku do obľúbených (%s zostávajúcich)"</string>
+  <string name="unit_m">m</string>
+  <string name="unit_km">km</string>
+  <string name="unit_ft">stopy</string>
+  <string name="unit_yd">yard</string>
+  <string name="unit_mi">míľa</string>
 </resources>
