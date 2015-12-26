@@ -5,6 +5,7 @@ import org.apache.commons.lang3.StringUtils;
 import rx.functions.Func1;
 
 import android.content.Context;
+import android.support.annotation.LayoutRes;
 import android.widget.ArrayAdapter;
 import android.widget.Filter;
 
@@ -19,7 +20,7 @@ public class AutoCompleteAdapter extends ArrayAdapter<String> {
     private String[] suggestions = EMPTY;
     private final Func1<String, String[]> suggestionFunction;
 
-    public AutoCompleteAdapter(final Context context, final int textViewResourceId, final Func1<String, String[]> suggestionFunction) {
+    public AutoCompleteAdapter(final Context context, @LayoutRes final int textViewResourceId, final Func1<String, String[]> suggestionFunction) {
         super(context, textViewResourceId);
         this.suggestionFunction = suggestionFunction;
     }

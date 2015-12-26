@@ -5,6 +5,7 @@ import com.github.amlcurran.showcaseview.ShowcaseView.Builder;
 import com.github.amlcurran.showcaseview.targets.Target;
 
 import android.app.Activity;
+import android.support.annotation.StringRes;
 import android.view.View;
 import android.view.WindowManager.LayoutParams;
 
@@ -21,7 +22,7 @@ public class ShowcaseViewBuilder extends Builder {
     }
 
     @Override
-    public ShowcaseViewBuilder setContentTitle(final int resId) {
+    public ShowcaseViewBuilder setContentTitle(@StringRes final int resId) {
         setSingleshot(activity.getResources().getString(resId));
         return (ShowcaseViewBuilder) super.setContentTitle(resId);
     }
@@ -35,7 +36,7 @@ public class ShowcaseViewBuilder extends Builder {
     }
 
     @Override
-    public ShowcaseViewBuilder setContentText(final int resId) {
+    public ShowcaseViewBuilder setContentText(@StringRes final int resId) {
         return (ShowcaseViewBuilder) super.setContentText(resId);
     }
 

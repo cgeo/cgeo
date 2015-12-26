@@ -23,6 +23,7 @@ import android.content.DialogInterface.OnClickListener;
 import android.graphics.drawable.Drawable;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
+import android.support.annotation.StringRes;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
@@ -259,7 +260,7 @@ public final class Dialogs {
         return builder;
     }
 
-    private static String getString(final int resourceId) {
+    private static String getString(@StringRes final int resourceId) {
         return CgeoApplication.getInstance().getString(resourceId);
     }
 

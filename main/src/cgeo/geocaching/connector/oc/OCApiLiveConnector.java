@@ -26,6 +26,7 @@ import org.eclipse.jdt.annotation.NonNull;
 
 import android.content.Context;
 import android.os.Handler;
+import android.support.annotation.StringRes;
 
 public class OCApiLiveConnector extends OCApiConnector implements ISearchByCenter, ISearchByViewPort, ILogin, ISearchByKeyword, ISearchByOwner, ISearchByFinder {
 
@@ -35,7 +36,7 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByCente
     private final int tokenSecretPrefKeyId;
     private UserInfo userInfo = new UserInfo(StringUtils.EMPTY, 0, UserInfoStatus.NOT_RETRIEVED);
 
-    public OCApiLiveConnector(final String name, final String host, final String prefix, final String licenseString, final int cKResId, final int cSResId, final int isActivePrefKeyId, final int tokenPublicPrefKeyId, final int tokenSecretPrefKeyId, final ApiSupport apiSupport) {
+    public OCApiLiveConnector(final String name, final String host, final String prefix, final String licenseString, @StringRes final int cKResId, @StringRes final int cSResId, final int isActivePrefKeyId, final int tokenPublicPrefKeyId, final int tokenSecretPrefKeyId, final ApiSupport apiSupport) {
         super(name, host, prefix, CryptUtils.rot13(CgeoApplication.getInstance().getResources().getString(cKResId)), licenseString, apiSupport);
 
         cS = CryptUtils.rot13(CgeoApplication.getInstance().getResources().getString(cSResId));

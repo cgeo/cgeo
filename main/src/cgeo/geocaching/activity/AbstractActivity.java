@@ -20,6 +20,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.support.annotation.LayoutRes;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.view.ActionMode;
 import android.view.Menu;
@@ -123,7 +124,7 @@ public abstract class AbstractActivity extends ActionBarActivity implements IAbs
         ActivityMixin.invalidateOptionsMenu(this);
     }
 
-    protected void onCreate(final Bundle savedInstanceState, final int resourceLayoutID) {
+    protected void onCreate(final Bundle savedInstanceState, @LayoutRes final int resourceLayoutID) {
         super.onCreate(savedInstanceState);
 
         initializeCommonFields();
@@ -148,7 +149,7 @@ public abstract class AbstractActivity extends ActionBarActivity implements IAbs
     }
 
     @Override
-    public void setContentView(final int layoutResID) {
+    public void setContentView(@LayoutRes final int layoutResID) {
         super.setContentView(layoutResID);
 
         // initialize the action bar title with the activity title for single source

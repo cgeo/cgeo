@@ -27,6 +27,7 @@ import android.graphics.Bitmap.CompressFormat;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.support.annotation.StringRes;
 import android.text.Html;
 import android.util.SparseArray;
 import android.view.ContextMenu;
@@ -54,12 +55,14 @@ public class ImagesList {
         LogImages(R.string.cache_log_images_title),
         SpoilerImages(R.string.cache_spoiler_images_title);
 
+        @StringRes
         private final int titleResId;
 
-        ImageType(final int title) {
+        ImageType(@StringRes final int title) {
             this.titleResId = title;
         }
 
+        @StringRes
         public int getTitle() {
             return titleResId;
         }

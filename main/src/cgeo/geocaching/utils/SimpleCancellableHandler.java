@@ -7,6 +7,7 @@ import cgeo.geocaching.activity.Progress;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Message;
+import android.support.annotation.StringRes;
 
 import java.lang.ref.WeakReference;
 
@@ -38,7 +39,7 @@ public class SimpleCancellableHandler extends CancellableHandler {
         dismissProgress();
     }
 
-    protected final void showToast(final int resId) {
+    protected final void showToast(@StringRes final int resId) {
         final AbstractActivity activity = activityRef.get();
         if (activity != null) {
             final Resources res = activity.getResources();
@@ -68,7 +69,7 @@ public class SimpleCancellableHandler extends CancellableHandler {
 
     }
 
-    protected void updateStatusMsg(final int resId, final String msg) {
+    protected void updateStatusMsg(@StringRes final int resId, final String msg) {
         final CacheDetailActivity activity = ((CacheDetailActivity) activityRef.get());
         if (activity != null) {
             setProgressMessage(activity.getResources().getString(resId)
@@ -77,7 +78,7 @@ public class SimpleCancellableHandler extends CancellableHandler {
         }
     }
 
-    public void sendTextMessage(final int what, final int resId) {
+    public void sendTextMessage(final int what, @StringRes final int resId) {
         final CacheDetailActivity activity = ((CacheDetailActivity) activityRef.get());
         if (activity != null) {
             final Message msg = obtainMessage(what);

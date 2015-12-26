@@ -8,6 +8,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 
 import android.content.res.Resources;
+import android.support.annotation.StringRes;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -67,7 +68,7 @@ public class FilterRegistry {
         register(R.string.caches_filter_personal_data, PersonalDataFilterFactory.class);
     }
 
-    private void register(final int resourceId, final @NonNull Class<? extends IFilterFactory> factoryClass) {
+    private void register(@StringRes final int resourceId, final @NonNull Class<? extends IFilterFactory> factoryClass) {
         registry.add(new FactoryEntry(res.getString(resourceId), factoryClass));
     }
 

@@ -1,5 +1,7 @@
 package cgeo.geocaching.utils;
 
+import android.support.annotation.StringRes;
+
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.LogEntry;
 import cgeo.geocaching.R;
@@ -74,15 +76,17 @@ public final class LogTemplateProvider {
 
     public abstract static class LogTemplate {
         private final String template;
+        @StringRes
         private final int resourceId;
 
-        protected LogTemplate(final String template, final int resourceId) {
+        protected LogTemplate(final String template, @StringRes final int resourceId) {
             this.template = template;
             this.resourceId = resourceId;
         }
 
         public abstract String getValue(LogContext context);
 
+        @StringRes
         public final int getResourceId() {
             return resourceId;
         }

@@ -9,12 +9,13 @@ import org.eclipse.jdt.annotation.NonNull;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.annotation.StringRes;
 
 abstract class GoogleNavigationApp extends AbstractPointNavigationApp {
 
     private final String mode;
 
-    private GoogleNavigationApp(final int nameResourceId, final String mode) {
+    private GoogleNavigationApp(@StringRes final int nameResourceId, final String mode) {
         super(getString(nameResourceId), null);
         this.mode = mode;
     }

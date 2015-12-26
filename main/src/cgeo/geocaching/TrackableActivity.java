@@ -57,6 +57,8 @@ import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.DrawableRes;
+import android.support.annotation.StringRes;
 import android.support.v7.app.ActionBar;
 import android.support.v7.view.ActionMode;
 import android.text.Html;
@@ -86,9 +88,10 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
         LOGS(R.string.cache_logs),
         IMAGES(R.string.cache_images);
 
+        @StringRes
         private final int resId;
 
-        Page(final int resId) {
+        Page(@StringRes final int resId) {
             this.resId = resId;
         }
     }
@@ -365,7 +368,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
         });
     }
 
-    private static void setupIcon(final ActionBar actionBar, final int resId) {
+    private static void setupIcon(final ActionBar actionBar, @DrawableRes final int resId) {
         if (actionBar != null) {
             actionBar.setIcon(resId);
         }

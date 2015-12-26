@@ -6,6 +6,7 @@ import cgeo.geocaching.models.Geocache;
 import org.eclipse.jdt.annotation.NonNull;
 
 import android.os.Parcel;
+import android.support.annotation.StringRes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +15,7 @@ abstract class AbstractFilter implements IFilter {
     @NonNull
     private final String name;
 
-    protected AbstractFilter(final int nameResourceId) {
+    protected AbstractFilter(@StringRes final int nameResourceId) {
         this(CgeoApplication.getInstance().getString(nameResourceId));
     }
 

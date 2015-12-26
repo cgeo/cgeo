@@ -14,6 +14,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
+import android.support.annotation.StringRes;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NavUtils;
 import android.support.v4.app.TaskStackBuilder;
@@ -80,7 +81,7 @@ public final class ActivityMixin {
      * @param activity the activity the user is facing
      * @param resId the message
      */
-    public static void showToast(final Activity activity, final int resId) {
+    public static void showToast(final Activity activity, @StringRes final int resId) {
         showToast(activity, activity.getString(resId));
     }
 

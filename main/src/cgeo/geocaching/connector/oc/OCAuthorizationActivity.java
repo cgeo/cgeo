@@ -13,9 +13,11 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.eclipse.jdt.annotation.Nullable;
 
 import android.os.Bundle;
+import android.support.annotation.StringRes;
 
 public class OCAuthorizationActivity extends OAuthAuthorizationActivity {
 
+    @StringRes
     private int titleResId;
     private int tokenPublicPrefKey;
     private int tokenSecretPrefKey;

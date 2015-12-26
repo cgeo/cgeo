@@ -8,6 +8,7 @@ import cgeo.geocaching.activity.OAuthAuthorizationActivity.OAuthParameters;
 import org.eclipse.jdt.annotation.NonNull;
 
 import android.content.Intent;
+import android.support.annotation.StringRes;
 
 public class OCAuthParams extends OAuthParameters {
 
@@ -35,14 +36,15 @@ public class OCAuthParams extends OAuthParameters {
             R.string.oc_uk_okapi_consumer_key, R.string.oc_uk_okapi_consumer_secret, "callback://www.cgeo.org/opencaching.org.uk/",
             R.string.auth_ocuk, R.string.pref_ocuk_tokenpublic, R.string.pref_ocuk_tokensecret, R.string.pref_temp_ocuk_token_public, R.string.pref_temp_ocuk_token_secret);
 
+    @StringRes
     public final int authTitleResId;
     public final int tokenPublicPrefKey;
     public final int tokenSecretPrefKey;
     public final int tempTokenPublicPrefKey;
     public final int tempTokenSecretPrefKey;
 
-    public OCAuthParams(@NonNull final String host, final boolean https, final int consumerKeyResId, final int consumerSecretResId, @NonNull final String callback,
-            final int authTitleResId, final int tokenPublicPrefKey, final int tokenSecretPrefKey, final int tempTokePublicPrefKey, final int tempTokenSecretPrefKey) {
+    public OCAuthParams(@NonNull final String host, final boolean https,@StringRes final int consumerKeyResId, @StringRes final int consumerSecretResId, @NonNull final String callback,
+            @StringRes final int authTitleResId, final int tokenPublicPrefKey, final int tokenSecretPrefKey, final int tempTokePublicPrefKey, final int tempTokenSecretPrefKey) {
         super(host, "/okapi/services/oauth/request_token",
                 "/okapi/services/oauth/authorize",
                 "/okapi/services/oauth/access_token",

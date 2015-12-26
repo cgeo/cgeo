@@ -1,5 +1,7 @@
 package cgeo.geocaching.files;
 
+import android.support.annotation.RawRes;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 import cgeo.geocaching.storage.DataStore;
@@ -41,7 +43,7 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         testGPXVersion(R.raw.gc1bkp3_gpx100);
     }
 
-    private Geocache testGPXVersion(final int resourceId) throws IOException, ParserException {
+    private Geocache testGPXVersion(@RawRes final int resourceId) throws IOException, ParserException {
         final List<Geocache> caches = readGPX10(resourceId);
         assertThat(caches).isNotNull();
         assertThat(caches).hasSize(1);
@@ -220,7 +222,7 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         assertEquals(8.545100, waypointCoords.getLongitude(), 0.000001);
     }
 
-    private List<Geocache> readGPX10(final int... resourceIds) throws IOException, ParserException {
+    private List<Geocache> readGPX10(@RawRes final int... resourceIds) throws IOException, ParserException {
         final GPX10Parser parser = new GPX10Parser(getTemporaryListId());
         return readVersionedGPX(parser, resourceIds);
     }
@@ -230,7 +232,7 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         return readVersionedGPX(parser, resourceIds);
     }
 
-    private List<Geocache> readVersionedGPX(final GPXParser parser, final int... resourceIds) throws IOException, ParserException {
+    private List<Geocache> readVersionedGPX(final GPXParser parser, @RawRes final int... resourceIds) throws IOException, ParserException {
         final Set<String> result = new HashSet<String>();
         for (final int resourceId : resourceIds) {
             final InputStream instream = getResourceStream(resourceId);
@@ -348,7 +350,7 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         assertThat(String.valueOf(GCConstants.gccodeToGCId(cache.getGeocode()))).isEqualTo(cache.getCacheId());
     }
 
-    private Geocache getFirstCache(final int gpxResourceId) throws IOException, ParserException {
+    private Geocache getFirstCache(@RawRes final int gpxResourceId) throws IOException, ParserException {
         final List<Geocache> caches = readGPX10(gpxResourceId);
         assertThat(caches).isNotNull();
         assertThat(caches).hasSize(1);

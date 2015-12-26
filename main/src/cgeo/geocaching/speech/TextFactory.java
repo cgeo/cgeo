@@ -1,5 +1,7 @@
 package cgeo.geocaching.speech;
 
+import android.support.annotation.StringRes;
+
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.location.Geopoint;
@@ -88,11 +90,11 @@ public class TextFactory {
         return getQuantityString(nearId, quantity, String.valueOf(quantity));
     }
 
-    private static String getString(final int resourceId, final Object... formatArgs) {
+    private static String getString(@StringRes final int resourceId, final Object... formatArgs) {
         return CgeoApplication.getInstance().getString(resourceId, formatArgs);
     }
 
-    private static String getQuantityString(final int resourceId, final int quantity, final Object... formatArgs) {
+    private static String getQuantityString(@StringRes final int resourceId, final int quantity, final Object... formatArgs) {
         return CgeoApplication.getInstance().getResources().getQuantityString(resourceId, quantity, formatArgs);
     }
 

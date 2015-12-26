@@ -1,5 +1,7 @@
 package cgeo.geocaching.files;
 
+import android.support.annotation.RawRes;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 import cgeo.geocaching.models.Geocache;
@@ -16,7 +18,7 @@ import java.util.Collection;
 import java.util.List;
 
 public class LocParserTest extends AbstractResourceInstrumentationTestCase {
-    private List<Geocache> readLoc(final int resourceId) throws IOException, ParserException {
+    private List<Geocache> readLoc(@RawRes final int resourceId) throws IOException, ParserException {
         final LocParser parser = new LocParser(getTemporaryListId());
         Collection<Geocache> caches = null;
         final InputStream instream = getResourceStream(resourceId);

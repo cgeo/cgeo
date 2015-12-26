@@ -7,6 +7,7 @@ import static org.hamcrest.Matchers.hasToString;
 import static org.hamcrest.Matchers.startsWith;
 
 import android.app.Activity;
+import android.support.annotation.StringRes;
 import android.test.ActivityInstrumentationTestCase2;
 
 public abstract class AbstractEspressoTest<T extends Activity> extends ActivityInstrumentationTestCase2<T> {
@@ -23,7 +24,7 @@ public abstract class AbstractEspressoTest<T extends Activity> extends ActivityI
         openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
     }
 
-    protected final String getString(int resId) {
+    protected final String getString(@StringRes int resId) {
         return getActivity().getString(resId);
     }
 

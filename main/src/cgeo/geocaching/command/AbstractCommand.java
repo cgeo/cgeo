@@ -11,6 +11,7 @@ import org.eclipse.jdt.annotation.Nullable;
 
 import android.app.Activity;
 import android.os.Parcelable;
+import android.support.annotation.StringRes;
 
 /**
  * Default implementation of the command interface with undo support and background processing.
@@ -23,7 +24,7 @@ abstract class AbstractCommand implements Command {
     private final Activity context;
     private String progressMessage = null;
 
-    protected AbstractCommand(final @NonNull Activity context, final int progressMessageId) {
+    protected AbstractCommand(final @NonNull Activity context, @StringRes final int progressMessageId) {
         this.context = context;
         if (progressMessageId != 0) {
             this.progressMessage = context.getString(progressMessageId);

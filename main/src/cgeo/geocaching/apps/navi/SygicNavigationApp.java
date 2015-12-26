@@ -9,6 +9,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.annotation.StringRes;
 
 /**
  * http://developers.sygic.com/documentation.php?action=customurl_android
@@ -24,7 +25,7 @@ abstract class SygicNavigationApp extends AbstractPointNavigationApp {
      */
     private static final String PACKAGE_VOUCHER = "com.sygic.aura_voucher";
 
-    private SygicNavigationApp(final int nameResourceId, final String mode) {
+    private SygicNavigationApp(@StringRes final int nameResourceId, final String mode) {
         super(getString(nameResourceId), null, PACKAGE_NORMAL);
         this.mode = mode;
     }

@@ -15,6 +15,8 @@ import cgeo.geocaching.list.StoredList;
 import android.content.ContentResolver;
 import android.content.res.Resources;
 import android.net.Uri;
+import android.support.annotation.AnyRes;
+import android.support.annotation.RawRes;
 import android.test.InstrumentationTestCase;
 
 import java.io.File;
@@ -34,12 +36,12 @@ public abstract class AbstractResourceInstrumentationTestCase extends Instrument
         DataStore.removeCache(geocode, flags);
     }
 
-    protected InputStream getResourceStream(final int resourceId) {
+    protected InputStream getResourceStream(@RawRes final int resourceId) {
         final Resources res = getInstrumentation().getContext().getResources();
         return res.openRawResource(resourceId);
     }
 
-    protected String getFileContent(final int resourceId) {
+    protected String getFileContent(@RawRes final int resourceId) {
         Scanner scanner = null;
         try {
             final InputStream ins = getResourceStream(resourceId);
@@ -55,7 +57,7 @@ public abstract class AbstractResourceInstrumentationTestCase extends Instrument
         return null;
     }
 
-    protected void copyResourceToFile(final int resourceId, final File file) throws IOException {
+    protected void copyResourceToFile(@RawRes final int resourceId, final File file) throws IOException {
         final InputStream is = getResourceStream(resourceId);
         final FileOutputStream os = new FileOutputStream(file);
 
@@ -92,7 +94,7 @@ public abstract class AbstractResourceInstrumentationTestCase extends Instrument
         return temporaryListId;
     }
 
-    final protected Geocache loadCacheFromResource(final int resourceId) throws IOException, ParserException {
+    final protected Geocache loadCacheFromResource(@RawRes final int resourceId) throws IOException, ParserException {
         final InputStream instream = getResourceStream(resourceId);
         try {
             final GPX10Parser parser = new GPX10Parser(StoredList.TEMPORARY_LIST.id);
@@ -105,7 +107,7 @@ public abstract class AbstractResourceInstrumentationTestCase extends Instrument
         }
     }
 
-    protected Uri getResourceURI(final int resId) {
+    protected Uri getResourceURI(@AnyRes final int resId) {
         final Resources resources = getInstrumentation().getContext().getResources();
         return Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + resources.getResourcePackageName(resId) + '/' + resources.getResourceTypeName(resId) + '/' + resources.getResourceEntryName(resId));
     }

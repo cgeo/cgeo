@@ -10,6 +10,7 @@ import cgeo.geocaching.utils.Log;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.support.annotation.RawRes;
 
 public class IconDecoderTest extends AbstractResourceInstrumentationTestCase {
 
@@ -23,7 +24,7 @@ public class IconDecoderTest extends AbstractResourceInstrumentationTestCase {
         assertThat(parseMapPNG(bitmap, 108, 112, 14).isFound()).isTrue();
     }
 
-    private Bitmap getBitmap(int resourceId) {
+    private Bitmap getBitmap(@RawRes int resourceId) {
         final BitmapFactory.Options options = new BitmapFactory.Options();
         options.inScaled = false;
         final Bitmap bitmap = BitmapFactory.decodeStream(getInstrumentation().getContext().getResources().openRawResource(resourceId));

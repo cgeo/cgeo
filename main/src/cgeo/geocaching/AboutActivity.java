@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.StringRes;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -51,7 +52,7 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
             return view;
         }
 
-        private String getRawResourceString(final int resourceId) {
+        private String getRawResourceString(@StringRes final int resourceId) {
             InputStream ins = null;
             Scanner scanner = null;
             try {
@@ -195,9 +196,10 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
         CONTRIBUTORS(R.string.about_contributors),
         LICENSE(R.string.about_license);
 
+        @StringRes
         private final int resourceId;
 
-        Page(final int resourceId) {
+        Page(@StringRes final int resourceId) {
             this.resourceId = resourceId;
         }
     }

@@ -90,6 +90,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.OpenableColumns;
+import android.support.annotation.StringRes;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v4.view.MenuItemCompat;
@@ -717,7 +718,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         return false;
     }
 
-    private void setMenuItemLabel(final Menu menu, final int menuId, final int resIdSelection, final int resId) {
+    private void setMenuItemLabel(final Menu menu, final int menuId, @StringRes final int resIdSelection, @StringRes final int resId) {
         final MenuItem menuItem = menu.findItem(menuId);
         if (menuItem == null) {
             return;

@@ -1,5 +1,8 @@
 package cgeo.geocaching.enumerations;
 
+import android.support.annotation.DrawableRes;
+import android.support.annotation.StringRes;
+
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 
@@ -21,12 +24,14 @@ public enum LogTypeTrackable {
     public final int id; // id matching LogTypes
     public final int gkid; // This is the id from GeoKrety
     @NonNull final public String action;
+    @StringRes
     final private int resourceId;
+    @DrawableRes
     public final int markerId;
     // A link to the old LogType. This is done while Twitter still only handle LogType
     public final LogType oldLogtype;
 
-    LogTypeTrackable(final int id, final int gkid, @NonNull final String action, final int resourceId, final int markerId, final LogType oldLogtype) {
+    LogTypeTrackable(final int id, final int gkid, @NonNull final String action, @StringRes final int resourceId, @DrawableRes final int markerId, final LogType oldLogtype) {
         this.id = id;
         this.gkid = gkid;
         this.action = action;
@@ -35,7 +40,7 @@ public enum LogTypeTrackable {
         this.oldLogtype = oldLogtype;
     }
 
-    LogTypeTrackable(final int id, final int gkid, final String action, final int resourceId, final LogType oldLogtype) {
+    LogTypeTrackable(final int id, final int gkid, final String action, @StringRes final int resourceId, final LogType oldLogtype) {
         this(id, gkid, action, resourceId, R.drawable.mark_gray, oldLogtype);
     }
 

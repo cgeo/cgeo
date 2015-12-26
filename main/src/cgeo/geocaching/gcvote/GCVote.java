@@ -1,5 +1,7 @@
 package cgeo.geocaching.gcvote;
 
+import android.support.annotation.StringRes;
+
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.R;
@@ -277,7 +279,7 @@ public final class GCVote {
         }
     }
 
-    private static String getString(final int resId) {
+    private static String getString(@StringRes final int resId) {
         return CgeoApplication.getInstance().getString(resId);
     }
 

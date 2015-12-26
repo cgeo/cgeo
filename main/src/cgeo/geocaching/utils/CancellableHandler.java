@@ -7,6 +7,7 @@ import rx.subscriptions.CompositeSubscription;
 
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.StringRes;
 
 /**
  * Handler with a cancel policy. Once cancelled, the handler will not handle
@@ -119,7 +120,7 @@ public abstract class CancellableHandler extends Handler {
         return handler != null && handler.isCancelled();
     }
 
-    public static void sendLoadProgressDetail(final Handler handler, final int resourceId) {
+    public static void sendLoadProgressDetail(final Handler handler, @StringRes final int resourceId) {
         if (null != handler) {
             handler.obtainMessage(UPDATE_LOAD_PROGRESS_DETAIL, CgeoApplication.getInstance().getString(resourceId)).sendToTarget();
         }

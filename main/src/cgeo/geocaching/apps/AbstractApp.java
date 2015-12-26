@@ -9,6 +9,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
 import android.content.Intent;
+import android.support.annotation.StringRes;
 
 public abstract class AbstractApp implements App {
 
@@ -56,8 +57,8 @@ public abstract class AbstractApp implements App {
         return name;
     }
 
-    protected static String getString(final int ressourceId) {
-        return CgeoApplication.getInstance().getString(ressourceId);
+    protected static String getString(@StringRes final int resourceId) {
+        return CgeoApplication.getInstance().getString(resourceId);
     }
 
     @Override

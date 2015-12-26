@@ -1,5 +1,8 @@
 package cgeo.geocaching.connector.trackable;
 
+import android.support.annotation.DrawableRes;
+import android.support.annotation.StringRes;
+
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 
@@ -11,10 +14,12 @@ public enum TrackableBrand {
     UNKNOWN(0, R.drawable.trackable_all, R.string.trackable_unknown); // Trackable not initialized yet
 
     private final int id;
+    @StringRes
     private final int stringId;
+    @DrawableRes
     private final int markerId;
 
-    TrackableBrand(final int id, final int markerId, final int stringId) {
+    TrackableBrand(final int id, @DrawableRes final int markerId, @StringRes final int stringId) {
         this.id = id;
         this.markerId = markerId;
         this.stringId = stringId;
@@ -24,6 +29,7 @@ public enum TrackableBrand {
         return id;
     }
 
+    @DrawableRes
     public int getIconResource() {
         return markerId;
     }

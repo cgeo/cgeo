@@ -5,6 +5,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.annotation.StringRes;
 
 import java.io.File;
 
@@ -13,7 +14,7 @@ public class ShareUtils {
         // utility class
     }
 
-    public static void share(final Context context, final @NonNull File file, final @NonNull String mimeType, final int titleResourceId) {
+    public static void share(final Context context, final @NonNull File file, final @NonNull String mimeType, @StringRes final int titleResourceId) {
         final Intent shareIntent = new Intent();
         shareIntent.setAction(Intent.ACTION_SEND);
         shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
@@ -21,7 +22,7 @@ public class ShareUtils {
         context.startActivity(Intent.createChooser(shareIntent, context.getString(titleResourceId)));
     }
 
-    public static void share(final Context context, final @NonNull File file, final int titleResourceId) {
+    public static void share(final Context context, final @NonNull File file, @StringRes final int titleResourceId) {
         share(context, file, "*/*", titleResourceId);
     }
 }

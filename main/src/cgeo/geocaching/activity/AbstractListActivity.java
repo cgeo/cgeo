@@ -5,6 +5,7 @@ import cgeo.geocaching.network.AndroidBeam;
 
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.support.annotation.LayoutRes;
 import android.view.MenuItem;
 import android.view.Window;
 
@@ -81,7 +82,7 @@ public abstract class AbstractListActivity extends ActionBarListActivity impleme
         ActivityMixin.invalidateOptionsMenu(this);
     }
 
-    public void onCreate(final Bundle savedInstanceState, final int resourceLayoutID) {
+    public void onCreate(final Bundle savedInstanceState, @LayoutRes final int resourceLayoutID) {
         super.onCreate(savedInstanceState);
         initializeCommonFields();
 
@@ -90,7 +91,7 @@ public abstract class AbstractListActivity extends ActionBarListActivity impleme
     }
 
     @Override
-    public void setContentView(final int layoutResID) {
+    public void setContentView(@LayoutRes final int layoutResID) {
         super.setContentView(layoutResID);
 
         // initialize action bar title with activity title

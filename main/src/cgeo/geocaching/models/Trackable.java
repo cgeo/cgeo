@@ -11,6 +11,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
+import android.support.annotation.DrawableRes;
 import android.text.Html;
 
 import java.util.ArrayList;
@@ -150,7 +151,7 @@ public class Trackable implements ILogable {
         return iconUrl;
     }
 
-
+    @DrawableRes
     public int getIconBrand() {
         return getBrand().getIconResource();
     }

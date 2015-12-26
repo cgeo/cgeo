@@ -1,5 +1,7 @@
 package cgeo.geocaching.connector.oc;
 
+import android.support.annotation.StringRes;
+
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.oc.OkapiError.OkapiErrors;
 
@@ -13,9 +15,10 @@ public class UserInfo {
         INVALID_TIMESTAMP(R.string.init_login_popup_invalid_timestamp),
         INVALID_TOKEN(R.string.init_login_popup_invalid_token);
 
+        @StringRes
         public final int resId;
 
-        UserInfoStatus(final int resId) {
+        UserInfoStatus(@StringRes final int resId) {
             this.resId = resId;
         }
 

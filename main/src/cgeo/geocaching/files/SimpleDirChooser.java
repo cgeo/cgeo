@@ -17,6 +17,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.annotation.LayoutRes;
 import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -162,10 +163,11 @@ public class SimpleDirChooser extends AbstractListActivity {
     public class FileArrayAdapter extends ArrayAdapter<Option> {
 
         private final Context context;
+        @LayoutRes
         private final int id;
         private final List<Option> items;
 
-        public FileArrayAdapter(final Context context, final int simpleDirItemResId, final List<Option> objects) {
+        public FileArrayAdapter(final Context context, @LayoutRes final int simpleDirItemResId, final List<Option> objects) {
             super(context, simpleDirItemResId, objects);
             this.context = context;
             this.id = simpleDirItemResId;

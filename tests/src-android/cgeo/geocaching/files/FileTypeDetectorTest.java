@@ -10,6 +10,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.net.Uri;
+import android.support.annotation.RawRes;
 
 public class FileTypeDetectorTest extends AbstractResourceInstrumentationTestCase {
 
@@ -44,7 +45,7 @@ public class FileTypeDetectorTest extends AbstractResourceInstrumentationTestCas
         assertFileType(R.raw.pq7545915, FileType.ZIP);
     }
 
-    private void assertFileType(final int resourceId, final @NonNull FileType fileType) {
+    private void assertFileType(@RawRes final int resourceId, final @NonNull FileType fileType) {
         final Uri resourceURI = getResourceURI(resourceId);
         final FileContentResolver contentResolver = new FileContentResolver(getInstrumentation().getContext());
         assertThat(new FileTypeDetector(resourceURI, contentResolver).getFileType()).isEqualTo(fileType);

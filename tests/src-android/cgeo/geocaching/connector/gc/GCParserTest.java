@@ -21,6 +21,7 @@ import cgeo.test.Compare;
 
 import org.apache.commons.lang3.StringUtils;
 
+import android.support.annotation.RawRes;
 import android.test.suitebuilder.annotation.MediumTest;
 
 import java.util.ArrayList;
@@ -213,7 +214,7 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
         assertThat(waypoints.get(2).getWaypointType()).isEqualTo(WaypointType.WAYPOINT);
     }
 
-    private Geocache parseCache(final int resourceId) {
+    private Geocache parseCache(@RawRes final int resourceId) {
         final String page = getFileContent(resourceId);
         final SearchResult result = GCParser.parseAndSaveCacheFromText(page, null);
         assertThat(result).isNotNull();

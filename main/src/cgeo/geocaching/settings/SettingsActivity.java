@@ -45,6 +45,7 @@ import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
+import android.support.annotation.AnyRes;
 import android.widget.BaseAdapter;
 import android.widget.ListAdapter;
 
@@ -791,7 +792,7 @@ public class SettingsActivity extends PreferenceActivity {
     }
 
     @SuppressWarnings("deprecation")
-    private static void addPreferencesFromResource(final PreferenceActivity preferenceActivity, final int preferencesResId) {
+    private static void addPreferencesFromResource(final PreferenceActivity preferenceActivity, @AnyRes final int preferencesResId) {
         preferenceActivity.addPreferencesFromResource(preferencesResId);
     }
 

@@ -18,6 +18,8 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
+import android.support.annotation.DrawableRes;
+import android.support.annotation.StringRes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,20 +28,23 @@ public class CreateShortcutActivity extends AbstractActionBarActivity {
 
     private static class Shortcut implements ItemWithIcon {
 
+        @StringRes
         private final int titleResourceId;
+        @DrawableRes
         private final int drawableResourceId;
         private final Intent intent;
 
         /**
          * shortcut with a separate icon
          */
-        public Shortcut(final int titleResourceId, final int drawableResourceId, final Intent intent) {
+        public Shortcut(@StringRes final int titleResourceId, @DrawableRes final int drawableResourceId, final Intent intent) {
             this.titleResourceId = titleResourceId;
             this.drawableResourceId = drawableResourceId;
             this.intent = intent;
         }
 
         @Override
+        @DrawableRes
         public int getIcon() {
             return drawableResourceId;
         }
@@ -113,7 +118,7 @@ public class CreateShortcutActivity extends AbstractActionBarActivity {
         createShortcutAndFinish(list.title, targetIntent, R.drawable.main_stored);
     }
 
-    private void createShortcutAndFinish(final String title, final Intent targetIntent, final int iconResourceId) {
+    private void createShortcutAndFinish(final String title, final Intent targetIntent, @DrawableRes final int iconResourceId) {
         final Intent intent = new Intent();
         intent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, targetIntent);
         intent.putExtra(Intent.EXTRA_SHORTCUT_NAME, title);
@@ -131,7 +136,7 @@ public class CreateShortcutActivity extends AbstractActionBarActivity {
         finish();
     }
 
-    private Bitmap createOverlay(final int drawableResourceId) {
+    private Bitmap createOverlay(@DrawableRes final int drawableResourceId) {
         final LayerDrawable layerDrawable = new LayerDrawable(new Drawable[] {
                 Compatibility.getDrawable(res, drawableResourceId), Compatibility.getDrawable(res, R.drawable.cgeo) });
         layerDrawable.setLayerInset(0, 0, 0, 10, 10);

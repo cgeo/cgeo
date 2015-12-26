@@ -1,6 +1,7 @@
 package cgeo.geocaching.activity;
 
 import android.os.Bundle;
+import android.support.annotation.LayoutRes;
 import android.view.View;
 
 /**
@@ -8,7 +9,7 @@ import android.view.View;
  */
 public class AbstractActionBarActivity extends AbstractActivity {
     @Override
-    protected void onCreate(final Bundle savedInstanceState, final int resourceLayoutID) {
+    protected void onCreate(final Bundle savedInstanceState, @LayoutRes final int resourceLayoutID) {
         super.onCreate(savedInstanceState, resourceLayoutID);
         initUpAction();
         showProgress(false);

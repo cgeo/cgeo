@@ -1,5 +1,7 @@
 package cgeo.geocaching.connector;
 
+import android.support.annotation.StringRes;
+
 import cgeo.contacts.ContactsAddon;
 import cgeo.geocaching.CacheListActivity;
 import cgeo.geocaching.CgeoApplication;
@@ -266,13 +268,13 @@ public abstract class AbstractConnector implements IConnector {
         return list;
     }
 
-    private void addCapability(final List<String> capabilities, final Class<? extends IConnector> clazz, final int featureResourceId) {
+    private void addCapability(final List<String> capabilities, final Class<? extends IConnector> clazz, @StringRes final int featureResourceId) {
         if (clazz.isInstance(this)) {
             capabilities.add(feature(featureResourceId));
         }
     }
 
-    private static String feature(final int featureResourceId) {
+    private static String feature(@StringRes final int featureResourceId) {
         return CgeoApplication.getInstance().getString(featureResourceId);
     }
 

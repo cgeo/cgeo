@@ -8,6 +8,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import rx.functions.Action1;
 
 import android.content.Context;
+import android.support.annotation.StringRes;
 import android.support.v4.view.ActionProvider;
 import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
@@ -60,7 +61,7 @@ public class SortActionProvider extends ActionProvider implements OnMenuItemClic
         mContext = context;
     }
 
-    private void register(final int resourceId, final Class<? extends CacheComparator> comparatorClass) {
+    private void register(@StringRes final int resourceId, final Class<? extends CacheComparator> comparatorClass) {
         registry.add(new ComparatorEntry(mContext.getString(resourceId), comparatorClass));
     }
 
