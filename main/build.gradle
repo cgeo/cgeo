@@ -12,7 +12,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion "Google Inc.:Google APIs:22"
-    buildToolsVersion "23.0.2"
+    buildToolsVersion project.buildToolsVersion
 
     compileOptions {
     	// use the diamond operator and some other goodies in Android

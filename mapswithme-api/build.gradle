@@ -4,7 +4,7 @@ android {
 
   // Define these properties in the gradle.properties file in the root project folder
   compileSdkVersion 19
-  buildToolsVersion "22.0.1"
+  buildToolsVersion project.buildToolsVersion
 
   defaultConfig {
     minSdkVersion 9

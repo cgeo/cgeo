@@ -109,7 +109,9 @@ allprojects {
 /*
  * common configuration for the Java projects
  */
- 
+
+ext.buildToolsVersion = "23.0.2"
+
 subprojects {
     repositories {
         jcenter()
