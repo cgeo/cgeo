@@ -35,7 +35,7 @@ public class OCApiConnector extends OCConnector implements ISearchByGeocode {
     private final ApiSupport apiSupport;
     private final String licenseString;
 
-    public OCApiConnector(final String name, final String host, final String prefix, final String cK, final String licenseString, final ApiSupport apiSupport) {
+    public OCApiConnector(@NonNull final String name, @NonNull final String host, final String prefix, final String cK, final String licenseString, final ApiSupport apiSupport) {
         super(name, host, prefix);
         this.cK = cK;
         this.apiSupport = apiSupport;
@@ -43,10 +43,13 @@ public class OCApiConnector extends OCConnector implements ISearchByGeocode {
     }
 
     public void addAuthentication(final Parameters params) {
+        if (StringUtils.isBlank(cK)) {
+            throw new IllegalStateException("empty OKAPI OAuth token for host " + getHost() + ". fix your keys.xml");
+        }
         final String rotCK = CryptUtils.rot13(cK);
         // check that developers are not using the Ant defined properties without any values
         if (StringUtils.startsWith(rotCK, "${")) {
-            throw new IllegalStateException("invalid OKAPI OAuth token " + rotCK);
+            throw new IllegalStateException("invalid OKAPI OAuth token '" + rotCK + "' for host " + getHost() + ". fix your keys.xml");
         }
         params.put(CryptUtils.rot13("pbafhzre_xrl"), rotCK);
     }

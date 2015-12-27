@@ -15,7 +15,9 @@ import java.util.regex.Pattern;
 
 public class OCConnector extends AbstractConnector {
 
+    @NonNull
     private final String host;
+    @NonNull
     private final String name;
     private final Pattern codePattern;
     private static final Pattern GPX_ZIP_FILE_PATTERN = Pattern.compile("oc[a-z]{2,3}\\d{5,}\\.zip", Pattern.CASE_INSENSITIVE);
@@ -23,7 +25,7 @@ public class OCConnector extends AbstractConnector {
     private static final List<LogType> STANDARD_LOG_TYPES = Arrays.asList(LogType.FOUND_IT, LogType.DIDNT_FIND_IT, LogType.NOTE);
     private static final List<LogType> EVENT_LOG_TYPES = Arrays.asList(LogType.WILL_ATTEND, LogType.ATTENDED, LogType.NOTE);
 
-    public OCConnector(final String name, final String host, final String prefix) {
+    public OCConnector(@NonNull final String name, @NonNull final String host, final String prefix) {
         this.name = name;
         this.host = host;
         codePattern = Pattern.compile(prefix + "[A-Z0-9]+", Pattern.CASE_INSENSITIVE);
