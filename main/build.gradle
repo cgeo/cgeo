@@ -235,8 +235,9 @@ dependencies {
     // Android Studio recommended test runner, see https://developer.android.com/tools/testing-support-library/index.html#setup
     androidTestCompile 'com.android.support.test:runner:0.4.1'
 
-    // TODO: this line is only needed to enforce the same version of the support annotations for the main app and the test app. it can be removed when upgrading the support library in our app
-    compile 'com.android.support:support-annotations:23.0.1'
+    // enforce same version of the support annotations for the main app and the test app
+    compile 'com.android.support:support-annotations:23.1.1'
+    androidTestCompile 'com.android.support:support-annotations:23.1.1'
 
     // Junit only needed for local unit tests
     testCompile 'junit:junit:4.12'
