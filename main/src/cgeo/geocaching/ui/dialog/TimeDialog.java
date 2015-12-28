@@ -8,6 +8,8 @@ import android.support.v4.app.DialogFragment;
 import android.text.format.DateFormat;
 import android.widget.TimePicker;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 import java.util.Calendar;
 
 public class TimeDialog extends DialogFragment implements OnTimeSetListener {
@@ -27,6 +29,7 @@ public class TimeDialog extends DialogFragment implements OnTimeSetListener {
     }
 
     @Override
+    @NonNull
     public Dialog onCreateDialog(final Bundle savedInstanceState) {
 
         final Bundle args = getArguments();

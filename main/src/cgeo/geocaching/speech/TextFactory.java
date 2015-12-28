@@ -1,5 +1,6 @@
 package cgeo.geocaching.speech;
 
+import android.support.annotation.PluralsRes;
 import android.support.annotation.StringRes;
 
 import cgeo.geocaching.CgeoApplication;
@@ -52,7 +53,7 @@ public class TextFactory {
 
     private static String getDistance(final float farDistance, final int nearDistance,
             final float farFarAway, final float farNearAway, final int nearFarAway,
-            final int farId, final int farOneId, final int nearId, final int nearOneId) {
+            @PluralsRes final int farId, @StringRes final int farOneId, @PluralsRes final int nearId, @StringRes final int nearOneId) {
         if (farDistance >= farFarAway) {
             // example: "5 kilometers" - always without decimal digits
             final int quantity = Math.round(farDistance);
@@ -94,7 +95,7 @@ public class TextFactory {
         return CgeoApplication.getInstance().getString(resourceId, formatArgs);
     }
 
-    private static String getQuantityString(@StringRes final int resourceId, final int quantity, final Object... formatArgs) {
+    private static String getQuantityString(@PluralsRes final int resourceId, final int quantity, final Object... formatArgs) {
         return CgeoApplication.getInstance().getResources().getQuantityString(resourceId, quantity, formatArgs);
     }
 

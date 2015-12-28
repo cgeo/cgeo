@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.RawRes;
 import android.support.annotation.StringRes;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -52,7 +53,7 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
             return view;
         }
 
-        private String getRawResourceString(@StringRes final int resourceId) {
+        private String getRawResourceString(@RawRes final int resourceId) {
             InputStream ins = null;
             Scanner scanner = null;
             try {

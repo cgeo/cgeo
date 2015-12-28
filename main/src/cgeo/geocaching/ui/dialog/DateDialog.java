@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.widget.DatePicker;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 import java.util.Calendar;
 
 public class DateDialog extends DialogFragment implements OnDateSetListener {
@@ -28,6 +30,7 @@ public class DateDialog extends DialogFragment implements OnDateSetListener {
     }
 
     @Override
+    @NonNull
     public Dialog onCreateDialog(final Bundle savedInstanceState) {
         final Bundle args = getArguments();
         date = (Calendar) args.getSerializable("date");

@@ -25,6 +25,8 @@ import android.content.Context;
 import android.location.Location;
 import android.os.Bundle;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -141,7 +143,7 @@ public class LocationProvider extends LocationCallback implements GoogleApiClien
     }
 
     @Override
-    public void onConnectionFailed(final ConnectionResult connectionResult) {
+    public void onConnectionFailed(@NonNull final ConnectionResult connectionResult) {
         Log.e("cannot connect to Google Play location service: " + connectionResult);
         subject.onError(new RuntimeException("Connection failed: " + connectionResult));
     }

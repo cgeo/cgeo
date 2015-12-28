@@ -10,13 +10,15 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Parcel;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 /**
  * code provided by menion - developer of Locus
  */
 public class LocusDataStorageProvider extends ContentProvider {
 
     @Override
-    public Cursor query(Uri aUri, String[] aProjection, String aSelection,
+    public Cursor query(@NonNull Uri aUri, String[] aProjection, String aSelection,
             String[] aSelectionArgs, String aSortOrder) {
 
         final DataCursor cursor = new DataCursor(new String[] { "data" });
@@ -35,17 +37,17 @@ public class LocusDataStorageProvider extends ContentProvider {
     }
 
     @Override
-    public int delete(Uri uri, String selection, String[] selectionArgs) {
+    public int delete(@NonNull Uri uri, String selection, String[] selectionArgs) {
         return 0;
     }
 
     @Override
-    public String getType(Uri uri) {
+    public String getType(@NonNull Uri uri) {
         return null;
     }
 
     @Override
-    public Uri insert(Uri uri, ContentValues values) {
+    public Uri insert(@NonNull Uri uri, ContentValues values) {
         return null;
     }
 
@@ -55,7 +57,7 @@ public class LocusDataStorageProvider extends ContentProvider {
     }
 
     @Override
-    public int update(Uri uri, ContentValues values, String selection,
+    public int update(@NonNull Uri uri, ContentValues values, String selection,
             String[] selectionArgs) {
         return 0;
     }
