@@ -1277,7 +1277,7 @@ public class DataStore {
     }
 
     /**
-     * Persists the given <code>destination</code> into the database.
+     * Persists the given {@code destination} into the database.
      *
      * @param destination
      *            a destination to save

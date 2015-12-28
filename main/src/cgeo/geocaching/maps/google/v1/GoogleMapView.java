@@ -84,9 +84,7 @@ public class GoogleMapView extends MapView implements MapViewImpl {
             controller.getZoomControls().setLayoutParams(zoomParams);
 
             super.displayZoomControls(takeFocus);
-        } catch (final NoSuchMethodException ignored) {
-            Log.w("GoogleMapView.displayZoomControls: unable to explicitly place the zoom buttons");
-        } catch (final NoSuchMethodError ignored) {
+        } catch (final NoSuchMethodException | NoSuchMethodError ignored) {
             Log.w("GoogleMapView.displayZoomControls: unable to explicitly place the zoom buttons");
         } catch (final Exception e) {
             Log.e("GoogleMapView.displayZoomControls", e);

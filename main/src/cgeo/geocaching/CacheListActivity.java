@@ -261,7 +261,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     /**
      * Loads the caches and fills the {@link #cacheList} according to {@link #search} content.
      *
-     * If {@link #search} is <code>null</code>, this does nothing.
+     * If {@link #search} is {@code null}, this does nothing.
      */
 
     private void replaceCacheListFromSearch() {

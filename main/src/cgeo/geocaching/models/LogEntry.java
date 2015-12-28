@@ -118,7 +118,7 @@ public final class LogEntry {
     }
 
     /**
-     * @return the log images or an empty list, never <code>null</code>
+     * @return the log images or an empty list, never {@code null}
      */
     public List<Image> getLogImages() {
         if (logImages == null) {

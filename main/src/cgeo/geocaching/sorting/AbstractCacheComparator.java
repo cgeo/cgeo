@@ -35,12 +35,12 @@ abstract class AbstractCacheComparator implements CacheComparator {
      * Check necessary preconditions (like missing fields) before running the comparison itself.
      * Caches not filling the conditions will be placed last, sorted by Geocode.
      *
-     * The default implementation returns <code>true</code> and can be overridden if needed in sub classes.
+     * The default implementation returns {@code true} and can be overridden if needed in sub classes.
      * 
      * @param cache
      *            the cache to be sorted
      *
-     * @return <code>true</code> if the cache holds the necessary data to be compared meaningfully
+     * @return {@code true} if the cache holds the necessary data to be compared meaningfully
      */
     @SuppressWarnings("static-method")
     protected boolean canCompare(final Geocache cache) {

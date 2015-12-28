@@ -89,7 +89,7 @@ class CalendarEntry {
     }
 
     /**
-     * @return <code>Date</code> based on hidden date. Time is set to 00:00:00.
+     * @return {@code Date} based on hidden date. Time is set to 00:00:00.
      */
     @NonNull
     protected Date parseDate() {

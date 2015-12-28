@@ -352,8 +352,8 @@ public final class Network {
      * Get the result of a GET HTTP request returning a JSON body.
      *
      * @param uri the base URI of the GET HTTP request
-     * @param params the query parameters, or <code>null</code> if there are none
-     * @return a JSON object if the request was successful and the body could be decoded, <code>null</code> otherwise
+     * @param params the query parameters, or {@code null} if there are none
+     * @return a JSON object if the request was successful and the body could be decoded, {@code null} otherwise
      */
     @Nullable
     public static ObjectNode requestJSON(final String uri, @Nullable final Parameters params) {
@@ -374,7 +374,7 @@ public final class Network {
      * Get the input stream corresponding to a HTTP response if it exists.
      *
      * @param response a HTTP response, which can be null
-     * @return the input stream if the HTTP request is successful, <code>null</code> otherwise
+     * @return the input stream if the HTTP request is successful, {@code null} otherwise
      */
     @Nullable
     public static InputStream getResponseStream(@Nullable final HttpResponse response) {
@@ -411,7 +411,7 @@ public final class Network {
      * {@link TextUtils#replaceWhitespace(String)} will be called on the result
      *
      * @param response a HTTP response, which can be null
-     * @return the body if the response comes from a successful HTTP request, <code>null</code> otherwise
+     * @return the body if the response comes from a successful HTTP request, {@code null} otherwise
      */
     @Nullable
     public static String getResponseData(@Nullable final HttpResponse response) {
@@ -427,9 +427,9 @@ public final class Network {
      * Get the body of a HTTP response.
      *
      * @param response a HTTP response, which can be null
-     * @param replaceWhitespace <code>true</code> if {@link TextUtils#replaceWhitespace(String)}
+     * @param replaceWhitespace {@code true} if {@link TextUtils#replaceWhitespace(String)}
      *                          should be called on the body
-     * @return the body if the response comes from a successful HTTP request, <code>null</code> otherwise
+     * @return the body if the response comes from a successful HTTP request, {@code null} otherwise
      */
     @Nullable
     public static String getResponseData(@Nullable final HttpResponse response, final boolean replaceWhitespace) {
@@ -471,7 +471,7 @@ public final class Network {
     /**
      * Checks if the device has network connection.
      *
-     * @return <code>true</code> if the device is connected to the network.
+     * @return {@code true} if the device is connected to the network.
      */
     public static boolean isNetworkConnected() {
         if (connectivityManager == null) {

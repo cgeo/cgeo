@@ -264,7 +264,7 @@ public final class StaticMapsProvider {
     /**
      * Check if at least one map file exists for the given cache.
      *
-     * @return <code>true</code> if at least one map file exists; <code>false</code> otherwise
+     * @return {@code true} if at least one map file exists; {@code false} otherwise
      */
     public static boolean hasStaticMap(@NonNull final Geocache cache) {
        final String geocode = cache.getGeocode();
@@ -283,7 +283,7 @@ public final class StaticMapsProvider {
     /**
      * Checks if at least one map file exists for the given geocode and waypoint ID.
      *
-     * @return <code>true</code> if at least one map file exists; <code>false</code> otherwise
+     * @return {@code true} if at least one map file exists; {@code false} otherwise
      */
     public static boolean hasStaticMapForWaypoint(final String geocode, final Waypoint waypoint) {
         final int waypointId = waypoint.getId();
@@ -300,7 +300,7 @@ public final class StaticMapsProvider {
     /**
      * Checks if all map files exist for the given geocode and waypoint ID.
      *
-     * @return <code>true</code> if all map files exist; <code>false</code> otherwise
+     * @return {@code true} if all map files exist; {@code false} otherwise
      */
     public static boolean hasAllStaticMapsForWaypoint(final String geocode, final Waypoint waypoint) {
         final int waypointId = waypoint.getId();

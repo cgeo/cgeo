@@ -216,7 +216,7 @@ public abstract class AbstractViewPagerActivity<Page extends Enum<Page>> extends
      * @param startPageIndex
      *            index of the page shown first
      * @param pageSelectedListener
-     *            page selection listener or <code>null</code>
+     *            page selection listener or {@code null}
      */
     protected final void createViewPager(final int startPageIndex, final OnPageSelectedListener pageSelectedListener) {
         // initialize ViewPager

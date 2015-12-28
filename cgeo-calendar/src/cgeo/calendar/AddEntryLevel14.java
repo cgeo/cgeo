@@ -8,7 +8,7 @@ import android.text.Html;
 import java.util.Date;
 
 /**
- * Add cache to calendar in Android versions 4.0 and greater using <code>Intent</code>. This does not require
+ * Add cache to calendar in Android versions 4.0 and greater using {@code Intent}. This does not require
  * calendar permissions.
  * TODO Does this work with apps other than default calendar app?
  */

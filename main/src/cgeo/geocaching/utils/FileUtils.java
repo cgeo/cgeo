@@ -140,7 +140,7 @@ public final class FileUtils {
     /**
      * Deletes a file and logs deletion failures.
      *
-     * @return <code> true</code> if this file was deleted, <code>false</code> otherwise.
+     * @return {@code true} if this file was deleted, {@code false} otherwise.
      */
     public static boolean delete(final File file) {
         final boolean success = file.delete() || !file.exists();
@@ -153,7 +153,7 @@ public final class FileUtils {
     /**
      * Creates the directory named by the given file, creating any missing parent directories in the process.
      *
-     * @return <code>true</code> if the directory was created, <code>false</code> on failure or if the directory already
+     * @return {@code true} if the directory was created, {@code false} on failure or if the directory already
      *         existed.
      */
     public static boolean mkdirs(final File file) {

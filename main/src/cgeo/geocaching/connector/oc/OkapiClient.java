@@ -884,8 +884,8 @@ final class OkapiClient {
     }
 
     /**
-     * Encapsulates response state and content of an HTTP-request that expects a JSON result. <code>isSuccess</code> is
-     * only true, if the response state was success and <code>data</code> is not null.
+     * Encapsulates response state and content of an HTTP-request that expects a JSON result. {@code isSuccess} is
+     * only true, if the response state was success and {@code data} is not null.
      */
     private static class JSONResult {
 

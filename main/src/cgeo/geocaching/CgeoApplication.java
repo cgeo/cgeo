@@ -116,7 +116,7 @@ public class CgeoApplication extends Application {
     /**
      * Check if cgeo must relog even if already logged in.
      *
-     * @return <code>true</code> if it is necessary to relog
+     * @return {@code true} if it is necessary to relog
      */
     public boolean mustRelog() {
         final boolean mustLogin = forceRelog;

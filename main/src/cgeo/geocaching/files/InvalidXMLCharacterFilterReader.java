@@ -24,7 +24,7 @@ public class InvalidXMLCharacterFilterReader extends FilterReader
      * and returns decreased value of the original read method. So after last
      * valid character there will be some unused chars in the buffer.
      *
-     * @return Number of read valid characters or <code>-1</code> if end of the
+     * @return Number of read valid characters or {@code -1} if end of the
      *         underling reader was reached.
      */
     @Override

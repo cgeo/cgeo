@@ -6,7 +6,7 @@ import android.view.MotionEvent;
 import android.widget.TextView;
 
 /**
- * <code>LinkMovementMethod</code> with built-in suppression of errors for links, where the URL cannot be handled
+ * {@code LinkMovementMethod} with built-in suppression of errors for links, where the URL cannot be handled
  * correctly by Android.
  *
  */

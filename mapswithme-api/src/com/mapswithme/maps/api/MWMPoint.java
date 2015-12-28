@@ -26,7 +26,7 @@ import java.io.Serializable;
 
 /**
  * POI wrapper object.
- * Has it's <code>equals()</code> and <code>hashCode()</code> methods overloaded
+ * Has it's {@code equals()} and {@code hashCode()} methods overloaded
  * so could be used in Hash(Map/Set/etc) classes.
  */
 public final class MWMPoint implements Serializable

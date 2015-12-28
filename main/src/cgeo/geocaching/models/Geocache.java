@@ -1123,7 +1123,7 @@ public class Geocache implements IWaypoint {
     /**
      * return an immutable list of waypoints.
      *
-     * @return always non <code>null</code>
+     * @return always non {@code null}
      */
     @NonNull
     public List<Waypoint> getWaypoints() {
@@ -1136,7 +1136,7 @@ public class Geocache implements IWaypoint {
      * @param saveToDatabase
      *            Indicates whether to add the waypoints to the database. Should be false if
      *            called while loading or building a cache
-     * @return <code>true</code> if waypoints successfully added to waypoint database
+     * @return {@code true} if waypoints successfully added to waypoint database
      */
     public boolean setWaypoints(final List<Waypoint> waypoints, final boolean saveToDatabase) {
         this.waypoints.clear();
@@ -1341,7 +1341,7 @@ public class Geocache implements IWaypoint {
      * @param saveToDatabase
      *            Indicates whether to add the waypoint to the database. Should be false if
      *            called while loading or building a cache
-     * @return <code>true</code> if waypoint successfully added to waypoint database
+     * @return {@code true} if waypoint successfully added to waypoint database
      */
     public boolean addOrChangeWaypoint(final Waypoint waypoint, final boolean saveToDatabase) {
         waypoint.setGeocode(geocode);
@@ -1408,7 +1408,7 @@ public class Geocache implements IWaypoint {
     }
 
     /**
-     * Reset <code>finalDefined</code> based on current list of stored waypoints
+     * Reset {@code finalDefined} based on current list of stored waypoints
      */
     private void resetFinalDefined() {
         finalDefined = false;
@@ -1433,7 +1433,7 @@ public class Geocache implements IWaypoint {
      *
      * @param original
      *            the waypoint to duplicate
-     * @return <code>true</code> if the waypoint was duplicated, <code>false</code> otherwise (invalid index)
+     * @return {@code true} if the waypoint was duplicated, {@code false} otherwise (invalid index)
      */
     public boolean duplicateWaypoint(final Waypoint original) {
         if (original == null) {
@@ -1452,7 +1452,7 @@ public class Geocache implements IWaypoint {
      *
      * @param waypoint
      *            to be removed from cache
-     * @return <code>true</code>, if the waypoint was deleted
+     * @return {@code true}, if the waypoint was deleted
      */
     public boolean deleteWaypoint(final Waypoint waypoint) {
         if (waypoint == null) {
@@ -1488,11 +1488,11 @@ public class Geocache implements IWaypoint {
     }
 
     /**
-     * Find index of given <code>waypoint</code> in cache's <code>waypoints</code> list
+     * Find index of given {@code waypoint} in cache's {@code waypoints} list
      *
      * @param waypoint
      *            to find index for
-     * @return index in <code>waypoints</code> if found, -1 otherwise
+     * @return index in {@code waypoints} if found, -1 otherwise
      */
     private int getWaypointIndex(final Waypoint waypoint) {
         final int id = waypoint.getId();
@@ -1509,7 +1509,7 @@ public class Geocache implements IWaypoint {
      *
      * @param id
      *            the id of the waypoint to look for
-     * @return waypoint or <code>null</code>
+     * @return waypoint or {@code null}
      */
     public Waypoint getWaypointById(final int id) {
         for (final Waypoint waypoint : waypoints) {

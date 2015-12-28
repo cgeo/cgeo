@@ -116,7 +116,7 @@ public final class NavigationAppFactory {
      * A dialog is created for tool selection and the selected tool is started afterwards.
      * <p />
      * Delegates to {@link #showNavigationMenu(Activity, Geocache, Waypoint, Geopoint, boolean, boolean)} with
-     * <code>showInternalMap = true</code> and <code>showDefaultNavigation = false</code>
+     * {@code showInternalMap = true} and {@code showDefaultNavigation = false}
      *
      */
     public static void showNavigationMenu(final Activity activity,
@@ -129,15 +129,15 @@ public final class NavigationAppFactory {
      * A dialog is created for tool selection and the selected tool is started afterwards.
      *
      * @param cache
-     *            may be <code>null</code>
+     *            may be {@code null}
      * @param waypoint
-     *            may be <code>null</code>
+     *            may be {@code null}
      * @param destination
-     *            may be <code>null</code>
+     *            may be {@code null}
      * @param showInternalMap
-     *            should be <code>false</code> only when called from within the internal map
+     *            should be {@code false} only when called from within the internal map
      * @param showDefaultNavigation
-     *            should be <code>false</code> by default
+     *            should be {@code false} by default
      *
      * @see #showNavigationMenu(Activity, Geocache, Waypoint, Geopoint)
      */
@@ -326,7 +326,7 @@ public final class NavigationAppFactory {
     /**
      * Returns the default navigation tool if correctly set and installed or the compass app as default fallback
      *
-     * @return never <code>null</code>
+     * @return never {@code null}
      */
     @NonNull
     public static App getDefaultNavigationApplication() {

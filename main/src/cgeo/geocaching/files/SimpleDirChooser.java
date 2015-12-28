@@ -125,7 +125,7 @@ public class SimpleDirChooser extends AbstractListActivity {
      * Return the directory containing a given path, or a sensible default.
      *
      * @param path the path to get the enclosing directory from, can be null or empty
-     * @return the directory containing <code>path</code>, or a sensible default if none
+     * @return the directory containing {@code path}, or a sensible default if none
      */
     private static File dirContaining(final String path) {
         return StringUtils.contains(path, File.separatorChar) ?

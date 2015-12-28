@@ -15,7 +15,7 @@ import java.util.TimeZone;
 
 /**
  * Field Notes are simple plain text files, but poorly documented. Syntax:<br>
- * <code>GCxxxxx,yyyy-mm-ddThh:mm:ssZ,Found it,"logtext"</code>
+ * {@code GCxxxxx,yyyy-mm-ddThh:mm:ssZ,Found it,"logtext"}
  */
 class FieldNotes {
 

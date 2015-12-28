@@ -1320,7 +1320,7 @@ public final class GCParser {
      *
      * @param cache
      *            the cache to add
-     * @return <code>false</code> if an error occurred, <code>true</code> otherwise
+     * @return {@code false} if an error occurred, {@code true} otherwise
      */
     static boolean addToWatchlist(final Geocache cache) {
         final String uri = "https://www.geocaching.com/my/watchlist.aspx?w=" + cache.getCacheId();
@@ -1368,7 +1368,7 @@ public final class GCParser {
      *
      * @param cache
      *            the cache to remove
-     * @return <code>false</code> if an error occurred, <code>true</code> otherwise
+     * @return {@code false} if an error occurred, {@code true} otherwise
      */
     static boolean removeFromWatchlist(final Geocache cache) {
         final String uri = "https://www.geocaching.com/my/watchlist.aspx?ds=1&action=rem&id=" + cache.getCacheId();
@@ -1437,7 +1437,7 @@ public final class GCParser {
      *
      * @param cache
      *            the cache to add
-     * @return <code>false</code> if an error occurred, <code>true</code> otherwise
+     * @return {@code false} if an error occurred, {@code true} otherwise
      */
     static boolean addToFavorites(final Geocache cache) {
         return changeFavorite(cache, true);
@@ -1478,7 +1478,7 @@ public final class GCParser {
      *
      * @param cache
      *            the cache to remove
-     * @return <code>false</code> if an error occurred, <code>true</code> otherwise
+     * @return {@code false} if an error occurred, {@code true} otherwise
      */
     static boolean removeFromFavorites(final Geocache cache) {
         return changeFavorite(cache, false);

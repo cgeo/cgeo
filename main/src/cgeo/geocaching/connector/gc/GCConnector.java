@@ -240,7 +240,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
      *
      * @param cache
      *            the cache to add
-     * @return <code>true</code> if the cache was successfully added, <code>false</code> otherwise
+     * @return {@code true} if the cache was successfully added, {@code false} otherwise
      */
 
     public static boolean addToFavorites(final Geocache cache) {
@@ -258,7 +258,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
      *
      * @param cache
      *            the cache to add
-     * @return <code>true</code> if the cache was successfully added, <code>false</code> otherwise
+     * @return {@code true} if the cache was successfully added, {@code false} otherwise
      */
 
     public static boolean removeFromFavorites(final Geocache cache) {

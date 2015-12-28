@@ -94,14 +94,14 @@ public abstract class AbstractLocusApp extends AbstractApp {
     }
 
     /**
-     * This method constructs a <code>Point</code> for displaying in Locus
+     * This method constructs a {@code Point} for displaying in Locus
      *
      * @param withWaypoints
      *            whether to give waypoints to Locus or not
      * @param withCacheDetails
      *            whether to give cache details (description, hint) to Locus or not
      *            should be false for all if more then 200 Caches are transferred
-     * @return null, when the <code>Point</code> could not be constructed
+     * @return null, when the {@code Point} could not be constructed
      */
     @Nullable
     private static Point getCachePoint(final Geocache cache, final boolean withWaypoints, final boolean withCacheDetails) {
@@ -184,9 +184,9 @@ public abstract class AbstractLocusApp extends AbstractApp {
     }
 
     /**
-     * This method constructs a <code>Point</code> for displaying in Locus
+     * This method constructs a {@code Point} for displaying in Locus
      *
-     * @return null, when the <code>Point</code> could not be constructed
+     * @return null, when the {@code Point} could not be constructed
      */
     @Nullable
     private static Point getWaypointPoint(final Waypoint waypoint) {

@@ -179,7 +179,7 @@ public interface IConnector {
      * Check if the current user is the owner of the given cache.
      *
      * @param cache a cache that this connector must be able to handle
-     * @return <code>true</code> if the current user is the cache owner, <code>false</code> otherwise
+     * @return {@code true} if the current user is the cache owner, {@code false} otherwise
      */
     public boolean isOwner(@NonNull final Geocache cache);
 

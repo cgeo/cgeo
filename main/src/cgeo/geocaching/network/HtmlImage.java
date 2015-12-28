@@ -298,11 +298,11 @@ public class HtmlImage implements Html.ImageGetter {
     }
 
     /**
-     * Download or refresh the copy of <code>url</code> in <code>file</code>.
+     * Download or refresh the copy of {@code url} in {@code file}.
      *
      * @param url the url of the document
      * @param file the file to save the document in
-     * @return <code>true</code> if the existing file was up-to-date, <code>false</code> otherwise
+     * @return {@code true} if the existing file was up-to-date, {@code false} otherwise
      */
     private boolean downloadOrRefreshCopy(final String url, final File file) {
         final String absoluteURL = makeAbsoluteURL(url);
@@ -354,7 +354,7 @@ public class HtmlImage implements Html.ImageGetter {
      * @param url the image URL
      * @param pseudoGeocode the geocode or the shared name
      * @param forceKeep keep the image if it is there, without checking its freshness
-     * @return A pair whose first element is the bitmap if available, and the second one is <code>true</code> if the image is present and fresh enough.
+     * @return A pair whose first element is the bitmap if available, and the second one is {@code true} if the image is present and fresh enough.
      */
     @NonNull
     private ImmutablePair<Bitmap, Boolean> loadImageFromStorage(final String url, @NonNull final String pseudoGeocode, final boolean forceKeep) {
@@ -401,10 +401,10 @@ public class HtmlImage implements Html.ImageGetter {
      *
      * @param file the file on disk
      * @param forceKeep keep the image if it is there, without checking its freshness
-     * @return a pair with <code>true</code> in the second component if the image was there and is fresh enough or <code>false</code> otherwise,
-     *         and the image (possibly <code>null</code> if the second component is <code>false</code> and the image
-     *         could not be loaded, or if the second component is <code>true</code> and <code>onlySave</code> is also
-     *         <code>true</code>)
+     * @return a pair with {@code true} in the second component if the image was there and is fresh enough or {@code false} otherwise,
+     *         and the image (possibly {@code null} if the second component is {@code false} and the image
+     *         could not be loaded, or if the second component is {@code true} and {@code onlySave} is also
+     *         {@code true})
      */
     @NonNull
     private ImmutablePair<Bitmap, Boolean> loadCachedImage(final File file, final boolean forceKeep) {
