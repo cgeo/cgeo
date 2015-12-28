@@ -17,7 +17,7 @@ public class GCBaseTest extends TestCase {
     public static void testSearchFromMap() {
         final MockedCacheAndroid mockedCache = new GC2CJPFAndroid();
 
-        final Set<String> geocodes = new HashSet<String>();
+        final Set<String> geocodes = new HashSet<>();
         geocodes.add(mockedCache.getGeocode());
 
         final SearchResult result = GCMap.searchByGeocodes(geocodes);

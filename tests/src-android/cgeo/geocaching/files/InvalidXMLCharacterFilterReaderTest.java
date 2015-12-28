@@ -14,7 +14,7 @@ public class InvalidXMLCharacterFilterReaderTest extends AndroidTestCase {
 
     public static void testFilterInvalid() throws Exception {
         final RootElement root = new RootElement("desc");
-        final AtomicReference<String> description = new AtomicReference<String>();
+        final AtomicReference<String> description = new AtomicReference<>();
         root.setEndTextElementListener(new EndTextElementListener() {
 
             @Override

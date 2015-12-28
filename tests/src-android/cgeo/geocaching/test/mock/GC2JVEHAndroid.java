@@ -113,12 +113,12 @@ public class GC2JVEHAndroid extends MockedCacheAndroid {
                 "hike_med_yes",
                 "rappelling_yes"
         };
-        return new MockedLazyInitializedList<String>(attributes);
+        return new MockedLazyInitializedList<>(attributes);
     }
 
     @Override
     public Map<LogType, Integer> getLogCounts() {
-        final Map<LogType, Integer> logCounts = new HashMap<LogType, Integer>();
+        final Map<LogType, Integer> logCounts = new HashMap<>();
         logCounts.put(LogType.FOUND_IT, 101);
         logCounts.put(LogType.NOTE, 7);
         logCounts.put(LogType.TEMP_DISABLE_LISTING, 1);
@@ -139,7 +139,7 @@ public class GC2JVEHAndroid extends MockedCacheAndroid {
 
     @Override
     public List<Trackable> getInventory() {
-        final ArrayList<Trackable> inventory = new ArrayList<Trackable>();
+        final ArrayList<Trackable> inventory = new ArrayList<>();
         inventory.add(new Trackable());
         return inventory;
     }
@@ -147,7 +147,7 @@ public class GC2JVEHAndroid extends MockedCacheAndroid {
     @Override
     @NonNull
     public List<Image> getSpoilers() {
-        final ArrayList<Image> spoilers = new ArrayList<Image>();
+        final ArrayList<Image> spoilers = new ArrayList<>();
         final Image mockedImage = Image.NONE;
         spoilers.add(mockedImage);
         spoilers.add(mockedImage);

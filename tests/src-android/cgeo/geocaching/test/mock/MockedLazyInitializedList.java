@@ -15,7 +15,7 @@ class MockedLazyInitializedList<ElementType> extends LazyInitializedList<Element
 
     @Override
     public List<ElementType> call() {
-        return new ArrayList<ElementType>();
+        return new ArrayList<>();
     }
 
 }

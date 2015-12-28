@@ -12,7 +12,7 @@ import junit.framework.TestCase;
 public class NavigationAppFactoryTest extends TestCase {
 
     public static void testUniqueNavigationAppIds() throws Exception {
-        final Set<Integer> idSet = new HashSet<Integer>();
+        final Set<Integer> idSet = new HashSet<>();
         for (NavigationAppsEnum navigationApp : NavigationAppsEnum.values()) {
             idSet.add(navigationApp.id);
         }

@@ -86,7 +86,7 @@ public class DataStoreTest extends CGeoTestCase {
         } finally {
 
             // remove caches
-            final Set<String> geocodes = new HashSet<String>();
+            final Set<String> geocodes = new HashSet<>();
             geocodes.add(cache1.getGeocode());
             geocodes.add(cache2.getGeocode());
             DataStore.removeCaches(geocodes, LoadFlags.REMOVE_ALL);
@@ -121,7 +121,7 @@ public class DataStoreTest extends CGeoTestCase {
         cache.setDetailed(true);
         final Trackable trackable = new Trackable();
         trackable.setLogs(null);
-        final List<Trackable> inventory = new ArrayList<Trackable>();
+        final List<Trackable> inventory = new ArrayList<>();
         inventory.add(trackable);
         cache.setInventory(inventory);
 
@@ -196,7 +196,7 @@ public class DataStoreTest extends CGeoTestCase {
 
         // Tile to test
         final Tile tile = new Tile(new Geopoint("N49 44.0 E8 37.0"), 14);
-        final Set<Tile> tiles = new HashSet<Tile>();
+        final Set<Tile> tiles = new HashSet<>();
         tiles.add(tile);
 
         // set up geocaches to fill into cacheCache

@@ -10,7 +10,7 @@ import java.util.Set;
 
 public class SearchResultTest extends AndroidTestCase {
     public static void testCreateFromGeocodes() {
-        final HashSet<String> geocodes = new HashSet<String>();
+        final HashSet<String> geocodes = new HashSet<>();
         geocodes.add("GC12345");
         geocodes.add("GC23456");
         final SearchResult searchResult = new SearchResult(geocodes);
@@ -20,7 +20,7 @@ public class SearchResultTest extends AndroidTestCase {
     }
 
     public static void testParcel() {
-        final Set<String> geocodes = new HashSet<String>();
+        final Set<String> geocodes = new HashSet<>();
         geocodes.add("GC12345");
         geocodes.add("GC23456");
         geocodes.add("GC34567");
@@ -48,7 +48,7 @@ public class SearchResultTest extends AndroidTestCase {
     }
 
     public static void testAddSearchResult() {
-        final Set<String> geocodes = new HashSet<String>();
+        final Set<String> geocodes = new HashSet<>();
         geocodes.add("GC12345");
         geocodes.add("GC23456");
         geocodes.add("GC34567");

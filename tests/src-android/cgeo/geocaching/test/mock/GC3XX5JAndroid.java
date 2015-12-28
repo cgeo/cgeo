@@ -115,12 +115,12 @@ public class GC3XX5JAndroid extends MockedCacheAndroid {
                 "parkngrab_yes",
                 "dogs_yes"
         };
-        return new MockedLazyInitializedList<String>(attributes);
+        return new MockedLazyInitializedList<>(attributes);
     }
 
     @Override
     public Map<LogType, Integer> getLogCounts() {
-        final Map<LogType, Integer> logCounts = new HashMap<LogType, Integer>();
+        final Map<LogType, Integer> logCounts = new HashMap<>();
         logCounts.put(LogType.PUBLISH_LISTING, 2);
         logCounts.put(LogType.FOUND_IT, 65);
         logCounts.put(LogType.RETRACT, 1);

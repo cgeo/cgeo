@@ -30,7 +30,7 @@ public class LazyInitializedListTest extends AndroidTestCase {
             if (counter == MAKE_EXCEPTION) {
                 throw new RuntimeException("exception in call()");
             }
-            final List<Integer> result = new LinkedList<Integer>();
+            final List<Integer> result = new LinkedList<>();
             for (int i = 0; i < counter; i++) {
                 result.add(counter);
             }

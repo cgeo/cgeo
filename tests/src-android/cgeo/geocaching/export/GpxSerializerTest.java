@@ -39,7 +39,7 @@ public class GpxSerializerTest extends AbstractResourceInstrumentationTestCase {
     }
 
     public void testProgressReporting() throws IOException, ParserException {
-        final AtomicReference<Integer> importedCount = new AtomicReference<Integer>(0);
+        final AtomicReference<Integer> importedCount = new AtomicReference<>(0);
         final StringWriter writer = new StringWriter();
 
         final Geocache cache = loadCacheFromResource(R.raw.gc1bkp3_gpx101);

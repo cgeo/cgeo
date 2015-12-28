@@ -233,7 +233,7 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
     }
 
     private List<Geocache> readVersionedGPX(final GPXParser parser, @RawRes final int... resourceIds) throws IOException, ParserException {
-        final Set<String> result = new HashSet<String>();
+        final Set<String> result = new HashSet<>();
         for (final int resourceId : resourceIds) {
             final InputStream instream = getResourceStream(resourceId);
             try {
@@ -247,7 +247,7 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
             }
         }
         // reload caches, because the parser only returns the minimum version of each cache
-        return new ArrayList<Geocache>(DataStore.loadCaches(result, LoadFlags.LOAD_ALL_DB_ONLY));
+        return new ArrayList<>(DataStore.loadCaches(result, LoadFlags.LOAD_ALL_DB_ONLY));
     }
 
     public static void testParseDateWithFractionalSeconds() throws ParseException {
@@ -276,7 +276,7 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
     public void testGeoToad() throws Exception {
         final List<Geocache> caches = readGPX10(R.raw.geotoad);
         assertThat(caches).hasSize(2);
-        final List<String> codes = new ArrayList<String>();
+        final List<String> codes = new ArrayList<>();
         for (final Geocache cache : caches) {
             codes.add(cache.getGeocode());
         }

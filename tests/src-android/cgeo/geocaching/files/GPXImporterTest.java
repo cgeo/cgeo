@@ -259,7 +259,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
     }
 
     static class TestHandler extends CancellableHandler {
-        private final List<Message> messages = new ArrayList<Message>();
+        private final List<Message> messages = new ArrayList<>();
         private long lastMessage = System.currentTimeMillis();
 
         @Override
@@ -315,7 +315,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
     @Override
     protected void tearDown() throws Exception {
         final SearchResult search = DataStore.getBatchOfStoredCaches(null, CacheType.ALL, listId);
-        final List<Geocache> cachesInList = new ArrayList<Geocache>();
+        final List<Geocache> cachesInList = new ArrayList<>();
         cachesInList.addAll(search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB));
         DataStore.markDropped(cachesInList);
         DataStore.removeList(listId);
