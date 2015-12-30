@@ -219,6 +219,7 @@
   <string name="info_log_posted">c:geo envió el registro sin problemas.</string>
   <string name="info_log_saved">c:geo guardó el registro sin problemas.</string>
   <string name="info_log_post_failed">Fallo al publicar tu registro.</string>
+  <string name="info_log_post_failed_reason">Motivo: %s</string>
   <string name="info_log_post_retry">Reintentar</string>
   <string name="info_log_post_save">Guardar sin conexión</string>
   <string name="info_log_cleared">Registro borrado.</string>
@@ -656,7 +657,9 @@
   <string name="cache_description_long">Descripción larga</string>
   <string name="cache_description_table_note">La descripción contiene formato de tabla que puede necesitar ser vista en %s para mostrarse correctamente.</string>
   <string name="cache_watchlist_on">Este caché está en tu Lista de seguimiento.</string>
+  <string name="cache_watchlist_on_extra">El caché está en tu lista de seguimiento (Seguidores: %1d).</string>
   <string name="cache_watchlist_not_on">Este caché no está en tu Lista de seguimiento.</string>
+  <string name="cache_watchlist_not_on_extra">El caché no está en tu lista de seguimiento (Seguidores: %1d).</string>
   <string name="cache_watchlist_add">Añadir a Lista de seguimiento</string>
   <string name="cache_watchlist_remove">Borrar de la Lista de seguimiento</string>
   <string name="cache_favpoint_on">Este caché es uno de tus favoritos.</string>
@@ -950,6 +953,8 @@
   <string name="helper_calendar_title">Complemento de calendario de c:geo</string>
   <string name="helper_calendar_missing">Complemento de calendario de c:geo no está instalado.</string>
   <string name="helper_calendar_description">Permite exportar eventos al calendario de tu dispositivo.</string>
+  <string name="helper_calendar_pastevent_title">Evento pasado</string>
+  <string name="helper_calendar_pastevent_question">La fecha del evento ya ha pasado. ¿Añadirlo de todos modos?</string>
   <string name="helper_sendtocgeo_title">Send to c:geo</string>
   <string name="helper_contacts_title">Complemento de contactos de c:geo</string>
   <string name="helper_contacts_description">Permite abrir un contacto (de tu libreta de contactos) directamente desde un registro, para que puedas pedir ayuda a tus amigos más fácilmente.</string>
@@ -1310,4 +1315,10 @@ Nombre de archivo:%2$s</string>
   </plurals>
   <string name="command_rename_list_result">Lista renombrada</string>
   <string name="command_delete_list_result">Lista borrada</string>
+  <string name="fav_points_remaining">"Añadir el caché a favoritos (te quedan %s)"</string>
+  <string name="unit_m">m</string>
+  <string name="unit_km">km</string>
+  <string name="unit_ft">ft</string>
+  <string name="unit_yd">yd</string>
+  <string name="unit_mi">mi</string>
 </resources>
