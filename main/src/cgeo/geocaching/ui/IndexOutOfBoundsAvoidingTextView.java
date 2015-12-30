@@ -1,6 +1,8 @@
 package cgeo.geocaching.ui;
 
 import android.content.Context;
+import android.text.Selection;
+import android.text.Spannable;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
@@ -50,6 +52,19 @@ public class IndexOutOfBoundsAvoidingTextView extends TextView {
 			super.setText(text, type);
         } catch (final IndexOutOfBoundsException ignored) {
 			setText(text.toString());
+		}
+	}
+
+	@Override
+	protected void onSelectionChanged(int selStart, int selEnd) {
+		if (selStart == -1 || selEnd == -1) {
+			// @hack : https://code.google.com/p/android/issues/detail?id=137509
+			CharSequence text = getText();
+			if (text instanceof Spannable) {
+				Selection.setSelection((Spannable) text, 0, 0);
+			}
+		} else {
+			super.onSelectionChanged(selStart, selEnd);
 		}
 	}
 }

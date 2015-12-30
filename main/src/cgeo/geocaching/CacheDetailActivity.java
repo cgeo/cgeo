@@ -1431,8 +1431,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     protected class DescriptionViewCreator extends AbstractCachingPageViewCreator<ScrollView> {
 
         @Bind(R.id.personalnote) protected TextView personalNoteView;
-        @Bind(R.id.shortdesc) protected IndexOutOfBoundsAvoidingTextView shortDescView;
-        @Bind(R.id.longdesc) protected IndexOutOfBoundsAvoidingTextView longDescView;
+        @Bind(R.id.description) protected IndexOutOfBoundsAvoidingTextView descView;
         @Bind(R.id.show_description) protected Button showDesc;
         @Bind(R.id.loading) protected View loadingView;
 
@@ -1448,7 +1447,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
             // cache short description
             if (StringUtils.isNotBlank(cache.getShortDescription())) {
-                loadDescription(cache.getShortDescription(), shortDescView, null);
+                loadDescription(cache.getShortDescription(), descView, null);
             }
 
             // long description
@@ -1578,7 +1577,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             loadingView.setVisibility(View.VISIBLE);
 
             final String longDescription = cache.getDescription();
-            loadDescription(longDescription, longDescView, loadingView);
+            loadDescription(longDescription, descView, loadingView);
         }
 
         private void warnPersonalNoteExceedsLimit() {
@@ -1611,12 +1610,16 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 addWarning(unknownTagsHandler, description);
                 if (StringUtils.isNotBlank(descriptionString)) {
                     try {
-                        descriptionView.setText(description, TextView.BufferType.SPANNABLE);
+                        if (descriptionView.getText().length() == 0) {
+                            descriptionView.setText(description, TextView.BufferType.SPANNABLE);
+                        } else {
+                            descriptionView.append(description);
+                        }
                     } catch (final Exception e) {
                         // On 4.1, there is sometimes a crash on measuring the layout: https://code.google.com/p/android/issues/detail?id=35412
                         Log.e("Android bug setting text: ", e);
                         // remove the formatting by converting to a simple string
-                        descriptionView.setText(description.toString());
+                        descriptionView.append(description.toString());
                     }
                     descriptionView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
                     fixTextColor(descriptionString, descriptionView);
@@ -1679,7 +1682,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
      * Hide the short description, if it is contained somewhere at the start of the long description.
      */
     public void potentiallyHideShortDescription() {
-        final View shortView = ButterKnife.findById(this, R.id.shortdesc);
+        final View shortView = ButterKnife.findById(this, R.id.description);
         if (shortView == null) {
             return;
         }
@@ -1939,6 +1942,8 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
     @Override
     public void addContextMenu(final View view) {
+        if (view.getId() == R.id.description) return;
+
         view.setOnLongClickListener(new OnLongClickListener() {
 
             @Override
@@ -1957,20 +1962,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                                 clickedItemText = ((TextView) view).getText();
                                 final CharSequence itemTitle = ((TextView) ((View) view.getParent()).findViewById(R.id.name)).getText();
                                 buildDetailsContextMenu(actionMode, menu, itemTitle, true);
-                                return true;
-                            case R.id.shortdesc:
-                                clickedItemText = cache.getShortDescription();
-                                buildDetailsContextMenu(actionMode, menu, res.getString(R.string.cache_description), false);
-                                return true;
-                            case R.id.longdesc:
-                                // combine short and long description
-                                final String shortDesc = cache.getShortDescription();
-                                if (StringUtils.isBlank(shortDesc)) {
-                                    clickedItemText = cache.getDescription();
-                                } else {
-                                    clickedItemText = shortDesc + "\n\n" + cache.getDescription();
-                                }
-                                buildDetailsContextMenu(actionMode, menu, res.getString(R.string.cache_description), false);
                                 return true;
                             case R.id.personalnote:
                                 clickedItemText = cache.getPersonalNote();
