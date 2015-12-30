@@ -57,6 +57,10 @@ android {
         release {
             signingConfig signingConfigs.release
         }
+        nightly {
+            versionNameSuffix "-${System.env.NB}-" + gitCommitId().substring(0, 7)
+            signingConfig signingConfigs.release
+        }
     }
     
     buildTypes.all { buildType ->
@@ -169,6 +173,13 @@ android {
             output.outputFile = new File(
                     output.outputFile.parent,
                     output.outputFile.name.replace('-basic-', '-'))
+        }
+    }
+
+    // special version code for nightly builds
+    applicationVariants.all { variant ->
+        if (variant.buildType.name.equals('nightly')) {
+            variant.mergedFlavor.versionCode = nightlyVersionCodeFromDate()
         }
     }
 }
@@ -313,6 +324,14 @@ def versionCodeFromDate() {
     def date = new Date()
     def formattedDate = date.format('yyyyMMdd')
     return Integer.valueOf(formattedDate)
+}
+/*
+ * nightly version number from the current date
+ */
+def nightlyVersionCodeFromDate() {
+    def date = new Date()
+    def formattedDate = date.format('yyyyMMdd')
+    return Integer.valueOf(formattedDate) + 10000000
 }
 
 /* 
