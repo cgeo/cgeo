@@ -84,6 +84,7 @@
 
     <TextView
         android:id="@+id/note"
+        android:autoLink="all"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="12dp"
