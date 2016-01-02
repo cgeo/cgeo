@@ -24,7 +24,7 @@ public class PositionHistory {
     /**
      * Adds the current position to the trail history to be able to show the trail on the map.
      */
-    void rememberTrailPosition(final Location coordinates) {
+    public void rememberTrailPosition(final Location coordinates) {
         if (coordinates.getAccuracy() >= 50f) {
             return;
         }

@@ -54,7 +54,7 @@ import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.AndroidGeocoder;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Units;
-import cgeo.geocaching.maps.CGeoMap;
+import cgeo.geocaching.maps.DefaultMap;
 import cgeo.geocaching.playservices.AppInvite;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
@@ -658,7 +658,7 @@ public class MainActivity extends AbstractActionBarActivity {
      */
     public void cgeoFindOnMap(final View v) {
         findOnMap.setPressed(true);
-        startActivity(CGeoMap.getLiveMapIntent(this));
+        startActivity(DefaultMap.getLiveMapIntent(this));
     }
 
     /**
