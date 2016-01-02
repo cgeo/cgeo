@@ -673,6 +673,11 @@
                 <CheckBoxPreference
                     android:defaultValue="true"
                     android:enabled="false"
+                    android:key="@string/pref_navigation_menu_internal_new_map"
+                    android:title="@string/cache_menu_new_map" />
+                <CheckBoxPreference
+                    android:defaultValue="true"
+                    android:enabled="false"
                     android:key="@string/pref_navigation_menu_static_map"
                     android:title="@string/cache_menu_map_static" />
                 <CheckBoxPreference
@@ -870,6 +875,12 @@
                 android:key="@string/pref_memory_dump"
                 android:title="@string/init_create_memory_dump" />
         </PreferenceCategory>
-    </PreferenceScreen>
+        <PreferenceCategory android:title="@string/init_experimental_title" >
+            <CheckBoxPreference
+                android:defaultValue="false"
+                android:key="@string/pref_new_map_as_default"
+                android:title="@string/init_newmap" />
+        </PreferenceCategory>
+</PreferenceScreen>
 
 </PreferenceScreen>

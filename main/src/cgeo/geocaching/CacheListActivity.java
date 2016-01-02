@@ -44,7 +44,7 @@ import cgeo.geocaching.loaders.OfflineGeocacheListLoader;
 import cgeo.geocaching.loaders.OwnerGeocacheListLoader;
 import cgeo.geocaching.loaders.PocketGeocacheListLoader;
 import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.maps.CGeoMap;
+import cgeo.geocaching.maps.DefaultMap;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.PocketQuery;
 import cgeo.geocaching.network.Cookies;
@@ -1518,7 +1518,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
         // apply filter settings (if there's a filter)
         final SearchResult searchToUse = getFilteredSearch();
-        CGeoMap.startActivitySearch(this, searchToUse, title);
+        DefaultMap.startActivitySearch(this, searchToUse, title);
     }
 
     private void refreshCurrentList() {

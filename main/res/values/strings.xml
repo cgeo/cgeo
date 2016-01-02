@@ -642,6 +642,8 @@
     <string name="feature_search_geocode">Search by geocode</string>
     <string name="feature_search_owner">Search by owner</string>
     <string name="feature_search_finder">Search by finder</string>
+    <string name="init_experimental_title">Experimental features</string>
+    <string name="init_newmap">Use the new map as default (live/lists)</string>
     
     <!-- map sources -->
     <string name="map_source_google_map">Google: Map</string>
@@ -815,6 +817,7 @@
     <string name="cache_menu_sygic_drive">Sygic (Driving)</string>
     <string name="cache_menu_radar">Radar</string>
     <string name="cache_menu_map">Map</string>
+    <string name="cache_menu_new_map">New Map</string>
     <string name="cache_menu_map_static">Static Maps</string>
     <string name="cache_menu_download_map_static">Download Static Maps</string>
     <string name="cache_menu_rmaps">Rmaps</string>

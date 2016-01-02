@@ -226,6 +226,11 @@ dependencies {
     compile files('libs/locus-api-1.37.jar')
     compile files('libs/locus-api-android-1.37.41.jar')
     compile files('libs/mapsforge-map-0.3.0-jar-with-dependencies.jar')
+    compile files('libs/androidsvg-1.2.2-beta-1.jar')
+    compile files('libs/mapsforge-core-0.6.0.jar')
+    compile files('libs/mapsforge-map-0.6.0.jar')
+    compile files('libs/mapsforge-map-android-0.6.0.jar')
+    compile files('libs/mapsforge-map-reader-0.6.0.jar')
 
     compile 'com.android.support:appcompat-v7:20.0.0'
 

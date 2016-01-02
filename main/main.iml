@@ -8,6 +8,15 @@
       <excludeFolder url="file://$MODULE_DIR$/.gradle"/>
     </content>
     <orderEntry type="sourceFolder" forTests="false"/>
+    <orderEntry type="library" exported="" name="okio-1.6.0" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="runner-0.5" level="project" />
+    <orderEntry type="library" exported="" name="mapsforge-map-0.6.0" level="project" />
+    <orderEntry type="library" exported="" name="locus-api-android-1.37.41" level="project" />
+    <orderEntry type="library" exported="" name="locus-api-1.37" level="project" />
+    <orderEntry type="library" exported="" name="jackson-annotations-2.7.1" level="project" />
+    <orderEntry type="library" exported="" name="mapsforge-core-0.6.0" level="project" />
+    <orderEntry type="library" exported="" name="androidsvg-1.2.2-beta-1" level="project" />
+    <orderEntry type="library" exported="" name="mapsforge-map-reader-0.6.0" level="project" />
   </component>
   <component name="ModuleRootManager"/>
 </module>

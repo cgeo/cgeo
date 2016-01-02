@@ -312,6 +312,10 @@
             android:label="@string/map_map" >
         </activity>
         <activity
+            android:name=".maps.mapsforge.v6.NewMap"
+            android:label="@string/map_map" >
+        </activity>
+        <activity
             android:name=".StaticMapsActivity_"
             android:label="@string/map_static_title" >
         </activity>

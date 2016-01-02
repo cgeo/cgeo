@@ -43,6 +43,8 @@ public final class NavigationAppFactory {
         RADAR(new RadarApp(), 1, R.string.pref_navigation_menu_radar),
         /** The selected map */
         INTERNAL_MAP(new InternalMap(), 2, R.string.pref_navigation_menu_internal_map),
+        /** The new internal map */
+        INTERNAL_MAP_NEW(new InternalMapNew(), 25, R.string.pref_navigation_menu_internal_new_map),
         /** The internal static map activity, when stored */
         STATIC_MAP(new StaticMapApp(), 3, R.string.pref_navigation_menu_static_map),
         /** The internal static map activity, when not yet stored */
