@@ -78,3 +78,8 @@
 
 # Play Service references to classes introduced in higher API levels
 -dontwarn com.google.android.gms.**
+
+# new mapsforge
+-dontwarn com.caverock.androidsvg.R$styleable
+-dontwarn com.caverock.androidsvg.R
+-dontwarn org.kxml2.io.KXmlParser

@@ -220,6 +220,11 @@ dependencies {
     compile files('libs/httpclientandroidlib-1.1.2.jar')
     compile files('libs/locus-api-4.0.jar')
     compile files('libs/mapsforge-map-0.3.0-jar-with-dependencies.jar')
+    compile files('libs/androidsvg-1.2.2-beta-1.jar')
+    compile files('libs/mapsforge-core-0.6.0.jar')
+    compile files('libs/mapsforge-map-0.6.0.jar')
+    compile files('libs/mapsforge-map-android-0.6.0.jar')
+    compile files('libs/mapsforge-map-reader-0.6.0.jar')
 
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.google.android.gms:play-services-location:8.4.0'

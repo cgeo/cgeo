@@ -23,6 +23,14 @@
     <View style="@style/action_bar_separator" />
 
     <ImageView
+        android:id="@+id/setAsTarget"
+        style="@style/action_bar_action"
+        android:longClickable="true"
+        android:src="@drawable/ic_menu_publish" />
+
+    <View style="@style/action_bar_separator" />
+
+    <ImageView
         android:id="@+id/overflowActionBar"
         style="@style/action_bar_action"
         android:longClickable="true"

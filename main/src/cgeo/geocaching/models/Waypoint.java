@@ -1,11 +1,13 @@
 package cgeo.geocaching.models;
 
 import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.enumerations.CoordinatesType;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.maps.mapsforge.v6.caches.GeoitemRef;
 import cgeo.geocaching.utils.MatcherWrapper;
 
 import org.apache.commons.lang3.StringUtils;
@@ -229,8 +231,8 @@ public class Waypoint implements IWaypoint {
     }
 
     @Override
-    public String getCoordType() {
-        return "waypoint";
+    public CoordinatesType getCoordType() {
+        return CoordinatesType.WAYPOINT;
     }
 
     public void setVisited(final boolean visited) {
@@ -332,5 +334,8 @@ public class Waypoint implements IWaypoint {
         return WaypointType.WAYPOINT;
     }
 
+    public GeoitemRef getGeoitemRef() {
+        return new GeoitemRef(getGpxId(), getCoordType(), getGeocode(), getId(), getName(), getWaypointType().markerId);
+    }
 
 }
