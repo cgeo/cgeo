@@ -82,3 +82,7 @@
 # OkHttp references unused classes
 -dontwarn java.nio.file.*
 -dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement
+# new mapsforge
+-dontwarn com.caverock.androidsvg.R$styleable
+-dontwarn com.caverock.androidsvg.R
+-dontwarn org.kxml2.io.KXmlParser

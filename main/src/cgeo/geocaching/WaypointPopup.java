@@ -1,5 +1,9 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.activity.ActivityMixin;
+
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,9 +11,6 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.Window;
-
-import cgeo.geocaching.activity.AbstractActivity;
-import cgeo.geocaching.activity.ActivityMixin;
 
 public class WaypointPopup extends AbstractActivity {
     private int waypointId = 0;
@@ -36,9 +37,17 @@ public class WaypointPopup extends AbstractActivity {
         final Intent popupIntent = new Intent(context, WaypointPopup.class);
         popupIntent.putExtra(Intents.EXTRA_WAYPOINT_ID, waypointId);
         popupIntent.putExtra(Intents.EXTRA_GEOCODE, geocode);
+
         context.startActivity(popupIntent);
     }
 
+    public static void startActivityAllowTarget(final Activity activity, final int waypointId, final String geocode) {
+        final Intent popupIntent = new Intent(activity, WaypointPopup.class);
+        popupIntent.putExtra(Intents.EXTRA_WAYPOINT_ID, waypointId);
+        popupIntent.putExtra(Intents.EXTRA_GEOCODE, geocode);
+
+        activity.startActivityForResult(popupIntent, AbstractDialogFragment.REQUEST_CODE_COORDINATES);
+    }
 
     void showDialog() {
         // DialogFragment.show() will take care of adding the fragment
