@@ -26,7 +26,7 @@
         android:id="@+id/overflowActionBar"
         style="@style/action_bar_action"
         android:longClickable="true"
-        android:src="@drawable/abc_ic_menu_moreoverflow_normal_holo_dark" />
+        android:src="@drawable/abc_ic_menu_moreoverflow_mtrl_alpha" />
 
 
 </LinearLayout>

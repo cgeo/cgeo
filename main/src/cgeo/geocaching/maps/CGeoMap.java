@@ -243,10 +243,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         final TextView titleview = ButterKnife.findById(activity, R.id.actionbar_title);
         if (titleview != null) {
             titleview.setText(title);
-
-        }
-        if ((Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH)) {
-            setTitleIceCreamSandwich(title);
         }
     }
 
@@ -284,9 +280,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         final TextView titleView = ButterKnife.findById(activity, R.id.actionbar_title);
         if (titleView != null) {
             titleView.setText(titleView.getText().toString() + ' ' + subtitle);
-        }
-        if ((Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH)) {
-            setSubtitleIceCreamSandwich(subtitle);
         }
     }
 
@@ -496,9 +489,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
         // set layout
         ActivityMixin.setTheme(activity);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
-            getActionBar().setDisplayHomeAsUpEnabled(true);
-        }
         activity.setContentView(mapProvider.getMapLayoutId());
         setTitle();
 
@@ -549,7 +539,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         // Check for Honeycomb fake overflow button and attach popup
         final View overflowActionBar = ButterKnife.findById(activity, R.id.overflowActionBar);
         if (overflowActionBar != null) {
-            honeycombMenu = true;
             overflowActionBar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(final View v) {
@@ -651,6 +640,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         inflater.inflate(R.menu.map_activity, popupMenu.getMenu());
 
         // continue processing menu items as usual
+        honeycombMenu = true;
         onCreateOptionsMenu(popupMenu.getMenu());
 
         onPrepareOptionsMenu(popupMenu.getMenu());
@@ -664,6 +654,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
                 }
                 );
         // display menu
+        honeycombMenu = false;
         popupMenu.show();
     }
 
