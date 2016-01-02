@@ -109,9 +109,6 @@ android {
 
                 // TODO: this one fails consistently when running from gradle, needs to be investigated
                 exclude '**/GPXImporterTest.java'
-
-                // TODO: remove after migration to gradle. not sure if this is currently used anywhere
-                exclude '**/CgeoTestSuite.java'
             }
             resources.srcDirs = ['../tests/src']
             res.srcDirs = ['../tests/res']
