@@ -73,6 +73,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.EnumSet;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
@@ -1017,6 +1018,7 @@ public final class GCParser {
             }
 
             final List<PocketQueryList> list = new ArrayList<>();
+            final Set<String> downloadablePocketQueries = getDownloadablePocketQueries(subPage);
 
             final MatcherWrapper matcherPocket = new MatcherWrapper(GCConstants.PATTERN_LIST_PQ, subPage);
 
@@ -1030,7 +1032,7 @@ public final class GCParser {
                 }
                 final String guid = Html.fromHtml(matcherPocket.group(2)).toString();
                 final String name = Html.fromHtml(matcherPocket.group(3)).toString();
-                final PocketQueryList pqList = new PocketQueryList(guid, name, maxCaches);
+                final PocketQueryList pqList = new PocketQueryList(guid, name, maxCaches, downloadablePocketQueries.contains(guid));
                 list.add(pqList);
             }
 
@@ -1047,6 +1049,28 @@ public final class GCParser {
             return Observable.just(list);
         }
     }).subscribeOn(AndroidRxUtils.networkScheduler);
+
+    /**
+     * Reads guids from table containing active (downloadable) PQ called uxOfflinePQTable
+     *
+     * @param subPage
+     * @return Set with guids of downloadable PQs
+     */
+    private static Set<String> getDownloadablePocketQueries(final String subPage) {
+        final Set<String> downloadablePocketQueries = new HashSet<>();
+        final String downloadSubPage = StringUtils.substringAfter(subPage, "id=\"uxOfflinePQTable\"");
+        if (StringUtils.isEmpty(downloadSubPage)) {
+            Log.w("GCParser.addDownloadableAttribute: id \"uxOfflinePQTable\" not found on page");
+        }
+
+        final MatcherWrapper matcherPocket = new MatcherWrapper(GCConstants.PATTERN_LIST_PQ_DL, downloadSubPage);
+
+        while (matcherPocket.find()) {
+            final String guid = Html.fromHtml(matcherPocket.group(1)).toString();
+            downloadablePocketQueries.add(guid);
+        }
+        return downloadablePocketQueries;
+    }
 
     static ImmutablePair<StatusCode, String> postLog(final String geocode, final String cacheid, final String[] viewstates,
                                                      final LogType logType, final int year, final int month, final int day,

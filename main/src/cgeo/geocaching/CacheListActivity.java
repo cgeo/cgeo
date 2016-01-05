@@ -1576,16 +1576,52 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         context.startActivity(cachesIntent);
     }
 
-    public static void startActivityPocket(final AbstractActivity context, final @NonNull PocketQueryList pq) {
-        final String guid = pq.getGuid();
+    public static void startActivityPocket(final AbstractActivity context, final @NonNull PocketQueryList pocketQuery) {
+        final String guid = pocketQuery.getGuid();
         if (guid == null) {
             context.showToast(CgeoApplication.getInstance().getString(R.string.warn_pocket_query_select));
             return;
         }
+        if (pocketQuery.isDownloadable()) {
+            // ask user to import pq or view cache list
+            final AlertDialog.Builder dialog = new AlertDialog.Builder(context);
+            dialog.setTitle(CgeoApplication.getInstance().getString(R.string.pq_available_for_download));
+            dialog.setMessage(CgeoApplication.getInstance().getString(R.string.pq_available_for_download_description));
+            dialog.setCancelable(true);
+            dialog.setNegativeButton(CgeoApplication.getInstance().getString(R.string.pq_as_cache_list), new DialogInterface.OnClickListener() {
+
+                @Override
+                public void onClick(final DialogInterface dialog, final int id) {
+                    startActivityPocket(context, pocketQuery, CacheListType.POCKET);
+                }
+            });
+            dialog.setPositiveButton(CgeoApplication.getInstance().getString(R.string.pq_download_and_import), new DialogInterface.OnClickListener() {
+
+                @Override
+                public void onClick(final DialogInterface dialog, final int id) {
+                    startActivityWithAttachment(context, pocketQuery);
+                }
+            });
+
+            final AlertDialog alert = dialog.create();
+            alert.show();
+        } else {
+            startActivityPocket(context, pocketQuery, CacheListType.POCKET);
+        }
+    }
+
+    private static void startActivityWithAttachment(final AbstractActivity context, final @NonNull PocketQueryList pocketQuery) {
+        final Uri uri = Uri.parse("https://www.geocaching.com/pocket/downloadpq.ashx?g=" + pocketQuery.getGuid() + "&src=web");
+        final Intent cachesIntent = new Intent(Intent.ACTION_VIEW, uri, context, CacheListActivity.class);
+        cachesIntent.setDataAndType(uri, "application/zip");
+        context.startActivity(cachesIntent);
+    }
+
+    private static void startActivityPocket(final AbstractActivity context, final @NonNull PocketQueryList pocketQuery, final CacheListType cacheListType) {
         final Intent cachesIntent = new Intent(context, CacheListActivity.class);
-        Intents.putListType(cachesIntent, CacheListType.POCKET);
-        cachesIntent.putExtra(Intents.EXTRA_NAME, pq.getName());
-        cachesIntent.putExtra(Intents.EXTRA_POCKET_GUID, guid);
+        Intents.putListType(cachesIntent, cacheListType);
+        cachesIntent.putExtra(Intents.EXTRA_NAME, pocketQuery.getName());
+        cachesIntent.putExtra(Intents.EXTRA_POCKET_GUID, pocketQuery.getGuid());
         context.startActivity(cachesIntent);
     }
 
