@@ -15,11 +15,11 @@
   <string name="multi">Multi-cache</string>
   <string name="mystery">Ukendt cache</string>
   <string name="letterbox">Letterbox-hybrid</string>
-  <string name="event">Event-cache</string>
-  <string name="mega">Megaevent-cache</string>
-  <string name="giga">Giga-Event Cache</string>
+  <string name="event">Arrangementcache</string>
+  <string name="mega">Mega-arrangement-cache</string>
+  <string name="giga">Giga-arrangement Cache</string>
   <string name="earth">Earth-cache</string>
-  <string name="cito">Cache in trash out-event</string>
+  <string name="cito">Cache in/trash out-arrangement</string>
   <string name="webcam">Webcam-cache</string>
   <string name="virtual">Virtuel cache</string>
   <string name="wherigo">Wherigo-cache</string>
@@ -288,7 +288,7 @@
   <string name="caches_sort_finds">Fund</string>
   <string name="caches_sort_state">Status</string>
   <string name="caches_sort_storage">Dato for lagring på enhed</string>
-  <string name="caches_sort_eventdate">Eventdato</string>
+  <string name="caches_sort_eventdate">Arrangementsdato</string>
   <string name="caches_select_mode">Markér</string>
   <string name="caches_select_mode_exit">Afslut markering</string>
   <string name="caches_select_invert">Omvend markering</string>
@@ -305,7 +305,7 @@
     <item quantity="other">Vil du slette de %d valgte cacher fra din enhed?</item>
   </plurals>
   <string name="caches_remove_progress">Fjerner cacher</string>
-  <string name="caches_delete_events">Slet tidligere begivenheder</string>
+  <string name="caches_delete_events">Slet tidligere arrangementer</string>
   <string name="caches_refresh_selected">Genindlæs valgte</string>
   <string name="caches_refresh_all">Genindlæs alle</string>
   <string name="caches_move_selected">Flyt valgte</string>
@@ -550,7 +550,7 @@
   <string name="init_maintenance_directories_note">c:geo gemmer billeder og andre filer, som er relateret til en cache, i en separat mappe. I nogle tilfælde (som for eksempel ved import/eksport af databasen) vil denne mappe indeholde ubrugte filer, som kan slettes med denne funktion.</string>
   <string name="init_maintenance_directories">Slet ubrugte filer</string>
   <string name="init_location">Geolokation</string>
-  <string name="init_location_note">På enheder som har installeret Google Play-tjenester, kan c:geo automatisk bruge en bedre metode til positionsbestemmelse. Dette forhindrer dog brugen af en ekstern Bluetooth GPS-modtager.</string>
+  <string name="init_location_note">På enheder, som har installeret Google Play-tjenester, kan c:geo automatisk bruge en bedre metode til positionsbestemmelse. Dette forhindrer dog brugen af en ekstern Bluetooth GPS-modtager.</string>
   <string name="init_location_googleplayservices">Brug Google Play-tjenester</string>
   <string name="init_low_power">Strømsparetilstand</string>
   <string name="init_low_power_note">Strømsparetilstand forhindrer at GPS og gyroskop bliver brugt medmindre det er strengt nødvendigt, men kan bevirke at positionsbestemmelse tager længere tid.</string>
@@ -951,7 +951,7 @@
   <string name="license_dismiss">Afvis</string>
   <string name="helper_calendar_title">c:geo kalender-plugin</string>
   <string name="helper_calendar_missing">c:geo kalender-plugin er ikke installeret.</string>
-  <string name="helper_calendar_description">Giver dig mulighed for at eksportere event cacher til din kalender på din enhed.</string>
+  <string name="helper_calendar_description">Giver dig mulighed for at eksportere arrangementcacher til din kalender på din enhed.</string>
   <string name="helper_sendtocgeo_title">Send2c:geo</string>
   <string name="helper_contacts_title">c:geo kontakt-plugin</string>
   <string name="helper_contacts_description">Giver dig mulighed for at åbne kontaktside (fra dine kontakter) direkte fra en logbesked, så du let kan kontakte dine venner.</string>
