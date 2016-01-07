@@ -25,18 +25,18 @@ Such a procedure is [described in the wiki](https://github.com/cgeo/cgeo/wiki/Ho
 
 ## Setting up an IDE
 
-### Eclipse
+### Android Studio (or IntelliJ IDEA)
+- Install Android Studio from https://developer.android.com/sdk/index.html
+- On first start, choose to clone a project from version control, and choose github afterwards. Supply your credentials.
+- Android Studio should detect that gradle is used for building cgeo. If it complains that this is not a gradle project, then close the project. Choose "Import project" and select the `build.gradle` or `gradle.settings` in the root directory of the git repository.
+
+### Eclipse (deprecated)
 - Install an Eclipse distribution for your OS from http://eclipse.org/downloads/ (you may choose the Java developers distribution).
 - Start Eclipse, choose any directory as workspace. Close the welcome screen, if it appears.
 - After the workbench has started, select File | Import | Install | Install Software Items From File and select a locally downloaded copy of https://github.com/cgeo/cgeo/tree/master/main/project/eclipse%20installation/cgeo%20eclipse%20components.p2f. This way you can easily install all necessary plugins.
 - After forking the project you should import the Eclipse projects in your workspace with File | Import | Projects from Git.
 
 Please be warned, we might remove the support for development in Eclipse, once we switch to a gradle based build.
-
-### Android Studio (or IntelliJ IDEA)
-- Install Android Studio from https://developer.android.com/sdk/index.html
-- On first start, choose to clone a project from version control, and choose github afterwards. Supply your credentials.
-- Android Studio should detect that gradle is used for building cgeo. If it complains that this is not a gradle project, then close the project. Choose "Import project" and select the `build.gradle` or `gradle.settings` in the root directory of the git repository.
 
 ## Build
 
@@ -59,7 +59,7 @@ Request your personal API key for the various [OpenCaching](http://www.opencachi
 
 ### Building with gradle
 
-Run `gradlew` from the root directory of the git repository. That will install the necessary build framework and display how to build cgeo.
+Run `gradlew` from the root directory of the git repository. That will install the necessary build framework and display a help how to build cgeo, how to run tests etc.
 
 ### Building with Ant (deprecated)
 
@@ -86,12 +86,11 @@ In Eclipse, create a Debug Configuration for an Android Application using the me
 
 ### Testing
 
-The Test classes can be found in the project test. Test classes should be located in the same package as
-the class under test.
+The test classes can be found in the project/module called "test". Test classes should be located in the same package as the class under test.
 Every class can be "Run As" (or "Debug As") an [Android JUnit Test](http://developer.android.com/guide/topics/testing/testing_android.html) from Eclipse.
 To run all tests use the same "Run As" menu item from the context menu of the test project.
 
-For tests to run successfully you need to configure c:geo on the emulator that runs the test with a valid geocaching.com account. In order for all tests to be successfull the account needs to be premium.
+For tests to run successfully you need to configure c:geo on the emulator that runs the test with a valid geocaching.com account. In order for all tests to be successfull the account needs to be a premium member.
 
 ## License
 
