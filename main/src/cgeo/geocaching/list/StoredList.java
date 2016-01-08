@@ -1,15 +1,13 @@
 package cgeo.geocaching.list;
 
 import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.dialog.Dialogs;
 
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
-
-import rx.functions.Action1;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -22,6 +20,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
+import rx.functions.Action1;
 
 public final class StoredList extends AbstractList {
     private static final int TEMPORARY_LIST_ID = 0;
@@ -205,6 +205,7 @@ public final class StoredList extends AbstractList {
      * Get the list title.
      */
     @Override
+    @NonNull
     public String getTitle() {
         return title;
     }

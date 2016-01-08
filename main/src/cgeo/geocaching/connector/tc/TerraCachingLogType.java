@@ -2,6 +2,8 @@ package cgeo.geocaching.connector.tc;
 
 import cgeo.geocaching.enumerations.LogType;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 /**
  * adapter for terracaching log types
  */
@@ -11,7 +13,8 @@ public final class TerraCachingLogType {
         // utility class
     }
 
-    public static LogType getLogType(final String logtype) {
+    @NonNull
+    public static LogType getLogType(@NonNull final String logtype) {
         switch (logtype) {
             case "Found it!":
                 return LogType.FOUND_IT;

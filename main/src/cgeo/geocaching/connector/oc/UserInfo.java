@@ -1,9 +1,11 @@
 package cgeo.geocaching.connector.oc;
 
-import android.support.annotation.StringRes;
-
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.oc.OkapiError.OkapiErrors;
+
+import org.eclipse.jdt.annotation.NonNull;
+
+import android.support.annotation.StringRes;
 
 public class UserInfo {
 
@@ -22,6 +24,7 @@ public class UserInfo {
             this.resId = resId;
         }
 
+        @NonNull
         public static UserInfoStatus getFromOkapiError(final OkapiErrors result) {
             switch (result) {
                 case NO_ERROR:
@@ -36,16 +39,17 @@ public class UserInfo {
         }
     }
 
-    private final String name;
+    @NonNull private final String name;
     private final int finds;
-    private final UserInfoStatus status;
+    @NonNull private final UserInfoStatus status;
 
-    UserInfo(final String name, final int finds, final UserInfoStatus status) {
+    UserInfo(@NonNull final String name, final int finds, @NonNull final UserInfoStatus status) {
         this.name = name;
         this.finds = finds;
         this.status = status;
     }
 
+    @NonNull
     public String getName() {
         return name;
     }
@@ -54,6 +58,7 @@ public class UserInfo {
         return finds;
     }
 
+    @NonNull
     public UserInfoStatus getStatus() {
         return status;
     }

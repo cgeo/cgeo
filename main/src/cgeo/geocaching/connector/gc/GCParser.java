@@ -1057,6 +1057,7 @@ public final class GCParser {
      *
      * @return Set with guids of downloadable PQs
      */
+    @NonNull
     private static Set<String> getDownloadablePocketQueries(final String subPage) {
         final Set<String> downloadablePocketQueries = new HashSet<>();
         final String downloadSubPage = StringUtils.substringAfter(subPage, "id=\"uxOfflinePQTable\"");
@@ -1073,6 +1074,7 @@ public final class GCParser {
         return downloadablePocketQueries;
     }
 
+    @NonNull
     static ImmutablePair<StatusCode, String> postLog(final String geocode, final String cacheid, final String[] viewstates,
                                                      final LogType logType, final int year, final int month, final int day,
                                                      final String log, final List<TrackableLog> trackables,final boolean addToFavorites) {
@@ -1230,6 +1232,7 @@ public final class GCParser {
      *            The Image Object
      * @return status code to indicate success or failure
      */
+    @NonNull
     static ImmutablePair<StatusCode, String> uploadLogImage(final String logId, @NonNull final Image image) {
         final String uri = new Uri.Builder().scheme("https").authority("www.geocaching.com").path("/seek/upload.aspx").encodedQuery("LID=" + logId).build().toString();
 
@@ -1274,6 +1277,7 @@ public final class GCParser {
      *
      * @return status code of the upload and ID of the log
      */
+    @NonNull
     public static StatusCode postLogTrackable(final String tbid, final String trackingCode, final String[] viewstates,
             final LogTypeTrackable logType, final int year, final int month, final int day, final String log) {
         if (GCLogin.isEmpty(viewstates)) {
@@ -1347,7 +1351,7 @@ public final class GCParser {
      *            the cache to add
      * @return {@code false} if an error occurred, {@code true} otherwise
      */
-    static boolean addToWatchlist(final Geocache cache) {
+    static boolean addToWatchlist(@NonNull final Geocache cache) {
         final String uri = "https://www.geocaching.com/my/watchlist.aspx?w=" + cache.getCacheId();
         final String page = GCLogin.getInstance().postRequestLogged(uri, null);
 
@@ -1395,7 +1399,7 @@ public final class GCParser {
      *            the cache to remove
      * @return {@code false} if an error occurred, {@code true} otherwise
      */
-    static boolean removeFromWatchlist(final Geocache cache) {
+    static boolean removeFromWatchlist(@NonNull final Geocache cache) {
         final String uri = "https://www.geocaching.com/my/watchlist.aspx?ds=1&action=rem&id=" + cache.getCacheId();
         String page = GCLogin.getInstance().postRequestLogged(uri, null);
 
@@ -1434,7 +1438,7 @@ public final class GCParser {
      *            the page to search in, may be null
      * @return true if the page contains the guid of the cache, false otherwise
      */
-    private static boolean isGuidContainedInPage(final Geocache cache, final String page) {
+    private static boolean isGuidContainedInPage(@NonNull final Geocache cache, final String page) {
         if (StringUtils.isBlank(page) || StringUtils.isBlank(cache.getGuid())) {
             return false;
         }
@@ -1464,11 +1468,11 @@ public final class GCParser {
      *            the cache to add
      * @return {@code false} if an error occurred, {@code true} otherwise
      */
-    static boolean addToFavorites(final Geocache cache) {
+    static boolean addToFavorites(@NonNull final Geocache cache) {
         return changeFavorite(cache, true);
     }
 
-    private static boolean changeFavorite(final Geocache cache, final boolean add) {
+    private static boolean changeFavorite(@NonNull final Geocache cache, final boolean add) {
         final String userToken = getUserToken(cache);
         if (StringUtils.isEmpty(userToken)) {
             return false;
@@ -1488,7 +1492,7 @@ public final class GCParser {
         return false;
     }
 
-    private static String getUserToken(final Geocache cache) {
+    private static String getUserToken(@NonNull final Geocache cache) {
         return parseUserToken(requestHtmlPage(cache.getGeocode(), null, "n"));
     }
 
@@ -1505,7 +1509,7 @@ public final class GCParser {
      *            the cache to remove
      * @return {@code false} if an error occurred, {@code true} otherwise
      */
-    static boolean removeFromFavorites(final Geocache cache) {
+    static boolean removeFromFavorites(@NonNull final Geocache cache) {
         return changeFavorite(cache, false);
     }
 
@@ -1954,7 +1958,7 @@ public final class GCParser {
         params.put("tx", cacheType.guid);
     }
 
-    private static void getExtraOnlineInfo(final Geocache cache, final String page, final CancellableHandler handler) {
+    private static void getExtraOnlineInfo(@NonNull final Geocache cache, final String page, final CancellableHandler handler) {
         // This method starts the page parsing for logs in the background, as well as retrieve the friends and own logs
         // if requested. It merges them and stores them in the background, while the rating is retrieved if needed and
         // stored. Then we wait for the log merging and saving to be completed before returning.
@@ -2026,15 +2030,15 @@ public final class GCParser {
         }
     }
 
-    static boolean uploadModifiedCoordinates(final Geocache cache, final Geopoint wpt) {
+    static boolean uploadModifiedCoordinates(@NonNull final Geocache cache, final Geopoint wpt) {
         return editModifiedCoordinates(cache, wpt);
     }
 
-    static boolean deleteModifiedCoordinates(final Geocache cache) {
+    static boolean deleteModifiedCoordinates(@NonNull final Geocache cache) {
         return editModifiedCoordinates(cache, null);
     }
 
-    static boolean editModifiedCoordinates(final Geocache cache, final Geopoint wpt) {
+    static boolean editModifiedCoordinates(@NonNull final Geocache cache, final Geopoint wpt) {
         final String userToken = getUserToken(cache);
         if (StringUtils.isEmpty(userToken)) {
             return false;
@@ -2060,7 +2064,7 @@ public final class GCParser {
         return false;
     }
 
-    static boolean uploadPersonalNote(final Geocache cache) {
+    static boolean uploadPersonalNote(@NonNull final Geocache cache) {
         final String userToken = getUserToken(cache);
         if (StringUtils.isEmpty(userToken)) {
             return false;

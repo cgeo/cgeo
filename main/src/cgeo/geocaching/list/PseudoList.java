@@ -1,10 +1,12 @@
 package cgeo.geocaching.list;
 
-import android.support.annotation.StringRes;
-
 import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.R;
+import cgeo.geocaching.storage.DataStore;
+
+import org.eclipse.jdt.annotation.NonNull;
+
+import android.support.annotation.StringRes;
 
 public abstract class PseudoList extends AbstractList {
 
@@ -54,6 +56,7 @@ public abstract class PseudoList extends AbstractList {
     }
 
     @Override
+    @NonNull
     public String getTitle() {
         return title;
     }

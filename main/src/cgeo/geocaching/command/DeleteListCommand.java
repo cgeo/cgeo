@@ -1,12 +1,12 @@
 package cgeo.geocaching.command;
 
-import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.list.StoredList;
+import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.storage.DataStore;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -21,7 +21,7 @@ public abstract class DeleteListCommand extends AbstractCommand {
     private Set<String> geocodes;
     private String listName;
 
-    protected DeleteListCommand(final @NonNull Activity context, final int listId) {
+    protected DeleteListCommand(@NonNull final Activity context, final int listId) {
         super(context);
         this.listId = listId;
     }

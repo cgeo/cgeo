@@ -20,7 +20,7 @@ public abstract class MoveToListCommand extends AbstractCachesCommand {
     private final int currentListId;
     private int newListId;
 
-    protected MoveToListCommand(final Activity context, @NonNull final Collection<Geocache> caches, final int currentListId) {
+    protected MoveToListCommand(@NonNull final Activity context, @NonNull final Collection<Geocache> caches, final int currentListId) {
         super(context, caches, R.string.command_move_caches_progress);
         this.currentListId = currentListId;
     }

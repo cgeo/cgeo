@@ -1,11 +1,9 @@
 package cgeo.geocaching.gcvote;
 
-import android.support.annotation.StringRes;
-
 import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.StatusCode;
+import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.settings.Credentials;
@@ -19,9 +17,12 @@ import org.apache.commons.io.Charsets;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
+
+import android.support.annotation.StringRes;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -45,6 +46,7 @@ public final class GCVote {
         // utility class
     }
 
+    @NonNull
     public static StatusCode login() {
         final Credentials login = Settings.getGCVoteLogin();
 
@@ -88,6 +90,7 @@ public final class GCVote {
      * Get user rating for a given guid or geocode. For a guid first the ratings cache is checked
      * before a request to gcvote.com is made.
      */
+    @Nullable
     public static GCVoteRating getRating(final String guid, final String geocode) {
         if (StringUtils.isNotBlank(guid) && RATINGS_CACHE.containsKey(guid)) {
             return RATINGS_CACHE.get(guid);
@@ -97,6 +100,7 @@ public final class GCVote {
         return MapUtils.isNotEmpty(ratings) ? ratings.values().iterator().next() : null;
     }
 
+    @Nullable
     private static List<String> singletonOrNull(final String item) {
         return StringUtils.isNotBlank(item) ? Collections.singletonList(item) : null;
     }
@@ -134,6 +138,7 @@ public final class GCVote {
         }
     }
 
+    @NonNull
     static Map<String, GCVoteRating> getRatingsFromXMLResponse(@NonNull final InputStream response, final boolean requestByGuids) {
         try {
             final XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
@@ -174,7 +179,7 @@ public final class GCVote {
      * @param rating the rating
      * @return {@code true} if the rating was submitted successfully
      */
-    public static boolean setRating(final Geocache cache, final float rating) {
+    public static boolean setRating(@NonNull final Geocache cache, final float rating) {
         if (!isVotingPossible(cache)) {
             throw new IllegalArgumentException("voting is not possible for " + cache);
         }
@@ -234,8 +239,8 @@ public final class GCVote {
     /**
      * Get geocodes of all the caches, which can be used with GCVote. Non-GC caches will be filtered out.
      */
-    private static @NonNull
-    List<String> getVotableGeocodes(final @NonNull Collection<Geocache> caches) {
+    @NonNull
+    private static List<String> getVotableGeocodes(final @NonNull Collection<Geocache> caches) {
         final List<String> geocodes = new ArrayList<>(caches.size());
         for (final Geocache cache : caches) {
             final String geocode = cache.getGeocode();

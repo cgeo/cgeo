@@ -1,29 +1,20 @@
 package cgeo.geocaching.activity;
 
-import butterknife.Bind;
-
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.OAuth;
 import cgeo.geocaching.network.OAuthTokens;
 import cgeo.geocaching.network.Parameters;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.BundleUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
-import cgeo.geocaching.utils.AndroidRxUtils;
-
-import ch.boye.httpclientandroidlib.HttpResponse;
-import ch.boye.httpclientandroidlib.ParseException;
-import ch.boye.httpclientandroidlib.client.entity.UrlEncodedFormEntity;
-import ch.boye.httpclientandroidlib.util.EntityUtils;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-
-import rx.functions.Action0;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -37,6 +28,13 @@ import android.widget.TextView;
 
 import java.io.IOException;
 import java.util.regex.Pattern;
+
+import butterknife.Bind;
+import ch.boye.httpclientandroidlib.HttpResponse;
+import ch.boye.httpclientandroidlib.ParseException;
+import ch.boye.httpclientandroidlib.client.entity.UrlEncodedFormEntity;
+import ch.boye.httpclientandroidlib.util.EntityUtils;
+import rx.functions.Action0;
 
 public abstract class OAuthAuthorizationActivity extends AbstractActivity {
 
@@ -299,6 +297,7 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
         });
     }
 
+    @NonNull
     protected abstract ImmutablePair<String, String> getTempTokens();
 
     protected abstract void setTempTokens(@Nullable String tokenPublic, @Nullable String tokenSecret);
@@ -307,6 +306,7 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
 
     // get resources from derived class
 
+    @NonNull
     protected abstract String getAuthTitle();
 
     private String getAuthAgain() {

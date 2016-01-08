@@ -2,6 +2,8 @@ package cgeo.geocaching.connector.tc;
 
 import cgeo.geocaching.enumerations.CacheType;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 /**
  * Adapter for cache types used on TerraCaching
  */
@@ -11,7 +13,7 @@ public final class TerraCachingType {
         // utility class
     }
 
-    public static final CacheType getCacheType(final String style) {
+    public static final CacheType getCacheType(@NonNull final String style) {
         switch (style) {
             case "Classic":
                 return CacheType.TRADITIONAL;

@@ -1,9 +1,9 @@
 package cgeo.geocaching.command;
 
-import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.list.StoredList;
+import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.storage.DataStore;
 
 import org.eclipse.jdt.annotation.NonNull;
 
@@ -17,7 +17,7 @@ import java.util.Collection;
 public abstract class DeleteCachesCommand extends AbstractCachesCommand {
     private int listId = StoredList.TEMPORARY_LIST.id;
 
-    public DeleteCachesCommand(final Activity context, final Collection<Geocache> caches) {
+    public DeleteCachesCommand(@NonNull final Activity context, @NonNull final Collection<Geocache> caches) {
         super(context, caches, R.string.command_delete_caches_progress);
     }
 

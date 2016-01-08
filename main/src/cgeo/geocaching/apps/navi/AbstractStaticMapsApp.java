@@ -1,14 +1,14 @@
 package cgeo.geocaching.apps.navi;
 
-import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.models.ILogable;
 import cgeo.geocaching.R;
 import cgeo.geocaching.StaticMapsActivity_;
 import cgeo.geocaching.StaticMapsProvider;
-import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.apps.AbstractApp;
+import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.ILogable;
+import cgeo.geocaching.models.Waypoint;
+import cgeo.geocaching.storage.DataStore;
 
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
@@ -30,10 +30,7 @@ abstract class AbstractStaticMapsApp extends AbstractApp implements CacheNavigat
         return false;
     }
 
-    protected static boolean hasStaticMap(final Waypoint waypoint) {
-        if (waypoint==null) {
-            return false;
-        }
+    protected static boolean hasStaticMap(@NonNull final Waypoint waypoint) {
         final String geocode = waypoint.getGeocode();
         if (StringUtils.isNotEmpty(geocode) && DataStore.isOffline(geocode, null)) {
             return StaticMapsProvider.hasStaticMapForWaypoint(geocode, waypoint);

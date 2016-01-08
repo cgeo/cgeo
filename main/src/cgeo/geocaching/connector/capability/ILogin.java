@@ -2,6 +2,8 @@ package cgeo.geocaching.connector.capability;
 
 import cgeo.geocaching.connector.IConnector;
 
+import org.eclipse.jdt.annotation.Nullable;
+
 import android.content.Context;
 import android.os.Handler;
 
@@ -17,7 +19,7 @@ public interface ILogin extends IConnector {
      *            Calling activity context
      * @return true in case of success, false in case of failure
      */
-    boolean login(Handler handler, Context fromActivity);
+    boolean login(Handler handler, @Nullable Context fromActivity);
 
     /**
      * Log out of the connector if possible.

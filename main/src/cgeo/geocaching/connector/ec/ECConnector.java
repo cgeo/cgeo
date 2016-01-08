@@ -1,7 +1,6 @@
 package cgeo.geocaching.connector.ec;
 
 import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.LogCacheActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
@@ -18,6 +17,7 @@ import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.loaders.RecaptchaReceiver;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
+import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.utils.CancellableHandler;
@@ -134,7 +134,7 @@ public class ECConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
-    public boolean login(final Handler handler, final Context fromActivity) {
+    public boolean login(final Handler handler, @Nullable final Context fromActivity) {
         // login
         final StatusCode status = ecLogin.login();
 

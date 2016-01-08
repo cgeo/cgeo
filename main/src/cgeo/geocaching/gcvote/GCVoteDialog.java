@@ -1,18 +1,16 @@
 package cgeo.geocaching.gcvote;
 
 import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.gcvote.GCVoteRatingBarUtil.OnRatingChangeListener;
+import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.Log;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-
-import rx.functions.Action1;
-import rx.functions.Func0;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -26,13 +24,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import rx.functions.Action1;
+import rx.functions.Func0;
+
 /**
  * Small dialog showing only a rating bar to vote on GCVote.com. Confirming the dialog will send the vote over the
  * network (in the background).
  */
 public class GCVoteDialog {
 
-    public static void show(final Activity context, final Geocache cache, final @Nullable Runnable afterVoteSent) {
+    public static void show(final Activity context, @NonNull final Geocache cache, final @Nullable Runnable afterVoteSent) {
         final Context themedContext;
 
         if (Settings.isLightSkin() && VERSION.SDK_INT < VERSION_CODES.HONEYCOMB) {
@@ -75,7 +76,7 @@ public class GCVoteDialog {
         dialog.getButton(DialogInterface.BUTTON_POSITIVE).setEnabled(GCVote.isValidRating(cache.getMyVote()));
     }
 
-    private static void vote(final Geocache cache, final float rating, final @Nullable Runnable afterVoteSent) {
+    private static void vote(@NonNull final Geocache cache, final float rating, final @Nullable Runnable afterVoteSent) {
         AndroidRxUtils.andThenOnUi(AndroidRxUtils.networkScheduler, new Func0<Boolean>() {
             @Override
             public Boolean call() {

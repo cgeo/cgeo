@@ -1,9 +1,9 @@
 package cgeo.geocaching.export;
 
 import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.AsyncTaskWithProgress;
 import cgeo.geocaching.utils.EnvironmentUtils;
@@ -12,6 +12,8 @@ import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ShareUtils;
 
 import org.apache.commons.lang3.CharEncoding;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -48,7 +50,7 @@ public class GpxExport extends AbstractExport {
     }
 
     @Override
-    public void export(final List<Geocache> caches, final Activity activity) {
+    public void export(@NonNull final List<Geocache> caches, @Nullable final Activity activity) {
         final String[] geocodes = getGeocodes(caches);
         calculateFileName(geocodes);
         if (null == activity) {

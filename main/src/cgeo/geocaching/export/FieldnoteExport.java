@@ -1,19 +1,20 @@
 package cgeo.geocaching.export;
 
 import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.models.LogEntry;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.capability.FieldNotesCapability;
+import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.LogEntry;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.AsyncTaskWithProgress;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
 import android.app.Activity;
@@ -53,7 +54,7 @@ public class FieldnoteExport extends AbstractExport {
     }
 
     @Override
-    public void export(final List<Geocache> cachesList, final Activity activity) {
+    public void export(@NonNull final List<Geocache> cachesList, @Nullable final Activity activity) {
         final Geocache[] caches = cachesList.toArray(new Geocache[cachesList.size()]);
         if (null == activity) {
             // No activity given, so no user interaction possible.

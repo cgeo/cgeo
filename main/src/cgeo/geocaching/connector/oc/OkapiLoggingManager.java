@@ -1,14 +1,14 @@
 package cgeo.geocaching.connector.oc;
 
-import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.models.Image;
 import cgeo.geocaching.LogCacheActivity;
-import cgeo.geocaching.models.TrackableLog;
 import cgeo.geocaching.connector.AbstractLoggingManager;
 import cgeo.geocaching.connector.ImageResult;
 import cgeo.geocaching.connector.LogResult;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.StatusCode;
+import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.Image;
+import cgeo.geocaching.models.TrackableLog;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -19,12 +19,15 @@ import java.util.List;
 
 public class OkapiLoggingManager extends AbstractLoggingManager {
 
+    @NonNull
     private final OCApiLiveConnector connector;
+    @NonNull
     private final Geocache cache;
+    @NonNull
     private final LogCacheActivity activity;
     private boolean hasLoaderError = true;
 
-    public OkapiLoggingManager(final LogCacheActivity activity, final OCApiLiveConnector connector, final Geocache cache) {
+    public OkapiLoggingManager(@NonNull final LogCacheActivity activity, @NonNull final OCApiLiveConnector connector, @NonNull final Geocache cache) {
         this.connector = connector;
         this.cache = cache;
         this.activity = activity;

@@ -84,8 +84,8 @@ public class TravelBugConnector extends AbstractTrackableConnector {
     }
 
     @Override
-    public @Nullable
-    String getTrackableCodeFromUrl(@NonNull final String url) {
+    @Nullable
+    public String getTrackableCodeFromUrl(@NonNull final String url) {
         // coord.info URLs
         final String code1 = StringUtils.substringAfterLast(url, "coord.info/");
         if (canHandleTrackable(code1)) {

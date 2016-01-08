@@ -1,8 +1,6 @@
 package cgeo.geocaching.models;
 
 import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.storage.DataStore.StorageLocation;
 import cgeo.geocaching.LogCacheActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
@@ -31,6 +29,8 @@ import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.storage.DataStore.StorageLocation;
 import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.ImageUtils;
@@ -41,7 +41,6 @@ import cgeo.geocaching.utils.LogTemplateProvider.LogContext;
 import cgeo.geocaching.utils.MatcherWrapper;
 import cgeo.geocaching.utils.RxUtils;
 
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.ListUtils;
 import org.apache.commons.lang3.BooleanUtils;
@@ -49,10 +48,6 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import rx.Scheduler;
-import rx.Subscription;
-import rx.functions.Action0;
-import rx.schedulers.Schedulers;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -79,6 +74,12 @@ import java.util.ListIterator;
 import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
+
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import rx.Scheduler;
+import rx.Subscription;
+import rx.functions.Action0;
+import rx.schedulers.Schedulers;
 
 /**
  * Internal representation of a "cache"
@@ -1038,12 +1039,13 @@ public class Geocache implements IWaypoint {
 
     /**
      * Add new Trackables to inventory safely.
-     * This take care of removing old items if they are from the same brand.
-     * If items are present, data are merged, not duplicated.
+     * This takes care of removing old items if they are from the same brand.
+     * If items are present, data is merged, not duplicated.
      *
-     * @param newTrackables to be added to the Geocache
+     * @param newTrackables
+     *            to be added to the Geocache
      */
-    public void mergeInventory(final List<Trackable> newTrackables, final EnumSet<TrackableBrand> processedBrands) {
+    public void mergeInventory(@NonNull final List<Trackable> newTrackables, final EnumSet<TrackableBrand> processedBrands) {
 
         final List<Trackable> mergedTrackables = new ArrayList<>(newTrackables);
 
@@ -1138,7 +1140,7 @@ public class Geocache implements IWaypoint {
      *            called while loading or building a cache
      * @return {@code true} if waypoints successfully added to waypoint database
      */
-    public boolean setWaypoints(final List<Waypoint> waypoints, final boolean saveToDatabase) {
+    public boolean setWaypoints(@Nullable final List<Waypoint> waypoints, final boolean saveToDatabase) {
         this.waypoints.clear();
         if (waypoints != null) {
             this.waypoints.addAll(waypoints);

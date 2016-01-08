@@ -356,6 +356,7 @@ public class Settings {
         putString(R.string.pref_memberstatus, memberStatus);
     }
 
+    @NonNull
     public static ImmutablePair<String, String> getTokenPair(final int tokenPublicPrefKey, final int tokenSecretPrefKey) {
         return new ImmutablePair<>(getString(tokenPublicPrefKey, null), getString(tokenSecretPrefKey, null));
     }
@@ -905,6 +906,7 @@ public class Settings {
         putString(R.string.pref_temp_twitter_token_secret, tokenSecret);
     }
 
+    @NonNull
     public static ImmutablePair<String, String> getTempToken() {
         final String tokenPublic = getString(R.string.pref_temp_twitter_token_public, null);
         final String tokenSecret = getString(R.string.pref_temp_twitter_token_secret, null);

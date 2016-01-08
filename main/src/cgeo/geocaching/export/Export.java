@@ -2,6 +2,9 @@ package cgeo.geocaching.export;
 
 import cgeo.geocaching.models.Geocache;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+
 import android.app.Activity;
 
 import java.util.List;
@@ -18,7 +21,7 @@ interface Export {
      * @param activity
      *            optional: Some exporters might have an UI which requires an {@link Activity}
      */
-    public void export(List<Geocache> caches, Activity activity);
+    public void export(@NonNull List<Geocache> caches, @Nullable Activity activity);
 
     /**
      * Get the localized name of this exporter.

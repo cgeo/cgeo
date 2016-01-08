@@ -1,16 +1,17 @@
 package cgeo.geocaching.gcvote;
 
-import butterknife.ButterKnife;
-
-import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.R;
+import cgeo.geocaching.models.Geocache;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
 import android.view.View;
 import android.widget.RatingBar;
 import android.widget.RatingBar.OnRatingBarChangeListener;
 import android.widget.TextView;
+
+import butterknife.ButterKnife;
 
 /**
  * TODO: convert to fragment
@@ -25,7 +26,7 @@ public final class GCVoteRatingBarUtil {
         // utility class
     }
 
-    public static void initializeRatingBar(final Geocache cache, final View parentView, @Nullable final OnRatingChangeListener changeListener) {
+    public static void initializeRatingBar(@NonNull final Geocache cache, final View parentView, @Nullable final OnRatingChangeListener changeListener) {
         if (GCVote.isVotingPossible(cache)) {
             final RatingBar ratingBar = ButterKnife.findById(parentView, R.id.gcvoteRating);
             final TextView label = ButterKnife.findById(parentView, R.id.gcvoteLabel);

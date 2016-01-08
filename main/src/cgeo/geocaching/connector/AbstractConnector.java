@@ -1,11 +1,8 @@
 package cgeo.geocaching.connector;
 
-import android.support.annotation.StringRes;
-
 import cgeo.contacts.ContactsAddon;
 import cgeo.geocaching.CacheListActivity;
 import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.LogCacheActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.UserAction.Context;
@@ -18,18 +15,21 @@ import cgeo.geocaching.connector.capability.ISearchByViewPort;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.models.Geocache;
 
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
-import rx.functions.Action1;
+import android.support.annotation.StringRes;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import rx.functions.Action1;
 
 public abstract class AbstractConnector implements IConnector {
 
@@ -279,8 +279,8 @@ public abstract class AbstractConnector implements IConnector {
     }
 
     @Override
-    public @NonNull
-    List<UserAction> getUserActions() {
+    @NonNull
+    public List<UserAction> getUserActions() {
         final List<UserAction> actions = getDefaultUserActions();
 
         if (this instanceof ISearchByOwner) {
@@ -308,8 +308,8 @@ public abstract class AbstractConnector implements IConnector {
     /**
      * @return user actions which are always available (independent of cache or trackable)
      */
-    static @NonNull
-    public List<UserAction> getDefaultUserActions() {
+    @NonNull
+    static public List<UserAction> getDefaultUserActions() {
         final List<UserAction> actions = new ArrayList<>();
         if (ContactsAddon.isAvailable()) {
             actions.add(new UserAction(R.string.user_menu_open_contact, new Action1<UserAction.Context>() {

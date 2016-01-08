@@ -6,14 +6,15 @@ import cgeo.geocaching.activity.OAuthAuthorizationActivity;
 import cgeo.geocaching.connector.oc.OkapiError.OkapiErrors;
 import cgeo.geocaching.settings.Settings;
 
-import ch.boye.httpclientandroidlib.HttpResponse;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
 import android.os.Bundle;
 import android.support.annotation.StringRes;
+
+import ch.boye.httpclientandroidlib.HttpResponse;
 
 public class OCAuthorizationActivity extends OAuthAuthorizationActivity {
 
@@ -39,6 +40,7 @@ public class OCAuthorizationActivity extends OAuthAuthorizationActivity {
     }
 
     @Override
+    @NonNull
     protected ImmutablePair<String, String> getTempTokens() {
         return Settings.getTokenPair(tempTokenPublicPrefKey, tempTokenSecretPrefKey);
     }
@@ -57,11 +59,13 @@ public class OCAuthorizationActivity extends OAuthAuthorizationActivity {
     }
 
     @Override
+    @NonNull
     protected String getAuthTitle() {
         return res.getString(titleResId);
     }
 
     @Override
+    @NonNull
     protected String getAuthDialogCompleted() {
         return res.getString(R.string.auth_dialog_completed_oc, getAuthTitle());
     }
@@ -70,6 +74,7 @@ public class OCAuthorizationActivity extends OAuthAuthorizationActivity {
      * Return an extended error in case of an invalid time stamp
      */
     @Override
+    @NonNull
     protected String getExtendedErrorMsg(final HttpResponse response) {
         final OkapiError error = OkapiClient.decodeErrorResponse(response);
         if (error.getResult() == OkapiErrors.INVALID_TIMESTAMP) {
