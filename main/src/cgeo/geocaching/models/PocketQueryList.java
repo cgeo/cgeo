@@ -22,12 +22,16 @@ public final class PocketQueryList {
     private final String guid;
     private final int maxCaches;
     private final String name;
+    private final boolean downloadable;
 
-    public PocketQueryList(final String guid, final String name, final int maxCaches) {
+    public PocketQueryList(final String guid, final String name, final int maxCaches, final boolean downloadable) {
         this.guid = guid;
         this.name = name;
         this.maxCaches = maxCaches;
+        this.downloadable = downloadable;
     }
+
+    public boolean isDownloadable() { return downloadable; }
 
     public String getGuid() {
         return guid;
@@ -62,7 +66,7 @@ public final class PocketQueryList {
         final CharSequence[] items = new CharSequence[pocketQueryList.size()];
 
         for (int i = 0; i < pocketQueryList.size(); i++) {
-            items[i] = pocketQueryList.get(i).name;
+            items[i] = pocketQueryList.get(i).name + (pocketQueryList.get(i).isDownloadable() ? " *" : "");
         }
 
         new AlertDialog.Builder(activity)
