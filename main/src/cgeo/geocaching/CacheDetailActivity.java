@@ -89,6 +89,7 @@ import rx.functions.Action0;
 import rx.functions.Action1;
 import rx.functions.Func0;
 import rx.functions.Func1;
+import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
 import rx.subscriptions.Subscriptions;
 
@@ -572,6 +573,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     public boolean onPrepareOptionsMenu(final Menu menu) {
         CacheMenuHandler.onPrepareOptionsMenu(menu, cache);
         LoggingUI.onPrepareOptionsMenu(menu, cache);
+        menu.findItem(R.id.menu_edit_fieldnote).setVisible(true);
         menu.findItem(R.id.menu_store).setVisible(cache != null && !cache.isOffline());
         menu.findItem(R.id.menu_delete).setVisible(cache != null && cache.isOffline());
         menu.findItem(R.id.menu_refresh).setVisible(cache != null && cache.supportsRefresh());
@@ -620,6 +622,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 new FieldnoteExport().export(Collections.singletonList(cache), this);
                 return true;
             case R.id.menu_edit_fieldnote:
+                ensureSaved();
                 editPersonalNote(cache, this);
                 return true;
             default:
@@ -762,7 +765,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         cache.setChangeNotificationHandler(new ChangeNotificationHandler(this, progress));
 
         setCacheTitleBar(cache);
-        final ScrollView scroll = ButterKnife.findById(this, R.id.detailScroll);
 
         // reset imagesList so Images view page will be redrawn
         imagesList = null;
@@ -773,16 +775,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         progress.dismiss();
 
         Settings.addCacheToHistory(cache.getGeocode());
-        if (scroll != null) {
-            final int lastScrollPos = scroll.getScrollY();
-            final ScrollView scrollNew = ButterKnife.findById(this, R.id.detailScroll);
-            scrollNew.post(new Runnable() {
-                @Override
-                public void run() {
-                    scrollNew.scrollTo(0, lastScrollPos);
-                }
-            });
-        }
     }
 
     /**
@@ -2314,17 +2306,22 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
     @Override
     public void onFinishEditNoteDialog(final String note) {
+        cache.setPersonalNote(note);
+        cache.parseWaypointsFromNote();
+
         final TextView personalNoteView = ButterKnife.findById(this, R.id.personalnote);
-        setPersonalNote(personalNoteView, note);
-        new AsyncTask<Void, Void, Void>() {
+        if (personalNoteView != null) {
+            setPersonalNote(personalNoteView, note);
+        } else {
+            reinitializeViewPager();
+        }
+
+        Schedulers.io().createWorker().schedule(new Action0() {
             @Override
-            protected Void doInBackground(final Void... params) {
-                cache.setPersonalNote(note);
-                cache.parseWaypointsFromNote();
+            public void call() {
                 DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
-                return null;
             }
-        }.execute();
+        });
     }
 
     private static void setPersonalNote(final TextView personalNoteView, final String personalNote) {
