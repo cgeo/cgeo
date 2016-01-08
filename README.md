@@ -36,7 +36,7 @@ Please be warned, we might remove the support for development in Eclipse, once w
 ### Android Studio (or IntelliJ IDEA)
 - Install Android Studio from https://developer.android.com/sdk/index.html
 - On first start, choose to clone a project from version control, and choose github afterwards. Supply your credentials.
-- Android Studio should detect that gradle is used for building cgeo. If it complains that this is not a gradle project, then close the project. Choose "Import project" and select the `build.gradle` or `gradle.settings` in the root directory of the git repository.
+- Android Studio should detect that gradle is used for building cgeo. If it complains that this is not a gradle project, then close the project. Choose "Import project" and select the `build.gradle` or `settings.gradle` in the root directory of the git repository.
 
 ## Build
 
