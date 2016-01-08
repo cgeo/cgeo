@@ -1,16 +1,8 @@
 package cgeo.geocaching.connector.gc;
 
 import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.models.Image;
-import cgeo.geocaching.models.LogEntry;
-import cgeo.geocaching.models.PocketQueryList;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.models.Trackable;
-import cgeo.geocaching.models.TrackableLog;
-import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.connector.trackable.TrackableBrand;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
@@ -26,20 +18,26 @@ import cgeo.geocaching.gcvote.GCVoteRating;
 import cgeo.geocaching.loaders.RecaptchaReceiver;
 import cgeo.geocaching.location.DistanceParser;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.Image;
+import cgeo.geocaching.models.LogEntry;
+import cgeo.geocaching.models.PocketQueryList;
+import cgeo.geocaching.models.Trackable;
+import cgeo.geocaching.models.TrackableLog;
+import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.HtmlUtils;
 import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
-import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.RxUtils;
 import cgeo.geocaching.utils.SynchronizedDateFormat;
 import cgeo.geocaching.utils.TextUtils;
-
-import ch.boye.httpclientandroidlib.HttpResponse;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
@@ -51,14 +49,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-
-import rx.Observable;
-import rx.Observable.OnSubscribe;
-import rx.Subscriber;
-import rx.functions.Action1;
-import rx.functions.Func0;
-import rx.functions.Func2;
-import rx.schedulers.Schedulers;
 
 import android.net.Uri;
 import android.text.Html;
@@ -78,6 +68,15 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 import java.util.regex.Pattern;
+
+import ch.boye.httpclientandroidlib.HttpResponse;
+import rx.Observable;
+import rx.Observable.OnSubscribe;
+import rx.Subscriber;
+import rx.functions.Action1;
+import rx.functions.Func0;
+import rx.functions.Func2;
+import rx.schedulers.Schedulers;
 
 public final class GCParser {
     @NonNull
@@ -1054,6 +1053,8 @@ public final class GCParser {
      * Reads guids from table containing active (downloadable) PQ called uxOfflinePQTable
      *
      * @param subPage
+     *            part of the page to parse
+     *
      * @return Set with guids of downloadable PQs
      */
     private static Set<String> getDownloadablePocketQueries(final String subPage) {
