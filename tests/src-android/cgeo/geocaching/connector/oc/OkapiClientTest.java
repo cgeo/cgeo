@@ -71,4 +71,11 @@ public class OkapiClientTest extends CGeoTestCase {
         assertThat(cache.getLogs().size()).isGreaterThan(defaultLogCount);
     }
 
+    public static void testShortDescription() {
+        final String geoCode = "OC10C06";
+        final Geocache cache = OkapiClient.getCache(geoCode);
+        assert cache != null; // eclipse null analysis
+        assertThat(cache.getShortDescription()).isEqualTo("Nur in der fünften Jahreszeit kann er sprechen");
+    }
+
 }

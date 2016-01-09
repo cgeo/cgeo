@@ -103,6 +103,7 @@ final class OkapiClient {
     private static final String CACHE_IMAGES = "images";
     private static final String CACHE_HINT = "hint";
     private static final String CACHE_DESCRIPTION = "description";
+    private static final String CACHE_SHORT_DESCRIPTION = "short_description";
     private static final String CACHE_RECOMMENDATIONS = "recommendations";
     private static final String CACHE_RATING = "rating";
     private static final String CACHE_TERRAIN = "terrain";
@@ -136,7 +137,7 @@ final class OkapiClient {
     // Additional: additional fields for full cache (L3 - only for level 3 auth, current - only for connectors with current api)
     private static final String SERVICE_CACHE_CORE_FIELDS = "code|name|location|type|status|difficulty|terrain|size|size2|date_hidden|trackables_count";
     private static final String SERVICE_CACHE_CORE_L3_FIELDS = "is_found";
-    private static final String SERVICE_CACHE_ADDITIONAL_FIELDS = "owner|founds|notfounds|rating|rating_votes|recommendations|description|hint|images|latest_logs|alt_wpts|attrnames|req_passwd|trackables";
+    private static final String SERVICE_CACHE_ADDITIONAL_FIELDS = "owner|founds|notfounds|rating|rating_votes|recommendations|description|hint|images|latest_logs|alt_wpts|attrnames|req_passwd|trackables|short_description";
     private static final String SERVICE_CACHE_ADDITIONAL_CURRENT_FIELDS = "gc_code|attribution_note|attr_acodes|willattends";
     private static final String SERVICE_CACHE_ADDITIONAL_L3_FIELDS = "my_notes";
     private static final String SERVICE_CACHE_ADDITIONAL_CURRENT_L3_FIELDS = "is_watched";
@@ -398,10 +399,11 @@ final class OkapiClient {
             // OpenCaching has no distinction between user id and user display name. Set the ID anyway to simplify c:geo workflows.
             cache.setOwnerUserId(owner);
 
-            cache.getLogCounts().put(LogType.FOUND_IT, response.get(CACHE_FOUNDS).asInt());
-            cache.getLogCounts().put(LogType.DIDNT_FIND_IT, response.get(CACHE_NOTFOUNDS).asInt());
+            final Map<LogType, Integer> logCounts = cache.getLogCounts();
+            logCounts.put(LogType.FOUND_IT, response.get(CACHE_FOUNDS).asInt());
+            logCounts.put(LogType.DIDNT_FIND_IT, response.get(CACHE_NOTFOUNDS).asInt());
             // only current Api
-            cache.getLogCounts().put(LogType.WILL_ATTEND, response.path(CACHE_WILLATTENDS).asInt());
+            logCounts.put(LogType.WILL_ATTEND, response.path(CACHE_WILLATTENDS).asInt());
 
             if (response.has(CACHE_RATING)) {
                 cache.setRating((float) response.get(CACHE_RATING).asDouble());
@@ -424,6 +426,13 @@ final class OkapiClient {
             }
             description.append(response.get(CACHE_DESCRIPTION).asText());
             cache.setDescription(description.toString());
+
+            if (response.has(CACHE_SHORT_DESCRIPTION)) {
+                final String shortDescription = StringUtils.trim(response.get(CACHE_SHORT_DESCRIPTION).asText());
+                if (StringUtils.isNotEmpty(shortDescription)) {
+                    cache.setShortDescription(shortDescription);
+                }
+            }
 
             // currently the hint is delivered as HTML (contrary to OKAPI documentation), so we can store it directly
             cache.setHint(response.get(CACHE_HINT).asText());

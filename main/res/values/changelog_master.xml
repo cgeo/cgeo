@@ -15,6 +15,7 @@
     · New: Suggest to remove list if empty\n
     · New: Allow to add past events\n
     · New: "My finds" pocket query is shown (if available)\n
+    · New: support short description of OpenCaching caches\n
     · Fix: Avoid crash when loading caches from different sources\n
     · Fix: Update found status in list after one-click-offline-log\n
     · Removed: Swaggie trackables support has been removed as they are deprecated\n
