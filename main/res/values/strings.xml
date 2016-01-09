@@ -1460,5 +1460,6 @@
     <string name="pq_available_for_download_description">This Pocket query is available for download as one file (gpx). Do you want to download and import it or view the caches as list?</string>
     <string name="pq_as_cache_list">View cache list</string>
     <string name="pq_download_and_import">Import Pocket query</string>
-
+    <string name="pq_my_finds">My finds</string>
+    
 </resources>

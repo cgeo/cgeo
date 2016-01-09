@@ -1017,6 +1017,7 @@ public final class GCParser {
             }
 
             final List<PocketQueryList> list = new ArrayList<>();
+            final List<String> allQueryGuids = new ArrayList<>();
             final Set<String> downloadablePocketQueries = getDownloadablePocketQueries(subPage);
 
             final MatcherWrapper matcherPocket = new MatcherWrapper(GCConstants.PATTERN_LIST_PQ, subPage);
@@ -1033,6 +1034,7 @@ public final class GCParser {
                 final String name = Html.fromHtml(matcherPocket.group(3)).toString();
                 final PocketQueryList pqList = new PocketQueryList(guid, name, maxCaches, downloadablePocketQueries.contains(guid));
                 list.add(pqList);
+                allQueryGuids.add(guid);
             }
 
             // just in case, lets sort the resulting list
@@ -1044,6 +1046,12 @@ public final class GCParser {
                     return collator.compare(left.getName(), right.getName());
                 }
             });
+
+            // the "My finds" query is not listed on the available queries page
+            downloadablePocketQueries.removeAll(allQueryGuids);
+            if (downloadablePocketQueries.size() == 1) {
+                list.add(new PocketQueryList(downloadablePocketQueries.iterator().next(), CgeoApplication.getInstance().getString(R.string.pq_my_finds), 0, true));
+            }
 
             return Observable.just(list);
         }

@@ -1,7 +1,5 @@
 package cgeo.geocaching.ui.dialog;
 
-import butterknife.ButterKnife;
-
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.settings.Settings;
@@ -9,10 +7,6 @@ import cgeo.geocaching.utils.ImageUtils;
 
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.Nullable;
-
-import rx.Observable;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -23,6 +17,7 @@ import android.content.DialogInterface.OnClickListener;
 import android.graphics.drawable.Drawable;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.StringRes;
 import android.text.Editable;
 import android.text.InputType;
@@ -37,6 +32,11 @@ import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import java.util.List;
+
+import butterknife.ButterKnife;
+import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
 
 /**
  * Wrapper for {@link AlertDialog}. If you want to show a simple text, use one of the
@@ -466,8 +466,9 @@ public final class Dialogs {
 
     public static interface ItemWithIcon {
         /**
-         * @return the drawable
+         * @return the drawable resource, or {@code 0} for no drawable
          */
+        @DrawableRes
         int getIcon();
     }
 

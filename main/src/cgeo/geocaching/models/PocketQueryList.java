@@ -3,21 +3,22 @@ package cgeo.geocaching.models;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.gc.GCParser;
+import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.ui.dialog.Dialogs.ItemWithIcon;
 
 import org.apache.commons.collections4.CollectionUtils;
+
+import android.app.Activity;
+import android.app.Dialog;
+import android.app.ProgressDialog;
+import android.support.annotation.DrawableRes;
+
+import java.util.List;
 
 import rx.android.app.AppObservable;
 import rx.functions.Action1;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.app.ProgressDialog;
-import android.content.DialogInterface;
-
-import java.util.List;
-
-public final class PocketQueryList {
+public final class PocketQueryList implements ItemWithIcon {
 
     private final String guid;
     private final int maxCaches;
@@ -31,7 +32,9 @@ public final class PocketQueryList {
         this.downloadable = downloadable;
     }
 
-    public boolean isDownloadable() { return downloadable; }
+    public boolean isDownloadable() {
+        return downloadable;
+    }
 
     public String getGuid() {
         return guid;
@@ -63,21 +66,22 @@ public final class PocketQueryList {
             return;
         }
 
-        final CharSequence[] items = new CharSequence[pocketQueryList.size()];
+        Dialogs.select(activity, activity.getString(R.string.search_pocket_select), pocketQueryList, runAfterwards);
+    }
 
-        for (int i = 0; i < pocketQueryList.size(); i++) {
-            items[i] = pocketQueryList.get(i).name + (pocketQueryList.get(i).isDownloadable() ? " *" : "");
+    @Override
+    @DrawableRes
+    public int getIcon() {
+        if (isDownloadable()) {
+            return R.drawable.ic_menu_save;
         }
+        return R.drawable.ic_menu_info_details;
+    }
 
-        new AlertDialog.Builder(activity)
-                .setTitle(activity.getString(R.string.search_pocket_select))
-                .setItems(items, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(final DialogInterface dialogInterface, final int itemId) {
-                        dialogInterface.dismiss();
-                        runAfterwards.call(pocketQueryList.get(itemId));
-                    }
-                }).create().show();
+    @Override
+    public String toString() {
+        // used by AlertBuilder
+        return getName();
     }
 
 }

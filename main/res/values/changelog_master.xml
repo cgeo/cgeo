@@ -3,19 +3,21 @@
   <!-- changelog for the master branch -->
   <string name="changelog_master" translatable="false">
     <b>Next feature release:</b>\n
-    · New: Support opencaching links using their internal ID\n
+    · New: Downloadable pocket queries can be imported directly\n
     · New: Improved Done and Cancel buttons for coordinate input\n
     · New: Change geocaching platform quickly by clicking info on main screen\n
     · New: Show amount of people watching a cache listing\n
-    · New: Parse GPX files of Geocaching.su\n
     · New: Filter for multi platform listings with different found state\n
+    · New: Parse GPX files of Geocaching.su\n
+    · New: Support opencaching links using their internal ID\n
     · New: Russian translation\n
-    · Fix: Update found status in list after one-click-offline-log\n
     · New: Show names of contacts if more than one match found\n
     · New: Suggest to remove list if empty\n
-    · Removed: Swaggie trackables support has been removed as they are deprecated\n
+    · New: Allow to add past events\n
+    · New: "My finds" pocket query is shown (if available)\n
     · Fix: Avoid crash when loading caches from different sources\n
-    · Fix: Allow to add past events\n
+    · Fix: Update found status in list after one-click-offline-log\n
+    · Removed: Swaggie trackables support has been removed as they are deprecated\n
     \n
     \n
   </string>
