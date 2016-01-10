@@ -1555,12 +1555,11 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 @Override
                 public void call() {
                     final IConnector con = ConnectorFactory.getConnector(cache);
-                    if (con.supportsPersonalNote()) {
-                        con.uploadPersonalNote(cache);
-                    }
+                    final boolean success = con.uploadPersonalNote(cache);
                     final Message msg = Message.obtain();
                     final Bundle bundle = new Bundle();
-                    bundle.putString(SimpleCancellableHandler.MESSAGE_TEXT, CgeoApplication.getInstance().getString(R.string.cache_personal_note_upload_done));
+                    bundle.putString(SimpleCancellableHandler.MESSAGE_TEXT,
+                            CgeoApplication.getInstance().getString(success ? R.string.cache_personal_note_upload_done : R.string.cache_personal_note_upload_error));
                     msg.setData(bundle);
                     myHandler.sendMessage(msg);
                 }
