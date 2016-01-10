@@ -1,11 +1,21 @@
 package cgeo.geocaching.connector.gc;
 
-import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.models.Image;
+import android.os.Bundle;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
+import android.widget.CheckBox;
+
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.List;
+
 import cgeo.geocaching.LogCacheActivity;
 import cgeo.geocaching.R;
-import cgeo.geocaching.models.TrackableLog;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.AbstractLoggingManager;
 import cgeo.geocaching.connector.ImageResult;
@@ -14,24 +24,14 @@ import cgeo.geocaching.enumerations.Loaders;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.loaders.UrlLoader;
+import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.Image;
+import cgeo.geocaching.models.TrackableLog;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
-
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
-
-import android.os.Bundle;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.Loader;
-import android.widget.CheckBox;
-
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.List;
 
 class GCLoggingManager extends AbstractLoggingManager implements LoaderManager.LoaderCallbacks<String> {
 
@@ -110,6 +110,10 @@ class GCLoggingManager extends AbstractLoggingManager implements LoaderManager.L
                     cache.setDisabled(true);
                 } else if (logType == LogType.ENABLE_LISTING) {
                     cache.setDisabled(false);
+                }
+                if (fav_check.isChecked()) {
+                    cache.setFavorite(true);
+                    cache.setFavoritePoints(cache.getFavoritePoints() + 1);
                 }
             }
             return new LogResult(postResult.left, postResult.right);
