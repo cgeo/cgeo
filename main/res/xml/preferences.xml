@@ -69,6 +69,10 @@
                         app:urlButton="@string/settings_goto_url_button" />
 
                     <Preference
+                        android:key="@string/pref_fakekey_gc_register"
+                        android:title="@string/settings_create_account" />
+
+                    <Preference
                         android:key="@string/pref_fakekey_gc_website"
                         android:title="@string/settings_open_website" />
 
@@ -96,6 +100,10 @@
                         android:key="@string/pref_fakekey_ocde_authorization" />
                 </PreferenceCategory>
                 <PreferenceCategory android:title="@string/settings_information" >
+                    <Preference
+                        android:key="@string/pref_fakekey_ocde_register"
+                        android:title="@string/settings_create_account" />
+
                     <Preference
                         android:key="@string/pref_fakekey_ocde_website"
                         android:title="@string/settings_open_website" />
@@ -125,6 +133,10 @@
                 </PreferenceCategory>
                 <PreferenceCategory android:title="@string/settings_information" >
                     <Preference
+                        android:key="@string/pref_fakekey_ocpl_register"
+                        android:title="@string/settings_create_account" />
+
+                    <Preference
                         android:key="@string/pref_fakekey_ocpl_website"
                         android:title="@string/settings_open_website" />
 
@@ -152,6 +164,10 @@
                         android:key="@string/pref_fakekey_ocnl_authorization" />
                 </PreferenceCategory>
                 <PreferenceCategory android:title="@string/settings_information" >
+                    <Preference
+                        android:key="@string/pref_fakekey_ocnl_register"
+                        android:title="@string/settings_create_account" />
+
                     <Preference
                         android:key="@string/pref_fakekey_ocnl_website"
                         android:title="@string/settings_open_website" />
@@ -181,6 +197,10 @@
                 </PreferenceCategory>
                 <PreferenceCategory android:title="@string/settings_information" >
                     <Preference
+                        android:key="@string/pref_fakekey_ocus_register"
+                        android:title="@string/settings_create_account" />
+
+                    <Preference
                         android:key="@string/pref_fakekey_ocus_website"
                         android:title="@string/settings_open_website" />
 
@@ -209,6 +229,10 @@
                 </PreferenceCategory>
                 <PreferenceCategory android:title="@string/settings_information" >
                     <Preference
+                        android:key="@string/pref_fakekey_ocro_register"
+                        android:title="@string/settings_create_account" />
+
+                    <Preference
                         android:key="@string/pref_fakekey_ocro_website"
                         android:title="@string/settings_open_website" />
 
@@ -236,6 +260,10 @@
                         android:key="@string/pref_fakekey_ocuk_authorization" />
                 </PreferenceCategory>
                 <PreferenceCategory android:title="@string/settings_information" >
+                    <Preference
+                        android:key="@string/pref_fakekey_ocuk_register"
+                        android:title="@string/settings_create_account" />
+
                     <Preference
                         android:key="@string/pref_fakekey_ocuk_website"
                         android:title="@string/settings_open_website" />
@@ -289,6 +317,10 @@
                 </PreferenceCategory>
                 <PreferenceCategory android:title="@string/settings_information" >
                     <Preference
+                        android:key="@string/pref_fakekey_ec_register"
+                        android:title="@string/settings_create_account" />
+
+                    <Preference
                         android:key="@string/pref_fakekey_ec_website"
                         android:title="@string/settings_open_website" />
 
@@ -337,6 +369,10 @@
                 </PreferenceCategory>
                 <PreferenceCategory android:title="@string/settings_information" >
                     <Preference
+                        android:key="@string/pref_fakekey_gcvote_register"
+                        android:title="@string/settings_create_account" />
+
+                    <Preference
                         android:key="@string/pref_fakekey_gcvote_website"
                         android:title="@string/settings_open_website" />
                 </PreferenceCategory>
@@ -371,11 +407,11 @@
                 </PreferenceCategory>
                 <PreferenceCategory android:title="@string/settings_information" >
                     <Preference
-                        android:key="@string/pref_fakekey_geokrety_website"
-                        android:title="@string/settings_open_website" />
-                    <Preference
                         android:key="@string/pref_fakekey_geokrety_register"
                         android:title="@string/settings_open_geokrety_register" />
+                    <Preference
+                        android:key="@string/pref_fakekey_geokrety_website"
+                        android:title="@string/settings_open_website" />
                     <Preference
                         android:key="@string/pref_fakekey_geokretymap_website"
                         android:title="@string/settings_open_geokretymap_website" />

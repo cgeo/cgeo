@@ -288,4 +288,14 @@ public final class GCVote {
         return CgeoApplication.getInstance().getString(resId);
     }
 
+    @NonNull
+    public static String getWebsite() {
+        return "http://gcvote.com";
+    }
+
+    @NonNull
+    public static String getCreateAccountUrl() {
+        return "http://gcvote.com/help_en.php";
+    }
+
 }

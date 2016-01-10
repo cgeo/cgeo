@@ -505,4 +505,9 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
         GCParser.ignoreCache(cache);
     }
 
+    @Override
+    @Nullable
+    public String getCreateAccountUrl() {
+        return "https://www.geocaching.com/account/register";
+    }
 }

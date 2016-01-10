@@ -1,31 +1,32 @@
 package cgeo.geocaching.settings;
 
 import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SelectMapfileActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.apps.navi.NavigationAppFactory;
 import cgeo.geocaching.apps.navi.NavigationAppFactory.NavigationAppsEnum;
+import cgeo.geocaching.connector.ec.ECConnector;
 import cgeo.geocaching.connector.gc.GCConnector;
+import cgeo.geocaching.connector.trackable.GeokretyConnector;
 import cgeo.geocaching.files.SimpleDirChooser;
+import cgeo.geocaching.gcvote.GCVote;
 import cgeo.geocaching.maps.MapProviderFactory;
 import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.network.AndroidBeam;
 import cgeo.geocaching.sensors.OrientationProvider;
 import cgeo.geocaching.sensors.RotationProvider;
 import cgeo.geocaching.sensors.Sensors;
+import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.DatabaseBackupUtils;
 import cgeo.geocaching.utils.DebugUtils;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.ProcessUtils;
 
 import org.apache.commons.lang3.StringUtils;
 import org.openintents.intents.FileManagerIntents;
-
-import rx.functions.Action0;
-import rx.schedulers.Schedulers;
 
 import android.R.string;
 import android.app.ProgressDialog;
@@ -52,6 +53,9 @@ import android.widget.ListAdapter;
 import java.io.File;
 import java.util.List;
 import java.util.Locale;
+
+import rx.functions.Action0;
+import rx.schedulers.Schedulers;
 
 /**
  * A {@link PreferenceActivity} that presents a set of application settings. On
@@ -182,41 +186,41 @@ public class SettingsActivity extends PreferenceActivity {
         for (final OCPreferenceKeys key : OCPreferenceKeys.values()) {
             getPreference(key.isActivePrefId).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
             setWebsite(key.websitePrefId, key.authParams.host);
+            setWebsite(key.registerPrefId, "http://" + key.authParams.host + "/register.php");
             getPreference(key.prefScreenId).setSummary(getServiceSummary(Settings.isOCConnectorActive(key.isActivePrefId)));
         }
         getPreference(R.string.pref_connectorGCActive).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
         setWebsite(R.string.pref_fakekey_gc_website, GCConnector.getInstance().getHost());
+        setWebsite(R.string.pref_fakekey_gc_register, GCConnector.getInstance().getCreateAccountUrl());
         getPreference(R.string.preference_screen_gc).setSummary(getServiceSummary(Settings.isGCConnectorActive()));
 
         getPreference(R.string.pref_connectorECActive).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
-        setWebsite(R.string.pref_fakekey_ec_website, "extremcaching.com");
+        setWebsite(R.string.pref_fakekey_ec_website, ECConnector.getInstance().getHost());
+        setWebsite(R.string.pref_fakekey_ec_register, ECConnector.getInstance().getCreateAccountUrl());
         getPreference(R.string.preference_screen_ec).setSummary(getServiceSummary(Settings.isECConnectorActive()));
 
         getPreference(R.string.pref_ratingwanted).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
-        setWebsite(R.string.pref_fakekey_gcvote_website, "gcvote.com");
+        setWebsite(R.string.pref_fakekey_gcvote_website, GCVote.getWebsite());
+        setWebsite(R.string.pref_fakekey_gcvote_register, GCVote.getCreateAccountUrl());
         getPreference(R.string.preference_screen_gcvote).setSummary(getServiceSummary(Settings.isRatingWanted()));
 
         getPreference(R.string.pref_connectorGeokretyActive).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
         setWebsite(R.string.pref_fakekey_geokrety_website, "geokrety.org");
         setWebsite(R.string.pref_fakekey_geokretymap_website, "geokretymap.org");
-        setWebsite(R.string.pref_fakekey_geokrety_register, "geokrety.org/adduser.php");
+        setWebsite(R.string.pref_fakekey_geokrety_register, GeokretyConnector.getCreateAccountUrl());
         getPreference(R.string.preference_screen_geokrety).setSummary(getServiceSummary(Settings.isGeokretyConnectorActive()));
 
         setWebsite(R.string.pref_fakekey_sendtocgeo_website, "send2.cgeo.org");
         getPreference(R.string.preference_screen_sendtocgeo).setSummary(getServiceSummary(Settings.isRegisteredForSend2cgeo()));
     }
 
-    private void setWebsite(final int preferenceKey, final String host) {
+    private void setWebsite(final int preferenceKey, final String urlOrHost) {
         final Preference preference = getPreference(preferenceKey);
         preference.setOnPreferenceClickListener(new OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(final Preference preference) {
-                try {
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://" + host)));
-                } catch (final ActivityNotFoundException e) {
-                    Log.e("Cannot find suitable activity", e);
-                    ActivityMixin.showToast(SettingsActivity.this, R.string.err_application_no);
-                }
+                final String url = StringUtils.startsWith(urlOrHost, "http") ? urlOrHost : "http://" + urlOrHost;
+                ProcessUtils.openUri(url, SettingsActivity.this);
                 return true;
             }
         });

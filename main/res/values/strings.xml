@@ -603,6 +603,7 @@
     <string name="init_hardware_acceleration_title">Hardware accelerated rendering</string>
     <string name="init_hardware_acceleration_note">Hardware acceleration renders graphical elements faster on the screen. However on some devices the Android operating system contains bugs and some text may appear blurred (notably bold characters). Disable hardware acceleration if this happens to you.</string>
     <string name="init_hardware_acceleration">Enable hardware acceleration</string>
+    <string name="settings_create_account">Create account</string>
     <string name="settings_open_website">Open website</string>
     <string name="settings_open_geokrety_register">Open GeoKrety.org registration page</string>
     <string name="settings_open_geokretymap_website">Open GeoKretyMap.org website</string>

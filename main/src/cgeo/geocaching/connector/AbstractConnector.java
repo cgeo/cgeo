@@ -326,4 +326,10 @@ public abstract class AbstractConnector implements IConnector {
 
     public void logout() {
     }
+
+    @Override
+    @Nullable
+    public String getCreateAccountUrl() {
+        return null;
+    }
 }

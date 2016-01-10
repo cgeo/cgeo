@@ -244,4 +244,9 @@ public class ECConnector extends AbstractConnector implements ISearchByGeocode, 
         return super.getGeocodeFromUrl(url);
     }
 
+    @Override
+    @NonNull
+    public String getCreateAccountUrl() {
+        return "https://extremcaching.com/component/comprofiler/registers";
+    }
 }

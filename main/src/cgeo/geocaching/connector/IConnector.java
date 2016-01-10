@@ -1,9 +1,9 @@
 package cgeo.geocaching.connector;
 
-import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.LogCacheActivity;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.models.Geocache;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -247,4 +247,10 @@ public interface IConnector {
      * @return true, when cache can be added to favorite
      */
     public boolean supportsAddToFavorite(final Geocache cache, final LogType type);
+
+    /**
+     * @return the URL to register a new account or {@code null}
+     */
+    @Nullable
+    public String getCreateAccountUrl();
 }

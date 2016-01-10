@@ -309,4 +309,8 @@ public class GeokretyConnector extends AbstractTrackableConnector {
     public String getHost() {
         return "geokrety.org";
     }
+
+    public static String getCreateAccountUrl() {
+        return "http://geokrety.org/adduser.php";
+    }
 }

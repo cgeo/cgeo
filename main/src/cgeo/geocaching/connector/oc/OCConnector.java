@@ -1,9 +1,9 @@
 package cgeo.geocaching.connector.oc;
 
-import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.AbstractConnector;
 import cgeo.geocaching.enumerations.LogType;
+import cgeo.geocaching.models.Geocache;
 
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
@@ -103,5 +103,11 @@ public class OCConnector extends AbstractConnector {
         // host.tld/viewcache.php?wp=geocode
         final String secondLevel = StringUtils.substringAfter(url, shortHost + "/viewcache.php?wp=");
         return canHandle(secondLevel) ? secondLevel : super.getGeocodeFromUrl(url);
+    }
+
+    @Override
+    @Nullable
+    public String getCreateAccountUrl() {
+        return "http://" + host + "/register.php";
     }
 }
