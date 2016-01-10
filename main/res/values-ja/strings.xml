@@ -515,6 +515,7 @@
   <string name="settings_open_website">サイトを開く</string>
   <string name="settings_settings">設定</string>
   <string name="settings_information">情報</string>
+  <string name="settings_advanced">詳細設定</string>
   <string name="init_ec_icons">地図のアイコン</string>
   <string name="settings_ec_icons_other">独自のスタイル</string>
   <string name="settings_ec_icons_oc">OCと同じ</string>
