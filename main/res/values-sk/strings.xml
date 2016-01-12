@@ -569,6 +569,7 @@
   <string name="init_hardware_acceleration_title">Hardvérovo zrýchlené vykresľovanie</string>
   <string name="init_hardware_acceleration_note">Hardvérové zrýchlenie vykresľuje grafické prvky na obrazovke rýchlejšie. Avšak na niektorých zariadeniach operačný systém Android obsahuje chybu, ktorá spôsobuje neostré vykresľovanie textu (viditeľne hrubšie znaky). Ak sa toto stane, je vhodné zakázať hardvérové zrýchlenie.</string>
   <string name="init_hardware_acceleration">Povoliť hardvérové zrýchlenie</string>
+  <string name="settings_create_account">Vytvoriť účet</string>
   <string name="settings_open_website">Otvoriť webovú stránku</string>
   <string name="settings_open_geokrety_register">Otvoriť stránku pre registráciu na GeoKrety.org</string>
   <string name="settings_open_geokretymap_website">Otvoriť stránku GeoKretyMap.org</string>
@@ -1356,4 +1357,9 @@
   <string name="unit_ft">stopy</string>
   <string name="unit_yd">yard</string>
   <string name="unit_mi">míľa</string>
+  <string name="pq_available_for_download">PQ k stiahnutiu</string>
+  <string name="pq_available_for_download_description">Táto PQ je dostupná k stiahnutiu ako jeden súbor (gpx). Chceš tento súbor stiahnuť a importovať, alebo iba zobraziť kešky ako zoznam?</string>
+  <string name="pq_as_cache_list">Zobraziť zoznam kešiek</string>
+  <string name="pq_download_and_import">Importovať PQ</string>
+  <string name="pq_my_finds">Moje nálezy</string>
 </resources>
