@@ -557,6 +557,7 @@
   <string name="init_hardware_acceleration_title">Renderizado con aceleración por hardware</string>
   <string name="init_hardware_acceleration_note">La aceleración por hardware renderiza los elementos gráficos en pantalla de manera más rápida. Sin embargo en algunos dispositivos el sistema operativo Android contiene fallos y algunos textos pueden aparecer borrosos (especialmente caracteres en negrita). Inhabilita la aceleración por hardware si ocurriera esto.</string>
   <string name="init_hardware_acceleration">Habilitar aceleración por hardware</string>
+  <string name="settings_create_account">Crear cuenta</string>
   <string name="settings_open_website">Abrir el sitio web</string>
   <string name="settings_open_geokrety_register">Abrir la página de registro de GeoKrety.org</string>
   <string name="settings_open_geokretymap_website">Abrir el sitio web GeoKretyMap.org</string>
@@ -1321,4 +1322,6 @@ Nombre de archivo:%2$s</string>
   <string name="unit_ft">ft</string>
   <string name="unit_yd">yd</string>
   <string name="unit_mi">mi</string>
+  <string name="pq_download_and_import">Importar Pocket Query</string>
+  <string name="pq_my_finds">Mis encontrados</string>
 </resources>

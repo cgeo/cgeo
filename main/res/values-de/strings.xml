@@ -214,8 +214,8 @@
   <string name="warn_deprecated_mapfile">Es wird eine veraltete Offline-Karte v0.2.4 verwendet.\nBitte zukünftig Offline-Karten in der Version 0.3.0 verwenden.\nDer Support für die alte Version wird im nächsten Release eingestellt.</string>
   <string name="warn_nonexistant_mapfile">Die gewählte Datei existiert nicht.\nOffline Karte ist nicht verfügbar.</string>
   <string name="warn_rendertheme_missing">Das gewählte Karten-Theme wurde nicht gefunden.</string>
-  <string name="warn_pocket_query_select">Kein Pocket Query ausgewählt.</string>
-  <string name="warn_no_pocket_query_found">Kein Pocket Query online gefunden</string>
+  <string name="warn_pocket_query_select">Kein Pocket-Query ausgewählt.</string>
+  <string name="warn_no_pocket_query_found">Kein Pocket-Query online gefunden.</string>
   <string name="info_log_posted">Log erfolgreich gesendet.</string>
   <string name="info_log_saved">Log erfolgreich gespeichert.</string>
   <string name="info_log_post_failed">Das Senden des Logs ist fehlgeschlagen.</string>
@@ -918,9 +918,9 @@
   <string name="search_address_started">Suche nach Orten</string>
   <string name="search_address_result">Gefundene Orte</string>
   <string name="search_own_caches">Meine Caches suchen</string>
-  <string name="search_pocket_title">Pocket Query</string>
+  <string name="search_pocket_title">Pocket-Query</string>
   <string name="search_pocket_loading">Eine Liste von Pocket Queries laden</string>
-  <string name="search_pocket_select">Pocket Query wählen</string>
+  <string name="search_pocket_select">Pocket-Query wählen</string>
   <string name="trackable">Trackable</string>
   <string name="trackable_details_loading">Lade Details des Trackable…</string>
   <string name="trackable_log_touch">Logge Fund</string>
@@ -987,8 +987,8 @@
   <string name="helper_bluetoothgps_description">Ermöglicht ein externes GPS zu verwenden, um die Standortgenauigkeit zu erhöhen und die Batterie zu schonen.</string>
   <string name="helper_barcode_title">Barcode-Scanner</string>
   <string name="helper_barcode_description">Es gibt GreaseMonkey-Scripte und Webseiten, die Geocodes als Strichcode darstellen können. Bei Verwendung dieser Skripte kann c:geo über diese App den Geocode eines Caches direkt vom Bildschirm des Computers ablesen.</string>
-  <string name="helper_pocketquery_title">Pocket Query Creator</string>
-  <string name="helper_pocketquery_description">Ermöglicht das einfache Erzeugen und Herunterladen von Pocket Queries basierend auf der aktuellen Position oder einem auf der Karte gewählten Punkt. Setzt eine Premium-Mitgliedschaft bei geocaching.com voraus.</string>
+  <string name="helper_pocketquery_title">Pocket-Query Creator</string>
+  <string name="helper_pocketquery_description">Ermöglicht das einfache Erzeugen und Herunterladen von Pocket-Queries basierend auf der aktuellen Position oder einem auf der Karte gewählten Punkt. Setzt eine Premium-Mitgliedschaft bei geocaching.com voraus.</string>
   <string name="helper_google_translate_title">Google Übersetzer</string>
   <string name="helper_google_translate_description">Wenn Sie Übersetzungspakete mit der Google Übersetzer-App herunterladen, können Sie Cache-Beschreibungen in c:geo durch langes Drücken auf den Cache-Beschreibungstext übersetzen (ohne Internetverbindung) .</string>
   <string name="helper_wear_title">c:geo Wear</string>
@@ -1342,9 +1342,9 @@
   <string name="unit_ft">ft</string>
   <string name="unit_yd">yd</string>
   <string name="unit_mi">mi</string>
-  <string name="pq_available_for_download">Pocket query bereit zum herunterladen</string>
-  <string name="pq_available_for_download_description">Dieser Pocket Query ist bereit zum herunterladen als Datei (gpx). Herunterladen und importieren oder als Liste anzeigen?</string>
+  <string name="pq_available_for_download">Pocket-Query bereit zum Herunterladen</string>
+  <string name="pq_available_for_download_description">Dieser Pocket-Query ist bereit zum Herunterladen als Datei (GPX). Herunterladen und importieren oder als Liste anzeigen?</string>
   <string name="pq_as_cache_list">Liste anzeigen</string>
-  <string name="pq_download_and_import">Pocket Query importieren</string>
+  <string name="pq_download_and_import">Pocket-Query importieren</string>
   <string name="pq_my_finds">Meine Funde</string>
 </resources>
