@@ -21,7 +21,7 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.models.LogEntry;
-import cgeo.geocaching.models.PocketQueryList;
+import cgeo.geocaching.models.PocketQuery;
 import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.models.TrackableLog;
 import cgeo.geocaching.models.Waypoint;
@@ -998,25 +998,25 @@ public final class GCParser {
      * Observable that fetches a list of pocket queries. Returns a single element (which may be an empty list).
      * Executes on the network scheduler.
      */
-    public static final Observable<List<PocketQueryList>> searchPocketQueryListObservable = Observable.defer(new Func0<Observable<List<PocketQueryList>>>() {
+    public static final Observable<List<PocketQuery>> searchPocketQueryListObservable = Observable.defer(new Func0<Observable<List<PocketQuery>>>() {
         @Override
-        public Observable<List<PocketQueryList>> call() {
+        public Observable<List<PocketQuery>> call() {
             final Parameters params = new Parameters();
 
             final String page = GCLogin.getInstance().getRequestLogged("https://www.geocaching.com/pocket/default.aspx", params);
 
             if (StringUtils.isBlank(page)) {
                 Log.e("GCParser.searchPocketQueryList: No data from server");
-                return Observable.just(Collections.<PocketQueryList>emptyList());
+                return Observable.just(Collections.<PocketQuery>emptyList());
             }
 
             final String subPage = StringUtils.substringAfter(page, "class=\"PocketQueryListTable");
             if (StringUtils.isEmpty(subPage)) {
                 Log.e("GCParser.searchPocketQueryList: class \"PocketQueryListTable\" not found on page");
-                return Observable.just(Collections.<PocketQueryList>emptyList());
+                return Observable.just(Collections.<PocketQuery>emptyList());
             }
 
-            final List<PocketQueryList> list = new ArrayList<>();
+            final List<PocketQuery> list = new ArrayList<>();
             final List<String> allQueryGuids = new ArrayList<>();
             final Set<String> downloadablePocketQueries = getDownloadablePocketQueries(subPage);
 
@@ -1032,17 +1032,17 @@ public final class GCParser {
                 }
                 final String guid = Html.fromHtml(matcherPocket.group(2)).toString();
                 final String name = Html.fromHtml(matcherPocket.group(3)).toString();
-                final PocketQueryList pqList = new PocketQueryList(guid, name, maxCaches, downloadablePocketQueries.contains(guid));
+                final PocketQuery pqList = new PocketQuery(guid, name, maxCaches, downloadablePocketQueries.contains(guid));
                 list.add(pqList);
                 allQueryGuids.add(guid);
             }
 
             // just in case, lets sort the resulting list
             final Collator collator = TextUtils.getCollator();
-            Collections.sort(list, new Comparator<PocketQueryList>() {
+            Collections.sort(list, new Comparator<PocketQuery>() {
 
                 @Override
-                public int compare(final PocketQueryList left, final PocketQueryList right) {
+                public int compare(final PocketQuery left, final PocketQuery right) {
                     return collator.compare(left.getName(), right.getName());
                 }
             });
@@ -1050,7 +1050,7 @@ public final class GCParser {
             // the "My finds" query is not listed on the available queries page
             downloadablePocketQueries.removeAll(allQueryGuids);
             if (downloadablePocketQueries.size() == 1) {
-                list.add(new PocketQueryList(downloadablePocketQueries.iterator().next(), CgeoApplication.getInstance().getString(R.string.pq_my_finds), 0, true));
+                list.add(new PocketQuery(downloadablePocketQueries.iterator().next(), CgeoApplication.getInstance().getString(R.string.pq_my_finds), -1, true));
             }
 
             return Observable.just(list);

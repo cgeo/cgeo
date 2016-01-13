@@ -43,7 +43,7 @@ import cgeo.geocaching.loaders.PocketGeocacheListLoader;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.maps.CGeoMap;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.models.PocketQueryList;
+import cgeo.geocaching.models.PocketQuery;
 import cgeo.geocaching.network.Cookies;
 import cgeo.geocaching.network.DownloadProgress;
 import cgeo.geocaching.network.Network;
@@ -60,11 +60,11 @@ import cgeo.geocaching.ui.CacheListAdapter;
 import cgeo.geocaching.ui.LoggingUI;
 import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.AndroidRxUtils;
 
 import com.github.amlcurran.showcaseview.targets.ActionViewTarget;
 import com.github.amlcurran.showcaseview.targets.ActionViewTarget.Type;
@@ -464,6 +464,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         }
 
         if (isInvokedFromAttachment()) {
+            listNameMemento.rememberTerm(extras.getString(Intents.EXTRA_NAME));
             importGpxAttachement();
         }
         else {
@@ -554,7 +555,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 new GPXImporter(CacheListActivity.this, listId, importGpxAttachementFinishedHandler).importGPX();
                 switchListById(listId);
             }
-        }, true, 0);
+        }, true, 0, listNameMemento);
     }
 
     @Override
@@ -758,7 +759,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 invalidateOptionsMenuCompatible();
                 return true;
             case R.id.menu_create_list:
-                new StoredList.UserInterface(this).promptForListCreation(getListSwitchingRunnable(), listNameMemento.getTerm());
+                new StoredList.UserInterface(this).promptForListCreation(getListSwitchingRunnable(), StringUtils.EMPTY);
                 refreshSpinnerAdapter();
                 invalidateOptionsMenuCompatible();
                 return true;
@@ -1576,10 +1577,10 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         context.startActivity(cachesIntent);
     }
 
-    public static void startActivityPocket(final AbstractActivity context, final @NonNull PocketQueryList pocketQuery) {
+    public static void startActivityPocket(final @NonNull Activity context, final @NonNull PocketQuery pocketQuery) {
         final String guid = pocketQuery.getGuid();
         if (guid == null) {
-            context.showToast(CgeoApplication.getInstance().getString(R.string.warn_pocket_query_select));
+            ActivityMixin.showToast(context, CgeoApplication.getInstance().getString(R.string.warn_pocket_query_select));
             return;
         }
         if (pocketQuery.isDownloadable()) {
@@ -1610,14 +1611,15 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         }
     }
 
-    private static void startActivityWithAttachment(final AbstractActivity context, final @NonNull PocketQueryList pocketQuery) {
+    private static void startActivityWithAttachment(final @NonNull Activity context, final @NonNull PocketQuery pocketQuery) {
         final Uri uri = Uri.parse("https://www.geocaching.com/pocket/downloadpq.ashx?g=" + pocketQuery.getGuid() + "&src=web");
         final Intent cachesIntent = new Intent(Intent.ACTION_VIEW, uri, context, CacheListActivity.class);
         cachesIntent.setDataAndType(uri, "application/zip");
+        cachesIntent.putExtra(Intents.EXTRA_NAME, pocketQuery.getName());
         context.startActivity(cachesIntent);
     }
 
-    private static void startActivityPocket(final AbstractActivity context, final @NonNull PocketQueryList pocketQuery, final CacheListType cacheListType) {
+    private static void startActivityPocket(final @NonNull Activity context, final @NonNull PocketQuery pocketQuery, final CacheListType cacheListType) {
         final Intent cachesIntent = new Intent(context, CacheListActivity.class);
         Intents.putListType(cachesIntent, cacheListType);
         cachesIntent.putExtra(Intents.EXTRA_NAME, pocketQuery.getName());
@@ -1709,7 +1711,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 break;
             case POCKET:
                 final String guid = extras.getString(Intents.EXTRA_POCKET_GUID);
-                title = extras.getString(Intents.EXTRA_NAME);
+                title = listNameMemento.rememberTerm(extras.getString(Intents.EXTRA_NAME));
                 loader = new PocketGeocacheListLoader(app, guid);
                 break;
         }

@@ -4,6 +4,7 @@ import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.activity.ShowcaseViewBuilder;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.capability.ILogin;
+import cgeo.geocaching.connector.gc.PocketQueryListActivity;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.list.PseudoList;
@@ -12,7 +13,6 @@ import cgeo.geocaching.location.AndroidGeocoder;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Units;
 import cgeo.geocaching.maps.CGeoMap;
-import cgeo.geocaching.models.PocketQueryList;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
@@ -376,13 +376,7 @@ public class MainActivity extends AbstractActionBarActivity {
                 if (!Settings.isGCPremiumMember()) {
                     return true;
                 }
-                PocketQueryList.promptForListSelection(this, new Action1<PocketQueryList>() {
-
-                    @Override
-                    public void call(final PocketQueryList pql) {
-                        CacheListActivity.startActivityPocket(MainActivity.this, pql);
-                    }
-                });
+                startActivity(new Intent(this, PocketQueryListActivity.class));
                 return true;
         }
         return super.onOptionsItemSelected(item);

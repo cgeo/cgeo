@@ -735,6 +735,17 @@
         <provider
             android:name=".search.SuggestionProvider"
             android:authorities="cgeo.geocaching.search.SuggestionProvider" />
+        
+        <activity
+            android:name="cgeo.geocaching.connector.gc.PocketQueryListActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/search_pocket_title"
+            android:parentActivityName="cgeo.geocaching.MainActivity"            >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="cgeo.geocaching.MainActivity" />
+        </activity>
+        
     </application>
 
 </manifest>
