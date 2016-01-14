@@ -42,7 +42,7 @@ Please be warned, we might remove the support for development in Eclipse, once w
 
 ### Prerequisites
 
-- [Android SDK](http://developer.android.com/sdk) (latest version) including Google APIs V19 and Google support repository
+- [Android SDK](http://developer.android.com/sdk) (latest version) including Google APIs V19, Google APIs V22, Google repository and Android support repository
 - If you use Microsoft Windows, [Google USB Driver](http://developer.android.com/sdk/win-usb.html) to install the application on the smartphone
 - You need to provide several API keys for compiling the app. See next section for details.
 
