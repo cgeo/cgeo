@@ -659,7 +659,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             setVisible(menu, R.id.menu_create_list, isOffline);
 
             setVisible(menu, R.id.menu_sort, !isEmpty && !isHistory);
-            setVisible(menu, R.id.menu_refresh_stored, !isEmpty && (isConcrete || type != CacheListType.OFFLINE));
+            setVisible(menu, R.id.menu_refresh_stored, !isEmpty && isOffline);
             setVisible(menu, R.id.menu_drop_caches, !isEmpty && isOffline);
             setVisible(menu, R.id.menu_delete_events, isConcrete && !isEmpty && containsPastEvents());
             setVisible(menu, R.id.menu_move_to_list, isOffline && !isEmpty);
@@ -743,8 +743,14 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 invalidateOptionsMenuCompatible();
                 return true;
             case R.id.menu_refresh_stored:
-                refreshStored(adapter.getCheckedOrAllCaches());
-                invalidateOptionsMenuCompatible();
+                Dialogs.confirmYesNo(this, R.string.caches_refresh_all, R.string.caches_refresh_all_warning, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(final DialogInterface dialog, final int id) {
+                        refreshStored(adapter.getCheckedOrAllCaches());
+                        invalidateOptionsMenuCompatible();
+                        dialog.cancel();
+                    }
+                });
                 return true;
             case R.id.menu_drop_caches:
                 deleteCachesWithConfirmation();

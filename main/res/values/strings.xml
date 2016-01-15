@@ -1462,5 +1462,6 @@
     <string name="pq_as_cache_list">View cache list</string>
     <string name="pq_download_and_import">Import Pocket query</string>
     <string name="pq_my_finds">My finds</string>
-    
+    <string name="caches_refresh_all_warning">This action may lead to high network traffic. Are you sure you want to batch refresh all caches?</string>
+
 </resources>
