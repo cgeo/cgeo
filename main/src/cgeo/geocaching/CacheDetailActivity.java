@@ -1,8 +1,5 @@
 package cgeo.geocaching;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
-
 import cgeo.calendar.CalendarAddon;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.AbstractViewPagerActivity;
@@ -80,19 +77,6 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
-import rx.Observable;
-import rx.Observable.OnSubscribe;
-import rx.Subscriber;
-import rx.Subscription;
-import rx.android.app.AppObservable;
-import rx.functions.Action0;
-import rx.functions.Action1;
-import rx.functions.Func0;
-import rx.functions.Func1;
-import rx.schedulers.Schedulers;
-import rx.subscriptions.CompositeSubscription;
-import rx.subscriptions.Subscriptions;
-
 import android.R.color;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -152,6 +136,21 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.regex.Pattern;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import rx.Observable;
+import rx.Observable.OnSubscribe;
+import rx.Subscriber;
+import rx.Subscription;
+import rx.android.app.AppObservable;
+import rx.functions.Action0;
+import rx.functions.Action1;
+import rx.functions.Func0;
+import rx.functions.Func1;
+import rx.schedulers.Schedulers;
+import rx.subscriptions.CompositeSubscription;
+import rx.subscriptions.Subscriptions;
 
 /**
  * Activity to handle all single-cache-stuff.
@@ -1001,8 +1000,8 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             }
 
             // cache attributes
-            updateAttributesText();
             updateAttributesIcons();
+            updateAttributesText();
             ButterKnife.findById(view, R.id.attributes_box).setVisibility(cache.getAttributes().isEmpty() ? View.GONE : View.VISIBLE);
 
             updateOfflineBox(view, cache, res, new RefreshCacheClickListener(), new DropCacheClickListener(), new StoreCacheClickListener());
@@ -1045,7 +1044,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         private void updateAttributesIcons() {
             final GridView gridView = ButterKnife.findById(view, R.id.attributes_grid);
             final List<String> attributes = cache.getAttributes();
-            if (attributes.isEmpty()) {
+            if (!CacheAttribute.hasRecognizedAttributeIcon(attributes)) {
                 gridView.setVisibility(View.GONE);
                 return;
             }
@@ -1087,14 +1086,18 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 text.append(attributeName);
             }
             attribView.setText(text);
-            attribView.setVisibility(View.GONE);
-            attribView.setOnClickListener(new OnClickListener() {
+            if (ButterKnife.findById(view, R.id.attributes_grid).getVisibility() == View.VISIBLE) {
+                attribView.setVisibility(View.GONE);
+                attribView.setOnClickListener(new OnClickListener() {
 
-                @Override
-                public void onClick(final View v) {
-                    toggleAttributesView();
-                }
-            });
+                    @Override
+                    public void onClick(final View v) {
+                        toggleAttributesView();
+                    }
+                });
+            } else {
+                attribView.setVisibility(View.VISIBLE);
+            }
         }
 
         private class StoreCacheClickListener implements View.OnClickListener {
