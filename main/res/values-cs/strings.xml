@@ -335,6 +335,7 @@
   <string name="caches_filter_personal_data">S osobními údaji</string>
   <string name="caches_filter_rating">S hodnocením</string>
   <string name="caches_filter_own_rating">S vlastním hodnocením</string>
+  <string name="caches_filter_multi_listing">Multi listing s různým stavem</string>
   <string name="caches_removing_from_history">Čištění Historie…</string>
   <string name="caches_clear_offlinelogs">Smazat offline Logy</string>
   <string name="caches_clear_offlinelogs_message">Opravdu chceš vymazat offline logy?</string>
@@ -568,6 +569,7 @@
   <string name="init_hardware_acceleration_title">Hardwarově akcelerované vykreslování</string>
   <string name="init_hardware_acceleration_note">S hardwarovou akcelerací se uživatelské rozhraní vykreslí rychleji. Operační systém Android však na některých zařízeních obsahuje chyby a některé části textu mohou být rozmazané (zejména tučné znaky). Pokud zaznamenáváš potíže, vypni hardwarovou akceleraci.</string>
   <string name="init_hardware_acceleration">Povolit hardwarovou akceleraci</string>
+  <string name="settings_create_account">Vytvořit účet</string>
   <string name="settings_open_website">Otevřít webovou stránku</string>
   <string name="settings_open_geokrety_register">Otevřít registrační stránku GeoKrety.org</string>
   <string name="settings_open_geokretymap_website">Otevřít stránku GeoKretyMap.org</string>
@@ -642,6 +644,21 @@
   <string name="cache_offline_time_about">přibližně před</string>
   <string name="cache_offline_time_mins">minutami</string>
   <string name="cache_offline_time_mins_few">několika minutami</string>
+  <plurals name="cache_offline_about_time_mins">
+    <item quantity="one">asi před %d minutou</item>
+    <item quantity="few">asi před %d minutami</item>
+    <item quantity="other">asi před %d minutami</item>
+  </plurals>
+  <plurals name="cache_offline_about_time_hours">
+    <item quantity="one">asi před %d hodinou</item>
+    <item quantity="few">asi před %d hodinami</item>
+    <item quantity="other">asi před %d hodinami</item>
+  </plurals>
+  <plurals name="cache_offline_about_time_days">
+    <item quantity="one">asi před %d dnem</item>
+    <item quantity="few">asi před %d dny</item>
+    <item quantity="other">asi před %d dny</item>
+  </plurals>
   <string name="cache_offline_time_hour">hodinou</string>
   <string name="cache_offline_time_hours">hodinami</string>
   <string name="cache_offline_time_days">dny</string>
@@ -662,7 +679,9 @@
   <string name="cache_description_long">Dlouhý popis</string>
   <string name="cache_description_table_note">Popis obsahuje tabulkové formátování, které je pravděpodobně nutné prohlížet na %s, aby bylo správně zobrazené.</string>
   <string name="cache_watchlist_on">Tato keš je v tvém Watchlistu.</string>
+  <string name="cache_watchlist_on_extra">Tato keš je na tvém watchlistu (sledující: %1d).</string>
   <string name="cache_watchlist_not_on">Tato keš není v tvém Watchlistu.</string>
+  <string name="cache_watchlist_not_on_extra">Tato keš není na tvém watchlistu (sledující: %1d).</string>
   <string name="cache_watchlist_add">Přidat na Watchlist</string>
   <string name="cache_watchlist_remove">Odstranit z Watchlistu</string>
   <string name="cache_favpoint_on">Tato keš je jedna z tvých Oblíbených.</string>
@@ -795,6 +814,7 @@
   <string name="gpx_import_loading_waypoints">Načítání souboru s body trasy</string>
   <string name="gpx_import_store_static_maps">Ukládání statických map</string>
   <string name="gpx_import_caches_imported">Keše importovány</string>
+  <string name="gpx_import_caches_imported_with_filename">%1$d keší importováno z %2$s</string>
   <string name="gpx_import_static_maps_skipped">Stažení statických map zrušeno</string>
   <string name="gpx_import_title_static_maps">Uložit statické mapy</string>
   <string name="gpx_import_title_reading_file">Čtení souboru</string>
@@ -805,6 +825,7 @@
   <string name="gpx_import_error_parser">Formát souboru je chybný</string>
   <string name="gpx_import_error_unexpected">Neočekávaná chyba</string>
   <string name="gpx_import_canceled">GPX import byl zrušen</string>
+  <string name="gpx_import_canceled_with_filename">GPX import z %1$s byl zrušen</string>
   <string name="gpx_import_delete_title">Smazat soubor</string>
   <string name="gpx_import_delete_message">Chceš smazat %s?</string>
   <string name="gpx_import_select_list_title">Import GPX do seznamu</string>
@@ -1331,4 +1352,14 @@
   <string name="command_rename_list_result">Seznam přejmenován</string>
   <string name="command_delete_list_result">Seznam odstraněn</string>
   <string name="fav_points_remaining">"Přidat tuto keš do oblíbených (zbývá %s)"</string>
+  <string name="unit_m">m</string>
+  <string name="unit_km">km</string>
+  <string name="unit_ft">ft</string>
+  <string name="unit_yd">yd</string>
+  <string name="unit_mi">mil</string>
+  <string name="pq_available_for_download">Pocket query ke stažení</string>
+  <string name="pq_available_for_download_description">Tento databázový požadavek je dostupný pro stažení jako jeden soubor (GPX). Chceš jej stáhnout a importovat nebo zobrazit keše jako seznam?</string>
+  <string name="pq_as_cache_list">Zobrazit seznam keší</string>
+  <string name="pq_download_and_import">Importovat databázový požadavek</string>
+  <string name="pq_my_finds">Moje nálezy</string>
 </resources>

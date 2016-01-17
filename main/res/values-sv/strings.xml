@@ -566,6 +566,7 @@
   <string name="init_hardware_acceleration_title">Hårdvaruaccelererad grafik</string>
   <string name="init_hardware_acceleration_note">Hårdvaruacceleration visar grafik snabbare på skärmen. På vissa enheter har Android buggar som gör att viss text blir suddig (eller som feta bokstäver). Inaktivera hårdvaruacceleration om du upplever detta.</string>
   <string name="init_hardware_acceleration">Aktivera hårdvaruacceleration</string>
+  <string name="settings_create_account">Skapa konto</string>
   <string name="settings_open_website">Öppna hemsida</string>
   <string name="settings_open_geokrety_register">Öppna GeoKrety.orgs registreringssida</string>
   <string name="settings_open_geokretymap_website">Öppna GeoKretyMap.org hemsida</string>
@@ -805,6 +806,7 @@
   <string name="gpx_import_loading_waypoints">Läser in punkter från .gpx file</string>
   <string name="gpx_import_store_static_maps">Sparar kartor</string>
   <string name="gpx_import_caches_imported">cacher importerade</string>
+  <string name="gpx_import_caches_imported_with_filename">%1$d cacher importerade från %2$s</string>
   <string name="gpx_import_static_maps_skipped">Hämtningen av kartor avbröts</string>
   <string name="gpx_import_title_static_maps">Sparar kartor</string>
   <string name="gpx_import_title_reading_file">Läser fil</string>
@@ -815,6 +817,7 @@
   <string name="gpx_import_error_parser">Felaktigt filformat</string>
   <string name="gpx_import_error_unexpected">Oväntat fel</string>
   <string name="gpx_import_canceled">Importingen av GPX avbruten</string>
+  <string name="gpx_import_canceled_with_filename">GPX-import från %1$s avbröts</string>
   <string name="gpx_import_delete_title">Ta bort fil</string>
   <string name="gpx_import_delete_message">Vill du radera %s?</string>
   <string name="gpx_import_select_list_title">Importera GPX till lista</string>
@@ -970,6 +973,8 @@
   <string name="helper_calendar_title">c:geo kalendertillägg</string>
   <string name="helper_calendar_missing">c:geo kalendertillägg är inte installerat</string>
   <string name="helper_calendar_description">Gör det möjligt att exportera event till din kalender.</string>
+  <string name="helper_calendar_pastevent_title">Tidigare event</string>
+  <string name="helper_calendar_pastevent_question">Eventets datum har passerat. Vill du lägga till det ändå?</string>
   <string name="helper_sendtocgeo_title">Skicka till c:geo (Send2cgeo)</string>
   <string name="helper_contacts_title">c:geo - Kontakttillägg</string>
   <string name="helper_contacts_description">Gör det möjligt att öppna en kontakt (i telefonens adressbok) direkt från en logg, så att du enkelt kan kontakta vänner för att få hjälp.</string>
@@ -1337,4 +1342,9 @@
   <string name="unit_ft">ft</string>
   <string name="unit_yd">yd</string>
   <string name="unit_mi">mi</string>
+  <string name="pq_available_for_download">Pocket Query är tillgänglig för nedladdning</string>
+  <string name="pq_available_for_download_description">Den här Pocket Queryn finns att ladda hem som en GPX-fil. Vill du ladda hem och importera den eller visa cacherna som en lista?</string>
+  <string name="pq_as_cache_list">Visa cachelista</string>
+  <string name="pq_download_and_import">Importera Pocket Query</string>
+  <string name="pq_my_finds">Mina hittade</string>
 </resources>
