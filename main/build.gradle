@@ -26,7 +26,7 @@ android {
         minSdkVersion 9
         targetSdkVersion 21
         versionName versionNameFromDate()
-        versionCode versionCodeFromDate()
+        versionCode versionCodeFromDate(0)
 
         // NOTE: must match the package in the test directory and must be different from the app package
         testApplicationId "cgeo.geocaching.test"
@@ -179,11 +179,15 @@ android {
         }
     }
 
-    // special version code for nightly builds
+    // special version code for nightly and rc builds
     applicationVariants.all { variant ->
         if (variant.buildType.name.equals('nightly')) {
-            variant.mergedFlavor.versionCode = nightlyVersionCodeFromDate()
+            variant.mergedFlavor.versionCode = versionCodeFromDate(10000000)
         }
+        if (variant.buildType.name.equals('rc')) {
+            variant.mergedFlavor.versionCode = versionCodeFromDate(-1)
+        }
+        // debug and release builds have offset zero, no special handling here
     }
 }
 
@@ -321,23 +325,15 @@ configure (verifyCgeoKeys) {
 
 
 /*
- * version number from the current date
+ * version number from the current date, plus an offset defined by the build type (to define which versions overwrite each other)
  */
-def versionCodeFromDate() {
+def versionCodeFromDate(offset) {
     def date = new Date()
     def formattedDate = date.format('yyyyMMdd')
-    return Integer.valueOf(formattedDate)
-}
-/*
- * nightly version number from the current date
- */
-def nightlyVersionCodeFromDate() {
-    def date = new Date()
-    def formattedDate = date.format('yyyyMMdd')
-    return Integer.valueOf(formattedDate) + 10000000
+    return Integer.valueOf(formattedDate) + offset
 }
 
-/* 
+/*
  * version name based on current date
  */ 
 def versionNameFromDate() {
