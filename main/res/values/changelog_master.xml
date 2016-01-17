@@ -3,7 +3,7 @@
   <!-- changelog for the master branch -->
   <string name="changelog_master" translatable="false">
     <b>Next feature release:</b>\n
-    · <i>Fix: don\'t show unknown attribute icons for opencaching.org.uk</i>
+    · Fix: don\'t show unknown attribute icons for opencaching.org.uk
     \n
     \n
   </string>
