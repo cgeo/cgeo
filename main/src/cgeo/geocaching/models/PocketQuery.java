@@ -34,12 +34,4 @@ public final class PocketQuery {
         return name;
     }
 
-    @DrawableRes
-    public int getIcon() {
-        if (isDownloadable()) {
-            return R.drawable.ic_menu_save;
-        }
-        return R.drawable.ic_menu_info_details;
-    }
-
 }

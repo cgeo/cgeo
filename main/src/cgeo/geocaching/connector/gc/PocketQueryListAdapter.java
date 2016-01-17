@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 import butterknife.Bind;
@@ -24,6 +25,7 @@ public class PocketQueryListAdapter extends ArrayAdapter<PocketQuery> {
     protected static final class ViewHolder extends AbstractViewHolder {
         @Bind(R.id.label) protected TextView label;
         @Bind(R.id.caches) protected TextView caches;
+        @Bind(R.id.download) protected Button download;
 
         public ViewHolder(final View view) {
             super(view);
@@ -50,8 +52,7 @@ public class PocketQueryListAdapter extends ArrayAdapter<PocketQuery> {
             holder = (ViewHolder) view.getTag();
         }
 
-        view.setOnClickListener(new View.OnClickListener() {
-
+        holder.label.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
                 final Activity activity = (Activity) v.getContext();
@@ -59,12 +60,22 @@ public class PocketQueryListAdapter extends ArrayAdapter<PocketQuery> {
             }
         });
 
+        holder.download.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View v) {
+                final Activity activity = (Activity) v.getContext();
+                CacheListActivity.startActivityPocketDownload(activity, pocketQuery);
+            }
+        });
+        holder.download.setVisibility(pocketQuery.isDownloadable()?View.VISIBLE:View.INVISIBLE);
+
         holder.label.setText(pocketQuery.getName());
-        holder.label.setCompoundDrawablesWithIntrinsicBounds(pocketQuery.getIcon(), 0, 0, 0);
+        holder.label.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_menu_info_details, 0, 0, 0);
         final int caches = pocketQuery.getMaxCaches();
         holder.caches.setText(caches >= 0 ? CgeoApplication.getInstance().getResources().getQuantityString(R.plurals.cache_counts, caches, caches) : StringUtils.EMPTY);
 
         return view;
     }
+
 
 }

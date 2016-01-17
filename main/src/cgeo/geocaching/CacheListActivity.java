@@ -1588,38 +1588,22 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         context.startActivity(cachesIntent);
     }
 
+    public static void startActivityPocketDownload(final @NonNull Activity context, final @NonNull PocketQuery pocketQuery) {
+        final String guid = pocketQuery.getGuid();
+        if (guid == null) {
+            ActivityMixin.showToast(context, CgeoApplication.getInstance().getString(R.string.warn_pocket_query_select));
+            return;
+        }
+        startActivityWithAttachment(context, pocketQuery);
+    }
+
     public static void startActivityPocket(final @NonNull Activity context, final @NonNull PocketQuery pocketQuery) {
         final String guid = pocketQuery.getGuid();
         if (guid == null) {
             ActivityMixin.showToast(context, CgeoApplication.getInstance().getString(R.string.warn_pocket_query_select));
             return;
         }
-        if (pocketQuery.isDownloadable()) {
-            // ask user to import pq or view cache list
-            final AlertDialog.Builder dialog = new AlertDialog.Builder(context);
-            dialog.setTitle(CgeoApplication.getInstance().getString(R.string.pq_available_for_download));
-            dialog.setMessage(CgeoApplication.getInstance().getString(R.string.pq_available_for_download_description));
-            dialog.setCancelable(true);
-            dialog.setNegativeButton(CgeoApplication.getInstance().getString(R.string.pq_as_cache_list), new DialogInterface.OnClickListener() {
-
-                @Override
-                public void onClick(final DialogInterface dialog, final int id) {
-                    startActivityPocket(context, pocketQuery, CacheListType.POCKET);
-                }
-            });
-            dialog.setPositiveButton(CgeoApplication.getInstance().getString(R.string.pq_download_and_import), new DialogInterface.OnClickListener() {
-
-                @Override
-                public void onClick(final DialogInterface dialog, final int id) {
-                    startActivityWithAttachment(context, pocketQuery);
-                }
-            });
-
-            final AlertDialog alert = dialog.create();
-            alert.show();
-        } else {
-            startActivityPocket(context, pocketQuery, CacheListType.POCKET);
-        }
+        startActivityPocket(context, pocketQuery, CacheListType.POCKET);
     }
 
     private static void startActivityWithAttachment(final @NonNull Activity context, final @NonNull PocketQuery pocketQuery) {
