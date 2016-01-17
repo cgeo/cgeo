@@ -54,11 +54,17 @@ android {
             // additional proguard rules just for the test code
 			testProguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt', '../tests/proguard-project.txt'
         }
-        release {
+        nightly {
+            def nightlyName = System.getenv('NB') // NB, NB1, ...
+            versionNameSuffix "-$nightlyName-" + gitCommitId().substring(0, 7)
             signingConfig signingConfigs.release
         }
-        nightly {
-            versionNameSuffix "-${System.env.NB}-" + gitCommitId().substring(0, 7)
+        rc {
+            def rcName = System.getenv('RC') // RC, RC1, RC2 ...
+            versionNameSuffix "-$rcName"
+            signingConfig signingConfigs.release
+        }
+        release {
             signingConfig signingConfigs.release
         }
     }
