@@ -230,7 +230,7 @@ public class GCLogin extends AbstractLogin {
                 Log.e("Failed to read viewstates to set geocaching.com language");
             }
             final Parameters params = new Parameters(
-                    "__EVENTTARGET", "ctl00$uxLocaleList$uxLocaleList$ctl00$uxLocaleItem", // switch to english
+                    "__EVENTTARGET", "ctl00$ctl27$uxLocaleList$uxLocaleList$ctl00$uxLocaleItem", // switch to english
                     "__EVENTARGUMENT", "");
             transferViewstates(page, params);
             final HttpResponse response = Network.postRequest(LANGUAGE_CHANGE_URI, params, new Parameters("Referer", LANGUAGE_CHANGE_URI));
