@@ -15,9 +15,11 @@
     · New: Suggest to remove list if empty\n
     · New: Allow to add past events\n
     · New: "My finds" pocket query is shown (if available)\n
-    · New: support short description of OpenCaching caches\n
+    · New: Support short description of Opencaching caches\n
+    · New: Show file name after successful GPX file import\n
     · Fix: Avoid crash when loading caches from different sources\n
     · Fix: Update found status in list after one-click-offline-log\n
+    · Fix: Links in waypoint description not working\n
     · Removed: Swaggie trackables support has been removed as they are deprecated\n
     \n
     \n
