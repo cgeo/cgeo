@@ -335,6 +335,7 @@
   <string name="caches_filter_personal_data">Z osobistymi informacjami</string>
   <string name="caches_filter_rating">Z oceną</string>
   <string name="caches_filter_own_rating">Z własną oceną</string>
+  <string name="caches_filter_multi_listing">Wielokrotne wyświetlanie z różnym stanem</string>
   <string name="caches_removing_from_history">Usuwam z Historii…</string>
   <string name="caches_clear_offlinelogs">Usuń wpisy offline</string>
   <string name="caches_clear_offlinelogs_message">Czy chcesz wyczyścić wpisy offline?</string>
@@ -352,6 +353,7 @@
   <string name="list_dialog_create_err">c:geo nie mógł utworzyć nowej listy</string>
   <string name="list_dialog_remove_title">Usuń listę</string>
   <string name="list_dialog_remove_description">Czy na pewno chcesz usunąć aktualną listę skrzynek? Wszystkie skrzynki na tej liście zostaną przeniesione do listy \"Zapisane\".</string>
+  <string name="list_dialog_remove_nowempty">Lista jest pusta. Czy chcesz usunąć aktualną listę?</string>
   <string name="list_dialog_remove">Usuń</string>
   <string name="list_dialog_remove_ok">Lista została usunięta</string>
   <string name="list_dialog_remove_err">c:geo nie mógł usunąć aktualnej listy</string>
@@ -563,6 +565,7 @@
   <string name="init_hardware_acceleration_title">Sprzętowa akceleracja renderowania</string>
   <string name="init_hardware_acceleration_note">Akceleracja sprzętowa renderuje elementy graficzne szybciej na ekranie. Jednakże na niektórych urządzeniach z systemem Android może powodować błędy i część tekstu może być niewyraźna (zwłaszcza pogrubione znaki). Jeśli tak się stanie, należy wyłączyć akcelerację sprzętową.</string>
   <string name="init_hardware_acceleration">Włącz akcelerację sprzętową</string>
+  <string name="settings_create_account">Utwórz konto</string>
   <string name="settings_open_website">Otwórz stronę</string>
   <string name="settings_open_geokrety_register">Otwórz stronę rejestracyjną GeoKrety.org</string>
   <string name="settings_open_geokretymap_website">Otwórz stronę GeoKretyMap.org</string>
@@ -633,6 +636,21 @@
   <string name="cache_offline_time_about">około</string>
   <string name="cache_offline_time_mins">minut temu</string>
   <string name="cache_offline_time_mins_few">przed kilkoma minutami</string>
+  <plurals name="cache_offline_about_time_mins">
+    <item quantity="one">około %d minuty temu</item>
+    <item quantity="few">około %d minut temu</item>
+    <item quantity="other">około %d minut temu</item>
+  </plurals>
+  <plurals name="cache_offline_about_time_hours">
+    <item quantity="one">około %d godziny temu</item>
+    <item quantity="few">około %d godzin temu</item>
+    <item quantity="other">około %d godzin temu</item>
+  </plurals>
+  <plurals name="cache_offline_about_time_days">
+    <item quantity="one">około %d dnia temu</item>
+    <item quantity="few">około %d dni temu</item>
+    <item quantity="other">około %d dni temu</item>
+  </plurals>
   <string name="cache_offline_time_hour">przed jedną godziną</string>
   <string name="cache_offline_time_hours">godzin temu</string>
   <string name="cache_offline_time_days">dni temu</string>
@@ -653,7 +671,9 @@
   <string name="cache_description_long">Długi opis</string>
   <string name="cache_description_table_note">Opis zawiera formatowanie w formie tabeli, które w celu poprawnego wyświetlania może wymagać odwiedzenia %s.</string>
   <string name="cache_watchlist_on">Ta skrzynka jest na Twojej liście obserwowanych.</string>
+  <string name="cache_watchlist_on_extra">Ta skrzynka jest na Twojej liście obserwowanych (Obserwatorzy: %1d).</string>
   <string name="cache_watchlist_not_on">Ta skrzynka nie jest na Twojej liście obserwowanych.</string>
+  <string name="cache_watchlist_not_on_extra">Ta skrzynka nie jest na Twojej liście obserwowanych (Obserwatorzy: %1d).</string>
   <string name="cache_watchlist_add">Dodaj do obserwowanych</string>
   <string name="cache_watchlist_remove">Usuń z obserwowanych</string>
   <string name="cache_favpoint_on">Ta skrzynka jest na Twojej liście ulubionych.</string>
@@ -785,6 +805,7 @@
   <string name="gpx_import_loading_waypoints">Ładuję plik z punktami nawigacji</string>
   <string name="gpx_import_store_static_maps">Zapisuję mapy statyczne</string>
   <string name="gpx_import_caches_imported">skrzynek importowanych</string>
+  <string name="gpx_import_caches_imported_with_filename">%1$d skrzynek zostało importowane z %2$s</string>
   <string name="gpx_import_static_maps_skipped">Pobieranie map statycznych wstrzymane</string>
   <string name="gpx_import_title_static_maps">Zapis map statycznych</string>
   <string name="gpx_import_title_reading_file">Czytanie pliku</string>
@@ -795,6 +816,7 @@
   <string name="gpx_import_error_parser">Zły format pliku</string>
   <string name="gpx_import_error_unexpected">Nieoczekiwany błąd</string>
   <string name="gpx_import_canceled">Import pliku GPX został anulowany</string>
+  <string name="gpx_import_canceled_with_filename">Import GPX z %1$s został anulowany</string>
   <string name="gpx_import_delete_title">Usuń plik</string>
   <string name="gpx_import_delete_message">Czy na pewno chcesz usunąć %s?</string>
   <string name="gpx_import_select_list_title">Importuj GPX do listy</string>
@@ -950,6 +972,8 @@
   <string name="helper_calendar_title">Dodatek Kalendarz c:geo</string>
   <string name="helper_calendar_missing">Dodatek Kalendarz c:geo nie jest zainstalowany.</string>
   <string name="helper_calendar_description">Umożliwia Tobie eksport skrzynek Wydarzenie do kalendarza w Twoim urządzeniu.</string>
+  <string name="helper_calendar_pastevent_title">Przeszłe wydarzenie</string>
+  <string name="helper_calendar_pastevent_question">Przeszłe wydarzenie. Dodać mimo wszystko?</string>
   <string name="helper_sendtocgeo_title">Wyślij do c:geo</string>
   <string name="helper_contacts_title">c:geo - dodatek Kontakty</string>
   <string name="helper_contacts_description">Umożliwia Tobie otwarcie kontaktu (z Twojej książki adresowej) bezpośrednio z wpisu do dziennika, więc możesz łatwiej poprosić przyjaciół o pomoc.</string>
@@ -1319,4 +1343,14 @@
   <string name="command_rename_list_result">Zmieniono nazwę listy</string>
   <string name="command_delete_list_result">Usunięto listę</string>
   <string name="fav_points_remaining">"Dodaj tę skrzynkę do ulubionych (pozostało %s)"</string>
+  <string name="unit_m">m</string>
+  <string name="unit_km">km</string>
+  <string name="unit_ft">ft</string>
+  <string name="unit_yd">yd</string>
+  <string name="unit_mi">mi</string>
+  <string name="pq_available_for_download">Pocket query dostępne do pobrania</string>
+  <string name="pq_available_for_download_description">To Pocket query jest dostępne do pobrania jako jeden plik (gpx). Czy chcesz pobrać je pobrać i wczytać czy też zobaczyć skrzynki w formie listy?</string>
+  <string name="pq_as_cache_list">Zobacz listę skrzynek</string>
+  <string name="pq_download_and_import">Importuj Pocket query</string>
+  <string name="pq_my_finds">Znalezione</string>
 </resources>
