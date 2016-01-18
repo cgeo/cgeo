@@ -569,6 +569,7 @@
   <string name="init_hardware_acceleration_title">Afişare accelerată hardware</string>
   <string name="init_hardware_acceleration_note">Accelerarea hardware generează şi afişează mai rapid pe ecran elemente grafice. Pe unele dispozitive însă sistemul de operare Android conţine erori şi unele texte pot apărea neclar. (în special literele îngroşate). Dezactivează accelerarea hardware dacă ai această problemă.</string>
   <string name="init_hardware_acceleration">Activează accelerarea hardware</string>
+  <string name="settings_create_account">Crează cont</string>
   <string name="settings_open_website">Intră pe site</string>
   <string name="settings_open_geokrety_register">Deschide pagina de înregistrare de la GeoKrety.org</string>
   <string name="settings_open_geokretymap_website">Deschide site-ul GeoKretyMap.org</string>
@@ -1352,4 +1353,14 @@
   <string name="command_rename_list_result">Lista a fost redenumită</string>
   <string name="command_delete_list_result">Lista a fost ştearsă</string>
   <string name="fav_points_remaining">"Adaugă această geocutie la favorite (au mai rămas %s)"</string>
+  <string name="unit_m">m</string>
+  <string name="unit_km">km</string>
+  <string name="unit_ft">ft</string>
+  <string name="unit_yd">zd</string>
+  <string name="unit_mi">mi</string>
+  <string name="pq_available_for_download">Căutarea personalizată este gata pentru descărcare</string>
+  <string name="pq_available_for_download_description">Această căutare personalizată poate fi descărcată ca un singur fişier (GPX). Vrei să-l descarci şi să-l imporţi sau să afişezi geocutiile într-o listă?</string>
+  <string name="pq_as_cache_list">Afişează lista geocutiilor</string>
+  <string name="pq_download_and_import">Importă căutare personalizată</string>
+  <string name="pq_my_finds">Găsirile mele</string>
 </resources>
