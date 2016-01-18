@@ -6,6 +6,7 @@ import android.support.annotation.StringRes;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 
+import cgeo.geocaching.utils.Log;
 import org.eclipse.jdt.annotation.NonNull;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +20,8 @@ public enum LogTypeTrackable {
     NOTE(4, 2, "", R.string.log_tb_note, LogType.NOTE),
     DISCOVERED_IT(48, 3, "", R.string.log_tb_discovered, R.drawable.mark_green, LogType.DISCOVERED_IT),
     ARCHIVED(5, 4, "", R.string.log_tb_archived, R.drawable.mark_red_more, LogType.UNKNOWN),
+    MOVE_COLLECTION(69, -1, "unused_collection", R.string.log_movecollection, LogType.MOVE_COLLECTION),
+    MOVE_INVENTORY(70, -1, "unused_inventory", R.string.log_moveinventory, LogType.MOVE_INVENTORY),
     UNKNOWN(0, -1, "", R.string.err_unknown, LogType.UNKNOWN);
 
     public final int id; // id matching LogTypes
@@ -55,6 +58,7 @@ public enum LogTypeTrackable {
                 return logTypeTrackable;
             }
         }
+        Log.e("LogTypeTrackable.getById(): Failed to lookup id:" + id);
         return UNKNOWN;
     }
 
