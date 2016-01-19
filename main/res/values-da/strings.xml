@@ -332,6 +332,7 @@
   <string name="caches_filter_personal_data">Med personlige data</string>
   <string name="caches_filter_rating">Med vurdering</string>
   <string name="caches_filter_own_rating">Med egen vurdering</string>
+  <string name="caches_filter_multi_listing">Flere lister med forskellige tilstand</string>
   <string name="caches_removing_from_history">Fjerner fra historik…</string>
   <string name="caches_clear_offlinelogs">Fjern offline logbeskeder</string>
   <string name="caches_clear_offlinelogs_message">Vil du fjerne offline logbeskeder?</string>
@@ -349,6 +350,7 @@
   <string name="list_dialog_create_err">c:geo kunne ikke oprette ny liste</string>
   <string name="list_dialog_remove_title">Fjern liste</string>
   <string name="list_dialog_remove_description">Vil du fjerne den aktuelle liste? Alle cacher i listen bliver flyttet til \"Gemte\".</string>
+  <string name="list_dialog_remove_nowempty">Listen er tom. Skal den aktuelle liste fjernes?</string>
   <string name="list_dialog_remove">Fjern</string>
   <string name="list_dialog_remove_ok">Listen blev fjernet</string>
   <string name="list_dialog_remove_err">c:geo kunne ikke fjerne den aktuelle liste</string>
@@ -564,6 +566,7 @@
   <string name="init_hardware_acceleration_title">Hardwareaccelereret grafik</string>
   <string name="init_hardware_acceleration_note">Med hardwareaccelereret grafik bliver grafiske elementer tegnet hurtigere på skærmen. Dog kan nogle enheders Android-styresystem indeholde fejl, som bevirker at tekster kan fremstå sløret (især fed skrift).  Du kan deaktivere hardwareaccelereret grafik, hvis du oplever dette problem.</string>
   <string name="init_hardware_acceleration">Aktivér hardwareaccelereret grafik</string>
+  <string name="settings_create_account">Opret konto</string>
   <string name="settings_open_website">Åbn websitet</string>
   <string name="settings_open_geokrety_register">Åben GeoKrety.org registreringsside</string>
   <string name="settings_open_geokretymap_website">Åbn GeoKretyMap.org hjemmeside</string>
@@ -637,6 +640,18 @@
   <string name="cache_offline_time_about">For</string>
   <string name="cache_offline_time_mins">minutter siden</string>
   <string name="cache_offline_time_mins_few">få minutter siden</string>
+  <plurals name="cache_offline_about_time_mins">
+    <item quantity="one">cirka %d minut siden</item>
+    <item quantity="other">cirka %d minutter siden</item>
+  </plurals>
+  <plurals name="cache_offline_about_time_hours">
+    <item quantity="one">cirka %d time siden</item>
+    <item quantity="other">cirka %d timer siden</item>
+  </plurals>
+  <plurals name="cache_offline_about_time_days">
+    <item quantity="one">cirka %d dag siden</item>
+    <item quantity="other">cirka %d dage siden</item>
+  </plurals>
   <string name="cache_offline_time_hour">en time siden</string>
   <string name="cache_offline_time_hours">timer siden</string>
   <string name="cache_offline_time_days">dage siden</string>
@@ -657,7 +672,9 @@
   <string name="cache_description_long">Lang beskrivelse</string>
   <string name="cache_description_table_note">Beskrivelsen indeholder tabeller som måske kun kan vises korrekt på %s.</string>
   <string name="cache_watchlist_on">Denne cache er på din overvågningsliste.</string>
+  <string name="cache_watchlist_on_extra">Denne cache er på din overvågningsliste (overvåget af %1d).</string>
   <string name="cache_watchlist_not_on">Denne cache er ikke på din overvågningsliste.</string>
+  <string name="cache_watchlist_not_on_extra">Denne cache er ikke på din overvågningsliste (overvåget af %1d).</string>
   <string name="cache_watchlist_add">Tilføj til overvågningsliste</string>
   <string name="cache_watchlist_remove">Fjern fra overvågningsliste</string>
   <string name="cache_favpoint_on">Dette er en favoritcache.</string>
@@ -787,6 +804,7 @@
   <string name="gpx_import_loading_waypoints">Indlæser waypoints fra fil</string>
   <string name="gpx_import_store_static_maps">Gemmer statiske kort</string>
   <string name="gpx_import_caches_imported">importerede cacher</string>
+  <string name="gpx_import_caches_imported_with_filename">%1$d cacher importeret fra %2$s</string>
   <string name="gpx_import_static_maps_skipped">Indlæsning af statiske kort blev afbrudt</string>
   <string name="gpx_import_title_static_maps">Gem statiske kort</string>
   <string name="gpx_import_title_reading_file">Indlæser fil</string>
@@ -797,6 +815,7 @@
   <string name="gpx_import_error_parser">Ugyldigt filformat</string>
   <string name="gpx_import_error_unexpected">Uventet fejl</string>
   <string name="gpx_import_canceled">Import af GPX blev afbrudt</string>
+  <string name="gpx_import_canceled_with_filename">GPX-import fra %1$s blev afbrudt</string>
   <string name="gpx_import_delete_title">Slet fil</string>
   <string name="gpx_import_delete_message">Vil du slette %s?</string>
   <string name="gpx_import_select_list_title">Importér GPX til liste</string>
@@ -952,6 +971,8 @@
   <string name="helper_calendar_title">c:geo kalender-plugin</string>
   <string name="helper_calendar_missing">c:geo kalender-plugin er ikke installeret.</string>
   <string name="helper_calendar_description">Giver dig mulighed for at eksportere arrangementcacher til din kalender på din enhed.</string>
+  <string name="helper_calendar_pastevent_title">Tidligere arrangement</string>
+  <string name="helper_calendar_pastevent_question">Arrangementsdato er i fortiden. Tilføj den alligevel?</string>
   <string name="helper_sendtocgeo_title">Send2c:geo</string>
   <string name="helper_contacts_title">c:geo kontakt-plugin</string>
   <string name="helper_contacts_description">Giver dig mulighed for at åbne kontaktside (fra dine kontakter) direkte fra en logbesked, så du let kan kontakte dine venner.</string>
@@ -1296,6 +1317,7 @@
   <string name="trackable_title_log_without_geocode">Geokode ikke sendt</string>
   <string name="trackable_log_without_geocode">Du er ved at sende en logbesked uden en geokode. Det anbefales at du inkluderer en geokode. Vil du tilføje en geokode?</string>
   <string name="do_not_ask_me_again">Spørg mig ikke igen</string>
+  <string name="geokrety_parsing_failed">Svar fra GeoKrety kunne ikke fortolkes.</string>
   <string name="settings_map_direction">Vis retning</string>
   <string name="settings_summary_map_direction">Vis pejlelinie til navigationsmål</string>
   <string name="map_direction">Vis retning</string>
@@ -1311,4 +1333,15 @@
   </plurals>
   <string name="command_rename_list_result">Liste omdøbt</string>
   <string name="command_delete_list_result">Listen blev slettet</string>
+  <string name="fav_points_remaining">"Tilføj denne cache til favoritter (%s resterende)"</string>
+  <string name="unit_m">m</string>
+  <string name="unit_km">km</string>
+  <string name="unit_ft">fod</string>
+  <string name="unit_yd">yards</string>
+  <string name="unit_mi">mil</string>
+  <string name="pq_available_for_download">Pocket Query er tilgængelig til download</string>
+  <string name="pq_available_for_download_description">Denne Pocket Query er tilgængelig til download som én fil (GPX). Vil du downloade og importere den eller se cacherne som en liste?</string>
+  <string name="pq_as_cache_list">Vis cacheliste</string>
+  <string name="pq_download_and_import">Importér Pocket Query</string>
+  <string name="pq_my_finds">Mine fund</string>
 </resources>

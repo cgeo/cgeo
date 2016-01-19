@@ -1225,6 +1225,8 @@
   <string name="attribute_geohotel_no">Не Кротель</string>
   <string name="attribute_survey_marker_yes">Рядом с геодезической отметкой</string>
   <string name="attribute_survey_marker_no">Далеко от геодезической отметки</string>
+  <string name="attribute_offset_cache_yes">Смещенный тайник</string>
+  <string name="attribute_offset_cache_no">Не смещенный тайник</string>
   <string name="quote">To make geocaching easier, to make users lazier.</string>
   <string name="support_title">Поддержка</string>
   <string name="website_title">Вебсайт</string>

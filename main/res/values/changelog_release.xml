@@ -2,7 +2,7 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-    <b>2016.01.18:</b>\n
+    <b>2016.01.19:</b>\n
     · New: Downloadable pocket queries can be imported directly\n
     · Fix: Login failure due to wrong language setting on geocaching.com webpage\n
     · New: Improved Done and Cancel buttons for coordinate input\n
