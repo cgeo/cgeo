@@ -348,6 +348,7 @@
   <string name="list_dialog_create_err">c:geo ei voinut luoda uutta listaa</string>
   <string name="list_dialog_remove_title">Poista lista</string>
   <string name="list_dialog_remove_description">Haluatko poistaa nykyisen listan? Kaikki jäljelle jäävät kätköt listassa siirretään \"Tallennettuihin\".</string>
+  <string name="list_dialog_remove_nowempty">Lista on tyhjä. Haluatko poistaa nykyisen listan?</string>
   <string name="list_dialog_remove">Poista</string>
   <string name="list_dialog_remove_ok">Lista poistettu</string>
   <string name="list_dialog_remove_err">c:geo ei onnistunut poistamaan nykyistä listaa</string>
@@ -553,6 +554,7 @@
   <string name="init_hardware_acceleration_title">Grafiikan parannus</string>
   <string name="init_hardware_acceleration_note">Laitteiston kiihdytys esittää graafisia elementtejä nopeammin. Kuitenkin jotkut Android laitteet sisältävät bugin joka näyttää tekstit epäselvinä (huomattavan lihavoidut merkit). Ota laitteiston kiihdytys pois käytöstä jos tämä tapahtuu sinulle.</string>
   <string name="init_hardware_acceleration">Mahdollista laitteiston kiihdytys</string>
+  <string name="settings_create_account">Luo tunnus</string>
   <string name="settings_open_website">Avaa sivusto</string>
   <string name="settings_open_geokrety_register">Avaa GeoKrety.org rekisteröitymissivu</string>
   <string name="settings_open_geokretymap_website">Avaa GeoKretyMap.org nettisivu</string>
@@ -620,6 +622,18 @@
   <string name="cache_offline_time_about">noin</string>
   <string name="cache_offline_time_mins">Minuutteja sitten</string>
   <string name="cache_offline_time_mins_few">muutama minuutti sitten</string>
+  <plurals name="cache_offline_about_time_mins">
+    <item quantity="one">noin %d minuutti sitten</item>
+    <item quantity="other">noin %d minuuttia sitten</item>
+  </plurals>
+  <plurals name="cache_offline_about_time_hours">
+    <item quantity="one">noin %d tunti sitten</item>
+    <item quantity="other">noin %d tuntia sitten</item>
+  </plurals>
+  <plurals name="cache_offline_about_time_days">
+    <item quantity="one">noin %d päivä sitten</item>
+    <item quantity="other">noin %d päivää sitten</item>
+  </plurals>
   <string name="cache_offline_time_hour">Tunti sitten</string>
   <string name="cache_offline_time_hours">tunteja sitten</string>
   <string name="cache_offline_time_days">päiviä sitten</string>

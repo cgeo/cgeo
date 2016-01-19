@@ -332,6 +332,7 @@
   <string name="caches_filter_personal_data">Amb dades personals</string>
   <string name="caches_filter_rating">Amb puntuació</string>
   <string name="caches_filter_own_rating">Amb puntuació pròpia</string>
+  <string name="caches_filter_multi_listing">Multi llista amb diferents estats</string>
   <string name="caches_removing_from_history">S\'està eliminant de l\'historial…</string>
   <string name="caches_clear_offlinelogs">Neteja els registres fora de línea</string>
   <string name="caches_clear_offlinelogs_message">Voleu esborrar els registres fora de línia?</string>
@@ -349,6 +350,7 @@
   <string name="list_dialog_create_err">El c:geo no ha pogut crear la nova llista</string>
   <string name="list_dialog_remove_title">Elimina la llista</string>
   <string name="list_dialog_remove_description">Voleu eliminar la llista actual? Tots els catxés de la llista es desplaçaran a \"Desats\".</string>
+  <string name="list_dialog_remove_nowempty">La llista és buida. Voleu eliminar-la?</string>
   <string name="list_dialog_remove">Elimina</string>
   <string name="list_dialog_remove_ok">La llista s\'ha suprimit</string>
   <string name="list_dialog_remove_err">El c:geo no ha pogut eliminar la llista actual</string>
@@ -564,6 +566,7 @@
   <string name="init_hardware_acceleration_title">Renderització amb acceleració per maquinari</string>
   <string name="init_hardware_acceleration_note">L\'acceleració per maquinari renderitza més ràpidament els elements gràfics a la pantalla. Tanmateix, en alguns dispositius Android, el sistema operatiu conté errors i algun text pot aparèixer borrós (caràcters en negreta molt notables). Inhabiliteu l\'acceleració per maquinari si teniu aquest problema.</string>
   <string name="init_hardware_acceleration">Activa l\'acceleració per maquinari</string>
+  <string name="settings_create_account">Crea un compte</string>
   <string name="settings_open_website">Obre el lloc web</string>
   <string name="settings_open_geokrety_register">Obrir la pàgina de registre de GeoKrety.org</string>
   <string name="settings_open_geokretymap_website">Obrir la pàgina web de GeoKretyMap.org</string>
@@ -636,6 +639,18 @@
   <string name="cache_offline_time_about">ara fa</string>
   <string name="cache_offline_time_mins">minuts</string>
   <string name="cache_offline_time_mins_few">ara fa uns minuts</string>
+  <plurals name="cache_offline_about_time_mins">
+    <item quantity="one"> fa aproximadament %d minut</item>
+    <item quantity="other"> fa aproximadament %d minuts</item>
+  </plurals>
+  <plurals name="cache_offline_about_time_hours">
+    <item quantity="one">fa %d hora</item>
+    <item quantity="other">fa %d hores</item>
+  </plurals>
+  <plurals name="cache_offline_about_time_days">
+    <item quantity="one">fa %d dia</item>
+    <item quantity="other">fa %d dies</item>
+  </plurals>
   <string name="cache_offline_time_hour">ara fa una hora</string>
   <string name="cache_offline_time_hours">hores</string>
   <string name="cache_offline_time_days">dies</string>
@@ -656,7 +671,9 @@
   <string name="cache_description_long">Descripció llarga</string>
   <string name="cache_description_table_note">La descripció conté un format que pot necessitar visualitzar-se a %s per a veure\'s correctament.</string>
   <string name="cache_watchlist_on">Aquest catxé és a la vostra llista de seguiment.</string>
+  <string name="cache_watchlist_on_extra">Aquest catxé està a la llista de seguiment (Seguidors: %1d).</string>
   <string name="cache_watchlist_not_on">Aquest catxé no és a la vostra llista de seguiment.</string>
+  <string name="cache_watchlist_not_on_extra">Aquest catxé no està a la llista de seguiment (Seguidors: %1d).</string>
   <string name="cache_watchlist_add">Posa\'l al seguiment</string>
   <string name="cache_watchlist_remove">Treu del seguiment</string>
   <string name="cache_favpoint_on">Aquest catxé és un dels vostres favorits.</string>
@@ -787,6 +804,7 @@
   <string name="gpx_import_loading_waypoints">S\'està carregant el fitxer de fites</string>
   <string name="gpx_import_store_static_maps">S\'estan desant els mapes estàtics</string>
   <string name="gpx_import_caches_imported">catxés importats</string>
+  <string name="gpx_import_caches_imported_with_filename">%1$d catxés importats de %2$s</string>
   <string name="gpx_import_static_maps_skipped">La descarrega de mapes estàtics ha estat interrompuda</string>
   <string name="gpx_import_title_static_maps">Desa els mapes estàtics</string>
   <string name="gpx_import_title_reading_file">S\'està llegint el fitxer</string>
@@ -797,6 +815,7 @@
   <string name="gpx_import_error_parser">Fitxer amb format incorrecte</string>
   <string name="gpx_import_error_unexpected">S\'ha produït un error inesperat</string>
   <string name="gpx_import_canceled">S\'ha cancel·lat la importació del GPX</string>
+  <string name="gpx_import_canceled_with_filename">S\'ha cancel·lat l\'importació GPX de %1$s</string>
   <string name="gpx_import_delete_title">Esborra el fitxer</string>
   <string name="gpx_import_delete_message">Voleu eliminar %s?</string>
   <string name="gpx_import_select_list_title">Importa el GPX a la llista</string>
@@ -952,6 +971,8 @@
   <string name="helper_calendar_title">Complement del calendari del c:geo</string>
   <string name="helper_calendar_missing">No s\'ha instal·lat el complement del calendari del c:geo.</string>
   <string name="helper_calendar_description">Permet exportar trobades al calendari del vostre dispositiu.</string>
+  <string name="helper_calendar_pastevent_title">Trobada passada</string>
+  <string name="helper_calendar_pastevent_question">La trobada ja ha passat. Voleu afegir-la de totes maneres?</string>
   <string name="helper_sendtocgeo_title">Send to c:geo</string>
   <string name="helper_contacts_title">Complement de contactes del c:geo</string>
   <string name="helper_contacts_description">Us permet obrir un contacte (de la llibreta de contactes) directament des d\'una entrada del registre, així podeu demanar ajuda als amics més fàcilment.</string>
@@ -1296,6 +1317,7 @@
   <string name="trackable_title_log_without_geocode">El Geocodi no es troba</string>
   <string name="trackable_log_without_geocode">Estàs a punt d\'enviar un registre sense un Geocodi. Voleu afegir-lo ara?</string>
   <string name="do_not_ask_me_again">No m\'ho tornis a preguntar</string>
+  <string name="geokrety_parsing_failed">Error al processar la resposta de GeoKrety.</string>
   <string name="settings_map_direction">Mostra la direcció</string>
   <string name="settings_summary_map_direction">Mostra una línia de direcció a la navegació</string>
   <string name="map_direction">Mostra la direcció</string>
@@ -1311,4 +1333,15 @@
   </plurals>
   <string name="command_rename_list_result">Canvia el nom de la llista</string>
   <string name="command_delete_list_result">Llista suprimida</string>
+  <string name="fav_points_remaining">"Afegeix aquest catxé a preferits (%s restants)"</string>
+  <string name="unit_m">m</string>
+  <string name="unit_km">km</string>
+  <string name="unit_ft">ft</string>
+  <string name="unit_yd">yd</string>
+  <string name="unit_mi">mi</string>
+  <string name="pq_available_for_download">Pocket query disponible per descarregar</string>
+  <string name="pq_available_for_download_description">Aquesta Pocket query està disponible per descarregar com un arxiu (gpx). Voleu descarregar i importar-la o veure els catxés en una llista?</string>
+  <string name="pq_as_cache_list">Veure la llista de catxés</string>
+  <string name="pq_download_and_import">Importa la Pocket query</string>
+  <string name="pq_my_finds">Els meus trobats</string>
 </resources>

@@ -82,9 +82,12 @@
   <string name="log_saving">Siunčiamas įrašas…</string>
   <string name="log_saving_and_uploading">Talpinamas įrašas ir įkeliamas paveiksliukas…</string>
   <string name="log_posting_log">Talpinamas įrašas…</string>
+  <string name="log_posting_twitter">Skelbiamas Tweet…</string>
+  <string name="log_posting_gcvote">Skelbiama GCVote…</string>
   <string name="log_posting_image">Talpinamas vaizdas…</string>
   <string name="log_posting_generic_trackable">Talpinama %1$s %2$s %3$s</string>
   <string name="log_clear">Išvalyti</string>
+  <string name="log_post_not_possible">Duomenys atsiunčiami…\nPrašome bandyti dar kartą po keletos sekundžių arba patikrinti interneto jungtį.</string>
   <string name="log_post_geocode_missing">Trūksta geo kodo…</string>
   <string name="log_date_future_not_allowed">Būsimos datos įrašai negalimi.</string>
   <string name="log_add">Pridėti</string>
@@ -215,6 +218,7 @@
   <string name="warn_no_pocket_query_found">Internete nerastas Kišeninis sąrašas.</string>
   <string name="info_log_posted">c:geo įrašą pateikė sėkmingai.</string>
   <string name="info_log_saved">c:geo įrašas sėkmingai išsaugotas.</string>
+  <string name="info_log_post_failed">Paskelbti įrašo nepavyko.</string>
   <string name="info_log_post_failed_reason">Priežastis: %s</string>
   <string name="info_log_post_retry">Kartoti</string>
   <string name="info_log_post_save">Išsaugoti neprisijungus</string>
@@ -224,6 +228,9 @@
   <string name="info_stored_image">Nauja nuotrauka įrašyta į:</string>
   <string name="info_storing_static_maps">Bandoma išsaugoti statinius žemėlapius</string>
   <string name="info_cache_saved">Slėptuvė buvo išsaugota įrenginyje</string>
+  <string name="err_trackable_log_not_anonymous">Anonimiškai užregistruoti %1$s per c:geo negalima. Ar norite atidaryti nustatymus ir užpildyti savo duomenis iš %2$s?</string>
+  <string name="err_trackable_no_preference_activity">Atsiprašome, negalime rasti tinkamo nustatymų ekrano.</string>
+  <string name="warn_discard_changes">Neišsaugoti kelio taškai atmesti!</string>
   <string name="loc_last">Paskutinė žinoma vieta</string>
   <string name="loc_net">Tinklas</string>
   <string name="loc_fused">Sujungta</string>
@@ -345,6 +352,7 @@
   <string name="list_dialog_create_err">c:geo nepavyko sukurti naujo sąrašo</string>
   <string name="list_dialog_remove_title">Pašalinti sąrašą</string>
   <string name="list_dialog_remove_description">Ar norite pašalinti dabartinį sąrašą? Visos slėptuvės likusios sąraše bus perkeltos į \"Išsaugota\".</string>
+  <string name="list_dialog_remove_nowempty">Sąrašas tuščias. Ar norite pašalinti pasirinktą sąrašą?</string>
   <string name="list_dialog_remove">Pašalinti</string>
   <string name="list_dialog_remove_ok">Sąrašas pašalintas</string>
   <string name="list_dialog_remove_err">c:geo nepavyko pašalinti dabartinio sąrašo</string>
@@ -368,14 +376,20 @@
   <string name="settings_title_appearance">Išvaizda</string>
   <string name="settings_summary_appearance">Konfigūruoti atstumo vienetus, kalbą ir programos spalvas.</string>
   <string name="settings_title_cachedetails">Slėptuvės informacija</string>
+  <string name="settings_summary_cachedetails">Pritaikyti vaizdą lobio informacijai. </string>
   <string name="settings_title_offlinedata">Duomenys darbui neprisijungus</string>
+  <string name="settings_summary_offlinedata">Nustatyti statinius žemėlapius ir saugojimo vietą, kai nėra ryšio.</string>
   <string name="settings_title_logging">Registravimas</string>
+  <string name="settings_summary_logging">Nustatyti Jūsų parašą ir registravimosi parinktis.</string>
   <string name="settings_title_map">Žemėlapis</string>
+  <string name="settings_summary_map">Nustatyti žemėlapio šaltinį, žemėlapių nustatymai nenaudojant ryšio ir žemėlapio detalės.</string>
   <string name="settings_title_map_data">Žemėlapio duomenys</string>
   <string name="settings_title_map_content">Žemėlapio turinys</string>
   <string name="settings_title_basicmembers">Parinktys baziniams nariams</string>
   <string name="settings_title_navigation">Navigacija</string>
+  <string name="settings_summary_navigation">Pasirinkti pirminį navigacijos būdą ir pasirinkti išorinę navigacijos programą.</string>
   <string name="settings_title_system">Sistema</string>
+  <string name="settings_summary_system">Padaryti kopiją ir atstatyti, nustatyti programos aplankus ir kitus sisteminius specialius nustatymus.</string>
   <string name="settings_title_navigation_menu">Navigacijos meniu</string>
   <string name="settings_category_browser">Naršyklė</string>
   <string name="settings_category_social">Socialiniai tinklai</string>
@@ -422,6 +436,7 @@
   <string name="init_authorization_credential_username">Vartotojo vardas</string>
   <string name="init_authorization_credential_password">Slaptažodis</string>
   <string name="settings_service_active">Aktyvuota</string>
+  <string name="settings_navigation_disabled">Ši programa negali būti instaliuota</string>
   <string name="init_signature">Parašas</string>
   <string name="init_template_help">Tokie kodai kaip [NAME] bus vėliau išskleidžiami, kai juos panaudosite įrašuose.</string>
   <string name="init_signature_template_button">Įterpti šabloną</string>
@@ -535,12 +550,14 @@
   <string name="init_low_power_note">Energijos taupymo režimas išvengia GPS ir giroskopo naudojimo kai labai tiksli vieta nėra būtina, bet truputėli pailgina vietos nustatymo laiką.</string>
   <string name="init_low_power_mode">Aktyvinti energijos taupymo režimą</string>
   <string name="init_force_orientation_sensor_title">Krypties jutiklis</string>
+  <string name="init_force_orientation_sensor">Priverstinai naudoti krypties daviklį</string>
   <string name="init_create_memory_dump">Sukurti atminties turinio failą</string>
   <string name="init_memory_dump">Atminties turinio failas</string>
   <string name="init_memory_dumped">Atminties turinio failas išsaugotas %s</string>
   <string name="init_hardware_acceleration_title">Aparatinis grafikos pateikimo spartinimas</string>
   <string name="init_hardware_acceleration_note">Aparatinis spartinimas greičiau pateikia grafinius elementus ekrane. Tačiau kai kuriuose įrenginiuose Android operacinėje sistemoje yra klaidų ir kai kuris tekstas gali būti neryškus (ypač paryškinti simboliai).  Jeigu taip atsitiktų, išjunkite aparatūros spartinimą.</string>
   <string name="init_hardware_acceleration">Įjungti aparatinį spartinimą</string>
+  <string name="settings_create_account">Sukurti paskyrą</string>
   <string name="settings_open_website">Atidaryti interneto svetainę</string>
   <string name="settings_open_geokrety_register">Atidaryti GeoKrety.org registracijos puslapį</string>
   <string name="settings_open_geokretymap_website">Atidaryti GeoKretyMap.org svetainę</string>
@@ -887,6 +904,7 @@
   <string name="trackable_spotted_unknown_location">Vieta nežinoma</string>
   <string name="trackable_spotted_owner">Savininko rankose</string>
   <string name="trackable_spotted_archived">Suarchyvuota</string>
+  <string name="trackable_spotted_travelling">Keliavimas</string>
   <string name="trackable_origin">Kilmė</string>
   <string name="trackable_unknown">Nenurodyta</string>
   <string name="trackable_released">Išleistas</string>
@@ -920,6 +938,7 @@
   <string name="helper_calendar_title">c:geo kalendorius (įskiepis)</string>
   <string name="helper_calendar_missing">c:geo kalendoriaus įskiepis neįdiegtas.</string>
   <string name="helper_calendar_description">Leidžia eksportuoti renginius į prietaiso kalendorių.</string>
+  <string name="helper_calendar_pastevent_title">Buvę įvykiai</string>
   <string name="helper_sendtocgeo_title">Siųsti į c:geo</string>
   <string name="helper_contacts_title">c:geo kontaktai (įskiepis)</string>
   <string name="helper_contacts_description">Leidžia tiesiai iš įrašo atidaryti kontakto kortelę (iš jūsų adresų knygos), kad galėtumėte susisiekti su draugais paprašyti pagalbos.</string>
@@ -1287,4 +1306,6 @@
   <string name="unit_ft">pėdos</string>
   <string name="unit_yd">jardai</string>
   <string name="unit_mi">mylios</string>
+  <string name="pq_as_cache_list">Peržiūrėti lobių sąrašą</string>
+  <string name="pq_my_finds">Mano radiniai</string>
 </resources>

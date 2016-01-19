@@ -566,6 +566,7 @@
   <string name="init_hardware_acceleration_title">Accélération graphique</string>
   <string name="init_hardware_acceleration_note">L\'accélération matérielle permet de dessiner les éléments graphiques plus rapidement à l\'écran. Toutefois, sur certains appareils, le système Android contient des erreurs et certains textes peuvent apparaitre flous, notamment les caractères gras. Dans ce cas, il suffit de désactiver l\'accélération graphique.</string>
   <string name="init_hardware_acceleration">Activer l\'accélération graphique</string>
+  <string name="settings_create_account">Créer un compte</string>
   <string name="settings_open_website">Ouvrir le site dans un navigateur</string>
   <string name="settings_open_geokrety_register">S\'inscrire sur GeoKrety.org</string>
   <string name="settings_open_geokretymap_website">Accéder au site GeoKretyMap.org</string>
@@ -639,6 +640,18 @@
   <string name="cache_offline_time_about">il y a environ</string>
   <string name="cache_offline_time_mins">minutes</string>
   <string name="cache_offline_time_mins_few">il y a quelques minutes</string>
+  <plurals name="cache_offline_about_time_mins">
+    <item quantity="one">il y a %d minute</item>
+    <item quantity="other">il y a %d minutes</item>
+  </plurals>
+  <plurals name="cache_offline_about_time_hours">
+    <item quantity="one">il y a %d heure</item>
+    <item quantity="other">il y a %d heures</item>
+  </plurals>
+  <plurals name="cache_offline_about_time_days">
+    <item quantity="one">il y a %d jour</item>
+    <item quantity="other">il y a %d jours</item>
+  </plurals>
   <string name="cache_offline_time_hour">une heure</string>
   <string name="cache_offline_time_hours">heures</string>
   <string name="cache_offline_time_days">jours</string>
@@ -659,7 +672,9 @@
   <string name="cache_description_long">Description longue</string>
   <string name="cache_description_table_note">La description peut contenir des mises en forme riches. Consultez le site %s pour visualiser toute la description.</string>
   <string name="cache_watchlist_on">Cette cache est dans votre liste de suivi.</string>
+  <string name="cache_watchlist_on_extra">Cette cache est sur votre liste de suivi (Personnes suivant la cache : %1d).</string>
   <string name="cache_watchlist_not_on">Cette cache n\'est pas dans votre liste de suivi.</string>
+  <string name="cache_watchlist_not_on_extra">Cette cache n\'est pas sur votre liste de suivi (Personnes suivant la cache : %1d).</string>
   <string name="cache_watchlist_add">Suivre</string>
   <string name="cache_watchlist_remove">Retirer du suivi</string>
   <string name="cache_favpoint_on">Cette cache est dans vos favoris.</string>
@@ -791,6 +806,7 @@
   <string name="gpx_import_loading_waypoints">Chargement des points intermédiaires depuis le fichier .gpx</string>
   <string name="gpx_import_store_static_maps">Écriture des cartes statiques</string>
   <string name="gpx_import_caches_imported">caches importées</string>
+  <string name="gpx_import_caches_imported_with_filename">%1$d caches importées de %2$s</string>
   <string name="gpx_import_static_maps_skipped">Chargement des cartes statiques interrompu</string>
   <string name="gpx_import_title_static_maps">Enregistrement des cartes statiques</string>
   <string name="gpx_import_title_reading_file">Lecture du fichier</string>
@@ -801,6 +817,7 @@
   <string name="gpx_import_error_parser">Format de fichier incorrect</string>
   <string name="gpx_import_error_unexpected">Erreur inattendue</string>
   <string name="gpx_import_canceled">Import GPX annulé</string>
+  <string name="gpx_import_canceled_with_filename">L\'importation GPX de %1$s a été annulée</string>
   <string name="gpx_import_delete_title">Supprimer le fichier</string>
   <string name="gpx_import_delete_message">Voulez-vous supprimer %s ?</string>
   <string name="gpx_import_select_list_title">Importer GPX dans la liste</string>
@@ -956,6 +973,8 @@
   <string name="helper_calendar_title">c:geo agenda</string>
   <string name="helper_calendar_missing">c:geo agenda non installé.</string>
   <string name="helper_calendar_description">Permet d\'exporter les événements liés aux caches dans le calendrier Android.</string>
+  <string name="helper_calendar_pastevent_title">Événement passé</string>
+  <string name="helper_calendar_pastevent_question">La date de l\'événement est dans le passé. Ajouter quand même ?</string>
   <string name="helper_sendtocgeo_title">Envoyer vers c:geo</string>
   <string name="helper_contacts_title">c:geo contacts</string>
   <string name="helper_contacts_description">Permet d\'ouvrir un contact (dans votre carnet d\'adresses) directement depuis le nom d\'un utilisateur dans une visite, de manière à pouvoir plus facilement appeler des amis à l\'aide.</string>
@@ -1317,4 +1336,14 @@
   <string name="command_rename_list_result">Liste renommée</string>
   <string name="command_delete_list_result">Liste supprimée</string>
   <string name="fav_points_remaining">"Ajouter aux favoris (restant : %s)"</string>
+  <string name="unit_m">m</string>
+  <string name="unit_km">km</string>
+  <string name="unit_ft">pieds</string>
+  <string name="unit_yd">yards</string>
+  <string name="unit_mi">miles</string>
+  <string name="pq_available_for_download">Pocket query disponible au téléchargement</string>
+  <string name="pq_available_for_download_description">Cette Pocket query est disponible pour un téléchargement groupé (gpx). Voulez-vous la télécharger et l\'importer ou juste voir les caches sous forme de liste ?</string>
+  <string name="pq_as_cache_list">Voir la liste de caches</string>
+  <string name="pq_download_and_import">Importer la Pocket query</string>
+  <string name="pq_my_finds">Mes caches trouvées</string>
 </resources>

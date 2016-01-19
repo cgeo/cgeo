@@ -332,6 +332,7 @@
   <string name="caches_filter_personal_data">Com notas pessoais</string>
   <string name="caches_filter_rating">Com classificação</string>
   <string name="caches_filter_own_rating">Com própria classificação</string>
+  <string name="caches_filter_multi_listing">Multi-listagem com estado diferente</string>
   <string name="caches_removing_from_history">A remover do histórico…</string>
   <string name="caches_clear_offlinelogs">Limpar registos offline</string>
   <string name="caches_clear_offlinelogs_message">Quer apagar os registos offline?</string>
@@ -349,6 +350,7 @@
   <string name="list_dialog_create_err">O c:geo falhou a criação da nova lista</string>
   <string name="list_dialog_remove_title">Remover lista</string>
   <string name="list_dialog_remove_description">Pretende remover a lista actual de caches? Todas as caches presentes na lista serão movidas para a lista \"Arquivadas\".</string>
+  <string name="list_dialog_remove_nowempty">Esta lista está vazia. Você quer removê-la?</string>
   <string name="list_dialog_remove">Remover</string>
   <string name="list_dialog_remove_ok">A lista foi removida</string>
   <string name="list_dialog_remove_err">O c:geo falhou a remoção da lista actual</string>
@@ -563,6 +565,7 @@
   <string name="init_hardware_acceleration_title">Renderização acelerada por hardware</string>
   <string name="init_hardware_acceleration_note">Aceleração por hardware processa elementos gráficos mais rapidamente no ecrã. No entanto, em alguns dispositivos o sistema operativo Android contém erros e algum texto pode aparecer desfocado (nomeadamente caracteres em negrito). Desactive a aceleração por hardware se isso lhe acontecer.</string>
   <string name="init_hardware_acceleration">Activar renderização acelerada por hardware</string>
+  <string name="settings_create_account">Criar conta</string>
   <string name="settings_open_website">Abrir o website</string>
   <string name="settings_open_geokrety_register">Abrir a página de registro de GeoKrety.org</string>
   <string name="settings_open_geokretymap_website">Abrir a página web GeoKretyMap.org</string>
@@ -632,6 +635,18 @@
   <string name="cache_offline_time_about">há</string>
   <string name="cache_offline_time_mins">minutos atrás</string>
   <string name="cache_offline_time_mins_few">alguns minutos atrás</string>
+  <plurals name="cache_offline_about_time_mins">
+    <item quantity="one">à %d minuto atrás</item>
+    <item quantity="other">a cerca de %d minutos atrás</item>
+  </plurals>
+  <plurals name="cache_offline_about_time_hours">
+    <item quantity="one">à %d hora atrás</item>
+    <item quantity="other">a cerca de %d horas atrás</item>
+  </plurals>
+  <plurals name="cache_offline_about_time_days">
+    <item quantity="one">à %d dia atrás</item>
+    <item quantity="other">a cerca de %d dias atrás</item>
+  </plurals>
   <string name="cache_offline_time_hour">uma hora atrás</string>
   <string name="cache_offline_time_hours">horas atrás</string>
   <string name="cache_offline_time_days">dias atrás</string>
@@ -652,7 +667,9 @@
   <string name="cache_description_long">Descrição longa</string>
   <string name="cache_description_table_note">A descrição contém a formatação da tabela que pode ser necessário para ser vista correctamente em %s.</string>
   <string name="cache_watchlist_on">Esta cache está na sua lista de observação.</string>
+  <string name="cache_watchlist_on_extra">Este cache está na sua lista de observação (Observadores: %1d).</string>
   <string name="cache_watchlist_not_on">Esta cache não está na sua lista de observação.</string>
+  <string name="cache_watchlist_not_on_extra">Este cache não está na sua lista de observação (Observadores: %1d).</string>
   <string name="cache_watchlist_add">Adicionar à lista de observação</string>
   <string name="cache_watchlist_remove">Remover da lista de observação</string>
   <string name="cache_favpoint_on">Esta cache é uma das suas favoritas.</string>
@@ -783,6 +800,7 @@
   <string name="gpx_import_loading_waypoints">A carregar o ficheiro dos waypoints</string>
   <string name="gpx_import_store_static_maps">A gravar mapas estáticos</string>
   <string name="gpx_import_caches_imported">caches importadas</string>
+  <string name="gpx_import_caches_imported_with_filename">%1$d caches importadas de %2$s</string>
   <string name="gpx_import_static_maps_skipped">Download of static maps aborted</string>
   <string name="gpx_import_title_static_maps">Gravar mapas estáticos</string>
   <string name="gpx_import_title_reading_file">A ler o ficheiro</string>
@@ -793,6 +811,7 @@
   <string name="gpx_import_error_parser">Formato de ficheiro errado</string>
   <string name="gpx_import_error_unexpected">Erro inesperado</string>
   <string name="gpx_import_canceled">A importação GPX foi cancelada</string>
+  <string name="gpx_import_canceled_with_filename">A importação GPX de %1$s foi cancelada</string>
   <string name="gpx_import_delete_title">Eliminar ficheiro</string>
   <string name="gpx_import_delete_message">Quer eliminar %s?</string>
   <string name="gpx_import_select_list_title">Importar GPX para lista</string>
@@ -948,6 +967,8 @@
   <string name="helper_calendar_title">Add on calendário para c:geo </string>
   <string name="helper_calendar_missing">Add on calendário para o c:geo não está instalado.</string>
   <string name="helper_calendar_description">Permite exportar caches evento para o calendário do seu dispositivo.</string>
+  <string name="helper_calendar_pastevent_title">Eventos passados</string>
+  <string name="helper_calendar_pastevent_question">A data do evento está no passado. Adicionar de qualquer maneira?</string>
   <string name="helper_sendtocgeo_title">Enviar para o c:geo</string>
   <string name="helper_contacts_title">c:geo - plugin contactos</string>
   <string name="helper_contacts_description">Permite abrir um contacto (da sua agenda telefónica) directamente a partir de um log. Assim será mais fácil de pedir ajuda aos seus amigos.</string>
@@ -1309,4 +1330,14 @@
   <string name="command_rename_list_result">Lista renomeada</string>
   <string name="command_delete_list_result">Lista apagada</string>
   <string name="fav_points_remaining">"Adiciona esta cache aos favoritos (%s restantes)"</string>
+  <string name="unit_m">m</string>
+  <string name="unit_km">km</string>
+  <string name="unit_ft">ft</string>
+  <string name="unit_yd">yd</string>
+  <string name="unit_mi">mi</string>
+  <string name="pq_available_for_download">Pocket query disponível para download</string>
+  <string name="pq_available_for_download_description">Esta Pocket query está disponível para download como um ficheiro (gpx). Quer fazer download e importa-la ou ver as caches como uma lista?</string>
+  <string name="pq_as_cache_list">Ver lista de caches</string>
+  <string name="pq_download_and_import">Importar Pocket query</string>
+  <string name="pq_my_finds">Minhas encontradas</string>
 </resources>

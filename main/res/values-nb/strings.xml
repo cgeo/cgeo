@@ -566,6 +566,7 @@
   <string name="init_hardware_acceleration_title">Maskinvareakselerert rendering</string>
   <string name="init_hardware_acceleration_note">Maskinvare-akselerasjon gjengir grafikkelementer raskere på skjermen. Men på noen Android telefoners operativsystem er det noen feil, og noe av teksten kan komme fram som uklare  Deaktiver maskinvare-akselerasjonen hvis dette skjer med deg.</string>
   <string name="init_hardware_acceleration">Aktivere maskinvareakselerasjonen</string>
+  <string name="settings_create_account">Opprett konto</string>
   <string name="settings_open_website">Åpne nettside</string>
   <string name="settings_open_geokrety_register">Åpne registreringssiden til GeoKrety.org</string>
   <string name="settings_open_geokretymap_website">Åpne nettsiden til GeoKretyMap.org</string>
@@ -1328,4 +1329,14 @@
   <string name="command_rename_list_result">Endret listenavn</string>
   <string name="command_delete_list_result">Slettet listen</string>
   <string name="fav_points_remaining">"Legg cachen til favoritter (%s igjen)"</string>
+  <string name="unit_m">m</string>
+  <string name="unit_km">km</string>
+  <string name="unit_ft">fot</string>
+  <string name="unit_yd">yd</string>
+  <string name="unit_mi">mi</string>
+  <string name="pq_available_for_download">Pocket Query er klar til nedlasting</string>
+  <string name="pq_available_for_download_description">Denne Pocket Query-en er tilgjengelig for nedlasting som én fil (gpx). Vil du laste ned og importere den eller vise cachene som en liste?</string>
+  <string name="pq_as_cache_list">Vis cacheliste</string>
+  <string name="pq_download_and_import">Importer Pocket Query</string>
+  <string name="pq_my_finds">Mine funn</string>
 </resources>
