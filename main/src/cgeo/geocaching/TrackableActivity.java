@@ -7,8 +7,6 @@ import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.AbstractViewPagerActivity;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.trackable.TrackableBrand;
-import cgeo.geocaching.connector.trackable.TrackableConnector;
-import cgeo.geocaching.connector.trackable.TravelBugConnector;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.location.Units;
 import cgeo.geocaching.models.LogEntry;
@@ -18,7 +16,6 @@ import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.AbstractCachingPageViewCreator;
 import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
 import cgeo.geocaching.ui.CacheDetailsCreator;
@@ -29,8 +26,6 @@ import cgeo.geocaching.ui.logs.TrackableLogsViewCreator;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.HtmlUtils;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.AndroidRxUtils;
-import cgeo.geocaching.utils.RxUtils;
 import cgeo.geocaching.utils.UnknownTagsHandler;
 
 import org.apache.commons.collections4.CollectionUtils;
@@ -39,15 +34,11 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 import org.eclipse.jdt.annotation.Nullable;
 
-import rx.Observable;
 import rx.Subscription;
 import rx.android.app.AppObservable;
 import rx.android.view.OnClickEvent;
 import rx.android.view.ViewObservable;
 import rx.functions.Action1;
-import rx.functions.Func0;
-import rx.functions.Func1;
-import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
 import rx.subscriptions.Subscriptions;
 
@@ -123,7 +114,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState, R.layout.viewpager_activity);
+        onCreate(savedInstanceState, R.layout.viewpager_activity);
         createSubscriptions = new CompositeSubscription();
 
         // set title in code, as the activity needs a hard coded title due to the intent filters
@@ -142,12 +133,12 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
             geocache = extras.getString(Intents.EXTRA_GEOCACHE);
             brand = TrackableBrand.getById(extras.getInt(Intents.EXTRA_BRAND));
             trackingCode = extras.getString(Intents.EXTRA_TRACKING_CODE);
-
         }
 
         // try to get data from URI
         if (geocode == null && guid == null && id == null && uri != null) {
             geocode = ConnectorFactory.getTrackableFromURL(uri.toString());
+            trackingCode = ConnectorFactory.getTrackableTrackingCodeFromURL(uri.toString());
 
             final String uriHost = uri.getHost().toLowerCase(Locale.US);
             if (uriHost.endsWith("geocaching.com")) {
@@ -171,6 +162,11 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
                     showToast(res.getString(R.string.err_tb_details_open));
                     finish();
                     return;
+                }
+            } else if (uriHost.endsWith("geokrety.org")) {
+                brand = TrackableBrand.GEOKRETY;
+                if (geocode == null && trackingCode != null) {
+                    geocode = trackingCode;
                 }
             }
         }
@@ -219,13 +215,13 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
 
     private void refreshTrackable(final String message) {
         waitDialog = ProgressDialog.show(this, message, res.getString(R.string.trackable_details_loading), true, true);
-        createSubscriptions.add(AppObservable.bindActivity(this, loadTrackable(geocode, guid, id, brand)).singleOrDefault(null).subscribe(new Action1<Trackable>() {
+        createSubscriptions.add(AppObservable.bindActivity(this, ConnectorFactory.loadTrackable(geocode, guid, id, brand)).singleOrDefault(null).subscribe(new Action1<Trackable>() {
             @Override
-            public void call(final Trackable trackable) {
-                if (trackable != null && trackingCode != null) {
-                    trackable.setTrackingcode(trackingCode);
+            public void call(final Trackable newTrackable) {
+                if (newTrackable != null && trackingCode != null) {
+                    newTrackable.setTrackingcode(trackingCode);
                 }
-                TrackableActivity.this.trackable = trackable;
+                trackable = newTrackable;
                 displayTrackable();
                 // reset imagelist
                 imagesList = null;
@@ -271,50 +267,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
         }
         return super.onPrepareOptionsMenu(menu);
     }
-
-    private static Observable<Trackable> loadTrackable(final String geocode, final String guid, final String id, final TrackableBrand brand) {
-        if (StringUtils.isEmpty(geocode)) {
-            // Only solution is GC search by uid
-            return RxUtils.deferredNullable(new Func0<Trackable>() {
-                @Override
-                public Trackable call() {
-                    return TravelBugConnector.getInstance().searchTrackable(geocode, guid, id);
-                }
-            }).subscribeOn(AndroidRxUtils.networkScheduler);
-        }
-
-        // We query all the connectors that can handle the trackable in parallel as well as the local storage.
-        // We return the first positive result coming from a connector, or, if none, the result of loading from
-        // the local storage.
-
-        final Observable<Trackable> fromNetwork =
-                Observable.from(ConnectorFactory.getTrackableConnectors()).filter(new Func1<TrackableConnector, Boolean>() {
-                    @Override
-                    public Boolean call(final TrackableConnector trackableConnector) {
-                        return trackableConnector.canHandleTrackable(geocode, brand);
-                    }
-                }).flatMap(new Func1<TrackableConnector, Observable<Trackable>>() {
-                    @Override
-                    public Observable<Trackable> call(final TrackableConnector trackableConnector) {
-                        return RxUtils.deferredNullable(new Func0<Trackable>() {
-                            @Override
-                            public Trackable call() {
-                                return trackableConnector.searchTrackable(geocode, guid, id);
-                            }
-                        }).subscribeOn(AndroidRxUtils.networkScheduler);
-                    }
-                });
-
-        final Observable<Trackable> fromLocalStorage = RxUtils.deferredNullable(new Func0<Trackable>() {
-            @Override
-            public Trackable call() {
-                return DataStore.loadTrackable(geocode);
-            }
-        }).subscribeOn(Schedulers.io());
-
-        return fromNetwork.concatWith(fromLocalStorage).take(1);
-    }
-
+    
     public void displayTrackable() {
         if (trackable == null) {
             if (waitDialog != null) {
@@ -475,12 +428,12 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
             }
 
             // trackable name
-            final TextView name = details.add(R.string.trackable_name, StringUtils.isNotBlank(trackable.getName()) ? Html.fromHtml(trackable.getName()).toString() : res.getString(R.string.trackable_unknown)).right;
-            addContextMenu(name);
+            final TextView nameTxtView = details.add(R.string.trackable_name, StringUtils.isNotBlank(trackable.getName()) ? Html.fromHtml(trackable.getName()).toString() : res.getString(R.string.trackable_unknown)).right;
+            addContextMenu(nameTxtView);
 
             // missing status
             if (trackable.isMissing()) {
-                name.setPaintFlags(name.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+                nameTxtView.setPaintFlags(nameTxtView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
             }
 
             // trackable type

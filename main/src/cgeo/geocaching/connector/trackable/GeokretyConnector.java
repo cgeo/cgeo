@@ -12,6 +12,7 @@ import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.Version;
 
@@ -22,6 +23,10 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.xml.sax.InputSource;
 
+import rx.Observable;
+import rx.functions.Func0;
+import rx.functions.Func1;
+
 import android.content.Context;
 
 import java.io.InputStream;
@@ -31,12 +36,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import rx.Observable;
-import rx.functions.Func1;
-
 public class GeokretyConnector extends AbstractTrackableConnector {
 
     private static final Pattern PATTERN_GK_CODE = Pattern.compile("GK[0-9A-F]{4,}");
+    private static final Pattern PATTERN_GK_CODE_EXTENDED = Pattern.compile("(GK[0-9A-F]{4,})|([0-9A-Z]{6})");
     private static final String URL = "http://geokrety.org";
     private static final String URLPROXY = "http://api.geokretymap.org";
 
@@ -48,6 +51,14 @@ public class GeokretyConnector extends AbstractTrackableConnector {
     @Override
     public boolean canHandleTrackable(@Nullable final String geocode) {
         return geocode != null && PATTERN_GK_CODE.matcher(geocode).matches();
+    }
+
+    @Override
+    public boolean canHandleTrackable(@Nullable final String geocode, @Nullable final TrackableBrand brand) {
+        if (brand == null || brand != TrackableBrand.GEOKRETY) {
+            return canHandleTrackable(geocode);
+        }
+        return geocode != null && PATTERN_GK_CODE_EXTENDED.matcher(geocode).matches();
     }
 
     @Override
@@ -74,11 +85,26 @@ public class GeokretyConnector extends AbstractTrackableConnector {
 
     @Nullable
     public static Trackable searchTrackable(final String geocode) {
-        Log.d("GeokretyConnector.searchTrackable: gkid=" + getId(geocode));
+        final Integer gkid;
+
+        if (StringUtils.startsWithIgnoreCase(geocode, "GK")) {
+            gkid = getId(geocode);
+        } else {
+            // This probably a Tracking Code
+            Log.d("GeokretyConnector.searchTrackable: geocode=" + geocode);
+
+            final String geocodeFound = getGeocodeFromTrackingCode(geocode);
+            if (geocodeFound == null) {
+                return null;
+            }
+            gkid = getId(geocodeFound);
+        }
+
+        Log.d("GeokretyConnector.searchTrackable: gkid=" + gkid);
         try {
             final String urlDetails = (Settings.isGeokretyCacheActive() ? URLPROXY + "/export-details.php" : URL + "/export2.php");
 
-            final InputStream response = Network.getResponseStream(Network.getRequest(urlDetails + "?gkid=" + getId(geocode)));
+            final InputStream response = Network.getResponseStream(Network.getRequest(urlDetails + "?gkid=" + gkid));
             if (response == null) {
                 Log.e("GeokretyConnector.searchTrackable: No data from server");
                 return null;
@@ -152,7 +178,7 @@ public class GeokretyConnector extends AbstractTrackableConnector {
     @Override
     @NonNull
     public Observable<TrackableLog> trackableLogInventory() {
-        return Observable.from(loadInventory(0)).map(new Func1<Trackable, TrackableLog>() {
+        return Observable.from(loadInventory()).map(new Func1<Trackable, TrackableLog>() {
             @Override
             public TrackableLog call(final Trackable trackable) {
                 return new TrackableLog(
@@ -191,6 +217,41 @@ public class GeokretyConnector extends AbstractTrackableConnector {
             return geocode(Integer.parseInt(gkmapId));
         }
         return null;
+    }
+
+    @Override
+    @Nullable
+    public String getTrackableTrackingCodeFromUrl(@NonNull final String url) {
+        // http://geokrety.org/m/qr.php?nr=<TRACKING_CODE>
+        final String gkTrackingCode = StringUtils.substringAfterLast(url, "qr.php?nr=");
+        if (StringUtils.isAlphanumeric(gkTrackingCode)) {
+            return gkTrackingCode;
+        }
+        return null;
+    }
+
+    /**
+     * Lookup Trackable Geocode from Tracking Code.
+     *
+     * @param trackingCode
+     *          the Trackable Tracking Code to lookup
+     * @return
+     *          the Trackable Geocode
+     */
+    @Nullable
+    public static String getGeocodeFromTrackingCode(final String trackingCode) {
+        return Observable.defer(new Func0<Observable<String>>() {
+            @Override
+            public Observable<String> call() {
+                final Parameters params = new Parameters("nr", trackingCode);
+                final String response = Network.getResponseData(Network.getRequest(URLPROXY + "/nr2id.php", params));
+                // An empty response means "not found"
+                if (response == null || StringUtils.equals(response, "0")) {
+                    return Observable.empty();
+                }
+                return Observable.just(geocode(Integer.parseInt(response)));
+            }
+        }).subscribeOn(AndroidRxUtils.networkScheduler).toBlocking().firstOrDefault(null);
     }
 
     @Override
