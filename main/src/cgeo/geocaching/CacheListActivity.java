@@ -743,14 +743,19 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 invalidateOptionsMenuCompatible();
                 return true;
             case R.id.menu_refresh_stored:
-                Dialogs.confirmYesNo(this, R.string.caches_refresh_all, R.string.caches_refresh_all_warning, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(final DialogInterface dialog, final int id) {
-                        refreshStored(adapter.getCheckedOrAllCaches());
-                        invalidateOptionsMenuCompatible();
-                        dialog.cancel();
-                    }
-                });
+                if (type == CacheListType.OFFLINE) {
+                    Dialogs.confirmYesNo(this, R.string.caches_refresh_all, R.string.caches_refresh_all_warning, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(final DialogInterface dialog, final int id) {
+                            refreshStored(adapter.getCheckedOrAllCaches());
+                            invalidateOptionsMenuCompatible();
+                            dialog.cancel();
+                        }
+                    });
+                } else {
+                    refreshStored(adapter.getCheckedOrAllCaches());
+                    invalidateOptionsMenuCompatible();
+                }
                 return true;
             case R.id.menu_drop_caches:
                 deleteCachesWithConfirmation();
