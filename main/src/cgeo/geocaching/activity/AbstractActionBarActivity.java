@@ -3,11 +3,20 @@ package cgeo.geocaching.activity;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.view.View;
+import android.view.Window;
 
 /**
  * Classes actually having an ActionBar (as opposed to the Dialog activities)
  */
 public class AbstractActionBarActivity extends AbstractActivity {
+
+    public AbstractActionBarActivity() {
+        super(false);
+    }
+    public AbstractActionBarActivity(final boolean keepScreenOn) {
+        super(keepScreenOn);
+    }
+
     @Override
     protected void onCreate(final Bundle savedInstanceState, @LayoutRes final int resourceLayoutID) {
         super.onCreate(savedInstanceState, resourceLayoutID);

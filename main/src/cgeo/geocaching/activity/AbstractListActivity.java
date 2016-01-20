@@ -1,112 +1,36 @@
 package cgeo.geocaching.activity;
 
-import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.network.AndroidBeam;
+import android.widget.HeaderViewListAdapter;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 
-import android.content.res.Resources;
-import android.os.Bundle;
-import android.support.annotation.LayoutRes;
-import android.view.MenuItem;
-import android.view.Window;
-
-public abstract class AbstractListActivity extends ActionBarListActivity implements
-        IAbstractActivity {
-
-    private boolean keepScreenOn = false;
-
-    protected CgeoApplication app = null;
-    protected Resources res = null;
+public abstract class AbstractListActivity extends AbstractActionBarActivity {
 
     protected AbstractListActivity() {
         this(false);
     }
 
     protected AbstractListActivity(final boolean keepScreenOn) {
-        this.keepScreenOn = keepScreenOn;
+        super(keepScreenOn);
     }
 
-    final public void showProgress(final boolean show) {
-        ActivityMixin.showProgress(this, show);
-    }
-
-    final public void setTheme() {
-        ActivityMixin.setTheme(this);
-    }
-
-    @Override
-    public final void showToast(final String text) {
-        ActivityMixin.showToast(this, text);
-    }
-
-    @Override
-    public final void showShortToast(final String text) {
-        ActivityMixin.showShortToast(this, text);
-    }
-
-    @Override
-    public void onCreate(final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        supportRequestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
-
-        initializeCommonFields();
-        initUpAction();
-        AndroidBeam.disable(this);
-    }
-
-    protected void initUpAction() {
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(final MenuItem item) {
-        if (item.getItemId()== android.R.id.home) {
-            return ActivityMixin.navigateUp(this);
+    private ListView mListView;
+    protected ListView getListView() {
+        if (mListView == null) {
+            mListView = (ListView) findViewById(android.R.id.list);
         }
-        return super.onOptionsItemSelected(item);
+        return mListView;
     }
 
-    private void initializeCommonFields() {
-        // init
-        res = this.getResources();
-        app = (CgeoApplication) this.getApplication();
-
-        ActivityMixin.onCreate(this, keepScreenOn);
+    protected void setListAdapter(final ListAdapter adapter) {
+        getListView().setAdapter(adapter);
     }
 
-    final protected void setTitle(final String title) {
-        ActivityMixin.setTitle(this, title);
+    protected ListAdapter getListAdapter() {
+        final ListAdapter adapter = getListView().getAdapter();
+        if (adapter instanceof HeaderViewListAdapter) {
+            return ((HeaderViewListAdapter)adapter).getWrappedAdapter();
+        }
+        return adapter;
     }
-
-    @Override
-    public void invalidateOptionsMenuCompatible() {
-        ActivityMixin.invalidateOptionsMenu(this);
-    }
-
-    public void onCreate(final Bundle savedInstanceState, @LayoutRes final int resourceLayoutID) {
-        super.onCreate(savedInstanceState);
-        initializeCommonFields();
-
-        setTheme();
-        setContentView(resourceLayoutID);
-    }
-
-    @Override
-    public void setContentView(@LayoutRes final int layoutResID) {
-        super.setContentView(layoutResID);
-
-        // initialize action bar title with activity title
-        ActivityMixin.setTitle(this, getTitle());
-    }
-
-    @Override
-    public final void presentShowcase() {
-        ActivityMixin.presentShowcase(this);
-    }
-
-    @Override
-    public ShowcaseViewBuilder getShowcase() {
-        // do nothing by default
-        return null;
-    }
-
 }
