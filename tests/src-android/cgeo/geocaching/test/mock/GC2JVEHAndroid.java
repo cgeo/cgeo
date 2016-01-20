@@ -133,6 +133,11 @@ public class GC2JVEHAndroid extends MockedCacheAndroid {
     }
 
     @Override
+    public boolean isDisabled() {
+        return true;
+    }
+
+    @Override
     public boolean isPremiumMembersOnly() {
         return true;
     }
