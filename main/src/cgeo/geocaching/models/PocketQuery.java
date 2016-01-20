@@ -1,9 +1,5 @@
 package cgeo.geocaching.models;
 
-import cgeo.geocaching.R;
-
-import android.support.annotation.DrawableRes;
-
 public final class PocketQuery {
 
     private final String guid;
