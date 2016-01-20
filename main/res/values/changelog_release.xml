@@ -2,6 +2,11 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
+    <b>Next bugfix release:</b>\n
+    · Fix: Crash in pocket query listing on Android 2.3.x\n
+    · Fix: Crash when enabling ExtremCaching initially\n
+    \n
+    \n
     <b>2016.01.19:</b>\n
     · New: Downloadable pocket queries can be imported directly\n
     · Fix: Login failure due to wrong language setting on geocaching.com webpage\n
