@@ -38,7 +38,13 @@ public class PocketQueryListActivity extends AbstractListActivity {
                     ActivityMixin.showToast(PocketQueryListActivity.this, getString(R.string.warn_no_pocket_query_found));
                     finish();
                 }
-                adapter.addAll(pocketQueryList);
+                // adapter.addAll does not exist until API 11. We will notify the adapter ourselves as not to queue
+                // a call to notifyDataSetChanged() after every add.
+                adapter.setNotifyOnChange(false);
+                for (final PocketQuery pocketQuery : pocketQueryList) {
+                    adapter.add(pocketQuery);
+                }
+                adapter.notifyDataSetChanged();
             }
         });
     }
