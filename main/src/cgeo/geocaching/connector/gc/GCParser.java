@@ -63,9 +63,11 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.EnumSet;
-import java.util.HashSet;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.regex.Pattern;
 
@@ -1018,21 +1020,19 @@ public final class GCParser {
 
             final List<PocketQuery> list = new ArrayList<>();
             final List<String> allQueryGuids = new ArrayList<>();
-            final Set<String> downloadablePocketQueries = getDownloadablePocketQueries(subPage);
+            final Map<String, Integer> downloadablePocketQueries = getDownloadablePocketQueries(subPage);
 
             final MatcherWrapper matcherPocket = new MatcherWrapper(GCConstants.PATTERN_LIST_PQ, subPage);
 
             while (matcherPocket.find()) {
-                int maxCaches;
-                try {
-                    maxCaches = Integer.parseInt(matcherPocket.group(1));
-                } catch (final NumberFormatException e) {
-                    maxCaches = 0;
-                    Log.e("GCParser.searchPocketQueryList: Unable to parse max caches", e);
-                }
                 final String guid = Html.fromHtml(matcherPocket.group(2)).toString();
                 final String name = Html.fromHtml(matcherPocket.group(3)).toString();
-                final PocketQuery pqList = new PocketQuery(guid, name, maxCaches, downloadablePocketQueries.contains(guid));
+                int maxCaches = -1;
+                final boolean downloadable = downloadablePocketQueries.containsKey(guid);
+                if (downloadable) {
+                    maxCaches = downloadablePocketQueries.get(guid);
+                }
+                final PocketQuery pqList = new PocketQuery(guid, name, maxCaches, downloadable);
                 list.add(pqList);
                 allQueryGuids.add(guid);
             }
@@ -1048,9 +1048,12 @@ public final class GCParser {
             });
 
             // the "My finds" query is not listed on the available queries page
-            downloadablePocketQueries.removeAll(allQueryGuids);
+            for (final String guid : allQueryGuids) {
+                downloadablePocketQueries.remove(guid);
+            }
             if (downloadablePocketQueries.size() == 1) {
-                list.add(new PocketQuery(downloadablePocketQueries.iterator().next(), CgeoApplication.getInstance().getString(R.string.pq_my_finds), -1, true));
+                final Entry<String, Integer> entry = downloadablePocketQueries.entrySet().iterator().next();
+                list.add(new PocketQuery(entry.getKey(), CgeoApplication.getInstance().getString(R.string.pq_my_finds), entry.getValue(), true));
             }
 
             return Observable.just(list);
@@ -1066,18 +1069,24 @@ public final class GCParser {
      * @return Set with guids of downloadable PQs
      */
     @NonNull
-    private static Set<String> getDownloadablePocketQueries(final String subPage) {
-        final Set<String> downloadablePocketQueries = new HashSet<>();
+    private static Map<String, Integer> getDownloadablePocketQueries(final String subPage) {
+        final Map<String, Integer> downloadablePocketQueries = new HashMap<>();
         final String downloadSubPage = StringUtils.substringAfter(subPage, "id=\"uxOfflinePQTable\"");
         if (StringUtils.isEmpty(downloadSubPage)) {
-            Log.w("GCParser.addDownloadableAttribute: id \"uxOfflinePQTable\" not found on page");
+            Log.w("GCParser.getDownloadablePocketQueries: id \"uxOfflinePQTable\" not found on page");
         }
 
         final MatcherWrapper matcherPocket = new MatcherWrapper(GCConstants.PATTERN_LIST_PQ_DL, downloadSubPage);
 
         while (matcherPocket.find()) {
             final String guid = Html.fromHtml(matcherPocket.group(1)).toString();
-            downloadablePocketQueries.add(guid);
+            try {
+                final Integer count = Integer.valueOf(matcherPocket.group(2));
+                downloadablePocketQueries.put(guid, count);
+            } catch (final NumberFormatException e) {
+                Log.w("GCParser.getDownloadablePocketQueries: cannot parse PQ cache count");
+                e.printStackTrace();
+            }
         }
         return downloadablePocketQueries;
     }

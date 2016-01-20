@@ -5,6 +5,7 @@
     <b>Next bugfix release:</b>\n
     · Fix: Crash in pocket query listing on Android 2.3.x\n
     · Fix: Crash when enabling ExtremCaching initially\n
+    · Change: Show number of caches only for downloadable pocket queries\n
     \n
     \n
     <b>2016.01.19:</b>\n
