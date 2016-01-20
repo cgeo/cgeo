@@ -45,7 +45,7 @@ public class ECLogin extends AbstractLogin {
     protected StatusCode login(final boolean retry) {
         final Credentials login = Settings.getCredentials(ECConnector.getInstance());
 
-        if (StringUtils.isEmpty(login.getUsername()) || StringUtils.isEmpty(login.getPassword())) {
+        if (login.isInvalid()) {
             clearLoginInfo();
             Log.e("ECLogin.login: No login information stored");
             return StatusCode.NO_LOGIN_INFO_STORED;
