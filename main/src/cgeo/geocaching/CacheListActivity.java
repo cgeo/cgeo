@@ -127,6 +127,7 @@ import rx.schedulers.Schedulers;
 public class CacheListActivity extends AbstractListActivity implements FilteredActivity, LoaderManager.LoaderCallbacks<SearchResult> {
 
     private static final int MAX_LIST_ITEMS = 1000;
+    private static final int REFRESH_WARNING_THRESHOLD = 100;
 
     private static final int REQUEST_CODE_IMPORT_GPX = 1;
 
@@ -743,19 +744,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 invalidateOptionsMenuCompatible();
                 return true;
             case R.id.menu_refresh_stored:
-                if (type == CacheListType.OFFLINE) {
-                    Dialogs.confirmYesNo(this, R.string.caches_refresh_all, R.string.caches_refresh_all_warning, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(final DialogInterface dialog, final int id) {
-                            refreshStored(adapter.getCheckedOrAllCaches());
-                            invalidateOptionsMenuCompatible();
-                            dialog.cancel();
-                        }
-                    });
-                } else {
-                    refreshStored(adapter.getCheckedOrAllCaches());
-                    invalidateOptionsMenuCompatible();
-                }
+                refreshStored(adapter.getCheckedOrAllCaches());
+                invalidateOptionsMenuCompatible();
                 return true;
             case R.id.menu_drop_caches:
                 deleteCachesWithConfirmation();
@@ -1133,6 +1123,20 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     public void refreshStored(final List<Geocache> caches) {
+        if (type == CacheListType.OFFLINE && caches.size() > REFRESH_WARNING_THRESHOLD) {
+            Dialogs.confirmYesNo(this, R.string.caches_refresh_all, R.string.caches_refresh_all_warning, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(final DialogInterface dialog, final int id) {
+                    refreshStoredConfirmed(caches);
+                    dialog.cancel();
+                }
+            });
+        } else {
+            refreshStoredConfirmed(caches);
+        }
+    }
+
+    private void refreshStoredConfirmed(final List<Geocache> caches) {
         detailTotal = caches.size();
         if (detailTotal == 0) {
             return;
