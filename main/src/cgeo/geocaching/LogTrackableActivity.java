@@ -120,13 +120,6 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
     @Override
     public Loader<List<LogTypeTrackable>> onCreateLoader(final int id, final Bundle bundle) {
         showProgress(true);
-        loggingManager = connector.getTrackableLoggingManager(this);
-
-        if (loggingManager == null) {
-            showToast(res.getString(R.string.err_tb_not_loggable));
-            finish();
-            return null;
-        }
 
         if (id == Loaders.LOGGING_TRAVELBUG.getLoaderId()) {
             loggingManager.setGuid(trackable.getGuid());
@@ -213,6 +206,15 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
 
         // create trackable connector
         connector = ConnectorFactory.getTrackableConnector(geocode, brand);
+        loggingManager = connector.getTrackableLoggingManager(this);
+
+        if (loggingManager == null) {
+            showToast(res.getString(R.string.err_tb_not_loggable));
+            finish();
+        }
+
+        // Initialize the UI
+        init();
 
         createSubscriptions.add(AppObservable.bindActivity(this, ConnectorFactory.loadTrackable(geocode, null, null, brand)).singleOrDefault(null).subscribe(new Action1<Trackable>() {
             @Override
