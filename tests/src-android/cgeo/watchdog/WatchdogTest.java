@@ -26,9 +26,9 @@ public class WatchdogTest extends CGeoTestCase {
         downloadOpenCaching("OC1234");
     }
 
-    public static void testOpenCachingNL() {
-        downloadOpenCaching("OB1AF6");
-    }
+//    public static void testOpenCachingNL() {
+//        downloadOpenCaching("OB1AF6");
+//    }
 
     public static void testOpenCachingPL() {
         downloadOpenCaching("OP89HC");
@@ -61,8 +61,9 @@ public class WatchdogTest extends CGeoTestCase {
 
     private static void checkWebsite(final String connectorName, final String host) {
 
-        // temporarily disable oc.es
+        // temporarily disable oc.es, oc.nl
         if (connectorName.equalsIgnoreCase("geocaching website opencaching.es")) return;
+        if (connectorName.equalsIgnoreCase("geocaching website opencaching.nl")) return;
 
         final String url = "http://" + host + "/";
         final String page = Network.getResponseData(Network.getRequest(url));
