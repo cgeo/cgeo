@@ -82,7 +82,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
 
     private ProgressDialog waitDialog = null;
     private Waypoint waypoint = null;
-    private String prefix = "OWN";
+    private String prefix = "";
     private String lookup = "---";
     private boolean own = true;
     List<String> distanceUnits = null;
