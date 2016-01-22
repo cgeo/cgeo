@@ -421,6 +421,7 @@
   <string name="init_oc_ro">Opencaching.ro</string>
   <string name="settings_activate_oc_ro">Activar</string>
   <string name="init_oc_ro_description">Permitir que c:geo pesquise, aceda e filtre as suas caches encontradas em opencaching.ro.</string>
+  <string name="init_oc_uk">Opencaching.org.uk</string>
   <string name="settings_activate_oc_uk">Ativar</string>
   <string name="init_oc_uk_description">Autorizar o c:geo em opencaching.org.uk para que pesquise por caches e aceder/filtrar as suas caches encontradas.</string>
   <string name="init_gcvote">GCvote.com</string>
@@ -618,6 +619,8 @@
   <string name="auth_dialog_completed_twitter">O c:geo está agora autorizado a publicar no Twitter.</string>
   <string name="auth_ocde">opencaching.de</string>
   <string name="auth_ocpl">Opencaching.pl</string>
+  <string name="auth_ocnl">opencaching.nl</string>
+  <string name="auth_ocro">opencaching.ro</string>
   <string name="auth_dialog_completed_oc">c:geo está agora autorizado a interagir com %s.</string>
   <string name="auth_dialog_completed_geokrety">c:geo está agora autorizado a interagir com %s.</string>
   <string name="err_auth_geokrety_bad_password">O utilizador/senha parecem inválidos.</string>
@@ -743,6 +746,7 @@
   <string name="cache_menu_oruxmaps">OruxMaps</string>
   <string name="cache_menu_navigon">Navigon</string>
   <string name="cache_menu_pebble">Seixo</string>
+  <string name="cache_menu_android_wear">Android Wear</string>
   <string name="cache_menu_vote">Voto</string>
   <string name="cache_menu_checker">Abrir Geochecker</string>
   <string name="cache_menu_ignore">Ignorar a cache</string>
