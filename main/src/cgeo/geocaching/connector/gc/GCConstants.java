@@ -45,28 +45,27 @@ public final class GCConstants {
     final static Pattern PATTERN_DIFFICULTY = Pattern.compile("<span id=\"ctl00_ContentBody_uxLegendScale\"[^>]*>[^<]*<img src=\"[^\"]*/images/stars/stars([0-9_]+)\\.gif\"");
     final static Pattern PATTERN_TERRAIN = Pattern.compile("<span id=\"ctl00_ContentBody_Localize[\\d]+\"[^>]*>[^<]*<img src=\"[^\"]*/images/stars/stars([0-9_]+)\\.gif\"");
     final static Pattern PATTERN_OWNER_USERID = Pattern.compile("other caches <a href=\"/seek/nearest\\.aspx\\?u=(.*?)\">hidden</a> or");
-    final static Pattern PATTERN_FOUND = Pattern.compile("ctl00_ContentBody_GeoNav_logText\">(Found It|Attended)");
-    final static Pattern PATTERN_FOUND_ALTERNATIVE = Pattern.compile("<div class=\"StatusInformationWidget FavoriteWidget\"");
+    final static Pattern PATTERN_FOUND = Pattern.compile("logtypes/48/10.png");
     final static Pattern PATTERN_OWNER_DISPLAYNAME = Pattern.compile("<div id=\"ctl00_ContentBody_mcd1\">[^<]+<a href=\"[^\"]+\">([^<]+)</a>");
     final static Pattern PATTERN_TYPE = Pattern.compile("<a href=\"/seek/nearest.aspx\\?tx=([0-9a-f-]+)");
     final static Pattern PATTERN_HIDDEN = Pattern.compile("<div id=\"ctl00_ContentBody_mcd2\">\\W*Hidden[\\s:]*([^<]+?)</div>");
-    final static Pattern PATTERN_HIDDENEVENT = Pattern.compile("Event\\s*Date\\s*:\\s*([^<]+)<div id=\"calLinks\">", Pattern.DOTALL);
+    final static Pattern PATTERN_HIDDENEVENT = Pattern.compile(":\\s*([0-9-/]+)\\s*<div id=\"calLinks\">", Pattern.DOTALL);
     final static Pattern PATTERN_FAVORITE = Pattern.compile("<div id=\"pnlFavoriteCache\">"); // without 'class="hideMe"' inside the tag !
     final static Pattern PATTERN_FAVORITECOUNT = Pattern.compile("<span class=\"favorite-value\">\\D*([0-9]+?)\\D*</span>");
     final static Pattern PATTERN_COUNTLOGS = Pattern.compile("<span id=\"ctl00_ContentBody_lblFindCounts\"><p(.+?)</p></span>");
-    final static Pattern PATTERN_WATCHLIST_COUNT = Pattern.compile("<li><a href=\".*\">.*?Watch.*?<\\/a> \\((\\d+)\\)");
+    final static Pattern PATTERN_WATCHLIST_COUNT = Pattern.compile("watchlist\\.aspx[^(]*\\((\\d+)\\)");
 
     /** Two groups ! */
     final static Pattern PATTERN_COUNTLOG = Pattern.compile("logtypes/([0-9]+)\\.[^>]+>\\s*([0-9,.]+)");
     static final Pattern PATTERN_PREMIUMMEMBERS = Pattern.compile("<p class=\"Warning NoBottomSpacing\">This is a Premium Member Only cache.</p>");
-    final static Pattern PATTERN_ATTRIBUTES = Pattern.compile("Attributes\\s*</h3>[^<]*<div class=\"WidgetBody\">((?:[^<]*<img src=\"[^\"]+\" alt=\"[^\"]+\"[^>]*>)+?)[^<]*<p");
+    final static Pattern PATTERN_ATTRIBUTES = Pattern.compile("(<img src=\"/images/attributes.*?)</p");
     /** Two groups ! */
-    final static Pattern PATTERN_ATTRIBUTESINSIDE = Pattern.compile("[^<]*<img src=\"([^\"]+)\" alt=\"([^\"]+?)\"");
+    final static Pattern PATTERN_ATTRIBUTESINSIDE = Pattern.compile("<img src=\"([^\"]+)\" alt=\"([^\"]+?)\"");
     final static Pattern PATTERN_SPOILER_IMAGE = Pattern.compile("<a href=\"(http://img(?:cdn)?\\.geocaching\\.com[^.]+\\.(?:jpg|jpeg|png|gif))\"[^>]+>" + "([^<]+)</a>" + "(?:\\s*<span[^>]*>([^<]+)</span>)?", Pattern.DOTALL);
     final static Pattern PATTERN_INVENTORY = Pattern.compile("<span id=\"ctl00_ContentBody_uxTravelBugList_uxInventoryLabel\">\\W*Inventory[^<]*</span>[^<]*</h3>[^<]*<div class=\"WidgetBody\">([^<]*<ul>(([^<]*<li>[^<]*<a href=\"[^\"]+\"[^>]*>[^<]*<img src=\"[^\"]+\"[^>]*>[^<]*<span>[^<]+<\\/span>[^<]*<\\/a>[^<]*<\\/li>)+)[^<]*<\\/ul>)?");
     final static Pattern PATTERN_INVENTORYINSIDE = Pattern.compile("[^<]*<li>[^<]*<a href=\"[a-z0-9\\-\\_\\.\\?\\/\\:\\@]*\\/track\\/details\\.aspx\\?guid=([0-9a-z\\-]+)[^\"]*\"[^>]*>[^<]*<img src=\"[^\"]+\"[^>]*>[^<]*<span>([^<]+)<\\/span>[^<]*<\\/a>[^<]*<\\/li>");
     final static Pattern PATTERN_WATCHLIST = Pattern.compile(Pattern.quote("watchlist.aspx") + ".{1,50}" + Pattern.quote("action=rem"));
-    final static Pattern PATTERN_RELATED_WEB_PAGE = Pattern.compile("id=\"ctl00_ContentBody_uxCacheUrl\" title=\"Related Web Page\" href=\"(.*?)\">");
+    final static Pattern PATTERN_RELATED_WEB_PAGE = Pattern.compile("ctl00_ContentBody_uxCacheUrl.*? href=\"(.*?)\">");
 
     // Info box top-right
     public static final Pattern PATTERN_LOGIN_NAME = Pattern.compile("class=\"li-user-info\"[^>]*>.*?<span>(.*?)</span>", Pattern.DOTALL);
@@ -74,7 +73,8 @@ public final class GCConstants {
     public static final String MEMBER_STATUS_PREMIUM = "Premium";
     public static final String MEMBER_STATUS_CHARTER = "Charter";
     /** Use replaceAll("[,.]","") on the resulting string before converting to an int */
-    static final Pattern PATTERN_CACHES_FOUND = Pattern.compile("<span[^>]*>.*?([\\d,.]+) Finds?", Pattern.DOTALL);
+    static final Pattern PATTERN_CACHES_FOUND = Pattern.compile(Pattern.quote("cache-count\">") + "\\s*([\\d,.]+)", Pattern.DOTALL);
+
     static final Pattern PATTERN_AVATAR_IMAGE_PROFILE_PAGE = Pattern.compile("src=\"(https?://(img(?:cdn)?\\.geocaching\\.com|[^>\"]+\\.cloudfront\\.net)/avatar/[0-9a-f-]+\\.jpg)\"[^>]*alt=\"");
     static final Pattern PATTERN_LOGIN_NAME_LOGIN_PAGE = Pattern.compile("ctl00_ContentBody_lbUsername\">.*<strong>(.*)</strong>");
     static final Pattern PATTERN_CUSTOMDATE = Pattern.compile("<option selected=\"selected\" value=\"([ /.Mdy-]+)\">");
@@ -85,7 +85,7 @@ public final class GCConstants {
      * Patterns for parsing trackables
      */
     final static Pattern PATTERN_TRACKABLE_GUID = Pattern.compile("<a id=\"ctl00_ContentBody_lnkPrint\" title=\"[^\"]*\" href=\".*sheet\\.aspx\\?guid=([a-z0-9\\-]+)\"[^>]*>[^<]*</a>");
-    final static Pattern PATTERN_TRACKABLE_GEOCODE = Pattern.compile("<strong>(TB[0-9A-Z]+)[^<]*</strong> to reference this item.");
+    final static Pattern PATTERN_TRACKABLE_GEOCODE = Pattern.compile(Pattern.quote("CoordInfoCode\">") + "(TB[0-9A-Z]+)<");
 
     // multiple error codes, depending on the search term for the trackable code
     final static String ERROR_TB_DOES_NOT_EXIST = "does not exist in the system";
@@ -132,7 +132,7 @@ public final class GCConstants {
     final static Pattern PATTERN_SEARCH_ID = Pattern.compile("name=\"CID\"[^v]*value=\"(\\d+)\"");
     final static Pattern PATTERN_SEARCH_FAVORITE = Pattern.compile("favorite-rank\">([0-9,.]+)</span>");
     final static Pattern PATTERN_SEARCH_FAVORITE_COUNT = Pattern.compile("Add to your Favorites \\((\\d+)");
-    final static Pattern PATTERN_SEARCH_TOTALCOUNT = Pattern.compile("<span>Total Records\\D*(\\d+)<");
+    final static Pattern PATTERN_SEARCH_TOTALCOUNT = Pattern.compile("PageBuilderWidget\"><span>[^<]*?<b>(\\d+)<");
     final static Pattern PATTERN_SEARCH_RECAPTCHA = Pattern.compile("<script[^>]*src=\"[^\"]*/recaptcha/api/challenge\\?k=([^\"]+)\"[^>]*>");
     public final static Pattern PATTERN_SEARCH_RECAPTCHACHALLENGE = Pattern.compile("challenge : '([^']+)'");
     final static Pattern PATTERN_SEARCH_HIDDEN_DATE = Pattern.compile("<td style=\"width:70px\">[^<]+<span class=\"small\">([^<]+)</span>");

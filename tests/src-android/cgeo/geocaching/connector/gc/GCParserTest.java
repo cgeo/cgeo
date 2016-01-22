@@ -3,15 +3,16 @@ package cgeo.geocaching.connector.gc;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.models.Image;
+import cgeo.geocaching.CgeoApplicationTest;
 import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.models.Trackable;
-import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.Image;
+import cgeo.geocaching.models.Trackable;
+import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 import cgeo.geocaching.test.R;
@@ -201,9 +202,7 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
     public static void testNoteParsingWaypointTypes() {
         final Geocache cache = new Geocache();
         cache.setWaypoints(new ArrayList<Waypoint>(), false);
-        cache.setPersonalNote("\"Parking area at PARKING=N 50° 40.666E 006° 58.222\n" +
-                "My calculated final coordinates: FINAL=N 50° 40.777E 006° 58.111\n" +
-                "Get some ice cream at N 50° 40.555E 006° 58.000\"");
+        cache.setPersonalNote("\"Parking area at PARKING=N 50° 40.666E 006° 58.222\n" + "My calculated final coordinates: FINAL=N 50° 40.777E 006° 58.111\n" + "Get some ice cream at N 50° 40.555E 006° 58.000\"");
 
         cache.parseWaypointsFromNote();
         final List<Waypoint> waypoints = cache.getWaypoints();
@@ -229,5 +228,17 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
         assertThat(trackable.getGeocode()).isEqualTo("TB123E");
         final String expectedDetails = CgeoApplication.getInstance().getString(cgeo.geocaching.R.string.trackable_not_activated);
         assertThat(trackable.getDetails()).isEqualTo(expectedDetails);
+    }
+
+    public static void testOnlineCacheUrl() {
+        assertThat(StringUtils.right(CgeoApplicationTest.testSearchByGeocode("GCK25B").getDescription(), 150)).as("Geocaching HQ related web page").contains("http://www.geocaching.com/");
+    }
+
+    public static void testOnlineEventDate() {
+        assertThat(CgeoApplicationTest.testSearchByGeocode("GC68TJE").getHiddenDate()).isEqualTo("2016-01-23");
+    }
+
+    public static void testOnlineWatchCount() {
+        assertThat(CgeoApplicationTest.testSearchByGeocode("GCK25B").getWatchlistCount()).as("Geocaching HQ watch count").isGreaterThan(50);
     }
 }

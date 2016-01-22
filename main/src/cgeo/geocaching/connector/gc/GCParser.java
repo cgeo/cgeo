@@ -540,7 +540,7 @@ public final class GCParser {
         }
 
         // cache found
-        cache.setFound(TextUtils.matches(page, GCConstants.PATTERN_FOUND) || TextUtils.matches(page, GCConstants.PATTERN_FOUND_ALTERNATIVE));
+        cache.setFound(TextUtils.matches(page, GCConstants.PATTERN_FOUND));
 
         // cache type
         cache.setType(CacheType.getByGuid(TextUtils.getMatch(page, GCConstants.PATTERN_TYPE, true, cache.getType().id)));
