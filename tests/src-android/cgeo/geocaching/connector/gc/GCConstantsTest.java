@@ -26,8 +26,8 @@ public class GCConstantsTest extends AndroidTestCase {
     }
 
     public static void testCacheCount() {
-        assertCacheCount(1510, "<span>1.510 Finds</span>");
-        assertCacheCount(1510, "<span>1,510 Finds</span>");
+        assertCacheCount(1510, "<span class=\"cache-count\">1.510 Finds</span>");
+        assertCacheCount(1510, "<span class=\"cache-count\">1,510 Finds</span>");
         assertCacheCount(MOCK_CACHES_FOUND, MockedCacheAndroid.readCachePage("GC2CJPF"));
     }
 
