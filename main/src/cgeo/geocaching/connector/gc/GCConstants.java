@@ -1,5 +1,7 @@
 package cgeo.geocaching.connector.gc;
 
+import cgeo.geocaching.enumerations.LogType;
+
 import org.eclipse.jdt.annotation.NonNull;
 
 import java.util.Arrays;
@@ -47,7 +49,7 @@ public final class GCConstants {
     final static Pattern PATTERN_DIFFICULTY = Pattern.compile("<span id=\"ctl00_ContentBody_uxLegendScale\"[^>]*>[^<]*<img src=\"[^\"]*/images/stars/stars([0-9_]+)\\.gif\"");
     final static Pattern PATTERN_TERRAIN = Pattern.compile("<span id=\"ctl00_ContentBody_Localize[\\d]+\"[^>]*>[^<]*<img src=\"[^\"]*/images/stars/stars([0-9_]+)\\.gif\"");
     final static Pattern PATTERN_OWNER_USERID = Pattern.compile("seek/nearest\\.aspx\\?u=(.*?)\">");
-    final static Pattern PATTERN_FOUND = Pattern.compile("logtypes/48/10.png");
+    final static Pattern PATTERN_FOUND = Pattern.compile("logtypes/48/(" + LogType.FOUND_IT.id + "|" + LogType.ATTENDED.id + ").png");
     final static Pattern PATTERN_OWNER_DISPLAYNAME = Pattern.compile("<div id=\"ctl00_ContentBody_mcd1\">[^<]+<a href=\"[^\"]+\">([^<]+)</a>");
     final static Pattern PATTERN_TYPE = Pattern.compile("<a href=\"/seek/nearest.aspx\\?tx=([0-9a-f-]+)");
     final static Pattern PATTERN_HIDDEN = Pattern.compile("ctl00_ContentBody_mcd2[^:]+:\\s*([0-9-/]+)");
