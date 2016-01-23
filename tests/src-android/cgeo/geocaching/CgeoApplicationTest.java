@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import cgeo.CGeoTestCase;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.gc.GCLogin;
+import cgeo.geocaching.connector.gc.GCMemberState;
 import cgeo.geocaching.connector.gc.GCParser;
 import cgeo.geocaching.connector.gc.MapTokens;
 import cgeo.geocaching.connector.gc.Tile;
@@ -141,7 +142,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
      */
     private static void withMockedLoginDo(final Runnable runnable) {
         final Credentials credentials = Settings.getGcCredentials();
-        final String memberStatus = Settings.getGCMemberStatus();
+        final GCMemberState memberStatus = Settings.getGCMemberStatus();
 
         try {
             runnable.run();
@@ -431,7 +432,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
         GCLogin.getInstance().logout();
         // Modify login data to avoid an automatic login again
         TestSettings.setLogin(new Credentials("c:geo", "c:geo"));
-        Settings.setGCMemberStatus("Basic member");
+        Settings.setGCMemberStatus(GCMemberState.BASIC);
     }
 
 }

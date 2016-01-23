@@ -6,6 +6,7 @@ import cgeo.geocaching.apps.navi.NavigationAppFactory.NavigationAppsEnum;
 import cgeo.geocaching.connector.capability.ICredentials;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.gc.GCConstants;
+import cgeo.geocaching.connector.gc.GCMemberState;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LogTypeTrackable;
 import cgeo.geocaching.list.StoredList;
@@ -340,20 +341,15 @@ public class Settings {
     }
 
     public static boolean isGCPremiumMember() {
-        final String memberStatus = getGCMemberStatus();
-        return StringUtils.equalsIgnoreCase(memberStatus, GCConstants.MEMBER_STATUS_PREMIUM) ||
-                StringUtils.equalsIgnoreCase(memberStatus, GCConstants.MEMBER_STATUS_CHARTER);
+        return getGCMemberStatus().isPremium();
     }
 
-    public static String getGCMemberStatus() {
-        return getString(R.string.pref_memberstatus, "");
+    public static GCMemberState getGCMemberStatus() {
+        return GCMemberState.fromString(getString(R.string.pref_memberstatus, ""));
     }
 
-    public static void setGCMemberStatus(final String memberStatus) {
-        if (StringUtils.isBlank(memberStatus)) {
-            remove(R.string.pref_memberstatus);
-        }
-        putString(R.string.pref_memberstatus, memberStatus);
+    public static void setGCMemberStatus(final GCMemberState memberStatus) {
+        putString(R.string.pref_memberstatus, memberStatus.englishWebsite);
     }
 
     @NonNull

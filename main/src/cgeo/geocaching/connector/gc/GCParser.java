@@ -192,7 +192,7 @@ public final class GCParser {
             cache.setGeocode(TextUtils.getMatch(row, GCConstants.PATTERN_SEARCH_GEOCODE, true, 1, cache.getGeocode(), true));
 
             // cache type
-            cache.setType(CacheType.getByPattern(TextUtils.getMatch(row, GCConstants.PATTERN_SEARCH_TYPE, null)));
+            cache.setType(CacheType.getByWaypointType(TextUtils.getMatch(row, GCConstants.PATTERN_SEARCH_TYPE, null)));
 
             // cache direction - image
             if (Settings.getLoadDirImg()) {
@@ -448,13 +448,14 @@ public final class GCParser {
         final String page = TextUtils.replaceWhitespace(pageIn);
 
         final Geocache cache = new Geocache();
-        cache.setDisabled(page.contains(GCConstants.STRING_DISABLED));
+        final String status = TextUtils.getMatch(page, GCConstants.PATTERN_STATUS, "");
+        cache.setDisabled(containsStatus(status, GCConstants.STATUS_DISABLED));
 
-        cache.setArchived(page.contains(GCConstants.STRING_ARCHIVED));
+        cache.setArchived(containsStatus(status, GCConstants.STATUS_ARCHIVED));
 
         cache.setPremiumMembersOnly(TextUtils.matches(page, GCConstants.PATTERN_PREMIUMMEMBERS));
 
-        cache.setFavorite(TextUtils.matches(page, GCConstants.PATTERN_FAVORITE));
+        cache.setFavorite(TextUtils.matches(page, GCConstants.PATTERN_IS_FAVORITE));
 
         // cache geocode
         cache.setGeocode(TextUtils.getMatch(page, GCConstants.PATTERN_GEOCODE, true, cache.getGeocode()));
@@ -798,6 +799,15 @@ public final class GCParser {
 
         cache.setDetailedUpdatedNow();
         return ImmutablePair.of(StatusCode.NO_ERROR, cache);
+    }
+
+    private static boolean containsStatus(final String status, @NonNull final List<String> patterns) {
+        for (final String pattern : patterns) {
+            if (StringUtils.contains(status, pattern)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Nullable
@@ -2128,7 +2138,7 @@ public final class GCParser {
 
     public static int getFavoritePoints(final String page) {
         if (page != null) {
-            final String favCount = TextUtils.getMatch(page, GCConstants.PATTERN_SEARCH_FAVORITE_COUNT, false, 1, null, true);
+            final String favCount = TextUtils.getMatch(page, GCConstants.PATTERN_USER_FAVORITE_POINTS, false, 1, null, true);
             if (favCount != null) {
                 return Integer.parseInt(favCount);
             }

@@ -10,20 +10,15 @@ import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.settings.Credentials;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
-import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.TextUtils;
-
-import ch.boye.httpclientandroidlib.HttpResponse;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-
-import rx.Observable;
-import rx.functions.Action0;
 
 import android.graphics.drawable.Drawable;
 
@@ -33,6 +28,10 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.regex.Matcher;
+
+import ch.boye.httpclientandroidlib.HttpResponse;
+import rx.Observable;
+import rx.functions.Action0;
 
 public class GCLogin extends AbstractLogin {
 
@@ -215,8 +214,9 @@ public class GCLogin extends AbstractLogin {
     /**
      * Ensure that the web site is in English.
      *
-     * @param previousPage the content of the last loaded page
-     * @return {@code true} if a switch was necessary and succesfully performed (non-English -> English)
+     * @param previousPage
+     *            the content of the last loaded page
+     * @return {@code true} if a switch was necessary and successfully performed (non-English -> English)
      */
     private boolean switchToEnglish(final String previousPage) {
         if (previousPage != null && previousPage.contains(ENGLISH)) {
@@ -290,8 +290,9 @@ public class GCLogin extends AbstractLogin {
                 final String page = StringUtils.defaultString(Network.getResponseData(Network.getRequest("https://www.geocaching.com/account/settings/membership")));
                 final Matcher match = GCConstants.PATTERN_MEMBERSHIP.matcher(page);
                 if (match.find()) {
-                    Log.d("Setting member status to " + match.group(1));
-                    Settings.setGCMemberStatus(match.group(1));
+                    final GCMemberState memberState = GCMemberState.fromString(match.group(1));
+                    Log.d("Setting member status to " + memberState);
+                    Settings.setGCMemberStatus(memberState);
                 } else {
                     Log.w("Cannot determine member status");
                 }
