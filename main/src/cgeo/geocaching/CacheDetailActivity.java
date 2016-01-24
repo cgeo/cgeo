@@ -1,8 +1,5 @@
 package cgeo.geocaching;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
-
 import cgeo.calendar.CalendarAddon;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.AbstractViewPagerActivity;
@@ -80,19 +77,6 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
-import rx.Observable;
-import rx.Observable.OnSubscribe;
-import rx.Subscriber;
-import rx.Subscription;
-import rx.android.app.AppObservable;
-import rx.functions.Action0;
-import rx.functions.Action1;
-import rx.functions.Func0;
-import rx.functions.Func1;
-import rx.schedulers.Schedulers;
-import rx.subscriptions.CompositeSubscription;
-import rx.subscriptions.Subscriptions;
-
 import android.R.color;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -152,6 +136,21 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.regex.Pattern;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import rx.Observable;
+import rx.Observable.OnSubscribe;
+import rx.Subscriber;
+import rx.Subscription;
+import rx.android.app.AppObservable;
+import rx.functions.Action0;
+import rx.functions.Action1;
+import rx.functions.Func0;
+import rx.functions.Func1;
+import rx.schedulers.Schedulers;
+import rx.subscriptions.CompositeSubscription;
+import rx.subscriptions.Subscriptions;
 
 /**
  * Activity to handle all single-cache-stuff.
@@ -329,10 +328,10 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         });
 
         // Load Generic Trackables
-        AppObservable.bindActivity(this,
+        if (StringUtils.isNotBlank(geocode)) {
+            AppObservable.bindActivity(this,
             // Obtain the active connectors and load trackables in parallel.
-            Observable.from(ConnectorFactory.getGenericTrackablesConnectors())
-            .flatMap(new Func1<TrackableConnector, Observable<Trackable>>() {
+            Observable.from(ConnectorFactory.getGenericTrackablesConnectors()).flatMap(new Func1<TrackableConnector, Observable<Trackable>>() {
                 @Override
                 public Observable<Trackable> call(final TrackableConnector trackableConnector) {
                     processedBrands.add(trackableConnector.getBrand());
@@ -343,19 +342,19 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                         }
                     }).subscribeOn(AndroidRxUtils.networkScheduler);
                 }
-            }).toList()
-        ).subscribe(new Action1<List<Trackable>>() {
-            @Override
-            public void call(final List<Trackable> trackables) {
-                // Todo: this is not really a good method, it may lead to duplicates ; ie: in OC connectors.
-                // Store trackables.
-                genericTrackables.addAll(trackables);
-                if (!trackables.isEmpty()) {
-                    // Update the UI if any trackables were found.
-                    notifyDataSetChanged();
+            }).toList()).subscribe(new Action1<List<Trackable>>() {
+                @Override
+                public void call(final List<Trackable> trackables) {
+                    // Todo: this is not really a good method, it may lead to duplicates ; ie: in OC connectors.
+                    // Store trackables.
+                    genericTrackables.addAll(trackables);
+                    if (!trackables.isEmpty()) {
+                        // Update the UI if any trackables were found.
+                        notifyDataSetChanged();
+                    }
                 }
-            }
-        });
+            });
+        }
 
         locationUpdater = new CacheDetailsGeoDirHandler(this);
 
