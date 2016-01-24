@@ -328,10 +328,10 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         });
 
         // Load Generic Trackables
-        AppObservable.bindActivity(this,
+        if (StringUtils.isNotBlank(geocode)) {
+            AppObservable.bindActivity(this,
             // Obtain the active connectors and load trackables in parallel.
-            Observable.from(ConnectorFactory.getGenericTrackablesConnectors())
-            .flatMap(new Func1<TrackableConnector, Observable<Trackable>>() {
+            Observable.from(ConnectorFactory.getGenericTrackablesConnectors()).flatMap(new Func1<TrackableConnector, Observable<Trackable>>() {
                 @Override
                 public Observable<Trackable> call(final TrackableConnector trackableConnector) {
                     processedBrands.add(trackableConnector.getBrand());
@@ -342,19 +342,19 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                         }
                     }).subscribeOn(AndroidRxUtils.networkScheduler);
                 }
-            }).toList()
-        ).subscribe(new Action1<List<Trackable>>() {
-            @Override
-            public void call(final List<Trackable> trackables) {
-                // Todo: this is not really a good method, it may lead to duplicates ; ie: in OC connectors.
-                // Store trackables.
-                genericTrackables.addAll(trackables);
-                if (!trackables.isEmpty()) {
-                    // Update the UI if any trackables were found.
-                    notifyDataSetChanged();
+            }).toList()).subscribe(new Action1<List<Trackable>>() {
+                @Override
+                public void call(final List<Trackable> trackables) {
+                    // Todo: this is not really a good method, it may lead to duplicates ; ie: in OC connectors.
+                    // Store trackables.
+                    genericTrackables.addAll(trackables);
+                    if (!trackables.isEmpty()) {
+                        // Update the UI if any trackables were found.
+                        notifyDataSetChanged();
+                    }
                 }
-            }
-        });
+            });
+        }
 
         locationUpdater = new CacheDetailsGeoDirHandler(this);
 
