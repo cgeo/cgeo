@@ -3,8 +3,8 @@
   <!-- changelog for the master branch -->
   <string name="changelog_master" translatable="false">
     <b>Next feature release:</b>\n
-    · Fix: don\'t show unknown attribute icons for opencaching.org.uk
-    · Fix: import pocket queries from bookmark lists with umlauts
+    · Fix: don\'t show unknown attribute icons for opencaching.org.uk\n
+    · Fix: import pocket queries from bookmark lists with umlauts\n
     \n
     \n
   </string>
