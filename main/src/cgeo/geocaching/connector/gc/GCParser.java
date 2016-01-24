@@ -653,26 +653,24 @@ public final class GCParser {
         try {
             final MatcherWrapper matcherInventory = new MatcherWrapper(GCConstants.PATTERN_INVENTORY, page);
             if (matcherInventory.find()) {
-                if (matcherInventory.groupCount() > 1) {
-                    final String inventoryPre = matcherInventory.group(2);
+                final String inventoryPre = matcherInventory.group();
 
-                    final ArrayList<Trackable> inventory = new ArrayList<>();
-                    if (StringUtils.isNotBlank(inventoryPre)) {
-                        final MatcherWrapper matcherInventoryInside = new MatcherWrapper(GCConstants.PATTERN_INVENTORYINSIDE, inventoryPre);
+                final ArrayList<Trackable> inventory = new ArrayList<>();
+                if (StringUtils.isNotBlank(inventoryPre)) {
+                    final MatcherWrapper matcherInventoryInside = new MatcherWrapper(GCConstants.PATTERN_INVENTORYINSIDE, inventoryPre);
 
-                        while (matcherInventoryInside.find()) {
-                            if (matcherInventoryInside.groupCount() > 0) {
-                                final Trackable inventoryItem = new Trackable();
-                                inventoryItem.forceSetBrand(TrackableBrand.TRAVELBUG);
-                                inventoryItem.setGuid(matcherInventoryInside.group(1));
-                                inventoryItem.setName(matcherInventoryInside.group(2));
+                    while (matcherInventoryInside.find()) {
+                        if (matcherInventoryInside.groupCount() > 0) {
+                            final Trackable inventoryItem = new Trackable();
+                            inventoryItem.forceSetBrand(TrackableBrand.TRAVELBUG);
+                            inventoryItem.setGuid(matcherInventoryInside.group(1));
+                            inventoryItem.setName(matcherInventoryInside.group(2));
 
-                                inventory.add(inventoryItem);
-                            }
+                            inventory.add(inventoryItem);
                         }
                     }
-                    cache.mergeInventory(inventory, EnumSet.of(TrackableBrand.TRAVELBUG));
                 }
+                cache.mergeInventory(inventory, EnumSet.of(TrackableBrand.TRAVELBUG));
             }
         } catch (final RuntimeException e) {
             // failed to parse cache inventory
