@@ -114,7 +114,7 @@ android {
                 exclude '**/*Waypoint*Test.java'
 
                 // TODO: this one fails consistently when running from gradle, needs to be investigated
-                exclude '**/GPXImporterTest.java'
+                //exclude '**/GPXImporterTest.java'
             }
             resources.srcDirs = ['../tests/src']
             res.srcDirs = ['../tests/res']

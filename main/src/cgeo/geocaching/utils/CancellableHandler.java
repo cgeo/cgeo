@@ -6,6 +6,7 @@ import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
 
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.support.annotation.StringRes;
 
@@ -19,6 +20,14 @@ public abstract class CancellableHandler extends Handler {
     protected static final int UPDATE_LOAD_PROGRESS_DETAIL = 42186;
     private volatile boolean cancelled = false;
     private final CompositeSubscription subscriptions = new CompositeSubscription();
+
+    public CancellableHandler(Looper serviceLooper) {
+        super(serviceLooper);
+    }
+
+    public CancellableHandler() {
+        super();
+    }
 
     private static class CancelHolder {
         final Object payload;

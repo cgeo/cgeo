@@ -37,8 +37,4 @@ class ImportGpxZipAttachmentThread extends AbstractImportGpxZipThread {
         return null;
     }
 
-    @Override
-    protected String getSourceDisplayName() {
-        return uri.getLastPathSegment();
-    }
 }

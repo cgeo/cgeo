@@ -21,7 +21,11 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import android.net.Uri;
+import android.os.HandlerThread;
+import android.os.Looper;
 import android.os.Message;
+
+import junit.framework.Test;
 
 import java.io.File;
 import java.io.IOException;
@@ -30,12 +34,13 @@ import java.util.Iterator;
 import java.util.List;
 
 public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
-    private final TestHandler importStepHandler = new TestHandler();
-    private final TestHandler progressHandler = new TestHandler();
+    private TestHandler importStepHandler;
+    private TestHandler progressHandler;
     private int listId;
     private File tempDir;
     private boolean importCacheStaticMaps;
     private boolean importWpStaticMaps;
+    private HandlerThread serviceThread;
 
     public void testGetWaypointsFileNameForGpxFile() throws IOException {
         final String[] gpxFiles = new String[] { "1234567.gpx", "1.gpx", "1234567.9.gpx",
@@ -115,6 +120,8 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         } catch (final InterruptedException e) {
             Log.e("GPXImporterTest.runImportThread", e);
         }
+        importStepHandler.sendEmptyMessage(TestHandler.TERMINATION_MESSAGE); // send End Message
+
         importStepHandler.waitForCompletion();
     }
 
@@ -266,30 +273,58 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         final ImportGpxZipAttachmentThread importThread = new ImportGpxZipAttachmentThread(uri, getInstrumentation().getContext().getContentResolver(), listId, importStepHandler, progressHandler);
         runImportThread(importThread);
 
-        assertImportStepMessages(GPXImporter.IMPORT_STEP_START, GPXImporter.IMPORT_STEP_READ_FILE, GPXImporter.IMPORT_STEP_READ_WPT_FILE, GPXImporter.IMPORT_STEP_STORE_STATIC_MAPS, GPXImporter.IMPORT_STEP_FINISHED);
+        assertImportStepMessages(GPXImporter.IMPORT_STEP_START, GPXImporter.IMPORT_STEP_READ_FILE, GPXImporter.IMPORT_STEP_STORE_STATIC_MAPS, GPXImporter.IMPORT_STEP_FINISHED);
         final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
         assert cache != null;
         assertThat(cache).isNotNull();
         assertCacheProperties(cache);
-        assertThat(cache.getWaypoints()).hasSize(1); // this is the original pocket query result without test waypoint
+        assertThat(cache.getWaypoints()).hasSize(0); // this is the original pocket query result without test waypoint
+        assertThat(importThread.getSourceDisplayName()).isEqualTo("17157344_Großer Ümlaut Täst.gpx");
+    }
+
+    public void testImportGpxZipAttachmentEntities() {
+        final String geocode = "GC448A";
+        removeCacheCompletely(geocode);
+        final Uri uri = Uri.parse("android.resource://cgeo.geocaching.test/raw/pq_entities");
+
+        final ImportGpxZipAttachmentThread importThread = new ImportGpxZipAttachmentThread(uri, getInstrumentation().getContext().getContentResolver(), listId, importStepHandler, progressHandler);
+        runImportThread(importThread);
+
+        assertImportStepMessages(GPXImporter.IMPORT_STEP_START, GPXImporter.IMPORT_STEP_READ_FILE, GPXImporter.IMPORT_STEP_STORE_STATIC_MAPS, GPXImporter.IMPORT_STEP_FINISHED);
+        final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+        assert cache != null;
+        assertThat(cache).isNotNull();
+        assertCacheProperties(cache);
+        assertThat(cache.getWaypoints()).hasSize(0); // this is the original pocket query result without test waypoint
+        assertThat(importThread.getSourceDisplayName()).isEqualTo("17157285_Großer Ümlaut Täst.gpx");
     }
 
     static class TestHandler extends CancellableHandler {
         private final List<Message> messages = new ArrayList<>();
         private long lastMessage = System.currentTimeMillis();
+        private boolean receivedTerminationMessage = false;
+        private static final int TERMINATION_MESSAGE = 9999;
+
+        public TestHandler(Looper serviceLooper) {
+            super(serviceLooper);
+        }
 
         @Override
         public synchronized void handleRegularMessage(final Message msg) {
             final Message msg1 = Message.obtain();
             msg1.copyFrom(msg);
-            messages.add(msg1);
+            if (msg1.what == TERMINATION_MESSAGE) {
+                receivedTerminationMessage = true;
+            } else {
+                messages.add(msg1);
+            }
             lastMessage = System.currentTimeMillis();
             notifyAll();
         }
 
         public synchronized void waitForCompletion(final long milliseconds) {
             try {
-                while (System.currentTimeMillis() - lastMessage <= milliseconds && !hasTerminatingMessage()) {
+                while ((System.currentTimeMillis() - lastMessage <= milliseconds) && !hasTerminatingMessage()) {
                     wait(milliseconds);
                 }
             } catch (final InterruptedException e) {
@@ -298,8 +333,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         }
 
         private boolean hasTerminatingMessage() {
-            final Message recentMessage = messages.get(messages.size() - 1);
-            return recentMessage.what == GPXImporter.IMPORT_STEP_CANCELED || recentMessage.what == GPXImporter.IMPORT_STEP_FINISHED || recentMessage.what == GPXImporter.IMPORT_STEP_FINISHED_WITH_ERROR;
+            return receivedTerminationMessage;
         }
 
         public void waitForCompletion() {
@@ -311,6 +345,12 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
     @Override
     protected void setUp() throws Exception {
         super.setUp();
+
+        serviceThread = new HandlerThread("[" + getClass().getSimpleName() + "Thread]");
+        serviceThread.start();
+        Looper serviceLooper = serviceThread.getLooper();
+        importStepHandler = new TestHandler(serviceLooper);
+        progressHandler = new TestHandler(serviceLooper);
 
         final String globalTempDir = System.getProperty("java.io.tmpdir");
         assertThat(StringUtils.isNotBlank(globalTempDir)).overridingErrorMessage("java.io.tmpdir is not defined").isTrue();
@@ -338,6 +378,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         FileUtils.deleteDirectory(tempDir);
         TestSettings.setStoreOfflineMaps(importCacheStaticMaps);
         TestSettings.setStoreOfflineWpMaps(importWpStaticMaps);
+        serviceThread.quit();
         super.tearDown();
     }
 }

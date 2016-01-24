@@ -8,10 +8,12 @@ import org.apache.commons.compress.archivers.zip.ZipArchiveInputStream;
 import org.apache.commons.lang3.StringUtils;
 
 import android.os.Handler;
+import android.text.Html;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URLDecoder;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.zip.ZipEntry;
@@ -19,6 +21,7 @@ import java.util.zip.ZipEntry;
 abstract class AbstractImportGpxZipThread extends AbstractImportGpxThread {
 
     public static final String ENCODING = "cp437"; // Geocaching.com used windows cp 437 encoding
+    private String gpxFileName = null;
 
     protected AbstractImportGpxZipThread(final int listId, final Handler importStepHandler, final CancellableHandler progressHandler) {
         super(listId, importStepHandler, progressHandler);
@@ -34,8 +37,9 @@ abstract class AbstractImportGpxZipThread extends AbstractImportGpxThread {
             int acceptedFiles = 0;
             int ignoredFiles = 0;
             for (ZipEntry zipEntry = zisPass1.getNextZipEntry(); zipEntry != null; zipEntry = zisPass1.getNextZipEntry()) {
-                if (StringUtils.endsWithIgnoreCase(zipEntry.getName(), GPXImporter.GPX_FILE_EXTENSION)) {
-                    if (!StringUtils.endsWithIgnoreCase(zipEntry.getName(), GPXImporter.WAYPOINTS_FILE_SUFFIX_AND_EXTENSION)) {
+                gpxFileName = zipEntry.getName();
+                if (StringUtils.endsWithIgnoreCase(gpxFileName, GPXImporter.GPX_FILE_EXTENSION)) {
+                    if (!StringUtils.endsWithIgnoreCase(gpxFileName, GPXImporter.WAYPOINTS_FILE_SUFFIX_AND_EXTENSION)) {
                         importStepHandler.sendMessage(importStepHandler.obtainMessage(GPXImporter.IMPORT_STEP_READ_FILE, R.string.gpx_import_loading_caches, (int) zipEntry.getSize()));
                         caches = parser.parse(new NoCloseInputStream(zisPass1), progressHandler);
                         acceptedFiles++;
@@ -65,6 +69,11 @@ abstract class AbstractImportGpxZipThread extends AbstractImportGpxThread {
         }
 
         return caches;
+    }
+
+    @Override
+    protected String getSourceDisplayName() {
+        return Html.fromHtml(gpxFileName).toString();
     }
 
     protected abstract InputStream getInputStream() throws IOException;
