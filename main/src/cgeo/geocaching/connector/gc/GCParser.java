@@ -1786,7 +1786,7 @@ public final class GCParser {
                         "tkn", userToken,
                         "idx", "1",
                         "num", String.valueOf(GCConstants.NUMBER_OF_LOGS),
-                        "decrypt", "true");
+                        "decrypt", "false"); // fetch encrypted logs as such
                 if (logType != Logs.ALL) {
                     params.add(logType.getParamName(), Boolean.toString(Boolean.TRUE));
                 }
