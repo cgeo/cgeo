@@ -719,6 +719,7 @@
     <string name="cache_personal_note_upload">Upload</string>
     <string name="cache_personal_note_uploading">Uploading personal note</string>
     <string name="cache_personal_note_upload_done">Personal note uploaded</string>
+    <string name="cache_personal_note_upload_error">Error uploading personal note</string>
     <string name="cache_personal_note_upload_cancelled">Personal note upload cancelled</string>
     <string name="cache_description">Description</string>
     <string name="cache_description_long">Long Description</string>
