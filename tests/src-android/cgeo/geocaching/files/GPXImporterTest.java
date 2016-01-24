@@ -258,6 +258,22 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         assertThat(cache.getWaypoints()).hasSize(1); // this is the original pocket query result without test waypoint
     }
 
+    public void testImportGpxZipAttachmentCp437() {
+        final String geocode = "GC448A";
+        removeCacheCompletely(geocode);
+        final Uri uri = Uri.parse("android.resource://cgeo.geocaching.test/raw/pq_cp437");
+
+        final ImportGpxZipAttachmentThread importThread = new ImportGpxZipAttachmentThread(uri, getInstrumentation().getContext().getContentResolver(), listId, importStepHandler, progressHandler);
+        runImportThread(importThread);
+
+        assertImportStepMessages(GPXImporter.IMPORT_STEP_START, GPXImporter.IMPORT_STEP_READ_FILE, GPXImporter.IMPORT_STEP_READ_WPT_FILE, GPXImporter.IMPORT_STEP_STORE_STATIC_MAPS, GPXImporter.IMPORT_STEP_FINISHED);
+        final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+        assert cache != null;
+        assertThat(cache).isNotNull();
+        assertCacheProperties(cache);
+        assertThat(cache.getWaypoints()).hasSize(1); // this is the original pocket query result without test waypoint
+    }
+
     static class TestHandler extends CancellableHandler {
         private final List<Message> messages = new ArrayList<>();
         private long lastMessage = System.currentTimeMillis();

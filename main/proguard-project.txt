@@ -35,6 +35,7 @@
 -dontnote ch.boye.httpclientandroidlib.**
 -dontwarn ch.boye.httpclientandroidlib.impl.auth.NegotiateScheme
 -dontwarn  org.springframework.**
+-dontwarn org.tukaani.xz.**
 
 -keepclasseswithmembers class * {
     public <init>(android.content.Context, android.util.AttributeSet);
