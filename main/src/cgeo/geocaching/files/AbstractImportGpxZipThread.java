@@ -1,7 +1,7 @@
 package cgeo.geocaching.files;
 
-import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.R;
+import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.utils.CancellableHandler;
 
 import org.apache.commons.compress.archivers.zip.ZipArchiveInputStream;
@@ -15,7 +15,6 @@ import java.io.InputStream;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.zip.ZipEntry;
-import java.util.zip.ZipInputStream;
 
 abstract class AbstractImportGpxZipThread extends AbstractImportGpxThread {
 
