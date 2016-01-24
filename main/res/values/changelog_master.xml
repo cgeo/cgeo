@@ -5,6 +5,7 @@
     <b>Next feature release:</b>\n
     · Fix: don\'t show unknown attribute icons for opencaching.org.uk\n
     · Fix: import pocket queries from bookmark lists with umlauts\n
+    · Change: encrypted log entries are shown encrypted initially\n
     \n
     \n
   </string>
