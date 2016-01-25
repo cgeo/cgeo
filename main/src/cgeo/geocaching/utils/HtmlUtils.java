@@ -62,13 +62,20 @@ public final class HtmlUtils {
         return Html.fromHtml(result).toString().trim();
     }
 
+    /**
+     * remove all tags that completely encapsulate the given HTML, e.g. all p and span tags around the content
+     */
     @NonNull
-    public static String removeExtraParagraph(final String htmlIn) {
-        final String html = StringUtils.trim(htmlIn);
-        if (StringUtils.startsWith(html, "<p>") && StringUtils.endsWith(html, "</p>")) {
-            final String paragraph = StringUtils.substring(html, "<p>".length(), html.length() - "</p>".length()).trim();
-            if (extractText(paragraph).equals(paragraph)) {
-                return paragraph;
+    public static String removeExtraTags(final String htmlIn) {
+        String html = StringUtils.trim(htmlIn);
+        if (StringUtils.startsWith(html, "<") && StringUtils.endsWith(html, ">")) {
+            final String tag = "<" + StringUtils.substringBetween(html, "<", ">") + ">";
+            if (StringUtils.isNotBlank(tag) && StringUtils.length(tag) < 10) {
+                final String endTag = StringUtils.left(tag, 1) + "/" + StringUtils.substring(tag, 1);
+                if (StringUtils.startsWith(html, tag) && StringUtils.endsWith(html, endTag) && StringUtils.indexOf(html, endTag) == StringUtils.length(html) - StringUtils.length(endTag)) {
+                    html = StringUtils.substring(html, tag.length(), html.length() - endTag.length()).trim();
+                    return removeExtraTags(html);
+                }
             }
         }
         return html;

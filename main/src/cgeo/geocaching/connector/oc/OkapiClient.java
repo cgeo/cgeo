@@ -526,7 +526,7 @@ final class OkapiClient {
                         parseUser(logResponse.get(LOG_USER)),
                         date.getTime(),
                         parseLogType(logResponse.get(LOG_TYPE).asText()),
-                        HtmlUtils.removeExtraParagraph(logResponse.get(LOG_COMMENT).asText().trim()));
+                        HtmlUtils.removeExtraTags(logResponse.get(LOG_COMMENT).asText().trim()));
                 result.add(log);
             } catch (final NullPointerException e) {
                 Log.e("OkapiClient.parseLogs", e);

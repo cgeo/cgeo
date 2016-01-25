@@ -1651,7 +1651,7 @@ public final class GCParser {
         }
 
         // trackable goal
-        trackable.setGoal(HtmlUtils.removeExtraParagraph(convertLinks(TextUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_GOAL, true, trackable.getGoal()))));
+        trackable.setGoal(HtmlUtils.removeExtraTags(convertLinks(TextUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_GOAL, true, trackable.getGoal()))));
 
         // trackable details & image
         try {
@@ -1664,7 +1664,7 @@ public final class GCParser {
                     trackable.setImage(StringUtils.replace(image, "/display/", "/large/"));
                 }
                 if (StringUtils.isNotEmpty(details) && !StringUtils.equals(details, "No additional details available.")) {
-                    trackable.setDetails(HtmlUtils.removeExtraParagraph(convertLinks(details)));
+                    trackable.setDetails(HtmlUtils.removeExtraTags(convertLinks(details)));
                 }
             }
         } catch (final RuntimeException e) {
