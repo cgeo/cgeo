@@ -26,6 +26,7 @@ public class PocketQueryListAdapter extends ArrayAdapter<PocketQuery> {
         @Bind(R.id.label) protected TextView label;
         @Bind(R.id.caches) protected TextView caches;
         @Bind(R.id.download) protected Button download;
+        @Bind(R.id.cachelist) protected Button cachelist;
 
         public ViewHolder(final View view) {
             super(view);
@@ -52,7 +53,7 @@ public class PocketQueryListAdapter extends ArrayAdapter<PocketQuery> {
             holder = (ViewHolder) view.getTag();
         }
 
-        holder.label.setOnClickListener(new View.OnClickListener() {
+        holder.cachelist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
                 final Activity activity = (Activity) v.getContext();
@@ -67,10 +68,9 @@ public class PocketQueryListAdapter extends ArrayAdapter<PocketQuery> {
                 CacheListActivity.startActivityPocketDownload(activity, pocketQuery);
             }
         });
-        holder.download.setVisibility(pocketQuery.isDownloadable()?View.VISIBLE:View.INVISIBLE);
+        holder.download.setVisibility(pocketQuery.isDownloadable() ? View.VISIBLE : View.GONE);
 
         holder.label.setText(pocketQuery.getName());
-        holder.label.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_menu_info_details, 0, 0, 0);
         final int caches = pocketQuery.getMaxCaches();
         holder.caches.setText(caches >= 0 ? CgeoApplication.getInstance().getResources().getQuantityString(R.plurals.cache_counts, caches, caches) : StringUtils.EMPTY);
 
