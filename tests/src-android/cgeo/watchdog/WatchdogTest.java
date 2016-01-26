@@ -61,7 +61,7 @@ public class WatchdogTest extends CGeoTestCase {
 
     private static void checkWebsite(final String connectorName, final String host) {
 
-        // temporarily disable oc.es, oc.nl
+        // temporarily disable oc.es, gk.org
         if (connectorName.equalsIgnoreCase("geocaching website opencaching.es")) return;
         if (connectorName.equalsIgnoreCase("trackable website geokrety.org")) return;
 
