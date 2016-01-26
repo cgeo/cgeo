@@ -63,7 +63,7 @@ public class WatchdogTest extends CGeoTestCase {
 
         // temporarily disable oc.es, oc.nl
         if (connectorName.equalsIgnoreCase("geocaching website opencaching.es")) return;
-        if (connectorName.equalsIgnoreCase("geocaching website opencaching.nl")) return;
+        if (connectorName.equalsIgnoreCase("trackable website geokrety.org")) return;
 
         final String url = "http://" + host + "/";
         final String page = Network.getResponseData(Network.getRequest(url));
