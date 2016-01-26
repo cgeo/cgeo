@@ -24,8 +24,4 @@ class ImportGpxZipFileThread extends AbstractImportGpxZipThread {
         return new FileInputStream(cacheFile);
     }
 
-    @Override
-    protected String getSourceDisplayName() {
-        return cacheFile.getName();
-    }
 }
