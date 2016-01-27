@@ -12,9 +12,9 @@ import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.mapsforge.android.maps.mapgenerator.MapGeneratorInternal;
-import org.mapsforge.map.reader.MapDatabase;
-import org.mapsforge.map.reader.header.FileOpenResult;
+import org.mapsforge.v3.android.maps.mapgenerator.MapGeneratorInternal;
+import org.mapsforge.v3.map.reader.MapDatabase;
+import org.mapsforge.v3.map.reader.header.FileOpenResult;
 
 import android.app.Activity;
 import android.content.res.Resources;

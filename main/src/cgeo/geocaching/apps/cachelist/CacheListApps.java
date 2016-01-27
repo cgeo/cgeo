@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public enum CacheListApps {
-        INTERNAL(new InternalCacheListMap()),
-        LOCUS_SHOW(new LocusShowCacheListApp()),
-        LOCUS_EXPORT(new LocusExportCacheListApp()),
+
+    INTERNAL(new InternalCacheListMap()),
+    INTERNAL_NEW(new InternalCacheListMapNew()),
+    LOCUS_SHOW(new LocusShowCacheListApp()),
+    LOCUS_EXPORT(new LocusExportCacheListApp()),
     MAPS_ME(new MapsMeCacheListApp());
 
     private final CacheListApp app;

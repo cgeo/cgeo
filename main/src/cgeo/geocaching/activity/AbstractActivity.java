@@ -21,7 +21,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -34,7 +34,7 @@ import butterknife.ButterKnife;
 import rx.Subscription;
 import rx.subscriptions.Subscriptions;
 
-public abstract class AbstractActivity extends ActionBarActivity implements IAbstractActivity {
+public abstract class AbstractActivity extends AppCompatActivity implements IAbstractActivity {
 
     protected CgeoApplication app = null;
     protected Resources res = null;

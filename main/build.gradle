@@ -11,7 +11,7 @@ import org.apache.tools.ant.filters.ReplaceTokens
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion "Google Inc.:Google APIs:22"
+    compileSdkVersion "Google Inc.:Google APIs:23"
     buildToolsVersion project.buildToolsVersion
 
     compileOptions {
@@ -24,7 +24,7 @@ android {
         // TODO fill this section and remove the values from AndroidManifest only after the full switch to gradle
         // As these values override the manifest, we might otherwise use different values in gradle and non-gradle builds.
         minSdkVersion 9
-        targetSdkVersion 21
+        targetSdkVersion 23
         versionName versionNameFromDate()
         versionCode versionCodeFromDate(0)
 
@@ -220,8 +220,13 @@ dependencies {
     compile files('libs/httpclientandroidlib-1.1.2.jar')
     compile files('libs/locus-api-4.0.jar')
     compile files('libs/mapsforge-map-0.3.0-jar-with-dependencies.jar')
+    compile files('libs/androidsvg-1.2.2-beta-1.jar')
+    compile files('libs/mapsforge-core-0.6.0.jar')
+    compile files('libs/mapsforge-map-0.6.0.jar')
+    compile files('libs/mapsforge-map-android-0.6.0.jar')
+    compile files('libs/mapsforge-map-reader-0.6.0.jar')
 
-    compile 'com.android.support:appcompat-v7:20.0.0'
+    compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.google.android.gms:play-services-location:8.4.0'
 
     // Apache Commons

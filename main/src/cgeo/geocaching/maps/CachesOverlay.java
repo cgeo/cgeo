@@ -9,6 +9,7 @@ import cgeo.geocaching.WaypointPopup;
 import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.connector.gc.GCMap;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.enumerations.CoordinatesType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.maps.interfaces.CachesOverlayItemImpl;
@@ -225,9 +226,9 @@ public class CachesOverlay extends AbstractItemizedOverlay {
             }
 
             final IWaypoint coordinate = item.getCoord();
-            final String coordType = coordinate.getCoordType();
+            final CoordinatesType coordType = coordinate.getCoordType();
 
-            if (StringUtils.equalsIgnoreCase(coordType, "cache") && StringUtils.isNotBlank(coordinate.getGeocode())) {
+            if (coordType == CoordinatesType.CACHE && StringUtils.isNotBlank(coordinate.getGeocode())) {
                 final Geocache cache = DataStore.loadCache(coordinate.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
                 if (cache != null) {
                     final RequestDetailsThread requestDetailsThread = new RequestDetailsThread(cache);
@@ -242,7 +243,7 @@ public class CachesOverlay extends AbstractItemizedOverlay {
                 return false;
             }
 
-            if (StringUtils.equalsIgnoreCase(coordType, "waypoint") && coordinate.getId() >= 0) {
+            if (coordType == CoordinatesType.WAYPOINT && coordinate.getId() >= 0) {
                 CGeoMap.markCacheAsDirty(coordinate.getGeocode());
                 WaypointPopup.startActivity(context, coordinate.getId(), coordinate.getGeocode());
             } else {

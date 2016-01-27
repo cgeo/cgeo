@@ -19,6 +19,7 @@ import cgeo.geocaching.connector.gc.UncertainProperty;
 import cgeo.geocaching.connector.trackable.TrackableBrand;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.enumerations.CoordinatesType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.RemoveFlag;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
@@ -27,6 +28,7 @@ import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.files.GPXParser;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.maps.mapsforge.v6.caches.GeoitemRef;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
@@ -1592,8 +1594,8 @@ public class Geocache implements IWaypoint {
     }
 
     @Override
-    public String getCoordType() {
-        return "cache";
+    public CoordinatesType getCoordType() {
+        return CoordinatesType.CACHE;
     }
 
     public Subscription drop(final Handler handler) {
@@ -1961,6 +1963,10 @@ public class Geocache implements IWaypoint {
     public void showHintToast(final Activity activity) {
         final String hint = getHint();
         ActivityMixin.showToast(activity, StringUtils.defaultIfBlank(hint, activity.getString(R.string.cache_hint_not_available)));
+    }
+
+    public GeoitemRef getGeoitemRef() {
+        return new GeoitemRef(getGeocode(), getCoordType(), getGeocode(), 0, getName(), getType().markerId);
     }
 
 }

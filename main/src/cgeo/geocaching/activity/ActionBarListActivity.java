@@ -1,6 +1,7 @@
 package cgeo.geocaching.activity;
 
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.HeaderViewListAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -8,7 +9,7 @@ import android.widget.ListView;
 /**
  * Compatbility Class until cgeo switches from ListActivities to ListFragments
  */
-public class ActionBarListActivity extends ActionBarActivity {
+public class ActionBarListActivity extends AppCompatActivity {
 
     private ListView mListView;
     protected ListView getListView() {

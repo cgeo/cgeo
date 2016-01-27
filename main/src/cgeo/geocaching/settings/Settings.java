@@ -1166,6 +1166,14 @@ public class Settings {
         putString(R.string.pref_caches_history, StringUtils.join(history, HISTORY_SEPARATOR));
     }
 
+    public static boolean useNewMapAsDefault() {
+        return getBoolean(R.string.pref_new_map_as_default, false);
+    }
+
+    static void setUseNewMapAsDefault(final boolean useNewMapAsDefault) {
+        putBoolean(R.string.pref_new_map_as_default, useNewMapAsDefault);
+    }
+
     public static boolean useHardwareAcceleration() {
         return getBoolean(R.string.pref_hardware_acceleration, !HW_ACCEL_DISABLED_BY_DEFAULT);
     }
