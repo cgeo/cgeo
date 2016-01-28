@@ -25,8 +25,6 @@ import android.os.HandlerThread;
 import android.os.Looper;
 import android.os.Message;
 
-import junit.framework.Test;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -305,7 +303,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         private boolean receivedTerminationMessage = false;
         private static final int TERMINATION_MESSAGE = 9999;
 
-        public TestHandler(Looper serviceLooper) {
+        public TestHandler(final Looper serviceLooper) {
             super(serviceLooper);
         }
 
@@ -348,7 +346,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
 
         serviceThread = new HandlerThread("[" + getClass().getSimpleName() + "Thread]");
         serviceThread.start();
-        Looper serviceLooper = serviceThread.getLooper();
+        final Looper serviceLooper = serviceThread.getLooper();
         importStepHandler = new TestHandler(serviceLooper);
         progressHandler = new TestHandler(serviceLooper);
 
