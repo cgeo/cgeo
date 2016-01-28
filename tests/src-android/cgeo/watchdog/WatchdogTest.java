@@ -11,6 +11,7 @@ import cgeo.geocaching.connector.trackable.TrackableConnector;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.network.Network;
+import cgeo.geocaching.test.NotForIntegrationTests;
 
 /**
  * This test is intended to run regularly on our CI server, to verify the availability of several geocaching websites
@@ -20,28 +21,35 @@ import cgeo.geocaching.network.Network;
  * </p>
  *
  */
+
 public class WatchdogTest extends CGeoTestCase {
 
+    @NotForIntegrationTests
     public static void testOpenCachingDE() {
         downloadOpenCaching("OC1234");
     }
 
+    @NotForIntegrationTests
     public static void testOpenCachingNL() {
         downloadOpenCaching("OB1AF6");
     }
 
+    @NotForIntegrationTests
     public static void testOpenCachingPL() {
         downloadOpenCaching("OP89HC");
     }
 
+    @NotForIntegrationTests
     public static void testOpenCachingRO() {
         downloadOpenCaching("OR011D");
     }
 
+    @NotForIntegrationTests
     public static void testOpenCachingUK() {
         downloadOpenCaching("OK0345");
     }
 
+    @NotForIntegrationTests
     public static void testOpenCachingUS() {
         downloadOpenCaching("OU0331");
     }
@@ -69,6 +77,7 @@ public class WatchdogTest extends CGeoTestCase {
         assertThat(page).overridingErrorMessage("Failed to get response from " + connectorName).isNotEmpty();
     }
 
+    @NotForIntegrationTests
     public static void testTrackableWebsites() {
         for (final TrackableConnector trackableConnector : ConnectorFactory.getTrackableConnectors()) {
             if (trackableConnector != ConnectorFactory.UNKNOWN_TRACKABLE_CONNECTOR) {
@@ -77,6 +86,7 @@ public class WatchdogTest extends CGeoTestCase {
         }
     }
 
+    @NotForIntegrationTests
     public static void testGeocachingWebsites() {
         for (final IConnector connector : ConnectorFactory.getConnectors()) {
             if (connector != ConnectorFactory.UNKNOWN_CONNECTOR) {
@@ -84,5 +94,4 @@ public class WatchdogTest extends CGeoTestCase {
             }
         }
     }
-
 }
