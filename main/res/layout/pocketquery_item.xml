@@ -12,6 +12,22 @@
     android:paddingTop="7dip"
     tools:context=".ui.PocketQueryListAdapter">
 
+    <Button
+        android:id="@+id/cachelist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/abc_ic_search"
+        android:gravity="left|center_vertical"
+        android:layout_alignParentRight="true"/>
+
+    <Button
+        android:id="@+id/download"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/cachelist"
+        android:drawableLeft="@drawable/ic_menu_save"
+        android:gravity="left|center_vertical" />
+
     <TextView
         android:id="@+id/label"
         android:layout_width="fill_parent"
@@ -23,16 +39,8 @@
         android:textColor="?text_color"
         android:textIsSelectable="false"
         android:textSize="22sp"
-        android:layout_alignParentLeft="true"/>
-
-    <Button
-        android:id="@+id/download"
-        android:layout_width="96dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:background="@android:color/transparent"
-        android:drawableRight="@drawable/ic_menu_save"
-        android:gravity="right|center_vertical" />
+        android:paddingRight="5dip"
+        android:layout_toLeftOf="@id/download"/>
 
     <TextView
         android:id="@+id/caches"
