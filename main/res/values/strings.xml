@@ -1465,4 +1465,8 @@
     <string name="pq_my_finds">My finds</string>
     <string name="caches_refresh_all_warning">This action may lead to high network traffic. Are you sure you want to batch refresh all caches?</string>
 
+    <string name="invitation_action">Invite friends</string>
+    <string name="invitation_title">Invite friends to use c:geo</string>
+    <string name="invitation_message">Try the c:geo app for geocaching</string>
+
 </resources>

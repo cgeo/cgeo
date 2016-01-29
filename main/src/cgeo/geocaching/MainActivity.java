@@ -1,41 +1,5 @@
 package cgeo.geocaching;
 
-import cgeo.geocaching.activity.AbstractActionBarActivity;
-import cgeo.geocaching.activity.ShowcaseViewBuilder;
-import cgeo.geocaching.connector.ConnectorFactory;
-import cgeo.geocaching.connector.capability.ILogin;
-import cgeo.geocaching.connector.gc.PocketQueryListActivity;
-import cgeo.geocaching.enumerations.CacheType;
-import cgeo.geocaching.enumerations.StatusCode;
-import cgeo.geocaching.list.PseudoList;
-import cgeo.geocaching.list.StoredList;
-import cgeo.geocaching.location.AndroidGeocoder;
-import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.location.Units;
-import cgeo.geocaching.maps.CGeoMap;
-import cgeo.geocaching.network.Network;
-import cgeo.geocaching.sensors.GeoData;
-import cgeo.geocaching.sensors.GeoDirHandler;
-import cgeo.geocaching.sensors.GpsStatusProvider;
-import cgeo.geocaching.sensors.GpsStatusProvider.Status;
-import cgeo.geocaching.sensors.Sensors;
-import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.settings.SettingsActivity;
-import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.ui.dialog.Dialogs;
-import cgeo.geocaching.utils.AndroidRxUtils;
-import cgeo.geocaching.utils.DatabaseBackupUtils;
-import cgeo.geocaching.utils.Formatter;
-import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.TextUtils;
-import cgeo.geocaching.utils.Version;
-
-import com.github.amlcurran.showcaseview.targets.ActionViewTarget;
-import com.google.zxing.integration.android.IntentIntegrator;
-import com.google.zxing.integration.android.IntentResult;
-
-import org.apache.commons.lang3.StringUtils;
-
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.SearchManager;
@@ -63,6 +27,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.github.amlcurran.showcaseview.targets.ActionViewTarget;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
+
+import org.apache.commons.lang3.StringUtils;
+
 import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -72,6 +42,36 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import cgeo.geocaching.activity.AbstractActionBarActivity;
+import cgeo.geocaching.activity.ShowcaseViewBuilder;
+import cgeo.geocaching.connector.ConnectorFactory;
+import cgeo.geocaching.connector.capability.ILogin;
+import cgeo.geocaching.connector.gc.PocketQueryListActivity;
+import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.enumerations.StatusCode;
+import cgeo.geocaching.list.PseudoList;
+import cgeo.geocaching.list.StoredList;
+import cgeo.geocaching.location.AndroidGeocoder;
+import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.location.Units;
+import cgeo.geocaching.maps.CGeoMap;
+import cgeo.geocaching.network.Network;
+import cgeo.geocaching.playservices.AppInvite;
+import cgeo.geocaching.sensors.GeoData;
+import cgeo.geocaching.sensors.GeoDirHandler;
+import cgeo.geocaching.sensors.GpsStatusProvider;
+import cgeo.geocaching.sensors.GpsStatusProvider.Status;
+import cgeo.geocaching.sensors.Sensors;
+import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.settings.SettingsActivity;
+import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.DatabaseBackupUtils;
+import cgeo.geocaching.utils.Formatter;
+import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.TextUtils;
+import cgeo.geocaching.utils.Version;
 import rx.Observable;
 import rx.android.app.AppObservable;
 import rx.android.schedulers.AndroidSchedulers;
@@ -93,9 +93,6 @@ public class MainActivity extends AbstractActionBarActivity {
     @Bind(R.id.nav_location) protected TextView navLocation;
     @Bind(R.id.offline_count) protected TextView countBubble;
     @Bind(R.id.info_area) protected LinearLayout infoArea;
-
-    public static final int SETTINGS_ACTIVITY_REQUEST_CODE = 1;
-    public static final int SEARCH_REQUEST_CODE = 2;
 
     /**
      * view of the action bar search
@@ -346,6 +343,7 @@ public class MainActivity extends AbstractActionBarActivity {
     public boolean onPrepareOptionsMenu(final Menu menu) {
         super.onPrepareOptionsMenu(menu);
         menu.findItem(R.id.menu_pocket_queries).setVisible(Settings.isGCConnectorActive() && Settings.isGCPremiumMember());
+        menu.findItem(R.id.menu_app_invite).setVisible(AppInvite.isAvailable());
         return true;
     }
 
@@ -364,7 +362,7 @@ public class MainActivity extends AbstractActionBarActivity {
                 startActivity(new Intent(this, UsefulAppsActivity.class));
                 return true;
             case R.id.menu_settings:
-                startActivityForResult(new Intent(this, SettingsActivity.class), SETTINGS_ACTIVITY_REQUEST_CODE);
+                startActivityForResult(new Intent(this, SettingsActivity.class), Intents.SETTINGS_ACTIVITY_REQUEST_CODE);
                 return true;
             case R.id.menu_history:
                 startActivity(CacheListActivity.getHistoryIntent(this));
@@ -377,6 +375,9 @@ public class MainActivity extends AbstractActionBarActivity {
                     return true;
                 }
                 startActivity(new Intent(this, PocketQueryListActivity.class));
+                return true;
+            case R.id.menu_app_invite:
+                AppInvite.send(this);
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -394,7 +395,7 @@ public class MainActivity extends AbstractActionBarActivity {
 
     @Override
     public void onActivityResult(final int requestCode, final int resultCode, final Intent intent) {
-        if (requestCode == SETTINGS_ACTIVITY_REQUEST_CODE) {
+        if (requestCode == Intents.SETTINGS_ACTIVITY_REQUEST_CODE) {
             if (resultCode == SettingsActivity.RESTART_NEEDED) {
                 CgeoApplication.getInstance().restartApplication();
             }
@@ -406,7 +407,7 @@ public class MainActivity extends AbstractActionBarActivity {
                     return;
                 }
                 SearchActivity.startActivityScan(scan, this);
-            } else if (requestCode == SEARCH_REQUEST_CODE) {
+            } else if (requestCode == Intents.SEARCH_REQUEST_CODE) {
                 // SearchActivity activity returned without making a search
                 if (resultCode == RESULT_CANCELED) {
                     String query = intent.getStringExtra(SearchManager.QUERY);

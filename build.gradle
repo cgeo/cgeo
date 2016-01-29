@@ -72,6 +72,9 @@ buildscript {
 
 		// un-mocking of portable Android classes
 		classpath 'de.mobilej.unmock:UnMockPlugin:0.3.6'
+
+		// Google Services (App Invite) has its own Gradle plugin
+		classpath 'com.google.gms:google-services:1.5.0'
     }
 }
 

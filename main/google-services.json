@@ -1,0 +1,51 @@
+{
+  "project_info": {
+    "project_id": "cgeo-geocaching",
+    "project_number": "345159095266",
+    "name": "cgeo"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:345159095266:android:f34b0a3ff2ce4661",
+        "client_id": "android:cgeo.geocaching",
+        "client_type": 1,
+        "android_client_info": {
+          "package_name": "cgeo.geocaching"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "345159095266-mb1csc50ev4laiunik0ahmhktberpd5p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "cgeo.geocaching",
+            "certificate_hash": "449BE14E69F3C98CAC748AE09118A2454701839C"
+          }
+        }
+      ],
+      "api_key": [],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "cloud_messaging_service": {
+          "status": 1,
+          "apns_config": []
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": []
+        },
+        "google_signin_service": {
+          "status": 1
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "client_info": [],
+  "ARTIFACT_VERSION": "1"
+}

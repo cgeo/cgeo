@@ -1,19 +1,22 @@
 package cgeo.geocaching;
 
-import cgeo.geocaching.enumerations.CacheListType;
+import android.content.Intent;
+import android.os.Bundle;
 
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 
-import android.content.Intent;
-import android.os.Bundle;
+import cgeo.geocaching.enumerations.CacheListType;
 
 public class Intents {
+
+    public static final int SETTINGS_ACTIVITY_REQUEST_CODE = 1;
+    public static final int SEARCH_REQUEST_CODE = 2;
+    public static final int APP_INVITE_REQUEST_CODE = 3;
 
     private Intents() {
         // Do not instantiate
     }
-
     private static final String PREFIX = "cgeo.geocaching.intent.extra.";
 
     public static final String EXTRA_ADDRESS = PREFIX + "address";

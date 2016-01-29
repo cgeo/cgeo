@@ -1,8 +1,25 @@
 package cgeo.geocaching;
 
-import butterknife.ButterKnife;
-import butterknife.Bind;
+import android.app.Activity;
+import android.app.SearchManager;
+import android.content.Intent;
+import android.content.res.Configuration;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 
+import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+
+import java.util.Locale;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.activity.ShowcaseViewBuilder;
 import cgeo.geocaching.connector.ConnectorFactory;
@@ -20,26 +37,7 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.dialog.CoordinatesInputDialog;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.EditUtils;
-
-import org.apache.commons.lang3.StringUtils;
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
-
 import rx.functions.Func1;
-
-import android.app.Activity;
-import android.app.SearchManager;
-import android.content.Intent;
-import android.content.res.Configuration;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.AutoCompleteTextView;
-import android.widget.Button;
-
-import java.util.Locale;
 
 public class SearchActivity extends AbstractActionBarActivity implements CoordinatesInputDialog.CoordinateUpdate {
 
@@ -420,7 +418,7 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
         searchIntent.setAction(Intent.ACTION_SEARCH).
                 putExtra(SearchManager.QUERY, scan).
                 putExtra(Intents.EXTRA_KEYWORD_SEARCH, false);
-        fromActivity.startActivityForResult(searchIntent, MainActivity.SEARCH_REQUEST_CODE);
+        fromActivity.startActivityForResult(searchIntent, Intents.SEARCH_REQUEST_CODE);
     }
 
     @Override
