@@ -14,13 +14,6 @@
      limitations under the License.
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.google.android.gms">
+          package="com.google.android.gms.base">
     <uses-sdk android:minSdkVersion="9"/>
-
-    <application>
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
-    </application>
-
 </manifest>

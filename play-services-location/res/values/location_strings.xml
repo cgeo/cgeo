@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2015 Google Inc. All Rights Reserved. -->
+
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <!-- Search box hint text for Place Autocomplete. [CHAR LIMIT=15] -->
+    <string name="place_autocomplete_search_hint">Search</string>
+
+    <!-- Description of the button that clears the search input when searching for places. -->
+    <string name="place_autocomplete_clear_button">Clear search</string>
+
+</resources>
