@@ -224,10 +224,13 @@ dependencies {
     compile 'com.android.support:appcompat-v7:20.0.0'
 
     // Play Services: location
-    compile 'com.google.android.gms:play-services-location:8.3.0'
+    compile 'com.google.android.gms:play-services-location:8.4.0'
 
     // Play Services: App Invite
-    compile 'com.google.android.gms:play-services-appinvite:8.3.0'
+    compile 'com.google.android.gms:play-services-appinvite:8.4.0'
+
+    // no idea why this dependency is needed. it is implicitly used, and defaults to a wrong version 8.3, so we make it explicit
+    compile 'com.google.android.gms:play-services-measurement:8.4.0'
 
     // Apache Commons
     compile 'org.apache.commons:commons-collections4:4.1'
