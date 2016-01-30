@@ -11,6 +11,8 @@ import cgeo.geocaching.apps.navi.GoogleNavigationApp.GoogleNavigationBikeApp;
 import cgeo.geocaching.apps.navi.GoogleNavigationApp.GoogleNavigationDrivingApp;
 import cgeo.geocaching.apps.navi.GoogleNavigationApp.GoogleNavigationTransitApp;
 import cgeo.geocaching.apps.navi.GoogleNavigationApp.GoogleNavigationWalkingApp;
+import cgeo.geocaching.apps.navi.OruxMapsApp.OruxOnlineMapApp;
+import cgeo.geocaching.apps.navi.OruxMapsApp.OruxOfflineMapApp;
 import cgeo.geocaching.apps.navi.SygicNavigationApp.SygicNavigationDrivingApp;
 import cgeo.geocaching.apps.navi.SygicNavigationApp.SygicNavigationWalkingApp;
 import cgeo.geocaching.location.Geopoint;
@@ -56,7 +58,9 @@ public final class NavigationAppFactory {
         /** Google Streetview */
         GOOGLE_STREETVIEW(new StreetviewApp(), 8, R.string.pref_navigation_menu_google_streetview),
         /** The external OruxMaps app */
-        ORUX_MAPS(new OruxMapsApp(), 9, R.string.pref_navigation_menu_oruxmaps),
+        ORUX_MAPS(new OruxOnlineMapApp(), 9, R.string.pref_navigation_menu_oruxmaps),
+        /** The external OruxMaps app */
+        ORUX_MAPS_OFFLINE(new OruxOfflineMapApp(), 24, R.string.pref_navigation_menu_oruxmaps_offline),
         /** The external navigon app */
         NAVIGON(new NavigonApp(), 10, R.string.pref_navigation_menu_navigon),
         /** The external Sygic app in walking mode */

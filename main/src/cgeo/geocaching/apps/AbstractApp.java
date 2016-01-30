@@ -14,7 +14,7 @@ import android.support.annotation.StringRes;
 public abstract class AbstractApp implements App {
 
     @Nullable private final String packageName;
-    @Nullable private final String intent;
+    @Nullable protected final String intent;
     @NonNull
     private final String name;
 

@@ -748,7 +748,12 @@
                     android:defaultValue="true"
                     android:enabled="false"
                     android:key="@string/pref_navigation_menu_oruxmaps"
-                    android:title="@string/cache_menu_oruxmaps" />
+                    android:title="@string/cache_menu_oruxmaps_online" />
+                <CheckBoxPreference
+                    android:defaultValue="true"
+                    android:enabled="false"
+                    android:key="@string/pref_navigation_menu_oruxmaps_offline"
+                    android:title="@string/cache_menu_oruxmaps_offline" />
                 <CheckBoxPreference
                     android:defaultValue="true"
                     android:enabled="false"
