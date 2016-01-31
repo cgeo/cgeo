@@ -45,8 +45,9 @@ abstract class OruxMapsApp extends AbstractPointNavigationApp {
 
     @Override
     public void navigate(@NonNull Activity activity, @NonNull Geocache cache) {
-        if (cache.getCoords() != null) {
-            navigate(activity, cache.getCoords(), cache.getName());
+        Geopoint coords = cache.getCoords();
+        if (coords != null) {
+            navigate(activity, coords, cache.getName());
         } else {
             ActivityMixin.showToast(activity, activity.getResources().getString(R.string.err_nav_no_coordinates));
         }
@@ -54,8 +55,9 @@ abstract class OruxMapsApp extends AbstractPointNavigationApp {
 
     @Override
     public void navigate(@NonNull Activity activity, @NonNull Waypoint waypoint) {
-        if (waypoint.getCoords() != null) {
-            navigate(activity, waypoint.getCoords(), waypoint.getName());
+        Geopoint coords = waypoint.getCoords();
+        if (coords != null) {
+            navigate(activity, coords, waypoint.getName());
         } else {
             ActivityMixin.showToast(activity, activity.getResources().getString(R.string.err_nav_no_coordinates));
         }
