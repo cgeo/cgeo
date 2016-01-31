@@ -2,8 +2,8 @@ package cgeo.geocaching.playservices;
 
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.Log;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -11,6 +11,13 @@ import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
+
+import android.content.Context;
+import android.location.Location;
+import android.os.Bundle;
+
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import rx.Observable;
 import rx.Observable.OnSubscribe;
@@ -20,15 +27,6 @@ import rx.functions.Func1;
 import rx.observers.Subscribers;
 import rx.subjects.ReplaySubject;
 import rx.subscriptions.Subscriptions;
-
-import android.content.Context;
-import android.location.Location;
-import android.os.Bundle;
-
-import org.eclipse.jdt.annotation.NonNull;
-
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class LocationProvider extends LocationCallback implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
@@ -143,7 +141,7 @@ public class LocationProvider extends LocationCallback implements GoogleApiClien
     }
 
     @Override
-    public void onConnectionFailed(@NonNull final ConnectionResult connectionResult) {
+    public void onConnectionFailed(final ConnectionResult connectionResult) {
         Log.e("cannot connect to Google Play location service: " + connectionResult);
         subject.onError(new RuntimeException("Connection failed: " + connectionResult));
     }
