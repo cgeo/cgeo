@@ -80,6 +80,7 @@ public final class GCConstants {
     static final Pattern PATTERN_CUSTOMDATE = Pattern.compile("<option selected=\"selected\" value=\"([ /.Mdy-]+)\">");
     static final Pattern PATTERN_HOME_LOCATION = Pattern.compile("<input class=\"search-coordinates\"[^>]* value=\"(.*?)\"");
     static final Pattern PATTERN_MAP_LOGGED_IN = Pattern.compile("<a href=\"https?://www.geocaching.com/my/\" class=\"CommonUsername\"");
+    static final Pattern PATTERN_ENGLISH_SELECTION = Pattern.compile(Pattern.quote("doPostBack(&#39;") + "(.*?uxLocaleItem)" + Pattern.quote("&#39;"));
 
     /**
      * Patterns for parsing trackables

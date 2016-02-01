@@ -10,20 +10,15 @@ import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.settings.Credentials;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
-import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.TextUtils;
-
-import ch.boye.httpclientandroidlib.HttpResponse;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-
-import rx.Observable;
-import rx.functions.Action0;
 
 import android.graphics.drawable.Drawable;
 
@@ -33,6 +28,10 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.regex.Matcher;
+
+import ch.boye.httpclientandroidlib.HttpResponse;
+import rx.Observable;
+import rx.functions.Action0;
 
 public class GCLogin extends AbstractLogin {
 
@@ -229,8 +228,12 @@ public class GCLogin extends AbstractLogin {
             if (page == null) {
                 Log.e("Failed to read viewstates to set geocaching.com language");
             }
-            final Parameters params = new Parameters(
-                    "__EVENTTARGET", "ctl00$ctl27$uxLocaleList$uxLocaleList$ctl00$uxLocaleItem", // switch to english
+            final String paramEnglish = TextUtils.getMatch(page, GCConstants.PATTERN_ENGLISH_SELECTION, null);
+            if (paramEnglish == null) {
+                Log.e("Failed to find English language selector");
+            }
+            // switch to english
+            final Parameters params = new Parameters("__EVENTTARGET", paramEnglish, 
                     "__EVENTARGUMENT", "");
             transferViewstates(page, params);
             final HttpResponse response = Network.postRequest(LANGUAGE_CHANGE_URI, params, new Parameters("Referer", LANGUAGE_CHANGE_URI));
