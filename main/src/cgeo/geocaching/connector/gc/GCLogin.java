@@ -229,8 +229,12 @@ public class GCLogin extends AbstractLogin {
             if (page == null) {
                 Log.e("Failed to read viewstates to set geocaching.com language");
             }
-            final Parameters params = new Parameters(
-                    "__EVENTTARGET", "ctl00$ctl27$uxLocaleList$uxLocaleList$ctl00$uxLocaleItem", // switch to english
+            final String paramEnglish = TextUtils.getMatch(page, GCConstants.PATTERN_ENGLISH_SELECTION, null);
+            if (paramEnglish == null) {
+                Log.e("Failed to find English language selector");
+            }
+            // switch to english
+            final Parameters params = new Parameters("__EVENTTARGET", paramEnglish, 
                     "__EVENTARGUMENT", "");
             transferViewstates(page, params);
             final HttpResponse response = Network.postRequest(LANGUAGE_CHANGE_URI, params, new Parameters("Referer", LANGUAGE_CHANGE_URI));
