@@ -7,6 +7,7 @@
     · Fix: import pocket queries from bookmark lists with umlauts\n
     · Change: encrypted log entries are shown encrypted initially\n
     · New: Invite friends to use c:geo directly from the app\n
+    · Fix: Waypoints imported correctly for GPX from geocheck.org\n
     \n
     \n
   </string>

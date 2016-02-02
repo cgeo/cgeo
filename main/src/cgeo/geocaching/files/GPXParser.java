@@ -82,6 +82,9 @@ public abstract class GPXParser extends FileParser {
      * supported GSAK extension of the GPX format
      */
     private static final String[] GSAK_NS = {
+            "http://www.gsak.net/xmlv1/1",
+            "http://www.gsak.net/xmlv1/2",
+            "http://www.gsak.net/xmlv1/3",
             "http://www.gsak.net/xmlv1/4",
             "http://www.gsak.net/xmlv1/5",
             "http://www.gsak.net/xmlv1/6"
