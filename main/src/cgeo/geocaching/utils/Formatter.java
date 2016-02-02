@@ -201,7 +201,7 @@ public final class Formatter {
         if (waypointType != WaypointType.OWN && waypointType != null) {
             infos.add(waypointType.getL10n());
         }
-        if (Waypoint.PREFIX_OWN.equalsIgnoreCase(waypoint.getPrefix())) {
+        if (waypoint.isUserDefined()) {
             infos.add(CgeoApplication.getInstance().getString(R.string.waypoint_custom));
         } else {
             if (StringUtils.isNotBlank(waypoint.getPrefix())) {

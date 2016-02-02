@@ -142,11 +142,12 @@ public class Waypoint implements IWaypoint {
         return cachedOrder;
     }
 
+    @NonNull
     public String getPrefix() {
         return prefix;
     }
 
-    public void setPrefix(final String prefix) {
+    public void setPrefix(final @NonNull String prefix) {
         this.prefix = prefix;
         cachedOrder = ORDER_UNDEFINED;
     }
