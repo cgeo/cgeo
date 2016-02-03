@@ -2,8 +2,10 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-    <b>Next bugfix release:</b>\n
+    <b>2016.02.03:</b>\n
     · Fix: Adapt to website changes due to markdown in logs\n
+    · Fix: Again login failure due to wrong language setting on geocaching.com webpage\n
+    · Fix: False error message when posting a log for a travelbug\n
     · Fix: Crash in pocket query listing on Android 2.3.x\n
     · Fix: Crash when enabling ExtremCaching initially\n
     · Change: Show number of caches only for downloadable pocket queries\n
