@@ -170,10 +170,9 @@ public final class GCConstants {
     final static Pattern PATTERN_VIEWSTATEFIELDCOUNT = Pattern.compile("id=\"__VIEWSTATEFIELDCOUNT\"[^(value)]+value=\"(\\d+)\"[^>]+>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
     final static Pattern PATTERN_VIEWSTATES = Pattern.compile("id=\"__VIEWSTATE(\\d*)\"[^(value)]+value=\"([^\"]+)\"[^>]+>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
     final static Pattern PATTERN_USERTOKEN = Pattern.compile("userToken\\s*=\\s*'([^']+)'");
-    final static Pattern PATTERN_LIST_PQ = Pattern.compile(Pattern.quote("(") + "(\\d+)" + Pattern.quote(")") + ".+?guid=(.+?)\".*?title=\"(.+?)\"");
 
-    // downloadable PQs,     <a href="/pocket/downloadpq.ashx?g=b1390cb5-88f3-4fcc-b5e9-f3786c30f773&src=web">
-    final static Pattern PATTERN_LIST_PQ_DL = Pattern.compile("downloadpq.ashx\\?g=([a-zA-Z0-9-]+).*?>\\s*(\\d+)\\s*</td>");
+    // downloadable PQs,
+    final static Pattern PATTERN_PQ_LAST_GEN = Pattern.compile("([^(]*)(\\(([\\d]+)?)?");
 
     /** Live Map since 14.02.2012 */
     final static Pattern PATTERN_USERSESSION = Pattern.compile("UserSession\\('([^']+)'");

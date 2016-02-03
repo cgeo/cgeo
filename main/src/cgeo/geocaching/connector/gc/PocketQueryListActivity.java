@@ -46,6 +46,12 @@ public class PocketQueryListActivity extends AbstractListActivity {
                 }
                 adapter.notifyDataSetChanged();
             }
+        }, new Action1<Throwable>() {
+            @Override
+            public void call(final Throwable e) {
+                ActivityMixin.showToast(PocketQueryListActivity.this, getString(R.string.err_read_pocket_query_list));
+                finish();
+            }
         });
     }
 

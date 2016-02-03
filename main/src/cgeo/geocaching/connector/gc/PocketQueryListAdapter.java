@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import butterknife.Bind;
+import cgeo.geocaching.utils.Formatter;
 
 public class PocketQueryListAdapter extends ArrayAdapter<PocketQuery> {
 
@@ -24,10 +25,9 @@ public class PocketQueryListAdapter extends ArrayAdapter<PocketQuery> {
 
     protected static final class ViewHolder extends AbstractViewHolder {
         @Bind(R.id.label) protected TextView label;
-        @Bind(R.id.caches) protected TextView caches;
         @Bind(R.id.download) protected Button download;
         @Bind(R.id.cachelist) protected Button cachelist;
-
+        @Bind(R.id.info) protected TextView info;
         public ViewHolder(final View view) {
             super(view);
         }
@@ -68,11 +68,10 @@ public class PocketQueryListAdapter extends ArrayAdapter<PocketQuery> {
                 CacheListActivity.startActivityPocketDownload(activity, pocketQuery);
             }
         });
-        holder.download.setVisibility(pocketQuery.isDownloadable() ? View.VISIBLE : View.GONE);
 
+        holder.download.setVisibility(pocketQuery.isDownloadable() ? View.VISIBLE : View.GONE);
         holder.label.setText(pocketQuery.getName());
-        final int caches = pocketQuery.getMaxCaches();
-        holder.caches.setText(caches >= 0 ? CgeoApplication.getInstance().getResources().getQuantityString(R.plurals.cache_counts, caches, caches) : StringUtils.EMPTY);
+        holder.info.setText(Formatter.formatPocketQueryInfo(pocketQuery));
 
         return view;
     }

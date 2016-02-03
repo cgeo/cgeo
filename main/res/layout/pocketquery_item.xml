@@ -43,7 +43,7 @@
         android:layout_toLeftOf="@id/download"/>
 
     <TextView
-        android:id="@+id/caches"
+        android:id="@+id/info"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:ellipsize="marquee"

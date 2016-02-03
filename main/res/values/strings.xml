@@ -233,6 +233,7 @@
     <string name="warn_rendertheme_missing">Map theme not found.</string>
     <string name="warn_pocket_query_select">No Pocket query selected.</string>
     <string name="warn_no_pocket_query_found">No Pocket query found online.</string>
+    <string name="err_read_pocket_query_list">Error reading Pocket query list.</string>
     <string name="info_log_posted">c:geo successfully submitted the log.</string>
     <string name="info_log_saved">c:geo successfully saved the log.</string>
     <string name="info_log_post_failed">Posting log failed.</string>
@@ -682,6 +683,13 @@
         <item quantity="one">One cache</item>
         <item quantity="other">%1$d caches</item>
     </plurals>
+
+    <!-- days remaining -->
+    <plurals name="days_remaining">
+        <item quantity="one">one day remaining</item>
+        <item quantity="other">%1$d days remaining</item>
+    </plurals>
+    <string name="last_day_available">last day available</string>
 
     <string name="cache_offline">Offline</string>
     <string name="cache_offline_refresh">Refresh</string>
