@@ -345,6 +345,7 @@
                         android:text="@string/init_gcvote_password_description" />
 
                     <EditTextPreference
+                        android:enabled="false"
                         android:dependency="@string/pref_ratingwanted"
                         android:dialogTitle="@string/init_username"
                         android:hint="@string/init_username"
