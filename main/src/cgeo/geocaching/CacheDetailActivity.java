@@ -1621,7 +1621,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 if (null != loadingIndicatorView) {
                     loadingIndicatorView.setVisibility(View.GONE);
                 }
-            } catch (final Exception ignored) {
+            } catch (final RuntimeException ignored) {
                 showToast(res.getString(R.string.err_load_descr_failed));
             }
         }

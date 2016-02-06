@@ -328,7 +328,7 @@ public class Settings {
         return new Credentials(username, password);
     }
 
-    public static String getUsername() {
+    public static String getUserName() {
         return getString(R.string.pref_username, StringUtils.EMPTY);
     }
 

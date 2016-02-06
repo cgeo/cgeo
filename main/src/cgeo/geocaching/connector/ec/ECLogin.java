@@ -53,7 +53,7 @@ public class ECLogin extends AbstractLogin {
 
         setActualStatus(app.getString(R.string.init_login_popup_working));
 
-        final Parameters params = new Parameters("user", login.getUsername(), "pass", login.getPassword());
+        final Parameters params = new Parameters("user", login.getUserName(), "pass", login.getPassword());
         final HttpResponse loginResponse = Network.postRequest("https://extremcaching.com/exports/apilogin.php", params);
 
         final String loginData = Network.getResponseData(loginResponse);
@@ -66,17 +66,17 @@ public class ECLogin extends AbstractLogin {
         assert loginData != null;
 
         if (loginData.contains("Wrong username or password")) { // hardcoded in English
-            Log.i("Failed to log in Extremcaching.com as " + login.getUsername() + " because of wrong username/password");
+            Log.i("Failed to log in Extremcaching.com as " + login.getUserName() + " because of wrong username/password");
             return StatusCode.WRONG_LOGIN_DATA; // wrong login
         }
 
         if (getLoginStatus(loginData)) {
-            Log.i("Successfully logged in Extremcaching.com as " + login.getUsername());
+            Log.i("Successfully logged in Extremcaching.com as " + login.getUserName());
 
             return StatusCode.NO_ERROR; // logged in
         }
 
-        Log.i("Failed to log in Extremcaching.com as " + login.getUsername() + " for some unknown reason");
+        Log.i("Failed to log in Extremcaching.com as " + login.getUserName() + " for some unknown reason");
         if (retry) {
             return login(false);
         }

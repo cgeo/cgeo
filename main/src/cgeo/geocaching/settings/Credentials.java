@@ -49,7 +49,7 @@ public class Credentials {
      *         if credentials are invalid
      */
     @NonNull
-    public String getUsername() {
+    public String getUserName() {
         guard();
         return username;
     }

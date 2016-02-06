@@ -55,7 +55,7 @@ public final class GCVote {
             return StatusCode.NO_LOGIN_INFO_STORED;
         }
 
-        final Parameters params = new Parameters("version", "cgeo", "userName", login.getUsername(), "password", login.getPassword());
+        final Parameters params = new Parameters("version", "cgeo", "userName", login.getUserName(), "password", login.getPassword());
 
         final InputStream response = Network.getResponseStream(Network.getRequest("http://gcvote.com/getVotes.php", params));
 
@@ -69,7 +69,7 @@ public final class GCVote {
                     final String tagName = xpp.getName();
                     if (StringUtils.equals(tagName, "votes")) {
                         if (StringUtils.equals(xpp.getAttributeValue(null, "loggedIn"), "true")) {
-                            Log.i("Successfully logged in gcvote.com as " + login.getUsername());
+                            Log.i("Successfully logged in gcvote.com as " + login.getUserName());
                             return StatusCode.NO_ERROR;
                         }
                         Log.e("Username or password is wrong");
@@ -117,7 +117,7 @@ public final class GCVote {
         final Parameters params = new Parameters("version", "cgeo");
         final Credentials login = Settings.getGCVoteLogin();
         if (login.isValid()) {
-            params.put("userName", login.getUsername(), "password", login.getPassword());
+            params.put("userName", login.getUserName(), "password", login.getPassword());
         }
 
         // use guid or gccode for lookup
@@ -193,7 +193,7 @@ public final class GCVote {
             return false;
         }
         final Parameters params = new Parameters(
-                "userName", login.getUsername(),
+                "userName", login.getUserName(),
                 "password", login.getPassword(),
                 "cacheId", cache.getGuid(),
                 "waypoint", cache.getGeocode(),

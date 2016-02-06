@@ -405,7 +405,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
         for (final MockedCacheAndroid mockedCache : MockedCacheAndroid.MOCKED_CACHES) {
             final String oldUser = mockedCache.getMockedDataUser();
             try {
-                mockedCache.setMockedDataUser(Settings.getUsername());
+                mockedCache.setMockedDataUser(Settings.getUserName());
                 final Geocache parsedCache = CgeoApplicationTest.testSearchByGeocode(mockedCache.getGeocode());
                 Compare.assertCompareCaches(mockedCache, parsedCache, true);
             } finally {

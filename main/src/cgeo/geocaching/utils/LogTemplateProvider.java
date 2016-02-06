@@ -150,7 +150,7 @@ public final class LogTemplateProvider {
                         return ((ILogin) connector).getUserName();
                     }
                 }
-                return Settings.getUsername();
+                return Settings.getUserName();
             }
         });
         templates.add(new LogTemplate("NUMBER", R.string.init_signature_template_number) {

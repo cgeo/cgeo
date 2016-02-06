@@ -46,7 +46,7 @@ public final class LogEntry {
      * @param text message of log
      */
     public LogEntry(final long dateInMilliSeconds, final LogType type, final String text) {
-        this(Settings.getUsername(), dateInMilliSeconds, type, text);
+        this(Settings.getUserName(), dateInMilliSeconds, type, text);
     }
 
     /**
@@ -174,6 +174,6 @@ public final class LogEntry {
      * @return True if LogEntry is from current user
      */
     public boolean isOwn() {
-        return author.equalsIgnoreCase(Settings.getUsername());
+        return author.equalsIgnoreCase(Settings.getUserName());
     }
 }

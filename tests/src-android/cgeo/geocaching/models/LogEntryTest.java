@@ -93,7 +93,7 @@ public class LogEntryTest extends CGeoTestCase {
 
     public static void testIsOwn() {
         final LogEntry logEntry1 = new LogEntry("userthatisnotthedefaultuser", 100, LogType.FOUND_IT, "LOGENTRY");
-        final LogEntry logEntry2 = new LogEntry(Settings.getUsername(), 100, LogType.FOUND_IT, "LOGENTRY");
+        final LogEntry logEntry2 = new LogEntry(Settings.getUserName(), 100, LogType.FOUND_IT, "LOGENTRY");
         final LogEntry logEntry3 = new LogEntry(100, LogType.FOUND_IT, "LOGENTRY");
 
         assertThat(logEntry1.isOwn()).isFalse();

@@ -67,7 +67,7 @@ public class GCLogin extends AbstractLogin {
             return resetGcCustomDate(StatusCode.NO_LOGIN_INFO_STORED);
         }
 
-        final String username = credentials.getUsername();
+        final String username = credentials.getUserName();
         final String password = credentials.getPassword();
 
         setActualStatus(CgeoApplication.getInstance().getString(R.string.init_login_popup_working));
@@ -202,7 +202,7 @@ public class GCLogin extends AbstractLogin {
         // login page
         setActualLoginStatus(TextUtils.matches(page, GCConstants.PATTERN_LOGIN_NAME_LOGIN_PAGE));
         if (isActualLoginStatus()) {
-            setActualUserName(Settings.getUsername());
+            setActualUserName(Settings.getUserName());
             // number of caches found is not part of this page
             return true;
         }

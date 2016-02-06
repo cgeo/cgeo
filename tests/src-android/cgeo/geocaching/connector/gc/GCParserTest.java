@@ -110,7 +110,7 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
                 assert parsedCache != null;  // To keep editors happy
                 assertThat(StringUtils.isNotBlank(mockedCache.getMockedDataUser())).isTrue();
                 // Workaround for issue #3777
-                if (mockedCache.getGeocode().equals("GC3XX5J") && Settings.getUsername().equals("mucek4")) {
+                if (mockedCache.getGeocode().equals("GC3XX5J") && Settings.getUserName().equals("mucek4")) {
                     parsedCache.setFound(true);
                 }
                 Compare.assertCompareCaches(mockedCache, parsedCache, true);

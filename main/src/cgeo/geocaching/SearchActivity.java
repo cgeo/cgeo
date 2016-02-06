@@ -407,7 +407,7 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
     @Override
     public final boolean onOptionsItemSelected(final MenuItem item) {
         if (item.getItemId() == R.id.menu_search_own_caches) {
-            findByOwnerFn(Settings.getUsername());
+            findByOwnerFn(Settings.getUserName());
             return true;
         }
         return super.onOptionsItemSelected(item);

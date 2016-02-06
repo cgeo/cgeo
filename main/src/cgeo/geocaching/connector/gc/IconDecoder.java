@@ -109,7 +109,7 @@ final class IconDecoder {
                     cache.setFound(true);
                     return true;
                 case CT_OWN:
-                    cache.setOwnerUserId(Settings.getUsername());
+                    cache.setOwnerUserId(Settings.getUserName());
                     return true;
                 case CT_MEGAEVENT:
                     cache.setType(CacheType.MEGA_EVENT, zoomlevel);

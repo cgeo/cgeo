@@ -144,7 +144,7 @@ public class GC3XX5JAndroid extends MockedCacheAndroid {
 
     @Override
     public boolean isFound() {
-        return Settings.getUsername().equals("mucek4");
+        return Settings.getUserName().equals("mucek4");
     }
 
 }

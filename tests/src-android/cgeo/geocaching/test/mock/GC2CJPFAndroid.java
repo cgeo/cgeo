@@ -109,7 +109,7 @@ public class GC2CJPFAndroid extends MockedCacheAndroid {
      */
     @Override
     public boolean isOwner() {
-        if ("Tom03".equals(Settings.getUsername())) {
+        if ("Tom03".equals(Settings.getUserName())) {
             return true;
         }
         return super.isOwner();
