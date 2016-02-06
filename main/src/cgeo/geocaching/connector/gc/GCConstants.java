@@ -123,7 +123,7 @@ public final class GCConstants {
     /**
      * Patterns for parsing the result of a search (next)
      */
-    final static Pattern PATTERN_SEARCH_TYPE = Pattern.compile("<img src=\"[^\"]*/images/wpttypes/(\\d+)\\.");
+    final static Pattern PATTERN_SEARCH_TYPE = Pattern.compile("<img src=\"[^\"]*/images/wpttypes/(.*?)\\.");
     final static Pattern PATTERN_SEARCH_GUIDANDDISABLED = Pattern.compile("SearchResultsWptType.*?<a href=\"[^\"]*\" class=\"lnk ([^\"]*)\"><span>([^<]*)</span>[^|]*[|][^|]*[|]([^<]*)<");
     /** Two groups **/
     final static Pattern PATTERN_SEARCH_TRACKABLES = Pattern.compile("<a id=\"ctl00_ContentBody_dlResults_ctl[0-9]+_uxTravelBugList\" class=\"tblist\" data-tbcount=\"([0-9]+)\" data-id=\"[^\"]*\"[^>]*>(.*)</a>");
