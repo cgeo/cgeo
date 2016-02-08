@@ -2136,7 +2136,7 @@ public final class GCParser {
 
     public static int getFavoritePoints(final String page) {
         if (page != null) {
-            final String favCount = TextUtils.getMatch(page, GCConstants.PATTERN_USER_FAVORITE_POINTS, false, 1, null, true);
+            final String favCount = TextUtils.getMatch(page, GCConstants.PATTERN_LOG_FAVORITE_POINTS, false, 1, null, true);
             if (favCount != null) {
                 return Integer.parseInt(favCount);
             }

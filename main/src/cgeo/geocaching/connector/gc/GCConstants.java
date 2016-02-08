@@ -76,7 +76,6 @@ public final class GCConstants {
     public static final Pattern PATTERN_MEMBERSHIP = Pattern.compile("<dl class=\"membership-details\">.*?<dd>\\s*(\\S+)\\s*</dd>\\s*</dl>", Pattern.DOTALL);
     /** Use replaceAll("[,.]","") on the resulting string before converting to an int */
     static final Pattern PATTERN_CACHES_FOUND = Pattern.compile(Pattern.quote("cache-count\">") + "\\s*([\\d,.]+)", Pattern.DOTALL);
-    final static Pattern PATTERN_USER_FAVORITE_POINTS = Pattern.compile("favorites\\.aspx\">\\((\\d+)");
 
     static final Pattern PATTERN_AVATAR_IMAGE_PROFILE_PAGE = Pattern.compile("src=\"(https?://(img(?:cdn)?\\.geocaching\\.com|[^>\"]+\\.cloudfront\\.net)/avatar/[0-9a-f-]+\\.jpg)\"[^>]*alt=\"");
     static final Pattern PATTERN_LOGIN_NAME_LOGIN_PAGE = Pattern.compile("ctl00_ContentBody_lbUsername\">.*<strong>(.*)</strong>");
@@ -181,6 +180,7 @@ public final class GCConstants {
 
     static final Pattern PATTERN_LOG_GUID = Pattern.compile("<a id=\"ctl00_ContentBody_LogBookPanel1_WaypointLink\"[^>]* href=\"https?://www\\.geocaching\\.com/seek/cache_details\\.aspx\\?guid=([0-9a-f-]+)\"");
     final static Pattern PATTERN_LOG_IMAGE_UPLOAD = Pattern.compile("/seek/upload\\.aspx\\?LID=(\\d+)", Pattern.CASE_INSENSITIVE);
+    final static Pattern PATTERN_LOG_FAVORITE_POINTS = Pattern.compile("chkAddToFavorites[\"']>.*\\((\\d+).*\\)<\\/label");
 
     final static String STRING_PREMIUMONLY_2 = "Sorry, the owner of this listing has made it viewable to Premium Members only.";
     final static String STRING_PREMIUMONLY_1 = "has chosen to make this cache listing visible to Premium Members only.";
