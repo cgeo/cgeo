@@ -232,9 +232,13 @@ public class CompassActivity extends AbstractActionBarActivity {
 
     @Override
     public ShowcaseViewBuilder getShowcase() {
-        return new ShowcaseViewBuilder(this)
-                .setTarget(new ActionItemTarget(this, R.id.menu_hint))
-                .setContent(R.string.showcase_compass_hint_title, R.string.showcase_compass_hint_text);
+        // present showcase only if hint menu item is available
+        if (cache != null) {
+            return new ShowcaseViewBuilder(this)
+                    .setTarget(new ActionItemTarget(this, R.id.menu_hint))
+                    .setContent(R.string.showcase_compass_hint_title, R.string.showcase_compass_hint_text);
+        }
+        return null;
     }
 
     private void setTarget(@NonNull final Geopoint coords, final String newDescription) {
