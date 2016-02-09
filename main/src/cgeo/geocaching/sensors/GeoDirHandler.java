@@ -61,7 +61,7 @@ public abstract class GeoDirHandler {
     }
 
     private static <T> Observable<T> throttleIfNeeded(final Observable<T> observable, final long windowDuration, final TimeUnit unit) {
-        return windowDuration > 0 ? observable.throttleFirst(windowDuration, unit) : observable;
+        return (windowDuration > 0 ? observable.throttleFirst(windowDuration, unit) : observable).onBackpressureLatest();
     }
 
     /**
