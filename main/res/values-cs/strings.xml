@@ -674,6 +674,7 @@
   <string name="cache_personal_note_upload">Nahrát</string>
   <string name="cache_personal_note_uploading">Nahrávání osobní poznámky</string>
   <string name="cache_personal_note_upload_done">Osobní poznámka nahrána</string>
+  <string name="cache_personal_note_upload_error">Při nahrávání osobní poznámky došlo k chybě</string>
   <string name="cache_personal_note_upload_cancelled">Nahrávání osobní poznámky přerušeno</string>
   <string name="cache_description">Popis</string>
   <string name="cache_description_long">Dlouhý popis</string>
@@ -753,7 +754,8 @@
   <string name="cache_menu_share">Sdílet keš</string>
   <string name="cache_menu_move_list">Přesunout do jiného seznamu</string>
   <string name="cache_menu_whereyougo">WhereYouGo</string>
-  <string name="cache_menu_oruxmaps">OruxMaps</string>
+  <string name="cache_menu_oruxmaps_online">OruxMaps (Online)</string>
+  <string name="cache_menu_oruxmaps_offline">OruxMaps (Offline)</string>
   <string name="cache_menu_navigon">Navigon</string>
   <string name="cache_menu_pebble">Pebble</string>
   <string name="cache_menu_android_wear">Android Wear</string>
@@ -1362,4 +1364,6 @@
   <string name="pq_as_cache_list">Zobrazit seznam keší</string>
   <string name="pq_download_and_import">Importovat databázový požadavek</string>
   <string name="pq_my_finds">Moje nálezy</string>
+  <string name="caches_refresh_all_warning">Tato akce může vést k vysokému zatížení sítě. Opravdu chceš provést hromadnou aktualizaci všech keší?</string>
+  <string name="invitation_action">Pozvat přátele</string>
 </resources>

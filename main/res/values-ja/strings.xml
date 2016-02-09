@@ -700,7 +700,6 @@
   <string name="cache_menu_share">キャッシュを共有</string>
   <string name="cache_menu_move_list">他のリストに移動</string>
   <string name="cache_menu_whereyougo">WhereYouGo</string>
-  <string name="cache_menu_oruxmaps">OruxMaps</string>
   <string name="cache_menu_pebble">Pebble</string>
   <string name="cache_menu_vote">投票する</string>
   <string name="cache_status">状態</string>

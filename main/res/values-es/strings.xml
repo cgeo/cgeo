@@ -383,6 +383,7 @@
   <string name="settings_summary_map">Elige proveedor de mapas, detalles, y opciones de mapas sin conexión.</string>
   <string name="settings_title_map_data">Datos del mapa</string>
   <string name="settings_title_map_content">Contenido del mapa</string>
+  <string name="settings_title_gpx">GPX</string>
   <string name="settings_title_basicmembers">Opciones para miembros básicos</string>
   <string name="settings_title_navigation">Navegación</string>
   <string name="settings_summary_navigation">Elige tus métodos de navegación preferidos y apps de navegación externas.</string>
@@ -618,7 +619,7 @@
     <item quantity="one">Un caché</item>
     <item quantity="other">%1$d cachés</item>
   </plurals>
-  <string name="cache_offline">Desconectado</string>
+  <string name="cache_offline">Guardado</string>
   <string name="cache_offline_refresh">Actualizar</string>
   <string name="cache_offline_drop">Tirar</string>
   <string name="cache_offline_store">Guardar</string>
@@ -732,7 +733,6 @@
   <string name="cache_menu_share">Compartir caché</string>
   <string name="cache_menu_move_list">Mover a otra lista</string>
   <string name="cache_menu_whereyougo">WhereYouGo</string>
-  <string name="cache_menu_oruxmaps">OruxMaps</string>
   <string name="cache_menu_pebble">Pebble</string>
   <string name="cache_menu_vote">Votar</string>
   <string name="cache_menu_checker">Abrir Geochecker</string>
@@ -1331,4 +1331,6 @@ Nombre de archivo:%2$s</string>
   <string name="pq_as_cache_list">Ver lista de cachés</string>
   <string name="pq_download_and_import">Importar Pocket Query</string>
   <string name="pq_my_finds">Mis encontrados</string>
+  <string name="invitation_action">Invitar amigos</string>
+  <string name="invitation_title">Invitar a amigos a usar c:geo</string>
 </resources>
