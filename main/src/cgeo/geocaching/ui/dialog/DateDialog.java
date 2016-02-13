@@ -6,10 +6,9 @@ import android.app.DatePickerDialog.OnDateSetListener;
 import android.app.Dialog;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.widget.DatePicker;
-
-import org.eclipse.jdt.annotation.NonNull;
 
 import java.util.Calendar;
 
