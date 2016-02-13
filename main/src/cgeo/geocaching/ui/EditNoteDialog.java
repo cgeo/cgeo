@@ -51,6 +51,7 @@ public class EditNoteDialog extends DialogFragment {
     }
 
     @Override
+    @android.support.annotation.NonNull
     public Dialog onCreateDialog(final Bundle savedInstanceState) {
         final @NonNull FragmentActivity activity = getActivity();
 
