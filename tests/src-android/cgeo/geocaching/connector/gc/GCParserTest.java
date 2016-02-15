@@ -231,7 +231,7 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
     }
 
     public static void testOnlineCacheUrl() {
-        assertThat(StringUtils.right(CgeoApplicationTest.testSearchByGeocode("GCK25B").getDescription(), 150)).as("Geocaching HQ related web page").contains("http://www.geocaching.com/");
+        assertThat(StringUtils.right(CgeoApplicationTest.testSearchByGeocode("GC5EF16").getDescription(), 150)).as("related web page appended to description").contains("http://eventimgruenen.de/");
     }
 
     public static void testOnlineEventDate() {
