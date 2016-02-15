@@ -9,8 +9,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Parcel;
-
-import org.eclipse.jdt.annotation.NonNull;
+import android.support.annotation.NonNull;
 
 /**
  * code provided by menion - developer of Locus
