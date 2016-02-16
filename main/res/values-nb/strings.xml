@@ -1338,4 +1338,5 @@
   <string name="pq_as_cache_list">Vis cacheliste</string>
   <string name="pq_download_and_import">Importer Pocket Query</string>
   <string name="pq_my_finds">Mine funn</string>
+  <string name="caches_refresh_all_warning">Dette kan føre til høy datatrafikk. Er du sikker på at du vil oppdaterer alle cachene?</string>
 </resources>

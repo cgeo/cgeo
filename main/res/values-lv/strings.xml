@@ -1338,9 +1338,9 @@
   <string name="fav_points_remaining">"Pievienot šo slēpni manai favorītu izlasei (%s paliekuši)"</string>
   <string name="unit_m">m</string>
   <string name="unit_km">km</string>
-  <string name="unit_ft">pēda (lineāra mērvienība - 1 ft = 12 collas = 30.48 cm)</string>
-  <string name="unit_yd">jards (lineāra mērvienība - 1 yd = 3 pēdas = 0.9144 m)</string>
-  <string name="unit_mi">jūdze (lineāra mērvienība - 1 mi = 5.280 pēdas = 1760 yd ~ 1.609 km)</string>
+  <string name="unit_ft">pēda</string>
+  <string name="unit_yd">jards</string>
+  <string name="unit_mi">jūdze</string>
   <string name="pq_available_for_download">Pocket query ir pieejams lejupielādei</string>
   <string name="pq_available_for_download_description">Šis Pocket query ir pieejams lejupielādei kā viens fails (gpx). Vai vēlies to lejupielādēt un importēt vai skatīties kā slēpņu sarakstu?</string>
   <string name="pq_as_cache_list">Skatīties slēpņu sarakstu</string>
