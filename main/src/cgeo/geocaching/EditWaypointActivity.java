@@ -204,9 +204,13 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
     }
 
     private void setCoordsModificationVisibility(final IConnector con, final Geocache cache) {
-        if (cache != null && (cache.getType() == CacheType.MYSTERY || cache.getType() == CacheType.MULTI)) {
+        final CacheType type = cache != null ? cache.getType() : null;
+        if (type == CacheType.MYSTERY || type == CacheType.MULTI) {
             coordinatesGroup.setVisibility(View.VISIBLE);
             modifyBoth.setVisibility(con.supportsOwnCoordinates() ? View.VISIBLE : View.GONE);
+        } else if (type == CacheType.LETTERBOX || type == CacheType.WHERIGO) {
+            coordinatesGroup.setVisibility(View.VISIBLE);
+            modifyBoth.setVisibility(View.GONE);
         } else {
             coordinatesGroup.setVisibility(View.GONE);
             modifyBoth.setVisibility(View.GONE);
