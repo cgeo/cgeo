@@ -24,7 +24,9 @@ public class GeokretyConnectorTest extends AbstractResourceInstrumentationTestCa
 
     public static void testGetTrackableCodeFromUrl() throws Exception {
         assertThat(new GeokretyConnector().getTrackableCodeFromUrl("http://www.geokrety.org/konkret.php?id=46464")).isEqualTo("GKB580");
+        assertThat(new GeokretyConnector().getTrackableCodeFromUrl("https://www.geokrety.org/konkret.php?id=46464")).isEqualTo("GKB580");
         assertThat(new GeokretyConnector().getTrackableCodeFromUrl("http://geokrety.org/konkret.php?id=46465")).isEqualTo("GKB581");
+        assertThat(new GeokretyConnector().getTrackableCodeFromUrl("https://geokrety.org/konkret.php?id=46465")).isEqualTo("GKB581");
     }
 
     public static void testGeocode() throws Exception {
@@ -38,8 +40,8 @@ public class GeokretyConnectorTest extends AbstractResourceInstrumentationTestCa
     public void testGetUrl() throws Exception {
         final List<Trackable> trackables = GeokretyParser.parse(new InputSource(getResourceStream(R.raw.geokret141_xml)));
         assertThat(trackables).hasSize(2);
-        assertThat(trackables.get(0).getUrl()).isEqualTo("http://geokrety.org/konkret.php?id=46464");
-        assertThat(trackables.get(1).getUrl()).isEqualTo("http://geokrety.org/konkret.php?id=46465");
+        assertThat(trackables.get(0).getUrl()).isEqualTo("https://geokrety.org/konkret.php?id=46464");
+        assertThat(trackables.get(1).getUrl()).isEqualTo("https://geokrety.org/konkret.php?id=46465");
     }
 
     public void testSearchTrackable() throws Exception {
