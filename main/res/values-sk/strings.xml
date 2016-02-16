@@ -1362,4 +1362,5 @@
   <string name="pq_as_cache_list">Zobraziť zoznam kešiek</string>
   <string name="pq_download_and_import">Importovať PQ</string>
   <string name="pq_my_finds">Moje nálezy</string>
+  <string name="caches_refresh_all_warning">Táto akcia môže viesť k vysokej sieťovej prevádzke. Naozaj chceš dávkovo obnoviť všetky cache?</string>
 </resources>

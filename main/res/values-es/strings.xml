@@ -383,6 +383,7 @@
   <string name="settings_summary_map">Elige proveedor de mapas, detalles, y opciones de mapas sin conexión.</string>
   <string name="settings_title_map_data">Datos del mapa</string>
   <string name="settings_title_map_content">Contenido del mapa</string>
+  <string name="settings_title_gpx">GPX</string>
   <string name="settings_title_basicmembers">Opciones para miembros básicos</string>
   <string name="settings_title_navigation">Navegación</string>
   <string name="settings_summary_navigation">Elige tus métodos de navegación preferidos y apps de navegación externas.</string>
@@ -618,7 +619,7 @@
     <item quantity="one">Un caché</item>
     <item quantity="other">%1$d cachés</item>
   </plurals>
-  <string name="cache_offline">Desconectado</string>
+  <string name="cache_offline">Guardado</string>
   <string name="cache_offline_refresh">Actualizar</string>
   <string name="cache_offline_drop">Tirar</string>
   <string name="cache_offline_store">Guardar</string>

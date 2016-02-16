@@ -1362,4 +1362,5 @@
   <string name="pq_as_cache_list">Zobrazit seznam keší</string>
   <string name="pq_download_and_import">Importovat databázový požadavek</string>
   <string name="pq_my_finds">Moje nálezy</string>
+  <string name="caches_refresh_all_warning">Tato akce může vést k vysokému zatížení sítě. Opravdu chceš provést hromadnou aktualizaci všech keší?</string>
 </resources>

@@ -1347,4 +1347,5 @@
   <string name="pq_as_cache_list">Liste anzeigen</string>
   <string name="pq_download_and_import">Pocket-Query importieren</string>
   <string name="pq_my_finds">Meine Funde</string>
+  <string name="caches_refresh_all_warning">Diese Aktion kann viel Datenverkehr verursachen. Bist du sicher, dass du alle Caches aktualisieren möchtest?</string>
 </resources>
