@@ -165,6 +165,7 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
         if (!trackableConnector.equals(ConnectorFactory.UNKNOWN_TRACKABLE_CONNECTOR) && geocode != null) {
             final Intent trackablesIntent = new Intent(this, TrackableActivity.class);
             trackablesIntent.putExtra(Intents.EXTRA_GEOCODE, geocode.toUpperCase(Locale.US));
+            trackablesIntent.putExtra(Intents.EXTRA_BRAND, trackableConnector.getBrand().getId());
             startActivity(trackablesIntent);
             return true;
         }
