@@ -28,10 +28,10 @@ public abstract class AbstractTrackableConnector implements TrackableConnector {
 
     @Override
     public boolean canHandleTrackable(@Nullable final String geocode, @Nullable final TrackableBrand brand) {
-        if (brand != null && brand != TrackableBrand.UNKNOWN) {
-            return brand == getBrand() && canHandleTrackable(geocode);
+        if (brand == null || brand == TrackableBrand.UNKNOWN) {
+            return canHandleTrackable(geocode);
         }
-        return canHandleTrackable(geocode);
+        return brand == getBrand() && canHandleTrackable(geocode);
     }
 
     @Override
