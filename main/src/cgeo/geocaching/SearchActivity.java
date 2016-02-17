@@ -154,7 +154,7 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
         TrackableConnector trackableConnector = ConnectorFactory.getTrackableConnector(geocode);
 
         // check if the query contains a TB code
-        if (trackableConnector == ConnectorFactory.UNKNOWN_TRACKABLE_CONNECTOR) {
+        if (trackableConnector.equals(ConnectorFactory.UNKNOWN_TRACKABLE_CONNECTOR)) {
             final String tbCode = ConnectorFactory.getTrackableFromURL(query);
             if (StringUtils.isNotBlank(tbCode)) {
                 trackableConnector = ConnectorFactory.getTrackableConnector(tbCode);
@@ -162,7 +162,7 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
             }
         }
 
-        if (trackableConnector != ConnectorFactory.UNKNOWN_TRACKABLE_CONNECTOR && geocode != null) {
+        if (!trackableConnector.equals(ConnectorFactory.UNKNOWN_TRACKABLE_CONNECTOR) && geocode != null) {
             final Intent trackablesIntent = new Intent(this, TrackableActivity.class);
             trackablesIntent.putExtra(Intents.EXTRA_GEOCODE, geocode.toUpperCase(Locale.US));
             startActivity(trackablesIntent);
