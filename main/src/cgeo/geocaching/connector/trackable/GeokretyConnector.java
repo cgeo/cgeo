@@ -40,8 +40,15 @@ public class GeokretyConnector extends AbstractTrackableConnector {
 
     private static final Pattern PATTERN_GK_CODE = Pattern.compile("GK[0-9A-F]{4,}");
     private static final Pattern PATTERN_GK_CODE_EXTENDED = Pattern.compile("(GK[0-9A-F]{4,})|([0-9A-Z]{6})");
-    private static final String URL = "http://geokrety.org";
+    private static final String HOST = "geokrety.org";
+    public static final String URL = "https://" + HOST;
     private static final String URLPROXY = "http://api.geokretymap.org";
+
+    @Override
+    @NonNull
+    public String getHost() {
+        return HOST;
+    }
 
     @Override
     public int getPreferenceActivity() {
@@ -70,7 +77,7 @@ public class GeokretyConnector extends AbstractTrackableConnector {
     @Override
     @NonNull
     public String getUrl(@NonNull final Trackable trackable) {
-        return "http://" + getHost() + "/konkret.php?id=" + getId(trackable.getGeocode());
+        return URL + "/konkret.php?id=" + getId(trackable.getGeocode());
     }
 
     @Override
@@ -365,13 +372,7 @@ public class GeokretyConnector extends AbstractTrackableConnector {
         }
     }
 
-    @Override
-    @NonNull
-    public String getHost() {
-        return "geokrety.org";
-    }
-
     public static String getCreateAccountUrl() {
-        return "http://geokrety.org/adduser.php";
+        return URL + "/adduser.php";
     }
 }

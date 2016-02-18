@@ -18,8 +18,8 @@ public class GeokretyAuthorizationActivity extends TokenAuthorizationActivity {
     private static final Pattern PATTERN_TOKEN = Pattern.compile("([\\w]+)");
 
     public static final TokenAuthParameters GEOKRETY_TOKEN_AUTH_PARAMS = new TokenAuthParameters(
-            "http://geokrety.org/api-login2secid.php",
-            "http://geokrety.org/adduser.php",
+            GeokretyConnector.URL + "/api-login2secid.php",
+            GeokretyConnector.URL + "/adduser.php",
             "login",
             "password");
 

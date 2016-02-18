@@ -86,7 +86,9 @@ public class ConnectorFactoryTest extends AbstractResourceInstrumentationTestCas
 
     public static void testGetTrackableFromURL() throws Exception {
         assertThat(ConnectorFactory.getTrackableFromURL("http://www.geokrety.org/konkret.php?id=30970")).isEqualTo("GK78FA");
+        assertThat(ConnectorFactory.getTrackableFromURL("https://www.geokrety.org/konkret.php?id=30970")).isEqualTo("GK78FA");
         assertThat(ConnectorFactory.getTrackableFromURL("http://geokrety.org/konkret.php?id=30970")).isEqualTo("GK78FA");
+        assertThat(ConnectorFactory.getTrackableFromURL("https://geokrety.org/konkret.php?id=30970")).isEqualTo("GK78FA");
         assertThat(ConnectorFactory.getTrackableFromURL("http://coord.info/TB1234")).isEqualTo("TB1234");
         assertThat(ConnectorFactory.getTrackableFromURL("http://www.coord.info/TB1234")).isEqualTo("TB1234");
         assertThat(ConnectorFactory.getTrackableFromURL("http://geocaching.com/track/details.aspx?tracker=TB1234")).isEqualTo("TB1234");
