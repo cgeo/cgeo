@@ -3,11 +3,15 @@
   <!-- changelog for the master branch -->
   <string name="changelog_master" translatable="false">
     <b>Next feature release:</b>\n
-    · Fix: don\'t show unknown attribute icons for opencaching.org.uk\n
-    · Fix: import pocket queries from bookmark lists with umlauts\n
-    · Change: encrypted log entries are shown encrypted initially\n
+    · Fix: Don\'t show unknown attribute icons for opencaching.org.uk\n
+    · Fix: Import pocket queries from bookmark lists with umlauts\n
+    · Change: Encrypted log entries are shown encrypted initially\n
     · New: Invite friends to use c:geo directly from the app\n
     · Fix: Waypoints imported correctly for GPX from geocheck.org\n
+    · New: Use https for communication with Geokrety\n
+    · Fix: Hide export menu if list does not contain exportable caches\n
+    · Fix: Hide showcase for hint in compass if no hint is available for that cache\n
+    · Fix: Inconsistency in descriptions of user created waypoints\n
     \n
     \n
   </string>
