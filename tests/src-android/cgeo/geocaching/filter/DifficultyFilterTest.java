@@ -15,7 +15,7 @@ public class DifficultyFilterTest extends TestCase {
         final Geocache hard = new Geocache();
         hard.setDifficulty(5f);
 
-        final DifficultyFilter easyFilter = new DifficultyFilter(1);
+        final DifficultyFilter easyFilter = (DifficultyFilter) new DifficultyFilter.Factory().getFilters().get(0);
 
         assertThat(easyFilter.accepts(easy)).isTrue();
         assertThat(easyFilter.accepts(hard)).isFalse();

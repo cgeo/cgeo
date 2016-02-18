@@ -1,20 +1,23 @@
 package cgeo.geocaching.filter;
 
-import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.R;
-
-import org.eclipse.jdt.annotation.NonNull;
-
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.StringRes;
+
+import org.eclipse.jdt.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import cgeo.geocaching.R;
+import cgeo.geocaching.models.Geocache;
+
 class DifficultyFilter extends AbstractRangeFilter {
 
-    public DifficultyFilter(final int difficulty) {
-        super(R.string.cache_difficulty, difficulty);
+    private DifficultyFilter(@StringRes final int name, final int difficulty) {
+        // do not inline the name constant. Android Lint has a bug which would lead to using the super super constructors
+        // @StringRes annotation for the non-annotated difficulty parameter of this constructor.
+        super(name, difficulty);
     }
 
     protected DifficultyFilter(final Parcel in) {
@@ -37,7 +40,7 @@ class DifficultyFilter extends AbstractRangeFilter {
         public List<IFilter> getFilters() {
             final List<IFilter> filters = new ArrayList<>(DIFFICULTY_MAX);
             for (int difficulty = DIFFICULTY_MIN; difficulty <= DIFFICULTY_MAX; difficulty++) {
-                filters.add(new DifficultyFilter(difficulty));
+                filters.add(new DifficultyFilter(R.string.cache_difficulty, difficulty));
             }
             return filters;
         }

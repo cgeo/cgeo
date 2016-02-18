@@ -15,7 +15,7 @@ public class TerrainFilterTest extends TestCase {
         final Geocache hard = new Geocache();
         hard.setTerrain(5f);
 
-        final AbstractRangeFilter easyFilter = new TerrainFilter(1);
+        final TerrainFilter easyFilter = (TerrainFilter) new TerrainFilter.Factory().getFilters().get(0);
 
         assertThat(easyFilter.accepts(easy)).isTrue();
         assertThat(easyFilter.accepts(hard)).isFalse();

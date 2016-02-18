@@ -1,20 +1,23 @@
 package cgeo.geocaching.filter;
 
-import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.R;
-
-import org.eclipse.jdt.annotation.NonNull;
-
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.StringRes;
+
+import org.eclipse.jdt.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import cgeo.geocaching.R;
+import cgeo.geocaching.models.Geocache;
+
 class TerrainFilter extends AbstractRangeFilter {
 
-    public TerrainFilter(final int terrain) {
-        super(R.string.cache_terrain, terrain);
+    private TerrainFilter(@StringRes final int name, final int terrain) {
+        // do not inline the name constant. Android Lint has a bug which would lead to using the super super constructors
+        // @StringRes annotation for the non-annotated terrain parameter of this constructor.
+        super(name, terrain);
     }
 
     protected TerrainFilter(final Parcel in) {
@@ -36,7 +39,7 @@ class TerrainFilter extends AbstractRangeFilter {
         public List<IFilter> getFilters() {
             final List<IFilter> filters = new ArrayList<>(TERRAIN_MAX);
             for (int terrain = TERRAIN_MIN; terrain <= TERRAIN_MAX; terrain++) {
-                filters.add(new TerrainFilter(terrain));
+                filters.add(new TerrainFilter(R.string.cache_terrain, terrain));
             }
             return filters;
         }
