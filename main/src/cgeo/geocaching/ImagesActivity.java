@@ -87,9 +87,7 @@ public class ImagesActivity extends AbstractActionBarActivity {
 
     @SuppressWarnings("deprecation")
     private static void startActivity(final Context fromActivity, final String geocode, final List<Image> logImages, final ImageType imageType) {
-        final Intent logImgIntent = new Intent(fromActivity, ImagesActivity.class);
-        // if resuming our app within this activity, finish it and return to the cache activity
-        logImgIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET)
+        final Intent logImgIntent = new Intent(fromActivity, ImagesActivity.class)
                 .putExtra(Intents.EXTRA_GEOCODE, geocode)
                 .putExtra(Intents.EXTRA_TYPE, imageType);
 
