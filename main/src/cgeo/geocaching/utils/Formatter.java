@@ -3,6 +3,7 @@ package cgeo.geocaching.utils;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.R;
+import cgeo.geocaching.models.PocketQuery;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.WaypointType;
@@ -254,4 +255,29 @@ public final class Formatter {
         return "D " + formatDT(cache.getDifficulty()) + SEPARATOR + "T " + formatDT(cache.getTerrain()) + SEPARATOR + cache.getGeocode();
     }
 
+    @NonNull
+    public static String formatPocketQueryInfo(PocketQuery pocketQuery) {
+        if (!pocketQuery.isDownloadable()) {
+            return StringUtils.EMPTY;
+        }
+
+        final List<String> infos = new ArrayList<>(3);
+        final int caches = pocketQuery.getCaches();
+        if (caches >= 0) {
+            infos.add(CgeoApplication.getInstance().getResources().getQuantityString(R.plurals.cache_counts, caches, caches));
+        }
+
+        if (pocketQuery.getLastGeneration() != null) {
+            infos.add(Formatter.formatShortDateVerbally(pocketQuery.getLastGeneration().getTime()));
+        }
+
+        final int daysRemaining = pocketQuery.getDaysRemaining();
+        if (daysRemaining == 0) {
+            infos.add(CgeoApplication.getInstance().getString(R.string.last_day_available));
+        } else {
+            infos.add(daysRemaining > 0 ? CgeoApplication.getInstance().getResources().getQuantityString(R.plurals.days_remaining, daysRemaining, daysRemaining) : StringUtils.EMPTY);
+        }
+
+        return StringUtils.join(infos, SEPARATOR);
+    }
 }

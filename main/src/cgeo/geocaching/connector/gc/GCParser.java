@@ -48,12 +48,17 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 import android.net.Uri;
 import android.text.Html;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
 import java.text.Collator;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -1013,88 +1018,93 @@ public final class GCParser {
             final Parameters params = new Parameters();
 
             final String page = GCLogin.getInstance().getRequestLogged("https://www.geocaching.com/pocket/default.aspx", params);
-
             if (StringUtils.isBlank(page)) {
                 Log.e("GCParser.searchPocketQueryList: No data from server");
                 return Observable.just(Collections.<PocketQuery>emptyList());
             }
 
-            final String subPage = StringUtils.substringAfter(page, "class=\"PocketQueryListTable");
-            if (StringUtils.isEmpty(subPage)) {
-                Log.e("GCParser.searchPocketQueryList: class \"PocketQueryListTable\" not found on page");
-                return Observable.just(Collections.<PocketQuery>emptyList());
-            }
+            try {
+                final Document document = Jsoup.parse(page);
+                final List<PocketQuery> list = new ArrayList<>();
+                final Map<String, PocketQuery> downloadablePocketQueries = getDownloadablePocketQueries(document);
+                list.addAll(downloadablePocketQueries.values());
 
-            final List<PocketQuery> list = new ArrayList<>();
-            final List<String> allQueryGuids = new ArrayList<>();
-            final Map<String, Integer> downloadablePocketQueries = getDownloadablePocketQueries(subPage);
-
-            final MatcherWrapper matcherPocket = new MatcherWrapper(GCConstants.PATTERN_LIST_PQ, subPage);
-
-            while (matcherPocket.find()) {
-                final String guid = Html.fromHtml(matcherPocket.group(2)).toString();
-                final String name = Html.fromHtml(matcherPocket.group(3)).toString();
-                int maxCaches = -1;
-                final boolean downloadable = downloadablePocketQueries.containsKey(guid);
-                if (downloadable) {
-                    maxCaches = downloadablePocketQueries.get(guid);
+                final Elements rows = document.select("#pqRepeater tr:has(td)");
+                for (Element row : rows) {
+                    if (row == rows.last()) {
+                        break; // skip footer
+                    }
+                    final Element link = row.select("td:eq(3) > a").first();
+                    final Uri uri = Uri.parse(link.attr("href"));
+                    final String guid = uri.getQueryParameter("guid");
+                    if (!downloadablePocketQueries.containsKey(guid)) {
+                        final String name = link.attr("title");
+                        final PocketQuery pocketQuery = new PocketQuery(guid, name, -1, false, null, -1);
+                        list.add(pocketQuery);
+                    }
                 }
-                final PocketQuery pqList = new PocketQuery(guid, name, maxCaches, downloadable);
-                list.add(pqList);
-                allQueryGuids.add(guid);
+
+                // just in case, lets sort the resulting list
+                final Collator collator = TextUtils.getCollator();
+                Collections.sort(list, new Comparator<PocketQuery>() {
+
+                    @Override
+                    public int compare(final PocketQuery left, final PocketQuery right) {
+                        return collator.compare(left.getName(), right.getName());
+                    }
+                });
+
+                return Observable.just(list);
+            } catch (Exception e) {
+                Log.e("GCParser.searchPocketQueryList: error parsing parsing html page", e);
+                return Observable.error(e);
             }
-
-            // just in case, lets sort the resulting list
-            final Collator collator = TextUtils.getCollator();
-            Collections.sort(list, new Comparator<PocketQuery>() {
-
-                @Override
-                public int compare(final PocketQuery left, final PocketQuery right) {
-                    return collator.compare(left.getName(), right.getName());
-                }
-            });
-
-            // the "My finds" query is not listed on the available queries page
-            for (final String guid : allQueryGuids) {
-                downloadablePocketQueries.remove(guid);
-            }
-            if (downloadablePocketQueries.size() == 1) {
-                final Entry<String, Integer> entry = downloadablePocketQueries.entrySet().iterator().next();
-                list.add(new PocketQuery(entry.getKey(), CgeoApplication.getInstance().getString(R.string.pq_my_finds), entry.getValue(), true));
-            }
-
-            return Observable.just(list);
         }
     }).subscribeOn(AndroidRxUtils.networkScheduler);
 
     /**
-     * Reads guids from table containing active (downloadable) PQ called uxOfflinePQTable
+     * Reads the downloadable pocket queries from the uxOfflinePQTable
      *
-     * @param subPage
-     *            part of the page to parse
+     * @param document
+     *            the page as Document
      *
-     * @return Set with guids of downloadable PQs
+     * @return Map with downloadable PQs keyed by guid
      */
     @NonNull
-    private static Map<String, Integer> getDownloadablePocketQueries(final String subPage) {
-        final Map<String, Integer> downloadablePocketQueries = new HashMap<>();
-        final String downloadSubPage = StringUtils.substringAfter(subPage, "id=\"uxOfflinePQTable\"");
-        if (StringUtils.isEmpty(downloadSubPage)) {
-            Log.w("GCParser.getDownloadablePocketQueries: id \"uxOfflinePQTable\" not found on page");
-        }
+    private static Map<String, PocketQuery> getDownloadablePocketQueries(final Document document) throws Exception {
+        final Map<String, PocketQuery> downloadablePocketQueries = new HashMap<>();
 
-        final MatcherWrapper matcherPocket = new MatcherWrapper(GCConstants.PATTERN_LIST_PQ_DL, downloadSubPage);
-
-        while (matcherPocket.find()) {
-            final String guid = Html.fromHtml(matcherPocket.group(1)).toString();
-            try {
-                final Integer count = Integer.valueOf(matcherPocket.group(2));
-                downloadablePocketQueries.put(guid, count);
-            } catch (final NumberFormatException e) {
-                Log.w("GCParser.getDownloadablePocketQueries: cannot parse PQ cache count");
-                e.printStackTrace();
+        final Elements rows = document.select("#uxOfflinePQTable tr:has(td)");
+        for (Element row : rows) {
+            if (row == rows.last()) {
+                break; // skip footer
             }
+
+            final Elements cells = row.select("td");
+            final Element link = cells.get(2).select("a").first();
+            final String name = link.text();
+            final String href = link.attr("href");
+            final Uri uri = Uri.parse(href);
+            final String guid = uri.getQueryParameter("g");
+
+            int count = Integer.parseInt(cells.get(4).text());
+
+            final MatcherWrapper matcherLastGeneration = new MatcherWrapper(GCConstants.PATTERN_PQ_LAST_GEN, cells.get(5).text());
+            Date lastGeneration = null;
+            int daysRemaining = 0;
+            if (matcherLastGeneration.find()) {
+                lastGeneration = GCLogin.parseGcCustomDate(matcherLastGeneration.group(1));
+
+                final String daysRemainingString = matcherLastGeneration.group(3);
+                if (daysRemainingString != null) {
+                    daysRemaining = Integer.parseInt(daysRemainingString);
+                }
+            }
+
+            final PocketQuery pocketQuery = new PocketQuery(guid, name, count, true, lastGeneration, daysRemaining);
+            downloadablePocketQueries.put(guid, pocketQuery);
         }
+
         return downloadablePocketQueries;
     }
 
