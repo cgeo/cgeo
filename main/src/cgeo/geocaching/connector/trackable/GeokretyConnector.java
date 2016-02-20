@@ -247,18 +247,13 @@ public class GeokretyConnector extends AbstractTrackableConnector {
      */
     @Nullable
     public static String getGeocodeFromTrackingCode(final String trackingCode) {
-        return Observable.defer(new Func0<Observable<String>>() {
-            @Override
-            public Observable<String> call() {
-                final Parameters params = new Parameters("nr", trackingCode);
-                final String response = Network.getResponseData(Network.getRequest(URLPROXY + "/nr2id.php", params));
-                // An empty response means "not found"
-                if (response == null || StringUtils.equals(response, "0")) {
-                    return Observable.empty();
-                }
-                return Observable.just(geocode(Integer.parseInt(response)));
-            }
-        }).subscribeOn(AndroidRxUtils.networkScheduler).toBlocking().firstOrDefault(null);
+        final Parameters params = new Parameters("nr", trackingCode);
+        final String response = Network.getResponseData(Network.getRequest(URLPROXY + "/nr2id.php", params));
+        // An empty response means "not found"
+        if (response == null || StringUtils.equals(response, "0")) {
+            return null;
+        }
+        return geocode(Integer.parseInt(response));
     }
 
     @Override

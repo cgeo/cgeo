@@ -135,18 +135,14 @@ public final class GeolutinsConnector extends AbstractTrackableConnector {
      */
     @Nullable
     public static String getGeocodeFromTrackingCode(final String trackingCode) {
-        return Observable.defer(new Func0<Observable<String>>() {
-            @Override
-            public Observable<String> call() {
-                final Parameters params = new Parameters("G", trackingCode);
-                final InputStream response = Network.getResponseStream(Network.getRequest("http://www.geolutins.com/xml/decode.php", params));
-                final List<Trackable> trackables = GeolutinsParser.parse(new InputSource(response));
 
-                if (CollectionUtils.isNotEmpty(trackables)) {
-                    return Observable.just(trackables.get(0).getGeocode());
-                }
-                return Observable.empty();
-            }
-        }).subscribeOn(AndroidRxUtils.networkScheduler).toBlocking().firstOrDefault(null);
+        final Parameters params = new Parameters("G", trackingCode);
+        final InputStream response = Network.getResponseStream(Network.getRequest("http://www.geolutins.com/xml/decode.php", params));
+        final List<Trackable> trackables = GeolutinsParser.parse(new InputSource(response));
+
+        if (CollectionUtils.isNotEmpty(trackables)) {
+            return trackables.get(0).getGeocode();
+        }
+        return null;
     }
 }
