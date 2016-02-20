@@ -9,6 +9,7 @@
     · New: Invite friends to use c:geo directly from the app\n
     · Fix: Waypoints imported correctly for GPX from geocheck.org\n
     · New: Use https for communication with Geokrety\n
+    · New: Support links encoded in some GeoKrety QRCode\n
     · Fix: Hide export menu if list does not contain exportable caches\n
     · Fix: Hide showcase for hint in compass if no hint is available for that cache\n
     · Fix: Inconsistency in descriptions of user created waypoints\n
