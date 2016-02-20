@@ -68,15 +68,6 @@ public abstract class AbstractActivity extends ActionBarActivity implements IAbs
     }
 
     @Override
-    public void onCreate(final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        supportRequestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
-
-        initializeCommonFields();
-        AndroidBeam.disable(this);
-    }
-
-    @Override
     public final void presentShowcase() {
         ActivityMixin.presentShowcase(this);
     }
@@ -124,10 +115,15 @@ public abstract class AbstractActivity extends ActionBarActivity implements IAbs
         ActivityMixin.invalidateOptionsMenu(this);
     }
 
+    @Override
+    public void onCreate(final Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        onCreateCommon();
+    }
+
     protected void onCreate(final Bundle savedInstanceState, @LayoutRes final int resourceLayoutID) {
         super.onCreate(savedInstanceState);
-
-        initializeCommonFields();
+        onCreateCommon();
 
         // non declarative part of layout
         setTheme();
@@ -138,7 +134,17 @@ public abstract class AbstractActivity extends ActionBarActivity implements IAbs
         ButterKnife.bind(this);
     }
 
+    /**
+     * Common actions for all onCreate functions.
+     */
+    private void onCreateCommon() {
+        supportRequestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+        AndroidBeam.disable(this);
+        initializeCommonFields();
+    }
+
     private void initializeCommonFields() {
+
         // initialize commonly used members
         res = this.getResources();
         app = (CgeoApplication) this.getApplication();

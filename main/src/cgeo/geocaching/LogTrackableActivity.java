@@ -51,7 +51,6 @@ import android.R.layout;
 import android.R.string;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
@@ -93,7 +92,6 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
     @Bind(R.id.tweet_box) protected LinearLayout tweetBox;
 
     private CompositeSubscription createSubscriptions;
-    private ProgressDialog waitDialog = null;
 
     private List<LogTypeTrackable> possibleLogTypesTrackable = new ArrayList<>();
     private String geocode = null;
@@ -122,13 +120,6 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
     @Override
     public Loader<List<LogTypeTrackable>> onCreateLoader(final int id, final Bundle bundle) {
         showProgress(true);
-        loggingManager = connector.getTrackableLoggingManager(this);
-
-        if (loggingManager == null) {
-            showToast(res.getString(R.string.err_tb_not_loggable));
-            finish();
-            return null;
-        }
 
         if (id == Loaders.LOGGING_TRAVELBUG.getLoaderId()) {
             loggingManager.setGuid(trackable.getGuid());
@@ -211,10 +202,19 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
     }
 
     private void refreshTrackable(final String message) {
-        waitDialog = ProgressDialog.show(this, message, res.getString(R.string.trackable_details_loading), true, true);
+        showProgress(true);
 
         // create trackable connector
         connector = ConnectorFactory.getTrackableConnector(geocode, brand);
+        loggingManager = connector.getTrackableLoggingManager(this);
+
+        if (loggingManager == null) {
+            showToast(res.getString(R.string.err_tb_not_loggable));
+            finish();
+        }
+
+        // Initialize the UI
+        init();
 
         createSubscriptions.add(AppObservable.bindActivity(this, ConnectorFactory.loadTrackable(geocode, null, null, brand)).singleOrDefault(null).subscribe(new Action1<Trackable>() {
             @Override
@@ -233,9 +233,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
     private void displayTrackable() {
         if (trackable == null) {
             Log.e("LogTrackableActivity.onCreate, cannot load trackable: " + geocode);
-            if (waitDialog != null) {
-                waitDialog.dismiss();
-            }
+            showProgress(false);
 
             if (StringUtils.isNotBlank(geocode)) {
                 showToast(res.getString(R.string.err_tb_find) + ' ' + geocode + '.');
@@ -250,9 +248,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
 
         // We're in LogTrackableActivity, so trackable must be loggable ;)
         if (!trackable.isLoggable()) {
-            if (waitDialog != null) {
-                waitDialog.dismiss();
-            }
+            showProgress(false);
             showToast(res.getString(R.string.err_tb_not_loggable));
             finish();
             return;
@@ -267,9 +263,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
         }
         init();
 
-        if (waitDialog != null) {
-            waitDialog.dismiss();
-        }
+        showProgress(false);
 
         requestKeyboardForLogging();
     }

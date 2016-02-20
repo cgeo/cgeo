@@ -106,6 +106,16 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     private boolean sendButtonEnabled;
     private int premFavPoints;
 
+    /**
+     * Hook called at the beginning of onCreateLoader().
+     */
+    public void onLoadStarted() {
+        showProgress(true);
+    }
+
+    /**
+     * Hook called at the beginning of onLoadFinished().
+     */
     public void onLoadFinished() {
         if (loggingManager.hasLoaderError()) {
             showErrorLoadingData();
