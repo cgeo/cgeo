@@ -22,6 +22,7 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
+import rx.Completable;
 import rx.Observable;
 import rx.Observable.OnSubscribe;
 import rx.Subscriber;
@@ -92,8 +93,10 @@ public class HtmlImage implements Html.ImageGetter {
     });
 
     // Background loading
-    final private PublishSubject<Observable<String>> loading = PublishSubject.create();
-    final private Observable<String> waitForEnd = Observable.merge(loading).cache();
+    // .cache() is not yet available on Completable instances as of RxJava 1.1.1, so we have to go back
+    // to the observable world to achieve the caching.
+    final private PublishSubject<Completable> loading = PublishSubject.create();
+    final private Completable waitForEnd = Completable.merge(loading).toObservable().cache().toCompletable();
     final private CompositeSubscription subscription = new CompositeSubscription(waitForEnd.subscribe());
 
     /**
@@ -102,7 +105,7 @@ public class HtmlImage implements Html.ImageGetter {
      * <ul>
      * <li>If onlySave is true, {@link #getDrawable(String)} will return <tt>null</tt> immediately and will queue the
      * image retrieval and saving in the loading subject. Downloads will start in parallel when the blocking
-     * {@link #waitForEndObservable(cgeo.geocaching.utils.CancellableHandler)} method is called, and they can be
+     * {@link #waitForEndCompletable(cgeo.geocaching.utils.CancellableHandler)} method is called, and they can be
      * cancelled through the given handler.</li>
      * <li>If <tt>onlySave</tt> is <tt>false</tt> and the instance is called through {@link #fetchDrawable(String)},
      * then an observable for the given URL will be returned. This observable will emit the local copy of the image if
@@ -170,12 +173,7 @@ public class HtmlImage implements Html.ImageGetter {
         }
         final Observable<BitmapDrawable> drawable = fetchDrawable(url);
         if (onlySave) {
-            loading.onNext(drawable.map(new Func1<BitmapDrawable, String>() {
-                @Override
-                public String call(final BitmapDrawable bitmapDrawable) {
-                    return url;
-                }
-            }));
+            loading.onNext(drawable.toCompletable());
             cache.put(url, null);
             return null;
         }
@@ -289,7 +287,7 @@ public class HtmlImage implements Html.ImageGetter {
         return ImmutablePair.of(bitmap != null ? ImageUtils.scaleBitmapToFitDisplay(bitmap) : null, loadResult.right);
     }
 
-    public Observable<String> waitForEndObservable(@Nullable final CancellableHandler handler) {
+    public Completable waitForEndCompletable(@Nullable final CancellableHandler handler) {
         if (handler != null) {
             handler.unsubscribeIfCancelled(subscription);
         }

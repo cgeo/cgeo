@@ -9,7 +9,6 @@ import rx.functions.Action0;
 import rx.functions.Action1;
 import rx.functions.Func0;
 import rx.functions.Func1;
-import rx.observables.BlockingObservable;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.Subscriptions;
 
@@ -64,14 +63,6 @@ public class RxUtils {
                 return fromNullable(func.call());
             }
         });
-    }
-
-    public static <T> void waitForCompletion(final BlockingObservable<T> observable) {
-        observable.lastOrDefault(null);
-    }
-
-    public static void waitForCompletion(final Observable<?>... observables) {
-        waitForCompletion(Observable.merge(observables).toBlocking());
     }
 
     /**

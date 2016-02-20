@@ -2033,7 +2033,7 @@ public final class GCParser {
         }
 
         // Wait for completion of logs parsing, retrieving and merging
-        RxUtils.waitForCompletion(mergedLogs);
+        mergedLogs.toCompletable().await();
     }
 
     /**

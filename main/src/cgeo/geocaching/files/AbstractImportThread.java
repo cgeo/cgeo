@@ -78,7 +78,7 @@ abstract class AbstractImportThread extends Thread {
             final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_WAYPOINTS);
             if (cache != null) {
                 Log.d("GPXImporter.ImportThread.importStaticMaps start downloadMaps for cache " + geocode);
-                RxUtils.waitForCompletion(StaticMapsProvider.downloadMaps(cache));
+                StaticMapsProvider.downloadMaps(cache).await();
             } else {
                 Log.d("GPXImporter.ImportThread.importStaticMaps: no data found for " + geocode);
             }

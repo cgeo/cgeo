@@ -1733,7 +1733,7 @@ public class Geocache implements IWaypoint {
                 return;
             }
 
-            RxUtils.waitForCompletion(StaticMapsProvider.downloadMaps(cache), imgGetter.waitForEndObservable(handler));
+            StaticMapsProvider.downloadMaps(cache).mergeWith(imgGetter.waitForEndCompletable(handler)).await();
 
             if (handler != null) {
                 handler.sendEmptyMessage(CancellableHandler.DONE);

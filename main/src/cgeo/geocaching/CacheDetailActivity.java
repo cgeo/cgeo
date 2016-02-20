@@ -1401,7 +1401,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
                 if (image == null) {
                     if (Settings.isStoreOfflineMaps() && cache.getCoords() != null) {
-                        RxUtils.waitForCompletion(StaticMapsProvider.storeCachePreviewMap(cache));
+                        StaticMapsProvider.storeCachePreviewMap(cache).await();
                         image = StaticMapsProvider.getPreviewMap(cache);
                     }
                 }

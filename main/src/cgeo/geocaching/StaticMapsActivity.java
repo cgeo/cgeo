@@ -157,7 +157,7 @@ public class StaticMapsActivity extends AbstractActionBarActivity {
     private boolean downloadStaticMaps() {
         if (waypointId == null) {
             showToast(res.getString(R.string.info_storing_static_maps));
-            RxUtils.waitForCompletion(StaticMapsProvider.storeCacheStaticMap(cache));
+            StaticMapsProvider.storeCacheStaticMap(cache).await();
             return cache.hasStaticMap();
         }
         final Waypoint waypoint = cache.getWaypointById(waypointId);
@@ -165,7 +165,7 @@ public class StaticMapsActivity extends AbstractActionBarActivity {
             showToast(res.getString(R.string.info_storing_static_maps));
             // refresh always removes old waypoint files
             StaticMapsProvider.removeWpStaticMaps(waypoint, geocode);
-            RxUtils.waitForCompletion(StaticMapsProvider.storeWaypointStaticMap(cache, waypoint));
+            StaticMapsProvider.storeWaypointStaticMap(cache, waypoint).await();
             return StaticMapsProvider.hasStaticMapForWaypoint(geocode, waypoint);
         }
         showToast(res.getString(R.string.err_detail_not_load_map_static));

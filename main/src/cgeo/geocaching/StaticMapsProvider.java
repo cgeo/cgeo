@@ -1,7 +1,6 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.compatibility.Compatibility;
-import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointFormatter.Format;
 import cgeo.geocaching.models.Geocache;
@@ -9,16 +8,15 @@ import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.storage.LocalStorage;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.AndroidRxUtils;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
-
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
-
-import rx.Observable;
+import rx.Completable;
 import rx.functions.Func0;
 
 import android.graphics.Bitmap;
@@ -58,28 +56,28 @@ public final class StaticMapsProvider {
         return LocalStorage.getStorageFile(geocode, MAP_FILENAME_PREFIX + prefix, false, createDirs);
     }
 
-    private static <T> Observable<T> checkDownloadPermission(final Observable<T> ifPermitted) {
-        return Observable.defer(new Func0<Observable<T>>() {
+    private static Completable checkDownloadPermission(final Completable ifPermitted) {
+        return Completable.defer(new Func0<Completable>() {
             @Override
-            public Observable<T> call() {
+            public Completable call() {
                 if (System.currentTimeMillis() - last403 >= 30000) {
                     return ifPermitted;
                 }
                 Log.d("StaticMaps.downloadMap: request ignored because of recent \"permission denied\" answer");
-                return Observable.empty();
+                return Completable.complete();
             }
         });
     }
 
-    private static Observable<String> downloadDifferentZooms(final String geocode, final String markerUrl, final String prefix, final String latlonMap, final int width, final int height, final Parameters waypoints) {
-        return checkDownloadPermission(Observable.merge(downloadMap(geocode, 20, SATELLITE, markerUrl, prefix + '1', "", latlonMap, width, height, waypoints),
+    private static Completable downloadDifferentZooms(final String geocode, final String markerUrl, final String prefix, final String latlonMap, final int width, final int height, final Parameters waypoints) {
+        return checkDownloadPermission(Completable.merge(downloadMap(geocode, 20, SATELLITE, markerUrl, prefix + '1', "", latlonMap, width, height, waypoints),
                 downloadMap(geocode, 18, SATELLITE, markerUrl, prefix + '2', "", latlonMap, width, height, waypoints),
                 downloadMap(geocode, 16, ROADMAP, markerUrl, prefix + '3', "", latlonMap, width, height, waypoints),
                 downloadMap(geocode, 14, ROADMAP, markerUrl, prefix + '4', "", latlonMap, width, height, waypoints),
                 downloadMap(geocode, 11, ROADMAP, markerUrl, prefix + '5', "", latlonMap, width, height, waypoints)));
     }
 
-    private static Observable<String> downloadMap(final String geocode, final int zoom, final String mapType, final String markerUrl, final String prefix, final String shadow, final String latlonMap, final int width, final int height, final Parameters waypoints) {
+    private static Completable downloadMap(final String geocode, final int zoom, final String mapType, final String markerUrl, final String prefix, final String shadow, final String latlonMap, final int width, final int height, final Parameters waypoints) {
         // If it has been less than 30 seconds since we got a 403 (permission denied) from Google servers,
         // do not try again.
         final int scale = width <= GOOGLE_MAPS_MAX_SIZE ? 1 : 2;
@@ -87,9 +85,9 @@ public final class StaticMapsProvider {
         final int requestWidth = Math.min(width / scale, GOOGLE_MAPS_MAX_SIZE);
         final int requestHeight = (aspectRatio > 1) ? Math.round(requestWidth / aspectRatio) : requestWidth;
         final int requestZoom = Math.min((scale == 2) ? zoom + 1 : zoom, GOOGLE_MAX_ZOOM);
-        return checkDownloadPermission(Observable.defer(new Func0<Observable<String>>() {
+        return checkDownloadPermission(Completable.defer(new Func0<Completable>() {
             @Override
-            public Observable<String> call() {
+            public Completable call() {
                 final Parameters params = new Parameters(
                         "center", latlonMap,
                         "zoom", String.valueOf(requestZoom),
@@ -105,7 +103,7 @@ public final class StaticMapsProvider {
 
                 if (httpResponse == null) {
                     Log.e("StaticMapsProvider.downloadMap: httpResponse is null");
-                    return Observable.just(prefix);
+                    return Completable.complete();
                 }
                 final int statusCode = httpResponse.getStatusLine().getStatusCode();
                 if (statusCode != 200) {
@@ -113,7 +111,7 @@ public final class StaticMapsProvider {
                     if (statusCode == 403) {
                         last403 = System.currentTimeMillis();
                     }
-                    return Observable.just(prefix);
+                    return Completable.complete();
                 }
                 final File file = getMapFile(geocode, prefix, true);
                 if (LocalStorage.saveEntityToFile(httpResponse, file)) {
@@ -123,19 +121,19 @@ public final class StaticMapsProvider {
                         FileUtils.deleteIgnoringFailure(file);
                     }
                 }
-                return Observable.just(prefix);
+                return Completable.complete();
             }
         }).subscribeOn(AndroidRxUtils.networkScheduler));
     }
 
-    public static Observable<String> downloadMaps(final Geocache cache) {
+    public static Completable downloadMaps(final Geocache cache) {
         if ((!Settings.isStoreOfflineMaps() && !Settings.isStoreOfflineWpMaps()) || StringUtils.isBlank(cache.getGeocode())) {
-            return Observable.empty();
+            return Completable.complete();
         }
         // TODO Check if this is also OK, was width -25
         final Point displaySize = Compatibility.getDisplaySize();
 
-        final List<Observable<String>> downloaders = new LinkedList<>();
+        final List<Completable> downloaders = new LinkedList<>();
 
         if (Settings.isStoreOfflineMaps() && cache.getCoords() != null) {
             downloaders.add(storeCachePreviewMap(cache));
@@ -152,39 +150,39 @@ public final class StaticMapsProvider {
 
         }
 
-        return checkDownloadPermission(Observable.merge(downloaders));
+        return checkDownloadPermission(Completable.merge(downloaders));
     }
 
     /**
      * Deletes and download all Waypoints static maps.
      */
-    private static Observable<String> refreshAllWpStaticMaps(final Geocache cache, final int width, final int height) {
+    private static Completable refreshAllWpStaticMaps(final Geocache cache, final int width, final int height) {
         LocalStorage.deleteFilesWithPrefix(cache.getGeocode(), MAP_FILENAME_PREFIX + WAYPOINT_PREFIX);
-        final List<Observable<String>> downloaders = new LinkedList<>();
+        final List<Completable> downloaders = new LinkedList<>();
         for (final Waypoint waypoint : cache.getWaypoints()) {
             downloaders.add(storeWaypointStaticMap(cache.getGeocode(), width, height, waypoint));
         }
-        return checkDownloadPermission(Observable.merge(downloaders));
+        return checkDownloadPermission(Completable.merge(downloaders));
     }
 
-    public static Observable<String> storeWaypointStaticMap(final Geocache cache, final Waypoint waypoint) {
+    public static Completable storeWaypointStaticMap(final Geocache cache, final Waypoint waypoint) {
         // TODO Check if this is also OK, was width -25
         final Point displaySize = Compatibility.getDisplaySize();
         return storeWaypointStaticMap(cache.getGeocode(), displaySize.x, displaySize.y, waypoint);
     }
 
-    private static Observable<String> storeWaypointStaticMap(final String geocode, final int width, final int height, final Waypoint waypoint) {
+    private static Completable storeWaypointStaticMap(final String geocode, final int width, final int height, final Waypoint waypoint) {
         if (geocode == null) {
             Log.e("storeWaypointStaticMap - missing input parameter geocode");
-            return Observable.empty();
+            return Completable.complete();
         }
         if (waypoint == null) {
             Log.e("storeWaypointStaticMap - missing input parameter waypoint");
-            return Observable.empty();
+            return Completable.complete();
         }
         Geopoint coordinates = waypoint.getCoords();
         if (coordinates == null) {
-            return Observable.empty();
+            return Completable.complete();
         }
         final String wpLatlonMap = coordinates.format(Format.LAT_LON_DECDEGREE_COMMA);
         final String wpMarkerUrl = getWpMarkerUrl(waypoint);
@@ -192,16 +190,16 @@ public final class StaticMapsProvider {
             // download map images in separate background thread for higher performance
             return downloadMaps(geocode, wpMarkerUrl, WAYPOINT_PREFIX + waypoint.getId() + '_' + waypoint.getStaticMapsHashcode() + "_", wpLatlonMap, width, height, null);
         }
-        return Observable.empty();
+        return Completable.complete();
     }
 
-    public static Observable<String> storeCacheStaticMap(final Geocache cache) {
+    public static Completable storeCacheStaticMap(final Geocache cache) {
         // TODO Check if this is also OK, was width -25
         final Point displaySize = Compatibility.getDisplaySize();
         return storeCacheStaticMap(cache, displaySize.x, displaySize.y);
     }
 
-    private static Observable<String> storeCacheStaticMap(final Geocache cache, final int width, final int height) {
+    private static Completable storeCacheStaticMap(final Geocache cache, final int width, final int height) {
         final String latlonMap = cache.getCoords().format(Format.LAT_LON_DECDEGREE_COMMA);
         final Parameters waypoints = new Parameters();
         for (final Waypoint waypoint : cache.getWaypoints()) {
@@ -217,14 +215,14 @@ public final class StaticMapsProvider {
         return downloadMaps(cache.getGeocode(), cacheMarkerUrl, "", latlonMap, width, height, waypoints);
     }
 
-    public static Observable<String> storeCachePreviewMap(final Geocache cache) {
+    public static Completable storeCachePreviewMap(final Geocache cache) {
         final String latlonMap = cache.getCoords().format(Format.LAT_LON_DECDEGREE_COMMA);
         final Point displaySize = Compatibility.getDisplaySize();
         final String markerUrl = MARKERS_URL + "my_location_mdpi.png";
         return downloadMap(cache.getGeocode(), 15, ROADMAP, markerUrl, PREFIX_PREVIEW, "shadow:false|", latlonMap, displaySize.x, displaySize.y, null);
     }
 
-    private static Observable<String> downloadMaps(final String geocode, final String markerUrl, final String prefix,
+    private static Completable downloadMaps(final String geocode, final String markerUrl, final String prefix,
             final String latlonMap, final int width, final int height,
                                                    final Parameters waypoints) {
         return downloadDifferentZooms(geocode, markerUrl, prefix, latlonMap, width, height, waypoints);

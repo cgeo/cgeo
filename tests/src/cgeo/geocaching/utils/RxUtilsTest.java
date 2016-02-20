@@ -63,28 +63,6 @@ public class RxUtilsTest extends TestCase {
         assertThat(fromNonNull.toBlocking().single()).isEqualTo("foo");
     }
 
-    public static void testWaitForCompletion() {
-        final PublishSubject<String> observable = PublishSubject.create();
-        final AtomicBoolean terminated = new AtomicBoolean(false);
-        new Thread() {
-            @Override
-            public void run() {
-                RxUtils.waitForCompletion(observable.toBlocking());
-                terminated.set(true);
-            }
-        }.start();
-        observable.onNext("foo");
-        assertThat(terminated.get()).isFalse();
-        observable.onNext("bar");
-        assertThat(terminated.get()).isFalse();
-        observable.onCompleted();
-        try {
-            Thread.sleep(100);
-        } catch (final InterruptedException ignored) {
-        }
-        assertThat(terminated.get()).isTrue();
-    }
-
     public static void testObservableCache() {
         final AtomicInteger counter = new AtomicInteger(0);
         final RxUtils.ObservableCache<String, Integer> cache = new RxUtils.ObservableCache<String, Integer>(new Func1<String, Observable<Integer>>() {

@@ -3,14 +3,13 @@ package cgeo.geocaching;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import cgeo.geocaching.enumerations.WaypointType;
-import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.TestSettings;
+import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.utils.FileUtils;
-import cgeo.geocaching.utils.RxUtils;
 
 import junit.framework.TestCase;
 
@@ -56,7 +55,7 @@ public class StaticMapsProviderTest extends TestCase {
             assertThat(StaticMapsProvider.hasStaticMapForWaypoint(geocode, trailhead)).isFalse();
 
             // download
-            RxUtils.waitForCompletion(StaticMapsProvider.downloadMaps(cache));
+            StaticMapsProvider.downloadMaps(cache).await();
 
             try {
                 Thread.sleep(10000);
