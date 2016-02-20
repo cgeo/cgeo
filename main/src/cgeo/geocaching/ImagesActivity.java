@@ -9,8 +9,6 @@ import cgeo.geocaching.ui.ImagesList.ImageType;
 
 import org.apache.commons.collections4.CollectionUtils;
 
-import rx.Subscription;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,6 +19,8 @@ import android.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import rx.Subscription;
 
 public class ImagesActivity extends AbstractActionBarActivity {
 
@@ -85,7 +85,6 @@ public class ImagesActivity extends AbstractActionBarActivity {
         startActivity(fromActivity, geocode, logImages, ImageType.LogImages);
     }
 
-    @SuppressWarnings("deprecation")
     private static void startActivity(final Context fromActivity, final String geocode, final List<Image> logImages, final ImageType imageType) {
         final Intent logImgIntent = new Intent(fromActivity, ImagesActivity.class)
                 .putExtra(Intents.EXTRA_GEOCODE, geocode)
