@@ -65,8 +65,8 @@ public class ConnectorFactoryTest extends AbstractResourceInstrumentationTestCas
     }
 
     public static void testGetGeocodeFromUrl() {
-        assertThat(ConnectorFactory.getGeocodeFromURL("http://coord.info/GC34PLO")).isEqualTo("GC34PLO");
-        assertThat(ConnectorFactory.getGeocodeFromURL("http://www.coord.info/GC34PLO")).isEqualTo("GC34PLO");
+        assertThat(ConnectorFactory.getGeocodeFromURL("http://coord.info/GC34PJN")).isEqualTo("GC34PJN");
+        assertThat(ConnectorFactory.getGeocodeFromURL("http://www.coord.info/GC34PJN")).isEqualTo("GC34PJN");
 
         assertThat(GCConnector.getInstance().getGeocodeFromUrl("http://coord.info/GC12ABC")).isEqualTo("GC12ABC");
         assertThat(GCConnector.getInstance().getGeocodeFromUrl("http://www.coord.info/GC12ABC")).isEqualTo("GC12ABC");
