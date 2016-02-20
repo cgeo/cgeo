@@ -1264,7 +1264,7 @@ public abstract class GPXParser extends FileParser {
                 || StringUtils.contains(type, "geocache")
                 || StringUtils.contains(sym, "geocache")
                 || StringUtils.containsIgnoreCase(sym, "waymark")
- || (StringUtils.containsIgnoreCase(sym, "terracache") && !terraChildWaypoint);
+                || (StringUtils.containsIgnoreCase(sym, "terracache") && !terraChildWaypoint);
         if ("GC_WayPoint1".equals(cache.getShortDescription())) {
             terraChildWaypoint = true;
         }

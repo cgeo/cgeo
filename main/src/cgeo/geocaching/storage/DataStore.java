@@ -107,48 +107,48 @@ public class DataStore {
     // Columns and indices for the cache data
     private static final String QUERY_CACHE_DATA =
             "SELECT " +
-                    "cg_caches.updated,"            +    // 0
-                    "cg_caches.reason,"             +    // 1
-                    "cg_caches.detailed,"           +    // 2
-                    "cg_caches.detailedupdate,"     +    // 3
-                    "cg_caches.visiteddate,"        +    // 4
-                    "cg_caches.geocode,"            +    // 5
-                    "cg_caches.cacheid,"            +    // 6
-                    "cg_caches.guid,"               +    // 7
-                    "cg_caches.type,"               +    // 8
-                    "cg_caches.name,"               +    // 9
-                    "cg_caches.owner,"              +    // 10
-                    "cg_caches.owner_real,"         +    // 11
-                    "cg_caches.hidden,"             +    // 12
-                    "cg_caches.hint,"               +    // 13
-                    "cg_caches.size,"               +    // 14
-                    "cg_caches.difficulty,"         +    // 15
-                    "cg_caches.direction,"          +    // 16
-                    "cg_caches.distance,"           +    // 17
-                    "cg_caches.terrain,"            +    // 18
-                    "cg_caches.location,"           +    // 19
-                    "cg_caches.personal_note,"      +    // 20
-                    "cg_caches.shortdesc,"          +    // 21
-                    "cg_caches.favourite_cnt,"      +    // 22
-                    "cg_caches.rating,"             +    // 23
-                    "cg_caches.votes,"              +    // 24
-                    "cg_caches.myvote,"             +    // 25
-                    "cg_caches.disabled,"           +    // 26
-                    "cg_caches.archived,"           +    // 27
-                    "cg_caches.members,"            +    // 28
-                    "cg_caches.found,"              +    // 29
-                    "cg_caches.favourite,"          +    // 30
-                    "cg_caches.inventoryunknown,"   +    // 31
-                    "cg_caches.onWatchlist,"        +    // 32
-                    "cg_caches.reliable_latlon,"    +    // 33
-                    "cg_caches.coordsChanged,"      +    // 34
-                    "cg_caches.latitude,"           +    // 35
-                    "cg_caches.longitude,"          +    // 36
-                    "cg_caches.finalDefined,"       +    // 37
-                    "cg_caches._id,"                +    // 38
-                    "cg_caches.inventorycoins,"     +    // 39
-                    "cg_caches.inventorytags,"      +    // 40
-                    "cg_caches.logPasswordRequired," +  //  41
+                    "cg_caches.updated,"             +   // 0
+                    "cg_caches.reason,"              +   // 1
+                    "cg_caches.detailed,"            +   // 2
+                    "cg_caches.detailedupdate,"      +   // 3
+                    "cg_caches.visiteddate,"         +   // 4
+                    "cg_caches.geocode,"             +   // 5
+                    "cg_caches.cacheid,"             +   // 6
+                    "cg_caches.guid,"                +   // 7
+                    "cg_caches.type,"                +   // 8
+                    "cg_caches.name,"                +   // 9
+                    "cg_caches.owner,"               +   // 10
+                    "cg_caches.owner_real,"          +   // 11
+                    "cg_caches.hidden,"              +   // 12
+                    "cg_caches.hint,"                +   // 13
+                    "cg_caches.size,"                +   // 14
+                    "cg_caches.difficulty,"          +   // 15
+                    "cg_caches.direction,"           +   // 16
+                    "cg_caches.distance,"            +   // 17
+                    "cg_caches.terrain,"             +   // 18
+                    "cg_caches.location,"            +   // 19
+                    "cg_caches.personal_note,"       +   // 20
+                    "cg_caches.shortdesc,"           +   // 21
+                    "cg_caches.favourite_cnt,"       +   // 22
+                    "cg_caches.rating,"              +   // 23
+                    "cg_caches.votes,"               +   // 24
+                    "cg_caches.myvote,"              +   // 25
+                    "cg_caches.disabled,"            +   // 26
+                    "cg_caches.archived,"            +   // 27
+                    "cg_caches.members,"             +   // 28
+                    "cg_caches.found,"               +   // 29
+                    "cg_caches.favourite,"           +   // 30
+                    "cg_caches.inventoryunknown,"    +   // 31
+                    "cg_caches.onWatchlist,"         +   // 32
+                    "cg_caches.reliable_latlon,"     +   // 33
+                    "cg_caches.coordsChanged,"       +   // 34
+                    "cg_caches.latitude,"            +   // 35
+                    "cg_caches.longitude,"           +   // 36
+                    "cg_caches.finalDefined,"        +   // 37
+                    "cg_caches._id,"                 +   // 38
+                    "cg_caches.inventorycoins,"      +   // 39
+                    "cg_caches.inventorytags,"       +   // 40
+                    "cg_caches.logPasswordRequired," +   // 41
                     "cg_caches.watchlistCount";          // 42
 
     /** The list of fields needed for mapping. */
@@ -1036,8 +1036,7 @@ public class DataStore {
             if (StringUtils.isNotBlank(geocode)) {
                 listId = PreparedStatement.LIST_ID_OF_GEOCODE.getStatement();
                 value = geocode;
-            }
-            else {
+            } else {
                 listId = PreparedStatement.LIST_ID_OF_GUID.getStatement();
                 value = guid;
             }
@@ -1129,8 +1128,7 @@ public class DataStore {
             final Geocache cacheFromCache = cacheCache.getCacheFromCache(geocode);
             if (cacheFromCache == null) {
                 cachesFromDatabase.add(geocode);
-            }
-            else {
+            } else {
                 existingCaches.put(geocode, cacheFromCache);
             }
         }
@@ -1227,7 +1225,7 @@ public class DataStore {
 
         init();
 
-        //try to update record else insert fresh..
+        // try to update record else insert fresh..
         database.beginTransaction();
 
         try {
@@ -1616,7 +1614,7 @@ public class DataStore {
         final Set<String> remaining = new HashSet<>(geocodes);
 
         if (loadFlags.contains(LoadFlag.CACHE_BEFORE)) {
-            for (final String geocode : new HashSet<>(remaining)) {
+            for (final String geocode : geocodes) {
                 final Geocache cache = cacheCache.getCacheFromCache(geocode);
                 if (cache != null) {
                     result.add(cache);
@@ -1650,7 +1648,7 @@ public class DataStore {
             }
         }
 
-        if (remaining.size() >= 1) {
+        if (!CollectionUtils.isEmpty(remaining)) {
             Log.d("DataStore.loadCaches(" + remaining.toString() + ") returned no results");
         }
         return result;
@@ -1812,7 +1810,6 @@ public class DataStore {
         cache.setFinalDefined(cursor.getInt(37) > 0);
         cache.setLogPasswordRequired(cursor.getInt(41) > 0);
         cache.setWatchlistCount(cursor.getInt(42));
-
 
         Log.d("Loading " + cache.toString() + " (" + cache.getListId() + ") from DB");
 
