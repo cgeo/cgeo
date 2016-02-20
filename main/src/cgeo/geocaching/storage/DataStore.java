@@ -1614,7 +1614,7 @@ public class DataStore {
         final Set<String> remaining = new HashSet<>(geocodes);
 
         if (loadFlags.contains(LoadFlag.CACHE_BEFORE)) {
-            for (final String geocode : new HashSet<>(remaining)) {
+            for (final String geocode : geocodes) {
                 final Geocache cache = cacheCache.getCacheFromCache(geocode);
                 if (cache != null) {
                     result.add(cache);
