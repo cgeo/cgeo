@@ -1693,15 +1693,15 @@ public final class GCParser {
                 } catch (final ParseException ignored) {
                 }
 
-                final LogEntry logDone = new LogEntry(
-                        Html.fromHtml(matcherLogs.group(3)).toString().trim(),
-                        date,
-                        LogType.getByIconName(matcherLogs.group(1)),
-                        matcherLogs.group(7).trim());
+                final LogEntry.Builder logDoneBuilder = new LogEntry.Builder()
+                        .setAuthor(Html.fromHtml(matcherLogs.group(3)).toString().trim())
+                        .setDate(date)
+                        .setLogType(LogType.getByIconName(matcherLogs.group(1)))
+                        .setLog(matcherLogs.group(7).trim());
 
                 if (matcherLogs.group(4) != null && matcherLogs.group(6) != null) {
-                    logDone.cacheGuid = matcherLogs.group(4);
-                    logDone.cacheName = matcherLogs.group(6);
+                    logDoneBuilder.setCacheGuid(matcherLogs.group(4));
+                    logDoneBuilder.setCacheName(matcherLogs.group(6));
                 }
 
                 // Apply the pattern for images in a trackable log entry against each full log (group(0))
@@ -1716,10 +1716,10 @@ public final class GCParser {
                             .setUrl(matcherLogImages.group(1))
                             .setTitle(matcherLogImages.group(2))
                             .build();
-                    logDone.addLogImage(logImage);
+                    logDoneBuilder.addLogImage(logImage);
                 }
 
-                trackable.getLogs().add(logDone);
+                trackable.getLogs().add(logDoneBuilder.build());
             }
         } catch (final Exception e) {
             // failed to parse logs
@@ -1839,13 +1839,13 @@ public final class GCParser {
                         // display them at all.
                         final String latLon = entry.path("LatLonString").asText();
                         final String logText = (StringUtils.isEmpty(latLon) ? "" : (latLon + "<br/><br/>")) + TextUtils.removeControlCharacters(entry.path("LogText").asText());
-                        final LogEntry logDone = new LogEntry(
-                                TextUtils.removeControlCharacters(entry.path("UserName").asText()),
-                                date,
-                                LogType.getByIconName(logIconName),
-                                logText);
-                        logDone.found = entry.path("GeocacheFindCount").asInt();
-                        logDone.friend = markAsFriendsLog;
+                        final LogEntry.Builder logDoneBuilder = new LogEntry.Builder()
+                                .setAuthor(TextUtils.removeControlCharacters(entry.path("UserName").asText()))
+                                .setDate(date)
+                                .setLogType(LogType.getByIconName(logIconName))
+                                .setLog(logText)
+                                .setFound(entry.path("GeocacheFindCount").asInt())
+                                .setFriend(markAsFriendsLog);
 
                         final ArrayNode images = (ArrayNode) entry.get("Images");
                         for (final JsonNode image: images) {
@@ -1853,10 +1853,10 @@ public final class GCParser {
                             final String title = TextUtils.removeControlCharacters(image.path("Name").asText());
                             final String description = image.path("Descr").asText();
                             final Image logImage = new Image.Builder().setUrl(url).setTitle(title).setDescription(description).build();
-                            logDone.addLogImage(logImage);
+                            logDoneBuilder.addLogImage(logImage);
                         }
 
-                        subscriber.onNext(logDone);
+                        subscriber.onNext(logDoneBuilder.build());
                     }
                 } catch (final IOException e) {
                     Log.w("GCParser.loadLogsFromDetails: Failed to parse cache logs", e);
@@ -2014,7 +2014,7 @@ public final class GCParser {
             ownLogs.subscribe(new Action1<LogEntry>() {
                 @Override
                 public void call(final LogEntry logEntry) {
-                    if (logEntry.type == LogType.FOUND_IT) {
+                    if (logEntry.getType() == LogType.FOUND_IT) {
                         cache.setVisitedDate(logEntry.date);
                     }
                 }
@@ -2047,7 +2047,9 @@ public final class GCParser {
     private static void mergeFriendsLogs(final List<LogEntry> mergedLogs, final Iterable<LogEntry> logsToMerge) {
         for (final LogEntry log : logsToMerge) {
             if (mergedLogs.contains(log)) {
-                mergedLogs.get(mergedLogs.indexOf(log)).friend = true;
+                final LogEntry friendLog = mergedLogs.get(mergedLogs.indexOf(log));
+                final LogEntry updatedFriendLog = friendLog.buildUpon().setFriend(true).build();
+                mergedLogs.set(mergedLogs.indexOf(log), updatedFriendLog);
             } else {
                 mergedLogs.add(log);
             }

@@ -76,7 +76,7 @@ public abstract class LogsViewCreator extends AbstractCachingListViewPageViewCre
             holder.date.setVisibility(View.GONE);
         }
 
-        holder.type.setText(log.type.getL10n());
+        holder.type.setText(log.getType().getL10n());
         holder.author.setText(StringEscapeUtils.unescapeHtml4(log.author));
 
         fillCountOrLocation(holder, log);
@@ -105,7 +105,7 @@ public abstract class LogsViewCreator extends AbstractCachingListViewPageViewCre
         }
 
         // colored marker
-        final int marker = log.type.markerId;
+        final int marker = log.getType().markerId;
         if (marker != 0) {
             holder.marker.setVisibility(View.VISIBLE);
             holder.marker.setImageResource(marker);

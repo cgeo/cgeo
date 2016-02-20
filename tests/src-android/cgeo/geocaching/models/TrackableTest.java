@@ -49,7 +49,12 @@ public class TrackableTest extends TestCase {
     public static void testMergeTrackable() {
         final Trackable trackable1 = createTrackable("TB1234");
         final AbstractList<LogEntry> logEntryList1 = new ArrayList<>(1);
-        final LogEntry logEntry1 = new LogEntry("author", 100, LogType.FOUND_IT, "OLDER");
+        final LogEntry logEntry1 = new LogEntry.Builder()
+                .setAuthor("author")
+                .setDate(100)
+                .setLogType(LogType.FOUND_IT)
+                .setLog("OLDER")
+                .build();
         logEntryList1.add(logEntry1);
         trackable1.setLogs(logEntryList1);
 
@@ -69,7 +74,12 @@ public class TrackableTest extends TestCase {
         trackable2.setDetails("details");
         trackable2.setImage("image");
         final AbstractList<LogEntry> logEntryList2 = new ArrayList<>(1);
-        final LogEntry logEntry2 = new LogEntry("author", 200, LogType.FOUND_IT, "RECENT");
+        final LogEntry logEntry2 = new LogEntry.Builder()
+                .setAuthor("author")
+                .setDate(200)
+                .setLogType(LogType.FOUND_IT)
+                .setLog("RECENT")
+                .build();
         logEntryList2.add(logEntry1);
         logEntryList2.add(logEntry2);
         trackable2.setLogs(logEntryList2);

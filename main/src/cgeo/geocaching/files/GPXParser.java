@@ -102,7 +102,7 @@ public abstract class GPXParser extends FileParser {
 
     private Geocache cache;
     private Trackable trackable = new Trackable();
-    private LogEntry log = null;
+    private LogEntry.Builder logBuilder = null;
 
     private String type = null;
     private String sym = null;
@@ -790,11 +790,11 @@ public abstract class GPXParser extends FileParser {
 
                 @Override
                 public void start(final Attributes attrs) {
-                    log = new LogEntry("", 0, LogType.UNKNOWN, "");
+                    logBuilder = new LogEntry.Builder();
 
                     try {
                         if (attrs.getIndex("id") > -1) {
-                            log.id = Integer.parseInt(attrs.getValue("id"));
+                            logBuilder.setId(Integer.parseInt(attrs.getValue("id")));
                         }
                     } catch (final NumberFormatException ignored) {
                         // nothing
@@ -806,8 +806,9 @@ public abstract class GPXParser extends FileParser {
 
                 @Override
                 public void end() {
-                    if (log.type != LogType.UNKNOWN) {
-                        if (log.type.isFoundLog() && StringUtils.isNotBlank(log.author)) {
+                    final LogEntry log = logBuilder.build();
+                    if (log.getType() != LogType.UNKNOWN) {
+                        if (log.getType().isFoundLog() && StringUtils.isNotBlank(log.author)) {
                             final IConnector connector = ConnectorFactory.getConnector(cache);
                             if (connector instanceof ILogin && StringUtils.equals(log.author, ((ILogin) connector).getUserName())) {
                                 cache.setFound(true);
@@ -825,7 +826,7 @@ public abstract class GPXParser extends FileParser {
                 @Override
                 public void end(final String body) {
                     try {
-                        log.date = parseDate(body).getTime();
+                        logBuilder.setDate(parseDate(body).getTime());
                     } catch (final Exception e) {
                         Log.w("Failed to parse log date", e);
                     }
@@ -838,7 +839,7 @@ public abstract class GPXParser extends FileParser {
                 @Override
                 public void end(final String body) {
                     final String logType = validate(body);
-                    log.type = LogType.getByType(logType);
+                    logBuilder.setLogType(LogType.getByType(logType));
                 }
             });
 
@@ -847,7 +848,7 @@ public abstract class GPXParser extends FileParser {
 
                 @Override
                 public void end(final String finderName) {
-                    log.author = validate(finderName);
+                    logBuilder.setAuthor(validate(finderName));
                 }
             });
 
@@ -856,7 +857,7 @@ public abstract class GPXParser extends FileParser {
 
                 @Override
                 public void end(final String logText) {
-                    log.log = validate(logText);
+                    logBuilder.setLog(validate(logText));
                 }
             });
         }
@@ -1048,11 +1049,11 @@ public abstract class GPXParser extends FileParser {
 
             @Override
             public void start(final Attributes attrs) {
-                log = new LogEntry("", 0, LogType.UNKNOWN, "");
+                logBuilder = new LogEntry.Builder();
 
                 try {
                     if (attrs.getIndex("id") > -1) {
-                        log.id = Integer.parseInt(attrs.getValue("id"));
+                        logBuilder.setId(Integer.parseInt(attrs.getValue("id")));
                     }
                 } catch (final NumberFormatException ignored) {
                     // nothing
@@ -1064,8 +1065,9 @@ public abstract class GPXParser extends FileParser {
 
             @Override
             public void end() {
-                if (log.type != LogType.UNKNOWN) {
-                    if (log.type.isFoundLog() && StringUtils.isNotBlank(log.author)) {
+                    final LogEntry log = logBuilder.build();
+                if (log.getType() != LogType.UNKNOWN) {
+                    if (log.getType().isFoundLog() && StringUtils.isNotBlank(log.author)) {
                         final IConnector connector = ConnectorFactory.getConnector(cache);
                         if (connector instanceof ILogin && StringUtils.equals(log.author, ((ILogin) connector).getUserName())) {
                             cache.setFound(true);
@@ -1083,7 +1085,7 @@ public abstract class GPXParser extends FileParser {
             @Override
             public void end(final String body) {
                 try {
-                    log.date = parseDate(body).getTime();
+                    logBuilder.setDate(parseDate(body).getTime());
                 } catch (final Exception e) {
                     Log.w("Failed to parse log date", e);
                 }
@@ -1096,7 +1098,7 @@ public abstract class GPXParser extends FileParser {
             @Override
             public void end(final String body) {
                 final String logType = validate(body);
-                log.type = TerraCachingLogType.getLogType(logType);
+                logBuilder.setLogType(TerraCachingLogType.getLogType(logType));
             }
         });
 
@@ -1105,7 +1107,7 @@ public abstract class GPXParser extends FileParser {
 
             @Override
             public void end(final String finderName) {
-                log.author = validate(finderName);
+                logBuilder.setAuthor(validate(finderName));
             }
         });
 
@@ -1114,7 +1116,7 @@ public abstract class GPXParser extends FileParser {
 
             @Override
             public void end(final String entry) {
-                log.log = trimHtml(validate(entry));
+                logBuilder.setLog(trimHtml(validate(entry)));
             }
 
         });

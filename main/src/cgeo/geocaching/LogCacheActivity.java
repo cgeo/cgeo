@@ -279,7 +279,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
             // If log had been previously saved, load it now, otherwise initialize signature as needed
             final LogEntry log = DataStore.loadLogOffline(geocode);
             if (log != null) {
-                typeSelected = log.type;
+                typeSelected = log.getType();
                 date.setTime(new Date(log.date));
                 text = log.log;
             } else if (StringUtils.isNotBlank(Settings.getSignature())
@@ -488,6 +488,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
 
             try {
                 final LogResult logResult = loggingManager.postLog(typeSelected, date, log, logPwd, new ArrayList<>(trackables));
+                ImageResult imageResult = null;
 
                 if (logResult.getPostLogResult() == StatusCode.NO_ERROR) {
                     // update geocache in DB
@@ -497,10 +498,27 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
                     }
                     DataStore.saveChangedCache(cache);
 
+                    final LogEntry.Builder logBuilder = new LogEntry.Builder()
+                            .setDate(date.getTimeInMillis())
+                            .setLogType(typeSelected)
+                            .setLog(log)
+                            .setFriend(true);
+
+                    // Posting image
+                    if (!image.isEmpty()) {
+                        publishProgress(res.getString(R.string.log_posting_image));
+                        imageResult = loggingManager.postLogImage(logResult.getLogId(), image);
+                        final String uploadedImageUrl = imageResult.getImageUri();
+                        if (StringUtils.isNotEmpty(uploadedImageUrl)) {
+                            logBuilder.addLogImage(image.buildUpon()
+                                    .setUrl(uploadedImageUrl)
+                                    .build());
+                        }
+                    }
+
                     // update logs in DB
                     final List<LogEntry> newLogs = new ArrayList<>(cache.getLogs());
-                    final LogEntry logNow = new LogEntry(date.getTimeInMillis(), typeSelected, log);
-                    logNow.friend = true;
+                    final LogEntry logNow = logBuilder.build();
                     newLogs.add(0, logNow);
                     DataStore.saveLogs(cache.getGeocode(), newLogs);
 
@@ -544,22 +562,12 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
                             }
                         }
                     }
-
-                    if (!image.isEmpty()) {
-                        publishProgress(res.getString(R.string.log_posting_image));
-                        final ImageResult imageResult = loggingManager.postLogImage(logResult.getLogId(), image);
-                        final String uploadedImageUrl = imageResult.getImageUri();
-                        if (StringUtils.isNotEmpty(uploadedImageUrl)) {
-                            image = image.buildUpon()
-                                    .setUrl(uploadedImageUrl)
-                                    .build();
-                            logNow.addLogImage(image);
-                            DataStore.saveLogs(cache.getGeocode(), newLogs);
-                        }
-                        return imageResult.getPostResult();
-                    }
                 }
 
+                // Todo error handling should be better than that
+                if (imageResult != null && imageResult.getPostResult() != StatusCode.NO_ERROR && imageResult.getPostResult() != StatusCode.LOG_SAVED) {
+                    return imageResult.getPostResult();
+                }
                 return logResult.getPostLogResult();
             } catch (final RuntimeException e) {
                 Log.e("LogCacheActivity.Poster.doInBackgroundInternal", e);

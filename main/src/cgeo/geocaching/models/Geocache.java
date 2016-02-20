@@ -514,7 +514,7 @@ public class Geocache implements IWaypoint {
         if (offlineLog == null) {
             return null;
         }
-        return offlineLog.type;
+        return offlineLog.getType();
     }
 
     /**
@@ -1870,7 +1870,7 @@ public class Geocache implements IWaypoint {
      */
     public boolean hasOwnLog(final LogType logType) {
         for (final LogEntry logEntry : getLogs()) {
-            if (logEntry.type == logType && logEntry.isOwn()) {
+            if (logEntry.getType() == logType && logEntry.isOwn()) {
                 return true;
             }
         }

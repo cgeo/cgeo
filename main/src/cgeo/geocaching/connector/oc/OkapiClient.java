@@ -522,11 +522,12 @@ final class OkapiClient {
                 if (date == null) {
                     continue;
                 }
-                final LogEntry log = new LogEntry(
-                        parseUser(logResponse.get(LOG_USER)),
-                        date.getTime(),
-                        parseLogType(logResponse.get(LOG_TYPE).asText()),
-                        HtmlUtils.removeExtraTags(logResponse.get(LOG_COMMENT).asText().trim()));
+
+                final LogEntry log = new LogEntry.Builder()
+                        .setAuthor(parseUser(logResponse.get(LOG_USER)))
+                        .setDate(date.getTime())
+                        .setLogType(parseLogType(logResponse.get(LOG_TYPE).asText()))
+                        .setLog(HtmlUtils.removeExtraTags(logResponse.get(LOG_COMMENT).asText().trim())).build();
                 result.add(log);
             } catch (final NullPointerException e) {
                 Log.e("OkapiClient.parseLogs", e);

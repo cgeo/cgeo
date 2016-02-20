@@ -24,7 +24,11 @@ public class ExportTest extends CGeoTestCase {
     public static void testGSAKExport() {
         final Geocache cache = new Geocache();
         cache.setGeocode("GCX1234");
-        final LogEntry log = new LogEntry(1353244820000L, LogType.FOUND_IT, "Hidden in a tree");
+        final LogEntry log = new LogEntry.Builder()
+                .setDate(1353244820000L)
+                .setLogType(LogType.FOUND_IT)
+                .setLog("Hidden in a tree")
+                .build();
         final FieldNotes fieldNotes = new FieldNotes();
         fieldNotes.add(cache, log);
         assertEquals("Non matching export " + fieldNotes.getContent(), "GCX1234,2012-11-18T13:20:20Z,Found it,\"Hidden in a tree\"\n", fieldNotes.getContent());
@@ -34,7 +38,11 @@ public class ExportTest extends CGeoTestCase {
         final Geocache cache = new Geocache();
         cache.setGeocode("GCX1234");
         cache.setCoords(new Geopoint("N 49 44.000 E 8 37.000"));
-        final LogEntry log = new LogEntry(1353244820000L, LogType.FOUND_IT, "Smile: \ud83d\ude0a");
+        final LogEntry log = new LogEntry.Builder()
+                .setDate(1353244820000L)
+                .setLogType(LogType.FOUND_IT)
+                .setLog("Smile: \ud83d\ude0a")
+                .build();
         DataStore.saveCache(cache, LoadFlags.SAVE_ALL);
         DataStore.saveLogs(cache.getGeocode(), Collections.singletonList(log));
         assertCanExport(cache);

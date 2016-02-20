@@ -1484,7 +1484,7 @@ public class DataStore {
         for (final LogEntry log : logs) {
             insertLog.bindString(1, geocode);
             insertLog.bindLong(2, timestamp);
-            insertLog.bindLong(3, log.type.id);
+            insertLog.bindLong(3, log.getType().id);
             insertLog.bindString(4, log.author);
             insertLog.bindString(5, log.log);
             insertLog.bindLong(6, log.date);
@@ -1987,18 +1987,19 @@ public class DataStore {
         LogEntry log = null;
         while (cursor.moveToNext() && logs.size() < 100) {
             if (log == null || log.id != cursor.getInt(0)) {
-                log = new LogEntry(
-                        cursor.getString(2),
-                        cursor.getLong(4),
-                        LogType.getById(cursor.getInt(1)),
-                        cursor.getString(3));
-                log.id = cursor.getInt(0);
-                log.found = cursor.getInt(5);
-                log.friend = cursor.getInt(6) == 1;
+                LogEntry.Builder logBuilder = new LogEntry.Builder()
+                        .setAuthor(cursor.getString(2))
+                        .setDate(cursor.getLong(4))
+                        .setLogType(LogType.getById(cursor.getInt(1)))
+                        .setLog(cursor.getString(3))
+                        .setId(cursor.getInt(0))
+                        .setFound(cursor.getInt(5))
+                        .setFriend(cursor.getInt(6) == 1);
+                if (!cursor.isNull(7)) {
+                    logBuilder.addLogImage(new Image.Builder().setUrl(cursor.getString(10)).setTitle(cursor.getString(9)).setDescription(cursor.getString(11)).build());
+                }
+                log = logBuilder.build();
                 logs.add(log);
-            }
-            if (!cursor.isNull(7)) {
-                log.addLogImage(new Image.Builder().setUrl(cursor.getString(10)).setTitle(cursor.getString(9)).setDescription(cursor.getString(11)).build());
             }
         }
 
@@ -2528,10 +2529,12 @@ public class DataStore {
 
         LogEntry log = null;
         if (cursor.moveToFirst()) {
-            log = new LogEntry(cursor.getLong(3),
-                    LogType.getById(cursor.getInt(1)),
-                    cursor.getString(2));
-            log.id = cursor.getInt(0);
+            log = new LogEntry.Builder()
+                    .setDate(cursor.getLong(3))
+                    .setLogType(LogType.getById(cursor.getInt(1)))
+                    .setLog(cursor.getString(2))
+                    .setId(cursor.getInt(0))
+                    .build();
         }
 
         cursor.close();

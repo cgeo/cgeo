@@ -495,7 +495,11 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
                     addLocalTrackableLog(logMsg);
                     if (tweetCheck.isChecked() && tweetBox.getVisibility() == View.VISIBLE) {
                         // TODO oldLogType as a temp workaround...
-                        final LogEntry logNow = new LogEntry(date.getTimeInMillis(), typeSelected.oldLogtype, logMsg);
+                        final LogEntry logNow = new LogEntry.Builder()
+                                .setDate(date.getTimeInMillis())
+                                .setLogType(typeSelected.oldLogtype)
+                                .setLog(logMsg)
+                                .build();
                         Twitter.postTweetTrackable(trackable.getGeocode(), logNow);
                     }
                 }
@@ -534,7 +538,11 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
          */
         private void addLocalTrackableLog(final String logText) {
             // TODO create a LogTrackableEntry. For now use "oldLogtype" as a temporary migration path
-            final LogEntry logEntry = new LogEntry(date.getTimeInMillis(), typeSelected.oldLogtype, logText);
+            final LogEntry logEntry = new LogEntry.Builder()
+                    .setDate(date.getTimeInMillis())
+                    .setLogType(typeSelected.oldLogtype)
+                    .setLog(logText)
+                    .build();
             final List<LogEntry> modifiedLogs = new ArrayList<>(trackable.getLogs());
             modifiedLogs.add(0, logEntry);
             trackable.setLogs(modifiedLogs);

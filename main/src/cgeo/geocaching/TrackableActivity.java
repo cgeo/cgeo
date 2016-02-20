@@ -494,7 +494,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
                 // days since last spotting
                 if (showTimeSpan) {
                     for (final LogEntry log : trackable.getLogs()) {
-                        if (log.type == LogType.RETRIEVED_IT || log.type == LogType.GRABBED_IT || log.type == LogType.DISCOVERED_IT || log.type == LogType.PLACED_IT) {
+                        if (log.getType() == LogType.RETRIEVED_IT || log.getType() == LogType.GRABBED_IT || log.getType() == LogType.DISCOVERED_IT || log.getType() == LogType.PLACED_IT) {
                             text.append(" (").append(Formatter.formatDaysAgo(log.date)).append(')');
                             break;
                         }

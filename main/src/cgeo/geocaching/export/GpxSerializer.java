@@ -286,7 +286,7 @@ public final class GpxSerializer {
 
             XmlUtils.multipleTexts(gpx, NS_GROUNDSPEAK,
                     "date", dateFormatZ.format(new Date(log.date)),
-                    "type", log.type.type);
+                    "type", log.getType().type);
 
             gpx.startTag(NS_GROUNDSPEAK, "finder");
             gpx.attribute("", "id", "");

@@ -48,8 +48,7 @@ public class CacheLogsViewCreator extends LogsViewCreator {
         final LogEntry log = DataStore.loadLogOffline(cache.getGeocode());
         final List<LogEntry> logs = new ArrayList<>(logsIn);
         if (log != null) {
-            log.author = res.getString(R.string.log_your_saved_log);
-            logs.add(0, log);
+            logs.add(0, log.buildUpon().setAuthor(res.getString(R.string.log_your_saved_log)).build());
         }
         return logs;
     }

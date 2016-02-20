@@ -102,11 +102,11 @@ public class CgeoApplicationTest extends CGeoTestCase {
         for (final LogEntry log : tb.getLogs()) {
             assertThat(log.date).isGreaterThan(0);
             assertThat(log.author).isNotEmpty();
-            if (log.type == LogType.PLACED_IT || log.type == LogType.RETRIEVED_IT) {
+            if (log.getType() == LogType.PLACED_IT || log.getType() == LogType.RETRIEVED_IT) {
                 assertThat(log.cacheName).isNotEmpty();
                 assertThat(log.cacheGuid).isNotEmpty();
             } else {
-                assertThat(log.type).isNotEqualTo(LogType.UNKNOWN);
+                assertThat(log.getType()).isNotEqualTo(LogType.UNKNOWN);
             }
         }
     }
