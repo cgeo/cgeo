@@ -17,6 +17,11 @@ public class TravelBugConnectorTest extends TestCase {
         assertThat(getConnector().canHandleTrackable("GK1234")).isTrue(); // valid secret code, even though this might be a geokrety
         assertThat(getConnector().canHandleTrackable("GST9HV")).isTrue(); // existing secret code
         assertThat(getConnector().canHandleTrackable("UNKNOWN")).isFalse();
+
+        assertThat(getConnector().canHandleTrackable("GC1234")).isTrue();
+        assertThat(getConnector().canHandleTrackable("GC1234", TrackableBrand.UNKNOWN)).isTrue(); // accepted as TB
+        assertThat(getConnector().canHandleTrackable("GC1234", TrackableBrand.TRAVELBUG)).isTrue(); // accepted explicitly as TB
+        assertThat(getConnector().canHandleTrackable("GC1234", TrackableBrand.GEOKRETY)).isFalse(); // Not a TB
     }
 
     public static void testGetUrl() {
@@ -50,8 +55,8 @@ public class TravelBugConnectorTest extends TestCase {
         assertThat(TravelBugConnector.getInstance().getTrackableCodeFromUrl("https://www.geocaching.com/track/details.aspx?tracker=TB1234")).isEqualTo("TB1234");
 
         // do not match coord.info URLs of caches
-        assertThat(TravelBugConnector.getInstance().getTrackableCodeFromUrl("http://coord.info/GC1234")).isNull();
-        assertThat(TravelBugConnector.getInstance().getTrackableCodeFromUrl("http://www.coord.info/GC1234")).isNull();
+        assertThat(TravelBugConnector.getInstance().getTrackableCodeFromUrl("http://coord.info/GC1234")).isEqualTo("GC1234");
+        assertThat(TravelBugConnector.getInstance().getTrackableCodeFromUrl("http://www.coord.info/GC1234")).isEqualTo("GC1234");
     }
 
     public static void testRecommendGeocode() throws Exception {

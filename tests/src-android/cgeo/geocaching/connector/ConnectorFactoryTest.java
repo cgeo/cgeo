@@ -95,8 +95,8 @@ public class ConnectorFactoryTest extends AbstractResourceInstrumentationTestCas
         assertThat(ConnectorFactory.getTrackableFromURL("https://www.geocaching.com/track/details.aspx?tracker=TB1234")).isEqualTo("TB1234");
 
         // cache URLs
-        assertThat(ConnectorFactory.getTrackableFromURL("http://coord.info/GC1234")).isNull();
-        assertThat(ConnectorFactory.getTrackableFromURL("http://www.coord.info/GC1234")).isNull();
+        assertThat(ConnectorFactory.getTrackableFromURL("http://coord.info/GC1234")).isEqualTo("GC1234");
+        assertThat(ConnectorFactory.getTrackableFromURL("http://www.coord.info/GC1234")).isEqualTo("GC1234");
     }
 
     public static Set<String> getGeocodeSample() {

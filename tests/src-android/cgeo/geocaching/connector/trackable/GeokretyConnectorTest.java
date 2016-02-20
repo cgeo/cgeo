@@ -16,17 +16,24 @@ import java.util.List;
 public class GeokretyConnectorTest extends AbstractResourceInstrumentationTestCase {
 
     public static void testCanHandleTrackable() {
-        assertThat(new GeokretyConnector().canHandleTrackable("GK82A2")).isTrue();
-        assertThat(new GeokretyConnector().canHandleTrackable("GKXYZ1")).isFalse(); // non hex
-        assertThat(new GeokretyConnector().canHandleTrackable("TB1234")).isFalse();
-        assertThat(new GeokretyConnector().canHandleTrackable("UNKNOWN")).isFalse();
+        assertThat(getConnector().canHandleTrackable("GK82A2")).isTrue();
+        assertThat(getConnector().canHandleTrackable("TB1234")).isFalse();
+        assertThat(getConnector().canHandleTrackable("UNKNOWN")).isFalse();
+
+        assertThat(getConnector().canHandleTrackable("GKXYZ1")).isFalse(); // non hex
+        assertThat(getConnector().canHandleTrackable("GKXYZ1", TrackableBrand.GEOKRETY)).isTrue(); // non hex, but match secret codes pattern
+
+        assertThat(getConnector().canHandleTrackable("GC1234")).isFalse();
+        assertThat(getConnector().canHandleTrackable("GC1234", TrackableBrand.UNKNOWN)).isFalse();
+        assertThat(getConnector().canHandleTrackable("GC1234", TrackableBrand.TRAVELBUG)).isFalse();
+        assertThat(getConnector().canHandleTrackable("GC1234", TrackableBrand.GEOKRETY)).isTrue();
     }
 
     public static void testGetTrackableCodeFromUrl() throws Exception {
-        assertThat(new GeokretyConnector().getTrackableCodeFromUrl("http://www.geokrety.org/konkret.php?id=46464")).isEqualTo("GKB580");
-        assertThat(new GeokretyConnector().getTrackableCodeFromUrl("https://www.geokrety.org/konkret.php?id=46464")).isEqualTo("GKB580");
-        assertThat(new GeokretyConnector().getTrackableCodeFromUrl("http://geokrety.org/konkret.php?id=46465")).isEqualTo("GKB581");
-        assertThat(new GeokretyConnector().getTrackableCodeFromUrl("https://geokrety.org/konkret.php?id=46465")).isEqualTo("GKB581");
+        assertThat(getConnector().getTrackableCodeFromUrl("http://www.geokrety.org/konkret.php?id=46464")).isEqualTo("GKB580");
+        assertThat(getConnector().getTrackableCodeFromUrl("https://www.geokrety.org/konkret.php?id=46464")).isEqualTo("GKB580");
+        assertThat(getConnector().getTrackableCodeFromUrl("http://geokrety.org/konkret.php?id=46465")).isEqualTo("GKB581");
+        assertThat(getConnector().getTrackableCodeFromUrl("https://geokrety.org/konkret.php?id=46465")).isEqualTo("GKB581");
     }
 
     public static void testGeocode() throws Exception {
