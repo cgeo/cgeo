@@ -1225,7 +1225,7 @@ public class DataStore {
 
         init();
 
-        //try to update record else insert fresh..
+        // try to update record else insert fresh..
         database.beginTransaction();
 
         try {
@@ -1810,7 +1810,6 @@ public class DataStore {
         cache.setFinalDefined(cursor.getInt(37) > 0);
         cache.setLogPasswordRequired(cursor.getInt(41) > 0);
         cache.setWatchlistCount(cursor.getInt(42));
-
 
         Log.d("Loading " + cache.toString() + " (" + cache.getListId() + ") from DB");
 
