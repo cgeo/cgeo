@@ -461,3 +461,31 @@ tasks.whenTaskAdded { theTask ->
         theTask.dependsOn "copyDefaultPreferencesToAndroid"
     }
 }
+
+apply plugin: 'de.undercouch.download'
+
+import de.undercouch.gradle.tasks.download.Download
+
+def mavenLib(vendor, name, version) {
+    "https://search.maven.org/remotecontent?filepath=${vendor}/${name}/${version}/${name}-${version}.jar"
+}
+
+task downloadLibs(type:Download) {
+    group "cgeo"
+    description "Downloads the dependency JARs for use with Eclipse"
+    src([
+            mavenLib('io/reactivex', 'rxjava', '1.1.1'),
+            mavenLib('io/reactivex', 'rxandroid', '0.25.0'),
+            mavenLib('com/fasterxml/jackson/core','jackson-core','2.7.1'),
+            mavenLib('com/fasterxml/jackson/core','jackson-databind','2.7.1'),
+            mavenLib('com/fasterxml/jackson/core','jackson-annotations','2.7.1'),
+            mavenLib('org/apache/commons','commons-collections4','4.1'),
+            mavenLib('org/apache/commons','commons-lang3','3.4'),
+            mavenLib('commons-io','commons-io','2.4'),
+            mavenLib('com/jakewharton','butterknife','7.0.1')
+    ])
+    dest 'libs'
+}
+
+
+
