@@ -1029,6 +1029,7 @@
     <string name="trackable_not_activated">Trackable not activated</string>
     <string name="trackable_travelbug">Travelbug</string>
     <string name="trackable_geokrety">GeoKrety</string>
+    <string name="trackable_geolutins">GeoLutins</string>
 
     <string name="geokret_type_traditional">Traditional</string>
     <string name="geokret_type_book_or_media">Book or electronic media</string>

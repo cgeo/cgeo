@@ -11,6 +11,7 @@ import org.eclipse.jdt.annotation.NonNull;
 public enum TrackableBrand {
     TRAVELBUG(1, R.drawable.trackable_travelbug, R.string.trackable_travelbug),
     GEOKRETY(2, R.drawable.trackable_geokrety, R.string.trackable_geokrety),
+    GEOLUTINS(4, R.drawable.trackable_geolutins, R.string.trackable_geolutins),
     UNKNOWN(0, R.drawable.trackable_all, R.string.trackable_unknown); // Trackable not initialized yet
 
     private final int id;
