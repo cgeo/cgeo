@@ -1036,8 +1036,7 @@ public class DataStore {
             if (StringUtils.isNotBlank(geocode)) {
                 listId = PreparedStatement.LIST_ID_OF_GEOCODE.getStatement();
                 value = geocode;
-            }
-            else {
+            } else {
                 listId = PreparedStatement.LIST_ID_OF_GUID.getStatement();
                 value = guid;
             }
@@ -1129,8 +1128,7 @@ public class DataStore {
             final Geocache cacheFromCache = cacheCache.getCacheFromCache(geocode);
             if (cacheFromCache == null) {
                 cachesFromDatabase.add(geocode);
-            }
-            else {
+            } else {
                 existingCaches.put(geocode, cacheFromCache);
             }
         }
