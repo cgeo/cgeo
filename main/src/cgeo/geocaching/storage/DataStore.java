@@ -1648,7 +1648,7 @@ public class DataStore {
             }
         }
 
-        if (!CollectionUtils.isEmpty(remaining)) {
+        if (CollectionUtils.isNotEmpty(remaining)) {
             Log.d("DataStore.loadCaches(" + remaining.toString() + ") returned no results");
         }
         return result;

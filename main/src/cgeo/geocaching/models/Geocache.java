@@ -1802,7 +1802,7 @@ public class Geocache implements IWaypoint {
                 try {
                     final int hours = Integer.parseInt(matcher.group(1));
                     int minutes = 0;
-                    if (matcher.groupCount() >= 2 && !StringUtils.isEmpty(matcher.group(2))) {
+                    if (matcher.groupCount() >= 2 && StringUtils.isNotEmpty(matcher.group(2))) {
                         minutes = Integer.parseInt(matcher.group(2));
                     }
                     if (hours >= 0 && hours < 24 && minutes >= 0 && minutes < 60) {
