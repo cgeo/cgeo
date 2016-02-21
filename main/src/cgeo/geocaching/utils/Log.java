@@ -43,7 +43,9 @@ public final class Log {
     }
 
     private static String addThreadInfo(final String msg) {
-        return new StringBuilder("[").append(Thread.currentThread().getName()).append("] ").append(msg).toString();
+        final String threadName = Thread.currentThread().getName();
+        final String shortName = threadName.startsWith("OkHttp") ? "OkHttp" : threadName;
+        return new StringBuilder("[").append(shortName).append("] ").append(msg).toString();
     }
 
     public static void v(final String msg) {
