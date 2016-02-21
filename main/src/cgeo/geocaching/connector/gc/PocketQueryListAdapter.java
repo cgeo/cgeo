@@ -1,12 +1,9 @@
 package cgeo.geocaching.connector.gc;
 
 import cgeo.geocaching.CacheListActivity;
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.models.PocketQuery;
 import cgeo.geocaching.ui.AbstractViewHolder;
-
-import org.apache.commons.lang3.StringUtils;
 
 import android.app.Activity;
 import android.view.LayoutInflater;

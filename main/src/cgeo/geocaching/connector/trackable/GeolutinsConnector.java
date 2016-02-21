@@ -4,7 +4,6 @@ import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.collections4.CollectionUtils;
@@ -12,9 +11,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.xml.sax.InputSource;
-
-import rx.Observable;
-import rx.functions.Func0;
 
 import java.io.InputStream;
 import java.util.List;
@@ -83,7 +79,7 @@ public final class GeolutinsConnector extends AbstractTrackableConnector {
 
         Log.i("GeolutinsConnector.searchTrackable: glid=" + glid);
         try {
-            final String urlDetails = "http://www.geolutins.com/xml/api.php?G=" + glid.toUpperCase();
+            final String urlDetails = "http://www.geolutins.com/xml/api.php?G=" + StringUtils.upperCase(glid);
             Log.i("GeolutinsConnector.searchTrackable URL: " + urlDetails);
 
             final InputStream response = Network.getResponseStream(Network.getRequest(urlDetails));
@@ -121,6 +117,7 @@ public final class GeolutinsConnector extends AbstractTrackableConnector {
     }
 
     @Override
+    @NonNull
     public String getHost() {
         return "www.geolutins.com";
     }

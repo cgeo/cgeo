@@ -12,7 +12,6 @@ import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.Version;
 
@@ -24,7 +23,6 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.xml.sax.InputSource;
 
 import rx.Observable;
-import rx.functions.Func0;
 import rx.functions.Func1;
 
 import android.content.Context;

@@ -1,8 +1,5 @@
 package cgeo.geocaching;
 
-import butterknife.ButterKnife;
-import butterknife.Bind;
-
 import cgeo.geocaching.activity.Keyboard;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.LogResult;
@@ -42,11 +39,6 @@ import cgeo.geocaching.utils.LogTemplateProvider.LogTemplate;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
-import rx.android.app.AppObservable;
-import rx.functions.Action1;
-import rx.functions.Func1;
-import rx.subscriptions.CompositeSubscription;
-
 import android.R.layout;
 import android.R.string;
 import android.app.Activity;
@@ -78,6 +70,13 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import rx.android.app.AppObservable;
+import rx.functions.Action1;
+import rx.functions.Func1;
+import rx.subscriptions.CompositeSubscription;
 
 public class LogTrackableActivity extends AbstractLoggingActivity implements DateDialogParent, TimeDialogParent, CoordinateUpdate, LoaderManager.LoaderCallbacks<List<LogTypeTrackable>> {
 
@@ -198,10 +197,10 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
             return;
         }
 
-        refreshTrackable(geocode);
+        refreshTrackable();
     }
 
-    private void refreshTrackable(final String message) {
+    private void refreshTrackable() {
         showProgress(true);
 
         // create trackable connector
