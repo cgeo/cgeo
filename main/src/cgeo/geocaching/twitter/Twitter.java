@@ -1,20 +1,18 @@
 package cgeo.geocaching.twitter;
 
-import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.LogEntry;
 import cgeo.geocaching.models.Trackable;
-import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.OAuth;
 import cgeo.geocaching.network.OAuthTokens;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.LogTemplateProvider;
 import cgeo.geocaching.utils.LogTemplateProvider.LogContext;
-
-import ch.boye.httpclientandroidlib.HttpResponse;
 
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
@@ -54,11 +52,11 @@ public final class Twitter {
 
             OAuth.signOAuth("api.twitter.com", "/1.1/statuses/update.json", "POST", true, parameters,
                     new OAuthTokens(Settings.getTokenPublic(), Settings.getTokenSecret()), Settings.getTwitterKeyConsumerPublic(), Settings.getTwitterKeyConsumerSecret());
-            final HttpResponse httpResponse = Network.postRequest("https://api.twitter.com/1.1/statuses/update.json", parameters);
-            if (Network.isSuccess(httpResponse)) {
+            try {
+                Network.completeWithSuccess(Network.postRequest("https://api.twitter.com/1.1/statuses/update.json", parameters));
                 Log.i("Tweet posted");
-            } else {
-                Log.e("Tweet could not be posted. Reason: " + httpResponse);
+            } catch (final Exception ignored) {
+                Log.e("Tweet could not be posted");
             }
         } catch (final Exception e) {
             Log.e("Twitter.postTweet", e);

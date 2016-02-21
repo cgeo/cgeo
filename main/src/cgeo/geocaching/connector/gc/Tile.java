@@ -1,20 +1,17 @@
 package cgeo.geocaching.connector.gc;
 
-import cgeo.geocaching.models.ICoordinates;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
+import cgeo.geocaching.models.ICoordinates;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
-import cgeo.geocaching.utils.LeastRecentlyUsedSet;
-import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.LeastRecentlyUsedSet;
 
-import ch.boye.httpclientandroidlib.HttpResponse;
-
+import okhttp3.Response;
 import org.eclipse.jdt.annotation.NonNull;
-
-import rx.Observable;
-import rx.functions.Func0;
+import rx.Single;
+import rx.functions.Func1;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -231,37 +228,44 @@ public class Tile {
     /** Request JSON informations for a tile. Return as soon as the request has been made, before the answer has been
      * read.
      *
-     * @return An observable with one element, which may be <tt>null</tt>.
+     * @return A single with one element, or an IOException
      */
 
-    static Observable<String> requestMapInfo(final String url, final Parameters params, final String referer) {
-        final HttpResponse response = Network.getRequest(url, params, new Parameters("Referer", referer));
-        return Observable.defer(new Func0<Observable<String>>() {
-            @Override
-            public Observable<String> call() {
-                return Observable.just(Network.getResponseData(response));
-            }
-        }).subscribeOn(AndroidRxUtils.networkScheduler);
+    static Single<String> requestMapInfo(final String url, final Parameters params, final String referer) {
+        try {
+            final Response response = Network.getRequest(url, params, new Parameters("Referer", referer))
+                    .toBlocking().value();
+            return Single.just(response).flatMap(Network.getResponseData);
+        } catch (final Exception e) {
+            return Single.error(e);
+        }
     }
 
     /** Request .png image for a tile. Return as soon as the request has been made, before the answer has been
      * read and processed.
      *
-     * @return An observable with one element, which may be <tt>null</tt>.
+     * @return A single with one element, or an IOException
      */
-    static Observable<Bitmap> requestMapTile(final Parameters params) {
-        final HttpResponse response = Network.getRequest(GCConstants.URL_MAP_TILE, params, new Parameters("Referer", GCConstants.URL_LIVE_MAP));
-        return Observable.defer(new Func0<Observable<Bitmap>>() {
-            @Override
-            public Observable<Bitmap> call() {
-                try {
-                    return Observable.just(response != null ? BitmapFactory.decodeStream(response.getEntity().getContent()) : null);
-                } catch (final IOException e) {
-                    Log.e("Tile.requestMapTile() ", e);
-                    return Observable.just(null);
-                }
-            }
-        }).subscribeOn(AndroidRxUtils.computationScheduler);
+    static Single<Bitmap> requestMapTile(final Parameters params) {
+        try {
+            final Response response = Network.getRequest(GCConstants.URL_MAP_TILE, params, new Parameters("Referer", GCConstants.URL_LIVE_MAP))
+                    .toBlocking().value();
+            return Single.just(response)
+                    .flatMap(new Func1<Response, Single<Bitmap>>() {
+                        @Override
+                        public Single<Bitmap> call(final Response response) {
+                            if (response.isSuccessful()) {
+                                final Bitmap bitmap = BitmapFactory.decodeStream(response.body().byteStream());
+                                if (bitmap != null) {
+                                    return Single.just(bitmap);
+                                }
+                            }
+                            return Single.error(new IOException("could not decode bitmap"));
+                        }
+                    }).subscribeOn(AndroidRxUtils.computationScheduler);
+        } catch (final Exception e) {
+            return Single.error(e);
+        }
     }
 
     public boolean containsPoint(final @NonNull ICoordinates point) {

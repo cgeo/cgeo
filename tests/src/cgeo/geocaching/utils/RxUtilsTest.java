@@ -8,6 +8,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import junit.framework.TestCase;
 import rx.Observable;
+import rx.Single;
 import rx.Subscription;
 import rx.functions.Action0;
 import rx.functions.Func0;

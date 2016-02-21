@@ -6,16 +6,14 @@ import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.BundleUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
-import cgeo.geocaching.utils.AndroidRxUtils;
 
-import ch.boye.httpclientandroidlib.HttpResponse;
-
+import okhttp3.Response;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
-
 import rx.functions.Action0;
 
 import android.app.Activity;
@@ -134,14 +132,14 @@ public abstract class TokenAuthorizationActivity extends AbstractActivity {
         }
 
         final Parameters params = new Parameters(fieldUsername, nam, fieldPassword, pwd);
-        final HttpResponse response = Network.postRequest(urlToken, params);
 
         int status = NOT_AUTHENTICATED;
         String message = StringUtils.EMPTY;
 
-        if (Network.isSuccess(response)) {
-            final String line = StringUtils.defaultString(Network.getResponseData(response));
-            try {
+        try {
+            final Response response = Network.postRequest(urlToken, params).toBlocking().value();
+            if (response.isSuccessful()) {
+                final String line = StringUtils.defaultString(Network.getResponseData(response));
                 final MatcherWrapper errorMatcher = new MatcherWrapper(getPatternIsError(), line);
                 final MatcherWrapper tokenMatcher = new MatcherWrapper(getPatternToken(), line);
                 if (errorMatcher.find()) {
@@ -151,12 +149,11 @@ public abstract class TokenAuthorizationActivity extends AbstractActivity {
                     status = AUTHENTICATED;
                     setToken(tokenMatcher.group(1));
                 }
-            } catch (final Exception e) {
-                Log.e("TokenAuthorizationActivity:", e);
+            } else {
+                message = getExtendedErrorMsg(response);
             }
-
-        } else {
-            message = getExtendedErrorMsg(response);
+        } catch (final Exception e) {
+            Log.e("TokenAuthorizationActivity:", e);
         }
 
         if (StringUtils.isNotBlank(message)) {
@@ -251,7 +248,7 @@ public abstract class TokenAuthorizationActivity extends AbstractActivity {
      * @return String with a more detailed error message (user-facing, localized), can be empty
      */
     @SuppressWarnings("static-method")
-    protected String getExtendedErrorMsg(final HttpResponse response) {
+    protected String getExtendedErrorMsg(final Response response) {
         return StringUtils.EMPTY;
     }
 

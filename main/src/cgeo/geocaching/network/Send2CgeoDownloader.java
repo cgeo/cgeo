@@ -2,13 +2,12 @@ package cgeo.geocaching.network;
 
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.CancellableHandler;
+import cgeo.geocaching.utils.Log;
 
-import ch.boye.httpclientandroidlib.HttpResponse;
-
+import okhttp3.Response;
 import org.apache.commons.lang3.StringUtils;
-
 import rx.Scheduler.Worker;
 import rx.functions.Action0;
 
@@ -41,9 +40,10 @@ public class Send2CgeoDownloader {
                 }
 
                 // Download new code
-                final HttpResponse responseFromWeb = Network.getRequest("http://send2.cgeo.org/read.html", PARAMS);
+                try {
+                    final Response responseFromWeb = Network.getRequest("http://send2.cgeo.org/read.html", PARAMS)
+                            .flatMap(Network.withSuccess).toBlocking().value();
 
-                if (responseFromWeb != null && responseFromWeb.getStatusLine().getStatusCode() == 200) {
                     final String response = Network.getResponseData(responseFromWeb);
                     if (response != null && response.length() > 2) {
                         handler.sendMessage(handler.obtainMessage(DownloadProgress.MSG_LOADING, response));
@@ -60,7 +60,8 @@ public class Send2CgeoDownloader {
                         worker.schedule(this, 5, TimeUnit.SECONDS);
                         handler.sendEmptyMessage(DownloadProgress.MSG_WAITING);
                     }
-                } else {
+                } catch (final Exception e) {
+                    Log.e("loadFromWeb", e);
                     handler.sendEmptyMessage(DownloadProgress.MSG_SERVER_FAIL);
                     handler.cancel();
                 }

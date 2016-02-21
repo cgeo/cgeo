@@ -7,6 +7,7 @@ import cgeo.geocaching.utils.Version;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import rx.functions.Action0;
+import rx.functions.Action1;
 import rx.subjects.BehaviorSubject;
 
 import android.os.Build.VERSION;
@@ -58,14 +59,21 @@ public class StatusUpdater {
         AndroidRxUtils.networkScheduler.createWorker().schedulePeriodically(new Action0() {
             @Override
             public void call() {
-                final ObjectNode response =
-                        Network.requestJSON("https://cgeo-status.herokuapp.com/api/status.json",
-                                new Parameters("version_code", String.valueOf(Version.getVersionCode(CgeoApplication.getInstance())),
-                                        "version_name", Version.getVersionName(CgeoApplication.getInstance()),
-                                        "locale", Locale.getDefault().toString()));
-                if (response != null) {
-                    LATEST_STATUS.onNext(Status.defaultStatus(new Status(response)));
-                }
+                Network.requestJSON("https://cgeo-status.herokuapp.com/api/status.json",
+                        new Parameters("version_code", String.valueOf(Version.getVersionCode(CgeoApplication.getInstance())),
+                                "version_name", Version.getVersionName(CgeoApplication.getInstance()),
+                                "locale", Locale.getDefault().toString()))
+                        .subscribe(new Action1<ObjectNode>() {
+                            @Override
+                            public void call(final ObjectNode json) {
+                                LATEST_STATUS.onNext(Status.defaultStatus(new Status(json)));
+                            }
+                        }, new Action1<Throwable>() {
+                            @Override
+                            public void call(final Throwable throwable) {
+                                // Error has already been signalled during the request
+                            }
+                        });
             }
         }, 0, 1800, TimeUnit.SECONDS);
     }

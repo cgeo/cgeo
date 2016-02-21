@@ -5,8 +5,7 @@ import cgeo.geocaching.activity.TokenAuthorizationActivity;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.settings.Settings;
 
-import ch.boye.httpclientandroidlib.HttpResponse;
-
+import okhttp3.Response;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.Nullable;
 
@@ -54,7 +53,7 @@ public class GeokretyAuthorizationActivity extends TokenAuthorizationActivity {
     }
 
     @Override
-    protected String getExtendedErrorMsg(final HttpResponse response) {
+    protected String getExtendedErrorMsg(final Response response) {
         final String line = Network.getResponseData(response);
         return getExtendedErrorMsg(line);
     }

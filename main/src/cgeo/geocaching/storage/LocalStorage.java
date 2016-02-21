@@ -6,9 +6,7 @@ import cgeo.geocaching.utils.EnvironmentUtils;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
 
-import ch.boye.httpclientandroidlib.Header;
-import ch.boye.httpclientandroidlib.HttpResponse;
-
+import okhttp3.Response;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.CharEncoding;
 import org.apache.commons.lang3.StringUtils;
@@ -195,31 +193,27 @@ public final class LocalStorage {
      *            the target file, which will be created if necessary
      * @return true if the operation was successful, false otherwise, in which case the file will not exist
      */
-    public static boolean saveEntityToFile(final HttpResponse response, final File targetFile) {
-        if (response == null) {
-            return false;
-        }
-
+    public static boolean saveEntityToFile(final Response response, final File targetFile) {
         try {
-            final boolean saved = saveToFile(response.getEntity().getContent(), targetFile);
+            final boolean saved = saveToFile(response.body().byteStream(), targetFile);
             saveHeader(HEADER_ETAG, saved ? response : null, targetFile);
             saveHeader(HEADER_LAST_MODIFIED, saved ? response : null, targetFile);
             return saved;
-        } catch (final IOException e) {
+        } catch (final Exception e) {
             Log.e("LocalStorage.saveEntityToFile", e);
         }
 
         return false;
     }
 
-    private static void saveHeader(final String name, @Nullable final HttpResponse response, final File baseFile) {
-        final Header header = response != null ? response.getFirstHeader(name) : null;
+    private static void saveHeader(final String name, final Response response, final File baseFile) {
+        final String header = response.header(name);
         final File file = filenameForHeader(baseFile, name);
         if (header == null) {
             FileUtils.deleteIgnoringFailure(file);
         } else {
             try {
-                saveToFile(new ByteArrayInputStream(header.getValue().getBytes("UTF-8")), file);
+                saveToFile(new ByteArrayInputStream(header.getBytes("UTF-8")), file);
             } catch (final UnsupportedEncodingException e) {
                 // Do not try to display the header in the log message, as our default encoding is
                 // likely to be UTF-8 and it will fail as well.

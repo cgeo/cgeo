@@ -1,7 +1,5 @@
 package cgeo.geocaching.connector.ec;
 
-import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.connector.LogResult;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
@@ -12,22 +10,23 @@ import cgeo.geocaching.files.GPX10Parser;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
+import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
+import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.SynchronizedDateFormat;
 
-import ch.boye.httpclientandroidlib.HttpResponse;
-
 import com.fasterxml.jackson.databind.JsonNode;
-
+import okhttp3.Response;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import rx.Single;
+import rx.functions.Func1;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
@@ -59,13 +58,17 @@ final class ECApi {
     @Nullable
     static Geocache searchByGeoCode(final String geocode) {
         final Parameters params = new Parameters("id", getIdFromGeocode(geocode));
-        final HttpResponse response = apiRequest("gpx.php", params);
+        try {
+            final Response response = apiRequest("gpx.php", params).toBlocking().value();
 
-        final Collection<Geocache> caches = importCachesFromGPXResponse(response);
-        if (CollectionUtils.isNotEmpty(caches)) {
-            return caches.iterator().next();
+            final Collection<Geocache> caches = importCachesFromGPXResponse(response);
+            if (CollectionUtils.isNotEmpty(caches)) {
+                return caches.iterator().next();
+            }
+            return null;
+        } catch (final Exception ignored) {
+            return null;
         }
-        return null;
     }
 
     @NonNull
@@ -80,21 +83,26 @@ final class ECApi {
         params.add("lat2", String.valueOf(viewport.getLatitudeMax()));
         params.add("lon1", String.valueOf(viewport.getLongitudeMin()));
         params.add("lon2", String.valueOf(viewport.getLongitudeMax()));
-        final HttpResponse response = apiRequest(params);
-
-        return importCachesFromJSON(response);
+        try {
+            final Response response = apiRequest(params).toBlocking().value();
+            return importCachesFromJSON(response);
+        } catch (final Exception ignored) {
+            return Collections.emptyList();
+        }
     }
 
     @NonNull
     static Collection<Geocache> searchByCenter(final Geopoint center) {
-
         final Parameters params = new Parameters("fnc", "center");
         params.add("distance", "20");
         params.add("lat", String.valueOf(center.getLatitude()));
         params.add("lon", String.valueOf(center.getLongitude()));
-        final HttpResponse response = apiRequest(params);
-
-        return importCachesFromJSON(response);
+        try {
+            final Response response = apiRequest(params).toBlocking().value();
+            return importCachesFromJSON(response);
+        } catch (final Exception ignored) {
+            return Collections.emptyList();
+        }
     }
 
     @NonNull
@@ -106,75 +114,69 @@ final class ECApi {
         params.add("sid", ecLogin.getSessionId());
 
         final String uri = API_HOST + "log.php";
-        final HttpResponse response = Network.postRequest(uri, params);
+        try {
+            final Response response = Network.postRequest(uri, params).toBlocking().value();
 
-        if (response == null) {
-            return new LogResult(StatusCode.LOG_POST_ERROR, "");
-        }
-        if (response.getStatusLine().getStatusCode() == 403) {
-            if (ecLogin.login() == StatusCode.NO_ERROR) {
-                apiRequest(uri, params, true);
+            if (response.code() == 403) {
+                if (ecLogin.login() == StatusCode.NO_ERROR) {
+                    apiRequest(uri, params, true);
+                }
             }
-        }
-        if (response.getStatusLine().getStatusCode() != 200) {
-            return new LogResult(StatusCode.LOG_POST_ERROR, "");
-        }
+            if (response.code() != 200) {
+                return new LogResult(StatusCode.LOG_POST_ERROR, "");
+            }
 
-        final String data = Network.getResponseDataAlways(response);
-        if (!StringUtils.isBlank(data) && StringUtils.contains(data, "success")) {
-            if (logType == LogType.FOUND_IT || logType == LogType.ATTENDED) {
-                ecLogin.setActualCachesFound(ecLogin.getActualCachesFound() + 1);
+            final String data = Network.getResponseData(response, false);
+            if (!StringUtils.isBlank(data) && StringUtils.contains(data, "success")) {
+                if (logType == LogType.FOUND_IT || logType == LogType.ATTENDED) {
+                    ecLogin.setActualCachesFound(ecLogin.getActualCachesFound() + 1);
+                }
+                final String uid = StringUtils.remove(data, "success:");
+                return new LogResult(StatusCode.NO_ERROR, uid);
             }
-            final String uid = StringUtils.remove(data, "success:");
-            return new LogResult(StatusCode.NO_ERROR, uid);
+        } catch (final Exception ignored) {
+            // Response is already logged
         }
 
         return new LogResult(StatusCode.LOG_POST_ERROR, "");
     }
 
-    @Nullable
-    private static HttpResponse apiRequest(final Parameters params) {
+    @NonNull
+    private static Single<Response> apiRequest(final Parameters params) {
         return apiRequest("api.php", params);
     }
 
-    @Nullable
-    private static HttpResponse apiRequest(final String uri, final Parameters params) {
+    @NonNull
+    private static Single<Response> apiRequest(final String uri, final Parameters params) {
         return apiRequest(uri, params, false);
     }
 
-    @Nullable
-    private static HttpResponse apiRequest(final String uri, final Parameters params, final boolean isRetry) {
+    @NonNull
+    private static Single<Response> apiRequest(final String uri, final Parameters params, final boolean isRetry) {
         // add session and cgeo marker on every request
         if (!isRetry) {
             params.add("cgeo", "1");
             params.add("sid", ecLogin.getSessionId());
         }
 
-        final HttpResponse response = Network.getRequest(API_HOST + uri, params);
-        if (response == null) {
-            return null;
-        }
+        final Single<Response> response = Network.getRequest(API_HOST + uri, params);
 
         // retry at most one time
-        if (!isRetry && response.getStatusLine().getStatusCode() == 403) {
-            if (ecLogin.login() == StatusCode.NO_ERROR) {
-                return apiRequest(uri, params, true);
+        return response.flatMap(new Func1<Response, Single<Response>>() {
+            @Override
+            public Single<Response> call(final Response response) {
+                if (!isRetry && response.code() == 403 && ecLogin.login() == StatusCode.NO_ERROR) {
+                    return apiRequest(uri, params, true);
+                }
+                return Single.just(response);
             }
-        }
-        if (response.getStatusLine().getStatusCode() != 200) {
-            return null;
-        }
-        return response;
+        });
     }
 
     @NonNull
-    private static Collection<Geocache> importCachesFromGPXResponse(final HttpResponse response) {
-        if (response == null) {
-            return Collections.emptyList();
-        }
-
+    private static Collection<Geocache> importCachesFromGPXResponse(final Response response) {
         try {
-            return new GPX10Parser(StoredList.TEMPORARY_LIST.id).parse(response.getEntity().getContent(), null);
+            return new GPX10Parser(StoredList.TEMPORARY_LIST.id).parse(response.body().byteStream(), null);
         } catch (final Exception e) {
             Log.e("Error importing gpx from extremcaching.com", e);
             return Collections.emptyList();
@@ -182,27 +184,24 @@ final class ECApi {
     }
 
     @NonNull
-    private static List<Geocache> importCachesFromJSON(final HttpResponse response) {
-        if (response != null) {
-            try {
-                final JsonNode json = JsonUtils.reader.readTree(Network.getResponseDataAlways(response));
-                if (!json.isArray()) {
-                    return Collections.emptyList();
-                }
-                final List<Geocache> caches = new ArrayList<>(json.size());
-                for (final JsonNode node: json) {
-                    final Geocache cache = parseCache(node);
-                    if (cache != null) {
-                        caches.add(cache);
-                    }
-                }
-                return caches;
-            } catch (IOException | ClassCastException e) {
-                Log.w("importCachesFromJSON", e);
+    private static List<Geocache> importCachesFromJSON(final Response response) {
+        try {
+            final JsonNode json = JsonUtils.reader.readTree(Network.getResponseData(response));
+            if (!json.isArray()) {
+                return Collections.emptyList();
             }
+            final List<Geocache> caches = new ArrayList<>(json.size());
+            for (final JsonNode node : json) {
+                final Geocache cache = parseCache(node);
+                if (cache != null) {
+                    caches.add(cache);
+                }
+            }
+            return caches;
+        } catch (final Exception e) {
+            Log.w("importCachesFromJSON", e);
+            return Collections.emptyList();
         }
-
-        return Collections.emptyList();
     }
 
     @Nullable

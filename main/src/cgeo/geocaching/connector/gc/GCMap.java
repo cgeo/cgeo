@@ -1,7 +1,5 @@
 package cgeo.geocaching.connector.gc;
 
-import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
@@ -13,9 +11,11 @@ import cgeo.geocaching.location.Units;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.LivemapStrategy;
 import cgeo.geocaching.maps.LivemapStrategy.Flag;
+import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.LeastRecentlyUsedMap;
@@ -24,12 +24,10 @@ import cgeo.geocaching.utils.Log;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
-
-import rx.Observable;
+import rx.Single;
 import rx.functions.Func2;
 
 import android.graphics.Bitmap;
@@ -65,7 +63,7 @@ public class GCMap {
             final Parameters params = new Parameters("i", geocodeList, "_", String.valueOf(System.currentTimeMillis()));
             params.add("app", "cgeo");
             final String referer = GCConstants.URL_LIVE_MAP_DETAILS;
-            final String data = StringUtils.defaultString(Tile.requestMapInfo(referer, params, referer).toBlocking().first());
+            final String data = Tile.requestMapInfo(referer, params, referer).toBlocking().value();
 
             // Example JSON information
             // {"status":"success",
@@ -305,37 +303,41 @@ public class GCMap {
                     }
 
                     // The PNG must be requested first, otherwise the following request would always return with 204 - No Content
-                    final Observable<Bitmap> bitmapObs = Tile.requestMapTile(params);
-                    final Observable<String> dataObs = Tile.requestMapInfo(GCConstants.URL_MAP_INFO, params, GCConstants.URL_LIVE_MAP);
-                    Observable.zip(bitmapObs, dataObs, new Func2<Bitmap, String, Void>() {
-                        @Override
-                        public Void call(final Bitmap bitmap, final String data) {
-                            final boolean validBitmap = bitmap != null && bitmap.getWidth() == Tile.TILE_SIZE && bitmap.getHeight() == Tile.TILE_SIZE;
+                    final Single<Bitmap> bitmapObs = Tile.requestMapTile(params).onErrorResumeNext(Single.<Bitmap>just(null));
+                    final Single<String> dataObs = Tile.requestMapInfo(GCConstants.URL_MAP_INFO, params, GCConstants.URL_LIVE_MAP).onErrorResumeNext(Single.just(""));
+                    try {
+                        Single.zip(bitmapObs, dataObs, new Func2<Bitmap, String, Void>() {
+                            @Override
+                            public Void call(final Bitmap bitmap, final String data) {
+                                final boolean validBitmap = bitmap != null && bitmap.getWidth() == Tile.TILE_SIZE && bitmap.getHeight() == Tile.TILE_SIZE;
 
-                            if (StringUtils.isEmpty(data)) {
-                                Log.w("GCMap.searchByViewport: No data from server for tile (" + tile.getX() + "/" + tile.getY() + ")");
-                            } else {
-                                final SearchResult search = parseMapJSON(data, tile, validBitmap ? bitmap : null, strategy);
-                                if (CollectionUtils.isEmpty(search.getGeocodes())) {
-                                    Log.e("GCMap.searchByViewport: No cache parsed for viewport " + viewport);
+                                if (StringUtils.isEmpty(data)) {
+                                    Log.w("GCMap.searchByViewport: No data from server for tile (" + tile.getX() + "/" + tile.getY() + ")");
                                 } else {
-                                    synchronized (searchResult) {
-                                        searchResult.addSearchResult(search);
+                                    final SearchResult search = parseMapJSON(data, tile, validBitmap ? bitmap : null, strategy);
+                                    if (CollectionUtils.isEmpty(search.getGeocodes())) {
+                                        Log.e("GCMap.searchByViewport: No cache parsed for viewport " + viewport);
+                                    } else {
+                                        synchronized (searchResult) {
+                                            searchResult.addSearchResult(search);
+                                        }
+                                    }
+                                    synchronized (Tile.cache) {
+                                        Tile.cache.add(tile);
                                     }
                                 }
-                                synchronized (Tile.cache) {
-                                    Tile.cache.add(tile);
+
+                                // release native bitmap memory
+                                if (bitmap != null) {
+                                    bitmap.recycle();
                                 }
-                            }
 
-                            // release native bitmap memory
-                            if (bitmap != null) {
-                                bitmap.recycle();
+                                return null;
                             }
-
-                            return null;
-                        }
-                    }).toBlocking().single();
+                        }).toBlocking().value();
+                    } catch (final Exception e) {
+                        Log.e("GCMap.searchByViewPort: connection error");
+                    }
                 }
             }
 

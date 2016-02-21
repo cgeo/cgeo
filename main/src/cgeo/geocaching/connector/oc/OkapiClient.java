@@ -40,14 +40,13 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-
+import okhttp3.Response;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
 import android.net.Uri;
 
-import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -61,8 +60,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
 import java.util.regex.Pattern;
-
-import ch.boye.httpclientandroidlib.HttpResponse;
 
 /**
  * Client for the OpenCaching API (Okapi).
@@ -819,7 +816,11 @@ final class OkapiClient {
         }
 
         final String uri = "http://" + host + service.methodName;
-        return new JSONResult(Network.getRequest(uri, params));
+        try {
+            return new JSONResult(Network.getRequest(uri, params).toBlocking().value());
+        } catch (final Exception e) {
+            return new JSONResult("connection error");
+        }
     }
 
     @NonNull
@@ -913,7 +914,7 @@ final class OkapiClient {
      * @return OkapiError object with detailed information
      */
     @NonNull
-    public static OkapiError decodeErrorResponse(final HttpResponse response) {
+    public static OkapiError decodeErrorResponse(final Response response) {
         final JSONResult result = new JSONResult(response);
         if (!result.isSuccess) {
             return new OkapiError(result.data);
@@ -930,19 +931,14 @@ final class OkapiClient {
         public final boolean isSuccess;
         public final ObjectNode data;
 
-        public JSONResult(final @Nullable HttpResponse response) {
-            final boolean isRequestSuccessful = Network.isSuccess(response);
-            final String responseData = Network.getResponseDataAlways(response);
+        public JSONResult(final Response response) {
             ObjectNode tempData = null;
-            if (responseData != null) {
-                try {
-                    tempData = (ObjectNode) JsonUtils.reader.readTree(responseData);
-                } catch (IOException | ClassCastException e) {
-                    Log.w("JSONResult", e);
-                }
+            try {
+                tempData = (ObjectNode) JsonUtils.reader.readTree(response.body().string());
+            } catch (final Exception e) {
             }
             data = tempData;
-            isSuccess = isRequestSuccessful && tempData != null;
+            isSuccess = response.isSuccessful() && tempData != null;
         }
 
         public JSONResult(final @NonNull String errorMessage) {
