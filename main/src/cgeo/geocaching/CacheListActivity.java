@@ -1475,6 +1475,10 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     private void refreshCurrentList(@NonNull final AfterLoadAction action) {
+        // do not refresh any of the dynamic search result lists
+        if (type != CacheListType.OFFLINE) {
+            return;
+        }
         refreshSpinnerAdapter();
         switchListById(listId, action);
     }
