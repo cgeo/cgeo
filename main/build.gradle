@@ -217,6 +217,7 @@ dependencies {
     // TODO replace by repository dependency. however, there is a conflict in min sdk, which needs to be solved then
     compile project(":showcaseview")
 
+    compile 'com.squareup.okhttp3:okhttp:3.1.2'
     compile files('libs/httpclientandroidlib-1.1.2.jar')
     compile files('libs/locus-api-4.0.jar')
     compile files('libs/mapsforge-map-0.3.0-jar-with-dependencies.jar')

@@ -82,3 +82,7 @@
 
 # Play Service references to classes introduced in higher API levels
 -dontwarn com.google.android.gms.**
+
+# OkHttp references unused classes
+-dontwarn java.nio.file.*
+-dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement
