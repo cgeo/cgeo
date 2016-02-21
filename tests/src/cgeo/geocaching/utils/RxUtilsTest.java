@@ -101,4 +101,12 @@ public class RxUtilsTest extends TestCase {
         assertThat(unsubscribed.get()).isTrue();
     }
 
+    public static void testNullableSingleValue() {
+        final Single<Integer> single = Single.just(42);
+        assertThat(RxUtils.nullableSingleValue(single)).isEqualTo(42);
+
+        final Single<Integer> errorSingle = Single.error(new RuntimeException("error-ed single"));
+        assertThat(RxUtils.nullableSingleValue(errorSingle)).isNull();
+    }
+
 }
