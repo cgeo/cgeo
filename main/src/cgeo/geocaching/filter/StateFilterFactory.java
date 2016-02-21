@@ -11,6 +11,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -146,22 +147,36 @@ class StateFilterFactory implements IFilterFactory {
 
     static class StateFoundLastMonthFilter extends AbstractFilter {
 
+        private static final double THIRTY_DAYS_MSECS = 30d * 86400d * 1000d;
+        private final long today;
+
         public StateFoundLastMonthFilter() {
             super(R.string.cache_found_last_30_days);
+            today = Calendar.getInstance().getTimeInMillis();
         }
 
         protected StateFoundLastMonthFilter(final Parcel in) {
             super(in);
+            today = Calendar.getInstance().getTimeInMillis();
         }
 
         @Override
         public boolean accepts(@NonNull final Geocache cache) {
             for (final LogEntry log : cache.getLogs()) {
-                if (log.getType().isFoundLog() && CalendarUtils.daysSince(log.date) <= 30) {
+                if (log.getType().isFoundLog() && foundLastMonth(log)) {
                     return true;
                 }
             }
             return false;
+        }
+
+        /**
+         * Inline version of {@link CalendarUtils#daysSince(long) to avoid performance issues} with {@link Calendar}
+         * instance creation. We totally neglect the time of day correction, since it is acceptable to have an error of
+         * +/- 1 day with this 30 days filter.
+         */
+        private boolean foundLastMonth(final LogEntry log) {
+            return today - log.date <= THIRTY_DAYS_MSECS;
         }
 
         public static final Creator<StateNeverFoundFilter> CREATOR = new Parcelable.Creator<StateNeverFoundFilter>() {
