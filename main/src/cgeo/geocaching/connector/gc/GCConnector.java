@@ -68,7 +68,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
      * Pattern for GC codes
      */
     @NonNull
-    private final static Pattern PATTERN_GC_CODE = Pattern.compile("GC[0-9A-Z]+", Pattern.CASE_INSENSITIVE);
+    private final static Pattern PATTERN_GC_CODE = Pattern.compile("GC[0-9A-Z&&[^ILOSU]]+", Pattern.CASE_INSENSITIVE);
 
     private GCConnector() {
         // singleton
