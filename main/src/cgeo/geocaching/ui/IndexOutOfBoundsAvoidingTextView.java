@@ -4,7 +4,6 @@ import android.content.Context;
 import android.text.Selection;
 import android.text.Spannable;
 import android.util.AttributeSet;
-import android.view.MenuItem;
 import android.widget.TextView;
 
 /**
@@ -60,10 +59,10 @@ public class IndexOutOfBoundsAvoidingTextView extends TextView {
 	}
 
 	@Override
-	protected void onSelectionChanged(int selStart, int selEnd) {
+	protected void onSelectionChanged(final int selStart, final int selEnd) {
 		if (selStart == -1 || selEnd == -1) {
 			// @hack : https://code.google.com/p/android/issues/detail?id=137509
-			CharSequence text = getText();
+			final CharSequence text = getText();
 			if (text instanceof Spannable) {
 				Selection.setSelection((Spannable) text, 0, 0);
 			}
@@ -79,7 +78,7 @@ public class IndexOutOfBoundsAvoidingTextView extends TextView {
 	}
 
 	@Override
-	public void onWindowFocusChanged(boolean hasWindowFocus) {
+	public void onWindowFocusChanged(final boolean hasWindowFocus) {
 		if (!shouldWindowFocusWait) {
 			super.onWindowFocusChanged(hasWindowFocus);
 		}
