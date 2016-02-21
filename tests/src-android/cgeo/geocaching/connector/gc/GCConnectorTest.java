@@ -13,6 +13,8 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.TestSettings;
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 
+import org.assertj.core.api.AbstractBooleanAssert;
+
 import java.util.Set;
 
 public class GCConnectorTest extends AbstractResourceInstrumentationTestCase {
@@ -35,7 +37,6 @@ public class GCConnectorTest extends AbstractResourceInstrumentationTestCase {
                 assertThat(searchResult).isNotNull();
                 assertThat(searchResult.isEmpty()).isFalse();
                 assertThat(searchResult.getGeocodes()).contains("GC4ER5H");
-                // 22.10.13: Changed from GC211WG (archived) to GC4ER5H  in same area
             }
 
             {
@@ -52,16 +53,26 @@ public class GCConnectorTest extends AbstractResourceInstrumentationTestCase {
     }
 
     public static void testCanHandle() {
-        assertThat(GCConnector.getInstance().canHandle("GC2MEGA")).isTrue();
-        assertThat(GCConnector.getInstance().canHandle("OXZZZZZ")).isFalse();
-        assertThat(GCConnector.getInstance().canHandle("gc77")).isTrue();
+        assertCanHandle("GC2MEGA").isTrue();
+        assertCanHandle("OXZZZZZ").isFalse();
+        assertCanHandle("gc77").isTrue();
+    }
+
+    public static void testGeocodeForbiddenChars() {
+        assertCanHandle("GC123").isTrue();
+        assertCanHandle("GC123M").isTrue();
+        assertCanHandle("GC123L").overridingErrorMessage("L is not allowed in GC codes").isFalse();
+    }
+
+    private static AbstractBooleanAssert<?> assertCanHandle(final String geocode) {
+        return assertThat(GCConnector.getInstance().canHandle(geocode));
     }
 
     /**
      * functionality moved to {@link TravelBugConnector}
      */
     public static void testCanNotHandleTrackablesAnymore() {
-        assertThat(GCConnector.getInstance().canHandle("TB3F651")).isFalse();
+        assertCanHandle("TB3F651").isFalse();
     }
 
     public static void testBaseCodings() {
@@ -107,7 +118,7 @@ public class GCConnectorTest extends AbstractResourceInstrumentationTestCase {
     }
 
     public static void testHandledGeocodes() {
-        Set<String> geocodes = ConnectorFactoryTest.getGeocodeSample();
+        final Set<String> geocodes = ConnectorFactoryTest.getGeocodeSample();
         assertThat(GCConnector.getInstance().handledGeocodes(geocodes)).containsOnly("GC1234", "GC5678");
     }
 }
