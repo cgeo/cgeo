@@ -287,6 +287,9 @@ dependencies {
  */
     compile 'com.jakewharton:butterknife:7.0.1'
 
+/*
+ * Jsoup HTML parsing
+ */
     compile 'org.jsoup:jsoup:1.8.3'
 
 }
@@ -484,10 +487,8 @@ task downloadLibs(type:Download) {
             mavenLib('org/apache/commons','commons-collections4','4.1'),
             mavenLib('org/apache/commons','commons-lang3','3.4'),
             mavenLib('commons-io','commons-io','2.4'),
-            mavenLib('com/jakewharton','butterknife','7.0.1')
+            mavenLib('com/jakewharton','butterknife','7.0.1'),
+            mavenLib('org/jsoup','jsoup','1.8.3')
     ])
     dest 'libs'
 }
-
-
-
