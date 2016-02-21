@@ -396,9 +396,9 @@ public class SettingsActivity extends PreferenceActivity {
                 return true;
                 }
             });
-		final Preference memoryDumpPref = getPreference(R.string.pref_memory_dump);
-		memoryDumpPref
-				.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+        final Preference memoryDumpPref = getPreference(R.string.pref_memory_dump);
+        memoryDumpPref
+                .setOnPreferenceClickListener(new OnPreferenceClickListener() {
                     @Override
                     public boolean onPreferenceClick(
                             final Preference preference) {
