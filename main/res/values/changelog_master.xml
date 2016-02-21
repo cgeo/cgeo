@@ -3,6 +3,7 @@
   <!-- changelog for the master branch -->
   <string name="changelog_master" translatable="false">
     <b>Next feature release:</b>\n
+    · New: Select parts of the cache description text for sharing\n
     · New: Invite friends to use c:geo directly from the app\n
     · New: Use https for communication with Geokrety\n
     · New: Support links encoded in some GeoKrety QRCode\n
