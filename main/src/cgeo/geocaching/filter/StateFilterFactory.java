@@ -1,8 +1,9 @@
 package cgeo.geocaching.filter;
 
+import cgeo.geocaching.R;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.LogEntry;
-import cgeo.geocaching.R;
+import cgeo.geocaching.utils.CalendarUtils;
 
 import org.eclipse.jdt.annotation.NonNull;
 
@@ -23,6 +24,7 @@ class StateFilterFactory implements IFilterFactory {
         filters.add(new StateFoundFilter());
         filters.add(new StateNotFoundFilter());
         filters.add(new StateNeverFoundFilter());
+        filters.add(new StateFoundLastMonthFilter());
         filters.add(new StateArchivedFilter());
         filters.add(new StateDisabledFilter());
         filters.add(new StatePremiumFilter());
@@ -126,6 +128,40 @@ class StateFilterFactory implements IFilterFactory {
                 }
             }
             return true;
+        }
+
+        public static final Creator<StateNeverFoundFilter> CREATOR = new Parcelable.Creator<StateNeverFoundFilter>() {
+
+            @Override
+            public StateNeverFoundFilter createFromParcel(final Parcel in) {
+                return new StateNeverFoundFilter(in);
+            }
+
+            @Override
+            public StateNeverFoundFilter[] newArray(final int size) {
+                return new StateNeverFoundFilter[size];
+            }
+        };
+    }
+
+    static class StateFoundLastMonthFilter extends AbstractFilter {
+
+        public StateFoundLastMonthFilter() {
+            super(R.string.cache_found_last_30_days);
+        }
+
+        protected StateFoundLastMonthFilter(final Parcel in) {
+            super(in);
+        }
+
+        @Override
+        public boolean accepts(@NonNull final Geocache cache) {
+            for (final LogEntry log : cache.getLogs()) {
+                if (log.getType().isFoundLog() && CalendarUtils.daysSince(log.date) <= 30) {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public static final Creator<StateNeverFoundFilter> CREATOR = new Parcelable.Creator<StateNeverFoundFilter>() {
