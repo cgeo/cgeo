@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 /**
  * Jelly beans can crash when calculating the layout of a textview.
- * 
+ *
  * https://code.google.com/p/android/issues/detail?id=35466
  *
  */

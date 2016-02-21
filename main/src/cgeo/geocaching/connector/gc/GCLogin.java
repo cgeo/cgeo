@@ -233,9 +233,8 @@ public class GCLogin extends AbstractLogin {
             if (paramEnglish == null) {
                 Log.e("Failed to find English language selector");
             }
-            // switch to english
-            final Parameters params = new Parameters("__EVENTTARGET", paramEnglish, 
-                    "__EVENTARGUMENT", "");
+            // switch to English
+            final Parameters params = new Parameters("__EVENTTARGET", paramEnglish, "__EVENTARGUMENT", "");
             transferViewstates(page, params);
             final HttpResponse response = Network.postRequest(LANGUAGE_CHANGE_URI, params, new Parameters("Referer", LANGUAGE_CHANGE_URI));
             if (Network.isSuccess(response)) {

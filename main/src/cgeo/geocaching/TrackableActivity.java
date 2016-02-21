@@ -267,7 +267,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
         }
         return super.onPrepareOptionsMenu(menu);
     }
-    
+
     public void displayTrackable() {
         if (trackable == null) {
             if (waitDialog != null) {

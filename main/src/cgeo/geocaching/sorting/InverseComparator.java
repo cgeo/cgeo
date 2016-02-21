@@ -4,7 +4,7 @@ import cgeo.geocaching.models.Geocache;
 
 /**
  * comparator which inverses the sort order of the given other comparator
- * 
+ *
  */
 public class InverseComparator implements CacheComparator {
 

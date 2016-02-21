@@ -9,7 +9,7 @@ import android.view.inputmethod.InputMethodManager;
 
 /**
  * Class for hiding/showing the soft keyboard on Android.
- * 
+ *
  */
 public class Keyboard {
     private final Activity activity;
