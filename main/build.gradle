@@ -486,7 +486,8 @@ task downloadLibs(type:Download) {
             mavenLib('org/apache/commons','commons-lang3','3.4'),
             mavenLib('commons-io','commons-io','2.4'),
             mavenLib('com/jakewharton','butterknife','7.0.1'),
-            mavenLib('org/jsoup','jsoup','1.8.3')
+            mavenLib('org/jsoup','jsoup','1.8.3'),
+            mavenLib('com/squareup/okhttp3', 'okhttp3', '3.1.2')
     ])
     dest 'libs'
 }
