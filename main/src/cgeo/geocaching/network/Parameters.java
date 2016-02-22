@@ -1,10 +1,8 @@
 package cgeo.geocaching.network;
 
-import ch.boye.httpclientandroidlib.NameValuePair;
-import ch.boye.httpclientandroidlib.client.utils.URLEncodedUtils;
-import ch.boye.httpclientandroidlib.message.BasicNameValuePair;
-
-import org.apache.commons.lang3.CharEncoding;
+import okhttp3.HttpUrl;
+import okhttp3.HttpUrl.Builder;
+import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
@@ -53,7 +51,7 @@ public class Parameters extends ArrayList<NameValuePair> {
             throw new InvalidParameterException("odd number of parameters");
         }
         for (int i = 0; i < keyValues.length; i += 2) {
-            add(new BasicNameValuePair(keyValues[i], keyValues[i + 1]));
+            add(new NameValuePair(keyValues[i], keyValues[i + 1]));
         }
         return this;
     }
@@ -69,7 +67,11 @@ public class Parameters extends ArrayList<NameValuePair> {
 
     @Override
     public String toString() {
-        return URLEncodedUtils.format(this, CharEncoding.UTF_8);
+        final Builder builder = HttpUrl.parse("http://dummy.cgeo.org/").newBuilder();
+        for (final NameValuePair nameValuePair : this) {
+            builder.addQueryParameter(nameValuePair.getName(), nameValuePair.getValue());
+        }
+        return StringUtils.defaultString(builder.build().encodedQuery());
     }
 
     /**

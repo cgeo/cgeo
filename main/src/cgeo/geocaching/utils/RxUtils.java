@@ -4,6 +4,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import rx.Observable;
 import rx.Observable.Operator;
+import rx.Single;
 import rx.Subscriber;
 import rx.functions.Action0;
 import rx.functions.Action1;
@@ -153,6 +154,22 @@ public class RxUtils {
             }));
             transformed.add(subscriber);
             return transformed;
+        }
+    }
+
+    /**
+     * Block until a Single is resolved, and return either the value if it succeeds or `null` if it fails.
+     *
+     * @param single the single to wait for
+     * @param <T> the type of the Single content
+     * @return the resolved value or `null` if an error occurred
+     */
+    @Nullable
+    public static <T> T nullableSingleValue(final Single<T> single) {
+        try {
+            return single.toBlocking().value();
+        } catch(final Throwable ignored) {
+            return null;
         }
     }
 }

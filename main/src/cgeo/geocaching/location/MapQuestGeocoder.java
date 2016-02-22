@@ -3,18 +3,15 @@ package cgeo.geocaching.location;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.AndroidRxUtils;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
-
 import rx.Observable;
 import rx.Observable.OnSubscribe;
 import rx.Subscriber;
-import rx.functions.Func0;
+import rx.functions.Func1;
 
 import android.location.Address;
 
@@ -53,36 +50,32 @@ public class MapQuestGeocoder {
     }
 
     private static Observable<Address> get(@NonNull final String method, @NonNull final Parameters parameters) {
-        return Observable.defer(new Func0<Observable<Address>>() {
-            @Override
-            public Observable<Address> call() {
-                final ObjectNode response = Network.requestJSON("https://open.mapquestapi.com/geocoding/v1/" + method,
-                        parameters.put("key", MAPQUEST_KEY));
-                if (response == null) {
-                    Log.w("MapQuest decoder error: no response");
-                    return Observable.error(new RuntimeException("no answer from MapQuest geocoder"));
-                }
-                final int statusCode = response.path("info").path("statuscode").asInt(-1);
-                if (statusCode != 0) {
-                    Log.w("MapQuest decoder error: statuscode is not 0");
-                    return Observable.error(new RuntimeException("no correct answer from MapQuest geocoder"));
-                }
-                return Observable.create(new OnSubscribe<Address>() {
+        return Network.requestJSON("https://open.mapquestapi.com/geocoding/v1/" + method,
+                parameters.put("key", MAPQUEST_KEY))
+                .flatMapObservable(new Func1<ObjectNode, Observable<Address>>() {
                     @Override
-                    public void call(final Subscriber<? super Address> subscriber) {
-                        try {
-                            for (final JsonNode address: response.get("results").get(0).get("locations")) {
-                                subscriber.onNext(mapquestToAddress(address));
-                            }
-                            subscriber.onCompleted();
-                        } catch (final Exception e) {
-                            Log.e("Error decoding MapQuest address", e);
-                            subscriber.onError(e);
+                    public Observable<Address> call(final ObjectNode response) {
+                        final int statusCode = response.path("info").path("statuscode").asInt(-1);
+                        if (statusCode != 0) {
+                            Log.w("MapQuest decoder error: statuscode is not 0");
+                            throw new RuntimeException("no correct answer from MapQuest geocoder");
                         }
+                        return Observable.create(new OnSubscribe<Address>() {
+                            @Override
+                            public void call(final Subscriber<? super Address> subscriber) {
+                                try {
+                                    for (final JsonNode address : response.get("results").get(0).get("locations")) {
+                                        subscriber.onNext(mapquestToAddress(address));
+                                    }
+                                    subscriber.onCompleted();
+                                } catch (final Exception e) {
+                                    Log.e("Error decoding MapQuest address", e);
+                                    subscriber.onError(e);
+                                }
+                            }
+                        });
                     }
                 });
-            }
-        }).subscribeOn(AndroidRxUtils.networkScheduler);
     }
 
     private static Address mapquestToAddress(final JsonNode mapquestAddress) {

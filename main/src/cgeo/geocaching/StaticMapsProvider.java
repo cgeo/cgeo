@@ -13,7 +13,7 @@ import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
 
-import ch.boye.httpclientandroidlib.HttpResponse;
+import okhttp3.Response;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 import rx.Completable;
@@ -30,13 +30,13 @@ import java.util.List;
 public final class StaticMapsProvider {
     static final int MAPS_LEVEL_MAX = 5;
     private static final String PREFIX_PREVIEW = "preview";
-    private static final String GOOGLE_STATICMAP_URL = "http://maps.google.com/maps/api/staticmap";
+    private static final String GOOGLE_STATICMAP_URL = "https://maps.google.com/maps/api/staticmap";
     private static final int GOOGLE_MAX_ZOOM = 20;
     private static final String SATELLITE = "satellite";
     private static final String ROADMAP = "roadmap";
     private static final String WAYPOINT_PREFIX = "wp";
     private static final String MAP_FILENAME_PREFIX = "map_";
-    private static final String MARKERS_URL = "http://status.cgeo.org/assets/markers/";
+    private static final String MARKERS_URL = "https://cgeo-status.herokuapp.com/assets/markers/";
 
     private static volatile long last403 = 0;
 
@@ -99,27 +99,27 @@ public final class StaticMapsProvider {
                 if (waypoints != null) {
                     params.addAll(waypoints);
                 }
-                final HttpResponse httpResponse = Network.getRequest(GOOGLE_STATICMAP_URL, params);
+                try {
+                    final Response httpResponse = Network.getRequest(GOOGLE_STATICMAP_URL, params).toBlocking().value();
 
-                if (httpResponse == null) {
-                    Log.e("StaticMapsProvider.downloadMap: httpResponse is null");
-                    return Completable.complete();
-                }
-                final int statusCode = httpResponse.getStatusLine().getStatusCode();
-                if (statusCode != 200) {
-                    Log.d("StaticMapsProvider.downloadMap: httpResponseCode = " + statusCode);
-                    if (statusCode == 403) {
-                        last403 = System.currentTimeMillis();
+                    final int statusCode = httpResponse.code();
+                    if (statusCode != 200) {
+                        Log.d("StaticMapsProvider.downloadMap: httpResponseCode = " + statusCode);
+                        if (statusCode == 403) {
+                            last403 = System.currentTimeMillis();
+                        }
+                        return Completable.complete();
                     }
-                    return Completable.complete();
-                }
-                final File file = getMapFile(geocode, prefix, true);
-                if (LocalStorage.saveEntityToFile(httpResponse, file)) {
-                    // Delete image if it has no contents
-                    final long fileSize = file.length();
-                    if (fileSize < MIN_MAP_IMAGE_BYTES) {
-                        FileUtils.deleteIgnoringFailure(file);
+                    final File file = getMapFile(geocode, prefix, true);
+                    if (LocalStorage.saveEntityToFile(httpResponse, file)) {
+                        // Delete image if it has no contents
+                        final long fileSize = file.length();
+                        if (fileSize < MIN_MAP_IMAGE_BYTES) {
+                            FileUtils.deleteIgnoringFailure(file);
+                        }
                     }
+                } catch (final Exception ignored) {
+                    Log.e("StaticMapsProvider.downloadMap: error");
                 }
                 return Completable.complete();
             }

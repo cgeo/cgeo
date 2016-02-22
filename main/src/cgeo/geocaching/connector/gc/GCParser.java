@@ -41,7 +41,6 @@ import cgeo.geocaching.utils.TextUtils;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -52,6 +51,13 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import rx.Observable;
+import rx.Observable.OnSubscribe;
+import rx.Subscriber;
+import rx.functions.Action1;
+import rx.functions.Func0;
+import rx.functions.Func2;
+import rx.schedulers.Schedulers;
 
 import android.net.Uri;
 import android.text.Html;
@@ -72,15 +78,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
-
-import ch.boye.httpclientandroidlib.HttpResponse;
-import rx.Observable;
-import rx.Observable.OnSubscribe;
-import rx.Subscriber;
-import rx.functions.Action1;
-import rx.functions.Func0;
-import rx.functions.Func2;
-import rx.schedulers.Schedulers;
 
 public final class GCParser {
     @NonNull
@@ -1512,16 +1509,16 @@ public final class GCParser {
 
         final String uri = "https://www.geocaching.com/datastore/favorites.svc/update?u=" + userToken + "&f=" + Boolean.toString(add);
 
-        final HttpResponse response = Network.postRequest(uri, null);
-
-        if (response != null && response.getStatusLine().getStatusCode() == 200) {
+        try {
+            Network.completeWithSuccess(Network.postRequest(uri, null));
             Log.i("GCParser.changeFavorite: cache added/removed to/from favorites");
             cache.setFavorite(add);
             cache.setFavoritePoints(cache.getFavoritePoints() + (add ? 1 : -1));
             return true;
+        } catch (final Exception ignored) {
+            Log.e("GCParser.changeFavorite: cache not added/removed to/from favorites");
+            return false;
         }
-        Log.e("GCParser.changeFavorite: cache not added/removed to/from favorites");
-        return false;
     }
 
     private static String getUserToken(@NonNull final Geocache cache) {
@@ -1795,22 +1792,14 @@ public final class GCParser {
                 if (logType != Logs.ALL) {
                     params.add(logType.getParamName(), Boolean.toString(Boolean.TRUE));
                 }
-                final HttpResponse response = Network.getRequest("https://www.geocaching.com/seek/geocache.logbook", params);
-                if (response == null) {
-                    Log.e("GCParser.loadLogsFromDetails: cannot log logs, response is null");
+                try {
+                    final InputStream responseStream =
+                            Network.getResponseStream(Network.getRequest("https://www.geocaching.com/seek/geocache.logbook", params));
+                    return parseLogs(logType != Logs.ALL, responseStream);
+                } catch (final Exception e) {
+                    Log.e("unable to read logs", e);
                     return Observable.empty();
                 }
-                final int statusCode = response.getStatusLine().getStatusCode();
-                if (statusCode != 200) {
-                    Log.e("GCParser.loadLogsFromDetails: error " + statusCode + " when requesting log information");
-                    return Observable.empty();
-                }
-                final InputStream responseStream = Network.getResponseStream(response);
-                if (responseStream == null) {
-                    Log.e("GCParser.loadLogsFromDetails: unable to read whole response");
-                    return Observable.empty();
-                }
-                return parseLogs(logType != Logs.ALL, responseStream);
             }
         }).subscribeOn(AndroidRxUtils.networkScheduler);
     }
@@ -2087,15 +2076,15 @@ public final class GCParser {
         final String uriSuffix = wpt != null ? "SetUserCoordinate" : "ResetUserCoordinate";
 
         final String uriPrefix = "https://www.geocaching.com/seek/cache_details.aspx/";
-        final HttpResponse response = Network.postJsonRequest(uriPrefix + uriSuffix, jo);
 
-        if (response != null && response.getStatusLine().getStatusCode() == 200) {
+        try {
+            Network.completeWithSuccess(Network.postJsonRequest(uriPrefix + uriSuffix, jo));
             Log.i("GCParser.editModifiedCoordinates - edited on GC.com");
             return true;
+        } catch (final Exception ignored) {
+            Log.e("GCParser.deleteModifiedCoordinates - cannot delete modified coords");
+            return false;
         }
-
-        Log.e("GCParser.deleteModifiedCoordinates - cannot delete modified coords");
-        return false;
     }
 
     static boolean uploadPersonalNote(@NonNull final Geocache cache) {
@@ -2110,15 +2099,15 @@ public final class GCParser {
         final String uriSuffix = "SetUserCacheNote";
 
         final String uriPrefix = "https://www.geocaching.com/seek/cache_details.aspx/";
-        final HttpResponse response = Network.postJsonRequest(uriPrefix + uriSuffix, jo);
 
-        if (response != null && response.getStatusLine().getStatusCode() == 200) {
+        try {
+            Network.completeWithSuccess(Network.postJsonRequest(uriPrefix + uriSuffix, jo));
             Log.i("GCParser.uploadPersonalNote - uploaded to GC.com");
             return true;
+        } catch (final Exception ignored) {
+            Log.e("GCParser.uploadPersonalNote - cannot upload personal note");
+            return false;
         }
-
-        Log.e("GCParser.uploadPersonalNote - cannot upload personal note");
-        return false;
     }
 
     static boolean ignoreCache(@NonNull final Geocache cache) {

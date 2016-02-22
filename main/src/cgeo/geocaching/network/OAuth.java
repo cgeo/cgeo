@@ -2,13 +2,8 @@ package cgeo.geocaching.network;
 
 import cgeo.geocaching.utils.CryptUtils;
 
-import ch.boye.httpclientandroidlib.NameValuePair;
-
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class OAuth {
     private OAuth() {
@@ -32,14 +27,16 @@ public class OAuth {
                 "oauth_version", "1.0");
         params.sort();
 
-        final List<String> paramsEncoded = new ArrayList<>();
+        final StringBuilder paramsEncodedBuilder = new StringBuilder();
         for (final NameValuePair nameValue : params) {
-            paramsEncoded.add(nameValue.getName() + "=" + percentEncode(nameValue.getValue()));
+            paramsEncodedBuilder.append('&').append(percentEncode(nameValue.getName()))
+                    .append('=').append(percentEncode(nameValue.getValue()));
         }
+        final String paramsEncoded = paramsEncodedBuilder.substring(1);
 
-        final String keysPacked = consumerSecret + "&" + StringUtils.defaultString(tokens.getTokenSecret()); // both even if empty some of them!
-        final @NonNull String joinedParams = StringUtils.join(paramsEncoded.toArray(), '&');
-        final String requestPacked = method + "&" + percentEncode((https ? "https" : "http") + "://" + host + path) + "&" + percentEncode(joinedParams);
+        final String requestPacked = method + '&' + percentEncode((https ? "https" : "http") + "://" + host + path) + '&' +
+                percentEncode(paramsEncoded);
+        final String keysPacked = percentEncode(consumerSecret) + '&' + percentEncode(StringUtils.defaultString(tokens.getTokenSecret())); // both even if empty some of them!
         params.put("oauth_signature", CryptUtils.base64Encode(CryptUtils.hashHmac(requestPacked, keysPacked)));
     }
 

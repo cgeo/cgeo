@@ -5,13 +5,11 @@ import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.ui.dialog.Dialogs;
-import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.Log;
 
-import ch.boye.httpclientandroidlib.HttpResponse;
-
+import okhttp3.Response;
 import org.apache.commons.lang3.StringUtils;
-
 import rx.Observable;
 import rx.android.app.AppObservable;
 import rx.functions.Action1;
@@ -62,19 +60,18 @@ public class RegisterSend2CgeoPreference extends AbstractClickablePreference {
                         final String cod = StringUtils.defaultString(deviceCode);
 
                         final Parameters params = new Parameters("name", nam, "code", cod);
-                        final HttpResponse response = Network.getRequest("http://send2.cgeo.org/auth.html", params);
 
-                        if (response != null && response.getStatusLine().getStatusCode() == 200) {
-                            //response was OK
+                        try {
+                            final Response response = Network.getRequest("http://send2.cgeo.org/auth.html", params)
+                                    .flatMap(Network.withSuccess).toBlocking().value();
+
                             final String[] strings = StringUtils.split(Network.getResponseData(response), ',');
                             if (strings != null) {
                                 Settings.setWebNameCode(nam, strings[0]);
-                                try {
-                                    return Observable.just(Integer.valueOf(strings[1].trim()));
-                                } catch (final Exception e) {
-                                    Log.e("RegisterSend2CgeoPreference", e);
-                                }
+                                return Observable.just(Integer.valueOf(strings[1].trim()));
                             }
+                        } catch (final Exception e) {
+                            Log.e("RegisterSend2CgeoPreference", e);
                         }
 
                         return Observable.empty();

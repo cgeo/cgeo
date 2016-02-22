@@ -11,10 +11,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.Log;
 
-import ch.boye.httpclientandroidlib.HttpResponse;
-
 import com.fasterxml.jackson.databind.JsonNode;
-
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -54,9 +51,8 @@ public class ECLogin extends AbstractLogin {
         setActualStatus(app.getString(R.string.init_login_popup_working));
 
         final Parameters params = new Parameters("user", login.getUserName(), "pass", login.getPassword());
-        final HttpResponse loginResponse = Network.postRequest("https://extremcaching.com/exports/apilogin.php", params);
 
-        final String loginData = Network.getResponseData(loginResponse);
+        final String loginData = Network.getResponseData(Network.postRequest("https://extremcaching.com/exports/apilogin.php", params));
 
         if (StringUtils.isBlank(loginData)) {
             Log.e("ECLogin.login: Failed to retrieve login data");

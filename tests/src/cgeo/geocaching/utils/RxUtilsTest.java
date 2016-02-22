@@ -8,6 +8,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import junit.framework.TestCase;
 import rx.Observable;
+import rx.Single;
 import rx.Subscription;
 import rx.functions.Action0;
 import rx.functions.Func0;
@@ -99,6 +100,14 @@ public class RxUtilsTest extends TestCase {
             // ignore for tests
         }
         assertThat(unsubscribed.get()).isTrue();
+    }
+
+    public static void testNullableSingleValue() {
+        final Single<Integer> single = Single.just(42);
+        assertThat(RxUtils.nullableSingleValue(single)).isEqualTo(42);
+
+        final Single<Integer> errorSingle = Single.error(new RuntimeException("error-ed single"));
+        assertThat(RxUtils.nullableSingleValue(errorSingle)).isNull();
     }
 
 }

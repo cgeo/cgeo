@@ -4,11 +4,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import cgeo.geocaching.enumerations.StatusCode;
 
+import junit.framework.TestCase;
 import org.apache.commons.lang3.StringUtils;
 
 import android.test.suitebuilder.annotation.Suppress;
-
-import junit.framework.TestCase;
 
 public class GCLoginTest extends TestCase {
 
@@ -21,7 +20,7 @@ public class GCLoginTest extends TestCase {
     }
 
     public static void testHomeLocation() {
-        assertThat(StringUtils.isNotBlank(GCLogin.retrieveHomeLocation())).isTrue();
+        assertThat(StringUtils.isNotBlank(GCLogin.retrieveHomeLocation().toBlocking().value())).isTrue();
     }
 
     @Suppress // It currently fails on CI

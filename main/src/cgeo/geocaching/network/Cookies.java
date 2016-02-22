@@ -1,51 +1,98 @@
 package cgeo.geocaching.network;
 
-import ch.boye.httpclientandroidlib.client.CookieStore;
-import ch.boye.httpclientandroidlib.cookie.Cookie;
-import ch.boye.httpclientandroidlib.impl.client.BasicCookieStore;
-import ch.boye.httpclientandroidlib.impl.cookie.BasicClientCookie;
+import okhttp3.Cookie;
+import okhttp3.Cookie.Builder;
+import okhttp3.CookieJar;
+import okhttp3.HttpUrl;
 import org.apache.commons.lang3.StringUtils;
+
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 
 public final class Cookies {
 
-    private static boolean cookieStoreRestored = false;
-    final static CookieStore cookieStore = new BasicCookieStore();
+    final static InMemoryCookieJar cookieJar = new InMemoryCookieJar();
+
+    static class InMemoryCookieJar implements CookieJar {
+
+        final HashMap<String, Cookie> allCookies = new HashMap<>();
+        private boolean cookieStoreRestored = false;
+
+        @Override
+        public synchronized void saveFromResponse(final HttpUrl url, final List<Cookie> cookies) {
+            for (final Cookie cookie : cookies) {
+                addCookie(cookie);
+            }
+        }
+
+        private void addCookie(final Cookie cookie) {
+            final String key = cookie.domain() + ';' + cookie.name();
+            allCookies.put(key, cookie);
+        }
+
+        @Override
+        public List<Cookie> loadForRequest(final HttpUrl url) {
+            final List<Cookie> cookies = new LinkedList<>();
+            synchronized(this) {
+                for (final Cookie cookie: allCookies.values()) {
+                    if (cookie.matches(url)) {
+                        cookies.add(cookie);
+                    }
+                }
+            }
+            return cookies;
+        }
+
+        public synchronized void clear() {
+            allCookies.clear();
+        }
+
+        public synchronized void restoreCookieStore(final String oldCookies) {
+            if (!cookieStoreRestored) {
+                clearCookies();
+                if (oldCookies != null) {
+                    for (final String cookie : StringUtils.split(oldCookies, ';')) {
+                        final String[] split = StringUtils.split(cookie, "=", 3);
+                        if (split.length == 3) {
+                            try {
+                                addCookie(new Builder().name(split[0]).value(split[1]).domain(split[2]).build());
+                            } catch (final Exception ignored) {
+                           }
+                        }
+                    }
+                }
+                cookieStoreRestored = true;
+            }
+        }
+
+        String dumpCookieStore() {
+            final StringBuilder cookies = new StringBuilder();
+            for (final Cookie cookie : allCookies.values()) {
+                cookies.append(cookie.name());
+                cookies.append('=');
+                cookies.append(cookie.value());
+                cookies.append('=');
+                cookies.append(cookie.domain());
+                cookies.append(';');
+            }
+            return cookies.toString();
+        }
+    }
 
     private Cookies() {
         // Utility class
     }
 
     public static void restoreCookieStore(final String oldCookies) {
-        if (!cookieStoreRestored) {
-            clearCookies();
-            if (oldCookies != null) {
-                for (final String cookie : StringUtils.split(oldCookies, ';')) {
-                    final String[] split = StringUtils.split(cookie, "=", 3);
-                    if (split.length == 3) {
-                        final BasicClientCookie newCookie = new BasicClientCookie(split[0], split[1]);
-                        newCookie.setDomain(split[2]);
-                        cookieStore.addCookie(newCookie);
-                    }
-                }
-            }
-            cookieStoreRestored = true;
-        }
+        cookieJar.restoreCookieStore(oldCookies);
     }
 
     public static String dumpCookieStore() {
-        final StringBuilder cookies = new StringBuilder();
-        for (final Cookie cookie : cookieStore.getCookies()) {
-            cookies.append(cookie.getName());
-            cookies.append('=');
-            cookies.append(cookie.getValue());
-            cookies.append('=');
-            cookies.append(cookie.getDomain());
-            cookies.append(';');
-        }
-        return cookies.toString();
+        return cookieJar.dumpCookieStore();
     }
 
     public static void clearCookies() {
-        cookieStore.clear();
+        cookieJar.clear();
     }
 }

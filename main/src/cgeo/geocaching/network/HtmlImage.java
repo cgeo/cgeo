@@ -4,24 +4,22 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.connector.ConnectorFactory;
-import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.list.StoredList;
+import cgeo.geocaching.storage.LocalStorage;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.ImageUtils.ContainerDrawable;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.RxUtils.ObservableCache;
 
-import ch.boye.httpclientandroidlib.HttpResponse;
-
+import okhttp3.Response;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-
 import rx.Completable;
 import rx.Observable;
 import rx.Observable.OnSubscribe;
@@ -307,18 +305,15 @@ public class HtmlImage implements Html.ImageGetter {
 
         if (absoluteURL != null) {
             try {
-                final HttpResponse httpResponse = Network.getRequest(absoluteURL, null, file);
-                if (httpResponse != null) {
-                    final int statusCode = httpResponse.getStatusLine().getStatusCode();
-                    if (statusCode == 200) {
+                final Response httpResponse = Network.getRequest(absoluteURL, null, file).toBlocking().value();
+                    if (httpResponse.isSuccessful()) {
                         LocalStorage.saveEntityToFile(httpResponse, file);
-                    } else if (statusCode == 304) {
+                    } else if (httpResponse.code() == 304) {
                         if (!file.setLastModified(System.currentTimeMillis())) {
                             makeFreshCopy(file);
                         }
                         return true;
                     }
-                }
             } catch (final Exception e) {
                 Log.e("HtmlImage.downloadOrRefreshCopy", e);
             }
