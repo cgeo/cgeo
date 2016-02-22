@@ -2,6 +2,11 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
+    <b>Next bugfix release:</b>\n
+    · Fix: Do not leave the app when selecting back in spoiler view\n
+    · Fix: Hint picture not refreshed when switching to different cache\n
+    \n
+    \n
     <b>2016.02.03:</b>\n
     · Fix: Adapt to website changes due to markdown in logs\n
     · Fix: Again login failure due to wrong language setting on geocaching.com webpage\n
