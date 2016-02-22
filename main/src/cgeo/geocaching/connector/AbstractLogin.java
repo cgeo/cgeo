@@ -4,7 +4,6 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.network.Cookies;
-import cgeo.geocaching.network.Network;
 import cgeo.geocaching.settings.Settings;
 
 import org.apache.commons.lang3.StringUtils;
@@ -72,7 +71,7 @@ public abstract class AbstractLogin {
 
     @NonNull
     public StatusCode login() {
-        if (!Network.isNetworkConnected()) {
+        if (!CgeoApplication.getInstance().isNetworkConnected()) {
             return StatusCode.COMMUNICATION_ERROR;
         }
         return login(true);

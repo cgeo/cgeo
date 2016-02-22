@@ -33,7 +33,6 @@ import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.network.AndroidBeam;
 import cgeo.geocaching.network.HtmlImage;
-import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.SmileyImage;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
@@ -863,7 +862,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             return;
         }
 
-        if (!Network.isNetworkConnected()) {
+        if (!app.isNetworkConnected()) {
             showToast(getString(R.string.err_server));
             return;
         }

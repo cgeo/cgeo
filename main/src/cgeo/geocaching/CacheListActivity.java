@@ -46,7 +46,6 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.PocketQuery;
 import cgeo.geocaching.network.Cookies;
 import cgeo.geocaching.network.DownloadProgress;
-import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Send2CgeoDownloader;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
@@ -1142,7 +1141,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             return;
         }
 
-        if (!Network.isNetworkConnected()) {
+        if (!app.isNetworkConnected()) {
             showToast(getString(R.string.err_server));
             return;
         }

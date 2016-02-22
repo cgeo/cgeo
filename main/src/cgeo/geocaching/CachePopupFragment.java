@@ -8,7 +8,6 @@ import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.network.Network;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.utils.CancellableHandler;
@@ -172,7 +171,7 @@ public class CachePopupFragment extends AbstractDialogFragment {
                 return;
             }
 
-            if (!Network.isNetworkConnected()) {
+            if (!CgeoApplication.getInstance().isNetworkConnected()) {
                 showToast(getString(R.string.err_server));
                 return;
             }

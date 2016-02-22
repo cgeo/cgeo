@@ -3,13 +3,13 @@ package cgeo.geocaching;
 import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.OOMDumpingUncaughtExceptionHandler;
-import cgeo.geocaching.utils.AndroidRxUtils;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
-
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.eclipse.jdt.annotation.NonNull;
 
 import android.app.AlarmManager;
@@ -19,12 +19,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.view.ViewConfiguration;
 
 import java.lang.reflect.Field;
 import java.util.Locale;
-
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 public class CgeoApplication extends Application {
 
@@ -34,7 +34,7 @@ public class CgeoApplication extends Application {
     private static CgeoApplication instance;
     private boolean isGooglePlayServicesAvailable = false;
     private Locale applicationLocale;
-
+    private ConnectivityManager connectivityManager = null;
 
     public static void dumpOnOutOfMemory(final boolean enable) {
 
@@ -60,6 +60,20 @@ public class CgeoApplication extends Application {
 
     public static CgeoApplication getInstance() {
         return instance;
+    }
+
+    /**
+     * Checks if the device has network connection.
+     *
+     * @return {@code true} if the device is connected to the network.
+     */
+    public boolean isNetworkConnected() {
+        if (connectivityManager == null) {
+            // Concurrent assignment would not hurt
+            connectivityManager = (ConnectivityManager) getInstance().getApplicationContext().getSystemService(CONNECTIVITY_SERVICE);
+        }
+        final NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
     @Override

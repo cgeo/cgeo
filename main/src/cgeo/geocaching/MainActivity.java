@@ -55,7 +55,6 @@ import cgeo.geocaching.location.AndroidGeocoder;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Units;
 import cgeo.geocaching.maps.CGeoMap;
-import cgeo.geocaching.network.Network;
 import cgeo.geocaching.playservices.AppInvite;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
@@ -148,12 +147,12 @@ public class MainActivity extends AbstractActionBarActivity {
     };
 
     private final class ConnectivityChangeReceiver extends BroadcastReceiver {
-        private boolean isConnected = Network.isNetworkConnected();
+        private boolean isConnected = app.isNetworkConnected();
 
         @Override
         public void onReceive(final Context context, final Intent intent) {
             final boolean wasConnected = isConnected;
-            isConnected = Network.isNetworkConnected();
+            isConnected = app.isNetworkConnected();
             if (isConnected && !wasConnected) {
                 startBackgroundLogin();
             }
