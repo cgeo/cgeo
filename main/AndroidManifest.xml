@@ -742,11 +742,6 @@
             </intent-filter>
         </activity>
 
-        <!-- provide enhanced meta data for caches (and waypoints) when invoking Locus from c:geo -->
-        <provider
-            android:name="menion.android.locus.LocusDataStorageProvider"
-            android:authorities="cgeo.geocaching.apps.locusdatastorageprovider" />
-
         <!-- search suggestions for the search bar at the top -->
         <provider
             android:name=".search.SuggestionProvider"

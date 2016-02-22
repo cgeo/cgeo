@@ -216,7 +216,8 @@ dependencies {
     compile project(":showcaseview")
 
     compile 'com.squareup.okhttp3:okhttp:3.1.2'
-    compile files('libs/locus-api-4.0.jar')
+    compile files('libs/locus-api-1.37.jar')
+    compile files('libs/locus-api-android-1.37.41.jar')
     compile files('libs/mapsforge-map-0.3.0-jar-with-dependencies.jar')
 
     compile 'com.android.support:appcompat-v7:20.0.0'
