@@ -2,25 +2,5 @@
 <resources>
   <!-- changelog for the master branch -->
   <string name="changelog_master" translatable="false">
-    <b>Next feature release:</b>\n
-    · New: Select parts of the cache description text for sharing\n
-    · New: Invite friends to use c:geo directly from the app\n
-    · New: Use https for communication with Geokrety\n
-    · New: Support links encoded in some GeoKrety QRCode\n
-    · New: Filter for caches found last 30 days\n
-    · New: Support GeoLutins trackables\n
-    · New: Allow to change header coords locally for Letterbox and Wherigo caches\n
-    · New: Show generation date and remaining days for pocket queries\n
-    · Change: Encrypted log entries are shown encrypted initially\n
-    · Fix: Waypoints imported correctly for GPX from geocheck.org\n
-    · Fix: Hide export menu if list does not contain exportable caches\n
-    · Fix: Hide showcase for hint in compass if no hint is available for that cache\n
-    · Fix: Inconsistency in descriptions of user created waypoints\n
-    · Fix: Don\'t show unknown attribute icons for opencaching.org.uk\n
-    · Fix: Import pocket queries from bookmark lists with umlauts\n
-    · Fix: Show progress indication on logging page while information is loaded in the background\n
-    · Fix: Allow searching for trackable secret codes starting with GC\n
-    \n
-    \n
   </string>
 </resources>
