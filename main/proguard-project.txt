@@ -32,11 +32,6 @@
 -keep class cgeo.geocaching.** { *; }
 -keep class android.support.v4.os.** { *; }
 
--keep class ch.boye.httpclientandroidlib.conn.scheme.Scheme { *; }
--keep class ch.boye.httpclientandroidlib.params.HttpParams { *; }
--keep class ch.boye.httpclientandroidlib.client.HttpClient { *; }
--dontnote ch.boye.httpclientandroidlib.**
--dontwarn ch.boye.httpclientandroidlib.impl.auth.NegotiateScheme
 -dontwarn  org.springframework.**
 -dontwarn org.tukaani.xz.**
 

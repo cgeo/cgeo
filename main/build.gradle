@@ -155,8 +155,6 @@ android {
         // findbugs
         exclude 'META-INF/maven/com.google.code.findbugs/jsr305/pom.properties'
         exclude 'META-INF/maven/com.google.code.findbugs/jsr305/pom.xml'
-        // httpclientandroidlib has some documentation image in the library
-        exclude 'ch/boye/httpclientandroidlib/impl/conn/tsccm/doc-files/tsccm-structure.png'
     }
 
     productFlavors {
@@ -218,7 +216,6 @@ dependencies {
     compile project(":showcaseview")
 
     compile 'com.squareup.okhttp3:okhttp:3.1.2'
-    compile files('libs/httpclientandroidlib-1.1.2.jar')
     compile files('libs/locus-api-4.0.jar')
     compile files('libs/mapsforge-map-0.3.0-jar-with-dependencies.jar')
 

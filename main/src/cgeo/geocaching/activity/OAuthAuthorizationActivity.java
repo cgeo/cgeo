@@ -13,9 +13,7 @@ import cgeo.geocaching.utils.BundleUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
 
-import ch.boye.httpclientandroidlib.ParseException;
-import ch.boye.httpclientandroidlib.client.entity.UrlEncodedFormEntity;
-import ch.boye.httpclientandroidlib.util.EntityUtils;
+import okhttp3.HttpUrl;
 import okhttp3.Response;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -33,7 +31,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import java.io.IOException;
 import java.util.regex.Pattern;
 
 public abstract class OAuthAuthorizationActivity extends AbstractActivity {
@@ -193,15 +190,10 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
 
                     if (StringUtils.isNotBlank(OAtoken) && StringUtils.isNotBlank(OAtokenSecret)) {
                         setTempTokens(OAtoken, OAtokenSecret);
-                        try {
-                            final Parameters paramsBrowser = new Parameters();
-                            paramsBrowser.put("oauth_token", OAtoken);
-                            final String encodedParams = EntityUtils.toString(new UrlEncodedFormEntity(paramsBrowser));
-                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getUrlPrefix() + host + pathAuthorize + "?" + encodedParams)));
-                            status = STATUS_SUCCESS;
-                        } catch (ParseException | IOException e) {
-                            Log.e("OAuthAuthorizationActivity.requestToken", e);
-                        }
+                        final HttpUrl url = HttpUrl.parse(getUrlPrefix() + host + pathAuthorize)
+                                .newBuilder().addQueryParameter("oauth_token", OAtoken).build();
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url.toString())));
+                        status = STATUS_SUCCESS;
                     }
                 }
 

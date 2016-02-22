@@ -10,7 +10,6 @@ import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.RxOkHttpUtils;
 import cgeo.geocaching.utils.TextUtils;
 
-import ch.boye.httpclientandroidlib.NameValuePair;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import okhttp3.FormBody;
 import okhttp3.Interceptor;
