@@ -3,6 +3,7 @@ package cgeo.geocaching.network;
 import cgeo.geocaching.utils.CryptUtils;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.eclipse.jdt.annotation.NonNull;
 
 public class OAuth {
@@ -28,9 +29,9 @@ public class OAuth {
         params.sort();
 
         final StringBuilder paramsEncodedBuilder = new StringBuilder();
-        for (final NameValuePair nameValue : params) {
-            paramsEncodedBuilder.append('&').append(percentEncode(nameValue.getName()))
-                    .append('=').append(percentEncode(nameValue.getValue()));
+        for (final ImmutablePair<String, String> nameValue : params) {
+            paramsEncodedBuilder.append('&').append(percentEncode(nameValue.left))
+                    .append('=').append(percentEncode(nameValue.right));
         }
         final String paramsEncoded = paramsEncodedBuilder.substring(1);
 

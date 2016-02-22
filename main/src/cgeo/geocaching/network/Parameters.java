@@ -3,6 +3,7 @@ package cgeo.geocaching.network;
 import okhttp3.HttpUrl;
 import okhttp3.HttpUrl.Builder;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
@@ -15,7 +16,7 @@ import java.util.Comparator;
  * List of key/values pairs to be used in a GET or POST request.
  *
  */
-public class Parameters extends ArrayList<NameValuePair> {
+public class Parameters extends ArrayList<ImmutablePair<String, String>> {
 
     private static final long serialVersionUID = 1L;
 
@@ -29,11 +30,11 @@ public class Parameters extends ArrayList<NameValuePair> {
         put(keyValues);
     }
 
-    private static final Comparator<NameValuePair> comparator = new Comparator<NameValuePair>() {
+    private static final Comparator<ImmutablePair<String, String>> comparator = new Comparator<ImmutablePair<String, String>>() {
         @Override
-        public int compare(final NameValuePair nv1, final NameValuePair nv2) {
-            final int comparedKeys = nv1.getName().compareTo(nv2.getName());
-            return comparedKeys != 0 ? comparedKeys : nv1.getValue().compareTo(nv2.getValue());
+        public int compare(final ImmutablePair<String, String> nv1, final ImmutablePair<String, String> nv2) {
+            final int comparedKeys = nv1.left.compareTo(nv2.left);
+            return comparedKeys != 0 ? comparedKeys : nv1.right.compareTo(nv2.right);
         }
     };
 
@@ -51,7 +52,7 @@ public class Parameters extends ArrayList<NameValuePair> {
             throw new InvalidParameterException("odd number of parameters");
         }
         for (int i = 0; i < keyValues.length; i += 2) {
-            add(new NameValuePair(keyValues[i], keyValues[i + 1]));
+            add(ImmutablePair.of(keyValues[i], keyValues[i + 1]));
         }
         return this;
     }
@@ -68,8 +69,8 @@ public class Parameters extends ArrayList<NameValuePair> {
     @Override
     public String toString() {
         final Builder builder = HttpUrl.parse("http://dummy.cgeo.org/").newBuilder();
-        for (final NameValuePair nameValuePair : this) {
-            builder.addQueryParameter(nameValuePair.getName(), nameValuePair.getValue());
+        for (final ImmutablePair<String, String> nameValuePair : this) {
+            builder.addQueryParameter(nameValuePair.left, nameValuePair.right);
         }
         return StringUtils.defaultString(builder.build().encodedQuery());
     }

@@ -22,6 +22,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 import org.apache.commons.lang3.CharEncoding;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import rx.Single;
@@ -131,8 +132,8 @@ public final class Network {
     public static Single<Response> postRequest(final String uri, final Parameters params,
             final String fileFieldName, final String fileContentType, final File file) {
         final MultipartBody.Builder entity = new MultipartBody.Builder().setType(FORM);
-        for (final NameValuePair param : params) {
-            entity.addFormDataPart(param.getName(), param.getValue());
+        for (final ImmutablePair<String, String> param : params) {
+            entity.addFormDataPart(param.left, param.right);
         }
         entity.addFormDataPart(fileFieldName, file.getName(),
                 RequestBody.create(MediaType.parse(fileContentType), file));
@@ -169,8 +170,8 @@ public final class Network {
             builder.url(uri);
             if (params != null) {
                 final FormBody.Builder body = new FormBody.Builder();
-                for (final NameValuePair param: params) {
-                    body.add(param.getName(), param.getValue());
+                for (final ImmutablePair<String, String> param: params) {
+                    body.add(param.left, param.right);
                 }
                 builder.post(body.build());
             } else {
@@ -192,8 +193,8 @@ public final class Network {
      *            if non-null, the file to take ETag and If-Modified-Since information from
      */
     private static void addHeaders(final Builder request, @Nullable final Parameters headers, @Nullable final File cacheFile) {
-        for (final NameValuePair header : Parameters.extend(Parameters.merge(headers, cacheHeaders(cacheFile)))) {
-            request.header(header.getName(), header.getValue());
+        for (final ImmutablePair<String, String> header : Parameters.extend(Parameters.merge(headers, cacheHeaders(cacheFile)))) {
+            request.header(header.left, header.right);
         }
     }
 
