@@ -170,7 +170,7 @@ public final class TextUtils {
 
     /**
      * Calculate a simple checksum for change-checking (not usable for security/cryptography!)
-     * 
+     *
      * @param input
      *            String to check
      * @return resulting checksum

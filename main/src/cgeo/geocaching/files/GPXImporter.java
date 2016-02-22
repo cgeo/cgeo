@@ -85,74 +85,74 @@ public class GPXImporter {
         final ContentResolver contentResolver = fromActivity.getContentResolver();
 
         Log.i("importGPX: " + uri + ", mimetype=" + mimeType);
-		@NonNull
-		FileType fileType = new FileTypeDetector(uri, contentResolver)
-				.getFileType();
+        @NonNull
+        FileType fileType = new FileTypeDetector(uri, contentResolver)
+                .getFileType();
 
-		if (fileType == FileType.UNKNOWN) {
-			fileType = getFileTypeFromPathName(pathName);
-		}
-		if (fileType == FileType.UNKNOWN) {
-			fileType = getFileTypeFromMimeType(mimeType);
-		}
+        if (fileType == FileType.UNKNOWN) {
+            fileType = getFileTypeFromPathName(pathName);
+        }
+        if (fileType == FileType.UNKNOWN) {
+            fileType = getFileTypeFromMimeType(mimeType);
+        }
         if (fileType == FileType.UNKNOWN && uri != null) {
             fileType = getFileTypeFromPathName(uri.toString());
         }
 
-		final AbstractImportThread importer = getImporterFromFileType(uri, contentResolver,
-				fileType);
+        final AbstractImportThread importer = getImporterFromFileType(uri, contentResolver,
+                fileType);
 
-		if (importer != null) {
-			importer.start();
-		} else {
-			importFinished();
-		}
-	}
+        if (importer != null) {
+            importer.start();
+        } else {
+            importFinished();
+        }
+    }
 
-	private static @NonNull FileType getFileTypeFromPathName(
-			final String pathName) {
+    private static @NonNull FileType getFileTypeFromPathName(
+            final String pathName) {
         if (StringUtils.endsWithIgnoreCase(pathName, GPX_FILE_EXTENSION)) {
-        		return FileType.GPX;
+                return FileType.GPX;
         }
 
-	if (StringUtils.endsWithIgnoreCase(pathName, LOC_FILE_EXTENSION)) {
-		return FileType.LOC;
-	}
-		return FileType.UNKNOWN;
-	}
+    if (StringUtils.endsWithIgnoreCase(pathName, LOC_FILE_EXTENSION)) {
+        return FileType.LOC;
+    }
+        return FileType.UNKNOWN;
+    }
 
-	private static @NonNull FileType getFileTypeFromMimeType(
-			final String mimeType) {
+    private static @NonNull FileType getFileTypeFromMimeType(
+            final String mimeType) {
         if (GPX_MIME_TYPES.contains(mimeType)) {
-			return FileType.GPX;
+            return FileType.GPX;
         }
         if (ZIP_MIME_TYPES.contains(mimeType)) {
-			return FileType.ZIP;
-		}
+            return FileType.ZIP;
+        }
         return FileType.UNKNOWN;
-	}
+    }
 
-	private AbstractImportThread getImporterFromFileType(final Uri uri,
-			final ContentResolver contentResolver, final FileType fileType) {
-		switch (fileType) {
-		case ZIP:
-			return new ImportGpxZipAttachmentThread(uri, contentResolver,
-					listId, importStepHandler, progressHandler);
-		case GPX:
-			return new ImportGpxAttachmentThread(uri, contentResolver, listId,
-					importStepHandler, progressHandler);
-		case LOC:
-			return new ImportLocAttachmentThread(uri, contentResolver, listId,
-					importStepHandler, progressHandler);
-		default:
-			return null;
-		}
-	}
+    private AbstractImportThread getImporterFromFileType(final Uri uri,
+            final ContentResolver contentResolver, final FileType fileType) {
+        switch (fileType) {
+        case ZIP:
+            return new ImportGpxZipAttachmentThread(uri, contentResolver,
+                    listId, importStepHandler, progressHandler);
+        case GPX:
+            return new ImportGpxAttachmentThread(uri, contentResolver, listId,
+                    importStepHandler, progressHandler);
+        case LOC:
+            return new ImportLocAttachmentThread(uri, contentResolver, listId,
+                    importStepHandler, progressHandler);
+        default:
+            return null;
+        }
+    }
 
-	/**
-	 * Import GPX provided via intent of activity that instantiated this
-	 * GPXImporter.
-	 */
+    /**
+     * Import GPX provided via intent of activity that instantiated this
+     * GPXImporter.
+     */
     public void importGPX() {
         final Intent intent = fromActivity.getIntent();
         final Uri uri = intent.getData();

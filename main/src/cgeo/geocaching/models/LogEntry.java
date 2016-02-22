@@ -21,7 +21,7 @@ import java.util.regex.Pattern;
 
 /**
  * Entry in a log book.
- * 
+ *
  * {@link LogEntry} Objects are immutable. They should be manipulated by {@link LogEntry.Builder}. Use {@link LogEntry#buildUpon()}
  * to create a {@link LogEntry.Builder} object capable of creating a new {@link LogEntry}.
  * This object should not be referenced directly from a Geocache object to reduce the memory usage

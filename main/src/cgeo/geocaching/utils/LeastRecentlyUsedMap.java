@@ -31,27 +31,27 @@ public abstract class LeastRecentlyUsedMap<K, V> extends LinkedHashMap<K, V> {
     final float loadFactor;
 
     protected LeastRecentlyUsedMap(final int maxEntries, final int initialCapacity, final float loadFactor, final OperationModes opMode) {
-    	super(initialCapacity, loadFactor, (opMode==OperationModes.LRU_CACHE));
-    	this.initialCapacity = initialCapacity;
-    	this.loadFactor = loadFactor;
+        super(initialCapacity, loadFactor, (opMode==OperationModes.LRU_CACHE));
+        this.initialCapacity = initialCapacity;
+        this.loadFactor = loadFactor;
         this.maxEntries = maxEntries;
         this.opMode = opMode;
     }
 
     protected LeastRecentlyUsedMap(final int maxEntries, final OperationModes opMode) {
-    	this(maxEntries, 16, 0.75f, opMode);
+        this(maxEntries, 16, 0.75f, opMode);
     }
 
     @Override
     public V put(final K key, final V value) {
-    	// in case the underlying Map is not running with accessOrder==true, the map won't notice any changes
-    	// of existing keys, so for the normal BOUNDED mode we remove and put the value to get its order updated.
-    	if (opMode == OperationModes.BOUNDED && containsKey(key)) {
+        // in case the underlying Map is not running with accessOrder==true, the map won't notice any changes
+        // of existing keys, so for the normal BOUNDED mode we remove and put the value to get its order updated.
+        if (opMode == OperationModes.BOUNDED && containsKey(key)) {
             // avoid trigger the remove notification
             final V oldVal = super.remove(key);
-    		put(key, value);
-    		return oldVal;
-    	}
+            put(key, value);
+            return oldVal;
+        }
 
         return super.put(key, value);
     }
@@ -62,8 +62,8 @@ public abstract class LeastRecentlyUsedMap<K, V> extends LinkedHashMap<K, V> {
     }
 
     public int getMaxEntries() {
-		return maxEntries;
-	}
+        return maxEntries;
+    }
 
     @Override
     public V remove(final Object key) {

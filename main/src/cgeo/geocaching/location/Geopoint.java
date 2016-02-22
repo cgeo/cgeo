@@ -540,7 +540,7 @@ public final class Geopoint implements ICoordinates, Parcelable {
 
     /**
      * Check whether a longitude from user supplied data is valid. We accept both E180/W180.
-     * 
+     *
      * @return <tt>true</tt> if the longitude looks valid, <tt>false</tt> otherwise
      */
     public static boolean isValidLongitude(final double longitude) {

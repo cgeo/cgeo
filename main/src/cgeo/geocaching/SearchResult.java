@@ -309,7 +309,7 @@ public class SearchResult implements Parcelable {
 
     /**
      * execute the given connector request in parallel on all active connectors
-     * 
+     *
      * @param connectors
      *            connectors to be considered in request
      * @param func

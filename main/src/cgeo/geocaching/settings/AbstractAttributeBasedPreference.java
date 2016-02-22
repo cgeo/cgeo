@@ -41,7 +41,7 @@ public abstract class AbstractAttributeBasedPreference extends Preference {
 
     /**
      * Evaluate the attributes which where requested in {@link AbstractAttributeBasedPreference#getAttributeNames()}.
-     * 
+     *
      */
     protected abstract void processAttributeValues(TypedArray values);
 

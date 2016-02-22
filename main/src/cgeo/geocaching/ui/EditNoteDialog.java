@@ -79,7 +79,7 @@ public class EditNoteDialog extends DialogFragment {
         final TextView title = ButterKnife.findById(view, R.id.dialog_title_title);
         title.setText(R.string.cache_personal_note);
         title.setVisibility(View.VISIBLE);
-        
+
         final ImageButton cancel = ButterKnife.findById(view, R.id.dialog_title_cancel);
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,7 +88,7 @@ public class EditNoteDialog extends DialogFragment {
             }
         });
         cancel.setVisibility(View.VISIBLE);
-        
+
         final ImageButton done = ButterKnife.findById(view, R.id.dialog_title_done);
         done.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,7 +98,7 @@ public class EditNoteDialog extends DialogFragment {
             }
         });
         done.setVisibility(View.VISIBLE);
-        
+
         new Keyboard(activity).showDelayed(mEditText);
         return dialog;
     }
