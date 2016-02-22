@@ -11,6 +11,7 @@ import cgeo.geocaching.utils.TextUtils;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import okhttp3.FormBody;
+import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -26,8 +27,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import rx.Single;
 import rx.functions.Func1;
-
-import android.net.Uri;
 
 import java.io.File;
 import java.io.IOException;
@@ -160,8 +159,11 @@ public final class Network {
         final Builder builder = new Builder();
 
         if (method.equals("GET")) {
-            final String fullUri = params == null ? uri : Uri.parse(uri).buildUpon().encodedQuery(params.toString()).build().toString();
-            builder.url(fullUri);
+            final HttpUrl.Builder urlBuilder = HttpUrl.parse(uri).newBuilder();
+            if (params != null) {
+                urlBuilder.encodedQuery(params.toString());
+            }
+            builder.url(urlBuilder.build());
         } else {
             builder.url(uri);
             if (params != null) {
