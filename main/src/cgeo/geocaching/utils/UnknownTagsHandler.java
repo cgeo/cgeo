@@ -103,7 +103,10 @@ public class UnknownTagsHandler implements TagHandler {
 
     private static void handleHr(final boolean opening, final Editable output) {
         if (opening) {
-            output.append("\n");
+            // If we are in the middle of a line, add a line feed.
+            if (output.length() > 0 && output.charAt(output.length() - 1) != '\n') {
+                output.append('\n');
+            }
             final int start = output.length();
             output.append("                              ");
             output.setSpan(new StrikethroughSpan(), start, output.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
