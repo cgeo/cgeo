@@ -1,6 +1,5 @@
 package cgeo.geocaching.network;
 
-import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.ImageUtils.LineHeightContainerDrawable;
 
@@ -18,7 +17,7 @@ import android.widget.TextView;
 public class SmileyImage extends HtmlImage {
 
     public SmileyImage(final String geocode, final TextView view) {
-        super(geocode, false, StoredList.STANDARD_LIST_ID, false, view);
+        super(geocode, false, false, view, false);
     }
 
     @Override
