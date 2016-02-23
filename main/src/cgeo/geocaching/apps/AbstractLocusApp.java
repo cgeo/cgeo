@@ -1,19 +1,12 @@
 package cgeo.geocaching.apps;
 
 import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.storage.LocalStorage;
-import cgeo.geocaching.utils.Log;
-import locus.api.android.ActionDisplay;
-import locus.api.android.ActionDisplayPoints;
-import locus.api.android.objects.PackWaypoints;
-import locus.api.android.utils.exceptions.RequiredVersionMissingException;
-import locus.api.objects.extra.Waypoint;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.utils.SynchronizedDateFormat;
+import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.utils.Log;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -21,16 +14,19 @@ import org.eclipse.jdt.annotation.Nullable;
 import android.app.Activity;
 import android.os.Environment;
 
-import locus.api.objects.extra.Location;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import locus.api.android.ActionDisplay;
+import locus.api.android.ActionDisplayPoints;
+import locus.api.android.objects.PackWaypoints;
 import locus.api.android.utils.LocusUtils;
+import locus.api.android.utils.exceptions.RequiredVersionMissingException;
+import locus.api.objects.extra.Location;
+import locus.api.objects.extra.Waypoint;
 import locus.api.objects.geocaching.GeocachingData;
 import locus.api.objects.geocaching.GeocachingWaypoint;
 
@@ -41,7 +37,6 @@ import locus.api.objects.geocaching.GeocachingWaypoint;
  * @see <a href="https://bitbucket.org/asamm/locus-api-android-sample/src/1fad202e6166239b6e424f03bac79f0000f8eb6d/src/main/java/menion/android/locus/api/utils/SampleCalls.java?at=default&fileviewer=file-view-default">Sample Calls</a>
  */
 public abstract class AbstractLocusApp extends AbstractApp {
-    private static final SynchronizedDateFormat ISO8601DATE = new SynchronizedDateFormat("yyyy-MM-dd'T'", Locale.US);
 
     @SuppressFBWarnings("NP_METHOD_PARAMETER_TIGHTENS_ANNOTATION")
     protected AbstractLocusApp(@NonNull final String text, @NonNull final String intent) {
@@ -89,7 +84,7 @@ public abstract class AbstractLocusApp extends AbstractApp {
         if (pd.getWaypoints().size() <= 1000) {
             try {
                 ActionDisplayPoints.sendPack(activity, pd, export ? ActionDisplay.ExtraAction.IMPORT : ActionDisplay.ExtraAction.CENTER);
-            } catch (RequiredVersionMissingException e) {
+            } catch (final RequiredVersionMissingException e) {
                 Log.e("AbstractLocusApp.showInLocus: problem in sendPack", e);
                 return false;
             }
@@ -106,12 +101,12 @@ public abstract class AbstractLocusApp extends AbstractApp {
             }
             filePath += "Android/data/menion.android.locus.api/files/showIn.locus";
 
-            final ArrayList<PackWaypoints> data = new ArrayList<PackWaypoints>();
+            final ArrayList<PackWaypoints> data = new ArrayList<>();
             data.add(pd);
 
             try {
                 ActionDisplayPoints.sendPacksFile(activity, data, filePath, export ? ActionDisplay.ExtraAction.IMPORT : ActionDisplay.ExtraAction.CENTER);
-            } catch (RequiredVersionMissingException e) {
+            } catch (final RequiredVersionMissingException e) {
                 Log.e("AbstractLocusApp.showInLocus: problem in sendPacksFile", e);
                 return false;
             }
@@ -182,7 +177,7 @@ public abstract class AbstractLocusApp extends AbstractApp {
                     continue;
                 }
 
-                GeocachingWaypoint gcWpt = new GeocachingWaypoint();
+                final GeocachingWaypoint gcWpt = new GeocachingWaypoint();
                 gcWpt.setCode(waypoint.getLookup());
                 gcWpt.setName(waypoint.getName());
                 gcWpt.setDesc(waypoint.getNote());

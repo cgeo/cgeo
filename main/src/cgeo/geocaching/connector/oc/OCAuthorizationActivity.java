@@ -6,7 +6,6 @@ import cgeo.geocaching.activity.OAuthAuthorizationActivity;
 import cgeo.geocaching.connector.oc.OkapiError.OkapiErrors;
 import cgeo.geocaching.settings.Settings;
 
-import okhttp3.Response;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.eclipse.jdt.annotation.NonNull;
@@ -14,6 +13,8 @@ import org.eclipse.jdt.annotation.Nullable;
 
 import android.os.Bundle;
 import android.support.annotation.StringRes;
+
+import okhttp3.Response;
 
 public class OCAuthorizationActivity extends OAuthAuthorizationActivity {
 
@@ -71,7 +72,9 @@ public class OCAuthorizationActivity extends OAuthAuthorizationActivity {
 
     /**
      * Return an extended error in case of an invalid time stamp
+     * 
      * @param response
+     *            network response
      */
     @Override
     @NonNull

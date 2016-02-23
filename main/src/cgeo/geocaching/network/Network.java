@@ -425,9 +425,8 @@ public final class Network {
                 } catch (final IOException e) {
                     return Single.error(e);
                 }
-            } else {
-                return Single.error(new IOException("request was not successful"));
             }
+            return Single.error(new IOException("request was not successful"));
         }
     };
 
