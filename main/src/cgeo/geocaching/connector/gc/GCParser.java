@@ -974,12 +974,9 @@ public final class GCParser {
             return null;
         }
 
-        Trackable trackable = new Trackable();
-
         final Parameters params = new Parameters();
         if (StringUtils.isNotBlank(geocode)) {
             params.put("tracker", geocode);
-            trackable.setGeocode(geocode);
         } else if (StringUtils.isNotBlank(guid)) {
             params.put("guid", guid);
         } else if (StringUtils.isNotBlank(id)) {
@@ -990,11 +987,11 @@ public final class GCParser {
 
         if (StringUtils.isBlank(page)) {
             Log.e("GCParser.searchTrackable: No data from server");
-            return trackable;
+            return null;
         }
         assert page != null;
 
-        trackable = parseTrackable(page, geocode);
+        final Trackable trackable = parseTrackable(page, geocode);
         if (trackable == null) {
             Log.w("GCParser.searchTrackable: No trackable parsed");
             return null;

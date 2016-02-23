@@ -1,9 +1,7 @@
 package cgeo.geocaching.connector;
 
-import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.connector.capability.ISearchByCenter;
 import cgeo.geocaching.connector.capability.ISearchByFinder;
@@ -26,6 +24,8 @@ import cgeo.geocaching.connector.trackable.TrackableConnector;
 import cgeo.geocaching.connector.trackable.TravelBugConnector;
 import cgeo.geocaching.connector.trackable.UnknownTrackableConnector;
 import cgeo.geocaching.location.Viewport;
+import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.RxUtils;
@@ -33,9 +33,9 @@ import cgeo.geocaching.utils.RxUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-
 import rx.Observable;
 import rx.functions.Func0;
+import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 import java.util.ArrayList;
@@ -43,8 +43,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-
-import rx.functions.Func1;
 
 public final class ConnectorFactory {
     @NonNull public static final UnknownConnector UNKNOWN_CONNECTOR = new UnknownConnector();
@@ -370,7 +368,8 @@ public final class ConnectorFactory {
                         return RxUtils.deferredNullable(new Func0<Trackable>() {
                             @Override
                             public Trackable call() {
-                                return trackableConnector.searchTrackable(geocode, guid, id);
+                                final Trackable trackable = trackableConnector.searchTrackable(geocode, guid, id);
+                                return trackable;
                             }
                         }).subscribeOn(AndroidRxUtils.networkScheduler);
                     }
@@ -379,7 +378,8 @@ public final class ConnectorFactory {
         final Observable<Trackable> fromLocalStorage = RxUtils.deferredNullable(new Func0<Trackable>() {
             @Override
             public Trackable call() {
-                return DataStore.loadTrackable(geocode);
+                final Trackable trackable = DataStore.loadTrackable(geocode);
+                return trackable;
             }
         }).subscribeOn(Schedulers.io());
 

@@ -215,10 +215,10 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
 
     private void refreshTrackable(final String message) {
         waitDialog = ProgressDialog.show(this, message, res.getString(R.string.trackable_details_loading), true, true);
-        createSubscriptions.add(AppObservable.bindActivity(this, ConnectorFactory.loadTrackable(geocode, guid, id, brand)).singleOrDefault(null).subscribe(new Action1<Trackable>() {
+        createSubscriptions.add(AppObservable.bindActivity(this, ConnectorFactory.loadTrackable(geocode, guid, id, brand)).single().subscribe(new Action1<Trackable>() {
             @Override
             public void call(final Trackable newTrackable) {
-                if (newTrackable != null && trackingCode != null) {
+                if (trackingCode != null) {
                     newTrackable.setTrackingcode(trackingCode);
                 }
                 trackable = newTrackable;
@@ -226,6 +226,13 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
                 // reset imagelist
                 imagesList = null;
                 lazyLoadTrackableImages();
+            }
+        }, new Action1<Throwable>() {
+            @Override
+            public void call(final Throwable t) {
+                Log.e("unable to retrieve trackable information", t);
+                showToast(res.getString(R.string.err_tb_find_that));
+                finish();
             }
         }));
     }
