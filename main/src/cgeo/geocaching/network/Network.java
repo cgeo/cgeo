@@ -164,15 +164,13 @@ public final class Network {
             builder.url(urlBuilder.build());
         } else {
             builder.url(uri);
+            final FormBody.Builder body = new FormBody.Builder();
             if (params != null) {
-                final FormBody.Builder body = new FormBody.Builder();
-                for (final ImmutablePair<String, String> param: params) {
+                for (final ImmutablePair<String, String> param : params) {
                     body.add(param.left, param.right);
                 }
-                builder.post(body.build());
-            } else {
-                builder.post(null);
             }
+            builder.post(body.build());
         }
 
         addHeaders(builder, headers, cacheFile);
