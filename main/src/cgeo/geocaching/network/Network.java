@@ -10,6 +10,22 @@ import cgeo.geocaching.utils.RxOkHttpUtils;
 import cgeo.geocaching.utils.TextUtils;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
+
+import org.apache.commons.lang3.CharEncoding;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+import java.util.concurrent.TimeUnit;
+import java.util.regex.Pattern;
+
 import okhttp3.FormBody;
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
@@ -20,22 +36,8 @@ import okhttp3.Request;
 import okhttp3.Request.Builder;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-import org.apache.commons.lang3.CharEncoding;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import rx.Single;
 import rx.functions.Func1;
-
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.net.URLEncoder;
-import java.util.concurrent.TimeUnit;
-import java.util.regex.Pattern;
 
 public final class Network {
 
@@ -81,7 +83,7 @@ public final class Network {
      * @param params the parameters to add to the POST request
      * @return a Single with the HTTP response, or an IOException
      */
-    @Nullable
+    @NonNull
     public static Single<Response> postRequest(final String uri, final Parameters params) {
         return request("POST", uri, params, null, null);
     }
@@ -277,7 +279,7 @@ public final class Network {
      *            the name of the file storing the cached resource, or null not to use one
      * @return a single with the HTTP response, or an IOException
      */
-    @Nullable
+    @NonNull
     public static Single<Response> getRequest(final String uri, @Nullable final Parameters params, @Nullable final File cacheFile) {
         return request("GET", uri, params, null, cacheFile);
     }
