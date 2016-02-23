@@ -4,7 +4,6 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.connector.ConnectorFactory;
-import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.CancellableHandler;
@@ -75,8 +74,8 @@ public class HtmlImage implements Html.ImageGetter {
      * on error: return large error image, if {@code true}, otherwise empty 1x1 image
      */
     final private boolean returnErrorImage;
-    final private int listId;
     final private boolean onlySave;
+    final private boolean userInitiatedRefresh;
     final private int maxWidth;
     final private int maxHeight;
     final private Resources resources;
@@ -121,23 +120,22 @@ public class HtmlImage implements Html.ImageGetter {
      * @param returnErrorImage
      *            set to <tt>true</tt> if an error image should be returned in case of a problem, <tt>false</tt> to get
      *            a transparent 1x1 image instead
-     * @param listId
-     *            the list this cache belongs to, used to determine if an older image for the offline case can be used
-     *            or not
      * @param onlySave
      *            if set to <tt>true</tt>, {@link #getDrawable(String)} will only fetch and store the image, not return
      *            it
      * @param view
      *            if non-null, {@link #getDrawable(String)} will return an initially empty drawable which will be
-     *            redrawn when
-     *            the image is ready through an invalidation of the given view
+     *            redrawn when the image is ready through an invalidation of the given view
+     * @param userInitiatedRefresh
+     *            if `true`, even fresh images will be refreshed if they have changed
      */
-    public HtmlImage(@NonNull final String geocode, final boolean returnErrorImage, final int listId, final boolean onlySave, final TextView view) {
+    public HtmlImage(@NonNull final String geocode, final boolean returnErrorImage, final boolean onlySave,
+                     final TextView view, final boolean userInitiatedRefresh) {
         this.geocode = geocode;
         this.returnErrorImage = returnErrorImage;
-        this.listId = listId;
         this.onlySave = onlySave;
         this.view = view;
+        this.userInitiatedRefresh = userInitiatedRefresh;
 
         final Point displaySize = Compatibility.getDisplaySize();
         this.maxWidth = displaySize.x - 25;
@@ -149,15 +147,16 @@ public class HtmlImage implements Html.ImageGetter {
      * Create a new HtmlImage object with different behaviors depending on <tt>onlySave</tt> value. No view object
      * will be tied to this HtmlImage.
      *
-     * For documentation, see {@link #HtmlImage(String, boolean, int, boolean, TextView)}.
+     * For documentation, see {@link #HtmlImage(String, boolean, boolean, TextView, boolean)}.
      */
-    public HtmlImage(@NonNull final String geocode, final boolean returnErrorImage, final int listId, final boolean onlySave) {
-        this(geocode, returnErrorImage, listId, onlySave, null);
+    public HtmlImage(@NonNull final String geocode, final boolean returnErrorImage, final boolean onlySave,
+                     final boolean userInitiatedRefresh) {
+        this(geocode, returnErrorImage, onlySave, null, userInitiatedRefresh);
     }
 
     /**
      * Retrieve and optionally display an image.
-     * See {@link #HtmlImage(String, boolean, int, boolean, TextView)} for the various behaviours.
+     * See {@link #HtmlImage(String, boolean, boolean, TextView, boolean)} for the various behaviours.
      *
      * @param url
      *            the URL to fetch from cache or network
@@ -401,8 +400,15 @@ public class HtmlImage implements Html.ImageGetter {
      */
     @NonNull
     private ImmutablePair<Bitmap, Boolean> loadCachedImage(final File file, final boolean forceKeep) {
+        // An image is considered fresh enough if the image exists and one of those conditions is true:
+        //  - forceKeep is true and the image has not been modified in the last 24 hours, to avoid reloading shared images;
+        //    with every refreshed cache;
+        //  - forceKeep is true and userInitiatedRefresh is false, as shared images are unlikely to change at all;
+        //  - userInitiatedRefresh is false and the image has not been modified in the last 24 hours.
         if (file.exists()) {
-            final boolean freshEnough = listId >= StoredList.STANDARD_LIST_ID || file.lastModified() > (System.currentTimeMillis() - (24 * 60 * 60 * 1000)) || forceKeep;
+            final boolean recentlyModified = file.lastModified() > (System.currentTimeMillis() - (24 * 60 * 60 * 1000));
+            final boolean freshEnough = (forceKeep && (recentlyModified || !userInitiatedRefresh)) ||
+                    (recentlyModified && !userInitiatedRefresh);
             if (freshEnough && onlySave) {
                 return ImmutablePair.of((Bitmap) null, true);
             }

@@ -1,6 +1,5 @@
 package cgeo.geocaching.ui;
 
-import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.network.HtmlImage;
 
 import rx.Observable;
@@ -9,7 +8,7 @@ import android.graphics.drawable.BitmapDrawable;
 
 public class DirectionImage {
 
-    static final private HtmlImage HTML_IMAGE = new HtmlImage(HtmlImage.SHARED, false, StoredList.STANDARD_LIST_ID, false);
+    static final private HtmlImage HTML_IMAGE = new HtmlImage(HtmlImage.SHARED, false, false, false);
 
     private DirectionImage() {
         // utility class

@@ -308,7 +308,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
     }
 
     private void setupIcon(final ActionBar actionBar, final String url) {
-        final HtmlImage imgGetter = new HtmlImage(HtmlImage.SHARED, false, 0, false);
+        final HtmlImage imgGetter = new HtmlImage(HtmlImage.SHARED, false, false, false);
         AppObservable.bindActivity(this, imgGetter.fetchDrawable(url)).subscribe(new Action1<BitmapDrawable>() {
             @Override
             public void call(final BitmapDrawable image) {
@@ -548,7 +548,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
             if (StringUtils.isNotBlank(HtmlUtils.extractText(trackable.getGoal()))) {
                 goalBox.setVisibility(View.VISIBLE);
                 goalTextView.setVisibility(View.VISIBLE);
-                goalTextView.setText(Html.fromHtml(trackable.getGoal(), new HtmlImage(geocode, true, 0, false, goalTextView), null), TextView.BufferType.SPANNABLE);
+                goalTextView.setText(Html.fromHtml(trackable.getGoal(), new HtmlImage(geocode, true, false, goalTextView, false), null), TextView.BufferType.SPANNABLE);
                 goalTextView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
                 addContextMenu(goalTextView);
             }
@@ -557,7 +557,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
             if (StringUtils.isNotBlank(HtmlUtils.extractText(trackable.getDetails()))) {
                 detailsBox.setVisibility(View.VISIBLE);
                 detailsTextView.setVisibility(View.VISIBLE);
-                detailsTextView.setText(Html.fromHtml(trackable.getDetails(), new HtmlImage(geocode, true, 0, false, detailsTextView), new UnknownTagsHandler()), TextView.BufferType.SPANNABLE);
+                detailsTextView.setText(Html.fromHtml(trackable.getDetails(), new HtmlImage(geocode, true, false, detailsTextView, false), new UnknownTagsHandler()), TextView.BufferType.SPANNABLE);
                 detailsTextView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
                 addContextMenu(detailsTextView);
             }
@@ -576,7 +576,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
                     }
                 });
 
-                AppObservable.bindActivity(TrackableActivity.this, new HtmlImage(geocode, true, 0, false).fetchDrawable(trackable.getImage())).subscribe(new Action1<BitmapDrawable>() {
+                AppObservable.bindActivity(TrackableActivity.this, new HtmlImage(geocode, true, false, false).fetchDrawable(trackable.getImage())).subscribe(new Action1<BitmapDrawable>() {
                     @Override
                     public void call(final BitmapDrawable bitmapDrawable) {
                         trackableImage.setImageDrawable(bitmapDrawable);

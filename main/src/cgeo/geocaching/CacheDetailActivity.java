@@ -1,5 +1,8 @@
 package cgeo.geocaching;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 import cgeo.calendar.CalendarAddon;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.AbstractViewPagerActivity;
@@ -74,6 +77,18 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import rx.Observable;
+import rx.Observable.OnSubscribe;
+import rx.Subscriber;
+import rx.Subscription;
+import rx.android.app.AppObservable;
+import rx.functions.Action0;
+import rx.functions.Action1;
+import rx.functions.Func0;
+import rx.functions.Func1;
+import rx.schedulers.Schedulers;
+import rx.subscriptions.CompositeSubscription;
+import rx.subscriptions.Subscriptions;
 
 import android.R.color;
 import android.app.AlertDialog;
@@ -134,21 +149,6 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.regex.Pattern;
-
-import butterknife.Bind;
-import butterknife.ButterKnife;
-import rx.Observable;
-import rx.Observable.OnSubscribe;
-import rx.Subscriber;
-import rx.Subscription;
-import rx.android.app.AppObservable;
-import rx.functions.Action0;
-import rx.functions.Action1;
-import rx.functions.Func0;
-import rx.functions.Func1;
-import rx.schedulers.Schedulers;
-import rx.subscriptions.CompositeSubscription;
-import rx.subscriptions.Subscriptions;
 
 /**
  * Activity to handle all single-cache-stuff.
@@ -1498,7 +1498,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             final TextView hintView = (ButterKnife.findById(view, R.id.hint));
             if (StringUtils.isNotBlank(cache.getHint())) {
                 if (TextUtils.containsHtml(cache.getHint())) {
-                    hintView.setText(Html.fromHtml(cache.getHint(), new HtmlImage(cache.getGeocode(), false, cache.getListId(), false), null), TextView.BufferType.SPANNABLE);
+                    hintView.setText(Html.fromHtml(cache.getHint(), new HtmlImage(cache.getGeocode(), false, false, false), null), TextView.BufferType.SPANNABLE);
                     hintView.setText(CryptUtils.rot13((Spannable) hintView.getText()));
                 }
                 else {
@@ -1598,7 +1598,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         private void loadDescription(final String descriptionString, final IndexOutOfBoundsAvoidingTextView descriptionView, final View loadingIndicatorView) {
             try {
                 final UnknownTagsHandler unknownTagsHandler = new UnknownTagsHandler();
-                final Spanned description = Html.fromHtml(descriptionString, new HtmlImage(cache.getGeocode(), true, cache.getListId(), false, descriptionView), unknownTagsHandler);
+                final Spanned description = Html.fromHtml(descriptionString, new HtmlImage(cache.getGeocode(), true, false, descriptionView, false), unknownTagsHandler);
                 addWarning(unknownTagsHandler, description);
                 if (StringUtils.isNotBlank(descriptionString)) {
                     try {

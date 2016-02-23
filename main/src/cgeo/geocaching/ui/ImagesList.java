@@ -2,16 +2,14 @@ package cgeo.geocaching.ui;
 
 import butterknife.ButterKnife;
 
-import cgeo.geocaching.models.Image;
 import cgeo.geocaching.R;
-import cgeo.geocaching.storage.LocalStorage;
-import cgeo.geocaching.list.StoredList;
+import cgeo.geocaching.models.Image;
 import cgeo.geocaching.network.HtmlImage;
+import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
-
 import rx.Subscription;
 import rx.android.app.AppObservable;
 import rx.functions.Action0;
@@ -105,7 +103,7 @@ public class ImagesList {
 
         imagesView = ButterKnife.findById(parentView, R.id.spoiler_list);
 
-        final HtmlImage imgGetter = new HtmlImage(geocode, true, offline ? StoredList.STANDARD_LIST_ID : StoredList.TEMPORARY_LIST.id, false);
+        final HtmlImage imgGetter = new HtmlImage(geocode, true, false, false);
 
         for (final Image img : images) {
             final LinearLayout rowView = (LinearLayout) inflater.inflate(R.layout.cache_image_item, imagesView, false);
