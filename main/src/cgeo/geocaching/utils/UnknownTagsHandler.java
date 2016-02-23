@@ -38,6 +38,8 @@ public class UnknownTagsHandler implements TagHandler {
             handleOl(opening);
         } else if (tag.equalsIgnoreCase("li")) {
             handleLi(opening, output);
+        } else if (tag.equalsIgnoreCase("hr")) {
+            handleHr(opening, output);
         }
     }
 
@@ -96,6 +98,16 @@ public class UnknownTagsHandler implements TagHandler {
             } else {
                 output.append("\n  • ");
             }
+        }
+    }
+
+    private static void handleHr(final boolean opening, final Editable output) {
+        if (opening) {
+            output.append("\n");
+            final int start = output.length();
+            output.append("                              ");
+            output.setSpan(new StrikethroughSpan(), start, output.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            output.append("\n");
         }
     }
 
