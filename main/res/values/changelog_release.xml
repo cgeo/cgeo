@@ -22,6 +22,7 @@
     · Fix: Allow searching for trackable secret codes starting with GC\n
     · Fix: Do not leave the app when selecting back in spoiler view\n
     · Fix: Hint picture not refreshed when switching to different cache\n
+    · Fix: Implemented workaround to show horizontal lines from HTML\n
     \n
     \n
 </string>
