@@ -287,7 +287,7 @@ public final class MapUtils {
      */
     private static boolean showUserModifiedCoords(final Geocache cache, @Nullable final CacheListType cacheListType) {
 
-        return cache.hasUserModifiedCoords() || cache.hasFinalDefined() && cacheListType != null;
+        return cache.hasUserModifiedCoords() || cache.hasFinalDefined();
     }
 
     /**
