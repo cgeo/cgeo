@@ -21,13 +21,10 @@ public class LocParserTest extends AbstractResourceInstrumentationTestCase {
     private List<Geocache> readLoc(@RawRes final int resourceId) throws IOException, ParserException {
         final LocParser parser = new LocParser(getTemporaryListId());
         Collection<Geocache> caches = null;
-        final InputStream instream = getResourceStream(resourceId);
-        try {
+        try (final InputStream instream = getResourceStream(resourceId)) {
             caches = parser.parse(instream, null);
             assertThat(caches).isNotNull();
             assertThat(caches).isNotEmpty();
-        } finally {
-            instream.close();
         }
 
         return new ArrayList<>(caches);

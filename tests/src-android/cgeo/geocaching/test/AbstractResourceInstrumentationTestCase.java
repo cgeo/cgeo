@@ -58,18 +58,15 @@ public abstract class AbstractResourceInstrumentationTestCase extends Instrument
     }
 
     protected void copyResourceToFile(@RawRes final int resourceId, final File file) throws IOException {
-        final InputStream is = getResourceStream(resourceId);
-        final FileOutputStream os = new FileOutputStream(file);
-
-        try {
+        try (
+            final InputStream is = getResourceStream(resourceId);
+            final FileOutputStream os = new FileOutputStream(file)
+        ) {
             final byte[] buffer = new byte[4096];
             int byteCount;
             while ((byteCount = is.read(buffer)) >= 0) {
                 os.write(buffer, 0, byteCount);
             }
-        } finally {
-            os.close();
-            is.close();
         }
     }
 
@@ -95,15 +92,12 @@ public abstract class AbstractResourceInstrumentationTestCase extends Instrument
     }
 
     final protected Geocache loadCacheFromResource(@RawRes final int resourceId) throws IOException, ParserException {
-        final InputStream instream = getResourceStream(resourceId);
-        try {
+        try (final InputStream instream = getResourceStream(resourceId)) {
             final GPX10Parser parser = new GPX10Parser(StoredList.TEMPORARY_LIST.id);
             final Collection<Geocache> caches = parser.parse(instream, null);
             assertThat(caches).isNotNull();
             assertThat(caches).isNotEmpty();
             return caches.iterator().next();
-        } finally {
-            instream.close();
         }
     }
 

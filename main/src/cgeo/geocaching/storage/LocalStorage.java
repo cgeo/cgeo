@@ -239,14 +239,11 @@ public final class LocalStorage {
     public static String getSavedHeader(final File baseFile, final String name) {
         try {
             final File file = filenameForHeader(baseFile, name);
-            final Reader reader = new InputStreamReader(new FileInputStream(file), CharEncoding.UTF_8);
-            try {
+            try (final Reader reader = new InputStreamReader(new FileInputStream(file), CharEncoding.UTF_8)) {
                 // No header will be more than 256 bytes
                 final char[] value = new char[256];
                 final int count = reader.read(value);
                 return new String(value, 0, count);
-            } finally {
-                reader.close();
             }
         } catch (final FileNotFoundException ignored) {
             // Do nothing, the file does not exist
