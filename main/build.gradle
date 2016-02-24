@@ -236,8 +236,8 @@ dependencies {
     compile 'org.apache.commons:commons-lang3:3.4'
     compile 'org.apache.commons:commons-compress:1.10'
     compile 'commons-io:commons-io:2.4'
-    compile 'com.google.code.findbugs:annotations:3.0.1u2'
-    androidTestCompile 'com.google.code.findbugs:annotations:3.0.1u2'
+    compile 'com.google.code.findbugs:annotations:3.0.1'
+    androidTestCompile 'com.google.code.findbugs:annotations:3.0.1'
 
     // Reactive extensions
     compile 'io.reactivex:rxjava:1.1.1'
