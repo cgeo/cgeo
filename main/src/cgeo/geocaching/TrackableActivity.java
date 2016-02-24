@@ -443,6 +443,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
             } else {
                 tbType = res.getString(R.string.trackable_unknown);
             }
+            details.add(R.string.trackable_brand, trackable.getBrand().getLabel());
             details.add(R.string.trackable_type, tbType);
 
             // trackable geocode

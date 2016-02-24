@@ -1021,6 +1021,7 @@
     <string name="trackable_image">Image</string>
     <string name="trackable_code">Tracking Code</string>
     <string name="trackable_name">Name</string>
+    <string name="trackable_brand">Brand</string>
     <string name="trackable_type">Type</string>
     <string name="trackable_owner">Owner</string>
     <string name="trackable_spotted">Spotted</string>
