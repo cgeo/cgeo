@@ -216,6 +216,7 @@
   <string name="warn_rendertheme_missing">Nie znaleziono tematu mapy.</string>
   <string name="warn_pocket_query_select">Nie wybrano Pocket query.</string>
   <string name="warn_no_pocket_query_found">Nie znaleziono Pocket query online.</string>
+  <string name="err_read_pocket_query_list">Błąd podczas odczytu listy Pocket query.</string>
   <string name="info_log_posted">Wpis został wysłany.</string>
   <string name="info_log_saved">Wpis został zapisany.</string>
   <string name="info_log_post_failed">Wysyłanie wpisu zakończone niepowodzeniem.</string>
@@ -627,6 +628,12 @@
     <item quantity="few">%1$d skrzynki</item>
     <item quantity="other">%1$d skrzynek</item>
   </plurals>
+  <plurals name="days_remaining">
+    <item quantity="one">został jeden dzień</item>
+    <item quantity="few">zostało %1$d dni</item>
+    <item quantity="other">zostało %1$d dni</item>
+  </plurals>
+  <string name="last_day_available">dostępne ostatni dzień</string>
   <string name="cache_offline">Offline</string>
   <string name="cache_offline_refresh">Odśwież</string>
   <string name="cache_offline_drop">Usuń</string>
@@ -666,6 +673,7 @@
   <string name="cache_personal_note_upload">Wyślij</string>
   <string name="cache_personal_note_uploading">Wysyłam osobistą notatkę</string>
   <string name="cache_personal_note_upload_done">Notatka osobista wysłana</string>
+  <string name="cache_personal_note_upload_error">Błąd podczas wysyłania notatki osobistej</string>
   <string name="cache_personal_note_upload_cancelled">Wysyłanie notatki osobistej anulowane</string>
   <string name="cache_description">Opis</string>
   <string name="cache_description_long">Długi opis</string>
@@ -745,6 +753,8 @@
   <string name="cache_menu_share">Podziel się skrzynką</string>
   <string name="cache_menu_move_list">Przenieś do innej listy</string>
   <string name="cache_menu_whereyougo">WhereYouGo</string>
+  <string name="cache_menu_oruxmaps_online">OruxMaps (Online)</string>
+  <string name="cache_menu_oruxmaps_offline">OruxMaps (Offline)</string>
   <string name="cache_menu_navigon">Navigon</string>
   <string name="cache_menu_pebble">Zegarek Pebble</string>
   <string name="cache_menu_vote">Głosuj</string>
@@ -757,6 +767,7 @@
   <string name="cache_status_found">Znaleziona</string>
   <string name="cache_not_status_found">Nie znaleziono</string>
   <string name="cache_never_found">Nigdy nie znaleziona</string>
+  <string name="cache_found_last_30_days">Znalezione przez ostatnie 30 dni</string>
   <string name="cache_status_archived">Zarchiwizowana</string>
   <string name="cache_status_disabled">Niedostępna</string>
   <string name="cache_status_premium">Tylko dla użytkowników Premium</string>
@@ -946,6 +957,7 @@
   <string name="trackable_not_activated">Przedmiot podróżny nie został zaktywowany</string>
   <string name="trackable_travelbug">Travelbug</string>
   <string name="trackable_geokrety">GeoKrety</string>
+  <string name="trackable_geolutins">GeoLutiny</string>
   <string name="geokret_type_traditional">Tradycyjny</string>
   <string name="geokret_type_book_or_media">Książka lub media elektroniczne</string>
   <string name="geokret_type_human">Człowiek</string>
@@ -1352,4 +1364,8 @@
   <string name="pq_as_cache_list">Zobacz listę skrzynek</string>
   <string name="pq_download_and_import">Importuj Pocket query</string>
   <string name="pq_my_finds">Znalezione</string>
+  <string name="caches_refresh_all_warning">Ta operacja może doprowadzić do dużego obciążenia sieci. Czy na pewno chcesz przeprowadzić zbiorczą aktualizację wszystkich skrzynek?</string>
+  <string name="invitation_action">Zaproś znajomych</string>
+  <string name="invitation_title">Zaproś znajomych do użycia c:geo</string>
+  <string name="invitation_message">Wypróbuj aplikację c:geo do geocachingu</string>
 </resources>

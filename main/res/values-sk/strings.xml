@@ -216,6 +216,7 @@
   <string name="warn_rendertheme_missing">Téma mapy nebola nájdená.</string>
   <string name="warn_pocket_query_select">Najprv vyber pocket query.</string>
   <string name="warn_no_pocket_query_found">Na webe sa nenašlo žiadne Pocket query.</string>
+  <string name="err_read_pocket_query_list">Chyba pri čítaní Pocket Query.</string>
   <string name="info_log_posted">c:geo úspešne zaslalo log.</string>
   <string name="info_log_saved">c:geo úspešne uložilo log.</string>
   <string name="info_log_post_failed">Odoslanie logu zlyhalo.</string>
@@ -635,6 +636,12 @@
     <item quantity="few">%1$d skrýše</item>
     <item quantity="other">%1$d skrýš</item>
   </plurals>
+  <plurals name="days_remaining">
+    <item quantity="one">ostáva jeden deň</item>
+    <item quantity="few">ostávajú %1$d dni</item>
+    <item quantity="other">ostáva %1$d dní</item>
+  </plurals>
+  <string name="last_day_available">ostáva posledný deň</string>
   <string name="cache_offline">Offline</string>
   <string name="cache_offline_refresh">Obnoviť</string>
   <string name="cache_offline_drop">Zmazať</string>
@@ -674,6 +681,7 @@
   <string name="cache_personal_note_upload">Nahrať</string>
   <string name="cache_personal_note_uploading">Nahrať osobnú poznámku</string>
   <string name="cache_personal_note_upload_done">Osobná poznámka nahraná</string>
+  <string name="cache_personal_note_upload_error">Chyba nahrávania osobnej poznámky</string>
   <string name="cache_personal_note_upload_cancelled">Nahrávanie osobnej poznámky zrušené</string>
   <string name="cache_description">Popis</string>
   <string name="cache_description_long">Dlhý popis</string>
@@ -753,6 +761,8 @@
   <string name="cache_menu_share">Zdieľať skrýšu</string>
   <string name="cache_menu_move_list">Presunúť do iného zoznamu</string>
   <string name="cache_menu_whereyougo">WhereYouGo</string>
+  <string name="cache_menu_oruxmaps_online">OruxMaps (Online)</string>
+  <string name="cache_menu_oruxmaps_offline">OruxMaps (Offline)</string>
   <string name="cache_menu_navigon">Navigon</string>
   <string name="cache_menu_pebble">Pebble</string>
   <string name="cache_menu_android_wear">Android Wear</string>
@@ -766,6 +776,7 @@
   <string name="cache_status_found">Nájdená</string>
   <string name="cache_not_status_found">Nebol nájdený</string>
   <string name="cache_never_found">Doteraz nenájdené</string>
+  <string name="cache_found_last_30_days">Nálezy za posledných 30 dní</string>
   <string name="cache_status_archived">Archivovaná</string>
   <string name="cache_status_disabled">Deaktivovaná</string>
   <string name="cache_status_premium">Iba pre platiacich používateľov</string>
@@ -955,6 +966,7 @@
   <string name="trackable_not_activated">Trackable neaktivovaný</string>
   <string name="trackable_travelbug">Travelbug</string>
   <string name="trackable_geokrety">GeoKrety</string>
+  <string name="trackable_geolutins">GeoLutiny</string>
   <string name="geokret_type_traditional">Tradičné</string>
   <string name="geokret_type_book_or_media">Kniha alebo elektronické médium</string>
   <string name="geokret_type_human">Človek</string>
@@ -988,6 +1000,7 @@
   <string name="helper_sendtocgeo_description">Poslať do c:geo je rozšírenie prehliadača <strong>pre vaše PC</strong>. Pri browsovaní geocaching.com, môžete poslať cache do vášho smartphone kliknutím na tlačidlo priamo v prehliadači.</string>
   <string name="helper_locus_title">Locus</string>
   <string name="helper_locus_description">Navigačná aplikácia pre tvoj mobil alebo tablet. Zmapuj okolie cez offline topografické mapy, zaznamenávaj svoju cestu, hľadaj geocache, používaj hlasovú navigáciu a rob ešte oveľa viac.</string>
+  <string name="helper_gpsstatus_title">GPS Status &amp; Toolbox</string>
   <string name="helper_gpsstatus_description">Radar z tejto aplikácie môžete použiť v c:geo. Poskytuje tiež mnoho iných informácií súvisiacich s GPS.</string>
   <string name="helper_bluetoothgps_title">Bluetooth GPS</string>
   <string name="helper_bluetoothgps_description">Umožňuje použitie externého GPS zariadenia pre lepší príjem, presnejšie umiestnenie a zníži využitie batérie vášho telefónu.</string>
@@ -1362,4 +1375,7 @@
   <string name="pq_download_and_import">Importovať PQ</string>
   <string name="pq_my_finds">Moje nálezy</string>
   <string name="caches_refresh_all_warning">Táto akcia môže viesť k vysokej sieťovej prevádzke. Naozaj chceš dávkovo obnoviť všetky cache?</string>
+  <string name="invitation_action">Pozvať priateľov</string>
+  <string name="invitation_title">Pozvať priateľov na používanie c:geo</string>
+  <string name="invitation_message">Skús aplikáciu c:geo pre geocaching</string>
 </resources>

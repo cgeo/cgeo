@@ -216,6 +216,7 @@
   <string name="warn_rendertheme_missing">Le thème de la carte n\'a pas été trouvé.</string>
   <string name="warn_pocket_query_select">Aucune Pocket Query sélectionnée.</string>
   <string name="warn_no_pocket_query_found">Aucune Pocket Query trouvée en ligne.</string>
+  <string name="err_read_pocket_query_list">Erreur de lecture de la liste des Pocket Queries.</string>
   <string name="info_log_posted">Envoi de la visite réussi.</string>
   <string name="info_log_saved">Enregistrement de la visite réussie.</string>
   <string name="info_log_post_failed">L\'envoi de la visite a échoué.</string>
@@ -631,6 +632,11 @@
     <item quantity="one">%1$d cache</item>
     <item quantity="other">%1$d caches</item>
   </plurals>
+  <plurals name="days_remaining">
+    <item quantity="one">Un jour restant</item>
+    <item quantity="other">%1$d jours restants</item>
+  </plurals>
+  <string name="last_day_available">dernier jour disponible</string>
   <string name="cache_offline">Hors-ligne</string>
   <string name="cache_offline_refresh">Actualiser</string>
   <string name="cache_offline_drop">Supprimer</string>
@@ -667,6 +673,7 @@
   <string name="cache_personal_note_upload">Envoyer</string>
   <string name="cache_personal_note_uploading">Envoi de la note personnelle</string>
   <string name="cache_personal_note_upload_done">Note personnelle envoyée</string>
+  <string name="cache_personal_note_upload_error">Une erreur est survenue lors de l\'envoi de votre note personnelle</string>
   <string name="cache_personal_note_upload_cancelled">Envoi de la note personnelle annulé</string>
   <string name="cache_description">Description</string>
   <string name="cache_description_long">Description longue</string>
@@ -745,6 +752,8 @@
   <string name="cache_menu_share">Partager la cache</string>
   <string name="cache_menu_move_list">Déplacer dans une autre liste</string>
   <string name="cache_menu_whereyougo">WhereYouGo</string>
+  <string name="cache_menu_oruxmaps_online">OruxMaps (en ligne)</string>
+  <string name="cache_menu_oruxmaps_offline">OruxMaps (hors ligne)</string>
   <string name="cache_menu_navigon">Navigon</string>
   <string name="cache_menu_pebble">Pebble</string>
   <string name="cache_menu_android_wear">Android Wear</string>
@@ -758,6 +767,7 @@
   <string name="cache_status_found">Trouvée</string>
   <string name="cache_not_status_found">Non trouvée</string>
   <string name="cache_never_found">Jamais trouvé</string>
+  <string name="cache_found_last_30_days">Trouvé dans les 30 derniers jours</string>
   <string name="cache_status_archived">Archivée</string>
   <string name="cache_status_disabled">Désactivée</string>
   <string name="cache_status_premium">Membres Premium seulement</string>
@@ -947,6 +957,7 @@
   <string name="trackable_not_activated">Objet voyageur non activé</string>
   <string name="trackable_travelbug">Objet voyageur</string>
   <string name="trackable_geokrety">GeoKrety</string>
+  <string name="trackable_geolutins">GeoLutins</string>
   <string name="geokret_type_traditional">Traditionnelle</string>
   <string name="geokret_type_book_or_media">Livre ou média électronique</string>
   <string name="geokret_type_human">Humain</string>
@@ -1345,4 +1356,8 @@
   <string name="pq_as_cache_list">Voir la liste de caches</string>
   <string name="pq_download_and_import">Importer la Pocket query</string>
   <string name="pq_my_finds">Mes caches trouvées</string>
+  <string name="caches_refresh_all_warning">Cette action peut entraîner le téléchargement de gros volumes de données. Êtes-vous sûr(e) de vouloir actualiser toutes les caches ?</string>
+  <string name="invitation_action">Inviter des amis</string>
+  <string name="invitation_title">Inviter des amis à utiliser c:geo</string>
+  <string name="invitation_message">Essayez l\'application c:geo pour le geocaching</string>
 </resources>

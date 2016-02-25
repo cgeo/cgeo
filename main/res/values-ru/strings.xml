@@ -658,6 +658,7 @@
   <string name="cache_personal_note_upload">Загрузить</string>
   <string name="cache_personal_note_uploading">Загрузка личной заметки</string>
   <string name="cache_personal_note_upload_done">Личная заметка загружена</string>
+  <string name="cache_personal_note_upload_error">Ошибка отправки персональной заметки</string>
   <string name="cache_personal_note_upload_cancelled">Загрузка личной заметки отменена</string>
   <string name="cache_description">Описание</string>
   <string name="cache_description_long">Подробное описание</string>
@@ -1343,4 +1344,6 @@
   <string name="pq_as_cache_list">Посмотреть как список</string>
   <string name="pq_download_and_import">Импортировать выборку</string>
   <string name="pq_my_finds">Мои находки</string>
+  <string name="invitation_action">Пригласить друзей</string>
+  <string name="invitation_title">Пригласить друзей использовать c:geo</string>
 </resources>

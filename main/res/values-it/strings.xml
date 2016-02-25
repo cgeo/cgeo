@@ -216,6 +216,7 @@
   <string name="warn_rendertheme_missing">Tema mappa non trovato.</string>
   <string name="warn_pocket_query_select">Nessuna Pocket query selezionata.</string>
   <string name="warn_no_pocket_query_found">Nessuna Pocket query trovata online.</string>
+  <string name="err_read_pocket_query_list">Errore nella lettura della lista di Pocket query.</string>
   <string name="info_log_posted">c:geo ha inviato il log con successo.</string>
   <string name="info_log_saved">c:geo ha salvato il log.</string>
   <string name="info_log_post_failed">Caricamento log fallito.</string>
@@ -623,6 +624,11 @@
     <item quantity="one">Un cache</item>
     <item quantity="other">%1$d cache</item>
   </plurals>
+  <plurals name="days_remaining">
+    <item quantity="one">un giorno restante</item>
+    <item quantity="other">%1$d giorni rimanenti</item>
+  </plurals>
+  <string name="last_day_available">ultimo giorno disponibile</string>
   <string name="cache_offline">Offline</string>
   <string name="cache_offline_refresh">Aggiorna</string>
   <string name="cache_offline_drop">Elimina</string>
@@ -659,6 +665,7 @@
   <string name="cache_personal_note_upload">Carica</string>
   <string name="cache_personal_note_uploading">Nota personale in caricamento</string>
   <string name="cache_personal_note_upload_done">Nota personale caricata</string>
+  <string name="cache_personal_note_upload_error">Errore durante il caricamento delle note personali</string>
   <string name="cache_personal_note_upload_cancelled">Caricamento nota personale annullato</string>
   <string name="cache_description">Descrizione</string>
   <string name="cache_description_long">Descrizione estesa</string>
@@ -737,6 +744,8 @@
   <string name="cache_menu_share">Condividi cache</string>
   <string name="cache_menu_move_list">Muovi in un\'altra lista</string>
   <string name="cache_menu_whereyougo">WhereYouGo</string>
+  <string name="cache_menu_oruxmaps_online">OruxMaps (Online)</string>
+  <string name="cache_menu_oruxmaps_offline">OruxMaps (Offline)</string>
   <string name="cache_menu_navigon">Navigon</string>
   <string name="cache_menu_pebble">Pebble</string>
   <string name="cache_menu_vote">Vota</string>
@@ -749,6 +758,7 @@
   <string name="cache_status_found">Trovato</string>
   <string name="cache_not_status_found">Non trovato</string>
   <string name="cache_never_found">Mai trovato</string>
+  <string name="cache_found_last_30_days">Trovati negli ultimi 30 giorni</string>
   <string name="cache_status_archived">Archiviato</string>
   <string name="cache_status_disabled">Non attivo</string>
   <string name="cache_status_premium">Solo per utenti Premium</string>
@@ -938,6 +948,7 @@
   <string name="trackable_not_activated">Trackable non attivato</string>
   <string name="trackable_travelbug">Travelbug</string>
   <string name="trackable_geokrety">GeoKrety</string>
+  <string name="trackable_geolutins">GeoLutins</string>
   <string name="geokret_type_traditional">Tradizionale</string>
   <string name="geokret_type_book_or_media">Libro o media elettronici</string>
   <string name="geokret_type_human">Umano</string>
@@ -1336,4 +1347,8 @@
   <string name="pq_as_cache_list">Vedi la lista dei cache</string>
   <string name="pq_download_and_import">Importa una Pocket query</string>
   <string name="pq_my_finds">I miei trovati</string>
+  <string name="caches_refresh_all_warning">Questa azione può causare elevato traffico di rete. Sei sicuro di voler aggiornare tutti i cache?</string>
+  <string name="invitation_action">Invita gli amici</string>
+  <string name="invitation_title">Invita gli amici a utilizzare c:geo</string>
+  <string name="invitation_message">Prova l\'app c:geo per il geocaching</string>
 </resources>

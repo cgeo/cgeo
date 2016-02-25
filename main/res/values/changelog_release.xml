@@ -23,6 +23,8 @@
     · Fix: Do not leave the app when selecting back in spoiler view\n
     · Fix: Hint picture not refreshed when switching to different cache\n
     · Fix: Implemented workaround to show horizontal lines from HTML\n
+    · Fix: List of PQ also shown if none of them is downloadable\n
+    · Fix: Caches with final waypoints predefined (e.g. challenges) will have final marker on map\n
     \n
     \n
 </string>
