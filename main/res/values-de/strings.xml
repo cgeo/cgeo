@@ -940,6 +940,7 @@
   <string name="trackable_image">Foto</string>
   <string name="trackable_code">Tracking-Code</string>
   <string name="trackable_name">Name</string>
+  <string name="trackable_brand">Marke</string>
   <string name="trackable_type">Typ</string>
   <string name="trackable_owner">Eigentümer</string>
   <string name="trackable_spotted">Gesehen</string>
