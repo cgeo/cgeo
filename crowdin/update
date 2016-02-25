@@ -1,4 +1,4 @@
-#/bin/sh
+#!/bin/sh
 
 #
 #
@@ -14,16 +14,39 @@
 
 # update_file uploads the file in parameter 1 to the crowdin file name in parameter 2 
 update_file() {
-    crowdin_surf -F "files[$2]=@$1" \
+    crowdin_surf -F "files[$2]=@$1" $BRANCH_TARGET \
         "http://api.crowdin.net/api/project/cgeo/update-file?key=${CROWDIN_APIKEY}"
 }
 
 . "$(dirname $0)/globals"
 
-echo You must be on an up-to-date master branch to execute this script.
+# current branch
+CURRENT_BRANCH=`git name-rev --name-only HEAD`
+# upload default
+BRANCH_TARGET='-F "branch=master"'
+
+# check branch
+if [ $CURRENT_BRANCH = release ]; then
+    debug "Syncing with branch 'release'"
+    BRANCH_TARGET='-F "branch=release"'
+elif [ $CURRENT_BRANCH != master ]; then
+    echo Only update from master or release!
+    exit
+fi
+
+echo You must be on an up-to-date $CURRENT_BRANCH branch to execute this script.
 echo You have 5 seconds to abort with ctrl-c if this is not the case.
 sleep 5
 
-update_file main/res/values/strings.xml /cgeo/strings.xml
-update_file cgeo-calendar/res/values/strings.xml /cgeo-calendar/strings.xml
-update_file cgeo-contacts/res/values/strings.xml /cgeo-contacts/strings.xml
+# update files on target branch
+update_file main/res/values/strings.xml cgeo/strings.xml
+update_file cgeo-calendar/res/values/strings.xml cgeo-calendar/strings.xml
+update_file cgeo-contacts/res/values/strings.xml cgeo-contacts/strings.xml
+
+# for master, update global files as well
+if [ $CURRENT_BRANCH = master ]; then
+    BRANCH_TARGET=
+    update_file main/res/values/strings.xml cgeo/strings.xml
+    update_file cgeo-calendar/res/values/strings.xml cgeo-calendar/strings.xml
+    update_file cgeo-contacts/res/values/strings.xml cgeo-contacts/strings.xml
+fi
