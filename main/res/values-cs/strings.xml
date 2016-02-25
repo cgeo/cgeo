@@ -216,6 +216,7 @@
   <string name="warn_rendertheme_missing">Téma pro mapu není k dispozici.</string>
   <string name="warn_pocket_query_select">Nevybrán žádný Databázový požadavek.</string>
   <string name="warn_no_pocket_query_found">V síti nebyl nalezen žádný Databázový požadavek.</string>
+  <string name="err_read_pocket_query_list">Chyba čtení seznamu databázových požadavků.</string>
   <string name="info_log_posted">c:geo úspěšně zaslalo tvůj Log.</string>
   <string name="info_log_saved">c:geo úspěšně uložilo tvůj Log.</string>
   <string name="info_log_post_failed">Odeslání logu se nezdařilo.</string>
@@ -635,6 +636,12 @@
     <item quantity="few">%1$d keše</item>
     <item quantity="other">%1$d keší</item>
   </plurals>
+  <plurals name="days_remaining">
+    <item quantity="one">zbývá jeden den</item>
+    <item quantity="few">zbývají %1$d dny</item>
+    <item quantity="other">zbývá %1$d dnů</item>
+  </plurals>
+  <string name="last_day_available">zbývá poslední den</string>
   <string name="cache_offline">Offline</string>
   <string name="cache_offline_refresh">Obnovit</string>
   <string name="cache_offline_drop">Smazat</string>
@@ -769,6 +776,7 @@
   <string name="cache_status_found">Nalezena</string>
   <string name="cache_not_status_found">Nenalezeno</string>
   <string name="cache_never_found">Nikdy nenalezena</string>
+  <string name="cache_found_last_30_days">Nalezeno za posledních 30 dní</string>
   <string name="cache_status_archived">Archivována</string>
   <string name="cache_status_disabled">Deaktivována</string>
   <string name="cache_status_premium">Pouze pro prémiové uživatele</string>
@@ -958,6 +966,7 @@
   <string name="trackable_not_activated">Sledovatelný předmět není aktivován</string>
   <string name="trackable_travelbug">Travelbug</string>
   <string name="trackable_geokrety">GeoKrety</string>
+  <string name="trackable_geolutins">Geolutiny</string>
   <string name="geokret_type_traditional">Tradiční</string>
   <string name="geokret_type_book_or_media">Kniha nebo elektronická média</string>
   <string name="geokret_type_human">Člověk</string>

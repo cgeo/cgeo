@@ -216,6 +216,7 @@
   <string name="warn_rendertheme_missing">Karttema ikke funnet.</string>
   <string name="warn_pocket_query_select">Ingen pocket query er valgt.</string>
   <string name="warn_no_pocket_query_found">Ingen pocket query ble funnet på geocaching.com.</string>
+  <string name="err_read_pocket_query_list">Feil under lesing av Pocket query-listen.</string>
   <string name="info_log_posted">c:geo lyktes i å logge funnet.</string>
   <string name="info_log_saved">c:geo lyktes i å lagre loggen.</string>
   <string name="info_log_post_failed">Opplastning av logg mislyktes.</string>
@@ -626,6 +627,11 @@
     <item quantity="one">En cache</item>
     <item quantity="other">%1$d cacher</item>
   </plurals>
+  <plurals name="days_remaining">
+    <item quantity="one">en dag gjenstår</item>
+    <item quantity="other">%1$d dager gjenstår</item>
+  </plurals>
+  <string name="last_day_available">siste dag tilgjengelig</string>
   <string name="cache_offline">Offline</string>
   <string name="cache_offline_refresh">Oppdater</string>
   <string name="cache_offline_drop">Fjern</string>
@@ -662,6 +668,7 @@
   <string name="cache_personal_note_upload">Last opp</string>
   <string name="cache_personal_note_uploading">Laster opp personlig cachenotat</string>
   <string name="cache_personal_note_upload_done">Personlig cachenotat er lastet opp</string>
+  <string name="cache_personal_note_upload_error">Feil under opplasting av personlig notat</string>
   <string name="cache_personal_note_upload_cancelled">Personlig cachenotat ble avbrutt under opplasting</string>
   <string name="cache_description">Beskrivelse</string>
   <string name="cache_description_long">Full beskrivelse</string>
@@ -740,6 +747,8 @@
   <string name="cache_menu_share">Del cachen</string>
   <string name="cache_menu_move_list">Flytt til annen liste</string>
   <string name="cache_menu_whereyougo">WhereYouGo</string>
+  <string name="cache_menu_oruxmaps_online">OruxMaps (Online)</string>
+  <string name="cache_menu_oruxmaps_offline">OruxMaps (frakoblet)</string>
   <string name="cache_menu_pebble">Pebble</string>
   <string name="cache_menu_vote">Avgi stemme</string>
   <string name="cache_menu_checker">Åpne Geochecker</string>
@@ -751,6 +760,7 @@
   <string name="cache_status_found">Funnet</string>
   <string name="cache_not_status_found">Ikke funnet</string>
   <string name="cache_never_found">Aldri funnet</string>
+  <string name="cache_found_last_30_days">Funnet siste 30 dager</string>
   <string name="cache_status_archived">Arkivert</string>
   <string name="cache_status_disabled">Deaktivert</string>
   <string name="cache_status_premium">Kun for premium-medlemmer</string>
@@ -940,6 +950,7 @@
   <string name="trackable_not_activated">Den sporbare er ikke aktivert</string>
   <string name="trackable_travelbug">Travelbug</string>
   <string name="trackable_geokrety">GeoKrety</string>
+  <string name="trackable_geolutins">GeoLutins</string>
   <string name="geokret_type_traditional">Tradisjonell</string>
   <string name="geokret_type_book_or_media">Bok eller elektronisk medium</string>
   <string name="geokret_type_human">Menneske</string>
@@ -1339,4 +1350,7 @@
   <string name="pq_download_and_import">Importer Pocket Query</string>
   <string name="pq_my_finds">Mine funn</string>
   <string name="caches_refresh_all_warning">Dette kan føre til høy datatrafikk. Er du sikker på at du vil oppdaterer alle cachene?</string>
+  <string name="invitation_action">Inviter venner</string>
+  <string name="invitation_title">Inviter venner til å bruke c:geo</string>
+  <string name="invitation_message">Prøv c:geo-appen til geocaching</string>
 </resources>

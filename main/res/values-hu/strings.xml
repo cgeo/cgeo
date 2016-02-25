@@ -23,7 +23,7 @@
   <string name="webcam">Webkamera láda</string>
   <string name="virtual">Virtuális láda</string>
   <string name="wherigo">Wherigo láda</string>
-  <string name="lostfound">Elveszett &amp; megtalált</string>
+  <string name="lostfound">\'Elveszett &amp; meglett\' esemény</string>
   <string name="ape">Project ape láda</string>
   <string name="gchq">Groundspeak központ</string>
   <string name="gps">GPS láda kiállítás</string>
@@ -216,6 +216,7 @@
   <string name="warn_rendertheme_missing">Térkép téma nem található.</string>
   <string name="warn_pocket_query_select">Nincs pocket lekérdezés kiválasztva.</string>
   <string name="warn_no_pocket_query_found">Online pocket lekérdezés nem található.</string>
+  <string name="err_read_pocket_query_list">Hiba a pocket lekérdezések listájának olvasásakor.</string>
   <string name="info_log_posted">A c:geo sikeresen elküldte a bejegyzést.</string>
   <string name="info_log_saved">A c:geo sikeresen elmentette a bejegyzést.</string>
   <string name="info_log_post_failed">Log küldése sikertelen.</string>
@@ -631,6 +632,11 @@
     <item quantity="one">1 láda</item>
     <item quantity="other">%1$d láda</item>
   </plurals>
+  <plurals name="days_remaining">
+    <item quantity="one">egy nap maradt</item>
+    <item quantity="other">%1$d nap maradt</item>
+  </plurals>
+  <string name="last_day_available">utolsó nap</string>
   <string name="cache_offline">Offline</string>
   <string name="cache_offline_refresh">Frissítés</string>
   <string name="cache_offline_drop">Törlés</string>
@@ -761,6 +767,7 @@
   <string name="cache_status_found">Megtaláltam</string>
   <string name="cache_not_status_found">Nem találtam meg</string>
   <string name="cache_never_found">Szűz láda</string>
+  <string name="cache_found_last_30_days">Az elmúlt 30 nap találatai</string>
   <string name="cache_status_archived">Archiválva</string>
   <string name="cache_status_disabled">Letiltva</string>
   <string name="cache_status_premium">Csak prémium tagoknak</string>
@@ -950,6 +957,7 @@
   <string name="trackable_not_activated">Nem aktivált utazó</string>
   <string name="trackable_travelbug">Travelbug</string>
   <string name="trackable_geokrety">GeoKrety</string>
+  <string name="trackable_geolutins">GeoLutins</string>
   <string name="geokret_type_traditional">Hagyományos</string>
   <string name="geokret_type_book_or_media">Könyv vagy elektronikus média</string>
   <string name="geokret_type_human">Humán</string>
@@ -1081,8 +1089,8 @@
   <string name="attribute_frontyard_no">Nem magánterület</string>
   <string name="attribute_teamwork_yes">Csapatmunka szükséges</string>
   <string name="attribute_teamwork_no">Csapatmunka nem szükséges</string>
-  <string name="attribute_landf_yes">Elveszett és megtalált túra</string>
-  <string name="attribute_landf_no">Nem Elveszett és megtalált túra</string>
+  <string name="attribute_landf_yes">\'Elveszett és meglett\' túra</string>
+  <string name="attribute_landf_no">Nem \'Elveszett és meglett\' túra</string>
   <string name="attribute_partnership_yes">Társasági láda</string>
   <string name="attribute_partnership_no">Nem társasági láda</string>
   <string name="attribute_fee_yes">Belépő vagy parkolódíj szükséges</string>

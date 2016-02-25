@@ -215,8 +215,9 @@
   <string name="warn_deprecated_mapfile">Jūs izmantojat novecojušu kartes faila versiju (0.2.4).\nApsveriet pāriet uz  0.3.0 versijas karti.\nMēs izbeigsim versijas 0.2.4 nākamajā atjauninājumā.</string>
   <string name="warn_nonexistant_mapfile">Izvēlētais kartes fails nepastāv. \nBezsaistes kartes nav pieejamas.</string>
   <string name="warn_rendertheme_missing">Kartes tēma nav atrasta.</string>
-  <string name="warn_pocket_query_select">Nav atlasīts Pocket queries.</string>
-  <string name="warn_no_pocket_query_found">Tiešsaistē nav atrasts Pocket queries.</string>
+  <string name="warn_pocket_query_select">Nav atlasīta Slēpņu atlase (PQ).</string>
+  <string name="warn_no_pocket_query_found">Tiešsaistē nav atrasta neviena Slēpņu atlase (PQ).</string>
+  <string name="err_read_pocket_query_list">Kļūda, nolasot Slēpņu atlases (PQ) sarakstu.</string>
   <string name="info_log_posted">c:geo veiksmīgi iesniedza pierakstu.</string>
   <string name="info_log_saved">c:geo veiksmīgi saglabāja pierakstu.</string>
   <string name="info_log_post_failed">Ieraksta publicēšana neizdevās.</string>
@@ -249,7 +250,7 @@
   <string name="menu_history">Vēsture</string>
   <string name="menu_filter">Filtrēt</string>
   <string name="menu_scan_geo">Skenēt Geo code</string>
-  <string name="menu_pocket_queries">Pocket queries</string>
+  <string name="menu_pocket_queries">Slēpņu atlases (PQ)</string>
   <string name="menu_scan_description">c:geo var skenēt ģeokodus, kuri tiek drukāti kā QR kods. Nav instalēta nepieciešamā aplikācija. Vai vēlaties atvērt Google Play (Google veikalu), lai to instalētu?</string>
   <string name="live_map_button">Karte</string>
   <string name="caches_nearby_button">Tuvumā</string>
@@ -401,6 +402,7 @@
   <string name="settings_goto_url_button">vairāk…</string>
   <string name="settings_title_gc">Geocaching.com</string>
   <string name="settings_title_ec">Extremcaching.com</string>
+  <string name="settings_title_ox">Opencaching.com (Garmin)</string>
   <string name="settings_activate_gc">Aktivizēt</string>
   <string name="settings_activate_ec">Aktivizēt</string>
   <string name="settings_activate_ox">Aktivizēt</string>
@@ -623,6 +625,12 @@
     <item quantity="one">%1$d slēpnis</item>
     <item quantity="other">%1$d slēpņi</item>
   </plurals>
+  <plurals name="days_remaining">
+    <item quantity="zero">atlikusi viena diena</item>
+    <item quantity="one">atlikusi viena diena</item>
+    <item quantity="other">atlikušas %1$d dienas</item>
+  </plurals>
+  <string name="last_day_available">pieejama pēdējo dienu</string>
   <string name="cache_offline">Bezsaistes režīmā</string>
   <string name="cache_offline_refresh">Atjaunot</string>
   <string name="cache_offline_drop">Izmest</string>
@@ -662,6 +670,7 @@
   <string name="cache_personal_note_upload">Augšupielādēt</string>
   <string name="cache_personal_note_uploading">Augšupielādē personīgo piezīmi</string>
   <string name="cache_personal_note_upload_done">Personiskā piezīme ir augšupielādēta</string>
+  <string name="cache_personal_note_upload_error">Kļūda augšupielādējot personisko piezīmi</string>
   <string name="cache_personal_note_upload_cancelled">Personiskās piezīmes ielāde atcelta</string>
   <string name="cache_description">Apraksts</string>
   <string name="cache_description_long">Garš apraksts</string>
@@ -741,6 +750,8 @@
   <string name="cache_menu_share">Dalīties ar slēpni</string>
   <string name="cache_menu_move_list">Pārvietot uz citu sarakstu</string>
   <string name="cache_menu_whereyougo">WhereYouGo</string>
+  <string name="cache_menu_oruxmaps_online">OruxMaps (tiešsaistes)</string>
+  <string name="cache_menu_oruxmaps_offline">OruxMaps (bezsaistes)</string>
   <string name="cache_menu_pebble">Pebble</string>
   <string name="cache_menu_vote">Balsot</string>
   <string name="cache_menu_checker">Atvērt Geochecker</string>
@@ -752,6 +763,7 @@
   <string name="cache_status_found">Atrasts</string>
   <string name="cache_not_status_found">Nav atrasts</string>
   <string name="cache_never_found">Nekad nav atrasts</string>
+  <string name="cache_found_last_30_days">Atrastie pēdējo 30 dienu laikā</string>
   <string name="cache_status_archived">Arhivēts</string>
   <string name="cache_status_disabled">Atspējots</string>
   <string name="cache_status_premium">TIkai Premium lietotājiem</string>
@@ -911,9 +923,9 @@
   <string name="search_address_started">Meklē vietu</string>
   <string name="search_address_result">Atrastās vietas</string>
   <string name="search_own_caches">Meklēt manus slēpņus</string>
-  <string name="search_pocket_title">Pocket Query</string>
-  <string name="search_pocket_loading">Tiek ielādēts saraksts ar Pocket Query</string>
-  <string name="search_pocket_select">Izvēlieties Pocket Query</string>
+  <string name="search_pocket_title">Slēpņu atlase (PQ)</string>
+  <string name="search_pocket_loading">Tiek ielādēts saraksts ar Slēpņu atlasēm (PQ)</string>
+  <string name="search_pocket_select">Izvēlieties Slēpņu atlasi (PQ)</string>
   <string name="trackable">Ceļotājs</string>
   <string name="trackable_details_loading">Ielādē  ceļotāja informāciju…</string>
   <string name="trackable_log_touch">Ierakstīt par saskarsmi</string>
@@ -941,6 +953,7 @@
   <string name="trackable_not_activated">Ceļotājs nav aktivizēts</string>
   <string name="trackable_travelbug">Ceļotājs</string>
   <string name="trackable_geokrety">GeoKrety</string>
+  <string name="trackable_geolutins">GeoLutins</string>
   <string name="geokret_type_traditional">Tradicionālais</string>
   <string name="geokret_type_book_or_media">Grāmata vai elektronisks līdzeklis</string>
   <string name="geokret_type_human">Cilvēks</string>
@@ -979,8 +992,8 @@
   <string name="helper_bluetoothgps_description">Lai iegūtu precīzāku atrašanās vietas datus, ļauj izmantot ārējo GPS uztvērēju, tas var ietaupīt ierīces akumulatoru.</string>
   <string name="helper_barcode_title">Svītrkodu lasītājs</string>
   <string name="helper_barcode_description">Šie ir Greasemonkey skripti un tīmekļa vietnes, kas ļauj parādīt ģeokodus kā svītrkodus. Ar šo aplikāciju c:geo var lasīt šādu ģeokodus tieši no datora ekrāna.</string>
-  <string name="helper_pocketquery_title">Pocket Query Creator aplikācija</string>
-  <string name="helper_pocketquery_description">Atļauj viegli izveidot un lejupielādēt no Pocket Query, kas centrēts uz tavu pašreizējo atrašanās vietu vai atlasīts no punkta kartē. Nepieciešams Geocaching.com Premium lietotāja konts.</string>
+  <string name="helper_pocketquery_title">Slēpņu atlašu veidošanas (PQ Creator) aplikācija</string>
+  <string name="helper_pocketquery_description">Atļauj viegli izveidot un lejupielādēt Slēpņu atlasi (PQ), kas centrēta uz tavu pašreizējo atrašanās vietu vai atlasīta no punkta kartē. Nepieciešams Geocaching.com Premium lietotāja konts.</string>
   <string name="helper_google_translate_title">Google Translate</string>
   <string name="helper_google_translate_description">Ja ir lejupielādētas tulkojuma pakotnes Google Translate aplikācijā, tad slēpņu aprakstus vari viegli tulkot c:geo paturot uz slēpņa apraksta teksta (bez interneta pieslēguma).</string>
   <string name="helper_wear_title">c:geo Wear</string>
@@ -1341,9 +1354,13 @@
   <string name="unit_ft">pēda</string>
   <string name="unit_yd">jards</string>
   <string name="unit_mi">jūdze</string>
-  <string name="pq_available_for_download">Pocket query ir pieejams lejupielādei</string>
-  <string name="pq_available_for_download_description">Šis Pocket query ir pieejams lejupielādei kā viens fails (gpx). Vai vēlies to lejupielādēt un importēt vai skatīties kā slēpņu sarakstu?</string>
+  <string name="pq_available_for_download">Slēpņu atlase (PQ) ir pieejama lejupielādei</string>
+  <string name="pq_available_for_download_description">Šī Slēpņu atlase (PQ) ir pieejama lejupielādei kā viens fails (gpx). Vai vēlies to lejupielādēt un importēt vai skatīties kā slēpņu sarakstu?</string>
   <string name="pq_as_cache_list">Skatīties slēpņu sarakstu</string>
-  <string name="pq_download_and_import">Importēt Pocket query</string>
+  <string name="pq_download_and_import">Importēt Slēpņu atlasi (PQ)</string>
   <string name="pq_my_finds">Mani atradumi</string>
+  <string name="caches_refresh_all_warning">Šī darbība var patērēt daudz interneta apjoma/tīkla trafika. Vai tiešām vēlaties uzsākt atjaunināt visus slēpņus?</string>
+  <string name="invitation_action">Uzaicināt draugus</string>
+  <string name="invitation_title">Uzaicināt draugus izmantot c:geo</string>
+  <string name="invitation_message">Izmēģināt c:geo aplikāciju slēpņošanai</string>
 </resources>

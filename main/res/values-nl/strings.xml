@@ -216,6 +216,7 @@
   <string name="warn_rendertheme_missing">Map thema niet gevonden.</string>
   <string name="warn_pocket_query_select">Geen Pocket query geselecteerd.</string>
   <string name="warn_no_pocket_query_found">Geen Pocket query online gevonden.</string>
+  <string name="err_read_pocket_query_list">Fout bij het lezen van de Pocket query lijst.</string>
   <string name="info_log_posted">c:geo heeft log succesvol gepost.</string>
   <string name="info_log_saved">c:geo heeft log succesvol opgeslagen.</string>
   <string name="info_log_post_failed">Het posten van de log is mislukt.</string>
@@ -631,6 +632,11 @@
     <item quantity="one">Een cache</item>
     <item quantity="other">%1$d Caches</item>
   </plurals>
+  <plurals name="days_remaining">
+    <item quantity="one">nog 1 dag over</item>
+    <item quantity="other">nog %1$d dagen over</item>
+  </plurals>
+  <string name="last_day_available">laatste dag beschikbaar</string>
   <string name="cache_offline">Offline</string>
   <string name="cache_offline_refresh">Verversen</string>
   <string name="cache_offline_drop">Laten vervallen</string>
@@ -667,6 +673,7 @@
   <string name="cache_personal_note_upload">Uploaden</string>
   <string name="cache_personal_note_uploading">Uploading persoonlijke notitie</string>
   <string name="cache_personal_note_upload_done">Persoonlijke notitie geupload</string>
+  <string name="cache_personal_note_upload_error">Fout bij uploaden privé cachenotitie</string>
   <string name="cache_personal_note_upload_cancelled">Persoonlijke notitie uploaden geannuleerd</string>
   <string name="cache_description">Omschrijving</string>
   <string name="cache_description_long">Lange omschrijving</string>
@@ -745,6 +752,8 @@
   <string name="cache_menu_share">Deel cache</string>
   <string name="cache_menu_move_list">Verplaats naar andere lijst</string>
   <string name="cache_menu_whereyougo">WhereYouGo</string>
+  <string name="cache_menu_oruxmaps_online">OruxMaps (Online)</string>
+  <string name="cache_menu_oruxmaps_offline">OruxMaps (Offline)</string>
   <string name="cache_menu_navigon">Navigon</string>
   <string name="cache_menu_pebble">Pebble</string>
   <string name="cache_menu_android_wear">Android Wear</string>
@@ -758,6 +767,7 @@
   <string name="cache_status_found">Gevonden</string>
   <string name="cache_not_status_found">Niet gevonden</string>
   <string name="cache_never_found">Nooit gevonden</string>
+  <string name="cache_found_last_30_days">Gevonden tijdens de laatste 30 dagen</string>
   <string name="cache_status_archived">Gearchiveerd</string>
   <string name="cache_status_disabled">Uitgeschakeld</string>
   <string name="cache_status_premium">Alleen voor premium leden</string>
@@ -947,6 +957,7 @@
   <string name="trackable_not_activated">Trackable niet geactiveerd</string>
   <string name="trackable_travelbug">Travelbug</string>
   <string name="trackable_geokrety">GeoKrety</string>
+  <string name="trackable_geolutins">GeoLutins</string>
   <string name="geokret_type_traditional">Traditioneel</string>
   <string name="geokret_type_book_or_media">Boek of electronische media</string>
   <string name="geokret_type_human">Mens</string>
@@ -1345,4 +1356,8 @@
   <string name="pq_as_cache_list">Lijst met caches bekijken</string>
   <string name="pq_download_and_import">Importeer Pocket query</string>
   <string name="pq_my_finds">Mijn vondsten</string>
+  <string name="caches_refresh_all_warning">Deze actie kan leiden tot veel netwerkverkeer. Weet je zeker dat je alle caches wil verversen?</string>
+  <string name="invitation_action">Nodig vrienden uit</string>
+  <string name="invitation_title">Vrienden uitnodigen c:geo te gebruiken</string>
+  <string name="invitation_message">Probeer de c:geo app voor geocachen</string>
 </resources>

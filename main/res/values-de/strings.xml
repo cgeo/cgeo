@@ -216,6 +216,7 @@
   <string name="warn_rendertheme_missing">Das gewählte Karten-Theme wurde nicht gefunden.</string>
   <string name="warn_pocket_query_select">Kein Pocket-Query ausgewählt.</string>
   <string name="warn_no_pocket_query_found">Kein Pocket-Query online gefunden.</string>
+  <string name="err_read_pocket_query_list">Fehler beim Lesen der Pocket Queries.</string>
   <string name="info_log_posted">Log erfolgreich gesendet.</string>
   <string name="info_log_saved">Log erfolgreich gespeichert.</string>
   <string name="info_log_post_failed">Das Senden des Logs ist fehlgeschlagen.</string>
@@ -631,6 +632,11 @@
     <item quantity="one">Ein Cache</item>
     <item quantity="other">%1$d Caches</item>
   </plurals>
+  <plurals name="days_remaining">
+    <item quantity="one">noch ein Tag verfügbar</item>
+    <item quantity="other">noch %1$d Tage verfügbar</item>
+  </plurals>
+  <string name="last_day_available">letzter Tag verfügbar</string>
   <string name="cache_offline">Offline</string>
   <string name="cache_offline_refresh">Aktualisieren</string>
   <string name="cache_offline_drop">Löschen</string>
@@ -761,6 +767,7 @@
   <string name="cache_status_found">Gefunden</string>
   <string name="cache_not_status_found">Nicht gefunden</string>
   <string name="cache_never_found">Noch kein Fund</string>
+  <string name="cache_found_last_30_days">Gefunden in den letzten 30 Tagen</string>
   <string name="cache_status_archived">Archiviert</string>
   <string name="cache_status_disabled">Deaktiviert</string>
   <string name="cache_status_premium">Nur für Premium-Mitglieder</string>
@@ -950,6 +957,7 @@
   <string name="trackable_not_activated">Trackable nicht aktiviert</string>
   <string name="trackable_travelbug">Travelbug</string>
   <string name="trackable_geokrety">GeoKrety</string>
+  <string name="trackable_geolutins">GeoLutins</string>
   <string name="geokret_type_traditional">Traditionell</string>
   <string name="geokret_type_book_or_media">Buch oder elektronisches Medium</string>
   <string name="geokret_type_human">Mensch</string>
@@ -1352,5 +1360,5 @@
   <string name="caches_refresh_all_warning">Diese Aktion kann viel Datenverkehr verursachen. Bist du sicher, dass du alle Caches aktualisieren möchtest?</string>
   <string name="invitation_action">Freunde einladen</string>
   <string name="invitation_title">Freunde einladen c:geo auszuprobieren</string>
-  <string name="invitation_message">Teste c:geo zum geocachen</string>
+  <string name="invitation_message">Teste c:geo fürs Geocaching</string>
 </resources>

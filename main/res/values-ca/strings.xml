@@ -216,6 +216,7 @@
   <string name="warn_rendertheme_missing">No s\'ha trobat l\'esquema de colors del mapa.</string>
   <string name="warn_pocket_query_select">No hi ha cap pocket query seleccionada.</string>
   <string name="warn_no_pocket_query_found">No s\'ha trobat cap pocket query en línia.</string>
+  <string name="err_read_pocket_query_list">Error llegint la llista de pocket querys.</string>
   <string name="info_log_posted">El c:geo ha tramès el registre correctament.</string>
   <string name="info_log_saved">El c:geo ha desat correctament el registre.</string>
   <string name="info_log_post_failed">Ha fallat la publicació del registre.</string>
@@ -630,6 +631,11 @@
     <item quantity="one">Un catxé</item>
     <item quantity="other">%1$d catxés</item>
   </plurals>
+  <plurals name="days_remaining">
+    <item quantity="one">resta un dia</item>
+    <item quantity="other">resten %1$d dies</item>
+  </plurals>
+  <string name="last_day_available">darrer dia disponible</string>
   <string name="cache_offline">Fora de línia</string>
   <string name="cache_offline_refresh">Actualitza</string>
   <string name="cache_offline_drop">Esborra</string>
@@ -666,6 +672,7 @@
   <string name="cache_personal_note_upload">Puja</string>
   <string name="cache_personal_note_uploading">S\'està pujant la nota personal</string>
   <string name="cache_personal_note_upload_done">S\'ha pujat la nota personal</string>
+  <string name="cache_personal_note_upload_error">Error carregant nota personal</string>
   <string name="cache_personal_note_upload_cancelled">S\'ha cancel·lat la pujada de la nota personal</string>
   <string name="cache_description">Descripció</string>
   <string name="cache_description_long">Descripció llarga</string>
@@ -744,6 +751,8 @@
   <string name="cache_menu_share">Comparteix el catxé</string>
   <string name="cache_menu_move_list">Mou a una llista diferent</string>
   <string name="cache_menu_whereyougo">WhereYouGo</string>
+  <string name="cache_menu_oruxmaps_online">OruxMaps (En línia)</string>
+  <string name="cache_menu_oruxmaps_offline">OruxMaps (Fora de línia)</string>
   <string name="cache_menu_navigon">Navigon</string>
   <string name="cache_menu_pebble">Pebble</string>
   <string name="cache_menu_vote">Vota</string>
@@ -756,6 +765,7 @@
   <string name="cache_status_found">Trobat</string>
   <string name="cache_not_status_found">No s\'ha trobat</string>
   <string name="cache_never_found">Mai s\'ha trobat</string>
+  <string name="cache_found_last_30_days">Trobat en els darrers 30 dies</string>
   <string name="cache_status_archived">Arxivat</string>
   <string name="cache_status_disabled">Desactivat</string>
   <string name="cache_status_premium">Només per membres Premium</string>
@@ -945,6 +955,7 @@
   <string name="trackable_not_activated">Traçable no activat</string>
   <string name="trackable_travelbug">Travelbug</string>
   <string name="trackable_geokrety">GeoKrety</string>
+  <string name="trackable_geolutins">GeoLutins</string>
   <string name="geokret_type_traditional">Tradicional</string>
   <string name="geokret_type_book_or_media">Llibre o mitjans electrònics</string>
   <string name="geokret_type_human">Humà</string>
@@ -1343,4 +1354,8 @@
   <string name="pq_as_cache_list">Veure la llista de catxés</string>
   <string name="pq_download_and_import">Importa la Pocket query</string>
   <string name="pq_my_finds">Els meus trobats</string>
+  <string name="caches_refresh_all_warning">Aquesta acció pot ocasionar un elevat tràfic a la xarxa. Esteu segur de voler actualitzar tots els catxés?</string>
+  <string name="invitation_action">Convida amics</string>
+  <string name="invitation_title">Convida amics a utilitzar c:geo</string>
+  <string name="invitation_message">Prova l\'app de c:geo per geocaching</string>
 </resources>

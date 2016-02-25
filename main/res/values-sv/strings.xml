@@ -216,6 +216,7 @@
   <string name="warn_rendertheme_missing">Karttema kunde inte hittas.</string>
   <string name="warn_pocket_query_select">Ingen Pocket query vald.</string>
   <string name="warn_no_pocket_query_found">Ingen Pocket query hittades på nätet.</string>
+  <string name="err_read_pocket_query_list">Fel vid inläsning av Pocket Query-lista.</string>
   <string name="info_log_posted">c:geo har postat din logg.</string>
   <string name="info_log_saved">c:geo har sparat din logg.</string>
   <string name="info_log_post_failed">Misslyckades skicka logg.</string>
@@ -631,6 +632,7 @@
     <item quantity="one">En cache</item>
     <item quantity="other">%1$d cacher</item>
   </plurals>
+  <string name="last_day_available">sista dagen tillgänglig</string>
   <string name="cache_offline">Offline</string>
   <string name="cache_offline_refresh">Uppdatera</string>
   <string name="cache_offline_drop">Radera</string>
@@ -667,6 +669,7 @@
   <string name="cache_personal_note_upload">Ladda upp</string>
   <string name="cache_personal_note_uploading">Laddar upp personlig anteckning</string>
   <string name="cache_personal_note_upload_done">Den personliga anteckning har laddats upp</string>
+  <string name="cache_personal_note_upload_error">Fel vid uppladdning av personlig anteckning</string>
   <string name="cache_personal_note_upload_cancelled">Uppladdningen av personliga anteckning avbruten</string>
   <string name="cache_description">Beskrivning</string>
   <string name="cache_description_long">Lång beskrivning</string>
@@ -760,6 +763,7 @@
   <string name="cache_status_found">Hittad</string>
   <string name="cache_not_status_found">Ej hittad</string>
   <string name="cache_never_found">Aldrig hittad</string>
+  <string name="cache_found_last_30_days">Hittad de senaste 30 dagarna</string>
   <string name="cache_status_archived">Arkiverad</string>
   <string name="cache_status_disabled">Inaktiverad</string>
   <string name="cache_status_premium">Enbart för Premium medlemmar</string>
@@ -949,6 +953,7 @@
   <string name="trackable_not_activated">Trackable är inte aktiverad</string>
   <string name="trackable_travelbug">Travelbug</string>
   <string name="trackable_geokrety">GeoKrety</string>
+  <string name="trackable_geolutins">GeoLutins</string>
   <string name="geokret_type_traditional">Traditionell</string>
   <string name="geokret_type_book_or_media">Bok eller elektronisk media</string>
   <string name="geokret_type_human">Mänsklig</string>
@@ -1348,6 +1353,7 @@
   <string name="pq_as_cache_list">Visa cachelista</string>
   <string name="pq_download_and_import">Importera Pocket Query</string>
   <string name="pq_my_finds">Mina hittade</string>
+  <string name="caches_refresh_all_warning">Denna åtgärd kan leda till hög datatrafik. Vill du verkligen batch-uppdatera alla cachar?</string>
   <string name="invitation_action">Bjud in vänner</string>
   <string name="invitation_title">Bjud in vänner att använda c:geo</string>
   <string name="invitation_message">Prova c:geo appen för geocaching</string>
