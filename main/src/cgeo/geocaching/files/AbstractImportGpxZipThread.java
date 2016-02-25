@@ -31,8 +31,7 @@ abstract class AbstractImportGpxZipThread extends AbstractImportGpxThread {
         Collection<Geocache> caches = Collections.emptySet();
         // can't assume that GPX file comes before waypoint file in zip -> so we need two passes
         // 1. parse GPX files
-        final ZipArchiveInputStream zisPass1 = new ZipArchiveInputStream(new BufferedInputStream(getInputStream()), ENCODING);
-        try {
+        try (final ZipArchiveInputStream zisPass1 = new ZipArchiveInputStream(new BufferedInputStream(getInputStream()), ENCODING)) {
             int acceptedFiles = 0;
             int ignoredFiles = 0;
             for (ZipEntry zipEntry = zisPass1.getNextZipEntry(); zipEntry != null; zipEntry = zisPass1.getNextZipEntry()) {
@@ -50,21 +49,16 @@ abstract class AbstractImportGpxZipThread extends AbstractImportGpxThread {
             if (ignoredFiles > 0 && acceptedFiles == 0) {
                 throw new ParserException("Imported ZIP does not contain a GPX file.");
             }
-        } finally {
-            zisPass1.close();
         }
 
         // 2. parse waypoint files
-        final ZipArchiveInputStream zisPass2 = new ZipArchiveInputStream(new BufferedInputStream(getInputStream()), ENCODING);
-        try {
+        try (final ZipArchiveInputStream zisPass2 = new ZipArchiveInputStream(new BufferedInputStream(getInputStream()), ENCODING)) {
             for (ZipEntry zipEntry = zisPass2.getNextZipEntry(); zipEntry != null; zipEntry = zisPass2.getNextZipEntry()) {
                 if (StringUtils.endsWithIgnoreCase(zipEntry.getName(), GPXImporter.WAYPOINTS_FILE_SUFFIX_AND_EXTENSION)) {
                     importStepHandler.sendMessage(importStepHandler.obtainMessage(GPXImporter.IMPORT_STEP_READ_WPT_FILE, R.string.gpx_import_loading_waypoints, (int) zipEntry.getSize()));
                     caches = parser.parse(new NoCloseInputStream(zisPass2), progressHandler);
                 }
             }
-        } finally {
-            zisPass2.close();
         }
 
         return caches;

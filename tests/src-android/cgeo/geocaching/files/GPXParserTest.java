@@ -235,15 +235,12 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
     private List<Geocache> readVersionedGPX(final GPXParser parser, @RawRes final int... resourceIds) throws IOException, ParserException {
         final Set<String> result = new HashSet<>();
         for (final int resourceId : resourceIds) {
-            final InputStream instream = getResourceStream(resourceId);
-            try {
+            try (final InputStream instream = getResourceStream(resourceId)) {
                 final Collection<Geocache> caches = parser.parse(instream, null);
                 assertThat(caches).isNotNull();
                 for (final Geocache cache : caches) {
                     result.add(cache.getGeocode());
                 }
-            } finally {
-                instream.close();
             }
         }
         // reload caches, because the parser only returns the minimum version of each cache
