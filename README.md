@@ -7,7 +7,7 @@ Perfect! Please **tell us in the [issue tracker](https://github.com/cgeo/cgeo/is
 
 ## Project status
 
-[![Build Status](http://ci.cgeo.org/job/c-geo/badge/icon)](http://ci.cgeo.org/job/c-geo/)<br>
+[![Build Status](http://ci.cgeo.org/job/cgeo%20continuous%20integration/badge/icon)](http://ci.cgeo.org/job/cgeo%20continuous%20integration/)<br>
 [![Issue Stats](http://issuestats.com/github/cgeo/cgeo/badge/pr)](http://issuestats.com/github/cgeo/cgeo)<br>
 [![Issue Stats](http://issuestats.com/github/cgeo/cgeo/badge/issue)](http://issuestats.com/github/cgeo/cgeo)<br>
 
