@@ -100,9 +100,12 @@ if [ -z "$(git diff)" ]; then
     exit
 fi
 
-# commit changes to github
+# commit changes either to BASE_BRANCH or translations BRANCH, depending on whether we prepare a PR
 AMEND=""
-[[ ! -z "$(git log ${BASE_BRANCH}..${BRANCH})" ]] && AMEND="--amend"
+if [ $DO_PR -eq 1 ]; then
+    [[ ! -z "$(git log ${BASE_BRANCH}..${BRANCH})" ]] && AMEND="--amend"
+fi
+
 _do git commit -a "${AMEND}" -m \"${GITHUB_PR_TITLE}\" || die "commit failed."
 
 # prepare and create PR
