@@ -1,0 +1,8 @@
+# jackson internal references
+-dontwarn org.w3c.dom.bootstrap.DOMImplementationRegistry
+
+# this does not exist on jdk6 and is only loaded dynamically by jackson if needed
+-dontwarn java.nio.file.Path*
+
+# dynamically loaded Java7 support of Jackson
+-dontwarn java.beans.*

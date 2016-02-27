@@ -1,0 +1,8 @@
+# OkHttp references unused classes
+-dontwarn java.nio.file.*
+-dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement
+
+# https://github.com/square/okhttp/issues/2230
+-dontwarn com.squareup.okhttp3.**
+-keep class com.squareup.okhttp3.** { *;}
+-dontwarn okio.*

@@ -1,0 +1,7 @@
+# commons compress uses some external libraries
+-dontwarn org.tukaani.xz.**
+
+# these classes are used in non-device tests, therefore they must be included in the app build
+-keep class org.apache.commons.io.FileUtils { *; }
+-keep class org.apache.commons.io.IOUtils { *; }
+-keep class org.apache.commons.lang3.StringUtils { *; }

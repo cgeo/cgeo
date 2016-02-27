@@ -50,9 +50,6 @@ android {
         debug {
             // debug build name contains git commit for better reproduction of bugs
             versionNameSuffix "-" + gitCommitId().substring(0, 7) + " developer build"
-
-            // additional proguard rules just for the test code
-			testProguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt', '../tests/proguard-project.txt'
         }
         nightly {
             def nightlyName = System.getenv('NB') // NB, NB1, ...
@@ -76,8 +73,23 @@ android {
         // remove unused resources in addition to unused code
         shrinkResources true
 
-		// proguard rules
-        buildType.proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt'
+        // library rules
+        buildType.proguardFile 'proguard/proguard-androidannotations.txt'
+        buildType.proguardFile 'proguard/proguard-apachecommons.txt'
+        buildType.proguardFile 'proguard/proguard-butterknife.txt'
+        buildType.proguardFile 'proguard/proguard-jackson.txt'
+        buildType.proguardFile 'proguard/proguard-jdt.txt'
+        buildType.proguardFile 'proguard/proguard-okhttp.txt'
+        buildType.proguardFile 'proguard/proguard-rxjava.txt'
+
+        // project rules
+        buildType.proguardFile 'proguard/proguard-cgeo.txt'
+
+        // default rules
+        buildType.proguardFile getDefaultProguardFile('proguard-android.txt')
+
+        // test rules
+        testProguardFile 'proguard/proguard-cgeo-test.txt'
     }
 
     testBuildType "debug" //the default BuildType
