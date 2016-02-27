@@ -182,7 +182,7 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
     }
 
 
-    private void aquireGCVote() {
+    private void acquireGCVote() {
         if (!Settings.isRatingWanted()) {
             return;
         }
@@ -226,7 +226,7 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
         if (cache.getRating() > 0) {
             details.addRating(cache);
         } else {
-            aquireGCVote();
+            acquireGCVote();
         }
 
         // favorite count
