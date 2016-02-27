@@ -394,7 +394,7 @@ public final class ImageUtils {
         public final void call(final Drawable newDrawable) {
             final boolean needsRedraw;
             synchronized (lock) {
-                // Check for emptyness inside the call to match the behaviour in redrawQueuedDrawables().
+                // Check for emptiness inside the call to match the behaviour in redrawQueuedDrawables().
                 needsRedraw = REDRAW_QUEUE.isEmpty();
                 REDRAW_QUEUE.add(ImmutablePair.of(this, newDrawable));
             }

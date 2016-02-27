@@ -61,7 +61,7 @@ public final class TextUtils {
                     // Some versions of Java copy the whole page String, when matching with regular expressions
                     // later this would block the garbage collector, as we only need tiny parts of the page
                     // see http://developer.android.com/reference/java/lang/String.html#backing_array
-                    // Thus the creating of a new String via String constructor is voluntary here!!
+                    // Thus the creation of a new String via String constructor is voluntary here!!
                     // And BTW: You cannot even see that effect in the debugger, but must use a separate memory profiler!
                     return trim ? new String(untrimmed).trim() : new String(untrimmed);
                 }

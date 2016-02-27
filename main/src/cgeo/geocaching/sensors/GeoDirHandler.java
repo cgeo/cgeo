@@ -104,7 +104,7 @@ public abstract class GeoDirHandler {
             }));
         }
         if ((flags & UPDATE_GEODIR) != 0) {
-            // combineOnLatest() does not implement backpressure handling, so we need to explicitely use a backpressure operator there.
+            // combineOnLatest() does not implement backpressure handling, so we need to explicitly use a backpressure operator there.
             subscriptions.add(throttleIfNeeded(Observable.combineLatest(sensors.geoDataObservable(lowPower), sensors.directionObservable(), new Func2<GeoData, Float, ImmutablePair<GeoData, Float>>() {
                 @Override
                 public ImmutablePair<GeoData, Float> call(final GeoData geoData, final Float direction) {

@@ -63,7 +63,7 @@ public abstract class AbstractSearchLoader extends AsyncTaskLoader<SearchResult>
             if (search == null) {
                 search = runSearch();
             } else {
-                // Unless we make a new Search the Loader framework won't deliver results. It does't do equals only identity
+                // Unless we make a new Search the Loader framework won't deliver results. It doesn't do equals only identity
                 search = new SearchResult(search);
             }
         } catch (final Exception e) {
