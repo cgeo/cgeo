@@ -478,7 +478,7 @@ public class DataStore {
         init();
 
         if (restoreDone) {
-            Log.i("Database succesfully restored from " + sourceFile.getPath());
+            Log.i("Database successfully restored from " + sourceFile.getPath());
         } else {
             Log.e("Could not restore database from " + sourceFile.getPath());
         }

@@ -51,7 +51,7 @@ public final class GCVote {
         final Credentials login = Settings.getGCVoteLogin();
 
         if (login.isInvalid()) {
-            Log.e("Credentials can't be retreived");
+            Log.e("Credentials can't be retrieved");
             return StatusCode.NO_LOGIN_INFO_STORED;
         }
 

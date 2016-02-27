@@ -1221,7 +1221,7 @@ public final class GCParser {
                 page = Network.getResponseData(Network.postRequest(uri, params));
             }
         } catch (final RuntimeException e) {
-            Log.e("GCParser.postLog.confim", e);
+            Log.e("GCParser.postLog.confirm", e);
         }
 
         if (page == null) {
@@ -1290,7 +1290,7 @@ public final class GCParser {
         final String response = Network.getResponseData(Network.postRequest(uri, uploadParams, "ctl00$ContentBody$ImageUploadControl1$uxFileUpload", "image/jpeg", image.getFile()));
 
         if (response == null) {
-            Log.e("GCParser.uploadLogIMage: didn't get response for image upload");
+            Log.e("GCParser.uploadLogImage: didn't get response for image upload");
             return ImmutablePair.of(StatusCode.LOGIMAGE_POST_ERROR, null);
         }
 
@@ -1301,7 +1301,7 @@ public final class GCParser {
             final String uploadedImageUrl = matcherUrl.group(1);
             return ImmutablePair.of(StatusCode.NO_ERROR, uploadedImageUrl);
         }
-        Log.e("GCParser.uploadLogIMage: Failed to upload image because of unknown error");
+        Log.e("GCParser.uploadLogImage: Failed to upload image because of unknown error");
 
         return ImmutablePair.of(StatusCode.LOGIMAGE_POST_ERROR, null);
     }
