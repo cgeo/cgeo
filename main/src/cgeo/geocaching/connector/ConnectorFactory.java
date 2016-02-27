@@ -368,8 +368,7 @@ public final class ConnectorFactory {
                         return RxUtils.deferredNullable(new Func0<Trackable>() {
                             @Override
                             public Trackable call() {
-                                final Trackable trackable = trackableConnector.searchTrackable(geocode, guid, id);
-                                return trackable;
+                                return trackableConnector.searchTrackable(geocode, guid, id);
                             }
                         }).subscribeOn(AndroidRxUtils.networkScheduler);
                     }
@@ -378,8 +377,7 @@ public final class ConnectorFactory {
         final Observable<Trackable> fromLocalStorage = RxUtils.deferredNullable(new Func0<Trackable>() {
             @Override
             public Trackable call() {
-                final Trackable trackable = DataStore.loadTrackable(geocode);
-                return trackable;
+                return DataStore.loadTrackable(geocode);
             }
         }).subscribeOn(Schedulers.io());
 
