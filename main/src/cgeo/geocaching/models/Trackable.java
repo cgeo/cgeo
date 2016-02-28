@@ -173,7 +173,7 @@ public class Trackable implements ILogable {
                 brand = connector.getBrand();
                 return brand;
             }
-            // Fallback to Unkwown
+            // Fallback to Unknown
             brand = TrackableBrand.UNKNOWN;
         }
         return brand;
@@ -294,7 +294,7 @@ public class Trackable implements ILogable {
 
     /**
      * Get the trackable missing status.
-     * False if missing status is unknonwn.
+     * False if missing status is unknown.
      *
      * @return true if missing from cache
      */

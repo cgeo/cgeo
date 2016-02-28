@@ -152,7 +152,7 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity implemen
             historyListView.addFooterView(getEmptyHistoryFooter(), null, false);
         }
 
-        historyListView.setAdapter(getDestionationHistoryAdapter());
+        historyListView.setAdapter(getDestinationHistoryAdapter());
         historyListView.setOnItemClickListener(new OnItemClickListener() {
 
             @Override
@@ -218,7 +218,7 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity implemen
         return historyFooter;
     }
 
-    private DestinationHistoryAdapter getDestionationHistoryAdapter() {
+    private DestinationHistoryAdapter getDestinationHistoryAdapter() {
         if (destinationHistoryAdapter == null) {
             destinationHistoryAdapter = new DestinationHistoryAdapter(this, getHistoryOfSearchedLocations());
         }
@@ -259,7 +259,7 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity implemen
 
         getButtonCurrent().setOnClickListener(new CurrentListener());
 
-        getDestionationHistoryAdapter().notifyDataSetChanged();
+        getDestinationHistoryAdapter().notifyDataSetChanged();
         disableSuggestions(getDistanceEditText());
 
         initializeDistanceUnitSelector();
@@ -419,7 +419,7 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity implemen
                 }
             }
 
-            getDestionationHistoryAdapter().notifyDataSetChanged();
+            getDestinationHistoryAdapter().notifyDataSetChanged();
 
             showToast(res.getString(R.string.search_remove_destination));
         }
@@ -436,7 +436,7 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity implemen
                 historyListView.addFooterView(getEmptyHistoryFooter());
             }
 
-            getDestionationHistoryAdapter().notifyDataSetChanged();
+            getDestinationHistoryAdapter().notifyDataSetChanged();
 
             showToast(res.getString(R.string.search_history_cleared));
         }

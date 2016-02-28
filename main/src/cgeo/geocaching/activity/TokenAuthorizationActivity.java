@@ -278,7 +278,7 @@ public abstract class TokenAuthorizationActivity extends AbstractActivity {
     }
 
     /**
-     * Enable or diable the start button depending on login/password field.
+     * Enable or disable the start button depending on login/password field.
      * If both fields are not empty, button is enabled.
      *
      */

@@ -111,7 +111,7 @@ public class CoordinatesInputDialog extends DialogFragment {
     @Override
     public void onSaveInstanceState(final Bundle outState) {
         super.onSaveInstanceState(outState);
-        // TODO: if current input is not commited in gp, read the current input into gp
+        // TODO: if current input is not committed in gp, read the current input into gp
         outState.putParcelable(GEOPOINT_ARG, gp);
     }
 

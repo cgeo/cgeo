@@ -94,7 +94,7 @@ public abstract class AbstractAsyncTaskWithProgress<Params, T, Result> extends A
     @SuppressWarnings("unchecked")
     @Override
     protected void onProgressUpdate(final T... status) {
-        throw new IllegalStateException("onProgressUpdate() must be overriden.");
+        throw new IllegalStateException("onProgressUpdate() must be overridden.");
     }
 
     /**

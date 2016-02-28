@@ -91,7 +91,7 @@
 
     </style>
 
-    <!-- Gingerbreads' Dialog style without the colors but with white backgound -->
+    <!-- Gingerbreads' Dialog style without the colors but with white background -->
     <style name="DialogWindowTitle">
         <item name="android:maxLines">1</item>
         <item name="android:scrollHorizontally">true</item>

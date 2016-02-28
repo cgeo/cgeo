@@ -436,7 +436,7 @@ public final class Network {
 
     /**
      * Wait until a request has completed and check its response status. An exception will be thrown if the
-     * request does not complete succesfully.success status.
+     * request does not complete successfully.success status.
      *
      * @param response the response to check
      */

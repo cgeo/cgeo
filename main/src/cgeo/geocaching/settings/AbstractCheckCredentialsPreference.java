@@ -44,7 +44,7 @@ public abstract class AbstractCheckCredentialsPreference extends AbstractClickab
      * Try to login.
      *
      * @return A pair containing the status code, and, if the status code is
-     * <tt>NO_ERROR</tt>, an observable (or <tt>null</tt>) wihch may emit
+     * <tt>NO_ERROR</tt>, an observable (or <tt>null</tt>) which may emit
      * the avatar for the user (every drawable will be shown in place of the previous one).
      */
     protected abstract ImmutablePair<StatusCode, Observable<Drawable>> login();

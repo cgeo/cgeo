@@ -27,7 +27,7 @@ public class MagnetometerAndAccelerometerProvider {
         final Sensor accelerometerSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         final Sensor magnetometerSensor = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
         if (magnetometerSensor == null || accelerometerSensor == null) {
-            return Observable.error(new RuntimeException("no magenetic or accelerometer sensor"));
+            return Observable.error(new RuntimeException("no magnetic or accelerometer sensor"));
         }
         final Observable<Float> observable = Observable.create(new OnSubscribe<Float>() {
             private final float[] lastAccelerometer = new float[3];

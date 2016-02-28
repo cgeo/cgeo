@@ -52,7 +52,7 @@ public class ImportGpxAttachmentThread extends AbstractImportGpxThread {
         try {
             return contentResolver.openInputStream(uri);
         } catch (final FileNotFoundException e) {
-            // for http links, we may need to download the content ourself, if it has no mime type announced by the browser
+            // for http links, we may need to download the content ourselves, if it has no mime type announced by the browser
             if (uri.toString().startsWith("http")) {
                 return Network.getResponseStream(Network.getRequest(uri.toString()));
             }

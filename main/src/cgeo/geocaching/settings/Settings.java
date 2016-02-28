@@ -413,7 +413,7 @@ public class Settings {
     }
 
     public static boolean useGooglePlayServices() {
-        // By defaut, enable play services starting from ICS.
+        // By default, enable play services starting from ICS.
         return CgeoApplication.getInstance().isGooglePlayServicesAvailable() &&
                 getBoolean(R.string.pref_googleplayservices, VERSION.SDK_INT >= VERSION_CODES.ICE_CREAM_SANDWICH);
     }
