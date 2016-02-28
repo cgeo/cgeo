@@ -969,6 +969,7 @@
   <string name="trackable_image">Bilde</string>
   <string name="trackable_code">Sporingskode</string>
   <string name="trackable_name">Navn</string>
+  <string name="trackable_brand">Merke</string>
   <string name="trackable_type">Type</string>
   <string name="trackable_owner">Eier</string>
   <string name="trackable_spotted">Oppdaget</string>

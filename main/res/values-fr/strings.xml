@@ -976,6 +976,7 @@
   <string name="trackable_image">Image</string>
   <string name="trackable_code">Code de suivi</string>
   <string name="trackable_name">Nom</string>
+  <string name="trackable_brand">Genre</string>
   <string name="trackable_type">Type</string>
   <string name="trackable_owner">Propriétaire</string>
   <string name="trackable_spotted">Se situe</string>

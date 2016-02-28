@@ -972,6 +972,7 @@
   <string name="trackable_image">Bild</string>
   <string name="trackable_code">Spårningskod</string>
   <string name="trackable_name">Namn</string>
+  <string name="trackable_brand">Varumärke</string>
   <string name="trackable_type">Typ</string>
   <string name="trackable_owner">Ägare</string>
   <string name="trackable_spotted">Plats</string>

@@ -985,6 +985,7 @@
   <string name="trackable_image">Obrázok</string>
   <string name="trackable_code">Kód trasovateľného predmetu (TB kód)</string>
   <string name="trackable_name">Názov</string>
+  <string name="trackable_brand">Značka</string>
   <string name="trackable_type">Typ</string>
   <string name="trackable_owner">Vlastník</string>
   <string name="trackable_spotted">Zhliadnuté</string>
@@ -1040,6 +1041,7 @@
   <string name="helper_sendtocgeo_description">Poslať do c:geo je rozšírenie prehliadača <strong>pre vaše PC</strong>. Pri browsovaní geocaching.com, môžete poslať cache do vášho smartphone kliknutím na tlačidlo priamo v prehliadači.</string>
   <string name="helper_locus_title">Locus</string>
   <string name="helper_locus_description">Navigačná aplikácia pre tvoj mobil alebo tablet. Zmapuj okolie cez offline topografické mapy, zaznamenávaj svoju cestu, hľadaj geocache, používaj hlasovú navigáciu a rob ešte oveľa viac.</string>
+  <string name="helper_gpsstatus_title">GPS Status &amp; Toolbox</string>
   <string name="helper_gpsstatus_description">Radar z tejto aplikácie môžete použiť v c:geo. Poskytuje tiež mnoho iných informácií súvisiacich s GPS.</string>
   <string name="helper_bluetoothgps_title">Bluetooth GPS</string>
   <string name="helper_bluetoothgps_description">Umožňuje použitie externého GPS zariadenia pre lepší príjem, presnejšie umiestnenie a zníži využitie batérie vášho telefónu.</string>
