@@ -993,13 +993,12 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         return adapter.findCacheByGeocode(contextMenuGeocode);
     }
 
-    private boolean setFilter(final IFilter filter) {
+    private void setFilter(final IFilter filter) {
         currentFilter = filter;
         adapter.setFilter(filter);
         prepareFilterBar();
         updateTitle();
         invalidateOptionsMenuCompatible();
-        return true;
     }
 
     @Override
