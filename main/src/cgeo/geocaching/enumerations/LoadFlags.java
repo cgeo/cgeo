@@ -9,7 +9,7 @@ import java.util.EnumSet;
  */
 public interface LoadFlags {
 
-    public enum LoadFlag {
+    enum LoadFlag {
         CACHE_BEFORE, // load from CacheCache
         CACHE_AFTER, // load from CacheCache
         DB_MINIMAL, // load minimal informations from DataBase
@@ -30,7 +30,7 @@ public interface LoadFlags {
     /** Retrieve cache (all stored informations) from DB only. Do not load from CacheCache */
     EnumSet<LoadFlag> LOAD_ALL_DB_ONLY = EnumSet.range(LoadFlag.DB_MINIMAL, LoadFlag.OFFLINE_LOG);
 
-    public enum SaveFlag {
+    enum SaveFlag {
         CACHE, // save only to CacheCache
         DB // include saving to CacheCache
     }
@@ -38,7 +38,7 @@ public interface LoadFlags {
     @NonNull
     EnumSet<SaveFlag> SAVE_ALL = EnumSet.allOf(SaveFlag.class);
 
-    public enum RemoveFlag {
+    enum RemoveFlag {
         CACHE, // save only to CacheCache
         DB, // includes removing from CacheCache
         OWN_WAYPOINTS_ONLY_FOR_TESTING // only to be used in unit testing (as we never delete own waypoints)
