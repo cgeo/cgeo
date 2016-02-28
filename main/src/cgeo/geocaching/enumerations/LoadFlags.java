@@ -22,13 +22,13 @@ public interface LoadFlags {
     }
 
     /** Retrieve cache from CacheCache only. Do not load from DB */
-    public final static EnumSet<LoadFlag> LOAD_CACHE_ONLY = EnumSet.of(LoadFlag.CACHE_BEFORE);
+    EnumSet<LoadFlag> LOAD_CACHE_ONLY = EnumSet.of(LoadFlag.CACHE_BEFORE);
     /** Retrieve cache from CacheCache first. If not found load from DB */
-    public final static EnumSet<LoadFlag> LOAD_CACHE_OR_DB = EnumSet.of(LoadFlag.CACHE_BEFORE, LoadFlag.DB_MINIMAL, LoadFlag.OFFLINE_LOG, LoadFlag.SPOILERS);
+    EnumSet<LoadFlag> LOAD_CACHE_OR_DB = EnumSet.of(LoadFlag.CACHE_BEFORE, LoadFlag.DB_MINIMAL, LoadFlag.OFFLINE_LOG, LoadFlag.SPOILERS);
     /** Retrieve cache (minimalistic information including waypoints) from DB first. If not found load from CacheCache */
-    public final static EnumSet<LoadFlag> LOAD_WAYPOINTS = EnumSet.of(LoadFlag.CACHE_AFTER, LoadFlag.DB_MINIMAL, LoadFlag.WAYPOINTS, LoadFlag.OFFLINE_LOG, LoadFlag.SPOILERS);
+    EnumSet<LoadFlag> LOAD_WAYPOINTS = EnumSet.of(LoadFlag.CACHE_AFTER, LoadFlag.DB_MINIMAL, LoadFlag.WAYPOINTS, LoadFlag.OFFLINE_LOG, LoadFlag.SPOILERS);
     /** Retrieve cache (all stored informations) from DB only. Do not load from CacheCache */
-    public final static EnumSet<LoadFlag> LOAD_ALL_DB_ONLY = EnumSet.range(LoadFlag.DB_MINIMAL, LoadFlag.OFFLINE_LOG);
+    EnumSet<LoadFlag> LOAD_ALL_DB_ONLY = EnumSet.range(LoadFlag.DB_MINIMAL, LoadFlag.OFFLINE_LOG);
 
     public enum SaveFlag {
         CACHE, // save only to CacheCache
@@ -36,7 +36,7 @@ public interface LoadFlags {
     }
 
     @NonNull
-    public final static EnumSet<SaveFlag> SAVE_ALL = EnumSet.allOf(SaveFlag.class);
+    EnumSet<SaveFlag> SAVE_ALL = EnumSet.allOf(SaveFlag.class);
 
     public enum RemoveFlag {
         CACHE, // save only to CacheCache
@@ -45,6 +45,6 @@ public interface LoadFlags {
     }
 
     @NonNull
-    public final static EnumSet<RemoveFlag> REMOVE_ALL = EnumSet.of(RemoveFlag.CACHE, RemoveFlag.DB);
+    EnumSet<RemoveFlag> REMOVE_ALL = EnumSet.of(RemoveFlag.CACHE, RemoveFlag.DB);
 
 }
