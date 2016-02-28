@@ -10,12 +10,12 @@ public interface ICredentials {
      * Get preference key of the user name.
      *
      */
-    public int getUsernamePreferenceKey();
+    int getUsernamePreferenceKey();
 
     /**
      * Get preference key of the password.
      *
      */
-    public int getPasswordPreferenceKey();
+    int getPasswordPreferenceKey();
 
 }

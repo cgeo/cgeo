@@ -11,5 +11,5 @@ import org.eclipse.jdt.annotation.Nullable;
  *
  */
 public interface ISearchByGeocode extends IConnector {
-    public SearchResult searchByGeocode(final @Nullable String geocode, final @Nullable String guid, final CancellableHandler handler);
+    SearchResult searchByGeocode(final @Nullable String geocode, final @Nullable String guid, final CancellableHandler handler);
 }

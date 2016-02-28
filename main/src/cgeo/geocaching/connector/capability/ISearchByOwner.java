@@ -12,5 +12,5 @@ import org.eclipse.jdt.annotation.NonNull;
  *
  */
 public interface ISearchByOwner extends IConnector {
-    public SearchResult searchByOwner(final @NonNull String owner, final @NonNull RecaptchaReceiver recaptchaReceiver);
+    SearchResult searchByOwner(final @NonNull String owner, final @NonNull RecaptchaReceiver recaptchaReceiver);
 }

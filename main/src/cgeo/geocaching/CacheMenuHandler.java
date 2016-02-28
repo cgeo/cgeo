@@ -33,11 +33,11 @@ public final class CacheMenuHandler extends AbstractUIFactory {
      *
      */
     interface ActivityInterface {
-        public void navigateTo();
+        void navigateTo();
 
-        public void showNavigationMenu();
+        void showNavigationMenu();
 
-        public void cachesAround();
+        void cachesAround();
 
     }
 

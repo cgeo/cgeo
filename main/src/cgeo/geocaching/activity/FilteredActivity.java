@@ -6,6 +6,6 @@ public interface FilteredActivity {
     /**
      * called from the filter bar view
      */
-    public void showFilterMenu(final View view);
+    void showFilterMenu(final View view);
 
 }

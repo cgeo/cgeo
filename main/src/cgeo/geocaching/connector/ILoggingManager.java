@@ -29,15 +29,15 @@ public interface ILoggingManager {
     ImageResult postLogImage(String logId,
             Image image);
 
-    public boolean hasLoaderError();
+    boolean hasLoaderError();
 
     @NonNull
-    public List<TrackableLog> getTrackables();
+    List<TrackableLog> getTrackables();
 
     @NonNull
-    public List<LogType> getPossibleLogTypes();
+    List<LogType> getPossibleLogTypes();
 
-    public void init();
+    void init();
 
-    public int getPremFavoritePoints();
+    int getPremFavoritePoints();
 }

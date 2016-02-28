@@ -5,8 +5,8 @@ import cgeo.geocaching.location.Geopoint;
 
 public interface MapItemFactory {
 
-    public GeoPointImpl getGeoPointBase(final Geopoint coords);
+    GeoPointImpl getGeoPointBase(final Geopoint coords);
 
-    public CachesOverlayItemImpl getCachesOverlayItem(final IWaypoint iWaypoint, final boolean applyDistanceRule);
+    CachesOverlayItemImpl getCachesOverlayItem(final IWaypoint iWaypoint, final boolean applyDistanceRule);
 
 }

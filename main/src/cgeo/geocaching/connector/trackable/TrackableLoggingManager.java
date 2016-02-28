@@ -28,15 +28,15 @@ public interface TrackableLoggingManager {
                              Image image);
 
     @NonNull
-    public List<LogTypeTrackable> getPossibleLogTypesTrackable();
+    List<LogTypeTrackable> getPossibleLogTypesTrackable();
 
-    public boolean canLogTime();
+    boolean canLogTime();
 
-    public boolean canLogCoordinates();
+    boolean canLogCoordinates();
 
-    public void setGuid(final String guid);
+    void setGuid(final String guid);
 
-    public boolean isTrackingCodeNeededToPostNote();
+    boolean isTrackingCodeNeededToPostNote();
 
-    public boolean postReady();
+    boolean postReady();
 }

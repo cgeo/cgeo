@@ -8,9 +8,9 @@ import android.graphics.drawable.Drawable;
  */
 public interface OverlayItemImpl {
 
-    public String getTitle();
+    String getTitle();
 
-    public Drawable getMarker(int index);
+    Drawable getMarker(int index);
 
-    public void setMarker(Drawable markerIn);
+    void setMarker(Drawable markerIn);
 }

@@ -4,6 +4,6 @@ import cgeo.geocaching.location.Geopoint;
 
 public interface ICoordinates {
 
-    public abstract Geopoint getCoords();
+    Geopoint getCoords();
 
 }

@@ -1,11 +1,11 @@
 package cgeo.geocaching.maps.interfaces;
 
 public interface MapSource {
-    public String getName();
+    String getName();
 
-    public boolean isAvailable();
+    boolean isAvailable();
 
-    public int getNumericalId();
+    int getNumericalId();
 
-    public MapProvider getMapProvider();
+    MapProvider getMapProvider();
 }

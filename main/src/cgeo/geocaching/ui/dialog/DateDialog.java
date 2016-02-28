@@ -15,7 +15,7 @@ import java.util.Calendar;
 public class DateDialog extends DialogFragment implements OnDateSetListener {
 
     public interface DateDialogParent {
-        abstract public void setDate(final Calendar date);
+        void setDate(final Calendar date);
     }
 
     private Calendar date;

@@ -8,7 +8,7 @@ import cgeo.geocaching.models.IWaypoint;
  */
 public interface CachesOverlayItemImpl extends OverlayItemImpl {
 
-    public IWaypoint getCoord();
+    IWaypoint getCoord();
 
-    public boolean applyDistanceRule();
+    boolean applyDistanceRule();
 }

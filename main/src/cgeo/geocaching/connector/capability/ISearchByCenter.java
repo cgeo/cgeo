@@ -12,5 +12,5 @@ import org.eclipse.jdt.annotation.NonNull;
  *
  */
 public interface ISearchByCenter extends IConnector {
-    public SearchResult searchByCenter(final @NonNull Geopoint center, final @NonNull RecaptchaReceiver recaptchaReceiver);
+    SearchResult searchByCenter(final @NonNull Geopoint center, final @NonNull RecaptchaReceiver recaptchaReceiver);
 }
