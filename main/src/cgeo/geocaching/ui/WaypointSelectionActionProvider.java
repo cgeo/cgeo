@@ -20,7 +20,7 @@ import android.view.SubMenu;
  */
 public class WaypointSelectionActionProvider extends AbstractMenuActionProvider {
 
-    public static interface Callback {
+    public interface Callback {
         void onWaypointSelected(final Waypoint waypoint);
 
         void onGeocacheSelected(final Geocache geocache);

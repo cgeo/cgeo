@@ -464,7 +464,7 @@ public final class Dialogs {
         dialog.getButton(DialogInterface.BUTTON_POSITIVE).setEnabled(StringUtils.isNotBlank(input));
     }
 
-    public static interface ItemWithIcon {
+    public interface ItemWithIcon {
         /**
          * @return the drawable resource, or {@code 0} for no drawable
          */
