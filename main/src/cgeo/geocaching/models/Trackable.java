@@ -4,6 +4,7 @@ import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.trackable.TrackableBrand;
 import cgeo.geocaching.connector.trackable.TrackableConnector;
 import cgeo.geocaching.enumerations.LogTypeTrackable;
+import cgeo.geocaching.utils.HtmlUtils;
 import cgeo.geocaching.utils.ImageUtils;
 
 import org.apache.commons.lang3.ObjectUtils;
@@ -273,7 +274,7 @@ public class Trackable implements ILogable {
     }
 
     public void setGoal(final String goal) {
-        this.goal = goal;
+        this.goal = HtmlUtils.removeExtraTags(goal);
     }
 
     public String getDetails() {
@@ -281,7 +282,7 @@ public class Trackable implements ILogable {
     }
 
     public void setDetails(final String details) {
-        this.details = details;
+        this.details = HtmlUtils.removeExtraTags(details);
     }
 
     public String getImage() {

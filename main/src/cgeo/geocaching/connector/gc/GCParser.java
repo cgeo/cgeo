@@ -31,7 +31,6 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.CancellableHandler;
-import cgeo.geocaching.utils.HtmlUtils;
 import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
@@ -41,6 +40,7 @@ import cgeo.geocaching.utils.TextUtils;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -51,13 +51,6 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import rx.Observable;
-import rx.Observable.OnSubscribe;
-import rx.Subscriber;
-import rx.functions.Action1;
-import rx.functions.Func0;
-import rx.functions.Func2;
-import rx.schedulers.Schedulers;
 
 import android.net.Uri;
 import android.text.Html;
@@ -78,6 +71,14 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
+
+import rx.Observable;
+import rx.Observable.OnSubscribe;
+import rx.Subscriber;
+import rx.functions.Action1;
+import rx.functions.Func0;
+import rx.functions.Func2;
+import rx.schedulers.Schedulers;
 
 public final class GCParser {
     @NonNull
@@ -1022,7 +1023,7 @@ public final class GCParser {
                 list.addAll(downloadablePocketQueries.values());
 
                 final Elements rows = document.select("#pqRepeater tr:has(td)");
-                for (Element row : rows) {
+                for (final Element row : rows) {
                     if (row == rows.last()) {
                         break; // skip footer
                     }
@@ -1047,7 +1048,7 @@ public final class GCParser {
                 });
 
                 return Observable.just(list);
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 Log.e("GCParser.searchPocketQueryList: error parsing parsing html page", e);
                 return Observable.error(e);
             }
@@ -1067,7 +1068,7 @@ public final class GCParser {
         final Map<String, PocketQuery> downloadablePocketQueries = new HashMap<>();
 
         final Elements rows = document.select("#uxOfflinePQTable tr:has(td)");
-        for (Element row : rows) {
+        for (final Element row : rows) {
             if (row == rows.last()) {
                 break; // skip footer
             }
@@ -1087,7 +1088,7 @@ public final class GCParser {
             final Uri uri = Uri.parse(href);
             final String guid = uri.getQueryParameter("g");
 
-            int count = Integer.parseInt(cells.get(4).text());
+            final int count = Integer.parseInt(cells.get(4).text());
 
             final MatcherWrapper matcherLastGeneration = new MatcherWrapper(GCConstants.PATTERN_PQ_LAST_GEN, cells.get(5).text());
             Date lastGeneration = null;
@@ -1660,7 +1661,7 @@ public final class GCParser {
         }
 
         // trackable goal
-        trackable.setGoal(HtmlUtils.removeExtraTags(convertLinks(TextUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_GOAL, true, trackable.getGoal()))));
+        trackable.setGoal(convertLinks(TextUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_GOAL, true, trackable.getGoal())));
 
         // trackable details & image
         try {
@@ -1673,7 +1674,7 @@ public final class GCParser {
                     trackable.setImage(StringUtils.replace(image, "/display/", "/large/"));
                 }
                 if (StringUtils.isNotEmpty(details) && !StringUtils.equals(details, "No additional details available.")) {
-                    trackable.setDetails(HtmlUtils.removeExtraTags(convertLinks(details)));
+                    trackable.setDetails(convertLinks(details));
                 }
             }
         } catch (final RuntimeException e) {

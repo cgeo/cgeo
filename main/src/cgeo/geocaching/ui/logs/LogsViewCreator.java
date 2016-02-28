@@ -1,9 +1,9 @@
 package cgeo.geocaching.ui.logs;
 
 import cgeo.geocaching.ImagesActivity;
-import cgeo.geocaching.models.LogEntry;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractActionBarActivity;
+import cgeo.geocaching.models.LogEntry;
 import cgeo.geocaching.network.SmileyImage;
 import cgeo.geocaching.ui.AbstractCachingListViewPageViewCreator;
 import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
@@ -84,8 +84,7 @@ public abstract class LogsViewCreator extends AbstractCachingListViewPageViewCre
         // log text, avoid parsing HTML if not necessary
         if (TextUtils.containsHtml(log.log)) {
             final UnknownTagsHandler unknownTagsHandler = new UnknownTagsHandler();
-            holder.text.setText(Html.fromHtml(log.getDisplayText(), new SmileyImage(getGeocode(), holder.text),
-                    unknownTagsHandler), TextView.BufferType.SPANNABLE);
+            holder.text.setText(TextUtils.trimSpanned(Html.fromHtml(log.getDisplayText(), new SmileyImage(getGeocode(), holder.text), unknownTagsHandler)), TextView.BufferType.SPANNABLE);
         } else {
             holder.text.setText(log.log, TextView.BufferType.SPANNABLE);
         }

@@ -3,15 +3,18 @@
  */
 package cgeo.geocaching.utils;
 
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-
 import org.eclipse.jdt.annotation.Nullable;
+
+import android.text.Html;
+import android.text.Spanned;
 
 import java.nio.charset.Charset;
 import java.text.Collator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.zip.CRC32;
+
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 /**
  * Misc. utils. All methods don't use Android specific stuff to use these methods in plain JUnit tests.
@@ -150,7 +153,8 @@ public final class TextUtils {
     /**
      * Quick and naive check for possible rich HTML content in a string.
      *
-     * @param str A string containing HTML code.
+     * @param str
+     *            A string containing HTML code.
      * @return <tt>true</tt> if <tt>str</tt> contains HTML code that needs to go through a HTML renderer before
      *         being displayed, <tt>false</tt> if it can be displayed as-is without any loss
      */
@@ -191,5 +195,23 @@ public final class TextUtils {
         collator.setDecomposition(Collator.CANONICAL_DECOMPOSITION);
         collator.setStrength(Collator.TERTIARY);
         return collator;
+    }
+
+    /**
+     * When converting html to text using {@link Html#fromHtml(String)} then the result often contains unwanted trailing
+     * linebreaks (from the conversion of paragraph tags). This method removes those.
+     */
+    public static CharSequence trimSpanned(final Spanned source) {
+        final int length = source.length();
+        int i = length;
+
+        // loop back to the first non-whitespace character
+        while (--i >= 0 && Character.isWhitespace(source.charAt(i))) {
+        }
+
+        if (i < length) {
+            return source.subSequence(0, i + 1);
+        }
+        return source;
     }
 }
