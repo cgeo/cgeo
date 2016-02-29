@@ -1091,6 +1091,10 @@ public class Settings {
         putBoolean(R.string.pref_excludemine, exclude);
     }
 
+    public static void setExcludeDisabled(final boolean exclude) {
+        putBoolean(R.string.pref_excludedisabled, exclude);
+    }
+
     static void setLogin(final String username, final String password) {
         if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
             // erase username and password
