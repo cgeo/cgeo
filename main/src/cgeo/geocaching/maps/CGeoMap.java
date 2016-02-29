@@ -720,6 +720,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
             menu.findItem(R.id.menu_store_caches).setVisible(!isLoading() && CollectionUtils.isNotEmpty(geocodesInViewport) && new SearchResult(geocodesInViewport).hasUnsavedCaches());
 
             menu.findItem(R.id.menu_mycaches_mode).setChecked(Settings.isExcludeMyCaches());
+            menu.findItem(R.id.menu_disabled_mode).setChecked(Settings.isExcludeDisabledCaches());
             menu.findItem(R.id.menu_direction_line).setChecked(Settings.isMapDirection());
             menu.findItem(R.id.menu_circle_mode).setChecked(overlayCaches.getCircles());
             menu.findItem(R.id.menu_trail_mode).setChecked(Settings.isMapTrail());
@@ -827,6 +828,14 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
                 markersInvalidated = true;
                 ActivityMixin.invalidateOptionsMenu(activity);
                 if (!Settings.isExcludeMyCaches()) {
+                    Tile.cache.clear();
+                }
+                return true;
+            case R.id.menu_disabled_mode:
+                Settings.setExcludeDisabled(!Settings.isExcludeDisabledCaches());
+                markersInvalidated = true;
+                ActivityMixin.invalidateOptionsMenu(activity);
+                if (!Settings.isExcludeDisabledCaches()) {
                     Tile.cache.clear();
                 }
                 return true;
