@@ -1,6 +1,0 @@
-# Butter knife view injection, see http://jakewharton.github.io/butterknife/
-# this is a reduced set, compared to the official recommended settings
-
--keep class **$$ViewInjector { *; }
--dontwarn butterknife.internal.**
--keepnames class * { @butterknife.InjectView *;}

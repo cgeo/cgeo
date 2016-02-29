@@ -1,8 +1,3 @@
-# AssertJ
--dontwarn java.nio.**
--dontwarn java.lang.management.**
--dontwarn org.assertj.core.internal.**
-
 -dontnote com.google.android.apps.common.testing.ui.espresso.**
 -dontnote com.google.common.reflect.**
 -dontwarn org.hamcrest.**
@@ -13,5 +8,3 @@
 
 -keep class cgeo.test.** { *; }
 -keep class android.support.test.runner.** { *; }
-
--dontwarn android.support.test.**

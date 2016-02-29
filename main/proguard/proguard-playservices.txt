@@ -1,3 +1,0 @@
-# Play Service references to classes introduced in higher API levels
-
--dontwarn com.google.android.gms.**

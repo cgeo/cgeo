@@ -1,7 +1,0 @@
-# rxjava includes references to the test frameworks within their class files
--dontwarn org.mockito.**
--dontwarn org.junit.**
--dontwarn org.robolectric.**
-
-# rxjava internally references sun.misc.Unsafe
--dontwarn sun.misc.Unsafe

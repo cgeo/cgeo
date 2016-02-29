@@ -1,3 +1,0 @@
-# ???
-
--keep class android.support.v4.os.** { *; }
