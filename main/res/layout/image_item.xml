@@ -1,9 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ImageView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/map_image"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    android:gravity="center"
-    tools:context=".ui.ImagesList" />
+    android:layout_height="wrap_content">
+
+    <ImageView
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/map_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        tools:context=".ui.ImagesList" />
+
+    <ImageView
+        android:id="@+id/geo_overlay"
+        android:src="@drawable/ic_menu_compass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:layout_alignParentBottom="true"/>
+
+</RelativeLayout>
