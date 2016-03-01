@@ -28,4 +28,12 @@ public class TapHandlerLayer extends Layer {
 
         return true;
     }
+
+    @Override
+    public boolean onLongPress(LatLong tapLatLong, Point layerXY, Point tapXY) {
+
+        tapHandler.onLongPress(tapLatLong);
+
+        return true;
+    }
 }
