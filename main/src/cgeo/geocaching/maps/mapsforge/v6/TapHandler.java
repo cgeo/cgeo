@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import cgeo.geocaching.maps.mapsforge.v6.caches.GeoitemRef;
+import org.mapsforge.core.model.LatLong;
 
 public class TapHandler {
 
@@ -30,5 +31,15 @@ public class TapHandler {
         }
 
         hitItems.clear();
+    }
+
+    public void onLongPress(LatLong tapLatLong) {
+
+        final NewMap map = this.map.get();
+
+        // show popup
+        if (map != null) {
+            map.showAddWaypoint(tapLatLong);
+        }
     }
 }

@@ -77,6 +77,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
 
     @Extra(Intents.EXTRA_GEOCODE) protected String geocode = null;
     @Extra(Intents.EXTRA_WAYPOINT_ID) protected int waypointId = -1;
+    @Extra(Intents.EXTRA_COORDS) protected Geopoint initialCoords = null;
 
     @InstanceState protected int waypointTypeSelectorPosition = -1;
 
@@ -196,6 +197,10 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
 
         } else { // new waypoint
             initializeWaypointTypeSelector();
+
+            if (initialCoords != null) {
+                updateCoordinates(initialCoords);
+            }
         }
 
         initializeDistanceUnitSelector();
@@ -607,5 +612,9 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
 
     public static void startActivityAddWaypoint(final Context context, final Geocache cache) {
         EditWaypointActivity_.intent(context).geocode(cache.getGeocode()).start();
+    }
+
+    public static void startActivityAddWaypoint(final Context context, final Geocache cache, final Geopoint initialCoords) {
+        EditWaypointActivity_.intent(context).geocode(cache.getGeocode()).initialCoords(initialCoords).start();
     }
 }
