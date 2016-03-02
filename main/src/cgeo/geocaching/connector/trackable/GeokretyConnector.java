@@ -36,8 +36,25 @@ import java.util.regex.Pattern;
 
 public class GeokretyConnector extends AbstractTrackableConnector {
 
+    /*
+    1) tracking code:
+
+    is generated from the alphabet:
+    "a b c d e f g h i j k l m n p q r s t u v w x y z 1 2 3 4 5 6 7 8 9"
+    (no O and 0)
+    sanity-check for tracking code: if generated code look like reference
+    number (ie GKxxxx):
+
+    preg_match("#^gk[0-9a-f]{4}$#i", $tc)
+
+    2) reference number (GKxxxx):
+    it is just a subsequent number in the database ($id) converted to hex:
+
+    $gk=sprintf("GK%04X",$id);
+    $id=hexdec(substr($gk, 2, 4));
+     */
     private static final Pattern PATTERN_GK_CODE = Pattern.compile("GK[0-9A-F]{4,}");
-    private static final Pattern PATTERN_GK_CODE_EXTENDED = Pattern.compile("(GK[0-9A-F]{4,})|([0-9A-Z]{6})");
+    private static final Pattern PATTERN_GK_CODE_EXTENDED = Pattern.compile("(GK[0-9A-F]{4,})|([1-9A-NP-Z]{6})");
     private static final String HOST = "geokrety.org";
     public static final String URL = "https://" + HOST;
     private static final String URLPROXY = "https://api.geokretymap.org";

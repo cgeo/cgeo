@@ -22,6 +22,10 @@ public class GeokretyConnectorTest extends AbstractResourceInstrumentationTestCa
 
         assertThat(getConnector().canHandleTrackable("GKXYZ1")).isFalse(); // non hex
         assertThat(getConnector().canHandleTrackable("GKXYZ1", TrackableBrand.GEOKRETY)).isTrue(); // non hex, but match secret codes pattern
+        assertThat(getConnector().canHandleTrackable("123456", TrackableBrand.GEOKRETY)).isTrue();  // Secret code
+        assertThat(getConnector().canHandleTrackable("012345", TrackableBrand.GEOKRETY)).isFalse(); // blacklisted 0/O
+        assertThat(getConnector().canHandleTrackable("ABCDEF", TrackableBrand.GEOKRETY)).isTrue();  // Secret code
+        assertThat(getConnector().canHandleTrackable("LMNOPQ", TrackableBrand.GEOKRETY)).isFalse(); // blacklisted 0/O
 
         assertThat(getConnector().canHandleTrackable("GC1234")).isFalse();
         assertThat(getConnector().canHandleTrackable("GC1234", TrackableBrand.UNKNOWN)).isFalse();
