@@ -384,13 +384,13 @@ public class Geocache implements IWaypoint {
         return detailed == other.detailed &&
                 StringUtils.equalsIgnoreCase(geocode, other.geocode) &&
                 StringUtils.equalsIgnoreCase(name, other.name) &&
-                cacheType == other.cacheType &&
+                UncertainProperty.equalValues(cacheType, other.cacheType) &&
                 size == other.size &&
                 ObjectUtils.equals(found, other.found) &&
                 ObjectUtils.equals(premiumMembersOnly, other.premiumMembersOnly) &&
                 difficulty == other.difficulty &&
                 terrain == other.terrain &&
-                (coords != null ? coords.equals(other.coords) : null == other.coords) &&
+                UncertainProperty.equalValues(coords, other.coords) &&
                 reliableLatLon == other.reliableLatLon &&
                 ObjectUtils.equals(disabled, other.disabled) &&
                 ObjectUtils.equals(archived, other.archived) &&
