@@ -921,6 +921,7 @@
   <string name="map_trail_show">Spur einblenden</string>
   <string name="map_circles_show">Kreise anzeigen</string>
   <string name="map_mycaches_hide">Eigene/gefundene Caches ausblenden</string>
+  <string name="map_disabled_hide">Deaktivierte Caches ausblenden</string>
   <string name="map_theme_builtin">Standard</string>
   <string name="map_theme_select">Kartendarstellung wählen</string>
   <string name="map_live_enable">Aktualisierung einschalten</string>
