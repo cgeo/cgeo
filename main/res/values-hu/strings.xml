@@ -144,7 +144,7 @@
   <string name="err_server_ec">Hiba a kapcsolatban az extremcaching.com-mal (a szerver vagy a kapcsolat nem működik?)</string>
   <string name="err_server_gk">Nem lehet kapcsolódni a GeoKrety.org-hoz. A weboldal ideglenesen nem elérhető vagy az internetkapcsolatod nem működik.</string>
   <string name="err_login">Nincs mentett belépési adat</string>
-  <string name="err_login_failed_toast">Sajnos a c:geo nem tud belépni. A c:geo hálózat nélküli módban fut. Ellenőrizd a belépési adataid a beállításoknál vagy engedélyezd az internetkapcsolatot.</string>
+  <string name="err_login_failed_toast">Sajnos a c:geo nem tud belépni. A c:geo hálózat nélküli módban fut. Ellenőrizd a belépési adataid a beállításoknál vagy engedélyezd az internetkapcsolatot!</string>
   <string name="err_unknown">Ismeretlen hiba</string>
   <string name="err_unknown_address">A c:geo nem tudta leképezni ezt a címet egy létező helyszínre</string>
   <string name="err_comm">Ismeretlen kommunikációs hiba</string>
