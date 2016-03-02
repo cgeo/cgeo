@@ -182,7 +182,7 @@ public final class GCConstants {
     final static Pattern PATTERN_LOG_FAVORITE_POINTS = Pattern.compile("chkAddToFavorites[\"']>.*\\((\\d+).*\\)<\\/label");
 
     final static String STRING_PREMIUMONLY_2 = "Sorry, the owner of this listing has made it viewable to Premium Members only.";
-    final static String STRING_PREMIUMONLY_1 = "has chosen to make this cache listing visible to Premium Members only.";
+    final static String STRING_PREMIUMONLY_1 = "has marked it as Premium-Only.";
     final static String STRING_UNPUBLISHED_OTHER = "you cannot view this cache listing until it has been published";
     final static String STRING_UNPUBLISHED_FROM_SEARCH = "class=\"UnpublishedCacheSearchWidget"; // do not include closing brace as the CSS can contain additional styles
     final static String STRING_UNKNOWN_ERROR = "An Error Has Occurred";

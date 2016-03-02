@@ -688,6 +688,7 @@
   <string name="cache_personal_note_upload">Enviar</string>
   <string name="cache_personal_note_uploading">A enviar nota pessoal</string>
   <string name="cache_personal_note_upload_done">Nota pessoal enviada</string>
+  <string name="cache_personal_note_upload_error">Erro ao enviar nota pessoal</string>
   <string name="cache_personal_note_upload_cancelled">Envio de nota pessoal cancelado</string>
   <string name="cache_description">Descrição</string>
   <string name="cache_description_long">Descrição longa</string>
@@ -766,6 +767,8 @@
   <string name="cache_menu_share">Partilhar cache</string>
   <string name="cache_menu_move_list">Mover para outra lista</string>
   <string name="cache_menu_whereyougo">WhereYouGo</string>
+  <string name="cache_menu_oruxmaps_online">OruxMaps (Online)</string>
+  <string name="cache_menu_oruxmaps_offline">OruxMaps (Offline)</string>
   <string name="cache_menu_navigon">Navigon</string>
   <string name="cache_menu_pebble">Seixo</string>
   <string name="cache_menu_android_wear">Android Wear</string>
@@ -1394,4 +1397,8 @@
   <string name="pq_as_cache_list">Ver lista de caches</string>
   <string name="pq_download_and_import">Importar Pocket query</string>
   <string name="pq_my_finds">Minhas encontradas</string>
+  <string name="caches_refresh_all_warning">Esta acção requer um grande volume de dados. Tem a certeza que deseja actualizar todas as caches?</string>
+  <string name="invitation_action">Convidar amigos</string>
+  <string name="invitation_title">Convide amigos a utilizar c:geo</string>
+  <string name="invitation_message">Experimente a aplicação c:geo para geocaching</string>
 </resources>
