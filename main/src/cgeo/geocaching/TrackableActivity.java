@@ -380,7 +380,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
             return;
         }
         imagesList = new ImagesList(this, trackable.getGeocode());
-        createSubscriptions.add(imagesList.loadImages(imageView, trackable.getImages(), false));
+        createSubscriptions.add(imagesList.loadImages(imageView, trackable.getImages()));
     }
 
     /**

@@ -828,7 +828,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             return;
         }
         imagesList = new ImagesList(this, cache.getGeocode());
-        createSubscriptions.add(imagesList.loadImages(imageView, cache.getImages(), false));
+        createSubscriptions.add(imagesList.loadImages(imageView, cache.getImages()));
     }
 
     public static void startActivity(final Context context, final String geocode) {

@@ -2,12 +2,11 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.models.Image;
-import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.ImagesList;
 import cgeo.geocaching.ui.ImagesList.ImageType;
 
 import org.apache.commons.collections4.CollectionUtils;
+import rx.Subscription;
 
 import android.content.Context;
 import android.content.Intent;
@@ -20,11 +19,8 @@ import android.view.View;
 import java.util.ArrayList;
 import java.util.List;
 
-import rx.Subscription;
-
 public class ImagesActivity extends AbstractActionBarActivity {
 
-    private boolean offline;
     private List<Image> imageNames;
     private ImageType imgType = ImageType.SpoilerImages;
     private ImagesList imagesList;
@@ -60,18 +56,13 @@ public class ImagesActivity extends AbstractActionBarActivity {
         if (CollectionUtils.isEmpty(imageNames)) {
             showToast(res.getString(R.string.warn_load_images));
             finish();
-            return;
         }
-
-        offline = DataStore.isOffline(geocode, null) && (imgType == ImageType.SpoilerImages
-                || Settings.isStoreLogImages());
-
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        subscription = imagesList.loadImages(findViewById(R.id.spoiler_list), imageNames, offline);
+        subscription = imagesList.loadImages(findViewById(R.id.spoiler_list), imageNames);
     }
 
     @Override
