@@ -361,6 +361,7 @@ public final class Network {
      * @param response a HTTP response
      * @return the body if the response comes from a successful HTTP request, {@code null} otherwise
      */
+    @Nullable
     public static String getResponseData(final Response response) {
         return getResponseData(response, true);
     }
