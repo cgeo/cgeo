@@ -102,13 +102,13 @@ public class HtmlImage implements Html.ImageGetter {
      * <ul>
      * <li>If onlySave is true, {@link #getDrawable(String)} will return <tt>null</tt> immediately and will queue the
      * image retrieval and saving in the loading subject. Downloads will start in parallel when the blocking
-     * {@link #waitForEndCompletable(cgeo.geocaching.utils.CancellableHandler)} method is called, and they can be
+     * {@link #waitForEndCompletable(CancellableHandler)} method is called, and they can be
      * cancelled through the given handler.</li>
      * <li>If <tt>onlySave</tt> is <tt>false</tt> and the instance is called through {@link #fetchDrawable(String)},
      * then an observable for the given URL will be returned. This observable will emit the local copy of the image if
      * it is present regardless of its freshness, then if needed an updated fresher copy after retrieving it from the
      * network.</li>
-     * <li>If <tt>onlySave</tt> is <tt>false</tt> and the instance is used as an {@link android.text.Html.ImageGetter},
+     * <li>If <tt>onlySave</tt> is <tt>false</tt> and the instance is used as an {@link Html.ImageGetter},
      * only the final version of the image will be returned, unless a view has been provided. If it has, then a dummy
      * drawable is returned and is updated when the image is available, possibly several times if we had a stale copy of
      * the image and then got a new one from the network.</li>
