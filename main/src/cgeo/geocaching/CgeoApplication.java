@@ -43,10 +43,8 @@ public class CgeoApplication extends Application {
             if (!OOMDumpingUncaughtExceptionHandler.activateHandler()) {
                 Log.e("OOM dumping handler not activated (either a problem occured or it was already active)");
             }
-        } else {
-            if (!OOMDumpingUncaughtExceptionHandler.resetToDefault()) {
-                Log.e("OOM dumping handler not resetted (either a problem occured or it was not active)");
-            }
+        } else if (!OOMDumpingUncaughtExceptionHandler.resetToDefault()) {
+            Log.e("OOM dumping handler not resetted (either a problem occured or it was not active)");
         }
     }
 

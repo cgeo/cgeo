@@ -2134,15 +2134,13 @@ public class DataStore {
                         compiledStmnt = PreparedStatement.COUNT_TYPE_ALL_LIST.getStatement();
                         compiledStmnt.bindString(1, cacheType.id);
                     }
+                } else if (cacheType == CacheType.ALL) {
+                    compiledStmnt = PreparedStatement.COUNT_ALL_TYPES_LIST.getStatement();
+                    compiledStmnt.bindLong(1, list);
                 } else {
-                    if (cacheType == CacheType.ALL) {
-                        compiledStmnt = PreparedStatement.COUNT_ALL_TYPES_LIST.getStatement();
-                        compiledStmnt.bindLong(1, list);
-                    } else {
-                        compiledStmnt = PreparedStatement.COUNT_TYPE_LIST.getStatement();
-                        compiledStmnt.bindString(1, cacheType.id);
-                        compiledStmnt.bindLong(1, list);
-                    }
+                    compiledStmnt = PreparedStatement.COUNT_TYPE_LIST.getStatement();
+                    compiledStmnt.bindString(1, cacheType.id);
+                    compiledStmnt.bindLong(1, list);
                 }
 
                 return (int) compiledStmnt.simpleQueryForLong();
