@@ -2,10 +2,16 @@ package cgeo.geocaching.ui;
 
 import butterknife.ButterKnife;
 
+import cgeo.geocaching.CacheDetailActivity;
 import cgeo.geocaching.R;
+import cgeo.geocaching.apps.navi.NavigationAppFactory;
+import cgeo.geocaching.enumerations.WaypointType;
+import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.Image;
+import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.storage.LocalStorage;
+import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.io.IOUtils;
@@ -35,9 +41,19 @@ import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.drew.imaging.ImageMetadataReader;
+import com.drew.lang.GeoLocation;
+import com.drew.metadata.Directory;
+import com.drew.metadata.Metadata;
+import com.drew.metadata.Tag;
+import com.drew.metadata.exif.GpsDirectory;
+
+import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -120,7 +136,7 @@ public class ImagesList {
                 descView.setVisibility(View.VISIBLE);
             }
 
-            final ImageView imageView = (ImageView) inflater.inflate(R.layout.image_item, rowView, false);
+            final RelativeLayout imageView = (RelativeLayout) inflater.inflate(R.layout.image_item, rowView, false);
             assert imageView != null;
             subscriptions.add(AppObservable.bindActivity(activity, imgGetter.fetchDrawable(img.getUrl())).subscribe(new Action1<BitmapDrawable>() {
                 @Override
@@ -135,7 +151,8 @@ public class ImagesList {
         return subscriptions;
     }
 
-    private void display(final ImageView imageView, final BitmapDrawable image, final Image img, final LinearLayout view) {
+    private void display(final RelativeLayout imageViewLayout, final BitmapDrawable image, final Image img, final LinearLayout view) {
+        final ImageView imageView = (ImageView)imageViewLayout.findViewById(R.id.map_image);
         if (image != null) {
             bitmaps.add(image.getBitmap());
 
@@ -152,14 +169,57 @@ public class ImagesList {
             activity.registerForContextMenu(imageView);
             imageView.setImageDrawable(image);
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            imageView.setLayoutParams(new LinearLayout.LayoutParams(bounds.width(), bounds.height()));
+            imageView.setLayoutParams(new RelativeLayout.LayoutParams(bounds.width(), bounds.height()));
 
             view.findViewById(R.id.progress_bar).setVisibility(View.GONE);
 
             imageView.setId(image.hashCode());
+            addGeoOverlay(imageViewLayout, img);
             images.put(imageView.getId(), img);
 
             view.invalidate();
+        }
+    }
+
+    private void addGeoOverlay(final RelativeLayout imageViewLayout, final Image img) {
+        try {
+            final File file = LocalStorage.getStorageFile(geocode, img.getUrl(), true, false);
+            final Metadata metadata = ImageMetadataReader.readMetadata(file);
+            final Collection<GpsDirectory> gpsDirectories = metadata.getDirectoriesOfType(GpsDirectory.class);
+            if (gpsDirectories == null) {
+                return;
+            }
+
+            for (final GpsDirectory gpsDirectory : gpsDirectories) {
+                // Try to read out the location, making sure it's non-zero
+                final GeoLocation geoLocation = gpsDirectory.getGeoLocation();
+                if (geoLocation != null && !geoLocation.isZero()) {
+                    final ImageView geoOverlay = (ImageView) imageViewLayout.findViewById(R.id.geo_overlay);
+                    geoOverlay.setVisibility(View.VISIBLE);
+                    geoOverlay.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(final View wpNavView) {
+                            final Geopoint gpt = new Geopoint(geoLocation.getLatitude(), geoLocation.getLongitude());
+                            wpNavView.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(final View v) {
+                                    NavigationAppFactory.startDefaultNavigationApplication(1, activity, gpt);
+                                }
+                            });
+                            wpNavView.setOnLongClickListener(new View.OnLongClickListener() {
+                                @Override
+                                public boolean onLongClick(final View v) {
+                                    NavigationAppFactory.startDefaultNavigationApplication(2, activity, gpt);
+                                    return true;
+                                }
+                            });
+                        }
+                    });
+                    break; // add only the first found geoLocation
+                }
+            }
+        } catch (final Exception e) {
+            Log.e("ImagesList.addGeoOverlay", e);
         }
     }
 
