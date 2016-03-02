@@ -122,7 +122,7 @@ public abstract class AbstractLocusApp extends AbstractApp {
      *            whether to give waypoints to Locus or not
      * @param withCacheDetails
      *            whether to give cache details (description, hint) to Locus or not
-     *            should be false for all if more then 200 Caches are transferred
+     *            should be false for all if more than 200 Caches are transferred
      * @return null, when the {@code Point} could not be constructed
      */
     @Nullable
