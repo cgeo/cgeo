@@ -57,6 +57,7 @@ public final class LocalStorage {
      *
      * @return the root of the cache directory
      */
+    @NonNull
     public static File getStorage() {
         return getStorageSpecific(false);
     }
@@ -66,24 +67,29 @@ public final class LocalStorage {
      *
      * @return the root of the cache directory
      */
+    @NonNull
     public static File getStorageSec() {
         return getStorageSpecific(true);
     }
 
+    @NonNull
     private static File getStorageSpecific(final boolean secondary) {
         return EnvironmentUtils.isExternalStorageAvailable() ^ secondary ?
                 getExternalStorageBase() :
                 new File(getInternalStorageBase(), CACHE_DIRNAME);
     }
 
+    @NonNull
     public static File getExternalDbDirectory() {
         return getExternalStorageBase();
     }
 
+    @NonNull
     public static File getInternalDbDirectory() {
         return new File(getInternalStorageBase(), "databases");
     }
 
+    @NonNull
     private static File getExternalStorageBase() {
         return new File(Environment.getExternalStorageDirectory(), CACHE_DIRNAME);
     }
@@ -103,7 +109,8 @@ public final class LocalStorage {
      *            the relative or absolute URL
      * @return the file extension, including the leading dot, or the empty string if none could be determined
      */
-    static String getExtension(final String url) {
+    @NonNull
+    static String getExtension(@NonNull final String url) {
         final String urlExt;
         if (url.startsWith("data:")) {
             // "data:image/png;base64,i53…" -> ".png"
@@ -123,6 +130,7 @@ public final class LocalStorage {
      *            the geocode
      * @return the cache directory
      */
+    @NonNull
     public static File getStorageDir(@NonNull final String geocode) {
         return storageDir(getStorage(), geocode);
     }
@@ -135,10 +143,12 @@ public final class LocalStorage {
      *            the geocode
      * @return the cache directory
      */
+    @NonNull
     private static File getStorageSecDir(@NonNull final String geocode) {
         return storageDir(getStorageSec(), geocode);
     }
 
+    @NonNull
     private static File storageDir(final File base, @NonNull final String geocode) {
         return new File(base, geocode);
     }
@@ -156,7 +166,8 @@ public final class LocalStorage {
      *            true if an url was given, false if a file name was given
      * @return the file
      */
-    public static File getStorageFile(@NonNull final String geocode, final String fileNameOrUrl, final boolean isUrl, final boolean createDirs) {
+    @NonNull
+    public static File getStorageFile(@NonNull final String geocode, @NonNull final String fileNameOrUrl, final boolean isUrl, final boolean createDirs) {
         return buildFile(getStorageDir(geocode), fileNameOrUrl, isUrl, createDirs);
     }
 
@@ -173,11 +184,13 @@ public final class LocalStorage {
      *            true if an url was given, false if a file name was given
      * @return the file
      */
-    public static File getStorageSecFile(final String geocode, final String fileNameOrUrl, final boolean isUrl) {
+    @NonNull
+    public static File getStorageSecFile(@NonNull final String geocode, @NonNull final String fileNameOrUrl, final boolean isUrl) {
         return buildFile(getStorageSecDir(geocode), fileNameOrUrl, isUrl, false);
     }
 
-    private static File buildFile(final File base, final String fileName, final boolean isUrl, final boolean createDirs) {
+    @NonNull
+    private static File buildFile(final File base, @NonNull final String fileName, final boolean isUrl, final boolean createDirs) {
         if (createDirs) {
             FileUtils.mkdirs(base);
         }
@@ -193,7 +206,7 @@ public final class LocalStorage {
      *            the target file, which will be created if necessary
      * @return true if the operation was successful, false otherwise, in which case the file will not exist
      */
-    public static boolean saveEntityToFile(final Response response, final File targetFile) {
+    public static boolean saveEntityToFile(@NonNull final Response response, @NonNull final File targetFile) {
         try {
             final boolean saved = saveToFile(response.body().byteStream(), targetFile);
             if (saved) {
@@ -208,7 +221,7 @@ public final class LocalStorage {
         return false;
     }
 
-    private static void saveHeader(final String name, final Response response, final File baseFile) {
+    private static void saveHeader(final String name, @NonNull final Response response, @NonNull final File baseFile) {
         final String header = response.header(name);
         final File file = filenameForHeader(baseFile, name);
         if (header == null) {
@@ -224,7 +237,8 @@ public final class LocalStorage {
         }
     }
 
-    private static File filenameForHeader(final File baseFile, final String name) {
+    @NonNull
+    private static File filenameForHeader(@NonNull final File baseFile, final String name) {
         return new File(baseFile.getAbsolutePath() + "-" + name);
     }
 
@@ -238,7 +252,7 @@ public final class LocalStorage {
      * @return the cached value, or <tt>null</tt> if none has been cached
      */
     @Nullable
-    public static String getSavedHeader(final File baseFile, final String name) {
+    public static String getSavedHeader(@NonNull final File baseFile, final String name) {
         try {
             final File file = filenameForHeader(baseFile, name);
             final Reader reader = new InputStreamReader(new FileInputStream(file), CharEncoding.UTF_8);
@@ -270,7 +284,7 @@ public final class LocalStorage {
      *            the target file, which will be created if necessary
      * @return true if the operation was successful, false otherwise
      */
-    public static boolean saveToFile(final InputStream inputStream, final File targetFile) {
+    public static boolean saveToFile(@Nullable final InputStream inputStream, @NonNull final File targetFile) {
         if (inputStream == null) {
             return false;
         }
@@ -306,7 +320,7 @@ public final class LocalStorage {
      *            the target file
      * @return true if the copy happened without error, false otherwise
      */
-    public static boolean copy(final File source, final File destination) {
+    public static boolean copy(@NonNull final File source, @NonNull final File destination) {
         FileUtils.mkdirs(destination.getParentFile());
 
         InputStream input = null;
@@ -335,7 +349,7 @@ public final class LocalStorage {
         return copyDone;
     }
 
-    public static boolean copy(final InputStream input, final OutputStream output) {
+    public static boolean copy(@NonNull final InputStream input, @NonNull final OutputStream output) {
         try {
             int length;
             final byte[] buffer = new byte[4096];
@@ -369,7 +383,7 @@ public final class LocalStorage {
      * @param prefix
      *            The filename prefix
      */
-    public static void deleteFilesWithPrefix(final String geocode, final String prefix) {
+    public static void deleteFilesWithPrefix(@NonNull final String geocode, @NonNull final String prefix) {
         final File[] filesToDelete = getFilesWithPrefix(geocode, prefix);
         if (filesToDelete == null) {
             return;
@@ -395,10 +409,10 @@ public final class LocalStorage {
      *            The prefix of the files
      * @return File[] the array of files starting with filenamePrefix in geocode directory
      */
-    public static File[] getFilesWithPrefix(final String geocode, final String filenamePrefix) {
+    public static File[] getFilesWithPrefix(@NonNull final String geocode, @NonNull final String filenamePrefix) {
         final FilenameFilter filter = new FilenameFilter() {
             @Override
-            public boolean accept(final File dir, final String filename) {
+            public boolean accept(final File dir, @NonNull final String filename) {
                 return filename.startsWith(filenamePrefix);
             }
         };
@@ -409,6 +423,7 @@ public final class LocalStorage {
      * Get all storages available on the device.
      * Will include paths like /mnt/sdcard /mnt/usbdisk /mnt/ext_card /mnt/sdcard/ext_card
      */
+    @NonNull
     public static List<File> getStorages() {
 
         final String extStorage = Environment.getExternalStorageDirectory().getAbsolutePath();
