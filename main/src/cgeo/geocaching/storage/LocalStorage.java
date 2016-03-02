@@ -196,8 +196,10 @@ public final class LocalStorage {
     public static boolean saveEntityToFile(final Response response, final File targetFile) {
         try {
             final boolean saved = saveToFile(response.body().byteStream(), targetFile);
-            saveHeader(HEADER_ETAG, saved ? response : null, targetFile);
-            saveHeader(HEADER_LAST_MODIFIED, saved ? response : null, targetFile);
+            if (saved) {
+                saveHeader(HEADER_ETAG, response, targetFile);
+                saveHeader(HEADER_LAST_MODIFIED, response, targetFile);
+            }
             return saved;
         } catch (final Exception e) {
             Log.e("LocalStorage.saveEntityToFile", e);
