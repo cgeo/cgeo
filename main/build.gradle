@@ -39,6 +39,9 @@ android {
 
         // by convention, the folder name "main" is used for the APK file name. we want cgeo instead
         archivesBaseName = "cgeo"
+
+        // this is necessary to move .google_measurement_service into a app-specific namespace (see https://github.com/kotmyrevich/analytics-issues/issues/784)
+        applicationId = "cgeo.geocaching"
     }
 
     // signing is handled via private.properties
