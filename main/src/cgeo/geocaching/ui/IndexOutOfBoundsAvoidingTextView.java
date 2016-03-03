@@ -58,16 +58,18 @@ public class IndexOutOfBoundsAvoidingTextView extends TextView {
 		}
 	}
 
+	// https://code.google.com/p/android/issues/detail?id=137509
 	@Override
 	protected void onSelectionChanged(final int selStart, final int selEnd) {
-		if (selStart == -1 || selEnd == -1) {
-			// @hack : https://code.google.com/p/android/issues/detail?id=137509
+		try{
+			super.onSelectionChanged(selStart, selEnd);
+		} catch (final IndexOutOfBoundsException ignored) {
 			final CharSequence text = getText();
 			if (text instanceof Spannable) {
 				Selection.setSelection((Spannable) text, 0, 0);
+			} else {
+				super.onSelectionChanged(0, 0);
 			}
-		} else {
-			super.onSelectionChanged(selStart, selEnd);
 		}
 	}
 
