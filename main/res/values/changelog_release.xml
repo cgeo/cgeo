@@ -26,6 +26,7 @@
     · Fix: List of PQ also shown if none of them is downloadable\n
     · Fix: Caches with final waypoints predefined (e.g. challenges) will have final marker on map\n
     · Fix: Correct error message if basic member tries to open PM-only cache\n
+    · Fix: Nearby result can not be sorted by \"Hidden date\"\n
     \n
     \n
 </string>
