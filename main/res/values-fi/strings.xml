@@ -964,6 +964,7 @@
   <string name="trackable_not_activated">Reissaaja ei ole aktivoitu</string>
   <string name="trackable_travelbug">Matkalainen</string>
   <string name="trackable_geokrety">GeoKrety</string>
+  <string name="trackable_geolutins">GeoLutins</string>
   <string name="geokret_type_traditional">Perinteinen</string>
   <string name="geokret_type_book_or_media">Kirja tai sähköinen media</string>
   <string name="geokret_type_human">Ihminen</string>

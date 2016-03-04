@@ -498,7 +498,7 @@
   <string name="init_offline">Statische kaarten</string>
   <string name="init_summary_offline">Kaarten opslaan voor gebruik zonder verbinding</string>
   <string name="init_offline_wp">Statische kaarten (WP)</string>
-  <string name="init_summary_offline_wp">Statische kaarten van waipoints opslaan voor gebruik zonder verbinding</string>
+  <string name="init_summary_offline_wp">Statische kaarten van waypoints opslaan voor gebruik zonder verbinding</string>
   <string name="init_save_log_img">Afbeeldingen opslaan</string>
   <string name="init_summary_save_log_img">Sla afbeeldingen van logs op</string>
   <string name="init_units">Gebruik imperiale stelsel voor afstanden</string>
