@@ -224,6 +224,7 @@
   <string name="warn_rendertheme_missing">Korttema ikke fundet.</string>
   <string name="warn_pocket_query_select">Ingen Pocket Query valgt.</string>
   <string name="warn_no_pocket_query_found">Det blev ikke fundet nogen Pocket Query online.</string>
+  <string name="err_read_pocket_query_list">Fejl ved læsning af Pocket Query-liste.</string>
   <string name="info_log_posted">Logbeskeden blev sendt.</string>
   <string name="info_log_saved">Logbeskeden blev gemt.</string>
   <string name="info_log_post_failed">Afsendelse af logbesked fejlede.</string>
@@ -654,6 +655,11 @@
     <item quantity="other">%1$d cacher</item>
   </plurals>
   <!-- days remaining -->
+  <plurals name="days_remaining">
+    <item quantity="one">en dag tilbage</item>
+    <item quantity="other">%1$d dage tilbage</item>
+  </plurals>
+  <string name="last_day_available">tilgængelig for sidste dag</string>
   <string name="cache_offline">Offline</string>
   <string name="cache_offline_refresh">Genindlæs</string>
   <string name="cache_offline_drop">Fjern</string>
@@ -690,6 +696,7 @@
   <string name="cache_personal_note_upload">Upload</string>
   <string name="cache_personal_note_uploading">Upload personlig note</string>
   <string name="cache_personal_note_upload_done">Personlig note uploadet</string>
+  <string name="cache_personal_note_upload_error">Fejl ved upload af personlig note</string>
   <string name="cache_personal_note_upload_cancelled">Upload af personlig note blev afbrudt</string>
   <string name="cache_description">Beskrivelse</string>
   <string name="cache_description_long">Lang beskrivelse</string>
@@ -781,6 +788,7 @@
   <string name="cache_status_found">Fundet</string>
   <string name="cache_not_status_found">Ikke fundet</string>
   <string name="cache_never_found">Aldrig fundet</string>
+  <string name="cache_found_last_30_days">Fundet indenfor de sidste 30 dage</string>
   <string name="cache_status_archived">Arkiveret</string>
   <string name="cache_status_disabled">Deaktiveret</string>
   <string name="cache_status_premium">Kun premium-medlemmer</string>
@@ -983,6 +991,7 @@
   <string name="trackable_not_activated">Trackable ikke aktiveret</string>
   <string name="trackable_travelbug">Travelbug</string>
   <string name="trackable_geokrety">GeoKrety</string>
+  <string name="trackable_geolutins">GeoLutiner</string>
   <string name="geokret_type_traditional">Traditionel</string>
   <string name="geokret_type_book_or_media">Bog eller elektronisk medium</string>
   <string name="geokret_type_human">Menneske</string>
@@ -1396,4 +1405,8 @@
   <string name="pq_as_cache_list">Vis cacheliste</string>
   <string name="pq_download_and_import">Importér Pocket Query</string>
   <string name="pq_my_finds">Mine fund</string>
+  <string name="caches_refresh_all_warning">Denne handling kan medføre en stor mængde netværkstrafik. Er du sikker på at du vil genindlæse alle cacher?</string>
+  <string name="invitation_action">Invitér venner</string>
+  <string name="invitation_title">Invitér venner til at bruge c:geo</string>
+  <string name="invitation_message">Prøv c:geo-appen til geocaching</string>
 </resources>
