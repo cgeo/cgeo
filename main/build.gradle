@@ -490,6 +490,7 @@ task downloadLibs(type:Download) {
             mavenLib('commons-io','commons-io','2.4'),
             mavenLib('com/jakewharton','butterknife','7.0.1'),
             mavenLib('org/jsoup','jsoup','1.8.3'),
+			mavenLib('com/drewnoakes','metadata-extractor','2.8.1'),
             mavenLib('com/squareup/okhttp3', 'okhttp', '3.2.0'),
             mavenLib('com/squareup/okio','okio','1.6.0') // for whatever reason Eclipse wants to resolve one reference to okio.ByteString
     ])
