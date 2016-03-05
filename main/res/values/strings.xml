@@ -163,6 +163,7 @@
     <string name="err_license">You have not agreed to the Geocaching.com license agreement, so c:geo can\'t load cache coordinates.</string>
     <string name="err_unvalidated_account">You must validate your account on the Geocaching.com website first.</string>
     <string name="err_unpublished">The requested cache is unpublished.</string>
+    <string name="err_cache_not_found">The requested cache could not be found.</string>
     <string name="err_premium_only">This Cache is only available to Geocaching.com Premium Members.</string>
     <string name="err_detail_open">c:geo can\'t open geocache details.</string>
     <string name="err_detail_cache">c:geo can\'t display the geocache you want. Is it really a geocache?</string>

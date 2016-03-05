@@ -21,6 +21,7 @@ public enum StatusCode {
     UNAPPROVED_LICENSE(R.string.err_license),
     UNVALIDATED_ACCOUNT(R.string.err_unvalidated_account),
     UNPUBLISHED_CACHE(R.string.err_unpublished),
+    CACHE_NOT_FOUND(R.string.err_cache_not_found),
     PREMIUM_ONLY(R.string.err_premium_only),
     MAINTENANCE(R.string.err_maintenance),
     LOG_POST_ERROR(R.string.err_log_post_failed),

@@ -23,6 +23,7 @@ import cgeo.geocaching.enumerations.CacheAttribute;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.RemoveFlag;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
+import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.export.FieldnoteExport;
 import cgeo.geocaching.export.GpxExport;
@@ -709,7 +710,11 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 }
 
                 if (activity.search.getError() != null) {
-                    activity.showToast(activity.getResources().getString(R.string.err_dwld_details_failed) + " " + activity.search.getError().getErrorString(activity.getResources()) + ".");
+                    // Cache not found is not a download error
+                    final StatusCode error = activity.search.getError();
+                    final Resources res = activity.getResources();
+                    final String toastPrefix = error != StatusCode.CACHE_NOT_FOUND ? res.getString(R.string.err_dwld_details_failed) + " " : "";
+                    activity.showToast(toastPrefix + error.getErrorString(res));
                     dismissProgress();
                     finishActivity();
                     return;
