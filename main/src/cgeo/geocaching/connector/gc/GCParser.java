@@ -427,6 +427,10 @@ public final class GCParser {
             return UNKNOWN_PARSE_ERROR;
         }
 
+        if (StringUtils.contains(pageIn, GCConstants.STRING_404_FILE_NOT_FOUND)) {
+            return ImmutablePair.of(StatusCode.CACHE_NOT_FOUND, null);
+        }
+
         if (pageIn.contains(GCConstants.STRING_UNPUBLISHED_OTHER) || pageIn.contains(GCConstants.STRING_UNPUBLISHED_FROM_SEARCH)) {
             return ImmutablePair.of(StatusCode.UNPUBLISHED_CACHE, null);
         }
