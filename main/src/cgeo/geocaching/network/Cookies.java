@@ -1,14 +1,15 @@
 package cgeo.geocaching.network;
 
-import okhttp3.Cookie;
-import okhttp3.Cookie.Builder;
-import okhttp3.CookieJar;
-import okhttp3.HttpUrl;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+
+import okhttp3.Cookie;
+import okhttp3.Cookie.Builder;
+import okhttp3.CookieJar;
+import okhttp3.HttpUrl;
 
 public final class Cookies {
 
@@ -57,8 +58,9 @@ public final class Cookies {
                         if (split.length == 3) {
                             try {
                                 addCookie(new Builder().name(split[0]).value(split[1]).domain(split[2]).build());
-                            } catch (final Exception ignored) {
-                           }
+                            } catch (final RuntimeException ignored) {
+                                // ignore
+                            }
                         }
                     }
                 }

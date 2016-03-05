@@ -1032,7 +1032,7 @@ public final class GCParser {
                     final String guid = uri.getQueryParameter("guid");
                     if (!downloadablePocketQueries.containsKey(guid)) {
                         final String name = link.attr("title");
-                        final PocketQuery pocketQuery = new PocketQuery(guid, name, -1, false, null, -1);
+                        final PocketQuery pocketQuery = new PocketQuery(guid, name, -1, false, 0, -1);
                         list.add(pocketQuery);
                     }
                 }
@@ -1091,10 +1091,13 @@ public final class GCParser {
             final int count = Integer.parseInt(cells.get(4).text());
 
             final MatcherWrapper matcherLastGeneration = new MatcherWrapper(GCConstants.PATTERN_PQ_LAST_GEN, cells.get(5).text());
-            Date lastGeneration = null;
+            long lastGeneration = 0;
             int daysRemaining = 0;
             if (matcherLastGeneration.find()) {
-                lastGeneration = GCLogin.parseGcCustomDate(matcherLastGeneration.group(1));
+                final Date lastGenerationDate = GCLogin.parseGcCustomDate(matcherLastGeneration.group(1));
+                if (lastGenerationDate != null) {
+                    lastGeneration = lastGenerationDate.getTime();
+                }
 
                 final String daysRemainingString = matcherLastGeneration.group(3);
                 if (daysRemainingString != null) {

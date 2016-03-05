@@ -100,7 +100,7 @@ public class ImagesList {
      */
     public Subscription loadImages(final View parentView, final Collection<Image> images) {
         // Start with a fresh subscription because of this method can be called several times if the
-        // englobing activity is stopped/restarted.
+        // enclosing activity is stopped/restarted.
         final CompositeSubscription subscriptions = new CompositeSubscription(Subscriptions.create(new Action0() {
             @Override
             public void call() {

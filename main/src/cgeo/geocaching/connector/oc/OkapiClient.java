@@ -937,6 +937,7 @@ final class OkapiClient {
             try {
                 tempData = (ObjectNode) JsonUtils.reader.readTree(response.body().string());
             } catch (final Exception e) {
+                // ignore
             }
             data = tempData;
             isSuccess = response.isSuccessful() && tempData != null;

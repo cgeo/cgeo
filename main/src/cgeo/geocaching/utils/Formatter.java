@@ -1,12 +1,12 @@
 package cgeo.geocaching.utils;
 
 import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.R;
-import cgeo.geocaching.models.PocketQuery;
-import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.WaypointType;
+import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.PocketQuery;
+import cgeo.geocaching.models.Waypoint;
 
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
@@ -256,7 +256,7 @@ public final class Formatter {
     }
 
     @NonNull
-    public static String formatPocketQueryInfo(PocketQuery pocketQuery) {
+    public static String formatPocketQueryInfo(final PocketQuery pocketQuery) {
         if (!pocketQuery.isDownloadable()) {
             return StringUtils.EMPTY;
         }
@@ -267,8 +267,9 @@ public final class Formatter {
             infos.add(CgeoApplication.getInstance().getResources().getQuantityString(R.plurals.cache_counts, caches, caches));
         }
 
-        if (pocketQuery.getLastGeneration() != null) {
-            infos.add(Formatter.formatShortDateVerbally(pocketQuery.getLastGeneration().getTime()));
+        final long lastGenerationTime = pocketQuery.getLastGenerationTime();
+        if (lastGenerationTime > 0) {
+            infos.add(Formatter.formatShortDateVerbally(lastGenerationTime));
         }
 
         final int daysRemaining = pocketQuery.getDaysRemaining();
