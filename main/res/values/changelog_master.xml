@@ -3,7 +3,7 @@
   <!-- changelog for the master branch -->
   <string name="changelog_master" translatable="false">
     <b>Next feature release:</b>\n
-    · New: New http libraries for more efficient network communication\n
+    · New: Different http libraries for more efficient network communication\n
     · New: Update of Locus API for improved interworking\n
     \n
     \n
