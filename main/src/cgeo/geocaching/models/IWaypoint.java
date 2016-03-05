@@ -9,10 +9,10 @@ public interface IWaypoint extends ILogable, ICoordinates {
      *
      * @return a non-negative id if set, -1 if unset
      */
-    public abstract int getId();
+    int getId();
 
-    public abstract WaypointType getWaypointType();
+    WaypointType getWaypointType();
 
-    public abstract String getCoordType();
+    String getCoordType();
 
 }

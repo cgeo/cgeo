@@ -2,18 +2,18 @@ package cgeo.geocaching.loaders;
 
 public interface RecaptchaReceiver {
 
-    public String getText();
+    String getText();
 
-    public void setText(String text);
+    void setText(String text);
 
-    public String getChallenge();
+    String getChallenge();
 
-    public void fetchChallenge();
+    void fetchChallenge();
 
-    public void setKey(String key);
+    void setKey(String key);
 
-    public void notifyNeed();
+    void notifyNeed();
 
-    public void waitForUser();
+    void waitForUser();
 
 }

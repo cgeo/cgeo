@@ -8,15 +8,15 @@ import android.app.Activity;
  */
 public interface MapProvider {
 
-    public boolean isSameActivity(final MapSource source1, final MapSource source2);
+    boolean isSameActivity(final MapSource source1, final MapSource source2);
 
-    public Class<? extends Activity> getMapClass();
+    Class<? extends Activity> getMapClass();
 
-    public int getMapViewId();
+    int getMapViewId();
 
-    public int getMapLayoutId();
+    int getMapLayoutId();
 
-    public MapItemFactory getMapItemFactory();
+    MapItemFactory getMapItemFactory();
 
-    public void registerMapSource(final MapSource mapSource);
+    void registerMapSource(final MapSource mapSource);
 }

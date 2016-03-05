@@ -45,7 +45,7 @@ public class AndroidBeam {
     public interface ActivitySharingInterface {
         /** Return an URL that represent the current activity for sharing or null for no sharing. */
         @Nullable
-        public String getAndroidBeamUri();
+        String getAndroidBeamUri();
     }
 
     public static void enable(final Activity activity, final ActivitySharingInterface sharingInterface) {

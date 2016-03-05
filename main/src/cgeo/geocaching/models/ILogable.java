@@ -8,11 +8,11 @@ public interface ILogable {
     /**
      * @return Geocode like GCxxxx
      */
-    public abstract String getGeocode();
+    String getGeocode();
 
     /**
      * @return Name
      */
-    public abstract String getName();
+    String getName();
 
 }

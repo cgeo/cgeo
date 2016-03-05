@@ -590,7 +590,7 @@ public class CoordinatesInputDialog extends DialogFragment {
     }
 
     public interface CoordinateUpdate {
-        public void updateCoordinates(final Geopoint gp);
+        void updateCoordinates(final Geopoint gp);
     }
 
     private class PadZerosOnFocusLostListener implements OnFocusChangeListener {

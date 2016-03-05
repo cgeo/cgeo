@@ -71,29 +71,29 @@ public abstract class AbstractViewPagerActivity<Page extends Enum<Page>> extends
          * Returns a validated view.
          *
          */
-        public View getDispatchedView(final ViewGroup parentView);
+        View getDispatchedView(final ViewGroup parentView);
 
         /**
          * Returns a (maybe cached) view.
          *
          */
-        public View getView(final ViewGroup parentView);
+        View getView(final ViewGroup parentView);
 
         /**
          * Handles changed data-sets.
          */
-        public void notifyDataSetChanged();
+        void notifyDataSetChanged();
 
         /**
          * Gets state of the view
          */
-        public @Nullable
+        @Nullable
         Bundle getViewState();
 
         /**
          * Set the state of the view
          */
-        public void setViewState(@NonNull Bundle state);
+        void setViewState(@NonNull Bundle state);
     }
 
     /**
@@ -101,7 +101,7 @@ public abstract class AbstractViewPagerActivity<Page extends Enum<Page>> extends
      *
      */
     protected interface OnPageSelectedListener {
-        public void onPageSelected(int position);
+        void onPageSelected(int position);
     }
 
     /**

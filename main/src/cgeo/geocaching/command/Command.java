@@ -9,6 +9,6 @@ package cgeo.geocaching.command;
  */
 interface Command {
 
-    public void execute();
+    void execute();
 
 }

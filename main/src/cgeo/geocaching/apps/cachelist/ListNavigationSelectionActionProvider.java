@@ -14,7 +14,7 @@ import java.util.List;
 
 public class ListNavigationSelectionActionProvider extends AbstractMenuActionProvider {
 
-    public static interface Callback {
+    public interface Callback {
         void onListNavigationSelected(final CacheListApp app);
     }
 

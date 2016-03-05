@@ -21,12 +21,12 @@ interface Export {
      * @param activity
      *            optional: Some exporters might have an UI which requires an {@link Activity}
      */
-    public void export(@NonNull List<Geocache> caches, @Nullable Activity activity);
+    void export(@NonNull List<Geocache> caches, @Nullable Activity activity);
 
     /**
      * Get the localized name of this exporter.
      *
      * @return localized name
      */
-    public String getName();
+    String getName();
 }

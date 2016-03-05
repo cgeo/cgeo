@@ -36,5 +36,5 @@ public interface MapActivityImpl {
     /**
      * called from the pseudo actionbar layout
      */
-    public abstract void navigateUp(View view);
+    void navigateUp(View view);
 }

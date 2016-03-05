@@ -9,5 +9,5 @@ import org.eclipse.jdt.annotation.NonNull;
 
 public interface ISearchByViewPort extends IConnector {
     @NonNull
-    public SearchResult searchByViewport(final @NonNull Viewport viewport, @NonNull final MapTokens tokens);
+    SearchResult searchByViewport(final @NonNull Viewport viewport, @NonNull final MapTokens tokens);
 }

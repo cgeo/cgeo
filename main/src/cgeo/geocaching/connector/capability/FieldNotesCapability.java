@@ -11,5 +11,5 @@ import java.io.File;
  *
  */
 public interface FieldNotesCapability extends IConnector {
-    public boolean uploadFieldNotes(@NonNull final File exportFile);
+    boolean uploadFieldNotes(@NonNull final File exportFile);
 }

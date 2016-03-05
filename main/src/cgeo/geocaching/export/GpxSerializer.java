@@ -66,7 +66,7 @@ public final class GpxSerializer {
     private ProgressListener progressListener;
     private final XmlSerializer gpx = new KXmlSerializer();
 
-    protected static interface ProgressListener {
+    protected interface ProgressListener {
 
         void publishProgress(int countExported);
 
