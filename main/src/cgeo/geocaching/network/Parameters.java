@@ -19,6 +19,7 @@ import java.util.Comparator;
 public class Parameters extends ArrayList<ImmutablePair<String, String>> {
 
     private static final long serialVersionUID = 1L;
+    private boolean percentEncoding = false;
 
     /**
      * @param keyValues
@@ -37,6 +38,13 @@ public class Parameters extends ArrayList<ImmutablePair<String, String>> {
             return comparedKeys != 0 ? comparedKeys : nv1.right.compareTo(nv2.right);
         }
     };
+
+    /**
+     * Percent encode following http://tools.ietf.org/html/rfc5849#section-3.6
+     */
+    static String percentEncode(@NonNull final String url) {
+        return StringUtils.replace(Network.rfc3986URLEncode(url), "*", "%2A");
+    }
 
     /**
      * Add new key/value pairs to the current parameters.
@@ -66,13 +74,32 @@ public class Parameters extends ArrayList<ImmutablePair<String, String>> {
         Collections.sort(this, comparator);
     }
 
+    /**
+     * Some sites require the use of percent encoding (see {@link #percentEncode(String)}) and do not
+     * accept other encodings during their authorization and signing processes. This forces those
+     * parameters to use percent encoding instead of the regular encoding.
+     */
+    public void usePercentEncoding() {
+        percentEncoding = true;
+    }
+
     @Override
     public String toString() {
-        final Builder builder = HttpUrl.parse("http://dummy.cgeo.org/").newBuilder();
-        for (final ImmutablePair<String, String> nameValuePair : this) {
-            builder.addQueryParameter(nameValuePair.left, nameValuePair.right);
+        if (percentEncoding) {
+            if (isEmpty())
+                return "";
+            final StringBuilder builder = new StringBuilder();
+            for (final ImmutablePair<String, String> nameValuePair : this) {
+                builder.append('&').append(percentEncode(nameValuePair.left)).append('=').append(percentEncode(nameValuePair.right));
+            }
+            return builder.substring(1);
+        } else {
+            final Builder builder = HttpUrl.parse("http://dummy.cgeo.org/").newBuilder();
+            for (final ImmutablePair<String, String> nameValuePair : this) {
+                builder.addQueryParameter(nameValuePair.left, nameValuePair.right);
+            }
+            return StringUtils.defaultString(builder.build().encodedQuery());
         }
-        return StringUtils.defaultString(builder.build().encodedQuery());
     }
 
     /**

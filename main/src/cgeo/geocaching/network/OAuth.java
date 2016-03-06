@@ -3,8 +3,6 @@ package cgeo.geocaching.network;
 import cgeo.geocaching.utils.CryptUtils;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.eclipse.jdt.annotation.NonNull;
 
 public class OAuth {
     private OAuth() {
@@ -28,23 +26,16 @@ public class OAuth {
                 "oauth_version", "1.0");
         params.sort();
 
-        final StringBuilder paramsEncodedBuilder = new StringBuilder();
-        for (final ImmutablePair<String, String> nameValue : params) {
-            paramsEncodedBuilder.append('&').append(percentEncode(nameValue.left))
-                    .append('=').append(percentEncode(nameValue.right));
-        }
-        final String paramsEncoded = paramsEncodedBuilder.substring(1);
+        // Twitter requires that the signature is generated from the raw data that is received in the query string.
+        // Opencaching sites require that the signature is generated from the percent-encoded versions of the parameters.
+        // As a consequence, we will always use percent-encoding for parameters during the OAuth signing process, which
+        // satisfies both constraints.
+        params.usePercentEncoding();
 
-        final String requestPacked = method + '&' + percentEncode((https ? "https" : "http") + "://" + host + path) + '&' +
-                percentEncode(paramsEncoded);
-        final String keysPacked = percentEncode(consumerSecret) + '&' + percentEncode(StringUtils.defaultString(tokens.getTokenSecret())); // both even if empty some of them!
+        final String requestPacked = method + '&' + Parameters.percentEncode((https ? "https" : "http") + "://" + host + path) + '&' +
+                Parameters.percentEncode(params.toString());
+        final String keysPacked = Parameters.percentEncode(consumerSecret) + '&' + Parameters.percentEncode(StringUtils.defaultString(tokens.getTokenSecret())); // both even if empty some of them!
         params.put("oauth_signature", CryptUtils.base64Encode(CryptUtils.hashHmac(requestPacked, keysPacked)));
     }
 
-    /**
-     * Percent encode following http://tools.ietf.org/html/rfc5849#section-3.6
-     */
-    static String percentEncode(@NonNull final String url) {
-        return StringUtils.replace(Network.rfc3986URLEncode(url), "*", "%2A");
-    }
 }
