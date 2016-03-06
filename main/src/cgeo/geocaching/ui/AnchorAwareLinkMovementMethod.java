@@ -32,7 +32,7 @@ public class AnchorAwareLinkMovementMethod extends LinkMovementMethod {
     }
 
     @Override
-    public boolean onTouchEvent(final TextView widget, final Spannable buffer, final MotionEvent event) {
+    public boolean onTouchEvent(@NonNull final TextView widget, @NonNull final Spannable buffer, @NonNull final MotionEvent event) {
         try {
             final int action = event.getAction();
 
