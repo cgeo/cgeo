@@ -58,19 +58,6 @@ public class IndexOutOfBoundsAvoidingTextView extends TextView {
         }
     }
 
-    @Override
-    protected void onSelectionChanged(final int selStart, final int selEnd) {
-        if (selStart == -1 || selEnd == -1) {
-            // @hack : https://code.google.com/p/android/issues/detail?id=137509
-            final CharSequence text = getText();
-            if (text instanceof Spannable) {
-                Selection.setSelection((Spannable) text, 0, 0);
-            }
-        } else {
-            super.onSelectionChanged(selStart, selEnd);
-        }
-    }
-
     // https://code.google.com/p/android/issues/detail?id=23381
     private boolean shouldWindowFocusWait;
     public void setWindowFocusWait(final boolean shouldWindowFocusWait) {
