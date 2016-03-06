@@ -32,7 +32,7 @@ public class OAuthTest extends TestCase {
         for (Character c : UNRESERVED) {
             final @NonNull
             String charAsString = String.valueOf(c);
-            assertEquals("wrong OAuth encoding for " + c, charAsString, OAuth.percentEncode(charAsString));
+            assertEquals("wrong OAuth encoding for " + c, charAsString, Parameters.percentEncode(charAsString));
         }
     }
 
@@ -42,7 +42,7 @@ public class OAuthTest extends TestCase {
             if (!UNRESERVED.contains(c)) {
                 final @NonNull
                 String charAsString = String.valueOf(c);
-                final String encoded = OAuth.percentEncode(charAsString);
+                final String encoded = Parameters.percentEncode(charAsString);
                 assertThat(charAsString).overridingErrorMessage("Character '" + charAsString + "' not encoded").isNotEqualTo(encoded);
                 assertThat(encoded).startsWith("%");
             }
@@ -50,6 +50,6 @@ public class OAuthTest extends TestCase {
     }
 
     public static void testAsterisk() {
-        assertThat("*".equals(OAuth.percentEncode("*"))).isFalse();
+        assertThat("*".equals(Parameters.percentEncode("*"))).isFalse();
     }
 }
