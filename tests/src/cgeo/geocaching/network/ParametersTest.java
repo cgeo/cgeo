@@ -1,12 +1,33 @@
 package cgeo.geocaching.network;
 
 import junit.framework.TestCase;
+import org.eclipse.jdt.annotation.NonNull;
 
 import java.security.InvalidParameterException;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ParametersTest extends TestCase {
+
+    static final List<Character> UNRESERVED;
+
+    static {
+        // unreserved characters: ALPHA / DIGIT / "-" / "." / "_" / "~"
+        ArrayList<Character> unreserved = new ArrayList<Character>();
+        for (int i = 65; i <= 90; i++) {
+            unreserved.add((char) i); // uppercase
+            unreserved.add((char) (i + 32)); // lowercase
+        }
+        for (int i = 0; i < 10; i++) {
+            unreserved.add(Character.forDigit(i, 10));
+        }
+        unreserved.add('-');
+        unreserved.add('.');
+        unreserved.add('_');
+        unreserved.add('~');
+        ParametersTest.UNRESERVED = unreserved;
+    }
 
     public static void testException() {
         try {
@@ -48,4 +69,35 @@ public class ParametersTest extends TestCase {
         assertThat(params.toString()).isEqualTo("name=foo%26bar&type=moving");
     }
 
+    public static void testUnreservedCharactersMustNotBeEncoded() {
+        for (Character c : UNRESERVED) {
+            final @NonNull
+            String charAsString = String.valueOf(c);
+            assertEquals("wrong OAuth encoding for " + c, charAsString, Parameters.percentEncode(charAsString));
+        }
+    }
+
+    public static void testOtherCharactersMustBeEncoded() {
+        for (int i = 32; i < 127; i++) {
+            final Character c = (char) i;
+            if (!UNRESERVED.contains(c)) {
+                final @NonNull
+                String charAsString = String.valueOf(c);
+                final String encoded = Parameters.percentEncode(charAsString);
+                assertThat(charAsString).overridingErrorMessage("Character '" + charAsString + "' not encoded").isNotEqualTo(encoded);
+                assertThat(encoded).startsWith("%");
+            }
+        }
+    }
+
+    public static void testAsterisk() {
+        assertThat("*".equals(Parameters.percentEncode("*"))).isFalse();
+    }
+
+    public static void testPercentEncoding {
+        final Parameters params = new Parameters("oauth_callback", "callback://www.cgeo.org/");
+        assertThat(params.toString()).isEqualTo("oauth_callback=callback://www.cgeo.org/");
+        params.usePercentEncoding();
+        assertThat(params.toString()).isEqualTo("oauth_callback=callback%3a%2f%2fwww.cgeo.org%2f");
+    }
 }
