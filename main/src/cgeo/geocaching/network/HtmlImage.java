@@ -13,11 +13,21 @@ import cgeo.geocaching.utils.ImageUtils.ContainerDrawable;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.RxUtils.ObservableCache;
 
+import okhttp3.Response;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import rx.Completable;
+import rx.Observable;
+import rx.Observable.OnSubscribe;
+import rx.Subscriber;
+import rx.functions.Action0;
+import rx.functions.Func0;
+import rx.functions.Func1;
+import rx.subjects.PublishSubject;
+import rx.subscriptions.CompositeSubscription;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -34,17 +44,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Map;
-
-import okhttp3.Response;
-import rx.Completable;
-import rx.Observable;
-import rx.Observable.OnSubscribe;
-import rx.Subscriber;
-import rx.functions.Action0;
-import rx.functions.Func0;
-import rx.functions.Func1;
-import rx.subjects.PublishSubject;
-import rx.subscriptions.CompositeSubscription;
 
 /**
  * All-purpose image getter that can also be used as a ImageGetter interface when displaying caches.
@@ -306,14 +305,14 @@ public class HtmlImage implements Html.ImageGetter {
         if (absoluteURL != null) {
             try {
                 final Response httpResponse = Network.getRequest(absoluteURL, null, file).toBlocking().value();
-                    if (httpResponse.isSuccessful()) {
-                        LocalStorage.saveEntityToFile(httpResponse, file);
-                    } else if (httpResponse.code() == 304) {
-                        if (!file.setLastModified(System.currentTimeMillis())) {
-                            makeFreshCopy(file);
-                        }
-                        return true;
+                if (httpResponse.isSuccessful()) {
+                    LocalStorage.saveEntityToFile(httpResponse, file);
+                } else if (httpResponse.code() == 304) {
+                    if (!file.setLastModified(System.currentTimeMillis())) {
+                        makeFreshCopy(file);
                     }
+                    return true;
+                }
             } catch (final Exception e) {
                 Log.e("HtmlImage.downloadOrRefreshCopy", e);
             }
