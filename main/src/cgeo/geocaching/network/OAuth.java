@@ -24,6 +24,12 @@ public class OAuth {
                 "oauth_timestamp", Long.toString(System.currentTimeMillis() / 1000),
                 "oauth_token", StringUtils.defaultString(tokens.getTokenPublic()),
                 "oauth_version", "1.0");
+        params.put("oauth_signature",
+                signCompletedOAuth(host, path, method, https, params, tokens.getTokenSecret(), consumerSecret));
+    }
+
+    static String signCompletedOAuth(final String host, final String path, final String method, final boolean https,
+                                     final Parameters params, final String tokenSecret, final String consumerSecret) {
         params.sort();
 
         // Twitter requires that the signature is generated from the raw data that is received in the query string.
@@ -34,8 +40,8 @@ public class OAuth {
 
         final String requestPacked = method + '&' + Parameters.percentEncode((https ? "https" : "http") + "://" + host + path) + '&' +
                 Parameters.percentEncode(params.toString());
-        final String keysPacked = Parameters.percentEncode(consumerSecret) + '&' + Parameters.percentEncode(StringUtils.defaultString(tokens.getTokenSecret())); // both even if empty some of them!
-        params.put("oauth_signature", CryptUtils.base64Encode(CryptUtils.hashHmac(requestPacked, keysPacked)));
+        final String keysPacked = Parameters.percentEncode(consumerSecret) + '&' + Parameters.percentEncode(StringUtils.defaultString(tokenSecret)); // both even if empty some of them!
+        return CryptUtils.base64Encode(CryptUtils.hashHmac(requestPacked, keysPacked));
     }
 
 }
