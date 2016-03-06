@@ -678,7 +678,9 @@
   <string name="cache_description_long">Pitkä kuvaus</string>
   <string name="cache_description_table_note">Kuvaus sisältää taulukkoja, joita saattaa joutua katselemaan %s jotta ne näkyvät oikein.</string>
   <string name="cache_watchlist_on">Tämä kätkö on seurantalistallasi.</string>
+  <string name="cache_watchlist_on_extra">Kätkö on seurantalistallasi (seuraajia: %1d).</string>
   <string name="cache_watchlist_not_on">Tämä kätkö ei ole seurantalistallasi.</string>
+  <string name="cache_watchlist_not_on_extra">Kätkö ei ole seurantalistallasi (seuraajia: %1d).</string>
   <string name="cache_watchlist_add">Lisää seurantalistalle</string>
   <string name="cache_watchlist_remove">Poista seurantalistalta</string>
   <string name="cache_favpoint_on">Tämä kätkö on yksi suosikeistasi.</string>
@@ -964,7 +966,7 @@
   <string name="trackable_not_activated">Reissaaja ei ole aktivoitu</string>
   <string name="trackable_travelbug">Matkalainen</string>
   <string name="trackable_geokrety">GeoKrety</string>
-  <string name="trackable_geolutins">GeoLutins</string>
+  <string name="trackable_geolutins">GeoLutinit</string>
   <string name="geokret_type_traditional">Perinteinen</string>
   <string name="geokret_type_book_or_media">Kirja tai sähköinen media</string>
   <string name="geokret_type_human">Ihminen</string>

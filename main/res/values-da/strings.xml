@@ -974,6 +974,7 @@
   <string name="trackable_image">Billede</string>
   <string name="trackable_code">Sporingskode</string>
   <string name="trackable_name">Navn</string>
+  <string name="trackable_brand">Mærke</string>
   <string name="trackable_type">Type</string>
   <string name="trackable_owner">Ejer</string>
   <string name="trackable_spotted">Set</string>

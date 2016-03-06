@@ -974,6 +974,7 @@
   <string name="trackable_image">Imatge</string>
   <string name="trackable_code">Codi traçable</string>
   <string name="trackable_name">Nom</string>
+  <string name="trackable_brand">Marca</string>
   <string name="trackable_type">Tipus</string>
   <string name="trackable_owner">Propietari</string>
   <string name="trackable_spotted">Contactat</string>
