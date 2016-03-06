@@ -173,7 +173,7 @@ public final class LocParser extends FileParser {
 
             fixCache(cache);
             cache.setType(CacheType.UNKNOWN); // type is not given in the LOC file
-            cache.setListId(listId);
+            cache.getLists().add(listId);
             cache.setDetailed(true);
             cache.store();
             if (progressHandler != null) {

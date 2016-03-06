@@ -46,7 +46,7 @@ public abstract class DeleteListCommand extends AbstractCommand {
         new StoredList(newListId, listName, 0);
 
         final Set<Geocache> caches = DataStore.loadCaches(geocodes, LoadFlags.LOAD_CACHE_OR_DB);
-        DataStore.moveToList(caches, newListId);
+        DataStore.addToList(caches, newListId);
     }
 
     @Override

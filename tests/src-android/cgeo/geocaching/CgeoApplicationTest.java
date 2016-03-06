@@ -36,6 +36,7 @@ import cgeo.test.Compare;
 import android.test.suitebuilder.annotation.MediumTest;
 import android.test.suitebuilder.annotation.SmallTest;
 
+import java.util.Collections;
 import java.util.GregorianCalendar;
 
 /**
@@ -116,7 +117,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
      */
     @MediumTest
     public static Geocache testSearchByGeocode(final String geocode) {
-        final SearchResult search = Geocache.searchByGeocode(geocode, null, 0, true, null);
+        final SearchResult search = Geocache.searchByGeocode(geocode, null, Collections.EMPTY_SET, true, null);
         assertThat(search).isNotNull();
         if (Settings.isGCPremiumMember() || search.getError() == null) {
             assertThat(search.getGeocodes()).containsExactly(geocode);
@@ -131,7 +132,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
      */
     @MediumTest
     public static void testSearchByGeocodeNotExisting() {
-        final SearchResult search = Geocache.searchByGeocode("GC123456", null, 0, true, null);
+        final SearchResult search = Geocache.searchByGeocode("GC123456", null, Collections.EMPTY_SET, true, null);
         assertThat(search).isNotNull();
         assertThat(search.getError()).isEqualTo(StatusCode.CACHE_NOT_FOUND);
     }
@@ -168,7 +169,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
 
                 deleteCacheFromDBAndLogout(cache.getGeocode());
 
-                SearchResult search = Geocache.searchByGeocode(cache.getGeocode(), null, StoredList.TEMPORARY_LIST.id, true, null);
+                SearchResult search = Geocache.searchByGeocode(cache.getGeocode(), null, Collections.EMPTY_SET, true, null);
                 assertThat(search).isNotNull();
                 assertThat(search.getGeocodes()).containsExactly(cache.getGeocode());
                 final Geocache searchedCache = search.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
@@ -182,7 +183,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
 
                 deleteCacheFromDBAndLogout(cache.getGeocode());
 
-                search = Geocache.searchByGeocode(cache.getGeocode(), null, StoredList.TEMPORARY_LIST.id, true, null);
+                search = Geocache.searchByGeocode(cache.getGeocode(), null, Collections.EMPTY_SET, true, null);
                 assertThat(search).isNotNull();
                 assertThat(search.getGeocodes()).isEmpty();
             }
@@ -203,7 +204,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
 
                 deleteCacheFromDBAndLogout(cache.getGeocode());
 
-                final SearchResult search = Geocache.searchByGeocode(cache.getGeocode(), null, StoredList.TEMPORARY_LIST.id, true, null);
+                final SearchResult search = Geocache.searchByGeocode(cache.getGeocode(), null, Collections.EMPTY_SET, true, null);
                 assertThat(search).isNotNull();
                 assertThat(search.getGeocodes()).isEmpty();
             }

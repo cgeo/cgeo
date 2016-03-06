@@ -9,6 +9,7 @@ import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.Log;
@@ -27,10 +28,15 @@ import android.os.Message;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 public class CachePopupFragment extends AbstractDialogFragment {
     private final Progress progress = new Progress();
@@ -106,6 +112,7 @@ public class CachePopupFragment extends AbstractDialogFragment {
             // offline use
             CacheDetailActivity.updateOfflineBox(getView(), cache, res, new RefreshCacheClickListener(), new DropCacheClickListener(), new StoreCacheClickListener());
 
+            updateCacheLists();
         } catch (final Exception e) {
             Log.e("CachePopupFragment.init", e);
         }
@@ -114,7 +121,31 @@ public class CachePopupFragment extends AbstractDialogFragment {
         progress.dismiss();
     }
 
+    private void updateCacheLists() {
+        final Set<String> listNames = new HashSet<>();
+        for (Integer listId : cache.getLists()) {
+            final StoredList list = DataStore.getList(listId);
+            listNames.add(list.getTitle());
+        }
+        final TextView offlineLists = ButterKnife.findById(getView(), R.id.offline_lists);
+        offlineLists.setText(res.getString(R.string.list_list_headline) + " " + StringUtils.join(listNames.toArray(), ", "));
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(final MenuItem item) {
+        if (super.onOptionsItemSelected(item)) {
+            return true;
+        }
+
+        final int menuItem = item.getItemId();
+
+        switch (menuItem) {
+            case R.id.menu_delete:
+                new DropCacheClickListener().onClick(getView());
+                return true;
+        }
+        return false;
+    }
 
     @Override
     public void onConfigurationChanged(final Configuration newConfig) {
@@ -139,27 +170,34 @@ public class CachePopupFragment extends AbstractDialogFragment {
                             public void call(final Integer selectedListId) {
                                 storeCache(selectedListId);
                             }
-                        }, true, StoredList.TEMPORARY_LIST.id);
+                        }, true, cache.getLists());
             } else {
                 storeCache(StoredList.TEMPORARY_LIST.id);
             }
         }
 
         protected void storeCache(final int listId) {
-            final StoreCacheHandler storeCacheHandler = new StoreCacheHandler(R.string.cache_dialog_offline_save_message);
-            final FragmentActivity activity = getActivity();
-            progress.show(activity, res.getString(R.string.cache_dialog_offline_save_title), res.getString(R.string.cache_dialog_offline_save_message), true, storeCacheHandler.cancelMessage());
-            AndroidRxUtils.andThenOnUi(Schedulers.io(), new Action0() {
-                @Override
-                public void call() {
-                    cache.store(listId, storeCacheHandler);
-                }
-            }, new Action0() {
-                @Override
-                public void call() {
-                    activity.supportInvalidateOptionsMenu();
-                }
-            });
+            if (cache.isOffline()) {
+                // cache already offline, just add to another list
+                DataStore.addToList(Collections.singletonList(cache), listId);
+                updateCacheLists();
+            } else {
+                final StoreCacheHandler storeCacheHandler = new StoreCacheHandler(R.string.cache_dialog_offline_save_message);
+                final FragmentActivity activity = getActivity();
+                progress.show(activity, res.getString(R.string.cache_dialog_offline_save_title), res.getString(R.string.cache_dialog_offline_save_message), true, storeCacheHandler.cancelMessage());
+                AndroidRxUtils.andThenOnUi(Schedulers.io(), new Action0() {
+                    @Override
+                    public void call() {
+                        cache.store(listId, storeCacheHandler);
+                    }
+                }, new Action0() {
+                    @Override
+                    public void call() {
+                        activity.supportInvalidateOptionsMenu();
+                        updateCacheLists();
+                    }
+                });
+            }
         }
     }
 

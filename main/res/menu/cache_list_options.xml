@@ -46,6 +46,11 @@
         app:showAsAction="ifRoom|withText">
     </item>
     <item
+        android:id="@+id/menu_copy_to_list"
+        android:title="@string/cache_menu_copy_list"
+        app:showAsAction="ifRoom|withText">
+    </item>
+    <item
         android:id="@+id/menu_drop_caches"
         android:icon="@drawable/ic_menu_delete"
         android:title="@string/caches_remove_all"

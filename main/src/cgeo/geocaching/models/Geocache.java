@@ -88,7 +88,7 @@ public class Geocache implements IWaypoint {
     private long updated = 0;
     private long detailedUpdate = 0;
     private long visitedDate = 0;
-    private int listId = StoredList.TEMPORARY_LIST.id;
+    private Set<Integer> lists = new HashSet<>();
     private boolean detailed = false;
 
     @NonNull
@@ -252,8 +252,8 @@ public class Geocache implements IWaypoint {
         if (visitedDate == 0) {
             visitedDate = other.visitedDate;
         }
-        if (listId == StoredList.TEMPORARY_LIST.id) {
-            listId = other.listId;
+        if (lists.isEmpty()) {
+            lists.addAll(other.lists);
         }
         if (StringUtils.isBlank(geocode)) {
             geocode = other.geocode;
@@ -392,7 +392,7 @@ public class Geocache implements IWaypoint {
                 reliableLatLon == other.reliableLatLon &&
                 ObjectUtils.equals(disabled, other.disabled) &&
                 ObjectUtils.equals(archived, other.archived) &&
-                listId == other.listId &&
+                ObjectUtils.equals(lists, other.lists) &&
                 StringUtils.equalsIgnoreCase(ownerDisplayName, other.ownerDisplayName) &&
                 StringUtils.equalsIgnoreCase(ownerUserId, other.ownerUserId) &&
                 StringUtils.equalsIgnoreCase(getDescription(), other.getDescription()) &&
@@ -893,12 +893,12 @@ public class Geocache implements IWaypoint {
         this.visitedDate = visitedDate;
     }
 
-    public int getListId() {
-        return listId;
+    public Set<Integer> getLists() {
+        return lists;
     }
 
-    public void setListId(final int listId) {
-        this.listId = listId;
+    public void setLists(final Set<Integer> lists) {
+        this.lists = lists;
     }
 
     public boolean isDetailed() {
@@ -1567,14 +1567,12 @@ public class Geocache implements IWaypoint {
     }
 
     public void store() {
-        store(StoredList.TEMPORARY_LIST.id, null);
+        store(StoredList.STANDARD_LIST_ID, null);
     }
 
     public void store(final int listId, final CancellableHandler handler) {
-        final int newListId = listId < StoredList.STANDARD_LIST_ID
-                ? Math.max(getListId(), StoredList.STANDARD_LIST_ID)
-                : listId;
-        storeCache(this, null, newListId, false, handler);
+        lists.add(listId);
+        storeCache(this, null, lists, false, handler);
     }
 
     @Override
@@ -1647,11 +1645,10 @@ public class Geocache implements IWaypoint {
     }
 
     public void refreshSynchronous(final CancellableHandler handler) {
-        DataStore.removeCache(geocode, EnumSet.of(RemoveFlag.CACHE));
-        storeCache(null, geocode, listId, true, handler);
+        storeCache(null, geocode, lists, true, handler);
     }
 
-    public static void storeCache(final Geocache origCache, final String geocode, final int listId, final boolean forceRedownload, final CancellableHandler handler) {
+    public static void storeCache(final Geocache origCache, final String geocode, final Set<Integer> lists, final boolean forceRedownload, final CancellableHandler handler) {
         try {
             Geocache cache = null;
             // get cache details, they may not yet be complete
@@ -1659,7 +1656,7 @@ public class Geocache implements IWaypoint {
                 SearchResult search = null;
                 // only reload the cache if it was already stored or doesn't have full details (by checking the description)
                 if (origCache.isOffline() || StringUtils.isBlank(origCache.getDescription())) {
-                    search = searchByGeocode(origCache.getGeocode(), null, listId, false, handler);
+                    search = searchByGeocode(origCache.getGeocode(), null, lists, false, handler);
                 }
                 if (search != null) {
                     cache = search.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
@@ -1667,7 +1664,7 @@ public class Geocache implements IWaypoint {
                     cache = origCache;
                 }
             } else if (StringUtils.isNotBlank(geocode)) {
-                final SearchResult search = searchByGeocode(geocode, null, listId, forceRedownload, handler);
+                final SearchResult search = searchByGeocode(geocode, null, lists, forceRedownload, handler);
                 if (search != null) {
                     cache = search.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
                 }
@@ -1722,7 +1719,7 @@ public class Geocache implements IWaypoint {
                 return;
             }
 
-            cache.setListId(listId);
+            cache.setLists(lists);
             DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
 
             if (CancellableHandler.isCancelled(handler)) {
@@ -1739,13 +1736,13 @@ public class Geocache implements IWaypoint {
         }
     }
 
-    public static SearchResult searchByGeocode(final String geocode, final String guid, final int listId, final boolean forceReload, final CancellableHandler handler) {
+    public static SearchResult searchByGeocode(final String geocode, final String guid, final Set<Integer> lists, final boolean forceReload, final CancellableHandler handler) {
         if (StringUtils.isBlank(geocode) && StringUtils.isBlank(guid)) {
             Log.e("Geocache.searchByGeocode: No geocode nor guid given");
             return null;
         }
 
-        if (!forceReload && listId == StoredList.TEMPORARY_LIST.id && (DataStore.isOffline(geocode, guid) || DataStore.isThere(geocode, guid, true))) {
+        if (!forceReload && lists.isEmpty() && (DataStore.isOffline(geocode, guid) || DataStore.isThere(geocode, guid, true))) {
             final SearchResult search = new SearchResult();
             final String realGeocode = StringUtils.isNotBlank(geocode) ? geocode : DataStore.getGeocodeForGuid(guid);
             search.addGeocode(realGeocode);
@@ -1765,7 +1762,7 @@ public class Geocache implements IWaypoint {
     }
 
     public boolean isOffline() {
-        return listId >= StoredList.STANDARD_LIST_ID;
+        return !lists.isEmpty();
     }
 
     /**
