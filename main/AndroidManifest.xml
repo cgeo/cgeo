@@ -428,6 +428,7 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data android:scheme="http" />
+                <data android:scheme="https" />
                 <data android:host="opencaching.de" />
                 <data android:host="www.opencaching.de" />
                 <data android:pathPrefix="/OC" />
@@ -444,6 +445,7 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data android:scheme="http" />
+                <data android:scheme="https" />
                 <data android:host="opencachingspain.es" />
                 <data android:host="www.opencachingspain.es" />
                 <data android:pathPrefix="/OC" />
@@ -460,6 +462,7 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data android:scheme="http" />
+                <data android:scheme="https" />
                 <data android:host="opencaching.fr" />
                 <data android:host="www.opencaching.fr" />
                 <data android:pathPrefix="/OC" />
@@ -476,6 +479,7 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data android:scheme="http" />
+                <data android:scheme="https" />
                 <data android:host="opencaching.it" />
                 <data android:host="www.opencaching.it" />
                 <data android:pathPrefix="/OC" />
@@ -492,6 +496,7 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data android:scheme="http" />
+                <data android:scheme="https" />
                 <data android:host="opencaching.no" />
                 <data android:host="www.opencaching.no" />
                 <data android:pathPrefix="/OC" />
@@ -508,6 +513,7 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data android:scheme="http" />
+                <data android:scheme="https" />
                 <data android:host="opencaching.nl" />
                 <data android:host="www.opencaching.nl" />
                 <data android:pathPrefix="/OB" />
@@ -524,6 +530,7 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data android:scheme="http" />
+                <data android:scheme="https" />
                 <data android:host="opencaching.pl" />
                 <data android:host="www.opencaching.pl" />
                 <data android:pathPrefix="/OP" />
@@ -540,6 +547,7 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data android:scheme="http" />
+                <data android:scheme="https" />
                 <data android:host="opencaching.org.uk" />
                 <data android:host="www.opencaching.org.uk" />
                 <data android:pathPrefix="/OK" />
@@ -556,6 +564,7 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data android:scheme="http" />
+                <data android:scheme="https" />
                 <data android:host="opencaching.ro" />
                 <data android:host="www.opencaching.ro" />
                 <data android:pathPrefix="/OR" />
@@ -572,6 +581,7 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data android:scheme="http" />
+                <data android:scheme="https" />
                 <data android:host="opencaching.us" />
                 <data android:host="www.opencaching.us" />
                 <data android:pathPrefix="/OU" />
