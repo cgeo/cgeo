@@ -227,7 +227,7 @@ public final class Network {
                 return response;
             } catch (final Exception e) {
                 Log.w("Failure" + formatTimeSpan(before) + reqLogStr + " (" + e + ")");
-                throw e;
+                throw new IOException("Invalid response", e);
             }
         }
 
