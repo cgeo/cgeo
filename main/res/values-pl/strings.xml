@@ -976,6 +976,7 @@
   <string name="trackable_image">Zdjęcie</string>
   <string name="trackable_code">Kod przedmiotu podróżnego</string>
   <string name="trackable_name">Nazwa</string>
+  <string name="trackable_brand">Marka</string>
   <string name="trackable_type">Typ</string>
   <string name="trackable_owner">Właściciel</string>
   <string name="trackable_spotted">Ostatnio widziany</string>

@@ -985,6 +985,7 @@
   <string name="trackable_image">Imagine</string>
   <string name="trackable_code">Codul de urmărire</string>
   <string name="trackable_name">Nume</string>
+  <string name="trackable_brand">Marca</string>
   <string name="trackable_type">Tip</string>
   <string name="trackable_owner">Proprietar</string>
   <string name="trackable_spotted">A fost văzut</string>

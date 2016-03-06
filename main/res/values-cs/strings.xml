@@ -985,6 +985,7 @@
   <string name="trackable_image">Obrázek</string>
   <string name="trackable_code">Identifikační kód</string>
   <string name="trackable_name">Název</string>
+  <string name="trackable_brand">Značka</string>
   <string name="trackable_type">Typ</string>
   <string name="trackable_owner">Vlastník</string>
   <string name="trackable_spotted">Viděn</string>

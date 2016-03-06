@@ -985,6 +985,7 @@
   <string name="trackable_image">Obrázok</string>
   <string name="trackable_code">Kód trasovateľného predmetu (TB kód)</string>
   <string name="trackable_name">Názov</string>
+  <string name="trackable_brand">Značka</string>
   <string name="trackable_type">Typ</string>
   <string name="trackable_owner">Vlastník</string>
   <string name="trackable_spotted">Zhliadnuté</string>

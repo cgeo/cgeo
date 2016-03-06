@@ -962,6 +962,7 @@
   <string name="trackable_image">Imagen</string>
   <string name="trackable_code">Código rastreable</string>
   <string name="trackable_name">Nombre</string>
+  <string name="trackable_brand">Marca</string>
   <string name="trackable_type">Tipo</string>
   <string name="trackable_owner">Propietario</string>
   <string name="trackable_spotted">Visto</string>

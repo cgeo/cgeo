@@ -976,6 +976,7 @@
   <string name="trackable_image">Afbeelding</string>
   <string name="trackable_code">Tracking Code</string>
   <string name="trackable_name">Naam</string>
+  <string name="trackable_brand">Merk</string>
   <string name="trackable_type">Type</string>
   <string name="trackable_owner">Eigenaar</string>
   <string name="trackable_spotted">Gespot</string>
