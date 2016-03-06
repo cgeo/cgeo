@@ -349,10 +349,8 @@ public abstract class GPXParser extends FileParser {
                     findGeoCode(cmt);
                 }
                 // take the name as code, if nothing else is available
-                if (StringUtils.isBlank(cache.getGeocode())) {
-                    if (StringUtils.isNotBlank(name)) {
-                        cache.setGeocode(name.trim());
-                    }
+                if (StringUtils.isBlank(cache.getGeocode()) && StringUtils.isNotBlank(name)) {
+                    cache.setGeocode(name.trim());
                 }
 
                 if (isValidForImport()) {

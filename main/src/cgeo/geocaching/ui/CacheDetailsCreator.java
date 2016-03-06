@@ -153,10 +153,8 @@ public final class CacheDetailsCreator {
 
     public void addDistance(final Geocache cache, final TextView cacheDistanceView) {
         Float distance = distanceNonBlocking(cache);
-        if (distance == null) {
-            if (cache.getDistance() != null) {
-                distance = cache.getDistance();
-            }
+        if (distance == null && cache.getDistance() != null) {
+            distance = cache.getDistance();
         }
         String text = "--";
         if (distance != null) {

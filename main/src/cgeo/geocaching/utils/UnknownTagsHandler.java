@@ -65,10 +65,8 @@ public class UnknownTagsHandler implements TagHandler {
 
     private void handleTd(final boolean opening, final Editable output) {
         // insert bar for each table column, see https://en.wikipedia.org/wiki/Box-drawing_characters
-        if (opening) {
-            if (countCells++ > 0) {
-                output.append('┆');
-            }
+        if (opening && countCells++ > 0) {
+            output.append('┆');
         }
     }
 

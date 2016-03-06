@@ -60,10 +60,8 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
                 final File[] files = directory.listFiles();
                 if (ArrayUtils.isNotEmpty(files)) {
                     for (final File file : files) {
-                        if (file.getName().endsWith(".map")) {
-                            if (isValidMapFile(file.getAbsolutePath())) {
-                                mapFileList.add(file.getAbsolutePath());
-                            }
+                        if (file.getName().endsWith(".map") && isValidMapFile(file.getAbsolutePath())) {
+                            mapFileList.add(file.getAbsolutePath());
                         }
                     }
                     Collections.sort(mapFileList, String.CASE_INSENSITIVE_ORDER);

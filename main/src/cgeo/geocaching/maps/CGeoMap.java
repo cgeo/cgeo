@@ -405,11 +405,9 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
                         waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + res.getQuantityString(R.plurals.caches_eta_mins, minsRemaining, minsRemaining));
                     }
                 }
-            } else if (msg.what == FINISHED_LOADING_DETAILS) {
-                if (waitDialog != null) {
-                    waitDialog.dismiss();
-                    waitDialog.setOnCancelListener(null);
-                }
+            } else if (msg.what == FINISHED_LOADING_DETAILS && waitDialog != null) {
+                waitDialog.dismiss();
+                waitDialog.setOnCancelListener(null);
             }
         }
         @Override
@@ -1096,10 +1094,8 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
                         final boolean needsRepaintForDistanceOrAccuracy = needsRepaintForDistanceOrAccuracy();
                         final boolean needsRepaintForHeading = needsRepaintForHeading();
 
-                        if (needsRepaintForDistanceOrAccuracy) {
-                            if (followMyLocation) {
-                                map.centerMap(new Geopoint(currentLocation));
-                            }
+                        if (needsRepaintForDistanceOrAccuracy && followMyLocation) {
+                            map.centerMap(new Geopoint(currentLocation));
                         }
 
                         if (needsRepaintForDistanceOrAccuracy || needsRepaintForHeading) {
@@ -1335,15 +1331,13 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
     private void doDownloadRun() {
         try {
             showProgressHandler.sendEmptyMessage(SHOW_PROGRESS); // show progress
-            if (Settings.isGCConnectorActive()) {
-                if (tokens == null) {
-                    tokens = GCLogin.getInstance().getMapTokens();
-                    if (StringUtils.isEmpty(tokens.getUserSession()) || StringUtils.isEmpty(tokens.getSessionToken())) {
-                        tokens = null;
-                        if (!noMapTokenShowed) {
-                            ActivityMixin.showToast(activity, res.getString(R.string.map_token_err));
-                            noMapTokenShowed = true;
-                        }
+            if (Settings.isGCConnectorActive() && tokens == null) {
+                tokens = GCLogin.getInstance().getMapTokens();
+                if (StringUtils.isEmpty(tokens.getUserSession()) || StringUtils.isEmpty(tokens.getSessionToken())) {
+                    tokens = null;
+                    if (!noMapTokenShowed) {
+                        ActivityMixin.showToast(activity, res.getString(R.string.map_token_err));
+                        noMapTokenShowed = true;
                     }
                 }
             }

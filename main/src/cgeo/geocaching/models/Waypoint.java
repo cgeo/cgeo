@@ -74,10 +74,8 @@ public class Waypoint implements IWaypoint {
         if (StringUtils.isBlank(note)) {
             note = old.note;
         }
-        if (note != null && old.note != null) {
-            if (old.note.length() > note.length()) {
-                note = old.note;
-            }
+        if (note != null && old.note != null && old.note.length() > note.length()) {
+            note = old.note;
         }
         if (id < 0) {
             id = old.id;

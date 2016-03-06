@@ -1402,11 +1402,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 // persistent preview from storage
                 Bitmap image = StaticMapsProvider.getPreviewMap(cache);
 
-                if (image == null) {
-                    if (Settings.isStoreOfflineMaps() && cache.getCoords() != null) {
-                        StaticMapsProvider.storeCachePreviewMap(cache).await();
-                        image = StaticMapsProvider.getPreviewMap(cache);
-                    }
+                if (image == null && Settings.isStoreOfflineMaps() && cache.getCoords() != null) {
+                    StaticMapsProvider.storeCachePreviewMap(cache).await();
+                    image = StaticMapsProvider.getPreviewMap(cache);
                 }
 
                 if (image != null) {

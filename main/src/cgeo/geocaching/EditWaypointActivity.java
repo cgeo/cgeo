@@ -381,10 +381,8 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
             wpNames.add(waypoint.getName());
         }
         // try final and trailhead without index
-        if (type == WaypointType.FINAL || type == WaypointType.TRAILHEAD) {
-            if (!wpNames.contains(type.getL10n())) {
-                return type.getL10n();
-            }
+        if ((type == WaypointType.FINAL || type == WaypointType.TRAILHEAD) && !wpNames.contains(type.getL10n())) {
+            return type.getL10n();
         }
         // for other types add an index by default, which is highest found index + 1
         int max = 0;

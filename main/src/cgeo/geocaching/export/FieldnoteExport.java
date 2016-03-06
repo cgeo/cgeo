@@ -148,10 +148,8 @@ public class FieldnoteExport extends AbstractExport {
                 for (final Geocache cache : caches) {
                     if (ConnectorFactory.getConnector(cache).equals(connector) && cache.isLogOffline()) {
                         final LogEntry log = DataStore.loadLogOffline(cache.getGeocode());
-                        if (log != null) {
-                            if (!onlyNew || log.date > Settings.getFieldnoteExportDate()) {
-                                fieldNotes.add(cache, log);
-                            }
+                        if (log != null && (!onlyNew || log.date > Settings.getFieldnoteExportDate())) {
+                            fieldNotes.add(cache, log);
                         }
                     }
                     publishProgress(++i);

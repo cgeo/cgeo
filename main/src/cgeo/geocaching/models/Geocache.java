@@ -328,10 +328,8 @@ public class Geocache implements IWaypoint {
         if (myVote == 0) {
             myVote = other.myVote;
         }
-        if (!detailed && attributes.isEmpty()) {
-            if (other.attributes != null) {
-                attributes.addAll(other.attributes);
-            }
+        if (!detailed && attributes.isEmpty() && other.attributes != null) {
+            attributes.addAll(other.attributes);
         }
         if (waypoints.isEmpty()) {
             this.setWaypoints(other.waypoints, false);
