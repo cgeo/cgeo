@@ -6,7 +6,10 @@ import cgeo.CGeoTestCase;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
+
+import java.util.Locale;
 
 public class OkapiClientTest extends CGeoTestCase {
 
@@ -76,6 +79,25 @@ public class OkapiClientTest extends CGeoTestCase {
         final Geocache cache = OkapiClient.getCache(geoCode);
         assert cache != null; // eclipse null analysis
         assertThat(cache.getShortDescription()).isEqualTo("Nur in der fünften Jahreszeit kann er sprechen");
+    }
+
+    public static void testPreferredLanguage() {
+        final Locale savedLocale = Locale.getDefault();
+        final boolean useEnglish = Settings.useEnglish();
+        try {
+            Settings.setUseEnglish(false);
+            Locale.setDefault(Locale.US);
+            assertThat(OkapiClient.getPreferredLanguage()).isEqualTo("en");     // US, useEnglish = false
+            Settings.setUseEnglish(true);
+            assertThat(OkapiClient.getPreferredLanguage()).isEqualTo("en");     // US, useEnglish = true
+            Locale.setDefault(Locale.GERMANY);
+            assertThat(OkapiClient.getPreferredLanguage()).isEqualTo("en|de");  // DE, useEnglish = true
+            Settings.setUseEnglish(false);
+            assertThat(OkapiClient.getPreferredLanguage()).isEqualTo("de|en");  // DE, useEnglish = false
+        } finally {
+            Locale.setDefault(savedLocale);
+            Settings.setUseEnglish(useEnglish);
+        }
     }
 
 }
