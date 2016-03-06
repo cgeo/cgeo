@@ -4,17 +4,18 @@ import junit.framework.TestCase;
 import org.eclipse.jdt.annotation.NonNull;
 
 import java.security.InvalidParameterException;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ParametersTest extends TestCase {
 
-    static final List<Character> UNRESERVED;
+    static List<Character> UNRESERVED;
 
     static {
         // unreserved characters: ALPHA / DIGIT / "-" / "." / "_" / "~"
-        ArrayList<Character> unreserved = new ArrayList<Character>();
+        final ArrayList<Character> unreserved = new ArrayList<Character>();
         for (int i = 65; i <= 90; i++) {
             unreserved.add((char) i); // uppercase
             unreserved.add((char) (i + 32)); // lowercase
@@ -98,6 +99,6 @@ public class ParametersTest extends TestCase {
         final Parameters params = new Parameters("oauth_callback", "callback://www.cgeo.org/");
         assertThat(params.toString()).isEqualTo("oauth_callback=callback://www.cgeo.org/");
         params.usePercentEncoding();
-        assertThat(params.toString()).isEqualTo("oauth_callback=callback%3a%2f%2fwww.cgeo.org%2f");
+        assertThat(params.toString()).isEqualTo("oauth_callback=callback%3A%2F%2Fwww.cgeo.org%2F");
     }
 }
