@@ -94,7 +94,7 @@ public class ParametersTest extends TestCase {
         assertThat("*".equals(Parameters.percentEncode("*"))).isFalse();
     }
 
-    public static void testPercentEncoding {
+    public static void testPercentEncoding() {
         final Parameters params = new Parameters("oauth_callback", "callback://www.cgeo.org/");
         assertThat(params.toString()).isEqualTo("oauth_callback=callback://www.cgeo.org/");
         params.usePercentEncoding();
