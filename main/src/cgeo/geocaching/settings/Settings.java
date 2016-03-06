@@ -532,6 +532,10 @@ public class Settings {
         return getBoolean(R.string.pref_useenglish, false);
     }
 
+    public static void setUseEnglish(final boolean useEnglish) {
+        putBoolean(R.string.pref_useenglish, useEnglish);
+    }
+
     public static boolean isShowAddress() {
         return getBoolean(R.string.pref_showaddress, true);
     }

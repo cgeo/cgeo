@@ -39,7 +39,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-
+import okhttp3.Response;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -59,8 +59,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
 import java.util.regex.Pattern;
-
-import okhttp3.Response;
 
 /**
  * Client for the OpenCaching API (Okapi).
@@ -824,13 +822,16 @@ final class OkapiClient {
         }
     }
 
+    /**
+     * Return a pipe-separated list of preferred languages. English and the device default language (if different) will
+     * always be in the list. Forcing cgeo language to English will prefer English over the device default language.
+     */
     @NonNull
-    private static String getPreferredLanguage() {
-        final String code = Locale.getDefault().getLanguage();
-        if (StringUtils.isNotBlank(code)) {
-            return StringUtils.lowerCase(code) + "|en";
-        }
-        return "en";
+    static String getPreferredLanguage() {
+        final String defaultLanguage = StringUtils.defaultIfBlank(StringUtils.lowerCase(Locale.getDefault().getLanguage()), "en");
+        if (defaultLanguage.equals("en"))
+            return defaultLanguage;
+        return Settings.useEnglish() ? "en|" + defaultLanguage : defaultLanguage + "|en";
     }
 
     private static void addFilterParams(@NonNull final Map<String, String> valueMap, @NonNull final OCApiConnector connector, final boolean my) {
