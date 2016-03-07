@@ -7,7 +7,7 @@ import cgeo.geocaching.models.Geocache;
  */
 public class EventDateComparator extends DateComparator {
 
-    final static public EventDateComparator singleton = new EventDateComparator();
+    final static public EventDateComparator INSTANCE = new EventDateComparator();
 
     @Override
     protected int sortSameDate(final Geocache left, final Geocache right) {
@@ -20,5 +20,10 @@ public class EventDateComparator extends DateComparator {
      */
     private static int compare(final int left, final int right) {
         return left < right ? -1 : (left == right ? 0 : 1);
+    }
+
+    @Override
+    public boolean isAutoManaged() {
+        return true;
     }
 }

@@ -1058,7 +1058,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private void updateAdapter() {
         adapter.notifyDataSetChanged();
         adapter.reFilter();
-        adapter.checkEvents();
+        adapter.checkSpecialSortOrder();
         adapter.forceSort();
     }
 

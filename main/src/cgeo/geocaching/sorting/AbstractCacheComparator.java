@@ -58,4 +58,9 @@ abstract class AbstractCacheComparator implements CacheComparator {
      */
     protected abstract int compareCaches(final Geocache cache1, final Geocache cache2);
 
+    @Override
+    public boolean isAutoManaged() {
+        return false;
+    }
+
 }
