@@ -67,12 +67,10 @@ final class IconDecoder {
                 final int type;
                 if (zoomlevel < 12) {
                     type = getCacheTypeFromPixel11(r, g, b);
+                } else if (zoomlevel > 13) {
+                    type = getCacheTypeFromPixel14(r, g, b);
                 } else {
-                    if (zoomlevel > 13) {
-                        type = getCacheTypeFromPixel14(r, g, b);
-                    } else {
-                        type = getCacheTypeFromPixel13(r, g, b);
-                    }
+                    type = getCacheTypeFromPixel13(r, g, b);
                 }
                 pngType[type]++;
             }

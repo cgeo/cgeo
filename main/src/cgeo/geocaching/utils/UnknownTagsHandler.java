@@ -47,11 +47,9 @@ public class UnknownTagsHandler implements TagHandler {
         final int length = output.length();
         if (opening) {
             strikePos = length;
-        } else {
-            if (strikePos > UNDEFINED_POSITION) {
-                output.setSpan(new StrikethroughSpan(), strikePos, length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                strikePos = UNDEFINED_POSITION;
-            }
+        } else if (strikePos > UNDEFINED_POSITION) {
+            output.setSpan(new StrikethroughSpan(), strikePos, length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            strikePos = UNDEFINED_POSITION;
         }
     }
 

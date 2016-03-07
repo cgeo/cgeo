@@ -23,14 +23,12 @@ public class Units {
                 distance *= 5280;
                 units = "ft";
             }
+        } else if (distanceKilometers >= 1) {
+            distance = distanceKilometers;
+            units = "km";
         } else {
-            if (distanceKilometers >= 1) {
-                distance = distanceKilometers;
-                units = "km";
-            } else {
-                distance = distanceKilometers * 1000;
-                units = "m";
-            }
+            distance = distanceKilometers * 1000;
+            units = "m";
         }
         return new ImmutablePair<>(distance, units);
     }

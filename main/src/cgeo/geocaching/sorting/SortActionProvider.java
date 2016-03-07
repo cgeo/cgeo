@@ -121,11 +121,8 @@ public class SortActionProvider extends ActionProvider implements OnMenuItemClic
                 if (comparatorEntry.cacheComparator == null) {
                     menuItem.setChecked(true);
                 }
-            }
-            else {
-                if (selection.getClass().equals(comparatorEntry.cacheComparator)) {
-                    menuItem.setChecked(true);
-                }
+            } else if (selection.getClass().equals(comparatorEntry.cacheComparator)) {
+                menuItem.setChecked(true);
             }
         }
         subMenu.setGroupCheckable(MENU_GROUP, true, true);
