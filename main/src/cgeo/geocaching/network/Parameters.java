@@ -1,7 +1,5 @@
 package cgeo.geocaching.network;
 
-import okhttp3.HttpUrl;
-import okhttp3.HttpUrl.Builder;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.eclipse.jdt.annotation.NonNull;
@@ -11,6 +9,9 @@ import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+
+import okhttp3.HttpUrl;
+import okhttp3.HttpUrl.Builder;
 
 /**
  * List of key/values pairs to be used in a GET or POST request.
@@ -86,20 +87,20 @@ public class Parameters extends ArrayList<ImmutablePair<String, String>> {
     @Override
     public String toString() {
         if (percentEncoding) {
-            if (isEmpty())
+            if (isEmpty()) {
                 return "";
+            }
             final StringBuilder builder = new StringBuilder();
             for (final ImmutablePair<String, String> nameValuePair : this) {
                 builder.append('&').append(percentEncode(nameValuePair.left)).append('=').append(percentEncode(nameValuePair.right));
             }
             return builder.substring(1);
-        } else {
-            final Builder builder = HttpUrl.parse("http://dummy.cgeo.org/").newBuilder();
-            for (final ImmutablePair<String, String> nameValuePair : this) {
-                builder.addQueryParameter(nameValuePair.left, nameValuePair.right);
-            }
-            return StringUtils.defaultString(builder.build().encodedQuery());
         }
+        final Builder builder = HttpUrl.parse("http://dummy.cgeo.org/").newBuilder();
+        for (final ImmutablePair<String, String> nameValuePair : this) {
+            builder.addQueryParameter(nameValuePair.left, nameValuePair.right);
+        }
+        return StringUtils.defaultString(builder.build().encodedQuery());
     }
 
     /**
