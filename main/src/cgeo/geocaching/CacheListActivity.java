@@ -1003,11 +1003,9 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     @Override
     public boolean onKeyDown(final int keyCode, final KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
-            if (adapter.isSelectMode()) {
-                adapter.setSelectMode(false);
-                return true;
-            }
+        if (keyCode == KeyEvent.KEYCODE_BACK && adapter.isSelectMode()) {
+            adapter.setSelectMode(false);
+            return true;
         }
         return super.onKeyDown(keyCode, event);
     }

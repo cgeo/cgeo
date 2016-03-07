@@ -244,11 +244,9 @@ public final class ImageUtils {
         // between applications and persist after your app has been uninstalled.
 
         // Create the storage directory if it does not exist
-        if (!mediaStorageDir.exists()) {
-            if (!FileUtils.mkdirs(mediaStorageDir)) {
-                Log.e("ImageUtils.getOutputImageFile: cannot create media storage directory");
-                return null;
-            }
+        if (!mediaStorageDir.exists() && !FileUtils.mkdirs(mediaStorageDir)) {
+            Log.e("ImageUtils.getOutputImageFile: cannot create media storage directory");
+            return null;
         }
 
         // Create a media file name

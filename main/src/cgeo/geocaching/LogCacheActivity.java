@@ -535,11 +535,9 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
                     // update offline log in DB
                     cache.clearOfflineLog();
 
-                    if (typeSelected == LogType.FOUND_IT) {
-                        if (tweetCheck.isChecked() && tweetBox.getVisibility() == View.VISIBLE) {
-                            publishProgress(res.getString(R.string.log_posting_twitter));
-                            Twitter.postTweetCache(geocode, logNow);
-                        }
+                    if (typeSelected == LogType.FOUND_IT && tweetCheck.isChecked() && tweetBox.getVisibility() == View.VISIBLE) {
+                        publishProgress(res.getString(R.string.log_posting_twitter));
+                        Twitter.postTweetCache(geocode, logNow);
                     }
                     if (GCVote.isValidRating(rating) && GCVote.isVotingPossible(cache)) {
                         publishProgress(res.getString(R.string.log_posting_gcvote));

@@ -117,10 +117,8 @@ final class ECApi {
         try {
             final Response response = Network.postRequest(uri, params).toBlocking().value();
 
-            if (response.code() == 403) {
-                if (ecLogin.login() == StatusCode.NO_ERROR) {
-                    apiRequest(uri, params, true);
-                }
+            if (response.code() == 403 && ecLogin.login() == StatusCode.NO_ERROR) {
+                apiRequest(uri, params, true);
             }
             if (response.code() != 200) {
                 return new LogResult(StatusCode.LOG_POST_ERROR, "");

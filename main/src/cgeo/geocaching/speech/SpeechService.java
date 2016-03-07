@@ -62,10 +62,8 @@ public class SpeechService extends Service implements OnInitListener {
 
             // to speak, we want max pause to have elapsed or distance to geopoint to have changed by a given amount
             final float distance = position.distanceTo(target);
-            if (now - lastSpeechTime <= SPEECH_MAXPAUSE_SECONDS * 1000) {
-                if (Math.abs(lastSpeechDistance - distance) < getDeltaForDistance(distance)) {
-                    return;
-                }
+            if (now - lastSpeechTime <= SPEECH_MAXPAUSE_SECONDS * 1000 && Math.abs(lastSpeechDistance - distance) < getDeltaForDistance(distance)) {
+                return;
             }
 
             final String text = TextFactory.getText(position, target, direction);

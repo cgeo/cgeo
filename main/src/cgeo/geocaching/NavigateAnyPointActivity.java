@@ -413,10 +413,8 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity implemen
             // Save
             DataStore.removeSearchedDestination(destination);
 
-            if (getHistoryOfSearchedLocations().isEmpty()) {
-                if (historyListView.getFooterViewsCount() == 0) {
-                    historyListView.addFooterView(getEmptyHistoryFooter());
-                }
+            if (getHistoryOfSearchedLocations().isEmpty() && historyListView.getFooterViewsCount() == 0) {
+                historyListView.addFooterView(getEmptyHistoryFooter());
             }
 
             getDestinationHistoryAdapter().notifyDataSetChanged();
