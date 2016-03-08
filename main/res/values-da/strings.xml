@@ -919,6 +919,7 @@
   <string name="map_trail_show">Vis spor</string>
   <string name="map_circles_show">Vis cirkler</string>
   <string name="map_mycaches_hide">Skjul egne/fundne cacher</string>
+  <string name="map_disabled_hide">Skjul deaktiverede cacher</string>
   <string name="map_theme_builtin">Standard</string>
   <string name="map_theme_select">Vælg korttema</string>
   <string name="map_live_enable">Aktivér live</string>

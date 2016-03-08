@@ -921,6 +921,7 @@
   <string name="map_trail_show">Toon spoor</string>
   <string name="map_circles_show">Laat cirkels zien</string>
   <string name="map_mycaches_hide">Verbergen eigen/gevonden caches</string>
+  <string name="map_disabled_hide">Verbergen uitgeschakelde caches</string>
   <string name="map_theme_builtin">Standaard</string>
   <string name="map_theme_select">Selecteer mapthema</string>
   <string name="map_live_enable">Live aanzetten</string>

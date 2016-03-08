@@ -919,6 +919,7 @@
   <string name="map_trail_show">Mostra la ruta</string>
   <string name="map_circles_show">Mostra els cercles</string>
   <string name="map_mycaches_hide">Amaga els catxés propis/trobats</string>
+  <string name="map_disabled_hide">Amagar catxés desactivats</string>
   <string name="map_theme_builtin">Per defecte</string>
   <string name="map_theme_select">Trieu els detalls del mapa</string>
   <string name="map_live_enable">Activa en viu</string>

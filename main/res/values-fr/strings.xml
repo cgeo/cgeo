@@ -921,6 +921,7 @@
   <string name="map_trail_show">Afficher le parcours</string>
   <string name="map_circles_show">Afficher les cercles</string>
   <string name="map_mycaches_hide">Masquer les caches placées/trouvées</string>
+  <string name="map_disabled_hide">Cacher les caches désactivées</string>
   <string name="map_theme_builtin">Défault</string>
   <string name="map_theme_select">Sélectionner le thème</string>
   <string name="map_live_enable">Activer Temps réel</string>

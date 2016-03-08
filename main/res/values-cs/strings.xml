@@ -930,6 +930,7 @@
   <string name="map_trail_show">Zobrazit záznam trasy</string>
   <string name="map_circles_show">Zobrazit kruhy</string>
   <string name="map_mycaches_hide">Skrýt vlastní/nalezené keše</string>
+  <string name="map_disabled_hide">Skrýt deaktivované keše</string>
   <string name="map_theme_builtin">Výchozí</string>
   <string name="map_theme_select">Styl mapy…</string>
   <string name="map_live_enable">Povolit aktivní mapu</string>

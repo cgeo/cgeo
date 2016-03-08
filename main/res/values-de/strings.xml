@@ -154,6 +154,7 @@
   <string name="err_license">Die Geocaching.com Nutzungsbedingungen wurden nicht akzeptiert. c:geo kann deshalb keine Koordinaten laden.</string>
   <string name="err_unvalidated_account">Die Logindaten müssen zuerst auf Geocaching.com validiert werden.</string>
   <string name="err_unpublished">Der aufgerufene Cache ist noch nicht veröffentlicht.</string>
+  <string name="err_cache_not_found">Der gesuchte Cache konnte nicht gefunden werden.</string>
   <string name="err_premium_only">Der Cache ist nur für Premium-Mitglieder von Geocaching.com verfügbar.</string>
   <string name="err_detail_open">c:geo konnte die Cache-Details nicht öffnen.</string>
   <string name="err_detail_cache">c:geo kann diesen Cache nicht darstellen. Ist es wirklich ein Cache?</string>

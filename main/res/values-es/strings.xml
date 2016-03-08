@@ -907,6 +907,7 @@
   <string name="map_trail_show">Mostrar rastro</string>
   <string name="map_circles_show">Mostrar círculos</string>
   <string name="map_mycaches_hide">Ocultar propios/encontr.</string>
+  <string name="map_disabled_hide">Ocultar cachés desactivados</string>
   <string name="map_theme_builtin">Por defecto</string>
   <string name="map_theme_select">Seleccionar tema del mapa</string>
   <string name="map_live_enable">Activar en vivo</string>
