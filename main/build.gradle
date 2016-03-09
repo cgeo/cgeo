@@ -244,9 +244,9 @@ dependencies {
     compile 'io.reactivex:rxandroid:0.25.0'
 
     // Jackson XML processing
-    compile 'com.fasterxml.jackson.core:jackson-core:2.7.1'
-    compile 'com.fasterxml.jackson.core:jackson-databind:2.7.1-1'
-    compile 'com.fasterxml.jackson.core:jackson-annotations:2.7.1'
+    compile 'com.fasterxml.jackson.core:jackson-core:2.7.2'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.7.2'
+    compile 'com.fasterxml.jackson.core:jackson-annotations:2.7.2'
 
     // Zxing barcode reader integration
     compile 'com.google.zxing:android-integration:3.2.1'
@@ -482,9 +482,9 @@ task downloadLibs(type:Download) {
     src([
             mavenLib('io/reactivex', 'rxjava', '1.1.1'),
             mavenLib('io/reactivex', 'rxandroid', '0.25.0'),
-            mavenLib('com/fasterxml/jackson/core','jackson-core','2.7.1'),
-            mavenLib('com/fasterxml/jackson/core','jackson-databind','2.7.1-1'),
-            mavenLib('com/fasterxml/jackson/core','jackson-annotations','2.7.1'),
+            mavenLib('com/fasterxml/jackson/core','jackson-core','2.7.2'),
+            mavenLib('com/fasterxml/jackson/core','jackson-databind','2.7.2'),
+            mavenLib('com/fasterxml/jackson/core','jackson-annotations','2.7.2'),
             mavenLib('org/apache/commons','commons-collections4','4.1'),
             mavenLib('org/apache/commons','commons-lang3','3.4'),
             mavenLib('commons-io','commons-io','2.4'),
