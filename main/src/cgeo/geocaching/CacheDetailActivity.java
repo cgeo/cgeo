@@ -1936,6 +1936,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     }
 
     private ActionMode mActionMode = null;
+    private boolean mSelectionModeActive = false;
     private IndexOutOfBoundsAvoidingTextView selectedTextView;
 
     private class TextMenuItemClickListener implements MenuItem.OnMenuItemClickListener {
@@ -1951,7 +1952,8 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
     @Override
     public void onSupportActionModeStarted(ActionMode mode) {
-        if (mActionMode == null && selectedTextView != null) {
+        if (mSelectionModeActive == true && selectedTextView != null) {
+            mSelectionModeActive = false;
             mActionMode = mode;
             Menu menu = mode.getMenu();
             mode.getMenuInflater().inflate(R.menu.details_context, menu);
@@ -1970,7 +1972,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         mActionMode = null;
         if (selectedTextView != null)
             selectedTextView.setWindowFocusWait(false);
-        selectedTextView = null;
+        if (mSelectionModeActive == false) {
+            selectedTextView = null;
+        }
         super.onSupportActionModeFinished(mode);
     }
 
@@ -1982,6 +1986,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             public boolean onLongClick(final View v) {
                 if ((view.getId() == R.id.description) || (view.getId() == R.id.hint)) {
                     selectedTextView = (IndexOutOfBoundsAvoidingTextView)view;
+                    mSelectionModeActive = true;
                     return false;
                 }
                 currentActionMode = startSupportActionMode(new ActionMode.Callback() {
