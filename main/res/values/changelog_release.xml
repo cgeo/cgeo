@@ -2,7 +2,7 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-    <b>Next feature release:</b>\n
+    <b>2016.03.06:</b>\n
     · New: Select parts of the cache description text for sharing\n
     · New: Invite friends to use c:geo directly from the app\n
     · New: Use https for communication with Geokrety\n
