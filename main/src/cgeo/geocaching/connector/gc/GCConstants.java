@@ -191,6 +191,9 @@ public final class GCConstants {
     final static List<String> STATUS_ARCHIVED = Arrays.asList("This cache has been archived", "Dieser Geocache wurde archiviert");
     final static String STRING_CACHEDETAILS = "id=\"cacheDetails\"";
 
+    // Pages with such title seem to be returned with a 200 code instead of 404
+    final static String STRING_404_FILE_NOT_FOUND = "<title>404 - File Not Found</title>";
+
     /** Number of logs to retrieve from GC.com */
     final static int NUMBER_OF_LOGS = 35;
     /** Maximum number of chars for personal note. **/
