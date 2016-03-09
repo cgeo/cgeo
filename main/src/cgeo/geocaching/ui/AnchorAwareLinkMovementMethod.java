@@ -83,4 +83,9 @@ public class AnchorAwareLinkMovementMethod extends LinkMovementMethod {
             Selection.setSelection(text, text.length());
         }
     }
+
+    @Override
+    public boolean canSelectArbitrarily () {
+        return true;
+    }
 }
