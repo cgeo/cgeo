@@ -65,6 +65,18 @@ public abstract class AbstractTrackableConnector implements TrackableConnector {
 
     @Override
     @NonNull
+    public String getHostUrl() {
+        return "https://" + getHost();
+    }
+
+    @Override
+    @Nullable
+    public String getProxyUrl() {
+        return null;
+    }
+
+    @Override
+    @NonNull
     public List<Trackable> searchTrackables(final String geocode) {
         return Collections.emptyList();
     }

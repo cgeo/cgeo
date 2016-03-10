@@ -12,6 +12,7 @@ import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.test.NotForIntegrationTests;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * This test is intended to run regularly on our CI server, to verify the availability of several geocaching websites
@@ -67,12 +68,11 @@ public class WatchdogTest extends CGeoTestCase {
         assertThat(geocache.getGeocode()).isEqualTo(geocode);
     }
 
-    private static void checkWebsite(final String connectorName, final String host) {
+    private static void checkWebsite(final String connectorName, final String url) {
 
         // temporarily disable oc.es
         if (connectorName.equalsIgnoreCase("geocaching website opencaching.es")) return;
 
-        final String url = "http://" + host + "/";
         final String page = Network.getResponseData(Network.getRequest(url));
         assertThat(page).overridingErrorMessage("Failed to get response from " + connectorName).isNotEmpty();
     }
@@ -80,8 +80,11 @@ public class WatchdogTest extends CGeoTestCase {
     @NotForIntegrationTests
     public static void testTrackableWebsites() {
         for (final TrackableConnector trackableConnector : ConnectorFactory.getTrackableConnectors()) {
-            if (trackableConnector != ConnectorFactory.UNKNOWN_TRACKABLE_CONNECTOR) {
-                checkWebsite("trackable website " + trackableConnector.getHost(), trackableConnector.getHost());
+            if (!trackableConnector.equals(ConnectorFactory.UNKNOWN_TRACKABLE_CONNECTOR)) {
+                checkWebsite("trackable website " + trackableConnector.getHost(), trackableConnector.getHostUrl());
+                if (StringUtils.isNotBlank(trackableConnector.getProxyUrl())) {
+                    checkWebsite("trackable website " + trackableConnector.getHost() + " proxy " + trackableConnector.getProxyUrl(), trackableConnector.getProxyUrl());
+                }
             }
         }
     }
@@ -89,8 +92,8 @@ public class WatchdogTest extends CGeoTestCase {
     @NotForIntegrationTests
     public static void testGeocachingWebsites() {
         for (final IConnector connector : ConnectorFactory.getConnectors()) {
-            if (connector != ConnectorFactory.UNKNOWN_CONNECTOR) {
-                checkWebsite("geocaching website " + connector.getName(), connector.getHost());
+            if (!connector.equals(ConnectorFactory.UNKNOWN_CONNECTOR)) {
+                checkWebsite("geocaching website " + connector.getName(), connector.getHostUrl());
             }
         }
     }

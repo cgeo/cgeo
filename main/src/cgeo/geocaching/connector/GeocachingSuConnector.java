@@ -45,7 +45,7 @@ class GeocachingSuConnector extends AbstractConnector {
     @Override
     @NonNull
     protected String getCacheUrlPrefix() {
-        return "http://" + getHost() + "/?pn=101";
+        return getHostUrl() + "/?pn=101";
     }
 
 }

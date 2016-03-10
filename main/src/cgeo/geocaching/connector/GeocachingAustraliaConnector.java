@@ -38,6 +38,6 @@ class GeocachingAustraliaConnector extends AbstractConnector {
     @Override
     @NonNull
     protected String getCacheUrlPrefix() {
-        return "http://" + getHost() + "/cache/";
+        return getHostUrl() + "/cache/";
     }
 }

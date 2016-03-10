@@ -66,6 +66,18 @@ public class GeokretyConnector extends AbstractTrackableConnector {
     }
 
     @Override
+    @NonNull
+    public String getHostUrl() {
+        return URL;
+    }
+
+    @Override
+    @Nullable
+    public String getProxyUrl() {
+        return URLPROXY;
+    }
+
+    @Override
     public int getPreferenceActivity() {
         return R.string.preference_screen_geokrety;
     }

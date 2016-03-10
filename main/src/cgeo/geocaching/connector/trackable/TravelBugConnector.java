@@ -45,7 +45,7 @@ public class TravelBugConnector extends AbstractTrackableConnector {
     @Override
     @NonNull
     public String getUrl(@NonNull final Trackable trackable) {
-        return "https://" + getHost() + "//track/details.aspx?tracker=" + trackable.getGeocode();
+        return getHostUrl() + "//track/details.aspx?tracker=" + trackable.getGeocode();
     }
 
     static String getTravelbugViewstates(final String guid) {
