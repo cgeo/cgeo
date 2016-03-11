@@ -6,6 +6,8 @@ import cgeo.geocaching.R;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -169,4 +171,17 @@ public enum LogType {
 		}
 		return R.drawable.marker_unknown_offline;
 	}
+
+    /**
+     * return the collection of found log type ids, to be used in the parser
+     */
+    public static Collection<String> foundLogTypes() {
+        final ArrayList<String> foundLogTypes = new ArrayList<>();
+        for (final LogType logType : LogType.values()) {
+            if (logType.isFoundLog()) {
+                foundLogTypes.add(String.valueOf(logType.id));
+            }
+        }
+        return foundLogTypes;
+    }
 }
