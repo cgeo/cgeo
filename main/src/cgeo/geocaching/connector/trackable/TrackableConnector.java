@@ -191,4 +191,18 @@ public interface TrackableConnector {
      */
     @NonNull
     String getHost();
+
+    /**
+     * Get url of the connector server, for dynamic loading of data.
+     * Contains scheme.
+     */
+    @NonNull
+    String getHostUrl();
+
+    /**
+     * Get proxy url name of the connector server, if any, for dynamic loading of data.
+     * Contains scheme.
+     */
+    @Nullable
+    String getProxyUrl();
 }

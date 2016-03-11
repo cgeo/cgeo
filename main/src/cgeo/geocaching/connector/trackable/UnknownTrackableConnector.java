@@ -50,4 +50,10 @@ public class UnknownTrackableConnector extends AbstractTrackableConnector {
     public String getHost() {
         throw new IllegalStateException("Unknown trackable connector does not have a host.");
     }
+
+    @Override
+    @NonNull
+    public String getHostUrl() {
+        throw new IllegalStateException("Unknown trackable connector does not have a host url.");
+    }
 }

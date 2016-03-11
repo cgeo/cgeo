@@ -19,6 +19,8 @@ import java.util.regex.Pattern;
 public final class GeolutinsConnector extends AbstractTrackableConnector {
 
     private static final Pattern PATTERN_GL_CODE = Pattern.compile("(GL[0-9A-F]{5}|[0-9]{8}-[0-9]{3,4})");
+    private static final String HOST = "www.geolutins.com";
+    private static final String URL = "http://" + HOST;
 
     /**
      * Get geocode from Geolutins id
@@ -56,7 +58,7 @@ public final class GeolutinsConnector extends AbstractTrackableConnector {
     }
 
     private static String getUrl(final String geocode) {
-        return "http://www.geolutins.com/profil_geolutin.php?ID_Geolutin_Selectionne=" + getId(geocode);
+        return URL + "/profil_geolutin.php?ID_Geolutin_Selectionne=" + getId(geocode);
     }
 
     @Override
@@ -68,7 +70,7 @@ public final class GeolutinsConnector extends AbstractTrackableConnector {
             glid = geocode;
         } else {
             // This probably a Tracking Code
-            Log.d("GeokretyConnector.searchTrackable: geocode=" + geocode);
+            Log.d("GeolutinsConnector.searchTrackable: geocode=" + geocode);
 
             final String geocodeFound = getGeocodeFromTrackingCode(geocode);
             if (geocodeFound == null) {
@@ -79,7 +81,7 @@ public final class GeolutinsConnector extends AbstractTrackableConnector {
 
         Log.i("GeolutinsConnector.searchTrackable: glid=" + glid);
         try {
-            final String urlDetails = "http://www.geolutins.com/xml/api.php?G=" + StringUtils.upperCase(glid);
+            final String urlDetails = URL + "/xml/api.php?G=" + StringUtils.upperCase(glid);
             Log.i("GeolutinsConnector.searchTrackable URL: " + urlDetails);
 
             final InputStream response = Network.getResponseStream(Network.getRequest(urlDetails));
@@ -119,7 +121,13 @@ public final class GeolutinsConnector extends AbstractTrackableConnector {
     @Override
     @NonNull
     public String getHost() {
-        return "www.geolutins.com";
+        return HOST;
+    }
+
+    @Override
+    @NonNull
+    public String getHostUrl() {
+        return URL;
     }
 
     /**
@@ -134,7 +142,7 @@ public final class GeolutinsConnector extends AbstractTrackableConnector {
     public static String getGeocodeFromTrackingCode(final String trackingCode) {
 
         final Parameters params = new Parameters("G", trackingCode);
-        final InputStream response = Network.getResponseStream(Network.getRequest("http://www.geolutins.com/xml/decode.php", params));
+        final InputStream response = Network.getResponseStream(Network.getRequest(URL + "/xml/decode.php", params));
         final List<Trackable> trackables = GeolutinsParser.parse(new InputSource(response));
 
         if (CollectionUtils.isNotEmpty(trackables)) {

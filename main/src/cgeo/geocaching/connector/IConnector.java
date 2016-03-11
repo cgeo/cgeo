@@ -105,6 +105,13 @@ public interface IConnector {
     String getHost();
 
     /**
+     * Get url of the connector server for dynamic loading of data.
+     *
+     */
+    @NonNull
+    String getHostUrl();
+
+    /**
      * Get cache data license text. This is displayed somewhere near the cache details.
      *
      */
