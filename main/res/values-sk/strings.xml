@@ -154,6 +154,7 @@
   <string name="err_license">Používateľ nepotvrdil súhlas s licenčnou dohodou serveru Geocaching.com, takže c:geo nemôže načítať súradnice skrýše.</string>
   <string name="err_unvalidated_account">Najprv musíte overiť svoj účet na internetových stránkach Geocaching.com.</string>
   <string name="err_unpublished">Požadovaná skrýša nebola publikovaná.</string>
+  <string name="err_cache_not_found">Požadovaná skrýša nebola nájdená.</string>
   <string name="err_premium_only">Skrýša je dostupná iba pre platiacich používateľov Geocaching.com</string>
   <string name="err_detail_open">Prepáčte, c:geo nedokáže načítať detaily skrýše.</string>
   <string name="err_detail_cache">Prepáčte, c:geo nedokáže načítať detaily skrýše. Je to naozaj skrýša?</string>
@@ -930,6 +931,7 @@
   <string name="map_trail_show">Zobraziť záznam trasy</string>
   <string name="map_circles_show">Zobraziť kruhy</string>
   <string name="map_mycaches_hide">Skryť vlastné/nájdené skrýše</string>
+  <string name="map_disabled_hide">Nezobrazovať deaktivované skrýše</string>
   <string name="map_theme_builtin">Predvolená</string>
   <string name="map_theme_select">Vybrať tému mapy</string>
   <string name="map_live_enable">Povoliť aktívnu mapu</string>
