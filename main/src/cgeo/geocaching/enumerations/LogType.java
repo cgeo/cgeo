@@ -6,6 +6,8 @@ import cgeo.geocaching.R;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -157,13 +159,26 @@ public enum LogType {
         return isArchiveLog();
     }
 
+	/**
+	 * get the overlay image ID for showing the offline log type
+	 */
+	public int getOfflineLogOverlay() {
+		if (overlayId != 0) {
+			return overlayId;
+		}
+		return R.drawable.marker_unknown_offline;
+	}
+
     /**
-     * get the overlay image ID for showing the offline log type
+     * return the collection of found log type ids, to be used in the parser
      */
-    public int getOfflineLogOverlay() {
-        if (overlayId != 0) {
-            return overlayId;
+    public static Collection<String> foundLogTypes() {
+        final ArrayList<String> foundLogTypes = new ArrayList<>();
+        for (final LogType logType : LogType.values()) {
+            if (logType.isFoundLog()) {
+                foundLogTypes.add(String.valueOf(logType.id));
+            }
         }
-        return R.drawable.marker_unknown_offline;
+        return foundLogTypes;
     }
 }

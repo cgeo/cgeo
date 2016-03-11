@@ -2,6 +2,11 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
+  <b>Next bugfix release:</b>\n
+    · Fix: Text selection from cache description no longer working on some devices\n
+    · Fix: Translation menu sometimes missing after selecting text\n
+    \n
+    \n
     <b>2016.03.06:</b>\n
     · New: Select parts of the cache description text for sharing\n
     · New: Invite friends to use c:geo directly from the app\n
