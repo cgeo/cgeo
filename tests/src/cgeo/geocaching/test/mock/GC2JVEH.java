@@ -13,7 +13,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
@@ -118,7 +118,7 @@ public class GC2JVEH extends MockedCache {
 
     @Override
     public Map<LogType, Integer> getLogCounts() {
-        final Map<LogType, Integer> logCounts = new HashMap<LogType, Integer>();
+        final Map<LogType, Integer> logCounts = new EnumMap<>(LogType.class);
         logCounts.put(LogType.FOUND_IT, 101);
         logCounts.put(LogType.NOTE, 7);
         logCounts.put(LogType.TEMP_DISABLE_LISTING, 1);
