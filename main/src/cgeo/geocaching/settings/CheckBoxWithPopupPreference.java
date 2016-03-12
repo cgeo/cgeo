@@ -39,12 +39,13 @@ public class CheckBoxWithPopupPreference extends CheckBoxPreference {
             return; // coward's retreat
         }
 
+        // Array need to be ordered. See: http://stackoverflow.com/a/19092511/944936
         final TypedArray types = context.obtainStyledAttributes(attrs, new int[] {
-                R.attr.title, R.attr.text, R.attr.url, R.attr.urlButton },
+                R.attr.text, R.attr.title, R.attr.url, R.attr.urlButton },
                 defStyle, 0);
 
-        title = types.getString(0);
-        text = types.getString(1);
+        text = types.getString(0);
+        title = types.getString(1);
         url = types.getString(2);
         urlButton = types.getString(3);
 
