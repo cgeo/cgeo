@@ -20,7 +20,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.mapsforge.map.layer.Layer;
 
 import java.lang.ref.WeakReference;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.EnumSet;
 import java.util.HashSet;
@@ -74,7 +73,7 @@ public class LiveCachesOverlay extends AbstractCachesOverlay {
 
                 // check if map moved or zoomed
                 //TODO Portree Use Rectangle inside with bigger search window. That will stop reloading on every move
-                final boolean moved = (previousViewport == null) || zoomNow != previousZoom ||
+                final boolean moved = overlay.isInvalidated() || (previousViewport == null) || zoomNow != previousZoom ||
                         (mapMoved(previousViewport, viewportNow) || !previousViewport.includes(viewportNow));
 
                 // update title on any change
@@ -91,6 +90,7 @@ public class LiveCachesOverlay extends AbstractCachesOverlay {
                         overlay.downloading = true;
                         previousViewport = viewportNow;
                         overlay.download();
+                        overlay.refreshed();
                         overlay.downloading = false;
                     }
                 }
@@ -123,7 +123,7 @@ public class LiveCachesOverlay extends AbstractCachesOverlay {
             searchResult.addSearchResult(ConnectorFactory.searchByViewport(getViewport().resize(1.2), tokens));
 
             final Set<Geocache> result = searchResult.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
-            filter(result);
+            AbstractCachesOverlay.filter(result);
             // update the caches
             // first remove filtered out
             final Set<String> filteredCodes = searchResult.getFilteredGeocodes();
@@ -202,19 +202,6 @@ public class LiveCachesOverlay extends AbstractCachesOverlay {
         timer.unsubscribe();
 
         super.onDestroy();
-    }
-
-    private static synchronized void filter(final Collection<Geocache> caches) {
-        final boolean excludeMine = Settings.isExcludeMyCaches();
-        final boolean excludeDisabled = Settings.isExcludeDisabledCaches();
-
-        final List<Geocache> removeList = new ArrayList<>();
-        for (final Geocache cache : caches) {
-            if ((excludeMine && cache.isFound()) || (excludeMine && cache.isOwner()) || (excludeDisabled && cache.isDisabled()) || (excludeDisabled && cache.isArchived())) {
-                removeList.add(cache);
-            }
-        }
-        caches.removeAll(removeList);
     }
 
     private static boolean mapMoved(final Viewport referenceViewport, final Viewport newViewport) {
