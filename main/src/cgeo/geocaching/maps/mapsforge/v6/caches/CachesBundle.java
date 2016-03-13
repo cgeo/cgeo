@@ -177,4 +177,13 @@ public class CachesBundle {
 
         return result;
     }
+
+    public void invalidate() {
+        if (storedOverlay != null) {
+            storedOverlay.invalidate();
+        }
+        if (liveOverlay != null) {
+            liveOverlay.invalidate();
+        }
+    }
 }

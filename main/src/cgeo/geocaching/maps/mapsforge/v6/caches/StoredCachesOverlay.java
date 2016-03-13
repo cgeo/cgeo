@@ -15,7 +15,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.mapsforge.map.layer.Layer;
 
 import java.lang.ref.WeakReference;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -64,7 +63,7 @@ public class StoredCachesOverlay extends AbstractCachesOverlay {
 
                 // check if map moved or zoomed
                 //TODO Portree Use Rectangle inside with bigger search window. That will stop reloading on every move
-                final boolean moved = (previousViewport == null) || zoomNow != previousZoom ||
+                final boolean moved = overlay.isInvalidated() || (previousViewport == null) || zoomNow != previousZoom ||
                         (mapMoved(previousViewport, viewportNow) || !previousViewport.includes(viewportNow));
 
                 // update title on any change
@@ -78,6 +77,7 @@ public class StoredCachesOverlay extends AbstractCachesOverlay {
 
                         previousViewport = viewportNow;
                         overlay.load();
+                    overlay.refreshed();
                 }
             } catch (final Exception e) {
                 Log.w("CGeoMap.startLoadtimer.start", e);
@@ -166,19 +166,6 @@ public class StoredCachesOverlay extends AbstractCachesOverlay {
         timer.unsubscribe();
 
         super.onDestroy();
-    }
-
-    private static synchronized void filter(final Collection<Geocache> caches) {
-        final boolean excludeMine = Settings.isExcludeMyCaches();
-        final boolean excludeDisabled = Settings.isExcludeDisabledCaches();
-
-        final List<Geocache> removeList = new ArrayList<>();
-        for (final Geocache cache : caches) {
-            if ((excludeMine && cache.isFound()) || (excludeMine && cache.isOwner()) || (excludeDisabled && cache.isDisabled()) || (excludeDisabled && cache.isArchived())) {
-                removeList.add(cache);
-            }
-        }
-        caches.removeAll(removeList);
     }
 
     private static boolean mapMoved(final Viewport referenceViewport, final Viewport newViewport) {

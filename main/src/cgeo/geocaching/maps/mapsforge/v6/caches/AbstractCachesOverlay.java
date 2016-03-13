@@ -1,16 +1,17 @@
 package cgeo.geocaching.maps.mapsforge.v6.caches;
 
 import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.enumerations.LoadFlags;
+import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.mapsforge.v6.MapHandlers;
 import cgeo.geocaching.maps.mapsforge.v6.MfMapView;
 import cgeo.geocaching.maps.mapsforge.v6.NewMap;
 import cgeo.geocaching.maps.mapsforge.v6.TapHandler;
-import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
-import cgeo.geocaching.enumerations.LoadFlags;
-import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.location.Viewport;
+import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapUtils;
 
@@ -20,7 +21,9 @@ import org.mapsforge.map.android.graphics.AndroidGraphicFactory;
 import org.mapsforge.map.layer.Layer;
 import org.mapsforge.map.layer.Layers;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 public abstract class AbstractCachesOverlay {
@@ -31,6 +34,7 @@ public abstract class AbstractCachesOverlay {
     private final Layer anchorLayer;
     private final GeoitemLayers layerList = new GeoitemLayers();
     private final MapHandlers mapHandlers;
+    private boolean invalidated = true;
 
     public AbstractCachesOverlay(final int overlayId, final Set<GeoEntry> geoEntries, final MfMapView mapView, final Layer anchorLayer, final MapHandlers mapHandlers) {
         this.overlayId = overlayId;
@@ -52,8 +56,20 @@ public abstract class AbstractCachesOverlay {
         return layerList.size();
     }
 
+    public void invalidate() {
+        invalidated = true;
+    }
+
+    protected boolean isInvalidated() {
+        return invalidated;
+    }
+
+    protected void refreshed() {
+        invalidated = false;
+    }
+
     protected final boolean addItem(final Geocache cache) {
-        GeoEntry entry = new GeoEntry(cache.getGeocode(), overlayId);
+        final GeoEntry entry = new GeoEntry(cache.getGeocode(), overlayId);
         if (geoEntries.add(entry)) {
             layerList.add(getCacheItem(cache, this.mapHandlers.getTapHandler()));
 
@@ -68,7 +84,7 @@ public abstract class AbstractCachesOverlay {
     }
 
     protected final boolean addItem(final Waypoint waypoint) {
-        GeoEntry entry = new GeoEntry(waypoint.getGpxId(), overlayId);
+        final GeoEntry entry = new GeoEntry(waypoint.getGpxId(), overlayId);
         final GeoitemLayer waypointItem = getWaypointItem(waypoint, this.mapHandlers.getTapHandler());
         if (waypointItem != null && geoEntries.add(entry)) {
             layerList.add(waypointItem);
@@ -139,6 +155,19 @@ public abstract class AbstractCachesOverlay {
         layers.addAll(index, layerList.getMatchingLayers(newCodes));
 
         Log.d(String.format("Layers for id %d synced. Codes removed: %d, new codes: %d, geoEntries: %d", overlayId, removeCodes.size(), newCodes.size(), geoEntries.size()));
+    }
+
+    static synchronized void filter(final Collection<Geocache> caches) {
+        final boolean excludeMine = Settings.isExcludeMyCaches();
+        final boolean excludeDisabled = Settings.isExcludeDisabledCaches();
+
+        final List<Geocache> removeList = new ArrayList<>();
+        for (final Geocache cache : caches) {
+            if ((excludeMine && cache.isFound()) || (excludeMine && cache.isOwner()) || (excludeDisabled && cache.isDisabled()) || (excludeDisabled && cache.isArchived())) {
+                removeList.add(cache);
+            }
+        }
+        caches.removeAll(removeList);
     }
 
     private static GeoitemLayer getCacheItem(final Geocache cache, final TapHandler tapHandler) {

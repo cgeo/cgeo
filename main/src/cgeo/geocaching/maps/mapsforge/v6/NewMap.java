@@ -5,16 +5,8 @@ import cgeo.geocaching.CachePopup;
 import cgeo.geocaching.CompassActivity;
 import cgeo.geocaching.EditWaypointActivity;
 import cgeo.geocaching.Intents;
-import cgeo.geocaching.maps.mapsforge.v6.caches.CachesBundle;
-import cgeo.geocaching.maps.mapsforge.v6.caches.GeoitemRef;
-import cgeo.geocaching.maps.mapsforge.v6.layers.HistoryLayer;
-import cgeo.geocaching.maps.mapsforge.v6.layers.NavigationLayer;
-import cgeo.geocaching.maps.mapsforge.v6.layers.PositionLayer;
-import cgeo.geocaching.maps.mapsforge.v6.layers.TapHandlerLayer;
-import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.WaypointPopup;
 import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.activity.ActivityMixin;
@@ -27,14 +19,23 @@ import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.CGeoMap.MapMode;
+import cgeo.geocaching.maps.LivemapStrategy;
 import cgeo.geocaching.maps.MapProviderFactory;
 import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.maps.interfaces.OnMapDragListener;
 import cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider;
+import cgeo.geocaching.maps.mapsforge.v6.caches.CachesBundle;
+import cgeo.geocaching.maps.mapsforge.v6.caches.GeoitemRef;
+import cgeo.geocaching.maps.mapsforge.v6.layers.HistoryLayer;
+import cgeo.geocaching.maps.mapsforge.v6.layers.NavigationLayer;
+import cgeo.geocaching.maps.mapsforge.v6.layers.PositionLayer;
+import cgeo.geocaching.maps.mapsforge.v6.layers.TapHandlerLayer;
+import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
@@ -52,9 +53,6 @@ import org.mapsforge.map.layer.renderer.TileRendererLayer;
 import org.mapsforge.map.reader.MapFile;
 import org.mapsforge.map.rendertheme.ExternalRenderTheme;
 import org.mapsforge.map.rendertheme.InternalRenderTheme;
-
-import rx.Subscription;
-import rx.subscriptions.Subscriptions;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
@@ -85,6 +83,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import rx.Subscription;
+import rx.subscriptions.Subscriptions;
+
 @SuppressLint("ClickableViewAccessibility")
 public class NewMap extends AbstractActionBarActivity {
 
@@ -106,6 +107,8 @@ public class NewMap extends AbstractActionBarActivity {
     private WaypointType waypointTypeIntent = null;
     private MapState mapStateIntent = null;
     private ArrayList<Location> trailHistory = null;
+
+    private Geopoint lastNavTarget = null;
 
     final private UpdateLoc geoDirUpdate = new UpdateLoc(this);
     /**
@@ -185,8 +188,30 @@ public class NewMap extends AbstractActionBarActivity {
                 this.mapView.getModel().frameBufferModel.getOverdrawFactor());
 
         // attach drag handler
-        DragHandler dragHandler = new DragHandler(this);
+        final DragHandler dragHandler = new DragHandler(this);
         mapView.setOnMapDragListener(dragHandler);
+
+        // prepare initial settings of mapview
+        if (mapStateIntent != null) {
+            this.mapView.getModel().mapViewPosition.setCenter(mapStateIntent.getCenter());
+            this.mapView.getModel().mapViewPosition.setZoomLevel((byte) mapStateIntent.getZoomLevel());
+        } else if (searchIntent != null) {
+            final Viewport viewport = DataStore.getBounds(searchIntent.getGeocodes());
+
+            if (viewport != null) {
+                mapView.zoomToViewport(viewport);
+            }
+        } else if (StringUtils.isNotEmpty(geocodeIntent)) {
+            final Viewport viewport = DataStore.getBounds(geocodeIntent);
+
+            if (viewport != null) {
+                mapView.zoomToViewport(viewport);
+            }
+        } else if (coordsIntent != null) {
+            mapView.zoomToViewport(new Viewport(coordsIntent, 0, 0));
+        } else {
+            mapView.zoomToViewport(new Viewport(Settings.getMapCenter().getCoords(), 0, 0));
+        }
     }
 
     @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
@@ -235,18 +260,45 @@ public class NewMap extends AbstractActionBarActivity {
             }
             itemMapLive.setVisible(coordsIntent == null);
 
+            //TODO: menu_store_caches
+            menu.findItem(R.id.menu_store_caches).setVisible(false);
+            //final Set<String> geocodesInViewport = getGeocodesForCachesInViewport();
+            //menu.findItem(R.id.menu_store_caches).setVisible(!isLoading() && CollectionUtils.isNotEmpty(geocodesInViewport) && new SearchResult(geocodesInViewport).hasUnsavedCaches());
+
             menu.findItem(R.id.menu_mycaches_mode).setChecked(Settings.isExcludeMyCaches());
+            menu.findItem(R.id.menu_disabled_mode).setChecked(Settings.isExcludeDisabledCaches());
             menu.findItem(R.id.menu_direction_line).setChecked(Settings.isMapDirection());
-            //            menu.findItem(R.id.menu_circle_mode).setChecked(this.searchOverlay.getCircles());
+            //TODO: circles            menu.findItem(R.id.menu_circle_mode).setChecked(this.searchOverlay.getCircles());
+            menu.findItem(R.id.menu_circle_mode).setVisible(false);
             menu.findItem(R.id.menu_trail_mode).setChecked(Settings.isMapTrail());
 
             menu.findItem(R.id.menu_theme_mode).setVisible(true);
+
+            //TODO: menu_as_list
+            menu.findItem(R.id.menu_as_list).setVisible(false);
+            //menu.findItem(R.id.menu_as_list).setVisible(!isLoading() && caches.size() > 1);
+
+            menu.findItem(R.id.submenu_strategy).setVisible(isLiveEnabled);
+
+            switch (Settings.getLiveMapStrategy()) {
+                case FASTEST:
+                    menu.findItem(R.id.menu_strategy_fastest).setChecked(true);
+                    break;
+                case FAST:
+                    menu.findItem(R.id.menu_strategy_fast).setChecked(true);
+                    break;
+                case AUTO:
+                    menu.findItem(R.id.menu_strategy_auto).setChecked(true);
+                    break;
+                default: // DETAILED
+                    menu.findItem(R.id.menu_strategy_detailed).setChecked(true);
+            }
 
             menu.findItem(R.id.menu_hint).setVisible(mapMode == MapMode.SINGLE);
             menu.findItem(R.id.menu_compass).setVisible(mapMode == MapMode.SINGLE);
 
         } catch (final RuntimeException e) {
-            Log.e("CGeoMap.onPrepareOptionsMenu", e);
+            Log.e("NewMap.onPrepareOptionsMenu", e);
         }
 
         return true;
@@ -280,6 +332,9 @@ public class NewMap extends AbstractActionBarActivity {
                     mapTitle = StringUtils.EMPTY;
                 }
                 return true;
+            case R.id.menu_store_caches:
+                //TODO: menu_store_caches
+                return true;
             case R.id.menu_circle_mode:
                 //                overlayCaches.switchCircles();
                 //                mapView.repaintRequired(overlayCaches);
@@ -287,14 +342,48 @@ public class NewMap extends AbstractActionBarActivity {
                 return true;
             case R.id.menu_mycaches_mode:
                 Settings.setExcludeMine(!Settings.isExcludeMyCaches());
+                caches.invalidate();
                 ActivityMixin.invalidateOptionsMenu(this);
                 if (!Settings.isExcludeMyCaches()) {
+                    Tile.cache.clear();
+                }
+                return true;
+            case R.id.menu_disabled_mode:
+                Settings.setExcludeDisabled(!Settings.isExcludeDisabledCaches());
+                caches.invalidate();
+                ActivityMixin.invalidateOptionsMenu(this);
+                if (!Settings.isExcludeDisabledCaches()) {
                     Tile.cache.clear();
                 }
                 return true;
             case R.id.menu_theme_mode:
                 selectMapTheme();
                 return true;
+            case R.id.menu_as_list: {
+                //TODO: menu_as_list
+                //CacheListActivity.startActivityMap(activity, new SearchResult(getGeocodesForCachesInViewport()));
+                return true;
+            }
+            case R.id.menu_strategy_fastest: {
+                item.setChecked(true);
+                Settings.setLiveMapStrategy(LivemapStrategy.FASTEST);
+                return true;
+            }
+            case R.id.menu_strategy_fast: {
+                item.setChecked(true);
+                Settings.setLiveMapStrategy(LivemapStrategy.FAST);
+                return true;
+            }
+            case R.id.menu_strategy_auto: {
+                item.setChecked(true);
+                Settings.setLiveMapStrategy(LivemapStrategy.AUTO);
+                return true;
+            }
+            case R.id.menu_strategy_detailed: {
+                item.setChecked(true);
+                Settings.setLiveMapStrategy(LivemapStrategy.DETAILED);
+                return true;
+            }
             case R.id.menu_hint:
                 menuShowHint();
                 return true;
@@ -417,27 +506,6 @@ public class NewMap extends AbstractActionBarActivity {
     protected void onStart() {
         super.onStart();
 
-        if (mapStateIntent != null) {
-            this.mapView.getModel().mapViewPosition.setCenter(mapStateIntent.getCenter());
-            this.mapView.getModel().mapViewPosition.setZoomLevel((byte) mapStateIntent.getZoomLevel());
-        } else if (searchIntent != null) {
-            final Viewport viewport = DataStore.getBounds(searchIntent.getGeocodes());
-
-            if (viewport != null) {
-                mapView.zoomToViewport(viewport);
-            }
-        } else if (StringUtils.isNotEmpty(geocodeIntent)) {
-            final Viewport viewport = DataStore.getBounds(geocodeIntent);
-
-            if (viewport != null) {
-                mapView.zoomToViewport(viewport);
-            }
-        } else if (coordsIntent != null) {
-            mapView.zoomToViewport(new Viewport(coordsIntent, 0, 0));
-        } else {
-            mapView.zoomToViewport(new Viewport(Settings.getMapCenter().getCoords(), 0, 0));
-        }
-
         // tile renderer layer using internal render theme
         this.tileRendererLayer = new TileRendererLayer(tileCache, new MapFile(NewMap.getMapFile()),
                 this.mapView.getModel().mapViewPosition, false, true, AndroidGraphicFactory.INSTANCE);
@@ -451,18 +519,21 @@ public class NewMap extends AbstractActionBarActivity {
         this.mapView.getLayerManager().getLayers().add(this.historyLayer);
 
         // NavigationLayer
-        Geopoint navTarget = this.coordsIntent;
-        if (navTarget == null && StringUtils.isNotEmpty(this.geocodeIntent)) {
-            final Viewport bounds = DataStore.getBounds(this.geocodeIntent);
-            if (bounds != null) {
-                navTarget = bounds.center;
+        Geopoint navTarget = lastNavTarget;
+        if (navTarget == null) {
+            navTarget = this.coordsIntent;
+            if (navTarget == null && StringUtils.isNotEmpty(this.geocodeIntent)) {
+                final Viewport bounds = DataStore.getBounds(this.geocodeIntent);
+                if (bounds != null) {
+                    navTarget = bounds.center;
+                }
             }
         }
         this.navigationLayer = new NavigationLayer(navTarget);
         this.mapView.getLayerManager().getLayers().add(this.navigationLayer);
 
         // TapHandler
-        TapHandlerLayer tapHandlerLayer = new TapHandlerLayer(this.mapHandlers.getTapHandler());
+        final TapHandlerLayer tapHandlerLayer = new TapHandlerLayer(this.mapHandlers.getTapHandler());
         this.mapView.getLayerManager().getLayers().add(tapHandlerLayer);
 
         // Caches bundle
@@ -472,7 +543,9 @@ public class NewMap extends AbstractActionBarActivity {
             this.caches = new CachesBundle(this.geocodeIntent, this.mapView, this.mapHandlers);
         } else if (this.coordsIntent != null) {
             this.caches = new CachesBundle(coordsIntent, waypointTypeIntent, this.mapView, this.mapHandlers);
-        } else caches = new CachesBundle(this.mapView, this.mapHandlers);
+        } else {
+            caches = new CachesBundle(this.mapView, this.mapHandlers);
+        }
 
         // Live map
         caches.handleLiveLayers(isLiveEnabled);
@@ -530,14 +603,18 @@ public class NewMap extends AbstractActionBarActivity {
     @Override
     protected void onSaveInstanceState(final Bundle outState) {
         super.onSaveInstanceState(outState);
-        final MapState state = new MapState(mapView.getModel().mapViewPosition.getCenter(),
-                mapView.getModel().mapViewPosition.getZoomLevel(),
-                followMyLocation,
-                false);
+        final MapState state = prepareMapState();
         outState.putParcelable(BUNDLE_MAP_STATE, state);
         if (historyLayer != null) {
             outState.putParcelableArrayList(BUNDLE_TRAIL_HISTORY, historyLayer.getHistory());
         }
+    }
+
+    private MapState prepareMapState() {
+        return new MapState(mapView.getModel().mapViewPosition.getCenter(),
+                mapView.getModel().mapViewPosition.getZoomLevel(),
+                followMyLocation,
+                false);
     }
 
     private void centerMap(final Geopoint geopoint) {
@@ -572,8 +649,8 @@ public class NewMap extends AbstractActionBarActivity {
         }
     }
 
-    public void showAddWaypoint(LatLong tapLatLong) {
-        Geocache cache = getSingleModeCache();
+    public void showAddWaypoint(final LatLong tapLatLong) {
+        final Geocache cache = getSingleModeCache();
         if (cache != null) {
             EditWaypointActivity.startActivityAddWaypoint(this, cache, new Geopoint(tapLatLong.latitude, tapLatLong.longitude));
         }
@@ -650,7 +727,7 @@ public class NewMap extends AbstractActionBarActivity {
     private void setTitle() {
         final String title = calculateTitle();
 
-        ActionBar actionBar = getSupportActionBar();
+        final ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setTitle(title);
         }
@@ -675,7 +752,7 @@ public class NewMap extends AbstractActionBarActivity {
             return;
         }
 
-        ActionBar actionBar = getSupportActionBar();
+        final ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setSubtitle(subtitle);
         }
@@ -946,16 +1023,16 @@ public class NewMap extends AbstractActionBarActivity {
                         android.R.id.text1,
                         items){
                     @Override
-                    public View getView(int position, View convertView, ViewGroup parent) {
+                    public View getView(final int position, final View convertView, final ViewGroup parent) {
                         //Use super class to create the View
-                        View v = super.getView(position, convertView, parent);
-                        TextView tv = (TextView)v.findViewById(android.R.id.text1);
+                        final View v = super.getView(position, convertView, parent);
+                        final TextView tv = (TextView)v.findViewById(android.R.id.text1);
 
                         //Put the image on the TextView
                         tv.setCompoundDrawablesWithIntrinsicBounds(items.get(position).getMarkerId(), 0, 0, 0);
 
                         //Add margin between image and text (support various screen densities)
-                        int dp5 = (int) (5 * getResources().getDisplayMetrics().density + 0.5f);
+                        final int dp5 = (int) (5 * getResources().getDisplayMetrics().density + 0.5f);
                         tv.setCompoundDrawablePadding(dp5);
 
                         return v;
@@ -1031,9 +1108,13 @@ public class NewMap extends AbstractActionBarActivity {
 
     @Nullable
     private Geocache getSingleModeCache() {
-        final Geocache cache = DataStore.loadCache(geocodeIntent, LoadFlags.LOAD_CACHE_OR_DB);
+        if (StringUtils.isNotBlank(geocodeIntent)) {
+            final Geocache cache = DataStore.loadCache(geocodeIntent, LoadFlags.LOAD_CACHE_OR_DB);
 
-        return cache;
+            return cache;
+        }
+
+        return null;
     }
 
     private void savePrefs() {
@@ -1076,7 +1157,7 @@ public class NewMap extends AbstractActionBarActivity {
             final Geopoint coords = data.getExtras().getParcelable(Intents.EXTRA_COORDS);
 
             if (coords != null) {
-                coordsIntent = coords;
+                lastNavTarget = coords;
                 if (navigationLayer != null) {
                     navigationLayer.setDestination(coords);
                     navigationLayer.requestRedraw();
