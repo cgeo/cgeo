@@ -96,7 +96,7 @@ public class ViewportTest extends TestCase {
 
     public static void testContaining() {
         assertThat(Viewport.containing(Collections.singleton((ICoordinates) null))).isNull();
-        final Set<Geopoint> points = new HashSet<Geopoint>();
+        final Set<Geopoint> points = new HashSet<>();
         points.add(vpRef.bottomLeft);
         assertEquals(new Viewport(vpRef.bottomLeft, vpRef.bottomLeft), Viewport.containing(points));
         points.add(vpRef.topRight);

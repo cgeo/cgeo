@@ -15,7 +15,7 @@ public class ParametersTest extends TestCase {
 
     static {
         // unreserved characters: ALPHA / DIGIT / "-" / "." / "_" / "~"
-        final ArrayList<Character> unreserved = new ArrayList<Character>();
+        final ArrayList<Character> unreserved = new ArrayList<>();
         for (int i = 65; i <= 90; i++) {
             unreserved.add((char) i); // uppercase
             unreserved.add((char) (i + 32)); // lowercase

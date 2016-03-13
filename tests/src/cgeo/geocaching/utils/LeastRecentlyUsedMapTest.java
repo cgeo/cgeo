@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LeastRecentlyUsedMapTest extends TestCase {
 
     public static void testLruMode() {
-        final Map<String, String> map = new LeastRecentlyUsedMap.LruCache<String, String>(4);
+        final Map<String, String> map = new LeastRecentlyUsedMap.LruCache<>(4);
         map.put("one", "1");
         map.put("two", "2");
         map.put("three", "3");
@@ -30,7 +30,7 @@ public class LeastRecentlyUsedMapTest extends TestCase {
     }
 
     public static void testBoundedMode() {
-        final Map<String, String> map = new LeastRecentlyUsedMap.Bounded<String, String>(5);
+        final Map<String, String> map = new LeastRecentlyUsedMap.Bounded<>(5);
         map.put("one", "1");
         map.put("two", "2");
         map.put("three", "3");
@@ -49,7 +49,7 @@ public class LeastRecentlyUsedMapTest extends TestCase {
     }
 
     public static void testRemoveEldestEntry() {
-        final LeastRecentlyUsedMap<String, Geocache> cache = new LeastRecentlyUsedMap.LruCache<String, Geocache>(10);
+        final LeastRecentlyUsedMap<String, Geocache> cache = new LeastRecentlyUsedMap.LruCache<>(10);
         final Geocache first = new Geocache();
         assertThat(cache.put("1", first)).isNull();
 

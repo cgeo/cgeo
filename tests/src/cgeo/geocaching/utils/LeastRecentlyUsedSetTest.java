@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LeastRecentlyUsedSetTest extends TestCase {
 
     public static void testLruMode() {
-        final Set<String> set = new LeastRecentlyUsedSet<String>(5);
+        final Set<String> set = new LeastRecentlyUsedSet<>(5);
         set.add("one");
         set.add("two");
         set.add("three");
@@ -30,7 +30,7 @@ public class LeastRecentlyUsedSetTest extends TestCase {
     }
 
     public static void testRemoveEldestEntry() {
-        final LeastRecentlyUsedSet<Geocache> caches = new LeastRecentlyUsedSet<Geocache>(10);
+        final LeastRecentlyUsedSet<Geocache> caches = new LeastRecentlyUsedSet<>(10);
         final Geocache first = new Geocache();
         first.setGeocode("1");
         assertThat(caches.add(first)).isTrue();
