@@ -15,6 +15,7 @@ import com.drew.metadata.exif.GpsDirectory;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.Nullable;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -58,11 +59,9 @@ public class ImagesList {
     private Image currentImage;
 
     public enum ImageType {
-        LogImages(R.string.cache_log_images_title),
-        SpoilerImages(R.string.cache_spoiler_images_title);
+        LogImages(R.string.cache_log_images_title), SpoilerImages(R.string.cache_spoiler_images_title);
 
-        @StringRes
-        private final int titleResId;
+        @StringRes private final int titleResId;
 
         ImageType(@StringRes final int title) {
             this.titleResId = title;
@@ -94,8 +93,10 @@ public class ImagesList {
     /**
      * Load images into a view.
      *
-     * @param parentView a view to load the images into
-     * @param images the images to load
+     * @param parentView
+     *            a view to load the images into
+     * @param images
+     *            the images to load
      * @return a subscription which, when unsubscribed, interrupts the loading and clears up resources
      */
     public Subscription loadImages(final View parentView, final Collection<Image> images) {
@@ -144,7 +145,7 @@ public class ImagesList {
     }
 
     private void display(final RelativeLayout imageViewLayout, final BitmapDrawable image, final Image img, final LinearLayout view) {
-        final ImageView imageView = (ImageView)imageViewLayout.findViewById(R.id.map_image);
+        final ImageView imageView = (ImageView) imageViewLayout.findViewById(R.id.map_image);
         if (image != null) {
             bitmaps.add(image.getBitmap());
 
@@ -173,45 +174,53 @@ public class ImagesList {
         }
     }
 
-    private void addGeoOverlay(final RelativeLayout imageViewLayout, final Image img) {
+    @Nullable
+    private GeoLocation getImageLocation(final Image image) {
         try {
-            final File file = LocalStorage.getStorageFile(geocode, img.getUrl(), true, false);
+            final File file = LocalStorage.getStorageFile(geocode, image.getUrl(), true, false);
             final Metadata metadata = ImageMetadataReader.readMetadata(file);
             final Collection<GpsDirectory> gpsDirectories = metadata.getDirectoriesOfType(GpsDirectory.class);
             if (gpsDirectories == null) {
-                return;
+                return null;
             }
 
             for (final GpsDirectory gpsDirectory : gpsDirectories) {
                 // Try to read out the location, making sure it's non-zero
                 final GeoLocation geoLocation = gpsDirectory.getGeoLocation();
                 if (geoLocation != null && !geoLocation.isZero()) {
-                    final ImageView geoOverlay = (ImageView) imageViewLayout.findViewById(R.id.geo_overlay);
-                    geoOverlay.setVisibility(View.VISIBLE);
-                    geoOverlay.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(final View wpNavView) {
-                            final Geopoint gpt = new Geopoint(geoLocation.getLatitude(), geoLocation.getLongitude());
-                            wpNavView.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(final View v) {
-                                    NavigationAppFactory.startDefaultNavigationApplication(1, activity, gpt);
-                                }
-                            });
-                            wpNavView.setOnLongClickListener(new View.OnLongClickListener() {
-                                @Override
-                                public boolean onLongClick(final View v) {
-                                    NavigationAppFactory.startDefaultNavigationApplication(2, activity, gpt);
-                                    return true;
-                                }
-                            });
-                        }
-                    });
-                    break; // add only the first found geoLocation
+                    return geoLocation;
                 }
             }
         } catch (final Exception e) {
             Log.e("ImagesList.addGeoOverlay", e);
+        }
+        return null;
+    }
+
+    private void addGeoOverlay(final RelativeLayout imageViewLayout, final Image img) {
+        final GeoLocation geoLocation = getImageLocation(img);
+        if (geoLocation != null) {
+            final ImageView geoOverlay = (ImageView) imageViewLayout.findViewById(R.id.geo_overlay);
+            geoOverlay.setVisibility(View.VISIBLE);
+            geoOverlay.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(final View wpNavView) {
+                    final Geopoint gpt = new Geopoint(geoLocation.getLatitude(), geoLocation.getLongitude());
+                    wpNavView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(final View v) {
+                            NavigationAppFactory.startDefaultNavigationApplication(1, activity, gpt);
+                        }
+                    });
+                    wpNavView.setOnLongClickListener(new View.OnLongClickListener() {
+                        @Override
+                        public boolean onLongClick(final View v) {
+                            NavigationAppFactory.startDefaultNavigationApplication(2, activity, gpt);
+                            return true;
+                        }
+                    });
+                }
+            });
         }
     }
 
