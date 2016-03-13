@@ -1952,7 +1952,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
     @Override
     public void onSupportActionModeStarted(ActionMode mode) {
-        if (mSelectionModeActive == true && selectedTextView != null) {
+        if (mSelectionModeActive && selectedTextView != null) {
             mSelectionModeActive = false;
             mActionMode = mode;
             Menu menu = mode.getMenu();
@@ -1972,7 +1972,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         mActionMode = null;
         if (selectedTextView != null)
             selectedTextView.setWindowFocusWait(false);
-        if (mSelectionModeActive == false) {
+        if (!mSelectionModeActive) {
             selectedTextView = null;
         }
         super.onSupportActionModeFinished(mode);
