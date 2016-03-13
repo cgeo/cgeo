@@ -5,6 +5,8 @@
   <b>Next bugfix release:</b>\n
     · Fix: Text selection from cache description no longer working on some devices\n
     · Fix: Translation menu sometimes missing after selecting text\n
+    · Fix: Found status of webcam caches not shown\n
+    · Fix: Avatar not shown on login check if it was not a jpeg\n
     \n
     \n
     <b>2016.03.06:</b>\n
