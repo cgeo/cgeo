@@ -40,7 +40,7 @@ public class NameComparatorTest extends TestCase {
      *
      */
     private void assertSortedNames(final String... names) {
-        final ArrayList<Geocache> caches = new ArrayList<Geocache>(names.length);
+        final ArrayList<Geocache> caches = new ArrayList<>(names.length);
         for (final String name : names) {
             caches.add(new NamedCache(name));
         }

@@ -33,7 +33,7 @@ public class TypeFilterTest extends TestCase {
     }
 
     public void testFilter() {
-        final ArrayList<Geocache> list = new ArrayList<Geocache>();
+        final ArrayList<Geocache> list = new ArrayList<>();
         traditionalFilter.filter(list);
         assertThat(list).isEmpty();
 

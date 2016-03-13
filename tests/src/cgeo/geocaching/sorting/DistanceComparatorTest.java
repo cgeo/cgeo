@@ -12,7 +12,7 @@ import cgeo.geocaching.location.Geopoint;
 public class DistanceComparatorTest extends TestCase {
 
     public static void testCompareCaches() {
-        final List<Geocache> caches = new ArrayList<Geocache>();
+        final List<Geocache> caches = new ArrayList<>();
         for (int i = 0; i < 37; i++) {
             Geocache cache = new Geocache();
             if (i % 3 == 0) {

@@ -40,7 +40,7 @@ public class SizeFilterTest extends TestCase {
     }
 
     public void testFilter() {
-        final ArrayList<Geocache> list = new ArrayList<Geocache>();
+        final ArrayList<Geocache> list = new ArrayList<>();
         list.add(regular);
         list.add(micro);
         assertThat(list).hasSize(2);

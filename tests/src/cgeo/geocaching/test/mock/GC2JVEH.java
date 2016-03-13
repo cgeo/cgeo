@@ -139,7 +139,7 @@ public class GC2JVEH extends MockedCache {
 
     @Override
     public List<Trackable> getInventory() {
-        final ArrayList<Trackable> inventory = new ArrayList<Trackable>();
+        final ArrayList<Trackable> inventory = new ArrayList<>();
         inventory.add(new Trackable());
         return inventory;
     }
@@ -147,7 +147,7 @@ public class GC2JVEH extends MockedCache {
     @Override
     @NonNull
     public List<Image> getSpoilers() {
-        final ArrayList<Image> spoilers = new ArrayList<Image>();
+        final ArrayList<Image> spoilers = new ArrayList<>();
         final Image mockedImage = Image.NONE;
         spoilers.add(mockedImage);
         spoilers.add(mockedImage);
