@@ -59,8 +59,12 @@ public class GCLogin extends AbstractLogin {
     @Override
     @NonNull
     protected StatusCode login(final boolean retry) {
-        final Credentials credentials = Settings.getGcCredentials();
+        return login(retry, Settings.getCredentials(GCConnector.getInstance()));
+    }
 
+    @Override
+    @NonNull
+    protected StatusCode login(final boolean retry, @NonNull final Credentials credentials) {
         if (credentials.isInvalid()) {
             clearLoginInfo();
             Log.e("Login.login: No login information stored");
@@ -86,7 +90,7 @@ public class GCLogin extends AbstractLogin {
             if (getLoginStatus(tryLoggedInData)) {
                 Log.i("Already logged in Geocaching.com as " + username + " (" + Settings.getGCMemberStatus() + ')');
                 if (switchToEnglish(tryLoggedInData) && retry) {
-                    return login(false);
+                    return login(false, credentials);
                 }
                 setHomeLocation();
                 refreshMemberStatus();
@@ -122,7 +126,7 @@ public class GCLogin extends AbstractLogin {
 
             if (getLoginStatus(loginData)) {
                 if (switchToEnglish(loginData) && retry) {
-                    return login(false);
+                    return login(false, credentials);
                 }
                 Log.i("Successfully logged in Geocaching.com as " + username + " (" + Settings.getGCMemberStatus() + ')');
                 Settings.setCookieStore(Cookies.dumpCookieStore());
@@ -145,7 +149,7 @@ public class GCLogin extends AbstractLogin {
             Log.i("Failed to log in Geocaching.com as " + username + " for some unknown reason");
             if (retry) {
                 switchToEnglish(loginData);
-                return login(false);
+                return login(false, credentials);
             }
 
             return resetGcCustomDate(StatusCode.UNKNOWN_ERROR); // can't login

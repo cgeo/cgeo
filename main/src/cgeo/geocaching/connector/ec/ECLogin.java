@@ -40,9 +40,13 @@ public class ECLogin extends AbstractLogin {
     @Override
     @NonNull
     protected StatusCode login(final boolean retry) {
-        final Credentials login = Settings.getCredentials(ECConnector.getInstance());
+        return login(retry, Settings.getCredentials(ECConnector.getInstance()));
+    }
 
-        if (login.isInvalid()) {
+    @Override
+    @NonNull
+    protected StatusCode login(final boolean retry, @NonNull final Credentials credentials) {
+        if (credentials.isInvalid()) {
             clearLoginInfo();
             Log.e("ECLogin.login: No login information stored");
             return StatusCode.NO_LOGIN_INFO_STORED;
@@ -50,7 +54,7 @@ public class ECLogin extends AbstractLogin {
 
         setActualStatus(app.getString(R.string.init_login_popup_working));
 
-        final Parameters params = new Parameters("user", login.getUserName(), "pass", login.getPassword());
+        final Parameters params = new Parameters("user", credentials.getUserName(), "pass", credentials.getPassword());
 
         final String loginData = Network.getResponseData(Network.postRequest("https://extremcaching.com/exports/apilogin.php", params));
 
@@ -62,19 +66,19 @@ public class ECLogin extends AbstractLogin {
         assert loginData != null;
 
         if (loginData.contains("Wrong username or password")) { // hardcoded in English
-            Log.i("Failed to log in Extremcaching.com as " + login.getUserName() + " because of wrong username/password");
+            Log.i("Failed to log in Extremcaching.com as " + credentials.getUserName() + " because of wrong username/password");
             return StatusCode.WRONG_LOGIN_DATA; // wrong login
         }
 
         if (getLoginStatus(loginData)) {
-            Log.i("Successfully logged in Extremcaching.com as " + login.getUserName());
+            Log.i("Successfully logged in Extremcaching.com as " + credentials.getUserName());
 
             return StatusCode.NO_ERROR; // logged in
         }
 
-        Log.i("Failed to log in Extremcaching.com as " + login.getUserName() + " for some unknown reason");
+        Log.i("Failed to log in Extremcaching.com as " + credentials.getUserName() + " for some unknown reason");
         if (retry) {
-            return login(false);
+            return login(false, credentials);
         }
 
         return StatusCode.UNKNOWN_ERROR; // can't login

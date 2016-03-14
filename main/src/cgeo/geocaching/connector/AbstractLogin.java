@@ -4,10 +4,12 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.network.Cookies;
+import cgeo.geocaching.settings.Credentials;
 import cgeo.geocaching.settings.Settings;
 
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 public abstract class AbstractLogin {
 
@@ -71,13 +73,24 @@ public abstract class AbstractLogin {
 
     @NonNull
     public StatusCode login() {
-        if (!CgeoApplication.getInstance().isNetworkConnected()) {
-            return StatusCode.COMMUNICATION_ERROR;
-        }
-        return login(true);
+        return login(null);
     }
 
     @NonNull
-    protected abstract StatusCode login(boolean retry);
+    public StatusCode login(@Nullable final Credentials credentials) {
+        if (!CgeoApplication.getInstance().isNetworkConnected()) {
+            return StatusCode.COMMUNICATION_ERROR;
+        }
+        if (credentials == null) {
+            return login(true);
+        }
+        return login(true, credentials);
+    }
+
+    @NonNull
+    protected abstract StatusCode login(final boolean retry);
+
+    @NonNull
+    protected abstract StatusCode login(final boolean retry, @NonNull final Credentials credentials);
 
 }
