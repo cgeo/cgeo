@@ -567,7 +567,7 @@ public class SettingsActivity extends PreferenceActivity {
                         : R.string.settings_authorize));
     }
 
-    void setGeokretyAuthTitle() {
+    private void setGeokretyAuthTitle() {
         getPreference(R.string.pref_fakekey_geokrety_authorization)
                 .setTitle(getString(Settings.hasGeokretyAuthorization()
                         ? R.string.settings_reauthorize

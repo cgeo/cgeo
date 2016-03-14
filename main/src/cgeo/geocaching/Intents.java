@@ -87,6 +87,10 @@ public class Intents {
     public static final String EXTRA_TOKEN_AUTH_USERNAME = PREFIX_TOKEN_AUTH + "username";
     public static final String EXTRA_TOKEN_AUTH_PASSWORD = PREFIX_TOKEN_AUTH + "password";
 
+    private static final String PREFIX_CREDENTIALS_AUTH = "cgeo.geocaching.intent.credentialsauth.";
+    public static final String EXTRA_CREDENTIALS_AUTH_URL_REGISTER = PREFIX_CREDENTIALS_AUTH + "register";
+    public static final String EXTRA_CREDENTIALS_AUTH_USERNAME = PREFIX_CREDENTIALS_AUTH + "username";
+
     private static final String PREFIX_INTERNAL = "cgeo.geocaching.intent.internal.";
     public static final String INTENT_CACHE_CHANGED = PREFIX_INTERNAL + "cache-changed";
 
