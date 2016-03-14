@@ -452,6 +452,7 @@
     <string name="settings_authorize">Authorize c:geo</string>
     <string name="settings_reauthorize">Authorize c:geo again</string>
     <string name="settings_gc_description">Authorize c:geo with geocaching.com to search for caches.</string>
+    <string name="settings_ec_description">Authorize c:geo with extremcaching.com to search for caches and access/filter your found caches.</string>
     <string name="init_oc">Opencaching.de</string>
     <string name="settings_activate_oc">Activate</string>
     <string name="init_oc_de_description">Authorize c:geo with opencaching.de to search for caches and access/filter your found caches.</string>

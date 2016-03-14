@@ -163,7 +163,7 @@ public class SettingsActivity extends PreferenceActivity {
                 R.string.pref_mapDirectory, R.string.pref_defaultNavigationTool,
                 R.string.pref_defaultNavigationTool2, R.string.pref_webDeviceName,
                 R.string.pref_fakekey_preference_backup_info, R.string.pref_twitter_cache_message, R.string.pref_twitter_trackable_message,
-                R.string.pref_ecusername, R.string.pref_ecpassword, R.string.pref_ec_icons }) {
+                R.string.pref_ec_icons }) {
             bindSummaryToStringValue(k);
         }
         bindGeocachingUserToGCVoteuser();
@@ -546,6 +546,10 @@ public class SettingsActivity extends PreferenceActivity {
             case R.string.pref_fakekey_ocuk_authorization:
                 setOCAuthTitle(OCPreferenceKeys.getByAuthId(prefKeyId));
                 break;
+            case R.string.pref_fakekey_ec_authorization:
+                setAuthTitle(prefKeyId, ECConnector.getInstance());
+                setConnectedUsernameTitle(prefKeyId, ECConnector.getInstance());
+                break;
             case R.string.pref_fakekey_twitter_authorization:
                 setTwitterAuthTitle();
                 break;
@@ -659,6 +663,11 @@ public class SettingsActivity extends PreferenceActivity {
                 setConnectedUsernameTitle(requestCode, GCConnector.getInstance());
                 redrawScreen(R.string.preference_screen_gc);
                 initBasicMemberPreferences();
+                break;
+            case R.string.pref_fakekey_ec_authorization:
+                setAuthTitle(requestCode, ECConnector.getInstance());
+                setConnectedUsernameTitle(requestCode, ECConnector.getInstance());
+                redrawScreen(R.string.preference_screen_ec);
                 break;
             case R.string.pref_fakekey_twitter_authorization:
                 setTwitterAuthTitle();
