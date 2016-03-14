@@ -544,7 +544,13 @@ public class SettingsActivity extends PreferenceActivity {
             case R.string.pref_fakekey_ocus_authorization:
             case R.string.pref_fakekey_ocro_authorization:
             case R.string.pref_fakekey_ocuk_authorization:
-                setOCAuthTitle(OCPreferenceKeys.getByAuthId(prefKeyId));
+                final OCPreferenceKeys key = OCPreferenceKeys.getByAuthId(prefKeyId);
+                if (key != null) {
+                    setOCAuthTitle(key);
+                    setConnectedTitle(prefKeyId, Settings.hasOCAuthorization(key.publicTokenPrefId, key.privateTokenPrefId));
+                } else {
+                    setConnectedTitle(prefKeyId, false);
+                }
                 break;
             case R.string.pref_fakekey_ec_authorization:
                 setAuthTitle(prefKeyId, ECConnector.getInstance());
@@ -556,9 +562,11 @@ public class SettingsActivity extends PreferenceActivity {
                 break;
             case R.string.pref_fakekey_twitter_authorization:
                 setTwitterAuthTitle();
+                setConnectedTitle(prefKeyId, Settings.hasTwitterAuthorization());
                 break;
             case R.string.pref_fakekey_geokrety_authorization:
                 setGeokretyAuthTitle();
+                setConnectedTitle(prefKeyId, Settings.hasGeokretyAuthorization());
                 break;
             default:
                 Log.e(String.format(Locale.ENGLISH, "Invalid key %d in SettingsActivity.setTitle()", prefKeyId));
@@ -566,12 +574,10 @@ public class SettingsActivity extends PreferenceActivity {
     }
 
     private void setOCAuthTitle(final OCPreferenceKeys key) {
-        if (key != null) {
-            getPreference(key.authPrefId)
-                    .setTitle(getString(Settings.hasOCAuthorization(key.publicTokenPrefId, key.privateTokenPrefId)
-                            ? R.string.settings_reauthorize
-                            : R.string.settings_authorize));
-        }
+        getPreference(key.authPrefId)
+                .setTitle(getString(Settings.hasOCAuthorization(key.publicTokenPrefId, key.privateTokenPrefId)
+                        ? R.string.settings_reauthorize
+                        : R.string.settings_authorize));
     }
 
     private void setTwitterAuthTitle() {
@@ -604,6 +610,13 @@ public class SettingsActivity extends PreferenceActivity {
                 .setSummary(StringUtils.isNotBlank(credentials.getUsernameRaw())
                         ? getString(R.string.auth_connected_as, credentials.getUserName())
                         : getString(R.string.auth_unconnected));
+    }
+
+    private void setConnectedTitle(final int prefKeyId, final boolean hasToken) {
+        getPreference(prefKeyId)
+                .setSummary(getString(hasToken
+                        ? R.string.auth_connected
+                        : R.string.auth_unconnected));
     }
 
     public static void openForScreen(final int preferenceScreenKey, final Context fromActivity) {
@@ -659,7 +672,10 @@ public class SettingsActivity extends PreferenceActivity {
                 final OCPreferenceKeys key = OCPreferenceKeys.getByAuthId(requestCode);
                 if (key != null) {
                     setOCAuthTitle(key);
+                    setConnectedTitle(requestCode, Settings.hasOCAuthorization(key.publicTokenPrefId, key.privateTokenPrefId));
                     redrawScreen(key.prefScreenId);
+                } else {
+                    setConnectedTitle(requestCode, false);
                 }
                 break;
             case R.string.pref_fakekey_gc_authorization:
@@ -680,10 +696,12 @@ public class SettingsActivity extends PreferenceActivity {
                 break;
             case R.string.pref_fakekey_twitter_authorization:
                 setTwitterAuthTitle();
+                setConnectedTitle(requestCode, Settings.hasTwitterAuthorization());
                 redrawScreen(R.string.preference_screen_twitter);
                 break;
             case R.string.pref_fakekey_geokrety_authorization:
                 setGeokretyAuthTitle();
+                setConnectedTitle(requestCode, Settings.hasGeokretyAuthorization());
                 redrawScreen(R.string.preference_screen_geokrety);
                 break;
             default:
