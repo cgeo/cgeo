@@ -327,6 +327,17 @@ public class Settings {
         return new Credentials(username, password);
     }
 
+    /**
+     * Set login and password information.
+     *
+     * @param connector the connector to retrieve the login information from
+     * @param credentials the credential information to store
+     */
+    public static void setCredentials(final @NonNull ICredentials connector, final Credentials credentials) {
+        putString(connector.getUsernamePreferenceKey(), credentials.getUserName());
+        putString(connector.getPasswordPreferenceKey(), credentials.getPassword());
+    }
+
     public static String getUserName() {
         return getString(R.string.pref_username, StringUtils.EMPTY);
     }

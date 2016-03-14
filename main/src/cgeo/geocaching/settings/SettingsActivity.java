@@ -7,6 +7,7 @@ import cgeo.geocaching.SelectMapfileActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.apps.navi.NavigationAppFactory;
 import cgeo.geocaching.apps.navi.NavigationAppFactory.NavigationAppsEnum;
+import cgeo.geocaching.connector.capability.ICredentials;
 import cgeo.geocaching.connector.ec.ECConnector;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.trackable.GeokretyConnector;
@@ -26,6 +27,7 @@ import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ProcessUtils;
 
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.NonNull;
 import org.openintents.intents.FileManagerIntents;
 
 import android.R.string;
@@ -154,7 +156,7 @@ public class SettingsActivity extends PreferenceActivity {
         initLanguagePreferences();
         initMaintenanceButtons();
 
-        for (final int k : new int[] { R.string.pref_username, R.string.pref_password,
+        for (final int k : new int[] {
                 R.string.pref_pass_vote, R.string.pref_signature,
                 R.string.pref_mapsource, R.string.pref_renderthemepath,
                 R.string.pref_gpxExportDir, R.string.pref_gpxImportDir,
@@ -532,6 +534,10 @@ public class SettingsActivity extends PreferenceActivity {
 
     public void setAuthTitle(final int prefKeyId) {
         switch (prefKeyId) {
+            case R.string.pref_fakekey_gc_authorization:
+                setAuthTitle(prefKeyId, GCConnector.getInstance());
+                setConnectedUsernameTitle(prefKeyId, GCConnector.getInstance());
+                break;
             case R.string.pref_fakekey_ocde_authorization:
             case R.string.pref_fakekey_ocpl_authorization:
             case R.string.pref_fakekey_ocnl_authorization:
@@ -572,6 +578,24 @@ public class SettingsActivity extends PreferenceActivity {
                 .setTitle(getString(Settings.hasGeokretyAuthorization()
                         ? R.string.settings_reauthorize
                         : R.string.settings_authorize));
+    }
+
+    private void setAuthTitle(final int prefKeyId, final @NonNull ICredentials connector) {
+        final Credentials credentials = Settings.getCredentials(connector);
+
+        getPreference(prefKeyId)
+                .setTitle(getString(StringUtils.isNotBlank(credentials.getUsernameRaw())
+                        ? R.string.settings_reauthorize
+                        : R.string.settings_authorize));
+    }
+
+    private void setConnectedUsernameTitle(final int prefKeyId, final @NonNull ICredentials connector) {
+        final Credentials credentials = Settings.getCredentials(connector);
+
+        getPreference(prefKeyId)
+                .setSummary(StringUtils.isNotBlank(credentials.getUsernameRaw())
+                        ? getString(R.string.auth_connected_as, credentials.getUserName())
+                        : getString(R.string.auth_unconnected));
     }
 
     public static void openForScreen(final int preferenceScreenKey, final Context fromActivity) {
@@ -629,6 +653,12 @@ public class SettingsActivity extends PreferenceActivity {
                     setOCAuthTitle(key);
                     redrawScreen(key.prefScreenId);
                 }
+                break;
+            case R.string.pref_fakekey_gc_authorization:
+                setAuthTitle(requestCode, GCConnector.getInstance());
+                setConnectedUsernameTitle(requestCode, GCConnector.getInstance());
+                redrawScreen(R.string.preference_screen_gc);
+                initBasicMemberPreferences();
                 break;
             case R.string.pref_fakekey_twitter_authorization:
                 setTwitterAuthTitle();
@@ -729,11 +759,6 @@ public class SettingsActivity extends PreferenceActivity {
                 // For all other preferences, set the summary to the value's
                 // simple string representation.
                 preference.setSummary(stringValue);
-            }
-            // TODO: do not special case geocaching.com here
-            if ((isPreference(preference, R.string.pref_username) && !stringValue.equals(Settings.getUserName())) || (isPreference(preference, R.string.pref_password) && !stringValue.equals(Settings.getGcCredentials().getPasswordRaw()))) {
-                // reset log-in if gc user or password is changed
-                CgeoApplication.getInstance().forceRelog();
             }
             return true;
         }

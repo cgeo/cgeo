@@ -6,6 +6,7 @@ import android.preference.Preference;
 import android.util.AttributeSet;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.settings.AbstractCredentialsAuthorizationActivity.CredentialsAuthParameters;
+import cgeo.geocaching.R;
 import org.eclipse.jdt.annotation.NonNull;
 
 public class CredentialsPreference extends AbstractClickablePreference {
@@ -13,7 +14,8 @@ public class CredentialsPreference extends AbstractClickablePreference {
     private static final int NO_KEY = -1;
 
     private enum CredentialActivityMapping {
-        NONE(NO_KEY, null, null);
+        NONE(NO_KEY, null, null),
+        GEOCACHING(R.string.pref_fakekey_gc_authorization, GCAuthorizationActivity.class, GCAuthorizationActivity.GEOCACHING_CREDENTIAL_AUTH_PARAMS);
 
         public final int prefKeyId;
         private final Class<?> authActivity;

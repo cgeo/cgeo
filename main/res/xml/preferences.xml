@@ -22,28 +22,15 @@
                         app:url="@string/settings_gc_legal_note_url"
                         app:urlButton="@string/settings_goto_url_button" />
 
-                    <EditTextPreference
+                    <cgeo.geocaching.settings.TextPreference
                         android:dependency="@string/pref_connectorGCActive"
-                        android:dialogTitle="@string/init_username"
-                        android:hint="@string/init_username"
-                        android:imeOptions="actionDone"
-                        android:key="@string/pref_username"
-                        android:singleLine="true"
-                        android:title="@string/init_username" />
+                        android:layout="@layout/text_preference"
+                        android:text="@string/settings_gc_description" />
 
-                    <cgeo.geocaching.settings.EditPasswordPreference
+                    <cgeo.geocaching.settings.CredentialsPreference
                         android:dependency="@string/pref_connectorGCActive"
-                        android:dialogTitle="@string/init_password"
-                        android:hint="@string/init_password"
-                        android:imeOptions="actionDone"
-                        android:inputType="textPassword"
-                        android:key="@string/pref_password"
-                        android:singleLine="true"
-                        android:title="@string/init_password" />
-
-                    <cgeo.geocaching.settings.CheckGcCredentialsPreference
-                        android:dependency="@string/pref_connectorGCActive"
-                        android:title="@string/init_login" />
+                        android:summary="@string/auth_unconnected"
+                        android:key="@string/pref_fakekey_gc_authorization" />
 
                     <PreferenceScreen
                         android:dependency="@string/pref_connectorGCActive"
