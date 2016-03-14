@@ -93,6 +93,7 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -1987,7 +1988,8 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
             @Override
             public boolean onLongClick(final View v) {
-                if ((view.getId() == R.id.description) || (view.getId() == R.id.hint)) {
+                if ((Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.HONEYCOMB )
+                        && ((view.getId() == R.id.description) || (view.getId() == R.id.hint))) {
                     selectedTextView = (IndexOutOfBoundsAvoidingTextView)view;
                     mSelectionModeActive = true;
                     return false;
@@ -2007,9 +2009,23 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                                 final CharSequence itemTitle = ((TextView) ((View) view.getParent()).findViewById(R.id.name)).getText();
                                 buildDetailsContextMenu(actionMode, menu, itemTitle, true);
                                 return true;
+                            case R.id.description:
+                                // combine short and long description
+                                final String shortDesc = cache.getShortDescription();
+                                if (StringUtils.isBlank(shortDesc)) {
+                                    clickedItemText = cache.getDescription();
+                                } else {
+                                    clickedItemText = shortDesc + "\n\n" + cache.getDescription();
+                                }
+                                buildDetailsContextMenu(actionMode, menu, res.getString(R.string.cache_description), false);
+                                return true;
                             case R.id.personalnote:
                                 clickedItemText = cache.getPersonalNote();
                                 buildDetailsContextMenu(actionMode, menu, res.getString(R.string.cache_personal_note), true);
+                                return true;
+                            case R.id.hint:
+                                clickedItemText = cache.getHint();
+                                buildDetailsContextMenu(actionMode, menu, res.getString(R.string.cache_hint), false);
                                 return true;
                             case R.id.log:
                                 assert view instanceof TextView;
