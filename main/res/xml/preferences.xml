@@ -319,28 +319,11 @@
                         android:layout="@layout/text_preference"
                         android:text="@string/init_gcvote_password_description" />
 
-                    <EditTextPreference
+                    <cgeo.geocaching.settings.CredentialsPreference
                         android:dependency="@string/pref_ratingwanted"
-                        android:dialogTitle="@string/init_username"
-                        android:hint="@string/init_username"
-                        android:imeOptions="actionDone"
-                        android:key="@string/pref_user_vote"
-                        android:singleLine="true"
-                        android:title="@string/init_username"/>
+                        android:summary="@string/auth_unconnected"
+                        android:key="@string/pref_fakekey_gcvote_authorization" />
 
-                    <cgeo.geocaching.settings.EditPasswordPreference
-                        android:dependency="@string/pref_ratingwanted"
-                        android:dialogTitle="@string/init_password"
-                        android:hint="@string/init_password"
-                        android:imeOptions="actionDone"
-                        android:inputType="textPassword"
-                        android:key="@string/pref_pass_vote"
-                        android:singleLine="true"
-                        android:title="@string/init_password" />
-
-                    <cgeo.geocaching.settings.CheckGCVoteCredentialsPreference
-                        android:dependency="@string/pref_ratingwanted"
-                        android:title="@string/init_login"/>
                 </PreferenceCategory>
                 <PreferenceCategory android:title="@string/settings_information" >
                     <Preference

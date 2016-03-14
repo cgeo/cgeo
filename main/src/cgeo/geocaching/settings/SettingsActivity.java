@@ -550,6 +550,10 @@ public class SettingsActivity extends PreferenceActivity {
                 setAuthTitle(prefKeyId, ECConnector.getInstance());
                 setConnectedUsernameTitle(prefKeyId, ECConnector.getInstance());
                 break;
+            case R.string.pref_fakekey_gcvote_authorization:
+                setAuthTitle(prefKeyId, GCVote.getInstance());
+                setConnectedUsernameTitle(prefKeyId, GCVote.getInstance());
+                break;
             case R.string.pref_fakekey_twitter_authorization:
                 setTwitterAuthTitle();
                 break;
@@ -668,6 +672,11 @@ public class SettingsActivity extends PreferenceActivity {
                 setAuthTitle(requestCode, ECConnector.getInstance());
                 setConnectedUsernameTitle(requestCode, ECConnector.getInstance());
                 redrawScreen(R.string.preference_screen_ec);
+                break;
+            case R.string.pref_fakekey_gcvote_authorization:
+                setAuthTitle(requestCode, GCVote.getInstance());
+                setConnectedUsernameTitle(requestCode, GCVote.getInstance());
+                redrawScreen(R.string.init_gcvote);
                 break;
             case R.string.pref_fakekey_twitter_authorization:
                 setTwitterAuthTitle();
@@ -819,7 +828,7 @@ public class SettingsActivity extends PreferenceActivity {
         }
 
         final String value = Settings.getGcCredentials().getUserName();
-        getPreference(R.string.pref_user_vote).setSummary(value);
+        getPreference(R.string.pref_fakekey_gcvote_authorization).setSummary(value);
         final Preference prefvote = getPreference(R.string.pref_user_vote);
         bindSummaryToValue(prefvote, value);
     }

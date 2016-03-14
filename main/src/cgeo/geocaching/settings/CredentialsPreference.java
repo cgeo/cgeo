@@ -16,7 +16,8 @@ public class CredentialsPreference extends AbstractClickablePreference {
     private enum CredentialActivityMapping {
         NONE(NO_KEY, null, null),
         GEOCACHING(R.string.pref_fakekey_gc_authorization, GCAuthorizationActivity.class, GCAuthorizationActivity.GEOCACHING_CREDENTIAL_AUTH_PARAMS),
-        EXTREMCACHING(R.string.pref_fakekey_ec_authorization, ECAuthorizationActivity.class, ECAuthorizationActivity.EXTREMCACHING_CREDENTIAL_AUTH_PARAMS);
+        EXTREMCACHING(R.string.pref_fakekey_ec_authorization, ECAuthorizationActivity.class, ECAuthorizationActivity.EXTREMCACHING_CREDENTIAL_AUTH_PARAMS),
+        GCVOTE(R.string.pref_fakekey_gcvote_authorization, GCVoteAuthorizationActivity.class, GCVoteAuthorizationActivity.GCVOTE_CREDENTIAL_AUTH_PARAMS);
 
         public final int prefKeyId;
         private final Class<?> authActivity;
