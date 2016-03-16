@@ -1,5 +1,7 @@
 package cgeo.geocaching;
 
+import butterknife.ButterKnife;
+
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.AbstractListActivity;
 import cgeo.geocaching.activity.ActivityMixin;
@@ -67,11 +69,19 @@ import cgeo.geocaching.utils.Log;
 
 import com.github.amlcurran.showcaseview.targets.ActionViewTarget;
 import com.github.amlcurran.showcaseview.targets.ActionViewTarget.Type;
-
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import rx.Observable;
+import rx.Observable.OnSubscribe;
+import rx.Subscriber;
+import rx.Subscription;
+import rx.functions.Action0;
+import rx.functions.Action1;
+import rx.functions.Func1;
+import rx.schedulers.Schedulers;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -108,20 +118,12 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Deque;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
-
-import butterknife.ButterKnife;
-import rx.Observable;
-import rx.Observable.OnSubscribe;
-import rx.Subscriber;
-import rx.Subscription;
-import rx.functions.Action0;
-import rx.functions.Action1;
-import rx.functions.Func1;
-import rx.schedulers.Schedulers;
 
 public class CacheListActivity extends AbstractListActivity implements FilteredActivity, LoaderManager.LoaderCallbacks<SearchResult> {
 
@@ -1257,16 +1259,29 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private void loadDetails(final CancellableHandler handler, final List<Geocache> caches) {
         final Observable<Geocache> allCaches;
         if (Settings.isStoreOfflineMaps()) {
-            final List<Geocache> withStaticMaps = new ArrayList<>(caches.size());
-            final List<Geocache> withoutStaticMaps = new ArrayList<>(caches.size());
-            for (final Geocache cache : caches) {
-                if (cache.hasStaticMap()) {
-                    withStaticMaps.add(cache);
-                } else {
-                    withoutStaticMaps.add(cache);
+            allCaches = Observable.create(new OnSubscribe<Geocache>() {
+                @Override
+                public void call(final Subscriber<? super Geocache> subscriber) {
+                    final Deque<Geocache> withStaticMaps = new LinkedList<Geocache>();
+                    for (final Geocache cache : caches) {
+                        if (subscriber.isUnsubscribed()) {
+                            return;
+                        }
+                        if (cache.hasStaticMap()) {
+                            withStaticMaps.push(cache);
+                        } else {
+                            subscriber.onNext(cache);
+                        }
+                    }
+                    for (final Geocache cache : withStaticMaps) {
+                        if (subscriber.isUnsubscribed()) {
+                            return;
+                        }
+                        subscriber.onNext(cache);
+                    }
+                    subscriber.onCompleted();
                 }
-            }
-            allCaches = Observable.concat(Observable.from(withoutStaticMaps), Observable.from(withStaticMaps));
+            }).subscribeOn(Schedulers.io());
         } else {
             allCaches = Observable.from(caches);
         }
