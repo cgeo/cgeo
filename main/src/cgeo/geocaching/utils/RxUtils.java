@@ -3,7 +3,9 @@ package cgeo.geocaching.utils;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import rx.Observable;
+import rx.Observable.OnSubscribe;
 import rx.Observable.Operator;
+import rx.Producer;
 import rx.Single;
 import rx.Subscriber;
 import rx.functions.Action0;
@@ -11,11 +13,16 @@ import rx.functions.Action1;
 import rx.functions.Func0;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
+import rx.subscriptions.CompositeSubscription;
 import rx.subscriptions.Subscriptions;
 
+import java.util.Deque;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class RxUtils {
@@ -171,5 +178,121 @@ public class RxUtils {
         } catch(final Throwable ignored) {
             return null;
         }
+    }
+
+    /**
+     * Merge two observables respecting the subscribing demand, preferring items coming from the first
+     * observable over the ones from the second observable. Backpressure is propagated downstream to both
+     * obervables, with one extra item which is internally buffered for the preferred observable.
+     *
+     * Errors from either observables are propagated as soon as they are transmitted to this operator.
+     *
+     * @param preferredObservable the preferred observable
+     * @param otherObservable the other observable
+     * @param <T> the type of the Observable content
+     * @return the merged observable
+     */
+    @NonNull
+    public static <T> Observable<T> mergePreferred(final Observable<T> preferredObservable, final Observable<T> otherObservable) {
+        return Observable.create(new OnSubscribe<T>() {
+            @Override
+            public void call(final Subscriber<? super T> subscriber) {
+
+                class TProducer implements Producer {
+
+                    final TSubscriber preferredSubscriber = new TSubscriber(1);
+                    final TSubscriber otherSubscriber = new TSubscriber(0);
+                    final AtomicLong totalDemand = new AtomicLong(0);
+                    final CompositeSubscription innerSubscriptions = new CompositeSubscription();
+
+                    public TProducer() {
+                        innerSubscriptions.add(preferredObservable.subscribe(preferredSubscriber));
+                        innerSubscriptions.add(otherObservable.subscribe(otherSubscriber));
+                    }
+
+                    class TSubscriber extends Subscriber<T> {
+
+                        private Deque<T> fetched = new LinkedList<>();
+                        private AtomicBoolean terminated = new AtomicBoolean(false);
+                        private AtomicLong demanded = new AtomicLong(1);
+                        private final long extra;
+
+                        TSubscriber(final long extra) {
+                            this.extra = extra;
+                        }
+
+                        @Override
+                        public void onStart() {
+                            super.onStart();
+                            dequeue();
+                        }
+
+                        @Override
+                        public void onCompleted() {
+                            terminated.set(true);
+                        }
+
+                        @Override
+                        public void onError(final Throwable e) {
+                            terminated.set(true);
+                            subscriber.onError(e);
+                            innerSubscriptions.unsubscribe();
+                        }
+
+                        @Override
+                        public void onNext(final T t) {
+                            synchronized (TProducer.this) {
+                                fetched.offer(t);
+                            }
+                            demanded.decrementAndGet();
+                            dequeue();
+                        }
+
+                        public void dequeue() {
+                            synchronized (TProducer.this) {
+                                while (!fetched.isEmpty() && totalDemand.get() > 0) {
+                                    if (totalDemand.getAndDecrement() > 0) {
+                                        subscriber.onNext(fetched.pop());
+                                    } else {
+                                        totalDemand.incrementAndGet();
+                                        break;
+                                    }
+                                }
+                                final long missing = totalDemand.get() - demanded.get() - fetched.size() + extra;
+                                if (missing > 0 && !terminated.get()) {
+                                    request(missing);
+                                }
+                            }
+                        }
+
+                        public boolean isTerminated() {
+                            synchronized (TProducer.this) {
+                                return fetched.isEmpty() && terminated.get();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void request(final long n) {
+                        if (n == Long.MAX_VALUE) {
+                            throw new IllegalArgumentException("mergePreferred must be used with backpressure, or merge should be used instead");
+                        }
+                        totalDemand.addAndGet(n);
+                        preferredSubscriber.dequeue();
+                        otherSubscriber.dequeue();
+                        if (preferredSubscriber.isTerminated() && otherSubscriber.isTerminated()) {
+                            subscriber.onCompleted();
+                        }
+                    }
+                }
+
+                final TProducer producer = new TProducer();
+
+                subscriber.add(producer.innerSubscriptions);
+                subscriber.setProducer(producer);
+
+            }
+
+        });
     }
 }
