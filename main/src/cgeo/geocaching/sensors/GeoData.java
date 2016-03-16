@@ -35,11 +35,11 @@ public class GeoData extends Location {
 
     @Nullable
     static Location best(@Nullable final Location gpsLocation, @Nullable final Location netLocation) {
-        if (netLocation == null || (gpsLocation != null && System.currentTimeMillis() <= gpsLocation.getTime() + 30000)) {
-            return gpsLocation;
-        }
         if (gpsLocation == null) {
             return netLocation;
+        }
+        if (netLocation == null || System.currentTimeMillis() <= gpsLocation.getTime() + 30000) {
+            return gpsLocation;
         }
         return gpsLocation.getTime() >= netLocation.getTime() ? gpsLocation : netLocation;
     }
