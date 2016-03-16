@@ -1,7 +1,5 @@
 package cgeo.geocaching;
 
-import butterknife.ButterKnife;
-
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.AbstractListActivity;
 import cgeo.geocaching.activity.ActivityMixin;
@@ -69,19 +67,11 @@ import cgeo.geocaching.utils.Log;
 
 import com.github.amlcurran.showcaseview.targets.ActionViewTarget;
 import com.github.amlcurran.showcaseview.targets.ActionViewTarget.Type;
+
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import rx.Observable;
-import rx.Observable.OnSubscribe;
-import rx.Subscriber;
-import rx.Subscription;
-import rx.functions.Action0;
-import rx.functions.Action1;
-import rx.functions.Func1;
-import rx.schedulers.Schedulers;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -124,6 +114,16 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
+
+import butterknife.ButterKnife;
+import rx.Observable;
+import rx.Observable.OnSubscribe;
+import rx.Subscriber;
+import rx.Subscription;
+import rx.functions.Action0;
+import rx.functions.Action1;
+import rx.functions.Func1;
+import rx.schedulers.Schedulers;
 
 public class CacheListActivity extends AbstractListActivity implements FilteredActivity, LoaderManager.LoaderCallbacks<SearchResult> {
 
@@ -1262,7 +1262,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             allCaches = Observable.create(new OnSubscribe<Geocache>() {
                 @Override
                 public void call(final Subscriber<? super Geocache> subscriber) {
-                    final Deque<Geocache> withStaticMaps = new LinkedList<Geocache>();
+                    final Deque<Geocache> withStaticMaps = new LinkedList<>();
                     for (final Geocache cache : caches) {
                         if (subscriber.isUnsubscribed()) {
                             return;
