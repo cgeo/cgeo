@@ -3,13 +3,15 @@ package cgeo.geocaching.connector.gc;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import cgeo.CGeoTestCase;
-import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.enumerations.LoadFlags;
+import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.CancellableHandler;
 
 import android.os.Message;
+
+import java.util.Collections;
 
 public class WaypointsTest extends CGeoTestCase {
 
@@ -21,7 +23,7 @@ public class WaypointsTest extends CGeoTestCase {
     };
 
     private static Geocache downloadCache(final String geocode) {
-        final SearchResult searchResult = Geocache.searchByGeocode(geocode, null, 0, true, handler);
+        final SearchResult searchResult = Geocache.searchByGeocode(geocode, null, Collections.EMPTY_SET, true, handler);
         assertThat(searchResult.getCount()).isEqualTo(1);
         return searchResult.getFirstCacheFromResult(LoadFlags.LOAD_WAYPOINTS);
     }

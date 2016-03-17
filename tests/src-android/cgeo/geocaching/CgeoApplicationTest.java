@@ -13,7 +13,6 @@ import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.StatusCode;
-import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.loaders.RecaptchaReceiver;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
@@ -113,7 +112,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
     }
 
     /**
-     * Test {@link Geocache#searchByGeocode(String, String, int, boolean, CancellableHandler)}
+     * Test {@link Geocache#searchByGeocode(String, String, java.util.Set, boolean, CancellableHandler)}
      */
     @MediumTest
     public static Geocache testSearchByGeocode(final String geocode) {
@@ -128,7 +127,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
     }
 
     /**
-     * Test {@link Geocache#searchByGeocode(String, String, int, boolean, CancellableHandler)}
+     * Test {@link Geocache#searchByGeocode(String, String, java.util.Set, boolean, CancellableHandler)}
      */
     @MediumTest
     public static void testSearchByGeocodeNotExisting() {
@@ -156,7 +155,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
     }
 
     /**
-     * Test {@link Geocache#searchByGeocode(String, String, int, boolean, CancellableHandler)}
+     * Test {@link Geocache#searchByGeocode(String, String, java.util.Set, boolean, CancellableHandler)}
      */
     @MediumTest
     public static void testSearchByGeocodeNotLoggedIn() {
@@ -191,7 +190,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
     }
 
     /**
-     * Test {@link Geocache#searchByGeocode(String, String, int, boolean, CancellableHandler)}
+     * Test {@link Geocache#searchByGeocode(String, String, java.util.Set, boolean, CancellableHandler)}
      */
     @MediumTest
     public static void testSearchErrorOccured() {

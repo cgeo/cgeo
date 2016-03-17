@@ -1,8 +1,5 @@
 package cgeo.geocaching;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
-
 import cgeo.calendar.CalendarAddon;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.AbstractViewPagerActivity;
@@ -80,18 +77,6 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import rx.Observable;
-import rx.Observable.OnSubscribe;
-import rx.Subscriber;
-import rx.Subscription;
-import rx.android.app.AppObservable;
-import rx.functions.Action0;
-import rx.functions.Action1;
-import rx.functions.Func0;
-import rx.functions.Func1;
-import rx.schedulers.Schedulers;
-import rx.subscriptions.CompositeSubscription;
-import rx.subscriptions.Subscriptions;
 
 import android.R.color;
 import android.app.AlertDialog;
@@ -140,7 +125,6 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
@@ -151,11 +135,24 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.EnumSet;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
-import java.util.Set;
 import java.util.regex.Pattern;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import rx.Observable;
+import rx.Observable.OnSubscribe;
+import rx.Subscriber;
+import rx.Subscription;
+import rx.android.app.AppObservable;
+import rx.functions.Action0;
+import rx.functions.Action1;
+import rx.functions.Func0;
+import rx.functions.Func1;
+import rx.schedulers.Schedulers;
+import rx.subscriptions.CompositeSubscription;
+import rx.subscriptions.Subscriptions;
 
 /**
  * Activity to handle all single-cache-stuff.
@@ -915,7 +912,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         }
     }
 
-    private void storeCacheInList(Integer selectedListId, StoreCacheHandler storeCacheHandler) {
+    private void storeCacheInList(final Integer selectedListId, final StoreCacheHandler storeCacheHandler) {
         if (cache.isOffline()) {
             // cache already offline, just add to another list
             DataStore.addToList(Collections.singletonList(cache), selectedListId);
@@ -1372,7 +1369,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             final LinearLayout listListView = (LinearLayout) view.findViewById(R.id.list_list);
 
             if (cache.isOffline()) {
-                listListView.removeAllViews();;
+                listListView.removeAllViews();
                 for (final Integer listId : cache.getLists()) {
                     final View listItemView = getLayoutInflater().inflate(R.layout.list_list_item, listListView, false);
                     final ListItemViewHolder holder = new ListItemViewHolder(listItemView);
@@ -1381,7 +1378,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     holder.name.setText(list.getTitle());
                     holder.remove.setOnClickListener(new View.OnClickListener() {
                         @Override
-                        public void onClick(View v) {
+                        public void onClick(final View v) {
                             DataStore.removeFromList(Collections.singletonList(cache), listId);
                             updateListBox();
                         }
@@ -1943,20 +1940,20 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     private class TextMenuItemClickListener implements MenuItem.OnMenuItemClickListener {
 
         @Override
-        public boolean onMenuItemClick(MenuItem menuItem) {
-            int startSelection= selectedTextView.getSelectionStart();
-            int endSelection= selectedTextView.getSelectionEnd();
+        public boolean onMenuItemClick(final MenuItem menuItem) {
+            final int startSelection= selectedTextView.getSelectionStart();
+            final int endSelection= selectedTextView.getSelectionEnd();
             clickedItemText = selectedTextView.getText().subSequence(startSelection,endSelection);
             return onClipboardItemSelected(mActionMode, menuItem, clickedItemText);
         }
     }
 
     @Override
-    public void onSupportActionModeStarted(ActionMode mode) {
+    public void onSupportActionModeStarted(final ActionMode mode) {
         if (mSelectionModeActive && selectedTextView != null) {
             mSelectionModeActive = false;
             mActionMode = mode;
-            Menu menu = mode.getMenu();
+            final Menu menu = mode.getMenu();
             mode.getMenuInflater().inflate(R.menu.details_context, menu);
             menu.findItem(R.id.menu_copy).setVisible(false);
             menu.findItem(R.id.menu_cache_share_field).setOnMenuItemClickListener(new TextMenuItemClickListener());
@@ -1969,10 +1966,11 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     }
 
     @Override
-    public void onSupportActionModeFinished(ActionMode mode) {
+    public void onSupportActionModeFinished(final ActionMode mode) {
         mActionMode = null;
-        if (selectedTextView != null)
+        if (selectedTextView != null) {
             selectedTextView.setWindowFocusWait(false);
+        }
         if (!mSelectionModeActive) {
             selectedTextView = null;
         }

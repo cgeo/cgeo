@@ -38,15 +38,6 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import rx.Observable;
-import rx.Observable.OnSubscribe;
-import rx.Subscriber;
-import rx.android.app.AppObservable;
-import rx.functions.Action0;
-import rx.functions.Action1;
-import rx.functions.Func0;
-import rx.functions.Func1;
-import rx.schedulers.Schedulers;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -84,6 +75,16 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
+
+import rx.Observable;
+import rx.Observable.OnSubscribe;
+import rx.Subscriber;
+import rx.android.app.AppObservable;
+import rx.functions.Action0;
+import rx.functions.Action1;
+import rx.functions.Func0;
+import rx.functions.Func1;
+import rx.schedulers.Schedulers;
 
 public class DataStore {
 
@@ -2047,7 +2048,7 @@ public class DataStore {
         LogEntry log = null;
         while (cursor.moveToNext() && logs.size() < 100) {
             if (log == null || log.id != cursor.getInt(0)) {
-                LogEntry.Builder logBuilder = new LogEntry.Builder()
+                final LogEntry.Builder logBuilder = new LogEntry.Builder()
                         .setAuthor(cursor.getString(2))
                         .setDate(cursor.getLong(4))
                         .setLogType(LogType.getById(cursor.getInt(1)))
@@ -2844,14 +2845,14 @@ public class DataStore {
     }
 
     public static void moveToList(final Collection<Geocache> caches, final int oldListId, final int newListId) {
+        if (caches.isEmpty()) {
+            return;
+        }
         final AbstractList list = AbstractList.getListById(newListId);
         if (list == null) {
             return;
         }
         if (!list.isConcrete()) {
-            return;
-        }
-        if (caches.isEmpty()) {
             return;
         }
         init();
@@ -2883,7 +2884,6 @@ public class DataStore {
         init();
 
         final SQLiteStatement remove = PreparedStatement.REMOVE_FROM_LIST.getStatement();
-        final SQLiteStatement add = PreparedStatement.ADD_TO_LIST.getStatement();
 
         database.beginTransaction();
         try {
@@ -2900,14 +2900,14 @@ public class DataStore {
     }
 
     public static void addToList(final Collection<Geocache> caches, final int listId) {
+        if (caches.isEmpty()) {
+            return;
+        }
         final AbstractList list = AbstractList.getListById(listId);
         if (list == null) {
             return;
         }
         if (!list.isConcrete()) {
-            return;
-        }
-        if (caches.isEmpty()) {
             return;
         }
         init();

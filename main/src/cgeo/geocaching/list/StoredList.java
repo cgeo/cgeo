@@ -19,7 +19,6 @@ import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -124,7 +123,7 @@ public final class StoredList extends AbstractList {
                 lists.remove(DataStore.getList(STANDARD_LIST_ID));
             }
 
-            for (Integer exceptListId : exceptListIds) {
+            for (final Integer exceptListId : exceptListIds) {
                 if (exceptListId >= DataStore.customListIdOffset) {
                     lists.remove(DataStore.getList(exceptListId));
                 }
