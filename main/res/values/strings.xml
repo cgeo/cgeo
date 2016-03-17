@@ -334,12 +334,18 @@
         <item quantity="one">Do you want to remove this cache from your device?</item>
         <item quantity="other">Do you want to remove the selected %d caches from your device?</item>
     </plurals>
+    <plurals name="caches_remove_selected_from_list_confirm">
+        <item quantity="one">Do you want to remove this cache from current list?</item>
+        <item quantity="other">Do you want to remove the selected %d caches from current list?</item>
+    </plurals>
     <string name="caches_remove_progress">Removing caches</string>
     <string name="caches_delete_events">Delete past events</string>
     <string name="caches_refresh_selected">Refresh selected</string>
     <string name="caches_refresh_all">Refresh all</string>
     <string name="caches_move_selected">Move selected</string>
     <string name="caches_move_all">Move all</string>
+    <string name="caches_copy_selected">Copy selected</string>
+    <string name="caches_copy_all">Copy all</string>
     <string name="caches_map_locus">Locus</string>
     <string name="caches_map_locus_export">Export to Locus</string>
     <string name="caches_recaptcha_title">reCAPTCHA</string>
@@ -696,6 +702,7 @@
     <string name="cache_offline_refresh">Refresh</string>
     <string name="cache_offline_drop">Drop</string>
     <string name="cache_offline_store">Store</string>
+    <string name="cache_offline_store_in_list">Store in list</string>
     <string name="cache_offline_stored">Stored in device</string>
     <string name="cache_offline_not_ready">Not available offline</string>
     <string name="cache_offline_time_about">about</string>
@@ -808,6 +815,7 @@
     <string name="cache_menu_refresh">Refresh</string>
     <string name="cache_menu_share">Share cache</string>
     <string name="cache_menu_move_list">Move to different list</string>
+    <string name="cache_menu_copy_list">Copy to different list</string>
     <string name="cache_menu_whereyougo">WhereYouGo</string>
     <string name="cache_menu_oruxmaps_online">OruxMaps (Online)</string>
     <string name="cache_menu_oruxmaps_offline">OruxMaps (Offline)</string>
@@ -1456,6 +1464,11 @@
         <item quantity="one">Moved %d cache</item>
         <item quantity="other">Moved %d caches</item>
     </plurals>
+    <string name="command_copy_caches_progress">Copying caches to list %1s</string>
+    <plurals name="command_copy_caches_result">
+        <item quantity="one">Copied %d cache</item>
+        <item quantity="other">Copied %d caches</item>
+    </plurals>
     <string name="command_delete_caches_progress">Deleting caches</string>
     <plurals name="command_delete_caches_result">
         <item quantity="one">Deleted %d cache</item>
@@ -1482,5 +1495,9 @@
     <string name="invitation_action">Invite friends</string>
     <string name="invitation_title">Invite friends to use c:geo</string>
     <string name="invitation_message">Try the c:geo app for geocaching</string>
+
+    <string name="cache_list_remove_from">Remove from list</string>
+    <string name="list_list_headline">Lists:</string>
+    <string name="cache_store_list">Store in list</string>
 
 </resources>

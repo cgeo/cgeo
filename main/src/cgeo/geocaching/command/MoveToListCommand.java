@@ -46,12 +46,12 @@ public abstract class MoveToListCommand extends AbstractCachesCommand {
 
     @Override
     protected void doCommand() {
-        DataStore.moveToList(getCaches(), newListId);
+        DataStore.moveToList(getCaches(), currentListId, newListId);
     }
 
     @Override
     protected void undoCommand() {
-        DataStore.moveToList(getCaches(), currentListId);
+        DataStore.moveToList(getCaches(), newListId, currentListId);
     }
 
     @Override

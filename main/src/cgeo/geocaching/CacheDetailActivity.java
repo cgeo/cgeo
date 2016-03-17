@@ -43,6 +43,7 @@ import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.AbstractCachingPageViewCreator;
+import cgeo.geocaching.ui.AbstractViewHolder;
 import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
 import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.ui.CoordinatesFormatSwitcher;
@@ -59,6 +60,7 @@ import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.logs.CacheLogsViewCreator;
 import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.CheckerUtils;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.CryptUtils;
@@ -138,6 +140,7 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
@@ -148,8 +151,10 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.EnumSet;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 /**
@@ -322,7 +327,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         AndroidRxUtils.networkScheduler.createWorker().schedule(new Action0() {
             @Override
             public void call() {
-                search = Geocache.searchByGeocode(realGeocode, StringUtils.isBlank(realGeocode) ? realGuid : null, 0, false, loadCacheHandler);
+                search = Geocache.searchByGeocode(realGeocode, StringUtils.isBlank(realGeocode) ? realGuid : null, Collections.EMPTY_SET, false, loadCacheHandler);
                 loadCacheHandler.sendMessage(Message.obtain());
             }
         });
@@ -573,7 +578,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         CacheMenuHandler.onPrepareOptionsMenu(menu, cache);
         LoggingUI.onPrepareOptionsMenu(menu, cache);
         menu.findItem(R.id.menu_edit_fieldnote).setVisible(true);
-        menu.findItem(R.id.menu_store).setVisible(cache != null && !cache.isOffline());
+        menu.findItem(R.id.menu_store_in_list).setVisible(cache != null);
         menu.findItem(R.id.menu_delete).setVisible(cache != null && cache.isOffline());
         menu.findItem(R.id.menu_refresh).setVisible(cache != null && cache.supportsRefresh());
         menu.findItem(R.id.menu_gcvote).setVisible(cache != null && GCVote.isVotingPossible(cache));
@@ -599,7 +604,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             case R.id.menu_delete:
                 dropCache();
                 return true;
-            case R.id.menu_store:
+            case R.id.menu_store_in_list:
                 storeCache();
                 return true;
             case R.id.menu_refresh:
@@ -902,18 +907,28 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     new Action1<Integer>() {
                         @Override
                         public void call(final Integer selectedListId) {
-                            storeCache(selectedListId, new StoreCacheHandler(CacheDetailActivity.this, progress));
+                            storeCacheInList(selectedListId, new StoreCacheHandler(CacheDetailActivity.this, progress));
                         }
-                    }, true, StoredList.TEMPORARY_LIST.id);
+                    }, true, cache.getLists());
         } else {
-            storeCache(StoredList.TEMPORARY_LIST.id, new StoreCacheHandler(this, progress));
+            storeCacheInList(StoredList.TEMPORARY_LIST.id, new StoreCacheHandler(this, progress));
+        }
+    }
+
+    private void storeCacheInList(Integer selectedListId, StoreCacheHandler storeCacheHandler) {
+        if (cache.isOffline()) {
+            // cache already offline, just add to another list
+            DataStore.addToList(Collections.singletonList(cache), selectedListId);
+            new StoreCacheHandler(CacheDetailActivity.this, progress).sendEmptyMessage(CancellableHandler.DONE);
+        } else {
+            storeCache(selectedListId, storeCacheHandler);
         }
     }
 
     /**
      * Creator for details-view.
      */
-    private class DetailsViewCreator extends AbstractCachingPageViewCreator<ScrollView> {
+    public class DetailsViewCreator extends AbstractCachingPageViewCreator<ScrollView> {
         // Reference to the details list and favorite line, so that the helper-method can access them without an additional argument
         private LinearLayout detailsList;
         private ImmutablePair<RelativeLayout, TextView> favoriteLine;
@@ -1025,8 +1040,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             updateFavPointBox();
 
             // list
-            final Button buttonChangeList = ButterKnife.findById(view, R.id.change_list);
-            buttonChangeList.setOnClickListener(new ChangeListClickListener());
             updateListBox();
 
             // data license
@@ -1112,17 +1125,17 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
         }
 
-        private class RefreshCacheClickListener implements View.OnClickListener {
-            @Override
-            public void onClick(final View arg0) {
-                refreshCache();
-            }
-        }
-
         private class DropCacheClickListener implements View.OnClickListener {
             @Override
             public void onClick(final View arg0) {
                 dropCache();
+            }
+        }
+
+        private class RefreshCacheClickListener implements View.OnClickListener {
+            @Override
+            public void onClick(final View arg0) {
+                refreshCache();
             }
         }
 
@@ -1260,38 +1273,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         }
 
         /**
-         * Listener for "change list" button
-         */
-        private class ChangeListClickListener implements View.OnClickListener {
-            @Override
-            public void onClick(final View v) {
-                new StoredList.UserInterface(CacheDetailActivity.this).promptForListSelection(R.string.list_title,
-                        new Action1<Integer>() {
-                            @Override
-                            public void call(final Integer selectedListId) {
-                                switchListById(selectedListId);
-                            }
-                        }, true, cache.getListId());
-            }
-        }
-
-        /**
-         * move cache to another list
-         *
-         * @param listId
-         *            the ID of the list
-         */
-        public void switchListById(final int listId) {
-            if (listId < 0) {
-                return;
-            }
-
-            Settings.saveLastList(listId);
-            DataStore.moveToList(cache, listId);
-            updateListBox();
-        }
-
-        /**
          * Show/hide buttons, set text in watchlist box
          */
         private void updateWatchlistBox() {
@@ -1375,23 +1356,42 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             }
         }
 
+        protected final class ListItemViewHolder extends AbstractViewHolder {
+            @Bind(R.id.list_text) protected TextView name;
+            @Bind(R.id.remove_from_list) protected Button remove;
+
+            public ListItemViewHolder(final View view) {
+                super(view);
+            }
+        }
+
         /**
          * shows/hides/updates list box
          */
-        private void updateListBox() {
-            final View box = view.findViewById(R.id.list_box);
+        public void updateListBox() {
+            final LinearLayout listListView = (LinearLayout) view.findViewById(R.id.list_list);
 
             if (cache.isOffline()) {
-                // show box
-                box.setVisibility(View.VISIBLE);
+                listListView.removeAllViews();;
+                for (final Integer listId : cache.getLists()) {
+                    final View listItemView = getLayoutInflater().inflate(R.layout.list_list_item, listListView, false);
+                    final ListItemViewHolder holder = new ListItemViewHolder(listItemView);
 
-                // update text
-                final TextView text = ButterKnife.findById(view, R.id.list_text);
-                final StoredList list = DataStore.getList(cache.getListId());
-                text.setText(res.getString(R.string.cache_list_text) + " " + list.title);
+                    final StoredList list = DataStore.getList(listId);
+                    holder.name.setText(list.getTitle());
+                    holder.remove.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            DataStore.removeFromList(Collections.singletonList(cache), listId);
+                            updateListBox();
+                        }
+                    });
+
+                    listListView.addView(listItemView);
+                }
             } else {
-                // hide box
-                box.setVisibility(View.GONE);
+                // hide listListView
+                listListView.setVisibility(View.GONE);
             }
         }
     }
@@ -1698,7 +1698,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     private void ensureSaved() {
         if (!cache.isOffline()) {
             showToast(getString(R.string.info_cache_saved));
-            cache.setListId(StoredList.STANDARD_LIST_ID);
+            cache.getLists().add(StoredList.STANDARD_LIST_ID);
             new AsyncTask<Void, Void, Void>() {
                 @Override
                 protected Void doInBackground(final Void... params) {
@@ -1985,9 +1985,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
             @Override
             public boolean onLongClick(final View v) {
-                if ((Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.HONEYCOMB )
+                if ((Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.HONEYCOMB)
                         && ((view.getId() == R.id.description) || (view.getId() == R.id.hint))) {
-                    selectedTextView = (IndexOutOfBoundsAvoidingTextView)view;
+                    selectedTextView = (IndexOutOfBoundsAvoidingTextView) view;
                     mSelectionModeActive = true;
                     return false;
                 }
@@ -2054,12 +2054,12 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     @Override
                     public boolean onActionItemClicked(final ActionMode actionMode, final MenuItem menuItem) {
                         switch (menuItem.getItemId()) {
-                        // detail fields
+                            // detail fields
                             case R.id.menu_calendar:
                                 CalendarAddon.addToCalendarWithIntent(CacheDetailActivity.this, cache);
                                 actionMode.finish();
                                 return true;
-                                // handle clipboard actions in base
+                            // handle clipboard actions in base
                             default:
                                 return onClipboardItemSelected(actionMode, menuItem, clickedItemText);
                         }
@@ -2250,6 +2250,14 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         final TextView offlineText = ButterKnife.findById(view, R.id.offline_text);
         final Button offlineRefresh = ButterKnife.findById(view, R.id.offline_refresh);
         final Button offlineStore = ButterKnife.findById(view, R.id.offline_store);
+        final Button offlineDrop = ButterKnife.findById(view, R.id.offline_drop);
+
+        offlineStore.setClickable(true);
+        offlineStore.setOnClickListener(storeCacheClickListener);
+
+        offlineRefresh.setVisibility(cache.supportsRefresh() ? View.VISIBLE : View.GONE);
+        offlineRefresh.setClickable(true);
+        offlineRefresh.setOnClickListener(refreshCacheClickListener);
 
         if (cache.isOffline()) {
             final long diff = (System.currentTimeMillis() / (60 * 1000)) - (cache.getDetailedUpdate() / (60 * 1000)); // minutes
@@ -2266,21 +2274,19 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             }
 
             offlineText.setText(res.getString(R.string.cache_offline_stored) + "\n" + ago);
-            offlineRefresh.setOnClickListener(refreshCacheClickListener);
 
-            offlineStore.setText(res.getString(R.string.cache_offline_drop));
-            offlineStore.setClickable(true);
-            offlineStore.setOnClickListener(dropCacheClickListener);
+            if (offlineDrop != null) {
+                offlineDrop.setOnClickListener(dropCacheClickListener);
+                offlineDrop.setClickable(true);
+                offlineDrop.setVisibility(View.VISIBLE);
+            }
         } else {
             offlineText.setText(res.getString(R.string.cache_offline_not_ready));
-            offlineRefresh.setOnClickListener(refreshCacheClickListener);
-
-            offlineStore.setText(res.getString(R.string.cache_offline_store));
-            offlineStore.setClickable(true);
-            offlineStore.setOnClickListener(storeCacheClickListener);
+            if (offlineDrop != null) {
+                offlineDrop.setVisibility(View.GONE);
+            }
         }
-        offlineRefresh.setVisibility(cache.supportsRefresh() ? View.VISIBLE : View.GONE);
-        offlineRefresh.setClickable(true);
+
     }
 
     public Geocache getCache() {

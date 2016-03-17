@@ -82,7 +82,7 @@ public final class MapUtils {
                 .append(showUserModifiedCoords(cache, cacheListType))
                 .append(cache.getPersonalNote())
                 .append(cache.isLogOffline())
-                .append(cache.getListId() > 0)
+                .append(!cache.getLists().isEmpty())
                 .append(cache.getOfflineLogType())
                 .append(showBackground(cacheListType))
                 .append(showFloppyOverlay(cacheListType))
@@ -197,7 +197,7 @@ public final class MapUtils {
             layers.add(Compatibility.getDrawable(res, R.drawable.marker_own));
             insets.add(getOwnInset(cacheListType)[resolution]);
             // if not, checked if stored
-        } else if (cache.getListId() > 0 && showFloppyOverlay(cacheListType)) {
+        } else if (!cache.getLists().isEmpty() && showFloppyOverlay(cacheListType)) {
             layers.add(Compatibility.getDrawable(res, R.drawable.marker_stored));
             insets.add(getOwnInset(cacheListType)[resolution]);
         }

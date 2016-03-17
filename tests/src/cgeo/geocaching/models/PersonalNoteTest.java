@@ -37,7 +37,7 @@ public class PersonalNoteTest extends TestCase {
         PersonalNote parsedNote = new PersonalNote(truncCache);
 
         Geocache exceedingCache = new Geocache();
-        exceedingCache.setListId(StoredList.STANDARD_LIST_ID); // stored
+        exceedingCache.getLists().add(StoredList.STANDARD_LIST_ID); // stored
         exceedingCache.setPersonalNote(testString);
         PersonalNote otherNote = new PersonalNote(exceedingCache);
         PersonalNote result = parsedNote.mergeWith(otherNote);
@@ -58,7 +58,7 @@ public class PersonalNoteTest extends TestCase {
         cache1.setPersonalNote("Simple cgeo note\n--\nSimple provider note");
         PersonalNote myNote = new PersonalNote(cache1);
         Geocache cache2 = new Geocache();
-        cache2.setListId(StoredList.STANDARD_LIST_ID); // stored
+        cache2.getLists().add(StoredList.STANDARD_LIST_ID); // stored
         cache2.setPersonalNote("cgeo note\n--\nProvider note");
         PersonalNote otherNote = new PersonalNote(cache2);
         PersonalNote result = myNote.mergeWith(otherNote);
@@ -71,7 +71,7 @@ public class PersonalNoteTest extends TestCase {
         cache1.setPersonalNote("Simple cgeo note\n--\nSimple provider note");
         PersonalNote myNote = new PersonalNote(cache1);
         Geocache cache2 = new Geocache();
-        cache2.setListId(StoredList.STANDARD_LIST_ID); // stored
+        cache2.getLists().add(StoredList.STANDARD_LIST_ID); // stored
         cache2.setPersonalNote("Provider note");
         PersonalNote otherNote = new PersonalNote(cache2);
         PersonalNote result = myNote.mergeWith(otherNote);

@@ -8,7 +8,7 @@ import android.app.Activity;
 
 import java.util.Collection;
 
-abstract class AbstractCachesCommand extends AbstractCommand {
+public abstract class AbstractCachesCommand extends AbstractCommand {
 
     @NonNull private final Collection<Geocache> caches;
 
