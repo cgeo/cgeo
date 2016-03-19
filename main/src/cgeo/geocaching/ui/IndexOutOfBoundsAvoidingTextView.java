@@ -58,6 +58,40 @@ public class IndexOutOfBoundsAvoidingTextView extends TextView {
 		}
 	}
 
+	float convertToLocalHorizontalCoordinate(float x) {
+		x -= getTotalPaddingLeft();
+		// Clamp the position to inside of the view.
+		x = Math.max(0.0f, x);
+		x = Math.min(getWidth() - getTotalPaddingRight() - 1, x);
+		x += getScrollX();
+		return x;
+	}
+
+
+	private int getOffsetAtCoordinate(int line, float x) {
+		x = convertToLocalHorizontalCoordinate(x);
+		return getLayout().getOffsetForHorizontal(line, x);
+	}
+
+	int getLineAtCoordinate(float y) {
+		y -= getTotalPaddingTop();
+		// Clamp the position to inside of the view.
+		y = Math.max(0.0f, y);
+		y = Math.min(getHeight() - getTotalPaddingBottom() - 1, y);
+		y += getScrollY();
+		return getLayout().getLineForVertical((int) y);
+	}
+
+	@Override
+	public int getOffsetForPosition(float x, float y) {
+		if (getLayout() == null) return -1;
+		int line = getLineAtCoordinate(y);
+		if (shouldWindowFocusWait && (line < getLineCount()-1))
+			line+=1;
+		final int offset = getOffsetAtCoordinate(line, x);
+		return offset;
+	}
+
 	@Override
 	protected void onSelectionChanged(final int selStart, final int selEnd) {
 		if (selStart == -1 || selEnd == -1) {
