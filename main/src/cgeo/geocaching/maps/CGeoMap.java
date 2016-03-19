@@ -1533,7 +1533,9 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
                     }
 
                     if (!DataStore.isOffline(geocode, null)) {
-                        Geocache.storeCache(null, geocode, listId, false, handler);
+                        final Set<Integer> lists = new HashSet<>();
+                        lists.add(listId);
+                        Geocache.storeCache(null, geocode, lists, false, handler);
                     }
                 } catch (final Exception e) {
                     Log.e("CGeoMap.LoadDetails.run", e);

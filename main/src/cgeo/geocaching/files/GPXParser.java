@@ -355,7 +355,7 @@ public abstract class GPXParser extends FileParser {
 
                 if (isValidForImport()) {
                     fixCache(cache);
-                    cache.setListId(listId);
+                    cache.getLists().add(listId);
                     cache.setDetailed(true);
 
                     createNoteFromGSAKUserdata();

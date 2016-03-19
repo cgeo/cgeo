@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/cache_list_item"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/list_text"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_gravity="left"
+        android:layout_marginLeft="6dip"
+        android:layout_marginRight="130dip"
+        android:paddingRight="3dip"
+        android:textColor="?text_color"
+        android:textSize="14sp" />
+
+    <Button
+        android:id="@+id/remove_from_list"
+        style="@style/button_small"
+        android:layout_alignParentRight="true"
+        android:text="@string/cache_list_remove_from"
+        android:visibility="visible" />
+</RelativeLayout>

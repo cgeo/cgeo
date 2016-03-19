@@ -2,6 +2,8 @@ package cgeo.geocaching.utils;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -13,6 +15,8 @@ import rx.Subscription;
 import rx.functions.Action0;
 import rx.functions.Func0;
 import rx.functions.Func1;
+import rx.observers.TestSubscriber;
+import rx.schedulers.TestScheduler;
 import rx.subjects.PublishSubject;
 
 public class RxUtilsTest extends TestCase {
@@ -108,6 +112,79 @@ public class RxUtilsTest extends TestCase {
 
         final Single<Integer> errorSingle = Single.error(new RuntimeException("error-ed single"));
         assertThat(RxUtils.nullableSingleValue(errorSingle)).isNull();
+    }
+
+    public static void testMergePreferredImmediate() {
+        final Observable<Integer> o1 = Observable.range(0, 5);
+        final Observable<Integer> o2 = Observable.range(5, 5);
+        // take(100) is here to add some backpressure
+        final List<Integer> merged = RxUtils.mergePreferred(o1, o2).take(100).toList().toBlocking().single();
+        final List<Integer> expected = new LinkedList<>();
+        for (int i = 0; i < 10; i++) {
+            expected.add(i);
+        }
+        assertThat(merged).isEqualTo(expected);
+    }
+
+    public static void testMergePreferredDelayed() {
+        final TestScheduler scheduler = new TestScheduler();
+        final Observable<Integer> o1 = Observable.range(2, 3).delay(100, TimeUnit.MILLISECONDS, scheduler);
+        final Observable<Integer> o2 = Observable.range(10, 5);
+        final Observable<Integer> merged = RxUtils.mergePreferred(o1, o2);
+        final TestSubscriber<Integer> subscriber = new TestSubscriber<>(0);
+        merged.subscribe(subscriber);
+        subscriber.assertNoValues();
+        subscriber.requestMore(1);
+        subscriber.assertValues(10);  // From non-preferred, preferred is not ready
+        subscriber.requestMore(1);
+        subscriber.assertValues(10, 11);  // From non-preferred, preferred is not ready
+        scheduler.advanceTimeBy(120, TimeUnit.MILLISECONDS);
+        subscriber.requestMore(100);
+        subscriber.assertValues(10, 11, 2, 3, 4, 12, 13, 14);  // From non-preferred (preferred has completed)
+        subscriber.assertCompleted();
+    }
+
+    public static void testMergePreferredError() {
+        {
+            final PublishSubject<Integer> o1 = PublishSubject.create();
+            final PublishSubject<Integer> o2 = PublishSubject.create();
+            final Observable<Integer> merged = RxUtils.mergePreferred(o1, o2);
+            final TestSubscriber<Integer> subscriber = new TestSubscriber<>(0);
+            merged.subscribe(subscriber);
+            o1.onNext(1);
+            o1.onNext(2);
+            o2.onNext(11);
+            o2.onNext(12);
+            o2.onNext(13);
+            subscriber.assertNoValues();
+            subscriber.requestMore(3);
+            subscriber.assertValues(1, 2, 11);
+            o1.onNext(3);
+            subscriber.requestMore(100);
+            subscriber.assertValues(1, 2, 11, 3, 12, 13);
+            o1.onError(new RuntimeException());
+            subscriber.assertError(RuntimeException.class);
+        }
+        {
+            final PublishSubject<Integer> o1 = PublishSubject.create();
+            final PublishSubject<Integer> o2 = PublishSubject.create();
+            final Observable<Integer> merged = RxUtils.mergePreferred(o1, o2);
+            final TestSubscriber<Integer> subscriber = new TestSubscriber<>(0);
+            merged.subscribe(subscriber);
+            o1.onNext(1);
+            o1.onNext(2);
+            o2.onNext(11);
+            o2.onNext(12);
+            o2.onNext(13);
+            subscriber.assertNoValues();
+            subscriber.requestMore(3);
+            subscriber.assertValues(1, 2, 11);
+            o1.onNext(3);
+            subscriber.requestMore(100);
+            subscriber.assertValues(1, 2, 11, 3, 12, 13);
+            o2.onError(new RuntimeException());
+            subscriber.assertError(RuntimeException.class);
+        }
     }
 
 }

@@ -49,9 +49,9 @@ public class DataStoreTest extends CGeoTestCase {
             assertThat(DataStore.getLists().size()).isGreaterThanOrEqualTo(2);
 
             cache1.setDetailed(true);
-            cache1.setListId(listId1);
+            cache1.getLists().add(listId1);
             cache2.setDetailed(true);
-            cache2.setListId(listId1);
+            cache2.getLists().add(listId1);
 
             // save caches to DB (cache1=listId1, cache2=listId1)
             DataStore.saveCache(cache1, LoadFlags.SAVE_ALL);
@@ -67,7 +67,7 @@ public class DataStoreTest extends CGeoTestCase {
             assertThat(list1.title).isEqualTo("DataStore Test (renamed)");
 
             // move to list (cache1=listId2, cache2=listId2)
-            DataStore.moveToList(Collections.singletonList(cache1), listId2);
+            DataStore.moveToList(Collections.singletonList(cache1), listId1, listId2);
             assertThat(DataStore.getAllStoredCachesCount(CacheType.ALL, listId2)).isEqualTo(1);
 
             // remove list (cache1=listId2, cache2=listId2)
@@ -77,7 +77,7 @@ public class DataStoreTest extends CGeoTestCase {
             DataStore.markDropped(Collections.singletonList(cache2));
 
             // mark stored (cache1=1, cache2=listId2)
-            DataStore.moveToList(Collections.singletonList(cache2), listId2);
+            DataStore.moveToList(Collections.singletonList(cache2), listId1, listId2);
             assertThat(DataStore.getAllStoredCachesCount(CacheType.ALL, listId2)).isEqualTo(2);
 
             // drop stored (cache1=0, cache2=0)

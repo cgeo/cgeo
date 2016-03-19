@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 
 import rx.functions.Action1;
 
@@ -70,11 +71,19 @@ public final class StoredList extends AbstractList {
         }
 
         public void promptForListSelection(final int titleId, @NonNull final Action1<Integer> runAfterwards, final boolean onlyConcreteLists, final int exceptListId) {
-            promptForListSelection(titleId, runAfterwards, onlyConcreteLists, exceptListId, ListNameMemento.EMPTY);
+            promptForListSelection(titleId, runAfterwards, onlyConcreteLists, Collections.singleton(exceptListId), ListNameMemento.EMPTY);
+        }
+
+        public void promptForListSelection(final int titleId, @NonNull final Action1<Integer> runAfterwards, final boolean onlyConcreteLists, final Set<Integer> exceptListIds) {
+            promptForListSelection(titleId, runAfterwards, onlyConcreteLists, exceptListIds, ListNameMemento.EMPTY);
         }
 
         public void promptForListSelection(final int titleId, @NonNull final Action1<Integer> runAfterwards, final boolean onlyConcreteLists, final int exceptListId, final @NonNull ListNameMemento listNameMemento) {
-            final List<AbstractList> lists = getMenuLists(onlyConcreteLists, exceptListId);
+            promptForListSelection(titleId, runAfterwards, onlyConcreteLists, Collections.singleton(exceptListId), listNameMemento);
+        }
+
+        public void promptForListSelection(final int titleId, @NonNull final Action1<Integer> runAfterwards, final boolean onlyConcreteLists, final Set<Integer> exceptListIds, final @NonNull ListNameMemento listNameMemento) {
+            final List<AbstractList> lists = getMenuLists(onlyConcreteLists, exceptListIds);
 
             final List<CharSequence> listsTitle = new ArrayList<>();
             for (final AbstractList list : lists) {
@@ -103,22 +112,32 @@ public final class StoredList extends AbstractList {
         }
 
         public static List<AbstractList> getMenuLists(final boolean onlyConcreteLists, final int exceptListId) {
+            return getMenuLists(onlyConcreteLists, Collections.singleton(exceptListId));
+        }
+
+        public static List<AbstractList> getMenuLists(final boolean onlyConcreteLists, final Set<Integer> exceptListIds) {
             final List<AbstractList> lists = new ArrayList<>();
             lists.addAll(getSortedLists());
 
-            if (exceptListId == STANDARD_LIST_ID || exceptListId >= DataStore.customListIdOffset) {
-                lists.remove(DataStore.getList(exceptListId));
+            if (exceptListIds.contains(STANDARD_LIST_ID)) {
+                lists.remove(DataStore.getList(STANDARD_LIST_ID));
+            }
+
+            for (final Integer exceptListId : exceptListIds) {
+                if (exceptListId >= DataStore.customListIdOffset) {
+                    lists.remove(DataStore.getList(exceptListId));
+                }
             }
 
             if (!onlyConcreteLists) {
-                if (exceptListId != PseudoList.ALL_LIST.id) {
+                if (!exceptListIds.contains(PseudoList.ALL_LIST.id)) {
                     lists.add(PseudoList.ALL_LIST);
                 }
-                if (exceptListId != PseudoList.HISTORY_LIST.id) {
+                if (!exceptListIds.contains(PseudoList.HISTORY_LIST.id)) {
                     lists.add(PseudoList.HISTORY_LIST);
                 }
             }
-            if (exceptListId != PseudoList.NEW_LIST.id) {
+            if (!exceptListIds.contains(PseudoList.NEW_LIST.id)) {
                 lists.add(PseudoList.NEW_LIST);
             }
             return lists;
