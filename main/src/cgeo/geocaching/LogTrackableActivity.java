@@ -552,7 +552,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
     }
 
     public static Intent getIntent(final Context context, final Trackable trackable, final String geocache) {
-        final Intent logTouchIntent =  getIntent(context, trackable);
+        final Intent logTouchIntent = getIntent(context, trackable);
         logTouchIntent.putExtra(Intents.EXTRA_GEOCACHE, geocache);
         return logTouchIntent;
     }

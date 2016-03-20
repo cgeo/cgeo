@@ -73,7 +73,7 @@ public class Image implements Parcelable {
             }
 
             // Assume uri has a scheme
-            uri =  Uri.parse(url);
+            uri = Uri.parse(url);
             if (uri.isRelative()) {
                 // If not the case treat it as a file
                 uri = Uri.fromFile(new File(url));
