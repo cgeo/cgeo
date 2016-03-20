@@ -1472,7 +1472,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 }
             });
             final Button personalNoteUpload = ButterKnife.findById(view, R.id.upload_personalnote);
-            if (cache.isOffline() && ConnectorFactory.getConnector(cache).supportsPersonalNote()) {
+            if (ConnectorFactory.getConnector(cache).supportsPersonalNote()) {
                 personalNoteUpload.setVisibility(View.VISIBLE);
                 personalNoteUpload.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -1703,6 +1703,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     return null;
                 }
             }.execute();
+            notifyDataSetChanged();
         }
     }
 
@@ -2353,11 +2354,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     }
 
     public static void editPersonalNote(final Geocache cache, final CacheDetailActivity activity) {
-        if (cache.isOffline()) {
-            final FragmentManager fm = activity.getSupportFragmentManager();
-            final EditNoteDialog dialog = EditNoteDialog.newInstance(cache.getPersonalNote());
-            dialog.show(fm, "fragment_edit_note");
-        }
+        final FragmentManager fm = activity.getSupportFragmentManager();
+        final EditNoteDialog dialog = EditNoteDialog.newInstance(cache.getPersonalNote());
+        dialog.show(fm, "fragment_edit_note");
     }
 
     @Override
