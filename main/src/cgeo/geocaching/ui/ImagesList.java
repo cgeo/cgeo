@@ -131,14 +131,14 @@ public class ImagesList {
 
             final RelativeLayout imageView = (RelativeLayout) inflater.inflate(R.layout.image_item, rowView, false);
             assert imageView != null;
+            rowView.addView(imageView);
+            imagesView.addView(rowView);
             subscriptions.add(AppObservable.bindActivity(activity, imgGetter.fetchDrawable(img.getUrl())).subscribe(new Action1<BitmapDrawable>() {
                 @Override
                 public void call(final BitmapDrawable image) {
                     display(imageView, image, img, rowView);
                 }
             }));
-            rowView.addView(imageView);
-            imagesView.addView(rowView);
         }
 
         return subscriptions;
@@ -146,7 +146,8 @@ public class ImagesList {
 
     private void display(final RelativeLayout imageViewLayout, final BitmapDrawable image, final Image img, final LinearLayout view) {
         final ImageView imageView = (ImageView) imageViewLayout.findViewById(R.id.map_image);
-        if (image != null) {
+        // In case of a failed download happening fast, the imageView seems to not have been added to the layout yet
+        if (image != null && imageView != null) {
             bitmaps.add(image.getBitmap());
 
             final Rect bounds = image.getBounds();
