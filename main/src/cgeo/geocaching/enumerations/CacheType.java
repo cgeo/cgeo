@@ -134,7 +134,7 @@ public enum CacheType {
     }
 
     public boolean isEvent() {
-        return EVENT == this || MEGA_EVENT == this || CITO == this || GIGA_EVENT == this || LOSTANDFOUND == this || BLOCK_PARTY == this || GPS_EXHIBIT == this;
+        return this == EVENT || this == MEGA_EVENT || this == CITO || this == GIGA_EVENT || this == LOSTANDFOUND || this == BLOCK_PARTY || this == GPS_EXHIBIT;
     }
 
     @Override
@@ -158,10 +158,10 @@ public enum CacheType {
     }
 
     public boolean applyDistanceRule() {
-        return TRADITIONAL == this || PROJECT_APE == this || GCHQ == this;
+        return this == TRADITIONAL || this == PROJECT_APE || this == GCHQ;
     }
 
     public boolean isVirtual() {
-        return VIRTUAL == this || WEBCAM == this || EARTH == this;
+        return this == VIRTUAL || this == WEBCAM || this == EARTH;
     }
 }

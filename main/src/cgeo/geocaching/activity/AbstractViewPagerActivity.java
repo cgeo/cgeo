@@ -146,7 +146,7 @@ public abstract class AbstractViewPagerActivity<Page extends Enum<Page>> extends
 
             PageViewCreator creator = viewCreators.get(page);
 
-            if (null == creator && null != page) {
+            if (creator == null && page != null) {
                 creator = AbstractViewPagerActivity.this.createViewCreator(page);
                 viewCreators.put(page, creator);
                 viewStates.put(page, new Bundle());
@@ -155,7 +155,7 @@ public abstract class AbstractViewPagerActivity<Page extends Enum<Page>> extends
             View view = null;
 
             try {
-                if (null != creator) {
+                if (creator != null) {
                     // Result from getView() is maybe cached, but it should be valid because the
                     // creator should be informed about data-changes with notifyDataSetChanged()
                     view = creator.getView(container);
@@ -202,7 +202,7 @@ public abstract class AbstractViewPagerActivity<Page extends Enum<Page>> extends
         @Override
         public String getTitle(final int position) {
             final Page page = pageOrder.get(position);
-            if (null == page) {
+            if (page == null) {
                 return "";
             }
             return AbstractViewPagerActivity.this.getTitle(page);

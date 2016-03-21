@@ -336,13 +336,13 @@ public class GCLogin extends AbstractLogin {
     private static void detectGcCustomDate() {
         final String result = Network.getResponseData(Network.getRequest("https://www.geocaching.com/account/settings/preferences"));
 
-        if (null == result) {
+        if (result == null) {
             Log.w("Login.detectGcCustomDate: result is null");
             return;
         }
 
         final String customDate = TextUtils.getMatch(result, GCConstants.PATTERN_CUSTOMDATE, true, null);
-        if (null != customDate) {
+        if (customDate != null) {
             Settings.setGcCustomDate(customDate);
         }
     }

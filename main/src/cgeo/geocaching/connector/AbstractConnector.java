@@ -200,7 +200,7 @@ public abstract class AbstractConnector implements IConnector {
             if (geocache.isOwner()) {
                 logTypes.add(LogType.ANNOUNCEMENT);
             }
-        } else if (CacheType.WEBCAM == geocache.getType()) {
+        } else if (geocache.getType() == CacheType.WEBCAM) {
             logTypes.add(LogType.WEBCAM_PHOTO_TAKEN);
         } else {
             logTypes.add(LogType.FOUND_IT);

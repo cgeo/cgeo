@@ -402,12 +402,12 @@ public class Geocache implements IWaypoint {
                 ObjectUtils.equals(favorite, other.favorite) &&
                 favoritePoints == other.favoritePoints &&
                 ObjectUtils.equals(onWatchlist, other.onWatchlist) &&
-                (hidden != null ? hidden.equals(other.hidden) : null == other.hidden) &&
+                (hidden != null ? hidden.equals(other.hidden) : other.hidden == null) &&
                 StringUtils.equalsIgnoreCase(guid, other.guid) &&
                 StringUtils.equalsIgnoreCase(getHint(), other.getHint()) &&
                 StringUtils.equalsIgnoreCase(cacheId, other.cacheId) &&
-                (direction != null ? direction.equals(other.direction) : null == other.direction) &&
-                (distance != null ? distance.equals(other.distance) : null == other.distance) &&
+                (direction != null ? direction.equals(other.direction) : other.direction == null) &&
+                (distance != null ? distance.equals(other.distance) : other.distance == null) &&
                 rating == other.rating &&
                 votes == other.votes &&
                 myVote == other.myVote &&
@@ -846,7 +846,7 @@ public class Geocache implements IWaypoint {
      * @return the normalized cached name to be used for sorting, taking into account the numerical parts in the name
      */
     public String getNameForSorting() {
-        if (null == nameForSorting) {
+        if (nameForSorting == null) {
             nameForSorting = name;
             // pad each number part to a fixed size of 6 digits, so that numerical sorting becomes equivalent to string sorting
             MatcherWrapper matcher = new MatcherWrapper(NUMBER_PATTERN, nameForSorting);
@@ -1290,14 +1290,14 @@ public class Geocache implements IWaypoint {
     }
 
     public void setType(final CacheType cacheType) {
-        if (cacheType == null || CacheType.ALL == cacheType) {
+        if (cacheType == null || cacheType == CacheType.ALL) {
             throw new IllegalArgumentException("Illegal cache type");
         }
         this.cacheType = new UncertainProperty<>(cacheType);
     }
 
     public void setType(final CacheType cacheType, final int zoomlevel) {
-        if (cacheType == null || CacheType.ALL == cacheType) {
+        if (cacheType == null || cacheType == CacheType.ALL) {
             throw new IllegalArgumentException("Illegal cache type");
         }
         this.cacheType = new UncertainProperty<>(cacheType, zoomlevel);

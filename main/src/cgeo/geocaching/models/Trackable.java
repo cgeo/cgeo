@@ -324,7 +324,7 @@ public class Trackable implements ILogable {
 
     @Override
     public String toString() {
-        if (null != name) {
+        if (name != null) {
             return Html.fromHtml(name).toString();
         }
 

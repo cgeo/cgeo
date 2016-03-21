@@ -98,7 +98,7 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByCente
 
     @Override
     public boolean supportsWatchList() {
-        return ApiSupport.current == getApiSupport();
+        return getApiSupport() == ApiSupport.current;
     }
 
     @Override

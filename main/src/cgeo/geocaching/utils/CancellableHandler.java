@@ -130,7 +130,7 @@ public abstract class CancellableHandler extends Handler {
     }
 
     public static void sendLoadProgressDetail(final Handler handler, @StringRes final int resourceId) {
-        if (null != handler) {
+        if (handler != null) {
             handler.obtainMessage(UPDATE_LOAD_PROGRESS_DETAIL, CgeoApplication.getInstance().getString(resourceId)).sendToTarget();
         }
     }

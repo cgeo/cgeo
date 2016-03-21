@@ -286,7 +286,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             String title = res.getString(R.string.cache);
             if (StringUtils.isNotBlank(name)) {
                 title = name;
-            } else if (null != geocode && StringUtils.isNotBlank(geocode)) { // can't be null, but the compiler doesn't understand StringUtils.isNotBlank()
+            } else if (geocode != null && StringUtils.isNotBlank(geocode)) { // can't be null, but the compiler doesn't understand StringUtils.isNotBlank()
                 title = geocode;
             }
             progress.show(this, title, res.getString(R.string.cache_dialog_loading_details), true, loadCacheHandler.cancelMessage());
@@ -698,7 +698,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
         @Override
         public void handleRegularMessage(final Message msg) {
-            if (UPDATE_LOAD_PROGRESS_DETAIL == msg.what && msg.obj instanceof String) {
+            if (msg.what == UPDATE_LOAD_PROGRESS_DETAIL && msg.obj instanceof String) {
                 updateStatusMsg((String) msg.obj);
             } else {
                 final CacheDetailActivity activity = ((CacheDetailActivity) activityRef.get());
@@ -1620,7 +1620,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     addContextMenu(descriptionView);
                     potentiallyHideShortDescription();
                 }
-                if (null != loadingIndicatorView) {
+                if (loadingIndicatorView != null) {
                     loadingIndicatorView.setVisibility(View.GONE);
                 }
             } catch (final RuntimeException ignored) {
@@ -1738,14 +1738,14 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 @Override
                 public View getView(final int position, final View convertView, final ViewGroup parent) {
                     View rowView = convertView;
-                    if (null == rowView) {
+                    if (rowView == null) {
                         rowView = getLayoutInflater().inflate(R.layout.waypoint_item, parent, false);
                         rowView.setClickable(true);
                         rowView.setLongClickable(true);
                         registerForContextMenu(rowView);
                     }
                     WaypointViewHolder holder = (WaypointViewHolder) rowView.getTag();
-                    if (null == holder) {
+                    if (holder == null) {
                         holder = new WaypointViewHolder(rowView);
                     }
 
@@ -1762,7 +1762,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             // coordinates
             final TextView coordinatesView = holder.coordinatesView;
             final Geopoint coordinates = wpt.getCoords();
-            if (null != coordinates) {
+            if (coordinates != null) {
                 coordinatesView.setOnClickListener(new CoordinatesFormatSwitcher(coordinates));
                 coordinatesView.setText(coordinates.toString());
                 coordinatesView.setVisibility(View.VISIBLE);
@@ -1786,7 +1786,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             final TextView nameView = holder.nameView;
             if (StringUtils.isNotBlank(wpt.getName())) {
                 nameView.setText(StringEscapeUtils.unescapeHtml4(wpt.getName()));
-            } else if (null != coordinates) {
+            } else if (coordinates != null) {
                 nameView.setText(coordinates.toString());
             } else {
                 nameView.setText(res.getString(R.string.waypoint));
@@ -2299,7 +2299,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
         @Override
         public void handleRegularMessage(final Message msg) {
-            if (UPDATE_LOAD_PROGRESS_DETAIL == msg.what && msg.obj instanceof String) {
+            if (msg.what == UPDATE_LOAD_PROGRESS_DETAIL && msg.obj instanceof String) {
                 updateStatusMsg(R.string.cache_dialog_offline_save_message, (String) msg.obj);
             } else {
                 notifyDataSetChanged(activityRef);
@@ -2315,7 +2315,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
         @Override
         public void handleRegularMessage(final Message msg) {
-            if (UPDATE_LOAD_PROGRESS_DETAIL == msg.what && msg.obj instanceof String) {
+            if (msg.what == UPDATE_LOAD_PROGRESS_DETAIL && msg.obj instanceof String) {
                 updateStatusMsg(R.string.cache_dialog_refresh_message, (String) msg.obj);
             } else {
                 notifyDataSetChanged(activityRef);

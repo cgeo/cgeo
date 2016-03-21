@@ -53,7 +53,7 @@ public class GpxExport extends AbstractExport {
     public void export(@NonNull final List<Geocache> caches, @Nullable final Activity activity) {
         final String[] geocodes = getGeocodes(caches);
         calculateFileName(geocodes);
-        if (null == activity) {
+        if (activity == null) {
             // No activity given, so no user interaction possible.
             // Start export with default parameters.
             new ExportTask(null).execute(geocodes);
@@ -179,7 +179,7 @@ public class GpxExport extends AbstractExport {
         @Override
         protected void onPostExecuteInternal(final File exportFile) {
             final Activity activityLocal = activity;
-            if (null != activityLocal) {
+            if (activityLocal != null) {
                 if (exportFile != null) {
                     ActivityMixin.showToast(activityLocal, getName() + ' ' + activityLocal.getString(R.string.export_exportedto) + ": " + exportFile.toString());
                     if (Settings.getShareAfterExport()) {

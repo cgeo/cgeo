@@ -194,7 +194,7 @@ public enum CacheAttribute {
 
     @NonNull
     public static String trimAttributeName(@Nullable final String attributeName) {
-        if (null == attributeName) {
+        if (attributeName == null) {
             return "";
         }
         return attributeName.replace(INTERNAL_YES, "").replace(INTERNAL_NO, "").trim();

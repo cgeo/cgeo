@@ -62,11 +62,11 @@ public enum WaypointType {
      */
     @NonNull
     public static WaypointType findById(final String id) {
-        if (null == id) {
+        if (id == null) {
             return WAYPOINT;
         }
         final WaypointType waypointType = FIND_BY_ID.get(id);
-        if (null == waypointType) {
+        if (waypointType == null) {
             return WAYPOINT;
         }
         return waypointType;

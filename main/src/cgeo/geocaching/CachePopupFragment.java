@@ -62,7 +62,7 @@ public class CachePopupFragment extends AbstractDialogFragment {
 
         @Override
         public void handleRegularMessage(final Message msg) {
-            if (UPDATE_LOAD_PROGRESS_DETAIL == msg.what && msg.obj instanceof String) {
+            if (msg.what == UPDATE_LOAD_PROGRESS_DETAIL && msg.obj instanceof String) {
                 updateStatusMsg((String) msg.obj);
             } else {
                 init();

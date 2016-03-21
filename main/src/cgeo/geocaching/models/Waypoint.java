@@ -102,7 +102,7 @@ public class Waypoint implements IWaypoint {
     }
 
     public boolean isUserDefined() {
-        return own || WaypointType.OWN == waypointType;
+        return own || waypointType == WaypointType.OWN;
     }
 
     public void setUserDefined() {
@@ -224,7 +224,7 @@ public class Waypoint implements IWaypoint {
      * @return True - waypoint is final and has coordinates, False - otherwise
      */
     public boolean isFinalWithCoords() {
-        return WaypointType.FINAL == waypointType && null != coords;
+        return waypointType == WaypointType.FINAL && coords != null;
     }
 
     @Override

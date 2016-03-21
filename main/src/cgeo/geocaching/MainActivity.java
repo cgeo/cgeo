@@ -573,7 +573,7 @@ public class MainActivity extends AbstractActionBarActivity {
     }
 
     private void checkRestore() {
-        if (!DataStore.isNewlyCreatedDatebase() || null == DatabaseBackupUtils.getRestoreFile()) {
+        if (!DataStore.isNewlyCreatedDatebase() || DatabaseBackupUtils.getRestoreFile() == null) {
             return;
         }
         new AlertDialog.Builder(this)
