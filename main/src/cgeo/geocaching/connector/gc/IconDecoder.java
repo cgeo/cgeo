@@ -133,7 +133,7 @@ final class IconDecoder {
     }
 
     /**
-     * A method that returns true if pixel color appears on more then one cache type and shall be excluded from parsing
+     * A method that returns true if pixel color appears on more than one cache type and shall be excluded from parsing
      *
      * @param r
      *            red value

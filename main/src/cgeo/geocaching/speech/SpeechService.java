@@ -135,7 +135,7 @@ public class SpeechService extends Service implements OnInitListener {
             return;
         }
         if (switchLocale == TextToSpeech.LANG_NOT_SUPPORTED) {
-            Log.e("Current languge not supported by text to speech.");
+            Log.e("Current language not supported by text to speech.");
             ActivityMixin.showToast(startingActivity, R.string.err_tts_lang_not_supported);
             return;
         }

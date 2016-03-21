@@ -1079,7 +1079,7 @@ public final class GCParser {
 
             final Elements cells = row.select("td");
             if (cells.size() < 6) {
-                Log.d("GCParser.getDownloadablePocketQueries: less then 6 table cells, looks like an empty table");
+                Log.d("GCParser.getDownloadablePocketQueries: less than 6 table cells, looks like an empty table");
                 continue;
             }
             final Element link = cells.get(2).select("a").first();
