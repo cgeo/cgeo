@@ -327,7 +327,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
             return afterCoord;
         }
         // expanded geocaching.com URLs
-        final String afterGeocache  = StringUtils.substringBetween(noQueryString, "/geocache/", "_");
+        final String afterGeocache = StringUtils.substringBetween(noQueryString, "/geocache/", "_");
         if (afterGeocache != null && canHandle(afterGeocache)) {
             return afterGeocache;
         }

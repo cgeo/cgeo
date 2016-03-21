@@ -62,7 +62,7 @@ public class RxUtils {
      * Transform a nullable return value into an observable with 0 or 1 element.
      *
      * @param func the function to call
-     * @return  an observable with only the result of calling {@code func} if it is not {@code null}, none otherwise
+     * @return an observable with only the result of calling {@code func} if it is not {@code null}, none otherwise
      */
     public static <T> Observable<T> deferredNullable(@NonNull final Func0<T> func) {
         return Observable.defer(new Func0<Observable<T>>() {
