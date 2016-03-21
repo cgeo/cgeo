@@ -24,10 +24,10 @@ import java.util.concurrent.TimeUnit;
  */
 public abstract class GeoDirHandler {
 
-    public static final int UPDATE_GEODATA = 1 << 1;
-    public static final int UPDATE_DIRECTION = 1 << 2;
-    public static final int UPDATE_GEODIR = 1 << 3;
-    public static final int LOW_POWER = 1 << 4;
+    public static final int UPDATE_GEODATA = 1 << 0;
+    public static final int UPDATE_DIRECTION = 1 << 1;
+    public static final int UPDATE_GEODIR = 1 << 2;
+    public static final int LOW_POWER = 1 << 3;
 
     /**
      * Update method called when new geodata is available. This method is called on the UI thread.
