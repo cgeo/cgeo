@@ -101,7 +101,7 @@ public class GC1ZXX2Android extends MockedCacheAndroid {
     @NonNull
     @Override
     public List<String> getAttributes() {
-        final String[] attributes = new String[] {
+        final String[] attributes = {
                 "bicycles_yes",
                 "available_yes",
                 "stroller_yes",

@@ -90,7 +90,7 @@ public final class CalendarActivity extends Activity {
 
         Cursor cursor = null;
         try {
-            final String[] projection = new String[]{"_id", "displayName"};
+            final String[] projection = {"_id", "displayName"};
             cursor = getContentResolver().query(calendarProvider, projection, "selected=1", null, null);
 
             if (cursor == null) {
