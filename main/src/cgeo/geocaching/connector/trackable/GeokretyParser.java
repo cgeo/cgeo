@@ -274,7 +274,7 @@ public class GeokretyParser {
                             break;
 
                         case XmlPullParser.END_TAG:
-                            if (tagname.equalsIgnoreCase("error") && null != text && !text.trim().isEmpty()) {
+                            if (tagname.equalsIgnoreCase("error") && text != null && !text.trim().isEmpty()) {
                                 errors.add(text);
                             }
                             break;
@@ -313,7 +313,7 @@ public class GeokretyParser {
 
     @Nullable
     public static ImmutablePair<Integer, List<String>> parseResponse(final String page) {
-        if (null != page) {
+        if (page != null) {
             try {
                 final GeokretyRuchyXmlParser parser = new GeokretyRuchyXmlParser();
                 parser.parse(page);

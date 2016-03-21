@@ -274,7 +274,7 @@ public final class GCParser {
 
             // id
             String result = TextUtils.getMatch(row, GCConstants.PATTERN_SEARCH_ID, null);
-            if (null != result) {
+            if (result != null) {
                 cache.setCacheId(result);
                 cids.add(cache.getCacheId());
             }
@@ -282,7 +282,7 @@ public final class GCParser {
             // favorite count
             try {
                 result = getNumberString(TextUtils.getMatch(row, GCConstants.PATTERN_SEARCH_FAVORITE, false, 1, null, true));
-                if (null != result) {
+                if (result != null) {
                     cache.setFavoritePoints(Integer.parseInt(result));
                 }
             } catch (final NumberFormatException e) {
@@ -296,7 +296,7 @@ public final class GCParser {
         // total caches found
         try {
             final String result = TextUtils.getMatch(page, GCConstants.PATTERN_SEARCH_TOTALCOUNT, false, 1, null, true);
-            if (null != result) {
+            if (result != null) {
                 searchResult.setTotalCountGC(Integer.parseInt(result) - excludedCaches);
             }
         } catch (final NumberFormatException e) {
@@ -684,7 +684,7 @@ public final class GCParser {
         // cache logs counts
         try {
             final String countlogs = TextUtils.getMatch(page, GCConstants.PATTERN_COUNTLOGS, true, null);
-            if (null != countlogs) {
+            if (countlogs != null) {
                 final MatcherWrapper matcherLog = new MatcherWrapper(GCConstants.PATTERN_COUNTLOG, countlogs);
 
                 while (matcherLog.find()) {
@@ -692,7 +692,7 @@ public final class GCParser {
                     final String countStr = getNumberString(matcherLog.group(2));
 
                     if (StringUtils.isNotBlank(typeStr)
-                            && LogType.UNKNOWN != LogType.getByIconName(typeStr)
+                            && LogType.getByIconName(typeStr) != LogType.UNKNOWN
                             && StringUtils.isNotBlank(countStr)) {
                         cache.getLogCounts().put(LogType.getByIconName(typeStr), Integer.valueOf(countStr));
                     }
@@ -713,7 +713,7 @@ public final class GCParser {
         try {
             final String originalCoords = TextUtils.getMatch(page, GCConstants.PATTERN_LATLON_ORIG, false, null);
 
-            if (null != originalCoords) {
+            if (originalCoords != null) {
                 final Waypoint waypoint = new Waypoint(CgeoApplication.getInstance().getString(R.string.cache_coordinates_original), WaypointType.ORIGINAL, false);
                 waypoint.setCoords(new Geopoint(originalCoords));
                 cache.addOrChangeWaypoint(waypoint, false);
@@ -1658,7 +1658,7 @@ public final class GCParser {
 
         // trackable distance
         final String distance = TextUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_DISTANCE, false, null);
-        if (null != distance) {
+        if (distance != null) {
             try {
                 trackable.setDistance(DistanceParser.parseDistance(distance,
                         !Settings.useImperialUnits()));

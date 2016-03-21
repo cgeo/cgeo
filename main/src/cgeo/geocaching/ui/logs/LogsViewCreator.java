@@ -48,11 +48,11 @@ public abstract class LogsViewCreator extends AbstractCachingListViewPageViewCre
             @Override
             public View getView(final int position, final View convertView, final android.view.ViewGroup parent) {
                 View rowView = convertView;
-                if (null == rowView) {
+                if (rowView == null) {
                     rowView = activity.getLayoutInflater().inflate(R.layout.logs_item, parent, false);
                 }
                 LogViewHolder holder = (LogViewHolder) rowView.getTag();
-                if (null == holder) {
+                if (holder == null) {
                     holder = new LogViewHolder(rowView);
                 }
                 holder.setPosition(position);

@@ -525,10 +525,10 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         setZoom(Settings.getMapZoom(mapMode));
         mapView.getMapController().setCenter(Settings.getMapCenter());
 
-        if (null == mapStateIntent) {
+        if (mapStateIntent == null) {
             followMyLocation = followMyLocation && (mapMode == MapMode.LIVE);
         } else {
-            followMyLocation = 1 == mapStateIntent[3];
+            followMyLocation = mapStateIntent[3] == 1;
             if ((overlayCaches.getCircles() ? 1 : 0) != mapStateIntent[4]) {
                 overlayCaches.switchCircles();
             }
@@ -1201,7 +1201,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
                     final long currentTime = System.currentTimeMillis();
 
-                    if (1000 < (currentTime - map.loadThreadRun)) {
+                    if ((currentTime - map.loadThreadRun) > 1000) {
                         previousViewport = viewportNow;
                         previousZoom = zoomNow;
                         loadExecutor.execute(new LoadRunnable(map));

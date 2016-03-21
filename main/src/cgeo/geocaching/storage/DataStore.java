@@ -2550,7 +2550,7 @@ public class DataStore {
             Log.e("DataStore.saveLogOffline: cannot log a blank geocode");
             return false;
         }
-        if (LogType.UNKNOWN == type && StringUtils.isBlank(log)) {
+        if (type == LogType.UNKNOWN && StringUtils.isBlank(log)) {
             Log.e("DataStore.saveLogOffline: cannot log an unknown log type and no message");
             return false;
         }
@@ -2784,7 +2784,7 @@ public class DataStore {
      * @return Number of lists changed
      */
     public static int renameList(final int listId, final String name) {
-        if (StringUtils.isBlank(name) || StoredList.STANDARD_LIST_ID == listId) {
+        if (StringUtils.isBlank(name) || listId == StoredList.STANDARD_LIST_ID) {
             return 0;
         }
 

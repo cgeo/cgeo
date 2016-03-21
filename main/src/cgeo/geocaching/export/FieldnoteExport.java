@@ -56,7 +56,7 @@ public class FieldnoteExport extends AbstractExport {
     @Override
     public void export(@NonNull final List<Geocache> cachesList, @Nullable final Activity activity) {
         final Geocache[] caches = cachesList.toArray(new Geocache[cachesList.size()]);
-        if (null == activity) {
+        if (activity == null) {
             // No activity given, so no user interaction possible.
             // Start export with default parameters.
             new ExportTask(null, false, false).execute(caches);
@@ -177,7 +177,7 @@ public class FieldnoteExport extends AbstractExport {
 
         @Override
         protected void onPostExecuteInternal(final Boolean result) {
-            if (null != activity) {
+            if (activity != null) {
                 final Context nonNullActivity = activity;
                 if (result) {
                     Settings.setFieldnoteExportDate(System.currentTimeMillis());
@@ -195,8 +195,8 @@ public class FieldnoteExport extends AbstractExport {
 
         @Override
         protected void onProgressUpdateInternal(final Integer status) {
-            if (null != activity) {
-                setMessage(activity.getString(STATUS_UPLOAD == status ? R.string.export_fieldnotes_uploading : R.string.export_fieldnotes_creating) + " (" + fieldNotesCount + ')');
+            if (activity != null) {
+                setMessage(activity.getString(status == STATUS_UPLOAD ? R.string.export_fieldnotes_uploading : R.string.export_fieldnotes_creating) + " (" + fieldNotesCount + ')');
             }
         }
     }

@@ -34,7 +34,7 @@ public abstract class AsyncTaskWithProgressText<Params, Result> extends Abstract
     @Override
     protected final void onProgressUpdate(final String... status) {
         final String progressValue = status[0];
-        if (null != activity && StringUtils.isNotBlank(progressValue)) {
+        if (activity != null && StringUtils.isNotBlank(progressValue)) {
             progress.setMessage(progressValue);
         }
         onProgressUpdateInternal(progressValue);

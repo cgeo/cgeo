@@ -250,7 +250,7 @@ public class MapsforgeMapView extends MapView implements MapViewImpl {
     @Override
     public void repaintRequired(final GeneralOverlay overlay) {
 
-        if (null == overlay) {
+        if (overlay == null) {
             invalidate();
         } else {
             try {

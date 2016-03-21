@@ -290,7 +290,7 @@ public class CachesOverlay extends AbstractItemizedOverlay {
         }
 
         public boolean requestRequired() {
-            return CacheType.UNKNOWN == cache.getType() || cache.getDifficulty() == 0;
+            return cache.getType() == CacheType.UNKNOWN || cache.getDifficulty() == 0;
         }
 
         @Override

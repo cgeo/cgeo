@@ -103,7 +103,7 @@ class GeopointParser {
      */
     private static ResultWrapper parseHelper(@NonNull final String text, final LatLon latlon) {
         final String replaceSpaceAfterComma = new MatcherWrapper(PATTERN_BAD_BLANK, text).replaceAll("$1.$2");
-        final MatcherWrapper matcher = new MatcherWrapper(LatLon.LAT == latlon ? PATTERN_LAT : PATTERN_LON, replaceSpaceAfterComma);
+        final MatcherWrapper matcher = new MatcherWrapper(latlon == LatLon.LAT ? PATTERN_LAT : PATTERN_LON, replaceSpaceAfterComma);
 
         try {
             return new ResultWrapper(Double.parseDouble(replaceSpaceAfterComma), 0, text.length());
@@ -119,12 +119,12 @@ class GeopointParser {
                 double minutes = 0.0;
                 double seconds = 0.0;
 
-                if (null != matcher.group(3)) {
+                if (matcher.group(3) != null) {
                     minutes = Integer.valueOf(matcher.group(3)).doubleValue();
 
-                    if (null != matcher.group(4)) {
+                    if (matcher.group(4) != null) {
                         seconds = Double.parseDouble("0." + matcher.group(4)) * 60.0;
-                    } else if (null != matcher.group(5)) {
+                    } else if (matcher.group(5) != null) {
                         seconds = Double.parseDouble(matcher.group(5).replace(",", "."));
                     }
                 }
