@@ -111,9 +111,9 @@ public final class ContactsActivity extends Activity {
 
     @NonNull
     private List<Pair<Integer, String>> getContacts(final @NonNull String searchName, final Uri uri, final @NonNull String idColumnName, final @NonNull String selectionColumnName, final boolean like) {
-        final String[] projection = new String[] { idColumnName, selectionColumnName, ContactsContract.Contacts.DISPLAY_NAME };
+        final String[] projection = { idColumnName, selectionColumnName, ContactsContract.Contacts.DISPLAY_NAME };
         final String selection = selectionColumnName + (like ? " LIKE" : " =") + " ? COLLATE NOCASE";
-        final String[] selectionArgs = new String[] { like ? "%" + searchName + "%" : searchName };
+        final String[] selectionArgs = { like ? "%" + searchName + "%" : searchName };
         Cursor cursor = null;
 
         final List<Pair<Integer, String>> result = new ArrayList<>();

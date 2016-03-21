@@ -123,8 +123,8 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
     public static void testWaypointsFromNote() {
         final Geocache cache = createCache(0);
 
-        final Geopoint[] empty = new Geopoint[] {};
-        final Geopoint[] one = new Geopoint[] { new Geopoint("N51 21.523", "E7 2.680") };
+        final Geopoint[] empty = {};
+        final Geopoint[] one = { new Geopoint("N51 21.523", "E7 2.680") };
         assertWaypointsFromNote(cache, empty, "  ");
         assertWaypointsFromNote(cache, empty, "some random strings 1 with n 2 numbers");
         assertWaypointsFromNote(cache, empty, "Station3 some coords");
