@@ -17,7 +17,6 @@ import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.models.TrackableLog;
 import cgeo.geocaching.network.AndroidBeam;
 import cgeo.geocaching.search.AutoCompleteAdapter;
-import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.storage.DataStore;
@@ -445,7 +444,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
     private class CoordinatesListener implements View.OnClickListener {
         @Override
         public void onClick(final View arg0) {
-            final CoordinatesInputDialog coordinatesDialog = CoordinatesInputDialog.getInstance(geocache, geopoint, Sensors.getInstance().currentGeo());
+            final CoordinatesInputDialog coordinatesDialog = CoordinatesInputDialog.getInstance(geocache, geopoint);
             coordinatesDialog.setCancelable(true);
             coordinatesDialog.show(getSupportFragmentManager(),"coordinates_dialog");
         }

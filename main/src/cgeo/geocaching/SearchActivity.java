@@ -295,7 +295,7 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
     }
 
     private void updateCoordinates() {
-        final CoordinatesInputDialog coordsDialog = CoordinatesInputDialog.getInstance(null, null, Sensors.getInstance().currentGeo());
+        final CoordinatesInputDialog coordsDialog = CoordinatesInputDialog.getInstance(null, null);
         coordsDialog.setCancelable(true);
         coordsDialog.show(getSupportFragmentManager(), "wpedit_dialog");
     }

@@ -2,20 +2,22 @@ package cgeo.geocaching.ui.dialog;
 
 import butterknife.ButterKnife;
 
-import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.Keyboard;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Geopoint.ParseException;
 import cgeo.geocaching.location.GeopointFormatter;
-import cgeo.geocaching.sensors.GeoData;
+import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.Settings.CoordInputFormatEnum;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.EditUtils;
 
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 import android.app.Dialog;
 import android.os.Build.VERSION;
@@ -46,7 +48,6 @@ import java.util.List;
 public class CoordinatesInputDialog extends DialogFragment {
 
     private Geopoint gp;
-    private Geopoint gpinitial;
     private Geopoint cacheCoords;
 
     private EditText eLat, eLon;
@@ -60,21 +61,19 @@ public class CoordinatesInputDialog extends DialogFragment {
     private List<EditText> orderedInputs;
 
     private static final String GEOPOINT_ARG = "GEOPOINT";
-    private static final String GEOPOINT_INITIAL_ARG = "GEOPOINT_INITIAL";
     private static final String CACHECOORDS_ARG = "CACHECOORDS";
 
-    public static CoordinatesInputDialog getInstance(final Geocache cache, final Geopoint gp, final GeoData geo) {
+    @NonNull
+    private static Geopoint currentCoords() {
+        return Sensors.getInstance().currentGeo().getCoords();
+    }
+
+    public static CoordinatesInputDialog getInstance(@Nullable final Geocache cache, @Nullable final Geopoint gp) {
 
         final Bundle args = new Bundle();
 
         if (gp != null) {
             args.putParcelable(GEOPOINT_ARG, gp);
-        } else {
-            args.putParcelable(GEOPOINT_ARG, geo != null ? geo.getCoords() : Geopoint.ZERO);
-        }
-
-        if (geo != null) {
-            args.putParcelable(GEOPOINT_INITIAL_ARG, geo.getCoords());
         }
 
         if (cache != null) {
@@ -90,7 +89,9 @@ public class CoordinatesInputDialog extends DialogFragment {
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         gp = getArguments().getParcelable(GEOPOINT_ARG);
-        gpinitial = getArguments().getParcelable(GEOPOINT_INITIAL_ARG);
+        if (gp == null) {
+            gp = currentCoords();
+        }
         cacheCoords = getArguments().getParcelable(CACHECOORDS_ARG);
 
         if (savedInstanceState != null && savedInstanceState.getParcelable(GEOPOINT_ARG) != null) {
@@ -435,7 +436,7 @@ public class CoordinatesInputDialog extends DialogFragment {
             final String lonSecFrac = padZerosRight(eLonSub.getText().toString(), 3);
 
             // then convert text to geopoint
-            Geopoint current = null;
+            final Geopoint current;
             switch (currentFormat) {
                 case Deg:
                     current = new Geopoint(latDir, latDeg, latDegFrac, lonDir, lonDeg, lonDegFrac);
@@ -449,9 +450,10 @@ public class CoordinatesInputDialog extends DialogFragment {
                 case Plain:
                     current = new Geopoint(eLat.getText().toString(), eLon.getText().toString());
                     break;
+                default:
+                    throw new IllegalStateException("can never happen, keep tools happy");
             }
-            // The null check is necessary to keep FindBugs happy
-            if (current != null && current.isValid()) {
+            if (current.isValid()) {
                 gp = current;
                 return true;
             }
@@ -500,13 +502,9 @@ public class CoordinatesInputDialog extends DialogFragment {
             if (currentFormat != null) {
 
                 // Start new format with an acceptable value: either the current one
-                // entered by the user, else our current coordinates, else (0,0).
+                // entered by the user, or our current position.
                 if (!areCurrentCoordinatesValid(false)) {
-                    if (gpinitial != null) {
-                        gp = gpinitial;
-                    } else {
-                        gp = Geopoint.ZERO;
-                    }
+                    gp = currentCoords();
                 }
             }
 
@@ -529,13 +527,7 @@ public class CoordinatesInputDialog extends DialogFragment {
 
         @Override
         public void onClick(final View v) {
-            if (gpinitial == null) {
-                final AbstractActivity activity = (AbstractActivity) getActivity();
-                activity.showToast(activity.getResources().getString(R.string.err_point_unknown_position));
-                return;
-            }
-
-            gp = gpinitial;
+            gp = currentCoords();
             updateGUI();
         }
     }
