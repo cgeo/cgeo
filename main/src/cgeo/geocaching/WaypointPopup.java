@@ -46,7 +46,7 @@ public class WaypointPopup extends AbstractActivity {
         popupIntent.putExtra(Intents.EXTRA_WAYPOINT_ID, waypointId);
         popupIntent.putExtra(Intents.EXTRA_GEOCODE, geocode);
 
-        activity.startActivityForResult(popupIntent, AbstractDialogFragment.REQUEST_CODE_COORDINATES);
+        activity.startActivityForResult(popupIntent, AbstractDialogFragment.REQUEST_CODE_TARGET_INFO);
     }
 
     void showDialog() {

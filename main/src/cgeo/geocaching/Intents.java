@@ -1,12 +1,12 @@
 package cgeo.geocaching;
 
-import android.content.Intent;
-import android.os.Bundle;
+import cgeo.geocaching.enumerations.CacheListType;
 
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 
-import cgeo.geocaching.enumerations.CacheListType;
+import android.content.Intent;
+import android.os.Bundle;
 
 public class Intents {
 
@@ -45,6 +45,7 @@ public class Intents {
 
     public static final String EXTRA_DOWNLOAD = PREFIX + "download";
 
+    public static final String EXTRA_TARGET_INFO = PREFIX + "targetInfo";
     /**
      * list type to be used with the cache list activity. Be aware to use the String representation of the corresponding
      * enum.

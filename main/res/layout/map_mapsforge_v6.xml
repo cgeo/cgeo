@@ -21,6 +21,28 @@
             android:keepScreenOn="true" />
 
         <TextView
+            android:id="@+id/target"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="-8dp"
+            android:layout_marginLeft="-8dp"
+            android:layout_marginRight="92dp"
+            android:paddingTop="4dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:background="@drawable/icon_bcg"
+            android:ellipsize="marquee"
+            android:gravity="center_horizontal"
+            android:lines="1"
+            android:singleLine="true"
+            android:textColor="@color/text_icon"
+            android:textStyle="bold"
+            android:textSize="18dp"
+            android:visibility="gone" />
+        
+        <TextView
             android:id="@+id/distance"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"

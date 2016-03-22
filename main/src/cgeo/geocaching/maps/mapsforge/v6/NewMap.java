@@ -1,6 +1,7 @@
 package cgeo.geocaching.maps.mapsforge.v6;
 
 import cgeo.geocaching.AbstractDialogFragment;
+import cgeo.geocaching.AbstractDialogFragment.TargetInfo;
 import cgeo.geocaching.CachePopup;
 import cgeo.geocaching.CompassActivity;
 import cgeo.geocaching.EditWaypointActivity;
@@ -108,6 +109,7 @@ public class NewMap extends AbstractActionBarActivity {
     private MapState mapStateIntent = null;
     private ArrayList<Location> trailHistory = null;
 
+    private String targetGeocode = null;
     private Geopoint lastNavTarget = null;
 
     final private UpdateLoc geoDirUpdate = new UpdateLoc(this);
@@ -118,6 +120,7 @@ public class NewMap extends AbstractActionBarActivity {
     private CheckBox myLocSwitch;
     private MapMode mapMode;
     private boolean isLiveEnabled = false;
+    private TargetView targetView;
 
     private static boolean followMyLocation;
 
@@ -207,6 +210,7 @@ public class NewMap extends AbstractActionBarActivity {
             if (viewport != null) {
                 mapView.zoomToViewport(viewport);
             }
+            targetGeocode = geocodeIntent;
         } else if (coordsIntent != null) {
             mapView.zoomToViewport(new Viewport(coordsIntent, 0, 0));
         } else {
@@ -330,6 +334,9 @@ public class NewMap extends AbstractActionBarActivity {
                 ActivityMixin.invalidateOptionsMenu(this);
                 if (mapMode != MapMode.SINGLE) {
                     mapTitle = StringUtils.EMPTY;
+                } else {
+                    // reset target cache on single mode map
+                    targetGeocode = geocodeIntent;
                 }
                 return true;
             case R.id.menu_store_caches:
@@ -402,14 +409,14 @@ public class NewMap extends AbstractActionBarActivity {
     }
 
     private void menuCompass() {
-        final Geocache cache = getSingleModeCache();
+        final Geocache cache = getCurrentTargetCache();
         if (cache != null) {
             CompassActivity.startActivityCache(this, cache);
         }
     }
 
     private void menuShowHint() {
-        final Geocache cache = getSingleModeCache();
+        final Geocache cache = getCurrentTargetCache();
         if (cache != null) {
             cache.showHintToast(this);
         }
@@ -506,6 +513,10 @@ public class NewMap extends AbstractActionBarActivity {
     protected void onStart() {
         super.onStart();
 
+        initializeLayers();
+    }
+
+    private void initializeLayers() {
         // tile renderer layer using internal render theme
         this.tileRendererLayer = new TileRendererLayer(tileCache, new MapFile(NewMap.getMapFile()),
                 this.mapView.getModel().mapViewPosition, false, true, AndroidGraphicFactory.INSTANCE);
@@ -557,6 +568,9 @@ public class NewMap extends AbstractActionBarActivity {
         //Distance view
         this.distanceView = new DistanceView(navTarget, (TextView) findViewById(R.id.distance));
 
+        //Target view
+        this.targetView = new TargetView((TextView) findViewById(R.id.target), StringUtils.EMPTY, StringUtils.EMPTY);
+
         this.resumeSubscription = Subscriptions.from(this.geoDirUpdate.start(GeoDirHandler.UPDATE_GEODIR));
     }
 
@@ -570,6 +584,13 @@ public class NewMap extends AbstractActionBarActivity {
 
     @Override
     protected void onStop() {
+
+        terminateLayers();
+
+        super.onStop();
+    }
+
+    private void terminateLayers() {
 
         this.resumeSubscription.unsubscribe();
 
@@ -586,8 +607,6 @@ public class NewMap extends AbstractActionBarActivity {
         this.mapView.getLayerManager().getLayers().remove(this.tileRendererLayer);
         this.tileRendererLayer.onDestroy();
         this.tileRendererLayer = null;
-
-        super.onStop();
     }
 
     @Override
@@ -650,7 +669,7 @@ public class NewMap extends AbstractActionBarActivity {
     }
 
     public void showAddWaypoint(final LatLong tapLatLong) {
-        final Geocache cache = getSingleModeCache();
+        final Geocache cache = getCurrentTargetCache();
         if (cache != null) {
             EditWaypointActivity.startActivityAddWaypoint(this, cache, new Geopoint(tapLatLong.latitude, tapLatLong.longitude));
         }
@@ -1117,6 +1136,17 @@ public class NewMap extends AbstractActionBarActivity {
         return null;
     }
 
+    @Nullable
+    private Geocache getCurrentTargetCache() {
+        if (StringUtils.isNotBlank(targetGeocode)) {
+            final Geocache cache = DataStore.loadCache(targetGeocode, LoadFlags.LOAD_CACHE_OR_DB);
+
+            return cache;
+        }
+
+        return null;
+    }
+
     private void savePrefs() {
         Settings.setMapZoom(MapMode.SINGLE, mapView.getMapZoomLevel());
         Settings.setMapCenter(new MapsforgeGeoPoint(mapView.getModel().mapViewPosition.getCenter()));
@@ -1153,18 +1183,23 @@ public class NewMap extends AbstractActionBarActivity {
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == AbstractDialogFragment.REQUEST_CODE_COORDINATES && resultCode == AbstractDialogFragment.RESULT_CODE_SET_TARGET) {
-            final Geopoint coords = data.getExtras().getParcelable(Intents.EXTRA_COORDS);
+        if (requestCode == AbstractDialogFragment.REQUEST_CODE_TARGET_INFO && resultCode == AbstractDialogFragment.RESULT_CODE_SET_TARGET) {
+            final TargetInfo targetInfo = data.getExtras().getParcelable(Intents.EXTRA_TARGET_INFO);
 
-            if (coords != null) {
-                lastNavTarget = coords;
+            if (targetInfo != null) {
+                lastNavTarget = targetInfo.coords;
                 if (navigationLayer != null) {
-                    navigationLayer.setDestination(coords);
+                    navigationLayer.setDestination(targetInfo.coords);
                     navigationLayer.requestRedraw();
                 }
                 if (distanceView != null) {
-                    distanceView.setDestination(coords);
+                    distanceView.setDestination(targetInfo.coords);
                     distanceView.setCoordinates(geoDirUpdate.getCurrenLocation());
+                }
+                if (StringUtils.isNotBlank(targetInfo.geocode)) {
+                    targetGeocode = targetInfo.geocode;
+                    final Geocache target = getCurrentTargetCache();
+                    targetView.setTarget(targetGeocode, target != null ? target.getName() : StringUtils.EMPTY);
                 }
             }
         }
