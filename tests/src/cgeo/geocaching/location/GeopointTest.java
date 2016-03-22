@@ -54,7 +54,7 @@ public class GeopointTest extends TestCase {
         final float d12 = gp1.distanceTo(gp2);
 
         // broken distance calculation in 4.2.1
-        if (Build.VERSION.SDK_INT == 17) {
+        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.JELLY_BEAN_MR1) {
             assertThat((double) d12).isEqualTo(110.83107, offset(1e-6));
         }
         else {
