@@ -1,25 +1,18 @@
 package cgeo.geocaching;
 
-import butterknife.ButterKnife;
-
 import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.apps.navi.NavigationAppFactory;
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.list.StoredList;
-import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.CacheDetailsCreator;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.AndroidRxUtils;
 
 import org.apache.commons.lang3.StringUtils;
-
-import rx.functions.Action0;
-import rx.functions.Action1;
-import rx.schedulers.Schedulers;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -37,6 +30,11 @@ import android.widget.TextView;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+
+import butterknife.ButterKnife;
+import rx.functions.Action0;
+import rx.functions.Action1;
+import rx.schedulers.Schedulers;
 
 public class CachePopupFragment extends AbstractDialogFragment {
     private final Progress progress = new Progress();
@@ -123,7 +121,7 @@ public class CachePopupFragment extends AbstractDialogFragment {
 
     private void updateCacheLists() {
         final Set<String> listNames = new HashSet<>();
-        for (Integer listId : cache.getLists()) {
+        for (final Integer listId : cache.getLists()) {
             final StoredList list = DataStore.getList(listId);
             listNames.add(list.getTitle());
         }
@@ -260,11 +258,11 @@ public class CachePopupFragment extends AbstractDialogFragment {
     }
 
     @Override
-    protected Geopoint getCoordinates() {
+    protected TargetInfo getTargetInfo() {
         if (cache == null) {
             return null;
         }
-        return cache.getCoords();
+        return new TargetInfo(cache.getCoords(), cache.getGeocode());
     }
 
 

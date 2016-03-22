@@ -139,11 +139,11 @@ public class WaypointPopupFragment extends AbstractDialogFragment {
     }
 
     @Override
-    protected Geopoint getCoordinates() {
+    protected TargetInfo getTargetInfo() {
         if (waypoint == null) {
             return null;
         }
-        return waypoint.getCoords();
+        return new TargetInfo(waypoint.getCoords());
     }
 
     public static DialogFragment newInstance(final String geocode, final int waypointId) {
