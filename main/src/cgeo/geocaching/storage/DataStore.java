@@ -2045,10 +2045,14 @@ public class DataStore {
                         + " FROM " + dbTableLogs + " LEFT OUTER JOIN " + dbTableLogImages
                         + " ON ( cg_logs._id = log_id ) WHERE geocode = ?  ORDER BY date desc, cg_logs._id asc", new String[]{geocode});
 
-        LogEntry log = null;
+        LogEntry.Builder log = null;
         while (cursor.moveToNext() && logs.size() < 100) {
-            if (log == null || log.id != cursor.getInt(0)) {
-                final LogEntry.Builder logBuilder = new LogEntry.Builder()
+            if (log == null || log.getId() != cursor.getInt(0)) {
+                // Start of a new log entry group (we may have several entries if the log has several images).
+                if (log != null) {
+                    logs.add(log.build());
+                }
+                log = new LogEntry.Builder()
                         .setAuthor(cursor.getString(2))
                         .setDate(cursor.getLong(4))
                         .setLogType(LogType.getById(cursor.getInt(1)))
@@ -2057,11 +2061,16 @@ public class DataStore {
                         .setFound(cursor.getInt(5))
                         .setFriend(cursor.getInt(6) == 1);
                 if (!cursor.isNull(7)) {
-                    logBuilder.addLogImage(new Image.Builder().setUrl(cursor.getString(10)).setTitle(cursor.getString(9)).setDescription(cursor.getString(11)).build());
+                    log.addLogImage(new Image.Builder().setUrl(cursor.getString(10)).setTitle(cursor.getString(9)).setDescription(cursor.getString(11)).build());
                 }
-                log = logBuilder.build();
-                logs.add(log);
+            } else {
+                // We cannot get several lines for the same log entry if it does not contain an image.
+                assert(!cursor.isNull(7));
+                log.addLogImage(new Image.Builder().setUrl(cursor.getString(10)).setTitle(cursor.getString(9)).setDescription(cursor.getString(11)).build());
             }
+        }
+        if (log != null) {
+            logs.add(log.build());
         }
 
         cursor.close();
