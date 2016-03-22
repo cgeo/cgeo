@@ -352,7 +352,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
 
                 @Override
                 protected void onPostExecute(final Geocache cache) {
-                    final CoordinatesInputDialog coordsDialog = CoordinatesInputDialog.getInstance(cache, geopoint, Sensors.getInstance().currentGeo());
+                    final CoordinatesInputDialog coordsDialog = CoordinatesInputDialog.getInstance(cache, geopoint);
                     coordsDialog.setCancelable(true);
                     coordsDialog.show(getSupportFragmentManager(), "wpeditdialog");
                 }

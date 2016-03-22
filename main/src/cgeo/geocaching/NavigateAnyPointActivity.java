@@ -287,7 +287,7 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity implemen
             if (getLatButton().getText().length() > 0 && getLonButton().getText().length() > 0) {
                 gp = new Geopoint(getLatButton().getText().toString() + " " + getLonButton().getText().toString());
             }
-            final CoordinatesInputDialog coordsDialog = CoordinatesInputDialog.getInstance(null, gp, Sensors.getInstance().currentGeo());
+            final CoordinatesInputDialog coordsDialog = CoordinatesInputDialog.getInstance(null, gp);
             coordsDialog.setCancelable(true);
             coordsDialog.show(getSupportFragmentManager(),"wpedit_dialog");
         }
