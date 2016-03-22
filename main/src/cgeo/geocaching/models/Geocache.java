@@ -1656,7 +1656,7 @@ public class Geocache implements IWaypoint {
                 SearchResult search = null;
                 // only reload the cache if it was already stored or doesn't have full details (by checking the description)
                 if (origCache.isOffline() || StringUtils.isBlank(origCache.getDescription())) {
-                    search = searchByGeocode(origCache.getGeocode(), null, lists, false, handler);
+                    search = searchByGeocode(origCache.getGeocode(), null, false, handler);
                 }
                 if (search != null) {
                     cache = search.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
@@ -1664,7 +1664,7 @@ public class Geocache implements IWaypoint {
                     cache = origCache;
                 }
             } else if (StringUtils.isNotBlank(geocode)) {
-                final SearchResult search = searchByGeocode(geocode, null, lists, forceRedownload, handler);
+                final SearchResult search = searchByGeocode(geocode, null, forceRedownload, handler);
                 if (search != null) {
                     cache = search.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
                 }
@@ -1736,13 +1736,13 @@ public class Geocache implements IWaypoint {
         }
     }
 
-    public static SearchResult searchByGeocode(final String geocode, final String guid, final Set<Integer> lists, final boolean forceReload, final CancellableHandler handler) {
+    public static SearchResult searchByGeocode(final String geocode, final String guid, final boolean forceReload, final CancellableHandler handler) {
         if (StringUtils.isBlank(geocode) && StringUtils.isBlank(guid)) {
             Log.e("Geocache.searchByGeocode: No geocode nor guid given");
             return null;
         }
 
-        if (!forceReload && lists.isEmpty() && (DataStore.isOffline(geocode, guid) || DataStore.isThere(geocode, guid, true))) {
+        if (!forceReload && (DataStore.isOffline(geocode, guid) || DataStore.isThere(geocode, guid, true))) {
             final SearchResult search = new SearchResult();
             final String realGeocode = StringUtils.isNotBlank(geocode) ? geocode : DataStore.getGeocodeForGuid(guid);
             search.addGeocode(realGeocode);

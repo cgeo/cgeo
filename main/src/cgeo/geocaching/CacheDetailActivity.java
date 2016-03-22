@@ -324,7 +324,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         AndroidRxUtils.networkScheduler.createWorker().schedule(new Action0() {
             @Override
             public void call() {
-                search = Geocache.searchByGeocode(realGeocode, StringUtils.isBlank(realGeocode) ? realGuid : null, Collections.EMPTY_SET, false, loadCacheHandler);
+                search = Geocache.searchByGeocode(realGeocode, StringUtils.isBlank(realGeocode) ? realGuid : null, false, loadCacheHandler);
                 loadCacheHandler.sendMessage(Message.obtain());
             }
         });
