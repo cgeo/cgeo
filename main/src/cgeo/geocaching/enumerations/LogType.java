@@ -159,15 +159,15 @@ public enum LogType {
         return isArchiveLog();
     }
 
-	/**
-	 * get the overlay image ID for showing the offline log type
-	 */
-	public int getOfflineLogOverlay() {
-		if (overlayId != 0) {
-			return overlayId;
-		}
-		return R.drawable.marker_unknown_offline;
-	}
+    /**
+     * get the overlay image ID for showing the offline log type
+     */
+    public int getOfflineLogOverlay() {
+        if (overlayId != 0) {
+            return overlayId;
+        }
+        return R.drawable.marker_unknown_offline;
+    }
 
     /**
      * return the collection of found log type ids, to be used in the parser

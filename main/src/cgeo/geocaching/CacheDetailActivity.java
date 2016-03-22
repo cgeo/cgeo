@@ -2215,9 +2215,10 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     }
 
     static void updateOfflineBox(final View view, final Geocache cache, final Resources res,
-                                        final OnClickListener refreshCacheClickListener,
-                                        final OnClickListener dropCacheClickListener,
-            final OnClickListener storeCacheClickListener, final OnLongClickListener moveCacheListener) {
+            final OnClickListener refreshCacheClickListener,
+            final OnClickListener dropCacheClickListener,
+            final OnClickListener storeCacheClickListener,
+            final OnLongClickListener moveCacheListener) {
         // offline use
         final TextView offlineText = ButterKnife.findById(view, R.id.offline_text);
         final Button offlineRefresh = ButterKnife.findById(view, R.id.offline_refresh);

@@ -322,7 +322,7 @@ public final class ImageUtils {
 
     /**
      * Add images present in the HTML description to the existing collection.
-     *  @param images a collection of images
+     * @param images a collection of images
      * @param geocode the common title for images in the description
      * @param htmlText the HTML description to be parsed, can be repeated
      */
