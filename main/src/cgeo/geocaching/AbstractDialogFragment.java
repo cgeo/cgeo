@@ -1,7 +1,5 @@
 package cgeo.geocaching;
 
-import butterknife.ButterKnife;
-
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.enumerations.LoadFlags;
@@ -16,15 +14,9 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.ui.LoggingUI;
-import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.RxUtils;
-
-import rx.Subscription;
-import rx.android.app.AppObservable;
-import rx.functions.Action1;
-import rx.functions.Func0;
-import rx.subscriptions.Subscriptions;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -33,6 +25,8 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.widget.PopupMenu;
 import android.view.ContextMenu;
@@ -43,6 +37,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import butterknife.ButterKnife;
+import rx.Subscription;
+import rx.android.app.AppObservable;
+import rx.functions.Action1;
+import rx.functions.Func0;
+import rx.subscriptions.Subscriptions;
 
 public abstract class AbstractDialogFragment extends DialogFragment implements CacheMenuHandler.ActivityInterface, PopupMenu.OnMenuItemClickListener, MenuItem.OnMenuItemClickListener {
     protected Resources res = null;
@@ -58,7 +59,7 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
     protected Geocache cache;
 
     public final static int RESULT_CODE_SET_TARGET = Activity.RESULT_FIRST_USER;
-    public final static int REQUEST_CODE_COORDINATES = 1;
+    public final static int REQUEST_CODE_TARGET_INFO = 1;
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
@@ -301,7 +302,7 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
     private void setAsTarget() {
         final Activity activity = getActivity();
         final Intent result = new Intent();
-        result.putExtra(Intents.EXTRA_COORDS, getCoordinates());
+        result.putExtra(Intents.EXTRA_TARGET_INFO, getTargetInfo());
         activity.setResult(RESULT_CODE_SET_TARGET, result);
         activity.finish();
     }
@@ -359,18 +360,18 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
     }
 
 
-    protected abstract Geopoint getCoordinates();
+    protected abstract TargetInfo getTargetInfo();
 
     protected abstract void startDefaultNavigation2();
 
     @Override
     public void cachesAround() {
-        final Geopoint coords = getCoordinates();
-        if (coords == null) {
+        final TargetInfo targetInfo = getTargetInfo();
+        if (targetInfo == null || targetInfo.coords == null) {
             showToast(res.getString(R.string.err_location_unknown));
             return;
         }
-        CacheListActivity.startActivityCoordinates((AbstractActivity) getActivity(), coords, cache != null ? cache.getName() : null);
+        CacheListActivity.startActivityCoordinates((AbstractActivity) getActivity(), targetInfo.coords, cache != null ? cache.getName() : null);
         getActivity().finish();
     }
 
@@ -380,4 +381,47 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
         getActivity().finish();
     }
 
+    public static class TargetInfo implements Parcelable {
+
+        public final Geopoint coords;
+        public final String geocode;
+
+        TargetInfo(final Geopoint coords, final String geocode) {
+            this.coords = coords;
+            this.geocode = geocode;
+        }
+
+        TargetInfo(final Geopoint coords) {
+            this.coords = coords;
+            this.geocode = null;
+        }
+
+        public TargetInfo(final Parcel in) {
+            this.coords = in.readParcelable(Geopoint.class.getClassLoader());
+            this.geocode = in.readString();
+        }
+
+        @Override
+        public void writeToParcel(final Parcel dest, final int flags) {
+            dest.writeParcelable(coords, PARCELABLE_WRITE_RETURN_VALUE);
+            dest.writeString(geocode);
+        }
+
+        public static final Parcelable.Creator<TargetInfo> CREATOR = new Parcelable.Creator<TargetInfo>() {
+            @Override
+            public TargetInfo createFromParcel(final Parcel in) {
+                return new TargetInfo(in);
+            }
+
+            @Override
+            public TargetInfo[] newArray(final int size) {
+                return new TargetInfo[size];
+            }
+        };
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+    }
 }

@@ -67,6 +67,6 @@ public class CachePopup extends AbstractActivity {
         final Intent popupIntent = new Intent(activity, CachePopup.class);
         popupIntent.putExtra(Intents.EXTRA_GEOCODE, geocode);
 
-        activity.startActivityForResult(popupIntent, AbstractDialogFragment.REQUEST_CODE_COORDINATES);
+        activity.startActivityForResult(popupIntent, AbstractDialogFragment.REQUEST_CODE_TARGET_INFO);
     }
 }
