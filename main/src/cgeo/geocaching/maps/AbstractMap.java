@@ -34,7 +34,7 @@ public abstract class AbstractMap {
     public void onCreate(final Bundle savedInstanceState) {
 
         mapActivity.superOnCreate(savedInstanceState);
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1) {
             mapActivity.getActivity().requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         }
     }
