@@ -27,14 +27,6 @@
             android:textSize="14sp"
             android:visibility="gone" />
 
-        <Button
-            android:id="@+id/show_description"
-            style="@style/button_small"
-            android:layout_marginBottom="36dip"
-            android:layout_marginTop="12dip"
-            android:text="@string/cache_description_long"
-            android:visibility="gone" />
-
         <RelativeLayout
             android:id="@+id/loading"
             android:layout_width="fill_parent"

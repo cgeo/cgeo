@@ -518,11 +518,6 @@
         android:summary="@string/settings_summary_cachedetails" >
         <CheckBoxPreference
             android:defaultValue="true"
-            android:key="@string/pref_autoloaddesc"
-            android:summary="@string/init_summary_autoload"
-            android:title="@string/init_autoload" />
-        <CheckBoxPreference
-            android:defaultValue="true"
             android:key="@string/pref_friendlogswanted"
             android:summary="@string/init_summary_friends_and_own_logs_wanted"
             android:title="@string/init_friends_and_own_logs_wanted" />
