@@ -11,6 +11,7 @@ import cgeo.geocaching.connector.gc.GCMap;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.location.IConversion;
 import cgeo.geocaching.maps.interfaces.CachesOverlayItemImpl;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
 import cgeo.geocaching.maps.interfaces.ItemizedOverlayImpl;
@@ -154,9 +155,9 @@ public class CachesOverlay extends AbstractItemizedOverlay {
     }
 
     /**
-     * calculate the radius of the circle to be drawn for the first item only. Those circles are only 161 meters in
-     * reality and therefore the minor changes due to the projection will not make any visible difference at the zoom
-     * levels which are used to see the circles.
+     * Calculate the radius of the circle to be drawn for the first item only. Those circles are only 528 feet
+     * (approximately 161 meters) in reality and therefore the minor changes due to the projection will not make any
+     * visible difference at the zoom levels which are used to see the circles.
      *
      */
     private int calculateDrawingRadius(final MapProjectionImpl projection) {
@@ -170,7 +171,7 @@ public class CachesOverlay extends AbstractItemizedOverlay {
         final GeoPointImpl itemGeo = mapItemFactory.getGeoPointBase(itemCoord);
 
         final Geopoint leftCoords = new Geopoint(itemCoord.getLatitude(),
-                itemCoord.getLongitude() - 161 / longitudeLineDistance);
+                itemCoord.getLongitude() - 528.0 * IConversion.FEET_TO_KILOMETER * 1000.0 / longitudeLineDistance);
         final GeoPointImpl leftGeo = mapItemFactory.getGeoPointBase(leftCoords);
 
         final Point center = new Point();
