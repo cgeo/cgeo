@@ -73,7 +73,7 @@ public final class Twitter {
 
     @NonNull
     static String getStatusMessage(final @NonNull Geocache cache, final @Nullable LogEntry logEntry) {
-        return appendHashTags(LogTemplateProvider.applyTemplates(Settings.getCacheTwitterMessage(), new LogContext(cache, logEntry)));
+        return appendHashTags(LogTemplateProvider.applyTemplatesNoIncrement(Settings.getCacheTwitterMessage(), new LogContext(cache, logEntry)));
     }
 
     @NonNull

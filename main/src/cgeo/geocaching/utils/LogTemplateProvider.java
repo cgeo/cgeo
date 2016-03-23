@@ -1,19 +1,19 @@
 package cgeo.geocaching.utils;
 
-import android.support.annotation.StringRes;
-
-import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.models.LogEntry;
 import cgeo.geocaching.R;
-import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.capability.ILogin;
+import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.LogEntry;
+import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.settings.Settings;
 
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+
+import android.support.annotation.StringRes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -112,7 +112,7 @@ public final class LogTemplateProvider {
     }
 
     /**
-     * @return all templates, but not the signature template itself
+     * @return all user-facing templates, but not the signature template itself
      */
     @NonNull
     public static List<LogTemplate> getTemplatesWithoutSignature() {
@@ -157,32 +157,7 @@ public final class LogTemplateProvider {
 
             @Override
             public String getValue(final LogContext context) {
-                final Geocache cache = context.getCache();
-                if (cache == null) {
-                    return StringUtils.EMPTY;
-                }
-
-                int current = 0;
-                final IConnector connector = ConnectorFactory.getConnector(cache);
-                if (connector instanceof ILogin) {
-                    current = ((ILogin) connector).getCachesFound();
-                }
-
-                // try updating the login information, if the counter is zero
-                if (current == 0) {
-                    if (context.isOffline()) {
-                        return StringUtils.EMPTY;
-                    }
-                    if (connector instanceof ILogin) {
-                        ((ILogin) connector).login(null, null);
-                        current = ((ILogin) connector).getCachesFound();
-                    }
-                }
-
-                if (current >= 0) {
-                    return String.valueOf(current + 1);
-                }
-                return StringUtils.EMPTY;
+                return getCounter(context, true);
             }
         });
         templates.add(new LogTemplate("OWNER", R.string.init_signature_template_owner) {
@@ -242,8 +217,38 @@ public final class LogTemplateProvider {
         return templates;
     }
 
+    @NonNull
+    private static String getCounter(final LogContext context, final boolean incrementCounter) {
+        final Geocache cache = context.getCache();
+        if (cache == null) {
+            return StringUtils.EMPTY;
+        }
+
+        int current = 0;
+        final IConnector connector = ConnectorFactory.getConnector(cache);
+        if (connector instanceof ILogin) {
+            current = ((ILogin) connector).getCachesFound();
+        }
+
+        // try updating the login information, if the counter is zero
+        if (current == 0) {
+            if (context.isOffline()) {
+                return StringUtils.EMPTY;
+            }
+            if (connector instanceof ILogin) {
+                ((ILogin) connector).login(null, null);
+                current = ((ILogin) connector).getCachesFound();
+            }
+        }
+
+        if (current >= 0) {
+            return String.valueOf(incrementCounter ? current + 1 : current);
+        }
+        return StringUtils.EMPTY;
+    }
+
     /**
-     * @return all templates, including the signature template
+     * @return all user-facing templates, including the signature template
      */
     @NonNull
     public static List<LogTemplate> getTemplatesWithSignature() {
@@ -261,9 +266,21 @@ public final class LogTemplateProvider {
         return templates;
     }
 
+    @NonNull
+    private static List<LogTemplate> getAllTemplates() {
+        final List<LogTemplate> templates = getTemplatesWithSignature();
+        templates.add(new LogTemplate("NUMBER$NOINC", -1 /* Never user facing */) {
+            @Override
+            public String getValue(final LogContext context) {
+                return getCounter(context, false);
+            }
+        });
+        return templates;
+    }
+
     @Nullable
     public static LogTemplate getTemplate(final int itemId) {
-        for (final LogTemplate template : getTemplatesWithSignature()) {
+        for (final LogTemplate template : getAllTemplates()) {
             if (template.getItemId() == itemId) {
                 return template;
             }
@@ -273,9 +290,13 @@ public final class LogTemplateProvider {
 
     public static String applyTemplates(@NonNull final String signature, final LogContext context) {
         String result = signature;
-        for (final LogTemplate template : getTemplatesWithSignature()) {
+        for (final LogTemplate template : getAllTemplates()) {
             result = template.apply(result, context);
         }
         return result;
+    }
+
+    public static String applyTemplatesNoIncrement(@NonNull final String signature, final LogContext context) {
+        return applyTemplates(signature.replace("[NUMBER]", "[NUMBER$NOINC]"), context);
     }
 }
