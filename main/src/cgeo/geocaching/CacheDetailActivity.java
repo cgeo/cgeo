@@ -712,7 +712,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     return;
                 }
 
-                if (activity.search.getError() != null) {
+                if (activity.search.getError() != StatusCode.NO_ERROR) {
                     // Cache not found is not a download error
                     final StatusCode error = activity.search.getError();
                     final Resources res = activity.getResources();
