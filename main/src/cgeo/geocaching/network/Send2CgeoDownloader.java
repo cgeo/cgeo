@@ -11,6 +11,7 @@ import org.apache.commons.lang3.StringUtils;
 import rx.Scheduler.Worker;
 import rx.functions.Action0;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.concurrent.TimeUnit;
 
@@ -48,7 +49,7 @@ public class Send2CgeoDownloader {
                     final String response = Network.getResponseData(responseFromWeb);
                     if (response != null && response.length() > 2) {
                         handler.sendMessage(handler.obtainMessage(DownloadProgress.MSG_LOADING, response));
-                        Geocache.storeCache(null, response, new HashSet<Integer>(), false, null);
+                        Geocache.storeCache(null, response, Collections.singleton(listId), false, null);
                         handler.sendMessage(handler.obtainMessage(DownloadProgress.MSG_LOADED, response));
                         baseTime = System.currentTimeMillis();
                         worker.schedule(this);
