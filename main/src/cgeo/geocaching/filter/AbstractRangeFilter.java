@@ -10,8 +10,9 @@ abstract class AbstractRangeFilter extends AbstractFilter {
     protected final float rangeMin;
     protected final float rangeMax;
 
-    protected AbstractRangeFilter(@StringRes final int resourceId, final int range) {
-        super(CgeoApplication.getInstance().getResources().getString(resourceId) + ' ' + (range == 5 ? '5' : range + " + " + String.format("%.1f", range + 0.5)));
+    protected AbstractRangeFilter(@StringRes final int resourceId, final int range, final int upperBound) {
+        super(CgeoApplication.getInstance().getResources().getString(resourceId) + ' ' +
+                (range == upperBound ? Integer.toString(upperBound) : range + " + " + String.format("%.1f", range + 0.5)));
         rangeMin = range;
         rangeMax = rangeMin + 1f;
     }
