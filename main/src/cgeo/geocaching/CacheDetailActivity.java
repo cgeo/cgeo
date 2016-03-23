@@ -1,5 +1,8 @@
 package cgeo.geocaching;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 import cgeo.calendar.CalendarAddon;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.AbstractViewPagerActivity;
@@ -77,6 +80,18 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import rx.Observable;
+import rx.Observable.OnSubscribe;
+import rx.Subscriber;
+import rx.Subscription;
+import rx.android.app.AppObservable;
+import rx.functions.Action0;
+import rx.functions.Action1;
+import rx.functions.Func0;
+import rx.functions.Func1;
+import rx.schedulers.Schedulers;
+import rx.subscriptions.CompositeSubscription;
+import rx.subscriptions.Subscriptions;
 
 import android.R.color;
 import android.app.AlertDialog;
@@ -138,21 +153,6 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.regex.Pattern;
-
-import butterknife.Bind;
-import butterknife.ButterKnife;
-import rx.Observable;
-import rx.Observable.OnSubscribe;
-import rx.Subscriber;
-import rx.Subscription;
-import rx.android.app.AppObservable;
-import rx.functions.Action0;
-import rx.functions.Action1;
-import rx.functions.Func0;
-import rx.functions.Func1;
-import rx.schedulers.Schedulers;
-import rx.subscriptions.CompositeSubscription;
-import rx.subscriptions.Subscriptions;
 
 /**
  * Activity to handle all single-cache-stuff.
@@ -1426,7 +1426,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
         @Bind(R.id.personalnote) protected TextView personalNoteView;
         @Bind(R.id.description) protected IndexOutOfBoundsAvoidingTextView descView;
-        @Bind(R.id.show_description) protected Button showDesc;
         @Bind(R.id.loading) protected View loadingView;
 
         @Override
@@ -1446,17 +1445,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
             // long description
             if (StringUtils.isNotBlank(cache.getDescription())) {
-                if (Settings.isAutoLoadDescription()) {
-                    loadLongDescription();
-                } else {
-                    showDesc.setVisibility(View.VISIBLE);
-                    showDesc.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(final View arg0) {
-                            loadLongDescription();
-                        }
-                    });
-                }
+                loadLongDescription();
             }
 
             // cache personal note
@@ -1565,8 +1554,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         }
 
         private void loadLongDescription() {
-            showDesc.setVisibility(View.GONE);
-            showDesc.setOnClickListener(null);
             loadingView.setVisibility(View.VISIBLE);
 
             final String longDescription = cache.getDescription();

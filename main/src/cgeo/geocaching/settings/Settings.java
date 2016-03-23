@@ -166,7 +166,6 @@ public class Settings {
             e.putString(getKey(R.string.pref_twitter_token_secret), prefsV0.getString(getKey(R.string.pref_twitter_token_secret), null));
             e.putString(getKey(R.string.pref_twitter_token_public), prefsV0.getString(getKey(R.string.pref_twitter_token_public), null));
             e.putInt(getKey(R.string.pref_version), prefsV0.getInt(getKey(R.string.pref_version), 0));
-            e.putBoolean(getKey(R.string.pref_autoloaddesc), prefsV0.getInt(getKey(R.string.pref_autoloaddesc), 1) != 0);
             e.putBoolean(getKey(R.string.pref_ratingwanted), prefsV0.getBoolean(getKey(R.string.pref_ratingwanted), true));
             e.putBoolean(getKey(R.string.pref_friendlogswanted), prefsV0.getBoolean(getKey(R.string.pref_friendlogswanted), true));
             e.putBoolean(getKey(R.string.pref_useenglish), prefsV0.getBoolean(getKey(R.string.pref_useenglish), false));
@@ -558,10 +557,6 @@ public class Settings {
 
     public static boolean isStoreLogImages() {
         return getBoolean(R.string.pref_logimages, false);
-    }
-
-    public static boolean isAutoLoadDescription() {
-        return getBoolean(R.string.pref_autoloaddesc, true);
     }
 
     public static boolean isRatingWanted() {

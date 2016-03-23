@@ -508,8 +508,6 @@
     <string name="init_summary_friends_and_own_logs_wanted">Display additional logbook page for friends\' and own logs</string>
     <string name="init_openlastdetailspage">Last Details Page</string>
     <string name="init_summary_openlastdetailspage">Open details with last used page</string>
-    <string name="init_autoload">Long Description</string>
-    <string name="init_summary_autoload">Always load long description</string>
     <string name="init_skin">Light Skin</string>
     <string name="init_summary_skin">Use light skin (Restart needed)</string>
     <string name="init_address">Show Address</string>
