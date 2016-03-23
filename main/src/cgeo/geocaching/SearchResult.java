@@ -37,7 +37,7 @@ public class SearchResult implements Parcelable {
 
     final private Set<String> geocodes;
     final private Set<String> filteredGeocodes;
-    private StatusCode error = null;
+    @NonNull private StatusCode error = StatusCode.NO_ERROR;
     private String url = "";
     private String[] viewstates = null;
     /**
@@ -68,7 +68,7 @@ public class SearchResult implements Parcelable {
     /**
      * Build a new empty search result with an error status.
      */
-    public SearchResult(final StatusCode statusCode) {
+    public SearchResult(@NonNull final StatusCode statusCode) {
         this();
         error = statusCode;
     }
@@ -178,11 +178,12 @@ public class SearchResult implements Parcelable {
         return geocodes.size();
     }
 
+    @NonNull
     public StatusCode getError() {
         return error;
     }
 
-    public void setError(final StatusCode error) {
+    public void setError(@NonNull final StatusCode error) {
         this.error = error;
     }
 

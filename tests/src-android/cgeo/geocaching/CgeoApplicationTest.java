@@ -35,7 +35,6 @@ import cgeo.test.Compare;
 import android.test.suitebuilder.annotation.MediumTest;
 import android.test.suitebuilder.annotation.SmallTest;
 
-import java.util.Collections;
 import java.util.GregorianCalendar;
 
 /**
@@ -118,7 +117,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
     public static Geocache testSearchByGeocode(final String geocode) {
         final SearchResult search = Geocache.searchByGeocode(geocode, null, true, null);
         assertThat(search).isNotNull();
-        if (Settings.isGCPremiumMember() || search.getError() == null) {
+        if (Settings.isGCPremiumMember() || search.getError() == StatusCode.NO_ERROR) {
             assertThat(search.getGeocodes()).containsExactly(geocode);
             return DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
         }
