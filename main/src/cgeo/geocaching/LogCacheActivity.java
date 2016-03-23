@@ -333,13 +333,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         // Load Generic Trackables
         AppObservable.bindActivity(this,
             // Obtain the actives connectors
-            Observable.from(ConnectorFactory.getGenericTrackablesConnectors())
-            .filter(new Func1<TrackableConnector, Boolean>() {
-                @Override
-                public Boolean call(final TrackableConnector trackableConnector) {
-                    return trackableConnector.isRegistered();
-                }
-            })
+            Observable.from(ConnectorFactory.getLoggableGenericTrackablesConnectors())
             .flatMap(new Func1<TrackableConnector, Observable<TrackableLog>>() {
                 @Override
                 public Observable<TrackableLog> call(final TrackableConnector trackableConnector) {
@@ -550,7 +544,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
                     }
 
                     // Posting Generic Trackables
-                    for (final TrackableConnector connector: ConnectorFactory.getGenericTrackablesConnectors()) {
+                    for (final TrackableConnector connector: ConnectorFactory.getLoggableGenericTrackablesConnectors()) {
                         final TrackableLoggingManager manager = connector.getTrackableLoggingManager((AbstractLoggingActivity) activity);
                         if (manager != null) {
                             // Filter trackables logs by action and brand

@@ -204,10 +204,30 @@ public final class ConnectorFactory {
         return UNKNOWN_TRACKABLE_CONNECTOR; // avoid null checks by returning a non implementing connector
     }
 
+    /**
+     * Get the list of active generic trackable connectors
+     *
+     * @return the list of actives connectors.
+     */
     public static List<TrackableConnector> getGenericTrackablesConnectors() {
         final List<TrackableConnector> trackableConnectors = new ArrayList<>();
         for (final TrackableConnector connector : TRACKABLE_CONNECTORS) {
-            if (connector.isGenericLoggable() && connector.isActive()) {
+            if (connector.isActive()) {
+                trackableConnectors.add(connector);
+            }
+        }
+        return trackableConnectors;
+    }
+
+    /**
+     * Get the list of active generic trackable connectors with support logging and currently connected
+     *
+     * @return the list of actives connectors supporting logging.
+     */
+    public static List<TrackableConnector> getLoggableGenericTrackablesConnectors() {
+        final List<TrackableConnector> trackableConnectors = new ArrayList<>();
+        for (final TrackableConnector connector : getGenericTrackablesConnectors()) {
+            if (connector.isGenericLoggable() && connector.isRegistered()) {
                 trackableConnectors.add(connector);
             }
         }
