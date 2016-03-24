@@ -23,7 +23,7 @@ public class WaypointsTest extends CGeoTestCase {
     };
 
     private static Geocache downloadCache(final String geocode) {
-        final SearchResult searchResult = Geocache.searchByGeocode(geocode, null, Collections.EMPTY_SET, true, handler);
+        final SearchResult searchResult = Geocache.searchByGeocode(geocode, null, true, handler);
         assertThat(searchResult.getCount()).isEqualTo(1);
         return searchResult.getFirstCacheFromResult(LoadFlags.LOAD_WAYPOINTS);
     }
