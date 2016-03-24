@@ -273,13 +273,7 @@ public class CachesOverlay extends AbstractItemizedOverlay {
 
     @Override
     public int size() {
-        try {
-            return items.size();
-        } catch (final Exception e) {
-            Log.e("CachesOverlay.size", e);
-        }
-
-        return 0;
+        return items.size();
     }
 
     private class RequestDetailsThread extends Thread {
