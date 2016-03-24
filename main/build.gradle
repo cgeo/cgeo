@@ -247,7 +247,7 @@ dependencies {
     androidTestCompile 'com.google.code.findbugs:annotations:3.0.1u2'
 
     // Reactive extensions
-    compile 'io.reactivex:rxjava:1.1.1'
+    compile 'io.reactivex:rxjava:1.1.2'
     compile 'io.reactivex:rxandroid:0.25.0'
 
     // Jackson XML processing
@@ -487,7 +487,7 @@ task downloadLibs(type:Download) {
     group "cgeo"
     description "Downloads the dependency JARs for use with Eclipse"
     src([
-            mavenLib('io/reactivex', 'rxjava', '1.1.1'),
+            mavenLib('io/reactivex', 'rxjava', '1.1.2'),
             mavenLib('io/reactivex', 'rxandroid', '0.25.0'),
             mavenLib('com/fasterxml/jackson/core','jackson-core','2.7.3'),
             mavenLib('com/fasterxml/jackson/core','jackson-databind','2.7.3'),
