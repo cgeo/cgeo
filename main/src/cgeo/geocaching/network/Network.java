@@ -23,6 +23,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import rx.Completable;
 import rx.Single;
 import rx.functions.Func1;
 
@@ -442,7 +443,7 @@ public final class Network {
      * @param response the response to check
      */
     final public static void completeWithSuccess(final Single<Response> response) {
-        response.flatMap(withSuccess).toObservable().toCompletable().await();
+        Completable.fromSingle(response.flatMap(withSuccess)).await();
     }
 
     final public static Func1<Response, Single<String>> getResponseDataReplaceWhitespace = new Func1<Response, Single<String>>() {
