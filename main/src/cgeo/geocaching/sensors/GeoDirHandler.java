@@ -110,7 +110,7 @@ public abstract class GeoDirHandler {
                 public ImmutablePair<GeoData, Float> call(final GeoData geoData, final Float direction) {
                     return ImmutablePair.of(geoData, direction);
                 }
-            }), windowDuration, unit).onBackpressureDrop().observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<ImmutablePair<GeoData, Float>>() {
+            }), windowDuration, unit).onBackpressureLatest().observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<ImmutablePair<GeoData, Float>>() {
                 @Override
                 public void call(final ImmutablePair<GeoData, Float> geoDir) {
                     updateGeoDir(geoDir.left, geoDir.right);

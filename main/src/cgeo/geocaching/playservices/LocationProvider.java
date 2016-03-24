@@ -11,15 +11,6 @@ import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
-
-import android.content.Context;
-import android.location.Location;
-import android.os.Bundle;
-import android.support.annotation.NonNull;
-
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicInteger;
-
 import rx.Observable;
 import rx.Observable.OnSubscribe;
 import rx.Subscriber;
@@ -28,6 +19,14 @@ import rx.functions.Func1;
 import rx.observers.Subscribers;
 import rx.subjects.ReplaySubject;
 import rx.subscriptions.Subscriptions;
+
+import android.content.Context;
+import android.location.Location;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class LocationProvider extends LocationCallback implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
@@ -90,7 +89,7 @@ public class LocationProvider extends LocationCallback implements GoogleApiClien
     }
 
     public static Observable<GeoData> getMostPrecise(final Context context) {
-        return get(context, mostPreciseCount).onBackpressureDrop();
+        return get(context, mostPreciseCount).onBackpressureLatest();
     }
 
     public static Observable<GeoData> getLowPower(final Context context) {
@@ -114,7 +113,7 @@ public class LocationProvider extends LocationCallback implements GoogleApiClien
         // After sending the last known location, try to get a precise location then use the low-power mode. If no
         // location information is given for 25 seconds (if the network location is turned off for example), get
         // back to the precise location and try again.
-        return subject.first().concatWith(untilPreciseEnoughObservable.concatWith(lowPowerObservable).timeout(25, TimeUnit.SECONDS).retry()).onBackpressureDrop();
+        return subject.first().concatWith(untilPreciseEnoughObservable.concatWith(lowPowerObservable).timeout(25, TimeUnit.SECONDS).retry()).onBackpressureLatest();
     }
 
     /**
