@@ -59,8 +59,12 @@ public class GCLogin extends AbstractLogin {
     @Override
     @NonNull
     protected StatusCode login(final boolean retry) {
-        final Credentials credentials = Settings.getGcCredentials();
+        return login(retry, Settings.getCredentials(GCConnector.getInstance()));
+    }
 
+    @Override
+    @NonNull
+    protected StatusCode login(final boolean retry, @NonNull final Credentials credentials) {
         if (credentials.isInvalid()) {
             clearLoginInfo();
             Log.e("Login.login: No login information stored");
@@ -86,7 +90,7 @@ public class GCLogin extends AbstractLogin {
             if (getLoginStatus(tryLoggedInData)) {
                 Log.i("Already logged in Geocaching.com as " + username + " (" + Settings.getGCMemberStatus() + ')');
                 if (switchToEnglish(tryLoggedInData) && retry) {
-                    return login(false);
+                    return login(false, credentials);
                 }
                 setHomeLocation();
                 refreshMemberStatus();
@@ -122,7 +126,7 @@ public class GCLogin extends AbstractLogin {
 
             if (getLoginStatus(loginData)) {
                 if (switchToEnglish(loginData) && retry) {
-                    return login(false);
+                    return login(false, credentials);
                 }
                 Log.i("Successfully logged in Geocaching.com as " + username + " (" + Settings.getGCMemberStatus() + ')');
                 Settings.setCookieStore(Cookies.dumpCookieStore());
@@ -145,7 +149,7 @@ public class GCLogin extends AbstractLogin {
             Log.i("Failed to log in Geocaching.com as " + username + " for some unknown reason");
             if (retry) {
                 switchToEnglish(loginData);
-                return login(false);
+                return login(false, credentials);
             }
 
             return resetGcCustomDate(StatusCode.UNKNOWN_ERROR); // can't login
@@ -254,7 +258,12 @@ public class GCLogin extends AbstractLogin {
         return false;
     }
 
-    public Observable<Drawable> downloadAvatar() {
+    /**
+     * Retrieve avatar url from GC
+     *
+     * @return the avatar url
+     */
+    public String getAvatarUrl() {
         try {
             final String responseData = StringUtils.defaultString(Network.getResponseData(Network.getRequest("https://www.geocaching.com/my/")));
             final String profile = TextUtils.replaceWhitespace(responseData);
@@ -263,11 +272,28 @@ public class GCLogin extends AbstractLogin {
 
             final String avatarURL = TextUtils.getMatch(profile, GCConstants.PATTERN_AVATAR_IMAGE_PROFILE_PAGE, false, null);
             if (avatarURL != null) {
-                final HtmlImage imgGetter = new HtmlImage(HtmlImage.SHARED, false, false, false);
-                return imgGetter.fetchDrawable(avatarURL.replace("avatar", "user/large")).cast(Drawable.class);
+                return avatarURL.replace("avatar", "user/large");
             }
             // No match? There may be no avatar set by user.
             Log.d("No avatar set for user");
+        } catch (final Exception e) {
+            Log.w("Error when retrieving user avatar url", e);
+        }
+        return StringUtils.EMPTY;
+    }
+
+    /**
+     * Download the avatar
+     *
+     * @return the avatar drawable
+     */
+    public Observable<Drawable> downloadAvatar() {
+        try {
+            final String avatarURL = getAvatarUrl();
+            if (!avatarURL.isEmpty()) {
+                final HtmlImage imgGetter = new HtmlImage(HtmlImage.SHARED, false, false, false);
+                return imgGetter.fetchDrawable(avatarURL).cast(Drawable.class);
+            }
         } catch (final Exception e) {
             Log.w("Error when retrieving user avatar", e);
         }

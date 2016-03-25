@@ -424,6 +424,11 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
+    public int getAvatarPreferenceKey() {
+        return R.string.pref_gc_avatar;
+    }
+
+    @Override
     public @NonNull
     List<UserAction> getUserActions() {
         final List<UserAction> actions = super.getUserActions();

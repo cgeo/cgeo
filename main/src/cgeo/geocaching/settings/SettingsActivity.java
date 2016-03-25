@@ -7,6 +7,7 @@ import cgeo.geocaching.SelectMapfileActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.apps.navi.NavigationAppFactory;
 import cgeo.geocaching.apps.navi.NavigationAppFactory.NavigationAppsEnum;
+import cgeo.geocaching.connector.capability.ICredentials;
 import cgeo.geocaching.connector.ec.ECConnector;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.trackable.GeokretyConnector;
@@ -26,6 +27,7 @@ import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ProcessUtils;
 
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.NonNull;
 import org.openintents.intents.FileManagerIntents;
 
 import android.R.string;
@@ -154,14 +156,14 @@ public class SettingsActivity extends PreferenceActivity {
         initLanguagePreferences();
         initMaintenanceButtons();
 
-        for (final int k : new int[] { R.string.pref_username, R.string.pref_password,
+        for (final int k : new int[] {
                 R.string.pref_pass_vote, R.string.pref_signature,
                 R.string.pref_mapsource, R.string.pref_renderthemepath,
                 R.string.pref_gpxExportDir, R.string.pref_gpxImportDir,
                 R.string.pref_mapDirectory, R.string.pref_defaultNavigationTool,
                 R.string.pref_defaultNavigationTool2, R.string.pref_webDeviceName,
                 R.string.pref_fakekey_preference_backup_info, R.string.pref_twitter_cache_message, R.string.pref_twitter_trackable_message,
-                R.string.pref_ecusername, R.string.pref_ecpassword, R.string.pref_ec_icons }) {
+                R.string.pref_ec_icons }) {
             bindSummaryToStringValue(k);
         }
         bindGeocachingUserToGCVoteuser();
@@ -532,19 +534,39 @@ public class SettingsActivity extends PreferenceActivity {
 
     public void setAuthTitle(final int prefKeyId) {
         switch (prefKeyId) {
+            case R.string.pref_fakekey_gc_authorization:
+                setAuthTitle(prefKeyId, GCConnector.getInstance());
+                setConnectedUsernameTitle(prefKeyId, GCConnector.getInstance());
+                break;
             case R.string.pref_fakekey_ocde_authorization:
             case R.string.pref_fakekey_ocpl_authorization:
             case R.string.pref_fakekey_ocnl_authorization:
             case R.string.pref_fakekey_ocus_authorization:
             case R.string.pref_fakekey_ocro_authorization:
             case R.string.pref_fakekey_ocuk_authorization:
-                setOCAuthTitle(OCPreferenceKeys.getByAuthId(prefKeyId));
+                final OCPreferenceKeys key = OCPreferenceKeys.getByAuthId(prefKeyId);
+                if (key != null) {
+                    setOCAuthTitle(key);
+                    setConnectedTitle(prefKeyId, Settings.hasOCAuthorization(key.publicTokenPrefId, key.privateTokenPrefId));
+                } else {
+                    setConnectedTitle(prefKeyId, false);
+                }
+                break;
+            case R.string.pref_fakekey_ec_authorization:
+                setAuthTitle(prefKeyId, ECConnector.getInstance());
+                setConnectedUsernameTitle(prefKeyId, ECConnector.getInstance());
+                break;
+            case R.string.pref_fakekey_gcvote_authorization:
+                setAuthTitle(prefKeyId, GCVote.getInstance());
+                setConnectedUsernameTitle(prefKeyId, GCVote.getInstance());
                 break;
             case R.string.pref_fakekey_twitter_authorization:
                 setTwitterAuthTitle();
+                setConnectedTitle(prefKeyId, Settings.hasTwitterAuthorization());
                 break;
             case R.string.pref_fakekey_geokrety_authorization:
                 setGeokretyAuthTitle();
+                setConnectedTitle(prefKeyId, Settings.hasGeokretyAuthorization());
                 break;
             default:
                 Log.e(String.format(Locale.ENGLISH, "Invalid key %d in SettingsActivity.setTitle()", prefKeyId));
@@ -552,12 +574,10 @@ public class SettingsActivity extends PreferenceActivity {
     }
 
     private void setOCAuthTitle(final OCPreferenceKeys key) {
-        if (key != null) {
-            getPreference(key.authPrefId)
-                    .setTitle(getString(Settings.hasOCAuthorization(key.publicTokenPrefId, key.privateTokenPrefId)
-                            ? R.string.settings_reauthorize
-                            : R.string.settings_authorize));
-        }
+        getPreference(key.authPrefId)
+                .setTitle(getString(Settings.hasOCAuthorization(key.publicTokenPrefId, key.privateTokenPrefId)
+                        ? R.string.settings_reauthorize
+                        : R.string.settings_authorize));
     }
 
     private void setTwitterAuthTitle() {
@@ -567,11 +587,36 @@ public class SettingsActivity extends PreferenceActivity {
                         : R.string.settings_authorize));
     }
 
-    void setGeokretyAuthTitle() {
+    private void setGeokretyAuthTitle() {
         getPreference(R.string.pref_fakekey_geokrety_authorization)
                 .setTitle(getString(Settings.hasGeokretyAuthorization()
                         ? R.string.settings_reauthorize
                         : R.string.settings_authorize));
+    }
+
+    private void setAuthTitle(final int prefKeyId, final @NonNull ICredentials connector) {
+        final Credentials credentials = Settings.getCredentials(connector);
+
+        getPreference(prefKeyId)
+                .setTitle(getString(StringUtils.isNotBlank(credentials.getUsernameRaw())
+                        ? R.string.settings_reauthorize
+                        : R.string.settings_authorize));
+    }
+
+    private void setConnectedUsernameTitle(final int prefKeyId, final @NonNull ICredentials connector) {
+        final Credentials credentials = Settings.getCredentials(connector);
+
+        getPreference(prefKeyId)
+                .setSummary(StringUtils.isNotBlank(credentials.getUsernameRaw())
+                        ? getString(R.string.auth_connected_as, credentials.getUserName())
+                        : getString(R.string.auth_unconnected));
+    }
+
+    private void setConnectedTitle(final int prefKeyId, final boolean hasToken) {
+        getPreference(prefKeyId)
+                .setSummary(getString(hasToken
+                        ? R.string.auth_connected
+                        : R.string.auth_unconnected));
     }
 
     public static void openForScreen(final int preferenceScreenKey, final Context fromActivity) {
@@ -627,15 +672,36 @@ public class SettingsActivity extends PreferenceActivity {
                 final OCPreferenceKeys key = OCPreferenceKeys.getByAuthId(requestCode);
                 if (key != null) {
                     setOCAuthTitle(key);
+                    setConnectedTitle(requestCode, Settings.hasOCAuthorization(key.publicTokenPrefId, key.privateTokenPrefId));
                     redrawScreen(key.prefScreenId);
+                } else {
+                    setConnectedTitle(requestCode, false);
                 }
+                break;
+            case R.string.pref_fakekey_gc_authorization:
+                setAuthTitle(requestCode, GCConnector.getInstance());
+                setConnectedUsernameTitle(requestCode, GCConnector.getInstance());
+                redrawScreen(R.string.preference_screen_gc);
+                initBasicMemberPreferences();
+                break;
+            case R.string.pref_fakekey_ec_authorization:
+                setAuthTitle(requestCode, ECConnector.getInstance());
+                setConnectedUsernameTitle(requestCode, ECConnector.getInstance());
+                redrawScreen(R.string.preference_screen_ec);
+                break;
+            case R.string.pref_fakekey_gcvote_authorization:
+                setAuthTitle(requestCode, GCVote.getInstance());
+                setConnectedUsernameTitle(requestCode, GCVote.getInstance());
+                redrawScreen(R.string.init_gcvote);
                 break;
             case R.string.pref_fakekey_twitter_authorization:
                 setTwitterAuthTitle();
+                setConnectedTitle(requestCode, Settings.hasTwitterAuthorization());
                 redrawScreen(R.string.preference_screen_twitter);
                 break;
             case R.string.pref_fakekey_geokrety_authorization:
                 setGeokretyAuthTitle();
+                setConnectedTitle(requestCode, Settings.hasGeokretyAuthorization());
                 redrawScreen(R.string.preference_screen_geokrety);
                 break;
             default:
@@ -730,11 +796,6 @@ public class SettingsActivity extends PreferenceActivity {
                 // simple string representation.
                 preference.setSummary(stringValue);
             }
-            // TODO: do not special case geocaching.com here
-            if ((isPreference(preference, R.string.pref_username) && !stringValue.equals(Settings.getUserName())) || (isPreference(preference, R.string.pref_password) && !stringValue.equals(Settings.getGcCredentials().getPasswordRaw()))) {
-                // reset log-in if gc user or password is changed
-                CgeoApplication.getInstance().forceRelog();
-            }
             return true;
         }
 
@@ -785,7 +846,7 @@ public class SettingsActivity extends PreferenceActivity {
         }
 
         final String value = Settings.getGcCredentials().getUserName();
-        getPreference(R.string.pref_user_vote).setSummary(value);
+        getPreference(R.string.pref_fakekey_gcvote_authorization).setSummary(value);
         final Preference prefvote = getPreference(R.string.pref_user_vote);
         bindSummaryToValue(prefvote, value);
     }

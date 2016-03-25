@@ -2,7 +2,7 @@ package cgeo.geocaching.gcvote;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
-import cgeo.geocaching.enumerations.StatusCode;
+import cgeo.geocaching.connector.capability.ICredentials;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
@@ -34,7 +34,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-public final class GCVote {
+public final class GCVote implements ICredentials {
     public static final float NO_RATING = 0;
 
     private static final int MAX_CACHED_RATINGS = 1000;
@@ -46,44 +46,14 @@ public final class GCVote {
         // utility class
     }
 
+    private static class SingletonHolder {
+        @NonNull
+        private final static GCVote INSTANCE = new GCVote();
+    }
+
     @NonNull
-    public static StatusCode login() {
-        final Credentials login = Settings.getGCVoteLogin();
-
-        if (login.isInvalid()) {
-            Log.e("Credentials can't be retrieved");
-            return StatusCode.NO_LOGIN_INFO_STORED;
-        }
-
-        final Parameters params = new Parameters("version", "cgeo", "userName", login.getUserName(), "password", login.getPassword());
-
-        final InputStream response = Network.getResponseStream(Network.getRequest("http://gcvote.com/getVotes.php", params));
-
-        try {
-            final XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
-            final XmlPullParser xpp = factory.newPullParser();
-            xpp.setInput(response, Charsets.UTF_8.name());
-            int eventType = xpp.getEventType();
-            while (eventType != XmlPullParser.END_DOCUMENT) {
-                if (eventType == XmlPullParser.START_TAG) {
-                    final String tagName = xpp.getName();
-                    if (StringUtils.equals(tagName, "votes")) {
-                        if (StringUtils.equals(xpp.getAttributeValue(null, "loggedIn"), "true")) {
-                            Log.i("Successfully logged in gcvote.com as " + login.getUserName());
-                            return StatusCode.NO_ERROR;
-                        }
-                        Log.e("Username or password is wrong");
-                        return StatusCode.WRONG_LOGIN_DATA;
-                    }
-                }
-                eventType = xpp.next();
-            }
-        } catch (final Exception e) {
-            Log.e("Cannot parse GCVote result", e);
-            return StatusCode.UNKNOWN_ERROR;
-        }
-
-        return StatusCode.UNKNOWN_ERROR;
+    public static GCVote getInstance() {
+        return SingletonHolder.INSTANCE;
     }
 
     /**
@@ -298,4 +268,18 @@ public final class GCVote {
         return "http://gcvote.com/help_en.php";
     }
 
+    @Override
+    public int getUsernamePreferenceKey() {
+        return R.string.pref_user_vote;
+    }
+
+    @Override
+    public int getPasswordPreferenceKey() {
+        return R.string.pref_pass_vote;
+    }
+
+    @Override
+    public int getAvatarPreferenceKey() {
+        return R.string.pref_gcvote_avatar;
+    }
 }
