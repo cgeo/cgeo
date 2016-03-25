@@ -163,7 +163,6 @@ public class NewMap extends AbstractActionBarActivity {
         // Get fresh map information from the bundle if any
         if (savedInstanceState != null) {
             mapStateIntent = savedInstanceState.getParcelable(BUNDLE_MAP_STATE);
-            //            isLiveEnabled = savedInstanceState.getBoolean(BUNDLE_LIVE_ENABLED, false);
             trailHistory = savedInstanceState.getParcelableArrayList(BUNDLE_TRAIL_HISTORY);
             followMyLocation = mapStateIntent.followsMyLocation();
         }
@@ -198,6 +197,9 @@ public class NewMap extends AbstractActionBarActivity {
         if (mapStateIntent != null) {
             this.mapView.getModel().mapViewPosition.setCenter(mapStateIntent.getCenter());
             this.mapView.getModel().mapViewPosition.setZoomLevel((byte) mapStateIntent.getZoomLevel());
+            this.targetGeocode = mapStateIntent.getTargetGeocode();
+            this.lastNavTarget = mapStateIntent.getLastNavTarget();
+            this.isLiveEnabled = mapStateIntent.isLiveEnabled();
         } else if (searchIntent != null) {
             final Viewport viewport = DataStore.getBounds(searchIntent.getGeocodes());
 
@@ -633,7 +635,10 @@ public class NewMap extends AbstractActionBarActivity {
         return new MapState(mapView.getModel().mapViewPosition.getCenter(),
                 mapView.getModel().mapViewPosition.getZoomLevel(),
                 followMyLocation,
-                false);
+                false,
+                targetGeocode,
+                lastNavTarget,
+                isLiveEnabled);
     }
 
     private void centerMap(final Geopoint geopoint) {
