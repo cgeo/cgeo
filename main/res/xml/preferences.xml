@@ -362,6 +362,7 @@
                 </PreferenceCategory>
                 <PreferenceCategory android:title="@string/settings_advanced" >
                     <CheckBoxPreference
+                        android:dependency="@string/pref_connectorGeokretyActive"
                         android:defaultValue="true"
                         android:key="@string/pref_geokrety_cache"
                         android:title="@string/init_geokrety_cache" />
