@@ -322,8 +322,8 @@ public class Settings {
      */
     @NonNull
     public static Credentials getCredentials(final @NonNull ICredentials connector) {
-        final String username = getString(connector.getUsernamePreferenceKey(), null);
-        final String password = getString(connector.getPasswordPreferenceKey(), null);
+        final String username = getString(connector.getUsernamePreferenceKey(), StringUtils.EMPTY);
+        final String password = getString(connector.getPasswordPreferenceKey(), StringUtils.EMPTY);
         return new Credentials(username, password);
     }
 
@@ -334,8 +334,8 @@ public class Settings {
      * @param credentials the credential information to store
      */
     public static void setCredentials(final @NonNull ICredentials connector, final Credentials credentials) {
-        putString(connector.getUsernamePreferenceKey(), credentials.getUserName());
-        putString(connector.getPasswordPreferenceKey(), credentials.getPassword());
+        putString(connector.getUsernamePreferenceKey(), credentials.getUsernameRaw());
+        putString(connector.getPasswordPreferenceKey(), credentials.getPasswordRaw());
     }
 
     public static String getUserName() {

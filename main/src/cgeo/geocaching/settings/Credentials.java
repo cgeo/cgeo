@@ -8,6 +8,7 @@ import org.eclipse.jdt.annotation.Nullable;
  * Hold valid or invalid credential information (login and password).
  */
 public class Credentials {
+    public static final Credentials EMPTY = new Credentials(StringUtils.EMPTY, StringUtils.EMPTY);
 
     private final String username;
     private final String password;
