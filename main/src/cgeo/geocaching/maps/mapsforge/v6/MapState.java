@@ -1,5 +1,6 @@
 package cgeo.geocaching.maps.mapsforge.v6;
 
+import cgeo.geocaching.location.Geopoint;
 import org.mapsforge.core.model.LatLong;
 
 import android.os.Parcel;
@@ -11,12 +12,18 @@ public class MapState implements Parcelable {
     private final int zoomLevel;
     private final boolean followMyLocation;
     private final boolean showCircles;
+    private final String targetGeocode;
+    private final Geopoint lastNavTarget;
+    private final boolean liveEnabled;
 
-    public MapState(final LatLong center, final int zoomLevel, final boolean followMyLocation, final boolean showCircles) {
+    public MapState(final LatLong center, final int zoomLevel, final boolean followMyLocation, final boolean showCircles, final String targetGeocode, final Geopoint lastNavTarget, final boolean liveEnabled) {
         this.center = center;
         this.zoomLevel = zoomLevel;
         this.followMyLocation = followMyLocation;
         this.showCircles = showCircles;
+        this.targetGeocode = targetGeocode;
+        this.lastNavTarget = lastNavTarget;
+        this.liveEnabled = liveEnabled;
     }
 
     public MapState(final Parcel in) {
@@ -24,6 +31,9 @@ public class MapState implements Parcelable {
         zoomLevel = in.readInt();
         followMyLocation = in.readInt() > 0 ? true : false;
         showCircles = in.readInt() > 0 ? true : false;
+        targetGeocode = in.readString();
+        lastNavTarget = in.readParcelable(Geopoint.class.getClassLoader());
+        liveEnabled = in.readInt() > 0 ? true : false;
     }
 
     public LatLong getCenter() {
@@ -42,6 +52,18 @@ public class MapState implements Parcelable {
         return showCircles;
     }
 
+    public String getTargetGeocode() {
+        return targetGeocode;
+    }
+
+    public Geopoint getLastNavTarget() {
+        return lastNavTarget;
+    }
+
+    public boolean isLiveEnabled() {
+        return liveEnabled;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -54,6 +76,9 @@ public class MapState implements Parcelable {
         dest.writeInt(zoomLevel);
         dest.writeInt(followMyLocation ? 1 : 0);
         dest.writeInt(showCircles ? 1 : 0);
+        dest.writeString(targetGeocode);
+        dest.writeParcelable(lastNavTarget, PARCELABLE_WRITE_RETURN_VALUE);
+        dest.writeInt(liveEnabled ? 1 : 0);
     }
 
     public static final Parcelable.Creator<MapState> CREATOR = new Parcelable.Creator<MapState>() {
