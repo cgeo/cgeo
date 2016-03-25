@@ -44,6 +44,9 @@
     <string name="pref_connectorOCUKActive">connectorOCUKActive</string>
     <string name="pref_ecusername">ecusername</string>
     <string name="pref_ecpassword">ecpassword</string>
+    <string name="pref_ec_avatar">ec_avatar</string>
+    <string name="pref_gc_avatar">gc_avatar</string>
+    <string name="pref_gcvote_avatar">gcvote_avatar</string>
     <string name="pref_connectorECActive">connectorECActive</string>
     <string name="pref_connectorGeokretyActive">connectorGeokretyActive</string>
     <string name="pref_geokrety_cache">geokretycache</string>

@@ -1223,4 +1223,25 @@ public class Settings {
                     !(RotationProvider.hasRotationSensor(context) || MagnetometerAndAccelerometerProvider.hasMagnetometerAndAccelerometerSensors(context))
                 );
     }
+
+    /**
+     * Get avatar URL by connector.
+     *
+     * @param connector the connector to retrieve the avatar information from
+     * @return the avatar url
+     */
+    @NonNull
+    public static String getAvatarUrl(final @NonNull ICredentials connector) {
+        return getString(connector.getAvatarPreferenceKey(), null);
+    }
+
+    /**
+     * Set avatar URL by connector.
+     *
+     * @param connector the connector to retrieve the avatar information from
+     * @param avatarUrl the avatar url information to store
+     */
+    public static void setAvatarUrl(final @NonNull ICredentials connector, final String avatarUrl) {
+        putString(connector.getAvatarPreferenceKey(), avatarUrl);
+    }
 }

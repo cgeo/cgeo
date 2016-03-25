@@ -258,7 +258,12 @@ public class GCLogin extends AbstractLogin {
         return false;
     }
 
-    public Observable<Drawable> downloadAvatar() {
+    /**
+     * Retrieve avatar url from GC
+     *
+     * @return the avatar url
+     */
+    public String getAvatarUrl() {
         try {
             final String responseData = StringUtils.defaultString(Network.getResponseData(Network.getRequest("https://www.geocaching.com/my/")));
             final String profile = TextUtils.replaceWhitespace(responseData);
@@ -267,11 +272,28 @@ public class GCLogin extends AbstractLogin {
 
             final String avatarURL = TextUtils.getMatch(profile, GCConstants.PATTERN_AVATAR_IMAGE_PROFILE_PAGE, false, null);
             if (avatarURL != null) {
-                final HtmlImage imgGetter = new HtmlImage(HtmlImage.SHARED, false, false, false);
-                return imgGetter.fetchDrawable(avatarURL.replace("avatar", "user/large")).cast(Drawable.class);
+                return avatarURL.replace("avatar", "user/large");
             }
             // No match? There may be no avatar set by user.
             Log.d("No avatar set for user");
+        } catch (final Exception e) {
+            Log.w("Error when retrieving user avatar url", e);
+        }
+        return StringUtils.EMPTY;
+    }
+
+    /**
+     * Download the avatar
+     *
+     * @return the avatar drawable
+     */
+    public Observable<Drawable> downloadAvatar() {
+        try {
+            final String avatarURL = getAvatarUrl();
+            if (!avatarURL.isEmpty()) {
+                final HtmlImage imgGetter = new HtmlImage(HtmlImage.SHARED, false, false, false);
+                return imgGetter.fetchDrawable(avatarURL).cast(Drawable.class);
+            }
         } catch (final Exception e) {
             Log.w("Error when retrieving user avatar", e);
         }

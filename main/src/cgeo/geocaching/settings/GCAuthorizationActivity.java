@@ -4,6 +4,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.gc.GCLogin;
 import cgeo.geocaching.enumerations.StatusCode;
+import cgeo.geocaching.network.HtmlImage;
 
 public class GCAuthorizationActivity extends AbstractCredentialsAuthorizationActivity {
 
@@ -36,6 +37,18 @@ public class GCAuthorizationActivity extends AbstractCredentialsAuthorizationAct
             // Force Logout before trying new credentials
             GCLogin.getInstance().logout();
         }
-        return GCLogin.getInstance().login(credentials);
+
+        StatusCode status = GCLogin.getInstance().login(credentials);
+        if (status == StatusCode.NO_ERROR) {
+            // Obtain avatar URL
+            final String avatarUrl = GCLogin.getInstance().getAvatarUrl();
+            // Force refresh/store avatar
+            final HtmlImage imgGetter = new HtmlImage(HtmlImage.SHARED, false, false, true);
+            imgGetter.getDrawable(avatarUrl);
+
+            // Save avatar url
+            Settings.setAvatarUrl(GCConnector.getInstance(), avatarUrl);
+        }
+        return  status;
     }
 }

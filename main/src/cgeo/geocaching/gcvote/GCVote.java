@@ -277,4 +277,9 @@ public final class GCVote implements ICredentials {
     public int getPasswordPreferenceKey() {
         return R.string.pref_pass_vote;
     }
+
+    @Override
+    public int getAvatarPreferenceKey() {
+        return R.string.pref_gcvote_avatar;
+    }
 }

@@ -18,4 +18,10 @@ public interface ICredentials {
      */
     int getPasswordPreferenceKey();
 
+    /**
+     * Get preference key of the avatar.
+     *
+     */
+    int getAvatarPreferenceKey();
+
 }
