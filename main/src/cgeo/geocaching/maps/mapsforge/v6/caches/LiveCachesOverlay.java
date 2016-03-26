@@ -95,7 +95,7 @@ public class LiveCachesOverlay extends AbstractCachesOverlay {
                     }
                 }
             } catch (final Exception e) {
-                Log.w("CGeoMap.startLoadtimer.start", e);
+                Log.w("LiveCachesOverlay.startLoadtimer.start", e);
             } finally {
                 overlay.downloading = false;
             }
@@ -151,9 +151,10 @@ public class LiveCachesOverlay extends AbstractCachesOverlay {
             final Set<Geocache> cachesToDisplay = caches;
 
             if (!cachesToDisplay.isEmpty()) {
-                // Only show waypoints for single view or setting
-                // when less than showWaypointsthreshold Caches shown
-                final boolean showWaypoints = cachesToDisplay.size() == 1 || cachesToDisplay.size() < Settings.getWayPointsThreshold();
+                // Only show waypoints when less than showWaypointsthreshold Caches shown
+                final boolean showWaypoints = cachesToDisplay.size() < Settings.getWayPointsThreshold();
+
+                Log.d(String.format("CachsToDisplay: %d, showWaypoints: %b", cachesToDisplay.size(), showWaypoints));
 
                 for (final Geocache cache : cachesToDisplay) {
 
@@ -166,8 +167,8 @@ public class LiveCachesOverlay extends AbstractCachesOverlay {
                             if (waypoint == null || waypoint.getCoords() == null) {
                                 continue;
                             }
-                            if (removeCodes.contains(waypoint.getGeocode())) {
-                                removeCodes.remove(waypoint.getGeocode());
+                            if (removeCodes.contains(waypoint.getGpxId())) {
+                                removeCodes.remove(waypoint.getGpxId());
                             } else {
                                 if (addItem(waypoint)) {
                                     newCodes.add(waypoint.getGpxId());
