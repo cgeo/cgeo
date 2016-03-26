@@ -594,6 +594,14 @@ public class Settings {
         putString(R.string.pref_fakekey_geokrety_authorization, secid);
     }
 
+    public static String getTokenSecret(final int prefKeyId) {
+        return getString(prefKeyId, StringUtils.EMPTY);
+    }
+
+    public static void setTokenSecret(final int prefKeyId, final String secretToken) {
+        putString(prefKeyId, secretToken);
+    }
+
     public static boolean isRegisteredForGeokretyLogging() {
         return getGeokretySecId() != null;
     }
