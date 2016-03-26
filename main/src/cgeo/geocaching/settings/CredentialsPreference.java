@@ -130,4 +130,15 @@ public class CredentialsPreference extends AbstractClickablePreference {
 
         return preferenceView;
     }
+
+    @Override
+    protected boolean isAuthorized() {
+        return Settings.getCredentials(credentialsMapping.getConnector()).isValid();
+    }
+
+    @Override
+    protected void revokeAuthorization() {
+        Settings.setCredentials(credentialsMapping.getConnector(), Credentials.EMPTY);
+        Settings.setAvatarUrl(credentialsMapping.getConnector(), StringUtils.EMPTY);
+    }
 }

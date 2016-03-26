@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.preference.Preference;
 import android.util.AttributeSet;
+import org.apache.commons.lang3.StringUtils;
 
 public class TokenPreference extends AbstractClickablePreference {
 
@@ -68,5 +69,15 @@ public class TokenPreference extends AbstractClickablePreference {
             }
         };
 
+    }
+
+    @Override
+    protected boolean isAuthorized() {
+        return !StringUtils.isEmpty(Settings.getTokenSecret(tokenMapping.prefKeyId));
+    }
+
+    @Override
+    protected void revokeAuthorization() {
+        Settings.setTokenSecret(tokenMapping.prefKeyId, StringUtils.EMPTY);
     }
 }

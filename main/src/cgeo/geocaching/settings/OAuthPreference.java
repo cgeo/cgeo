@@ -77,4 +77,21 @@ public class OAuthPreference extends AbstractClickablePreference {
         };
 
     }
+
+    @Override
+    protected boolean isAuthorized() {
+        final OCPreferenceKeys key = OCPreferenceKeys.getByAuthId(oAuthMapping.prefKeyId);
+        if (key != null) {
+            return Settings.hasOCAuthorization(key.publicTokenPrefId, key.privateTokenPrefId);
+        }
+        return false;
+    }
+
+    @Override
+    protected void revokeAuthorization() {
+        final OCPreferenceKeys key = OCPreferenceKeys.getByAuthId(oAuthMapping.prefKeyId);
+        if (key != null) {
+            Settings.setTokens(key.publicTokenPrefId, null, key.privateTokenPrefId, null);
+        }
+    }
 }
