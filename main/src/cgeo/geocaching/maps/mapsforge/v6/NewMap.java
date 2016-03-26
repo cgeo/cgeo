@@ -519,13 +519,16 @@ public class NewMap extends AbstractActionBarActivity {
     }
 
     private void initializeLayers() {
-        // tile renderer layer using internal render theme
-        this.tileRendererLayer = new TileRendererLayer(tileCache, new MapFile(NewMap.getMapFile()),
-                this.mapView.getModel().mapViewPosition, false, true, AndroidGraphicFactory.INSTANCE);
-        this.setMapTheme();
+        // tile renderer layer (if map file is defined)
+        File mapFile = NewMap.getMapFile();
+        if (mapFile != null && mapFile.exists()) {
+            this.tileRendererLayer = new TileRendererLayer(tileCache, new MapFile(mapFile),
+                    this.mapView.getModel().mapViewPosition, false, true, AndroidGraphicFactory.INSTANCE);
+            this.setMapTheme();
 
-        // only once a layer is associated with a mapView the rendering starts
-        this.mapView.getLayerManager().getLayers().add(this.tileRendererLayer);
+            // only once a layer is associated with a mapView the rendering starts
+            this.mapView.getLayerManager().getLayers().add(this.tileRendererLayer);
+        }
 
         // History Layer
         this.historyLayer = new HistoryLayer(trailHistory);
@@ -606,9 +609,11 @@ public class NewMap extends AbstractActionBarActivity {
         this.mapView.getLayerManager().getLayers().remove(this.historyLayer);
         this.historyLayer = null;
 
-        this.mapView.getLayerManager().getLayers().remove(this.tileRendererLayer);
-        this.tileRendererLayer.onDestroy();
-        this.tileRendererLayer = null;
+        if (this.tileRendererLayer != null) {
+            this.mapView.getLayerManager().getLayers().remove(this.tileRendererLayer);
+            this.tileRendererLayer.onDestroy();
+            this.tileRendererLayer = null;
+        }
     }
 
     @Override
@@ -711,8 +716,14 @@ public class NewMap extends AbstractActionBarActivity {
         }
     }
 
+    @Nullable
     private static File getMapFile() {
-        return new File(Settings.getMapFile());
+        String mapFileName = Settings.getMapFile();
+        if (StringUtils.isNotEmpty(mapFileName)) {
+            return new File(mapFileName);
+        }
+
+        return null;
     }
 
     private final static class DisplayHandler extends Handler {
