@@ -64,9 +64,9 @@ abstract class AbstractClickablePreference extends Preference implements View.On
         }
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-        builder.setMessage("You'll be disconnected from this connector. Your currently saved credentials will be lost.")
+        builder.setMessage(R.string.auth_forget_message)
                 .setIcon(android.R.drawable.ic_dialog_alert)
-                .setTitle("Forget authorization?")
+                .setTitle(R.string.auth_forget_title)
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(final DialogInterface dialog, final int id) {
