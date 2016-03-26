@@ -71,6 +71,7 @@
 -keep class org.apache.commons.io.FileUtils { *; }
 
 # action providers are only referenced from XML
+-keep public class android.support.v7.widget.ShareActionProvider { *; }
 -keep public class cgeo.geocaching.sorting.SortActionProvider { *; }
 -keep public class cgeo.geocaching.ui.NavigationActionProvider { *; }
 -keep public class cgeo.geocaching.apps.navi.NavigationSelectionActionProvider  { *; }
