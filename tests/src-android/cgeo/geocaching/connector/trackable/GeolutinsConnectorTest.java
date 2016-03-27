@@ -21,7 +21,8 @@ public class GeolutinsConnectorTest extends TestCase {
         assertThat(getConnector().canHandleTrackable("12345678-12")).isFalse();
         assertThat(getConnector().canHandleTrackable("12345678-12")).isFalse();
         assertThat(getConnector().canHandleTrackable("12345678-123")).isTrue();
-        assertThat(getConnector().canHandleTrackable("1234567-1234")).isFalse();
+        assertThat(getConnector().canHandleTrackable("123456-1234")).isFalse();
+        assertThat(getConnector().canHandleTrackable("1234567-1234")).isTrue();
         assertThat(getConnector().canHandleTrackable("12345671234")).isFalse();
         assertThat(getConnector().canHandleTrackable("1234567123")).isFalse();
         assertThat(getConnector().canHandleTrackable("12345678-1234")).isTrue();
