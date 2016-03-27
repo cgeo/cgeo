@@ -119,8 +119,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Deque;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -751,7 +753,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 invalidateOptionsMenuCompatible();
                 return true;
             case R.id.menu_drop_caches:
-                deleteCachesWithConfirmation();
+                deleteCaches(adapter.getCheckedOrAllCaches());
                 invalidateOptionsMenuCompatible();
                 return true;
             case R.id.menu_import_gpx:
@@ -854,7 +856,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 deletion.add(cache);
             }
         }
-        deleteCachesInternal(deletion);
+        deleteCaches(deletion);
     }
 
     private void clearOfflineLogs() {
@@ -978,7 +980,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 CacheDetailActivity.startActivity(this, cache.getGeocode(), cache.getName());
                 break;
             case R.id.menu_drop_cache:
-                deleteCachesInternal(Collections.singletonList(cache));
+                deleteCaches(Collections.singletonList(cache));
                 break;
             case R.id.menu_move_to_list:
                 moveCachesToOtherList(Collections.singletonList(cache));
@@ -1256,21 +1258,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         Send2CgeoDownloader.loadFromWeb(downloadFromWebHandler, listId);
     }
 
-    private void deleteCachesWithConfirmation() {
-        final int titleId = (adapter.getCheckedCount() > 0) ? R.string.caches_remove_selected : R.string.caches_remove_all;
-        final int count = adapter.getCheckedOrAllCount();
-        final String message = res.getQuantityString(adapter.getCheckedCount() > 0 ? R.plurals.caches_remove_selected_from_list_confirm : R.plurals.caches_remove_all_confirm, count, count);
-        Dialogs.confirmYesNo(this, titleId, message, new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(final DialogInterface dialog, final int id) {
-                deleteCachesInternal(adapter.getCheckedOrAllCaches());
-                dialog.cancel();
-            }
-        });
-    }
-
-    private void deleteCachesInternal(final @NonNull Collection<Geocache> caches) {
+    private void deleteCaches(final @NonNull Collection<Geocache> caches) {
         new DeleteCachesFromListCommand(this, caches, listId).execute();
     }
 
@@ -1334,6 +1322,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         private final WeakReference<CacheListActivity> activityRef;
         private final int lastListPosition;
         private int listId = StoredList.TEMPORARY_LIST.id;
+        private Map<String, Set<Integer>> oldCachesLists = new HashMap<>();
 
         public DeleteCachesFromListCommand(@NonNull final CacheListActivity context, final Collection<Geocache> caches, final int listId) {
             super(context, caches, R.string.command_delete_caches_progress);
@@ -1355,12 +1344,20 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
         @Override
         protected void doCommand() {
-            DataStore.removeFromList(getCaches(), listId);
+            if (listId == PseudoList.ALL_LIST.id) {
+                oldCachesLists = DataStore.markDropped(getCaches());
+            } else {
+                DataStore.removeFromList(getCaches(), listId);
+            }
         }
 
         @Override
         protected void undoCommand() {
-            DataStore.addToList(getCaches(), listId);
+            if (listId == PseudoList.ALL_LIST.id) {
+                DataStore.addToLists(getCaches(), oldCachesLists);
+            } else {
+                DataStore.addToList(getCaches(), listId);
+            }
         }
 
         @Override

@@ -1403,7 +1403,7 @@ public class DataStore {
      */
     private static void removeOutdatedWaypointsOfCache(final @NonNull Geocache cache, final @NonNull Collection<String> remainingWaypointIds) {
         final String idList = StringUtils.join(remainingWaypointIds, ',');
-        database.delete(dbTableWaypoints, "geocode = ? AND _id NOT in (" + idList + ")", new String[] { cache.getGeocode() });
+        database.delete(dbTableWaypoints, "geocode = ? AND _id NOT in (" + idList + ")", new String[]{cache.getGeocode()});
     }
 
     /**
@@ -2942,6 +2942,36 @@ public class DataStore {
         }
     }
 
+    public static void addToLists(final Collection<Geocache> caches, final Map<String, Set<Integer>> cachesLists) {
+        if (caches.isEmpty() || cachesLists.isEmpty()) {
+            return;
+        }
+        init();
+
+        final SQLiteStatement add = PreparedStatement.ADD_TO_LIST.getStatement();
+
+        database.beginTransaction();
+        try {
+            for (final Geocache cache : caches) {
+                final Set<Integer> lists = cachesLists.get(cache.getGeocode());
+                if (lists.isEmpty()) {
+                    continue;
+                }
+
+                for (Integer listId : lists) {
+                    add.bindLong(1, listId);
+                    add.bindString(2, cache.getGeocode());
+                    add.execute();
+                }
+
+                cache.getLists().addAll(lists);
+            }
+            database.setTransactionSuccessful();
+        } finally {
+            database.endTransaction();
+        }
+    }
+
     public static boolean isInitialized() {
         return database != null;
     }
@@ -3153,12 +3183,15 @@ public class DataStore {
         setVisitDate(Collections.singletonList(geocode), System.currentTimeMillis());
     }
 
-    public static void markDropped(final Collection<Geocache> caches) {
+    public static Map<String, Set<Integer>> markDropped(final Collection<Geocache> caches) {
         final SQLiteStatement remove = PreparedStatement.REMOVE_FROM_ALL_LISTS.getStatement();
+        final Map<String, Set<Integer>> oldLists = new HashMap<>();
 
         database.beginTransaction();
         try {
             for (final Geocache cache : caches) {
+                oldLists.put(cache.getGeocode(), loadLists(cache.getGeocode()));
+
                 remove.bindString(1, cache.getGeocode());
                 remove.execute();
 
@@ -3168,6 +3201,8 @@ public class DataStore {
         } finally {
             database.endTransaction();
         }
+
+        return oldLists;
     }
 
     @Nullable
