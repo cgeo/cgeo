@@ -6,14 +6,14 @@ import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.Log;
 
-import okhttp3.Response;
 import org.apache.commons.lang3.StringUtils;
-import rx.Scheduler.Worker;
-import rx.functions.Action0;
 
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.concurrent.TimeUnit;
+
+import okhttp3.Response;
+import rx.Scheduler.Worker;
+import rx.functions.Action0;
 
 public class Send2CgeoDownloader {
 

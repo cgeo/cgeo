@@ -11,8 +11,6 @@ import cgeo.geocaching.utils.CancellableHandler;
 
 import android.os.Message;
 
-import java.util.Collections;
-
 public class WaypointsTest extends CGeoTestCase {
 
     public static final CancellableHandler handler = new CancellableHandler() {

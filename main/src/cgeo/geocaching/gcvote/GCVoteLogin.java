@@ -1,6 +1,5 @@
 package cgeo.geocaching.gcvote;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.connector.AbstractLogin;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.network.Network;
@@ -8,6 +7,7 @@ import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.settings.Credentials;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
+
 import org.apache.commons.io.Charsets;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
@@ -17,9 +17,6 @@ import org.xmlpull.v1.XmlPullParserFactory;
 import java.io.InputStream;
 
 public class GCVoteLogin extends AbstractLogin {
-
-    private final CgeoApplication app = CgeoApplication.getInstance();
-    private String sessionId = null;
 
     private GCVoteLogin() {
         // singleton
