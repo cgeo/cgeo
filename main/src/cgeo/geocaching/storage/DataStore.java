@@ -2454,6 +2454,10 @@ public class DataStore {
                     Log.d("Database clean: removing obsolete log images records");
                     database.delete(dbTableLogImages, "log_id NOT IN (SELECT _id FROM " + dbTableLogs + ")", null);
 
+                    // remove non-existing caches from lists
+                    Log.d("Database clean: removing non-existing caches from lists");
+                    database.delete(dbTableCachesLists, "geocode NOT IN (SELECT geocode FROM " + dbTableCaches + ")", null);
+
                     // Remove the obsolete "_others" directory where the user avatar used to be stored.
                     FileUtils.deleteDirectory(LocalStorage.getStorageDir("_others"));
 
