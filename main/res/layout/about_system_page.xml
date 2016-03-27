@@ -11,12 +11,27 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical" >
-        <Button android:id="@+id/copy"
-            android:layout_width="wrap_content"
+
+        <LinearLayout
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="@string/copy_to_clipboard"
-            android:layout_gravity="center_horizontal"
-            android:padding="12dp" />
+            android:orientation="horizontal" >
+
+            <Button android:id="@+id/copy"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/copy_to_clipboard"
+                    android:padding="12dp" />
+
+            <Button android:id="@+id/share"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/about_system_info_send_button"
+                    android:padding="12dp" />
+        </LinearLayout>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
