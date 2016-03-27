@@ -118,6 +118,7 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
 
         @Bind(R.id.system) protected TextView system;
         @Bind(R.id.copy) protected Button copy;
+        @Bind(R.id.share) protected Button share;
 
         @Override
         public ScrollView getDispatchedView(final ViewGroup parentView) {
@@ -132,6 +133,18 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
                 public void onClick(final View view) {
                     ClipboardUtils.copyToClipboard(systemInfo);
                     showShortToast(getString(R.string.clipboard_copy_ok));
+                }
+            });
+            share.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(final View view) {
+                    ClipboardUtils.copyToClipboard(systemInfo);
+                    Intent share = new Intent(android.content.Intent.ACTION_SENDTO);
+                    share.setType("message/rfc822");
+                    share.setData(Uri.parse("mailto:"));
+                    share.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.about_system_info));
+                    share.putExtra(Intent.EXTRA_TEXT, systemInfo);
+                    startActivity(Intent.createChooser(share, getString(R.string.about_system_info_send_chooser)));
                 }
             });
             return view;
