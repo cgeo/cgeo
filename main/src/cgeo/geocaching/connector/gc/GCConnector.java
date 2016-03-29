@@ -27,6 +27,7 @@ import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
+import cgeo.geocaching.settings.Credentials;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.storage.DataStore;
@@ -372,6 +373,11 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     @Override
     public String getUserName() {
         return GCLogin.getInstance().getActualUserName();
+    }
+
+    @Override
+    public Credentials getCredentials() {
+        return Settings.getCredentials(R.string.pref_username, R.string.pref_password);
     }
 
     @Override

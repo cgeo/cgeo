@@ -138,8 +138,6 @@ public abstract class AbstractCredentialsAuthorizationActivity extends AbstractA
 
     protected abstract StatusCode checkCredentials(final Credentials credentials);
 
-    protected abstract Credentials getCredentials();
-
     protected abstract String getAuthTitle();
 
     protected String getAuthDialogCompleted() {

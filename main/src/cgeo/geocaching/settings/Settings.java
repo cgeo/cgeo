@@ -315,6 +315,20 @@ public class Settings {
     }
 
     /**
+     * Get login and password information from preference key id.
+     *
+     * @param usernamePreferenceKey Username preference key id
+     * @param passwordPreferenceKey Password preference key id
+     * @return the credential information
+     */
+    @NonNull
+    public static Credentials getCredentials(final int usernamePreferenceKey, final int passwordPreferenceKey) {
+        final String username = getString(usernamePreferenceKey, StringUtils.EMPTY);
+        final String password = getString(passwordPreferenceKey, StringUtils.EMPTY);
+        return new Credentials(username, password);
+    }
+
+    /**
      * Get login and password information.
      *
      * @param connector the connector to retrieve the login information from
@@ -322,9 +336,7 @@ public class Settings {
      */
     @NonNull
     public static Credentials getCredentials(final @NonNull ICredentials connector) {
-        final String username = getString(connector.getUsernamePreferenceKey(), StringUtils.EMPTY);
-        final String password = getString(connector.getPasswordPreferenceKey(), StringUtils.EMPTY);
-        return new Credentials(username, password);
+        return getCredentials(connector.getUsernamePreferenceKey(), connector.getPasswordPreferenceKey());
     }
 
     /**

@@ -18,6 +18,7 @@ import cgeo.geocaching.loaders.RecaptchaReceiver;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.settings.Credentials;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.utils.CancellableHandler;
@@ -153,6 +154,11 @@ public class ECConnector extends AbstractConnector implements ISearchByGeocode, 
     @Override
     public String getUserName() {
         return ecLogin.getActualUserName();
+    }
+
+    @Override
+    public Credentials getCredentials() {
+        return Settings.getCredentials(R.string.pref_ecusername, R.string.pref_ecpassword);
     }
 
     @Override

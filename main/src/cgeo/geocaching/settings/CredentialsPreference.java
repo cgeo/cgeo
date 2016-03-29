@@ -12,12 +12,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import butterknife.ButterKnife;
 import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.Intents;
 import cgeo.geocaching.connector.capability.ICredentials;
 import cgeo.geocaching.connector.ec.ECConnector;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.gcvote.GCVote;
 import cgeo.geocaching.network.HtmlImage;
-import cgeo.geocaching.settings.AbstractCredentialsAuthorizationActivity.CredentialsAuthParameters;
 import cgeo.geocaching.R;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
@@ -29,29 +29,23 @@ public class CredentialsPreference extends AbstractClickablePreference {
     private static final int NO_KEY = -1;
 
     private enum CredentialActivityMapping {
-        NONE(NO_KEY, null, null, null),
-        GEOCACHING(R.string.pref_fakekey_gc_authorization, GCAuthorizationActivity.class, GCAuthorizationActivity.GEOCACHING_CREDENTIAL_AUTH_PARAMS, GCConnector.getInstance()),
-        EXTREMCACHING(R.string.pref_fakekey_ec_authorization, ECAuthorizationActivity.class, ECAuthorizationActivity.EXTREMCACHING_CREDENTIAL_AUTH_PARAMS, ECConnector.getInstance()),
-        GCVOTE(R.string.pref_fakekey_gcvote_authorization, GCVoteAuthorizationActivity.class, GCVoteAuthorizationActivity.GCVOTE_CREDENTIAL_AUTH_PARAMS, GCVote.getInstance());
+        NONE(NO_KEY, null, null),
+        GEOCACHING(R.string.pref_fakekey_gc_authorization, GCAuthorizationActivity.class, GCConnector.getInstance()),
+        EXTREMCACHING(R.string.pref_fakekey_ec_authorization, ECAuthorizationActivity.class, ECConnector.getInstance()),
+        GCVOTE(R.string.pref_fakekey_gcvote_authorization, GCVoteAuthorizationActivity.class, GCVote.getInstance());
 
         public final int prefKeyId;
         private final Class<?> authActivity;
-        private final CredentialsAuthParameters credentialsParams;
         private final ICredentials connector;
 
-        CredentialActivityMapping(final int prefKeyId, @NonNull final Class<?> authActivity, @NonNull final CredentialsAuthParameters credentialsParams, @NonNull final ICredentials connector) {
+        CredentialActivityMapping(final int prefKeyId, @NonNull final Class<?> authActivity, @NonNull final ICredentials connector) {
             this.prefKeyId = prefKeyId;
             this.authActivity = authActivity;
-            this.credentialsParams = credentialsParams;
             this.connector = connector;
         }
 
         public Class<?> getAuthActivity() {
             return authActivity;
-        }
-
-        public CredentialsAuthParameters getCredentialsParams() {
-            return credentialsParams;
         }
 
         public ICredentials getConnector() {
@@ -95,7 +89,11 @@ public class CredentialsPreference extends AbstractClickablePreference {
             public boolean onPreferenceClick(final Preference preference) {
                 if (credentialsMapping != CredentialActivityMapping.NONE) {
                     final Intent checkIntent = new Intent(preference.getContext(), credentialsMapping.getAuthActivity());
-                    credentialsMapping.getCredentialsParams().setCredentialsAuthExtras(checkIntent);
+
+                    final Credentials credentials = credentialsMapping.getConnector().getCredentials();
+                    checkIntent.putExtra(Intents.EXTRA_CREDENTIALS_AUTH_USERNAME, credentials.getUsernameRaw());
+                    checkIntent.putExtra(Intents.EXTRA_CREDENTIALS_AUTH_PASSWORD, credentials.getPasswordRaw());
+
                     settingsActivity.startActivityForResult(checkIntent, credentialsMapping.prefKeyId);
                 }
                 return false; // no shared preference has to be changed
