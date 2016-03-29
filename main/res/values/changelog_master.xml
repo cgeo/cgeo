@@ -3,8 +3,13 @@
   <!-- changelog for the master branch -->
   <string name="changelog_master" translatable="false">
     <b>Next feature release:</b>\n
+    · New: Allow caches to be stored on more than one list\n
     · New: Different http libraries for more efficient network communication\n
     · New: Update of Locus API for improved interworking\n
+    · New: New account administration layout\n
+    · New: Removed option to show only short description of a cache\n
+    · Fix: Twitter NUMBER template showing wrong find count\n
+    · Fix: Terain filter was going up to T7.5\n
     \n
     \n
   </string>
