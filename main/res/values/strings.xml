@@ -158,7 +158,7 @@
     <string name="err_unknown_address">c:geo was unable to map this address to an existing location</string>
     <string name="err_comm">Unknown communication error</string>
     <string name="err_missing_auth">No username and/or password set.</string>
-    <string name="err_wrong">Login information incorrect</string>
+    <string name="err_wrong">Wrong username and/or password.</string>
     <string name="err_maintenance">Geocaching.com is down for maintenance. c:geo works offline with Stored caches.</string>
     <string name="err_license">You have not agreed to the Geocaching.com license agreement, so c:geo can\'t load cache coordinates.</string>
     <string name="err_unvalidated_account">You must validate your account on the Geocaching.com website first.</string>
