@@ -16,18 +16,17 @@ import rx.functions.Action1;
 import rx.functions.Func0;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.preference.Preference;
 import android.util.AttributeSet;
 
 public class RegisterSend2CgeoPreference extends AbstractClickablePreference {
 
-    public RegisterSend2CgeoPreference(final Context context, final AttributeSet attrs) {
-        super(context, attrs);
+    public RegisterSend2CgeoPreference(final SettingsActivity settingsActivity, final AttributeSet attrs) {
+        super(settingsActivity, attrs);
     }
 
-    public RegisterSend2CgeoPreference(final Context context, final AttributeSet attrs, final int defStyle) {
-        super(context, attrs, defStyle);
+    public RegisterSend2CgeoPreference(final SettingsActivity settingsActivity, final AttributeSet attrs, final int defStyle) {
+        super(settingsActivity, attrs, defStyle);
     }
 
     @Override
