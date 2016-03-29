@@ -10,7 +10,6 @@ import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.BundleUtils;
-import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.Nullable;
@@ -18,11 +17,8 @@ import org.eclipse.jdt.annotation.NonNull;
 import rx.Observable;
 import rx.android.app.AppObservable;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.ActivityNotFoundException;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -35,11 +31,9 @@ import rx.functions.Func0;
 
 public abstract class AbstractCredentialsAuthorizationActivity extends AbstractActivity {
 
-    @NonNull private String connectorUrlRegister = StringUtils.EMPTY;
     @NonNull private String connectorUsername = StringUtils.EMPTY;
 
     @Bind(R.id.check) protected Button checkButton;
-    @Bind(R.id.register) protected Button registerButton;
     @Bind(R.id.auth_1) protected TextView auth1;
     @Bind(R.id.auth_2) protected TextView auth2;
     @Bind(R.id.username) protected EditText usernameEditText;
@@ -51,7 +45,6 @@ public abstract class AbstractCredentialsAuthorizationActivity extends AbstractA
 
         final Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            connectorUrlRegister = BundleUtils.getString(extras, Intents.EXTRA_CREDENTIALS_AUTH_URL_REGISTER, connectorUrlRegister);
             connectorUsername = BundleUtils.getString(extras, Intents.EXTRA_CREDENTIALS_AUTH_USERNAME, connectorUsername);
         }
 
@@ -63,14 +56,6 @@ public abstract class AbstractCredentialsAuthorizationActivity extends AbstractA
         checkButton.setText(getAuthCheck());
         checkButton.setOnClickListener(new CheckListener());
         enableCheckButtonIfReady();
-
-        if (StringUtils.isEmpty(connectorUrlRegister)) {
-            registerButton.setVisibility(View.GONE);
-        } else {
-            registerButton.setText(getAuthRegister());
-            registerButton.setEnabled(true);
-            registerButton.setOnClickListener(new RegisterListener());
-        }
 
         usernameEditText.setText(connectorUsername);
 
@@ -143,20 +128,6 @@ public abstract class AbstractCredentialsAuthorizationActivity extends AbstractA
         }
     }
 
-    private class RegisterListener implements View.OnClickListener {
-
-        @Override
-        public void onClick(final View view) {
-            final Activity activity = AbstractCredentialsAuthorizationActivity.this;
-            try {
-                activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(connectorUrlRegister)));
-            } catch (final ActivityNotFoundException e) {
-                Log.e("Cannot find suitable activity", e);
-                ActivityMixin.showToast(activity, R.string.err_application_no);
-            }
-        }
-    }
-
     // get resources from derived class
 
     protected abstract void setCredentials(final Credentials credentials);
@@ -191,10 +162,6 @@ public abstract class AbstractCredentialsAuthorizationActivity extends AbstractA
         return res.getString(R.string.auth_check_again, getAuthTitle());
     }
 
-    protected String getAuthRegister() {
-        return res.getString(R.string.auth_register, getAuthTitle());
-    }
-
     /**
      * Enable or disable the start button depending on login/password field.
      * If both fields are not empty, button is enabled.
@@ -223,20 +190,15 @@ public abstract class AbstractCredentialsAuthorizationActivity extends AbstractA
     }
 
     public static class CredentialsAuthParameters {
-        @Nullable public final String urlRegister;
         @Nullable public final String username;
 
-        public CredentialsAuthParameters(@Nullable final String urlRegister, @Nullable final String username) {
-            this.urlRegister = urlRegister;
+        public CredentialsAuthParameters(@Nullable final String username) {
             this.username = username;
         }
 
         public void setCredentialsAuthExtras(final Intent intent) {
             if (intent != null) {
                 intent.putExtra(Intents.EXTRA_CREDENTIALS_AUTH_USERNAME, StringUtils.defaultIfBlank(username, StringUtils.EMPTY));
-                if (urlRegister != null){
-                    intent.putExtra(Intents.EXTRA_CREDENTIALS_AUTH_URL_REGISTER, urlRegister);
-                }
             }
         }
 
