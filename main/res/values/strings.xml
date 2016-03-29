@@ -403,7 +403,7 @@
     <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
     <string name="about_help">Help</string>
     <string name="about_system_include">Please include the following system information when sending a bug report or asking for more information about c:geo:</string>
-    <string name="about_system_info_send_button">Send</string>
+    <string name="about_system_info_send_button">Send by mail…</string>
     <string name="about_system_info">c:geo system information</string>
     <string name="about_system_info_send_chooser">Send system information</string>
     <string name="changelog_github">List of all changes</string>
