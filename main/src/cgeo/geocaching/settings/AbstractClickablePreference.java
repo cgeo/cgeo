@@ -1,5 +1,7 @@
 package cgeo.geocaching.settings;
 
+import cgeo.geocaching.R;
+
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -10,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-import cgeo.geocaching.R;
 
 abstract class AbstractClickablePreference extends Preference implements View.OnLongClickListener {
 
@@ -30,16 +31,16 @@ abstract class AbstractClickablePreference extends Preference implements View.On
     protected View onCreateView(final ViewGroup parent) {
         setOnPreferenceClickListener(getOnPreferenceClickListener(activity));
 
-        ListView listView = (ListView)parent;
+        final ListView listView = (ListView)parent;
         listView.setOnItemLongClickListener(new ListView.OnItemLongClickListener() {
 
             @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                ListView listView = (ListView) parent;
-                ListAdapter listAdapter = listView.getAdapter();
-                Object obj = listAdapter.getItem(position);
+            public boolean onItemLongClick(final AdapterView<?> parent, final View view, final int position, final long id) {
+                final ListView listView = (ListView) parent;
+                final ListAdapter listAdapter = listView.getAdapter();
+                final Object obj = listAdapter.getItem(position);
                 if (obj instanceof View.OnLongClickListener) {
-                    View.OnLongClickListener longListener = (View.OnLongClickListener) obj;
+                    final View.OnLongClickListener longListener = (View.OnLongClickListener) obj;
                     return longListener.onLongClick(view);
                 }
                 return false;
@@ -51,6 +52,7 @@ abstract class AbstractClickablePreference extends Preference implements View.On
 
     protected abstract OnPreferenceClickListener getOnPreferenceClickListener(final SettingsActivity settingsActivity);
 
+    @SuppressWarnings("static-method")
     protected boolean isAuthorized() {
         return false;
     }
@@ -58,7 +60,7 @@ abstract class AbstractClickablePreference extends Preference implements View.On
     protected void revokeAuthorization() {}
 
     @Override
-    public boolean onLongClick(View v) {
+    public boolean onLongClick(final View v) {
         if (!isAuthorized()) {
             return false;
         }
