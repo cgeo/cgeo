@@ -1,7 +1,6 @@
 package cgeo.geocaching.settings;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.preference.Preference;
 import android.util.AttributeSet;
@@ -71,20 +70,20 @@ public class CredentialsPreference extends AbstractClickablePreference {
 
     private final CredentialActivityMapping credentialsMapping;
 
-    public CredentialsPreference(final Context context, final AttributeSet attrs) {
-        super(context, attrs);
+    public CredentialsPreference(final SettingsActivity settingsActivity, final AttributeSet attrs) {
+        super(settingsActivity, attrs);
         this.credentialsMapping = getAuthorization();
-        init(context);
+        init(settingsActivity);
     }
 
-    public CredentialsPreference(final Context context, final AttributeSet attrs, final int defStyle) {
-        super(context, attrs, defStyle);
+    public CredentialsPreference(final SettingsActivity settingsActivity, final AttributeSet attrs, final int defStyle) {
+        super(settingsActivity, attrs, defStyle);
         this.credentialsMapping = getAuthorization();
-        init(context);
+        init(settingsActivity);
     }
 
-    private void init(final Context context) {
-        inflater = ((Activity) context).getLayoutInflater();
+    private void init(final SettingsActivity settingsActivity) {
+        inflater = settingsActivity.getLayoutInflater();
     }
 
     @Override

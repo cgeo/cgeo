@@ -3,7 +3,6 @@ package cgeo.geocaching.settings;
 import cgeo.geocaching.R;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.preference.Preference;
 import android.util.AttributeSet;
@@ -17,14 +16,14 @@ abstract class AbstractClickablePreference extends Preference implements View.On
 
     private final SettingsActivity activity;
 
-    AbstractClickablePreference(final Context context, final AttributeSet attrs) {
-        super(context, attrs);
-        activity = (SettingsActivity) context;
+    AbstractClickablePreference(final SettingsActivity settingsActivity, final AttributeSet attrs) {
+        super(settingsActivity, attrs);
+        activity = settingsActivity;
     }
 
-    AbstractClickablePreference(final Context context, final AttributeSet attrs, final int defStyle) {
-        super(context, attrs, defStyle);
-        activity = (SettingsActivity) context;
+    AbstractClickablePreference(final SettingsActivity settingsActivity, final AttributeSet attrs, final int defStyle) {
+        super(settingsActivity, attrs, defStyle);
+        activity = settingsActivity;
     }
 
     @Override
