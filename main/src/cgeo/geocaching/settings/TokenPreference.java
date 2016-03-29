@@ -5,6 +5,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.activity.TokenAuthorizationActivity.TokenAuthParameters;
 import cgeo.geocaching.connector.trackable.GeokretyAuthorizationActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.preference.Preference;
 import android.util.AttributeSet;
@@ -41,13 +42,13 @@ public class TokenPreference extends AbstractClickablePreference {
         return TokenActivityMapping.NONE;
     }
 
-    public TokenPreference(final SettingsActivity settingsActivity, final AttributeSet attrs) {
-        super(settingsActivity, attrs);
+    public TokenPreference(final Context context, final AttributeSet attrs) {
+        super(context, attrs);
         this.tokenMapping = getAuthorization();
     }
 
-    public TokenPreference(final SettingsActivity settingsActivity, final AttributeSet attrs, final int defStyle) {
-        super(settingsActivity, attrs, defStyle);
+    public TokenPreference(final Context context, final AttributeSet attrs, final int defStyle) {
+        super(context, attrs, defStyle);
         this.tokenMapping = getAuthorization();
     }
 
