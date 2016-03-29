@@ -32,6 +32,7 @@ import rx.functions.Func0;
 public abstract class AbstractCredentialsAuthorizationActivity extends AbstractActivity {
 
     @NonNull private String connectorUsername = StringUtils.EMPTY;
+    @NonNull private String connectorPassword = StringUtils.EMPTY;
 
     @Bind(R.id.check) protected Button checkButton;
     @Bind(R.id.auth_1) protected TextView auth1;
@@ -46,6 +47,7 @@ public abstract class AbstractCredentialsAuthorizationActivity extends AbstractA
         final Bundle extras = getIntent().getExtras();
         if (extras != null) {
             connectorUsername = BundleUtils.getString(extras, Intents.EXTRA_CREDENTIALS_AUTH_USERNAME, connectorUsername);
+            connectorPassword = BundleUtils.getString(extras, Intents.EXTRA_CREDENTIALS_AUTH_PASSWORD, connectorPassword);
         }
 
         setTitle(getAuthTitle());
@@ -58,6 +60,8 @@ public abstract class AbstractCredentialsAuthorizationActivity extends AbstractA
         enableCheckButtonIfReady();
 
         usernameEditText.setText(connectorUsername);
+        passwordEditText.setText(connectorPassword);
+        enableCheckButtonIfReady();
 
         final EnableStartButtonWatcher enableStartButtonWatcher = new EnableStartButtonWatcher();
         usernameEditText.addTextChangedListener(enableStartButtonWatcher);
@@ -191,14 +195,17 @@ public abstract class AbstractCredentialsAuthorizationActivity extends AbstractA
 
     public static class CredentialsAuthParameters {
         @Nullable public final String username;
+        @Nullable public final String password;
 
-        public CredentialsAuthParameters(@Nullable final String username) {
+        public CredentialsAuthParameters(@Nullable final String username, @Nullable final String password) {
             this.username = username;
+            this.password = password;
         }
 
         public void setCredentialsAuthExtras(final Intent intent) {
             if (intent != null) {
                 intent.putExtra(Intents.EXTRA_CREDENTIALS_AUTH_USERNAME, StringUtils.defaultIfBlank(username, StringUtils.EMPTY));
+                intent.putExtra(Intents.EXTRA_CREDENTIALS_AUTH_PASSWORD, StringUtils.defaultIfBlank(password, StringUtils.EMPTY));
             }
         }
 

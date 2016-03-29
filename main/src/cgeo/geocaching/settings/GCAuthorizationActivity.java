@@ -10,7 +10,8 @@ public class GCAuthorizationActivity extends AbstractCredentialsAuthorizationAct
 
 
     public static final CredentialsAuthParameters GEOCACHING_CREDENTIAL_AUTH_PARAMS = new CredentialsAuthParameters(
-        (Settings.getCredentials(GCConnector.getInstance()).isValid() ? Settings.getCredentials(GCConnector.getInstance()).getUserName() : ""));
+        Settings.getCredentials(GCConnector.getInstance()).getUsernameRaw(),
+        Settings.getCredentials(GCConnector.getInstance()).getPasswordRaw());
 
     @Override
     protected Credentials getCredentials() {

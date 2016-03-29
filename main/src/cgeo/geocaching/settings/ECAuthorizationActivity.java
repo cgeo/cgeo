@@ -8,7 +8,8 @@ import cgeo.geocaching.enumerations.StatusCode;
 public class ECAuthorizationActivity extends AbstractCredentialsAuthorizationActivity {
 
     public static final CredentialsAuthParameters EXTREMCACHING_CREDENTIAL_AUTH_PARAMS = new CredentialsAuthParameters(
-            Settings.getCredentials(ECConnector.getInstance()).getUsernameRaw());
+            Settings.getCredentials(ECConnector.getInstance()).getUsernameRaw(),
+            Settings.getCredentials(ECConnector.getInstance()).getPasswordRaw());
 
     @Override
     protected Credentials getCredentials() {
