@@ -8,16 +8,6 @@ import cgeo.geocaching.network.HtmlImage;
 
 public class GCAuthorizationActivity extends AbstractCredentialsAuthorizationActivity {
 
-
-    public static final CredentialsAuthParameters GEOCACHING_CREDENTIAL_AUTH_PARAMS = new CredentialsAuthParameters(
-        GCConnector.getInstance().getCreateAccountUrl(),
-        (Settings.getCredentials(GCConnector.getInstance()).isValid() ? Settings.getCredentials(GCConnector.getInstance()).getUserName() : ""));
-
-    @Override
-    protected Credentials getCredentials() {
-        return Settings.getCredentials(GCConnector.getInstance());
-    }
-
     @Override
     protected void setCredentials(final Credentials credentials) {
         Settings.setCredentials(GCConnector.getInstance(), credentials);
@@ -30,7 +20,7 @@ public class GCAuthorizationActivity extends AbstractCredentialsAuthorizationAct
 
     @Override
     protected StatusCode checkCredentials(final Credentials credentials) {
-        Credentials currentCredentials = getCredentials();
+        Credentials currentCredentials = GCConnector.getInstance().getCredentials();
         if (currentCredentials.isInvalid() ||
                 !currentCredentials.getUserName().equals(credentials.getUserName()) ||
                 !currentCredentials.getPassword().equals(credentials.getPassword())) {

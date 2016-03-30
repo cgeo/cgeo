@@ -7,15 +7,6 @@ import cgeo.geocaching.gcvote.GCVoteLogin;
 
 public class GCVoteAuthorizationActivity extends AbstractCredentialsAuthorizationActivity {
 
-    public static final CredentialsAuthParameters GCVOTE_CREDENTIAL_AUTH_PARAMS = new CredentialsAuthParameters(
-            GCVote.getCreateAccountUrl(),
-            Settings.getGCVoteLogin().getUsernameRaw());
-
-    @Override
-    protected Credentials getCredentials() {
-        return Settings.getGCVoteLogin();
-    }
-
     @Override
     protected void setCredentials(final Credentials credentials) {
         Settings.setCredentials(GCVote.getInstance(), credentials);
