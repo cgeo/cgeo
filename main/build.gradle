@@ -190,13 +190,6 @@ android {
 }
 
 /*
- * IDEA
- */
-apply plugin: 'idea'
-
-idea.module.testSourceDirs += file('tests/src-android')
-
-/*
  * AndroidAnnotations, https://github.com/excilys/androidannotations/wiki/building-project-gradle
  */
 apply plugin: 'android-apt'
