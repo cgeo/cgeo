@@ -278,8 +278,8 @@ dependencies {
 /*
  * AndroidAnnotations, https://github.com/excilys/androidannotations/wiki/building-project-gradle
  */
-    apt 'org.androidannotations:androidannotations:3.3.2'
-    compile 'org.androidannotations:androidannotations-api:3.3.2'
+    apt 'org.androidannotations:androidannotations:4.0.0'
+    compile 'org.androidannotations:androidannotations-api:4.0.0'
 
 /*
  * ButterKnife view injection, https://github.com/JakeWharton/butterknife
