@@ -55,7 +55,7 @@ import rx.subscriptions.Subscriptions;
 
 public class ImagesList {
 
-    private BitmapDrawable currentDrawable;
+    private ImageView currentView;
     private Image currentImage;
 
     public enum ImageType {
@@ -81,6 +81,7 @@ public class ImagesList {
      * map image view id to image
      */
     private final SparseArray<Image> images = new SparseArray<>();
+    private final SparseArray<Geopoint> geoPoints = new SparseArray<>();
     private final String geocode;
     private LinearLayout imagesView;
 
@@ -168,15 +169,20 @@ public class ImagesList {
             view.findViewById(R.id.progress_bar).setVisibility(View.GONE);
 
             imageView.setId(image.hashCode());
-            addGeoOverlay(imageViewLayout, img);
             images.put(imageView.getId(), img);
+
+            final Geopoint gpt = getImageLocation(img);
+            if (gpt != null) {
+                addGeoOverlay(imageViewLayout, img, gpt);
+                geoPoints.put(imageView.getId(), gpt);
+            }
 
             view.invalidate();
         }
     }
 
     @Nullable
-    private GeoLocation getImageLocation(final Image image) {
+    private Geopoint getImageLocation(final Image image) {
         try {
             final File file = LocalStorage.getStorageFile(geocode, image.getUrl(), true, false);
             final Metadata metadata = ImageMetadataReader.readMetadata(file);
@@ -189,40 +195,36 @@ public class ImagesList {
                 // Try to read out the location, making sure it's non-zero
                 final GeoLocation geoLocation = gpsDirectory.getGeoLocation();
                 if (geoLocation != null && !geoLocation.isZero()) {
-                    return geoLocation;
+                    return new Geopoint(geoLocation.getLatitude(), geoLocation.getLongitude());
                 }
             }
         } catch (final Exception e) {
-            Log.e("ImagesList.addGeoOverlay", e);
+            Log.e("ImagesList.getImageLocation", e);
         }
         return null;
     }
 
-    private void addGeoOverlay(final RelativeLayout imageViewLayout, final Image img) {
-        final GeoLocation geoLocation = getImageLocation(img);
-        if (geoLocation != null) {
-            final ImageView geoOverlay = (ImageView) imageViewLayout.findViewById(R.id.geo_overlay);
-            geoOverlay.setVisibility(View.VISIBLE);
-            geoOverlay.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(final View wpNavView) {
-                    final Geopoint gpt = new Geopoint(geoLocation.getLatitude(), geoLocation.getLongitude());
-                    wpNavView.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(final View v) {
-                            NavigationAppFactory.startDefaultNavigationApplication(1, activity, gpt);
-                        }
-                    });
-                    wpNavView.setOnLongClickListener(new View.OnLongClickListener() {
-                        @Override
-                        public boolean onLongClick(final View v) {
-                            NavigationAppFactory.startDefaultNavigationApplication(2, activity, gpt);
-                            return true;
-                        }
-                    });
-                }
-            });
-        }
+    private void addGeoOverlay(final RelativeLayout imageViewLayout, final Image img, final Geopoint gpt) {
+        final ImageView geoOverlay = (ImageView) imageViewLayout.findViewById(R.id.geo_overlay);
+        geoOverlay.setVisibility(View.VISIBLE);
+        geoOverlay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View wpNavView) {
+                wpNavView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(final View v) {
+                        NavigationAppFactory.startDefaultNavigationApplication(1, activity, gpt);
+                    }
+                });
+                wpNavView.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(final View v) {
+                        NavigationAppFactory.startDefaultNavigationApplication(2, activity, gpt);
+                        return true;
+                    }
+                });
+            }
+        });
     }
 
     private void removeAllViews() {
@@ -231,6 +233,7 @@ public class ImagesList {
         }
         bitmaps.clear();
         images.clear();
+        geoPoints.clear();
 
         imagesView.removeAllViews();
     }
@@ -240,12 +243,13 @@ public class ImagesList {
         activity.getMenuInflater().inflate(R.menu.images_list_context, menu);
         final Resources res = activity.getResources();
         menu.setHeaderTitle(res.getString(R.string.cache_image));
-        final ImageView view = (ImageView) v;
-        currentDrawable = (BitmapDrawable) view.getDrawable();
-        currentImage = images.get(view.getId());
+        currentView = (ImageView) v;
+        currentImage = images.get(currentView.getId());
+        menu.findItem(R.id.menu_navigate).setVisible(geoPoints.get(currentView.getId()) != null);
     }
 
     public boolean onContextItemSelected(final MenuItem item) {
+        final BitmapDrawable currentDrawable = (BitmapDrawable) currentView.getDrawable();
         switch (item.getItemId()) {
             case R.id.image_open_file:
                 viewImageInStandardApp(currentImage, currentDrawable);
@@ -253,6 +257,12 @@ public class ImagesList {
             case R.id.image_open_browser:
                 if (currentImage != null) {
                     currentImage.openInBrowser(activity);
+                }
+                return true;
+            case R.id.menu_navigate:
+                final Geopoint geopoint = geoPoints.get(currentView.getId());
+                if (geopoint != null) {
+                    NavigationAppFactory.showNavigationMenu(activity, null, null, geopoint);
                 }
                 return true;
             default:
