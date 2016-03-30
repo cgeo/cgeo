@@ -157,7 +157,7 @@ public class ImagesList {
             imageView.setClickable(true);
             imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(final View arg0) {
+                public void onClick(final View view) {
                     viewImageInStandardApp(img, image);
                 }
             });
@@ -171,10 +171,10 @@ public class ImagesList {
             imageView.setId(image.hashCode());
             images.put(imageView.getId(), img);
 
-            final Geopoint gpt = getImageLocation(img);
-            if (gpt != null) {
-                addGeoOverlay(imageViewLayout, img, gpt);
-                geoPoints.put(imageView.getId(), gpt);
+            final Geopoint geoPoint = getImageLocation(img);
+            if (geoPoint != null) {
+                addGeoOverlay(imageViewLayout, geoPoint);
+                geoPoints.put(imageView.getId(), geoPoint);
             }
 
             view.invalidate();
@@ -204,7 +204,7 @@ public class ImagesList {
         return null;
     }
 
-    private void addGeoOverlay(final RelativeLayout imageViewLayout, final Image img, final Geopoint gpt) {
+    private void addGeoOverlay(final RelativeLayout imageViewLayout, final Geopoint gpt) {
         final ImageView geoOverlay = (ImageView) imageViewLayout.findViewById(R.id.geo_overlay);
         geoOverlay.setVisibility(View.VISIBLE);
         geoOverlay.setOnClickListener(new View.OnClickListener() {
