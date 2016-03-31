@@ -8,6 +8,11 @@ import cgeo.geocaching.enumerations.StatusCode;
 public class ECAuthorizationActivity extends AbstractCredentialsAuthorizationActivity {
 
     @Override
+    protected String getCreateAccountUrl() {
+        return ECConnector.getInstance().getCreateAccountUrl();
+    }
+
+    @Override
     protected void setCredentials(final Credentials credentials) {
         Settings.setCredentials(ECConnector.getInstance(), credentials);
     }

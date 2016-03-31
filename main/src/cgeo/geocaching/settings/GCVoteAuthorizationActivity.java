@@ -8,6 +8,11 @@ import cgeo.geocaching.gcvote.GCVoteLogin;
 public class GCVoteAuthorizationActivity extends AbstractCredentialsAuthorizationActivity {
 
     @Override
+    protected String getCreateAccountUrl() {
+        return GCVote.getCreateAccountUrl();
+    }
+
+    @Override
     protected void setCredentials(final Credentials credentials) {
         Settings.setCredentials(GCVote.getInstance(), credentials);
     }

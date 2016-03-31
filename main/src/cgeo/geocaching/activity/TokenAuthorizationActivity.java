@@ -43,7 +43,6 @@ public abstract class TokenAuthorizationActivity extends AbstractActivity {
     private static final int ERROR_EXT_MSG = 2;
 
     @NonNull private String urlToken = StringUtils.EMPTY;
-    @NonNull private String urlRegister = StringUtils.EMPTY;
     @NonNull private String fieldUsername = StringUtils.EMPTY;
     @NonNull private String fieldPassword = StringUtils.EMPTY;
 
@@ -91,7 +90,6 @@ public abstract class TokenAuthorizationActivity extends AbstractActivity {
         final Bundle extras = getIntent().getExtras();
         if (extras != null) {
             urlToken = BundleUtils.getString(extras, Intents.EXTRA_TOKEN_AUTH_URL_TOKEN, urlToken);
-            urlRegister = BundleUtils.getString(extras, Intents.EXTRA_TOKEN_AUTH_URL_REGISTER, urlRegister);
             fieldUsername = BundleUtils.getString(extras, Intents.EXTRA_TOKEN_AUTH_USERNAME, fieldUsername);
             fieldPassword = BundleUtils.getString(extras, Intents.EXTRA_TOKEN_AUTH_PASSWORD, fieldPassword);
         }
@@ -105,9 +103,13 @@ public abstract class TokenAuthorizationActivity extends AbstractActivity {
         startButton.setOnClickListener(new StartListener());
         enableStartButtonIfReady();
 
-        registerButton.setText(getAuthRegister());
-        registerButton.setEnabled(true);
-        registerButton.setOnClickListener(new RegisterListener());
+        if (StringUtils.isEmpty(getCreateAccountUrl())) {
+            registerButton.setVisibility(View.GONE);
+        } else {
+            registerButton.setText(getAuthRegister());
+            registerButton.setEnabled(true);
+            registerButton.setOnClickListener(new RegisterListener());
+        }
 
         startButton.setText(StringUtils.isBlank(getToken()) ? getAuthStart() : getAuthAgain());
 
@@ -196,7 +198,7 @@ public abstract class TokenAuthorizationActivity extends AbstractActivity {
         public void onClick(final View view) {
             final Activity activity = TokenAuthorizationActivity.this;
             try {
-                activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(urlRegister)));
+                activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getCreateAccountUrl())));
             } catch (final ActivityNotFoundException e) {
                 Log.e("Cannot find suitable activity", e);
                 ActivityMixin.showToast(activity, R.string.err_application_no);
@@ -205,6 +207,8 @@ public abstract class TokenAuthorizationActivity extends AbstractActivity {
     }
 
     // get resources from derived class
+
+    protected abstract String getCreateAccountUrl();
 
     protected abstract void setToken(String token);
 
@@ -274,7 +278,7 @@ public abstract class TokenAuthorizationActivity extends AbstractActivity {
     }
 
     protected String getAuthRegister() {
-        return res.getString(R.string.auth_token_register, getAuthTitle());
+        return res.getString(R.string.auth_register, getAuthTitle());
     }
 
     /**
@@ -306,16 +310,13 @@ public abstract class TokenAuthorizationActivity extends AbstractActivity {
 
     public static class TokenAuthParameters {
         @NonNull public final String urlToken;
-        @NonNull public final String urlRegister;
         @NonNull public final String fieldUsername;
         @NonNull public final String fieldPassword;
 
         public TokenAuthParameters(@NonNull final String urlToken,
-                               @NonNull final String urlRegister,
                                @NonNull final String fieldUsername,
                                @NonNull final String fieldPassword) {
             this.urlToken = urlToken;
-            this.urlRegister = urlRegister;
             this.fieldUsername = fieldUsername;
             this.fieldPassword = fieldPassword;
         }
@@ -323,7 +324,6 @@ public abstract class TokenAuthorizationActivity extends AbstractActivity {
         public void setTokenAuthExtras(final Intent intent) {
             if (intent != null) {
                 intent.putExtra(Intents.EXTRA_TOKEN_AUTH_URL_TOKEN, urlToken);
-                intent.putExtra(Intents.EXTRA_TOKEN_AUTH_URL_REGISTER, urlRegister);
                 intent.putExtra(Intents.EXTRA_TOKEN_AUTH_USERNAME, fieldUsername);
                 intent.putExtra(Intents.EXTRA_TOKEN_AUTH_PASSWORD, fieldPassword);
             }

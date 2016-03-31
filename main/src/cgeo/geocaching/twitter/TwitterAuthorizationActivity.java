@@ -21,6 +21,11 @@ public class TwitterAuthorizationActivity extends OAuthAuthorizationActivity {
             "callback://www.cgeo.org/twitter/");
 
     @Override
+    protected String getCreateAccountUrl() {
+        return "https://twitter.com/signup";
+    }
+
+    @Override
     @NonNull
     protected final ImmutablePair<String, String> getTempTokens() {
         return Settings.getTempToken();

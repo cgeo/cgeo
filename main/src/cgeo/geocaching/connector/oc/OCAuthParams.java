@@ -12,7 +12,7 @@ import android.support.annotation.StringRes;
 
 public class OCAuthParams extends OAuthParameters {
 
-    public static final OCAuthParams OC_DE_AUTH_PARAMS = new OCAuthParams("www.opencaching.de", false,
+    public static final OCAuthParams OC_DE_AUTH_PARAMS = new OCAuthParams("www.opencaching.de", false, // Todo: enable SSL
             R.string.oc_de_okapi_consumer_key, R.string.oc_de_okapi_consumer_secret, "callback://www.cgeo.org/opencaching.de/",
             R.string.auth_ocde, R.string.pref_ocde_tokenpublic, R.string.pref_ocde_tokensecret, R.string.pref_temp_ocde_token_public, R.string.pref_temp_ocde_token_secret);
 
@@ -24,7 +24,7 @@ public class OCAuthParams extends OAuthParameters {
             R.string.oc_pl_okapi_consumer_key, R.string.oc_pl_okapi_consumer_secret, "callback://www.cgeo.org/opencaching.pl/",
             R.string.auth_ocpl, R.string.pref_ocpl_tokenpublic, R.string.pref_ocpl_tokensecret, R.string.pref_temp_ocpl_token_public, R.string.pref_temp_ocpl_token_secret);
 
-    public static final OCAuthParams OC_US_AUTH_PARAMS = new OCAuthParams("www.opencaching.us", false,
+    public static final OCAuthParams OC_US_AUTH_PARAMS = new OCAuthParams("www.opencaching.us", false, // TODO: enable SSL
             R.string.oc_us_okapi_consumer_key, R.string.oc_us_okapi_consumer_secret, "callback://www.cgeo.org/opencaching.us/",
             R.string.auth_ocus, R.string.pref_ocus_tokenpublic, R.string.pref_ocus_tokensecret, R.string.pref_temp_ocus_token_public, R.string.pref_temp_ocus_token_secret);
 

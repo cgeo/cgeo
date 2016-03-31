@@ -18,9 +18,13 @@ public class GeokretyAuthorizationActivity extends TokenAuthorizationActivity {
 
     public static final TokenAuthParameters GEOKRETY_TOKEN_AUTH_PARAMS = new TokenAuthParameters(
             GeokretyConnector.URL + "/api-login2secid.php",
-            GeokretyConnector.URL + "/adduser.php",
             "login",
             "password");
+
+    @Override
+    protected String getCreateAccountUrl() {
+        return GeokretyConnector.getCreateAccountUrl();
+    }
 
     @Override
     protected void setToken(final String token) {

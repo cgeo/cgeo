@@ -9,6 +9,11 @@ import cgeo.geocaching.network.HtmlImage;
 public class GCAuthorizationActivity extends AbstractCredentialsAuthorizationActivity {
 
     @Override
+    protected String getCreateAccountUrl() {
+        return GCConnector.getInstance().getCreateAccountUrl();
+    }
+
+    @Override
     protected void setCredentials(final Credentials credentials) {
         Settings.setCredentials(GCConnector.getInstance(), credentials);
     }
