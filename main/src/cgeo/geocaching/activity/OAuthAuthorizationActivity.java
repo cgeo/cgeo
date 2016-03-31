@@ -1,5 +1,7 @@
 package cgeo.geocaching.activity;
 
+import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import butterknife.Bind;
 
 import cgeo.geocaching.Intents;
@@ -54,7 +56,9 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
     @NonNull private String callback = StringUtils.EMPTY;
     private String OAtoken = null;
     private String OAtokenSecret = null;
+
     @Bind(R.id.start) protected Button startButton;
+    @Bind(R.id.register) protected Button registerButton;
     @Bind(R.id.auth_1) protected TextView auth_1;
     @Bind(R.id.auth_2) protected TextView auth_2;
     private ProgressDialog requestTokenDialog = null;
@@ -133,6 +137,14 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
         startButton.setText(getAuthAuthorize());
         startButton.setEnabled(true);
         startButton.setOnClickListener(new StartListener());
+
+        if (StringUtils.isEmpty(getCreateAccountUrl())) {
+            registerButton.setVisibility(View.GONE);
+        } else {
+            registerButton.setText(getAuthRegister());
+            registerButton.setEnabled(true);
+            registerButton.setOnClickListener(new RegisterListener());
+        }
 
         if (StringUtils.isBlank(OAtoken) && StringUtils.isBlank(OAtokenSecret)) {
             // start authorization process
@@ -279,6 +291,20 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
         }
     }
 
+    private class RegisterListener implements View.OnClickListener {
+
+        @Override
+        public void onClick(final View view) {
+            final Activity activity = OAuthAuthorizationActivity.this;
+            try {
+                activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getCreateAccountUrl())));
+            } catch (final ActivityNotFoundException e) {
+                Log.e("Cannot find suitable activity", e);
+                ActivityMixin.showToast(activity, R.string.err_application_no);
+            }
+        }
+    }
+
     private void exchangeTokens(final String verifier) {
         if (changeTokensDialog == null) {
             changeTokensDialog = new ProgressDialog(this);
@@ -303,6 +329,8 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
     protected abstract void setTokens(@Nullable String tokenPublic, @Nullable String tokenSecret, boolean enable);
 
     // get resources from derived class
+
+    protected abstract String getCreateAccountUrl();
 
     @NonNull
     protected abstract String getAuthTitle();
@@ -351,6 +379,10 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
 
     private String getAuthAuthorize() {
         return res.getString(R.string.auth_authorize, getAuthTitle());
+    }
+
+    protected String getAuthRegister() {
+        return res.getString(R.string.auth_register, getAuthTitle());
     }
 
     public static class OAuthParameters {

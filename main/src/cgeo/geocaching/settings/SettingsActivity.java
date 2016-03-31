@@ -10,7 +10,6 @@ import cgeo.geocaching.apps.navi.NavigationAppFactory.NavigationAppsEnum;
 import cgeo.geocaching.connector.capability.ICredentials;
 import cgeo.geocaching.connector.ec.ECConnector;
 import cgeo.geocaching.connector.gc.GCConnector;
-import cgeo.geocaching.connector.trackable.GeokretyConnector;
 import cgeo.geocaching.files.SimpleDirChooser;
 import cgeo.geocaching.gcvote.GCVote;
 import cgeo.geocaching.maps.MapProviderFactory;
@@ -188,28 +187,23 @@ public class SettingsActivity extends PreferenceActivity {
         for (final OCPreferenceKeys key : OCPreferenceKeys.values()) {
             getPreference(key.isActivePrefId).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
             setWebsite(key.websitePrefId, key.authParams.host);
-            setWebsite(key.registerPrefId, "http://" + key.authParams.host + "/register.php");
             getPreference(key.prefScreenId).setSummary(getServiceSummary(Settings.isOCConnectorActive(key.isActivePrefId)));
         }
         getPreference(R.string.pref_connectorGCActive).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
         setWebsite(R.string.pref_fakekey_gc_website, GCConnector.getInstance().getHost());
-        setWebsite(R.string.pref_fakekey_gc_register, GCConnector.getInstance().getCreateAccountUrl());
         getPreference(R.string.preference_screen_gc).setSummary(getServiceSummary(Settings.isGCConnectorActive()));
 
         getPreference(R.string.pref_connectorECActive).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
         setWebsite(R.string.pref_fakekey_ec_website, ECConnector.getInstance().getHost());
-        setWebsite(R.string.pref_fakekey_ec_register, ECConnector.getInstance().getCreateAccountUrl());
         getPreference(R.string.preference_screen_ec).setSummary(getServiceSummary(Settings.isECConnectorActive()));
 
         getPreference(R.string.pref_ratingwanted).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
         setWebsite(R.string.pref_fakekey_gcvote_website, GCVote.getWebsite());
-        setWebsite(R.string.pref_fakekey_gcvote_register, GCVote.getCreateAccountUrl());
         getPreference(R.string.preference_screen_gcvote).setSummary(getServiceSummary(Settings.isRatingWanted()));
 
         getPreference(R.string.pref_connectorGeokretyActive).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
         setWebsite(R.string.pref_fakekey_geokrety_website, "https://geokrety.org");
         setWebsite(R.string.pref_fakekey_geokretymap_website, "https://geokretymap.org");
-        setWebsite(R.string.pref_fakekey_geokrety_register, GeokretyConnector.getCreateAccountUrl());
         getPreference(R.string.preference_screen_geokrety).setSummary(getServiceSummary(Settings.isGeokretyConnectorActive()));
 
         setWebsite(R.string.pref_fakekey_sendtocgeo_website, "send2.cgeo.org");

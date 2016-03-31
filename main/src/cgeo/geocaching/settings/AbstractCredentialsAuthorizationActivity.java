@@ -1,5 +1,8 @@
 package cgeo.geocaching.settings;
 
+import android.app.Activity;
+import android.content.ActivityNotFoundException;
+import android.net.Uri;
 import butterknife.Bind;
 
 import cgeo.geocaching.Intents;
@@ -11,6 +14,7 @@ import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.BundleUtils;
 
+import cgeo.geocaching.utils.Log;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.jdt.annotation.NonNull;
@@ -35,6 +39,7 @@ public abstract class AbstractCredentialsAuthorizationActivity extends AbstractA
     @NonNull private String connectorPassword = StringUtils.EMPTY;
 
     @Bind(R.id.check) protected Button checkButton;
+    @Bind(R.id.register) protected Button registerButton;
     @Bind(R.id.auth_1) protected TextView auth1;
     @Bind(R.id.auth_2) protected TextView auth2;
     @Bind(R.id.username) protected EditText usernameEditText;
@@ -62,6 +67,14 @@ public abstract class AbstractCredentialsAuthorizationActivity extends AbstractA
         usernameEditText.setText(connectorUsername);
         passwordEditText.setText(connectorPassword);
         enableCheckButtonIfReady();
+
+        if (StringUtils.isEmpty(getCreateAccountUrl())) {
+            registerButton.setVisibility(View.GONE);
+        } else {
+            registerButton.setText(getAuthRegister());
+            registerButton.setEnabled(true);
+            registerButton.setOnClickListener(new RegisterListener());
+        }
 
         final EnableStartButtonWatcher enableStartButtonWatcher = new EnableStartButtonWatcher();
         usernameEditText.addTextChangedListener(enableStartButtonWatcher);
@@ -132,7 +145,23 @@ public abstract class AbstractCredentialsAuthorizationActivity extends AbstractA
         }
     }
 
+    private class RegisterListener implements View.OnClickListener {
+
+        @Override
+        public void onClick(final View view) {
+            final Activity activity = AbstractCredentialsAuthorizationActivity.this;
+            try {
+                activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getCreateAccountUrl())));
+            } catch (final ActivityNotFoundException e) {
+                Log.e("Cannot find suitable activity", e);
+                ActivityMixin.showToast(activity, R.string.err_application_no);
+            }
+        }
+    }
+
     // get resources from derived class
+
+    protected abstract String getCreateAccountUrl();
 
     protected abstract void setCredentials(final Credentials credentials);
 
@@ -162,6 +191,10 @@ public abstract class AbstractCredentialsAuthorizationActivity extends AbstractA
 
     protected String getAuthCheckAgain() {
         return res.getString(R.string.auth_check_again, getAuthTitle());
+    }
+
+    protected String getAuthRegister() {
+        return res.getString(R.string.auth_register, getAuthTitle());
     }
 
     /**

@@ -42,6 +42,11 @@
             android:id="@+id/start"
             style="@style/button_full"
             android:layout_margin="7dip" />
+
+        <Button
+            android:id="@+id/register"
+            style="@style/button_full"
+            android:layout_margin="7dip" />
     </LinearLayout>
 
 </ScrollView>
