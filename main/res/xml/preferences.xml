@@ -345,9 +345,6 @@
                 </PreferenceCategory>
                 <PreferenceCategory android:title="@string/settings_information" >
                     <Preference
-                        android:key="@string/pref_fakekey_geokrety_register"
-                        android:title="@string/settings_open_geokrety_register" />
-                    <Preference
                         android:key="@string/pref_fakekey_geokrety_website"
                         android:title="@string/settings_open_website" />
                     <Preference
