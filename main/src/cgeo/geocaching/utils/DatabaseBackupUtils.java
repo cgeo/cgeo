@@ -1,18 +1,13 @@
 package cgeo.geocaching.utils;
 
-import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.MainActivity;
 import cgeo.geocaching.R;
+import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.dialog.Dialogs;
 
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-
-import rx.functions.Action0;
-import rx.functions.Action1;
-import rx.functions.Func0;
-import rx.schedulers.Schedulers;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -22,6 +17,11 @@ import android.content.res.Resources;
 
 import java.io.File;
 import java.util.concurrent.atomic.AtomicBoolean;
+
+import rx.functions.Action0;
+import rx.functions.Action1;
+import rx.functions.Func0;
+import rx.schedulers.Schedulers;
 
 public class DatabaseBackupUtils {
 
@@ -38,6 +38,7 @@ public class DatabaseBackupUtils {
      */
     public static void restoreDatabase(final Activity activity) {
         if (!hasBackup()) {
+            Dialogs.message(activity, R.string.init_backup_restore, R.string.init_backup_no_backup_available);
             return;
         }
         final int caches = DataStore.getAllCachesCount();
