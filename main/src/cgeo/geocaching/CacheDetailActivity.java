@@ -1,8 +1,5 @@
 package cgeo.geocaching;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
-
 import cgeo.calendar.CalendarAddon;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.AbstractViewPagerActivity;
@@ -80,18 +77,6 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import rx.Observable;
-import rx.Observable.OnSubscribe;
-import rx.Subscriber;
-import rx.Subscription;
-import rx.android.app.AppObservable;
-import rx.functions.Action0;
-import rx.functions.Action1;
-import rx.functions.Func0;
-import rx.functions.Func1;
-import rx.schedulers.Schedulers;
-import rx.subscriptions.CompositeSubscription;
-import rx.subscriptions.Subscriptions;
 
 import android.R.color;
 import android.app.AlertDialog;
@@ -153,6 +138,21 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.regex.Pattern;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import rx.Observable;
+import rx.Observable.OnSubscribe;
+import rx.Subscriber;
+import rx.Subscription;
+import rx.android.app.AppObservable;
+import rx.functions.Action0;
+import rx.functions.Action1;
+import rx.functions.Func0;
+import rx.functions.Func1;
+import rx.schedulers.Schedulers;
+import rx.subscriptions.CompositeSubscription;
+import rx.subscriptions.Subscriptions;
 
 /**
  * Activity to handle all single-cache-stuff.
@@ -904,21 +904,21 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     new Action1<Integer>() {
                         @Override
                         public void call(final Integer selectedListId) {
-                            storeCacheInList(selectedListId, new StoreCacheHandler(CacheDetailActivity.this, progress));
+                            storeCacheInList(selectedListId);
                         }
                     }, true, cache.getLists());
         } else {
-            storeCacheInList(StoredList.TEMPORARY_LIST.id, new StoreCacheHandler(this, progress));
+            storeCacheInList(StoredList.TEMPORARY_LIST.id);
         }
     }
 
-    private void storeCacheInList(final Integer selectedListId, final StoreCacheHandler storeCacheHandler) {
+    private void storeCacheInList(final Integer selectedListId) {
         if (cache.isOffline()) {
             // cache already offline, just add to another list
             DataStore.addToList(Collections.singletonList(cache), selectedListId);
             new StoreCacheHandler(CacheDetailActivity.this, progress).sendEmptyMessage(CancellableHandler.DONE);
         } else {
-            storeCache(selectedListId, storeCacheHandler);
+            storeCache(selectedListId);
         }
     }
 
@@ -2330,7 +2330,8 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         }
     }
 
-    protected void storeCache(final int listId, final StoreCacheHandler storeCacheHandler) {
+    protected void storeCache(final int listId) {
+        final StoreCacheHandler storeCacheHandler = new StoreCacheHandler(CacheDetailActivity.this, progress);
         progress.show(this, res.getString(R.string.cache_dialog_offline_save_title), res.getString(R.string.cache_dialog_offline_save_message), true, storeCacheHandler.cancelMessage());
         AndroidRxUtils.networkScheduler.createWorker().schedule(new Action0() {
             @Override
