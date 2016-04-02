@@ -3,10 +3,11 @@ package cgeo.geocaching.connector.oc;
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.OAuthAuthorizationActivity;
+import cgeo.geocaching.connector.ConnectorFactory;
+import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.oc.OkapiError.OkapiErrors;
 import cgeo.geocaching.settings.Settings;
 
-import cgeo.geocaching.utils.Log;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.eclipse.jdt.annotation.NonNull;
@@ -25,7 +26,6 @@ public class OCAuthorizationActivity extends OAuthAuthorizationActivity {
     private int tokenSecretPrefKey;
     private int tempTokenPublicPrefKey;
     private int tempTokenSecretPrefKey;
-    private boolean urlHttps;
     private String urlHost;
 
     @Override
@@ -38,7 +38,6 @@ public class OCAuthorizationActivity extends OAuthAuthorizationActivity {
             tokenSecretPrefKey = extras.getInt(Intents.EXTRA_OAUTH_TOKEN_SECRET_KEY);
             tempTokenPublicPrefKey = extras.getInt(Intents.EXTRA_OAUTH_TEMP_TOKEN_KEY_PREF);
             tempTokenSecretPrefKey = extras.getInt(Intents.EXTRA_OAUTH_TEMP_TOKEN_SECRET_PREF);
-            urlHttps = extras.getBoolean(Intents.EXTRA_OAUTH_HTTPS);
             urlHost = extras.getString(Intents.EXTRA_OAUTH_HOST);
         }
         super.onCreate(savedInstanceState);
@@ -46,11 +45,16 @@ public class OCAuthorizationActivity extends OAuthAuthorizationActivity {
 
     @Override
     protected String getCreateAccountUrl() {
-        if (StringUtils.isEmpty(urlHost)) {
-            Log.d("OCAuthorizationActivity.getCreateAccountUrl: Failed to determine full URL");
-            return StringUtils.EMPTY;
+        return getConnector().getCreateAccountUrl();
+    }
+
+    private IConnector getConnector() {
+        for (final IConnector connector : ConnectorFactory.getConnectors()) {
+            if (connector.getHost().equalsIgnoreCase(urlHost)) {
+                return connector;
+            }
         }
-        return (urlHttps ? "https://" : "http://" ) + urlHost + "/register.php";
+        throw new IllegalStateException("Cannot find connector for host " + urlHost);
     }
 
     @Override
@@ -86,7 +90,7 @@ public class OCAuthorizationActivity extends OAuthAuthorizationActivity {
 
     /**
      * Return an extended error in case of an invalid time stamp
-     * 
+     *
      * @param response
      *            network response
      */

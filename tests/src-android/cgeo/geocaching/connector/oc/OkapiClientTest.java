@@ -3,6 +3,7 @@ package cgeo.geocaching.connector.oc;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import cgeo.CGeoTestCase;
+import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.models.Geocache;
@@ -98,6 +99,21 @@ public class OkapiClientTest extends CGeoTestCase {
             Locale.setDefault(savedLocale);
             Settings.setUseEnglish(useEnglish);
         }
+    }
+
+    public static void testMobileRegistrationUrl() {
+        // there is a plan to implement a mobile page, so in the future this test needs to be adapted
+        assertThat(OkapiClient.getMobileRegistrationUrl(getConnectorOCDE())).isNull();
+    }
+
+    public static void testRegistrationUrl() {
+        assertThat(OkapiClient.getRegistrationUrl(getConnectorOCDE())).isEqualTo("http://www.opencaching.de/register.php");
+    }
+
+    private static OCApiLiveConnector getConnectorOCDE() {
+        final OCApiLiveConnector connector = (OCApiLiveConnector) ConnectorFactory.getConnector("OC0000");
+        assertThat(connector).isNotNull();
+        return connector;
     }
 
 }

@@ -1,12 +1,12 @@
 package cgeo.geocaching.connector.oc;
 
-import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.capability.ISearchByGeocode;
+import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.network.Parameters;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.CryptUtils;
-import cgeo.geocaching.utils.AndroidRxUtils;
 
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
@@ -27,6 +27,7 @@ public class OCApiConnector extends OCConnector implements ISearchByGeocode {
 
     // Levels of OAuth-Authentication we support
     public enum OAuthLevel {
+        Level0,
         Level1,
         Level3
     }
@@ -138,6 +139,23 @@ public class OCApiConnector extends OCConnector implements ISearchByGeocode {
         }
 
         return super.getGeocodeFromUrl(url);
+    }
+
+    @Override
+    @Nullable
+    public String getCreateAccountUrl() {
+        // mobile
+        String url = OkapiClient.getMobileRegistrationUrl(this);
+        if (StringUtils.isNotBlank(url)) {
+            return url;
+        }
+        // non-mobile
+        url = OkapiClient.getRegistrationUrl(this);
+        if (StringUtils.isNotBlank(url)) {
+            return url;
+        }
+        // fall back to a simple host name based pattern
+        return super.getCreateAccountUrl();
     }
 
 }

@@ -39,7 +39,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import okhttp3.Response;
+
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -59,6 +59,8 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
 import java.util.regex.Pattern;
+
+import okhttp3.Response;
 
 /**
  * Client for the OpenCaching API (Okapi).
@@ -804,14 +806,22 @@ final class OkapiClient {
 
         params.add("langpref", getPreferredLanguage());
 
-        if (connector.getSupportedAuthLevel() == OAuthLevel.Level3) {
-            final OAuthTokens tokens = new OAuthTokens(connector);
-            if (!tokens.isValid()) {
-                return new JSONResult("invalid oauth tokens");
+        switch (connector.getSupportedAuthLevel()) {
+            case Level3: {
+                final OAuthTokens tokens = new OAuthTokens(connector);
+                if (!tokens.isValid()) {
+                    return new JSONResult("invalid oauth tokens");
+                }
+                OAuth.signOAuth(host, service.methodName, "GET", false, params, tokens, connector.getCK(), connector.getCS());
+                break;
             }
-            OAuth.signOAuth(host, service.methodName, "GET", false, params, tokens, connector.getCK(), connector.getCS());
-        } else {
-            connector.addAuthentication(params);
+            case Level1 : {
+                connector.addAuthentication(params);
+                break;
+            }
+            case Level0: {
+                // do nothing, anonymous access
+            }
         }
 
         final String uri = "http://" + host + service.methodName;
@@ -967,6 +977,34 @@ final class OkapiClient {
         if (data.has("results")) {
             final ArrayNode results = (ArrayNode) data.path("results");
             return results.get(0).asText();
+        }
+
+        return null;
+    }
+
+    /**
+     * get the registration url for mobile devices
+     */
+    public static String getMobileRegistrationUrl(@NonNull final OCApiConnector connector) {
+        return getInstallationInformation(connector, "mobile_registration_url");
+    }
+
+    /**
+     * get the normal registration url
+     */
+    public static String getRegistrationUrl(@NonNull final OCApiConnector connector) {
+        return getInstallationInformation(connector, "registration_url");
+    }
+
+    private static String getInstallationInformation(final OCApiConnector connector, final String field) {
+        final ObjectNode data = request(connector, OkapiService.SERVICE_API_INSTALLATION, new Parameters()).data;
+
+        if (data == null) {
+            return null;
+        }
+
+        if (data.has(field) && !data.get(field).isNull()) {
+            return data.get(field).asText();
         }
 
         return null;
