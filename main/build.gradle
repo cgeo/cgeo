@@ -42,6 +42,9 @@ android {
 
         // this is necessary to move .google_measurement_service into a app-specific namespace (see https://github.com/kotmyrevich/analytics-issues/issues/784)
         applicationId = "cgeo.geocaching"
+
+        // include only those language resources from libraries which we actively maintain ourself in the translation project
+        resConfigs "en","ca","cs","da","de","es","fi","fr","hu","it","ja","lt","lv","nb","nl","pl","pt","ro","ru","sk","sl","sv"
     }
 
     // signing is handled via private.properties
