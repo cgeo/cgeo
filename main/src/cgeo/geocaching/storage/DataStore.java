@@ -2958,7 +2958,7 @@ public class DataStore {
                     continue;
                 }
 
-                for (Integer listId : lists) {
+                for (final Integer listId : lists) {
                     add.bindLong(1, listId);
                     add.bindString(2, cache.getGeocode());
                     add.execute();
@@ -3131,7 +3131,7 @@ public class DataStore {
         GEOCODE_OFFLINE("SELECT count(list_id) FROM " + dbTableCachesLists + " WHERE geocode = ? AND list_id != " + StoredList.TEMPORARY_LIST.id),
         GUID_OFFLINE("SELECT count(list_id) FROM " + dbTableCachesLists + " WHERE geocode = (SELECT geocode FROM " + dbTableCaches + " WHERE guid = ?) AND list_id != " + StoredList.TEMPORARY_LIST.id),
         GEOCODE_OF_GUID("SELECT geocode FROM " + dbTableCaches + " WHERE guid = ?"),
-        GEOCODE_FROM_TITLE("SELECT geocode FROM " + dbTableCaches + " WHERE title = ?"),
+        GEOCODE_FROM_TITLE("SELECT geocode FROM " + dbTableCaches + " WHERE name = ?"),
         INSERT_SEARCH_DESTINATION("INSERT INTO " + dbTableSearchDestinationHistory + " (date, latitude, longitude) VALUES (?, ?, ?)"),
         COUNT_TYPE_ALL_LIST("SELECT COUNT(c._id) FROM " + dbTableCaches + " c, " + dbTableCachesLists + " l  WHERE c.detailed = 1 AND c.type = ? AND c.geocode = l.geocode AND l.list_id > 0"), // See use of COUNT_TYPE_LIST for synchronization
         COUNT_ALL_TYPES_ALL_LIST("SELECT COUNT(c._id) FROM " + dbTableCaches + " c, " + dbTableCachesLists + " l WHERE c.detailed = 1 AND c.geocode = l.geocode AND l.list_id  > 0"), // See use of COUNT_TYPE_LIST for synchronization
