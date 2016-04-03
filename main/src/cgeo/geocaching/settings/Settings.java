@@ -77,6 +77,8 @@ public class Settings {
             StringUtils.equals(Build.MODEL, "GT-I9195")  ||    // Samsung S4 mini
             StringUtils.equals(Build.MODEL, "GT-I8200N");      // Samsung S3 mini
 
+    private static final String PHONE_MODEL_AND_SDK = Build.MODEL + "/" + Build.VERSION.SDK_INT;
+
     // twitter api keys
     private final static @NonNull String TWITTER_KEY_CONSUMER_PUBLIC = CryptUtils.rot13("ESnsCvAv3kEupF1GCR3jGj");
     private final static @NonNull String TWITTER_KEY_CONSUMER_SECRET = CryptUtils.rot13("7vQWceACV9umEjJucmlpFe9FCMZSeqIqfkQ2BnhV9x");
@@ -435,9 +437,10 @@ public class Settings {
     }
 
     public static boolean useGooglePlayServices() {
+        final boolean defaultForPhone = VERSION.SDK_INT >= VERSION_CODES.ICE_CREAM_SANDWICH;
         // By default, enable play services starting from ICS.
         return CgeoApplication.getInstance().isGooglePlayServicesAvailable() &&
-                getBoolean(R.string.pref_googleplayservices, VERSION.SDK_INT >= VERSION_CODES.ICE_CREAM_SANDWICH);
+                outdatedPhoneModelOrSdk() ? defaultForPhone : getBoolean(R.string.pref_googleplayservices, defaultForPhone);
     }
 
     public static boolean useLowPowerMode() {
@@ -1201,11 +1204,21 @@ public class Settings {
     }
 
     public static boolean useHardwareAcceleration() {
-        return getBoolean(R.string.pref_hardware_acceleration, !HW_ACCEL_DISABLED_BY_DEFAULT);
+        return outdatedPhoneModelOrSdk() ? !HW_ACCEL_DISABLED_BY_DEFAULT :
+                getBoolean(R.string.pref_hardware_acceleration, !HW_ACCEL_DISABLED_BY_DEFAULT);
     }
 
     static void setUseHardwareAcceleration(final boolean useHardwareAcceleration) {
         putBoolean(R.string.pref_hardware_acceleration, useHardwareAcceleration);
+        storePhoneModelAndSdk();
+    }
+
+    static private boolean outdatedPhoneModelOrSdk() {
+        return !StringUtils.equals(PHONE_MODEL_AND_SDK, getString(R.string.pref_phone_model_and_sdk, null));
+    }
+
+    static private void storePhoneModelAndSdk() {
+        putString(R.string.pref_phone_model_and_sdk, PHONE_MODEL_AND_SDK);
     }
 
     public static String getLastCacheLog() {
