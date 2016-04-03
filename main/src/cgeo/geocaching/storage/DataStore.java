@@ -1736,8 +1736,6 @@ public class DataStore {
             while (cursor.moveToNext()) {
                 final Geocache cache = createCacheFromDatabaseContent(cursor);
 
-                cache.setLists(loadLists(cache.getGeocode()));
-
                 if (loadFlags.contains(LoadFlag.ATTRIBUTES)) {
                     cache.setAttributes(loadAttributes(cache.getGeocode()));
                 }
@@ -1779,6 +1777,14 @@ public class DataStore {
                 cacheCache.putCacheInCache(cache);
 
                 caches.add(cache);
+            }
+
+            final Map<String, Set<Integer>> cacheLists = loadLists(geocodes);
+            for (final Geocache geocache : caches) {
+                final Set<Integer> listIds = cacheLists.get(geocache.getGeocode());
+                if (listIds != null) {
+                    geocache.setLists(listIds);
+                }
             }
             return caches;
         } finally {
@@ -1894,6 +1900,38 @@ public class DataStore {
                 "100",
                 new HashSet<Integer>(),
                 GET_INTEGER_0);
+    }
+
+    @NonNull
+    public static Map<String, Set<Integer>> loadLists(final Collection<String> geocodes) {
+        final Map<String, Set<Integer>> cacheLists = new HashMap<>();
+
+        final StringBuilder query = new StringBuilder("SELECT list_id, geocode FROM ");
+        query.append(dbTableCachesLists);
+        query.append(" WHERE ");
+        query.append(whereGeocodeIn(geocodes));
+
+        final Cursor cursor = database.rawQuery(query.toString(), null);
+        try {
+            while (cursor.moveToNext()) {
+                final Integer listId = cursor.getInt(0);
+                final String geocode = cursor.getString(1);
+
+                Set<Integer> listIds = cacheLists.get(geocode);
+                if (listIds != null) {
+                    listIds.add(listId);
+                } else {
+                    listIds = new HashSet<>();
+                    listIds.add(listId);
+                    cacheLists.put(geocode, listIds);
+                }
+            }
+
+        } finally {
+            cursor.close();
+        }
+
+        return cacheLists;
     }
 
     @Nullable
