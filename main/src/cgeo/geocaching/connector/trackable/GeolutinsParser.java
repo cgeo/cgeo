@@ -125,7 +125,7 @@ public class GeolutinsParser {
                             trackable.setSpottedType(Trackable.SPOTTED_USER);
                             trackable.setSpottedName(lastLog.author);
                         } else {
-                            Log.e("GeolutinsHandler.endElement unknown logtype:" + lastLog.getType());
+                            Log.w("GeolutinsHandler.endElement unknown logtype:" + lastLog.getType());
                         }
                     }
                 }
@@ -134,7 +134,7 @@ public class GeolutinsParser {
                     logsEntries.add(logEntryBuilder.build());
                 }
             } catch (final ParseException | NumberFormatException e) {
-                Log.e("Parsing GeoLutins", e);
+                Log.w("Parsing GeoLutins", e);
             }
         }
 
