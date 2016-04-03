@@ -18,13 +18,11 @@ public abstract class LazyInitializedList<ElementType> extends AbstractList<Elem
             synchronized(this) {
                 try {
                     list = call();
-                    if (list == null) {
-                        Log.w("LazyInitializedList.getList: null result");
-                    }
                 } catch (final Exception e) {
                     Log.w("LazyInitializedList.getList", e);
                 }
                 if (list == null) {
+                    Log.w("LazyInitializedList.getList: null result");
                     Log.w("LazyInitializedList.getList: using an empty list as a fallback");
                     list = Collections.emptyList();
                 }
