@@ -19,13 +19,13 @@ public abstract class LazyInitializedList<ElementType> extends AbstractList<Elem
                 try {
                     list = call();
                     if (list == null) {
-                        Log.e("LazyInitializedList.getList: null result");
+                        Log.w("LazyInitializedList.getList: null result");
                     }
                 } catch (final Exception e) {
-                    Log.e("LazyInitializedList.getList", e);
+                    Log.w("LazyInitializedList.getList", e);
                 }
                 if (list == null) {
-                    Log.e("LazyInitializedList.getList: using an empty list as a fallback");
+                    Log.w("LazyInitializedList.getList: using an empty list as a fallback");
                     list = Collections.emptyList();
                 }
             }

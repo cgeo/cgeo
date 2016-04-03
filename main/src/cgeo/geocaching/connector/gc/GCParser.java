@@ -1824,7 +1824,7 @@ public final class GCParser {
                 try {
                     final ObjectNode resp = (ObjectNode) JsonUtils.reader.readTree(responseStream);
                     if (!resp.path("status").asText().equals("success")) {
-                        Log.e("GCParser.loadLogsFromDetails: status is " + resp.path("status").asText("[absent]"));
+                        Log.w("GCParser.loadLogsFromDetails: status is " + resp.path("status").asText("[absent]"));
                         subscriber.onCompleted();
                         return;
                     }
