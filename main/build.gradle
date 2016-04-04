@@ -505,3 +505,15 @@ task downloadLibs {
         }
     }
 }
+
+apply plugin: 'checkstyle'
+
+check.dependsOn 'checkstyle'
+
+task checkstyle(type: Checkstyle) {
+    configFile file("${project.rootDir}/config/quality/checkstyle/checkstyle.xml")
+    source 'src'
+    include '**/*.java'
+
+    classpath = files()
+}
