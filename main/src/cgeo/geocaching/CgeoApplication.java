@@ -67,7 +67,7 @@ public class CgeoApplication extends Application {
      */
     public boolean isNetworkConnected() {
         if (connectivityManager == null) {
-            // Concurrent assignment would not hurt
+            // Concurrent assignment would not hurt as this request is idempotent
             connectivityManager = (ConnectivityManager) getInstance().getApplicationContext().getSystemService(CONNECTIVITY_SERVICE);
         }
         final NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
