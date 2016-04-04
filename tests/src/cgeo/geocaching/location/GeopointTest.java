@@ -41,6 +41,16 @@ public class GeopointTest extends TestCase {
         assertThat(gp1.equals(gp2)).isFalse();
     }
 
+    public static void testEqualExternal() {
+        final Geopoint gp1 = new Geopoint(48.2, 2.31);
+        assertThat(Geopoint.equals(gp1, gp1)).isTrue();
+        final Geopoint gp2 = new Geopoint(48.3, 2.31);
+        assertThat(Geopoint.equals(gp1, gp2)).isFalse();
+        assertThat(Geopoint.equals(null, null)).isTrue();
+        assertThat(Geopoint.equals(null, gp1)).isFalse();
+        assertThat(Geopoint.equals(gp1, null)).isFalse();
+    }
+
     public static void testGetE6() {
         final Geopoint gp = new Geopoint(41.2, -3.4);
         assertThat((double) gp.getLatitudeE6()).isEqualTo(41200000.0, offset(1e-6));
