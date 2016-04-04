@@ -746,7 +746,7 @@ public class DataStore {
                         try {
                             // Add new indices and remove obsolete cache files
                             createIndices(db);
-                            removeObsoleteCacheDirectories(db);
+                            removeObsoleteCacheDirectories();
                         } catch (final Exception e) {
                             Log.e("Failed to upgrade to ver. 59", e);
                         }
@@ -951,16 +951,6 @@ public class DataStore {
      * Remove obsolete cache directories in c:geo private storage.
      */
     public static void removeObsoleteCacheDirectories() {
-        removeObsoleteCacheDirectories(database);
-    }
-
-    /**
-     * Remove obsolete cache directories in c:geo private storage.
-     *
-     * @param db
-     *            the read-write database to use
-     */
-    private static void removeObsoleteCacheDirectories(final SQLiteDatabase db) {
         final File[] files = LocalStorage.getStorage().listFiles();
         if (ArrayUtils.isNotEmpty(files)) {
             final Pattern oldFilePattern = Pattern.compile("^[GC|TB|EC|GK|O][A-Z0-9]{4,7}$");

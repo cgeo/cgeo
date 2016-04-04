@@ -1,7 +1,5 @@
 package cgeo.geocaching.test;
 
-import butterknife.ButterKnife;
-
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.pm.InstrumentationInfo;
@@ -19,6 +17,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
+
+import butterknife.ButterKnife;
 
 public class CgeoTestsActivity extends Activity {
     private static final String TAG = CgeoTestsActivity.class.getName();
@@ -41,13 +41,13 @@ public class CgeoTestsActivity extends Activity {
                 mProc = Runtime.getRuntime().exec(CMD);
                 mReader = new BufferedReader(new InputStreamReader(
                         mProc.getInputStream()));
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 Log.e(TAG, "Creating proc", e);
             }
         }
 
         @Override
-        protected void onProgressUpdate(String... values) {
+        protected void onProgressUpdate(final String... values) {
             final String line = values[0];
             final boolean isAtBottom = scrollView.isAtBottom();
             if (!TextUtils.isEmpty(line)) {
@@ -58,7 +58,7 @@ public class CgeoTestsActivity extends Activity {
             }
         }
 
-        private String color(String line) {
+        private String color(final String line) {
             switch (line.charAt(0)) {
                 case 'E':
                     return "red";
@@ -72,7 +72,7 @@ public class CgeoTestsActivity extends Activity {
         }
 
         @Override
-        protected Void doInBackground(Integer... params) {
+        protected Void doInBackground(final Integer... params) {
             final long timeout = System.currentTimeMillis() + params[0];
             try {
                 do {
@@ -90,7 +90,7 @@ public class CgeoTestsActivity extends Activity {
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cgeo_tests_activity);
         logView = ButterKnife.findById(this, R.id.logOutput);
@@ -119,11 +119,7 @@ public class CgeoTestsActivity extends Activity {
     public void runTests(final View v) {
         final Button button = ButterKnife.findById(this, R.id.buttonRun);
         button.setEnabled(false);
-        try {
-            runTestsInternally();
-        } finally {
-            //            button.setEnabled(true);
-        }
+        runTestsInternally();
     }
 
     private void runTestsInternally() {

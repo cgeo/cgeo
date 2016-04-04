@@ -1,11 +1,11 @@
 package cgeo.geocaching.utils;
 
-import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.R;
-import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.LogType;
+import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.Waypoint;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.eclipse.jdt.annotation.NonNull;
@@ -79,7 +79,7 @@ public final class MapUtils {
                 .append(cache.getMapMarkerId())
                 .append(cache.isOwner())
                 .append(cache.isFound())
-                .append(showUserModifiedCoords(cache, cacheListType))
+                .append(showUserModifiedCoords(cache))
                 .append(cache.getPersonalNote())
                 .append(cache.isLogOffline())
                 .append(!cache.getLists().isEmpty())
@@ -217,7 +217,7 @@ public final class MapUtils {
             insets.add(getFoundInset(cacheListType)[resolution]);
         }
         // user modified coords
-        if (showUserModifiedCoords(cache, cacheListType)) {
+        if (showUserModifiedCoords(cache)) {
             layers.add(Compatibility.getDrawable(res, R.drawable.marker_usermodifiedcoords));
             insets.add(getUMCInset(cacheListType)[resolution]);
         }
@@ -280,12 +280,10 @@ public final class MapUtils {
      *
      * @param cache
      *            The cache currently used
-     * @param cacheListType
-     *            The cache list currently used
      * @return
      *         True if the UserModifiedCoords flag should be displayed
      */
-    private static boolean showUserModifiedCoords(final Geocache cache, @Nullable final CacheListType cacheListType) {
+    private static boolean showUserModifiedCoords(final Geocache cache) {
 
         return cache.hasUserModifiedCoords() || cache.hasFinalDefined();
     }
