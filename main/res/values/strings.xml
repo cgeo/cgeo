@@ -675,7 +675,7 @@
     <string name="auth_explain_short">The following process will allow <b>c:geo</b> to access %s.</string>
     <string name="auth_explain_long">Pressing the \"authorize c:geo\" button will start the process. This process will open up a web browser with a %s page. Log in on this page and allow <b>c:geo</b> to access your account. That\'s all.</string>
     <string name="auth_forget_title">Forget authorization?</string>
-    <string name="auth_forget_message">You\'ll be disconnected from this connector. Your currently saved credentials will be lost.</string>
+    <string name="auth_forget_message">You\'ll be disconnected from this service. Your currently saved credentials will be lost.</string>
 
     <!-- auth credentials -->
     <string name="auth_credentials_explain_short">The following process will allow <b>c:geo</b> to access %s.</string>
