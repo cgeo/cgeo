@@ -426,15 +426,8 @@ public class Geocache implements IWaypoint {
     }
 
     public boolean canBeAddedToCalendar() {
-        // is event type?
-        if (!isEventCache()) {
-            return false;
-        }
-        // has event date set?
-        if (hidden == null) {
-            return false;
-        }
-        return true;
+        // Is event type with event date set?
+        return isEventCache() && hidden != null;
     }
 
     public boolean isPastEvent() {
