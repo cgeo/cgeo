@@ -149,7 +149,6 @@
   <string name="err_unknown_address">c:geoがこのアドレスを既存の場所に合わせられませんでした</string>
   <string name="err_comm">未知の通信エラー</string>
   <string name="err_missing_auth">ユーザ名またはパスワードが入力されていません。</string>
-  <string name="err_wrong">ログイン情報が間違っています</string>
   <string name="err_maintenance">Geocaching.comはメンテナンス中で接続できません。 保存済みキャッシュのみでオフラインで動作します。</string>
   <string name="err_license">Geocaching.comのライセンス契約に同意しなかったのでキャッシュの座標を見ることはできません。</string>
   <string name="err_unvalidated_account">Geocaching.comでアカウントを有効化してください。</string>
@@ -440,7 +439,6 @@
   <string name="init_login_popup_working">ログイン中…</string>
   <string name="init_login_popup_ok">ログイン完了</string>
   <string name="init_login_popup_failed">ログイン失敗</string>
-  <string name="init_login_popup_failed_reason">ログインに失敗しました。原因: </string>
   <string name="init_login_popup_not_authorized">認証できませんでした</string>
   <string name="init_login_popup_invalid_timestamp">デバイスの時刻が正しくありません。時刻の設定をしてください。</string>
   <string name="init_login_popup_invalid_token">認証できませんでした。再度認証してください。</string>
@@ -466,8 +464,6 @@
   <string name="init_summary_friends_and_own_logs_wanted">お友達と自分のログがあるもう一つのページを表示する</string>
   <string name="init_openlastdetailspage">最後に表示したページ</string>
   <string name="init_summary_openlastdetailspage">キャッシュ情報の表示では最後に表示したページを開く</string>
-  <string name="init_autoload">詳細表示</string>
-  <string name="init_summary_autoload">キャッシュの説明を自動的に全て表示</string>
   <string name="init_skin">明るいスキン</string>
   <string name="init_summary_skin">明るい色のスキンを使用\n(c:geoの再起動が必要)</string>
   <string name="init_address">地名表示</string>
@@ -604,6 +600,7 @@
   <string name="auth_again">再度認証を開始</string>
   <string name="auth_dialog_waiting">%sからの返答を待っています…</string>
   <string name="auth_explain_short">次のプロセスは<b>c:geo</b>に%sへのアクセスを許可させる。</string>
+  <!-- auth credentials -->
   <!-- auth token -->
   <string name="auth_token_register">アカウントを作成</string>
   <!-- auth Twitter -->

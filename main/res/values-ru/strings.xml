@@ -148,7 +148,6 @@
   <string name="err_unknown_address">Не удалось получить координаты по данному адресу</string>
   <string name="err_comm">Неизвестная ошибка соединения</string>
   <string name="err_missing_auth">Имя пользователя и/или пароль не установлены.</string>
-  <string name="err_wrong">Неверные данные для входа</string>
   <string name="err_maintenance">Geocaching.com отключен для обслуживания. c:geo работает в автономном режиме с сохранёнными тайниками.</string>
   <string name="err_license">Вы не согласились с правилами Geocaching.com, поэтому c:geo не может загрузить координаты тайников.</string>
   <string name="err_unvalidated_account">Сначала вы должны активировать свой аккаунт на Geocaching.com.</string>
@@ -223,6 +222,7 @@
   <string name="warn_rendertheme_missing">Тема карты не найдена.</string>
   <string name="warn_pocket_query_select">Не выбрана выборка.</string>
   <string name="warn_no_pocket_query_found">Не найдено выборок.</string>
+  <string name="err_read_pocket_query_list">Ошибка чтения списка Выборок.</string>
   <string name="info_log_posted">Запись в блокнот успешно отправлена.</string>
   <string name="info_log_saved">Запись в блокнот успешно сохранена.</string>
   <string name="info_log_post_failed">Запись в блокнот не удалась.</string>
@@ -445,7 +445,6 @@
   <string name="init_login_popup_working">Выполняется вход</string>
   <string name="init_login_popup_ok">Вход ОК</string>
   <string name="init_login_popup_failed">Ошибка входа</string>
-  <string name="init_login_popup_failed_reason">Ошибка входа:</string>
   <string name="init_login_popup_not_authorized">Не авторизован</string>
   <string name="init_login_popup_invalid_timestamp">Установленное время некорректно, настройте время устройства</string>
   <string name="init_login_popup_invalid_token">Авторизация не удалась, попробуйте еще раз</string>
@@ -471,8 +470,6 @@
   <string name="init_summary_friends_and_own_logs_wanted">Отображать дополнительную страницу блокнота для своих записей и записей друзей</string>
   <string name="init_openlastdetailspage">Запоминать страницу</string>
   <string name="init_summary_openlastdetailspage">Открывать последнюю использованную страницу (блокнот, детали, описание)</string>
-  <string name="init_autoload">Подробное описание</string>
-  <string name="init_summary_autoload">Всегда загружать полное описание</string>
   <string name="init_skin">Светлый стиль</string>
   <string name="init_summary_skin">Использовать Светлый стиль (требуется перезапуск)</string>
   <string name="init_address">Показывать адрес</string>
@@ -623,6 +620,7 @@
   <string name="auth_dialog_waiting">Ожидание %s…</string>
   <string name="auth_explain_short">Следующая процедура позволит <b>c:geo</b> иметь доступ к %s.</string>
   <string name="auth_explain_long">Нажмите \"Авторизовать c:geo\" для начала авторизации. Откроется браузер на странице %s. Введите свои данные и разрешите <b>c:geo</b> доступ к вашей учетной записи. На этом все.</string>
+  <!-- auth credentials -->
   <!-- auth token -->
   <string name="auth_token_register">Создать учетную запись</string>
   <string name="auth_token_explain_short">Следующая процедура позволит <b>c:geo</b> иметь доступ к %s.</string>
@@ -761,6 +759,8 @@
   <string name="cache_menu_share">Поделиться</string>
   <string name="cache_menu_move_list">Переместить в другой список</string>
   <string name="cache_menu_whereyougo">WhereYouGo</string>
+  <string name="cache_menu_oruxmaps_online">OruxMaps (Онлайн)</string>
+  <string name="cache_menu_oruxmaps_offline">OruxMaps (Оффлайн)</string>
   <string name="cache_menu_pebble">Pebble</string>
   <string name="cache_menu_vote">Оценить</string>
   <string name="cache_menu_checker">Открыть Geochecker</string>
@@ -772,6 +772,7 @@
   <string name="cache_status_found">Найден</string>
   <string name="cache_not_status_found">Не найден</string>
   <string name="cache_never_found">Никем не найденные</string>
+  <string name="cache_found_last_30_days">Найденные за 30 дней</string>
   <string name="cache_status_archived">В архиве</string>
   <string name="cache_status_disabled">Вне игры</string>
   <string name="cache_status_premium">Только для Премиум участников</string>
@@ -974,6 +975,7 @@
   <string name="trackable_not_activated">Трекабл не активирован</string>
   <string name="trackable_travelbug">Travelbug</string>
   <string name="trackable_geokrety">ГеоКрот</string>
+  <string name="trackable_geolutins">GeoLutins</string>
   <string name="geokret_type_traditional">Традиционный</string>
   <string name="geokret_type_book_or_media">Книга, CD или DVD</string>
   <string name="geokret_type_human">Человек</string>
@@ -1395,6 +1397,8 @@
   <string name="pq_as_cache_list">Посмотреть как список</string>
   <string name="pq_download_and_import">Импортировать выборку</string>
   <string name="pq_my_finds">Мои находки</string>
+  <string name="caches_refresh_all_warning">Это действие может привести к большому количеству трафика. Вы точно хотите обновить все тайники?</string>
   <string name="invitation_action">Пригласить друзей</string>
   <string name="invitation_title">Пригласить друзей использовать c:geo</string>
+  <string name="invitation_message">Попробуйте c:geo для геокешинга</string>
 </resources>

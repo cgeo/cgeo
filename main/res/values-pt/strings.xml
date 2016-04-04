@@ -149,7 +149,6 @@
   <string name="err_unknown_address">c:geo não conseguiu mapear a morada para uma localização existente</string>
   <string name="err_comm">Erro de comunicação desconhecido</string>
   <string name="err_missing_auth">Sem nome de utilizador/password definidos.</string>
-  <string name="err_wrong">Dados de login inválidos</string>
   <string name="err_maintenance">Geocaching.com está em manutenção. O c:geo funciona offline com as caches Arquivadas.</string>
   <string name="err_license">O utilizador não concordou com a licença de utilização de Geocaching.com, por isso c:geo não pode carregar as coordenadas da cache.</string>
   <string name="err_unvalidated_account">Deve validar a sua conta primeiro em Geocaching.com.</string>
@@ -452,7 +451,6 @@
   <string name="init_login_popup_working">Logging to Geocaching.com…</string>
   <string name="init_login_popup_ok">Login OK</string>
   <string name="init_login_popup_failed">Login falhado.</string>
-  <string name="init_login_popup_failed_reason">Login falhado porque </string>
   <string name="init_login_popup_not_authorized">Não autorizado</string>
   <string name="init_login_popup_invalid_timestamp">Hora local inválida, altere a hora do aparelho</string>
   <string name="init_login_popup_invalid_token">Autorização inválida, re-autorizar</string>
@@ -478,8 +476,6 @@
   <string name="init_summary_friends_and_own_logs_wanted">Mostrar página adicional de registo com registos de amigos e próprias</string>
   <string name="init_openlastdetailspage">Abrir detalhes da última página vizualizada</string>
   <string name="init_summary_openlastdetailspage">Abrir detalhes da última página vizualizada</string>
-  <string name="init_autoload">Carregar automaticamente a descrição longa</string>
-  <string name="init_summary_autoload">Carregar automaticamente a descrição longa</string>
   <string name="init_skin">Tema leve (precisa reiniciar o c:geo)</string>
   <string name="init_summary_skin">Tema leve (precisa reiniciar o c:geo)</string>
   <string name="init_address">Mostrar endereços no ecrã principal</string>
@@ -630,6 +626,7 @@
   <string name="auth_dialog_waiting">Esperando por %s…</string>
   <string name="auth_explain_short">O processo a seguir permitirá que <b>c:geo</b> acesse o %s.</string>
   <string name="auth_explain_long">Pressionar o botão \"autorizar c:geo\" vai iniciar o processo. Este processo vai abrir um navegador web com uma página %s. Entre nesta página e permita que o <b>c:geo</b> tenha acesso à sua conta. E já está.</string>
+  <!-- auth credentials -->
   <!-- auth token -->
   <string name="auth_token_register">Criar uma conta</string>
   <string name="auth_token_explain_short">O processo a seguir permitirá que o <b>c:geo</b> aceda %s.</string>

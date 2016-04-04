@@ -149,7 +149,6 @@
   <string name="err_unknown_address">c:geo nevarēja atrast kartē šo adresi ar pašreizējo atrašanās vietu</string>
   <string name="err_comm">Nezināma sakaru kļūda</string>
   <string name="err_missing_auth">Nav uzstādīts lietotājvārds un/vai parole.</string>
-  <string name="err_wrong">Pieteikšanās informācija ir nepareiza</string>
   <string name="err_maintenance">Geocaching.com apkopes dēļ nedarbojas. c:geo strādā bezsaistē ar saglabātajiem bezsaistē slēpņiem.</string>
   <string name="err_license">Jūs neesat piekritis Geocaching.com licences līgumam, tāpēc c:geo nevar ielādēt slēpņu koordinātas.</string>
   <string name="err_unvalidated_account">Vispirms tev jāapstiprina savs konts vietnē Geocaching.com.</string>
@@ -450,7 +449,6 @@
   <string name="init_login_popup_working">Piesakās sistēmā…</string>
   <string name="init_login_popup_ok">Pieteikšanās izpildīta veiksmīgi</string>
   <string name="init_login_popup_failed">Pieteikšanās neizdevās</string>
-  <string name="init_login_popup_failed_reason">Pieteikšanās neizdevās:</string>
   <string name="init_login_popup_not_authorized">Nav autorizēts</string>
   <string name="init_login_popup_invalid_timestamp">Vietējais laiks nepareizs, pielāgot ierīces laiku</string>
   <string name="init_login_popup_invalid_token">Atļauja nederīga, atkārtoti mēģiniet autorizēties</string>
@@ -476,8 +474,6 @@
   <string name="init_summary_friends_and_own_logs_wanted">Rādīt papildu lapu ar draugu un saviem apmeklējuma ierakstiem</string>
   <string name="init_openlastdetailspage">Pēdējā atvērtā sadaļa</string>
   <string name="init_summary_openlastdetailspage">Atvērt datus ar pēdējo izmantoto sadaļu</string>
-  <string name="init_autoload">Pilns apraksts</string>
-  <string name="init_summary_autoload">Vienmēr ielādēt pilnu aprakstu</string>
   <string name="init_skin">Gaišs fons</string>
   <string name="init_summary_skin">Izmantot gaišu fonu (nepieciešama restartēšana)</string>
   <string name="init_address">Rādīt adresi</string>
@@ -628,6 +624,7 @@
   <string name="auth_dialog_waiting">Gaida uz %s…</string>
   <string name="auth_explain_short">Šis process ļaus piekļūt %s <b>c:geo</b>.</string>
   <string name="auth_explain_long">Nospiežot pogu \"atļaut c:geo\" tiks sākts process. Šis process atvērs ar %s lappusi web pārlūkprogrammā. Piesakies šajā lapā un ļauj <b>c:geo</b>, piekļūt savam kontam. Tas ir viss.</string>
+  <!-- auth credentials -->
   <!-- auth token -->
   <string name="auth_token_register">Izveidot profilu</string>
   <string name="auth_token_explain_short">Šis process ļaus piekļūt %s <b>c:geo</b>.</string>

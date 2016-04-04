@@ -149,7 +149,6 @@
   <string name="err_unknown_address">C:geo nepavyko susieti šio adreso su egzistuojančia vietove</string>
   <string name="err_comm">Nežinoma ryšio klaida</string>
   <string name="err_missing_auth">Neįvestas vartotojo vardas ir/ar slaptažodis.</string>
-  <string name="err_wrong">Neteisinga prisijungimo informacija</string>
   <string name="err_maintenance">Geocaching.com svetainė neveikia dėl priežiūros darbų. c:geo veikia neprisijungusi su išsaugotomis slėptuvėmis.</string>
   <string name="err_license">Jūs dar nesutikote su Geocaching.com licenciniu susitarimu, todėl c:geo negali įkelti slėptuvės koordinačių.</string>
   <string name="err_unvalidated_account">Jums pirmiausia reikia patvirtinti savo vartotojo paskyrą Geocaching.com svetainėje.</string>
@@ -445,7 +444,6 @@
   <string name="init_login_popup_working">Jungiamasi…</string>
   <string name="init_login_popup_ok">Prisijungta</string>
   <string name="init_login_popup_failed">Nepavyko prisijungti</string>
-  <string name="init_login_popup_failed_reason">Nepavyko prisijungti:</string>
   <string name="init_login_popup_not_authorized">Prisijungimas neleistinas</string>
   <string name="init_login_popup_invalid_timestamp">Neteisingas vietinis laikas, nustatykite prietaiso laiką</string>
   <string name="init_login_popup_invalid_token">Blogas prisijungimo leidimas, leiskite prisijungti dar kartą</string>
@@ -471,8 +469,6 @@
   <string name="init_summary_friends_and_own_logs_wanted">Rodyti papildomą draugų ir savų įrašų puslapį</string>
   <string name="init_openlastdetailspage">Paskutinis naudotas puslapis</string>
   <string name="init_summary_openlastdetailspage">Atidaryti kitą slėptuvę nuo paskutinio naudoto puslapio</string>
-  <string name="init_autoload">Ilgas aprašymas</string>
-  <string name="init_summary_autoload">Visada išskleisti ilgą aprašymą</string>
   <string name="init_skin">Šviesi tema</string>
   <string name="init_summary_skin">Naudoti šviesią programos temą (reikia pakartotinai paleisti)</string>
   <string name="init_address">Rodyti adresą</string>
@@ -622,6 +618,7 @@
   <string name="auth_dialog_waiting">Laukiama %s…</string>
   <string name="auth_explain_short">Šie veiksmai <b>c:geo</b> programai leis naudotis %s.</string>
   <string name="auth_explain_long">Registracija bus pradėta paspaudus mygtuką \"Pradėti registraciją\". Šis procesas naršyklėje atvers %s puslapį. Prisijunkite prie savo paskyros ir leiskite <b>c:geo</b> ja naudotis.</string>
+  <!-- auth credentials -->
   <!-- auth token -->
   <string name="auth_token_register">Sukurti paskyrą</string>
   <string name="auth_token_explain_short">Šie veiksmai <b>c:geo</b> programai leis naudotis %s.</string>

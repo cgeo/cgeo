@@ -149,7 +149,6 @@
   <string name="err_unknown_address">c:geo nedokázal nájsť miesto k daným súradniciam</string>
   <string name="err_comm">Neznáma chyba pri komunikácii</string>
   <string name="err_missing_auth">Nevyplnené používateľské meno a/alebo heslo.</string>
-  <string name="err_wrong">Prihlasovacie údaje sú nesprávne</string>
   <string name="err_maintenance">Na webe Geocaching.com prebieha údržba, opakujte požiadavku neskôr. c:geo funguje v offline režime.</string>
   <string name="err_license">Používateľ nepotvrdil súhlas s licenčnou dohodou serveru Geocaching.com, takže c:geo nemôže načítať súradnice skrýše.</string>
   <string name="err_unvalidated_account">Najprv musíte overiť svoj účet na internetových stránkach Geocaching.com.</string>
@@ -457,7 +456,6 @@
   <string name="init_login_popup_working">Prihlasovanie…</string>
   <string name="init_login_popup_ok">Prihlásenie úspešné</string>
   <string name="init_login_popup_failed">Prihlásenie neúspešné</string>
-  <string name="init_login_popup_failed_reason">Prihlásenie neúspešné: </string>
   <string name="init_login_popup_not_authorized">Nie je autorizované</string>
   <string name="init_login_popup_invalid_timestamp">Neplatný miestny čas, nastavte čas zariadenia</string>
   <string name="init_login_popup_invalid_token">Neplatné prihlásenie, prihláste sa znovu</string>
@@ -483,8 +481,6 @@
   <string name="init_summary_friends_and_own_logs_wanted">Zobraziť ďalšiu stránku pre logy priateľov a vlastné logy</string>
   <string name="init_openlastdetailspage">Detaily na posledne použitej stránke</string>
   <string name="init_summary_openlastdetailspage">Otvoriť detaily na posledne použitej stránke</string>
-  <string name="init_autoload">Dlhý popis</string>
-  <string name="init_summary_autoload">Automatické načítanie dlhého popisu</string>
   <string name="init_skin">Svetlý vzhľad</string>
   <string name="init_summary_skin">Svetlý vzhľad\n(vyžaduje reštart c:geo)</string>
   <string name="init_address">Ukázať adresu</string>
@@ -635,6 +631,7 @@
   <string name="auth_dialog_waiting">Čakanie na %s…</string>
   <string name="auth_explain_short">Nasledujúci postup umožní <b>c:geo</b> prístup k %s.</string>
   <string name="auth_explain_long">Stlačením tlačidla \"autorizovať c:geo\" začne proces. Tento proces otvorí webový prehliadač na stránke %s. Prihláste sa na túto stránku a umožnite <b>c:geo</b> prístup k svojmu kontu. To je všetko.</string>
+  <!-- auth credentials -->
   <!-- auth token -->
   <string name="auth_token_register">Vytvoriť účet</string>
   <string name="auth_token_explain_short">Nasledujúci proces povolí <b>c:geo</b> prístup k %s.</string>

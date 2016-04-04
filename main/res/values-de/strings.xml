@@ -149,7 +149,7 @@
   <string name="err_unknown_address">c:geo konnte keine Koordinaten für diese Adresse ermitteln</string>
   <string name="err_comm">Unbekannter Kommunikationsfehler</string>
   <string name="err_missing_auth">Benutzername oder Passwort nicht gesetzt.</string>
-  <string name="err_wrong">Benutzername und/oder Passwort falsch</string>
+  <string name="err_wrong">Benutzername und/oder Passwort falsch.</string>
   <string name="err_maintenance">Geocaching.com wird zur Zeit gewartet, bitte später erneut versuchen. c:geo arbeitet im Offline-Modus.</string>
   <string name="err_license">Die Geocaching.com Nutzungsbedingungen wurden nicht akzeptiert. c:geo kann deshalb keine Koordinaten laden.</string>
   <string name="err_unvalidated_account">Die Logindaten müssen zuerst auf Geocaching.com validiert werden.</string>
@@ -324,6 +324,8 @@
   <string name="caches_refresh_all">Alle aktualisieren</string>
   <string name="caches_move_selected">Ausgewählte verschieben</string>
   <string name="caches_move_all">Alle verschieben</string>
+  <string name="caches_copy_selected">Ausgewählte kopieren</string>
+  <string name="caches_copy_all">Alle kopieren</string>
   <string name="caches_map_locus">Locus</string>
   <string name="caches_map_locus_export">Exportieren nach Locus</string>
   <string name="caches_recaptcha_title">reCAPTCHA</string>
@@ -383,6 +385,9 @@
   <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
   <string name="about_help">Hilfe</string>
   <string name="about_system_include">Bitte die folgende Systeminformation bei jedem Fehlerbericht oder bei Informationsanfragen zu c:geo mitsenden:</string>
+  <string name="about_system_info_send_button">Per E-Mail versenden…</string>
+  <string name="about_system_info">c:geo Systeminformationen</string>
+  <string name="about_system_info_send_chooser">Systeminformationen senden</string>
   <string name="changelog_github">Liste aller Änderungen</string>
   <!-- settings -->
   <string name="settings_title_open_settings">Öffne Einstellungen?</string>
@@ -423,23 +428,31 @@
   <string name="settings_info_facebook_login">c:geo kann sich zwar nicht per Facebook bei Geocaching.com einloggen, aber es gibt eine einfache Abhilfe…</string>
   <string name="settings_authorize">c:geo autorisieren</string>
   <string name="settings_reauthorize">c:geo neu autorisieren</string>
+  <string name="settings_gc_description">Autorisiere c:geo auf geocaching.com zuzugreifen, um Caches zu suchen.</string>
+  <string name="settings_ec_description">Autorisiere c:geo auf extremcaching.com zuzugreifen, um Caches zu suchen und nach deinen Funden zu filtern.</string>
   <string name="init_oc">Opencaching.de</string>
   <string name="settings_activate_oc">Aktivieren</string>
+  <string name="init_summary_oc_de">Caches von opencaching.de laden</string>
   <string name="init_oc_de_description">Autorisiere c:geo auf opencaching.de zuzugreifen um Caches zu suchen und nach deinen Funden zu filtern.</string>
   <string name="init_oc_pl">Opencaching.pl</string>
   <string name="settings_activate_oc_pl">Aktiviere</string>
+  <string name="init_summary_oc_pl">Caches von opencaching.pl laden</string>
   <string name="init_oc_pl_description">Autorisiere c:geo auf opencaching.pl zuzugreifen um Caches zu suchen und nach deinen Funden zu filtern.</string>
   <string name="init_oc_nl">Opencaching.nl</string>
   <string name="settings_activate_oc_nl">Aktivieren</string>
+  <string name="init_summary_oc_nl">Caches von opencaching.nl laden</string>
   <string name="init_oc_nl_description">Autorisiere c:geo auf opencaching.nl zuzugreifen um Caches zu suchen und nach deinen Funden zu filtern.</string>
   <string name="init_oc_us">Opencaching.us</string>
   <string name="settings_activate_oc_us">Aktivieren</string>
+  <string name="init_summary_oc_us">Caches von opencaching.us laden</string>
   <string name="init_oc_us_description">Autorisiere c:geo auf opencaching.us zuzugreifen um Caches zu suchen und nach deinen Funden zu filtern.</string>
   <string name="init_oc_ro">Opencaching.ro</string>
   <string name="settings_activate_oc_ro">Aktivieren</string>
+  <string name="init_summary_oc_ro">Caches von opencaching.ro laden</string>
   <string name="init_oc_ro_description">Autorisiere c:geo auf opencaching.ro zuzugreifen um Caches zu suchen und nach deinen Funden zu filtern.</string>
   <string name="init_oc_uk">Opencaching.org.uk</string>
   <string name="settings_activate_oc_uk">Aktivieren</string>
+  <string name="init_summary_oc_uk">Caches von opencaching.org.uk laden</string>
   <string name="init_oc_uk_description">Autorisiere c:geo auf opencaching.org.uk zuzugreifen um Caches zu suchen und nach deinen Funden zu filtern.</string>
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_gcvote_password_description">Um einen Cache bewerten zu können, folge der Anleitung auf gcvote.com  und gib das GCVote-Passwort anschließend hier ein.</string>
@@ -454,7 +467,7 @@
   <string name="init_login_popup_working">Anmeldung…</string>
   <string name="init_login_popup_ok">Login OK</string>
   <string name="init_login_popup_failed">Login fehlgeschlagen</string>
-  <string name="init_login_popup_failed_reason">Login fehlgeschlagen:</string>
+  <string name="init_login_popup_failed_reason">Login fehlgeschlagen: %s.</string>
   <string name="init_login_popup_not_authorized">Nicht autorisiert</string>
   <string name="init_login_popup_invalid_timestamp">Lokale Zeit ungültig, Gerätezeit einstellen</string>
   <string name="init_login_popup_invalid_token">Genehmigung ungültig, Neu aktivieren</string>
@@ -480,8 +493,6 @@
   <string name="init_summary_friends_and_own_logs_wanted">Lade zusätzliche Logbuch-Seiten für eigene und Logs von Freunden</string>
   <string name="init_openlastdetailspage">Zuletzt genutzte Seite</string>
   <string name="init_summary_openlastdetailspage">Öffne Details mit zuletzt genutzter Seite</string>
-  <string name="init_autoload">Ausführliche Beschreibung</string>
-  <string name="init_summary_autoload">Ausführliche Beschreibung automatisch laden</string>
   <string name="init_skin">Helle Oberfläche</string>
   <string name="init_summary_skin">Helle Oberfläche (Neustart erforderlich)</string>
   <string name="init_address">Ort statt Koordinaten</string>
@@ -518,6 +529,7 @@
   <string name="init_backup_success">Datenbank von c:geo wurde erfolgreich kopiert nach:</string>
   <string name="init_backup_failed">Sicherung der Datenbank von c:geo fehlgeschlagen.</string>
   <string name="init_backup_unnecessary">Datenbank ist leer, keine Sicherung notwendig.</string>
+  <string name="init_backup_no_backup_available">Es ist kein Backup verfügbar.</string>
   <string name="backup_confirm_overwrite">Möchtest du das existierende Backup vom %s überschreiben?</string>
   <string name="restore_confirm_overwrite">Möchtest du %s auf deinem Gerät mit dem Backup überschreiben?</string>
   <string name="init_restore_success">Wiederherstellung fertig.</string>
@@ -615,7 +627,7 @@
   <string name="map_source_osm_cyclemap">OSM: Radfahrerkarte</string>
   <string name="map_source_osm_offline">Offline</string>
   <string name="init_sendToCgeo">Send to c:geo</string>
-  <string name="settings_info_send2cgeo_title">Info zu send2:cgeo</string>
+  <string name="settings_info_send2cgeo_title">Info zu send2cgeo</string>
   <string name="init_sendToCgeo_name">Name des Endgerätes</string>
   <string name="init_sendToCgeo_description"><b>Send2cgeo</b> erlaubt es, mit einem speziellen Plugin für Firefox oder Chrome, Caches direkt von der Geocachingseite zu empfangen. Bitte dazu die Details vor einer Registrierung auf <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a> durchlesen. Eine Registrierung ist nur erforderlich, wenn auch send2cgeo genutzt werden soll. c:geo wird auch ohne Registrierung normal funktionieren.</string>
   <string name="init_sendToCgeo_register">Registrierung anfordern</string>
@@ -627,11 +639,22 @@
   <!-- auth generic -->
   <string name="auth_twitter">Twitter</string>
   <string name="auth_authorize">c:geo autorisieren</string>
+  <string name="auth_check">Authentifizierung überprüfen</string>
+  <string name="auth_check_again">Authentifizierung erneut überprüfen</string>
   <string name="auth_start">Starte Autorisierung</string>
   <string name="auth_again">Neustarten</string>
+  <string name="auth_register">Nutzerkonto erstellen</string>
+  <string name="auth_connected">Verbunden</string>
+  <string name="auth_unconnected">Noch nicht verbunden</string>
+  <string name="auth_connected_as">Verbunden als %s</string>
   <string name="auth_dialog_waiting">Warte auf %s…</string>
   <string name="auth_explain_short">Der folgende Prozess erlaubt es <b>c:geo</b> auf %s zuzugreifen.</string>
   <string name="auth_explain_long">\"Starte Autorisierung\" öffnet die Webseite von %s. Bitte dort anmelden und <b>c:geo</b> Zugriff auf den Account erlauben. Das ist alles.</string>
+  <string name="auth_forget_title">Authorisierung entfernen?</string>
+  <string name="auth_forget_message">Du wirst von diesem Dienst abgemeldet. Deine gespeicherten Anmeldedaten werden gelöscht.</string>
+  <!-- auth credentials -->
+  <string name="auth_credentials_explain_short">Der folgende Prozess erlaubt es <b>c:geo</b> auf %s zuzugreifen.</string>
+  <string name="auth_credentials_explain_long">Nach Eingabe der Anmeldeinformation \"Starte Authentifizierung\" auswählen um den Prozess zu starten. Dieser Prozess verbindet mit %s und prüft die Anmeldeinformationen. Das ist alles.</string>
   <!-- auth token -->
   <string name="auth_token_register">Nutzerkonto erstellen</string>
   <string name="auth_token_explain_short">Der folgende Prozess erlaubt es <b>c:geo</b>  auf %s zuzugreifen.</string>
@@ -665,6 +688,7 @@
   <string name="cache_offline_refresh">Aktualisieren</string>
   <string name="cache_offline_drop">Löschen</string>
   <string name="cache_offline_store">Speichern</string>
+  <string name="cache_offline_store_in_list">In Liste speichern</string>
   <string name="cache_offline_stored">Auf dem Gerät gespeichert</string>
   <string name="cache_offline_not_ready">Nicht offline verfügbar</string>
   <string name="cache_offline_time_about">vor etwa</string>
@@ -775,6 +799,7 @@
   <string name="cache_menu_refresh">Aktualisieren</string>
   <string name="cache_menu_share">Weiterleiten</string>
   <string name="cache_menu_move_list">Auf andere Liste verschieben</string>
+  <string name="cache_menu_copy_list">In andere Liste kopieren</string>
   <string name="cache_menu_whereyougo">WhereYouGo</string>
   <string name="cache_menu_oruxmaps_online">OruxMaps (Online)</string>
   <string name="cache_menu_oruxmaps_offline">OruxMaps (Offline)</string>
@@ -1392,6 +1417,11 @@
     <item quantity="one">%d Cache verschoben</item>
     <item quantity="other">%d Caches verschoben</item>
   </plurals>
+  <string name="command_copy_caches_progress">Kopiere Caches zu Liste %1s</string>
+  <plurals name="command_copy_caches_result">
+    <item quantity="one">%d Cache kopiert</item>
+    <item quantity="other">%d Caches kopiert</item>
+  </plurals>
   <string name="command_delete_caches_progress">Lösche Caches</string>
   <plurals name="command_delete_caches_result">
     <item quantity="one">%d Cache gelöscht</item>
@@ -1415,4 +1445,7 @@
   <string name="invitation_action">Freunde einladen</string>
   <string name="invitation_title">Freunde einladen c:geo auszuprobieren</string>
   <string name="invitation_message">Teste c:geo fürs Geocaching</string>
+  <string name="cache_list_remove_from">Aus Liste entfernen</string>
+  <string name="list_list_headline">Listen:</string>
+  <string name="cache_store_list">In Liste speichern</string>
 </resources>

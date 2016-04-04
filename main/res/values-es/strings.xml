@@ -149,11 +149,11 @@
   <string name="err_unknown_address">c:geo no ha podido ubicar en el mapa esta dirección</string>
   <string name="err_comm">Error de comunicación desconocido</string>
   <string name="err_missing_auth">Falta nombre de usuario o contraseña.</string>
-  <string name="err_wrong">Información de acceso errónea</string>
   <string name="err_maintenance">Geocaching.com no está disponible debido a labores de mantenimiento. c:geo puede funcionar sin conexión con los caches que hayan sido almacenados previamente.</string>
   <string name="err_license">No has aceptado las condiciones del acuerdo de licencia de Geocaching.com, por lo que c:geo no puede cargar las coordenadas de los cachés.</string>
   <string name="err_unvalidated_account">Antes debe validar su cuenta en la página web Geocaching.com.</string>
   <string name="err_unpublished">El caché solicitado aún no ha sido publicado.</string>
+  <string name="err_cache_not_found">No se pudo encontrar el caché solicitado.</string>
   <string name="err_premium_only">Este caché solo está disponible para los miembros Premium de Geocaching.com.</string>
   <string name="err_detail_open">c:geo no puede abrir los detalles del caché.</string>
   <string name="err_detail_cache">c:geo no puede mostrar el caché que quieres. ¿Seguro que es un geocaché?</string>
@@ -446,7 +446,6 @@
   <string name="init_login_popup_working">Accediendo a Geocaching.com…</string>
   <string name="init_login_popup_ok">Acceso conseguido</string>
   <string name="init_login_popup_failed">Error en el acceso.</string>
-  <string name="init_login_popup_failed_reason">El acceso ha fallado debido a </string>
   <string name="init_login_popup_not_authorized">No autorizado</string>
   <string name="init_login_popup_invalid_timestamp">Hora local inválida, ajuste la hora de nuevo</string>
   <string name="init_login_popup_invalid_token">Autorización inválida, volver a autorizar</string>
@@ -472,8 +471,6 @@
   <string name="init_summary_friends_and_own_logs_wanted">Mostrar una página adicional para los registros de amigos y propios</string>
   <string name="init_openlastdetailspage">Recordar última página</string>
   <string name="init_summary_openlastdetailspage">Mostrar última página vista al consultar los detalles del caché</string>
-  <string name="init_autoload">Descripción larga</string>
-  <string name="init_summary_autoload">Autocargar descripción larga</string>
   <string name="init_skin">Fondo blanco</string>
   <string name="init_summary_skin">Usar fondo blanco (necesitas reiniciar c:geo)</string>
   <string name="init_address">Mostrar dirección</string>
@@ -624,6 +621,7 @@
   <string name="auth_dialog_waiting">Esperando a %s…</string>
   <string name="auth_explain_short">El siguiente proceso permitirá a <b>c:geo</b> acceder a %s.</string>
   <string name="auth_explain_long">Presionando el botón \"Autorizar c:geo\" comenzará el proceso. Este proceso abrirá el navegador web con una página %s. Registrate en esta página y permite a <b>c:geo</b> acceder a tu cuenta. Eso es todo.</string>
+  <!-- auth credentials -->
   <!-- auth token -->
   <string name="auth_token_register">Crear una cuenta</string>
   <string name="auth_token_explain_short">El siguiente proceso permitirá a <b>c:geo</b> acceder a %s.</string>

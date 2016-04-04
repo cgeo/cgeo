@@ -149,7 +149,6 @@
   <string name="err_unknown_address">c:geo kunne ikke tilknytte denne adresse til en eksisterende placering</string>
   <string name="err_comm">Ukendt forbindelsesfejl</string>
   <string name="err_missing_auth">Intet brugernavn og/eller password konfigureret.</string>
-  <string name="err_wrong">Fejl i login</string>
   <string name="err_maintenance">Geocaching.com er midlertidigt lukket på grund af vedligeholdelse. c:geo fungerer offline med gemte cacher.</string>
   <string name="err_license">Bruger accepterer betingelser på Geocaching.com</string>
   <string name="err_unvalidated_account">Du skal først validere din konto på geocaching.com.</string>
@@ -453,7 +452,6 @@
   <string name="init_login_popup_working">Logger ind…</string>
   <string name="init_login_popup_ok">Login OK</string>
   <string name="init_login_popup_failed">Login fejlede</string>
-  <string name="init_login_popup_failed_reason">Login fejlede:</string>
   <string name="init_login_popup_not_authorized">Ikke godkendt</string>
   <string name="init_login_popup_invalid_timestamp">Din enheds ur er ikke korrekt indstillet. Du skal indstille enhedens ur</string>
   <string name="init_login_popup_invalid_token">Godkendelse ikke gyldig. Godkend igen.</string>
@@ -479,8 +477,6 @@
   <string name="init_summary_friends_and_own_logs_wanted">Vis en særskilt logbogsside med venners og egne logbeskeder</string>
   <string name="init_openlastdetailspage">Åbn sidste detaljeside</string>
   <string name="init_summary_openlastdetailspage">Åbn detaljesiden med de sidst indlæste oplysninger</string>
-  <string name="init_autoload">Auto-indlæs lang cachebeskrivelse</string>
-  <string name="init_summary_autoload">Auto-indlæs lang cachebeskrivelse</string>
   <string name="init_skin">Light skin</string>
   <string name="init_summary_skin">Light skin (kræver genstart af c:geo)</string>
   <string name="init_address">Vis adresse på hovedskærm</string>
@@ -631,6 +627,7 @@
   <string name="auth_dialog_waiting">Venter på %s…</string>
   <string name="auth_explain_short">Den følgende proces vil give <b>c:geo</b> tilladelse til at tilgå %s.</string>
   <string name="auth_explain_long">Når du trykker på \"Godkend c:geo\" vil du starten en godkendelsesprocedure. En browser vil blive åbnet med en %s-side, som du skal logge ind på for at godkende at <b>c:geo</b> kan tilgå din konto.</string>
+  <!-- auth credentials -->
   <!-- auth token -->
   <string name="auth_token_register">Opret en konto</string>
   <string name="auth_token_explain_short">Ved at gennemføre denne opsætning, tillader du at <b>c:geo</b> kan få adgang til %s.</string>
