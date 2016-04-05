@@ -168,13 +168,6 @@ public class Geocache implements IWaypoint {
 
     private Handler changeNotificationHandler = null;
 
-    /**
-     * Create a new cache. To be used everywhere except for the GPX parser
-     */
-    public Geocache() {
-        // empty
-    }
-
     public void setChangeNotificationHandler(final Handler newNotificationHandler) {
         changeNotificationHandler = newNotificationHandler;
     }
