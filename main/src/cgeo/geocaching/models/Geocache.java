@@ -1736,7 +1736,7 @@ public class Geocache implements IWaypoint {
     }
 
     public boolean isOffline() {
-        return !lists.isEmpty();
+        return !lists.isEmpty() && (lists.size() > 1 || lists.iterator().next() != StoredList.TEMPORARY_LIST.id);
     }
 
     /**
