@@ -56,6 +56,7 @@ import android.database.sqlite.SQLiteStatement;
 
 import java.io.File;
 import java.io.FilenameFilter;
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -1477,14 +1478,15 @@ public class DataStore {
     }
 
     private static void saveSpoilersWithoutTransaction(final Geocache cache) {
-        final String geocode = cache.getGeocode();
-        database.delete(dbTableSpoilers, "geocode = ?", new String[]{geocode});
+        if (cache.hasSpoilersSet()) {
+            final String geocode = cache.getGeocode();
+            final SQLiteStatement remove = PreparedStatement.REMOVE_SPOILERS.getStatement();
+            remove.bindString(1, cache.getGeocode());
+            remove.execute();
 
-        final List<Image> spoilers = cache.getSpoilers();
-        if (CollectionUtils.isNotEmpty(spoilers)) {
             final SQLiteStatement insertSpoiler = PreparedStatement.INSERT_SPOILER.getStatement();
             final long timestamp = System.currentTimeMillis();
-            for (final Image spoiler : spoilers) {
+            for (final Image spoiler : cache.getSpoilers()) {
                 insertSpoiler.bindString(1, geocode);
                 insertSpoiler.bindLong(2, timestamp);
                 insertSpoiler.bindString(3, spoiler.getUrl());
@@ -3150,6 +3152,7 @@ public class DataStore {
         INSERT_LOG_IMAGE("INSERT INTO " + dbTableLogImages + " (log_id, title, url, description) VALUES (?, ?, ?, ?)"),
         INSERT_LOG_COUNTS("INSERT INTO " + dbTableLogCount + " (geocode, updated, type, count) VALUES (?, ?, ?, ?)"),
         INSERT_SPOILER("INSERT INTO " + dbTableSpoilers + " (geocode, updated, url, title, description) VALUES (?, ?, ?, ?, ?)"),
+        REMOVE_SPOILERS("DELETE FROM " + dbTableSpoilers + " WHERE geocode = ?"),
         LOG_COUNT_OF_GEOCODE("SELECT count(_id) FROM " + dbTableLogsOffline + " WHERE geocode = ?"),
         COUNT_CACHES_ON_STANDARD_LIST("SELECT count(geocode) FROM " + dbTableCachesLists + " WHERE list_id = " + StoredList.STANDARD_LIST_ID),
         COUNT_ALL_CACHES("SELECT count(distinct(geocode)) FROM " + dbTableCachesLists + " WHERE list_id >= " + StoredList.STANDARD_LIST_ID),
