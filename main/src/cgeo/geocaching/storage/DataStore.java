@@ -2912,6 +2912,39 @@ public class DataStore {
         }
     }
 
+    public static void moveToList(final Collection<Geocache> caches, final int listId) {
+        if (caches.isEmpty()) {
+            return;
+        }
+        final AbstractList list = AbstractList.getListById(listId);
+        if (list == null) {
+            return;
+        }
+        if (!list.isConcrete()) {
+            return;
+        }
+        init();
+
+        final SQLiteStatement add = PreparedStatement.ADD_TO_LIST.getStatement();
+        final SQLiteStatement remove = PreparedStatement.REMOVE_FROM_ALL_LISTS.getStatement();
+
+        database.beginTransaction();
+        try {
+            for (final Geocache cache : caches) {
+                remove.bindString(1, cache.getGeocode());
+                remove.execute();
+                add.bindLong(1, listId);
+                add.bindString(2, cache.getGeocode());
+                add.execute();
+
+                cache.getLists().add(listId);
+            }
+            database.setTransactionSuccessful();
+        } finally {
+            database.endTransaction();
+        }
+    }
+
     public static void addToList(final Collection<Geocache> caches, final int listId) {
         if (caches.isEmpty()) {
             return;

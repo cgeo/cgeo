@@ -133,10 +133,12 @@ import android.widget.TextView.BufferType;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 import butterknife.Bind;
@@ -893,6 +895,15 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     }
 
     private void storeCache() {
+        storeCache(false);
+    }
+
+    /**
+     *
+     * @param move set to <code>true</code> to move the cache to the cache, <code>false</code> to
+     *             add another tag
+     */
+    private void storeCache(final boolean move) {
         if (progress.isShowing()) {
             showToast(res.getString(R.string.err_detail_still_working));
             return;
@@ -904,20 +915,29 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     new Action1<Integer>() {
                         @Override
                         public void call(final Integer selectedListId) {
-                            storeCacheInList(selectedListId);
+                            storeCacheInList(selectedListId, move);
                         }
                     }, true, cache.getLists());
         } else {
-            storeCacheInList(StoredList.TEMPORARY_LIST.id);
+            storeCacheInList(StoredList.TEMPORARY_LIST.id, move);
         }
     }
 
     private void storeCacheInList(final Integer selectedListId) {
+        storeCacheInList(selectedListId, false);
+    }
+    private void storeCacheInList(final Integer selectedListId, final boolean move) {
         if (cache.isOffline()) {
             // cache already offline, just add to another list
-            DataStore.addToList(Collections.singletonList(cache), selectedListId);
+            if (move) {
+                DataStore.moveToList(Collections.singletonList(cache), selectedListId);
+            } else {
+                DataStore.addToList(Collections.singletonList(cache), selectedListId);
+            }
+
             new StoreCacheHandler(CacheDetailActivity.this, progress).sendEmptyMessage(CancellableHandler.DONE);
         } else {
+            // no need to consider move, selectedListId will be the only selected list
             storeCache(selectedListId);
         }
     }
@@ -1020,7 +1040,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             updateAttributesText();
             ButterKnife.findById(view, R.id.attributes_box).setVisibility(cache.getAttributes().isEmpty() ? View.GONE : View.VISIBLE);
 
-            updateOfflineBox(view, cache, res, new RefreshCacheClickListener(), new DropCacheClickListener(), new StoreCacheClickListener());
+            updateOfflineBox(view, cache, res, new RefreshCacheClickListener(), new DropCacheClickListener(), new StoreCacheClickListener(), new StoreCacheLongClickListener());
 
             // watchlist
             final Button buttonWatchlistAdd = ButterKnife.findById(view, R.id.add_to_watchlist);
@@ -1118,6 +1138,15 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             @Override
             public void onClick(final View arg0) {
                 storeCache();
+            }
+
+        }
+
+        private class StoreCacheLongClickListener implements View.OnLongClickListener {
+            @Override
+            public boolean onLongClick(final View arg0) {
+                storeCache(true);
+                return true;
             }
 
         }
@@ -2231,7 +2260,8 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     static void updateOfflineBox(final View view, final Geocache cache, final Resources res,
                                         final OnClickListener refreshCacheClickListener,
                                         final OnClickListener dropCacheClickListener,
-                                        final OnClickListener storeCacheClickListener) {
+                                        final OnClickListener storeCacheClickListener,
+                                        final OnLongClickListener storeCacheLongClickListener) {
         // offline use
         final TextView offlineText = ButterKnife.findById(view, R.id.offline_text);
         final Button offlineRefresh = ButterKnife.findById(view, R.id.offline_refresh);
@@ -2240,6 +2270,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
         offlineStore.setClickable(true);
         offlineStore.setOnClickListener(storeCacheClickListener);
+        offlineStore.setOnLongClickListener(storeCacheLongClickListener);
 
         offlineRefresh.setVisibility(cache.supportsRefresh() ? View.VISIBLE : View.GONE);
         offlineRefresh.setClickable(true);

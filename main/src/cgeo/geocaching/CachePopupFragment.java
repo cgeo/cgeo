@@ -110,7 +110,7 @@ public class CachePopupFragment extends AbstractDialogFragment {
             addCacheDetails();
 
             // offline use
-            CacheDetailActivity.updateOfflineBox(getView(), cache, res, new RefreshCacheClickListener(), new DropCacheClickListener(), new StoreCacheClickListener());
+            CacheDetailActivity.updateOfflineBox(getView(), cache, res, new RefreshCacheClickListener(), new DropCacheClickListener(), new StoreCacheClickListener(), new StoreCacheLongClickListener());
 
             updateCacheLists();
         } catch (final Exception e) {
@@ -201,6 +201,55 @@ public class CachePopupFragment extends AbstractDialogFragment {
         }
     }
 
+    private class StoreCacheLongClickListener implements View.OnLongClickListener {
+        @Override
+        public boolean onLongClick(final View arg0) {
+            if (progress.isShowing()) {
+                showToast(res.getString(R.string.err_detail_still_working));
+                return false;
+            }
+
+            if (Settings.getChooseList()) {
+                // let user select list to store cache in
+                new StoredList.UserInterface(getActivity()).promptForListSelection(R.string.list_title,
+                        new Action1<Integer>() {
+                            @Override
+                            public void call(final Integer selectedListId) {
+                                storeCache(selectedListId);
+                            }
+                        }, true, cache.getLists());
+            } else {
+                storeCache(StoredList.TEMPORARY_LIST.id);
+            }
+            return true;
+        }
+
+        protected void storeCache(final int listId) {
+            if (cache.isOffline()) {
+                // cache already offline, just move to another list
+                DataStore.moveToList(Collections.singletonList(cache), listId);
+                cache.setLists(Collections.singleton(listId));
+                updateCacheLists();
+            } else {
+                // normal store to list, as cache should not yet be tagged
+                final StoreCacheHandler storeCacheHandler = new StoreCacheHandler(R.string.cache_dialog_offline_save_message);
+                final FragmentActivity activity = getActivity();
+                progress.show(activity, res.getString(R.string.cache_dialog_offline_save_title), res.getString(R.string.cache_dialog_offline_save_message), true, storeCacheHandler.cancelMessage());
+                AndroidRxUtils.andThenOnUi(Schedulers.io(), new Action0() {
+                    @Override
+                    public void call() {
+                        cache.store(listId, storeCacheHandler);
+                    }
+                }, new Action0() {
+                    @Override
+                    public void call() {
+                        activity.supportInvalidateOptionsMenu();
+                        updateCacheLists();
+                    }
+                });
+            }
+        }
+    }
     private class RefreshCacheClickListener implements View.OnClickListener {
         @Override
         public void onClick(final View arg0) {
