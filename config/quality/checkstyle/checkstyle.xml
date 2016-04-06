@@ -12,9 +12,6 @@
       <property name="allowClassImports" value="false" />
       <property name="allowStaticMemberImports" value="false" />
     </module>
-    <module name="AvoidStaticImport">
-      <property name="severity" value="warning" />
-    </module>
     <module name="DefaultComesLast">
       <property name="severity" value="warning" />
     </module>
