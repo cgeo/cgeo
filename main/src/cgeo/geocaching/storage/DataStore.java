@@ -98,14 +98,14 @@ public class DataStore {
         DATABASE,
     }
 
-    private static final Func1<Cursor,String> GET_STRING_0 = new Func1<Cursor, String>() {
+    private static final Func1<Cursor, String> GET_STRING_0 = new Func1<Cursor, String>() {
         @Override
         public String call(final Cursor cursor) {
             return cursor.getString(0);
         }
     };
 
-    private static final Func1<Cursor,Integer> GET_INTEGER_0 = new Func1<Cursor, Integer>() {
+    private static final Func1<Cursor, Integer> GET_INTEGER_0 = new Func1<Cursor, Integer>() {
         @Override
         public Integer call(final Cursor cursor) {
             return cursor.getInt(0);
@@ -1239,7 +1239,7 @@ public class DataStore {
         values.put("coordsChanged", cache.hasUserModifiedCoords() ? 1 : 0);
         values.put("finalDefined", cache.hasFinalDefined() ? 1 : 0);
         values.put("logPasswordRequired", cache.isLogPasswordRequired() ? 1 : 0);
-        values.put("watchlistCount",cache.getWatchlistCount());
+        values.put("watchlistCount", cache.getWatchlistCount());
 
         init();
 

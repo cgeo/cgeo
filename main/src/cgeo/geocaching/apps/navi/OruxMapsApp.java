@@ -26,10 +26,10 @@ abstract class OruxMapsApp extends AbstractPointNavigationApp {
 
     private void navigate(final @NonNull Activity activity, final @NonNull Geopoint point, final @NonNull String name) {
         final Intent intent = new Intent(this.intent);
-        double[] targetLat = { point.getLatitude() };
-        double[] targetLon = { point.getLongitude() };
-        intent.putExtra(ORUXMAPS_EXTRA_LATITUDE, targetLat);//latitude, wgs84 datum
-        intent.putExtra(ORUXMAPS_EXTRA_LONGITUDE, targetLon);//longitude, wgs84 datum
+        final double[] targetLat = { point.getLatitude() };
+        final double[] targetLon = { point.getLongitude() };
+        intent.putExtra(ORUXMAPS_EXTRA_LATITUDE, targetLat); //latitude, wgs84 datum
+        intent.putExtra(ORUXMAPS_EXTRA_LONGITUDE, targetLon); //longitude, wgs84 datum
         if (!name.isEmpty()) {
             String[] targetName = { name };
             intent.putExtra(ORUXMAPS_EXTRA_NAME, targetName);

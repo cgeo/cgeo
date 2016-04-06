@@ -437,7 +437,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
         public void onClick(final View arg0) {
             final TimeDialog timeDialog = TimeDialog.getInstance(date);
             timeDialog.setCancelable(true);
-            timeDialog.show(getSupportFragmentManager(),"time_dialog");
+            timeDialog.show(getSupportFragmentManager(), "time_dialog");
         }
     }
 
@@ -446,7 +446,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
         public void onClick(final View arg0) {
             final CoordinatesInputDialog coordinatesDialog = CoordinatesInputDialog.getInstance(geocache, geopoint);
             coordinatesDialog.setCancelable(true);
-            coordinatesDialog.show(getSupportFragmentManager(),"coordinates_dialog");
+            coordinatesDialog.show(getSupportFragmentManager(), "coordinates_dialog");
         }
     }
 

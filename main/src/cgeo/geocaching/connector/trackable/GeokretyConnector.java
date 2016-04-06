@@ -353,7 +353,7 @@ public class GeokretyConnector extends AbstractTrackableConnector {
                     "formname", "ruchy",
                     "logtype", String.valueOf(trackableLog.action.gkid),
                     "data", String.format(Locale.ENGLISH, "%tY-%tm-%td", date, date, date), // YYYY-MM-DD
-                    "godzina",String.format("%tH", date), // HH
+                    "godzina", String.format("%tH", date), // HH
                     "minuta", String.format("%tM", date), // MM
                     "comment", log,
                     "app", context.getString(R.string.app_name),

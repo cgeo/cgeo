@@ -42,10 +42,10 @@ public class CachePopupFragment extends AbstractDialogFragment {
     public static DialogFragment newInstance(final String geocode) {
 
         final Bundle args = new Bundle();
-        args.putString(GEOCODE_ARG,geocode);
+        args.putString(GEOCODE_ARG, geocode);
 
         final DialogFragment f = new CachePopupFragment();
-        f.setStyle(DialogFragment.STYLE_NO_TITLE,0);
+        f.setStyle(DialogFragment.STYLE_NO_TITLE, 0);
         f.setArguments(args);
 
         return f;

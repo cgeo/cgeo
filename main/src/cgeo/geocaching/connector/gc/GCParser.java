@@ -1118,7 +1118,8 @@ public final class GCParser {
     @NonNull
     static ImmutablePair<StatusCode, String> postLog(final String geocode, final String cacheid, final String[] viewstates,
                                                      final LogType logType, final int year, final int month, final int day,
-                                                     final String log, final List<TrackableLog> trackables,final boolean addToFavorites) {
+                                                     final String log, final List<TrackableLog> trackables,
+                                                     final boolean addToFavorites) {
         if (GCLogin.isEmpty(viewstates)) {
             Log.e("GCParser.postLog: No viewstate given");
             return new ImmutablePair<>(StatusCode.LOG_POST_ERROR, "");
