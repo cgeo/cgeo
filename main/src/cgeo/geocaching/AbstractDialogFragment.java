@@ -68,8 +68,7 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
         setHasOptionsMenu(true);
     }
 
-    protected void initCustomActionBar(final View v)
-    {
+    protected void initCustomActionBar(final View v) {
         final ImageView defaultNavigationImageView = ButterKnife.findById(v, R.id.defaultNavigation);
         defaultNavigationImageView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -130,8 +129,7 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
     }
 
 
-    protected void showPopup(final View view)
-    {
+    protected void showPopup(final View view) {
         // For reason I totally not understand the PopupMenu from Appcompat is broken beyond
         // repair. Chicken out here and show the old menu on Gingerbread.
         // The "correct" way of implementing this is stil in
@@ -159,8 +157,7 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
         popupMenu.show();
     }
 
-    protected void showPopupCompat(final View view)
-    {
+    protected void showPopupCompat(final View view) {
         final PopupMenu popupMenu = new PopupMenu(getActivity(), view);
 
         // Directly instantiate SupportMenuInflater instead of getActivity().getMenuinflator
@@ -173,8 +170,7 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
     }
 
 
-    protected void init()
-    {
+    protected void init() {
         cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
 
         if (cache == null) {

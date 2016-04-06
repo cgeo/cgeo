@@ -10,8 +10,7 @@ import java.io.Reader;
  * Filter reader which can filter out invalid XML characters and character references.
  *
  */
-public class InvalidXMLCharacterFilterReader extends FilterReader
-{
+public class InvalidXMLCharacterFilterReader extends FilterReader {
 
     public InvalidXMLCharacterFilterReader(final Reader in) {
         super(in);

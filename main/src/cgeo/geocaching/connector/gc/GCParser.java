@@ -1419,8 +1419,7 @@ public final class GCParser {
      * @param page Page containing the information about howm many people watching on geocache
      * @return Number of people watching geocache, -1 when error
      */
-    static int getWatchListCount(final String page)
-    {
+    static int getWatchListCount(final String page) {
         final String sCount = TextUtils.getMatch(page, GCConstants.PATTERN_WATCHLIST_COUNT, true, 1, "notFound", false);
         if (sCount.equals("notFound")) {
             return -1;
