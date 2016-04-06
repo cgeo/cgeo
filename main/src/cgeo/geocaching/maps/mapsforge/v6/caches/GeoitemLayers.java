@@ -1,8 +1,8 @@
 package cgeo.geocaching.maps.mapsforge.v6.caches;
 
-import android.support.annotation.NonNull;
-
 import org.mapsforge.map.layer.Layer;
+
+import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -118,6 +118,7 @@ public class GeoitemLayers implements Collection<GeoitemLayer> {
         return this.geoitems.values().toArray();
     }
 
+    @SuppressWarnings("hiding")
     @Override
     @NonNull
     public <GeoitemLayer> GeoitemLayer[] toArray(@NonNull final GeoitemLayer[] array) {

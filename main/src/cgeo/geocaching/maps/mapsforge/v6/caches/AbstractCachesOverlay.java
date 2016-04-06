@@ -23,7 +23,9 @@ import org.mapsforge.map.layer.Layers;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 
 public abstract class AbstractCachesOverlay {
@@ -68,17 +70,70 @@ public abstract class AbstractCachesOverlay {
         invalidated = false;
     }
 
+    protected void fill(final Set<Geocache> caches) {
+
+        final Collection<String> removeCodes = getGeocodes();
+        final Collection<String> newCodes = new HashSet<>();
+
+        // display caches
+        final Set<Geocache> cachesToDisplay = caches;
+
+        if (!cachesToDisplay.isEmpty()) {
+            // Only show waypoints when less than showWaypointsthreshold Caches shown
+            final boolean showWaypoints = cachesToDisplay.size() < Settings.getWayPointsThreshold();
+
+            Log.d(String.format(Locale.ENGLISH, "CachesToDisplay: %d, showWaypoints: %b", cachesToDisplay.size(), showWaypoints));
+
+            for (final Geocache cache : cachesToDisplay) {
+
+                if (cache == null) {
+                    continue;
+                }
+                if (showWaypoints) {
+                    final List<Waypoint> waypoints = cache.getWaypoints();
+                    for (final Waypoint waypoint : waypoints) {
+                        if (waypoint == null || waypoint.getCoords() == null) {
+                            continue;
+                        }
+                        if (removeCodes.contains(waypoint.getGpxId())) {
+                            removeCodes.remove(waypoint.getGpxId());
+                        } else {
+                            if (addItem(waypoint)) {
+                                newCodes.add(waypoint.getGpxId());
+                            }
+                        }
+                    }
+                }
+
+                if (cache.getCoords() == null) {
+                    continue;
+                }
+                if (removeCodes.contains(cache.getGeocode())) {
+                    removeCodes.remove(cache.getGeocode());
+                } else {
+                    if (addItem(cache)) {
+                        newCodes.add(cache.getGeocode());
+                    }
+                }
+            }
+        }
+
+        syncLayers(removeCodes, newCodes);
+
+        repaint();
+    }
+
     protected final boolean addItem(final Geocache cache) {
         final GeoEntry entry = new GeoEntry(cache.getGeocode(), overlayId);
         if (geoEntries.add(entry)) {
             layerList.add(getCacheItem(cache, this.mapHandlers.getTapHandler()));
 
-            Log.d(String.format("Cache %s for id %d added, geoEntries: %d", entry.geocode, overlayId, geoEntries.size()));
+            Log.d(String.format(Locale.ENGLISH, "Cache %s for id %d added, geoEntries: %d", entry.geocode, overlayId, geoEntries.size()));
 
             return true;
         }
 
-        Log.d(String.format("Cache %s for id %d not added, geoEntries: %d", entry.geocode, overlayId, geoEntries.size()));
+        Log.d(String.format(Locale.ENGLISH, "Cache %s for id %d not added, geoEntries: %d", entry.geocode, overlayId, geoEntries.size()));
 
         return false;
     }
@@ -89,12 +144,12 @@ public abstract class AbstractCachesOverlay {
         if (waypointItem != null && geoEntries.add(entry)) {
             layerList.add(waypointItem);
 
-            Log.d(String.format("Waypoint %s for id %d added, geoEntries: %d", entry.geocode, overlayId, geoEntries.size()));
+            Log.d(String.format(Locale.ENGLISH, "Waypoint %s for id %d added, geoEntries: %d", entry.geocode, overlayId, geoEntries.size()));
 
             return true;
         }
 
-        Log.d(String.format("Waypoint %s for id %d not added, geoEntries: %d", entry.geocode, overlayId, geoEntries.size()));
+        Log.d(String.format(Locale.ENGLISH, "Waypoint %s for id %d not added, geoEntries: %d", entry.geocode, overlayId, geoEntries.size()));
 
         return false;
     }
@@ -140,7 +195,7 @@ public abstract class AbstractCachesOverlay {
 
         layerList.clear();
 
-        Log.d(String.format("Layers for id %d cleared, remaining geoEntries: %d", overlayId, geoEntries.size()));
+        Log.d(String.format(Locale.ENGLISH, "Layers for id %d cleared, remaining geoEntries: %d", overlayId, geoEntries.size()));
     }
 
     protected void syncLayers(final Collection<String> removeCodes, final Collection<String> newCodes) {
@@ -154,7 +209,14 @@ public abstract class AbstractCachesOverlay {
         final int index = layers.indexOf(anchorLayer) + 1;
         layers.addAll(index, layerList.getMatchingLayers(newCodes));
 
-        Log.d(String.format("Layers for id %d synced. Codes removed: %d, new codes: %d, geoEntries: %d", overlayId, removeCodes.size(), newCodes.size(), geoEntries.size()));
+        Log.d(String.format(Locale.ENGLISH, "Layers for id %d synced. Codes removed: %d, new codes: %d, geoEntries: %d", overlayId, removeCodes.size(), newCodes.size(), geoEntries.size()));
+    }
+
+    static boolean mapMoved(final Viewport referenceViewport, final Viewport newViewport) {
+        return Math.abs(newViewport.getLatitudeSpan() - referenceViewport.getLatitudeSpan()) > 50e-6 ||
+                Math.abs(newViewport.getLongitudeSpan() - referenceViewport.getLongitudeSpan()) > 50e-6 ||
+                Math.abs(newViewport.center.getLatitude() - referenceViewport.center.getLatitude()) > referenceViewport.getLatitudeSpan() / 4 ||
+                Math.abs(newViewport.center.getLongitude() - referenceViewport.center.getLongitude()) > referenceViewport.getLongitudeSpan() / 4;
     }
 
     static synchronized void filter(final Collection<Geocache> caches) {
