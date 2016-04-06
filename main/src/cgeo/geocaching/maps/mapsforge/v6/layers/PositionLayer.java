@@ -27,7 +27,6 @@ public class PositionLayer extends Layer {
     private LatLong location = null;
     private float heading = 0f;
     private android.graphics.Bitmap arrowNative = null;
-    private android.graphics.Bitmap arrowRotNative = null;
     private Bitmap arrow = null;
     private Paint accuracyCircle = null;
     private int widthArrowHalf = 0;
@@ -94,7 +93,7 @@ public class PositionLayer extends Layer {
 
         final Matrix matrix = new Matrix();
         matrix.setRotate(heading, widthArrowHalf, heightArrowHalf);
-        arrowRotNative = android.graphics.Bitmap.createBitmap(arrowNative, 0, 0, arrowNative.getWidth(), arrowNative.getHeight(), matrix, true);
+        final android.graphics.Bitmap arrowRotNative = android.graphics.Bitmap.createBitmap(arrowNative, 0, 0, arrowNative.getWidth(), arrowNative.getHeight(), matrix, true);
 
         final Drawable tmpArrow = new BitmapDrawable(CgeoApplication.getInstance().getResources(), arrowRotNative);
         arrow = AndroidGraphicFactory.convertToBitmap(tmpArrow);

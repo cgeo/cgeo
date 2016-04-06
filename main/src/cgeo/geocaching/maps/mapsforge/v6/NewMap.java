@@ -298,6 +298,7 @@ public class NewMap extends AbstractActionBarActivity {
                     break;
                 default: // DETAILED
                     menu.findItem(R.id.menu_strategy_detailed).setChecked(true);
+                    break;
             }
 
             menu.findItem(R.id.menu_hint).setVisible(mapMode == MapMode.SINGLE);
@@ -520,7 +521,7 @@ public class NewMap extends AbstractActionBarActivity {
 
     private void initializeLayers() {
         // tile renderer layer (if map file is defined)
-        File mapFile = NewMap.getMapFile();
+        final File mapFile = NewMap.getMapFile();
         if (mapFile != null && mapFile.exists()) {
             this.tileRendererLayer = new TileRendererLayer(tileCache, new MapFile(mapFile),
                     this.mapView.getModel().mapViewPosition, false, true, AndroidGraphicFactory.INSTANCE);
@@ -718,7 +719,7 @@ public class NewMap extends AbstractActionBarActivity {
 
     @Nullable
     private static File getMapFile() {
-        String mapFileName = Settings.getMapFile();
+        final String mapFileName = Settings.getMapFile();
         if (StringUtils.isNotEmpty(mapFileName)) {
             return new File(mapFileName);
         }
@@ -967,10 +968,8 @@ public class NewMap extends AbstractActionBarActivity {
                         final boolean needsRepaintForDistanceOrAccuracy = needsRepaintForDistanceOrAccuracy();
                         final boolean needsRepaintForHeading = needsRepaintForHeading();
 
-                        if (needsRepaintForDistanceOrAccuracy) {
-                            if (NewMap.followMyLocation) {
-                                map.centerMap(new Geopoint(currentLocation));
-                            }
+                        if (needsRepaintForDistanceOrAccuracy && NewMap.followMyLocation) {
+                            map.centerMap(new Geopoint(currentLocation));
                         }
 
                         if (needsRepaintForDistanceOrAccuracy || needsRepaintForHeading) {
@@ -1084,10 +1083,8 @@ public class NewMap extends AbstractActionBarActivity {
             }
 
         } catch (final NotFoundException e) {
-            Log.e("NewMap.showPopup", e);
+            Log.e("NewMap.showSelection", e);
         }
-
-        return;
     }
 
     private class SelectionClickListener implements DialogInterface.OnClickListener {
@@ -1119,9 +1116,6 @@ public class NewMap extends AbstractActionBarActivity {
                 final Geocache cache = DataStore.loadCache(item.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
                 if (cache != null) {
                     final RequestDetailsThread requestDetailsThread = new RequestDetailsThread(cache, this);
-                    if (!requestDetailsThread.requestRequired()) {
-                        // don't show popup if we have enough details
-                    }
                     requestDetailsThread.start();
                     return;
                 }
@@ -1137,8 +1131,6 @@ public class NewMap extends AbstractActionBarActivity {
         } catch (final NotFoundException e) {
             Log.e("NewMap.showPopup", e);
         }
-
-        return;
     }
 
     @Nullable
