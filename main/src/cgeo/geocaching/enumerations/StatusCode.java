@@ -31,19 +31,19 @@ public enum StatusCode {
     NOT_LOGGED_IN(R.string.init_login_popup_failed),
     LOGIMAGE_POST_ERROR(R.string.err_logimage_post_failed);
 
-    final private int error_string;
+    final private int errorString;
 
-    StatusCode(final int error_string) {
-        this.error_string = error_string;
+    StatusCode(final int errorString) {
+        this.errorString = errorString;
     }
 
     public int getErrorString() {
-        return error_string;
+        return errorString;
     }
 
     @NonNull
     public String getErrorString(final Resources res) {
-        return res.getString(error_string);
+        return res.getString(errorString);
     }
 
 }
