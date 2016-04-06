@@ -33,6 +33,10 @@ import rx.functions.Func0;
  */
 public class GCVoteDialog {
 
+    private GCVoteDialog() {
+        // prevents calls from subclass throw new UnsupportedOperationException();
+    }
+
     public static void show(final Activity context, @NonNull final Geocache cache, final @Nullable Runnable afterVoteSent) {
         final Context themedContext;
 

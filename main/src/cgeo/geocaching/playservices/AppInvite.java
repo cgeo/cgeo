@@ -13,6 +13,10 @@ import cgeo.geocaching.utils.ProcessUtils;
 
 public class AppInvite {
 
+    private AppInvite() {
+        // prevents calls from subclass throw new UnsupportedOperationException();
+    }
+
     public static final boolean isAvailable() {
         return ProcessUtils.isIntentAvailable("com.google.android.gms.appinvite.ACTION_APP_INVITE");
     }
