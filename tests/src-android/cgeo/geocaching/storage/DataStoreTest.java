@@ -99,9 +99,9 @@ public class DataStoreTest extends CGeoTestCase {
 
     public static void testMoveToList() {
 
-        int listId1 = StoredList.STANDARD_LIST_ID;
-        int listId2 = StoredList.STANDARD_LIST_ID;
-        int listId3 = StoredList.STANDARD_LIST_ID;
+        Integer listId1 = null;
+        Integer listId2 = null;
+        Integer listId3 = null;
 
         // create caches
         final Geocache cache1 = new Geocache();
@@ -150,9 +150,15 @@ public class DataStoreTest extends CGeoTestCase {
             DataStore.removeCaches(geocodes, LoadFlags.REMOVE_ALL);
 
             // remove list
-            DataStore.removeList(listId1);
-            DataStore.removeList(listId2);
-            DataStore.removeList(listId3);
+            if (listId1 != null) {
+                DataStore.removeList(listId1);
+            }
+            if (listId2 != null) {
+                DataStore.removeList(listId2);
+            }
+            if (listId3 != null) {
+                DataStore.removeList(listId3);
+            }
         }
     }
 

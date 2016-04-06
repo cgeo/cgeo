@@ -604,7 +604,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 dropCache();
                 return true;
             case R.id.menu_store_in_list:
-                storeCache();
+                storeCache(false);
                 return true;
             case R.id.menu_refresh:
                 refreshCache();
@@ -894,11 +894,8 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         cache.drop(new ChangeNotificationHandler(this, progress));
     }
 
-    private void storeCache() {
-        storeCache(false);
-    }
-
     /**
+     * Store the current cache in a list. User may choose from an existing list, or create a new one
      *
      * @param move set to <code>true</code> to move the cache to the cache, <code>false</code> to
      *             add another tag
@@ -923,9 +920,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         }
     }
 
-    private void storeCacheInList(final Integer selectedListId) {
-        storeCacheInList(selectedListId, false);
-    }
     private void storeCacheInList(final Integer selectedListId, final boolean move) {
         if (cache.isOffline()) {
             // cache already offline, just add to another list
@@ -1137,7 +1131,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         private class StoreCacheClickListener implements View.OnClickListener {
             @Override
             public void onClick(final View arg0) {
-                storeCache();
+                storeCache(false);
             }
 
         }

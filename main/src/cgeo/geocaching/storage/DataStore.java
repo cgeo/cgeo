@@ -2914,10 +2914,12 @@ public class DataStore {
 
     public static void moveToList(final Collection<Geocache> caches, final int listId) {
         if (caches.isEmpty()) {
+            Log.e("No cache was passed to moveToList");
             return;
         }
         final AbstractList list = AbstractList.getListById(listId);
         if (list == null) {
+            Log.e("Target list with id " + list + " does not exist in moveToList");
             return;
         }
         if (!list.isConcrete()) {
