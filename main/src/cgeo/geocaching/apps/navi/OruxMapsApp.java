@@ -26,12 +26,12 @@ abstract class OruxMapsApp extends AbstractPointNavigationApp {
 
     private void navigate(final @NonNull Activity activity, final @NonNull Geopoint point, final @NonNull String name) {
         final Intent intent = new Intent(this.intent);
-        double[] targetLat = { point.getLatitude() };
-        double[] targetLon = { point.getLongitude() };
+        final double[] targetLat = { point.getLatitude() };
+        final double[] targetLon = { point.getLongitude() };
         intent.putExtra(ORUXMAPS_EXTRA_LATITUDE, targetLat);//latitude, wgs84 datum
         intent.putExtra(ORUXMAPS_EXTRA_LONGITUDE, targetLon);//longitude, wgs84 datum
         if (!name.isEmpty()) {
-            String[] targetName = { name };
+            final String[] targetName = { name };
             intent.putExtra(ORUXMAPS_EXTRA_NAME, targetName);
         }
 
@@ -44,8 +44,8 @@ abstract class OruxMapsApp extends AbstractPointNavigationApp {
     }
 
     @Override
-    public void navigate(@NonNull Activity activity, @NonNull Geocache cache) {
-        Geopoint coords = cache.getCoords();
+    public void navigate(final @NonNull Activity activity, final @NonNull Geocache cache) {
+        final Geopoint coords = cache.getCoords();
         if (coords != null) {
             navigate(activity, coords, cache.getName());
         } else {
@@ -54,8 +54,8 @@ abstract class OruxMapsApp extends AbstractPointNavigationApp {
     }
 
     @Override
-    public void navigate(@NonNull Activity activity, @NonNull Waypoint waypoint) {
-        Geopoint coords = waypoint.getCoords();
+    public void navigate(final @NonNull Activity activity, final @NonNull Waypoint waypoint) {
+        final Geopoint coords = waypoint.getCoords();
         if (coords != null) {
             navigate(activity, coords, waypoint.getName());
         } else {

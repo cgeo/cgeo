@@ -25,7 +25,7 @@ public class GCAuthorizationActivity extends AbstractCredentialsAuthorizationAct
 
     @Override
     protected StatusCode checkCredentials(final Credentials credentials) {
-        Credentials currentCredentials = GCConnector.getInstance().getCredentials();
+        final Credentials currentCredentials = GCConnector.getInstance().getCredentials();
         if (currentCredentials.isInvalid() ||
                 !currentCredentials.getUserName().equals(credentials.getUserName()) ||
                 !currentCredentials.getPassword().equals(credentials.getPassword())) {
@@ -33,7 +33,7 @@ public class GCAuthorizationActivity extends AbstractCredentialsAuthorizationAct
             GCLogin.getInstance().logout();
         }
 
-        StatusCode status = GCLogin.getInstance().login(credentials);
+        final StatusCode status = GCLogin.getInstance().login(credentials);
         if (status == StatusCode.NO_ERROR) {
             // Obtain avatar URL
             final String avatarUrl = GCLogin.getInstance().getAvatarUrl();
