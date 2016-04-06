@@ -20,18 +20,18 @@ abstract class OruxMapsApp extends AbstractPointNavigationApp {
     private static final String INTENT_ONLINE = "com.oruxmaps.VIEW_MAP_ONLINE";
     private static final String INTENT_OFFLINE = "com.oruxmaps.VIEW_MAP_OFFLINE";
 
-    private OruxMapsApp(@StringRes final int nameResourceId, String intent) {
+    private OruxMapsApp(@StringRes final int nameResourceId, final String intent) {
         super(getString(nameResourceId), intent);
     }
 
     private void navigate(final @NonNull Activity activity, final @NonNull Geopoint point, final @NonNull String name) {
         final Intent intent = new Intent(this.intent);
-        final double[] targetLat = { point.getLatitude() };
-        final double[] targetLon = { point.getLongitude() };
+        double[] targetLat = { point.getLatitude() };
+        double[] targetLon = { point.getLongitude() };
         intent.putExtra(ORUXMAPS_EXTRA_LATITUDE, targetLat);//latitude, wgs84 datum
         intent.putExtra(ORUXMAPS_EXTRA_LONGITUDE, targetLon);//longitude, wgs84 datum
         if (!name.isEmpty()) {
-            final String[] targetName = { name };
+            String[] targetName = { name };
             intent.putExtra(ORUXMAPS_EXTRA_NAME, targetName);
         }
 

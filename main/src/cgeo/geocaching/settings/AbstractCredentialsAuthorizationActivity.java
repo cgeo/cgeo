@@ -109,7 +109,7 @@ public abstract class AbstractCredentialsAuthorizationActivity extends AbstractA
             }
         })).subscribeOn(AndroidRxUtils.networkScheduler).subscribe(new Action1<StatusCode>() {
             @Override
-            public void call(StatusCode statusCode) {
+            public void call(final StatusCode statusCode) {
                 loginDialog.dismiss();
                 if (statusCode == StatusCode.NO_ERROR) {
                     setCredentials(credentials);
