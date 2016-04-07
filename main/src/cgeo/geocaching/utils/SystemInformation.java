@@ -74,10 +74,10 @@ public final class SystemInformation {
         for (final IConnector connector : ConnectorFactory.getConnectors()) {
             if (connector.isActive()) {
                 connectorCount++;
-                connectors.append("\n - ").append(connector.getName());
+                connectors.append("\n   ").append(connector.getName());
                 if (connector instanceof ILogin) {
                     final ILogin login = (ILogin) connector;
-                    connectors.append(": ").append(login.isLoggedIn() ? "logged in" : "not logged in")
+                    connectors.append(": ").append(login.isLoggedIn() ? "Logged in" : "Not logged in")
                             .append(" (").append(login.getLoginStatusString()).append(')');
                     if (login.getName().equals("geocaching.com") && login.isLoggedIn()) {
                         connectors.append(" / ").append(Settings.getGCMemberStatus());
@@ -85,7 +85,7 @@ public final class SystemInformation {
                 }
             }
         }
-        body.append("\nGeocaching sites enabled:").append(connectorCount > 0 ? connectors : " none");
+        body.append("\nGeocaching sites enabled:").append(connectorCount > 0 ? connectors : " None");
     }
 
     private static void appendAddons(@NonNull final StringBuilder body) {
