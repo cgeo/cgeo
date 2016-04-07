@@ -31,7 +31,7 @@ abstract class OruxMapsApp extends AbstractPointNavigationApp {
         intent.putExtra(ORUXMAPS_EXTRA_LATITUDE, targetLat); //latitude, wgs84 datum
         intent.putExtra(ORUXMAPS_EXTRA_LONGITUDE, targetLon); //longitude, wgs84 datum
         if (!name.isEmpty()) {
-            String[] targetName = { name };
+            final String[] targetName = { name };
             intent.putExtra(ORUXMAPS_EXTRA_NAME, targetName);
         }
 
