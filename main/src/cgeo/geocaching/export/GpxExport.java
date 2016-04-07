@@ -68,8 +68,7 @@ public class GpxExport extends AbstractExport {
         if (geocodes.length == 1) {
             // geocode as file name
             fileName = geocodes[0] + ".gpx";
-        }
-        else {
+        } else {
             // date and time as file name
             final SimpleDateFormat fileNameDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
             fileName = "export_" + fileNameDateFormat.format(new Date()) + ".gpx";

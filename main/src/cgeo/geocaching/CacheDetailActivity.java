@@ -1490,8 +1490,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 if (TextUtils.containsHtml(cache.getHint())) {
                     hintView.setText(Html.fromHtml(cache.getHint(), new HtmlImage(cache.getGeocode(), false, false, false), null), TextView.BufferType.SPANNABLE);
                     hintView.setText(CryptUtils.rot13((Spannable) hintView.getText()));
-                }
-                else {
+                } else {
                     hintView.setText(CryptUtils.rot13(cache.getHint()));
                 }
                 hintView.setVisibility(View.VISIBLE);
@@ -1754,8 +1753,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 coordinatesView.setOnClickListener(new CoordinatesFormatSwitcher(coordinates));
                 coordinatesView.setText(coordinates.toString());
                 coordinatesView.setVisibility(View.VISIBLE);
-            }
-            else {
+            } else {
                 coordinatesView.setVisibility(View.GONE);
             }
 
@@ -1765,8 +1763,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             if (StringUtils.isNotBlank(waypointInfo)) {
                 infoView.setText(waypointInfo);
                 infoView.setVisibility(View.VISIBLE);
-            }
-            else {
+            } else {
                 infoView.setVisibility(View.GONE);
             }
 
@@ -1798,12 +1795,10 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 noteView.setVisibility(View.VISIBLE);
                 if (TextUtils.containsHtml(wpt.getNote())) {
                     noteView.setText(Html.fromHtml(wpt.getNote(), new SmileyImage(cache.getGeocode(), noteView), new UnknownTagsHandler()), TextView.BufferType.SPANNABLE);
-                }
-                else {
+                } else {
                     noteView.setText(wpt.getNote());
                 }
-            }
-            else {
+            } else {
                 noteView.setVisibility(View.GONE);
             }
 

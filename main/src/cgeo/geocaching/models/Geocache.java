@@ -316,8 +316,7 @@ public class Geocache implements IWaypoint {
         }
         if (waypoints.isEmpty()) {
             this.setWaypoints(other.waypoints, false);
-        }
-        else {
+        } else {
             final List<Waypoint> newPoints = new ArrayList<>(waypoints);
             Waypoint.mergeWayPoints(newPoints, other.waypoints, false);
             this.setWaypoints(newPoints, false);

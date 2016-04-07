@@ -774,8 +774,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
                     sendLogInternal();
                 }
             });
-        }
-        else {
+        } else {
             sendLogInternal();
         }
     }

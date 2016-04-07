@@ -173,8 +173,7 @@ public class SettingsActivity extends PreferenceActivity {
             final Preference preference = getPreference(appEnum.preferenceKey);
             if (appEnum.app.isInstalled()) {
                 preference.setEnabled(true);
-            }
-            else {
+            } else {
                 preference.setSummary(R.string.settings_navigation_disabled);
             }
         }

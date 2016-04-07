@@ -60,8 +60,7 @@ class DistanceFilter extends AbstractFilter {
                 final int maxRange;
                 if (i < KILOMETERS.length - 1) {
                     maxRange = KILOMETERS[i + 1];
-                }
-                else {
+                } else {
                     maxRange = Integer.MAX_VALUE;
                 }
                 final String range = maxRange == Integer.MAX_VALUE ? "> " + minRange : minRange + " - " + maxRange;

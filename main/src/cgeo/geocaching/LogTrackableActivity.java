@@ -270,8 +270,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
     protected void requestKeyboardForLogging() {
         if (StringUtils.isBlank(trackingEditText.getText())) {
             new Keyboard(this).show(trackingEditText);
-        }
-        else {
+        } else {
             super.requestKeyboardForLogging();
         }
     }

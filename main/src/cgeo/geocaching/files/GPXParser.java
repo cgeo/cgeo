@@ -391,11 +391,9 @@ public abstract class GPXParser extends FileParser {
                     if (StringUtils.isBlank(parentCacheCode)) {
                         if (StringUtils.containsIgnoreCase(scriptUrl, "extremcaching")) {
                             parentCacheCode = cache.getName().substring(2);
-                        }
- else if (terraChildWaypoint) {
+                        } else if (terraChildWaypoint) {
                             parentCacheCode = StringUtils.left(cache.getGeocode(), cache.getGeocode().length() - 1);
-                        }
-                        else {
+                        } else {
                             parentCacheCode = "GC" + cache.getName().substring(2).toUpperCase(Locale.US);
                         }
                     }
@@ -906,8 +904,7 @@ public abstract class GPXParser extends FileParser {
                 public void end(final String favoritePoints) {
                     try {
                         cache.setFavoritePoints(Integer.parseInt(favoritePoints));
-                    }
-                    catch (final NumberFormatException e) {
+                    } catch (final NumberFormatException e) {
                         Log.w("Failed to parse favorite points", e);
                     }
                 }

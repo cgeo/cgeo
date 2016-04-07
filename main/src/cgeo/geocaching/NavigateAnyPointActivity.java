@@ -104,8 +104,7 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity implemen
             if (rowView == null) {
                 rowView = getInflater().inflate(R.layout.simple_way_point, parent, false);
                 viewHolder = new ViewHolder(rowView);
-            }
-            else {
+            } else {
                 viewHolder = (ViewHolder) rowView.getTag();
             }
 

@@ -44,8 +44,7 @@ public class DatabaseBackupUtils {
         final int caches = DataStore.getAllCachesCount();
         if (caches == 0) {
             restoreDatabaseInternal(activity);
-        }
-        else {
+        } else {
             Dialogs.confirm(activity, R.string.init_backup_restore, activity.getString(R.string.restore_confirm_overwrite, activity.getResources().getQuantityString(R.plurals.cache_counts, caches, caches)), new OnClickListener() {
 
                 @Override
@@ -99,8 +98,7 @@ public class DatabaseBackupUtils {
                     createBackupInternal(activity, runAfterwards);
                 }
             });
-        }
-        else {
+        } else {
             createBackupInternal(activity, runAfterwards);
         }
     }

@@ -595,8 +595,7 @@ public class CoordinatesInputDialog extends DialogFragment {
                 if (editText.length() < maxLength) {
                     if ((editText.getGravity() & Gravity.HORIZONTAL_GRAVITY_MASK) == Gravity.RIGHT) {
                         editText.setText(StringUtils.leftPad(editText.getText().toString(), maxLength, '0'));
-                    }
-                    else {
+                    } else {
                         editText.setText(StringUtils.rightPad(editText.getText().toString(), maxLength, '0'));
                     }
                 }

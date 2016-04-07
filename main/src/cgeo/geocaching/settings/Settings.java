@@ -715,8 +715,7 @@ public class Settings {
     public static void setMapZoom(final MapMode mapMode, final int zoomLevel) {
         if (mapMode == MapMode.SINGLE || mapMode == MapMode.COORDS) {
             setCacheZoom(zoomLevel);
-        }
-        else {
+        } else {
             setMapZoom(zoomLevel);
         }
     }

@@ -216,8 +216,7 @@ final class OkapiClient {
             params = new Parameters("search_method", METHOD_SEARCH_NEAREST);
             valueMap.put("center", centerString);
             valueMap.put("limit", "20");
-        }
-        else {
+        } else {
             params = new Parameters("search_method", METHOD_SEARCH_ALL);
             valueMap.put("limit", "20");
         }

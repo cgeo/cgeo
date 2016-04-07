@@ -62,8 +62,7 @@ public class AutoCompleteAdapter extends ArrayAdapter<String> {
                 if (filterResults != null && filterResults.count > 0) {
                     suggestions = (String[]) filterResults.values;
                     notifyDataSetChanged();
-                }
-                else {
+                } else {
                     notifyDataSetInvalidated();
                 }
             }

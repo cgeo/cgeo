@@ -517,8 +517,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
                         public void onClick(final View arg0) {
                             if (StringUtils.isNotBlank(trackable.getSpottedGuid())) {
                                 CacheDetailActivity.startActivityGuid(TrackableActivity.this, trackable.getSpottedGuid(), trackable.getSpottedName());
-                            }
-                            else {
+                            } else {
                                 // for GeoKrety we only know the cache geocode
                                 final String cacheCode = trackable.getSpottedName();
                                 if (ConnectorFactory.canHandle(cacheCode)) {

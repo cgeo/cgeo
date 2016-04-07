@@ -55,8 +55,7 @@ public class InvalidXMLCharacterFilterReader extends FilterReader {
                                 final int value;
                                 if (StringUtils.startsWith(numberString, "x")) {
                                     value = Integer.parseInt(numberString.substring(1), 16);
-                                }
-                                else {
+                                } else {
                                     value = Integer.parseInt(numberString);
                                 }
                                 if (!isValidXMLChar((char) value)) {

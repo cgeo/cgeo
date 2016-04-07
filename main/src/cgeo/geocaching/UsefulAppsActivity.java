@@ -102,8 +102,7 @@ public class UsefulAppsActivity extends AbstractActionBarActivity {
                 final HelperApp helperApp = HELPER_APPS[position];
                 if (helperApp.packageName.startsWith("http")) {
                     startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(helperApp.packageName)));
-                }
-                else {
+                } else {
                     ProcessUtils.openMarket(UsefulAppsActivity.this, helperApp.packageName);
                 }
             }

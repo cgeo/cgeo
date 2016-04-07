@@ -65,8 +65,7 @@ public abstract class AsyncTaskWithProgress<Params, Result> extends AbstractAsyn
         if (activity != null) {
             if (indeterminate) {
                 progress.show(activity, progressTitle, progressMessage, true, null);
-            }
-            else {
+            } else {
                 progress.show(activity, progressTitle, progressMessage, ProgressDialog.STYLE_HORIZONTAL, null);
             }
         }

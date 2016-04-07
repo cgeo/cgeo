@@ -751,8 +751,7 @@ public class MainActivity extends AbstractActionBarActivity {
         if (searchView != null && !searchView.isIconified()) {
             searchView.setIconified(true);
             MenuItemCompat.collapseActionView(searchItem);
-        }
-        else {
+        } else {
             super.onBackPressed();
         }
     }
