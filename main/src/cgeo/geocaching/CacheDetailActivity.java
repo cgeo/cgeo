@@ -1087,17 +1087,18 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 return;
             }
             final StringBuilder text = new StringBuilder();
-            for (String attributeName : attributes) {
+            for (final String attributeName : attributes) {
                 final boolean enabled = CacheAttribute.isEnabled(attributeName);
                 // search for a translation of the attribute
                 final CacheAttribute attrib = CacheAttribute.getByRawName(CacheAttribute.trimAttributeName(attributeName));
+                String attributeNameL10n = attributeName;
                 if (attrib != null) {
-                    attributeName = attrib.getL10n(enabled);
+                    attributeNameL10n = attrib.getL10n(enabled);
                 }
                 if (text.length() > 0) {
                     text.append('\n');
                 }
-                text.append(attributeName);
+                text.append(attributeNameL10n);
             }
             attribView.setText(text);
             if (ButterKnife.findById(view, R.id.attributes_grid).getVisibility() == View.VISIBLE) {
