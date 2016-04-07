@@ -149,7 +149,6 @@
   <string name="err_unknown_address">c:geo nie mógł dopasować adresu do istniejącej lokalizacji</string>
   <string name="err_comm">Nieznany błąd w komunikacji</string>
   <string name="err_missing_auth">Brak nazwy użytkownika i/lub hasła.</string>
-  <string name="err_wrong">Niepoprawne dane użytkownika</string>
   <string name="err_maintenance">Trwają prace serwisowe w Geocaching.com. c:geo pracuje offline z zapisanymi skrzynkami.</string>
   <string name="err_license">Użytkownik nie zaakceptował jeszcze regulaminu Geocaching.com, więc c:geo nie może załadować współrzędnych skrzynek.</string>
   <string name="err_unvalidated_account">Musisz najpierw zatwierdzić swoje konto na stronie Geocaching.com.</string>
@@ -452,7 +451,6 @@
   <string name="init_login_popup_working">Logowanie…</string>
   <string name="init_login_popup_ok">Nazwa użytkownika OK</string>
   <string name="init_login_popup_failed">Logowanie nie powiodło się</string>
-  <string name="init_login_popup_failed_reason">Logowanie nie powiodło się, ponieważ </string>
   <string name="init_login_popup_not_authorized">Brak autoryzacji</string>
   <string name="init_login_popup_invalid_timestamp">Czas lokalny nieprawidłowy, ustaw właściwy czas urządzenia</string>
   <string name="init_login_popup_invalid_token">Autoryzacja nieprawidłowa, spróbuj ponownie</string>
@@ -478,8 +476,6 @@
   <string name="init_summary_friends_and_own_logs_wanted">Wyświetl dodatkowy dziennik dla wpisów własnych i przyjaciół</string>
   <string name="init_openlastdetailspage">Otwórz szczegóły ostatnio używanej strony</string>
   <string name="init_summary_openlastdetailspage">Otwórz szczegóły ostatnio używanej strony</string>
-  <string name="init_autoload">Automatyczne ładowanie długich opisów</string>
-  <string name="init_summary_autoload">Zawsze ładuj długie opisy</string>
   <string name="init_skin">Light skin</string>
   <string name="init_summary_skin">Użyj light skin\n(wymaga restartu)</string>
   <string name="init_address">Pokaż adres</string>
@@ -630,6 +626,7 @@
   <string name="auth_dialog_waiting">Czekanie na %s…</string>
   <string name="auth_explain_short">Wybrany proces pozwoli na dostęp <b>c:geo</b> do %s.</string>
   <string name="auth_explain_long">Naciśnięcie \"autoryzuj c:geo\" rozpocznie proces autoryzacji. Zostanie otwarte okno przeglądarki ze stroną %s. Zaloguj się na tej stronie i zezwól <b>c:geo</b> na dostęp do konta.</string>
+  <!-- auth credentials -->
   <!-- auth token -->
   <string name="auth_token_register">Utwórz konto</string>
   <string name="auth_token_explain_short">Następujący proces umożliwi <b>c:geo</b> na dostęp do %s.</string>

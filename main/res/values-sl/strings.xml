@@ -146,7 +146,6 @@
   <string name="err_unknown">Neznana napaka</string>
   <string name="err_comm">Neznana napaka v komunikaciji</string>
   <string name="err_missing_auth">Uporabniško ime in geslo še ni nastavljeno.</string>
-  <string name="err_wrong">Napačno uporabniško ime ali geslo</string>
   <string name="err_maintenance">Geocaching.com trenutno ni na voljo zaradi vzdrževanja. c:geo lahko deluje brez povezave s shranjenimi zakladi.</string>
   <string name="err_license">Sprejeti morate pogoje uporabe Geocaching.com, da lahko naložite koordinate.</string>
   <string name="err_unvalidated_account">Aktivirate morate svoj uporabniški račun na spletni strani Geocaching.com.</string>
@@ -410,7 +409,6 @@
   <string name="init_login_popup_working">Prijavljanje…</string>
   <string name="init_login_popup_ok">Prijava uspešna</string>
   <string name="init_login_popup_failed">Prijava neuspešna</string>
-  <string name="init_login_popup_failed_reason">Prijava neuspešna:</string>
   <string name="init_login_popup_not_authorized">Ni avtoriziran</string>
   <string name="init_login_popup_invalid_timestamp">Lokalni čas ni veljaven, nastavite trenutni čas na napravi</string>
   <string name="init_login_popup_invalid_token">Neveljavna avtorizacija. Poskusite ponovno</string>
@@ -433,8 +431,6 @@
   <string name="init_summary_friends_and_own_logs_wanted">Prikaži dodaten zavihek s svojimi/prijateljevimi zapisi</string>
   <string name="init_openlastdetailspage">Odpri nazadnje odprto stran</string>
   <string name="init_summary_openlastdetailspage">Pri podrobnostih zaklada vedno odpri zadnjo uporabljeno stran</string>
-  <string name="init_autoload">Prikaži celoten opis</string>
-  <string name="init_summary_autoload">Vedno naloži celoten opis zaklada</string>
   <string name="init_skin">Svetli izgled</string>
   <string name="init_summary_skin">Uporabi svetlo različico\n(potrebuje ponovni zagon aplikacije)</string>
   <string name="init_address">Pokaži naslov</string>
@@ -576,6 +572,7 @@
   <string name="auth_dialog_waiting">Čakam na %s…</string>
   <string name="auth_explain_short">Naslednji postopek bo omogočil <b>c:geo</b>tu dostop do %s.</string>
   <string name="auth_explain_long">S pritiskom na gumb \"poveži c:geo\" se bo začel postopek. Postopek bo najprej odprl spletno stran %s. Prijavite se na to spletno stran in dovolite <b>c:geo</b>tu dostop do vašega računa. To je vse.</string>
+  <!-- auth credentials -->
   <!-- auth token -->
   <!-- auth Twitter -->
   <string name="auth_dialog_completed_twitter">c:geo je sedaj povezan s Twitterjem za objavo sporočil.</string>

@@ -149,7 +149,6 @@
   <string name="err_unknown_address">c:geo was niet in staat dit adres te herkennen als bestaande locatie</string>
   <string name="err_comm">Onbekende communicatiefout</string>
   <string name="err_missing_auth">Geen gebruikersnaam en/of wachtwoord ingesteld.</string>
-  <string name="err_wrong">Foutieve login informatie</string>
   <string name="err_maintenance">Geocaching.com is offline voor onderhoud. c:geo werkt offline met opgeslagen caches.</string>
   <string name="err_license">Gebruiker heeft de gebruikersvoorwaarden van Geocaching.com niet geaccepteerd en kan daarom geen coördinaten laden.</string>
   <string name="err_unvalidated_account">Je dient je account eerst te valideren op de Geocaching.com website.</string>
@@ -365,7 +364,7 @@
   <string name="list_dialog_create_err">c:geo kon geen nieuwe lijst aanmaken</string>
   <string name="list_dialog_remove_title">Verwijder lijst</string>
   <string name="list_dialog_remove_description">Wil je de huidige lijst van caches verwijderen? Alle overgebleven caches zullen worden verplaatst naar \"Opgeslagen\".</string>
-  <string name="list_dialog_remove_nowempty">Lijst is leeg. Wilt je de huidige lijst verwijderen?</string>
+  <string name="list_dialog_remove_nowempty">Lijst is leeg. Wil je de huidige lijst verwijderen?</string>
   <string name="list_dialog_remove">Verwijder</string>
   <string name="list_dialog_remove_ok">Lijst is verwijderd</string>
   <string name="list_dialog_remove_err">c:geo kon de huidige lijst niet verwijderen</string>
@@ -454,7 +453,6 @@
   <string name="init_login_popup_working">Inloggen op Geocaching.com…</string>
   <string name="init_login_popup_ok">Ingelogd</string>
   <string name="init_login_popup_failed">Inloggen mislukt.</string>
-  <string name="init_login_popup_failed_reason">Inloggen mislukt omdat </string>
   <string name="init_login_popup_not_authorized">Niet geautoriseerd</string>
   <string name="init_login_popup_invalid_timestamp">Lokale tijd ongeldig, pas apparaat tijd aan</string>
   <string name="init_login_popup_invalid_token">Autorisatie ongeldig, opnieuw autoriseren</string>
@@ -480,8 +478,6 @@
   <string name="init_summary_friends_and_own_logs_wanted">Toon additionele logboek pagina voor eigen en vrienden logs</string>
   <string name="init_openlastdetailspage">Laad details met laatst gebruikte pagina</string>
   <string name="init_summary_openlastdetailspage">Laad details met laatst gebruikte pagina</string>
-  <string name="init_autoload">Lange omschrijving</string>
-  <string name="init_summary_autoload">Automatisch laden van lange omschrijving</string>
   <string name="init_skin">Lichte skin</string>
   <string name="init_summary_skin">Lichte skin (c:geo herstarten)</string>
   <string name="init_address">Toon adres</string>
@@ -518,7 +514,7 @@
   <string name="init_backup_success">De database van c:geo was succesvol gekopieerd naar het bestand:</string>
   <string name="init_backup_failed">Backup van c:geo database is niet gelukt.</string>
   <string name="init_backup_unnecessary">Database is leeg, backup niet nodig.</string>
-  <string name="backup_confirm_overwrite">Wilt je de bestaande backup van %s overschrijven?</string>
+  <string name="backup_confirm_overwrite">Wil je de bestaande backup van %s overschrijven?</string>
   <string name="restore_confirm_overwrite">Wil je %s op uw apparaat overschrijven met de backup?</string>
   <string name="init_restore_success">Herstellen is gelukt.</string>
   <string name="init_restore_failed">Herstellen is niet gelukt.</string>
@@ -632,6 +628,7 @@
   <string name="auth_dialog_waiting">Wachten op %s…</string>
   <string name="auth_explain_short">Het volgende proces zal <b>c:geo</b> toegang geven tot %s.</string>
   <string name="auth_explain_long">Druk op de knop \"Autoriseer c:geo\" om het proces te starten. Dit proces zal een webbrowser met een pagina voor %s. Log in op deze pagina om <b>c:geo</b> toegang te geven tot je account. Dat is alles.</string>
+  <!-- auth credentials -->
   <!-- auth token -->
   <string name="auth_token_register">Een account aanmaken</string>
   <string name="auth_token_explain_short">Het volgende proces zal <b>c:geo</b> toegang geven tot %s.</string>

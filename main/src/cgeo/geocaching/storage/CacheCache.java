@@ -85,7 +85,7 @@ public class CacheCache {
             if (cache.getCoords() == null) {
                 // FIXME: this kludge must be removed, it is only present to help us debug the cases where
                 // caches contain null coordinates.
-                Log.e("CacheCache.getInViewport: got cache with null coordinates: " + cache.getGeocode());
+                Log.w("CacheCache.getInViewport: got cache with null coordinates: " + cache.getGeocode());
                 continue;
             }
             if (cacheType.contains(cache) && viewport.contains(cache)) {

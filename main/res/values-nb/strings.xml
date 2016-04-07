@@ -149,7 +149,6 @@
   <string name="err_unknown_address">c:geo klarte ikke finne et sted ut fra denne adressen</string>
   <string name="err_comm">Ukjent tilkoblingsfeil</string>
   <string name="err_missing_auth">Brukernavn eller passord er ikke oppgitt.</string>
-  <string name="err_wrong">Feilaktige innloggingsopplysninger</string>
   <string name="err_maintenance">Geocaching.com er nede for vedlikehold. c:geo arbeider offline med lagrede cacher.</string>
   <string name="err_license">Brukeren har ikke akseptert Geocaching.com sin lisens. c:geo kan ikke laste cachens koordinater.</string>
   <string name="err_unvalidated_account">Du må aktivere kontoen din på Geocaching.com først.</string>
@@ -453,7 +452,6 @@
   <string name="init_login_popup_working">Logger inn på Geocaching.com…</string>
   <string name="init_login_popup_ok">Innlogging fullført</string>
   <string name="init_login_popup_failed">Innlogging mislyktes.</string>
-  <string name="init_login_popup_failed_reason">Innlogging mislyktes p.g.a.</string>
   <string name="init_login_popup_not_authorized">Ikke godkjent</string>
   <string name="init_login_popup_invalid_timestamp">Lokal tid er ugyldig. Still klokken på enheten</string>
   <string name="init_login_popup_invalid_token">Godkjenning ugyldig, prøv å godkjenn på nytt</string>
@@ -479,8 +477,6 @@
   <string name="init_summary_friends_and_own_logs_wanted">Vis ekstra loggbokside for venners og egne logger</string>
   <string name="init_openlastdetailspage">Sist brukte fane</string>
   <string name="init_summary_openlastdetailspage">Åpne detaljsiden til cacher på den siste brukte fanen</string>
-  <string name="init_autoload">Last full beskrivelse automatisk</string>
-  <string name="init_summary_autoload">Last full beskrivelse automatisk</string>
   <string name="init_skin">Hvitt tema</string>
   <string name="init_summary_skin">Hvitt tema</string>
   <string name="init_address">Vis adressen i menyen</string>
@@ -631,6 +627,7 @@
   <string name="auth_dialog_waiting">Venter på %s…</string>
   <string name="auth_explain_short">Følgende prosess vil gi <b>c:geo</b> tilgang til %s.</string>
   <string name="auth_explain_long">Når du trykker på knappen \"Godkjenn c:geo\" starter prosessen. Nettleseren åpner siden til %s. Logg inn på denne siden og tillat at <b>c:geo</b> får tilgang til din brukerkonto. Så enkelt er det!</string>
+  <!-- auth credentials -->
   <!-- auth token -->
   <string name="auth_token_register">Opprett en konto</string>
   <string name="auth_token_explain_short">Følgende prosess vil gi <b>c:geo</b> tilgang til %s.</string>

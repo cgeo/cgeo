@@ -14,10 +14,12 @@ import cgeo.geocaching.location.Geopoint;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.EnumSet;
+import java.util.HashSet;
 import java.util.List;
 
 public class GeocacheTest extends CGeoTestCase {
@@ -582,4 +584,28 @@ public class GeocacheTest extends CGeoTestCase {
         assertThat(cache.getInventory().get(1).getBrand()).isEqualTo(TrackableBrand.GEOKRETY);
 
     }
+
+    public static void testIsOfflineNoList() {
+        final Geocache cache = new Geocache();
+        assertThat(cache.isOffline()).isFalse();
+    }
+
+    public static void testIsOfflineStandardList() {
+        final Geocache cache = new Geocache();
+        cache.setLists(Collections.singleton(StoredList.STANDARD_LIST_ID));
+        assertThat(cache.isOffline()).isTrue();
+    }
+
+    public static void testIsOfflineTemporaryList() {
+        final Geocache cache = new Geocache();
+        cache.setLists(Collections.singleton(StoredList.TEMPORARY_LIST.id));
+        assertThat(cache.isOffline()).isFalse();
+    }
+
+    public static void testIsOfflineMultipleLists() {
+        final Geocache cache = new Geocache();
+        cache.setLists(new HashSet<>(Arrays.asList(StoredList.TEMPORARY_LIST.id, 42)));
+        assertThat(cache.isOffline()).isTrue();
+    }
+
 }

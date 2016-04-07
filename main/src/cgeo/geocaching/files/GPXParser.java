@@ -1,12 +1,7 @@
 package cgeo.geocaching.files;
 
 import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.models.LogEntry;
 import cgeo.geocaching.R;
-import cgeo.geocaching.models.Trackable;
-import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.capability.ILogin;
@@ -22,6 +17,11 @@ import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.LogEntry;
+import cgeo.geocaching.models.Trackable;
+import cgeo.geocaching.models.Waypoint;
+import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.HtmlUtils;
 import cgeo.geocaching.utils.Log;
@@ -49,6 +49,7 @@ import java.io.InputStreamReader;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.EnumSet;
 import java.util.HashSet;
@@ -1218,7 +1219,7 @@ public abstract class GPXParser extends FileParser {
         wptUserDefined = false;
         logs = new ArrayList<>();
 
-        cache = new Geocache(this);
+        cache = createCache();
 
         // explicitly set all properties which could lead to database access, if left as null value
         cache.setLocation("");
@@ -1231,6 +1232,20 @@ public abstract class GPXParser extends FileParser {
         }
         originalLon = null;
         originalLat = null;
+    }
+
+    /**
+     * Geocache factory method. This explicitly sets several members to empty lists, which does not happen with the
+     * default constructor.
+     */
+    private static Geocache createCache() {
+        final Geocache newCache = new Geocache();
+
+        newCache.setReliableLatLon(true); // always assume correct coordinates, when importing from file instead of website
+        newCache.setAttributes(Collections.<String> emptyList()); // override the lazy initialized list
+        newCache.setWaypoints(Collections.<Waypoint> emptyList(), false); // override the lazy initialized list
+
+        return newCache;
     }
 
     /**

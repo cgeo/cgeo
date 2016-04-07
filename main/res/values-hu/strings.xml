@@ -149,7 +149,6 @@
   <string name="err_unknown_address">A c:geo nem tudta leképezni ezt a címet egy létező helyszínre</string>
   <string name="err_comm">Ismeretlen kommunikációs hiba</string>
   <string name="err_missing_auth">Nincs megadva belépési név és/vagy jelszó.</string>
-  <string name="err_wrong">Rossz belépési adatok</string>
   <string name="err_maintenance">A geocaching.com karbantartás miatt elérhetetlen. A c:geo offline módban működik elmentett ládákkal.</string>
   <string name="err_license">Nem fogadtad el a geocaching.com licencmegállapodását, így a c:geo nem tudja betölteni a ládák koordinátáit.</string>
   <string name="err_unvalidated_account">Előbb aktiválnod kell a fiókod a geocaching.com weboldalon.</string>
@@ -454,7 +453,6 @@
   <string name="init_login_popup_working">Belépés a geocaching.com-ra…</string>
   <string name="init_login_popup_ok">Belépés ok</string>
   <string name="init_login_popup_failed">Belépés sikertelen.</string>
-  <string name="init_login_popup_failed_reason">Belépés sikertelen, mert </string>
   <string name="init_login_popup_not_authorized">Nem engedélyezett</string>
   <string name="init_login_popup_invalid_timestamp">A helyi idő érvénytelen, állítsd be a készülék óráját</string>
   <string name="init_login_popup_invalid_token">Sikertelen engedélyezés, próbáld újra</string>
@@ -480,8 +478,6 @@
   <string name="init_summary_friends_and_own_logs_wanted">Barátok/saját logok megjelenítése kiegészítő oldalon</string>
   <string name="init_openlastdetailspage">Utoljára használt oldaltípus</string>
   <string name="init_summary_openlastdetailspage">Utoljára használt oldaltípus megnyitása belépéskor</string>
-  <string name="init_autoload">Hosszú leírás automatikus betöltése</string>
-  <string name="init_summary_autoload">Hosszú leírás automatikus betöltése</string>
   <string name="init_skin">Világos felület</string>
   <string name="init_summary_skin">Világos felület\n(a c:geo újraindítását igényli)</string>
   <string name="init_address">Cím mutatása a főablakban</string>
@@ -632,6 +628,7 @@
   <string name="auth_dialog_waiting">Várakozás %s-re…</string>
   <string name="auth_explain_short">A következő folyamat lehetővé teszi a <b>c:geo</b>-nak a hozzáférést %s-hez.</string>
   <string name="auth_explain_long">A \"c:geo engedélyezése\" gomb megnyomása után a böngészőben megnyílik a(z) %s oldal. Jelentkezz be ezen az oldalon, és engedélyezd a <b>c:geo</b> hozzáférését a fiókodhoz.</string>
+  <!-- auth credentials -->
   <!-- auth token -->
   <string name="auth_token_register">Fiók létrehozása</string>
   <string name="auth_token_explain_short">A következő folyamat lehetővé teszi a <b>c:geo</b>-nak a hozzáférést %s-hez.</string>

@@ -11,7 +11,7 @@ import java.text.Collator;
  * sorts caches by name
  *
  */
-class NameComparator extends AbstractCacheComparator {
+public class NameComparator extends AbstractCacheComparator {
 
     private final Collator collator = TextUtils.getCollator();
 

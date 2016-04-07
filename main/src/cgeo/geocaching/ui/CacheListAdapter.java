@@ -1,13 +1,11 @@
 package cgeo.geocaching.ui;
 
-import butterknife.Bind;
-
 import cgeo.geocaching.CacheDetailActivity;
-import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.filter.IFilter;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
@@ -15,6 +13,7 @@ import cgeo.geocaching.sorting.CacheComparator;
 import cgeo.geocaching.sorting.DistanceComparator;
 import cgeo.geocaching.sorting.EventDateComparator;
 import cgeo.geocaching.sorting.InverseComparator;
+import cgeo.geocaching.sorting.SeriesNameComparator;
 import cgeo.geocaching.sorting.VisitComparator;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.CalendarUtils;
@@ -25,9 +24,6 @@ import cgeo.geocaching.utils.MapUtils;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
-
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -55,6 +51,10 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
+import butterknife.Bind;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
+
 public class CacheListAdapter extends ArrayAdapter<Geocache> {
 
     private LayoutInflater inflater = null;
@@ -75,6 +75,10 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
     final private List<Geocache> list;
     private boolean eventsOnly;
     private boolean inverseSort = false;
+    /**
+     * {@code true} if the caches in this list are a complete series and should be sorted by name instead of distance
+     */
+    private boolean series = false;
 
     private static final int SWIPE_MIN_DISTANCE = 60;
     private static final int SWIPE_MAX_OFF_PATH = 100;
@@ -84,6 +88,11 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
     private static final int PAUSE_BETWEEN_LIST_SORT = 1000;
 
     private static final int[] RATING_BACKGROUND = new int[3];
+    /**
+     * automatically order cache series by name, if they all have a common suffix or prefix at least these many
+     * characters
+     */
+    private static final int MIN_COMMON_CHARACTERS_SERIES = 4;
     static {
         if (Settings.isLightSkin()) {
             RATING_BACKGROUND[0] = R.drawable.favorite_background_red_light;
@@ -125,7 +134,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
         this.res = activity.getResources();
         this.list = list;
         this.cacheListType = cacheListType;
-        checkEvents();
+        checkSpecialSortOrder();
     }
 
     /**
@@ -170,10 +179,13 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
             return VisitComparator.singleton;
         }
         if (cacheComparator == null && eventsOnly) {
-            return EventDateComparator.singleton;
+            return EventDateComparator.INSTANCE;
+        }
+        if (cacheComparator == null && series) {
+            return SeriesNameComparator.INSTANCE;
         }
         if (cacheComparator == null) {
-            return DistanceComparator.singleton;
+            return DistanceComparator.INSTANCE;
         }
         return cacheComparator;
     }
@@ -342,6 +354,11 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
     private boolean isSortedByEvent() {
         final CacheComparator comparator = getCacheComparator();
         return comparator == null || comparator instanceof EventDateComparator;
+    }
+
+    private boolean isSortedBySeries() {
+        final CacheComparator comparator = getCacheComparator();
+        return comparator == null || comparator instanceof SeriesNameComparator;
     }
 
     public void setActualHeading(final float direction) {
@@ -650,16 +667,53 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
         return list.size();
     }
 
-    public void checkEvents() {
+    public void checkSpecialSortOrder() {
+        checkEvents();
+        checkSeries();
+        if (!eventsOnly && isSortedByEvent()) {
+            setComparator(DistanceComparator.INSTANCE);
+        }
+        if (!series && isSortedBySeries()) {
+            setComparator(DistanceComparator.INSTANCE);
+        }
+    }
+
+    private void checkEvents() {
         eventsOnly = true;
         for (final Geocache cache : list) {
             if (!cache.isEventCache()) {
                 eventsOnly = false;
-                if (isSortedByEvent()) {
-                    setComparator(DistanceComparator.singleton);
-                }
                 return;
             }
+        }
+    }
+
+    /**
+     * detect whether all caches in this list belong to a series with similar names
+     */
+    private void checkSeries() {
+        series = false;
+        if (list.size() < 3 || list.size() > 50) {
+            return;
+        }
+        final ArrayList<String> names = new ArrayList<>();
+        final ArrayList<String> reverseNames = new ArrayList<>();
+        for (final Geocache cache : list) {
+            final String name = cache.getName();
+            names.add(name);
+            reverseNames.add(StringUtils.reverse(name));
+        }
+        final String commonPrefix = StringUtils.getCommonPrefix(names.toArray(new String[names.size()]));
+        if (StringUtils.length(commonPrefix) >= MIN_COMMON_CHARACTERS_SERIES) {
+            series = true;
+        } else {
+            final String commonSuffix = StringUtils.getCommonPrefix(reverseNames.toArray(new String[reverseNames.size()]));
+            if (StringUtils.length(commonSuffix) >= MIN_COMMON_CHARACTERS_SERIES) {
+                series = true;
+            }
+        }
+        if (series) {
+            setComparator(new SeriesNameComparator());
         }
     }
 

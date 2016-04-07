@@ -24,7 +24,6 @@ import cgeo.geocaching.enumerations.LoadFlags.RemoveFlag;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.WaypointType;
-import cgeo.geocaching.files.GPXParser;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.network.HtmlImage;
@@ -40,7 +39,6 @@ import cgeo.geocaching.utils.LogTemplateProvider;
 import cgeo.geocaching.utils.LogTemplateProvider.LogContext;
 import cgeo.geocaching.utils.MatcherWrapper;
 
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.ListUtils;
 import org.apache.commons.lang3.BooleanUtils;
@@ -48,10 +46,6 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import rx.Scheduler;
-import rx.Subscription;
-import rx.functions.Action0;
-import rx.schedulers.Schedulers;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -78,6 +72,12 @@ import java.util.ListIterator;
 import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
+
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import rx.Scheduler;
+import rx.Subscription;
+import rx.functions.Action0;
+import rx.schedulers.Schedulers;
 
 /**
  * Internal representation of a "cache"
@@ -167,25 +167,6 @@ public class Geocache implements IWaypoint {
     private static final Pattern NUMBER_PATTERN = Pattern.compile("\\d+");
 
     private Handler changeNotificationHandler = null;
-
-    /**
-     * Create a new cache. To be used everywhere except for the GPX parser
-     */
-    public Geocache() {
-        // empty
-    }
-
-    /**
-     * Cache constructor to be used by the GPX parser only. This constructor explicitly sets several members to empty
-     * lists.
-     *
-     * @param gpxParser ignored parameter allowing to select this constructor
-     */
-    public Geocache(final GPXParser gpxParser) {
-        setReliableLatLon(true);
-        setAttributes(Collections.<String> emptyList());
-        setWaypoints(Collections.<Waypoint> emptyList(), false);
-    }
 
     public void setChangeNotificationHandler(final Handler newNotificationHandler) {
         changeNotificationHandler = newNotificationHandler;
@@ -426,15 +407,8 @@ public class Geocache implements IWaypoint {
     }
 
     public boolean canBeAddedToCalendar() {
-        // is event type?
-        if (!isEventCache()) {
-            return false;
-        }
-        // has event date set?
-        if (hidden == null) {
-            return false;
-        }
-        return true;
+        // Is event type with event date set?
+        return isEventCache() && hidden != null;
     }
 
     public boolean isPastEvent() {
@@ -1762,7 +1736,7 @@ public class Geocache implements IWaypoint {
     }
 
     public boolean isOffline() {
-        return !lists.isEmpty();
+        return !lists.isEmpty() && (lists.size() > 1 || lists.iterator().next() != StoredList.TEMPORARY_LIST.id);
     }
 
     /**

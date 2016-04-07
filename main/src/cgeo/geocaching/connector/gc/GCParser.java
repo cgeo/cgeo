@@ -40,7 +40,6 @@ import cgeo.geocaching.utils.TextUtils;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -51,6 +50,13 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import rx.Observable;
+import rx.Observable.OnSubscribe;
+import rx.Subscriber;
+import rx.functions.Action1;
+import rx.functions.Func0;
+import rx.functions.Func2;
+import rx.schedulers.Schedulers;
 
 import android.net.Uri;
 import android.text.Html;
@@ -71,14 +77,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
-
-import rx.Observable;
-import rx.Observable.OnSubscribe;
-import rx.Subscriber;
-import rx.functions.Action1;
-import rx.functions.Func0;
-import rx.functions.Func2;
-import rx.schedulers.Schedulers;
 
 public final class GCParser {
     @NonNull
@@ -1824,7 +1822,7 @@ public final class GCParser {
                 try {
                     final ObjectNode resp = (ObjectNode) JsonUtils.reader.readTree(responseStream);
                     if (!resp.path("status").asText().equals("success")) {
-                        Log.e("GCParser.loadLogsFromDetails: status is " + resp.path("status").asText("[absent]"));
+                        Log.w("GCParser.loadLogsFromDetails: status is " + resp.path("status").asText("[absent]"));
                         subscriber.onCompleted();
                         return;
                     }

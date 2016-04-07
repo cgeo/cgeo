@@ -746,7 +746,7 @@ public class DataStore {
                         try {
                             // Add new indices and remove obsolete cache files
                             createIndices(db);
-                            removeObsoleteCacheDirectories(db);
+                            removeObsoleteCacheDirectories();
                         } catch (final Exception e) {
                             Log.e("Failed to upgrade to ver. 59", e);
                         }
@@ -951,16 +951,6 @@ public class DataStore {
      * Remove obsolete cache directories in c:geo private storage.
      */
     public static void removeObsoleteCacheDirectories() {
-        removeObsoleteCacheDirectories(database);
-    }
-
-    /**
-     * Remove obsolete cache directories in c:geo private storage.
-     *
-     * @param db
-     *            the read-write database to use
-     */
-    private static void removeObsoleteCacheDirectories(final SQLiteDatabase db) {
         final File[] files = LocalStorage.getStorage().listFiles();
         if (ArrayUtils.isNotEmpty(files)) {
             final Pattern oldFilePattern = Pattern.compile("^[GC|TB|EC|GK|O][A-Z0-9]{4,7}$");
@@ -1736,8 +1726,6 @@ public class DataStore {
             while (cursor.moveToNext()) {
                 final Geocache cache = createCacheFromDatabaseContent(cursor);
 
-                cache.setLists(loadLists(cache.getGeocode()));
-
                 if (loadFlags.contains(LoadFlag.ATTRIBUTES)) {
                     cache.setAttributes(loadAttributes(cache.getGeocode()));
                 }
@@ -1779,6 +1767,14 @@ public class DataStore {
                 cacheCache.putCacheInCache(cache);
 
                 caches.add(cache);
+            }
+
+            final Map<String, Set<Integer>> cacheLists = loadLists(geocodes);
+            for (final Geocache geocache : caches) {
+                final Set<Integer> listIds = cacheLists.get(geocache.getGeocode());
+                if (listIds != null) {
+                    geocache.setLists(listIds);
+                }
             }
             return caches;
         } finally {
@@ -1894,6 +1890,38 @@ public class DataStore {
                 "100",
                 new HashSet<Integer>(),
                 GET_INTEGER_0);
+    }
+
+    @NonNull
+    public static Map<String, Set<Integer>> loadLists(final Collection<String> geocodes) {
+        final Map<String, Set<Integer>> cacheLists = new HashMap<>();
+
+        final StringBuilder query = new StringBuilder("SELECT list_id, geocode FROM ");
+        query.append(dbTableCachesLists);
+        query.append(" WHERE ");
+        query.append(whereGeocodeIn(geocodes));
+
+        final Cursor cursor = database.rawQuery(query.toString(), null);
+        try {
+            while (cursor.moveToNext()) {
+                final Integer listId = cursor.getInt(0);
+                final String geocode = cursor.getString(1);
+
+                Set<Integer> listIds = cacheLists.get(geocode);
+                if (listIds != null) {
+                    listIds.add(listId);
+                } else {
+                    listIds = new HashSet<>();
+                    listIds.add(listId);
+                    cacheLists.put(geocode, listIds);
+                }
+            }
+
+        } finally {
+            cursor.close();
+        }
+
+        return cacheLists;
     }
 
     @Nullable

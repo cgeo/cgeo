@@ -149,7 +149,6 @@
   <string name="err_unknown_address">c:geo n\'a pas réussi à trouver de coordonnées géographiques pour cette adresse</string>
   <string name="err_comm">Erreur de communication inconnue</string>
   <string name="err_missing_auth">Nom d\'utilisateur ou mot de passe manquant.</string>
-  <string name="err_wrong">Nom d\'utilisateur ou mot de passe incorrect</string>
   <string name="err_maintenance">Le site de Geocaching.com est en cours de maintenance, essayez plus tard. c:geo fonctionne en mode hors-ligne.</string>
   <string name="err_license">L\'utilisateur n\'a pas accepté les termes et les conditions d\'utilisation de Geocaching.com</string>
   <string name="err_unvalidated_account">Vous devez d\'abord confirmer votre compte sur le site web Geocaching.com</string>
@@ -453,7 +452,6 @@
   <string name="init_login_popup_working">Connexion…</string>
   <string name="init_login_popup_ok">Connecté</string>
   <string name="init_login_popup_failed">Erreur de connexion</string>
-  <string name="init_login_popup_failed_reason">Erreur de connexion :</string>
   <string name="init_login_popup_not_authorized">Non autorisé</string>
   <string name="init_login_popup_invalid_timestamp">Heure locale invalide, réglez votre appareil</string>
   <string name="init_login_popup_invalid_token">Autorisation non valide, ré-autoriser</string>
@@ -479,8 +477,6 @@
   <string name="init_summary_friends_and_own_logs_wanted">Afficher une page de carnet supplémentaire avec vos visites et celles de vos amis</string>
   <string name="init_openlastdetailspage">Afficher les détails à la dernière page ouverte</string>
   <string name="init_summary_openlastdetailspage">A l\'ouverture des détails d\'une cache afficher le dernier onglet consulté</string>
-  <string name="init_autoload">Descriptions longues</string>
-  <string name="init_summary_autoload">Toujours afficher les descriptions longues</string>
   <string name="init_skin">Fond blanc</string>
   <string name="init_summary_skin">Fond blanc (nécessite le redémarrage de c:geo)</string>
   <string name="init_address">Afficher l\'adresse sur l\'accueil</string>
@@ -631,6 +627,7 @@
   <string name="auth_dialog_waiting">En attente de %s…</string>
   <string name="auth_explain_short">Le processus suivant autorisera <b>c:geo</b> à accéder à %s.</string>
   <string name="auth_explain_long">L\'appui sur \"Autoriser c:geo\" lancera le processus (la page web %s sera ouverte dans un navigateur, après avoir renseigné les informations d\'authentification, <b>c:geo</b> sera autorisé à accéder à votre compte).</string>
+  <!-- auth credentials -->
   <!-- auth token -->
   <string name="auth_token_register">Créer un compte</string>
   <string name="auth_token_explain_short">Vous êtes sur le point d\'autoriser <b>c:geo</b> à accéder à %s.</string>

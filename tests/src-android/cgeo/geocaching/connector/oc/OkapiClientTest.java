@@ -107,7 +107,7 @@ public class OkapiClientTest extends CGeoTestCase {
     }
 
     public static void testRegistrationUrl() {
-        assertThat(OkapiClient.getRegistrationUrl(getConnectorOCDE())).isEqualTo("http://www.opencaching.de/register.php");
+        assertThat(OkapiClient.getRegistrationUrl(getConnectorOCDE())).isEqualTo("https://www.opencaching.de/register.php");
     }
 
     private static OCApiLiveConnector getConnectorOCDE() {

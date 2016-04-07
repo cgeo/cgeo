@@ -149,7 +149,6 @@
   <string name="err_unknown_address">c:geo nu a putut găsi coordonate pentru această adresă</string>
   <string name="err_comm">Eroare necunoscută de comunicaţie</string>
   <string name="err_missing_auth">Nu a fost dat numele de utilizator sau parola.</string>
-  <string name="err_wrong">Informaţii de autentificare incorecte</string>
   <string name="err_maintenance">Geocaching.com este oprit temporar pentru lucrări de întreţinere. c:geo funcţionează deconectat cu cutiile stocate local.</string>
   <string name="err_license">Nu ai acceptat termenele si condiţiile de utilizare ale Geocaching.com, în consecinţă c:geo nu poate încărca coordonatele cutiei.</string>
   <string name="err_unvalidated_account">Mai întâi trebuie să îţi validezi contul de pe Geocaching.com.</string>
@@ -456,7 +455,6 @@
   <string name="init_login_popup_working">Autentificare în curs…</string>
   <string name="init_login_popup_ok">Autentificare REUŞITĂ</string>
   <string name="init_login_popup_failed">Autentificare eșuată</string>
-  <string name="init_login_popup_failed_reason">Autentificare eșuată:</string>
   <string name="init_login_popup_not_authorized">Neautorizat</string>
   <string name="init_login_popup_invalid_timestamp">Ora dispozitivului nu este validă, reglaţi data şi ora</string>
   <string name="init_login_popup_invalid_token">Autorizare invalidă, încercaţi din nou</string>
@@ -482,8 +480,6 @@
   <string name="init_summary_friends_and_own_logs_wanted">Afişează pagină de jurnal separată pentru însemnările proprii şi ale prietenilor</string>
   <string name="init_openlastdetailspage">Ultima pagină cu detalii</string>
   <string name="init_summary_openlastdetailspage">Arată detaliile de pe ultima pagină afişată</string>
-  <string name="init_autoload">Descriere completă</string>
-  <string name="init_summary_autoload">Întotdeauna încarcă descrierea completă</string>
   <string name="init_skin">Culori luminoase</string>
   <string name="init_summary_skin">Foloseşte culori luminoase (necesită repornirea aplicaţiei)</string>
   <string name="init_address">Arată adresa</string>
@@ -634,6 +630,7 @@
   <string name="auth_dialog_waiting">Aştept după %s…</string>
   <string name="auth_explain_short">Această procedură va permite <b>c:geo</b> să aibe acces la %s.</string>
   <string name="auth_explain_long">Apăsând \"Autorizează c:geo\" va începe procedura. Această procedură va deschide în browser pagina %s. Autentifică-te pe această pagină şi confirmă permisiunea pentru ca <b>c:geo</b> să aibe acces la contul tău. Aceasta este totul.</string>
+  <!-- auth credentials -->
   <!-- auth token -->
   <string name="auth_token_register">Creează un cont nou</string>
   <string name="auth_token_explain_short">Această procedură va permite <b>c:geo</b> să aibe acces la %s.</string>

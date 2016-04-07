@@ -477,16 +477,13 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
     }
 
     private boolean isWaypointChanged(final @NonNull ActivityData currentState) {
-        if (waypoint == null
-                || currentState.coords != waypoint.getCoords()
+        return waypoint == null
+                || !Geopoint.equals(currentState.coords, waypoint.getCoords())
                 || !StringUtils.equals(currentState.name, waypoint.getName())
                 || !StringUtils.equals(currentState.noteText, waypoint.getNote())
                 || currentState.visited != waypoint.isVisited()
-                || currentState.type != waypoint.getWaypointType()) {
-            return true;
-        }
+                || currentState.type != waypoint.getWaypointType();
 
-        return false;
     }
 
     private void saveWaypoint(final ActivityData currentState) {

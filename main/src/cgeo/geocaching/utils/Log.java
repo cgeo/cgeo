@@ -94,10 +94,19 @@ public final class Log {
 
     public static void e(final String msg) {
         android.util.Log.e(TAG, addThreadInfo(msg));
+        if (isDebug) {
+            throw new RuntimeException("Aborting on Log.e()");
+        }
     }
 
     public static void e(final String msg, final Throwable t) {
         android.util.Log.e(TAG, addThreadInfo(msg), t);
+        if (isDebug) {
+            if (t instanceof RuntimeException) {
+                throw (RuntimeException) t;
+            }
+            throw new RuntimeException("Aborting on Log.e()", t);
+        }
     }
 
     /**

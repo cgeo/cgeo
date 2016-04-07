@@ -149,11 +149,11 @@
   <string name="err_unknown_address">c:geo no ha pogut assignar aquesta adreça a una ubicació existent</string>
   <string name="err_comm">S\'ha produït un error de comunicació desconegut</string>
   <string name="err_missing_auth">No s\'ha definit nom d\'usuari i/o contrasenya.</string>
-  <string name="err_wrong">La informació d\'accés és incorrecta</string>
   <string name="err_maintenance">Geocaching.com no funciona per motius de manteniment. El c:geo funcionarà amb els catxés desats.</string>
   <string name="err_license">No heu acceptat l\'acord de llicència de Geocaching.com, per tant el c:geo no pot carregar les coordenades.</string>
   <string name="err_unvalidated_account">Primer heu de validar el vostre compte a la pàgina web de Geocaching.com.</string>
   <string name="err_unpublished">El catxé sol·licitat no està publicat.</string>
+  <string name="err_cache_not_found">El catxé sol·licitat no s\'ha trobat.</string>
   <string name="err_premium_only">Aquest catxé només està disponible per a usuaris de pagament de Geocaching.com.</string>
   <string name="err_detail_open">El c:geo no pot obrir els detalls del catxé.</string>
   <string name="err_detail_cache">El c:geo no pot mostrar el catxé que voleu. És realment un catxé?</string>
@@ -453,7 +453,6 @@
   <string name="init_login_popup_working">S\'està accedint…</string>
   <string name="init_login_popup_ok">Accés correcte</string>
   <string name="init_login_popup_failed">S\'ha produït un error al accedir</string>
-  <string name="init_login_popup_failed_reason">S\'ha produït un error al accedir:</string>
   <string name="init_login_popup_not_authorized">La connexió no ha estat autoritzada</string>
   <string name="init_login_popup_invalid_timestamp">L\'hora local és incorrecta, ajusta l\'hora del teu dispositiu</string>
   <string name="init_login_popup_invalid_token">L\'autorització no és vàlida, torneu a autoritzar</string>
@@ -479,8 +478,6 @@
   <string name="init_summary_friends_and_own_logs_wanted">Visualitza una pàgina addicional del llibre de registre pels registres dels amics i els propis</string>
   <string name="init_openlastdetailspage">Obre l\'última pàgina de detalls</string>
   <string name="init_summary_openlastdetailspage">Obre els detalls amb l\'última pàgina utilitzada</string>
-  <string name="init_autoload">Descripció llarga</string>
-  <string name="init_summary_autoload">Carrega sempre la descripció llarga</string>
   <string name="init_skin">Aparença lluminosa</string>
   <string name="init_summary_skin">Utilitza el fons clar (cal reiniciar)</string>
   <string name="init_address">Mostra l\'adreça</string>
@@ -631,6 +628,7 @@
   <string name="auth_dialog_waiting">Esperant %s…</string>
   <string name="auth_explain_short">El següent procés permetrà al <b>c:geo</b> accedir a %s.</string>
   <string name="auth_explain_long">Prement el botó \"Autoritza al c:geo\"  s\'iniciarà el procés. Aquest procés obrirà el navegador web amb una pàgina %s. Registreu-vos a aquesta pàgina i permeteu al <b>c:geo</b> a accedir al vostre compte.</string>
+  <!-- auth credentials -->
   <!-- auth token -->
   <string name="auth_token_register">Crea un compte</string>
   <string name="auth_token_explain_short">El següent procés permetrà al <b>c:geo</b> accedir a %s.</string>

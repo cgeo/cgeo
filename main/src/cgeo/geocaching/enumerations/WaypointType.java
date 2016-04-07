@@ -7,8 +7,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 
 import java.util.Collections;
+import java.util.EnumSet;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -44,17 +44,13 @@ public enum WaypointType {
      * non public so that {@code null} handling can be handled centrally in the enum type itself
      */
     private static final Map<String, WaypointType> FIND_BY_ID = new HashMap<>();
-    private static final Set<WaypointType> ALL_TYPES_EXCEPT_OWN_AND_ORIGINAL_TMP = new HashSet<>();
     static {
         for (final WaypointType wt : values()) {
             FIND_BY_ID.put(wt.id, wt);
-            if (wt != OWN && wt != ORIGINAL) {
-                ALL_TYPES_EXCEPT_OWN_AND_ORIGINAL_TMP.add(wt);
-            }
         }
     }
     @NonNull
-    public static final Set<WaypointType> ALL_TYPES_EXCEPT_OWN_AND_ORIGINAL = Collections.unmodifiableSet(ALL_TYPES_EXCEPT_OWN_AND_ORIGINAL_TMP);
+    public static final Set<WaypointType> ALL_TYPES_EXCEPT_OWN_AND_ORIGINAL = Collections.unmodifiableSet(EnumSet.complementOf(EnumSet.of(OWN, ORIGINAL)));
 
     /**
      * inverse lookup of waypoint IDs<br/>

@@ -57,7 +57,8 @@ public final class SystemInformation {
                 .append("\nMap strategy: ").append(Settings.getLiveMapStrategy().toString().toLowerCase(Locale.getDefault()))
                 .append("\nHW acceleration: ").append(Settings.useHardwareAcceleration() ? "enabled" : "disabled")
                 .append(" (").append(Settings.useHardwareAcceleration() == Settings.HW_ACCEL_DISABLED_BY_DEFAULT ? "manually changed" : "default state").append(')')
-                .append("\nSystem language: ").append(Locale.getDefault());
+                .append("\nSystem language: ").append(Locale.getDefault())
+                .append("\nDebug mode active: ").append(Settings.isDebug() ? "yes" : "no");
         if (Settings.useEnglish()) {
             body.append(" (cgeo forced to English)");
         }
@@ -73,10 +74,10 @@ public final class SystemInformation {
         for (final IConnector connector : ConnectorFactory.getConnectors()) {
             if (connector.isActive()) {
                 connectorCount++;
-                connectors.append("\n - ").append(connector.getName());
+                connectors.append("\n   ").append(connector.getName());
                 if (connector instanceof ILogin) {
                     final ILogin login = (ILogin) connector;
-                    connectors.append(": ").append(login.isLoggedIn() ? "logged in" : "not logged in")
+                    connectors.append(": ").append(login.isLoggedIn() ? "Logged in" : "Not logged in")
                             .append(" (").append(login.getLoginStatusString()).append(')');
                     if (login.getName().equals("geocaching.com") && login.isLoggedIn()) {
                         connectors.append(" / ").append(Settings.getGCMemberStatus());
@@ -84,7 +85,7 @@ public final class SystemInformation {
                 }
             }
         }
-        body.append("\nGeocaching sites enabled:").append(connectorCount > 0 ? connectors : " none");
+        body.append("\nGeocaching sites enabled:").append(connectorCount > 0 ? connectors : " None");
     }
 
     private static void appendAddons(@NonNull final StringBuilder body) {

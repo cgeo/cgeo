@@ -19,4 +19,9 @@ public class InverseComparator implements CacheComparator {
         return originalComparator.compare(rhs, lhs);
     }
 
+    @Override
+    public boolean isAutoManaged() {
+        return originalComparator.isAutoManaged();
+    }
+
 }

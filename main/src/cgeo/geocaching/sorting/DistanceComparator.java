@@ -1,7 +1,7 @@
 package cgeo.geocaching.sorting;
 
-import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.models.Geocache;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +16,7 @@ public class DistanceComparator extends AbstractCacheComparator {
     final private List<Geocache> list;
     private boolean cachedDistances;
 
-    final static public DistanceComparator singleton = new DistanceComparator();
+    final static public DistanceComparator INSTANCE = new DistanceComparator();
 
     public DistanceComparator() {
         // This constructor should not be used as a comparator as distances will not be updated.

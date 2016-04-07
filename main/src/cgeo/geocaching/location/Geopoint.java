@@ -1,10 +1,11 @@
 package cgeo.geocaching.location;
 
-import cgeo.geocaching.models.ICoordinates;
 import cgeo.geocaching.R;
+import cgeo.geocaching.models.ICoordinates;
 
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 import android.location.Location;
 import android.os.Build;
@@ -554,6 +555,18 @@ public final class Geopoint implements ICoordinates, Parcelable {
      */
     public boolean isValid() {
         return isValidLatitude(latitude) && isValidLongitude(longitude);
+    }
+
+    /**
+     * Check whether two geopoints represent the same latitude and longitude or are both <tt>null</tt>.
+     *
+     * @param p1 the first Geopoint, or <tt>null</tt>
+     * @param p2 the second Geopoint, or <tt>null</tt>
+     * @return <tt>true</tt> if both geopoints represent the same latitude and longitude or are both <tt>null</tt>,
+     *         <tt>false</tt> otherwise
+     */
+    public static boolean equals(@Nullable final Geopoint p1, @Nullable final Geopoint p2) {
+        return p1 == null ? p2 == null : p2 != null && p1.equals(p2);
     }
 
 }

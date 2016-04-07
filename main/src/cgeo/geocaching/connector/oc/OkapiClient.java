@@ -819,9 +819,9 @@ final class OkapiClient {
                 connector.addAuthentication(params);
                 break;
             }
-            case Level0: {
+            default:
                 // do nothing, anonymous access
-            }
+                break;
         }
 
         final String uri = "http://" + host + service.methodName;
