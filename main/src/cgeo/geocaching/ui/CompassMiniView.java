@@ -116,7 +116,7 @@ final public class CompassMiniView extends View {
         final int marginLeft = (getWidth() - compassArrowWidth) / 2;
         final int marginTop = (getHeight() - compassArrowHeight) / 2;
 
-        invalidate(marginLeft, marginTop, (marginLeft + compassArrowWidth), (marginTop + compassArrowHeight));
+        invalidate(marginLeft, marginTop, marginLeft + compassArrowWidth, marginTop + compassArrowHeight);
     }
 
     @Override

@@ -245,7 +245,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
             titleview.setText(title);
 
         }
-        if ((Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH)) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
             setTitleIceCreamSandwich(title);
         }
     }
@@ -285,7 +285,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         if (titleView != null) {
             titleView.setText(titleView.getText().toString() + ' ' + subtitle);
         }
-        if ((Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH)) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
             setSubtitleIceCreamSandwich(subtitle);
         }
     }

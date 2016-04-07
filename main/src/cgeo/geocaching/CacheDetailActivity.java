@@ -701,7 +701,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             if (msg.what == UPDATE_LOAD_PROGRESS_DETAIL && msg.obj instanceof String) {
                 updateStatusMsg((String) msg.obj);
             } else {
-                final CacheDetailActivity activity = ((CacheDetailActivity) activityRef.get());
+                final CacheDetailActivity activity = (CacheDetailActivity) activityRef.get();
                 if (activity == null) {
                     return;
                 }
@@ -731,7 +731,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         }
 
         private void updateStatusMsg(final String msg) {
-            final CacheDetailActivity activity = ((CacheDetailActivity) activityRef.get());
+            final CacheDetailActivity activity = (CacheDetailActivity) activityRef.get();
             if (activity == null) {
                 return;
             }
@@ -1044,7 +1044,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             final String license = connector.getLicenseText(cache);
             if (StringUtils.isNotBlank(license)) {
                 view.findViewById(R.id.license_box).setVisibility(View.VISIBLE);
-                final TextView licenseView = (ButterKnife.findById(view, R.id.license));
+                final TextView licenseView = ButterKnife.findById(view, R.id.license);
                 licenseView.setText(Html.fromHtml(license), BufferType.SPANNABLE);
                 licenseView.setClickable(true);
                 licenseView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
@@ -1485,7 +1485,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 hintBoxView.setVisibility(View.GONE);
             }
 
-            final TextView hintView = (ButterKnife.findById(view, R.id.hint));
+            final TextView hintView = ButterKnife.findById(view, R.id.hint);
             if (StringUtils.isNotBlank(cache.getHint())) {
                 if (TextUtils.containsHtml(cache.getHint())) {
                     hintView.setText(Html.fromHtml(cache.getHint(), new HtmlImage(cache.getGeocode(), false, false, false), null), TextView.BufferType.SPANNABLE);
@@ -1507,7 +1507,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 hintBoxView.setOnClickListener(null);
             }
 
-            final TextView spoilerlinkView = (ButterKnife.findById(view, R.id.hint_spoilerlink));
+            final TextView spoilerlinkView = ButterKnife.findById(view, R.id.hint_spoilerlink);
             if (CollectionUtils.isNotEmpty(cache.getSpoilers())) {
                 spoilerlinkView.setVisibility(View.VISIBLE);
                 spoilerlinkView.setClickable(true);
@@ -2319,7 +2319,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     }
 
     private static void notifyDataSetChanged(final WeakReference<AbstractActivity> activityRef) {
-        final CacheDetailActivity activity = ((CacheDetailActivity) activityRef.get());
+        final CacheDetailActivity activity = (CacheDetailActivity) activityRef.get();
         if (activity != null) {
             activity.notifyDataSetChanged();
         }

@@ -79,7 +79,7 @@ public enum WaypointType {
     }
 
     public boolean applyDistanceRule() {
-        return (this == FINAL || this == STAGE);
+        return this == FINAL || this == STAGE;
     }
 
     public static WaypointType fromGPXString(@NonNull final String sym) {

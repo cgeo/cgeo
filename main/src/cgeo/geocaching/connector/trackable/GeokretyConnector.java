@@ -114,7 +114,7 @@ public class GeokretyConnector extends AbstractTrackableConnector {
     }
 
     private static String getUrlCache() {
-        return (Settings.isGeokretyCacheActive() ? URLPROXY : URL);
+        return Settings.isGeokretyCacheActive() ? URLPROXY : URL;
     }
 
     @Nullable
@@ -136,7 +136,7 @@ public class GeokretyConnector extends AbstractTrackableConnector {
 
         Log.d("GeokretyConnector.searchTrackable: gkid=" + gkid);
         try {
-            final String urlDetails = (Settings.isGeokretyCacheActive() ? URLPROXY + "/export-details.php" : URL + "/export2.php");
+            final String urlDetails = Settings.isGeokretyCacheActive() ? URLPROXY + "/export-details.php" : URL + "/export2.php";
 
             final InputStream response = Network.getResponseStream(Network.getRequest(urlDetails + "?gkid=" + gkid));
             if (response == null) {

@@ -633,7 +633,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
                 clickedItemText = ((TextView) view).getText();
                 switch (viewId) {
                     case R.id.value: // name, TB-code, origin, released, distance
-                        final TextView textView = ButterKnife.findById(((View) view.getParent()), R.id.name);
+                        final TextView textView = ButterKnife.findById((View) view.getParent(), R.id.name);
                         final CharSequence itemTitle = textView.getText();
                         buildDetailsContextMenu(actionMode, menu, itemTitle, true);
                         return true;

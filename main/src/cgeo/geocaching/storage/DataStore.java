@@ -2093,7 +2093,7 @@ public class DataStore {
                 }
             } else {
                 // We cannot get several lines for the same log entry if it does not contain an image.
-                assert(!cursor.isNull(7));
+                assert !cursor.isNull(7);
                 log.addLogImage(new Image.Builder().setUrl(cursor.getString(10)).setTitle(cursor.getString(9)).setDescription(cursor.getString(11)).build());
             }
         }

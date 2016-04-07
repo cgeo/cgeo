@@ -103,7 +103,7 @@ class GCLoggingManager extends AbstractLoggingManager implements LoaderManager.L
         try {
             final CheckBox fav_check = (CheckBox) activity.findViewById(R.id.favorite_check);
             final ImmutablePair<StatusCode, String> postResult = GCParser.postLog(cache.getGeocode(), cache.getCacheId(), viewstates, logType,
-                    date.get(Calendar.YEAR), (date.get(Calendar.MONTH) + 1), date.get(Calendar.DATE),
+                    date.get(Calendar.YEAR), date.get(Calendar.MONTH) + 1, date.get(Calendar.DATE),
                     log, trackableLogs, fav_check.isChecked());
 
             if (postResult.left == StatusCode.NO_ERROR) {

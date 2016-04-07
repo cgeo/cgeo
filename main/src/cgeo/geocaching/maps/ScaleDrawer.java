@@ -81,15 +81,15 @@ public class ScaleDrawer {
 
         final String formatString = distanceRound >= 1 ? "%.0f" : "%.1f";
 
-        canvas.drawLine(10, bottom, 10, (bottom - (8 * pixelDensity)), scaleShadow);
-        canvas.drawLine((int) (pixels + 10), bottom, (int) (pixels + 10), (bottom - (8 * pixelDensity)), scaleShadow);
+        canvas.drawLine(10, bottom, 10, bottom - 8 * pixelDensity, scaleShadow);
+        canvas.drawLine((int) (pixels + 10), bottom, (int) (pixels + 10), bottom - 8 * pixelDensity, scaleShadow);
         canvas.drawLine(8, bottom, (int) (pixels + 12), bottom, scaleShadow);
-        canvas.drawText(String.format(formatString, distanceRound) + " " + scaled.right, (float) (pixels - (10 * pixelDensity)), (bottom - (10 * pixelDensity)), scaleShadow);
+        canvas.drawText(String.format(formatString, distanceRound) + " " + scaled.right, (float) (pixels - 10 * pixelDensity), bottom - 10 * pixelDensity, scaleShadow);
 
-        canvas.drawLine(11, bottom, 11, (bottom - (6 * pixelDensity)), scale);
-        canvas.drawLine((int) (pixels + 9), bottom, (int) (pixels + 9), (bottom - (6 * pixelDensity)), scale);
+        canvas.drawLine(11, bottom, 11, bottom - (6 * pixelDensity), scale);
+        canvas.drawLine((int) (pixels + 9), bottom, (int) (pixels + 9), bottom - 6 * pixelDensity, scale);
         canvas.drawLine(10, bottom, (int) (pixels + 10), bottom, scale);
-        canvas.drawText(String.format(formatString, distanceRound) + " " + scaled.right, (float) (pixels - (10 * pixelDensity)), (bottom - (10 * pixelDensity)), scale);
+        canvas.drawText(String.format(formatString, distanceRound) + " " + scaled.right, (float) (pixels - 10 * pixelDensity), bottom - 10 * pixelDensity, scale);
     }
 
 }
