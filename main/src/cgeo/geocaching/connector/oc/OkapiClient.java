@@ -290,7 +290,7 @@ final class OkapiClient {
     @NonNull
     public static LogResult postLog(@NonNull final Geocache cache, @NonNull final LogType logType, @NonNull final Calendar date, @NonNull final String log, @Nullable final String logPassword, @NonNull final OCApiConnector connector) {
         final Parameters params = new Parameters("cache_code", cache.getGeocode());
-        params.add("logtype", logType.oc_type);
+        params.add("logtype", logType.ocType);
         params.add("comment", log);
         params.add("comment_format", "plaintext");
         params.add("when", LOG_DATE_FORMAT.format(date.getTime()));

@@ -54,13 +54,13 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
     @NonNull private String consumerKey = StringUtils.EMPTY;
     @NonNull private String consumerSecret = StringUtils.EMPTY;
     @NonNull private String callback = StringUtils.EMPTY;
-    private String OAtoken = null;
-    private String OAtokenSecret = null;
+    private String oAtoken = null;
+    private String oAtokenSecret = null;
 
     @Bind(R.id.start) protected Button startButton;
     @Bind(R.id.register) protected Button registerButton;
-    @Bind(R.id.auth_1) protected TextView auth_1;
-    @Bind(R.id.auth_2) protected TextView auth_2;
+    @Bind(R.id.auth_1) protected TextView auth1;
+    @Bind(R.id.auth_2) protected TextView auth2;
     private ProgressDialog requestTokenDialog = null;
     private ProgressDialog changeTokensDialog = null;
 
@@ -127,12 +127,12 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
 
         setTitle(getAuthTitle());
 
-        auth_1.setText(getAuthExplainShort());
-        auth_2.setText(getAuthExplainLong());
+        auth1.setText(getAuthExplainShort());
+        auth2.setText(getAuthExplainLong());
 
         final ImmutablePair<String, String> tempToken = getTempTokens();
-        OAtoken = tempToken.left;
-        OAtokenSecret = tempToken.right;
+        oAtoken = tempToken.left;
+        oAtokenSecret = tempToken.right;
 
         startButton.setText(getAuthAuthorize());
         startButton.setEnabled(true);
@@ -146,7 +146,7 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
             registerButton.setOnClickListener(new RegisterListener());
         }
 
-        if (StringUtils.isBlank(OAtoken) && StringUtils.isBlank(OAtokenSecret)) {
+        if (StringUtils.isBlank(oAtoken) && StringUtils.isBlank(oAtokenSecret)) {
             // start authorization process
             startButton.setText(getAuthStart());
         } else {
@@ -193,17 +193,17 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
                     assert line != null;
                     final MatcherWrapper paramsMatcher1 = new MatcherWrapper(PARAMS_PATTERN_1, line);
                     if (paramsMatcher1.find()) {
-                        OAtoken = paramsMatcher1.group(1);
+                        oAtoken = paramsMatcher1.group(1);
                     }
                     final MatcherWrapper paramsMatcher2 = new MatcherWrapper(PARAMS_PATTERN_2, line);
                     if (paramsMatcher2.find()) {
-                        OAtokenSecret = paramsMatcher2.group(1);
+                        oAtokenSecret = paramsMatcher2.group(1);
                     }
 
-                    if (StringUtils.isNotBlank(OAtoken) && StringUtils.isNotBlank(OAtokenSecret)) {
-                        setTempTokens(OAtoken, OAtokenSecret);
+                    if (StringUtils.isNotBlank(oAtoken) && StringUtils.isNotBlank(oAtokenSecret)) {
+                        setTempTokens(oAtoken, oAtokenSecret);
                         final HttpUrl url = HttpUrl.parse(getUrlPrefix() + host + pathAuthorize)
-                                .newBuilder().addQueryParameter("oauth_token", OAtoken).build();
+                                .newBuilder().addQueryParameter("oauth_token", oAtoken).build();
                         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url.toString())));
                         status = STATUS_SUCCESS;
                     }
@@ -233,27 +233,27 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
             final Parameters params = new Parameters("oauth_verifier", verifier);
 
             final String method = "POST";
-            OAuth.signOAuth(host, pathAccess, method, https, params, new OAuthTokens(OAtoken, OAtokenSecret), consumerKey, consumerSecret);
+            OAuth.signOAuth(host, pathAccess, method, https, params, new OAuthTokens(oAtoken, oAtokenSecret), consumerKey, consumerSecret);
             final String line = StringUtils.defaultString(Network.getResponseData(Network.postRequest(getUrlPrefix() + host + pathAccess, params)));
 
-            OAtoken = "";
-            OAtokenSecret = "";
+            oAtoken = "";
+            oAtokenSecret = "";
 
             final MatcherWrapper paramsMatcher1 = new MatcherWrapper(PARAMS_PATTERN_1, line);
             if (paramsMatcher1.find()) {
-                OAtoken = paramsMatcher1.group(1);
+                oAtoken = paramsMatcher1.group(1);
             }
             final MatcherWrapper paramsMatcher2 = new MatcherWrapper(PARAMS_PATTERN_2, line);
             if (paramsMatcher2.find() && paramsMatcher2.groupCount() > 0) {
-                OAtokenSecret = paramsMatcher2.group(1);
+                oAtokenSecret = paramsMatcher2.group(1);
             }
 
-            if (StringUtils.isBlank(OAtoken) && StringUtils.isBlank(OAtokenSecret)) {
-                OAtoken = "";
-                OAtokenSecret = "";
+            if (StringUtils.isBlank(oAtoken) && StringUtils.isBlank(oAtokenSecret)) {
+                oAtoken = "";
+                oAtokenSecret = "";
                 setTokens(null, null, false);
             } else {
-                setTokens(OAtoken, OAtokenSecret, true);
+                setTokens(oAtoken, oAtokenSecret, true);
                 status = AUTHENTICATED;
             }
         } catch (final Exception e) {

@@ -53,7 +53,7 @@ public enum LogType {
     @NonNull
     public final String type;
     @NonNull
-    public final String oc_type;
+    public final String ocType;
     private final int stringId;
     public final int markerId;
     /**
@@ -66,7 +66,7 @@ public enum LogType {
         this.id = id;
         this.iconName = iconName;
         this.type = type;
-        this.oc_type = ocType;
+        this.ocType = ocType;
         this.stringId = stringId;
         this.markerId = markerId;
         this.overlayId = overlayId;
