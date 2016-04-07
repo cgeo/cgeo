@@ -1,5 +1,7 @@
 package cgeo.geocaching.twitter;
 
+import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.LogEntry;
@@ -47,7 +49,7 @@ public final class Twitter {
 
         try {
             final String trimmed = StringUtils.trim(status);
-            final String truncated = StringUtils.length(trimmed) <= MAX_TWEET_SIZE ? trimmed : StringUtils.substring(trimmed, 0, MAX_TWEET_SIZE - 1) + '…';
+            final String truncated = StringUtils.length(trimmed) <= MAX_TWEET_SIZE ? trimmed : StringUtils.substring(trimmed, 0, MAX_TWEET_SIZE - 1) + CgeoApplication.getInstance().getString(R.string.ellipsis);
             final Parameters parameters = new Parameters("status", truncated);
 
             OAuth.signOAuth("api.twitter.com", "/1.1/statuses/update.json", "POST", true, parameters,

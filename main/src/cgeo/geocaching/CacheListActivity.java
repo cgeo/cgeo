@@ -358,10 +358,10 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                     progress.setMessage(res.getString(R.string.web_import_waiting));
                     break;
                 case DownloadProgress.MSG_LOADING:  //cache downloading
-                    progress.setMessage(res.getString(R.string.web_downloading) + " " + msg.obj + '…');
+                    progress.setMessage(res.getString(R.string.web_downloading) + ' ' + msg.obj + res.getString(R.string.ellipsis));
                     break;
                 case DownloadProgress.MSG_LOADED:  //Cache downloaded
-                    progress.setMessage(res.getString(R.string.web_downloaded) + " " + msg.obj + '…');
+                    progress.setMessage(res.getString(R.string.web_downloaded) + ' ' + msg.obj + res.getString(R.string.ellipsis));
                     refreshCurrentList();
                     break;
                 case DownloadProgress.MSG_SERVER_FAIL:
