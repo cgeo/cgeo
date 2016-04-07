@@ -1304,8 +1304,8 @@ public class DataStore {
             return;
         }
         final SQLiteStatement statement = PreparedStatement.ADD_TO_LIST.getStatement();
-        for (final Integer list_id : lists) {
-            statement.bindLong(1, list_id);
+        for (final Integer listId : lists) {
+            statement.bindLong(1, listId);
             statement.bindString(2, geocode);
             statement.executeInsert();
         }

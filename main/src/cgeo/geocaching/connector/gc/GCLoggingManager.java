@@ -101,10 +101,10 @@ class GCLoggingManager extends AbstractLoggingManager implements LoaderManager.L
     public LogResult postLog(@NonNull final LogType logType, @NonNull final Calendar date, @NonNull final String log, @Nullable final String logPassword, @NonNull final List<TrackableLog> trackableLogs) {
 
         try {
-            final CheckBox fav_check = (CheckBox) activity.findViewById(R.id.favorite_check);
+            final CheckBox favCheck = (CheckBox) activity.findViewById(R.id.favorite_check);
             final ImmutablePair<StatusCode, String> postResult = GCParser.postLog(cache.getGeocode(), cache.getCacheId(), viewstates, logType,
                     date.get(Calendar.YEAR), date.get(Calendar.MONTH) + 1, date.get(Calendar.DATE),
-                    log, trackableLogs, fav_check.isChecked());
+                    log, trackableLogs, favCheck.isChecked());
 
             if (postResult.left == StatusCode.NO_ERROR) {
                 if (logType == LogType.TEMP_DISABLE_LISTING) {
@@ -112,7 +112,7 @@ class GCLoggingManager extends AbstractLoggingManager implements LoaderManager.L
                 } else if (logType == LogType.ENABLE_LISTING) {
                     cache.setDisabled(false);
                 }
-                if (fav_check.isChecked()) {
+                if (favCheck.isChecked()) {
                     cache.setFavorite(true);
                     cache.setFavoritePoints(cache.getFavoritePoints() + 1);
                 }

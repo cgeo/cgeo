@@ -122,11 +122,11 @@ public class Settings {
     }
 
     private static void migrateSettings() {
-        final int LATEST_PREFERENCES_VERSION = 2;
+        final int latestPreferencesVersion = 2;
         final int currentVersion = getInt(R.string.pref_settingsversion, 0);
 
         // No need to migrate if we are up to date.
-        if (currentVersion == LATEST_PREFERENCES_VERSION) {
+        if (currentVersion == latestPreferencesVersion) {
             return;
         }
 
@@ -135,7 +135,7 @@ public class Settings {
         final SharedPreferences prefsV0 = CgeoApplication.getInstance().getSharedPreferences(preferencesNameV0, Context.MODE_PRIVATE);
         if (currentVersion == 0 && prefsV0.getAll().isEmpty()) {
             final Editor e = sharedPrefs.edit();
-            e.putInt(getKey(R.string.pref_settingsversion), LATEST_PREFERENCES_VERSION);
+            e.putInt(getKey(R.string.pref_settingsversion), latestPreferencesVersion);
             e.apply();
             return;
         }
