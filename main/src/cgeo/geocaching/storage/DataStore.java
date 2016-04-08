@@ -2970,6 +2970,43 @@ public class DataStore {
         }
     }
 
+    public static void saveLists(final Collection<Geocache> caches, final Set<Integer> listIds) {
+        if (caches.isEmpty()) {
+            return;
+        }
+        init();
+
+        final SQLiteStatement add = PreparedStatement.ADD_TO_LIST.getStatement();
+        final SQLiteStatement remove = PreparedStatement.REMOVE_FROM_ALL_LISTS.getStatement();
+
+        database.beginTransaction();
+        try {
+            for (final Geocache cache : caches) {
+                remove.bindString(1, cache.getGeocode());
+                remove.execute();
+                cache.getLists().clear();
+
+                for (Integer listId : listIds) {
+                    final AbstractList list = AbstractList.getListById(listId);
+                    if (list == null) {
+                        return;
+                    }
+                    if (!list.isConcrete()) {
+                        return;
+                    }
+                    add.bindLong(1, listId);
+                    add.bindString(2, cache.getGeocode());
+                    add.execute();
+
+                    cache.getLists().add(listId);
+                }
+            }
+            database.setTransactionSuccessful();
+        } finally {
+            database.endTransaction();
+        }
+    }
+
     public static void addToLists(final Collection<Geocache> caches, final Map<String, Set<Integer>> cachesLists) {
         if (caches.isEmpty() || cachesLists.isEmpty()) {
             return;
@@ -2992,7 +3029,6 @@ public class DataStore {
                     add.execute();
                 }
 
-                cache.getLists().addAll(lists);
             }
             database.setTransactionSuccessful();
         } finally {

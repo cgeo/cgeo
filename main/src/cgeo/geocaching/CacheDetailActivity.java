@@ -40,7 +40,6 @@ import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.AbstractCachingPageViewCreator;
-import cgeo.geocaching.ui.AbstractViewHolder;
 import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
 import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.ui.CoordinatesFormatSwitcher;
@@ -135,8 +134,10 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.EnumSet;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 import butterknife.Bind;
@@ -900,25 +901,25 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
         if (Settings.getChooseList()) {
             // let user select list to store cache in
-            new StoredList.UserInterface(this).promptForListSelection(R.string.list_title,
-                    new Action1<Integer>() {
+            new StoredList.UserInterface(this).promptForMultiListSelection(R.string.lists_title,
+                    new Action1<Set<Integer>>() {
                         @Override
-                        public void call(final Integer selectedListId) {
-                            storeCacheInList(selectedListId);
+                        public void call(final Set<Integer> selectedListIds) {
+                            storeCacheInLists(selectedListIds);
                         }
                     }, true, cache.getLists());
         } else {
-            storeCacheInList(StoredList.STANDARD_LIST_ID);
+            storeCacheInLists(Collections.singleton(StoredList.STANDARD_LIST_ID));
         }
     }
 
-    private void storeCacheInList(final Integer selectedListId) {
+    private void storeCacheInLists(final Set<Integer> selectedListIds) {
         if (cache.isOffline()) {
             // cache already offline, just add to another list
-            DataStore.addToList(Collections.singletonList(cache), selectedListId);
+            DataStore.saveLists(Collections.singletonList(cache), selectedListIds);
             new StoreCacheHandler(CacheDetailActivity.this, progress).sendEmptyMessage(CancellableHandler.DONE);
         } else {
-            storeCache(selectedListId);
+            storeCache(selectedListIds);
         }
     }
 
@@ -1022,6 +1023,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
             updateOfflineBox(view, cache, res, new RefreshCacheClickListener(), new DropCacheClickListener(), new StoreCacheClickListener());
 
+            // list
+            updateCacheLists(view, cache, res);
+
             // watchlist
             final Button buttonWatchlistAdd = ButterKnife.findById(view, R.id.add_to_watchlist);
             final Button buttonWatchlistRemove = ButterKnife.findById(view, R.id.remove_from_watchlist);
@@ -1035,9 +1039,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             buttonFavPointAdd.setOnClickListener(new FavoriteAddClickListener());
             buttonFavPointRemove.setOnClickListener(new FavoriteRemoveClickListener());
             updateFavPointBox();
-
-            // list
-            updateListBox();
 
             // data license
             final IConnector connector = ConnectorFactory.getConnector(cache);
@@ -1354,44 +1355,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             }
         }
 
-        protected final class ListItemViewHolder extends AbstractViewHolder {
-            @Bind(R.id.list_text) TextView name;
-            @Bind(R.id.remove_from_list) Button remove;
-
-            public ListItemViewHolder(final View view) {
-                super(view);
-            }
-        }
-
-        /**
-         * shows/hides/updates list box
-         */
-        public void updateListBox() {
-            final LinearLayout listListView = (LinearLayout) view.findViewById(R.id.list_list);
-
-            if (cache.isOffline()) {
-                listListView.removeAllViews();
-                for (final Integer listId : cache.getLists()) {
-                    final View listItemView = getLayoutInflater().inflate(R.layout.list_list_item, listListView, false);
-                    final ListItemViewHolder holder = new ListItemViewHolder(listItemView);
-
-                    final StoredList list = DataStore.getList(listId);
-                    holder.name.setText(list.getTitle());
-                    holder.remove.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(final View v) {
-                            DataStore.removeFromList(Collections.singletonList(cache), listId);
-                            updateListBox();
-                        }
-                    });
-
-                    listListView.addView(listItemView);
-                }
-            } else {
-                // hide listListView
-                listListView.setVisibility(View.GONE);
-            }
-        }
     }
 
     private final Observable<BitmapDrawable> previewMap = Observable.create(new OnSubscribe<BitmapDrawable>() {
@@ -2262,13 +2225,26 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 offlineDrop.setClickable(true);
                 offlineDrop.setVisibility(View.VISIBLE);
             }
+
+            offlineStore.setText(R.string.cache_offline_manage);
         } else {
             offlineText.setText(res.getString(R.string.cache_offline_not_ready));
             if (offlineDrop != null) {
                 offlineDrop.setVisibility(View.GONE);
             }
+            offlineStore.setText(R.string.cache_offline_store);
         }
 
+    }
+
+    static void updateCacheLists(final View view, final Geocache cache, final Resources res) {
+        final Set<String> listNames = new HashSet<>();
+        for (Integer listId : cache.getLists()) {
+            final StoredList list = DataStore.getList(listId);
+            listNames.add(list.getTitle());
+        }
+        final TextView offlineLists = ButterKnife.findById(view, R.id.offline_lists);
+        offlineLists.setText(res.getString(R.string.list_list_headline) + " " + StringUtils.join(listNames.toArray(), ", "));
     }
 
     public Geocache getCache() {
@@ -2326,13 +2302,13 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         }
     }
 
-    protected void storeCache(final int listId) {
+    protected void storeCache(final Set<Integer> listIds) {
         final StoreCacheHandler storeCacheHandler = new StoreCacheHandler(CacheDetailActivity.this, progress);
         progress.show(this, res.getString(R.string.cache_dialog_offline_save_title), res.getString(R.string.cache_dialog_offline_save_message), true, storeCacheHandler.cancelMessage());
         AndroidRxUtils.networkScheduler.createWorker().schedule(new Action0() {
             @Override
             public void call() {
-                cache.store(listId, storeCacheHandler);
+                cache.store(listIds, storeCacheHandler);
             }
         });
     }

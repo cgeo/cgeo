@@ -52,7 +52,7 @@
     <item
         android:id="@+id/menu_store_in_list"
         android:icon="@drawable/ic_menu_save"
-        android:title="@string/cache_offline_store_in_list"
+        android:title="@string/cache_offline_store"
         android:visible="false"
         app:showAsAction="ifRoom">
     </item>

@@ -101,7 +101,6 @@
                         style="@style/button_small"
                         android:layout_width="wrap_content"
                         android:minWidth="60dip"
-                        android:layout_marginRight="3dip"
                         android:text="@string/cache_offline_refresh"
                         android:visibility="gone" />
 
@@ -112,19 +111,17 @@
                         android:layout_marginLeft="2dip"
                         android:minWidth="60dip"
                         android:text="@string/cache_offline_drop" />
+
                 </LinearLayout>
 
             </RelativeLayout>
 
-            <View
-                style="@style/separator_horizontal"
-                android:layout_marginBottom="9dp"
-                android:layout_marginTop="9dp" />
-
             <RelativeLayout
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content" >
+
                 <TextView
+                    android:id="@+id/offline_lists"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
@@ -133,26 +130,19 @@
                     android:layout_marginRight="130dip"
                     android:paddingRight="3dip"
                     android:textColor="?text_color"
-                    android:textSize="14sp"
-                    android:text="@string/list_list_headline"/>
-
+                    android:textSize="14sp"/>
                 <Button
                     android:id="@+id/offline_store"
                     style="@style/button_small"
+                    android:layout_alignParentRight="true"
                     android:layout_width="wrap_content"
                     android:layout_marginLeft="2dip"
-                    android:layout_alignParentRight="true"
                     android:layout_gravity="right"
                     android:minWidth="60dip"
-                    android:text="@string/cache_store_list" />
+                    android:text="@string/cache_offline_store" />
+
             </RelativeLayout>
 
-            <LinearLayout android:id="@+id/list_list"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical" >
-
-            </LinearLayout>
         </LinearLayout>
 
         <!-- Watchlist box -->
