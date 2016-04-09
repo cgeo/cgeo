@@ -1,9 +1,11 @@
 package cgeo.geocaching.filter;
 
-import cgeo.geocaching.CgeoApplication;
-
 import android.os.Parcel;
 import android.support.annotation.StringRes;
+
+import java.util.Locale;
+
+import cgeo.geocaching.CgeoApplication;
 
 abstract class AbstractRangeFilter extends AbstractFilter {
 
@@ -12,7 +14,7 @@ abstract class AbstractRangeFilter extends AbstractFilter {
 
     protected AbstractRangeFilter(@StringRes final int resourceId, final int range, final int upperBound) {
         super(CgeoApplication.getInstance().getResources().getString(resourceId) + ' ' +
-                (range == upperBound ? Integer.toString(upperBound) : range + " + " + String.format("%.1f", range + 0.5)));
+                (range == upperBound ? Integer.toString(upperBound) : range + " + " + String.format(Locale.getDefault(),"%.1f", range + 0.5)));
         rangeMin = range;
         rangeMax = rangeMin + 1f;
     }

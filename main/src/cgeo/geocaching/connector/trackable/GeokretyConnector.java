@@ -1,5 +1,22 @@
 package cgeo.geocaching.connector.trackable;
 
+import android.content.Context;
+
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+import org.xml.sax.InputSource;
+
+import java.io.InputStream;
+import java.net.URLEncoder;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.List;
+import java.util.Locale;
+import java.util.regex.Pattern;
+
 import cgeo.geocaching.AbstractLoggingActivity;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
@@ -14,25 +31,8 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.Version;
-
-import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
-import org.xml.sax.InputSource;
-
 import rx.Observable;
 import rx.functions.Func1;
-
-import android.content.Context;
-
-import java.io.InputStream;
-import java.net.URLEncoder;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.List;
-import java.util.regex.Pattern;
 
 public class GeokretyConnector extends AbstractTrackableConnector {
 
@@ -352,7 +352,7 @@ public class GeokretyConnector extends AbstractTrackableConnector {
                     "nr", trackableLog.trackCode,
                     "formname", "ruchy",
                     "logtype", String.valueOf(trackableLog.action.gkid),
-                    "data", String.format("%tY-%tm-%td", date, date, date), // YYYY-MM-DD
+                    "data", String.format(Locale.ENGLISH, "%tY-%tm-%td", date, date, date), // YYYY-MM-DD
                     "godzina",String.format("%tH", date), // HH
                     "minuta", String.format("%tM", date), // MM
                     "comment", log,

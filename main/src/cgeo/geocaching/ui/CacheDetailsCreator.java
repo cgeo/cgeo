@@ -1,18 +1,5 @@
 package cgeo.geocaching.ui;
 
-import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.models.ICoordinates;
-import cgeo.geocaching.R;
-import cgeo.geocaching.models.Waypoint;
-import cgeo.geocaching.connector.ConnectorFactory;
-import cgeo.geocaching.location.Units;
-import cgeo.geocaching.sensors.Sensors;
-import cgeo.geocaching.utils.Formatter;
-
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.eclipse.jdt.annotation.NonNull;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.res.Resources;
@@ -22,10 +9,23 @@ import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.eclipse.jdt.annotation.NonNull;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.ButterKnife;
+import cgeo.geocaching.R;
+import cgeo.geocaching.connector.ConnectorFactory;
+import cgeo.geocaching.location.Units;
+import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.ICoordinates;
+import cgeo.geocaching.models.Waypoint;
+import cgeo.geocaching.sensors.Sensors;
+import cgeo.geocaching.utils.Formatter;
 
 // TODO The suppression of this lint finding is bad. But to fix it, someone needs to rework the layout of the cache
 // details also, not just only change the code here.
@@ -74,7 +74,7 @@ public final class CacheDetailsCreator {
         lastValueView = ButterKnife.findById(layout, R.id.value);
 
         nameView.setText(activity.getResources().getString(nameId));
-        lastValueView.setText(String.format("%.1f", value) + ' ' + activity.getResources().getString(R.string.cache_rating_of) + " " + String.format("%d", max));
+        lastValueView.setText(String.format(Locale.getDefault(), "%.1f", value) + ' ' + activity.getResources().getString(R.string.cache_rating_of) + ' ' + String.format(Locale.getDefault(), "%d", max));
 
         final RatingBar layoutStars = ButterKnife.findById(layout, R.id.stars);
         layoutStars.setNumStars(max);
