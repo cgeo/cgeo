@@ -433,7 +433,7 @@
   <string name="init_summary_friends_and_own_logs_wanted">Prikaži dodaten zavihek s svojimi/prijateljevimi zapisi</string>
   <string name="init_openlastdetailspage">Odpri nazadnje odprto stran</string>
   <string name="init_summary_openlastdetailspage">Pri podrobnostih zaklada vedno odpri zadnjo uporabljeno stran</string>
-  <string name="init_autoload">Prikaži celoten opis</string>
+  <string name="init_autoload">Daljši opis</string>
   <string name="init_summary_autoload">Vedno naloži celoten opis zaklada</string>
   <string name="init_skin">Svetli izgled</string>
   <string name="init_summary_skin">Uporabi svetlo različico\n(potrebuje ponovni zagon aplikacije)</string>

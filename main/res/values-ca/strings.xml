@@ -154,6 +154,7 @@
   <string name="err_license">No heu acceptat l\'acord de llicència de Geocaching.com, per tant el c:geo no pot carregar les coordenades.</string>
   <string name="err_unvalidated_account">Primer heu de validar el vostre compte a la pàgina web de Geocaching.com.</string>
   <string name="err_unpublished">El catxé sol·licitat no està publicat.</string>
+  <string name="err_cache_not_found">El catxé sol·licitat no s\'ha trobat.</string>
   <string name="err_premium_only">Aquest catxé només està disponible per a usuaris de pagament de Geocaching.com.</string>
   <string name="err_detail_open">El c:geo no pot obrir els detalls del catxé.</string>
   <string name="err_detail_cache">El c:geo no pot mostrar el catxé que voleu. És realment un catxé?</string>

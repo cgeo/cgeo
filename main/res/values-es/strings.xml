@@ -154,6 +154,7 @@
   <string name="err_license">No has aceptado las condiciones del acuerdo de licencia de Geocaching.com, por lo que c:geo no puede cargar las coordenadas de los cachés.</string>
   <string name="err_unvalidated_account">Antes debe validar su cuenta en la página web Geocaching.com.</string>
   <string name="err_unpublished">El caché solicitado aún no ha sido publicado.</string>
+  <string name="err_cache_not_found">No se pudo encontrar el caché solicitado.</string>
   <string name="err_premium_only">Este caché solo está disponible para los miembros Premium de Geocaching.com.</string>
   <string name="err_detail_open">c:geo no puede abrir los detalles del caché.</string>
   <string name="err_detail_cache">c:geo no puede mostrar el caché que quieres. ¿Seguro que es un geocaché?</string>

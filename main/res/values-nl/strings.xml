@@ -154,6 +154,7 @@
   <string name="err_license">Gebruiker heeft de gebruikersvoorwaarden van Geocaching.com niet geaccepteerd en kan daarom geen coördinaten laden.</string>
   <string name="err_unvalidated_account">Je dient je account eerst te valideren op de Geocaching.com website.</string>
   <string name="err_unpublished">De cache is nog niet gepubliceerd</string>
+  <string name="err_cache_not_found">De opgevraagde cache kan niet worden gevonden.</string>
   <string name="err_premium_only">Deze cache is alleen beschikbaar voor Geocaching.com premium leden.</string>
   <string name="err_detail_open">Sorry, c:geo kan de geocache details niet openen.</string>
   <string name="err_detail_cache">Sorry, c:geo kan de gezochte geocache niet weergeven. Is het wel een geocache?</string>
@@ -364,7 +365,7 @@
   <string name="list_dialog_create_err">c:geo kon geen nieuwe lijst aanmaken</string>
   <string name="list_dialog_remove_title">Verwijder lijst</string>
   <string name="list_dialog_remove_description">Wil je de huidige lijst van caches verwijderen? Alle overgebleven caches zullen worden verplaatst naar \"Opgeslagen\".</string>
-  <string name="list_dialog_remove_nowempty">Lijst is leeg. Wilt je de huidige lijst verwijderen?</string>
+  <string name="list_dialog_remove_nowempty">Lijst is leeg. Wil je de huidige lijst verwijderen?</string>
   <string name="list_dialog_remove">Verwijder</string>
   <string name="list_dialog_remove_ok">Lijst is verwijderd</string>
   <string name="list_dialog_remove_err">c:geo kon de huidige lijst niet verwijderen</string>
@@ -517,7 +518,7 @@
   <string name="init_backup_success">De database van c:geo was succesvol gekopieerd naar het bestand:</string>
   <string name="init_backup_failed">Backup van c:geo database is niet gelukt.</string>
   <string name="init_backup_unnecessary">Database is leeg, backup niet nodig.</string>
-  <string name="backup_confirm_overwrite">Wilt je de bestaande backup van %s overschrijven?</string>
+  <string name="backup_confirm_overwrite">Wil je de bestaande backup van %s overschrijven?</string>
   <string name="restore_confirm_overwrite">Wil je %s op uw apparaat overschrijven met de backup?</string>
   <string name="init_restore_success">Herstellen is gelukt.</string>
   <string name="init_restore_failed">Herstellen is niet gelukt.</string>

@@ -477,7 +477,7 @@
   <string name="init_summary_friends_and_own_logs_wanted">Rādīt papildu lapu ar draugu un saviem apmeklējuma ierakstiem</string>
   <string name="init_openlastdetailspage">Pēdējā atvērtā sadaļa</string>
   <string name="init_summary_openlastdetailspage">Atvērt datus ar pēdējo izmantoto sadaļu</string>
-  <string name="init_autoload">Pilns apraksts</string>
+  <string name="init_autoload">Garš apraksts</string>
   <string name="init_summary_autoload">Vienmēr ielādēt pilnu aprakstu</string>
   <string name="init_skin">Gaišs fons</string>
   <string name="init_summary_skin">Izmantot gaišu fonu (nepieciešama restartēšana)</string>

@@ -478,7 +478,7 @@
   <string name="init_summary_friends_and_own_logs_wanted">Wyświetl dodatkowy dziennik dla wpisów własnych i przyjaciół</string>
   <string name="init_openlastdetailspage">Otwórz szczegóły ostatnio używanej strony</string>
   <string name="init_summary_openlastdetailspage">Otwórz szczegóły ostatnio używanej strony</string>
-  <string name="init_autoload">Automatyczne ładowanie długich opisów</string>
+  <string name="init_autoload">Długi opis</string>
   <string name="init_summary_autoload">Zawsze ładuj długie opisy</string>
   <string name="init_skin">Light skin</string>
   <string name="init_summary_skin">Użyj light skin\n(wymaga restartu)</string>

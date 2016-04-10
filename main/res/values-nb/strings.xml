@@ -154,6 +154,7 @@
   <string name="err_license">Brukeren har ikke akseptert Geocaching.com sin lisens. c:geo kan ikke laste cachens koordinater.</string>
   <string name="err_unvalidated_account">Du må aktivere kontoen din på Geocaching.com først.</string>
   <string name="err_unpublished">Den forespurte cachen er ikke publisert.</string>
+  <string name="err_cache_not_found">Finner ikke denne cachen.</string>
   <string name="err_premium_only">Denne cachen er bare tilgjengelig for premiummedlemmer på Geocaching.com.</string>
   <string name="err_detail_open">Beklager, c:geo klarte ikke å finne detaljene.</string>
   <string name="err_detail_cache">Beklager, c:geo klarte ikke å finne den forespurte cachen. Er du sikker på at den eksisterer?</string>
@@ -479,7 +480,7 @@
   <string name="init_summary_friends_and_own_logs_wanted">Vis ekstra loggbokside for venners og egne logger</string>
   <string name="init_openlastdetailspage">Sist brukte fane</string>
   <string name="init_summary_openlastdetailspage">Åpne detaljsiden til cacher på den siste brukte fanen</string>
-  <string name="init_autoload">Last full beskrivelse automatisk</string>
+  <string name="init_autoload">Full beskrivelse</string>
   <string name="init_summary_autoload">Last full beskrivelse automatisk</string>
   <string name="init_skin">Hvitt tema</string>
   <string name="init_summary_skin">Hvitt tema</string>

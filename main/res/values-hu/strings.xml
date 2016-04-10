@@ -154,6 +154,7 @@
   <string name="err_license">Nem fogadtad el a geocaching.com licencmegállapodását, így a c:geo nem tudja betölteni a ládák koordinátáit.</string>
   <string name="err_unvalidated_account">Előbb aktiválnod kell a fiókod a geocaching.com weboldalon.</string>
   <string name="err_unpublished">A kért geoládát eltávolították.</string>
+  <string name="err_cache_not_found">A kért láda nem található.</string>
   <string name="err_premium_only">Ez a láda csak a geocaching.com prémium felhasználói számára hozzáférhető.</string>
   <string name="err_detail_open">Sajnáljuk, a c:geo nem tudja megnyitni a láda adatait.</string>
   <string name="err_detail_cache">Sajnáljuk, a c:geo nem tudja megmutatni a kért ládát. Biztos, hogy ez egy láda?</string>
@@ -479,7 +480,7 @@
   <string name="init_summary_friends_and_own_logs_wanted">Barátok/saját logok megjelenítése kiegészítő oldalon</string>
   <string name="init_openlastdetailspage">Utoljára használt oldaltípus</string>
   <string name="init_summary_openlastdetailspage">Utoljára használt oldaltípus megnyitása belépéskor</string>
-  <string name="init_autoload">Hosszú leírás automatikus betöltése</string>
+  <string name="init_autoload">Hosszú leírás</string>
   <string name="init_summary_autoload">Hosszú leírás automatikus betöltése</string>
   <string name="init_skin">Világos felület</string>
   <string name="init_summary_skin">Világos felület\n(a c:geo újraindítását igényli)</string>

@@ -153,6 +153,7 @@
   <string name="err_license">Et ole hyväksynyt Geocaching.com-käyttöoikeussopimusta, joten c:geo ei voi ladata kätköjen koordinaatteja.</string>
   <string name="err_unvalidated_account">Sinun täytyy ensin varmentaa tunnuksesi Geocaching.com-sivustolla (\"validate\"-toiminto).</string>
   <string name="err_unpublished">Pyydetty kätkö on vielä julkaisematon.</string>
+  <string name="err_cache_not_found">Pyydettyä kätköä ei löytynyt.</string>
   <string name="err_premium_only">Tämä kätkö on tarjolla vain Geocaching.com Premium-jäsenille.</string>
   <string name="err_detail_open">c:geo ei pysty avaamaan geokätkön tietoja.</string>
   <string name="err_detail_cache">c:geo ei voi näyttää haluamaasi geokätköä. Onko se varmasti geokätkö?</string>
@@ -223,6 +224,7 @@
   <string name="warn_rendertheme_missing">Karttateemaa ei löytynyt.</string>
   <string name="warn_pocket_query_select">Ei pocket queryja valittuna.</string>
   <string name="warn_no_pocket_query_found">Yhtään Pocket querya ei löydetty.</string>
+  <string name="err_read_pocket_query_list">Virhe luettaessa Pocket Query -listausta.</string>
   <string name="info_log_posted">c:geo latasi lokin onnistuneesti.</string>
   <string name="info_log_saved">c:geo tallensi lokin onnistuneesti.</string>
   <string name="info_log_post_failed">Lokin lähettäminen epäonnistui.</string>
@@ -343,6 +345,7 @@
   <string name="caches_filter_personal_data">Omia tietoja</string>
   <string name="caches_filter_rating">Luokitus</string>
   <string name="caches_filter_own_rating">Oma luokitus</string>
+  <string name="caches_filter_multi_listing">Sama kätkö eri sivustoilla, osittain lokattu</string>
   <string name="caches_removing_from_history">Poistetaan historiasta…</string>
   <string name="caches_clear_offlinelogs">Poista offline-lokit</string>
   <string name="caches_clear_offlinelogs_message">Haluatko poistaa offline lokit?</string>
@@ -607,7 +610,7 @@
   <string name="init_sendToCgeo_description"><b>Send2cgeo</b> voit lähettää kätköt Android-laitteeseen suoraan geocaching.com sivulta, käyttäen erityistä laajennusta Firefox- ja Chrome-selaimissa. Ennen rekisteröitymistä, katso <a href="http://send2.cgeo.org/"> http://send2.cgeo.org/</a>. Sinun tarvitsee vain rekisteröityä, jos haluat käyttää send2cgeo. c:geo toimii normaalisti ilman laitteen rekisteröitymistä.</string>
   <string name="init_sendToCgeo_register">Vaatii rekisteröitymisen</string>
   <string name="init_sendToCgeo_registering">Rekisteröidään laitteesi send2cgeo…</string>
-  <string name="init_sendToCgeo_register_ok">Rekisteröinti onnistui. PIN-koodi on ###. Käytä sitä c:geo verkkosivuilla yhdistääksesi tämän laitteen selaimeen.</string>
+  <string name="init_sendToCgeo_register_ok">Rekisteröinti onnistui. PIN-koodi on ####. Käytä sitä c:geon verkkosivuilla yhdistääksesi tämän laitteen selaimeen.</string>
   <string name="init_sendToCgeo_register_fail">Rekisteröinti epäonnistui.</string>
   <string name="sendToCgeo_download_fail">c:geo ei onnistunut lataamaan kätköjä. Ei internet-yhteyttä tai send2cgeo on kaatunut.</string>
   <string name="sendToCgeo_no_registration">c:geo ei onnistunut latamaan kätköjä. Kirjautuminen kohteeseen send2cgeo vanhentunut. Kirjaudu uudelleen asetuksien kautta.</string>
@@ -637,6 +640,7 @@
     <item quantity="other">%1$d kätköä</item>
   </plurals>
   <!-- days remaining -->
+  <string name="last_day_available">saatavilla enää tänään</string>
   <string name="cache_offline">Offline</string>
   <string name="cache_offline_refresh">Päivitä</string>
   <string name="cache_offline_drop">Poista</string>
@@ -673,6 +677,7 @@
   <string name="cache_personal_note_upload">Lataa</string>
   <string name="cache_personal_note_uploading">Ladataan omaa muistiinpanoa</string>
   <string name="cache_personal_note_upload_done">Oma muistiinpano ladattu</string>
+  <string name="cache_personal_note_upload_error">Virhe oman muistiinpanon lähettämisessä</string>
   <string name="cache_personal_note_upload_cancelled">Oman muistiinpanon lataaminen peruttu</string>
   <string name="cache_description">Kuvaus</string>
   <string name="cache_description_long">Pitkä kuvaus</string>
@@ -764,6 +769,7 @@
   <string name="cache_status_found">Löydetty</string>
   <string name="cache_not_status_found">Ei löydetty</string>
   <string name="cache_never_found">Löytämätön</string>
+  <string name="cache_found_last_30_days">Löydetty viimeisen 30 päivän aikana</string>
   <string name="cache_status_archived">Arkistoitu</string>
   <string name="cache_status_disabled">Ei käytössä</string>
   <string name="cache_status_premium">Vain Premium-jäsenille</string>
@@ -949,6 +955,7 @@
   <string name="trackable_image">Kuva</string>
   <string name="trackable_code">Seurantakoodi</string>
   <string name="trackable_name">Nimi</string>
+  <string name="trackable_brand">Tyyppi</string>
   <string name="trackable_type">Tyyppi</string>
   <string name="trackable_owner">Omistaja</string>
   <string name="trackable_spotted">Nähty</string>
@@ -999,7 +1006,7 @@
   <string name="helper_calendar_pastevent_title">Mennyt tapahtuma</string>
   <string name="helper_calendar_pastevent_question">Päivämäärä on menneisyydessä. Lisätäänkö tästä huolimatta?</string>
   <string name="helper_sendtocgeo_title">Lähetä c:geo:on</string>
-  <string name="helper_contacts_title">c:geo ottaa yhteyttä lisäosaan</string>
+  <string name="helper_contacts_title">c:geo yhteystiedot -lisäosa</string>
   <string name="helper_contacts_description">Voit avata kontaktit (puhelimen osoitekirjasta) suoraan kätkön sivulta, joten voit helpommin pyytää ystävän apua.</string>
   <string name="helper_sendtocgeo_description">Lähetä c:geo on selaimen laajennus <strong>tietokoneellesi</strong>. Geocaching.com sivua selattaessa kätköt voi lähettää älypuhelimeen napin painalluksella suoraan selaimesta.</string>
   <string name="helper_locus_title">Locus</string>
@@ -1014,7 +1021,7 @@
   <string name="helper_google_translate_title">Google-kääntäjä</string>
   <string name="helper_google_translate_description">Jos lataat käännöspaketteja Google Translate -sovellukseen, voit helposti kääntää kätkökuvaukset c:geo:ssa painamalla pitkään kätkökuvauksen tekstiä (ilman Internet-yhteyttä).</string>
   <string name="helper_wear_title">c:geo Wear</string>
-  <string name="helper_wear_description">c:geo Wear on plugin c:geoon, jonka avulla voit navigoida käyttäen Android Wear älykelloa.</string>
+  <string name="helper_wear_description">c:geo Wear -lisäosalla voit navigoida kätköille käyttäen Android Wear -älykelloa.</string>
   <string name="helper_where_you_go_title">WhereYouGo</string>
   <string name="helper_where_you_go_description">WhereYouGo-sovelluksen avulla pystyy pelaamaan ja etsimään Wherigo-kätköjä. c:geo osaa ladata suoraan Wherigo-kasetit tämän sovelluksen avulla.</string>
   <!-- add-ons -->

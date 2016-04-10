@@ -223,6 +223,7 @@
   <string name="warn_rendertheme_missing">Тема карты не найдена.</string>
   <string name="warn_pocket_query_select">Не выбрана выборка.</string>
   <string name="warn_no_pocket_query_found">Не найдено выборок.</string>
+  <string name="err_read_pocket_query_list">Ошибка чтения списка Выборок.</string>
   <string name="info_log_posted">Запись в блокнот успешно отправлена.</string>
   <string name="info_log_saved">Запись в блокнот успешно сохранена.</string>
   <string name="info_log_post_failed">Запись в блокнот не удалась.</string>
@@ -761,6 +762,8 @@
   <string name="cache_menu_share">Поделиться</string>
   <string name="cache_menu_move_list">Переместить в другой список</string>
   <string name="cache_menu_whereyougo">WhereYouGo</string>
+  <string name="cache_menu_oruxmaps_online">OruxMaps (Онлайн)</string>
+  <string name="cache_menu_oruxmaps_offline">OruxMaps (Оффлайн)</string>
   <string name="cache_menu_pebble">Pebble</string>
   <string name="cache_menu_vote">Оценить</string>
   <string name="cache_menu_checker">Открыть Geochecker</string>
@@ -772,6 +775,7 @@
   <string name="cache_status_found">Найден</string>
   <string name="cache_not_status_found">Не найден</string>
   <string name="cache_never_found">Никем не найденные</string>
+  <string name="cache_found_last_30_days">Найденные за 30 дней</string>
   <string name="cache_status_archived">В архиве</string>
   <string name="cache_status_disabled">Вне игры</string>
   <string name="cache_status_premium">Только для Премиум участников</string>
@@ -974,6 +978,7 @@
   <string name="trackable_not_activated">Трекабл не активирован</string>
   <string name="trackable_travelbug">Travelbug</string>
   <string name="trackable_geokrety">ГеоКрот</string>
+  <string name="trackable_geolutins">GeoLutins</string>
   <string name="geokret_type_traditional">Традиционный</string>
   <string name="geokret_type_book_or_media">Книга, CD или DVD</string>
   <string name="geokret_type_human">Человек</string>
@@ -1395,6 +1400,8 @@
   <string name="pq_as_cache_list">Посмотреть как список</string>
   <string name="pq_download_and_import">Импортировать выборку</string>
   <string name="pq_my_finds">Мои находки</string>
+  <string name="caches_refresh_all_warning">Это действие может привести к большому количеству трафика. Вы точно хотите обновить все тайники?</string>
   <string name="invitation_action">Пригласить друзей</string>
   <string name="invitation_title">Пригласить друзей использовать c:geo</string>
+  <string name="invitation_message">Попробуйте c:geo для геокешинга</string>
 </resources>

@@ -154,6 +154,7 @@
   <string name="err_license">Die Geocaching.com Nutzungsbedingungen wurden nicht akzeptiert. c:geo kann deshalb keine Koordinaten laden.</string>
   <string name="err_unvalidated_account">Die Logindaten müssen zuerst auf Geocaching.com validiert werden.</string>
   <string name="err_unpublished">Der aufgerufene Cache ist noch nicht veröffentlicht.</string>
+  <string name="err_cache_not_found">Der gesuchte Cache konnte nicht gefunden werden.</string>
   <string name="err_premium_only">Der Cache ist nur für Premium-Mitglieder von Geocaching.com verfügbar.</string>
   <string name="err_detail_open">c:geo konnte die Cache-Details nicht öffnen.</string>
   <string name="err_detail_cache">c:geo kann diesen Cache nicht darstellen. Ist es wirklich ein Cache?</string>
@@ -614,7 +615,7 @@
   <string name="map_source_osm_cyclemap">OSM: Radfahrerkarte</string>
   <string name="map_source_osm_offline">Offline</string>
   <string name="init_sendToCgeo">Send to c:geo</string>
-  <string name="settings_info_send2cgeo_title">Info zu send2:cgeo</string>
+  <string name="settings_info_send2cgeo_title">Info zu send2cgeo</string>
   <string name="init_sendToCgeo_name">Name des Endgerätes</string>
   <string name="init_sendToCgeo_description"><b>Send2cgeo</b> erlaubt es, mit einem speziellen Plugin für Firefox oder Chrome, Caches direkt von der Geocachingseite zu empfangen. Bitte dazu die Details vor einer Registrierung auf <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a> durchlesen. Eine Registrierung ist nur erforderlich, wenn auch send2cgeo genutzt werden soll. c:geo wird auch ohne Registrierung normal funktionieren.</string>
   <string name="init_sendToCgeo_register">Registrierung anfordern</string>

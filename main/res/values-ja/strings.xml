@@ -466,7 +466,7 @@
   <string name="init_summary_friends_and_own_logs_wanted">お友達と自分のログがあるもう一つのページを表示する</string>
   <string name="init_openlastdetailspage">最後に表示したページ</string>
   <string name="init_summary_openlastdetailspage">キャッシュ情報の表示では最後に表示したページを開く</string>
-  <string name="init_autoload">詳細表示</string>
+  <string name="init_autoload">全て表示</string>
   <string name="init_summary_autoload">キャッシュの説明を自動的に全て表示</string>
   <string name="init_skin">明るいスキン</string>
   <string name="init_summary_skin">明るい色のスキンを使用\n(c:geoの再起動が必要)</string>

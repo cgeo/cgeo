@@ -478,7 +478,7 @@
   <string name="init_summary_friends_and_own_logs_wanted">Mostrar página adicional de registo com registos de amigos e próprias</string>
   <string name="init_openlastdetailspage">Abrir detalhes da última página vizualizada</string>
   <string name="init_summary_openlastdetailspage">Abrir detalhes da última página vizualizada</string>
-  <string name="init_autoload">Carregar automaticamente a descrição longa</string>
+  <string name="init_autoload">Descrição longa</string>
   <string name="init_summary_autoload">Carregar automaticamente a descrição longa</string>
   <string name="init_skin">Tema leve (precisa reiniciar o c:geo)</string>
   <string name="init_summary_skin">Tema leve (precisa reiniciar o c:geo)</string>

@@ -479,7 +479,7 @@
   <string name="init_summary_friends_and_own_logs_wanted">Vis en særskilt logbogsside med venners og egne logbeskeder</string>
   <string name="init_openlastdetailspage">Åbn sidste detaljeside</string>
   <string name="init_summary_openlastdetailspage">Åbn detaljesiden med de sidst indlæste oplysninger</string>
-  <string name="init_autoload">Auto-indlæs lang cachebeskrivelse</string>
+  <string name="init_autoload">Lang beskrivelse</string>
   <string name="init_summary_autoload">Auto-indlæs lang cachebeskrivelse</string>
   <string name="init_skin">Light skin</string>
   <string name="init_summary_skin">Light skin (kræver genstart af c:geo)</string>

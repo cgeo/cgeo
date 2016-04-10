@@ -154,6 +154,7 @@
   <string name="err_license">Neodsouhlasil/a jsi licenční smlouvu Geocaching.com, takže c:geo nemůže načíst souřadnice keše.</string>
   <string name="err_unvalidated_account">Nejdříve je třeba ověřit tvůj účet na Geocaching.com.</string>
   <string name="err_unpublished">Požadovaná keš není publikována.</string>
+  <string name="err_cache_not_found">Požadovanou keš nelze nalézt.</string>
   <string name="err_premium_only">Tato keš je dostupná jen Prémiovým uživatelům Geocaching.com.</string>
   <string name="err_detail_open">c:geo nemůže načíst detaily keše.</string>
   <string name="err_detail_cache">c:geo nemůže zobrazit požadovanou keš. Je to skutečně geokeš?</string>

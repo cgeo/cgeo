@@ -479,7 +479,7 @@
   <string name="init_summary_friends_and_own_logs_wanted">Visa en extra loggbok med dina vänners och egna loggar</string>
   <string name="init_openlastdetailspage">Visning av cachedetaljer</string>
   <string name="init_summary_openlastdetailspage">Visa senaste använda delsidan när detaljer öppnas</string>
-  <string name="init_autoload">Cachebeskrivning</string>
+  <string name="init_autoload">Lång beskrivning</string>
   <string name="init_summary_autoload">Ladda full beskrivning automatiskt</string>
   <string name="init_skin">Vitt skal</string>
   <string name="init_summary_skin">Vitt skal (kräver omstart av c:geo)</string>
