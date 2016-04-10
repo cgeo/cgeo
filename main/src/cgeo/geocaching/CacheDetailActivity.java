@@ -914,7 +914,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                         }
                     }, true, cache.getLists());
         } else {
-            storeCacheInList(StoredList.TEMPORARY_LIST.id, move);
+            storeCacheInList(StoredList.STANDARD_LIST_ID, move);
         }
     }
 
