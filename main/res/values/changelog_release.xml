@@ -8,6 +8,8 @@
     · Fix: Found status of webcam caches not shown\n
     · Fix: Avatar not shown on login check if it was not a jpeg\n
     · Fix: Own coords not updated in waypoint screen\n
+    · Fix: Twitter NUMBER template showing wrong find count\n
+    · Fix: Terain filter was going up to T7.5\n
     \n
     \n
     <b>2016.03.06:</b>\n
