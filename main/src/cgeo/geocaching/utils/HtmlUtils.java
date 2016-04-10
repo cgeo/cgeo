@@ -68,17 +68,18 @@ public final class HtmlUtils {
     @NonNull
     public static String removeExtraTags(final String htmlIn) {
         String html = StringUtils.trim(htmlIn);
-        if (StringUtils.startsWith(html, "<") && StringUtils.endsWith(html, ">")) {
+        while (StringUtils.startsWith(html, "<") && StringUtils.endsWith(html, ">")) {
             final String tag = "<" + StringUtils.substringBetween(html, "<", ">") + ">";
             final int tagLength = tag.length();
-            if (tagLength < 10) {
-                final String endTag = "</" + StringUtils.substring(tag, 1);
-                final int endTagIndex = html.length() - endTag.length();
-                if (StringUtils.startsWith(html, tag) && StringUtils.endsWith(html, endTag) && StringUtils.indexOf(html, endTag) == endTagIndex) {
-                    html = StringUtils.substring(html, tagLength, endTagIndex).trim();
-                    return removeExtraTags(html);
-                }
+            if (tagLength >= 10) {
+                break;
             }
+            final String endTag = "</" + StringUtils.substring(tag, 1);
+            final int endTagIndex = html.length() - endTag.length();
+            if (!StringUtils.startsWith(html, tag) || !StringUtils.endsWith(html, endTag) || StringUtils.indexOf(html, endTag) != endTagIndex) {
+                break;
+            }
+            html = StringUtils.substring(html, tagLength, endTagIndex).trim();
         }
         return html;
     }
