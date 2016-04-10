@@ -1354,8 +1354,8 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         }
 
         protected final class ListItemViewHolder extends AbstractViewHolder {
-            @Bind(R.id.list_text) protected TextView name;
-            @Bind(R.id.remove_from_list) protected Button remove;
+            @Bind(R.id.list_text) TextView name;
+            @Bind(R.id.remove_from_list) Button remove;
 
             public ListItemViewHolder(final View view) {
                 super(view);

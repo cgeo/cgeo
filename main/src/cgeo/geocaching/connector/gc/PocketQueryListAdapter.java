@@ -21,10 +21,10 @@ public class PocketQueryListAdapter extends ArrayAdapter<PocketQuery> {
     final private LayoutInflater inflater;
 
     protected static final class ViewHolder extends AbstractViewHolder {
-        @Bind(R.id.label) protected TextView label;
-        @Bind(R.id.download) protected Button download;
-        @Bind(R.id.cachelist) protected Button cachelist;
-        @Bind(R.id.info) protected TextView info;
+        @Bind(R.id.label) TextView label;
+        @Bind(R.id.download) Button download;
+        @Bind(R.id.cachelist) Button cachelist;
+        @Bind(R.id.info) TextView info;
         public ViewHolder(final View view) {
             super(view);
         }

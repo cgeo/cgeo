@@ -80,8 +80,8 @@ public class FileSelectionListAdapter extends ArrayAdapter<File> {
     }
 
     protected static final class ViewHolder extends AbstractViewHolder {
-        @Bind(R.id.mapfilepath) protected TextView filepath;
-        @Bind(R.id.mapfilename) protected TextView filename;
+        @Bind(R.id.mapfilepath) TextView filepath;
+        @Bind(R.id.mapfilename) TextView filename;
 
         public ViewHolder(final View view) {
             super(view);
