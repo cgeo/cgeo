@@ -82,8 +82,7 @@ public class RegisterSend2CgeoPreference extends AbstractClickablePreference {
                         progressDialog.dismiss();
                         if (pin > 0) {
                             Dialogs.message(activity, R.string.init_sendToCgeo,
-                                    activity.getString(R.string.init_sendToCgeo_register_ok)
-                                            .replace("####", String.valueOf(pin)));
+                                    activity.getString(R.string.init_sendToCgeo_register_ok, pin));
                         } else {
                             Dialogs.message(activity, R.string.init_sendToCgeo, R.string.init_sendToCgeo_register_fail);
                         }
