@@ -125,7 +125,7 @@ public final class CalendarActivity extends Activity {
         return calendars;
     }
 
-    public final void showToast(final int res) {
+    public void showToast(final int res) {
         final String text = getResources().getString(res);
         final Toast toast = Toast.makeText(this, text, Toast.LENGTH_LONG);
 

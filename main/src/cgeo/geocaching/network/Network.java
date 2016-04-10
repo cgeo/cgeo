@@ -442,7 +442,7 @@ public final class Network {
      *
      * @param response the response to check
      */
-    final public static void completeWithSuccess(final Single<Response> response) {
+    public static void completeWithSuccess(final Single<Response> response) {
         Completable.fromSingle(response.flatMap(withSuccess)).await();
     }
 

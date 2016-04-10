@@ -13,7 +13,7 @@ public final class TerraCachingType {
         // utility class
     }
 
-    public static final CacheType getCacheType(@NonNull final String style) {
+    public static CacheType getCacheType(@NonNull final String style) {
         switch (style) {
             case "Classic":
                 return CacheType.TRADITIONAL;
