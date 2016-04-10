@@ -70,8 +70,8 @@ public final class HtmlUtils {
         String html = StringUtils.trim(htmlIn);
         if (StringUtils.startsWith(html, "<") && StringUtils.endsWith(html, ">")) {
             final String tag = "<" + StringUtils.substringBetween(html, "<", ">") + ">";
-            if (StringUtils.isNotBlank(tag) && StringUtils.length(tag) < 10) {
-                final String endTag = StringUtils.left(tag, 1) + "/" + StringUtils.substring(tag, 1);
+            if (StringUtils.length(tag) < 10) {
+                final String endTag = "</" + StringUtils.substring(tag, 1);
                 if (StringUtils.startsWith(html, tag) && StringUtils.endsWith(html, endTag) && StringUtils.indexOf(html, endTag) == StringUtils.length(html) - StringUtils.length(endTag)) {
                     html = StringUtils.substring(html, tag.length(), html.length() - endTag.length()).trim();
                     return removeExtraTags(html);
