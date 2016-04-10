@@ -2,12 +2,12 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/cgeo.iml" filepath="$PROJECT_DIR$/cgeo.iml" />
-      <module fileurl="file://$PROJECT_DIR$/cgeo-calendar/cgeo-calendar.iml" filepath="$PROJECT_DIR$/cgeo-calendar/cgeo-calendar.iml" />
-      <module fileurl="file://$PROJECT_DIR$/cgeo-contacts/cgeo-contacts.iml" filepath="$PROJECT_DIR$/cgeo-contacts/cgeo-contacts.iml" />
-      <module fileurl="file://$PROJECT_DIR$/main/main.iml" filepath="$PROJECT_DIR$/main/main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/mapswithme-api/mapswithme-api.iml" filepath="$PROJECT_DIR$/mapswithme-api/mapswithme-api.iml" />
-      <module fileurl="file://$PROJECT_DIR$/showcaseview/showcaseview.iml" filepath="$PROJECT_DIR$/showcaseview/showcaseview.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/cgeo.iml" filepath="$PROJECT_DIR$/.idea/modules/cgeo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/cgeo-calendar/cgeo-calendar.iml" filepath="$PROJECT_DIR$/.idea/modules/cgeo-calendar/cgeo-calendar.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/cgeo-contacts/cgeo-contacts.iml" filepath="$PROJECT_DIR$/.idea/modules/cgeo-contacts/cgeo-contacts.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/main/main.iml" filepath="$PROJECT_DIR$/.idea/modules/main/main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mapswithme-api/mapswithme-api.iml" filepath="$PROJECT_DIR$/.idea/modules/mapswithme-api/mapswithme-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/showcaseview/showcaseview.iml" filepath="$PROJECT_DIR$/.idea/modules/showcaseview/showcaseview.iml" />
     </modules>
   </component>
 </project>

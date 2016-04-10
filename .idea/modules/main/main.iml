@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module external.linked.project.id=":main" external.linked.project.path="$MODULE_DIR$/../../../main" external.root.project.path="$MODULE_DIR$/../../.." external.system.id="GRADLE" external.system.module.group="cgeo" external.system.module.version="unspecified" type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="android-gradle" name="Android-Gradle">
+      <configuration>
+        <option name="GRADLE_PROJECT_PATH" value=":main" />
+      </configuration>
+    </facet>
+    <facet type="android" name="Android">
+      <configuration>
+        <option name="SELECTED_BUILD_VARIANT" value="basicDebug" />
+        <option name="SELECTED_TEST_ARTIFACT" value="_android_test_" />
+        <option name="ASSEMBLE_TASK_NAME" value="assembleBasicDebug" />
+        <option name="COMPILE_JAVA_TASK_NAME" value="compileBasicDebugSources" />
+        <option name="ASSEMBLE_TEST_TASK_NAME" value="assembleBasicDebugAndroidTest" />
+        <option name="COMPILE_JAVA_TEST_TASK_NAME" value="compileBasicDebugAndroidTestSources" />
+        <afterSyncTasks>
+          <task>generateBasicDebugAndroidTestSources</task>
+          <task>generateBasicDebugSources</task>
+        </afterSyncTasks>
+        <option name="ALLOW_USER_CONFIGURATION" value="false" />
+        <option name="RES_FOLDERS_RELATIVE_PATH" value="file://$MODULE_DIR$/../../../main/res" />
+      </configuration>
+    </facet>
+  </component>
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_7" inherit-compiler-output="false">
+    <output url="file://$MODULE_DIR$/../../../main/build/intermediates/classes/basic/debug" />
+    <output-test url="file://$MODULE_DIR$/../../../main/build/intermediates/classes/androidTest/basic/debug" />
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/../../../common/src">
+      <sourceFolder url="file://$MODULE_DIR$/../../../common/src" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../../main">
+      <sourceFolder url="file://$MODULE_DIR$/../../../main/build/generated/source/apt/basic/debug" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../main/build/generated/source/r/basic/debug" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../main/build/generated/source/aidl/basic/debug" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../main/build/generated/source/buildConfig/basic/debug" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../main/build/generated/source/rs/basic/debug" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../main/build/generated/res/google-services/basic/debug" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../main/build/generated/res/rs/basic/debug" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../main/build/generated/res/resValues/basic/debug" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../main/src/basicDebug/res" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../main/src/basicDebug/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../main/src/basicDebug/assets" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../main/src/basicDebug/aidl" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../main/src/basicDebug/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../main/src/basicDebug/jni" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../main/src/basicDebug/rs" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../main/build/generated/source/apt/androidTest/basic/debug" isTestSource="true" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../main/build/generated/source/r/androidTest/basic/debug" isTestSource="true" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../main/build/generated/source/aidl/androidTest/basic/debug" isTestSource="true" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../main/build/generated/source/buildConfig/androidTest/basic/debug" isTestSource="true" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../main/build/generated/source/rs/androidTest/basic/debug" isTestSource="true" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../main/build/generated/res/rs/androidTest/basic/debug" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../main/build/generated/res/resValues/androidTest/basic/debug" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../main/src/basic/res" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../main/src/basic/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../main/src/basic/assets" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../main/src/basic/aidl" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../main/src/basic/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../main/src/basic/jni" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../main/src/basic/rs" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../main/src/androidTestBasic/res" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../main/src/androidTestBasic/resources" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../main/src/androidTestBasic/assets" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../main/src/androidTestBasic/aidl" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../main/src/androidTestBasic/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../main/src/androidTestBasic/jni" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../main/src/androidTestBasic/rs" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../main/src/debug/res" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../main/src/debug/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../main/src/debug/assets" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../main/src/debug/aidl" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../main/src/debug/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../main/src/debug/jni" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../main/src/debug/rs" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../main/res" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../main/src/main/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../main/assets" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../main/src/main/aidl" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../main/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../main/thirdparty" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../main/src/main/jni" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../main/src/main/rs" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../main/src" isTestSource="true" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../main/build/intermediates/assets" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../main/build/intermediates/blame" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../main/build/intermediates/classes" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../main/build/intermediates/dependency-cache" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../main/build/intermediates/exploded-aar/com.android.support.test/exposed-instrumentation-api-publish/0.5/jars" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../main/build/intermediates/exploded-aar/com.android.support.test/runner/0.5/jars" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../main/build/intermediates/exploded-aar/com.android.support/appcompat-v7/20.0.0/jars" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../main/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.0/jars" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../main/build/intermediates/exploded-aar/com.github.jenzz.undobar/library/1.3/api8Release/jars" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../main/build/intermediates/exploded-aar/com.google.android.gms/play-services-appinvite/8.4.0/jars" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../main/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.4.0/jars" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../main/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.4.0/jars" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../main/build/intermediates/exploded-aar/com.google.android.gms/play-services-location/8.4.0/jars" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../main/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/8.4.0/jars" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../main/build/intermediates/exploded-aar/com.google.android.gms/play-services-measurement/8.4.0/jars" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../main/build/intermediates/incremental" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../main/build/intermediates/instant-run-support" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../main/build/intermediates/jniLibs" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../main/build/intermediates/lint" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../main/build/intermediates/manifests" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../main/build/intermediates/pre-dexed" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../main/build/intermediates/proguard-rules" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../main/build/intermediates/res" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../main/build/intermediates/rs" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../main/build/intermediates/sourceFolderJavaResources" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../main/build/intermediates/symbols" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../main/build/intermediates/transforms" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../main/build/intermediates/unmock_work" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../main/build/intermediates/unmocked-android.jar" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../main/build/outputs" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../main/build/reports" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../main/build/test-results" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../main/build/tmp" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../../tests/aidl">
+      <sourceFolder url="file://$MODULE_DIR$/../../../tests/aidl" isTestSource="true" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../../tests/assets">
+      <sourceFolder url="file://$MODULE_DIR$/../../../tests/assets" type="java-test-resource" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../../tests/jni">
+      <sourceFolder url="file://$MODULE_DIR$/../../../tests/jni" isTestSource="true" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../../tests/res">
+      <sourceFolder url="file://$MODULE_DIR$/../../../tests/res" type="java-test-resource" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../../tests/rs">
+      <sourceFolder url="file://$MODULE_DIR$/../../../tests/rs" isTestSource="true" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../../tests/src">
+      <sourceFolder url="file://$MODULE_DIR$/../../../tests/src" type="java-test-resource" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../../tests/src-android">
+      <sourceFolder url="file://$MODULE_DIR$/../../../tests/src-android" isTestSource="true" />
+    </content>
+    <orderEntry type="jdk" jdkName="Android 5.1 Google APIs" jdkType="Android SDK" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" exported="" name="butterknife-7.0.1" level="project" />
+    <orderEntry type="library" exported="" name="play-services-location-8.4.0" level="project" />
+    <orderEntry type="library" exported="" name="okio-1.6.0" level="project" />
+    <orderEntry type="library" exported="" name="commons-io-2.4" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="runner-0.5" level="project" />
+    <orderEntry type="library" exported="" name="mapsforge-map-0.3.0-jar-with-dependencies" level="project" />
+    <orderEntry type="library" exported="" name="jsoup-1.8.3" level="project" />
+    <orderEntry type="library" exported="" name="android-integration-3.2.1" level="project" />
+    <orderEntry type="library" exported="" name="jsr305-3.0.1" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="assertj-core-1.7.1" level="project" />
+    <orderEntry type="library" exported="" name="locus-api-android-1.37.41" level="project" />
+    <orderEntry type="library" exported="" name="locus-api-1.37" level="project" />
+    <orderEntry type="library" exported="" name="play-services-base-8.4.0" level="project" />
+    <orderEntry type="library" exported="" name="play-services-measurement-8.4.0" level="project" />
+    <orderEntry type="library" exported="" name="play-services-maps-8.4.0" level="project" />
+    <orderEntry type="library" exported="" name="jackson-annotations-2.7.3" level="project" />
+    <orderEntry type="library" exported="" name="commons-lang3-3.4" level="project" />
+    <orderEntry type="library" exported="" name="commons-collections4-4.1" level="project" />
+    <orderEntry type="library" exported="" name="support-v4-23.0.0" level="project" />
+    <orderEntry type="library" exported="" name="support-annotations-23.2.0" level="project" />
+    <orderEntry type="library" exported="" name="play-services-appinvite-8.4.0" level="project" />
+    <orderEntry type="library" exported="" name="annotations-3.0.1u2" level="project" />
+    <orderEntry type="library" exported="" name="library-2.4.0" level="project" />
+    <orderEntry type="library" exported="" name="androidannotations-api-4.0.0" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="exposed-instrumentation-api-publish-0.5" level="project" />
+    <orderEntry type="library" exported="" name="jcip-annotations-1.0" level="project" />
+    <orderEntry type="library" exported="" name="jackson-core-2.7.3" level="project" />
+    <orderEntry type="library" exported="" name="rxandroid-0.25.0" level="project" />
+    <orderEntry type="library" exported="" name="jackson-databind-2.7.3" level="project" />
+    <orderEntry type="library" exported="" name="rxjava-1.1.2" level="project" />
+    <orderEntry type="library" exported="" name="appcompat-v7-20.0.0" level="project" />
+    <orderEntry type="library" exported="" name="library-1.3" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="hamcrest-core-1.3" level="project" />
+    <orderEntry type="library" exported="" name="okhttp-3.2.0" level="project" />
+    <orderEntry type="library" exported="" name="org.eclipse.jdt.annotation-1.1.0" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="junit-4.12" level="project" />
+    <orderEntry type="library" exported="" name="xmpcore-5.1.2" level="project" />
+    <orderEntry type="library" exported="" name="play-services-basement-8.4.0" level="project" />
+    <orderEntry type="library" exported="" name="commons-compress-1.10" level="project" />
+    <orderEntry type="library" exported="" name="metadata-extractor-2.8.1" level="project" />
+    <orderEntry type="module" module-name="mapswithme-api" exported="" />
+    <orderEntry type="module" module-name="showcaseview" exported="" />
+  </component>
+</module>

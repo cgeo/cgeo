@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module external.linked.project.id=":showcaseview" external.linked.project.path="$MODULE_DIR$/../../../showcaseview" external.root.project.path="$MODULE_DIR$/../../.." external.system.id="GRADLE" external.system.module.group="cgeo" external.system.module.version="unspecified" type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="android-gradle" name="Android-Gradle">
+      <configuration>
+        <option name="GRADLE_PROJECT_PATH" value=":showcaseview" />
+      </configuration>
+    </facet>
+    <facet type="android" name="Android">
+      <configuration>
+        <option name="SELECTED_BUILD_VARIANT" value="debug" />
+        <option name="SELECTED_TEST_ARTIFACT" value="_android_test_" />
+        <option name="ASSEMBLE_TASK_NAME" value="assembleDebug" />
+        <option name="COMPILE_JAVA_TASK_NAME" value="compileDebugSources" />
+        <option name="ASSEMBLE_TEST_TASK_NAME" value="assembleDebugAndroidTest" />
+        <option name="COMPILE_JAVA_TEST_TASK_NAME" value="compileDebugAndroidTestSources" />
+        <afterSyncTasks>
+          <task>generateDebugAndroidTestSources</task>
+          <task>generateDebugSources</task>
+        </afterSyncTasks>
+        <option name="ALLOW_USER_CONFIGURATION" value="false" />
+        <option name="RES_FOLDERS_RELATIVE_PATH" value="file://$MODULE_DIR$/../../../showcaseview/res" />
+        <option name="LIBRARY_PROJECT" value="true" />
+      </configuration>
+    </facet>
+  </component>
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_6" inherit-compiler-output="false">
+    <output url="file://$MODULE_DIR$/../../../showcaseview/build/intermediates/classes/debug" />
+    <output-test url="file://$MODULE_DIR$/../../../showcaseview/build/intermediates/classes/androidTest/debug" />
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/../../../showcaseview">
+      <sourceFolder url="file://$MODULE_DIR$/../../../showcaseview/build/generated/source/r/debug" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../showcaseview/build/generated/source/aidl/debug" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../showcaseview/build/generated/source/buildConfig/debug" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../showcaseview/build/generated/source/rs/debug" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../showcaseview/build/generated/res/rs/debug" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../showcaseview/build/generated/res/resValues/debug" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../showcaseview/build/generated/source/r/androidTest/debug" isTestSource="true" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../showcaseview/build/generated/source/aidl/androidTest/debug" isTestSource="true" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../showcaseview/build/generated/source/buildConfig/androidTest/debug" isTestSource="true" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../showcaseview/build/generated/source/rs/androidTest/debug" isTestSource="true" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../showcaseview/build/generated/res/rs/androidTest/debug" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../showcaseview/build/generated/res/resValues/androidTest/debug" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../showcaseview/build-types/debug/res" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../showcaseview/build-types/debug/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../showcaseview/build-types/debug/assets" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../showcaseview/build-types/debug/aidl" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../showcaseview/build-types/debug/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../showcaseview/build-types/debug/jni" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../showcaseview/build-types/debug/rs" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../showcaseview/res" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../showcaseview/java" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../showcaseview/assets" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../showcaseview/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../showcaseview/src/main/jni" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../showcaseview/src/androidTest/res" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../showcaseview/src/androidTest/resources" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../showcaseview/src/androidTest/assets" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../showcaseview/src/androidTest/aidl" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../showcaseview/src/androidTest/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../showcaseview/src/androidTest/jni" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../showcaseview/src/androidTest/rs" isTestSource="true" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../showcaseview/build/intermediates/assets" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../showcaseview/build/intermediates/blame" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../showcaseview/build/intermediates/bundles" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../showcaseview/build/intermediates/classes" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../showcaseview/build/intermediates/dependency-cache" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../showcaseview/build/intermediates/incremental" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../showcaseview/build/intermediates/instant-run-support" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../showcaseview/build/intermediates/jniLibs" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../showcaseview/build/intermediates/lint" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../showcaseview/build/intermediates/pre-dexed" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../showcaseview/build/intermediates/res" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../showcaseview/build/intermediates/rs" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../showcaseview/build/intermediates/symbols" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../showcaseview/build/intermediates/transforms" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../showcaseview/build/outputs" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../showcaseview/build/reports" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../showcaseview/build/test-results" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../showcaseview/build/tmp" />
+    </content>
+    <orderEntry type="jdk" jdkName="Android API 19 Platform" jdkType="Android SDK" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>
