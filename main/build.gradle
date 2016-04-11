@@ -158,6 +158,13 @@ android {
         // findbugs
         exclude 'META-INF/maven/com.google.code.findbugs/jsr305/pom.properties'
         exclude 'META-INF/maven/com.google.code.findbugs/jsr305/pom.xml'
+        // mapsforge
+        exclude 'META-INF/maven/org.mapsforge/mapsforge-map-reader/pom.properties'
+        exclude 'META-INF/maven/org.mapsforge/mapsforge-map-reader/pom.xml'
+        exclude 'META-INF/maven/org.mapsforge/mapsforge-map/pom.properties'
+        exclude 'META-INF/maven/org.mapsforge/mapsforge-map/pom.xml'
+        exclude 'COPYING.LESSER.v3'
+        exclude 'COPYING.v3'
     }
 
     productFlavors {
@@ -211,6 +218,9 @@ dependencies {
 /*
  * cgeo library dependencies. add gradle plugin related dependencies further down below
  */
+    // network access
+    compile 'com.squareup.okhttp3:okhttp:3.2.0'
+
     // Maps.ME integration
     compile project(":mapswithme-api")
 
@@ -218,15 +228,20 @@ dependencies {
     // TODO replace by repository dependency. however, there is a conflict in min sdk, which needs to be solved then
     compile project(":showcaseview")
 
-    compile 'com.squareup.okhttp3:okhttp:3.2.0'
+    // Locus integration
     compile files('libs/locus-api-1.37.jar')
     compile files('libs/locus-api-android-1.37.41.jar')
+
+    // Mapsforge integration
     compile files('libs/mapsforge-map-0.3.0-jar-with-dependencies.jar')
-    compile files('libs/androidsvg-1.2.2-beta-1.jar')
-    compile files('libs/mapsforge-core-0.6.0.jar')
-    compile files('libs/mapsforge-map-0.6.0.jar')
-    compile files('libs/mapsforge-map-android-0.6.0.jar')
-    compile files('libs/mapsforge-map-reader-0.6.0.jar')
+    compile 'com.caverock:androidsvg:1.2.2-beta-1'
+    compile 'org.mapsforge:mapsforge-core:0.6.0'
+    compile 'org.mapsforge:mapsforge-map:0.6.0'
+    compile 'org.mapsforge:mapsforge-map-android:0.6.0'
+    compile 'org.mapsforge:mapsforge-map-reader:0.6.0'
+    configurations {
+        all*.exclude group: 'net.sf.kxml', module: 'kxml2' // duplicate XmlPullParser class
+    }
 
     compile 'com.android.support:appcompat-v7:20.0.0'
 
@@ -299,8 +314,8 @@ dependencies {
  */
     compile 'org.jsoup:jsoup:1.8.3'
 
+    // EXIF location extraction from images
     compile 'com.drewnoakes:metadata-extractor:2.9.0'
-
 }
 
 /*
