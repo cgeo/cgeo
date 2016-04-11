@@ -149,6 +149,7 @@
   <string name="err_unknown_address">c:geo klarte ikke finne et sted ut fra denne adressen</string>
   <string name="err_comm">Ukjent tilkoblingsfeil</string>
   <string name="err_missing_auth">Brukernavn eller passord er ikke oppgitt.</string>
+  <string name="err_wrong">Feil brukernavn og/eller passord.</string>
   <string name="err_maintenance">Geocaching.com er nede for vedlikehold. c:geo arbeider offline med lagrede cacher.</string>
   <string name="err_license">Brukeren har ikke akseptert Geocaching.com sin lisens. c:geo kan ikke laste cachens koordinater.</string>
   <string name="err_unvalidated_account">Du må aktivere kontoen din på Geocaching.com først.</string>
@@ -323,6 +324,8 @@
   <string name="caches_refresh_all">Oppdater alle</string>
   <string name="caches_move_selected">Flytt valgte</string>
   <string name="caches_move_all">Flytt alle</string>
+  <string name="caches_copy_selected">Kopier de merkede</string>
+  <string name="caches_copy_all">Kopier alle</string>
   <string name="caches_map_locus">Locus</string>
   <string name="caches_map_locus_export">Eksporter til Locus</string>
   <string name="caches_recaptcha_title">reCAPTCHA</string>
@@ -382,6 +385,9 @@
   <string name="about_apache_license"><a href="">Apache-lisens, versjon 2.0</a></string>
   <string name="about_help">Hjelp</string>
   <string name="about_system_include">Inkluder den følgende informasjonen når du sender en feilrapport eller ber om mer informasjon fra c:geo:</string>
+  <string name="about_system_info_send_button">Send på e-post…</string>
+  <string name="about_system_info">Systeminformasjon for c:geo</string>
+  <string name="about_system_info_send_chooser">Send systeminformasjon</string>
   <string name="changelog_github">Liste over alle endringer</string>
   <!-- settings -->
   <string name="settings_title_open_settings">Åpne innstillinger?</string>
@@ -422,23 +428,31 @@
   <string name="settings_info_facebook_login">Du kan ikke logge inn på geocaching.com i c:geo ved hjelp av facebook-kontoen. Men det finnes en løsning…</string>
   <string name="settings_authorize">Godkjenn c:geo</string>
   <string name="settings_reauthorize">Godkjenn c:geo igjen</string>
+  <string name="settings_gc_description">Autoriser c:geo med geocaching.com for å søke etter cacher.</string>
+  <string name="settings_ec_description">Autoriser c:geo med extremecaching.com for å søke etter cacher og vise/filtrere de cachene du har funnet.</string>
   <string name="init_oc">Opencaching.de</string>
   <string name="settings_activate_oc">Aktiver</string>
+  <string name="init_summary_oc_de">Last cacher fra opencaching.de</string>
   <string name="init_oc_de_description">Gi c:geo tilgang til å bruke opencaching.de for å søke etter cacher og vise/filtrere dine funnede cacher.</string>
   <string name="init_oc_pl">Opencaching.pl</string>
   <string name="settings_activate_oc_pl">Aktiver</string>
+  <string name="init_summary_oc_pl">Last cacher fra opencaching.pl</string>
   <string name="init_oc_pl_description">Gi c:geo tilgang til å bruke opencaching.pl for å søke etter cacher og vise/filtrere dine funnede cacher.</string>
   <string name="init_oc_nl">Opencaching.nl</string>
   <string name="settings_activate_oc_nl">Aktiver</string>
+  <string name="init_summary_oc_nl">Last cacher fra opencaching.nl</string>
   <string name="init_oc_nl_description">Gi c:geo tilgang til å bruke opencaching.nl for å søke etter cacher og vise/filtrere dine funnede cacher.</string>
   <string name="init_oc_us">Opencaching.us</string>
   <string name="settings_activate_oc_us">Aktiver</string>
+  <string name="init_summary_oc_us">Last cacher fra opencaching.us</string>
   <string name="init_oc_us_description">Gi c:geo tilgang til å bruke opencaching.us for å søke etter cacher og vise/filtrere dine funnede cacher.</string>
   <string name="init_oc_ro">Opencaching.ro</string>
   <string name="settings_activate_oc_ro">Aktiver</string>
+  <string name="init_summary_oc_ro">Last cacher fra opencaching.ro</string>
   <string name="init_oc_ro_description">Gi c:geo tilgang til å bruke opencaching.ro for å søke etter cacher og vise/filtrere dine funnede cacher.</string>
   <string name="init_oc_uk">Opencaching.org.uk</string>
   <string name="settings_activate_oc_uk">Aktiver</string>
+  <string name="init_summary_oc_uk">Last cacher fra opencaching.org.uk</string>
   <string name="init_oc_uk_description">Gi c:geo tilgang til å bruke opencaching.org.uk for å søke etter cacher og vise/filtrere dine funnede cacher.</string>
   <string name="init_gcvote">GCVote.com</string>
   <string name="init_gcvote_password_description">For å kunne vurdere en cache må du følge instruksjonene på GCVote.com og angi ditt GCVote passord her.</string>
@@ -453,6 +467,7 @@
   <string name="init_login_popup_working">Logger inn på Geocaching.com…</string>
   <string name="init_login_popup_ok">Innlogging fullført</string>
   <string name="init_login_popup_failed">Innlogging mislyktes.</string>
+  <string name="init_login_popup_failed_reason">Innlogging mislyktes: %s.</string>
   <string name="init_login_popup_not_authorized">Ikke godkjent</string>
   <string name="init_login_popup_invalid_timestamp">Lokal tid er ugyldig. Still klokken på enheten</string>
   <string name="init_login_popup_invalid_token">Godkjenning ugyldig, prøv å godkjenn på nytt</string>
@@ -514,6 +529,7 @@
   <string name="init_backup_success">Databasen til c:geo ble kopiert til:</string>
   <string name="init_backup_failed">Sikkerhetskopi av databasen til c:geo mislyktes.</string>
   <string name="init_backup_unnecessary">Databasen er tom, sikkerhetskopiering er ikke nødvendig.</string>
+  <string name="init_backup_no_backup_available">Det finnes ingen sikkerhetskopier.</string>
   <string name="backup_confirm_overwrite">Vil du overskrive den eksisterende sikkerhetskopien fra %s?</string>
   <string name="restore_confirm_overwrite">Vil du overskrive %s på enheten din med sikkerhetskopien?</string>
   <string name="init_restore_success">Gjenoppretting fullført.</string>
@@ -623,12 +639,22 @@
   <!-- auth generic -->
   <string name="auth_twitter">Twitter</string>
   <string name="auth_authorize">Godkjenn c:geo</string>
+  <string name="auth_check">Kontroller brukernavn/passord</string>
+  <string name="auth_check_again">Kontroller brukernavn/passord på nytt</string>
   <string name="auth_start">Start autorisasjon</string>
   <string name="auth_again">Prøv igjen</string>
+  <string name="auth_register">Opprett en konto</string>
+  <string name="auth_connected">Tilkoblet</string>
+  <string name="auth_unconnected">Ikke tilkoblet ennå</string>
+  <string name="auth_connected_as">Tilkoblet som %s</string>
   <string name="auth_dialog_waiting">Venter på %s…</string>
   <string name="auth_explain_short">Følgende prosess vil gi <b>c:geo</b> tilgang til %s.</string>
   <string name="auth_explain_long">Når du trykker på knappen \"Godkjenn c:geo\" starter prosessen. Nettleseren åpner siden til %s. Logg inn på denne siden og tillat at <b>c:geo</b> får tilgang til din brukerkonto. Så enkelt er det!</string>
+  <string name="auth_forget_title">Glemt brukernavn?</string>
+  <string name="auth_forget_message">Du vil bli koblet fra denne tjenesten. Lagrede innloggingsdetaljer går tapt.</string>
   <!-- auth credentials -->
+  <string name="auth_credentials_explain_short">Dette vil gi <b>c:geo</b> tilgang til %s.</string>
+  <string name="auth_credentials_explain_long">Du starter prosessen ved å fylle inn brukernavn og passord og trykke \"Godkjenne c:geo\". Denne prosessen vil koble til %s og hente et token for godkjenning. Verre er det ikke.</string>
   <!-- auth token -->
   <string name="auth_token_register">Opprett en konto</string>
   <string name="auth_token_explain_short">Følgende prosess vil gi <b>c:geo</b> tilgang til %s.</string>
@@ -657,6 +683,7 @@
   <string name="cache_offline_refresh">Oppdater</string>
   <string name="cache_offline_drop">Fjern</string>
   <string name="cache_offline_store">Lagre</string>
+  <string name="cache_offline_store_in_list">Lagre i liste</string>
   <string name="cache_offline_stored">Lagret på enheten for</string>
   <string name="cache_offline_not_ready">Kan ikke brukes\noffline (ikke lagret)</string>
   <string name="cache_offline_time_about">omtrent</string>
@@ -767,6 +794,7 @@
   <string name="cache_menu_refresh">Oppdater</string>
   <string name="cache_menu_share">Del cachen</string>
   <string name="cache_menu_move_list">Flytt til annen liste</string>
+  <string name="cache_menu_copy_list">Kopier til en annen liste</string>
   <string name="cache_menu_whereyougo">WhereYouGo</string>
   <string name="cache_menu_oruxmaps_online">OruxMaps (Online)</string>
   <string name="cache_menu_oruxmaps_offline">OruxMaps (frakoblet)</string>
@@ -912,6 +940,7 @@
   <string name="map_trail_show">Vis spor</string>
   <string name="map_circles_show">Vis sirkler</string>
   <string name="map_mycaches_hide">Skjul egne og funnede cacher</string>
+  <string name="map_disabled_hide">Skjul deaktiverte cacher</string>
   <string name="map_theme_builtin">Standard</string>
   <string name="map_theme_select">Velg karttema</string>
   <string name="map_live_enable">Aktiver live</string>
@@ -1380,6 +1409,11 @@
     <item quantity="one">Flyttet %d cache</item>
     <item quantity="other">Flyttet %d cacher</item>
   </plurals>
+  <string name="command_copy_caches_progress">Kopierer cacher til liste %1s</string>
+  <plurals name="command_copy_caches_result">
+    <item quantity="one">Kopierte %d cache</item>
+    <item quantity="other">Kopierte %d cacher</item>
+  </plurals>
   <string name="command_delete_caches_progress">Sletter cacher</string>
   <plurals name="command_delete_caches_result">
     <item quantity="one">Slettet %d cache</item>
@@ -1403,4 +1437,7 @@
   <string name="invitation_action">Inviter venner</string>
   <string name="invitation_title">Inviter venner til å bruke c:geo</string>
   <string name="invitation_message">Prøv c:geo-appen til geocaching</string>
+  <string name="cache_list_remove_from">Fjern fra liste</string>
+  <string name="list_list_headline">Lister:</string>
+  <string name="cache_store_list">Lagre i liste</string>
 </resources>

@@ -142,13 +142,14 @@
   <string name="err_parse">Hiba a belépőoldalon</string>
   <string name="err_server">Hiba a kapcsolatban a geocaching.com-mal (a szerver vagy a kapcsolat nem működik?)</string>
   <string name="err_server_ec">Hiba a kapcsolatban az extremcaching.com-mal (a szerver vagy a kapcsolat nem működik?)</string>
-  <string name="err_server_gk">Nem lehet kapcsolódni a GeoKrety.org-hoz. A weboldal ideglenesen nem elérhető vagy az internetkapcsolatod nem működik.</string>
+  <string name="err_server_gk">Nem lehet kapcsolódni a geokrety.org-hoz. A weboldal ideglenesen nem elérhető vagy az internetkapcsolatod nem működik.</string>
   <string name="err_login">Nincs mentett belépési adat</string>
   <string name="err_login_failed_toast">Sajnos a c:geo nem tud belépni. A c:geo hálózat nélküli módban fut. Ellenőrizd a belépési adataid a beállításoknál vagy engedélyezd az internetkapcsolatot!</string>
   <string name="err_unknown">Ismeretlen hiba</string>
   <string name="err_unknown_address">A c:geo nem tudta leképezni ezt a címet egy létező helyszínre</string>
   <string name="err_comm">Ismeretlen kommunikációs hiba</string>
   <string name="err_missing_auth">Nincs megadva belépési név és/vagy jelszó.</string>
+  <string name="err_wrong">Hibás felhasználónév és/vagy jelszó.</string>
   <string name="err_maintenance">A geocaching.com karbantartás miatt elérhetetlen. A c:geo offline módban működik elmentett ládákkal.</string>
   <string name="err_license">Nem fogadtad el a geocaching.com licencmegállapodását, így a c:geo nem tudja betölteni a ládák koordinátáit.</string>
   <string name="err_unvalidated_account">Előbb aktiválnod kell a fiókod a geocaching.com weboldalon.</string>
@@ -168,8 +169,8 @@
   <string name="err_watchlist_still_managing">Még folyik a figyelőlista kezelése.</string>
   <string name="err_watchlist_failed">A figyelőlista módosítása sikertelen.</string>
   <string name="err_application_no">A c:geo nem talál megfelelő alkalmazást.</string>
-  <string name="err_auth_initialize">Sajnáljuk, a c:geo nem tudta elindítani az engedélyezési eljárást.</string>
-  <string name="err_auth_process">Az engedélyezési eljárás sikertelen.</string>
+  <string name="err_auth_initialize">A c:geo nem tudta elindítani a hitelesítést.</string>
+  <string name="err_auth_process">Sikertelen hitelesítés.</string>
   <string name="err_cannot_log_visit">A c:geo-nak nincs elég információja a láda logolásához. Kérlek, logold a ládát a láda teljes leírásánál!</string>
   <string name="err_download_fail">Sajnáljuk, a c:geo nem tudja letölteni a ládákat, mert </string>
   <string name="err_dwld_details_failed">Sajnáljuk, a c:geo nem tudja letölteni a láda adatait.</string>
@@ -198,7 +199,7 @@
   <string name="err_log_post_missing_coordinates">A koordináták hiányoznak.</string>
   <string name="err_log_post_failed">Úgy tűnik, hogy a logod nem ment át. Kérlek, ellenőrizd a láda weboldalát!</string>
   <string name="err_log_post_failed_ec">Úgy tűnik, hogy a logod nem került hozzáadásra. Kérlek, ellenőrizd a extremcaching.com-on!</string>
-  <string name="err_log_post_failed_gk">Úgy tűnik, hogy a logod nem került hozzáadásra. Kérlek, ellenőrizd a GeoKrety.org-on!</string>
+  <string name="err_log_post_failed_gk">Úgy tűnik, hogy a logod nem került hozzáadásra. Kérlek, ellenőrizd a geokrety.org-on!</string>
   <string name="err_logimage_post_failed">Úgy tűnik, hogy a logfotóid nem mentek át. Kérlek, ellenőrizd a láda weboldalát!</string>
   <string name="err_search_address_forgot">Sajnáljuk, a c:geo elfelejtette a keresett címet.</string>
   <string name="err_parse_lat">Sajnáljuk, a c:geo nem tudja értelmezni a szélességet.</string>
@@ -323,6 +324,8 @@
   <string name="caches_refresh_all">Összes frissítése</string>
   <string name="caches_move_selected">Kijelöltek mozgatása</string>
   <string name="caches_move_all">Összes mozgatása</string>
+  <string name="caches_copy_selected">Kijelöltek másolása</string>
+  <string name="caches_copy_all">Összes másolása</string>
   <string name="caches_map_locus">Locus</string>
   <string name="caches_map_locus_export">Exportálás Locus-ba</string>
   <string name="caches_recaptcha_title">reCAPTCHA</string>
@@ -382,6 +385,9 @@
   <string name="about_apache_license"><a href="">Apache licenc, 2.0 verzió</a></string>
   <string name="about_help">Segítség</string>
   <string name="about_system_include">Kérlek, csatold az alábbi rendszeradatokat, ha hibajelentést küldesz, vagy további információt kérsz a c:geo-ról:</string>
+  <string name="about_system_info_send_button">Küldés e-mailben…</string>
+  <string name="about_system_info">c:geo rendszeradatok</string>
+  <string name="about_system_info_send_chooser">Rendszeradatok küldése</string>
   <string name="changelog_github">Összes változtatás listázása</string>
   <!-- settings -->
   <string name="settings_title_open_settings">Beállítások megnyitása?</string>
@@ -420,26 +426,34 @@
   <string name="settings_gc_legal_note">A geocaching.com használatával elfogadja a Groundspeak Felhasználási Feltételeit.</string>
   <string name="settings_info_facebook_login_title">Facebook-os bejelentkezés</string>
   <string name="settings_info_facebook_login">Facebook-os azonosítóval nem hajtható végre c:geo-os bejelentkezés a geocaching.com-ra. De van egy egyszerű megoldás…</string>
-  <string name="settings_authorize">c:geo engedélyezése</string>
-  <string name="settings_reauthorize">c:geo újraengedélyezése</string>
+  <string name="settings_authorize">A c:geo hitelesítése</string>
+  <string name="settings_reauthorize">A c:geo újrahitelesítése</string>
+  <string name="settings_gc_description">A c:geo hitelesítése a geocaching.com-on ládák kereséséhez.</string>
+  <string name="settings_ec_description">A c:geo hitelesítése az extremcaching.com-on ládák kereséséhez és találataid lekéréséhez, szűréséhez.</string>
   <string name="init_oc">Opencaching.de</string>
   <string name="settings_activate_oc">Aktiválás</string>
-  <string name="init_oc_de_description">c:geo engedélyezése az opencahing.de-re, hogy geoládákat kereshessen és hozzáférhessen ill. szűrhessen a megtalált geoládáidra.</string>
+  <string name="init_summary_oc_de">Ládák letöltése az opencaching.de-ről</string>
+  <string name="init_oc_de_description">A c:geo hitelesítése az opencaching.de-n ládák kereséséhez és találataid lekéréséhez, szűréséhez.</string>
   <string name="init_oc_pl">Opencaching.pl</string>
   <string name="settings_activate_oc_pl">Aktiválás</string>
-  <string name="init_oc_pl_description">c:geo engedélyezése az opencahing.pl-re, hogy geoládákat kereshessen és hozzáférhessen ill. szűrhessen a megtalált geoládáidra.</string>
+  <string name="init_summary_oc_pl">Ládák letöltése az opencaching.pl-ről</string>
+  <string name="init_oc_pl_description">A c:geo hitelesítése az opencaching.pl-en ládák kereséséhez és találataid lekéréséhez, szűréséhez.</string>
   <string name="init_oc_nl">Opencaching.nl</string>
   <string name="settings_activate_oc_nl">Aktiválás</string>
-  <string name="init_oc_nl_description">c:geo engedélyezése az opencahing.nl-re, hogy geoládákat kereshessen és hozzáférhessen ill. szűrhessen a megtalált geoládáidra.</string>
+  <string name="init_summary_oc_nl">Ládák letöltése az opencaching.nl-ről</string>
+  <string name="init_oc_nl_description">A c:geo hitelesítése az opencaching.nl-en ládák kereséséhez és találataid lekéréséhez, szűréséhez.</string>
   <string name="init_oc_us">Opencaching.us</string>
   <string name="settings_activate_oc_us">Aktiválás</string>
-  <string name="init_oc_us_description">c:geo engedélyezése az opencahing.us-re, hogy geoládákat kereshessen és hozzáférhessen ill. szűrhessen a megtalált geoládáidra.</string>
+  <string name="init_summary_oc_us">Ládák letöltése az opencaching.us-ről</string>
+  <string name="init_oc_us_description">A c:geo hitelesítése az opencaching.us-en ládák kereséséhez és találataid lekéréséhez, szűréséhez.</string>
   <string name="init_oc_ro">Opencaching.ro</string>
   <string name="settings_activate_oc_ro">Aktiválás</string>
-  <string name="init_oc_ro_description">c:geo engedélyezése az opencahing.ro-ra, hogy geoládákat kereshessen és hozzáférhessen ill. szűrhessen a megtalált geoládáidra.</string>
+  <string name="init_summary_oc_ro">Ládák letöltése az opencaching.ro-ról</string>
+  <string name="init_oc_ro_description">A c:geo hitelesítése az opencaching.ro-n ládák kereséséhez és találataid lekéréséhez, szűréséhez.</string>
   <string name="init_oc_uk">Opencaching.org.uk</string>
   <string name="settings_activate_oc_uk">Aktiválás</string>
-  <string name="init_oc_uk_description">c:geo engedélyezése az opencaching.org.uk-ra, hogy geoládákat kereshessen és hozzáférhessen ill. szűrhessen a megtalált geoládáidra.</string>
+  <string name="init_summary_oc_uk">Ládák letöltése az opencaching.org.uk-ról</string>
+  <string name="init_oc_uk_description">A c:geo hitelesítése az opencaching.org.uk-án ládák kereséséhez és találataid lekéréséhez, szűréséhez.</string>
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_gcvote_password_description">Ládák értékeléséhez itt add meg a GCVote jelszavad és kövesd az utasításokat a GCVote.com-on!</string>
   <string name="err_gcvote_send_rating">Az értélkelés elküldése sikertelen. Ellenőrizd a GCVote jelszavad a beállításoknál! Próbálkozz a törlésével!</string>
@@ -453,9 +467,10 @@
   <string name="init_login_popup_working">Belépés a geocaching.com-ra…</string>
   <string name="init_login_popup_ok">Belépés ok</string>
   <string name="init_login_popup_failed">Belépés sikertelen.</string>
-  <string name="init_login_popup_not_authorized">Nem engedélyezett</string>
+  <string name="init_login_popup_failed_reason">Sikertelen bejelentkezés: %s.</string>
+  <string name="init_login_popup_not_authorized">Nincs hitelesítés</string>
   <string name="init_login_popup_invalid_timestamp">A helyi idő érvénytelen, állítsd be a készülék óráját</string>
-  <string name="init_login_popup_invalid_token">Sikertelen engedélyezés, próbáld újra</string>
+  <string name="init_login_popup_invalid_token">Sikertelen hitelesítés, új próbálkozás</string>
   <string name="init_authorization_credential_username">Felhasználónév</string>
   <string name="init_authorization_credential_password">Jelszó</string>
   <string name="settings_service_active">Aktív</string>
@@ -514,6 +529,7 @@
   <string name="init_backup_success">A c:geo adatbázisa sikeresen mentésre került ebbe a fájlba:</string>
   <string name="init_backup_failed">A c:geo biztonsági mentése sikertelen.</string>
   <string name="init_backup_unnecessary">Az adatbázis üres, biztonsági mentés nem szükséges.</string>
+  <string name="init_backup_no_backup_available">Nincs elérhető biztonsági mentés.</string>
   <string name="backup_confirm_overwrite">Felülírod a következő időpontról származó mentést: %s?</string>
   <string name="restore_confirm_overwrite">Felülírod az adatbázist (%s) a mentéssel?</string>
   <string name="init_restore_success">Visszaállítás kész.</string>
@@ -581,7 +597,7 @@
   <string name="init_hardware_acceleration">Hardveres gyorsítás engedélyezése</string>
   <string name="settings_create_account">Fiók létrehozása</string>
   <string name="settings_open_website">Weboldal megnyitása</string>
-  <string name="settings_open_geokrety_register">GeoKrety.org regisztrációs oldalának megnyitása</string>
+  <string name="settings_open_geokrety_register">A geokrety.org regisztrációs oldalának megnyitása</string>
   <string name="settings_open_geokretymap_website">GeoKretyMap.org megnyitása</string>
   <string name="settings_settings">Beállítások</string>
   <string name="settings_information">További információk</string>
@@ -622,19 +638,29 @@
   <string name="sendToCgeo_no_registration">A c:geo nem tudta letölteni a ládákat. A send2cgeo regisztrációd lejárt. Kérlek, regisztrálj a beállításoknál!</string>
   <!-- auth generic -->
   <string name="auth_twitter">Twitter</string>
-  <string name="auth_authorize">Hozzáférés engedélyezése a c:geo-nak</string>
-  <string name="auth_start">Engedélyezés indítása</string>
+  <string name="auth_authorize">A c:geo hitelesítése</string>
+  <string name="auth_check">Hitelesítés ellenőrzése</string>
+  <string name="auth_check_again">Hitelesítés újraellenőrzése</string>
+  <string name="auth_start">Hitelesítés indítása</string>
   <string name="auth_again">Engedélyezés indítása újra</string>
+  <string name="auth_register">Fiók létrehozása</string>
+  <string name="auth_connected">Kapcsolat</string>
+  <string name="auth_unconnected">Még nincs kapcsolat</string>
+  <string name="auth_connected_as">Kapcsolat %sként</string>
   <string name="auth_dialog_waiting">Várakozás %s-re…</string>
   <string name="auth_explain_short">A következő folyamat lehetővé teszi a <b>c:geo</b>-nak a hozzáférést %s-hez.</string>
-  <string name="auth_explain_long">A \"c:geo engedélyezése\" gomb megnyomása után a böngészőben megnyílik a(z) %s oldal. Jelentkezz be ezen az oldalon, és engedélyezd a <b>c:geo</b> hozzáférését a fiókodhoz.</string>
+  <string name="auth_explain_long">A \"Hitelesítés indítása\" gomb megnyomása után a böngészőben megnyílik a(z) %s oldala. Jelentkezz be ezen az oldalon, és engedélyezd a <b>c:geo</b> hozzáférését a fiókodhoz!</string>
+  <string name="auth_forget_title">Újrahitelesítés?</string>
+  <string name="auth_forget_message">Megszakad a kapcsolat a szolgáltatóval. A mentett hitelesítő adataid elvesznek.</string>
   <!-- auth credentials -->
+  <string name="auth_credentials_explain_short">A következő folyamat lehetővé teszi a <b>c:geo</b> hozzáférését a(z) %s-hoz.</string>
+  <string name="auth_credentials_explain_long">A hitelesítő adataid megadása után a \"Hitelesítés ellenőrzése\" gomb megnyomásával elindul a folyamat, mely során belépünk a(z) %s-ra és ellenőrizzük az adataidat.</string>
   <!-- auth token -->
   <string name="auth_token_register">Fiók létrehozása</string>
   <string name="auth_token_explain_short">A következő folyamat lehetővé teszi a <b>c:geo</b>-nak a hozzáférést %s-hez.</string>
   <string name="auth_token_explain_long">Hitelesítési adataid kitöltése, majd az \"c:geo engedélyezése\" gomb megnyomása elindítja a folyamatot. A folyamat csatlakozik %s kiszolgálóhoz, majd lekéri a hitelesítési tokent. Ez minden.</string>
   <!-- auth Twitter -->
-  <string name="auth_dialog_completed_twitter">A c:geo engedélyt kapott, hogy bejegyzéseket küldjön a Twitter-re.</string>
+  <string name="auth_dialog_completed_twitter">A c:geo engedélyt kapott Twitter bejegyzések küldésére.</string>
   <!-- auth opencaching -->
   <string name="auth_ocde">opencaching.de</string>
   <string name="auth_ocpl">opencaching.pl</string>
@@ -642,9 +668,9 @@
   <string name="auth_ocus">opencaching.us</string>
   <string name="auth_ocro">opencaching.ro</string>
   <string name="auth_ocuk">opencaching.org.uk</string>
-  <string name="auth_dialog_completed_oc">A c:geo engedélyt kapott, hogy együttműködjön a(z) %s-vel.</string>
+  <string name="auth_dialog_completed_oc">A c:geo engedélyt kapott az együttműködésre: %s</string>
   <!-- auth geokrety -->
-  <string name="auth_dialog_completed_geokrety">A c:geo engedélyt kapott, hogy együttműködjön a(z) %s-vel.</string>
+  <string name="auth_dialog_completed_geokrety">A c:geo engedélyt kapott az együttműködésre: %s</string>
   <string name="err_auth_geokrety_bad_password">A felhasználóneved/jelszavad helytelennek tűnik.</string>
   <string name="err_auth_geokrety_unknown">%1$s visszatérési értéke: %2$s.</string>
   <!-- cache -->
@@ -662,6 +688,7 @@
   <string name="cache_offline_refresh">Frissítés</string>
   <string name="cache_offline_drop">Törlés</string>
   <string name="cache_offline_store">Mentés</string>
+  <string name="cache_offline_store_in_list">Mentés listába</string>
   <string name="cache_offline_stored">Elmentve az eszközre</string>
   <string name="cache_offline_not_ready">Nem érhető el offline</string>
   <string name="cache_offline_time_about"> </string>
@@ -772,6 +799,7 @@
   <string name="cache_menu_refresh">Frissítés</string>
   <string name="cache_menu_share">Láda megosztása</string>
   <string name="cache_menu_move_list">Mozgatás másik listára</string>
+  <string name="cache_menu_copy_list">Másolás másik listába</string>
   <string name="cache_menu_whereyougo">WhereYouGo</string>
   <string name="cache_menu_oruxmaps_online">OruxMaps (Online)</string>
   <string name="cache_menu_oruxmaps_offline">OruxMaps (Offline)</string>
@@ -1366,13 +1394,13 @@
   <string name="confirm_log_message">Logod a következő: \'%s\'. Biztosan ezt akarod?</string>
   <!-- Geokrety -->
   <string name="settings_activate_geokrety">Aktiválás</string>
-  <string name="init_geokrety">GeoKrety.org</string>
+  <string name="init_geokrety">geokrety.org</string>
   <string name="init_connectorGeokretyActive">GeoKrety utazók</string>
   <string name="init_summary_geokrety">GeoKrety utazók engedélyezése</string>
   <string name="init_summary_geokrety_account">Nincs fiók konfigurálva.</string>
   <string name="init_geokrety_register_ok">Sikeres belépés</string>
   <string name="init_geokrety_register_fail">Sikertelen belépés</string>
-  <string name="init_geokrety_description">A c:geo engedélyezése, hogy GeoKrety tárgyakat is logolhasson.</string>
+  <string name="init_geokrety_description">A c:geo hitelesítése a geokrety.org-on GeoKrety tárgyak logolásához.</string>
   <string name="init_geokrety_cache_description">A geokretymap.org a GeoKrety utazókhoz biztosít adatokat.\nAz elérhető adatok több információt tartalmaznak, mint pl. leírás vagy státuszadatok.\n\nNem élő adatok!\nPoziciók: ~30 perc.\nLeírások: ~24 óra.</string>
   <string name="init_geokrety_cache">GeoKretyMap.org használata</string>
   <string name="init_geokrety_userid">Felhasználói azonosító: %s</string>
@@ -1387,6 +1415,11 @@
   <plurals name="command_move_caches_result">
     <item quantity="one">%d láda áthelyezve</item>
     <item quantity="other">%d láda áthelyezve</item>
+  </plurals>
+  <string name="command_copy_caches_progress">Ládák másolás a(z) %1s listába</string>
+  <plurals name="command_copy_caches_result">
+    <item quantity="one">%d láda átmásolva</item>
+    <item quantity="other">%d láda átmásolva</item>
   </plurals>
   <string name="command_delete_caches_progress">Ládák törlése</string>
   <plurals name="command_delete_caches_result">
@@ -1411,4 +1444,7 @@
   <string name="invitation_action">Ajánlás barátoknak</string>
   <string name="invitation_title">c:geo ajánlása barátoknak</string>
   <string name="invitation_message">Próbáld ki a c:geo-t geoládázáshoz!</string>
+  <string name="cache_list_remove_from">Törlés listából</string>
+  <string name="list_list_headline">Listák:</string>
+  <string name="cache_store_list">Mentés listába</string>
 </resources>

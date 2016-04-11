@@ -640,7 +640,7 @@
   <string name="auth_twitter">Twitter</string>
   <string name="auth_authorize">c:geo autorisieren</string>
   <string name="auth_check">Authentifizierung überprüfen</string>
-  <string name="auth_check_again">Authentifizierung erneut überprüfen</string>
+  <string name="auth_check_again">Authentifizierung erneut prüfen</string>
   <string name="auth_start">Starte Autorisierung</string>
   <string name="auth_again">Neustarten</string>
   <string name="auth_register">Nutzerkonto erstellen</string>
@@ -654,7 +654,7 @@
   <string name="auth_forget_message">Du wirst von diesem Dienst abgemeldet. Deine gespeicherten Anmeldedaten werden gelöscht.</string>
   <!-- auth credentials -->
   <string name="auth_credentials_explain_short">Der folgende Prozess erlaubt es <b>c:geo</b> auf %s zuzugreifen.</string>
-  <string name="auth_credentials_explain_long">Nach Eingabe der Anmeldeinformation \"Starte Authentifizierung\" auswählen um den Prozess zu starten. Dieser Prozess verbindet mit %s und prüft die Anmeldeinformationen. Das ist alles.</string>
+  <string name="auth_credentials_explain_long">Nach Eingabe der Anmeldeinformation \"Authentifizierung prüfen\" auswählen um den Prozess zu starten. Dieser Prozess verbindet mit %s und prüft die Anmeldeinformationen. Das ist alles.</string>
   <!-- auth token -->
   <string name="auth_token_register">Nutzerkonto erstellen</string>
   <string name="auth_token_explain_short">Der folgende Prozess erlaubt es <b>c:geo</b>  auf %s zuzugreifen.</string>
