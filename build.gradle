@@ -117,7 +117,7 @@ allprojects {
  * common configuration for the Java projects
  */
 
-ext.buildToolsVersion = "23.0.2"
+ext.buildToolsVersion = "23.0.3"
 
 subprojects {
     repositories {

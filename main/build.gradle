@@ -285,8 +285,8 @@ dependencies {
     androidTestCompile 'com.android.support.test:runner:0.5'
 
     // enforce same version of the support annotations for the main app and the test app
-    compile 'com.android.support:support-annotations:23.2.0'
-    androidTestCompile 'com.android.support:support-annotations:23.2.0'
+    compile 'com.android.support:support-annotations:23.2.1'
+    androidTestCompile 'com.android.support:support-annotations:23.2.1'
 
     // Junit only needed for local unit tests
     testCompile 'junit:junit:4.12'
