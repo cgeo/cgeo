@@ -104,7 +104,7 @@ public class GC2JVEH extends MockedCache {
     @NonNull
     @Override
     public List<String> getAttributes() {
-        final String[] attributes = new String[] {
+        final String[] attributes = {
                 "winter_yes",
                 "flashlight_yes",
                 "stealth_yes",
