@@ -7,7 +7,7 @@ import android.content.Context;
 import android.graphics.Point;
 import android.view.WindowManager;
 
-@TargetApi(value = 13)
+@TargetApi(13)
 class AndroidLevel13 implements AndroidLevel13Interface {
 
     @Override
