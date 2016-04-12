@@ -136,7 +136,7 @@ public final class ContactsActivity extends Activity {
         return result;
     }
 
-    public final void showToast(final String text) {
+    public void showToast(final String text) {
         final Toast toast = Toast.makeText(this, text, Toast.LENGTH_LONG);
 
         toast.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM, 0, 100);
