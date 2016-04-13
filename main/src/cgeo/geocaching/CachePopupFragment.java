@@ -216,7 +216,7 @@ public class CachePopupFragment extends AbstractDialogFragment {
                             }
                         }, true, cache.getLists());
             } else {
-                storeCache(StoredList.TEMPORARY_LIST.id);
+                storeCache(StoredList.STANDARD_LIST_ID);
             }
             return true;
         }
