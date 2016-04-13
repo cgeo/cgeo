@@ -1,6 +1,13 @@
 package cgeo.geocaching.storage;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.EnumSet;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import cgeo.CGeoTestCase;
 import cgeo.geocaching.SearchResult;
@@ -16,14 +23,7 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.LogEntry;
 import cgeo.geocaching.models.Trackable;
 
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.EnumSet;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class DataStoreTest extends CGeoTestCase {
 
@@ -96,6 +96,72 @@ public class DataStoreTest extends CGeoTestCase {
             DataStore.removeList(listId2);
         }
     }
+
+    public static void testMoveToList() {
+
+        Integer listId1 = null;
+        Integer listId2 = null;
+        Integer listId3 = null;
+
+        // create caches
+        final Geocache cache1 = new Geocache();
+        cache1.setGeocode("Cache 1");
+        final Geocache cache2 = new Geocache();
+        cache2.setGeocode("Cache 2");
+        assertThat(cache2).isNotNull();
+
+        try {
+
+            // create lists
+            listId1 = DataStore.createList("DataStore Test");
+            assertThat(listId1).isGreaterThan(StoredList.STANDARD_LIST_ID);
+            listId2 = DataStore.createList("DataStoreTest");
+            assertThat(listId2).isGreaterThan(StoredList.STANDARD_LIST_ID);
+            listId3 = DataStore.createList("Target");
+            assertThat(DataStore.getLists().size()).isGreaterThanOrEqualTo(3);
+
+            cache1.setDetailed(true);
+            cache1.getLists().add(listId1);
+            cache1.getLists().add(listId2);
+            cache2.setDetailed(true);
+            cache2.getLists().add(listId1);
+
+            // save caches to DB (cache1=listId1+listId2, cache2=listId1)
+            DataStore.saveCache(cache1, LoadFlags.SAVE_ALL);
+            DataStore.saveCache(cache2, LoadFlags.SAVE_ALL);
+            assertThat(DataStore.getAllCachesCount()).isGreaterThanOrEqualTo(2);
+
+            // move to list (cache1=listId2, cache2=listId2)
+            DataStore.moveToList(Collections.singletonList(cache1), listId3);
+            assertThat(DataStore.getAllStoredCachesCount(CacheType.ALL, listId3)).isEqualTo(1);
+
+            Geocache movedCache = DataStore.loadCache(cache1.getGeocode(), LoadFlags.LOAD_ALL_DB_ONLY);
+            assertThat(movedCache).isNotNull();
+            if (movedCache != null) {
+                // null check needed, otherwise Android Studio complains about possible NPE
+                assertThat(movedCache.getLists().size()).isEqualTo(1);
+            }
+        } finally {
+
+            // remove caches
+            final Set<String> geocodes = new HashSet<>();
+            geocodes.add(cache1.getGeocode());
+            geocodes.add(cache2.getGeocode());
+            DataStore.removeCaches(geocodes, LoadFlags.REMOVE_ALL);
+
+            // remove list
+            if (listId1 != null) {
+                DataStore.removeList(listId1);
+            }
+            if (listId2 != null) {
+                DataStore.removeList(listId2);
+            }
+            if (listId3 != null) {
+                DataStore.removeList(listId3);
+            }
+        }
+    }
+
 
     // Check that queries don't throw an exception (see issue #1429).
     public static void testLoadWaypoints() {

@@ -1,5 +1,76 @@
 package cgeo.geocaching;
 
+import android.R.color;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
+import android.net.Uri;
+import android.os.AsyncTask;
+import android.os.Build;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.content.LocalBroadcastManager;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.view.ActionMode;
+import android.text.Editable;
+import android.text.Html;
+import android.text.Spannable;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.StrikethroughSpan;
+import android.text.style.StyleSpan;
+import android.text.util.Linkify;
+import android.util.TypedValue;
+import android.view.ContextMenu;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.View.OnLongClickListener;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.GridView;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
+import android.widget.TextView;
+import android.widget.TextView.BufferType;
+
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringEscapeUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.EnumSet;
+import java.util.List;
+import java.util.Locale;
+import java.util.regex.Pattern;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import cgeo.calendar.CalendarAddon;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.AbstractViewPagerActivity;
@@ -69,78 +140,6 @@ import cgeo.geocaching.utils.SimpleCancellableHandler;
 import cgeo.geocaching.utils.SimpleHandler;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.UnknownTagsHandler;
-
-import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.lang3.StringEscapeUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.apache.commons.lang3.tuple.Pair;
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
-
-import android.R.color;
-import android.app.AlertDialog;
-import android.app.ProgressDialog;
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.Typeface;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.LayerDrawable;
-import android.net.Uri;
-import android.os.AsyncTask;
-import android.os.Build;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.content.LocalBroadcastManager;
-import android.support.v4.view.MenuItemCompat;
-import android.support.v7.view.ActionMode;
-import android.text.Editable;
-import android.text.Html;
-import android.text.Spannable;
-import android.text.Spanned;
-import android.text.style.ForegroundColorSpan;
-import android.text.style.StrikethroughSpan;
-import android.text.style.StyleSpan;
-import android.text.util.Linkify;
-import android.util.TypedValue;
-import android.view.ContextMenu;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.View.OnLongClickListener;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.GridView;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.RelativeLayout;
-import android.widget.ScrollView;
-import android.widget.TextView;
-import android.widget.TextView.BufferType;
-
-import java.lang.ref.WeakReference;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Locale;
-import java.util.regex.Pattern;
-
-import butterknife.Bind;
-import butterknife.ButterKnife;
 import rx.Observable;
 import rx.Observable.OnSubscribe;
 import rx.Subscriber;
@@ -602,7 +601,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 dropCache();
                 return true;
             case R.id.menu_store_in_list:
-                storeCache();
+                storeCache(false);
                 return true;
             case R.id.menu_refresh:
                 refreshCache();
@@ -892,7 +891,13 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         cache.drop(new ChangeNotificationHandler(this, progress));
     }
 
-    private void storeCache() {
+    /**
+     * Store the current cache in a list. User may choose from an existing list, or create a new one
+     *
+     * @param move set to <code>true</code> to move the cache to the cache, <code>false</code> to
+     *             add another tag
+     */
+    private void storeCache(final boolean move) {
         if (progress.isShowing()) {
             showToast(res.getString(R.string.err_detail_still_working));
             return;
@@ -904,20 +909,26 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     new Action1<Integer>() {
                         @Override
                         public void call(final Integer selectedListId) {
-                            storeCacheInList(selectedListId);
+                            storeCacheInList(selectedListId, move);
                         }
                     }, true, cache.getLists());
         } else {
-            storeCacheInList(StoredList.STANDARD_LIST_ID);
+            storeCacheInList(StoredList.TEMPORARY_LIST.id, move);
         }
     }
 
-    private void storeCacheInList(final Integer selectedListId) {
+    private void storeCacheInList(final Integer selectedListId, final boolean move) {
         if (cache.isOffline()) {
             // cache already offline, just add to another list
-            DataStore.addToList(Collections.singletonList(cache), selectedListId);
+            if (move) {
+                DataStore.moveToList(Collections.singletonList(cache), selectedListId);
+            } else {
+                DataStore.addToList(Collections.singletonList(cache), selectedListId);
+            }
+
             new StoreCacheHandler(CacheDetailActivity.this, progress).sendEmptyMessage(CancellableHandler.DONE);
         } else {
+            // no need to consider move, selectedListId will be the only selected list
             storeCache(selectedListId);
         }
     }
@@ -1020,7 +1031,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             updateAttributesText();
             ButterKnife.findById(view, R.id.attributes_box).setVisibility(cache.getAttributes().isEmpty() ? View.GONE : View.VISIBLE);
 
-            updateOfflineBox(view, cache, res, new RefreshCacheClickListener(), new DropCacheClickListener(), new StoreCacheClickListener());
+            updateOfflineBox(view, cache, res, new RefreshCacheClickListener(), new DropCacheClickListener(), new StoreCacheClickListener(), new StoreCacheLongClickListener());
 
             // watchlist
             final Button buttonWatchlistAdd = ButterKnife.findById(view, R.id.add_to_watchlist);
@@ -1117,7 +1128,16 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         private class StoreCacheClickListener implements View.OnClickListener {
             @Override
             public void onClick(final View arg0) {
-                storeCache();
+                storeCache(false);
+            }
+
+        }
+
+        private class StoreCacheLongClickListener implements View.OnLongClickListener {
+            @Override
+            public boolean onLongClick(final View arg0) {
+                storeCache(true);
+                return true;
             }
 
         }
@@ -2231,7 +2251,8 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     static void updateOfflineBox(final View view, final Geocache cache, final Resources res,
                                         final OnClickListener refreshCacheClickListener,
                                         final OnClickListener dropCacheClickListener,
-                                        final OnClickListener storeCacheClickListener) {
+                                        final OnClickListener storeCacheClickListener,
+                                        final OnLongClickListener storeCacheLongClickListener) {
         // offline use
         final TextView offlineText = ButterKnife.findById(view, R.id.offline_text);
         final Button offlineRefresh = ButterKnife.findById(view, R.id.offline_refresh);
@@ -2240,6 +2261,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
         offlineStore.setClickable(true);
         offlineStore.setOnClickListener(storeCacheClickListener);
+        offlineStore.setOnLongClickListener(storeCacheLongClickListener);
 
         offlineRefresh.setVisibility(cache.supportsRefresh() ? View.VISIBLE : View.GONE);
         offlineRefresh.setClickable(true);

@@ -1,19 +1,5 @@
 package cgeo.geocaching;
 
-import cgeo.geocaching.activity.Progress;
-import cgeo.geocaching.apps.navi.NavigationAppFactory;
-import cgeo.geocaching.compatibility.Compatibility;
-import cgeo.geocaching.list.StoredList;
-import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.ui.CacheDetailsCreator;
-import cgeo.geocaching.utils.AndroidRxUtils;
-import cgeo.geocaching.utils.CancellableHandler;
-import cgeo.geocaching.utils.Log;
-
-import org.apache.commons.lang3.StringUtils;
-
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
@@ -27,11 +13,24 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
 import butterknife.ButterKnife;
+import cgeo.geocaching.activity.Progress;
+import cgeo.geocaching.apps.navi.NavigationAppFactory;
+import cgeo.geocaching.compatibility.Compatibility;
+import cgeo.geocaching.list.StoredList;
+import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.ui.CacheDetailsCreator;
+import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.CancellableHandler;
+import cgeo.geocaching.utils.Log;
 import rx.functions.Action0;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
@@ -108,7 +107,7 @@ public class CachePopupFragment extends AbstractDialogFragment {
             addCacheDetails();
 
             // offline use
-            CacheDetailActivity.updateOfflineBox(getView(), cache, res, new RefreshCacheClickListener(), new DropCacheClickListener(), new StoreCacheClickListener());
+            CacheDetailActivity.updateOfflineBox(getView(), cache, res, new RefreshCacheClickListener(), new DropCacheClickListener(), new StoreCacheClickListener(), new StoreCacheLongClickListener());
 
             updateCacheLists();
         } catch (final Exception e) {
@@ -199,6 +198,55 @@ public class CachePopupFragment extends AbstractDialogFragment {
         }
     }
 
+    private class StoreCacheLongClickListener implements View.OnLongClickListener {
+        @Override
+        public boolean onLongClick(final View arg0) {
+            if (progress.isShowing()) {
+                showToast(res.getString(R.string.err_detail_still_working));
+                return false;
+            }
+
+            if (Settings.getChooseList()) {
+                // let user select list to store cache in
+                new StoredList.UserInterface(getActivity()).promptForListSelection(R.string.list_title,
+                        new Action1<Integer>() {
+                            @Override
+                            public void call(final Integer selectedListId) {
+                                storeCache(selectedListId);
+                            }
+                        }, true, cache.getLists());
+            } else {
+                storeCache(StoredList.TEMPORARY_LIST.id);
+            }
+            return true;
+        }
+
+        protected void storeCache(final int listId) {
+            if (cache.isOffline()) {
+                // cache already offline, just move to another list
+                DataStore.moveToList(Collections.singletonList(cache), listId);
+                cache.setLists(Collections.singleton(listId));
+                updateCacheLists();
+            } else {
+                // normal store to list, as cache should not yet be tagged
+                final StoreCacheHandler storeCacheHandler = new StoreCacheHandler(R.string.cache_dialog_offline_save_message);
+                final FragmentActivity activity = getActivity();
+                progress.show(activity, res.getString(R.string.cache_dialog_offline_save_title), res.getString(R.string.cache_dialog_offline_save_message), true, storeCacheHandler.cancelMessage());
+                AndroidRxUtils.andThenOnUi(Schedulers.io(), new Action0() {
+                    @Override
+                    public void call() {
+                        cache.store(listId, storeCacheHandler);
+                    }
+                }, new Action0() {
+                    @Override
+                    public void call() {
+                        activity.supportInvalidateOptionsMenu();
+                        updateCacheLists();
+                    }
+                });
+            }
+        }
+    }
     private class RefreshCacheClickListener implements View.OnClickListener {
         @Override
         public void onClick(final View arg0) {
