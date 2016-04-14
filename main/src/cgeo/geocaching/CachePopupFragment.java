@@ -225,7 +225,6 @@ public class CachePopupFragment extends AbstractDialogFragment {
             if (cache.isOffline()) {
                 // cache already offline, just move to another list
                 DataStore.moveToList(Collections.singletonList(cache), listId);
-                cache.setLists(Collections.singleton(listId));
                 updateCacheLists();
             } else {
                 // normal store to list, as cache should not yet be tagged

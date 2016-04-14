@@ -134,6 +134,7 @@ public class DataStoreTest extends CGeoTestCase {
             // move to list (cache1=listId2, cache2=listId2)
             DataStore.moveToList(Collections.singletonList(cache1), listId3);
             assertThat(DataStore.getAllStoredCachesCount(CacheType.ALL, listId3)).isEqualTo(1);
+            assertThat(cache1.getLists().size()).isEqualTo(1);
 
             Geocache movedCache = DataStore.loadCache(cache1.getGeocode(), LoadFlags.LOAD_ALL_DB_ONLY);
             assertThat(movedCache).isNotNull();
