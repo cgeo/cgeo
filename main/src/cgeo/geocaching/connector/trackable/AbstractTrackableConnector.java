@@ -70,6 +70,12 @@ public abstract class AbstractTrackableConnector implements TrackableConnector {
     }
 
     @Override
+    @NonNull
+    public String getTestUrl() {
+        return getHostUrl();
+    }
+
+    @Override
     @Nullable
     public String getProxyUrl() {
         return null;

@@ -112,6 +112,13 @@ public interface IConnector {
     String getHostUrl();
 
     /**
+     * Get url to use when testing website availability (because host url may redirect)
+     *
+     */
+    @NonNull
+    String getTestUrl();
+
+    /**
      * Get cache data license text. This is displayed somewhere near the cache details.
      *
      */

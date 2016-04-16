@@ -153,6 +153,12 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
+    @NonNull
+    public String getTestUrl() {
+        return "https://" + getHost() + "/play";
+    }
+
+    @Override
     public SearchResult searchByGeocode(final @Nullable String geocode, final @Nullable String guid, final CancellableHandler handler) {
 
         CancellableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_loadpage);

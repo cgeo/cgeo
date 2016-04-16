@@ -200,6 +200,13 @@ public interface TrackableConnector {
     String getHostUrl();
 
     /**
+     * Get url to use when testing website availability (because host url may redirect)
+     *
+     */
+    @NonNull
+    String getTestUrl();
+
+    /**
      * Get proxy url name of the connector server, if any, for dynamic loading of data.
      * Contains scheme.
      */
