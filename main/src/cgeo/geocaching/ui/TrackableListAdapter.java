@@ -20,8 +20,8 @@ public class TrackableListAdapter extends ArrayAdapter<Trackable> {
     final private LayoutInflater inflater;
 
     protected static final class ViewHolder extends AbstractViewHolder {
-        @Bind(R.id.trackable_image_brand) protected ImageView imageBrand;
-        @Bind(R.id.trackable_name) protected TextView name;
+        @Bind(R.id.trackable_image_brand) ImageView imageBrand;
+        @Bind(R.id.trackable_name) TextView name;
 
         public ViewHolder(final View view) {
             super(view);

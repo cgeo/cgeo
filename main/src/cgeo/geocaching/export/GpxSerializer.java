@@ -353,7 +353,7 @@ public final class GpxSerializer {
         gpx.endTag(NS_GROUNDSPEAK, "attributes");
     }
 
-    protected static String getState(@NonNull final Geocache cache) {
+    static String getState(@NonNull final Geocache cache) {
         return getLocationPart(cache, 0);
     }
 
@@ -368,7 +368,7 @@ public final class GpxSerializer {
         return StringUtils.EMPTY;
     }
 
-    protected static String getCountry(@NonNull final Geocache cache) {
+    static String getCountry(@NonNull final Geocache cache) {
         final String country = getLocationPart(cache, 1);
         if (StringUtils.isNotEmpty(country)) {
             return country;

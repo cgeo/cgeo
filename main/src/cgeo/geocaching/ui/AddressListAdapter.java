@@ -28,8 +28,8 @@ public class AddressListAdapter extends ArrayAdapter<Address> {
     @NonNull final private Geopoint location;
 
     protected static final class ViewHolder extends AbstractViewHolder {
-        @Bind(R.id.label) protected TextView label;
-        @Bind(R.id.distance) protected TextView distance;
+        @Bind(R.id.label) TextView label;
+        @Bind(R.id.distance) TextView distance;
 
         public ViewHolder(final View view) {
             super(view);
