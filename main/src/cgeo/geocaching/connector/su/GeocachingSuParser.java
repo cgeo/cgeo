@@ -79,7 +79,7 @@ public class GeocachingSuParser {
                             caches.add(cache);
                         } else if ("lat".equalsIgnoreCase(tagname)) {
                             lattitude = text;
-                        } else if ("lon".equalsIgnoreCase(tagname)) {
+                        } else if ("lng".equalsIgnoreCase(tagname)) {
                             cache.setCoords(new Geopoint(lattitude, text));
                         } else if ("nick".equalsIgnoreCase(tagname)) {
                             cache.setOwnerDisplayName(text);
