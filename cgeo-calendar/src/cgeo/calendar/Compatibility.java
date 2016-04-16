@@ -11,6 +11,10 @@ public final class Compatibility {
     private final static boolean IS_LEVEL_8 = SDK_VERSION >= 8;
     private final static boolean IS_LEVEL_14 = SDK_VERSION >= 14;
 
+    private Compatibility() {
+        // utility class
+    }
+
     @NonNull
     public static Uri getCalendarProviderURI() {
         return Uri.parse(IS_LEVEL_8 ? "content://com.android.calendar/calendars" : "content://calendar/calendars");

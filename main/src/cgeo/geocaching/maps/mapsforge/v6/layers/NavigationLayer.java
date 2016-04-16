@@ -57,12 +57,12 @@ public class NavigationLayer extends Layer {
 
         final long mapSize = MercatorProjection.getMapSize(zoomLevel, this.displayModel.getTileSize());
 
-        final int pos_x = (int) (MercatorProjection.longitudeToPixelX(this.currentCoords.getLongitude(), mapSize) - topLeftPoint.x);
-        final int pos_y = (int) (MercatorProjection.latitudeToPixelY(this.currentCoords.getLatitude(), mapSize) - topLeftPoint.y);
+        final int posX = (int) (MercatorProjection.longitudeToPixelX(this.currentCoords.getLongitude(), mapSize) - topLeftPoint.x);
+        final int posY = (int) (MercatorProjection.latitudeToPixelY(this.currentCoords.getLatitude(), mapSize) - topLeftPoint.y);
 
-        final int dest_x = (int) (MercatorProjection.longitudeToPixelX(this.destinationCoords.getLongitude(), mapSize) - topLeftPoint.x);
-        final int dest_y = (int) (MercatorProjection.latitudeToPixelY(this.destinationCoords.getLatitude(), mapSize) - topLeftPoint.y);
+        final int destX = (int) (MercatorProjection.longitudeToPixelX(this.destinationCoords.getLongitude(), mapSize) - topLeftPoint.x);
+        final int destY = (int) (MercatorProjection.latitudeToPixelY(this.destinationCoords.getLatitude(), mapSize) - topLeftPoint.y);
 
-        canvas.drawLine(pos_x, pos_y, dest_x, dest_y, line);
+        canvas.drawLine(posX, posY, destX, destY, line);
     }
 }

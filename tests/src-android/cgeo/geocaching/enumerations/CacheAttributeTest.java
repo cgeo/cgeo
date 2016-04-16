@@ -43,10 +43,10 @@ public class CacheAttributeTest extends AndroidTestCase {
     }
 
     public static void testIsEnabled() {
-        final String hiking_yes = "hiking_yes";
-        final String hiking_no = "hiking_no";
-        assertThat(CacheAttribute.isEnabled(hiking_yes)).isTrue();
-        assertThat(CacheAttribute.isEnabled(hiking_no)).isFalse();
+        final String hikingYes = "hiking_yes";
+        final String hikingNo = "hiking_no";
+        assertThat(CacheAttribute.isEnabled(hikingYes)).isTrue();
+        assertThat(CacheAttribute.isEnabled(hikingNo)).isFalse();
     }
 
 }

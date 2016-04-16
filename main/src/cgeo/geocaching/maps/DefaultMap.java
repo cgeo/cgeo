@@ -9,7 +9,11 @@ import cgeo.geocaching.settings.Settings;
 import android.app.Activity;
 import android.content.Intent;
 
-public class DefaultMap {
+public final class DefaultMap {
+
+    private DefaultMap() {
+        // utility class
+    }
 
     public static Intent getLiveMapIntent(final Activity fromActivity) {
         if (Settings.useNewMapAsDefault()) {

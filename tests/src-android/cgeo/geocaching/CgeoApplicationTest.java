@@ -417,11 +417,11 @@ public class CgeoApplicationTest extends CGeoTestCase {
      * Caches that are good test cases
      */
     public static void testSearchByGeocodeSpecialties() {
-        final Geocache GCV2R9 = CgeoApplicationTest.testSearchByGeocode("GCV2R9");
-        assertThat(GCV2R9.getLocation()).isEqualTo("California, United States");
+        final Geocache gcv2r9 = CgeoApplicationTest.testSearchByGeocode("GCV2R9");
+        assertThat(gcv2r9.getLocation()).isEqualTo("California, United States");
 
-        final Geocache GC1ZXEZ = CgeoApplicationTest.testSearchByGeocode("GC1ZXEZ");
-        assertThat(GC1ZXEZ.getOwnerUserId()).isEqualTo("Ms.Marple/Mr.Stringer");
+        final Geocache gc1zxez = CgeoApplicationTest.testSearchByGeocode("GC1ZXEZ");
+        assertThat(gc1zxez.getOwnerUserId()).isEqualTo("Ms.Marple/Mr.Stringer");
     }
 
     /** Remove cache from DB and cache to ensure that the cache is not loaded from the database */

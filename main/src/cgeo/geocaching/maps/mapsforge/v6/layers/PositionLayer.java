@@ -45,8 +45,8 @@ public class PositionLayer extends Layer {
         final double pixelX = MercatorProjection.longitudeToPixelX(this.location.longitude, mapSize);
         final double pixelY = MercatorProjection.latitudeToPixelY(this.location.latitude, mapSize);
 
-        final int center_x = (int) (pixelX - topLeftPoint.x);
-        final int center_y = (int) (pixelY - topLeftPoint.y);
+        final int centerX = (int) (pixelX - topLeftPoint.x);
+        final int centerY = (int) (pixelY - topLeftPoint.y);
 
         final int radius = (int) MercatorProjection.metersToPixelsWithScaleFactor(accuracy, location.latitude,
                 this.displayModel.getScaleFactor(), this.displayModel.getTileSize());
@@ -58,11 +58,11 @@ public class PositionLayer extends Layer {
 
         accuracyCircle.setColor(0x66000000);
         accuracyCircle.setStyle(Style.STROKE);
-        canvas.drawCircle(center_x, center_y, radius, accuracyCircle);
+        canvas.drawCircle(centerX, centerY, radius, accuracyCircle);
 
         accuracyCircle.setColor(0x08000000);
         accuracyCircle.setStyle(Style.FILL);
-        canvas.drawCircle(center_x, center_y, radius, accuracyCircle);
+        canvas.drawCircle(centerX, centerY, radius, accuracyCircle);
 
         if (arrow == null) {
             arrowNative = BitmapFactory.decodeResource(CgeoApplication.getInstance().getResources(), R.drawable.my_location_chevron);
@@ -71,8 +71,8 @@ public class PositionLayer extends Layer {
         }
 
 
-        final int left = center_x - widthArrowHalf;
-        final int top = center_y - heightArrowHalf;
+        final int left = centerX - widthArrowHalf;
+        final int top = centerY - heightArrowHalf;
         final int right = left + this.arrow.getWidth();
         final int bottom = top + this.arrow.getHeight();
         final Rectangle bitmapRectangle = new Rectangle(left, top, right, bottom);

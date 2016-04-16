@@ -28,10 +28,10 @@ public class WaypointsTest extends CGeoTestCase {
 
     public static void testDownloadWaypoints() {
         // Check that repeated loads of "GC33HXE" hold the right number of waypoints (issue #2430).
-        final String GEOCODE = "GC33HXE";
-        DataStore.removeCache(GEOCODE, LoadFlags.REMOVE_ALL);
-        assertThat(downloadCache(GEOCODE).getWaypoints()).hasSize(9);
-        assertThat(downloadCache(GEOCODE).getWaypoints()).hasSize(9);
+        final String geocode = "GC33HXE";
+        DataStore.removeCache(geocode, LoadFlags.REMOVE_ALL);
+        assertThat(downloadCache(geocode).getWaypoints()).hasSize(9);
+        assertThat(downloadCache(geocode).getWaypoints()).hasSize(9);
     }
 
 }

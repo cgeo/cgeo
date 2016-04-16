@@ -27,8 +27,9 @@ import java.util.Set;
 
 public class DataStoreTest extends CGeoTestCase {
 
-    public static void testStoredLists() {
+    final static String ARTIFICIAL_GEOCODE = "TEST";
 
+    public static void testStoredLists() {
         int listId1 = StoredList.STANDARD_LIST_ID;
         int listId2 = StoredList.STANDARD_LIST_ID;
 
@@ -113,11 +114,9 @@ public class DataStoreTest extends CGeoTestCase {
     // Check that saving a cache and trackable without logs works (see #2199)
     public static void testSaveWithoutLogs() {
 
-        final String GEOCODE_CACHE = "TEST";
-
         // create cache and trackable
         final Geocache cache = new Geocache();
-        cache.setGeocode(GEOCODE_CACHE);
+        cache.setGeocode(ARTIFICIAL_GEOCODE);
         cache.setDetailed(true);
         final Trackable trackable = new Trackable();
         trackable.setLogs(null);
@@ -127,21 +126,20 @@ public class DataStoreTest extends CGeoTestCase {
 
         try {
             DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
-            final Geocache loadedCache = DataStore.loadCache(GEOCODE_CACHE, LoadFlags.LOAD_ALL_DB_ONLY);
+            final Geocache loadedCache = DataStore.loadCache(ARTIFICIAL_GEOCODE, LoadFlags.LOAD_ALL_DB_ONLY);
             assert loadedCache != null;
             assertThat(loadedCache).isNotNull();
             assertThat(loadedCache).overridingErrorMessage("Cache was not saved.").isNotNull();
             assertThat(loadedCache.getInventory()).hasSize(1);
         } finally {
-            DataStore.removeCache(GEOCODE_CACHE, LoadFlags.REMOVE_ALL);
+            DataStore.removeCache(ARTIFICIAL_GEOCODE, LoadFlags.REMOVE_ALL);
         }
     }
 
     // Check that loading a cache by case insensitive geo code works correctly (see #3139)
     public static void testGeocodeCaseInsensitive() {
 
-        final String GEOCODE_CACHE = "TEST";
-        final String upperCase = GEOCODE_CACHE;
+        final String upperCase = ARTIFICIAL_GEOCODE;
         final String lowerCase = StringUtils.lowerCase(upperCase);
         assertThat(upperCase.equals(lowerCase)).isFalse();
 
