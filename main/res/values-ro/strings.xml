@@ -148,7 +148,6 @@
   <string name="err_unknown">Eroare necunoscută</string>
   <string name="err_unknown_address">c:geo nu a putut găsi coordonate pentru această adresă</string>
   <string name="err_comm">Eroare necunoscută de comunicaţie</string>
-  <string name="err_missing_auth">Nu a fost dat numele de utilizator sau parola.</string>
   <string name="err_maintenance">Geocaching.com este oprit temporar pentru lucrări de întreţinere. c:geo funcţionează deconectat cu cutiile stocate local.</string>
   <string name="err_license">Nu ai acceptat termenele si condiţiile de utilizare ale Geocaching.com, în consecinţă c:geo nu poate încărca coordonatele cutiei.</string>
   <string name="err_unvalidated_account">Mai întâi trebuie să îţi validezi contul de pe Geocaching.com.</string>
@@ -618,7 +617,7 @@
   <string name="init_sendToCgeo_description"><b>Send2cgeo</b> îţi permite să încarci cutii în dispozitivul tău Android direct de pe geocaching.com folosind o extensie pentru Firefox sau Chrome. Înainte să te înregistrezi, citeşte aici: <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Trebuie să te înregistrezi numai daca vrei să foloseşti send2cgeo. c:geo va funcţiona normal şi fără să îţi înregistrezi dispozitivul.</string>
   <string name="init_sendToCgeo_register">Cere Înregistrare</string>
   <string name="init_sendToCgeo_registering">Dispozitivul tău se înregistrează pentru send2cgeo…</string>
-  <string name="init_sendToCgeo_register_ok">Înregistrare reuţită. Codul PIN este ####. Foloseşte-l pe internet pe pagina c:geo pentru a conecta acest dispozitiv cu browser-ul tău.</string>
+  <string name="init_sendToCgeo_register_ok">Înregistrare reuţită. Codul PIN este %d. Foloseşte-l pe internet pe pagina c:geo pentru a conecta acest dispozitiv cu browser-ul tău.</string>
   <string name="init_sendToCgeo_register_fail">Înregistrare eşuată.</string>
   <string name="sendToCgeo_download_fail">c:geo nu a putut descărca cutiile. Lipsă conexiune internet sau send2cgeo nu funcţionează.</string>
   <string name="sendToCgeo_no_registration">c:geo nu a putut descărca cutiile. Înregistrarea pentru send2cgeo a expirat. Te rog înregistrează la opţiuni.</string>

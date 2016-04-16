@@ -148,7 +148,6 @@
   <string name="err_unknown">Nežinoma klaida</string>
   <string name="err_unknown_address">C:geo nepavyko susieti šio adreso su egzistuojančia vietove</string>
   <string name="err_comm">Nežinoma ryšio klaida</string>
-  <string name="err_missing_auth">Neįvestas vartotojo vardas ir/ar slaptažodis.</string>
   <string name="err_maintenance">Geocaching.com svetainė neveikia dėl priežiūros darbų. c:geo veikia neprisijungusi su išsaugotomis slėptuvėmis.</string>
   <string name="err_license">Jūs dar nesutikote su Geocaching.com licenciniu susitarimu, todėl c:geo negali įkelti slėptuvės koordinačių.</string>
   <string name="err_unvalidated_account">Jums pirmiausia reikia patvirtinti savo vartotojo paskyrą Geocaching.com svetainėje.</string>
@@ -606,7 +605,7 @@
   <string name="init_sendToCgeo_description"><b>Send2cgeo</b> leidžia jums siųsti slėptuves į Android įrenginį tiesiogiai iš geocaching.com naudojant specialius Firefox ar Chrome priedus. Prieš registruodamiesi, pažiūrėkite <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Registruotis reikia tik tuomet jei norite naudotis send2cgeo. c:geo veiks įprastai ir be prietaiso registravimo.</string>
   <string name="init_sendToCgeo_register">Prašyti registracijos</string>
   <string name="init_sendToCgeo_registering">Prietaisas registruojamas su send2cgeo…</string>
-  <string name="init_sendToCgeo_register_ok">Registracija pavyko. PIN kodas ####. Naudokite jį c:geo svetainėje ir susiekite prietaisą su savo naršykle.</string>
+  <string name="init_sendToCgeo_register_ok">Registracija pavyko. PIN kodas %d. Naudokite jį c:geo svetainėje ir susiekite prietaisą su savo naršykle.</string>
   <string name="init_sendToCgeo_register_fail">Registracija nepavyko.</string>
   <string name="sendToCgeo_download_fail">c:geo nepavyko atsisiųsti slėptuvių. Nėra interneto ryšio arba neveikia send2cgeo.</string>
   <string name="sendToCgeo_no_registration">c:geo nepavyko atsisiųsti slėptuvių. send2cgeo registracijos galiojimo laikas pasibaigė. Prašome registruotis Nustatymuose.</string>

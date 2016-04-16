@@ -148,7 +148,6 @@
   <string name="err_unknown">Erreur inconnue</string>
   <string name="err_unknown_address">c:geo n\'a pas réussi à trouver de coordonnées géographiques pour cette adresse</string>
   <string name="err_comm">Erreur de communication inconnue</string>
-  <string name="err_missing_auth">Nom d\'utilisateur ou mot de passe manquant.</string>
   <string name="err_maintenance">Le site de Geocaching.com est en cours de maintenance, essayez plus tard. c:geo fonctionne en mode hors-ligne.</string>
   <string name="err_license">L\'utilisateur n\'a pas accepté les termes et les conditions d\'utilisation de Geocaching.com</string>
   <string name="err_unvalidated_account">Vous devez d\'abord confirmer votre compte sur le site web Geocaching.com</string>
@@ -615,7 +614,7 @@
   <string name="init_sendToCgeo_description"><b>Send2cgeo</b> permet de recevoir les caches directement depuis le site Geocaching.com en utilisant une extension pour Firefox ou Chrome. Après votre inscription, veuillez lire <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Pour utiliser send2cgeo, vous avez juste besoin de vous inscrire. c:geo fonctionnera aussi sans enregistrer votre appareil.</string>
   <string name="init_sendToCgeo_register">Demande d\'enregistrement</string>
   <string name="init_sendToCgeo_registering">Enregistrez votre appareil pour send2cgeo…</string>
-  <string name="init_sendToCgeo_register_ok">Enregistrement réussi. Le code PIN est ####. Utiliser le sur le site de c:geo pour ajouter votre appareil dans votre navigateur.</string>
+  <string name="init_sendToCgeo_register_ok">Enregistrement réussi. Le code PIN est %d. Utiliser le sur le site de c:geo pour ajouter votre appareil dans votre navigateur.</string>
   <string name="init_sendToCgeo_register_fail">Échec de l\'enregistrement.</string>
   <string name="sendToCgeo_download_fail">c:geo n\'a pas pu charger les caches. Absence de connexion Internet ou problème avec le site send2cgeo.</string>
   <string name="sendToCgeo_no_registration">c:geo n\'a pas pu charger les caches. L\'enregistrement sur send2cgeo a expiré. Merci de vous réenregistrer en allant dans les Paramètres.</string>

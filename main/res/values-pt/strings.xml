@@ -148,7 +148,6 @@
   <string name="err_unknown">Erro desconhecido</string>
   <string name="err_unknown_address">c:geo não conseguiu mapear a morada para uma localização existente</string>
   <string name="err_comm">Erro de comunicação desconhecido</string>
-  <string name="err_missing_auth">Sem nome de utilizador/password definidos.</string>
   <string name="err_maintenance">Geocaching.com está em manutenção. O c:geo funciona offline com as caches Arquivadas.</string>
   <string name="err_license">O utilizador não concordou com a licença de utilização de Geocaching.com, por isso c:geo não pode carregar as coordenadas da cache.</string>
   <string name="err_unvalidated_account">Deve validar a sua conta primeiro em Geocaching.com.</string>
@@ -614,7 +613,7 @@
   <string name="init_sendToCgeo_description"><b>Send2cgeo</b> permite-lhe receber caches directamente do site Geocaching.com, utilizando um plugin especial para o Firefox ou Chrome. Antes de se registar, por favor leia <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Apenas necessita de registar, se pretender utilizar o send2cgeo. O c:geo irá funcionar mesmo sem este registo.</string>
   <string name="init_sendToCgeo_register">Solicitar registo</string>
   <string name="init_sendToCgeo_registering">Registando o seu dispositivo para send2cgeo…</string>
-  <string name="init_sendToCgeo_register_ok">Registo bem sucedido. O código PIN é ####. Use-o no site do c:geo para adicionar este dispositivo ao seu browser.</string>
+  <string name="init_sendToCgeo_register_ok">Registo bem sucedido. O código PIN é %d. Use-o no site do c:geo para adicionar este dispositivo ao seu browser.</string>
   <string name="init_sendToCgeo_register_fail">O registo falhou.</string>
   <string name="sendToCgeo_download_fail">c:geo falhou o download das caches. Sem ligação à internet ou send2cgeo está em baixo.</string>
   <string name="sendToCgeo_no_registration">c:geo falhou o download das caches. Registo do send2cgeo expirou. Faça o registo nas definições.</string>

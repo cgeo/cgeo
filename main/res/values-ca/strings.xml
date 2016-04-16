@@ -148,7 +148,6 @@
   <string name="err_unknown">Error desconegut</string>
   <string name="err_unknown_address">c:geo no ha pogut assignar aquesta adreça a una ubicació existent</string>
   <string name="err_comm">S\'ha produït un error de comunicació desconegut</string>
-  <string name="err_missing_auth">No s\'ha definit nom d\'usuari i/o contrasenya.</string>
   <string name="err_maintenance">Geocaching.com no funciona per motius de manteniment. El c:geo funcionarà amb els catxés desats.</string>
   <string name="err_license">No heu acceptat l\'acord de llicència de Geocaching.com, per tant el c:geo no pot carregar les coordenades.</string>
   <string name="err_unvalidated_account">Primer heu de validar el vostre compte a la pàgina web de Geocaching.com.</string>
@@ -616,7 +615,7 @@
   <string name="init_sendToCgeo_description"><b>Send2cgeo</b> us permet enviar els catxés al vostre aparell Android directament des de Geocaching.com utilitzant un complement especial per al Firefox o pel Chrome. Abans de registrar-vos veieu <a href="http://send2.cgeo.org/"> http://send2.cgeo.org/</a>. Només cal que us registreu si voleu utilitzar el send2cgeo.</string>
   <string name="init_sendToCgeo_register">Sol·licita registre</string>
   <string name="init_sendToCgeo_registering">S\'està registrant el dispositiu per send2cgeo…</string>
-  <string name="init_sendToCgeo_register_ok">Us heu registrat correctament. El codi PIN és ####. Utilitzeu-lo a la pàgina web del c:geo per connectar aquest dispositiu al navegador.</string>
+  <string name="init_sendToCgeo_register_ok">Us heu registrat correctament. El codi PIN és %d. Utilitzeu-lo a la pàgina web del c:geo per connectar aquest dispositiu al navegador.</string>
   <string name="init_sendToCgeo_register_fail">S\'ha produït un error en el registre del sendToCgeo.</string>
   <string name="sendToCgeo_download_fail">El c:geo ha fallat al descarregar els catxés. No hi ha connexió a Internet o el send2cgeo no funciona.</string>
   <string name="sendToCgeo_no_registration">S\'ha produït un error descarregant els catxés. El registre a send2cgeo ha caducat. Registreu-vos de nou a la configuració.</string>

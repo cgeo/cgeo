@@ -147,8 +147,6 @@
   <string name="err_unknown">Tuntematon virhe</string>
   <string name="err_unknown_address">c:geo ei voi näyttää tätä osoitetta kartalla</string>
   <string name="err_comm">Tuntematon yhteysvirhe</string>
-  <string name="err_missing_auth">Käyttäjätunnusta ja/tai salasanaa ei ole asetettu.</string>
-  <string name="err_wrong">Väärä käyttäjätunnus ja/tai salasana.</string>
   <string name="err_maintenance">Geocaching.com on huollettavana. c:geo toimii offline-tilassa, jolloin käytössä tallennetut kätköt.</string>
   <string name="err_license">Et ole hyväksynyt Geocaching.com-käyttöoikeussopimusta, joten c:geo ei voi ladata kätköjen koordinaatteja.</string>
   <string name="err_unvalidated_account">Sinun täytyy ensin varmentaa tunnuksesi Geocaching.com-sivustolla (\"validate\"-toiminto).</string>
@@ -455,7 +453,6 @@
   <string name="init_login_popup_working">Kirjaudutaan sisään…</string>
   <string name="init_login_popup_ok">Sisäänkirjautuminen onnistui</string>
   <string name="init_login_popup_failed">Sisäänkirjautuminen epäonnistui</string>
-  <string name="init_login_popup_failed_reason">Kirjautuminen epäonnistui: %s.</string>
   <string name="init_login_popup_not_authorized">Ei valtuutettu</string>
   <string name="init_login_popup_invalid_timestamp">Paikallinen aika virheellinen, tarkista laitteesi aika</string>
   <string name="init_login_popup_invalid_token">Valtuutus epäonnistui, yritä uudestaan</string>
@@ -619,7 +616,7 @@
   <string name="init_sendToCgeo_description"><b>Send2cgeo</b> voit lähettää kätköt Android-laitteeseen suoraan geocaching.com sivulta, käyttäen erityistä laajennusta Firefox- ja Chrome-selaimissa. Ennen rekisteröitymistä, katso <a href="http://send2.cgeo.org/"> http://send2.cgeo.org/</a>. Sinun tarvitsee vain rekisteröityä, jos haluat käyttää send2cgeo. c:geo toimii normaalisti ilman laitteen rekisteröitymistä.</string>
   <string name="init_sendToCgeo_register">Vaatii rekisteröitymisen</string>
   <string name="init_sendToCgeo_registering">Rekisteröidään laitteesi send2cgeo…</string>
-  <string name="init_sendToCgeo_register_ok">Rekisteröinti onnistui. PIN-koodi on ####. Käytä sitä c:geon verkkosivuilla yhdistääksesi tämän laitteen selaimeen.</string>
+  <string name="init_sendToCgeo_register_ok">Rekisteröinti onnistui. PIN-koodi on %d. Käytä sitä c:geon verkkosivuilla yhdistääksesi tämän laitteen selaimeen.</string>
   <string name="init_sendToCgeo_register_fail">Rekisteröinti epäonnistui.</string>
   <string name="sendToCgeo_download_fail">c:geo ei onnistunut lataamaan kätköjä. Ei internet-yhteyttä tai send2cgeo on kaatunut.</string>
   <string name="sendToCgeo_no_registration">c:geo ei onnistunut latamaan kätköjä. Kirjautuminen kohteeseen send2cgeo vanhentunut. Kirjaudu uudelleen asetuksien kautta.</string>

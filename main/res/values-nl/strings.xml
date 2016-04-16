@@ -148,7 +148,6 @@
   <string name="err_unknown">Onbekende fout</string>
   <string name="err_unknown_address">c:geo was niet in staat dit adres te herkennen als bestaande locatie</string>
   <string name="err_comm">Onbekende communicatiefout</string>
-  <string name="err_missing_auth">Geen gebruikersnaam en/of wachtwoord ingesteld.</string>
   <string name="err_maintenance">Geocaching.com is offline voor onderhoud. c:geo werkt offline met opgeslagen caches.</string>
   <string name="err_license">Gebruiker heeft de gebruikersvoorwaarden van Geocaching.com niet geaccepteerd en kan daarom geen coördinaten laden.</string>
   <string name="err_unvalidated_account">Je dient je account eerst te valideren op de Geocaching.com website.</string>
@@ -616,7 +615,7 @@
   <string name="init_sendToCgeo_description"><b>Send2cgeo</b> zorgt ervoor dat je caches direct vanaf de geocaching website kan ontvangen door middel van een plugin in je webbrowser (Chrome of Firefox). Lees het volgende voordat je registreert <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Registratie is alleen nodig als je send2cgeo wil gebruiken. c:geo werkt ook zonder het registreren van je apparaat.</string>
   <string name="init_sendToCgeo_register">Verstuur registratieverzoek</string>
   <string name="init_sendToCgeo_registering">Bezig met het registreren voor send2cgeo…</string>
-  <string name="init_sendToCgeo_register_ok">Registratie gelukt. PIN code is ####. Gebruik dit op de c:geo website om dit apparaat aan je browser toe te voegen.</string>
+  <string name="init_sendToCgeo_register_ok">Registratie gelukt. PIN code is %d. Gebruik dit op de c:geo website om dit apparaat aan je browser toe te voegen.</string>
   <string name="init_sendToCgeo_register_fail">Registratie is niet gelukt.</string>
   <string name="sendToCgeo_download_fail">Het is c:geo niet gelukt om de caches te downloaden. Geen internetverbinding beschikbaar of send2cgeo is niet bereikbaar.</string>
   <string name="sendToCgeo_no_registration">Het is c:geo niet gelukt om de caches te downloaden. De registratie van send2cgeo is verlopen. Registreer s.v.p. in de instellingen.</string>

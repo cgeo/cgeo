@@ -148,7 +148,6 @@
   <string name="err_unknown">Nieznany błąd</string>
   <string name="err_unknown_address">c:geo nie mógł dopasować adresu do istniejącej lokalizacji</string>
   <string name="err_comm">Nieznany błąd w komunikacji</string>
-  <string name="err_missing_auth">Brak nazwy użytkownika i/lub hasła.</string>
   <string name="err_maintenance">Trwają prace serwisowe w Geocaching.com. c:geo pracuje offline z zapisanymi skrzynkami.</string>
   <string name="err_license">Użytkownik nie zaakceptował jeszcze regulaminu Geocaching.com, więc c:geo nie może załadować współrzędnych skrzynek.</string>
   <string name="err_unvalidated_account">Musisz najpierw zatwierdzić swoje konto na stronie Geocaching.com.</string>
@@ -614,7 +613,7 @@
   <string name="init_sendToCgeo_description"><b>Send2cgeo</b> pozwala Tobie odbierać skrzynki bezpośrednio ze strony geocaching.com za pomocą specjalnego pluginu do przeglądarki Firefox lub Chrome. Przed rejestracją prosimy o zapoznanie się z <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Rejestracja jest wymagana tylko jeśli będziesz używać send2cgeo. c:geo będzie normalnie działał również bez rejestracji urządzenia.</string>
   <string name="init_sendToCgeo_register">Poproś o rejestrację</string>
   <string name="init_sendToCgeo_registering">Rejestruję Twoje urządzenie do send2cgeo…</string>
-  <string name="init_sendToCgeo_register_ok">Rejestracja udana. Kod PIN to ####. Użyj go na stronie c:geo, aby dodać urządzenie do przeglądarki.</string>
+  <string name="init_sendToCgeo_register_ok">Rejestracja udana. Kod PIN to %d. Użyj go na stronie c:geo, aby dodać urządzenie do przeglądarki.</string>
   <string name="init_sendToCgeo_register_fail">Rejestracja nie powiodła się.</string>
   <string name="sendToCgeo_download_fail">c:geo nie może pobrać skrzynek. Brak połączenia z internetem lub narzędzie send2cgeo jest wyłączone.</string>
   <string name="sendToCgeo_no_registration">c:geo nie może pobrać skrzynek. Rejestracja do send2cgeo wygasła. Proszę zarejestrować urządzenie w Ustawieniach.</string>
