@@ -51,7 +51,7 @@ public class LiveCachesOverlay extends AbstractCachesOverlay {
         private int previousZoom = -100;
         private Viewport previousViewport;
 
-        public LoadTimerAction(@NonNull final LiveCachesOverlay overlay) {
+        LoadTimerAction(@NonNull final LiveCachesOverlay overlay) {
             this.overlayRef = new WeakReference<>(overlay);
         }
 
@@ -79,7 +79,7 @@ public class LiveCachesOverlay extends AbstractCachesOverlay {
                 if (moved) {
                     final long currentTime = System.currentTimeMillis();
 
-                    if (1000 < (currentTime - overlay.loadThreadRun )) {
+                    if (1000 < (currentTime - overlay.loadThreadRun)) {
                         overlay.downloading = true;
                         previousViewport = viewportNow;
                         overlay.download();

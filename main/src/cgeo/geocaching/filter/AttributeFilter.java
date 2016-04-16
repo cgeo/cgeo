@@ -1,8 +1,8 @@
 package cgeo.geocaching.filter;
 
 import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.R;
+import cgeo.geocaching.models.Geocache;
 
 import org.eclipse.jdt.annotation.NonNull;
 
@@ -17,7 +17,7 @@ class AttributeFilter extends AbstractFilter {
 
     private final String attribute;
 
-    public AttributeFilter(@NonNull final String name, final String attribute) {
+    AttributeFilter(@NonNull final String name, final String attribute) {
         super(name);
         this.attribute = attribute;
     }

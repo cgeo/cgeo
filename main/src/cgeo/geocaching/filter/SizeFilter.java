@@ -1,7 +1,7 @@
 package cgeo.geocaching.filter;
 
-import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.enumerations.CacheSize;
+import cgeo.geocaching.models.Geocache;
 
 import org.eclipse.jdt.annotation.NonNull;
 
@@ -14,7 +14,7 @@ import java.util.List;
 class SizeFilter extends AbstractFilter {
     private final CacheSize cacheSize;
 
-    public SizeFilter(@NonNull final CacheSize cacheSize) {
+    SizeFilter(@NonNull final CacheSize cacheSize) {
         super(cacheSize.id);
         this.cacheSize = cacheSize;
     }

@@ -22,7 +22,7 @@ class GeopointParser {
         final int matcherPos;
         final int matcherLength;
 
-        public ResultWrapper(final double result, final int matcherPos, final int stringLength) {
+        ResultWrapper(final double result, final int matcherPos, final int stringLength) {
             this.result = result;
             this.matcherPos = matcherPos;
             this.matcherLength = stringLength;

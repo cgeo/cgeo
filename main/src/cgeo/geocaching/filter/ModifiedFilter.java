@@ -1,7 +1,7 @@
 package cgeo.geocaching.filter;
 
-import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.R;
+import cgeo.geocaching.models.Geocache;
 
 import org.eclipse.jdt.annotation.NonNull;
 
@@ -13,7 +13,7 @@ import java.util.List;
 
 class ModifiedFilter extends AbstractFilter implements IFilterFactory {
 
-    public ModifiedFilter() {
+    ModifiedFilter() {
         super(R.string.caches_filter_modified);
     }
 

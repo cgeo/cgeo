@@ -141,7 +141,7 @@ public abstract class GPXParser extends FileParser {
     private final class UserDataListener implements EndTextElementListener {
         private final int index;
 
-        public UserDataListener(final int index) {
+        UserDataListener(final int index) {
             this.index = index;
         }
 

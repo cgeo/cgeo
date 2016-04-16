@@ -1,7 +1,5 @@
 package cgeo.geocaching.ui.dialog;
 
-import butterknife.ButterKnife;
-
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.Keyboard;
@@ -44,6 +42,8 @@ import android.widget.TextView;
 import java.lang.ref.WeakReference;
 import java.util.Arrays;
 import java.util.List;
+
+import butterknife.ButterKnife;
 
 public class CoordinatesInputDialog extends DialogFragment {
 
@@ -371,7 +371,7 @@ public class CoordinatesInputDialog extends DialogFragment {
          */
         private final WeakReference<EditText> editTextRef;
 
-        public SwitchToNextFieldWatcher(final EditText editText) {
+        SwitchToNextFieldWatcher(final EditText editText) {
             this.editTextRef = new WeakReference<>(editText);
         }
 

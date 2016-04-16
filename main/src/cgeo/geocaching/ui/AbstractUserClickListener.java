@@ -19,7 +19,7 @@ abstract class AbstractUserClickListener implements View.OnClickListener {
 
     private final List<UserAction> userActions;
 
-    public AbstractUserClickListener(final @NonNull List<UserAction> userActions) {
+    AbstractUserClickListener(final @NonNull List<UserAction> userActions) {
         this.userActions = userActions;
     }
 

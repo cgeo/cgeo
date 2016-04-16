@@ -2,6 +2,16 @@ package cgeo.geocaching.utils;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+
+import java.util.Deque;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicLong;
+import java.util.concurrent.atomic.AtomicReference;
+
 import rx.Observable;
 import rx.Observable.OnSubscribe;
 import rx.Observable.Operator;
@@ -15,15 +25,6 @@ import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
 import rx.subscriptions.Subscriptions;
-
-import java.util.Deque;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.concurrent.atomic.AtomicLong;
-import java.util.concurrent.atomic.AtomicReference;
 
 public class RxUtils {
 
@@ -205,16 +206,16 @@ public class RxUtils {
                     final AtomicLong totalDemand = new AtomicLong(0);
                     final CompositeSubscription innerSubscriptions = new CompositeSubscription();
 
-                    public TProducer() {
+                    TProducer() {
                         innerSubscriptions.add(preferredObservable.subscribe(preferredSubscriber));
                         innerSubscriptions.add(otherObservable.subscribe(otherSubscriber));
                     }
 
                     class TSubscriber extends Subscriber<T> {
 
-                        private Deque<T> fetched = new LinkedList<>();
-                        private AtomicBoolean terminated = new AtomicBoolean(false);
-                        private AtomicLong demanded = new AtomicLong(1);
+                        private final Deque<T> fetched = new LinkedList<>();
+                        private final AtomicBoolean terminated = new AtomicBoolean(false);
+                        private final AtomicLong demanded = new AtomicLong(1);
                         private final long extra;
 
                         TSubscriber(final long extra) {

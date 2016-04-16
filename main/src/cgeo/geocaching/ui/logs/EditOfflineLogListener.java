@@ -11,7 +11,7 @@ class EditOfflineLogListener implements OnClickListener {
     private final Geocache cache;
     private final CacheDetailActivity activity;
 
-    public EditOfflineLogListener(final Geocache cache, final CacheDetailActivity activity) {
+    EditOfflineLogListener(final Geocache cache, final CacheDetailActivity activity) {
         this.cache = cache;
         this.activity = activity;
     }

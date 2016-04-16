@@ -1061,9 +1061,11 @@ public class Settings {
 
     private static class ExtensionsBasedFileSelector implements FileSelector {
         private final String[] extensions;
-        public ExtensionsBasedFileSelector(final String[] extensions) {
+
+        ExtensionsBasedFileSelector(final String[] extensions) {
             this.extensions = extensions;
         }
+
         @Override
         public boolean isSelected(final File file) {
             final String filename = file.getName();
@@ -1074,6 +1076,7 @@ public class Settings {
             }
             return false;
         }
+
         @Override
         public boolean shouldEnd() {
             return false;

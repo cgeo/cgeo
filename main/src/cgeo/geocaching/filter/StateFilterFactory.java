@@ -49,7 +49,7 @@ class StateFilterFactory implements IFilterFactory {
 
     static class StateFoundFilter extends AbstractFilter {
 
-        public StateFoundFilter() {
+        StateFoundFilter() {
             super(R.string.cache_status_found);
         }
 
@@ -79,7 +79,7 @@ class StateFilterFactory implements IFilterFactory {
 
     static class StateNotFoundFilter extends AbstractFilter {
 
-        public StateNotFoundFilter() {
+        StateNotFoundFilter() {
             super(R.string.cache_not_status_found);
         }
 
@@ -109,7 +109,7 @@ class StateFilterFactory implements IFilterFactory {
 
     static class StateNeverFoundFilter extends AbstractFilter {
 
-        public StateNeverFoundFilter() {
+        StateNeverFoundFilter() {
             super(R.string.cache_never_found);
         }
 
@@ -150,7 +150,7 @@ class StateFilterFactory implements IFilterFactory {
         private static final double THIRTY_DAYS_MSECS = 30d * 86400d * 1000d;
         private final long today;
 
-        public StateFoundLastMonthFilter() {
+        StateFoundLastMonthFilter() {
             super(R.string.cache_found_last_30_days);
             today = Calendar.getInstance().getTimeInMillis();
         }
@@ -195,7 +195,7 @@ class StateFilterFactory implements IFilterFactory {
 
     static class StateArchivedFilter extends AbstractFilter {
 
-        public StateArchivedFilter() {
+        StateArchivedFilter() {
             super(R.string.cache_status_archived);
         }
 
@@ -225,7 +225,7 @@ class StateFilterFactory implements IFilterFactory {
 
     static class StateDisabledFilter extends AbstractFilter {
 
-        public StateDisabledFilter() {
+        StateDisabledFilter() {
             super(R.string.cache_status_disabled);
         }
 
@@ -255,7 +255,7 @@ class StateFilterFactory implements IFilterFactory {
 
     static class StatePremiumFilter extends AbstractFilter {
 
-        public StatePremiumFilter() {
+        StatePremiumFilter() {
             super(R.string.cache_status_premium);
         }
 
@@ -285,7 +285,7 @@ class StateFilterFactory implements IFilterFactory {
 
     static class StateNonPremiumFilter extends AbstractFilter {
 
-        public StateNonPremiumFilter() {
+        StateNonPremiumFilter() {
             super(R.string.cache_status_not_premium);
         }
 
@@ -315,7 +315,7 @@ class StateFilterFactory implements IFilterFactory {
 
     static class StateStoredFilter extends AbstractFilter {
 
-        public StateStoredFilter() {
+        StateStoredFilter() {
             super(R.string.cache_status_stored);
         }
 
@@ -345,7 +345,7 @@ class StateFilterFactory implements IFilterFactory {
 
     static class StateNotStoredFilter extends AbstractFilter {
 
-        public StateNotStoredFilter() {
+        StateNotStoredFilter() {
             super(R.string.cache_status_not_stored);
         }
 

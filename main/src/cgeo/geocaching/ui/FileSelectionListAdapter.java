@@ -1,7 +1,5 @@
 package cgeo.geocaching.ui;
 
-import butterknife.Bind;
-
 import cgeo.geocaching.R;
 import cgeo.geocaching.files.IFileSelectionView;
 import cgeo.geocaching.utils.Log;
@@ -16,6 +14,8 @@ import android.widget.TextView;
 
 import java.io.File;
 import java.util.List;
+
+import butterknife.Bind;
 
 public class FileSelectionListAdapter extends ArrayAdapter<File> {
 
@@ -67,7 +67,7 @@ public class FileSelectionListAdapter extends ArrayAdapter<File> {
     private class TouchListener implements View.OnClickListener {
         private File file = null;
 
-        public TouchListener(final File fileIn) {
+        TouchListener(final File fileIn) {
             file = fileIn;
         }
 

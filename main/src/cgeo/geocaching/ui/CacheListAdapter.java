@@ -535,7 +535,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
 
         private final Geocache cache;
 
-        public SelectionCheckBoxListener(final Geocache cache) {
+        SelectionCheckBoxListener(final Geocache cache) {
             this.cache = cache;
         }
 
@@ -553,7 +553,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
         private final GestureDetector gestureDetector;
         private final @NonNull WeakReference<CacheListAdapter> adapterRef;
 
-        public TouchListener(final Geocache cache, final @NonNull CacheListAdapter adapter) {
+        TouchListener(final Geocache cache, final @NonNull CacheListAdapter adapter) {
             this.cache = cache;
             gestureDetector = new GestureDetector(adapter.getContext(), new FlingGesture(cache, adapter));
             adapterRef = new WeakReference<>(adapter);
@@ -595,7 +595,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
         private final Geocache cache;
         private final @NonNull WeakReference<CacheListAdapter> adapterRef;
 
-        public FlingGesture(final Geocache cache, final @NonNull CacheListAdapter adapter) {
+        FlingGesture(final Geocache cache, final @NonNull CacheListAdapter adapter) {
             this.cache = cache;
             adapterRef = new WeakReference<>(adapter);
         }

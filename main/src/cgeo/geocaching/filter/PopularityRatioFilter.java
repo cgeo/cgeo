@@ -1,10 +1,10 @@
 package cgeo.geocaching.filter;
 
 import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.LogType;
+import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.storage.DataStore;
 
 import org.eclipse.jdt.annotation.NonNull;
 
@@ -21,7 +21,7 @@ class PopularityRatioFilter extends AbstractFilter {
     private final int minRatio;
     private final int maxRatio;
 
-    public PopularityRatioFilter(@NonNull final String name, final int minRatio, final int maxRatio) {
+    PopularityRatioFilter(@NonNull final String name, final int minRatio, final int maxRatio) {
         super(name);
         this.minRatio = minRatio;
         this.maxRatio = maxRatio;

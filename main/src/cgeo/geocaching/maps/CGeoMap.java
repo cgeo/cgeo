@@ -1,52 +1,5 @@
 package cgeo.geocaching.maps;
 
-import android.annotation.TargetApi;
-import android.app.ActionBar;
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.res.Resources;
-import android.location.Location;
-import android.os.Build;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.SubMenu;
-import android.view.View;
-import android.view.ViewGroup.LayoutParams;
-import android.widget.CheckBox;
-import android.widget.ImageSwitcher;
-import android.widget.ImageView;
-import android.widget.ImageView.ScaleType;
-import android.widget.ProgressBar;
-import android.widget.TextView;
-import android.widget.ViewSwitcher.ViewFactory;
-
-import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
-
-import java.io.File;
-import java.lang.ref.WeakReference;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.EnumSet;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
-
-import butterknife.ButterKnife;
 import cgeo.geocaching.CacheListActivity;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.CompassActivity;
@@ -91,6 +44,54 @@ import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.LeastRecentlyUsedSet;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapUtils;
+
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+
+import android.annotation.TargetApi;
+import android.app.ActionBar;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.res.Resources;
+import android.location.Location;
+import android.os.Build;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.SubMenu;
+import android.view.View;
+import android.view.ViewGroup.LayoutParams;
+import android.widget.CheckBox;
+import android.widget.ImageSwitcher;
+import android.widget.ImageView;
+import android.widget.ImageView.ScaleType;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.ViewSwitcher.ViewFactory;
+
+import java.io.File;
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.EnumSet;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+
+import butterknife.ButterKnife;
 import rx.Subscription;
 import rx.functions.Action0;
 import rx.functions.Action1;
@@ -207,7 +208,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
         private final WeakReference<CGeoMap> mapRef;
 
-        public DisplayHandler(@NonNull final CGeoMap map) {
+        DisplayHandler(@NonNull final CGeoMap map) {
             this.mapRef = new WeakReference<>(map);
         }
         @Override
@@ -341,7 +342,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
         @NonNull private final WeakReference<CGeoMap> mapRef;
 
-        public ShowProgressHandler(@NonNull final CGeoMap map) {
+        ShowProgressHandler(@NonNull final CGeoMap map) {
             this.mapRef = new WeakReference<>(map);
         }
 
@@ -1067,7 +1068,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
          */
         private final WeakReference<CGeoMap> mapRef;
 
-        public UpdateLoc(final CGeoMap map) {
+        UpdateLoc(final CGeoMap map) {
             mapRef = new WeakReference<>(map);
         }
 
@@ -1166,7 +1167,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         private int previousZoom = -100;
         private Viewport previousViewport;
 
-        public LoadTimerAction(@NonNull final CGeoMap map) {
+        LoadTimerAction(@NonNull final CGeoMap map) {
             this.mapRef = new WeakReference<>(map);
         }
 
@@ -1229,7 +1230,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
     private static class LoadRunnable extends DoRunnable {
 
-        public LoadRunnable(@NonNull final CGeoMap map) {
+        LoadRunnable(@NonNull final CGeoMap map) {
             super(map);
         }
 
@@ -1314,7 +1315,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
     private static class DownloadRunnable extends DoRunnable {
 
-        public DownloadRunnable(final CGeoMap map) {
+        DownloadRunnable(final CGeoMap map) {
             super(map);
         }
 
@@ -1366,7 +1367,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
      */
     private static class DisplayRunnable extends DoRunnable {
 
-        public DisplayRunnable(@NonNull final CGeoMap map) {
+        DisplayRunnable(@NonNull final CGeoMap map) {
             super(map);
         }
 
@@ -1506,7 +1507,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         final private List<String> geocodes;
         final private int listId;
 
-        public LoadDetails(final CancellableHandler handler, final List<String> geocodes, final int listId) {
+        LoadDetails(final CancellableHandler handler, final List<String> geocodes, final int listId) {
             this.handler = handler;
             this.geocodes = geocodes;
             this.listId = listId;
@@ -1652,7 +1653,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
         private final WeakReference<CGeoMap> mapRef;
 
-        public MyLocationListener(@NonNull final CGeoMap map) {
+        MyLocationListener(@NonNull final CGeoMap map) {
             mapRef = new WeakReference<>(map);
         }
 

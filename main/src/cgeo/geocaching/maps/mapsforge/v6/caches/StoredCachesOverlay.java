@@ -40,7 +40,7 @@ public class StoredCachesOverlay extends AbstractCachesOverlay {
         private int previousZoom = -100;
         private Viewport previousViewport;
 
-        public LoadTimerAction(@NonNull final StoredCachesOverlay overlay) {
+        LoadTimerAction(@NonNull final StoredCachesOverlay overlay) {
             this.overlayRef = new WeakReference<>(overlay);
         }
 

@@ -124,7 +124,7 @@ public class FieldnoteExport extends AbstractExport {
          * @param onlyNew
          *            Upload/export only new logs since last export
          */
-        public ExportTask(@Nullable final Activity activity, final boolean upload, final boolean onlyNew) {
+        ExportTask(@Nullable final Activity activity, final boolean upload, final boolean onlyNew) {
             super(activity, getProgressTitle(), CgeoApplication.getInstance().getString(R.string.export_fieldnotes_creating), true);
             this.upload = upload;
             this.onlyNew = onlyNew;

@@ -1,9 +1,6 @@
 package cgeo.geocaching.maps;
 
 import cgeo.geocaching.CachePopup;
-import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.models.IWaypoint;
 import cgeo.geocaching.R;
 import cgeo.geocaching.WaypointPopup;
 import cgeo.geocaching.activity.Progress;
@@ -20,7 +17,10 @@ import cgeo.geocaching.maps.interfaces.MapItemFactory;
 import cgeo.geocaching.maps.interfaces.MapProjectionImpl;
 import cgeo.geocaching.maps.interfaces.MapProvider;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
+import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.IWaypoint;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
@@ -281,7 +281,7 @@ public class CachesOverlay extends AbstractItemizedOverlay {
 
         private final @NonNull Geocache cache;
 
-        public RequestDetailsThread(final @NonNull Geocache cache) {
+        RequestDetailsThread(final @NonNull Geocache cache) {
             this.cache = cache;
         }
 

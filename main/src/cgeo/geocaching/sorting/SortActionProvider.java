@@ -5,8 +5,6 @@ import cgeo.geocaching.utils.Log;
 
 import org.eclipse.jdt.annotation.NonNull;
 
-import rx.functions.Action1;
-
 import android.content.Context;
 import android.support.annotation.StringRes;
 import android.support.v4.view.ActionProvider;
@@ -18,6 +16,8 @@ import android.view.View;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+
+import rx.functions.Action1;
 
 /**
  * Provides a sub menu for sorting caches. Register your listener in the onCreateOptionsMenu of the containing activity.
@@ -44,7 +44,7 @@ public class SortActionProvider extends ActionProvider implements OnMenuItemClic
         private final String name;
         private final Class<? extends CacheComparator> cacheComparator;
 
-        public ComparatorEntry(final String name, final Class<? extends CacheComparator> cacheComparator) {
+        ComparatorEntry(final String name, final Class<? extends CacheComparator> cacheComparator) {
             this.name = name;
             this.cacheComparator = cacheComparator;
         }

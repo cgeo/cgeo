@@ -30,7 +30,7 @@ public class GeoitemRef {
         if (!(o instanceof GeoitemRef)) {
             return false;
         }
-        return (StringUtils.equalsIgnoreCase(this.itemCode, ((GeoitemRef) o).itemCode));
+        return StringUtils.equalsIgnoreCase(this.itemCode, ((GeoitemRef) o).itemCode);
     }
 
     @Override

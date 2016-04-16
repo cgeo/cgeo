@@ -13,7 +13,7 @@ import java.io.InputStream;
 class ImportGpxZipFileThread extends AbstractImportGpxZipThread {
     private final File cacheFile;
 
-    public ImportGpxZipFileThread(final File file, final int listId, final Handler importStepHandler, final CancellableHandler progressHandler) {
+    ImportGpxZipFileThread(final File file, final int listId, final Handler importStepHandler, final CancellableHandler progressHandler) {
         super(listId, importStepHandler, progressHandler);
         this.cacheFile = file;
         Log.i("Import zipped GPX: " + file);

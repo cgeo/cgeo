@@ -503,7 +503,7 @@ public class DataStore {
 
     private static class DBContext extends ContextWrapper {
 
-        public DBContext(final Context base) {
+        DBContext(final Context base) {
             super(base);
         }
 

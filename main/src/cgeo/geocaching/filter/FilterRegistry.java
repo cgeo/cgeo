@@ -26,7 +26,7 @@ public class FilterRegistry {
         private final String name;
         private final @NonNull Class<? extends IFilterFactory> filterFactory;
 
-        public FactoryEntry(final String name, final @NonNull Class<? extends IFilterFactory> filterFactory) {
+        FactoryEntry(final String name, final @NonNull Class<? extends IFilterFactory> filterFactory) {
             this.name = name;
             this.filterFactory = filterFactory;
         }

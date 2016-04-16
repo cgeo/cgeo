@@ -10,17 +10,21 @@ public class GeoEntry {
     public final String geocode;
     public final int overlayId;
 
-    public GeoEntry(@NonNull String geocode, int overlayId) {
+    public GeoEntry(@NonNull final String geocode, final int overlayId) {
         this.geocode = geocode;
         this.overlayId = overlayId;
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
-        GeoEntry geoEntry = (GeoEntry) o;
+        final GeoEntry geoEntry = (GeoEntry) o;
 
         return geocode.equals(geoEntry.geocode);
 

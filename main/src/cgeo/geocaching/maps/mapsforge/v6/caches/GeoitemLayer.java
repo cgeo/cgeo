@@ -45,8 +45,7 @@ public class GeoitemLayer extends Marker {
         return item;
     }
 
-    public String getItemCode()
-    {
+    public String getItemCode() {
         return item.getItemCode();
     }
 

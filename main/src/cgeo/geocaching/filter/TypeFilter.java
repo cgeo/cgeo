@@ -1,7 +1,7 @@
 package cgeo.geocaching.filter;
 
-import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.models.Geocache;
 
 import org.eclipse.jdt.annotation.NonNull;
 
@@ -14,7 +14,7 @@ import java.util.List;
 class TypeFilter extends AbstractFilter {
     private final CacheType cacheType;
 
-    public TypeFilter(@NonNull final CacheType cacheType) {
+    TypeFilter(@NonNull final CacheType cacheType) {
         super(cacheType.id);
         this.cacheType = cacheType;
     }

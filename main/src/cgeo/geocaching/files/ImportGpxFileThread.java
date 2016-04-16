@@ -1,7 +1,7 @@
 package cgeo.geocaching.files;
 
-import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.R;
+import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.Log;
 
@@ -14,7 +14,7 @@ import java.util.Collection;
 class ImportGpxFileThread extends AbstractImportGpxThread {
     private final File cacheFile;
 
-    public ImportGpxFileThread(final File file, final int listId, final Handler importStepHandler, final CancellableHandler progressHandler) {
+    ImportGpxFileThread(final File file, final int listId, final Handler importStepHandler, final CancellableHandler progressHandler) {
         super(listId, importStepHandler, progressHandler);
         this.cacheFile = file;
     }

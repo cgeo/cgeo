@@ -1,9 +1,9 @@
 package cgeo.geocaching.filter;
 
 import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.Sensors;
 
@@ -20,7 +20,7 @@ class DistanceFilter extends AbstractFilter {
     private final int minDistance;
     private final int maxDistance;
 
-    public DistanceFilter(@NonNull final String name, final int minDistance, final int maxDistance) {
+    DistanceFilter(@NonNull final String name, final int minDistance, final int maxDistance) {
         super(name);
         this.minDistance = minDistance;
         this.maxDistance = maxDistance;

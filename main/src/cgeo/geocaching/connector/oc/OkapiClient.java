@@ -943,7 +943,7 @@ final class OkapiClient {
         public final boolean isSuccess;
         public final ObjectNode data;
 
-        public JSONResult(final Response response) {
+        JSONResult(final Response response) {
             ObjectNode tempData = null;
             try {
                 tempData = (ObjectNode) JsonUtils.reader.readTree(response.body().string());
@@ -954,7 +954,7 @@ final class OkapiClient {
             isSuccess = response.isSuccessful() && tempData != null;
         }
 
-        public JSONResult(final @NonNull String errorMessage) {
+        JSONResult(final @NonNull String errorMessage) {
             isSuccess = false;
             data = new ObjectNode(JsonUtils.factory);
             data.putObject("error").put("developer_message", errorMessage);

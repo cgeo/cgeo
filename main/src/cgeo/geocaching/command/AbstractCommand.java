@@ -31,7 +31,7 @@ abstract class AbstractCommand implements Command {
         }
     }
 
-    public AbstractCommand(final Activity context) {
+    AbstractCommand(final Activity context) {
         this(context, 0);
     }
 

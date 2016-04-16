@@ -1,8 +1,8 @@
 package cgeo.geocaching.filter;
 
 import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.R;
+import cgeo.geocaching.models.Geocache;
 
 import org.eclipse.jdt.annotation.NonNull;
 
@@ -16,7 +16,7 @@ class PopularityFilter extends AbstractFilter {
     private final int minFavorites;
     private final int maxFavorites;
 
-    public PopularityFilter(@NonNull final String name, final int minFavorites, final int maxFavorites) {
+    PopularityFilter(@NonNull final String name, final int minFavorites, final int maxFavorites) {
         super(name);
         this.minFavorites = minFavorites;
         this.maxFavorites = maxFavorites;

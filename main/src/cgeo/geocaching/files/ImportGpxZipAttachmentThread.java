@@ -16,7 +16,7 @@ class ImportGpxZipAttachmentThread extends AbstractImportGpxZipThread {
     private final Uri uri;
     private final ContentResolver contentResolver;
 
-    public ImportGpxZipAttachmentThread(final Uri uri, final ContentResolver contentResolver, final int listId, final Handler importStepHandler, final CancellableHandler progressHandler) {
+    ImportGpxZipAttachmentThread(final Uri uri, final ContentResolver contentResolver, final int listId, final Handler importStepHandler, final CancellableHandler progressHandler) {
         super(listId, importStepHandler, progressHandler);
         this.uri = uri;
         this.contentResolver = contentResolver;

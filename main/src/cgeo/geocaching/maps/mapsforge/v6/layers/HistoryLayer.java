@@ -82,8 +82,8 @@ public class HistoryLayer extends Layer {
 //                    historyLineShadow.setAlpha(alpha);
 //                    historyLine.setAlpha(alpha);
 
-                    canvas.drawLine( (int)pointPrevious.x, (int)pointPrevious.y, (int)pointNow.x, (int)pointNow.y, historyLineShadow);
-                    canvas.drawLine( (int)pointPrevious.x, (int)pointPrevious.y, (int)pointNow.x, (int)pointNow.y, historyLine);
+                    canvas.drawLine((int) pointPrevious.x, (int) pointPrevious.y, (int) pointNow.x, (int) pointNow.y, historyLineShadow);
+                    canvas.drawLine((int) pointPrevious.x, (int) pointPrevious.y, (int) pointNow.x, (int) pointNow.y, historyLine);
 
                     pointPrevious = pointNow;
                 }

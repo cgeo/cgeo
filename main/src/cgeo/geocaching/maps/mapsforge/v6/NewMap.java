@@ -700,7 +700,7 @@ public class NewMap extends AbstractActionBarActivity {
         }
 
 
-        public MyLocationListener(@NonNull final NewMap map) {
+        MyLocationListener(@NonNull final NewMap map) {
             mapRef = new WeakReference<>(map);
         }
 
@@ -731,7 +731,7 @@ public class NewMap extends AbstractActionBarActivity {
 
         private final WeakReference<NewMap> mapRef;
 
-        public DisplayHandler(@NonNull final NewMap map) {
+        DisplayHandler(@NonNull final NewMap map) {
             this.mapRef = new WeakReference<>(map);
         }
 
@@ -810,8 +810,7 @@ public class NewMap extends AbstractActionBarActivity {
 
             if (visible != total && Settings.isDebug()) {
                 subtitle.append(visible).append('/').append(res.getQuantityString(R.plurals.cache_counts, total, total));
-            }
-            else {
+            } else {
                 subtitle.append(res.getQuantityString(R.plurals.cache_counts, visible, visible));
             }
         }
@@ -851,7 +850,7 @@ public class NewMap extends AbstractActionBarActivity {
 
         @NonNull private final WeakReference<NewMap> mapRef;
 
-        public ShowProgressHandler(@NonNull final NewMap map) {
+        ShowProgressHandler(@NonNull final NewMap map) {
             this.mapRef = new WeakReference<>(map);
         }
 
@@ -939,7 +938,7 @@ public class NewMap extends AbstractActionBarActivity {
          */
         private final WeakReference<NewMap> mapRef;
 
-        public UpdateLoc(final NewMap map) {
+        UpdateLoc(final NewMap map) {
             mapRef = new WeakReference<>(map);
         }
 
@@ -1028,7 +1027,7 @@ public class NewMap extends AbstractActionBarActivity {
 
         private final WeakReference<NewMap> mapRef;
 
-        public DragHandler(final NewMap parent) {
+        DragHandler(final NewMap parent) {
             mapRef = new WeakReference<>(parent);
         }
 
@@ -1060,7 +1059,7 @@ public class NewMap extends AbstractActionBarActivity {
                     public View getView(final int position, final View convertView, final ViewGroup parent) {
                         //Use super class to create the View
                         final View v = super.getView(position, convertView, parent);
-                        final TextView tv = (TextView)v.findViewById(android.R.id.text1);
+                        final TextView tv = (TextView) v.findViewById(android.R.id.text1);
 
                         //Put the image on the TextView
                         tv.setCompoundDrawablesWithIntrinsicBounds(items.get(position).getMarkerId(), 0, 0, 0);
@@ -1091,7 +1090,7 @@ public class NewMap extends AbstractActionBarActivity {
 
         private final ArrayList<GeoitemRef> items;
 
-        public SelectionClickListener(final ArrayList<GeoitemRef> items) {
+        SelectionClickListener(final ArrayList<GeoitemRef> items) {
             this.items = items;
         }
 
@@ -1165,7 +1164,7 @@ public class NewMap extends AbstractActionBarActivity {
         private final @NonNull Geocache cache;
         private final @NonNull WeakReference<NewMap> map;
 
-        public RequestDetailsThread(final @NonNull Geocache cache, final @NonNull NewMap map) {
+        RequestDetailsThread(final @NonNull Geocache cache, final @NonNull NewMap map) {
             this.cache = cache;
             this.map = new WeakReference<>(map);
         }

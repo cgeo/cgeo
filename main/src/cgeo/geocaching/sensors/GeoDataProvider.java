@@ -1,16 +1,10 @@
 package cgeo.geocaching.sensors;
 
-import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.RxUtils.DelayedUnsubscription;
 
 import org.apache.commons.lang3.StringUtils;
-
-import rx.Observable;
-import rx.Observable.OnSubscribe;
-import rx.Subscriber;
-import rx.functions.Action0;
-import rx.subscriptions.Subscriptions;
 
 import android.content.Context;
 import android.location.Location;
@@ -20,6 +14,12 @@ import android.os.Bundle;
 
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
+
+import rx.Observable;
+import rx.Observable.OnSubscribe;
+import rx.Subscriber;
+import rx.functions.Action0;
+import rx.subscriptions.Subscriptions;
 
 public class GeoDataProvider {
 
@@ -72,7 +72,7 @@ public class GeoDataProvider {
         final Subscriber<? super GeoData> subscriber;
         final AtomicReference<Location> latestGPSLocation;
 
-        public Listener(final Subscriber<? super GeoData> subscriber, final AtomicReference<Location> latestGPSLocation) {
+        Listener(final Subscriber<? super GeoData> subscriber, final AtomicReference<Location> latestGPSLocation) {
             this.subscriber = subscriber;
             this.latestGPSLocation = latestGPSLocation;
         }

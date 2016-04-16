@@ -238,7 +238,7 @@ public class GeokretyParser {
         private final List<String> errors;
         private String text;
 
-        public GeokretyRuchyXmlParser() {
+        GeokretyRuchyXmlParser() {
             errors = new ArrayList<>();
             gkid = 0;
         }
