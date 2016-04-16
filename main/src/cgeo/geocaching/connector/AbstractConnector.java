@@ -216,8 +216,7 @@ public abstract class AbstractConnector implements IConnector {
             logTypes.add(LogType.OWNER_MAINTENANCE);
             if (geocache.isDisabled()) {
                 logTypes.add(LogType.ENABLE_LISTING);
-            }
-            else {
+            } else {
                 logTypes.add(LogType.TEMP_DISABLE_LISTING);
             }
             logTypes.add(LogType.ARCHIVE);

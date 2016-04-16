@@ -125,8 +125,7 @@ public class PositionDrawer {
                     final int alpha;
                     if ((alphaCnt - cnt) > 0) {
                         alpha = 255 / (alphaCnt - cnt);
-                    }
-                    else {
+                    } else {
                         alpha = 255;
                     }
 

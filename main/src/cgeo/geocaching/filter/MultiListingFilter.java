@@ -46,8 +46,7 @@ public class MultiListingFilter extends AbstractFilter {
                         filtered.add(current);
                         filtered.add(next);
                     }
-                }
-                else {
+                } else {
                     break;
                 }
             }

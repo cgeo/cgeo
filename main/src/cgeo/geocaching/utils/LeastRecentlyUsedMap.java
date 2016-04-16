@@ -31,7 +31,7 @@ public abstract class LeastRecentlyUsedMap<K, V> extends LinkedHashMap<K, V> {
     final float loadFactor;
 
     protected LeastRecentlyUsedMap(final int maxEntries, final int initialCapacity, final float loadFactor, final OperationModes opMode) {
-        super(initialCapacity, loadFactor, (opMode==OperationModes.LRU_CACHE));
+        super(initialCapacity, loadFactor, opMode==OperationModes.LRU_CACHE);
         this.initialCapacity = initialCapacity;
         this.loadFactor = loadFactor;
         this.maxEntries = maxEntries;

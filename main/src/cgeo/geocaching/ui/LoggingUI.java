@@ -64,7 +64,7 @@ public final class LoggingUI extends AbstractUIFactory {
             this.stringId = stringId;
         }
 
-        public final String getL10n() {
+        public String getL10n() {
             return res.getString(stringId);
         }
     }

@@ -701,7 +701,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             if (msg.what == UPDATE_LOAD_PROGRESS_DETAIL && msg.obj instanceof String) {
                 updateStatusMsg((String) msg.obj);
             } else {
-                final CacheDetailActivity activity = ((CacheDetailActivity) activityRef.get());
+                final CacheDetailActivity activity = (CacheDetailActivity) activityRef.get();
                 if (activity == null) {
                     return;
                 }
@@ -731,7 +731,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         }
 
         private void updateStatusMsg(final String msg) {
-            final CacheDetailActivity activity = ((CacheDetailActivity) activityRef.get());
+            final CacheDetailActivity activity = (CacheDetailActivity) activityRef.get();
             if (activity == null) {
                 return;
             }
@@ -1044,7 +1044,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             final String license = connector.getLicenseText(cache);
             if (StringUtils.isNotBlank(license)) {
                 view.findViewById(R.id.license_box).setVisibility(View.VISIBLE);
-                final TextView licenseView = (ButterKnife.findById(view, R.id.license));
+                final TextView licenseView = ButterKnife.findById(view, R.id.license);
                 licenseView.setText(Html.fromHtml(license), BufferType.SPANNABLE);
                 licenseView.setClickable(true);
                 licenseView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
@@ -1087,17 +1087,18 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 return;
             }
             final StringBuilder text = new StringBuilder();
-            for (String attributeName : attributes) {
+            for (final String attributeName : attributes) {
                 final boolean enabled = CacheAttribute.isEnabled(attributeName);
                 // search for a translation of the attribute
                 final CacheAttribute attrib = CacheAttribute.getByRawName(CacheAttribute.trimAttributeName(attributeName));
+                String attributeNameL10n = attributeName;
                 if (attrib != null) {
-                    attributeName = attrib.getL10n(enabled);
+                    attributeNameL10n = attrib.getL10n(enabled);
                 }
                 if (text.length() > 0) {
                     text.append('\n');
                 }
-                text.append(attributeName);
+                text.append(attributeNameL10n);
             }
             attribView.setText(text);
             if (ButterKnife.findById(view, R.id.attributes_grid).getVisibility() == View.VISIBLE) {
@@ -1485,13 +1486,12 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 hintBoxView.setVisibility(View.GONE);
             }
 
-            final TextView hintView = (ButterKnife.findById(view, R.id.hint));
+            final TextView hintView = ButterKnife.findById(view, R.id.hint);
             if (StringUtils.isNotBlank(cache.getHint())) {
                 if (TextUtils.containsHtml(cache.getHint())) {
                     hintView.setText(Html.fromHtml(cache.getHint(), new HtmlImage(cache.getGeocode(), false, false, false), null), TextView.BufferType.SPANNABLE);
                     hintView.setText(CryptUtils.rot13((Spannable) hintView.getText()));
-                }
-                else {
+                } else {
                     hintView.setText(CryptUtils.rot13(cache.getHint()));
                 }
                 hintView.setVisibility(View.VISIBLE);
@@ -1508,7 +1508,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 hintBoxView.setOnClickListener(null);
             }
 
-            final TextView spoilerlinkView = (ButterKnife.findById(view, R.id.hint_spoilerlink));
+            final TextView spoilerlinkView = ButterKnife.findById(view, R.id.hint_spoilerlink);
             if (CollectionUtils.isNotEmpty(cache.getSpoilers())) {
                 spoilerlinkView.setVisibility(View.VISIBLE);
                 spoilerlinkView.setClickable(true);
@@ -1754,8 +1754,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 coordinatesView.setOnClickListener(new CoordinatesFormatSwitcher(coordinates));
                 coordinatesView.setText(coordinates.toString());
                 coordinatesView.setVisibility(View.VISIBLE);
-            }
-            else {
+            } else {
                 coordinatesView.setVisibility(View.GONE);
             }
 
@@ -1765,8 +1764,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             if (StringUtils.isNotBlank(waypointInfo)) {
                 infoView.setText(waypointInfo);
                 infoView.setVisibility(View.VISIBLE);
-            }
-            else {
+            } else {
                 infoView.setVisibility(View.GONE);
             }
 
@@ -1798,12 +1796,10 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 noteView.setVisibility(View.VISIBLE);
                 if (TextUtils.containsHtml(wpt.getNote())) {
                     noteView.setText(Html.fromHtml(wpt.getNote(), new SmileyImage(cache.getGeocode(), noteView), new UnknownTagsHandler()), TextView.BufferType.SPANNABLE);
-                }
-                else {
+                } else {
                     noteView.setText(wpt.getNote());
                 }
-            }
-            else {
+            } else {
                 noteView.setVisibility(View.GONE);
             }
 
@@ -1931,7 +1927,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         public boolean onMenuItemClick(final MenuItem menuItem) {
             final int startSelection= selectedTextView.getSelectionStart();
             final int endSelection= selectedTextView.getSelectionEnd();
-            clickedItemText = selectedTextView.getText().subSequence(startSelection,endSelection);
+            clickedItemText = selectedTextView.getText().subSequence(startSelection, endSelection);
             return onClipboardItemSelected(mActionMode, menuItem, clickedItemText);
         }
     }
@@ -2324,7 +2320,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     }
 
     private static void notifyDataSetChanged(final WeakReference<AbstractActivity> activityRef) {
-        final CacheDetailActivity activity = ((CacheDetailActivity) activityRef.get());
+        final CacheDetailActivity activity = (CacheDetailActivity) activityRef.get();
         if (activity != null) {
             activity.notifyDataSetChanged();
         }

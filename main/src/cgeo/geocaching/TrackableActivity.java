@@ -517,8 +517,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
                         public void onClick(final View arg0) {
                             if (StringUtils.isNotBlank(trackable.getSpottedGuid())) {
                                 CacheDetailActivity.startActivityGuid(TrackableActivity.this, trackable.getSpottedGuid(), trackable.getSpottedName());
-                            }
-                            else {
+                            } else {
                                 // for GeoKrety we only know the cache geocode
                                 final String cacheCode = trackable.getSpottedName();
                                 if (ConnectorFactory.canHandle(cacheCode)) {
@@ -634,7 +633,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
                 clickedItemText = ((TextView) view).getText();
                 switch (viewId) {
                     case R.id.value: // name, TB-code, origin, released, distance
-                        final TextView textView = ButterKnife.findById(((View) view.getParent()), R.id.name);
+                        final TextView textView = ButterKnife.findById((View) view.getParent(), R.id.name);
                         final CharSequence itemTitle = textView.getText();
                         buildDetailsContextMenu(actionMode, menu, itemTitle, true);
                         return true;

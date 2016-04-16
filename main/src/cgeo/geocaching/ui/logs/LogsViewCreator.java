@@ -108,8 +108,7 @@ public abstract class LogsViewCreator extends AbstractCachingListViewPageViewCre
         if (marker != 0) {
             holder.marker.setVisibility(View.VISIBLE);
             holder.marker.setImageResource(marker);
-        }
-        else {
+        } else {
             holder.marker.setVisibility(View.GONE);
         }
 

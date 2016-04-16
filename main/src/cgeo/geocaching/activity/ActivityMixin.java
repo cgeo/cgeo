@@ -149,8 +149,7 @@ public final class ActivityMixin {
     public static void invalidateOptionsMenu(final Activity activity) {
         if (activity instanceof ActionBarActivity) {
             ((ActionBarActivity) activity).supportInvalidateOptionsMenu();
-        }
-        else {
+        } else {
             ActivityCompat.invalidateOptionsMenu(activity);
         }
     }

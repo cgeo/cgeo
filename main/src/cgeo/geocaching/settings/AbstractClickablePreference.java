@@ -31,7 +31,7 @@ abstract class AbstractClickablePreference extends Preference implements View.On
     protected View onCreateView(final ViewGroup parent) {
         setOnPreferenceClickListener(getOnPreferenceClickListener(activity));
 
-        final ListView listView = (ListView)parent;
+        final ListView listView = (ListView) parent;
         listView.setOnItemLongClickListener(new ListView.OnItemLongClickListener() {
 
             @Override

@@ -98,14 +98,14 @@ public class DataStore {
         DATABASE,
     }
 
-    private static final Func1<Cursor,String> GET_STRING_0 = new Func1<Cursor, String>() {
+    private static final Func1<Cursor, String> GET_STRING_0 = new Func1<Cursor, String>() {
         @Override
         public String call(final Cursor cursor) {
             return cursor.getString(0);
         }
     };
 
-    private static final Func1<Cursor,Integer> GET_INTEGER_0 = new Func1<Cursor, Integer>() {
+    private static final Func1<Cursor, Integer> GET_INTEGER_0 = new Func1<Cursor, Integer>() {
         @Override
         public Integer call(final Cursor cursor) {
             return cursor.getInt(0);
@@ -1239,7 +1239,7 @@ public class DataStore {
         values.put("coordsChanged", cache.hasUserModifiedCoords() ? 1 : 0);
         values.put("finalDefined", cache.hasFinalDefined() ? 1 : 0);
         values.put("logPasswordRequired", cache.isLogPasswordRequired() ? 1 : 0);
-        values.put("watchlistCount",cache.getWatchlistCount());
+        values.put("watchlistCount", cache.getWatchlistCount());
 
         init();
 
@@ -1304,8 +1304,8 @@ public class DataStore {
             return;
         }
         final SQLiteStatement statement = PreparedStatement.ADD_TO_LIST.getStatement();
-        for (final Integer list_id : lists) {
-            statement.bindLong(1, list_id);
+        for (final Integer listId : lists) {
+            statement.bindLong(1, listId);
             statement.bindString(2, geocode);
             statement.executeInsert();
         }
@@ -2093,7 +2093,7 @@ public class DataStore {
                 }
             } else {
                 // We cannot get several lines for the same log entry if it does not contain an image.
-                assert(!cursor.isNull(7));
+                assert !cursor.isNull(7);
                 log.addLogImage(new Image.Builder().setUrl(cursor.getString(10)).setTitle(cursor.getString(9)).setDescription(cursor.getString(11)).build());
             }
         }

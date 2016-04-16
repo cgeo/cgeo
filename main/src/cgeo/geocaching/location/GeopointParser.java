@@ -140,9 +140,9 @@ class GeopointParser {
             final String[] items = StringUtils.split(StringUtils.trimToEmpty(text));
             final int length = ArrayUtils.getLength(items);
             if (length > 0 && length <= 2) {
-                final int index = (latlon == LatLon.LON ? length - 1 : 0);
+                final int index = latlon == LatLon.LON ? length - 1 : 0;
                 final String textPart = items[index];
-                final int pos = (latlon == LatLon.LON ? text.lastIndexOf(textPart) : text.indexOf(textPart));
+                final int pos = latlon == LatLon.LON ? text.lastIndexOf(textPart) : text.indexOf(textPart);
                 return new ResultWrapper(Double.parseDouble(textPart), pos, textPart.length());
             }
         } catch (final NumberFormatException ignored) {

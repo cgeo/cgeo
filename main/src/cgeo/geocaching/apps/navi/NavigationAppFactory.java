@@ -355,11 +355,9 @@ public final class NavigationAppFactory {
     private static void invokeNavigation(final Activity activity, final Geocache cache, final Waypoint waypoint, final Geopoint destination, final App app) {
         if (cache != null) {
             navigateCache(activity, cache, app);
-        }
-        else if (waypoint != null) {
+        } else if (waypoint != null) {
             navigateWaypoint(activity, waypoint, app);
-        }
-        else {
+        } else {
             navigateGeopoint(activity, destination, app);
         }
     }

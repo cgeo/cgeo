@@ -311,7 +311,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
                 final int dp = detailProgress.get();
                 final int secondsElapsed = (int) ((System.currentTimeMillis() - detailProgressTime) / 1000);
-                final int minutesRemaining = ((detailTotal - dp) * secondsElapsed / ((dp > 0) ? dp : 1) / 60);
+                final int minutesRemaining = (detailTotal - dp) * secondsElapsed / (dp > 0 ? dp : 1) / 60;
 
                 progress.setProgress(dp);
                 if (minutesRemaining < 1) {
@@ -358,10 +358,10 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                     progress.setMessage(res.getString(R.string.web_import_waiting));
                     break;
                 case DownloadProgress.MSG_LOADING:  //cache downloading
-                    progress.setMessage(res.getString(R.string.web_downloading) + " " + msg.obj + '…');
+                    progress.setMessage(res.getString(R.string.web_downloading) + ' ' + msg.obj + res.getString(R.string.ellipsis));
                     break;
                 case DownloadProgress.MSG_LOADED:  //Cache downloaded
-                    progress.setMessage(res.getString(R.string.web_downloaded) + " " + msg.obj + '…');
+                    progress.setMessage(res.getString(R.string.web_downloaded) + ' ' + msg.obj + res.getString(R.string.ellipsis));
                     refreshCurrentList();
                     break;
                 case DownloadProgress.MSG_SERVER_FAIL:
@@ -422,8 +422,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         if (extras != null) {
             type = Intents.getListType(getIntent());
             coords = extras.getParcelable(Intents.EXTRA_COORDS);
-        }
-        else {
+        } else {
             extras = new Bundle();
         }
         if (isInvokedFromAttachment()) {
@@ -470,8 +469,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         if (isInvokedFromAttachment()) {
             listNameMemento.rememberTerm(extras.getString(Intents.EXTRA_NAME));
             importGpxAttachement();
-        }
-        else {
+        } else {
             presentShowcase();
         }
     }
@@ -1118,8 +1116,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 final Uri uri = data.getData();
                 new GPXImporter(this, listId, importGpxAttachementFinishedHandler).importGPX(uri, null, getDisplayName(uri));
             }
-        }
-        else if (requestCode == FilterActivity.REQUEST_SELECT_FILTER && resultCode == Activity.RESULT_OK) {
+        } else if (requestCode == FilterActivity.REQUEST_SELECT_FILTER && resultCode == Activity.RESULT_OK) {
             final int[] filterIndex = data.getIntArrayExtra(FilterActivity.EXTRA_FILTER_RESULT);
             setFilter(FilterActivity.getFilterFromPosition(filterIndex[0], filterIndex[1]));
         }
@@ -1199,7 +1196,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
         showProgress(false);
 
-        final int etaTime = ((detailTotal * 25) / 60);
+        final int etaTime = detailTotal * 25 / 60;
         final String message;
         if (etaTime < 1) {
             message = res.getString(R.string.caches_downloading) + " " + res.getString(R.string.caches_eta_ltm);
@@ -1576,8 +1573,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             final TextView filterTextView = ButterKnife.findById(this, R.id.filter_text);
             filterTextView.setText(output.toString());
             findViewById(R.id.filter_bar).setVisibility(View.VISIBLE);
-        }
-        else {
+        } else {
             findViewById(R.id.filter_bar).setVisibility(View.GONE);
         }
     }

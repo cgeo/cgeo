@@ -138,8 +138,7 @@ public class SortActionProvider extends ActionProvider implements OnMenuItemClic
         try {
             if (cacheComparator == null) {
                 onClickListener.call(null);
-            }
-            else {
+            } else {
                 final CacheComparator comparator = cacheComparator.newInstance();
                 onClickListener.call(comparator);
             }

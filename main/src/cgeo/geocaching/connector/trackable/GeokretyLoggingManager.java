@@ -37,7 +37,7 @@ public class GeokretyLoggingManager extends AbstractTrackableLoggingManager {
                     date,
                     log);
 
-            final String logs = (response.getRight().isEmpty() ? "" : StringUtils.join(response.getRight(), "\n"));
+            final String logs = response.getRight().isEmpty() ? "" : StringUtils.join(response.getRight(), "\n");
             return new LogResult(response.getLeft(), logs);
         } catch (final Exception e) {
             Log.e("GeokretyLoggingManager.postLog", e);

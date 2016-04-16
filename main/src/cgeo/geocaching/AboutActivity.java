@@ -139,7 +139,7 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
                 @Override
                 public void onClick(final View view) {
                     ClipboardUtils.copyToClipboard(systemInfo);
-                    Intent share = new Intent(android.content.Intent.ACTION_SENDTO);
+                    final Intent share = new Intent(android.content.Intent.ACTION_SENDTO);
                     share.setType("message/rfc822");
                     share.setData(Uri.parse("mailto:"));
                     share.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.about_system_info));

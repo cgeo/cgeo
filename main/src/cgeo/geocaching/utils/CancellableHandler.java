@@ -21,7 +21,7 @@ public abstract class CancellableHandler extends Handler {
     private volatile boolean cancelled = false;
     private final CompositeSubscription subscriptions = new CompositeSubscription();
 
-    public CancellableHandler(Looper serviceLooper) {
+    public CancellableHandler(final Looper serviceLooper) {
         super(serviceLooper);
     }
 

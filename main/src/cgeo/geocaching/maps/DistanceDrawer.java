@@ -81,14 +81,14 @@ public class DistanceDrawer {
             paintText.setTextAlign(Paint.Align.LEFT);
             paintText.setTypeface(Typeface.DEFAULT_BOLD);
 
-            final int TRANSPARENCY = 0x80000000;
+            final int transparency = 0x80000000;
             if (needsInvertedColors) {
-                paintBoxShadow.setColor(0x000000 | TRANSPARENCY);
-                paintBox.setColor(0xFFFFFF | TRANSPARENCY);
+                paintBoxShadow.setColor(0x000000 | transparency);
+                paintBox.setColor(0xFFFFFF | transparency);
                 paintText.setColor(0xFF000000);
             } else {
-                paintBoxShadow.setColor(0xFFFFFF | TRANSPARENCY);
-                paintBox.setColor(0x000000 | TRANSPARENCY);
+                paintBoxShadow.setColor(0xFFFFFF | transparency);
+                paintBox.setColor(0x000000 | transparency);
                 paintText.setColor(0xFFFFFFFF);
             }
         }

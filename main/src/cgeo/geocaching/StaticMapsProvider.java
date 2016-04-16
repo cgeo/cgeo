@@ -180,7 +180,7 @@ public final class StaticMapsProvider {
             Log.e("storeWaypointStaticMap - missing input parameter waypoint");
             return Completable.complete();
         }
-        Geopoint coordinates = waypoint.getCoords();
+        final Geopoint coordinates = waypoint.getCoords();
         if (coordinates == null) {
             return Completable.complete();
         }
@@ -203,7 +203,7 @@ public final class StaticMapsProvider {
         final String latlonMap = cache.getCoords().format(Format.LAT_LON_DECDEGREE_COMMA);
         final Parameters waypoints = new Parameters();
         for (final Waypoint waypoint : cache.getWaypoints()) {
-            Geopoint coordinates = waypoint.getCoords();
+            final Geopoint coordinates = waypoint.getCoords();
             if (coordinates == null) {
                 continue;
             }

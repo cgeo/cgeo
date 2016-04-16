@@ -292,8 +292,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
         if (isSortedByDistance()) {
             lastSort = 0;
             updateSortByDistance();
-        }
-        else {
+        } else {
             Collections.sort(list, getPotentialInversion(getCacheComparator()));
         }
 
@@ -443,8 +442,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
 
         if (spannable != null) {
             holder.text.setText(spannable, TextView.BufferType.SPANNABLE);
-        }
-        else {
+        } else {
             holder.text.setText(cache.getName());
         }
         holder.cacheListType = cacheListType;

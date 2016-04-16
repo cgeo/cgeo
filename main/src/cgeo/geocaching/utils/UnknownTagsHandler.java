@@ -1,5 +1,7 @@
 package cgeo.geocaching.utils;
 
+import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.R;
 import org.xml.sax.XMLReader;
 
 import android.text.Editable;
@@ -64,7 +66,7 @@ public class UnknownTagsHandler implements TagHandler {
     private void handleTd(final boolean opening, final Editable output) {
         // insert bar for each table column, see https://en.wikipedia.org/wiki/Box-drawing_characters
         if (opening && countCells++ > 0) {
-            output.append('┆');
+            output.append(CgeoApplication.getInstance().getString(R.string.triple_dash_vertical));
         }
     }
 

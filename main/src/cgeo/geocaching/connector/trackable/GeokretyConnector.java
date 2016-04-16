@@ -114,7 +114,7 @@ public class GeokretyConnector extends AbstractTrackableConnector {
     }
 
     private static String getUrlCache() {
-        return (Settings.isGeokretyCacheActive() ? URLPROXY : URL);
+        return Settings.isGeokretyCacheActive() ? URLPROXY : URL;
     }
 
     @Nullable
@@ -136,7 +136,7 @@ public class GeokretyConnector extends AbstractTrackableConnector {
 
         Log.d("GeokretyConnector.searchTrackable: gkid=" + gkid);
         try {
-            final String urlDetails = (Settings.isGeokretyCacheActive() ? URLPROXY + "/export-details.php" : URL + "/export2.php");
+            final String urlDetails = Settings.isGeokretyCacheActive() ? URLPROXY + "/export-details.php" : URL + "/export2.php";
 
             final InputStream response = Network.getResponseStream(Network.getRequest(urlDetails + "?gkid=" + gkid));
             if (response == null) {
@@ -353,7 +353,7 @@ public class GeokretyConnector extends AbstractTrackableConnector {
                     "formname", "ruchy",
                     "logtype", String.valueOf(trackableLog.action.gkid),
                     "data", String.format(Locale.ENGLISH, "%tY-%tm-%td", date, date, date), // YYYY-MM-DD
-                    "godzina",String.format("%tH", date), // HH
+                    "godzina", String.format("%tH", date), // HH
                     "minuta", String.format("%tM", date), // MM
                     "comment", log,
                     "app", context.getString(R.string.app_name),

@@ -334,8 +334,7 @@ public class HtmlImage implements Html.ImageGetter {
         if (file.renameTo(tempFile)) {
             LocalStorage.copy(tempFile, file);
             FileUtils.deleteIgnoringFailure(tempFile);
-        }
-        else {
+        } else {
             Log.e("Could not reset timestamp of file " + file.getAbsolutePath());
         }
     }

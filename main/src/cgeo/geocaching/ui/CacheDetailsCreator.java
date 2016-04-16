@@ -159,8 +159,7 @@ public final class CacheDetailsCreator {
         String text = "--";
         if (distance != null) {
             text = Units.getDistanceFromKilometers(distance);
-        }
-        else if (cacheDistanceView != null) {
+        } else if (cacheDistanceView != null) {
             // if there is already a distance in cacheDistance, use it instead of resetting to default.
             // this prevents displaying "--" while waiting for a new position update (See bug #1468)
             text = cacheDistanceView.getText().toString();
@@ -173,8 +172,7 @@ public final class CacheDetailsCreator {
         String text = "--";
         if (distance != null) {
             text = Units.getDistanceFromKilometers(distance);
-        }
-        else if (waypointDistanceView != null) {
+        } else if (waypointDistanceView != null) {
             // if there is already a distance in waypointDistance, use it instead of resetting to default.
             // this prevents displaying "--" while waiting for a new position update (See bug #1468)
             text = waypointDistanceView.getText().toString();

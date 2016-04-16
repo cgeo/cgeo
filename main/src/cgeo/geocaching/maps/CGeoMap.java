@@ -245,7 +245,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
             titleview.setText(title);
 
         }
-        if ((Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH)) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
             setTitleIceCreamSandwich(title);
         }
     }
@@ -285,7 +285,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         if (titleView != null) {
             titleView.setText(titleView.getText().toString() + ' ' + subtitle);
         }
-        if ((Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH)) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
             setSubtitleIceCreamSandwich(subtitle);
         }
     }
@@ -305,8 +305,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
             if (cachesCnt != totalCount && Settings.isDebug()) {
                 subtitle.append(cachesCnt).append('/').append(res.getQuantityString(R.plurals.cache_counts, totalCount, totalCount));
-            }
-            else {
+            } else {
                 subtitle.append(res.getQuantityString(R.plurals.cache_counts, cachesCnt, cachesCnt));
             }
         }
@@ -460,8 +459,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
             waypointTypeIntent = WaypointType.findById(extras.getString(Intents.EXTRA_WPTTYPE));
             mapStateIntent = extras.getIntArray(Intents.EXTRA_MAPSTATE);
             mapTitle = extras.getString(Intents.EXTRA_TITLE);
-        }
-        else {
+        } else {
             mapMode = MapMode.LIVE;
             isLiveEnabled = Settings.isLiveMap();
         }
@@ -1285,15 +1283,13 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
                     final CacheType type = Settings.getCacheType();
                     final Set<Waypoint> waypointsInViewport = DataStore.loadWaypoints(mapView.getViewport(), excludeMine, excludeDisabled, type);
                     waypoints.addAll(waypointsInViewport);
-                }
-                else {
+                } else {
                     //All waypoints from the viewed caches
                     for (final Geocache c : caches.getAsList()) {
                         waypoints.addAll(c.getWaypoints());
                     }
                 }
-            }
-            else {
+            } else {
                 // we don't want to see any stale waypoints when above threshold
                 waypoints.clear();
             }

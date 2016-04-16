@@ -73,7 +73,7 @@ public class AnchorAwareLinkMovementMethod extends LinkMovementMethod {
     }
 
     @Override
-    public void onTakeFocus(TextView view, @NonNull Spannable text, int dir) {
+    public void onTakeFocus(final TextView view, final @NonNull Spannable text, final int dir) {
         if ((dir & (View.FOCUS_FORWARD | View.FOCUS_DOWN)) != 0) {
             if (view.getLayout() == null) {
                 // This shouldn't be null, but do something sensible if it is.

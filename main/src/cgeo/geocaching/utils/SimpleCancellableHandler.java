@@ -70,7 +70,7 @@ public class SimpleCancellableHandler extends CancellableHandler {
     }
 
     protected void updateStatusMsg(@StringRes final int resId, final String msg) {
-        final CacheDetailActivity activity = ((CacheDetailActivity) activityRef.get());
+        final CacheDetailActivity activity = (CacheDetailActivity) activityRef.get();
         if (activity != null) {
             setProgressMessage(activity.getResources().getString(resId)
                     + "\n\n"
@@ -79,7 +79,7 @@ public class SimpleCancellableHandler extends CancellableHandler {
     }
 
     public void sendTextMessage(final int what, @StringRes final int resId) {
-        final CacheDetailActivity activity = ((CacheDetailActivity) activityRef.get());
+        final CacheDetailActivity activity = (CacheDetailActivity) activityRef.get();
         if (activity != null) {
             final Message msg = obtainMessage(what);
             final Bundle bundle = new Bundle();

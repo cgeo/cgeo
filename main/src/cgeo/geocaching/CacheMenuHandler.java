@@ -47,7 +47,7 @@ public final class CacheMenuHandler extends AbstractUIFactory {
         if (activityInterface instanceof Activity) {
             activity = (Activity) activityInterface;
         } else {
-            activity = ((Fragment)activityInterface).getActivity();
+            activity = ((Fragment) activityInterface).getActivity();
         }
 
         switch (item.getItemId()) {

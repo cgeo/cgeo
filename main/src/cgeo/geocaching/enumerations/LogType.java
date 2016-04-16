@@ -53,7 +53,7 @@ public enum LogType {
     @NonNull
     public final String type;
     @NonNull
-    public final String oc_type;
+    public final String ocType;
     private final int stringId;
     public final int markerId;
     /**
@@ -61,24 +61,24 @@ public enum LogType {
      */
     public final int overlayId;
 
-    LogType(final int id, @Nullable final String iconName, @NonNull final String type, @NonNull final String oc_type,
+    LogType(final int id, @Nullable final String iconName, @NonNull final String type, @NonNull final String ocType,
             final int stringId, final int markerId, final int overlayId) {
         this.id = id;
         this.iconName = iconName;
         this.type = type;
-        this.oc_type = oc_type;
+        this.ocType = ocType;
         this.stringId = stringId;
         this.markerId = markerId;
         this.overlayId = overlayId;
     }
 
-    LogType(final int id, final String iconName, final String type, final String oc_type, final int stringId,
+    LogType(final int id, final String iconName, final String type, final String ocType, final int stringId,
             final int markerId) {
-        this(id, iconName, type, oc_type, stringId, markerId, 0);
+        this(id, iconName, type, ocType, stringId, markerId, 0);
     }
 
-    LogType(final int id, final String iconName, final String type, final String oc_type, final int stringId) {
-        this(id, iconName, type, oc_type, stringId, R.drawable.mark_gray);
+    LogType(final int id, final String iconName, final String type, final String ocType, final int stringId) {
+        this(id, iconName, type, ocType, stringId, R.drawable.mark_gray);
     }
 
     private final static Map<String, LogType> FIND_BY_ICONNAME = new HashMap<>();

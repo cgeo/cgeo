@@ -95,19 +95,16 @@ public class CompassActivity extends AbstractActionBarActivity {
             if (waypoint != null) {
                 setTarget(waypoint);
             }
-        }
-        else if (extras.containsKey(Intents.EXTRA_COORDS)) {
+        } else if (extras.containsKey(Intents.EXTRA_COORDS)) {
             setTarget(extras.<Geopoint> getParcelable(Intents.EXTRA_COORDS), extras.getString(Intents.EXTRA_COORD_DESCRIPTION));
-        }
-        else {
+        } else {
             setTarget(cache);
         }
 
         // set activity title just once, independent of what target is switched to
         if (cache != null) {
             setCacheTitleBar(cache);
-        }
-        else {
+        } else {
             setTitle(StringUtils.defaultIfBlank(extras.getString(Intents.EXTRA_NAME), res.getString(R.string.navigation)));
         }
 
@@ -203,11 +200,9 @@ public class CompassActivity extends AbstractActionBarActivity {
             case R.id.menu_map:
                 if (waypoint != null) {
                     DefaultMap.startActivityCoords(this, waypoint.getCoords(), waypoint.getWaypointType(), waypoint.getName());
-                }
-                else if (cache != null) {
+                } else if (cache != null) {
                     DefaultMap.startActivityGeoCode(this, cache.getGeocode());
-                }
-                else {
+                } else {
                     DefaultMap.startActivityCoords(this, dstCoords, null, null);
                 }
                 return true;

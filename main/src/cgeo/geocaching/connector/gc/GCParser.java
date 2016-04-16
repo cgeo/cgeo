@@ -1118,7 +1118,8 @@ public final class GCParser {
     @NonNull
     static ImmutablePair<StatusCode, String> postLog(final String geocode, final String cacheid, final String[] viewstates,
                                                      final LogType logType, final int year, final int month, final int day,
-                                                     final String log, final List<TrackableLog> trackables,final boolean addToFavorites) {
+                                                     final String log, final List<TrackableLog> trackables,
+                                                     final boolean addToFavorites) {
         if (GCLogin.isEmpty(viewstates)) {
             Log.e("GCParser.postLog: No viewstate given");
             return new ImmutablePair<>(StatusCode.LOG_POST_ERROR, "");
@@ -1419,8 +1420,7 @@ public final class GCParser {
      * @param page Page containing the information about howm many people watching on geocache
      * @return Number of people watching geocache, -1 when error
      */
-    static int getWatchListCount(final String page)
-    {
+    static int getWatchListCount(final String page) {
         final String sCount = TextUtils.getMatch(page, GCConstants.PATTERN_WATCHLIST_COUNT, true, 1, "notFound", false);
         if (sCount.equals("notFound")) {
             return -1;

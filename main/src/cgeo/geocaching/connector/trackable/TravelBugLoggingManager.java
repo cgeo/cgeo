@@ -71,7 +71,7 @@ public class TravelBugLoggingManager extends AbstractTrackableLoggingManager {
                     viewstates,
                     trackableLog.action,
                     date.get(Calendar.YEAR),
-                    (date.get(Calendar.MONTH) + 1),
+                    date.get(Calendar.MONTH) + 1,
                     date.get(Calendar.DATE),
                     log);
 

@@ -523,7 +523,7 @@ public final class Geopoint implements ICoordinates, Parcelable {
                 Math.cos(toRadians(lat1)) * Math.cos(toRadians(lat2)) *
                 Math.sin(dLon / 2) * Math.sin(dLon / 2);
         // simplify haversine
-        return (2 * earthRadius * 1000 * Math.asin(Math.sqrt(a)));
+        return 2 * earthRadius * 1000 * Math.asin(Math.sqrt(a));
     }
 
     private static double toRadians(final double angdeg) {

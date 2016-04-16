@@ -102,8 +102,7 @@ public final class StoredList extends AbstractList {
                     if (list == PseudoList.NEW_LIST) {
                         // create new list on the fly
                         promptForListCreation(runAfterwards, listNameMemento.getTerm());
-                    }
-                    else {
+                    } else {
                         runAfterwards.call(lists.get(itemId).id);
                     }
                 }

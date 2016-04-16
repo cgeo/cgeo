@@ -1,5 +1,7 @@
 package cgeo.geocaching.utils;
 
+import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.R;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.CharEncoding;
@@ -62,7 +64,7 @@ public final class FileUtils {
                         continue; // skip hidden directories
                     }
                     if (name.length() > 16) {
-                        name = name.substring(0, 14) + '…';
+                        name = name.substring(0, 14) + CgeoApplication.getInstance().getString(R.string.ellipsis);
                     }
                     if (feedBackHandler != null) {
                         feedBackHandler.sendMessage(Message.obtain(feedBackHandler, 0, name));

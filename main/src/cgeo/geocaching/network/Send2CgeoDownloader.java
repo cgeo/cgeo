@@ -31,7 +31,7 @@ public class Send2CgeoDownloader {
         final Worker worker = AndroidRxUtils.networkScheduler.createWorker();
         handler.unsubscribeIfCancelled(worker);
         worker.schedule(new Action0() {
-            private final Parameters PARAMS = new Parameters("code", StringUtils.defaultString(Settings.getWebDeviceCode()));
+            private final Parameters params = new Parameters("code", StringUtils.defaultString(Settings.getWebDeviceCode()));
             private long baseTime = System.currentTimeMillis();
 
             @Override
@@ -43,7 +43,7 @@ public class Send2CgeoDownloader {
 
                 // Download new code
                 try {
-                    final Response responseFromWeb = Network.getRequest("http://send2.cgeo.org/read.html", PARAMS)
+                    final Response responseFromWeb = Network.getRequest("http://send2.cgeo.org/read.html", params)
                             .flatMap(Network.withSuccess).toBlocking().value();
 
                     final String response = Network.getResponseData(responseFromWeb);

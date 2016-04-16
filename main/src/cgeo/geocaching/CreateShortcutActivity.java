@@ -90,8 +90,7 @@ public class CreateShortcutActivity extends AbstractActionBarActivity {
             public void call(final Shortcut shortcut) {
                 if (shortcut == offlineShortcut) {
                     promptForListShortcut();
-                }
-                else {
+                } else {
                     createShortcutAndFinish(shortcut.toString(), shortcut.intent, shortcut.drawableResourceId);
                 }
             }
@@ -125,8 +124,7 @@ public class CreateShortcutActivity extends AbstractActionBarActivity {
         if (iconResourceId == R.drawable.cgeo) {
             final ShortcutIconResource iconResource = Intent.ShortcutIconResource.fromContext(this, iconResourceId);
             intent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE, iconResource);
-        }
-        else {
+        } else {
             intent.putExtra(Intent.EXTRA_SHORTCUT_ICON, createOverlay(iconResourceId));
         }
 
