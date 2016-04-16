@@ -16,6 +16,7 @@ import cgeo.geocaching.connector.oc.OCApiConnector.ApiSupport;
 import cgeo.geocaching.connector.oc.OCApiLiveConnector;
 import cgeo.geocaching.connector.oc.OCCZConnector;
 import cgeo.geocaching.connector.oc.OCConnector;
+import cgeo.geocaching.connector.su.GeocachingSuConnector;
 import cgeo.geocaching.connector.tc.TerraCachingConnector;
 import cgeo.geocaching.connector.trackable.GeokretyConnector;
 import cgeo.geocaching.connector.trackable.GeolutinsConnector;
@@ -33,16 +34,17 @@ import cgeo.geocaching.utils.RxUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import rx.Observable;
-import rx.functions.Func0;
-import rx.functions.Func1;
-import rx.schedulers.Schedulers;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+
+import rx.Observable;
+import rx.functions.Func0;
+import rx.functions.Func1;
+import rx.schedulers.Schedulers;
 
 public final class ConnectorFactory {
     @NonNull public static final UnknownConnector UNKNOWN_CONNECTOR = new UnknownConnector();
@@ -75,7 +77,7 @@ public final class ConnectorFactory {
             new GeopeitusConnector(),
             new TerraCachingConnector(),
             new WaymarkingConnector(),
-            new GeocachingSuConnector(),
+            GeocachingSuConnector.getInstance(),
             UNKNOWN_CONNECTOR // the unknown connector MUST be the last one
     ));
 
