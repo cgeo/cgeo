@@ -126,4 +126,10 @@ public class TravelBugConnector extends AbstractTrackableConnector {
     public String getHost() {
         return "www.geocaching.com";
     }
+
+    @Override
+    @NonNull
+    public String getTestUrl() {
+        return "https://" + getHost() + "/play";
+    }
 }

@@ -79,7 +79,7 @@ public class WatchdogTest extends CGeoTestCase {
     public static void testTrackableWebsites() {
         for (final TrackableConnector trackableConnector : ConnectorFactory.getTrackableConnectors()) {
             if (!trackableConnector.equals(ConnectorFactory.UNKNOWN_TRACKABLE_CONNECTOR)) {
-                checkWebsite("trackable website " + trackableConnector.getHost(), trackableConnector.getHostUrl());
+                checkWebsite("trackable website " + trackableConnector.getHost(), trackableConnector.getTestUrl());
                 if (StringUtils.isNotBlank(trackableConnector.getProxyUrl())) {
                     checkWebsite("trackable website " + trackableConnector.getHost() + " proxy " + trackableConnector.getProxyUrl(), trackableConnector.getProxyUrl());
                 }
@@ -91,7 +91,7 @@ public class WatchdogTest extends CGeoTestCase {
     public static void testGeocachingWebsites() {
         for (final IConnector connector : ConnectorFactory.getConnectors()) {
             if (!connector.equals(ConnectorFactory.UNKNOWN_CONNECTOR)) {
-                checkWebsite("geocaching website " + connector.getName(), connector.getHostUrl());
+                checkWebsite("geocaching website " + connector.getName(), connector.getTestUrl());
             }
         }
     }

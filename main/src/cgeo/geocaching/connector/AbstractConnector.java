@@ -172,6 +172,12 @@ public abstract class AbstractConnector implements IConnector {
     }
 
     @Override
+    @NonNull
+    public String getTestUrl() {
+        return getHostUrl();
+    }
+
+    @Override
     @Nullable
     public String getLongCacheUrl(final @NonNull Geocache cache) {
         return getCacheUrl(cache);
