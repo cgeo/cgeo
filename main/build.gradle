@@ -23,7 +23,7 @@ android {
     defaultConfig {
         // TODO fill this section and remove the values from AndroidManifest only after the full switch to gradle
         // As these values override the manifest, we might otherwise use different values in gradle and non-gradle builds.
-        minSdkVersion 9
+        minSdkVersion project.minSdkVersion
         targetSdkVersion 21
         versionName versionNameFromDate()
         versionCode versionCodeFromDate(0)
@@ -408,7 +408,7 @@ android.applicationVariants.all { variant ->
     if (variant.install) {
         tasks.create(name: "run${variant.name.capitalize()}", dependsOn: variant.install) {
             group 'cgeo'
-            description "Installs the ${variant.description} and runs the main launcher activity. Depends on 'adb' being on the PATH."
+            description "Installs the ${variant.description} and runs the main activity. Depends on 'adb' being on the PATH."
 
             doFirst {
                 def classpath = variant.applicationId

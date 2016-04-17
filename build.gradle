@@ -118,6 +118,7 @@ allprojects {
  */
 
 ext.buildToolsVersion = "23.0.3"
+ext.minSdkVersion = 9
 
 subprojects {
     repositories {
