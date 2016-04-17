@@ -1249,6 +1249,10 @@ public class Geocache implements IWaypoint {
         this.spoilers = spoilers;
     }
 
+    public boolean hasSpoilersSet() {
+        return this.spoilers != null;
+    }
+
     public void setLogCounts(final Map<LogType, Integer> logCounts) {
         this.logCounts = logCounts;
     }
