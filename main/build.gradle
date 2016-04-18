@@ -9,6 +9,10 @@ import org.apache.tools.ant.filters.ReplaceTokens
  * Android plugin, http://developer.android.com/tools/building/plugin-for-gradle.html
  */
 apply plugin: 'com.android.application'
+/*
+ * https://github.com/KeepSafe/dexcount-gradle-plugin
+ */
+apply plugin: 'com.getkeepsafe.dexcount'
 
 android {
     compileSdkVersion "Google Inc.:Google APIs:22"

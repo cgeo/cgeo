@@ -75,6 +75,9 @@ buildscript {
 
 		// Google Services (App Invite) has its own Gradle plugin
 		classpath 'com.google.gms:google-services:2.0.0'
+
+		// monitor our application method limit
+		classpath 'com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.4.4'
 	}
 }
 
