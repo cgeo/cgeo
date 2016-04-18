@@ -32,6 +32,10 @@ public class GeocachingSuParser {
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
     private static final SimpleDateFormat DATE_TIME_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US);
 
+    private GeocachingSuParser() {
+        // utility class
+    }
+
     @NonNull
     public static SearchResult parseCaches(final String endTag, final InputStream inputStream) {
         final ArrayList<Geocache> caches = new ArrayList<>();
