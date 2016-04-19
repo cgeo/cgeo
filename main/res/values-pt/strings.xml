@@ -386,7 +386,7 @@
   <string name="settings_summary_services">Configure a informação da conta de utilizador e o acesso a serviços opcionais.</string>
   <string name="settings_title_appearance">Aparência</string>
   <string name="settings_summary_appearance">Configurar unidades de distância, idioma e cores da Aplicação.</string>
-  <string name="settings_title_cachedetails">Detalhos da Cache</string>
+  <string name="settings_title_cachedetails">Detalhes da Cache</string>
   <string name="settings_summary_cachedetails">Personalizar a exibição de informações da cache. </string>
   <string name="settings_title_offlinedata">Dados Offline</string>
   <string name="settings_summary_offlinedata">Configurar mapas estáticos e outros dados de armazenamento offline.</string>

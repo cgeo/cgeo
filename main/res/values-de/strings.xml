@@ -454,6 +454,9 @@
   <string name="settings_activate_oc_uk">Aktivieren</string>
   <string name="init_summary_oc_uk">Caches von opencaching.org.uk laden</string>
   <string name="init_oc_uk_description">Autorisiere c:geo auf opencaching.org.uk zuzugreifen um Caches zu suchen und nach deinen Funden zu filtern.</string>
+  <string name="init_su">Geocaching.su</string>
+  <string name="init_summary_su">Caches von geocaching.su laden</string>
+  <string name="settings_activate_su">Aktivieren</string>
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_gcvote_password_description">Um einen Cache bewerten zu können, folge der Anleitung auf gcvote.com  und gib das GCVote-Passwort anschließend hier ein.</string>
   <string name="err_gcvote_send_rating">Fehler beim Senden der Bewertung. Prüfe das GCVote-Passwort in den Einstellungen oder lösche es.</string>
