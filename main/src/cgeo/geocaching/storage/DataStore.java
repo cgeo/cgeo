@@ -170,7 +170,7 @@ public class DataStore {
      * holds the column indexes of the cache table to avoid lookups
      */
     private static final CacheCache cacheCache = new CacheCache();
-    private static SQLiteDatabase database = null;
+    private static volatile SQLiteDatabase database = null;
     private static final int dbVersion = 71;
     public static final int customListIdOffset = 10;
     private static final @NonNull String dbName = "data";
