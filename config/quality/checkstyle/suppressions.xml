@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE suppressions PUBLIC
+"-//Puppy Crawl//DTD Suppressions 1.1//EN"
+"http://www.puppycrawl.com/dtds/suppressions_1_1.dtd">
+
+<suppressions>
+<!-- hidden files -->
+<suppress files="[/\\]\..+" checks=".*"/>
+<!-- maven target folders -->
+<suppress files="[/\\]target[/\\]" checks=".*"/>
+<!-- generated code -->
+<suppress files="[/\\]gen[/\\]" checks=".*"/>
+<suppress files="[/\\]annotation_gen[/\\]" checks=".*"/>
+<!-- thirdparty code in our repository -->
+<suppress files="[/\\]thirdparty[/\\]" checks=".*"/>
+</suppressions>
