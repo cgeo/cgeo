@@ -8,9 +8,9 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.TestSettings;
 import cgeo.geocaching.utils.LogTemplateProvider.LogContext;
 
-import junit.framework.TestCase;
-
 import java.util.Calendar;
+
+import junit.framework.TestCase;
 
 public class LogTemplateProviderTest extends TestCase {
 
@@ -34,7 +34,7 @@ public class LogTemplateProviderTest extends TestCase {
         final String oldSignature = Settings.getSignature();
         try {
             TestSettings.setSignature("[DATE]");
-            String currentDate = LogTemplateProvider.applyTemplates(Settings.getSignature(), new LogContext(null, null, true));
+            final String currentDate = LogTemplateProvider.applyTemplates(Settings.getSignature(), new LogContext(null, null, true));
             final String signatureTemplate = "Signature [SIGNATURE]";
             final String signature = LogTemplateProvider.applyTemplates(signatureTemplate, new LogContext(null, null, true));
             assertThat(signature).isEqualTo("Signature " + currentDate);

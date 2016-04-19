@@ -143,7 +143,7 @@ abstract class AbstractCommand implements Command {
 
     private final class UndoTask extends AsyncTaskWithProgress<Void, Void> {
 
-        public UndoTask(final Activity activity) {
+        UndoTask(final Activity activity) {
             super(activity, null, null, true);
         }
 

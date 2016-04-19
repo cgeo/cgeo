@@ -1,7 +1,5 @@
 package cgeo.geocaching;
 
-import butterknife.ButterKnife;
-
 import cgeo.geocaching.list.AbstractList;
 
 import android.content.Context;
@@ -10,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+
+import butterknife.ButterKnife;
 
 class CacheListSpinnerAdapter extends ArrayAdapter<AbstractList> {
 
@@ -20,7 +20,7 @@ class CacheListSpinnerAdapter extends ArrayAdapter<AbstractList> {
 
     private final CacheListActivity cacheListActivity;
 
-    public CacheListSpinnerAdapter(final CacheListActivity context, final int resource) {
+    CacheListSpinnerAdapter(final CacheListActivity context, final int resource) {
         super(context, resource);
         cacheListActivity = context;
     }

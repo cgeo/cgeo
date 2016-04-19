@@ -23,13 +23,13 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.twitter.Twitter;
 import cgeo.geocaching.ui.dialog.DateDialog;
 import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.AsyncTaskWithProgressText;
 import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.LogTemplateProvider;
 import cgeo.geocaching.utils.LogTemplateProvider.LogContext;
-import cgeo.geocaching.utils.AndroidRxUtils;
 
 import com.github.amlcurran.showcaseview.targets.ActionItemTarget;
 
@@ -479,7 +479,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
 
     private class Poster extends AsyncTaskWithProgressText<String, StatusCode> {
 
-        public Poster(final Activity activity, final String progressMessage) {
+        Poster(final Activity activity, final String progressMessage) {
             super(activity, res.getString(image.isEmpty() ?
                     R.string.log_posting_log :
                     R.string.log_saving_and_uploading), progressMessage);

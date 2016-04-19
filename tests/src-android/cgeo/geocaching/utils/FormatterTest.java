@@ -1,13 +1,13 @@
 package cgeo.geocaching.utils;
 
-import junit.framework.TestCase;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
-import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.enumerations.WaypointType;
+import cgeo.geocaching.models.Waypoint;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import junit.framework.TestCase;
 
 public class FormatterTest extends TestCase {
 
@@ -25,7 +25,7 @@ public class FormatterTest extends TestCase {
         assertFormatting(own, CgeoApplication.getInstance().getString(R.string.waypoint_custom));
     }
 
-    private static void assertFormatting(Waypoint waypoint, String expected) {
+    private static void assertFormatting(final Waypoint waypoint, final String expected) {
         assertThat(Formatter.formatWaypointInfo(waypoint)).isEqualTo(expected);
     }
 

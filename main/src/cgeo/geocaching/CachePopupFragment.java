@@ -54,7 +54,7 @@ public class CachePopupFragment extends AbstractDialogFragment {
     private class StoreCacheHandler extends CancellableHandler {
         private final int progressMessage;
 
-        public StoreCacheHandler(final int progressMessage) {
+        StoreCacheHandler(final int progressMessage) {
             this.progressMessage = progressMessage;
         }
 

@@ -2,11 +2,11 @@ package cgeo.geocaching.connector.gc;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.models.LogEntry;
 import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.models.TrackableLog;
-import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 import cgeo.geocaching.test.R;
 import cgeo.geocaching.utils.TextUtils;
@@ -59,7 +59,7 @@ public class TrackablesTest extends AbstractResourceInstrumentationTestCase {
         assertThat(log4Images.get(0).getUrl()).isEqualTo("http://imgcdn.geocaching.com/track/log/large/3dc286d2-671e-4502-937a-f1bd35a13813.jpg");
         assertThat(log4Images.get(0).getTitle()).isEqualTo("@Osaka");
 
-        for (LogEntry entry : log) {
+        for (final LogEntry entry : log) {
             assertThat(entry.log.startsWith("<div>")).isFalse();
         }
         assertThat(log.get(0).log).isEqualTo("Dropped in Una Bhan (GC49XCJ)");
@@ -119,7 +119,7 @@ public class TrackablesTest extends AbstractResourceInstrumentationTestCase {
         assertThat(logs).hasSize(10);
     }
 
-    private Trackable parseTrackable(int trackablePage) {
+    private Trackable parseTrackable(final int trackablePage) {
         final String pageContent = getFileContent(trackablePage);
         return GCParser.parseTrackable(TextUtils.replaceWhitespace(pageContent), null);
     }

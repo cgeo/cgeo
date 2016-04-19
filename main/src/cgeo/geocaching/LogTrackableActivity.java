@@ -467,7 +467,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
 
     private class Poster extends AsyncTaskWithProgress<String, StatusCode> {
 
-        public Poster(final Activity activity, final String progressMessage) {
+        Poster(final Activity activity, final String progressMessage) {
             super(activity, null, progressMessage, true);
         }
 

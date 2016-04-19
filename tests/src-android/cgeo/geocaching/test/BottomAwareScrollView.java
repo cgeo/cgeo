@@ -9,22 +9,22 @@ public class BottomAwareScrollView extends ScrollView {
 
     private boolean isAtBottom = true;
 
-    public BottomAwareScrollView(Context context, AttributeSet attrs, int defStyle) {
+    public BottomAwareScrollView(final Context context, final AttributeSet attrs, final int defStyle) {
         super(context, attrs, defStyle);
     }
 
-    public BottomAwareScrollView(Context context, AttributeSet attrs) {
+    public BottomAwareScrollView(final Context context, final AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public BottomAwareScrollView(Context context) {
+    public BottomAwareScrollView(final Context context) {
         super(context);
     }
 
     @Override
-    protected void onScrollChanged(int l, int t, int oldl, int oldt) {
-        View lastChildView = getChildAt(getChildCount() - 1);
-        int diff = (lastChildView.getBottom() - (getHeight() + getScrollY()));
+    protected void onScrollChanged(final int l, final int t, final int oldl, final int oldt) {
+        final View lastChildView = getChildAt(getChildCount() - 1);
+        final int diff = lastChildView.getBottom() - (getHeight() + getScrollY());
         isAtBottom = diff <= 0;
         super.onScrollChanged(l, t, oldl, oldt);
     }

@@ -1,14 +1,16 @@
 package cgeo.geocaching;
 
-import cgeo.geocaching.utils.Log;
+import static org.assertj.core.api.Assertions.assertThat;
 
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringEscapeUtils;
 
 import android.os.SystemClock;
 import android.test.AndroidTestCase;
 import android.text.Html;
+
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 public class HtmlPerformanceTest extends AndroidTestCase {
     private String input;
@@ -20,8 +22,8 @@ public class HtmlPerformanceTest extends AndroidTestCase {
     }
 
     public void testUnescape() {
-        assert (unescapeAndroid().equals("Weißer Tiger"));
-        assert (unescapeApache().equals("Weißer Tiger"));
+        assertThat(unescapeAndroid()).isEqualTo("Weißer Tiger");
+        assertThat(unescapeApache()).isEqualTo("Weißer Tiger");
     }
 
     private String unescapeApache() {
@@ -54,7 +56,7 @@ public class HtmlPerformanceTest extends AndroidTestCase {
     }
 
     @SuppressFBWarnings("DM_GC")
-    private static long measure(String label, Runnable runnable) {
+    private static long measure(final String label, final Runnable runnable) {
         System.gc();
         final long start = SystemClock.elapsedRealtime();
         runnable.run();

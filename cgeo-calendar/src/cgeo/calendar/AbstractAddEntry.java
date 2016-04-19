@@ -11,7 +11,7 @@ abstract class AbstractAddEntry {
     @NonNull
     protected final CalendarActivity activity;
 
-    public AbstractAddEntry(@NonNull final CalendarEntry entry, @NonNull final CalendarActivity activity) {
+    AbstractAddEntry(@NonNull final CalendarEntry entry, @NonNull final CalendarActivity activity) {
         this.entry = entry;
         this.activity = activity;
     }

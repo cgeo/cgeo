@@ -1,7 +1,5 @@
 package cgeo.geocaching;
 
-import butterknife.ButterKnife;
-
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.AbstractListActivity;
 import cgeo.geocaching.activity.ActivityMixin;
@@ -70,18 +68,11 @@ import cgeo.geocaching.utils.Log;
 
 import com.github.amlcurran.showcaseview.targets.ActionViewTarget;
 import com.github.amlcurran.showcaseview.targets.ActionViewTarget.Type;
+
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import rx.Observable;
-import rx.Observable.OnSubscribe;
-import rx.Subscriber;
-import rx.Subscription;
-import rx.functions.Action0;
-import rx.functions.Action1;
-import rx.functions.Func1;
-import rx.schedulers.Schedulers;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -126,6 +117,16 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
+
+import butterknife.ButterKnife;
+import rx.Observable;
+import rx.Observable.OnSubscribe;
+import rx.Subscriber;
+import rx.Subscription;
+import rx.functions.Action0;
+import rx.functions.Action1;
+import rx.functions.Func1;
+import rx.schedulers.Schedulers;
 
 public class CacheListActivity extends AbstractListActivity implements FilteredActivity, LoaderManager.LoaderCallbacks<SearchResult> {
 
@@ -1321,7 +1322,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         private int listId = StoredList.TEMPORARY_LIST.id;
         private Map<String, Set<Integer>> oldCachesLists = new HashMap<>();
 
-        public DeleteCachesFromListCommand(@NonNull final CacheListActivity context, final Collection<Geocache> caches, final int listId) {
+        DeleteCachesFromListCommand(@NonNull final CacheListActivity context, final Collection<Geocache> caches, final int listId) {
             super(context, caches, R.string.command_delete_caches_progress);
             lastListPosition = context.getListView().getFirstVisiblePosition();
             activityRef = new WeakReference<>(context);

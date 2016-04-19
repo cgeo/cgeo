@@ -18,7 +18,7 @@ class AddEntry extends AbstractAddEntry {
      * @param calendarId
      *         The selected calendar
      */
-    public AddEntry(@NonNull final CalendarEntry entry, @NonNull final CalendarActivity activity, final int calendarId) {
+    AddEntry(@NonNull final CalendarEntry entry, @NonNull final CalendarActivity activity, final int calendarId) {
         super(entry, activity);
         this.calendarId = calendarId;
     }

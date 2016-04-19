@@ -2,8 +2,8 @@ package cgeo.geocaching.connector.gc;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 import cgeo.geocaching.test.R;
 import cgeo.geocaching.utils.Log;
@@ -24,7 +24,7 @@ public class IconDecoderTest extends AbstractResourceInstrumentationTestCase {
         assertThat(parseMapPNG(bitmap, 108, 112, 14).isFound()).isTrue();
     }
 
-    private Bitmap getBitmap(@RawRes int resourceId) {
+    private Bitmap getBitmap(@RawRes final int resourceId) {
         final BitmapFactory.Options options = new BitmapFactory.Options();
         options.inScaled = false;
         final Bitmap bitmap = BitmapFactory.decodeStream(getInstrumentation().getContext().getResources().openRawResource(resourceId));
@@ -32,7 +32,7 @@ public class IconDecoderTest extends AbstractResourceInstrumentationTestCase {
         return bitmap;
     }
 
-    private static Geocache parseMapPNG(Bitmap bitmap, int x, int y, int zoomlevel) {
+    private static Geocache parseMapPNG(final Bitmap bitmap, final int x, final int y, final int zoomlevel) {
         final Geocache cache = new Geocache();
         cache.setGeocode("GC30");
         IconDecoder.parseMapPNG(cache, bitmap, new UTFGridPosition(x / 4, y / 4), zoomlevel);

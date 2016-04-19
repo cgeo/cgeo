@@ -71,11 +71,11 @@ public class GpxFileListActivityTest extends ActivityInstrumentationTestCase2<Gp
         denyImport("acde12345678.zip");
     }
 
-    private void assertImport(String fileName) {
+    private void assertImport(final String fileName) {
         assertThat(importGpxActivity.filenameBelongsToList(fileName)).isTrue();
     }
 
-    private void denyImport(String fileName) {
+    private void denyImport(final String fileName) {
         assertThat(importGpxActivity.filenameBelongsToList(fileName)).isFalse();
     }
 }

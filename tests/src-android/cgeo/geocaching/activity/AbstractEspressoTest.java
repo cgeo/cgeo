@@ -12,11 +12,11 @@ import android.test.ActivityInstrumentationTestCase2;
 
 public abstract class AbstractEspressoTest<T extends Activity> extends ActivityInstrumentationTestCase2<T> {
 
-    public AbstractEspressoTest(Class<T> activityClass) {
+    public AbstractEspressoTest(final Class<T> activityClass) {
         super(activityClass);
     }
 
-    protected final void clickActionBarItem(int labelResourceId) {
+    protected final void clickActionBarItem(final int labelResourceId) {
         onData(hasToString(startsWith(getString(labelResourceId)))).perform(click());
     }
 
@@ -24,7 +24,7 @@ public abstract class AbstractEspressoTest<T extends Activity> extends ActivityI
         openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
     }
 
-    protected final String getString(@StringRes int resId) {
+    protected final String getString(@StringRes final int resId) {
         return getActivity().getString(resId);
     }
 

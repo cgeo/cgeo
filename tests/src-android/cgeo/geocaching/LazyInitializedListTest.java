@@ -18,7 +18,7 @@ public class LazyInitializedListTest extends AndroidTestCase {
 
         private int counter;
 
-        MyList(int counter) {
+        MyList(final int counter) {
             this.counter = counter;
         }
 

@@ -669,7 +669,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     private static final class CacheDetailsGeoDirHandler extends GeoDirHandler {
         private final WeakReference<CacheDetailActivity> activityRef;
 
-        public CacheDetailsGeoDirHandler(final CacheDetailActivity activity) {
+        CacheDetailsGeoDirHandler(final CacheDetailActivity activity) {
             this.activityRef = new WeakReference<>(activity);
         }
 
@@ -692,7 +692,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
     private final static class LoadCacheHandler extends SimpleCancellableHandler {
 
-        public LoadCacheHandler(final CacheDetailActivity activity, final Progress progress) {
+        LoadCacheHandler(final CacheDetailActivity activity, final Progress progress) {
             super(activity, progress);
         }
 
@@ -2277,7 +2277,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
     private static class StoreCacheHandler extends SimpleCancellableHandler {
 
-        public StoreCacheHandler(final CacheDetailActivity activity, final Progress progress) {
+        StoreCacheHandler(final CacheDetailActivity activity, final Progress progress) {
             super(activity, progress);
         }
 
@@ -2293,7 +2293,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
     private static final class RefreshCacheHandler extends SimpleCancellableHandler {
 
-        public RefreshCacheHandler(final CacheDetailActivity activity, final Progress progress) {
+        RefreshCacheHandler(final CacheDetailActivity activity, final Progress progress) {
             super(activity, progress);
         }
 
@@ -2309,7 +2309,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
     private static final class ChangeNotificationHandler extends SimpleHandler {
 
-        public ChangeNotificationHandler(final CacheDetailActivity activity, final Progress progress) {
+        ChangeNotificationHandler(final CacheDetailActivity activity, final Progress progress) {
             super(activity, progress);
         }
 

@@ -2,9 +2,9 @@ package cgeo.geocaching.connector;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import junit.framework.TestCase;
-
 import java.util.Set;
+
+import junit.framework.TestCase;
 
 public class GeopeitusConnectorTest extends TestCase {
 
@@ -22,7 +22,7 @@ public class GeopeitusConnectorTest extends TestCase {
     }
 
     public static void testHandledGeocodes() {
-        Set<String> geocodes = ConnectorFactoryTest.getGeocodeSample();
+        final Set<String> geocodes = ConnectorFactoryTest.getGeocodeSample();
         assertThat(getGeopeitusConnector().handledGeocodes(geocodes)).containsOnly("GE1234", "GE5678");
     }
 }

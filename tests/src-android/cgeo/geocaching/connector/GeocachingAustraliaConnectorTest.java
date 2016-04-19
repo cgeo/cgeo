@@ -2,9 +2,9 @@ package cgeo.geocaching.connector;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import junit.framework.TestCase;
-
 import java.util.Set;
+
+import junit.framework.TestCase;
 
 public class GeocachingAustraliaConnectorTest extends TestCase {
 
@@ -24,7 +24,7 @@ public class GeocachingAustraliaConnectorTest extends TestCase {
     }
 
     public static void testHandledGeocodes() {
-        Set<String> geocodes = ConnectorFactoryTest.getGeocodeSample();
+        final Set<String> geocodes = ConnectorFactoryTest.getGeocodeSample();
         assertThat(getGeocachingAustraliaConnector().handledGeocodes(geocodes)).containsOnly("GA1234", "TP1234", "GA5678", "TP5678");
     }
 }

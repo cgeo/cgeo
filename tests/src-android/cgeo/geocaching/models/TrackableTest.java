@@ -5,11 +5,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 import cgeo.geocaching.connector.trackable.TrackableBrand;
 import cgeo.geocaching.enumerations.LogType;
 
-import junit.framework.TestCase;
-
 import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.Date;
+
+import junit.framework.TestCase;
 
 public class TrackableTest extends TestCase {
 
@@ -37,7 +37,7 @@ public class TrackableTest extends TestCase {
     }
 
     public static void testGeokretUrl() {
-        Trackable geokret = createTrackable("GK82A2");
+        final Trackable geokret = createTrackable("GK82A2");
         assertThat(geokret.getUrl()).isEqualTo("https://geokrety.org/konkret.php?id=33442");
     }
 
@@ -113,7 +113,7 @@ public class TrackableTest extends TestCase {
 
     }
 
-    private static Trackable createTrackable(String geocode) {
+    private static Trackable createTrackable(final String geocode) {
         final Trackable trackable = new Trackable();
         trackable.setGeocode(geocode);
         return trackable;

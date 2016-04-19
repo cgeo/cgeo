@@ -2,10 +2,10 @@ package cgeo.geocaching.twitter;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.LogEntry;
 import cgeo.geocaching.models.Trackable;
-import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.TestSettings;
 
@@ -17,7 +17,7 @@ public class TwitterTest extends TestCase {
         final String oldMessage = Settings.getTrackableTwitterMessage();
         try {
             TestSettings.setTrackableTwitterMessage("I touched [NAME] ([URL]).");
-            Trackable tb = new Trackable();
+            final Trackable tb = new Trackable();
             tb.setName("Travel bug");
             tb.setGeocode("TB1234");
             assertThat(Twitter.getStatusMessage(tb, null)).isEqualTo("I touched Travel bug (https://www.geocaching.com//track/details.aspx?tracker=TB1234). #cgeo #geocaching");
@@ -30,7 +30,7 @@ public class TwitterTest extends TestCase {
         final String oldMessage = Settings.getCacheTwitterMessage();
         try {
             TestSettings.setCacheTwitterMessage("I found [NAME] ([URL]).");
-            Geocache cache = new Geocache();
+            final Geocache cache = new Geocache();
             cache.setGeocode("GC1234");
             cache.setName("TwitterTest");
             assertThat(Twitter.getStatusMessage(cache, null)).isEqualTo("I found TwitterTest (http://coord.info/GC1234). #cgeo #geocaching");
@@ -43,8 +43,8 @@ public class TwitterTest extends TestCase {
         final String oldMessage = Settings.getCacheTwitterMessage();
         try {
             TestSettings.setCacheTwitterMessage("[LOG]");
-            Geocache cache = new Geocache();
-            LogEntry log = new LogEntry.Builder().setDate(0).setLogType(LogType.FOUND_IT).setLog("log text").build();
+            final Geocache cache = new Geocache();
+            final LogEntry log = new LogEntry.Builder().setDate(0).setLogType(LogType.FOUND_IT).setLog("log text").build();
             assertThat(Twitter.getStatusMessage(cache, log)).isEqualTo("log text #cgeo #geocaching");
         } finally {
             TestSettings.setCacheTwitterMessage(oldMessage);
@@ -55,8 +55,8 @@ public class TwitterTest extends TestCase {
         final String oldMessage = Settings.getCacheTwitterMessage();
         try {
             TestSettings.setTrackableTwitterMessage("[LOG]");
-            Trackable trackable = new Trackable();
-            LogEntry log = new LogEntry.Builder().setDate(0).setLogType(LogType.FOUND_IT).setLog("trackable log text").build();
+            final Trackable trackable = new Trackable();
+            final LogEntry log = new LogEntry.Builder().setDate(0).setLogType(LogType.FOUND_IT).setLog("trackable log text").build();
             assertThat(Twitter.getStatusMessage(trackable, log)).isEqualTo("trackable log text #cgeo #geocaching");
         } finally {
             TestSettings.setTrackableTwitterMessage(oldMessage);
@@ -67,7 +67,7 @@ public class TwitterTest extends TestCase {
         final String oldMessage = Settings.getCacheTwitterMessage();
         try {
             TestSettings.setCacheTwitterMessage("[NAME] #cgeo #mytag");
-            Geocache cache = new Geocache();
+            final Geocache cache = new Geocache();
             cache.setGeocode("GC1234");
             cache.setName("TwitterTest");
             assertThat(Twitter.getStatusMessage(cache, null)).isEqualTo("TwitterTest #cgeo #mytag #geocaching");

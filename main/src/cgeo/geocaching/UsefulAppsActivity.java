@@ -1,8 +1,5 @@
 package cgeo.geocaching;
 
-import butterknife.ButterKnife;
-import butterknife.Bind;
-
 import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.ui.AbstractViewHolder;
@@ -20,6 +17,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 public class UsefulAppsActivity extends AbstractActionBarActivity {
 
@@ -42,7 +42,7 @@ public class UsefulAppsActivity extends AbstractActionBarActivity {
         @NonNull
         private final String packageName;
 
-        public HelperApp(final int title, final int description, final int icon, @NonNull final String packageName) {
+        HelperApp(final int title, final int description, final int icon, @NonNull final String packageName) {
             this.titleId = title;
             this.descriptionId = description;
             this.iconId = icon;

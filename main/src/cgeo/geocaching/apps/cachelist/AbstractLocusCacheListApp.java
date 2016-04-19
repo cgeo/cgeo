@@ -1,9 +1,9 @@
 package cgeo.geocaching.apps.cachelist;
 
-import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.apps.AbstractLocusApp;
+import cgeo.geocaching.models.Geocache;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.eclipse.jdt.annotation.NonNull;
@@ -17,7 +17,7 @@ abstract class AbstractLocusCacheListApp extends AbstractLocusApp implements Cac
 
     private final boolean export;
 
-    public AbstractLocusCacheListApp(final boolean export) {
+    AbstractLocusCacheListApp(final boolean export) {
         super(getString(export ? R.string.caches_map_locus_export : R.string.caches_map_locus), Intent.ACTION_VIEW);
         this.export = export;
     }

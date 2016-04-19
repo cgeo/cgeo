@@ -144,11 +144,11 @@ public class TextFactoryTest extends AndroidTestCase {
         assertThat(TextFactory.getText(MY_POSITION, MY_POSITION, 0)).isEqualTo("Klockan 12. 0 fot");
     }
 
-    private static void setLocale(Locale locale, boolean metric) {
+    private static void setLocale(final Locale locale, final boolean metric) {
         setLocale(locale, locale, metric);
     }
 
-    private static void setLocale(Locale locale1, Locale locale2, boolean metric) {
+    private static void setLocale(final Locale locale1, final Locale locale2, final boolean metric) {
         final Configuration config = new Configuration();
         config.locale = locale1;
         final Resources resources = CgeoApplication.getInstance().getResources();

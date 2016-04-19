@@ -2,13 +2,13 @@ package cgeo.geocaching.activity.waypoint;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.EditWaypointActivity_;
-import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.activity.AbstractEspressoTest;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
+import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.storage.DataStore;
 
 import java.util.Collections;
 
@@ -44,7 +44,7 @@ public abstract class AbstractWaypointActivityTest extends AbstractEspressoTest<
 
     @SuppressWarnings("static-method")
     protected Geocache createTestCache() {
-        Geocache testCache = new Geocache();
+        final Geocache testCache = new Geocache();
         testCache.setGeocode("TEST");
         testCache.setType(CacheType.TRADITIONAL);
         return testCache;

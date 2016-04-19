@@ -25,7 +25,7 @@ import java.util.List;
 public class GeocacheTest extends CGeoTestCase {
 
     private static final class MockedEventCache extends Geocache {
-        public MockedEventCache(final Date date) {
+        MockedEventCache(final Date date) {
             setHidden(date);
             setType(CacheType.EVENT);
         }

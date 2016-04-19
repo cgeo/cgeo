@@ -56,7 +56,6 @@ import android.database.sqlite.SQLiteStatement;
 
 import java.io.File;
 import java.io.FilenameFilter;
-import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;

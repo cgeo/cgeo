@@ -16,7 +16,7 @@ public class FileTypeDetectorTest extends AbstractResourceInstrumentationTestCas
 
     private static class FileContentResolver extends ContentResolver {
 
-        public FileContentResolver(Context context) {
+        FileContentResolver(final Context context) {
             super(context);
         }
     }

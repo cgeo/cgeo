@@ -36,7 +36,7 @@ public class CgeoTestsActivity extends Activity {
         private BufferedReader mReader;
         private Process mProc;
 
-        public LogcatAsyncTask() {
+        LogcatAsyncTask() {
             try {
                 mProc = Runtime.getRuntime().exec(CMD);
                 mReader = new BufferedReader(new InputStreamReader(
@@ -136,8 +136,7 @@ public class CgeoTestsActivity extends Activity {
         if (startInstrumentation(cn, null, null)) {
             logCatTask = new LogcatAsyncTask();
             logCatTask.execute(TIMEOUT);
-        }
-        else {
+        } else {
             Toast.makeText(this,
                     "Cannot run instrumentation for " + pn, Toast.LENGTH_SHORT)
                     .show();

@@ -66,8 +66,7 @@ public final class ContactsActivity extends Activity {
 
         if (contacts.size() > 1) {
             selectContact(contacts);
-        }
-        else {
+        } else {
             final int contactId = contacts.get(0).first;
             openContactAndFinish(contactId);
         }

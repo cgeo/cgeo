@@ -303,7 +303,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         private boolean receivedTerminationMessage = false;
         private static final int TERMINATION_MESSAGE = 9999;
 
-        public TestHandler(final Looper serviceLooper) {
+        TestHandler(final Looper serviceLooper) {
             super(serviceLooper);
         }
 

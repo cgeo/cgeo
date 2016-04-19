@@ -1,9 +1,10 @@
 package cgeo.geocaching.connector;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import junit.framework.TestCase;
 
 import java.util.Set;
+
+import junit.framework.TestCase;
 
 public class WaymarkingConnectorTest extends TestCase {
 
@@ -34,7 +35,7 @@ public class WaymarkingConnectorTest extends TestCase {
     }
 
     public static void testHandledGeocodes() {
-        Set<String> geocodes = ConnectorFactoryTest.getGeocodeSample();
+        final Set<String> geocodes = ConnectorFactoryTest.getGeocodeSample();
         assertThat(getWaymarkingConnector().handledGeocodes(geocodes)).containsOnly("WM1234", "WM5678");
     }
 }

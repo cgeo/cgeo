@@ -16,9 +16,9 @@ import cgeo.geocaching.ui.AbstractViewHolder;
 import cgeo.geocaching.ui.NavigationActionProvider;
 import cgeo.geocaching.ui.dialog.CoordinatesInputDialog;
 import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.AndroidRxUtils;
 
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.Nullable;
@@ -91,7 +91,7 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity implemen
     private static class DestinationHistoryAdapter extends ArrayAdapter<Destination> {
         private LayoutInflater inflater = null;
 
-        public DestinationHistoryAdapter(final Context context,
+        DestinationHistoryAdapter(final Context context,
                 final List<Destination> objects) {
             super(context, 0, objects);
         }

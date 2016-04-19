@@ -2,10 +2,10 @@ package cgeo.geocaching.connector.ec;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.connector.ConnectorFactoryTest;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LogType;
+import cgeo.geocaching.models.Geocache;
 
 import java.util.List;
 import java.util.Set;
@@ -39,7 +39,7 @@ public class ECConnectorTest extends TestCase {
     }
 
     public static void testHandledGeocodes() {
-        Set<String> geocodes = ConnectorFactoryTest.getGeocodeSample();
+        final Set<String> geocodes = ConnectorFactoryTest.getGeocodeSample();
         assertThat(ECConnector.getInstance().handledGeocodes(geocodes)).containsOnly("EC1234", "EC5678");
     }
 }

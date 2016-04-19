@@ -32,7 +32,7 @@ class CalendarEntry {
     @NonNull
     private final Uri uri;
 
-    public CalendarEntry(@NonNull final Uri uri) {
+    CalendarEntry(@NonNull final Uri uri) {
         this.uri = uri;
         this.shortDesc = getParameter(ICalendar.PARAM_SHORT_DESC);
         this.hiddenDate = getParameter(ICalendar.PARAM_HIDDEN_DATE);

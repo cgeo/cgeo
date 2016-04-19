@@ -1,10 +1,10 @@
 package cgeo.geocaching.apps.navi;
 
-import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
-import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.utils.ProcessUtils;
 
 import org.eclipse.jdt.annotation.NonNull;
@@ -19,7 +19,7 @@ class AndroidWearApp extends AbstractPointNavigationApp {
     private static final String INTENT_ACTION = "cgeo.geocaching.wear.NAVIGATE_TO";
     private static final String INTENT_PACKAGE = "com.javadog.cgeowear";
 
-    public AndroidWearApp() {
+    AndroidWearApp() {
         super(getString(R.string.cache_menu_android_wear), INTENT_ACTION, null);
     }
 

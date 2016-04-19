@@ -8,7 +8,7 @@ import java.util.List;
 
 class MockedLazyInitializedList<ElementType> extends LazyInitializedList<ElementType> {
 
-    public MockedLazyInitializedList(ElementType[] elements) {
+    MockedLazyInitializedList(final ElementType[] elements) {
         clear();
         addAll(Arrays.asList(elements));
     }
