@@ -10,6 +10,8 @@ import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.Dialogs.ItemWithIcon;
 import cgeo.geocaching.utils.ImageUtils;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 import android.content.Intent;
 import android.content.Intent.ShortcutIconResource;
 import android.graphics.Bitmap;
@@ -75,6 +77,7 @@ public class CreateShortcutActivity extends AbstractActionBarActivity {
         // shortcuts.add(new Shortcut(R.string.cache_menu_visit, new Intent(this, LogCacheActivity.class)));
         // shortcuts.add(new Shortcut(R.string.trackable_log_touch, new Intent(this, LogTrackableActivity.class)));
 
+        @NonNull
         final Shortcut offlineShortcut = new Shortcut(R.string.list_title, R.drawable.main_stored, null);
         shortcuts.add(offlineShortcut);
         final Intent allIntent = new Intent(this, CacheListActivity.class);
@@ -88,7 +91,7 @@ public class CreateShortcutActivity extends AbstractActionBarActivity {
 
             @Override
             public void call(final Shortcut shortcut) {
-                if (shortcut == offlineShortcut) {
+                if (offlineShortcut.equals(shortcut)) {
                     promptForListShortcut();
                 } else {
                     createShortcutAndFinish(shortcut.toString(), shortcut.intent, shortcut.drawableResourceId);

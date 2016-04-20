@@ -20,7 +20,6 @@ import java.util.List;
  */
 public class FilterRegistry {
     private final List<FactoryEntry> registry = new ArrayList<>();
-    private static Resources res;
 
     static class FactoryEntry {
         private final String name;
@@ -54,7 +53,6 @@ public class FilterRegistry {
     }
 
     private FilterRegistry() {
-        res = CgeoApplication.getInstance().getResources();
         register(R.string.caches_filter_type, TypeFilter.Factory.class);
         register(R.string.caches_filter_size, SizeFilter.Factory.class);
         register(R.string.cache_terrain, TerrainFilter.Factory.class);
@@ -69,6 +67,7 @@ public class FilterRegistry {
     }
 
     private void register(@StringRes final int resourceId, final @NonNull Class<? extends IFilterFactory> factoryClass) {
+        final Resources res = CgeoApplication.getInstance().getResources();
         registry.add(new FactoryEntry(res.getString(resourceId), factoryClass));
     }
 

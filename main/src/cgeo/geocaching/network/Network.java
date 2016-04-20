@@ -8,6 +8,22 @@ import cgeo.geocaching.utils.RxOkHttpUtils;
 import cgeo.geocaching.utils.TextUtils;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
+
+import org.apache.commons.lang3.CharEncoding;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+import java.util.concurrent.TimeUnit;
+import java.util.regex.Pattern;
+
 import okhttp3.FormBody;
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
@@ -18,23 +34,9 @@ import okhttp3.Request;
 import okhttp3.Request.Builder;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-import org.apache.commons.lang3.CharEncoding;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import rx.Completable;
 import rx.Single;
 import rx.functions.Func1;
-
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.net.URLEncoder;
-import java.util.concurrent.TimeUnit;
-import java.util.regex.Pattern;
 
 public final class Network {
 
@@ -157,7 +159,7 @@ public final class Network {
                                             @Nullable final File cacheFile) {
         final Builder builder = new Builder();
 
-        if (method.equals("GET")) {
+        if ("GET".equals(method)) {
             final HttpUrl.Builder urlBuilder = HttpUrl.parse(uri).newBuilder();
             if (params != null) {
                 urlBuilder.encodedQuery(params.toString());

@@ -1,11 +1,11 @@
 package cgeo.geocaching.ui;
 
-import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.models.LogEntry;
 import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.LogType;
+import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.LogEntry;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.CacheListAdapter.ViewHolder;
 
 import android.app.Activity;
@@ -89,7 +89,7 @@ public final class LoggingUI extends AbstractUIFactory {
         final List<LogType> logTypes = cache.getPossibleLogTypes();
         final ArrayList<LogTypeEntry> list = new ArrayList<>();
         for (final LogType logType : logTypes) {
-            list.add(new LogTypeEntry(logType, null, logType == currentLogType));
+            list.add(new LogTypeEntry(logType, null, logType.equals(currentLogType)));
         }
         if (cache.isLogOffline()) {
             list.add(new LogTypeEntry(null, SpecialLogType.CLEAR_LOG, false));

@@ -838,7 +838,7 @@ final class OkapiClient {
     @NonNull
     static String getPreferredLanguage() {
         final String defaultLanguage = StringUtils.defaultIfBlank(StringUtils.lowerCase(Locale.getDefault().getLanguage()), "en");
-        if (defaultLanguage.equals("en")) {
+        if ("en".equals(defaultLanguage)) {
             return defaultLanguage;
         }
         return Settings.useEnglish() ? "en|" + defaultLanguage : defaultLanguage + "|en";

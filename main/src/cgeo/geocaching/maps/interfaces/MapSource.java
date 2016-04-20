@@ -1,5 +1,7 @@
 package cgeo.geocaching.maps.interfaces;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 public interface MapSource {
     String getName();
 
@@ -7,5 +9,6 @@ public interface MapSource {
 
     int getNumericalId();
 
+    @NonNull
     MapProvider getMapProvider();
 }

@@ -1423,7 +1423,7 @@ public final class GCParser {
      */
     static int getWatchListCount(final String page) {
         final String sCount = TextUtils.getMatch(page, GCConstants.PATTERN_WATCHLIST_COUNT, true, 1, "notFound", false);
-        if (sCount.equals("notFound")) {
+        if ("notFound".equals(sCount)) {
             return -1;
         }
         try {

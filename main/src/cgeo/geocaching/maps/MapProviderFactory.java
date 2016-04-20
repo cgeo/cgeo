@@ -61,7 +61,7 @@ public class MapProviderFactory {
     public static boolean isSameActivity(@NonNull final MapSource source1, @NonNull final MapSource source2) {
         final MapProvider provider1 = source1.getMapProvider();
         final MapProvider provider2 = source2.getMapProvider();
-        return provider1 == provider2 && provider1.isSameActivity(source1, source2);
+        return provider1.equals(provider2) && provider1.isSameActivity(source1, source2);
     }
 
     public static void addMapviewMenuItems(final Menu menu) {

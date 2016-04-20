@@ -3,13 +3,16 @@ package cgeo.geocaching.maps;
 import cgeo.geocaching.maps.interfaces.MapProvider;
 import cgeo.geocaching.maps.interfaces.MapSource;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 public abstract class AbstractMapSource implements MapSource {
 
     private final String name;
+    @NonNull
     private final MapProvider mapProvider;
     private final String id;
 
-    protected AbstractMapSource(final String id, final MapProvider mapProvider, final String name) {
+    protected AbstractMapSource(final String id, @NonNull final MapProvider mapProvider, final String name) {
         this.id = id;
         this.mapProvider = mapProvider;
         this.name = name;
@@ -37,6 +40,7 @@ public abstract class AbstractMapSource implements MapSource {
     }
 
     @Override
+    @NonNull
     public MapProvider getMapProvider() {
         return mapProvider;
     }
