@@ -10,7 +10,7 @@
     android:paddingLeft="5dip"
     android:paddingRight="5dip"
     android:paddingTop="7dip"
-    tools:context=".ui.PocketQueryListAdapter">
+    tools:context=".connector.gc.PocketQueryListAdapter">
 
     <Button
         android:id="@+id/cachelist"

@@ -5,7 +5,7 @@
     android:layout_height="fill_parent"
     android:orientation="vertical"
     android:padding="4dip"
-    tools:context=".network.OAuthAuthorizationActivity" >
+    tools:context=".activity.OAuthAuthorizationActivity" >
 
     <LinearLayout
         android:layout_width="fill_parent"
