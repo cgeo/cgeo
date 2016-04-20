@@ -454,6 +454,9 @@
   <string name="settings_activate_oc_uk">Aktiválás</string>
   <string name="init_summary_oc_uk">Ládák letöltése az opencaching.org.uk-ról</string>
   <string name="init_oc_uk_description">A c:geo hitelesítése az opencaching.org.uk-án ládák kereséséhez és találataid lekéréséhez, szűréséhez.</string>
+  <string name="init_su">Geocaching.su</string>
+  <string name="init_summary_su">Ládák letöltése a geocaching.su-ról</string>
+  <string name="settings_activate_su">Aktiválás</string>
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_gcvote_password_description">Ládák értékeléséhez itt add meg a GCVote jelszavad és kövesd az utasításokat a GCVote.com-on!</string>
   <string name="err_gcvote_send_rating">Az értélkelés elküldése sikertelen. Ellenőrizd a GCVote jelszavad a beállításoknál! Próbálkozz a törlésével!</string>
