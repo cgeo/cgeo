@@ -66,7 +66,7 @@ public final class GCConstants {
     final static Pattern PATTERN_ATTRIBUTES = Pattern.compile("(<img src=\"/images/attributes.*?)</p");
     /** Two groups ! */
     final static Pattern PATTERN_ATTRIBUTESINSIDE = Pattern.compile("<img src=\"([^\"]+)\" alt=\"([^\"]+?)\"");
-    final static Pattern PATTERN_SPOILER_IMAGE = Pattern.compile("<a href=\"(http://img(?:cdn)?\\.geocaching\\.com[^.]+\\.(?:jpg|jpeg|png|gif))\"[^>]+>" + "([^<]+)</a>" + "(?:\\s*<span[^>]*>([^<]+)</span>)?", Pattern.DOTALL);
+    final static Pattern PATTERN_SPOILER_IMAGE = Pattern.compile("<a href=\"(http://img(?:cdn)?\\.geocaching\\.com[^.]+\\.(?:jpg|jpeg|png|gif))\"[^>]+>" + "([^<]+)</a>" + ".*?(?:description\"[^>]*>([^<]+)</span>)?</li>", Pattern.DOTALL);
     final static Pattern PATTERN_INVENTORY = Pattern.compile("ctl00_ContentBody_uxTravelBugList_uxInventoryLabel\">.*?WidgetBody(.*?)<div");
     final static Pattern PATTERN_INVENTORYINSIDE = Pattern.compile("[^<]*<li>[^<]*<a href=\"[a-z0-9\\-\\_\\.\\?\\/\\:\\@]*\\/track\\/details\\.aspx\\?guid=([0-9a-z\\-]+)[^\"]*\"[^>]*>[^<]*<img src=\"[^\"]+\"[^>]*>[^<]*<span>([^<]+)<\\/span>[^<]*<\\/a>[^<]*<\\/li>");
     final static Pattern PATTERN_WATCHLIST = Pattern.compile(Pattern.quote("watchlist.aspx") + ".{1,50}" + Pattern.quote("action=rem"));

@@ -241,4 +241,19 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
     public static void testOnlineWatchCount() {
         assertThat(CgeoApplicationTest.testSearchByGeocode("GCK25B").getWatchlistCount()).as("Geocaching HQ watch count").isGreaterThan(50);
     }
+
+    public void testSpoilerDescriptionForOwner() {
+        final Geocache cache = parseCache(R.raw.gc352y3_owner_view);
+        assertThat(cache).isNotNull();
+        final List<Image> spoilers = cache.getSpoilers();
+
+        assertThat(spoilers).hasSize(2);
+
+        Image spoiler = spoilers.get(0);
+        assertThat(spoiler.getTitle()).isEqualTo("Grundschule Moltkestra&#223;e");
+
+        spoiler = spoilers.get(1);
+        assertThat(spoiler.getTitle()).isEqualTo("SPOILER");
+        assertThat(spoiler.getDescription()).isEqualTo("Suche diese Schraube");
+    }
 }
