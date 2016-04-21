@@ -9,6 +9,7 @@ import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.utils.Log;
 
 import com.drew.imaging.ImageMetadataReader;
+import com.drew.imaging.ImageProcessingException;
 import com.drew.lang.GeoLocation;
 import com.drew.metadata.Metadata;
 import com.drew.metadata.exif.GpsDirectory;
@@ -42,6 +43,7 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Collection;
 import java.util.LinkedList;
 
@@ -198,8 +200,8 @@ public class ImagesList {
                     return new Geopoint(geoLocation.getLatitude(), geoLocation.getLongitude());
                 }
             }
-        } catch (final Exception e) {
-            Log.e("ImagesList.getImageLocation", e);
+        } catch (ImageProcessingException | IOException e) {
+            Log.i("ImagesList.getImageLocation", e);
         }
         return null;
     }
