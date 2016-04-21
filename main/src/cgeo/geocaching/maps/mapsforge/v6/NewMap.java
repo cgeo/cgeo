@@ -1159,7 +1159,7 @@ public class NewMap extends AbstractActionBarActivity {
         Settings.setMapCenter(new MapsforgeGeoPoint(mapView.getModel().mapViewPosition.getCenter()));
     }
 
-    private class RequestDetailsThread extends Thread {
+    private static class RequestDetailsThread extends Thread {
 
         private final @NonNull Geocache cache;
         private final @NonNull WeakReference<NewMap> map;
