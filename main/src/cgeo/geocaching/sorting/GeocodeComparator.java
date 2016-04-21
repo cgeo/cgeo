@@ -16,6 +16,6 @@ public class GeocodeComparator extends AbstractCacheComparator {
 
     @Override
     protected int compareCaches(final Geocache cache1, final Geocache cache2) {
-        throw new RuntimeException("should never be called");
+        throw new IllegalStateException("should never be called");
     }
 }

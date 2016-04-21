@@ -6,16 +6,18 @@ import cgeo.geocaching.utils.Log;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
-import rx.Observable;
-import rx.Observable.OnSubscribe;
-import rx.Subscriber;
-import rx.functions.Func1;
 
 import android.location.Address;
 
 import java.util.Locale;
+
+import rx.Observable;
+import rx.Observable.OnSubscribe;
+import rx.Subscriber;
+import rx.functions.Func1;
 
 public class MapQuestGeocoder {
 
@@ -58,7 +60,7 @@ public class MapQuestGeocoder {
                         final int statusCode = response.path("info").path("statuscode").asInt(-1);
                         if (statusCode != 0) {
                             Log.w("MapQuest decoder error: statuscode is not 0");
-                            throw new RuntimeException("no correct answer from MapQuest geocoder");
+                            throw new IllegalStateException("no correct answer from MapQuest geocoder");
                         }
                         return Observable.create(new OnSubscribe<Address>() {
                             @Override

@@ -2317,7 +2317,7 @@ public class DataStore {
         selection.append(dbTableCachesLists);
         selection.append(" WHERE list_id ");
         selection.append(listId != PseudoList.ALL_LIST.id ? "=" + Math.max(listId, 1) : ">= " + StoredList.STANDARD_LIST_ID);
-        selection.append(")");
+        selection.append(')');
 
 
         try {

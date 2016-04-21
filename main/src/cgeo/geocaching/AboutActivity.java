@@ -1,5 +1,20 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.activity.AbstractViewPagerActivity;
+import cgeo.geocaching.compatibility.Compatibility;
+import cgeo.geocaching.ui.AbstractCachingPageViewCreator;
+import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
+import cgeo.geocaching.utils.ClipboardUtils;
+import cgeo.geocaching.utils.ProcessUtils;
+import cgeo.geocaching.utils.SystemInformation;
+import cgeo.geocaching.utils.Version;
+
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.CharEncoding;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
+
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -13,12 +28,6 @@ import android.widget.Button;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.CharEncoding;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.apache.commons.lang3.tuple.Pair;
-
 import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;
@@ -26,14 +35,6 @@ import java.util.Scanner;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import cgeo.geocaching.activity.AbstractViewPagerActivity;
-import cgeo.geocaching.compatibility.Compatibility;
-import cgeo.geocaching.ui.AbstractCachingPageViewCreator;
-import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
-import cgeo.geocaching.utils.ClipboardUtils;
-import cgeo.geocaching.utils.ProcessUtils;
-import cgeo.geocaching.utils.SystemInformation;
-import cgeo.geocaching.utils.Version;
 
 public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page> {
 
@@ -139,7 +140,7 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
                 @Override
                 public void onClick(final View view) {
                     ClipboardUtils.copyToClipboard(systemInfo);
-                    final Intent share = new Intent(android.content.Intent.ACTION_SENDTO);
+                    final Intent share = new Intent(Intent.ACTION_SENDTO);
                     share.setType("message/rfc822");
                     share.setData(Uri.parse("mailto:"));
                     share.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.about_system_info));
@@ -246,7 +247,7 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
     }
 
     @Override
-    protected final cgeo.geocaching.activity.AbstractViewPagerActivity.PageViewCreator createViewCreator(final Page page) {
+    protected final AbstractViewPagerActivity.PageViewCreator createViewCreator(final Page page) {
         switch (page) {
             case VERSION:
                 return new VersionViewCreator();

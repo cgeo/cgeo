@@ -28,7 +28,7 @@ public class LazyInitializedListTest extends AndroidTestCase {
                 return null;
             }
             if (counter == MAKE_EXCEPTION) {
-                throw new RuntimeException("exception in call()");
+                throw new IllegalStateException("exception in call()");
             }
             final List<Integer> result = new LinkedList<>();
             for (int i = 0; i < counter; i++) {

@@ -30,7 +30,7 @@ public class SensorsTest extends ActivityInstrumentationTestCase2<MainActivity> 
         assertThat(angle == 1.0f || angle == 91.0f || angle == 181.0f || angle == 271.0f).isTrue();
     }
 
-    private static <T> void testDataAvailability(final Observable<T> observable) {
+    private static <T> void assertDataAvailability(final Observable<T> observable) {
         try {
             observable.timeout(2, TimeUnit.SECONDS).first().toBlocking().single();
         } catch (final Exception ignored) {
@@ -39,12 +39,12 @@ public class SensorsTest extends ActivityInstrumentationTestCase2<MainActivity> 
     }
 
     public void testDirectionObservable() {
-        testDataAvailability(sensors.directionObservable());
+        assertDataAvailability(sensors.directionObservable());
     }
 
     public void testGeodataObservable() {
-        testDataAvailability(sensors.geoDataObservable(false));
-        testDataAvailability(sensors.geoDataObservable(true));
+        assertDataAvailability(sensors.geoDataObservable(false));
+        assertDataAvailability(sensors.geoDataObservable(true));
     }
 
 }

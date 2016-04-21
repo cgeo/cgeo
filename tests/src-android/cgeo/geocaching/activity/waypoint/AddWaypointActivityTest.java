@@ -17,8 +17,6 @@ import static org.hamcrest.Matchers.startsWith;
 import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.WaypointType;
 
-import com.google.android.apps.common.testing.ui.espresso.action.ViewActions;
-
 import android.test.suitebuilder.annotation.Suppress;
 
 public class AddWaypointActivityTest extends AbstractAddWaypointActivityTest {
@@ -58,7 +56,7 @@ public class AddWaypointActivityTest extends AbstractAddWaypointActivityTest {
         onView(withId(R.id.name)).check(matches(not(withText(waypointType.getL10n()))));
 
         // open type selector
-        onView(withId(R.id.type)).perform(ViewActions.click());
+        onView(withId(R.id.type)).perform(click());
 
         // select final type
         onData(hasToString(startsWith(waypointType.getL10n()))).inAdapterView(isClickable()).perform(click());

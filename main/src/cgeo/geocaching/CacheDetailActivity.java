@@ -1066,7 +1066,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             gridView.setVisibility(View.VISIBLE);
             gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
-                public void onItemClick(final android.widget.AdapterView<?> parent, final View view, final int position, final long id) {
+                public void onItemClick(final AdapterView<?> parent, final View view, final int position, final long id) {
                     toggleAttributesView();
                 }
             });
