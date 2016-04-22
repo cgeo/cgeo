@@ -1,13 +1,7 @@
 package cgeo.geocaching.files;
 
-import android.support.annotation.RawRes;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
-import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.models.LogEntry;
-import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.gc.GCConstants;
@@ -18,11 +12,17 @@ import cgeo.geocaching.enumerations.LoadFlags.LoadFlag;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.LogEntry;
+import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.sorting.GeocodeComparator;
+import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 import cgeo.geocaching.test.R;
 import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.SynchronizedDateFormat;
+
+import android.support.annotation.RawRes;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -40,10 +40,11 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
     private static final SynchronizedDateFormat LOG_DATE_FORMAT = new SynchronizedDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US); // 2010-04-20T07:00:00Z
 
     public void testGPXVersion100() throws Exception {
-        testGPXVersion(R.raw.gc1bkp3_gpx100);
+        final Geocache cache = readAndAssertTreasureIsland(R.raw.gc1bkp3_gpx100);
+        assertThat(cache).isNotNull();
     }
 
-    private Geocache testGPXVersion(@RawRes final int resourceId) throws IOException, ParserException {
+    private Geocache readAndAssertTreasureIsland(@RawRes final int resourceId) throws IOException, ParserException {
         final List<Geocache> caches = readGPX10(resourceId);
         assertThat(caches).isNotNull();
         assertThat(caches).hasSize(1);
@@ -66,7 +67,7 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
     }
 
     public void testGPXVersion101() throws IOException, ParserException {
-        final Geocache cache = testGPXVersion(R.raw.gc1bkp3_gpx101);
+        final Geocache cache = readAndAssertTreasureIsland(R.raw.gc1bkp3_gpx101);
         assertThat(cache.getAttributes()).isNotNull();
         assertThat(cache.getAttributes()).hasSize(10);
     }

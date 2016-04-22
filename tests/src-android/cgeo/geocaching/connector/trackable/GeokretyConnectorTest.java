@@ -85,10 +85,6 @@ public class GeokretyConnectorTest extends AbstractResourceInstrumentationTestCa
         assertThat(trackables.get(1).getIconBrand()).isEqualTo(TrackableBrand.GEOKRETY.getIconResource());
     }
 
-    public static void testGetTrackableLoggingManager() throws Exception {
-        assertThat(getConnector().getTrackableLoggingManager(null)).isNotNull();
-    }
-
     private static GeokretyConnector getConnector() {
         return new GeokretyConnector();
     }
