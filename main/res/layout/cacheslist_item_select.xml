@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/one_cache"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="?background_color"
+    tools:context=".maps.mapsforge.v6.NewMap" >
+
+    <!-- cache name and icon -->
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_marginRight="3dip"
+        android:ellipsize="marquee"
+        android:lines="1"
+        android:paddingRight="3dip"
+        android:paddingTop="5dip"
+        android:scrollHorizontally="true"
+        android:singleLine="true"
+        android:textColor="?text_color"
+        android:textIsSelectable="false"
+        android:textSize="18sp" />
+
+    <!-- cache attributes and other info -->
+
+    <TextView
+        android:id="@+id/info"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="left"
+        android:layout_marginRight="3dip"
+        android:layout_marginLeft="3dip"
+        android:layout_marginTop="30dip"
+        android:ellipsize="marquee"
+        android:lines="1"
+        android:paddingBottom="5dip"
+        android:paddingRight="3dip"
+        android:scrollHorizontally="true"
+        android:singleLine="true"
+        android:textColor="?text_color_grey"
+        android:textIsSelectable="false"
+        android:textSize="12sp" />
+
+</RelativeLayout>

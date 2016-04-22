@@ -68,6 +68,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.ActionBar;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -185,9 +186,7 @@ public class NewMap extends AbstractActionBarActivity {
         mapView.getMapZoomControls().setZoomLevelMax((byte) 20);
 
         // create a tile cache of suitable size
-        tileCache = AndroidUtil.createTileCache(this, "mapcache",
-                mapView.getModel().displayModel.getTileSize(), 1f,
-                this.mapView.getModel().frameBufferModel.getOverdrawFactor());
+        tileCache = AndroidUtil.createTileCache(this, "mapcache", mapView.getModel().displayModel.getTileSize(), 1f, this.mapView.getModel().frameBufferModel.getOverdrawFactor());
 
         // attach drag handler
         final DragHandler dragHandler = new DragHandler(this);
@@ -452,23 +451,22 @@ public class NewMap extends AbstractActionBarActivity {
 
         builder.setTitle(R.string.map_theme_select);
 
-        builder.setSingleChoiceItems(names.toArray(new String[names.size()]), selectedItem,
-                new DialogInterface.OnClickListener() {
+        builder.setSingleChoiceItems(names.toArray(new String[names.size()]), selectedItem, new DialogInterface.OnClickListener() {
 
-                    @Override
-                    public void onClick(final DialogInterface dialog, final int newItem) {
-                        if (newItem != selectedItem) {
-                            // Adjust index because of <default> selection
-                            if (newItem > 0) {
-                                Settings.setCustomRenderThemeFile(themeFiles[newItem - 1].getPath());
-                            } else {
-                                Settings.setCustomRenderThemeFile(StringUtils.EMPTY);
-                            }
-                            setMapTheme();
-                        }
-                        dialog.cancel();
+            @Override
+            public void onClick(final DialogInterface dialog, final int newItem) {
+                if (newItem != selectedItem) {
+                    // Adjust index because of <default> selection
+                    if (newItem > 0) {
+                        Settings.setCustomRenderThemeFile(themeFiles[newItem - 1].getPath());
+                    } else {
+                        Settings.setCustomRenderThemeFile(StringUtils.EMPTY);
                     }
-                });
+                    setMapTheme();
+                }
+                dialog.cancel();
+            }
+        });
 
         builder.show();
     }
@@ -495,8 +493,7 @@ public class NewMap extends AbstractActionBarActivity {
         Settings.setMapSource(mapSource);
 
         // Create new render layer
-        final TileRendererLayer newLayer = new TileRendererLayer(tileCache, new MapFile(NewMap.getMapFile()),
-                this.mapView.getModel().mapViewPosition, false, true, AndroidGraphicFactory.INSTANCE);
+        final TileRendererLayer newLayer = new TileRendererLayer(tileCache, new MapFile(NewMap.getMapFile()), this.mapView.getModel().mapViewPosition, false, true, AndroidGraphicFactory.INSTANCE);
 
         // Exchange layer
         final TileRendererLayer oldLayer = this.tileRendererLayer;
@@ -523,8 +520,7 @@ public class NewMap extends AbstractActionBarActivity {
         // tile renderer layer (if map file is defined)
         final File mapFile = NewMap.getMapFile();
         if (mapFile != null && mapFile.exists()) {
-            this.tileRendererLayer = new TileRendererLayer(tileCache, new MapFile(mapFile),
-                    this.mapView.getModel().mapViewPosition, false, true, AndroidGraphicFactory.INSTANCE);
+            this.tileRendererLayer = new TileRendererLayer(tileCache, new MapFile(mapFile), this.mapView.getModel().mapViewPosition, false, true, AndroidGraphicFactory.INSTANCE);
             this.setMapTheme();
 
             // only once a layer is associated with a mapView the rendering starts
@@ -638,13 +634,7 @@ public class NewMap extends AbstractActionBarActivity {
     }
 
     private MapState prepareMapState() {
-        return new MapState(mapView.getModel().mapViewPosition.getCenter(),
-                mapView.getModel().mapViewPosition.getZoomLevel(),
-                followMyLocation,
-                false,
-                targetGeocode,
-                lastNavTarget,
-                isLiveEnabled);
+        return new MapState(mapView.getModel().mapViewPosition.getCenter(), mapView.getModel().mapViewPosition.getZoomLevel(), followMyLocation, false, targetGeocode, lastNavTarget, isLiveEnabled);
     }
 
     private void centerMap(final Geopoint geopoint) {
@@ -698,7 +688,6 @@ public class NewMap extends AbstractActionBarActivity {
                 map.switchMyLocationButton();
             }
         }
-
 
         MyLocationListener(@NonNull final NewMap map) {
             mapRef = new WeakReference<>(map);
@@ -879,9 +868,7 @@ public class NewMap extends AbstractActionBarActivity {
     }
 
     public static Intent getLiveMapIntent(final Activity fromActivity) {
-        return new Intent(fromActivity, NewMap.class)
-                .putExtra(Intents.EXTRA_MAP_MODE, MapMode.LIVE)
-                .putExtra(Intents.EXTRA_LIVE_ENABLED, Settings.isLiveMap());
+        return new Intent(fromActivity, NewMap.class).putExtra(Intents.EXTRA_MAP_MODE, MapMode.LIVE).putExtra(Intents.EXTRA_LIVE_ENABLED, Settings.isLiveMap());
     }
 
     public static void startActivityCoords(final Activity fromActivity, final Geopoint coords, final WaypointType type, final String title) {
@@ -1041,45 +1028,41 @@ public class NewMap extends AbstractActionBarActivity {
         }
     }
 
-    public void showSelection(final ArrayList<GeoitemRef> items) {
+    public void showSelection(final @NonNull ArrayList<GeoitemRef> items) {
+        if (items.isEmpty()) {
+            return;
+        }
+
+        if (items.size() == 1) {
+            showPopup(items.get(0));
+            return;
+        }
         try {
+            final ArrayList<GeoitemRef> sorted = new ArrayList<>(items);
+            Collections.sort(sorted, GeoitemRef.NAME_COMPARATOR);
 
-            if (items.isEmpty()) {
-                return;
-            }
+            final LayoutInflater inflater = LayoutInflater.from(this);
+            final ListAdapter adapter = new ArrayAdapter<GeoitemRef>(this, R.layout.cacheslist_item_select, sorted) {
+                @Override
+                public View getView(final int position, final View convertView, final ViewGroup parent) {
 
-            if (items.size() > 1) {
+                    final View view = convertView == null ? inflater.inflate(R.layout.cacheslist_item_select, null) : convertView;
+                    final TextView tv = (TextView) view.findViewById(R.id.text);
 
-                final ListAdapter adapter = new ArrayAdapter<GeoitemRef>(
-                        this,
-                        android.R.layout.select_dialog_item,
-                        android.R.id.text1,
-                        items){
-                    @Override
-                    public View getView(final int position, final View convertView, final ViewGroup parent) {
-                        //Use super class to create the View
-                        final View v = super.getView(position, convertView, parent);
-                        final TextView tv = (TextView) v.findViewById(android.R.id.text1);
+                    final GeoitemRef item = getItem(position);
+                    tv.setText(item.getName());
 
-                        //Put the image on the TextView
-                        tv.setCompoundDrawablesWithIntrinsicBounds(items.get(position).getMarkerId(), 0, 0, 0);
+                    //Put the image on the TextView
+                    tv.setCompoundDrawablesWithIntrinsicBounds(item.getMarkerId(), 0, 0, 0);
 
-                        //Add margin between image and text (support various screen densities)
-                        final int dp5 = (int) (5 * getResources().getDisplayMetrics().density + 0.5f);
-                        tv.setCompoundDrawablePadding(dp5);
+                    final TextView infoView = (TextView) view.findViewById(R.id.info);
+                    infoView.setText(item.getItemCode());
 
-                        return v;
-                    }
-                };
+                    return view;
+                }
+            };
 
-                new AlertDialog.Builder(this)
-                    .setTitle("Select an item")
-                    .setAdapter(adapter, new SelectionClickListener(items))
-                    .show();
-
-            } else {
-                showPopup(items.get(0));
-            }
+            new AlertDialog.Builder(this).setTitle("Select an item").setAdapter(adapter, new SelectionClickListener(items)).show();
 
         } catch (final NotFoundException e) {
             Log.e("NewMap.showSelection", e);

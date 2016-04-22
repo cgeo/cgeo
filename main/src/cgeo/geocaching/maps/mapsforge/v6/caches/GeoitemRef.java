@@ -4,7 +4,17 @@ import cgeo.geocaching.enumerations.CoordinatesType;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.Comparator;
+
 public class GeoitemRef {
+
+    public static final Comparator<? super GeoitemRef> NAME_COMPARATOR = new Comparator<GeoitemRef>() {
+
+        @Override
+        public int compare(final GeoitemRef left, final GeoitemRef right) {
+            return left.getName().compareToIgnoreCase(right.getName());
+        }
+    };
 
     private final String itemCode;
     private final CoordinatesType type;
