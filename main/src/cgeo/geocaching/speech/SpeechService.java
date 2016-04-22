@@ -10,9 +10,7 @@ import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
-
-import rx.Subscription;
-import rx.subscriptions.Subscriptions;
+import org.eclipse.jdt.annotation.NonNull;
 
 import android.app.Activity;
 import android.app.Service;
@@ -21,6 +19,9 @@ import android.os.IBinder;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.TextToSpeech.Engine;
 import android.speech.tts.TextToSpeech.OnInitListener;
+
+import rx.Subscription;
+import rx.subscriptions.Subscriptions;
 
 /**
  * Service to speak the compass directions.
@@ -46,7 +47,7 @@ public class SpeechService extends Service implements OnInitListener {
     final GeoDirHandler geoDirHandler = new GeoDirHandler() {
 
         @Override
-        public void updateGeoDir(final GeoData newGeo, final float newDirection) {
+        public void updateGeoDir(@NonNull final GeoData newGeo, final float newDirection) {
             // We might receive a location update before the target has been set. In this case, do nothing.
             if (target == null) {
                 return;

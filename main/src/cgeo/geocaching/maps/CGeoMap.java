@@ -1073,7 +1073,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         }
 
         @Override
-        public void updateGeoDir(final GeoData geo, final float dir) {
+        public void updateGeoDir(@NonNull final GeoData geo, final float dir) {
             currentLocation = geo;
             currentHeading = AngleUtils.getDirectionNow(dir);
             repaintPositionOverlay();

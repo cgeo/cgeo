@@ -298,7 +298,7 @@ public class CompassActivity extends AbstractActionBarActivity {
 
     private final GeoDirHandler geoDirHandler = new GeoDirHandler() {
         @Override
-        public void updateGeoDir(final GeoData geo, final float dir) {
+        public void updateGeoDir(@NonNull final GeoData geo, final float dir) {
             try {
                 navType.setText(res.getString(geo.getLocationProvider().resourceId));
 

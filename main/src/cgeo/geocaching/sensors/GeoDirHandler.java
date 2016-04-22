@@ -1,6 +1,9 @@
 package cgeo.geocaching.sensors;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.eclipse.jdt.annotation.NonNull;
+
+import java.util.concurrent.TimeUnit;
 
 import rx.Observable;
 import rx.Subscription;
@@ -8,8 +11,6 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.functions.Func2;
 import rx.subscriptions.CompositeSubscription;
-
-import java.util.concurrent.TimeUnit;
 
 /**
  * GeoData and Direction handler.
@@ -57,7 +58,7 @@ public abstract class GeoDirHandler {
      * If the device goes fast enough, or if the compass use is not enabled in the settings,
      * the GPS direction information will be used instead of the compass one.
      */
-    public void updateGeoDir(final GeoData geoData, final float direction) {
+    public void updateGeoDir(@NonNull final GeoData geoData, final float direction) {
     }
 
     private static <T> Observable<T> throttleIfNeeded(final Observable<T> observable, final long windowDuration, final TimeUnit unit) {

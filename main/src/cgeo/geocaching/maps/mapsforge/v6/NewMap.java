@@ -488,7 +488,7 @@ public class NewMap extends AbstractActionBarActivity {
         tileRendererLayer.requestRedraw();
     }
 
-    private void setMapSource(final MapSource mapSource) {
+    private void setMapSource(final @NonNull MapSource mapSource) {
         // Update mapsource in settings
         Settings.setMapSource(mapSource);
 
@@ -638,7 +638,7 @@ public class NewMap extends AbstractActionBarActivity {
     }
 
     private void centerMap(final Geopoint geopoint) {
-        this.mapView.getModel().mapViewPosition.setCenter(new LatLong(geopoint.getLatitude(), geopoint.getLongitude()));
+        mapView.getModel().mapViewPosition.setCenter(new LatLong(geopoint.getLatitude(), geopoint.getLongitude()));
     }
 
     public Location getCoordinates() {
@@ -679,6 +679,7 @@ public class NewMap extends AbstractActionBarActivity {
     // set my location listener
     private static class MyLocationListener implements View.OnClickListener {
 
+        @NonNull
         private final WeakReference<NewMap> mapRef;
 
         private void onFollowMyLocationClicked() {
@@ -718,6 +719,7 @@ public class NewMap extends AbstractActionBarActivity {
 
     private final static class DisplayHandler extends Handler {
 
+        @NonNull
         private final WeakReference<NewMap> mapRef;
 
         DisplayHandler(@NonNull final NewMap map) {
@@ -916,6 +918,7 @@ public class NewMap extends AbstractActionBarActivity {
         // minimum change of location in fraction of map width/height (whatever is smaller) for position overlay update
         private static final float MIN_LOCATION_DELTA = 0.01f;
 
+        @NonNull
         Location currentLocation = Sensors.getInstance().currentGeo();
         float currentHeading;
 
@@ -923,19 +926,20 @@ public class NewMap extends AbstractActionBarActivity {
         /**
          * weak reference to the outer class
          */
-        private final WeakReference<NewMap> mapRef;
+        @NonNull private final WeakReference<NewMap> mapRef;
 
-        UpdateLoc(final NewMap map) {
+        UpdateLoc(final @NonNull NewMap map) {
             mapRef = new WeakReference<>(map);
         }
 
         @Override
-        public void updateGeoDir(final GeoData geo, final float dir) {
+        public void updateGeoDir(@NonNull final GeoData geo, final float dir) {
             currentLocation = geo;
             currentHeading = AngleUtils.getDirectionNow(dir);
             repaintPositionOverlay();
         }
 
+        @NonNull
         public Location getCurrenLocation() {
             return currentLocation;
         }
@@ -1012,9 +1016,10 @@ public class NewMap extends AbstractActionBarActivity {
 
     private static class DragHandler implements OnMapDragListener {
 
+        @NonNull
         private final WeakReference<NewMap> mapRef;
 
-        DragHandler(final NewMap parent) {
+        DragHandler(final @NonNull NewMap parent) {
             mapRef = new WeakReference<>(parent);
         }
 
@@ -1071,9 +1076,10 @@ public class NewMap extends AbstractActionBarActivity {
 
     private class SelectionClickListener implements DialogInterface.OnClickListener {
 
+        @NonNull
         private final ArrayList<GeoitemRef> items;
 
-        SelectionClickListener(final ArrayList<GeoitemRef> items) {
+        SelectionClickListener(final @NonNull ArrayList<GeoitemRef> items) {
             this.items = items;
         }
 
@@ -1088,12 +1094,11 @@ public class NewMap extends AbstractActionBarActivity {
     }
 
     private void showPopup(final GeoitemRef item) {
+        if (item == null || StringUtils.isEmpty(item.getGeocode())) {
+            return;
+        }
+
         try {
-
-            if (item == null || StringUtils.isEmpty(item.getGeocode())) {
-                return;
-            }
-
             if (item.getType() == CoordinatesType.CACHE) {
                 final Geocache cache = DataStore.loadCache(item.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
                 if (cache != null) {
@@ -1106,8 +1111,6 @@ public class NewMap extends AbstractActionBarActivity {
 
             if (item.getType() == CoordinatesType.WAYPOINT && item.getId() >= 0) {
                 WaypointPopup.startActivityAllowTarget(this, item.getId(), item.getGeocode());
-            } else {
-                return;
             }
 
         } catch (final NotFoundException e) {
@@ -1118,9 +1121,7 @@ public class NewMap extends AbstractActionBarActivity {
     @Nullable
     private Geocache getSingleModeCache() {
         if (StringUtils.isNotBlank(geocodeIntent)) {
-            final Geocache cache = DataStore.loadCache(geocodeIntent, LoadFlags.LOAD_CACHE_OR_DB);
-
-            return cache;
+            return DataStore.loadCache(geocodeIntent, LoadFlags.LOAD_CACHE_OR_DB);
         }
 
         return null;
@@ -1129,9 +1130,7 @@ public class NewMap extends AbstractActionBarActivity {
     @Nullable
     private Geocache getCurrentTargetCache() {
         if (StringUtils.isNotBlank(targetGeocode)) {
-            final Geocache cache = DataStore.loadCache(targetGeocode, LoadFlags.LOAD_CACHE_OR_DB);
-
-            return cache;
+            return DataStore.loadCache(targetGeocode, LoadFlags.LOAD_CACHE_OR_DB);
         }
 
         return null;
