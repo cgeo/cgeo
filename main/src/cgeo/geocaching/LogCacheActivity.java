@@ -30,6 +30,7 @@ import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.LogTemplateProvider;
 import cgeo.geocaching.utils.LogTemplateProvider.LogContext;
+import cgeo.geocaching.utils.TextUtils;
 
 import com.github.amlcurran.showcaseview.targets.ActionItemTarget;
 
@@ -237,7 +238,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
 
             @Override
             public int compare(final TrackableLog lhs, final TrackableLog rhs) {
-                return lhs.name.compareToIgnoreCase(rhs.name);
+                return TextUtils.COLLATOR.compare(lhs.name, rhs.name);
             }
         });
         return sortedTrackables;

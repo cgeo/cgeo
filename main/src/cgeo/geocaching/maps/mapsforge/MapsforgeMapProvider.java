@@ -9,6 +9,7 @@ import cgeo.geocaching.maps.interfaces.MapProvider;
 import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.TextUtils;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -64,7 +65,7 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
                             mapFileList.add(file.getAbsolutePath());
                         }
                     }
-                    Collections.sort(mapFileList, String.CASE_INSENSITIVE_ORDER);
+                    Collections.sort(mapFileList, TextUtils.COLLATOR);
                 }
                 return mapFileList;
             } catch (final Exception e) {

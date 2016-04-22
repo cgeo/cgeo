@@ -24,6 +24,11 @@ public final class TextUtils {
     public static final Charset CHARSET_UTF8 = Charset.forName("UTF-8");
     public static final Charset CHARSET_ASCII = Charset.forName("US-ASCII");
 
+    /**
+     * a Collator instance appropriate for comparing strings using the default locale while ignoring the casing
+     */
+    public static final Collator COLLATOR = getCollator();
+
     private static final Pattern PATTERN_REMOVE_NONPRINTABLE = Pattern.compile("\\p{Cntrl}");
 
     private TextUtils() {
@@ -190,7 +195,7 @@ public final class TextUtils {
      *
      * @return a collator
      */
-    public static Collator getCollator() {
+    private static Collator getCollator() {
         final Collator collator = Collator.getInstance();
         collator.setDecomposition(Collator.CANONICAL_DECOMPOSITION);
         collator.setStrength(Collator.TERTIARY);

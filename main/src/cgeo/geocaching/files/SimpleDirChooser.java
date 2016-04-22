@@ -1,11 +1,10 @@
 package cgeo.geocaching.files;
 
-import butterknife.ButterKnife;
-
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractListActivity;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.utils.TextUtils;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -35,6 +34,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
+import butterknife.ButterKnife;
 
 /**
  * Dialog for choosing a file or directory.
@@ -270,7 +271,7 @@ public class SimpleDirChooser extends AbstractListActivity {
 
             @Override
             public int compare(final Option lhs, final Option rhs) {
-                return String.CASE_INSENSITIVE_ORDER.compare(lhs.name, rhs.name);
+                return TextUtils.COLLATOR.compare(lhs.name, rhs.name);
             }
 
         };

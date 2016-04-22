@@ -2,6 +2,7 @@ package cgeo.geocaching.sorting;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.TextUtils;
 
 import org.eclipse.jdt.annotation.NonNull;
 
@@ -93,7 +94,7 @@ public class SortActionProvider extends ActionProvider implements OnMenuItemClic
 
             @Override
             public int compare(final ComparatorEntry lhs, final ComparatorEntry rhs) {
-                return lhs.name.compareToIgnoreCase(rhs.name);
+                return TextUtils.COLLATOR.compare(lhs.name, rhs.name);
             }
         });
     }

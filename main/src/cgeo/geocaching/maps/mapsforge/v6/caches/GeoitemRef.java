@@ -1,6 +1,7 @@
 package cgeo.geocaching.maps.mapsforge.v6.caches;
 
 import cgeo.geocaching.enumerations.CoordinatesType;
+import cgeo.geocaching.utils.TextUtils;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -12,7 +13,7 @@ public class GeoitemRef {
 
         @Override
         public int compare(final GeoitemRef left, final GeoitemRef right) {
-            return left.getName().compareToIgnoreCase(right.getName());
+            return TextUtils.COLLATOR.compare(left.getName(), right.getName());
         }
     };
 

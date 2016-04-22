@@ -8,6 +8,7 @@ import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.utils.EnvironmentUtils;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.TextUtils;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -185,7 +186,7 @@ public abstract class AbstractFileListActivity<T extends ArrayAdapter<File>> ext
 
                 @Override
                 public int compare(final File lhs, final File rhs) {
-                    return lhs.getName().compareToIgnoreCase(rhs.getName());
+                    return TextUtils.COLLATOR.compare(lhs.getName(), rhs.getName());
                 }
             });
 

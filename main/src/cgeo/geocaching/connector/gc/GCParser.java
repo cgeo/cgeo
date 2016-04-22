@@ -57,7 +57,6 @@ import android.text.Html;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.text.Collator;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -1041,13 +1040,11 @@ public final class GCParser {
                     }
                 }
 
-                // just in case, lets sort the resulting list
-                final Collator collator = TextUtils.getCollator();
                 Collections.sort(list, new Comparator<PocketQuery>() {
 
                     @Override
                     public int compare(final PocketQuery left, final PocketQuery right) {
-                        return collator.compare(left.getName(), right.getName());
+                        return TextUtils.COLLATOR.compare(left.getName(), right.getName());
                     }
                 });
 

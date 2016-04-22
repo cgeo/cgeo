@@ -4,6 +4,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.LogEntry;
 import cgeo.geocaching.utils.CalendarUtils;
+import cgeo.geocaching.utils.TextUtils;
 
 import org.eclipse.jdt.annotation.NonNull;
 
@@ -40,7 +41,7 @@ class StateFilterFactory implements IFilterFactory {
 
             @Override
             public int compare(final AbstractFilter filter1, final AbstractFilter filter2) {
-                return String.CASE_INSENSITIVE_ORDER.compare(filter1.getName(), filter2.getName());
+                return TextUtils.COLLATOR.compare(filter1.getName(), filter2.getName());
             }
         });
 

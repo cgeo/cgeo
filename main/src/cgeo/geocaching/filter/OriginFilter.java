@@ -1,8 +1,9 @@
 package cgeo.geocaching.filter;
 
-import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
+import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.utils.TextUtils;
 
 import org.eclipse.jdt.annotation.NonNull;
 
@@ -48,7 +49,7 @@ public class OriginFilter extends AbstractFilter {
 
                 @Override
                 public int compare(final OriginFilter lhs, final OriginFilter rhs) {
-                    return lhs.getName().compareToIgnoreCase(rhs.getName());
+                    return TextUtils.COLLATOR.compare(lhs.getName(), rhs.getName());
                 }
             });
 
