@@ -1067,7 +1067,7 @@ public class NewMap extends AbstractActionBarActivity {
                 }
             };
 
-            new AlertDialog.Builder(this).setTitle("Select an item").setAdapter(adapter, new SelectionClickListener(items)).show();
+            new AlertDialog.Builder(this).setTitle("Select an item").setAdapter(adapter, new SelectionClickListener(sorted)).show();
 
         } catch (final NotFoundException e) {
             Log.e("NewMap.showSelection", e);
