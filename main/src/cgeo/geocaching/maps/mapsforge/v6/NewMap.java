@@ -1051,7 +1051,7 @@ public class NewMap extends AbstractActionBarActivity {
                 @Override
                 public View getView(final int position, final View convertView, final ViewGroup parent) {
 
-                    final View view = convertView == null ? inflater.inflate(R.layout.cacheslist_item_select, null) : convertView;
+                    final View view = convertView == null ? inflater.inflate(R.layout.cacheslist_item_select, parent, false) : convertView;
                     final TextView tv = (TextView) view.findViewById(R.id.text);
 
                     final GeoitemRef item = getItem(position);
