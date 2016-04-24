@@ -13,5 +13,6 @@ public final class Charsets {
     /**
      * We cannot use the recommend java.nio charset, this that is not available in old android target versions
      */
+    // CHECKSTYLE IGNORE StaticVariableNameCheck FOR NEXT 1 LINES
     @SuppressWarnings("deprecation") public static Charset UTF_8 = org.apache.commons.io.Charsets.UTF_8;
 }
