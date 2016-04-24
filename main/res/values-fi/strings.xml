@@ -495,7 +495,7 @@
   <string name="init_units">Käytä brittiläistä yksikköjärjestelmää</string>
   <string name="init_summary_units">Käytä brittiläistä yksikköjärjestelmää metrijärjestelmän sijaan</string>
   <string name="init_log_offline">Offline-lokkaus</string>
-  <string name="init_summary_log_offline">Käytä offline-lokkausta (Online-lokeja ei näytettä lokatessa, lokeja ei lähetetä)</string>
+  <string name="init_summary_log_offline">Käytä offline-lokkausta (Online-lokeja ei näytetä lokatessa, lokeja ei lähetetä)</string>
   <string name="init_choose_list">Kysy listausta</string>
   <string name="init_summary_choose_list">Kysy mihin luetteloon kätköt tallennetaan</string>
   <string name="init_livelist">Näytä suunta</string>
