@@ -89,7 +89,7 @@ public final class StoredList extends AbstractList {
             final CharSequence[] listTitles = new CharSequence[lists.size()];
             final boolean[] selectedItems = new boolean[lists.size()];
             for (int i = 0 ; i < lists.size() ; i++) {
-                AbstractList list = lists.get(i);
+                final AbstractList list = lists.get(i);
                 listTitles[i] = list.getTitleAndCount();
                 selectedItems[i] = currentListIds.contains(list.id);
             }
@@ -100,7 +100,7 @@ public final class StoredList extends AbstractList {
             builder.setTitle(res.getString(titleId));
             builder.setMultiChoiceItems(listTitles, selectedItems, new DialogInterface.OnMultiChoiceClickListener() {
                 @Override
-                public void onClick(DialogInterface dialog, int itemId, boolean isChecked) {
+                public void onClick(final DialogInterface dialog, final int itemId, final boolean isChecked) {
                     final AbstractList list = lists.get(itemId);
                     if (isChecked) {
                         selectedListIds.add(list.id);
@@ -109,8 +109,9 @@ public final class StoredList extends AbstractList {
                     }
                 }
             });
-            builder.setPositiveButton(R.string.lists_ok,new DialogInterface.OnClickListener(){
-                        public void onClick(DialogInterface dialog, int id){
+            builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                @Override
+                        public void onClick(final DialogInterface dialog, final int id){
                             if (selectedListIds.contains(PseudoList.NEW_LIST.id)) {
                                 // create new list on the fly
                                 promptForListCreation(runAfterwards, selectedListIds, listNameMemento.getTerm());
@@ -120,8 +121,9 @@ public final class StoredList extends AbstractList {
                             dialog.cancel();
                         }
                     }
-            ).setNegativeButton(R.string.lists_cancel, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
+            ).setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                @Override
+                        public void onClick(final DialogInterface dialog, final int id) {
                             dialog.dismiss();
                         }
                     }

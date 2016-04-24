@@ -2239,7 +2239,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
     static void updateCacheLists(final View view, final Geocache cache, final Resources res) {
         final Set<String> listNames = new HashSet<>();
-        for (Integer listId : cache.getLists()) {
+        for (final Integer listId : cache.getLists()) {
             final StoredList list = DataStore.getList(listId);
             listNames.add(list.getTitle());
         }
