@@ -44,7 +44,7 @@
                 android:focusable="false"
                 android:textColor="?text_color"
                 android:textSize="18sp"
-                tools:text="Description of the Cache with a lot of small words so the an incorrect"/>
+                tools:text="Description of the waypoint with a lot of small words so that an incorrect layout should easily be noticed"/>
 
             <TextView
                 android:id="@+id/info"

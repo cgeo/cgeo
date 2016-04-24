@@ -11,7 +11,8 @@
     <RelativeLayout
         android:id="@+id/loading"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" >
+        android:layout_height="fill_parent"
+        tools:visibility="gone">
 
         <ProgressBar
             style="@android:style/Widget.ProgressBar.Large"
@@ -36,6 +37,7 @@
         android:padding="0dip"
         android:scrollbarStyle="outsideOverlay"
         android:visibility="gone"
-        tools:listitem="@layout/cacheslist_item" />
+        tools:listitem="@layout/cacheslist_item"
+        tools:visibility="visible"/>
 
 </LinearLayout>

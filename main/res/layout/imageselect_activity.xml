@@ -52,7 +52,8 @@
             android:layout_marginTop="5dip"
             android:background="#000000"
             android:padding="1dp"
-            android:visibility="gone" />
+            android:visibility="gone"
+            tools:visibility="visible"/>
 
         <EditText
             android:id="@+id/caption"

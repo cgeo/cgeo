@@ -18,7 +18,8 @@
         android:layout_height="wrap_content"
         android:drawableLeft="@drawable/abc_ic_search"
         android:gravity="left|center_vertical"
-        android:layout_alignParentRight="true"/>
+        android:layout_alignParentRight="true"
+        android:text="@null"/>
 
     <Button
         android:id="@+id/download"
@@ -26,7 +27,8 @@
         android:layout_height="wrap_content"
         android:layout_toLeftOf="@id/cachelist"
         android:drawableLeft="@drawable/ic_menu_save"
-        android:gravity="left|center_vertical" />
+        android:gravity="left|center_vertical"
+        android:text="@null"/>
 
     <TextView
         android:id="@+id/label"
@@ -40,7 +42,8 @@
         android:textIsSelectable="false"
         android:textSize="22sp"
         android:paddingRight="5dip"
-        android:layout_toLeftOf="@id/download"/>
+        android:layout_toLeftOf="@id/download"
+        tools:text="name"/>
 
     <TextView
         android:id="@+id/info"
@@ -55,6 +58,7 @@
         android:textIsSelectable="false"
         android:textSize="12sp"
         android:layout_below="@id/label"
-        android:layout_alignParentLeft="true"/>
+        android:layout_alignParentLeft="true"
+        tools:text="info"/>
 
 </RelativeLayout>

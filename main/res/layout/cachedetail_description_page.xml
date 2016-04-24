@@ -25,7 +25,9 @@
             android:textColorLink="?text_color_link"
             android:textIsSelectable="true"
             android:textSize="14sp"
-            android:visibility="gone" />
+            android:visibility="gone"
+            tools:visibility="visible"
+            tools:text="This is the cache description. It might be very long..."/>
 
         <RelativeLayout
             android:id="@+id/loading"
@@ -51,7 +53,8 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dip"
             android:orientation="vertical"
-            android:visibility="gone" >
+            android:visibility="gone"
+            tools:visibility="visible">
 
             <RelativeLayout style="@style/separator_horizontal_layout" >
 
@@ -71,7 +74,8 @@
                 android:textColor="?text_color"
                 android:textIsSelectable="true"
                 android:textColorLink="?text_color_link"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                tools:text="A hint for finding the cache..."/>
 
             <TextView
                 android:id="@+id/hint_spoilerlink"
@@ -111,7 +115,8 @@
                 android:linksClickable="true"
                 android:textColor="?text_color"
                 android:textColorLink="?text_color_link"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                tools:text="Personal note text\nline 2\nline 3"/>
 
             <Button
                 android:id="@+id/edit_personalnote"

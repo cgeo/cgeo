@@ -36,7 +36,8 @@
             android:singleLine="true"
             android:textColor="?text_color"
             android:textIsSelectable="false"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            tools:text="name"/>
 
         <TextView
             android:id="@+id/trackcode"
@@ -50,7 +51,8 @@
             android:singleLine="true"
             android:textColor="?text_color"
             android:textIsSelectable="false"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            tools:text="tracking code"/>
     </LinearLayout>
 
     <TextView
@@ -66,6 +68,7 @@
         android:singleLine="true"
         android:textColor="?text_color"
         android:textIsSelectable="false"
-        android:textSize="14sp" />
+        android:textSize="14sp"
+        tools:text="action"/>
 
 </LinearLayout>

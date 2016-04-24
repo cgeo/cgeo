@@ -23,7 +23,8 @@
         android:singleLine="false"
         android:textColor="?text_color"
         android:textIsSelectable="false"
-        android:textSize="22sp" />
+        android:textSize="22sp"
+        tools:text="Address of place\nwith multiple lines"/>
 
     <TextView
         android:id="@+id/distance"
@@ -36,6 +37,7 @@
         android:singleLine="true"
         android:textColor="?text_color"
         android:textIsSelectable="false"
-        android:textSize="12sp" />
+        android:textSize="12sp"
+        tools:text="distance"/>
 
 </LinearLayout>

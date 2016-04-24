@@ -32,7 +32,8 @@
             android:inputType="textNoSuggestions"
             android:lines="0"
             android:scrollHorizontally="true"
-            android:singleLine="true" />
+            android:singleLine="true"
+            tools:text="some/selected/path"/>
     </LinearLayout>
 
     <LinearLayout

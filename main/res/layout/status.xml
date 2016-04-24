@@ -6,6 +6,7 @@
     android:layout_height="fill_parent"
     android:background="@drawable/helper_bcg"
     android:visibility="invisible"
+    tools:visibility="visible"
     tools:context=".StatusFragment" >
 
     <ImageView
@@ -14,7 +15,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
-        android:layout_margin="4dip" />
+        android:layout_margin="4dip"
+        tools:src="@drawable/attribute_firstaid"/>
 
     <TextView
         android:id="@+id/status_message"
@@ -26,6 +28,7 @@
         android:padding="4dip"
         android:textColor="@color/text_icon"
         android:textIsSelectable="false"
-        android:textSize="14sp" />
+        android:textSize="14sp"
+        tools:text="status message"/>
 
 </RelativeLayout>

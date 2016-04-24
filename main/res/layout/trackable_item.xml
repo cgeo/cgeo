@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -9,7 +10,8 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_marginRight="4dip"
-        android:scaleType="fitCenter" />
+        android:scaleType="fitCenter"
+        tools:src="@drawable/trackable_travelbug"/>
 
     <TextView
         android:id="@+id/trackable_name"
@@ -20,5 +22,6 @@
         android:minHeight="?android:attr/listPreferredItemHeight"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="?text_color"
-        android:textIsSelectable="false" />
+        android:textIsSelectable="false"
+        tools:text="trackable name"/>
 </LinearLayout>

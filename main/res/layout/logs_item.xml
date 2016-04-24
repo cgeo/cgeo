@@ -9,7 +9,8 @@
 
     <TextView
         android:id="@+id/author"
-        style="@style/logitem_author" />
+        style="@style/logitem_author"
+        tools:text="author"/>
 
     <LinearLayout
         android:id="@+id/detail_box"
@@ -29,15 +30,18 @@
 
             <TextView
                 android:id="@+id/added"
-                style="@style/logitem_property" />
+                style="@style/logitem_property"
+                tools:text="date"/>
 
             <TextView
                 android:id="@+id/type"
-                style="@style/logitem_property" />
+                style="@style/logitem_property"
+                tools:text="type"/>
 
             <TextView
                 android:id="@+id/count_or_location"
-                style="@style/logitem_property" />
+                style="@style/logitem_property"
+                tools:text="count"/>
         </LinearLayout>
 
         <ImageView
@@ -62,7 +66,8 @@
             android:layout_marginTop="22dip"
             android:gravity="left"
             android:textColor="?text_color"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            tools:text="log text"/>
 
         <TextView
             android:id="@+id/log_images"
@@ -73,7 +78,8 @@
             android:drawableLeft="?log_img_icon"
             android:drawablePadding="3dip"
             android:textColor="?text_color"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            tools:text="log images"/>
     </LinearLayout>
 
 </RelativeLayout>

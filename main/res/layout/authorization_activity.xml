@@ -24,7 +24,8 @@
             android:drawablePadding="15dip"
             android:gravity="left|center_vertical"
             android:textColor="?text_color"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            tools:text="Auth text 1"/>
 
         <TextView
             android:id="@+id/auth_2"
@@ -36,17 +37,20 @@
             android:layout_marginRight="10dip"
             android:gravity="left|center_vertical"
             android:textColor="?text_color"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            tools:text="Auth text 2"/>
 
         <Button
             android:id="@+id/start"
             style="@style/button_full"
-            android:layout_margin="7dip" />
+            android:layout_margin="7dip"
+            tools:text="start"/>
 
         <Button
             android:id="@+id/register"
             style="@style/button_full"
-            android:layout_margin="7dip" />
+            android:layout_margin="7dip"
+            tools:text="register"/>
     </LinearLayout>
 
 </ScrollView>

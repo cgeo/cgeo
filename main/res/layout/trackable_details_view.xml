@@ -24,7 +24,8 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:visibility="gone" >
+            android:visibility="gone"
+            tools:visibility="visible">
 
             <RelativeLayout style="@style/separator_horizontal_layout" >
 
@@ -44,7 +45,9 @@
                 android:textColor="?text_color"
                 android:textColorLink="?text_color_link"
                 android:textSize="14sp"
-                android:visibility="gone" />
+                android:visibility="gone"
+                tools:visibility="visible"
+                tools:text="goal of the trackable"/>
         </LinearLayout>
 
         <LinearLayout
@@ -52,7 +55,8 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:visibility="gone" >
+            android:visibility="gone"
+            tools:visibility="visible">
 
             <RelativeLayout style="@style/separator_horizontal_layout" >
 
@@ -72,7 +76,9 @@
                 android:textColor="?text_color"
                 android:textColorLink="?text_color_link"
                 android:textSize="14sp"
-                android:visibility="gone" />
+                android:visibility="gone"
+                tools:visibility="visible"
+                tools:text="details of the trackable"/>
         </LinearLayout>
 
         <LinearLayout
@@ -80,7 +86,8 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:visibility="gone" >
+            android:visibility="gone"
+            tools:visibility="visible">
 
             <RelativeLayout style="@style/separator_horizontal_layout" >
 
@@ -97,7 +104,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dip"
                 android:orientation="vertical"
-                android:padding="3dip" >
+                android:padding="3dip">
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

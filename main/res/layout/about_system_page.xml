@@ -47,7 +47,8 @@
             android:textColor="?text_color"
             android:textColorLink="?text_color_link"
             android:textIsSelectable="true"
-            android:textSize="12sp" />
+            android:textSize="12sp"
+            tools:text="long list of system properties"/>
     </LinearLayout>
 
 </ScrollView>

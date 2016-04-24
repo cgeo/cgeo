@@ -93,19 +93,22 @@
                 android:id="@+id/nav_type"
                 style="@style/location_current_type"
                 android:textColor="?text_color_grey"
-                android:textIsSelectable="false" />
+                android:textIsSelectable="false"
+                tools:text="GPS?"/>
 
             <TextView
                 android:id="@+id/nav_accuracy"
                 style="@style/location_current_accuracy"
                 android:textColor="?text_color_grey"
-                android:textIsSelectable="false" />
+                android:textIsSelectable="false"
+                tools:text="+/- x meters"/>
 
             <TextView
                 android:id="@+id/nav_satellites"
                 style="@style/location_current_satellites"
                 android:textColor="?text_color_grey"
-                android:textIsSelectable="false" />
+                android:textIsSelectable="false"
+                tools:text="123 satellites"/>
         </RelativeLayout>
     </LinearLayout>
 

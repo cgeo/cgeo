@@ -35,7 +35,8 @@
             android:layout_gravity="center"
             android:layout_margin="1dip"
             android:gravity="center"
-            android:scaleType="fitXY" />
+            android:scaleType="fitXY"
+            tools:src="@drawable/helper_wear"/>
 
         <TextView
             android:id="@+id/description"
@@ -47,7 +48,8 @@
             android:textColor="?text_color"
             android:textColorLink="?text_color_link"
             android:textIsSelectable="false"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            tools:text="description"/>
     </LinearLayout>
 
 </LinearLayout>

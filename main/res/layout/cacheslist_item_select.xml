@@ -24,7 +24,8 @@
         android:singleLine="true"
         android:textColor="?text_color"
         android:textIsSelectable="false"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        tools:text="name"/>
 
     <!-- cache attributes and other info -->
 
@@ -45,6 +46,7 @@
         android:singleLine="true"
         android:textColor="?text_color_grey"
         android:textIsSelectable="false"
-        android:textSize="12sp" />
+        android:textSize="12sp"
+        tools:text="geocode"/>
 
 </RelativeLayout>

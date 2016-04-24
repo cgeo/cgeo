@@ -15,7 +15,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_weight="1"
-        android:paddingRight="8dp" />
+        android:paddingRight="8dp"
+        tools:progress="25"/>
 
     <TextView
         android:id="@+id/wp_threshold_value_view"
@@ -23,6 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_weight="5"
-        android:gravity="center" />
+        android:gravity="center"
+        tools:text="25"/>
 
 </LinearLayout>

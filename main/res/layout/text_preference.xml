@@ -12,7 +12,8 @@
         android:id="@+id/textPreferenceText"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        tools:text="preference"/>
 
     <TextView
         android:id="@+id/textPreferenceSummary"
@@ -20,6 +21,8 @@
         android:layout_height="wrap_content"
         android:paddingTop="8dp"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:visibility="gone" />
+        android:visibility="gone"
+        tools:visibility="visible"
+        tools:text="some summary for that preference"/>
 
 </LinearLayout>

@@ -12,7 +12,8 @@
         android:numStars="5"
         android:stepSize="0.5"
         android:visibility="gone"
-        tools:visibility="visible"/>
+        tools:visibility="visible"
+        tools:rating="2"/>
 
     <TextView
         android:id="@+id/gcvoteLabel"

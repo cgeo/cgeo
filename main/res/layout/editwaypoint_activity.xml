@@ -83,7 +83,8 @@
             android:id="@+id/modify_cache_coordinates_group"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="gone" >
+            android:visibility="gone"
+            tools:visibility="visible">
 
             <RadioButton
                 android:id="@+id/modify_cache_coordinates_nothing"
@@ -100,7 +101,8 @@
                 android:id="@+id/modify_cache_coordinates_local_and_remote"
                 style="@style/radiobutton_wrap"
                 android:text="@string/waypoint_save_and_modify_on_website"
-                android:visibility="gone" />
+                android:visibility="gone"
+                tools:visibility="visible"/>
         </RadioGroup>
 
     </LinearLayout>

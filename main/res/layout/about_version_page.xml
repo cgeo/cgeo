@@ -70,7 +70,8 @@
             android:textColor="?text_color"
             android:textIsSelectable="true"
             android:textSize="14sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:text="version string is determined by the gradle build"/>
 
         <TextView
             android:id="@+id/about_special_build"
@@ -84,7 +85,9 @@
             android:textIsSelectable="true"
             android:textSize="14sp"
             android:textStyle="bold"
-            android:visibility="gone"/>
+            android:visibility="gone"
+            tools:text="additional text in case of deprecated eclipse build"
+            tools:visibility="visible"/>
 
         <RelativeLayout style="@style/separator_horizontal_layout" >
 

@@ -19,7 +19,8 @@
         android:layout_gravity="left"
         android:gravity="left|center_horizontal"
         android:paddingRight="5dip"
-        android:visibility="gone" />
+        android:visibility="gone"
+        tools:visibility="visible"/>
 
     <!-- "found" marker, vertical green/red line -->
 
@@ -32,7 +33,8 @@
         android:layout_toRightOf="@id/checkbox"
         android:scaleType="fitXY"
         android:src="@drawable/mark_green"
-        android:visibility="gone" />
+        android:visibility="gone"
+        tools:visibility="visible"/>
 
     <!-- cache name and icon -->
 
@@ -51,7 +53,8 @@
         android:singleLine="true"
         android:textColor="?text_color"
         android:textIsSelectable="false"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        tools:text="name"/>
 
     <!-- cache attributes and other info -->
 
@@ -72,7 +75,8 @@
         android:singleLine="true"
         android:textColor="?text_color_grey"
         android:textIsSelectable="false"
-        android:textSize="12sp" />
+        android:textSize="12sp"
+        tools:text="terrain, difficulty and others"/>
 
     <!-- real text based direction and distance -->
 
@@ -156,7 +160,8 @@
             android:textColor="?text_color"
             android:textIsSelectable="false"
             android:textSize="12sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:text="12"/>
 
         <TextView
             android:id="@+id/favorite"
@@ -178,7 +183,8 @@
             android:textColor="?text_color"
             android:textIsSelectable="false"
             android:textSize="12sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:text="345"/>
     </RelativeLayout>
 
 </RelativeLayout>

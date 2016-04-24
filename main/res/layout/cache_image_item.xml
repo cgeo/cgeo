@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical" >
@@ -7,14 +8,16 @@
     <RelativeLayout
         android:id="@+id/titleLayout"
         style="@style/separator_horizontal_layout"
-        android:visibility="gone" >
+        android:visibility="gone"
+        tools:visibility="visible">
 
         <View style="@style/separator_horizontal" />
 
         <TextView
             android:id="@+id/title"
             style="@style/separator_horizontal_headline"
-            android:text="@null" />
+            android:text="@null"
+            tools:text="image title"/>
     </RelativeLayout>
 
     <TextView
@@ -25,7 +28,10 @@
         android:padding="3dip"
         android:textColor="?text_color"
         android:textSize="14sp"
-        android:visibility="gone" />
+        android:visibility="gone"
+        tools:text="image description"
+        tools:visibility="visible"
+        />
 
     <ProgressBar
         android:id="@+id/progress_bar"

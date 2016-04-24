@@ -65,7 +65,8 @@
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="71dip"
                     android:text="@string/cache_offline_drop"
-                    android:visibility="gone" />
+                    android:visibility="gone"
+                    tools:visibility="visible"/>
 
                 <Button
                     android:id="@+id/offline_refresh"
@@ -89,7 +90,8 @@
                 android:paddingRight="3dip"
                 android:textColor="?text_color"
                 android:textIsSelectable="false"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                tools:text="list 1, list 2"/>
 
             <Button
                 android:id="@+id/offline_store"

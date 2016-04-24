@@ -5,6 +5,7 @@
     style="@style/filter_bar"
     android:onClick="showFilterMenu"
     android:visibility="gone"
+    tools:visibility="visible"
     tools:ignore="UseCompoundDrawables" > <!-- This cannot be done with a compound drawable as there is no easy way to set the size of the image in XML -->
 
     <ImageView
@@ -15,6 +16,7 @@
     <TextView
         android:id="@+id/filter_text"
         style="@style/filter_bar_text"
-        android:textIsSelectable="false" />
+        android:textIsSelectable="false"
+        tools:text="currently active filter"/>
 
 </LinearLayout>
