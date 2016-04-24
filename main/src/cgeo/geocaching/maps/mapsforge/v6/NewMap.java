@@ -51,9 +51,13 @@ import org.mapsforge.map.android.util.AndroidUtil;
 import org.mapsforge.map.layer.Layers;
 import org.mapsforge.map.layer.cache.TileCache;
 import org.mapsforge.map.layer.renderer.TileRendererLayer;
+import org.mapsforge.map.model.DisplayModel;
 import org.mapsforge.map.reader.MapFile;
 import org.mapsforge.map.rendertheme.ExternalRenderTheme;
 import org.mapsforge.map.rendertheme.InternalRenderTheme;
+import org.mapsforge.map.rendertheme.XmlRenderTheme;
+import org.mapsforge.map.rendertheme.rule.RenderThemeHandler;
+import org.xmlpull.v1.XmlPullParserException;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
@@ -79,7 +83,7 @@ import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -472,15 +476,28 @@ public class NewMap extends AbstractActionBarActivity {
     }
 
     protected void setMapTheme() {
+
+        if (tileRendererLayer == null) {
+            return;
+        }
+
         final String themePath = Settings.getCustomRenderThemeFilePath();
 
         if (StringUtils.isEmpty(themePath)) {
             tileRendererLayer.setXmlRenderTheme(InternalRenderTheme.OSMARENDER);
         } else {
             try {
-                tileRendererLayer.setXmlRenderTheme(new ExternalRenderTheme(new File(themePath)));
-            } catch (final FileNotFoundException e) {
+                final XmlRenderTheme xmlRenderTheme = new ExternalRenderTheme(new File(themePath));
+                // Validate the theme file
+                RenderThemeHandler.getRenderTheme(AndroidGraphicFactory.INSTANCE, new DisplayModel(), xmlRenderTheme);
+                tileRendererLayer.setXmlRenderTheme(xmlRenderTheme);
+            } catch (final IOException e) {
                 Log.w("Failed to set render theme", e);
+                ActivityMixin.showApplicationToast(getString(R.string.err_rendertheme_file_unreadable));
+                tileRendererLayer.setXmlRenderTheme(InternalRenderTheme.OSMARENDER);
+            } catch (final XmlPullParserException e) {
+                Log.w("render theme invalid", e);
+                ActivityMixin.showApplicationToast(getString(R.string.err_rendertheme_invalid));
                 tileRendererLayer.setXmlRenderTheme(InternalRenderTheme.OSMARENDER);
             }
         }
@@ -492,19 +509,24 @@ public class NewMap extends AbstractActionBarActivity {
         // Update mapsource in settings
         Settings.setMapSource(mapSource);
 
-        // Create new render layer
-        final TileRendererLayer newLayer = new TileRendererLayer(tileCache, new MapFile(NewMap.getMapFile()), this.mapView.getModel().mapViewPosition, false, true, AndroidGraphicFactory.INSTANCE);
-
-        // Exchange layer
+        // Create new render layer, if mapfile exists
         final TileRendererLayer oldLayer = this.tileRendererLayer;
-        final Layers layers = this.mapView.getLayerManager().getLayers();
-        final int index = layers.indexOf(oldLayer) + 1;
-        layers.add(index, newLayer);
-        this.tileRendererLayer = newLayer;
-        this.setMapTheme();
+        final File mapFile = NewMap.getMapFile();
+        if (mapFile != null && mapFile.exists()) {
+            final TileRendererLayer newLayer = new TileRendererLayer(tileCache, new MapFile(mapFile), this.mapView.getModel().mapViewPosition, false, true, AndroidGraphicFactory.INSTANCE);
+
+            // Exchange layer
+            final Layers layers = this.mapView.getLayerManager().getLayers();
+            final int index = layers.indexOf(oldLayer) + 1;
+            layers.add(index, newLayer);
+            this.tileRendererLayer = newLayer;
+            this.setMapTheme();
+        } else {
+            this.tileRendererLayer = null;
+        }
 
         // Cleanup
-        layers.remove(oldLayer);
+        this.mapView.getLayerManager().getLayers().remove(oldLayer);
         oldLayer.onDestroy();
         tileCache.destroy();
     }
@@ -517,6 +539,7 @@ public class NewMap extends AbstractActionBarActivity {
     }
 
     private void initializeLayers() {
+
         // tile renderer layer (if map file is defined)
         final File mapFile = NewMap.getMapFile();
         if (mapFile != null && mapFile.exists()) {
