@@ -1102,8 +1102,8 @@
   <string name="attribute_night_no">Non recommandé de nuit</string>
   <string name="attribute_winter_yes">Disponible durant l\'hiver</string>
   <string name="attribute_winter_no">Pas disponible durant l\'hiver</string>
-  <string name="attribute_stealth_yes">Bonne santé nécessaire</string>
-  <string name="attribute_stealth_no">Bonne santé pas nécessaire</string>
+  <string name="attribute_stealth_yes">Discrétion nécessaire</string>
+  <string name="attribute_stealth_no">Discrétion pas nécessaire</string>
   <string name="attribute_firstaid_yes">Nécessite une maintenance</string>
   <string name="attribute_firstaid_no">Ne nécessite pas de maintenance</string>
   <string name="attribute_cow_yes">Attention au bétail</string>
