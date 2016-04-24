@@ -1,13 +1,13 @@
 package cgeo.geocaching.files;
 
-import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.utils.CancellableHandler;
+import cgeo.geocaching.utils.Charsets;
 import cgeo.geocaching.utils.Log;
 
-import org.apache.commons.io.Charsets;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;

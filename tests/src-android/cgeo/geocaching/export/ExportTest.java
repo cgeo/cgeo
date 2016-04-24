@@ -3,13 +3,13 @@ package cgeo.geocaching.export;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import cgeo.CGeoTestCase;
-import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.models.LogEntry;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.LogEntry;
+import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.FileUtils;
 
 import java.io.File;
@@ -75,7 +75,7 @@ public class ExportTest extends CGeoTestCase {
         assertThat(result).isNotNull();
 
         // make sure we actually exported waypoints
-        final String gpx = org.apache.commons.io.FileUtils.readFileToString(result);
+        final String gpx = org.apache.commons.io.FileUtils.readFileToString(result, (String) null);
         assertThat(gpx).contains("<wpt");
         assertThat(gpx).contains(cache.getGeocode());
         if (cache.getUrl() != null) {

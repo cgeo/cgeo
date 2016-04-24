@@ -265,7 +265,7 @@ dependencies {
     compile 'org.apache.commons:commons-collections4:4.1'
     compile 'org.apache.commons:commons-lang3:3.4'
     compile 'org.apache.commons:commons-compress:1.11'
-    compile 'commons-io:commons-io:2.4'
+    compile 'commons-io:commons-io:2.5'
     compile 'com.google.code.findbugs:annotations:3.0.1u2'
     androidTestCompile 'com.google.code.findbugs:annotations:3.0.1u2'
 
@@ -322,7 +322,7 @@ dependencies {
     compile 'org.jsoup:jsoup:1.9.1'
 
     // EXIF location extraction from images
-    compile 'com.drewnoakes:metadata-extractor:2.9.0'
+    compile 'com.drewnoakes:metadata-extractor:2.9.1'
 }
 
 /*
