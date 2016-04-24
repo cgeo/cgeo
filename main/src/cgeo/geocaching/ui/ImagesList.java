@@ -1,9 +1,13 @@
 package cgeo.geocaching.ui;
 
+import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.apps.navi.NavigationAppFactory;
+import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
+import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.utils.Log;
@@ -27,6 +31,7 @@ import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.support.annotation.StringRes;
+import android.support.v4.content.LocalBroadcastManager;
 import android.text.Html;
 import android.util.SparseArray;
 import android.view.ContextMenu;
@@ -85,11 +90,13 @@ public class ImagesList {
     private final SparseArray<Image> images = new SparseArray<>();
     private final SparseArray<Geopoint> geoPoints = new SparseArray<>();
     private final String geocode;
+    private Geocache geocache;
     private LinearLayout imagesView;
 
-    public ImagesList(final Activity activity, final String geocode) {
+    public ImagesList(final Activity activity, final String geocode, Geocache geocache) {
         this.activity = activity;
         this.geocode = geocode;
+        this.geocache = geocache;
         inflater = activity.getLayoutInflater();
     }
 
@@ -247,7 +254,9 @@ public class ImagesList {
         menu.setHeaderTitle(res.getString(R.string.cache_image));
         currentView = (ImageView) v;
         currentImage = images.get(currentView.getId());
-        menu.findItem(R.id.menu_navigate).setVisible(geoPoints.get(currentView.getId()) != null);
+        final boolean hasCoordinates = geoPoints.get(currentView.getId()) != null;
+        menu.findItem(R.id.image_add_waypoint).setVisible(hasCoordinates && geocache != null);
+        menu.findItem(R.id.menu_navigate).setVisible(hasCoordinates);
     }
 
     public boolean onContextItemSelected(final MenuItem item) {
@@ -259,6 +268,17 @@ public class ImagesList {
             case R.id.image_open_browser:
                 if (currentImage != null) {
                     currentImage.openInBrowser(activity);
+                }
+                return true;
+            case R.id.image_add_waypoint:
+                final Geopoint coords = geoPoints.get(currentView.getId());
+                if (geocache != null && coords != null) {
+                    final Waypoint waypoint = new Waypoint(currentImage.getTitle(), WaypointType.WAYPOINT, true);
+                    waypoint.setCoords(coords);
+                    geocache.addOrChangeWaypoint(waypoint, true);
+                    final Intent intent = new Intent(Intents.INTENT_CACHE_CHANGED);
+                    intent.putExtra(Intents.EXTRA_WPT_PAGE_UPDATE, true);
+                    LocalBroadcastManager.getInstance(activity).sendBroadcast(intent);
                 }
                 return true;
             case R.id.menu_navigate:
