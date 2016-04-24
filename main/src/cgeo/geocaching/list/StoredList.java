@@ -19,6 +19,7 @@ import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -74,16 +75,62 @@ public final class StoredList extends AbstractList {
             promptForListSelection(titleId, runAfterwards, onlyConcreteLists, Collections.singleton(exceptListId), ListNameMemento.EMPTY);
         }
 
-        public void promptForListSelection(final int titleId, @NonNull final Action1<Integer> runAfterwards, final boolean onlyConcreteLists, final Set<Integer> exceptListIds) {
-            promptForListSelection(titleId, runAfterwards, onlyConcreteLists, exceptListIds, ListNameMemento.EMPTY);
+        public void promptForMultiListSelection(final int titleId, @NonNull final Action1<Set<Integer>> runAfterwards, final boolean onlyConcreteLists, final Set<Integer> currentListIds) {
+            promptForMultiListSelection(titleId, runAfterwards, onlyConcreteLists, Collections.<Integer>emptySet(), currentListIds, ListNameMemento.EMPTY);
         }
 
         public void promptForListSelection(final int titleId, @NonNull final Action1<Integer> runAfterwards, final boolean onlyConcreteLists, final int exceptListId, final @NonNull ListNameMemento listNameMemento) {
             promptForListSelection(titleId, runAfterwards, onlyConcreteLists, Collections.singleton(exceptListId), listNameMemento);
         }
 
+        public void promptForMultiListSelection(final int titleId, @NonNull final Action1<Set<Integer>> runAfterwards, final boolean onlyConcreteLists, final Set<Integer> exceptListIds, final Set<Integer> currentListIds, final @NonNull ListNameMemento listNameMemento) {
+            final List<AbstractList> lists = getMenuLists(onlyConcreteLists, exceptListIds, currentListIds);
+
+            final CharSequence[] listTitles = new CharSequence[lists.size()];
+            final boolean[] selectedItems = new boolean[lists.size()];
+            for (int i = 0 ; i < lists.size() ; i++) {
+                AbstractList list = lists.get(i);
+                listTitles[i] = list.getTitleAndCount();
+                selectedItems[i] = currentListIds.contains(list.id);
+            }
+            final Set<Integer> selectedListIds = new HashSet<>(currentListIds);
+
+            final Activity activity = activityRef.get();
+            final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+            builder.setTitle(res.getString(titleId));
+            builder.setMultiChoiceItems(listTitles, selectedItems, new DialogInterface.OnMultiChoiceClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int itemId, boolean isChecked) {
+                    final AbstractList list = lists.get(itemId);
+                    if (isChecked) {
+                        selectedListIds.add(list.id);
+                    } else {
+                        selectedListIds.remove(list.id);
+                    }
+                }
+            });
+            builder.setPositiveButton(R.string.lists_ok,new DialogInterface.OnClickListener(){
+                        public void onClick(DialogInterface dialog, int id){
+                            if (selectedListIds.contains(PseudoList.NEW_LIST.id)) {
+                                // create new list on the fly
+                                promptForListCreation(runAfterwards, selectedListIds, listNameMemento.getTerm());
+                            } else {
+                                runAfterwards.call(selectedListIds);
+                            }
+                            dialog.cancel();
+                        }
+                    }
+            ).setNegativeButton(R.string.lists_cancel, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.dismiss();
+                        }
+                    }
+            );
+            builder.create().show();
+        }
+
         public void promptForListSelection(final int titleId, @NonNull final Action1<Integer> runAfterwards, final boolean onlyConcreteLists, final Set<Integer> exceptListIds, final @NonNull ListNameMemento listNameMemento) {
-            final List<AbstractList> lists = getMenuLists(onlyConcreteLists, exceptListIds);
+            final List<AbstractList> lists = getMenuLists(onlyConcreteLists, exceptListIds, Collections.<Integer>emptySet());
 
             final List<CharSequence> listsTitle = new ArrayList<>();
             for (final AbstractList list : lists) {
@@ -111,12 +158,12 @@ public final class StoredList extends AbstractList {
         }
 
         public static List<AbstractList> getMenuLists(final boolean onlyConcreteLists, final int exceptListId) {
-            return getMenuLists(onlyConcreteLists, Collections.singleton(exceptListId));
+            return getMenuLists(onlyConcreteLists, Collections.singleton(exceptListId), Collections.<Integer>emptySet());
         }
 
-        public static List<AbstractList> getMenuLists(final boolean onlyConcreteLists, final Set<Integer> exceptListIds) {
+        public static List<AbstractList> getMenuLists(final boolean onlyConcreteLists, final Set<Integer> exceptListIds, final Set<Integer> selectedLists) {
             final List<AbstractList> lists = new ArrayList<>();
-            lists.addAll(getSortedLists());
+            lists.addAll(getSortedLists(selectedLists));
 
             if (exceptListIds.contains(STANDARD_LIST_ID)) {
                 lists.remove(DataStore.getList(STANDARD_LIST_ID));
@@ -143,13 +190,19 @@ public final class StoredList extends AbstractList {
         }
 
         @NonNull
-        private static List<StoredList> getSortedLists() {
+        private static List<StoredList> getSortedLists(final Set<Integer> selectedLists) {
             final Collator collator = Collator.getInstance();
             final List<StoredList> lists = DataStore.getLists();
             Collections.sort(lists, new Comparator<StoredList>() {
 
                 @Override
                 public int compare(final StoredList lhs, final StoredList rhs) {
+                    if (selectedLists.contains(lhs.id) && !selectedLists.contains(rhs.id)) {
+                        return -1;
+                    }
+                    if (selectedLists.contains(rhs.id) && !selectedLists.contains(lhs.id)) {
+                        return 1;
+                    }
                     // have the standard list at the top
                     if (lhs.id == STANDARD_LIST_ID) {
                         return -1;
@@ -180,6 +233,31 @@ public final class StoredList extends AbstractList {
 
                     if (newId >= DataStore.customListIdOffset) {
                         runAfterwards.call(newId);
+                    } else {
+                        ActivityMixin.showToast(activity, res.getString(R.string.list_dialog_create_err));
+                    }
+                }
+            });
+        }
+
+        public void promptForListCreation(@NonNull final Action1<Set<Integer>> runAfterwards, final Set<Integer> selectedLists, final String newListName) {
+            handleListNameInput(newListName, R.string.list_dialog_create_title, R.string.list_dialog_create, new Action1<String>() {
+
+                // We need to update the list cache by creating a new StoredList object here.
+                @SuppressWarnings("unused")
+                @Override
+                public void call(final String listName) {
+                    final Activity activity = activityRef.get();
+                    if (activity == null) {
+                        return;
+                    }
+                    final int newId = DataStore.createList(listName);
+                    new StoredList(newId, listName, 0);
+
+                    if (newId >= DataStore.customListIdOffset) {
+                        selectedLists.remove(PseudoList.NEW_LIST.id);
+                        selectedLists.add(newId);
+                        runAfterwards.call(selectedLists);
                     } else {
                         ActivityMixin.showToast(activity, res.getString(R.string.list_dialog_create_err));
                     }
