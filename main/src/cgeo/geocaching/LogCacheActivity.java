@@ -91,10 +91,8 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     private List<LogType> possibleLogTypes = new ArrayList<>();
     private final Set<TrackableLog> trackables = new HashSet<>();
     protected @Bind(R.id.tweet) CheckBox tweetCheck;
-    protected @Bind(R.id.tweet_box) LinearLayout tweetBox;
     protected @Bind(R.id.log_password_box) LinearLayout logPasswordBox;
-    protected @Bind(R.id.favorite_box) LinearLayout favBox;
-    protected @Bind(R.id.favorite_remaining) TextView favRemaining;
+    protected @Bind(R.id.favorite_check) CheckBox favCheck;
     private SparseArray<TrackableLog> actionButtons;
 
     private ILoggingManager loggingManager;
@@ -375,11 +373,11 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     private void initializeFavoriteCheck() {
         if (ConnectorFactory.getConnector(cache).supportsAddToFavorite(cache, typeSelected)) {
             if (premFavPoints > 0) {
-                favBox.setVisibility(View.VISIBLE);
-                favRemaining.setText(getString(R.string.fav_points_remaining, premFavPoints));
+                favCheck.setVisibility(View.VISIBLE);
+                favCheck.setText(getString(R.string.fav_points_remaining, premFavPoints));
             }
         } else {
-            favBox.setVisibility(View.GONE);
+            favCheck.setVisibility(View.GONE);
         }
     }
 
@@ -454,9 +452,9 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
 
     private void updateTweetBox(final LogType type) {
         if (type == LogType.FOUND_IT && Settings.isUseTwitter() && Settings.isTwitterLoginValid()) {
-            tweetBox.setVisibility(View.VISIBLE);
+            tweetCheck.setVisibility(View.VISIBLE);
         } else {
-            tweetBox.setVisibility(View.GONE);
+            tweetCheck.setVisibility(View.GONE);
         }
     }
 
@@ -530,7 +528,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
                     // update offline log in DB
                     cache.clearOfflineLog();
 
-                    if (typeSelected == LogType.FOUND_IT && tweetCheck.isChecked() && tweetBox.getVisibility() == View.VISIBLE) {
+                    if (typeSelected == LogType.FOUND_IT && tweetCheck.isChecked() && tweetCheck.getVisibility() == View.VISIBLE) {
                         publishProgress(res.getString(R.string.log_posting_twitter));
                         Twitter.postTweetCache(geocode, logNow);
                     }

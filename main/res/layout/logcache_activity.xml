@@ -29,13 +29,15 @@
                     android:id="@+id/type"
                     style="@style/button_full"
                     android:layout_width="0dip"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    tools:text="log type"/>
 
                 <Button
                     android:id="@+id/date"
                     style="@style/button_full"
                     android:layout_width="0dip"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    tools:text="log date"/>
             </LinearLayout>
 
             <EditText
@@ -46,7 +48,8 @@
                 android:inputType="textMultiLine|textCapSentences"
                 android:maxLength="4000"
                 android:minLines="5"
-                android:singleLine="false" />
+                android:singleLine="false"
+                tools:text="The log text is limited to 4000 characters."/>
 
             <LinearLayout
                 android:id="@+id/log_password_box"
@@ -54,7 +57,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dip"
                 android:orientation="vertical"
-                android:visibility="gone" >
+                android:visibility="gone"
+                tools:visibility="visible">
 
                 <TextView
                     android:layout_width="fill_parent"
@@ -75,61 +79,31 @@
             </LinearLayout>
 
             <include layout="@layout/gcvote_rating_bar"  android:layout_width="wrap_content" android:layout_height="wrap_content"/>
-            <LinearLayout
-                android:id="@+id/favorite_box"
-                android:layout_width="fill_parent"
+            <CheckBox
+                android:id="@+id/favorite_check"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:text="@string/fav_points_remaining"
                 android:layout_marginBottom="5dip"
                 android:layout_marginLeft="10dip"
                 android:layout_marginRight="10dip"
-                android:orientation="horizontal"
-                android:visibility="gone">
-                <CheckBox
-                    android:id="@+id/favorite_check"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="left"
-                    android:gravity="center"
-                    android:padding="2sp"/>
-                <TextView
-                    android:id="@+id/favorite_remaining"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:gravity="left"
-                    android:padding="2sp"
-                    android:textColor="?text_color"
-                    android:textSize="14sp"/>
-            </LinearLayout>
+                android:visibility="gone"
+                tools:visibility="visible"
+                />
 
-            <LinearLayout
-                android:id="@+id/tweet_box"
-                android:layout_width="fill_parent"
+            <CheckBox
+                android:id="@+id/tweet"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:text="@string/visit_tweet"
                 android:layout_marginBottom="5dip"
                 android:layout_marginLeft="10dip"
                 android:layout_marginRight="10dip"
-                android:orientation="horizontal"
-                android:visibility="gone" >
+                android:visibility="gone"
+                tools:visibility="visible"                />
 
-                <CheckBox
-                    android:id="@+id/tweet"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="left"
-                    android:gravity="center"
-                    android:padding="2sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:gravity="left"
-                    android:paddingRight="3dip"
-                    android:text="@string/visit_tweet"
-                    android:textColor="?text_color"
-                    android:textSize="14sp" />
-            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -139,7 +113,8 @@
             android:layout_marginBottom="10dip"
             android:layout_marginTop="10dip"
             android:orientation="vertical"
-            android:visibility="gone" >
+            android:visibility="gone"
+            tools:visibility="visible">
 
             <RelativeLayout style="@style/separator_horizontal_layout" >
 
@@ -163,7 +138,8 @@
                 android:layout_height="wrap_content"
                 android:gravity="right"
                 android:orientation="vertical"
-                android:visibility="gone" >
+                android:visibility="gone"
+                tools:visibility="visible">
 
                 <Button
                     android:id="@+id/changebutton"
