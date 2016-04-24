@@ -646,15 +646,15 @@
   <string name="auth_authorize">A c:geo hitelesítése</string>
   <string name="auth_check">Hitelesítés ellenőrzése</string>
   <string name="auth_check_again">Hitelesítés újraellenőrzése</string>
-  <string name="auth_start">Hitelesítés indítása</string>
-  <string name="auth_again">Újrahitelesítése</string>
+  <string name="auth_start">Hitelesítés</string>
+  <string name="auth_again">Újrahitelesítés</string>
   <string name="auth_register">Fiók létrehozása</string>
   <string name="auth_connected">Bejelentkezve</string>
   <string name="auth_unconnected">Nem vagy bejelentkezve</string>
   <string name="auth_connected_as">Bejelentkezve %s azonosítóval</string>
   <string name="auth_dialog_waiting">Várakozás a(z) %s válaszára…</string>
   <string name="auth_explain_short">Itt engedélyeztetheted a <b>c:geo</b> hozzáférését a(z) %s adataihoz.</string>
-  <string name="auth_explain_long">A \"Hitelesítés indítása\" gomb megnyomása után a böngészőben megnyílik a(z) %s oldala. Jelentkezz be ezen az oldalon, és engedélyezd a <b>c:geo</b> hozzáférését a fiókodhoz!</string>
+  <string name="auth_explain_long">A \"Hitelesítés\" gomb megnyomása után a böngészőben megnyílik a(z) %s oldala. Jelentkezz be ezen az oldalon, és engedélyezd a <b>c:geo</b> hozzáférését a fiókodhoz!</string>
   <string name="auth_forget_title">Hitelesítés törlése</string>
   <string name="auth_forget_message">Kijelentkezel a szolgáltatótól. A mentett bejelentkezési adataid elvesznek.</string>
   <!-- auth credentials -->

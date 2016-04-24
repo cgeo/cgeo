@@ -325,6 +325,7 @@
   <string name="caches_refresh_all">Aktualizovat vše</string>
   <string name="caches_move_selected">Přesunout vybrané</string>
   <string name="caches_move_all">Přesunout vše</string>
+  <string name="caches_copy_all">Kopírovat vše</string>
   <string name="caches_map_locus">Locus</string>
   <string name="caches_map_locus_export">Exportovat do Locusu</string>
   <string name="caches_recaptcha_title">reCAPTCHA</string>
@@ -384,6 +385,7 @@
   <string name="about_apache_license"><a href=""> licence Apache, verze 2.0</a></string>
   <string name="about_help">Nápověda</string>
   <string name="about_system_include">Při odesílání hlášení o chybě nebo žádosti o další informace uveďte prosím následující systémové informace:</string>
+  <string name="about_system_info_send_button">Odeslat e-mailem…</string>
   <string name="changelog_github">Seznam všech změn</string>
   <!-- settings -->
   <string name="settings_title_open_settings">Otevřít nastavení?</string>
@@ -426,22 +428,31 @@
   <string name="settings_reauthorize">Znovu autorizovat c:geo</string>
   <string name="init_oc">Opencaching.de</string>
   <string name="settings_activate_oc">Aktivovat</string>
+  <string name="init_summary_oc_de">Načíst keše z opencaching.de</string>
   <string name="init_oc_de_description">Autorizovat c:geo pro hledání keší a přístup/filtrování tvých nalezených keší služby opencaching.de.</string>
   <string name="init_oc_pl">Opencaching.pl</string>
   <string name="settings_activate_oc_pl">Aktivovat</string>
+  <string name="init_summary_oc_pl">Načíst keše z opencaching.pl</string>
   <string name="init_oc_pl_description">Autorizovat c:geo pro hledání keší a přístup/filtrování tvých nalezených keší služby opencaching.pl.</string>
   <string name="init_oc_nl">Opencaching.nl</string>
   <string name="settings_activate_oc_nl">Aktivovat</string>
+  <string name="init_summary_oc_nl">Načíst keše z opencaching.nl</string>
   <string name="init_oc_nl_description">Autorizovat c:geo pro hledání keší a přístup/filtrování tvých nalezených keší služby opencaching.nl.</string>
   <string name="init_oc_us">Opencaching.us</string>
   <string name="settings_activate_oc_us">Aktivovat</string>
+  <string name="init_summary_oc_us">Načíst keše z opencaching.us</string>
   <string name="init_oc_us_description">Autorizovat c:geo pro hledání keší a přístup/filtrování tvých nalezených keší služby opencaching.us.</string>
   <string name="init_oc_ro">Opencaching.ro</string>
   <string name="settings_activate_oc_ro">Aktivovat</string>
+  <string name="init_summary_oc_ro">Načíst keše z opencaching.ro</string>
   <string name="init_oc_ro_description">Autorizovat c:geo pro hledání keší a přístup/filtrování tvých nalezených keší služby opencaching.ro.</string>
   <string name="init_oc_uk">Opencaching.org.uk</string>
   <string name="settings_activate_oc_uk">Aktivovat</string>
+  <string name="init_summary_oc_uk">Načíst keše z opencaching.org.uk</string>
   <string name="init_oc_uk_description">Autorizovat c:geo pro hledání keší a přístup/filtrování tvých nalezených keší služby opencaching.org.uk.</string>
+  <string name="init_su">Geocaching.su</string>
+  <string name="init_summary_su">Načíst keše z geocaching.su</string>
+  <string name="settings_activate_su">Aktivovat</string>
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_gcvote_password_description">Pokud chceš hodnotit keše, je třeba postupovat dle pokynů na GCVote.com a zadat sem své heslo.</string>
   <string name="err_gcvote_send_rating">Chyba při odesílání hodnocení, zkontroluj GCVote heslo v nastavení nebo ho nech prázdné.</string>

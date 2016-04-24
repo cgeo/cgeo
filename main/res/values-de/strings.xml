@@ -359,6 +359,8 @@
   <string name="list_menu_rename">Aktuelle Liste umbenennen</string>
   <string name="list_menu_import">Importieren</string>
   <string name="list_title">Liste wählen</string>
+  <string name="lists_title">Listen wählen</string>
+  <string name="lists_remove_all">Keine</string>
   <string name="list_inbox">Standardliste</string>
   <string name="list_all_lists">Alle</string>
   <string name="list_dialog_create_title">Neue Liste</string>
@@ -780,6 +782,7 @@
   <string name="cache_dialog_favorite_remove_message">Entferne den Cache von deinen Favoriten…</string>
   <string name="cache_menu_navigate">Navigieren</string>
   <string name="cache_menu_navigation_drive">Navigation (Fahren)</string>
+  <string name="cache_menu_navigation_drive_select_target">Cache oder Parkplatz?</string>
   <string name="cache_menu_navigation_walk">Navigation (Gehen)</string>
   <string name="cache_menu_navigation_transit">Navigation (ÖPNV)</string>
   <string name="cache_menu_navigation_bike">Navigation (Fahrrad)</string>
@@ -1454,4 +1457,6 @@
   <string name="cache_list_remove_from">Aus Liste entfernen</string>
   <string name="list_list_headline">Listen:</string>
   <string name="cache_store_list">In Liste speichern</string>
+  <string name="err_rendertheme_file_unreadable">Konnte die gewählte Kartendarstellung nicht laden. Verwende den Standard.</string>
+  <string name="err_rendertheme_invalid">Die gewählte Kartendarstellung ist nicht für diese mapsforge-Version gültig. Verwende den Standard.</string>
 </resources>
