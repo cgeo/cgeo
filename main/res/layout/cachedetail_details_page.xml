@@ -59,7 +59,7 @@
                 android:textColorLink="?text_color_link"
                 android:textIsSelectable="false"
                 android:textSize="14sp"
-                tools:text="attributes text"/>
+                tools:text="attribute 1\nattribute 2\nattribute 3"/>
         </LinearLayout>
 
         <!-- Offline box -->
@@ -92,7 +92,8 @@
                     android:paddingRight="3dip"
                     android:textColor="?text_color"
                     android:textSize="14sp"
-                    tools:text="This cache has not been stored. Or has it?"/>
+                    tools:text="This cache has not been stored. Or has it? Maybe an hour ago?"
+                    android:textIsSelectable="false" />
 
                 <LinearLayout
                     android:id="@+id/offline_buttons"
@@ -136,7 +137,8 @@
                     android:paddingRight="3dip"
                     android:textColor="?text_color"
                     android:textSize="14sp"
-                    tools:text="list 1, list 2, list 3"/>
+                    tools:text="list 1, list 2, list 3, and many, many, many, many, many more lists"
+                    android:textIsSelectable="false" />
                 <Button
                     android:id="@+id/offline_store"
                     style="@style/button_small"
@@ -180,7 +182,8 @@
                     android:paddingRight="3dip"
                     android:textColor="?text_color"
                     android:textSize="14sp"
-                    tools:text="The cache may or may not be on your watch list."/>
+                    tools:text="The cache may or may not be on your watch list."
+                    android:textIsSelectable="false" />
 
                 <Button
                     android:id="@+id/add_to_watchlist"
@@ -228,7 +231,8 @@
                     android:paddingRight="3dip"
                     android:textColor="?text_color"
                     android:textSize="14sp"
-                    tools:text="Not on your favorite list. You may have some fav points remaining."/>
+                    tools:text="Probably not on your favorite list. You may have some fav points remaining."
+                    android:textIsSelectable="false" />
 
                 <Button
                     android:id="@+id/add_to_favpoint"
