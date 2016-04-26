@@ -203,6 +203,8 @@
   <string name="err_parse_lon">c:geo n\'arrive pas à lire la longitude.</string>
   <string name="err_parse_dist">c:geo n\'arrive pas à lire la distance.</string>
   <string name="err_parse_lat_lon">c:geo n\'arrive pas à lire la latitude ou la longitude.</string>
+  <string name="err_rendertheme_file_unreadable">Impossible de charger le thème de rendu sélectionné. Retour au thème intégré.</string>
+  <string name="err_rendertheme_invalid">Le thème de rendu sélectionné n\'est pas valide pour cette version de mapsforge. Retour au thème intégré.</string>
   <string name="warn_save_nothing">Il n\'y a rien à enregistrer.</string>
   <string name="warn_no_cache_coord">Il n\'y pas de caches avec les coordonnées associées.</string>
   <string name="warn_no_coordinates">Aucune coordonnée associée.</string>

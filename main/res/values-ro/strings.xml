@@ -203,6 +203,8 @@
   <string name="err_parse_lon">c:geo nu înţelege longitudinea.</string>
   <string name="err_parse_dist">c:geo nu înţelege distanţa.</string>
   <string name="err_parse_lat_lon">c:geo nu înţelege latitudinea sau longitudinea.</string>
+  <string name="err_rendertheme_file_unreadable">Tema de afişare aleasă nu a putut fi încărcată. Revenire la tema implicită.</string>
+  <string name="err_rendertheme_invalid">Tema de afişare aleasă nu este valabilă pentru această versiune de mapsforge. Revenire la tema implicită.</string>
   <string name="warn_save_nothing">Nimic de salvat.</string>
   <string name="warn_no_cache_coord">Nu există cutii cu coordonate.</string>
   <string name="warn_no_coordinates">Coordonatele nu a fost specificate.</string>
@@ -441,6 +443,7 @@
   <string name="init_oc_uk">Opencaching.org.uk</string>
   <string name="settings_activate_oc_uk">Activează</string>
   <string name="init_oc_uk_description">Autorizează c:geo cu opencaching.org.uk pentru a putea căuta geocutii şi a putea accesa/filtra pe cele găsite de tine.</string>
+  <string name="settings_activate_su">Activează</string>
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_gcvote_password_description">Pentru a putea evalua o geocutie, trebuie să urmezi instrucţiunile de la GCVote.com şi să introduci aici parola GCVote.</string>
   <string name="err_gcvote_send_rating">Eroare la trimiterea evaluării, verifică-ţi parola GCVote din configuraţie sau şterge această parolă.</string>
@@ -626,10 +629,12 @@
   <string name="auth_authorize">Autorizează c:geo</string>
   <string name="auth_start">Începe autorizarea</string>
   <string name="auth_again">Încearcă din nou</string>
+  <string name="auth_register">Creează cont</string>
   <string name="auth_dialog_waiting">Aştept după %s…</string>
   <string name="auth_explain_short">Această procedură va permite <b>c:geo</b> să aibe acces la %s.</string>
   <string name="auth_explain_long">Apăsând \"Autorizează c:geo\" va începe procedura. Această procedură va deschide în browser pagina %s. Autentifică-te pe această pagină şi confirmă permisiunea pentru ca <b>c:geo</b> să aibe acces la contul tău. Aceasta este totul.</string>
   <!-- auth credentials -->
+  <string name="auth_credentials_explain_short">Această procedură va permite <b>c:geo</b> să aibe acces la %s.</string>
   <!-- auth token -->
   <string name="auth_token_register">Creează un cont nou</string>
   <string name="auth_token_explain_short">Această procedură va permite <b>c:geo</b> să aibe acces la %s.</string>
@@ -665,6 +670,7 @@
   <string name="cache_offline_refresh">Împrospătează</string>
   <string name="cache_offline_drop">Şterge</string>
   <string name="cache_offline_store">Salvează</string>
+  <string name="cache_offline_manage">Gestionează</string>
   <string name="cache_offline_stored">Salvată pe dispozitiv</string>
   <string name="cache_offline_not_ready">Indisponibilă fără internet</string>
   <string name="cache_offline_time_about">despre</string>

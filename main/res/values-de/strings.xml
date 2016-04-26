@@ -206,6 +206,8 @@
   <string name="err_parse_lon">c:geo konnte den Längengrad nicht verarbeiten.</string>
   <string name="err_parse_dist">c:geo konnte die Entfernung nicht verarbeiten.</string>
   <string name="err_parse_lat_lon">c:geo konnte den Breiten- oder Längengrad nicht verarbeiten.</string>
+  <string name="err_rendertheme_file_unreadable">Konnte die gewählte Kartendarstellung nicht laden. Verwende den Standard.</string>
+  <string name="err_rendertheme_invalid">Die gewählte Kartendarstellung ist nicht für diese mapsforge-Version gültig. Verwende den Standard.</string>
   <string name="warn_save_nothing">Es gibt nichts zum Speichern.</string>
   <string name="warn_no_cache_coord">Es gibt hier keinen Cache mit Koordinaten.</string>
   <string name="warn_no_coordinates">Keine Koordinaten angegeben.</string>
@@ -695,6 +697,7 @@
   <string name="cache_offline_refresh">Aktualisieren</string>
   <string name="cache_offline_drop">Löschen</string>
   <string name="cache_offline_store">Speichern</string>
+  <string name="cache_offline_manage">Verwalten</string>
   <string name="cache_offline_store_in_list">In Liste speichern</string>
   <string name="cache_offline_stored">Auf dem Gerät gespeichert</string>
   <string name="cache_offline_not_ready">Nicht offline verfügbar</string>
@@ -1457,6 +1460,4 @@
   <string name="cache_list_remove_from">Aus Liste entfernen</string>
   <string name="list_list_headline">Listen:</string>
   <string name="cache_store_list">In Liste speichern</string>
-  <string name="err_rendertheme_file_unreadable">Konnte die gewählte Kartendarstellung nicht laden. Verwende den Standard.</string>
-  <string name="err_rendertheme_invalid">Die gewählte Kartendarstellung ist nicht für diese mapsforge-Version gültig. Verwende den Standard.</string>
 </resources>

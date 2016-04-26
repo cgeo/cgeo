@@ -148,6 +148,8 @@
   <string name="err_unknown">Onbekende fout</string>
   <string name="err_unknown_address">c:geo was niet in staat dit adres te herkennen als bestaande locatie</string>
   <string name="err_comm">Onbekende communicatiefout</string>
+  <string name="err_missing_auth">Geen gebruikersnaam en/of wachtwoord ingesteld</string>
+  <string name="err_wrong">Verkeerde gebruikersnaam en/of wachtwoord</string>
   <string name="err_maintenance">Geocaching.com is offline voor onderhoud. c:geo werkt offline met opgeslagen caches.</string>
   <string name="err_license">Gebruiker heeft de gebruikersvoorwaarden van Geocaching.com niet geaccepteerd en kan daarom geen coördinaten laden.</string>
   <string name="err_unvalidated_account">Je dient je account eerst te valideren op de Geocaching.com website.</string>
@@ -204,6 +206,8 @@
   <string name="err_parse_lon">Sorry, c:geo kan lengtegraad niet verwerken.</string>
   <string name="err_parse_dist">Sorry, c:geo kan afstand niet verwerken.</string>
   <string name="err_parse_lat_lon">Sorry, c:geo kan breedtegraad of lengtegraad niet verwerken.</string>
+  <string name="err_rendertheme_file_unreadable">Het geselecteerde render thema kan niet worden geladen. Er wordt teruggekeerd naar het ingebouwde thema.</string>
+  <string name="err_rendertheme_invalid">Het geselecteerde render thema is niet geldig voor deze versie van mapsforge. Er wordt teruggekeerd naar het ingebouwde thema.</string>
   <string name="warn_save_nothing">Er is niets op te slaan.</string>
   <string name="warn_no_cache_coord">Er is geen cache met deze coördinaten.</string>
   <string name="warn_no_coordinates">Geen coördinaten opgegeven.</string>
@@ -322,6 +326,8 @@
   <string name="caches_refresh_all">Ververs alle</string>
   <string name="caches_move_selected">Verplaats geselecteerden</string>
   <string name="caches_move_all">Verplaats alle</string>
+  <string name="caches_copy_selected">Kopieer geselecteerde</string>
+  <string name="caches_copy_all">Kopieer alles</string>
   <string name="caches_map_locus">Locus</string>
   <string name="caches_map_locus_export">Exporteer naar Locus</string>
   <string name="caches_recaptcha_title">reCAPTCHA</string>
@@ -355,6 +361,8 @@
   <string name="list_menu_rename">Hernoem huidige lijst</string>
   <string name="list_menu_import">Importeer</string>
   <string name="list_title">Selecteer een lijst</string>
+  <string name="lists_title">Kies een lijst</string>
+  <string name="lists_remove_all">Geen</string>
   <string name="list_inbox">Opgeslagen</string>
   <string name="list_all_lists">Alle caches</string>
   <string name="list_dialog_create_title">Nieuwe lijst</string>
@@ -381,6 +389,9 @@
   <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
   <string name="about_help">Help</string>
   <string name="about_system_include">Voeg volgende systeem informatie toe wanneer je een bug report stuurt of vraagt om meer informatie over c:geo:</string>
+  <string name="about_system_info_send_button">Verzenden via mail…</string>
+  <string name="about_system_info">c:geo systeeminformatie</string>
+  <string name="about_system_info_send_chooser">Verzend systeeminformatie</string>
   <string name="changelog_github">Lijst met alle wijzigingen</string>
   <!-- settings -->
   <string name="settings_title_open_settings">Instellingen openen?</string>
@@ -421,24 +432,35 @@
   <string name="settings_info_facebook_login">U kunt c:geo login aanbrengen in geocaching.com met uw Facebook-account. Maar er is een eenvoudige alternatieve oplossing…</string>
   <string name="settings_authorize">Autoriseer c:geo</string>
   <string name="settings_reauthorize">Autoriseer c:geo nogmaals</string>
+  <string name="settings_gc_description">Autoriseer c:geo met geocaching.com om caches te zoeken.</string>
+  <string name="settings_ec_description">Autoriseer c:geo met extremcaching.com om caches te zoeken en toegang te hebben tot jouw gevonden caches.</string>
   <string name="init_oc">Opencaching.de</string>
   <string name="settings_activate_oc">Activeren</string>
+  <string name="init_summary_oc_de">Laad caches van opencaching.de</string>
   <string name="init_oc_de_description">c:geo authoriseren met opencaching.de om naar caches te zoeken en het filteren van gevonden caches.</string>
   <string name="init_oc_pl">Opencaching.pl</string>
   <string name="settings_activate_oc_pl">Activeren</string>
+  <string name="init_summary_oc_pl">Laad caches van opencaching.pl</string>
   <string name="init_oc_pl_description">c:geo authoriseren met opencaching.pl om naar caches te zoeken en het filteren van gevonden caches.</string>
   <string name="init_oc_nl">Opencaching.nl</string>
   <string name="settings_activate_oc_nl">Activeren</string>
+  <string name="init_summary_oc_nl">Laad caches van opencaching.nl</string>
   <string name="init_oc_nl_description">c:geo Autoriseren met opencaching.nl naar caches te zoeken en je gevonden caches te benaderen/filteren.</string>
   <string name="init_oc_us">Opencaching.us</string>
   <string name="settings_activate_oc_us">Activeren</string>
+  <string name="init_summary_oc_us">Laad caches van opencaching.us</string>
   <string name="init_oc_us_description">c:geo Autoriseren met opencaching.us naar caches te zoeken en je gevonden caches te benaderen/filteren.</string>
   <string name="init_oc_ro">Opencaching.ro</string>
   <string name="settings_activate_oc_ro">Activeren</string>
+  <string name="init_summary_oc_ro">Laad caches van opencaching.ro</string>
   <string name="init_oc_ro_description">c:geo Autoriseren met opencaching.ro naar caches te zoeken en je gevonden caches te benaderen/filteren.</string>
   <string name="init_oc_uk">Opencaching.org.uk</string>
   <string name="settings_activate_oc_uk">Activeren</string>
+  <string name="init_summary_oc_uk">Laad caches van opencaching.org.uk</string>
   <string name="init_oc_uk_description">c:geo authoriseren met opencaching.org.uk om naar caches te zoeken en het filteren van gevonden caches.</string>
+  <string name="init_su">Geocaching.su</string>
+  <string name="init_summary_su">Laad caches van Geocaching.su</string>
+  <string name="settings_activate_su">Activeer</string>
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_gcvote_password_description">Om een cache te kunnen beoordelen, volg de instructies op GCVote.com en geef hier uw GCVote wachtwoord op.</string>
   <string name="err_gcvote_send_rating">Fout bij het verzenden van beoordeling, controleer het GCVote wachtwoord in instellingen of maak deze leeg.</string>
@@ -452,6 +474,7 @@
   <string name="init_login_popup_working">Inloggen op Geocaching.com…</string>
   <string name="init_login_popup_ok">Ingelogd</string>
   <string name="init_login_popup_failed">Inloggen mislukt.</string>
+  <string name="init_login_popup_failed_reason">Inloggen mislukt: %s</string>
   <string name="init_login_popup_not_authorized">Niet geautoriseerd</string>
   <string name="init_login_popup_invalid_timestamp">Lokale tijd ongeldig, pas apparaat tijd aan</string>
   <string name="init_login_popup_invalid_token">Autorisatie ongeldig, opnieuw autoriseren</string>
@@ -513,6 +536,7 @@
   <string name="init_backup_success">De database van c:geo was succesvol gekopieerd naar het bestand:</string>
   <string name="init_backup_failed">Backup van c:geo database is niet gelukt.</string>
   <string name="init_backup_unnecessary">Database is leeg, backup niet nodig.</string>
+  <string name="init_backup_no_backup_available">Er is geen back-up bestand beschikbaar.</string>
   <string name="backup_confirm_overwrite">Wil je de bestaande backup van %s overschrijven?</string>
   <string name="restore_confirm_overwrite">Wil je %s op uw apparaat overschrijven met de backup?</string>
   <string name="init_restore_success">Herstellen is gelukt.</string>
@@ -603,6 +627,8 @@
   <string name="feature_search_geocode">Zoek op geocode</string>
   <string name="feature_search_owner">Zoek op eigenaar</string>
   <string name="feature_search_finder">Zoek op vinder</string>
+  <string name="init_experimental_title">Experimentele functies</string>
+  <string name="init_newmap">Gebruik de nieuwe kaart als standaard (live/lijsten)</string>
   <!-- map sources -->
   <string name="map_source_google_map">Google: Map</string>
   <string name="map_source_google_satellite">Google: Satellite</string>
@@ -615,19 +641,29 @@
   <string name="init_sendToCgeo_description"><b>Send2cgeo</b> zorgt ervoor dat je caches direct vanaf de geocaching website kan ontvangen door middel van een plugin in je webbrowser (Chrome of Firefox). Lees het volgende voordat je registreert <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Registratie is alleen nodig als je send2cgeo wil gebruiken. c:geo werkt ook zonder het registreren van je apparaat.</string>
   <string name="init_sendToCgeo_register">Verstuur registratieverzoek</string>
   <string name="init_sendToCgeo_registering">Bezig met het registreren voor send2cgeo…</string>
-  <string name="init_sendToCgeo_register_ok">Registratie gelukt. PIN code is %d. Gebruik dit op de c:geo website om dit apparaat aan je browser toe te voegen.</string>
+  <string name="init_sendToCgeo_register_ok">Registratie gelukt. PIN code is %d. Gebruik dit op de c:geo website om dit apparaat aan je browser te verbinden.</string>
   <string name="init_sendToCgeo_register_fail">Registratie is niet gelukt.</string>
   <string name="sendToCgeo_download_fail">Het is c:geo niet gelukt om de caches te downloaden. Geen internetverbinding beschikbaar of send2cgeo is niet bereikbaar.</string>
   <string name="sendToCgeo_no_registration">Het is c:geo niet gelukt om de caches te downloaden. De registratie van send2cgeo is verlopen. Registreer s.v.p. in de instellingen.</string>
   <!-- auth generic -->
   <string name="auth_twitter">Twitter</string>
   <string name="auth_authorize">c:geo Autoriseren</string>
+  <string name="auth_check">Controleer authenticatie</string>
+  <string name="auth_check_again">Controleer authenticatie nogmaals</string>
   <string name="auth_start">Start autorisatie</string>
   <string name="auth_again">Nogmaals starten</string>
+  <string name="auth_register">Account aanmaken</string>
+  <string name="auth_connected">Verbonden</string>
+  <string name="auth_unconnected">Nog niet verbonden</string>
+  <string name="auth_connected_as">Verbonden als %s</string>
   <string name="auth_dialog_waiting">Wachten op %s…</string>
   <string name="auth_explain_short">Het volgende proces zal <b>c:geo</b> toegang geven tot %s.</string>
   <string name="auth_explain_long">Druk op de knop \"Autoriseer c:geo\" om het proces te starten. Dit proces zal een webbrowser met een pagina voor %s. Log in op deze pagina om <b>c:geo</b> toegang te geven tot je account. Dat is alles.</string>
+  <string name="auth_forget_title">Autorisatie vergeten?</string>
+  <string name="auth_forget_message">De verbinding met deze dienst zal worden verbroken. Je opgeslagen referenties zullen verloren gaan.</string>
   <!-- auth credentials -->
+  <string name="auth_credentials_explain_short">Het volgende proces zal <b>c:geo</b> toegang geven tot %s.</string>
+  <string name="auth_credentials_explain_long">Het invullen van je referenties en drukken op de \"Controleer authenticatie\" knop zal het proces starten. Dit proces zal verbinden met %s en je referenties valideren. Dat is alles.</string>
   <!-- auth token -->
   <string name="auth_token_register">Een account aanmaken</string>
   <string name="auth_token_explain_short">Het volgende proces zal <b>c:geo</b> toegang geven tot %s.</string>
@@ -661,6 +697,8 @@
   <string name="cache_offline_refresh">Verversen</string>
   <string name="cache_offline_drop">Laten vervallen</string>
   <string name="cache_offline_store">Opslaan</string>
+  <string name="cache_offline_manage">Beheren</string>
+  <string name="cache_offline_store_in_list">Opslaan in lijst</string>
   <string name="cache_offline_stored">Opgeslagen in apparaat</string>
   <string name="cache_offline_not_ready">Niet gereed voor\n offline gebruik</string>
   <string name="cache_offline_time_about">ongeveer</string>
@@ -747,6 +785,7 @@
   <string name="cache_dialog_favorite_remove_message">Verwijder cache van je favorieten…</string>
   <string name="cache_menu_navigate">Navigeer</string>
   <string name="cache_menu_navigation_drive">Navigeer (rijden)</string>
+  <string name="cache_menu_navigation_drive_select_target">Cache of parkeerplaats?</string>
   <string name="cache_menu_navigation_walk">Navigeer (lopen)</string>
   <string name="cache_menu_navigation_transit">Navigatie (Onderweg)</string>
   <string name="cache_menu_navigation_bike">Navigeer (fiets)</string>
@@ -755,6 +794,7 @@
   <string name="cache_menu_sygic_drive">Sygic (rijden)</string>
   <string name="cache_menu_radar">Radar</string>
   <string name="cache_menu_map">Toon op kaart</string>
+  <string name="cache_menu_new_map">Nieuwe Kaart</string>
   <string name="cache_menu_map_static">Statische kaarten</string>
   <string name="cache_menu_download_map_static">Download statische kaarten</string>
   <string name="cache_menu_rmaps">Rmaps</string>
@@ -771,6 +811,7 @@
   <string name="cache_menu_refresh">Verversen</string>
   <string name="cache_menu_share">Deel cache</string>
   <string name="cache_menu_move_list">Verplaats naar andere lijst</string>
+  <string name="cache_menu_copy_list">Naar een andere lijst kopiëren</string>
   <string name="cache_menu_whereyougo">WhereYouGo</string>
   <string name="cache_menu_oruxmaps_online">OruxMaps (Online)</string>
   <string name="cache_menu_oruxmaps_offline">OruxMaps (Offline)</string>
@@ -1388,6 +1429,11 @@
     <item quantity="one">%d Cache verplaatst</item>
     <item quantity="other">%d Caches verplaatst</item>
   </plurals>
+  <string name="command_copy_caches_progress">Caches kopiëren naar lijst %1s</string>
+  <plurals name="command_copy_caches_result">
+    <item quantity="one">%d Cache verplaatst</item>
+    <item quantity="other">%d Caches verplaatst</item>
+  </plurals>
   <string name="command_delete_caches_progress">Bezig met verwijderen caches</string>
   <plurals name="command_delete_caches_result">
     <item quantity="one">%d Cache verwijderd</item>
@@ -1411,4 +1457,7 @@
   <string name="invitation_action">Nodig vrienden uit</string>
   <string name="invitation_title">Vrienden uitnodigen c:geo te gebruiken</string>
   <string name="invitation_message">Probeer de c:geo app voor geocachen</string>
+  <string name="cache_list_remove_from">Verwijder uit lijst</string>
+  <string name="list_list_headline">Lijsten:</string>
+  <string name="cache_store_list">Opslaan in lijst</string>
 </resources>

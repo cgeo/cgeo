@@ -204,6 +204,8 @@
   <string name="err_parse_lon">c:geo nemůže dopočítat zeměpisnou délku.</string>
   <string name="err_parse_dist">c:geo nemůže dopočítat vzdálenost.</string>
   <string name="err_parse_lat_lon">c:geo nemůže dopočítat zeměpisnou šířku nebo délku.</string>
+  <string name="err_rendertheme_file_unreadable">Vybraný styl vykreslování nelze načíst. Bude použit výchozí styl.</string>
+  <string name="err_rendertheme_invalid">Vybraný styl vykreslování nelze s touto verzí mapsforge použít. Bude použit výchozí styl.</string>
   <string name="warn_save_nothing">Není nic k uložení.</string>
   <string name="warn_no_cache_coord">Není k dispozici žádná keš se souřadnicemi.</string>
   <string name="warn_no_coordinates">Souřadnice nezískány</string>

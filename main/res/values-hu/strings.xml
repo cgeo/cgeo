@@ -206,6 +206,8 @@
   <string name="err_parse_lon">Sajnáljuk, a c:geo nem tudja értelmezni a hosszúságot.</string>
   <string name="err_parse_dist">Sajnáljuk, a c:geo nem tudja értelmezni a távolságot.</string>
   <string name="err_parse_lat_lon">Sajnáljuk, a c:geo nem tudja értelmezni a szélességet vagy a hosszúságot.</string>
+  <string name="err_rendertheme_file_unreadable">A kiválasztott stílus betöltése sikertelen. Visszatérés a beépítetthez.</string>
+  <string name="err_rendertheme_invalid">A kiválasztott stílus inkompatibilis a mapsforge verzióval. Visszatérés a beépítetthez.</string>
   <string name="warn_save_nothing">Nincs semmi, amit menteni lehetne.</string>
   <string name="warn_no_cache_coord">Nincsenek koordinátával megadott ládák.</string>
   <string name="warn_no_coordinates">Nincsenek koordináták.</string>
@@ -222,7 +224,7 @@
   <string name="warn_invalid_mapfile">A kiválasztott térképfájl nem felel meg a mapsforge v0.3.0 formátumnak.\nAz offline térképek nem elérhetőék.</string>
   <string name="warn_deprecated_mapfile">0.2.4-es verziójú térképfájlt használsz.\nFontold meg a 0.3.0 verziójú térképre váltást.\nA következő kiadás már nem fogja támogatni a 0.2.4-es verziót.</string>
   <string name="warn_nonexistant_mapfile">A kiválasztott térképfájl nem létezik.\nAz offline térképek nem elérhetőék.</string>
-  <string name="warn_rendertheme_missing">Térkép téma nem található.</string>
+  <string name="warn_rendertheme_missing">Nem található térképstílus</string>
   <string name="warn_pocket_query_select">Nincs pocket lekérdezés kiválasztva.</string>
   <string name="warn_no_pocket_query_found">Online pocket lekérdezés nem található.</string>
   <string name="err_read_pocket_query_list">Hiba a pocket lekérdezések listájának olvasásakor.</string>
@@ -359,6 +361,8 @@
   <string name="list_menu_rename">Jelenlegi lista átnevezése</string>
   <string name="list_menu_import">Importálás</string>
   <string name="list_title">Válassz listát</string>
+  <string name="lists_title">Lista választása</string>
+  <string name="lists_remove_all">Egyik sem</string>
   <string name="list_inbox">Mentett</string>
   <string name="list_all_lists">Az összes láda</string>
   <string name="list_dialog_create_title">Új lista</string>
@@ -624,7 +628,7 @@
   <string name="feature_search_owner">Keresés tulajdonos alapján</string>
   <string name="feature_search_finder">Keresés megtalálók alapján</string>
   <string name="init_experimental_title">Kísérleti funkciók</string>
-  <string name="init_newmap">Az új térképet alapértelmezett használata (élő/listák)</string>
+  <string name="init_newmap">Új térkép alapért. használata (élő/listák)</string>
   <!-- map sources -->
   <string name="map_source_google_map">Google: Térkép</string>
   <string name="map_source_google_satellite">Google: Műholdkép</string>
@@ -693,6 +697,7 @@
   <string name="cache_offline_refresh">Frissítés</string>
   <string name="cache_offline_drop">Törlés</string>
   <string name="cache_offline_store">Mentés</string>
+  <string name="cache_offline_manage">Kezelés</string>
   <string name="cache_offline_store_in_list">Mentés listába</string>
   <string name="cache_offline_stored">Elmentve az eszközre</string>
   <string name="cache_offline_not_ready">Nem érhető el offline</string>
@@ -780,6 +785,7 @@
   <string name="cache_dialog_favorite_remove_message">Láda eltávolítása a kedvencek közül…</string>
   <string name="cache_menu_navigate">Navigáció</string>
   <string name="cache_menu_navigation_drive">Autós navigáció</string>
+  <string name="cache_menu_navigation_drive_select_target">Láda vagy parkolóhely?</string>
   <string name="cache_menu_navigation_walk">Gyalogos navigáció</string>
   <string name="cache_menu_navigation_transit">Tömegközlekedési navigáció</string>
   <string name="cache_menu_navigation_bike">Biciklis navigáció</string>
