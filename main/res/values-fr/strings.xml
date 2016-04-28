@@ -1098,8 +1098,8 @@
   <string name="attribute_wading_no">Ne demande pas à barboter</string>
   <string name="attribute_swimming_yes">Peut demander à nager</string>
   <string name="attribute_swimming_no">Ne demande pas à nager</string>
-  <string name="attribute_available_yes">Disponible par tout temps</string>
-  <string name="attribute_available_no">Pas disponible par tout temps</string>
+  <string name="attribute_available_yes">Disponible à toute heure</string>
+  <string name="attribute_available_no">Pas disponible à toute heure</string>
   <string name="attribute_night_yes">Recommandé de nuit</string>
   <string name="attribute_night_no">Non recommandé de nuit</string>
   <string name="attribute_winter_yes">Disponible durant l\'hiver</string>
