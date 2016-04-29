@@ -379,9 +379,8 @@ public class GCMap {
      *         8 = mystery, 1858 = whereigo
      */
     private static String getCacheTypeFilter(final CacheType typeToDisplay) {
-        final Set<String> filterTypes = new HashSet<>();
         // Put all types in set, remove what should be visible in a second step
-        filterTypes.addAll(Arrays.asList("2", "9", "5", "3", "6", "453", "13", "1304", "4", "11", "137", "8", "1858"));
+        final Set<String> filterTypes = new HashSet<>(Arrays.asList("2", "9", "5", "3", "6", "453", "13", "1304", "4", "11", "137", "8", "1858"));
         switch (typeToDisplay) {
             case TRADITIONAL:
                 filterTypes.remove("2");
