@@ -90,10 +90,10 @@ public class ImagesList {
     private final SparseArray<Image> images = new SparseArray<>();
     private final SparseArray<Geopoint> geoPoints = new SparseArray<>();
     private final String geocode;
-    private Geocache geocache;
+    private final Geocache geocache;
     private LinearLayout imagesView;
 
-    public ImagesList(final Activity activity, final String geocode, Geocache geocache) {
+    public ImagesList(final Activity activity, final String geocode, final Geocache geocache) {
         this.activity = activity;
         this.geocode = geocode;
         this.geocache = geocache;
