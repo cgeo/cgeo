@@ -1,5 +1,15 @@
 package cgeo.geocaching.apps.navi;
 
+import cgeo.geocaching.R;
+import cgeo.geocaching.enumerations.WaypointType;
+import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.IWaypoint;
+import cgeo.geocaching.models.Waypoint;
+import cgeo.geocaching.utils.Log;
+
+import org.eclipse.jdt.annotation.NonNull;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -14,17 +24,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
-import org.eclipse.jdt.annotation.NonNull;
-
 import java.util.ArrayList;
-
-import cgeo.geocaching.R;
-import cgeo.geocaching.enumerations.WaypointType;
-import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.models.IWaypoint;
-import cgeo.geocaching.models.Waypoint;
-import cgeo.geocaching.utils.Log;
 
 abstract class GoogleNavigationApp extends AbstractPointNavigationApp {
 
@@ -105,9 +105,8 @@ abstract class GoogleNavigationApp extends AbstractPointNavigationApp {
 
                     final TextView infoView = (TextView) view.findViewById(R.id.info);
                     if (item instanceof Waypoint) {
-                        infoView.setText(((Waypoint)item).getNote());
-                    }
-                    else {
+                        infoView.setText(((Waypoint) item).getNote());
+                    } else {
                         infoView.setText(item.getGeocode());
                     }
 
