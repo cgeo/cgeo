@@ -13,6 +13,12 @@
         app:showAsAction="ifRoom|withText">
     </item>
     <item
+        android:id="@+id/image_add_waypoint"
+        android:title="@string/cache_image_add_waypoint"
+        app:showAsAction="ifRoom|withText"
+        android:visible="false">
+    </item>
+    <item
         android:id="@+id/menu_navigate"
         android:icon="@drawable/ic_menu_goto"
         android:title="@string/cache_menu_navigate"

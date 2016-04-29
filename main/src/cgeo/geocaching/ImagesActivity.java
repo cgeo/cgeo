@@ -50,7 +50,7 @@ public class ImagesActivity extends AbstractActionBarActivity {
         setContentView(R.layout.images_activity);
         setTitle(res.getString(imgType.getTitle()));
 
-        imagesList = new ImagesList(this, geocode);
+        imagesList = new ImagesList(this, geocode, null);
 
         imageNames = extras.getParcelableArrayList(Intents.EXTRA_IMAGES);
         if (CollectionUtils.isEmpty(imageNames)) {

@@ -895,6 +895,7 @@
     <string name="cache_image">Image</string>
     <string name="cache_image_open_file">Open as file</string>
     <string name="cache_image_open_browser">Open in browser</string>
+    <string name="cache_image_add_waypoint">Add waypoint</string>
     <string name="cache_share_field">Share</string>
     <string name="cache_time_full_hours">o\'clock</string>
     <string name="cache_listed_on">Listed on %s</string>

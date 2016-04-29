@@ -790,7 +790,11 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
         @Override
         public void onReceive(final Context context, final Intent intent) {
-            notifyDataSetChanged();
+            if (intent.getBooleanExtra(Intents.EXTRA_WPT_PAGE_UPDATE, false)) {
+                getViewCreator(Page.WAYPOINTS).notifyDataSetChanged();
+            } else {
+                notifyDataSetChanged();
+            }
         }
     };
 
@@ -836,7 +840,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         if (imageView == null) {
             return;
         }
-        imagesList = new ImagesList(this, cache.getGeocode());
+        imagesList = new ImagesList(this, cache.getGeocode(), cache);
         createSubscriptions.add(imagesList.loadImages(imageView, cache.getImages()));
     }
 
