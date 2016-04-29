@@ -1,10 +1,11 @@
 package cgeo.geocaching.enumerations;
 
-import cgeo.geocaching.R;
+import android.content.res.Resources;
+import android.support.annotation.StringRes;
 
 import org.eclipse.jdt.annotation.NonNull;
 
-import android.content.res.Resources;
+import cgeo.geocaching.R;
 
 public enum StatusCode {
 
@@ -31,12 +32,14 @@ public enum StatusCode {
     NOT_LOGGED_IN(R.string.init_login_popup_failed),
     LOGIMAGE_POST_ERROR(R.string.err_logimage_post_failed);
 
+    @StringRes
     final private int errorString;
 
-    StatusCode(final int errorString) {
+    StatusCode(@StringRes final int errorString) {
         this.errorString = errorString;
     }
 
+    @StringRes
     public int getErrorString() {
         return errorString;
     }

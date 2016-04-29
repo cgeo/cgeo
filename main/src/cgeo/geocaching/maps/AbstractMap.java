@@ -1,8 +1,5 @@
 package cgeo.geocaching.maps;
 
-import cgeo.geocaching.R;
-import cgeo.geocaching.maps.interfaces.MapActivityImpl;
-
 import android.app.Activity;
 import android.content.res.Resources;
 import android.os.Build;
@@ -11,13 +8,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
 
+import cgeo.geocaching.R;
+import cgeo.geocaching.maps.interfaces.MapActivityImpl;
+
 /**
  * Base class for the map activity. Delegates base class calls to the
  * provider-specific implementation.
  */
 public abstract class AbstractMap {
 
-    MapActivityImpl mapActivity;
+    final MapActivityImpl mapActivity;
 
     protected AbstractMap(final MapActivityImpl activity) {
         mapActivity = activity;

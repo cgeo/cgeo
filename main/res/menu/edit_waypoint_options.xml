@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto" >
 
     <item
         android:id="@+id/menu_edit_waypoint_cancel"
         android:icon="@drawable/ic_menu_cancel_holo_dark"
         android:title="@string/waypoint_cancel_edit"
-        app:showAsAction="always">
+        app:showAsAction="always"
+        tools:ignore="AlwaysShowAction">
     </item>
     <item
         android:id="@+id/menu_edit_waypoint_save"
         android:icon="@drawable/ic_menu_done_holo_dark"
         android:title="@string/waypoint_save"
-        app:showAsAction="always">
+        app:showAsAction="always"
+        tools:ignore="AlwaysShowAction">
     </item>
 
 </menu>

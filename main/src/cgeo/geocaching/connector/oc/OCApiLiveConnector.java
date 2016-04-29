@@ -1,5 +1,15 @@
 package cgeo.geocaching.connector.oc;
 
+import android.content.Context;
+import android.os.Handler;
+import android.support.annotation.StringRes;
+
+import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+
+import java.util.Locale;
+
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.LogCacheActivity;
 import cgeo.geocaching.SearchResult;
@@ -21,14 +31,6 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.CryptUtils;
 import cgeo.geocaching.utils.Log;
-
-import org.apache.commons.lang3.StringUtils;
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
-
-import android.content.Context;
-import android.os.Handler;
-import android.support.annotation.StringRes;
 
 public class OCApiLiveConnector extends OCApiConnector implements ISearchByCenter, ISearchByViewPort, ILogin, ISearchByKeyword, ISearchByOwner, ISearchByFinder {
 
@@ -57,7 +59,7 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByCente
     public SearchResult searchByViewport(@NonNull final Viewport viewport, @NonNull final MapTokens tokens) {
         final SearchResult result = new SearchResult(OkapiClient.getCachesBBox(viewport, this));
 
-        Log.d(String.format("OC returning %d caches from search by viewport", result.getCount()));
+        Log.d(String.format("OC returning %d caches from search by viewport", result.getCount(), Locale.getDefault()));
 
         return result;
     }

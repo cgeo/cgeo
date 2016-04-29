@@ -1,10 +1,10 @@
 package cgeo.geocaching.utils;
 
-import cgeo.geocaching.CgeoApplication;
-
 import android.content.Context;
 import android.view.Surface;
 import android.view.WindowManager;
+
+import cgeo.geocaching.CgeoApplication;
 
 public final class AngleUtils {
 
@@ -40,6 +40,8 @@ public final class AngleUtils {
 
     public static int getRotationOffset() {
         switch (WindowManagerHolder.WINDOW_MANAGER.getDefaultDisplay().getRotation()) {
+            case Surface.ROTATION_0:
+                return 0;
             case Surface.ROTATION_90:
                 return 90;
             case Surface.ROTATION_180:
