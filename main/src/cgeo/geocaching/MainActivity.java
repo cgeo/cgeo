@@ -512,8 +512,7 @@ public class MainActivity extends AbstractActionBarActivity {
         cacheTypes.add(CacheType.MYSTERY);
 
         // then add all other cache types sorted alphabetically
-        final List<CacheType> sorted = new ArrayList<>();
-        sorted.addAll(Arrays.asList(CacheType.values()));
+        final List<CacheType> sorted = new ArrayList<>(Arrays.asList(CacheType.values()));
         sorted.removeAll(cacheTypes);
 
         Collections.sort(sorted, new Comparator<CacheType>() {

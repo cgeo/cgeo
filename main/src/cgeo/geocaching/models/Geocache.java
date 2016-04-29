@@ -1796,8 +1796,7 @@ public class Geocache implements IWaypoint {
 
     @NonNull
     public Collection<Image> getImages() {
-        final List<Image> result = new LinkedList<>();
-        result.addAll(getSpoilers());
+        final List<Image> result = new LinkedList<>(getSpoilers());
         addLocalSpoilersTo(result);
         for (final LogEntry log : getLogs()) {
             result.addAll(log.getLogImages());
