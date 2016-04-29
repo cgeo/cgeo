@@ -376,7 +376,7 @@ public class GCMap {
      *         3 = multi
      *         6 = event, 453 = mega, 13 = cito, 1304 = gps adventures
      *         4 = virtual, 11 = webcam, 137 = earth
-     *         8 = mystery, 1858 = whereigo
+     *         8 = mystery, 1858 = wherigo
      */
     private static String getCacheTypeFilter(final CacheType typeToDisplay) {
         final Set<String> filterTypes = new HashSet<>();

@@ -122,7 +122,7 @@ It also defines attribute names and descriptions in several languages.
 		<lang id="en">
 			<name>Wherigo Cache</name>
 			<desc>
-				Cache description includes a file - the Whereigo cartridge. In order to
+				Cache description includes a file - the Wherigo cartridge. In order to
 				find the cache, you need to download the file and install it on
 				a proper compatible device.
 			</desc>
