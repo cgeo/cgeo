@@ -627,10 +627,12 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 ensureSaved();
                 editPersonalNote(cache, this);
                 return true;
-            default:
+            case R.id.menu_navigate:
                 if (NavigationAppFactory.onMenuItemSelected(item, this, cache)) {
                     return true;
                 }
+                break;
+            default:
                 if (LoggingUI.onMenuItemSelected(item, this, cache)) {
                     refreshOnResume = true;
                     return true;
