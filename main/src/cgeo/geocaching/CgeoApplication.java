@@ -1,17 +1,5 @@
 package cgeo.geocaching;
 
-import cgeo.geocaching.sensors.Sensors;
-import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.utils.AndroidRxUtils;
-import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.OOMDumpingUncaughtExceptionHandler;
-
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GoogleApiAvailability;
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-import org.eclipse.jdt.annotation.NonNull;
-
 import android.app.AlarmManager;
 import android.app.Application;
 import android.app.PendingIntent;
@@ -23,8 +11,22 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.view.ViewConfiguration;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
+
+import org.eclipse.jdt.annotation.NonNull;
+
 import java.lang.reflect.Field;
 import java.util.Locale;
+
+import cgeo.geocaching.compatibility.Compatibility;
+import cgeo.geocaching.sensors.Sensors;
+import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.OOMDumpingUncaughtExceptionHandler;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 public class CgeoApplication extends Application {
 
@@ -106,11 +108,13 @@ public class CgeoApplication extends Application {
 
     @Override
     public void onLowMemory() {
-        onTrimMemory(TRIM_MEMORY_COMPLETE);
+        super.onLowMemory();
+        onTrimMemory(Compatibility.TRIM_MEMORY_COMPLETE);
     }
 
     @Override
     public void onTrimMemory(final int level) {
+        super.onTrimMemory(level);
         if (level >= TRIM_MEMORY_MODERATE) {
             Log.i("Cleaning applications cache to trim memory");
             DataStore.removeAllFromCache();

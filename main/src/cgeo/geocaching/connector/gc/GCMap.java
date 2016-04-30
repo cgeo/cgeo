@@ -250,7 +250,7 @@ public class GCMap {
             result.setUrl(result.getUrl() + text);
         }
 
-        Log.d(String.format("GCMap: returning %d caches from search", result.getCount(), Locale.getDefault()));
+        Log.d(String.format(Locale.getDefault(),"GCMap: returning %d caches from search", result.getCount()));
 
         return result;
     }

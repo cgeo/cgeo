@@ -1,7 +1,5 @@
 package cgeo.geocaching.compatibility;
 
-import org.eclipse.jdt.annotation.NonNull;
-
 import android.app.Activity;
 import android.content.res.Resources;
 import android.graphics.Point;
@@ -9,7 +7,11 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.widget.TextView;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 public final class Compatibility {
+
+    public static final int TRIM_MEMORY_COMPLETE = 80; // copied from ComponentCallbacks2
 
     private static final int SDK_VERSION = Build.VERSION.SDK_INT;
 
