@@ -72,7 +72,6 @@ public class GoogleCacheOverlay extends ItemizedOverlay<GoogleCacheOverlayItem> 
     }
 
     private static MapViewImpl castMapViewImpl(final MapView mapView) {
-        assert mapView instanceof MapViewImpl;
         return (MapViewImpl) mapView;
     }
 

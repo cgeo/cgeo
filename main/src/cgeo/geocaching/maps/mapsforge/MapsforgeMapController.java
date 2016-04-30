@@ -22,7 +22,6 @@ public class MapsforgeMapController implements MapControllerImpl {
     }
 
     private static GeoPoint castToGeoPoint(final GeoPointImpl geoPoint) {
-        assert geoPoint instanceof GeoPoint;
         return (GeoPoint) geoPoint;
     }
 

@@ -20,7 +20,6 @@ public class GoogleMapController implements MapControllerImpl {
     }
 
     private static GeoPoint castToGeoPointImpl(final GeoPointImpl geoPoint) {
-        assert geoPoint instanceof GeoPoint;
         return (GeoPoint) geoPoint;
     }
 

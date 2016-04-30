@@ -42,7 +42,6 @@ public final class CacheMenuHandler extends AbstractUIFactory {
     }
 
     public static boolean onMenuItemSelected(final MenuItem item, @NonNull final CacheMenuHandler.ActivityInterface activityInterface, final Geocache cache) {
-        assert activityInterface instanceof Activity || activityInterface instanceof Fragment;
         final Activity activity;
         if (activityInterface instanceof Activity) {
             activity = (Activity) activityInterface;

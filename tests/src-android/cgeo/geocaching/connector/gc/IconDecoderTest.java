@@ -28,7 +28,7 @@ public class IconDecoderTest extends AbstractResourceInstrumentationTestCase {
         final BitmapFactory.Options options = new BitmapFactory.Options();
         options.inScaled = false;
         final Bitmap bitmap = BitmapFactory.decodeStream(getInstrumentation().getContext().getResources().openRawResource(resourceId));
-        assert bitmap.getWidth() == Tile.TILE_SIZE : "Wrong size";
+        assertThat(bitmap.getWidth()).isEqualTo(Tile.TILE_SIZE);
         return bitmap;
     }
 

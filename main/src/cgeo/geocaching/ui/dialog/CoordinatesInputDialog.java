@@ -336,7 +336,6 @@ public class CoordinatesInputDialog extends DialogFragment {
 
         @Override
         public void onClick(final View view) {
-            assert view instanceof Button;
             final Button button = (Button) view;
             final CharSequence text = button.getText();
             if (StringUtils.isBlank(text)) {

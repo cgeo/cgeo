@@ -1950,7 +1950,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     private boolean prepareClipboardActionMode(final View view, final ActionMode actionMode, final Menu menu) {
                         switch (view.getId()) {
                             case R.id.value: // coordinates, gc-code, name
-                                assert view instanceof TextView;
                                 clickedItemText = ((TextView) view).getText();
                                 final CharSequence itemTitle = ((TextView) ((View) view.getParent()).findViewById(R.id.name)).getText();
                                 buildDetailsContextMenu(actionMode, menu, itemTitle, true);
@@ -1974,7 +1973,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                                 buildDetailsContextMenu(actionMode, menu, res.getString(R.string.cache_hint), false);
                                 return true;
                             case R.id.log:
-                                assert view instanceof TextView;
                                 clickedItemText = ((TextView) view).getText();
                                 buildDetailsContextMenu(actionMode, menu, res.getString(R.string.cache_logs), false);
                                 return true;

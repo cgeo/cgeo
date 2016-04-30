@@ -29,7 +29,6 @@ public class CoordinatesFormatSwitcher implements OnClickListener {
 
     @Override
     public void onClick(final View view) {
-        assert view instanceof TextView;
         position = (position + 1) % availableFormats.length;
         final TextView textView = (TextView) view;
         // rotate coordinate formats on click
