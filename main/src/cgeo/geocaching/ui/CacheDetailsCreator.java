@@ -1,5 +1,20 @@
 package cgeo.geocaching.ui;
 
+import cgeo.geocaching.R;
+import cgeo.geocaching.connector.ConnectorFactory;
+import cgeo.geocaching.enumerations.LogType;
+import cgeo.geocaching.location.Units;
+import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.ICoordinates;
+import cgeo.geocaching.models.LogEntry;
+import cgeo.geocaching.models.Waypoint;
+import cgeo.geocaching.sensors.Sensors;
+import cgeo.geocaching.utils.Formatter;
+
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.eclipse.jdt.annotation.NonNull;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.res.Resources;
@@ -9,23 +24,11 @@ import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.eclipse.jdt.annotation.NonNull;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 import butterknife.ButterKnife;
-import cgeo.geocaching.R;
-import cgeo.geocaching.connector.ConnectorFactory;
-import cgeo.geocaching.location.Units;
-import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.models.ICoordinates;
-import cgeo.geocaching.models.Waypoint;
-import cgeo.geocaching.sensors.Sensors;
-import cgeo.geocaching.utils.Formatter;
 
 // TODO The suppression of this lint finding is bad. But to fix it, someone needs to rework the layout of the cache
 // details also, not just only change the code here.
@@ -86,26 +89,33 @@ public final class CacheDetailsCreator {
     }
 
     public void addCacheState(final Geocache cache) {
-        if (cache.isLogOffline() || cache.isArchived() || cache.isDisabled() || cache.isPremiumMembersOnly() || cache.isFound()) {
-            final List<String> states = new ArrayList<>(5);
-            String date = getVisitedDate(cache);
-            if (cache.isLogOffline()) {
-                states.add(res.getString(R.string.cache_status_offline_log) + date);
-                // reset the found date, to avoid showing it twice
-                date = "";
+        final List<String> states = new ArrayList<>(5);
+        String date = getVisitedDate(cache);
+        if (cache.isLogOffline()) {
+            states.add(res.getString(R.string.cache_status_offline_log) + date);
+            // reset the found date, to avoid showing it twice
+            date = "";
+        }
+        if (cache.isFound()) {
+            states.add(res.getString(R.string.cache_status_found) + date);
+        }
+        if (cache.isEventCache() && states.isEmpty()) {
+            for (final LogEntry log : cache.getLogs()) {
+                if (LogType.WILL_ATTEND.equals(log.getType()) && log.isOwn()) {
+                    states.add(LogType.WILL_ATTEND.getL10n());
+                }
             }
-            if (cache.isFound()) {
-                states.add(res.getString(R.string.cache_status_found) + date);
-            }
-            if (cache.isArchived()) {
-                states.add(res.getString(R.string.cache_status_archived));
-            }
-            if (cache.isDisabled()) {
-                states.add(res.getString(R.string.cache_status_disabled));
-            }
-            if (cache.isPremiumMembersOnly()) {
-                states.add(res.getString(R.string.cache_status_premium));
-            }
+        }
+        if (cache.isArchived()) {
+            states.add(res.getString(R.string.cache_status_archived));
+        }
+        if (cache.isDisabled()) {
+            states.add(res.getString(R.string.cache_status_disabled));
+        }
+        if (cache.isPremiumMembersOnly()) {
+            states.add(res.getString(R.string.cache_status_premium));
+        }
+        if (!states.isEmpty()) {
             add(R.string.cache_status, StringUtils.join(states, ", "));
         }
     }
