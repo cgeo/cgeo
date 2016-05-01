@@ -150,7 +150,7 @@ public class CachePopupFragment extends AbstractDialogFragment {
                 return;
             }
 
-            if (Settings.getChooseList()) {
+            if (Settings.getChooseList() || cache.isOffline()) {
                 // let user select list to store cache in
                 new StoredList.UserInterface(getActivity()).promptForMultiListSelection(R.string.lists_title,
                         new Action1<Set<Integer>>() {
