@@ -8,6 +8,7 @@ import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.apps.cachelist.MapsMeCacheListApp;
 import cgeo.geocaching.apps.navi.NavigationAppFactory;
 import cgeo.geocaching.apps.navi.NavigationSelectionActionProvider;
+import cgeo.geocaching.command.MoveToListCommand;
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
@@ -919,6 +920,21 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         }
     }
 
+    private void moveCache() {
+        if (progress.isShowing()) {
+            showToast(res.getString(R.string.err_detail_still_working));
+            return;
+        }
+
+        new MoveToListCommand(CacheDetailActivity.this, Collections.singletonList(cache), cache.getLists().iterator().next()) {
+
+            @Override
+            protected void onFinished() {
+                updateCacheLists(ButterKnife.findById(CacheDetailActivity.this, R.id.offline_lists), cache, res);
+            }
+        }.execute();
+    }
+
     private void storeCacheInLists(final Set<Integer> selectedListIds) {
         if (cache.isOffline()) {
             // cache already offline, just add to another list
@@ -1027,7 +1043,14 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             updateAttributesText();
             ButterKnife.findById(view, R.id.attributes_box).setVisibility(cache.getAttributes().isEmpty() ? View.GONE : View.VISIBLE);
 
-            updateOfflineBox(view, cache, res, new RefreshCacheClickListener(), new DropCacheClickListener(), new StoreCacheClickListener());
+            updateOfflineBox(view, cache, res, new RefreshCacheClickListener(), new DropCacheClickListener(), new StoreCacheClickListener(), new OnLongClickListener() {
+
+                @Override
+                public boolean onLongClick(final View v) {
+                    moveCache();
+                    return true;
+                }
+            });
 
             // list
             updateCacheLists(view, cache, res);
@@ -2194,7 +2217,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     static void updateOfflineBox(final View view, final Geocache cache, final Resources res,
                                         final OnClickListener refreshCacheClickListener,
                                         final OnClickListener dropCacheClickListener,
-                                        final OnClickListener storeCacheClickListener) {
+            final OnClickListener storeCacheClickListener, final OnLongClickListener moveCacheListener) {
         // offline use
         final TextView offlineText = ButterKnife.findById(view, R.id.offline_text);
         final Button offlineRefresh = ButterKnife.findById(view, R.id.offline_refresh);
@@ -2203,6 +2226,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
         offlineStore.setClickable(true);
         offlineStore.setOnClickListener(storeCacheClickListener);
+        if (moveCacheListener != null) {
+            offlineStore.setOnLongClickListener(moveCacheListener);
+        }
 
         offlineRefresh.setVisibility(cache.supportsRefresh() ? View.VISIBLE : View.GONE);
         offlineRefresh.setClickable(true);

@@ -1,7 +1,5 @@
 package cgeo.geocaching;
 
-import butterknife.ButterKnife;
-
 import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.apps.navi.NavigationAppFactory;
 import cgeo.geocaching.compatibility.Compatibility;
@@ -10,15 +8,11 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.CacheDetailsCreator;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.AndroidRxUtils;
 
 import org.apache.commons.lang3.StringUtils;
-
-import rx.functions.Action0;
-import rx.functions.Action1;
-import rx.schedulers.Schedulers;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -35,6 +29,11 @@ import android.widget.TextView;
 
 import java.util.Collections;
 import java.util.Set;
+
+import butterknife.ButterKnife;
+import rx.functions.Action0;
+import rx.functions.Action1;
+import rx.schedulers.Schedulers;
 
 public class CachePopupFragment extends AbstractDialogFragment {
     private final Progress progress = new Progress();
@@ -108,7 +107,7 @@ public class CachePopupFragment extends AbstractDialogFragment {
             addCacheDetails();
 
             // offline use
-            CacheDetailActivity.updateOfflineBox(getView(), cache, res, new RefreshCacheClickListener(), new DropCacheClickListener(), new StoreCacheClickListener());
+            CacheDetailActivity.updateOfflineBox(getView(), cache, res, new RefreshCacheClickListener(), new DropCacheClickListener(), new StoreCacheClickListener(), null);
 
             CacheDetailActivity.updateCacheLists(getView(), cache, res);
         } catch (final Exception e) {
@@ -168,7 +167,7 @@ public class CachePopupFragment extends AbstractDialogFragment {
             if (cache.isOffline()) {
                 // cache already offline, just add to another list
                 DataStore.saveLists(Collections.singletonList(cache), listIds);
-                CacheDetailActivity.updateOfflineBox(getView(), cache, res, new RefreshCacheClickListener(), new DropCacheClickListener(), new StoreCacheClickListener());
+                CacheDetailActivity.updateOfflineBox(getView(), cache, res, new RefreshCacheClickListener(), new DropCacheClickListener(), new StoreCacheClickListener(), null);
                 CacheDetailActivity.updateCacheLists(getView(), cache, res);
             } else {
                 final StoreCacheHandler storeCacheHandler = new StoreCacheHandler(R.string.cache_dialog_offline_save_message);
@@ -183,7 +182,7 @@ public class CachePopupFragment extends AbstractDialogFragment {
                     @Override
                     public void call() {
                         activity.supportInvalidateOptionsMenu();
-                        CacheDetailActivity.updateOfflineBox(getView(), cache, res, new RefreshCacheClickListener(), new DropCacheClickListener(), new StoreCacheClickListener());
+                        CacheDetailActivity.updateOfflineBox(getView(), cache, res, new RefreshCacheClickListener(), new DropCacheClickListener(), new StoreCacheClickListener(), null);
                         CacheDetailActivity.updateCacheLists(getView(), cache, res);
                     }
                 });
