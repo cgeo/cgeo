@@ -1090,7 +1090,7 @@ public class NewMap extends AbstractActionBarActivity {
                 }
             };
 
-            new AlertDialog.Builder(this).setTitle("Select an item").setAdapter(adapter, new SelectionClickListener(sorted)).show();
+            new AlertDialog.Builder(this).setTitle(res.getString(R.string.map_select_multiple_items)).setAdapter(adapter, new SelectionClickListener(sorted)).show();
 
         } catch (final NotFoundException e) {
             Log.e("NewMap.showSelection", e);
