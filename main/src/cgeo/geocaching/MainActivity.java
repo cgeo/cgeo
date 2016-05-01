@@ -376,7 +376,7 @@ public class MainActivity extends AbstractActionBarActivity {
                 startActivity(new Intent(this, PocketQueryListActivity.class));
                 return true;
             case R.id.menu_app_invite:
-                AppInvite.send(this);
+                AppInvite.send(this, getString(R.string.invitation_message));
                 return true;
         }
         return super.onOptionsItemSelected(item);

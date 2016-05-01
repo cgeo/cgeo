@@ -116,4 +116,10 @@
         android:title="@string/cache_personal_note"
         android:visible="false">
     </item>
+    <item
+        android:id="@+id/menu_app_invite"
+        android:title="@string/invitation_action"
+        app:showAsAction="ifRoom"
+        android:visible="false">
+    </item>
 </menu>
