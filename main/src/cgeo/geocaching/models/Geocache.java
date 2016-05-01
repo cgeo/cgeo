@@ -1805,6 +1805,18 @@ public class Geocache implements IWaypoint {
         return result;
     }
 
+    @NonNull
+    public Collection<Image> getNonStaticImages() {
+        final ArrayList<Image> result = new ArrayList<>();
+        for (final Image image : getImages()) {
+            // search strings fit geocaching.com and opencaching, may need to add others
+            if (!StringUtils.containsAny(image.getUrl(), "/static", "/resource")) {
+                result.add(image);
+            }
+        }
+        return result;
+    }
+
     /**
      * Add spoilers stored locally in <tt>/sdcard/GeocachePhotos</tt>. If a cache is named GC123ABC, the
      * directory will be <tt>/sdcard/GeocachePhotos/C/B/GC123ABC/</tt>.

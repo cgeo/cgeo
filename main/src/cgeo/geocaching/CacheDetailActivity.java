@@ -851,7 +851,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             return;
         }
         imagesList = new ImagesList(this, cache.getGeocode(), cache);
-        createSubscriptions.add(imagesList.loadImages(imageView, cache.getImages()));
+        createSubscriptions.add(imagesList.loadImages(imageView, cache.getNonStaticImages()));
     }
 
     public static void startActivity(final Context context, final String geocode) {
@@ -2187,7 +2187,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         if (CollectionUtils.isNotEmpty(cache.getInventory()) || CollectionUtils.isNotEmpty(genericTrackables)) {
             pages.add(Page.INVENTORY);
         }
-        if (CollectionUtils.isNotEmpty(cache.getImages())) {
+        if (CollectionUtils.isNotEmpty(cache.getNonStaticImages())) {
             pages.add(Page.IMAGES);
         }
         return new ImmutablePair<List<? extends Page>, Integer>(pages, detailsIndex);
