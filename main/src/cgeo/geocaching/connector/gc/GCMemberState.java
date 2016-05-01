@@ -5,9 +5,9 @@ import org.eclipse.jdt.annotation.NonNull;
 
 public enum GCMemberState {
     UNKNOWN(""),
- BASIC("Basic member"),
+    BASIC("Basic member"),
     PREMIUM("Premium"),
- CHARTER("Charter");
+    CHARTER("Charter");
 
     final @NonNull public String englishWebsite;
 
