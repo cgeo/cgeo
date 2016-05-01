@@ -156,7 +156,7 @@ public enum LogType {
      * @return True if user must confirm Log
      */
     public boolean mustConfirmLog() {
-        return isArchiveLog();
+        return isArchiveLog() || this == NEEDS_MAINTENANCE;
     }
 
     /**
