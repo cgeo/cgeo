@@ -60,4 +60,9 @@ public abstract class MoveToListCommand extends AbstractCachesCommand {
         final int size = getCaches().size();
         return getContext().getResources().getQuantityString(R.plurals.command_move_caches_result, size, size);
     }
+
+    protected final int getNewListId() {
+        return newListId;
+    }
+
 }

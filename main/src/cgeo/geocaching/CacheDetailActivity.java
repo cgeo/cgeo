@@ -8,7 +8,7 @@ import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.apps.cachelist.MapsMeCacheListApp;
 import cgeo.geocaching.apps.navi.NavigationAppFactory;
 import cgeo.geocaching.apps.navi.NavigationSelectionActionProvider;
-import cgeo.geocaching.command.MoveToListCommand;
+import cgeo.geocaching.command.MoveToListAndRemoveFromOthersCommand;
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
@@ -926,7 +926,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             return;
         }
 
-        new MoveToListCommand(CacheDetailActivity.this, Collections.singletonList(cache), cache.getLists().iterator().next()) {
+        new MoveToListAndRemoveFromOthersCommand(CacheDetailActivity.this, cache) {
 
             @Override
             protected void onFinished() {
