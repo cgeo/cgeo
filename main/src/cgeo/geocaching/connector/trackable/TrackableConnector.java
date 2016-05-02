@@ -41,7 +41,7 @@ public interface TrackableConnector {
     String getServiceTitle();
 
     /**
-     * Check whether the connector has URLs corresponding the the trackable.
+     * Check whether the connector has URLs corresponding to the trackable.
      *
      * @return <tt>true</tt> if the connector handles URLs, <tt>false</tt> otherwise
      */
