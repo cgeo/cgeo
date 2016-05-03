@@ -1,20 +1,5 @@
 package cgeo.geocaching;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
-
-import cgeo.geocaching.activity.AbstractActionBarActivity;
-import cgeo.geocaching.storage.LocalStorage;
-import cgeo.geocaching.models.Image;
-import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.ui.dialog.Dialogs;
-import cgeo.geocaching.utils.ImageUtils;
-import cgeo.geocaching.utils.Log;
-
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.eclipse.jdt.annotation.Nullable;
-
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -33,22 +18,36 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.Nullable;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import cgeo.geocaching.activity.AbstractActionBarActivity;
+import cgeo.geocaching.models.Image;
+import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.storage.LocalStorage;
+import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.utils.ImageUtils;
+import cgeo.geocaching.utils.Log;
+
 public class ImageSelectActivity extends AbstractActionBarActivity {
 
-    @Bind(R.id.caption) protected EditText captionView;
-    @Bind(R.id.description) protected EditText descriptionView;
-    @Bind(R.id.logImageScale) protected Spinner scaleView;
-    @Bind(R.id.camera) protected Button cameraButton;
-    @Bind(R.id.stored) protected Button storedButton;
-    @Bind(R.id.save) protected Button saveButton;
-    @Bind(R.id.cancel) protected Button clearButton;
-    @Bind(R.id.image_preview) protected ImageView imagePreview;
+    @BindView(R.id.caption) protected EditText captionView;
+    @BindView(R.id.description) protected EditText descriptionView;
+    @BindView(R.id.logImageScale) protected Spinner scaleView;
+    @BindView(R.id.camera) protected Button cameraButton;
+    @BindView(R.id.stored) protected Button storedButton;
+    @BindView(R.id.save) protected Button saveButton;
+    @BindView(R.id.cancel) protected Button clearButton;
+    @BindView(R.id.image_preview) protected ImageView imagePreview;
 
     private static final String SAVED_STATE_IMAGE = "cgeo.geocaching.saved_state_image";
     private static final String SAVED_STATE_IMAGE_SCALE = "cgeo.geocaching.saved_state_image_scale";

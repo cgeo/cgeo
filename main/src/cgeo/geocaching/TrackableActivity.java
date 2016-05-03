@@ -1,5 +1,41 @@
 package cgeo.geocaching;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.graphics.Paint;
+import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
+import android.os.Bundle;
+import android.support.annotation.DrawableRes;
+import android.support.annotation.StringRes;
+import android.support.v7.app.ActionBar;
+import android.support.v7.view.ActionMode;
+import android.text.Html;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.View.OnLongClickListener;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
+import android.widget.TextView;
+
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
+import org.eclipse.jdt.annotation.Nullable;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.AbstractViewPagerActivity;
 import cgeo.geocaching.connector.ConnectorFactory;
@@ -24,43 +60,6 @@ import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.HtmlUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.UnknownTagsHandler;
-
-import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.apache.commons.lang3.tuple.Pair;
-import org.eclipse.jdt.annotation.Nullable;
-
-import android.app.ProgressDialog;
-import android.content.Intent;
-import android.graphics.Paint;
-import android.graphics.drawable.BitmapDrawable;
-import android.net.Uri;
-import android.os.Bundle;
-import android.support.annotation.DrawableRes;
-import android.support.annotation.StringRes;
-import android.support.v7.app.ActionBar;
-import android.support.v7.view.ActionMode;
-import android.text.Html;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.View.OnLongClickListener;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ScrollView;
-import android.widget.TextView;
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
-
-import butterknife.Bind;
-import butterknife.ButterKnife;
 import rx.Subscription;
 import rx.android.app.AppObservable;
 import rx.android.view.OnClickEvent;
@@ -411,13 +410,13 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
 
     public class DetailsViewCreator extends AbstractCachingPageViewCreator<ScrollView> {
 
-        @Bind(R.id.goal_box) protected LinearLayout goalBox;
-        @Bind(R.id.goal) protected TextView goalTextView;
-        @Bind(R.id.details_box) protected LinearLayout detailsBox;
-        @Bind(R.id.details) protected TextView detailsTextView;
-        @Bind(R.id.image_box) protected LinearLayout imageBox;
-        @Bind(R.id.details_list) protected LinearLayout detailsList;
-        @Bind(R.id.image) protected LinearLayout imageView;
+        @BindView(R.id.goal_box) protected LinearLayout goalBox;
+        @BindView(R.id.goal) protected TextView goalTextView;
+        @BindView(R.id.details_box) protected LinearLayout detailsBox;
+        @BindView(R.id.details) protected TextView detailsTextView;
+        @BindView(R.id.image_box) protected LinearLayout imageBox;
+        @BindView(R.id.details_list) protected LinearLayout detailsList;
+        @BindView(R.id.image) protected LinearLayout imageView;
 
         @Override
         public ScrollView getDispatchedView(final ViewGroup parentView) {

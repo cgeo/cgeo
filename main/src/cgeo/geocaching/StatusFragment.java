@@ -1,17 +1,5 @@
 package cgeo.geocaching;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
-
-import cgeo.geocaching.network.StatusUpdater;
-import cgeo.geocaching.network.StatusUpdater.Status;
-import cgeo.geocaching.utils.Log;
-
-import rx.Subscription;
-import rx.android.app.AppObservable;
-import rx.functions.Action1;
-import rx.subscriptions.Subscriptions;
-
 import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
@@ -24,18 +12,30 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+import cgeo.geocaching.network.StatusUpdater;
+import cgeo.geocaching.network.StatusUpdater.Status;
+import cgeo.geocaching.utils.Log;
+import rx.Subscription;
+import rx.android.app.AppObservable;
+import rx.functions.Action1;
+import rx.subscriptions.Subscriptions;
+
 public class StatusFragment extends Fragment {
 
-    protected @Bind(R.id.status_icon) ImageView statusIcon;
-    protected @Bind(R.id.status_message) TextView statusMessage;
+    protected @BindView(R.id.status_icon) ImageView statusIcon;
+    protected @BindView(R.id.status_message) TextView statusMessage;
 
     private Subscription statusSubscription = Subscriptions.empty();
+    private Unbinder unbinder;
 
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         final ViewGroup statusGroup = (ViewGroup) inflater.inflate(R.layout.status, container, false);
-        ButterKnife.bind(this, statusGroup);
+        unbinder = ButterKnife.bind(this, statusGroup);
         statusSubscription = AppObservable.bindSupportFragment(this, StatusUpdater.LATEST_STATUS)
                 .subscribe(new Action1<Status>() {
                     @Override
@@ -91,7 +91,7 @@ public class StatusFragment extends Fragment {
     public void onDestroyView() {
         statusSubscription.unsubscribe();
         super.onDestroyView();
-        ButterKnife.unbind(this);
+        unbinder.unbind();
     }
 
 }

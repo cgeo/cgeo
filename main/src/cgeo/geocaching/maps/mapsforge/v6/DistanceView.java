@@ -4,7 +4,7 @@ import android.location.Location;
 import android.view.View;
 import android.widget.TextView;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import cgeo.geocaching.R;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Units;
@@ -13,7 +13,7 @@ public class DistanceView {
 
     private Geopoint destinationCoords;
 
-    @Bind(R.id.distance) protected TextView distanceView;
+    @BindView(R.id.distance) protected TextView distanceView;
 
     public DistanceView(final Geopoint destinationCoords, final TextView distanceView) {
 

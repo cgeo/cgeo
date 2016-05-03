@@ -1,12 +1,5 @@
 package cgeo.geocaching;
 
-import cgeo.geocaching.activity.AbstractActionBarActivity;
-import cgeo.geocaching.compatibility.Compatibility;
-import cgeo.geocaching.ui.AbstractViewHolder;
-import cgeo.geocaching.utils.ProcessUtils;
-
-import org.eclipse.jdt.annotation.NonNull;
-
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -18,17 +11,23 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import butterknife.Bind;
+import org.eclipse.jdt.annotation.NonNull;
+
+import butterknife.BindView;
 import butterknife.ButterKnife;
+import cgeo.geocaching.activity.AbstractActionBarActivity;
+import cgeo.geocaching.compatibility.Compatibility;
+import cgeo.geocaching.ui.AbstractViewHolder;
+import cgeo.geocaching.utils.ProcessUtils;
 
 public class UsefulAppsActivity extends AbstractActionBarActivity {
 
-    @Bind(R.id.apps_list) protected ListView list;
+    @BindView(R.id.apps_list) protected ListView list;
 
     protected static class ViewHolder extends AbstractViewHolder {
-        @Bind(R.id.title) protected TextView title;
-        @Bind(R.id.image) protected ImageView image;
-        @Bind(R.id.description) protected TextView description;
+        @BindView(R.id.title) protected TextView title;
+        @BindView(R.id.image) protected ImageView image;
+        @BindView(R.id.description) protected TextView description;
 
         public ViewHolder(final View rowView) {
             super(rowView);

@@ -1,5 +1,42 @@
 package cgeo.geocaching;
 
+import android.R.layout;
+import android.R.string;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
+import android.content.res.Configuration;
+import android.net.Uri;
+import android.os.Build.VERSION;
+import android.os.Build.VERSION_CODES;
+import android.os.Bundle;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
+import android.view.ContextMenu;
+import android.view.ContextThemeWrapper;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnFocusChangeListener;
+import android.widget.AutoCompleteTextView;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+import java.util.Locale;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import cgeo.geocaching.activity.Keyboard;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.LogResult;
@@ -34,44 +71,6 @@ import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.LogTemplateProvider;
 import cgeo.geocaching.utils.LogTemplateProvider.LogContext;
 import cgeo.geocaching.utils.LogTemplateProvider.LogTemplate;
-
-import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
-
-import android.R.layout;
-import android.R.string;
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
-import android.content.Intent;
-import android.content.res.Configuration;
-import android.net.Uri;
-import android.os.Build.VERSION;
-import android.os.Build.VERSION_CODES;
-import android.os.Bundle;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.Loader;
-import android.view.ContextMenu;
-import android.view.ContextThemeWrapper;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.View.OnFocusChangeListener;
-import android.widget.AutoCompleteTextView;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Locale;
-
-import butterknife.Bind;
-import butterknife.ButterKnife;
 import rx.android.app.AppObservable;
 import rx.functions.Action1;
 import rx.functions.Func1;
@@ -79,15 +78,15 @@ import rx.subscriptions.CompositeSubscription;
 
 public class LogTrackableActivity extends AbstractLoggingActivity implements DateDialogParent, TimeDialogParent, CoordinateUpdate, LoaderManager.LoaderCallbacks<List<LogTypeTrackable>> {
 
-    @Bind(R.id.type) protected Button typeButton;
-    @Bind(R.id.date) protected Button dateButton;
-    @Bind(R.id.time) protected Button timeButton;
-    @Bind(R.id.geocode) protected AutoCompleteTextView geocodeEditText;
-    @Bind(R.id.coordinates) protected Button coordinatesButton;
-    @Bind(R.id.tracking) protected EditText trackingEditText;
-    @Bind(R.id.log) protected EditText logEditText;
-    @Bind(R.id.tweet) protected CheckBox tweetCheck;
-    @Bind(R.id.tweet_box) protected LinearLayout tweetBox;
+    @BindView(R.id.type) protected Button typeButton;
+    @BindView(R.id.date) protected Button dateButton;
+    @BindView(R.id.time) protected Button timeButton;
+    @BindView(R.id.geocode) protected AutoCompleteTextView geocodeEditText;
+    @BindView(R.id.coordinates) protected Button coordinatesButton;
+    @BindView(R.id.tracking) protected EditText trackingEditText;
+    @BindView(R.id.log) protected EditText logEditText;
+    @BindView(R.id.tweet) protected CheckBox tweetCheck;
+    @BindView(R.id.tweet_box) protected LinearLayout tweetBox;
 
     private CompositeSubscription createSubscriptions;
 

@@ -1,20 +1,5 @@
 package cgeo.geocaching;
 
-import cgeo.geocaching.activity.AbstractViewPagerActivity;
-import cgeo.geocaching.compatibility.Compatibility;
-import cgeo.geocaching.ui.AbstractCachingPageViewCreator;
-import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
-import cgeo.geocaching.utils.ClipboardUtils;
-import cgeo.geocaching.utils.ProcessUtils;
-import cgeo.geocaching.utils.SystemInformation;
-import cgeo.geocaching.utils.Version;
-
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.CharEncoding;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.apache.commons.lang3.tuple.Pair;
-
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -28,13 +13,27 @@ import android.widget.Button;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.CharEncoding;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
+
 import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
+import cgeo.geocaching.activity.AbstractViewPagerActivity;
+import cgeo.geocaching.compatibility.Compatibility;
+import cgeo.geocaching.ui.AbstractCachingPageViewCreator;
+import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
+import cgeo.geocaching.utils.ClipboardUtils;
+import cgeo.geocaching.utils.ProcessUtils;
+import cgeo.geocaching.utils.SystemInformation;
+import cgeo.geocaching.utils.Version;
 
 public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page> {
 
@@ -42,8 +41,8 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
 
     class LicenseViewCreator extends AbstractCachingPageViewCreator<ScrollView> {
 
-        @Bind(R.id.license) protected TextView licenseLink;
-        @Bind(R.id.license_text) protected TextView licenseText;
+        @BindView(R.id.license) protected TextView licenseLink;
+        @BindView(R.id.license_text) protected TextView licenseText;
 
         @Override
         public ScrollView getDispatchedView(final ViewGroup parentView) {
@@ -74,7 +73,7 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
 
     class ContributorsViewCreator extends AbstractCachingPageViewCreator<ScrollView> {
 
-        @Bind(R.id.contributors) protected TextView contributors;
+        @BindView(R.id.contributors) protected TextView contributors;
 
         @Override
         public ScrollView getDispatchedView(final ViewGroup parentView) {
@@ -88,9 +87,9 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
 
     class ChangeLogViewCreator extends AbstractCachingPageViewCreator<ScrollView> {
 
-        @Bind(R.id.changelog_master) protected TextView changeLogMaster;
-        @Bind(R.id.changelog_release) protected TextView changeLogRelease;
-        @Bind(R.id.changelog_github) protected TextView changeLogLink;
+        @BindView(R.id.changelog_master) protected TextView changeLogMaster;
+        @BindView(R.id.changelog_release) protected TextView changeLogRelease;
+        @BindView(R.id.changelog_github) protected TextView changeLogLink;
 
         @Override
         public ScrollView getDispatchedView(final ViewGroup parentView) {
@@ -117,9 +116,9 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
 
     class SystemViewCreator extends AbstractCachingPageViewCreator<ScrollView> {
 
-        @Bind(R.id.system) protected TextView system;
-        @Bind(R.id.copy) protected Button copy;
-        @Bind(R.id.share) protected Button share;
+        @BindView(R.id.system) protected TextView system;
+        @BindView(R.id.copy) protected Button copy;
+        @BindView(R.id.share) protected Button share;
 
         @Override
         public ScrollView getDispatchedView(final ViewGroup parentView) {
@@ -154,12 +153,12 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
 
     class HelpViewCreator extends AbstractCachingPageViewCreator<ScrollView> {
 
-        @Bind(R.id.support) protected TextView support;
-        @Bind(R.id.website) protected TextView website;
-        @Bind(R.id.facebook) protected TextView facebook;
-        @Bind(R.id.twitter) protected TextView twitter;
-        @Bind(R.id.market) protected TextView market;
-        @Bind(R.id.faq) protected TextView faq;
+        @BindView(R.id.support) protected TextView support;
+        @BindView(R.id.website) protected TextView website;
+        @BindView(R.id.facebook) protected TextView facebook;
+        @BindView(R.id.twitter) protected TextView twitter;
+        @BindView(R.id.market) protected TextView market;
+        @BindView(R.id.faq) protected TextView faq;
 
         @Override
         public ScrollView getDispatchedView(final ViewGroup parentView) {
@@ -185,9 +184,9 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
 
     class VersionViewCreator extends AbstractCachingPageViewCreator<ScrollView> {
 
-        @Bind(R.id.about_version_string) protected TextView version;
-        @Bind(R.id.about_special_build) protected TextView specialBuild;
-        @Bind(R.id.donate) protected TextView donateButton;
+        @BindView(R.id.about_version_string) protected TextView version;
+        @BindView(R.id.about_special_build) protected TextView specialBuild;
+        @BindView(R.id.donate) protected TextView donateButton;
 
         @Override
         public ScrollView getDispatchedView(final ViewGroup parentView) {

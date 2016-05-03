@@ -1,10 +1,5 @@
 package cgeo.geocaching.ui;
 
-import butterknife.Bind;
-
-import cgeo.geocaching.R;
-import cgeo.geocaching.models.Trackable;
-
 import android.app.Activity;
 import android.graphics.Paint;
 import android.text.Html;
@@ -15,13 +10,17 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import butterknife.BindView;
+import cgeo.geocaching.R;
+import cgeo.geocaching.models.Trackable;
+
 public class TrackableListAdapter extends ArrayAdapter<Trackable> {
 
     final private LayoutInflater inflater;
 
     protected static final class ViewHolder extends AbstractViewHolder {
-        @Bind(R.id.trackable_image_brand) ImageView imageBrand;
-        @Bind(R.id.trackable_name) TextView name;
+        @BindView(R.id.trackable_image_brand) ImageView imageBrand;
+        @BindView(R.id.trackable_name) TextView name;
 
         public ViewHolder(final View view) {
             super(view);

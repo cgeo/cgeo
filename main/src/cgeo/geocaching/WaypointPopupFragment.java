@@ -1,5 +1,19 @@
 package cgeo.geocaching;
 
+import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import org.apache.commons.lang3.StringUtils;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import cgeo.geocaching.apps.navi.NavigationAppFactory;
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.location.Geopoint;
@@ -11,26 +25,11 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.utils.Log;
 
-import org.apache.commons.lang3.StringUtils;
-
-import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-
-import butterknife.Bind;
-import butterknife.ButterKnife;
-
 public class WaypointPopupFragment extends AbstractDialogFragment {
-    @Bind(R.id.actionbar_title) protected TextView actionBarTitle;
-    @Bind(R.id.waypoint_details_list) protected LinearLayout waypointDetailsLayout;
-    @Bind(R.id.edit) protected Button buttonEdit;
-    @Bind(R.id.details_list) protected LinearLayout cacheDetailsLayout;
+    @BindView(R.id.actionbar_title) protected TextView actionBarTitle;
+    @BindView(R.id.waypoint_details_list) protected LinearLayout waypointDetailsLayout;
+    @BindView(R.id.edit) protected Button buttonEdit;
+    @BindView(R.id.details_list) protected LinearLayout cacheDetailsLayout;
 
     private int waypointId = 0;
     private Waypoint waypoint = null;

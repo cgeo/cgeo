@@ -18,7 +18,7 @@ import org.eclipse.jdt.annotation.Nullable;
 
 import java.util.Locale;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.activity.ShowcaseViewBuilder;
@@ -41,27 +41,27 @@ import rx.functions.Func1;
 
 public class SearchActivity extends AbstractActionBarActivity implements CoordinatesInputDialog.CoordinateUpdate {
 
-    @Bind(R.id.buttonLatitude) protected Button buttonLatitude;
-    @Bind(R.id.buttonLongitude) protected Button buttonLongitude;
-    @Bind(R.id.search_coordinates) protected Button buttonSearchCoords;
+    @BindView(R.id.buttonLatitude) protected Button buttonLatitude;
+    @BindView(R.id.buttonLongitude) protected Button buttonLongitude;
+    @BindView(R.id.search_coordinates) protected Button buttonSearchCoords;
 
-    @Bind(R.id.address) protected AutoCompleteTextView addressEditText;
-    @Bind(R.id.search_address) protected Button buttonSearchAddress;
+    @BindView(R.id.address) protected AutoCompleteTextView addressEditText;
+    @BindView(R.id.search_address) protected Button buttonSearchAddress;
 
-    @Bind(R.id.geocode) protected AutoCompleteTextView geocodeEditText;
-    @Bind(R.id.display_geocode) protected Button buttonSearchGeocode;
+    @BindView(R.id.geocode) protected AutoCompleteTextView geocodeEditText;
+    @BindView(R.id.display_geocode) protected Button buttonSearchGeocode;
 
-    @Bind(R.id.keyword) protected AutoCompleteTextView keywordEditText;
-    @Bind(R.id.search_keyword) protected Button buttonSearchKeyword;
+    @BindView(R.id.keyword) protected AutoCompleteTextView keywordEditText;
+    @BindView(R.id.search_keyword) protected Button buttonSearchKeyword;
 
-    @Bind(R.id.finder) protected AutoCompleteTextView finderNameEditText;
-    @Bind(R.id.search_finder) protected Button buttonSearchFinder;
+    @BindView(R.id.finder) protected AutoCompleteTextView finderNameEditText;
+    @BindView(R.id.search_finder) protected Button buttonSearchFinder;
 
-    @Bind(R.id.owner) protected AutoCompleteTextView ownerNameEditText;
-    @Bind(R.id.search_owner) protected Button buttonSearchOwner;
+    @BindView(R.id.owner) protected AutoCompleteTextView ownerNameEditText;
+    @BindView(R.id.search_owner) protected Button buttonSearchOwner;
 
-    @Bind(R.id.trackable) protected AutoCompleteTextView trackableEditText;
-    @Bind(R.id.display_trackable) protected Button buttonSearchTrackable;
+    @BindView(R.id.trackable) protected AutoCompleteTextView trackableEditText;
+    @BindView(R.id.display_trackable) protected Button buttonSearchTrackable;
 
     private static final String GOOGLE_NOW_SEARCH_ACTION = "com.google.android.gms.actions.SEARCH_ACTION";
 

@@ -66,7 +66,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import rx.Observable;
 import rx.android.app.AppObservable;
@@ -90,9 +90,9 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     private String text = null;
     private List<LogType> possibleLogTypes = new ArrayList<>();
     private final Set<TrackableLog> trackables = new HashSet<>();
-    protected @Bind(R.id.tweet) CheckBox tweetCheck;
-    protected @Bind(R.id.log_password_box) LinearLayout logPasswordBox;
-    protected @Bind(R.id.favorite_check) CheckBox favCheck;
+    protected @BindView(R.id.tweet) CheckBox tweetCheck;
+    protected @BindView(R.id.log_password_box) LinearLayout logPasswordBox;
+    protected @BindView(R.id.favorite_check) CheckBox favCheck;
     private SparseArray<TrackableLog> actionButtons;
 
     private ILoggingManager loggingManager;

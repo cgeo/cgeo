@@ -1,5 +1,36 @@
 package cgeo.geocaching.ui;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.res.Resources;
+import android.graphics.drawable.BitmapDrawable;
+import android.text.Spannable;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.StrikethroughSpan;
+import android.view.GestureDetector;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.NonNull;
+
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
+
+import butterknife.BindView;
 import cgeo.geocaching.CacheDetailActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.CacheListType;
@@ -20,38 +51,6 @@ import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapUtils;
-
-import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.eclipse.jdt.annotation.NonNull;
-
-import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.content.res.Resources;
-import android.graphics.drawable.BitmapDrawable;
-import android.text.Spannable;
-import android.text.Spanned;
-import android.text.style.ForegroundColorSpan;
-import android.text.style.StrikethroughSpan;
-import android.view.GestureDetector;
-import android.view.LayoutInflater;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
-import android.widget.ImageView;
-import android.widget.TextView;
-
-import java.lang.ref.WeakReference;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
-
-import butterknife.Bind;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 
@@ -110,15 +109,15 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
      *
      */
     protected static class ViewHolder extends AbstractViewHolder {
-        @Bind(R.id.checkbox) protected CheckBox checkbox;
-        @Bind(R.id.log_status_mark) protected ImageView logStatusMark;
-        @Bind(R.id.text) protected TextView text;
-        @Bind(R.id.distance) protected DistanceView distance;
-        @Bind(R.id.favorite) protected TextView favorite;
-        @Bind(R.id.info) protected TextView info;
-        @Bind(R.id.inventory) protected TextView inventory;
-        @Bind(R.id.direction) protected CompassMiniView direction;
-        @Bind(R.id.dirimg) protected ImageView dirImg;
+        @BindView(R.id.checkbox) protected CheckBox checkbox;
+        @BindView(R.id.log_status_mark) protected ImageView logStatusMark;
+        @BindView(R.id.text) protected TextView text;
+        @BindView(R.id.distance) protected DistanceView distance;
+        @BindView(R.id.favorite) protected TextView favorite;
+        @BindView(R.id.info) protected TextView info;
+        @BindView(R.id.inventory) protected TextView inventory;
+        @BindView(R.id.direction) protected CompassMiniView direction;
+        @BindView(R.id.dirimg) protected ImageView dirImg;
         private CacheListType cacheListType;
         public Geocache cache = null;
 

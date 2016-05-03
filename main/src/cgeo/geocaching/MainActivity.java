@@ -1,5 +1,46 @@
 package cgeo.geocaching;
 
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.app.SearchManager;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.res.Configuration;
+import android.location.Address;
+import android.net.ConnectivityManager;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.widget.SearchView;
+import android.support.v7.widget.SearchView.OnQueryTextListener;
+import android.support.v7.widget.SearchView.OnSuggestionListener;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import com.github.amlcurran.showcaseview.targets.ActionViewTarget;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
+
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.activity.ShowcaseViewBuilder;
 import cgeo.geocaching.connector.ConnectorFactory;
@@ -29,48 +70,6 @@ import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.Version;
-
-import com.github.amlcurran.showcaseview.targets.ActionViewTarget;
-import com.google.zxing.integration.android.IntentIntegrator;
-import com.google.zxing.integration.android.IntentResult;
-
-import org.apache.commons.lang3.StringUtils;
-
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
-import android.app.SearchManager;
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.content.res.Configuration;
-import android.location.Address;
-import android.net.ConnectivityManager;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.support.v4.view.MenuItemCompat;
-import android.support.v7.widget.SearchView;
-import android.support.v7.widget.SearchView.OnQueryTextListener;
-import android.support.v7.widget.SearchView.OnSuggestionListener;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-
-import butterknife.Bind;
-import butterknife.ButterKnife;
 import rx.Observable;
 import rx.android.app.AppObservable;
 import rx.android.schedulers.AndroidSchedulers;
@@ -79,19 +78,19 @@ import rx.functions.Action1;
 import rx.functions.Func1;
 
 public class MainActivity extends AbstractActionBarActivity {
-    @Bind(R.id.nav_satellites) protected TextView navSatellites;
-    @Bind(R.id.filter_button_title) protected TextView filterTitle;
-    @Bind(R.id.map) protected ImageView findOnMap;
-    @Bind(R.id.search_offline) protected ImageView findByOffline;
-    @Bind(R.id.advanced_button) protected ImageView advanced;
-    @Bind(R.id.any_button) protected ImageView any;
-    @Bind(R.id.filter_button) protected ImageView filter;
-    @Bind(R.id.nearest) protected ImageView nearestView;
-    @Bind(R.id.nav_type) protected TextView navType;
-    @Bind(R.id.nav_accuracy) protected TextView navAccuracy;
-    @Bind(R.id.nav_location) protected TextView navLocation;
-    @Bind(R.id.offline_count) protected TextView countBubble;
-    @Bind(R.id.info_area) protected LinearLayout infoArea;
+    @BindView(R.id.nav_satellites) protected TextView navSatellites;
+    @BindView(R.id.filter_button_title) protected TextView filterTitle;
+    @BindView(R.id.map) protected ImageView findOnMap;
+    @BindView(R.id.search_offline) protected ImageView findByOffline;
+    @BindView(R.id.advanced_button) protected ImageView advanced;
+    @BindView(R.id.any_button) protected ImageView any;
+    @BindView(R.id.filter_button) protected ImageView filter;
+    @BindView(R.id.nearest) protected ImageView nearestView;
+    @BindView(R.id.nav_type) protected TextView navType;
+    @BindView(R.id.nav_accuracy) protected TextView navAccuracy;
+    @BindView(R.id.nav_location) protected TextView navLocation;
+    @BindView(R.id.offline_count) protected TextView countBubble;
+    @BindView(R.id.info_area) protected LinearLayout infoArea;
 
     /**
      * view of the action bar search

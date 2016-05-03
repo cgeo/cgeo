@@ -1,10 +1,23 @@
 package cgeo.geocaching.settings;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
+import android.content.Intent;
 import android.net.Uri;
-import butterknife.Bind;
+import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
+import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+
+import butterknife.BindView;
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractActivity;
@@ -13,23 +26,9 @@ import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.BundleUtils;
-
 import cgeo.geocaching.utils.Log;
-import org.apache.commons.lang3.StringUtils;
-import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.jdt.annotation.NonNull;
 import rx.Observable;
 import rx.android.app.AppObservable;
-
-import android.app.ProgressDialog;
-import android.content.Intent;
-import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 import rx.functions.Action1;
 import rx.functions.Func0;
 
@@ -38,12 +37,12 @@ public abstract class AbstractCredentialsAuthorizationActivity extends AbstractA
     @NonNull private String connectorUsername = StringUtils.EMPTY;
     @NonNull private String connectorPassword = StringUtils.EMPTY;
 
-    @Bind(R.id.check) protected Button checkButton;
-    @Bind(R.id.register) protected Button registerButton;
-    @Bind(R.id.auth_1) protected TextView auth1;
-    @Bind(R.id.auth_2) protected TextView auth2;
-    @Bind(R.id.username) protected EditText usernameEditText;
-    @Bind(R.id.password) protected EditText passwordEditText;
+    @BindView(R.id.check) protected Button checkButton;
+    @BindView(R.id.register) protected Button registerButton;
+    @BindView(R.id.auth_1) protected TextView auth1;
+    @BindView(R.id.auth_2) protected TextView auth2;
+    @BindView(R.id.username) protected EditText usernameEditText;
+    @BindView(R.id.password) protected EditText passwordEditText;
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {

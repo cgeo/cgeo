@@ -1,5 +1,25 @@
 package cgeo.geocaching;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.res.Configuration;
+import android.media.AudioManager;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.TextView;
+import android.widget.ToggleButton;
+
+import com.github.amlcurran.showcaseview.targets.ActionItemTarget;
+
+import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.activity.ShowcaseViewBuilder;
 import cgeo.geocaching.enumerations.LoadFlags;
@@ -21,42 +41,21 @@ import cgeo.geocaching.ui.WaypointSelectionActionProvider;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
-
-import com.github.amlcurran.showcaseview.targets.ActionItemTarget;
-
-import org.apache.commons.lang3.StringUtils;
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
-
-import android.content.Context;
-import android.content.Intent;
-import android.content.res.Configuration;
-import android.media.AudioManager;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.TextView;
-import android.widget.ToggleButton;
-
-import butterknife.Bind;
-import butterknife.ButterKnife;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 
 public class CompassActivity extends AbstractActionBarActivity {
 
-    @Bind(R.id.nav_type) protected TextView navType;
-    @Bind(R.id.nav_accuracy) protected TextView navAccuracy;
-    @Bind(R.id.nav_satellites) protected TextView navSatellites;
-    @Bind(R.id.nav_location) protected TextView navLocation;
-    @Bind(R.id.distance) protected TextView distanceView;
-    @Bind(R.id.heading) protected TextView headingView;
-    @Bind(R.id.rose) protected CompassView compassView;
-    @Bind(R.id.destination) protected TextView destinationTextView;
-    @Bind(R.id.cacheinfo) protected TextView cacheInfoView;
-    @Bind(R.id.use_compass) protected ToggleButton useCompassSwitch;
+    @BindView(R.id.nav_type) protected TextView navType;
+    @BindView(R.id.nav_accuracy) protected TextView navAccuracy;
+    @BindView(R.id.nav_satellites) protected TextView navSatellites;
+    @BindView(R.id.nav_location) protected TextView navLocation;
+    @BindView(R.id.distance) protected TextView distanceView;
+    @BindView(R.id.heading) protected TextView headingView;
+    @BindView(R.id.rose) protected CompassView compassView;
+    @BindView(R.id.destination) protected TextView destinationTextView;
+    @BindView(R.id.cacheinfo) protected TextView cacheInfoView;
+    @BindView(R.id.use_compass) protected ToggleButton useCompassSwitch;
 
     /**
      * Destination cache, may be null

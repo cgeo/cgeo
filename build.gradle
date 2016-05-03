@@ -95,6 +95,10 @@ allprojects {
 						if (selection.candidate.group == 'com.caverock') {
 							rejected = false
 						}
+						// google auto service only available as rc2 right now
+						if (selection.candidate.group == 'com.google.auto.service') {
+							rejected = false
+						}
 						if (rejected) {
 							selection.reject('Release candidate')
 						}

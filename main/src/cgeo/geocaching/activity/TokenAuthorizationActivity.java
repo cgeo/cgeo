@@ -1,21 +1,5 @@
 package cgeo.geocaching.activity;
 
-import butterknife.Bind;
-
-import cgeo.geocaching.Intents;
-import cgeo.geocaching.R;
-import cgeo.geocaching.network.Network;
-import cgeo.geocaching.network.Parameters;
-import cgeo.geocaching.utils.AndroidRxUtils;
-import cgeo.geocaching.utils.BundleUtils;
-import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.MatcherWrapper;
-
-import okhttp3.Response;
-import org.apache.commons.lang3.StringUtils;
-import org.eclipse.jdt.annotation.NonNull;
-import rx.functions.Action0;
-
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
@@ -31,7 +15,22 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.NonNull;
+
 import java.util.regex.Pattern;
+
+import butterknife.BindView;
+import cgeo.geocaching.Intents;
+import cgeo.geocaching.R;
+import cgeo.geocaching.network.Network;
+import cgeo.geocaching.network.Parameters;
+import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.BundleUtils;
+import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.MatcherWrapper;
+import okhttp3.Response;
+import rx.functions.Action0;
 
 public abstract class TokenAuthorizationActivity extends AbstractActivity {
 
@@ -46,12 +45,12 @@ public abstract class TokenAuthorizationActivity extends AbstractActivity {
     @NonNull private String fieldUsername = StringUtils.EMPTY;
     @NonNull private String fieldPassword = StringUtils.EMPTY;
 
-    @Bind(R.id.start) protected Button startButton;
-    @Bind(R.id.register) protected Button registerButton;
-    @Bind(R.id.auth_1) protected TextView auth1;
-    @Bind(R.id.auth_2) protected TextView auth2;
-    @Bind(R.id.username) protected EditText usernameEditText;
-    @Bind(R.id.password) protected EditText passwordEditText;
+    @BindView(R.id.start) protected Button startButton;
+    @BindView(R.id.register) protected Button registerButton;
+    @BindView(R.id.auth_1) protected TextView auth1;
+    @BindView(R.id.auth_2) protected TextView auth2;
+    @BindView(R.id.username) protected EditText usernameEditText;
+    @BindView(R.id.password) protected EditText passwordEditText;
 
     private ProgressDialog requestTokenDialog = null;
 

@@ -1,16 +1,5 @@
 package cgeo.geocaching.ui;
 
-import butterknife.Bind;
-
-import cgeo.geocaching.CacheListActivity;
-import cgeo.geocaching.R;
-import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.location.Units;
-import cgeo.geocaching.sensors.Sensors;
-
-import org.apache.commons.lang3.StringUtils;
-import org.eclipse.jdt.annotation.NonNull;
-
 import android.app.Activity;
 import android.location.Address;
 import android.view.LayoutInflater;
@@ -19,8 +8,18 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.NonNull;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import butterknife.BindView;
+import cgeo.geocaching.CacheListActivity;
+import cgeo.geocaching.R;
+import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.location.Units;
+import cgeo.geocaching.sensors.Sensors;
 
 public class AddressListAdapter extends ArrayAdapter<Address> {
 
@@ -28,8 +27,8 @@ public class AddressListAdapter extends ArrayAdapter<Address> {
     @NonNull final private Geopoint location;
 
     protected static final class ViewHolder extends AbstractViewHolder {
-        @Bind(R.id.label) TextView label;
-        @Bind(R.id.distance) TextView distance;
+        @BindView(R.id.label) TextView label;
+        @BindView(R.id.distance) TextView distance;
 
         public ViewHolder(final View view) {
             super(view);

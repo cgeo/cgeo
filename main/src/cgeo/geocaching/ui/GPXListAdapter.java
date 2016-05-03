@@ -1,14 +1,5 @@
 package cgeo.geocaching.ui;
 
-import butterknife.Bind;
-
-import cgeo.geocaching.GpxFileListActivity;
-import cgeo.geocaching.R;
-import cgeo.geocaching.files.GPXImporter;
-import cgeo.geocaching.ui.dialog.Dialogs;
-import cgeo.geocaching.utils.FileUtils;
-import cgeo.geocaching.utils.Log;
-
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.view.LayoutInflater;
@@ -20,13 +11,21 @@ import android.widget.TextView;
 import java.io.File;
 import java.util.List;
 
+import butterknife.BindView;
+import cgeo.geocaching.GpxFileListActivity;
+import cgeo.geocaching.R;
+import cgeo.geocaching.files.GPXImporter;
+import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.utils.FileUtils;
+import cgeo.geocaching.utils.Log;
+
 public class GPXListAdapter extends ArrayAdapter<File> {
     private final GpxFileListActivity activity;
     private final LayoutInflater inflater;
 
     protected static class ViewHolder extends AbstractViewHolder {
-        @Bind(R.id.filepath) protected TextView filepath;
-        @Bind(R.id.filename) protected TextView filename;
+        @BindView(R.id.filepath) protected TextView filepath;
+        @BindView(R.id.filename) protected TextView filename;
 
         public ViewHolder(final View view) {
             super(view);

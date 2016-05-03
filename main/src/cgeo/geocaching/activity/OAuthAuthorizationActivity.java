@@ -1,9 +1,25 @@
 package cgeo.geocaching.activity;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
-import butterknife.Bind;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+
+import java.util.regex.Pattern;
+
+import butterknife.BindView;
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.network.Network;
@@ -14,26 +30,9 @@ import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.BundleUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
-
 import okhttp3.HttpUrl;
 import okhttp3.Response;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import rx.functions.Action0;
-
-import android.app.ProgressDialog;
-import android.content.Intent;
-import android.net.Uri;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
-
-import java.util.regex.Pattern;
 
 public abstract class OAuthAuthorizationActivity extends AbstractActivity {
 
@@ -57,10 +56,10 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
     private String oAtoken = null;
     private String oAtokenSecret = null;
 
-    @Bind(R.id.start) protected Button startButton;
-    @Bind(R.id.register) protected Button registerButton;
-    @Bind(R.id.auth_1) protected TextView auth1;
-    @Bind(R.id.auth_2) protected TextView auth2;
+    @BindView(R.id.start) protected Button startButton;
+    @BindView(R.id.register) protected Button registerButton;
+    @BindView(R.id.auth_1) protected TextView auth1;
+    @BindView(R.id.auth_2) protected TextView auth2;
     private ProgressDialog requestTokenDialog = null;
     private ProgressDialog changeTokensDialog = null;
 

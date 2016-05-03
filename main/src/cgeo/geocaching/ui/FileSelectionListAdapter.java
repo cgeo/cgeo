@@ -1,9 +1,5 @@
 package cgeo.geocaching.ui;
 
-import cgeo.geocaching.R;
-import cgeo.geocaching.files.IFileSelectionView;
-import cgeo.geocaching.utils.Log;
-
 import android.app.Activity;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
@@ -15,7 +11,10 @@ import android.widget.TextView;
 import java.io.File;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
+import cgeo.geocaching.R;
+import cgeo.geocaching.files.IFileSelectionView;
+import cgeo.geocaching.utils.Log;
 
 public class FileSelectionListAdapter extends ArrayAdapter<File> {
 
@@ -80,8 +79,8 @@ public class FileSelectionListAdapter extends ArrayAdapter<File> {
     }
 
     protected static final class ViewHolder extends AbstractViewHolder {
-        @Bind(R.id.mapfilepath) TextView filepath;
-        @Bind(R.id.mapfilename) TextView filename;
+        @BindView(R.id.mapfilepath) TextView filepath;
+        @BindView(R.id.mapfilename) TextView filename;
 
         public ViewHolder(final View view) {
             super(view);

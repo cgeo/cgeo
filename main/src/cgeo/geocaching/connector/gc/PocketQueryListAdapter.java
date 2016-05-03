@@ -1,10 +1,5 @@
 package cgeo.geocaching.connector.gc;
 
-import cgeo.geocaching.CacheListActivity;
-import cgeo.geocaching.R;
-import cgeo.geocaching.models.PocketQuery;
-import cgeo.geocaching.ui.AbstractViewHolder;
-
 import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +8,11 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
-import butterknife.Bind;
+import butterknife.BindView;
+import cgeo.geocaching.CacheListActivity;
+import cgeo.geocaching.R;
+import cgeo.geocaching.models.PocketQuery;
+import cgeo.geocaching.ui.AbstractViewHolder;
 import cgeo.geocaching.utils.Formatter;
 
 public class PocketQueryListAdapter extends ArrayAdapter<PocketQuery> {
@@ -21,10 +20,10 @@ public class PocketQueryListAdapter extends ArrayAdapter<PocketQuery> {
     final private LayoutInflater inflater;
 
     protected static final class ViewHolder extends AbstractViewHolder {
-        @Bind(R.id.label) TextView label;
-        @Bind(R.id.download) Button download;
-        @Bind(R.id.cachelist) Button cachelist;
-        @Bind(R.id.info) TextView info;
+        @BindView(R.id.label) TextView label;
+        @BindView(R.id.download) Button download;
+        @BindView(R.id.cachelist) Button cachelist;
+        @BindView(R.id.info) TextView info;
         public ViewHolder(final View view) {
             super(view);
         }
