@@ -89,6 +89,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import butterknife.ButterKnife;
 import rx.Subscription;
 import rx.subscriptions.Subscriptions;
 
@@ -221,6 +222,7 @@ public class NewMap extends AbstractActionBarActivity {
         } else {
             mapView.zoomToViewport(new Viewport(Settings.getMapCenter().getCoords(), 0, 0));
         }
+        prepareFilterBar();
     }
 
     @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
@@ -426,6 +428,26 @@ public class NewMap extends AbstractActionBarActivity {
         if (cache != null) {
             cache.showHintToast(this);
         }
+    }
+
+    private void prepareFilterBar() {
+        // show the filter warning bar if the filter is set
+        if (Settings.getCacheType() != CacheType.ALL) {
+            final String cacheType = Settings.getCacheType().getL10n();
+            final TextView filterTitleView = ButterKnife.findById(this, R.id.filter_text);
+            filterTitleView.setText(cacheType);
+            findViewById(R.id.filter_bar).setVisibility(View.VISIBLE);
+        } else {
+            findViewById(R.id.filter_bar).setVisibility(View.GONE);
+        }
+    }
+
+    /**
+     * @param view
+     *            Not used here, required by layout
+     */
+    public void showFilterMenu(final View view) {
+        // do nothing, the filter bar only shows the global filter
     }
 
     private void selectMapTheme() {
