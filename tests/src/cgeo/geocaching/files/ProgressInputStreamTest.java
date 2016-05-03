@@ -9,7 +9,7 @@ import junit.framework.TestCase;
 public class ProgressInputStreamTest extends TestCase {
 
     public static void testRead() throws Exception {
-        ProgressInputStream stream = new ProgressInputStream(IOUtils.toInputStream("test"));
+        ProgressInputStream stream = new ProgressInputStream(IOUtils.toInputStream("test", "UTF-8"));
         assertThat(stream.getProgress()).isEqualTo(0);
 
         int bytesRead = 0;
