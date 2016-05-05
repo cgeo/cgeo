@@ -2,7 +2,11 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-  <b>2016.04.12:</b>\n
+    <b>Next bugfix release:</b>\n
+    · Fix: Spoiler images not downloaded\n
+    \n
+    \n
+    <b>2016.04.12:</b>\n
     · Fix: Text selection from cache description no longer working on some devices\n
     · Fix: Translation menu sometimes missing after selecting text\n
     · Fix: Found status of webcam caches not shown\n
