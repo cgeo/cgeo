@@ -1810,7 +1810,7 @@ public class Geocache implements IWaypoint {
         final ArrayList<Image> result = new ArrayList<>();
         for (final Image image : getImages()) {
             // search strings fit geocaching.com and opencaching, may need to add others
-            if (!StringUtils.containsAny(image.getUrl(), "/static", "/resource")) {
+            if (!StringUtils.containsAny(image.getUrl(), "/static", "/resource", "/icons/")) {
                 result.add(image);
             }
         }
