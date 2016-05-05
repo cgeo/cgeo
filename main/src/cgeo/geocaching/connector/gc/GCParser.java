@@ -1828,9 +1828,7 @@ public final class GCParser {
 
                     final ArrayNode data = (ArrayNode) resp.get("data");
                     for (final JsonNode entry: data) {
-                        // FIXME: use the "LogType" field instead of the "LogTypeImage" one.
-                        final String logIconNameExt = entry.path("LogTypeImage").asText(".gif");
-                        final String logIconName = logIconNameExt.substring(0, logIconNameExt.length() - 4);
+                        final String logType = entry.path("LogType").asText();
 
                         final long date;
                         try {
@@ -1849,7 +1847,7 @@ public final class GCParser {
                         final LogEntry.Builder logDoneBuilder = new LogEntry.Builder()
                                 .setAuthor(TextUtils.removeControlCharacters(entry.path("UserName").asText()))
                                 .setDate(date)
-                                .setLogType(LogType.getByIconName(logIconName))
+                                .setLogType(LogType.getByType(logType))
                                 .setLog(logText)
                                 .setFound(entry.path("GeocacheFindCount").asInt())
                                 .setFriend(markAsFriendsLog);
