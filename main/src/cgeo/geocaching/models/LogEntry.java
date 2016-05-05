@@ -406,7 +406,7 @@ public final class LogEntry {
         if (titles.isEmpty()) {
             titles.add(CgeoApplication.getInstance().getString(R.string.cache_log_image_default_title));
         }
-        return StringUtils.join(titles, ", ");
+        return "• " + StringUtils.join(titles, "\n• ");
     }
 
     /**

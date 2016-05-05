@@ -53,7 +53,7 @@ public class LogEntryTest extends CGeoTestCase {
     }
 
     public static void testGetImageTitles() {
-        final String defaultTitle = CgeoApplication.getInstance().getString(R.string.cache_log_image_default_title);
+        final String defaultTitle = "• " + CgeoApplication.getInstance().getString(R.string.cache_log_image_default_title);
 
         LogEntry logEntry = new LogEntry.Builder().setDate(100).setLogType(LogType.FOUND_IT).setLog("LOGENTRY").build();
 
@@ -72,7 +72,7 @@ public class LogEntryTest extends CGeoTestCase {
         logEntry = logEntry.buildUpon().addLogImage(mockedImage3).build();
 
         assertThat(logEntry.getLogImages()).hasSize(3);
-        final String titlesWanted = "TITLE 1, TITLE 2";
+        final String titlesWanted = "• TITLE 1\n• TITLE 2";
         assertThat(logEntry.getImageTitles()).isEqualTo(titlesWanted);
     }
 
