@@ -142,7 +142,7 @@ public class WaypointPopupFragment extends AbstractDialogFragment {
         if (waypoint == null) {
             return null;
         }
-        return new TargetInfo(waypoint.getCoords());
+        return new TargetInfo(waypoint.getCoords(), cache.getGeocode());
     }
 
     public static DialogFragment newInstance(final String geocode, final int waypointId) {

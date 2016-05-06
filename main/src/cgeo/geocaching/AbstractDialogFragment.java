@@ -387,11 +387,6 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
             this.geocode = geocode;
         }
 
-        TargetInfo(final Geopoint coords) {
-            this.coords = coords;
-            this.geocode = null;
-        }
-
         public TargetInfo(final Parcel in) {
             this.coords = in.readParcelable(Geopoint.class.getClassLoader());
             this.geocode = in.readString();
