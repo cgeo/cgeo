@@ -53,7 +53,7 @@ public class EditNoteDialog extends DialogFragment {
     @Override
     @android.support.annotation.NonNull
     public Dialog onCreateDialog(final Bundle savedInstanceState) {
-        final @NonNull FragmentActivity activity = getActivity();
+        @NonNull final FragmentActivity activity = getActivity();
 
         final Context themedContext;
         if (Settings.isLightSkin() && VERSION.SDK_INT < VERSION_CODES.HONEYCOMB) {

@@ -118,16 +118,16 @@ public abstract class LogsViewCreator extends AbstractCachingListViewPageViewCre
         activity.registerForContextMenu(holder.text);
     }
 
-    abstract protected UserActionsClickListener createUserActionsListener();
+    protected abstract UserActionsClickListener createUserActionsListener();
 
-    abstract protected String getGeocode();
+    protected abstract String getGeocode();
 
-    abstract protected List<LogEntry> getLogs();
+    protected abstract List<LogEntry> getLogs();
 
-    abstract protected void addHeaderView();
+    protected abstract void addHeaderView();
 
-    abstract protected void fillCountOrLocation(LogViewHolder holder, final LogEntry log);
+    protected abstract void fillCountOrLocation(LogViewHolder holder, final LogEntry log);
 
-    abstract protected boolean isValid();
+    protected abstract boolean isValid();
 
 }

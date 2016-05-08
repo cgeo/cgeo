@@ -25,11 +25,11 @@ import junit.framework.Assert;
 
 public abstract class MockedCacheAndroid extends Geocache {
 
-    final protected Geopoint coords;
+    protected final Geopoint coords;
     private final String data;
     private String mockedDataUser;
 
-    public final static List<MockedCacheAndroid> MOCKED_CACHES;
+    public static final List<MockedCacheAndroid> MOCKED_CACHES;
     static {
         MOCKED_CACHES = Collections.unmodifiableList(Arrays.asList(new GC2CJPFAndroid(), new GC1ZXX2Android(), new GC2JVEHAndroid(), new GC3XX5JAndroid()));
     }

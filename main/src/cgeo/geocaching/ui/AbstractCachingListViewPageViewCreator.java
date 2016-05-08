@@ -24,9 +24,9 @@ public abstract class AbstractCachingListViewPageViewCreator extends AbstractCac
      *
      * @return the state encapsulated in a bundle
      */
+    @Nullable
     @Override
-    public @Nullable
-    Bundle getViewState() {
+    public Bundle getViewState() {
         if (view == null) {
             return null;
         }

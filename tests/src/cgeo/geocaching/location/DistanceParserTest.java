@@ -4,7 +4,7 @@ import junit.framework.TestCase;
 
 public class DistanceParserTest extends TestCase {
 
-    static private final double MM = 1e-6; // 1mm, in kilometers
+    private static final double MM = 1e-6; // 1mm, in kilometers
 
     public static void testFormats() {
         assertEquals(1.2, DistanceParser.parseDistance("1200 m", true), MM);

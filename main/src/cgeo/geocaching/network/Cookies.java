@@ -13,7 +13,7 @@ import okhttp3.HttpUrl;
 
 public final class Cookies {
 
-    final static InMemoryCookieJar cookieJar = new InMemoryCookieJar();
+    static final InMemoryCookieJar cookieJar = new InMemoryCookieJar();
 
     static class InMemoryCookieJar implements CookieJar {
 

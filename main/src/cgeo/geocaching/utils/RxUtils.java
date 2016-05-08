@@ -82,8 +82,8 @@ public class RxUtils {
      */
     public static class ObservableCache<K, V> {
 
-        final private Func1<K, Observable<V>> func;
-        final private Map<K, Observable<V>> cached = new HashMap<>();
+        private final Func1<K, Observable<V>> func;
+        private final Map<K, Observable<V>> cached = new HashMap<>();
 
         /**
          * Create a new observables cache.
@@ -116,8 +116,8 @@ public class RxUtils {
 
     public static class DelayedUnsubscription<T> implements Operator<T, T> {
 
-        final private long time;
-        final private TimeUnit unit;
+        private final long time;
+        private final TimeUnit unit;
 
         public DelayedUnsubscription(final long time, final TimeUnit unit) {
             this.time = time;

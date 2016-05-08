@@ -21,7 +21,7 @@ import java.util.Set;
 public class CacheCache {
 
     private static final int MAX_CACHED_CACHES = 1000;
-    final private LeastRecentlyUsedMap<String, Geocache> cachesCache;
+    private final LeastRecentlyUsedMap<String, Geocache> cachesCache;
 
     public CacheCache() {
         cachesCache = new LeastRecentlyUsedMap.LruCache<>(MAX_CACHED_CACHES);

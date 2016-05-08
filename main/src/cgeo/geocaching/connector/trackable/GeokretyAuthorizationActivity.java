@@ -63,7 +63,7 @@ public class GeokretyAuthorizationActivity extends TokenAuthorizationActivity {
     }
 
     @Override
-    protected String getExtendedErrorMsg(final @Nullable String response) {
+    protected String getExtendedErrorMsg(@Nullable final String response) {
         if (StringUtils.equals(response, "1")) {
             return res.getString(R.string.err_auth_geokrety_bad_password);
         }

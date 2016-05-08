@@ -118,7 +118,7 @@ public class NewMap extends AbstractActionBarActivity {
     private String targetGeocode = null;
     private Geopoint lastNavTarget = null;
 
-    final private UpdateLoc geoDirUpdate = new UpdateLoc(this);
+    private final UpdateLoc geoDirUpdate = new UpdateLoc(this);
     /**
      * initialization with an empty subscription to make static code analysis tools more happy
      */
@@ -527,7 +527,7 @@ public class NewMap extends AbstractActionBarActivity {
         tileRendererLayer.requestRedraw();
     }
 
-    private void setMapSource(final @NonNull MapSource mapSource) {
+    private void setMapSource(@NonNull final MapSource mapSource) {
         // Update mapsource in settings
         Settings.setMapSource(mapSource);
 
@@ -762,7 +762,7 @@ public class NewMap extends AbstractActionBarActivity {
         return null;
     }
 
-    private final static class DisplayHandler extends Handler {
+    private static final class DisplayHandler extends Handler {
 
         @NonNull
         private final WeakReference<NewMap> mapRef;
@@ -973,7 +973,7 @@ public class NewMap extends AbstractActionBarActivity {
          */
         @NonNull private final WeakReference<NewMap> mapRef;
 
-        UpdateLoc(final @NonNull NewMap map) {
+        UpdateLoc(@NonNull final NewMap map) {
             mapRef = new WeakReference<>(map);
         }
 
@@ -1064,7 +1064,7 @@ public class NewMap extends AbstractActionBarActivity {
         @NonNull
         private final WeakReference<NewMap> mapRef;
 
-        DragHandler(final @NonNull NewMap parent) {
+        DragHandler(@NonNull final NewMap parent) {
             mapRef = new WeakReference<>(parent);
         }
 
@@ -1078,7 +1078,7 @@ public class NewMap extends AbstractActionBarActivity {
         }
     }
 
-    public void showSelection(final @NonNull ArrayList<GeoitemRef> items) {
+    public void showSelection(@NonNull final ArrayList<GeoitemRef> items) {
         if (items.isEmpty()) {
             return;
         }
@@ -1124,7 +1124,7 @@ public class NewMap extends AbstractActionBarActivity {
         @NonNull
         private final ArrayList<GeoitemRef> items;
 
-        SelectionClickListener(final @NonNull ArrayList<GeoitemRef> items) {
+        SelectionClickListener(@NonNull final ArrayList<GeoitemRef> items) {
             this.items = items;
         }
 
@@ -1188,10 +1188,10 @@ public class NewMap extends AbstractActionBarActivity {
 
     private static class RequestDetailsThread extends Thread {
 
-        private final @NonNull Geocache cache;
-        private final @NonNull WeakReference<NewMap> map;
+        @NonNull private final Geocache cache;
+        @NonNull private final WeakReference<NewMap> map;
 
-        RequestDetailsThread(final @NonNull Geocache cache, final @NonNull NewMap map) {
+        RequestDetailsThread(@NonNull final Geocache cache, @NonNull final NewMap map) {
             this.cache = cache;
             this.map = new WeakReference<>(map);
         }

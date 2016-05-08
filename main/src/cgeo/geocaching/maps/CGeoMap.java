@@ -140,12 +140,12 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
     private Activity activity;
     private MapItemFactory mapItemFactory;
     private String mapTitle;
-    final private LeastRecentlyUsedSet<Geocache> caches = new LeastRecentlyUsedSet<>(MAX_CACHES + DataStore.getAllCachesCount());
+    private final LeastRecentlyUsedSet<Geocache> caches = new LeastRecentlyUsedSet<>(MAX_CACHES + DataStore.getAllCachesCount());
     private MapViewImpl mapView;
     private CachesOverlay overlayCaches;
     private PositionAndScaleOverlay overlayPositionAndScale;
 
-    final private GeoDirHandler geoDirUpdate = new UpdateLoc(this);
+    private final GeoDirHandler geoDirUpdate = new UpdateLoc(this);
     private SearchResult searchIntent = null;
     private String geocodeIntent = null;
     private Geopoint coordsIntent = null;
@@ -204,7 +204,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
     // handlers
     /** Updates the titles */
 
-    private final static class DisplayHandler extends Handler {
+    private static final class DisplayHandler extends Handler {
 
         private final WeakReference<CGeoMap> mapRef;
 
@@ -236,7 +236,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
     }
 
-    final private Handler displayHandler = new DisplayHandler(this);
+    private final Handler displayHandler = new DisplayHandler(this);
 
     private void setTitle() {
         final String title = calculateTitle();
@@ -381,9 +381,9 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
     }
 
-    final private Handler showProgressHandler = new ShowProgressHandler(this);
+    private final Handler showProgressHandler = new ShowProgressHandler(this);
 
-    final private class LoadDetailsHandler extends CancellableHandler {
+    private final class LoadDetailsHandler extends CancellableHandler {
 
         @Override
         public void handleRegularMessage(final Message msg) {
@@ -1435,7 +1435,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         displayHandler.sendEmptyMessage(UPDATE_TITLE);
     }
 
-    private static abstract class DoRunnable implements Runnable {
+    private abstract static class DoRunnable implements Runnable {
 
         private final WeakReference<CGeoMap> mapRef;
 
@@ -1444,14 +1444,14 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         }
 
         @Override
-        final public void run() {
+        public final void run() {
             final CGeoMap map = mapRef.get();
             if (map != null) {
                 runWithMap(map);
             }
         }
 
-        abstract protected void runWithMap(final CGeoMap map);
+        protected abstract void runWithMap(final CGeoMap map);
     }
 
     /**
@@ -1503,9 +1503,9 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
     private class LoadDetails extends Thread {
 
-        final private CancellableHandler handler;
-        final private List<String> geocodes;
-        final private int listId;
+        private final CancellableHandler handler;
+        private final List<String> geocodes;
+        private final int listId;
 
         LoadDetails(final CancellableHandler handler, final List<String> geocodes, final int listId) {
             this.handler = handler;

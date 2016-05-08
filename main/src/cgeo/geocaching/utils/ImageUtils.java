@@ -65,7 +65,7 @@ public final class ImageUtils {
 
     // Images whose URL contains one of those patterns will not be available on the Images tab
     // for opening into an external application.
-    private final static String[] NO_EXTERNAL = { "geocheck.org" };
+    private static final String[] NO_EXTERNAL = { "geocheck.org" };
 
     private ImageUtils() {
         // Do not let this class be instantiated, this is a utility class.
@@ -359,11 +359,11 @@ public final class ImageUtils {
      * been handled.
      */
     public static class ContainerDrawable extends BitmapDrawable implements Action1<Drawable> {
-        final private static Object lock = new Object(); // Used to lock the queue to determine if a refresh needs to be scheduled
-        final private static LinkedBlockingQueue<ImmutablePair<ContainerDrawable, Drawable>> REDRAW_QUEUE = new LinkedBlockingQueue<>();
-        final private static Set<TextView> VIEWS = new HashSet<>();  // Modified only on the UI thread, from redrawQueuedDrawables
-        final private static Worker UI_WORKER = AndroidSchedulers.mainThread().createWorker();
-        final private static Action0 REDRAW_QUEUED_DRAWABLES = new Action0() {
+        private static final Object lock = new Object(); // Used to lock the queue to determine if a refresh needs to be scheduled
+        private static final LinkedBlockingQueue<ImmutablePair<ContainerDrawable, Drawable>> REDRAW_QUEUE = new LinkedBlockingQueue<>();
+        private static final Set<TextView> VIEWS = new HashSet<>();  // Modified only on the UI thread, from redrawQueuedDrawables
+        private static final Worker UI_WORKER = AndroidSchedulers.mainThread().createWorker();
+        private static final Action0 REDRAW_QUEUED_DRAWABLES = new Action0() {
             @Override
             public void call() {
                 redrawQueuedDrawables();
@@ -371,7 +371,7 @@ public final class ImageUtils {
         };
 
         private Drawable drawable;
-        final protected WeakReference<TextView> viewRef;
+        protected final WeakReference<TextView> viewRef;
 
         @SuppressWarnings("deprecation")
         public ContainerDrawable(@NonNull final TextView view, final Observable<? extends Drawable> drawableObservable) {
@@ -441,7 +441,7 @@ public final class ImageUtils {
     /**
      * Image that automatically scales to fit a line of text in the containing {@link TextView}.
      */
-    public final static class LineHeightContainerDrawable extends ContainerDrawable {
+    public static final class LineHeightContainerDrawable extends ContainerDrawable {
         public LineHeightContainerDrawable(@NonNull final TextView view, final Observable<? extends Drawable> drawableObservable) {
             super(view, drawableObservable);
         }

@@ -954,7 +954,7 @@ final class OkapiClient {
             isSuccess = response.isSuccessful() && tempData != null;
         }
 
-        JSONResult(final @NonNull String errorMessage) {
+        JSONResult(@NonNull final String errorMessage) {
             isSuccess = false;
             data = new ObjectNode(JsonUtils.factory);
             data.putObject("error").put("developer_message", errorMessage);

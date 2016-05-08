@@ -22,12 +22,12 @@ public class WhereYouGoApp extends AbstractGeneralApp {
     }
 
     @Override
-    public boolean isEnabled(final @NonNull Geocache cache) {
+    public boolean isEnabled(@NonNull final Geocache cache) {
         return cache.getType() == CacheType.WHERIGO && StringUtils.isNotEmpty(getWhereIGoUrl(cache));
     }
 
     @Override
-    public void navigate(final @NonNull Activity activity, final @NonNull Geocache cache) {
+    public void navigate(@NonNull final Activity activity, @NonNull final Geocache cache) {
         activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getWhereIGoUrl(cache))));
     }
 

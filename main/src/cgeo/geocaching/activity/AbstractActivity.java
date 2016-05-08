@@ -49,11 +49,11 @@ public abstract class AbstractActivity extends ActionBarActivity implements IAbs
         this.keepScreenOn = keepScreenOn;
     }
 
-    final protected void showProgress(final boolean show) {
+    protected final void showProgress(final boolean show) {
         ActivityMixin.showProgress(this, show);
     }
 
-    final protected void setTheme() {
+    protected final void setTheme() {
         ActivityMixin.setTheme(this);
     }
 
@@ -220,7 +220,7 @@ public abstract class AbstractActivity extends ActionBarActivity implements IAbs
         }
     }
 
-    protected void setCacheTitleBar(final @NonNull Geocache cache) {
+    protected void setCacheTitleBar(@NonNull final Geocache cache) {
         setCacheTitleBar(cache.getGeocode(), cache.getName(), cache.getType());
     }
 

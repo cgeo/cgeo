@@ -9,9 +9,9 @@ public enum GCMemberState {
     PREMIUM("Premium"),
     CHARTER("Charter");
 
-    final @NonNull public String englishWebsite;
+    @NonNull public final String englishWebsite;
 
-    GCMemberState(final @NonNull String display) {
+    GCMemberState(@NonNull final String display) {
         this.englishWebsite = display;
     }
 

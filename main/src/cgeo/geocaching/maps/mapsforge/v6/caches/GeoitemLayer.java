@@ -15,8 +15,8 @@ import android.view.WindowManager;
 
 public class GeoitemLayer extends Marker {
 
-    private final static double tapSpanInches = 0.12; // 3mm as inches
-    private final static double tapSpanRadius;
+    private static final double tapSpanInches = 0.12; // 3mm as inches
+    private static final double tapSpanRadius;
 
     static {
 

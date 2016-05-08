@@ -98,8 +98,8 @@ public abstract class GPXParser extends FileParser {
     private static final Pattern PATTERN_MILLISECONDS = Pattern.compile("\\.\\d{3,7}");
 
     private int listId = StoredList.STANDARD_LIST_ID;
-    final protected String namespace;
-    final private String version;
+    protected final String namespace;
+    private final String version;
 
     private Geocache cache;
     private Trackable trackable = new Trackable();

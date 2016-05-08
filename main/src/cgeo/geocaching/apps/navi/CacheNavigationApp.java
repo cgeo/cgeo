@@ -12,5 +12,5 @@ import android.app.Activity;
  *
  */
 public interface CacheNavigationApp extends App {
-    void navigate(final @NonNull Activity activity, @NonNull final Geocache cache);
+    void navigate(@NonNull final Activity activity, @NonNull final Geocache cache);
 }

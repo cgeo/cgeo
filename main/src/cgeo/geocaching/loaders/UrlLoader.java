@@ -9,8 +9,8 @@ import android.support.v4.content.AsyncTaskLoader;
 
 public class UrlLoader extends AsyncTaskLoader<String> {
 
-    final private String url;
-    final private Parameters params;
+    private final String url;
+    private final Parameters params;
 
     public UrlLoader(final Context context, final String url, final Parameters params) {
         super(context);

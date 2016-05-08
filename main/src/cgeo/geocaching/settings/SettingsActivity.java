@@ -592,7 +592,7 @@ public class SettingsActivity extends PreferenceActivity {
                         : R.string.settings_authorize));
     }
 
-    private void setAuthTitle(final int prefKeyId, final @NonNull ICredentials connector) {
+    private void setAuthTitle(final int prefKeyId, @NonNull final ICredentials connector) {
         final Credentials credentials = Settings.getCredentials(connector);
 
         getPreference(prefKeyId)
@@ -601,7 +601,7 @@ public class SettingsActivity extends PreferenceActivity {
                         : R.string.settings_authorize));
     }
 
-    private void setConnectedUsernameTitle(final int prefKeyId, final @NonNull ICredentials connector) {
+    private void setConnectedUsernameTitle(final int prefKeyId, @NonNull final ICredentials connector) {
         final Credentials credentials = Settings.getCredentials(connector);
 
         getPreference(prefKeyId)

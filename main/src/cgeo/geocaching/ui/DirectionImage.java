@@ -8,7 +8,7 @@ import android.graphics.drawable.BitmapDrawable;
 
 public class DirectionImage {
 
-    static final private HtmlImage HTML_IMAGE = new HtmlImage(HtmlImage.SHARED, false, false, false);
+    private static final HtmlImage HTML_IMAGE = new HtmlImage(HtmlImage.SHARED, false, false, false);
 
     private DirectionImage() {
         // utility class

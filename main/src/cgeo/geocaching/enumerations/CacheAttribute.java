@@ -170,9 +170,9 @@ public enum CacheAttribute {
     }
 
     @NonNull
-    private final static Map<String, CacheAttribute> FIND_BY_GCRAWNAME = new HashMap<>();
+    private static final Map<String, CacheAttribute> FIND_BY_GCRAWNAME = new HashMap<>();
     @NonNull
-    private final static SparseArray<CacheAttribute> FIND_BY_OCACODE = new SparseArray<>();
+    private static final SparseArray<CacheAttribute> FIND_BY_OCACODE = new SparseArray<>();
     static {
         for (final CacheAttribute attr : values()) {
             FIND_BY_GCRAWNAME.put(attr.rawName, attr);
@@ -204,7 +204,7 @@ public enum CacheAttribute {
         return !StringUtils.endsWithIgnoreCase(attributeName, INTERNAL_NO);
     }
 
-    public static boolean hasRecognizedAttributeIcon(final @NonNull List<String> attributes) {
+    public static boolean hasRecognizedAttributeIcon(@NonNull final List<String> attributes) {
         for (final String attributeName : attributes) {
             final CacheAttribute attrib = CacheAttribute.getByRawName(CacheAttribute.trimAttributeName(attributeName));
             if (attrib != null) {

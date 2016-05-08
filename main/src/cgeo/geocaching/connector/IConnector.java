@@ -27,7 +27,7 @@ public interface IConnector {
      *            geocode of a cache
      * @return return {@code true}, if this connector is responsible for the cache
      */
-    boolean canHandle(final @NonNull String geocode);
+    boolean canHandle(@NonNull final String geocode);
 
     /**
      * Return a new geocodes list, with only geocodes for which this connector is responsible.
@@ -36,21 +36,21 @@ public interface IConnector {
      *            list of geocodes of a cache
      * @return return a new stripped list
      */
-    Set<String> handledGeocodes(final @NonNull Set<String> geocodes);
+    Set<String> handledGeocodes(@NonNull final Set<String> geocodes);
 
     /**
      * Get the browser URL for the given cache.
      *
      */
     @Nullable
-    String getCacheUrl(final @NonNull Geocache cache);
+    String getCacheUrl(@NonNull final Geocache cache);
 
     /**
      * get long browser URL for the given cache
      *
      */
     @Nullable
-    String getLongCacheUrl(final @NonNull Geocache cache);
+    String getLongCacheUrl(@NonNull final Geocache cache);
 
     /**
      * enable/disable watchlist controls in cache details
@@ -123,7 +123,7 @@ public interface IConnector {
      *
      */
     @NonNull
-    String getLicenseText(final @NonNull Geocache cache);
+    String getLicenseText(@NonNull final Geocache cache);
 
     /**
      * return true if this is a ZIP file containing a GPX file

@@ -27,7 +27,7 @@ import java.util.Set;
 
 public class DataStoreTest extends CGeoTestCase {
 
-    final static String ARTIFICIAL_GEOCODE = "TEST";
+    static final String ARTIFICIAL_GEOCODE = "TEST";
 
     public static void testStoredLists() {
         int listId1 = StoredList.STANDARD_LIST_ID;

@@ -12,7 +12,7 @@ import java.util.List;
 
 public interface CacheListApp extends App {
 
-    boolean invoke(final @NonNull List<Geocache> caches,
-            final @NonNull Activity activity, @NonNull final SearchResult search);
+    boolean invoke(@NonNull final List<Geocache> caches,
+            @NonNull final Activity activity, @NonNull final SearchResult search);
 
 }

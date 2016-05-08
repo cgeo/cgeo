@@ -94,7 +94,7 @@ public abstract class AbstractResourceInstrumentationTestCase extends Instrument
         return temporaryListId;
     }
 
-    final protected Geocache loadCacheFromResource(@RawRes final int resourceId) throws IOException, ParserException {
+    protected final Geocache loadCacheFromResource(@RawRes final int resourceId) throws IOException, ParserException {
         final InputStream instream = getResourceStream(resourceId);
         try {
             final GPX10Parser parser = new GPX10Parser(StoredList.TEMPORARY_LIST.id);

@@ -48,7 +48,7 @@ public final class GCVote implements ICredentials {
 
     private static class SingletonHolder {
         @NonNull
-        private final static GCVote INSTANCE = new GCVote();
+        private static final GCVote INSTANCE = new GCVote();
     }
 
     @NonNull
@@ -178,7 +178,7 @@ public final class GCVote implements ICredentials {
         return true;
     }
 
-    public static void loadRatings(final @NonNull List<Geocache> caches) {
+    public static void loadRatings(@NonNull final List<Geocache> caches) {
         if (!Settings.isRatingWanted()) {
             return;
         }
@@ -210,7 +210,7 @@ public final class GCVote implements ICredentials {
      * Get geocodes of all the caches, which can be used with GCVote. Non-GC caches will be filtered out.
      */
     @NonNull
-    private static List<String> getVotableGeocodes(final @NonNull Collection<Geocache> caches) {
+    private static List<String> getVotableGeocodes(@NonNull final Collection<Geocache> caches) {
         final List<String> geocodes = new ArrayList<>(caches.size());
         for (final Geocache cache : caches) {
             final String geocode = cache.getGeocode();

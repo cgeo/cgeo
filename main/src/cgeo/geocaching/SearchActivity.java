@@ -281,7 +281,7 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
         });
     }
 
-    private static void setSearchAction(final AutoCompleteTextView editText, final Button button, final @NonNull Runnable runnable, final @Nullable Func1<String, String[]> suggestionFunction) {
+    private static void setSearchAction(final AutoCompleteTextView editText, final Button button, @NonNull final Runnable runnable, @Nullable final Func1<String, String[]> suggestionFunction) {
         EditUtils.setActionListener(editText, runnable);
         button.setOnClickListener(new View.OnClickListener() {
             @Override

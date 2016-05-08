@@ -22,7 +22,7 @@ public class AndroidRxUtils {
         // Utility class, not to be instantiated
     }
 
-    public final static Scheduler computationScheduler = Schedulers.computation();
+    public static final Scheduler computationScheduler = Schedulers.computation();
 
     public static final Scheduler networkScheduler = Schedulers.from(Executors.newFixedThreadPool(10, new RxThreadFactory("network-")));
 

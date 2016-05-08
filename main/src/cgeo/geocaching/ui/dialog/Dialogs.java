@@ -298,7 +298,7 @@ public final class Dialogs {
      * @param message
      *            message dialog content
      */
-    public static void message(final Activity context, final @Nullable String title, final String message) {
+    public static void message(final Activity context, @Nullable final String title, final String message) {
         message(context, title, message, null);
     }
 
@@ -314,7 +314,7 @@ public final class Dialogs {
      * @param iconObservable
      *            observable (may be <tt>null</tt>) containing the icon(s) to set
      */
-    public static void message(final Activity context, final @Nullable String title, final String message, final @Nullable Observable<Drawable> iconObservable) {
+    public static void message(final Activity context, @Nullable final String title, final String message, @Nullable final Observable<Drawable> iconObservable) {
         final Builder builder = new AlertDialog.Builder(context)
                 .setMessage(message)
                 .setCancelable(true)

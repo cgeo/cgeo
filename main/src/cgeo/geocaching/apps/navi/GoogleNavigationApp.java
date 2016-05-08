@@ -41,7 +41,7 @@ abstract class GoogleNavigationApp extends AbstractPointNavigationApp {
     }
 
     @Override
-    public void navigate(final @NonNull Activity activity, final @NonNull Geopoint coords) {
+    public void navigate(@NonNull final Activity activity, @NonNull final Geopoint coords) {
         try {
             activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri
                     .parse("google.navigation:ll=" + coords.getLatitude() + ","

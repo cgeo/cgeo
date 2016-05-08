@@ -26,9 +26,9 @@ public enum LogTypeTrackable {
 
     public final int id; // id matching LogTypes
     public final int gkid; // This is the id from GeoKrety
-    @NonNull final public String action;
+    @NonNull public final String action;
     @StringRes
-    final private int resourceId;
+    private final int resourceId;
     @DrawableRes
     public final int markerId;
     // A link to the old LogType. This is done while Twitter still only handle LogType

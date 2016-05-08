@@ -38,7 +38,7 @@ public class GeocachingSuConnector extends AbstractConnector implements ISearchB
      * initialization on demand holder pattern
      */
     private static class Holder {
-        private static final @NonNull GeocachingSuConnector INSTANCE = new GeocachingSuConnector();
+        @NonNull private static final GeocachingSuConnector INSTANCE = new GeocachingSuConnector();
     }
 
     public static GeocachingSuConnector getInstance() {
@@ -53,7 +53,7 @@ public class GeocachingSuConnector extends AbstractConnector implements ISearchB
 
     @Override
     @NonNull
-    public String getCacheUrl(final @NonNull Geocache cache) {
+    public String getCacheUrl(@NonNull final Geocache cache) {
         return getCacheUrlPrefix() + "&cid=" + getCacheId(cache.getGeocode());
     }
 
@@ -76,7 +76,7 @@ public class GeocachingSuConnector extends AbstractConnector implements ISearchB
     }
 
     @Override
-    public boolean canHandle(final @NonNull String geocode) {
+    public boolean canHandle(@NonNull final String geocode) {
         return (StringUtils.startsWithAny(StringUtils.upperCase(geocode), "SU", PREFIX_TRADITIONAL, PREFIX_MULTISTEP_VIRTUAL, PREFIX_VIRTUAL, PREFIX_MULTISTEP, PREFIX_EVENT, PREFIX_CONTEST)) && isNumericId(geocode.substring(2));
     }
 
@@ -108,11 +108,11 @@ public class GeocachingSuConnector extends AbstractConnector implements ISearchB
         return searchCaches("cache", "rtype=0&lngmax=" + viewport.getLongitudeMax() + "&lngmin=" + viewport.getLongitudeMin() + "&latmax=" + viewport.getLatitudeMax() + "&latmin=" + viewport.getLatitudeMin());
     }
 
-    private static SearchResult searchCaches(final @NonNull String endTag, final @NonNull String url) {
+    private static SearchResult searchCaches(@NonNull final String endTag, @NonNull final String url) {
         return parseCaches(endTag, Network.getResponseStream(Network.getRequest(API_URL + url)));
     }
 
-    private static SearchResult parseCaches(final @NonNull String endTag, final InputStream inputStream) {
+    private static SearchResult parseCaches(@NonNull final String endTag, final InputStream inputStream) {
         return GeocachingSuParser.parseCaches(endTag, inputStream);
     }
 

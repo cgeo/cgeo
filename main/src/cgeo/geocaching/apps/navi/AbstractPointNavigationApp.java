@@ -27,7 +27,7 @@ abstract class AbstractPointNavigationApp extends AbstractApp implements CacheNa
     }
 
     @Override
-    public void navigate(@NonNull final Activity activity, final @NonNull Geocache cache) {
+    public void navigate(@NonNull final Activity activity, @NonNull final Geocache cache) {
         navigateWithNullCheck(activity, cache.getCoords());
     }
 
@@ -40,17 +40,17 @@ abstract class AbstractPointNavigationApp extends AbstractApp implements CacheNa
     }
 
     @Override
-    public void navigate(final @NonNull Activity activity, final @NonNull Waypoint waypoint) {
+    public void navigate(@NonNull final Activity activity, @NonNull final Waypoint waypoint) {
         navigateWithNullCheck(activity, waypoint.getCoords());
     }
 
     @Override
-    public boolean isEnabled(final @NonNull Geocache cache) {
+    public boolean isEnabled(@NonNull final Geocache cache) {
         return cache.getCoords() != null;
     }
 
     @Override
-    public boolean isEnabled(final @NonNull Waypoint waypoint) {
+    public boolean isEnabled(@NonNull final Waypoint waypoint) {
         return waypoint.getCoords() != null;
     }
 

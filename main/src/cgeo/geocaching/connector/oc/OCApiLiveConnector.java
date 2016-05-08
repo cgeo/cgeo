@@ -65,17 +65,17 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByCente
     }
 
     @Override
-    public SearchResult searchByCenter(@NonNull final Geopoint center, final @NonNull RecaptchaReceiver recaptchaReceiver) {
+    public SearchResult searchByCenter(@NonNull final Geopoint center, @NonNull final RecaptchaReceiver recaptchaReceiver) {
         return new SearchResult(OkapiClient.getCachesAround(center, this));
     }
 
     @Override
-    public SearchResult searchByOwner(@NonNull final String username, final @NonNull RecaptchaReceiver recaptchaReceiver) {
+    public SearchResult searchByOwner(@NonNull final String username, @NonNull final RecaptchaReceiver recaptchaReceiver) {
         return new SearchResult(OkapiClient.getCachesByOwner(username, this));
     }
 
     @Override
-    public SearchResult searchByFinder(@NonNull final String username, final @NonNull RecaptchaReceiver recaptchaReceiver) {
+    public SearchResult searchByFinder(@NonNull final String username, @NonNull final RecaptchaReceiver recaptchaReceiver) {
         return new SearchResult(OkapiClient.getCachesByFinder(username, this));
     }
 
@@ -186,7 +186,7 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByCente
     }
 
     @Override
-    public SearchResult searchByKeyword(final @NonNull String name, final @NonNull RecaptchaReceiver recaptchaReceiver) {
+    public SearchResult searchByKeyword(@NonNull final String name, @NonNull final RecaptchaReceiver recaptchaReceiver) {
         return new SearchResult(OkapiClient.getCachesNamed(Sensors.getInstance().currentGeo().getCoords(), name, this));
     }
 

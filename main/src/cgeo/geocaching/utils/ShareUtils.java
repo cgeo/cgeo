@@ -14,7 +14,7 @@ public class ShareUtils {
         // utility class
     }
 
-    public static void share(final Context context, final @NonNull File file, final @NonNull String mimeType, @StringRes final int titleResourceId) {
+    public static void share(final Context context, @NonNull final File file, @NonNull final String mimeType, @StringRes final int titleResourceId) {
         final Intent shareIntent = new Intent();
         shareIntent.setAction(Intent.ACTION_SEND);
         shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
@@ -22,7 +22,7 @@ public class ShareUtils {
         context.startActivity(Intent.createChooser(shareIntent, context.getString(titleResourceId)));
     }
 
-    public static void share(final Context context, final @NonNull File file, @StringRes final int titleResourceId) {
+    public static void share(final Context context, @NonNull final File file, @StringRes final int titleResourceId) {
         share(context, file, "*/*", titleResourceId);
     }
 }

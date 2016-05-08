@@ -148,7 +148,7 @@ public class SortActionProvider extends ActionProvider implements OnMenuItemClic
         }
     }
 
-    public void setClickListener(final @NonNull Action1<CacheComparator> onClickListener) {
+    public void setClickListener(@NonNull final Action1<CacheComparator> onClickListener) {
         this.onClickListener = onClickListener;
     }
 

@@ -147,7 +147,7 @@ public class Waypoint implements IWaypoint {
         return prefix;
     }
 
-    public void setPrefix(final @NonNull String prefix) {
+    public void setPrefix(@NonNull final String prefix) {
         this.prefix = prefix;
         cachedOrder = ORDER_UNDEFINED;
     }

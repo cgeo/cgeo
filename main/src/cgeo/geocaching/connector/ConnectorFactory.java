@@ -166,7 +166,7 @@ public final class ConnectorFactory {
         return liveConns.toArray(new ILogin[liveConns.size()]);
     }
 
-    public static boolean canHandle(final @Nullable String geocode) {
+    public static boolean canHandle(@Nullable final String geocode) {
         if (geocode == null) {
             return false;
         }
@@ -281,7 +281,7 @@ public final class ConnectorFactory {
 
     /** @see ISearchByViewPort#searchByViewport */
     @NonNull
-    public static SearchResult searchByViewport(final @NonNull Viewport viewport, @NonNull final MapTokens tokens) {
+    public static SearchResult searchByViewport(@NonNull final Viewport viewport, @NonNull final MapTokens tokens) {
         return SearchResult.parallelCombineActive(searchByViewPortConns, new Func1<ISearchByViewPort, SearchResult>() {
             @Override
             public SearchResult call(final ISearchByViewPort connector) {

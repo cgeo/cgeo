@@ -279,9 +279,9 @@ public class CachesOverlay extends AbstractItemizedOverlay {
 
     private class RequestDetailsThread extends Thread {
 
-        private final @NonNull Geocache cache;
+        @NonNull private final Geocache cache;
 
-        RequestDetailsThread(final @NonNull Geocache cache) {
+        RequestDetailsThread(@NonNull final Geocache cache) {
             this.cache = cache;
         }
 

@@ -29,7 +29,7 @@ public class ECLogin extends AbstractLogin {
 
     private static class SingletonHolder {
         @NonNull
-        private final static ECLogin INSTANCE = new ECLogin();
+        private static final ECLogin INSTANCE = new ECLogin();
     }
 
     @NonNull

@@ -31,7 +31,7 @@ public class ScaleDrawer {
         pixelDensity = metrics.density;
     }
 
-    static private double keepSignificantDigit(final double distance) {
+    private static double keepSignificantDigit(final double distance) {
         final double scale = Math.pow(10, Math.floor(Math.log10(distance)));
         return scale * Math.floor(distance / scale);
     }

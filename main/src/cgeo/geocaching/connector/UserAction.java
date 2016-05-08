@@ -25,7 +25,7 @@ public class UserAction {
     public final int displayResourceId;
     @NonNull private final Action1<Context> runnable;
 
-    public UserAction(@StringRes final int displayResourceId, final @NonNull Action1<Context> runnable) {
+    public UserAction(@StringRes final int displayResourceId, @NonNull final Action1<Context> runnable) {
         this.displayResourceId = displayResourceId;
         this.runnable = runnable;
     }

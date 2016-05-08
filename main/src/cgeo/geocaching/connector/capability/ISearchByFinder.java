@@ -7,5 +7,5 @@ import cgeo.geocaching.loaders.RecaptchaReceiver;
 import org.eclipse.jdt.annotation.NonNull;
 
 public interface ISearchByFinder extends IConnector {
-    SearchResult searchByFinder(final @NonNull String finder, final @NonNull RecaptchaReceiver recaptchaReceiver);
+    SearchResult searchByFinder(@NonNull final String finder, @NonNull final RecaptchaReceiver recaptchaReceiver);
 }

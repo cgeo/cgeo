@@ -197,7 +197,7 @@ public final class CacheDetailsCreator {
         addHiddenDate(cache);
     }
 
-    public TextView addHiddenDate(final @NonNull Geocache cache) {
+    public TextView addHiddenDate(@NonNull final Geocache cache) {
         final String dateString = Formatter.formatHiddenDate(cache);
         if (StringUtils.isEmpty(dateString)) {
             return null;

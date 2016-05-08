@@ -25,7 +25,8 @@ public class FileTypeDetector {
         this.contentResolver = contentResolver;
     }
 
-    public @NonNull FileType getFileType() {
+    @NonNull
+    public FileType getFileType() {
         InputStream is = null;
         BufferedReader reader = null;
         FileType type = FileType.UNKNOWN;

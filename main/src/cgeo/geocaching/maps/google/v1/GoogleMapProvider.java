@@ -65,7 +65,7 @@ public final class GoogleMapProvider extends AbstractMapProvider {
         return true;
     }
 
-    private static abstract class AbstractGoogleMapSource extends AbstractMapSource {
+    private abstract static class AbstractGoogleMapSource extends AbstractMapSource {
 
         protected AbstractGoogleMapSource(final String id, final MapProvider mapProvider, final String name) {
             super(id, mapProvider, name);

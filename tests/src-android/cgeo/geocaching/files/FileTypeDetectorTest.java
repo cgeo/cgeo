@@ -45,7 +45,7 @@ public class FileTypeDetectorTest extends AbstractResourceInstrumentationTestCas
         assertFileType(R.raw.pq7545915, FileType.ZIP);
     }
 
-    private void assertFileType(@RawRes final int resourceId, final @NonNull FileType fileType) {
+    private void assertFileType(@RawRes final int resourceId, @NonNull final FileType fileType) {
         final Uri resourceURI = getResourceURI(resourceId);
         final FileContentResolver contentResolver = new FileContentResolver(getInstrumentation().getContext());
         assertThat(new FileTypeDetector(resourceURI, contentResolver).getFileType()).isEqualTo(fileType);

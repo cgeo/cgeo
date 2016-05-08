@@ -62,7 +62,7 @@ public abstract class AbstractApp implements App {
     }
 
     @Override
-    public boolean isEnabled(final @NonNull Geocache cache) {
+    public boolean isEnabled(@NonNull final Geocache cache) {
         return true;
     }
 }

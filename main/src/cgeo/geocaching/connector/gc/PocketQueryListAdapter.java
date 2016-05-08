@@ -17,7 +17,7 @@ import cgeo.geocaching.utils.Formatter;
 
 public class PocketQueryListAdapter extends ArrayAdapter<PocketQuery> {
 
-    final private LayoutInflater inflater;
+    private final LayoutInflater inflater;
 
     protected static final class ViewHolder extends AbstractViewHolder {
         @BindView(R.id.label) TextView label;

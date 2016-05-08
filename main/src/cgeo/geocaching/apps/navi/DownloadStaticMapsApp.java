@@ -15,22 +15,22 @@ class DownloadStaticMapsApp extends AbstractStaticMapsApp {
     }
 
     @Override
-    public boolean isEnabled(final @NonNull Geocache cache) {
+    public boolean isEnabled(@NonNull final Geocache cache) {
         return cache.isOffline() && !cache.hasStaticMap();
     }
 
     @Override
-    public boolean isEnabled(final @NonNull Waypoint waypoint) {
+    public boolean isEnabled(@NonNull final Waypoint waypoint) {
         return !hasStaticMap(waypoint);
     }
 
     @Override
-    public void navigate(final @NonNull Activity activity, final @NonNull Geocache cache) {
+    public void navigate(@NonNull final Activity activity, @NonNull final Geocache cache) {
         invokeStaticMaps(activity, cache, null, true);
     }
 
     @Override
-    public void navigate(final @NonNull Activity activity, final @NonNull Waypoint waypoint) {
+    public void navigate(@NonNull final Activity activity, @NonNull final Waypoint waypoint) {
         invokeStaticMaps(activity, null, waypoint, true);
     }
 }

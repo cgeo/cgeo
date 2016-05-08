@@ -16,7 +16,7 @@ import android.graphics.PaintFlagsDrawFilter;
 import android.util.AttributeSet;
 import android.view.View;
 
-final public class CompassMiniView extends View {
+public final class CompassMiniView extends View {
     private Geopoint targetCoords = null;
     private float azimuth = 0;
     private float heading = 0;

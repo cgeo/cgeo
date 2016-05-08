@@ -31,10 +31,10 @@ import android.widget.ImageView;
 import java.io.InputStream;
 
 public class RecaptchaHandler extends Handler {
-    final public static int SHOW_CAPTCHA = 1;
+    public static final int SHOW_CAPTCHA = 1;
 
-    final private Activity activity;
-    final private RecaptchaReceiver recaptchaReceiver;
+    private final Activity activity;
+    private final RecaptchaReceiver recaptchaReceiver;
 
     public RecaptchaHandler(final Activity activity, final RecaptchaReceiver recaptchaReceiver) {
         this.activity = activity;

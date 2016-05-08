@@ -28,14 +28,14 @@ public final class Twitter {
         // Utility class
     }
 
-    public static void postTweetCache(final String geocode, final @Nullable LogEntry logEntry) {
+    public static void postTweetCache(final String geocode, @Nullable final LogEntry logEntry) {
         final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
         if (cache != null) {
             postTweet(getStatusMessage(cache, logEntry));
         }
     }
 
-    public static void postTweetTrackable(final String geocode, final @Nullable LogEntry logEntry) {
+    public static void postTweetTrackable(final String geocode, @Nullable final LogEntry logEntry) {
         final Trackable trackable = DataStore.loadTrackable(geocode);
         if (trackable != null) {
             postTweet(getStatusMessage(trackable, logEntry));
@@ -72,12 +72,12 @@ public final class Twitter {
     }
 
     @NonNull
-    static String getStatusMessage(final @NonNull Geocache cache, final @Nullable LogEntry logEntry) {
+    static String getStatusMessage(@NonNull final Geocache cache, @Nullable final LogEntry logEntry) {
         return appendHashTags(LogTemplateProvider.applyTemplatesNoIncrement(Settings.getCacheTwitterMessage(), new LogContext(cache, logEntry)));
     }
 
     @NonNull
-    static String getStatusMessage(final @NonNull Trackable trackable, final @Nullable LogEntry logEntry) {
+    static String getStatusMessage(@NonNull final Trackable trackable, @Nullable final LogEntry logEntry) {
         return appendHashTags(LogTemplateProvider.applyTemplates(Settings.getTrackableTwitterMessage(), new LogContext(trackable, logEntry)));
     }
 

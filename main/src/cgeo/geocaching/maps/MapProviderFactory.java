@@ -21,7 +21,7 @@ import java.util.List;
 
 public class MapProviderFactory {
 
-    private final static ArrayList<MapSource> mapSources = new ArrayList<>();
+    private static final ArrayList<MapSource> mapSources = new ArrayList<>();
 
     static {
         // add GoogleMapProvider only if google api is available in order to support x86 android emulator

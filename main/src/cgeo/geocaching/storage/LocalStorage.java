@@ -44,7 +44,7 @@ public final class LocalStorage {
     public static final String HEADER_ETAG = "etag";
 
     /** Name of the local private directory used to hold cached information */
-    public final static String CACHE_DIRNAME = ".cgeo";
+    public static final String CACHE_DIRNAME = ".cgeo";
 
     private static File internalStorageBase;
 

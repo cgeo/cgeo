@@ -23,13 +23,13 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Trackable implements ILogable {
-    static final private int SPOTTED_UNSET = 0;
-    static final public int SPOTTED_CACHE = 1;
-    static final public int SPOTTED_USER = 2;
-    static final public int SPOTTED_UNKNOWN = 3;
-    static final public int SPOTTED_OWNER = 4;
-    static final public int SPOTTED_ARCHIVED = 5;
-    static final public int SPOTTED_TRAVELLING = 6;
+    private static final int SPOTTED_UNSET = 0;
+    public static final int SPOTTED_CACHE = 1;
+    public static final int SPOTTED_USER = 2;
+    public static final int SPOTTED_UNKNOWN = 3;
+    public static final int SPOTTED_OWNER = 4;
+    public static final int SPOTTED_ARCHIVED = 5;
+    public static final int SPOTTED_TRAVELLING = 6;
 
     private String guid = "";
     private String geocode = "";
@@ -361,7 +361,7 @@ public class Trackable implements ILogable {
     }
 
     @NonNull
-    static public List<LogTypeTrackable> getPossibleLogTypes() {
+    public static List<LogTypeTrackable> getPossibleLogTypes() {
         final List<LogTypeTrackable> logTypes = new ArrayList<>();
         logTypes.add(LogTypeTrackable.RETRIEVED_IT);
         logTypes.add(LogTypeTrackable.GRABBED_IT);

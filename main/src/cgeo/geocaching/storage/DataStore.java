@@ -163,7 +163,7 @@ public class DataStore {
     private static final String[] WAYPOINT_COLUMNS = { "_id", "geocode", "updated", "type", "prefix", "lookup", "name", "latitude", "longitude", "note", "own", "visited" };
 
     /** Number of days (as ms) after temporarily saved caches are deleted */
-    private final static long DAYS_AFTER_CACHE_IS_DELETED = 3 * 24 * 60 * 60 * 1000;
+    private static final long DAYS_AFTER_CACHE_IS_DELETED = 3 * 24 * 60 * 60 * 1000;
 
     /**
      * holds the column indexes of the cache table to avoid lookups
@@ -172,20 +172,20 @@ public class DataStore {
     private static volatile SQLiteDatabase database = null;
     private static final int dbVersion = 71;
     public static final int customListIdOffset = 10;
-    private static final @NonNull String dbName = "data";
-    private static final @NonNull String dbTableCaches = "cg_caches";
-    private static final @NonNull String dbTableLists = "cg_lists";
-    private static final @NonNull String dbTableCachesLists = "cg_caches_lists";
-    private static final @NonNull String dbTableAttributes = "cg_attributes";
-    private static final @NonNull String dbTableWaypoints = "cg_waypoints";
-    private static final @NonNull String dbTableSpoilers = "cg_spoilers";
-    private static final @NonNull String dbTableLogs = "cg_logs";
-    private static final @NonNull String dbTableLogCount = "cg_logCount";
-    private static final @NonNull String dbTableLogImages = "cg_logImages";
-    private static final @NonNull String dbTableLogsOffline = "cg_logs_offline";
-    private static final @NonNull String dbTableTrackables = "cg_trackables";
-    private static final @NonNull String dbTableSearchDestinationHistory = "cg_search_destination_history";
-    private static final @NonNull String dbCreateCaches = ""
+    @NonNull private static final String dbName = "data";
+    @NonNull private static final String dbTableCaches = "cg_caches";
+    @NonNull private static final String dbTableLists = "cg_lists";
+    @NonNull private static final String dbTableCachesLists = "cg_caches_lists";
+    @NonNull private static final String dbTableAttributes = "cg_attributes";
+    @NonNull private static final String dbTableWaypoints = "cg_waypoints";
+    @NonNull private static final String dbTableSpoilers = "cg_spoilers";
+    @NonNull private static final String dbTableLogs = "cg_logs";
+    @NonNull private static final String dbTableLogCount = "cg_logCount";
+    @NonNull private static final String dbTableLogImages = "cg_logImages";
+    @NonNull private static final String dbTableLogsOffline = "cg_logs_offline";
+    @NonNull private static final String dbTableTrackables = "cg_trackables";
+    @NonNull private static final String dbTableSearchDestinationHistory = "cg_search_destination_history";
+    @NonNull private static final String dbCreateCaches = ""
             + "create table " + dbTableCaches + " ("
             + "_id integer primary key autoincrement, "
             + "updated long not null, "
@@ -548,7 +548,7 @@ public class DataStore {
             createIndices(db);
         }
 
-        static private void createIndices(final SQLiteDatabase db) {
+        private static void createIndices(final SQLiteDatabase db) {
             db.execSQL("create index if not exists in_caches_geo on " + dbTableCaches + " (geocode)");
             db.execSQL("create index if not exists in_caches_guid on " + dbTableCaches + " (guid)");
             db.execSQL("create index if not exists in_caches_lat on " + dbTableCaches + " (latitude)");
@@ -1391,7 +1391,7 @@ public class DataStore {
      * @param remainingWaypointIds
      *            ids of waypoints which shall not be deleted
      */
-    private static void removeOutdatedWaypointsOfCache(final @NonNull Geocache cache, final @NonNull Collection<String> remainingWaypointIds) {
+    private static void removeOutdatedWaypointsOfCache(@NonNull final Geocache cache, @NonNull final Collection<String> remainingWaypointIds) {
         final String idList = StringUtils.join(remainingWaypointIds, ',');
         database.delete(dbTableWaypoints, "geocode = ? AND _id NOT in (" + idList + ")", new String[]{cache.getGeocode()});
     }

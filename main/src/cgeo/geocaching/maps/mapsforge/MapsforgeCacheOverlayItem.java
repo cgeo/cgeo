@@ -9,8 +9,8 @@ import org.mapsforge.v3.core.GeoPoint;
 import android.graphics.drawable.Drawable;
 
 public class MapsforgeCacheOverlayItem extends OverlayItem implements CachesOverlayItemImpl {
-    final private IWaypoint coord;
-    final private boolean applyDistanceRule;
+    private final IWaypoint coord;
+    private final boolean applyDistanceRule;
 
     public MapsforgeCacheOverlayItem(final IWaypoint coordinate, final boolean applyDistanceRule) {
         super(new GeoPoint(coordinate.getCoords().getLatitudeE6(), coordinate.getCoords().getLongitudeE6()), coordinate.getName(), "");

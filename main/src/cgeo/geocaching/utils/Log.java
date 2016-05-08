@@ -17,7 +17,7 @@ public final class Log {
     private static final String TAG = "cgeo";
 
     private static final class StackTraceDebug extends RuntimeException {
-        final static private long serialVersionUID = 27058374L;
+        private static final long serialVersionUID = 27058374L;
     }
 
     /**

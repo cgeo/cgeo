@@ -19,7 +19,7 @@ abstract class AbstractGeneralApp extends AbstractApp implements CacheNavigation
     }
 
     @Override
-    public void navigate(final @NonNull Activity activity, final @NonNull Geocache cache) {
+    public void navigate(@NonNull final Activity activity, @NonNull final Geocache cache) {
         final Intent intent = getLaunchIntent();
         if (intent != null) {
             intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);

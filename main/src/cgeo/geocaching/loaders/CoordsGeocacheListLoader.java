@@ -12,9 +12,9 @@ import rx.functions.Func1;
 import android.content.Context;
 
 public class CoordsGeocacheListLoader extends AbstractSearchLoader {
-    private final @NonNull Geopoint coords;
+    @NonNull private final Geopoint coords;
 
-    public CoordsGeocacheListLoader(final Context context, final @NonNull Geopoint coords) {
+    public CoordsGeocacheListLoader(final Context context, @NonNull final Geopoint coords) {
         super(context);
         this.coords = coords;
     }

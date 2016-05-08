@@ -28,7 +28,7 @@ abstract class AbstractLocusCacheListApp extends AbstractLocusApp implements Cac
      * @see AbstractLocusApp#showInLocus
      */
     @Override
-    public boolean invoke(final @NonNull List<Geocache> cacheList, final @NonNull Activity activity, final @NonNull SearchResult search) {
+    public boolean invoke(@NonNull final List<Geocache> cacheList, @NonNull final Activity activity, @NonNull final SearchResult search) {
         if (CollectionUtils.isEmpty(cacheList)) {
             return false;
         }

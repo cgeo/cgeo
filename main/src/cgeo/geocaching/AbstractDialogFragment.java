@@ -58,8 +58,8 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
 
     protected Geocache cache;
 
-    public final static int RESULT_CODE_SET_TARGET = Activity.RESULT_FIRST_USER;
-    public final static int REQUEST_CODE_TARGET_INFO = 1;
+    public static final int RESULT_CODE_SET_TARGET = Activity.RESULT_FIRST_USER;
+    public static final int REQUEST_CODE_TARGET_INFO = 1;
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
@@ -114,7 +114,7 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
 
     }
 
-    final public void setTitle(final CharSequence title) {
+    public final void setTitle(final CharSequence title) {
         final TextView titleview = ButterKnife.findById(getView(), R.id.actionbar_title);
         if (titleview != null) {
             titleview.setText(title);

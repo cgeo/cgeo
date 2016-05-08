@@ -25,8 +25,10 @@ import rx.subscriptions.Subscriptions;
 
 public class StatusFragment extends Fragment {
 
-    protected @BindView(R.id.status_icon) ImageView statusIcon;
-    protected @BindView(R.id.status_message) TextView statusMessage;
+    @BindView(R.id.status_icon)
+    protected ImageView statusIcon;
+    @BindView(R.id.status_message)
+    protected TextView statusMessage;
 
     private Subscription statusSubscription = Subscriptions.empty();
     private Unbinder unbinder;

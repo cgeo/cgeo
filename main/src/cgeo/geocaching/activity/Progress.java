@@ -17,7 +17,7 @@ public class Progress {
     private ProgressDialog dialog;
     private int progress = 0;
     private int progressDivider = 1;
-    final private boolean hideAbsolute;
+    private final boolean hideAbsolute;
 
     public Progress(final boolean hideAbsolute) {
         this.hideAbsolute = hideAbsolute;

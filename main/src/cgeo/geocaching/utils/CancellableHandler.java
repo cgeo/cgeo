@@ -38,7 +38,7 @@ public abstract class CancellableHandler extends Handler {
     }
 
     @Override
-    final public void handleMessage(final Message message) {
+    public final void handleMessage(final Message message) {
         if (cancelled) {
             return;
         }
@@ -55,7 +55,7 @@ public abstract class CancellableHandler extends Handler {
     /**
      * Add a subscription to the list of subscriptions to be subscribed at cancellation time.
      */
-    final public void unsubscribeIfCancelled(final Subscription subscription) {
+    public final void unsubscribeIfCancelled(final Subscription subscription) {
         subscriptions.add(subscription);
         if (cancelled) {
             // Protect against race conditions
@@ -70,7 +70,7 @@ public abstract class CancellableHandler extends Handler {
      * @param message
      *            the message to handle
      */
-    abstract protected void handleRegularMessage(final Message message);
+    protected abstract void handleRegularMessage(final Message message);
 
     /**
      * Handle a cancel message.

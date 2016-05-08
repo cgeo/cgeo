@@ -1256,7 +1256,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         Send2CgeoDownloader.loadFromWeb(downloadFromWebHandler, listId);
     }
 
-    private void deleteCaches(final @NonNull Collection<Geocache> caches) {
+    private void deleteCaches(@NonNull final Collection<Geocache> caches) {
         new DeleteCachesFromListCommand(this, caches, listId).execute();
     }
 
@@ -1641,7 +1641,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         context.startActivity(cachesIntent);
     }
 
-    public static void startActivityPocketDownload(final @NonNull Activity context, final @NonNull PocketQuery pocketQuery) {
+    public static void startActivityPocketDownload(@NonNull final Activity context, @NonNull final PocketQuery pocketQuery) {
         final String guid = pocketQuery.getGuid();
         if (guid == null) {
             ActivityMixin.showToast(context, CgeoApplication.getInstance().getString(R.string.warn_pocket_query_select));
@@ -1650,7 +1650,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         startActivityWithAttachment(context, pocketQuery);
     }
 
-    public static void startActivityPocket(final @NonNull Activity context, final @NonNull PocketQuery pocketQuery) {
+    public static void startActivityPocket(@NonNull final Activity context, @NonNull final PocketQuery pocketQuery) {
         final String guid = pocketQuery.getGuid();
         if (guid == null) {
             ActivityMixin.showToast(context, CgeoApplication.getInstance().getString(R.string.warn_pocket_query_select));
@@ -1659,7 +1659,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         startActivityPocket(context, pocketQuery, CacheListType.POCKET);
     }
 
-    private static void startActivityWithAttachment(final @NonNull Activity context, final @NonNull PocketQuery pocketQuery) {
+    private static void startActivityWithAttachment(@NonNull final Activity context, @NonNull final PocketQuery pocketQuery) {
         final Uri uri = Uri.parse("https://www.geocaching.com/pocket/downloadpq.ashx?g=" + pocketQuery.getGuid() + "&src=web");
         final Intent cachesIntent = new Intent(Intent.ACTION_VIEW, uri, context, CacheListActivity.class);
         cachesIntent.setDataAndType(uri, "application/zip");
@@ -1667,7 +1667,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         context.startActivity(cachesIntent);
     }
 
-    private static void startActivityPocket(final @NonNull Activity context, final @NonNull PocketQuery pocketQuery, final CacheListType cacheListType) {
+    private static void startActivityPocket(@NonNull final Activity context, @NonNull final PocketQuery pocketQuery, final CacheListType cacheListType) {
         final Intent cachesIntent = new Intent(context, CacheListActivity.class);
         Intents.putListType(cachesIntent, cacheListType);
         cachesIntent.putExtra(Intents.EXTRA_NAME, pocketQuery.getName());

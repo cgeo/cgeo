@@ -17,8 +17,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class ViewportTest extends TestCase {
 
-    final private static @NonNull
-    Viewport vpRef = new Viewport(new Geopoint(-1.0, -2.0), new Geopoint(3.0, 4.0));
+    @NonNull
+    private static final Viewport vpRef = new Viewport(new Geopoint(-1.0, -2.0), new Geopoint(3.0, 4.0));
 
     public static void assertBounds(final Viewport vp) {
         assertEquals(new Geopoint(1.0, 1.0), vp.center);

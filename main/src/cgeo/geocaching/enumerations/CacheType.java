@@ -61,12 +61,12 @@ public enum CacheType {
     }
 
     @NonNull
-    private final static Map<String, CacheType> FIND_BY_ID = new HashMap<>();
+    private static final Map<String, CacheType> FIND_BY_ID = new HashMap<>();
     @NonNull
-    private final static Map<String, CacheType> FIND_BY_PATTERN = new HashMap<>();
+    private static final Map<String, CacheType> FIND_BY_PATTERN = new HashMap<>();
     @NonNull
-    private final static Map<String, CacheType> FIND_BY_GUID = new HashMap<>();
-    @NonNull private final static Map<String, CacheType> FIND_BY_WPT_TYPE = new HashMap<>();
+    private static final Map<String, CacheType> FIND_BY_GUID = new HashMap<>();
+    @NonNull private static final Map<String, CacheType> FIND_BY_WPT_TYPE = new HashMap<>();
 
     static {
         for (final CacheType ct : values()) {

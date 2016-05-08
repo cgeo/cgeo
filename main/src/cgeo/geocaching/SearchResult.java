@@ -35,8 +35,8 @@ import java.util.Set;
 
 public class SearchResult implements Parcelable {
 
-    final private Set<String> geocodes;
-    final private Set<String> filteredGeocodes;
+    private final Set<String> geocodes;
+    private final Set<String> filteredGeocodes;
     @NonNull private StatusCode error = StatusCode.NO_ERROR;
     private String url = "";
     private String[] viewstates = null;
@@ -46,7 +46,7 @@ public class SearchResult implements Parcelable {
      */
     private int totalCountGC = 0;
 
-    final public static Parcelable.Creator<SearchResult> CREATOR = new Parcelable.Creator<SearchResult>() {
+    public static final Parcelable.Creator<SearchResult> CREATOR = new Parcelable.Creator<SearchResult>() {
         @Override
         public SearchResult createFromParcel(final Parcel in) {
             return new SearchResult(in);

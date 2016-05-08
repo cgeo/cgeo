@@ -10,7 +10,7 @@ public abstract class AbstractList {
     public final int id;
     @NonNull
     public final String title;
-    private final static SparseArray<AbstractList> LISTS = new SparseArray<>();
+    private static final SparseArray<AbstractList> LISTS = new SparseArray<>();
 
     public AbstractList(final int id, @NonNull final String title) {
         this.id = id;
