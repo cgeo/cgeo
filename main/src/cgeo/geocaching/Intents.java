@@ -96,12 +96,13 @@ public class Intents {
     private static final String PREFIX_INTERNAL = "cgeo.geocaching.intent.internal.";
     public static final String INTENT_CACHE_CHANGED = PREFIX_INTERNAL + "cache-changed";
 
-    public static Intent putListType(final Intent intent, final @NonNull CacheListType listType) {
+    public static Intent putListType(final Intent intent, @NonNull final CacheListType listType) {
         intent.putExtra(EXTRA_LIST_TYPE, listType.name());
         return intent;
     }
 
-    public static @NonNull CacheListType getListType(final Intent intent) {
+    @NonNull
+    public static CacheListType getListType(final Intent intent) {
         final Bundle extras = intent.getExtras();
         if (extras == null) {
             return CacheListType.OFFLINE;

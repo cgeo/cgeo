@@ -19,7 +19,7 @@ public final class Geopoint implements ICoordinates, Parcelable {
     /**
      * Reusable default object
      */
-    public static final @NonNull Geopoint ZERO = new Geopoint(0.0, 0.0);
+    @NonNull public static final Geopoint ZERO = new Geopoint(0.0, 0.0);
 
     private static final double DEG_TO_RAD = Math.PI / 180;
     private static final double RAD_TO_DEG = 180 / Math.PI;
@@ -275,7 +275,7 @@ public final class Geopoint implements ICoordinates, Parcelable {
         return format(GeopointFormatter.Format.LAT_LON_DECMINUTE);
     }
 
-    abstract public static class GeopointException extends NumberFormatException {
+    public abstract static class GeopointException extends NumberFormatException {
         private static final long serialVersionUID = 1L;
 
         protected GeopointException(final String msg) {

@@ -125,7 +125,7 @@ public abstract class AbstractConnector implements IConnector {
 
     @Override
     @NonNull
-    public String getLicenseText(final @NonNull Geocache cache) {
+    public String getLicenseText(@NonNull final Geocache cache) {
         return StringUtils.EMPTY;
     }
 
@@ -163,7 +163,7 @@ public abstract class AbstractConnector implements IConnector {
     }
 
     @NonNull
-    abstract protected String getCacheUrlPrefix();
+    protected abstract String getCacheUrlPrefix();
 
     @Override
     @NonNull
@@ -179,7 +179,7 @@ public abstract class AbstractConnector implements IConnector {
 
     @Override
     @Nullable
-    public String getLongCacheUrl(final @NonNull Geocache cache) {
+    public String getLongCacheUrl(@NonNull final Geocache cache) {
         return getCacheUrl(cache);
     }
 
@@ -320,7 +320,7 @@ public abstract class AbstractConnector implements IConnector {
      * @return user actions which are always available (independent of cache or trackable)
      */
     @NonNull
-    static public List<UserAction> getDefaultUserActions() {
+    public static List<UserAction> getDefaultUserActions() {
         final List<UserAction> actions = new ArrayList<>();
         if (ContactsAddon.isAvailable()) {
             actions.add(new UserAction(R.string.user_menu_open_contact, new Action1<UserAction.Context>() {

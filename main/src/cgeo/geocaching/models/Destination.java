@@ -4,9 +4,9 @@ import cgeo.geocaching.location.Geopoint;
 
 public final class Destination implements ICoordinates {
 
-    final private long id;
-    final private long date;
-    final private Geopoint coords;
+    private final long id;
+    private final long date;
+    private final Geopoint coords;
 
     public Destination(final long id, final long date, final Geopoint coords) {
         this.id = id;

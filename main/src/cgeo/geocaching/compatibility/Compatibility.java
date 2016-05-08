@@ -33,7 +33,7 @@ public final class Compatibility {
         return LEVEL_13.getDisplaySize();
     }
 
-    public static void importGpxFromStorageAccessFramework(final @NonNull Activity activity, final int requestCodeImportGpx) {
+    public static void importGpxFromStorageAccessFramework(@NonNull final Activity activity, final int requestCodeImportGpx) {
         LEVEL_19.importGpxFromStorageAccessFramework(activity, requestCodeImportGpx);
     }
 

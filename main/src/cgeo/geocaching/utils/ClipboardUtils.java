@@ -25,7 +25,7 @@ public final class ClipboardUtils {
      *            The text to place in the clipboard.
      */
     @SuppressWarnings("deprecation")
-    public static void copyToClipboard(final @NonNull CharSequence text) {
+    public static void copyToClipboard(@NonNull final CharSequence text) {
         // fully qualified name used here to avoid buggy deprecation warning (of javac) on the import statement
         final android.text.ClipboardManager clipboard = (android.text.ClipboardManager) CgeoApplication.getInstance().getSystemService(Context.CLIPBOARD_SERVICE);
         clipboard.setText(text);

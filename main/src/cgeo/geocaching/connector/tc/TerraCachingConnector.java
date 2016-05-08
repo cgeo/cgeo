@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 
 public class TerraCachingConnector extends AbstractConnector {
 
-    @NonNull private final static Pattern PATTERN_GEOCODE = Pattern.compile("(TC|CC|LC)[0-9A-Z]{1,4}", Pattern.CASE_INSENSITIVE);
+    @NonNull private static final Pattern PATTERN_GEOCODE = Pattern.compile("(TC|CC|LC)[0-9A-Z]{1,4}", Pattern.CASE_INSENSITIVE);
 
     @Override
     @NonNull

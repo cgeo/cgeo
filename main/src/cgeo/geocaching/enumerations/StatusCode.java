@@ -33,7 +33,7 @@ public enum StatusCode {
     LOGIMAGE_POST_ERROR(R.string.err_logimage_post_failed);
 
     @StringRes
-    final private int errorString;
+    private final int errorString;
 
     StatusCode(@StringRes final int errorString) {
         this.errorString = errorString;

@@ -27,7 +27,7 @@ class GoogleMapsApp extends AbstractPointNavigationApp {
     }
 
     @Override
-    public void navigate(final @NonNull Activity activity, final @NonNull Geopoint point) {
+    public void navigate(@NonNull final Activity activity, @NonNull final Geopoint point) {
         navigate(activity, point, activity.getString(R.string.waypoint));
     }
 
@@ -49,12 +49,12 @@ class GoogleMapsApp extends AbstractPointNavigationApp {
     }
 
     @Override
-    public void navigate(final @NonNull Activity activity, final @NonNull Geocache cache) {
+    public void navigate(@NonNull final Activity activity, @NonNull final Geocache cache) {
         navigate(activity, cache.getCoords(), cache.getName());
     }
 
     @Override
-    public void navigate(final @NonNull Activity activity, final @NonNull Waypoint waypoint) {
+    public void navigate(@NonNull final Activity activity, @NonNull final Waypoint waypoint) {
         navigate(activity, waypoint.getCoords(), waypoint.getName());
     }
 }

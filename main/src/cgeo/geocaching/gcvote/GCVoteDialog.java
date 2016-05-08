@@ -37,7 +37,7 @@ public class GCVoteDialog {
         // prevents calls from subclass throw new UnsupportedOperationException();
     }
 
-    public static void show(final Activity context, @NonNull final Geocache cache, final @Nullable Runnable afterVoteSent) {
+    public static void show(final Activity context, @NonNull final Geocache cache, @Nullable final Runnable afterVoteSent) {
         final Context themedContext;
 
         if (Settings.isLightSkin() && VERSION.SDK_INT < VERSION_CODES.HONEYCOMB) {
@@ -80,7 +80,7 @@ public class GCVoteDialog {
         dialog.getButton(DialogInterface.BUTTON_POSITIVE).setEnabled(GCVote.isValidRating(cache.getMyVote()));
     }
 
-    private static void vote(@NonNull final Geocache cache, final float rating, final @Nullable Runnable afterVoteSent) {
+    private static void vote(@NonNull final Geocache cache, final float rating, @Nullable final Runnable afterVoteSent) {
         AndroidRxUtils.andThenOnUi(AndroidRxUtils.networkScheduler, new Func0<Boolean>() {
             @Override
             public Boolean call() {

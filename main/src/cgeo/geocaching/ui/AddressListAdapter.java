@@ -23,8 +23,8 @@ import cgeo.geocaching.sensors.Sensors;
 
 public class AddressListAdapter extends ArrayAdapter<Address> {
 
-    final private LayoutInflater inflater;
-    @NonNull final private Geopoint location;
+    private final LayoutInflater inflater;
+    @NonNull private final Geopoint location;
 
     protected static final class ViewHolder extends AbstractViewHolder {
         @BindView(R.id.label) TextView label;

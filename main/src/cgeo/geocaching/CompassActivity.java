@@ -243,7 +243,7 @@ public class CompassActivity extends AbstractActionBarActivity {
         Log.d("destination set: " + newDescription + " (" + dstCoords + ")");
     }
 
-    private void setTarget(final @NonNull Waypoint waypointIn) {
+    private void setTarget(@NonNull final Waypoint waypointIn) {
         waypoint = waypointIn;
         final Geopoint coordinates = waypointIn.getCoords();
         if (coordinates != null) { // handled by WaypointSelectionActionProvider, but the compiler doesn't know
@@ -264,7 +264,7 @@ public class CompassActivity extends AbstractActionBarActivity {
         destinationTextView.setText(dstCoords.toString());
     }
 
-    private void setTargetDescription(final @Nullable String newDescription) {
+    private void setTargetDescription(@Nullable final String newDescription) {
         description = newDescription;
         if (description == null) {
             cacheInfoView.setVisibility(View.GONE);

@@ -27,7 +27,7 @@ public class MapsMeCacheListApp extends AbstractApp implements CacheListApp {
     }
 
     @Override
-    public boolean invoke(@NonNull final List<Geocache> caches, @NonNull final Activity activity, final @NonNull SearchResult search) {
+    public boolean invoke(@NonNull final List<Geocache> caches, @NonNull final Activity activity, @NonNull final SearchResult search) {
         final MWMPoint[] points = new MWMPoint[caches.size()];
         for (int i = 0; i < points.length; i++) {
             final Geocache geocache = caches.get(i);

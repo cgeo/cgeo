@@ -24,7 +24,7 @@ abstract class OruxMapsApp extends AbstractPointNavigationApp {
         super(getString(nameResourceId), intent);
     }
 
-    private void navigate(final @NonNull Activity activity, final @NonNull Geopoint point, final @NonNull String name) {
+    private void navigate(@NonNull final Activity activity, @NonNull final Geopoint point, @NonNull final String name) {
         final Intent intent = new Intent(this.intent);
         final double[] targetLat = { point.getLatitude() };
         final double[] targetLon = { point.getLongitude() };
@@ -39,12 +39,12 @@ abstract class OruxMapsApp extends AbstractPointNavigationApp {
     }
 
     @Override
-    public void navigate(final @NonNull Activity activity, final @NonNull Geopoint point) {
+    public void navigate(@NonNull final Activity activity, @NonNull final Geopoint point) {
         navigate(activity, point, "Waypoint");
     }
 
     @Override
-    public void navigate(final @NonNull Activity activity, final @NonNull Geocache cache) {
+    public void navigate(@NonNull final Activity activity, @NonNull final Geocache cache) {
         final Geopoint coords = cache.getCoords();
         if (coords != null) {
             navigate(activity, coords, cache.getName());
@@ -54,7 +54,7 @@ abstract class OruxMapsApp extends AbstractPointNavigationApp {
     }
 
     @Override
-    public void navigate(final @NonNull Activity activity, final @NonNull Waypoint waypoint) {
+    public void navigate(@NonNull final Activity activity, @NonNull final Waypoint waypoint) {
         final Geopoint coords = waypoint.getCoords();
         if (coords != null) {
             navigate(activity, coords, waypoint.getName());

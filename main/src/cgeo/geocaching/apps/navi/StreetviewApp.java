@@ -28,7 +28,7 @@ class StreetviewApp extends AbstractPointNavigationApp {
     }
 
     @Override
-    public void navigate(final @NonNull Activity activity, final @NonNull Geopoint point) {
+    public void navigate(@NonNull final Activity activity, @NonNull final Geopoint point) {
         try {
             activity.startActivity(new Intent(Intent.ACTION_VIEW,
                     Uri.parse("google.streetview:cbll=" + point.getLatitude() + "," + point.getLongitude())));

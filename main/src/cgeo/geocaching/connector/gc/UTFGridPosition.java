@@ -12,7 +12,7 @@ final class UTFGridPosition {
 
     final int x;
     final int y;
-    private final static Pattern PATTERN_JSON_KEY = Pattern.compile("[^\\d]*" + "(\\d+),\\s*(\\d+)" + "[^\\d]*"); // (12, 34)
+    private static final Pattern PATTERN_JSON_KEY = Pattern.compile("[^\\d]*" + "(\\d+),\\s*(\\d+)" + "[^\\d]*"); // (12, 34)
 
     UTFGridPosition(final int x, final int y) {
         if (x < 0 || x > UTFGrid.GRID_MAXX) {

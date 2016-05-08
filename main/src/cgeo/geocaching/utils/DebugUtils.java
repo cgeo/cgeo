@@ -20,7 +20,7 @@ public class DebugUtils {
         // utility class
     }
 
-    public static void createMemoryDump(final @NonNull Context context) {
+    public static void createMemoryDump(@NonNull final Context context) {
         try {
             final SimpleDateFormat fileNameDateFormat = new SimpleDateFormat("yyyy-MM-dd_hh-mm", Locale.US);
             final File file = FileUtils.getUniqueNamedFile(new File(Environment.getExternalStorageDirectory(),

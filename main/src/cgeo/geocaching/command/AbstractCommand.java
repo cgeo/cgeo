@@ -24,7 +24,7 @@ abstract class AbstractCommand implements Command {
     private final Activity context;
     private String progressMessage = null;
 
-    protected AbstractCommand(final @NonNull Activity context, @StringRes final int progressMessageId) {
+    protected AbstractCommand(@NonNull final Activity context, @StringRes final int progressMessageId) {
         this.context = context;
         if (progressMessageId != 0) {
             this.progressMessage = context.getString(progressMessageId);
@@ -49,7 +49,7 @@ abstract class AbstractCommand implements Command {
      * This runs in a <b>non</b> UI thread.
      * </p>
      */
-    abstract protected void doCommand();
+    protected abstract void doCommand();
 
     /**
      * Reverse operation to undo the effects of {@link #doCommand()}.
@@ -57,7 +57,7 @@ abstract class AbstractCommand implements Command {
      * This runs in a <b>non</b> UI thread.
      * </p>
      */
-    abstract protected void undoCommand();
+    protected abstract void undoCommand();
 
     /**
      * Called after the execution of {@link #doCommand()} or {@link #undoCommand()} finished.
@@ -65,7 +65,7 @@ abstract class AbstractCommand implements Command {
      * This runs in the UI thread.
      * </p>
      */
-    abstract protected void onFinished();
+    protected abstract void onFinished();
 
     /**
      * Called after the execution of {@link #undoCommand()} finished. By default, calls {@link #onFinished()}.

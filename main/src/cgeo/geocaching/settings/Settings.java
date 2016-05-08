@@ -80,8 +80,8 @@ public class Settings {
     private static final String PHONE_MODEL_AND_SDK = Build.MODEL + "/" + Build.VERSION.SDK_INT;
 
     // twitter api keys
-    private final static @NonNull String TWITTER_KEY_CONSUMER_PUBLIC = CryptUtils.rot13("ESnsCvAv3kEupF1GCR3jGj");
-    private final static @NonNull String TWITTER_KEY_CONSUMER_SECRET = CryptUtils.rot13("7vQWceACV9umEjJucmlpFe9FCMZSeqIqfkQ2BnhV9x");
+    @NonNull private static final String TWITTER_KEY_CONSUMER_PUBLIC = CryptUtils.rot13("ESnsCvAv3kEupF1GCR3jGj");
+    @NonNull private static final String TWITTER_KEY_CONSUMER_SECRET = CryptUtils.rot13("7vQWceACV9umEjJucmlpFe9FCMZSeqIqfkQ2BnhV9x");
 
     private static boolean useCompass = true;
 
@@ -337,7 +337,7 @@ public class Settings {
      * @return the credential information
      */
     @NonNull
-    public static Credentials getCredentials(final @NonNull ICredentials connector) {
+    public static Credentials getCredentials(@NonNull final ICredentials connector) {
         return getCredentials(connector.getUsernamePreferenceKey(), connector.getPasswordPreferenceKey());
     }
 
@@ -347,7 +347,7 @@ public class Settings {
      * @param connector the connector to retrieve the login information from
      * @param credentials the credential information to store
      */
-    public static void setCredentials(final @NonNull ICredentials connector, final Credentials credentials) {
+    public static void setCredentials(@NonNull final ICredentials connector, final Credentials credentials) {
         putString(connector.getUsernamePreferenceKey(), credentials.getUsernameRaw());
         putString(connector.getPasswordPreferenceKey(), credentials.getPasswordRaw());
     }
@@ -774,14 +774,14 @@ public class Settings {
         return MapProviderFactory.getDefaultSource();
     }
 
-    private final static int GOOGLEMAP_BASEID = 30;
-    private final static int MAP = 1;
-    private final static int SATELLITE = 2;
+    private static final int GOOGLEMAP_BASEID = 30;
+    private static final int MAP = 1;
+    private static final int SATELLITE = 2;
 
-    private final static int MFMAP_BASEID = 40;
-    private final static int MAPNIK = 1;
-    private final static int CYCLEMAP = 3;
-    private final static int OFFLINE = 4;
+    private static final int MFMAP_BASEID = 40;
+    private static final int MAPNIK = 1;
+    private static final int CYCLEMAP = 3;
+    private static final int OFFLINE = 4;
     private static final int HISTORY_SIZE = 10;
 
     /**
@@ -1227,11 +1227,11 @@ public class Settings {
         storePhoneModelAndSdk();
     }
 
-    static private boolean outdatedPhoneModelOrSdk() {
+    private static boolean outdatedPhoneModelOrSdk() {
         return !StringUtils.equals(PHONE_MODEL_AND_SDK, getString(R.string.pref_phone_model_and_sdk, null));
     }
 
-    static private void storePhoneModelAndSdk() {
+    private static void storePhoneModelAndSdk() {
         putString(R.string.pref_phone_model_and_sdk, PHONE_MODEL_AND_SDK);
     }
 
@@ -1278,7 +1278,7 @@ public class Settings {
      * @return the avatar url
      */
     @NonNull
-    public static String getAvatarUrl(final @NonNull ICredentials connector) {
+    public static String getAvatarUrl(@NonNull final ICredentials connector) {
         return getString(connector.getAvatarPreferenceKey(), null);
     }
 
@@ -1288,7 +1288,7 @@ public class Settings {
      * @param connector the connector to retrieve the avatar information from
      * @param avatarUrl the avatar url information to store
      */
-    public static void setAvatarUrl(final @NonNull ICredentials connector, final String avatarUrl) {
+    public static void setAvatarUrl(@NonNull final ICredentials connector, final String avatarUrl) {
         putString(connector.getAvatarPreferenceKey(), avatarUrl);
     }
 }

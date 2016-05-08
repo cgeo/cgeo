@@ -41,13 +41,13 @@ import rx.functions.Func1;
 public final class Network {
 
     /** User agent id */
-    private final static String PC_USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64; rv:9.0.1) Gecko/20100101 Firefox/9.0.1";
+    private static final String PC_USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64; rv:9.0.1) Gecko/20100101 Firefox/9.0.1";
     /** Native user agent, taken from a Android 2.2 Nexus **/
-    private final static String NATIVE_USER_AGENT = "Mozilla/5.0 (Linux; U; Android 2.2; en-us; Nexus One Build/FRF91) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1";
+    private static final String NATIVE_USER_AGENT = "Mozilla/5.0 (Linux; U; Android 2.2; en-us; Nexus One Build/FRF91) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1";
 
     private static final Pattern PATTERN_PASSWORD = Pattern.compile("(?<=[\\?&])[Pp]ass(w(or)?d)?=[^&#$]+");
 
-    private final static OkHttpClient OK_HTTP_CLIENT = new OkHttpClient.Builder()
+    private static final OkHttpClient OK_HTTP_CLIENT = new OkHttpClient.Builder()
             .connectTimeout(30, TimeUnit.SECONDS)
             .readTimeout(30, TimeUnit.SECONDS)
             .writeTimeout(30, TimeUnit.SECONDS)
@@ -414,7 +414,7 @@ public final class Network {
         }
     }
 
-    final public static Func1<Response, Single<String>> getResponseData = new Func1<Response, Single<String>>() {
+    public static final Func1<Response, Single<String>> getResponseData = new Func1<Response, Single<String>>() {
         @Override
         public Single<String> call(final Response response) {
             if (response.isSuccessful()) {
@@ -431,7 +431,7 @@ public final class Network {
     /**
      * Filter only successful responses for use with flatMap.
      */
-    final public static Func1<Response, Single<Response>> withSuccess = new Func1<Response, Single<Response>>() {
+    public static final Func1<Response, Single<Response>> withSuccess = new Func1<Response, Single<Response>>() {
         @Override
         public Single<Response> call(final Response response) {
             return response.isSuccessful() ? Single.just(response) : Single.<Response>error(new IOException("unsuccessful response: " + response));
@@ -448,7 +448,7 @@ public final class Network {
         Completable.fromSingle(response.flatMap(withSuccess)).await();
     }
 
-    final public static Func1<Response, Single<String>> getResponseDataReplaceWhitespace = new Func1<Response, Single<String>>() {
+    public static final Func1<Response, Single<String>> getResponseDataReplaceWhitespace = new Func1<Response, Single<String>>() {
         @Override
         public Single<String> call(final Response response) {
             return getResponseData.call(response).map(new Func1<String, String>() {

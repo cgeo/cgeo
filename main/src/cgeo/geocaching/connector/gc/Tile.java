@@ -45,7 +45,7 @@ public class Tile {
         }
     }
 
-    public final static TileCache cache = new TileCache();
+    public static final TileCache cache = new TileCache();
 
     private final int tileX;
     private final int tileY;
@@ -268,7 +268,7 @@ public class Tile {
         }
     }
 
-    public boolean containsPoint(final @NonNull ICoordinates point) {
+    public boolean containsPoint(@NonNull final ICoordinates point) {
         return viewPort.contains(point);
     }
 

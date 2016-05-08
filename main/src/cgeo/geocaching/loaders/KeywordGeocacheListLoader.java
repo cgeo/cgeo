@@ -11,9 +11,9 @@ import android.content.Context;
 
 public class KeywordGeocacheListLoader extends AbstractSearchLoader {
 
-    private final @NonNull String keyword;
+    @NonNull private final String keyword;
 
-    public KeywordGeocacheListLoader(final Context context, final @NonNull String keyword) {
+    public KeywordGeocacheListLoader(final Context context, @NonNull final String keyword) {
         super(context);
         this.keyword = keyword;
     }

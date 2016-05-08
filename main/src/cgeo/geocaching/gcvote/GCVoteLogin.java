@@ -24,7 +24,7 @@ public class GCVoteLogin extends AbstractLogin {
 
     private static class SingletonHolder {
         @NonNull
-        private final static GCVoteLogin INSTANCE = new GCVoteLogin();
+        private static final GCVoteLogin INSTANCE = new GCVoteLogin();
     }
 
     @NonNull

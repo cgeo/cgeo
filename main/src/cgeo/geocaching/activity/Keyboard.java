@@ -14,7 +14,7 @@ import android.view.inputmethod.InputMethodManager;
 public class Keyboard {
     private final Activity activity;
 
-    public Keyboard(final @NonNull Activity activity) {
+    public Keyboard(@NonNull final Activity activity) {
         this.activity = activity;
     }
 

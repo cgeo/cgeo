@@ -32,7 +32,7 @@ class UnknownConnector extends AbstractConnector {
     }
 
     @Override
-    public boolean canHandle(final @NonNull String geocode) {
+    public boolean canHandle(@NonNull final String geocode) {
         return StringUtils.isNotBlank(geocode);
     }
 

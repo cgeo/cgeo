@@ -16,7 +16,7 @@ import cgeo.geocaching.models.Trackable;
 
 public class TrackableListAdapter extends ArrayAdapter<Trackable> {
 
-    final private LayoutInflater inflater;
+    private final LayoutInflater inflater;
 
     protected static final class ViewHolder extends AbstractViewHolder {
         @BindView(R.id.trackable_image_brand) ImageView imageBrand;

@@ -700,7 +700,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         }
     }
 
-    private final static class LoadCacheHandler extends SimpleCancellableHandler {
+    private static final class LoadCacheHandler extends SimpleCancellableHandler {
 
         LoadCacheHandler(final CacheDetailActivity activity, final Progress progress) {
             super(activity, progress);
@@ -871,7 +871,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         INVENTORY(R.string.cache_inventory),
         IMAGES(R.string.cache_images);
 
-        final private int titleStringId;
+        private final int titleStringId;
 
         Page(final int titleStringId) {
             this.titleStringId = titleStringId;

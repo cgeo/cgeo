@@ -28,7 +28,7 @@ public class AppInvite {
         return ProcessUtils.isIntentAvailable("com.google.android.gms.appinvite.ACTION_APP_INVITE");
     }
 
-    public static void send(@NonNull final Activity activity, final @NonNull String message) {
+    public static void send(@NonNull final Activity activity, @NonNull final String message) {
         sendInvite(activity, message, null);
     }
 

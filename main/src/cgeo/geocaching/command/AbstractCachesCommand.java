@@ -12,7 +12,7 @@ public abstract class AbstractCachesCommand extends AbstractCommand {
 
     @NonNull private final Collection<Geocache> caches;
 
-    public AbstractCachesCommand(final @NonNull Activity context, final @NonNull Collection<Geocache> caches, final int progressMessage) {
+    public AbstractCachesCommand(@NonNull final Activity context, @NonNull final Collection<Geocache> caches, final int progressMessage) {
         super(context, progressMessage);
         this.caches = caches;
     }

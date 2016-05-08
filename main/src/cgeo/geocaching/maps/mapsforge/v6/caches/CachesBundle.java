@@ -17,13 +17,13 @@ import java.util.Set;
  */
 public class CachesBundle {
 
-    private final static int BASE_SEPARATOR = 0;
-    private final static int STORED_SEPARATOR = 1;
-    private final static int LIVE_SEPARATOR = 2;
+    private static final int BASE_SEPARATOR = 0;
+    private static final int STORED_SEPARATOR = 1;
+    private static final int LIVE_SEPARATOR = 2;
 
-    private final static int BASE_OVERLAY_ID = 0;
-    private final static int STORED_OVERLAY_ID = 1;
-    private final static int LIVE_OVERLAY_ID = 2;
+    private static final int BASE_OVERLAY_ID = 0;
+    private static final int STORED_OVERLAY_ID = 1;
+    private static final int LIVE_OVERLAY_ID = 2;
 
     private final MfMapView mapView;
     private final MapHandlers mapHandlers;

@@ -36,7 +36,7 @@ abstract class SygicNavigationApp extends AbstractPointNavigationApp {
     }
 
     @Override
-    public void navigate(final @NonNull Activity activity, final @NonNull Geopoint coords) {
+    public void navigate(@NonNull final Activity activity, @NonNull final Geopoint coords) {
         final String str = "com.sygic.aura://coordinate|" + coords.getLongitude() + "|" + coords.getLatitude() + "|" + mode;
         activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(str)));
     }

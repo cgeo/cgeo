@@ -79,7 +79,8 @@ public class FilterActivity extends AbstractActionBarActivity {
         });
     }
 
-    public static @Nullable IFilter getFilterFromPosition(final int groupPosition, final int childPosition) {
+    @Nullable
+    public static IFilter getFilterFromPosition(final int groupPosition, final int childPosition) {
         if (groupPosition < 0 || childPosition < 0) {
             return null;
         }

@@ -9,6 +9,6 @@ import org.eclipse.jdt.annotation.NonNull;
  * Connector capability to ignore caches.
  */
 public interface IgnoreCapability extends IConnector {
-    boolean canIgnoreCache(final @NonNull Geocache cache);
-    void ignoreCache(final @NonNull Geocache cache);
+    boolean canIgnoreCache(@NonNull final Geocache cache);
+    void ignoreCache(@NonNull final Geocache cache);
 }

@@ -22,11 +22,11 @@ public class StatusUpdater {
         // Utility class
     }
 
-    static public class Status {
-        final public String message;
-        final public String messageId;
-        final public String icon;
-        final public String url;
+    public static class Status {
+        public final String message;
+        public final String messageId;
+        public final String icon;
+        public final String url;
 
         private Status(final String message, final String messageId, final String icon, final String url) {
             this.message = message;
@@ -42,10 +42,10 @@ public class StatusUpdater {
             url = response.path("url").asText(null);
         }
 
-        final static public Status CLOSEOUT_STATUS =
+        public static final Status CLOSEOUT_STATUS =
                 new Status("", "status_closeout_warning", "attribute_abandonedbuilding", "http://faq.cgeo.org/#legacy");
 
-        final static public Status defaultStatus(final Status upToDate) {
+        public static final Status defaultStatus(final Status upToDate) {
             if (upToDate != null && upToDate.message != null) {
                 return upToDate;
             }
@@ -53,7 +53,7 @@ public class StatusUpdater {
         }
     }
 
-    final static public BehaviorSubject<Status> LATEST_STATUS = BehaviorSubject.create(Status.defaultStatus(null));
+    public static final BehaviorSubject<Status> LATEST_STATUS = BehaviorSubject.create(Status.defaultStatus(null));
 
     static {
         AndroidRxUtils.networkScheduler.createWorker().schedulePeriodically(new Action0() {

@@ -66,12 +66,12 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
     private List<Geocache> originalList = null;
     private final boolean isLiveList = Settings.isLiveList();
 
-    final private Set<CompassMiniView> compasses = new LinkedHashSet<>();
-    final private Set<DistanceView> distances = new LinkedHashSet<>();
-    final private CacheListType cacheListType;
-    final private Resources res;
+    private final Set<CompassMiniView> compasses = new LinkedHashSet<>();
+    private final Set<DistanceView> distances = new LinkedHashSet<>();
+    private final CacheListType cacheListType;
+    private final Resources res;
     /** Resulting list of caches */
-    final private List<Geocache> list;
+    private final List<Geocache> list;
     private boolean eventsOnly;
     private boolean inverseSort = false;
     /**
@@ -549,9 +549,9 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
 
         private final Geocache cache;
         private final GestureDetector gestureDetector;
-        private final @NonNull WeakReference<CacheListAdapter> adapterRef;
+        @NonNull private final WeakReference<CacheListAdapter> adapterRef;
 
-        TouchListener(final Geocache cache, final @NonNull CacheListAdapter adapter) {
+        TouchListener(final Geocache cache, @NonNull final CacheListAdapter adapter) {
             this.cache = cache;
             gestureDetector = new GestureDetector(adapter.getContext(), new FlingGesture(cache, adapter));
             adapterRef = new WeakReference<>(adapter);
@@ -591,9 +591,9 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
     private static class FlingGesture extends GestureDetector.SimpleOnGestureListener {
 
         private final Geocache cache;
-        private final @NonNull WeakReference<CacheListAdapter> adapterRef;
+        @NonNull private final WeakReference<CacheListAdapter> adapterRef;
 
-        FlingGesture(final Geocache cache, final @NonNull CacheListAdapter adapter) {
+        FlingGesture(final Geocache cache, @NonNull final CacheListAdapter adapter) {
             this.cache = cache;
             adapterRef = new WeakReference<>(adapter);
         }

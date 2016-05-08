@@ -38,7 +38,7 @@ public abstract class AbstractFileListActivity<T extends ArrayAdapter<File>> ext
     protected int listId = StoredList.STANDARD_LIST_ID;
     private String[] extensions;
 
-    final private Handler changeWaitDialogHandler = new Handler() {
+    private final Handler changeWaitDialogHandler = new Handler() {
         private String searchInfo;
 
         @Override
@@ -63,7 +63,7 @@ public abstract class AbstractFileListActivity<T extends ArrayAdapter<File>> ext
         }
     };
 
-    final private Handler loadFilesHandler = new Handler() {
+    private final Handler loadFilesHandler = new Handler() {
 
         @Override
         public void handleMessage(final Message msg) {

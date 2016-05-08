@@ -81,7 +81,7 @@ public class GPXImporter {
      * @param uri
      *            URI of the file to import
      */
-    public void importGPX(final Uri uri, final @Nullable String mimeType, final @Nullable String pathName) {
+    public void importGPX(final Uri uri, @Nullable final String mimeType, @Nullable final String pathName) {
         final ContentResolver contentResolver = fromActivity.getContentResolver();
 
         Log.i("importGPX: " + uri + ", mimetype=" + mimeType);
@@ -109,7 +109,8 @@ public class GPXImporter {
         }
     }
 
-    private static @NonNull FileType getFileTypeFromPathName(
+    @NonNull
+    private static FileType getFileTypeFromPathName(
             final String pathName) {
         if (StringUtils.endsWithIgnoreCase(pathName, GPX_FILE_EXTENSION)) {
                 return FileType.GPX;
@@ -121,7 +122,8 @@ public class GPXImporter {
         return FileType.UNKNOWN;
     }
 
-    private static @NonNull FileType getFileTypeFromMimeType(
+    @NonNull
+    private static FileType getFileTypeFromMimeType(
             final String mimeType) {
         if (GPX_MIME_TYPES.contains(mimeType)) {
             return FileType.GPX;
@@ -160,14 +162,14 @@ public class GPXImporter {
         importGPX(uri, mimeType, null);
     }
 
-    final private CancellableHandler progressHandler = new CancellableHandler() {
+    private final CancellableHandler progressHandler = new CancellableHandler() {
         @Override
         public void handleRegularMessage(final Message msg) {
             progress.setProgress(msg.arg1);
         }
     };
 
-    final private Handler importStepHandler = new Handler() {
+    private final Handler importStepHandler = new Handler() {
         @Override
         public void handleMessage(final Message msg) {
             switch (msg.what) {

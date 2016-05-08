@@ -165,7 +165,7 @@ public class CompassView extends View {
      *            the actual value
      * @return the new value
      */
-    static protected float smoothUpdate(final float goal, final float actual) {
+    protected static float smoothUpdate(final float goal, final float actual) {
         final double diff = AngleUtils.difference(actual, goal);
 
         double offset = 0;

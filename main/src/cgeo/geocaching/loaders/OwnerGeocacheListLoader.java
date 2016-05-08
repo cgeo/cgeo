@@ -11,9 +11,9 @@ import android.content.Context;
 
 public class OwnerGeocacheListLoader extends AbstractSearchLoader {
 
-    private final @NonNull String username;
+    @NonNull private final String username;
 
-    public OwnerGeocacheListLoader(final Context context, final @NonNull String username) {
+    public OwnerGeocacheListLoader(final Context context, @NonNull final String username) {
         super(context);
         this.username = username;
     }

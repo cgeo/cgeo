@@ -17,7 +17,7 @@ import java.util.regex.Pattern;
  */
 public class WhitespaceTest extends AbstractResourceInstrumentationTestCase {
 
-    private final static int EXPECTED_SIZE = 122907;
+    private static final int EXPECTED_SIZE = 122907;
     private String data;
 
     @Override

@@ -23,9 +23,9 @@ public class FilterRegistry {
 
     static class FactoryEntry {
         private final String name;
-        private final @NonNull Class<? extends IFilterFactory> filterFactory;
+        @NonNull private final Class<? extends IFilterFactory> filterFactory;
 
-        FactoryEntry(final String name, final @NonNull Class<? extends IFilterFactory> filterFactory) {
+        FactoryEntry(final String name, @NonNull final Class<? extends IFilterFactory> filterFactory) {
             this.name = name;
             this.filterFactory = filterFactory;
         }
@@ -66,7 +66,7 @@ public class FilterRegistry {
         register(R.string.caches_filter_personal_data, PersonalDataFilterFactory.class);
     }
 
-    private void register(@StringRes final int resourceId, final @NonNull Class<? extends IFilterFactory> factoryClass) {
+    private void register(@StringRes final int resourceId, @NonNull final Class<? extends IFilterFactory> factoryClass) {
         final Resources res = CgeoApplication.getInstance().getResources();
         registry.add(new FactoryEntry(res.getString(resourceId), factoryClass));
     }

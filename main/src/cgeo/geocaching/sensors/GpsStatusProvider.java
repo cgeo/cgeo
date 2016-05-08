@@ -21,9 +21,9 @@ public class GpsStatusProvider {
     }
 
     public static class Status {
-        final public boolean gpsEnabled;
-        final public int satellitesVisible;
-        final public int satellitesFixed;
+        public final boolean gpsEnabled;
+        public final int satellitesVisible;
+        public final int satellitesFixed;
 
         public Status(final boolean gpsEnabled, final int satellitesVisible, final int satellitesFixed) {
             this.gpsEnabled = gpsEnabled;

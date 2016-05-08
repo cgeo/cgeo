@@ -72,8 +72,8 @@ public class ParametersTest extends TestCase {
 
     public static void testUnreservedCharactersMustNotBeEncoded() {
         for (Character c : UNRESERVED) {
-            final @NonNull
-            String charAsString = String.valueOf(c);
+            @NonNull
+            final String charAsString = String.valueOf(c);
             assertEquals("wrong OAuth encoding for " + c, charAsString, Parameters.percentEncode(charAsString));
         }
     }
@@ -82,8 +82,8 @@ public class ParametersTest extends TestCase {
         for (int i = 32; i < 127; i++) {
             final Character c = (char) i;
             if (!UNRESERVED.contains(c)) {
-                final @NonNull
-                String charAsString = String.valueOf(c);
+                @NonNull
+                final String charAsString = String.valueOf(c);
                 final String encoded = Parameters.percentEncode(charAsString);
                 assertThat(charAsString).overridingErrorMessage("Character '" + charAsString + "' not encoded").isNotEqualTo(encoded);
                 assertThat(encoded).startsWith("%");

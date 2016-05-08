@@ -311,7 +311,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         }
     }
 
-    final private GeoDirHandler geoDirHandler = new GeoDirHandler() {
+    private final GeoDirHandler geoDirHandler = new GeoDirHandler() {
         @Override
         public void updateGeoData(final GeoData geo) {
             try {
@@ -480,7 +480,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         return currentState;
     }
 
-    private boolean isWaypointChanged(final @NonNull ActivityData currentState) {
+    private boolean isWaypointChanged(@NonNull final ActivityData currentState) {
         return waypoint == null
                 || !Geopoint.equals(currentState.coords, waypoint.getCoords())
                 || !StringUtils.equals(currentState.name, waypoint.getName())

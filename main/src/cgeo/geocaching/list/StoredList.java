@@ -65,7 +65,7 @@ public final class StoredList extends AbstractList {
         private final CgeoApplication app;
         private final Resources res;
 
-        public UserInterface(final @NonNull Activity activity) {
+        public UserInterface(@NonNull final Activity activity) {
             this.activityRef = new WeakReference<>(activity);
             app = CgeoApplication.getInstance();
             res = app.getResources();
@@ -79,11 +79,11 @@ public final class StoredList extends AbstractList {
             promptForMultiListSelection(titleId, runAfterwards, onlyConcreteLists, Collections.<Integer>emptySet(), currentListIds, ListNameMemento.EMPTY);
         }
 
-        public void promptForListSelection(final int titleId, @NonNull final Action1<Integer> runAfterwards, final boolean onlyConcreteLists, final int exceptListId, final @NonNull ListNameMemento listNameMemento) {
+        public void promptForListSelection(final int titleId, @NonNull final Action1<Integer> runAfterwards, final boolean onlyConcreteLists, final int exceptListId, @NonNull final ListNameMemento listNameMemento) {
             promptForListSelection(titleId, runAfterwards, onlyConcreteLists, Collections.singleton(exceptListId), listNameMemento);
         }
 
-        public void promptForMultiListSelection(final int titleId, @NonNull final Action1<Set<Integer>> runAfterwards, final boolean onlyConcreteLists, final Set<Integer> exceptListIds, final Set<Integer> currentListIds, final @NonNull ListNameMemento listNameMemento) {
+        public void promptForMultiListSelection(final int titleId, @NonNull final Action1<Set<Integer>> runAfterwards, final boolean onlyConcreteLists, final Set<Integer> exceptListIds, final Set<Integer> currentListIds, @NonNull final ListNameMemento listNameMemento) {
             final List<AbstractList> lists = getMenuLists(onlyConcreteLists, exceptListIds, currentListIds);
 
             final CharSequence[] listTitles = new CharSequence[lists.size()];
@@ -131,7 +131,7 @@ public final class StoredList extends AbstractList {
             builder.create().show();
         }
 
-        public void promptForListSelection(final int titleId, @NonNull final Action1<Integer> runAfterwards, final boolean onlyConcreteLists, final Set<Integer> exceptListIds, final @NonNull ListNameMemento listNameMemento) {
+        public void promptForListSelection(final int titleId, @NonNull final Action1<Integer> runAfterwards, final boolean onlyConcreteLists, final Set<Integer> exceptListIds, @NonNull final ListNameMemento listNameMemento) {
             final List<AbstractList> lists = getMenuLists(onlyConcreteLists, exceptListIds, Collections.<Integer>emptySet());
 
             final List<CharSequence> listsTitle = new ArrayList<>();

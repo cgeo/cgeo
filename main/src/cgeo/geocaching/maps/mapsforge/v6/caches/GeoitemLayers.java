@@ -11,7 +11,7 @@ import java.util.Iterator;
 
 public class GeoitemLayers implements Collection<GeoitemLayer> {
 
-    final private HashMap<String, GeoitemLayer> geoitems = new HashMap<>();
+    private final HashMap<String, GeoitemLayer> geoitems = new HashMap<>();
 
     public Collection<String> getGeocodes() {
         return new ArrayList<>(geoitems.keySet());

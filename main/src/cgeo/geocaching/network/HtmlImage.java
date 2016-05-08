@@ -69,20 +69,20 @@ public class HtmlImage implements Html.ImageGetter {
     };
     public static final String SHARED = "shared";
 
-    @NonNull final private String geocode;
+    @NonNull private final String geocode;
     /**
      * on error: return large error image, if {@code true}, otherwise empty 1x1 image
      */
-    final private boolean returnErrorImage;
-    final private boolean onlySave;
-    final private boolean userInitiatedRefresh;
-    final private int maxWidth;
-    final private int maxHeight;
-    final private Resources resources;
+    private final boolean returnErrorImage;
+    private final boolean onlySave;
+    private final boolean userInitiatedRefresh;
+    private final int maxWidth;
+    private final int maxHeight;
+    private final Resources resources;
     protected final TextView view;
-    final private Map<String, BitmapDrawable> cache = new HashMap<>();
+    private final Map<String, BitmapDrawable> cache = new HashMap<>();
 
-    final private ObservableCache<String, BitmapDrawable> observableCache = new ObservableCache<>(new Func1<String, Observable<BitmapDrawable>>() {
+    private final ObservableCache<String, BitmapDrawable> observableCache = new ObservableCache<>(new Func1<String, Observable<BitmapDrawable>>() {
         @Override
         public Observable<BitmapDrawable> call(final String url) {
             return fetchDrawableUncached(url);
@@ -92,9 +92,9 @@ public class HtmlImage implements Html.ImageGetter {
     // Background loading
     // .cache() is not yet available on Completable instances as of RxJava 1.1.1, so we have to go back
     // to the observable world to achieve the caching.
-    final private PublishSubject<Completable> loading = PublishSubject.create();
-    final private Completable waitForEnd = Completable.merge(loading).toObservable().cache().toCompletable();
-    final private CompositeSubscription subscription = new CompositeSubscription(waitForEnd.subscribe());
+    private final PublishSubject<Completable> loading = PublishSubject.create();
+    private final Completable waitForEnd = Completable.merge(loading).toObservable().cache().toCompletable();
+    private final CompositeSubscription subscription = new CompositeSubscription(waitForEnd.subscribe());
 
     /**
      * Create a new HtmlImage object with different behaviors depending on <tt>onlySave</tt> and <tt>view</tt> values.
