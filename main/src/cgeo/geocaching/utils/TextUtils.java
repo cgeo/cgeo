@@ -214,7 +214,7 @@ public final class TextUtils {
         while (--i >= 0 && Character.isWhitespace(source.charAt(i))) {
         }
 
-        if (i < length) {
+        if (i < length - 1) {
             return source.subSequence(0, i + 1);
         }
         return source;
