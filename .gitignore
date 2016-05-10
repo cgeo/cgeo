@@ -23,10 +23,10 @@ private.properties
 /main/project/settings/drawable-mdpi/
 .directory
 .gradle/
-.idea/libraries/
+.idea/
+*.iml
 main/build/
 mapswithme-api/build/
 build
 main/usage.txt
 main/gradle.properties
-.idea/uiDesigner.xml
