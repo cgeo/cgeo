@@ -11,23 +11,21 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class ParametersTest extends TestCase {
 
-    static List<Character> UNRESERVED;
+    static final List<Character> UNRESERVED = new ArrayList<>();
 
     static {
         // unreserved characters: ALPHA / DIGIT / "-" / "." / "_" / "~"
-        final ArrayList<Character> unreserved = new ArrayList<>();
         for (int i = 65; i <= 90; i++) {
-            unreserved.add((char) i); // uppercase
-            unreserved.add((char) (i + 32)); // lowercase
+            UNRESERVED.add((char) i); // uppercase
+            UNRESERVED.add((char) (i + 32)); // lowercase
         }
         for (int i = 0; i < 10; i++) {
-            unreserved.add(Character.forDigit(i, 10));
+            UNRESERVED.add(Character.forDigit(i, 10));
         }
-        unreserved.add('-');
-        unreserved.add('.');
-        unreserved.add('_');
-        unreserved.add('~');
-        ParametersTest.UNRESERVED = unreserved;
+        UNRESERVED.add('-');
+        UNRESERVED.add('.');
+        UNRESERVED.add('_');
+        UNRESERVED.add('~');
     }
 
     public static void testException() {
