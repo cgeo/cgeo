@@ -11,7 +11,7 @@
     <property name="file" value="https://raw.githubusercontent.com/cgeo/cgeo/master/config/quality/checkstyle/suppressions.xml"/>
   </module>
   <module name="NewlineAtEndOfFile">
-    <property name="severity" value="info" />
+    <property name="severity" value="ignore" />
   </module>
   <module name="TreeWalker">
     <property name="tabWidth" value="1" />
