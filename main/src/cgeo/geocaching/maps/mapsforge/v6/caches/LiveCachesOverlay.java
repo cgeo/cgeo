@@ -83,13 +83,12 @@ public class LiveCachesOverlay extends AbstractCachesOverlay {
                         overlay.downloading = true;
                         previousViewport = viewportNow;
                         overlay.download();
-                        overlay.refreshed();
-                        overlay.downloading = false;
                     }
                 }
             } catch (final Exception e) {
                 Log.w("LiveCachesOverlay.startLoadtimer.start", e);
             } finally {
+                overlay.refreshed();
                 overlay.downloading = false;
             }
         }
