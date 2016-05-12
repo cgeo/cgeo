@@ -617,6 +617,10 @@ public class NewMap extends AbstractActionBarActivity {
 
         //Target view
         this.targetView = new TargetView((TextView) findViewById(R.id.target), StringUtils.EMPTY, StringUtils.EMPTY);
+        final Geocache target = getCurrentTargetCache();
+        if (target != null) {
+            targetView.setTarget(target.getGeocode(), target.getName());
+        }
 
         this.resumeSubscription = Subscriptions.from(this.geoDirUpdate.start(GeoDirHandler.UPDATE_GEODIR));
     }
