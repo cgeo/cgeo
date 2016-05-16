@@ -454,7 +454,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
         actions.add(new UserAction(R.string.user_menu_send_message, new Action1<UserAction.Context>() {
 
             @Override
-            public void call(final cgeo.geocaching.connector.UserAction.Context context) {
+            public void call(final UserAction.Context context) {
                 try {
                     context.activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.geocaching.com/email/?u=" + Network.encode(context.userName))));
                 } catch (final ActivityNotFoundException e) {

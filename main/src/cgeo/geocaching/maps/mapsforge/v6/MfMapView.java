@@ -90,7 +90,7 @@ public class MfMapView extends MapView {
             final double dyMax = MercatorProjection.longitudeToPixelX(viewport.getLatitudeMax(), mapSize) / tileSize;
             final double dyMin = MercatorProjection.longitudeToPixelX(viewport.getLatitudeMin(), mapSize) / tileSize;
             final double zoomY = Math.floor(-Math.log(3.8) * Math.log(Math.abs(dyMax - dyMin)) + getHeight() / tileSize);
-            final byte newZoom = Double.valueOf(Math.min(zoomX, zoomY)).byteValue();
+            final byte newZoom = (byte) Math.min(zoomX, zoomY);
             getModel().mapViewPosition.setZoomLevel(newZoom);
         }
         getModel().mapViewPosition.setCenter(new LatLong(viewport.getCenter().getLatitude(), viewport.getCenter().getLongitude()));

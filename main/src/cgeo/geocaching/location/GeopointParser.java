@@ -114,13 +114,13 @@ class GeopointParser {
         try {
             if (matcher.find()) {
                 final double sign = matcher.group(1).equalsIgnoreCase("S") || matcher.group(1).equalsIgnoreCase("W") ? -1.0 : 1.0;
-                final double degree = Integer.valueOf(StringUtils.defaultIfEmpty(StringUtils.stripEnd(matcher.group(2), "°"), "0")).doubleValue();
+                final double degree = Double.parseDouble(StringUtils.defaultIfEmpty(StringUtils.stripEnd(matcher.group(2), "°"), "0"));
 
                 double minutes = 0.0;
                 double seconds = 0.0;
 
                 if (matcher.group(3) != null) {
-                    minutes = Integer.valueOf(matcher.group(3)).doubleValue();
+                    minutes = Double.parseDouble(matcher.group(3));
 
                     if (matcher.group(4) != null) {
                         seconds = Double.parseDouble("0." + matcher.group(4)) * 60.0;
