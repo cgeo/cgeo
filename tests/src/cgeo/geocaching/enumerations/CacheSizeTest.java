@@ -1,10 +1,10 @@
 package cgeo.geocaching.enumerations;
 
-import junit.framework.TestCase;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Locale;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import junit.framework.TestCase;
 
 public class CacheSizeTest extends TestCase {
 
@@ -34,4 +34,10 @@ public class CacheSizeTest extends TestCase {
         assertThat(CacheSize.getById("3")).isEqualTo(CacheSize.REGULAR);
         assertThat(CacheSize.getById("-1")).isEqualTo(CacheSize.UNKNOWN);
     }
+
+    public static void testGetByIdVeryLarge() throws Exception {
+        assertThat(CacheSize.getById("Very large")).isEqualTo(CacheSize.VERY_LARGE);
+        assertThat(CacheSize.getById("very_large")).as("size from website icon").isEqualTo(CacheSize.VERY_LARGE);
+    }
+
 }
