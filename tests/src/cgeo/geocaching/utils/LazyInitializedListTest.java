@@ -1,18 +1,18 @@
 package cgeo.geocaching.utils;
 
-import junit.framework.TestCase;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import junit.framework.TestCase;
 
 public class LazyInitializedListTest extends TestCase {
 
     private static final class MockedLazyInitializedList extends LazyInitializedList<String> {
         @Override
         public List<String> call() {
-            return new ArrayList<String>();
+            return new ArrayList<>();
         }
     }
 

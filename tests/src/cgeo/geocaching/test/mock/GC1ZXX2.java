@@ -92,7 +92,7 @@ public class GC1ZXX2 extends MockedCache {
     public Date getHiddenDate() {
         try {
             return GCLogin.parseGcCustomDate("2009-10-16", getDateFormat());
-        } catch (ParseException e) {
+        } catch (final ParseException e) {
             // intentionally left blank
         }
         return null;
@@ -110,7 +110,7 @@ public class GC1ZXX2 extends MockedCache {
                 "kids_yes",
                 "dogs_yes"
         };
-        return new MockedLazyInitializedList<String>(attributes);
+        return new MockedLazyInitializedList<>(attributes);
     }
 
     @Override

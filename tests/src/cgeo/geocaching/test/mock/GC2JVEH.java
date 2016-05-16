@@ -1,12 +1,12 @@
 package cgeo.geocaching.test.mock;
 
-import cgeo.geocaching.models.Image;
-import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.connector.gc.GCLogin;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.models.Image;
+import cgeo.geocaching.models.Trackable;
 
 import org.eclipse.jdt.annotation.NonNull;
 
@@ -95,7 +95,7 @@ public class GC2JVEH extends MockedCache {
     public Date getHiddenDate() {
         try {
             return GCLogin.parseGcCustomDate("2010-11-28", getDateFormat());
-        } catch (ParseException e) {
+        } catch (final ParseException e) {
             // intentionally left blank
         }
         return null;
@@ -113,7 +113,7 @@ public class GC2JVEH extends MockedCache {
                 "hike_med_yes",
                 "rappelling_yes"
         };
-        return new MockedLazyInitializedList<String>(attributes);
+        return new MockedLazyInitializedList<>(attributes);
     }
 
     @Override
