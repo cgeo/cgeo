@@ -916,7 +916,9 @@
     
     <!-- gpx -->
     <string name="gpx_import_loading_caches">Loading caches from .gpx file</string>
+    <string name="gpx_import_loading_caches_with_filename">Loading caches from %1$s</string>
     <string name="gpx_import_loading_waypoints">Loading waypoints file</string>
+    <string name="gpx_import_loading_waypoints_with_filename">Loading waypoints from %1$s</string>
     <string name="gpx_import_store_static_maps">Storing static maps</string>
     <string name="gpx_import_caches_imported">caches imported</string>
     <string name="gpx_import_caches_imported_with_filename">%1$d caches imported from %2$s</string>

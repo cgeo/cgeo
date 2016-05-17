@@ -22,7 +22,7 @@ class ImportLocFileThread extends AbstractImportThread {
     @Override
     protected Collection<Geocache> doImport() throws IOException, ParserException {
         Log.i("Import LOC file: " + file.getAbsolutePath());
-        importStepHandler.sendMessage(importStepHandler.obtainMessage(GPXImporter.IMPORT_STEP_READ_FILE, R.string.gpx_import_loading_caches, (int) file.length()));
+        importStepHandler.sendMessage(importStepHandler.obtainMessage(GPXImporter.IMPORT_STEP_READ_FILE, R.string.gpx_import_loading_caches_with_filename, (int) file.length(), getSourceDisplayName()));
         final LocParser parser = new LocParser(listId);
         return parser.parse(file, progressHandler);
     }

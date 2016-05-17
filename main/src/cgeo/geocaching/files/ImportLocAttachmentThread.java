@@ -28,7 +28,7 @@ class ImportLocAttachmentThread extends AbstractImportThread {
     @Override
     protected Collection<Geocache> doImport() throws IOException, ParserException {
         Log.i("Import LOC from uri: " + uri);
-        importStepHandler.sendMessage(importStepHandler.obtainMessage(GPXImporter.IMPORT_STEP_READ_FILE, R.string.gpx_import_loading_caches, -1));
+        importStepHandler.sendMessage(importStepHandler.obtainMessage(GPXImporter.IMPORT_STEP_READ_FILE, R.string.gpx_import_loading_caches_with_filename, -1, getSourceDisplayName()));
         final InputStream is = contentResolver.openInputStream(uri);
         final LocParser parser = new LocParser(listId);
         try {
