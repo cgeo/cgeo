@@ -236,7 +236,7 @@ class StateFilterFactory implements IFilterFactory {
 
         @Override
         public boolean accepts(@NonNull final Geocache cache) {
-            return cache.isDisabled();
+            return cache.isDisabled() && !cache.isArchived();
         }
 
         public static final Creator<StateDisabledFilter> CREATOR
