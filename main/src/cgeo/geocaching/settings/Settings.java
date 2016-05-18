@@ -977,6 +977,7 @@ public class Settings {
                 String.valueOf(NavigationAppsEnum.INTERNAL_MAP.id)));
     }
 
+    @NonNull
     public static LivemapStrategy getLiveMapStrategy() {
         return LivemapStrategy.getById(getInt(R.string.pref_livemapstrategy, LivemapStrategy.AUTO.id));
     }

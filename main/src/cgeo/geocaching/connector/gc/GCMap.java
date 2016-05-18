@@ -28,6 +28,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 import android.graphics.Bitmap;
 
@@ -237,7 +238,7 @@ public class GCMap {
      *            Live map tokens
      */
     @NonNull
-    public static SearchResult searchByViewport(final Viewport viewport, final MapTokens tokens) {
+    public static SearchResult searchByViewport(@NonNull final Viewport viewport, @Nullable final MapTokens tokens) {
         final int speed = (int) Sensors.getInstance().currentGeo().getSpeed() * 60 * 60 / 1000; // in km/h
         LivemapStrategy strategy = Settings.getLiveMapStrategy();
         if (strategy == LivemapStrategy.AUTO) {
@@ -269,7 +270,7 @@ public class GCMap {
      *            Strategy for data retrieval and parsing, @see Strategy
      */
     @NonNull
-    private static SearchResult searchByViewport(final Viewport viewport, final MapTokens tokens, final LivemapStrategy strategy) {
+    private static SearchResult searchByViewport(@NonNull final Viewport viewport, @Nullable final MapTokens tokens, @NonNull final LivemapStrategy strategy) {
         Log.d("GCMap.searchByViewport" + viewport.toString());
 
         final SearchResult searchResult = new SearchResult();

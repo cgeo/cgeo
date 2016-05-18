@@ -281,7 +281,7 @@ public final class ConnectorFactory {
 
     /** @see ISearchByViewPort#searchByViewport */
     @NonNull
-    public static SearchResult searchByViewport(@NonNull final Viewport viewport, @NonNull final MapTokens tokens) {
+    public static SearchResult searchByViewport(@NonNull final Viewport viewport, @Nullable final MapTokens tokens) {
         return SearchResult.parallelCombineActive(searchByViewPortConns, new Func1<ISearchByViewPort, SearchResult>() {
             @Override
             public SearchResult call(final ISearchByViewPort connector) {

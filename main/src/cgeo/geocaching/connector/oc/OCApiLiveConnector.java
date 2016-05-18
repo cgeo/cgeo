@@ -56,7 +56,7 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByCente
 
     @Override
     @NonNull
-    public SearchResult searchByViewport(@NonNull final Viewport viewport, @NonNull final MapTokens tokens) {
+    public SearchResult searchByViewport(@NonNull final Viewport viewport, @Nullable final MapTokens tokens) {
         final SearchResult result = new SearchResult(OkapiClient.getCachesBBox(viewport, this));
 
         Log.d(String.format(Locale.getDefault(), "OC returning %d caches from search by viewport", result.getCount()));

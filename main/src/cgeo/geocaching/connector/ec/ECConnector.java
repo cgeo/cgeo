@@ -104,7 +104,7 @@ public class ECConnector extends AbstractConnector implements ISearchByGeocode, 
 
     @Override
     @NonNull
-    public SearchResult searchByViewport(@NonNull final Viewport viewport, @NonNull final MapTokens tokens) {
+    public SearchResult searchByViewport(@NonNull final Viewport viewport, @Nullable final MapTokens tokens) {
         final Collection<Geocache> caches = ECApi.searchByBBox(viewport);
         final SearchResult searchResult = new SearchResult(caches);
         return searchResult.filterSearchResults(false, Settings.getCacheType());

@@ -104,7 +104,7 @@ public class GeocachingSuConnector extends AbstractConnector implements ISearchB
 
     @Override
     @NonNull
-    public SearchResult searchByViewport(@NonNull final Viewport viewport, @NonNull final MapTokens tokens) {
+    public SearchResult searchByViewport(@NonNull final Viewport viewport, @Nullable final MapTokens tokens) {
         return searchCaches("cache", "rtype=0&lngmax=" + viewport.getLongitudeMax() + "&lngmin=" + viewport.getLongitudeMin() + "&latmax=" + viewport.getLatitudeMax() + "&latmin=" + viewport.getLatitudeMin());
     }
 
