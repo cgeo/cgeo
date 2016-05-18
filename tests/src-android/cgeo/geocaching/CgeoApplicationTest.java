@@ -356,38 +356,56 @@ public class CgeoApplicationTest extends CGeoTestCase {
                 final CacheType cacheType = Settings.getCacheType();
 
                 try {
+                    { // non premium cache
+                        final MockedCacheAndroid cache = new GC2CJPFAndroid();
+                        deleteCacheFromDBAndLogout(cache.getGeocode());
+                        Tile.cache.removeFromTileCache(cache);
+                        Settings.setCacheType(CacheType.ALL);
 
-                    // non premium cache
-                    MockedCacheAndroid cache = new GC2CJPFAndroid();
-                    deleteCacheFromDBAndLogout(cache.getGeocode());
-                    Tile.cache.removeFromTileCache(cache);
-                    Settings.setCacheType(CacheType.ALL);
+                        final Viewport viewport = new Viewport(cache, 0.003, 0.003);
+                        final SearchResult search = ConnectorFactory.searchByViewport(viewport, INVALID_TOKEN);
 
-                    Viewport viewport = new Viewport(cache, 0.003, 0.003);
-                    SearchResult search = ConnectorFactory.searchByViewport(viewport, INVALID_TOKEN);
+                        assertThat(search).isNotNull();
+                        assertThat(search.getGeocodes()).contains(cache.getGeocode());
+                        // coords differ
+                        final Geocache cacheFromViewport = DataStore.loadCache(cache.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
+                        assert cacheFromViewport != null;
+                        assertThat(cacheFromViewport).isNotNull();
+                        Log.d("cgeoApplicationTest.testSearchByViewportNotLoggedIn: Coords expected = " + cache.getCoords());
+                        Log.d("cgeoApplicationTest.testSearchByViewportNotLoggedIn: Coords actual = " + cacheFromViewport.getCoords());
+                        assertThat(cache.getCoords().distanceTo(cacheFromViewport.getCoords()) <= 1e-3).isFalse();
+                        // depending on the chosen strategy the coords can be reliable or not
+                        // noinspection ConstantConditions
+                        assertThat(cacheFromViewport.isReliableLatLon()).isEqualTo(testStrategy == LivemapStrategy.DETAILED);
+                    }
 
-                    assertThat(search).isNotNull();
-                    assertThat(search.getGeocodes()).contains(cache.getGeocode());
-                    // coords differ
-                    final Geocache cacheFromViewport = DataStore.loadCache(cache.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
-                    assert cacheFromViewport != null;
-                    assertThat(cacheFromViewport).isNotNull();
-                    Log.d("cgeoApplicationTest.testSearchByViewportNotLoggedIn: Coords expected = " + cache.getCoords());
-                    Log.d("cgeoApplicationTest.testSearchByViewportNotLoggedIn: Coords actual = " + cacheFromViewport.getCoords());
-                    assertThat(cache.getCoords().distanceTo(cacheFromViewport.getCoords()) <= 1e-3).isFalse();
-                    // depending on the chosen strategy the coords can be reliable or not
-                    assertThat(cacheFromViewport.isReliableLatLon()).isEqualTo(testStrategy == LivemapStrategy.DETAILED);
+                    { // premium cache
+                        final MockedCacheAndroid cache = new MockedCacheAndroid(new Geopoint(49.010183, 2.566117)) {
+                            @Override
+                            public String getGeocode() {
+                                return "GC1K1W4";
+                            }
+                        };
+                        deleteCacheFromDBAndLogout(cache.getGeocode());
+                        Tile.cache.removeFromTileCache(cache);
+                        Settings.setCacheType(CacheType.ALL);
 
-                    // premium cache
-                    cache = new GC2JVEHAndroid();
-                    deleteCacheFromDBAndLogout(cache.getGeocode());
+                        final Viewport viewport = new Viewport(cache, 0.003, 0.003);
+                        final SearchResult search = ConnectorFactory.searchByViewport(viewport, INVALID_TOKEN);
 
-                    viewport = new Viewport(cache, 0.003, 0.003);
-                    search = ConnectorFactory.searchByViewport(viewport, INVALID_TOKEN);
-
-                    assertThat(search).isNotNull();
-                    // In the meantime, premium-member caches are also shown on map when not logged in
-                    assertThat(search.getGeocodes()).contains(cache.getGeocode());
+                        assertThat(search).isNotNull();
+                        assertThat(search.getGeocodes()).contains(cache.getGeocode());
+                        // coords differ
+                        final Geocache cacheFromViewport = DataStore.loadCache(cache.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
+                        assert cacheFromViewport != null;
+                        assertThat(cacheFromViewport).isNotNull();
+                        Log.d("cgeoApplicationTest.testSearchByViewportNotLoggedIn: Coords expected = " + cache.getCoords());
+                        Log.d("cgeoApplicationTest.testSearchByViewportNotLoggedIn: Coords actual = " + cacheFromViewport.getCoords());
+                        assertThat(cache.getCoords().distanceTo(cacheFromViewport.getCoords()) <= 1e-3).isFalse();
+                        // depending on the chosen strategy the coords can be reliable or not
+                        // noinspection ConstantConditions
+                        assertThat(cacheFromViewport.isReliableLatLon()).isEqualTo(testStrategy == LivemapStrategy.DETAILED);
+                    }
 
                 } finally {
                     Settings.setLiveMapStrategy(strategy);
@@ -418,9 +436,11 @@ public class CgeoApplicationTest extends CGeoTestCase {
      */
     public static void testSearchByGeocodeSpecialties() {
         final Geocache gcv2r9 = CgeoApplicationTest.testSearchByGeocode("GCV2R9");
+        assertThat(gcv2r9).isNotNull();
         assertThat(gcv2r9.getLocation()).isEqualTo("California, United States");
 
         final Geocache gc1zxez = CgeoApplicationTest.testSearchByGeocode("GC1ZXEZ");
+        assertThat(gc1zxez).isNotNull();
         assertThat(gc1zxez.getOwnerUserId()).isEqualTo("Ms.Marple/Mr.Stringer");
     }
 
