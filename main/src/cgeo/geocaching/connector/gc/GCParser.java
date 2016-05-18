@@ -898,14 +898,14 @@ public final class GCParser {
         final String page = GCLogin.getInstance().getRequestLogged(uri, paramsWithF);
 
         if (StringUtils.isBlank(page)) {
-            Log.e("GCParser.searchByAny: No data from server");
+            Log.w("GCParser.searchByAny: No data from server");
             return null;
         }
         assert page != null;
 
         final SearchResult searchResult = parseSearch(fullUri, page, showCaptcha, recaptchaReceiver);
         if (searchResult == null || CollectionUtils.isEmpty(searchResult.getGeocodes())) {
-            Log.e("GCParser.searchByAny: No cache parsed");
+            Log.w("GCParser.searchByAny: No cache parsed");
             return searchResult;
         }
 
