@@ -39,7 +39,7 @@ public class ImportGpxAttachmentThread extends AbstractImportGpxThread {
         if (streamSize == 0) {
             streamSize = -1;
         }
-        importStepHandler.sendMessage(importStepHandler.obtainMessage(GPXImporter.IMPORT_STEP_READ_FILE, R.string.gpx_import_loading_caches, streamSize));
+        importStepHandler.sendMessage(importStepHandler.obtainMessage(GPXImporter.IMPORT_STEP_READ_FILE, R.string.gpx_import_loading_caches_with_filename, streamSize, getSourceDisplayName()));
         try {
             return parser.parse(inputStream, progressHandler);
         } finally {

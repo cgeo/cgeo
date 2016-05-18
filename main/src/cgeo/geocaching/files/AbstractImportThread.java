@@ -30,7 +30,7 @@ abstract class AbstractImportThread extends Thread {
     @Override
     public void run() {
         try {
-            importStepHandler.sendMessage(importStepHandler.obtainMessage(GPXImporter.IMPORT_STEP_START));
+            importStepHandler.sendMessage(importStepHandler.obtainMessage(GPXImporter.IMPORT_STEP_START, getSourceDisplayName()));
             final Collection<Geocache> caches = doImport();
             Log.i("Imported successfully " + caches.size() + " caches.");
 

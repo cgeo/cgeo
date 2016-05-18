@@ -22,7 +22,7 @@ class ImportGpxFileThread extends AbstractImportGpxThread {
     @Override
     protected Collection<Geocache> doImport(final GPXParser parser) throws IOException, ParserException {
         Log.i("Import GPX file: " + cacheFile.getAbsolutePath());
-        importStepHandler.sendMessage(importStepHandler.obtainMessage(GPXImporter.IMPORT_STEP_READ_FILE, R.string.gpx_import_loading_caches, (int) cacheFile.length()));
+        importStepHandler.sendMessage(importStepHandler.obtainMessage(GPXImporter.IMPORT_STEP_READ_FILE, R.string.gpx_import_loading_caches_with_filename, (int) cacheFile.length(), getSourceDisplayName()));
         Collection<Geocache> caches = parser.parse(cacheFile, progressHandler);
 
         final String wptsFilename = GPXImporter.getWaypointsFileNameForGpxFile(cacheFile);
@@ -30,7 +30,7 @@ class ImportGpxFileThread extends AbstractImportGpxThread {
             final File wptsFile = new File(cacheFile.getParentFile(), wptsFilename);
             if (wptsFile.canRead()) {
                 Log.i("Import GPX waypoint file: " + wptsFile.getAbsolutePath());
-                importStepHandler.sendMessage(importStepHandler.obtainMessage(GPXImporter.IMPORT_STEP_READ_WPT_FILE, R.string.gpx_import_loading_waypoints, (int) wptsFile.length()));
+                importStepHandler.sendMessage(importStepHandler.obtainMessage(GPXImporter.IMPORT_STEP_READ_WPT_FILE, R.string.gpx_import_loading_waypoints_with_filename, (int) wptsFile.length(), wptsFilename));
                 caches = parser.parse(wptsFile, progressHandler);
             }
         }

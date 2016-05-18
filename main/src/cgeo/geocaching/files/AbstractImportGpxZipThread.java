@@ -39,7 +39,7 @@ abstract class AbstractImportGpxZipThread extends AbstractImportGpxThread {
                 gpxFileName = zipEntry.getName();
                 if (StringUtils.endsWithIgnoreCase(gpxFileName, GPXImporter.GPX_FILE_EXTENSION)) {
                     if (!StringUtils.endsWithIgnoreCase(gpxFileName, GPXImporter.WAYPOINTS_FILE_SUFFIX_AND_EXTENSION)) {
-                        importStepHandler.sendMessage(importStepHandler.obtainMessage(GPXImporter.IMPORT_STEP_READ_FILE, R.string.gpx_import_loading_caches, (int) zipEntry.getSize()));
+                        importStepHandler.sendMessage(importStepHandler.obtainMessage(GPXImporter.IMPORT_STEP_READ_FILE, R.string.gpx_import_loading_caches_with_filename, (int) zipEntry.getSize(), getSourceDisplayName()));
                         caches = parser.parse(new NoCloseInputStream(zisPass1), progressHandler);
                         acceptedFiles++;
                     }
@@ -59,7 +59,7 @@ abstract class AbstractImportGpxZipThread extends AbstractImportGpxThread {
         try {
             for (ZipEntry zipEntry = zisPass2.getNextZipEntry(); zipEntry != null; zipEntry = zisPass2.getNextZipEntry()) {
                 if (StringUtils.endsWithIgnoreCase(zipEntry.getName(), GPXImporter.WAYPOINTS_FILE_SUFFIX_AND_EXTENSION)) {
-                    importStepHandler.sendMessage(importStepHandler.obtainMessage(GPXImporter.IMPORT_STEP_READ_WPT_FILE, R.string.gpx_import_loading_waypoints, (int) zipEntry.getSize()));
+                    importStepHandler.sendMessage(importStepHandler.obtainMessage(GPXImporter.IMPORT_STEP_READ_WPT_FILE, R.string.gpx_import_loading_waypoints_with_filename, (int) zipEntry.getSize(), zipEntry.getName()));
                     caches = parser.parse(new NoCloseInputStream(zisPass2), progressHandler);
                 }
             }
@@ -72,7 +72,7 @@ abstract class AbstractImportGpxZipThread extends AbstractImportGpxThread {
 
     @Override
     protected String getSourceDisplayName() {
-        return Html.fromHtml(gpxFileName).toString();
+        return gpxFileName == null ? ".gpx" : Html.fromHtml(gpxFileName).toString();
     }
 
     protected abstract InputStream getInputStream() throws IOException;

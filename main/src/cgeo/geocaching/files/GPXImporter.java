@@ -175,12 +175,12 @@ public class GPXImporter {
             switch (msg.what) {
                 case IMPORT_STEP_START:
                     final Message cancelMessage = importStepHandler.obtainMessage(IMPORT_STEP_CANCEL);
-                    progress.show(fromActivity, res.getString(R.string.gpx_import_title_reading_file), res.getString(R.string.gpx_import_loading_caches), ProgressDialog.STYLE_HORIZONTAL, cancelMessage);
+                    progress.show(fromActivity, res.getString(R.string.gpx_import_title_reading_file), res.getString(R.string.gpx_import_loading_caches_with_filename, msg.obj), ProgressDialog.STYLE_HORIZONTAL, cancelMessage);
                     break;
 
                 case IMPORT_STEP_READ_FILE:
                 case IMPORT_STEP_READ_WPT_FILE:
-                    progress.setMessage(res.getString(msg.arg1));
+                    progress.setMessage(res.getString(msg.arg1, msg.obj));
                     progress.setMaxProgressAndReset(msg.arg2);
                     break;
 
