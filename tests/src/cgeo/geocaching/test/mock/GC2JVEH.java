@@ -133,6 +133,11 @@ public class GC2JVEH extends MockedCache {
     }
 
     @Override
+    public boolean isArchived() {
+        return true;
+    }
+
+    @Override
     public boolean isPremiumMembersOnly() {
         return true;
     }
