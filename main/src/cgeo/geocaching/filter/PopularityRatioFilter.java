@@ -17,18 +17,15 @@ import java.util.List;
  */
 class PopularityRatioFilter extends AbstractFilter {
     private final int minRatio;
-    private final int maxRatio;
 
-    PopularityRatioFilter(@NonNull final String name, final int minRatio, final int maxRatio) {
+    PopularityRatioFilter(@NonNull final String name, final int minRatio) {
         super(name);
         this.minRatio = minRatio;
-        this.maxRatio = maxRatio;
     }
 
     protected PopularityRatioFilter(final Parcel in) {
         super(in);
         minRatio = in.readInt();
-        maxRatio = in.readInt();
     }
 
     @Override
@@ -41,7 +38,7 @@ class PopularityRatioFilter extends AbstractFilter {
 
         final int favorites = cache.getFavoritePoints();
         final float ratio = 100.0f * favorites / finds;
-        return ratio > minRatio && ratio <= maxRatio;
+        return ratio > minRatio;
     }
 
     public static class Factory implements IFilterFactory {
@@ -53,9 +50,8 @@ class PopularityRatioFilter extends AbstractFilter {
         public List<IFilter> getFilters() {
             final List<IFilter> filters = new ArrayList<>(RATIOS.length);
             for (final int minRange : RATIOS) {
-                final int maxRange = Integer.MAX_VALUE;
                 final String name = CgeoApplication.getInstance().getResources().getString(R.string.more_than_percent_favorite_points, minRange);
-                filters.add(new PopularityRatioFilter(name, minRange, maxRange));
+                filters.add(new PopularityRatioFilter(name, minRange));
             }
             return filters;
         }
@@ -65,7 +61,6 @@ class PopularityRatioFilter extends AbstractFilter {
     public void writeToParcel(final Parcel dest, final int flags) {
         super.writeToParcel(dest, flags);
         dest.writeInt(minRatio);
-        dest.writeInt(maxRatio);
     }
 
     public static final Creator<PopularityRatioFilter> CREATOR
