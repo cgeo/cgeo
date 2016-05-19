@@ -2,9 +2,7 @@ package cgeo.geocaching.filter;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
-import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.storage.DataStore;
 
 import org.eclipse.jdt.annotation.NonNull;
 
@@ -35,7 +33,7 @@ class PopularityRatioFilter extends AbstractFilter {
 
     @Override
     public boolean accepts(@NonNull final Geocache cache) {
-        final int finds = getFindsCount(cache);
+        final int finds = cache.getFindsCount();
 
         if (finds == 0) {   // Prevent division by zero
             return false;
@@ -44,17 +42,6 @@ class PopularityRatioFilter extends AbstractFilter {
         final int favorites = cache.getFavoritePoints();
         final float ratio = 100.0f * favorites / finds;
         return ratio > minRatio && ratio <= maxRatio;
-    }
-
-    private static int getFindsCount(final Geocache cache) {
-        if (cache.getLogCounts().isEmpty()) {
-            cache.setLogCounts(DataStore.loadLogCounts(cache.getGeocode()));
-        }
-        final Integer logged = cache.getLogCounts().get(LogType.FOUND_IT);
-        if (logged != null) {
-            return logged;
-        }
-        return 0;
     }
 
     public static class Factory implements IFilterFactory {
