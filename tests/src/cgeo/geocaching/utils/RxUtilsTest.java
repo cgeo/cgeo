@@ -70,7 +70,7 @@ public class RxUtilsTest extends TestCase {
 
     public static void testObservableCache() {
         final AtomicInteger counter = new AtomicInteger(0);
-        final RxUtils.ObservableCache<String, Integer> cache = new RxUtils.ObservableCache<String, Integer>(new Func1<String, Observable<Integer>>() {
+        final RxUtils.ObservableCache<String, Integer> cache = new RxUtils.ObservableCache<>(new Func1<String, Observable<Integer>>() {
             @Override
             public Observable<Integer> call(final String s) {
                 counter.incrementAndGet();
@@ -96,7 +96,7 @@ public class RxUtilsTest extends TestCase {
             public void call() {
                 unsubscribed.set(true);
             }
-        }).lift(new RxUtils.DelayedUnsubscription<Object>(100, TimeUnit.MILLISECONDS)).subscribe().unsubscribe();
+        }).lift(new RxUtils.DelayedUnsubscription<>(100, TimeUnit.MILLISECONDS)).subscribe().unsubscribe();
         assertThat(unsubscribed.get()).isFalse();
         try {
             Thread.sleep(200);
