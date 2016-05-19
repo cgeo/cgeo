@@ -44,10 +44,10 @@ public class GpxFileListActivity extends AbstractFileListActivity<GPXListAdapter
         return Collections.singletonList(new File(Settings.getGpxImportDir()));
     }
 
-    public static void startSubActivity(final Activity fromActivity, final int listId) {
+    public static void startSubActivity(final Activity fromActivity, final int listId, final int requestCode) {
         final Intent intent = new Intent(fromActivity, GpxFileListActivity.class);
         intent.putExtra(Intents.EXTRA_LIST_ID, StoredList.getConcreteList(listId));
-        fromActivity.startActivityForResult(intent, 0);
+        fromActivity.startActivityForResult(intent, requestCode);
     }
 
     @Override
