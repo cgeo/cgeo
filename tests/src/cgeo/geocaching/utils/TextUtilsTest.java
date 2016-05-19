@@ -2,18 +2,50 @@ package cgeo.geocaching.utils;
 
 import android.text.SpannableString;
 
+import junit.framework.Assert;
 import junit.framework.TestCase;
 
+import org.apache.commons.io.IOUtils;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.regex.Pattern;
 
 import cgeo.geocaching.connector.gc.GCConstants;
-import cgeo.geocaching.test.mock.MockedCache;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class TextUtilsTest extends TestCase {
+
+    private static String readCachePage(final String geocode) {
+        InputStream is = null;
+        BufferedReader br = null;
+        try {
+            is = TextUtilsTest.class.getResourceAsStream("/cgeo/geocaching/test/mock/" + geocode + ".html");
+            br = new BufferedReader(new InputStreamReader(is), 150000);
+
+            final StringBuilder buffer = new StringBuilder();
+            String line;
+
+            while ((line = br.readLine()) != null) {
+                buffer.append(line).append('\n');
+            }
+
+            return TextUtils.replaceWhitespace(buffer.toString());
+        } catch (final IOException e) {
+            Assert.fail(e.getMessage());
+        } finally {
+            IOUtils.closeQuietly(is);
+            IOUtils.closeQuietly(br);
+        }
+        return null;
+    }
+
+
     public static void testRegEx() {
-        final String page = MockedCache.readCachePage("GC2CJPF");
+        final String page = readCachePage("GC2CJPF");
         assertThat(TextUtils.getMatch(page, GCConstants.PATTERN_LOGIN_NAME, true, "???")).isEqualTo("Bananeweizen");
     }
 

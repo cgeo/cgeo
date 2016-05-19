@@ -1,13 +1,6 @@
 package cgeo.geocaching.test.mock;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.models.Image;
-import cgeo.geocaching.models.Trackable;
-import cgeo.geocaching.connector.gc.GCConstants;
-import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.utils.TextUtils;
+import junit.framework.Assert;
 
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
@@ -21,7 +14,14 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import junit.framework.Assert;
+import cgeo.geocaching.connector.gc.GCConstants;
+import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.Image;
+import cgeo.geocaching.models.Trackable;
+import cgeo.geocaching.utils.TextUtils;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public abstract class MockedCache extends Geocache {
 

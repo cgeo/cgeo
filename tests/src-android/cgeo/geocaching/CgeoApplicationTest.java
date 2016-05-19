@@ -24,10 +24,10 @@ import cgeo.geocaching.settings.Credentials;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.TestSettings;
 import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.test.mock.GC1ZXX2Android;
-import cgeo.geocaching.test.mock.GC2CJPFAndroid;
-import cgeo.geocaching.test.mock.GC2JVEHAndroid;
-import cgeo.geocaching.test.mock.MockedCacheAndroid;
+import cgeo.geocaching.test.mock.GC1ZXX2;
+import cgeo.geocaching.test.mock.GC2CJPF;
+import cgeo.geocaching.test.mock.GC2JVEH;
+import cgeo.geocaching.test.mock.MockedCache;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.Log;
 import cgeo.test.Compare;
@@ -163,7 +163,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
             @Override
             public void run() {
                 // non premium cache
-                MockedCacheAndroid cache = new GC2CJPFAndroid();
+                MockedCache cache = new GC2CJPF();
 
                 deleteCacheFromDBAndLogout(cache.getGeocode());
 
@@ -177,7 +177,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
                 assertThat(searchedCache.getCoords()).isNull();
 
                 // premium cache. Not visible to guests
-                cache = new GC2JVEHAndroid();
+                cache = new GC2JVEH();
 
                 deleteCacheFromDBAndLogout(cache.getGeocode());
 
@@ -198,7 +198,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
             @Override
             public void run() {
                 // non premium cache
-                final MockedCacheAndroid cache = new GC1ZXX2Android();
+                final MockedCache cache = new GC1ZXX2();
 
                 deleteCacheFromDBAndLogout(cache.getGeocode());
 
@@ -300,7 +300,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
                     TestSettings.setExcludeMine(false);
                     Settings.setCacheType(CacheType.ALL);
 
-                    final GC2CJPFAndroid mockedCache = new GC2CJPFAndroid();
+                    final GC2CJPF mockedCache = new GC2CJPF();
                     deleteCacheFromDB(mockedCache.getGeocode());
 
                     final MapTokens tokens = GCLogin.getInstance().getMapTokens();
@@ -357,7 +357,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
 
                 try {
                     { // non premium cache
-                        final MockedCacheAndroid cache = new GC2CJPFAndroid();
+                        final MockedCache cache = new GC2CJPF();
                         deleteCacheFromDBAndLogout(cache.getGeocode());
                         Tile.cache.removeFromTileCache(cache);
                         Settings.setCacheType(CacheType.ALL);
@@ -380,7 +380,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
                     }
 
                     { // premium cache
-                        final MockedCacheAndroid cache = new MockedCacheAndroid(new Geopoint(49.010183, 2.566117)) {
+                        final MockedCache cache = new MockedCache(new Geopoint(49.010183, 2.566117)) {
                             @Override
                             public String getGeocode() {
                                 return "GC1K1W4";
@@ -419,7 +419,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
      * Test cache parsing. Esp. useful after a GC.com update
      */
     public static void testSearchByGeocodeBasis() {
-        for (final MockedCacheAndroid mockedCache : MockedCacheAndroid.MOCKED_CACHES) {
+        for (final MockedCache mockedCache : MockedCache.MOCKED_CACHES) {
             final String oldUser = mockedCache.getMockedDataUser();
             try {
                 mockedCache.setMockedDataUser(Settings.getUserName());

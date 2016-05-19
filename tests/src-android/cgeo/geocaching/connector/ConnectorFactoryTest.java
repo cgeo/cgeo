@@ -1,15 +1,15 @@
 package cgeo.geocaching.connector;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.oc.OCConnector;
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
-import cgeo.geocaching.test.mock.GC1ZXX2Android;
+import cgeo.geocaching.test.mock.GC1ZXX2;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ConnectorFactoryTest extends AbstractResourceInstrumentationTestCase {
 
@@ -50,7 +50,7 @@ public class ConnectorFactoryTest extends AbstractResourceInstrumentationTestCas
     }
 
     public static void testGetConnectorCgCache() {
-        assertThat(ConnectorFactory.getConnector(new GC1ZXX2Android())).isEqualTo(GCConnector.getInstance());
+        assertThat(ConnectorFactory.getConnector(new GC1ZXX2())).isEqualTo(GCConnector.getInstance());
     }
 
     public static void testGetConnectorString() {

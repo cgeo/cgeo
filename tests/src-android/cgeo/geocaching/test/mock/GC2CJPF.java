@@ -15,9 +15,9 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
-public class GC2CJPFAndroid extends MockedCacheAndroid {
+public class GC2CJPF extends MockedCache {
 
-    public GC2CJPFAndroid() {
+    public GC2CJPF() {
         super(new Geopoint(52.425067, 9.664200));
     }
 

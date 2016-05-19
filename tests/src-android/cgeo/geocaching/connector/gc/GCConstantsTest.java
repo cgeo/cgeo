@@ -1,12 +1,12 @@
 package cgeo.geocaching.connector.gc;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-import cgeo.geocaching.test.mock.MockedCacheAndroid;
-import cgeo.geocaching.utils.TextUtils;
-
 import android.test.AndroidTestCase;
 import android.text.Html;
+
+import cgeo.geocaching.test.mock.MockedCache;
+import cgeo.geocaching.utils.TextUtils;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class GCConstantsTest extends AndroidTestCase {
 
@@ -28,7 +28,7 @@ public class GCConstantsTest extends AndroidTestCase {
     public static void testCacheCount() {
         assertCacheCount(1510, "<span class=\"cache-count\">1.510 Finds</span>");
         assertCacheCount(1510, "<span class=\"cache-count\">1,510 Finds</span>");
-        assertCacheCount(MOCK_CACHES_FOUND, MockedCacheAndroid.readCachePage("GC2CJPF"));
+        assertCacheCount(MOCK_CACHES_FOUND, MockedCache.readCachePage("GC2CJPF"));
     }
 
     private static void assertCacheCount(final int count, final String html) {

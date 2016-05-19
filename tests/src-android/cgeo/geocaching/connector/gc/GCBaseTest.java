@@ -3,8 +3,8 @@ package cgeo.geocaching.connector.gc;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.enumerations.LoadFlags;
-import cgeo.geocaching.test.mock.GC2CJPFAndroid;
-import cgeo.geocaching.test.mock.MockedCacheAndroid;
+import cgeo.geocaching.test.mock.GC2CJPF;
+import cgeo.geocaching.test.mock.MockedCache;
 import cgeo.test.Compare;
 
 import java.util.HashSet;
@@ -15,7 +15,7 @@ import junit.framework.TestCase;
 public class GCBaseTest extends TestCase {
 
     public static void testSearchFromMap() {
-        final MockedCacheAndroid mockedCache = new GC2CJPFAndroid();
+        final MockedCache mockedCache = new GC2CJPF();
 
         final Set<String> geocodes = new HashSet<>();
         geocodes.add(mockedCache.getGeocode());

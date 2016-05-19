@@ -16,7 +16,7 @@ import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 import cgeo.geocaching.test.R;
-import cgeo.geocaching.test.mock.MockedCacheAndroid;
+import cgeo.geocaching.test.mock.MockedCache;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.test.Compare;
 
@@ -73,13 +73,13 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
     }
 
     private static Geocache createCache(final int index) {
-        final MockedCacheAndroid mockedCache = MockedCacheAndroid.MOCKED_CACHES.get(index);
+        final MockedCache mockedCache = MockedCache.MOCKED_CACHES.get(index);
         // to get the same results we have to use the date format used when the mocked data was created
         final String oldCustomDate = Settings.getGcCustomDate();
 
         final SearchResult searchResult;
         try {
-            Settings.setGcCustomDate(MockedCacheAndroid.getDateFormat());
+            Settings.setGcCustomDate(MockedCache.getDateFormat());
             searchResult = GCParser.parseAndSaveCacheFromText(mockedCache.getData(), null);
         } finally {
             Settings.setGcCustomDate(oldCustomDate);
@@ -101,9 +101,9 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
     public static void testParseCacheFromTextWithMockedData() {
         final String gcCustomDate = Settings.getGcCustomDate();
         try {
-            for (final MockedCacheAndroid mockedCache : MockedCacheAndroid.MOCKED_CACHES) {
+            for (final MockedCache mockedCache : MockedCache.MOCKED_CACHES) {
                 // to get the same results we have to use the date format used when the mocked data was created
-                Settings.setGcCustomDate(MockedCacheAndroid.getDateFormat());
+                Settings.setGcCustomDate(MockedCache.getDateFormat());
                 final SearchResult searchResult = GCParser.parseAndSaveCacheFromText(mockedCache.getData(), null);
                 final Geocache parsedCache = searchResult.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
                 assertThat(parsedCache).isNotNull();

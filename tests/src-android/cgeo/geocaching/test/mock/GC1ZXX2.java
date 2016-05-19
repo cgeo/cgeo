@@ -5,7 +5,6 @@ import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.settings.Settings;
 
 import org.eclipse.jdt.annotation.NonNull;
 
@@ -15,42 +14,42 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
-public class GC3XX5J extends MockedCache {
+public class GC1ZXX2 extends MockedCache {
 
-    public GC3XX5J() {
-        super(new Geopoint(46.080467, 14.5));
+    public GC1ZXX2() {
+        super(new Geopoint(52.373217, 9.710800));
     }
 
     @Override
     public String getName() {
-        return "Zaraščen Tir";
+        return "Hannopoly: Eislisenstrasse";
     }
 
     @Override
     public float getDifficulty() {
-        return 1.5f;
+        return 3.0f;
     }
 
     @NonNull
     @Override
     public String getGeocode() {
-        return "GC3XX5J";
+        return "GC1ZXX2";
     }
 
     @Override
     public String getOwnerDisplayName() {
-        return "David & Ajda";
+        return "Rich Uncle Pennybags";
     }
 
     @NonNull
     @Override
     public CacheSize getSize() {
-        return CacheSize.SMALL;
+        return CacheSize.OTHER;
     }
 
     @Override
     public float getTerrain() {
-        return 2.0f;
+        return 1.5f;
     }
 
     @Override
@@ -60,41 +59,40 @@ public class GC3XX5J extends MockedCache {
 
     @Override
     public boolean isArchived() {
-        // The cache has been archived since 2015-01-13.
         return true;
     }
 
     @NonNull
     @Override
     public String getOwnerUserId() {
-        return "David & Ajda";
+        return "daniel354";
     }
 
     @Override
     public String getDescription() {
-        return "SLO:<br />";
+        return "<center><img width=\"500\"";
     }
 
     @Override
     public String getCacheId() {
-        return "3220672";
+        return "1433909";
     }
 
     @Override
     public String getGuid() {
-        return "51e40dec-6272-4dad-934b-e175daaac265";
+        return "36d45871-b99d-46d6-95fc-ff86ab564c98";
     }
 
     @Override
     public String getLocation() {
-        return "Slovenia";
+        return "Niedersachsen, Germany";
     }
 
     @Override
     public Date getHiddenDate() {
         try {
-            return GCLogin.parseGcCustomDate("2012-10-01", "yyyy-MM-dd");
-        } catch (final ParseException e) {
+            return GCLogin.parseGcCustomDate("2009-10-16", getDateFormat());
+        } catch (ParseException e) {
             // intentionally left blank
         }
         return null;
@@ -104,15 +102,12 @@ public class GC3XX5J extends MockedCache {
     @Override
     public List<String> getAttributes() {
         final String[] attributes = {
-                "stroller_no",
-                "kids_no",
                 "bicycles_yes",
-                "night_yes",
                 "available_yes",
-                "stealth_yes",
+                "stroller_yes",
                 "parking_yes",
-                "hike_short_yes",
-                "parkngrab_yes",
+                "onehour_yes",
+                "kids_yes",
                 "dogs_yes"
         };
         return new MockedLazyInitializedList<>(attributes);
@@ -121,30 +116,29 @@ public class GC3XX5J extends MockedCache {
     @Override
     public Map<LogType, Integer> getLogCounts() {
         final Map<LogType, Integer> logCounts = new EnumMap<>(LogType.class);
-        logCounts.put(LogType.PUBLISH_LISTING, 2);
-        logCounts.put(LogType.FOUND_IT, 65);
-        logCounts.put(LogType.RETRACT, 1);
+        logCounts.put(LogType.PUBLISH_LISTING, 1);
+        logCounts.put(LogType.FOUND_IT, 368);
+        logCounts.put(LogType.POST_REVIEWER_NOTE, 1);
+        logCounts.put(LogType.DIDNT_FIND_IT, 7);
+        logCounts.put(LogType.NOTE, 10);
+        logCounts.put(LogType.ARCHIVE, 1);
+        logCounts.put(LogType.ENABLE_LISTING, 2);
+        logCounts.put(LogType.TEMP_DISABLE_LISTING, 3);
+        logCounts.put(LogType.OWNER_MAINTENANCE, 7);
         return logCounts;
     }
 
     @Override
     public int getFavoritePoints() {
-        return 1;
+        return 30;
     }
 
     @Override
-    public String getHint() {
-        return "Odmakni kamen ob tiru / Remove the stone wich lies beside the rail";
-    }
-
-    @Override
-    public String getShortDescription() {
-        return "Kadar zbolimo nam pomaga...<br /> <br /> When we get sick, they are helpful...";
-    }
-
-    @Override
-    public boolean isFound() {
-        return Settings.getUserName().equals("mucek4");
+    public String getPersonalNote() {
+        if ("blafoo".equals(this.getMockedDataUser()) || "JoSaMaJa".equals(this.getMockedDataUser())) {
+            return "Test für c:geo";
+        }
+        return super.getPersonalNote();
     }
 
 }

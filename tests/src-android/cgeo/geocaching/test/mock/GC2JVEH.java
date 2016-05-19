@@ -17,14 +17,14 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
-public class GC2JVEHAndroid extends MockedCacheAndroid {
+public class GC2JVEH extends MockedCache {
 
     @Override
     public String getName() {
         return "Auf den Spuren des Indianer Jones Teil 1";
     }
 
-    public GC2JVEHAndroid() {
+    public GC2JVEH() {
         super(new Geopoint(52.37225, 9.735367));
     }
 
