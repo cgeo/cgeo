@@ -842,6 +842,7 @@
   <string name="cache_image">Obrázek</string>
   <string name="cache_image_open_file">Otevřít jako soubor</string>
   <string name="cache_image_open_browser">Otevřít v prohlížeči</string>
+  <string name="cache_image_add_waypoint">Přidat bod trasy</string>
   <string name="cache_share_field">Sdílet</string>
   <string name="cache_time_full_hours">hodin</string>
   <string name="cache_listed_on">Zveřejněno na %s</string>

@@ -147,6 +147,8 @@
   <string name="err_unknown">Tuntematon virhe</string>
   <string name="err_unknown_address">c:geo ei voi näyttää tätä osoitetta kartalla</string>
   <string name="err_comm">Tuntematon yhteysvirhe</string>
+  <string name="err_missing_auth">Käyttäjätunnusta ja/tai salasanaa ei ole asetettu</string>
+  <string name="err_wrong">Väärä käyttäjätunnus ja/tai salasana</string>
   <string name="err_maintenance">Geocaching.com on huollettavana. c:geo toimii offline-tilassa, jolloin käytössä tallennetut kätköt.</string>
   <string name="err_license">Et ole hyväksynyt Geocaching.com-käyttöoikeussopimusta, joten c:geo ei voi ladata kätköjen koordinaatteja.</string>
   <string name="err_unvalidated_account">Sinun täytyy ensin varmentaa tunnuksesi Geocaching.com-sivustolla (\"validate\"-toiminto).</string>
@@ -203,6 +205,8 @@
   <string name="err_parse_lon">c:geo ei saanut käsiteltyä pituusastetta.</string>
   <string name="err_parse_dist">c:geo ei saanut käsiteltyä etäisyyttä.</string>
   <string name="err_parse_lat_lon">c:geo ei saanut käsiteltyä leveys- tai pituusastetta.</string>
+  <string name="err_rendertheme_file_unreadable">Valittua kartanpiirtoteemaa ei voitu ladata. Käytetään sisäänrakennettua teemaa.</string>
+  <string name="err_rendertheme_invalid">Valittu kartanpiirtoteema ei ole kelvollinen tässä Mapsforge-versiossa. Käytetään sisäänrakennettua teemaa.</string>
   <string name="warn_save_nothing">Ei mitään tallennettavaa.</string>
   <string name="warn_no_cache_coord">Ei kätköjä joilla olisi koordinaatit.</string>
   <string name="warn_no_coordinates">Koordinaatteja ei ole annettu.</string>
@@ -356,6 +360,8 @@
   <string name="list_menu_rename">Nimeä uudelleen nykyinen lista</string>
   <string name="list_menu_import">Tuo</string>
   <string name="list_title">Valitse lista</string>
+  <string name="lists_title">Valitse listat</string>
+  <string name="lists_remove_all">Ei mitään</string>
   <string name="list_inbox">Tallennettu</string>
   <string name="list_all_lists">Kaikki kätköt</string>
   <string name="list_dialog_create_title">Uusi lista</string>
@@ -422,6 +428,8 @@
   <string name="settings_info_facebook_login">c:geo ei voi kirjautua geocaching.com:iin Facebook tilillä, mutta se on helppo kiertää…</string>
   <string name="settings_authorize">Valtuuta c:geo</string>
   <string name="settings_reauthorize">Valtuuta c:geo uudelleen</string>
+  <string name="settings_gc_description">Anna c:geolle lupa geocaching.com-palvelun käyttöön etsiäksesi kätköjä.</string>
+  <string name="settings_ec_description">Anna c:geolle lupa extremcaching.com-palvelun käyttöön voidaksesi etsiä kätköjä sekä nähdä/valikoida löytämiäsi kätköjä.</string>
   <string name="settings_activate_oc">Aktivoi</string>
   <string name="init_summary_oc_de">Lataa kätköt palvelusta opencaching.de</string>
   <string name="init_oc_de_description">Anna c:geolle lupa opencaching.de:n käyttöön voidaksesi etsiä kätköjä sekä nähdä/valikoida löytämiäsi kätköjä.</string>
@@ -440,6 +448,9 @@
   <string name="settings_activate_oc_uk">Aktivoi</string>
   <string name="init_summary_oc_uk">Lataa kätköt palvelusta opencaching.org.uk</string>
   <string name="init_oc_uk_description">Anna c:geolle lupa opencaching.org.uk:n käyttöön voidaksesi etsiä kätköjä sekä nähdä/valikoida löytämiäsi kätköjä.</string>
+  <string name="init_su">Geocaching.su</string>
+  <string name="init_summary_su">Lataa kätköt palvelusta Geocaching.su</string>
+  <string name="settings_activate_su">Aktivoi</string>
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_gcvote_password_description">Voidaksesi arvostella kätköjä, sinun täytyy hyväksyä GCVote,com:in ehdot ja antaa salasanasi GCvote:en.</string>
   <string name="err_gcvote_send_rating">Virhe arvostelun lähettämisessä, tarkista GCVote:n salasana asetuksista tai poista arvostelu käytöstä tyhjentämällä salasana-kenttä.</string>
@@ -453,6 +464,7 @@
   <string name="init_login_popup_working">Kirjaudutaan sisään…</string>
   <string name="init_login_popup_ok">Sisäänkirjautuminen onnistui</string>
   <string name="init_login_popup_failed">Sisäänkirjautuminen epäonnistui</string>
+  <string name="init_login_popup_failed_reason">Kirjautuminen epäonnistui: %s</string>
   <string name="init_login_popup_not_authorized">Ei valtuutettu</string>
   <string name="init_login_popup_invalid_timestamp">Paikallinen aika virheellinen, tarkista laitteesi aika</string>
   <string name="init_login_popup_invalid_token">Valtuutus epäonnistui, yritä uudestaan</string>
@@ -514,6 +526,7 @@
   <string name="init_backup_success">c: geo:n tietokanta kopioitu onnistuneesti:</string>
   <string name="init_backup_failed">c:geon tietokannan varmuuskopiointi epäonnistui.</string>
   <string name="init_backup_unnecessary">Tietokanta on tyhjä, varmuuskopiointia ei tarvita.</string>
+  <string name="init_backup_no_backup_available">Ei varmuuskopiota käytettävissä.</string>
   <string name="backup_confirm_overwrite">Haluatko korvata olemassa olevan varmuuskopion %s?</string>
   <string name="restore_confirm_overwrite">Haluatko korvata laitteessasi olevan %s varmuuskopiolla?</string>
   <string name="init_restore_success">Palautus valmis.</string>
@@ -566,7 +579,7 @@
   <string name="init_maintenance_directories">Poista orpotiedostot</string>
   <string name="init_location">Paikkatieto</string>
   <string name="init_location_note">Laitteissa joissa on Google Play Service, c:goen voi automaattisesti käyttää paremman paikkatiedon tuottajaa. Tämä kuitenkin estää ulkoisen BlueTooth GPS vastaanottimen käytön.</string>
-  <string name="init_location_googleplayservices">Käytä Google Play Services:iä</string>
+  <string name="init_location_googleplayservices">Käytä Google Play Palveluita</string>
   <string name="init_low_power">Virransäästötila</string>
   <string name="init_low_power_note">Virransäästötila välttää GPS:n ja gyroskoopin käyttöä, kun tarkka paikantaminen ei ole tarpeellista. Tämä kuitenkin pidentää paikantamiseen tarvittavaa aikaa.</string>
   <string name="init_low_power_mode">Aktivoi virransäästötila</string>
@@ -604,6 +617,8 @@
   <string name="feature_search_geocode">Hae GC-koodilla</string>
   <string name="feature_search_owner">Etsi omistajan mukaan</string>
   <string name="feature_search_finder">Etsi löytäjän mukaan</string>
+  <string name="init_experimental_title">Kokeelliset ominaisuudet</string>
+  <string name="init_newmap">Käytä uutta karttaa oletuksena (live/luettelot)</string>
   <!-- map sources -->
   <string name="map_source_google_map">Google Map</string>
   <string name="map_source_google_satellite">Google: Satelliitti</string>
@@ -630,9 +645,12 @@
   <string name="auth_register">Luo käyttäjätili</string>
   <string name="auth_connected">Yhdistetty</string>
   <string name="auth_unconnected">Ei vielä yhdistetty</string>
+  <string name="auth_connected_as">Yhdistetty käyttäjänä %s</string>
   <string name="auth_dialog_waiting">Odotetaan %s…</string>
   <string name="auth_explain_short">Seuraava prosessi sallii <b>c:geo</b>:lle pääsyn %s.</string>
   <string name="auth_explain_long">Painamalla \"Valtuuta c:geo\"-painiketta Aloitat tapahtuman. Tämä tapahtuma Avaa %s sivun web-selaimessa. Kirjaudu sisään tällä sivulla ja anna <b>c:geo</b> lupa käyttää tiliäsi. Siinä kaikki.</string>
+  <string name="auth_forget_title">Unohda kirjautumistiedot?</string>
+  <string name="auth_forget_message">Yhteytesi katkaistaan tästä palvelusta. Tällä hetkellä tallennettuna olevat kirjautumistietosi menetetään.</string>
   <!-- auth credentials -->
   <string name="auth_credentials_explain_short">Seuraava prosessi sallii <b>c:geo</b>:lle pääsyn %s.</string>
   <!-- auth token -->
@@ -658,6 +676,8 @@
   <string name="cache_offline_refresh">Päivitä</string>
   <string name="cache_offline_drop">Poista</string>
   <string name="cache_offline_store">Tallenna</string>
+  <string name="cache_offline_manage">Hallinnoi</string>
+  <string name="cache_offline_store_in_list">Tallenna listaan</string>
   <string name="cache_offline_stored">Tallennettu laitteeseen</string>
   <string name="cache_offline_not_ready">Ei käytettävissä offline-tilassa</string>
   <string name="cache_offline_time_about">noin</string>
@@ -744,6 +764,7 @@
   <string name="cache_dialog_favorite_remove_message">Poista kätkö suosikeistasi…</string>
   <string name="cache_menu_navigate">Navigoi</string>
   <string name="cache_menu_navigation_drive">Navigointi (ajo)</string>
+  <string name="cache_menu_navigation_drive_select_target">Kätkö vai pysäköintialue?</string>
   <string name="cache_menu_navigation_walk">Navigointi (kävely)</string>
   <string name="cache_menu_navigation_transit">Navigointi (liikenteessä)</string>
   <string name="cache_menu_navigation_bike">Navigointi (Pyöräily)</string>
@@ -752,6 +773,7 @@
   <string name="cache_menu_sygic_drive">Sygic (ajaessa)</string>
   <string name="cache_menu_radar">Tutka</string>
   <string name="cache_menu_map">Kartta</string>
+  <string name="cache_menu_new_map">Uusi kartta</string>
   <string name="cache_menu_map_static">Staattinen kartta</string>
   <string name="cache_menu_download_map_static">Lataa Staattinen kartta</string>
   <string name="cache_menu_rmaps">Rmaps</string>
@@ -816,6 +838,7 @@
   <string name="cache_image">Kuva</string>
   <string name="cache_image_open_file">Avaa tiedosto</string>
   <string name="cache_image_open_browser">Avaa selaimessa</string>
+  <string name="cache_image_add_waypoint">Lisää reittipiste</string>
   <string name="cache_share_field">Jaa</string>
   <string name="cache_time_full_hours">Kello</string>
   <string name="cache_listed_on">Listattu %s</string>
@@ -930,6 +953,7 @@
   <string name="map_strategy_auto">Nopeuden mukaan</string>
   <string name="map_strategy_detailed">Yksityiskohtainen</string>
   <string name="live_map_notification">Koordinaatit livekartalla eivät välttämättä aina ole tarkat. Mahdollisesti epätarkat koordinaatit on merkitty oranssilla ympyrällä. \nKätkön tietojen avaaminen tai kätkön tallentaminen offline-käyttöä varten antaa aina tarkat koordinaatit.\n\nLisää tietoa löytyy ohjelmasta \"tietoja c:geo\"-sivulla.</string>
+  <string name="map_select_multiple_items">Valitse kohde</string>
   <!-- search -->
   <string name="search_bar_hint">Etsi kätköjä</string>
   <string name="search_bar_desc">Kätköt (GC-koodi, avainsana), reissaajat (TB-koodi)</string>
@@ -1412,4 +1436,5 @@
   <string name="invitation_message">Kokeile c:geo-sovellusta geokätköilyyn</string>
   <string name="cache_list_remove_from">Poista listalta</string>
   <string name="list_list_headline">Listat:</string>
+  <string name="cache_store_list">Tallenna listaan</string>
 </resources>

@@ -878,7 +878,9 @@
   <string name="simple_dir_chooser_invalid_path">Ungültiger Pfad</string>
   <!-- gpx -->
   <string name="gpx_import_loading_caches">Lade Caches aus GPX-Datei</string>
+  <string name="gpx_import_loading_caches_with_filename">Lade Caches aus GPX-Datei %1$s</string>
   <string name="gpx_import_loading_waypoints">Lade Wegpunkte aus GPX-Datei</string>
+  <string name="gpx_import_loading_waypoints_with_filename">Lade Wegpunkte aus GPX-Datei %1$s</string>
   <string name="gpx_import_store_static_maps">Schreibe statische Karten</string>
   <string name="gpx_import_caches_imported">Caches importiert</string>
   <string name="gpx_import_caches_imported_with_filename">%1$d Caches von %2$s importiert</string>
