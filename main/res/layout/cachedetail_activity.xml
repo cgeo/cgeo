@@ -21,7 +21,6 @@
         android:background="@drawable/actionbar_background"
         app:footerColor="#ff888888"
         app:footerIndicatorHeight="3dp"
-        app:footerIndicatorStyle="underline"
-        app:textSize="16sp" />
+        app:footerIndicatorStyle="underline" />
 
 </LinearLayout>
