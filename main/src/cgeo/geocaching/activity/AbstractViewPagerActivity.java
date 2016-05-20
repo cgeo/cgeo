@@ -1,17 +1,5 @@
 package cgeo.geocaching.activity;
 
-import butterknife.ButterKnife;
-
-import cgeo.geocaching.R;
-import cgeo.geocaching.utils.Log;
-
-import com.viewpagerindicator.TitlePageIndicator;
-import com.viewpagerindicator.TitleProvider;
-
-import org.apache.commons.lang3.tuple.Pair;
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -21,10 +9,20 @@ import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.viewpagerindicator.TitlePageIndicator;
+
+import org.apache.commons.lang3.tuple.Pair;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import butterknife.ButterKnife;
+import cgeo.geocaching.R;
+import cgeo.geocaching.utils.Log;
 
 /**
  * Abstract activity with the ability to manage pages in a view pager.
@@ -107,7 +105,7 @@ public abstract class AbstractViewPagerActivity<Page extends Enum<Page>> extends
     /**
      * The ViewPagerAdapter for scrolling through pages of the CacheDetailActivity.
      */
-    private class ViewPagerAdapter extends PagerAdapter implements TitleProvider {
+    private class ViewPagerAdapter extends PagerAdapter {
 
         @Override
         public void destroyItem(final ViewGroup container, final int position, final Object object) {
@@ -200,14 +198,13 @@ public abstract class AbstractViewPagerActivity<Page extends Enum<Page>> extends
         }
 
         @Override
-        public String getTitle(final int position) {
+        public CharSequence getPageTitle(int position) {
             final Page page = pageOrder.get(position);
             if (page == null) {
                 return "";
             }
             return AbstractViewPagerActivity.this.getTitle(page);
         }
-
     }
 
     /**

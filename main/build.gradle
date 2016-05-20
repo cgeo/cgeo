@@ -323,6 +323,9 @@ dependencies {
 
     // EXIF location extraction from images
     compile 'com.drewnoakes:metadata-extractor:2.9.1'
+
+    // view pager titles for cache details and similar view pager based activities
+    compile 'com.github.renaudcerrato:ViewPagerIndicator:2.4.1-gradle'
 }
 
 /*
