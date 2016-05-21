@@ -21,11 +21,11 @@
         android:paddingRight="3dip"
         android:paddingTop="5dip"
         android:scrollHorizontally="true"
-        android:singleLine="true"
         android:textColor="?text_color"
         android:textIsSelectable="false"
         android:textSize="18sp"
-        tools:text="name"/>
+        tools:text="name"
+        android:maxLines="1" />
 
     <!-- cache attributes and other info -->
 
@@ -43,10 +43,10 @@
         android:paddingBottom="5dip"
         android:paddingRight="3dip"
         android:scrollHorizontally="true"
-        android:singleLine="true"
         android:textColor="?text_color_grey"
         android:textIsSelectable="false"
         android:textSize="12sp"
-        tools:text="geocode"/>
+        tools:text="geocode"
+        android:maxLines="1" />
 
 </RelativeLayout>

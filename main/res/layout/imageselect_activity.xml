@@ -62,8 +62,7 @@
             android:hint="@string/log_image_caption"
             android:inputType="textCapSentences"
             android:maxLength="50"
-            android:minLines="1"
-            android:singleLine="false" />
+            android:minLines="1" />
 
         <EditText
             android:id="@+id/description"
@@ -72,8 +71,7 @@
             android:hint="@string/log_image_description"
             android:inputType="textMultiLine|textCapSentences"
             android:maxLength="250"
-            android:minLines="5"
-            android:singleLine="false" />
+            android:minLines="5" />
 
         <Spinner
             android:id="@+id/logImageScale"

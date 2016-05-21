@@ -26,10 +26,10 @@
             android:paddingLeft="5dip"
             android:paddingRight="5dip"
             android:scrollHorizontally="true"
-            android:singleLine="true"
             android:textColor="@color/text_icon"
             android:textSize="12sp"
-            android:visibility="gone" />
+            android:visibility="gone"
+            android:maxLines="1" />
 
         <view
             android:id="@+id/map"

@@ -33,11 +33,11 @@
             android:gravity="left"
             android:lines="1"
             android:scrollHorizontally="true"
-            android:singleLine="true"
             android:textColor="?text_color"
             android:textIsSelectable="false"
             android:textSize="14sp"
-            tools:text="name"/>
+            tools:text="name"
+            android:maxLines="1" />
 
         <TextView
             android:id="@+id/trackcode"
@@ -48,11 +48,11 @@
             android:gravity="left"
             android:lines="1"
             android:scrollHorizontally="true"
-            android:singleLine="true"
             android:textColor="?text_color"
             android:textIsSelectable="false"
             android:textSize="14sp"
-            tools:text="tracking code"/>
+            tools:text="tracking code"
+            android:maxLines="1" />
     </LinearLayout>
 
     <TextView
@@ -65,10 +65,10 @@
         android:gravity="right"
         android:lines="1"
         android:scrollHorizontally="true"
-        android:singleLine="true"
         android:textColor="?text_color"
         android:textIsSelectable="false"
         android:textSize="14sp"
-        tools:text="action"/>
+        tools:text="action"
+        android:maxLines="1" />
 
 </LinearLayout>

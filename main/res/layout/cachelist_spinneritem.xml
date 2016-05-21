@@ -12,20 +12,20 @@
     <TextView
         android:id="@android:id/text1"
         tools:text="This is the title"
-        android:singleLine="true"
         android:ellipsize="marquee"
         android:layout_width="match_parent"
         style="?attr/titleTextStyle"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:maxLines="1" />
 
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:singleLine="true"
         android:ellipsize="marquee"
         style="?attr/subtitleTextStyle"
         tools:text="This is the subtitle"
-        android:id="@android:id/text2" />
+        android:id="@android:id/text2"
+        android:maxLines="1" />
 
 </LinearLayout>

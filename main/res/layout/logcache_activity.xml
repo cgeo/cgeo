@@ -48,7 +48,6 @@
                 android:inputType="textMultiLine|textCapSentences"
                 android:maxLength="4000"
                 android:minLines="5"
-                android:singleLine="false"
                 tools:text="The log text is limited to 4000 characters."/>
 
             <LinearLayout
@@ -74,8 +73,8 @@
                     style="@style/edittext_full"
                     android:hint="@string/log_hint_log_password"
                     android:inputType="text"
-                    android:singleLine="true"
-                    tools:ignore="TextFields" />
+                    tools:ignore="TextFields"
+                    android:maxLines="1" />
             </LinearLayout>
 
             <include layout="@layout/gcvote_rating_bar"  android:layout_width="wrap_content" android:layout_height="wrap_content"/>

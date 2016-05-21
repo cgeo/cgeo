@@ -83,8 +83,7 @@
             android:hint="@string/log_new_log_text"
             android:inputType="textMultiLine|textCapSentences"
             android:lines="5"
-            android:maxLength="4000"
-            android:singleLine="false" />
+            android:maxLength="4000" />
 
         <LinearLayout
             android:id="@+id/tweet_box"

@@ -111,7 +111,6 @@
                 style="@style/button_full"
                 android:layout_width="280dip"
                 android:lines="2"
-                android:singleLine="false"
                 android:text="@string/about_donation_more" />
         </LinearLayout>
     </LinearLayout>

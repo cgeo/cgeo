@@ -21,11 +21,11 @@
         android:gravity="right"
         android:lines="1"
         android:scrollHorizontally="true"
-        android:singleLine="true"
         android:textColor="?text_color_grey"
         android:textIsSelectable="false"
         android:textSize="12sp"
-        tools:text="file path"/>
+        tools:text="file path"
+        android:maxLines="1" />
 
     <TextView
         android:id="@+id/mapfilename"
@@ -35,10 +35,10 @@
         android:gravity="left"
         android:lines="1"
         android:scrollHorizontally="true"
-        android:singleLine="true"
         android:textColor="?text_color"
         android:textIsSelectable="false"
         android:textSize="22sp"
-        tools:text="file name"/>
+        tools:text="file name"
+        android:maxLines="1" />
 
 </LinearLayout>

@@ -56,12 +56,12 @@
                 android:focusable="false"
                 android:lines="1"
                 android:scrollHorizontally="true"
-                android:singleLine="true"
                 android:textColor="?text_color_headline"
                 android:textSize="14sp"
                 android:visibility="gone"
                 tools:visiblity="visible"
-                tools:text="Info"/>
+                tools:text="Info"
+                android:maxLines="1" />
         </LinearLayout>
     </RelativeLayout>
 
@@ -75,12 +75,12 @@
         android:focusable="false"
         android:lines="1"
         android:scrollHorizontally="true"
-        android:singleLine="true"
         android:textColor="?text_color_headline"
         android:textSize="14sp"
         android:visibility="gone"
         tools:visiblity="visible"
-        tools:text="1.2.3.4.5N 6.7.8.9.10S"/>
+        tools:text="1.2.3.4.5N 6.7.8.9.10S"
+        android:maxLines="1" />
 
     <TextView
         android:id="@+id/note"

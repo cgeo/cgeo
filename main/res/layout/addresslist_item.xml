@@ -20,7 +20,6 @@
         android:ellipsize="marquee"
         android:gravity="left"
         android:scrollHorizontally="true"
-        android:singleLine="false"
         android:textColor="?text_color"
         android:textIsSelectable="false"
         android:textSize="22sp"
@@ -34,10 +33,10 @@
         android:gravity="left"
         android:lines="1"
         android:scrollHorizontally="true"
-        android:singleLine="true"
         android:textColor="?text_color"
         android:textIsSelectable="false"
         android:textSize="12sp"
-        tools:text="distance"/>
+        tools:text="distance"
+        android:maxLines="1" />
 
 </LinearLayout>

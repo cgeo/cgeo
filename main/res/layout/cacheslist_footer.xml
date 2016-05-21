@@ -11,8 +11,8 @@
     android:lines="1"
     android:padding="8dip"
     android:scrollHorizontally="true"
-    android:singleLine="true"
     android:text="@string/caches_no_cache"
     android:textColor="@color/just_white"
     android:textSize="16sp"
-    tools:context=".CacheListActivity" />
+    tools:context=".CacheListActivity"
+    android:maxLines="1" />

@@ -71,8 +71,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/waypoint_note"
             android:inputType="textMultiLine|textCapSentences"
-            android:minLines="5"
-            android:singleLine="false" />
+            android:minLines="5" />
 
         <CheckBox
             android:id="@+id/wpt_visited_checkbox"
