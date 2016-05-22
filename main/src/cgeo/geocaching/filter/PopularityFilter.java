@@ -14,23 +14,20 @@ import java.util.List;
 
 class PopularityFilter extends AbstractFilter {
     private final int minFavorites;
-    private final int maxFavorites;
 
-    PopularityFilter(@NonNull final String name, final int minFavorites, final int maxFavorites) {
+    PopularityFilter(@NonNull final String name, final int minFavorites) {
         super(name);
         this.minFavorites = minFavorites;
-        this.maxFavorites = maxFavorites;
     }
 
     protected PopularityFilter(final Parcel in) {
         super(in);
         minFavorites = in.readInt();
-        maxFavorites = in.readInt();
     }
 
     @Override
     public boolean accepts(@NonNull final Geocache cache) {
-        return (cache.getFavoritePoints() > minFavorites) && (cache.getFavoritePoints() <= maxFavorites);
+        return cache.getFavoritePoints() > minFavorites;
     }
 
     public static class Factory implements IFilterFactory {
@@ -42,10 +39,9 @@ class PopularityFilter extends AbstractFilter {
         public List<IFilter> getFilters() {
             final List<IFilter> filters = new ArrayList<>(FAVORITES.length);
             for (final int minRange : FAVORITES) {
-                final int maxRange = Integer.MAX_VALUE;
                 final String range = "> " + minRange;
                 final String name = CgeoApplication.getInstance().getResources().getQuantityString(R.plurals.favorite_points, minRange, range);
-                filters.add(new PopularityFilter(name, minRange, maxRange));
+                filters.add(new PopularityFilter(name, minRange));
             }
             return filters;
         }
@@ -55,7 +51,6 @@ class PopularityFilter extends AbstractFilter {
     public void writeToParcel(final Parcel dest, final int flags) {
         super.writeToParcel(dest, flags);
         dest.writeInt(minFavorites);
-        dest.writeInt(maxFavorites);
     }
 
     public static final Creator<PopularityFilter> CREATOR
