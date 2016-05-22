@@ -20,6 +20,7 @@ import cgeo.geocaching.maps.interfaces.MapProvider;
 import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider;
 import cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider.OfflineMapSource;
+import cgeo.geocaching.playservices.GooglePlayServices;
 import cgeo.geocaching.sensors.MagnetometerAndAccelerometerProvider;
 import cgeo.geocaching.sensors.OrientationProvider;
 import cgeo.geocaching.sensors.RotationProvider;
@@ -443,7 +444,7 @@ public class Settings {
     public static boolean useGooglePlayServices() {
         final boolean defaultForPhone = VERSION.SDK_INT >= VERSION_CODES.ICE_CREAM_SANDWICH;
         // By default, enable play services starting from ICS.
-        return CgeoApplication.getInstance().isGooglePlayServicesAvailable() &&
+        return GooglePlayServices.isAvailable() &&
                 outdatedPhoneModelOrSdk() ? defaultForPhone : getBoolean(R.string.pref_googleplayservices, defaultForPhone);
     }
 

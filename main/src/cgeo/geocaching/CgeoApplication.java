@@ -8,9 +8,6 @@ import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.OOMDumpingUncaughtExceptionHandler;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GoogleApiAvailability;
-
 import org.eclipse.jdt.annotation.NonNull;
 
 import android.annotation.SuppressLint;
@@ -36,7 +33,6 @@ public class CgeoApplication extends Application {
     public boolean showLoginToast = true; //login toast shown just once.
     private boolean liveMapHintShownInThisSession = false; // livemap hint has been shown
     private static CgeoApplication instance;
-    private boolean isGooglePlayServicesAvailable = false;
     private Locale applicationLocale;
     private ConnectivityManager connectivityManager = null;
 
@@ -95,10 +91,6 @@ public class CgeoApplication extends Application {
         // ensure initialization of lists
         DataStore.getLists();
 
-        // Check if Google Play services is available
-        if (GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(this) == ConnectionResult.SUCCESS) {
-            isGooglePlayServicesAvailable = true;
-        }
         final Sensors sensors = Sensors.getInstance();
         sensors.setupGeoDataObservables(Settings.useGooglePlayServices(), Settings.useLowPowerMode());
         sensors.setupDirectionObservable();
@@ -148,10 +140,6 @@ public class CgeoApplication extends Application {
      */
     public void forceRelog() {
         forceRelog = true;
-    }
-
-    public boolean isGooglePlayServicesAvailable() {
-        return isGooglePlayServicesAvailable;
     }
 
     /**

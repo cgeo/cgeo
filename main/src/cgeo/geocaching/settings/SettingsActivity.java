@@ -16,6 +16,7 @@ import cgeo.geocaching.gcvote.GCVote;
 import cgeo.geocaching.maps.MapProviderFactory;
 import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.network.AndroidBeam;
+import cgeo.geocaching.playservices.GooglePlayServices;
 import cgeo.geocaching.sensors.OrientationProvider;
 import cgeo.geocaching.sensors.RotationProvider;
 import cgeo.geocaching.sensors.Sensors;
@@ -480,7 +481,7 @@ public class SettingsActivity extends PreferenceActivity {
                 return true;
             }
         });
-        playServices.setEnabled(CgeoApplication.getInstance().isGooglePlayServicesAvailable());
+        playServices.setEnabled(GooglePlayServices.isAvailable());
         getPreference(R.string.pref_lowpowermode).setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(final Preference preference, final Object newValue) {

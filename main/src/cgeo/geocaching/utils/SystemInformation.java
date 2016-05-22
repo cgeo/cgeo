@@ -2,10 +2,10 @@ package cgeo.geocaching.utils;
 
 import cgeo.calendar.CalendarAddon;
 import cgeo.contacts.ContactsAddon;
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.capability.ILogin;
+import cgeo.geocaching.playservices.GooglePlayServices;
 import cgeo.geocaching.sensors.MagnetometerAndAccelerometerProvider;
 import cgeo.geocaching.sensors.OrientationProvider;
 import cgeo.geocaching.sensors.RotationProvider;
@@ -32,7 +32,7 @@ public final class SystemInformation {
 
     @NonNull
     public static String getSystemInformation(@NonNull final Context context) {
-        final boolean googlePlayServicesAvailable = CgeoApplication.getInstance().isGooglePlayServicesAvailable();
+        final boolean googlePlayServicesAvailable = GooglePlayServices.isAvailable();
         final String usedDirectionSensor;
         if (Settings.useOrientationSensor(context)) {
             usedDirectionSensor = "orientation";
