@@ -1293,4 +1293,14 @@ public class Settings {
     public static void setAvatarUrl(@NonNull final ICredentials connector, final String avatarUrl) {
         putString(connector.getAvatarPreferenceKey(), avatarUrl);
     }
+
+    /**
+     * Return the locale that should be used to display information to the user.
+     *
+     * @return either the system locale or an English one, depending on the settings
+     */
+    public static Locale getApplicationLocale() {
+        return Settings.useEnglish() ? Locale.ENGLISH : Locale.getDefault();
+    }
+
 }

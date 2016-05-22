@@ -1,5 +1,42 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.activity.AbstractActionBarActivity;
+import cgeo.geocaching.activity.ShowcaseViewBuilder;
+import cgeo.geocaching.connector.ConnectorFactory;
+import cgeo.geocaching.connector.capability.ILogin;
+import cgeo.geocaching.connector.gc.PocketQueryListActivity;
+import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.enumerations.StatusCode;
+import cgeo.geocaching.list.PseudoList;
+import cgeo.geocaching.list.StoredList;
+import cgeo.geocaching.location.AndroidGeocoder;
+import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.location.Units;
+import cgeo.geocaching.maps.DefaultMap;
+import cgeo.geocaching.network.Network;
+import cgeo.geocaching.playservices.AppInvite;
+import cgeo.geocaching.sensors.GeoData;
+import cgeo.geocaching.sensors.GeoDirHandler;
+import cgeo.geocaching.sensors.GpsStatusProvider;
+import cgeo.geocaching.sensors.GpsStatusProvider.Status;
+import cgeo.geocaching.sensors.Sensors;
+import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.settings.SettingsActivity;
+import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.DatabaseBackupUtils;
+import cgeo.geocaching.utils.Formatter;
+import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.TextUtils;
+import cgeo.geocaching.utils.Version;
+
+import com.github.amlcurran.showcaseview.targets.ActionViewTarget;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
+
+import org.apache.commons.lang3.StringUtils;
+
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.SearchManager;
@@ -27,12 +64,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.github.amlcurran.showcaseview.targets.ActionViewTarget;
-import com.google.zxing.integration.android.IntentIntegrator;
-import com.google.zxing.integration.android.IntentResult;
-
-import org.apache.commons.lang3.StringUtils;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -41,35 +72,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import cgeo.geocaching.activity.AbstractActionBarActivity;
-import cgeo.geocaching.activity.ShowcaseViewBuilder;
-import cgeo.geocaching.connector.ConnectorFactory;
-import cgeo.geocaching.connector.capability.ILogin;
-import cgeo.geocaching.connector.gc.PocketQueryListActivity;
-import cgeo.geocaching.enumerations.CacheType;
-import cgeo.geocaching.enumerations.StatusCode;
-import cgeo.geocaching.list.PseudoList;
-import cgeo.geocaching.list.StoredList;
-import cgeo.geocaching.location.AndroidGeocoder;
-import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.location.Units;
-import cgeo.geocaching.maps.DefaultMap;
-import cgeo.geocaching.playservices.AppInvite;
-import cgeo.geocaching.sensors.GeoData;
-import cgeo.geocaching.sensors.GeoDirHandler;
-import cgeo.geocaching.sensors.GpsStatusProvider;
-import cgeo.geocaching.sensors.GpsStatusProvider.Status;
-import cgeo.geocaching.sensors.Sensors;
-import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.settings.SettingsActivity;
-import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.ui.dialog.Dialogs;
-import cgeo.geocaching.utils.AndroidRxUtils;
-import cgeo.geocaching.utils.DatabaseBackupUtils;
-import cgeo.geocaching.utils.Formatter;
-import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.TextUtils;
-import cgeo.geocaching.utils.Version;
 import rx.Observable;
 import rx.android.app.AppObservable;
 import rx.android.schedulers.AndroidSchedulers;
@@ -146,12 +148,12 @@ public class MainActivity extends AbstractActionBarActivity {
     };
 
     private final class ConnectivityChangeReceiver extends BroadcastReceiver {
-        private boolean isConnected = app.isNetworkConnected();
+        private boolean isConnected = Network.isConnected();
 
         @Override
         public void onReceive(final Context context, final Intent intent) {
             final boolean wasConnected = isConnected;
-            isConnected = app.isNetworkConnected();
+            isConnected = Network.isConnected();
             if (isConnected && !wasConnected) {
                 startBackgroundLogin();
             }
@@ -250,9 +252,7 @@ public class MainActivity extends AbstractActionBarActivity {
     }
 
     private void startBackgroundLogin() {
-        assert app != null;
-
-        final boolean mustLogin = app.mustRelog();
+        final boolean mustLogin = ConnectorFactory.mustRelog();
 
         for (final ILogin conn : ConnectorFactory.getActiveLiveConnectors()) {
             if (mustLogin || !conn.isLoggedIn()) {

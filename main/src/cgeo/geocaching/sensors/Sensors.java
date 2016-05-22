@@ -10,13 +10,14 @@ import cgeo.geocaching.utils.RxUtils;
 
 import org.eclipse.jdt.annotation.NonNull;
 
-import rx.Observable;
-import rx.functions.Action1;
-import rx.functions.Func1;
-
+import android.app.Application;
 import android.content.Context;
 
 import java.util.concurrent.atomic.AtomicBoolean;
+
+import rx.Observable;
+import rx.functions.Action1;
+import rx.functions.Func1;
 
 public class Sensors {
 
@@ -27,7 +28,7 @@ public class Sensors {
     @NonNull private volatile GeoData currentGeo = GeoData.DUMMY_LOCATION;
     private volatile float currentDirection = 0.0f;
     private final boolean hasCompassCapabilities;
-    private final CgeoApplication app = CgeoApplication.getInstance();
+    private final Application app = CgeoApplication.getInstance();
 
     private static class InstanceHolder {
         static final Sensors INSTANCE = new Sensors();

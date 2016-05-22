@@ -109,6 +109,8 @@ public final class ConnectorFactory {
     @NonNull
     private static final Collection<ISearchByFinder> SEARCH_BY_FINDER_CONNECTORS = getMatchingConnectors(ISearchByFinder.class);
 
+    private static boolean forceRelog = false; // c:geo needs to log into cache providers
+
     private ConnectorFactory() {
         // utility class
     }
@@ -405,4 +407,23 @@ public final class ConnectorFactory {
 
         return fromNetwork.concatWith(fromLocalStorage).take(1);
     }
+
+    /**
+     * Check if cgeo must relog even if already logged in.
+     *
+     * @return {@code true} if it is necessary to relog
+     */
+    public static boolean mustRelog() {
+        final boolean mustLogin = forceRelog;
+        forceRelog = false;
+        return mustLogin;
+    }
+
+    /**
+     * Force cgeo to relog when reaching the main activity.
+     */
+    public static void forceRelog() {
+        forceRelog = true;
+    }
+
 }

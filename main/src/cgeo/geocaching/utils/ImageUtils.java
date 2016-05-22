@@ -1,9 +1,9 @@
 package cgeo.geocaching.utils;
 
 import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.models.Image;
 import cgeo.geocaching.R;
 import cgeo.geocaching.compatibility.Compatibility;
+import cgeo.geocaching.models.Image;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -11,12 +11,7 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
-import rx.Observable;
-import rx.Scheduler.Worker;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action0;
-import rx.functions.Action1;
-
+import android.app.Application;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -52,6 +47,12 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 import java.util.concurrent.LinkedBlockingQueue;
+
+import rx.Observable;
+import rx.Scheduler.Worker;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action0;
+import rx.functions.Action1;
 
 public final class ImageUtils {
     private static final int[] ORIENTATIONS = {
@@ -116,7 +117,7 @@ public final class ImageUtils {
      */
     @NonNull
     private static BitmapDrawable scaleBitmapTo(@NonNull final Bitmap image, final int maxWidth, final int maxHeight) {
-        final CgeoApplication app = CgeoApplication.getInstance();
+        final Application app = CgeoApplication.getInstance();
         Bitmap result = image;
         int width = image.getWidth();
         int height = image.getHeight();

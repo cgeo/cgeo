@@ -10,12 +10,14 @@ import cgeo.geocaching.test.R;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.xml.sax.InputSource;
 
+import android.app.Application;
+
 import java.util.List;
 
 public class GeokretyParserTest extends AbstractResourceInstrumentationTestCase {
 
     public void testParse() throws Exception {
-        final CgeoApplication app = CgeoApplication.getInstance();
+        final Application app = CgeoApplication.getInstance();
 
         final List<Trackable> trackables = GeokretyParser.parse(new InputSource(getResourceStream(R.raw.geokret141_xml)));
         assertThat(trackables).hasSize(2);
@@ -67,7 +69,7 @@ public class GeokretyParserTest extends AbstractResourceInstrumentationTestCase 
     }
 
     public static void testGetType() throws Exception {
-        final CgeoApplication app = CgeoApplication.getInstance();
+        final Application app = CgeoApplication.getInstance();
         assertThat(GeokretyParser.getType(0)).isEqualTo(app.getString(cgeo.geocaching.R.string.geokret_type_traditional));
         assertThat(GeokretyParser.getType(1)).isEqualTo(app.getString(cgeo.geocaching.R.string.geokret_type_book_or_media));
         assertThat(GeokretyParser.getType(2)).isEqualTo(app.getString(cgeo.geocaching.R.string.geokret_type_human));
@@ -78,7 +80,7 @@ public class GeokretyParserTest extends AbstractResourceInstrumentationTestCase 
     }
 
     public void testParseNoValueFields() throws Exception {
-        final CgeoApplication app = CgeoApplication.getInstance();
+        final Application app = CgeoApplication.getInstance();
 
         final List<Trackable> trackables = GeokretyParser.parse(new InputSource(getResourceStream(R.raw.geokret146_xml)));
         assertThat(trackables).hasSize(1);

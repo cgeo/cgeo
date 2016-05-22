@@ -7,6 +7,7 @@ import cgeo.geocaching.SelectMapfileActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.apps.navi.NavigationAppFactory;
 import cgeo.geocaching.apps.navi.NavigationAppFactory.NavigationAppsEnum;
+import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.capability.ICredentials;
 import cgeo.geocaching.connector.ec.ECConnector;
 import cgeo.geocaching.connector.gc.GCConnector;
@@ -763,7 +764,7 @@ public class SettingsActivity extends PreferenceActivity {
                 }
                 redrawScreen(preference.getPreferenceManager().findPreference(getKey(R.string.preference_screen_services)));
                 // reset log-in status if connector activation was changed
-                CgeoApplication.getInstance().forceRelog();
+                ConnectorFactory.forceRelog();
             } else if (preference instanceof ListPreference) {
                 // For list preferences, look up the correct display value in
                 // the preference's 'entries' list.

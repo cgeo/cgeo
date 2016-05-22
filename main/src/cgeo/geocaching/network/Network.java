@@ -1,5 +1,6 @@
 package cgeo.geocaching.network;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.utils.JsonUtils;
@@ -14,6 +15,10 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 
 import java.io.File;
 import java.io.IOException;
@@ -70,6 +75,8 @@ public final class Network {
             }
         }
     };
+
+    private static ConnectivityManager connectivityManager = null;
 
     private Network() {
         // Utility class
@@ -484,6 +491,20 @@ public final class Network {
             Log.e("Network.encode", e);
         }
         return null;
+    }
+
+    /**
+     * Checks if the device has network connection.
+     *
+     * @return {@code true} if the device is connected to the network.
+     */
+    public static boolean isConnected() {
+        if (connectivityManager == null) {
+            // Concurrent assignment would not hurt as this request is idempotent
+            connectivityManager = (ConnectivityManager) CgeoApplication.getInstance().getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        }
+        final NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
 }

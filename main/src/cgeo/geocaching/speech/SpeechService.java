@@ -1,12 +1,12 @@
 package cgeo.geocaching.speech;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
@@ -129,7 +129,7 @@ public class SpeechService extends Service implements OnInitListener {
             return;
         }
 
-        final int switchLocale = tts.setLanguage(CgeoApplication.getInstance().getApplicationLocale());
+        final int switchLocale = tts.setLanguage(Settings.getApplicationLocale());
 
         if (switchLocale == TextToSpeech.LANG_MISSING_DATA) {
             startingActivity.startActivity(new Intent(Engine.ACTION_INSTALL_TTS_DATA));

@@ -5,6 +5,7 @@ import cgeo.geocaching.apps.navi.NavigationAppFactory;
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.network.Network;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.CacheDetailsCreator;
@@ -198,7 +199,7 @@ public class CachePopupFragment extends AbstractDialogFragment {
                 return;
             }
 
-            if (!CgeoApplication.getInstance().isNetworkConnected()) {
+            if (!Network.isConnected()) {
                 showToast(getString(R.string.err_server));
                 return;
             }
