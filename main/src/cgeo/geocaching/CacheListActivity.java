@@ -134,6 +134,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private static final int REFRESH_WARNING_THRESHOLD = 100;
 
     private static final int REQUEST_CODE_IMPORT_GPX = 1;
+    private static final int REQUEST_CODE_RESTART = 2;
 
     private static final String STATE_FILTER = "currentFilter";
     private static final String STATE_INVERSE_SORT = "currentInverseSort";
@@ -1098,7 +1099,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     private void importGpx() {
-        GpxFileListActivity.startSubActivity(this, listId);
+        GpxFileListActivity.startSubActivity(this, listId, REQUEST_CODE_RESTART);
     }
 
     private void importGpxFromAndroid() {
@@ -1120,9 +1121,11 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         } else if (requestCode == FilterActivity.REQUEST_SELECT_FILTER && resultCode == Activity.RESULT_OK) {
             final int[] filterIndex = data.getIntArrayExtra(FilterActivity.EXTRA_FILTER_RESULT);
             setFilter(FilterActivity.getFilterFromPosition(filterIndex[0], filterIndex[1]));
+        } else if (requestCode == REQUEST_CODE_RESTART && resultCode == Activity.RESULT_OK) {
+            restartActivity();
         }
 
-        if (type == CacheListType.OFFLINE) {
+        if (type == CacheListType.OFFLINE && requestCode != REQUEST_CODE_RESTART) {
             refreshCurrentList();
         }
     }
