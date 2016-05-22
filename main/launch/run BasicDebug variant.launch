@@ -3,10 +3,13 @@
 <listAttribute key="arguments"/>
 <stringAttribute key="gradle_distribution" value="GRADLE_DISTRIBUTION(WRAPPER)"/>
 <listAttribute key="jvm_arguments"/>
+<listAttribute key="org.eclipse.debug.ui.favoriteGroups">
+<listEntry value="org.eclipse.debug.ui.launchGroup.run"/>
+</listAttribute>
 <booleanAttribute key="show_console_view" value="true"/>
 <booleanAttribute key="show_execution_view" value="true"/>
 <listAttribute key="tasks">
-<listEntry value="testDebug"/>
+<listEntry value=":main:runBasicDebug"/>
 </listAttribute>
 <stringAttribute key="working_dir" value="${git_work_tree:/cgeo}"/>
 </launchConfiguration>
