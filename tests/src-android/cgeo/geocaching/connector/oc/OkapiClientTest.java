@@ -7,6 +7,7 @@ import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.LogEntry;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 
@@ -114,6 +115,21 @@ public class OkapiClientTest extends CGeoTestCase {
         final OCApiLiveConnector connector = (OCApiLiveConnector) ConnectorFactory.getConnector("OC0000");
         assertThat(connector).isNotNull();
         return connector;
+    }
+
+    public static void testLogImages() {
+        final String geoCode = "OCFBC8";
+        final Geocache cache = OkapiClient.getCache(geoCode);
+        assert cache != null; // eclipse null analysis
+        LogEntry logWithImage = null;
+        for (final LogEntry logEntry : cache.getLogs()) {
+            if ("mountainbatchers".equals(logEntry.author)) {
+                logWithImage = logEntry;
+            }
+        }
+        assertThat(logWithImage).isNotNull();
+        assert logWithImage != null; // eclipse null analysis
+        assertThat(logWithImage.getLogImages()).isNotEmpty();
     }
 
 }

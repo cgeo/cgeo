@@ -70,8 +70,12 @@ import okhttp3.Response;
  */
 final class OkapiClient {
 
-    private static final String PARAMETER_LOGCOUNT_VALUE = "all";
     private static final String PARAMETER_LOGCOUNT_KEY = "lpc";
+    private static final String PARAMETER_LOGCOUNT_VALUE = "all";
+
+    private static final String PARAMETER_LOG_FIELDS_KEY = "log_fields";
+    private static final String PARAMETER_LOG_FIELDS_VALUE = "uuid|date|user|type|comment|images";
+
     private static final char SEPARATOR = '|';
     private static final String SEPARATOR_STRING = Character.toString(SEPARATOR);
     private static final SynchronizedDateFormat LOG_DATE_FORMAT = new SynchronizedDateFormat("yyyy-MM-dd HH:mm:ss.SSSZ", TimeZone.getTimeZone("UTC"), Locale.US);
@@ -124,11 +128,15 @@ final class OkapiClient {
     private static final String LOG_COMMENT = "comment";
     private static final String LOG_DATE = "date";
     private static final String LOG_USER = "user";
+    private static final String LOG_IMAGES = "images";
 
     private static final String USER_UUID = "uuid";
     private static final String USER_USERNAME = "username";
     private static final String USER_CACHES_FOUND = "caches_found";
     private static final String USER_INFO_FIELDS = "username|caches_found";
+
+    private static final String IMAGE_CAPTION = "caption";
+    private static final String IMAGE_URL = "url";
 
     // the several realms of possible fields for cache retrieval:
     // Core: for livemap requests (L3 - only with level 3 auth)
@@ -164,6 +172,7 @@ final class OkapiClient {
         params.add("fields", getFullFields(ocapiConn));
         params.add("attribution_append", "none");
         params.add(PARAMETER_LOGCOUNT_KEY, PARAMETER_LOGCOUNT_VALUE);
+        params.add(PARAMETER_LOG_FIELDS_KEY, PARAMETER_LOG_FIELDS_VALUE);
 
         final JSONResult result = request(ocapiConn, OkapiService.SERVICE_CACHE, params);
 
@@ -519,11 +528,11 @@ final class OkapiClient {
                 if (date == null) {
                     continue;
                 }
-
                 final LogEntry log = new LogEntry.Builder()
                         .setAuthor(parseUser(logResponse.get(LOG_USER)))
                         .setDate(date.getTime())
                         .setLogType(parseLogType(logResponse.get(LOG_TYPE).asText()))
+                        .setLogImages(parseLogImages((ArrayNode) logResponse.path(LOG_IMAGES)))
                         .setLog(logResponse.get(LOG_COMMENT).asText().trim()).build();
                 result.add(log);
             } catch (final NullPointerException e) {
@@ -531,6 +540,14 @@ final class OkapiClient {
             }
         }
         return result;
+    }
+
+    private static List<Image> parseLogImages(final ArrayNode imagesNode) {
+        final List<Image> images = new ArrayList<>();
+        for (final JsonNode image : imagesNode) {
+            images.add(new Image.Builder().setUrl(image.get(IMAGE_URL).asText()).setTitle(image.get(IMAGE_CAPTION).asText()).build());
+        }
+        return images;
     }
 
     @Nullable
