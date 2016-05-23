@@ -14,6 +14,7 @@ import org.eclipse.jdt.annotation.Nullable;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Application;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
@@ -104,7 +105,7 @@ public class GCVoteDialog {
         }, new Action1<Boolean>() {
             @Override
             public void call(final Boolean status) {
-                final CgeoApplication context = CgeoApplication.getInstance();
+                final Application context = CgeoApplication.getInstance();
                 final String text = context.getString(status ? R.string.gcvote_sent : R.string.err_gcvote_send_rating);
                 Toast.makeText(context, text, Toast.LENGTH_SHORT).show();
                 if (afterVoteSent != null) {

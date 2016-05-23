@@ -326,6 +326,9 @@ dependencies {
 
     // view pager titles for cache details and similar view pager based activities
     compile 'com.github.renaudcerrato:ViewPagerIndicator:2.4.1-gradle'
+    
+    // reliable process restart
+    compile 'com.jakewharton:process-phoenix:1.0.2'
 }
 
 /*

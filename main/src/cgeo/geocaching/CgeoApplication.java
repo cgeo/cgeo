@@ -11,18 +11,12 @@ import cgeo.geocaching.utils.OOMDumpingUncaughtExceptionHandler;
 import org.eclipse.jdt.annotation.NonNull;
 
 import android.annotation.SuppressLint;
-import android.app.AlarmManager;
 import android.app.Application;
-import android.app.PendingIntent;
-import android.content.Context;
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.view.ViewConfiguration;
 
 import java.lang.reflect.Field;
-
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 public class CgeoApplication extends Application {
 
@@ -112,18 +106,5 @@ public class CgeoApplication extends Application {
         final Resources resources = getResources();
         resources.updateConfiguration(config, resources.getDisplayMetrics());
     }
-
-    /**
-     * Kill and restart the application.
-     */
-    @SuppressFBWarnings("DM_EXIT")
-    public void restartApplication() {
-        final Intent launchIntent = new Intent(this, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        final PendingIntent intent= PendingIntent.getActivity(this, 0, launchIntent, 0);
-        final AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        alarmManager.set(AlarmManager.RTC, System.currentTimeMillis() + 500, intent);
-        System.exit(0);
-    }
-
 
 }

@@ -11,6 +11,7 @@ import org.eclipse.jdt.annotation.NonNull;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Application;
 import android.content.DialogInterface;
 import android.content.res.Resources;
 
@@ -62,7 +63,7 @@ public final class StoredList extends AbstractList {
 
     public static class UserInterface {
         private final WeakReference<Activity> activityRef;
-        private final CgeoApplication app;
+        private final Application app;
         private final Resources res;
 
         public UserInterface(@NonNull final Activity activity) {

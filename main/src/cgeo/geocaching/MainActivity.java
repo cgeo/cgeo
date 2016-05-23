@@ -34,6 +34,7 @@ import cgeo.geocaching.utils.Version;
 import com.github.amlcurran.showcaseview.targets.ActionViewTarget;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
+import com.jakewharton.processphoenix.ProcessPhoenix;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -395,7 +396,7 @@ public class MainActivity extends AbstractActionBarActivity {
     public void onActivityResult(final int requestCode, final int resultCode, final Intent intent) {
         if (requestCode == Intents.SETTINGS_ACTIVITY_REQUEST_CODE) {
             if (resultCode == SettingsActivity.RESTART_NEEDED) {
-                CgeoApplication.getInstance().restartApplication();
+                ProcessPhoenix.triggerRebirth(this);
             }
         } else {
             final IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
