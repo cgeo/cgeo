@@ -1,6 +1,5 @@
 package cgeo.geocaching.ui.dialog;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.settings.Settings;
 
@@ -39,7 +38,6 @@ public class LiveMapInfoDialogBuilder {
             @Override
             public void onClick(final DialogInterface dialog, final int which) {
                 dialog.dismiss();
-                CgeoApplication.getInstance().setLiveMapHintShownInThisSession();
             }
         });
         return builder.create();

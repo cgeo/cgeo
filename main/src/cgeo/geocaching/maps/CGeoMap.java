@@ -1,7 +1,6 @@
 package cgeo.geocaching.maps;
 
 import cgeo.geocaching.CacheListActivity;
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.CompassActivity;
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
@@ -36,7 +35,6 @@ import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.ui.dialog.LiveMapInfoDialogBuilder;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.CancellableHandler;
@@ -555,9 +553,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
             });
         }
 
-        if (!CgeoApplication.getInstance().isLiveMapHintShownInThisSession() && Settings.getLiveMapHintShowCount() <= 3) {
-            LiveMapInfoDialogBuilder.create(activity).show();
-        }
+        LiveMapHint.getInstance().showHint(activity);
         AndroidBeam.disable(activity);
     }
 

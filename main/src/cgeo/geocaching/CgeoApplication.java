@@ -21,7 +21,6 @@ import java.lang.reflect.Field;
 public class CgeoApplication extends Application {
 
     public boolean showLoginToast = true; //login toast shown just once.
-    private boolean liveMapHintShownInThisSession = false; // livemap hint has been shown
     private static CgeoApplication instance;
 
     public static void dumpOnOutOfMemory(final boolean enable) {
@@ -87,14 +86,6 @@ public class CgeoApplication extends Application {
             Log.i("Cleaning applications cache to trim memory");
             DataStore.removeAllFromCache();
         }
-    }
-
-    public boolean isLiveMapHintShownInThisSession() {
-        return liveMapHintShownInThisSession;
-    }
-
-    public void setLiveMapHintShownInThisSession() {
-        liveMapHintShownInThisSession = true;
     }
 
     /**
