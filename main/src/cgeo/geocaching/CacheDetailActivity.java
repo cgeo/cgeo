@@ -1593,7 +1593,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                         if (descriptionView.getText().length() == 0) {
                             descriptionView.setText(description, TextView.BufferType.SPANNABLE);
                         } else {
-                            descriptionView.append(description);
+                            descriptionView.append("\n" + description);
                         }
                     } catch (final Exception e) {
                         // On 4.1, there is sometimes a crash on measuring the layout: https://code.google.com/p/android/issues/detail?id=35412
