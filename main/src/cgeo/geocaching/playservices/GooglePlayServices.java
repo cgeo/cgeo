@@ -7,10 +7,14 @@ import com.google.android.gms.common.GoogleApiAvailability;
 
 import android.content.Context;
 
-public class GooglePlayServices {
+public final class GooglePlayServices {
 
     private static boolean isGooglePlayServicesAvailable = false;
     private static boolean initialized = false;
+
+    private GooglePlayServices() {
+        // utility class
+    }
 
     /**
      * Check if Google Play services is available on this device
@@ -30,5 +34,6 @@ public class GooglePlayServices {
         if (GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(context) == ConnectionResult.SUCCESS) {
             isGooglePlayServicesAvailable = true;
         }
+        initialized = true;
     }
 }
