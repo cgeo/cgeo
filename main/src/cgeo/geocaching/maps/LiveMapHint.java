@@ -10,7 +10,9 @@ import android.app.Activity;
  */
 public final class LiveMapHint {
 
-    private static LiveMapHint INSTANCE;
+    private static LiveMapHint instance;
+
+    private boolean liveMapHintShownInThisSession = false;
 
     private LiveMapHint() {
         // singleton
@@ -18,14 +20,12 @@ public final class LiveMapHint {
 
     public static LiveMapHint getInstance() {
         synchronized (LiveMapHint.class) {
-            if (INSTANCE == null) {
-                INSTANCE = new LiveMapHint();
+            if (instance == null) {
+                instance = new LiveMapHint();
             }
-            return INSTANCE;
+            return instance;
         }
     }
-
-    private boolean liveMapHintShownInThisSession = false;
 
     public void showHint(final Activity activity) {
         if (!liveMapHintShownInThisSession && Settings.getLiveMapHintShowCount() <= 3) {

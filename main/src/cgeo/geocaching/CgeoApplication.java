@@ -50,15 +50,8 @@ public class CgeoApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        try {
-            final ViewConfiguration config = ViewConfiguration.get(this);
-            final Field menuKeyField = ViewConfiguration.class.getDeclaredField("sHasPermanentMenuKey");
-            menuKeyField.setAccessible(true);
-            menuKeyField.setBoolean(config, false);
-        } catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException ignored) {
-        }
+        showOverflowMenu();
 
-        // Set language to English if the user decided so.
         initApplicationLocale();
 
         // ensure initialization of lists
@@ -70,6 +63,16 @@ public class CgeoApplication extends Application {
 
         // Attempt to acquire an initial location before any real activity happens.
         sensors.geoDataObservable(true).subscribeOn(AndroidRxUtils.looperCallbacksScheduler).first().subscribe();
+    }
+
+    private void showOverflowMenu() {
+        try {
+            final ViewConfiguration config = ViewConfiguration.get(this);
+            final Field menuKeyField = ViewConfiguration.class.getDeclaredField("sHasPermanentMenuKey");
+            menuKeyField.setAccessible(true);
+            menuKeyField.setBoolean(config, false);
+        } catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException ignored) {
+        }
     }
 
     @Override
@@ -89,7 +92,7 @@ public class CgeoApplication extends Application {
     }
 
     /**
-     * Set the current application language.
+     * Enforce language to be English if the user decided so.
      */
     private void initApplicationLocale() {
         final Configuration config = new Configuration();
