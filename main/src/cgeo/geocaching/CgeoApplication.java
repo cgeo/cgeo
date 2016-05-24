@@ -20,7 +20,6 @@ import java.lang.reflect.Field;
 
 public class CgeoApplication extends Application {
 
-    public boolean showLoginToast = true; //login toast shown just once.
     private static CgeoApplication instance;
 
     public static void dumpOnOutOfMemory(final boolean enable) {
@@ -43,7 +42,7 @@ public class CgeoApplication extends Application {
         instance = application;
     }
 
-    public static CgeoApplication getInstance() {
+    public static Application getInstance() {
         return instance;
     }
 

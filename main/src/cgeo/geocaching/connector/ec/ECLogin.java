@@ -12,15 +12,18 @@ import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.Log;
 
 import com.fasterxml.jackson.databind.JsonNode;
+
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+
+import android.app.Application;
 
 import java.io.IOException;
 
 public class ECLogin extends AbstractLogin {
 
-    private final CgeoApplication app = CgeoApplication.getInstance();
+    private final Application app = CgeoApplication.getInstance();
     private String sessionId = null;
 
     private ECLogin() {

@@ -275,7 +275,7 @@ public class MainActivity extends AbstractActionBarActivity {
     @Override
     public void onDestroy() {
         initialized = false;
-        app.showLoginToast = true;
+        ConnectorFactory.showLoginToast = true;
 
         super.onDestroy();
     }

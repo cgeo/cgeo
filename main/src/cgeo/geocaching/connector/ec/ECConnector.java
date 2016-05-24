@@ -1,10 +1,10 @@
 package cgeo.geocaching.connector.ec;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.LogCacheActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.AbstractConnector;
+import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.ILoggingManager;
 import cgeo.geocaching.connector.capability.ICredentials;
 import cgeo.geocaching.connector.capability.ILogin;
@@ -45,8 +45,6 @@ public class ECConnector extends AbstractConnector implements ISearchByGeocode, 
      */
     @NonNull
     private static final Pattern PATTERN_EC_CODE = Pattern.compile("EC[0-9]+", Pattern.CASE_INSENSITIVE);
-
-    private final CgeoApplication app = CgeoApplication.getInstance();
 
     @NonNull
     private final ECLogin ecLogin = ECLogin.getInstance();
@@ -139,9 +137,9 @@ public class ECConnector extends AbstractConnector implements ISearchByGeocode, 
         // login
         final StatusCode status = ecLogin.login();
 
-        if (app.showLoginToast && handler != null) {
+        if (ConnectorFactory.showLoginToast && handler != null) {
             handler.sendMessage(handler.obtainMessage(0, status));
-            app.showLoginToast = false;
+            ConnectorFactory.showLoginToast = false;
 
             // invoke settings activity to insert login details
             if (status == StatusCode.NO_LOGIN_INFO_STORED && fromActivity != null) {
