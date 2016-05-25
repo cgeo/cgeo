@@ -53,8 +53,8 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
     private Subscription resumeSubscription = Subscriptions.empty();
     private TextView cacheDistance = null;
 
-    protected static final String GEOCODE_ARG= "GEOCODE";
-    protected static final String WAYPOINT_ARG= "WAYPOINT";
+    protected static final String GEOCODE_ARG = "GEOCODE";
+    protected static final String WAYPOINT_ARG = "WAYPOINT";
 
     protected Geocache cache;
 
@@ -314,7 +314,7 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
     public void onCreateContextMenu(final ContextMenu menu, final View v, final ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
         CacheMenuHandler.addMenuItems(new MenuInflater(getActivity()), menu, cache);
-        for (int i=0; i<menu.size(); i++) {
+        for (int i = 0; i < menu.size(); i++) {
             final MenuItem m = menu.getItem(i);
             m.setOnMenuItemClickListener(this);
         }

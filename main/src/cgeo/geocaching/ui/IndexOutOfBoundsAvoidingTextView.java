@@ -29,7 +29,7 @@ public class IndexOutOfBoundsAvoidingTextView extends TextView {
 
     @Override
     protected void onMeasure(final int widthMeasureSpec, final int heightMeasureSpec) {
-        try{
+        try {
             super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         } catch (final IndexOutOfBoundsException ignored) {
             setText(getText().toString());
@@ -38,8 +38,8 @@ public class IndexOutOfBoundsAvoidingTextView extends TextView {
     }
 
     @Override
-    public void setGravity(final int gravity){
-        try{
+    public void setGravity(final int gravity) {
+        try {
             super.setGravity(gravity);
         } catch (final IndexOutOfBoundsException ignored) {
             setText(getText().toString());
@@ -49,7 +49,7 @@ public class IndexOutOfBoundsAvoidingTextView extends TextView {
 
     @Override
     public void setText(final CharSequence text, final BufferType type) {
-        try{
+        try {
             super.setText(text, type);
         } catch (final IndexOutOfBoundsException ignored) {
             setText(text.toString());

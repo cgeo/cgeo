@@ -1925,8 +1925,8 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
         @Override
         public boolean onMenuItemClick(final MenuItem menuItem) {
-            final int startSelection= selectedTextView.getSelectionStart();
-            final int endSelection= selectedTextView.getSelectionEnd();
+            final int startSelection = selectedTextView.getSelectionStart();
+            final int endSelection = selectedTextView.getSelectionEnd();
             clickedItemText = selectedTextView.getText().subSequence(startSelection, endSelection);
             return onClipboardItemSelected(mActionMode, menuItem, clickedItemText);
         }

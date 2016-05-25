@@ -101,7 +101,7 @@ public final class CacheMenuHandler extends AbstractUIFactory {
         final MenuItem shareItem = menu.findItem(R.id.menu_share);
         final ShareActionProvider shareActionProvider = (ShareActionProvider)
                 MenuItemCompat.getActionProvider(shareItem);
-        if(shareActionProvider != null) {
+        if (shareActionProvider != null) {
             shareActionProvider.setShareIntent(cache.getShareIntent());
         }
 

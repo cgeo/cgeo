@@ -93,7 +93,7 @@ public class Trackable implements ILogable {
      * @param newLogs to merge
      */
     public void mergeLogEntry(final List<LogEntry> newLogs) {
-        for (final LogEntry newLog : newLogs){
+        for (final LogEntry newLog : newLogs) {
            if (!logs.contains(newLog)) {
                logs.add(newLog);
            }

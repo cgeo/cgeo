@@ -45,7 +45,7 @@ public class MagnetometerAndAccelerometerProvider {
                         if (sensorEvent.sensor.equals(accelerometerSensor)) {
                             System.arraycopy(sensorEvent.values, 0, lastAccelerometer, 0, sensorEvent.values.length);
                             lastAccelerometerSet = true;
-                        } else if (sensorEvent.sensor.equals(magnetometerSensor)){
+                        } else if (sensorEvent.sensor.equals(magnetometerSensor)) {
                             System.arraycopy(sensorEvent.values, 0, lastMagnetometer, 0, sensorEvent.values.length);
                             lastMagnetometerSet = true;
                         }

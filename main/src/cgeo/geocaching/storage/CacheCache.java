@@ -40,7 +40,7 @@ public class CacheCache {
         if (StringUtils.isBlank(geocode)) {
             throw new IllegalArgumentException("geocode must not be empty");
         }
-        synchronized(this) {
+        synchronized (this) {
             cachesCache.remove(geocode);
         }
     }
@@ -59,7 +59,7 @@ public class CacheCache {
         if (StringUtils.isBlank(cache.getGeocode())) {
             throw new IllegalArgumentException("geocode must not be empty");
         }
-        synchronized(this) {
+        synchronized (this) {
             cache.addStorageLocation(StorageLocation.CACHE);
             cachesCache.put(cache.getGeocode(), cache);
         }
@@ -74,7 +74,7 @@ public class CacheCache {
         if (StringUtils.isBlank(geocode)) {
             throw new IllegalArgumentException("geocode must not be empty");
         }
-        synchronized(this) {
+        synchronized (this) {
             return cachesCache.get(geocode);
         }
     }

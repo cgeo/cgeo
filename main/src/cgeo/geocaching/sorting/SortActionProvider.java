@@ -100,18 +100,18 @@ public class SortActionProvider extends ActionProvider implements OnMenuItemClic
     }
 
     @Override
-    public View onCreateActionView(){
+    public View onCreateActionView() {
         // must return null, otherwise onPrepareSubMenu is not called
         return null;
     }
 
     @Override
-    public boolean hasSubMenu(){
+    public boolean hasSubMenu() {
         return true;
     }
 
     @Override
-    public void onPrepareSubMenu(final SubMenu subMenu){
+    public void onPrepareSubMenu(final SubMenu subMenu) {
         subMenu.clear();
         registerComparators();
         for (int i = 0; i < registry.size(); i++) {
@@ -130,7 +130,7 @@ public class SortActionProvider extends ActionProvider implements OnMenuItemClic
     }
 
     @Override
-    public boolean onMenuItemClick(final MenuItem item){
+    public boolean onMenuItemClick(final MenuItem item) {
         callListener(registry.get(item.getItemId()).cacheComparator);
         return true;
     }

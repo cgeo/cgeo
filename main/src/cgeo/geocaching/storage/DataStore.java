@@ -354,7 +354,7 @@ public class DataStore {
             return;
         }
 
-        synchronized(DataStore.class) {
+        synchronized (DataStore.class) {
             if (database != null) {
                 return;
             }

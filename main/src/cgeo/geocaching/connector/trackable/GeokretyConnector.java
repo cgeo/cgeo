@@ -383,7 +383,7 @@ public class GeokretyConnector extends AbstractTrackableConnector {
             }
             if (!response.getRight().isEmpty()) {
                 for (final String error: response.getRight()) {
-                    Log.w("GeokretyConnector.postLogTrackable: "+ error);
+                    Log.w("GeokretyConnector.postLogTrackable: " + error);
                 }
                 return new ImmutablePair<>(StatusCode.LOG_POST_ERROR_GK, response.getRight());
             }

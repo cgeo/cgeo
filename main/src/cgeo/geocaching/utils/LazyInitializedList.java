@@ -15,7 +15,7 @@ public abstract class LazyInitializedList<ElementType> extends AbstractList<Elem
     @NonNull
     public List<ElementType> getUnderlyingList() {
         if (list == null) {
-            synchronized(this) {
+            synchronized (this) {
                 try {
                     list = call();
                     if (list == null) {

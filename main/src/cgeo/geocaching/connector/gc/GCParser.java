@@ -1425,7 +1425,7 @@ public final class GCParser {
         }
         try {
             return Integer.parseInt(sCount);
-        } catch(final NumberFormatException nfe) {
+        } catch (final NumberFormatException nfe) {
             Log.e("Could not parse", nfe);
             return -1;
         }

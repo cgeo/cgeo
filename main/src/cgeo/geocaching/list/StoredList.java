@@ -112,7 +112,7 @@ public final class StoredList extends AbstractList {
             });
             builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                 @Override
-                        public void onClick(final DialogInterface dialog, final int id){
+                        public void onClick(final DialogInterface dialog, final int id) {
                             if (selectedListIds.contains(PseudoList.NEW_LIST.id)) {
                                 // create new list on the fly
                                 promptForListCreation(runAfterwards, selectedListIds, listNameMemento.getTerm());
