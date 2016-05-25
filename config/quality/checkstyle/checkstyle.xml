@@ -124,6 +124,9 @@
     <module name="WhitespaceAfter">
       <property name="severity" value="info" />
     </module>
+    <module name="WhitespaceAround">
+      <property name="severity" value="info" />
+    </module>
   </module>
 </module>
 
