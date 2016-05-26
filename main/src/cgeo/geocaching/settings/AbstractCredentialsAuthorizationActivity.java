@@ -212,10 +212,12 @@ public abstract class AbstractCredentialsAuthorizationActivity extends AbstractA
      */
     private class EnableStartButtonWatcher implements TextWatcher {
         @Override
-        public void beforeTextChanged(final CharSequence s, final int start, final int count, final int after) {}
+        public void beforeTextChanged(final CharSequence s, final int start, final int count, final int after) {
+        }
 
         @Override
-        public void onTextChanged(final CharSequence s, final int start, final int before, final int count) {}
+        public void onTextChanged(final CharSequence s, final int start, final int before, final int count) {
+        }
 
         @Override
         public void afterTextChanged(final Editable s) {

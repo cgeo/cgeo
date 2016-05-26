@@ -142,7 +142,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private static final String STATE_LIST_TYPE = "currentListType";
     private static final String STATE_LIST_ID = "currentListId";
 
-    private static final String BUNDLE_ACTION_KEY ="afterLoadAction";
+    private static final String BUNDLE_ACTION_KEY = "afterLoadAction";
 
     private CacheListType type = null;
     private Geopoint coords = null;

@@ -51,7 +51,7 @@ public class GeoitemRef {
 
     @Override
     public String toString() {
-        if(StringUtils.isEmpty(name)) {
+        if (StringUtils.isEmpty(name)) {
             return itemCode;
         }
 

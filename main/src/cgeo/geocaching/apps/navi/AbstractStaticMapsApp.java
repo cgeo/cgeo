@@ -41,7 +41,7 @@ abstract class AbstractStaticMapsApp extends AbstractApp implements CacheNavigat
     protected static boolean invokeStaticMaps(final Activity activity, final Geocache cache, final Waypoint waypoint, final boolean download) {
         final ILogable logable = cache != null && !cache.getLists().isEmpty() ? cache : waypoint;
         // If the cache is not stored for offline, cache seems to be null and waypoint may be null too
-        if (logable==null || logable.getGeocode()==null) {
+        if (logable == null || logable.getGeocode() == null) {
             ActivityMixin.showToast(activity, getString(R.string.err_detail_no_map_static));
             return true;
         }

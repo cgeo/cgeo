@@ -36,7 +36,7 @@ public final class XmlUtils {
      */
     public static void multipleTexts(final XmlSerializer serializer, final String prefix, final String... tagAndText) throws IOException {
         for (int i = 0; i < tagAndText.length; i += 2) {
-            simpleText(serializer, prefix, tagAndText[i], tagAndText[i+1]);
+            simpleText(serializer, prefix, tagAndText[i], tagAndText[i + 1]);
         }
     }
 }

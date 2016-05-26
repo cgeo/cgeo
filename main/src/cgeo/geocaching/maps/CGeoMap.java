@@ -536,7 +536,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
 
         final CheckBox locSwitch = ButterKnife.findById(activity, R.id.my_position);
-        if (locSwitch!=null) {
+        if (locSwitch != null) {
             initMyLocationSwitchButton(locSwitch);
         }
         prepareFilterBar();
@@ -1266,7 +1266,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
             final boolean excludeMine = Settings.isExcludeMyCaches();
             final boolean excludeDisabled = Settings.isExcludeDisabledCaches();
             if (mapMode == MapMode.LIVE) {
-                synchronized(caches) {
+                synchronized (caches) {
                     filter(caches);
                 }
             }
@@ -1749,7 +1749,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
     }
 
     public static void markCacheAsDirty(final String geocode) {
-        synchronized(dirtyCaches) {
+        synchronized (dirtyCaches) {
             dirtyCaches.add(geocode);
         }
     }

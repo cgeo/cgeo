@@ -57,7 +57,8 @@ abstract class AbstractClickablePreference extends Preference implements View.On
         return false;
     }
 
-    protected void revokeAuthorization() {}
+    protected void revokeAuthorization() {
+    }
 
     @Override
     public boolean onLongClick(final View v) {

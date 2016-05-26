@@ -35,7 +35,7 @@ public final class Cookies {
         @Override
         public List<Cookie> loadForRequest(final HttpUrl url) {
             final List<Cookie> cookies = new LinkedList<>();
-            synchronized(this) {
+            synchronized (this) {
                 for (final Cookie cookie: allCookies.values()) {
                     if (cookie.matches(url)) {
                         cookies.add(cookie);

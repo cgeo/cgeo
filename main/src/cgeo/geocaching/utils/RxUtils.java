@@ -176,7 +176,7 @@ public class RxUtils {
     public static <T> T nullableSingleValue(final Single<T> single) {
         try {
             return single.toBlocking().value();
-        } catch(final Throwable ignored) {
+        } catch (final Throwable ignored) {
             return null;
         }
     }
