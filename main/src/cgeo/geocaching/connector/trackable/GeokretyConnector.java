@@ -185,7 +185,7 @@ public class GeokretyConnector extends AbstractTrackableConnector {
     }
 
     @NonNull
-    public static List<Trackable> loadInventory(final int userid) {
+    private static List<Trackable> loadInventory(final int userid) {
         Log.d("GeokretyConnector.loadInventory: userid=" + userid);
         try {
             final Parameters params = new Parameters("inventory", "1");
@@ -276,7 +276,7 @@ public class GeokretyConnector extends AbstractTrackableConnector {
      *          the Trackable Geocode
      */
     @Nullable
-    public static String getGeocodeFromTrackingCode(final String trackingCode) {
+    private static String getGeocodeFromTrackingCode(final String trackingCode) {
         final Parameters params = new Parameters("nr", trackingCode);
         final String response = Network.getResponseData(Network.getRequest(URLPROXY + "/nr2id.php", params));
         // An empty response means "not found"
