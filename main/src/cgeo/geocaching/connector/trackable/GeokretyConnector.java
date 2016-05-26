@@ -341,7 +341,7 @@ public class GeokretyConnector extends AbstractTrackableConnector {
         }
         try {
             // SecId is mandatory when using API, anonymous log are only possible via website
-            if (Settings.getGeokretySecId() == null || Settings.getGeokretySecId().isEmpty()) {
+            if (StringUtils.isEmpty(Settings.getGeokretySecId())) {
                 Log.e("GeokretyConnector.postLogTrackable: not authenticated");
                 return new ImmutablePair<>(StatusCode.NO_LOGIN_INFO_STORED, Collections.<String> emptyList());
             }
@@ -383,7 +383,7 @@ public class GeokretyConnector extends AbstractTrackableConnector {
                 Log.w("GeokretyConnector.postLogTrackable: Cannot parseResponse GeoKrety");
                 return new ImmutablePair<>(StatusCode.LOG_POST_ERROR_GK, Collections.<String> emptyList());
             }
-            if (!response.getRight().isEmpty()) {
+            if (CollectionUtils.isNotEmpty(response.getRight())) {
                 for (final String error: response.getRight()) {
                     Log.w("GeokretyConnector.postLogTrackable: " + error);
                 }
