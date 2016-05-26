@@ -215,19 +215,21 @@ public class GeokretyConnector extends AbstractTrackableConnector {
     @Override
     @NonNull
     public Observable<TrackableLog> trackableLogInventory() {
-        return Observable.from(loadInventory()).map(new Func1<Trackable, TrackableLog>() {
-            @Override
-            public TrackableLog call(final Trackable trackable) {
-                return new TrackableLog(
-                        trackable.getGeocode(),
-                        trackable.getTrackingcode(),
-                        trackable.getName(),
-                        getId(trackable.getGeocode()),
-                        0,
-                        trackable.getBrand()
-                );
-            }
-        });
+        return Observable.from(loadInventory()).map(new TrackableLogFunction());
+    }
+
+    private static class TrackableLogFunction implements Func1<Trackable, TrackableLog> {
+        @Override
+        public TrackableLog call(final Trackable trackable) {
+            return new TrackableLog(
+                    trackable.getGeocode(),
+                    trackable.getTrackingcode(),
+                    trackable.getName(),
+                    getId(trackable.getGeocode()),
+                    0,
+                    trackable.getBrand()
+            );
+        }
     }
 
     public static int getId(final String geocode) {
