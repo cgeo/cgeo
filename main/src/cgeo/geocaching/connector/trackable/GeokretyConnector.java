@@ -5,6 +5,7 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.LogTypeTrackable;
 import cgeo.geocaching.enumerations.StatusCode;
+import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.models.TrackableLog;
@@ -148,8 +149,9 @@ public class GeokretyConnector extends AbstractTrackableConnector {
             final List<Trackable> trackables = GeokretyParser.parse(is);
 
             if (CollectionUtils.isNotEmpty(trackables)) {
-                DataStore.saveTrackable(trackables.get(0));
-                return trackables.get(0);
+                final Trackable trackable = trackables.get(0);
+                DataStore.saveTrackable(trackable);
+                return trackable;
             }
         } catch (final Exception e) {
             Log.w("GeokretyConnector.searchTrackable", e);
@@ -341,14 +343,15 @@ public class GeokretyConnector extends AbstractTrackableConnector {
         }
         try {
             // SecId is mandatory when using API, anonymous log are only possible via website
-            if (StringUtils.isEmpty(Settings.getGeokretySecId())) {
+            final String secId = Settings.getGeokretySecId();
+            if (StringUtils.isEmpty(secId)) {
                 Log.e("GeokretyConnector.postLogTrackable: not authenticated");
                 return new ImmutablePair<>(StatusCode.NO_LOGIN_INFO_STORED, Collections.<String> emptyList());
             }
 
             // Construct Post Parameters
             final Parameters params = new Parameters(
-                    "secid", Settings.getGeokretySecId(),
+                    "secid", secId,
                     "gzip", "0",
                     "nr", trackableLog.trackCode,
                     "formname", "ruchy",
@@ -364,11 +367,14 @@ public class GeokretyConnector extends AbstractTrackableConnector {
 
             // See doc: http://geokrety.org/help.php#acceptableformats
             if (cache != null) {
-                if (cache.getCoords() != null) {
-                    params.add("latlon", cache.getCoords().toString());
+                final Geopoint coords = cache.getCoords();
+                if (coords != null) {
+                    params.add("latlon", coords.toString());
                 }
-                if (StringUtils.isNotEmpty(cache.getGeocode())) {
-                    params.add("wpt", cache.getGeocode());
+
+                final String geocode = cache.getGeocode();
+                if (StringUtils.isNotEmpty(geocode)) {
+                    params.add("wpt", geocode);
                 }
             }
 
@@ -383,11 +389,13 @@ public class GeokretyConnector extends AbstractTrackableConnector {
                 Log.w("GeokretyConnector.postLogTrackable: Cannot parseResponse GeoKrety");
                 return new ImmutablePair<>(StatusCode.LOG_POST_ERROR_GK, Collections.<String> emptyList());
             }
-            if (CollectionUtils.isNotEmpty(response.getRight())) {
-                for (final String error: response.getRight()) {
+
+            final List<String> errors = response.getRight();
+            if (CollectionUtils.isNotEmpty(errors)) {
+                for (final String error: errors) {
                     Log.w("GeokretyConnector.postLogTrackable: " + error);
                 }
-                return new ImmutablePair<>(StatusCode.LOG_POST_ERROR_GK, response.getRight());
+                return new ImmutablePair<>(StatusCode.LOG_POST_ERROR_GK, errors);
             }
             Log.i("Geokrety Log successfully posted to trackable #" + trackableLog.trackCode);
             return new ImmutablePair<>(StatusCode.NO_ERROR, Collections.<String> emptyList());
