@@ -363,11 +363,13 @@ public class GeokretyConnector extends AbstractTrackableConnector {
             );
 
             // See doc: http://geokrety.org/help.php#acceptableformats
-            if (cache != null && cache.getCoords() != null) {
-                params.add("latlon", cache.getCoords().toString());
-            }
-            if (cache != null && StringUtils.isNotEmpty(cache.getGeocode())) {
-                params.add("wpt", cache.getGeocode());
+            if (cache != null) {
+                if (cache.getCoords() != null) {
+                    params.add("latlon", cache.getCoords().toString());
+                }
+                if (StringUtils.isNotEmpty(cache.getGeocode())) {
+                    params.add("wpt", cache.getGeocode());
+                }
             }
 
             final String page = Network.getResponseData(Network.postRequest(URL + "/ruchy.php", params));
