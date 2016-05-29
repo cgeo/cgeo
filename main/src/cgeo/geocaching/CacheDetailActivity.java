@@ -2361,7 +2361,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     @Override
     public void onFinishEditNoteDialog(final String note) {
         cache.setPersonalNote(note);
-        cache.parseWaypointsFromNote();
+        if (cache.parseWaypointsFromNote()) {
+            getViewCreator(Page.WAYPOINTS).notifyDataSetChanged();
+        }
 
         final TextView personalNoteView = ButterKnife.findById(this, R.id.personalnote);
         if (personalNoteView != null) {
