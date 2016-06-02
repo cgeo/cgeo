@@ -2019,7 +2019,7 @@ public final class GCParser {
             ownLogs.subscribe(new Action1<LogEntry>() {
                 @Override
                 public void call(final LogEntry logEntry) {
-                    if (logEntry.getType() == LogType.FOUND_IT) {
+                    if (logEntry.getType().isFoundLog()) {
                         cache.setVisitedDate(logEntry.date);
                     }
                 }
