@@ -62,6 +62,11 @@ public abstract class AbstractCachesOverlay {
         invalidated = true;
     }
 
+    public void invalidate(final Collection<String> invalidGeocodes) {
+        removeItems(invalidGeocodes);
+        invalidate();
+    }
+
     protected boolean isInvalidated() {
         return invalidated;
     }
@@ -199,17 +204,24 @@ public abstract class AbstractCachesOverlay {
     }
 
     protected void syncLayers(final Collection<String> removeCodes, final Collection<String> newCodes) {
+        removeItems(removeCodes);
         final Layers layers = this.mapView.getLayerManager().getLayers();
-        for (final String code : removeCodes) {
-            final GeoitemLayer item = layerList.getItem(code);
-            geoEntries.remove(new GeoEntry(code, overlayId));
-            layers.remove(item);
-            layerList.remove(item);
-        }
         final int index = layers.indexOf(anchorLayer) + 1;
         layers.addAll(index, layerList.getMatchingLayers(newCodes));
 
         Log.d(String.format(Locale.ENGLISH, "Layers for id %d synced. Codes removed: %d, new codes: %d, geoEntries: %d", overlayId, removeCodes.size(), newCodes.size(), geoEntries.size()));
+    }
+
+    private void removeItems(final Collection<String> removeCodes) {
+        final Layers layers = this.mapView.getLayerManager().getLayers();
+        for (final String code : removeCodes) {
+            final GeoitemLayer item = layerList.getItem(code);
+            if (item != null) {
+                geoEntries.remove(new GeoEntry(code, overlayId));
+                layers.remove(item);
+                layerList.remove(item);
+            }
+        }
     }
 
     static boolean mapMoved(final Viewport referenceViewport, final Viewport newViewport) {

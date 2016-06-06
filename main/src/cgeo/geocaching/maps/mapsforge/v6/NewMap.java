@@ -88,6 +88,8 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Queue;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 import butterknife.ButterKnife;
 import rx.Subscription;
@@ -117,6 +119,7 @@ public class NewMap extends AbstractActionBarActivity {
 
     private String targetGeocode = null;
     private Geopoint lastNavTarget = null;
+    private Queue<String> popupGeocodes = new ConcurrentLinkedQueue<>();
 
     private final UpdateLoc geoDirUpdate = new UpdateLoc(this);
     /**
@@ -1159,6 +1162,7 @@ public class NewMap extends AbstractActionBarActivity {
             }
 
             if (item.getType() == CoordinatesType.WAYPOINT && item.getId() >= 0) {
+                popupGeocodes.add(item.getGeocode());
                 WaypointPopup.startActivityAllowTarget(this, item.getId(), item.getGeocode());
             }
 
@@ -1213,6 +1217,7 @@ public class NewMap extends AbstractActionBarActivity {
             if (requestRequired()) {
                 /* final SearchResult search = */GCMap.searchByGeocodes(Collections.singleton(cache.getGeocode()));
             }
+            map.popupGeocodes.add(cache.getGeocode());
             CachePopup.startActivityAllowTarget(map, cache.getGeocode());
         }
     }
@@ -1221,25 +1226,34 @@ public class NewMap extends AbstractActionBarActivity {
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == AbstractDialogFragment.REQUEST_CODE_TARGET_INFO && resultCode == AbstractDialogFragment.RESULT_CODE_SET_TARGET) {
-            final TargetInfo targetInfo = data.getExtras().getParcelable(Intents.EXTRA_TARGET_INFO);
+        if (requestCode == AbstractDialogFragment.REQUEST_CODE_TARGET_INFO) {
+            if (resultCode == AbstractDialogFragment.RESULT_CODE_SET_TARGET) {
+                final TargetInfo targetInfo = data.getExtras().getParcelable(Intents.EXTRA_TARGET_INFO);
 
-            if (targetInfo != null) {
-                lastNavTarget = targetInfo.coords;
-                if (navigationLayer != null) {
-                    navigationLayer.setDestination(targetInfo.coords);
-                    navigationLayer.requestRedraw();
-                }
-                if (distanceView != null) {
-                    distanceView.setDestination(targetInfo.coords);
-                    distanceView.setCoordinates(geoDirUpdate.getCurrenLocation());
-                }
-                if (StringUtils.isNotBlank(targetInfo.geocode)) {
-                    targetGeocode = targetInfo.geocode;
-                    final Geocache target = getCurrentTargetCache();
-                    targetView.setTarget(targetGeocode, target != null ? target.getName() : StringUtils.EMPTY);
+                if (targetInfo != null) {
+                    lastNavTarget = targetInfo.coords;
+                    if (navigationLayer != null) {
+                        navigationLayer.setDestination(targetInfo.coords);
+                        navigationLayer.requestRedraw();
+                    }
+                    if (distanceView != null) {
+                        distanceView.setDestination(targetInfo.coords);
+                        distanceView.setCoordinates(geoDirUpdate.getCurrenLocation());
+                    }
+                    if (StringUtils.isNotBlank(targetInfo.geocode)) {
+                        targetGeocode = targetInfo.geocode;
+                        final Geocache target = getCurrentTargetCache();
+                        targetView.setTarget(targetGeocode, target != null ? target.getName() : StringUtils.EMPTY);
+                    }
                 }
             }
+            List<String> changedGeocodes = new ArrayList<>();
+            String geocode = popupGeocodes.poll();
+            while(geocode != null) {
+                changedGeocodes.add(geocode);
+                geocode = popupGeocodes.poll();
+            }
+            caches.invalidate(changedGeocodes);
         }
     }
 }

@@ -7,6 +7,7 @@ import cgeo.geocaching.maps.mapsforge.v6.MapHandlers;
 import cgeo.geocaching.maps.mapsforge.v6.MfMapView;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -184,6 +185,15 @@ public class CachesBundle {
         }
         if (liveOverlay != null) {
             liveOverlay.invalidate();
+        }
+    }
+
+    public void invalidate(final Collection<String> geocodes) {
+        if (storedOverlay != null) {
+            storedOverlay.invalidate(geocodes);
+        }
+        if (liveOverlay != null) {
+            liveOverlay.invalidate(geocodes);
         }
     }
 }
