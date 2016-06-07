@@ -1247,7 +1247,7 @@ public class NewMap extends AbstractActionBarActivity {
                     }
                 }
             }
-            List<String> changedGeocodes = new ArrayList<>();
+            final List<String> changedGeocodes = new ArrayList<>();
             String geocode = popupGeocodes.poll();
             while(geocode != null) {
                 changedGeocodes.add(geocode);
