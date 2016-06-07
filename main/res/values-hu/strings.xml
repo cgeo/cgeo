@@ -878,7 +878,9 @@
   <string name="simple_dir_chooser_invalid_path">Érvénytelen útvonal</string>
   <!-- gpx -->
   <string name="gpx_import_loading_caches">Geoládák betöltése .gpx fájlból</string>
+  <string name="gpx_import_loading_caches_with_filename">%1$s: ládák betöltése</string>
   <string name="gpx_import_loading_waypoints">Útpontfájl betöltése</string>
+  <string name="gpx_import_loading_waypoints_with_filename">%1$s: útpontok betöltése</string>
   <string name="gpx_import_store_static_maps">Statikus térképek mentése</string>
   <string name="gpx_import_caches_imported">láda importálva</string>
   <string name="gpx_import_caches_imported_with_filename">%1$d láda importálva %2$s fájlból</string>

@@ -148,6 +148,7 @@
   <string name="err_unknown">Neznáma chyba</string>
   <string name="err_unknown_address">c:geo nedokázal nájsť miesto k daným súradniciam</string>
   <string name="err_comm">Neznáma chyba pri komunikácii</string>
+  <string name="err_missing_auth">Nevyplnené používateľské meno a/alebo heslo</string>
   <string name="err_maintenance">Na webe Geocaching.com prebieha údržba, opakujte požiadavku neskôr. c:geo funguje v offline režime.</string>
   <string name="err_license">Používateľ nepotvrdil súhlas s licenčnou dohodou serveru Geocaching.com, takže c:geo nemôže načítať súradnice skrýše.</string>
   <string name="err_unvalidated_account">Najprv musíte overiť svoj účet na internetových stránkach Geocaching.com.</string>
@@ -325,6 +326,7 @@
   <string name="caches_refresh_all">Obnoviť všetky</string>
   <string name="caches_move_selected">Presunúť vybraté</string>
   <string name="caches_move_all">Presunúť všetky</string>
+  <string name="caches_copy_all">Kopírovať všetko</string>
   <string name="caches_map_locus">Locus</string>
   <string name="caches_map_locus_export">Exportovať do Locus</string>
   <string name="caches_recaptcha_title">reCAPTCHA</string>
@@ -358,6 +360,7 @@
   <string name="list_menu_rename">Premenovať tento zoznam</string>
   <string name="list_menu_import">Import</string>
   <string name="list_title">Výber zoznamu</string>
+  <string name="lists_remove_all">Žiadna</string>
   <string name="list_inbox">Uložené</string>
   <string name="list_all_lists">Všetky skrýše</string>
   <string name="list_dialog_create_title">Nový zoznam</string>
@@ -442,6 +445,7 @@
   <string name="init_oc_uk">Opencaching.org.uk</string>
   <string name="settings_activate_oc_uk">Aktivovať</string>
   <string name="init_oc_uk_description">Autorizovať c:geo pre opencaching.org.uk na vyhľadávanie, zobrazenie a filtrovanie nájdených skrýš.</string>
+  <string name="settings_activate_su">Aktivovať</string>
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_gcvote_password_description">Ak chcete hodnotiť skrýše, postupujte podľa pokynov na GCVote.com a potom sem zadajte svoje GCVote heslo.</string>
   <string name="err_gcvote_send_rating">Chyba pri odosielaní hodnotenia, skontrolujte GCVote heslo v nastaveniach alebo ho ponechajte prázdne.</string>
@@ -627,10 +631,12 @@
   <string name="auth_authorize">Autorizovať c:geo</string>
   <string name="auth_start">Zahájiť autorizáciu</string>
   <string name="auth_again">Znovu autorizovať</string>
+  <string name="auth_register">Vytvoriť účet</string>
   <string name="auth_dialog_waiting">Čakanie na %s…</string>
   <string name="auth_explain_short">Nasledujúci postup umožní <b>c:geo</b> prístup k %s.</string>
   <string name="auth_explain_long">Stlačením tlačidla \"autorizovať c:geo\" začne proces. Tento proces otvorí webový prehliadač na stránke %s. Prihláste sa na túto stránku a umožnite <b>c:geo</b> prístup k svojmu kontu. To je všetko.</string>
   <!-- auth credentials -->
+  <string name="auth_credentials_explain_short">Nasledujúci proces povolí <b>c:geo</b> prístup k %s.</string>
   <!-- auth token -->
   <string name="auth_token_register">Vytvoriť účet</string>
   <string name="auth_token_explain_short">Nasledujúci proces povolí <b>c:geo</b> prístup k %s.</string>
@@ -666,6 +672,7 @@
   <string name="cache_offline_refresh">Obnoviť</string>
   <string name="cache_offline_drop">Zmazať</string>
   <string name="cache_offline_store">Uložiť</string>
+  <string name="cache_offline_manage">Spravovať</string>
   <string name="cache_offline_stored">Uložená v zariadení</string>
   <string name="cache_offline_not_ready">Nie je pripravená\nna použitie offline</string>
   <string name="cache_offline_time_about">približne pred</string>
@@ -829,6 +836,7 @@
   <string name="cache_image">Obrázok</string>
   <string name="cache_image_open_file">Otvoriť ako súbor</string>
   <string name="cache_image_open_browser">Otvoriť v prehliadači</string>
+  <string name="cache_image_add_waypoint">Nový bod trasy</string>
   <string name="cache_share_field">Zdieľať</string>
   <string name="cache_time_full_hours">hodín</string>
   <string name="cache_listed_on">Uvedené na %s</string>

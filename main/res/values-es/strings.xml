@@ -432,6 +432,7 @@
   <string name="init_oc_ro_description">Autorizar que c:geo pueda usar opencaching.ro para buscar cachés y acceder a / filtrar tus cachés encontrados.</string>
   <string name="settings_activate_oc_uk">Activar</string>
   <string name="init_oc_uk_description">Autorizar que c:geo pueda usar opencaching.org.uk para buscar cachés y acceder a / filtrar tus cachés encontrados.</string>
+  <string name="settings_activate_su">Activar</string>
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_gcvote_password_description">Para poder calificar un caché, tienes que seguir las instrucciones en GCVote.com e introducir tu contraseña de GCVote aquí.</string>
   <string name="err_gcvote_send_rating">Error al enviar la calificación, comprueba tu contraseña de GCVote en configuración o déjala en blanco.</string>
@@ -617,10 +618,12 @@
   <string name="auth_authorize">Autorizar c:geo</string>
   <string name="auth_start">Iniciar autorización</string>
   <string name="auth_again">Volver a iniciar</string>
+  <string name="auth_register">Crear una cuenta</string>
   <string name="auth_dialog_waiting">Esperando a %s…</string>
   <string name="auth_explain_short">El siguiente proceso permitirá a <b>c:geo</b> acceder a %s.</string>
   <string name="auth_explain_long">Presionando el botón \"Autorizar c:geo\" comenzará el proceso. Este proceso abrirá el navegador web con una página %s. Registrate en esta página y permite a <b>c:geo</b> acceder a tu cuenta. Eso es todo.</string>
   <!-- auth credentials -->
+  <string name="auth_credentials_explain_short">El siguiente proceso permitirá a <b>c:geo</b> acceder a %s.</string>
   <!-- auth token -->
   <string name="auth_token_register">Crear una cuenta</string>
   <string name="auth_token_explain_short">El siguiente proceso permitirá a <b>c:geo</b> acceder a %s.</string>
@@ -806,6 +809,7 @@
   <string name="cache_image">Imagen</string>
   <string name="cache_image_open_file">Abrir como archivo</string>
   <string name="cache_image_open_browser">Abrir en el navegador</string>
+  <string name="cache_image_add_waypoint">Añadir waypoint</string>
   <string name="cache_share_field">Compartir</string>
   <string name="cache_time_full_hours">en punto</string>
   <string name="cache_listed_on">Listado en %s</string>

@@ -578,7 +578,7 @@
   <string name="init_maintenance_directories_note">c:geo tallentaa kuvat, lokikuvat sekä muut tiedostot kätköön liittyen erillisiin polkuihin. Joissain tapauksissa (tietokannan tuonti/vienti) tämä polku saattaa sisältää vanhentuneita tiedostoja, ne voidaan poistaa täältä.</string>
   <string name="init_maintenance_directories">Poista orpotiedostot</string>
   <string name="init_location">Paikkatieto</string>
-  <string name="init_location_note">Laitteissa joissa on Google Play Service, c:goen voi automaattisesti käyttää paremman paikkatiedon tuottajaa. Tämä kuitenkin estää ulkoisen BlueTooth GPS vastaanottimen käytön.</string>
+  <string name="init_location_note">Laitteissa joissa on Google Play Palvelut, c:geo voi automaattisesti käyttää paremman paikkatiedon tuottajaa. Tämä kuitenkin estää ulkoisen BlueTooth GPS -vastaanottimen käytön.</string>
   <string name="init_location_googleplayservices">Käytä Google Play Palveluita</string>
   <string name="init_low_power">Virransäästötila</string>
   <string name="init_low_power_note">Virransäästötila välttää GPS:n ja gyroskoopin käyttöä, kun tarkka paikantaminen ei ole tarpeellista. Tämä kuitenkin pidentää paikantamiseen tarvittavaa aikaa.</string>
@@ -855,7 +855,9 @@
   <string name="simple_dir_chooser_invalid_path">Virheellinen polku</string>
   <!-- gpx -->
   <string name="gpx_import_loading_caches">Ladataan kätköjä .gpx-tiedostosta</string>
+  <string name="gpx_import_loading_caches_with_filename">Ladataan kätköjä kohteesta %1$s</string>
   <string name="gpx_import_loading_waypoints">Ladataan reittipisteitä</string>
+  <string name="gpx_import_loading_waypoints_with_filename">Ladataan reittipisteitä kohteesta %1$s</string>
   <string name="gpx_import_store_static_maps">Tallennetaan staattiselle kartalle</string>
   <string name="gpx_import_caches_imported">Kätköt tuotu</string>
   <string name="gpx_import_caches_imported_with_filename">%1$d kätköä tuotu tiedostosta %2$s</string>
