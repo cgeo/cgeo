@@ -65,13 +65,13 @@ buildscript {
 		classpath 'com.github.ben-manes:gradle-versions-plugin:0.12.0'
 	
 		// Android gradle plugin
-        classpath 'com.android.tools.build:gradle:2.1.0'
+        classpath 'com.android.tools.build:gradle:2.1.2'
     
 		// Android annotation processor
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
 
 		// un-mocking of portable Android classes
-		classpath 'de.mobilej.unmock:UnMockPlugin:0.4.0'
+		classpath 'de.mobilej.unmock:UnMockPlugin:0.5.0'
 
 		// Google Services (App Invite) has its own Gradle plugin
 		classpath 'com.google.gms:google-services:2.1.0'
