@@ -101,6 +101,14 @@ public final class Formatter {
      */
     @NonNull
     public static String formatShortDateVerbally(final long date) {
+        final String verbally = formatDateVerbally(date);
+        if (verbally != null) {
+            return verbally;
+        }
+        return formatShortDate(date);
+    }
+
+    private static String formatDateVerbally(final long date) {
         final int diff = CalendarUtils.daysSince(date);
         switch (diff) {
             case 0:
@@ -108,7 +116,7 @@ public final class Formatter {
             case 1:
                 return CgeoApplication.getInstance().getString(R.string.log_yesterday);
             default:
-                return formatShortDate(date);
+                return null;
         }
     }
 
@@ -245,8 +253,15 @@ public final class Formatter {
         }
         String dateString = formatFullDate(time);
         if (cache.isEventCache()) {
+            // use today and yesterday strings
+            final String verbally = formatDateVerbally(time);
+            if (verbally != null) {
+                return verbally;
+            }
+            // otherwise use weekday and normal date
             dateString = DateUtils.formatDateTime(CgeoApplication.getInstance().getBaseContext(), time, DateUtils.FORMAT_SHOW_WEEKDAY) + ", " + dateString;
         }
+        // use just normal date
         return dateString;
     }
 
