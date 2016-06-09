@@ -12,7 +12,7 @@
     <TextView
         android:id="@android:id/text1"
         tools:text="This is the title"
-        android:ellipsize="marquee"
+        android:ellipsize="end"
         android:layout_width="match_parent"
         style="?attr/titleTextStyle"
         android:layout_height="wrap_content"
@@ -22,7 +22,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ellipsize="marquee"
+        android:ellipsize="end"
         style="?attr/subtitleTextStyle"
         tools:text="This is the subtitle"
         android:id="@android:id/text2"

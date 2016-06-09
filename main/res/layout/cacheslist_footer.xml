@@ -6,7 +6,7 @@
     android:layout_height="fill_parent"
     android:layout_gravity="center"
     android:background="@drawable/actionbar_background"
-    android:ellipsize="marquee"
+    android:ellipsize="end"
     android:gravity="center"
     android:lines="1"
     android:padding="8dip"
