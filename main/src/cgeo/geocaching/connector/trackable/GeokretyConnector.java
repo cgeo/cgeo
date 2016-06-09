@@ -5,6 +5,7 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.LogTypeTrackable;
 import cgeo.geocaching.enumerations.StatusCode;
+import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.models.TrackableLog;
@@ -90,7 +91,7 @@ public class GeokretyConnector extends AbstractTrackableConnector {
 
     @Override
     public boolean canHandleTrackable(@Nullable final String geocode, @Nullable final TrackableBrand brand) {
-        if (brand == null || brand != TrackableBrand.GEOKRETY) {
+        if (brand != TrackableBrand.GEOKRETY) {
             return canHandleTrackable(geocode);
         }
         return geocode != null && PATTERN_GK_CODE_EXTENDED.matcher(geocode).matches();
@@ -148,8 +149,9 @@ public class GeokretyConnector extends AbstractTrackableConnector {
             final List<Trackable> trackables = GeokretyParser.parse(is);
 
             if (CollectionUtils.isNotEmpty(trackables)) {
-                DataStore.saveTrackable(trackables.get(0));
-                return trackables.get(0);
+                final Trackable trackable = trackables.get(0);
+                DataStore.saveTrackable(trackable);
+                return trackable;
             }
         } catch (final Exception e) {
             Log.w("GeokretyConnector.searchTrackable", e);
@@ -183,7 +185,7 @@ public class GeokretyConnector extends AbstractTrackableConnector {
     }
 
     @NonNull
-    public static List<Trackable> loadInventory(final int userid) {
+    private static List<Trackable> loadInventory(final int userid) {
         Log.d("GeokretyConnector.loadInventory: userid=" + userid);
         try {
             final Parameters params = new Parameters("inventory", "1");
@@ -213,19 +215,21 @@ public class GeokretyConnector extends AbstractTrackableConnector {
     @Override
     @NonNull
     public Observable<TrackableLog> trackableLogInventory() {
-        return Observable.from(loadInventory()).map(new Func1<Trackable, TrackableLog>() {
-            @Override
-            public TrackableLog call(final Trackable trackable) {
-                return new TrackableLog(
-                        trackable.getGeocode(),
-                        trackable.getTrackingcode(),
-                        trackable.getName(),
-                        getId(trackable.getGeocode()),
-                        0,
-                        trackable.getBrand()
-                );
-            }
-        });
+        return Observable.from(loadInventory()).map(new TrackableLogFunction());
+    }
+
+    private static class TrackableLogFunction implements Func1<Trackable, TrackableLog> {
+        @Override
+        public TrackableLog call(final Trackable trackable) {
+            return new TrackableLog(
+                    trackable.getGeocode(),
+                    trackable.getTrackingcode(),
+                    trackable.getName(),
+                    getId(trackable.getGeocode()),
+                    0,
+                    trackable.getBrand()
+            );
+        }
     }
 
     public static int getId(final String geocode) {
@@ -274,7 +278,7 @@ public class GeokretyConnector extends AbstractTrackableConnector {
      *          the Trackable Geocode
      */
     @Nullable
-    public static String getGeocodeFromTrackingCode(final String trackingCode) {
+    private static String getGeocodeFromTrackingCode(final String trackingCode) {
         final Parameters params = new Parameters("nr", trackingCode);
         final String response = Network.getResponseData(Network.getRequest(URLPROXY + "/nr2id.php", params));
         // An empty response means "not found"
@@ -341,14 +345,15 @@ public class GeokretyConnector extends AbstractTrackableConnector {
         }
         try {
             // SecId is mandatory when using API, anonymous log are only possible via website
-            if (Settings.getGeokretySecId() == null || Settings.getGeokretySecId().isEmpty()) {
+            final String secId = Settings.getGeokretySecId();
+            if (StringUtils.isEmpty(secId)) {
                 Log.e("GeokretyConnector.postLogTrackable: not authenticated");
                 return new ImmutablePair<>(StatusCode.NO_LOGIN_INFO_STORED, Collections.<String> emptyList());
             }
 
             // Construct Post Parameters
             final Parameters params = new Parameters(
-                    "secid", Settings.getGeokretySecId(),
+                    "secid", secId,
                     "gzip", "0",
                     "nr", trackableLog.trackCode,
                     "formname", "ruchy",
@@ -363,11 +368,16 @@ public class GeokretyConnector extends AbstractTrackableConnector {
             );
 
             // See doc: http://geokrety.org/help.php#acceptableformats
-            if (cache != null && cache.getCoords() != null) {
-                params.add("latlon", cache.getCoords().toString());
-            }
-            if (cache != null && StringUtils.isNotEmpty(cache.getGeocode())) {
-                params.add("wpt", cache.getGeocode());
+            if (cache != null) {
+                final Geopoint coords = cache.getCoords();
+                if (coords != null) {
+                    params.add("latlon", coords.toString());
+                }
+
+                final String geocode = cache.getGeocode();
+                if (StringUtils.isNotEmpty(geocode)) {
+                    params.add("wpt", geocode);
+                }
             }
 
             final String page = Network.getResponseData(Network.postRequest(URL + "/ruchy.php", params));
@@ -381,11 +391,13 @@ public class GeokretyConnector extends AbstractTrackableConnector {
                 Log.w("GeokretyConnector.postLogTrackable: Cannot parseResponse GeoKrety");
                 return new ImmutablePair<>(StatusCode.LOG_POST_ERROR_GK, Collections.<String> emptyList());
             }
-            if (!response.getRight().isEmpty()) {
-                for (final String error: response.getRight()) {
+
+            final List<String> errors = response.getRight();
+            if (CollectionUtils.isNotEmpty(errors)) {
+                for (final String error: errors) {
                     Log.w("GeokretyConnector.postLogTrackable: " + error);
                 }
-                return new ImmutablePair<>(StatusCode.LOG_POST_ERROR_GK, response.getRight());
+                return new ImmutablePair<>(StatusCode.LOG_POST_ERROR_GK, errors);
             }
             Log.i("Geokrety Log successfully posted to trackable #" + trackableLog.trackCode);
             return new ImmutablePair<>(StatusCode.NO_ERROR, Collections.<String> emptyList());
