@@ -102,6 +102,18 @@ public final class LogEntry {
         }
 
         /**
+         * Get {@link LogEntry} id. Throws an exception if {@link #setId(int)} has not be called previously.
+         *
+         * @return The log id
+         */
+        public int getId() {
+            if (id == 0) {
+                throw new IllegalStateException("setId must be called before getId");
+            }
+            return id;
+        }
+
+        /**
          * Set {@link LogEntry} {@link LogType}.
          *
          * @param logType
@@ -394,7 +406,7 @@ public final class LogEntry {
         if (titles.isEmpty()) {
             titles.add(CgeoApplication.getInstance().getString(R.string.cache_log_image_default_title));
         }
-        return StringUtils.join(titles, ", ");
+        return "• " + StringUtils.join(titles, "\n• ");
     }
 
     /**
