@@ -119,7 +119,7 @@ public class NewMap extends AbstractActionBarActivity {
 
     private String targetGeocode = null;
     private Geopoint lastNavTarget = null;
-    private Queue<String> popupGeocodes = new ConcurrentLinkedQueue<>();
+    private final Queue<String> popupGeocodes = new ConcurrentLinkedQueue<>();
 
     private final UpdateLoc geoDirUpdate = new UpdateLoc(this);
     /**
@@ -1253,7 +1253,9 @@ public class NewMap extends AbstractActionBarActivity {
                 changedGeocodes.add(geocode);
                 geocode = popupGeocodes.poll();
             }
-            caches.invalidate(changedGeocodes);
+            if (caches != null) {
+                caches.invalidate(changedGeocodes);
+            }
         }
     }
 }
