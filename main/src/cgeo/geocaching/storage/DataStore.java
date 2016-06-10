@@ -2100,9 +2100,6 @@ public class DataStore {
         if (log != null) {
             logs.add(log.build());
         }
-        if (log != null) {
-            logs.add(log.build());
-        }
 
         cursor.close();
 
