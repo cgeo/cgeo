@@ -1249,7 +1249,7 @@ public class NewMap extends AbstractActionBarActivity {
             }
             final List<String> changedGeocodes = new ArrayList<>();
             String geocode = popupGeocodes.poll();
-            while(geocode != null) {
+            while (geocode != null) {
                 changedGeocodes.add(geocode);
                 geocode = popupGeocodes.poll();
             }
