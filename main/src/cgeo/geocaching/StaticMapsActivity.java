@@ -5,6 +5,7 @@ import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.Log;
 
 import org.androidannotations.annotations.EActivity;
@@ -44,9 +45,7 @@ public class StaticMapsActivity extends AbstractActionBarActivity {
 
         @Override
         public void handleMessage(final Message msg) {
-            if (waitDialog != null) {
-                waitDialog.dismiss();
-            }
+            Dialogs.dismiss(waitDialog);
             try {
                 if (CollectionUtils.isEmpty(maps)) {
                     if (download) {
@@ -169,5 +168,11 @@ public class StaticMapsActivity extends AbstractActionBarActivity {
         }
         showToast(res.getString(R.string.err_detail_not_load_map_static));
         return false;
+    }
+
+    @Override
+    public void finish() {
+    	Dialogs.dismiss(waitDialog);
+        super.finish();
     }
 }

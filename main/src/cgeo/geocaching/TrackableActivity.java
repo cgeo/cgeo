@@ -1,5 +1,37 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.activity.AbstractViewPagerActivity;
+import cgeo.geocaching.connector.ConnectorFactory;
+import cgeo.geocaching.connector.trackable.TrackableBrand;
+import cgeo.geocaching.enumerations.LogType;
+import cgeo.geocaching.location.Units;
+import cgeo.geocaching.models.LogEntry;
+import cgeo.geocaching.models.Trackable;
+import cgeo.geocaching.network.AndroidBeam;
+import cgeo.geocaching.network.HtmlImage;
+import cgeo.geocaching.sensors.GeoData;
+import cgeo.geocaching.sensors.GeoDirHandler;
+import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.ui.AbstractCachingPageViewCreator;
+import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
+import cgeo.geocaching.ui.CacheDetailsCreator;
+import cgeo.geocaching.ui.ImagesList;
+import cgeo.geocaching.ui.UserActionsClickListener;
+import cgeo.geocaching.ui.UserNameClickListener;
+import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.ui.logs.TrackableLogsViewCreator;
+import cgeo.geocaching.utils.Formatter;
+import cgeo.geocaching.utils.HtmlUtils;
+import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.UnknownTagsHandler;
+
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
+import org.eclipse.jdt.annotation.Nullable;
+
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Paint;
@@ -23,12 +55,6 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.apache.commons.lang3.tuple.Pair;
-import org.eclipse.jdt.annotation.Nullable;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -36,30 +62,6 @@ import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import cgeo.geocaching.activity.AbstractActivity;
-import cgeo.geocaching.activity.AbstractViewPagerActivity;
-import cgeo.geocaching.connector.ConnectorFactory;
-import cgeo.geocaching.connector.trackable.TrackableBrand;
-import cgeo.geocaching.enumerations.LogType;
-import cgeo.geocaching.location.Units;
-import cgeo.geocaching.models.LogEntry;
-import cgeo.geocaching.models.Trackable;
-import cgeo.geocaching.network.AndroidBeam;
-import cgeo.geocaching.network.HtmlImage;
-import cgeo.geocaching.sensors.GeoData;
-import cgeo.geocaching.sensors.GeoDirHandler;
-import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.ui.AbstractCachingPageViewCreator;
-import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
-import cgeo.geocaching.ui.CacheDetailsCreator;
-import cgeo.geocaching.ui.ImagesList;
-import cgeo.geocaching.ui.UserActionsClickListener;
-import cgeo.geocaching.ui.UserNameClickListener;
-import cgeo.geocaching.ui.logs.TrackableLogsViewCreator;
-import cgeo.geocaching.utils.Formatter;
-import cgeo.geocaching.utils.HtmlUtils;
-import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.UnknownTagsHandler;
 import rx.Subscription;
 import rx.android.app.AppObservable;
 import rx.android.view.OnClickEvent;
@@ -275,9 +277,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
 
     public void displayTrackable() {
         if (trackable == null) {
-            if (waitDialog != null) {
-                waitDialog.dismiss();
-            }
+            Dialogs.dismiss(waitDialog);
 
             if (StringUtils.isNotBlank(geocode)) {
                 showToast(res.getString(R.string.err_tb_find) + " " + geocode + ".");
@@ -306,10 +306,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
             Log.e("TrackableActivity.loadTrackableHandler: ", e);
         }
 
-        if (waitDialog != null) {
-            waitDialog.dismiss();
-        }
-
+        Dialogs.dismiss(waitDialog);
     }
 
     private void setupIcon(final ActionBar actionBar, final String url) {
@@ -683,5 +680,11 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
 
     public Trackable getTrackable() {
         return trackable;
+    }
+
+    @Override
+    public void finish() {
+    	Dialogs.dismiss(waitDialog);
+        super.finish();
     }
 }

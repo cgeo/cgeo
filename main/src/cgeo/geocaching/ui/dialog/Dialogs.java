@@ -11,6 +11,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
@@ -503,5 +504,14 @@ public final class Dialogs {
                         listener.call(items.get(item));
                     }
                 }).show();
+    }
+
+    public static void dismiss(@Nullable final ProgressDialog dialog) {
+        if (dialog == null) {
+            return;
+        }
+        if (dialog.isShowing()) {
+            dialog.dismiss();
+        }
     }
 }

@@ -145,10 +145,8 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
             } catch (final RuntimeException e) {
                 Log.e("EditWaypointActivity.loadWaypointHandler", e);
             } finally {
-                if (waitDialog != null) {
-                    waitDialog.dismiss();
-                    waitDialog = null;
-                }
+                Dialogs.dismiss(waitDialog);
+                waitDialog = null;
             }
         }
     };
@@ -612,5 +610,11 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
 
     public static void startActivityAddWaypoint(final Context context, final Geocache cache, final Geopoint initialCoords) {
         EditWaypointActivity_.intent(context).geocode(cache.getGeocode()).initialCoords(initialCoords).start();
+    }
+
+    @Override
+    public void finish() {
+    	Dialogs.dismiss(waitDialog);
+        super.finish();
     }
 }

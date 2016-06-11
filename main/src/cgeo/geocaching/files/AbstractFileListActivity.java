@@ -5,6 +5,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractListActivity;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.storage.LocalStorage;
+import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.EnvironmentUtils;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
@@ -67,9 +68,7 @@ public abstract class AbstractFileListActivity<T extends ArrayAdapter<File>> ext
 
         @Override
         public void handleMessage(final Message msg) {
-            if (waitDialog != null) {
-                waitDialog.dismiss();
-            }
+            Dialogs.dismiss(waitDialog);
             if (CollectionUtils.isEmpty(files) && requireFiles()) {
                 showToast(res.getString(R.string.file_list_no_files));
                 finish();
@@ -260,5 +259,11 @@ public abstract class AbstractFileListActivity<T extends ArrayAdapter<File>> ext
         public synchronized void setShouldEnd() {
             this.shouldEnd = true;
         }
+    }
+
+    @Override
+    public void finish() {
+        Dialogs.dismiss(waitDialog);
+        super.finish();
     }
 }

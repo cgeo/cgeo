@@ -1,5 +1,18 @@
 package cgeo.geocaching.activity;
 
+import cgeo.geocaching.Intents;
+import cgeo.geocaching.R;
+import cgeo.geocaching.network.Network;
+import cgeo.geocaching.network.Parameters;
+import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.BundleUtils;
+import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.MatcherWrapper;
+
+import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.NonNull;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
@@ -15,20 +28,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import org.apache.commons.lang3.StringUtils;
-import org.eclipse.jdt.annotation.NonNull;
-
 import java.util.regex.Pattern;
 
 import butterknife.BindView;
-import cgeo.geocaching.Intents;
-import cgeo.geocaching.R;
-import cgeo.geocaching.network.Network;
-import cgeo.geocaching.network.Parameters;
-import cgeo.geocaching.utils.AndroidRxUtils;
-import cgeo.geocaching.utils.BundleUtils;
-import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.MatcherWrapper;
 import okhttp3.Response;
 import rx.functions.Action0;
 
@@ -58,9 +60,7 @@ public abstract class TokenAuthorizationActivity extends AbstractActivity {
 
         @Override
         public void handleMessage(final Message msg) {
-            if (requestTokenDialog != null && requestTokenDialog.isShowing()) {
-                requestTokenDialog.dismiss();
-            }
+            Dialogs.dismiss(requestTokenDialog);
 
             startButton.setOnClickListener(new StartListener());
             startButton.setEnabled(true);
@@ -330,5 +330,11 @@ public abstract class TokenAuthorizationActivity extends AbstractActivity {
             }
         }
 
+    }
+
+    @Override
+    public void finish() {
+        Dialogs.dismiss(requestTokenDialog);
+        super.finish();
     }
 }
