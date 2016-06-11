@@ -442,10 +442,12 @@ public class Settings {
     }
 
     public static boolean useGooglePlayServices() {
+        if (!GooglePlayServices.isAvailable()) {
+            return false;
+        }
         final boolean defaultForPhone = VERSION.SDK_INT >= VERSION_CODES.ICE_CREAM_SANDWICH;
         // By default, enable play services starting from ICS.
-        return GooglePlayServices.isAvailable() &&
-                outdatedPhoneModelOrSdk() ? defaultForPhone : getBoolean(R.string.pref_googleplayservices, defaultForPhone);
+        return outdatedPhoneModelOrSdk() ? defaultForPhone : getBoolean(R.string.pref_googleplayservices, defaultForPhone);
     }
 
     public static boolean useLowPowerMode() {
