@@ -990,7 +990,7 @@ public final class GCParser {
         final String page = GCLogin.getInstance().getRequestLogged("https://www.geocaching.com/track/details.aspx", params);
 
         if (StringUtils.isBlank(page)) {
-            Log.e("GCParser.searchTrackable: No data from server");
+            Log.w("GCParser.searchTrackable: No data from server");
             return null;
         }
         assert page != null;
