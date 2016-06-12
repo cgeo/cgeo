@@ -215,7 +215,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
 
     private void refreshTrackable(final String message) {
         waitDialog = ProgressDialog.show(this, message, res.getString(R.string.trackable_details_loading), true, true);
-        createSubscriptions.add(AppObservable.bindActivity(this, ConnectorFactory.loadTrackable(geocode, guid, id, brand)).single().subscribe(new Action1<Trackable>() {
+        createSubscriptions.add(AppObservable.bindActivity(this, ConnectorFactory.loadTrackable(geocode, guid, id, brand)).singleOrDefault(null).subscribe(new Action1<Trackable>() {
             @Override
             public void call(final Trackable newTrackable) {
                 if (trackingCode != null) {
