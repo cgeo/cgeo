@@ -1417,6 +1417,11 @@
     <item quantity="few">Přesunuty %d keše</item>
     <item quantity="other">Přesunuto %d keší</item>
   </plurals>
+  <plurals name="command_copy_caches_result">
+    <item quantity="one">Zkopírována %d keš</item>
+    <item quantity="few">Zkopírovány %d keše</item>
+    <item quantity="other">Zkopírováno %d keší</item>
+  </plurals>
   <string name="command_delete_caches_progress">Odstraňování keší</string>
   <plurals name="command_delete_caches_result">
     <item quantity="one">Odstraněna %d keš</item>
