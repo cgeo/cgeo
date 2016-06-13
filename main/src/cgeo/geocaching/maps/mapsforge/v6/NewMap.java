@@ -174,6 +174,8 @@ public class NewMap extends AbstractActionBarActivity {
             mapStateIntent = savedInstanceState.getParcelable(BUNDLE_MAP_STATE);
             trailHistory = savedInstanceState.getParcelableArrayList(BUNDLE_TRAIL_HISTORY);
             followMyLocation = mapStateIntent.followsMyLocation();
+        } else {
+            followMyLocation = followMyLocation && (mapMode == MapMode.LIVE);
         }
 
         ActivityMixin.onCreate(this, true);
