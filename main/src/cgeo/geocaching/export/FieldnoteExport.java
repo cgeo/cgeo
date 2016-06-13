@@ -133,12 +133,13 @@ public class FieldnoteExport extends AbstractExport {
         @Override
         protected Boolean doInBackgroundInternal(final Geocache[] caches) {
             // export field notes separately for each connector, so the file can be uploaded to the respective site afterwards
+            boolean success = true;
             for (final IConnector connector : ConnectorFactory.getConnectors()) {
                 if (connector instanceof FieldNotesCapability) {
-                    exportFieldNotes((FieldNotesCapability) connector, caches);
+                    success &= exportFieldNotes((FieldNotesCapability) connector, caches);
                 }
             }
-            return true;
+            return success;
         }
 
         private boolean exportFieldNotes(final FieldNotesCapability connector, final Geocache[] caches) {
