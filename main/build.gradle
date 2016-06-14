@@ -242,10 +242,10 @@ dependencies {
     // Mapsforge integration
     compile files('libs/mapsforge-map-0.3.0-jar-with-dependencies.jar')
     compile 'com.caverock:androidsvg:1.2.2-beta-1'
-    compile 'org.mapsforge:mapsforge-core:0.6.0'
-    compile 'org.mapsforge:mapsforge-map:0.6.0'
-    compile 'org.mapsforge:mapsforge-map-android:0.6.0'
-    compile 'org.mapsforge:mapsforge-map-reader:0.6.0'
+    compile 'org.mapsforge:mapsforge-core:0.6.1'
+    compile 'org.mapsforge:mapsforge-map:0.6.1'
+    compile 'org.mapsforge:mapsforge-map-android:0.6.1'
+    compile 'org.mapsforge:mapsforge-map-reader:0.6.1'
     configurations {
         all*.exclude group: 'net.sf.kxml', module: 'kxml2' // duplicate XmlPullParser class
     }

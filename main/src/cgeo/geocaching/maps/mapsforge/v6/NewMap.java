@@ -540,7 +540,7 @@ public class NewMap extends AbstractActionBarActivity {
         final TileRendererLayer oldLayer = this.tileRendererLayer;
         final File mapFile = NewMap.getMapFile();
         if (mapFile != null && mapFile.exists()) {
-            final TileRendererLayer newLayer = new TileRendererLayer(tileCache, new MapFile(mapFile), this.mapView.getModel().mapViewPosition, false, true, AndroidGraphicFactory.INSTANCE);
+            final TileRendererLayer newLayer = new TileRendererLayer(tileCache, new MapFile(mapFile), this.mapView.getModel().mapViewPosition, false, true, false, AndroidGraphicFactory.INSTANCE);
 
             // Exchange layer
             final Layers layers = this.mapView.getLayerManager().getLayers();
@@ -570,7 +570,7 @@ public class NewMap extends AbstractActionBarActivity {
         // tile renderer layer (if map file is defined)
         final File mapFile = NewMap.getMapFile();
         if (mapFile != null && mapFile.exists()) {
-            this.tileRendererLayer = new TileRendererLayer(tileCache, new MapFile(mapFile), this.mapView.getModel().mapViewPosition, false, true, AndroidGraphicFactory.INSTANCE);
+            this.tileRendererLayer = new TileRendererLayer(tileCache, new MapFile(mapFile), this.mapView.getModel().mapViewPosition, false, true, false, AndroidGraphicFactory.INSTANCE);
             this.setMapTheme();
 
             // only once a layer is associated with a mapView the rendering starts
