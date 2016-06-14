@@ -45,10 +45,11 @@ public class WatchdogTest extends CGeoTestCase {
         downloadOpenCaching("OR011D");
     }
 
-    @NotForIntegrationTests
-    public static void testOpenCachingUK() {
-        downloadOpenCaching("OK0345");
-    }
+    // Temporarily disabled due to longer website outage
+    //@NotForIntegrationTests
+    //public static void testOpenCachingUK() {
+    //    downloadOpenCaching("OK0345");
+    //}
 
     @NotForIntegrationTests
     public static void testOpenCachingUS() {
@@ -70,6 +71,8 @@ public class WatchdogTest extends CGeoTestCase {
 
     private static void checkWebsite(final String connectorName, final String url) {
 
+        // temporarily disable oc.uk
+        if (connectorName.equalsIgnoreCase("geocaching website opencaching.org.uk")) return;
 
         final String page = Network.getResponseData(Network.getRequest(url));
         assertThat(page).overridingErrorMessage("Failed to get response from " + connectorName).isNotEmpty();
