@@ -13,11 +13,8 @@ import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
 
-import okhttp3.Response;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
-import rx.Completable;
-import rx.functions.Func0;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -26,6 +23,10 @@ import android.graphics.Point;
 import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
+
+import okhttp3.Response;
+import rx.Completable;
+import rx.functions.Func0;
 
 public final class StaticMapsProvider {
     static final int MAPS_LEVEL_MAX = 5;
@@ -118,8 +119,8 @@ public final class StaticMapsProvider {
                             FileUtils.deleteIgnoringFailure(file);
                         }
                     }
-                } catch (final Exception ignored) {
-                    Log.e("StaticMapsProvider.downloadMap: error");
+                } catch (final Exception ex) {
+                    Log.w("StaticMapsProvider.downloadMap: error", ex);
                 }
                 return Completable.complete();
             }
