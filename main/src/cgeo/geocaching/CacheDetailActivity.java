@@ -2180,7 +2180,8 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         pages.add(Page.DETAILS);
         final int detailsIndex = pages.size() - 1;
         pages.add(Page.DESCRIPTION);
-        if (!cache.getLogs().isEmpty()) {
+        // enforce showing the empty log book if new entries can be added
+        if (cache.supportsLogging() || !cache.getLogs().isEmpty()) {
             pages.add(Page.LOGS);
         }
         if (CollectionUtils.isNotEmpty(cache.getFriendsLogs())) {
