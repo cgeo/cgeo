@@ -147,10 +147,13 @@
   <string name="err_unknown">Неизвестная ошибка</string>
   <string name="err_unknown_address">Не удалось получить координаты по данному адресу</string>
   <string name="err_comm">Неизвестная ошибка соединения</string>
+  <string name="err_missing_auth">Имя пользователя и/или пароль не установлены</string>
+  <string name="err_wrong">Неправильное имя пользователя и/или пароль</string>
   <string name="err_maintenance">Geocaching.com отключен для обслуживания. c:geo работает в автономном режиме с сохранёнными тайниками.</string>
   <string name="err_license">Вы не согласились с правилами Geocaching.com, поэтому c:geo не может загрузить координаты тайников.</string>
   <string name="err_unvalidated_account">Сначала вы должны активировать свой аккаунт на Geocaching.com.</string>
   <string name="err_unpublished">Запрашиваемый тайник не опубликован.</string>
+  <string name="err_cache_not_found">Не удалось найти запрошенный тайник.</string>
   <string name="err_premium_only">Тайник доступен только для премиум-участников Geocaching.com.</string>
   <string name="err_detail_open">c:geo не может открыть детали тайника.</string>
   <string name="err_detail_cache">c:geo не может отобразить запрашиваемый тайник. Это действительно тайник?</string>
@@ -202,6 +205,8 @@
   <string name="err_parse_lon">c:geo не удается разобрать долготу.</string>
   <string name="err_parse_dist">c:geo не удается разобрать расстояние.</string>
   <string name="err_parse_lat_lon">c:geo не удается разобрать широту или долготу.</string>
+  <string name="err_rendertheme_file_unreadable">Не удалось загрузить выбранную тему. Возвращаюсь к встроенной.</string>
+  <string name="err_rendertheme_invalid">Выбранная тема не подходит к этой версии mapsforge. Возвращаюсь к встроенной.</string>
   <string name="warn_save_nothing">Нет данных для сохранения.</string>
   <string name="warn_no_cache_coord">Отсутствуют тайники с такими координатами.</string>
   <string name="warn_no_coordinates">Не введены координаты.</string>
@@ -323,6 +328,8 @@
   <string name="caches_refresh_all">Обновить все</string>
   <string name="caches_move_selected">Переместить выбранные</string>
   <string name="caches_move_all">Переместить все</string>
+  <string name="caches_copy_selected">Скопировать выбранное</string>
+  <string name="caches_copy_all">Копировать все</string>
   <string name="caches_map_locus">Locus</string>
   <string name="caches_map_locus_export">Экспорт в Locus</string>
   <string name="caches_recaptcha_title">reCAPTCHA</string>
@@ -356,6 +363,8 @@
   <string name="list_menu_rename">Переименовать текущий список</string>
   <string name="list_menu_import">Импортировать</string>
   <string name="list_title">Выбрать список</string>
+  <string name="lists_title">Выбрать списки</string>
+  <string name="lists_remove_all">Ни одного</string>
   <string name="list_inbox">Сохраненные</string>
   <string name="list_all_lists">Все тайники</string>
   <string name="list_dialog_create_title">Новый список</string>
@@ -382,6 +391,9 @@
   <string name="about_apache_license"><a href="">Лицензия Apache, Version 2.0</a></string>
   <string name="about_help">Помощь</string>
   <string name="about_system_include">Пожалуйста, включите следующую информацию об устройстве, когда отправляете отчет об ошибке или запрашиваете больше информации про c:geo:</string>
+  <string name="about_system_info_send_button">Отправить по email…</string>
+  <string name="about_system_info">Служебная информация c:geo</string>
+  <string name="about_system_info_send_chooser">Отправить служебную информацию</string>
   <string name="changelog_github">Список всех изменений</string>
   <!-- settings -->
   <string name="settings_title_open_settings">Открыть настройки?</string>
@@ -419,18 +431,29 @@
   <string name="settings_info_facebook_login">Вы не можете войти в geocaching.com, используя учетную запись Facebook. Но есть простое решение…</string>
   <string name="settings_authorize">Авторизовать c:geo</string>
   <string name="settings_reauthorize">Авторизовать c:geo еще раз</string>
+  <string name="settings_gc_description">Авторизовать c:geo для поиска тайников geocaching.com.</string>
+  <string name="settings_ec_description">Авторизовать c:geo для extremcaching.com, чтобы искать тайники и иметь доступ к найденным вами тайникам.</string>
   <string name="settings_activate_oc">Активировать</string>
+  <string name="init_summary_oc_de">Загрузить тайники с opencaching.de</string>
   <string name="init_oc_de_description">Авторизовать c:geo для opencaching.de, чтобы искать тайники и иметь доступ к найденным вами тайникам.</string>
   <string name="settings_activate_oc_pl">Активировать</string>
+  <string name="init_summary_oc_pl">Загрузить тайники с opencaching.pl</string>
   <string name="init_oc_pl_description">Авторизовать c:geo для opencaching.pl, чтобы искать тайники и иметь доступ к найденным вами тайникам.</string>
   <string name="settings_activate_oc_nl">Активировать</string>
+  <string name="init_summary_oc_nl">Загрузить тайники с opencaching.nl</string>
   <string name="init_oc_nl_description">Авторизовать c:geo для opencaching.nl, чтобы искать тайники и иметь доступ к найденным вами тайникам.</string>
   <string name="settings_activate_oc_us">Активировать</string>
+  <string name="init_summary_oc_us">Загрузить тайники с opencaching.us</string>
   <string name="init_oc_us_description">Авторизовать c:geo для opencaching.us, чтобы искать тайники и иметь доступ к найденным вами тайникам.</string>
   <string name="settings_activate_oc_ro">Активировать</string>
+  <string name="init_summary_oc_ro">Загрузить тайники с opencaching.ro</string>
   <string name="init_oc_ro_description">Авторизовать c:geo для opencaching.ro, чтобы искать тайники и иметь доступ к найденным вами тайникам.</string>
   <string name="settings_activate_oc_uk">Активировать</string>
+  <string name="init_summary_oc_uk">Загрузить тайники с opencaching.org.uk</string>
   <string name="init_oc_uk_description">Авторизовать c:geo для opencaching.org.uk, чтобы искать тайники и иметь доступ к найденным вами тайникам.</string>
+  <string name="init_su">Geocaching.su</string>
+  <string name="init_summary_su">Загрузить тайники с Geocaching.su</string>
+  <string name="settings_activate_su">Активировать</string>
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_gcvote_password_description">Чтобы оценивать тайники, вам необходимо проследовать инструкциям на GCVote.com и ввести здесь ваш пароль GCVote.</string>
   <string name="err_gcvote_send_rating">Ошибка при отправке оценки, проверьте ваш GCVote пароль в настройках.</string>
@@ -444,6 +467,7 @@
   <string name="init_login_popup_working">Выполняется вход</string>
   <string name="init_login_popup_ok">Вход ОК</string>
   <string name="init_login_popup_failed">Ошибка входа</string>
+  <string name="init_login_popup_failed_reason">Ошибка входа: %s</string>
   <string name="init_login_popup_not_authorized">Не авторизован</string>
   <string name="init_login_popup_invalid_timestamp">Установленное время некорректно, настройте время устройства</string>
   <string name="init_login_popup_invalid_token">Авторизация не удалась, попробуйте еще раз</string>
@@ -505,6 +529,7 @@
   <string name="init_backup_success">База данных c:geo была успешно скопирована в:</string>
   <string name="init_backup_failed">Резервное копирование не удалось.</string>
   <string name="init_backup_unnecessary">База данных пуста, резервное копирование не нужно.</string>
+  <string name="init_backup_no_backup_available">Отсутствует файл резервной копии.</string>
   <string name="backup_confirm_overwrite">Вы хотите перезаписать существующую резервную копию от %s?</string>
   <string name="restore_confirm_overwrite">Вы хотите перезаписать %s на вашем устройстве резервной копией?</string>
   <string name="init_restore_success">Восстановление завершено.</string>
@@ -595,6 +620,8 @@
   <string name="feature_search_geocode">Поиск по геокоду</string>
   <string name="feature_search_owner">Поиск по создателю</string>
   <string name="feature_search_finder">Поиск по посетителям</string>
+  <string name="init_experimental_title">Экспериментальные функции</string>
+  <string name="init_newmap">Использовать новую карту по умолчанию (live, списки)</string>
   <!-- map sources -->
   <string name="map_source_google_map">Google: карта</string>
   <string name="map_source_google_satellite">Google: спутник</string>
@@ -614,12 +641,22 @@
   <!-- auth generic -->
   <string name="auth_twitter">Twitter</string>
   <string name="auth_authorize">Авторизовать c:geo</string>
+  <string name="auth_check">Проверить аутентификацию</string>
+  <string name="auth_check_again">Проверить аутентификацию еще раз</string>
   <string name="auth_start">Начать авторизацию</string>
   <string name="auth_again">Авторизоваться еще раз</string>
+  <string name="auth_register">Создать учетную запись</string>
+  <string name="auth_connected">Подключен</string>
+  <string name="auth_unconnected">Еще не подключен</string>
+  <string name="auth_connected_as">Подключен как %s</string>
   <string name="auth_dialog_waiting">Ожидание %s…</string>
   <string name="auth_explain_short">Следующая процедура позволит <b>c:geo</b> иметь доступ к %s.</string>
   <string name="auth_explain_long">Нажмите \"Авторизовать c:geo\" для начала авторизации. Откроется браузер на странице %s. Введите свои данные и разрешите <b>c:geo</b> доступ к вашей учетной записи. На этом все.</string>
+  <string name="auth_forget_title">Забыли авторизацию?</string>
+  <string name="auth_forget_message">Вы будете отключены от сервиса. Ваши сохраненные логин и пароль будут потеряны.</string>
   <!-- auth credentials -->
+  <string name="auth_credentials_explain_short">Следующая процедура позволит <b>c:geo</b> иметь доступ к %s.</string>
+  <string name="auth_credentials_explain_long">Заполнение данных для входа и нажатие кнопки \"Проверить аутентификацию\" вызовет соединение с %s для проверки ваших данных. Вот и все.</string>
   <!-- auth token -->
   <string name="auth_token_register">Создать учетную запись</string>
   <string name="auth_token_explain_short">Следующая процедура позволит <b>c:geo</b> иметь доступ к %s.</string>
@@ -649,6 +686,8 @@
   <string name="cache_offline_refresh">Обновить</string>
   <string name="cache_offline_drop">Удалить</string>
   <string name="cache_offline_store">Сохранить</string>
+  <string name="cache_offline_manage">Управление</string>
+  <string name="cache_offline_store_in_list">Сохранить в список</string>
   <string name="cache_offline_stored">Сохранено на устройстве</string>
   <string name="cache_offline_not_ready">Недоступно оффлайн</string>
   <string name="cache_offline_time_about">примерно</string>
@@ -739,6 +778,7 @@
   <string name="cache_dialog_favorite_remove_message">Удаляем рекомендацию…</string>
   <string name="cache_menu_navigate">Навигация</string>
   <string name="cache_menu_navigation_drive">Навигация (за рулем)</string>
+  <string name="cache_menu_navigation_drive_select_target">Тайник или парковка?</string>
   <string name="cache_menu_navigation_walk">Навигация (пешком)</string>
   <string name="cache_menu_navigation_transit">Навигация (общественный транспорт)</string>
   <string name="cache_menu_navigation_bike">Навигация (велосипед)</string>
@@ -747,6 +787,7 @@
   <string name="cache_menu_sygic_drive">Sygic (за рулем)</string>
   <string name="cache_menu_radar">Радар</string>
   <string name="cache_menu_map">Карта</string>
+  <string name="cache_menu_new_map">Новая карта</string>
   <string name="cache_menu_map_static">Статическая карта</string>
   <string name="cache_menu_download_map_static">Скачать статические карты</string>
   <string name="cache_menu_rmaps">Rmaps</string>
@@ -763,6 +804,7 @@
   <string name="cache_menu_refresh">Обновить</string>
   <string name="cache_menu_share">Поделиться</string>
   <string name="cache_menu_move_list">Переместить в другой список</string>
+  <string name="cache_menu_copy_list">Скопировать в другой список</string>
   <string name="cache_menu_whereyougo">WhereYouGo</string>
   <string name="cache_menu_oruxmaps_online">OruxMaps (Онлайн)</string>
   <string name="cache_menu_oruxmaps_offline">OruxMaps (Оффлайн)</string>
@@ -810,6 +852,7 @@
   <string name="cache_image">Изображение</string>
   <string name="cache_image_open_file">Открыть файл</string>
   <string name="cache_image_open_browser">Открыть в браузере</string>
+  <string name="cache_image_add_waypoint">Добавить путевую точку</string>
   <string name="cache_share_field">Поделиться</string>
   <string name="cache_time_full_hours">часов</string>
   <string name="cache_listed_on">Упомянут на %s</string>
@@ -826,7 +869,9 @@
   <string name="simple_dir_chooser_invalid_path">Недопустимый путь</string>
   <!-- gpx -->
   <string name="gpx_import_loading_caches">Загрузка тайников из .gpx файла</string>
+  <string name="gpx_import_loading_caches_with_filename">Загрузка тайников из %1$s</string>
   <string name="gpx_import_loading_waypoints">Загрузка файла точек</string>
+  <string name="gpx_import_loading_waypoints_with_filename">Загрузка файла точек из %1$s</string>
   <string name="gpx_import_store_static_maps">Сохранение статических карт</string>
   <string name="gpx_import_caches_imported">тайника (-ов) импортировано</string>
   <string name="gpx_import_caches_imported_with_filename">%1$d тайника (-ов) импортировано из %2$s</string>
@@ -908,6 +953,7 @@
   <string name="map_trail_show">Показать маршрут</string>
   <string name="map_circles_show">Показать круги</string>
   <string name="map_mycaches_hide">Скрыть свои/посещенные</string>
+  <string name="map_disabled_hide">Скрыть тайники вне игры</string>
   <string name="map_theme_builtin">По умолчанию</string>
   <string name="map_theme_select">Выбрать тему карты</string>
   <string name="map_live_enable">Подгружать тайники \"на лету\"</string>
@@ -923,6 +969,7 @@
   <string name="map_strategy_auto">Зависит от скорости</string>
   <string name="map_strategy_detailed">Детальная</string>
   <string name="live_map_notification">Координаты на онлайновой карте не всегда точны. Возможные неточности выделяются оранжевым кругом.\nОткрытие страницы тайника или сохранение тайника всегда сохранит точные координаты.\n\nБольше информации доступно на странице \"О c:geo\".</string>
+  <string name="map_select_multiple_items">Выбрать элемент</string>
   <!-- search -->
   <string name="search_bar_hint">Поиск тайников</string>
   <string name="search_bar_desc">Тайники (геокод, название), код трекабла</string>
@@ -963,6 +1010,7 @@
   <string name="trackable_image">Фотография</string>
   <string name="trackable_code">Код слежения</string>
   <string name="trackable_name">Название</string>
+  <string name="trackable_brand">Тип</string>
   <string name="trackable_type">Тип</string>
   <string name="trackable_owner">Создатель</string>
   <string name="trackable_spotted">Замечен</string>
@@ -1382,6 +1430,12 @@
     <item quantity="few">Перемещено %d тайника</item>
     <item quantity="other">Перемещено %d тайников</item>
   </plurals>
+  <string name="command_copy_caches_progress">Копирование тайников в список %1s</string>
+  <plurals name="command_copy_caches_result">
+    <item quantity="one">Скопирован %d тайник</item>
+    <item quantity="few">Скопировано %d тайника</item>
+    <item quantity="other">Скопировано %d тайников</item>
+  </plurals>
   <string name="command_delete_caches_progress">Удаление тайников</string>
   <plurals name="command_delete_caches_result">
     <item quantity="one">Удален %d тайник</item>
@@ -1406,4 +1460,7 @@
   <string name="invitation_action">Пригласить друзей</string>
   <string name="invitation_title">Пригласить друзей использовать c:geo</string>
   <string name="invitation_message">Попробуйте c:geo для геокешинга</string>
+  <string name="cache_list_remove_from">Удалить из списка</string>
+  <string name="list_list_headline">Списки:</string>
+  <string name="cache_store_list">Сохранить в список</string>
 </resources>

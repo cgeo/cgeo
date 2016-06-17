@@ -148,10 +148,13 @@
   <string name="err_unknown">Nežinoma klaida</string>
   <string name="err_unknown_address">C:geo nepavyko susieti šio adreso su egzistuojančia vietove</string>
   <string name="err_comm">Nežinoma ryšio klaida</string>
+  <string name="err_missing_auth">Neįvestas vartotojo vardas ir/ar slaptažodis</string>
+  <string name="err_wrong">Neteisingas prisijungimo vardas arba slaptažodis</string>
   <string name="err_maintenance">Geocaching.com svetainė neveikia dėl priežiūros darbų. c:geo veikia neprisijungusi su išsaugotomis slėptuvėmis.</string>
   <string name="err_license">Jūs dar nesutikote su Geocaching.com licenciniu susitarimu, todėl c:geo negali įkelti slėptuvės koordinačių.</string>
   <string name="err_unvalidated_account">Jums pirmiausia reikia patvirtinti savo vartotojo paskyrą Geocaching.com svetainėje.</string>
   <string name="err_unpublished">Ši slėptuvė dar nepublikuota.</string>
+  <string name="err_cache_not_found">Pareikalauta slėptuve nerasta.</string>
   <string name="err_premium_only">Ši slėptuvė prieinama tik Geocaching.com Premium nariams.</string>
   <string name="err_detail_open">c:geo negali atidaryti slėptuvės informacijos.</string>
   <string name="err_detail_cache">c:geo negali parodyti šios slėptuvės. Ar tai tikrai slėptuvė?</string>
@@ -220,8 +223,9 @@
   <string name="warn_deprecated_mapfile">Jūs naudojate pasenusią žemėlapio versiją (0.2.4).\nSiūlome atsinaujinti žemėlapį į 0.3.0 versiją.\nNuo sekančio leidimo versija 0.2.4 nebebus palaikoma.</string>
   <string name="warn_nonexistant_mapfile">Pasirinktas žemėlapio failas neegzistuoja.\nIšsaugoti žemėlapiai yra nepasiekiami.</string>
   <string name="warn_rendertheme_missing">Nerasta žemėlapio tema.</string>
-  <string name="warn_pocket_query_select">Nepasirinktas Kišeninis sąrašas.</string>
-  <string name="warn_no_pocket_query_found">Internete nerastas Kišeninis sąrašas.</string>
+  <string name="warn_pocket_query_select">Nepasirinktas joks Pocket query.</string>
+  <string name="warn_no_pocket_query_found">Nerastas Pocket query internete.</string>
+  <string name="err_read_pocket_query_list">Klaida skaitant Pocket query sąrašą.</string>
   <string name="info_log_posted">c:geo įrašą pateikė sėkmingai.</string>
   <string name="info_log_saved">c:geo įrašas sėkmingai išsaugotas.</string>
   <string name="info_log_post_failed">Paskelbti įrašo nepavyko.</string>
@@ -248,7 +252,7 @@
   <string name="loc_trying">Bandoma nustatyti</string>
   <string name="loc_no_addr">Nežinomas adresas</string>
   <string name="loc_gps_disabled">GPS išjungtas</string>
-  <string name="menu_centerposition">Centruoti mano poziciją</string>
+  <string name="menu_centerposition">Centruoti mano vietoje</string>
   <!-- standard menu -->
   <string name="menu_about">Apie c:geo</string>
   <string name="menu_helpers">Naudingos programos</string>
@@ -256,7 +260,7 @@
   <string name="menu_history">Istorija</string>
   <string name="menu_filter">Filtras</string>
   <string name="menu_scan_geo">Skenuoti geo kodą</string>
-  <string name="menu_pocket_queries">Kišeniniai sąrašai</string>
+  <string name="menu_pocket_queries">Pocket query sąrašai</string>
   <string name="menu_scan_description">c:geo negali nuskaityti QR kodų. Reikalinga programa neįdiegta. Ar norite atidaryti Google Play ir ją įdiegti?</string>
   <!-- main screen -->
   <string name="live_map_button">Žemėlapis</string>
@@ -323,6 +327,8 @@
   <string name="caches_refresh_all">Atnaujinti visas</string>
   <string name="caches_move_selected">Perkelti pasirinktas</string>
   <string name="caches_move_all">Perkelti visas</string>
+  <string name="caches_copy_selected">Kopijuoti pasirinktas</string>
+  <string name="caches_copy_all">Kopijuoti visas</string>
   <string name="caches_map_locus">Locus</string>
   <string name="caches_map_locus_export">Eksportuoti į Locus</string>
   <string name="caches_recaptcha_title">reCAPTCHA</string>
@@ -355,6 +361,8 @@
   <string name="list_menu_rename">Pervadinti dabartinį sąrašą</string>
   <string name="list_menu_import">Importuoti</string>
   <string name="list_title">Pasirinkti sąrašą</string>
+  <string name="lists_title">Pasirinkti sąrašus</string>
+  <string name="lists_remove_all">Nieko</string>
   <string name="list_inbox">Išsaugota</string>
   <string name="list_all_lists">Visos slėptuvės</string>
   <string name="list_dialog_create_title">Naujas sąrašas</string>
@@ -381,6 +389,9 @@
   <string name="about_apache_license"><a href=""> Apache licencija, versija 2.0</a></string>
   <string name="about_help">Pagalba</string>
   <string name="about_system_include">Pridėkite papildomą sisteminę informaciją, kai siunčiate klaidos pranešimą arba norite gauti daugiau informacijos apie c:geo:</string>
+  <string name="about_system_info_send_button">Siųsti paštu…</string>
+  <string name="about_system_info">c:geo sistemos informacija</string>
+  <string name="about_system_info_send_chooser">Siųsti sistemos informaciją</string>
   <string name="changelog_github">Pakeitimų sąrašas</string>
   <!-- settings -->
   <string name="settings_title_open_settings">Atidaryti parametrus?</string>
@@ -399,7 +410,7 @@
   <string name="settings_title_map_data">Žemėlapio duomenys</string>
   <string name="settings_title_map_content">Žemėlapio turinys</string>
   <string name="settings_title_gpx">GPX</string>
-  <string name="settings_title_basicmembers">Parinktys baziniams nariams</string>
+  <string name="settings_title_basicmembers">Parinktys paprastiesiems nariams</string>
   <string name="settings_title_navigation">Navigacija</string>
   <string name="settings_summary_navigation">Pasirinkti pirminį navigacijos būdą ir pasirinkti išorinę navigacijos programą.</string>
   <string name="settings_title_system">Sistema</string>
@@ -419,17 +430,26 @@
   <string name="settings_authorize">Leisti c:geo prisijungti</string>
   <string name="settings_reauthorize">Dar kartą leisti c:geo prisijungti</string>
   <string name="settings_activate_oc">Aktyvuoti</string>
+  <string name="init_summary_oc_de">Įkelti slėptuves iš opencaching.de</string>
   <string name="init_oc_de_description">Leiskite c:geo prisijungti prie opencaching.de tam, kad galėtumėt ieškoti slėptuvių ir pasiekti/filtruoti rastas slėptuves.</string>
   <string name="settings_activate_oc_pl">Aktyvuoti</string>
+  <string name="init_summary_oc_pl">Įkelti slėptuves iš opencaching.pl</string>
   <string name="init_oc_pl_description">Leiskite c:geo prisijungti prie opencaching.pl tam, kad galėtumėt ieškoti slėptuvių ir pasiekti/filtruoti rastas slėptuves.</string>
   <string name="settings_activate_oc_nl">Aktyvuoti</string>
+  <string name="init_summary_oc_nl">Įkelti slėptuves iš opencaching.nl</string>
   <string name="init_oc_nl_description">Leiskite c:geo prisijungti prie opencaching.nl tam, kad galėtumėt ieškoti slėptuvių ir pasiekti/filtruoti rastas slėptuves.</string>
   <string name="settings_activate_oc_us">Aktyvuoti</string>
+  <string name="init_summary_oc_us">Įkelti slėptuves iš opencaching.us</string>
   <string name="init_oc_us_description">Leiskite c:geo prisijungti prie opencaching.us tam, kad galėtumėt ieškoti slėptuvių ir pasiekti/filtruoti rastas slėptuves.</string>
   <string name="settings_activate_oc_ro">Aktyvuoti</string>
+  <string name="init_summary_oc_ro">Įkelti slėptuves iš opencaching.ro</string>
   <string name="init_oc_ro_description">Leiskite c:geo prisijungti prie opencaching.ro tam, kad galėtumėt ieškoti slėptuvių ir pasiekti/filtruoti rastas slėptuves.</string>
   <string name="settings_activate_oc_uk">Aktyvuoti</string>
+  <string name="init_summary_oc_uk">Įkelti slėptuves iš opencaching.org.uk</string>
   <string name="init_oc_uk_description">Leiskite c:geo prisijungti prie opencaching.org.uk tam, kad galėtumėt ieškoti slėptuvių ir pasiekti/filtruoti rastas slėptuves.</string>
+  <string name="init_su">Geocaching.su</string>
+  <string name="init_summary_su">Įkelti slėptuves iš Geocaching.su</string>
+  <string name="settings_activate_su">Aktyvuoti</string>
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_gcvote_password_description">Kad būtų galima reitinguoti slėptuvę, sekite instrukciją GCVote.com svetainėje ir čia  įveskite GCVote slaptažodį.</string>
   <string name="err_gcvote_send_rating">Klaida siunčiant reitingą, patikrinkite GCVote slaptažodį parametruose arba jį ištrinkite.</string>
@@ -443,6 +463,7 @@
   <string name="init_login_popup_working">Jungiamasi…</string>
   <string name="init_login_popup_ok">Prisijungta</string>
   <string name="init_login_popup_failed">Nepavyko prisijungti</string>
+  <string name="init_login_popup_failed_reason">Nepavyko prisijungti: %s</string>
   <string name="init_login_popup_not_authorized">Prisijungimas neleistinas</string>
   <string name="init_login_popup_invalid_timestamp">Neteisingas vietinis laikas, nustatykite prietaiso laiką</string>
   <string name="init_login_popup_invalid_token">Blogas prisijungimo leidimas, leiskite prisijungti dar kartą</string>
@@ -466,14 +487,14 @@
   <string name="init_summary_ratingwanted">Įkelti slėptuvės reitingą iš GCvote.com</string>
   <string name="init_friends_and_own_logs_wanted">Rodyti draugų/savo</string>
   <string name="init_summary_friends_and_own_logs_wanted">Rodyti papildomą draugų ir savų įrašų puslapį</string>
-  <string name="init_openlastdetailspage">Paskutinis naudotas puslapis</string>
-  <string name="init_summary_openlastdetailspage">Atidaryti kitą slėptuvę nuo paskutinio naudoto puslapio</string>
+  <string name="init_openlastdetailspage">Paskutinis informacijos puslapis</string>
+  <string name="init_summary_openlastdetailspage">Atidaryti informaciją iš paskutinio naudoto puslapio</string>
   <string name="init_skin">Šviesi tema</string>
   <string name="init_summary_skin">Naudoti šviesią programos temą (reikia pakartotinai paleisti)</string>
   <string name="init_address">Rodyti adresą</string>
   <string name="init_summary_address">Pagrindiniame ekrane vietoje koordinačių rodyti adresą</string>
   <string name="init_captcha">Rodyti CAPTCHA</string>
-  <string name="init_summary_captcha">Jei reikia rodyti CAPTCHA (tik baziniams nariams)</string>
+  <string name="init_summary_captcha">Jei reikia rodyti CAPTCHA (tik paprastiems nariams)</string>
   <string name="init_useenglish">Anglu kalba</string>
   <string name="init_summary_useenglish">Naudoti anglų kalbą (reikia pakartotinai paleisti)</string>
   <string name="init_exclude">Atmesti savo ir rastas</string>
@@ -504,6 +525,7 @@
   <string name="init_backup_success">c:geo duomenų bazė sėkmingai nukopijuota į:</string>
   <string name="init_backup_failed">Nepavyko sukurti atsarginės c:geo duomenų bazės kopijos.</string>
   <string name="init_backup_unnecessary">Duomenų bazė tuščia, atsarginė kopija nereikalinga.</string>
+  <string name="init_backup_no_backup_available">Nėra jokių atsarginės kopijos failų.</string>
   <string name="backup_confirm_overwrite">Ar norite perrašyti esamą atsarginę kopiją nuo %s?</string>
   <string name="restore_confirm_overwrite">Ar norite perrašyti %s įrenginyje su atsargine kopija?</string>
   <string name="init_restore_success">Atkūrimas baigtas.</string>
@@ -529,7 +551,7 @@
   <string name="init_summary_trackautovisit">Automatiškai nustatyti keliauninkus kaip \"Apsilankė\"</string>
   <string name="init_sigautoinsert">Įterpti automatiškai</string>
   <string name="init_loaddirectionimg">Krypties paveikslėlis</string>
-  <string name="init_summary_loaddirectionimg">Jeigu reikia atsisiųst krypties rodyklių paveikslėlius (reikalinga tik baziniams nariams)</string>
+  <string name="init_summary_loaddirectionimg">Jei reikia atsisiųsti krypties rodyklių paveikslėlius (reikalinga tik paprastiems nariams)</string>
   <string name="init_default_navigation_tool">Numatytoji navigacija</string>
   <string name="init_secondary_navigation_tool">Antrinė navigacija</string>
   <string name="init_default_navigation_tool_description">Čia galite pasirinkti jūsų pageidaujamą navigacijos įrankį.</string>
@@ -593,6 +615,7 @@
   <string name="feature_search_geocode">Paieška pagal geo kodą</string>
   <string name="feature_search_owner">Paieška pagal savininką</string>
   <string name="feature_search_finder">Paieška pagal radėją</string>
+  <string name="init_experimental_title">Eksperimentinės funkcijos</string>
   <!-- map sources -->
   <string name="map_source_google_map">Google: Žemėlapis</string>
   <string name="map_source_google_satellite">Google: Palydovas</string>
@@ -614,10 +637,15 @@
   <string name="auth_authorize">Leisti c:geo prisijungti</string>
   <string name="auth_start">Pradėti registraciją</string>
   <string name="auth_again">Pradėti iš naujo</string>
+  <string name="auth_register">Sukurti paskyrą</string>
+  <string name="auth_connected">Prisijungta</string>
+  <string name="auth_unconnected">Dar nesate prisijungę</string>
+  <string name="auth_connected_as">Prisijungta kaip %s</string>
   <string name="auth_dialog_waiting">Laukiama %s…</string>
   <string name="auth_explain_short">Šie veiksmai <b>c:geo</b> programai leis naudotis %s.</string>
   <string name="auth_explain_long">Registracija bus pradėta paspaudus mygtuką \"Pradėti registraciją\". Šis procesas naršyklėje atvers %s puslapį. Prisijunkite prie savo paskyros ir leiskite <b>c:geo</b> ja naudotis.</string>
   <!-- auth credentials -->
+  <string name="auth_credentials_explain_short">Šie veiksmai <b>c:geo</b> programai leis naudotis %s.</string>
   <!-- auth token -->
   <string name="auth_token_register">Sukurti paskyrą</string>
   <string name="auth_token_explain_short">Šie veiksmai <b>c:geo</b> programai leis naudotis %s.</string>
@@ -636,15 +664,38 @@
     <item quantity="other">%1$d slėptuvių</item>
   </plurals>
   <!-- days remaining -->
+  <plurals name="days_remaining">
+    <item quantity="one">liko viena diena</item>
+    <item quantity="few">liko %1$d dienos</item>
+    <item quantity="other">liko %1$d dienų</item>
+  </plurals>
+  <string name="last_day_available">liko paskutine diena</string>
   <string name="cache_offline">Išsaugota</string>
   <string name="cache_offline_refresh">Naujinti</string>
   <string name="cache_offline_drop">Išmesti</string>
   <string name="cache_offline_store">Saugoti</string>
+  <string name="cache_offline_manage">Valdyti</string>
+  <string name="cache_offline_store_in_list">Išsaugoti sąraše</string>
   <string name="cache_offline_stored">Išsaugota prietaise</string>
   <string name="cache_offline_not_ready">Neišsaugota</string>
   <string name="cache_offline_time_about">apie</string>
   <string name="cache_offline_time_mins">minučių atgal</string>
   <string name="cache_offline_time_mins_few">prieš kelias minutes</string>
+  <plurals name="cache_offline_about_time_mins">
+    <item quantity="one">prieš %d minutes</item>
+    <item quantity="few">prieš %d minutes</item>
+    <item quantity="other">prieš %d minučių</item>
+  </plurals>
+  <plurals name="cache_offline_about_time_hours">
+    <item quantity="one">prieš %d valandas</item>
+    <item quantity="few">prieš %d valandų</item>
+    <item quantity="other">prieš %d valandų</item>
+  </plurals>
+  <plurals name="cache_offline_about_time_days">
+    <item quantity="one">prieš %d dienas</item>
+    <item quantity="few">prieš %d dienų</item>
+    <item quantity="other">prieš %d dienų</item>
+  </plurals>
   <string name="cache_offline_time_hour">valandą atgal</string>
   <string name="cache_offline_time_hours">valandas atgal</string>
   <string name="cache_offline_time_days">dienų atgal</string>
@@ -714,14 +765,17 @@
   <string name="cache_dialog_favorite_remove_title">Pašalinti iš mėgiamų sąrašo</string>
   <string name="cache_dialog_favorite_remove_message">Slėptuvė šalinama iš Jūsų mėgiamų slėptuvių sąrašo…</string>
   <string name="cache_menu_navigate">Naviguoti</string>
-  <string name="cache_menu_navigation_drive">Navigacija (vairuoti)</string>
+  <string name="cache_menu_navigation_drive">Navigacija (važiuoti)</string>
+  <string name="cache_menu_navigation_drive_select_target">Slėptuvė ar automobilių stovėjimo vieta?</string>
   <string name="cache_menu_navigation_walk">Navigacija (pėsčiomis)</string>
+  <string name="cache_menu_navigation_transit">Navigacija (keleiviniu transportu)</string>
   <string name="cache_menu_navigation_bike">Navigacija (dviračiu)</string>
   <string name="cache_menu_maps_directions">Google Maps nuorodos</string>
   <string name="cache_menu_sygic_walk">Sygic (pėsčiomis)</string>
   <string name="cache_menu_sygic_drive">Sygic (vairuoti)</string>
   <string name="cache_menu_radar">Radaras</string>
   <string name="cache_menu_map">Žemėlapis</string>
+  <string name="cache_menu_new_map">Naujas žemėlapis</string>
   <string name="cache_menu_map_static">Statinis žemėlapis</string>
   <string name="cache_menu_download_map_static">Parsisiųsti statinį žemėlapį</string>
   <string name="cache_menu_rmaps">Rmaps</string>
@@ -738,6 +792,7 @@
   <string name="cache_menu_refresh">Atnaujinti</string>
   <string name="cache_menu_share">Bendrinti slėptuvę</string>
   <string name="cache_menu_move_list">Perkelti į kitą sąrašą</string>
+  <string name="cache_menu_copy_list">Perkelti į kitą sąrašą</string>
   <string name="cache_menu_whereyougo">WhereYouGo</string>
   <string name="cache_menu_oruxmaps_online">OruxMaps (internetu)</string>
   <string name="cache_menu_oruxmaps_offline">OruxMaps (neprisijungus)</string>
@@ -751,6 +806,7 @@
   <string name="cache_status_found">Rasta</string>
   <string name="cache_not_status_found">Nerasta</string>
   <string name="cache_never_found">Niekada nesurastos</string>
+  <string name="cache_found_last_30_days">Rasti per paskutines 30 dienų</string>
   <string name="cache_status_archived">Suarchyvuota</string>
   <string name="cache_status_disabled">Išjungta</string>
   <string name="cache_status_premium">Tik Premium nariams</string>
@@ -783,6 +839,7 @@
   <string name="cache_image">Nuotrauka</string>
   <string name="cache_image_open_file">Atidaryti kaip failą</string>
   <string name="cache_image_open_browser">Atidaryti naršyklėje</string>
+  <string name="cache_image_add_waypoint">Pridėti papildomą tašką</string>
   <string name="cache_share_field">Bendrinti</string>
   <string name="cache_time_full_hours">valanda (-os)</string>
   <string name="cache_listed_on">Publikuota %s</string>
@@ -881,6 +938,7 @@
   <string name="map_trail_show">Rodyti pėdsaką</string>
   <string name="map_circles_show">Rodyti apskritimus</string>
   <string name="map_mycaches_hide">Slėpti savo/rastas slėptuves</string>
+  <string name="map_disabled_hide">Slėpti išjungtas slėptuves</string>
   <string name="map_theme_builtin">Numatyta</string>
   <string name="map_theme_select">Pasirinkti žemėlapio temą</string>
   <string name="map_live_enable">Slėptuvės tiesiogiai</string>
@@ -896,6 +954,7 @@
   <string name="map_strategy_auto">Priklausoma nuo greičio</string>
   <string name="map_strategy_detailed">Išsami</string>
   <string name="live_map_notification">Koordinatės tiesioginiame žemėlapyje gali būti netikslios. Galimos netikslios koordinatės žymimos oranžinės spalvos apskritimu.\nAtidarius slėptuvės informaciją arba išsaugojus slėptuvę naudojimui neprisijungus bus visada gautos tikslios koordinatės.\n\nDaugiau informacijos rasite programos skiltyje \"Apie c:geo\".</string>
+  <string name="map_select_multiple_items">Pasirinkite elementą</string>
   <!-- search -->
   <string name="search_bar_hint">Ieškoti</string>
   <string name="search_bar_desc">Slėptuvės (geo kodas, raktažodis), Keliauninkai (TB kodas)</string>
@@ -922,13 +981,13 @@
   <string name="search_address_started">Ieškoma vietų</string>
   <string name="search_address_result">Rastos vietos</string>
   <string name="search_own_caches">Ieškoti mano slėptuvių</string>
-  <string name="search_pocket_title">Kišeninis sąrašas</string>
-  <string name="search_pocket_loading">Įkeliami Kišeniniai sąrašai</string>
-  <string name="search_pocket_select">Pasirinkite kišeninį sąrašą</string>
+  <string name="search_pocket_title">Pocket Query</string>
+  <string name="search_pocket_loading">Įkeliami Pocket Query sąrašai</string>
+  <string name="search_pocket_select">Pasirinkite Pocket Query sąrašą</string>
   <!-- trackable -->
   <string name="trackable">Keliauninkas</string>
   <string name="trackable_details_loading">Įkeliama keliauninko informacija…</string>
-  <string name="trackable_log_touch">Registruoti</string>
+  <string name="trackable_log_touch">Paliesti keliauninką</string>
   <string name="trackable_browser_open">Atidaryti naršyklėje</string>
   <string name="trackable_refresh">Atnaujinti</string>
   <string name="trackable_goal">Tikslas</string>
@@ -936,6 +995,7 @@
   <string name="trackable_image">Nuotrauka</string>
   <string name="trackable_code">Sekimo kodas</string>
   <string name="trackable_name">Pavadinimas</string>
+  <string name="trackable_brand">Gamintojas</string>
   <string name="trackable_type">Tipas</string>
   <string name="trackable_owner">Savininkas</string>
   <string name="trackable_spotted">Pastebėtas</string>
@@ -953,6 +1013,7 @@
   <string name="trackable_not_activated">Keliauninkas neaktyvuotas</string>
   <string name="trackable_travelbug">Keliauninkas</string>
   <string name="trackable_geokrety">GeoKrety</string>
+  <string name="trackable_geolutins">GeoLutins</string>
   <string name="geokret_type_traditional">Tradicinis</string>
   <string name="geokret_type_book_or_media">Knyga arba elektroninės priemonės</string>
   <string name="geokret_type_human">Žmogus</string>
@@ -994,8 +1055,8 @@
   <string name="helper_bluetoothgps_description">Leidžia naudoti išorinį GPS imtuvą tikslesnėms koordinatėms gauti ir taupyti jūsų prietaiso bateriją.</string>
   <string name="helper_barcode_title">Barcode Scanner</string>
   <string name="helper_barcode_description">Egzistuoja Greasemonkey įskiepiai ir svetainės, kurios  geo kodus paverčia brūkšniniu kodu. Su šia programa c:geo gali nuskaityti tokius kodus tiesiai iš kompiuterio ekrano.</string>
-  <string name="helper_pocketquery_title">Pocket Query Creator</string>
-  <string name="helper_pocketquery_description">Leidžia lengvai sukurti ir atsisiųsti Kišeninius sąrašus pagal jūsų buvimo vietą arba pasirinktą tašką žemėlapyje. Būtina Premium narystė Geocaching.com.</string>
+  <string name="helper_pocketquery_title">Pocket Query kūrėjas</string>
+  <string name="helper_pocketquery_description">Leidžia lengvai sukurti ir atsisiųsti Pocket Query sąrašus pagal jūsų esamą vietą arba pasirinktą tašką žemėlapyje. Būtina Premium Geocaching.com narystė.</string>
   <string name="helper_google_translate_title">\"Google\" vertėjas</string>
   <string name="helper_google_translate_description">Atsisiuntę vertimo paketą Google Translate programai galėsite lengvai išversti slėptuvės aprašymus ilgai paspaudę ant slėptuvės aprašymo teksto (tam nereikės interneto ryšio).</string>
   <string name="helper_where_you_go_title">WhereYouGo</string>
@@ -1012,7 +1073,7 @@
   <string name="export_fieldnotes_info">Lauko užrašai bus eksportuojami į /sdcard/field-notes su dabartine data ir laiku failo pavadinime.</string>
   <string name="export_fieldnotes_upload">Įkelti į geocaching.com</string>
   <string name="export_fieldnotes_uploading">Įkeliama…</string>
-  <string name="export_fieldnotes_upload_success">Įkelimas į geocaching.com sėkmingas</string>
+  <string name="export_fieldnotes_upload_success">Įkėlimas į geocaching.com sėkmingas</string>
   <string name="export_fieldnotes_onlynew">Tik nuo paskutinio eksportavimo</string>
   <string name="export_fieldnotes_creating">Kuriami Lauko užrašai…</string>
   <string name="export_gpx">GPX</string>
@@ -1348,6 +1409,12 @@
     <item quantity="few">Perkeltos %d slėptuvės</item>
     <item quantity="other">Perkelta %d slėptuvių</item>
   </plurals>
+  <string name="command_copy_caches_progress">Kopijuojamos slėptuvės į %1s sąrašą</string>
+  <plurals name="command_copy_caches_result">
+    <item quantity="one">Nukopijuotos %d slėptuvės</item>
+    <item quantity="few">Nukopijuota %d slėptuvių</item>
+    <item quantity="other">Nukopijuota %d slėptuvių</item>
+  </plurals>
   <string name="command_delete_caches_progress">Ištrinamos slėptuvės</string>
   <plurals name="command_delete_caches_result">
     <item quantity="one">Ištrinta %d slėptuvė</item>
@@ -1362,9 +1429,15 @@
   <string name="unit_ft">pėdos</string>
   <string name="unit_yd">jardai</string>
   <string name="unit_mi">mylios</string>
+  <string name="pq_available_for_download">Galima atsisiųsti Pocket query</string>
+  <string name="pq_available_for_download_description">Šį Pocket query galima atsisiųsti kaip vieną failą (gpx). Ar norite atsisiųsti ir jį importuoti ar peržiūrėti slėptuves kaip sąrašą?</string>
   <string name="pq_as_cache_list">Peržiūrėti lobių sąrašą</string>
+  <string name="pq_download_and_import">Importuoti Pocket query</string>
   <string name="pq_my_finds">Mano radiniai</string>
   <string name="invitation_action">Pakviesti draugus</string>
   <string name="invitation_title">Pakviesti draugus naudoti c:geo</string>
   <string name="invitation_message">Geoslėptuvių paieškai pabandykite c:geo programėlę</string>
+  <string name="cache_list_remove_from">Pašalinti iš sąrašo</string>
+  <string name="list_list_headline">Sąrašai:</string>
+  <string name="cache_store_list">Išsaugoti sąraše</string>
 </resources>

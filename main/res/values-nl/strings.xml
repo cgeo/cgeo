@@ -861,6 +861,7 @@
   <string name="cache_image">Afbeelding</string>
   <string name="cache_image_open_file">Open als bestand</string>
   <string name="cache_image_open_browser">Open in browser</string>
+  <string name="cache_image_add_waypoint">Waypoint toevoegen</string>
   <string name="cache_share_field">Delen</string>
   <string name="cache_time_full_hours">uur</string>
   <string name="cache_listed_on">Opgenomen in %s</string>
@@ -877,7 +878,9 @@
   <string name="simple_dir_chooser_invalid_path">Ongeldig pad</string>
   <!-- gpx -->
   <string name="gpx_import_loading_caches">Caches laden van .gpx bestand</string>
+  <string name="gpx_import_loading_caches_with_filename">Laden van caches uit %1$s</string>
   <string name="gpx_import_loading_waypoints">Waypoints laden van .gpx bestand</string>
+  <string name="gpx_import_loading_waypoints_with_filename">Laden van waypoints uit %1$s</string>
   <string name="gpx_import_store_static_maps">Opslaan statische kaarten</string>
   <string name="gpx_import_caches_imported">Caches geïmporteerd</string>
   <string name="gpx_import_caches_imported_with_filename">%1$d caches geïmporteerd uit %2$s</string>
@@ -975,6 +978,7 @@
   <string name="map_strategy_auto">Afhankelijk van snelheid</string>
   <string name="map_strategy_detailed">Gedetailleerd</string>
   <string name="live_map_notification">Op de nieuwe live-kaart zullen coördinaten niet altijd exact zijn. Mogelijke onnauwkeurige coördinaten zijn aangegeven met een oranje cirkel.\nHet openen of opslaan van de cache zorgt ervoor dat de exacte coördinaten gebruikt worden.\n\nMeer informatie over de wijzigingen kan gevonden worden op de \"Over c:geo\" pagina in de app.</string>
+  <string name="map_select_multiple_items">Selecteer item</string>
   <!-- search -->
   <string name="search_bar_hint">Zoek naar caches</string>
   <string name="search_bar_desc">Caches (geo code, trefwoord), Trackables (TB-code)</string>
