@@ -81,6 +81,9 @@ public class GeocachingSuParser {
                 final String tagname = parser.getName();
                 switch (eventType) {
                     case XmlPullParser.START_TAG:
+                        // reset text value to correctly indicate empty tags
+                        text = "";
+
                         if ("cache".equalsIgnoreCase(tagname)) {
                             cache = createNewCache();
                             parsed = new Parsed();
@@ -137,7 +140,10 @@ public class GeocachingSuParser {
                         } else if ("recom".equalsIgnoreCase(tagname)) {
                             cache.setFavoritePoints(Integer.valueOf(StringUtils.trim(text)));
                         } else if ("rating".equalsIgnoreCase(tagname)) {
-                            cache.setRating(Float.valueOf(StringUtils.trim(text)));
+                            final String trimmed = StringUtils.trim(text);
+                            if (StringUtils.isNotEmpty(trimmed)) {
+                                cache.setRating(Float.valueOf(trimmed));
+                            }
                         }
 
                         break;
