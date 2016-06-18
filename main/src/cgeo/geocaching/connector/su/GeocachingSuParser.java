@@ -134,6 +134,10 @@ public class GeocachingSuParser {
                             cache.addSpoiler(new Image.Builder().setUrl(text).build());
                         } else if ("status".equalsIgnoreCase(tagname)) {
                             cache.setDisabled(isDisabledStatus(text));
+                        } else if ("recom".equalsIgnoreCase(tagname)) {
+                            cache.setFavoritePoints(Integer.valueOf(StringUtils.trim(text)));
+                        } else if ("rating".equalsIgnoreCase(tagname)) {
+                            cache.setRating(Float.valueOf(StringUtils.trim(text)));
                         }
 
                         break;
