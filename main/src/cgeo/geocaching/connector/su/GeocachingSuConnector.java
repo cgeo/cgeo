@@ -8,9 +8,11 @@ import cgeo.geocaching.connector.capability.ISearchByViewPort;
 import cgeo.geocaching.connector.gc.MapTokens;
 import cgeo.geocaching.loaders.RecaptchaReceiver;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.network.Network;
+import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.CancellableHandler;
 
@@ -28,7 +30,26 @@ public class GeocachingSuConnector extends AbstractConnector implements ISearchB
     private static final CharSequence PREFIX_MULTISTEP = "MS";
     private static final CharSequence PREFIX_EVENT = "EV";
     private static final CharSequence PREFIX_CONTEST = "CT";
+
+    /**
+     * base URL for all API operations
+     */
     private static final String API_URL = "http://www.geocaching.su/site/api.php?";
+
+    /**
+     * kind of request to the server
+     */
+    private static final String PARAMETER_REQUEST_TYPE = "rtype";
+    private static final String REQUEST_TYPE_BOUNDING_BOX = "0";
+    private static final String REQUEST_TYPE_CENTER = "1";
+    private static final String REQUEST_TYPE_CACHE = "2";
+
+    /**
+     * level of detail for the result to be returned
+     */
+    private static final String PARAMETER_RESULT_FIELDS = "istr";
+    private static final String RESULT_FIELDS_AREA = "ms";
+    private static final String RESULT_FIELDS_DETAILED = "abcdefghiklmnops";
 
     private GeocachingSuConnector() {
         // singleton
@@ -93,23 +114,25 @@ public class GeocachingSuConnector extends AbstractConnector implements ISearchB
 
     @Override
     public SearchResult searchByCenter(@NonNull final Geopoint center, @NonNull final RecaptchaReceiver recaptchaReceiver) {
-        return searchCaches("cache", "rtype=1&radius=20&clng=" + center.getLongitude() + "&clat=" + center.getLatitude());
+        return searchCaches("cache", new Parameters(PARAMETER_REQUEST_TYPE, REQUEST_TYPE_CENTER, "radius", "20", "clng", GeopointFormatter.format(GeopointFormatter.Format.LON_DECDEGREE_RAW, center), "clat", GeopointFormatter.format(GeopointFormatter.Format.LAT_DECDEGREE_RAW, center)));
     }
 
     @Override
     public SearchResult searchByGeocode(@Nullable final String geocode, @Nullable final String guid, final CancellableHandler handler) {
         final String id = StringUtils.substring(geocode, 2);
-        return searchCaches("data", "rtype=2&cid=" + id + "&istr=abcdefghiklmnos");
+        return searchCaches("data", new Parameters(PARAMETER_REQUEST_TYPE, REQUEST_TYPE_CACHE, "cid", id, PARAMETER_RESULT_FIELDS, RESULT_FIELDS_DETAILED));
     }
 
     @Override
     @NonNull
     public SearchResult searchByViewport(@NonNull final Viewport viewport, @Nullable final MapTokens tokens) {
-        return searchCaches("cache", "rtype=0&lngmax=" + viewport.getLongitudeMax() + "&lngmin=" + viewport.getLongitudeMin() + "&latmax=" + viewport.getLatitudeMax() + "&latmin=" + viewport.getLatitudeMin());
+        final Geopoint min = viewport.bottomLeft;
+        final Geopoint max = viewport.topRight;
+        return searchCaches("cache", new Parameters(PARAMETER_REQUEST_TYPE, REQUEST_TYPE_BOUNDING_BOX, "lngmax", GeopointFormatter.format(GeopointFormatter.Format.LON_DECDEGREE_RAW, max), "lngmin", GeopointFormatter.format(GeopointFormatter.Format.LON_DECDEGREE_RAW, min), "latmax", GeopointFormatter.format(GeopointFormatter.Format.LAT_DECDEGREE_RAW, max), "latmin", GeopointFormatter.format(GeopointFormatter.Format.LAT_DECDEGREE_RAW, min), PARAMETER_RESULT_FIELDS, RESULT_FIELDS_AREA));
     }
 
-    private static SearchResult searchCaches(@NonNull final String endTag, @NonNull final String url) {
-        return parseCaches(endTag, Network.getResponseStream(Network.getRequest(API_URL + url)));
+    private static SearchResult searchCaches(@NonNull final String endTag, @NonNull final Parameters parameters) {
+        return parseCaches(endTag, Network.getResponseStream(Network.getRequest(API_URL, parameters)));
     }
 
     private static SearchResult parseCaches(@NonNull final String endTag, final InputStream inputStream) {

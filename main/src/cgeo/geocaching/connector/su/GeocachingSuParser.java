@@ -25,6 +25,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.EnumSet;
+import java.util.List;
 import java.util.Locale;
 
 public class GeocachingSuParser {
@@ -36,6 +37,31 @@ public class GeocachingSuParser {
         // utility class
     }
 
+    /**
+     * Collects temporary data until parsing of a single cache is completed, since not all parsed tags or attributes can
+     * be stored immediately.
+     */
+    private static final class Parsed {
+        private final StringBuilder description = new StringBuilder();
+        public String latitude = null;
+        public Builder logBuilder = new LogEntry.Builder();
+        public final List<LogEntry> logs = new ArrayList<>();
+
+        void addDescription(final String text) {
+            if (StringUtils.isBlank(text)) {
+                return;
+            }
+            if (description.length() > 0) {
+                description.append("\n");
+            }
+            description.append(StringUtils.trim(text));
+        }
+
+        String getDescription() {
+            return description.toString();
+        }
+    }
+
     @NonNull
     public static SearchResult parseCaches(final String endTag, final InputStream inputStream) {
         final ArrayList<Geocache> caches = new ArrayList<>();
@@ -45,12 +71,10 @@ public class GeocachingSuParser {
             final XmlPullParser parser = factory.newPullParser();
             parser.setInput(inputStream, "UTF-8");
 
-            String text = "";
+            Parsed parsed = new Parsed();
             Geocache cache = createNewCache();
-            String lattitude = "";
-            Builder logEntry = new LogEntry.Builder();
-            ArrayList<LogEntry> logs = new ArrayList<>();
 
+            String text = "";
             int eventType = parser.getEventType();
 
             while (eventType != XmlPullParser.END_DOCUMENT) {
@@ -59,12 +83,12 @@ public class GeocachingSuParser {
                     case XmlPullParser.START_TAG:
                         if ("cache".equalsIgnoreCase(tagname)) {
                             cache = createNewCache();
-                            logs = new ArrayList<>();
+                            parsed = new Parsed();
                         } else if ("note".equalsIgnoreCase(tagname)) {
-                            logEntry = new LogEntry.Builder();
-                            logEntry.setAuthor(parser.getAttributeValue(null, "nick"));
-                            logEntry.setDate(parseDateTime(parser.getAttributeValue(null, "date")));
-                            logEntry.setLogType(LogType.NOTE);
+                            parsed.logBuilder = new LogEntry.Builder();
+                            parsed.logBuilder.setAuthor(parser.getAttributeValue(null, "nick"));
+                            parsed.logBuilder.setDate(parseDateTime(parser.getAttributeValue(null, "date")));
+                            parsed.logBuilder.setLogType(LogType.NOTE);
                         }
                         break;
 
@@ -78,27 +102,38 @@ public class GeocachingSuParser {
                         } else if ("name".equalsIgnoreCase(tagname)) {
                             cache.setName(text);
                         } else if (endTag.equalsIgnoreCase(tagname)) {
-                            DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
-                            DataStore.saveLogs(cache.getGeocode(), logs);
-                            caches.add(cache);
+                            storeCache(cache, caches, parsed);
                         } else if ("lat".equalsIgnoreCase(tagname)) {
-                            lattitude = text;
+                            parsed.latitude = text;
                         } else if ("lng".equalsIgnoreCase(tagname)) {
-                            cache.setCoords(new Geopoint(lattitude, text));
-                        } else if ("nick".equalsIgnoreCase(tagname)) {
+                            cache.setCoords(new Geopoint(parsed.latitude, text));
+                        } else if ("nick".equalsIgnoreCase(tagname) || "autor".equalsIgnoreCase(tagname)) {
+                            // sic!, "autor", not "author"
                             cache.setOwnerDisplayName(text);
                         } else if ("adesc".equalsIgnoreCase(tagname)) {
-                            cache.setDescription(text);
-                            cache.setDetailedUpdatedNow();
+                            // description of the area
+                            parsed.addDescription(text);
+                        } else if ("cdesc".equalsIgnoreCase(tagname)) {
+                            // description of the cache task
+                            parsed.addDescription(text);
+                        } else if ("tpart".equalsIgnoreCase(tagname)) {
+                            // description for traditional part (optional, rarely used), where to look for the cache
+                            parsed.addDescription(text);
+                        } else if ("vpart".equalsIgnoreCase(tagname)) {
+                            // virtual question for winter time (or just virtual question for virtual caches)
+                            parsed.addDescription(text);
                         } else if ("date".equalsIgnoreCase(tagname)) {
                             cache.setHidden(parseDate(text));
-                        } else if ("type".equalsIgnoreCase(tagname)) {
+                        } else if ("type".equalsIgnoreCase(tagname) || "ctype".equalsIgnoreCase(tagname)) {
+                            // different tags used in single cache details and area search
                             cache.setType(parseType(text));
                         } else if ("note".equalsIgnoreCase(tagname)) {
-                            logEntry.setLog(StringUtils.trim(text));
-                            logs.add(logEntry.build());
+                            parsed.logBuilder.setLog(StringUtils.trim(text));
+                            parsed.logs.add(parsed.logBuilder.build());
                         } else if ("img".equalsIgnoreCase(tagname)) {
                             cache.addSpoiler(new Image.Builder().setUrl(text).build());
+                        } else if ("status".equalsIgnoreCase(tagname)) {
+                            cache.setDisabled(isDisabledStatus(text));
                         }
 
                         break;
@@ -114,6 +149,23 @@ public class GeocachingSuParser {
         }
 
         return new SearchResult(caches);
+    }
+
+    private static boolean isDisabledStatus(final String status) {
+        return !("1".equals(status) || "На сайте".equalsIgnoreCase(status));
+    }
+
+    private static void storeCache(final Geocache cache, final ArrayList<Geocache> caches, final Parsed parsed) {
+        // finalize the data of the cache
+        cache.setDescription(parsed.getDescription());
+        cache.setDetailedUpdatedNow();
+
+        // save to database
+        DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
+        DataStore.saveLogs(cache.getGeocode(), parsed.logs);
+
+        // append to search result
+        caches.add(cache);
     }
 
     @NonNull
