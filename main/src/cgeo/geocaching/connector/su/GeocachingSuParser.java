@@ -204,8 +204,13 @@ public class GeocachingSuParser {
     private static void storeCache(final Geocache cache, final ArrayList<Geocache> caches, final Parsed parsed) {
         // finalize the data of the cache
         cache.setGeocode(getGeocode(parsed));
-        cache.setDescription(parsed.getDescription());
-        cache.setDetailedUpdatedNow();
+        final String description = parsed.getDescription();
+        cache.setDescription(description);
+
+        // differentiate between area search, and detailed request
+        if (StringUtils.isNotEmpty(description)) {
+            cache.setDetailedUpdatedNow();
+        }
 
         // save to database
         DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
