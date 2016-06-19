@@ -134,7 +134,11 @@ public class GeocachingSuParser {
                             parsed.logBuilder.setLog(StringUtils.trim(text));
                             parsed.logs.add(parsed.logBuilder.build());
                         } else if ("img".equalsIgnoreCase(tagname)) {
-                            cache.addSpoiler(new Image.Builder().setUrl(text).build());
+                            if (text.contains("photos/caches")) {
+                                cache.addSpoiler(new Image.Builder().setUrl(text).build());
+                            } else {
+                                parsed.addDescription("<img src=\"" + text + "\"/><br/>");
+                            }
                         } else if ("status".equalsIgnoreCase(tagname)) {
                             cache.setDisabled(isDisabledStatus(text));
                         } else if ("recom".equalsIgnoreCase(tagname)) {
