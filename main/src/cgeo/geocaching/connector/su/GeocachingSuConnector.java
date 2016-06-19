@@ -24,12 +24,12 @@ import java.io.InputStream;
 
 public class GeocachingSuConnector extends AbstractConnector implements ISearchByCenter, ISearchByGeocode, ISearchByViewPort {
 
-    private static final CharSequence PREFIX_MULTISTEP_VIRTUAL = "MV";
-    private static final CharSequence PREFIX_TRADITIONAL = "TR";
-    private static final CharSequence PREFIX_VIRTUAL = "VI";
-    private static final CharSequence PREFIX_MULTISTEP = "MS";
-    private static final CharSequence PREFIX_EVENT = "EV";
-    private static final CharSequence PREFIX_CONTEST = "CT";
+    static final CharSequence PREFIX_MULTISTEP_VIRTUAL = "MV";
+    static final CharSequence PREFIX_TRADITIONAL = "TR";
+    static final CharSequence PREFIX_VIRTUAL = "VI";
+    static final CharSequence PREFIX_MULTISTEP = "MS";
+    static final CharSequence PREFIX_EVENT = "EV";
+    static final CharSequence PREFIX_CONTEST = "CT";
 
     /**
      * base URL for all API operations
@@ -98,7 +98,7 @@ public class GeocachingSuConnector extends AbstractConnector implements ISearchB
 
     @Override
     public boolean canHandle(@NonNull final String geocode) {
-        return (StringUtils.startsWithAny(StringUtils.upperCase(geocode), "SU", PREFIX_TRADITIONAL, PREFIX_MULTISTEP_VIRTUAL, PREFIX_VIRTUAL, PREFIX_MULTISTEP, PREFIX_EVENT, PREFIX_CONTEST)) && isNumericId(geocode.substring(2));
+        return (StringUtils.startsWithAny(StringUtils.upperCase(geocode), PREFIX_TRADITIONAL, PREFIX_MULTISTEP_VIRTUAL, PREFIX_VIRTUAL, PREFIX_MULTISTEP, PREFIX_EVENT, PREFIX_CONTEST)) && isNumericId(geocode.substring(2));
     }
 
     @Override
@@ -114,7 +114,7 @@ public class GeocachingSuConnector extends AbstractConnector implements ISearchB
 
     @Override
     public SearchResult searchByCenter(@NonNull final Geopoint center, @NonNull final RecaptchaReceiver recaptchaReceiver) {
-        return searchCaches("cache", new Parameters(PARAMETER_REQUEST_TYPE, REQUEST_TYPE_CENTER, "radius", "20", "clng", GeopointFormatter.format(GeopointFormatter.Format.LON_DECDEGREE_RAW, center), "clat", GeopointFormatter.format(GeopointFormatter.Format.LAT_DECDEGREE_RAW, center), PARAMETER_RESULT_FIELDS, RESULT_FIELDS_SEARCH));
+        return searchCaches("cache", new Parameters(PARAMETER_REQUEST_TYPE, REQUEST_TYPE_CENTER, "radius", "40", "clng", GeopointFormatter.format(GeopointFormatter.Format.LON_DECDEGREE_RAW, center), "clat", GeopointFormatter.format(GeopointFormatter.Format.LAT_DECDEGREE_RAW, center), PARAMETER_RESULT_FIELDS, RESULT_FIELDS_SEARCH));
     }
 
     @Override

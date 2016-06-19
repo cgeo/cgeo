@@ -42,10 +42,12 @@ public class GeocachingSuParser {
      * be stored immediately.
      */
     private static final class Parsed {
+        public String id;
         private final StringBuilder description = new StringBuilder();
         public String latitude = null;
         public Builder logBuilder = new LogEntry.Builder();
         public final List<LogEntry> logs = new ArrayList<>();
+        public String type;
 
         void addDescription(final String text) {
             if (StringUtils.isBlank(text)) {
@@ -101,7 +103,7 @@ public class GeocachingSuParser {
 
                     case XmlPullParser.END_TAG:
                         if ("id".equalsIgnoreCase(tagname)) {
-                            cache.setGeocode("SU" + text);
+                            parsed.id = text;
                         } else if ("name".equalsIgnoreCase(tagname)) {
                             cache.setName(text);
                         } else if (endTag.equalsIgnoreCase(tagname)) {
@@ -129,6 +131,7 @@ public class GeocachingSuParser {
                             cache.setHidden(parseDate(text));
                         } else if ("type".equalsIgnoreCase(tagname) || "ctype".equalsIgnoreCase(tagname)) {
                             // different tags used in single cache details and area search
+                            parsed.type = text;
                             cache.setType(parseType(text));
                         } else if ("note".equalsIgnoreCase(tagname)) {
                             parsed.logBuilder.setLog(StringUtils.trim(text));
@@ -147,6 +150,12 @@ public class GeocachingSuParser {
                             final String trimmed = StringUtils.trim(text);
                             if (StringUtils.isNotEmpty(trimmed)) {
                                 cache.setRating(Float.valueOf(trimmed));
+                            }
+                        } else if ("container".equalsIgnoreCase(tagname)) {
+                            // we only have the geocaching.com container sizes, therefore let's move this into the hint
+                            final String trimmed = StringUtils.trim(text);
+                            if (StringUtils.isNotEmpty(trimmed)) {
+                                cache.setHint(trimmed);
                             }
                         }
 
@@ -190,6 +199,7 @@ public class GeocachingSuParser {
 
     private static void storeCache(final Geocache cache, final ArrayList<Geocache> caches, final Parsed parsed) {
         // finalize the data of the cache
+        cache.setGeocode(getGeocode(parsed));
         cache.setDescription(parsed.getDescription());
         cache.setDetailedUpdatedNow();
 
@@ -199,6 +209,29 @@ public class GeocachingSuParser {
 
         // append to search result
         caches.add(cache);
+    }
+
+    private static String getGeocode(final Parsed parsed) {
+        return parseGeocodePrefix(parsed.type) + parsed.id;
+    }
+
+    private static CharSequence parseGeocodePrefix(final String type) {
+        switch (type) {
+            case "Пошаговый виртуальный":
+                return GeocachingSuConnector.PREFIX_MULTISTEP_VIRTUAL;
+            case "Традиционный":
+                return GeocachingSuConnector.PREFIX_TRADITIONAL;
+            case "Виртуальный":
+                return GeocachingSuConnector.PREFIX_VIRTUAL;
+            case "Сообщение о встрече":
+                return GeocachingSuConnector.PREFIX_EVENT;
+            case "Пошаговый традиционный":
+                return GeocachingSuConnector.PREFIX_MULTISTEP;
+            case "Конкурс":
+            	return GeocachingSuConnector.PREFIX_CONTEST;
+            default:
+                return "SU"; // fallback solution to not use the numeric id only
+        }
     }
 
     @NonNull
