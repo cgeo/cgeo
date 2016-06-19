@@ -483,6 +483,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
             final StatusCode loginState = GCLogin.getInstance().login();
             if (loginState != StatusCode.NO_ERROR) {
                 Log.e("FieldnoteExport.ExportTask upload: Login failed");
+                return false;
             }
         }
 
