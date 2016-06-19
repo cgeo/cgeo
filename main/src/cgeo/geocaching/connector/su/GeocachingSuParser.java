@@ -91,7 +91,7 @@ public class GeocachingSuParser {
                             parsed.logBuilder = new LogEntry.Builder();
                             parsed.logBuilder.setAuthor(parser.getAttributeValue(null, "nick"));
                             parsed.logBuilder.setDate(parseDateTime(parser.getAttributeValue(null, "date")));
-                            parsed.logBuilder.setLogType(LogType.NOTE);
+                            parsed.logBuilder.setLogType(parseLogType(parser.getAttributeValue(null, "status")));
                         }
                         break;
 
@@ -163,6 +163,25 @@ public class GeocachingSuParser {
         }
 
         return new SearchResult(caches);
+    }
+
+    private static LogType parseLogType(final String status) {
+        switch (status) {
+            case "1":
+                return LogType.FOUND_IT;
+            case "2":
+                return LogType.DIDNT_FIND_IT;
+            case "3":
+                return LogType.NOTE;
+            case "4":
+                return LogType.DIDNT_FIND_IT;
+            case "5":
+                return LogType.OWNER_MAINTENANCE;
+            case "6":
+                return LogType.OWNER_MAINTENANCE;
+            default:
+                return LogType.UNKNOWN;
+        }
     }
 
     private static boolean isDisabledStatus(final String status) {
