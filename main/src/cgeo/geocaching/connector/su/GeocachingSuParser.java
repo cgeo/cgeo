@@ -157,6 +157,10 @@ public class GeocachingSuParser {
                             if (StringUtils.isNotEmpty(trimmed)) {
                                 cache.setHint(trimmed);
                             }
+                        } else if ("area_value".equalsIgnoreCase(tagname)) {
+                            cache.setTerrain(Float.parseFloat(text));
+                        } else if ("cache_value".equalsIgnoreCase(tagname)) {
+                            cache.setDifficulty(Float.parseFloat(text));
                         }
 
                         break;
