@@ -48,7 +48,7 @@ public class GeocachingSuConnector extends AbstractConnector implements ISearchB
      * level of detail for the result to be returned
      */
     private static final String PARAMETER_RESULT_FIELDS = "istr";
-    private static final String RESULT_FIELDS_AREA = "ms";
+    private static final String RESULT_FIELDS_SEARCH = "ms";
     private static final String RESULT_FIELDS_DETAILED = "abcdefghiklmnops";
 
     private GeocachingSuConnector() {
@@ -114,7 +114,7 @@ public class GeocachingSuConnector extends AbstractConnector implements ISearchB
 
     @Override
     public SearchResult searchByCenter(@NonNull final Geopoint center, @NonNull final RecaptchaReceiver recaptchaReceiver) {
-        return searchCaches("cache", new Parameters(PARAMETER_REQUEST_TYPE, REQUEST_TYPE_CENTER, "radius", "20", "clng", GeopointFormatter.format(GeopointFormatter.Format.LON_DECDEGREE_RAW, center), "clat", GeopointFormatter.format(GeopointFormatter.Format.LAT_DECDEGREE_RAW, center)));
+        return searchCaches("cache", new Parameters(PARAMETER_REQUEST_TYPE, REQUEST_TYPE_CENTER, "radius", "20", "clng", GeopointFormatter.format(GeopointFormatter.Format.LON_DECDEGREE_RAW, center), "clat", GeopointFormatter.format(GeopointFormatter.Format.LAT_DECDEGREE_RAW, center), PARAMETER_RESULT_FIELDS, RESULT_FIELDS_SEARCH));
     }
 
     @Override
@@ -128,7 +128,7 @@ public class GeocachingSuConnector extends AbstractConnector implements ISearchB
     public SearchResult searchByViewport(@NonNull final Viewport viewport, @Nullable final MapTokens tokens) {
         final Geopoint min = viewport.bottomLeft;
         final Geopoint max = viewport.topRight;
-        return searchCaches("cache", new Parameters(PARAMETER_REQUEST_TYPE, REQUEST_TYPE_BOUNDING_BOX, "lngmax", GeopointFormatter.format(GeopointFormatter.Format.LON_DECDEGREE_RAW, max), "lngmin", GeopointFormatter.format(GeopointFormatter.Format.LON_DECDEGREE_RAW, min), "latmax", GeopointFormatter.format(GeopointFormatter.Format.LAT_DECDEGREE_RAW, max), "latmin", GeopointFormatter.format(GeopointFormatter.Format.LAT_DECDEGREE_RAW, min), PARAMETER_RESULT_FIELDS, RESULT_FIELDS_AREA));
+        return searchCaches("cache", new Parameters(PARAMETER_REQUEST_TYPE, REQUEST_TYPE_BOUNDING_BOX, "lngmax", GeopointFormatter.format(GeopointFormatter.Format.LON_DECDEGREE_RAW, max), "lngmin", GeopointFormatter.format(GeopointFormatter.Format.LON_DECDEGREE_RAW, min), "latmax", GeopointFormatter.format(GeopointFormatter.Format.LAT_DECDEGREE_RAW, max), "latmin", GeopointFormatter.format(GeopointFormatter.Format.LAT_DECDEGREE_RAW, min), PARAMETER_RESULT_FIELDS, RESULT_FIELDS_SEARCH));
     }
 
     private static SearchResult searchCaches(@NonNull final String endTag, @NonNull final Parameters parameters) {
