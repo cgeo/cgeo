@@ -11,6 +11,7 @@ import cgeo.geocaching.models.LogEntry;
 import cgeo.geocaching.models.LogEntry.Builder;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.SynchronizedDateFormat;
 
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
@@ -21,7 +22,6 @@ import org.xmlpull.v1.XmlPullParserFactory;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.EnumSet;
@@ -30,8 +30,8 @@ import java.util.Locale;
 
 public class GeocachingSuParser {
 
-    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
-    private static final SimpleDateFormat DATE_TIME_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US);
+    private static final SynchronizedDateFormat DATE_FORMAT = new SynchronizedDateFormat("yyyy-MM-dd", Locale.US);
+    private static final SynchronizedDateFormat DATE_TIME_FORMAT = new SynchronizedDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US);
 
     private GeocachingSuParser() {
         // utility class
@@ -54,7 +54,7 @@ public class GeocachingSuParser {
                 return;
             }
             if (description.length() > 0) {
-                description.append("\n");
+                description.append('\n');
             }
             description.append(StringUtils.trim(text));
         }
@@ -145,7 +145,7 @@ public class GeocachingSuParser {
                         } else if ("status".equalsIgnoreCase(tagname)) {
                             cache.setDisabled(isDisabledStatus(text));
                         } else if ("recom".equalsIgnoreCase(tagname)) {
-                            cache.setFavoritePoints(Integer.valueOf(StringUtils.trim(text)));
+                            cache.setFavoritePoints(Integer.parseInt(StringUtils.trim(text)));
                         } else if ("rating".equalsIgnoreCase(tagname)) {
                             final String trimmed = StringUtils.trim(text);
                             if (StringUtils.isNotEmpty(trimmed)) {

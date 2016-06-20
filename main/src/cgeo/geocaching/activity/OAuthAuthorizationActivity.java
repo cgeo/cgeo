@@ -217,7 +217,7 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
                     requestTokenHandler.sendEmptyMessage(STATUS_ERROR);
                 }
             }
-        } catch (final Exception ignored) {
+        } catch (final RuntimeException ignored) {
             Log.e("requestToken: cannot get token");
             requestTokenHandler.sendEmptyMessage(STATUS_ERROR);
         }
