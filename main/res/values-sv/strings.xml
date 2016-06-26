@@ -545,7 +545,6 @@
   <string name="init_default_navigation_tool_2_description">Här kan du välja ditt andra förvalda navigeringsprogram. Det kan aktiveras genom att klicka länge på navigationsikonen i listen överst i en cachebeskrivning.</string>
   <string name="init_navigation_menu_description">Här kan du välja program som ska visas navigeringsmenyn i en cache eller punkt. Program som är gråa är inte installerade på enheten.</string>
   <string name="init_debug_title">Debug information</string>
-  <string name="init_debug_note">c:geo kan generera mycket debug information. Denna information är normalt inte användbar för användare av c:geo. Vid eventuella problem kan dock utvecklare behöva den här informationen för att analysera problemet. Om så är fallet kommer du att ombedjas att markera rutan nedan och sedan skicka loggfilen till dem.</string>
   <string name="init_debug">Generera debug info</string>
   <string name="init_dbonsdcard_title">Databasplacering</string>
   <string name="init_dbonsdcard_note">Du kan placera c:geos databas på ditt minneskort. På detta sätt kan du spara internminne, men du kan också få något sämre prestanda och c:geo kommer inte fungera om ditt minneskort inte är tillgängligt (exempelvis när den är kopplad till en dator).</string>

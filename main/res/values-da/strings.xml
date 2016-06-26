@@ -567,7 +567,6 @@
   <string name="init_default_navigation_tool_2_description">Her kan du vælge din sekundære navigationsmetode. Aktivér den ved at holde på navigationssymbolet det vises i cachens titel.</string>
   <string name="init_navigation_menu_description">Her kan du vælge hvilke af de tilgængelige navigationsmetoder, der skal vises i navigationsmenuen for en cache eller et waypoint. Metoder som ikke er installeret på denne enhed kan ikke vælges.</string>
   <string name="init_debug_title">Debug-information</string>
-  <string name="init_debug_note">c:geo kan generere en stor mængde informationer til at hjælpe med fejlretning. Disse informationer er ikke generelt brugbare for almindelige brugere af c:geo, men udviklere kan have brug for disse dem for at analysere fejl i appen. En udvikler kan bede dig om at aktivere denne indstilling og efterfølgende fremsende den resulterende logfil.</string>
   <string name="init_debug">Aktivér debug-log</string>
   <string name="init_dbonsdcard_title">Databaseplacering</string>
   <string name="init_dbonsdcard_note">Du kan gemme c:geos database på dit eksterne SD-kort. Dermed vil du spare intern hukommelse, men c:geo vil fungere lidt langsommere og vil ikke fungere hvis dit eksterne SD-kort ikke er tilgængeligt.</string>

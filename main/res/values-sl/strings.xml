@@ -497,7 +497,6 @@
   <string name="init_default_navigation_tool_2_description">Tukaj lahko izberete sekundarno aplikacijo za navigacijo. Aktivirate jo lahko z dolgim klikom na ikono za navigacijo pri opisu zaklada.</string>
   <string name="init_navigation_menu_description">Tukaj lahko izberete, katera navigacijska orodja bodo na voljo v navigacijskem meniju za zaklade ali dodatne točke. Onemogočena navigacijska orodja niso nameščena na vaši napravi.</string>
   <string name="init_debug_title">Informacije za razhroščevanje</string>
-  <string name="init_debug_note">c:geo lahko generira veliko informacij za razhroščevanje, ki sicer niso uporabne za zakladolovce, pridejo pa prav razvijalcem aplikacije c:geo, ki s pomočjo teh informacij lažje najdejo napako in jo odpravijo. V primeru napake vas lahko prosijo za te informacije, ki jih pridobite če vklopite to možnost.</string>
   <string name="init_debug">Poročilo za razhroščevanje</string>
   <string name="init_dbonsdcard_title">Lokacija podatkovne baze</string>
   <string name="init_dbonsdcard_note">Podatkovno bazo aplikacije c:geo lahko shranite tudi na zunanji pomnilniški medij. S tem načinom lahko sprostite veliko internega pomnilnika, vendar lahko zaradi tega c:geo deluje počasneje, če pa SD kartice ne bo na voljo pa c:geo sploh ne bo deloval.</string>

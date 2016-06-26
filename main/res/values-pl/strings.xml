@@ -544,7 +544,6 @@
   <string name="init_default_navigation_tool_2_description">Tutaj możesz wybrać drugie preferowane narzędzie nawigacji. Jest aktywowane przez długie kliknięcie ikony nawigacji obok nazwy skrzynki.</string>
   <string name="init_navigation_menu_description">Możesz tu wybrać jakie dostępne metody nawigacji będą widoczne w menu nawigacji. Pozycje wyłączone nie są zainstalowane na urządzeniu.</string>
   <string name="init_debug_title">Informacja o błędach</string>
-  <string name="init_debug_note">c:geo może generować ogromne ilości informacji o błędach. Podczas gdy te informacje są w ogólności nieprzydatne dla użytkowników c:geo, deweloperzy mogą potrzebować generować te informacje w celu analizy błędów. Możesz zaznaczyć pole poniżej i wysłać plik z logiem.</string>
   <string name="init_debug">Włącz logowanie błędów</string>
   <string name="init_dbonsdcard_title">Położenie bazy danych</string>
   <string name="init_dbonsdcard_note">Możesz przechowywać bazę danych c:geo na zewnętrznym urządzeniu. Dzięki temu zaoszczędzisz miejsce w pamięci wewnętrznej, ale wydajność może zmniejszyć się trochę, a c:geo nie będzie mógł pracować jeśli Twoja karta SD będzie niedostępna.</string>

@@ -529,7 +529,6 @@
   <string name="init_mapsource_select">Choisir la source des cartes</string>
   <string name="settings_title_scale_map_text">Zoom du texte</string>
   <string name="settings_summary_scale_map_text">Mise à l\'échelle des textes sur la carte hors-ligne en fonction de la résolution de l\'appareil</string>
-  <string name="init_map_directory_description">Dossier contenant les cartes hors-ligne</string>
   <string name="init_gpx_exportdir">Dossier d\'export GPX</string>
   <string name="init_gpx_importdir">Dossier d\'import GPX</string>
   <string name="init_maptrail">Afficher la trace</string>
@@ -547,7 +546,6 @@
   <string name="init_default_navigation_tool_2_description">Vous pouvez choisir ici votre deuxième outil de navigation préféré. Il sera activé par un appui long sur l\'icône de navigation situé près du nom de la cache.</string>
   <string name="init_navigation_menu_description">Vous pouvez choisir ici les méthodes de navigation qui seront actives dans le menu de navigation d\'une géocache ou d\'un point intermédiaire. Les outils non sélectionnables ne sont pas installés sur cet appareil.</string>
   <string name="init_debug_title">Déverminage</string>
-  <string name="init_debug_note">c:geo est capable de générer beaucoup d\'informations peu utiles pour des utilisateurs normaux. En cas de problème, les développeurs en charge de c:geo peuvent avoir besoin de ces informations pour identifier et corriger le bug. Dans ce cas, ils vous demanderont d\'activer cette option et de leur envoyer ces fichiers journaux.</string>
   <string name="init_debug">Activer le débogage</string>
   <string name="init_dbonsdcard_title">Emplacement de la base</string>
   <string name="init_dbonsdcard_note">La base de données de c:geo peut être enregistrée sur un support externe. En choisissant cette option, vous récupérerez de l\'espace de stockage sur votre appareil mais vous risquez de perdre en performances et c:geo ne fonctionnera pas si votre carte SD est absente.</string>
@@ -560,7 +558,6 @@
   <string name="init_summary_plain_logs">Afficher les visites sans les couleurs</string>
   <string name="init_use_native_ua">Navigateur web Android</string>
   <string name="init_summary_use_native_ua">S\'identifier comme le navigateur web Android. Peut résoudre des problèmes de connexion avec certains opérateurs mobiles / fournisseurs d\'accès au réseau.</string>
-  <string name="init_rendertheme_folder">Dossier contenant les cartes hors-ligne personnelles (optionnelles).</string>
   <string name="init_maintenance">Maintenance</string>
   <string name="init_maintenance_directories_note">c:geo stocke les images et les autres fichiers associés à une cache dans un dossier dédié. Dans certains cas (comme l\'importation/exportation de la base de données), ce dossier peut contenir des fichiers obsolètes, qui peuvent être supprimés ici.</string>
   <string name="init_maintenance_directories">Supprimer les fichiers orphelins</string>

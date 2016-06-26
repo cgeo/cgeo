@@ -560,7 +560,6 @@
   <string name="init_default_navigation_tool_2_description">Her kan du velge ditt andre foretrukne navigasjonsverktøy. Aktiver det ved å trykke lenge på navigasjonsikonet ved siden av tittelen på cachen.</string>
   <string name="init_navigation_menu_description">Her kan du velge hvilke av de tilgjengelige navigasjonsmetodene som vises i navigasjonsmenyen for en cache eller veipunkt. Deaktiverte verktøy er ikke installert på denne enheten.</string>
   <string name="init_debug_title">Feilsøkingsinformasjon</string>
-  <string name="init_debug_note">c:geo kan generere mye informasjon til bruk under feilsøking. Denne informasjonen er vanligvis ikke nyttig for c:geo-brukerne, men utviklerne kan trenge denne informasjonen for å analysere programfeil. I såfall vil de be deg om å krysse av boksen under og så sende loggfilen til dem.</string>
   <string name="init_debug">Aktiver logging av feilsøkingsinformasjon</string>
   <string name="init_dbonsdcard_title">Lagringssted for databasen</string>
   <string name="init_dbonsdcard_note">Du kan lagre c:geos database på et eksternt minnekort. Du vil spare intern lagringsplass, men mister noe ytelse og c:geo vil ikke virke uten at minnekortet er satt i.</string>

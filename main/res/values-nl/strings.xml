@@ -570,7 +570,6 @@
   <string name="init_default_navigation_tool_2_description">Hier kan je de tweede navigatie-tool van jouw voorkeur instellen. Je kan deze activeren door lang op de navigatie-icoon naast de titel van de cache te klikken.</string>
   <string name="init_navigation_menu_description">Here kun je selecteren welke beschikbare navigatie methodes getoond worden in het navigatie menu voor een cache of waypoint. Uitgeschakelde tools zijn niet geïnstalleerd op uw apparaat.</string>
   <string name="init_debug_title">Foutopsporings informatie</string>
-  <string name="init_debug_note">c:geo kan een foutopsporings-informatie genereren. Alhoewel deze gegevens niet nuttig zijn voor c:geo gebruikers, kunnen ontwikkelaars deze nodig hebben om een bug te analyseren. Ze zullen dan vragen om hier een vinkje te plaatsen en de logfile op te sturen.</string>
   <string name="init_debug">Activeer foutopsporings informatie</string>
   <string name="init_dbonsdcard_title">Database locatie</string>
   <string name="init_dbonsdcard_note">Je kan de c:geo database op een externe locatie opslaan. Dit zal intern geheugen besparen maar kan de applicatie iets trager maken en c:geo zal niet werken als het externe medium (zoals een (micro-)SD-kaart) verwijderd is.</string>

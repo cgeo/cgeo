@@ -540,7 +540,6 @@
   <string name="init_default_navigation_tool_2_description">Aquí puedes seleccionar tu segunda herramienta de navegación. Actívala presionando unos segundos el icono de navegación al lado del título del caché.</string>
   <string name="init_navigation_menu_description">Aquí puedes seleccionar qué métodos de navegación de los disponibles serán mostrados en el menú de navegación de un caché o waypoint. Las herramientas deshabilitadas no están instaladas en este dispositivo.</string>
   <string name="init_debug_title">Información de depuración</string>
-  <string name="init_debug_note">c:geo puede generar gran cantidad de información de depuración. Esta información puede no ser útil para el usuario, pero los desarrolladores la pueden necesitar para analizar un error. En este caso, os pedirán que marquéis la casilla siguiente y enviéis el fichero de registro.</string>
   <string name="init_debug">Activar el registro de depuración</string>
   <string name="init_dbonsdcard_title">Ubicación de la base de datos</string>
   <string name="init_dbonsdcard_note">Puedes almacenar la base de datos de c:geo en tu tarjeta de memoria externa. Haciendo esto ahorras espacio en tu memoria interna, pero puedes perder algo de rendimiento de la aplicación, y ésta no funcionará si la tarjeta SD no está disponible.</string>

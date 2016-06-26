@@ -542,7 +542,6 @@
   <string name="init_default_navigation_tool_2_description">Šeit var izvēlēties sekundāro navigācijas rīku. Aktivizē to ilgi turot nospiestu navigācijas ikonu blakus slēpņa nosaukumam.</string>
   <string name="init_navigation_menu_description">Šeit vari atlasīt, kuras pieejamās navigācijas metodes tiks parādītas navigācijas izvēlnē slēpnim vai Starpposmam. Neaktīvie rīki nav instalēti šajā ierīcē.</string>
   <string name="init_debug_title">Atkļūdošanas informācija</string>
-  <string name="init_debug_note">c:geo var radīt daudz atkļūdošanas informācijas. Kamēr šī informācija parasti nav noderīga c:geo lietotājiem, izstrādātājiem tā var būt noderīga, lai novērstu kļūdas. Šajā gadījumā viņi lūgs jums atzīmēt tālāk redzamo izvēles rūtiņu un, nosūtītot paziņojumu, pievienot iegūto žurnāla failu.</string>
   <string name="init_debug">Aktivizētu atkļūdošanas žurnālu</string>
   <string name="init_dbonsdcard_title">Datu bāzes atrašanās vieta</string>
   <string name="init_dbonsdcard_note">c:geo datu bāze var tikt saglabāt ārējā glabāšanas vietā. Darot to, tas ļaus ietaupīt iekšējo atmiņu, bet tu vari mazliet zaudēt ātrdarbību un c:geo nedarbosies, ja SD karte nav pieejama.</string>

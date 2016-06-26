@@ -570,7 +570,6 @@
   <string name="init_default_navigation_tool_2_description">Itt választhatod ki a másodlagos navigációs eszközödet. A láda neve melletti navigációs ikon hosszabb megnyomásával aktiválhatod.</string>
   <string name="init_navigation_menu_description">Itt adhatod meg, hogy mely navigációs lehetőségek jelenjenek meg egy láda vagy útpont számára a navigációs menüben. A letiltott alkalmazások nincsenek telepítve.</string>
   <string name="init_debug_title">Hibakeresési információ</string>
-  <string name="init_debug_note">A c:geo nagy mennyiségű hibakeresési információt képes generálni. Ez az információ általában hasznavehetetlen a felhasználók számára, de a fejlesztőknek szükségük lehet rá hibák felderítéséhez. Ha szükséges, meg fogunk kérni, hogy jelöld be a lenti jelölőnégyzetet és küld el nekünk a keletkező logfájlt.</string>
   <string name="init_debug">Hibakeresési napló aktiválása</string>
   <string name="init_dbonsdcard_title">Adatbázis helye</string>
   <string name="init_dbonsdcard_note">Az adatbázist elmentheted a külső tárolódra is. Ezzel belső memóriát takaríthatsz meg, de csökkenhet a teljesítmény és a c:geo nem fog működni, ha az SD kártyád nem hozzáférhető.</string>

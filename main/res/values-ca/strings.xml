@@ -546,7 +546,6 @@
   <string name="init_default_navigation_tool_2_description">Aquí podeu seleccionar la segona eina de navegació preferida. Serà activada prement de manera continuada la icona de navegació al costat el nom del catxé.</string>
   <string name="init_navigation_menu_description">Aquí podeu seleccionar els mètodes de navegació disponibles que es mostraran en el menú de navegació d\'un catxé o fita. Les eines desactivades no estan instal·lades en aquest dispositiu.</string>
   <string name="init_debug_title">Informació de depuració</string>
-  <string name="init_debug_note">El c:geo pot generar una gran quantitat d\'informació de depuració. Aquesta informació pot no ser útil per l\'usuari, però els desenvolupadors poden necessitar generar aquesta informació per tal d\'analitzar un error. En aquest cas,  us demanaran que activeu la casella següent i envieu el fitxer de registre.</string>
   <string name="init_debug">Activa el registre de depuració</string>
   <string name="init_dbonsdcard_title">Localització de la base de dades</string>
   <string name="init_dbonsdcard_note">Podeu desar la base de dades de c:geo a una targeta de memòria externa. D\'aquesta manera estalviareu memòria interna, però podeu perdre una mica de rendiment i el c:geo no funcionarà si la vostra targeta SD no està disponible.</string>

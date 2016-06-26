@@ -144,7 +144,7 @@
   <string name="err_server_ec">Nepavyksta susisiekti su Extremcaching.com. Neveikia svetainė arba jūsų interneto ryšys.</string>
   <string name="err_server_gk">Nepavyksta susisiekti su GeoKrety.org. Neveikia svetainė arba jūsų interneto ryšys.</string>
   <string name="err_login">Nėra išsaugotos prisijungimo informacijos</string>
-  <string name="err_login_failed_toast">c:geo negali prisijungti. c:geo veikia neprisijungusi su išsaugotomis slėptuvėmis. Patikrinkite prisijungimo nustatymus arba įjunkite prietaiso interneto ryšį.</string>
+  <string name="err_login_failed_toast">c:geo negali prisijungti. c:geo veikia be interneto su išsaugotomis slėptuvėmis. Patikrinkite prisijungimo nustatymus arba įjunkite prietaiso interneto ryšį.</string>
   <string name="err_unknown">Nežinoma klaida</string>
   <string name="err_unknown_address">C:geo nepavyko susieti šio adreso su egzistuojančia vietove</string>
   <string name="err_comm">Nežinoma ryšio klaida</string>
@@ -360,7 +360,7 @@
   <string name="list_menu_drop">Išmesti dabartinį sąrašą</string>
   <string name="list_menu_rename">Pervadinti dabartinį sąrašą</string>
   <string name="list_menu_import">Importuoti</string>
-  <string name="list_title">Pasirinkti sąrašą</string>
+  <string name="list_title">Pasirinkite sąraša(us)</string>
   <string name="lists_title">Pasirinkti sąrašus</string>
   <string name="lists_remove_all">Nieko</string>
   <string name="list_inbox">Išsaugota</string>
@@ -401,7 +401,7 @@
   <string name="settings_summary_appearance">Konfigūruoti atstumo vienetus, kalbą ir programos spalvas.</string>
   <string name="settings_title_cachedetails">Slėptuvės informacija</string>
   <string name="settings_summary_cachedetails">Pritaikyti vaizdą lobio informacijai. </string>
-  <string name="settings_title_offlinedata">Duomenys darbui neprisijungus</string>
+  <string name="settings_title_offlinedata">Duomenys darbui be interneto</string>
   <string name="settings_summary_offlinedata">Nustatyti statinius žemėlapius ir saugojimo vietą, kai nėra ryšio.</string>
   <string name="settings_title_logging">Registravimas</string>
   <string name="settings_summary_logging">Nustatyti Jūsų parašą ir registravimosi parinktis.</string>
@@ -504,9 +504,9 @@
   <string name="init_disabled">Atmesti išjungtas</string>
   <string name="init_summary_disabled">Atmesti išjungtas slėptuves</string>
   <string name="init_offline">Statiniai žemėlapiai</string>
-  <string name="init_summary_offline">Išsaugoti slėptuvių statinius žemėlapius naudojimui neprisijungus</string>
+  <string name="init_summary_offline">Išsaugoti slėptuvių statinius žemėlapius naudojimui be interneto</string>
   <string name="init_offline_wp">Statiniai žemėlapiai (PT)</string>
-  <string name="init_summary_offline_wp">Išsaugoti papildomų taškų statinius žemėlapius naudojimui neprisijungus</string>
+  <string name="init_summary_offline_wp">Išsaugoti papildomų taškų statinius žemėlapius naudojimui be interneto</string>
   <string name="init_save_log_img">Išsaugoti nuotraukas</string>
   <string name="init_summary_save_log_img">Išsaugoti nuotraukas iš įrašų</string>
   <string name="init_units">Imperiniai vienetai</string>
@@ -559,7 +559,6 @@
   <string name="init_default_navigation_tool_2_description">Čia galite pasirinkti savo antrą pageidaujamą navigacijos įrankį. Aktyvinkite jį ilgai paspausdami navigacijos piktogramą šalia slėptuvės pavadinimo.</string>
   <string name="init_navigation_menu_description">Čia galite pasirinkti, kuris iš navigacinių metodų bus rodomas slėptuvės arba papildomo taško navigacijos meniu. Išjungti įrankiai šiame prietaise yra neįdiegti.</string>
   <string name="init_debug_title">Derinimo informacija</string>
-  <string name="init_debug_note">c:geo gali generuoti daug derinimo informacijos. Nors paprastai ši informacija nėra naudinga c:geo vartotojams, kūrėjams gali prireikti šios informacijos analizuojant klaidas. Tokiu atveju, jūsų bus paprašyta pažymėti šį žymės laukelį ir atsiųsti jiems žurnalo failą.</string>
   <string name="init_debug">Aktyvinti derinimo ataskaitą</string>
   <string name="init_dbonsdcard_title">Duomenų bazės vieta</string>
   <string name="init_dbonsdcard_note">Jūs galite c:geo duomenų bazę saugoti išorinėje atmintyje. Tokiu būdu sutaupysite vidinės atminties, bet sumažės veikimo sparta ir c:geo neveiks, jei nebus SD kortelės.</string>
@@ -687,13 +686,13 @@
     <item quantity="other">prieš %d minučių</item>
   </plurals>
   <plurals name="cache_offline_about_time_hours">
-    <item quantity="one">prieš %d valandas</item>
-    <item quantity="few">prieš %d valandų</item>
+    <item quantity="one">prieš %d valandą</item>
+    <item quantity="few">prieš %d valandas</item>
     <item quantity="other">prieš %d valandų</item>
   </plurals>
   <plurals name="cache_offline_about_time_days">
-    <item quantity="one">prieš %d dienas</item>
-    <item quantity="few">prieš %d dienų</item>
+    <item quantity="one">prieš %d dieną</item>
+    <item quantity="few">prieš %d dienas</item>
     <item quantity="other">prieš %d dienų</item>
   </plurals>
   <string name="cache_offline_time_hour">valandą atgal</string>
@@ -750,8 +749,8 @@
   <string name="cache_dialog_loading_details_status_gcvote">Įkeliama GCVote informacija</string>
   <string name="cache_dialog_loading_details_status_cache">Išsaugomi duomenys</string>
   <string name="cache_dialog_loading_details_status_render">Generuojamas vaizdas</string>
-  <string name="cache_dialog_offline_save_title">Išsaugoti</string>
-  <string name="cache_dialog_offline_save_message">Slėptuvė išsaugoma naudojimui neprisijungus…</string>
+  <string name="cache_dialog_offline_save_title">Išsaugoma</string>
+  <string name="cache_dialog_offline_save_message">Slėptuvė išsaugoma naudojimui be interneto…</string>
   <string name="cache_dialog_offline_drop_title">Pašalinti</string>
   <string name="cache_dialog_offline_drop_message">Slėptuvė pašalinama iš prietaiso atminties…</string>
   <string name="cache_dialog_refresh_title">Atnaujinti</string>
@@ -795,7 +794,7 @@
   <string name="cache_menu_copy_list">Perkelti į kitą sąrašą</string>
   <string name="cache_menu_whereyougo">WhereYouGo</string>
   <string name="cache_menu_oruxmaps_online">OruxMaps (internetu)</string>
-  <string name="cache_menu_oruxmaps_offline">OruxMaps (neprisijungus)</string>
+  <string name="cache_menu_oruxmaps_offline">OruxMaps (be interneto)</string>
   <string name="cache_menu_pebble">Pebble</string>
   <string name="cache_menu_vote">Balsuoti</string>
   <string name="cache_menu_checker">Atidaryti Geochecker</string>
@@ -953,7 +952,7 @@
   <string name="map_strategy_fast">Greita</string>
   <string name="map_strategy_auto">Priklausoma nuo greičio</string>
   <string name="map_strategy_detailed">Išsami</string>
-  <string name="live_map_notification">Koordinatės tiesioginiame žemėlapyje gali būti netikslios. Galimos netikslios koordinatės žymimos oranžinės spalvos apskritimu.\nAtidarius slėptuvės informaciją arba išsaugojus slėptuvę naudojimui neprisijungus bus visada gautos tikslios koordinatės.\n\nDaugiau informacijos rasite programos skiltyje \"Apie c:geo\".</string>
+  <string name="live_map_notification">Koordinatės tiesioginiame žemėlapyje gali būti netikslios. Galimos netikslios koordinatės žymimos oranžinės spalvos apskritimu.\nAtidarius slėptuvės informaciją arba išsaugojus slėptuvę naudojimui be interneto bus visada gautos tikslios koordinatės.\n\nDaugiau informacijos rasite programos skiltyje \"Apie c:geo\".</string>
   <string name="map_select_multiple_items">Pasirinkite elementą</string>
   <!-- search -->
   <string name="search_bar_hint">Ieškoti</string>
@@ -1438,6 +1437,6 @@
   <string name="invitation_title">Pakviesti draugus naudoti c:geo</string>
   <string name="invitation_message">Geoslėptuvių paieškai pabandykite c:geo programėlę</string>
   <string name="cache_list_remove_from">Pašalinti iš sąrašo</string>
-  <string name="list_list_headline">Sąrašai:</string>
+  <string name="list_list_headline">Sąrašas:</string>
   <string name="cache_store_list">Išsaugoti sąraše</string>
 </resources>

@@ -541,7 +541,6 @@
   <string name="init_default_navigation_tool_2_description">Qui puoi scegliere il tuo secondo navigatore preferito. Sarà attivato tenendo premuto l\'icona di navigazione vicino al titolo del cache.</string>
   <string name="init_navigation_menu_description">Qui è possibile selezionare quale dei metodi disponibili di navigazione sarà visualizzato nel menu di navigazione per un cache o un waypoint. Gli strumenti non installati su questo dispositivo sono disabilitati.</string>
   <string name="init_debug_title">Informazioni di Debug</string>
-  <string name="init_debug_note">c:geo può generare molte informazioni di debug. Per quanto queste informazioni non sono generalmente utili agli utenti di c:geo, gli sviluppatori potrebbero averne bisogno per analizzare un eventuale problema. In questo caso, vi sarà chiesto di settare l\'opzione sottostante ed inviare il log.</string>
   <string name="init_debug">Attiva informazioni di debug</string>
   <string name="init_dbonsdcard_title">Posizione Database</string>
   <string name="init_dbonsdcard_note">Puoi decidere di salvare il database su memoria esterna. In questo caso risparmierai memoria interna ma potresti perdere un pochino di velocità e c:geo non funzionerà se la tua scheda SD non sarà disponibile.</string>

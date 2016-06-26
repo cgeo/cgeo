@@ -551,7 +551,6 @@
   <string name="init_default_navigation_tool_2_description">Aici poţi alege metoda de navigare secundară. Aceasta se poate activa apăsând prelungit pe icoana de navigare alături de numele cutiei.</string>
   <string name="init_navigation_menu_description">Aici poţi alege care dintre metodele de navigare vor fi afişate în meniul de navigaţie pentru cutii si puncte. Uneltele inactive nu sunt instalate pe acest dispozitiv.</string>
   <string name="init_debug_title">Informaţii pentru depanare</string>
-  <string name="init_debug_note">c:geo poate genera foarte multe informaţii pentru depanare. Aceste informaţii de regulă nu sunt utile pentru utilizatorii obişnuiţi, dar programatorii aplicaţiei au nevoie de aceste informaţii pentru a identifica şi analiza unele erori. În această situaţie ei îţi vor cere să activezi această opţiuni şi să le trimiţi fişierul rezultat.</string>
   <string name="init_debug">Activează jurnal de depanare</string>
   <string name="init_dbonsdcard_title">Locaţia bazei de date</string>
   <string name="init_dbonsdcard_note">Poţi păstra baza de date a c:geo pe card. În acest fel vei economisi spaţiu din memoria internă, dar c:geo va funcţiona puţin mai lent. Dacă cardul nu este disponibil, c:geo nu va putea funcţiona.</string>

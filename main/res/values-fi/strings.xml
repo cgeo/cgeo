@@ -560,7 +560,6 @@
   <string name="init_default_navigation_tool_2_description">Tästä voi valita toissijaisen navigointitavan. Aktivoidaksesi sen paina navigointi-ikonia kätkön nimen vieressä pitkään.</string>
   <string name="init_navigation_menu_description">Tästä voit valita mitkä käytettävissä olevista navigointitavoista näytetään kätkön/reittipisteen navigointivalikossa. Valitsemattomia ei tulla asentamaan laitteeseesi.</string>
   <string name="init_debug_title">Virheenjäljitystiedot</string>
-  <string name="init_debug_note">c:geo saattaa tuottaa paljon virheenjäljitystietoa. Vaikka tämä tieto on pääsääntöisesti tarpeetonta c:geon käyttäjille, sovelluksen kehittäjille tämä voi olla tärkeää bugin analysoimiseksi. Tässä tapauksessa he saattavat pyytää sinua valitsemaan tämän ja lähettämään tuotetun lokitiedoston heille.</string>
   <string name="init_debug">Aktivoi vianjäljitysloki</string>
   <string name="init_dbonsdcard_title">Tietokannan sijainti</string>
   <string name="init_dbonsdcard_note">Voit tallentaa c:geon tiedot myös ulkoiselle muistille. Tämä säästää sisäisen muistin käyttöä, mutta saattaa hieman heikentää suorituskykyä. Lisäksi c:geo ei toimi, jos ulkoinen muisti ei ole saatavilla.</string>
