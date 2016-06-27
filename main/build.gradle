@@ -264,7 +264,7 @@ dependencies {
     // Apache Commons
     compile 'org.apache.commons:commons-collections4:4.1'
     compile 'org.apache.commons:commons-lang3:3.4'
-    compile 'org.apache.commons:commons-compress:1.11'
+    compile 'org.apache.commons:commons-compress:1.12'
     compile 'commons-io:commons-io:2.5'
     compile 'com.google.code.findbugs:annotations:3.0.1u2'
     androidTestCompile 'com.google.code.findbugs:annotations:3.0.1u2'
@@ -314,8 +314,8 @@ dependencies {
 /*
  * ButterKnife view injection, https://github.com/JakeWharton/butterknife
  */
-    compile 'com.jakewharton:butterknife:8.0.1'
-    apt 'com.jakewharton:butterknife-compiler:8.0.1'
+    compile 'com.jakewharton:butterknife:8.1.0'
+    apt 'com.jakewharton:butterknife-compiler:8.1.0'
 /*
  * Jsoup HTML parsing
  */
