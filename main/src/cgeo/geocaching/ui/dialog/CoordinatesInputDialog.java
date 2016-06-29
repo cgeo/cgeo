@@ -21,6 +21,7 @@ import android.app.Dialog;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.v4.app.DialogFragment;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -229,14 +230,14 @@ public class CoordinatesInputDialog extends DialogFragment {
 
         switch (currentFormat) {
             case Plain:
-                getView().findViewById(R.id.coordTable).setVisibility(View.GONE);
+                setVisible(R.id.coordTable, View.GONE);
                 eLat.setVisibility(View.VISIBLE);
                 eLon.setVisibility(View.VISIBLE);
                 eLat.setText(gp.format(GeopointFormatter.Format.LAT_DECMINUTE));
                 eLon.setText(gp.format(GeopointFormatter.Format.LON_DECMINUTE));
                 break;
             case Deg: // DDD.DDDDD°
-                getView().findViewById(R.id.coordTable).setVisibility(View.VISIBLE);
+                setVisible(R.id.coordTable, View.VISIBLE);
                 eLat.setVisibility(View.GONE);
                 eLon.setVisibility(View.GONE);
                 eLatSec.setVisibility(View.GONE);
@@ -259,7 +260,7 @@ public class CoordinatesInputDialog extends DialogFragment {
                 eLonMin.setGravity(Gravity.NO_GRAVITY);
                 break;
             case Min: // DDD° MM.MMM
-                getView().findViewById(R.id.coordTable).setVisibility(View.VISIBLE);
+                setVisible(R.id.coordTable, View.VISIBLE);
                 eLat.setVisibility(View.GONE);
                 eLon.setVisibility(View.GONE);
                 eLatSec.setVisibility(View.VISIBLE);
@@ -286,7 +287,7 @@ public class CoordinatesInputDialog extends DialogFragment {
                 eLonSec.setText(addZeros(gp.getLonMinFrac(), 3));
                 break;
             case Sec: // DDD° MM SS.SSS
-                getView().findViewById(R.id.coordTable).setVisibility(View.VISIBLE);
+                setVisible(R.id.coordTable, View.VISIBLE);
                 eLat.setVisibility(View.GONE);
                 eLon.setVisibility(View.GONE);
                 eLatSec.setVisibility(View.VISIBLE);
@@ -319,6 +320,10 @@ public class CoordinatesInputDialog extends DialogFragment {
         for (final EditText editText : orderedInputs) {
             setSize(editText);
         }
+    }
+
+    private void setVisible(@IdRes final int viewId, final int visibility) {
+        ButterKnife.findById(getView(), viewId).setVisibility(visibility);
     }
 
     private void setSize(final EditText someEditText) {
