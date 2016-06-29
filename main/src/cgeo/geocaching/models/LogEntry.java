@@ -1,12 +1,5 @@
 package cgeo.geocaching.models;
 
-import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.R;
-import cgeo.geocaching.enumerations.LogType;
-import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.utils.HtmlUtils;
-import cgeo.geocaching.utils.MatcherWrapper;
-
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -17,6 +10,13 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.regex.Pattern;
+
+import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.R;
+import cgeo.geocaching.enumerations.LogType;
+import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.utils.HtmlUtils;
+import cgeo.geocaching.utils.MatcherWrapper;
 
 /**
  * Entry in a log book.
@@ -274,9 +274,9 @@ public final class LogEntry {
      * @param cacheName spotted cache name
      * @param cacheGuid spotted cache guid
      */
-    private LogEntry(final int id, final LogType logType, final String author, final String log,
+    private LogEntry(final int id, final @NonNull LogType logType, final @NonNull String author, final @NonNull String log,
                     final long date, final int found, final boolean friend,
-                    final List<Image> logImages, final String cacheName, final String cacheGuid) {
+                    final @NonNull List<Image> logImages, final @NonNull String cacheName, final @NonNull String cacheGuid) {
         this.id = id;
         this.logType = logType;
         this.author = author;
@@ -326,6 +326,7 @@ public final class LogEntry {
      * @return
      *          The {@link Image}s List
      */
+    @NonNull
     public List<Image> getLogImages() {
         return logImages;
     }
