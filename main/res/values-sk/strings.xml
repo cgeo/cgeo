@@ -395,7 +395,7 @@
   <string name="settings_title_appearance">Vzhľad</string>
   <string name="settings_summary_appearance">Nastavte jednotky dĺžky, jazyk a farebné schémy.</string>
   <string name="settings_title_cachedetails">Detaily skrýše</string>
-  <string name="settings_summary_cachedetails">Nastavte zobrazovanie detailov skrýše. </string>
+  <string name="settings_summary_cachedetails">Nastavte zobrazovanie detailov skrýše.</string>
   <string name="settings_title_offlinedata">Údaje v režime offline</string>
   <string name="settings_summary_offlinedata">Nastavte statické mapy a ukladací priestor pre offline dáta.</string>
   <string name="settings_title_logging">Zápis logu</string>

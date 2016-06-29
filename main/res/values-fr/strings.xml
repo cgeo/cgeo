@@ -390,7 +390,7 @@
   <string name="settings_title_appearance">Apparence</string>
   <string name="settings_summary_appearance">Configurer les unités de distance, la langue et les couleurs.</string>
   <string name="settings_title_cachedetails">Détails de la cache</string>
-  <string name="settings_summary_cachedetails">Personnaliser l\'affichage des informations de la cache. </string>
+  <string name="settings_summary_cachedetails">Personnaliser l\'affichage des informations de la cache.</string>
   <string name="settings_title_offlinedata">Données hors-ligne</string>
   <string name="settings_summary_offlinedata">Configurer les cartes statiques et le stockage des autres données hors connexion.</string>
   <string name="settings_title_logging">Visites</string>

@@ -391,7 +391,7 @@
   <string name="settings_title_appearance">Wygląd</string>
   <string name="settings_summary_appearance">Skonfiguruj jednostki długości, język i kolory aplikacji.</string>
   <string name="settings_title_cachedetails">Szczegóły skrzynki</string>
-  <string name="settings_summary_cachedetails">Ustaw sposób wyświetlania informacji o skrzynce. </string>
+  <string name="settings_summary_cachedetails">Ustaw sposób wyświetlania informacji o skrzynce.</string>
   <string name="settings_title_offlinedata">Dane offline</string>
   <string name="settings_summary_offlinedata">Skonfiguruj mapy statyczne i inne miejsca przechowywania danych offline.</string>
   <string name="settings_title_logging">Logowanie</string>

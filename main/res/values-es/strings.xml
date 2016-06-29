@@ -389,7 +389,7 @@
   <string name="settings_title_appearance">Aspecto</string>
   <string name="settings_summary_appearance">Configura unidades de distancia, idioma y colores de la app.</string>
   <string name="settings_title_cachedetails">Detalles del caché</string>
-  <string name="settings_summary_cachedetails">Personaliza la pantalla de información de los cachés. </string>
+  <string name="settings_summary_cachedetails">Personaliza la pantalla de información de los cachés.</string>
   <string name="settings_title_offlinedata">Datos sin conexión</string>
   <string name="settings_summary_offlinedata">Configura los mapas estáticos y otros datos almacenados sin conexión.</string>
   <string name="settings_title_logging">Registro</string>
@@ -651,6 +651,7 @@
   <string name="cache_offline_refresh">Actualizar</string>
   <string name="cache_offline_drop">Tirar</string>
   <string name="cache_offline_store">Guardar</string>
+  <string name="cache_offline_manage">Gestionar</string>
   <string name="cache_offline_stored">Guardado en el dispositivo</string>
   <string name="cache_offline_not_ready">No preparado\npara usar desconectado</string>
   <string name="cache_offline_time_about">desde</string>

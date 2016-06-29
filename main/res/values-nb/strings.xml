@@ -394,7 +394,7 @@
   <string name="settings_title_appearance">Utseende</string>
   <string name="settings_summary_appearance">Endre avstandsenheter, språk og fargetema i appen.</string>
   <string name="settings_title_cachedetails">Cache-detaljer</string>
-  <string name="settings_summary_cachedetails">Tilpass visningen av cacheinformasjon. </string>
+  <string name="settings_summary_cachedetails">Tilpass visningen av cacheinformasjon.</string>
   <string name="settings_title_offlinedata">Offline-data</string>
   <string name="settings_summary_offlinedata">Endre lagringssted for statiske kart og andre offline-data.</string>
   <string name="settings_title_logging">Logging</string>

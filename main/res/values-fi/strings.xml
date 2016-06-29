@@ -399,7 +399,7 @@
   <string name="settings_title_appearance">Ulkoasu</string>
   <string name="settings_summary_appearance">Aseta etäisyysyksiköt, kieli ja sovelluksen värit.</string>
   <string name="settings_title_cachedetails">Kätkön tiedot</string>
-  <string name="settings_summary_cachedetails">Kustomoi kätkön tietojen esitystapa. </string>
+  <string name="settings_summary_cachedetails">Kustomoi kätkön tietojen esitystapa.</string>
   <string name="settings_title_offlinedata">Offline-data</string>
   <string name="settings_summary_offlinedata">Määritä staattinen kartta ja offline-tietojen tallennus.</string>
   <string name="settings_title_logging">Kirjaaminen</string>

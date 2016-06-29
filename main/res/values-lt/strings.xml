@@ -400,7 +400,7 @@
   <string name="settings_title_appearance">Išvaizda</string>
   <string name="settings_summary_appearance">Konfigūruoti atstumo vienetus, kalbą ir programos spalvas.</string>
   <string name="settings_title_cachedetails">Slėptuvės informacija</string>
-  <string name="settings_summary_cachedetails">Pritaikyti vaizdą lobio informacijai. </string>
+  <string name="settings_summary_cachedetails">Pritaikyti vaizdą lobio informacijai.</string>
   <string name="settings_title_offlinedata">Duomenys darbui be interneto</string>
   <string name="settings_summary_offlinedata">Nustatyti statinius žemėlapius ir saugojimo vietą, kai nėra ryšio.</string>
   <string name="settings_title_logging">Registravimas</string>
@@ -1043,6 +1043,7 @@
   <string name="helper_calendar_missing">c:geo kalendoriaus įskiepis neįdiegtas.</string>
   <string name="helper_calendar_description">Leidžia eksportuoti renginius į prietaiso kalendorių.</string>
   <string name="helper_calendar_pastevent_title">Buvę įvykiai</string>
+  <string name="helper_calendar_pastevent_question">Renginio data yra praeityje. Vis tiek pridėti?</string>
   <string name="helper_sendtocgeo_title">Siųsti į c:geo</string>
   <string name="helper_contacts_title">c:geo kontaktai (įskiepis)</string>
   <string name="helper_contacts_description">Leidžia tiesiai iš įrašo atidaryti kontakto kortelę (iš jūsų adresų knygos), kad galėtumėte susisiekti su draugais paprašyti pagalbos.</string>
@@ -1058,6 +1059,8 @@
   <string name="helper_pocketquery_description">Leidžia lengvai sukurti ir atsisiųsti Pocket Query sąrašus pagal jūsų esamą vietą arba pasirinktą tašką žemėlapyje. Būtina Premium Geocaching.com narystė.</string>
   <string name="helper_google_translate_title">\"Google\" vertėjas</string>
   <string name="helper_google_translate_description">Atsisiuntę vertimo paketą Google Translate programai galėsite lengvai išversti slėptuvės aprašymus ilgai paspaudę ant slėptuvės aprašymo teksto (tam nereikės interneto ryšio).</string>
+  <string name="helper_wear_title">c:geo Wear</string>
+  <string name="helper_wear_description">c:geo Wear tai priedas prie c:geo, kuris leis naviguoti iki slėptuvių naudojant jūsų Android Wear išmanujį laikrodį.</string>
   <string name="helper_where_you_go_title">WhereYouGo</string>
   <string name="helper_where_you_go_description">WhereYouGo leidžia žaisti ir ieškoti geocaches tipo Wherigo. c:Geo automatiškai gali sukelti kasetės per šią programą atsisiųsti.</string>
   <!-- add-ons -->
@@ -1398,6 +1401,7 @@
   <string name="init_geokrety_cache">Naudoti GeoKretyMap.org</string>
   <string name="init_geokrety_userid">Vartotojo Id: %s</string>
   <string name="trackable_title_log_without_geocode">Nenurodytas geokodas</string>
+  <string name="trackable_log_without_geocode">Jūs ruošiatės siųsti įrašą be Geo kodo. Reikia nurodyti Geo kodą. Ar norite pridėti jį dabar?</string>
   <string name="do_not_ask_me_again">Neklausti manęs dar kartą</string>
   <string name="settings_map_direction">Rodyti kryptį</string>
   <string name="settings_summary_map_direction">Rodyti krypties linija į tikslą</string>
@@ -1422,6 +1426,7 @@
   </plurals>
   <string name="command_rename_list_result">Pervadinti sąrašą</string>
   <string name="command_delete_list_result">Sąrašas ištrintas</string>
+  <string name="fav_points_remaining">"Šią slėptuvę pridėti prie megstamų (%s liko)"</string>
   <!-- distance units -->
   <string name="unit_m">m</string>
   <string name="unit_km">km</string>
@@ -1433,6 +1438,7 @@
   <string name="pq_as_cache_list">Peržiūrėti lobių sąrašą</string>
   <string name="pq_download_and_import">Importuoti Pocket query</string>
   <string name="pq_my_finds">Mano radiniai</string>
+  <string name="caches_refresh_all_warning">Šis veiksmas gali išnaudoti daug tinklo srauto. Ar tikrai norite atnaujinti visas slėptuves?</string>
   <string name="invitation_action">Pakviesti draugus</string>
   <string name="invitation_title">Pakviesti draugus naudoti c:geo</string>
   <string name="invitation_message">Geoslėptuvių paieškai pabandykite c:geo programėlę</string>

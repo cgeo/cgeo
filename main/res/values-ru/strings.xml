@@ -402,7 +402,7 @@
   <string name="settings_title_appearance">Оформление</string>
   <string name="settings_summary_appearance">Настройки единиц измерения, языка и цветовой темы.</string>
   <string name="settings_title_cachedetails">Настройки тайников</string>
-  <string name="settings_summary_cachedetails">Настройка отображения тайников. </string>
+  <string name="settings_summary_cachedetails">Настройка отображения тайников.</string>
   <string name="settings_title_offlinedata">Сохраненные данные</string>
   <string name="settings_summary_offlinedata">Настройка статических карт и других опций сохранения.</string>
   <string name="settings_title_logging">Запись в блокнот</string>

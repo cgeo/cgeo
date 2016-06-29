@@ -398,7 +398,7 @@
   <string name="settings_title_appearance">Udseende</string>
   <string name="settings_summary_appearance">Konfigurér afstandsenheder, sprog og app-farver.</string>
   <string name="settings_title_cachedetails">Cachedetaljer</string>
-  <string name="settings_summary_cachedetails">Konfigurér visning af cacheinformationer. </string>
+  <string name="settings_summary_cachedetails">Konfigurér visning af cacheinformationer.</string>
   <string name="settings_title_offlinedata">Offline data</string>
   <string name="settings_summary_offlinedata">Konfigurér statiske kort og offline datalagring.</string>
   <string name="settings_title_logging">Logning</string>

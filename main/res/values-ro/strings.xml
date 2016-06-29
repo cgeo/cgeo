@@ -393,7 +393,7 @@
   <string name="settings_title_appearance">Aspect vizual</string>
   <string name="settings_summary_appearance">Configurează unităţile de măsura, limba şi culorile aplicaţiei.</string>
   <string name="settings_title_cachedetails">Detalii cutie</string>
-  <string name="settings_summary_cachedetails">Personalizează informaţiile afişate despre o geocutie. </string>
+  <string name="settings_summary_cachedetails">Personalizează informaţiile afişate despre o geocutie.</string>
   <string name="settings_title_offlinedata">Informaţii păstrate locale</string>
   <string name="settings_summary_offlinedata">Configurează hărţile statice şi alte date salvate local.</string>
   <string name="settings_title_logging">Jurnal</string>

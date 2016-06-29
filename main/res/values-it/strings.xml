@@ -388,7 +388,7 @@
   <string name="settings_title_appearance">Aspetto</string>
   <string name="settings_summary_appearance">Configurazione delle unità di misura, lingua e colori app.</string>
   <string name="settings_title_cachedetails">Dettagli cache</string>
-  <string name="settings_summary_cachedetails">Personalizzazione dell\'aspetto delle informazioni del cache. </string>
+  <string name="settings_summary_cachedetails">Personalizzazione dell\'aspetto delle informazioni del cache.</string>
   <string name="settings_title_offlinedata">Dati offline</string>
   <string name="settings_summary_offlinedata">Configurazione mappe statiche e altri servizi offline.</string>
   <string name="settings_title_logging">Registro Log</string>

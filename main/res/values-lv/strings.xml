@@ -392,7 +392,7 @@
   <string name="settings_title_appearance">Izskats</string>
   <string name="settings_summary_appearance">Konfigurēt attāluma vienības, valodu un aplikācijas krāsas.</string>
   <string name="settings_title_cachedetails">Slēpņu informācija</string>
-  <string name="settings_summary_cachedetails">Pielāgot displeju slēpņa informācijai. </string>
+  <string name="settings_summary_cachedetails">Pielāgot displeju slēpņa informācijai.</string>
   <string name="settings_title_offlinedata">Bezsaistes dati</string>
   <string name="settings_summary_offlinedata">Konfigurēt statiskās kartes un citas bezsaistes datu krātuves.</string>
   <string name="settings_title_logging">Pierakstīšanās</string>

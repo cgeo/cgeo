@@ -389,7 +389,7 @@
   <string name="settings_title_appearance">Aparença</string>
   <string name="settings_summary_appearance">Configureu les unitats de distància, l\'idioma i les app.</string>
   <string name="settings_title_cachedetails">Detalls del catxé</string>
-  <string name="settings_summary_cachedetails">Personalitza la pantalla d\'informació del catxé. </string>
+  <string name="settings_summary_cachedetails">Personalitza la pantalla d\'informació del catxé.</string>
   <string name="settings_title_offlinedata">Dades fora de línia</string>
   <string name="settings_summary_offlinedata">Configura els  mapes estàtics i altres dades de fora de línia.</string>
   <string name="settings_title_logging">Registre</string>
@@ -546,6 +546,7 @@
   <string name="init_default_navigation_tool_2_description">Aquí podeu seleccionar la segona eina de navegació preferida. Serà activada prement de manera continuada la icona de navegació al costat el nom del catxé.</string>
   <string name="init_navigation_menu_description">Aquí podeu seleccionar els mètodes de navegació disponibles que es mostraran en el menú de navegació d\'un catxé o fita. Les eines desactivades no estan instal·lades en aquest dispositiu.</string>
   <string name="init_debug_title">Informació de depuració</string>
+  <string name="init_debug_note">El c:geo pot generar una gran quantitat d\'informació en la depuració. Activant aquesta opció pot afectar l\'estabilitat de c:geo i es recomana només si se us demana per enviar un registre als desenvolupadors.</string>
   <string name="init_debug">Activa el registre de depuració</string>
   <string name="init_dbonsdcard_title">Localització de la base de dades</string>
   <string name="init_dbonsdcard_note">Podeu desar la base de dades de c:geo a una targeta de memòria externa. D\'aquesta manera estalviareu memòria interna, però podeu perdre una mica de rendiment i el c:geo no funcionarà si la vostra targeta SD no està disponible.</string>

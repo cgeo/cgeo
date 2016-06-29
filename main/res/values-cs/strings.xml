@@ -401,7 +401,7 @@
   <string name="settings_title_appearance">Vzhled</string>
   <string name="settings_summary_appearance">Nastavení jednotek vzdálenosti, jazyka a barev.</string>
   <string name="settings_title_cachedetails">Detaily keše</string>
-  <string name="settings_summary_cachedetails">Nastavení zobrazování informací u keší. </string>
+  <string name="settings_summary_cachedetails">Nastavení zobrazování informací u keší.</string>
   <string name="settings_title_offlinedata">Offline zdroje</string>
   <string name="settings_summary_offlinedata">Nastavení statických map a dalších funkcí pro offline režim.</string>
   <string name="settings_title_logging">Logování</string>
@@ -571,6 +571,7 @@
   <string name="init_default_navigation_tool_2_description">Zde můžeš vybrat druhý preferovaný navigační nástroj. Ten se aktivuje dlouhým klepnutím na navigační ikonu vedle názvu keše.</string>
   <string name="init_navigation_menu_description">Zde můžeš zvolit, které z dostupných metod navigace budou zobrazovány v navigačním menu keše nebo bodu trasy. Nedostupné nástroje nejsou na tomto zařízení nainstalovány.</string>
   <string name="init_debug_title">Ladící informace</string>
+  <string name="init_debug_note">c:geo může generovat mnoho ladících informací. Aktivace této volby může negativně ovlivnit stabilitu aplikace, proto je doporučena pouze v případě, že si vývojáři vyžádají zaslání protokolu.</string>
   <string name="init_debug">Aktivovat ladící protokolování</string>
   <string name="init_dbonsdcard_title">Umístění databáze</string>
   <string name="init_dbonsdcard_note">Databáze c:geo může být umístěna na SD kartě. Ušetříš tím část interní paměti, avšak za cenu případného snížení rychlosti aplikace. Bez SD karty aplikace nebude následně fungovat.</string>

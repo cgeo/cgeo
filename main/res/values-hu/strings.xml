@@ -400,7 +400,7 @@
   <string name="settings_title_appearance">Megjelenés</string>
   <string name="settings_summary_appearance">A távolság mértékegységének, a nyelvnek és a színeknek a beállítása</string>
   <string name="settings_title_cachedetails">Ládaadatok</string>
-  <string name="settings_summary_cachedetails">A ládák megjelenő adatainak beállítása</string>
+  <string name="settings_summary_cachedetails">A ládák megjelenő adatainak beállítása.</string>
   <string name="settings_title_offlinedata">Offline adatok</string>
   <string name="settings_summary_offlinedata">Statikus térképek és más offline adatok tarolásának beállítása</string>
   <string name="settings_title_logging">Logolás</string>
