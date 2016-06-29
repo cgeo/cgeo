@@ -1,5 +1,17 @@
 package cgeo.geocaching.settings;
 
+import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.Intents;
+import cgeo.geocaching.R;
+import cgeo.geocaching.connector.capability.ICredentials;
+import cgeo.geocaching.connector.ec.ECConnector;
+import cgeo.geocaching.connector.gc.GCConnector;
+import cgeo.geocaching.gcvote.GCVote;
+import cgeo.geocaching.network.HtmlImage;
+
+import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.NonNull;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -10,17 +22,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+
 import butterknife.ButterKnife;
-import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.Intents;
-import cgeo.geocaching.connector.capability.ICredentials;
-import cgeo.geocaching.connector.ec.ECConnector;
-import cgeo.geocaching.connector.gc.GCConnector;
-import cgeo.geocaching.gcvote.GCVote;
-import cgeo.geocaching.network.HtmlImage;
-import cgeo.geocaching.R;
-import org.apache.commons.lang3.StringUtils;
-import org.eclipse.jdt.annotation.NonNull;
 
 public class CredentialsPreference extends AbstractClickablePreference {
 
@@ -29,7 +32,6 @@ public class CredentialsPreference extends AbstractClickablePreference {
     private static final int NO_KEY = -1;
 
     private enum CredentialActivityMapping {
-        NONE(NO_KEY, null, null),
         GEOCACHING(R.string.pref_fakekey_gc_authorization, GCAuthorizationActivity.class, GCConnector.getInstance()),
         EXTREMCACHING(R.string.pref_fakekey_ec_authorization, ECAuthorizationActivity.class, ECConnector.getInstance()),
         GCVOTE(R.string.pref_fakekey_gcvote_authorization, GCVoteAuthorizationActivity.class, GCVote.getInstance());
@@ -60,7 +62,7 @@ public class CredentialsPreference extends AbstractClickablePreference {
                 return auth;
             }
         }
-        return CredentialActivityMapping.NONE;
+        throw new IllegalStateException("Invalid authorization preference");
     }
 
     private final CredentialActivityMapping credentialsMapping;
@@ -87,15 +89,13 @@ public class CredentialsPreference extends AbstractClickablePreference {
         return new OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(final Preference preference) {
-                if (credentialsMapping != CredentialActivityMapping.NONE) {
-                    final Intent checkIntent = new Intent(preference.getContext(), credentialsMapping.getAuthActivity());
+                final Intent checkIntent = new Intent(preference.getContext(), credentialsMapping.getAuthActivity());
 
-                    final Credentials credentials = credentialsMapping.getConnector().getCredentials();
-                    checkIntent.putExtra(Intents.EXTRA_CREDENTIALS_AUTH_USERNAME, credentials.getUsernameRaw());
-                    checkIntent.putExtra(Intents.EXTRA_CREDENTIALS_AUTH_PASSWORD, credentials.getPasswordRaw());
+                final Credentials credentials = credentialsMapping.getConnector().getCredentials();
+                checkIntent.putExtra(Intents.EXTRA_CREDENTIALS_AUTH_USERNAME, credentials.getUsernameRaw());
+                checkIntent.putExtra(Intents.EXTRA_CREDENTIALS_AUTH_PASSWORD, credentials.getPasswordRaw());
 
-                    settingsActivity.startActivityForResult(checkIntent, credentialsMapping.prefKeyId);
-                }
+                settingsActivity.startActivityForResult(checkIntent, credentialsMapping.prefKeyId);
                 return false; // no shared preference has to be changed
             }
         };
