@@ -237,7 +237,7 @@ public class GeocachingSuParser {
             case "Пошаговый традиционный":
                 return GeocachingSuConnector.PREFIX_MULTISTEP;
             case "Конкурс":
-            	return GeocachingSuConnector.PREFIX_CONTEST;
+                return GeocachingSuConnector.PREFIX_CONTEST;
             default:
                 return "SU"; // fallback solution to not use the numeric id only
         }

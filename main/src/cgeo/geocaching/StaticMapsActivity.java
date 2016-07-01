@@ -172,7 +172,7 @@ public class StaticMapsActivity extends AbstractActionBarActivity {
 
     @Override
     public void finish() {
-    	Dialogs.dismiss(waitDialog);
+        Dialogs.dismiss(waitDialog);
         super.finish();
     }
 }
