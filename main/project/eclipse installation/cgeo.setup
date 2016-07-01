@@ -288,6 +288,17 @@
           url="http://download.eclipse.org/releases/neon/"/>
       <description>Eclipse market place for manual installation of additional plugins</description>
     </setupTask>
+    <setupTask
+        xsi:type="setup.p2:P2Task"
+        label="Project Usus"
+        licenseConfirmationDisabled="true">
+      <requirement
+          name="org.projectusus.feature.group"
+          optional="true"/>
+      <repository
+          url="http://www.projectusus.org/usus-plugins/updates/"/>
+      <description>Project Usus has a before and after (refactoring) comparison of dependency graphs.</description>
+    </setupTask>
   </setupTask>
   <setupTask
       xsi:type="setup:CompoundTask"
