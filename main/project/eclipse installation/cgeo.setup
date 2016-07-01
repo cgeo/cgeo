@@ -277,6 +277,17 @@
           url="http://moreunit.sourceforge.net/update-site/"/>
       <description></description>
     </setupTask>
+    <setupTask
+        xsi:type="setup.p2:P2Task"
+        label="Marketplace"
+        licenseConfirmationDisabled="true">
+      <requirement
+          name="org.eclipse.epp.mpc.feature.group"
+          optional="true"/>
+      <repository
+          url="http://download.eclipse.org/releases/neon/"/>
+      <description>Eclipse market place for manual installation of additional plugins</description>
+    </setupTask>
   </setupTask>
   <setupTask
       xsi:type="setup:CompoundTask"
@@ -378,6 +389,16 @@
       <description>cgeo pull requests</description>
     </setupTask>
     <description></description>
+  </setupTask>
+  <setupTask
+      xsi:type="setup:CompoundTask"
+      name="Redirect setup to online version">
+    <setupTask
+        xsi:type="setup:EclipseIniTask"
+        option="-Doomph.redirection.cgeosetup"
+        value="=https://raw.githubusercontent.com/cgeo/cgeo/master/main/project/eclipse%20installation/cgeo.setup->${git.clone.location|uri}/main/project/eclipse installation/cgeo.setup"
+        vm="true"/>
+    <description>The setup file used during the initial installation will not update itself, therefore we have to redirect the URL to the github version.</description>
   </setupTask>
   <stream name="master"
       label="Master"/>
