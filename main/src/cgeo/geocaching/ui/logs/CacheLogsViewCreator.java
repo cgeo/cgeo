@@ -2,11 +2,11 @@ package cgeo.geocaching.ui.logs;
 
 import cgeo.geocaching.CacheDetailActivity;
 import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.models.LogEntry;
 import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.LogType;
+import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.LogEntry;
+import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.UserActionsClickListener;
 
 import org.apache.commons.lang3.StringUtils;
@@ -55,7 +55,11 @@ public class CacheLogsViewCreator extends LogsViewCreator {
 
     @Override
     protected void addHeaderView() {
-        // adds the log counts
+        addLogCountsHeader();
+        addEmptyLogsHeader();
+    }
+
+    private void addLogCountsHeader() {
         final Map<LogType, Integer> logCounts = getCache().getLogCounts();
         if (logCounts != null) {
             final List<Entry<LogType, Integer>> sortedLogCounts = new ArrayList<>(logCounts.size());
@@ -85,6 +89,14 @@ public class CacheLogsViewCreator extends LogsViewCreator {
                 countView.setText(res.getString(R.string.cache_log_types) + ": " + StringUtils.join(labels, ", "));
                 view.addHeaderView(countView, null, false);
             }
+        }
+    }
+
+    private void addEmptyLogsHeader() {
+        if (getLogs().isEmpty()) {
+            final TextView countView = new TextView(activity);
+            countView.setText(res.getString(R.string.log_empty_logbook));
+            view.addHeaderView(countView, null, false);
         }
     }
 
