@@ -1,5 +1,12 @@
 package cgeo.geocaching.utils;
 
+import android.os.Handler;
+import android.os.HandlerThread;
+import android.os.Looper;
+import android.os.Process;
+
+import java.util.concurrent.Executors;
+
 import rx.Scheduler;
 import rx.Scheduler.Worker;
 import rx.android.schedulers.AndroidSchedulers;
@@ -9,18 +16,7 @@ import rx.functions.Func0;
 import rx.internal.util.RxThreadFactory;
 import rx.schedulers.Schedulers;
 
-import android.os.Handler;
-import android.os.HandlerThread;
-import android.os.Looper;
-import android.os.Process;
-
-import java.util.concurrent.Executors;
-
 public class AndroidRxUtils {
-
-    private AndroidRxUtils() {
-        // Utility class, not to be instantiated
-    }
 
     public static final Scheduler computationScheduler = Schedulers.computation();
 
@@ -38,6 +34,10 @@ public class AndroidRxUtils {
     public static final Looper looperCallbacksLooper = looperCallbacksThread.getLooper();
     public static final Scheduler looperCallbacksScheduler = AndroidSchedulers.handlerThread(new Handler(looperCallbacksLooper));
     public static final Worker looperCallbacksWorker = looperCallbacksScheduler.createWorker();
+
+    private AndroidRxUtils() {
+        // Utility class, not to be instantiated
+    }
 
     public static <T> void andThenOnUi(final Scheduler scheduler, final Func0<T> background, final Action1<T> foreground) {
         scheduler.createWorker().schedule(new Action0() {

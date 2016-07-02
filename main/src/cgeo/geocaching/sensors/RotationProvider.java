@@ -1,13 +1,7 @@
 package cgeo.geocaching.sensors;
 
-import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.AndroidRxUtils;
-
-import rx.Observable;
-import rx.Observable.OnSubscribe;
-import rx.Subscriber;
-import rx.functions.Action0;
-import rx.subscriptions.Subscriptions;
+import cgeo.geocaching.utils.Log;
 
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -15,6 +9,12 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+
+import rx.Observable;
+import rx.Observable.OnSubscribe;
+import rx.Subscriber;
+import rx.functions.Action0;
+import rx.subscriptions.Subscriptions;
 
 public class RotationProvider {
 
@@ -75,6 +75,7 @@ public class RotationProvider {
 
                     @Override
                     public void onAccuracyChanged(final Sensor sensor, final int accuracy) {
+                        // empty
                     }
 
                 };

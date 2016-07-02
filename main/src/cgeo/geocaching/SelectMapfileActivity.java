@@ -1,20 +1,5 @@
 package cgeo.geocaching;
 
-import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
-
-import org.openintents.intents.FileManagerIntents;
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import cgeo.geocaching.files.AbstractFileListActivity;
 import cgeo.geocaching.files.IFileSelectionView;
 import cgeo.geocaching.files.SimpleDirChooser;
@@ -22,17 +7,33 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.ui.FileSelectionListAdapter;
 
+import org.openintents.intents.FileManagerIntents;
+
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class SelectMapfileActivity extends AbstractFileListActivity<FileSelectionListAdapter> implements IFileSelectionView {
 
-    public SelectMapfileActivity() {
-        super("map");
-    }
+    private static final int REQUEST_DIRECTORY = 1;
 
     @BindView(R.id.select_dir) protected Button selectDirectory;
 
     private String mapFile;
 
-    private static final int REQUEST_DIRECTORY = 1;
+    public SelectMapfileActivity() {
+        super("map");
+    }
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {

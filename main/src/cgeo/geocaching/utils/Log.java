@@ -16,15 +16,15 @@ public final class Log {
 
     private static final String TAG = "cgeo";
 
-    private static final class StackTraceDebug extends RuntimeException {
-        private static final long serialVersionUID = 27058374L;
-    }
-
     /**
      * The debug flag is cached here so that we don't need to access the settings every time we have to evaluate it.
      */
     private static boolean isDebug = true;
     private static boolean first = true;
+
+    private static final class StackTraceDebug extends RuntimeException {
+        private static final long serialVersionUID = 27058374L;
+    }
 
     private Log() {
         // utility class

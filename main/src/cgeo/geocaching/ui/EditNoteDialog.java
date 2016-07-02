@@ -1,7 +1,5 @@
 package cgeo.geocaching.ui;
 
-import butterknife.ButterKnife;
-
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.Keyboard;
 import cgeo.geocaching.settings.Settings;
@@ -24,15 +22,17 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-public class EditNoteDialog extends DialogFragment {
+import butterknife.ButterKnife;
 
-    public interface EditNoteDialogListener {
-        void onFinishEditNoteDialog(final String inputText);
-    }
+public class EditNoteDialog extends DialogFragment {
 
     public static final String ARGUMENT_INITIAL_NOTE = "initialNote";
 
     private EditText mEditText;
+
+    public interface EditNoteDialogListener {
+        void onFinishEditNoteDialog(final String inputText);
+    }
 
     /**
      * Create a new dialog to edit a note.

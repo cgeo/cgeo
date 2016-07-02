@@ -297,10 +297,12 @@ public abstract class TokenAuthorizationActivity extends AbstractActivity {
     private class EnableStartButtonWatcher implements TextWatcher {
         @Override
         public void beforeTextChanged(final CharSequence s, final int start, final int count, final int after) {
+            // empty
         }
 
         @Override
         public void onTextChanged(final CharSequence s, final int start, final int before, final int count) {
+            // empty
         }
 
         @Override

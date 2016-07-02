@@ -1,7 +1,7 @@
 package cgeo.geocaching.ui;
 
-import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.R;
+import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
 
 import org.eclipse.jdt.annotation.NonNull;
@@ -20,14 +20,14 @@ import android.view.SubMenu;
  */
 public class WaypointSelectionActionProvider extends AbstractMenuActionProvider {
 
+    private Callback callback;
+    private Geocache geocache;
+
     public interface Callback {
         void onWaypointSelected(final Waypoint waypoint);
 
         void onGeocacheSelected(final Geocache geocache);
     }
-
-    private Callback callback;
-    private Geocache geocache;
 
     public WaypointSelectionActionProvider(final Context context) {
         super(context);

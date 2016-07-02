@@ -12,6 +12,8 @@ import android.widget.TextView;
  */
 public class IndexOutOfBoundsAvoidingTextView extends TextView {
 
+    private boolean shouldWindowFocusWait;
+
     public IndexOutOfBoundsAvoidingTextView(final Context context, final AttributeSet attrs, final int defStyle) {
         super(context, attrs, defStyle);
         shouldWindowFocusWait = false;
@@ -56,8 +58,9 @@ public class IndexOutOfBoundsAvoidingTextView extends TextView {
         }
     }
 
-    // https://code.google.com/p/android/issues/detail?id=23381
-    private boolean shouldWindowFocusWait;
+    /**
+     * @see <a href="https://code.google.com/p/android/issues/detail?id=23381">bug report</a>
+     */
     public void setWindowFocusWait(final boolean shouldWindowFocusWait) {
         this.shouldWindowFocusWait = shouldWindowFocusWait;
     }

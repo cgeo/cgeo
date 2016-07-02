@@ -1,5 +1,19 @@
 package cgeo.geocaching.settings;
 
+import cgeo.geocaching.Intents;
+import cgeo.geocaching.R;
+import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.enumerations.StatusCode;
+import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.BundleUtils;
+import cgeo.geocaching.utils.Log;
+
+import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
@@ -13,20 +27,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import org.apache.commons.lang3.StringUtils;
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
-
 import butterknife.BindView;
-import cgeo.geocaching.Intents;
-import cgeo.geocaching.R;
-import cgeo.geocaching.activity.AbstractActivity;
-import cgeo.geocaching.activity.ActivityMixin;
-import cgeo.geocaching.enumerations.StatusCode;
-import cgeo.geocaching.ui.dialog.Dialogs;
-import cgeo.geocaching.utils.AndroidRxUtils;
-import cgeo.geocaching.utils.BundleUtils;
-import cgeo.geocaching.utils.Log;
 import rx.Observable;
 import rx.android.app.AppObservable;
 import rx.functions.Action1;
@@ -213,10 +214,12 @@ public abstract class AbstractCredentialsAuthorizationActivity extends AbstractA
     private class EnableStartButtonWatcher implements TextWatcher {
         @Override
         public void beforeTextChanged(final CharSequence s, final int start, final int count, final int after) {
+            // empty
         }
 
         @Override
         public void onTextChanged(final CharSequence s, final int start, final int before, final int count) {
+            // empty
         }
 
         @Override

@@ -14,9 +14,6 @@ public class Intents {
     public static final int SEARCH_REQUEST_CODE = 2;
     public static final int APP_INVITE_REQUEST_CODE = 3;
 
-    private Intents() {
-        // Do not instantiate
-    }
     private static final String PREFIX = "cgeo.geocaching.intent.extra.";
 
     public static final String EXTRA_ADDRESS = PREFIX + "address";
@@ -95,6 +92,10 @@ public class Intents {
 
     private static final String PREFIX_INTERNAL = "cgeo.geocaching.intent.internal.";
     public static final String INTENT_CACHE_CHANGED = PREFIX_INTERNAL + "cache-changed";
+
+    private Intents() {
+        // Do not instantiate
+    }
 
     public static Intent putListType(final Intent intent, @NonNull final CacheListType listType) {
         intent.putExtra(EXTRA_LIST_TYPE, listType.name());

@@ -60,6 +60,14 @@ import java.util.List;
 
 @EActivity
 public class EditWaypointActivity extends AbstractActionBarActivity implements CoordinatesInputDialog.CoordinateUpdate {
+
+    public static final int SUCCESS = 0;
+    public static final int UPLOAD_START = 1;
+    public static final int UPLOAD_ERROR = 2;
+    public static final int UPLOAD_NOT_POSSIBLE = 3;
+    public static final int UPLOAD_SUCCESS = 4;
+    public static final int SAVE_ERROR = 5;
+
     private static final ArrayList<WaypointType> POSSIBLE_WAYPOINT_TYPES = new ArrayList<>(WaypointType.ALL_TYPES_EXCEPT_OWN_AND_ORIGINAL);
 
     @ViewById(R.id.buttonLatitude) protected Button buttonLat;
@@ -400,13 +408,6 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         final int selectedTypeIndex = waypointTypeSelector.getSelectedItemPosition();
         return selectedTypeIndex >= 0 ? POSSIBLE_WAYPOINT_TYPES.get(selectedTypeIndex) : waypoint.getWaypointType();
     }
-
-    public static final int SUCCESS = 0;
-    public static final int UPLOAD_START = 1;
-    public static final int UPLOAD_ERROR = 2;
-    public static final int UPLOAD_NOT_POSSIBLE = 3;
-    public static final int UPLOAD_SUCCESS = 4;
-    public static final int SAVE_ERROR = 5;
 
     private void toastOnChanged() {
         final ActivityData currentState = getActivityData();

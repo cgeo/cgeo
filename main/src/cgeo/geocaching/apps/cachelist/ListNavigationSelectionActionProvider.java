@@ -14,11 +14,11 @@ import java.util.List;
 
 public class ListNavigationSelectionActionProvider extends AbstractMenuActionProvider {
 
+    private Callback callback;
+
     public interface Callback {
         void onListNavigationSelected(final CacheListApp app);
     }
-
-    private Callback callback;
 
     public ListNavigationSelectionActionProvider(final Context context) {
         super(context);

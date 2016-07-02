@@ -178,6 +178,24 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private Subscription resumeSubscription;
     private final ListNameMemento listNameMemento = new ListNameMemento();
 
+    private final Handler loadCachesHandler = new LoadCachesHandler(this);
+
+    private static class LoadCachesHandler extends WeakReferenceHandler<CacheListActivity> {
+
+        protected LoadCachesHandler(final CacheListActivity activity) {
+            super(activity);
+        }
+
+        @Override
+        public void handleMessage(final Message msg) {
+            final CacheListActivity activity = getActivity();
+            if (activity == null) {
+                return;
+            }
+            activity.handleCachesLoaded();
+        }
+    }
+
     // FIXME: This method has mostly been replaced by the loaders. But it still contains a license agreement check.
     public void handleCachesLoaded() {
         try {
@@ -245,24 +263,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
         final AlertDialog alert = dialog.create();
         alert.show();
-    }
-
-    private final Handler loadCachesHandler = new LoadCachesHandler(this);
-
-    private static class LoadCachesHandler extends WeakReferenceHandler<CacheListActivity> {
-
-        protected LoadCachesHandler(final CacheListActivity activity) {
-            super(activity);
-        }
-
-        @Override
-        public void handleMessage(final Message msg) {
-            final CacheListActivity activity = getActivity();
-            if (activity == null) {
-                return;
-            }
-            activity.handleCachesLoaded();
-        }
     }
 
     /**

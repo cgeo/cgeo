@@ -27,9 +27,10 @@ import butterknife.ButterKnife;
 
 public class CredentialsPreference extends AbstractClickablePreference {
 
-    private LayoutInflater inflater;
-
     private static final int NO_KEY = -1;
+
+    private LayoutInflater inflater;
+    private final CredentialActivityMapping credentialsMapping;
 
     private enum CredentialActivityMapping {
         GEOCACHING(R.string.pref_fakekey_gc_authorization, GCAuthorizationActivity.class, GCConnector.getInstance()),
@@ -64,8 +65,6 @@ public class CredentialsPreference extends AbstractClickablePreference {
         }
         throw new IllegalStateException("Invalid authorization preference");
     }
-
-    private final CredentialActivityMapping credentialsMapping;
 
     public CredentialsPreference(final Context context, final AttributeSet attrs) {
         super(context, attrs);

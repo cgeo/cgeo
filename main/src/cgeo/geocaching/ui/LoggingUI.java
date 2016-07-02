@@ -21,11 +21,11 @@ import java.util.List;
 
 public final class LoggingUI extends AbstractUIFactory {
 
+    private static View selectedView;
+
     private LoggingUI() {
         // utility class
     }
-
-    private static View selectedView;
 
     public static class LogTypeEntry {
         private final LogType logType;

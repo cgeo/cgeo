@@ -233,10 +233,12 @@ public abstract class AbstractViewPagerActivity<Page extends Enum<Page>> extends
 
                 @Override
                 public void onPageScrolled(final int position, final float positionOffset, final int positionOffsetPixels) {
+                    // empty
                 }
 
                 @Override
                 public void onPageScrollStateChanged(final int state) {
+                    // empty
                 }
             });
         }

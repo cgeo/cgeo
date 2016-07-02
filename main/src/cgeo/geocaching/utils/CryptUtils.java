@@ -18,10 +18,6 @@ import javax.crypto.spec.SecretKeySpec;
 
 public final class CryptUtils {
 
-    private CryptUtils() {
-        // utility class
-    }
-
     private static final byte[] EMPTY = {};
     private static final char[] BASE64MAP1 = new char[64];
     private static final byte[] BASE64MAP2 = new byte[128];
@@ -46,6 +42,10 @@ public final class CryptUtils {
         for (i = 0; i < 64; i++) {
             BASE64MAP2[BASE64MAP1[i]] = (byte) i;
         }
+    }
+
+    private CryptUtils() {
+        // utility class
     }
 
     private static class Rot13Encryption {

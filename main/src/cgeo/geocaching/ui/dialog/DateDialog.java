@@ -14,11 +14,11 @@ import java.util.Calendar;
 
 public class DateDialog extends DialogFragment implements OnDateSetListener {
 
+    private Calendar date;
+
     public interface DateDialogParent {
         void setDate(final Calendar date);
     }
-
-    private Calendar date;
 
     public static DateDialog getInstance(final Calendar date) {
         final DateDialog dateDialog = new DateDialog();
