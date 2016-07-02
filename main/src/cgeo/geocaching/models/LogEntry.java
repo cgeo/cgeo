@@ -274,9 +274,9 @@ public final class LogEntry {
      * @param cacheName spotted cache name
      * @param cacheGuid spotted cache guid
      */
-    private LogEntry(final int id, final @NonNull LogType logType, final @NonNull String author, final @NonNull String log,
+    private LogEntry(final int id, @NonNull final LogType logType, @NonNull final String author, @NonNull final String log,
                     final long date, final int found, final boolean friend,
-                    final @NonNull List<Image> logImages, final @NonNull String cacheName, final @NonNull String cacheGuid) {
+                    @NonNull final List<Image> logImages, @NonNull final String cacheName, @NonNull final String cacheGuid) {
         this.id = id;
         this.logType = logType;
         this.author = author;
