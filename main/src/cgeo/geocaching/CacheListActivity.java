@@ -112,6 +112,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Deque;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -302,6 +303,12 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     private class LoadDetailsHandler extends CancellableHandler {
+
+        @Override
+        protected void handleCancel(final Object extra) {
+            super.handleCancel(extra);
+            replaceCacheListFromSearch();
+        }
 
         @Override
         public void handleRegularMessage(final Message msg) {
@@ -1177,26 +1184,19 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                     new Action1<Set<Integer>>() {
                         @Override
                         public void call(final Set<Integer> selectedListIds) {
-                            // in case of online lists, set the list id to a concrete list now
-                            for (final Geocache geocache : caches) {
-                                geocache.getLists().addAll(selectedListIds);
-                            }
-                            refreshStoredInternal(caches);
+                            refreshStoredInternal(caches, selectedListIds);
                         }
                     }, true, Collections.singleton(StoredList.TEMPORARY_LIST.id), Collections.<Integer>emptySet(), listNameMemento);
         } else {
+            final Set<Integer> selectedListIds = new HashSet<>();
             if (type != CacheListType.OFFLINE) {
-                for (final Geocache geocache : caches) {
-                    if (geocache.getLists().isEmpty()) {
-                        geocache.getLists().add(StoredList.STANDARD_LIST_ID);
-                    }
-                }
+                selectedListIds.add(StoredList.STANDARD_LIST_ID);
             }
-            refreshStoredInternal(caches);
+            refreshStoredInternal(caches, selectedListIds);
         }
     }
 
-    private void refreshStoredInternal(final List<Geocache> caches) {
+    private void refreshStoredInternal(final List<Geocache> caches, final Set<Integer> listIds) {
         detailProgress.set(0);
 
         showProgress(false);
@@ -1215,7 +1215,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
         detailProgressTime = System.currentTimeMillis();
 
-        loadDetails(loadDetailsHandler, caches);
+        loadDetails(loadDetailsHandler, caches, listIds);
     }
 
     public void removeFromHistoryCheck() {
@@ -1267,8 +1267,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     /**
      * Method to asynchronously refresh the caches details.
      */
-
-    private void loadDetails(final CancellableHandler handler, final List<Geocache> caches) {
+    private void loadDetails(final CancellableHandler handler, final List<Geocache> caches, final Set<Integer> additionalListIds) {
         final Observable<Geocache> allCaches;
         if (Settings.isStoreOfflineMaps()) {
             allCaches = Observable.create(new OnSubscribe<Geocache>() {
@@ -1303,7 +1302,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 return Observable.create(new OnSubscribe<Geocache>() {
                     @Override
                     public void call(final Subscriber<? super Geocache> subscriber) {
-                        cache.refreshSynchronous(null);
+                        cache.refreshSynchronous(null, additionalListIds);
                         detailProgress.incrementAndGet();
                         handler.obtainMessage(DownloadProgress.MSG_LOADED, cache).sendToTarget();
                         subscriber.onCompleted();
