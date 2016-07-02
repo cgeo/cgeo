@@ -12,6 +12,7 @@
   </module>
   <module name="FileTabCharacter">
     <property name="eachLine" value="true"/>
+    <property name="fileExtensions" value="java"/>
   </module>
   <module name="NewlineAtEndOfFile">
     <property name="severity" value="ignore" />

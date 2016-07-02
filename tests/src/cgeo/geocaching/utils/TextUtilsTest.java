@@ -1,11 +1,12 @@
 package cgeo.geocaching.utils;
 
-import android.text.SpannableString;
+import static org.assertj.core.api.Assertions.assertThat;
 
-import junit.framework.Assert;
-import junit.framework.TestCase;
+import cgeo.geocaching.connector.gc.GCConstants;
 
 import org.apache.commons.io.IOUtils;
+
+import android.text.SpannableString;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -13,9 +14,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.regex.Pattern;
 
-import cgeo.geocaching.connector.gc.GCConstants;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import junit.framework.Assert;
+import junit.framework.TestCase;
 
 public class TextUtilsTest extends TestCase {
 
@@ -67,13 +67,13 @@ public class TextUtilsTest extends TestCase {
     }
 
     public static void testTrimSpanned() {
-        assertTrimSpanned(" ","");
+        assertTrimSpanned(" ", "");
         assertTrimSpanned("\n", "");
         assertTrimSpanned("a ", "a");
         assertTrimSpanned("a\n", "a");
     }
 
-    private static void assertTrimSpanned(String input, String expected) {
+    private static void assertTrimSpanned(final String input, final String expected) {
         assertThat(TextUtils.trimSpanned(new SpannableString(input)).toString()).isEqualTo(new SpannableString(expected).toString());
     }
 }

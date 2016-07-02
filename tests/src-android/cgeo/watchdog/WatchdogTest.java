@@ -12,6 +12,7 @@ import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.test.NotForIntegrationTests;
+
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -72,7 +73,9 @@ public class WatchdogTest extends CGeoTestCase {
     private static void checkWebsite(final String connectorName, final String url) {
 
         // temporarily disable oc.uk
-        if (connectorName.equalsIgnoreCase("geocaching website opencaching.org.uk")) return;
+        if (connectorName.equalsIgnoreCase("geocaching website opencaching.org.uk")) {
+            return;
+        }
 
         final String page = Network.getResponseData(Network.getRequest(url));
         assertThat(page).overridingErrorMessage("Failed to get response from " + connectorName).isNotEmpty();

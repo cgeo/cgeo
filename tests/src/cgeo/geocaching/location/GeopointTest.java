@@ -1,12 +1,12 @@
 package cgeo.geocaching.location;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.offset;
+
 import android.os.Build;
 import android.os.Bundle;
 
 import junit.framework.TestCase;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.offset;
 
 public class GeopointTest extends TestCase {
 
@@ -66,8 +66,7 @@ public class GeopointTest extends TestCase {
         // broken distance calculation in 4.2.1
         if (Build.VERSION.SDK_INT == Build.VERSION_CODES.JELLY_BEAN_MR1) {
             assertThat((double) d12).isEqualTo(110.83107, offset(1e-6));
-        }
-        else {
+        } else {
             assertThat((double) d12).isEqualTo(110.967995, offset(1e-6));
         }
 
@@ -81,10 +80,10 @@ public class GeopointTest extends TestCase {
 
     public static void testParcelable() {
         final Geopoint gp = new Geopoint(1.2, 3.4);
-        final String KEY = "geopoint";
+        final String key = "geopoint";
         final Bundle bundle = new Bundle();
-        bundle.putParcelable(KEY, gp);
-        assertThat(bundle.getParcelable(KEY)).isEqualTo(gp);
+        bundle.putParcelable(key, gp);
+        assertThat(bundle.getParcelable(key)).isEqualTo(gp);
     }
 
     public static void testDDD() {

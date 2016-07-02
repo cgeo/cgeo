@@ -1,19 +1,19 @@
 package cgeo.geocaching.sorting;
 
-import junit.framework.TestCase;
+import static org.assertj.core.api.Assertions.assertThat;
+
+import cgeo.geocaching.models.Geocache;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
-import cgeo.geocaching.models.Geocache;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import junit.framework.TestCase;
 
 public class NameComparatorTest extends TestCase {
 
     private static class NamedCache extends Geocache {
 
-        public NamedCache(final String name) {
+        NamedCache(final String name) {
             this.setName(name);
         }
     }

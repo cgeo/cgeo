@@ -13,9 +13,9 @@ public class PersonalNoteTest extends TestCase {
 
     public static void testParse() {
         final String testString = "Simple cgeo note\n--\nSimple provider note";
-        Geocache cache = new Geocache();
+        final Geocache cache = new Geocache();
         cache.setPersonalNote(testString);
-        PersonalNote parsedNote = new PersonalNote(cache);
+        final PersonalNote parsedNote = new PersonalNote(cache);
         assertThat(parsedNote.toString()).isEqualTo(testString);
         assertPersonalNote(parsedNote, "Simple cgeo note", "Simple provider note");
 
@@ -23,57 +23,57 @@ public class PersonalNoteTest extends TestCase {
 
     public static void testParseProviderOnly() {
         final String testString = "Simple provider note";
-        Geocache cache = new Geocache();
+        final Geocache cache = new Geocache();
         cache.setPersonalNote(testString);
-        PersonalNote parsedNote = new PersonalNote(cache);
+        final PersonalNote parsedNote = new PersonalNote(cache);
         assertThat(parsedNote.toString()).isEqualTo(testString);
         assertPersonalNote(parsedNote, null, "Simple provider note");
     }
 
     public static void testLocalNoteExceedsLimit() {
-        String testString = StringUtils.repeat("x", GCConstants.PERSONAL_NOTE_MAX_CHARS + 1);
-        Geocache truncCache = new Geocache();
+        final String testString = StringUtils.repeat("x", GCConstants.PERSONAL_NOTE_MAX_CHARS + 1);
+        final Geocache truncCache = new Geocache();
         truncCache.setPersonalNote(testString.substring(0, GCConstants.PERSONAL_NOTE_MAX_CHARS));
-        PersonalNote parsedNote = new PersonalNote(truncCache);
+        final PersonalNote parsedNote = new PersonalNote(truncCache);
 
-        Geocache exceedingCache = new Geocache();
+        final Geocache exceedingCache = new Geocache();
         exceedingCache.getLists().add(StoredList.STANDARD_LIST_ID); // stored
         exceedingCache.setPersonalNote(testString);
-        PersonalNote otherNote = new PersonalNote(exceedingCache);
-        PersonalNote result = parsedNote.mergeWith(otherNote);
+        final PersonalNote otherNote = new PersonalNote(exceedingCache);
+        final PersonalNote result = parsedNote.mergeWith(otherNote);
         assertPersonalNote(result, null, testString);
     }
 
     public static void testParseCgeoOnly() {
         final String testString = "Simple cgeo note";
-        Geocache cache = new Geocache();
+        final Geocache cache = new Geocache();
         cache.setPersonalNote(testString);
-        PersonalNote parsedNote = new PersonalNote(cache);
+        final PersonalNote parsedNote = new PersonalNote(cache);
         assertThat(parsedNote.toString()).isEqualTo("Simple cgeo note");
         assertPersonalNote(parsedNote, null, "Simple cgeo note");
     }
 
     public static void testSimpleMerge() {
-        Geocache cache1 = new Geocache(); // not stored
+        final Geocache cache1 = new Geocache(); // not stored
         cache1.setPersonalNote("Simple cgeo note\n--\nSimple provider note");
-        PersonalNote myNote = new PersonalNote(cache1);
-        Geocache cache2 = new Geocache();
+        final PersonalNote myNote = new PersonalNote(cache1);
+        final Geocache cache2 = new Geocache();
         cache2.getLists().add(StoredList.STANDARD_LIST_ID); // stored
         cache2.setPersonalNote("cgeo note\n--\nProvider note");
-        PersonalNote otherNote = new PersonalNote(cache2);
-        PersonalNote result = myNote.mergeWith(otherNote);
+        final PersonalNote otherNote = new PersonalNote(cache2);
+        final PersonalNote result = myNote.mergeWith(otherNote);
         assertThat(result.toString()).isEqualTo("cgeo note\n--\nSimple provider note");
         assertPersonalNote(result, "cgeo note", "Simple provider note");
     }
 
     public static void testMixedMerge() {
-        Geocache cache1 = new Geocache(); // not stored
+        final Geocache cache1 = new Geocache(); // not stored
         cache1.setPersonalNote("Simple cgeo note\n--\nSimple provider note");
-        PersonalNote myNote = new PersonalNote(cache1);
-        Geocache cache2 = new Geocache();
+        final PersonalNote myNote = new PersonalNote(cache1);
+        final Geocache cache2 = new Geocache();
         cache2.getLists().add(StoredList.STANDARD_LIST_ID); // stored
         cache2.setPersonalNote("Provider note");
-        PersonalNote otherNote = new PersonalNote(cache2);
+        final PersonalNote otherNote = new PersonalNote(cache2);
         PersonalNote result = myNote.mergeWith(otherNote);
         assertThat(result.toString()).isEqualTo("Simple cgeo note\n--\nSimple provider note");
         assertPersonalNote(result, "Simple cgeo note", "Simple provider note");
