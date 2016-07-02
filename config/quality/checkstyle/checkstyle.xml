@@ -10,6 +10,9 @@
   <module name="SuppressionFilter">
     <property name="file" value="https://raw.githubusercontent.com/cgeo/cgeo/master/config/quality/checkstyle/suppressions.xml"/>
   </module>
+  <module name="FileTabCharacter">
+    <property name="eachLine" value="true"/>
+  </module>
   <module name="NewlineAtEndOfFile">
     <property name="severity" value="ignore" />
   </module>

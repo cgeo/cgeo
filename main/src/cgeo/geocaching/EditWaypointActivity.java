@@ -614,7 +614,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
 
     @Override
     public void finish() {
-    	Dialogs.dismiss(waitDialog);
+        Dialogs.dismiss(waitDialog);
         super.finish();
     }
 }
