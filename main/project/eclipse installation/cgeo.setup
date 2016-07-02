@@ -299,6 +299,15 @@
           url="http://www.projectusus.org/usus-plugins/updates/"/>
       <description>Project Usus has a before and after (refactoring) comparison of dependency graphs.</description>
     </setupTask>
+    <setupTask
+        xsi:type="setup.p2:P2Task"
+        label="Checkstyle"
+        licenseConfirmationDisabled="true">
+      <requirement
+          name="net.sf.eclipsecs.feature.group"/>
+      <repository
+          url="http://eclipse-cs.sf.net/update"/>
+    </setupTask>
   </setupTask>
   <setupTask
       xsi:type="setup:CompoundTask"
