@@ -5,6 +5,7 @@ import cgeo.geocaching.activity.Keyboard;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.dialog.Dialogs;
 
+import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 
 import android.app.AlertDialog;
@@ -64,8 +65,12 @@ public class EditNoteDialog extends DialogFragment {
 
         final View view = View.inflate(themedContext, R.layout.fragment_edit_note, null);
         mEditText = ButterKnife.findById(view, R.id.note);
-        final String initialNote = getArguments().getString(ARGUMENT_INITIAL_NOTE);
+        String initialNote = getArguments().getString(ARGUMENT_INITIAL_NOTE);
         if (initialNote != null) {
+            // add a new line when editing existing text, to avoid accidental overwriting of the last line
+            if (StringUtils.isNotBlank(initialNote)) {
+                initialNote = StringUtils.appendIfMissing(initialNote, "\n");
+            }
             mEditText.setText(initialNote);
             Dialogs.moveCursorToEnd(mEditText);
             getArguments().remove(ARGUMENT_INITIAL_NOTE);
@@ -93,7 +98,9 @@ public class EditNoteDialog extends DialogFragment {
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
-                ((EditNoteDialogListener) getActivity()).onFinishEditNoteDialog(mEditText.getText().toString());
+                // trim note to avoid unnecessary uploads for whitespace only changes
+                final String personalNote = StringUtils.trim(mEditText.getText().toString());
+                ((EditNoteDialogListener) getActivity()).onFinishEditNoteDialog(personalNote);
                 dialog.dismiss();
             }
         });
