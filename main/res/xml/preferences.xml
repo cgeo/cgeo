@@ -295,6 +295,11 @@
                         android:summary="@string/init_summary_su"
                         android:title="@string/settings_activate_su" />
 
+                    <cgeo.geocaching.settings.TextPreference
+                        android:dependency="@string/pref_connectorSUActive"
+                        android:layout="@layout/text_preference"
+                        android:text="@string/settings_su_description" />
+
                 </PreferenceCategory>
                 <PreferenceCategory android:title="@string/settings_information" >
 

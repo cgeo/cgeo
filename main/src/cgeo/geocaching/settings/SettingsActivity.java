@@ -750,7 +750,8 @@ public class SettingsActivity extends PreferenceActivity {
                     || isPreference(preference, R.string.pref_connectorOCROActive)
                     || isPreference(preference, R.string.pref_connectorOCUKActive)
                     || isPreference(preference, R.string.pref_connectorGCActive)
-                    || isPreference(preference, R.string.pref_connectorECActive)) {
+                    || isPreference(preference, R.string.pref_connectorECActive)
+                    || isPreference(preference, R.string.pref_connectorSUActive)) {
                 // update summary
                 final boolean boolVal = (Boolean) value;
                 final String summary = getServiceSummary(boolVal);
@@ -761,6 +762,8 @@ public class SettingsActivity extends PreferenceActivity {
                     preference.getPreferenceManager().findPreference(getKey(R.string.preference_screen_gc)).setSummary(summary);
                 } else if (isPreference(preference, R.string.pref_connectorECActive)) {
                     preference.getPreferenceManager().findPreference(getKey(R.string.preference_screen_ec)).setSummary(summary);
+                } else if (isPreference(preference, R.string.pref_connectorSUActive)) {
+                    preference.getPreferenceManager().findPreference(getKey(R.string.preference_screen_su)).setSummary(summary);
                 }
                 redrawScreen(preference.getPreferenceManager().findPreference(getKey(R.string.preference_screen_services)));
                 // reset log-in status if connector activation was changed
