@@ -1625,7 +1625,13 @@ public class Geocache implements IWaypoint {
     }
 
     public void refreshSynchronous(final CancellableHandler handler) {
-        storeCache(null, geocode, lists, true, handler);
+        refreshSynchronous(handler, lists);
+    }
+
+    public void refreshSynchronous(final CancellableHandler handler, final Set<Integer> additionalListIds) {
+        final Set<Integer> combinedListIds = new HashSet<>(lists);
+        combinedListIds.addAll(additionalListIds);
+        storeCache(null, geocode, combinedListIds, true, handler);
     }
 
     public static void storeCache(final Geocache origCache, final String geocode, final Set<Integer> lists, final boolean forceRedownload, final CancellableHandler handler) {
