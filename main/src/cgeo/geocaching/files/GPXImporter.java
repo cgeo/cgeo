@@ -239,12 +239,12 @@ public class GPXImporter {
         if (gpxfile == null || !gpxfile.canRead()) {
             return null;
         }
-        final String gpxFileName = gpxfile.getName();
         final File dir = gpxfile.getParentFile();
         final String[] filenameList = dir.list();
         if (filenameList == null) {
             return null;
         }
+        final String gpxFileName = gpxfile.getName();
         for (final String filename : filenameList) {
             if (!StringUtils.containsIgnoreCase(filename, WAYPOINTS_FILE_SUFFIX)) {
                 continue;

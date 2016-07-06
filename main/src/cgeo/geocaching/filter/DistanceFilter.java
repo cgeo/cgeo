@@ -36,13 +36,13 @@ class DistanceFilter extends AbstractFilter {
 
     @Override
     public boolean accepts(@NonNull final Geocache cache) {
-        final Geopoint currentPos = new Geopoint(geo);
         final Geopoint coords = cache.getCoords();
         if (coords == null) {
             // If a cache has no coordinates, consider it to be out of range. It will
             // happen with archived caches.
             return false;
         }
+        final Geopoint currentPos = new Geopoint(geo);
         final float distance = currentPos.distanceTo(coords);
         return distance >= minDistance && distance <= maxDistance;
     }

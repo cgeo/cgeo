@@ -83,10 +83,10 @@ class GeopointParser {
         }
 
         final double lat = latitudeWrapper.result;
-        final double lon = longitudeWrapper.result;
         if (!Geopoint.isValidLatitude(lat)) {
             throw new Geopoint.ParseException(text, LatLon.LAT);
         }
+        final double lon = longitudeWrapper.result;
         if (!Geopoint.isValidLongitude(lon)) {
             throw new Geopoint.ParseException(text, LatLon.LON);
         }
@@ -103,7 +103,6 @@ class GeopointParser {
      */
     private static ResultWrapper parseHelper(@NonNull final String text, final LatLon latlon) {
         final String replaceSpaceAfterComma = new MatcherWrapper(PATTERN_BAD_BLANK, text).replaceAll("$1.$2");
-        final MatcherWrapper matcher = new MatcherWrapper(latlon == LatLon.LAT ? PATTERN_LAT : PATTERN_LON, replaceSpaceAfterComma);
 
         try {
             return new ResultWrapper(Double.parseDouble(replaceSpaceAfterComma), 0, text.length());
@@ -111,6 +110,7 @@ class GeopointParser {
             // fall through to advanced parsing
         }
 
+        final MatcherWrapper matcher = new MatcherWrapper(latlon == LatLon.LAT ? PATTERN_LAT : PATTERN_LON, replaceSpaceAfterComma);
         try {
             if (matcher.find()) {
                 final double sign = matcher.group(1).equalsIgnoreCase("S") || matcher.group(1).equalsIgnoreCase("W") ? -1.0 : 1.0;
