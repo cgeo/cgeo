@@ -126,6 +126,7 @@
   <string name="log_hint_log_password">Log-Passwort eingeben</string>
   <string name="log_oc_team_comment">OC Team Bemerkung</string>
   <string name="log_your_saved_log">Dein gespeichertes Log</string>
+  <string name="log_empty_logbook">Das Logbuch dieses Caches ist leer.</string>
   <string-array name="log_image_scales">
     <item>Keine Skalierung</item>
     <item>512 px</item>
@@ -434,6 +435,7 @@
   <string name="settings_reauthorize">c:geo neu autorisieren</string>
   <string name="settings_gc_description">Autorisiere c:geo auf geocaching.com zuzugreifen, um Caches zu suchen.</string>
   <string name="settings_ec_description">Autorisiere c:geo auf extremcaching.com zuzugreifen, um Caches zu suchen und nach deinen Funden zu filtern.</string>
+  <string name="settings_su_description">Autorisiere c:geo auf geocaching.su zuzugreifen, um Caches zu suchen.</string>
   <string name="init_oc">Opencaching.de</string>
   <string name="settings_activate_oc">Aktivieren</string>
   <string name="init_summary_oc_de">Caches von opencaching.de laden</string>
