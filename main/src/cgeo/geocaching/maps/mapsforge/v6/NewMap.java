@@ -868,25 +868,11 @@ public class NewMap extends AbstractActionBarActivity {
     }
 
     private int countVisibleCaches() {
-
-        int result = 0;
-
-        if (caches != null) {
-            result = caches.getVisibleItemsCount();
-        }
-
-        return result;
+        return caches != null ? caches.getVisibleItemsCount() : 0;
     }
 
     private int countTotalCaches() {
-
-        int result = 0;
-
-        if (caches != null) {
-            result += caches.getItemsCount();
-        }
-
-        return result;
+        return caches != null ? caches.getItemsCount() : 0;
     }
 
     /** Updates the progress. */
