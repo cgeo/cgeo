@@ -782,12 +782,12 @@ public class NewMap extends AbstractActionBarActivity {
 
         @Override
         public void handleMessage(final Message msg) {
-            final int what = msg.what;
             final NewMap map = mapRef.get();
             if (map == null) {
                 return;
             }
 
+            final int what = msg.what;
             switch (what) {
                 case UPDATE_TITLE:
                     map.setTitle();
@@ -840,19 +840,19 @@ public class NewMap extends AbstractActionBarActivity {
     }
 
     private String calculateSubtitle() {
-        // count caches in the sub title
-        final int visible = countVisibleCaches();
-        final int total = countTotalCaches();
-
-        final StringBuilder subtitle = new StringBuilder();
         if (!isLiveEnabled && mapMode == MapMode.SINGLE) {
             final Geocache cache = getSingleModeCache();
             if (cache != null) {
                 return Formatter.formatMapSubtitle(cache);
             }
         }
-        if (total != 0) {
 
+        // count caches in the sub title
+        final int visible = countVisibleCaches();
+        final int total = countTotalCaches();
+
+        final StringBuilder subtitle = new StringBuilder();
+        if (total != 0) {
             if (visible != total && Settings.isDebug()) {
                 subtitle.append(visible).append('/').append(res.getQuantityString(R.plurals.cache_counts, total, total));
             } else {
