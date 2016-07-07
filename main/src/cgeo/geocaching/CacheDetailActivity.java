@@ -1986,6 +1986,10 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                             case R.id.value: // coordinates, gc-code, name
                                 clickedItemText = ((TextView) view).getText();
                                 final CharSequence itemTitle = ((TextView) ((View) view.getParent()).findViewById(R.id.name)).getText();
+                                if (itemTitle.equals(res.getText(R.string.cache_coordinates))) {
+                                    // remove middle dot from some coordinate formats before copying to clipboard
+                                    clickedItemText = clickedItemText.toString().replace("· ", "");
+                                }
                                 buildDetailsContextMenu(actionMode, menu, itemTitle, true);
                                 return true;
                             case R.id.description:
