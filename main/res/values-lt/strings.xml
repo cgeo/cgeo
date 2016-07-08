@@ -126,6 +126,7 @@
   <string name="log_hint_log_password">Įveskite savo įrašo slaptažodį</string>
   <string name="log_oc_team_comment">OC komandos komentaras</string>
   <string name="log_your_saved_log">Jūsų išsaugotas įrašas</string>
+  <string name="log_empty_logbook">Šios slėptuvės įrašų žurnalas yra tuščias.</string>
   <string-array name="log_image_scales">
     <item>Nekeisti dydžio</item>
     <item>512 px</item>
@@ -206,6 +207,8 @@
   <string name="err_parse_lon">c:geo nesupranta įvestos ilgumos.</string>
   <string name="err_parse_dist">c:geo negali apdoroti atstumo.</string>
   <string name="err_parse_lat_lon">c:geo negali išanalizuoti platumos arba ilgumos.</string>
+  <string name="err_rendertheme_file_unreadable">Neįmanoma įkelti pasirinktos žemėlapio temos. Atkuriama į numatytąją temą.</string>
+  <string name="err_rendertheme_invalid">Pasirinkta žemėlapio tema netinka šiai mapsforge versijai. Atkuriama į numatytąją temą.</string>
   <string name="warn_save_nothing">Čia nėra ko išsaugoti.</string>
   <string name="warn_no_cache_coord">Čia nėra slėptuvių su koordinatėmis.</string>
   <string name="warn_no_coordinates">Neduotos koordinatės.</string>
@@ -351,6 +354,7 @@
   <string name="caches_filter_personal_data">Su asmeniniais duomenimis</string>
   <string name="caches_filter_rating">Su reitingu</string>
   <string name="caches_filter_own_rating">Su savo reitingu</string>
+  <string name="caches_filter_multi_listing">Daugiafunkciniai sąrašai su skirtingu statusu</string>
   <string name="caches_removing_from_history">Pašalinama iš Istorijos…</string>
   <string name="caches_clear_offlinelogs">Išvalyti išsaugotus įrašus</string>
   <string name="caches_clear_offlinelogs_message">Ar norite išvalyti išsaugotus įrašus?</string>
@@ -429,6 +433,9 @@
   <string name="settings_info_facebook_login">c:geo negali prisijungti prie geocaching.com su jūsų Facebook paskyra. Bet yra paprastas problemos sprendimas…</string>
   <string name="settings_authorize">Leisti c:geo prisijungti</string>
   <string name="settings_reauthorize">Dar kartą leisti c:geo prisijungti</string>
+  <string name="settings_gc_description">Leiskite c:geo prisijungti prie geocaching.com tam, kad galėtumėt ieškoti slėptuvių.</string>
+  <string name="settings_ec_description">Leiskite c:geo prisijungti prie extremcaching.com tam, kad galėtumėt ieškoti slėptuvių ir pasiekti/filtruoti rastas slėptuves.</string>
+  <string name="settings_su_description">Leiskite c:geo prisijungti prie geocaching.su tam, kad galėtumėt ieškoti slėptuvių.</string>
   <string name="settings_activate_oc">Aktyvuoti</string>
   <string name="init_summary_oc_de">Įkelti slėptuves iš opencaching.de</string>
   <string name="init_oc_de_description">Leiskite c:geo prisijungti prie opencaching.de tam, kad galėtumėt ieškoti slėptuvių ir pasiekti/filtruoti rastas slėptuves.</string>
@@ -464,7 +471,7 @@
   <string name="init_login_popup_ok">Prisijungta</string>
   <string name="init_login_popup_failed">Nepavyko prisijungti</string>
   <string name="init_login_popup_failed_reason">Nepavyko prisijungti: %s</string>
-  <string name="init_login_popup_not_authorized">Prisijungimas neleistinas</string>
+  <string name="init_login_popup_not_authorized">Neprisiregistruota</string>
   <string name="init_login_popup_invalid_timestamp">Neteisingas vietinis laikas, nustatykite prietaiso laiką</string>
   <string name="init_login_popup_invalid_token">Blogas prisijungimo leidimas, leiskite prisijungti dar kartą</string>
   <string name="init_authorization_credential_username">Vartotojo vardas</string>
@@ -486,7 +493,7 @@
   <string name="init_ratingwanted">GCvote reitingas</string>
   <string name="init_summary_ratingwanted">Įkelti slėptuvės reitingą iš GCvote.com</string>
   <string name="init_friends_and_own_logs_wanted">Rodyti draugų/savo</string>
-  <string name="init_summary_friends_and_own_logs_wanted">Rodyti papildomą draugų ir savų įrašų puslapį</string>
+  <string name="init_summary_friends_and_own_logs_wanted">Rodyti papildomą draugų ir savų įrašų žurnalo puslapį</string>
   <string name="init_openlastdetailspage">Paskutinis informacijos puslapis</string>
   <string name="init_summary_openlastdetailspage">Atidaryti informaciją iš paskutinio naudoto puslapio</string>
   <string name="init_skin">Šviesi tema</string>
@@ -559,6 +566,7 @@
   <string name="init_default_navigation_tool_2_description">Čia galite pasirinkti savo antrą pageidaujamą navigacijos įrankį. Aktyvinkite jį ilgai paspausdami navigacijos piktogramą šalia slėptuvės pavadinimo.</string>
   <string name="init_navigation_menu_description">Čia galite pasirinkti, kuris iš navigacinių metodų bus rodomas slėptuvės arba papildomo taško navigacijos meniu. Išjungti įrankiai šiame prietaise yra neįdiegti.</string>
   <string name="init_debug_title">Derinimo informacija</string>
+  <string name="init_debug_note">c:geo gali generuoti daug derinimo informacijos. Aktyvavus šį nustatymą gali paveikti c:geo stabilumą ir yra rekomenduojamas tik jei jūsų prašoma siųsti žurnalą kūrėjams.</string>
   <string name="init_debug">Aktyvinti derinimo ataskaitą</string>
   <string name="init_dbonsdcard_title">Duomenų bazės vieta</string>
   <string name="init_dbonsdcard_note">Jūs galite c:geo duomenų bazę saugoti išorinėje atmintyje. Tokiu būdu sutaupysite vidinės atminties, bet sumažės veikimo sparta ir c:geo neveiks, jei nebus SD kortelės.</string>
@@ -582,6 +590,7 @@
   <string name="init_low_power_note">Energijos taupymo režimas išvengia GPS ir giroskopo naudojimo kai labai tiksli vieta nėra būtina, bet truputėli pailgina vietos nustatymo laiką.</string>
   <string name="init_low_power_mode">Aktyvinti energijos taupymo režimą</string>
   <string name="init_force_orientation_sensor_title">Krypties jutiklis</string>
+  <string name="init_force_orientation_sensor_note">Kai kuriuose įrenginiuose, reguliarios rotacijos vektorių jutiklis elgiasi netvarkingai, duoda klaidingą kryptį. Šiuo atveju, alternatyvus jutiklis (orientacijos jutiklis) gali pateikti geresnius rezultatus.</string>
   <string name="init_force_orientation_sensor">Priverstinai naudoti krypties daviklį</string>
   <string name="init_create_memory_dump">Sukurti atminties turinio failą</string>
   <string name="init_memory_dump">Atminties turinio failas</string>
@@ -615,6 +624,7 @@
   <string name="feature_search_owner">Paieška pagal savininką</string>
   <string name="feature_search_finder">Paieška pagal radėją</string>
   <string name="init_experimental_title">Eksperimentinės funkcijos</string>
+  <string name="init_newmap">Naudoti naują žemėlapį kaip numatytąjį (live/lists)</string>
   <!-- map sources -->
   <string name="map_source_google_map">Google: Žemėlapis</string>
   <string name="map_source_google_satellite">Google: Palydovas</string>
@@ -634,6 +644,8 @@
   <!-- auth generic -->
   <string name="auth_twitter">Twitter</string>
   <string name="auth_authorize">Leisti c:geo prisijungti</string>
+  <string name="auth_check">Patikrinti prisijungimo duomenis</string>
+  <string name="auth_check_again">Patikrinti prisijungimo duomenis vėl</string>
   <string name="auth_start">Pradėti registraciją</string>
   <string name="auth_again">Pradėti iš naujo</string>
   <string name="auth_register">Sukurti paskyrą</string>
@@ -643,11 +655,15 @@
   <string name="auth_dialog_waiting">Laukiama %s…</string>
   <string name="auth_explain_short">Šie veiksmai <b>c:geo</b> programai leis naudotis %s.</string>
   <string name="auth_explain_long">Registracija bus pradėta paspaudus mygtuką \"Pradėti registraciją\". Šis procesas naršyklėje atvers %s puslapį. Prisijunkite prie savo paskyros ir leiskite <b>c:geo</b> ja naudotis.</string>
+  <string name="auth_forget_title">Pamiršote prisijungimo duomenis?</string>
+  <string name="auth_forget_message">Jūs būsite atjungti nuo šios paslaugos. Šiuo metu įrašyti prisijungimo duomenys bus prarasti.</string>
   <!-- auth credentials -->
   <string name="auth_credentials_explain_short">Šie veiksmai <b>c:geo</b> programai leis naudotis %s.</string>
+  <string name="auth_credentials_explain_long">Užpildžius jūsų asmeninę informaciją ir paspaudus mygtuką \"Patikrinti prisijungimo duomenis\" bus pradėtas procesas. Šis procesas prisijungs prie %s ir patvirtins jūsų kredencialus. Tai viskas.</string>
   <!-- auth token -->
   <string name="auth_token_register">Sukurti paskyrą</string>
   <string name="auth_token_explain_short">Šie veiksmai <b>c:geo</b> programai leis naudotis %s.</string>
+  <string name="auth_token_explain_long">Užpildžius jūsų asmeninę informaciją ir paspaudus mygtuką \"Leisti c:geo\" bus pradėtas procesas. Šis procesas prisijungs prie %s ir patvirtins jūsų kredencialus. Tai viskas.</string>
   <!-- auth Twitter -->
   <string name="auth_dialog_completed_twitter">c:geo priregistruota ir jai leidžiama rašyti Twitter paskyroje.</string>
   <!-- auth opencaching -->
@@ -738,7 +754,7 @@
   <string name="cache_waypoints_add">Pridėti papildomą tašką</string>
   <string name="cache_hint">Užuomina</string>
   <string name="cache_hint_not_available">Užuomina nepateikiama</string>
-  <string name="cache_logs">Įrašai</string>
+  <string name="cache_logs">Įrašų žurnalas</string>
   <string name="cache_logs_friends_and_own">Draugų/savi įrašai</string>
   <string name="cache_dialog_loading_details">Įkeliama slėptuvės informacija…</string>
   <string name="cache_dialog_loading_details_status_loadpage">Įkeliamas puslapis</string>
@@ -800,6 +816,7 @@
   <string name="cache_menu_checker">Atidaryti Geochecker</string>
   <string name="cache_menu_ignore">Ignoruoti slėptuvę</string>
   <string name="ignore_confirm_title">Būk atsargus</string>
+  <string name="ignore_confirm_message">Ignoruota slėptuvė reiškia, kad ši slėptuvė niekada neatsiras įkeliant duomenis iš geocaching.com. Jūs galėsite pamatyti slėptuvę tik nebeignoruojant svetainėje.</string>
   <string name="cache_status">Būsena</string>
   <string name="cache_status_offline_log">Išsaugotas įrašas</string>
   <string name="cache_status_found">Rasta</string>
@@ -855,7 +872,9 @@
   <string name="simple_dir_chooser_invalid_path">Neteisingas kelias</string>
   <!-- gpx -->
   <string name="gpx_import_loading_caches">Slėptuvės įkeliamos iš .gpx failo</string>
+  <string name="gpx_import_loading_caches_with_filename">Įkeliamos slėptuvės nuo %1$s</string>
   <string name="gpx_import_loading_waypoints">Įkeliamas papildomų taškų failas</string>
+  <string name="gpx_import_loading_waypoints_with_filename">Įkeliami papildomi taškai nuo %1$s</string>
   <string name="gpx_import_store_static_maps">Išsaugomi statiniai žemėlapiai</string>
   <string name="gpx_import_caches_imported">slėptuvės importuotos</string>
   <string name="gpx_import_caches_imported_with_filename">%1$d slėptuvės importuotos iš %2$s</string>
@@ -1403,6 +1422,7 @@
   <string name="trackable_title_log_without_geocode">Nenurodytas geokodas</string>
   <string name="trackable_log_without_geocode">Jūs ruošiatės siųsti įrašą be Geo kodo. Reikia nurodyti Geo kodą. Ar norite pridėti jį dabar?</string>
   <string name="do_not_ask_me_again">Neklausti manęs dar kartą</string>
+  <string name="geokrety_parsing_failed">Nepavyko išnagrinėti GeoKrety atsakymo.</string>
   <string name="settings_map_direction">Rodyti kryptį</string>
   <string name="settings_summary_map_direction">Rodyti krypties linija į tikslą</string>
   <string name="map_direction">Rodyti kryptį</string>

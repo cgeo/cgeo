@@ -126,6 +126,7 @@
   <string name="log_hint_log_password">Írd be a láda (log) jelszavát</string>
   <string name="log_oc_team_comment">OC csapat kommentje</string>
   <string name="log_your_saved_log">Offline logod</string>
+  <string name="log_empty_logbook">A ládát még nem logolták.</string>
   <string-array name="log_image_scales">
     <item>Nincs átméretezés</item>
     <item>512 px</item>
@@ -434,6 +435,7 @@
   <string name="settings_reauthorize">A c:geo újrahitelesítése</string>
   <string name="settings_gc_description">A c:geo hitelesítése a geocaching.com-on ládák kereséséhez.</string>
   <string name="settings_ec_description">A c:geo hitelesítése az extremcaching.com-on ládák kereséséhez és találataid lekéréséhez, szűréséhez.</string>
+  <string name="settings_su_description">A c:geo hitelesítése a geocaching.su-n ládák kereséséhez.</string>
   <string name="init_oc">Opencaching.de</string>
   <string name="settings_activate_oc">Aktiválás</string>
   <string name="init_summary_oc_de">Ládák letöltése az opencaching.de-ről</string>
@@ -570,6 +572,7 @@
   <string name="init_default_navigation_tool_2_description">Itt választhatod ki a másodlagos navigációs eszközödet. A láda neve melletti navigációs ikon hosszabb megnyomásával aktiválhatod.</string>
   <string name="init_navigation_menu_description">Itt adhatod meg, hogy mely navigációs lehetőségek jelenjenek meg egy láda vagy útpont számára a navigációs menüben. A letiltott alkalmazások nincsenek telepítve.</string>
   <string name="init_debug_title">Hibakeresési információ</string>
+  <string name="init_debug_note">A c:geo nagy mennyiségű hibakeresési információt képes generálni. Ennek bekapcsolása azonban hatással lehet a c:geo stabil működésére. Ez csak akkor ajánlott, ha a fejlesztők logok küldését kérték.</string>
   <string name="init_debug">Hibakeresési napló aktiválása</string>
   <string name="init_dbonsdcard_title">Adatbázis helye</string>
   <string name="init_dbonsdcard_note">Az adatbázist elmentheted a külső tárolódra is. Ezzel belső memóriát takaríthatsz meg, de csökkenhet a teljesítmény és a c:geo nem fog működni, ha az SD kártyád nem hozzáférhető.</string>
