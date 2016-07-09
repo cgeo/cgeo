@@ -226,7 +226,7 @@ dependencies {
  * cgeo library dependencies. add gradle plugin related dependencies further down below
  */
     // network access
-    compile 'com.squareup.okhttp3:okhttp:3.3.1'
+    compile 'com.squareup.okhttp3:okhttp:3.4.0'
 
     // Maps.ME integration
     compile project(":mapswithme-api")
@@ -274,9 +274,9 @@ dependencies {
     compile 'io.reactivex:rxandroid:0.25.0'
 
     // Jackson XML processing
-    compile 'com.fasterxml.jackson.core:jackson-core:2.7.5'
-    compile 'com.fasterxml.jackson.core:jackson-databind:2.7.5'
-    compile 'com.fasterxml.jackson.core:jackson-annotations:2.7.5'
+    compile 'com.fasterxml.jackson.core:jackson-core:2.8.0'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.8.0'
+    compile 'com.fasterxml.jackson.core:jackson-annotations:2.8.0'
 
     // Zxing barcode reader integration
     compile 'com.google.zxing:android-integration:3.2.1'

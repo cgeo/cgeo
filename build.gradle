@@ -62,7 +62,7 @@ buildscript {
 		// these dependencies are used by gradle plugins, not by our projects
 		
 		// check for updates of gradle plugin dependencies
-		classpath 'com.github.ben-manes:gradle-versions-plugin:0.12.0'
+		classpath 'com.github.ben-manes:gradle-versions-plugin:0.13.0'
 	
 		// Android gradle plugin
         classpath 'com.android.tools.build:gradle:2.1.2'
@@ -77,7 +77,7 @@ buildscript {
 		classpath 'com.google.gms:google-services:2.1.0'
 
 		// monitor our application method limit
-		classpath 'com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.5.4'
+		classpath 'com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.5.5'
 	}
 }
 
