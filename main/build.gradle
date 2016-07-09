@@ -242,10 +242,11 @@ dependencies {
     // Mapsforge integration
     compile files('libs/mapsforge-map-0.3.0-jar-with-dependencies.jar')
     compile 'com.caverock:androidsvg:1.2.2-beta-1'
-    compile 'org.mapsforge:mapsforge-core:0.6.1'
-    compile 'org.mapsforge:mapsforge-map:0.6.1'
-    compile 'org.mapsforge:mapsforge-map-android:0.6.1'
-    compile 'org.mapsforge:mapsforge-map-reader:0.6.1'
+    def mapsforgeVersion = '0.6.1'
+    compile "org.mapsforge:mapsforge-core:$mapsforgeVersion"
+    compile "org.mapsforge:mapsforge-map:$mapsforgeVersion"
+    compile "org.mapsforge:mapsforge-map-android:$mapsforgeVersion"
+    compile "org.mapsforge:mapsforge-map-reader:$mapsforgeVersion"
     configurations {
         all*.exclude group: 'net.sf.kxml', module: 'kxml2' // duplicate XmlPullParser class
     }
@@ -274,9 +275,10 @@ dependencies {
     compile 'io.reactivex:rxandroid:0.25.0'
 
     // Jackson XML processing
-    compile 'com.fasterxml.jackson.core:jackson-core:2.8.0'
-    compile 'com.fasterxml.jackson.core:jackson-databind:2.8.0'
-    compile 'com.fasterxml.jackson.core:jackson-annotations:2.8.0'
+    def jacksonVersion = '2.8.0'
+    compile "com.fasterxml.jackson.core:jackson-core:$jacksonVersion"
+    compile "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
+    compile "com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion"
 
     // Zxing barcode reader integration
     compile 'com.google.zxing:android-integration:3.2.1'
@@ -299,8 +301,9 @@ dependencies {
     testCompile 'junit:junit:4.12'
 
     // AssertJ for testing, needed both for local unit tests and Android instrumentation tests
-    testCompile 'org.assertj:assertj-core:1.7.1'
-    androidTestCompile 'org.assertj:assertj-core:1.7.1'
+    def assertJVersion = '1.7.1'
+    testCompile "org.assertj:assertj-core:$assertJVersion"
+    androidTestCompile "org.assertj:assertj-core:$assertJVersion"
 
     // Espresso TODO: disabled because of causing proguard errors en masse (due to including hamcrest and what else as own dependencies)
 //    androidTestCompile 'com.jakewharton.espresso:espresso:1.1-r3'
@@ -308,14 +311,16 @@ dependencies {
 /*
  * AndroidAnnotations, https://github.com/excilys/androidannotations/wiki/building-project-gradle
  */
-    apt 'org.androidannotations:androidannotations:4.0.0'
-    compile 'org.androidannotations:androidannotations-api:4.0.0'
+    def androidAnnotationsVersion = '4.0.0'
+    apt "org.androidannotations:androidannotations:$androidAnnotationsVersion"
+    compile "org.androidannotations:androidannotations-api:$androidAnnotationsVersion"
 
 /*
  * ButterKnife view injection, https://github.com/JakeWharton/butterknife
  */
-    compile 'com.jakewharton:butterknife:8.1.0'
-    apt 'com.jakewharton:butterknife-compiler:8.1.0'
+    def butterKnifeVersion = '8.1.0'
+    compile "com.jakewharton:butterknife:$butterKnifeVersion"
+    apt "com.jakewharton:butterknife-compiler:$butterKnifeVersion"
 /*
  * Jsoup HTML parsing
  */
@@ -329,6 +334,12 @@ dependencies {
     
     // reliable process restart
     compile 'com.jakewharton:process-phoenix:1.0.2'
+
+    // memory leak detection
+    def leakCanaryVersion = '1.4-beta2'
+    debugCompile "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion"
+    releaseCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
+    testCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
 }
 
 /*

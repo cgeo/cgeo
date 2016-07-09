@@ -99,6 +99,9 @@ allprojects {
 						if (selection.candidate.group == 'com.google.auto.service') {
 							rejected = false
 						}
+						if (selection.candidate.group == 'com.squareup.leakcanary') {
+							rejected = false
+						}
 						if (rejected) {
 							selection.reject('Release candidate')
 						}
