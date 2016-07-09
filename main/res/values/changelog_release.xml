@@ -2,6 +2,10 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
+    <b>next bugfix release</b>\n
+    · Fix: Maps.me API change led to caches not opening from that app\n
+    \n
+    \n
     <b>2016.06.09:</b>\n
     · Fix: Lab caches imported from GPX may overwrite other lab caches\n
     · Fix: Only first log image was shown in logbook\n

@@ -1,15 +1,16 @@
 package cgeo.geocaching.apps.cachelist;
 
 import cgeo.geocaching.CacheDetailActivity;
-import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.apps.AbstractApp;
+import cgeo.geocaching.models.Geocache;
 
 import com.mapswithme.maps.api.MWMPoint;
 import com.mapswithme.maps.api.MWMResponse;
 import com.mapswithme.maps.api.MapsWithMeApi;
 
+import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
@@ -52,7 +53,12 @@ public class MapsMeCacheListApp extends AbstractApp implements CacheListApp {
         final MWMResponse mwmResponse = MWMResponse.extractFromIntent(context, intent);
         final MWMPoint point = mwmResponse.getPoint();
         if (point != null) {
-            return point.getId();
+            final String id = point.getId();
+            // for unknown reason the ID is now actually a URI in recent maps.me versions
+            if (StringUtils.contains(id, "&id=")) {
+                return StringUtils.substringAfter(id, "&id=");
+            }
+            return id;
         }
         return null;
     }
