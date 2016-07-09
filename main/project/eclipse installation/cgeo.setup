@@ -230,19 +230,15 @@
       <requirement
           name="org.eclipse.mylyn.tasks.ui"/>
       <requirement
-          name="org.eclipse.mylyn.ide_feature.feature.group"
-          optional="true"/>
+          name="org.eclipse.mylyn.ide_feature.feature.group"/>
       <requirement
-          name="org.eclipse.mylyn.java_feature.feature.group"
-          optional="true"/>
+          name="org.eclipse.mylyn.java_feature.feature.group"/>
       <requirement
-          name="org.eclipse.mylyn.team_feature.feature.group"
-          optional="true"/>
+          name="org.eclipse.mylyn.team_feature.feature.group"/>
       <requirement
           name="org.eclipse.mylyn.context_feature.feature.group"/>
       <requirement
-          name="org.eclipse.mylyn.git.feature.group"
-          optional="true"/>
+          name="org.eclipse.mylyn.git.feature.group"/>
       <requirement
           name="org.eclipse.mylyn.builds.feature.group"/>
       <requirement
@@ -282,8 +278,7 @@
         label="Marketplace"
         licenseConfirmationDisabled="true">
       <requirement
-          name="org.eclipse.epp.mpc.feature.group"
-          optional="true"/>
+          name="org.eclipse.epp.mpc.feature.group"/>
       <repository
           url="http://download.eclipse.org/releases/neon/"/>
       <description>Eclipse market place for manual installation of additional plugins</description>
@@ -293,8 +288,7 @@
         label="Project Usus"
         licenseConfirmationDisabled="true">
       <requirement
-          name="org.projectusus.feature.group"
-          optional="true"/>
+          name="org.projectusus.feature.group"/>
       <repository
           url="http://www.projectusus.org/usus-plugins/updates/"/>
       <description>Project Usus has a before and after (refactoring) comparison of dependency graphs.</description>
