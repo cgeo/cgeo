@@ -137,6 +137,7 @@ public class MwmRequest
 
         appendIfNotNull(urlBuilder, "n", point.getName());
         appendIfNotNull(urlBuilder, "id", point.getId());
+        appendIfNotNull(urlBuilder, "s", point.getStyleForUrl());
       }
     }
 

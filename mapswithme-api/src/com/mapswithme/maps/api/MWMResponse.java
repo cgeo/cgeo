@@ -71,7 +71,7 @@ public class MWMResponse
     return response;
   }
 
-  private static final double INVALID_LL =  Double.MIN_VALUE;
+  private final static double INVALID_LL =  Double.MIN_VALUE;
 
   private MWMResponse() {}
 }
