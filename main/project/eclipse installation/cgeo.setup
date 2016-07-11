@@ -148,8 +148,6 @@
       <requirement
           name="org.eclipse.jdt.feature.group"/>
       <repository
-          url="https://eclipse.org/jdt/core/update-site/"/>
-      <repository
           url="http://download.eclipse.org/releases/neon/"/>
       <description></description>
     </setupTask>
