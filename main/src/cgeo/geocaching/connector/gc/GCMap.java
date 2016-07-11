@@ -322,7 +322,7 @@ public class GCMap {
                                 } else {
                                     final SearchResult search = parseMapJSON(data, tile, validBitmap ? bitmap : null, strategy);
                                     if (CollectionUtils.isEmpty(search.getGeocodes())) {
-                                        Log.e("GCMap.searchByViewport: No cache parsed for viewport " + viewport);
+                                        Log.w("GCMap.searchByViewport: No cache parsed for viewport " + viewport);
                                     } else {
                                         synchronized (searchResult) {
                                             searchResult.addSearchResult(search);
