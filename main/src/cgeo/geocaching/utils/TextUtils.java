@@ -219,4 +219,15 @@ public final class TextUtils {
         }
         return source;
     }
+
+    /**
+     * Convert a potentially HTML string into a plain-text one. If the string does not contain HTML markup,
+     * it is returned unchanged.
+     *
+     * @param html a string containing either HTML or plain text
+     * @return a string without any HTML markup
+     */
+    public static String stripHtml(final String html) {
+        return containsHtml(html) ? trimSpanned(Html.fromHtml(html)).toString() : html;
+    }
 }

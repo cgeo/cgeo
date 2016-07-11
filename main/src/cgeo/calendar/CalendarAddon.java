@@ -6,6 +6,7 @@ import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.ProcessUtils;
+import cgeo.geocaching.utils.TextUtils;
 
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
@@ -67,7 +68,7 @@ public class CalendarAddon {
                 ICalendar.PARAM_URL, StringUtils.defaultString(cache.getUrl()),
                 ICalendar.PARAM_COORDS, cache.getCoords() == null ? "" : cache.getCoords().format(GeopointFormatter.Format.LAT_LON_DECMINUTE_RAW),
                 ICalendar.PARAM_LOCATION, StringUtils.defaultString(cache.getLocation()),
-                ICalendar.PARAM_SHORT_DESC, StringUtils.defaultString(cache.getShortDescription()),
+                ICalendar.PARAM_SHORT_DESC, TextUtils.stripHtml(StringUtils.defaultString(cache.getShortDescription())),
                 ICalendar.PARAM_START_TIME_MINUTES, startTime
                 );
 
