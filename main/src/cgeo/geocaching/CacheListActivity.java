@@ -930,11 +930,17 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     private void moveCachesToOtherList(final Collection<Geocache> caches) {
         new MoveToListCommand(this, caches, listId) {
+            private LastPositionHelper lastPositionHelper;
+
+            @Override
+            protected void doCommand() {
+                lastPositionHelper = new LastPositionHelper(CacheListActivity.this);
+                super.doCommand();
+            }
 
             @Override
             protected void onFinished() {
-                adapter.setSelectMode(false);
-                refreshCurrentList(AfterLoadAction.CHECK_IF_EMPTY);
+                lastPositionHelper.refreshListAtLastPosition();
             }
 
         }.execute();
@@ -1318,22 +1324,17 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         handler.unsubscribeIfCancelled(loaded.subscribe());
     }
 
-    private static final class DeleteCachesFromListCommand extends AbstractCachesCommand {
-
+    private static final class LastPositionHelper {
         private final WeakReference<CacheListActivity> activityRef;
         private final int lastListPosition;
-        private int listId = StoredList.TEMPORARY_LIST.id;
-        private Map<String, Set<Integer>> oldCachesLists = new HashMap<>();
 
-        DeleteCachesFromListCommand(@NonNull final CacheListActivity context, final Collection<Geocache> caches, final int listId) {
-            super(context, caches, R.string.command_delete_caches_progress);
-            lastListPosition = context.getListView().getFirstVisiblePosition();
-            activityRef = new WeakReference<>(context);
-            this.listId = listId;
+        LastPositionHelper(@NonNull final CacheListActivity context) {
+            super();
+            this.lastListPosition = context.getListView().getFirstVisiblePosition();
+            this.activityRef = new WeakReference<>(context);
         }
 
-        @Override
-        public void onFinished() {
+        public void refreshListAtLastPosition() {
             final CacheListActivity activity = activityRef.get();
             if (activity != null) {
                 activity.adapter.setSelectMode(false);
@@ -1342,11 +1343,29 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 activity.getListView().setSelection(lastListPosition);
             }
         }
+    }
+
+    private static final class DeleteCachesFromListCommand extends AbstractCachesCommand {
+
+        private final LastPositionHelper lastPositionHelper;
+        private final int listId;
+        private final Map<String, Set<Integer>> oldCachesLists = new HashMap<>();
+
+        DeleteCachesFromListCommand(@NonNull final CacheListActivity context, final Collection<Geocache> caches, final int listId) {
+            super(context, caches, R.string.command_delete_caches_progress);
+            this.lastPositionHelper = new LastPositionHelper(context);
+            this.listId = listId;
+        }
+
+        @Override
+        public void onFinished() {
+            lastPositionHelper.refreshListAtLastPosition();
+        }
 
         @Override
         protected void doCommand() {
             if (listId == PseudoList.ALL_LIST.id) {
-                oldCachesLists = DataStore.markDropped(getCaches());
+                oldCachesLists.putAll(DataStore.markDropped(getCaches()));
             } else {
                 DataStore.removeFromList(getCaches(), listId);
             }
