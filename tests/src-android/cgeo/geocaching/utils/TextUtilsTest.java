@@ -4,6 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import cgeo.geocaching.connector.gc.GCConstants;
 
+import junit.framework.Assert;
+import junit.framework.TestCase;
 import org.apache.commons.io.IOUtils;
 
 import android.text.SpannableString;
@@ -13,9 +15,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.regex.Pattern;
-
-import junit.framework.Assert;
-import junit.framework.TestCase;
 
 public class TextUtilsTest extends TestCase {
 
@@ -75,5 +74,10 @@ public class TextUtilsTest extends TestCase {
 
     private static void assertTrimSpanned(final String input, final String expected) {
         assertThat(TextUtils.trimSpanned(new SpannableString(input)).toString()).isEqualTo(new SpannableString(expected).toString());
+    }
+
+    public static void testStripHtml() {
+        assertThat(TextUtils.stripHtml("foo bar")).isEqualTo("foo bar");
+        assertThat(TextUtils.stripHtml("<div><span>foo</span> bar</div>")).isEqualTo("foo bar");
     }
 }
