@@ -339,6 +339,8 @@ dependencies {
     def leakCanaryVersion = '1.4-beta2'
     debugCompile "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion"
     releaseCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
+    nightlyCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
+    rcCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
     testCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
 }
 
