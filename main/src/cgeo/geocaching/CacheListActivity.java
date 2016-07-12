@@ -67,14 +67,6 @@ import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.Log;
 
-import com.github.amlcurran.showcaseview.targets.ActionViewTarget;
-import com.github.amlcurran.showcaseview.targets.ActionViewTarget.Type;
-
-import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -117,10 +109,17 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.Vector;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import butterknife.ButterKnife;
+import com.github.amlcurran.showcaseview.targets.ActionViewTarget;
+import com.github.amlcurran.showcaseview.targets.ActionViewTarget.Type;
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import rx.Observable;
 import rx.Observable.OnSubscribe;
 import rx.Subscriber;
@@ -1238,9 +1237,9 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     private void removeFromHistory() {
         final List<Geocache> caches = adapter.getCheckedOrAllCaches();
-        final String[] geocodes = new String[caches.size()];
-        for (int i = 0; i < geocodes.length; i++) {
-            geocodes[i] = caches.get(i).getGeocode();
+        final Vector<String> geocodes = new Vector<>(caches.size());
+        for (final Geocache cache : caches) {
+            geocodes.add(cache.getGeocode());
         }
         DataStore.clearVisitDate(geocodes);
         refreshCurrentList();

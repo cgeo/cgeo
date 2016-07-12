@@ -32,13 +32,6 @@ import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.Version;
 
-import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.collections4.MapUtils;
-import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
-
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
@@ -57,7 +50,6 @@ import android.database.sqlite.SQLiteStatement;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -76,6 +68,12 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.collections4.MapUtils;
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import rx.Observable;
 import rx.Observable.OnSubscribe;
 import rx.Subscriber;
@@ -2690,7 +2688,7 @@ public class DataStore {
         return false;
     }
 
-    private static void setVisitDate(final List<String> geocodes, final long visitedDate) {
+    private static void setVisitDate(final Collection<String> geocodes, final long visitedDate) {
         if (geocodes.isEmpty()) {
             return;
         }
@@ -3279,8 +3277,8 @@ public class DataStore {
         return getBounds(Collections.singleton(geocode));
     }
 
-    public static void clearVisitDate(final String[] selected) {
-        setVisitDate(Arrays.asList(selected), 0);
+    public static void clearVisitDate(final Collection<String> selected) {
+        setVisitDate(selected, 0);
     }
 
     @NonNull
