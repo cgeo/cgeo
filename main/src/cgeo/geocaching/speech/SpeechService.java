@@ -20,6 +20,7 @@ import android.speech.tts.TextToSpeech;
 import android.speech.tts.TextToSpeech.Engine;
 import android.speech.tts.TextToSpeech.OnInitListener;
 
+import org.eclipse.jdt.annotation.Nullable;
 import rx.Subscription;
 import rx.subscriptions.Subscriptions;
 
@@ -31,8 +32,9 @@ public class SpeechService extends Service implements OnInitListener {
 
     private static final int SPEECH_MINPAUSE_SECONDS = 5;
     private static final int SPEECH_MAXPAUSE_SECONDS = 30;
+    @Nullable
     private static Activity startingActivity;
-    private static boolean isRunning = false;
+    private static final Object startingActivityLock = new Object();
     /**
      * Text to speech API of Android
      */
@@ -44,7 +46,7 @@ public class SpeechService extends Service implements OnInitListener {
     protected float direction;
     protected Geopoint position;
 
-    final GeoDirHandler geoDirHandler = new GeoDirHandler() {
+    private final GeoDirHandler geoDirHandler = new GeoDirHandler() {
 
         @Override
         public void updateGeoDir(@NonNull final GeoData newGeo, final float newDirection) {
@@ -132,19 +134,31 @@ public class SpeechService extends Service implements OnInitListener {
         final int switchLocale = tts.setLanguage(Settings.getApplicationLocale());
 
         if (switchLocale == TextToSpeech.LANG_MISSING_DATA) {
-            startingActivity.startActivity(new Intent(Engine.ACTION_INSTALL_TTS_DATA));
+            synchronized (startingActivityLock) {
+                if (startingActivity != null) {
+                    startingActivity.startActivity(new Intent(Engine.ACTION_INSTALL_TTS_DATA));
+                }
+            }
             return;
         }
         if (switchLocale == TextToSpeech.LANG_NOT_SUPPORTED) {
             Log.e("Current language not supported by text to speech.");
-            ActivityMixin.showToast(startingActivity, R.string.err_tts_lang_not_supported);
+            synchronized (startingActivityLock) {
+                if (startingActivity != null) {
+                    ActivityMixin.showToast(startingActivity, R.string.err_tts_lang_not_supported);
+                }
+            }
             return;
         }
 
         initialized = true;
 
-        initSubscription = geoDirHandler.start(GeoDirHandler.UPDATE_GEODIR);
-        ActivityMixin.showShortToast(startingActivity, startingActivity.getResources().getString(R.string.tts_started));
+        synchronized (startingActivityLock) {
+            if (startingActivity != null) {
+                initSubscription = geoDirHandler.start(GeoDirHandler.UPDATE_GEODIR);
+                ActivityMixin.showShortToast(startingActivity, startingActivity.getString(R.string.tts_started));
+            }
+        }
     }
 
     @Override
@@ -164,22 +178,25 @@ public class SpeechService extends Service implements OnInitListener {
     }
 
     public static void startService(final Activity activity, final Geopoint dstCoords) {
-        isRunning = true;
-        startingActivity = activity;
+        synchronized (startingActivityLock) {
+            startingActivity = activity;
+        }
         final Intent talkingService = new Intent(activity, SpeechService.class);
         talkingService.putExtra(Intents.EXTRA_COORDS, dstCoords);
         activity.startService(talkingService);
     }
 
     public static void stopService(final Activity activity) {
-        isRunning = false;
-        if (activity.stopService(new Intent(activity, SpeechService.class))) {
-            ActivityMixin.showShortToast(activity, activity.getResources().getString(R.string.tts_stopped));
+        synchronized (startingActivityLock) {
+            if (activity.stopService(new Intent(activity, SpeechService.class))) {
+                ActivityMixin.showShortToast(activity, activity.getResources().getString(R.string.tts_stopped));
+            }
+            startingActivity = null;
         }
     }
 
     public static boolean isRunning() {
-        return isRunning;
+        return startingActivity != null;
     }
 
 }
