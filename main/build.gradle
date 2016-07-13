@@ -324,7 +324,7 @@ dependencies {
 /*
  * Jsoup HTML parsing
  */
-    compile 'org.jsoup:jsoup:1.9.1'
+    compile 'org.jsoup:jsoup:1.9.2'
 
     // EXIF location extraction from images
     compile 'com.drewnoakes:metadata-extractor:2.9.1'
