@@ -1334,33 +1334,18 @@ public final class GCParser {
 
         final String logInfo = log.replace("\n", "\r\n"); // windows' eol
 
-        final Calendar currentDate = Calendar.getInstance();
         final Parameters params = new Parameters(
                 "__EVENTTARGET", "",
                 "__EVENTARGUMENT", "",
                 "__LASTFOCUS", "",
                 "ctl00$ContentBody$LogBookPanel1$ddLogType", Integer.toString(logType.id),
-                "ctl00$ContentBody$LogBookPanel1$tbCode", trackingCode);
-        GCLogin.putViewstates(params, viewstates);
-        if (currentDate.get(Calendar.YEAR) == year && (currentDate.get(Calendar.MONTH) + 1) == month && currentDate.get(Calendar.DATE) == day) {
-            params.put("ctl00$ContentBody$LogBookPanel1$DateTimeLogged", "");
-            params.put("ctl00$ContentBody$LogBookPanel1$uxDateVisited", "");
-        } else {
-            params.put("ctl00$ContentBody$LogBookPanel1$DateTimeLogged", Integer.toString(month) + "/" + Integer.toString(day) + "/" + Integer.toString(year));
-            params.put("ctl00$ContentBody$LogBookPanel1$uxDateVisited", GCLogin.formatGcCustomDate(year, month, day));
-        }
-        params.put(
-                "ctl00$ContentBody$LogBookPanel1$DateTimeLogged$Day", Integer.toString(day),
-                "ctl00$ContentBody$LogBookPanel1$DateTimeLogged$Month", Integer.toString(month),
-                "ctl00$ContentBody$LogBookPanel1$DateTimeLogged$Year", Integer.toString(year),
-                "ctl00$ContentBody$LogBookPanel1$uxDateVisited$Day", Integer.toString(day),
-                "ctl00$ContentBody$LogBookPanel1$uxDateVisited$Month", Integer.toString(month),
-                "ctl00$ContentBody$LogBookPanel1$uxDateVisited$Year", Integer.toString(year),
+                "ctl00$ContentBody$LogBookPanel1$tbCode", trackingCode,
+                "ctl00$ContentBody$LogBookPanel1$DateTimeLogged", Integer.toString(month) + "/" + Integer.toString(day) + "/" + Integer.toString(year),
+                "ctl00$ContentBody$LogBookPanel1$uxDateVisited", GCLogin.formatGcCustomDate(year, month, day),
                 "ctl00$ContentBody$LogBookPanel1$uxLogInfo", logInfo,
                 "ctl00$ContentBody$LogBookPanel1$btnSubmitLog", "Submit Log Entry",
-                "ctl00$ContentBody$uxVistOtherTrackableTB", "",
-                "ctl00$ContentBody$LogBookPanel1$LogButton", "Submit Log Entry",
-                "ctl00$ContentBody$uxVistOtherListingGC", "");
+                "ctl00$ContentBody$uxVistOtherTrackableTB", "");
+        GCLogin.putViewstates(params, viewstates);
 
         final String uri = new Uri.Builder().scheme("https").authority("www.geocaching.com").path("/track/log.aspx").encodedQuery("wid=" + tbid).build().toString();
         final String page = GCLogin.getInstance().postRequestLogged(uri, params);
