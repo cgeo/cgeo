@@ -69,6 +69,7 @@ public class ImagesActivity extends AbstractActionBarActivity {
     public void onStop() {
         // Reclaim native memory faster than the finalizers would
         subscription.unsubscribe();
+        subscription = null;
         super.onStop();
     }
 

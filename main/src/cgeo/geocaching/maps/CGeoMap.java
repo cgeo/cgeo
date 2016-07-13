@@ -620,6 +620,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
     @Override
     public void onPause() {
         resumeSubscription.unsubscribe();
+        resumeSubscription = Subscriptions.empty();
         savePrefs();
 
         mapView.destroyDrawingCache();

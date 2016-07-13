@@ -602,6 +602,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     @Override
     public void onPause() {
         resumeSubscription.unsubscribe();
+        resumeSubscription = null;
         super.onPause();
     }
 
