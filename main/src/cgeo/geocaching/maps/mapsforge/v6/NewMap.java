@@ -649,6 +649,7 @@ public class NewMap extends AbstractActionBarActivity {
     private void terminateLayers() {
 
         this.resumeSubscription.unsubscribe();
+        this.resumeSubscription = Subscriptions.empty();
 
         this.caches.onDestroy();
         this.caches = null;

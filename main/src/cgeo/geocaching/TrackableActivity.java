@@ -210,6 +210,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
     @Override
     public void onPause() {
         geoDataSubscription.unsubscribe();
+        geoDataSubscription = Subscriptions.empty();
         super.onPause();
     }
 
@@ -675,6 +676,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
     @Override
     protected void onDestroy() {
         createSubscriptions.unsubscribe();
+        createSubscriptions = null;
         super.onDestroy();
     }
 

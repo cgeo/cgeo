@@ -125,6 +125,7 @@ public class CompassView extends View {
     @Override
     public void onDetachedFromWindow() {
         periodicUpdate.unsubscribe();
+        periodicUpdate = Subscriptions.empty();
 
         super.onDetachedFromWindow();
 

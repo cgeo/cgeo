@@ -92,6 +92,7 @@ public class StatusFragment extends Fragment {
     @Override
     public void onDestroyView() {
         statusSubscription.unsubscribe();
+        statusSubscription = Subscriptions.empty();
         super.onDestroyView();
         unbinder.unbind();
     }

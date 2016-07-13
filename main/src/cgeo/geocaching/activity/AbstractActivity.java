@@ -94,6 +94,7 @@ public abstract class AbstractActivity extends ActionBarActivity implements IAbs
     @Override
     public void onPause() {
         resumeSubscription.unsubscribe();
+        resumeSubscription = Subscriptions.empty();
         super.onPause();
     }
 

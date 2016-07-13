@@ -384,6 +384,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         final boolean start;
         if (Settings.useLowPowerMode()) {
             geoDataSubscription.unsubscribe();
+            geoDataSubscription = Subscriptions.empty();
             start = requireGeodata;
         } else {
             start = initial;
@@ -414,12 +415,14 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     @Override
     public void onPause() {
         geoDataSubscription.unsubscribe();
+        geoDataSubscription = Subscriptions.empty();
         super.onPause();
     }
 
     @Override
     public void onDestroy() {
         createSubscriptions.unsubscribe();
+        createSubscriptions = null;
         super.onDestroy();
     }
 

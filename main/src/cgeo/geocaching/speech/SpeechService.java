@@ -115,6 +115,7 @@ public class SpeechService extends Service implements OnInitListener {
     @Override
     public void onDestroy() {
         initSubscription.unsubscribe();
+        initSubscription = Subscriptions.empty();
         if (tts != null) {
             tts.stop();
             tts.shutdown();

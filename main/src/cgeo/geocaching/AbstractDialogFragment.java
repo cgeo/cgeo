@@ -194,6 +194,7 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
     @Override
     public void onPause() {
         resumeSubscription.unsubscribe();
+        resumeSubscription = Subscriptions.empty();
         super.onPause();
     }
 
