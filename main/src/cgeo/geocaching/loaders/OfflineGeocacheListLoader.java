@@ -1,12 +1,12 @@
 package cgeo.geocaching.loaders;
 
-import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.storage.DataStore;
 
-import android.content.Context;
+import android.app.Activity;
 import android.os.Bundle;
 
 public class OfflineGeocacheListLoader extends AbstractSearchLoader {
@@ -14,8 +14,8 @@ public class OfflineGeocacheListLoader extends AbstractSearchLoader {
     private final int listId;
     private final Geopoint searchCenter;
 
-    public OfflineGeocacheListLoader(final Context context, final Geopoint searchCenter, final int listId) {
-        super(context);
+    public OfflineGeocacheListLoader(final Activity activity, final Geopoint searchCenter, final int listId) {
+        super(activity);
         this.searchCenter = searchCenter;
         this.listId = listId;
     }

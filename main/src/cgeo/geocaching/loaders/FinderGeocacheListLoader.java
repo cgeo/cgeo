@@ -4,23 +4,23 @@ import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.capability.ISearchByFinder;
 
+import android.app.Activity;
+
 import org.eclipse.jdt.annotation.NonNull;
 import rx.functions.Func1;
-
-import android.content.Context;
 
 public class FinderGeocacheListLoader extends AbstractSearchLoader {
 
     @NonNull private final String username;
 
-    public FinderGeocacheListLoader(final Context context, @NonNull final String username) {
-        super(context);
+    public FinderGeocacheListLoader(final Activity activity, @NonNull final String username) {
+        super(activity);
         this.username = username;
     }
 
     @Override
     public SearchResult runSearch() {
-        return SearchResult.parallelCombineActive(ConnectorFactory.getSearchByFinderConnectors(),
+        return nonEmptyCombineActive(ConnectorFactory.getSearchByFinderConnectors(),
                 new Func1<ISearchByFinder, SearchResult>() {
                     @Override
                     public SearchResult call(final ISearchByFinder connector) {
