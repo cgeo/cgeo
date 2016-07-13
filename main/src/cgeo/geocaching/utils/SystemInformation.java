@@ -58,6 +58,7 @@ public final class SystemInformation {
                 .append("\nHW acceleration: ").append(Settings.useHardwareAcceleration() ? "enabled" : "disabled")
                 .append(" (").append(Settings.useHardwareAcceleration() == Settings.HW_ACCEL_DISABLED_BY_DEFAULT ? "manually changed" : "default state").append(')')
                 .append("\nSystem language: ").append(Locale.getDefault())
+                .append("\nLog date format: ").append(Formatter.formatShortDate(System.currentTimeMillis()))
                 .append("\nDebug mode active: ").append(Settings.isDebug() ? "yes" : "no");
         if (Settings.useEnglish()) {
             body.append(" (cgeo forced to English)");
