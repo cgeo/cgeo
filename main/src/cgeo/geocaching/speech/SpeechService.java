@@ -32,6 +32,7 @@ public class SpeechService extends Service implements OnInitListener {
     private static final int SPEECH_MINPAUSE_SECONDS = 5;
     private static final int SPEECH_MAXPAUSE_SECONDS = 30;
     private static Activity startingActivity;
+    private static final Object startingActivityLock = new Object();
     private static boolean isRunning = false;
     /**
      * Text to speech API of Android
@@ -132,19 +133,31 @@ public class SpeechService extends Service implements OnInitListener {
         final int switchLocale = tts.setLanguage(Settings.getApplicationLocale());
 
         if (switchLocale == TextToSpeech.LANG_MISSING_DATA) {
-            startingActivity.startActivity(new Intent(Engine.ACTION_INSTALL_TTS_DATA));
+            synchronized (startingActivityLock) {
+                if (startingActivity != null) {
+                    startingActivity.startActivity(new Intent(Engine.ACTION_INSTALL_TTS_DATA));
+                }
+            }
             return;
         }
         if (switchLocale == TextToSpeech.LANG_NOT_SUPPORTED) {
             Log.e("Current language not supported by text to speech.");
-            ActivityMixin.showToast(startingActivity, R.string.err_tts_lang_not_supported);
+            synchronized (startingActivityLock) {
+                if (startingActivity != null) {
+                    ActivityMixin.showToast(startingActivity, R.string.err_tts_lang_not_supported);
+                }
+            }
             return;
         }
 
         initialized = true;
 
-        initSubscription = geoDirHandler.start(GeoDirHandler.UPDATE_GEODIR);
-        ActivityMixin.showShortToast(startingActivity, startingActivity.getResources().getString(R.string.tts_started));
+        synchronized (startingActivityLock) {
+            if (startingActivity != null) {
+                initSubscription = geoDirHandler.start(GeoDirHandler.UPDATE_GEODIR);
+                ActivityMixin.showShortToast(startingActivity, startingActivity.getString(R.string.tts_started));
+            }
+        }
     }
 
     @Override
@@ -164,17 +177,22 @@ public class SpeechService extends Service implements OnInitListener {
     }
 
     public static void startService(final Activity activity, final Geopoint dstCoords) {
-        isRunning = true;
-        startingActivity = activity;
+        synchronized (startingActivityLock) {
+            isRunning = true;
+            startingActivity = activity;
+        }
         final Intent talkingService = new Intent(activity, SpeechService.class);
         talkingService.putExtra(Intents.EXTRA_COORDS, dstCoords);
         activity.startService(talkingService);
     }
 
     public static void stopService(final Activity activity) {
-        isRunning = false;
-        if (activity.stopService(new Intent(activity, SpeechService.class))) {
-            ActivityMixin.showShortToast(activity, activity.getResources().getString(R.string.tts_stopped));
+        synchronized (startingActivityLock) {
+            isRunning = false;
+            if (activity.stopService(new Intent(activity, SpeechService.class))) {
+                ActivityMixin.showShortToast(activity, activity.getResources().getString(R.string.tts_stopped));
+            }
+            startingActivity = null;
         }
     }
 
