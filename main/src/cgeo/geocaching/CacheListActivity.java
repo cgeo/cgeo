@@ -1736,27 +1736,27 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                     title = list.title;
                 }
 
-                loader = new OfflineGeocacheListLoader(getBaseContext(), coords, listId);
+                loader = new OfflineGeocacheListLoader(this, coords, listId);
 
                 break;
             case HISTORY:
                 title = res.getString(R.string.caches_history);
                 listId = PseudoList.HISTORY_LIST.id;
-                loader = new HistoryGeocacheListLoader(app, coords);
+                loader = new HistoryGeocacheListLoader(this, coords);
                 break;
             case NEAREST:
                 title = res.getString(R.string.caches_nearby);
-                loader = new CoordsGeocacheListLoader(app, coords);
+                loader = new CoordsGeocacheListLoader(this, coords);
                 break;
             case COORDINATE:
                 title = coords.toString();
-                loader = new CoordsGeocacheListLoader(app, coords);
+                loader = new CoordsGeocacheListLoader(this, coords);
                 break;
             case KEYWORD:
                 final String keyword = extras.getString(Intents.EXTRA_KEYWORD);
                 title = listNameMemento.rememberTerm(keyword);
                 if (keyword != null) {
-                    loader = new KeywordGeocacheListLoader(app, keyword);
+                    loader = new KeywordGeocacheListLoader(this, keyword);
                 }
                 break;
             case ADDRESS:
@@ -1766,20 +1766,20 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 } else {
                     title = coords.toString();
                 }
-                loader = new CoordsGeocacheListLoader(app, coords);
+                loader = new CoordsGeocacheListLoader(this, coords);
                 break;
             case FINDER:
                 final String username = extras.getString(Intents.EXTRA_USERNAME);
                 title = listNameMemento.rememberTerm(username);
                 if (username != null) {
-                    loader = new FinderGeocacheListLoader(app, username);
+                    loader = new FinderGeocacheListLoader(this, username);
                 }
                 break;
             case OWNER:
                 final String ownerName = extras.getString(Intents.EXTRA_USERNAME);
                 title = listNameMemento.rememberTerm(ownerName);
                 if (ownerName != null) {
-                    loader = new OwnerGeocacheListLoader(app, ownerName);
+                    loader = new OwnerGeocacheListLoader(this, ownerName);
                 }
                 break;
             case MAP:
@@ -1790,12 +1790,12 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 loadCachesHandler.sendMessage(Message.obtain());
                 break;
             case NEXT_PAGE:
-                loader = new NextPageGeocacheListLoader(app, search);
+                loader = new NextPageGeocacheListLoader(this, search);
                 break;
             case POCKET:
                 final String guid = extras.getString(Intents.EXTRA_POCKET_GUID);
                 title = listNameMemento.rememberTerm(extras.getString(Intents.EXTRA_NAME));
-                loader = new PocketGeocacheListLoader(app, guid);
+                loader = new PocketGeocacheListLoader(this, guid);
                 break;
         }
         // if there is a title given in the activity start request, use this one instead of the default

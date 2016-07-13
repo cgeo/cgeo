@@ -1,7 +1,9 @@
 package cgeo.geocaching.loaders;
 
 import cgeo.geocaching.CacheListActivity;
+import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
+import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.gc.GCConstants;
 import cgeo.geocaching.connector.gc.RecaptchaHandler;
 import cgeo.geocaching.network.Network;
@@ -9,15 +11,19 @@ import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
 
-import org.apache.commons.lang3.StringUtils;
-
-import android.content.Context;
+import android.app.Activity;
 import android.os.Handler;
 import android.support.v4.content.AsyncTaskLoader;
+import android.widget.Toast;
 
+import java.util.Collection;
 import java.util.concurrent.CountDownLatch;
 
+import org.apache.commons.lang3.StringUtils;
+import rx.functions.Func1;
+
 public abstract class AbstractSearchLoader extends AsyncTaskLoader<SearchResult> implements RecaptchaReceiver {
+
 
     public enum CacheListLoaderType {
         OFFLINE,
@@ -37,6 +43,7 @@ public abstract class AbstractSearchLoader extends AsyncTaskLoader<SearchResult>
         }
     }
 
+    private final Activity activity;
     private Handler recaptchaHandler = null;
     private String recaptchaChallenge = null;
     private String recaptchaKey = null;
@@ -46,8 +53,33 @@ public abstract class AbstractSearchLoader extends AsyncTaskLoader<SearchResult>
     private final CountDownLatch latch = new CountDownLatch(1);
     private CacheListActivity.AfterLoadAction afterLoadAction = CacheListActivity.AfterLoadAction.NO_ACTION;
 
-    public AbstractSearchLoader(final Context context) {
-        super(context);
+    private static class NoConnectorException extends RuntimeException {
+    }
+
+    /**
+     * Run {@link SearchResult#parallelCombineActive(Collection, Func1)} if there is at least one active connector
+     * in <tt>connectors</tt>, and throw <tt>NoConnectorException</tt> otherwise.
+     *
+     * @param connectors a collection of connectors
+     * @param func a function to apply to every connector
+     * @param <C> the type of connectors
+     * @return the result of {@link SearchResult#parallelCombineActive(Collection, Func1)} if there is ast least one
+     * active connector
+     */
+    protected <C extends IConnector> SearchResult nonEmptyCombineActive(final Collection<C> connectors,
+                                                                        final Func1<C, SearchResult> func) {
+        for (final IConnector connector : connectors) {
+            if (connector.isActive()) {
+                return SearchResult.parallelCombineActive(connectors, func);
+            }
+        }
+        throw new NoConnectorException();
+    }
+
+
+    public AbstractSearchLoader(final Activity activity) {
+        super(activity);
+        this.activity = activity;
     }
 
     public abstract SearchResult runSearch();
@@ -66,6 +98,14 @@ public abstract class AbstractSearchLoader extends AsyncTaskLoader<SearchResult>
                 // Unless we make a new Search the Loader framework won't deliver results. It doesn't do equals only identity
                 search = new SearchResult(search);
             }
+        } catch (final NoConnectorException ignored) {
+            activity.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(activity, R.string.warn_no_connector, Toast.LENGTH_LONG).show();
+                    activity.finish();
+                }
+            });
         } catch (final Exception e) {
             Log.e("Error in Loader ", e);
         }

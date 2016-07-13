@@ -5,23 +5,22 @@ import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.capability.ISearchByCenter;
 import cgeo.geocaching.location.Geopoint;
 
+import android.app.Activity;
+
 import org.eclipse.jdt.annotation.NonNull;
-
 import rx.functions.Func1;
-
-import android.content.Context;
 
 public class CoordsGeocacheListLoader extends AbstractSearchLoader {
     @NonNull private final Geopoint coords;
 
-    public CoordsGeocacheListLoader(final Context context, @NonNull final Geopoint coords) {
-        super(context);
+    public CoordsGeocacheListLoader(final Activity activity, @NonNull final Geopoint coords) {
+        super(activity);
         this.coords = coords;
     }
 
     @Override
     public SearchResult runSearch() {
-        return SearchResult.parallelCombineActive(ConnectorFactory.getSearchByCenterConnectors(),
+        return nonEmptyCombineActive(ConnectorFactory.getSearchByCenterConnectors(),
                 new Func1<ISearchByCenter, SearchResult>() {
                     @Override
                     public SearchResult call(final ISearchByCenter connector) {

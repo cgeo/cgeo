@@ -5,15 +5,15 @@ import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.capability.ISearchByNextPage;
 import cgeo.geocaching.settings.Settings;
 
-import rx.functions.Func1;
+import android.app.Activity;
 
-import android.content.Context;
+import rx.functions.Func1;
 
 public class NextPageGeocacheListLoader extends AbstractSearchLoader {
     private final SearchResult search;
 
-    public NextPageGeocacheListLoader(final Context context, final SearchResult search) {
-        super(context);
+    public NextPageGeocacheListLoader(final Activity activity, final SearchResult search) {
+        super(activity);
         this.search = search;
     }
 

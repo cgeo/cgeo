@@ -223,6 +223,7 @@
     <string name="warn_no_coordinates">No Coordinates given.</string>
     <string name="warn_no_keyword">No Keyword given.</string>
     <string name="warn_no_username">No Username given.</string>
+    <string name="warn_no_connector">No currently activated geocaching services provide this type of search.</string>
     <string name="warn_search_help_title">Need some help?</string>
     <string name="warn_search_help_address">Enter an address or location name. For example use a postal address \"Radlicka 100, Prague, Czech Republic\", a city name \"Berlin\" or just a name of something like \"Yellowstone Park\".</string>
     <string name="warn_search_help_gccode">Enter the code for a geocache. For example \"GC1VCAZ\".</string>
