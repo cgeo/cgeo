@@ -226,7 +226,7 @@ dependencies {
  * cgeo library dependencies. add gradle plugin related dependencies further down below
  */
     // network access
-    compile 'com.squareup.okhttp3:okhttp:3.4.0'
+    compile 'com.squareup.okhttp3:okhttp:3.4.1'
 
     // Maps.ME integration
     compile project(":mapswithme-api")
