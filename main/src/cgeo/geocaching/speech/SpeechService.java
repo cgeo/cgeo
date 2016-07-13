@@ -9,9 +9,6 @@ import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
 
-import org.apache.commons.lang3.StringUtils;
-import org.eclipse.jdt.annotation.NonNull;
-
 import android.app.Activity;
 import android.app.Service;
 import android.content.Intent;
@@ -20,6 +17,8 @@ import android.speech.tts.TextToSpeech;
 import android.speech.tts.TextToSpeech.Engine;
 import android.speech.tts.TextToSpeech.OnInitListener;
 
+import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import rx.Subscription;
 import rx.subscriptions.Subscriptions;
@@ -154,9 +153,10 @@ public class SpeechService extends Service implements OnInitListener {
         initialized = true;
 
         synchronized (startingActivityLock) {
-            if (startingActivity != null) {
+            final Activity startingActivityChecked = startingActivity;
+            if (startingActivityChecked != null) {
                 initSubscription = geoDirHandler.start(GeoDirHandler.UPDATE_GEODIR);
-                ActivityMixin.showShortToast(startingActivity, startingActivity.getString(R.string.tts_started));
+                ActivityMixin.showShortToast(startingActivity, startingActivityChecked.getString(R.string.tts_started));
             }
         }
     }
