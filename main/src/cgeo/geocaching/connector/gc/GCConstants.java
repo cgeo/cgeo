@@ -119,6 +119,7 @@ public final class GCConstants {
     static final Pattern PATTERN_TRACKABLE_DISTANCE = Pattern.compile("\\(([0-9.,]+(km|mi))[^\\)]*\\)\\s*<a href=\"map_gm");
     static final Pattern PATTERN_TRACKABLE_LOG = Pattern.compile("<tr class=\"Data BorderTop .+?/images/logtypes/([^.]+)\\.png[^>]+>&nbsp;([^<]+)</td>.+?guid.+?>([^<]+)</a>.+?(?:guid=([^\"]+)\">(<span[^>]+>)?([^<]+)</.+?)?<td colspan=\"4\">\\s*<div.*?>(.*?)</div>\\s*(?:<ul.+?ul>)?\\s*</td>\\s*</tr>");
     static final Pattern PATTERN_TRACKABLE_LOG_IMAGES = Pattern.compile("<li><a href=\"([^\"]+)\".+?LogImgTitle.+?>([^<]*)</");
+    static final String TRACKABLE_IS_LOCKED = ">Found it? Log it! (locked)</a></td>";
 
     /**
      * Patterns for parsing the result of a search (next)

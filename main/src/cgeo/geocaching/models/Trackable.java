@@ -53,6 +53,7 @@ public class Trackable implements ILogable {
     private TrackableBrand brand = null;
     private TrackableConnector trackableConnector = null;
     private Boolean missing = null;
+    private boolean locked = false;
 
     /**
      * Merge data from another Trackable.
@@ -336,7 +337,11 @@ public class Trackable implements ILogable {
     }
 
     public boolean isLoggable() {
-        return getConnector().isLoggable();
+        return getConnector().isLoggable() && !locked;
+    }
+
+    public void setIsLocked() {
+        locked = true;
     }
 
     public String getTrackingcode() {

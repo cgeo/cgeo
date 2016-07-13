@@ -1689,6 +1689,11 @@ public final class GCParser {
             trackable.setDetails(CgeoApplication.getInstance().getString(R.string.trackable_not_activated));
         }
 
+        // trackable may be locked
+        if (page.contains(GCConstants.TRACKABLE_IS_LOCKED)) {
+            trackable.setIsLocked();
+        }
+
         // trackable logs
         try {
             final MatcherWrapper matcherLogs = new MatcherWrapper(GCConstants.PATTERN_TRACKABLE_LOG, page);
