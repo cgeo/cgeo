@@ -1557,7 +1557,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     public static void startActivityOwner(final Activity context, final String userName) {
-        if (!isValidUsername(context, userName)) {
+        if (!checkNonBlankUsername(context, userName)) {
             return;
         }
         final Intent cachesIntent = new Intent(context, CacheListActivity.class);
@@ -1566,7 +1566,14 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         context.startActivity(cachesIntent);
     }
 
-    private static boolean isValidUsername(final Activity context, final String username) {
+    /**
+     * Check if a given username is valid (non blank), and show a toast if it isn't.
+     *
+     * @param context an activity
+     * @param username the username to check
+     * @return <tt>true</tt> if the username is not blank, <tt>false</tt> otherwise
+     */
+    private static boolean checkNonBlankUsername(final Activity context, final String username) {
         if (StringUtils.isBlank(username)) {
             ActivityMixin.showToast(context, R.string.warn_no_username);
             return false;
@@ -1575,7 +1582,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     public static void startActivityFinder(final Activity context, final String userName) {
-        if (!isValidUsername(context, userName)) {
+        if (!checkNonBlankUsername(context, userName)) {
             return;
         }
         final Intent cachesIntent = new Intent(context, CacheListActivity.class);
