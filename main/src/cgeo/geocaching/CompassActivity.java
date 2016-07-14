@@ -96,8 +96,11 @@ public class CompassActivity extends AbstractActionBarActivity {
             }
         } else if (extras.containsKey(Intents.EXTRA_COORDS)) {
             setTarget(extras.<Geopoint> getParcelable(Intents.EXTRA_COORDS), extras.getString(Intents.EXTRA_COORD_DESCRIPTION));
-        } else {
+        } else if (cache != null) {
             setTarget(cache);
+        } else {
+            Log.w("CompassActivity.onCreate: no cache was found for geocode " + geocode);
+            finish();
         }
 
         // set activity title just once, independent of what target is switched to
@@ -251,7 +254,7 @@ public class CompassActivity extends AbstractActionBarActivity {
         }
     }
 
-    private void setTarget(final Geocache cache) {
+    private void setTarget(@NonNull final Geocache cache) {
         setTarget(cache.getCoords(), Formatter.formatCacheInfoShort(cache));
     }
 
