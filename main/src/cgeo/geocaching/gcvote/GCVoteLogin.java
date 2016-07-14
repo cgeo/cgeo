@@ -9,12 +9,12 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Charsets;
 import cgeo.geocaching.utils.Log;
 
+import java.io.InputStream;
+
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
-
-import java.io.InputStream;
 
 public class GCVoteLogin extends AbstractLogin {
 
@@ -43,7 +43,7 @@ public class GCVoteLogin extends AbstractLogin {
     protected StatusCode login(final boolean retry, @NonNull final Credentials credentials) {
 
         if (credentials.isInvalid()) {
-            Log.e("Credentials can't be retrieved");
+            Log.w("Credentials can't be retrieved");
             return StatusCode.NO_LOGIN_INFO_STORED;
         }
 
@@ -64,14 +64,14 @@ public class GCVoteLogin extends AbstractLogin {
                             Log.i("Successfully logged in gcvote.com as " + credentials.getUserName());
                             return StatusCode.NO_ERROR;
                         }
-                        Log.e("Username or password is wrong");
+                        Log.w("Username or password is wrong");
                         return StatusCode.WRONG_LOGIN_DATA;
                     }
                 }
                 eventType = xpp.next();
             }
         } catch (final Exception e) {
-            Log.e("Cannot parse GCVote result", e);
+            Log.w("Cannot parse GCVote result", e);
             return StatusCode.UNKNOWN_ERROR;
         }
 
