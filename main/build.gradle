@@ -294,8 +294,9 @@ dependencies {
     androidTestCompile 'com.android.support.test:runner:0.5'
 
     // enforce same version of the support annotations for the main app and the test app
-    compile 'com.android.support:support-annotations:23.3.0'
-    androidTestCompile 'com.android.support:support-annotations:23.3.0'
+    def supportAnnotationsVersion = '24.0.0'
+    compile "com.android.support:support-annotations:$supportAnnotationsVersion"
+    androidTestCompile "com.android.support:support-annotations:$supportAnnotationsVersion"
 
     // Junit only needed for local unit tests
     testCompile 'junit:junit:4.12'
@@ -318,7 +319,7 @@ dependencies {
 /*
  * ButterKnife view injection, https://github.com/JakeWharton/butterknife
  */
-    def butterKnifeVersion = '8.1.0'
+    def butterKnifeVersion = '8.2.1'
     compile "com.jakewharton:butterknife:$butterKnifeVersion"
     apt "com.jakewharton:butterknife-compiler:$butterKnifeVersion"
 /*
