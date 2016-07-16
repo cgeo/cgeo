@@ -5,7 +5,7 @@ import cgeo.geocaching.utils.Log;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.CharEncoding;
 import org.apache.commons.lang3.StringUtils;
-import org.eclipse.jdt.annotation.NonNull;
+import android.support.annotation.NonNull;
 
 import android.content.ContentResolver;
 import android.net.Uri;

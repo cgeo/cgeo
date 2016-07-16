@@ -6,7 +6,7 @@ import cgeo.geocaching.network.Network;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.Log;
 
-import org.eclipse.jdt.annotation.Nullable;
+import android.support.annotation.Nullable;
 
 import android.content.ContentResolver;
 import android.net.Uri;

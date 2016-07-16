@@ -5,9 +5,6 @@ import cgeo.geocaching.activity.Keyboard;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.dialog.Dialogs;
 
-import org.apache.commons.lang3.StringUtils;
-import org.eclipse.jdt.annotation.NonNull;
-
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -24,6 +21,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import butterknife.ButterKnife;
+import org.apache.commons.lang3.StringUtils;
 
 public class EditNoteDialog extends DialogFragment {
 
@@ -54,7 +52,7 @@ public class EditNoteDialog extends DialogFragment {
     @Override
     @android.support.annotation.NonNull
     public Dialog onCreateDialog(final Bundle savedInstanceState) {
-        @NonNull final FragmentActivity activity = getActivity();
+        final FragmentActivity activity = getActivity();
 
         final Context themedContext;
         if (Settings.isLightSkin() && VERSION.SDK_INT < VERSION_CODES.HONEYCOMB) {

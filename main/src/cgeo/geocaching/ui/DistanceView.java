@@ -3,7 +3,7 @@ package cgeo.geocaching.ui;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Units;
 
-import org.eclipse.jdt.annotation.NonNull;
+import android.support.annotation.NonNull;
 
 import android.content.Context;
 import android.util.AttributeSet;

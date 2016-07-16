@@ -283,9 +283,6 @@ dependencies {
     // Zxing barcode reader integration
     compile 'com.google.zxing:android-integration:3.2.1'
 
-    // Null annotations
-    compile 'org.eclipse.jdt:org.eclipse.jdt.annotation:1.1.0'
-
     // Undo toast
     compile 'com.github.jenzz.undobar:library:1.3:api8Release@aar'
     compile 'com.nineoldandroids:library:2.4.0'

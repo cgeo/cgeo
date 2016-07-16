@@ -17,7 +17,7 @@ import cgeo.org.kxml2.io.KXmlSerializer;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.CharEncoding;
 import org.apache.commons.lang3.StringUtils;
-import org.eclipse.jdt.annotation.NonNull;
+import android.support.annotation.NonNull;
 import org.xmlpull.v1.XmlSerializer;
 
 import java.io.IOException;

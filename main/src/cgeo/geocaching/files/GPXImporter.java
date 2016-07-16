@@ -7,10 +7,6 @@ import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.Log;
 
-import org.apache.commons.lang3.StringUtils;
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
-
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
@@ -19,10 +15,14 @@ import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.NonNull;
 
 import java.io.File;
 import java.util.Arrays;
 import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
+import android.support.annotation.Nullable;
 
 public class GPXImporter {
     static final int IMPORT_STEP_START = 0;
@@ -85,7 +85,7 @@ public class GPXImporter {
         final ContentResolver contentResolver = fromActivity.getContentResolver();
 
         Log.i("importGPX: " + uri + ", mimetype=" + mimeType);
-        @NonNull
+
         FileType fileType = new FileTypeDetector(uri, contentResolver)
                 .getFileType();
 

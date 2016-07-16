@@ -13,7 +13,7 @@ import cgeo.geocaching.utils.Formatter;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.eclipse.jdt.annotation.NonNull;
+import android.support.annotation.NonNull;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;

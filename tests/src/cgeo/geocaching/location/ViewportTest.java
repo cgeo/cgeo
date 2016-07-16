@@ -4,7 +4,7 @@ import android.annotation.SuppressLint;
 
 import junit.framework.TestCase;
 
-import org.eclipse.jdt.annotation.NonNull;
+import android.support.annotation.NonNull;
 
 import java.util.Collections;
 import java.util.HashSet;

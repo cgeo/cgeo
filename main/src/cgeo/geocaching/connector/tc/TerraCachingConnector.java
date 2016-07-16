@@ -3,8 +3,8 @@ package cgeo.geocaching.connector.tc;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.connector.AbstractConnector;
 
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import java.util.regex.Pattern;
 

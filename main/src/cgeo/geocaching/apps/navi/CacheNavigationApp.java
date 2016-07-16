@@ -3,7 +3,7 @@ package cgeo.geocaching.apps.navi;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.apps.App;
 
-import org.eclipse.jdt.annotation.NonNull;
+import android.support.annotation.NonNull;
 
 import android.app.Activity;
 

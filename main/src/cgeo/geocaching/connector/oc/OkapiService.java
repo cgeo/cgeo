@@ -2,7 +2,7 @@ package cgeo.geocaching.connector.oc;
 
 import cgeo.geocaching.connector.oc.OCApiConnector.OAuthLevel;
 
-import org.eclipse.jdt.annotation.NonNull;
+import android.support.annotation.NonNull;
 
 
 enum OkapiService {

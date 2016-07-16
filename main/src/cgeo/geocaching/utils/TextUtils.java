@@ -3,7 +3,7 @@
  */
 package cgeo.geocaching.utils;
 
-import org.eclipse.jdt.annotation.Nullable;
+import android.support.annotation.Nullable;
 
 import android.text.Html;
 import android.text.Spanned;

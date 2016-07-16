@@ -4,7 +4,7 @@ import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.utils.CancellableHandler;
 
-import org.eclipse.jdt.annotation.Nullable;
+import android.support.annotation.Nullable;
 
 /**
  * connector capability of searching online for a cache by geocode

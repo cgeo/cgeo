@@ -1,6 +1,6 @@
 package cgeo.contacts;
 
-import org.eclipse.jdt.annotation.NonNull;
+import android.support.annotation.NonNull;
 
 public interface IContacts {
     @NonNull String INTENT = "cgeo.contacts.FIND";

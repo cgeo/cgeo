@@ -1,6 +1,6 @@
 package cgeo.geocaching.activity;
 
-import org.eclipse.jdt.annotation.NonNull;
+import android.support.annotation.NonNull;
 
 import android.app.Activity;
 import android.content.Context;

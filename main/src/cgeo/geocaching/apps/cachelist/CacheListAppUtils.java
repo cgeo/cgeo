@@ -2,7 +2,7 @@ package cgeo.geocaching.apps.cachelist;
 
 import cgeo.geocaching.models.Geocache;
 
-import org.eclipse.jdt.annotation.NonNull;
+import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;

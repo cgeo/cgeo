@@ -5,7 +5,7 @@ import cgeo.geocaching.maps.interfaces.ItemizedOverlayImpl;
 import cgeo.geocaching.maps.interfaces.MapProjectionImpl;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
 
-import org.eclipse.jdt.annotation.NonNull;
+import android.support.annotation.NonNull;
 import org.mapsforge.v3.android.maps.Projection;
 import org.mapsforge.v3.android.maps.overlay.ItemizedOverlay;
 

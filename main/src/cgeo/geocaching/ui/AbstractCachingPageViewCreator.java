@@ -4,8 +4,8 @@ import cgeo.geocaching.activity.AbstractViewPagerActivity.PageViewCreator;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import android.os.Bundle;
 import android.view.View;

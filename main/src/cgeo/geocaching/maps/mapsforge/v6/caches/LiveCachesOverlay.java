@@ -15,7 +15,7 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
-import org.eclipse.jdt.annotation.NonNull;
+import android.support.annotation.NonNull;
 import org.mapsforge.map.layer.Layer;
 
 import java.lang.ref.WeakReference;

@@ -8,7 +8,7 @@ import android.view.ViewConfiguration;
 
 import com.squareup.leakcanary.LeakCanary;
 
-import org.eclipse.jdt.annotation.NonNull;
+import android.support.annotation.NonNull;
 
 import java.lang.reflect.Field;
 

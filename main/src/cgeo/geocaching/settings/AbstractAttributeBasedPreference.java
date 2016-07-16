@@ -1,6 +1,6 @@
 package cgeo.geocaching.settings;
 
-import org.eclipse.jdt.annotation.Nullable;
+import android.support.annotation.Nullable;
 
 import android.content.Context;
 import android.content.res.TypedArray;

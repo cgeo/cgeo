@@ -4,7 +4,7 @@ import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.loaders.RecaptchaReceiver;
 
-import org.eclipse.jdt.annotation.NonNull;
+import android.support.annotation.NonNull;
 
 /**
  * Connector capability of searching online for a cache by keyword.

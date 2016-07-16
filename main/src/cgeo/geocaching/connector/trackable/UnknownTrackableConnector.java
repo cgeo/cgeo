@@ -3,8 +3,8 @@ package cgeo.geocaching.connector.trackable;
 import cgeo.geocaching.connector.UserAction;
 import cgeo.geocaching.models.Trackable;
 
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import java.util.Collections;
 import java.util.List;

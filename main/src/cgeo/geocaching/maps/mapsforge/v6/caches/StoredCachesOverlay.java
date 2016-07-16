@@ -10,7 +10,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.Log;
 
-import org.eclipse.jdt.annotation.NonNull;
+import android.support.annotation.NonNull;
 import org.mapsforge.map.layer.Layer;
 
 import java.lang.ref.WeakReference;

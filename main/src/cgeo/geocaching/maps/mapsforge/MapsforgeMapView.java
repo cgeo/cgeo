@@ -16,7 +16,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
-import org.eclipse.jdt.annotation.NonNull;
+import android.support.annotation.NonNull;
 import org.mapsforge.v3.android.maps.MapView;
 import org.mapsforge.v3.android.maps.Projection;
 import org.mapsforge.v3.android.maps.mapgenerator.MapGenerator;

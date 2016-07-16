@@ -20,7 +20,7 @@ import com.drew.metadata.exif.GpsDirectory;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.eclipse.jdt.annotation.Nullable;
+import android.support.annotation.Nullable;
 
 import android.app.Activity;
 import android.content.Intent;

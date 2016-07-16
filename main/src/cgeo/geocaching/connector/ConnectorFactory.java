@@ -31,9 +31,8 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.RxUtils;
 
-import org.apache.commons.lang3.StringUtils;
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -41,6 +40,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import rx.Observable;
 import rx.functions.Func0;
 import rx.functions.Func1;
@@ -299,7 +299,7 @@ public final class ConnectorFactory {
             return null;
         }
         for (final IConnector connector : CONNECTORS) {
-            @Nullable final String geocode = connector.getGeocodeFromUrl(url);
+            final String geocode = connector.getGeocodeFromUrl(url);
             if (StringUtils.isNotBlank(geocode)) {
                 return StringUtils.upperCase(geocode);
             }

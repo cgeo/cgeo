@@ -2,7 +2,7 @@ package cgeo.geocaching.apps.navi;
 
 import cgeo.geocaching.location.Geopoint;
 
-import org.eclipse.jdt.annotation.NonNull;
+import android.support.annotation.NonNull;
 
 import android.app.Activity;
 

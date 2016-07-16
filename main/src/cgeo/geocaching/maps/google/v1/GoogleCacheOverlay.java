@@ -8,7 +8,7 @@ import cgeo.geocaching.maps.interfaces.MapViewImpl;
 import com.google.android.maps.ItemizedOverlay;
 import com.google.android.maps.MapView;
 
-import org.eclipse.jdt.annotation.Nullable;
+import android.support.annotation.Nullable;
 
 import android.content.Context;
 import android.graphics.Canvas;

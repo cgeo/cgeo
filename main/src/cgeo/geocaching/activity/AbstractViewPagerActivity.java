@@ -3,15 +3,11 @@ package cgeo.geocaching.activity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.utils.Log;
 
-import com.viewpagerindicator.TitlePageIndicator;
-
-import org.apache.commons.lang3.tuple.Pair;
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
@@ -24,6 +20,8 @@ import java.util.List;
 import java.util.Map;
 
 import butterknife.ButterKnife;
+import com.viewpagerindicator.TitlePageIndicator;
+import org.apache.commons.lang3.tuple.Pair;
 
 /**
  * Abstract activity with the ability to manage pages in a view pager.
@@ -118,9 +116,7 @@ public abstract class AbstractViewPagerActivity<Page extends Enum<Page>> extends
             // Store the state of the view if the page supports it
             final PageViewCreator creator = viewCreators.get(page);
             if (creator != null) {
-                @Nullable
-                final
-                Bundle state = creator.getViewState();
+                final Bundle state = creator.getViewState();
                 if (state != null) {
                     viewStates.put(page, state);
                 }

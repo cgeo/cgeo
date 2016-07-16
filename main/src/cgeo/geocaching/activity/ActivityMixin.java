@@ -6,7 +6,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.settings.Settings;
 
 import org.apache.commons.lang3.StringUtils;
-import org.eclipse.jdt.annotation.NonNull;
+import android.support.annotation.NonNull;
 
 import android.annotation.TargetApi;
 import android.app.Activity;

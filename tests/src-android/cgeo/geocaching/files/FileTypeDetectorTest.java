@@ -5,7 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 import cgeo.geocaching.test.R;
 
-import org.eclipse.jdt.annotation.NonNull;
+import android.support.annotation.NonNull;
 
 import android.content.ContentResolver;
 import android.content.Context;

@@ -1,6 +1,6 @@
 This setup is intended to be used with Eclipse Neon or better only. Do not use older versions.
 
-Download the Eclipse Neon installer from eclipse.org.
+Download the Eclipse Neon installer from eclipse.org. It depends on your current operating system, therefore we cannot give a direct link.
 Start it and switch to the advanced mode using the menu on the top right.
 Confirm the question about placing the installer in a permanent location, otherwise your settings cannot be stored.
 

@@ -5,7 +5,7 @@ import cgeo.geocaching.settings.Settings;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.eclipse.jdt.annotation.NonNull;
+import android.support.annotation.NonNull;
 
 import android.util.Pair;
 

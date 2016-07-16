@@ -1,6 +1,6 @@
 package cgeo.geocaching.utils;
 
-import org.eclipse.jdt.annotation.NonNull;
+import android.support.annotation.NonNull;
 
 import java.util.AbstractList;
 import java.util.ArrayList;

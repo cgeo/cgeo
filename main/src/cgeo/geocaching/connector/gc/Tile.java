@@ -9,7 +9,7 @@ import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.LeastRecentlyUsedSet;
 
 import okhttp3.Response;
-import org.eclipse.jdt.annotation.NonNull;
+import android.support.annotation.NonNull;
 import rx.Single;
 import rx.functions.Func1;
 

@@ -2,7 +2,7 @@ package cgeo.geocaching.connector.tc;
 
 import cgeo.geocaching.enumerations.CacheType;
 
-import org.eclipse.jdt.annotation.NonNull;
+import android.support.annotation.NonNull;
 
 /**
  * Adapter for cache types used on TerraCaching

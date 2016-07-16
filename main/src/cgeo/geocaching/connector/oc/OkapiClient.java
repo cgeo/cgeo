@@ -36,6 +36,8 @@ import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.SynchronizedDateFormat;
 
 import android.net.Uri;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -57,8 +59,6 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import okhttp3.Response;
 import org.apache.commons.lang3.StringUtils;
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 
 /**
  * Client for the OpenCaching API (Okapi).
@@ -203,7 +203,7 @@ final class OkapiClient {
     private static List<Geocache> getCachesByUser(@NonNull final String username, @NonNull final OCApiConnector connector, final String userRequestParam) {
         final Parameters params = new Parameters("search_method", METHOD_SEARCH_ALL);
         final Map<String, String> valueMap = new LinkedHashMap<>();
-        @Nullable final String uuid = getUserUUID(connector, username);
+        final String uuid = getUserUUID(connector, username);
         if (StringUtils.isEmpty(uuid)) {
             return Collections.emptyList();
         }

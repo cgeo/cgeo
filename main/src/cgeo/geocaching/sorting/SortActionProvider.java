@@ -4,7 +4,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
 
-import org.eclipse.jdt.annotation.NonNull;
+import android.support.annotation.NonNull;
 
 import android.content.Context;
 import android.support.annotation.StringRes;

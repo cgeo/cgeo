@@ -6,7 +6,7 @@ import cgeo.geocaching.connector.capability.ISearchByKeyword;
 
 import android.app.Activity;
 
-import org.eclipse.jdt.annotation.NonNull;
+import android.support.annotation.NonNull;
 import rx.functions.Func1;
 
 public class KeywordGeocacheListLoader extends AbstractSearchLoader {

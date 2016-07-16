@@ -1,6 +1,6 @@
 package cgeo.calendar;
 
-import org.eclipse.jdt.annotation.NonNull;
+import android.support.annotation.NonNull;
 
 public interface ICalendar {
     @Deprecated

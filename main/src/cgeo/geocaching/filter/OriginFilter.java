@@ -5,7 +5,7 @@ import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.utils.TextUtils;
 
-import org.eclipse.jdt.annotation.NonNull;
+import android.support.annotation.NonNull;
 
 import android.os.Parcel;
 import android.os.Parcelable;

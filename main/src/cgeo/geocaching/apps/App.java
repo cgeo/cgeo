@@ -2,7 +2,7 @@ package cgeo.geocaching.apps;
 
 import cgeo.geocaching.models.Geocache;
 
-import org.eclipse.jdt.annotation.NonNull;
+import android.support.annotation.NonNull;
 
 public interface App {
     boolean isInstalled();

@@ -3,7 +3,7 @@ package cgeo.geocaching.connector.oc;
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.oc.OkapiError.OkapiErrors;
 
-import org.eclipse.jdt.annotation.NonNull;
+import android.support.annotation.NonNull;
 
 import android.support.annotation.StringRes;
 

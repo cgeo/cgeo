@@ -1,13 +1,12 @@
 package cgeo.geocaching.network;
 
-import junit.framework.TestCase;
-import org.eclipse.jdt.annotation.NonNull;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import junit.framework.TestCase;
 
 public class ParametersTest extends TestCase {
 
@@ -33,14 +32,14 @@ public class ParametersTest extends TestCase {
             final Parameters params = new Parameters("aaa", "AAA", "bbb");
             params.clear(); // this will never be invoked, but suppresses warnings about unused objects
             fail("Exception not raised");
-        } catch (InvalidParameterException e) {
+        } catch (final InvalidParameterException e) {
             // Ok
         }
         try {
             final Parameters params = new Parameters("aaa", "AAA");
             params.put("bbb", "BBB", "ccc");
             fail("Exception not raised");
-        } catch (InvalidParameterException e) {
+        } catch (final InvalidParameterException e) {
             // Ok
         }
     }
@@ -69,8 +68,7 @@ public class ParametersTest extends TestCase {
     }
 
     public static void testUnreservedCharactersMustNotBeEncoded() {
-        for (Character c : UNRESERVED) {
-            @NonNull
+        for (final Character c : UNRESERVED) {
             final String charAsString = String.valueOf(c);
             assertEquals("wrong OAuth encoding for " + c, charAsString, Parameters.percentEncode(charAsString));
         }
@@ -80,7 +78,6 @@ public class ParametersTest extends TestCase {
         for (int i = 32; i < 127; i++) {
             final Character c = (char) i;
             if (!UNRESERVED.contains(c)) {
-                @NonNull
                 final String charAsString = String.valueOf(c);
                 final String encoded = Parameters.percentEncode(charAsString);
                 assertThat(charAsString).overridingErrorMessage("Character '" + charAsString + "' not encoded").isNotEqualTo(encoded);

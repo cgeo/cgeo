@@ -16,7 +16,7 @@
 
 package android.support.v4.app;
 
-import org.eclipse.jdt.annotation.NonNull;
+import android.support.annotation.NonNull;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;

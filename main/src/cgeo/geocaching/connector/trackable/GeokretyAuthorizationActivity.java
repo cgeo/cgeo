@@ -7,7 +7,7 @@ import cgeo.geocaching.settings.Settings;
 
 import okhttp3.Response;
 import org.apache.commons.lang3.StringUtils;
-import org.eclipse.jdt.annotation.Nullable;
+import android.support.annotation.Nullable;
 
 import java.util.regex.Pattern;
 

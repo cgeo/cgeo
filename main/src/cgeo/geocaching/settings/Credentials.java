@@ -1,8 +1,8 @@
 package cgeo.geocaching.settings;
 
 import org.apache.commons.lang3.StringUtils;
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 /**
  * Hold valid or invalid credential information (login and password).

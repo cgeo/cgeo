@@ -29,7 +29,7 @@ import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ProcessUtils;
 
 import org.apache.commons.lang3.StringUtils;
-import org.eclipse.jdt.annotation.NonNull;
+import android.support.annotation.NonNull;
 import org.openintents.intents.FileManagerIntents;
 
 import android.R.string;

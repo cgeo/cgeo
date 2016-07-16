@@ -3,7 +3,7 @@ package cgeo.geocaching.search;
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.enumerations.CacheType;
 
-import org.eclipse.jdt.annotation.NonNull;
+import android.support.annotation.NonNull;
 
 import android.app.SearchManager;
 import android.database.MatrixCursor;

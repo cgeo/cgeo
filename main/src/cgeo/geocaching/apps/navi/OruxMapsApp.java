@@ -7,7 +7,7 @@ import cgeo.geocaching.location.Geopoint;
 
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
-import org.eclipse.jdt.annotation.NonNull;
+import android.support.annotation.NonNull;
 
 import android.app.Activity;
 import android.content.Intent;

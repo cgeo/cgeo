@@ -3,8 +3,8 @@ package cgeo.geocaching.gcvote;
 import cgeo.geocaching.R;
 import cgeo.geocaching.models.Geocache;
 
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import android.view.View;
 import android.widget.RatingBar;

@@ -4,7 +4,7 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.gcvote.GCVote;
 
-import org.eclipse.jdt.annotation.NonNull;
+import android.support.annotation.NonNull;
 
 import android.os.Parcel;
 import android.os.Parcelable;

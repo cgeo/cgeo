@@ -19,7 +19,7 @@ import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapView;
 
 import org.apache.commons.lang3.reflect.MethodUtils;
-import org.eclipse.jdt.annotation.NonNull;
+import android.support.annotation.NonNull;
 
 import android.content.Context;
 import android.graphics.Canvas;

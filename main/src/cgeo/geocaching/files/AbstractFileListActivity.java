@@ -13,7 +13,7 @@ import cgeo.geocaching.utils.TextUtils;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.eclipse.jdt.annotation.NonNull;
+import android.support.annotation.NonNull;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;

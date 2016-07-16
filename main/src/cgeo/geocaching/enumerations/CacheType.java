@@ -5,7 +5,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.models.Geocache;
 
 import org.apache.commons.lang3.StringUtils;
-import org.eclipse.jdt.annotation.NonNull;
+import android.support.annotation.NonNull;
 
 import java.util.HashMap;
 import java.util.Locale;

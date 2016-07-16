@@ -17,10 +17,7 @@ import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.Geocache;
 
-import org.apache.commons.lang3.StringUtils;
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
-
+import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 
 import java.util.ArrayList;
@@ -29,6 +26,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.commons.lang3.StringUtils;
+import android.support.annotation.Nullable;
 import rx.functions.Action1;
 
 public abstract class AbstractConnector implements IConnector {
@@ -154,7 +153,7 @@ public abstract class AbstractConnector implements IConnector {
     public String getGeocodeFromUrl(@NonNull final String url) {
         final String urlPrefix = getCacheUrlPrefix();
         if (StringUtils.isEmpty(urlPrefix) || StringUtils.startsWith(url, urlPrefix)) {
-            @NonNull final String geocode = url.substring(urlPrefix.length());
+            final String geocode = url.substring(urlPrefix.length());
             if (canHandle(geocode)) {
                 return geocode;
             }

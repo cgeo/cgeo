@@ -8,7 +8,7 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.eclipse.jdt.annotation.NonNull;
+import android.support.annotation.NonNull;
 
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;

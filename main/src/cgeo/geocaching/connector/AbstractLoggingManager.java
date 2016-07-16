@@ -2,7 +2,7 @@ package cgeo.geocaching.connector;
 
 import cgeo.geocaching.models.TrackableLog;
 
-import org.eclipse.jdt.annotation.NonNull;
+import android.support.annotation.NonNull;
 
 import java.util.Collections;
 import java.util.List;
