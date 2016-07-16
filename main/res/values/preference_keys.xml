@@ -128,6 +128,7 @@
     <string translatable="false" name="pref_settingsversion">settingsversion</string>
     <string translatable="false" name="pref_trackableaction">trackableaction</string>
     <string translatable="false" name="pref_shareafterexport">shareafterexport</string>
+    <string translatable="false" name="pref_includefoundstatus">includefoundstatus</string>
     <string translatable="false" name="pref_renderthemefile">renderthemefile</string>
     <string translatable="false" name="pref_logImageScale">logImageScale</string>
     <string translatable="false" name="pref_ocde_tokensecret">ocde_tokensecret</string>

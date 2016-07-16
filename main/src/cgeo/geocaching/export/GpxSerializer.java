@@ -7,6 +7,7 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.LogEntry;
 import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.models.Waypoint;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.SynchronizedDateFormat;
@@ -128,7 +129,7 @@ public final class GpxSerializer {
                     "desc", cache.getName(),
                     "url", cache.getUrl(),
                     "urlname", cache.getName(),
-                    "sym", cache.isFound() ? "Geocache Found" : "Geocache",
+                    "sym", cache.isFound() && Settings.getIncludeFoundStatus() ? "Geocache Found" : "Geocache",
                     "type", "Geocache|" + cache.getType().pattern);
 
             gpx.startTag(NS_GROUNDSPEAK, "cache");
