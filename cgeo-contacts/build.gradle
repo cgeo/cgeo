@@ -42,7 +42,4 @@ android {
 dependencies {
     // Apache Commons
     compile 'org.apache.commons:commons-lang3:3.4'
-
-    // Null annotations
-    compile 'org.eclipse.jdt:org.eclipse.jdt.annotation:1.1.0'
 }

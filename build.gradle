@@ -110,11 +110,6 @@ allprojects {
 						if (selection.candidate.group == 'org.assertj' && selection.candidate.module == 'assertj-core' && selection.candidate.version.substring(0,1).toInteger() > 1) {
 							selection.reject("assertj 2.x or higher require Java 7 SE classes not available in Android")
 						}
-
-						// JDT null annotations
-						if (selection.candidate.group == 'org.eclipse.jdt' && selection.candidate.module == 'org.eclipse.jdt.annotation' && selection.candidate.version.startsWith('2')) {
-							selection.reject("jdt.annotations 2.x require Java 8")
-						}
 					}
 				}
 			}
