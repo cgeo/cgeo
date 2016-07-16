@@ -558,7 +558,6 @@
   <string name="init_maptrail">Pad tonen</string>
   <string name="init_summary_maptrail">Laat pad op kaart zien</string>
   <string name="init_share_after_export">Open deel-menu na GPX export</string>
-  <string name="init_include_found_status">\"Gevonden\" status mee exporteren</string>
   <string name="init_trackautovisit">Trackables bezoeken</string>
   <string name="init_summary_trackautovisit">Zet trackables automatisch op \'bezocht\'</string>
   <string name="init_sigautoinsert">Voeg automatisch toe</string>
