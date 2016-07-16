@@ -1,20 +1,8 @@
 package cgeo.geocaching.connector.su;
 
-import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.enumerations.CacheType;
-import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
-import cgeo.geocaching.enumerations.LogType;
-import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.models.Image;
-import cgeo.geocaching.models.LogEntry;
-import cgeo.geocaching.models.LogEntry.Builder;
-import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.SynchronizedDateFormat;
+import android.support.annotation.NonNull;
 
 import org.apache.commons.lang3.StringUtils;
-import android.support.annotation.NonNull;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -27,6 +15,19 @@ import java.util.Date;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Locale;
+
+import cgeo.geocaching.SearchResult;
+import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
+import cgeo.geocaching.enumerations.LogType;
+import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.Image;
+import cgeo.geocaching.models.LogEntry;
+import cgeo.geocaching.models.LogEntry.Builder;
+import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.SynchronizedDateFormat;
 
 public class GeocachingSuParser {
 
@@ -210,11 +211,11 @@ public class GeocachingSuParser {
         // differentiate between area search, and detailed request
         if (StringUtils.isNotEmpty(description)) {
             cache.setDetailedUpdatedNow();
+            DataStore.saveLogs(cache.getGeocode(), parsed.logs);
         }
 
         // save to database
         DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
-        DataStore.saveLogs(cache.getGeocode(), parsed.logs);
 
         // append to search result
         caches.add(cache);
