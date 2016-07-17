@@ -2,17 +2,17 @@ package cgeo.geocaching.utils;
 
 import cgeo.geocaching.models.Geocache;
 
-import org.apache.commons.lang3.StringEscapeUtils;
-import org.apache.commons.lang3.StringUtils;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-
 import android.util.Patterns;
 
 import java.util.regex.Matcher;
 
+import org.apache.commons.lang3.StringEscapeUtils;
+import org.apache.commons.lang3.StringUtils;
+
 public final class CheckerUtils {
-    private static final String[] CHECKERS = { "geocheck.org/geo_inputchkcoord.php?", "geochecker.com/index.php?", "certitudes.org/certitude?" };
+    private static final String[] CHECKERS = { "geocheck.org/geo_inputchkcoord.php?", "geochecker.com/index.php?", "certitudes.org/certitude?", "geochecker.gps-cache.de/check.aspx?" };
 
     private CheckerUtils() {
         // utility class
