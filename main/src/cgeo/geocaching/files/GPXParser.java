@@ -7,6 +7,7 @@ import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.connector.tc.TerraCachingLogType;
 import cgeo.geocaching.connector.tc.TerraCachingType;
+import cgeo.geocaching.enumerations.CacheAttribute;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
@@ -28,18 +29,13 @@ import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
 import cgeo.geocaching.utils.SynchronizedDateFormat;
 
-import org.apache.commons.lang3.CharEncoding;
-import org.apache.commons.lang3.StringUtils;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import org.xml.sax.Attributes;
-import org.xml.sax.SAXException;
-
 import android.sax.Element;
 import android.sax.EndElementListener;
 import android.sax.EndTextElementListener;
 import android.sax.RootElement;
 import android.sax.StartElementListener;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.util.Xml;
 
 import java.io.BufferedReader;
@@ -57,6 +53,11 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 import java.util.regex.Pattern;
+
+import org.apache.commons.lang3.CharEncoding;
+import org.apache.commons.lang3.StringUtils;
+import org.xml.sax.Attributes;
+import org.xml.sax.SAXException;
 
 public abstract class GPXParser extends FileParser {
 
@@ -148,126 +149,6 @@ public abstract class GPXParser extends FileParser {
         @Override
         public void end(final String user) {
             userData[index] = validate(user);
-        }
-    }
-
-    private static final class CacheAttributeTranslator {
-        // List of cache attributes matching IDs used in GPX files.
-        // The ID is represented by the position of the String in the array.
-        // Strings are not used as text but as resource IDs of strings, just to be aware of changes
-        // made in strings.xml which then will lead to compile errors here and not to runtime errors.
-        private static final int[] CACHE_ATTRIBUTES = {
-                -1, // 0
-                R.string.attribute_dogs_yes, // 1
-                R.string.attribute_fee_yes, // 2
-                R.string.attribute_rappelling_yes, // 3
-                R.string.attribute_boat_yes, // 4
-                R.string.attribute_scuba_yes, // 5
-                R.string.attribute_kids_yes, // 6
-                R.string.attribute_onehour_yes, // 7
-                R.string.attribute_scenic_yes, // 8
-                R.string.attribute_hiking_yes, // 9
-                R.string.attribute_climbing_yes, // 10
-                R.string.attribute_wading_yes, // 11
-                R.string.attribute_swimming_yes, // 12
-                R.string.attribute_available_yes, // 13
-                R.string.attribute_night_yes, // 14
-                R.string.attribute_winter_yes, // 15
-                -1, // 16
-                R.string.attribute_poisonoak_yes, // 17
-                R.string.attribute_dangerousanimals_yes, // 18
-                R.string.attribute_ticks_yes, // 19
-                R.string.attribute_mine_yes, // 20
-                R.string.attribute_cliff_yes, // 21
-                R.string.attribute_hunting_yes, // 22
-                R.string.attribute_danger_yes, // 23
-                R.string.attribute_wheelchair_yes, // 24
-                R.string.attribute_parking_yes, // 25
-                R.string.attribute_public_yes, // 26
-                R.string.attribute_water_yes, // 27
-                R.string.attribute_restrooms_yes, // 28
-                R.string.attribute_phone_yes, // 29
-                R.string.attribute_picnic_yes, // 30
-                R.string.attribute_camping_yes, // 31
-                R.string.attribute_bicycles_yes, // 32
-                R.string.attribute_motorcycles_yes, // 33
-                R.string.attribute_quads_yes, // 34
-                R.string.attribute_jeeps_yes, // 35
-                R.string.attribute_snowmobiles_yes, // 36
-                R.string.attribute_horses_yes, // 37
-                R.string.attribute_campfires_yes, // 38
-                R.string.attribute_thorn_yes, // 39
-                R.string.attribute_stealth_yes, // 40
-                R.string.attribute_stroller_yes, // 41
-                R.string.attribute_firstaid_yes, // 42
-                R.string.attribute_cow_yes, // 43
-                R.string.attribute_flashlight_yes, // 44
-                R.string.attribute_landf_yes, // 45
-                R.string.attribute_rv_yes, // 46
-                R.string.attribute_field_puzzle_yes, // 47
-                R.string.attribute_uv_yes, // 48
-                R.string.attribute_snowshoes_yes, // 49
-                R.string.attribute_skiis_yes, // 50
-                R.string.attribute_s_tool_yes, // 51
-                R.string.attribute_nightcache_yes, // 52
-                R.string.attribute_parkngrab_yes, // 53
-                R.string.attribute_abandonedbuilding_yes, // 54
-                R.string.attribute_hike_short_yes, // 55
-                R.string.attribute_hike_med_yes, // 56
-                R.string.attribute_hike_long_yes, // 57
-                R.string.attribute_fuel_yes, // 58
-                R.string.attribute_food_yes, // 59
-                R.string.attribute_wirelessbeacon_yes, // 60
-                R.string.attribute_partnership_yes, // 61
-                R.string.attribute_seasonal_yes, // 62
-                R.string.attribute_touristok_yes, // 63
-                R.string.attribute_treeclimbing_yes, // 64
-                R.string.attribute_frontyard_yes, // 65
-                R.string.attribute_teamwork_yes, // 66
-                R.string.attribute_geotour_yes, // 67
-        };
-        private static final String YES = "_yes";
-        private static final String NO = "_no";
-        private static final Pattern BASENAME_PATTERN = Pattern.compile("^.*attribute_(.*)(_yes|_no)");
-
-        // map GPX-Attribute-Id to baseName
-        public static String getBaseName(final int id) {
-            if (id < 0) {
-                return null;
-            }
-            // get String out of array
-            if (CACHE_ATTRIBUTES.length <= id) {
-                return null;
-            }
-            final int stringId = CACHE_ATTRIBUTES[id];
-            if (stringId == -1) {
-                return null; // id not found
-            }
-            // get text for string
-            final String stringName;
-            try {
-                stringName = CgeoApplication.getInstance().getResources().getResourceName(stringId);
-            } catch (final NullPointerException ignored) {
-                return null;
-            }
-            if (stringName == null) {
-                return null;
-            }
-            // cut out baseName
-            final MatcherWrapper m = new MatcherWrapper(BASENAME_PATTERN, stringName);
-            if (!m.matches()) {
-                return null;
-            }
-            return m.group(1);
-        }
-
-        // @return  baseName + "_yes" or "_no" e.g. "food_no" or "uv_yes"
-        public static String getInternalId(final int attributeId, final boolean active) {
-            final String baseName = getBaseName(attributeId);
-            if (baseName == null) {
-                return null;
-            }
-            return baseName + (active ? YES : NO);
         }
     }
 
@@ -643,9 +524,9 @@ public abstract class GPXParser extends FileParser {
                         if (attrs.getIndex("id") > -1 && attrs.getIndex("inc") > -1) {
                             final int attributeId = Integer.parseInt(attrs.getValue("id"));
                             final boolean attributeActive = Integer.parseInt(attrs.getValue("inc")) != 0;
-                            final String internalId = CacheAttributeTranslator.getInternalId(attributeId, attributeActive);
-                            if (internalId != null) {
-                                cache.getAttributes().add(internalId);
+                            final CacheAttribute attribute = CacheAttribute.getById(attributeId);
+                            if (attribute != null) {
+                                cache.getAttributes().add(attribute.getValue(attributeActive));
                             }
                         }
                     } catch (final NumberFormatException ignored) {

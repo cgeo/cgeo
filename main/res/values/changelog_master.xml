@@ -16,6 +16,7 @@
     · Changed: Show more text of cache title in lists\n
     · Changed: Always start new line when editing personal note\n
     · Fix: Show empty log book page for OpenCaching caches without any log\n
+    · Fix: Show attributes for OpenCaching GPX imports\n
     · Removed: No more option to show only short description of a cache\n
     \n
     \n
