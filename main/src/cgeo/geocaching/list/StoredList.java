@@ -6,14 +6,12 @@ import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.dialog.Dialogs;
 
-import org.apache.commons.lang3.StringUtils;
-import android.support.annotation.NonNull;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Application;
 import android.content.DialogInterface;
 import android.content.res.Resources;
+import android.support.annotation.NonNull;
 
 import java.lang.ref.WeakReference;
 import java.text.Collator;
@@ -24,6 +22,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.commons.lang3.StringUtils;
 import rx.functions.Action1;
 
 public final class StoredList extends AbstractList {
@@ -108,6 +107,7 @@ public final class StoredList extends AbstractList {
                     } else {
                         selectedListIds.remove(list.id);
                     }
+                    ((AlertDialog) dialog).getButton(DialogInterface.BUTTON_POSITIVE).setEnabled(!selectedListIds.isEmpty());
                 }
             });
             builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
@@ -122,14 +122,17 @@ public final class StoredList extends AbstractList {
                             dialog.cancel();
                         }
                     }
-            ).setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+            );
+            builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
                 @Override
                         public void onClick(final DialogInterface dialog, final int id) {
                             dialog.dismiss();
                         }
                     }
             );
-            builder.create().show();
+            final AlertDialog dialog = builder.create();
+            dialog.show();
+            dialog.getButton(DialogInterface.BUTTON_POSITIVE).setEnabled(!selectedListIds.isEmpty());
         }
 
         public void promptForListSelection(final int titleId, @NonNull final Action1<Integer> runAfterwards, final boolean onlyConcreteLists, final Set<Integer> exceptListIds, @NonNull final ListNameMemento listNameMemento) {
