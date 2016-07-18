@@ -1026,6 +1026,13 @@ public class Settings {
     public static void setShareAfterExport(final boolean shareAfterExport) {
         putBoolean(R.string.pref_shareafterexport, shareAfterExport);
     }
+    public static boolean getIncludeFoundStatus() {
+        return getBoolean(R.string.pref_includefoundstatus, true);
+    }
+
+    public static void setIncludeFoundStatus(final boolean includeFoundStatus) {
+        putBoolean(R.string.pref_includefoundstatus, includeFoundStatus);
+    }
 
     /**
      * Obtain Trackable action from the last Trackable log.

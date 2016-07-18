@@ -19,4 +19,9 @@
         style="@style/checkbox_full"
         android:text="@string/init_share_after_export" />
 
+    <CheckBox
+        android:id="@+id/include_found_status"
+        style="@style/checkbox_full"
+        android:text="@string/init_include_found_status" />
+
 </LinearLayout>

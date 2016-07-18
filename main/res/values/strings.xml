@@ -583,6 +583,7 @@
     <string name="init_maptrail">Show Trail</string>
     <string name="init_summary_maptrail">Show trail on Map</string>
     <string name="init_share_after_export">Open share menu after GPX export</string>
+    <string name="init_include_found_status">Include \"Found\" status</string>
     <string name="init_trackautovisit">Visit TBs</string>
     <string name="init_summary_trackautovisit">Set trackables to \"Visited\" by default</string>
     <string name="init_sigautoinsert">Insert automatically</string>
