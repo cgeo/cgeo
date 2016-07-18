@@ -214,6 +214,7 @@
   <string name="warn_no_coordinates">Keine Koordinaten angegeben.</string>
   <string name="warn_no_keyword">Kein Stichwort angegeben.</string>
   <string name="warn_no_username">Kein Benutzername angegeben.</string>
+  <string name="warn_no_connector">Keiner der derzeit aktivierten Dienste unterstützt diese Suche.</string>
   <string name="warn_search_help_title">Hilfe benötigt?</string>
   <string name="warn_search_help_address">Adresse oder Ort eingeben, z. B. Postanschrift \"Dorfstraße 333, Berlin, Deutschland\", einen Ort \"Berlin\" oder den Namen eines beliebigen Ortes wie \"Tiergarten\".</string>
   <string name="warn_search_help_gccode">Geocode eingeben, z. B. \"GC1VCAZ\".</string>
@@ -560,6 +561,7 @@
   <string name="init_maptrail">Zeige Spur</string>
   <string name="init_summary_maptrail">Zeige Spur auf Karte</string>
   <string name="init_share_after_export">Weiterleiten nach dem Export</string>
+  <string name="init_include_found_status">Found status einbeziehen</string>
   <string name="init_trackautovisit">TBs besuchen</string>
   <string name="init_summary_trackautovisit">Trackables automatisch auf \"besuchen\" setzen</string>
   <string name="init_sigautoinsert">Automatisch einfügen</string>

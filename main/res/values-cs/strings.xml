@@ -126,6 +126,7 @@
   <string name="log_hint_log_password">Zadej své logovací heslo</string>
   <string name="log_oc_team_comment">Komentář týmu OC</string>
   <string name="log_your_saved_log">Tvé uložené logy</string>
+  <string name="log_empty_logbook">Logbook této keše je prázdný.</string>
   <string-array name="log_image_scales">
     <item>Bez měřítka</item>
     <item>512 px</item>
@@ -435,6 +436,7 @@
   <string name="settings_reauthorize">Znovu autorizovat c:geo</string>
   <string name="settings_gc_description">Autorizovat c:geo pro hledání keší prostřednictvím geocaching.com.</string>
   <string name="settings_ec_description">Autorizovat c:geo pro hledání keší a přístup/filtrování tvých nalezených keší služby extremcaching.com.</string>
+  <string name="settings_su_description">Autorizovat c:geo pro hledání keší prostřednictvím geocaching.su.</string>
   <string name="init_oc">Opencaching.de</string>
   <string name="settings_activate_oc">Aktivovat</string>
   <string name="init_summary_oc_de">Načíst keše z opencaching.de</string>
