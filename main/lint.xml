@@ -5,9 +5,11 @@
     <issue id="DuplicateIds" severity="error" />
     <issue id="DuplicateIncludedIds" severity="error" />
     <issue id="ExportedContentProvider" severity="ignore" />
+    <issue id="ImpliedQuantity" severity="ignore" />
     <issue id="InvalidPackage" severity="ignore" />
     <issue id="MissingQuantity">
         <ignore path="res/values-pl/strings.xml" />
+        <ignore path="res/values-ru/strings.xml" />
     </issue>
     <issue id="MissingTranslation" severity="ignore" />
     <issue id="Registered" severity="ignore" />
@@ -15,6 +17,9 @@
     <issue id="RtlSymmetry" severity="ignore" />
     <issue id="Typos" severity="ignore" />
     <issue id="UnusedAttribute" severity="ignore" />
+    <issue id="UnusedQuantity">
+        <ignore path="res/values-ru/strings.xml" />
+    </issue>
     <issue id="UnusedResources">
         <ignore path="res/drawable-mdpi/attribute_maintenance.png" />
         <ignore path="res/values/vpi__colors.xml" />
