@@ -68,12 +68,9 @@ public class LogTemplateProviderTest extends TestCase {
         final String template = "[NUMBER]";
         final String withIncrement = LogTemplateProvider.applyTemplates(template, context);
         final String withoutIncrement = LogTemplateProvider.applyTemplatesNoIncrement(template, context);
-        // Either both strings are empty because we have no cache, or they represent integers with an offset of one.
-        if (withIncrement.isEmpty()) {
-            assertThat(withoutIncrement).isEmpty();
-        } else {
-            assertThat(Integer.valueOf(withIncrement) - Integer.valueOf(withoutIncrement)).isEqualTo(1);
-        }
+
+        // both strings represent integers with an offset of one.
+        assertThat(Integer.parseInt(withIncrement) - Integer.parseInt(withoutIncrement)).isEqualTo(1);
     }
 
 }
