@@ -43,11 +43,6 @@ import cgeo.geocaching.utils.LeastRecentlyUsedSet;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapUtils;
 
-import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-
 import android.annotation.TargetApi;
 import android.app.ActionBar;
 import android.app.Activity;
@@ -62,6 +57,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -90,6 +87,8 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.ButterKnife;
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import rx.Subscription;
 import rx.functions.Action0;
 import rx.functions.Action1;
@@ -491,9 +490,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
         // set layout
         ActivityMixin.setTheme(activity);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
-            getActionBar().setDisplayHomeAsUpEnabled(true);
-        }
+        setDisplayHomeAsUpEnabled();
         activity.setContentView(mapProvider.getMapLayoutId());
         setTitle();
 
@@ -555,6 +552,13 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
         LiveMapHint.getInstance().showHint(activity);
         AndroidBeam.disable(activity);
+    }
+
+    @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+    private void setDisplayHomeAsUpEnabled() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+            getActionBar().setDisplayHomeAsUpEnabled(true);
+        }
     }
 
     private void initMyLocationSwitchButton(final CheckBox locSwitch) {
