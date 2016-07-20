@@ -1187,7 +1187,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
                 // check if map moved or zoomed
                 //TODO Portree Use Rectangle inside with bigger search window. That will stop reloading on every move
-                final boolean moved = map.markersInvalidated || (map.isLiveEnabled && !map.downloaded) || (previousViewport == null) || zoomNow != previousZoom ||
+                final boolean moved = map.markersInvalidated || (map.isLiveEnabled && !map.downloaded) || previousViewport == null || zoomNow != previousZoom ||
                         (mapMoved(previousViewport, viewportNow) && (map.cachesCnt <= 0 || CollectionUtils.isEmpty(map.caches) || !previousViewport.includes(viewportNow)));
 
                 // update title on any change
@@ -1390,7 +1390,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
             if (!cachesToDisplay.isEmpty()) {
                 // Only show waypoints for single view or setting
                 // when less than showWaypointsthreshold Caches shown
-                if (mapMode == MapMode.SINGLE || (cachesCnt < Settings.getWayPointsThreshold())) {
+                if (mapMode == MapMode.SINGLE || cachesCnt < Settings.getWayPointsThreshold()) {
                     for (final Waypoint waypoint : waypointsToDisplay) {
 
                         if (waypoint == null || waypoint.getCoords() == null) {

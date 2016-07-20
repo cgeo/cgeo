@@ -215,7 +215,7 @@ public final class GCConstants {
         long base = GC_BASE31;
         final String geocodeWO = gccode.substring(2).toUpperCase(Locale.US);
 
-        if ((geocodeWO.length() < 4) || (geocodeWO.length() == 4 && SEQUENCE_GCID.indexOf(geocodeWO.charAt(0)) < 16)) {
+        if (geocodeWO.length() < 4 || (geocodeWO.length() == 4 && SEQUENCE_GCID.indexOf(geocodeWO.charAt(0)) < 16)) {
             base = GC_BASE16;
         }
 

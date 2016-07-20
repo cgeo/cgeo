@@ -215,9 +215,10 @@ public class Tile {
         if (!(o instanceof Tile)) {
             return false;
         }
-        return (this.tileX == ((Tile) o).tileX)
-                && (this.tileY == ((Tile) o).tileY)
-                && (this.zoomLevel == ((Tile) o).zoomLevel);
+        final Tile other = (Tile) o;
+        return this.tileX == other.tileX
+                && this.tileY == other.tileY
+                && this.zoomLevel == other.zoomLevel;
     }
 
     @Override

@@ -32,7 +32,7 @@ public final class EditUtils {
             @Override
             public boolean onKey(final View v, final int keyCode, final KeyEvent event) {
                 // If the event is a key-down event on the "enter" button
-                if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
                     runnable.run();
                     return true;
                 }

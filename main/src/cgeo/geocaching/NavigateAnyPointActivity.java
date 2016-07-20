@@ -177,7 +177,7 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity implemen
     @Override
     public boolean onContextItemSelected(final MenuItem item) {
         final AdapterView.AdapterContextMenuInfo menuInfo = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-        final int position = (menuInfo != null) ? menuInfo.position : contextMenuItemPosition;
+        final int position = menuInfo != null ? menuInfo.position : contextMenuItemPosition;
         final Object destination = historyListView.getItemAtPosition(position);
 
         switch (item.getItemId()) {

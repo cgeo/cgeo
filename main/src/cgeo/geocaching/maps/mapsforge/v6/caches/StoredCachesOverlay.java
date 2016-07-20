@@ -59,8 +59,8 @@ public class StoredCachesOverlay extends AbstractCachesOverlay {
 
                 // check if map moved or zoomed
                 //TODO Portree Use Rectangle inside with bigger search window. That will stop reloading on every move
-                final boolean moved = overlay.isInvalidated() || (previousViewport == null) || zoomNow != previousZoom ||
-                        (AbstractCachesOverlay.mapMoved(previousViewport, viewportNow) || !previousViewport.includes(viewportNow));
+                final boolean moved = overlay.isInvalidated() || previousViewport == null || zoomNow != previousZoom ||
+                        AbstractCachesOverlay.mapMoved(previousViewport, viewportNow) || !previousViewport.includes(viewportNow);
 
                 previousZoom = zoomNow;
 

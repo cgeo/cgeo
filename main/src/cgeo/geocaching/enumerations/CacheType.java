@@ -93,7 +93,7 @@ public enum CacheType {
 
     @NonNull
     public static CacheType getById(final String id) {
-        final CacheType result = (id != null) ? FIND_BY_ID.get(id.toLowerCase(Locale.US).trim()) : null;
+        final CacheType result = id != null ? FIND_BY_ID.get(id.toLowerCase(Locale.US).trim()) : null;
         if (result == null) {
             return UNKNOWN;
         }
@@ -102,7 +102,7 @@ public enum CacheType {
 
     @NonNull
     public static CacheType getByPattern(final String pattern) {
-        final CacheType result = (pattern != null) ? FIND_BY_PATTERN.get(pattern.toLowerCase(Locale.US).trim()) : null;
+        final CacheType result = pattern != null ? FIND_BY_PATTERN.get(pattern.toLowerCase(Locale.US).trim()) : null;
         if (result != null) {
             return result;
         }
@@ -111,7 +111,7 @@ public enum CacheType {
 
     @NonNull
     public static CacheType getByGuid(final String guid) {
-        final CacheType result = (guid != null) ? FIND_BY_GUID.get(guid) : null;
+        final CacheType result = guid != null ? FIND_BY_GUID.get(guid) : null;
         if (result == null) {
             return UNKNOWN;
         }
@@ -120,7 +120,7 @@ public enum CacheType {
 
     @NonNull
     public static CacheType getByWaypointType(final String typeNumber) {
-        final CacheType result = (typeNumber != null) ? FIND_BY_WPT_TYPE.get(typeNumber) : null;
+        final CacheType result = typeNumber != null ? FIND_BY_WPT_TYPE.get(typeNumber) : null;
         if (result == null) {
             // earthcaches don't use their numeric ID on search result pages, but a literal "earthcache". therefore have a fallback
             return getByPattern(typeNumber);

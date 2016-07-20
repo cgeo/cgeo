@@ -84,8 +84,8 @@ public final class StaticMapsProvider {
         final int scale = width <= GOOGLE_MAPS_MAX_SIZE ? 1 : 2;
         final float aspectRatio = width / (float) height;
         final int requestWidth = Math.min(width / scale, GOOGLE_MAPS_MAX_SIZE);
-        final int requestHeight = (aspectRatio > 1) ? Math.round(requestWidth / aspectRatio) : requestWidth;
-        final int requestZoom = Math.min((scale == 2) ? zoom + 1 : zoom, GOOGLE_MAX_ZOOM);
+        final int requestHeight = aspectRatio > 1 ? Math.round(requestWidth / aspectRatio) : requestWidth;
+        final int requestZoom = Math.min(scale == 2 ? zoom + 1 : zoom, GOOGLE_MAX_ZOOM);
         return checkDownloadPermission(Completable.defer(new Func0<Completable>() {
             @Override
             public Completable call() {
