@@ -98,7 +98,7 @@ public class GeocachingSuConnector extends AbstractConnector implements ISearchB
 
     @Override
     public boolean canHandle(@NonNull final String geocode) {
-        return (StringUtils.startsWithAny(StringUtils.upperCase(geocode), PREFIX_TRADITIONAL, PREFIX_MULTISTEP_VIRTUAL, PREFIX_VIRTUAL, PREFIX_MULTISTEP, PREFIX_EVENT, PREFIX_CONTEST)) && isNumericId(geocode.substring(2));
+        return StringUtils.startsWithAny(StringUtils.upperCase(geocode), PREFIX_TRADITIONAL, PREFIX_MULTISTEP_VIRTUAL, PREFIX_VIRTUAL, PREFIX_MULTISTEP, PREFIX_EVENT, PREFIX_CONTEST) && isNumericId(geocode.substring(2));
     }
 
     @Override

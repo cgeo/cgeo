@@ -89,7 +89,7 @@ public class MagnetometerAndAccelerometerProvider {
 
     public static boolean hasMagnetometerAndAccelerometerSensors(final Context context) {
         final SensorManager sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
-        return (sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD) != null) &&
-                (sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER) != null);
+        return sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD) != null &&
+                sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER) != null;
     }
 }

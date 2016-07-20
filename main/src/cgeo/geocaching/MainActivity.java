@@ -627,7 +627,7 @@ public class MainActivity extends AbstractActionBarActivity {
                 if (addCoords == null) {
                     navLocation.setText(R.string.loc_no_addr);
                 }
-                if (addCoords == null || (currentCoords.distanceTo(addCoords) > 0.5)) {
+                if (addCoords == null || currentCoords.distanceTo(addCoords) > 0.5) {
                     addCoords = currentCoords;
                     final Observable<String> address = (new AndroidGeocoder(MainActivity.this).getFromLocation(currentCoords)).map(new Func1<Address, String>() {
                         @Override

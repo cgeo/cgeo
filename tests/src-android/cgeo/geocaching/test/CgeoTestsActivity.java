@@ -109,7 +109,7 @@ public class CgeoTestsActivity extends Activity {
         final List<InstrumentationInfo> list =
                 getPackageManager()
                         .queryInstrumentation(packageName, 0);
-        return (!list.isEmpty()) ? list.get(0) : null;
+        return !list.isEmpty() ? list.get(0) : null;
     }
 
     /**

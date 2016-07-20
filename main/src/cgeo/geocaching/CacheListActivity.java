@@ -1184,7 +1184,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             return;
         }
 
-        if (Settings.getChooseList() && (type != CacheListType.OFFLINE && type != CacheListType.HISTORY)) {
+        if (Settings.getChooseList() && type != CacheListType.OFFLINE && type != CacheListType.HISTORY) {
             // let user select list to store cache in
             new StoredList.UserInterface(this).promptForMultiListSelection(R.string.list_title,
                     new Action1<Set<Integer>>() {

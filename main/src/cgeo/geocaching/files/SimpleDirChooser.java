@@ -243,7 +243,7 @@ public class SimpleDirChooser extends AbstractListActivity {
 
         @Override
         public void onClick(final View arg0) {
-            final Option lastOption = (lastPosition > -1) ? adapter.getItem(lastPosition) : null;
+            final Option lastOption = lastPosition > -1 ? adapter.getItem(lastPosition) : null;
             final Option currentOption = adapter.getItem(position);
             if (lastOption != null) {
                 lastOption.setChecked(false);

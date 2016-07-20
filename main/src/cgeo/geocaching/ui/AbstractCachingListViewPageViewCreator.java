@@ -32,7 +32,7 @@ public abstract class AbstractCachingListViewPageViewCreator extends AbstractCac
         }
         final int position = view.getFirstVisiblePosition();
         final View child = view.getChildAt(0);
-        final int positionFromTop = (child == null) ? 0 : child.getTop();
+        final int positionFromTop = child == null ? 0 : child.getTop();
         final Bundle state = new Bundle();
         state.putInt(STATE_POSITION, position);
         state.putInt(STATE_POSITION_FROM_TOP, positionFromTop);

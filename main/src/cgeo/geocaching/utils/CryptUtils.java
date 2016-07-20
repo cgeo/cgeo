@@ -60,7 +60,7 @@ public final class CryptUtils {
             } else if (!plaintext) {
                 final int capitalized = result & 32;
                 result &= ~capitalized;
-                result = ((result >= 'A') && (result <= 'Z') ? ((result - 'A' + 13) % 26 + 'A') : result)
+                result = (result >= 'A' && result <= 'Z' ? ((result - 'A' + 13) % 26 + 'A') : result)
                         | capitalized;
             }
             return (char) result;

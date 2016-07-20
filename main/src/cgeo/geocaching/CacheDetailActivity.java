@@ -1971,8 +1971,8 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
             @Override
             public boolean onLongClick(final View v) {
-                if ((Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.HONEYCOMB)
-                        && ((view.getId() == R.id.description) || (view.getId() == R.id.hint))) {
+                if (Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.HONEYCOMB
+                        && (view.getId() == R.id.description || view.getId() == R.id.hint)) {
                     selectedTextView = (IndexOutOfBoundsAvoidingTextView) view;
                     mSelectionModeActive = true;
                     return false;
