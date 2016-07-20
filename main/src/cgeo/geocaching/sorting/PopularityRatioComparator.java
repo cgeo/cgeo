@@ -24,13 +24,6 @@ class PopularityRatioComparator extends AbstractCacheComparator {
             ratio2 = (float) cache2.getFavoritePoints() / (float) finds2;
         }
 
-        if ((ratio2 - ratio1) > 0.0f) {
-            return 1;
-        }
-        if ((ratio2 - ratio1) < 0.0f) {
-            return -1;
-        }
-
-        return 0;
+        return Float.compare(ratio2, ratio1);
     }
 }
