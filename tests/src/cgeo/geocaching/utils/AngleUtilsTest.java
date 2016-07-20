@@ -15,6 +15,7 @@ public class AngleUtilsTest extends TestCase {
         assertEquals(AngleUtils.normalize(-720), 0.0f, 0);
         assertEquals(AngleUtils.normalize(721), 1.0f, 0);
         assertEquals(AngleUtils.normalize(-721), 359.0f, 0);
+        assertEquals(AngleUtils.normalize(-Float.MIN_VALUE), 0.0f, 0);
     }
 
     public static void testDifference() {
