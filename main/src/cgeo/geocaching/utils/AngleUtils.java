@@ -35,7 +35,8 @@ public final class AngleUtils {
      * @return the same angle in the [0, 360[ range
      */
     public static float normalize(final float angle) {
-        return (angle >= 0 ? angle : (360 - ((-angle) % 360))) % 360;
+        final float mod = angle % 360;
+        return mod >= 0 ? mod : (mod + 360) % 360;
     }
 
     public static int getRotationOffset() {
