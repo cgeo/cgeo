@@ -43,7 +43,7 @@ public class GeokretyParser {
         private static final SynchronizedDateFormat DATE_FORMAT = new SynchronizedDateFormat("yyyy-MM-dd kk:mm:ss", TimeZone.getTimeZone("UTC"), Locale.US);
         private final List<Trackable> trackables = new ArrayList<>();
         private Trackable trackable;
-        private boolean isMessage = false;
+        private boolean isMultiline = false;
         private String content;
 
         @NonNull
@@ -114,7 +114,7 @@ public class GeokretyParser {
                     }
                 }
                 if (localName.equalsIgnoreCase("description")) {
-                    isMessage = true;
+                    isMultiline = true;
                 }
                 // TODO: latitude/longitude could be parsed, but trackable doesn't support it, yet...
                 //if (localName.equalsIgnoreCase("position")) {
@@ -151,7 +151,7 @@ public class GeokretyParser {
                 }
                 if (localName.equalsIgnoreCase("description")) {
                     trackable.setDetails(content);
-                    isMessage = false;
+                    isMultiline = false;
                 }
                 if (localName.equalsIgnoreCase("owner")) {
                     trackable.setOwner(content);
@@ -184,7 +184,7 @@ public class GeokretyParser {
         public final void characters(final char[] ch, final int start, final int length)
                 throws SAXException {
             final String text = StringUtils.trim(new String(ch, start, length));
-            content = isMessage ? StringUtils.join(content, text) : text;
+            content = isMultiline ? StringUtils.join(content, text) : text;
         }
 
         /**
