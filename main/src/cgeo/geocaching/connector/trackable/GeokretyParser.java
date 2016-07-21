@@ -211,7 +211,9 @@ public class GeokretyParser {
                     final Date date = DATE_FORMAT_SECONDS.parse(content);
                     trackable.setReleased(date);
                 }
-                if (StringUtils.isNotBlank(content) && localName.equalsIgnoreCase("distancetravelled")) {
+                if (StringUtils.isNotBlank(content) && (
+                        localName.equalsIgnoreCase("distancetravelled") || localName.equalsIgnoreCase("distancetraveled")
+                )) {
                     trackable.setDistance(Float.parseFloat(content));
                 }
                 if (localName.equalsIgnoreCase("images")) {
