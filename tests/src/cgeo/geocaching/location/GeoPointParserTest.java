@@ -20,7 +20,7 @@ public class GeoPointParserTest extends TestCase {
 
     public static void testFullCoordinates() {
         final Geopoint goal = new Geopoint(refLatitude, refLongitude);
-        assertGeopointEquals(goal, GeopointParser.parse("N 49° 56.031 | E 8° 38.564"), (float) 1e-6);
+        assertGeopointEquals(goal, GeopointParser.parse("N 49° 56.031 | E 8° 38.564"), 1e-6f);
     }
 
     private static void assertGeopointEquals(final Geopoint expected, final Geopoint actual, final float tolerance) {
@@ -61,13 +61,13 @@ public class GeoPointParserTest extends TestCase {
     public static void testVariousFormats() {
         final Geopoint goal1 = GeopointParser.parse("N 49° 43' 57\" | E 2 12' 35");
         final Geopoint goal2 = GeopointParser.parse("N 49 43.95 E2°12.5833333333");
-        assertGeopointEquals(goal1, goal2, (float) 1e-6);
+        assertGeopointEquals(goal1, goal2, 1e-6f);
     }
 
     public static void testParseOurOwnSeparator() {
         final Geopoint separator = GeopointParser.parse("N 49° 43' 57\" · E 2 12' 35");
         final Geopoint noSeparator = GeopointParser.parse("N 49 43.95 E2°12.5833333333");
-        assertGeopointEquals(separator, noSeparator, (float) 1e-6);
+        assertGeopointEquals(separator, noSeparator, 1e-6f);
     }
 
     public static void testInSentence() {
