@@ -101,7 +101,7 @@ public final class CacheDetailsCreator {
         }
         if (cache.isEventCache() && states.isEmpty()) {
             for (final LogEntry log : cache.getLogs()) {
-                if (LogType.WILL_ATTEND.equals(log.getType()) && log.isOwn()) {
+                if (log.getType() == LogType.WILL_ATTEND && log.isOwn()) {
                     states.add(LogType.WILL_ATTEND.getL10n());
                 }
             }

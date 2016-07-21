@@ -89,7 +89,7 @@ public final class LoggingUI extends AbstractUIFactory {
         final List<LogType> logTypes = cache.getPossibleLogTypes();
         final ArrayList<LogTypeEntry> list = new ArrayList<>();
         for (final LogType logType : logTypes) {
-            list.add(new LogTypeEntry(logType, null, logType.equals(currentLogType)));
+            list.add(new LogTypeEntry(logType, null, logType == currentLogType));
         }
         if (cache.isLogOffline()) {
             list.add(new LogTypeEntry(null, SpecialLogType.CLEAR_LOG, false));
