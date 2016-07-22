@@ -7,16 +7,15 @@ import cgeo.geocaching.SearchActivity;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.utils.ProcessUtils;
 
-import com.google.android.gms.appinvite.AppInviteInvitation;
-import com.google.android.gms.appinvite.AppInviteInvitation.IntentBuilder;
-
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-
 import android.app.Activity;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
+import com.google.android.gms.appinvite.AppInviteInvitation;
+import com.google.android.gms.appinvite.AppInviteInvitation.IntentBuilder;
 
 public class AppInvite {
 
@@ -50,6 +49,11 @@ public class AppInvite {
         message.append(activity.getString(R.string.cache_terrain)).append(separator).append(cache.getTerrain()).append(lineBreak);
         message.append(activity.getString(R.string.cache_difficulty)).append(separator).append(cache.getDifficulty()).append(lineBreak);
         message.append(cache.getUrl());
+
+        // there is a limit of 100 characters
+        while (message.length() > AppInviteInvitation.IntentBuilder.MAX_MESSAGE_LENGTH && message.lastIndexOf(lineBreak) > 0) {
+            message.delete(message.lastIndexOf(lineBreak), message.length());
+        }
 
         final Intent searchIntent = new Intent(CgeoApplication.getInstance(), SearchActivity.class);
         searchIntent.setAction(Intent.ACTION_SEARCH).putExtra(SearchManager.QUERY, cache.getGeocode()).putExtra(Intents.EXTRA_KEYWORD_SEARCH, false);
