@@ -1,19 +1,11 @@
 package cgeo.geocaching.connector.gc;
 
-import butterknife.ButterKnife;
-
 import cgeo.geocaching.R;
 import cgeo.geocaching.loaders.RecaptchaReceiver;
 import cgeo.geocaching.network.Network;
-import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.utils.AndroidRxUtils;
-
-import org.apache.commons.io.IOUtils;
-
-import rx.Observable;
-import rx.android.app.AppObservable;
-import rx.functions.Action1;
-import rx.functions.Func0;
+import cgeo.geocaching.utils.Log;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -21,7 +13,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.widget.EditText;
@@ -30,14 +21,20 @@ import android.widget.ImageView;
 
 import java.io.InputStream;
 
-public class RecaptchaHandler extends Handler {
+import butterknife.ButterKnife;
+import org.apache.commons.io.IOUtils;
+import rx.Observable;
+import rx.android.app.AppObservable;
+import rx.functions.Action1;
+import rx.functions.Func0;
+
+public class RecaptchaHandler extends WeakReferenceHandler<Activity> {
     public static final int SHOW_CAPTCHA = 1;
 
-    private final Activity activity;
     private final RecaptchaReceiver recaptchaReceiver;
 
     public RecaptchaHandler(final Activity activity, final RecaptchaReceiver recaptchaReceiver) {
-        this.activity = activity;
+        super(activity);
         this.recaptchaReceiver = recaptchaReceiver;
     }
 
@@ -64,6 +61,10 @@ public class RecaptchaHandler extends Handler {
                 return Observable.empty();
             }
         });
+        final Activity activity = getActivity();
+        if (activity == null) {
+            return;
+        }
         AppObservable.bindActivity(activity, captcha).subscribeOn(AndroidRxUtils.networkScheduler).subscribe(new Action1<Bitmap>() {
             @Override
             public void call(final Bitmap bitmap) {
@@ -82,6 +83,10 @@ public class RecaptchaHandler extends Handler {
     @Override
     public void handleMessage(final Message msg) {
         if (msg.what == SHOW_CAPTCHA) {
+            final Activity activity = getActivity();
+            if (activity == null) {
+                return;
+            }
             final AlertDialog.Builder dlg = new AlertDialog.Builder(activity);
             final View view = activity.getLayoutInflater().inflate(R.layout.recaptcha_dialog, null, false);
 
