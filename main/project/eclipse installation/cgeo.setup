@@ -38,6 +38,10 @@
           value="false">
         <description>Do not gitignore derived resources automatically</description>
       </setupTask>
+      <setupTask
+          xsi:type="setup:PreferenceTask"
+          key="/instance/org.eclipse.egit.core/core_defaultRepositoryDir"
+          value="${installation.location}/git"/>
     </setupTask>
     <setupTask
         xsi:type="setup:CompoundTask"
