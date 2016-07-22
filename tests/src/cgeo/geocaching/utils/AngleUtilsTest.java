@@ -2,8 +2,6 @@ package cgeo.geocaching.utils;
 
 import junit.framework.TestCase;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 public class AngleUtilsTest extends TestCase {
 
     public static void testNormalize() {
