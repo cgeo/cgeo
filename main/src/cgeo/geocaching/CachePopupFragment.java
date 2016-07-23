@@ -13,8 +13,6 @@ import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.Log;
 
-import org.apache.commons.lang3.StringUtils;
-
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
@@ -28,10 +26,12 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.lang.ref.WeakReference;
 import java.util.Collections;
 import java.util.Set;
 
 import butterknife.ButterKnife;
+import org.apache.commons.lang3.StringUtils;
 import rx.functions.Action0;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
@@ -51,11 +51,13 @@ public class CachePopupFragment extends AbstractDialogFragment {
         return f;
     }
 
-    private class StoreCacheHandler extends CancellableHandler {
+    private static class StoreCacheHandler extends CancellableHandler {
         private final int progressMessage;
+        private final WeakReference<CachePopupFragment> popupRef;
 
-        StoreCacheHandler(final int progressMessage) {
+        StoreCacheHandler(final CachePopupFragment popup, final int progressMessage) {
             this.progressMessage = progressMessage;
+            popupRef = new WeakReference<>(popup);
         }
 
         @Override
@@ -63,21 +65,39 @@ public class CachePopupFragment extends AbstractDialogFragment {
             if (msg.what == UPDATE_LOAD_PROGRESS_DETAIL && msg.obj instanceof String) {
                 updateStatusMsg((String) msg.obj);
             } else {
-                init();
+                final CachePopupFragment popup = popupRef.get();
+                if (popup != null) {
+                    popup.init();
+                }
             }
         }
 
         private void updateStatusMsg(final String msg) {
-            progress.setMessage(res.getString(progressMessage)
+            final CachePopupFragment popup = popupRef.get();
+            if (popup == null) {
+                return;
+            }
+            popup.progress.setMessage(popup.getResources().getString(progressMessage)
                     + "\n\n"
                     + msg);
         }
     }
 
-    private class DropCacheHandler extends Handler {
+    private static class DropCacheHandler extends Handler {
+
+        private final WeakReference<CachePopupFragment> popupRef;
+
+        public DropCacheHandler(final CachePopupFragment popup) {
+            this.popupRef = new WeakReference<>(popup);
+        }
+
         @Override
         public void handleMessage(final Message msg) {
-            getActivity().finish();
+            final CachePopupFragment popup = popupRef.get();
+            if (popup == null) {
+                return;
+            }
+            popup.getActivity().finish();
         }
     }
 
@@ -171,7 +191,7 @@ public class CachePopupFragment extends AbstractDialogFragment {
                 CacheDetailActivity.updateOfflineBox(getView(), cache, res, new RefreshCacheClickListener(), new DropCacheClickListener(), new StoreCacheClickListener(), null);
                 CacheDetailActivity.updateCacheLists(getView(), cache, res);
             } else {
-                final StoreCacheHandler storeCacheHandler = new StoreCacheHandler(R.string.cache_dialog_offline_save_message);
+                final StoreCacheHandler storeCacheHandler = new StoreCacheHandler(CachePopupFragment.this, R.string.cache_dialog_offline_save_message);
                 final FragmentActivity activity = getActivity();
                 progress.show(activity, res.getString(R.string.cache_dialog_offline_save_title), res.getString(R.string.cache_dialog_offline_save_message), true, storeCacheHandler.cancelMessage());
                 AndroidRxUtils.andThenOnUi(Schedulers.io(), new Action0() {
@@ -204,7 +224,7 @@ public class CachePopupFragment extends AbstractDialogFragment {
                 return;
             }
 
-            final StoreCacheHandler refreshCacheHandler = new StoreCacheHandler(R.string.cache_dialog_offline_save_message);
+            final StoreCacheHandler refreshCacheHandler = new StoreCacheHandler(CachePopupFragment.this, R.string.cache_dialog_offline_save_message);
             progress.show(getActivity(), res.getString(R.string.cache_dialog_refresh_title), res.getString(R.string.cache_dialog_refresh_message), true, refreshCacheHandler.cancelMessage());
             cache.refresh(refreshCacheHandler, AndroidRxUtils.networkScheduler);
         }
@@ -218,7 +238,7 @@ public class CachePopupFragment extends AbstractDialogFragment {
                 return;
             }
 
-            final DropCacheHandler dropCacheHandler = new DropCacheHandler();
+            final DropCacheHandler dropCacheHandler = new DropCacheHandler(CachePopupFragment.this);
             progress.show(getActivity(), res.getString(R.string.cache_dialog_offline_drop_title), res.getString(R.string.cache_dialog_offline_drop_message), true, null);
             cache.drop(dropCacheHandler);
         }
