@@ -16,12 +16,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
 public final class LoggingUI extends AbstractUIFactory {
 
-    private static View selectedView;
+    private static WeakReference<View> selectedViewRef;
 
     private LoggingUI() {
         // utility class
@@ -118,6 +119,7 @@ public final class LoggingUI extends AbstractUIFactory {
                 } else {
                     cache.logOffline(activity, logTypeEntry.logType);
                 }
+                final View selectedView = selectedViewRef != null ? selectedViewRef.get() : null;
                 if (selectedView != null) {
                     final ViewHolder holder = (ViewHolder) selectedView.getTag();
                     if (holder != null) {
@@ -144,7 +146,7 @@ public final class LoggingUI extends AbstractUIFactory {
 
     public static void onPrepareOptionsMenu(final Menu menu, final Geocache cache, final View view) {
         onPrepareOptionsMenu(menu, cache);
-        selectedView = view;
+        selectedViewRef = new WeakReference<>(view);
     }
 
     public static void addMenuItems(final Activity activity, final Menu menu, final Geocache cache) {
