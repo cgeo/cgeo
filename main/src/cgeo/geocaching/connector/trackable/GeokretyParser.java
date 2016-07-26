@@ -266,8 +266,12 @@ public class GeokretyParser {
         @Override
         public final void characters(final char[] ch, final int start, final int length)
                 throws SAXException {
-            final String text = StringUtils.trim(new String(ch, start, length));
-            content = isMultiline ? StringUtils.join(content, text) : text;
+            final String text = new String(ch, start, length);
+            if (isMultiline) {
+                content = StringUtils.join(content, text.replaceAll("(\r\n|\n)", "<br />"));
+            } else {
+                content = StringUtils.trim(text);
+            }
         }
 
         /**

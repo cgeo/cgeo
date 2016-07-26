@@ -110,7 +110,7 @@ public class GeokretyParserTest extends AbstractResourceInstrumentationTestCase 
         assertThat(trackable1.getGeocode()).isEqualTo("GKC240");
         assertThat(trackable1.getDistance()).isEqualTo(2254);
         assertThat(trackable1.getDetails()).isEqualTo("Dieser Geokret dient zum Testen von c:geo.<br />" +
-                "Er befindet sich nicht wirklich im gelisteten Cache. <br />" +
+                "Er befindet sich nicht wirklich im gelisteten Cache.<br />" +
                 "<br />" +
                 "Bitte ignorieren.");
     }
