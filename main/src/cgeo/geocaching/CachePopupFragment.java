@@ -87,7 +87,7 @@ public class CachePopupFragment extends AbstractDialogFragment {
 
         private final WeakReference<CachePopupFragment> popupRef;
 
-        public DropCacheHandler(final CachePopupFragment popup) {
+        DropCacheHandler(final CachePopupFragment popup) {
             this.popupRef = new WeakReference<>(popup);
         }
 
