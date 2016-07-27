@@ -274,7 +274,7 @@ dependencies {
     compile 'io.reactivex:rxandroid:0.25.0'
 
     // Jackson XML processing
-    def jacksonVersion = '2.8.0'
+    def jacksonVersion = '2.8.1'
     compile "com.fasterxml.jackson.core:jackson-core:$jacksonVersion"
     compile "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
     compile "com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion"
