@@ -191,8 +191,13 @@ public class GeokretyParser {
                     }
 
                     // This is a special case. Deal it at the end of the "geokret" parsing (xml close)
-                    if (trackable.getSpottedType() == Trackable.SPOTTED_TRAVELLING && trackable.getDistance() == 0) {
-                        trackable.setSpottedType(Trackable.SPOTTED_OWNER);
+                    if (trackable.getSpottedType() == Trackable.SPOTTED_USER) {
+                        if (trackable.getDistance() == 0) {
+                            trackable.setSpottedType(Trackable.SPOTTED_OWNER);
+                            trackable.setSpottedName(trackable.getOwner());
+                        } else {
+                            trackable.setSpottedName(getLastSpottedUsername(logsEntries));
+                        }
                     }
 
                     trackable.setLogs(logsEntries);
@@ -289,7 +294,7 @@ public class GeokretyParser {
                     return Trackable.SPOTTED_CACHE;
                 case 1: // Grabbed from
                 case 5: // Visiting
-                    return Trackable.SPOTTED_TRAVELLING;
+                    return Trackable.SPOTTED_USER;
                 case 4: // Archived
                     return Trackable.SPOTTED_ARCHIVED;
                 //case 2: // A comment (however this case doesn't exists in db)
@@ -436,5 +441,27 @@ public class GeokretyParser {
             }
         }
         return null;
+    }
+
+    /**
+     * Determine from the newest logs (ignoring Notes) if the GK is spotted
+     * in the hand of someone.
+     *
+     * @param logsEntries
+     *          the log entries to analyze
+     * @return
+     *          The spotted username (or unknown)
+     */
+    static String getLastSpottedUsername(final List<LogEntry> logsEntries) {
+        for (final LogEntry log: logsEntries) {
+            if (log.getType() == LogType.NOTE) {
+                continue;
+            }
+            if (log.getType() != LogType.GRABBED_IT && log.getType() != LogType.VISIT) {
+                return CgeoApplication.getInstance().getString(R.string.user_unknown);
+            }
+            return log.author;
+        }
+        return CgeoApplication.getInstance().getString(R.string.user_unknown);
     }
 }

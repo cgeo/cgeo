@@ -29,7 +29,6 @@ public class Trackable implements ILogable {
     public static final int SPOTTED_UNKNOWN = 3;
     public static final int SPOTTED_OWNER = 4;
     public static final int SPOTTED_ARCHIVED = 5;
-    public static final int SPOTTED_TRAVELLING = 6;
 
     private String guid = "";
     private String geocode = "";
