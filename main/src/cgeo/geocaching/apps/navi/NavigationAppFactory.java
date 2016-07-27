@@ -345,6 +345,14 @@ public final class NavigationAppFactory {
 
         for (final NavigationAppsEnum navigationApp : installedNavigationApps) {
             if (navigationApp.id == navigationAppId) {
+                // redirect navigation tools between old and new map on the fly.
+                // if the global checkbox and the selected tools don't match, then offline maps may not work due to different theme versions
+                if (navigationApp == NavigationAppsEnum.INTERNAL_MAP && Settings.useNewMapAsDefault()) {
+                    return NavigationAppsEnum.INTERNAL_MAP_NEW.app;
+                }
+                if (navigationApp == NavigationAppsEnum.INTERNAL_MAP_NEW && !Settings.useNewMapAsDefault()) {
+                    return NavigationAppsEnum.INTERNAL_MAP.app;
+                }
                 return navigationApp.app;
             }
         }
