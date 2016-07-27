@@ -132,7 +132,7 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
     protected void showPopup(final View view) {
         // For reason I totally not understand the PopupMenu from Appcompat is broken beyond
         // repair. Chicken out here and show the old menu on Gingerbread.
-        // The "correct" way of implementing this is stil in
+        // The "correct" way of implementing this is still in
         // showPopupCompat(view)
 
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {

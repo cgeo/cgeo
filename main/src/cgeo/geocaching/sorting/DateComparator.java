@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 /**
- * compares caches by date
+ * compares caches by hidden date
  */
 class DateComparator extends AbstractCacheComparator {
 

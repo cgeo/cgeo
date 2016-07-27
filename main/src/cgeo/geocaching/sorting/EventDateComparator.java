@@ -3,7 +3,7 @@ package cgeo.geocaching.sorting;
 import cgeo.geocaching.models.Geocache;
 
 /**
- * Compares caches by date. Used only for event caches.
+ * Compares caches by date. Used only for event caches, if the cache list detects that a list contains only events.
  */
 public class EventDateComparator extends DateComparator {
 
