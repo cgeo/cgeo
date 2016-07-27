@@ -2,9 +2,9 @@ package cgeo.geocaching.test.mock;
 
 import junit.framework.Assert;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import android.support.annotation.NonNull;
-import org.mapsforge.v3.core.IOUtils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
