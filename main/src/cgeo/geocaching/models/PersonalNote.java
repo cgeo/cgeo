@@ -10,21 +10,21 @@ public class PersonalNote {
     private boolean isOffline;
 
     private PersonalNote() {
-        // Empty default constructor
+        // only used for merging
     }
 
     public PersonalNote(final Geocache cache) {
         this.isOffline = cache.isOffline();
         final String personalNote = cache.getPersonalNote();
-        if (StringUtils.isEmpty(personalNote)) {
+        if (StringUtils.isBlank(personalNote)) {
             return;
         }
         final String[] notes = StringUtils.splitByWholeSeparator(personalNote, SEPARATOR);
         if (notes.length > 1) {
-            this.cgeoNote = notes[0];
-            this.providerNote = notes[1];
+            this.cgeoNote = StringUtils.trim(notes[0]);
+            this.providerNote = StringUtils.trim(notes[1]);
         } else {
-            this.providerNote = notes[0];
+            this.providerNote = StringUtils.trim(notes[0]);
         }
     }
 
@@ -97,11 +97,11 @@ public class PersonalNote {
         return builder.toString();
     }
 
-    public final String getCgeoNote() {
+    final String getCgeoNote() {
         return cgeoNote;
     }
 
-    public final String getProviderNote() {
+    final String getProviderNote() {
         return providerNote;
     }
 
