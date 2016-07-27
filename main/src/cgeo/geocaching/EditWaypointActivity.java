@@ -18,18 +18,11 @@ import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.ui.dialog.CoordinatesInputDialog;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.SimpleHandler;
 import cgeo.geocaching.utils.TextUtils;
-
-import org.androidannotations.annotations.EActivity;
-import org.androidannotations.annotations.Extra;
-import org.androidannotations.annotations.InstanceState;
-import org.androidannotations.annotations.ViewById;
-import org.apache.commons.lang3.StringUtils;
-import android.support.annotation.NonNull;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -38,6 +31,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.NonNull;
 import android.support.v4.content.LocalBroadcastManager;
 import android.text.Html;
 import android.view.Menu;
@@ -57,6 +51,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.List;
+
+import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.Extra;
+import org.androidannotations.annotations.InstanceState;
+import org.androidannotations.annotations.ViewById;
+import org.apache.commons.lang3.StringUtils;
 
 @EActivity
 public class EditWaypointActivity extends AbstractActionBarActivity implements CoordinatesInputDialog.CoordinateUpdate {
@@ -489,44 +489,56 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
 
     }
 
-    private void saveWaypoint(final ActivityData currentState) {
+    private static class FinishWaypointSaveHandler extends WeakReferenceHandler<EditWaypointActivity> {
 
-        final Handler finishHandler = new SimpleHandler(this, null) {
+        private final Geopoint coords;
 
-            @Override
-            public void handleMessage(final Message msg) {
-                switch (msg.what) {
-                    case UPLOAD_SUCCESS:
-                        ActivityMixin.showApplicationToast(getString(R.string.waypoint_coordinates_has_been_modified_on_website, currentState.coords));
-                        break;
-                    case SUCCESS:
-                        break;
-                    case UPLOAD_START:
-                        break;
-                    case UPLOAD_ERROR:
-                        ActivityMixin.showApplicationToast(getString(R.string.waypoint_coordinates_upload_error));
-                        break;
-                    case UPLOAD_NOT_POSSIBLE:
-                        ActivityMixin.showApplicationToast(getString(R.string.waypoint_coordinates_couldnt_be_modified_on_website));
-                        break;
-                    case SAVE_ERROR:
-                        ActivityMixin.showApplicationToast(getString(R.string.err_waypoint_add_failed));
-                        break;
-                    default:
-                        throw new UnsupportedOperationException();
-                }
+        FinishWaypointSaveHandler(final EditWaypointActivity activity, final Geopoint coords) {
+            super(activity);
+            this.coords = new Geopoint(coords.getLatitude(), coords.getLongitude());
+        }
+
+        @Override
+        public void handleMessage(final Message msg) {
+            final EditWaypointActivity activity = getActivity();
+            if (activity == null) {
+                return;
             }
-        };
+            switch (msg.what) {
+                case UPLOAD_SUCCESS:
+                    ActivityMixin.showApplicationToast(activity.getString(R.string.waypoint_coordinates_has_been_modified_on_website, coords));
+                    break;
+                case SUCCESS:
+                    break;
+                case UPLOAD_START:
+                    break;
+                case UPLOAD_ERROR:
+                    ActivityMixin.showApplicationToast(activity.getString(R.string.waypoint_coordinates_upload_error));
+                    break;
+                case UPLOAD_NOT_POSSIBLE:
+                    ActivityMixin.showApplicationToast(activity.getString(R.string.waypoint_coordinates_couldnt_be_modified_on_website));
+                    break;
+                case SAVE_ERROR:
+                    ActivityMixin.showApplicationToast(activity.getString(R.string.err_waypoint_add_failed));
+                    break;
+                default:
+                    throw new IllegalStateException();
+            }
+        }
+    }
+
+    private void saveWaypoint(final ActivityData currentState) {
+        // currentState might be null here if there is a problem with the waypoints data
+        if (currentState == null) {
+            return;
+        }
+
+        final Handler finishHandler = new FinishWaypointSaveHandler(this, currentState.coords);
 
         class SaveWptTask extends AsyncTask<Void, Void, Void> {
 
             @Override
             protected Void doInBackground(final Void... params) {
-                // currentState might be null here if there is a problem with the waypoints data
-                if (currentState == null) {
-                    finishHandler.sendEmptyMessage(SAVE_ERROR);
-                    return null;
-                }
                 final Waypoint waypoint = new Waypoint(currentState.name, currentState.type, own);
                 waypoint.setGeocode(geocode);
                 waypoint.setPrefix(prefix);
