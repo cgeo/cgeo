@@ -147,13 +147,37 @@
       name="Eclipse plugins">
     <setupTask
         xsi:type="setup.p2:P2Task"
-        label="Java"
+        label="Android Development Tools"
         licenseConfirmationDisabled="true">
       <requirement
-          name="org.eclipse.jdt.feature.group"/>
+          name="com.android.ide.eclipse.adt.feature.feature.group"/>
+      <requirement
+          name="com.android.ide.eclipse.hierarchyviewer.feature.feature.group"/>
+      <requirement
+          name="com.android.ide.eclipse.traceview.feature.feature.group"/>
+      <requirement
+          name="com.android.ide.eclipse.gldebugger.feature.feature.group"/>
       <repository
-          url="http://download.eclipse.org/releases/neon/"/>
+          url="https://dl-ssl.google.com/android/eclipse/"/>
+    </setupTask>
+    <setupTask
+        xsi:type="setup.p2:P2Task"
+        label="Buildship"
+        licenseConfirmationDisabled="true">
+      <requirement
+          name="org.eclipse.buildship.feature.group"/>
+      <repository
+          url="http://download.eclipse.org/buildship/updates/e45/releases"/>
       <description></description>
+    </setupTask>
+    <setupTask
+        xsi:type="setup.p2:P2Task"
+        label="Checkstyle"
+        licenseConfirmationDisabled="true">
+      <requirement
+          name="net.sf.eclipsecs.feature.group"/>
+      <repository
+          url="http://eclipse-cs.sf.net/update"/>
     </setupTask>
     <setupTask
         xsi:type="setup.p2:P2Task"
@@ -165,22 +189,6 @@
           name="org.eclipse.egit.mylyn.feature.group"/>
       <repository
           url="http://download.eclipse.org/egit/updates"/>
-    </setupTask>
-    <setupTask
-        xsi:type="setup.p2:P2Task"
-        label="Android Development Tools"
-        licenseConfirmationDisabled="true">
-      <requirement
-          name="com.android.ide.eclipse.adt.feature.feature.group"/>
-      <requirement
-          name="com.android.ide.eclipse.hierarchyviewer.feature.feature.group"/>
-      <requirement
-          name="com.android.ide.eclipse.traceview.feature.feature.group"/>
-      <requirement
-          name="com.android.ide.eclipse.gldebugger.feature.feature.group"
-          optional="true"/>
-      <repository
-          url="https://dl-ssl.google.com/android/eclipse/"/>
     </setupTask>
     <setupTask
         xsi:type="setup.p2:P2Task"
@@ -196,10 +204,29 @@
         label="Genymoton"
         licenseConfirmationDisabled="true">
       <requirement
-          name="com.genymobile.genymotion.ide.eclipse.feature.group"
-          optional="true"/>
+          name="com.genymobile.genymotion.ide.eclipse.feature.group"/>
       <repository
           url="http://plugins.genymotion.com/eclipse"/>
+      <description></description>
+    </setupTask>
+    <setupTask
+        xsi:type="setup.p2:P2Task"
+        label="Java"
+        licenseConfirmationDisabled="true">
+      <requirement
+          name="org.eclipse.jdt.feature.group"/>
+      <repository
+          url="http://download.eclipse.org/releases/neon/"/>
+      <description></description>
+    </setupTask>
+    <setupTask
+        xsi:type="setup.p2:P2Task"
+        label="Javascript"
+        licenseConfirmationDisabled="true">
+      <requirement
+          name="org.eclipse.wst.jsdt.feature.feature.group"/>
+      <repository
+          url="http://download.eclipse.org/releases/neon/"/>
       <description></description>
     </setupTask>
     <setupTask
@@ -213,12 +240,22 @@
     </setupTask>
     <setupTask
         xsi:type="setup.p2:P2Task"
-        label="Buildship"
+        label="Marketplace"
         licenseConfirmationDisabled="true">
       <requirement
-          name="org.eclipse.buildship.feature.group"/>
+          name="org.eclipse.epp.mpc.feature.group"/>
       <repository
-          url="http://download.eclipse.org/buildship/updates/e45/releases"/>
+          url="http://download.eclipse.org/releases/neon/"/>
+      <description>Eclipse market place for manual installation of additional plugins</description>
+    </setupTask>
+    <setupTask
+        xsi:type="setup.p2:P2Task"
+        label="MoreUnit"
+        licenseConfirmationDisabled="true">
+      <requirement
+          name="org.moreunit.feature.group"/>
+      <repository
+          url="http://moreunit.sourceforge.net/update-site/"/>
       <description></description>
     </setupTask>
     <setupTask
@@ -267,26 +304,6 @@
     </setupTask>
     <setupTask
         xsi:type="setup.p2:P2Task"
-        label="MoreUnit"
-        licenseConfirmationDisabled="true">
-      <requirement
-          name="org.moreunit.feature.group"/>
-      <repository
-          url="http://moreunit.sourceforge.net/update-site/"/>
-      <description></description>
-    </setupTask>
-    <setupTask
-        xsi:type="setup.p2:P2Task"
-        label="Marketplace"
-        licenseConfirmationDisabled="true">
-      <requirement
-          name="org.eclipse.epp.mpc.feature.group"/>
-      <repository
-          url="http://download.eclipse.org/releases/neon/"/>
-      <description>Eclipse market place for manual installation of additional plugins</description>
-    </setupTask>
-    <setupTask
-        xsi:type="setup.p2:P2Task"
         label="Project Usus"
         licenseConfirmationDisabled="true">
       <requirement
@@ -294,15 +311,6 @@
       <repository
           url="http://www.projectusus.org/usus-plugins/updates/"/>
       <description>Project Usus has a before and after (refactoring) comparison of dependency graphs.</description>
-    </setupTask>
-    <setupTask
-        xsi:type="setup.p2:P2Task"
-        label="Checkstyle"
-        licenseConfirmationDisabled="true">
-      <requirement
-          name="net.sf.eclipsecs.feature.group"/>
-      <repository
-          url="http://eclipse-cs.sf.net/update"/>
     </setupTask>
   </setupTask>
   <setupTask
@@ -405,16 +413,6 @@
       <description>cgeo pull requests</description>
     </setupTask>
     <description></description>
-  </setupTask>
-  <setupTask
-      xsi:type="setup:CompoundTask"
-      name="Redirect setup to online version">
-    <setupTask
-        xsi:type="setup:EclipseIniTask"
-        option="-Doomph.redirection.cgeosetup"
-        value="=https://raw.githubusercontent.com/cgeo/cgeo/master/main/project/eclipse%20installation/cgeo.setup->${git.clone.location|uri}/main/project/eclipse installation/cgeo.setup"
-        vm="true"/>
-    <description>The setup file used during the initial installation will not update itself, therefore we have to redirect the URL to the github version.</description>
   </setupTask>
   <stream name="master"
       label="Master"/>
