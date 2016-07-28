@@ -454,13 +454,13 @@ public class GeokretyParser {
      */
     static String getLastSpottedUsername(final List<LogEntry> logsEntries) {
         for (final LogEntry log: logsEntries) {
-            if (log.getType() == LogType.NOTE) {
-                continue;
+            final LogType logType = log.getType();
+            if (logType == LogType.GRABBED_IT || logType == LogType.VISIT) {
+                return log.author;
             }
-            if (log.getType() != LogType.GRABBED_IT && log.getType() != LogType.VISIT) {
-                return CgeoApplication.getInstance().getString(R.string.user_unknown);
+            if (logType != LogType.NOTE) {
+                break;
             }
-            return log.author;
         }
         return CgeoApplication.getInstance().getString(R.string.user_unknown);
     }
