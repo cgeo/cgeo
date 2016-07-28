@@ -5,12 +5,6 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.models.Image;
 
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.ImmutablePair;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-
 import android.app.Application;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -24,6 +18,8 @@ import android.graphics.drawable.Drawable;
 import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Environment;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.text.Html;
 import android.text.Html.ImageGetter;
 import android.util.Base64;
@@ -48,6 +44,9 @@ import java.util.Locale;
 import java.util.Set;
 import java.util.concurrent.LinkedBlockingQueue;
 
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import rx.Observable;
 import rx.Scheduler.Worker;
 import rx.android.schedulers.AndroidSchedulers;
@@ -176,13 +175,15 @@ public final class ImageUtils {
         if (image == null) {
             return null;
         }
-        final BitmapDrawable scaledImage = scaleBitmapTo(image, maxXY, maxXY);
+
         final File tempImageFile = getOutputImageFile();
         if (tempImageFile == null) {
             Log.e("ImageUtils.readScaleAndWriteImage: unable to write scaled image");
             return null;
         }
         final String uploadFilename = tempImageFile.getPath();
+
+        final BitmapDrawable scaledImage = scaleBitmapTo(image, maxXY, maxXY);
         storeBitmap(scaledImage.getBitmap(), Bitmap.CompressFormat.JPEG, 75, uploadFilename);
         return uploadFilename;
     }

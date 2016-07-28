@@ -420,8 +420,6 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
 
     private ActivityData getActivityData() {
 
-        final ActivityData currentState = new ActivityData();
-
         final String bearingText = bearing.getText().toString();
         // combine distance from EditText and distanceUnit saved from Spinner
         final String distanceText = distanceView.getText().toString() + distanceUnits.get(distanceUnitSelector.getSelectedItemPosition());
@@ -468,6 +466,8 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
 
             coords = coords.project(bearing, distance);
         }
+
+        final ActivityData currentState = new ActivityData();
 
         currentState.coords = coords;
 

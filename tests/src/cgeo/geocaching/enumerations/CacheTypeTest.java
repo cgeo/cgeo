@@ -1,12 +1,12 @@
 package cgeo.geocaching.enumerations;
 
-import junit.framework.TestCase;
-
-import java.util.Locale;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import cgeo.geocaching.models.Geocache;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import java.util.Locale;
+
+import junit.framework.TestCase;
 
 public class CacheTypeTest extends TestCase {
 
@@ -25,7 +25,7 @@ public class CacheTypeTest extends TestCase {
     }
 
     public static void testGetByIdComplete() {
-        for (CacheType type : CacheType.values()) {
+        for (final CacheType type : CacheType.values()) {
             assertThat(CacheType.getById(type.id)).isEqualTo(type);
             assertThat(CacheType.getById(type.id.toLowerCase(Locale.US))).isEqualTo(type);
             assertThat(CacheType.getById(type.id.toUpperCase(Locale.US))).isEqualTo(type);
@@ -33,7 +33,7 @@ public class CacheTypeTest extends TestCase {
     }
 
     public static void testGetByPatternComplete() {
-        for (CacheType type : CacheType.values()) {
+        for (final CacheType type : CacheType.values()) {
             assertThat(CacheType.getByPattern(type.pattern)).isEqualTo(type);
             assertThat(CacheType.getByPattern(type.pattern.toLowerCase(Locale.US))).isEqualTo(type);
             assertThat(CacheType.getByPattern(type.pattern.toUpperCase(Locale.US))).isEqualTo(type);

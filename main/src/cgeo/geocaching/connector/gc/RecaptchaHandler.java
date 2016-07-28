@@ -39,6 +39,10 @@ public class RecaptchaHandler extends WeakReferenceHandler<Activity> {
     }
 
     private void loadChallenge(final ImageView imageView, final View reloadButton, final boolean needsFetch) {
+        final Activity activity = getActivity();
+        if (activity == null) {
+            return;
+        }
         final Observable<Bitmap> captcha = Observable.defer(new Func0<Observable<Bitmap>>() {
             @Override
             public Observable<Bitmap> call() {
@@ -61,10 +65,6 @@ public class RecaptchaHandler extends WeakReferenceHandler<Activity> {
                 return Observable.empty();
             }
         });
-        final Activity activity = getActivity();
-        if (activity == null) {
-            return;
-        }
         AppObservable.bindActivity(activity, captcha).subscribeOn(AndroidRxUtils.networkScheduler).subscribe(new Action1<Bitmap>() {
             @Override
             public void call(final Bitmap bitmap) {

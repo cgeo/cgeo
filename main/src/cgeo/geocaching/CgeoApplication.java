@@ -82,15 +82,13 @@ public class CgeoApplication extends Application {
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
     private void fixUserManagerMemoryLeak() {
         try {
+            // invoke UserManager.get() via reflection
             final Method m = UserManager.class.getMethod("get", Context.class);
             m.setAccessible(true);
             m.invoke(null, this);
-
-            //above is reflection for below...
-            //UserManager.get();
         } catch (final Throwable e) {
             if (BuildConfig.DEBUG) {
-                throw new RuntimeException(e);
+                throw new IllegalStateException("Cannot fix UserManager memory leak", e);
             }
         }
     }

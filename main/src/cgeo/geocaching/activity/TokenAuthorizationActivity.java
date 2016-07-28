@@ -10,9 +10,6 @@ import cgeo.geocaching.utils.BundleUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
 
-import org.apache.commons.lang3.StringUtils;
-import android.support.annotation.NonNull;
-
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
@@ -21,6 +18,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.NonNull;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -32,6 +30,7 @@ import java.util.regex.Pattern;
 
 import butterknife.BindView;
 import okhttp3.Response;
+import org.apache.commons.lang3.StringUtils;
 import rx.functions.Action0;
 
 public abstract class TokenAuthorizationActivity extends AbstractActivity {
@@ -123,14 +122,14 @@ public abstract class TokenAuthorizationActivity extends AbstractActivity {
     }
 
     protected void requestToken(final String username, final String password) {
-        final String nam = StringUtils.defaultString(username);
-        final String pwd = StringUtils.defaultString(password);
-
         if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
             ActivityMixin.showToast(this, R.string.err_missing_auth);
             requestTokenHandler.sendEmptyMessage(NOT_AUTHENTICATED);
             return;
         }
+
+        final String nam = StringUtils.defaultString(username);
+        final String pwd = StringUtils.defaultString(password);
 
         final Parameters params = new Parameters(fieldUsername, nam, fieldPassword, pwd);
 

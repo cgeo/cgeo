@@ -14,17 +14,9 @@ import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
 import cgeo.geocaching.utils.TextUtils;
 
-import okhttp3.Response;
-import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.StringUtils;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import rx.Observable;
-import rx.Single;
-import rx.functions.Action1;
-import rx.functions.Func1;
-
-import android.graphics.drawable.Drawable;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -32,6 +24,14 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.regex.Matcher;
+
+import okhttp3.Response;
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
+import rx.Observable;
+import rx.Single;
+import rx.functions.Action1;
+import rx.functions.Func1;
 
 public class GCLogin extends AbstractLogin {
 
@@ -101,6 +101,12 @@ public class GCLogin extends AbstractLogin {
             Cookies.clearCookies();
             Settings.setCookieStore(null);
 
+            final String[] viewstates = getViewstates(tryLoggedInData);
+            if (isEmpty(viewstates)) {
+                Log.e("Login.login: Failed to find viewstates");
+                return StatusCode.LOGIN_PARSE_ERROR; // no viewstates
+            }
+
             final Parameters params = new Parameters(
                     "__EVENTTARGET", "",
                     "__EVENTARGUMENT", "",
@@ -108,11 +114,6 @@ public class GCLogin extends AbstractLogin {
                     "ctl00$ContentBody$tbPassword", password,
                     "ctl00$ContentBody$cbRememberMe", "on",
                     "ctl00$ContentBody$btnSignIn", "Login");
-            final String[] viewstates = getViewstates(tryLoggedInData);
-            if (isEmpty(viewstates)) {
-                Log.e("Login.login: Failed to find viewstates");
-                return StatusCode.LOGIN_PARSE_ERROR; // no viewstates
-            }
             putViewstates(params, viewstates);
 
             final String loginData = Network.getResponseData(Network.postRequest("https://www.geocaching.com/login/default.aspx", params));

@@ -1,5 +1,13 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.activity.AbstractActionBarActivity;
+import cgeo.geocaching.models.Image;
+import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.storage.LocalStorage;
+import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.utils.ImageUtils;
+import cgeo.geocaching.utils.Log;
+
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -10,6 +18,7 @@ import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.provider.MediaStore.MediaColumns;
+import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
@@ -17,10 +26,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
-
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.StringUtils;
-import android.support.annotation.Nullable;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -30,13 +35,8 @@ import java.io.OutputStream;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import cgeo.geocaching.activity.AbstractActionBarActivity;
-import cgeo.geocaching.models.Image;
-import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.storage.LocalStorage;
-import cgeo.geocaching.ui.dialog.Dialogs;
-import cgeo.geocaching.utils.ImageUtils;
-import cgeo.geocaching.utils.Log;
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
 
 public class ImageSelectActivity extends AbstractActionBarActivity {
 
@@ -190,9 +190,6 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
     }
 
     private void selectImageFromCamera() {
-        // create Intent to take a picture and return control to the calling application
-        final Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-
         final Uri imageUri = ImageUtils.getOutputImageFileUri();
         if (imageUri == null) {
             showFailure();
@@ -204,6 +201,9 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
             showFailure();
             return;
         }
+
+        // create Intent to take a picture and return control to the calling application
+        final Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, image.getUri()); // set the image file name
 
         // start the image capture Intent

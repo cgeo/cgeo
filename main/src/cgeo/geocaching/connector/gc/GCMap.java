@@ -21,16 +21,9 @@ import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.LeastRecentlyUsedMap;
 import cgeo.geocaching.utils.Log;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
-
-import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
+import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-
-import android.graphics.Bitmap;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -44,6 +37,11 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import rx.Single;
 import rx.functions.Func2;
 
@@ -125,8 +123,6 @@ public class GCMap {
 
         try {
 
-            final LeastRecentlyUsedMap<String, String> nameCache = new LeastRecentlyUsedMap.LruCache<>(2000); // JSON id, cache name
-
             if (StringUtils.isEmpty(data)) {
                 throw new ParserException("No page given");
             }
@@ -155,6 +151,7 @@ public class GCMap {
             // iterate over the data and construct all caches in this tile
             final Map<String, List<UTFGridPosition>> positions = new HashMap<>(); // JSON id as key
             final Map<String, List<UTFGridPosition>> singlePositions = new HashMap<>(); // JSON id as key
+            final LeastRecentlyUsedMap<String, String> nameCache = new LeastRecentlyUsedMap.LruCache<>(2000); // JSON id, cache name
 
             for (final JsonNode rawKey: keys) {
                 final String key = rawKey.asText();

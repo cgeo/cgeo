@@ -159,7 +159,6 @@ final class OkapiClient {
 
     @Nullable
     public static Geocache getCache(final String geoCode) {
-        final Parameters params = new Parameters("cache_code", geoCode);
         final IConnector connector = ConnectorFactory.getConnector(geoCode);
         if (!(connector instanceof OCApiConnector)) {
             return null;
@@ -167,6 +166,7 @@ final class OkapiClient {
 
         final OCApiConnector ocapiConn = (OCApiConnector) connector;
 
+        final Parameters params = new Parameters("cache_code", geoCode);
         params.add("fields", getFullFields(ocapiConn));
         params.add("attribution_append", "none");
         params.add(PARAMETER_LOGCOUNT_KEY, PARAMETER_LOGCOUNT_VALUE);
@@ -201,12 +201,12 @@ final class OkapiClient {
 
     @NonNull
     private static List<Geocache> getCachesByUser(@NonNull final String username, @NonNull final OCApiConnector connector, final String userRequestParam) {
-        final Parameters params = new Parameters("search_method", METHOD_SEARCH_ALL);
-        final Map<String, String> valueMap = new LinkedHashMap<>();
         final String uuid = getUserUUID(connector, username);
         if (StringUtils.isEmpty(uuid)) {
             return Collections.emptyList();
         }
+        final Parameters params = new Parameters("search_method", METHOD_SEARCH_ALL);
+        final Map<String, String> valueMap = new LinkedHashMap<>();
         valueMap.put(userRequestParam, uuid);
 
         return requestCaches(connector, params, valueMap, connector.isSearchForMyCaches(username));

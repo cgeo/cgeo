@@ -10,16 +10,14 @@ import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.BundleUtils;
 import cgeo.geocaching.utils.Log;
 
-import org.apache.commons.lang3.StringUtils;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -28,6 +26,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import butterknife.BindView;
+import org.apache.commons.lang3.StringUtils;
 import rx.Observable;
 import rx.android.app.AppObservable;
 import rx.functions.Action1;
@@ -87,13 +86,13 @@ public abstract class AbstractCredentialsAuthorizationActivity extends AbstractA
     }
 
     private void checkCredentials(final String username, final String password) {
-        final String nam = StringUtils.defaultString(username);
-        final String pwd = StringUtils.defaultString(password);
-
         if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
             ActivityMixin.showToast(this, R.string.err_missing_auth);
             return;
         }
+
+        final String nam = StringUtils.defaultString(username);
+        final String pwd = StringUtils.defaultString(password);
 
         final Credentials credentials = new Credentials(nam, pwd);
         final AbstractCredentialsAuthorizationActivity authorizationActivity = this;

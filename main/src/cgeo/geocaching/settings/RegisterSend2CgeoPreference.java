@@ -8,17 +8,17 @@ import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Log;
 
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.preference.Preference;
+import android.util.AttributeSet;
+
 import okhttp3.Response;
 import org.apache.commons.lang3.StringUtils;
 import rx.Observable;
 import rx.android.app.AppObservable;
 import rx.functions.Action1;
 import rx.functions.Func0;
-
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.preference.Preference;
-import android.util.AttributeSet;
 
 public class RegisterSend2CgeoPreference extends AbstractClickablePreference {
 
@@ -41,12 +41,12 @@ public class RegisterSend2CgeoPreference extends AbstractClickablePreference {
                 }
 
                 final String deviceName = Settings.getWebDeviceName();
-                final String deviceCode = Settings.getWebDeviceCode();
-
                 if (StringUtils.isBlank(deviceName)) {
                     ActivityMixin.showToast(activity, R.string.err_missing_device_name);
                     return false;
                 }
+
+                final String deviceCode = Settings.getWebDeviceCode();
 
                 final ProgressDialog progressDialog = ProgressDialog.show(activity,
                         activity.getString(R.string.init_sendToCgeo),

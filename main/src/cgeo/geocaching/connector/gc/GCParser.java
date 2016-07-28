@@ -38,6 +38,8 @@ import cgeo.geocaching.utils.SynchronizedDateFormat;
 import cgeo.geocaching.utils.TextUtils;
 
 import android.net.Uri;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.text.Html;
 
 import java.io.IOException;
@@ -62,8 +64,6 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -97,7 +97,6 @@ public final class GCParser {
             return null;
         }
 
-        final List<String> cids = new ArrayList<>();
         String page = pageContent;
 
         final SearchResult searchResult = new SearchResult();
@@ -140,6 +139,7 @@ public final class GCParser {
 
         page = page.substring(startPos + 1, endPos - startPos + 1); // cut between <table> and </table>
 
+        final List<String> cids = new ArrayList<>();
         final String[] rows = StringUtils.splitByWholeSeparator(page, "<tr class=");
         final int rowsCount = rows.length;
 
@@ -818,15 +818,14 @@ public final class GCParser {
         if (search == null) {
             return null;
         }
-        final String[] viewstates = search.getViewstates();
 
         final String url = search.getUrl();
-
         if (StringUtils.isBlank(url)) {
             Log.e("GCParser.searchByNextPage: No url found");
             return search;
         }
 
+        final String[] viewstates = search.getViewstates();
         if (GCLogin.isEmpty(viewstates)) {
             Log.e("GCParser.searchByNextPage: No viewstate given");
             return search;
@@ -891,7 +890,6 @@ public final class GCParser {
 
         final String uri = "https://www.geocaching.com/seek/nearest.aspx";
         final Parameters paramsWithF = addFToParams(params, my);
-        final String fullUri = uri + "?" + paramsWithF;
         final String page = GCLogin.getInstance().getRequestLogged(uri, paramsWithF);
 
         if (StringUtils.isBlank(page)) {
@@ -900,6 +898,7 @@ public final class GCParser {
         }
         assert page != null;
 
+        final String fullUri = uri + "?" + paramsWithF;
         final SearchResult searchResult = parseSearch(fullUri, page, showCaptcha, recaptchaReceiver);
         if (searchResult == null || CollectionUtils.isEmpty(searchResult.getGeocodes())) {
             Log.w("GCParser.searchByAny: No cache parsed");

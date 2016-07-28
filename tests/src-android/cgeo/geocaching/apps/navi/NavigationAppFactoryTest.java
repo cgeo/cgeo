@@ -13,7 +13,7 @@ public class NavigationAppFactoryTest extends TestCase {
 
     public static void testUniqueNavigationAppIds() throws Exception {
         final Set<Integer> idSet = new HashSet<>();
-        for (NavigationAppsEnum navigationApp : NavigationAppsEnum.values()) {
+        for (final NavigationAppsEnum navigationApp : NavigationAppsEnum.values()) {
             idSet.add(navigationApp.id);
         }
         assertThat(idSet).doesNotHaveDuplicates();
