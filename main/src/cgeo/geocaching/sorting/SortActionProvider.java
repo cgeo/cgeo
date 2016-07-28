@@ -4,9 +4,8 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
 
-import android.support.annotation.NonNull;
-
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 import android.support.v4.view.ActionProvider;
 import android.view.MenuItem;
@@ -27,7 +26,7 @@ import rx.functions.Action1;
 public class SortActionProvider extends ActionProvider implements OnMenuItemClickListener {
 
     private static final int MENU_GROUP = 1;
-    private final Context mContext;
+    private final Context context;
     private final ArrayList<ComparatorEntry> registry = new ArrayList<>(20);
     /**
      * Callback triggered on selecting a new sort order.
@@ -56,14 +55,20 @@ public class SortActionProvider extends ActionProvider implements OnMenuItemClic
         }
     }
 
-
+    /**
+     * Creates a new instance. ActionProvider classes should always implement a
+     * constructor that takes a single Context parameter for inflating from menu XML.
+     *
+     * @param context
+     *            Context for accessing resources.
+     */
     public SortActionProvider(final Context context) {
         super(context);
-        mContext = context;
+        this.context = context;
     }
 
     private void register(@StringRes final int resourceId, final Class<? extends CacheComparator> comparatorClass) {
-        registry.add(new ComparatorEntry(mContext.getString(resourceId), comparatorClass));
+        registry.add(new ComparatorEntry(context.getString(resourceId), comparatorClass));
     }
 
     private void registerComparators() {

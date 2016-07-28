@@ -1,15 +1,5 @@
 package cgeo.geocaching.connector.oc;
 
-import android.content.Context;
-import android.os.Handler;
-import android.support.annotation.StringRes;
-
-import org.apache.commons.lang3.StringUtils;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-
-import java.util.Locale;
-
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.LogCacheActivity;
 import cgeo.geocaching.SearchResult;
@@ -31,6 +21,16 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.CryptUtils;
 import cgeo.geocaching.utils.Log;
+
+import android.app.Activity;
+import android.os.Handler;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.annotation.StringRes;
+
+import java.util.Locale;
+
+import org.apache.commons.lang3.StringUtils;
 
 public class OCApiLiveConnector extends OCApiConnector implements ISearchByCenter, ISearchByViewPort, ILogin, ISearchByKeyword, ISearchByOwner, ISearchByFinder {
 
@@ -151,7 +151,7 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByCente
     }
 
     @Override
-    public boolean login(final Handler handler, @Nullable final Context fromActivity) {
+    public boolean login(final Handler handler, @Nullable final Activity fromActivity) {
         if (supportsPersonalization()) {
             userInfo = OkapiClient.getUserInfo(this);
         } else {

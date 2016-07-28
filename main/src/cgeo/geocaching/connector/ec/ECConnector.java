@@ -23,17 +23,17 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.utils.CancellableHandler;
 
-import org.apache.commons.lang3.StringUtils;
+import android.app.Activity;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-
-import android.content.Context;
-import android.os.Handler;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.regex.Pattern;
+
+import org.apache.commons.lang3.StringUtils;
 
 public class ECConnector extends AbstractConnector implements ISearchByGeocode, ISearchByCenter, ISearchByViewPort, ILogin, ICredentials {
 
@@ -133,7 +133,7 @@ public class ECConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
-    public boolean login(final Handler handler, @Nullable final Context fromActivity) {
+    public boolean login(final Handler handler, @Nullable final Activity fromActivity) {
         // login
         final StatusCode status = ecLogin.login();
 

@@ -6,9 +6,6 @@ import cgeo.geocaching.activity.AbstractListActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.utils.TextUtils;
 
-import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.StringUtils;
-
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -36,6 +33,8 @@ import java.util.Comparator;
 import java.util.List;
 
 import butterknife.ButterKnife;
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Dialog for choosing a file or directory.
@@ -184,7 +183,7 @@ public class SimpleDirChooser extends AbstractListActivity {
         public View getView(final int position, final View convertView, final ViewGroup parent) {
             View v = convertView;
             if (v == null) {
-                final LayoutInflater vi = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                final LayoutInflater vi = LayoutInflater.from(context);
                 v = vi.inflate(id, null);
             }
 

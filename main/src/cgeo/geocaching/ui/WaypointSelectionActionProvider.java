@@ -4,9 +4,8 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
 
-import android.support.annotation.NonNull;
-
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v4.view.ActionProvider;
 import android.support.v4.view.MenuItemCompat;
 import android.view.Menu;
@@ -29,6 +28,13 @@ public class WaypointSelectionActionProvider extends AbstractMenuActionProvider 
         void onGeocacheSelected(final Geocache geocache);
     }
 
+    /**
+     * Creates a new instance. ActionProvider classes should always implement a
+     * constructor that takes a single Context parameter for inflating from menu XML.
+     *
+     * @param context
+     *            Context for accessing resources.
+     */
     public WaypointSelectionActionProvider(final Context context) {
         super(context);
     }

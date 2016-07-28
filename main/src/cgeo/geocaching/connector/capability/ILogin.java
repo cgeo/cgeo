@@ -2,10 +2,9 @@ package cgeo.geocaching.connector.capability;
 
 import cgeo.geocaching.connector.IConnector;
 
-import android.support.annotation.Nullable;
-
-import android.content.Context;
+import android.app.Activity;
 import android.os.Handler;
+import android.support.annotation.Nullable;
 
 public interface ILogin extends IConnector {
 
@@ -19,7 +18,7 @@ public interface ILogin extends IConnector {
      *            Calling activity context
      * @return true in case of success, false in case of failure
      */
-    boolean login(Handler handler, @Nullable Context fromActivity);
+    boolean login(Handler handler, @Nullable Activity fromActivity);
 
     /**
      * Log out of the connector if possible.
@@ -27,7 +26,7 @@ public interface ILogin extends IConnector {
     void logout();
 
     /**
-     * Returns the status of the last {@link #login(Handler, Context)} request.
+     * Returns the status of the last {@link #login(Handler, Activity)} request.
      *
      */
     boolean isLoggedIn();
@@ -40,14 +39,14 @@ public interface ILogin extends IConnector {
 
     /**
      * Name the user has in this connector or empty string if not applicable.
-     * It might be necessary to execute {@link #login(Handler, Context)} before this information is valid.
+     * It might be necessary to execute {@link #login(Handler, Activity)} before this information is valid.
      *
      */
     String getUserName();
 
     /**
      * Number of caches the user has found in this connector.
-     * Normally retrieved/updated with {@link #login(Handler, Context)}.
+     * Normally retrieved/updated with {@link #login(Handler, Activity)}.
      * Might be stale as changes on the connectors site are generally not notified.
      *
      */

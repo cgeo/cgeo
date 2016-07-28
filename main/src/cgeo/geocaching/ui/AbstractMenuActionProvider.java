@@ -4,9 +4,19 @@ import android.content.Context;
 import android.support.v4.view.ActionProvider;
 import android.view.View;
 
+/**
+ * abstract super class for all our action providers showing sub menus
+ */
 public abstract class AbstractMenuActionProvider extends ActionProvider {
 
-    public AbstractMenuActionProvider(final Context context) {
+    /**
+     * Creates a new instance. ActionProvider classes should always implement a
+     * constructor that takes a single Context parameter for inflating from menu XML.
+     *
+     * @param context
+     *            Context for accessing resources.
+     */
+    protected AbstractMenuActionProvider(final Context context) {
         super(context);
     }
 

@@ -1,6 +1,15 @@
 package cgeo.geocaching;
 
-import android.content.Context;
+import cgeo.geocaching.activity.AbstractViewPagerActivity;
+import cgeo.geocaching.compatibility.Compatibility;
+import cgeo.geocaching.ui.AbstractCachingPageViewCreator;
+import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
+import cgeo.geocaching.utils.ClipboardUtils;
+import cgeo.geocaching.utils.ProcessUtils;
+import cgeo.geocaching.utils.SystemInformation;
+import cgeo.geocaching.utils.Version;
+
+import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,12 +22,6 @@ import android.widget.Button;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.CharEncoding;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.apache.commons.lang3.tuple.Pair;
-
 import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;
@@ -26,14 +29,11 @@ import java.util.Scanner;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import cgeo.geocaching.activity.AbstractViewPagerActivity;
-import cgeo.geocaching.compatibility.Compatibility;
-import cgeo.geocaching.ui.AbstractCachingPageViewCreator;
-import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
-import cgeo.geocaching.utils.ClipboardUtils;
-import cgeo.geocaching.utils.ProcessUtils;
-import cgeo.geocaching.utils.SystemInformation;
-import cgeo.geocaching.utils.Version;
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.CharEncoding;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
 
 public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page> {
 
@@ -275,7 +275,7 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
         return new ImmutablePair<List<? extends Page>, Integer>(pages, 0);
     }
 
-    public static void showChangeLog(final Context fromActivity) {
+    public static void showChangeLog(final Activity fromActivity) {
         final Intent intent = new Intent(fromActivity, AboutActivity.class);
         intent.putExtra(EXTRA_ABOUT_STARTPAGE, Page.CHANGELOG.ordinal());
         fromActivity.startActivity(intent);

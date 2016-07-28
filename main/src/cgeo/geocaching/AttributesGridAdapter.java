@@ -4,7 +4,7 @@ import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.enumerations.CacheAttribute;
 import cgeo.geocaching.models.Geocache;
 
-import android.content.Context;
+import android.app.Activity;
 import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,16 +16,16 @@ import android.widget.ImageView;
 import java.util.List;
 
 public class AttributesGridAdapter extends BaseAdapter {
-    private final Context context;
+    private final Activity context;
     private final Resources resources;
     private final List<String> attributes;
     private final LayoutInflater inflater;
 
-    public AttributesGridAdapter(final Context context, final Geocache cache) {
+    public AttributesGridAdapter(final Activity context, final Geocache cache) {
         this.context = context;
         resources = context.getResources();
         attributes = cache.getAttributes();
-        inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        inflater = LayoutInflater.from(context);
     }
 
     @Override

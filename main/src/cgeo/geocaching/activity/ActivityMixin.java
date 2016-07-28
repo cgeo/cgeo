@@ -5,15 +5,13 @@ import cgeo.geocaching.MainActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.settings.Settings;
 
-import org.apache.commons.lang3.StringUtils;
-import android.support.annotation.NonNull;
-
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
+import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NavUtils;
@@ -27,6 +25,8 @@ import android.view.WindowManager;
 import android.view.WindowManager.LayoutParams;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import org.apache.commons.lang3.StringUtils;
 
 public final class ActivityMixin {
 
