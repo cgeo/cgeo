@@ -1,19 +1,19 @@
 package cgeo.geocaching.apps.navi;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.StaticMapsActivity_;
-import cgeo.geocaching.StaticMapsProvider;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.apps.AbstractApp;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.ILogable;
 import cgeo.geocaching.models.Waypoint;
+import cgeo.geocaching.staticmaps.StaticMapsActivity_;
+import cgeo.geocaching.staticmaps.StaticMapsProvider;
 import cgeo.geocaching.storage.DataStore;
 
-import org.apache.commons.lang3.StringUtils;
+import android.app.Activity;
 import android.support.annotation.NonNull;
 
-import android.app.Activity;
+import org.apache.commons.lang3.StringUtils;
 
 abstract class AbstractStaticMapsApp extends AbstractApp implements CacheNavigationApp, WaypointNavigationApp {
     protected AbstractStaticMapsApp(@NonNull final String name) {

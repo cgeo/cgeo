@@ -319,7 +319,7 @@
             android:label="@string/map_map" >
         </activity>
         <activity
-            android:name=".StaticMapsActivity_"
+            android:name=".staticmaps.StaticMapsActivity_"
             android:label="@string/map_static_title" >
         </activity>
         <activity

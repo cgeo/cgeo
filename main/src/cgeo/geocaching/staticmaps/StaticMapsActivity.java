@@ -1,6 +1,8 @@
-package cgeo.geocaching;
+package cgeo.geocaching.staticmaps;
 
-import cgeo.geocaching.activity.AbstractActionBarActivity;
+import cgeo.geocaching.Intents;
+import cgeo.geocaching.R;
+import cgeo.geocaching.activity.AbstractListActivity;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
@@ -8,46 +10,34 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.Log;
 
-import org.androidannotations.annotations.EActivity;
-import org.androidannotations.annotations.Extra;
-import org.androidannotations.annotations.OptionsItem;
-import org.androidannotations.annotations.OptionsMenu;
-import org.apache.commons.collections4.CollectionUtils;
-
 import android.app.ProgressDialog;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.view.LayoutInflater;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import butterknife.ButterKnife;
+import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.Extra;
+import org.androidannotations.annotations.OptionsItem;
+import org.androidannotations.annotations.OptionsMenu;
 
 @EActivity
 @OptionsMenu(R.menu.static_maps_activity_options)
-public class StaticMapsActivity extends AbstractActionBarActivity {
+public class StaticMapsActivity extends AbstractListActivity {
 
     @Extra(Intents.EXTRA_DOWNLOAD) boolean download = false;
     @Extra(Intents.EXTRA_WAYPOINT_ID) Integer waypointId = null;
     @Extra(Intents.EXTRA_GEOCODE) String geocode = null;
 
     private Geocache cache;
-    private final List<Bitmap> maps = new ArrayList<>();
-    private LayoutInflater inflater = null;
     private ProgressDialog waitDialog = null;
-    private LinearLayout smapsView = null;
     private final Handler loadMapsHandler = new Handler() {
 
         @Override
         public void handleMessage(final Message msg) {
             Dialogs.dismiss(waitDialog);
             try {
-                if (CollectionUtils.isEmpty(maps)) {
+                if (adapter.isEmpty()) {
                     if (download) {
                         final boolean succeeded = downloadStaticMaps();
                         if (succeeded) {
@@ -59,36 +49,13 @@ public class StaticMapsActivity extends AbstractActionBarActivity {
                         showToast(res.getString(R.string.err_detail_not_load_map_static));
                     }
                     finish();
-                } else {
-                    showStaticMaps();
                 }
             } catch (final Exception e) {
                 Log.e("StaticMapsActivity.loadMapsHandler", e);
             }
         }
     };
-
-    /**
-     * Shows the static maps.
-     */
-    private void showStaticMaps() {
-        if (inflater == null) {
-            inflater = getLayoutInflater();
-        }
-
-        if (smapsView == null) {
-            smapsView = ButterKnife.findById(this, R.id.maps_list);
-        }
-        smapsView.removeAllViews();
-
-        for (final Bitmap image : maps) {
-            if (image != null) {
-                final ImageView map = (ImageView) inflater.inflate(R.layout.staticmaps_activity_item, smapsView, false);
-                map.setImageBitmap(image);
-                smapsView.addView(map);
-            }
-        }
-    }
+    private StaticMapsAdapter adapter;
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
@@ -103,6 +70,9 @@ public class StaticMapsActivity extends AbstractActionBarActivity {
         }
 
         setCacheTitleBar(cache);
+
+        adapter = new StaticMapsAdapter(this);
+        setListAdapter(adapter);
 
         waitDialog = ProgressDialog.show(this, null, res.getString(R.string.map_static_loading), true);
         waitDialog.setCancelable(true);
@@ -122,19 +92,19 @@ public class StaticMapsActivity extends AbstractActionBarActivity {
                             if (waypointId != null) {
                                 final Bitmap image = StaticMapsProvider.getWaypointMap(geocode, cache.getWaypointById(waypointId), level);
                                 if (image != null) {
-                                    maps.add(image);
+                                    adapter.add(image);
                                 }
                             } else {
                                 final Bitmap image = StaticMapsProvider.getCacheMap(geocode, level);
                                 if (image != null) {
-                                    maps.add(image);
+                                    adapter.add(image);
                                 }
                             }
                         } catch (final Exception e) {
                             Log.e("StaticMapsActivity.LoadMapsThread.run", e);
                         }
                     }
-                    if (!maps.isEmpty()) {
+                    if (!adapter.isEmpty()) {
                         break;
                     }
                 }

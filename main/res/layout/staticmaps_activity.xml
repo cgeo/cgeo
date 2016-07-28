@@ -1,17 +1,22 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    android:padding="4dip"
     tools:context=".StaticMapsActivity" >
 
-    <LinearLayout
-        android:id="@+id/maps_list"
+    <ListView
+        android:id="@android:id/list"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical" >
-    </LinearLayout>
+        android:layout_height="fill_parent"
+        android:layout_margin="0dip"
+        android:background="?background_color"
+        android:cacheColorHint="?background_color"
+        android:clipToPadding="false"
+        android:dividerHeight="1dip"
+        android:padding="0dip"
+        android:scrollbarStyle="outsideOverlay"
+        tools:listitem="@layout/staticmaps_activity_item" />
 
-</ScrollView>
+</LinearLayout>

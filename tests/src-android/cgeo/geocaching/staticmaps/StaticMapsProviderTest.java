@@ -1,4 +1,4 @@
-package cgeo.geocaching;
+package cgeo.geocaching.staticmaps;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

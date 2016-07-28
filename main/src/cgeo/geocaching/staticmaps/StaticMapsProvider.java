@@ -1,4 +1,4 @@
-package cgeo.geocaching;
+package cgeo.geocaching.staticmaps;
 
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.location.Geopoint;
