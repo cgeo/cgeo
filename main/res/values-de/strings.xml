@@ -216,11 +216,11 @@
   <string name="warn_no_username">Kein Benutzername angegeben.</string>
   <string name="warn_no_connector">Keiner der derzeit aktivierten Dienste unterstützt diese Suche.</string>
   <string name="warn_search_help_title">Hilfe benötigt?</string>
-  <string name="warn_search_help_address">Adresse oder Ort eingeben, z. B. Postanschrift \"Dorfstraße 333, Berlin, Deutschland\", einen Ort \"Berlin\" oder den Namen eines beliebigen Ortes wie \"Tiergarten\".</string>
-  <string name="warn_search_help_gccode">Geocode eingeben, z. B. \"GC1VCAZ\".</string>
+  <string name="warn_search_help_address">Adresse oder Ort eingeben, z. B. Postanschrift \"Dorfstraße 333, Berlin, Deutschland\", einen Ort \"Berlin\" oder den Namen eines beliebigen Ortes wie \"Tiergarten\".</string>
+  <string name="warn_search_help_gccode">Geocode eingeben, z. B. \"GC1VCAZ\".</string>
   <string name="warn_search_help_keyword">Stichwörter eingeben, die im Namen des zu suchenden Caches enthalten sind.</string>
   <string name="warn_search_help_user">Name eines Benutzers auf geocaching.com eingeben.</string>
-  <string name="warn_search_help_tb">Code des Trackables eingeben, z.B. \"TB29QMZ\".</string>
+  <string name="warn_search_help_tb">Code des Trackables eingeben, z. B. \"TB29QMZ\".</string>
   <string name="warn_log_text_fill">Bitte Text einfügen.</string>
   <string name="warn_load_images">c:geo konnte die Bilder nicht laden.</string>
   <string name="warn_invalid_mapfile">Die gewählte Datei ist keine gültige Mapsforge-Karte in der Version 0.3.0.\nOffline Karte ist nicht verfügbar.</string>
@@ -551,7 +551,7 @@
   <string name="settings_info_offline_maps_title">Info zu Offline-Karten</string>
   <string name="settings_info_offline_maps">c:geo ermöglicht es Offline-Karten zu verwenden. Die Karten können bei Mapsforge heruntergeladen werden oder es können eigene Karten aus OSM-Daten erstellt werden. Es muss zuerst ein Verzeichnis mit Offline-Karten angegeben werden, bevor eine Offline-Karte ausgewählt werden kann.</string>
   <string name="settings_info_themes_title">Info zu Karten-Themes</string>
-  <string name="settings_info_themes">c:geo kann eigene Karten-Themes für Offline-Karten verwenden. Du kannst sie benutzen, um die Farbauswahl der Karte (z. B. für eine Nachtansicht) zu verändern oder um bestimmte Objekte wie Radwege oder Höhenlinien hervorzuheben.</string>
+  <string name="settings_info_themes">c:geo kann eigene Karten-Themes für Offline-Karten verwenden. Du kannst sie benutzen, um die Farbauswahl der Karte (z. B. für eine Nachtansicht) zu verändern oder um bestimmte Objekte wie Radwege oder Höhenlinien hervorzuheben.</string>
   <string name="init_mapsource_select">Kartenquelle wählen</string>
   <string name="settings_title_scale_map_text">Textgröße anpassen</string>
   <string name="settings_summary_scale_map_text">Textgröße der Bezeichnungen auf der Offline-Karte entsprechend der Bildschirmauflösung anpassen</string>
@@ -589,7 +589,7 @@
   <string name="init_summary_use_native_ua">Als Android-Browser identifizieren. Löst Anmeldeprobleme einiger Netzanbieter.</string>
   <string name="init_rendertheme_folder">Karten-Themes-Verzeichnis</string>
   <string name="init_maintenance">Wartung</string>
-  <string name="init_maintenance_directories_note">c:geo speichert Bilder, Log-Bilder und weitere Dateien zu einem Cache in einem separaten Verzeichnis. In manchen Fällen (z.B. bei Sichern und Wiederherstellen der Datenbank) kann dieses Verzeichnis unnötige Daten enthalten, die gelöscht werden können.</string>
+  <string name="init_maintenance_directories_note">c:geo speichert Bilder, Log-Bilder und weitere Dateien zu einem Cache in einem separaten Verzeichnis. In manchen Fällen (z. B. bei Sichern und Wiederherstellen der Datenbank) kann dieses Verzeichnis unnötige Daten enthalten, die gelöscht werden können.</string>
   <string name="init_maintenance_directories">Verwaiste Daten löschen</string>
   <string name="init_location">Positionierung</string>
   <string name="init_location_note">Auf Geräten mit Google Play-Diensten kann c:geo automatisch eine bessere Positions-Bestimmung nutzen. Allerdings kann dann kein externer Bluetooth GPS-Empfänger verwendet werden. Weiterhin kann damit ein Energiesparmodus ohne GPS genutzt werden, wenn hohe Genauigkeit nicht unbedingt erforderlich ist.</string>
@@ -1423,7 +1423,7 @@
   <string name="init_geokrety_register_ok">Anmeldung OK</string>
   <string name="init_geokrety_register_fail">Anmeldung fehlgeschlagen</string>
   <string name="init_geokrety_description">Autorisiere c:geo auf GeoKrety.org zuzugreifen, um GeoKrety-Trackables zu loggen.</string>
-  <string name="init_geokrety_cache_description">GeoKretyMap.org stellt zwischengespeicherte Daten für GeoKrety Trackables zur Verfügung.\nDie Daten enthalten mehr Infos zu GeoKretys wie z.B. \'Beschreibung\' oder \'Vermisst\'-Status.\n\nDie Daten sind nicht immer aktuell!\nPositionen: ~30min.\nBeschreibungen: ~24h.</string>
+  <string name="init_geokrety_cache_description">GeoKretyMap.org stellt zwischengespeicherte Daten für GeoKrety Trackables zur Verfügung.\nDie Daten enthalten mehr Infos zu GeoKretys wie z. B. \'Beschreibung\' oder \'Vermisst\'-Status.\n\nDie Daten sind nicht immer aktuell!\nPositionen: ~30min.\nBeschreibungen: ~24h.</string>
   <string name="init_geokrety_cache">Benutze GeoKretyMap.org</string>
   <string name="init_geokrety_userid">Nutzer-ID: %s</string>
   <string name="trackable_title_log_without_geocode">Geocode nicht gesetzt</string>
