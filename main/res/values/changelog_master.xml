@@ -17,6 +17,7 @@
     · Changed: Always start new line when editing personal note\n
     · Fix: Show empty log book page for OpenCaching caches without any log\n
     · Fix: Show attributes for OpenCaching GPX imports\n
+    · Fix: Recognize BMP as spoiler format\n
     · Removed: No more option to show only short description of a cache\n
     \n
     \n

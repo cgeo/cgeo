@@ -2,13 +2,14 @@ package cgeo.geocaching.connector.gc;
 
 import cgeo.geocaching.enumerations.LogType;
 
-import org.apache.commons.lang3.StringUtils;
 import android.support.annotation.NonNull;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import java.util.regex.Pattern;
+
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * These patterns have been optimized for speed. Improve them only if you can prove
@@ -66,7 +67,8 @@ public final class GCConstants {
     static final Pattern PATTERN_ATTRIBUTES = Pattern.compile("(<img src=\"/images/attributes.*?)</p");
     /** Two groups ! */
     static final Pattern PATTERN_ATTRIBUTESINSIDE = Pattern.compile("<img src=\"([^\"]+)\" alt=\"([^\"]+?)\"");
-    static final Pattern PATTERN_SPOILER_IMAGE = Pattern.compile("<a href=\"(https?://img(?:cdn)?\\.geocaching\\.com[^.]+\\.(?:jpg|jpeg|png|gif))\"[^>]+>" + "([^<]+)</a>" + ".*?(?:description\"[^>]*>([^<]+)</span>)?</li>", Pattern.DOTALL);
+    private static final String IMAGE_FORMATS = "jpg|jpeg|png|gif|bmp";
+    static final Pattern PATTERN_SPOILER_IMAGE = Pattern.compile("<a href=\"(https?://img(?:cdn)?\\.geocaching\\.com[^.]+\\.(?:" + IMAGE_FORMATS + "))\"[^>]+>" + "([^<]+)</a>" + ".*?(?:description\"[^>]*>([^<]+)</span>)?</li>", Pattern.DOTALL);
     static final Pattern PATTERN_INVENTORY = Pattern.compile("ctl00_ContentBody_uxTravelBugList_uxInventoryLabel\">.*?WidgetBody(.*?)<div");
     static final Pattern PATTERN_INVENTORYINSIDE = Pattern.compile("[^<]*<li>[^<]*<a href=\"[a-z0-9\\-\\_\\.\\?\\/\\:\\@]*\\/track\\/details\\.aspx\\?guid=([0-9a-z\\-]+)[^\"]*\"[^>]*>[^<]*<img src=\"[^\"]+\"[^>]*>[^<]*<span>([^<]+)<\\/span>[^<]*<\\/a>[^<]*<\\/li>");
     static final Pattern PATTERN_WATCHLIST = Pattern.compile(Pattern.quote("watchlist.aspx") + ".{1,50}" + Pattern.quote("action=rem"));
@@ -78,7 +80,7 @@ public final class GCConstants {
     /** Use replaceAll("[,.]","") on the resulting string before converting to an int */
     static final Pattern PATTERN_CACHES_FOUND = Pattern.compile(Pattern.quote("cache-count\">") + "\\s*([\\d,.]+)", Pattern.DOTALL);
 
-    static final Pattern PATTERN_AVATAR_IMAGE_PROFILE_PAGE = Pattern.compile("src=\"(https?://(img(?:cdn)?\\.geocaching\\.com|[^>\"]+\\.cloudfront\\.net)/avatar/[0-9a-f-]+\\.(jpg|png|gif))\"[^>]*alt=\"");
+    static final Pattern PATTERN_AVATAR_IMAGE_PROFILE_PAGE = Pattern.compile("src=\"(https?://(img(?:cdn)?\\.geocaching\\.com|[^>\"]+\\.cloudfront\\.net)/avatar/[0-9a-f-]+\\.(" + IMAGE_FORMATS + "))\"[^>]*alt=\"");
     static final Pattern PATTERN_LOGIN_NAME_LOGIN_PAGE = Pattern.compile("ctl00_ContentBody_lbUsername\">.*<strong>(.*)</strong>");
     static final Pattern PATTERN_CUSTOMDATE = Pattern.compile("<option selected=\"selected\" value=\"([ /.Mdy-]+)\">");
     static final Pattern PATTERN_HOME_LOCATION = Pattern.compile("<input class=\"search-coordinates\"[^>]* value=\"(.*?)\"");
