@@ -109,7 +109,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.Vector;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -1238,7 +1237,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     private void removeFromHistory() {
         final List<Geocache> caches = adapter.getCheckedOrAllCaches();
-        final Vector<String> geocodes = new Vector<>(caches.size());
+        final Collection<String> geocodes = new ArrayList<>(caches.size());
         for (final Geocache cache : caches) {
             geocodes.add(cache.getGeocode());
         }
