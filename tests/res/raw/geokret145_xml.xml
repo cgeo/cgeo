@@ -2,9 +2,9 @@
 <gkxml version="1.0" date="2015-03-31 00:53:46"><geokrety>
   <geokret id="49728">
     <name><![CDATA[c:geo Test]]></name>
-    <description><![CDATA[Dieser Geokret dient zum Testen von c:geo.<br />
-Er befindet sich nicht wirklich im gelisteten Cache. <br />
-<br />
+    <description><![CDATA[Dieser Geokret dient zum Testen von c:geo.
+Er befindet sich nicht wirklich im gelisteten Cache.
+
 Bitte ignorieren.]]></description>
     <owner id="17135"><![CDATA[Lineflyer]]></owner>
     <datecreated>2015-03-29 00:12:15</datecreated>

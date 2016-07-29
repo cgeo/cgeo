@@ -2,6 +2,9 @@ package cgeo.geocaching.connector.trackable;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
+import cgeo.geocaching.enumerations.LogType;
+import cgeo.geocaching.models.Image;
+import cgeo.geocaching.models.LogEntry;
 import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.SynchronizedDateFormat;
@@ -40,11 +43,20 @@ public class GeokretyParser {
     }
 
     static class GeokretyHandler extends DefaultHandler {
-        private static final SynchronizedDateFormat DATE_FORMAT = new SynchronizedDateFormat("yyyy-MM-dd kk:mm:ss", TimeZone.getTimeZone("UTC"), Locale.US);
+        private static final SynchronizedDateFormat DATE_FORMAT = new SynchronizedDateFormat("yyyy-MM-dd kk:mm", TimeZone.getTimeZone("UTC"), Locale.US);
+        private static final SynchronizedDateFormat DATE_FORMAT_SECONDS = new SynchronizedDateFormat("yyyy-MM-dd kk:mm:ss", TimeZone.getTimeZone("UTC"), Locale.US);
         private final List<Trackable> trackables = new ArrayList<>();
         private Trackable trackable;
-        private boolean isMessage = false;
+        private LogEntry.Builder logEntryBuilder;
+        private final List<LogEntry> logsEntries = new ArrayList<>();
+        private Image.Builder imageBuilder;
+
+        private boolean isMultiline = false;
+        private boolean isInMoves = false;
+        private boolean isInImages = false;
+        private boolean isInComments = false;
         private String content;
+
 
         @NonNull
         public final List<Trackable> getTrackables() {
@@ -114,7 +126,7 @@ public class GeokretyParser {
                     }
                 }
                 if (localName.equalsIgnoreCase("description")) {
-                    isMessage = true;
+                    isMultiline = true;
                 }
                 // TODO: latitude/longitude could be parsed, but trackable doesn't support it, yet...
                 //if (localName.equalsIgnoreCase("position")) {
@@ -127,7 +139,44 @@ public class GeokretyParser {
                 //    trackable.setLongitude(longitude);
                 //}
                 //}
-            } catch (final NumberFormatException e) {
+                if (localName.equalsIgnoreCase("move")) {
+                    logEntryBuilder = new LogEntry.Builder();
+                    isInMoves = true;
+                }
+                if (localName.equalsIgnoreCase("date")) {
+                    final String movedDate = attributes.getValue("moved");
+                    if (StringUtils.isNotBlank(movedDate)) {
+                        logEntryBuilder.setDate(DATE_FORMAT.parse(movedDate).getTime());
+                    }
+                }
+                if (localName.equalsIgnoreCase("user")) {
+                    final String userId = attributes.getValue("id");
+                    if (StringUtils.isNotBlank(userId)) {
+                        logEntryBuilder.setAuthor(CgeoApplication.getInstance().getString(R.string.init_geokrety_userid, userId));
+                    }
+                }
+                if (localName.equalsIgnoreCase("comments")) {
+                    isInComments = true;
+                }
+                if (localName.equalsIgnoreCase("comment")) {
+                    isMultiline = true;
+                }
+                if (localName.equalsIgnoreCase("logtype")) {
+                    final String logtype = attributes.getValue("id");
+                    logEntryBuilder.setLogType(getLogType(Integer.parseInt(logtype)));
+                }
+                if (localName.equalsIgnoreCase("images")) {
+                    isInImages = true;
+                }
+                // TODO: Trackable doesn't support multiple image yet, so ignore other image tags if we're not in moves
+                if (localName.equalsIgnoreCase("image") && !isInImages) {
+                    imageBuilder = new Image.Builder();
+                    final String title = attributes.getValue("title");
+                    if (StringUtils.isNotBlank(title)) {
+                        imageBuilder.setTitle(title);
+                    }
+                }
+            } catch (final ParseException | NumberFormatException e) {
                 Log.e("Parsing GeoKret", e);
             }
         }
@@ -142,29 +191,47 @@ public class GeokretyParser {
                     }
 
                     // This is a special case. Deal it at the end of the "geokret" parsing (xml close)
-                    if (trackable.getSpottedType() == Trackable.SPOTTED_TRAVELLING && trackable.getDistance() == 0) {
-                        trackable.setSpottedType(Trackable.SPOTTED_OWNER);
+                    if (trackable.getSpottedType() == Trackable.SPOTTED_USER) {
+                        if (trackable.getDistance() == 0) {
+                            trackable.setSpottedType(Trackable.SPOTTED_OWNER);
+                            trackable.setSpottedName(trackable.getOwner());
+                        } else {
+                            trackable.setSpottedName(getLastSpottedUsername(logsEntries));
+                        }
                     }
+
+                    trackable.setLogs(logsEntries);
                 }
                 if (localName.equalsIgnoreCase("name")) {
                     trackable.setName(content);
                 }
                 if (localName.equalsIgnoreCase("description")) {
                     trackable.setDetails(content);
-                    isMessage = false;
+                    isMultiline = false;
                 }
                 if (localName.equalsIgnoreCase("owner")) {
                     trackable.setOwner(content);
                 }
                 if (StringUtils.isNotBlank(content) && localName.equalsIgnoreCase("datecreated")) {
-                    final Date date = DATE_FORMAT.parse(content);
+                    final Date date = DATE_FORMAT_SECONDS.parse(content);
                     trackable.setReleased(date);
                 }
-                if (StringUtils.isNotBlank(content) && localName.equalsIgnoreCase("distancetravelled")) {
+                if (StringUtils.isNotBlank(content) && !isInMoves && (
+                        localName.equalsIgnoreCase("distancetravelled") || localName.equalsIgnoreCase("distancetraveled")
+                )) {
                     trackable.setDistance(Float.parseFloat(content));
                 }
+                if (localName.equalsIgnoreCase("images")) {
+                    isInImages = false;
+                }
                 if (StringUtils.isNotBlank(content) && localName.equalsIgnoreCase("image")) {
-                    trackable.setImage("http://geokrety.org/obrazki/" + content);
+                    if (isInMoves) {
+                        imageBuilder.setUrl("http://geokrety.org/obrazki/" + content);
+                        logEntryBuilder.addLogImage(imageBuilder.build());
+                    } else if (!isInImages) {
+                        // TODO: Trackable doesn't support multiple image yet, so ignore other image tags if we're not in moves
+                        trackable.setImage("http://geokrety.org/obrazki/" + content);
+                    }
                 }
                 if (StringUtils.isNotBlank(content) && localName.equalsIgnoreCase("state")) {
                     trackable.setSpottedType(getSpottedType(Integer.parseInt(content)));
@@ -175,6 +242,27 @@ public class GeokretyParser {
                 if (StringUtils.isNotBlank(content) && localName.equalsIgnoreCase("waypoint")) {
                     trackable.setSpottedName(content);
                 }
+                if (StringUtils.isNotBlank(content) && localName.equalsIgnoreCase("user")) {
+                    logEntryBuilder.setAuthor(content);
+                }
+                if (localName.equalsIgnoreCase("move")) {
+                    isInMoves = false;
+                    logsEntries.add(logEntryBuilder.build());
+                }
+                if (localName.equalsIgnoreCase("comments")) {
+                    isInComments = false;
+                }
+                if (localName.equalsIgnoreCase("comment") && !isInComments) {
+                    isMultiline = false;
+                    logEntryBuilder.setLog(content);
+                }
+                if (StringUtils.isNotBlank(content) && localName.equalsIgnoreCase("wpt")) {
+                    //logEntryBuilder.setCacheGeocode(content); // TODO: also implement Geocode support in LogEntry
+                    logEntryBuilder.setCacheName(content);
+                }
+                if (localName.equalsIgnoreCase("id")) {
+                    logEntryBuilder.setId(Integer.parseInt(content));
+                }
             } catch (final ParseException | NumberFormatException e) {
                 Log.e("Parsing GeoKret", e);
             }
@@ -183,8 +271,12 @@ public class GeokretyParser {
         @Override
         public final void characters(final char[] ch, final int start, final int length)
                 throws SAXException {
-            final String text = StringUtils.trim(new String(ch, start, length));
-            content = isMessage ? StringUtils.join(content, text) : text;
+            final String text = new String(ch, start, length);
+            if (isMultiline) {
+                content = StringUtils.join(content, text.replaceAll("(\r\n|\n)", "<br />"));
+            } else {
+                content = StringUtils.trim(text);
+            }
         }
 
         /**
@@ -202,12 +294,38 @@ public class GeokretyParser {
                     return Trackable.SPOTTED_CACHE;
                 case 1: // Grabbed from
                 case 5: // Visiting
-                    return Trackable.SPOTTED_TRAVELLING;
+                    return Trackable.SPOTTED_USER;
                 case 4: // Archived
                     return Trackable.SPOTTED_ARCHIVED;
                 //case 2: // A comment (however this case doesn't exists in db)
             }
             return Trackable.SPOTTED_UNKNOWN;
+        }
+
+        /**
+         * Convert states from GK to c:geo spotted types.
+         *
+         * @param type
+         *          the GK Log type
+         * @return
+         *          The LogType
+         */
+        private static LogType getLogType(final int type) {
+            switch (type) {
+                case 0: // Dropped
+                    return LogType.PLACED_IT;
+                case 1: // Grabbed from
+                    return LogType.GRABBED_IT;
+                case 2: // A comment
+                    return LogType.NOTE;
+                case 3: // Seen in
+                    return LogType.DISCOVERED_IT;
+                case 4: // Archived
+                    return LogType.ARCHIVE;
+                case 5: // Visiting
+                    return LogType.VISIT;
+            }
+            return LogType.UNKNOWN;
         }
     }
 
@@ -323,5 +441,27 @@ public class GeokretyParser {
             }
         }
         return null;
+    }
+
+    /**
+     * Determine from the newest logs (ignoring Notes) if the GK is spotted
+     * in the hand of someone.
+     *
+     * @param logsEntries
+     *          the log entries to analyze
+     * @return
+     *          The spotted username (or unknown)
+     */
+    static String getLastSpottedUsername(final List<LogEntry> logsEntries) {
+        for (final LogEntry log: logsEntries) {
+            final LogType logType = log.getType();
+            if (logType == LogType.GRABBED_IT || logType == LogType.VISIT) {
+                return log.author;
+            }
+            if (logType != LogType.NOTE) {
+                break;
+            }
+        }
+        return CgeoApplication.getInstance().getString(R.string.user_unknown);
     }
 }

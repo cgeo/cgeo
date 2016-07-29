@@ -3,16 +3,22 @@ package cgeo.geocaching.connector.trackable;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.enumerations.LogType;
+import cgeo.geocaching.models.LogEntry;
 import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 import cgeo.geocaching.test.R;
 
+import cgeo.geocaching.utils.SynchronizedDateFormat;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.xml.sax.InputSource;
 
 import android.app.Application;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
 
 public class GeokretyParserTest extends AbstractResourceInstrumentationTestCase {
 
@@ -110,7 +116,7 @@ public class GeokretyParserTest extends AbstractResourceInstrumentationTestCase 
         assertThat(trackable1.getGeocode()).isEqualTo("GKC240");
         assertThat(trackable1.getDistance()).isEqualTo(2254);
         assertThat(trackable1.getDetails()).isEqualTo("Dieser Geokret dient zum Testen von c:geo.<br />" +
-                "Er befindet sich nicht wirklich im gelisteten Cache. <br />" +
+                "Er befindet sich nicht wirklich im gelisteten Cache.<br />" +
                 "<br />" +
                 "Bitte ignorieren.");
     }
@@ -136,5 +142,134 @@ public class GeokretyParserTest extends AbstractResourceInstrumentationTestCase 
         final Trackable trackable4 = trackables3.get(1);
         assertThat(trackable4).isNotNull();
         assertThat(trackable4.isMissing()).isTrue();
+    }
+
+    public void testFullDetails() throws Exception {
+        final Application app = CgeoApplication.getInstance();
+
+        final List<Trackable> trackables = GeokretyParser.parse(new InputSource(getResourceStream(R.raw.geokret47496_details_xml)));
+        assertThat(trackables).hasSize(1);
+
+        final Trackable trackable1 = trackables.get(0);
+        assertThat(trackable1).isNotNull();
+        assertThat(trackable1.getName()).isEqualTo("c:geo tests");
+        assertThat(trackable1.getGeocode()).isEqualTo("GKB988");
+        assertThat(trackable1.getType()).isEqualTo(app.getString(cgeo.geocaching.R.string.geokret_type_traditional));
+        assertThat(trackable1.getOwner()).isEqualTo("kumy");
+        assertThat(trackable1.getDistance()).isEqualTo(143);
+        assertThat(trackable1.isMissing()).isFalse();
+        assertThat(trackable1.getDetails()).isEqualTo("virtual, just for testing c:geo app<br />" +
+                "<br />" +
+                "<br />" +
+                "<br />" +
+                "<br />" +
+                "Test to break c:geo");
+        assertThat(trackable1.getSpottedType()).isEqualTo(Trackable.SPOTTED_USER);
+        assertThat(trackable1.getSpottedName()).isEqualTo("gueta");
+    }
+
+    public void testLogs() throws Exception {
+        final List<Trackable> trackables = GeokretyParser.parse(new InputSource(getResourceStream(R.raw.geokret47496_details_xml)));
+        assertThat(trackables).hasSize(1);
+        final Trackable trackable1 = trackables.get(0);
+
+        // Check the logs
+        final SynchronizedDateFormat DATE_FORMAT = new SynchronizedDateFormat("yyyy-MM-dd kk:mm", TimeZone.getTimeZone("UTC"), Locale.US);
+        final List<LogEntry> logs = trackable1.getLogs();
+        assertThat(logs).hasSize(6);
+
+        final LogEntry log6 = logs.get(5);
+        assertThat(log6.author).isEqualTo("kumy");
+        assertThat(log6.id).isEqualTo(673734);
+        assertThat(log6.date).isEqualTo(DATE_FORMAT.parse("2015-03-29 14:10").getTime());
+        assertThat(log6.getDisplayText()).isEqualTo("Test");
+        assertThat(log6.getType()).isEqualTo(LogType.NOTE);
+        assertThat(log6.cacheName).isNullOrEmpty();
+    }
+
+    public void testGetLastSpottedUsername() throws Exception {
+
+        final LogEntry note = new LogEntry.Builder()
+                .setLogType(LogType.NOTE)
+                .setAuthor("authorNote")
+                .build();
+
+        final LogEntry placed = new LogEntry.Builder()
+                .setLogType(LogType.PLACED_IT)
+                .setAuthor("authorPlaced")
+                .build();
+
+        final LogEntry grabbed = new LogEntry.Builder()
+                .setLogType(LogType.GRABBED_IT)
+                .setAuthor("authorGrabbed")
+                .build();
+
+        final LogEntry visit = new LogEntry.Builder()
+                .setLogType(LogType.VISIT)
+                .setAuthor("authorVisit")
+                .build();
+
+        final LogEntry discovered = new LogEntry.Builder()
+                .setLogType(LogType.DISCOVERED_IT)
+                .setAuthor("authorDiscovered")
+                .build();
+
+        final String userUnknown = CgeoApplication.getInstance().getString(cgeo.geocaching.R.string.user_unknown);
+        assertThat(GeokretyParser.getLastSpottedUsername(new ArrayList<LogEntry>())).isEqualTo(userUnknown);
+
+        final List<LogEntry> logsEntries1 = new ArrayList<>();
+        logsEntries1.add(note);
+        assertThat(GeokretyParser.getLastSpottedUsername(logsEntries1)).isEqualTo(userUnknown);
+
+        final List<LogEntry> logsEntries2 = new ArrayList<>();
+        logsEntries2.add(note);
+        logsEntries2.add(placed);
+        assertThat(GeokretyParser.getLastSpottedUsername(logsEntries2)).isEqualTo(userUnknown);
+
+        final List<LogEntry> logsEntries3 = new ArrayList<>();
+        logsEntries3.add(visit);
+        assertThat(GeokretyParser.getLastSpottedUsername(logsEntries3)).isEqualTo("authorVisit");
+
+        final List<LogEntry> logsEntries4 = new ArrayList<>();
+        logsEntries4.add(note);
+        logsEntries4.add(visit);
+        assertThat(GeokretyParser.getLastSpottedUsername(logsEntries4)).isEqualTo("authorVisit");
+
+        final List<LogEntry> logsEntries5 = new ArrayList<>();
+        logsEntries5.add(placed);
+        assertThat(GeokretyParser.getLastSpottedUsername(logsEntries5)).isEqualTo(userUnknown);
+
+        final List<LogEntry> logsEntries6 = new ArrayList<>();
+        logsEntries6.add(placed);
+        logsEntries6.add(visit);
+        assertThat(GeokretyParser.getLastSpottedUsername(logsEntries6)).isEqualTo(userUnknown);
+
+        final List<LogEntry> logsEntries7 = new ArrayList<>();
+        logsEntries7.add(visit);
+        logsEntries7.add(placed);
+        assertThat(GeokretyParser.getLastSpottedUsername(logsEntries7)).isEqualTo("authorVisit");
+
+        final List<LogEntry> logsEntries8 = new ArrayList<>();
+        logsEntries8.add(placed);
+        logsEntries8.add(visit);
+        assertThat(GeokretyParser.getLastSpottedUsername(logsEntries8)).isEqualTo(userUnknown);
+
+        final List<LogEntry> logsEntries9 = new ArrayList<>();
+        logsEntries9.add(grabbed);
+        logsEntries9.add(visit);
+        assertThat(GeokretyParser.getLastSpottedUsername(logsEntries9)).isEqualTo("authorGrabbed");
+
+        final List<LogEntry> logsEntries10 = new ArrayList<>();
+        logsEntries10.add(discovered);
+        logsEntries10.add(visit);
+        assertThat(GeokretyParser.getLastSpottedUsername(logsEntries10)).isEqualTo(userUnknown);
+
+        final List<LogEntry> logsEntries11 = new ArrayList<>();
+        logsEntries11.add(note);
+        logsEntries11.add(discovered);
+        logsEntries11.add(note);
+        logsEntries11.add(visit);
+        logsEntries11.add(note);
+        assertThat(GeokretyParser.getLastSpottedUsername(logsEntries11)).isEqualTo(userUnknown);
     }
 }
