@@ -8,10 +8,7 @@ import cgeo.geocaching.models.LogEntry;
 import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 import cgeo.geocaching.test.R;
-
 import cgeo.geocaching.utils.SynchronizedDateFormat;
-import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.xml.sax.InputSource;
 
 import android.app.Application;
 
@@ -19,6 +16,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
+
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.xml.sax.InputSource;
 
 public class GeokretyParserTest extends AbstractResourceInstrumentationTestCase {
 
@@ -174,20 +174,20 @@ public class GeokretyParserTest extends AbstractResourceInstrumentationTestCase 
         final Trackable trackable1 = trackables.get(0);
 
         // Check the logs
-        final SynchronizedDateFormat DATE_FORMAT = new SynchronizedDateFormat("yyyy-MM-dd kk:mm", TimeZone.getTimeZone("UTC"), Locale.US);
+        final SynchronizedDateFormat dateFormat = new SynchronizedDateFormat("yyyy-MM-dd kk:mm", TimeZone.getTimeZone("UTC"), Locale.US);
         final List<LogEntry> logs = trackable1.getLogs();
         assertThat(logs).hasSize(6);
 
         final LogEntry log6 = logs.get(5);
         assertThat(log6.author).isEqualTo("kumy");
         assertThat(log6.id).isEqualTo(673734);
-        assertThat(log6.date).isEqualTo(DATE_FORMAT.parse("2015-03-29 14:10").getTime());
+        assertThat(log6.date).isEqualTo(dateFormat.parse("2015-03-29 14:10").getTime());
         assertThat(log6.getDisplayText()).isEqualTo("Test");
         assertThat(log6.getType()).isEqualTo(LogType.NOTE);
         assertThat(log6.cacheName).isNullOrEmpty();
     }
 
-    public void testGetLastSpottedUsername() throws Exception {
+    public static void testGetLastSpottedUsername() throws Exception {
 
         final LogEntry note = new LogEntry.Builder()
                 .setLogType(LogType.NOTE)
