@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.enumerations.LogType;
+import cgeo.geocaching.models.Image;
 import cgeo.geocaching.models.LogEntry;
 import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
@@ -186,6 +187,67 @@ public class GeokretyParserTest extends AbstractResourceInstrumentationTestCase 
         assertThat(log6.getType()).isEqualTo(LogType.NOTE);
         assertThat(log6.cacheName).isNullOrEmpty();
         assertThat(log6.cacheGeocode).isNullOrEmpty();
+
+        final LogEntry log5 = logs.get(4);
+        assertThat(log5.author).isEqualTo("kumy");
+        assertThat(log5.id).isEqualTo(722027);
+        assertThat(log5.date).isEqualTo(dateFormat.parse("2015-07-04 00:00").getTime());
+        assertThat(log5.getDisplayText()).isEqualTo("Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32.");
+        assertThat(log5.getType()).isEqualTo(LogType.VISIT);
+        assertThat(log5.cacheName).isEqualTo("GC2E895");
+        assertThat(log5.cacheGeocode).isEqualTo("GC2E895");
+
+        final LogEntry log4 = logs.get(3);
+        assertThat(log4.author).isEqualTo("kumy");
+        assertThat(log4.id).isEqualTo(912063);
+        assertThat(log4.date).isEqualTo(dateFormat.parse("2016-01-03 12:00").getTime());
+        assertThat(log4.getDisplayText()).isEqualTo("test drop");
+        assertThat(log4.getType()).isEqualTo(LogType.PLACED_IT);
+        assertThat(log4.cacheName).isEqualTo("GC5BRQK");
+        assertThat(log4.cacheGeocode).isEqualTo("GC5BRQK");
+
+        final LogEntry log3 = logs.get(2);
+        assertThat(log3.author).isEqualTo("kumy");
+        assertThat(log3.id).isEqualTo(967654);
+        assertThat(log3.date).isEqualTo(dateFormat.parse("2016-02-12 12:00").getTime());
+        assertThat(log3.getDisplayText()).isEqualTo("Multiline 1<br />" +
+                "<br />" +
+                "Multiline 2<br />" +
+                "Multiline 3<br />" +
+                "<br />" +
+                "<br />" +
+                "<br />" +
+                "Multiline 4");
+        assertThat(log3.getType()).isEqualTo(LogType.DISCOVERED_IT);
+        assertThat(log3.cacheName).isEqualTo("GC5BRQK");
+        assertThat(log3.cacheGeocode).isEqualTo("GC5BRQK");
+
+        final LogEntry log2 = logs.get(1);
+        assertThat(log2.author).isEqualTo("gueta");
+        assertThat(log2.id).isEqualTo(967656);
+        assertThat(log2.date).isEqualTo(dateFormat.parse("2016-03-21 18:31").getTime());
+        assertThat(log2.getDisplayText()).isEqualTo("Grabbed");
+        assertThat(log2.getType()).isEqualTo(LogType.GRABBED_IT);
+        assertThat(log2.cacheName).isNullOrEmpty();
+        assertThat(log2.cacheGeocode).isNullOrEmpty();
+
+        final LogEntry log1 = logs.get(0);
+        assertThat(log1.author).isEqualTo("kumy");
+        assertThat(log1.id).isEqualTo(911689);
+        assertThat(log1.date).isEqualTo(dateFormat.parse("2016-05-02 12:00").getTime());
+        assertThat(log1.getDisplayText()).isEqualTo("test images in log");
+        assertThat(log1.getType()).isEqualTo(LogType.NOTE);
+        assertThat(log1.cacheName).isNullOrEmpty();
+        assertThat(log1.cacheGeocode).isNullOrEmpty();
+
+        final List<Image> logImages1 = log1.getLogImages();
+        assertThat(logImages1).hasSize(2);
+        final Image image1 = logImages1.get(0);
+        assertThat(image1.getTitle()).isEqualTo("test logo 2");
+        assertThat(image1.getUrl()).isEqualTo("http://geokrety.org/obrazki/14622133503lxv2.png");
+        final Image image2 = logImages1.get(1);
+        assertThat(image2.getTitle()).isEqualTo("test 1");
+        assertThat(image2.getUrl()).isEqualTo("http://geokrety.org/obrazki/1462213331lhaiu.png");
     }
 
     public static void testGetLastSpottedUsername() throws Exception {
