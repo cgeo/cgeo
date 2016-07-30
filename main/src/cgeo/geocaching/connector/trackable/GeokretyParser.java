@@ -168,8 +168,7 @@ public class GeokretyParser {
                 if (localName.equalsIgnoreCase("images")) {
                     isInImages = true;
                 }
-                // TODO: Trackable doesn't support multiple image yet, so ignore other image tags if we're not in moves
-                if (localName.equalsIgnoreCase("image") && !isInImages) {
+                if (localName.equalsIgnoreCase("image")) {
                     imageBuilder = new Image.Builder();
                     final String title = attributes.getValue("title");
                     if (StringUtils.isNotBlank(title)) {
@@ -257,7 +256,7 @@ public class GeokretyParser {
                     logEntryBuilder.setLog(content);
                 }
                 if (StringUtils.isNotBlank(content) && localName.equalsIgnoreCase("wpt")) {
-                    //logEntryBuilder.setCacheGeocode(content); // TODO: also implement Geocode support in LogEntry
+                    logEntryBuilder.setCacheGeocode(content);
                     logEntryBuilder.setCacheName(content);
                 }
                 if (localName.equalsIgnoreCase("id")) {

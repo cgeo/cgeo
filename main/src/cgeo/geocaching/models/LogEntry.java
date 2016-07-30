@@ -31,6 +31,29 @@ public final class LogEntry {
 
     private static final Pattern PATTERN_REMOVE_COLORS = Pattern.compile("</?font.*?>", Pattern.CASE_INSENSITIVE);
 
+    /** Log id */
+    public final int id;
+    /** The {@link LogType} */
+    @NonNull private final LogType logType;
+    /** The author */
+    @NonNull public final String author;
+    /** The log message */
+    @NonNull public final String log;
+    /** The log date */
+    public final long date;
+    /** Is a found log */
+    public final int found;
+    /** Friend's log entry */
+    public final boolean friend;
+    /** log {@link Image} List */
+    @NonNull private final List<Image> logImages;
+    /** Spotted cache name */
+    @NonNull public final String cacheName; // used for trackables
+    /** Spotted cache guid */
+    @NonNull public final String cacheGuid; // used for trackables
+    /** Spotted cache geocode */
+    @NonNull public final String cacheGeocode; // used for trackables
+
     /**
      * Helper class for building or manipulating {@link LogEntry} references.
      *
@@ -58,6 +81,8 @@ public final class LogEntry {
         @NonNull private String cacheName; // used for trackables
         /** Spotted cache guid */
         @NonNull private String cacheGuid; // used for trackables
+        /** Spotted cache geocode */
+        @NonNull private String cacheGeocode; // used for trackables
 
 
         /**
@@ -75,6 +100,7 @@ public final class LogEntry {
             logImages = null;
             cacheName = "";
             cacheGuid = "";
+            cacheGeocode = "";
         }
 
         /**
@@ -85,7 +111,7 @@ public final class LogEntry {
         public LogEntry build() {
             final List<Image> finalLogImage = logImages == null ? Collections.<Image>emptyList() : logImages;
             return new LogEntry(id, logType, StringUtils.defaultIfBlank(author, Settings.getUserName()),
-                    message, date, found, friend, finalLogImage, cacheName, cacheGuid);
+                    message, date, found, friend, finalLogImage, cacheName, cacheGuid, cacheGeocode);
         }
 
         /**
@@ -209,6 +235,18 @@ public final class LogEntry {
         }
 
         /**
+         * Set {@link LogEntry} spotted cache Geocode.
+         *
+         * @param cacheGeocode
+         *          The cache geocode
+         */
+        @NonNull
+        public Builder setCacheGeocode(@NonNull final String cacheGeocode) {
+            this.cacheGeocode = cacheGeocode;
+            return this;
+        }
+
+        /**
          * Set {@link LogEntry} images.
          *
          * @param logImages
@@ -239,27 +277,6 @@ public final class LogEntry {
         }
     }
 
-    /** Log id */
-    public final int id;
-    /** The {@link LogType} */
-    @NonNull private final LogType logType;
-    /** The author */
-    @NonNull public final String author;
-    /** The log message */
-    @NonNull public final String log;
-    /** The log date */
-    public final long date;
-    /** Is a found log */
-    public final int found;
-    /** Friend's log entry */
-    public final boolean friend;
-    /** log {@link Image} List */
-    @NonNull private final List<Image> logImages;
-    /** Spotted cache name */
-    @NonNull public final String cacheName; // used for trackables
-    /** Spotted cache guid */
-    @NonNull public final String cacheGuid; // used for trackables
-
     /**
      * LogEntry main constructor.
      *
@@ -273,10 +290,12 @@ public final class LogEntry {
      * @param logImages log images
      * @param cacheName spotted cache name
      * @param cacheGuid spotted cache guid
+     * @param cacheGeocode spotted cache geocode
      */
     private LogEntry(final int id, @NonNull final LogType logType, @NonNull final String author, @NonNull final String log,
-                    final long date, final int found, final boolean friend,
-                    @NonNull final List<Image> logImages, @NonNull final String cacheName, @NonNull final String cacheGuid) {
+                     final long date, final int found, final boolean friend,
+                     @NonNull final List<Image> logImages,
+                     @NonNull final String cacheName, @NonNull final String cacheGuid, @NonNull final String cacheGeocode) {
         this.id = id;
         this.logType = logType;
         this.author = author;
@@ -287,6 +306,7 @@ public final class LogEntry {
         this.logImages = logImages;
         this.cacheName = cacheName;
         this.cacheGuid = cacheGuid;
+        this.cacheGeocode = cacheGeocode;
     }
 
     /**
@@ -306,7 +326,8 @@ public final class LogEntry {
                 .setFriend(friend)
                 .setLogImages(logImages)
                 .setCacheName(cacheName)
-                .setCacheGuid(cacheGuid);
+                .setCacheGuid(cacheGuid)
+                .setCacheGeocode(cacheGeocode);
 
     }
 
@@ -341,7 +362,7 @@ public final class LogEntry {
     public int hashCode() {
         return new HashCodeBuilder()
                 .append(id).append(logType).append(author).append(log).append(date).append(found)
-                .append(friend).append(logImages).append(cacheName).append(cacheGuid)
+                .append(friend).append(logImages).append(cacheName).append(cacheGuid).append(cacheGeocode)
                 .build();
     }
 
