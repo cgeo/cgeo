@@ -62,6 +62,9 @@ public enum LogType {
      */
     public final int overlayId;
 
+    private static final Map<String, LogType> FIND_BY_ICONNAME = new HashMap<>();
+    private static final Map<String, LogType> FIND_BY_TYPE = new HashMap<>();
+
     LogType(final int id, @Nullable final String iconName, @NonNull final String type, @NonNull final String ocType,
             final int stringId, final int markerId, final int overlayId) {
         this.id = id;
@@ -81,9 +84,6 @@ public enum LogType {
     LogType(final int id, final String iconName, final String type, final String ocType, final int stringId) {
         this(id, iconName, type, ocType, stringId, R.drawable.mark_gray);
     }
-
-    private static final Map<String, LogType> FIND_BY_ICONNAME = new HashMap<>();
-    private static final Map<String, LogType> FIND_BY_TYPE = new HashMap<>();
 
     static {
         for (final LogType lt : values()) {
