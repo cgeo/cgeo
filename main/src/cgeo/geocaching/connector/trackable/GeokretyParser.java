@@ -36,13 +36,13 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
-public class GeokretyParser {
+class GeokretyParser {
 
     private GeokretyParser() {
         // Utility class
     }
 
-    static class GeokretyHandler extends DefaultHandler {
+    private static class GeokretyHandler extends DefaultHandler {
         private static final SynchronizedDateFormat DATE_FORMAT = new SynchronizedDateFormat("yyyy-MM-dd kk:mm", TimeZone.getTimeZone("UTC"), Locale.US);
         private static final SynchronizedDateFormat DATE_FORMAT_SECONDS = new SynchronizedDateFormat("yyyy-MM-dd kk:mm:ss", TimeZone.getTimeZone("UTC"), Locale.US);
         private final List<Trackable> trackables = new ArrayList<>();
@@ -364,7 +364,7 @@ public class GeokretyParser {
             return errors;
         }
 
-        public int getGkid() {
+        int getGkid() {
             return gkid;
         }
 
@@ -429,7 +429,7 @@ public class GeokretyParser {
     }
 
     @Nullable
-    public static ImmutablePair<Integer, List<String>> parseResponse(final String page) {
+    static ImmutablePair<Integer, List<String>> parseResponse(final String page) {
         if (page != null) {
             try {
                 final GeokretyRuchyXmlParser parser = new GeokretyRuchyXmlParser();
