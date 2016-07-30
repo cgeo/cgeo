@@ -31,6 +31,29 @@ public final class LogEntry {
 
     private static final Pattern PATTERN_REMOVE_COLORS = Pattern.compile("</?font.*?>", Pattern.CASE_INSENSITIVE);
 
+    /** Log id */
+    public final int id;
+    /** The {@link LogType} */
+    @NonNull private final LogType logType;
+    /** The author */
+    @NonNull public final String author;
+    /** The log message */
+    @NonNull public final String log;
+    /** The log date */
+    public final long date;
+    /** Is a found log */
+    public final int found;
+    /** Friend's log entry */
+    public final boolean friend;
+    /** log {@link Image} List */
+    @NonNull private final List<Image> logImages;
+    /** Spotted cache name */
+    @NonNull public final String cacheName; // used for trackables
+    /** Spotted cache guid */
+    @NonNull public final String cacheGuid; // used for trackables
+    /** Spotted cache geocode */
+    @NonNull public final String cacheGeocode; // used for trackables
+
     /**
      * Helper class for building or manipulating {@link LogEntry} references.
      *
@@ -253,29 +276,6 @@ public final class LogEntry {
             return this;
         }
     }
-
-    /** Log id */
-    public final int id;
-    /** The {@link LogType} */
-    @NonNull private final LogType logType;
-    /** The author */
-    @NonNull public final String author;
-    /** The log message */
-    @NonNull public final String log;
-    /** The log date */
-    public final long date;
-    /** Is a found log */
-    public final int found;
-    /** Friend's log entry */
-    public final boolean friend;
-    /** log {@link Image} List */
-    @NonNull private final List<Image> logImages;
-    /** Spotted cache name */
-    @NonNull public final String cacheName; // used for trackables
-    /** Spotted cache guid */
-    @NonNull public final String cacheGuid; // used for trackables
-    /** Spotted cache geocode */
-    @NonNull public final String cacheGeocode; // used for trackables
 
     /**
      * LogEntry main constructor.
