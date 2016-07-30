@@ -604,12 +604,9 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
         trackable.setTrackingcode(trackingEditText.getText().toString());
 
         // Check params for trackables needing coordinates
-        if (loggingManager.canLogCoordinates() && LogTypeTrackable.isCoordinatesNeeded(typeSelected)) {
-            // Check Coordinates
-            if (geopoint == null) {
-                showToast(res.getString(R.string.err_log_post_missing_coordinates));
-                return;
-            }
+        if (loggingManager.canLogCoordinates() && LogTypeTrackable.isCoordinatesNeeded(typeSelected) && geopoint == null) {
+            showToast(res.getString(R.string.err_log_post_missing_coordinates));
+            return;
         }
 
         // Some Trackable connectors recommend logging with a Geocode.
