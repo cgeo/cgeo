@@ -1,6 +1,7 @@
 package cgeo.geocaching.ui.logs;
 
 import cgeo.geocaching.CacheDetailActivity;
+import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.models.LogEntry;
 import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.TrackableActivity;
@@ -52,7 +53,15 @@ public class TrackableLogsViewCreator extends LogsViewCreator {
             holder.countOrLocation.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(final View arg0) {
-                    CacheDetailActivity.startActivityGuid(activity, cacheGuid, Html.fromHtml(cacheName).toString());
+                    if (StringUtils.isNotBlank(cacheGuid)) {
+                        CacheDetailActivity.startActivityGuid(activity, cacheGuid, Html.fromHtml(cacheName).toString());
+                    } else {
+                        // for GeoKrety we only know the cache geocode
+                        final String cacheGeocode = log.cacheGeocode;
+                        if (ConnectorFactory.canHandle(cacheGeocode)) {
+                            CacheDetailActivity.startActivity(activity, cacheGeocode);
+                        }
+                    }
                 }
             });
         } else {

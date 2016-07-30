@@ -185,6 +185,7 @@ public class GeokretyParserTest extends AbstractResourceInstrumentationTestCase 
         assertThat(log6.getDisplayText()).isEqualTo("Test");
         assertThat(log6.getType()).isEqualTo(LogType.NOTE);
         assertThat(log6.cacheName).isNullOrEmpty();
+        assertThat(log6.cacheGeocode).isNullOrEmpty();
     }
 
     public static void testGetLastSpottedUsername() throws Exception {

@@ -257,7 +257,7 @@ public class GeokretyParser {
                     logEntryBuilder.setLog(content);
                 }
                 if (StringUtils.isNotBlank(content) && localName.equalsIgnoreCase("wpt")) {
-                    //logEntryBuilder.setCacheGeocode(content); // TODO: also implement Geocode support in LogEntry
+                    logEntryBuilder.setCacheGeocode(content);
                     logEntryBuilder.setCacheName(content);
                 }
                 if (localName.equalsIgnoreCase("id")) {
