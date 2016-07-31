@@ -126,6 +126,7 @@
   <string name="log_hint_log_password">Introduzca su contraseña</string>
   <string name="log_oc_team_comment">Comentario equipo OC</string>
   <string name="log_your_saved_log">Tu registro guardado</string>
+  <string name="log_empty_logbook">El logbook de esta caché está vacío.</string>
   <string-array name="log_image_scales">
     <item>Sin redimensionar</item>
     <item>512 px</item>
@@ -148,6 +149,8 @@
   <string name="err_unknown">Error desconocido</string>
   <string name="err_unknown_address">c:geo no ha podido ubicar en el mapa esta dirección</string>
   <string name="err_comm">Error de comunicación desconocido</string>
+  <string name="err_missing_auth">Falta nombre de usuario o contraseña</string>
+  <string name="err_wrong">Usuario o contraseña incorrectos</string>
   <string name="err_maintenance">Geocaching.com no está disponible debido a labores de mantenimiento. c:geo puede funcionar sin conexión con los caches que hayan sido almacenados previamente.</string>
   <string name="err_license">No has aceptado las condiciones del acuerdo de licencia de Geocaching.com, por lo que c:geo no puede cargar las coordenadas de los cachés.</string>
   <string name="err_unvalidated_account">Antes debe validar su cuenta en la página web Geocaching.com.</string>
@@ -204,11 +207,14 @@
   <string name="err_parse_lon">c:geo no puede procesar la longitud.</string>
   <string name="err_parse_dist">c:geo no puede procesar la distancia.</string>
   <string name="err_parse_lat_lon">c:geo no ha podido interpretar la latitud o la longitud.</string>
+  <string name="err_rendertheme_file_unreadable">No se ha podido cargar el tema de representación seleccionado. Se revertirá al predeterminado.</string>
+  <string name="err_rendertheme_invalid">El tema de procesamiento seleccionado no es válido para esta versión de mapsforge. Se volverá al predeterminado.</string>
   <string name="warn_save_nothing">No hay nada para guardar.</string>
   <string name="warn_no_cache_coord">No hay cachés con coordenadas.</string>
   <string name="warn_no_coordinates">No se han dado coordenadas.</string>
   <string name="warn_no_keyword">No se ha indicado ninguna palabra clave.</string>
   <string name="warn_no_username">No se ha indicado nombre de usuario.</string>
+  <string name="warn_no_connector">No hay servicios de geocaching activados qué proporcionen este tipo de búsqueda.</string>
   <string name="warn_search_help_title">¿Necesitas ayuda?</string>
   <string name="warn_search_help_address">\"Rellena la dirección o el nombre del lugar. Por ejemplo usa la dirección \"Gran Vía 100, Vigo, España\", nombre de la ciudad \"Pontevedra\" o nombra a algo como  \"Lagunas de Ruidera\".</string>
   <string name="warn_search_help_gccode">Indica el código del caché. Por ejemplo \"GC1VCAZ\".</string>
@@ -322,6 +328,8 @@
   <string name="caches_refresh_all">Actualizar todos</string>
   <string name="caches_move_selected">Mover seleccionados</string>
   <string name="caches_move_all">Mover todos</string>
+  <string name="caches_copy_selected">Copiar seleccionados</string>
+  <string name="caches_copy_all">Copiar todos</string>
   <string name="caches_map_locus">Locus</string>
   <string name="caches_map_locus_export">Exportar a Locus</string>
   <string name="caches_recaptcha_title">reCAPTCHA</string>
@@ -355,6 +363,8 @@
   <string name="list_menu_rename">Renombrar la lista actual</string>
   <string name="list_menu_import">Importar</string>
   <string name="list_title">Escoger lista</string>
+  <string name="lists_title">Escoge las listas</string>
+  <string name="lists_remove_all">Ninguna</string>
   <string name="list_inbox">Guardados</string>
   <string name="list_all_lists">Todos los cachés</string>
   <string name="list_dialog_create_title">Nueva lista</string>
@@ -381,6 +391,9 @@
   <string name="about_apache_license"><a href="">Licencia Apache, Versión 2.0</a></string>
   <string name="about_help">Ayuda</string>
   <string name="about_system_include">Por favor, incluya la siguiente información del sistema cuando envíe un informe de error o pida más información sobre c:geo:</string>
+  <string name="about_system_info_send_button">Enviar por correo…</string>
+  <string name="about_system_info">Información del sistema c:geo</string>
+  <string name="about_system_info_send_chooser">Enviar información del sistema</string>
   <string name="changelog_github">Lista de todos los cambios</string>
   <!-- settings -->
   <string name="settings_title_open_settings">¿Abrir ajustes?</string>
@@ -419,19 +432,30 @@
   <string name="settings_info_facebook_login">No puedes iniciar sesión en geocaching.com desde c:geo con tu cuenta de Facebook. Pero esto se puede solucionar con un simple truco…</string>
   <string name="settings_authorize">Autorizar c:geo</string>
   <string name="settings_reauthorize">Autorizar c:geo otra vez</string>
+  <string name="settings_gc_description">Autorizar a c:geo en geocaching.com para buscar cachés.</string>
+  <string name="settings_ec_description">Autorizar que c:geo pueda usar extremcaching.com para buscar cachés y acceder a / filtrar tus cachés encontrados.</string>
+  <string name="settings_su_description">Autorizar a c:geo en geocaching.su para buscar cachés.</string>
   <string name="init_oc">Opencaching.de</string>
   <string name="settings_activate_oc">Activar</string>
+  <string name="init_summary_oc_de">Carga cachés de opencaching.de</string>
   <string name="init_oc_de_description">Autorizar que c:geo pueda usar opencaching.de para buscar cachés y acceder a / filtrar tus cachés encontrados.</string>
   <string name="settings_activate_oc_pl">Activar</string>
+  <string name="init_summary_oc_pl">Carga cachés de opencaching.pl</string>
   <string name="init_oc_pl_description">Autorizar que c:geo pueda usar opencaching.pl para buscar cachés y acceder a / filtrar tus cachés encontrados.</string>
   <string name="settings_activate_oc_nl">Activar</string>
+  <string name="init_summary_oc_nl">Carga cachés de opencaching.nl</string>
   <string name="init_oc_nl_description">Autorizar que c:geo pueda usar opencaching.nl para buscar cachés y acceder a / filtrar tus cachés encontrados.</string>
   <string name="settings_activate_oc_us">Activar</string>
+  <string name="init_summary_oc_us">Carga cachés de opencaching.us</string>
   <string name="init_oc_us_description">Autorizar que c:geo pueda usar opencaching.us para buscar cachés y acceder a / filtrar tus cachés encontrados.</string>
   <string name="settings_activate_oc_ro">Activar</string>
+  <string name="init_summary_oc_ro">Carga cachés de opencaching.ro</string>
   <string name="init_oc_ro_description">Autorizar que c:geo pueda usar opencaching.ro para buscar cachés y acceder a / filtrar tus cachés encontrados.</string>
   <string name="settings_activate_oc_uk">Activar</string>
+  <string name="init_summary_oc_uk">Carga cachés de opencaching.org.uk</string>
   <string name="init_oc_uk_description">Autorizar que c:geo pueda usar opencaching.org.uk para buscar cachés y acceder a / filtrar tus cachés encontrados.</string>
+  <string name="init_su">Geocaching.su</string>
+  <string name="init_summary_su">Carga cachés de Geocaching.su</string>
   <string name="settings_activate_su">Activar</string>
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_gcvote_password_description">Para poder calificar un caché, tienes que seguir las instrucciones en GCVote.com e introducir tu contraseña de GCVote aquí.</string>
@@ -446,6 +470,7 @@
   <string name="init_login_popup_working">Accediendo a Geocaching.com…</string>
   <string name="init_login_popup_ok">Acceso conseguido</string>
   <string name="init_login_popup_failed">Error en el acceso.</string>
+  <string name="init_login_popup_failed_reason">Error al iniciar sesión: %s</string>
   <string name="init_login_popup_not_authorized">No autorizado</string>
   <string name="init_login_popup_invalid_timestamp">Hora local inválida, ajuste la hora de nuevo</string>
   <string name="init_login_popup_invalid_token">Autorización inválida, volver a autorizar</string>
@@ -507,6 +532,7 @@
   <string name="init_backup_success">La base de datos de c:geo se ha copiado a:</string>
   <string name="init_backup_failed">Ha fallado la copia de seguridad.</string>
   <string name="init_backup_unnecessary">La base de datos está vacía, no es necesaria una copia de seguridad.</string>
+  <string name="init_backup_no_backup_available">No hay ninguna copia de seguridad disponible.</string>
   <string name="backup_confirm_overwrite">¿Quieres sobreescribir la copia de seguridad existente de %s?</string>
   <string name="restore_confirm_overwrite">¿Quieres sobreescribir %s en tu dispositivo con la copia de seguridad?</string>
   <string name="init_restore_success">Restauración completa.</string>
@@ -528,6 +554,7 @@
   <string name="init_maptrail">Mostrar rastro</string>
   <string name="init_summary_maptrail">Muestra el rastro en el mapa</string>
   <string name="init_share_after_export">Abrir el menú de compartir tras exportar GPX</string>
+  <string name="init_include_found_status">Incluir estado \"Encontrado\"</string>
   <string name="init_trackautovisit">Convertir TBs a Visitado</string>
   <string name="init_summary_trackautovisit">Convertir rastreables automáticamente a \"Visitado\"</string>
   <string name="init_sigautoinsert">Insertar automáticamente</string>
@@ -540,6 +567,7 @@
   <string name="init_default_navigation_tool_2_description">Aquí puedes seleccionar tu segunda herramienta de navegación. Actívala presionando unos segundos el icono de navegación al lado del título del caché.</string>
   <string name="init_navigation_menu_description">Aquí puedes seleccionar qué métodos de navegación de los disponibles serán mostrados en el menú de navegación de un caché o waypoint. Las herramientas deshabilitadas no están instaladas en este dispositivo.</string>
   <string name="init_debug_title">Información de depuración</string>
+  <string name="init_debug_note">c:geo puede generar una gran cantidad de información de depuración. Sin embargo, activar este ajuste puede afectar a la estabilidad de c:geo, y sólo se recomienda si te piden que envíes un registro para los desarrolladores.</string>
   <string name="init_debug">Activar el registro de depuración</string>
   <string name="init_dbonsdcard_title">Ubicación de la base de datos</string>
   <string name="init_dbonsdcard_note">Puedes almacenar la base de datos de c:geo en tu tarjeta de memoria externa. Haciendo esto ahorras espacio en tu memoria interna, pero puedes perder algo de rendimiento de la aplicación, y ésta no funcionará si la tarjeta SD no está disponible.</string>
@@ -596,6 +624,8 @@
   <string name="feature_search_geocode">Buscar por código GC</string>
   <string name="feature_search_owner">Búsqueda por dueño</string>
   <string name="feature_search_finder">Buscar por quien lo ha encontrado</string>
+  <string name="init_experimental_title">Características experimentales</string>
+  <string name="init_newmap">Usar el nuevo mapa como predetermindado (En vivo/listas)</string>
   <!-- map sources -->
   <string name="map_source_google_map">Google: Mapa</string>
   <string name="map_source_google_satellite">Google: Satélite</string>
@@ -615,14 +645,22 @@
   <!-- auth generic -->
   <string name="auth_twitter">Twitter</string>
   <string name="auth_authorize">Autorizar c:geo</string>
+  <string name="auth_check">Comprobar autenticación</string>
+  <string name="auth_check_again">Comprobar autenticación otra vez</string>
   <string name="auth_start">Iniciar autorización</string>
   <string name="auth_again">Volver a iniciar</string>
   <string name="auth_register">Crear una cuenta</string>
+  <string name="auth_connected">Conectado</string>
+  <string name="auth_unconnected">Aún no conectado</string>
+  <string name="auth_connected_as">Conectado como %s</string>
   <string name="auth_dialog_waiting">Esperando a %s…</string>
   <string name="auth_explain_short">El siguiente proceso permitirá a <b>c:geo</b> acceder a %s.</string>
   <string name="auth_explain_long">Presionando el botón \"Autorizar c:geo\" comenzará el proceso. Este proceso abrirá el navegador web con una página %s. Registrate en esta página y permite a <b>c:geo</b> acceder a tu cuenta. Eso es todo.</string>
+  <string name="auth_forget_title">¿Olvidar la autorización?</string>
+  <string name="auth_forget_message">Serás desconectado de este servicio. Tus credenciales guardados actuales se perderán.</string>
   <!-- auth credentials -->
   <string name="auth_credentials_explain_short">El siguiente proceso permitirá a <b>c:geo</b> acceder a %s.</string>
+  <string name="auth_credentials_explain_long">Rellenando tus datos y pulsando el botón \"Comprobar autenticación\" comenzará el procesi. Este proceso se conectará a %s y validará tus credenciales. Eso es todo.</string>
   <!-- auth token -->
   <string name="auth_token_register">Crear una cuenta</string>
   <string name="auth_token_explain_short">El siguiente proceso permitirá a <b>c:geo</b> acceder a %s.</string>
@@ -652,6 +690,7 @@
   <string name="cache_offline_drop">Tirar</string>
   <string name="cache_offline_store">Guardar</string>
   <string name="cache_offline_manage">Gestionar</string>
+  <string name="cache_offline_store_in_list">Guardar en lista</string>
   <string name="cache_offline_stored">Guardado en el dispositivo</string>
   <string name="cache_offline_not_ready">No preparado\npara usar desconectado</string>
   <string name="cache_offline_time_about">desde</string>
@@ -738,6 +777,7 @@
   <string name="cache_dialog_favorite_remove_message">Borrando el caché de tus favoritos…</string>
   <string name="cache_menu_navigate">Navegar</string>
   <string name="cache_menu_navigation_drive">Navegación (Coche)</string>
+  <string name="cache_menu_navigation_drive_select_target">¿Al caché o al parking?</string>
   <string name="cache_menu_navigation_walk">Navegación (A Pie)</string>
   <string name="cache_menu_navigation_transit">Navegación (Trans. público)</string>
   <string name="cache_menu_navigation_bike">Navegación (Bici)</string>
@@ -746,6 +786,7 @@
   <string name="cache_menu_sygic_drive">Sygic (Coche)</string>
   <string name="cache_menu_radar">Radar</string>
   <string name="cache_menu_map">Ver en mapa</string>
+  <string name="cache_menu_new_map">Mapa Nuevo</string>
   <string name="cache_menu_map_static">Mapas estáticos</string>
   <string name="cache_menu_download_map_static">Descargar mapas estáticos</string>
   <string name="cache_menu_rmaps">Rmaps</string>
@@ -762,6 +803,7 @@
   <string name="cache_menu_refresh">Actualizar</string>
   <string name="cache_menu_share">Compartir caché</string>
   <string name="cache_menu_move_list">Mover a otra lista</string>
+  <string name="cache_menu_copy_list">Copiar a otra lista</string>
   <string name="cache_menu_whereyougo">WhereYouGo</string>
   <string name="cache_menu_oruxmaps_online">OruxMaps (Online)</string>
   <string name="cache_menu_oruxmaps_offline">OruxMaps (Offline)</string>
@@ -826,7 +868,9 @@
   <string name="simple_dir_chooser_invalid_path">Ruta inválida</string>
   <!-- gpx -->
   <string name="gpx_import_loading_caches">Cargando cachés del archivo .gpx</string>
+  <string name="gpx_import_loading_caches_with_filename">Cargando cachés desde %1$s</string>
   <string name="gpx_import_loading_waypoints">Cargando archivo de waypoints</string>
+  <string name="gpx_import_loading_waypoints_with_filename">Cargando waypoints desde %1$s</string>
   <string name="gpx_import_store_static_maps">Almacenando mapas estáticos</string>
   <string name="gpx_import_caches_imported">cachés importados</string>
   <string name="gpx_import_caches_imported_with_filename">%1$d cachés importados de %2$s</string>
@@ -924,6 +968,7 @@
   <string name="map_strategy_auto">En función de la velocidad</string>
   <string name="map_strategy_detailed">Detallado</string>
   <string name="live_map_notification">Las coordenadas en el mapa en vivo pueden no ser precisas. Posibles coordenadas imprecisas están marcadas con un círculo naranja.\nAbrir los detalles del caché o guardándolo para su uso sin conexión proporcionará siempre coordenadas precisas.\n\nPuedes encontrar más información en la página \"Sobre c:geo\" dentro de la app.</string>
+  <string name="map_select_multiple_items">Seleccionar elemento</string>
   <!-- search -->
   <string name="search_bar_hint">Buscar cachés</string>
   <string name="search_bar_desc">Cachés (Código-GC, palabra clave), Rastreables (Código-TB)</string>
@@ -973,7 +1018,6 @@
   <string name="trackable_spotted_unknown_location">Ubicación desconocida</string>
   <string name="trackable_spotted_owner">En manos del propietario</string>
   <string name="trackable_spotted_archived">Archivado</string>
-  <string name="trackable_spotted_travelling">De viaje</string>
   <string name="trackable_origin">Origen</string>
   <string name="trackable_unknown">Desconocido</string>
   <string name="trackable_released">Activado</string>
@@ -1377,6 +1421,11 @@ Nombre de archivo:%2$s</string>
     <item quantity="one">%d caché movido</item>
     <item quantity="other">%d cachés movidos</item>
   </plurals>
+  <string name="command_copy_caches_progress">Copiando cachés a la lista %1s</string>
+  <plurals name="command_copy_caches_result">
+    <item quantity="one">%d caché copiado</item>
+    <item quantity="other">%d cachés copiados</item>
+  </plurals>
   <string name="command_delete_caches_progress">Eliminando cachés</string>
   <plurals name="command_delete_caches_result">
     <item quantity="one">%d caché eliminado</item>
@@ -1400,4 +1449,7 @@ Nombre de archivo:%2$s</string>
   <string name="invitation_action">Invitar amigos</string>
   <string name="invitation_title">Invitar a amigos a usar c:geo</string>
   <string name="invitation_message">Prueba la app c:geo para geocaching</string>
+  <string name="cache_list_remove_from">Borrar de la lista</string>
+  <string name="list_list_headline">Listas:</string>
+  <string name="cache_store_list">Guardar en lista</string>
 </resources>

@@ -1015,7 +1015,6 @@
   <string name="trackable_spotted_unknown_location">Ukendt sted</string>
   <string name="trackable_spotted_owner">Hos ejer</string>
   <string name="trackable_spotted_archived">Arkiveret</string>
-  <string name="trackable_spotted_travelling">Rejsende</string>
   <string name="trackable_origin">Oprindelsessted</string>
   <string name="trackable_unknown">Ukendt</string>
   <string name="trackable_released">Frigivet</string>

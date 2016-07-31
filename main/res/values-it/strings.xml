@@ -970,7 +970,6 @@
   <string name="trackable_spotted_unknown_location">Posizione sconosciuta</string>
   <string name="trackable_spotted_owner">Nelle mani del proprietario</string>
   <string name="trackable_spotted_archived">Archiviato</string>
-  <string name="trackable_spotted_travelling">In viaggio</string>
   <string name="trackable_origin">Origine</string>
   <string name="trackable_unknown">Sconosciuto</string>
   <string name="trackable_released">Rilasciato</string>

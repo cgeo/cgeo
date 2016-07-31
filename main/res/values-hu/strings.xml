@@ -1030,7 +1030,6 @@
   <string name="trackable_spotted_unknown_location">Ismeretlen helyen</string>
   <string name="trackable_spotted_owner">A tulajdonosnál</string>
   <string name="trackable_spotted_archived">Archiválva</string>
-  <string name="trackable_spotted_travelling">Úton</string>
   <string name="trackable_origin">Indítás helye</string>
   <string name="trackable_unknown">Ismeretlen</string>
   <string name="trackable_released">Indítás ideje</string>

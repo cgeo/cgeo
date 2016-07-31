@@ -1004,7 +1004,6 @@
   <string name="trackable_spotted_unknown_location">Sijainti tuntematon</string>
   <string name="trackable_spotted_owner">Omistajan hallussa</string>
   <string name="trackable_spotted_archived">Arkistoitu</string>
-  <string name="trackable_spotted_travelling">Matkustamassa</string>
   <string name="trackable_origin">Alkuperä</string>
   <string name="trackable_unknown">Tuntematon</string>
   <string name="trackable_released">Laskettu liikkeelle</string>

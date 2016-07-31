@@ -1021,7 +1021,6 @@
   <string name="trackable_spotted_unknown_location">Position inconnue</string>
   <string name="trackable_spotted_owner">Entre les mains du propriétaire</string>
   <string name="trackable_spotted_archived">Archivé</string>
-  <string name="trackable_spotted_travelling">En voyage</string>
   <string name="trackable_origin">Origine</string>
   <string name="trackable_unknown">Inconnu</string>
   <string name="trackable_released">Libéré le</string>

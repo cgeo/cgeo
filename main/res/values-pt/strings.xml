@@ -126,6 +126,7 @@
   <string name="log_hint_log_password">Inserira a password do registo</string>
   <string name="log_oc_team_comment">Comentário da OC Team</string>
   <string name="log_your_saved_log">O seu registo gravado</string>
+  <string name="log_empty_logbook">O logbook desta cache está vazio.</string>
   <string-array name="log_image_scales">
     <item>Não dimensionar</item>
     <item>512 px</item>
@@ -213,6 +214,7 @@
   <string name="warn_no_coordinates">Nenhumas coordenadas fornecidas.</string>
   <string name="warn_no_keyword">Nenhuma palavra-chave fornecida.</string>
   <string name="warn_no_username">Nenhum nome de utilizador fornecido.</string>
+  <string name="warn_no_connector">Nenhum dos serviços de geocaching atualmente ativados fornece esse tipo de pesquisa.</string>
   <string name="warn_search_help_title">Precisa de ajuda?</string>
   <string name="warn_search_help_address">\"Preencha o endereço ou o nome da localização. Por exemplo o nome da rua \"Avenida da Liberdade 100, Lisboa, Portugal\", nome da cidade \"Coimbra\" ou simplesmente o nome de algo como \"Parque das Nações\".</string>
   <string name="warn_search_help_gccode">Preencha o código da geocache. Por exemplo \"GC1VCAZ\".</string>
@@ -433,24 +435,34 @@
   <string name="settings_authorize">Autorizar c:geo</string>
   <string name="settings_reauthorize">Reautorizar c:geo</string>
   <string name="settings_gc_description">Autorize o c:geo a pesquisar caches em geocaching.com.</string>
+  <string name="settings_ec_description">Autorize o c:geo a pesquisar caches em extremecaching.com.</string>
+  <string name="settings_su_description">Autorize o c:geo a pesquisar caches em geocaching.su.</string>
   <string name="init_oc">Opencaching.de</string>
   <string name="settings_activate_oc">Activar</string>
+  <string name="init_summary_oc_de">Carregar caches de opencaching.de</string>
   <string name="init_oc_de_description">Autorizar c:geo com opencaching.de para pesquisar por caches e aceder/filtrar as suas caches encontradas.</string>
   <string name="init_oc_pl">Opencaching.pl</string>
   <string name="settings_activate_oc_pl">Activar</string>
+  <string name="init_summary_oc_pl">Carregar caches de opencaching.pl</string>
   <string name="init_oc_pl_description">Autorizar c:geo com opencaching.pl para pesquisar por caches e aceder/filtrar as suas caches encontradas.</string>
   <string name="init_oc_nl">Opencaching.nl</string>
   <string name="settings_activate_oc_nl">Activar</string>
+  <string name="init_summary_oc_nl">Carregar caches de opencaching.nl</string>
   <string name="init_oc_nl_description">Permitir que c:geo pesquise, aceda e filtre as suas caches encontradas em opencaching.pl.</string>
   <string name="init_oc_us">Opencaching.us</string>
   <string name="settings_activate_oc_us">Activar</string>
+  <string name="init_summary_oc_us">Carregar caches de opencaching.us</string>
   <string name="init_oc_us_description">Permitir que c:geo pesquise, aceda e filtre as suas caches encontradas em opencaching.us.</string>
   <string name="init_oc_ro">Opencaching.ro</string>
   <string name="settings_activate_oc_ro">Activar</string>
+  <string name="init_summary_oc_ro">Carregar caches de opencaching.ro</string>
   <string name="init_oc_ro_description">Permitir que c:geo pesquise, aceda e filtre as suas caches encontradas em opencaching.ro.</string>
   <string name="init_oc_uk">Opencaching.org.uk</string>
   <string name="settings_activate_oc_uk">Ativar</string>
+  <string name="init_summary_oc_uk">Carregar caches de opencaching.org.uk</string>
   <string name="init_oc_uk_description">Autorizar o c:geo em opencaching.org.uk para que pesquise por caches e aceder/filtrar as suas caches encontradas.</string>
+  <string name="init_su">Geocaching.su</string>
+  <string name="init_summary_su">Carregar caches de Geocaching.su</string>
   <string name="settings_activate_su">Activar</string>
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_gcvote_password_description">Para poder classificar uma cache, tem que seguir as instruções em GCVote.com e digitar a sua senha GCVote aqui.</string>
@@ -549,6 +561,7 @@
   <string name="init_maptrail">Mostrar rasto no mapa</string>
   <string name="init_summary_maptrail">Mostrar rasto no mapa</string>
   <string name="init_share_after_export">Abrir o menu de partilha depois da exportação GPX</string>
+  <string name="init_include_found_status">Incluir o estado \"Encontrado\"</string>
   <string name="init_trackautovisit">Marcar automaticamente os trackables como \"visitados\"</string>
   <string name="init_summary_trackautovisit">Marcar automaticamente os trackables como \"visitados\"</string>
   <string name="init_sigautoinsert">Inserir automaticamente</string>
@@ -561,6 +574,7 @@
   <string name="init_default_navigation_tool_2_description">Aqui define a sua segunda preferida ferramenta de navefação. É activada com clique longo no ícone ao lado do títula da cache.</string>
   <string name="init_navigation_menu_description">Aqui você pode selecionar qual dos métodos de navegação disponíveis serão mostrados no menu de navegação para um cache ou um ponto de referência. Métodos desativados não estão instalados neste dispositivo.</string>
   <string name="init_debug_title">Informação de depuração</string>
+  <string name="init_debug_note">c:Geo pode gerar uma grande quantidade de informações de depuração. Ativar essa configuração pode, no entanto, afetar a estabilidade do c:geo e só é recomendado se for solicitado a enviar um log para os desenvolvedores.</string>
   <string name="init_debug">Activar depuração</string>
   <string name="init_dbonsdcard_title">Localização da base de dados</string>
   <string name="init_dbonsdcard_note">Pode armazenar a base de dados do c:geo no armazenamento externo. Se o fizer vai poupar memória interna, mas pode perder um pouco de performance e o c:geo pode não funcionar se o armazenamento externo não estiver disponível.</string>
@@ -653,6 +667,7 @@
   <string name="auth_forget_message">Será desconectado deste serviço. As suas credenciais atualmente guardadas serão perdidas.</string>
   <!-- auth credentials -->
   <string name="auth_credentials_explain_short">O processo a seguir permitirá que o <b>c:geo</b> aceda a %s.</string>
+  <string name="auth_credentials_explain_long">Preencher as suas credenciais e carregar no botão \"Verificar Autenticação\" irá iniciar o processo. Este processo irá conectar a %s e validar as suas credenciais. Nada mais simples.</string>
   <!-- auth token -->
   <string name="auth_token_register">Criar uma conta</string>
   <string name="auth_token_explain_short">O processo a seguir permitirá que o <b>c:geo</b> aceda %s.</string>
@@ -685,6 +700,7 @@
   <string name="cache_offline_drop">Apagar</string>
   <string name="cache_offline_store">Arquivar</string>
   <string name="cache_offline_manage">Gerir</string>
+  <string name="cache_offline_store_in_list">Armazenar na lista</string>
   <string name="cache_offline_stored">Arquivada no dispositivo</string>
   <string name="cache_offline_not_ready">Não está pronta\npara utilização offline</string>
   <string name="cache_offline_time_about">há</string>
@@ -771,6 +787,7 @@
   <string name="cache_dialog_favorite_remove_message">Remover cache dos favoritos…</string>
   <string name="cache_menu_navigate">Navegar</string>
   <string name="cache_menu_navigation_drive">Navegar (Conduzir)</string>
+  <string name="cache_menu_navigation_drive_select_target">Cache ou lugar de estacionamento?</string>
   <string name="cache_menu_navigation_walk">Navegar (Caminhar)</string>
   <string name="cache_menu_navigation_transit">Navegação (Transportes)</string>
   <string name="cache_menu_navigation_bike">Navegar (Andar de bicicleta)</string>
@@ -779,6 +796,7 @@
   <string name="cache_menu_sygic_drive">Sygic (conduzir)</string>
   <string name="cache_menu_radar">Radar</string>
   <string name="cache_menu_map">Mostrar no mapa</string>
+  <string name="cache_menu_new_map">Novo Mapa</string>
   <string name="cache_menu_map_static">Mapas estáticos</string>
   <string name="cache_menu_download_map_static">Descarregar os mapas estáticos</string>
   <string name="cache_menu_rmaps">Rmaps</string>
@@ -795,6 +813,7 @@
   <string name="cache_menu_refresh">Actualizar</string>
   <string name="cache_menu_share">Partilhar cache</string>
   <string name="cache_menu_move_list">Mover para outra lista</string>
+  <string name="cache_menu_copy_list">Copiar para uma lista diferente</string>
   <string name="cache_menu_whereyougo">WhereYouGo</string>
   <string name="cache_menu_oruxmaps_online">OruxMaps (Online)</string>
   <string name="cache_menu_oruxmaps_offline">OruxMaps (Offline)</string>
@@ -861,7 +880,9 @@
   <string name="simple_dir_chooser_invalid_path">Caminho inválido</string>
   <!-- gpx -->
   <string name="gpx_import_loading_caches">A carregar as caches do ficheiro .gpx</string>
+  <string name="gpx_import_loading_caches_with_filename">A carregar caches de %1$s</string>
   <string name="gpx_import_loading_waypoints">A carregar o ficheiro dos waypoints</string>
+  <string name="gpx_import_loading_waypoints_with_filename">A carregar coordenadas de %1$s</string>
   <string name="gpx_import_store_static_maps">A gravar mapas estáticos</string>
   <string name="gpx_import_caches_imported">caches importadas</string>
   <string name="gpx_import_caches_imported_with_filename">%1$d caches importadas de %2$s</string>
@@ -943,6 +964,7 @@
   <string name="map_trail_show">Mostrar caminho</string>
   <string name="map_circles_show">Mostrar círculos</string>
   <string name="map_mycaches_hide">Esconder caches encontradas e minhas</string>
+  <string name="map_disabled_hide">Esconder caches desativadas</string>
   <string name="map_theme_builtin">Padrão</string>
   <string name="map_theme_select">Selecione o tema de mapa</string>
   <string name="map_live_enable">Activar ao vivo</string>
@@ -958,6 +980,7 @@
   <string name="map_strategy_auto">Dependente da velocidade</string>
   <string name="map_strategy_detailed">Detalhado</string>
   <string name="live_map_notification">No novo mapa ao vivo as coordenadas podem nem sempre ser precisas. As coordenadas possivelmente imprecisas são marcadas com um círculo cor de laranja.\nAbrindo os detalhes da cache or gravando a cache para utilização offline fará com que obtenha as coordenadas precisas.\n\nMais informações em todas as alterações podem ser encontradas na página \"Sobre c:geo\" na aplicação.</string>
+  <string name="map_select_multiple_items">Selecionar item</string>
   <!-- search -->
   <string name="search_bar_hint">Procurar caches</string>
   <string name="search_bar_desc">Caches (código-GC, palavra-chave), Trackables (código-TB)</string>
@@ -998,6 +1021,7 @@
   <string name="trackable_image">Imagem</string>
   <string name="trackable_code">Código de acompanhamento</string>
   <string name="trackable_name">Nome</string>
+  <string name="trackable_brand">Marca</string>
   <string name="trackable_type">Tipo</string>
   <string name="trackable_owner">Dono</string>
   <string name="trackable_spotted">Visto</string>
@@ -1006,7 +1030,6 @@
   <string name="trackable_spotted_unknown_location">Localização desconhecida</string>
   <string name="trackable_spotted_owner">Nas mãos do dono</string>
   <string name="trackable_spotted_archived">Arquivada</string>
-  <string name="trackable_spotted_travelling">Viajar</string>
   <string name="trackable_origin">Origem</string>
   <string name="trackable_unknown">Desconhecido</string>
   <string name="trackable_released">Criado</string>
@@ -1410,6 +1433,11 @@
     <item quantity="one">%d cache movida</item>
     <item quantity="other">%d caches movidas</item>
   </plurals>
+  <string name="command_copy_caches_progress">A copiar as caches para a lista %1s</string>
+  <plurals name="command_copy_caches_result">
+    <item quantity="one">%d cache copiada</item>
+    <item quantity="other">%d caches copiadas</item>
+  </plurals>
   <string name="command_delete_caches_progress">A apagar caches</string>
   <plurals name="command_delete_caches_result">
     <item quantity="one">Apagada %d cache</item>
@@ -1433,4 +1461,7 @@
   <string name="invitation_action">Convidar amigos</string>
   <string name="invitation_title">Convide amigos a utilizar c:geo</string>
   <string name="invitation_message">Experimente a aplicação c:geo para geocaching</string>
+  <string name="cache_list_remove_from">Remover da lista</string>
+  <string name="list_list_headline">Listas:</string>
+  <string name="cache_store_list">Armazenar na lista</string>
 </resources>

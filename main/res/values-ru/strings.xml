@@ -1018,7 +1018,6 @@
   <string name="trackable_spotted_unknown_location">Неизвестно</string>
   <string name="trackable_spotted_owner">У создателя</string>
   <string name="trackable_spotted_archived">В архиве</string>
-  <string name="trackable_spotted_travelling">Путешествует</string>
   <string name="trackable_origin">Родина</string>
   <string name="trackable_unknown">Неизвестно</string>
   <string name="trackable_released">Создано</string>

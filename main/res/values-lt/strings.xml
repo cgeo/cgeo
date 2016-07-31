@@ -214,6 +214,7 @@
   <string name="warn_no_coordinates">Neduotos koordinatės.</string>
   <string name="warn_no_keyword">Neduotas raktažodis.</string>
   <string name="warn_no_username">Neduotas vartotojo vardas.</string>
+  <string name="warn_no_connector">Šio tipo paieškai nėra šiuo metu aktyvuotų paslaugų.</string>
   <string name="warn_search_help_title">Reikalinga pagalba?</string>
   <string name="warn_search_help_address">Įveskite adresą arba vietovės pavadinimą. Pavyzdžiui naudokite pašto adresą \"Radlica 100, Praha, Čekijos Respublika\", miesto pavadinimą \"Berlynas\" arba tiesiog tokį pavadinimą kaip \"Yellowstone Park\".</string>
   <string name="warn_search_help_gccode">Įveskite slėptuvės kodą. Pvz. \"GC3WED4\".</string>
@@ -554,6 +555,7 @@
   <string name="init_maptrail">Rodyti pėdsaką</string>
   <string name="init_summary_maptrail">Rodyti pėdsaką žemėlapyje</string>
   <string name="init_share_after_export">Po GPX eksportavimo atidaryti bendrinimo meniu</string>
+  <string name="init_include_found_status">Įtraukti \"Rasta\" būseną</string>
   <string name="init_trackautovisit">Apsilankyti su keliauninkais</string>
   <string name="init_summary_trackautovisit">Automatiškai nustatyti keliauninkus kaip \"Apsilankė\"</string>
   <string name="init_sigautoinsert">Įterpti automatiškai</string>
@@ -1022,7 +1024,6 @@
   <string name="trackable_spotted_unknown_location">Vieta nežinoma</string>
   <string name="trackable_spotted_owner">Savininko rankose</string>
   <string name="trackable_spotted_archived">Suarchyvuota</string>
-  <string name="trackable_spotted_travelling">Keliavimas</string>
   <string name="trackable_origin">Kilmė</string>
   <string name="trackable_unknown">Nenurodyta</string>
   <string name="trackable_released">Išleistas</string>

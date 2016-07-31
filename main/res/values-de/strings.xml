@@ -1032,7 +1032,6 @@
   <string name="trackable_spotted_unknown_location">Unbekannter Ort</string>
   <string name="trackable_spotted_owner">Beim Besitzer</string>
   <string name="trackable_spotted_archived">Archiviert</string>
-  <string name="trackable_spotted_travelling">Unterwegs</string>
   <string name="trackable_origin">Ursprungsort</string>
   <string name="trackable_unknown">Unbekannt</string>
   <string name="trackable_released">Ausgesetzt</string>
@@ -1054,6 +1053,7 @@
   <string name="user_menu_open_browser">Profil im Browser öffnen</string>
   <string name="user_menu_send_message">Nachricht senden</string>
   <string name="user_menu_open_contact">Kontakt öffnen</string>
+  <string name="user_unknown">Unbekannter Benutzer</string>
   <!-- navigation -->
   <string name="navigation">Navigation</string>
   <string name="compass_title">Kompass</string>
