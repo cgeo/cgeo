@@ -91,6 +91,12 @@ public class CgeoApplication extends Application {
         sensors.geoDataObservable(true).subscribeOn(AndroidRxUtils.looperCallbacksScheduler).first().subscribe();
     }
 
+    @Override
+    public void onConfigurationChanged(final Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+
+        initApplicationLocale(Settings.useEnglish());
+    }
 
     @Override
     public void onLowMemory() {
