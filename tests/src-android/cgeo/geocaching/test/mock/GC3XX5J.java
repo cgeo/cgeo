@@ -67,7 +67,7 @@ public class GC3XX5J extends MockedCache {
     @NonNull
     @Override
     public String getOwnerUserId() {
-        return "David & Ajda";
+        return "Murncki";
     }
 
     @Override
