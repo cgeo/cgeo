@@ -265,7 +265,7 @@
   <string name="menu_filter">Filter</string>
   <string name="menu_scan_geo">Geocode scannen</string>
   <string name="menu_pocket_queries">Pocket-Queries</string>
-  <string name="menu_scan_description">c:geo kann Geocodes scannen, die als QR-Code abgebildet sind. Die dafür notwendige App ist nicht installiert. Möchten Sie Google Play öffnen, um sie zu installieren?</string>
+  <string name="menu_scan_description">c:geo kann Geocodes scannen, die als QR-Code abgebildet sind. Die dafür notwendige App ist nicht installiert. Möchtest du Google Play öffnen, um sie zu installieren?</string>
   <!-- main screen -->
   <string name="live_map_button">Live-Karte</string>
   <string name="caches_nearby_button">In der Nähe</string>
@@ -500,7 +500,7 @@
   <string name="init_ratingwanted">GCvote-Bewertung</string>
   <string name="init_summary_ratingwanted">Lade Cache-Bewertung von GCvote.com</string>
   <string name="init_friends_and_own_logs_wanted">Eigene und Logs von Freunden zeigen</string>
-  <string name="init_summary_friends_and_own_logs_wanted">Zeige zusätzliche Logbuchseite für Logs von Dir und Deinen Freunden</string>
+  <string name="init_summary_friends_and_own_logs_wanted">Zeige zusätzliche Logbuchseite für Logs von dir und deinen Freunden</string>
   <string name="init_openlastdetailspage">Zuletzt genutzte Seite</string>
   <string name="init_summary_openlastdetailspage">Öffne Details mit zuletzt genutzter Seite</string>
   <string name="init_skin">Helle Oberfläche</string>
@@ -574,7 +574,7 @@
   <string name="init_default_navigation_tool_2_description">Hier kann das zweite bevorzugte Navigationswerkzeug festgelegt werden. Es ist durch langen Klick auf das Navigationssymbol in der Titelzeile eines Caches erreichbar.</string>
   <string name="init_navigation_menu_description">Hier kann ausgewählt werden, welche der verfügbaren Navigationswerkzeuge im Navigationsmenü für einen Cache oder Wegpunkt angezeigt werden. Nicht auswählbare Optionen sind auf diesem Gerät nicht installiert.</string>
   <string name="init_debug_title">Fehlersuche</string>
-  <string name="init_debug_note">Erlaubt c:geo Debug-Informationen zu generieren. Das Aktivieren der Einstellung kann sich negativ auf die Stabilität von c:geo auswirken und wird nur empfohlen, wenn Sie von den Entwicklern dazu aufgefordert werden.</string>
+  <string name="init_debug_note">Erlaubt c:geo Debug-Informationen zu generieren. Das Aktivieren der Einstellung kann sich negativ auf die Stabilität von c:geo auswirken und wird nur empfohlen, wenn du von den Entwicklern dazu aufgefordert werden.</string>
   <string name="init_debug">Debug-Log aktivieren</string>
   <string name="init_dbonsdcard_title">Datenspeicherung</string>
   <string name="init_dbonsdcard_note">Die Datenbank von c:geo kann auf eine externe Speicherkarte verschoben werden. Hiermit kann interner Speicher gespart werden, allerdings wird sich die Leistung etwas reduzieren und c:geo funktioniert nicht mehr ohne verfügbare Speicherkarte.</string>
@@ -1077,7 +1077,7 @@
   <string name="helper_sendtocgeo_title">Send to c:geo</string>
   <string name="helper_contacts_title"> c:geo Kontakte-Plugin</string>
   <string name="helper_contacts_description">Ermöglicht das direkte Öffnen von Kontakten (aus dem eigenen Adressbuch) von Logeinträgen aus, sodass man Freunde einfacher um Hilfe fragen kann.</string>
-  <string name="helper_sendtocgeo_description">Send to c:geo ist eine Browsererweiterung <strong>für Ihren PC</strong>. Beim Durchsuchen von geocaching.com können Sie Caches mit einem Klick im Browser direkt an Ihr Smartphone übermitteln.</string>
+  <string name="helper_sendtocgeo_description">Send to c:geo ist eine Browsererweiterung <strong>für deinen PC</strong>. Beim Durchsuchen von geocaching.com kannst du Caches mit einem Klick im Browser direkt an dein Smartphone übermitteln.</string>
   <string name="helper_locus_title">Locus</string>
   <string name="helper_locus_description">Outdoor Navigations-App für dein Handy oder Tablet. Verwende topografische Karten offline, zeichne Tracks von deinen Touren auf, suche Geocaches, benutze Sprachführung und vieles mehr.</string>
   <string name="helper_gpsstatus_title">GPS Status &amp; Toolbox</string>
@@ -1085,11 +1085,11 @@
   <string name="helper_bluetoothgps_title">Bluetooth GPS</string>
   <string name="helper_bluetoothgps_description">Ermöglicht ein externes GPS zu verwenden, um die Standortgenauigkeit zu erhöhen und die Batterie zu schonen.</string>
   <string name="helper_barcode_title">Barcode-Scanner</string>
-  <string name="helper_barcode_description">Es gibt GreaseMonkey-Scripte und Webseiten, die Geocodes als Strichcode darstellen können. Bei Verwendung dieser Skripte kann c:geo über diese App den Geocode eines Caches direkt vom Bildschirm des Computers ablesen.</string>
+  <string name="helper_barcode_description">Es gibt Greasemonkey-Scripte und Webseiten, die Geocodes als Strichcode darstellen können. Bei Verwendung dieser Skripte kann c:geo über diese App den Geocode eines Caches direkt vom Bildschirm des Computers ablesen.</string>
   <string name="helper_pocketquery_title">Pocket-Query Creator</string>
   <string name="helper_pocketquery_description">Ermöglicht das einfache Erzeugen und Herunterladen von Pocket-Queries basierend auf der aktuellen Position oder einem auf der Karte gewählten Punkt. Setzt eine Premium-Mitgliedschaft bei geocaching.com voraus.</string>
   <string name="helper_google_translate_title">Google Übersetzer</string>
-  <string name="helper_google_translate_description">Wenn Sie Übersetzungspakete mit der Google Übersetzer-App herunterladen, können Sie Cache-Beschreibungen in c:geo durch langes Drücken auf den Cache-Beschreibungstext übersetzen (ohne Internetverbindung) .</string>
+  <string name="helper_google_translate_description">Wenn du Übersetzungspakete mit der Google Übersetzer-App herunterlädst, kannst du Cache-Beschreibungen in c:geo durch langes Drücken auf den Cache-Beschreibungstext übersetzen (ohne Internetverbindung) .</string>
   <string name="helper_wear_title">c:geo Wear</string>
   <string name="helper_wear_description">c:geo Wear ist eine Erweiterung für c:geo, mit der du mit deiner Android Wear Smartwatch zu Geocaches navigieren kannst.</string>
   <string name="helper_where_you_go_title">WhereYouGo</string>
