@@ -2,7 +2,23 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-    <b>next bugfix release</b>\n
+    <b>Next feature release:</b>\n
+    · New: Allow caches to be stored on more than one list\n
+    · New: Different http libraries for more efficient network communication\n
+    · New: Update of Locus API for improved interworking\n
+    · New: Reworked and simplified authentication screens\n
+    · New: Lists automatically sorted by name, if they contain only similarly named caches\n
+    · New: Online search support for Geocaching.su\n
+    · New: Select between cache and parking place when using navigation for driving\n
+    · New: Show will attend state in cache details, if a matching log is available\n
+    · New: Smileys are now filtered from image list\n
+    · New: Log images shown for OpenCaching caches\n
+    · Changed: Show more text of cache title in lists\n
+    · Changed: Always start new line when editing personal note\n
+    · Removed: No more option to show only short description of a cache\n
+    · Fix: Show empty log book page for OpenCaching caches without any log\n
+    · Fix: Show attributes for OpenCaching GPX imports\n
+    · Fix: Recognize BMP as spoiler format\n
     · Fix: Maps.me API change led to caches not opening from that app\n
     \n
     \n
