@@ -149,7 +149,7 @@ class GeokretyParser {
                         logEntryBuilder.setDate(DATE_FORMAT.parse(movedDate).getTime());
                     }
                 }
-                if (localName.equalsIgnoreCase("user")) {
+                if (localName.equalsIgnoreCase("user") && !isInComments) {
                     final String userId = attributes.getValue("id");
                     if (StringUtils.isNotBlank(userId)) {
                         logEntryBuilder.setAuthor(CgeoApplication.getInstance().getString(R.string.init_geokrety_userid, userId));
@@ -241,7 +241,7 @@ class GeokretyParser {
                 if (StringUtils.isNotBlank(content) && localName.equalsIgnoreCase("waypoint")) {
                     trackable.setSpottedName(content);
                 }
-                if (StringUtils.isNotBlank(content) && localName.equalsIgnoreCase("user")) {
+                if (StringUtils.isNotBlank(content) && localName.equalsIgnoreCase("user") && !isInComments) {
                     logEntryBuilder.setAuthor(content);
                 }
                 if (localName.equalsIgnoreCase("move")) {

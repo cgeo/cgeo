@@ -335,4 +335,21 @@ public class GeokretyParserTest extends AbstractResourceInstrumentationTestCase 
         logsEntries11.add(note);
         assertThat(GeokretyParser.getLastSpottedUsername(logsEntries11)).isEqualTo(userUnknown);
     }
+
+    public void testLogsWithComments() throws Exception {
+        final List<Trackable> trackables = GeokretyParser.parse(new InputSource(getResourceStream(R.raw.geokret46072_details_xml)));
+        assertThat(trackables).hasSize(1);
+        final Trackable trackable1 = trackables.get(0);
+
+        // Check the logs
+        final List<LogEntry> logs = trackable1.getLogs();
+        assertThat(logs).hasSize(7);
+
+        final LogEntry logNocybe = logs.get(2);
+        assertThat(logNocybe.id).isEqualTo(855750);
+        assertThat(logNocybe.author).isEqualTo("nocybe1810");
+        assertThat(logNocybe.getType()).isEqualTo(LogType.GRABBED_IT);
+        assertThat(logNocybe.cacheName).isNullOrEmpty();
+        assertThat(logNocybe.cacheGeocode).isNullOrEmpty();
+    }
 }

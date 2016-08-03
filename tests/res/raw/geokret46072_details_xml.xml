@@ -1,0 +1,92 @@
+<gkxml version="1.0" date="2016-07-30T18:15:05.957Z">
+    <geokrety>
+        <geokret id="46072">
+            <name><![CDATA[BN Head - 9]]></name>
+            <description><![CDATA[Nous sommes 10 frères et sœurs "Tête BN". Nous participons un concours du plus grand nombre de saut de cache en cache. Aidez-nous à accomplir notre but. Merci. --- We are 10 brothers and sisters "BN's Head". We attend a contest for the greatest cache to cache jump number. Help us reach our goal. Thank you.]]></description>
+            <owner id="26422"><![CDATA[kumy]]></owner>
+            <datecreated/>
+            <dateupdated>2016-07-30T18:15:05.957Z</dateupdated>
+            <distancetravelled unit="km">54</distancetravelled>
+            <places>4</places>
+            <state>1</state>
+            <missing>0</missing>
+            <waypoints>
+                <waypoint id="969151"/>
+            </waypoints>
+            <type id="0">Traditional</type>
+            <image title="">14089824963c5y4.jpg</image>
+            <moves last_id="969151">
+                <move>
+                    <id>969151</id>
+                    <date moved="2016-07-30 18:00"/>
+                    <user id=""><![CDATA[Grafista]]></user>
+                    <comment><![CDATA[Nous ferons avancer le "BN" dans son défi et le déposerons dans notre prochaine cache ! Bon voyage petit BN :-)]]></comment>
+                    <logtype id="1">Grabbed from</logtype>
+                </move>
+                <move>
+                    <id>873820</id>
+                    <position latitude="43.62137" longitude="7.01283"/>
+                    <wpt alt="fr">GC63QWR</wpt>
+                    <date moved="2016-03-03 12:00"/>
+                    <user id=""><![CDATA[nocybe1810]]></user>
+                    <comment/>
+                    <logtype id="0">Dropped to</logtype>
+                    <distancetravelled unit="km">21</distancetravelled>
+                </move>
+                <move>
+                    <id>855750</id>
+                    <date moved="2016-01-30 13:00"/>
+                    <user id=""><![CDATA[nocybe1810]]></user>
+                    <comment><![CDATA[Pardon, fausse info, je l'avais recupere, pas depose. Malheureusement, on ne peut pas supprimer un log.
+Pour info: le Krety ne resemmble pas a la photo, c'est juste un morceau de papier.]]></comment>
+                    <logtype id="1">Grabbed from</logtype>
+                    <comments>
+                        <comment type="message">
+                            <user id="26422"><![CDATA[kumy]]></user>
+                            <message><![CDATA[Juste un morceau de papier... C'est moche :(]]></message>
+                        </comment>
+                        <comment type="message">
+                            <user id="26422"><![CDATA[kumy]]></user>
+                            <message><![CDATA[log précédent supprimé]]></message>
+                        </comment>
+                    </comments>
+                </move>
+                <move>
+                    <id>648096</id>
+                    <position latitude="43.66155" longitude="6.75320"/>
+                    <wpt alt="fr">GC24N8N</wpt>
+                    <date moved="2015-01-27 10:00"/>
+                    <user id="27829"><![CDATA[gueta]]></user>
+                    <comment/>
+                    <logtype id="0">Dropped to</logtype>
+                    <distancetravelled unit="km">20</distancetravelled>
+                </move>
+                <move>
+                    <id>638121</id>
+                    <date moved="2015-01-03 15:00"/>
+                    <user id="27829"><![CDATA[gueta]]></user>
+                    <comment/>
+                    <logtype id="1">Grabbed from</logtype>
+                </move>
+                <move>
+                    <id>599522</id>
+                    <position latitude="43.68835" longitude="7.00190"/>
+                    <wpt alt="fr">GC2P1FR</wpt>
+                    <date moved="2014-09-27 19:26"/>
+                    <user id="26422"><![CDATA[kumy]]></user>
+                    <comment><![CDATA[Bon voyage :)]]></comment>
+                    <logtype id="0">Dropped to</logtype>
+                    <distancetravelled unit="km">13</distancetravelled>
+                </move>
+                <move>
+                    <id>580953</id>
+                    <date moved="2014-08-25 17:58"/>
+                    <user id="26422"><![CDATA[kumy]]></user>
+                    <comment><![CDATA[Né ici]]></comment>
+                    <logtype id="5">Dipped in</logtype>
+                    <distancetravelled unit="km">0</distancetravelled>
+                </move>
+            </moves>
+        </geokret>
+    </geokrety>
+</gkxml>
