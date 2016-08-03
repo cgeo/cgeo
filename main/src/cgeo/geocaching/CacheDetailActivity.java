@@ -120,6 +120,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -1067,15 +1068,15 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             updateCacheLists(view, cache, res);
 
             // watchlist
-            final Button buttonWatchlistAdd = ButterKnife.findById(view, R.id.add_to_watchlist);
-            final Button buttonWatchlistRemove = ButterKnife.findById(view, R.id.remove_from_watchlist);
+            final ImageButton buttonWatchlistAdd = ButterKnife.findById(view, R.id.add_to_watchlist);
+            final ImageButton buttonWatchlistRemove = ButterKnife.findById(view, R.id.remove_from_watchlist);
             buttonWatchlistAdd.setOnClickListener(new AddToWatchlistClickListener());
             buttonWatchlistRemove.setOnClickListener(new RemoveFromWatchlistClickListener());
             updateWatchlistBox();
 
             // favorite points
-            final Button buttonFavPointAdd = ButterKnife.findById(view, R.id.add_to_favpoint);
-            final Button buttonFavPointRemove = ButterKnife.findById(view, R.id.remove_from_favpoint);
+            final ImageButton buttonFavPointAdd = ButterKnife.findById(view, R.id.add_to_favpoint);
+            final ImageButton buttonFavPointRemove = ButterKnife.findById(view, R.id.remove_from_favpoint);
             buttonFavPointAdd.setOnClickListener(new FavoriteAddClickListener());
             buttonFavPointRemove.setOnClickListener(new FavoriteRemoveClickListener());
             updateFavPointBox();
@@ -1321,8 +1322,8 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             if (!supportsWatchList) {
                 return;
             }
-            final Button buttonAdd = ButterKnife.findById(view, R.id.add_to_watchlist);
-            final Button buttonRemove = ButterKnife.findById(view, R.id.remove_from_watchlist);
+            final ImageButton buttonAdd = ButterKnife.findById(view, R.id.add_to_watchlist);
+            final ImageButton buttonRemove = ButterKnife.findById(view, R.id.remove_from_watchlist);
             final TextView text = ButterKnife.findById(view, R.id.watchlist_text);
 
             final int watchListCount = cache.getWatchlistCount();
@@ -1372,8 +1373,8 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             if (!supportsFavoritePoints || cache.isOwner() || !Settings.isGCPremiumMember()) {
                 return;
             }
-            final Button buttonAdd = ButterKnife.findById(view, R.id.add_to_favpoint);
-            final Button buttonRemove = ButterKnife.findById(view, R.id.remove_from_favpoint);
+            final ImageButton buttonAdd = ButterKnife.findById(view, R.id.add_to_favpoint);
+            final ImageButton buttonRemove = ButterKnife.findById(view, R.id.remove_from_favpoint);
             final TextView text = ButterKnife.findById(view, R.id.favpoint_text);
 
             if (cache.isFavorite()) {
@@ -2238,9 +2239,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             final OnLongClickListener moveCacheListener) {
         // offline use
         final TextView offlineText = ButterKnife.findById(view, R.id.offline_text);
-        final Button offlineRefresh = ButterKnife.findById(view, R.id.offline_refresh);
-        final Button offlineStore = ButterKnife.findById(view, R.id.offline_store);
-        final Button offlineDrop = ButterKnife.findById(view, R.id.offline_drop);
+        final ImageButton offlineRefresh = ButterKnife.findById(view, R.id.offline_refresh);
+        final ImageButton offlineStore = ButterKnife.findById(view, R.id.offline_store);
+        final ImageButton offlineDrop = ButterKnife.findById(view, R.id.offline_drop);
 
         offlineStore.setClickable(true);
         offlineStore.setOnClickListener(storeCacheClickListener);
@@ -2274,13 +2275,13 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 offlineDrop.setVisibility(View.VISIBLE);
             }
 
-            offlineStore.setText(R.string.cache_offline_manage);
+            offlineStore.setImageResource(R.drawable.ic_menu_edit);
         } else {
             offlineText.setText(res.getString(R.string.cache_offline_not_ready));
             if (offlineDrop != null) {
                 offlineDrop.setVisibility(View.GONE);
             }
-            offlineStore.setText(R.string.cache_offline_store);
+            offlineStore.setImageResource(R.drawable.ic_menu_save);
         }
 
     }
