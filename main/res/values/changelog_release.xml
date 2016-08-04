@@ -4,6 +4,7 @@
   <string name="changelog_release" translatable="false">\n
     <b>Next feature release:</b>\n
     · New: Allow caches to be stored on more than one list\n
+    · New: Experimental beta version of new mapsforge-based offline map\n
     · New: Different http libraries for more efficient network communication\n
     · New: Update of Locus API for improved interworking\n
     · New: Reworked and simplified authentication screens\n

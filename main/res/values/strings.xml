@@ -654,7 +654,8 @@
     <string name="feature_search_owner">Search by owner</string>
     <string name="feature_search_finder">Search by finder</string>
     <string name="init_experimental_title">Experimental features</string>
-    <string name="init_newmap">Use the new map as default (live/lists)</string>
+    <string name="init_mfbeta">Mapsforge beta as default</string>
+    <string name="init_mfbeta_description">The current release contains a beta version of our new Mapsforge map as an experimental feature. This new map can be activated here as default for the live and list maps.</string>
     
     <!-- map sources -->
     <string name="map_source_google_map">Google: Map</string>
@@ -832,7 +833,7 @@
     <string name="cache_menu_sygic_drive">Sygic (Driving)</string>
     <string name="cache_menu_radar">Radar</string>
     <string name="cache_menu_map">Map</string>
-    <string name="cache_menu_new_map">New Map</string>
+    <string name="cache_menu_mfbeta">Mapsforge Beta</string>
     <string name="cache_menu_map_static">Static Maps</string>
     <string name="cache_menu_download_map_static">Download Static Maps</string>
     <string name="cache_menu_rmaps">Rmaps</string>
