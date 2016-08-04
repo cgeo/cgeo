@@ -1,20 +1,19 @@
 package cgeo.geocaching.apps.navi;
 
-import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.R;
-import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.maps.mapsforge.v6.NewMap;
-
-import android.support.annotation.NonNull;
+import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.Waypoint;
 
 import android.app.Activity;
+import android.support.annotation.NonNull;
 
 class InternalMapNew extends AbstractPointNavigationApp {
 
     InternalMapNew() {
-        super(getString(R.string.cache_menu_new_map), null);
+        super(getString(R.string.cache_menu_mfbeta), null);
     }
 
     @Override
