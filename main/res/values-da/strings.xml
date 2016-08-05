@@ -624,7 +624,6 @@
   <string name="feature_search_owner">Søg efter ejer</string>
   <string name="feature_search_finder">Søg efter finder</string>
   <string name="init_experimental_title">Eksperimentelle funktioner</string>
-  <string name="init_newmap">Brug det nye kort som standard (live/lister)</string>
   <!-- map sources -->
   <string name="map_source_google_map">Google: Kort</string>
   <string name="map_source_google_satellite">Google: Satellit</string>
@@ -784,7 +783,6 @@
   <string name="cache_menu_sygic_drive">Sygic (kørsel)</string>
   <string name="cache_menu_radar">Radar</string>
   <string name="cache_menu_map">Vis på kort</string>
-  <string name="cache_menu_new_map">Nyt kort</string>
   <string name="cache_menu_map_static">Statiske kort</string>
   <string name="cache_menu_download_map_static">Indlæs statiske kort</string>
   <string name="cache_menu_rmaps">Rmaps</string>
@@ -1386,12 +1384,9 @@
   <string name="send">Send</string>
   <string name="showcase_logcache_title">Afsendelse af logbesked</string>
   <string name="showcase_logcache_text">Husk, at mange funktioner nu er i titellinien, hvor du også kan finde knappen til at sende den færdige logbesked.</string>
-  <string name="showcase_main_title">Nye menuer</string>
-  <string name="showcase_main_text">Som i andre moderne apps er menupunkter i c:geo nu placeret i titellinien. Nogle menupunkter er skjult og bliver først vist når du trykker på knappen med tre prikker. Et langt tryk på et menupunkt åbner en beskrivelse af menupunktet.</string>
   <string name="showcase_cachelist_title">Skift af liste</string>
   <string name="showcase_cachelist_text">Du kan skifte mellem dine lister ved at trykke på listens titel.</string>
   <string name="showcase_compass_hint_title">Vis tip</string>
-  <string name="showcase_compass_hint_text">Dette nye menupunkt kan give dig en idé om hvor man kan finde cachen - det viser tippet, hvis det er tilgængelig.</string>
   <string name="confirm_log_title">Usædvanlig logtype</string>
   <string name="confirm_log_message">Du er ved at logge \"%s\". Er du sikker?</string>
   <!-- Geokrety -->

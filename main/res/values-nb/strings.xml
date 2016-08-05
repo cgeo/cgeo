@@ -1371,12 +1371,9 @@
   <string name="send">Send</string>
   <string name="showcase_logcache_title">Sender loggen</string>
   <string name="showcase_logcache_text">Husk, mange kommandoer er nå i tittellinjen. Der finner du knappen for å sende den ferdige loggen.</string>
-  <string name="showcase_main_title">Nye menyer</string>
-  <string name="showcase_main_text">c:geo har nå plassert menyelementer i tittellinjen, slik som andre moderne app-er. Noen elementer er skjult bak symbolet med prikker. Langt trykk på en knapp viser en beskrivelse av funksjonen.</string>
   <string name="showcase_cachelist_title">Bytter lister.</string>
   <string name="showcase_cachelist_text">Du kan bytte mellom geocache lister ved å klikke på tittelen på listen.</string>
   <string name="showcase_compass_hint_title">Vis hint</string>
-  <string name="showcase_compass_hint_text">Denne nye menyen kan gi deg hjelp til å finne cachen - her vises hintet, hvis det er tilgjengelig.</string>
   <string name="confirm_log_title">Uvanlig loggtype</string>
   <string name="confirm_log_message">Du vil logge \'%s\'. Er du sikker?</string>
   <!-- Geokrety -->

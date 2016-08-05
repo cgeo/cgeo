@@ -628,7 +628,6 @@
   <string name="feature_search_owner">Zoek op eigenaar</string>
   <string name="feature_search_finder">Zoek op vinder</string>
   <string name="init_experimental_title">Experimentele functies</string>
-  <string name="init_newmap">Gebruik de nieuwe kaart als standaard (live/lijsten)</string>
   <!-- map sources -->
   <string name="map_source_google_map">Google: Map</string>
   <string name="map_source_google_satellite">Google: Satellite</string>
@@ -794,7 +793,6 @@
   <string name="cache_menu_sygic_drive">Sygic (rijden)</string>
   <string name="cache_menu_radar">Radar</string>
   <string name="cache_menu_map">Toon op kaart</string>
-  <string name="cache_menu_new_map">Nieuwe Kaart</string>
   <string name="cache_menu_map_static">Statische kaarten</string>
   <string name="cache_menu_download_map_static">Download statische kaarten</string>
   <string name="cache_menu_rmaps">Rmaps</string>
@@ -1074,7 +1072,7 @@
   <string name="helper_sendtocgeo_description">Verzenden naar c:geo is een browserextensie <strong>voor uw PC</strong>. Tijdens het browsen op geocaching.com, kunt u caches verzenden naar uw smartphone met een klik direct in de browser.</string>
   <string name="helper_locus_title">Locus</string>
   <string name="helper_locus_description">Outdoor navigatie app voor uw telefoon of Tablet. Topo kaarten offline bekijken, uw route vastleggen, geocaches zoeken, gebruik een stem gids en meer.</string>
-  <string name="helper_gpsstatus_title">GPS-Status &amp; Toolbox</string>
+  <string name="helper_gpsstatus_title">GPS Status &amp; Toolbox</string>
   <string name="helper_gpsstatus_description">De radar van deze applicatie kan gebruikt worden samen met c:geo. Het bied ook vele andere GPS gerelateerde informatie.</string>
   <string name="helper_bluetoothgps_title">Bluetooth GPS</string>
   <string name="helper_bluetoothgps_description">Maakt het mogelijk om een externe GPS ontvanger te gebruiken voor betere ontvangst, betere locatiebepaling en kan gebruik van de telefoonbatterij verminderen.</string>
@@ -1400,12 +1398,9 @@
   <string name="send">Verzenden</string>
   <string name="showcase_logcache_title">Verstuurt de log</string>
   <string name="showcase_logcache_text">Onthoud, veel commando\'s zijn nu te vinden in de titelbalk. Daar is de knop te vinden voor het verzenden van de log.</string>
-  <string name="showcase_main_title">Nieuwe menu\'s</string>
-  <string name="showcase_main_text">c:geo plaatst nu menu-items in de titelbalk, zoals veel andere moderne apps. Sommige items zijn verborgen achter het symbool met de drie puntjes. Druk lang op een knop om de beschrijving te zien.</string>
   <string name="showcase_cachelist_title">Wisselen van lijst</string>
   <string name="showcase_cachelist_text">Je kan wisselen tussen geocache lijsten door te klikken op de titel van de lijst.</string>
   <string name="showcase_compass_hint_title">Toon hint</string>
-  <string name="showcase_compass_hint_text">Dit nieuwe menu-item kan een idee geven waar de cache gevonden kan worden - het toont de hint, indien beschikbaar.</string>
   <string name="confirm_log_title">Ongebruikelijk logtype</string>
   <string name="confirm_log_message">Je wilt \'%s\' loggen. Weet je het zeker?</string>
   <!-- Geokrety -->

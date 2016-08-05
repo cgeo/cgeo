@@ -1252,8 +1252,6 @@
   <string name="send">Pošlji</string>
   <string name="showcase_logcache_title">Pošiljanje zapisa</string>
   <string name="showcase_logcache_text">Ne pozabite! Veliko ukazov je sedaj v naslovni vrstici. Tam boste našli tudi gumb za pošiljanje zapisa.</string>
-  <string name="showcase_main_title">Novi meniji</string>
-  <string name="showcase_main_text">c:geo ima sedaj svoj meni v naslovni vrstici, tako kot ostale moderne aplikacije. Nekateri elementi menija so skriti pod simbolom treh pikic. Dolg pritisk na posamezen gumb vam prikaže njegov opis.</string>
   <string name="showcase_cachelist_title">Premikanje med seznami</string>
   <string name="showcase_cachelist_text">S klikom na ime seznama lahko preklapljate med različnimi seznami zakladov.</string>
   <string name="confirm_log_title">Nenavaden zapis</string>

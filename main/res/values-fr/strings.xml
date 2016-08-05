@@ -551,6 +551,7 @@
   <string name="init_mapsource_select">Choisir la source des cartes</string>
   <string name="settings_title_scale_map_text">Zoom du texte</string>
   <string name="settings_summary_scale_map_text">Mise à l\'échelle des textes sur la carte hors-ligne en fonction de la résolution de l\'appareil</string>
+  <string name="init_map_directory_description">Dossier cartes hors-ligne</string>
   <string name="init_gpx_exportdir">Dossier d\'export GPX</string>
   <string name="init_gpx_importdir">Dossier d\'import GPX</string>
   <string name="init_maptrail">Afficher la trace</string>
@@ -581,6 +582,7 @@
   <string name="init_summary_plain_logs">Afficher les visites sans les couleurs</string>
   <string name="init_use_native_ua">Navigateur web Android</string>
   <string name="init_summary_use_native_ua">S\'identifier comme le navigateur web Android. Peut résoudre des problèmes de connexion avec certains opérateurs mobiles / fournisseurs d\'accès au réseau.</string>
+  <string name="init_rendertheme_folder">Dossier thèmes cartes hors-ligne</string>
   <string name="init_maintenance">Maintenance</string>
   <string name="init_maintenance_directories_note">c:geo stocke les images et les autres fichiers associés à une cache dans un dossier dédié. Dans certains cas (comme l\'importation/exportation de la base de données), ce dossier peut contenir des fichiers obsolètes, qui peuvent être supprimés ici.</string>
   <string name="init_maintenance_directories">Supprimer les fichiers orphelins</string>
@@ -625,7 +627,6 @@
   <string name="feature_search_owner">Rechercher par Propriétaire</string>
   <string name="feature_search_finder">Rechercher par Découvreur</string>
   <string name="init_experimental_title">Fonctionnalités expérimentales</string>
-  <string name="init_newmap">Utiliser la nouvelle carte par défaut (temps réel/listes)</string>
   <!-- map sources -->
   <string name="map_source_google_map">Google Maps : plan</string>
   <string name="map_source_google_satellite">Google Maps : satellite</string>
@@ -788,7 +789,6 @@
   <string name="cache_menu_sygic_drive">Sygic (en voiture)</string>
   <string name="cache_menu_radar">Radar</string>
   <string name="cache_menu_map">Carte</string>
-  <string name="cache_menu_new_map">Nouvelle carte</string>
   <string name="cache_menu_map_static">Cartes statiques</string>
   <string name="cache_menu_download_map_static">Télécharger les cartes statiques</string>
   <string name="cache_menu_rmaps">Rmaps</string>
@@ -1345,7 +1345,7 @@
   <string name="status_new_rc" tools:ignore="UnusedResources">Une nouvelle version candidate est disponible.\nAppuyez ici pour l\'installer.</string>
   <string name="status_geocaching_change" tools:ignore="UnusedResources">Des changements récents sur Geocaching.com ont cassé c:geo.\nNous sommes en train de corriger. Revenez plus tard.</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Des changements récents sur Geocaching.com ont cassé la carte temps-réel.\nNous sommes en train de corriger. Revenez plus tard.</string>
-  <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Maintenance en cours sur geocaching.com.\nIl se peut que vous rencontriez des problèmes.</string>
+  <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Maintenant en cours sur geocaching.com.\nIl se peut que vous rencontriez des problèmes.</string>
   <string name="status_closeout_warning" tools:ignore="UnusedResources">Vous utilisez une version d\'Android inférieure à 2.1. Les futures versions de c:geo pourront ne pas être disponibles pour votre appareil.</string>
   <!-- text-to-speech for compass view -->
   <string name="tts_service">Boussole parlante</string>
@@ -1393,12 +1393,9 @@
   <string name="send">Envoyer</string>
   <string name="showcase_logcache_title">Envoi de la visite</string>
   <string name="showcase_logcache_text">N\'oubliez pas, beaucoup de commandes sont maintenant dans la barre de titre. Ici, l\'envoi d\'une visite.</string>
-  <string name="showcase_main_title">Nouveaux menus</string>
-  <string name="showcase_main_text">c:geo place maintenant les entrées de menu dans la barre de titre comme les autres applications modernes. Certaines entrées sont masquées derrière les trois points. Un appui long sur un bouton affiche sa description dans une bulle.</string>
   <string name="showcase_cachelist_title">Changer de liste</string>
   <string name="showcase_cachelist_text">Vous pouvez basculer entre vos différentes listes en appuyant sur le nom de la liste courante.</string>
   <string name="showcase_compass_hint_title">Afficher l\'indice</string>
-  <string name="showcase_compass_hint_text">Cette nouvelle entrée de menu peut vous aider à trouver la cache en affichant l\'indice lorsqu\'il existe.</string>
   <string name="confirm_log_title">Type inhabituel pour une visite</string>
   <string name="confirm_log_message">Vous allez envoyer \'%s\'. Êtes-vous sûr(e) ?</string>
   <!-- Geokrety -->

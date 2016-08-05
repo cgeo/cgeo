@@ -1357,12 +1357,9 @@
   <string name="send">Wyślij</string>
   <string name="showcase_logcache_title">Wysyłanie wpisu</string>
   <string name="showcase_logcache_text">Pamiętaj, wiele poleceń jest teraz dostępnych w pasku tytułowym. Tam znajdziesz przycisk wysyłający gotowy wpis.</string>
-  <string name="showcase_main_title">Nowe menu</string>
-  <string name="showcase_main_text">c:geo umieszcza teraz opcje menu w pasku tytułowym jak inne współczesne programy. Niektóre opcje są schowane za kropkowanym symbolem. Naciśnij dłużej przycisk by zobaczyć opis.</string>
   <string name="showcase_cachelist_title">Przełączanie list</string>
   <string name="showcase_cachelist_text">Możesz przełączać między listami skrzynek klikając tytuł listy.</string>
   <string name="showcase_compass_hint_title">Podpowiedź</string>
-  <string name="showcase_compass_hint_text">Ten nowy element menu może Ci pomóc przy szukaniu skrzynki - pokazuje podpowiedź, o ile jest dostępna.</string>
   <string name="confirm_log_title">Niezwykły typ wpisu</string>
   <string name="confirm_log_message">Chcesz wpisać \'%s\'. Czy jesteś pewien?</string>
   <!-- Geokrety -->
