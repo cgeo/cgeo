@@ -1373,12 +1373,9 @@
   <string name="send">Trimite</string>
   <string name="showcase_logcache_title">Trimiterea însemnării</string>
   <string name="showcase_logcache_text">Reţine, multe comenzi sunt acum în bara de titlu. Acolo vei găsi butonul pentru a trimite o însemnare finalizată.</string>
-  <string name="showcase_main_title">Noile meniuri</string>
-  <string name="showcase_main_text">c:geo foloseşte meniu în bara de titlu precum alte aplicaţii moderne. Unele elemente sunt ascunse în spatele simbolului punctat. O apăsare prelungită pe un buton afişează descrierea acestuia.</string>
   <string name="showcase_cachelist_title">Comutare între liste</string>
   <string name="showcase_cachelist_text">Poţi să schimbi lista afişată apăsând pe titlul listei.</string>
   <string name="showcase_compass_hint_title">Arată indiciu</string>
-  <string name="showcase_compass_hint_text">Această opţiune îţi poate da informaţii suplimentare despre unde ar putea fi ascunsă geocutia - afişează indiciul, dacă există.</string>
   <string name="confirm_log_title">Tip neobişnuit de însemnare</string>
   <string name="confirm_log_message">Vrei să scrii o însemnare pentru \'%s\'. Eşti sigur?</string>
   <!-- Geokrety -->

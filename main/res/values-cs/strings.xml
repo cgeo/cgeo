@@ -800,7 +800,6 @@
   <string name="cache_menu_sygic_drive">Sygic (řízení)</string>
   <string name="cache_menu_radar">Radar</string>
   <string name="cache_menu_map">Zobrazit na mapě</string>
-  <string name="cache_menu_new_map">Nová mapa</string>
   <string name="cache_menu_map_static">Statické mapy</string>
   <string name="cache_menu_download_map_static">Stáhnout statické mapy</string>
   <string name="cache_menu_rmaps">Rmaps</string>
@@ -1411,12 +1410,9 @@
   <string name="send">Odeslat</string>
   <string name="showcase_logcache_title">Odesílání logu</string>
   <string name="showcase_logcache_text">Pamatuj, mnoho příkazů je teď umístěno v záhlaví. Zde také najdeš tlačítko pro odeslání hotových logů.</string>
-  <string name="showcase_main_title">Nová menu</string>
-  <string name="showcase_main_text">c:geo nyní umísťuje položky menu v záhlaví jako ostatní moderní aplikace. Některé položky jsou skryty za symbolem tří teček. Dlouhým stiskem tlačítka zobrazíš jeho popis.</string>
   <string name="showcase_cachelist_title">Přepínání seznamů</string>
   <string name="showcase_cachelist_text">Mezi seznamy s keškami můžeš přepínat klepnutím na název seznamu.</string>
   <string name="showcase_compass_hint_title">Zobrazit nápovědu</string>
-  <string name="showcase_compass_hint_text">Tato nová položka ti může poradit, kde kešku hledat - zobrazuje nápovědu, pokud je k dispozici.</string>
   <string name="confirm_log_title">Neobvyklý typ logu</string>
   <string name="confirm_log_message">Opravdu chceš zalogovat „%s“?</string>
   <!-- Geokrety -->

@@ -632,7 +632,6 @@
   <string name="feature_search_owner">Procura por dono</string>
   <string name="feature_search_finder">Procura por quem encontrou</string>
   <string name="init_experimental_title">Funcionalidades experimentais</string>
-  <string name="init_newmap">Usar o novo mapa como predefinido (ao vivo/listas)</string>
   <!-- map sources -->
   <string name="map_source_google_map">Google: Mapa</string>
   <string name="map_source_google_satellite">Google: Satélite</string>
@@ -796,7 +795,6 @@
   <string name="cache_menu_sygic_drive">Sygic (conduzir)</string>
   <string name="cache_menu_radar">Radar</string>
   <string name="cache_menu_map">Mostrar no mapa</string>
-  <string name="cache_menu_new_map">Novo Mapa</string>
   <string name="cache_menu_map_static">Mapas estáticos</string>
   <string name="cache_menu_download_map_static">Descarregar os mapas estáticos</string>
   <string name="cache_menu_rmaps">Rmaps</string>
@@ -1401,12 +1399,9 @@
   <string name="send">Enviar</string>
   <string name="showcase_logcache_title">Enviando o registo</string>
   <string name="showcase_logcache_text">Lembre-se, muitos comandos estão agora na barra de título. Lá encontra o botão para enviar o registo terminado.</string>
-  <string name="showcase_main_title">Novos menus</string>
-  <string name="showcase_main_text">c:Geo coloca agora itens de menu na barra de título como outras aplicações modernas. Alguns itens estão escondidos atrás do símbolo dos pontos. Prima longamente um botão para ver sua descrição.</string>
   <string name="showcase_cachelist_title">A trocar de listas</string>
   <string name="showcase_cachelist_text">Pode alternar entre listas de caches clicando no título da lista.</string>
   <string name="showcase_compass_hint_title">Mostrar a dica</string>
-  <string name="showcase_compass_hint_text">Este novo item do menu pode dar-te uma ideia onde encontrar a cache - Mostra a dica, caso disponível.</string>
   <string name="confirm_log_title">Tipo de registo invulgar</string>
   <string name="confirm_log_message">Quer fazer o registo \'%s\'. Tem a certeza?</string>
   <!-- Geokrety -->

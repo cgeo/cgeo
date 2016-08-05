@@ -630,7 +630,6 @@
   <string name="feature_search_owner">Keresés tulajdonos alapján</string>
   <string name="feature_search_finder">Keresés megtalálók alapján</string>
   <string name="init_experimental_title">Kísérleti funkciók</string>
-  <string name="init_newmap">Új térkép alapért. használata (élő/listák)</string>
   <!-- map sources -->
   <string name="map_source_google_map">Google: Térkép</string>
   <string name="map_source_google_satellite">Google: Műholdkép</string>
@@ -796,7 +795,6 @@
   <string name="cache_menu_sygic_drive">Sygic (vezetés)</string>
   <string name="cache_menu_radar">Radar</string>
   <string name="cache_menu_map">Térkép</string>
-  <string name="cache_menu_new_map">Új térkép</string>
   <string name="cache_menu_map_static">Statikus térképek</string>
   <string name="cache_menu_download_map_static">Statikus térképek letöltése</string>
   <string name="cache_menu_rmaps">Rmaps</string>
@@ -1076,6 +1074,7 @@
   <string name="helper_sendtocgeo_description">A Send2cgeo egy böngészőbővítmény <strong>PC-re</strong>. A geocaching.com böngészése közben, egy kattintással tudsz geoládákat küldeni a készülékedre.</string>
   <string name="helper_locus_title">Locus</string>
   <string name="helper_locus_description">Telefonon, tableten használható szabadtéri navigációs program. Offline térképek használata, útvonalkövetés, ládavadászat, hangos útikalauz, stb.</string>
+  <string name="helper_gpsstatus_title">GPS Status &amp; Toolbox</string>
   <string name="helper_gpsstatus_description">A programban található radart a c:geo-hoz is használhatod. Sok egyéb GPS-szel kapcsolatos információt is megmutat.</string>
   <string name="helper_bluetoothgps_title">Bluetooth GPS</string>
   <string name="helper_bluetoothgps_description">Ez a program külső GPS vevők használatát teszi lehetővé, amelyek segítségével jobb vételt és pontosabb koordinátákat kaphatsz. Külső GPS használatával a telefonod akkumulátora is tovább bírja.</string>
@@ -1401,12 +1400,9 @@
   <string name="send">Küldés</string>
   <string name="showcase_logcache_title">Log küldése</string>
   <string name="showcase_logcache_text">Ne feledd, sok parancs található a címsorban. Ott találod a kész logot elküldő gombot is.</string>
-  <string name="showcase_main_title">Új menük</string>
-  <string name="showcase_main_text">A c:geo is a címsorban jeleníti meg a menüelemeket más modern appokhoz hasonlóan. Néhány elemet a pontozott szimbólum mögött találsz. A gombokat hosszan lenyomva jelennek meg a hozzájuk tartozó leírások.</string>
   <string name="showcase_cachelist_title">Listák váltása</string>
   <string name="showcase_cachelist_text">Váltogathatsz a ládalistáid között a listák címére kattintva.</string>
   <string name="showcase_compass_hint_title">Tipp mutatása</string>
-  <string name="showcase_compass_hint_text">Ez az új menü elem ötletet adhat, hogy hol találhatod meg a ládát - tippet ad, ha elérhető.</string>
   <string name="confirm_log_title">Különleges logtípus</string>
   <string name="confirm_log_message">Logod a következő: \'%s\'. Biztosan ezt akarod?</string>
   <!-- Geokrety -->

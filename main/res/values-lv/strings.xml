@@ -415,6 +415,7 @@
   <string name="settings_goto_url_button">vairāk…</string>
   <string name="settings_title_gc">Geocaching.com</string>
   <string name="settings_title_ec">Extremcaching.com</string>
+  <string name="settings_title_ox">Opencaching.com (Garmin)</string>
   <string name="settings_activate_gc">Aktivizēt</string>
   <string name="settings_activate_ec">Aktivizēt</string>
   <string name="settings_activate_ox">Aktivizēt</string>
@@ -1350,12 +1351,9 @@
   <string name="send">Nosūtīt</string>
   <string name="showcase_logcache_title">Tiek sūtīts apmeklējuma pieraksts</string>
   <string name="showcase_logcache_text">Atcerieties, ka daudzas komandas ir tagad redzams pogās virspusē. Tur jūs atradīsiet pogu apmeklējuma pieraksta nosūtīšanai.</string>
-  <string name="showcase_main_title">Jaunas izvēlnes</string>
-  <string name="showcase_main_text">c:geo tagad izvieto izvēlnes elementus pogas tāpat kā citas mūsdienu aplikācijas. Daži elementi ir paslēpti aiz punktotā simbola. Turiet nospiestu pogu, lai apskatītu tā aprakstu.</string>
   <string name="showcase_cachelist_title">Saraksti pārslēdzas</string>
   <string name="showcase_cachelist_text">Vari pārslēgties starp slēpņu sarakstiem, noklikšķinot uz saraksta nosaukuma.</string>
   <string name="showcase_compass_hint_title">Rādīt mājienu</string>
-  <string name="showcase_compass_hint_text">Šis jaunais izvēlnes elements iespējams dos ideju, kur atrast slēpni - tiks parādīts mājiens, ja tas ir pieejams.</string>
   <string name="confirm_log_title">Neparasts pierakstīšanās tips</string>
   <string name="confirm_log_message">You want to log \'%s\'. Are you sure?</string>
   <!-- Geokrety -->

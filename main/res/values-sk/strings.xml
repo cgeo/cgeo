@@ -1377,12 +1377,9 @@
   <string name="send">Odoslať</string>
   <string name="showcase_logcache_title">Odosielam log</string>
   <string name="showcase_logcache_text">Pamätaj, že mnohé príkazy sú teraz v záhlaví. Tam nájdeš tlačidlo pre odoslanie hotového logu.</string>
-  <string name="showcase_main_title">Nové menu</string>
-  <string name="showcase_main_text">c:geo teraz umiestňuje položky menu v záhlaví, ako iné moderné aplikácie. Niektoré položky sú skryté za symbolom bodiek. Dlhým podržaním tlačidla sa zobrazí jeho popis.</string>
   <string name="showcase_cachelist_title">Prepínanie zoznamov</string>
   <string name="showcase_cachelist_text">Môžete prepínať medzi svojimi zoznamami skrýš kliknutím na názov zoznamu.</string>
   <string name="showcase_compass_hint_title">Zobraziť nápovedu</string>
-  <string name="showcase_compass_hint_text">Táto vec ti môže pomôcť pri hľadaní skrýše - zobrazí nápovedu, ak je dostupná.</string>
   <string name="confirm_log_title">Nezvyčajný typ logu</string>
   <string name="confirm_log_message">Chceš zalogovať \'%s\'. Určite?</string>
   <!-- Geokrety -->

@@ -626,7 +626,8 @@
   <string name="feature_search_owner">Paieška pagal savininką</string>
   <string name="feature_search_finder">Paieška pagal radėją</string>
   <string name="init_experimental_title">Eksperimentinės funkcijos</string>
-  <string name="init_newmap">Naudoti naują žemėlapį kaip numatytąjį (live/lists)</string>
+  <string name="init_mfbeta">Mapsforge beta kaip numatytasis</string>
+  <string name="init_mfbeta_description">Kaip eksperimentinė funkciją dabartinė versija turi mūsų naują Mapsforge beta versijos žemėlapį. Šis naujas žemėlapis gali būti aktyvuota čia kaip numatytasis žemėlapis.</string>
   <!-- map sources -->
   <string name="map_source_google_map">Google: Žemėlapis</string>
   <string name="map_source_google_satellite">Google: Palydovas</string>
@@ -792,7 +793,7 @@
   <string name="cache_menu_sygic_drive">Sygic (vairuoti)</string>
   <string name="cache_menu_radar">Radaras</string>
   <string name="cache_menu_map">Žemėlapis</string>
-  <string name="cache_menu_new_map">Naujas žemėlapis</string>
+  <string name="cache_menu_mfbeta">Mapsforge Beta</string>
   <string name="cache_menu_map_static">Statinis žemėlapis</string>
   <string name="cache_menu_download_map_static">Parsisiųsti statinį žemėlapį</string>
   <string name="cache_menu_rmaps">Rmaps</string>
@@ -1045,6 +1046,7 @@
   <string name="user_menu_open_browser">Atidaryti profilį naršyklėje</string>
   <string name="user_menu_send_message">Siųsti žinutę</string>
   <string name="user_menu_open_contact">Atidaryti kontakto kortelę</string>
+  <string name="user_unknown">Nežinomas vartotojas</string>
   <!-- navigation -->
   <string name="navigation">Navigacija</string>
   <string name="compass_title">Kompasas</string>
@@ -1400,12 +1402,12 @@
   <string name="send">Siųsti</string>
   <string name="showcase_logcache_title">Siųsti įrašą</string>
   <string name="showcase_logcache_text">Atminkite, kad dauguma komandų dabar pavadinimo juostoje. Ten rasite užbaigto įrašo siuntimo mygtuką.</string>
-  <string name="showcase_main_title">Naujas meniu</string>
-  <string name="showcase_main_text">c:geo dabar meniu komandas patalpino pavadinimo juostoje kaip ir kituose šiuolaikinėse programose. Kai kurie elementai yra paslėpti už trijų taškų simbolio. Norėdami peržiūrėti jų aprašymus, ilgai spauskite mygtuką.</string>
+  <string name="showcase_main_title">Meniu juosta</string>
+  <string name="showcase_main_text">Kai kurios c:geo funkcijos prieinamos meniu juostoje arba pateikiamas meniu po trijų taškų simbolio. Galite ilgai spausti mygtuką, kad pamatytumėte aprašymą.</string>
   <string name="showcase_cachelist_title">Sąrašų perjungimas</string>
   <string name="showcase_cachelist_text">Galite perjungti slėptuvių sąrašus spustelėdami sąrašo pavadinimą.</string>
   <string name="showcase_compass_hint_title">Rodyti užuominą</string>
-  <string name="showcase_compass_hint_text">Šis naujas meniu punktas gali suteikti jums idėja kur rasti slėptuvę - jis rodo užuominas, jei tokios yra.</string>
+  <string name="showcase_compass_hint_text">Šis meniu punktas gali suteikti jums idėja kur rasti slėptuvę - jis rodo užuominas, jei tokios yra.</string>
   <string name="confirm_log_title">Neįprastas įrašo tipas</string>
   <string name="confirm_log_message">Norite registruoti \'%s\'. Ar tikrai?</string>
   <!-- Geokrety -->
