@@ -52,28 +52,30 @@
                     android:layout_alignParentLeft="true"
                     android:layout_gravity="left"
                     android:layout_marginLeft="6dip"
-                    android:layout_marginRight="130dip"
+                    android:layout_marginRight="100dip"
                     android:paddingRight="3dip"
                     android:textColor="?text_color"
                     android:textIsSelectable="false"
                     android:textSize="14sp" />
 
-                <Button
+                <ImageButton
                     android:id="@+id/offline_drop"
                     style="@style/button_small"
-                    android:layout_width="60dip"
+                    android:src="@drawable/ic_menu_delete"
+                    android:layout_width="40dip"
+                    android:layout_height="40dip"
                     android:layout_alignParentRight="true"
-                    android:layout_marginRight="71dip"
-                    android:text="@string/cache_offline_drop"
+                    android:layout_marginRight="51dip"
                     android:visibility="gone"
                     tools:visibility="visible"/>
 
-                <Button
+                <ImageButton
                     android:id="@+id/offline_refresh"
                     style="@style/button_small"
-                    android:layout_width="60dip"
-                    android:layout_alignParentRight="true"
-                    android:text="@string/cache_offline_refresh" />
+                    android:src="@drawable/ic_menu_refresh"
+                    android:layout_width="40dip"
+                    android:layout_height="40dip"
+                    android:layout_alignParentRight="true"/>
             </RelativeLayout>
 
             <RelativeLayout
@@ -86,20 +88,21 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_marginLeft="6dip"
-                android:layout_marginRight="71dip"
+                android:layout_marginRight="51dip"
                 android:paddingRight="3dip"
                 android:textColor="?text_color"
                 android:textIsSelectable="false"
                 android:textSize="14sp"
                 tools:text="list 1, list 2"/>
 
-            <Button
+            <ImageButton
                 android:id="@+id/offline_store"
                 style="@style/button_small"
-                android:layout_width="60dip"
+                android:src="@drawable/ic_menu_save"
+                android:layout_width="40dip"
+                android:layout_height="40dip"
                 android:layout_marginLeft="2dip"
-                android:layout_alignParentRight="true"
-                android:text="@string/cache_offline_store" />
+                android:layout_alignParentRight="true"/>
             </RelativeLayout>
 
         </LinearLayout>
