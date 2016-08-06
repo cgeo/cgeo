@@ -58,7 +58,7 @@ public class LiveCachesOverlay extends AbstractCachesOverlay {
         @Override
         public void call() {
             final LiveCachesOverlay overlay = overlayRef.get();
-            if (overlay == null || overlay.downloading) {
+            if (overlay == null || overlay.isDownloading()) {
                 return;
             }
             try {
@@ -73,14 +73,13 @@ public class LiveCachesOverlay extends AbstractCachesOverlay {
                 final boolean moved = overlay.isInvalidated() || previousViewport == null || zoomNow != previousZoom ||
                         mapMoved(previousViewport, viewportNow) || !previousViewport.includes(viewportNow);
 
-                previousZoom = zoomNow;
-
                 // save new values
                 if (moved) {
                     final long currentTime = System.currentTimeMillis();
 
                     if (1000 < (currentTime - overlay.loadThreadRun)) {
                         overlay.downloading = true;
+                        previousZoom = zoomNow;
                         previousViewport = viewportNow;
                         overlay.download();
                     }
@@ -98,8 +97,6 @@ public class LiveCachesOverlay extends AbstractCachesOverlay {
         try {
             showProgress();
 
-            final SearchResult searchResult = DataStore.loadCachedInViewport(getViewport(), Settings.getCacheType());
-
             if (Settings.isGCConnectorActive() && tokens == null) {
                 tokens = GCLogin.getInstance().getMapTokens();
                 if (StringUtils.isEmpty(tokens.getUserSession()) || StringUtils.isEmpty(tokens.getSessionToken())) {
@@ -111,7 +108,7 @@ public class LiveCachesOverlay extends AbstractCachesOverlay {
                     //                    }
                 }
             }
-            searchResult.addSearchResult(ConnectorFactory.searchByViewport(getViewport().resize(1.2), tokens));
+            final SearchResult searchResult = ConnectorFactory.searchByViewport(getViewport().resize(1.2), tokens);
 
             final Set<Geocache> result = searchResult.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
             AbstractCachesOverlay.filter(result);
@@ -136,5 +133,9 @@ public class LiveCachesOverlay extends AbstractCachesOverlay {
         timer.unsubscribe();
 
         super.onDestroy();
+    }
+
+    public boolean isDownloading() {
+        return downloading;
     }
 }
