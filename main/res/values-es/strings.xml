@@ -126,7 +126,7 @@
   <string name="log_hint_log_password">Introduzca su contraseña</string>
   <string name="log_oc_team_comment">Comentario equipo OC</string>
   <string name="log_your_saved_log">Tu registro guardado</string>
-  <string name="log_empty_logbook">El logbook de esta caché está vacío.</string>
+  <string name="log_empty_logbook">No hay registros en este caché.</string>
   <string-array name="log_image_scales">
     <item>Sin redimensionar</item>
     <item>512 px</item>
@@ -1037,6 +1037,7 @@
   <string name="user_menu_open_browser">Abrir perfil en el navegador</string>
   <string name="user_menu_send_message">Enviar mensaje</string>
   <string name="user_menu_open_contact">Abriendo contacto</string>
+  <string name="user_unknown">Usuario desconocido</string>
   <!-- navigation -->
   <string name="navigation">Navegación</string>
   <string name="compass_title">Brújula</string>

@@ -126,6 +126,7 @@
   <string name="log_hint_log_password">Entrez votre mot de passe pour la visite</string>
   <string name="log_oc_team_comment">Commentaire de l\'équipe OC</string>
   <string name="log_your_saved_log">Visite enregistrée hors-ligne</string>
+  <string name="log_empty_logbook">Le carnet de visites de cette cache est vide.</string>
   <string-array name="log_image_scales">
     <item>Taille originale</item>
     <item>512 px</item>
@@ -213,6 +214,7 @@
   <string name="warn_no_coordinates">Aucune coordonnée associée.</string>
   <string name="warn_no_keyword">Aucun mot-clé saisi.</string>
   <string name="warn_no_username">Pas de nom d\'utilisateur.</string>
+  <string name="warn_no_connector">Aucun service de geocaching actuellement activé ne fournit ce type de recherche.</string>
   <string name="warn_search_help_title">Besoin d\'aide?</string>
   <string name="warn_search_help_address">Veuillez remplir l\'adresse ou le lieu. Par exemple l\'adresse \"100 Avenue Montaigne, Paris, France\", nom de la ville \"Berlin\" ou simplement \"Parc Yellowstone\".</string>
   <string name="warn_search_help_gccode">Veuillez entrer le code de la cache. Par exemple \"GC1VCAZ\".</string>
@@ -434,6 +436,7 @@
   <string name="settings_reauthorize">Ré-autoriser c:geo</string>
   <string name="settings_gc_description">Autoriser c:geo à utiliser geocaching.com pour chercher des caches.</string>
   <string name="settings_ec_description">Autoriser c:geo à utiliser extremcaching.com pour chercher des caches et accéder/filtrer vos caches trouvées.</string>
+  <string name="settings_su_description">Autoriser c:geo à utiliser geocaching.su pour chercher des caches.</string>
   <string name="init_oc">Opencaching.de</string>
   <string name="settings_activate_oc">Activer</string>
   <string name="init_summary_oc_de">Charger les caches depuis opencaching.de</string>
@@ -460,6 +463,7 @@
   <string name="init_oc_uk_description">Autoriser c:geo à utiliser opencaching.org.uk pour chercher des caches et accéder/filtrer vos caches trouvées.</string>
   <string name="init_su">Geocaching.su</string>
   <string name="init_summary_su">Charger les caches depuis Geocaching.su</string>
+  <string name="settings_activate_su">Activer</string>
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_gcvote_password_description">Afin de pouvoir attribuer un vote à une cache, vous devez suivre les instructions de GCVote.com et entrer ici votre mot de passe GCVote.</string>
   <string name="err_gcvote_send_rating">Erreur lors de l\'envoi du vote, vérifiez votre mot de passe GCVote dans les paramètres ou effacez le.</string>
@@ -557,6 +561,7 @@
   <string name="init_maptrail">Afficher la trace</string>
   <string name="init_summary_maptrail">Afficher la trace sur la carte</string>
   <string name="init_share_after_export">Ouvrir le menu de partage après les exports GPX</string>
+  <string name="init_include_found_status">Inclure le statut \"Trouvé\"</string>
   <string name="init_trackautovisit">Marquer automatiquement les objets voyageurs comme \"A visité\"</string>
   <string name="init_summary_trackautovisit">Par défaut, positionner les objets voyageurs avec le statut \"A visité\"</string>
   <string name="init_sigautoinsert">Insérer la signature automatiquement</string>
@@ -627,6 +632,8 @@
   <string name="feature_search_owner">Rechercher par Propriétaire</string>
   <string name="feature_search_finder">Rechercher par Découvreur</string>
   <string name="init_experimental_title">Fonctionnalités expérimentales</string>
+  <string name="init_mfbeta">Carte Mapsforge beta par défaut</string>
+  <string name="init_mfbeta_description">La version actuelle contient une version beta de notre nouvelle carte Mapsforge (fonctionnalité expérimentale). Cette nouvelle carte peut être activée ici par défaut pour la carte en temps réel et pour celle des listes.</string>
   <!-- map sources -->
   <string name="map_source_google_map">Google Maps : plan</string>
   <string name="map_source_google_satellite">Google Maps : satellite</string>
@@ -650,6 +657,7 @@
   <string name="auth_check_again">Revérifier l\'authentification</string>
   <string name="auth_start">Demander l\'autorisation</string>
   <string name="auth_again">Autoriser à nouveau</string>
+  <string name="auth_register">Créer un compte</string>
   <string name="auth_connected">Connecté</string>
   <string name="auth_unconnected">Pas encore connecté</string>
   <string name="auth_connected_as">Connecté en tant que %s</string>
@@ -659,6 +667,7 @@
   <string name="auth_forget_title">Oublier l\'autorisation ?</string>
   <string name="auth_forget_message">Vous allez être déconnecté du service et vos identifiants sauvegardés seront perdus.</string>
   <!-- auth credentials -->
+  <string name="auth_credentials_explain_short">Vous êtes sur le point d\'autoriser <b>c:geo</b> à accéder à %s.</string>
   <string name="auth_credentials_explain_long">Renseignez vos identifiants et appuyez sur le bouton \"Vérifier l’authentification\" démarrera le processus. Cette étape se connectera au site %s et validera vos identifiants. C\'est tout.</string>
   <!-- auth token -->
   <string name="auth_token_register">Créer un compte</string>
@@ -693,6 +702,7 @@
   <string name="cache_offline_refresh">Actualiser</string>
   <string name="cache_offline_drop">Supprimer</string>
   <string name="cache_offline_store">Enregistrer</string>
+  <string name="cache_offline_manage">Gérer</string>
   <string name="cache_offline_store_in_list">Stocker dans la liste</string>
   <string name="cache_offline_stored">Enregistrée</string>
   <string name="cache_offline_not_ready">Hors-ligne indisponible</string>
@@ -789,6 +799,7 @@
   <string name="cache_menu_sygic_drive">Sygic (en voiture)</string>
   <string name="cache_menu_radar">Radar</string>
   <string name="cache_menu_map">Carte</string>
+  <string name="cache_menu_mfbeta">Mapsforge Beta</string>
   <string name="cache_menu_map_static">Cartes statiques</string>
   <string name="cache_menu_download_map_static">Télécharger les cartes statiques</string>
   <string name="cache_menu_rmaps">Rmaps</string>
@@ -855,6 +866,7 @@
   <string name="cache_image">Image</string>
   <string name="cache_image_open_file">Ouvrir en tant que fichier</string>
   <string name="cache_image_open_browser">Ouvrir dans le navigateur</string>
+  <string name="cache_image_add_waypoint">Ajouter une étape</string>
   <string name="cache_share_field">Partager</string>
   <string name="cache_time_full_hours">heures</string>
   <string name="cache_listed_on">Listée le %s</string>
@@ -1042,6 +1054,7 @@
   <string name="user_menu_open_browser">Ouvrir le profil dans un navigateur</string>
   <string name="user_menu_send_message">Envoyer un message</string>
   <string name="user_menu_open_contact">Ouvrir la fiche du contact</string>
+  <string name="user_unknown">Utilisateur inconnu</string>
   <!-- navigation -->
   <string name="navigation">Navigation</string>
   <string name="compass_title">Boussole</string>
@@ -1393,9 +1406,12 @@
   <string name="send">Envoyer</string>
   <string name="showcase_logcache_title">Envoi de la visite</string>
   <string name="showcase_logcache_text">N\'oubliez pas, beaucoup de commandes sont maintenant dans la barre de titre. Ici, l\'envoi d\'une visite.</string>
+  <string name="showcase_main_title">Barre de menu</string>
+  <string name="showcase_main_text">Certaines fonctions de c:geo sont accessibles dans la barre de menu ou figurent dans le menu \"trois points\". Vous pouvez effectuer un appui long sur un bouton pour voir sa description.</string>
   <string name="showcase_cachelist_title">Changer de liste</string>
   <string name="showcase_cachelist_text">Vous pouvez basculer entre vos différentes listes en appuyant sur le nom de la liste courante.</string>
   <string name="showcase_compass_hint_title">Afficher l\'indice</string>
+  <string name="showcase_compass_hint_text">Cette entrée de menu peut vous aider à trouver la cache en affichant l\'indice lorsqu\'il existe.</string>
   <string name="confirm_log_title">Type inhabituel pour une visite</string>
   <string name="confirm_log_message">Vous allez envoyer \'%s\'. Êtes-vous sûr(e) ?</string>
   <!-- Geokrety -->

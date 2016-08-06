@@ -632,6 +632,8 @@
   <string name="feature_search_owner">Procura por dono</string>
   <string name="feature_search_finder">Procura por quem encontrou</string>
   <string name="init_experimental_title">Funcionalidades experimentais</string>
+  <string name="init_mfbeta">Predefinir o Mapsforge beta</string>
+  <string name="init_mfbeta_description">A versão actual contém uma versão beta do nosso novo mapa da Mapsforge como uma funcionalidade experimental. Este novo mapa pode ser activado aqui como o predefinido para os mapas ao vivo e das listas.</string>
   <!-- map sources -->
   <string name="map_source_google_map">Google: Mapa</string>
   <string name="map_source_google_satellite">Google: Satélite</string>
@@ -795,6 +797,7 @@
   <string name="cache_menu_sygic_drive">Sygic (conduzir)</string>
   <string name="cache_menu_radar">Radar</string>
   <string name="cache_menu_map">Mostrar no mapa</string>
+  <string name="cache_menu_mfbeta">Mapsforge Beta</string>
   <string name="cache_menu_map_static">Mapas estáticos</string>
   <string name="cache_menu_download_map_static">Descarregar os mapas estáticos</string>
   <string name="cache_menu_rmaps">Rmaps</string>
@@ -1049,6 +1052,7 @@
   <string name="user_menu_open_browser">Abrir perfil no browser</string>
   <string name="user_menu_send_message">Enviar mensagem</string>
   <string name="user_menu_open_contact">Abrir contacto</string>
+  <string name="user_unknown">Utilizador desconhecido</string>
   <!-- navigation -->
   <string name="navigation">Navegação</string>
   <string name="compass_title">Bússola</string>
@@ -1359,7 +1363,7 @@
   <string name="tts_stop">Páre de falar</string>
   <string name="tts_started">Iniciou fala</string>
   <string name="tts_stopped">Parou fala</string>
-  <string name="err_tts_lang_not_supported">A linguagem corrente não é suportada pelo texto em fala.</string>
+  <string name="err_tts_lang_not_supported">A linguagem actual não é suportada pela conversão de texto em voz.</string>
   <string name="tts_one_kilometer">um quilômetro</string>
   <plurals name="tts_kilometers">
     <item quantity="one">%s quilômetros</item>
@@ -1399,9 +1403,12 @@
   <string name="send">Enviar</string>
   <string name="showcase_logcache_title">Enviando o registo</string>
   <string name="showcase_logcache_text">Lembre-se, muitos comandos estão agora na barra de título. Lá encontra o botão para enviar o registo terminado.</string>
+  <string name="showcase_main_title">Barra de menu</string>
+  <string name="showcase_main_text">Algumas funções de c:geo são acessíveis na barra de menu ou no menu com o símbolo pontilhado. Manter um botão pressionado para ver a sua descrição.</string>
   <string name="showcase_cachelist_title">A trocar de listas</string>
   <string name="showcase_cachelist_text">Pode alternar entre listas de caches clicando no título da lista.</string>
   <string name="showcase_compass_hint_title">Mostrar a dica</string>
+  <string name="showcase_compass_hint_text">Este novo item do menu pode dar-te uma ideia onde encontrar a cache - Mostra a dica, caso disponível.</string>
   <string name="confirm_log_title">Tipo de registo invulgar</string>
   <string name="confirm_log_message">Quer fazer o registo \'%s\'. Tem a certeza?</string>
   <!-- Geokrety -->

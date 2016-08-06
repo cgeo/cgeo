@@ -214,6 +214,7 @@
   <string name="warn_no_coordinates">Souřadnice nezískány</string>
   <string name="warn_no_keyword">Nenalezena žádná klíčová slova</string>
   <string name="warn_no_username">Nenalezeno žádné uživatelské jméno</string>
+  <string name="warn_no_connector">Tento typ vyhledávání nepodporuje žádná z aktivovaných geocachingových služeb.</string>
   <string name="warn_search_help_title">Potřebuješ pomoct?</string>
   <string name="warn_search_help_address">Zadej adresu nebo název oblasti. Můžeš použít například název ulice „Radlicka 100, Praha, Ceska republika“, název města „Berlín“ nebo název místa „Yellowstone Park“.</string>
   <string name="warn_search_help_gccode">Zadej kód keše. Například „GC1VCAZ“.</string>
@@ -330,6 +331,7 @@
   <string name="caches_refresh_all">Aktualizovat vše</string>
   <string name="caches_move_selected">Přesunout vybrané</string>
   <string name="caches_move_all">Přesunout vše</string>
+  <string name="caches_copy_selected">Kopírovat výběr</string>
   <string name="caches_copy_all">Kopírovat vše</string>
   <string name="caches_map_locus">Locus</string>
   <string name="caches_map_locus_export">Exportovat do Locusu</string>
@@ -393,6 +395,7 @@
   <string name="about_help">Nápověda</string>
   <string name="about_system_include">Při odesílání hlášení o chybě nebo žádosti o další informace uveďte prosím následující systémové informace:</string>
   <string name="about_system_info_send_button">Odeslat e-mailem…</string>
+  <string name="about_system_info">c:geo systémové informace</string>
   <string name="about_system_info_send_chooser">Odeslat systémové informace</string>
   <string name="changelog_github">Seznam všech změn</string>
   <!-- settings -->
@@ -561,6 +564,7 @@
   <string name="init_maptrail">Zobrazovat trasu cesty</string>
   <string name="init_summary_maptrail">Zobrazovat na mapě trasu cesty</string>
   <string name="init_share_after_export">Po exportování GPX otevřít menu sdílení</string>
+  <string name="init_include_found_status">Zahrnout stav „nalezeno“</string>
   <string name="init_trackautovisit">Nastavit TB na „Navštíveno“</string>
   <string name="init_summary_trackautovisit">Nastavit sledovatelné předměty na „Navštíveno“ jako výchozí</string>
   <string name="init_sigautoinsert">Vkládat podpis automaticky</string>
@@ -1054,6 +1058,7 @@
   <string name="user_menu_open_browser">Otevřít profil v prohlížeči</string>
   <string name="user_menu_send_message">Odeslat zprávu</string>
   <string name="user_menu_open_contact">Otevřít kartu kontaktu</string>
+  <string name="user_unknown">Neznámý uživatel</string>
   <!-- navigation -->
   <string name="navigation">Navigace</string>
   <string name="compass_title">Kompas</string>
