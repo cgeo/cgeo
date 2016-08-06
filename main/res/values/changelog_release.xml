@@ -14,6 +14,7 @@
     · New: Show will attend state in cache details, if a matching log is available\n
     · New: Smileys are now filtered from image list\n
     · New: Log images shown for OpenCaching caches\n
+    · New: Icons instead of text for list and cache management\n
     · Changed: Show more text of cache title in lists\n
     · Changed: Always start new line when editing personal note\n
     · Removed: No more option to show only short description of a cache\n
