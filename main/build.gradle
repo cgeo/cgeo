@@ -308,7 +308,7 @@ dependencies {
 /*
  * AndroidAnnotations, https://github.com/excilys/androidannotations/wiki/building-project-gradle
  */
-    def androidAnnotationsVersion = '4.0.0'
+    def androidAnnotationsVersion = '4.1.0'
     apt "org.androidannotations:androidannotations:$androidAnnotationsVersion"
     compile "org.androidannotations:androidannotations-api:$androidAnnotationsVersion"
 
