@@ -3,13 +3,12 @@ package cgeo.geocaching.network;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.ImageUtils.LineHeightContainerDrawable;
 
-import org.apache.commons.lang3.tuple.ImmutablePair;
-
-import rx.Observable;
-
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.widget.TextView;
+
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import rx.Observable;
 
 /**
  * Specialized image class for fetching and displaying smileys in the log book.
@@ -26,13 +25,14 @@ public class SmileyImage extends HtmlImage {
         if (bitmap == null) {
             return ImmutablePair.of((BitmapDrawable) null, loadResult.right);
         }
+        final TextView view = viewRef.get();
         final BitmapDrawable drawable = new BitmapDrawable(view.getResources(), bitmap);
         drawable.setBounds(ImageUtils.scaleImageToLineHeight(drawable, view));
         return ImmutablePair.of(drawable, loadResult.right);
     }
 
     @Override
-    protected BitmapDrawable getContainerDrawable(final Observable<BitmapDrawable> drawable) {
+    protected BitmapDrawable getContainerDrawable(final TextView view, final Observable<BitmapDrawable> drawable) {
         return new LineHeightContainerDrawable(view, drawable);
     }
 

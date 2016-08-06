@@ -13,18 +13,14 @@ import cgeo.geocaching.utils.ImageUtils.ContainerDrawable;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.RxUtils.ObservableCache;
 
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.ImmutablePair;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.text.Html;
 import android.widget.TextView;
 
@@ -32,10 +28,14 @@ import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.lang.ref.WeakReference;
 import java.util.HashMap;
 import java.util.Map;
 
 import okhttp3.Response;
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import rx.Completable;
 import rx.Observable;
 import rx.Observable.OnSubscribe;
@@ -80,7 +80,7 @@ public class HtmlImage implements Html.ImageGetter {
     private final int maxWidth;
     private final int maxHeight;
     private final Resources resources;
-    protected final TextView view;
+    protected final WeakReference<TextView> viewRef;
     private final Map<String, BitmapDrawable> cache = new HashMap<>();
 
     private final ObservableCache<String, BitmapDrawable> observableCache = new ObservableCache<>(new Func1<String, Observable<BitmapDrawable>>() {
@@ -135,7 +135,7 @@ public class HtmlImage implements Html.ImageGetter {
         this.geocode = geocode;
         this.returnErrorImage = returnErrorImage;
         this.onlySave = onlySave;
-        this.view = view;
+        this.viewRef = new WeakReference<>(view);
         this.userInitiatedRefresh = userInitiatedRefresh;
 
         final Point displaySize = Compatibility.getDisplaySize();
@@ -157,7 +157,7 @@ public class HtmlImage implements Html.ImageGetter {
 
     /**
      * Retrieve and optionally display an image.
-     * See {@link #HtmlImage(String, boolean, boolean, TextView, boolean)} for the various behaviours.
+     * See {@link #HtmlImage(String, boolean, boolean, TextView, boolean)} for the various behaviors.
      *
      * @param url
      *            the URL to fetch from cache or network
@@ -175,13 +175,15 @@ public class HtmlImage implements Html.ImageGetter {
             cache.put(url, null);
             return null;
         }
-        final BitmapDrawable result = view == null ? drawable.toBlocking().lastOrDefault(null) : getContainerDrawable(drawable);
+        final TextView textView = viewRef.get();
+        final BitmapDrawable result = textView == null ? drawable.toBlocking().lastOrDefault(null) : getContainerDrawable(textView, drawable);
         cache.put(url, result);
         return result;
     }
 
-    protected BitmapDrawable getContainerDrawable(final Observable<BitmapDrawable> drawable) {
-        return new ContainerDrawable(view, drawable);
+    @SuppressWarnings("static-method")
+    protected BitmapDrawable getContainerDrawable(final TextView textView, final Observable<BitmapDrawable> drawable) {
+        return new ContainerDrawable(textView, drawable);
     }
 
     public Observable<BitmapDrawable> fetchDrawable(final String url) {
