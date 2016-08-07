@@ -412,7 +412,7 @@
   <string name="settings_title_map_data">Kartendaten</string>
   <string name="settings_title_map_content">Karteninhalt</string>
   <string name="settings_title_gpx">GPX</string>
-  <string name="settings_title_basicmembers">Optionen für Basic Member</string>
+  <string name="settings_title_basicmembers">Optionen für Basis-Mitglieder</string>
   <string name="settings_title_navigation">Navigation</string>
   <string name="settings_summary_navigation">Wähle die Standardnavigation und externe Navigations-Apps.</string>
   <string name="settings_title_system">System</string>
@@ -508,7 +508,7 @@
   <string name="init_address">Ort statt Koordinaten</string>
   <string name="init_summary_address">Adresse statt Koordinaten im Startbildschirm anzeigen</string>
   <string name="init_captcha">Zeige CAPTCHA</string>
-  <string name="init_summary_captcha">Zeige CAPTCHA wenn notwendig (nur Basic Member)</string>
+  <string name="init_summary_captcha">Zeige CAPTCHA wenn notwendig (nur Basis-Mitglieder)</string>
   <string name="init_useenglish">Auf Englisch</string>
   <string name="init_summary_useenglish">c:geo auf Englisch nutzen (Neustart erforderlich)</string>
   <string name="init_exclude">Eigene und gefundene Caches</string>
@@ -566,7 +566,7 @@
   <string name="init_summary_trackautovisit">Trackables automatisch auf „besucht“ setzen</string>
   <string name="init_sigautoinsert">Automatisch einfügen</string>
   <string name="init_loaddirectionimg">Richtungs-Grafik</string>
-  <string name="init_summary_loaddirectionimg">Richtungs-Pfeil laden wenn nötig (nur Basic-Member)</string>
+  <string name="init_summary_loaddirectionimg">Richtungs-Pfeil laden wenn nötig (nur Basis-Mitglieder)</string>
   <string name="init_default_navigation_tool">Standardnavigation</string>
   <string name="init_secondary_navigation_tool">Zweitnavigation</string>
   <string name="init_default_navigation_tool_description">Hier kann das bevorzugte Navigationswerkzeug festgelegt werden.</string>
