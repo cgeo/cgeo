@@ -33,10 +33,10 @@
   <string name="block">Groundspeak Block Party</string>
   <string name="unknown">Unbekannter Typ</string>
   <!-- cache sizes -->
-  <string name="cache_size_micro">Micro</string>
-  <string name="cache_size_small">Small</string>
-  <string name="cache_size_regular">Regular</string>
-  <string name="cache_size_large">Large</string>
+  <string name="cache_size_micro">Mikro</string>
+  <string name="cache_size_small">Klein</string>
+  <string name="cache_size_regular">Normal</string>
+  <string name="cache_size_large">Groß</string>
   <string name="cache_size_other">Sonstige</string>
   <string name="cache_size_virtual">Virtual</string>
   <string name="cache_size_notchosen">Nicht gewählt</string>
