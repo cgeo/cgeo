@@ -451,8 +451,8 @@
   <string name="init_oc_nl_description">Autorisiere c:geo auf opencaching.nl zuzugreifen, um Caches zu suchen und nach deinen Funden zu filtern.</string>
   <string name="init_oc_us">Opencaching.us</string>
   <string name="settings_activate_oc_us">Aktivieren</string>
-  <string name="init_summary_oc_us">Caches von opencaching.us laden</string>
-  <string name="init_oc_us_description">Autorisiere c:geo auf opencaching.us zuzugreifen, um Caches zu suchen und nach deinen Funden zu filtern.</string>
+  <string name="init_summary_oc_us">Caches von Opencaching.us laden</string>
+  <string name="init_oc_us_description">Autorisiere c:geo auf Opencaching.us zuzugreifen, um Caches zu suchen und nach deinen Funden zu filtern.</string>
   <string name="init_oc_ro">Opencaching.ro</string>
   <string name="settings_activate_oc_ro">Aktivieren</string>
   <string name="init_summary_oc_ro">Caches von opencaching.ro laden</string>
@@ -679,7 +679,7 @@
   <string name="auth_ocde">Opencaching.de</string>
   <string name="auth_ocpl">opencaching.pl</string>
   <string name="auth_ocnl">opencaching.nl</string>
-  <string name="auth_ocus">opencaching.us</string>
+  <string name="auth_ocus">Opencaching.us</string>
   <string name="auth_ocro">opencaching.ro</string>
   <string name="auth_ocuk">opencaching.org.uk</string>
   <string name="auth_dialog_completed_oc">c:geo ist nun autorisiert, Caches zu laden und auf %s zu loggen.</string>
