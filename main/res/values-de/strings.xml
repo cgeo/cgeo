@@ -219,7 +219,7 @@
   <string name="warn_search_help_address">Adresse oder Ort eingeben, z. B. Postanschrift „Dorfstraße 333, Berlin, Deutschland“, einen Ort „Berlin“ oder den Namen eines beliebigen Ortes wie „Tiergarten“.</string>
   <string name="warn_search_help_gccode">Geocode eingeben, z. B. „GC1VCAZ“.</string>
   <string name="warn_search_help_keyword">Stichwörter eingeben, die im Namen des zu suchenden Caches enthalten sind.</string>
-  <string name="warn_search_help_user">Name eines Benutzers auf geocaching.com eingeben.</string>
+  <string name="warn_search_help_user">Name eines Benutzers auf Geocaching.com eingeben.</string>
   <string name="warn_search_help_tb">Code des Trackables eingeben, z. B. „TB29QMZ“.</string>
   <string name="warn_log_text_fill">Bitte Text einfügen.</string>
   <string name="warn_load_images">c:geo konnte die Bilder nicht laden.</string>
@@ -429,12 +429,12 @@
   <string name="settings_activate_gc">Aktivieren</string>
   <string name="settings_activate_ec">Aktivieren</string>
   <string name="settings_activate_ox">Aktivieren</string>
-  <string name="settings_gc_legal_note">Mit Benutzung der Dienste von geocaching.com werden die Groundspeak-Nutzungsbedingungen (englisch) akzeptiert.</string>
+  <string name="settings_gc_legal_note">Mit Benutzung der Dienste von Geocaching.com werden die Groundspeak-Nutzungsbedingungen (englisch) akzeptiert.</string>
   <string name="settings_info_facebook_login_title">Facebook-Anmeldung</string>
   <string name="settings_info_facebook_login">c:geo kann sich zwar nicht per Facebook bei Geocaching.com einloggen, aber es gibt eine einfache Abhilfe…</string>
   <string name="settings_authorize">c:geo autorisieren</string>
   <string name="settings_reauthorize">c:geo neu autorisieren</string>
-  <string name="settings_gc_description">Autorisiere c:geo auf geocaching.com zuzugreifen, um Caches zu suchen.</string>
+  <string name="settings_gc_description">Autorisiere c:geo auf Geocaching.com zuzugreifen, um Caches zu suchen.</string>
   <string name="settings_ec_description">Autorisiere c:geo auf extremcaching.com zuzugreifen, um Caches zu suchen und nach deinen Funden zu filtern.</string>
   <string name="settings_su_description">Autorisiere c:geo auf geocaching.su zuzugreifen, um Caches zu suchen.</string>
   <string name="init_oc">Opencaching.de</string>
@@ -827,7 +827,7 @@
   <string name="cache_menu_checker">Öffne Geochecker</string>
   <string name="cache_menu_ignore">Cache ignorieren</string>
   <string name="ignore_confirm_title">Sei vorsichtig</string>
-  <string name="ignore_confirm_message">Ignorieren bedeutet, dass dieser Cache nicht mehr auftaucht, wenn du Daten von geocaching.com lädst. Du kannst ihn nur wieder sichtbar machen, indem du das Ignorieren auf der Webseite aufhebst.</string>
+  <string name="ignore_confirm_message">Ignorieren bedeutet, dass dieser Cache nicht mehr auftaucht, wenn du Daten von Geocaching.com lädst. Du kannst ihn nur wieder sichtbar machen, indem du das Ignorieren auf der Webseite aufhebst.</string>
   <string name="cache_status">Status</string>
   <string name="cache_status_offline_log">Gespeicherter Log</string>
   <string name="cache_status_found">Gefunden</string>
@@ -1077,7 +1077,7 @@
   <string name="helper_sendtocgeo_title">Send to c:geo</string>
   <string name="helper_contacts_title"> c:geo Kontakte-Plugin</string>
   <string name="helper_contacts_description">Ermöglicht das direkte Öffnen von Kontakten (aus dem eigenen Adressbuch) von Logeinträgen aus, sodass man Freunde einfacher um Hilfe fragen kann.</string>
-  <string name="helper_sendtocgeo_description">Send to c:geo ist eine Browsererweiterung <strong>für deinen PC</strong>. Beim Durchsuchen von geocaching.com kannst du Caches mit einem Klick im Browser direkt an dein Smartphone übermitteln.</string>
+  <string name="helper_sendtocgeo_description">Send to c:geo ist eine Browsererweiterung <strong>für deinen PC</strong>. Beim Durchsuchen von Geocaching.com kannst du Caches mit einem Klick im Browser direkt an dein Smartphone übermitteln.</string>
   <string name="helper_locus_title">Locus</string>
   <string name="helper_locus_description">Outdoor Navigations-App für dein Handy oder Tablet. Verwende topografische Karten offline, zeichne Tracks von deinen Touren auf, suche Geocaches, benutze Sprachführung und vieles mehr.</string>
   <string name="helper_gpsstatus_title">GPS Status &amp; Toolbox</string>
@@ -1087,7 +1087,7 @@
   <string name="helper_barcode_title">Barcode-Scanner</string>
   <string name="helper_barcode_description">Es gibt Greasemonkey-Scripte und Webseiten, die Geocodes als Strichcode darstellen können. Bei Verwendung dieser Skripte kann c:geo über diese App den Geocode eines Caches direkt vom Bildschirm des Computers ablesen.</string>
   <string name="helper_pocketquery_title">Pocket-Query Creator</string>
-  <string name="helper_pocketquery_description">Ermöglicht das einfache Erzeugen und Herunterladen von Pocket-Queries basierend auf der aktuellen Position oder einem auf der Karte gewählten Punkt. Setzt eine Premium-Mitgliedschaft bei geocaching.com voraus.</string>
+  <string name="helper_pocketquery_description">Ermöglicht das einfache Erzeugen und Herunterladen von Pocket-Queries basierend auf der aktuellen Position oder einem auf der Karte gewählten Punkt. Setzt eine Premium-Mitgliedschaft bei Geocaching.com voraus.</string>
   <string name="helper_google_translate_title">Google Übersetzer</string>
   <string name="helper_google_translate_description">Wenn du Übersetzungspakete mit der Google Übersetzer-App herunterlädst, kannst du Cache-Beschreibungen in c:geo durch langes Drücken auf den Cache-Beschreibungstext übersetzen (ohne Internetverbindung) .</string>
   <string name="helper_wear_title">c:geo Wear</string>
@@ -1104,9 +1104,9 @@
   <string name="export_failed">Exportieren fehlgeschlagen</string>
   <string name="export_fieldnotes">Field Notes</string>
   <string name="export_fieldnotes_info">Field Notes werden nach /sdcard/field-notes mit dem aktuellen Datum und Zeit als Dateiname exportiert.</string>
-  <string name="export_fieldnotes_upload">Hochladen auf geocaching.com</string>
+  <string name="export_fieldnotes_upload">Hochladen auf Geocaching.com</string>
   <string name="export_fieldnotes_uploading">Hochladen…</string>
-  <string name="export_fieldnotes_upload_success">Hochladen auf geocaching.com erfolgreich</string>
+  <string name="export_fieldnotes_upload_success">Hochladen auf Geocaching.com erfolgreich</string>
   <string name="export_fieldnotes_onlynew">Nur seit letztem Export</string>
   <string name="export_fieldnotes_creating">Erstelle Field Notes…</string>
   <string name="export_gpx">GPX</string>
@@ -1356,9 +1356,9 @@
   <string name="status_new_release" tools:ignore="UnusedResources">Neuer Release verfügbar.\nKlicken zum Installieren.</string>
   <string name="status_new_nightly" tools:ignore="UnusedResources">Neuer Nightly Build verfügbar.\nKlicken zum Installieren.</string>
   <string name="status_new_rc" tools:ignore="UnusedResources">Neuer Release Candidate verfügbar.\nKlicken zum Installieren.</string>
-  <string name="status_geocaching_change" tools:ignore="UnusedResources">Änderungen auf geocaching.com führen zu Problemen mit c:geo.\nWir arbeiten daran.</string>
-  <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Änderungen auf geocaching.com führen zu Problemen mit der Live Map.\nWir arbeiten daran.</string>
-  <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com wird gerade gewartet.\nDaher könnten einige Dinge nicht funktionieren.</string>
+  <string name="status_geocaching_change" tools:ignore="UnusedResources">Änderungen auf Geocaching.com führen zu Problemen mit c:geo.\nWir arbeiten daran.</string>
+  <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Änderungen auf Geocaching.com führen zu Problemen mit der Live Map.\nWir arbeiten daran.</string>
+  <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Geocaching.com wird gerade gewartet.\nDaher könnten einige Dinge nicht funktionieren.</string>
   <string name="status_closeout_warning" tools:ignore="UnusedResources">Deine Android-Version scheint älter als 2.1 zu sein. Zukünftige Versionen von c:geo sind für dein Gerät vermutlich nicht mehr verfügbar.</string>
   <!-- text-to-speech for compass view -->
   <string name="tts_service">Sprechender Kompass</string>
