@@ -124,7 +124,7 @@
   <string name="log_image_scale">Skalierung</string>
   <string name="log_password_title">Log-Passwort:</string>
   <string name="log_hint_log_password">Log-Passwort eingeben</string>
-  <string name="log_oc_team_comment">OC Team Bemerkung</string>
+  <string name="log_oc_team_comment">OC-Team-Bemerkung</string>
   <string name="log_your_saved_log">Dein gespeichertes Log</string>
   <string name="log_empty_logbook">Das Logbuch dieses Caches ist leer.</string>
   <string-array name="log_image_scales">
@@ -152,7 +152,7 @@
   <string name="err_missing_auth">Benutzername oder Passwort nicht gesetzt</string>
   <string name="err_wrong">Benutzername und/oder Passwort falsch</string>
   <string name="err_maintenance">Geocaching.com wird zur Zeit gewartet, bitte später erneut versuchen. c:geo arbeitet im Offline-Modus.</string>
-  <string name="err_license">Die Geocaching.com Nutzungsbedingungen wurden nicht akzeptiert. c:geo kann deshalb keine Koordinaten laden.</string>
+  <string name="err_license">Die Geocaching.com-Nutzungsbedingungen wurden nicht akzeptiert. c:geo kann deshalb keine Koordinaten laden.</string>
   <string name="err_unvalidated_account">Die Anmeldedaten müssen zuerst auf Geocaching.com validiert werden.</string>
   <string name="err_unpublished">Der aufgerufene Cache ist noch nicht veröffentlicht.</string>
   <string name="err_cache_not_found">Der gesuchte Cache konnte nicht gefunden werden.</string>
@@ -225,11 +225,11 @@
   <string name="warn_load_images">c:geo konnte die Bilder nicht laden.</string>
   <string name="warn_invalid_mapfile">Die gewählte Datei ist keine gültige Mapsforge-Karte in der Version 0.3.0.\nOffline Karte ist nicht verfügbar.</string>
   <string name="warn_deprecated_mapfile">Es wird eine veraltete Offline-Karte v0.2.4 verwendet.\nBitte zukünftig Offline-Karten in der Version 0.3.0 verwenden.\nDer Support für die alte Version wird im nächsten Release eingestellt.</string>
-  <string name="warn_nonexistant_mapfile">Die gewählte Datei existiert nicht.\nOffline Karte ist nicht verfügbar.</string>
+  <string name="warn_nonexistant_mapfile">Die gewählte Datei existiert nicht.\nOffline-Karte ist nicht verfügbar.</string>
   <string name="warn_rendertheme_missing">Das gewählte Karten-Theme wurde nicht gefunden.</string>
   <string name="warn_pocket_query_select">Kein Pocket-Query ausgewählt.</string>
   <string name="warn_no_pocket_query_found">Kein Pocket-Query online gefunden.</string>
-  <string name="err_read_pocket_query_list">Fehler beim Lesen der Pocket Queries.</string>
+  <string name="err_read_pocket_query_list">Fehler beim Lesen der Pocket-Queries.</string>
   <string name="info_log_posted">Log erfolgreich gesendet.</string>
   <string name="info_log_saved">Log erfolgreich gespeichert.</string>
   <string name="info_log_post_failed">Das Senden des Logs ist fehlgeschlagen.</string>
@@ -264,7 +264,7 @@
   <string name="menu_history">Verlauf</string>
   <string name="menu_filter">Filter</string>
   <string name="menu_scan_geo">Geocode scannen</string>
-  <string name="menu_pocket_queries">Pocket Queries</string>
+  <string name="menu_pocket_queries">Pocket-Queries</string>
   <string name="menu_scan_description">c:geo kann Geocodes scannen, die als QR-Code abgebildet sind. Die dafür notwendige App ist nicht installiert. Möchten Sie Google Play öffnen, um sie zu installieren?</string>
   <!-- main screen -->
   <string name="live_map_button">Live-Karte</string>
@@ -1011,7 +1011,7 @@
   <string name="search_address_result">Gefundene Orte</string>
   <string name="search_own_caches">Meine Caches suchen</string>
   <string name="search_pocket_title">Pocket-Query</string>
-  <string name="search_pocket_loading">Eine Liste von Pocket Queries laden</string>
+  <string name="search_pocket_loading">Eine Liste von Pocket-Queries laden</string>
   <string name="search_pocket_select">Pocket-Query wählen</string>
   <!-- trackable -->
   <string name="trackable">Trackable</string>
@@ -1422,7 +1422,7 @@
   <string name="init_summary_geokrety_account">Kein Konto konfiguriert.</string>
   <string name="init_geokrety_register_ok">Anmeldung OK</string>
   <string name="init_geokrety_register_fail">Anmeldung fehlgeschlagen</string>
-  <string name="init_geokrety_description">Autorisiere c:geo auf GeoKrety.org zuzugreifen, um GeoKrety Trackables zu loggen.</string>
+  <string name="init_geokrety_description">Autorisiere c:geo auf GeoKrety.org zuzugreifen, um GeoKrety-Trackables zu loggen.</string>
   <string name="init_geokrety_cache_description">GeoKretyMap.org stellt zwischengespeicherte Daten für GeoKrety Trackables zur Verfügung.\nDie Daten enthalten mehr Infos zu GeoKretys wie z.B. \'Beschreibung\' oder \'Vermisst\'-Status.\n\nDie Daten sind nicht immer aktuell!\nPositionen: ~30min.\nBeschreibungen: ~24h.</string>
   <string name="init_geokrety_cache">Benutze GeoKretyMap.org</string>
   <string name="init_geokrety_userid">Nutzer-ID: %s</string>
