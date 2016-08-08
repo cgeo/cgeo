@@ -126,6 +126,7 @@
   <string name="log_hint_log_password">Введите ваш пароль журнала</string>
   <string name="log_oc_team_comment">Комментарий команды OC</string>
   <string name="log_your_saved_log">Ваша сохраненная запись</string>
+  <string name="log_empty_logbook">Блокнот этого тайника пуст.</string>
   <string-array name="log_image_scales">
     <item>Без масштабирования</item>
     <item>512 px</item>
@@ -213,6 +214,7 @@
   <string name="warn_no_coordinates">Не введены координаты.</string>
   <string name="warn_no_keyword">Не введены ключевые слова.</string>
   <string name="warn_no_username">Не введено имя пользователя.</string>
+  <string name="warn_no_connector">Нет активированных сервисов геокешинга, предоставляющих этот тип поиска.</string>
   <string name="warn_search_help_title">Нужна помощь?</string>
   <string name="warn_search_help_address">Введите адрес или название места. Например, адрес \"Москва, ул. Пришвина, д. 22\", город \"Берлин\" или название \"Красная площадь\".</string>
   <string name="warn_search_help_gccode">Введите код тайника. Например, \"GC1VCAZ\".</string>
@@ -434,6 +436,7 @@
   <string name="settings_reauthorize">Авторизовать c:geo еще раз</string>
   <string name="settings_gc_description">Авторизовать c:geo для поиска тайников geocaching.com.</string>
   <string name="settings_ec_description">Авторизовать c:geo для extremcaching.com, чтобы искать тайники и иметь доступ к найденным вами тайникам.</string>
+  <string name="settings_su_description">Авторизовать c:geo для поиска тайников geocaching.su.</string>
   <string name="settings_activate_oc">Активировать</string>
   <string name="init_summary_oc_de">Загрузить тайники с opencaching.de</string>
   <string name="init_oc_de_description">Авторизовать c:geo для opencaching.de, чтобы искать тайники и иметь доступ к найденным вами тайникам.</string>
@@ -552,6 +555,7 @@
   <string name="init_maptrail">Показать маршрут</string>
   <string name="init_summary_maptrail">Показать маршрут на карте</string>
   <string name="init_share_after_export">Открыть меню отправки после экспорта</string>
+  <string name="init_include_found_status">Включить \"Найденные\" тайники</string>
   <string name="init_trackautovisit">Отмечать трекаблы</string>
   <string name="init_summary_trackautovisit">Выставлять \"Посетил\" для трекаблов по умолчанию</string>
   <string name="init_sigautoinsert">Вставлять автоматически</string>
@@ -564,6 +568,7 @@
   <string name="init_default_navigation_tool_2_description">Вы можете выбрать дополнительный способ навигации. Активируется долгим касанием иконки навигации на странице тайника.</string>
   <string name="init_navigation_menu_description">Позволяет выбрать доступные способы навигации, которые будут показываться в меню навигации для тайника или путевой точки. Недоступные способы не установлены на устройстве.</string>
   <string name="init_debug_title">Отладочная информация</string>
+  <string name="init_debug_note">c:geo может генерировать много отладочной информации. Однако, включение этой опции может повлиять на стабильность приложения, поэтому рекомендуется ее использовать, только если вы хотите прислать лог-файл разработчикам.</string>
   <string name="init_debug">Писать отладочную инф.</string>
   <string name="init_dbonsdcard_title">Расположение базы данных</string>
   <string name="init_dbonsdcard_note">Вы можете сохранить базу данных c:geo на внешнем носителе. Это сэкономит внутреннюю память, но немного замедлит приложение, также c:geo будет недоступно, если вы извлечете SD-карту.</string>
@@ -621,6 +626,8 @@
   <string name="feature_search_owner">Поиск по создателю</string>
   <string name="feature_search_finder">Поиск по посетителям</string>
   <string name="init_experimental_title">Экспериментальные функции</string>
+  <string name="init_mfbeta">Бета Mapsforge по умолчанию</string>
+  <string name="init_mfbeta_description">Текущая версия содержит бета-версию нашей новой карты Mapsforge в качестве экспериментальной функциональности. Вы можете включить эту карту для онлайн карты и карты списков.</string>
   <!-- map sources -->
   <string name="map_source_google_map">Google: карта</string>
   <string name="map_source_google_satellite">Google: спутник</string>
@@ -786,6 +793,7 @@
   <string name="cache_menu_sygic_drive">Sygic (за рулем)</string>
   <string name="cache_menu_radar">Радар</string>
   <string name="cache_menu_map">Карта</string>
+  <string name="cache_menu_mfbeta">Бета Mapsforge</string>
   <string name="cache_menu_map_static">Статическая карта</string>
   <string name="cache_menu_download_map_static">Скачать статические карты</string>
   <string name="cache_menu_rmaps">Rmaps</string>
@@ -1038,6 +1046,7 @@
   <string name="user_menu_open_browser">Открыть профиль в браузере</string>
   <string name="user_menu_send_message">Отправить сообщение</string>
   <string name="user_menu_open_contact">Открыть контакт</string>
+  <string name="user_unknown">Неизвестный пользователь</string>
   <!-- navigation -->
   <string name="navigation">Навигация</string>
   <string name="compass_title">Компас</string>
@@ -1394,9 +1403,12 @@
   <string name="send">Отправить</string>
   <string name="showcase_logcache_title">Отправка записи</string>
   <string name="showcase_logcache_text">Запомните, многие команды теперь в строке заголовка. Там же находится кнопка отправки сохраненной записи.</string>
+  <string name="showcase_main_title">Меню</string>
+  <string name="showcase_main_text">Некоторые функции c:geo доступны из меню или находятся в меню под символом точек. Используйте долгое нажатие по кнопке, чтобы увидеть ее описание.</string>
   <string name="showcase_cachelist_title">Переключение списков</string>
   <string name="showcase_cachelist_text">Мы можете переключаться между списками тайников, кликая по названию списка.</string>
   <string name="showcase_compass_hint_title">Показать подсказку</string>
+  <string name="showcase_compass_hint_text">Этот пункт может дать вам подсказку, где находится тайник - показывает подсказку, если она есть.</string>
   <string name="confirm_log_title">Необычный тип записи</string>
   <string name="confirm_log_message">Вы хотите записать \"%s\". Вы уверены?</string>
   <!-- Geokrety -->

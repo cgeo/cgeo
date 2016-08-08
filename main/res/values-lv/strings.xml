@@ -126,6 +126,7 @@
   <string name="log_hint_log_password">Ievadi savu pierakstīšanās paroli</string>
   <string name="log_oc_team_comment">OC Team komentārs</string>
   <string name="log_your_saved_log">Tavs saglabātais Ieraksts</string>
+  <string name="log_empty_logbook">Šī slēpņa viesu grāmata ir tukša.</string>
   <string-array name="log_image_scales">
     <item>Bez mērogošanas</item>
     <item>512 px</item>
@@ -148,10 +149,13 @@
   <string name="err_unknown">Nezināma kļūda</string>
   <string name="err_unknown_address">c:geo nevarēja atrast kartē šo adresi ar pašreizējo atrašanās vietu</string>
   <string name="err_comm">Nezināma sakaru kļūda</string>
+  <string name="err_missing_auth">Nav uzstādīts lietotājvārds un/vai parole</string>
+  <string name="err_wrong">Tu ievadīji nepareizu lietotājvārdu un/vai paroli</string>
   <string name="err_maintenance">Geocaching.com apkopes dēļ nedarbojas. c:geo strādā bezsaistē ar saglabātajiem bezsaistē slēpņiem.</string>
   <string name="err_license">Jūs neesat piekritis Geocaching.com licences līgumam, tāpēc c:geo nevar ielādēt slēpņu koordinātas.</string>
   <string name="err_unvalidated_account">Vispirms tev jāapstiprina savs konts vietnē Geocaching.com.</string>
   <string name="err_unpublished">Pieprasītais slēpnis nav publicēts.</string>
+  <string name="err_cache_not_found">Piepasīto slēpni nevarēja atrast.</string>
   <string name="err_premium_only">Šīs slēpnis ir pieejams tikai Geocaching.com Premium lietotājiem.</string>
   <string name="err_detail_open">c:geo nevar atvērt ģeoslēpņa informāciju.</string>
   <string name="err_detail_cache">c:geo nevar parādīt izvēlēto ģeoslēpni. Tas tiešām ir ģeoslēpnis?</string>
@@ -204,11 +208,14 @@
   <string name="err_parse_lon">c:geo nevar apstrādāt garuma grādus.</string>
   <string name="err_parse_dist">c:geo nevar parsēt attālumu.</string>
   <string name="err_parse_lat_lon">c:geo nevar apstrādāt platuma vai garuma  grādus.</string>
+  <string name="err_rendertheme_file_unreadable">Nevarēja ielādēt izvēlēto izskatu. Atgriežos pie oriģinālā (iebūvētā).</string>
+  <string name="err_rendertheme_invalid">Izvēlētais mapes izskats neder šai mapsforge versijai. Atgriežos pie oriģinālā (iebūvētā).</string>
   <string name="warn_save_nothing">Šeit nekā nav ko saglabāt.</string>
   <string name="warn_no_cache_coord">Te nav slēpņu ar koordinātām.</string>
   <string name="warn_no_coordinates">Nav dotas koordinātas.</string>
   <string name="warn_no_keyword">Nav sniegts atslēgvārds.</string>
   <string name="warn_no_username">Nav dots lietotājvārds.</string>
+  <string name="warn_no_connector">Neviens no šobrīd aktivizētajiem geocaching pakalpojumu sniedzējiem nepiedāvā šādu meklēšanas veidu.</string>
   <string name="warn_search_help_title">Nepieciešama palīdzība?</string>
   <string name="warn_search_help_address">Ievadiet adresi vai atrašanās vietas nosaukumu. Piemēram, pasta adrese \"Brīvības iela 99, Rīga, Latvija\", pilsētas nosaukumu \"Berlīne\" vai tikai vietas nosaukumu - kaut ko līdzīgu \"Zelta Boulings\".</string>
   <string name="warn_search_help_gccode">Ievadiet kodu ģeoslēpnim. Piemēram, \"GC1VCAZ\".</string>
@@ -325,6 +332,8 @@
   <string name="caches_refresh_all">Atjaunot visu</string>
   <string name="caches_move_selected">Pārvietot atlasīto</string>
   <string name="caches_move_all">Pārvietot visus</string>
+  <string name="caches_copy_selected">Kopēt atlasīto</string>
+  <string name="caches_copy_all">Kopēt visu</string>
   <string name="caches_map_locus">Locus</string>
   <string name="caches_map_locus_export">Eksportēt uz Locus</string>
   <string name="caches_recaptcha_title">reCAPTCHA</string>
@@ -358,6 +367,8 @@
   <string name="list_menu_rename">Pārdēvēt pašreizējo sarakstu</string>
   <string name="list_menu_import">Importēt</string>
   <string name="list_title">Izvēlēties sarakstu</string>
+  <string name="lists_title">Izvēlēties sarakstus</string>
+  <string name="lists_remove_all">Neviens</string>
   <string name="list_inbox">Saglabātie bezsaistē</string>
   <string name="list_all_lists">Visi slēpņi</string>
   <string name="list_dialog_create_title">Jauns saraksts</string>
@@ -384,6 +395,9 @@
   <string name="about_apache_license"><a href=""> Apache License, Version 2.0</a></string>
   <string name="about_help">Palīdzība</string>
   <string name="about_system_include">Lūdzu, iekļaujiet sekojošu informāciju par sistēmu, nosūtot kļūdas ziņojumu vai prasot vairāk informācijas par c:geo:</string>
+  <string name="about_system_info_send_button">Nosūtīt pa e-pastu…</string>
+  <string name="about_system_info">Par c:geo</string>
+  <string name="about_system_info_send_chooser">Nosūtīt sistēmas informāciju</string>
   <string name="changelog_github">Visu izmaiņu saraksts</string>
   <!-- settings -->
   <string name="settings_title_open_settings">Atvērt uzstādījumus?</string>
@@ -424,6 +438,7 @@
   <string name="settings_info_facebook_login">Nevar veikt c:geo pieteikšanos ar savu Facebook kontu iekš geocaching.com. Bet tam ir vienkāršs risinājums…</string>
   <string name="settings_authorize">Atļaut c:geo</string>
   <string name="settings_reauthorize">Atkal atļaut c:geo</string>
+  <string name="settings_gc_description">Autorizējies c:geo ar geocaching.com profilu, lai meklētu slēpņus.</string>
   <string name="settings_activate_oc">Aktivizēt</string>
   <string name="init_oc_de_description">Atļaut c:geo un opencaching.de meklēt slēpņus un piekļūt/filtrēt tavus atrastos slēpņus.</string>
   <string name="settings_activate_oc_pl">Aktivizēt</string>
@@ -436,6 +451,7 @@
   <string name="init_oc_ro_description">Atļaut c:geo un opencaching.ro meklēt slēpņus un piekļūt/filtrēt tavus atrastos slēpņus.</string>
   <string name="settings_activate_oc_uk">Aktivizēt</string>
   <string name="init_oc_uk_description">Atļaut c:geo un opencaching.org.uk meklēt slēpņus un piekļūt/filtrēt tavus atrastos slēpņus.</string>
+  <string name="init_su">Geocaching.su</string>
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_gcvote_password_description">Lai spētu novērtēt slēpni, tev jāseko instrukcijām GCVote.com mājas lapā un jāievada sava GCVote parole šeit.</string>
   <string name="err_gcvote_send_rating">Kļūda, nosūtot vērtējumu, pārbaudiet GCVote paroli iestatījumos vai izdzēsiet to.</string>
@@ -599,6 +615,8 @@
   <string name="feature_search_geocode">Meklēt pēc Geo code</string>
   <string name="feature_search_owner">Meklēt pēc īpašnieka</string>
   <string name="feature_search_finder">Meklēt pēc atradēja</string>
+  <string name="init_mfbeta">Mapsforge beta kā noklusējumu</string>
+  <string name="init_mfbeta_description">Pašreizējā versija ir eksperimentālā, kas satur beta versiju ar mūsu jaunajām Mapsforge kartēm. Var aktivizēt šo jauno karti šeit kā noklusējumu tiešsaistes kartēs un sarakstos.</string>
   <!-- map sources -->
   <string name="map_source_google_map">Google: Map</string>
   <string name="map_source_google_satellite">Google: Satellite</string>
@@ -751,6 +769,7 @@
   <string name="cache_menu_sygic_drive">Sygic (braukšana)</string>
   <string name="cache_menu_radar">Radars</string>
   <string name="cache_menu_map">Karte</string>
+  <string name="cache_menu_mfbeta">Mapsforge Beta</string>
   <string name="cache_menu_map_static">Statiskās kartes</string>
   <string name="cache_menu_download_map_static">Lejupielādēt statisko karti</string>
   <string name="cache_menu_rmaps">Rmaps</string>
@@ -1351,9 +1370,12 @@
   <string name="send">Nosūtīt</string>
   <string name="showcase_logcache_title">Tiek sūtīts apmeklējuma pieraksts</string>
   <string name="showcase_logcache_text">Atcerieties, ka daudzas komandas ir tagad redzams pogās virspusē. Tur jūs atradīsiet pogu apmeklējuma pieraksta nosūtīšanai.</string>
+  <string name="showcase_main_title">Izvēlnes josla</string>
+  <string name="showcase_main_text">Dažas funkcijas c:geo ir pieejamas izvēlņu joslā vai atrodas izvēlnē aiz punktotajiem simboliem. Vari paturēt nospiestu pogu, lai apskatītu tās aprakstu.</string>
   <string name="showcase_cachelist_title">Saraksti pārslēdzas</string>
   <string name="showcase_cachelist_text">Vari pārslēgties starp slēpņu sarakstiem, noklikšķinot uz saraksta nosaukuma.</string>
   <string name="showcase_compass_hint_title">Rādīt mājienu</string>
+  <string name="showcase_compass_hint_text">Šis jaunais izvēlnes elements, iespējams, dos idejas, kur atrast slēpni - tiks parādīts mājiens, ja tas ir pieejams.</string>
   <string name="confirm_log_title">Neparasts pierakstīšanās tips</string>
   <string name="confirm_log_message">You want to log \'%s\'. Are you sure?</string>
   <!-- Geokrety -->

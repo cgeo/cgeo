@@ -126,6 +126,7 @@
   <string name="log_hint_log_password">Skriv adgangskode til log</string>
   <string name="log_oc_team_comment">OC Hold-meddelelse</string>
   <string name="log_your_saved_log">Din gemte log</string>
+  <string name="log_empty_logbook">Logbogen for denne cache er tom.</string>
   <string-array name="log_image_scales">
     <item>Ingen skalering</item>
     <item>512 px</item>
@@ -206,11 +207,14 @@
   <string name="err_parse_lon">c:geo kan ikke forstå den indtastede længdegrad.</string>
   <string name="err_parse_dist">c:geo kan ikke forstå den indtastede afstand.</string>
   <string name="err_parse_lat_lon">c:geo kan ikke forstå de indtastede længde- eller breddegrader.</string>
+  <string name="err_rendertheme_file_unreadable">Det valgte korttema kunne ikke indlæses. Vender tilbage til det indbyggede.</string>
+  <string name="err_rendertheme_invalid">Det valgte korttema er ikke gyldigt for denne version af Mapsforge. Vender tilbage til det indbyggede.</string>
   <string name="warn_save_nothing">Der er ikke noget at gemme.</string>
   <string name="warn_no_cache_coord">Der er ingen cache med disse koordinater.</string>
   <string name="warn_no_coordinates">Position er ikke angivet.</string>
   <string name="warn_no_keyword">Nøgleord er ikke angivet.</string>
   <string name="warn_no_username">Brugernavn er ikke angivet.</string>
+  <string name="warn_no_connector">Ingen af de aktiverede geocaching-tjenester understøtter denne type søgning.</string>
   <string name="warn_search_help_title">Brug for hjælp?</string>
   <string name="warn_search_help_address">Indtast en adresse eller et stednavn. For eksempel en postadresse (\"Jernbanegade 5, Århus, Denmark\"), et bynavn (\"Gundsømagle\") eller blot et stednavn (\"Søparken\").</string>
   <string name="warn_search_help_gccode">Skriv en geokode på en cache. For eksempel \"GC1VCAZ\".</string>
@@ -432,6 +436,7 @@
   <string name="settings_reauthorize">Godkend c:geo igen</string>
   <string name="settings_gc_description">Giv tilladelse til at c:geo søger efter cacher på geocaching.com.</string>
   <string name="settings_ec_description">Giv c:geo tilladelse til at søge efter cacher samt tilgå og filtrere dine fundne cacher på extremcaching.com.</string>
+  <string name="settings_su_description">Giv tilladelse til at c:geo søger efter cacher på geocaching.su.</string>
   <string name="init_oc">Opencaching.de</string>
   <string name="settings_activate_oc">Aktivér</string>
   <string name="init_summary_oc_de">Indlæs cacher fra opencaching.de</string>
@@ -458,6 +463,7 @@
   <string name="init_oc_uk_description">Giv c:geo tilladelse til at søge efter cacher samt tilgå og filtrere dine fundne cacher på opencaching.org.uk.</string>
   <string name="init_su">Geocaching.su</string>
   <string name="init_summary_su">Indlæs cacher fra Geocaching.su</string>
+  <string name="settings_activate_su">Aktivér</string>
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_gcvote_password_description">For at kunne bedømme en cache skal du følge instruktionerne på GCVote.com og angive dit password til GCVote her.</string>
   <string name="err_gcvote_send_rating">Fejl under afsendelse af bedømmelse. Kontrollér eller fjern GCVote password under Indstillinger.</string>
@@ -555,6 +561,7 @@
   <string name="init_maptrail">Vis spor</string>
   <string name="init_summary_maptrail">Vis dit spor på kortet</string>
   <string name="init_share_after_export">Åbn Del-menu efter GPX eksport</string>
+  <string name="init_include_found_status">Inkludér \"Fundet\"-status</string>
   <string name="init_trackautovisit">Besøg automatisk Trackable</string>
   <string name="init_summary_trackautovisit">Markér Trackables som \"Besøgt\" som standard</string>
   <string name="init_sigautoinsert">Indsæt automatisk</string>
@@ -567,6 +574,7 @@
   <string name="init_default_navigation_tool_2_description">Her kan du vælge din sekundære navigationsmetode. Aktivér den ved at holde på navigationssymbolet det vises i cachens titel.</string>
   <string name="init_navigation_menu_description">Her kan du vælge hvilke af de tilgængelige navigationsmetoder, der skal vises i navigationsmenuen for en cache eller et waypoint. Metoder som ikke er installeret på denne enhed kan ikke vælges.</string>
   <string name="init_debug_title">Debug-information</string>
+  <string name="init_debug_note">c:geo kan generere en stor mængde fejlretningsinformation. Aktivering af denne indstilling kan imidlertid påvirke stabiliteten af c:geo og det anbefales kun at bruge dem såfremt du er blevet bedt om at sende fejlretningsloggen til udviklerne.</string>
   <string name="init_debug">Aktivér debug-log</string>
   <string name="init_dbonsdcard_title">Databaseplacering</string>
   <string name="init_dbonsdcard_note">Du kan gemme c:geos database på dit eksterne SD-kort. Dermed vil du spare intern hukommelse, men c:geo vil fungere lidt langsommere og vil ikke fungere hvis dit eksterne SD-kort ikke er tilgængeligt.</string>
@@ -624,6 +632,8 @@
   <string name="feature_search_owner">Søg efter ejer</string>
   <string name="feature_search_finder">Søg efter finder</string>
   <string name="init_experimental_title">Eksperimentelle funktioner</string>
+  <string name="init_mfbeta">Mapsforge Beta som standard</string>
+  <string name="init_mfbeta_description">c:geo indeholder eksperimentel understøttelse af Mapsforge-kort. Mapsforge-kort kan aktiveres her som standard for live og offline kort.</string>
   <!-- map sources -->
   <string name="map_source_google_map">Google: Kort</string>
   <string name="map_source_google_satellite">Google: Satellit</string>
@@ -643,8 +653,11 @@
   <!-- auth generic -->
   <string name="auth_twitter">Twitter</string>
   <string name="auth_authorize">Godkend c:geo</string>
+  <string name="auth_check">Kontrollér autentifikation</string>
+  <string name="auth_check_again">Kontrollér autentifikation igen</string>
   <string name="auth_start">Start godkendelse</string>
   <string name="auth_again">Start igen</string>
+  <string name="auth_register">Opret en konto</string>
   <string name="auth_connected">Forbundet</string>
   <string name="auth_unconnected">Endnu ikke forbundet</string>
   <string name="auth_connected_as">Forbundet som %s</string>
@@ -654,6 +667,8 @@
   <string name="auth_forget_title">Glem autorisering?</string>
   <string name="auth_forget_message">Forbindelsen til servicen bliver afbrudt. Dine aktuelle gemte legitimationsoplysninger vil gå tabt.</string>
   <!-- auth credentials -->
+  <string name="auth_credentials_explain_short">Den følgende opsætningsguide vil give <b>c:geo</b> tilladelse til at tilgå %s.</string>
+  <string name="auth_credentials_explain_long">Ved at udfylde dine legitimationsoplysninger og trykke på \"Kontrollér autentifikation\" starter opsætningen. Under opsætningen vil der blive hentet autentifikationsoplysninger fra %s.</string>
   <!-- auth token -->
   <string name="auth_token_register">Opret en konto</string>
   <string name="auth_token_explain_short">Ved at gennemføre denne opsætning, tillader du at <b>c:geo</b> kan få adgang til %s.</string>
@@ -687,6 +702,7 @@
   <string name="cache_offline_refresh">Genindlæs</string>
   <string name="cache_offline_drop">Fjern</string>
   <string name="cache_offline_store">Gem</string>
+  <string name="cache_offline_manage">Administrér</string>
   <string name="cache_offline_store_in_list">Gem i liste</string>
   <string name="cache_offline_stored">Gemt i telefon</string>
   <string name="cache_offline_not_ready">Ikke klar\ntil offline brug</string>
@@ -783,6 +799,7 @@
   <string name="cache_menu_sygic_drive">Sygic (kørsel)</string>
   <string name="cache_menu_radar">Radar</string>
   <string name="cache_menu_map">Vis på kort</string>
+  <string name="cache_menu_mfbeta">Mapsforge Beta</string>
   <string name="cache_menu_map_static">Statiske kort</string>
   <string name="cache_menu_download_map_static">Indlæs statiske kort</string>
   <string name="cache_menu_rmaps">Rmaps</string>
@@ -847,6 +864,7 @@
   <string name="cache_image">Billede</string>
   <string name="cache_image_open_file">Åbn som fil</string>
   <string name="cache_image_open_browser">Åbn i browser</string>
+  <string name="cache_image_add_waypoint">Tilføj waypoint</string>
   <string name="cache_share_field">Del</string>
   <string name="cache_time_full_hours">klokken</string>
   <string name="cache_listed_on">Fra %s</string>
@@ -1034,6 +1052,7 @@
   <string name="user_menu_open_browser">Åbn profil i browser</string>
   <string name="user_menu_send_message">Send besked</string>
   <string name="user_menu_open_contact">Åbn kontaktdetaljer</string>
+  <string name="user_unknown">Ukendt brugerkonto</string>
   <!-- navigation -->
   <string name="navigation">Navigation</string>
   <string name="compass_title">Kompas</string>
@@ -1384,9 +1403,12 @@
   <string name="send">Send</string>
   <string name="showcase_logcache_title">Afsendelse af logbesked</string>
   <string name="showcase_logcache_text">Husk, at mange funktioner nu er i titellinien, hvor du også kan finde knappen til at sende den færdige logbesked.</string>
+  <string name="showcase_main_title">Menubjælke</string>
+  <string name="showcase_main_text">Nogle funktioner i c:geo er tilgængelige gennem menubjælken eller gennem menuen med prikkerne. Ved at holde på en knap, kan du få vist en beskrivelse af knappens funktion.</string>
   <string name="showcase_cachelist_title">Skift af liste</string>
   <string name="showcase_cachelist_text">Du kan skifte mellem dine lister ved at trykke på listens titel.</string>
   <string name="showcase_compass_hint_title">Vis tip</string>
+  <string name="showcase_compass_hint_text">Dette menupunkt kan give dig et hint om hvordan du finder cachen, hvis det er tilgængeligt.</string>
   <string name="confirm_log_title">Usædvanlig logtype</string>
   <string name="confirm_log_message">Du er ved at logge \"%s\". Er du sikker?</string>
   <!-- Geokrety -->
