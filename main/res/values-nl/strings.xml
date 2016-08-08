@@ -126,6 +126,7 @@
   <string name="log_hint_log_password">Voer Login Wachtwoord</string>
   <string name="log_oc_team_comment">OC Team commentaar</string>
   <string name="log_your_saved_log">Je opgeslagen log</string>
+  <string name="log_empty_logbook">Het logboek van deze cache is leeg.</string>
   <string-array name="log_image_scales">
     <item>Niet schalen</item>
     <item>512 px</item>
@@ -213,6 +214,7 @@
   <string name="warn_no_coordinates">Geen coördinaten opgegeven.</string>
   <string name="warn_no_keyword">Geen sleutelwoord opgegeven.</string>
   <string name="warn_no_username">Geem gebruikersnaam opgegeven.</string>
+  <string name="warn_no_connector">Geen enkele geactiveerde geocaching service biedt dit type van zoeken aan.</string>
   <string name="warn_search_help_title">Hulp nodig?</string>
   <string name="warn_search_help_address">Vul adres of locatienaam. Gebruik bijvoorbeeld adres \"Hoofdstraat 100, Amsterdam, Nederland\", plaatsnaam \"Utrecht\" of een naam \"Nationaal Park de Hoge Veluwe\".</string>
   <string name="warn_search_help_gccode">Voer de cachecode in. Bijvoorbeeld \"GC1VCAZ\".</string>
@@ -434,6 +436,7 @@
   <string name="settings_reauthorize">Autoriseer c:geo nogmaals</string>
   <string name="settings_gc_description">Autoriseer c:geo met geocaching.com om caches te zoeken.</string>
   <string name="settings_ec_description">Autoriseer c:geo met extremcaching.com om caches te zoeken en toegang te hebben tot jouw gevonden caches.</string>
+  <string name="settings_su_description">Autoriseer c:geo met geocaching.su om caches te zoeken.</string>
   <string name="init_oc">Opencaching.de</string>
   <string name="settings_activate_oc">Activeren</string>
   <string name="init_summary_oc_de">Laad caches van opencaching.de</string>
@@ -558,6 +561,7 @@
   <string name="init_maptrail">Pad tonen</string>
   <string name="init_summary_maptrail">Laat pad op kaart zien</string>
   <string name="init_share_after_export">Open deel-menu na GPX export</string>
+  <string name="init_include_found_status">Neem status \"Gevonden\" mee</string>
   <string name="init_trackautovisit">Trackables bezoeken</string>
   <string name="init_summary_trackautovisit">Zet trackables automatisch op \'bezocht\'</string>
   <string name="init_sigautoinsert">Voeg automatisch toe</string>
@@ -628,6 +632,8 @@
   <string name="feature_search_owner">Zoek op eigenaar</string>
   <string name="feature_search_finder">Zoek op vinder</string>
   <string name="init_experimental_title">Experimentele functies</string>
+  <string name="init_mfbeta">Mapsforge bèta als standaard</string>
+  <string name="init_mfbeta_description">De huidige release bevat een beta versie van onze nieuwe Mapsforge-kaart als een experimentele functie. Deze nieuwe kaart kan hier geactiveerd worden als standaard voor de live en lijst kaarten.</string>
   <!-- map sources -->
   <string name="map_source_google_map">Google: Map</string>
   <string name="map_source_google_satellite">Google: Satellite</string>
@@ -793,6 +799,7 @@
   <string name="cache_menu_sygic_drive">Sygic (rijden)</string>
   <string name="cache_menu_radar">Radar</string>
   <string name="cache_menu_map">Toon op kaart</string>
+  <string name="cache_menu_mfbeta">Mapsforge Bèta</string>
   <string name="cache_menu_map_static">Statische kaarten</string>
   <string name="cache_menu_download_map_static">Download statische kaarten</string>
   <string name="cache_menu_rmaps">Rmaps</string>
@@ -1047,6 +1054,7 @@
   <string name="user_menu_open_browser">Open profiel in browser</string>
   <string name="user_menu_send_message">Verstuur bericht</string>
   <string name="user_menu_open_contact">Open contactkaart</string>
+  <string name="user_unknown">Onbekende gebruiker</string>
   <!-- navigation -->
   <string name="navigation">Navigatie</string>
   <string name="compass_title">Kompas</string>
@@ -1398,9 +1406,12 @@
   <string name="send">Verzenden</string>
   <string name="showcase_logcache_title">Verstuurt de log</string>
   <string name="showcase_logcache_text">Onthoud, veel commando\'s zijn nu te vinden in de titelbalk. Daar is de knop te vinden voor het verzenden van de log.</string>
+  <string name="showcase_main_title">Menubalk</string>
+  <string name="showcase_main_text">Sommige functies van c:geo zijn toegankelijk in de menubalk of onderdeel van het menu achter het puntjes symbool. U kunt lang drukken op een knop om de omschrijving te zien.</string>
   <string name="showcase_cachelist_title">Wisselen van lijst</string>
   <string name="showcase_cachelist_text">Je kan wisselen tussen geocache lijsten door te klikken op de titel van de lijst.</string>
   <string name="showcase_compass_hint_title">Toon hint</string>
+  <string name="showcase_compass_hint_text">Dit menu-item geeft je een idee waar de cache zich bevindt - het toont de hint, indien beschikbaar.</string>
   <string name="confirm_log_title">Ongebruikelijk logtype</string>
   <string name="confirm_log_message">Je wilt \'%s\' loggen. Weet je het zeker?</string>
   <!-- Geokrety -->

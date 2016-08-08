@@ -279,7 +279,7 @@
   <string name="caches_more_caches_no">Daugiau slėptuvių nėra</string>
   <string name="caches_more_caches_loading">Įkeliamos slėptuvės…</string>
   <string name="caches_more_caches_currently">dabar</string>
-  <string name="caches_downloading">Atnaujinamos slėptuvės…\nUžtruks</string>
+  <string name="caches_downloading">Atsisiunčiamos slėptuvės…\nUžtruks: </string>
   <string name="caches_eta_ltm">mažiau nei minutę</string>
   <plurals name="caches_eta_mins">
     <item quantity="one">%d minutę</item>
@@ -319,7 +319,7 @@
     <item quantity="few">Ar norite pašalinti visas %d slėptuves iš dabartinio sąrašo?</item>
     <item quantity="other">Ar norite pašalinti visas %d slėptuvių iš dabartinio sąrašo?</item>
   </plurals>
-  <string name="caches_remove_selected">Pašalinti pasirinktą</string>
+  <string name="caches_remove_selected">Pašalinti pasirinktas</string>
   <plurals name="caches_remove_selected_confirm">
     <item quantity="one">Ar norite pašalinti slėptuvę iš prietaiso?</item>
     <item quantity="few">Ar norite pašalinti pasirinktas %d slėptuves iš prietaiso?</item>

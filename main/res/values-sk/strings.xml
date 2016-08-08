@@ -126,6 +126,7 @@
   <string name="log_hint_log_password">Zadajte svoje logovacie heslo</string>
   <string name="log_oc_team_comment">Komentár tímu OC</string>
   <string name="log_your_saved_log">Tvoj uložený log</string>
+  <string name="log_empty_logbook">Logbook tejto skrýše je prázdny.</string>
   <string-array name="log_image_scales">
     <item>Bez zmeny mierky</item>
     <item>512 px</item>
@@ -149,6 +150,7 @@
   <string name="err_unknown_address">c:geo nedokázal nájsť miesto k daným súradniciam</string>
   <string name="err_comm">Neznáma chyba pri komunikácii</string>
   <string name="err_missing_auth">Nevyplnené používateľské meno a/alebo heslo</string>
+  <string name="err_wrong">Nesprávne používateľské meno alebo heslo</string>
   <string name="err_maintenance">Na webe Geocaching.com prebieha údržba, opakujte požiadavku neskôr. c:geo funguje v offline režime.</string>
   <string name="err_license">Používateľ nepotvrdil súhlas s licenčnou dohodou serveru Geocaching.com, takže c:geo nemôže načítať súradnice skrýše.</string>
   <string name="err_unvalidated_account">Najprv musíte overiť svoj účet na internetových stránkach Geocaching.com.</string>
@@ -167,7 +169,7 @@
   <string name="err_detail_still_working">Stále prebieha práca na inej úlohe.</string>
   <string name="err_watchlist_still_managing">Stále prebieha správa vášho zoznamu sledovaných.</string>
   <string name="err_watchlist_failed">Zlyhala zmena sledovaných.</string>
-  <string name="err_application_no">Prepáčte, c:geo nemôže násjť žiadnu vhodnú aplikáciu.</string>
+  <string name="err_application_no">Prepáčte, c:geo nemôže nájsť žiadnu vhodnú aplikáciu.</string>
   <string name="err_auth_initialize">Prepáčte, c:geo nedokázalo zahájiť autorizáciu.</string>
   <string name="err_auth_process">Autorizácia zlyhala.</string>
   <string name="err_cannot_log_visit">c:geo nemá dostatok informácií pre zapísanie návštevy. Prosím urobte to z obrazovky s kompletným detailom skrýše.</string>
@@ -326,6 +328,7 @@
   <string name="caches_refresh_all">Obnoviť všetky</string>
   <string name="caches_move_selected">Presunúť vybraté</string>
   <string name="caches_move_all">Presunúť všetky</string>
+  <string name="caches_copy_selected">Kopírovať vybrané</string>
   <string name="caches_copy_all">Kopírovať všetko</string>
   <string name="caches_map_locus">Locus</string>
   <string name="caches_map_locus_export">Exportovať do Locus</string>
@@ -360,6 +363,7 @@
   <string name="list_menu_rename">Premenovať tento zoznam</string>
   <string name="list_menu_import">Import</string>
   <string name="list_title">Výber zoznamu</string>
+  <string name="lists_title">Vyberte zoznamy</string>
   <string name="lists_remove_all">Žiadna</string>
   <string name="list_inbox">Uložené</string>
   <string name="list_all_lists">Všetky skrýše</string>
@@ -387,6 +391,9 @@
   <string name="about_apache_license"><a href=""> Apache License, verzia 2.0</a></string>
   <string name="about_help">Pomoc</string>
   <string name="about_system_include">Keď budete posielať správu o chybe alebo budete chcieť vedieť viac o c:geo, uveďte, prosím, nasledujúce systémové informácie:</string>
+  <string name="about_system_info_send_button">Poslať e-mailom…</string>
+  <string name="about_system_info">c:geo systémové informácie</string>
+  <string name="about_system_info_send_chooser">Odoslať systémové informácie</string>
   <string name="changelog_github">Zoznam všetkých zmien</string>
   <!-- settings -->
   <string name="settings_title_open_settings">Otvoriť nastavenia?</string>
@@ -950,6 +957,7 @@
   <string name="map_strategy_auto">Podľa rýchlosti</string>
   <string name="map_strategy_detailed">Podrobná</string>
   <string name="live_map_notification">Na aktívnej mape nemusia byť súradnice vždy presné. Súradnice, ktoré môžu byť nepresné, sú označené oranžovým krúžkom.\nPo otvorení detailu skrýše alebo po jej uložení pre použitie offline, sú získané vždy presné súradnice.\n\nViac informácií nájdete na stránke „O c:geo“ v aplikácii.</string>
+  <string name="map_select_multiple_items">Vybrať položku</string>
   <!-- search -->
   <string name="search_bar_hint">Hľadanie skrýš</string>
   <string name="search_bar_desc">Skrýše (geokód, kľúčové slovo), trasovateľné predmety (TB-kód)</string>
@@ -1020,6 +1028,7 @@
   <string name="user_menu_open_browser">Otvoriť profil v prehliadači</string>
   <string name="user_menu_send_message">Odoslať správu</string>
   <string name="user_menu_open_contact">Otvoriť kartu kontaktu</string>
+  <string name="user_unknown">Neznámy používateľ</string>
   <!-- navigation -->
   <string name="navigation">Navigácia</string>
   <string name="compass_title">Kompas</string>
@@ -1407,6 +1416,12 @@
     <item quantity="few">Presunuté %d keše</item>
     <item quantity="other">Presunutých %d keší</item>
   </plurals>
+  <string name="command_copy_caches_progress">Kopírovanie skrýš do zoznamu %1s</string>
+  <plurals name="command_copy_caches_result">
+    <item quantity="one">Skopírovaná %d skrýša</item>
+    <item quantity="few">Skopírované %d skrýše</item>
+    <item quantity="other">Skopírovaných %d skrýš</item>
+  </plurals>
   <string name="command_delete_caches_progress">Odstraňovanie skrýš</string>
   <plurals name="command_delete_caches_result">
     <item quantity="one">Odstránená %d skrýša</item>
@@ -1431,4 +1446,7 @@
   <string name="invitation_action">Pozvať priateľov</string>
   <string name="invitation_title">Pozvať priateľov na používanie c:geo</string>
   <string name="invitation_message">Skús aplikáciu c:geo pre geocaching</string>
+  <string name="cache_list_remove_from">Odstrániť zo zoznamu</string>
+  <string name="list_list_headline">Zoznamy:</string>
+  <string name="cache_store_list">Uložiť do zoznamu</string>
 </resources>
