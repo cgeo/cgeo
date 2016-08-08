@@ -145,7 +145,7 @@
   <string name="err_server_ec">Verbindung zu extremcaching.com konnte nicht hergestellt werden. Server ist nicht verfügbar oder keine Internet-Verbindung vorhanden.</string>
   <string name="err_server_gk">Verbindung zu GeoKrety.org konnte nicht hergestellt werden. Server ist nicht verfügbar oder keine Internet-Verbindung vorhanden.</string>
   <string name="err_login">Keine Anmeldedaten gespeichert.</string>
-  <string name="err_login_failed_toast">c:geo konnte sich nicht einloggen und arbeitet im Offline-Modus. Bitte die Login-Daten in den Einstellungen überprüfen oder eine Internetverbindung herstellen.</string>
+  <string name="err_login_failed_toast">c:geo konnte sich nicht einloggen und arbeitet im Offline-Modus. Bitte die Anmeldedaten in den Einstellungen überprüfen oder eine Internetverbindung herstellen.</string>
   <string name="err_unknown">Unbekannter Fehler</string>
   <string name="err_unknown_address">c:geo konnte keine Koordinaten für diese Adresse ermitteln</string>
   <string name="err_comm">Unbekannter Kommunikationsfehler</string>
@@ -153,7 +153,7 @@
   <string name="err_wrong">Benutzername und/oder Passwort falsch</string>
   <string name="err_maintenance">Geocaching.com wird zur Zeit gewartet, bitte später erneut versuchen. c:geo arbeitet im Offline-Modus.</string>
   <string name="err_license">Die Geocaching.com Nutzungsbedingungen wurden nicht akzeptiert. c:geo kann deshalb keine Koordinaten laden.</string>
-  <string name="err_unvalidated_account">Die Logindaten müssen zuerst auf Geocaching.com validiert werden.</string>
+  <string name="err_unvalidated_account">Die Anmeldedaten müssen zuerst auf Geocaching.com validiert werden.</string>
   <string name="err_unpublished">Der aufgerufene Cache ist noch nicht veröffentlicht.</string>
   <string name="err_cache_not_found">Der gesuchte Cache konnte nicht gefunden werden.</string>
   <string name="err_premium_only">Der Cache ist nur für Premium-Mitglieder von Geocaching.com verfügbar.</string>
@@ -430,7 +430,7 @@
   <string name="settings_activate_ec">Aktivieren</string>
   <string name="settings_activate_ox">Aktivieren</string>
   <string name="settings_gc_legal_note">Mit Benutzung der Dienste von geocaching.com werden die Groundspeak-Nutzungsbedingungen (englisch) akzeptiert.</string>
-  <string name="settings_info_facebook_login_title">Facebook-Login</string>
+  <string name="settings_info_facebook_login_title">Facebook-Anmeldung</string>
   <string name="settings_info_facebook_login">c:geo kann sich zwar nicht per Facebook bei Geocaching.com einloggen, aber es gibt eine einfache Abhilfe…</string>
   <string name="settings_authorize">c:geo autorisieren</string>
   <string name="settings_reauthorize">c:geo neu autorisieren</string>
@@ -473,11 +473,11 @@
   <string name="init_username">Benutzername</string>
   <string name="init_password">Passwort</string>
   <string name="init_login">Anmeldedaten überprüfen</string>
-  <string name="init_login_popup">Login</string>
+  <string name="init_login_popup">Anmeldung</string>
   <string name="init_login_popup_working">Anmeldung…</string>
-  <string name="init_login_popup_ok">Login OK</string>
-  <string name="init_login_popup_failed">Login fehlgeschlagen</string>
-  <string name="init_login_popup_failed_reason">Login fehlgeschlagen: %s</string>
+  <string name="init_login_popup_ok">Anmeldung OK</string>
+  <string name="init_login_popup_failed">Anmeldung fehlgeschlagen</string>
+  <string name="init_login_popup_failed_reason">Anmeldung fehlgeschlagen: %s</string>
   <string name="init_login_popup_not_authorized">Nicht autorisiert</string>
   <string name="init_login_popup_invalid_timestamp">Lokale Zeit ungültig, Gerätezeit einstellen</string>
   <string name="init_login_popup_invalid_token">Autorisierung ungültig, erneut autorisieren</string>
@@ -534,7 +534,7 @@
   <string name="init_backup">Sicherung</string>
   <string name="init_backup_backup">Sicherung</string>
   <string name="init_backup_running">Erzeuge Sicherung der Cache-Datenbank…</string>
-  <string name="init_backup_note">Hinweis: Diese Option sichert die Datenbank von c:geo. Nur Caches und Wegpunkte werden gesichert, keine Einstellungen. Login-Daten und Passwörter werden die App nicht verlassen.</string>
+  <string name="init_backup_note">Hinweis: Diese Option sichert die Datenbank von c:geo. Nur Caches und Wegpunkte werden gesichert, keine Einstellungen. Anmeldedaten und Passwörter werden die App nicht verlassen.</string>
   <string name="init_backup_restore">Wiederherstellung</string>
   <string name="init_backup_success">Datenbank von c:geo wurde erfolgreich kopiert nach:</string>
   <string name="init_backup_failed">Sicherung der Datenbank von c:geo fehlgeschlagen.</string>
@@ -586,7 +586,7 @@
   <string name="init_plain_logs">Logs ohne Farben</string>
   <string name="init_summary_plain_logs">Logeinträge ohne Farben anzeigen</string>
   <string name="init_use_native_ua">Android-Browser</string>
-  <string name="init_summary_use_native_ua">Als Android-Browser identifizieren. Löst Login-Probleme einiger Netzanbieter.</string>
+  <string name="init_summary_use_native_ua">Als Android-Browser identifizieren. Löst Anmeldeprobleme einiger Netzanbieter.</string>
   <string name="init_rendertheme_folder">Karten-Themes-Verzeichnis</string>
   <string name="init_maintenance">Wartung</string>
   <string name="init_maintenance_directories_note">c:geo speichert Bilder, Log-Bilder und weitere Dateien zu einem Cache in einem separaten Verzeichnis. In manchen Fällen (z.B. bei Sichern und Wiederherstellen der Datenbank) kann dieses Verzeichnis unnötige Daten enthalten, die gelöscht werden können.</string>
@@ -1420,8 +1420,8 @@
   <string name="init_connectorGeokretyActive">GeoKrety Trackables</string>
   <string name="init_summary_geokrety">Lädt Trackables von GeoKrety.org</string>
   <string name="init_summary_geokrety_account">Kein Konto konfiguriert.</string>
-  <string name="init_geokrety_register_ok">Login OK</string>
-  <string name="init_geokrety_register_fail">Login fehlgeschlagen</string>
+  <string name="init_geokrety_register_ok">Anmeldung OK</string>
+  <string name="init_geokrety_register_fail">Anmeldung fehlgeschlagen</string>
   <string name="init_geokrety_description">Autorisiere c:geo auf GeoKrety.org zuzugreifen, um GeoKrety Trackables zu loggen.</string>
   <string name="init_geokrety_cache_description">GeoKretyMap.org stellt zwischengespeicherte Daten für GeoKrety Trackables zur Verfügung.\nDie Daten enthalten mehr Infos zu GeoKretys wie z.B. \'Beschreibung\' oder \'Vermisst\'-Status.\n\nDie Daten sind nicht immer aktuell!\nPositionen: ~30min.\nBeschreibungen: ~24h.</string>
   <string name="init_geokrety_cache">Benutze GeoKretyMap.org</string>
