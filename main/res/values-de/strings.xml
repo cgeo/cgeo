@@ -465,7 +465,7 @@
   <string name="init_summary_su">Caches von geocaching.su laden</string>
   <string name="settings_activate_su">Aktivieren</string>
   <string name="init_gcvote">GCvote.com</string>
-  <string name="init_gcvote_password_description">Um einen Cache bewerten zu können, folge der Anleitung auf gcvote.com  und gib das GCVote-Passwort anschließend hier ein.</string>
+  <string name="init_gcvote_password_description">Um einen Cache bewerten zu können, folge der Anleitung auf gcvote.com und gib das GCVote-Passwort anschließend hier ein.</string>
   <string name="err_gcvote_send_rating">Fehler beim Senden der Bewertung. Prüfe das GCVote-Passwort in den Einstellungen oder lösche es.</string>
   <string name="gcvote_sent">Bewertung erfolgreich gesendet</string>
   <string name="init_twitter">Twitter</string>
@@ -671,7 +671,7 @@
   <string name="auth_credentials_explain_long">Nach Eingabe der Anmeldeinformation \"Authentifizierung prüfen\" auswählen um den Prozess zu starten. Dieser Prozess verbindet mit %s und prüft die Anmeldeinformationen. Das ist alles.</string>
   <!-- auth token -->
   <string name="auth_token_register">Nutzerkonto erstellen</string>
-  <string name="auth_token_explain_short">Der folgende Prozess erlaubt es <b>c:geo</b>  auf %s zuzugreifen.</string>
+  <string name="auth_token_explain_short">Der folgende Prozess erlaubt es <b>c:geo</b> auf %s zuzugreifen.</string>
   <string name="auth_token_explain_long">Nach Eingabe der Anmeldeinformation \"Starte Autorisierung\" auswählen um den Prozess zu starten. Dieser Prozess verbindet mit %s und ruft einen Authentifizierungstoken ab. Das ist alles.</string>
   <!-- auth Twitter -->
   <string name="auth_dialog_completed_twitter">c:geo ist nun autorisiert, Tweets bei Twitter zu erstellen.</string>
@@ -1422,7 +1422,7 @@
   <string name="init_summary_geokrety_account">Kein Konto konfiguriert.</string>
   <string name="init_geokrety_register_ok">Login OK</string>
   <string name="init_geokrety_register_fail">Login fehlgeschlagen</string>
-  <string name="init_geokrety_description">Autorisiere c:geo  auf GeoKrety.org zuzugreifen um GeoKrety Trackables zu loggen.</string>
+  <string name="init_geokrety_description">Autorisiere c:geo auf GeoKrety.org zuzugreifen um GeoKrety Trackables zu loggen.</string>
   <string name="init_geokrety_cache_description">GeoKretyMap.org stellt zwischengespeicherte Daten für GeoKrety Trackables zur Verfügung.\nDie Daten enthalten mehr Infos zu GeoKretys wie z.B. \'Beschreibung\' oder \'Vermisst\'-Status.\n\nDie Daten sind nicht immer aktuell!\nPositionen: ~30min.\nBeschreibungen: ~24h.</string>
   <string name="init_geokrety_cache">Benutze GeoKretyMap.org</string>
   <string name="init_geokrety_userid">Nutzer-ID: %s</string>
