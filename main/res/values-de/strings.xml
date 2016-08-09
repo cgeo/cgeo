@@ -464,8 +464,8 @@
   <string name="init_su">Geocaching.su</string>
   <string name="init_summary_su">Caches von geocaching.su laden</string>
   <string name="settings_activate_su">Aktivieren</string>
-  <string name="init_gcvote">GCvote.com</string>
-  <string name="init_gcvote_password_description">Um einen Cache bewerten zu können, folge der Anleitung auf gcvote.com und gib das GCVote-Passwort anschließend hier ein.</string>
+  <string name="init_gcvote">GCVote.com</string>
+  <string name="init_gcvote_password_description">Um einen Cache bewerten zu können, folge der Anleitung auf GCVote.com und gib das GCVote-Passwort anschließend hier ein.</string>
   <string name="err_gcvote_send_rating">Fehler beim Senden der Bewertung. Prüfe das GCVote-Passwort in den Einstellungen oder lösche es.</string>
   <string name="gcvote_sent">Bewertung erfolgreich gesendet</string>
   <string name="init_twitter">Twitter</string>
@@ -497,8 +497,8 @@
   <string name="init_signature_template_name">Name</string>
   <string name="init_signature_template_url">URL</string>
   <string name="init_signature_template_log">Log text</string>
-  <string name="init_ratingwanted">GCvote-Bewertung</string>
-  <string name="init_summary_ratingwanted">Lade Cache-Bewertung von GCvote.com</string>
+  <string name="init_ratingwanted">GCVote-Bewertung</string>
+  <string name="init_summary_ratingwanted">Lade Cache-Bewertung von GCVote.com</string>
   <string name="init_friends_and_own_logs_wanted">Eigene und Logs von Freunden zeigen</string>
   <string name="init_summary_friends_and_own_logs_wanted">Zeige zusätzliche Logbuchseite für Logs von dir und deinen Freunden</string>
   <string name="init_openlastdetailspage">Zuletzt genutzte Seite</string>
