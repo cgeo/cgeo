@@ -15,7 +15,7 @@ import android.net.Uri;
  */
 public final class TranslationUtils {
 
-    private static final String TRANSLATION_WEBSITE = "http://translate.google.com/";
+    private static final String TRANSLATION_WEBSITE = "https://translate.google.com/m/translate";
     private static final String TRANSLATION_FORCE_CLASSIC_MODE = "?vi=c";
     private static final String TRANSLATION_AUTO_SELECT = "#auto";
     private static final String TRANSLATION_FIELD_SEPARATOR = "|";
