@@ -1,7 +1,5 @@
 package cgeo.geocaching.maps.interfaces;
 
-import cgeo.geocaching.maps.AbstractItemizedOverlay;
-
 import android.graphics.Canvas;
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
@@ -11,8 +9,6 @@ import android.graphics.drawable.Drawable;
  * ItemizedOverlay implementation
  */
 public interface ItemizedOverlayImpl extends OverlayImpl {
-
-    AbstractItemizedOverlay getBase();
 
     void superPopulate();
 

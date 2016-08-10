@@ -322,7 +322,9 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:3.12.2'
 
     // Play Services
-    implementation 'com.google.android.gms:play-services-location:11.8.0'
+    def playServicesVersion = '11.8.0'
+    implementation "com.google.android.gms:play-services-location:$playServicesVersion"
+    implementation "com.google.android.gms:play-services-maps:$playServicesVersion"
     // somehow there is a transitive play service dependency which we don't want
     configurations.all*.exclude module: "play-services-measurement"
 

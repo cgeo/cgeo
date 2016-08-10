@@ -38,7 +38,7 @@ public class MapsforgeMapController implements MapControllerImpl {
     public void setZoom(final int mapzoom) {
         // Google Maps and OSM Maps use different zoom levels for the same view.
         // All OSM Maps zoom levels are offset by 1 so they match Google Maps.
-        mapController.setZoom(Math.min(mapzoom - 1, maxZoomLevel));
+        mapController.setZoom(Math.min(mapzoom + 1, maxZoomLevel));
     }
 
     @Override
