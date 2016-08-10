@@ -61,7 +61,11 @@ public class DistanceDrawer {
         distanceText = Units.getDistanceFromKilometers(distance);
     }
 
-    void drawDistance(final Canvas canvas) {
+    public Geopoint getDestinationCoords() {
+        return destinationCoords;
+    }
+
+    public void drawDistance(final Canvas canvas) {
         if (distanceText == null) {
             return;
         }

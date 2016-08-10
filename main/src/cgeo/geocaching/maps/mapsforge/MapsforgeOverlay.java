@@ -1,7 +1,6 @@
 package cgeo.geocaching.maps.mapsforge;
 
 import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.maps.PositionAndScaleOverlay;
 import cgeo.geocaching.maps.interfaces.GeneralOverlay;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
 import cgeo.geocaching.maps.interfaces.OverlayImpl;
@@ -17,11 +16,11 @@ import org.mapsforge.v3.android.maps.overlay.Overlay;
 
 public class MapsforgeOverlay extends Overlay implements OverlayImpl {
 
-    private PositionAndScaleOverlay overlayBase = null;
+    private MapsforgePositionAndHistory overlayBase = null;
     private final Lock lock = new ReentrantLock();
 
-    public MapsforgeOverlay(final MapViewImpl mapView, final Geopoint coords, final String geocode) {
-        overlayBase = new PositionAndScaleOverlay(this, mapView, coords, geocode);
+    public MapsforgeOverlay(final MapViewImpl mapView, final Geopoint coords) {
+        overlayBase = new MapsforgePositionAndHistory(this, mapView, coords);
     }
 
     @Override

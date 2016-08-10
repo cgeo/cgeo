@@ -49,11 +49,6 @@
         android:hardwareAccelerated="false"
         android:supportsRtl="true"
         android:largeHeap="true">
-        
-        <!-- Optionally use Google Maps, if available on this device -->
-        <uses-library
-            android:name="com.google.android.maps"
-            android:required="false" />
 
         <!-- Samsung Multi-Window support -->
         <uses-library
@@ -73,7 +68,7 @@
         <meta-data
             android:name="android.app.default_searchable"
             android:value=".SearchActivity" />
-        
+
         <!-- Android Backup Service, to restore settings on new devices. https://developer.android.com/google/backup/index.html -->
         <meta-data
             android:name="com.google.android.backup.api_key"
@@ -83,6 +78,9 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/maps_api_key" />
 
         <!-- support also very wide screen devices. https://developer.android.com/guide/practices/screens_support.html#MaxAspectRatio -->
         <meta-data
@@ -324,7 +322,7 @@
             android:label="@string/map_map" >
         </activity>
         <activity
-            android:name=".maps.google.v1.GoogleMapActivity"
+            android:name=".maps.google.v2.GoogleMapActivity"
             android:label="@string/map_map" >
         </activity>
         <activity
