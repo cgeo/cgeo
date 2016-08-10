@@ -1,4 +1,4 @@
-package cgeo.geocaching.maps;
+package cgeo.geocaching.maps.mapsforge;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.location.Geopoint;

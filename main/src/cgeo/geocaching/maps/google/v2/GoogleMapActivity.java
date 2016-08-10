@@ -1,4 +1,4 @@
-package cgeo.geocaching.maps.google.v1;
+package cgeo.geocaching.maps.google.v2;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
@@ -14,9 +14,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.google.android.maps.MapActivity;
+public class GoogleMapActivity extends Activity implements MapActivityImpl, FilteredActivity {
 
-public class GoogleMapActivity extends MapActivity implements MapActivityImpl, FilteredActivity {
 
     private final AbstractMap mapBase;
 
@@ -24,7 +23,6 @@ public class GoogleMapActivity extends MapActivity implements MapActivityImpl, F
         mapBase = new CGeoMap(this);
     }
 
-    @Override
     public void setTheme(final int resid) {
         if (Settings.isLightSkin()) {
             super.setTheme(R.style.cgeo_gmap_light);
@@ -34,9 +32,6 @@ public class GoogleMapActivity extends MapActivity implements MapActivityImpl, F
     }
 
     @Override
-    protected boolean isRouteDisplayed() {
-        return false;
-    }
 
     @Override
     public Activity getActivity() {
@@ -51,6 +46,11 @@ public class GoogleMapActivity extends MapActivity implements MapActivityImpl, F
     @Override
     protected void onSaveInstanceState(final Bundle outState) {
         mapBase.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onLowMemory() {
+        mapBase.onLowMemory();
     }
 
     @Override

@@ -1,6 +1,6 @@
 package cgeo.geocaching.maps.interfaces;
 
-import android.graphics.drawable.Drawable;
+import cgeo.geocaching.maps.CacheMarker;
 
 /**
  * Common functions of the provider-specific
@@ -10,7 +10,7 @@ public interface OverlayItemImpl {
 
     String getTitle();
 
-    Drawable getMarker(int index);
+    CacheMarker getMarker(int index);
 
-    void setMarker(Drawable markerIn);
+    void setMarker(CacheMarker markerIn);
 }

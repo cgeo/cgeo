@@ -23,7 +23,7 @@ public abstract class AbstractItemizedOverlay implements GeneralOverlay {
         ovlImpl = ovlImplIn;
     }
 
-    void populate() {
+    protected void populate() {
         ovlImpl.superPopulate();
     }
 
@@ -31,11 +31,11 @@ public abstract class AbstractItemizedOverlay implements GeneralOverlay {
         return ovlImpl.superOnTap(index);
     }
 
-    Drawable boundCenterBottom(final Drawable markerIn) {
+    protected Drawable boundCenterBottom(final Drawable markerIn) {
         return ovlImpl.superBoundCenterBottom(markerIn);
     }
 
-    void setLastFocusedItemIndex(final int index) {
+    protected void setLastFocusedItemIndex(final int index) {
         ovlImpl.superSetLastFocusedItemIndex(index);
     }
 
