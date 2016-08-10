@@ -114,7 +114,7 @@
   <string name="log_announcement">Ankündigung</string>
   <string name="log_today">Heute</string>
   <string name="log_yesterday">Gestern</string>
-  <string name="log_smilies">Smilies</string>
+  <string name="log_smilies">Smileys</string>
   <string name="log_image">Bild</string>
   <string name="log_image_attach">Bild hinzufügen</string>
   <string name="log_image_stored">Vorhanden</string>
@@ -542,14 +542,14 @@
   <string name="init_backup_no_backup_available">Es ist kein Backup verfügbar.</string>
   <string name="backup_confirm_overwrite">Möchtest du das existierende Backup vom %s überschreiben?</string>
   <string name="restore_confirm_overwrite">Möchtest du %s auf deinem Gerät mit dem Backup überschreiben?</string>
-  <string name="init_restore_success">Wiederherstellung fertig.</string>
+  <string name="init_restore_success">Wiederherstellung abgeschlossen.</string>
   <string name="init_restore_failed">Wiederherstellung fehlgeschlagen.</string>
   <string name="init_restore_running">Wiederherstellung der Cache-Datenbank…</string>
   <string name="init_restore_confirm">Die Datenbank ist leer. Soll die vorhandene Sicherung wiederhergestellt werden?</string>
   <string name="init_backup_last">Backup verfügbar vom</string>
   <string name="init_backup_last_no">Keine Datei mit Datenbanksicherung gefunden.</string>
   <string name="settings_info_offline_maps_title">Info zu Offline-Karten</string>
-  <string name="settings_info_offline_maps">c:ego ermöglicht es Offline-Karten zu verwenden. Die Karten können bei Mapsforge heruntergeladen werden oder es können eigene Karten aus OSM-Daten erstellt werden. Es muss zuerst ein Verzeichnis mit Offline-Karten angegeben werden, bevor eine Offline-Karte ausgewählt werden kann.</string>
+  <string name="settings_info_offline_maps">c:geo ermöglicht es Offline-Karten zu verwenden. Die Karten können bei Mapsforge heruntergeladen werden oder es können eigene Karten aus OSM-Daten erstellt werden. Es muss zuerst ein Verzeichnis mit Offline-Karten angegeben werden, bevor eine Offline-Karte ausgewählt werden kann.</string>
   <string name="settings_info_themes_title">Info zu Karten-Themes</string>
   <string name="settings_info_themes">c:geo kann eigene Karten-Themes für Offline-Karten verwenden. Du kannst sie benutzen, um die Farbauswahl der Karte (z. B. für eine Nachtansicht) zu verändern oder um bestimmte Objekte wie Radwege oder Höhenlinien hervorzuheben.</string>
   <string name="init_mapsource_select">Kartenquelle wählen</string>
@@ -632,7 +632,7 @@
   <string name="feature_search_owner">Suche nach Besitzer</string>
   <string name="feature_search_finder">Suche nach Finder</string>
   <string name="init_experimental_title">Experimentelle Funktionen</string>
-  <string name="init_mfbeta">Mapsforge beta als Standard</string>
+  <string name="init_mfbeta">Mapsforge Beta als Standard</string>
   <string name="init_mfbeta_description">Der aktuelle Release enthält eine Betaversion unserer neuen Mapsforge-Karte als experimentelles Feature. Dies neue Karte kann hier als Standard für Live-Karte und Listen aktiviert werden.</string>
   <!-- map sources -->
   <string name="map_source_google_map">Google: Karte</string>
@@ -1076,7 +1076,7 @@
   <string name="helper_calendar_pastevent_question">Das Event-Datum liegt in der Vergangenheit. Trotzdem hinzufügen?</string>
   <string name="helper_sendtocgeo_title">Send to c:geo</string>
   <string name="helper_contacts_title"> c:geo Kontakte-Plugin</string>
-  <string name="helper_contacts_description">Ermöglicht das direkte Öffnen von Kontakten (aus dem eigenen Adressbuch) von Logeinträgen aus, so dass man Freunde einfacher um Hilfe fragen kann.</string>
+  <string name="helper_contacts_description">Ermöglicht das direkte Öffnen von Kontakten (aus dem eigenen Adressbuch) von Logeinträgen aus, sodass man Freunde einfacher um Hilfe fragen kann.</string>
   <string name="helper_sendtocgeo_description">Send to c:geo ist eine Browsererweiterung <strong>für Ihren PC</strong>. Beim Durchsuchen von geocaching.com können Sie Caches mit einem Klick im Browser direkt an Ihr Smartphone übermitteln.</string>
   <string name="helper_locus_title">Locus</string>
   <string name="helper_locus_description">Outdoor Navigations-App für dein Handy oder Tablet. Verwende topografische Karten offline, zeichne Tracks von deinen Touren auf, suche Geocaches, benutze Sprachführung und vieles mehr.</string>
