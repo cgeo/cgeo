@@ -1,11 +1,9 @@
 package cgeo.geocaching.maps.mapsforge;
 
-import cgeo.geocaching.maps.CachesOverlay;
 import cgeo.geocaching.maps.interfaces.ItemizedOverlayImpl;
 import cgeo.geocaching.maps.interfaces.MapProjectionImpl;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
 
-import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
@@ -20,17 +18,17 @@ import org.mapsforge.v3.android.maps.overlay.ItemizedOverlay;
 public class MapsforgeCacheOverlay extends ItemizedOverlay<MapsforgeCacheOverlayItem> implements ItemizedOverlayImpl {
 
     @NonNull
-    private final CachesOverlay base;
+    private final MapsforgeCachesList base;
     @NonNull
     private final Lock lock = new ReentrantLock();
 
-    public MapsforgeCacheOverlay(final Context contextIn, final Drawable markerIn) {
-        super(boundCenterBottom(markerIn));
-        base = new CachesOverlay(this, contextIn);
+    public MapsforgeCacheOverlay(final Drawable markerIn) {
+        super(markerIn == null ? null : boundCenterBottom(markerIn));
+        base = new MapsforgeCachesList(this);
     }
 
-    @Override
-    public CachesOverlay getBase() {
+    @NonNull
+    public MapsforgeCachesList getBase() {
         return base;
     }
 

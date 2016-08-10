@@ -1,12 +1,13 @@
-package cgeo.geocaching.maps;
+package cgeo.geocaching.maps.mapsforge;
 
 import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.location.Viewport;
+import cgeo.geocaching.maps.DistanceDrawer;
+import cgeo.geocaching.maps.ScaleDrawer;
 import cgeo.geocaching.maps.interfaces.GeneralOverlay;
 import cgeo.geocaching.maps.interfaces.MapProjectionImpl;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
 import cgeo.geocaching.maps.interfaces.OverlayImpl;
-import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.maps.interfaces.PositionAndHistory;
 
 import android.graphics.Canvas;
 import android.graphics.Point;
@@ -14,7 +15,7 @@ import android.location.Location;
 
 import java.util.ArrayList;
 
-public class PositionAndScaleOverlay implements GeneralOverlay {
+public class MapsforgePositionAndHistory implements GeneralOverlay, PositionAndHistory {
     private OverlayImpl ovlImpl = null;
 
     PositionDrawer positionDrawer = null;
@@ -22,7 +23,7 @@ public class PositionAndScaleOverlay implements GeneralOverlay {
     DirectionDrawer directionDrawer = null;
     DistanceDrawer distanceDrawer = null;
 
-    public PositionAndScaleOverlay(final OverlayImpl ovlImpl, final MapViewImpl mapView, final Geopoint coords, final String geocode) {
+    public MapsforgePositionAndHistory(final OverlayImpl ovlImpl, final MapViewImpl mapView, final Geopoint coords) {
         this.ovlImpl = ovlImpl;
         positionDrawer = new PositionDrawer();
         scaleDrawer = new ScaleDrawer();
@@ -30,15 +31,10 @@ public class PositionAndScaleOverlay implements GeneralOverlay {
         if (coords != null) {
             directionDrawer = new DirectionDrawer(coords);
             distanceDrawer = new DistanceDrawer(mapView, coords);
-        } else if (geocode != null) {
-            final Viewport bounds = DataStore.getBounds(geocode);
-            if (bounds != null) {
-                directionDrawer = new DirectionDrawer(bounds.center);
-                distanceDrawer = new DistanceDrawer(mapView, bounds.center);
-            }
         }
     }
 
+    @Override
     public void setCoordinates(final Location coordinatesIn) {
         positionDrawer.setCoordinates(coordinatesIn);
         if (directionDrawer != null) {
@@ -48,14 +44,17 @@ public class PositionAndScaleOverlay implements GeneralOverlay {
 
     }
 
+    @Override
     public Location getCoordinates() {
         return positionDrawer.getCoordinates();
     }
 
+    @Override
     public void setHeading(final float bearingNow) {
         positionDrawer.setHeading(bearingNow);
     }
 
+    @Override
     public float getHeading() {
         return positionDrawer.getHeading();
     }
@@ -89,11 +88,18 @@ public class PositionAndScaleOverlay implements GeneralOverlay {
         return this.ovlImpl;
     }
 
+    @Override
     public ArrayList<Location> getHistory() {
         return positionDrawer.getHistory();
     }
 
+    @Override
     public void setHistory(final ArrayList<Location> history) {
         positionDrawer.setHistory(history);
+    }
+
+    @Override
+    public void repaintRequired() {
+        ovlImpl.getMapViewImpl().repaintRequired(this);
     }
 }

@@ -2,7 +2,7 @@ package cgeo.geocaching.maps;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
-import cgeo.geocaching.maps.google.v1.GoogleMapProvider;
+import cgeo.geocaching.maps.google.v2.GoogleMapProvider;
 import cgeo.geocaching.maps.interfaces.MapProvider;
 import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider;
@@ -45,7 +45,7 @@ public class MapProviderFactory {
 
         // Check if API is available
         try {
-            Class.forName("com.google.android.maps.MapActivity");
+            Class.forName("com.google.android.gms.maps.MapView");
         } catch (final ClassNotFoundException ignored) {
             return false;
         }

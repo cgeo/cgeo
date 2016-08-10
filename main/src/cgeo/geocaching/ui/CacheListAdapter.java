@@ -382,7 +382,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
         } else {
             holder.logStatusMark.setVisibility(View.GONE);
         }
-        holder.text.setCompoundDrawablesWithIntrinsicBounds(MapUtils.getCacheMarker(res, cache, holder.cacheListType), null, null, null);
+        holder.text.setCompoundDrawablesWithIntrinsicBounds(MapUtils.getCacheMarker(res, cache, holder.cacheListType).getDrawable(), null, null, null);
     }
 
     @Override

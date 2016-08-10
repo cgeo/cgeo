@@ -1,14 +1,18 @@
 package cgeo.geocaching.maps;
 
 import cgeo.geocaching.CacheListActivity;
+import cgeo.geocaching.CachePopup;
 import cgeo.geocaching.CompassActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
+import cgeo.geocaching.WaypointPopup;
 import cgeo.geocaching.activity.ActivityMixin;
-import cgeo.geocaching.compatibility.Compatibility;
+import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.connector.ConnectorFactory;
+import cgeo.geocaching.connector.gc.GCMap;
 import cgeo.geocaching.connector.gc.Tile;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.enumerations.CoordinatesType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.RemoveFlag;
 import cgeo.geocaching.enumerations.WaypointType;
@@ -16,17 +20,22 @@ import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.interfaces.CachesOverlayItemImpl;
+import cgeo.geocaching.maps.interfaces.GeneralOverlay;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
 import cgeo.geocaching.maps.interfaces.MapActivityImpl;
 import cgeo.geocaching.maps.interfaces.MapControllerImpl;
 import cgeo.geocaching.maps.interfaces.MapItemFactory;
 import cgeo.geocaching.maps.interfaces.MapProvider;
+import cgeo.geocaching.maps.interfaces.MapReadyCallback;
 import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
+import cgeo.geocaching.maps.interfaces.OnCacheTapListener;
 import cgeo.geocaching.maps.interfaces.OnMapDragListener;
+import cgeo.geocaching.maps.interfaces.PositionAndHistory;
 import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.maps.routing.RoutingMode;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.IWaypoint;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.network.AndroidBeam;
 import cgeo.geocaching.permission.PermissionHandler;
@@ -50,12 +59,14 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.Menu;
@@ -94,7 +105,7 @@ import org.apache.commons.lang3.StringUtils;
 /**
  * Class representing the Map in c:geo
  */
-public class CGeoMap extends AbstractMap implements ViewFactory {
+public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListener {
 
     /**
      * max. number of caches displayed in the Live Map
@@ -125,9 +136,10 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
     private Activity activity;
     private MapItemFactory mapItemFactory;
     private final LeastRecentlyUsedSet<Geocache> caches = new LeastRecentlyUsedSet<>(MAX_CACHES + DataStore.getAllCachesCount());
-    private MapViewImpl mapView;
-    private CachesOverlay overlayCaches;
-    private PositionAndScaleOverlay overlayPositionAndScale;
+    private MapViewImpl<CachesOverlayItemImpl> mapView;
+    private PositionAndHistory overlayPositionAndScale;
+    private final Progress progress = new Progress();
+
 
     private final GeoDirHandler geoDirUpdate = new UpdateLoc(this);
     // status data
@@ -388,15 +400,80 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
     }
 
     protected void countVisibleCaches() {
-        cachesCnt = mapView.getViewport().count(caches.getAsList());
+        final Viewport viewport = mapView.getViewport();
+        cachesCnt =  viewport == null ? caches.size() : viewport.count(caches.getAsList());
     }
 
     @Override
     public void onSaveInstanceState(final Bundle outState) {
+        mapView.onSaveInstanceState(outState);
         outState.putInt(BUNDLE_MAP_SOURCE, currentSourceId);
         outState.putParcelable(BUNDLE_MAP_STATE, currentMapState());
         outState.putBoolean(BUNDLE_LIVE_ENABLED, mapOptions.isLiveEnabled);
-        outState.putParcelableArrayList(BUNDLE_TRAIL_HISTORY, overlayPositionAndScale.getHistory());
+        outState.putParcelableArrayList(BUNDLE_TRAIL_HISTORY, overlayPositionAndScale == null ? new ArrayList<Parcelable>() : overlayPositionAndScale.getHistory());
+    }
+
+    @Override
+    public void onLowMemory() {
+        mapView.onLowMemory();
+    }
+
+    protected Geopoint getIntentCoords() {
+        if (mapOptions.coords != null) {
+            return mapOptions.coords;
+        } else
+        if (mapOptions.geocode != null) {
+            final Viewport bounds = DataStore.getBounds(mapOptions.geocode);
+            if (bounds != null) {
+                return bounds.center;
+            }
+        }
+        return null;
+    }
+
+    protected void initializeMap(final ArrayList<Location> trailHistory) {
+
+        mapView.setMapSource();
+        mapView.setBuiltInZoomControls(true);
+        mapView.displayZoomControls(true);
+        mapView.setOnDragListener(new MapDragListener(this));
+
+        // initialize overlays
+        mapView.clearOverlays();
+
+        mapView.setOnTapListener(this);
+
+        final Geopoint savedCoords = mapOptions.coords;  // remember for centerMap
+        if (mapOptions.mapMode == MapMode.LIVE && savedCoords != null) {
+            mapOptions.coords = null;   // no direction line, even if enabled in settings
+            followMyLocation = false;   // do not center on GPS position, even if in LIVE mode
+        }
+
+        overlayPositionAndScale = mapView.createAddPositionAndScaleOverlay(getIntentCoords());
+        if (trailHistory != null) {
+            overlayPositionAndScale.setHistory(trailHistory);
+        }
+
+        // prepare circular progress spinner
+        spinner = (ProgressBar) activity.findViewById(R.id.map_progressbar);
+        spinner.setVisibility(View.GONE);
+
+        mapView.repaintRequired(null);
+
+        setZoom(Settings.getMapZoom(mapOptions.mapMode));
+        mapView.getMapController().setCenter(Settings.getMapCenter());
+
+        if (mapOptions.mapState == null) {
+            followMyLocation = followMyLocation && (mapOptions.mapMode == MapMode.LIVE);
+        } else {
+            followMyLocation = mapOptions.mapState.followsMyLocation();
+            if (mapView.getCircles() != mapOptions.mapState.showsCircles()) {
+                mapView.switchCircles();
+            }
+        }
+        if (mapOptions.geocode != null || mapOptions.searchResult != null || savedCoords != null || mapOptions.mapState != null) {
+            centerMap(mapOptions.geocode, mapOptions.searchResult, savedCoords, mapOptions.mapState);
+        }
     }
 
     @Override
@@ -414,7 +491,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         final Bundle extras = activity.getIntent().getExtras();
         mapOptions = new MapOptions(activity, extras);
 
-        ArrayList<Location> trailHistory = null;
+        final ArrayList<Location> trailHistory;
 
         // Get fresh map information from the bundle if any
         if (savedInstanceState != null) {
@@ -424,6 +501,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
             trailHistory = savedInstanceState.getParcelableArrayList(BUNDLE_TRAIL_HISTORY);
         } else {
             currentSourceId = Settings.getMapSource().getNumericalId();
+            trailHistory = null;
         }
 
         // If recreating from an obsolete map source, we may need a restart
@@ -445,48 +523,23 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
         // initialize map
         mapView = (MapViewImpl) activity.findViewById(mapProvider.getMapViewId());
-        mapView.setMapSource();
-        mapView.setBuiltInZoomControls(true);
-        mapView.displayZoomControls(true);
-        mapView.preLoad();
-        mapView.setOnDragListener(new MapDragListener(this));
 
-        // initialize overlays
-        mapView.clearOverlays();
-
-        overlayCaches = mapView.createAddMapOverlay(mapView.getContext(), Compatibility.getDrawable(getResources(), R.drawable.marker));
-
-        final Geopoint savedCoords = mapOptions.coords;  // remember for centerMap
-        if (mapOptions.mapMode == MapMode.LIVE && savedCoords != null) {
-            mapOptions.coords = null;   // no direction line, even if enabled in settings
-            followMyLocation = false;   // do not center on GPS position, even if in LIVE mode
+        // added keys must be removed before passing bundle to google's mapView, otherwise this will be thrown:
+        // ClassNotFoundException: Didn't find class "cgeo.geocaching.sensors.GeoData"
+        // solution from http://stackoverflow.com/questions/13900322/badparcelableexception-in-google-maps-code/15572337#15572337
+        if (savedInstanceState != null) {
+            savedInstanceState.remove(BUNDLE_MAP_SOURCE);
+            savedInstanceState.remove(BUNDLE_MAP_STATE);
+            savedInstanceState.remove(BUNDLE_TRAIL_HISTORY);
         }
+        mapView.onCreate(savedInstanceState);
 
-        overlayPositionAndScale = mapView.createAddPositionAndScaleOverlay(mapOptions.coords, mapOptions.geocode);
-        if (trailHistory != null) {
-            overlayPositionAndScale.setHistory(trailHistory);
-        }
-
-        // prepare circular progress spinner
-        spinner = (ProgressBar) activity.findViewById(R.id.map_progressbar);
-        spinner.setVisibility(View.GONE);
-
-        mapView.repaintRequired(null);
-
-        setZoom(Settings.getMapZoom(mapOptions.mapMode));
-        mapView.getMapController().setCenter(Settings.getMapCenter());
-
-        if (mapOptions.mapState != null) {
-            followMyLocation = mapOptions.mapState.followsMyLocation();
-            if (overlayCaches.getCircles() != mapOptions.mapState.showsCircles()) {
-                overlayCaches.switchCircles();
+        mapView.onMapReady(new MapReadyCallback() {
+            @Override
+            public void mapReady() {
+                initializeMap(trailHistory);
             }
-        } else if (mapOptions.mapMode != MapMode.LIVE) {
-            followMyLocation = false;
-        }
-        if (mapOptions.geocode != null || mapOptions.searchResult != null || savedCoords != null || mapOptions.mapState != null) {
-            centerMap(mapOptions.geocode, mapOptions.searchResult, savedCoords, mapOptions.mapState);
-        }
+        });
 
         prepareFilterBar();
 
@@ -532,6 +585,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
                     @Override
                     public void executeAfter() {
+                        mapView.onResume();
                         resumeDisposables.addAll(geoDirUpdate.start(GeoDirHandler.UPDATE_GEODIR), startTimer());
                     }
                 });
@@ -565,9 +619,12 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
         mapView.destroyDrawingCache();
 
+        // do not clear cached items - BitmapDescriptoCache needs same Drawables, not new ones created
+        // after cache is cleared, or TODO implement ComparableDrawable?
         MapUtils.clearCachedItems();
 
         super.onPause();
+        mapView.onPause();
     }
 
     @Override
@@ -575,6 +632,14 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         // Ensure that handlers will not try to update the dialog once the view is detached.
         waitDialog = null;
         super.onStop();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mapView != null) { // avoid occasionally NPE
+            mapView.onDestroy();
+        }
     }
 
     @Override
@@ -615,7 +680,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
             menu.findItem(R.id.menu_mycaches_mode).setChecked(Settings.isExcludeMyCaches());
             menu.findItem(R.id.menu_disabled_mode).setChecked(Settings.isExcludeDisabledCaches());
             menu.findItem(R.id.menu_direction_line).setChecked(Settings.isMapDirection());
-            menu.findItem(R.id.menu_circle_mode).setChecked(overlayCaches.getCircles());
+            menu.findItem(R.id.menu_circle_mode).setChecked(mapView.getCircles());
             menu.findItem(R.id.menu_trail_mode).setChecked(Settings.isMapTrail());
 
             menu.findItem(R.id.menu_theme_mode).setVisible(mapView.hasMapThemes());
@@ -657,12 +722,12 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
                 return true;
             case R.id.menu_trail_mode:
                 Settings.setMapTrail(!Settings.isMapTrail());
-                mapView.repaintRequired(overlayPositionAndScale);
+                mapView.repaintRequired(overlayPositionAndScale instanceof GeneralOverlay ? ((GeneralOverlay) overlayPositionAndScale) : null);
                 ActivityMixin.invalidateOptionsMenu(activity);
                 return true;
             case R.id.menu_direction_line:
                 Settings.setMapDirection(!Settings.isMapDirection());
-                mapView.repaintRequired(overlayPositionAndScale);
+                mapView.repaintRequired(overlayPositionAndScale instanceof GeneralOverlay ? ((GeneralOverlay) overlayPositionAndScale) : null);
                 ActivityMixin.invalidateOptionsMenu(activity);
                 return true;
             case R.id.menu_map_live:
@@ -684,8 +749,8 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
             case R.id.menu_store_unsaved_caches:
                 return storeCaches(getUnsavedGeocodes(getGeocodesForCachesInViewport()));
             case R.id.menu_circle_mode:
-                overlayCaches.switchCircles();
-                mapView.repaintRequired(overlayCaches);
+                mapView.switchCircles();
+                mapView.repaintRequired(null);
                 ActivityMixin.invalidateOptionsMenu(activity);
                 return true;
             case R.id.menu_mycaches_mode:
@@ -714,32 +779,32 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
             case R.id.menu_clear_trailhistory: {
                 DataStore.clearTrailHistory();
                 overlayPositionAndScale.setHistory(new ArrayList<Location>());
-                mapView.repaintRequired(overlayPositionAndScale);
+                mapView.repaintRequired(overlayPositionAndScale instanceof GeneralOverlay ? ((GeneralOverlay) overlayPositionAndScale) : null);
                 ActivityMixin.showToast(activity, res.getString(R.string.map_trailhistory_cleared));
                 return true;
             }
             case R.id.menu_routing_straight: {
                 item.setChecked(true);
                 Settings.setRoutingMode(RoutingMode.STRAIGHT);
-                mapView.repaintRequired(overlayPositionAndScale);
+                mapView.repaintRequired(overlayPositionAndScale instanceof GeneralOverlay ? ((GeneralOverlay) overlayPositionAndScale) : null);
                 return true;
             }
             case R.id.menu_routing_walk: {
                 item.setChecked(true);
                 Settings.setRoutingMode(RoutingMode.WALK);
-                mapView.repaintRequired(overlayPositionAndScale);
+                mapView.repaintRequired(overlayPositionAndScale instanceof GeneralOverlay ? ((GeneralOverlay) overlayPositionAndScale) : null);
                 return true;
             }
             case R.id.menu_routing_bike: {
                 item.setChecked(true);
                 Settings.setRoutingMode(RoutingMode.BIKE);
-                mapView.repaintRequired(overlayPositionAndScale);
+                mapView.repaintRequired(overlayPositionAndScale instanceof GeneralOverlay ? ((GeneralOverlay) overlayPositionAndScale) : null);
                 return true;
             }
             case R.id.menu_routing_car: {
                 item.setChecked(true);
                 Settings.setRoutingMode(RoutingMode.CAR);
-                mapView.repaintRequired(overlayPositionAndScale);
+                mapView.repaintRequired(overlayPositionAndScale instanceof GeneralOverlay ? ((GeneralOverlay) overlayPositionAndScale) : null);
                 return true;
             }
             case R.id.menu_hint:
@@ -848,6 +913,11 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
         final Viewport viewport = mapView.getViewport();
 
+        if (viewport == null) {
+            // fail safe check
+            return Collections.emptySet();
+        }
+
         for (final Geocache cache : cachesProtected) {
             if (viewport.contains(cache)) {
                 geocodes.add(cache.getGeocode());
@@ -874,7 +944,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
      * @return true if a restart is needed, false otherwise
      */
     private boolean changeMapSource(@NonNull final MapSource newSource) {
-        final MapSource oldSource = MapProviderFactory.getMapSource(currentSourceId);
+        final MapSource oldSource = Settings.getMapSource();
         final boolean restartRequired = oldSource == null || !MapProviderFactory.isSameActivity(oldSource, newSource);
 
         Settings.setMapSource(newSource);
@@ -915,7 +985,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         }
         final GeoPointImpl mapCenter = mapView.getMapViewCenter();
         // For the 'old' map, isStoredEnabled == isLiveEnabled
-        return new MapState(mapCenter.getCoords(), mapView.getMapZoomLevel(), followMyLocation, overlayCaches.getCircles(), null, null, mapOptions.isLiveEnabled, mapOptions.isLiveEnabled);
+        return new MapState(mapCenter.getCoords(), mapView.getMapZoomLevel(), followMyLocation, mapView.getCircles(), null, null, mapOptions.isLiveEnabled, mapOptions.isLiveEnabled);
     }
 
     private void savePrefs() {
@@ -971,7 +1041,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
                 try {
                     final CGeoMap map = mapRef.get();
-                    if (map != null) {
+                    if (map != null && map.overlayPositionAndScale != null) {
                         final boolean needsRepaintForDistanceOrAccuracy = needsRepaintForDistanceOrAccuracy();
                         final boolean needsRepaintForHeading = needsRepaintForHeading();
 
@@ -979,11 +1049,17 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
                             map.centerMap(new Geopoint(currentLocation));
                         }
 
-                        if (needsRepaintForDistanceOrAccuracy || needsRepaintForHeading) {
-
+                        if (needsRepaintForDistanceOrAccuracy) {
                             map.overlayPositionAndScale.setCoordinates(currentLocation);
-                            map.overlayPositionAndScale.setHeading(currentHeading);
-                            map.mapView.repaintRequired(map.overlayPositionAndScale);
+                        }
+
+                        if (needsRepaintForHeading) {
+                            final float mapBearing = map.mapView.getBearing();
+                            map.overlayPositionAndScale.setHeading(currentHeading + mapBearing);
+                        }
+
+                        if (needsRepaintForDistanceOrAccuracy || needsRepaintForHeading) {
+                            map.overlayPositionAndScale.repaintRequired();
                         }
                     }
                 } catch (final RuntimeException e) {
@@ -994,7 +1070,10 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
         boolean needsRepaintForHeading() {
             final CGeoMap map = mapRef.get();
-            return map != null && Math.abs(AngleUtils.difference(currentHeading, map.overlayPositionAndScale.getHeading())) > MIN_HEADING_DELTA;
+            if (map == null || map.overlayPositionAndScale == null) {
+                return false;
+            }
+            return Math.abs(AngleUtils.difference(currentHeading, map.overlayPositionAndScale.getHeading())) > MIN_HEADING_DELTA;
         }
 
         boolean needsRepaintForDistanceOrAccuracy() {
@@ -1002,7 +1081,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
             if (map == null) {
                 return false;
             }
-            final Location lastLocation = map.overlayPositionAndScale.getCoordinates();
+            final Location lastLocation = map.overlayPositionAndScale != null ? map.overlayPositionAndScale.getCoordinates() : null;
 
             float dist = Float.MAX_VALUE;
             if (lastLocation != null) {
@@ -1060,6 +1139,9 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
             try {
                 // get current viewport
                 final Viewport viewportNow = map.mapView.getViewport();
+                if (viewportNow == null) {
+                    return;
+                }
                 // Since zoomNow is used only for local comparison purposes,
                 // it is ok to use the Google Maps compatible zoom level of OSM Maps
                 final int zoomNow = map.mapView.getMapZoomLevel();
@@ -1245,13 +1327,17 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
     }
 
     private void doDisplayRun() {
+        // don't add anything to mapView if just one point should be displayed
+        if (mapOptions.coords != null) {
+            return;
+        }
         try {
             showProgressHandler.sendEmptyMessage(SHOW_PROGRESS);
 
             // display caches
             final List<Geocache> cachesToDisplay = caches.getAsList();
             final List<Waypoint> waypointsToDisplay = new ArrayList<>(waypoints);
-            final List<CachesOverlayItemImpl> itemsToDisplay = new ArrayList<>();
+            final Set<CachesOverlayItemImpl> itemsToDisplay = new HashSet<>();
 
             if (!cachesToDisplay.isEmpty()) {
                 // Only show waypoints for single view or setting
@@ -1271,7 +1357,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
             }
             // don't add other waypoints to overlayCaches if just one point should be displayed
             if (mapOptions.coords == null) {
-                overlayCaches.updateItems(itemsToDisplay);
+                mapView.updateItems(itemsToDisplay);
             }
             displayHandler.sendEmptyMessage(INVALIDATE_MAP);
 
@@ -1286,7 +1372,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         waypoint.setCoords(coords);
 
         final CachesOverlayItemImpl item = getWaypointItem(waypoint);
-        overlayCaches.updateItems(item);
+        mapView.updateItems(Collections.singletonList(item));
         displayHandler.sendEmptyMessage(INVALIDATE_MAP);
         updateMapTitle();
 
@@ -1581,6 +1667,68 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         final CachesOverlayItemImpl item = mapItemFactory.getCachesOverlayItem(waypoint, waypoint.getWaypointType().applyDistanceRule());
         item.setMarker(MapUtils.getWaypointMarker(getResources(), waypoint));
         return item;
+    }
+
+
+    @Override
+    public void onCacheTap(final IWaypoint waypoint) {
+        final Context context = mapView.getContext();
+
+        progress.show(context, context.getResources().getString(R.string.map_live), context.getResources().getString(R.string.cache_dialog_loading_details), true, null);
+
+        if (waypoint == null) {
+            return;
+        }
+
+        final CoordinatesType coordType = waypoint.getCoordType();
+
+        if (coordType == CoordinatesType.CACHE && StringUtils.isNotBlank(waypoint.getGeocode())) {
+            final Geocache cache = DataStore.loadCache(waypoint.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
+            if (cache != null) {
+                final RequestDetailsThread requestDetailsThread = new RequestDetailsThread(cache);
+                if (!requestDetailsThread.requestRequired()) {
+                    // don't show popup if we have enough details
+                    progress.dismiss();
+                }
+                requestDetailsThread.start();
+                return;
+            }
+            progress.dismiss();
+            return;
+        }
+
+        if (coordType == CoordinatesType.WAYPOINT && waypoint.getId() >= 0) {
+            CGeoMap.markCacheAsDirty(waypoint.getGeocode());
+            WaypointPopup.startActivity(context, waypoint.getId(), waypoint.getGeocode());
+        } else {
+            progress.dismiss();
+            return;
+        }
+
+        progress.dismiss();
+    }
+
+    private class RequestDetailsThread extends Thread {
+
+        @NonNull private final Geocache cache;
+
+        RequestDetailsThread(@NonNull final Geocache cache) {
+            this.cache = cache;
+        }
+
+        public boolean requestRequired() {
+            return cache.getType() == CacheType.UNKNOWN || cache.getDifficulty() == 0;
+        }
+
+        @Override
+        public void run() {
+            if (requestRequired()) {
+                GCMap.searchByGeocodes(Collections.singleton(cache.getGeocode()));
+            }
+            CGeoMap.markCacheAsDirty(cache.getGeocode());
+            CachePopup.startActivity(mapView.getContext(), cache.getGeocode());
+            progress.dismiss();
+        }
     }
 
 }

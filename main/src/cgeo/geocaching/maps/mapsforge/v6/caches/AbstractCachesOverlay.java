@@ -312,7 +312,7 @@ public abstract class AbstractCachesOverlay {
         if (isDotMode) {
             marker = AndroidGraphicFactory.convertToBitmap(MapUtils.createCacheDotMarker(CgeoApplication.getInstance().getResources(), cache));
         } else {
-            marker = AndroidGraphicFactory.convertToBitmap(MapUtils.getCacheMarker(CgeoApplication.getInstance().getResources(), cache));
+            marker = AndroidGraphicFactory.convertToBitmap(MapUtils.getCacheMarker(CgeoApplication.getInstance().getResources(), cache).getDrawable());
         }
         return new GeoitemLayer(cache.getGeoitemRef(), tapHandler, new LatLong(target.getLatitude(), target.getLongitude()), marker, 0, -marker.getHeight() / 2);
     }
@@ -324,7 +324,7 @@ public abstract class AbstractCachesOverlay {
             if (isDotMode) {
                 marker = AndroidGraphicFactory.convertToBitmap(MapUtils.createWaypointDotMarker(CgeoApplication.getInstance().getResources(), waypoint));
             } else {
-                marker = AndroidGraphicFactory.convertToBitmap(MapUtils.getWaypointMarker(CgeoApplication.getInstance().getResources(), waypoint));
+                marker = AndroidGraphicFactory.convertToBitmap(MapUtils.getWaypointMarker(CgeoApplication.getInstance().getResources(), waypoint).getDrawable());
             }
             return new GeoitemLayer(waypoint.getGeoitemRef(), tapHandler, new LatLong(target.getLatitude(), target.getLongitude()), marker, 0, -marker.getHeight() / 2);
         }
