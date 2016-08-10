@@ -3,7 +3,7 @@
   <!-- changelog for the master branch -->
   <string name="changelog_master" translatable="false">
     <b>Next feature release:</b>\n
-    · <i>Nothing yet</i>
+    · <i>Fix: Attribute filter now lists non GC attributes</i>
     \n
     \n
   </string>
