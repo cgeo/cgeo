@@ -67,8 +67,10 @@ public final class NavigationAppFactory {
         NAVIGON(new NavigonApp(), 10, R.string.pref_navigation_menu_navigon),
         /** The external Sygic app in walking mode */
         SYGIC_WALKING(new SygicNavigationWalkingApp(), 11, R.string.pref_navigation_menu_sygic_walking),
-        /** The external Sygic app in walking mode */
+        /** The external Sygic app in driving mode */
         SYGIC_DRIVING(new SygicNavigationDrivingApp(), 23, R.string.pref_navigation_menu_sygic_driving),
+        /** The external OsmAnd app */
+        OSM_AND(new OsmAndApp(), 26, R.string.pref_navigation_menu_osmand),
         /** Google Navigation in walking mode */
         GOOGLE_NAVIGATION_WALK(new GoogleNavigationWalkingApp(), 12, R.string.pref_navigation_menu_google_walk),
         /** Google Navigation in bike mode */

@@ -154,6 +154,7 @@
     <string translatable="false" name="pref_navigation_menu_navigon">navigationNavigon</string>
     <string translatable="false" name="pref_navigation_menu_sygic_walking">navigationSygicWalking</string>
     <string translatable="false" name="pref_navigation_menu_sygic_driving">navigationSygicDriving</string>
+    <string translatable="false" name="pref_navigation_menu_osmand">navigationOsmAnd</string>
     <string translatable="false" name="pref_navigation_menu_google_walk">navigationGoogleWalk</string>
     <string translatable="false" name="pref_navigation_menu_google_transit">navigationGoogleTransit</string>
     <string translatable="false" name="pref_navigation_menu_google_bike">navigationGoogleBike</string>

@@ -737,6 +737,11 @@
                 <CheckBoxPreference
                     android:defaultValue="true"
                     android:enabled="false"
+                    android:key="@string/pref_navigation_menu_osmand"
+                    android:title="@string/cache_menu_osmand" />
+                <CheckBoxPreference
+                    android:defaultValue="true"
+                    android:enabled="false"
                     android:key="@string/pref_navigation_menu_google_walk"
                     android:title="@string/cache_menu_navigation_walk" />
                 <CheckBoxPreference
