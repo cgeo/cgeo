@@ -16,6 +16,7 @@ import android.os.Handler;
 import android.support.v4.content.AsyncTaskLoader;
 import android.widget.Toast;
 
+import java.lang.ref.WeakReference;
 import java.util.Collection;
 import java.util.concurrent.CountDownLatch;
 
@@ -43,7 +44,7 @@ public abstract class AbstractSearchLoader extends AsyncTaskLoader<SearchResult>
         }
     }
 
-    private final Activity activity;
+    private final WeakReference<Activity> activityRef;
     private Handler recaptchaHandler = null;
     private String recaptchaChallenge = null;
     private String recaptchaKey = null;
@@ -60,11 +61,14 @@ public abstract class AbstractSearchLoader extends AsyncTaskLoader<SearchResult>
      * Run {@link SearchResult#parallelCombineActive(Collection, Func1)} if there is at least one active connector
      * in <tt>connectors</tt>, and throw <tt>NoConnectorException</tt> otherwise.
      *
-     * @param connectors a collection of connectors
-     * @param func a function to apply to every connector
-     * @param <C> the type of connectors
-     * @return the result of {@link SearchResult#parallelCombineActive(Collection, Func1)} if there is ast least one
-     * active connector
+     * @param connectors
+     *            a collection of connectors
+     * @param func
+     *            a function to apply to every connector
+     * @param <C>
+     *            the type of connectors
+     * @return the result of {@link SearchResult#parallelCombineActive(Collection, Func1)} if there is at least one
+     *         active connector
      */
     protected <C extends IConnector> SearchResult nonEmptyCombineActive(final Collection<C> connectors,
                                                                         final Func1<C, SearchResult> func) {
@@ -77,9 +81,9 @@ public abstract class AbstractSearchLoader extends AsyncTaskLoader<SearchResult>
     }
 
 
-    public AbstractSearchLoader(final Activity activity) {
+    protected AbstractSearchLoader(final Activity activity) {
         super(activity);
-        this.activity = activity;
+        this.activityRef = new WeakReference<>(activity);
     }
 
     public abstract SearchResult runSearch();
@@ -99,13 +103,16 @@ public abstract class AbstractSearchLoader extends AsyncTaskLoader<SearchResult>
                 search = new SearchResult(search);
             }
         } catch (final NoConnectorException ignored) {
-            activity.runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    Toast.makeText(activity, R.string.warn_no_connector, Toast.LENGTH_LONG).show();
-                    activity.finish();
-                }
-            });
+            final Activity activity = activityRef.get();
+            if (activity != null) {
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(activity, R.string.warn_no_connector, Toast.LENGTH_LONG).show();
+                        activity.finish();
+                    }
+                });
+            }
         } catch (final Exception e) {
             Log.e("Error in Loader ", e);
         }
