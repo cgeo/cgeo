@@ -52,22 +52,11 @@
                     android:layout_alignParentLeft="true"
                     android:layout_gravity="left"
                     android:layout_marginLeft="6dip"
-                    android:layout_marginRight="100dip"
+                    android:layout_marginRight="51dip"
                     android:paddingRight="3dip"
                     android:textColor="?text_color"
                     android:textIsSelectable="false"
                     android:textSize="14sp" />
-
-                <ImageButton
-                    android:id="@+id/offline_drop"
-                    style="@style/button_small"
-                    android:src="@drawable/ic_menu_delete"
-                    android:layout_width="40dip"
-                    android:layout_height="40dip"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="51dip"
-                    android:visibility="gone"
-                    tools:visibility="visible"/>
 
                 <ImageButton
                     android:id="@+id/offline_refresh"
@@ -88,21 +77,32 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_marginLeft="6dip"
-                android:layout_marginRight="51dip"
+                android:layout_marginRight="100dip"
                 android:paddingRight="3dip"
                 android:textColor="?text_color"
                 android:textIsSelectable="false"
                 android:textSize="14sp"
                 tools:text="list 1, list 2"/>
 
-            <ImageButton
-                android:id="@+id/offline_store"
-                style="@style/button_small"
-                android:src="@drawable/ic_menu_save"
-                android:layout_width="40dip"
-                android:layout_height="40dip"
-                android:layout_marginLeft="2dip"
-                android:layout_alignParentRight="true"/>
+                <ImageButton
+                    android:id="@+id/offline_edit"
+                    style="@style/button_small"
+                    android:src="@drawable/ic_menu_edit"
+                    android:layout_width="40dip"
+                    android:layout_height="40dip"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="51dip"
+                    android:visibility="gone"
+                    tools:visibility="visible"/>
+
+                <ImageButton
+                    android:id="@+id/offline_store_drop"
+                    style="@style/button_small"
+                    android:src="@drawable/ic_menu_save"
+                    android:layout_width="40dip"
+                    android:layout_height="40dip"
+                    android:layout_marginLeft="2dip"
+                    android:layout_alignParentRight="true"/>
             </RelativeLayout>
 
         </LinearLayout>
