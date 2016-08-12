@@ -3,6 +3,7 @@ package cgeo.geocaching.utils;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.support.annotation.Nullable;
 
 public class Version {
 
@@ -39,6 +40,17 @@ public class Version {
     public static int getVersionCode(final Context context) {
         final PackageInfo packageInfo = getPackageInfo(context);
         return packageInfo != null ? packageInfo.versionCode : -1;
+    }
+
+    /**
+     * Get the current package installer if available.
+     *
+     * @param context the context to use
+     * @return the current package installer
+     */
+    @Nullable
+    public static String getPackageInstaller(final Context context) {
+        return context.getPackageManager().getInstallerPackageName(context.getPackageName());
     }
 
 }
