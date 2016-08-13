@@ -22,6 +22,7 @@
     · Fix: Show attributes for OpenCaching GPX imports\n
     · Fix: Recognize BMP as spoiler format\n
     · Fix: Maps.me API change led to caches not opening from that app\n
+    · Fix: Language change when rotating the device\n
     \n
     \n
     <b>2016.06.09:</b>\n
