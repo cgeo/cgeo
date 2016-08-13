@@ -93,6 +93,13 @@ public class CgeoApplication extends Application {
         }
     }
 
+    @Override
+    public void onConfigurationChanged(final Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+
+        initApplicationLocale();
+    }
+
     private void showOverflowMenu() {
         try {
             final ViewConfiguration config = ViewConfiguration.get(this);

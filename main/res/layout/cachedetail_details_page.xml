@@ -101,13 +101,6 @@
                     android:layout_alignParentRight="true" >
 
                     <ImageButton
-                        android:id="@+id/offline_drop"
-                        style="@style/button_small"
-                        android:src="@drawable/ic_menu_delete"
-                        android:layout_width="40dip"
-                        android:layout_height="40dip"/>
-
-                    <ImageButton
                         android:id="@+id/offline_refresh"
                         style="@style/button_small"
                         android:src="@drawable/ic_menu_refresh"
@@ -130,7 +123,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
                     android:layout_alignParentLeft="true"
-                    android:layout_toLeftOf="@+id/offline_store"
+                    android:layout_toLeftOf="@+id/offline_edit"
                     android:layout_marginLeft="6dip"
                     android:layout_marginRight="6dip"
                     android:paddingRight="3dip"
@@ -138,8 +131,17 @@
                     android:textSize="14sp"
                     tools:text="list 1, list 2, list 3, and many, many, many, many, many more lists"
                     android:textIsSelectable="false" />
+
                 <ImageButton
-                    android:id="@+id/offline_store"
+                    android:id="@+id/offline_edit"
+                    style="@style/button_small"
+                    android:src="@drawable/ic_menu_edit"
+                    android:layout_toLeftOf="@+id/offline_store_drop"
+                    android:layout_width="40dip"
+                    android:layout_height="40dip"/>
+
+                <ImageButton
+                    android:id="@+id/offline_store_drop"
                     style="@style/button_small"
                     android:src="@drawable/ic_menu_save"
                     android:layout_alignParentRight="true"
