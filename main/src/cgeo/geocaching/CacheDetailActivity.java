@@ -2269,19 +2269,15 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
             offlineText.setText(res.getString(R.string.cache_offline_stored) + "\n" + ago);
 
-            if (offlineStoreDrop != null) {
-                offlineStoreDrop.setOnClickListener(dropCacheClickListener);
-                offlineStoreDrop.setClickable(true);
-                offlineStoreDrop.setImageResource(R.drawable.ic_menu_delete);
-            }
+            offlineStoreDrop.setOnClickListener(dropCacheClickListener);
+            offlineStoreDrop.setClickable(true);
+            offlineStoreDrop.setImageResource(R.drawable.ic_menu_delete);
 
             offlineEdit.setVisibility(View.VISIBLE);
             offlineEdit.setOnClickListener(storeCacheClickListener);
         } else {
             offlineText.setText(res.getString(R.string.cache_offline_not_ready));
-            if (offlineStoreDrop != null) {
-                offlineStoreDrop.setImageResource(R.drawable.ic_menu_save);
-            }
+            offlineStoreDrop.setImageResource(R.drawable.ic_menu_save);
 
             offlineEdit.setVisibility(View.GONE);
         }
