@@ -140,7 +140,7 @@
   <string name="translate_length_warning">Die Übersetzung kann bei sehr langen Texten evtl. fehlschlagen.</string>
   <!-- errors, warnings, info toasts -->
   <string name="err_none">OK</string>
-  <string name="err_parse">Parsen der Anmeldeseite fehlgeschlagen</string>
+  <string name="err_parse">Verarbeiten der Anmeldeseite fehlgeschlagen</string>
   <string name="err_server">Verbindung zu Geocaching.com konnte nicht hergestellt werden (Server oder Verbindung inaktiv?)</string>
   <string name="err_server_ec">Verbindung zu Extremcaching.com konnte nicht hergestellt werden. Server ist nicht verfügbar oder keine Internet-Verbindung vorhanden.</string>
   <string name="err_server_gk">Verbindung zu GeoKrety.org konnte nicht hergestellt werden. Server ist nicht verfügbar oder keine Internet-Verbindung vorhanden.</string>
