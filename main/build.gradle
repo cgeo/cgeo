@@ -270,7 +270,7 @@ dependencies {
     androidTestCompile 'com.google.code.findbugs:annotations:3.0.1u2'
 
     // Reactive extensions
-    compile 'io.reactivex:rxjava:1.1.8'
+    compile 'io.reactivex:rxjava:1.1.9'
     compile 'io.reactivex:rxandroid:0.25.0'
 
     // Jackson XML processing
