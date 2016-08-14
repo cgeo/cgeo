@@ -1,7 +1,6 @@
 package cgeo.geocaching.apps.navi;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
@@ -35,20 +34,16 @@ public class OsmAndApp extends AbstractPointNavigationApp {
 
     @Override
     public void navigate(@NonNull final Activity activity, @NonNull final Geocache cache) {
-        if (cache.getCoords() != null) {
-            navigate(activity, cache.getCoords(), cache.getName());
-        } else {
-            ActivityMixin.showToast(activity, activity.getResources().getString(R.string.err_nav_no_coordinates));
-        }
+        final Geopoint coords = cache.getCoords();
+        assert coords != null; // guaranteed by super class
+        navigate(activity, coords, cache.getName());
     }
 
     @Override
     public void navigate(@NonNull final Activity activity, @NonNull final Waypoint waypoint) {
-        if (waypoint.getCoords() != null) {
-            navigate(activity, waypoint.getCoords(), waypoint.getName());
-        } else {
-            ActivityMixin.showToast(activity, activity.getResources().getString(R.string.err_nav_no_coordinates));
-        }
+        final Geopoint coords = waypoint.getCoords();
+        assert coords != null; // guaranteed by super class
+        navigate(activity, coords, waypoint.getName());
     }
 
     @Override
@@ -56,14 +51,14 @@ public class OsmAndApp extends AbstractPointNavigationApp {
         navigate(activity, coords, activity.getResources().getString(R.string.osmand_marker_cgeo));
     }
 
-    private void navigate(@NonNull final Activity activity, @NonNull final Geopoint coords, @NonNull final String markerName) {
+    private static void navigate(@NonNull final Activity activity, @NonNull final Geopoint coords, @NonNull final String markerName) {
         final Parameters params = new Parameters(PARAM_LAT, String.valueOf(coords.getLatitude()),
                 PARAM_LON, String.valueOf(coords.getLongitude()),
                 PARAM_NAME, markerName);
         activity.startActivity(buildIntent(params));
     }
 
-    private Intent buildIntent(@Nullable final Parameters parameters) {
+    private static Intent buildIntent(@Nullable final Parameters parameters) {
         final StringBuilder stringBuilder = new StringBuilder(PREFIX);
         stringBuilder.append(ADD_MAP_MARKER);
         if (parameters != null && !parameters.isEmpty()) {

@@ -1,17 +1,14 @@
 package cgeo.geocaching.apps.navi;
 
-import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.R;
-import cgeo.geocaching.models.Waypoint;
-import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.apps.AbstractApp;
 import cgeo.geocaching.location.Geopoint;
-
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.Waypoint;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 /**
  * navigation app for simple point navigation (no differentiation between cache/waypoint/point)
@@ -28,20 +25,16 @@ abstract class AbstractPointNavigationApp extends AbstractApp implements CacheNa
 
     @Override
     public void navigate(@NonNull final Activity activity, @NonNull final Geocache cache) {
-        navigateWithNullCheck(activity, cache.getCoords());
-    }
-
-    private void navigateWithNullCheck(@NonNull final Activity activity, @Nullable final Geopoint coords) {
-        if (coords != null) {
-            navigate(activity, coords);
-        } else {
-            ActivityMixin.showToast(activity, activity.getResources().getString(R.string.err_nav_no_coordinates));
-        }
+        final Geopoint coords = cache.getCoords();
+        assert coords != null; // asserted by caller
+        navigate(activity, coords);
     }
 
     @Override
     public void navigate(@NonNull final Activity activity, @NonNull final Waypoint waypoint) {
-        navigateWithNullCheck(activity, waypoint.getCoords());
+        final Geopoint coords = waypoint.getCoords();
+        assert coords != null; // asserted by caller
+        navigate(activity, coords);
     }
 
     @Override

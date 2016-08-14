@@ -1,16 +1,14 @@
 package cgeo.geocaching.apps.navi;
 
-import android.support.annotation.StringRes;
 import cgeo.geocaching.R;
-import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.location.Geopoint;
-
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
-import android.support.annotation.NonNull;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.annotation.StringRes;
 
 abstract class OruxMapsApp extends AbstractPointNavigationApp {
 
@@ -46,21 +44,15 @@ abstract class OruxMapsApp extends AbstractPointNavigationApp {
     @Override
     public void navigate(@NonNull final Activity activity, @NonNull final Geocache cache) {
         final Geopoint coords = cache.getCoords();
-        if (coords != null) {
-            navigate(activity, coords, cache.getName());
-        } else {
-            ActivityMixin.showToast(activity, activity.getResources().getString(R.string.err_nav_no_coordinates));
-        }
+        assert coords != null; // guaranteed by caller
+        navigate(activity, coords, cache.getName());
     }
 
     @Override
     public void navigate(@NonNull final Activity activity, @NonNull final Waypoint waypoint) {
         final Geopoint coords = waypoint.getCoords();
-        if (coords != null) {
-            navigate(activity, coords, waypoint.getName());
-        } else {
-            ActivityMixin.showToast(activity, activity.getResources().getString(R.string.err_nav_no_coordinates));
-        }
+        assert coords != null; // guaranteed by caller
+        navigate(activity, coords, waypoint.getName());
     }
 
     static class OruxOnlineMapApp extends OruxMapsApp {

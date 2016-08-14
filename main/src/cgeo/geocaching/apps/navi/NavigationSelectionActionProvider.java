@@ -1,7 +1,7 @@
 package cgeo.geocaching.apps.navi;
 
-import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.apps.navi.NavigationAppFactory.NavigationAppsEnum;
+import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.ui.AbstractMenuActionProvider;
 
 import android.app.Activity;
@@ -33,7 +33,7 @@ public class NavigationSelectionActionProvider extends AbstractMenuActionProvide
     @Override
     public void onPrepareSubMenu(final SubMenu subMenu) {
         subMenu.clear();
-        if (geocache == null) {
+        if (geocache == null || geocache.getCoords() == null) {
             return;
         }
         for (final NavigationAppsEnum app : NavigationAppFactory.getActiveNavigationApps()) {
