@@ -1,6 +1,18 @@
 package cgeo.geocaching.files;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import android.support.annotation.RawRes;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.EnumSet;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Locale;
+import java.util.Set;
 
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
@@ -22,19 +34,7 @@ import cgeo.geocaching.test.R;
 import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.SynchronizedDateFormat;
 
-import android.support.annotation.RawRes;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.EnumSet;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Locale;
-import java.util.Set;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
     private static final SynchronizedDateFormat LOG_DATE_FORMAT = new SynchronizedDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US); // 2010-04-20T07:00:00Z
@@ -496,6 +496,15 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
 
         final Waypoint waypoint = waypoints.get(0);
         assertThat(waypoint.getNote()).startsWith("75 feet due south of large shoreside");
+    }
+
+    public void testOpenCachingAttributes() throws Exception {
+        final List<Geocache> caches = readGPX10(R.raw.oc1310f_gpx);
+        assertThat(caches).hasSize(1);
+
+        final Geocache cache = caches.get(0);
+        final List<String> attributes = cache.getAttributes();
+        assertThat(attributes).hasSize(2);
     }
 
 }

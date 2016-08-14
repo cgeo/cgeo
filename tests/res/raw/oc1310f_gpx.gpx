@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<gpx xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" version="1.0" creator="Opencaching.de - http://www.opencaching.de/" xsi:schemaLocation="http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd http://www.groundspeak.com/cache/1/0/1 http://www.groundspeak.com/cache/1/0/1/cache.xsd" xmlns="http://www.topografix.com/GPX/1/0">
+  <name>Cache listing generated from Opencaching.de</name>
+  <desc>This is a waypoint file generated from Opencaching.de</desc>
+  <author>Opencaching.de</author>
+  <email>kontakt@opencaching.de</email>
+  <url>www.opencaching.de</url>
+  <urlname>Opencaching.de - Geocaching in Deutschland, Österreich und der Schweiz</urlname>
+  <time>2016-07-17T13:50:34Z</time>
+  <keywords>cache, geocache, opencaching, waypoint</keywords>
+  <wpt lat="51.67295" lon="6.98328">
+    <time>2016-07-10T00:00:00Z</time>
+    <name>OC1310F</name>
+    <desc>Autobahnkapellen / Kirchen</desc>
+    <src>www.opencaching.de</src>
+    <url>http://www.opencaching.de/viewcache.php?cacheid=181184</url>
+    <urlname>Autobahnkapellen / Kirchen</urlname>
+    <sym>Geocache</sym>
+    <type>Geocache|Virtual Cache</type>
+    <groundspeak:cache id="181184" available="True" archived="False" xmlns:groundspeak="http://www.groundspeak.com/cache/1/0/1">
+      <groundspeak:name>Autobahnkapellen / Kirchen</groundspeak:name>
+      <groundspeak:placed_by>möweninsel</groundspeak:placed_by>
+      <groundspeak:owner id="325196">möweninsel</groundspeak:owner>
+      <groundspeak:type>Virtual Cache</groundspeak:type>
+      <groundspeak:container>Virtual</groundspeak:container>
+      <groundspeak:attributes>
+           <groundspeak:attribute id="106" inc="1">Only loggable at Opencaching</groundspeak:attribute>
+           <groundspeak:attribute id="161" inc="1">Safari Cache</groundspeak:attribute>
+      </groundspeak:attributes>
+      <groundspeak:difficulty>1.5</groundspeak:difficulty>
+      <groundspeak:terrain>1</groundspeak:terrain>
+      <groundspeak:country>Germany</groundspeak:country>
+      <groundspeak:state>Nordrhein-Westfalen</groundspeak:state>
+      <groundspeak:short_description html="True">Besuche eine Autobahnkapelle oder Autobahnkirche</groundspeak:short_description>
+      <groundspeak:long_description html="True">&lt;div style="border:solid 2px #5f90bb;background:#dbe6f1;color:#000000;padding:5px;text-align:justify;"&gt; &lt;img style="float:left;" src="resource2/ocstyle/images/attributes/safari.png" alt="safari.png" /&gt;&lt;p style="margin-left:45px;"&gt;Dies ist ein virtueller &lt;a href="http://wiki.opencaching.de/index.php/Safari-Cache"&gt;Safari-Cache&lt;/a&gt;. Es ist nicht an einen festen Ort gebunden, sondern kann an verschiedenen Orten gelöst werden. Die oben angegebenen Koordinaten dienen nur als Beispiel.&lt;br /&gt; Weitere Caches mit dem Attribut "Safari-Cache" findet man mit dieser &lt;a href="search.php?searchto=searchbyname&amp;amp;showresult=1&amp;amp;output=HTML&amp;amp;utf8=1&amp;amp;sort=byname&amp;amp;cache_attribs=61"&gt;Suche&lt;/a&gt;.&lt;br /&gt; Safari-Caches und die zugehörigen Logs werden auf der &lt;a href="http://www.flopp.net/safari/"&gt;Safari-Cache-Karte&lt;/a&gt; angezeigt.&lt;br /&gt; Der Cache und seine Logs werden &lt;a href="http://www.flopp.net/safari/OC1310f"&gt;hier&lt;/a&gt; angezeigt. &lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt; &lt;/p&gt;
+&lt;p&gt; &lt;/p&gt;
+&lt;p&gt;&lt;span style="font-family:georgia, palatino;font-size:large;"&gt;Urlaubszeit ist Reisezeit, ebenso an langen Wochenenden und auch in der normalen Arbeitswoche herrscht auf unseren Autobahnen ein reger Verkehr. Wenn man stundenlang auf der Bahn unterwegs ist, ist eine Pause immer wichtig!&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style="font-family:georgia, palatino;font-size:large;"&gt;Oft halten wir dann bei einer Autobahnkapelle oder Autobahnkirche, geniessen die Stille in diesen Räumen, entzünden ein paar Kerzen und kommen einfach ´runter´. Ebenso findet man ja an fast allen Autobahnkapellen oder -kirchen einen Cache. :)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style="font-family:georgia, palatino;font-size:large;"&gt;Den nehmen wir dann natürlich immer mit. :)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style="font-family:georgia, palatino;font-size:large;"&gt;Es gibt in an Deutschlands Autobahnen 44 Kirchen und Kapellen und um diese geht es bei dieser Safari. &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style="font-family:georgia, palatino;font-size:large;"&gt;Im Internet auf www.autobahnkirchen.de findet Ihr eine Auflistung der Kapellen und Kirchen an deutschen Autobahnen.&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style="font-family:georgia, palatino;font-size:large;"&gt;Nun zu dieser Safari: &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style="font-family:georgia, palatino;font-size:large;"&gt;Besuche eine Autobahnkapelle oder Kirche in Deutschland.&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style="font-family:georgia, palatino;font-size:large;"&gt;Mache ein Foto von Dir oder einen persönlichen Gegenstand von Dir mit der Kapelle, bzw. Kirche. &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style="font-family:georgia, palatino;font-size:large;"&gt;Nenne in deinem Log den Namen der Kapelle, bzw. der Kirche und die Koordinaten.&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt; &lt;/p&gt;
+&lt;p&gt;&lt;span style="font-family:georgia, palatino;font-size:large;"&gt;Jeder darf die 44 Kapellen bzw. Kirchen einmal loggen. :)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style="font-family:georgia, palatino;font-size:large;"&gt;Da in allen Kapellen oder Kirchen Bücher zum einschreiben ausliegen ... schreib doch in deinem Log, &lt;/span&gt;&lt;span style="font-family:georgia, palatino;font-size:large;letter-spacing:0px;"&gt;nur wenn Du willst, was Du dort geschrieben hast.&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style="font-family:georgia, palatino;font-size:large;"&gt;Wir sind gespannt, wer als erster alle 44 Orte besucht hat. &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style="font-family:georgia, palatino;font-size:large;"&gt;Gibt sicher Pluspunkte bei Petrus. :)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style="font-family:georgia, palatino;font-size:large;"&gt;Hier unser Beispiel:&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style="font-family:georgia, palatino;font-size:large;"&gt;Autobahnkapelle "Jesus - Brot des Lebens" an der BAB Emden-Bottrop, zwischen den Anschlussstellen Twist und Geeste auf dem Rastplatz "Heseper Moor",&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style="font-family:georgia, palatino;font-size:large;"&gt;bei N 52° 38.112 E 007° 11.352&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="thumbs.php?type=2&amp;amp;showspoiler=1&amp;amp;uuid=AEBF49B5-46CE-11E6-B872-3ED879E433BE" alt="" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style="font-size:large;"&gt;... und egal welcher Glauben Ihr angehört ... oder wenn auch keinem!&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style="font-size:large;"&gt;Habt immer eine gute Fahrt und kommt gesund an Euer Ziel!&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style="font-size:large;"&gt;Möweninsel&lt;/span&gt;&lt;/p&gt;
+&lt;div style="border:solid 2px #5f90bb;background:#dbe6f1;color:#000000;padding:5px;text-align:justify;"&gt;
+&lt;p&gt;Bitte die in der Logbedingung geforderten Koordinaten im Format "N/S DD MM.MMM E/W DDD MM.MMM" (z.B. "N 48 00.000 E 008 00.000") ins Log eintragen, damit die Positionen von der &lt;a href="http://www.flopp.net/safari/"&gt;Safari-Cache-Karte&lt;/a&gt; korrekt erkannt und angezeigt werden können!&lt;br /&gt; Der Cache und seine Logs werden &lt;a href="http://www.flopp.net/safari/OC1310F"&gt;hier&lt;/a&gt; angezeigt. &lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;&lt;em&gt;© &lt;a href='http://www.opencaching.de/viewprofile.php?userid=325196' target='_blank'&gt;möweninsel&lt;/a&gt;, &lt;a href='http://www.opencaching.de/viewcache.php?cacheid=181184' target='_blank'&gt;Opencaching.de&lt;/a&gt;, &lt;a href='http://creativecommons.org/licenses/by-nc-nd/3.0/de/' target='_blank'&gt;CC BY-NC-ND&lt;/a&gt;, Stand: 17.07.2016; alle Logeinträge © jeweiliger Autor&lt;/em&gt;&lt;/p&gt;
+&lt;br /&gt;&lt;div style="float:left; padding:8px"&gt;&lt;a href="http://www.opencaching.de/images/uploads/AEBF49B5-46CE-11E6-B872-3ED879E433BE.jpg" target="_blank"&gt;&lt;img src="http://www.opencaching.de/thumbs.php?type=2&amp;uuid=AEBF49B5-46CE-11E6-B872-3ED879E433BE" /&gt;&lt;/a&gt;&lt;br /&gt;Autobahnkapelle Emsland&lt;/div&gt;</groundspeak:long_description>
+      <groundspeak:logs>
+      </groundspeak:logs>
+      <groundspeak:travelbugs>
+      </groundspeak:travelbugs>
+    </groundspeak:cache>
+  </wpt>
+</gpx>
