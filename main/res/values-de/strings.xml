@@ -38,7 +38,7 @@
   <string name="cache_size_regular">Normal</string>
   <string name="cache_size_large">Groß</string>
   <string name="cache_size_other">Sonstige</string>
-  <string name="cache_size_virtual">Virtual</string>
+  <string name="cache_size_virtual">Virtuell</string>
   <string name="cache_size_notchosen">Nicht gewählt</string>
   <string name="cache_size_unknown">Unbekannt</string>
   <string name="cache_size_nano">Nano</string>
