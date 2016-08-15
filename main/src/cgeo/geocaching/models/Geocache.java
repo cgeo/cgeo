@@ -1816,7 +1816,13 @@ public class Geocache implements IWaypoint {
         final ArrayList<Image> result = new ArrayList<>();
         for (final Image image : getImages()) {
             // search strings fit geocaching.com and opencaching, may need to add others
-            if (!StringUtils.containsAny(image.getUrl(), "/static", "/resource", "/icons/")) {
+            // Xiaomi does not support java.lang.CharSequence#containsAny(java.lang.CharSequence[]),
+            // which is called by StringUtils.containsAny(CharSequence, CharSequence...).
+            // Thus, we have to use StringUtils.contains(...) instead (see issue #5766).
+            final String url = image.getUrl();
+            if (!StringUtils.contains(url, "/static") &&
+                    !StringUtils.contains(url, "/resource") &&
+                    !StringUtils.contains(url, "/icons/")) {
                 result.add(image);
             }
         }
