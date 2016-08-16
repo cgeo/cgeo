@@ -2,7 +2,7 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-    <b>2016.08.14:</b>\n
+    <b>2016.08.16:</b>\n
     · New: Allow caches to be stored on more than one list\n
     · New: Experimental beta version of new mapsforge-based offline map\n
     · New: Different http libraries for more efficient network communication\n
