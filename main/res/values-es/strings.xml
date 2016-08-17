@@ -625,6 +625,8 @@
   <string name="feature_search_owner">Búsqueda por dueño</string>
   <string name="feature_search_finder">Buscar por quien lo ha encontrado</string>
   <string name="init_experimental_title">Características experimentales</string>
+  <string name="init_mfbeta">Mapsforge Beta como predeterminado</string>
+  <string name="init_mfbeta_description">Esta actualización contiene una versión beta de nuestro nuevo mapa Mapsforge como característica experimental. Este nuevo mapa se puede activar aquí como predeterminado para el mapa en vivo y los mapas de listas.</string>
   <!-- map sources -->
   <string name="map_source_google_map">Google: Mapa</string>
   <string name="map_source_google_satellite">Google: Satélite</string>
@@ -785,6 +787,7 @@
   <string name="cache_menu_sygic_drive">Sygic (Coche)</string>
   <string name="cache_menu_radar">Radar</string>
   <string name="cache_menu_map">Ver en mapa</string>
+  <string name="cache_menu_mfbeta">Mapsforge Beta</string>
   <string name="cache_menu_map_static">Mapas estáticos</string>
   <string name="cache_menu_download_map_static">Descargar mapas estáticos</string>
   <string name="cache_menu_rmaps">Rmaps</string>
@@ -1388,9 +1391,12 @@ Nombre de archivo:%2$s</string>
   <string name="send">Enviar</string>
   <string name="showcase_logcache_title">Enviando el registro</string>
   <string name="showcase_logcache_text">Recuerda, muchos de los comandos están ahora en la barra de título. Allí encontrarás el botón para enviar el registro terminado.</string>
+  <string name="showcase_main_title">Barra de menú</string>
+  <string name="showcase_main_text">Algunas funciones de c:geo son accesibles desde la barra de menú o pulsando el símbolo de tres puntos. Si mantienes apretado un botón aparecerá su descripción.</string>
   <string name="showcase_cachelist_title">Cambio entre listas</string>
   <string name="showcase_cachelist_text">Puedes cambiar entre tus listas de cachés haciendo clic sobre el nombre de la lista.</string>
   <string name="showcase_compass_hint_title">Mostrar la pista</string>
+  <string name="showcase_compass_hint_text">Este elemento del menú puede darte una idea de dónde encontrar el caché - muestra la pista, si está disponible.</string>
   <string name="confirm_log_title">Tipo de registro inusual</string>
   <string name="confirm_log_message">Vas a registrar \'%s\'. ¿Estás seguro?</string>
   <!-- Geokrety -->

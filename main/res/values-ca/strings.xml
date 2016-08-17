@@ -126,6 +126,7 @@
   <string name="log_hint_log_password">Introduïu la contrasenya d\'accés</string>
   <string name="log_oc_team_comment">Comentari de l\'equip OC</string>
   <string name="log_your_saved_log">El registre que heu desat</string>
+  <string name="log_empty_logbook">El llibre de registres del catxé està buit.</string>
   <string-array name="log_image_scales">
     <item>Sense escala</item>
     <item>512 px</item>
@@ -148,6 +149,8 @@
   <string name="err_unknown">Error desconegut</string>
   <string name="err_unknown_address">c:geo no ha pogut assignar aquesta adreça a una ubicació existent</string>
   <string name="err_comm">S\'ha produït un error de comunicació desconegut</string>
+  <string name="err_missing_auth">No s\'ha definit nom d\'usuari i/o contrasenya</string>
+  <string name="err_wrong">Nom d\'usuari i/o contrasenya incorrectes</string>
   <string name="err_maintenance">Geocaching.com no funciona per motius de manteniment. El c:geo funcionarà amb els catxés desats.</string>
   <string name="err_license">No heu acceptat l\'acord de llicència de Geocaching.com, per tant el c:geo no pot carregar les coordenades.</string>
   <string name="err_unvalidated_account">Primer heu de validar el vostre compte a la pàgina web de Geocaching.com.</string>
@@ -204,11 +207,14 @@
   <string name="err_parse_lon">El c:geo no pot calcular la longitud.</string>
   <string name="err_parse_dist">El c:geo no pot calcular la distància.</string>
   <string name="err_parse_lat_lon">El c:geo no pot calcular la latitud o la longitud.</string>
+  <string name="err_rendertheme_file_unreadable">No s\'ha pogut carregar el tema de la representació seleccionada. S\'utilitzarà el predefinit.</string>
+  <string name="err_rendertheme_invalid">El tema de representació seleccionat no és vàlid per aquesta versió de mapsforge. S\'utilitzarà el predefinit.</string>
   <string name="warn_save_nothing">No hi ha res per desar.</string>
   <string name="warn_no_cache_coord">No hi ha cap catxé amb les coordenades.</string>
   <string name="warn_no_coordinates">No s\'han indicat les coordenades.</string>
   <string name="warn_no_keyword">No s\'ha indicat cap paraula clau.</string>
   <string name="warn_no_username">No s\'ha indicat el nom de l\'usuari.</string>
+  <string name="warn_no_connector">Cap dels serveis activats actuals de geocaching proporciona aquest tipus de cerca.</string>
   <string name="warn_search_help_title">Necessiteu ajuda?</string>
   <string name="warn_search_help_address">Introduiu una adreça o el nom d\'un lloc. Per exemple l\'adreça \"Av. Amadeus Vives, 27, La Pineda\", o un nom de municipi com \"Colldejou\" o el nom d\'algun lloc com per exemple \"Pont del Diable\".</string>
   <string name="warn_search_help_gccode">Introduïu el codi d\'un catxé, Per exemple \"GC482R5\".</string>
@@ -322,6 +328,8 @@
   <string name="caches_refresh_all">Actualitza-ho tot</string>
   <string name="caches_move_selected">Mou els seleccionats</string>
   <string name="caches_move_all">Mou-ho tot</string>
+  <string name="caches_copy_selected">Copiar els seleccionats</string>
+  <string name="caches_copy_all">Copiar-ho tot</string>
   <string name="caches_map_locus">Locus</string>
   <string name="caches_map_locus_export">Exporta al Locus</string>
   <string name="caches_recaptcha_title">reCAPTCHA</string>
@@ -355,6 +363,8 @@
   <string name="list_menu_rename">Reanomena la llista actual</string>
   <string name="list_menu_import">Importa</string>
   <string name="list_title">Trieu una llista</string>
+  <string name="lists_title">Trieu les llistes</string>
+  <string name="lists_remove_all">Cap</string>
   <string name="list_inbox">Desats</string>
   <string name="list_all_lists">Tots els catxés</string>
   <string name="list_dialog_create_title">Llista nova</string>
@@ -381,6 +391,9 @@
   <string name="about_apache_license"><a href="">Llicència Apache, versió 2.0</a></string>
   <string name="about_help">Ajuda</string>
   <string name="about_system_include">Si us plau incloure la següent informació de sistema quan envieu un informe d\'error o demanar més informació sobre c:geo:</string>
+  <string name="about_system_info_send_button">Enviar per correu...</string>
+  <string name="about_system_info">Informació del sistema de c:geo</string>
+  <string name="about_system_info_send_chooser">Enviar informació del sistema</string>
   <string name="changelog_github">Llista de tots els canvis</string>
   <!-- settings -->
   <string name="settings_title_open_settings">Obrir la configuració?</string>
@@ -421,24 +434,36 @@
   <string name="settings_info_facebook_login">No podeu fer que el c:geo es connecti a geocaching.com amb el compte de Facebook. Però hi ha una manera fàcil de solucionar-ho…</string>
   <string name="settings_authorize">Autoritza al c:geo</string>
   <string name="settings_reauthorize">Autoritza al c:geo de nou</string>
+  <string name="settings_gc_description">Autoritza c:geo a geocaching.com per buscar catxés.</string>
+  <string name="settings_ec_description">Autoritza al c:geo a extremcaching.com per buscar catxés i accedir/filtrar els teus catxés trobats.</string>
+  <string name="settings_su_description">Autoritza c:geo a geocaching.su per buscar catxés.</string>
   <string name="init_oc">Opencaching.de</string>
   <string name="settings_activate_oc">Activa</string>
+  <string name="init_summary_oc_de">Carregar catxés des de opencaching.de</string>
   <string name="init_oc_de_description">Autoritza al c:geo a opencaching.de per buscar catxés i accedir/filtrar els teus catxés trobats.</string>
   <string name="init_oc_pl">Opencaching.pl</string>
   <string name="settings_activate_oc_pl">Activa</string>
+  <string name="init_summary_oc_pl">Carregar catxés des de opencaching.pl</string>
   <string name="init_oc_pl_description">Autoritza al c:geo a  buscar catxés i accedir/filtrar els teus catxés trobats de opencaching.pl.</string>
   <string name="init_oc_nl">Opencaching.nl</string>
   <string name="settings_activate_oc_nl">Activa</string>
+  <string name="init_summary_oc_nl">Carregar catxés des de opencaching.nl</string>
   <string name="init_oc_nl_description">Autoritza al c:geo a opencaching.pl per buscar catxés i accedir/filtrar els teus catxés trobats.</string>
   <string name="init_oc_us">Opencaching.us</string>
   <string name="settings_activate_oc_us">Activa</string>
+  <string name="init_summary_oc_us">Carregar catxés des de opencaching.us</string>
   <string name="init_oc_us_description">Autoritza al c:geo a opencaching.us per buscar catxés i accedir/filtrar els teus catxés trobats.</string>
   <string name="init_oc_ro">Opencaching.ro</string>
   <string name="settings_activate_oc_ro">Activa</string>
+  <string name="init_summary_oc_ro">Carregar catxés des de opencaching.ro</string>
   <string name="init_oc_ro_description">Autoritza al c:geo a opencaching.ro per buscar catxés i accedir/filtrar els teus catxés trobats.</string>
   <string name="init_oc_uk">Opencaching.org.uk</string>
   <string name="settings_activate_oc_uk">Activa</string>
+  <string name="init_summary_oc_uk">Carregar catxés des de opencaching.org.uk</string>
   <string name="init_oc_uk_description">Autoritza al c:geo a opencaching.org.uk per buscar catxés i accedir/filtrar els teus catxés trobats.</string>
+  <string name="init_su">Geocaching.su</string>
+  <string name="init_summary_su">Carregar catxés des de Geocaching.su</string>
+  <string name="settings_activate_su">Activa</string>
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_gcvote_password_description">Per poder puntuar un catxé, cal seguir les instruccions a GCVote.com i introduir aquí la contrasenya del GCVote.</string>
   <string name="err_gcvote_send_rating">Hi ha un error al enviar la puntuació, comproveu la contrasenya de GCVote a les opcions  o deixeu-ho buit.</string>
@@ -452,6 +477,7 @@
   <string name="init_login_popup_working">S\'està accedint…</string>
   <string name="init_login_popup_ok">Accés correcte</string>
   <string name="init_login_popup_failed">S\'ha produït un error al accedir</string>
+  <string name="init_login_popup_failed_reason">L\'inici de sessió ha fallat: %s</string>
   <string name="init_login_popup_not_authorized">La connexió no ha estat autoritzada</string>
   <string name="init_login_popup_invalid_timestamp">L\'hora local és incorrecta, ajusta l\'hora del teu dispositiu</string>
   <string name="init_login_popup_invalid_token">L\'autorització no és vàlida, torneu a autoritzar</string>
@@ -513,6 +539,7 @@
   <string name="init_backup_success">La base de dades del c:geo s\'ha copiat amb èxit a:</string>
   <string name="init_backup_failed">Ha fallat la còpia de seguretat de la base de dades de c:geo.</string>
   <string name="init_backup_unnecessary">La base de dades està buida, no cal fer una còpia de seguretat.</string>
+  <string name="init_backup_no_backup_available">No hi ha cap còpia de seguretat disponible.</string>
   <string name="backup_confirm_overwrite">Voleu sobreescriure la còpia de seguretat existent de %s?</string>
   <string name="restore_confirm_overwrite">Voleu sobreescriure %s al dispositiu amb la còpia de seguretat?</string>
   <string name="init_restore_success">La restauració s\'ha completat.</string>
@@ -534,6 +561,7 @@
   <string name="init_maptrail">Mostra el traçat</string>
   <string name="init_summary_maptrail">Mostra el traçat al mapa</string>
   <string name="init_share_after_export">Obre el menú per compartir després de l\'exportació a GPX</string>
+  <string name="init_include_found_status">Inlcou l\'estat \"Trobat\"</string>
   <string name="init_trackautovisit">Visita TBs</string>
   <string name="init_summary_trackautovisit">Posa per defecte un \"Visitat\" als traçables </string>
   <string name="init_sigautoinsert">Insereix automàticament</string>
@@ -603,6 +631,9 @@
   <string name="feature_search_geocode">Cerca per geocodi</string>
   <string name="feature_search_owner">Cerca per propietari</string>
   <string name="feature_search_finder">Cerca per qui els ha trobat</string>
+  <string name="init_experimental_title">Característiques experimentals</string>
+  <string name="init_mfbeta">Mapsforge Beta per defecte</string>
+  <string name="init_mfbeta_description">La versió actual disposa d\'una versió beta del nostre nou mapa Mapsforge de manera experimental. Aquest nou mapa pot ser activat aquí perquè aparegui per defecte al mapa en viu i als mapes de les llistes.</string>
   <!-- map sources -->
   <string name="map_source_google_map">Google: mapa</string>
   <string name="map_source_google_satellite">Google: satèl·lit</string>
@@ -622,12 +653,22 @@
   <!-- auth generic -->
   <string name="auth_twitter">Twitter</string>
   <string name="auth_authorize">Autoritza al c:geo</string>
+  <string name="auth_check">Comprova l\'autenticació</string>
+  <string name="auth_check_again">Comprova l\'autenticació de nou</string>
   <string name="auth_start">Inicia l\'autorització</string>
   <string name="auth_again">Inicia de nou</string>
+  <string name="auth_register">Crear un compte</string>
+  <string name="auth_connected">Connectat</string>
+  <string name="auth_unconnected">Encara no s\'ha conectat</string>
+  <string name="auth_connected_as">Connectat com %s</string>
   <string name="auth_dialog_waiting">Esperant %s…</string>
   <string name="auth_explain_short">El següent procés permetrà al <b>c:geo</b> accedir a %s.</string>
   <string name="auth_explain_long">Prement el botó \"Autoritza al c:geo\"  s\'iniciarà el procés. Aquest procés obrirà el navegador web amb una pàgina %s. Registreu-vos a aquesta pàgina i permeteu al <b>c:geo</b> a accedir al vostre compte.</string>
+  <string name="auth_forget_title">Oblidar l\'autorització?</string>
+  <string name="auth_forget_message">Seràs desconnectat d\'aquest servei. Les teves credencials desades es perdran.</string>
   <!-- auth credentials -->
+  <string name="auth_credentials_explain_short">El següent procés permetrà a <b>c:geo</b> accedir a %s.</string>
+  <string name="auth_credentials_explain_long">Emplena les teves dades, prem el botó \"Comprovar autenticació\" i començarà el procés. Aquest procés es connecta a %s i validarà les teves credencials. Això és tot.</string>
   <!-- auth token -->
   <string name="auth_token_register">Crea un compte</string>
   <string name="auth_token_explain_short">El següent procés permetrà al <b>c:geo</b> accedir a %s.</string>
@@ -660,6 +701,8 @@
   <string name="cache_offline_refresh">Actualitza</string>
   <string name="cache_offline_drop">Esborra</string>
   <string name="cache_offline_store">Desa</string>
+  <string name="cache_offline_manage">Administra</string>
+  <string name="cache_offline_store_in_list">Guardar a la llista</string>
   <string name="cache_offline_stored">Desat al dispositiu</string>
   <string name="cache_offline_not_ready">No disponible fora de línia</string>
   <string name="cache_offline_time_about">ara fa</string>
@@ -746,6 +789,7 @@
   <string name="cache_dialog_favorite_remove_message">S\'esta eliminant el catxé dels preferits…</string>
   <string name="cache_menu_navigate">Navega</string>
   <string name="cache_menu_navigation_drive">Navegació (conduint)</string>
+  <string name="cache_menu_navigation_drive_select_target">Catxé o plaça de pàrquing?</string>
   <string name="cache_menu_navigation_walk">Navegació (caminant)</string>
   <string name="cache_menu_navigation_transit">Navegació (trànsit)</string>
   <string name="cache_menu_navigation_bike">Navegació (bicicleta)</string>
@@ -754,6 +798,7 @@
   <string name="cache_menu_sygic_drive">Sygic (Conduir)</string>
   <string name="cache_menu_radar">Radar</string>
   <string name="cache_menu_map">Mapa</string>
+  <string name="cache_menu_mfbeta">Mapsforge Beta</string>
   <string name="cache_menu_map_static">Mapes estàtics</string>
   <string name="cache_menu_download_map_static">Baixa els mapes estàtics</string>
   <string name="cache_menu_rmaps">Rmaps</string>
@@ -770,6 +815,7 @@
   <string name="cache_menu_refresh">Actualitza</string>
   <string name="cache_menu_share">Comparteix el catxé</string>
   <string name="cache_menu_move_list">Mou a una llista diferent</string>
+  <string name="cache_menu_copy_list">Copia a una llista diferent</string>
   <string name="cache_menu_whereyougo">WhereYouGo</string>
   <string name="cache_menu_oruxmaps_online">OruxMaps (En línia)</string>
   <string name="cache_menu_oruxmaps_offline">OruxMaps (Fora de línia)</string>
@@ -818,6 +864,7 @@
   <string name="cache_image">Imatge</string>
   <string name="cache_image_open_file">Obre com a fitxer</string>
   <string name="cache_image_open_browser">Obre al navegador</string>
+  <string name="cache_image_add_waypoint">Afegeix fita</string>
   <string name="cache_share_field">Comparteix</string>
   <string name="cache_time_full_hours">en punt</string>
   <string name="cache_listed_on">Llistat a %s</string>
@@ -834,7 +881,9 @@
   <string name="simple_dir_chooser_invalid_path">La ruta és invàlida</string>
   <!-- gpx -->
   <string name="gpx_import_loading_caches">S\'estan carregant els catxés des del fitxer .gpx</string>
+  <string name="gpx_import_loading_caches_with_filename">Carregant catxés de %1$s</string>
   <string name="gpx_import_loading_waypoints">S\'està carregant el fitxer de fites</string>
+  <string name="gpx_import_loading_waypoints_with_filename">Carregant fites de %1$s</string>
   <string name="gpx_import_store_static_maps">S\'estan desant els mapes estàtics</string>
   <string name="gpx_import_caches_imported">catxés importats</string>
   <string name="gpx_import_caches_imported_with_filename">%1$d catxés importats de %2$s</string>
@@ -932,6 +981,7 @@
   <string name="map_strategy_auto">Sensible a la velocitat</string>
   <string name="map_strategy_detailed">Detallada</string>
   <string name="live_map_notification">Les coordenades al mapa en viu poden no ser precises. Possiblement les coordenades imprecises estan marcades amb un cercle taronja.\nObrint els detalls del catxé o guardant el catxé per a ús fora de línia  obtindreu les coordenades precises.\n\nPodeu trobar més informació a la pàgina \"Quant al c:geo\" dins de l\'aplicació.</string>
+  <string name="map_select_multiple_items">Seleccionar un element</string>
   <!-- search -->
   <string name="search_bar_hint">Cerca de catxés</string>
   <string name="search_bar_desc">Catxés (codi del catxé, paraula clau), Traçables (codi TB)</string>
@@ -1002,6 +1052,7 @@
   <string name="user_menu_open_browser">Obre el perfil al navegador</string>
   <string name="user_menu_send_message">Envia un missatge</string>
   <string name="user_menu_open_contact">Obre targeta del contacte</string>
+  <string name="user_unknown">Usuari desconegut</string>
   <!-- navigation -->
   <string name="navigation">Navegació</string>
   <string name="compass_title">Brúixola</string>
@@ -1352,9 +1403,12 @@
   <string name="send">Envia</string>
   <string name="showcase_logcache_title">Enviant el registre</string>
   <string name="showcase_logcache_text">Recordeu, ara moltes comandes es troben a la barra de títol. Allà trobareu el botó per enviar el registre acabat.</string>
+  <string name="showcase_main_title">Barra de menú</string>
+  <string name="showcase_main_text">Algunes funcions del c:geo són accessibles a la barra del menú o apretant el símbol dels tres punts que desplega un menú ocult. Per conèixer la funcionalitat d\'un botó determinat, només cal apretar-lo durant uns segons.</string>
   <string name="showcase_cachelist_title">Llista de canvis</string>
   <string name="showcase_cachelist_text">Es pot canviar entre les diferents llistes fent un clic al nom de la llista actual.</string>
   <string name="showcase_compass_hint_title">Mostrar la pista</string>
+  <string name="showcase_compass_hint_text">Aquest element del menú podria donar una idea d\'on trobar l\'amagatall - li mostrarà la pista, si n\'hi ha.</string>
   <string name="confirm_log_title">Tipus de registre poc habitual</string>
   <string name="confirm_log_message">Voleu registrar \'%s\'. N\'esteu segurs?</string>
   <!-- Geokrety -->
@@ -1381,6 +1435,11 @@
     <item quantity="one">%d catxé mogut</item>
     <item quantity="other">%d catxés moguts</item>
   </plurals>
+  <string name="command_copy_caches_progress">Copiant catxés a la llista %1s</string>
+  <plurals name="command_copy_caches_result">
+    <item quantity="one">%d catxé copiat</item>
+    <item quantity="other">%d catxés copiats</item>
+  </plurals>
   <string name="command_delete_caches_progress">Eliminant catxés</string>
   <plurals name="command_delete_caches_result">
     <item quantity="one">%d catxé eliminat</item>
@@ -1404,4 +1463,7 @@
   <string name="invitation_action">Convida amics</string>
   <string name="invitation_title">Convida amics a utilitzar c:geo</string>
   <string name="invitation_message">Prova l\'app de c:geo per geocaching</string>
+  <string name="cache_list_remove_from">Esborrar de la llista</string>
+  <string name="list_list_headline">Llistes:</string>
+  <string name="cache_store_list">Guardar a la llista</string>
 </resources>

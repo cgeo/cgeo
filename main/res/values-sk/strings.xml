@@ -207,11 +207,14 @@
   <string name="err_parse_lon">c:geo nemôže dopočítať zemepisnú dĺžku.</string>
   <string name="err_parse_dist">c:geo nemôže dopočítať vzdialenosť.</string>
   <string name="err_parse_lat_lon">c:geo nemôže zistiť zemepisnú šírku alebo dĺžku.</string>
+  <string name="err_rendertheme_file_unreadable">Nepodarilo sa načítať vybranú tému. Návrat na pôvodnú.</string>
+  <string name="err_rendertheme_invalid">Vybraná téma nie je platná pre túto verziu mapsforge. Návrat na pôvodnú.</string>
   <string name="warn_save_nothing">Nie je čo uložiť.</string>
   <string name="warn_no_cache_coord">Nie je žiadna skrýša so súradnicami.</string>
   <string name="warn_no_coordinates">Neboli zadané súradnice.</string>
   <string name="warn_no_keyword">Neboli zadané žiadne kľúčové slová.</string>
   <string name="warn_no_username">Nebolo zadané používateľské meno.</string>
+  <string name="warn_no_connector">Tento typ vyhľadávania nepodporuje žiadna z aktivovaných geocaching služieb.</string>
   <string name="warn_search_help_title">Potrebujete pomoc?</string>
   <string name="warn_search_help_address">Zadajte adresu alebo meno oblasti. Napríklad použite poštovú adresu „Radlicka 100, Praha, Ceska republika“, názov mesta „Berlin“ alebo použite názov miesta „Yellowstone Park“.</string>
   <string name="warn_search_help_gccode">Zadajte kód skrýše. Napríklad „GC1VCAZ“.</string>
@@ -312,9 +315,9 @@
   <string name="caches_manage">Spravovať</string>
   <string name="caches_remove_all">Odstrániť všetky</string>
   <plurals name="caches_remove_all_confirm">
-    <item quantity="one">Chcete odstrániť túto skrýšu z tohoto zoznamu?</item>
-    <item quantity="few">Chcete odstrániť tieto %d skrýše z tohoto zoznamu?</item>
-    <item quantity="other">Chcete odstrániť týchto %d skrýš z tohoto zoznamu?</item>
+    <item quantity="one">Chcete odstrániť túto skrýšu z tohto zoznamu?</item>
+    <item quantity="few">Chcete odstrániť tieto %d skrýše z tohto zoznamu?</item>
+    <item quantity="other">Chcete odstrániť týchto %d skrýš z tohto zoznamu?</item>
   </plurals>
   <string name="caches_remove_selected">Odstrániť vybraté</string>
   <plurals name="caches_remove_selected_confirm">
@@ -434,24 +437,35 @@
   <string name="settings_info_facebook_login">Nemôžete sa s c:geo prihlásiť na Geocaching.com pomocou účtu Facebook. Ale existuje jednoduché riešenie…</string>
   <string name="settings_authorize">Autorizovať c:geo</string>
   <string name="settings_reauthorize">Autorizovať c:geo znova</string>
+  <string name="settings_gc_description">Autorizovať c:geo pre hľadanie skrýš geocaching.com.</string>
+  <string name="settings_ec_description">Autorizovať c:geo pre hľadanie skrýš a prístup/filtrovanie vašich nájdených skrýš s extremcaching.com.</string>
+  <string name="settings_su_description">Autorizovať c:geo pre hľadanie skrýš s geocaching.su.</string>
   <string name="init_oc">Opencaching.de</string>
   <string name="settings_activate_oc">Aktivovať</string>
+  <string name="init_summary_oc_de">Načítať skrýše z opencaching.de</string>
   <string name="init_oc_de_description">Autorizovať c:geo pre opencaching.de na vyhľadávanie, zobrazenie a filtrovanie nájdených skrýš.</string>
   <string name="init_oc_pl">Opencaching.pl</string>
   <string name="settings_activate_oc_pl">Aktivovať</string>
+  <string name="init_summary_oc_pl">Načítať skrýše z opencaching.pl</string>
   <string name="init_oc_pl_description">Autorizovať c:geo pre opencaching.pl na vyhľadávanie, zobrazenie a filtrovanie nájdených skrýš.</string>
   <string name="init_oc_nl">Opencaching.nl</string>
   <string name="settings_activate_oc_nl">Aktivovať</string>
+  <string name="init_summary_oc_nl">Načítať skrýše z opencaching.nl</string>
   <string name="init_oc_nl_description">Autorizovať c:geo pre opencaching.nl na vyhľadávanie, zobrazenie a filtrovanie nájdených skrýš.</string>
   <string name="init_oc_us">Opencaching.us</string>
   <string name="settings_activate_oc_us">Aktivovať</string>
+  <string name="init_summary_oc_us">Načítať skrýše z opencaching.us</string>
   <string name="init_oc_us_description">Autorizovať c:geo pre opencaching.us na vyhľadávanie, zobrazenie a filtrovanie nájdených skrýš.</string>
   <string name="init_oc_ro">Opencaching.ro</string>
   <string name="settings_activate_oc_ro">Aktivovať</string>
+  <string name="init_summary_oc_ro">Načítať skrýše z opencaching.ro</string>
   <string name="init_oc_ro_description">Autorizovať c:geo pre opencaching.ro na vyhľadávanie, zobrazenie a filtrovanie nájdených skrýš.</string>
   <string name="init_oc_uk">Opencaching.org.uk</string>
   <string name="settings_activate_oc_uk">Aktivovať</string>
+  <string name="init_summary_oc_uk">Načítať skrýše z opencaching.org.uk</string>
   <string name="init_oc_uk_description">Autorizovať c:geo pre opencaching.org.uk na vyhľadávanie, zobrazenie a filtrovanie nájdených skrýš.</string>
+  <string name="init_su">Geocaching.su</string>
+  <string name="init_summary_su">Načítať skrýše z Geocaching.su</string>
   <string name="settings_activate_su">Aktivovať</string>
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_gcvote_password_description">Ak chcete hodnotiť skrýše, postupujte podľa pokynov na GCVote.com a potom sem zadajte svoje GCVote heslo.</string>
@@ -466,6 +480,7 @@
   <string name="init_login_popup_working">Prihlasovanie…</string>
   <string name="init_login_popup_ok">Prihlásenie úspešné</string>
   <string name="init_login_popup_failed">Prihlásenie neúspešné</string>
+  <string name="init_login_popup_failed_reason">Prihlásenie zlyhalo: %s</string>
   <string name="init_login_popup_not_authorized">Nie je autorizované</string>
   <string name="init_login_popup_invalid_timestamp">Neplatný miestny čas, nastavte čas zariadenia</string>
   <string name="init_login_popup_invalid_token">Neplatné prihlásenie, prihláste sa znovu</string>
@@ -527,6 +542,7 @@
   <string name="init_backup_success">Databáza c:geo bola úspešne skopírovaná do:</string>
   <string name="init_backup_failed">Záloha databázy c:geo zlyhala.</string>
   <string name="init_backup_unnecessary">Databáza je prázdna, záloha nie je potrebná.</string>
+  <string name="init_backup_no_backup_available">Nie je dostupný žiadny súbor so zálohou.</string>
   <string name="backup_confirm_overwrite">Naozaj chceš prepísať existujúcu zálohu z %s?</string>
   <string name="restore_confirm_overwrite">Naozaj chceš prepísať %s na tvojom zariadení zálohou?</string>
   <string name="init_restore_success">Úspešne obnovené.</string>
@@ -548,6 +564,7 @@
   <string name="init_maptrail">Zobraziť stopu</string>
   <string name="init_summary_maptrail">Zobraziť stopu na mape</string>
   <string name="init_share_after_export">Po exporte GPX otvoriť menu pre zdieľanie</string>
+  <string name="init_include_found_status">Zahrnúť stav \"Nájdené\"</string>
   <string name="init_trackautovisit">Návšteva TB</string>
   <string name="init_summary_trackautovisit">Nastaviť trasovateľné predmety (trackables) automaticky na „navštívené“</string>
   <string name="init_sigautoinsert">Automaticky vložiť podpis</string>
@@ -560,6 +577,7 @@
   <string name="init_default_navigation_tool_2_description">Môžete vybrať druhý preferovaný nástroj pre navigáciu. Spustíte ho dlhým stlačením ikony navigácie vedľa názvu skrýše.</string>
   <string name="init_navigation_menu_description">Tu môžete vybrať, ktoré z dostupných navigačných metód sa zobrazia v navigačnom menu pre skrýšu alebo bod trasy. Nástroje, ktoré nie sú nainštalované na tomto zariadení, nie je možné vybrať.</string>
   <string name="init_debug_title">Ladiace informácie</string>
+  <string name="init_debug_note">c:geo môže generovať mnoho ladiacich informácií. Aktivovanie tohto nastavenia môže negatívne ovplyvniť stabilitu aplikácie, preto sa odporúča iba v prípade, ak vás vývojár požiadal o zaslanie protokolu.</string>
   <string name="init_debug">Aktivovať denník ladenia</string>
   <string name="init_dbonsdcard_title">Umiestnenie databázy</string>
   <string name="init_dbonsdcard_note">Databázu c:geo môžete umiestniť na externé úložisko. Ak to spravíte, ušetríte vnútornú pamäť, ale môžete stratiť časť z výkonu a c:geo nebude fungovať, keď vaša SD karta nebude dostupná.</string>
@@ -616,6 +634,9 @@
   <string name="feature_search_geocode">Hľadať podľa geokódu</string>
   <string name="feature_search_owner">Hľadať podľa zakladateľa</string>
   <string name="feature_search_finder">Vyhľadávanie podľa nálezcu</string>
+  <string name="init_experimental_title">Experimentálne funkcie</string>
+  <string name="init_mfbeta">Mapsforge beta ako predvolené</string>
+  <string name="init_mfbeta_description">Aktuálne vydanie aplikácie obsahuje beta verziu našej novej Mapsforge mapy ako experimentálnu funkciu. Táto nová mapa sa tu dá nastaviť ako predvolená.</string>
   <!-- map sources -->
   <string name="map_source_google_map">Google: Mapa</string>
   <string name="map_source_google_satellite">Google: Satelit</string>
@@ -635,14 +656,22 @@
   <!-- auth generic -->
   <string name="auth_twitter">Twitter</string>
   <string name="auth_authorize">Autorizovať c:geo</string>
+  <string name="auth_check">Skontrolovať autentifikáciu</string>
+  <string name="auth_check_again">Znovu skontrolovať autentifikáciu</string>
   <string name="auth_start">Zahájiť autorizáciu</string>
   <string name="auth_again">Znovu autorizovať</string>
   <string name="auth_register">Vytvoriť účet</string>
+  <string name="auth_connected">Pripojené</string>
+  <string name="auth_unconnected">Zatiaľ nepripojené</string>
+  <string name="auth_connected_as">Pripojené ako %s</string>
   <string name="auth_dialog_waiting">Čakanie na %s…</string>
   <string name="auth_explain_short">Nasledujúci postup umožní <b>c:geo</b> prístup k %s.</string>
   <string name="auth_explain_long">Stlačením tlačidla \"autorizovať c:geo\" začne proces. Tento proces otvorí webový prehliadač na stránke %s. Prihláste sa na túto stránku a umožnite <b>c:geo</b> prístup k svojmu kontu. To je všetko.</string>
+  <string name="auth_forget_title">Zrušiť autorizáciu?</string>
+  <string name="auth_forget_message">Od tejto služby budete odpojený. Vaše uložené prihlasovacie údaje budú stratené.</string>
   <!-- auth credentials -->
   <string name="auth_credentials_explain_short">Nasledujúci proces povolí <b>c:geo</b> prístup k %s.</string>
+  <string name="auth_credentials_explain_long">Po vyplnení vašich prihlasovacích údajov a stlačení tlačidla \"Kontrola autentifikácie\" sa c: geo pripojí na %s a overí vaše údaje. To je všetko.</string>
   <!-- auth token -->
   <string name="auth_token_register">Vytvoriť účet</string>
   <string name="auth_token_explain_short">Nasledujúci proces povolí <b>c:geo</b> prístup k %s.</string>
@@ -679,6 +708,7 @@
   <string name="cache_offline_drop">Zmazať</string>
   <string name="cache_offline_store">Uložiť</string>
   <string name="cache_offline_manage">Spravovať</string>
+  <string name="cache_offline_store_in_list">Uložiť do zoznamu</string>
   <string name="cache_offline_stored">Uložená v zariadení</string>
   <string name="cache_offline_not_ready">Nie je pripravená\nna použitie offline</string>
   <string name="cache_offline_time_about">približne pred</string>
@@ -769,6 +799,7 @@
   <string name="cache_dialog_favorite_remove_message">Odstraňovanie skrýše z obľúbených…</string>
   <string name="cache_menu_navigate">Navigovať</string>
   <string name="cache_menu_navigation_drive">Navigácia (auto)</string>
+  <string name="cache_menu_navigation_drive_select_target">Skrýša alebo parkovacie miesto?</string>
   <string name="cache_menu_navigation_walk">Navigácia (pešo)</string>
   <string name="cache_menu_navigation_transit">Navigácia (Tranzit)</string>
   <string name="cache_menu_navigation_bike">Navigácia (bicykel)</string>
@@ -777,6 +808,7 @@
   <string name="cache_menu_sygic_drive">Sygic (autom)</string>
   <string name="cache_menu_radar">Radar</string>
   <string name="cache_menu_map">Mapa</string>
+  <string name="cache_menu_mfbeta">Mapsforge Beta</string>
   <string name="cache_menu_map_static">Statická mapa</string>
   <string name="cache_menu_download_map_static">Prevziať statické mapy</string>
   <string name="cache_menu_rmaps">Rmaps</string>
@@ -793,6 +825,7 @@
   <string name="cache_menu_refresh">Obnoviť</string>
   <string name="cache_menu_share">Zdieľať skrýšu</string>
   <string name="cache_menu_move_list">Presunúť do iného zoznamu</string>
+  <string name="cache_menu_copy_list">Kopírovať do iného zoznamu</string>
   <string name="cache_menu_whereyougo">WhereYouGo</string>
   <string name="cache_menu_oruxmaps_online">OruxMaps (Online)</string>
   <string name="cache_menu_oruxmaps_offline">OruxMaps (Offline)</string>
@@ -859,7 +892,9 @@
   <string name="simple_dir_chooser_invalid_path">Neplatná cesta</string>
   <!-- gpx -->
   <string name="gpx_import_loading_caches">Načítanie skrýš z .gpx súboru\nNačítané:</string>
+  <string name="gpx_import_loading_caches_with_filename">Načítavanie skrýš z %1$s</string>
   <string name="gpx_import_loading_waypoints">Načítanie bodov trasy z .gpx súboru\nNačítané:</string>
+  <string name="gpx_import_loading_waypoints_with_filename">Načítavanie bodov trasy z %1$s</string>
   <string name="gpx_import_store_static_maps">Ukladanie statických máp</string>
   <string name="gpx_import_caches_imported">skrýše importované</string>
   <string name="gpx_import_caches_imported_with_filename">Počet skrýš importovaných z %2$s: %1$d</string>
@@ -1386,9 +1421,12 @@
   <string name="send">Odoslať</string>
   <string name="showcase_logcache_title">Odosielam log</string>
   <string name="showcase_logcache_text">Pamätaj, že mnohé príkazy sú teraz v záhlaví. Tam nájdeš tlačidlo pre odoslanie hotového logu.</string>
+  <string name="showcase_main_title">Panel s ponukami</string>
+  <string name="showcase_main_text">Niektoré z funkcií c:geo sú prístupné v paneli s ponukami alebo v menu za troma bodkami. Dlhým podržaním tlačidla je možné zobraziť jeho popis.</string>
   <string name="showcase_cachelist_title">Prepínanie zoznamov</string>
   <string name="showcase_cachelist_text">Môžete prepínať medzi svojimi zoznamami skrýš kliknutím na názov zoznamu.</string>
   <string name="showcase_compass_hint_title">Zobraziť nápovedu</string>
+  <string name="showcase_compass_hint_text">Táto položka ti môže pomôcť pri hľadaní skrýše - ukazuje nápovedu, ak je dostupná.</string>
   <string name="confirm_log_title">Nezvyčajný typ logu</string>
   <string name="confirm_log_message">Chceš zalogovať \'%s\'. Určite?</string>
   <!-- Geokrety -->
