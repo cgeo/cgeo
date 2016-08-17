@@ -126,6 +126,7 @@
   <string name="log_hint_log_password">Ange ditt lösenord för loggning</string>
   <string name="log_oc_team_comment">Meddelande från OC Team</string>
   <string name="log_your_saved_log">Din sparade logg</string>
+  <string name="log_empty_logbook">Cachens loggbok är tom.</string>
   <string-array name="log_image_scales">
     <item>Ingen skalning</item>
     <item>512 px</item>
@@ -213,6 +214,7 @@
   <string name="warn_no_coordinates">Inga koordinater angivna.</string>
   <string name="warn_no_keyword">Inget nyckelord angett.</string>
   <string name="warn_no_username">Inget användarnamn angett.</string>
+  <string name="warn_no_connector">Inga aktiverade geocaching-tjänster tillhandahåller denna typ av sökning.</string>
   <string name="warn_search_help_title">Tips!</string>
   <string name="warn_search_help_address">Ange adress eller namn på en plats. Använd tex gatunamn \"Kungsgatan 10, Stockholm\", namn på ort \"Malmö\" eller annat sorts namn \"Avenyn\".</string>
   <string name="warn_search_help_gccode">Ange geocachens kod. Tex \"GC1VCAZ\".</string>
@@ -362,6 +364,7 @@
   <string name="list_menu_import">Importera</string>
   <string name="list_title">Välj en lista</string>
   <string name="lists_title">Välj listorna</string>
+  <string name="lists_remove_all">Ingen</string>
   <string name="list_inbox">Sparade</string>
   <string name="list_all_lists">Alla cacher</string>
   <string name="list_dialog_create_title">Ny lista</string>
@@ -389,6 +392,7 @@
   <string name="about_help">Hjälp</string>
   <string name="about_system_include">Vänligen inkludera följande systeminformation när du skickar en felrapport eller ber om mer information om c:geo:</string>
   <string name="about_system_info_send_button">Skicka via e-post…</string>
+  <string name="about_system_info">c:geo systeminformation</string>
   <string name="about_system_info_send_chooser">Skicka systeminformation</string>
   <string name="changelog_github">Lista över alla ändringar</string>
   <!-- settings -->
@@ -430,6 +434,9 @@
   <string name="settings_info_facebook_login">c:geo kan inte logga inte logga in på geocaching.com med ditt Facebook konto. Men det finns en enkel lösning…</string>
   <string name="settings_authorize">Tillåt c:geo</string>
   <string name="settings_reauthorize">Tillåt c:geo igen</string>
+  <string name="settings_gc_description">Tillåt c:geo att söka efter cacher på geocaching.com.</string>
+  <string name="settings_ec_description">Tillåt c:geo att söka efter cacher och få tillgång till/filtrera dina hittade cacher på extremcaching.com.</string>
+  <string name="settings_su_description">Tillåt c:geo att söka efter cacher på geocaching.su.</string>
   <string name="init_oc">Opencaching.de</string>
   <string name="settings_activate_oc">Aktivera</string>
   <string name="init_summary_oc_de">Ladda cacher från opencaching.de</string>
@@ -456,6 +463,7 @@
   <string name="init_oc_uk_description">Använd c:geo med opencaching.org.uk för att söka efter cacher samt för att filtrera dina funna cacher.</string>
   <string name="init_su">Geocaching.su</string>
   <string name="init_summary_su">Ladda cacher från geocaching.su</string>
+  <string name="settings_activate_su">Aktivera</string>
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_gcvote_password_description">För att kunna betygsätta en cache måste du följa instruktionerna på GCVote.com och ange ditt lösenord till GCVote här.</string>
   <string name="err_gcvote_send_rating">Fel uppstod när betyg skulle sparas, kontrollera eller ta bort lösenordet för GCVote i inställningarna.</string>
@@ -566,6 +574,7 @@
   <string name="init_default_navigation_tool_2_description">Här kan du välja ditt andra förvalda navigeringsprogram. Det kan aktiveras genom att klicka länge på navigationsikonen i listen överst i en cachebeskrivning.</string>
   <string name="init_navigation_menu_description">Här kan du välja program som ska visas navigeringsmenyn i en cache eller punkt. Program som är gråa är inte installerade på enheten.</string>
   <string name="init_debug_title">Debug information</string>
+  <string name="init_debug_note">c:geo kan generera en hel del felsökningsinformation. Att aktivera denna inställning kan dock påverka stabiliteten av c:geo och är endast rekommenderat om du är uppmanad att skicka en logg till utvecklarna.</string>
   <string name="init_debug">Generera debug info</string>
   <string name="init_dbonsdcard_title">Databasplacering</string>
   <string name="init_dbonsdcard_note">Du kan placera c:geos databas på ditt minneskort. På detta sätt kan du spara internminne, men du kan också få något sämre prestanda och c:geo kommer inte fungera om ditt minneskort inte är tillgängligt (exempelvis när den är kopplad till en dator).</string>
@@ -623,6 +632,8 @@
   <string name="feature_search_owner">Sök baserat på ägare</string>
   <string name="feature_search_finder">Sök baserat på hittare</string>
   <string name="init_experimental_title">Experimentella funktioner</string>
+  <string name="init_mfbeta">Mapsforge beta som standard</string>
+  <string name="init_mfbeta_description">Den nuvarande versionen innehåller en betaversion av vår nya Mapforge-karta som en experimentell funktion. Denna karta kan aktiveras här som standard för live- och listkartan.</string>
   <!-- map sources -->
   <string name="map_source_google_map">Google: Map</string>
   <string name="map_source_google_satellite">Google: Satellit</string>
@@ -646,6 +657,7 @@
   <string name="auth_check_again">Kolla autentisering igen</string>
   <string name="auth_start">Påbörja koppling mot Twitter</string>
   <string name="auth_again">Koppla mot Twitter igen</string>
+  <string name="auth_register">Skapa ett konto</string>
   <string name="auth_connected">Ansluten</string>
   <string name="auth_unconnected">Inte ansluten ännu</string>
   <string name="auth_connected_as">Ansluten som %s</string>
@@ -655,6 +667,8 @@
   <string name="auth_forget_title">Glöm autentisering?</string>
   <string name="auth_forget_message">Du kommer att bli frånkopplad från denna tjänst, dina sparade uppgifter kommer att försvinna.</string>
   <!-- auth credentials -->
+  <string name="auth_credentials_explain_short">Följande process kommer ge <b>c:geo</b> tillgång till %s.</string>
+  <string name="auth_credentials_explain_long">Genom att fylla i dina uppgifter och trycka på \"Kolla autentisering\" kommer processen att startas. Denna process ansluter till %s och validerar dina uppgifter. Det är allt.</string>
   <!-- auth token -->
   <string name="auth_token_register">Skapa ett konto</string>
   <string name="auth_token_explain_short">Följande process kommer ge <b>c:geo</b> tillgång till %s.</string>
@@ -688,6 +702,7 @@
   <string name="cache_offline_refresh">Uppdatera</string>
   <string name="cache_offline_drop">Radera</string>
   <string name="cache_offline_store">Spara</string>
+  <string name="cache_offline_manage">Hantera</string>
   <string name="cache_offline_store_in_list">Lagra i lista</string>
   <string name="cache_offline_stored">Sparad i enheten</string>
   <string name="cache_offline_not_ready">Inte redo\nför användning offline</string>
@@ -952,6 +967,7 @@
   <string name="map_trail_show">Visa spår</string>
   <string name="map_circles_show">Visa cirklar</string>
   <string name="map_mycaches_hide">Dölj egna/funna cacher</string>
+  <string name="map_disabled_hide">Göm inaktiverade cacher</string>
   <string name="map_theme_builtin">Standard</string>
   <string name="map_theme_select">Välj karttema</string>
   <string name="map_live_enable">Aktivera live</string>
@@ -1391,9 +1407,11 @@
   <string name="showcase_logcache_title">Skicka loggen</string>
   <string name="showcase_logcache_text">Kom ihåg, många kommandon hittar du nu i titelraden. Där hittar du knappen för att skicka den avslutade loggen.</string>
   <string name="showcase_main_title">Menyrad</string>
+  <string name="showcase_main_text">Vissa funktioner i c:geo är tillgängliga i menyraden eller i menyn bakom den prickiga symbolen. Du kan långtrycka på en knapp för att se dess beskrivning.</string>
   <string name="showcase_cachelist_title">Byt listor</string>
   <string name="showcase_cachelist_text">Du kan växla mellan dina geocachelistor genom att klicka på rubriken för listan.</string>
   <string name="showcase_compass_hint_title">Visa ledtråd</string>
+  <string name="showcase_compass_hint_text">Det här menyalternativet kan ge dig en aning var du kan hitta cachen - det visar tipset, om något sådant finns.</string>
   <string name="confirm_log_title">Ovanlig loggtyp</string>
   <string name="confirm_log_message">Du vill logga \'%s\'. Är du säker?</string>
   <!-- Geokrety -->
@@ -1421,6 +1439,10 @@
     <item quantity="other">Flyttade %d cacher</item>
   </plurals>
   <string name="command_copy_caches_progress">Kopierar cacher till lista %1s</string>
+  <plurals name="command_copy_caches_result">
+    <item quantity="one">Kopierade %d cache</item>
+    <item quantity="other">Kopierade %d cacher</item>
+  </plurals>
   <string name="command_delete_caches_progress">Tar bort cacher</string>
   <plurals name="command_delete_caches_result">
     <item quantity="one">Tog bort %d cache</item>
@@ -1446,4 +1468,5 @@
   <string name="invitation_message">Prova c:geo appen för geocaching</string>
   <string name="cache_list_remove_from">Ta bort från lista</string>
   <string name="list_list_headline">Listor:</string>
+  <string name="cache_store_list">Spara i lista</string>
 </resources>

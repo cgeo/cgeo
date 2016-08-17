@@ -559,7 +559,7 @@
   <string name="init_gpx_importdir">Katalog do importu plików GPX</string>
   <string name="init_maptrail">Pokaż szlak na mapie</string>
   <string name="init_summary_maptrail">Pokaż szlak na mapie</string>
-  <string name="init_share_after_export">Otwórz dzielone menu po eksporcie plików GPX</string>
+  <string name="init_share_after_export">Otwórz menu udostępniania po wyeksportowaniu plików GPX</string>
   <string name="init_include_found_status">Uwzględnij status \"Znalezione\"</string>
   <string name="init_trackautovisit">Ustaw przedmioty podróżne domyślnie na \"Odwiedzony\"</string>
   <string name="init_summary_trackautovisit">Ustaw przedmioty podróżne domyślnie na \"Odwiedzony\"</string>
