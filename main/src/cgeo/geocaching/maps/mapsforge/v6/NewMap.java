@@ -2,6 +2,7 @@ package cgeo.geocaching.maps.mapsforge.v6;
 
 import cgeo.geocaching.AbstractDialogFragment;
 import cgeo.geocaching.AbstractDialogFragment.TargetInfo;
+import cgeo.geocaching.CacheListActivity;
 import cgeo.geocaching.CachePopup;
 import cgeo.geocaching.CompassActivity;
 import cgeo.geocaching.EditWaypointActivity;
@@ -73,6 +74,7 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -302,9 +304,7 @@ public class NewMap extends AbstractActionBarActivity {
 
             menu.findItem(R.id.menu_theme_mode).setVisible(true);
 
-            //TODO: menu_as_list
-            menu.findItem(R.id.menu_as_list).setVisible(false);
-            //menu.findItem(R.id.menu_as_list).setVisible(!isLoading() && caches.size() > 1);
+            menu.findItem(R.id.menu_as_list).setVisible(!caches.isDownloading() && caches.getVisibleItemsCount() > 0);
 
             menu.findItem(R.id.submenu_strategy).setVisible(isLiveEnabled);
 
@@ -366,7 +366,7 @@ public class NewMap extends AbstractActionBarActivity {
                 return true;
             case R.id.menu_store_caches:
                 if (!caches.isDownloading()) {
-                    final List<String> geocodes = caches.getVisibleGeocodes();
+                    final Set<String> geocodes = caches.getVisibleGeocodes();
 
                     if (geocodes.isEmpty()) {
                         ActivityMixin.showToast(this, res.getString(R.string.warn_save_nothing));
@@ -412,8 +412,7 @@ public class NewMap extends AbstractActionBarActivity {
                 selectMapTheme();
                 return true;
             case R.id.menu_as_list: {
-                //TODO: menu_as_list
-                //CacheListActivity.startActivityMap(activity, new SearchResult(getGeocodesForCachesInViewport()));
+                CacheListActivity.startActivityMap(this, new SearchResult(caches.getVisibleGeocodes()));
                 return true;
             }
             case R.id.menu_strategy_fastest: {
@@ -707,7 +706,7 @@ public class NewMap extends AbstractActionBarActivity {
      * @param listId
      *            the list to store the caches in
      */
-    private void storeCaches(final List<String> geocodes, final int listId) {
+    private void storeCaches(final Set<String> geocodes, final int listId) {
 
         final int count = geocodes.size();
         final LoadDetailsHandler loadDetailsHandler = new LoadDetailsHandler(count, this);
@@ -1363,10 +1362,10 @@ public class NewMap extends AbstractActionBarActivity {
     private class LoadDetails extends Thread {
 
         private final CancellableHandler handler;
-        private final List<String> geocodes;
+        private final Collection<String> geocodes;
         private final int listId;
 
-        LoadDetails(final CancellableHandler handler, final List<String> geocodes, final int listId) {
+        LoadDetails(final CancellableHandler handler, final Collection<String> geocodes, final int listId) {
             this.handler = handler;
             this.geocodes = geocodes;
             this.listId = listId;

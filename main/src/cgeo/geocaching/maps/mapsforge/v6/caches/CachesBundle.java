@@ -162,20 +162,15 @@ public class CachesBundle {
         return result;
     }
 
-    public List<String> getVisibleGeocodes() {
+    public Set<String> getVisibleGeocodes() {
 
-        final List<String> result = new ArrayList<>();
-
-        if (this.baseOverlay != null) {
-            result.addAll(this.baseOverlay.getVisibleGeocodes());
-        }
-
-        if (this.storedOverlay != null) {
-            result.addAll(this.storedOverlay.getVisibleGeocodes());
-        }
+        final Set<String> result = new HashSet<>();
 
         if (this.liveOverlay != null) {
             result.addAll(this.liveOverlay.getVisibleGeocodes());
+        }
+        if (this.storedOverlay != null) {
+            result.addAll(this.storedOverlay.getVisibleGeocodes());
         }
 
         return result;
