@@ -607,7 +607,7 @@ public class SettingsActivity extends PreferenceActivity {
         final Credentials credentials = Settings.getCredentials(connector);
 
         getPreference(prefKeyId)
-                .setSummary(StringUtils.isNotBlank(credentials.getUsernameRaw())
+                .setSummary(credentials.isValid()
                         ? getString(R.string.auth_connected_as, credentials.getUserName())
                         : getString(R.string.auth_unconnected));
     }
