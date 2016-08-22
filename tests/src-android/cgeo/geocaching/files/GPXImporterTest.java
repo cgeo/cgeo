@@ -17,9 +17,6 @@ import cgeo.geocaching.test.R;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.Log;
 
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.StringUtils;
-
 import android.net.Uri;
 import android.os.HandlerThread;
 import android.os.Looper;
@@ -30,6 +27,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 
 public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
     private TestHandler importStepHandler;
@@ -266,6 +266,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
     public void testImportGpxZipAttachmentCp437() {
         final String geocode = "GC448A";
         removeCacheCompletely(geocode);
+        assertThat(R.raw.pq_cp437).isNotEqualTo(0); // avoid lint warning, fake usage of below resource
         final Uri uri = Uri.parse("android.resource://cgeo.geocaching.test/raw/pq_cp437");
 
         final ImportGpxZipAttachmentThread importThread = new ImportGpxZipAttachmentThread(uri, getInstrumentation().getContext().getContentResolver(), listId, importStepHandler, progressHandler);
@@ -283,6 +284,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
     public void testImportGpxZipAttachmentEntities() {
         final String geocode = "GC448A";
         removeCacheCompletely(geocode);
+        assertThat(R.raw.pq_entities).isNotEqualTo(0); // avoid lint warning, fake usage of below resource
         final Uri uri = Uri.parse("android.resource://cgeo.geocaching.test/raw/pq_entities");
 
         final ImportGpxZipAttachmentThread importThread = new ImportGpxZipAttachmentThread(uri, getInstrumentation().getContext().getContentResolver(), listId, importStepHandler, progressHandler);
