@@ -196,8 +196,8 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
                 case UPDATE_TITLE:
                     map.setTitle();
                     map.setSubtitle();
-
                     break;
+
                 case INVALIDATE_MAP:
                     map.mapView.repaintRequired(null);
                     break;
@@ -217,8 +217,8 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         final TextView titleview = ButterKnife.findById(activity, R.id.actionbar_title);
         if (titleview != null) {
             titleview.setText(title);
-
         }
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
             setTitleIceCreamSandwich(title);
         }
@@ -323,13 +323,11 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         public void handleMessage(final Message msg) {
             final int what = msg.what;
 
-            if (what == HIDE_PROGRESS) {
-                if (--counter == 0) {
-                    showProgress(false);
-                }
-            } else if (what == SHOW_PROGRESS) {
+            if (what == SHOW_PROGRESS) {
                 showProgress(true);
                 counter++;
+            } else if (what == HIDE_PROGRESS && --counter == 0) {
+                showProgress(false);
             }
         }
         private void showProgress(final boolean show) {
@@ -340,12 +338,8 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
             final ProgressBar progress = ButterKnife.findById(map.activity, R.id.actionbar_progress);
             if (progress != null) {
-                if (show) {
-                    progress.setVisibility(View.VISIBLE);
-                } else {
-                    progress.setVisibility(View.GONE);
-
-                }
+                final int visibility = show ? View.VISIBLE : View.GONE;
+                progress.setVisibility(visibility);
             }
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
                 map.activity.setProgressBarIndeterminateVisibility(show);
@@ -360,15 +354,10 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
         @Override
         public void handleRegularMessage(final Message msg) {
-            if (msg.what == UPDATE_PROGRESS) {
-                if (waitDialog != null) {
+            if (waitDialog != null) {
+                if (msg.what == UPDATE_PROGRESS) {
                     final int secondsElapsed = (int) ((System.currentTimeMillis() - detailProgressTime) / 1000);
-                    final int secondsRemaining;
-                    if (detailProgress > 0) {
-                        secondsRemaining = (detailTotal - detailProgress) * secondsElapsed / detailProgress;
-                    } else {
-                        secondsRemaining = (detailTotal - detailProgress) * secondsElapsed;
-                    }
+                    final int secondsRemaining = (detailTotal - detailProgress) * secondsElapsed / detailProgress;
 
                     waitDialog.setProgress(detailProgress);
                     if (secondsRemaining < 40) {
@@ -377,10 +366,10 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
                         final int minsRemaining = secondsRemaining / 60;
                         waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + res.getQuantityString(R.plurals.caches_eta_mins, minsRemaining, minsRemaining));
                     }
+                } else if (msg.what == FINISHED_LOADING_DETAILS) {
+                    waitDialog.dismiss();
+                    waitDialog.setOnCancelListener(null);
                 }
-            } else if (msg.what == FINISHED_LOADING_DETAILS && waitDialog != null) {
-                waitDialog.dismiss();
-                waitDialog.setOnCancelListener(null);
             }
         }
         @Override
@@ -480,13 +469,13 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         setZoom(Settings.getMapZoom(mapOptions.mapMode));
         mapView.getMapController().setCenter(Settings.getMapCenter());
 
-        if (mapOptions.mapState == null) {
-            followMyLocation = followMyLocation && (mapOptions.mapMode == MapMode.LIVE);
-        } else {
+        if (mapOptions.mapState != null) {
             followMyLocation = mapOptions.mapState.followsMyLocation();
             if (overlayCaches.getCircles() != mapOptions.mapState.showsCircles()) {
                 overlayCaches.switchCircles();
             }
+        } else if (mapOptions.mapMode != MapMode.LIVE) {
+            followMyLocation = false;
         }
         if (mapOptions.geocode != null || mapOptions.searchResult != null || mapOptions.coords != null || mapOptions.mapState != null) {
             centerMap(mapOptions.geocode, mapOptions.searchResult, mapOptions.coords, mapOptions.mapState);
@@ -667,11 +656,8 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
         try {
             final MenuItem itemMapLive = menu.findItem(R.id.menu_map_live);
-            if (mapOptions.isLiveEnabled) {
-                itemMapLive.setTitle(res.getString(R.string.map_live_disable));
-            } else {
-                itemMapLive.setTitle(res.getString(R.string.map_live_enable));
-            }
+            final int titleResource = mapOptions.isLiveEnabled ? R.string.map_live_disable : R.string.map_live_enable;
+            itemMapLive.setTitle(res.getString(titleResource));
             itemMapLive.setVisible(mapOptions.coords == null);
 
 
@@ -1179,7 +1165,8 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
             loadThreadRun = System.currentTimeMillis();
 
             final SearchResult searchResult;
-            if (mapOptions.mapMode == MapMode.LIVE) {
+            final MapMode mapMode = mapOptions.mapMode;
+            if (mapMode == MapMode.LIVE) {
                 searchResult = mapOptions.isLiveEnabled ? new SearchResult() : new SearchResult(DataStore.loadStoredInViewport(mapView.getViewport(), Settings.getCacheType()));
             } else {
                 // map started from another activity
@@ -1202,17 +1189,16 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
             final boolean excludeMine = Settings.isExcludeMyCaches();
             final boolean excludeDisabled = Settings.isExcludeDisabledCaches();
-            if (mapOptions.mapMode == MapMode.LIVE) {
+            if (mapMode == MapMode.LIVE) {
                 synchronized (caches) {
                     filter(caches);
                 }
             }
             countVisibleCaches();
+            // we don't want to see any stale waypoints
+            waypoints.clear();
             if (cachesCnt < Settings.getWayPointsThreshold() || mapOptions.geocode != null) {
-                // we don't want to see any stale waypoints
-                waypoints.clear();
-                if (mapOptions.isLiveEnabled || mapOptions.mapMode == MapMode.LIVE
-                        || mapOptions.mapMode == MapMode.COORDS) {
+                if (mapOptions.isLiveEnabled || mapMode == MapMode.LIVE || mapMode == MapMode.COORDS) {
                     //All visible waypoints
                     final CacheType type = Settings.getCacheType();
                     final Set<Waypoint> waypointsInViewport = DataStore.loadWaypoints(mapView.getViewport(), excludeMine, excludeDisabled, type);
@@ -1223,9 +1209,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
                         waypoints.addAll(c.getWaypoints());
                     }
                 }
-            } else {
-                // we don't want to see any stale waypoints when above threshold
-                waypoints.clear();
             }
 
             //render
@@ -1242,7 +1225,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
     }
 
     /**
-     * Worker thread downloading caches from the internet.
+     * Worker thread downloading caches from the Internet.
      * Started by {@link LoadRunnable}.
      */
 
@@ -1324,20 +1307,15 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
                 // when less than showWaypointsthreshold Caches shown
                 if (mapOptions.mapMode == MapMode.SINGLE || cachesCnt < Settings.getWayPointsThreshold()) {
                     for (final Waypoint waypoint : waypointsToDisplay) {
-
-                        if (waypoint == null || waypoint.getCoords() == null) {
-                            continue;
+                        if (waypoint != null && waypoint.getCoords() != null) {
+                            itemsToDisplay.add(getWaypointItem(waypoint));
                         }
-
-                        itemsToDisplay.add(getWaypointItem(waypoint));
                     }
                 }
                 for (final Geocache cache : cachesToDisplay) {
-
-                    if (cache == null || cache.getCoords() == null) {
-                        continue;
+                    if (cache != null && cache.getCoords() != null) {
+                        itemsToDisplay.add(getCacheItem(cache));
                     }
-                    itemsToDisplay.add(getCacheItem(cache));
                 }
             }
             // don't add other waypoints to overlayCaches if just one point should be displayed
@@ -1487,7 +1465,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
         final List<Geocache> removeList = new ArrayList<>();
         for (final Geocache cache : caches) {
-            if ((excludeMine && cache.isFound()) || (excludeMine && cache.isOwner()) || (excludeDisabled && cache.isDisabled()) || (excludeDisabled && cache.isArchived())) {
+            if ((excludeMine && (cache.isFound() || cache.isOwner())) || (excludeDisabled && (cache.isDisabled() || cache.isArchived()))) {
                 removeList.add(cache);
             }
         }
