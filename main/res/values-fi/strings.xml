@@ -304,8 +304,8 @@
   <string name="caches_sort_state">Tila</string>
   <string name="caches_sort_storage">Laitteelle tallentamisen päivämäärä</string>
   <string name="caches_sort_eventdate">Tapahtuman päivämäärä</string>
-  <string name="caches_select_mode">Valitse tila</string>
-  <string name="caches_select_mode_exit">Poistu valitusta tilasta</string>
+  <string name="caches_select_mode">Valintatila</string>
+  <string name="caches_select_mode_exit">Poistu valintatilasta</string>
   <string name="caches_select_invert">Käänteinen valinta</string>
   <string name="caches_nearby">Lähistöllä</string>
   <string name="caches_manage">Hallinnoi</string>
