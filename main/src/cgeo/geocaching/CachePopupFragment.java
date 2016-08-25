@@ -203,8 +203,11 @@ public class CachePopupFragment extends AbstractDialogFragment {
                     @Override
                     public void call() {
                         activity.supportInvalidateOptionsMenu();
-                        CacheDetailActivity.updateOfflineBox(getView(), cache, res, new RefreshCacheClickListener(), new DropCacheClickListener(), new StoreCacheClickListener(), null);
-                        CacheDetailActivity.updateCacheLists(getView(), cache, res);
+                        final View view = getView();
+                        if (view != null) {
+                            CacheDetailActivity.updateOfflineBox(view, cache, res, new RefreshCacheClickListener(), new DropCacheClickListener(), new StoreCacheClickListener(), null);
+                            CacheDetailActivity.updateCacheLists(view, cache, res);
+                        }
                     }
                 });
             }
