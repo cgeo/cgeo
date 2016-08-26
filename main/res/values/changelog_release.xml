@@ -2,7 +2,7 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-    <b>Next bugfix release:</b>\n
+    <b>2016.08.27:</b>\n
     · Fix: Crashes on (live) map\n
     · Fix: Crashes in settings or on startup\n
     · Info: The interworking of c:geo with maps.me is not working due to an issue in the current maps.me version, seems we cannot fix it on our side\n
