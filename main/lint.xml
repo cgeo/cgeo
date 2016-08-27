@@ -5,6 +5,7 @@
     <issue id="DuplicateIds" severity="error" />
     <issue id="DuplicateIncludedIds" severity="error" />
     <issue id="ExportedContentProvider" severity="ignore" />
+    <issue id="IconDensities" severity="ignore" />
     <issue id="ImpliedQuantity" severity="ignore" />
     <issue id="InvalidPackage" severity="ignore" />
     <issue id="MissingQuantity">
