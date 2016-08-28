@@ -3,7 +3,8 @@
   <!-- changelog for the master branch -->
   <string name="changelog_master" translatable="false">
     <b>Next feature release:</b>\n
-    · <i>Fix: Attribute filter now lists non GC attributes</i>
+    · Fix: Attribute filter now lists non GC attributes
+    · Fix: Better GPX file compatibility with Garmin devices
     \n
     \n
   </string>

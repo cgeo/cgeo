@@ -1,5 +1,21 @@
 package cgeo.geocaching.export;
 
+import android.support.annotation.NonNull;
+
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.CharEncoding;
+import org.apache.commons.lang3.StringUtils;
+import org.xmlpull.v1.XmlSerializer;
+
+import java.io.IOException;
+import java.io.Writer;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+import java.util.Set;
+
 import cgeo.geocaching.enumerations.CacheAttribute;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.location.Geopoint;
@@ -14,21 +30,6 @@ import cgeo.geocaching.utils.SynchronizedDateFormat;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.XmlUtils;
 import cgeo.org.kxml2.io.KXmlSerializer;
-
-import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.lang3.CharEncoding;
-import org.apache.commons.lang3.StringUtils;
-import android.support.annotation.NonNull;
-import org.xmlpull.v1.XmlSerializer;
-
-import java.io.IOException;
-import java.io.Writer;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
-import java.util.Set;
 
 public final class GpxSerializer {
 
@@ -147,8 +148,8 @@ public final class GpxSerializer {
             writeAttributes(cache);
 
             XmlUtils.multipleTexts(gpx, NS_GROUNDSPEAK,
-                    "difficulty", Float.toString(cache.getDifficulty()),
-                    "terrain", Float.toString(cache.getTerrain()),
+                    "difficulty", integerIfPossible(cache.getDifficulty()),
+                    "terrain", integerIfPossible(cache.getTerrain()),
                     "country", getCountry(cache),
  "state", getState(cache));
 
@@ -376,5 +377,13 @@ public final class GpxSerializer {
         }
         // fall back to returning everything, but only for the country
         return cache.getLocation();
+    }
+
+    private static String integerIfPossible(double value)
+    {
+        if(value == (long) value)
+            return String.format(Locale.ENGLISH, "%d",(long)value);
+        else
+            return String.format(Locale.ENGLISH, "%s",value);
     }
 }

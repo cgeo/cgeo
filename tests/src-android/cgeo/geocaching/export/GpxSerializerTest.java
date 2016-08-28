@@ -1,19 +1,8 @@
 package cgeo.geocaching.export;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.models.Waypoint;
-import cgeo.geocaching.enumerations.LoadFlags;
-import cgeo.geocaching.enumerations.WaypointType;
-import cgeo.geocaching.files.GPX10Parser;
-import cgeo.geocaching.files.ParserException;
-import cgeo.geocaching.list.StoredList;
-import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
-import cgeo.geocaching.test.R;
-
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.CharEncoding;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -22,6 +11,20 @@ import java.io.StringWriter;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.concurrent.atomic.AtomicReference;
+
+import cgeo.geocaching.enumerations.LoadFlags;
+import cgeo.geocaching.enumerations.WaypointType;
+import cgeo.geocaching.files.GPX10Parser;
+import cgeo.geocaching.files.ParserException;
+import cgeo.geocaching.list.StoredList;
+import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.Waypoint;
+import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
+import cgeo.geocaching.test.R;
+import cgeo.geocaching.utils.Charsets;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class GpxSerializerTest extends AbstractResourceInstrumentationTestCase {
 
@@ -134,6 +137,32 @@ public class GpxSerializerTest extends AbstractResourceInstrumentationTestCase {
         } finally {
             DataStore.removeCache(geocode, LoadFlags.REMOVE_ALL);
         }
+    }
+
+    public void testDTNumbersAreIntegers() throws IOException, ParserException {
+        final int cacheResource = R.raw.gc31j2h;
+        loadCacheFromResource(cacheResource);
+
+        final String exported = getGPXFromCache("GC31J2H");
+        final String imported = IOUtils.toString(getResourceStream(R.raw.gc31j2h), Charsets.UTF_8);
+        assertEqualTags(imported, exported, "groundspeak:difficulty");
+        assertEqualTags(imported, exported, "groundspeak:terrain");
+    }
+
+    public void testStatusSameCaseAfterExport() throws IOException, ParserException {
+        final int cacheResource = R.raw.gc31j2h;
+        loadCacheFromResource(cacheResource);
+
+        final String exported = getGPXFromCache("GC31J2H");
+        final String imported = IOUtils.toString(getResourceStream(R.raw.gc31j2h), Charsets.UTF_8);
+        assertEqualTags(imported, exported, "groundspeak:type");
+    }
+
+    private static void assertEqualTags(final String imported, final String exported, final String tag) {
+        final String[] importedContent = StringUtils.substringsBetween(imported, "<" + tag + ">", "</" + tag + ">");
+        final String[] exportedContent = StringUtils.substringsBetween(exported, "<" + tag + ">", "</" + tag + ">");
+        assertThat(importedContent).isNotEmpty();
+        assertThat(importedContent).isEqualTo(exportedContent);
     }
 
 }
