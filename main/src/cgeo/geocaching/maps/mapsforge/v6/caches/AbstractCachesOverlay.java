@@ -15,12 +15,7 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapUtils;
 
-import org.mapsforge.core.graphics.Bitmap;
-import org.mapsforge.core.model.LatLong;
-import org.mapsforge.map.android.graphics.AndroidGraphicFactory;
-import org.mapsforge.map.layer.Layer;
-import org.mapsforge.map.layer.Layers;
-
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -28,11 +23,18 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 
+import org.mapsforge.core.graphics.Bitmap;
+import org.mapsforge.core.model.LatLong;
+import org.mapsforge.map.android.graphics.AndroidGraphicFactory;
+import org.mapsforge.map.android.view.MapView;
+import org.mapsforge.map.layer.Layer;
+import org.mapsforge.map.layer.Layers;
+
 public abstract class AbstractCachesOverlay {
 
     private final int overlayId;
     private final Set<GeoEntry> geoEntries;
-    private final MfMapView mapView;
+    private final WeakReference<MfMapView> mapViewRef;
     private final Layer anchorLayer;
     private final GeoitemLayers layerList = new GeoitemLayers();
     private final MapHandlers mapHandlers;
@@ -41,7 +43,7 @@ public abstract class AbstractCachesOverlay {
     public AbstractCachesOverlay(final int overlayId, final Set<GeoEntry> geoEntries, final MfMapView mapView, final Layer anchorLayer, final MapHandlers mapHandlers) {
         this.overlayId = overlayId;
         this.geoEntries = geoEntries;
-        this.mapView = mapView;
+        this.mapViewRef = new WeakReference<>(mapView);
         this.anchorLayer = anchorLayer;
         this.mapHandlers = mapHandlers;
     }
@@ -51,6 +53,10 @@ public abstract class AbstractCachesOverlay {
     }
 
     public int getVisibleItemsCount() {
+        final MfMapView mapView = mapViewRef.get();
+        if (mapView == null) {
+            return 0;
+        }
         return mapView.getViewport().count(DataStore.loadCaches(getGeocodes(), LoadFlags.LOAD_CACHE_OR_DB));
     }
 
@@ -160,7 +166,11 @@ public abstract class AbstractCachesOverlay {
     }
 
     protected void addLayers() {
-        final Layers layers = this.mapView.getLayerManager().getLayers();
+        final MapView mapView = mapViewRef.get();
+        if (mapView == null) {
+            return;
+        }
+        final Layers layers = mapView.getLayerManager().getLayers();
         final int index = layers.indexOf(anchorLayer) + 1;
         layers.addAll(index, layerList.getAsLayers());
     }
@@ -170,11 +180,19 @@ public abstract class AbstractCachesOverlay {
     }
 
     protected Viewport getViewport() {
-        return this.mapView.getViewport();
+        final MfMapView mapView = this.mapViewRef.get();
+        if (mapView == null) {
+            return null;
+        }
+        return mapView.getViewport();
     }
 
     protected int getMapZoomLevel() {
-        return this.mapView.getMapZoomLevel();
+        final MfMapView mapView = this.mapViewRef.get();
+        if (mapView == null) {
+            return 0;
+        }
+        return mapView.getMapZoomLevel();
     }
 
     protected void showProgress() {
@@ -191,7 +209,11 @@ public abstract class AbstractCachesOverlay {
     }
 
     protected void clearLayers() {
-        final Layers layers = this.mapView.getLayerManager().getLayers();
+        final MfMapView mapView = this.mapViewRef.get();
+        if (mapView == null) {
+            return;
+        }
+        final Layers layers = mapView.getLayerManager().getLayers();
 
         for (final GeoitemLayer layer : layerList) {
             geoEntries.remove(new GeoEntry(layer.getItemCode(), overlayId));
@@ -204,8 +226,12 @@ public abstract class AbstractCachesOverlay {
     }
 
     protected void syncLayers(final Collection<String> removeCodes, final Collection<String> newCodes) {
+        final MfMapView mapView = this.mapViewRef.get();
+        if (mapView == null) {
+            return;
+        }
         removeItems(removeCodes);
-        final Layers layers = this.mapView.getLayerManager().getLayers();
+        final Layers layers = mapView.getLayerManager().getLayers();
         final int index = layers.indexOf(anchorLayer) + 1;
         layers.addAll(index, layerList.getMatchingLayers(newCodes));
 
@@ -213,7 +239,11 @@ public abstract class AbstractCachesOverlay {
     }
 
     private void removeItems(final Collection<String> removeCodes) {
-        final Layers layers = this.mapView.getLayerManager().getLayers();
+        final MfMapView mapView = this.mapViewRef.get();
+        if (mapView == null) {
+            return;
+        }
+        final Layers layers = mapView.getLayerManager().getLayers();
         for (final String code : removeCodes) {
             final GeoitemLayer item = layerList.getItem(code);
             if (item != null) {
