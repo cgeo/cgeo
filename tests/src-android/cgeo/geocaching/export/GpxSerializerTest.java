@@ -1,5 +1,7 @@
 package cgeo.geocaching.export;
 
+import android.support.annotation.NonNull;
+
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.CharEncoding;
 import org.apache.commons.lang3.StringUtils;
@@ -156,6 +158,38 @@ public class GpxSerializerTest extends AbstractResourceInstrumentationTestCase {
         final String exported = getGPXFromCache("GC31J2H");
         final String imported = IOUtils.toString(getResourceStream(R.raw.gc31j2h), Charsets.UTF_8);
         assertEqualTags(imported, exported, "groundspeak:type");
+    }
+
+    public void testSameFieldsAfterExport() throws IOException, ParserException {
+        final int cacheResource = R.raw.gc31j2h;
+        loadCacheFromResource(cacheResource);
+
+        final String exported = extractWaypoint(getGPXFromCache("GC31J2H"));
+        final String imported = extractWaypoint(IOUtils.toString(getResourceStream(R.raw.gc31j2h), Charsets.UTF_8));
+
+        assertEqualTags(imported, exported, "time");
+        assertEqualTags(imported, exported, "name");
+        // desc is not the same, since imported files also contain owner and T/D there
+        // url is different since we export direct urls, no redirection via coord.info
+        assertEqualTags(imported, exported, "urlname");
+        assertEqualTags(imported, exported, "sym");
+        assertEqualTags(imported, exported, "type");
+
+        assertEqualTags(imported, exported, "groundspeak:name");
+        assertEqualTags(imported, exported, "groundspeak:placed_by");
+        assertEqualTags(imported, exported, "groundspeak:type");
+        assertEqualTags(imported, exported, "groundspeak:container");
+        assertEqualTags(imported, exported, "groundspeak:difficulty");
+        assertEqualTags(imported, exported, "groundspeak:terrain");
+        assertEqualTags(imported, exported, "groundspeak:country");
+        assertEqualTags(imported, exported, "groundspeak:state");
+        // different newlines in hints (and all other text). that's okay
+        assertEqualTags(imported, exported, "groundspeak:date");
+    }
+
+    @NonNull
+    private String extractWaypoint(String gpx) {
+        return StringUtils.substringBetween(gpx, "<wpt", "</wpt>");
     }
 
     private static void assertEqualTags(final String imported, final String exported, final String tag) {
