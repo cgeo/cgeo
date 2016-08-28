@@ -23,7 +23,12 @@
     <uses-feature
         android:name="android.hardware.nfc"
         android:required="false" />
-
+	<!-- Enforce working on older versions of Chromebook, which don't have a touchscreen, and where the OS does not automatically enable this.
+	https://developer.android.com/topic/arc/index.html -->
+    <uses-feature
+        android:name="android.hardware.touchscreen"
+        android:required="false" />
+        
     <supports-screens
         android:anyDensity="true"
         android:largeScreens="true"
