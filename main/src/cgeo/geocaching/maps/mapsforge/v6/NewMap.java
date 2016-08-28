@@ -41,24 +41,6 @@ import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
 
-import org.apache.commons.lang3.StringUtils;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import org.mapsforge.core.model.LatLong;
-import org.mapsforge.map.android.graphics.AndroidGraphicFactory;
-import org.mapsforge.map.android.graphics.AndroidResourceBitmap;
-import org.mapsforge.map.android.util.AndroidUtil;
-import org.mapsforge.map.layer.Layers;
-import org.mapsforge.map.layer.cache.TileCache;
-import org.mapsforge.map.layer.renderer.TileRendererLayer;
-import org.mapsforge.map.model.DisplayModel;
-import org.mapsforge.map.reader.MapFile;
-import org.mapsforge.map.rendertheme.ExternalRenderTheme;
-import org.mapsforge.map.rendertheme.InternalRenderTheme;
-import org.mapsforge.map.rendertheme.XmlRenderTheme;
-import org.mapsforge.map.rendertheme.rule.RenderThemeHandler;
-import org.xmlpull.v1.XmlPullParserException;
-
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -71,6 +53,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -92,6 +76,21 @@ import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 import butterknife.ButterKnife;
+import org.apache.commons.lang3.StringUtils;
+import org.mapsforge.core.model.LatLong;
+import org.mapsforge.map.android.graphics.AndroidGraphicFactory;
+import org.mapsforge.map.android.graphics.AndroidResourceBitmap;
+import org.mapsforge.map.android.util.AndroidUtil;
+import org.mapsforge.map.layer.Layers;
+import org.mapsforge.map.layer.cache.TileCache;
+import org.mapsforge.map.layer.renderer.TileRendererLayer;
+import org.mapsforge.map.model.DisplayModel;
+import org.mapsforge.map.reader.MapFile;
+import org.mapsforge.map.rendertheme.ExternalRenderTheme;
+import org.mapsforge.map.rendertheme.InternalRenderTheme;
+import org.mapsforge.map.rendertheme.XmlRenderTheme;
+import org.mapsforge.map.rendertheme.rule.RenderThemeHandler;
+import org.xmlpull.v1.XmlPullParserException;
 import rx.Subscription;
 import rx.subscriptions.Subscriptions;
 
@@ -815,6 +814,7 @@ public class NewMap extends AbstractActionBarActivity {
         }
     }
 
+    @NonNull
     private String calculateTitle() {
         if (isLiveEnabled) {
             return res.getString(R.string.map_live);
@@ -840,6 +840,7 @@ public class NewMap extends AbstractActionBarActivity {
         }
     }
 
+    @NonNull
     private String calculateSubtitle() {
         if (!isLiveEnabled && mapMode == MapMode.SINGLE) {
             final Geocache cache = getSingleModeCache();
@@ -910,6 +911,7 @@ public class NewMap extends AbstractActionBarActivity {
 
     }
 
+    @NonNull
     public static Intent getLiveMapIntent(final Activity fromActivity) {
         return new Intent(fromActivity, NewMap.class).putExtra(Intents.EXTRA_MAP_MODE, MapMode.LIVE).putExtra(Intents.EXTRA_LIVE_ENABLED, Settings.isLiveMap());
     }
