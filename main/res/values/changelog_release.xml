@@ -2,6 +2,12 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
+    <b>2016.08.27:</b>\n
+    · Fix: Crashes on (live) map\n
+    · Fix: Crashes in settings or on startup\n
+    · Info: The interworking of c:geo with maps.me is not working due to an issue in the current maps.me version, seems we cannot fix it on our side\n
+    \n
+    \n
     <b>2016.08.16:</b>\n
     · New: Allow caches to be stored on more than one list\n
     · New: Experimental beta version of new mapsforge-based offline map\n
