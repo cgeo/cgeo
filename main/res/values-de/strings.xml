@@ -33,12 +33,12 @@
   <string name="block">Groundspeak Block Party</string>
   <string name="unknown">Unbekannter Typ</string>
   <!-- cache sizes -->
-  <string name="cache_size_micro">Micro</string>
-  <string name="cache_size_small">Small</string>
-  <string name="cache_size_regular">Regular</string>
-  <string name="cache_size_large">Large</string>
+  <string name="cache_size_micro">Mikro</string>
+  <string name="cache_size_small">Klein</string>
+  <string name="cache_size_regular">Normal</string>
+  <string name="cache_size_large">Groß</string>
   <string name="cache_size_other">Sonstige</string>
-  <string name="cache_size_virtual">Virtual</string>
+  <string name="cache_size_virtual">Virtuell</string>
   <string name="cache_size_notchosen">Nicht gewählt</string>
   <string name="cache_size_unknown">Unbekannt</string>
   <string name="cache_size_nano">Nano</string>
@@ -229,7 +229,7 @@
   <string name="warn_rendertheme_missing">Das gewählte Karten-Theme wurde nicht gefunden.</string>
   <string name="warn_pocket_query_select">Kein Pocket-Query ausgewählt.</string>
   <string name="warn_no_pocket_query_found">Kein Pocket-Query online gefunden.</string>
-  <string name="err_read_pocket_query_list">Fehler beim Lesen der Pocket Queries.</string>
+  <string name="err_read_pocket_query_list">Fehler beim Lesen der Pocket-Queries.</string>
   <string name="info_log_posted">Log erfolgreich gesendet.</string>
   <string name="info_log_saved">Log erfolgreich gespeichert.</string>
   <string name="info_log_post_failed">Das Senden des Logs ist fehlgeschlagen.</string>
@@ -632,7 +632,7 @@
   <string name="feature_search_owner">Suche nach Besitzer</string>
   <string name="feature_search_finder">Suche nach Finder</string>
   <string name="init_experimental_title">Experimentelle Funktionen</string>
-  <string name="init_mfbeta">Mapsforge beta als Standard</string>
+  <string name="init_mfbeta">Mapsforge Beta als Standard</string>
   <string name="init_mfbeta_description">Der aktuelle Release enthält eine Betaversion unserer neuen Mapsforge-Karte als experimentelles Feature. Dies neue Karte kann hier als Standard für Live-Karte und Listen aktiviert werden.</string>
   <!-- map sources -->
   <string name="map_source_google_map">Google: Karte</string>
@@ -676,10 +676,10 @@
   <!-- auth Twitter -->
   <string name="auth_dialog_completed_twitter">c:geo ist nun autorisiert, Tweets bei Twitter zu erstellen.</string>
   <!-- auth opencaching -->
-  <string name="auth_ocde">opencaching.de</string>
+  <string name="auth_ocde">Opencaching.de</string>
   <string name="auth_ocpl">opencaching.pl</string>
   <string name="auth_ocnl">opencaching.nl</string>
-  <string name="auth_ocus">opencaching.us</string>
+  <string name="auth_ocus">Opencaching.us</string>
   <string name="auth_ocro">opencaching.ro</string>
   <string name="auth_ocuk">opencaching.org.uk</string>
   <string name="auth_dialog_completed_oc">c:geo ist nun autorisiert, Caches zu laden und auf %s zu loggen.</string>
@@ -1411,7 +1411,7 @@
   <string name="showcase_cachelist_title">Liste wechseln</string>
   <string name="showcase_cachelist_text">Du kannst zwischen deinen Listen wechseln, indem du auf den Titel der Liste klickst.</string>
   <string name="showcase_compass_hint_title">Zeige den Hint</string>
-  <string name="showcase_compass_hint_text">Diese Option könnte dir helfen den Cache zu finden - sie zeigt den Hint an, wenn es einen gibt.</string>
+  <string name="showcase_compass_hint_text">Diese Option könnte dir helfen den Cache zu finden – sie zeigt den Hint an, wenn es einen gibt.</string>
   <string name="confirm_log_title">Ungewöhnlicher Log-Typ</string>
   <string name="confirm_log_message">Du möchtest „%s“ loggen. Bist du dir sicher?</string>
   <!-- Geokrety -->
