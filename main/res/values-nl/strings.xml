@@ -135,8 +135,8 @@
     <item>1024 px</item>
   </string-array>
   <!-- translation -->
-  <string name="translate_to_sys_lang">Vertaal naar %s</string>
-  <string name="translate_to_english">Vertaal naar engels</string>
+  <string name="translate_to_sys_lang">%s</string>
+  <string name="translate_to_english">Engels</string>
   <string name="translate_length_warning">Vertaling kan mislukken bij grote stukken tekst.</string>
   <!-- errors, warnings, info toasts -->
   <string name="err_none">Ok</string>
@@ -799,7 +799,7 @@
   <string name="cache_menu_sygic_drive">Sygic (rijden)</string>
   <string name="cache_menu_radar">Radar</string>
   <string name="cache_menu_map">Toon op kaart</string>
-  <string name="cache_menu_mfbeta">Mapsforge Bèta</string>
+  <string name="cache_menu_mfbeta">Mapsforge Beta</string>
   <string name="cache_menu_map_static">Statische kaarten</string>
   <string name="cache_menu_download_map_static">Download statische kaarten</string>
   <string name="cache_menu_rmaps">Rmaps</string>
@@ -1080,7 +1080,7 @@
   <string name="helper_sendtocgeo_description">Verzenden naar c:geo is een browserextensie <strong>voor uw PC</strong>. Tijdens het browsen op geocaching.com, kunt u caches verzenden naar uw smartphone met een klik direct in de browser.</string>
   <string name="helper_locus_title">Locus</string>
   <string name="helper_locus_description">Outdoor navigatie app voor uw telefoon of Tablet. Topo kaarten offline bekijken, uw route vastleggen, geocaches zoeken, gebruik een stem gids en meer.</string>
-  <string name="helper_gpsstatus_title">GPS Status &amp; Toolbox</string>
+  <string name="helper_gpsstatus_title">GPS-Status &amp; Toolbox</string>
   <string name="helper_gpsstatus_description">De radar van deze applicatie kan gebruikt worden samen met c:geo. Het bied ook vele andere GPS gerelateerde informatie.</string>
   <string name="helper_bluetoothgps_title">Bluetooth GPS</string>
   <string name="helper_bluetoothgps_description">Maakt het mogelijk om een externe GPS ontvanger te gebruiken voor betere ontvangst, betere locatiebepaling en kan gebruik van de telefoonbatterij verminderen.</string>

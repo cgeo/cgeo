@@ -391,7 +391,7 @@
   <string name="about_apache_license"><a href="">Llicència Apache, versió 2.0</a></string>
   <string name="about_help">Ajuda</string>
   <string name="about_system_include">Si us plau incloure la següent informació de sistema quan envieu un informe d\'error o demanar més informació sobre c:geo:</string>
-  <string name="about_system_info_send_button">Enviar per correu...</string>
+  <string name="about_system_info_send_button">Enviar per correu…</string>
   <string name="about_system_info">Informació del sistema de c:geo</string>
   <string name="about_system_info_send_chooser">Enviar informació del sistema</string>
   <string name="changelog_github">Llista de tots els canvis</string>

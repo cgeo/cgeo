@@ -19,15 +19,15 @@
   <string name="mystery">Mystery-Cache</string>
   <string name="letterbox">Letterbox Hybrid</string>
   <string name="event">Event-Cache</string>
-  <string name="mega">Mega Event-Cache</string>
-  <string name="giga">Giga-Event Cache</string>
+  <string name="mega">Mega-Event-Cache</string>
+  <string name="giga">Giga-Event-Cache</string>
   <string name="earth">Earth-Cache</string>
-  <string name="cito">Cache in Trash out Event</string>
+  <string name="cito">Cache-In-Trash-Out-Event</string>
   <string name="webcam">Webcam-Cache</string>
   <string name="virtual">Virtual-Cache</string>
   <string name="wherigo">Wherigo-Cache</string>
   <string name="lostfound">Lost &amp; Found Event Cache</string>
-  <string name="ape">Project Ape-Cache</string>
+  <string name="ape">Project-APE-Cache</string>
   <string name="gchq">Groundspeak HQ</string>
   <string name="gps">GPS Adventures Exhibit</string>
   <string name="block">Groundspeak Block Party</string>
@@ -45,7 +45,7 @@
   <string name="cache_size_very_large">Extrem groß</string>
   <!-- waypoints -->
   <string name="wp_final">Final</string>
-  <string name="wp_stage">Station eines Multi-Cache</string>
+  <string name="wp_stage">Station eines Multi-Caches</string>
   <string name="wp_puzzle">Station mit Frage</string>
   <string name="wp_pkg">Parkplatz</string>
   <string name="wp_trailhead">Ausgangspunkt</string>
@@ -114,7 +114,7 @@
   <string name="log_announcement">Ankündigung</string>
   <string name="log_today">Heute</string>
   <string name="log_yesterday">Gestern</string>
-  <string name="log_smilies">Smilies</string>
+  <string name="log_smilies">Smileys</string>
   <string name="log_image">Bild</string>
   <string name="log_image_attach">Bild hinzufügen</string>
   <string name="log_image_stored">Vorhanden</string>
@@ -124,7 +124,7 @@
   <string name="log_image_scale">Skalierung</string>
   <string name="log_password_title">Log-Passwort:</string>
   <string name="log_hint_log_password">Log-Passwort eingeben</string>
-  <string name="log_oc_team_comment">OC Team Bemerkung</string>
+  <string name="log_oc_team_comment">OC-Team-Bemerkung</string>
   <string name="log_your_saved_log">Dein gespeichertes Log</string>
   <string name="log_empty_logbook">Das Logbuch dieses Caches ist leer.</string>
   <string-array name="log_image_scales">
@@ -140,20 +140,20 @@
   <string name="translate_length_warning">Die Übersetzung kann bei sehr langen Texten evtl. fehlschlagen.</string>
   <!-- errors, warnings, info toasts -->
   <string name="err_none">OK</string>
-  <string name="err_parse">Parsing der Anmeldung gescheitert</string>
+  <string name="err_parse">Verarbeiten der Anmeldeseite fehlgeschlagen</string>
   <string name="err_server">Verbindung zu Geocaching.com konnte nicht hergestellt werden (Server oder Verbindung inaktiv?)</string>
-  <string name="err_server_ec">Verbindung zu extremcaching.com konnte nicht hergestellt werden. Server ist nicht verfügbar oder keine Internet-Verbindung vorhanden.</string>
+  <string name="err_server_ec">Verbindung zu Extremcaching.com konnte nicht hergestellt werden. Server ist nicht verfügbar oder keine Internet-Verbindung vorhanden.</string>
   <string name="err_server_gk">Verbindung zu GeoKrety.org konnte nicht hergestellt werden. Server ist nicht verfügbar oder keine Internet-Verbindung vorhanden.</string>
   <string name="err_login">Keine Anmeldedaten gespeichert.</string>
-  <string name="err_login_failed_toast">c:geo konnte sich nicht einloggen und arbeitet im Offline-Modus. Bitte die Login-Daten in den Einstellungen überprüfen oder eine Internetverbindung herstellen.</string>
+  <string name="err_login_failed_toast">c:geo konnte sich nicht anmelden und arbeitet im Offline-Modus. Bitte die Anmeldedaten in den Einstellungen überprüfen oder eine Internetverbindung herstellen.</string>
   <string name="err_unknown">Unbekannter Fehler</string>
   <string name="err_unknown_address">c:geo konnte keine Koordinaten für diese Adresse ermitteln</string>
   <string name="err_comm">Unbekannter Kommunikationsfehler</string>
   <string name="err_missing_auth">Benutzername oder Passwort nicht gesetzt</string>
   <string name="err_wrong">Benutzername und/oder Passwort falsch</string>
   <string name="err_maintenance">Geocaching.com wird zur Zeit gewartet, bitte später erneut versuchen. c:geo arbeitet im Offline-Modus.</string>
-  <string name="err_license">Die Geocaching.com Nutzungsbedingungen wurden nicht akzeptiert. c:geo kann deshalb keine Koordinaten laden.</string>
-  <string name="err_unvalidated_account">Die Logindaten müssen zuerst auf Geocaching.com validiert werden.</string>
+  <string name="err_license">Die Geocaching.com-Nutzungsbedingungen wurden nicht akzeptiert. c:geo kann deshalb keine Koordinaten laden.</string>
+  <string name="err_unvalidated_account">Die Anmeldedaten müssen zuerst auf Geocaching.com validiert werden.</string>
   <string name="err_unpublished">Der aufgerufene Cache ist noch nicht veröffentlicht.</string>
   <string name="err_cache_not_found">Der gesuchte Cache konnte nicht gefunden werden.</string>
   <string name="err_premium_only">Der Cache ist nur für Premium-Mitglieder von Geocaching.com verfügbar.</string>
@@ -172,7 +172,7 @@
   <string name="err_application_no">c:geo konnte keine passende Anwendung finden.</string>
   <string name="err_auth_initialize">c:geo konnte die Autorisierung nicht starten.</string>
   <string name="err_auth_process">Autorisierung fehlgeschlagen.</string>
-  <string name="err_cannot_log_visit">c:geo hat nicht genügend Informationen um den Besuch zu loggen. Bitte über die Cache-Details versuchen.</string>
+  <string name="err_cannot_log_visit">c:geo hat nicht genügend Informationen, um den Besuch zu loggen. Bitte über die Cache-Details versuchen.</string>
   <string name="err_download_fail">c:geo konnte keine Caches laden, weil </string>
   <string name="err_dwld_details_failed">Download der Cache-Details fehlgeschlagen.</string>
   <string name="err_load_descr_failed">Laden der Cachebeschreibung fehlgeschlagen.</string>
@@ -216,16 +216,16 @@
   <string name="warn_no_username">Kein Benutzername angegeben.</string>
   <string name="warn_no_connector">Keiner der derzeit aktivierten Dienste unterstützt diese Suche.</string>
   <string name="warn_search_help_title">Hilfe benötigt?</string>
-  <string name="warn_search_help_address">Adresse oder Ort eingeben, z. B. Postanschrift \"Dorfstraße 333, Berlin, Deutschland\", einen Ort \"Berlin\" oder den Namen eines beliebigen Ortes wie \"Tiergarten\".</string>
-  <string name="warn_search_help_gccode">Geocode eingeben, z. B. \"GC1VCAZ\".</string>
+  <string name="warn_search_help_address">Adresse oder Ort eingeben, z. B. Postanschrift „Dorfstraße 333, Berlin, Deutschland“, einen Ort „Berlin“ oder den Namen eines beliebigen Ortes wie „Tiergarten“.</string>
+  <string name="warn_search_help_gccode">Geocode eingeben, z. B. „GC1VCAZ“.</string>
   <string name="warn_search_help_keyword">Stichwörter eingeben, die im Namen des zu suchenden Caches enthalten sind.</string>
-  <string name="warn_search_help_user">Name eines Benutzers auf geocaching.com eingeben.</string>
-  <string name="warn_search_help_tb">Code des Trackables eingeben, z.B. \"TB29QMZ\".</string>
+  <string name="warn_search_help_user">Name eines Benutzers auf Geocaching.com eingeben.</string>
+  <string name="warn_search_help_tb">Code des Trackables eingeben, z. B. „TB29QMZ“.</string>
   <string name="warn_log_text_fill">Bitte Text einfügen.</string>
   <string name="warn_load_images">c:geo konnte die Bilder nicht laden.</string>
   <string name="warn_invalid_mapfile">Die gewählte Datei ist keine gültige Mapsforge-Karte in der Version 0.3.0.\nOffline Karte ist nicht verfügbar.</string>
   <string name="warn_deprecated_mapfile">Es wird eine veraltete Offline-Karte v0.2.4 verwendet.\nBitte zukünftig Offline-Karten in der Version 0.3.0 verwenden.\nDer Support für die alte Version wird im nächsten Release eingestellt.</string>
-  <string name="warn_nonexistant_mapfile">Die gewählte Datei existiert nicht.\nOffline Karte ist nicht verfügbar.</string>
+  <string name="warn_nonexistant_mapfile">Die gewählte Datei existiert nicht.\nOffline-Karte ist nicht verfügbar.</string>
   <string name="warn_rendertheme_missing">Das gewählte Karten-Theme wurde nicht gefunden.</string>
   <string name="warn_pocket_query_select">Kein Pocket-Query ausgewählt.</string>
   <string name="warn_no_pocket_query_found">Kein Pocket-Query online gefunden.</string>
@@ -242,7 +242,7 @@
   <string name="info_stored_image">Neues Foto gespeichert nach:</string>
   <string name="info_storing_static_maps">Versuche, statische Karten zu speichern</string>
   <string name="info_cache_saved">Der Cache wurde gespeichert</string>
-  <string name="err_trackable_log_not_anonymous">Loggen von %1$s aus c:geo kann nicht anonym erfolgen. Möchtest du die Einstellungen öffnen um deine Anmeldeinformation für %2$s einzugeben?</string>
+  <string name="err_trackable_log_not_anonymous">Loggen von %1$s aus c:geo kann nicht anonym erfolgen. Möchtest du die Einstellungen öffnen, um deine Anmeldeinformation für %2$s einzugeben?</string>
   <string name="err_trackable_no_preference_activity">Tut mir leid, es kann kein geeignetes Einstellungs-Menü gefunden werden.</string>
   <string name="warn_discard_changes">Wegpunktänderungen verworfen!</string>
   <!-- location service -->
@@ -264,8 +264,8 @@
   <string name="menu_history">Verlauf</string>
   <string name="menu_filter">Filter</string>
   <string name="menu_scan_geo">Geocode scannen</string>
-  <string name="menu_pocket_queries">Pocket Queries</string>
-  <string name="menu_scan_description">c:geo kann Geocodes scannen, die als QR-Code abgebildet sind. Die dafür notwendige App ist nicht installiert. Möchten Sie Google Play öffnen, um sie zu installieren?</string>
+  <string name="menu_pocket_queries">Pocket-Queries</string>
+  <string name="menu_scan_description">c:geo kann Geocodes scannen, die als QR-Code abgebildet sind. Die dafür notwendige App ist nicht installiert. Möchtest du Google Play öffnen, um sie zu installieren?</string>
   <!-- main screen -->
   <string name="live_map_button">Live-Karte</string>
   <string name="caches_nearby_button">In der Nähe</string>
@@ -285,7 +285,7 @@
     <item quantity="one">%d Minute</item>
     <item quantity="other">%d Minuten</item>
   </plurals>
-  <string name="caches_store_offline">Für Offline speichern</string>
+  <string name="caches_store_offline">Offline speichern</string>
   <string name="caches_store_selected">Ausgewählte speichern</string>
   <string name="caches_history">Verlauf</string>
   <string name="caches_on_map">Zeige auf Karte</string>
@@ -297,7 +297,7 @@
   <string name="caches_sort_favorites">Favoriten</string>
   <string name="caches_sort_favorites_ratio">Favoriten [%]</string>
   <string name="caches_sort_name">Name</string>
-  <string name="caches_sort_geocode">Geo-Code</string>
+  <string name="caches_sort_geocode">Geocode</string>
   <string name="caches_sort_rating">Bewertung</string>
   <string name="caches_sort_vote">Eigene Bewertung</string>
   <string name="caches_sort_inventory">Inventaranzahl</string>
@@ -412,7 +412,7 @@
   <string name="settings_title_map_data">Kartendaten</string>
   <string name="settings_title_map_content">Karteninhalt</string>
   <string name="settings_title_gpx">GPX</string>
-  <string name="settings_title_basicmembers">Optionen für Basic Member</string>
+  <string name="settings_title_basicmembers">Optionen für Basis-Mitglieder</string>
   <string name="settings_title_navigation">Navigation</string>
   <string name="settings_summary_navigation">Wähle die Standardnavigation und externe Navigations-Apps.</string>
   <string name="settings_title_system">System</string>
@@ -429,43 +429,43 @@
   <string name="settings_activate_gc">Aktivieren</string>
   <string name="settings_activate_ec">Aktivieren</string>
   <string name="settings_activate_ox">Aktivieren</string>
-  <string name="settings_gc_legal_note">Mit Benutzung der Dienste von geocaching.com werden die Groundspeak-Nutzungsbedingungen (englisch) akzeptiert.</string>
-  <string name="settings_info_facebook_login_title">Facebook-Login</string>
-  <string name="settings_info_facebook_login">c:geo kann sich zwar nicht per Facebook bei Geocaching.com einloggen, aber es gibt eine einfache Abhilfe…</string>
+  <string name="settings_gc_legal_note">Mit Benutzung der Dienste von Geocaching.com werden die Groundspeak-Nutzungsbedingungen (englisch) akzeptiert.</string>
+  <string name="settings_info_facebook_login_title">Facebook-Anmeldung</string>
+  <string name="settings_info_facebook_login">c:geo kann sich zwar nicht per Facebook bei Geocaching.com anmelden, aber es gibt eine einfache Abhilfe…</string>
   <string name="settings_authorize">c:geo autorisieren</string>
   <string name="settings_reauthorize">c:geo neu autorisieren</string>
-  <string name="settings_gc_description">Autorisiere c:geo auf geocaching.com zuzugreifen, um Caches zu suchen.</string>
-  <string name="settings_ec_description">Autorisiere c:geo auf extremcaching.com zuzugreifen, um Caches zu suchen und nach deinen Funden zu filtern.</string>
+  <string name="settings_gc_description">Autorisiere c:geo auf Geocaching.com zuzugreifen, um Caches zu suchen.</string>
+  <string name="settings_ec_description">Autorisiere c:geo auf Extremcaching.com zuzugreifen, um Caches zu suchen und nach deinen Funden zu filtern.</string>
   <string name="settings_su_description">Autorisiere c:geo auf geocaching.su zuzugreifen, um Caches zu suchen.</string>
   <string name="init_oc">Opencaching.de</string>
   <string name="settings_activate_oc">Aktivieren</string>
-  <string name="init_summary_oc_de">Caches von opencaching.de laden</string>
-  <string name="init_oc_de_description">Autorisiere c:geo auf opencaching.de zuzugreifen um Caches zu suchen und nach deinen Funden zu filtern.</string>
+  <string name="init_summary_oc_de">Caches von Opencaching.de laden</string>
+  <string name="init_oc_de_description">Autorisiere c:geo auf Opencaching.de zuzugreifen, um Caches zu suchen und nach deinen Funden zu filtern.</string>
   <string name="init_oc_pl">Opencaching.pl</string>
   <string name="settings_activate_oc_pl">Aktiviere</string>
   <string name="init_summary_oc_pl">Caches von opencaching.pl laden</string>
-  <string name="init_oc_pl_description">Autorisiere c:geo auf opencaching.pl zuzugreifen um Caches zu suchen und nach deinen Funden zu filtern.</string>
+  <string name="init_oc_pl_description">Autorisiere c:geo auf opencaching.pl zuzugreifen, um Caches zu suchen und nach deinen Funden zu filtern.</string>
   <string name="init_oc_nl">Opencaching.nl</string>
   <string name="settings_activate_oc_nl">Aktivieren</string>
   <string name="init_summary_oc_nl">Caches von opencaching.nl laden</string>
-  <string name="init_oc_nl_description">Autorisiere c:geo auf opencaching.nl zuzugreifen um Caches zu suchen und nach deinen Funden zu filtern.</string>
+  <string name="init_oc_nl_description">Autorisiere c:geo auf opencaching.nl zuzugreifen, um Caches zu suchen und nach deinen Funden zu filtern.</string>
   <string name="init_oc_us">Opencaching.us</string>
   <string name="settings_activate_oc_us">Aktivieren</string>
-  <string name="init_summary_oc_us">Caches von opencaching.us laden</string>
-  <string name="init_oc_us_description">Autorisiere c:geo auf opencaching.us zuzugreifen um Caches zu suchen und nach deinen Funden zu filtern.</string>
+  <string name="init_summary_oc_us">Caches von Opencaching.us laden</string>
+  <string name="init_oc_us_description">Autorisiere c:geo auf Opencaching.us zuzugreifen, um Caches zu suchen und nach deinen Funden zu filtern.</string>
   <string name="init_oc_ro">Opencaching.ro</string>
   <string name="settings_activate_oc_ro">Aktivieren</string>
   <string name="init_summary_oc_ro">Caches von opencaching.ro laden</string>
-  <string name="init_oc_ro_description">Autorisiere c:geo auf opencaching.ro zuzugreifen um Caches zu suchen und nach deinen Funden zu filtern.</string>
+  <string name="init_oc_ro_description">Autorisiere c:geo auf opencaching.ro zuzugreifen, um Caches zu suchen und nach deinen Funden zu filtern.</string>
   <string name="init_oc_uk">Opencaching.org.uk</string>
   <string name="settings_activate_oc_uk">Aktivieren</string>
   <string name="init_summary_oc_uk">Caches von opencaching.org.uk laden</string>
-  <string name="init_oc_uk_description">Autorisiere c:geo auf opencaching.org.uk zuzugreifen um Caches zu suchen und nach deinen Funden zu filtern.</string>
+  <string name="init_oc_uk_description">Autorisiere c:geo auf opencaching.org.uk zuzugreifen, um Caches zu suchen und nach deinen Funden zu filtern.</string>
   <string name="init_su">Geocaching.su</string>
   <string name="init_summary_su">Caches von geocaching.su laden</string>
   <string name="settings_activate_su">Aktivieren</string>
-  <string name="init_gcvote">GCvote.com</string>
-  <string name="init_gcvote_password_description">Um einen Cache bewerten zu können, folge der Anleitung auf gcvote.com  und gib das GCVote-Passwort anschließend hier ein.</string>
+  <string name="init_gcvote">GCVote.com</string>
+  <string name="init_gcvote_password_description">Um einen Cache bewerten zu können, folge der Anleitung auf GCVote.com und gib das GCVote-Passwort anschließend hier ein.</string>
   <string name="err_gcvote_send_rating">Fehler beim Senden der Bewertung. Prüfe das GCVote-Passwort in den Einstellungen oder lösche es.</string>
   <string name="gcvote_sent">Bewertung erfolgreich gesendet</string>
   <string name="init_twitter">Twitter</string>
@@ -473,14 +473,14 @@
   <string name="init_username">Benutzername</string>
   <string name="init_password">Passwort</string>
   <string name="init_login">Anmeldedaten überprüfen</string>
-  <string name="init_login_popup">Login</string>
+  <string name="init_login_popup">Anmeldung</string>
   <string name="init_login_popup_working">Anmeldung…</string>
-  <string name="init_login_popup_ok">Login OK</string>
-  <string name="init_login_popup_failed">Login fehlgeschlagen</string>
-  <string name="init_login_popup_failed_reason">Login fehlgeschlagen: %s</string>
+  <string name="init_login_popup_ok">Anmeldung OK</string>
+  <string name="init_login_popup_failed">Anmeldung fehlgeschlagen</string>
+  <string name="init_login_popup_failed_reason">Anmeldung fehlgeschlagen: %s</string>
   <string name="init_login_popup_not_authorized">Nicht autorisiert</string>
   <string name="init_login_popup_invalid_timestamp">Lokale Zeit ungültig, Gerätezeit einstellen</string>
-  <string name="init_login_popup_invalid_token">Genehmigung ungültig, Neu aktivieren</string>
+  <string name="init_login_popup_invalid_token">Autorisierung ungültig, erneut autorisieren</string>
   <string name="init_authorization_credential_username">Benutzername</string>
   <string name="init_authorization_credential_password">Passwort</string>
   <string name="settings_service_active">Aktiv</string>
@@ -497,10 +497,10 @@
   <string name="init_signature_template_name">Name</string>
   <string name="init_signature_template_url">URL</string>
   <string name="init_signature_template_log">Log text</string>
-  <string name="init_ratingwanted">GCvote-Bewertung</string>
-  <string name="init_summary_ratingwanted">Lade Cache-Bewertung von GCvote.com</string>
+  <string name="init_ratingwanted">GCVote-Bewertung</string>
+  <string name="init_summary_ratingwanted">Lade Cache-Bewertung von GCVote.com</string>
   <string name="init_friends_and_own_logs_wanted">Eigene und Logs von Freunden zeigen</string>
-  <string name="init_summary_friends_and_own_logs_wanted">Lade zusätzliche Logbuch-Seiten für eigene und Logs von Freunden</string>
+  <string name="init_summary_friends_and_own_logs_wanted">Zeige zusätzliche Logbuchseite für Logs von dir und deinen Freunden</string>
   <string name="init_openlastdetailspage">Zuletzt genutzte Seite</string>
   <string name="init_summary_openlastdetailspage">Öffne Details mit zuletzt genutzter Seite</string>
   <string name="init_skin">Helle Oberfläche</string>
@@ -508,7 +508,7 @@
   <string name="init_address">Ort statt Koordinaten</string>
   <string name="init_summary_address">Adresse statt Koordinaten im Startbildschirm anzeigen</string>
   <string name="init_captcha">Zeige CAPTCHA</string>
-  <string name="init_summary_captcha">Zeige CAPTCHA wenn notwendig (nur Basic Member)</string>
+  <string name="init_summary_captcha">Zeige CAPTCHA wenn notwendig (nur Basis-Mitglieder)</string>
   <string name="init_useenglish">Auf Englisch</string>
   <string name="init_summary_useenglish">c:geo auf Englisch nutzen (Neustart erforderlich)</string>
   <string name="init_exclude">Eigene und gefundene Caches</string>
@@ -526,7 +526,7 @@
   <string name="init_units">Imperiale Einheiten</string>
   <string name="init_summary_units">Imperiale Einheiten (Meilen/Fuß)</string>
   <string name="init_log_offline">Offline loggen</string>
-  <string name="init_summary_log_offline">Offline loggen aktivieren (Dialog für Online-Log wird beim loggen nicht angezeigt, Logs werden nicht hochgeladen)</string>
+  <string name="init_summary_log_offline">Offline loggen aktivieren (Dialog für Online-Log wird beim Loggen nicht angezeigt, Logs werden nicht hochgeladen)</string>
   <string name="init_choose_list">Nach Liste fragen</string>
   <string name="init_summary_choose_list">Beim Speichern von Caches nach Liste fragen</string>
   <string name="init_livelist">Richtung zum Cache</string>
@@ -534,7 +534,7 @@
   <string name="init_backup">Sicherung</string>
   <string name="init_backup_backup">Sicherung</string>
   <string name="init_backup_running">Erzeuge Sicherung der Cache-Datenbank…</string>
-  <string name="init_backup_note">Hinweis: Diese Option sichert die Datenbank von c:geo. Nur Caches und Wegpunkte werden gesichert, keine Einstellungen. Login-Daten und Passwörter werden die App nicht verlassen.</string>
+  <string name="init_backup_note">Hinweis: Diese Option sichert die Datenbank von c:geo. Nur Caches und Wegpunkte werden gesichert, keine Einstellungen. Anmeldedaten und Passwörter werden die App nicht verlassen.</string>
   <string name="init_backup_restore">Wiederherstellung</string>
   <string name="init_backup_success">Datenbank von c:geo wurde erfolgreich kopiert nach:</string>
   <string name="init_backup_failed">Sicherung der Datenbank von c:geo fehlgeschlagen.</string>
@@ -542,16 +542,16 @@
   <string name="init_backup_no_backup_available">Es ist kein Backup verfügbar.</string>
   <string name="backup_confirm_overwrite">Möchtest du das existierende Backup vom %s überschreiben?</string>
   <string name="restore_confirm_overwrite">Möchtest du %s auf deinem Gerät mit dem Backup überschreiben?</string>
-  <string name="init_restore_success">Wiederherstellung fertig.</string>
+  <string name="init_restore_success">Wiederherstellung abgeschlossen.</string>
   <string name="init_restore_failed">Wiederherstellung fehlgeschlagen.</string>
   <string name="init_restore_running">Wiederherstellung der Cache-Datenbank…</string>
   <string name="init_restore_confirm">Die Datenbank ist leer. Soll die vorhandene Sicherung wiederhergestellt werden?</string>
   <string name="init_backup_last">Backup verfügbar vom</string>
   <string name="init_backup_last_no">Keine Datei mit Datenbanksicherung gefunden.</string>
   <string name="settings_info_offline_maps_title">Info zu Offline-Karten</string>
-  <string name="settings_info_offline_maps">c:ego ermöglicht es Offline-Karten zu verwenden. Die Karten können bei Mapsforge heruntergeladen werden oder es können eigene Karten aus OSM-Daten erstellt werden. Es muss zuerst ein Verzeichnis mit Offline-Karten angegeben werden, bevor eine Offline-Karte ausgewählt werden kann.</string>
+  <string name="settings_info_offline_maps">c:geo ermöglicht es Offline-Karten zu verwenden. Die Karten können bei Mapsforge heruntergeladen werden oder es können eigene Karten aus OSM-Daten erstellt werden. Es muss zuerst ein Verzeichnis mit Offline-Karten angegeben werden, bevor eine Offline-Karte ausgewählt werden kann.</string>
   <string name="settings_info_themes_title">Info zu Karten-Themes</string>
-  <string name="settings_info_themes">c:geo kann eigene Karten-Themes für Offline-Karten verwenden. Du kannst sie benutzen, um die Farbauswahl der Karte (z. B. für eine Nachtansicht) zu verändern oder um bestimmte Objekte wie Radwege oder Höhenlinien hervorzuheben.</string>
+  <string name="settings_info_themes">c:geo kann eigene Karten-Themes für Offline-Karten verwenden. Du kannst sie benutzen, um die Farbauswahl der Karte (z. B. für eine Nachtansicht) zu verändern oder um bestimmte Objekte wie Radwege oder Höhenlinien hervorzuheben.</string>
   <string name="init_mapsource_select">Kartenquelle wählen</string>
   <string name="settings_title_scale_map_text">Textgröße anpassen</string>
   <string name="settings_summary_scale_map_text">Textgröße der Bezeichnungen auf der Offline-Karte entsprechend der Bildschirmauflösung anpassen</string>
@@ -561,12 +561,12 @@
   <string name="init_maptrail">Zeige Spur</string>
   <string name="init_summary_maptrail">Zeige Spur auf Karte</string>
   <string name="init_share_after_export">Weiterleiten nach dem Export</string>
-  <string name="init_include_found_status">Found status einbeziehen</string>
+  <string name="init_include_found_status">Fundstatus einbeziehen</string>
   <string name="init_trackautovisit">TBs besuchen</string>
-  <string name="init_summary_trackautovisit">Trackables automatisch auf \"besuchen\" setzen</string>
+  <string name="init_summary_trackautovisit">Trackables automatisch auf „besucht“ setzen</string>
   <string name="init_sigautoinsert">Automatisch einfügen</string>
   <string name="init_loaddirectionimg">Richtungs-Grafik</string>
-  <string name="init_summary_loaddirectionimg">Richtungs-Pfeil laden wenn nötig (nur Basic-Member)</string>
+  <string name="init_summary_loaddirectionimg">Richtungs-Pfeil laden wenn nötig (nur Basis-Mitglieder)</string>
   <string name="init_default_navigation_tool">Standardnavigation</string>
   <string name="init_secondary_navigation_tool">Zweitnavigation</string>
   <string name="init_default_navigation_tool_description">Hier kann das bevorzugte Navigationswerkzeug festgelegt werden.</string>
@@ -574,7 +574,7 @@
   <string name="init_default_navigation_tool_2_description">Hier kann das zweite bevorzugte Navigationswerkzeug festgelegt werden. Es ist durch langen Klick auf das Navigationssymbol in der Titelzeile eines Caches erreichbar.</string>
   <string name="init_navigation_menu_description">Hier kann ausgewählt werden, welche der verfügbaren Navigationswerkzeuge im Navigationsmenü für einen Cache oder Wegpunkt angezeigt werden. Nicht auswählbare Optionen sind auf diesem Gerät nicht installiert.</string>
   <string name="init_debug_title">Fehlersuche</string>
-  <string name="init_debug_note">Erlaubt c:geo Debug-Informationen zu generieren. Das Aktivieren der Einstellung kann sich negativ auf die Stabilität von c:geo auswirken und wird nur empfohlen, wenn Sie von den Entwicklern dazu aufgefordert werden.</string>
+  <string name="init_debug_note">Erlaubt c:geo Debug-Informationen zu generieren. Das Aktivieren der Einstellung kann sich negativ auf die Stabilität von c:geo auswirken und wird nur empfohlen, wenn du von den Entwicklern dazu aufgefordert werden.</string>
   <string name="init_debug">Debug-Log aktivieren</string>
   <string name="init_dbonsdcard_title">Datenspeicherung</string>
   <string name="init_dbonsdcard_note">Die Datenbank von c:geo kann auf eine externe Speicherkarte verschoben werden. Hiermit kann interner Speicher gespart werden, allerdings wird sich die Leistung etwas reduzieren und c:geo funktioniert nicht mehr ohne verfügbare Speicherkarte.</string>
@@ -586,10 +586,10 @@
   <string name="init_plain_logs">Logs ohne Farben</string>
   <string name="init_summary_plain_logs">Logeinträge ohne Farben anzeigen</string>
   <string name="init_use_native_ua">Android-Browser</string>
-  <string name="init_summary_use_native_ua">Als Android-Browser identifizieren. Löst Login-Probleme einiger Netzanbieter.</string>
+  <string name="init_summary_use_native_ua">Als Android-Browser identifizieren. Löst Anmeldeprobleme einiger Netzanbieter.</string>
   <string name="init_rendertheme_folder">Karten-Themes-Verzeichnis</string>
   <string name="init_maintenance">Wartung</string>
-  <string name="init_maintenance_directories_note">c:geo speichert Bilder, Log-Bilder und weitere Dateien zu einem Cache in einem separaten Verzeichnis. In manchen Fällen (z.B. bei Sichern und Wiederherstellen der Datenbank) kann dieses Verzeichnis unnötige Daten enthalten, die gelöscht werden können.</string>
+  <string name="init_maintenance_directories_note">c:geo speichert Bilder, Log-Bilder und weitere Dateien zu einem Cache in einem separaten Verzeichnis. In manchen Fällen (z. B. bei Sichern und Wiederherstellen der Datenbank) kann dieses Verzeichnis unnötige Daten enthalten, die gelöscht werden können.</string>
   <string name="init_maintenance_directories">Verwaiste Daten löschen</string>
   <string name="init_location">Positionierung</string>
   <string name="init_location_note">Auf Geräten mit Google Play-Diensten kann c:geo automatisch eine bessere Positions-Bestimmung nutzen. Allerdings kann dann kein externer Bluetooth GPS-Empfänger verwendet werden. Weiterhin kann damit ein Energiesparmodus ohne GPS genutzt werden, wenn hohe Genauigkeit nicht unbedingt erforderlich ist.</string>
@@ -604,7 +604,7 @@
   <string name="init_memory_dump">Speicherabbild</string>
   <string name="init_memory_dumped">Speicherabbild in %s gespeichert</string>
   <string name="init_hardware_acceleration_title">Hardwarebeschleunigte Darstellung</string>
-  <string name="init_hardware_acceleration_note">Mittels Hardwarebeschleunigung werden grafische Elemente schneller auf den Bildschirm dargestellt. Jedoch enthält das Android auf manchen Geräten Fehler, die zu verschwommenem Text (meistens bei fettgedruckten Zeichen) führen können. in diesen Fällen sollte die Hardwarebeschleunigung deaktiviert werden.</string>
+  <string name="init_hardware_acceleration_note">Mittels Hardwarebeschleunigung werden grafische Elemente schneller auf den Bildschirm dargestellt. Jedoch enthalten manche Android-Systeme Fehler, die zu verschwommenem Text (meistens bei fettgedruckten Zeichen) führen können. In diesem Fall sollte die Hardwarebeschleunigung deaktiviert werden.</string>
   <string name="init_hardware_acceleration">Hardwarebeschleunigung aktivieren</string>
   <string name="settings_create_account">Konto erstellen</string>
   <string name="settings_open_website">Webseite öffnen</string>
@@ -663,16 +663,16 @@
   <string name="auth_connected_as">Verbunden als %s</string>
   <string name="auth_dialog_waiting">Warte auf %s…</string>
   <string name="auth_explain_short">Der folgende Prozess erlaubt es <b>c:geo</b> auf %s zuzugreifen.</string>
-  <string name="auth_explain_long">\"Starte Autorisierung\" öffnet die Webseite von %s. Bitte dort anmelden und <b>c:geo</b> Zugriff auf den Account erlauben. Das ist alles.</string>
+  <string name="auth_explain_long">„Starte Autorisierung“ öffnet die Webseite von %s. Bitte dort anmelden und <b>c:geo</b> Zugriff auf den Account erlauben. Das ist alles.</string>
   <string name="auth_forget_title">Authorisierung entfernen?</string>
   <string name="auth_forget_message">Du wirst von diesem Dienst abgemeldet. Deine gespeicherten Anmeldedaten werden gelöscht.</string>
   <!-- auth credentials -->
   <string name="auth_credentials_explain_short">Der folgende Prozess erlaubt es <b>c:geo</b> auf %s zuzugreifen.</string>
-  <string name="auth_credentials_explain_long">Nach Eingabe der Anmeldeinformation \"Authentifizierung prüfen\" auswählen um den Prozess zu starten. Dieser Prozess verbindet mit %s und prüft die Anmeldeinformationen. Das ist alles.</string>
+  <string name="auth_credentials_explain_long">Nach Eingabe der Anmeldeinformation „Authentifizierung prüfen“ auswählen, um den Prozess zu starten. Dieser Prozess verbindet mit %s und prüft die Anmeldeinformationen. Das ist alles.</string>
   <!-- auth token -->
   <string name="auth_token_register">Nutzerkonto erstellen</string>
-  <string name="auth_token_explain_short">Der folgende Prozess erlaubt es <b>c:geo</b>  auf %s zuzugreifen.</string>
-  <string name="auth_token_explain_long">Nach Eingabe der Anmeldeinformation \"Starte Autorisierung\" auswählen um den Prozess zu starten. Dieser Prozess verbindet mit %s und ruft einen Authentifizierungstoken ab. Das ist alles.</string>
+  <string name="auth_token_explain_short">Der folgende Prozess erlaubt es <b>c:geo</b> auf %s zuzugreifen.</string>
+  <string name="auth_token_explain_long">Nach Eingabe der Anmeldeinformation „Starte Autorisierung“ auswählen, um den Prozess zu starten. Dieser Prozess verbindet mit %s und ruft einen Authentifizierungstoken ab. Das ist alles.</string>
   <!-- auth Twitter -->
   <string name="auth_dialog_completed_twitter">c:geo ist nun autorisiert, Tweets bei Twitter zu erstellen.</string>
   <!-- auth opencaching -->
@@ -827,7 +827,7 @@
   <string name="cache_menu_checker">Öffne Geochecker</string>
   <string name="cache_menu_ignore">Cache ignorieren</string>
   <string name="ignore_confirm_title">Sei vorsichtig</string>
-  <string name="ignore_confirm_message">Ignorieren bedeutet, dass dieser Cache nicht mehr auftaucht, wenn du Daten von geocaching.com lädst. Du kannst ihn nur wieder sichtbar machen, indem du das Ignorieren auf der Webseite aufhebst.</string>
+  <string name="ignore_confirm_message">Ignorieren bedeutet, dass dieser Cache nicht mehr auftaucht, wenn du Daten von Geocaching.com lädst. Du kannst ihn nur wieder sichtbar machen, indem du das Ignorieren auf der Webseite aufhebst.</string>
   <string name="cache_status">Status</string>
   <string name="cache_status_offline_log">Gespeicherter Log</string>
   <string name="cache_status_found">Gefunden</string>
@@ -982,7 +982,7 @@
   <string name="map_strategy_fast">Schnell</string>
   <string name="map_strategy_auto">Geschwindigkeitsabhängig</string>
   <string name="map_strategy_detailed">Detailliert</string>
-  <string name="live_map_notification">Auf der neuen Live-Karte sind die Koordinaten nicht immer genau. Eventuell ungenaue Koordinaten sind mit einem orangen Kreis markiert.\nDas Öffnen der Cache-Details oder das Speichern des Cache liefert immer genaue Koordinaten.\n\nMehr Informationen über alle Änderungen befinden sich auf der \"Über c:geo\"-Seite in der App.</string>
+  <string name="live_map_notification">Auf der neuen Live-Karte sind die Koordinaten nicht immer genau. Eventuell ungenaue Koordinaten sind mit einem orangen Kreis markiert.\nDas Öffnen der Cache-Details oder das Speichern des Cache liefert immer genaue Koordinaten.\n\nMehr Informationen über alle Änderungen befinden sich auf der „Über c:geo“-Seite in der App.</string>
   <string name="map_select_multiple_items">Element auswählen</string>
   <!-- search -->
   <string name="search_bar_hint">Suche nach Caches</string>
@@ -991,8 +991,8 @@
   <string name="search_coordinates_button">Suche mit Koordinaten</string>
   <string name="search_address">Adresse</string>
   <string name="search_address_button">Suche mit Adresse</string>
-  <string name="search_geo">Geo-Code</string>
-  <string name="search_geo_button">Suche mit Geo-Code</string>
+  <string name="search_geo">Geocode</string>
+  <string name="search_geo_button">Suche mit Geocode</string>
   <string name="search_kw">Stichworte</string>
   <string name="search_kw_prefill">Stichwörter</string>
   <string name="search_kw_button">Suche mit Stichwörtern</string>
@@ -1011,7 +1011,7 @@
   <string name="search_address_result">Gefundene Orte</string>
   <string name="search_own_caches">Meine Caches suchen</string>
   <string name="search_pocket_title">Pocket-Query</string>
-  <string name="search_pocket_loading">Eine Liste von Pocket Queries laden</string>
+  <string name="search_pocket_loading">Eine Liste von Pocket-Queries laden</string>
   <string name="search_pocket_select">Pocket-Query wählen</string>
   <!-- trackable -->
   <string name="trackable">Trackable</string>
@@ -1076,8 +1076,8 @@
   <string name="helper_calendar_pastevent_question">Das Event-Datum liegt in der Vergangenheit. Trotzdem hinzufügen?</string>
   <string name="helper_sendtocgeo_title">Send to c:geo</string>
   <string name="helper_contacts_title"> c:geo Kontakte-Plugin</string>
-  <string name="helper_contacts_description">Ermöglicht das direkte Öffnen von Kontakten (aus dem eigenen Adressbuch) von Logeinträgen aus, so dass man Freunde einfacher um Hilfe fragen kann.</string>
-  <string name="helper_sendtocgeo_description">Send to c:geo ist eine Browsererweiterung <strong>für Ihren PC</strong>. Beim Durchsuchen von geocaching.com können Sie Caches mit einem Klick im Browser direkt an Ihr Smartphone übermitteln.</string>
+  <string name="helper_contacts_description">Ermöglicht das direkte Öffnen von Kontakten (aus dem eigenen Adressbuch) von Logeinträgen aus, sodass man Freunde einfacher um Hilfe fragen kann.</string>
+  <string name="helper_sendtocgeo_description">Send to c:geo ist eine Browsererweiterung <strong>für deinen PC</strong>. Beim Durchsuchen von Geocaching.com kannst du Caches mit einem Klick im Browser direkt an dein Smartphone übermitteln.</string>
   <string name="helper_locus_title">Locus</string>
   <string name="helper_locus_description">Outdoor Navigations-App für dein Handy oder Tablet. Verwende topografische Karten offline, zeichne Tracks von deinen Touren auf, suche Geocaches, benutze Sprachführung und vieles mehr.</string>
   <string name="helper_gpsstatus_title">GPS Status &amp; Toolbox</string>
@@ -1085,11 +1085,11 @@
   <string name="helper_bluetoothgps_title">Bluetooth GPS</string>
   <string name="helper_bluetoothgps_description">Ermöglicht ein externes GPS zu verwenden, um die Standortgenauigkeit zu erhöhen und die Batterie zu schonen.</string>
   <string name="helper_barcode_title">Barcode-Scanner</string>
-  <string name="helper_barcode_description">Es gibt GreaseMonkey-Scripte und Webseiten, die Geocodes als Strichcode darstellen können. Bei Verwendung dieser Skripte kann c:geo über diese App den Geocode eines Caches direkt vom Bildschirm des Computers ablesen.</string>
+  <string name="helper_barcode_description">Es gibt Greasemonkey-Scripte und Webseiten, die Geocodes als Strichcode darstellen können. Bei Verwendung dieser Skripte kann c:geo über diese App den Geocode eines Caches direkt vom Bildschirm des Computers ablesen.</string>
   <string name="helper_pocketquery_title">Pocket-Query Creator</string>
-  <string name="helper_pocketquery_description">Ermöglicht das einfache Erzeugen und Herunterladen von Pocket-Queries basierend auf der aktuellen Position oder einem auf der Karte gewählten Punkt. Setzt eine Premium-Mitgliedschaft bei geocaching.com voraus.</string>
+  <string name="helper_pocketquery_description">Ermöglicht das einfache Erzeugen und Herunterladen von Pocket-Queries basierend auf der aktuellen Position oder einem auf der Karte gewählten Punkt. Setzt eine Premium-Mitgliedschaft bei Geocaching.com voraus.</string>
   <string name="helper_google_translate_title">Google Übersetzer</string>
-  <string name="helper_google_translate_description">Wenn Sie Übersetzungspakete mit der Google Übersetzer-App herunterladen, können Sie Cache-Beschreibungen in c:geo durch langes Drücken auf den Cache-Beschreibungstext übersetzen (ohne Internetverbindung) .</string>
+  <string name="helper_google_translate_description">Wenn du Übersetzungspakete mit der Google Übersetzer-App herunterlädst, kannst du Cache-Beschreibungen in c:geo durch langes Drücken auf den Cache-Beschreibungstext übersetzen (ohne Internetverbindung) .</string>
   <string name="helper_wear_title">c:geo Wear</string>
   <string name="helper_wear_description">c:geo Wear ist eine Erweiterung für c:geo, mit der du mit deiner Android Wear Smartwatch zu Geocaches navigieren kannst.</string>
   <string name="helper_where_you_go_title">WhereYouGo</string>
@@ -1104,9 +1104,9 @@
   <string name="export_failed">Exportieren fehlgeschlagen</string>
   <string name="export_fieldnotes">Field Notes</string>
   <string name="export_fieldnotes_info">Field Notes werden nach /sdcard/field-notes mit dem aktuellen Datum und Zeit als Dateiname exportiert.</string>
-  <string name="export_fieldnotes_upload">Hochladen auf geocaching.com</string>
+  <string name="export_fieldnotes_upload">Hochladen auf Geocaching.com</string>
   <string name="export_fieldnotes_uploading">Hochladen…</string>
-  <string name="export_fieldnotes_upload_success">Hochladen auf geocaching.com erfolgreich</string>
+  <string name="export_fieldnotes_upload_success">Hochladen auf Geocaching.com erfolgreich</string>
   <string name="export_fieldnotes_onlynew">Nur seit letztem Export</string>
   <string name="export_fieldnotes_creating">Erstelle Field Notes…</string>
   <string name="export_gpx">GPX</string>
@@ -1176,13 +1176,13 @@
   <string name="attribute_seasonal_yes">Saisonabhängiger Zugang</string>
   <string name="attribute_seasonal_no">Zugang nicht saisonabhängig</string>
   <string name="attribute_touristok_yes">Touristenfreundlich</string>
-  <string name="attribute_touristok_no">Nicht Touristenfreundlich</string>
+  <string name="attribute_touristok_no">Nicht touristenfreundlich</string>
   <string name="attribute_frontyard_yes">Privatgrundstück</string>
   <string name="attribute_frontyard_no">Kein Privatgrundstück</string>
   <string name="attribute_teamwork_yes">Teamwork notwendig</string>
   <string name="attribute_teamwork_no">Teamwork nicht notwendig</string>
-  <string name="attribute_landf_yes">\'Lost and found\' Tour</string>
-  <string name="attribute_landf_no">Keine \'Lost and found\' Tour</string>
+  <string name="attribute_landf_yes">„Lost and found“ Tour</string>
+  <string name="attribute_landf_no">Keine „Lost and found“ Tour</string>
   <string name="attribute_partnership_yes">Partnerschafts-Cache</string>
   <string name="attribute_partnership_no">Kein Partnerschafts-Cache</string>
   <string name="attribute_fee_yes">Eintritts- oder Parkplatzgebühr</string>
@@ -1224,7 +1224,7 @@
   <string name="attribute_thorn_yes">Dornen</string>
   <string name="attribute_thorn_no">Keine Dornen</string>
   <string name="attribute_wheelchair_yes">Rollstuhlgerecht</string>
-  <string name="attribute_wheelchair_no">Nicht Rollstuhlgerecht</string>
+  <string name="attribute_wheelchair_no">Nicht rollstuhlgerecht</string>
   <string name="attribute_parking_yes">Parkplatz vorhanden</string>
   <string name="attribute_parking_no">Kein Parkplatz vorhanden</string>
   <string name="attribute_public_yes">Öffentliche Verkehrsmittel</string>
@@ -1313,32 +1313,32 @@
   <string name="attribute_historic_site_no">Keine historische Stätte</string>
   <string name="attribute_magnetic_yes">Magnetischer Cache</string>
   <string name="attribute_magnetic_no">Kein magnetischer Cache</string>
-  <string name="attribute_usb_cache_yes">\"dead drop\" USB-Cache</string>
-  <string name="attribute_usb_cache_no">Kein \"dead drop\" USB-Cache</string>
-  <string name="attribute_shovel_yes">Sie brauchen vielleicht eine Schaufel</string>
-  <string name="attribute_shovel_no">Sie brauchen keine Schaufel</string>
-  <string name="attribute_specific_access_yes">Verfügbar zu bestimmten Zeiten (könnte Eintritt kosten)</string>
+  <string name="attribute_usb_cache_yes">„dead drop“-USB-Cache</string>
+  <string name="attribute_usb_cache_no">Kein „dead drop“-USB-Cache</string>
+  <string name="attribute_shovel_yes">Schaufel benötigt</string>
+  <string name="attribute_shovel_no">Keine Schaufel benötigt</string>
+  <string name="attribute_specific_access_yes">Nur zu bestimmten Zeiten verfügbar (könnte Eintritt kosten)</string>
   <string name="attribute_specific_access_no">Zu jeder Zeit erreichbar</string>
   <string name="attribute_pedestrian_only_yes">Zugang nur für Fußgänger</string>
   <string name="attribute_pedestrian_only_no">Zugang nicht nur für Fußgänger</string>
   <string name="attribute_nature_cache_yes">Versteckt in natürlicher Umgebung (Wald, Berg, usw.)</string>
   <string name="attribute_nature_cache_no">Nicht versteckt in natürlicher Umgebung</string>
   <string name="attribute_byop_yes">Eigener Stift erforderlich</string>
-  <string name="attribute_byop_no">Eigener Stift nicht erforderlich</string>
-  <string name="attribute_safari_cache_yes">Reverse Cache</string>
-  <string name="attribute_safari_cache_no">Kein Reverse Cache</string>
+  <string name="attribute_byop_no">Kein eigener Stift erforderlich</string>
+  <string name="attribute_safari_cache_yes">Reverse-Cache</string>
+  <string name="attribute_safari_cache_no">Kein Reverse-Cache</string>
   <string name="attribute_quick_cache_yes">Schneller Cache</string>
   <string name="attribute_quick_cache_no">Kein schneller Cache</string>
-  <string name="attribute_wherigo_yes">Wherigo Cache</string>
-  <string name="attribute_wherigo_no">kein Wherigo Cache</string>
+  <string name="attribute_wherigo_yes">Wherigo-Cache</string>
+  <string name="attribute_wherigo_no">Kein Wherigo-Cache</string>
   <string name="attribute_audio_cache_yes">Beschreibung enthält eine Audio-Datei</string>
   <string name="attribute_audio_cache_no">Beschreibung enthält keine Audio-Datei</string>
-  <string name="attribute_geohotel_yes">GeoHotel Cache</string>
-  <string name="attribute_geohotel_no">kein GeoHotel Cache</string>
+  <string name="attribute_geohotel_yes">GeoHotel-Cache</string>
+  <string name="attribute_geohotel_no">Kein GeoHotel-Cache</string>
   <string name="attribute_survey_marker_yes">In der Nähe eines Vermessungspunktes</string>
   <string name="attribute_survey_marker_no">Nicht in der Nähe eines Vermessungspunktes</string>
-  <string name="attribute_offset_cache_yes">Offset Cache</string>
-  <string name="attribute_offset_cache_no">Kein Offset Cache</string>
+  <string name="attribute_offset_cache_yes">Offset-Cache</string>
+  <string name="attribute_offset_cache_no">Kein Offset-Cache</string>
   <!-- next things -->
   <string name="quote">Um Geocachen einfacher zu machen, um es Anwendern bequemer zu machen.</string>
   <string name="powered_by">carnero</string>
@@ -1356,9 +1356,9 @@
   <string name="status_new_release" tools:ignore="UnusedResources">Neuer Release verfügbar.\nKlicken zum Installieren.</string>
   <string name="status_new_nightly" tools:ignore="UnusedResources">Neuer Nightly Build verfügbar.\nKlicken zum Installieren.</string>
   <string name="status_new_rc" tools:ignore="UnusedResources">Neuer Release Candidate verfügbar.\nKlicken zum Installieren.</string>
-  <string name="status_geocaching_change" tools:ignore="UnusedResources">Änderungen auf geocaching.com führen zu Problemen mit c:geo.\nWir arbeiten daran.</string>
-  <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Änderungen auf geocaching.com führen zu Problemen mit der Live Map.\nWir arbeiten daran.</string>
-  <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com wird gerade gewartet.\nDaher könnten einige Dinge nicht funktionieren.</string>
+  <string name="status_geocaching_change" tools:ignore="UnusedResources">Änderungen auf Geocaching.com führen zu Problemen mit c:geo.\nWir arbeiten daran.</string>
+  <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Änderungen auf Geocaching.com führen zu Problemen mit der Live Map.\nWir arbeiten daran.</string>
+  <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Geocaching.com wird gerade gewartet.\nDaher könnten einige Dinge nicht funktionieren.</string>
   <string name="status_closeout_warning" tools:ignore="UnusedResources">Deine Android-Version scheint älter als 2.1 zu sein. Zukünftige Versionen von c:geo sind für dein Gerät vermutlich nicht mehr verfügbar.</string>
   <!-- text-to-speech for compass view -->
   <string name="tts_service">Sprechender Kompass</string>
@@ -1413,17 +1413,17 @@
   <string name="showcase_compass_hint_title">Zeige den Hint</string>
   <string name="showcase_compass_hint_text">Diese Option könnte dir helfen den Cache zu finden - sie zeigt den Hint an, wenn es einen gibt.</string>
   <string name="confirm_log_title">Ungewöhnlicher Log-Typ</string>
-  <string name="confirm_log_message">Du möchtest \'%s\' loggen. Bist du dir sicher?</string>
+  <string name="confirm_log_message">Du möchtest „%s“ loggen. Bist du dir sicher?</string>
   <!-- Geokrety -->
   <string name="settings_activate_geokrety">Aktivieren</string>
   <string name="init_geokrety">GeoKrety.org</string>
   <string name="init_connectorGeokretyActive">GeoKrety Trackables</string>
   <string name="init_summary_geokrety">Lädt Trackables von GeoKrety.org</string>
   <string name="init_summary_geokrety_account">Kein Konto konfiguriert.</string>
-  <string name="init_geokrety_register_ok">Login OK</string>
-  <string name="init_geokrety_register_fail">Login fehlgeschlagen</string>
-  <string name="init_geokrety_description">Autorisiere c:geo  auf GeoKrety.org zuzugreifen um GeoKrety Trackables zu loggen.</string>
-  <string name="init_geokrety_cache_description">GeoKretyMap.org stellt zwischengespeicherte Daten für GeoKrety Trackables zur Verfügung.\nDie Daten enthalten mehr Infos zu GeoKretys wie z.B. \'Beschreibung\' oder \'Vermisst\'-Status.\n\nDie Daten sind nicht immer aktuell!\nPositionen: ~30min.\nBeschreibungen: ~24h.</string>
+  <string name="init_geokrety_register_ok">Anmeldung OK</string>
+  <string name="init_geokrety_register_fail">Anmeldung fehlgeschlagen</string>
+  <string name="init_geokrety_description">Autorisiere c:geo auf GeoKrety.org zuzugreifen, um GeoKrety-Trackables zu loggen.</string>
+  <string name="init_geokrety_cache_description">GeoKretyMap.org stellt zwischengespeicherte Daten für GeoKrety Trackables zur Verfügung.\nDie Daten enthalten mehr Infos zu GeoKretys wie z. B. „Beschreibung“ oder „Vermisst“-Status.\n\nDie Daten sind nicht immer aktuell!\nPositionen: ~30min.\nBeschreibungen: ~24h.</string>
   <string name="init_geokrety_cache">Benutze GeoKretyMap.org</string>
   <string name="init_geokrety_userid">Nutzer-ID: %s</string>
   <string name="trackable_title_log_without_geocode">Geocode nicht gesetzt</string>

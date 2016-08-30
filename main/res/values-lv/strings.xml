@@ -429,7 +429,6 @@
   <string name="settings_goto_url_button">vairāk…</string>
   <string name="settings_title_gc">Geocaching.com</string>
   <string name="settings_title_ec">Extremcaching.com</string>
-  <string name="settings_title_ox">Opencaching.com (Garmin)</string>
   <string name="settings_activate_gc">Aktivizēt</string>
   <string name="settings_activate_ec">Aktivizēt</string>
   <string name="settings_activate_ox">Aktivizēt</string>
@@ -1015,6 +1014,7 @@
   <string name="user_menu_open_browser">Atvērt profilu pārlūkprogrammā</string>
   <string name="user_menu_send_message">Nosūtīt ziņu</string>
   <string name="user_menu_open_contact">Atvērt kontakta kartīti</string>
+  <string name="user_unknown">Nezināms lietotājs</string>
   <!-- navigation -->
   <string name="navigation">Navigācija</string>
   <string name="compass_title">Kompass</string>
