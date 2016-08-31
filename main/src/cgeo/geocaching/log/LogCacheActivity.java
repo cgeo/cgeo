@@ -17,6 +17,7 @@ import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.gcvote.GCVote;
 import cgeo.geocaching.gcvote.GCVoteRatingBarUtil;
 import cgeo.geocaching.gcvote.GCVoteRatingBarUtil.OnRatingChangeListener;
+import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.log.LogTemplateProvider.LogContext;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
@@ -42,6 +43,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -679,8 +681,18 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         // without using "Clear". This may be a manipulation mistake, and erasing
         // again will be easy using "Clear" while retyping the text may not be.
         if (force || (StringUtils.isNotEmpty(log) && !StringUtils.equals(log, text) && !StringUtils.equals(log, Settings.getSignature()))) {
-            cache.logOffline(this, log, date, typeSelected);
-            Settings.setLastCacheLog(log);
+            new AsyncTask<Void, Void, Void>() {
+                @Override
+                protected Void doInBackground(final Void... params) {
+                    if (!cache.isOffline()) {
+                        cache.getLists().add(StoredList.STANDARD_LIST_ID);
+                        DataStore.saveCache(cache, LoadFlags.SAVE_ALL);
+                    }
+                    cache.logOffline(LogCacheActivity.this, log, date, typeSelected);
+                    Settings.setLastCacheLog(log);
+                    return null;
+                }
+            }.execute();
         }
         text = log;
     }
