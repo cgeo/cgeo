@@ -131,6 +131,7 @@ public class GeokretyConnector extends AbstractTrackableConnector {
 
             final String geocodeFound = getGeocodeFromTrackingCode(geocode);
             if (geocodeFound == null) {
+                Log.d("GeokretyConnector.searchTrackable: Unable to retrieve trackable by TrackingCode");
                 return null;
             }
             gkid = getId(geocodeFound);
@@ -142,7 +143,7 @@ public class GeokretyConnector extends AbstractTrackableConnector {
 
             final InputStream response = Network.getResponseStream(Network.getRequest(urlDetails + "?gkid=" + gkid));
             if (response == null) {
-                Log.e("GeokretyConnector.searchTrackable: No data from server");
+                Log.d("GeokretyConnector.searchTrackable: No data from server");
                 return null;
             }
             final InputSource is = new InputSource(response);
@@ -167,7 +168,7 @@ public class GeokretyConnector extends AbstractTrackableConnector {
         try {
             final InputStream response = Network.getResponseStream(Network.getRequest(getUrlCache() + "/export2.php?wpt=" + URLEncoder.encode(geocode, "utf-8")));
             if (response == null) {
-                Log.e("GeokretyConnector.searchTrackable: No data from server");
+                Log.d("GeokretyConnector.searchTrackable: No data from server");
                 return Collections.emptyList();
             }
             final InputSource is = new InputSource(response);
@@ -201,7 +202,7 @@ public class GeokretyConnector extends AbstractTrackableConnector {
             }
             final InputStream response = Network.getResponseStream(Network.getRequest(URL + "/export2.php", params));
             if (response == null) {
-                Log.e("GeokretyConnector.loadInventory: No data from server");
+                Log.d("GeokretyConnector.loadInventory: No data from server");
                 return Collections.emptyList();
             }
             final InputSource is = new InputSource(response);
@@ -347,7 +348,7 @@ public class GeokretyConnector extends AbstractTrackableConnector {
             // SecId is mandatory when using API, anonymous log are only possible via website
             final String secId = Settings.getGeokretySecId();
             if (StringUtils.isEmpty(secId)) {
-                Log.e("GeokretyConnector.postLogTrackable: not authenticated");
+                Log.d("GeokretyConnector.postLogTrackable: not authenticated");
                 return new ImmutablePair<>(StatusCode.NO_LOGIN_INFO_STORED, Collections.<String> emptyList());
             }
 
@@ -382,7 +383,7 @@ public class GeokretyConnector extends AbstractTrackableConnector {
 
             final String page = Network.getResponseData(Network.postRequest(URL + "/ruchy.php", params));
             if (page == null) {
-                Log.e("GeokretyConnector.postLogTrackable: No data from server");
+                Log.d("GeokretyConnector.postLogTrackable: No data from server");
                 return new ImmutablePair<>(StatusCode.CONNECTION_FAILED_GK, Collections.<String> emptyList());
             }
 
