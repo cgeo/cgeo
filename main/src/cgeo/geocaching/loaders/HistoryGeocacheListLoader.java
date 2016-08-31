@@ -18,7 +18,7 @@ public class HistoryGeocacheListLoader extends AbstractSearchLoader {
 
     @Override
     public SearchResult runSearch() {
-        return DataStore.getHistoryOfCaches(true, coords != null ? Settings.getCacheType() : CacheType.ALL);
+        return DataStore.getHistoryOfCaches(coords != null ? Settings.getCacheType() : CacheType.ALL);
     }
 
 }

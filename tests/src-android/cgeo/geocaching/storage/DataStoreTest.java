@@ -1,7 +1,5 @@
 package cgeo.geocaching.storage;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import cgeo.CGeoTestCase;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.gc.GCConnector;
@@ -16,14 +14,15 @@ import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Trackable;
 
-import org.apache.commons.lang3.StringUtils;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import org.apache.commons.lang3.StringUtils;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class DataStoreTest extends CGeoTestCase {
 
@@ -176,7 +175,7 @@ public class DataStoreTest extends CGeoTestCase {
         int sumCaches = 0;
         int allCaches = 0;
         for (final CacheType cacheType : CacheType.values()) {
-            final SearchResult historyOfType = DataStore.getHistoryOfCaches(false, cacheType);
+            final SearchResult historyOfType = DataStore.getHistoryOfCaches(cacheType);
             assertThat(historyOfType).isNotNull();
             if (cacheType != CacheType.ALL) {
                 sumCaches += historyOfType.getCount();

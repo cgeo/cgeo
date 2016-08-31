@@ -1171,7 +1171,7 @@ public class DataStore {
 
             // Only save the cache in the database if it is requested by the caller and
             // the cache contains detailed information.
-            if (saveFlags.contains(SaveFlag.DB) && cache.isDetailed() && dbUpdateRequired) {
+            if (saveFlags.contains(SaveFlag.DB) && dbUpdateRequired) {
                 toBeStored.add(cache);
             }
         }
@@ -2343,12 +2343,9 @@ public class DataStore {
     }
 
     @NonNull
-    private static Set<String> loadBatchOfHistoricGeocodes(final boolean detailedOnly, final CacheType cacheType) {
+    private static Set<String> loadBatchOfHistoricGeocodes(final CacheType cacheType) {
         final StringBuilder selection = new StringBuilder("visiteddate > 0");
 
-        if (detailedOnly) {
-            selection.append(" AND detailed = 1");
-        }
         String[] selectionArgs = null;
         if (cacheType != CacheType.ALL) {
             selection.append(" AND type = ?");
@@ -3297,8 +3294,8 @@ public class DataStore {
     }
 
     @NonNull
-    public static SearchResult getHistoryOfCaches(final boolean detailedOnly, final CacheType cacheType) {
-        final Set<String> geocodes = loadBatchOfHistoricGeocodes(detailedOnly, cacheType);
+    public static SearchResult getHistoryOfCaches(final CacheType cacheType) {
+        final Set<String> geocodes = loadBatchOfHistoricGeocodes(cacheType);
         return new SearchResult(geocodes, getAllHistoryCachesCount());
     }
 
