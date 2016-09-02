@@ -5,6 +5,7 @@ import cgeo.geocaching.models.ICoordinates;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 public final class Viewport {
@@ -93,6 +94,23 @@ public final class Viewport {
             }
         }
         return total;
+    }
+
+    /**
+     * Filter return the points present in the viewport.
+     *
+     * @param points
+     *            a collection of (possibly null) points
+     * @return a new collection containing the points in the viewport
+     */
+    public <T extends ICoordinates> Collection<T> filter(@NonNull final Collection<T> points) {
+        final Collection<T> result = new ArrayList<>();
+        for (final T point : points) {
+            if (point != null && contains(point)) {
+                result.add(point);
+            }
+        }
+        return result;
     }
 
     @Override

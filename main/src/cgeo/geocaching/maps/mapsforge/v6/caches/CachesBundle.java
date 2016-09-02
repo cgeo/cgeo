@@ -34,7 +34,7 @@ public class CachesBundle {
 
     private AbstractCachesOverlay baseOverlay;
     private AbstractCachesOverlay storedOverlay;
-    private AbstractCachesOverlay liveOverlay;
+    private LiveCachesOverlay liveOverlay;
     private final List<SeparatorLayer> separators = new ArrayList<>();
 
     /**
@@ -162,6 +162,25 @@ public class CachesBundle {
         return result;
     }
 
+    public List<String> getVisibleGeocodes() {
+
+        final List<String> result = new ArrayList<>();
+
+        if (this.baseOverlay != null) {
+            result.addAll(this.baseOverlay.getVisibleGeocodes());
+        }
+
+        if (this.storedOverlay != null) {
+            result.addAll(this.storedOverlay.getVisibleGeocodes());
+        }
+
+        if (this.liveOverlay != null) {
+            result.addAll(this.liveOverlay.getVisibleGeocodes());
+        }
+
+        return result;
+    }
+
     public int getItemsCount() {
 
         int result = 0;
@@ -195,5 +214,9 @@ public class CachesBundle {
         if (liveOverlay != null) {
             liveOverlay.invalidate(geocodes);
         }
+    }
+
+    public boolean isDownloading() {
+        return liveOverlay != null && liveOverlay.isDownloading();
     }
 }

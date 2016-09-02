@@ -52,6 +52,19 @@ public abstract class AbstractCachesOverlay {
         clearLayers();
     }
 
+    public Set<String> getVisibleGeocodes() {
+        final Set<String> geocodesInViewport = new HashSet<>();
+        final MfMapView mapView = mapViewRef.get();
+        if (mapView != null) {
+        final Collection<Geocache> cachesInViewport = mapView.getViewport().filter(DataStore.loadCaches(getGeocodes(), LoadFlags.LOAD_CACHE_OR_DB));
+        for (final Geocache cache : cachesInViewport) {
+            geocodesInViewport.add(cache.getGeocode());
+        }
+
+        }
+        return geocodesInViewport;
+    }
+
     public int getVisibleItemsCount() {
         final MfMapView mapView = mapViewRef.get();
         if (mapView == null) {
