@@ -26,7 +26,7 @@ import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.capability.ISearchByGeocode;
 import cgeo.geocaching.connector.trackable.TrackableBrand;
-import cgeo.geocaching.connector.trackable.TrackableConnector;
+import cgeo.geocaching.connector.trackable.TrackableTrackingCode;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.search.AutoCompleteAdapter;
@@ -151,21 +151,30 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
         }
 
         // Check if the query is a TB code
-        TrackableConnector trackableConnector = ConnectorFactory.getTrackableConnector(geocode);
+        TrackableBrand trackableBrand = ConnectorFactory.getTrackableConnector(geocode).getBrand();
 
         // check if the query contains a TB code
-        if (trackableConnector.equals(ConnectorFactory.UNKNOWN_TRACKABLE_CONNECTOR)) {
+        if (trackableBrand.equals(TrackableBrand.UNKNOWN)) {
             final String tbCode = ConnectorFactory.getTrackableFromURL(query);
             if (StringUtils.isNotBlank(tbCode)) {
-                trackableConnector = ConnectorFactory.getTrackableConnector(tbCode);
+                trackableBrand = ConnectorFactory.getTrackableConnector(tbCode).getBrand();
                 geocode = tbCode;
             }
         }
 
-        if (!trackableConnector.equals(ConnectorFactory.UNKNOWN_TRACKABLE_CONNECTOR) && geocode != null) {
+        // check if the query contains a TB tracking code
+        if (trackableBrand.equals(TrackableBrand.UNKNOWN)) {
+            final TrackableTrackingCode tbTrackingCode = ConnectorFactory.getTrackableTrackingCodeFromURL(query);
+            if (!tbTrackingCode.isEmpty()) {
+                trackableBrand = tbTrackingCode.brand;
+                geocode = tbTrackingCode.trackingCode;
+            }
+        }
+
+        if (!trackableBrand.equals(TrackableBrand.UNKNOWN) && geocode != null) {
             final Intent trackablesIntent = new Intent(this, TrackableActivity.class);
             trackablesIntent.putExtra(Intents.EXTRA_GEOCODE, geocode.toUpperCase(Locale.US));
-            trackablesIntent.putExtra(Intents.EXTRA_BRAND, trackableConnector.getBrand().getId());
+            trackablesIntent.putExtra(Intents.EXTRA_BRAND, trackableBrand.getId());
             startActivity(trackablesIntent);
             return true;
         }

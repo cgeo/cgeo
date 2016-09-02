@@ -43,6 +43,7 @@ import cgeo.geocaching.connector.LogResult;
 import cgeo.geocaching.connector.trackable.AbstractTrackableLoggingManager;
 import cgeo.geocaching.connector.trackable.TrackableBrand;
 import cgeo.geocaching.connector.trackable.TrackableConnector;
+import cgeo.geocaching.connector.trackable.TrackableTrackingCode;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.Loaders;
 import cgeo.geocaching.enumerations.LogTypeTrackable;
@@ -177,14 +178,15 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
         // try to get data from URI
         if (geocode == null && uri != null) {
             geocode = ConnectorFactory.getTrackableFromURL(uri.toString());
-            trackingCode = ConnectorFactory.getTrackableTrackingCodeFromURL(uri.toString());
+        }
 
-            final String uriHost = uri.getHost().toLowerCase(Locale.US);
-            if (uriHost.endsWith("geokrety.org")) {
-                brand = TrackableBrand.GEOKRETY;
-                if (geocode == null && trackingCode != null) {
-                    geocode = trackingCode;
-                }
+        // try to get data from URI from a potential tracking Code
+        if (geocode == null && uri != null) {
+            final TrackableTrackingCode tbTrackingCode = ConnectorFactory.getTrackableTrackingCodeFromURL(uri.toString());
+
+            if (!tbTrackingCode.isEmpty()) {
+                brand = tbTrackingCode.brand;
+                geocode = tbTrackingCode.trackingCode;
             }
         }
 
