@@ -4,6 +4,7 @@ import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.AbstractViewPagerActivity;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.trackable.TrackableBrand;
+import cgeo.geocaching.connector.trackable.TrackableTrackingCode;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.location.Units;
 import cgeo.geocaching.models.LogEntry;
@@ -138,7 +139,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
         // try to get data from URI
         if (geocode == null && guid == null && id == null && uri != null) {
             geocode = ConnectorFactory.getTrackableFromURL(uri.toString());
-            trackingCode = ConnectorFactory.getTrackableTrackingCodeFromURL(uri.toString());
+            final TrackableTrackingCode tbTrackingCode = ConnectorFactory.getTrackableTrackingCodeFromURL(uri.toString());
 
             final String uriHost = uri.getHost().toLowerCase(Locale.US);
             if (uriHost.endsWith("geocaching.com")) {
@@ -164,10 +165,8 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
                     return;
                 }
             } else if (uriHost.endsWith("geokrety.org")) {
-                brand = TrackableBrand.GEOKRETY;
-                if (geocode == null && trackingCode != null) {
-                    geocode = trackingCode;
-                }
+                brand = tbTrackingCode.brand;
+                geocode = trackingCode = tbTrackingCode.trackingCode;
             }
         }
 

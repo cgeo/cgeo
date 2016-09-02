@@ -22,6 +22,7 @@ import cgeo.geocaching.connector.trackable.GeokretyConnector;
 import cgeo.geocaching.connector.trackable.GeolutinsConnector;
 import cgeo.geocaching.connector.trackable.TrackableBrand;
 import cgeo.geocaching.connector.trackable.TrackableConnector;
+import cgeo.geocaching.connector.trackable.TrackableTrackingCode;
 import cgeo.geocaching.connector.trackable.TravelBugConnector;
 import cgeo.geocaching.connector.trackable.UnknownTrackableConnector;
 import cgeo.geocaching.location.Viewport;
@@ -336,20 +337,20 @@ public final class ConnectorFactory {
      * Get trackable Tracking Code from an URL.
      *
      * @return
-     *          the tracking code, {@code null} if the URL cannot be decoded
+     *          the TrackableTrackingCode object, {@code null} if the URL cannot be decoded
      */
-    @Nullable
-    public static String getTrackableTrackingCodeFromURL(final String url) {
+    @NonNull
+    public static TrackableTrackingCode getTrackableTrackingCodeFromURL(final String url) {
         if (url == null) {
-            return null;
+            return TrackableTrackingCode.EMPTY;
         }
         for (final TrackableConnector connector : TRACKABLE_CONNECTORS) {
             final String trackableCode = connector.getTrackableTrackingCodeFromUrl(url);
             if (StringUtils.isNotBlank(trackableCode)) {
-                return trackableCode;
+                return new TrackableTrackingCode(trackableCode, connector.getBrand());
             }
         }
-        return null;
+        return TrackableTrackingCode.EMPTY;
     }
 
     /**
