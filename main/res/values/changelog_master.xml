@@ -5,6 +5,7 @@
     <b>Next feature release:</b>\n
     · Fix: Attribute filter now lists non GC attributes\n
     · Fix: Better GPX file compatibility with Garmin devices\n
+    · Fix: Scan GeoKrety QRCodes from internal app\n
     \n
     \n
   </string>
