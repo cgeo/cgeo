@@ -452,6 +452,7 @@
   <string name="settings_activate_oc_uk">Aktiver</string>
   <string name="init_summary_oc_uk">Last cacher fra opencaching.org.uk</string>
   <string name="init_oc_uk_description">Gi c:geo tilgang til å bruke opencaching.org.uk for å søke etter cacher og vise/filtrere dine funnede cacher.</string>
+  <string name="settings_activate_su">Aktiver</string>
   <string name="init_gcvote">GCVote.com</string>
   <string name="init_gcvote_password_description">For å kunne vurdere en cache må du følge instruksjonene på GCVote.com og angi ditt GCVote passord her.</string>
   <string name="err_gcvote_send_rating">Feil ved sending av vurdering. Sjekk at passordet for GCVote i innstillingene er riktig eller fjern passordet.</string>
