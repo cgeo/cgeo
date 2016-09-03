@@ -27,12 +27,6 @@ import cgeo.geocaching.utils.HtmlUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.UnknownTagsHandler;
 
-import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.apache.commons.lang3.tuple.Pair;
-import android.support.annotation.Nullable;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Paint;
@@ -40,6 +34,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.DrawableRes;
+import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.v7.app.ActionBar;
 import android.support.v7.view.ActionMode;
@@ -63,6 +58,10 @@ import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
 import rx.Subscription;
 import rx.android.app.AppObservable;
 import rx.android.view.OnClickEvent;
@@ -166,7 +165,8 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
                 }
             } else if (uriHost.endsWith("geokrety.org")) {
                 brand = tbTrackingCode.brand;
-                geocode = trackingCode = tbTrackingCode.trackingCode;
+                trackingCode = tbTrackingCode.trackingCode;
+                geocode = trackingCode;
             }
         }
 

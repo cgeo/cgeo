@@ -1,18 +1,6 @@
 package cgeo.geocaching.export;
 
-import android.support.annotation.NonNull;
-
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.CharEncoding;
-import org.apache.commons.lang3.StringUtils;
-
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.StringWriter;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.concurrent.atomic.AtomicReference;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.WaypointType;
@@ -26,7 +14,19 @@ import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 import cgeo.geocaching.test.R;
 import cgeo.geocaching.utils.Charsets;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import android.support.annotation.NonNull;
+
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.StringWriter;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.concurrent.atomic.AtomicReference;
+
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.CharEncoding;
+import org.apache.commons.lang3.StringUtils;
 
 public class GpxSerializerTest extends AbstractResourceInstrumentationTestCase {
 
@@ -188,7 +188,7 @@ public class GpxSerializerTest extends AbstractResourceInstrumentationTestCase {
     }
 
     @NonNull
-    private String extractWaypoint(String gpx) {
+    private static String extractWaypoint(final String gpx) {
         return StringUtils.substringBetween(gpx, "<wpt", "</wpt>");
     }
 

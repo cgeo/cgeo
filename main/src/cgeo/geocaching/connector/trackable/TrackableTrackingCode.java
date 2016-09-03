@@ -10,7 +10,7 @@ import org.apache.commons.lang3.StringUtils;
  * This is useful in some cases, as not all Trackable connectors are activated to handle tracking code lookup.
  * However, coupled with the brand, such lookup are possible.
  */
-final public class TrackableTrackingCode {
+public final class TrackableTrackingCode {
 
     @NonNull public final String trackingCode;
     @NonNull public final TrackableBrand brand;

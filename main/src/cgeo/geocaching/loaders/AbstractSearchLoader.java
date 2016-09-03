@@ -55,6 +55,11 @@ public abstract class AbstractSearchLoader extends AsyncTaskLoader<SearchResult>
     private CacheListActivity.AfterLoadAction afterLoadAction = CacheListActivity.AfterLoadAction.NO_ACTION;
 
     private static class NoConnectorException extends RuntimeException {
+
+        /**
+         *
+         */
+        private static final long serialVersionUID = -3068184330294931088L;
     }
 
     /**
@@ -70,7 +75,7 @@ public abstract class AbstractSearchLoader extends AsyncTaskLoader<SearchResult>
      * @return the result of {@link SearchResult#parallelCombineActive(Collection, Func1)} if there is at least one
      *         active connector
      */
-    protected <C extends IConnector> SearchResult nonEmptyCombineActive(final Collection<C> connectors,
+    protected static <C extends IConnector> SearchResult nonEmptyCombineActive(final Collection<C> connectors,
                                                                         final Func1<C, SearchResult> func) {
         for (final IConnector connector : connectors) {
             if (connector.isActive()) {
