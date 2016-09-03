@@ -13,15 +13,13 @@ import cgeo.geocaching.settings.Settings.CoordInputFormatEnum;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.EditUtils;
 
-import org.apache.commons.lang3.StringUtils;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-
 import android.app.Dialog;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -45,6 +43,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import butterknife.ButterKnife;
+import org.apache.commons.lang3.StringUtils;
 
 public class CoordinatesInputDialog extends DialogFragment {
 
@@ -323,7 +322,9 @@ public class CoordinatesInputDialog extends DialogFragment {
     }
 
     private void setVisible(@IdRes final int viewId, final int visibility) {
-        ButterKnife.findById(getView(), viewId).setVisibility(visibility);
+        final View view = getView();
+        assert view != null;
+        ButterKnife.findById(view, viewId).setVisibility(visibility);
     }
 
     private void setSize(final EditText someEditText) {

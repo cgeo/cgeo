@@ -1,0 +1,7 @@
+class android/text/method/LinkMovementMethod
+onTakeFocus
+ (Landroid/widget/TextView;Landroid/text/Spannable;I)V
+ (Landroid/widget/TextView;L1android/text/Spannable;I)V
+onTouchEvent
+ (Landroid/widget/TextView;Landroid/text/Spannable;Landroid/view/MotionEvent;)Z
+ (L1android/widget/TextView;L1android/text/Spannable;L1android/view/MotionEvent;)Z

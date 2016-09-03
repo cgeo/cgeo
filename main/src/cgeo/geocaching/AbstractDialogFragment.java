@@ -115,10 +115,11 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
     }
 
     public final void setTitle(final CharSequence title) {
-        final TextView titleview = ButterKnife.findById(getView(), R.id.actionbar_title);
+        final View view = getView();
+        assert view != null;
+        final TextView titleview = ButterKnife.findById(view, R.id.actionbar_title);
         if (titleview != null) {
             titleview.setText(title);
-
         }
     }
 
@@ -250,7 +251,9 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
         details.add(R.string.cache_favorite, cache.getFavoritePoints() + "×");
 
         // more details
-        final Button buttonMore = ButterKnife.findById(getView(), R.id.more_details);
+        final View view = getView();
+        assert view != null;
+        final Button buttonMore = ButterKnife.findById(view, R.id.more_details);
 
         buttonMore.setOnClickListener(new View.OnClickListener() {
 

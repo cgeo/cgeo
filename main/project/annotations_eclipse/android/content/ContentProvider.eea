@@ -1,0 +1,16 @@
+class android/content/ContentProvider
+delete
+ (Landroid/net/Uri;Ljava/lang/String;[Ljava/lang/String;)I
+ (L1android/net/Uri;L0java/lang/String;[Ljava/lang/String;)I
+getType
+ (Landroid/net/Uri;)Ljava/lang/String;
+ (L1android/net/Uri;)L0java/lang/String;
+insert
+ (Landroid/net/Uri;Landroid/content/ContentValues;)Landroid/net/Uri;
+ (L1android/net/Uri;L0android/content/ContentValues;)L0android/net/Uri;
+query
+ (Landroid/net/Uri;[Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;Ljava/lang/String;)Landroid/database/Cursor;
+ (L1android/net/Uri;[0Ljava/lang/String;L0java/lang/String;[Ljava/lang/String;L0java/lang/String;)L0android/database/Cursor;
+update
+ (Landroid/net/Uri;Landroid/content/ContentValues;Ljava/lang/String;[Ljava/lang/String;)I
+ (L1android/net/Uri;L0android/content/ContentValues;L0java/lang/String;[Ljava/lang/String;)I
