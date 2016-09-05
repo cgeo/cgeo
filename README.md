@@ -26,6 +26,8 @@ Such a procedure is [described in the wiki](https://github.com/cgeo/cgeo/wiki/Ho
 
 ## Setting up an IDE
 
+Make sure to use Java 8 for your IDE and build process. Some of the involved tools require it, even though the source code is Java 7 only.
+
 ### Eclipse
 - Install an Eclipse distribution for your OS from http://eclipse.org/downloads/ (you may choose the Java developers distribution).
 - Start Eclipse, choose any directory as workspace. Close the welcome screen, if it appears.
