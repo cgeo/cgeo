@@ -2,6 +2,12 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
+    <b>Next feature release:</b>\n
+    · Fix: Attribute filter now lists non GC attributes\n
+    · Fix: Better GPX file compatibility with Garmin devices\n
+    · Fix: Scan GeoKrety QRCodes from internal app\n
+    \n
+    \n
     <b>2016.08.27:</b>\n
     · Fix: Crashes on (live) map\n
     · Fix: Crashes in settings or on startup\n
