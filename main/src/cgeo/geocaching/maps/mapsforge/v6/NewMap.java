@@ -2,6 +2,7 @@ package cgeo.geocaching.maps.mapsforge.v6;
 
 import cgeo.geocaching.AbstractDialogFragment;
 import cgeo.geocaching.AbstractDialogFragment.TargetInfo;
+import cgeo.geocaching.CacheListActivity;
 import cgeo.geocaching.CachePopup;
 import cgeo.geocaching.CompassActivity;
 import cgeo.geocaching.EditWaypointActivity;
@@ -17,6 +18,7 @@ import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.CoordinatesType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.WaypointType;
+import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.CGeoMap.MapMode;
@@ -38,6 +40,7 @@ import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.AngleUtils;
+import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
 
@@ -45,6 +48,7 @@ import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources.NotFoundException;
@@ -70,12 +74,16 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Queue;
+import java.util.Set;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 import butterknife.ButterKnife;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.mapsforge.core.model.LatLong;
 import org.mapsforge.map.android.graphics.AndroidGraphicFactory;
@@ -92,6 +100,7 @@ import org.mapsforge.map.rendertheme.XmlRenderTheme;
 import org.mapsforge.map.rendertheme.rule.RenderThemeHandler;
 import org.xmlpull.v1.XmlPullParserException;
 import rx.Subscription;
+import rx.functions.Action1;
 import rx.subscriptions.Subscriptions;
 
 @SuppressLint("ClickableViewAccessibility")
@@ -120,6 +129,9 @@ public class NewMap extends AbstractActionBarActivity {
     private Geopoint lastNavTarget = null;
     private final Queue<String> popupGeocodes = new ConcurrentLinkedQueue<>();
 
+    private ProgressDialog waitDialog;
+    private LoadDetails loadDetailsThread;
+
     private final UpdateLoc geoDirUpdate = new UpdateLoc(this);
     /**
      * initialization with an empty subscription to make static code analysis tools more happy
@@ -136,10 +148,15 @@ public class NewMap extends AbstractActionBarActivity {
     private static final String BUNDLE_TRAIL_HISTORY = "trailHistory";
 
     // Handler messages
+    // DisplayHandler
     public static final int UPDATE_TITLE = 0;
     public static final int INVALIDATE_MAP = 1;
+    // ShowProgressHandler
     public static final int HIDE_PROGRESS = 0;
     public static final int SHOW_PROGRESS = 1;
+    // LoadDetailsHandler
+    public static final int UPDATE_PROGRESS = 0;
+    public static final int FINISHED_LOADING_DETAILS = 1;
 
     @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     @Override
@@ -275,10 +292,8 @@ public class NewMap extends AbstractActionBarActivity {
             }
             itemMapLive.setVisible(coordsIntent == null);
 
-            //TODO: menu_store_caches
             menu.findItem(R.id.menu_store_caches).setVisible(false);
-            //final Set<String> geocodesInViewport = getGeocodesForCachesInViewport();
-            //menu.findItem(R.id.menu_store_caches).setVisible(!isLoading() && CollectionUtils.isNotEmpty(geocodesInViewport) && new SearchResult(geocodesInViewport).hasUnsavedCaches());
+            menu.findItem(R.id.menu_store_caches).setVisible(!caches.isDownloading() && caches.getVisibleItemsCount() > 0);
 
             menu.findItem(R.id.menu_mycaches_mode).setChecked(Settings.isExcludeMyCaches());
             menu.findItem(R.id.menu_disabled_mode).setChecked(Settings.isExcludeDisabledCaches());
@@ -289,9 +304,7 @@ public class NewMap extends AbstractActionBarActivity {
 
             menu.findItem(R.id.menu_theme_mode).setVisible(true);
 
-            //TODO: menu_as_list
-            menu.findItem(R.id.menu_as_list).setVisible(false);
-            //menu.findItem(R.id.menu_as_list).setVisible(!isLoading() && caches.size() > 1);
+            menu.findItem(R.id.menu_as_list).setVisible(!caches.isDownloading() && caches.getVisibleItemsCount() > 0);
 
             menu.findItem(R.id.submenu_strategy).setVisible(isLiveEnabled);
 
@@ -352,7 +365,27 @@ public class NewMap extends AbstractActionBarActivity {
                 }
                 return true;
             case R.id.menu_store_caches:
-                //TODO: menu_store_caches
+                if (!caches.isDownloading()) {
+                    final Set<String> geocodes = caches.getVisibleGeocodes();
+
+                    if (geocodes.isEmpty()) {
+                        ActivityMixin.showToast(this, res.getString(R.string.warn_save_nothing));
+
+                        return true;
+                    }
+
+                    if (Settings.getChooseList()) {
+                        // let user select list to store cache in
+                        new StoredList.UserInterface(this).promptForListSelection(R.string.list_title, new Action1<Integer>() {
+                            @Override
+                            public void call(final Integer selectedListId) {
+                                storeCaches(geocodes, selectedListId);
+                            }
+                        }, true, StoredList.TEMPORARY_LIST.id);
+                    } else {
+                        storeCaches(geocodes, StoredList.STANDARD_LIST_ID);
+                    }
+                }
                 return true;
             case R.id.menu_circle_mode:
                 //                overlayCaches.switchCircles();
@@ -379,8 +412,7 @@ public class NewMap extends AbstractActionBarActivity {
                 selectMapTheme();
                 return true;
             case R.id.menu_as_list: {
-                //TODO: menu_as_list
-                //CacheListActivity.startActivityMap(activity, new SearchResult(getGeocodesForCachesInViewport()));
+                CacheListActivity.startActivityMap(this, new SearchResult(caches.getVisibleGeocodes()));
                 return true;
             }
             case R.id.menu_strategy_fastest: {
@@ -640,6 +672,7 @@ public class NewMap extends AbstractActionBarActivity {
     @Override
     protected void onStop() {
 
+        waitDialog = null;
         terminateLayers();
 
         super.onStop();
@@ -665,6 +698,51 @@ public class NewMap extends AbstractActionBarActivity {
             this.tileRendererLayer.onDestroy();
             this.tileRendererLayer = null;
         }
+    }
+
+    /**
+     * store caches, invoked by "store offline" menu item
+     *
+     * @param listId
+     *            the list to store the caches in
+     */
+    private void storeCaches(final Set<String> geocodes, final int listId) {
+
+        final int count = geocodes.size();
+        final LoadDetailsHandler loadDetailsHandler = new LoadDetailsHandler(count, this);
+
+        waitDialog = new ProgressDialog(this);
+        waitDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        waitDialog.setCancelable(true);
+        waitDialog.setCancelMessage(loadDetailsHandler.cancelMessage());
+        waitDialog.setMax(count);
+        waitDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+
+            @Override
+            public void onCancel(final DialogInterface arg0) {
+                try {
+                    if (loadDetailsThread != null) {
+                        loadDetailsThread.stopIt();
+                    }
+                } catch (final Exception e) {
+                    Log.e("CGeoMap.storeCaches.onCancel", e);
+                }
+            }
+        });
+
+        final float etaTime = count * 7.0f / 60.0f;
+        final int roundedEta = Math.round(etaTime);
+        if (etaTime < 0.4) {
+            waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + res.getString(R.string.caches_eta_ltm));
+        } else {
+            waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + res.getQuantityString(R.plurals.caches_eta_mins, roundedEta, roundedEta));
+        }
+        loadDetailsHandler.setStart();
+
+        waitDialog.show();
+
+        loadDetailsThread = new LoadDetails(loadDetailsHandler, geocodes, listId);
+        loadDetailsThread.start();
     }
 
     @Override
@@ -911,7 +989,71 @@ public class NewMap extends AbstractActionBarActivity {
 
     }
 
-    @NonNull
+    private static final class LoadDetailsHandler extends CancellableHandler {
+
+        private final int detailTotal;
+        private int detailProgress;
+        private long detailProgressTime;
+        private final WeakReference<NewMap> mapRef;
+
+        public LoadDetailsHandler(final int detailTotal, final NewMap map) {
+            super();
+
+            this.detailTotal = detailTotal;
+            this.detailProgress = 0;
+            this.mapRef = new WeakReference<>(map);
+        }
+
+        public void setStart() {
+            detailProgressTime = System.currentTimeMillis();
+        }
+
+        @Override
+        public void handleRegularMessage(final Message msg) {
+            final NewMap map = mapRef.get();
+            if (map == null) {
+                return;
+            }
+            if (msg.what == UPDATE_PROGRESS) {
+                if (detailProgress < detailTotal) {
+                    detailProgress++;
+                }
+                if (map.waitDialog != null) {
+                    final int secondsElapsed = (int) ((System.currentTimeMillis() - detailProgressTime) / 1000);
+                    final int secondsRemaining;
+                    if (detailProgress > 0) {
+                        secondsRemaining = (detailTotal - detailProgress) * secondsElapsed / detailProgress;
+                    } else {
+                        secondsRemaining = (detailTotal - detailProgress) * secondsElapsed;
+                    }
+
+                    map.waitDialog.setProgress(detailProgress);
+                    if (secondsRemaining < 40) {
+                        map.waitDialog.setMessage(map.res.getString(R.string.caches_downloading) + " " + map.res.getString(R.string.caches_eta_ltm));
+                    } else {
+                        final int minsRemaining = secondsRemaining / 60;
+                        map.waitDialog.setMessage(map.res.getString(R.string.caches_downloading) + " " + map.res.getQuantityString(R.plurals.caches_eta_mins, minsRemaining, minsRemaining));
+                    }
+                }
+            } else if (msg.what == FINISHED_LOADING_DETAILS && map.waitDialog != null) {
+                map.waitDialog.dismiss();
+                map.waitDialog.setOnCancelListener(null);
+            }
+        }
+
+        @Override
+        public void handleCancel(final Object extra) {
+            final NewMap map = mapRef.get();
+            if (map == null) {
+                return;
+            }
+            if (map.loadDetailsThread != null) {
+                map.loadDetailsThread.stopIt();
+            }
+        }
+
+    }
+
     public static Intent getLiveMapIntent(final Activity fromActivity) {
         return new Intent(fromActivity, NewMap.class).putExtra(Intents.EXTRA_MAP_MODE, MapMode.LIVE).putExtra(Intents.EXTRA_LIVE_ENABLED, Settings.isLiveMap());
     }
@@ -1210,6 +1352,57 @@ public class NewMap extends AbstractActionBarActivity {
             }
             map.popupGeocodes.add(cache.getGeocode());
             CachePopup.startActivityAllowTarget(map, cache.getGeocode());
+        }
+    }
+
+    /**
+     * Thread to store the caches in the viewport. Started by Activity.
+     */
+
+    private class LoadDetails extends Thread {
+
+        private final CancellableHandler handler;
+        private final Collection<String> geocodes;
+        private final int listId;
+
+        LoadDetails(final CancellableHandler handler, final Collection<String> geocodes, final int listId) {
+            this.handler = handler;
+            this.geocodes = geocodes;
+            this.listId = listId;
+        }
+
+        public void stopIt() {
+            handler.cancel();
+        }
+
+        @Override
+        public void run() {
+            if (CollectionUtils.isEmpty(geocodes)) {
+                return;
+            }
+
+            for (final String geocode : geocodes) {
+                try {
+                    if (handler.isCancelled()) {
+                        break;
+                    }
+
+                    if (!DataStore.isOffline(geocode, null)) {
+                        final Set<Integer> lists = new HashSet<>();
+                        lists.add(listId);
+                        Geocache.storeCache(null, geocode, lists, false, handler);
+                    }
+                } catch (final Exception e) {
+                    Log.e("CGeoMap.LoadDetails.run", e);
+                } finally {
+                    handler.sendEmptyMessage(UPDATE_PROGRESS);
+                }
+            }
+
+            // we're done
+            caches.invalidate(geocodes);
+            invalidateOptionsMenuCompatible();
+            handler.sendEmptyMessage(FINISHED_LOADING_DETAILS);
         }
     }
 
