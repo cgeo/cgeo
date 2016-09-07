@@ -551,7 +551,7 @@
   <string name="settings_info_offline_maps_title">Oplysninger om offline kort</string>
   <string name="settings_info_offline_maps">c:geo understøtter kort til offline brug. Du kan downloade kort fra Mapsforge eller lave dine egne kort ved hjælp af OSM data. Du skal vælge en mappe, som indeholder offline kort, før du kan bruge offline kort.</string>
   <string name="settings_info_themes_title">Oplysninger om korttemaer</string>
-  <string name="settings_info_themes">c:geo understøtter tilpassede temaer til offline kort. Temaer kan bruges til at ændre farvestil på kortet (f.eks. farver som egne sig til brug i mørke) eller til at fremhæve bestemte typer af objekter, som cykelstier eller højdekurver.</string>
+  <string name="settings_info_themes">c:geo understøtter tilpassede temaer til offline kort. Temaer kan bruges til at ændre farvestil på kortet (f.eks. farver som egne sig til brug i mørke) eller til at fremhæve bestemte typer af objekter, som cykelstier eller højdekurver, på kortet.</string>
   <string name="init_mapsource_select">Vælg kortkilde</string>
   <string name="settings_title_scale_map_text">Tilpas tekst på kort</string>
   <string name="settings_summary_scale_map_text">Tilpas størrelsen af tekster på offline kort, så de passer til enhedens skærmopløsning,</string>

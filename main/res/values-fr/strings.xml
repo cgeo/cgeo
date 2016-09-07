@@ -1358,7 +1358,7 @@
   <string name="status_new_rc" tools:ignore="UnusedResources">Une nouvelle version candidate est disponible.\nAppuyez ici pour l\'installer.</string>
   <string name="status_geocaching_change" tools:ignore="UnusedResources">Des changements récents sur Geocaching.com ont cassé c:geo.\nNous sommes en train de corriger. Revenez plus tard.</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Des changements récents sur Geocaching.com ont cassé la carte temps-réel.\nNous sommes en train de corriger. Revenez plus tard.</string>
-  <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Maintenance en cours sur geocaching.com.\nIl se peut que vous rencontriez des problèmes.</string>
+  <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Maintenant en cours sur geocaching.com.\nIl se peut que vous rencontriez des problèmes.</string>
   <string name="status_closeout_warning" tools:ignore="UnusedResources">Vous utilisez une version d\'Android inférieure à 2.1. Les futures versions de c:geo pourront ne pas être disponibles pour votre appareil.</string>
   <!-- text-to-speech for compass view -->
   <string name="tts_service">Boussole parlante</string>
