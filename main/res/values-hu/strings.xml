@@ -1074,6 +1074,7 @@
   <string name="helper_sendtocgeo_description">A Send2cgeo egy böngészőbővítmény <strong>PC-re</strong>. A geocaching.com böngészése közben, egy kattintással tudsz geoládákat küldeni a készülékedre.</string>
   <string name="helper_locus_title">Locus</string>
   <string name="helper_locus_description">Telefonon, tableten használható szabadtéri navigációs program. Offline térképek használata, útvonalkövetés, ládavadászat, hangos útikalauz, stb.</string>
+  <string name="helper_gpsstatus_title">GPS Status &amp; Toolbox</string>
   <string name="helper_gpsstatus_description">A programban található radart a c:geo-hoz is használhatod. Sok egyéb GPS-szel kapcsolatos információt is megmutat.</string>
   <string name="helper_bluetoothgps_title">Bluetooth GPS</string>
   <string name="helper_bluetoothgps_description">Ez a program külső GPS vevők használatát teszi lehetővé, amelyek segítségével jobb vételt és pontosabb koordinátákat kaphatsz. Külső GPS használatával a telefonod akkumulátora is tovább bírja.</string>

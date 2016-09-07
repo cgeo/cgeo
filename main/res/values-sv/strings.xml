@@ -655,6 +655,7 @@
   <string name="auth_authorize">Koppla c:geo mot Twitter</string>
   <string name="auth_check">Kolla autentisering</string>
   <string name="auth_check_again">Kolla autentisering igen</string>
+  <string name="auth_start">Påbörja koppling mot Twitter</string>
   <string name="auth_again">Koppla mot Twitter igen</string>
   <string name="auth_register">Skapa ett konto</string>
   <string name="auth_connected">Ansluten</string>
