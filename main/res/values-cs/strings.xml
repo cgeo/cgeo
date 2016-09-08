@@ -497,7 +497,7 @@
   <string name="init_signature_template_user">Uživatel</string>
   <string name="init_signature_template_number">Číslo nálezu</string>
   <string name="init_signature_template_owner">Vlastník</string>
-  <string name="init_signature_template_name">Jméno</string>
+  <string name="init_signature_template_name">Název</string>
   <string name="init_signature_template_url">URL adresa</string>
   <string name="init_signature_template_log">Text logu</string>
   <string name="init_ratingwanted">Načítat hodnocení</string>
