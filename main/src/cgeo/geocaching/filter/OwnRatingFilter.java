@@ -1,13 +1,12 @@
 package cgeo.geocaching.filter;
 
-import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.gcvote.GCVote;
-
-import android.support.annotation.NonNull;
+import cgeo.geocaching.models.Geocache;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 
 import java.util.Collections;
 import java.util.List;
@@ -18,6 +17,19 @@ import java.util.List;
  *
  */
 public class OwnRatingFilter extends AbstractFilter implements IFilterFactory {
+
+    public static final Creator<OwnRatingFilter> CREATOR = new Parcelable.Creator<OwnRatingFilter>() {
+
+        @Override
+        public OwnRatingFilter createFromParcel(final Parcel in) {
+            return new OwnRatingFilter(in);
+        }
+
+        @Override
+        public OwnRatingFilter[] newArray(final int size) {
+            return new OwnRatingFilter[size];
+        }
+    };
 
     protected OwnRatingFilter() {
         super(R.string.caches_filter_own_rating);
@@ -34,21 +46,7 @@ public class OwnRatingFilter extends AbstractFilter implements IFilterFactory {
 
     @Override
     @NonNull
-    public List<OwnRatingFilter> getFilters() {
-        return Collections.singletonList(this);
+    public List<IFilter> getFilters() {
+        return Collections.<IFilter> singletonList(this);
     }
-
-    public static final Creator<OwnRatingFilter> CREATOR
-            = new Parcelable.Creator<OwnRatingFilter>() {
-
-        @Override
-        public OwnRatingFilter createFromParcel(final Parcel in) {
-            return new OwnRatingFilter(in);
-        }
-
-        @Override
-        public OwnRatingFilter[] newArray(final int size) {
-            return new OwnRatingFilter[size];
-        }
-    };
 }

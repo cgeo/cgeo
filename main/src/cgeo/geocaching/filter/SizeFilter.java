@@ -3,16 +3,28 @@ package cgeo.geocaching.filter;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.models.Geocache;
 
-import android.support.annotation.NonNull;
-
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 
 import java.util.LinkedList;
 import java.util.List;
 
 class SizeFilter extends AbstractFilter {
     private final CacheSize cacheSize;
+
+    public static final Creator<SizeFilter> CREATOR = new Parcelable.Creator<SizeFilter>() {
+
+        @Override
+        public SizeFilter createFromParcel(final Parcel in) {
+            return new SizeFilter(in);
+        }
+
+        @Override
+        public SizeFilter[] newArray(final int size) {
+            return new SizeFilter[size];
+        }
+    };
 
     SizeFilter(@NonNull final CacheSize cacheSize) {
         super(cacheSize.id);
@@ -56,18 +68,4 @@ class SizeFilter extends AbstractFilter {
         super.writeToParcel(dest, flags);
         dest.writeInt(cacheSize.ordinal());
     }
-
-    public static final Creator<SizeFilter> CREATOR
-            = new Parcelable.Creator<SizeFilter>() {
-
-        @Override
-        public SizeFilter createFromParcel(final Parcel in) {
-            return new SizeFilter(in);
-        }
-
-        @Override
-        public SizeFilter[] newArray(final int size) {
-            return new SizeFilter[size];
-        }
-    };
 }

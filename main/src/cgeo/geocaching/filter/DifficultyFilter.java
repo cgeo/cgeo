@@ -3,16 +3,28 @@ package cgeo.geocaching.filter;
 import cgeo.geocaching.R;
 import cgeo.geocaching.models.Geocache;
 
-import android.support.annotation.NonNull;
-
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 
 import java.util.ArrayList;
 import java.util.List;
 
 class DifficultyFilter extends AbstractRangeFilter {
+
+    public static final Creator<DifficultyFilter> CREATOR = new Parcelable.Creator<DifficultyFilter>() {
+
+        @Override
+        public DifficultyFilter createFromParcel(final Parcel in) {
+            return new DifficultyFilter(in);
+        }
+
+        @Override
+        public DifficultyFilter[] newArray(final int size) {
+            return new DifficultyFilter[size];
+        }
+    };
 
     private DifficultyFilter(@StringRes final int name, final int difficulty) {
         // do not inline the name constant. Android Lint has a bug which would lead to using the super super constructors
@@ -45,18 +57,4 @@ class DifficultyFilter extends AbstractRangeFilter {
             return filters;
         }
     }
-
-    public static final Creator<DifficultyFilter> CREATOR
-            = new Parcelable.Creator<DifficultyFilter>() {
-
-        @Override
-        public DifficultyFilter createFromParcel(final Parcel in) {
-            return new DifficultyFilter(in);
-        }
-
-        @Override
-        public DifficultyFilter[] newArray(final int size) {
-            return new DifficultyFilter[size];
-        }
-    };
 }

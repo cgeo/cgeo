@@ -6,5 +6,5 @@ import java.util.List;
 
 interface IFilterFactory {
     @NonNull
-    List<? extends IFilter> getFilters();
+    List<IFilter> getFilters();
 }

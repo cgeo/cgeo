@@ -7,10 +7,9 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.Sensors;
 
-import android.support.annotation.NonNull;
-
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +18,19 @@ class DistanceFilter extends AbstractFilter {
     private final GeoData geo;
     private final int minDistance;
     private final int maxDistance;
+
+    public static final Creator<DistanceFilter> CREATOR = new Parcelable.Creator<DistanceFilter>() {
+
+        @Override
+        public DistanceFilter createFromParcel(final Parcel in) {
+            return new DistanceFilter(in);
+        }
+
+        @Override
+        public DistanceFilter[] newArray(final int size) {
+            return new DistanceFilter[size];
+        }
+    };
 
     DistanceFilter(@NonNull final String name, final int minDistance, final int maxDistance) {
         super(name);
@@ -77,18 +89,4 @@ class DistanceFilter extends AbstractFilter {
         dest.writeInt(minDistance);
         dest.writeInt(maxDistance);
     }
-
-    public static final Creator<DistanceFilter> CREATOR
-            = new Parcelable.Creator<DistanceFilter>() {
-
-        @Override
-        public DistanceFilter createFromParcel(final Parcel in) {
-            return new DistanceFilter(in);
-        }
-
-        @Override
-        public DistanceFilter[] newArray(final int size) {
-            return new DistanceFilter[size];
-        }
-    };
 }

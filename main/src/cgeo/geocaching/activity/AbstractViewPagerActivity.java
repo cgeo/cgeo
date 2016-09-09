@@ -127,6 +127,7 @@ public abstract class AbstractViewPagerActivity<Page extends Enum<Page>> extends
 
         @Override
         public void finishUpdate(final ViewGroup container) {
+            // empty
         }
 
         @Override
@@ -176,6 +177,7 @@ public abstract class AbstractViewPagerActivity<Page extends Enum<Page>> extends
 
         @Override
         public void restoreState(final Parcelable arg0, final ClassLoader arg1) {
+            // empty
         }
 
         @Override
@@ -185,6 +187,7 @@ public abstract class AbstractViewPagerActivity<Page extends Enum<Page>> extends
 
         @Override
         public void startUpdate(final ViewGroup arg0) {
+            // empty
         }
 
         @Override

@@ -5,10 +5,9 @@ import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.utils.TextUtils;
 
-import android.support.annotation.NonNull;
-
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -18,6 +17,19 @@ import java.util.List;
 public class OriginFilter extends AbstractFilter {
 
     private final IConnector connector;
+
+    public static final Creator<OriginFilter> CREATOR = new Parcelable.Creator<OriginFilter>() {
+
+        @Override
+        public OriginFilter createFromParcel(final Parcel in) {
+            return new OriginFilter(in);
+        }
+
+        @Override
+        public OriginFilter[] newArray(final int size) {
+            return new OriginFilter[size];
+        }
+    };
 
     public OriginFilter(@NonNull final IConnector connector) {
         super(connector.getName());
@@ -38,17 +50,17 @@ public class OriginFilter extends AbstractFilter {
 
         @Override
         @NonNull
-        public List<OriginFilter> getFilters() {
-            final List<OriginFilter> filters = new ArrayList<>();
+        public List<IFilter> getFilters() {
+            final List<IFilter> filters = new ArrayList<>();
             for (final IConnector connector : ConnectorFactory.getConnectors()) {
                 filters.add(new OriginFilter(connector));
             }
 
             // sort connectors by name
-            Collections.sort(filters, new Comparator<OriginFilter>() {
+            Collections.sort(filters, new Comparator<IFilter>() {
 
                 @Override
-                public int compare(final OriginFilter lhs, final OriginFilter rhs) {
+                public int compare(final IFilter lhs, final IFilter rhs) {
                     return TextUtils.COLLATOR.compare(lhs.getName(), rhs.getName());
                 }
             });
@@ -61,20 +73,6 @@ public class OriginFilter extends AbstractFilter {
     @Override
     public void writeToParcel(final Parcel dest, final int flags) {
         super.writeToParcel(dest, flags);
-        dest.writeString(connector.getName()); // Do not parcell the full Connector Object
+        dest.writeString(connector.getName()); // Do not parcel the full Connector Object
     }
-
-    public static final Creator<OriginFilter> CREATOR
-            = new Parcelable.Creator<OriginFilter>() {
-
-        @Override
-        public OriginFilter createFromParcel(final Parcel in) {
-            return new OriginFilter(in);
-        }
-
-        @Override
-        public OriginFilter[] newArray(final int size) {
-            return new OriginFilter[size];
-        }
-    };
 }

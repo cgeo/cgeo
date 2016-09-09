@@ -3,15 +3,28 @@ package cgeo.geocaching.filter;
 import cgeo.geocaching.R;
 import cgeo.geocaching.models.Geocache;
 
-import android.support.annotation.NonNull;
-
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 
 import java.util.Collections;
 import java.util.List;
 
 class ModifiedFilter extends AbstractFilter implements IFilterFactory {
+
+    public static final Creator<ModifiedFilter> CREATOR
+            = new Parcelable.Creator<ModifiedFilter>() {
+
+        @Override
+        public ModifiedFilter createFromParcel(final Parcel in) {
+            return new ModifiedFilter(in);
+        }
+
+        @Override
+        public ModifiedFilter[] newArray(final int size) {
+            return new ModifiedFilter[size];
+        }
+    };
 
     ModifiedFilter() {
         super(R.string.caches_filter_modified);
@@ -29,21 +42,7 @@ class ModifiedFilter extends AbstractFilter implements IFilterFactory {
 
     @Override
     @NonNull
-    public List<ModifiedFilter> getFilters() {
-        return Collections.singletonList(this);
+    public List<IFilter> getFilters() {
+        return Collections.<IFilter> singletonList(this);
     }
-
-    public static final Creator<ModifiedFilter> CREATOR
-            = new Parcelable.Creator<ModifiedFilter>() {
-
-        @Override
-        public ModifiedFilter createFromParcel(final Parcel in) {
-            return new ModifiedFilter(in);
-        }
-
-        @Override
-        public ModifiedFilter[] newArray(final int size) {
-            return new ModifiedFilter[size];
-        }
-    };
 }

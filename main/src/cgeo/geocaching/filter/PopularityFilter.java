@@ -4,16 +4,29 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.models.Geocache;
 
-import android.support.annotation.NonNull;
-
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
 class PopularityFilter extends AbstractFilter {
     private final int minFavorites;
+
+    public static final Creator<PopularityFilter> CREATOR
+            = new Parcelable.Creator<PopularityFilter>() {
+
+        @Override
+        public PopularityFilter createFromParcel(final Parcel in) {
+            return new PopularityFilter(in);
+        }
+
+        @Override
+        public PopularityFilter[] newArray(final int size) {
+            return new PopularityFilter[size];
+        }
+    };
 
     PopularityFilter(@NonNull final String name, final int minFavorites) {
         super(name);
@@ -52,18 +65,4 @@ class PopularityFilter extends AbstractFilter {
         super.writeToParcel(dest, flags);
         dest.writeInt(minFavorites);
     }
-
-    public static final Creator<PopularityFilter> CREATOR
-            = new Parcelable.Creator<PopularityFilter>() {
-
-        @Override
-        public PopularityFilter createFromParcel(final Parcel in) {
-            return new PopularityFilter(in);
-        }
-
-        @Override
-        public PopularityFilter[] newArray(final int size) {
-            return new PopularityFilter[size];
-        }
-    };
 }

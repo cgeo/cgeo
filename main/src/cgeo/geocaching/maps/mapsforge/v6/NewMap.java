@@ -814,16 +814,16 @@ public class NewMap extends AbstractActionBarActivity {
         @NonNull
         private final WeakReference<NewMap> mapRef;
 
+        MyLocationListener(@NonNull final NewMap map) {
+            mapRef = new WeakReference<>(map);
+        }
+
         private void onFollowMyLocationClicked() {
             followMyLocation = !followMyLocation;
             final NewMap map = mapRef.get();
             if (map != null) {
                 map.switchMyLocationButton();
             }
-        }
-
-        MyLocationListener(@NonNull final NewMap map) {
-            mapRef = new WeakReference<>(map);
         }
 
         @Override
@@ -996,7 +996,7 @@ public class NewMap extends AbstractActionBarActivity {
         private long detailProgressTime;
         private final WeakReference<NewMap> mapRef;
 
-        public LoadDetailsHandler(final int detailTotal, final NewMap map) {
+        LoadDetailsHandler(final int detailTotal, final NewMap map) {
             super();
 
             this.detailTotal = detailTotal;
@@ -1218,7 +1218,7 @@ public class NewMap extends AbstractActionBarActivity {
         }
     }
 
-    public void showSelection(@NonNull final ArrayList<GeoitemRef> items) {
+    public void showSelection(@NonNull final List<GeoitemRef> items) {
         if (items.isEmpty()) {
             return;
         }
@@ -1262,9 +1262,9 @@ public class NewMap extends AbstractActionBarActivity {
     private class SelectionClickListener implements DialogInterface.OnClickListener {
 
         @NonNull
-        private final ArrayList<GeoitemRef> items;
+        private final List<GeoitemRef> items;
 
-        SelectionClickListener(@NonNull final ArrayList<GeoitemRef> items) {
+        SelectionClickListener(@NonNull final List<GeoitemRef> items) {
             this.items = items;
         }
 

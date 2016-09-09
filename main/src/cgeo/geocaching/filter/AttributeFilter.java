@@ -14,6 +14,19 @@ class AttributeFilter extends AbstractFilter {
 
     private final String attribute;
 
+    public static final Creator<AttributeFilter> CREATOR = new Parcelable.Creator<AttributeFilter>() {
+
+        @Override
+        public AttributeFilter createFromParcel(final Parcel in) {
+            return new AttributeFilter(in);
+        }
+
+        @Override
+        public AttributeFilter[] newArray(final int size) {
+            return new AttributeFilter[size];
+        }
+    };
+
     AttributeFilter(@NonNull final String name, final String attribute) {
         super(name);
         this.attribute = attribute;
@@ -49,18 +62,4 @@ class AttributeFilter extends AbstractFilter {
         super.writeToParcel(dest, flags);
         dest.writeString(attribute);
     }
-
-    public static final Creator<AttributeFilter> CREATOR
-            = new Parcelable.Creator<AttributeFilter>() {
-
-        @Override
-        public AttributeFilter createFromParcel(final Parcel in) {
-            return new AttributeFilter(in);
-        }
-
-        @Override
-        public AttributeFilter[] newArray(final int size) {
-            return new AttributeFilter[size];
-        }
-    };
 }
