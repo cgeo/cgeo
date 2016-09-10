@@ -2,7 +2,6 @@ package cgeo.geocaching.connector.capability;
 
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.IConnector;
-import cgeo.geocaching.loaders.RecaptchaReceiver;
 
 import android.support.annotation.NonNull;
 
@@ -12,5 +11,5 @@ import android.support.annotation.NonNull;
  *
  */
 public interface ISearchByOwner extends IConnector {
-    SearchResult searchByOwner(@NonNull final String owner, @NonNull final RecaptchaReceiver recaptchaReceiver);
+    SearchResult searchByOwner(@NonNull final String owner);
 }

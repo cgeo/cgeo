@@ -18,7 +18,7 @@ public class PocketGeocacheListLoader extends AbstractSearchLoader {
     public SearchResult runSearch() {
 
         if (Settings.isGCConnectorActive()) {
-            return GCParser.searchByPocketQuery(guid, Settings.getCacheType(), Settings.isShowCaptcha(), this);
+            return GCParser.searchByPocketQuery(guid, Settings.getCacheType());
         }
 
         return new SearchResult();

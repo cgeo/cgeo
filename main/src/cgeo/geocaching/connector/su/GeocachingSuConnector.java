@@ -6,7 +6,6 @@ import cgeo.geocaching.connector.capability.ISearchByCenter;
 import cgeo.geocaching.connector.capability.ISearchByGeocode;
 import cgeo.geocaching.connector.capability.ISearchByViewPort;
 import cgeo.geocaching.connector.gc.MapTokens;
-import cgeo.geocaching.loaders.RecaptchaReceiver;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.location.Viewport;
@@ -16,11 +15,12 @@ import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.CancellableHandler;
 
-import org.apache.commons.lang3.StringUtils;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import java.io.InputStream;
+
+import org.apache.commons.lang3.StringUtils;
 
 public class GeocachingSuConnector extends AbstractConnector implements ISearchByCenter, ISearchByGeocode, ISearchByViewPort {
 
@@ -113,7 +113,7 @@ public class GeocachingSuConnector extends AbstractConnector implements ISearchB
     }
 
     @Override
-    public SearchResult searchByCenter(@NonNull final Geopoint center, @NonNull final RecaptchaReceiver recaptchaReceiver) {
+    public SearchResult searchByCenter(@NonNull final Geopoint center) {
         return searchCaches("cache", new Parameters(PARAMETER_REQUEST_TYPE, REQUEST_TYPE_CENTER, "radius", "40", "clng", GeopointFormatter.format(GeopointFormatter.Format.LON_DECDEGREE_RAW, center), "clat", GeopointFormatter.format(GeopointFormatter.Format.LAT_DECDEGREE_RAW, center), PARAMETER_RESULT_FIELDS, RESULT_FIELDS_SEARCH));
     }
 

@@ -12,7 +12,6 @@ import cgeo.geocaching.connector.capability.ISearchByOwner;
 import cgeo.geocaching.connector.capability.ISearchByViewPort;
 import cgeo.geocaching.connector.gc.MapTokens;
 import cgeo.geocaching.connector.oc.UserInfo.UserInfoStatus;
-import cgeo.geocaching.loaders.RecaptchaReceiver;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.models.Geocache;
@@ -65,17 +64,17 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByCente
     }
 
     @Override
-    public SearchResult searchByCenter(@NonNull final Geopoint center, @NonNull final RecaptchaReceiver recaptchaReceiver) {
+    public SearchResult searchByCenter(@NonNull final Geopoint center) {
         return new SearchResult(OkapiClient.getCachesAround(center, this));
     }
 
     @Override
-    public SearchResult searchByOwner(@NonNull final String username, @NonNull final RecaptchaReceiver recaptchaReceiver) {
+    public SearchResult searchByOwner(@NonNull final String username) {
         return new SearchResult(OkapiClient.getCachesByOwner(username, this));
     }
 
     @Override
-    public SearchResult searchByFinder(@NonNull final String username, @NonNull final RecaptchaReceiver recaptchaReceiver) {
+    public SearchResult searchByFinder(@NonNull final String username) {
         return new SearchResult(OkapiClient.getCachesByFinder(username, this));
     }
 
@@ -186,7 +185,7 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByCente
     }
 
     @Override
-    public SearchResult searchByKeyword(@NonNull final String name, @NonNull final RecaptchaReceiver recaptchaReceiver) {
+    public SearchResult searchByKeyword(@NonNull final String name) {
         return new SearchResult(OkapiClient.getCachesNamed(Sensors.getInstance().currentGeo().getCoords(), name, this));
     }
 

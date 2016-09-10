@@ -353,8 +353,7 @@ public class GCMap {
         if (strategy.flags.contains(Flag.SEARCH_NEARBY) && Settings.isGCPremiumMember()) {
             final Geopoint center = viewport.getCenter();
             if (lastSearchViewport == null || !lastSearchViewport.contains(center)) {
-                //FIXME We don't have a RecaptchaReceiver!?
-                final SearchResult search = GCParser.searchByCoords(center, Settings.getCacheType(), false, null);
+                final SearchResult search = GCParser.searchByCoords(center, Settings.getCacheType());
                 if (search != null && !search.isEmpty()) {
                     final Set<String> geocodes = search.getGeocodes();
                     lastSearchViewport = DataStore.getBounds(geocodes);

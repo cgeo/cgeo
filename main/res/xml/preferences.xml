@@ -37,11 +37,6 @@
                         android:key="@string/preference_screen_basicmembers"
                         android:title="@string/settings_title_basicmembers" >
                         <CheckBoxPreference
-                            android:defaultValue="false"
-                            android:key="@string/pref_showcaptcha"
-                            android:summary="@string/init_summary_captcha"
-                            android:title="@string/init_captcha" />
-                        <CheckBoxPreference
                             android:defaultValue="true"
                             android:key="@string/pref_loaddirectionimg"
                             android:summary="@string/init_summary_loaddirectionimg"

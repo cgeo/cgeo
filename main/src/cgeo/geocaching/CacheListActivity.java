@@ -17,7 +17,6 @@ import cgeo.geocaching.command.DeleteListCommand;
 import cgeo.geocaching.command.MoveToListCommand;
 import cgeo.geocaching.command.RenameListCommand;
 import cgeo.geocaching.compatibility.Compatibility;
-import cgeo.geocaching.connector.gc.RecaptchaHandler;
 import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
@@ -83,6 +82,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.OpenableColumns;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
@@ -117,8 +118,6 @@ import com.github.amlcurran.showcaseview.targets.ActionViewTarget;
 import com.github.amlcurran.showcaseview.targets.ActionViewTarget.Type;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import rx.Observable;
 import rx.Observable.OnSubscribe;
 import rx.Subscriber;
@@ -1809,9 +1808,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         showProgress(true);
         showFooterLoadingCaches();
 
-        if (loader != null) {
-            loader.setRecaptchaHandler(new RecaptchaHandler(this, loader));
-        }
         return loader;
     }
 

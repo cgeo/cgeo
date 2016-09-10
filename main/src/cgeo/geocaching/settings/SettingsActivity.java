@@ -28,10 +28,6 @@ import cgeo.geocaching.utils.DebugUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ProcessUtils;
 
-import org.apache.commons.lang3.StringUtils;
-import android.support.annotation.NonNull;
-import org.openintents.intents.FileManagerIntents;
-
 import android.R.string;
 import android.app.ProgressDialog;
 import android.app.backup.BackupManager;
@@ -51,6 +47,7 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.support.annotation.AnyRes;
+import android.support.annotation.NonNull;
 import android.widget.BaseAdapter;
 import android.widget.ListAdapter;
 
@@ -58,6 +55,8 @@ import java.io.File;
 import java.util.List;
 import java.util.Locale;
 
+import org.apache.commons.lang3.StringUtils;
+import org.openintents.intents.FileManagerIntents;
 import rx.functions.Action0;
 import rx.schedulers.Schedulers;
 
@@ -498,8 +497,6 @@ public class SettingsActivity extends PreferenceActivity {
         getPreference(R.string.preference_screen_basicmembers)
                 .setEnabled(!Settings.isGCPremiumMember());
         getPreference(R.string.pref_loaddirectionimg)
-                .setEnabled(!Settings.isGCPremiumMember());
-        getPreference(R.string.pref_showcaptcha)
                 .setEnabled(!Settings.isGCPremiumMember());
 
         redrawScreen(R.string.preference_screen_services);

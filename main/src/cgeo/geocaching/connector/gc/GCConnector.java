@@ -21,7 +21,6 @@ import cgeo.geocaching.connector.capability.ISearchByViewPort;
 import cgeo.geocaching.connector.capability.IgnoreCapability;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.StatusCode;
-import cgeo.geocaching.loaders.RecaptchaReceiver;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.models.Geocache;
@@ -195,8 +194,8 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
-    public SearchResult searchByNextPage(final SearchResult search, final boolean showCaptcha, final RecaptchaReceiver recaptchaReceiver) {
-        return GCParser.searchByNextPage(search, showCaptcha, recaptchaReceiver);
+    public SearchResult searchByNextPage(final SearchResult search) {
+        return GCParser.searchByNextPage(search);
     }
 
     @Override
@@ -303,8 +302,8 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
-    public SearchResult searchByCenter(@NonNull final Geopoint center, @NonNull final RecaptchaReceiver recaptchaReceiver) {
-        return GCParser.searchByCoords(center, Settings.getCacheType(), Settings.isShowCaptcha(), recaptchaReceiver);
+    public SearchResult searchByCenter(@NonNull final Geopoint center) {
+        return GCParser.searchByCoords(center, Settings.getCacheType());
     }
 
     @Override
@@ -420,8 +419,8 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
-    public SearchResult searchByKeyword(@NonNull final String keyword, @NonNull final RecaptchaReceiver recaptchaReceiver) {
-        return GCParser.searchByKeyword(keyword, Settings.getCacheType(), Settings.isShowCaptcha(), recaptchaReceiver);
+    public SearchResult searchByKeyword(@NonNull final String keyword) {
+        return GCParser.searchByKeyword(keyword, Settings.getCacheType());
     }
 
     @Override
@@ -466,13 +465,13 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
-    public SearchResult searchByOwner(@NonNull final String username, @NonNull final RecaptchaReceiver recaptchaReceiver) {
-        return GCParser.searchByOwner(username, Settings.getCacheType(), Settings.isShowCaptcha(), recaptchaReceiver);
+    public SearchResult searchByOwner(@NonNull final String username) {
+        return GCParser.searchByOwner(username, Settings.getCacheType());
     }
 
     @Override
-    public SearchResult searchByFinder(@NonNull final String username, @NonNull final RecaptchaReceiver recaptchaReceiver) {
-        return GCParser.searchByUsername(username, Settings.getCacheType(), Settings.isShowCaptcha(), recaptchaReceiver);
+    public SearchResult searchByFinder(@NonNull final String username) {
+        return GCParser.searchByUsername(username, Settings.getCacheType());
     }
 
     @Override

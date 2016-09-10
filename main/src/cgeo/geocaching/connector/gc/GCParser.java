@@ -15,7 +15,6 @@ import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.files.LocParser;
 import cgeo.geocaching.gcvote.GCVote;
 import cgeo.geocaching.gcvote.GCVoteRating;
-import cgeo.geocaching.loaders.RecaptchaReceiver;
 import cgeo.geocaching.location.DistanceParser;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.Geocache;
@@ -91,7 +90,7 @@ public final class GCParser {
     }
 
     @Nullable
-    private static SearchResult parseSearch(final String url, final String pageContent, final boolean showCaptcha, final RecaptchaReceiver recaptchaReceiver) {
+    private static SearchResult parseSearch(final String url, final String pageContent) {
         if (StringUtils.isBlank(pageContent)) {
             Log.e("GCParser.parseSearch: No page given");
             return null;
@@ -102,20 +101,6 @@ public final class GCParser {
         final SearchResult searchResult = new SearchResult();
         searchResult.setUrl(url);
         searchResult.setViewstates(GCLogin.getViewstates(page));
-
-        // recaptcha
-        if (showCaptcha) {
-            final String recaptchaJsParam = TextUtils.getMatch(page, GCConstants.PATTERN_SEARCH_RECAPTCHA, false, null);
-
-            if (recaptchaJsParam != null) {
-                recaptchaReceiver.setKey(recaptchaJsParam.trim());
-
-                recaptchaReceiver.fetchChallenge();
-            }
-            if (recaptchaReceiver != null && StringUtils.isNotBlank(recaptchaReceiver.getChallenge())) {
-                recaptchaReceiver.notifyNeed();
-            }
-        }
 
         if (!page.contains("SearchResultsTable")) {
             // there are no results. aborting here avoids a wrong error log in the next parsing step
@@ -299,13 +284,7 @@ public final class GCParser {
             Log.w("GCParser.parseSearch: Failed to parse cache count", e);
         }
 
-        String recaptchaText = null;
-        if (recaptchaReceiver != null && StringUtils.isNotBlank(recaptchaReceiver.getChallenge())) {
-            recaptchaReceiver.waitForUser();
-            recaptchaText = recaptchaReceiver.getText();
-        }
-
-        if (!cids.isEmpty() && (Settings.isGCPremiumMember() || showCaptcha) && ((recaptchaReceiver == null || StringUtils.isBlank(recaptchaReceiver.getChallenge())) || StringUtils.isNotBlank(recaptchaText))) {
+        if (!cids.isEmpty() && Settings.isGCPremiumMember()) {
             Log.i("Trying to get .loc for " + cids.size() + " caches");
             final Observable<Set<Geocache>> storedCaches = Observable.defer(new Func0<Observable<Set<Geocache>>>() {
                 @Override
@@ -325,11 +304,6 @@ public final class GCParser {
                     params.put("CID", cid);
                 }
 
-                if (StringUtils.isNotBlank(recaptchaText)) {
-                    assert recaptchaReceiver != null;  // Help Eclipse here. If recaptchaReceiver could be null, recaptchaText would have stayed null also.
-                    params.put("recaptcha_challenge_field", recaptchaReceiver.getChallenge());
-                    params.put("recaptcha_response_field", recaptchaText);
-                }
                 params.put("Download", "Download Waypoints");
 
                 // retrieve target url
@@ -814,7 +788,7 @@ public final class GCParser {
     }
 
     @Nullable
-    public static SearchResult searchByNextPage(final SearchResult search, final boolean showCaptcha, final RecaptchaReceiver recaptchaReceiver) {
+    public static SearchResult searchByNextPage(final SearchResult search) {
         if (search == null) {
             return null;
         }
@@ -847,7 +821,7 @@ public final class GCParser {
             return search;
         }
 
-        final SearchResult searchResult = parseSearch(url, page, showCaptcha, recaptchaReceiver);
+        final SearchResult searchResult = parseSearch(url, page);
         if (searchResult == null || CollectionUtils.isEmpty(searchResult.getGeocodes())) {
             Log.w("GCParser.searchByNextPage: No cache parsed");
             return search;
@@ -885,7 +859,7 @@ public final class GCParser {
     }
 
     @Nullable
-    private static SearchResult searchByAny(@NonNull final CacheType cacheType, final boolean my, final boolean showCaptcha, final Parameters params, final RecaptchaReceiver recaptchaReceiver) {
+    private static SearchResult searchByAny(@NonNull final CacheType cacheType, final boolean my, final Parameters params) {
         insertCacheType(params, cacheType);
 
         final String uri = "https://www.geocaching.com/seek/nearest.aspx";
@@ -899,7 +873,7 @@ public final class GCParser {
         assert page != null;
 
         final String fullUri = uri + "?" + paramsWithF;
-        final SearchResult searchResult = parseSearch(fullUri, page, showCaptcha, recaptchaReceiver);
+        final SearchResult searchResult = parseSearch(fullUri, page);
         if (searchResult == null || CollectionUtils.isEmpty(searchResult.getGeocodes())) {
             Log.w("GCParser.searchByAny: No cache parsed");
             return searchResult;
@@ -912,19 +886,19 @@ public final class GCParser {
         return search;
     }
 
-    public static SearchResult searchByCoords(@NonNull final Geopoint coords, @NonNull final CacheType cacheType, final boolean showCaptcha, final RecaptchaReceiver recaptchaReceiver) {
+    public static SearchResult searchByCoords(@NonNull final Geopoint coords, @NonNull final CacheType cacheType) {
         final Parameters params = new Parameters("lat", Double.toString(coords.getLatitude()), "lng", Double.toString(coords.getLongitude()));
-        return searchByAny(cacheType, false, showCaptcha, params, recaptchaReceiver);
+        return searchByAny(cacheType, false, params);
     }
 
-    static SearchResult searchByKeyword(@NonNull final String keyword, @NonNull final CacheType cacheType, final boolean showCaptcha, final RecaptchaReceiver recaptchaReceiver) {
+    static SearchResult searchByKeyword(@NonNull final String keyword, @NonNull final CacheType cacheType) {
         if (StringUtils.isBlank(keyword)) {
             Log.e("GCParser.searchByKeyword: No keyword given");
             return null;
         }
 
         final Parameters params = new Parameters("key", keyword);
-        return searchByAny(cacheType, false, showCaptcha, params, recaptchaReceiver);
+        return searchByAny(cacheType, false, params);
     }
 
     private static boolean isSearchForMyCaches(final String userName) {
@@ -935,7 +909,7 @@ public final class GCParser {
         return false;
     }
 
-    public static SearchResult searchByUsername(final String userName, @NonNull final CacheType cacheType, final boolean showCaptcha, final RecaptchaReceiver recaptchaReceiver) {
+    public static SearchResult searchByUsername(final String userName, @NonNull final CacheType cacheType) {
         if (StringUtils.isBlank(userName)) {
             Log.e("GCParser.searchByUsername: No user name given");
             return null;
@@ -943,10 +917,10 @@ public final class GCParser {
 
         final Parameters params = new Parameters("ul", userName);
 
-        return searchByAny(cacheType, isSearchForMyCaches(userName), showCaptcha, params, recaptchaReceiver);
+        return searchByAny(cacheType, isSearchForMyCaches(userName), params);
     }
 
-    public static SearchResult searchByPocketQuery(final String pocketGuid, @NonNull final CacheType cacheType, final boolean showCaptcha, final RecaptchaReceiver recaptchaReceiver) {
+    public static SearchResult searchByPocketQuery(final String pocketGuid, @NonNull final CacheType cacheType) {
         if (StringUtils.isBlank(pocketGuid)) {
             Log.e("GCParser.searchByPocket: No guid name given");
             return null;
@@ -954,17 +928,17 @@ public final class GCParser {
 
         final Parameters params = new Parameters("pq", pocketGuid);
 
-        return searchByAny(cacheType, false, showCaptcha, params, recaptchaReceiver);
+        return searchByAny(cacheType, false, params);
     }
 
-    public static SearchResult searchByOwner(final String userName, @NonNull final CacheType cacheType, final boolean showCaptcha, final RecaptchaReceiver recaptchaReceiver) {
+    public static SearchResult searchByOwner(final String userName, @NonNull final CacheType cacheType) {
         if (StringUtils.isBlank(userName)) {
             Log.e("GCParser.searchByOwner: No user name given");
             return null;
         }
 
         final Parameters params = new Parameters("u", userName);
-        return searchByAny(cacheType, isSearchForMyCaches(userName), showCaptcha, params, recaptchaReceiver);
+        return searchByAny(cacheType, isSearchForMyCaches(userName), params);
     }
 
     @Nullable

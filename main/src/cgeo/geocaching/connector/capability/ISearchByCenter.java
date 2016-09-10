@@ -2,7 +2,6 @@ package cgeo.geocaching.connector.capability;
 
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.IConnector;
-import cgeo.geocaching.loaders.RecaptchaReceiver;
 import cgeo.geocaching.location.Geopoint;
 
 import android.support.annotation.NonNull;
@@ -12,5 +11,5 @@ import android.support.annotation.NonNull;
  *
  */
 public interface ISearchByCenter extends IConnector {
-    SearchResult searchByCenter(@NonNull final Geopoint center, @NonNull final RecaptchaReceiver recaptchaReceiver);
+    SearchResult searchByCenter(@NonNull final Geopoint center);
 }

@@ -139,8 +139,6 @@ public final class GCConstants {
     static final Pattern PATTERN_SEARCH_ID = Pattern.compile("name=\"CID\"[^v]*value=\"(\\d+)\"");
     static final Pattern PATTERN_SEARCH_FAVORITE = Pattern.compile("favorite-rank\">([0-9,.]+)</span>");
     static final Pattern PATTERN_SEARCH_TOTALCOUNT = Pattern.compile("PageBuilderWidget\"><span>[^<]*?<b>(\\d+)<");
-    static final Pattern PATTERN_SEARCH_RECAPTCHA = Pattern.compile("<script[^>]*src=\"[^\"]*/recaptcha/api/challenge\\?k=([^\"]+)\"[^>]*>");
-    public static final Pattern PATTERN_SEARCH_RECAPTCHACHALLENGE = Pattern.compile("challenge : '([^']+)'");
     static final Pattern PATTERN_SEARCH_HIDDEN_DATE = Pattern.compile("<td style=\"width:70px\" data-dateplaced=\"[^\"]+\">[^<]+<span class=\"small\">([^<]+)</span>");
     static final Pattern PATTERN_SEARCH_POST_ACTION = Pattern.compile("<form name=\"aspnetForm\" method=\"post\" action=\"(.*)\" id=\"aspnetForm\"");
 

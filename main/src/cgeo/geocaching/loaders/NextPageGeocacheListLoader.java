@@ -3,7 +3,6 @@ package cgeo.geocaching.loaders;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.capability.ISearchByNextPage;
-import cgeo.geocaching.settings.Settings;
 
 import android.app.Activity;
 
@@ -23,7 +22,7 @@ public class NextPageGeocacheListLoader extends AbstractSearchLoader {
                 new Func1<ISearchByNextPage, SearchResult>() {
                     @Override
                     public SearchResult call(final ISearchByNextPage connector) {
-                        return connector.searchByNextPage(search, Settings.isShowCaptcha(), NextPageGeocacheListLoader.this);
+                        return connector.searchByNextPage(search);
                     }
                 });
     }

@@ -85,7 +85,6 @@
     <string translatable="false" name="pref_defaultNavigationTool2">defaultNavigationTool2</string>
     <string translatable="false" name="pref_gpxExportDir">gpxExportDir</string>
     <string translatable="false" name="pref_gpxImportDir">gpxImportDir</string>
-    <string translatable="false" name="pref_showcaptcha">showcaptcha</string>
     <string translatable="false" name="pref_loaddirectionimg">loaddirectionimg</string>
     <string translatable="false" name="pref_fakekey_preference_backup_info">fakekey_preference_backup_info</string>
     <string translatable="false" name="pref_fakekey_preference_backup">fakekey_preference_backup</string>

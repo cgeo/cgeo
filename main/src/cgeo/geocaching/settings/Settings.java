@@ -29,11 +29,6 @@ import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.FileUtils.FileSelector;
 import cgeo.geocaching.utils.Log;
 
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.ImmutablePair;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -42,12 +37,17 @@ import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.os.Environment;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
+
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 
 /**
  * General c:geo preferences/settings set by the user
@@ -158,7 +158,6 @@ public class Settings {
             e.putInt(getKey(R.string.pref_mapsource), prefsV0.getInt(getKey(R.string.pref_mapsource), MAP_SOURCE_DEFAULT));
             e.putBoolean(getKey(R.string.pref_twitter), prefsV0.getInt(getKey(R.string.pref_twitter), 0) != 0);
             e.putBoolean(getKey(R.string.pref_showaddress), prefsV0.getInt(getKey(R.string.pref_showaddress), 1) != 0);
-            e.putBoolean(getKey(R.string.pref_showcaptcha), prefsV0.getBoolean(getKey(R.string.pref_showcaptcha), false));
             e.putBoolean(getKey(R.string.pref_maptrail), prefsV0.getInt(getKey(R.string.pref_maptrail), 1) != 0);
             e.putInt(getKey(R.string.pref_lastmapzoom), prefsV0.getInt(getKey(R.string.pref_lastmapzoom), 14));
             e.putBoolean(getKey(R.string.pref_livelist), prefsV0.getInt(getKey(R.string.pref_livelist), 1) != 0);
@@ -570,10 +569,6 @@ public class Settings {
 
     public static boolean isShowAddress() {
         return getBoolean(R.string.pref_showaddress, true);
-    }
-
-    public static boolean isShowCaptcha() {
-        return !isGCPremiumMember() && getBoolean(R.string.pref_showcaptcha, false);
     }
 
     public static boolean isExcludeDisabledCaches() {

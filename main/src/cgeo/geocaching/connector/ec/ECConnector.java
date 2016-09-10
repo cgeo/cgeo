@@ -14,7 +14,6 @@ import cgeo.geocaching.connector.capability.ISearchByViewPort;
 import cgeo.geocaching.connector.gc.MapTokens;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.StatusCode;
-import cgeo.geocaching.loaders.RecaptchaReceiver;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.models.Geocache;
@@ -110,7 +109,7 @@ public class ECConnector extends AbstractConnector implements ISearchByGeocode, 
 
     @Override
     @NonNull
-    public SearchResult searchByCenter(@NonNull final Geopoint center, @NonNull final RecaptchaReceiver recaptchaReceiver) {
+    public SearchResult searchByCenter(@NonNull final Geopoint center) {
         final Collection<Geocache> caches = ECApi.searchByCenter(center);
         final SearchResult searchResult = new SearchResult(caches);
         return searchResult.filterSearchResults(false, Settings.getCacheType());

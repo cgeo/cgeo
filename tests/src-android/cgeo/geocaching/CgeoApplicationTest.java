@@ -13,7 +13,6 @@ import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.StatusCode;
-import cgeo.geocaching.loaders.RecaptchaReceiver;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.LivemapStrategy;
@@ -232,7 +231,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
     }
 
     /**
-     * Test {@link GCParser#searchByCoords(Geopoint, CacheType, boolean, RecaptchaReceiver)}
+     * Test {@link GCParser#searchByCoords(Geopoint, CacheType)}
      */
     @MediumTest
     public static void testSearchByCoords() {
@@ -240,7 +239,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
 
             @Override
             public void run() {
-                final SearchResult search = GCParser.searchByCoords(new Geopoint("N 50° 06.654 E 008° 39.777"), CacheType.MYSTERY, false, null);
+                final SearchResult search = GCParser.searchByCoords(new Geopoint("N 50° 06.654 E 008° 39.777"), CacheType.MYSTERY);
                 assertThat(search).isNotNull();
                 assertThat(search.getGeocodes().size()).isGreaterThanOrEqualTo(20);
                 assertThat(search.getGeocodes()).contains("GC1HBMY");
@@ -249,7 +248,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
     }
 
     /**
-     * Test {@link GCParser#searchByOwner(String, CacheType, boolean, RecaptchaReceiver)}
+     * Test {@link GCParser#searchByOwner(String, CacheType)}
      */
     @MediumTest
     public static void testSearchByOwner() {
@@ -257,7 +256,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
 
             @Override
             public void run() {
-                final SearchResult search = GCParser.searchByOwner("blafoo", CacheType.MYSTERY, false, null);
+                final SearchResult search = GCParser.searchByOwner("blafoo", CacheType.MYSTERY);
                 assertThat(search).isNotNull();
                 assertThat(search.getGeocodes()).hasSize(7);
                 assertThat(search.getGeocodes()).contains("GC36RT6");
@@ -266,7 +265,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
     }
 
     /**
-     * Test {@link GCParser#searchByUsername(String, CacheType, boolean, RecaptchaReceiver)}
+     * Test {@link GCParser#searchByUsername(String, CacheType)}
      */
     @MediumTest
     public static void testSearchByUsername() {
@@ -274,7 +273,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
 
             @Override
             public void run() {
-                final SearchResult search = GCParser.searchByUsername("blafoo", CacheType.WEBCAM, false, null);
+                final SearchResult search = GCParser.searchByUsername("blafoo", CacheType.WEBCAM);
                 assertThat(search).isNotNull();
                 assertThat(search.getTotalCountGC()).isEqualTo(5);
                 assertThat(search.getGeocodes()).contains("GCP0A9");

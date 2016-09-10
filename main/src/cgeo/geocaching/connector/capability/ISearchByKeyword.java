@@ -2,7 +2,6 @@ package cgeo.geocaching.connector.capability;
 
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.IConnector;
-import cgeo.geocaching.loaders.RecaptchaReceiver;
 
 import android.support.annotation.NonNull;
 
@@ -11,6 +10,5 @@ import android.support.annotation.NonNull;
  *
  */
 public interface ISearchByKeyword extends IConnector {
-    // TODO: The recaptcha receiver is only needed for GC. Would be good to refactor this away from the generic interface.
-    SearchResult searchByKeyword(@NonNull final String keyword, @NonNull final RecaptchaReceiver recaptchaReceiver);
+    SearchResult searchByKeyword(@NonNull final String keyword);
 }

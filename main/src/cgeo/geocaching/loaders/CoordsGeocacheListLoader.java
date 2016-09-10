@@ -6,8 +6,8 @@ import cgeo.geocaching.connector.capability.ISearchByCenter;
 import cgeo.geocaching.location.Geopoint;
 
 import android.app.Activity;
-
 import android.support.annotation.NonNull;
+
 import rx.functions.Func1;
 
 public class CoordsGeocacheListLoader extends AbstractSearchLoader {
@@ -24,7 +24,7 @@ public class CoordsGeocacheListLoader extends AbstractSearchLoader {
                 new Func1<ISearchByCenter, SearchResult>() {
                     @Override
                     public SearchResult call(final ISearchByCenter connector) {
-                        return connector.searchByCenter(coords, CoordsGeocacheListLoader.this);
+                        return connector.searchByCenter(coords);
                     }
                 });
     }
