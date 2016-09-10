@@ -668,8 +668,10 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     }
                 });
                 // For consistency, remove also the local cache immediately from memory cache and database
-                dropCache();
-                DataStore.removeCache(cache.getGeocode(), EnumSet.of(RemoveFlag.DB));
+                if (cache.isOffline()) {
+                    dropCache();
+                    DataStore.removeCache(cache.getGeocode(), EnumSet.of(RemoveFlag.DB));
+                }
             }
         });
     }
