@@ -10,6 +10,7 @@ import cgeo.geocaching.connector.capability.ISearchByFinder;
 import cgeo.geocaching.connector.capability.ISearchByKeyword;
 import cgeo.geocaching.connector.capability.ISearchByOwner;
 import cgeo.geocaching.connector.capability.ISearchByViewPort;
+import cgeo.geocaching.connector.capability.IgnoreCapability;
 import cgeo.geocaching.connector.capability.WatchListCapability;
 import cgeo.geocaching.connector.gc.MapTokens;
 import cgeo.geocaching.connector.oc.UserInfo.UserInfoStatus;
@@ -32,7 +33,7 @@ import java.util.Locale;
 
 import org.apache.commons.lang3.StringUtils;
 
-public class OCApiLiveConnector extends OCApiConnector implements ISearchByCenter, ISearchByViewPort, ILogin, ISearchByKeyword, ISearchByOwner, ISearchByFinder, WatchListCapability {
+public class OCApiLiveConnector extends OCApiConnector implements ISearchByCenter, ISearchByViewPort, ILogin, ISearchByKeyword, ISearchByOwner, ISearchByFinder, WatchListCapability, IgnoreCapability {
 
     private final String cS;
     private final int isActivePrefKeyId;
@@ -203,6 +204,20 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByCente
     @Override
     public boolean uploadPersonalNote(@NonNull final Geocache cache) {
         return OkapiClient.uploadPersonalNotes(this, cache);
+    }
+
+    @Override
+    public boolean canIgnoreCache(final Geocache cache) {
+        return true;
+    }
+
+    @Override
+    public void ignoreCache(final Geocache cache) {
+        final boolean ignored = OkapiClient.setIgnored(cache, this);
+
+        if (ignored) {
+            DataStore.saveChangedCache(cache);
+        }
     }
 
 }

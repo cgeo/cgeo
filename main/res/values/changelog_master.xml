@@ -4,6 +4,7 @@
   <string name="changelog_master" translatable="false">
     <b>Next feature release:</b>\n
     · Removed: No longer supports captchas for getting exact coordinates as basic member
+    · New: Support ignoring caches on OpenCaching sites
     \n
     \n
   </string>

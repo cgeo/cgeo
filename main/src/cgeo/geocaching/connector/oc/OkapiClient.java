@@ -294,6 +294,15 @@ final class OkapiClient {
         return true;
     }
 
+    public static boolean setIgnored(@NonNull final Geocache cache, @NonNull final OCApiConnector connector) {
+        final Parameters params = new Parameters("cache_code", cache.getGeocode());
+        params.add("ignored", "true");
+
+        final ObjectNode data = request(connector, OkapiService.SERVICE_MARK_CACHE, params).data;
+
+        return data != null;
+    }
+
     @NonNull
     public static LogResult postLog(@NonNull final Geocache cache, @NonNull final LogType logType, @NonNull final Calendar date, @NonNull final String log, @Nullable final String logPassword, @NonNull final OCApiConnector connector) {
         final Parameters params = new Parameters("cache_code", cache.getGeocode());
