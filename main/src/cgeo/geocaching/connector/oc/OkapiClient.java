@@ -876,6 +876,10 @@ final class OkapiClient {
             valueMap.put("exclude_my_own", "true");
             valueMap.put("found_status", "notfound_only");
         }
+        // OKAPI returns ignored caches, we have to actively suppress them
+        if (connector.getSupportedAuthLevel() == OAuthLevel.Level3) {
+            valueMap.put("ignored_status", "notignored_only");
+        }
         if (Settings.getCacheType() != CacheType.ALL) {
             valueMap.put("type", getFilterFromType());
         }
