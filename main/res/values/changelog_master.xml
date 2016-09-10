@@ -5,6 +5,7 @@
     <b>Next feature release:</b>\n
     · Removed: No longer supports captchas for getting exact coordinates as basic member\n
     · New: Support ignoring caches on OpenCaching sites\n
+    · New: Remove duplicate caches from all other lists\n
     \n
     \n
   </string>

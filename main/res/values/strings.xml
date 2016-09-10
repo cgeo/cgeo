@@ -373,7 +373,8 @@
     <string name="caches_clear_offlinelogs">Clear offline logs</string>
     <string name="caches_clear_offlinelogs_message">Do you want to clear the offline logs?</string>
     <string name="caches_clear_offlinelogs_progress">Clearing offline logs</string>
-
+    <string name="caches_make_list_unique">Make list unique</string>
+    
     <!-- caches lists -->
     <string name="list_menu_create">Create new list</string>
     <string name="list_menu_drop">Drop current list</string>
@@ -1517,6 +1518,7 @@
     </plurals>
     <string name="command_rename_list_result">Renamed list</string>
     <string name="command_delete_list_result">Deleted list</string>
+    <string name="command_unique_list_result">Deleted caches from other lists</string>
     <string name="fav_points_remaining">"Add this cache to favorites (%s remaining)"</string>
 
     <!-- distance units -->

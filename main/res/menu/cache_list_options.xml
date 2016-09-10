@@ -140,5 +140,11 @@
         android:visible="false"
         app:showAsAction="never|withText">
     </item>
-
+    <item
+        android:id="@+id/menu_make_list_unique"
+        android:title="@string/caches_make_list_unique"
+        android:visible="true"
+        app:showAsAction="never|withText">
+    </item>
+    
 </menu>

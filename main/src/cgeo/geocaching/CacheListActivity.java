@@ -14,6 +14,7 @@ import cgeo.geocaching.apps.navi.NavigationAppFactory;
 import cgeo.geocaching.command.AbstractCachesCommand;
 import cgeo.geocaching.command.CopyToListCommand;
 import cgeo.geocaching.command.DeleteListCommand;
+import cgeo.geocaching.command.MakeListUniqueCommand;
 import cgeo.geocaching.command.MoveToListCommand;
 import cgeo.geocaching.command.RenameListCommand;
 import cgeo.geocaching.compatibility.Compatibility;
@@ -822,6 +823,21 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 if (cacheToShow()) {
                     CacheListApps.getActiveApps().get(0).invoke(CacheListAppUtils.filterCoords(cacheList), this, getFilteredSearch());
                 }
+                return true;
+            case R.id.menu_make_list_unique:
+                new MakeListUniqueCommand(this, listId) {
+
+                    @Override
+                    protected void onFinished() {
+                        refreshSpinnerAdapter();
+                    }
+
+                    @Override
+                    protected void onFinishedUndo() {
+                        refreshSpinnerAdapter();
+                    }
+
+                }.execute();
                 return true;
         }
         return super.onOptionsItemSelected(item);
