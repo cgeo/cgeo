@@ -53,26 +53,6 @@ public interface IConnector {
     String getLongCacheUrl(@NonNull final Geocache cache);
 
     /**
-     * enable/disable watchlist controls in cache details
-     *
-     */
-    boolean supportsWatchList();
-
-    /**
-     * Add the cache to the watchlist
-     *
-     * @return True - success/False - failure
-     */
-    boolean addToWatchlist(@NonNull Geocache cache);
-
-    /**
-     * Remove the cache from the watchlist
-     *
-     * @return True - success/False - failure
-     */
-    boolean removeFromWatchlist(@NonNull Geocache cache);
-
-    /**
      * enable/disable favorite points controls in cache details
      *
      */

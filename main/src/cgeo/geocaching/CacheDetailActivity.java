@@ -13,6 +13,7 @@ import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.capability.IgnoreCapability;
+import cgeo.geocaching.connector.capability.WatchListCapability;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.gc.GCConstants;
 import cgeo.geocaching.connector.trackable.TrackableBrand;
@@ -1244,7 +1245,8 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
         /** Add this cache to the watchlist of the user */
         private void watchListAdd(final SimpleCancellableHandler handler) {
-            if (ConnectorFactory.getConnector(cache).addToWatchlist(cache)) {
+            final WatchListCapability connector = (WatchListCapability) ConnectorFactory.getConnector(cache);
+            if (connector.addToWatchlist(cache)) {
                 handler.obtainMessage(MESSAGE_SUCCEEDED).sendToTarget();
             } else {
                 handler.sendTextMessage(MESSAGE_FAILED, R.string.err_watchlist_failed);
@@ -1253,7 +1255,8 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
         /** Remove this cache from the watchlist of the user */
         private void watchListRemove(final SimpleCancellableHandler handler) {
-            if (ConnectorFactory.getConnector(cache).removeFromWatchlist(cache)) {
+            final WatchListCapability connector = (WatchListCapability) ConnectorFactory.getConnector(cache);
+            if (connector.removeFromWatchlist(cache)) {
                 handler.obtainMessage(MESSAGE_SUCCEEDED).sendToTarget();
             } else {
                 handler.sendTextMessage(MESSAGE_FAILED, R.string.err_watchlist_failed);
