@@ -249,8 +249,7 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
         details.add(R.string.cache_geocode, cache.getGeocode());
         details.addCacheState(cache);
 
-        details.addDistance(cache, cacheDistance);
-        cacheDistance = details.getValueView();
+        cacheDistance = details.addDistance(cache, cacheDistance);
 
         details.addDifficulty(cache);
         details.addTerrain(cache);

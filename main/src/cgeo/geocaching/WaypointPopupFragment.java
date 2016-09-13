@@ -89,8 +89,7 @@ public class WaypointPopupFragment extends AbstractDialogFragment {
 
             //Waypoint geocode
             details.add(R.string.cache_geocode, waypoint.getPrefix() + waypoint.getGeocode().substring(2));
-            details.addDistance(waypoint, waypointDistance);
-            waypointDistance = details.getValueView();
+            waypointDistance = details.addDistance(waypoint, waypointDistance);
             details.add(R.string.waypoint_note, waypoint.getNote());
 
             buttonEdit.setOnClickListener(new OnClickListener() {

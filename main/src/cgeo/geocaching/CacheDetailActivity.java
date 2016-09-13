@@ -1009,8 +1009,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             addContextMenu(details.add(R.string.cache_geocode, cache.getGeocode()).right);
             details.addCacheState(cache);
 
-            details.addDistance(cache, cacheDistanceView);
-            cacheDistanceView = details.getValueView();
+            cacheDistanceView = details.addDistance(cache, cacheDistanceView);
 
             details.addDifficulty(cache);
             details.addTerrain(cache);

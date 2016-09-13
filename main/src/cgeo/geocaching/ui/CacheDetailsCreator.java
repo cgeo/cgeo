@@ -36,7 +36,6 @@ import butterknife.ButterKnife;
 public final class CacheDetailsCreator {
     private final Activity activity;
     private final ViewGroup parentView;
-    private TextView lastValueView;
     private final Resources res;
 
     public CacheDetailsCreator(final Activity activity, final ViewGroup parentView) {
@@ -57,27 +56,23 @@ public final class CacheDetailsCreator {
         final RelativeLayout layout = (RelativeLayout) activity.getLayoutInflater().inflate(R.layout.cache_information_item, null, false);
         final TextView nameView = ButterKnife.findById(layout, R.id.name);
         nameView.setText(res.getString(nameId));
-        lastValueView = ButterKnife.findById(layout, R.id.value);
-        lastValueView.setText(value);
+        final TextView valueView = ButterKnife.findById(layout, R.id.value);
+        valueView.setText(value);
         parentView.addView(layout);
-        return ImmutablePair.of(layout, lastValueView);
-    }
-
-    public TextView getValueView() {
-        return lastValueView;
+        return ImmutablePair.of(layout, valueView);
     }
 
     public RelativeLayout addStars(final int nameId, final float value) {
         return addStars(nameId, value, 5);
     }
 
-    public RelativeLayout addStars(final int nameId, final float value, final int max) {
+    private RelativeLayout addStars(final int nameId, final float value, final int max) {
         final RelativeLayout layout = (RelativeLayout) activity.getLayoutInflater().inflate(R.layout.cache_information_item, null, false);
         final TextView nameView = ButterKnife.findById(layout, R.id.name);
-        lastValueView = ButterKnife.findById(layout, R.id.value);
+        final TextView valueView = ButterKnife.findById(layout, R.id.value);
 
         nameView.setText(activity.getResources().getString(nameId));
-        lastValueView.setText(String.format(Locale.getDefault(), "%.1f", value) + ' ' + activity.getResources().getString(R.string.cache_rating_of) + ' ' + String.format(Locale.getDefault(), "%d", max));
+        valueView.setText(String.format(Locale.getDefault(), "%.1f", value) + ' ' + activity.getResources().getString(R.string.cache_rating_of) + ' ' + String.format(Locale.getDefault(), "%d", max));
 
         final RatingBar layoutStars = ButterKnife.findById(layout, R.id.stars);
         layoutStars.setNumStars(max);
@@ -161,7 +156,7 @@ public final class CacheDetailsCreator {
         }
     }
 
-    public void addDistance(final Geocache cache, final TextView cacheDistanceView) {
+    public TextView addDistance(final Geocache cache, final TextView cacheDistanceView) {
         Float distance = distanceNonBlocking(cache);
         if (distance == null && cache.getDistance() != null) {
             distance = cache.getDistance();
@@ -174,10 +169,10 @@ public final class CacheDetailsCreator {
             // this prevents displaying "--" while waiting for a new position update (See bug #1468)
             text = cacheDistanceView.getText().toString();
         }
-        add(R.string.cache_distance, text);
+        return add(R.string.cache_distance, text).right;
     }
 
-    public void addDistance(final Waypoint wpt, final TextView waypointDistanceView) {
+    public TextView addDistance(final Waypoint wpt, final TextView waypointDistanceView) {
         final Float distance = distanceNonBlocking(wpt);
         String text = "--";
         if (distance != null) {
@@ -187,7 +182,7 @@ public final class CacheDetailsCreator {
             // this prevents displaying "--" while waiting for a new position update (See bug #1468)
             text = waypointDistanceView.getText().toString();
         }
-        add(R.string.cache_distance, text);
+        return add(R.string.cache_distance, text).right;
     }
 
     public void addEventDate(@NonNull final Geocache cache) {
