@@ -2,6 +2,7 @@ package cgeo.geocaching.maps;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.maps.brouter.BRouter;
 import cgeo.geocaching.maps.interfaces.MapItemFactory;
 import cgeo.geocaching.maps.interfaces.MapProjectionImpl;
 import cgeo.geocaching.settings.Settings;
@@ -13,6 +14,8 @@ import android.graphics.Point;
 import android.location.Location;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
+
+import org.xml.sax.SAXException;
 
 public class DirectionDrawer {
     private Geopoint currentCoords;
@@ -56,9 +59,37 @@ public class DirectionDrawer {
 
         final Point pos = new Point();
         final Point dest = new Point();
-        projection.toPixels(mapItemFactory.getGeoPointBase(currentCoords), pos);
-        projection.toPixels(mapItemFactory.getGeoPointBase(destinationCoords), dest);
 
-        canvas.drawLine(pos.x, pos.y, dest.x, dest.y, line);
+        Geopoint[] routingPoints =  null;
+        try {
+            routingPoints = BRouter.getTrack(currentCoords, destinationCoords);
+        } catch (SAXException e) {
+            e.printStackTrace();
+        }
+
+        if(routingPoints != null && routingPoints.length > 0){
+            Point lastPoint = null;
+            Point currentPoint = new Point();
+            for (Geopoint currentGeoPoint: routingPoints) {
+                projection.toPixels(mapItemFactory.getGeoPointBase(currentGeoPoint), currentPoint);
+
+                if(lastPoint != null){
+                    canvas.drawLine(lastPoint.x, lastPoint.y, currentPoint.x, currentPoint.y, line);
+                }
+                else {
+                    lastPoint = new Point();
+                }
+                lastPoint.x = currentPoint.x;
+                lastPoint.y = currentPoint.y;
+            }
+        }
+        else
+        {
+            projection.toPixels(mapItemFactory.getGeoPointBase(currentCoords), pos);
+            projection.toPixels(mapItemFactory.getGeoPointBase(destinationCoords), dest);
+
+            canvas.drawLine(pos.x, pos.y, dest.x, dest.y, line);
+        }
+
     }
 }
