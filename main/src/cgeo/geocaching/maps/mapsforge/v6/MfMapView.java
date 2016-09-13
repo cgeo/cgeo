@@ -2,7 +2,7 @@ package cgeo.geocaching.maps.mapsforge.v6;
 
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
-import cgeo.geocaching.maps.CGeoMap.MapMode;
+import cgeo.geocaching.maps.MapMode;
 import cgeo.geocaching.maps.interfaces.OnMapDragListener;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;

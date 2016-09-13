@@ -11,7 +11,7 @@ import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LogTypeTrackable;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.maps.CGeoMap.MapMode;
+import cgeo.geocaching.maps.MapMode;
 import cgeo.geocaching.maps.LivemapStrategy;
 import cgeo.geocaching.maps.MapProviderFactory;
 import cgeo.geocaching.maps.google.v1.GoogleMapProvider;

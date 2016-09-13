@@ -17,13 +17,14 @@ import cgeo.geocaching.connector.gc.Tile;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.CoordinatesType;
 import cgeo.geocaching.enumerations.LoadFlags;
-import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
-import cgeo.geocaching.maps.CGeoMap.MapMode;
 import cgeo.geocaching.maps.LivemapStrategy;
+import cgeo.geocaching.maps.MapMode;
+import cgeo.geocaching.maps.MapOptions;
 import cgeo.geocaching.maps.MapProviderFactory;
+import cgeo.geocaching.maps.MapState;
 import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.maps.interfaces.OnMapDragListener;
 import cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider;
@@ -46,7 +47,6 @@ import cgeo.geocaching.utils.Log;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -117,12 +117,6 @@ public class NewMap extends AbstractActionBarActivity {
 
     private DistanceView distanceView;
 
-    private String mapTitle;
-    private String geocodeIntent;
-    private Geopoint coordsIntent;
-    private SearchResult searchIntent;
-    private WaypointType waypointTypeIntent = null;
-    private MapState mapStateIntent = null;
     private ArrayList<Location> trailHistory = null;
 
     private String targetGeocode = null;
@@ -138,8 +132,7 @@ public class NewMap extends AbstractActionBarActivity {
      */
     private Subscription resumeSubscription = Subscriptions.empty();
     private CheckBox myLocSwitch;
-    private MapMode mapMode;
-    private boolean isLiveEnabled = false;
+    private MapOptions mapOptions;
     private TargetView targetView;
 
     private static boolean followMyLocation;
@@ -166,32 +159,15 @@ public class NewMap extends AbstractActionBarActivity {
         AndroidGraphicFactory.createInstance(this.getApplication());
 
         // Get parameters from the intent
-        final Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            mapMode = (MapMode) extras.get(Intents.EXTRA_MAP_MODE);
-            isLiveEnabled = extras.getBoolean(Intents.EXTRA_LIVE_ENABLED, false);
-            geocodeIntent = extras.getString(Intents.EXTRA_GEOCODE);
-            searchIntent = extras.getParcelable(Intents.EXTRA_SEARCH);
-            coordsIntent = extras.getParcelable(Intents.EXTRA_COORDS);
-            waypointTypeIntent = WaypointType.findById(extras.getString(Intents.EXTRA_WPTTYPE));
-            mapTitle = extras.getString(Intents.EXTRA_TITLE);
-            mapStateIntent = extras.getParcelable(Intents.EXTRA_MAPSTATE);
-        } else {
-            mapMode = MapMode.LIVE;
-            isLiveEnabled = Settings.isLiveMap();
-        }
-
-        if (StringUtils.isBlank(mapTitle)) {
-            mapTitle = res.getString(R.string.map_map);
-        }
+        mapOptions = new MapOptions(this, getIntent().getExtras());
 
         // Get fresh map information from the bundle if any
         if (savedInstanceState != null) {
-            mapStateIntent = savedInstanceState.getParcelable(BUNDLE_MAP_STATE);
+            mapOptions.mapState = savedInstanceState.getParcelable(BUNDLE_MAP_STATE);
             trailHistory = savedInstanceState.getParcelableArrayList(BUNDLE_TRAIL_HISTORY);
-            followMyLocation = mapStateIntent.followsMyLocation();
+            followMyLocation = mapOptions.mapState.followsMyLocation();
         } else {
-            followMyLocation = followMyLocation && mapMode == MapMode.LIVE;
+            followMyLocation = followMyLocation && mapOptions.mapMode == MapMode.LIVE;
         }
 
         ActivityMixin.onCreate(this, true);
@@ -219,27 +195,27 @@ public class NewMap extends AbstractActionBarActivity {
         mapView.setOnMapDragListener(dragHandler);
 
         // prepare initial settings of mapview
-        if (mapStateIntent != null) {
-            this.mapView.getModel().mapViewPosition.setCenter(mapStateIntent.getCenter());
-            this.mapView.getModel().mapViewPosition.setZoomLevel((byte) mapStateIntent.getZoomLevel());
-            this.targetGeocode = mapStateIntent.getTargetGeocode();
-            this.lastNavTarget = mapStateIntent.getLastNavTarget();
-            this.isLiveEnabled = mapStateIntent.isLiveEnabled();
-        } else if (searchIntent != null) {
-            final Viewport viewport = DataStore.getBounds(searchIntent.getGeocodes());
+        if (mapOptions.mapState != null) {
+            this.mapView.getModel().mapViewPosition.setCenter(MapsforgeUtils.toLatLong(mapOptions.mapState.getCenter()));
+            this.mapView.getModel().mapViewPosition.setZoomLevel((byte) mapOptions.mapState.getZoomLevel());
+            this.targetGeocode = mapOptions.mapState.getTargetGeocode();
+            this.lastNavTarget = mapOptions.mapState.getLastNavTarget();
+            mapOptions.isLiveEnabled = mapOptions.mapState.isLiveEnabled();
+        } else if (mapOptions.searchResult != null) {
+            final Viewport viewport = DataStore.getBounds(mapOptions.searchResult.getGeocodes());
 
             if (viewport != null) {
                 mapView.zoomToViewport(viewport);
             }
-        } else if (StringUtils.isNotEmpty(geocodeIntent)) {
-            final Viewport viewport = DataStore.getBounds(geocodeIntent);
+        } else if (StringUtils.isNotEmpty(mapOptions.geocode)) {
+            final Viewport viewport = DataStore.getBounds(mapOptions.geocode);
 
             if (viewport != null) {
                 mapView.zoomToViewport(viewport);
             }
-            targetGeocode = geocodeIntent;
-        } else if (coordsIntent != null) {
-            mapView.zoomToViewport(new Viewport(coordsIntent, 0, 0));
+            targetGeocode = mapOptions.geocode;
+        } else if (mapOptions.coords != null) {
+            mapView.zoomToViewport(new Viewport(mapOptions.coords, 0, 0));
         } else {
             mapView.zoomToViewport(new Viewport(Settings.getMapCenter().getCoords(), 0, 0));
         }
@@ -285,12 +261,12 @@ public class NewMap extends AbstractActionBarActivity {
 
         try {
             final MenuItem itemMapLive = menu.findItem(R.id.menu_map_live);
-            if (isLiveEnabled) {
+            if (mapOptions.isLiveEnabled) {
                 itemMapLive.setTitle(res.getString(R.string.map_live_disable));
             } else {
                 itemMapLive.setTitle(res.getString(R.string.map_live_enable));
             }
-            itemMapLive.setVisible(coordsIntent == null);
+            itemMapLive.setVisible(mapOptions.coords == null);
 
             menu.findItem(R.id.menu_store_caches).setVisible(false);
             menu.findItem(R.id.menu_store_caches).setVisible(!caches.isDownloading() && caches.getVisibleItemsCount() > 0);
@@ -306,7 +282,7 @@ public class NewMap extends AbstractActionBarActivity {
 
             menu.findItem(R.id.menu_as_list).setVisible(!caches.isDownloading() && caches.getVisibleItemsCount() > 0);
 
-            menu.findItem(R.id.submenu_strategy).setVisible(isLiveEnabled);
+            menu.findItem(R.id.submenu_strategy).setVisible(mapOptions.isLiveEnabled);
 
             switch (Settings.getLiveMapStrategy()) {
                 case FASTEST:
@@ -323,8 +299,8 @@ public class NewMap extends AbstractActionBarActivity {
                     break;
             }
 
-            menu.findItem(R.id.menu_hint).setVisible(mapMode == MapMode.SINGLE);
-            menu.findItem(R.id.menu_compass).setVisible(mapMode == MapMode.SINGLE);
+            menu.findItem(R.id.menu_hint).setVisible(mapOptions.mapMode == MapMode.SINGLE);
+            menu.findItem(R.id.menu_compass).setVisible(mapOptions.mapMode == MapMode.SINGLE);
 
         } catch (final RuntimeException e) {
             Log.e("NewMap.onPrepareOptionsMenu", e);
@@ -351,17 +327,17 @@ public class NewMap extends AbstractActionBarActivity {
                 ActivityMixin.invalidateOptionsMenu(this);
                 return true;
             case R.id.menu_map_live:
-                isLiveEnabled = !isLiveEnabled;
-                if (mapMode == MapMode.LIVE) {
-                    Settings.setLiveMap(isLiveEnabled);
+                mapOptions.isLiveEnabled = !mapOptions.isLiveEnabled;
+                if (mapOptions.mapMode == MapMode.LIVE) {
+                    Settings.setLiveMap(mapOptions.isLiveEnabled);
                 }
-                caches.handleLiveLayers(isLiveEnabled);
+                caches.handleLiveLayers(mapOptions.isLiveEnabled);
                 ActivityMixin.invalidateOptionsMenu(this);
-                if (mapMode != MapMode.SINGLE) {
-                    mapTitle = StringUtils.EMPTY;
+                if (mapOptions.mapMode != MapMode.SINGLE) {
+                    mapOptions.title = StringUtils.EMPTY;
                 } else {
                     // reset target cache on single mode map
-                    targetGeocode = geocodeIntent;
+                    targetGeocode = mapOptions.geocode;
                 }
                 return true;
             case R.id.menu_store_caches:
@@ -615,9 +591,9 @@ public class NewMap extends AbstractActionBarActivity {
         // NavigationLayer
         Geopoint navTarget = lastNavTarget;
         if (navTarget == null) {
-            navTarget = this.coordsIntent;
-            if (navTarget == null && StringUtils.isNotEmpty(this.geocodeIntent)) {
-                final Viewport bounds = DataStore.getBounds(this.geocodeIntent);
+            navTarget = mapOptions.coords;
+            if (navTarget == null && StringUtils.isNotEmpty(mapOptions.geocode)) {
+                final Viewport bounds = DataStore.getBounds(mapOptions.geocode);
                 if (bounds != null) {
                     navTarget = bounds.center;
                 }
@@ -631,18 +607,18 @@ public class NewMap extends AbstractActionBarActivity {
         this.mapView.getLayerManager().getLayers().add(tapHandlerLayer);
 
         // Caches bundle
-        if (this.searchIntent != null) {
-            this.caches = new CachesBundle(this.searchIntent, this.mapView, this.mapHandlers);
-        } else if (StringUtils.isNotEmpty(this.geocodeIntent)) {
-            this.caches = new CachesBundle(this.geocodeIntent, this.mapView, this.mapHandlers);
-        } else if (this.coordsIntent != null) {
-            this.caches = new CachesBundle(coordsIntent, waypointTypeIntent, this.mapView, this.mapHandlers);
+        if (mapOptions.searchResult != null) {
+            this.caches = new CachesBundle(mapOptions.searchResult, this.mapView, this.mapHandlers);
+        } else if (StringUtils.isNotEmpty(mapOptions.geocode)) {
+            this.caches = new CachesBundle(mapOptions.geocode, this.mapView, this.mapHandlers);
+        } else if (mapOptions.coords != null) {
+            this.caches = new CachesBundle(mapOptions.coords, mapOptions.waypointType, this.mapView, this.mapHandlers);
         } else {
             caches = new CachesBundle(this.mapView, this.mapHandlers);
         }
 
         // Live map
-        caches.handleLiveLayers(isLiveEnabled);
+        caches.handleLiveLayers(mapOptions.isLiveEnabled);
 
         // Position layer
         this.positionLayer = new PositionLayer();
@@ -766,7 +742,7 @@ public class NewMap extends AbstractActionBarActivity {
     }
 
     private MapState prepareMapState() {
-        return new MapState(mapView.getModel().mapViewPosition.getCenter(), mapView.getModel().mapViewPosition.getZoomLevel(), followMyLocation, false, targetGeocode, lastNavTarget, isLiveEnabled);
+        return new MapState(MapsforgeUtils.toGeopoint(mapView.getModel().mapViewPosition.getCenter()), mapView.getModel().mapViewPosition.getZoomLevel(), followMyLocation, false, targetGeocode, lastNavTarget, mapOptions.isLiveEnabled);
     }
 
     private void centerMap(final Geopoint geopoint) {
@@ -894,16 +870,16 @@ public class NewMap extends AbstractActionBarActivity {
 
     @NonNull
     private String calculateTitle() {
-        if (isLiveEnabled) {
+        if (mapOptions.isLiveEnabled) {
             return res.getString(R.string.map_live);
         }
-        if (mapMode == MapMode.SINGLE) {
+        if (mapOptions.mapMode == MapMode.SINGLE) {
             final Geocache cache = getSingleModeCache();
             if (cache != null) {
                 return cache.getName();
             }
         }
-        return StringUtils.defaultIfEmpty(mapTitle, res.getString(R.string.map_map));
+        return StringUtils.defaultIfEmpty(mapOptions.title, res.getString(R.string.map_map));
     }
 
     private void setSubtitle() {
@@ -920,7 +896,7 @@ public class NewMap extends AbstractActionBarActivity {
 
     @NonNull
     private String calculateSubtitle() {
-        if (!isLiveEnabled && mapMode == MapMode.SINGLE) {
+        if (!mapOptions.isLiveEnabled && mapOptions.mapMode == MapMode.SINGLE) {
             final Geocache cache = getSingleModeCache();
             if (cache != null) {
                 return Formatter.formatMapSubtitle(cache);
@@ -1052,44 +1028,6 @@ public class NewMap extends AbstractActionBarActivity {
             }
         }
 
-    }
-
-    public static Intent getLiveMapIntent(final Activity fromActivity) {
-        return new Intent(fromActivity, NewMap.class).putExtra(Intents.EXTRA_MAP_MODE, MapMode.LIVE).putExtra(Intents.EXTRA_LIVE_ENABLED, Settings.isLiveMap());
-    }
-
-    public static void startActivityCoords(final Activity fromActivity, final Geopoint coords, final WaypointType type, final String title) {
-        final Intent mapIntent = new Intent(fromActivity, NewMap.class);
-        mapIntent.putExtra(Intents.EXTRA_MAP_MODE, MapMode.COORDS);
-        mapIntent.putExtra(Intents.EXTRA_LIVE_ENABLED, false);
-        mapIntent.putExtra(Intents.EXTRA_COORDS, coords);
-        if (type != null) {
-            mapIntent.putExtra(Intents.EXTRA_WPTTYPE, type.id);
-        }
-        if (StringUtils.isNotBlank(title)) {
-            mapIntent.putExtra(Intents.EXTRA_TITLE, title);
-        }
-        fromActivity.startActivity(mapIntent);
-    }
-
-    public static void startActivityGeoCode(final Activity fromActivity, final String geocode) {
-        final Intent mapIntent = new Intent(fromActivity, NewMap.class);
-        mapIntent.putExtra(Intents.EXTRA_MAP_MODE, MapMode.SINGLE);
-        mapIntent.putExtra(Intents.EXTRA_LIVE_ENABLED, false);
-        mapIntent.putExtra(Intents.EXTRA_GEOCODE, geocode);
-        mapIntent.putExtra(Intents.EXTRA_TITLE, geocode);
-        fromActivity.startActivity(mapIntent);
-    }
-
-    public static void startActivitySearch(final Activity fromActivity, final SearchResult search, final String title) {
-        final Intent mapIntent = new Intent(fromActivity, NewMap.class);
-        mapIntent.putExtra(Intents.EXTRA_SEARCH, search);
-        mapIntent.putExtra(Intents.EXTRA_MAP_MODE, MapMode.LIST);
-        mapIntent.putExtra(Intents.EXTRA_LIVE_ENABLED, false);
-        if (StringUtils.isNotBlank(title)) {
-            mapIntent.putExtra(Intents.EXTRA_TITLE, title);
-        }
-        fromActivity.startActivity(mapIntent);
     }
 
     // class: update location
@@ -1306,8 +1244,8 @@ public class NewMap extends AbstractActionBarActivity {
 
     @Nullable
     private Geocache getSingleModeCache() {
-        if (StringUtils.isNotBlank(geocodeIntent)) {
-            return DataStore.loadCache(geocodeIntent, LoadFlags.LOAD_CACHE_OR_DB);
+        if (StringUtils.isNotBlank(mapOptions.geocode)) {
+            return DataStore.loadCache(mapOptions.geocode, LoadFlags.LOAD_CACHE_OR_DB);
         }
 
         return null;

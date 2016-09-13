@@ -1,5 +1,7 @@
 package cgeo.geocaching.maps;
 
+import cgeo.geocaching.settings.Settings;
+
 import android.app.Activity;
 import android.os.Bundle;
 
@@ -11,7 +13,7 @@ public class MapActivity extends Activity {
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        startActivity(CGeoMap.getLiveMapIntent(this));
+        startActivity(DefaultMap.getLiveMapIntent(this, Settings.getMapProvider().getMapClass()));
         finish();
     }
 }
