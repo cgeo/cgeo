@@ -789,6 +789,7 @@
   <string name="cache_menu_navigation_transit">Навигация (общественный транспорт)</string>
   <string name="cache_menu_navigation_bike">Навигация (велосипед)</string>
   <string name="cache_menu_maps_directions">Построить маршрут на картах Google</string>
+  <string name="cache_menu_osmand">OsmAnd</string>
   <string name="cache_menu_sygic_walk">Sygic (пешком)</string>
   <string name="cache_menu_sygic_drive">Sygic (за рулем)</string>
   <string name="cache_menu_radar">Радар</string>
@@ -1056,6 +1057,7 @@
   <string name="navigation_direct_navigation">Прямая навигация</string>
   <string name="navigation_target">Цель</string>
   <string name="err_nav_no_coordinates">Невозможно начать навигацию без координат</string>
+  <string name="osmand_marker_cgeo">Маркер из c:geo</string>
   <!-- license -->
   <string name="license">Лицензия</string>
   <string name="license_show">Показать лицензию</string>
