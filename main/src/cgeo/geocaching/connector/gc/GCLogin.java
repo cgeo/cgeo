@@ -67,7 +67,7 @@ public class GCLogin extends AbstractLogin {
     protected StatusCode login(final boolean retry, @NonNull final Credentials credentials) {
         if (credentials.isInvalid()) {
             clearLoginInfo();
-            Log.e("Login.login: No login information stored");
+            Log.w("Login.login: No login information stored");
             return resetGcCustomDate(StatusCode.NO_LOGIN_INFO_STORED);
         }
 

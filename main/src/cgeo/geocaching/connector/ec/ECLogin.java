@@ -11,15 +11,14 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.Log;
 
-import com.fasterxml.jackson.databind.JsonNode;
-
-import org.apache.commons.lang3.StringUtils;
+import android.app.Application;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import android.app.Application;
-
 import java.io.IOException;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import org.apache.commons.lang3.StringUtils;
 
 public class ECLogin extends AbstractLogin {
 
@@ -51,7 +50,7 @@ public class ECLogin extends AbstractLogin {
     protected StatusCode login(final boolean retry, @NonNull final Credentials credentials) {
         if (credentials.isInvalid()) {
             clearLoginInfo();
-            Log.e("ECLogin.login: No login information stored");
+            Log.w("ECLogin.login: No login information stored");
             return StatusCode.NO_LOGIN_INFO_STORED;
         }
 
