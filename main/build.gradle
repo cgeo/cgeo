@@ -254,7 +254,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:20.0.0'
 
     // Play Services
-    def playServicesVersion = '9.2.1'
+    def playServicesVersion = '9.4.0'
     compile "com.google.android.gms:play-services-location:$playServicesVersion"
     compile "com.google.android.gms:play-services-appinvite:$playServicesVersion"
 
