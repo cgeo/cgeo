@@ -1,14 +1,13 @@
-package cgeo.geocaching.maps.mapsforge.v6;
+package cgeo.geocaching.maps;
 
 import cgeo.geocaching.location.Geopoint;
-import org.mapsforge.core.model.LatLong;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
 public class MapState implements Parcelable {
 
-    private final LatLong center;
+    private final Geopoint center;
     private final int zoomLevel;
     private final boolean followMyLocation;
     private final boolean showCircles;
@@ -16,7 +15,7 @@ public class MapState implements Parcelable {
     private final Geopoint lastNavTarget;
     private final boolean liveEnabled;
 
-    public MapState(final LatLong center, final int zoomLevel, final boolean followMyLocation, final boolean showCircles, final String targetGeocode, final Geopoint lastNavTarget, final boolean liveEnabled) {
+    public MapState(final Geopoint center, final int zoomLevel, final boolean followMyLocation, final boolean showCircles, final String targetGeocode, final Geopoint lastNavTarget, final boolean liveEnabled) {
         this.center = center;
         this.zoomLevel = zoomLevel;
         this.followMyLocation = followMyLocation;
@@ -27,16 +26,16 @@ public class MapState implements Parcelable {
     }
 
     public MapState(final Parcel in) {
-        center = new LatLong(in.readDouble(), in.readDouble());
+        center = in.readParcelable(Geopoint.class.getClassLoader());
         zoomLevel = in.readInt();
-        followMyLocation = in.readInt() > 0 ? true : false;
-        showCircles = in.readInt() > 0 ? true : false;
+        followMyLocation = in.readInt() > 0;
+        showCircles = in.readInt() > 0;
         targetGeocode = in.readString();
         lastNavTarget = in.readParcelable(Geopoint.class.getClassLoader());
-        liveEnabled = in.readInt() > 0 ? true : false;
+        liveEnabled = in.readInt() > 0;
     }
 
-    public LatLong getCenter() {
+    public Geopoint getCenter() {
         return center;
     }
 
@@ -71,8 +70,7 @@ public class MapState implements Parcelable {
 
     @Override
     public void writeToParcel(final Parcel dest, final int flags) {
-        dest.writeDouble(center.latitude);
-        dest.writeDouble(center.longitude);
+        dest.writeParcelable(center, 0);
         dest.writeInt(zoomLevel);
         dest.writeInt(followMyLocation ? 1 : 0);
         dest.writeInt(showCircles ? 1 : 0);

@@ -15,35 +15,40 @@ public final class DefaultMap {
         // utility class
     }
 
+    private static Class<?> getDefaultMapClass() {
+        return Settings.useNewMapAsDefault() ? NewMap.class : Settings.getMapProvider().getMapClass();
+    }
+
+    public static Intent getLiveMapIntent(final Activity fromActivity, final Class<?> cls) {
+        return new MapOptions().newIntent(fromActivity, cls);
+    }
+
     public static Intent getLiveMapIntent(final Activity fromActivity) {
-        if (Settings.useNewMapAsDefault()) {
-            return NewMap.getLiveMapIntent(fromActivity);
-        }
-        return CGeoMap.getLiveMapIntent(fromActivity);
+        return getLiveMapIntent(fromActivity, getDefaultMapClass());
+    }
+
+    public static void startActivityCoords(final Activity fromActivity, final Class<?> cls, final Geopoint coords, final WaypointType type, final String title) {
+        new MapOptions(coords, type, title).startIntent(fromActivity, cls);
     }
 
     public static void startActivityCoords(final Activity fromActivity, final Geopoint coords, final WaypointType type, final String title) {
-        if (Settings.useNewMapAsDefault()) {
-            NewMap.startActivityCoords(fromActivity, coords, type, title);
-        } else {
-            CGeoMap.startActivityCoords(fromActivity, coords, type, title);
-        }
+        startActivityCoords(fromActivity, getDefaultMapClass(), coords, type, title);
+    }
+
+    public static void startActivityGeoCode(final Activity fromActivity, final Class<?> cls, final String geocode) {
+        new MapOptions(geocode).startIntent(fromActivity, cls);
     }
 
     public static void startActivityGeoCode(final Activity fromActivity, final String geocode) {
-        if (Settings.useNewMapAsDefault()) {
-            NewMap.startActivityGeoCode(fromActivity, geocode);
-        } else {
-            CGeoMap.startActivityGeoCode(fromActivity, geocode);
-        }
+        startActivityGeoCode(fromActivity, getDefaultMapClass(), geocode);
+    }
+
+    public static void startActivitySearch(final Activity fromActivity, final Class<?> cls, final SearchResult search, final String title) {
+        new MapOptions(search, title).startIntent(fromActivity, cls);
     }
 
     public static void startActivitySearch(final Activity fromActivity, final SearchResult search, final String title) {
-        if (Settings.useNewMapAsDefault()) {
-            NewMap.startActivitySearch(fromActivity, search, title);
-        } else {
-            CGeoMap.startActivitySearch(fromActivity, search, title);
-        }
+        startActivitySearch(fromActivity, getDefaultMapClass(), search, title);
     }
 
 }
