@@ -789,6 +789,7 @@
   <string name="cache_menu_navigation_transit">Navigacija (keleiviniu transportu)</string>
   <string name="cache_menu_navigation_bike">Navigacija (dviračiu)</string>
   <string name="cache_menu_maps_directions">Google Maps nuorodos</string>
+  <string name="cache_menu_osmand">OsmAnd</string>
   <string name="cache_menu_sygic_walk">Sygic (pėsčiomis)</string>
   <string name="cache_menu_sygic_drive">Sygic (vairuoti)</string>
   <string name="cache_menu_radar">Radaras</string>
@@ -1056,6 +1057,7 @@
   <string name="navigation_direct_navigation">Tiesioginė navigacija</string>
   <string name="navigation_target">Tikslas</string>
   <string name="err_nav_no_coordinates">Be koordinačių navigacijos pradėti neįmanoma</string>
+  <string name="osmand_marker_cgeo">Žymeklis iš c:geo</string>
   <!-- license -->
   <string name="license">Licencija</string>
   <string name="license_show">Rodyti licenciją</string>
