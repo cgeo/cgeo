@@ -184,154 +184,154 @@ public class DataStore {
     @NonNull private static final String dbTableTrackables = "cg_trackables";
     @NonNull private static final String dbTableSearchDestinationHistory = "cg_search_destination_history";
     @NonNull private static final String dbCreateCaches = ""
-            + "create table " + dbTableCaches + " ("
-            + "_id integer primary key autoincrement, "
-            + "updated long not null, "
-            + "detailed integer not null default 0, "
-            + "detailedupdate long, "
-            + "visiteddate long, "
-            + "geocode text unique not null, "
-            + "reason integer not null default 0, " // cached, favorite...
-            + "cacheid text, "
-            + "guid text, "
-            + "type text, "
-            + "name text, "
-            + "owner text, "
-            + "owner_real text, "
-            + "hidden long, "
-            + "hint text, "
-            + "size text, "
-            + "difficulty float, "
-            + "terrain float, "
-            + "location text, "
-            + "direction double, "
-            + "distance double, "
-            + "latitude double, "
-            + "longitude double, "
-            + "reliable_latlon integer, "
-            + "personal_note text, "
-            + "shortdesc text, "
-            + "description text, "
-            + "favourite_cnt integer, "
-            + "rating float, "
-            + "votes integer, "
-            + "myvote float, "
-            + "disabled integer not null default 0, "
-            + "archived integer not null default 0, "
-            + "members integer not null default 0, "
-            + "found integer not null default 0, "
-            + "favourite integer not null default 0, "
-            + "inventorycoins integer default 0, "
-            + "inventorytags integer default 0, "
-            + "inventoryunknown integer default 0, "
-            + "onWatchlist integer default 0, "
-            + "coordsChanged integer default 0, "
-            + "finalDefined integer default 0, "
-            + "logPasswordRequired integer default 0,"
-            + "watchlistCount integer default -1"
+            + "CREATE TABLE " + dbTableCaches + " ("
+            + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + "updated LONG NOT NULL, "
+            + "detailed INTEGER NOT NULL DEFAULT 0, "
+            + "detailedupdate LONG, "
+            + "visiteddate LONG, "
+            + "geocode TEXT UNIQUE NOT NULL, "
+            + "reason INTEGER NOT NULL DEFAULT 0, " // cached, favorite...
+            + "cacheid TEXT, "
+            + "guid TEXT, "
+            + "type TEXT, "
+            + "name TEXT, "
+            + "owner TEXT, "
+            + "owner_real TEXT, "
+            + "hidden LONG, "
+            + "hint TEXT, "
+            + "size TEXT, "
+            + "difficulty FLOAT, "
+            + "terrain FLOAT, "
+            + "location TEXT, "
+            + "direction DOUBLE, "
+            + "distance DOUBLE, "
+            + "latitude DOUBLE, "
+            + "longitude DOUBLE, "
+            + "reliable_latlon INTEGER, "
+            + "personal_note TEXT, "
+            + "shortdesc TEXT, "
+            + "description TEXT, "
+            + "favourite_cnt INTEGER, "
+            + "rating FLOAT, "
+            + "votes INTEGER, "
+            + "myvote FLOAT, "
+            + "disabled INTEGER NOT NULL DEFAULT 0, "
+            + "archived INTEGER NOT NULL DEFAULT 0, "
+            + "members INTEGER NOT NULL DEFAULT 0, "
+            + "found INTEGER NOT NULL DEFAULT 0, "
+            + "favourite INTEGER NOT NULL DEFAULT 0, "
+            + "inventorycoins INTEGER DEFAULT 0, "
+            + "inventorytags INTEGER DEFAULT 0, "
+            + "inventoryunknown INTEGER DEFAULT 0, "
+            + "onWatchlist INTEGER DEFAULT 0, "
+            + "coordsChanged INTEGER DEFAULT 0, "
+            + "finalDefined INTEGER DEFAULT 0, "
+            + "logPasswordRequired INTEGER DEFAULT 0,"
+            + "watchlistCount INTEGER DEFAULT -1"
             + "); ";
     private static final String dbCreateLists = ""
-            + "create table " + dbTableLists + " ("
-            + "_id integer primary key autoincrement, "
-            + "title text not null, "
-            + "updated long not null"
+            + "CREATE TABLE " + dbTableLists + " ("
+            + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + "title TEXT NOT NULL, "
+            + "updated LONG NOT NULL"
             + "); ";
     private static final String dbCreateCachesLists = ""
-            + "create table " + dbTableCachesLists + " ("
-            + "list_id integer not null, "
-            + "geocode text not null, "
-            + "primary key (list_id, geocode)"
+            + "CREATE TABLE " + dbTableCachesLists + " ("
+            + "list_id INTEGER NOT NULL, "
+            + "geocode TEXT NOT NULL, "
+            + "PRIMARY KEY (list_id, geocode)"
             + "); ";
     private static final String dbCreateAttributes = ""
-            + "create table " + dbTableAttributes + " ("
-            + "_id integer primary key autoincrement, "
-            + "geocode text not null, "
-            + "updated long not null, " // date of save
-            + "attribute text "
+            + "CREATE TABLE " + dbTableAttributes + " ("
+            + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + "geocode TEXT NOT NULL, "
+            + "updated LONG NOT NULL, " // date of save
+            + "attribute TEXT "
             + "); ";
 
     private static final String dbCreateWaypoints = ""
-            + "create table " + dbTableWaypoints + " ("
-            + "_id integer primary key autoincrement, "
-            + "geocode text not null, "
-            + "updated long not null, " // date of save
-            + "type text not null default 'waypoint', "
-            + "prefix text, "
-            + "lookup text, "
-            + "name text, "
-            + "latitude double, "
-            + "longitude double, "
-            + "note text, "
-            + "own integer default 0, "
-            + "visited integer default 0"
+            + "CREATE TABLE " + dbTableWaypoints + " ("
+            + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + "geocode TEXT NOT NULL, "
+            + "updated LONG NOT NULL, " // date of save
+            + "type TEXT NOT NULL DEFAULT 'waypoint', "
+            + "prefix TEXT, "
+            + "lookup TEXT, "
+            + "name TEXT, "
+            + "latitude DOUBLE, "
+            + "longitude DOUBLE, "
+            + "note TEXT, "
+            + "own INTEGER DEFAULT 0, "
+            + "visited INTEGER DEFAULT 0"
             + "); ";
     private static final String dbCreateSpoilers = ""
-            + "create table " + dbTableSpoilers + " ("
-            + "_id integer primary key autoincrement, "
-            + "geocode text not null, "
-            + "updated long not null, " // date of save
-            + "url text, "
-            + "title text, "
-            + "description text "
+            + "CREATE TABLE " + dbTableSpoilers + " ("
+            + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + "geocode TEXT NOT NULL, "
+            + "updated LONG NOT NULL, " // date of save
+            + "url TEXT, "
+            + "title TEXT, "
+            + "description TEXT "
             + "); ";
     private static final String dbCreateLogs = ""
-            + "create table " + dbTableLogs + " ("
-            + "_id integer primary key autoincrement, "
-            + "geocode text not null, "
-            + "updated long not null, " // date of save
-            + "type integer not null default 4, "
-            + "author text, "
-            + "log text, "
-            + "date long, "
-            + "found integer not null default 0, "
-            + "friend integer "
+            + "CREATE TABLE " + dbTableLogs + " ("
+            + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + "geocode TEXT NOT NULL, "
+            + "updated LONG NOT NULL, " // date of save
+            + "type INTEGER NOT NULL DEFAULT 4, "
+            + "author TEXT, "
+            + "log TEXT, "
+            + "date LONG, "
+            + "found INTEGER NOT NULL DEFAULT 0, "
+            + "friend INTEGER "
             + "); ";
 
     private static final String dbCreateLogCount = ""
-            + "create table " + dbTableLogCount + " ("
-            + "_id integer primary key autoincrement, "
-            + "geocode text not null, "
-            + "updated long not null, " // date of save
-            + "type integer not null default 4, "
-            + "count integer not null default 0 "
+            + "CREATE TABLE " + dbTableLogCount + " ("
+            + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + "geocode TEXT NOT NULL, "
+            + "updated LONG NOT NULL, " // date of save
+            + "type INTEGER NOT NULL DEFAULT 4, "
+            + "count INTEGER NOT NULL DEFAULT 0 "
             + "); ";
     private static final String dbCreateLogImages = ""
-            + "create table " + dbTableLogImages + " ("
-            + "_id integer primary key autoincrement, "
-            + "log_id integer not null, "
-            + "title text not null, "
-            + "url text not null, "
-            + "description text "
+            + "CREATE TABLE " + dbTableLogImages + " ("
+            + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + "log_id INTEGER NOT NULL, "
+            + "title TEXT NOT NULL, "
+            + "url TEXT NOT NULL, "
+            + "description TEXT "
             + "); ";
     private static final String dbCreateLogsOffline = ""
-            + "create table " + dbTableLogsOffline + " ("
-            + "_id integer primary key autoincrement, "
-            + "geocode text not null, "
-            + "updated long not null, " // date of save
-            + "type integer not null default 4, "
-            + "log text, "
-            + "date long "
+            + "CREATE TABLE " + dbTableLogsOffline + " ("
+            + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + "geocode TEXT NOT NULL, "
+            + "updated LONG NOT NULL, " // date of save
+            + "type INTEGER NOT NULL DEFAULT 4, "
+            + "log TEXT, "
+            + "date LONG "
             + "); ";
     private static final String dbCreateTrackables = ""
-            + "create table " + dbTableTrackables + " ("
-            + "_id integer primary key autoincrement, "
-            + "updated long not null, " // date of save
-            + "tbcode text not null, "
-            + "guid text, "
-            + "title text, "
-            + "owner text, "
-            + "released long, "
-            + "goal text, "
-            + "description text, "
-            + "geocode text "
+            + "CREATE TABLE " + dbTableTrackables + " ("
+            + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + "updated LONG NOT NULL, " // date of save
+            + "tbcode TEXT NOT NULL, "
+            + "guid TEXT, "
+            + "title TEXT, "
+            + "owner TEXT, "
+            + "released LONG, "
+            + "goal TEXT, "
+            + "description TEXT, "
+            + "geocode TEXT "
             + "); ";
 
     private static final String dbCreateSearchDestinationHistory = ""
-            + "create table " + dbTableSearchDestinationHistory + " ("
-            + "_id integer primary key autoincrement, "
-            + "date long not null, "
-            + "latitude double, "
-            + "longitude double "
+            + "CREATE TABLE " + dbTableSearchDestinationHistory + " ("
+            + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + "date LONG NOT NULL, "
+            + "latitude DOUBLE, "
+            + "longitude DOUBLE "
             + "); ";
 
     private static final Observable<Integer> allCachesCountObservable = Observable.create(new OnSubscribe<Integer>() {
@@ -547,23 +547,23 @@ public class DataStore {
         }
 
         private static void createIndices(final SQLiteDatabase db) {
-            db.execSQL("create index if not exists in_caches_geo on " + dbTableCaches + " (geocode)");
-            db.execSQL("create index if not exists in_caches_guid on " + dbTableCaches + " (guid)");
-            db.execSQL("create index if not exists in_caches_lat on " + dbTableCaches + " (latitude)");
-            db.execSQL("create index if not exists in_caches_lon on " + dbTableCaches + " (longitude)");
-            db.execSQL("create index if not exists in_caches_reason on " + dbTableCaches + " (reason)");
-            db.execSQL("create index if not exists in_caches_detailed on " + dbTableCaches + " (detailed)");
-            db.execSQL("create index if not exists in_caches_type on " + dbTableCaches + " (type)");
-            db.execSQL("create index if not exists in_caches_visit_detail on " + dbTableCaches + " (visiteddate, detailedupdate)");
-            db.execSQL("create index if not exists in_attr_geo on " + dbTableAttributes + " (geocode)");
-            db.execSQL("create index if not exists in_wpts_geo on " + dbTableWaypoints + " (geocode)");
-            db.execSQL("create index if not exists in_wpts_geo_type on " + dbTableWaypoints + " (geocode, type)");
-            db.execSQL("create index if not exists in_spoil_geo on " + dbTableSpoilers + " (geocode)");
-            db.execSQL("create index if not exists in_logs_geo on " + dbTableLogs + " (geocode)");
-            db.execSQL("create index if not exists in_logcount_geo on " + dbTableLogCount + " (geocode)");
-            db.execSQL("create index if not exists in_logsoff_geo on " + dbTableLogsOffline + " (geocode)");
-            db.execSQL("create index if not exists in_trck_geo on " + dbTableTrackables + " (geocode)");
-            db.execSQL("create index if not exists in_lists_geo on " + dbTableCachesLists + " (geocode)");
+            db.execSQL("CREATE INDEX IF NOT EXISTS in_caches_geo ON " + dbTableCaches + " (geocode)");
+            db.execSQL("CREATE INDEX IF NOT EXISTS in_caches_guid ON " + dbTableCaches + " (guid)");
+            db.execSQL("CREATE INDEX IF NOT EXISTS in_caches_lat ON " + dbTableCaches + " (latitude)");
+            db.execSQL("CREATE INDEX IF NOT EXISTS in_caches_lon ON " + dbTableCaches + " (longitude)");
+            db.execSQL("CREATE INDEX IF NOT EXISTS in_caches_reason ON " + dbTableCaches + " (reason)");
+            db.execSQL("CREATE INDEX IF NOT EXISTS in_caches_detailed ON " + dbTableCaches + " (detailed)");
+            db.execSQL("CREATE INDEX IF NOT EXISTS in_caches_type ON " + dbTableCaches + " (type)");
+            db.execSQL("CREATE INDEX IF NOT EXISTS in_caches_visit_detail ON " + dbTableCaches + " (visiteddate, detailedupdate)");
+            db.execSQL("CREATE INDEX IF NOT EXISTS in_attr_geo ON " + dbTableAttributes + " (geocode)");
+            db.execSQL("CREATE INDEX IF NOT EXISTS in_wpts_geo ON " + dbTableWaypoints + " (geocode)");
+            db.execSQL("CREATE INDEX IF NOT EXISTS in_wpts_geo_type ON " + dbTableWaypoints + " (geocode, type)");
+            db.execSQL("CREATE INDEX IF NOT EXISTS in_spoil_geo ON " + dbTableSpoilers + " (geocode)");
+            db.execSQL("CREATE INDEX IF NOT EXISTS in_logs_geo ON " + dbTableLogs + " (geocode)");
+            db.execSQL("CREATE INDEX IF NOT EXISTS in_logcount_geo ON " + dbTableLogCount + " (geocode)");
+            db.execSQL("CREATE INDEX IF NOT EXISTS in_logsoff_geo ON " + dbTableLogsOffline + " (geocode)");
+            db.execSQL("CREATE INDEX IF NOT EXISTS in_trck_geo ON " + dbTableTrackables + " (geocode)");
+            db.execSQL("CREATE INDEX IF NOT EXISTS in_lists_geo ON " + dbTableCachesLists + " (geocode)");
         }
 
         @Override
@@ -585,7 +585,7 @@ public class DataStore {
                 }
 
                 if (oldVersion > 0) {
-                    db.execSQL("delete from " + dbTableCaches + " where reason = 0");
+                    db.execSQL("DELETE FROM " + dbTableCaches + " WHERE reason = 0");
 
                     if (oldVersion < 52) { // upgrade to 52
                         try {
@@ -599,7 +599,7 @@ public class DataStore {
 
                     if (oldVersion < 53) { // upgrade to 53
                         try {
-                            db.execSQL("alter table " + dbTableCaches + " add column onWatchlist integer");
+                            db.execSQL("ALTER TABLE " + dbTableCaches + " ADD COLUMN onWatchlist INTEGER");
 
                             Log.i("Column onWatchlist added to " + dbTableCaches + ".");
                         } catch (final Exception e) {
@@ -618,7 +618,7 @@ public class DataStore {
 
                     if (oldVersion < 55) { // update to 55
                         try {
-                            db.execSQL("alter table " + dbTableCaches + " add column personal_note text");
+                            db.execSQL("ALTER TABLE " + dbTableCaches + " ADD COLUMN personal_note TEXT");
                         } catch (final Exception e) {
                             Log.e("Failed to upgrade to ver. 55", e);
                         }
@@ -628,9 +628,9 @@ public class DataStore {
                     // @see issue #299
                     if (oldVersion < 56) { // update to 56
                         try {
-                            db.execSQL("update " + dbTableAttributes + " set attribute = " +
-                                    "lower(attribute) where attribute like \"%_yes\" " +
-                                    "or attribute like \"%_no\"");
+                            db.execSQL("UPDATE " + dbTableAttributes + " SET attribute = " +
+                                    "LOWER(attribute) WHERE attribute LIKE \"%_yes\" " +
+                                    "OR  attribute LIKE \"%_no\"");
                         } catch (final Exception e) {
                             Log.e("Failed to upgrade to ver. 56", e);
                         }
@@ -639,12 +639,12 @@ public class DataStore {
                     // Create missing indices. See issue #435
                     if (oldVersion < 57) { // update to 57
                         try {
-                            db.execSQL("drop index in_a");
-                            db.execSQL("drop index in_b");
-                            db.execSQL("drop index in_c");
-                            db.execSQL("drop index in_d");
-                            db.execSQL("drop index in_e");
-                            db.execSQL("drop index in_f");
+                            db.execSQL("DROP INDEX in_a");
+                            db.execSQL("DROP INDEX in_b");
+                            db.execSQL("DROP INDEX in_c");
+                            db.execSQL("DROP INDEX in_d");
+                            db.execSQL("DROP INDEX in_e");
+                            db.execSQL("DROP INDEX in_f");
                             createIndices(db);
                         } catch (final Exception e) {
                             Log.e("Failed to upgrade to ver. 57", e);
@@ -657,76 +657,76 @@ public class DataStore {
 
                             final String dbTableCachesTemp = dbTableCaches + "_temp";
                             final String dbCreateCachesTemp = ""
-                                    + "create table " + dbTableCachesTemp + " ("
-                                    + "_id integer primary key autoincrement, "
-                                    + "updated long not null, "
-                                    + "detailed integer not null default 0, "
-                                    + "detailedupdate long, "
-                                    + "visiteddate long, "
-                                    + "geocode text unique not null, "
-                                    + "reason integer not null default 0, "
-                                    + "cacheid text, "
-                                    + "guid text, "
-                                    + "type text, "
-                                    + "name text, "
-                                    + "own integer not null default 0, "
-                                    + "owner text, "
-                                    + "owner_real text, "
-                                    + "hidden long, "
-                                    + "hint text, "
-                                    + "size text, "
-                                    + "difficulty float, "
-                                    + "terrain float, "
-                                    + "location text, "
-                                    + "direction double, "
-                                    + "distance double, "
-                                    + "latitude double, "
-                                    + "longitude double, "
-                                    + "reliable_latlon integer, "
-                                    + "personal_note text, "
-                                    + "shortdesc text, "
-                                    + "description text, "
-                                    + "favourite_cnt integer, "
-                                    + "rating float, "
-                                    + "votes integer, "
-                                    + "myvote float, "
-                                    + "disabled integer not null default 0, "
-                                    + "archived integer not null default 0, "
-                                    + "members integer not null default 0, "
-                                    + "found integer not null default 0, "
-                                    + "favourite integer not null default 0, "
-                                    + "inventorycoins integer default 0, "
-                                    + "inventorytags integer default 0, "
-                                    + "inventoryunknown integer default 0, "
-                                    + "onWatchlist integer default 0 "
+                                    + "CREATE TABLE " + dbTableCachesTemp + " ("
+                                    + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                                    + "updated LONG NOT NULL, "
+                                    + "detailed INTEGER NOT NULL DEFAULT 0, "
+                                    + "detailedupdate LONG, "
+                                    + "visiteddate LONG, "
+                                    + "geocode TEXT UNIQUE NOT NULL, "
+                                    + "reason INTEGER NOT NULL DEFAULT 0, "
+                                    + "cacheid TEXT, "
+                                    + "guid TEXT, "
+                                    + "type TEXT, "
+                                    + "name TEXT, "
+                                    + "own INTEGER NOT NULL DEFAULT 0, "
+                                    + "owner TEXT, "
+                                    + "owner_real TEXT, "
+                                    + "hidden LONG, "
+                                    + "hint TEXT, "
+                                    + "size TEXT, "
+                                    + "difficulty FLOAT, "
+                                    + "terrain FLOAT, "
+                                    + "location TEXT, "
+                                    + "direction DOUBLE, "
+                                    + "distance DOUBLE, "
+                                    + "latitude DOUBLE, "
+                                    + "longitude DOUBLE, "
+                                    + "reliable_latlon INTEGER, "
+                                    + "personal_note TEXT, "
+                                    + "shortdesc TEXT, "
+                                    + "description TEXT, "
+                                    + "favourite_cnt INTEGER, "
+                                    + "rating FLOAT, "
+                                    + "votes INTEGER, "
+                                    + "myvote FLOAT, "
+                                    + "disabled INTEGER NOT NULL DEFAULT 0, "
+                                    + "archived INTEGER NOT NULL DEFAULT 0, "
+                                    + "members INTEGER NOT NULL DEFAULT 0, "
+                                    + "found INTEGER NOT NULL DEFAULT 0, "
+                                    + "favourite INTEGER NOT NULL DEFAULT 0, "
+                                    + "inventorycoins INTEGER DEFAULT 0, "
+                                    + "inventorytags INTEGER DEFAULT 0, "
+                                    + "inventoryunknown INTEGER DEFAULT 0, "
+                                    + "onWatchlist INTEGER DEFAULT 0 "
                                     + "); ";
 
                             db.execSQL(dbCreateCachesTemp);
-                            db.execSQL("insert into " + dbTableCachesTemp + " select _id,updated,detailed,detailedupdate,visiteddate,geocode,reason,cacheid,guid,type,name,own,owner,owner_real," +
+                            db.execSQL("INSERT INTO " + dbTableCachesTemp + " SELECT _id,updated,detailed,detailedupdate,visiteddate,geocode,reason,cacheid,guid,type,name,own,owner,owner_real," +
                                     "hidden,hint,size,difficulty,terrain,location,direction,distance,latitude,longitude, 0," +
                                     "personal_note,shortdesc,description,favourite_cnt,rating,votes,myvote,disabled,archived,members,found,favourite,inventorycoins," +
-                                    "inventorytags,inventoryunknown,onWatchlist from " + dbTableCaches);
-                            db.execSQL("drop table " + dbTableCaches);
-                            db.execSQL("alter table " + dbTableCachesTemp + " rename to " + dbTableCaches);
+                                    "inventorytags,inventoryunknown,onWatchlist FROM " + dbTableCaches);
+                            db.execSQL("DROP TABLE " + dbTableCaches);
+                            db.execSQL("ALTER TABLE " + dbTableCachesTemp + " RENAME TO " + dbTableCaches);
 
                             final String dbTableWaypointsTemp = dbTableWaypoints + "_temp";
                             final String dbCreateWaypointsTemp = ""
-                                    + "create table " + dbTableWaypointsTemp + " ("
-                                    + "_id integer primary key autoincrement, "
-                                    + "geocode text not null, "
-                                    + "updated long not null, " // date of save
-                                    + "type text not null default 'waypoint', "
-                                    + "prefix text, "
-                                    + "lookup text, "
-                                    + "name text, "
-                                    + "latitude double, "
-                                    + "longitude double, "
-                                    + "note text "
+                                    + "CREATE TABLE " + dbTableWaypointsTemp + " ("
+                                    + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                                    + "geocode TEXT NOT NULL, "
+                                    + "updated LONG NOT NULL, " // date of save
+                                    + "type TEXT NOT NULL DEFAULT 'waypoint', "
+                                    + "prefix TEXT, "
+                                    + "lookup TEXT, "
+                                    + "name TEXT, "
+                                    + "latitude DOUBLE, "
+                                    + "longitude DOUBLE, "
+                                    + "note TEXT "
                                     + "); ";
                             db.execSQL(dbCreateWaypointsTemp);
-                            db.execSQL("insert into " + dbTableWaypointsTemp + " select _id, geocode, updated, type, prefix, lookup, name, latitude, longitude, note from " + dbTableWaypoints);
-                            db.execSQL("drop table " + dbTableWaypoints);
-                            db.execSQL("alter table " + dbTableWaypointsTemp + " rename to " + dbTableWaypoints);
+                            db.execSQL("INSERT INTO " + dbTableWaypointsTemp + " SELECT _id, geocode, updated, type, prefix, lookup, name, latitude, longitude, note FROM " + dbTableWaypoints);
+                            db.execSQL("DROP TABLE " + dbTableWaypoints);
+                            db.execSQL("ALTER TABLE " + dbTableWaypointsTemp + " RENAME TO " + dbTableWaypoints);
 
                             createIndices(db);
 
@@ -759,8 +759,8 @@ public class DataStore {
                     }
                     if (oldVersion < 61) {
                         try {
-                            db.execSQL("alter table " + dbTableLogs + " add column friend integer");
-                            db.execSQL("alter table " + dbTableCaches + " add column coordsChanged integer default 0");
+                            db.execSQL("ALTER TABLE " + dbTableLogs + " ADD COLUMN friend INTEGER");
+                            db.execSQL("ALTER TABLE " + dbTableCaches + " ADD COLUMN coordsChanged INTEGER DEFAULT 0");
                         } catch (final Exception e) {
                             Log.e("Failed to upgrade to ver. 61", e);
 
@@ -769,9 +769,9 @@ public class DataStore {
                     // Introduces finalDefined on caches and own on waypoints
                     if (oldVersion < 62) {
                         try {
-                            db.execSQL("alter table " + dbTableCaches + " add column finalDefined integer default 0");
-                            db.execSQL("alter table " + dbTableWaypoints + " add column own integer default 0");
-                            db.execSQL("update " + dbTableWaypoints + " set own = 1 where type = 'own'");
+                            db.execSQL("ALTER TABLE " + dbTableCaches + " ADD COLUMN finalDefined INTEGER DEFAULT 0");
+                            db.execSQL("ALTER TABLE " + dbTableWaypoints + " ADD COLUMN own INTEGER DEFAULT 0");
+                            db.execSQL("UPDATE " + dbTableWaypoints + " SET own = 1 WHERE type = 'own'");
                         } catch (final Exception e) {
                             Log.e("Failed to upgrade to ver. 62", e);
 
@@ -791,7 +791,7 @@ public class DataStore {
                             // No cache should ever be stored into the ALL_CACHES list. Here we use hardcoded list ids
                             // rather than symbolic ones because the fix must be applied with the values at the time
                             // of the problem. The problem was introduced in release 2012.06.01.
-                            db.execSQL("update " + dbTableCaches + " set reason=1 where reason=2");
+                            db.execSQL("UPDATE " + dbTableCaches + " SET reason=1 WHERE reason=2");
                         } catch (final Exception e) {
                             Log.e("Failed to upgrade to ver. 64", e);
                         }
@@ -800,7 +800,7 @@ public class DataStore {
                     if (oldVersion < 65) {
                         try {
                             // Set all waypoints where name is Original coordinates to type ORIGINAL
-                            db.execSQL("update " + dbTableWaypoints + " set type='original', own=0 where name='Original Coordinates'");
+                            db.execSQL("UPDATE " + dbTableWaypoints + " SET type='original', own=0 WHERE name='Original Coordinates'");
                         } catch (final Exception e) {
                             Log.e("Failed to upgrade to ver. 65:", e);
                         }
@@ -808,7 +808,7 @@ public class DataStore {
                     // Introduces visited feature on waypoints
                     if (oldVersion < 66) {
                         try {
-                            db.execSQL("alter table " + dbTableWaypoints + " add column visited integer default 0");
+                            db.execSQL("ALTER TABLE " + dbTableWaypoints + " ADD COLUMN visited INTEGER DEFAULT 0");
                         } catch (final Exception e) {
                             Log.e("Failed to upgrade to ver. 66", e);
 
@@ -817,8 +817,8 @@ public class DataStore {
                     // issue2662 OC: Leichtes Klettern / Easy climbing
                     if (oldVersion < 67) {
                         try {
-                            db.execSQL("update " + dbTableAttributes + " set attribute = 'easy_climbing_yes' where geocode like 'OC%' and attribute = 'climbing_yes'");
-                            db.execSQL("update " + dbTableAttributes + " set attribute = 'easy_climbing_no' where geocode like 'OC%' and attribute = 'climbing_no'");
+                            db.execSQL("UPDATE " + dbTableAttributes + " SET attribute = 'easy_climbing_yes' WHERE geocode LIKE 'OC%' AND attribute = 'climbing_yes'");
+                            db.execSQL("UPDATE " + dbTableAttributes + " SET attribute = 'easy_climbing_no' WHERE geocode LIKE 'OC%' AND attribute = 'climbing_no'");
                         } catch (final Exception e) {
                             Log.e("Failed to upgrade to ver. 67", e);
 
@@ -827,7 +827,7 @@ public class DataStore {
                     // Introduces logPasswordRequired on caches
                     if (oldVersion < 68) {
                         try {
-                            db.execSQL("alter table " + dbTableCaches + " add column logPasswordRequired integer default 0");
+                            db.execSQL("ALTER TABLE " + dbTableCaches + " ADD COLUMN logPasswordRequired INTEGER DEFAULT 0");
                         } catch (final Exception e) {
                             Log.e("Failed to upgrade to ver. 68", e);
 
@@ -836,7 +836,7 @@ public class DataStore {
                     // description for log Images
                     if (oldVersion < 69) {
                         try {
-                            db.execSQL("alter table " + dbTableLogImages + " add column description text");
+                            db.execSQL("ALTER TABLE " + dbTableLogImages + " ADD COLUMN description TEXT");
                         } catch (final Exception e) {
                             Log.e("Failed to upgrade to ver. 69", e);
                         }
@@ -844,7 +844,7 @@ public class DataStore {
                     // Introduces watchListCount
                     if (oldVersion < 70) {
                         try {
-                            db.execSQL("alter table " + dbTableCaches + " add column watchlistCount integer default -1");
+                            db.execSQL("ALTER TABLE " + dbTableCaches + " ADD COLUMN watchlistCount INTEGER DEFAULT -1");
                         } catch (final Exception e) {
                             Log.e("Failed to upgrade to ver. 70", e);
                         }
@@ -854,7 +854,7 @@ public class DataStore {
                         try {
                             db.execSQL(dbCreateCachesLists);
                             createIndices(db);
-                            db.execSQL("insert into " + dbTableCachesLists + " select reason, geocode from " + dbTableCaches);
+                            db.execSQL("INSERT INTO " + dbTableCachesLists + " SELECT reason, geocode FROM " + dbTableCaches);
                         } catch (final Exception e) {
                             Log.e("Failed to upgrade to ver. 71", e);
                         }
@@ -886,7 +886,7 @@ public class DataStore {
         private static void sanityChecks(final SQLiteDatabase db) {
             // Check that the history of searches is well formed as some dates seem to be missing according
             // to NPE traces.
-            final int staleHistorySearches = db.delete(dbTableSearchDestinationHistory, "date is null", null);
+            final int staleHistorySearches = db.delete(dbTableSearchDestinationHistory, "date IS NULL", null);
             if (staleHistorySearches > 0) {
                 Log.w(String.format(Locale.getDefault(), "DataStore.dbHelper.onOpen: removed %d bad search history entries", staleHistorySearches));
             }
@@ -932,15 +932,15 @@ public class DataStore {
         }
 
         private static void dropDatabase(final SQLiteDatabase db) {
-            db.execSQL("drop table if exists " + dbTableCachesLists);
-            db.execSQL("drop table if exists " + dbTableCaches);
-            db.execSQL("drop table if exists " + dbTableAttributes);
-            db.execSQL("drop table if exists " + dbTableWaypoints);
-            db.execSQL("drop table if exists " + dbTableSpoilers);
-            db.execSQL("drop table if exists " + dbTableLogs);
-            db.execSQL("drop table if exists " + dbTableLogCount);
-            db.execSQL("drop table if exists " + dbTableLogsOffline);
-            db.execSQL("drop table if exists " + dbTableTrackables);
+            db.execSQL("DROP TABLE IF EXISTS " + dbTableCachesLists);
+            db.execSQL("DROP TABLE IF EXISTS " + dbTableCaches);
+            db.execSQL("DROP TABLE IF EXISTS " + dbTableAttributes);
+            db.execSQL("DROP TABLE IF EXISTS " + dbTableWaypoints);
+            db.execSQL("DROP TABLE IF EXISTS " + dbTableSpoilers);
+            db.execSQL("DROP TABLE IF EXISTS " + dbTableLogs);
+            db.execSQL("DROP TABLE IF EXISTS " + dbTableLogCount);
+            db.execSQL("DROP TABLE IF EXISTS " + dbTableLogsOffline);
+            db.execSQL("DROP TABLE IF EXISTS " + dbTableTrackables);
         }
 
     }
@@ -1391,7 +1391,7 @@ public class DataStore {
      */
     private static void removeOutdatedWaypointsOfCache(@NonNull final Geocache cache, @NonNull final Collection<String> remainingWaypointIds) {
         final String idList = StringUtils.join(remainingWaypointIds, ',');
-        database.delete(dbTableWaypoints, "geocode = ? AND _id NOT in (" + idList + ")", new String[]{cache.getGeocode()});
+        database.delete(dbTableWaypoints, "geocode = ? AND _id NOT IN (" + idList + ")", new String[]{cache.getGeocode()});
     }
 
     /**
@@ -2025,7 +2025,7 @@ public class DataStore {
                 new String[]{"_id", "date", "latitude", "longitude"},
                 "latitude IS NOT NULL AND longitude IS NOT NULL",
                 null,
-                "date desc",
+                "date DESC",
                 "100",
                 new LinkedList<Destination>(),
                 new Func1<Cursor, Destination>() {
@@ -2068,9 +2068,9 @@ public class DataStore {
 
         final Cursor cursor = database.rawQuery(
                 //                           0       1      2      3    4      5      6                                                7       8      9     10     11
-                "SELECT cg_logs._id as cg_logs_id, type, author, log, date, found, friend, " + dbTableLogImages + "._id as cg_logImages_id, log_id, title, url, description"
+                "SELECT cg_logs._id AS cg_logs_id, type, author, log, date, found, friend, " + dbTableLogImages + "._id as cg_logImages_id, log_id, title, url, description"
                         + " FROM " + dbTableLogs + " LEFT OUTER JOIN " + dbTableLogImages
-                        + " ON ( cg_logs._id = log_id ) WHERE geocode = ?  ORDER BY date desc, cg_logs._id asc", new String[]{geocode});
+                        + " ON ( cg_logs._id = log_id ) WHERE geocode = ?  ORDER BY date DESC, cg_logs._id ASC", new String[]{geocode});
 
         LogEntry.Builder log = null;
         while (cursor.moveToNext() && logs.size() < 100) {
@@ -2306,11 +2306,11 @@ public class DataStore {
 
         String[] selectionArgs = null;
         if (cacheType != CacheType.ALL) {
-            selection.append(" and type = ?");
+            selection.append(" AND type = ?");
             selectionArgs = new String[] { String.valueOf(cacheType.id) };
         }
 
-        selection.append(" and geocode in (SELECT geocode FROM ");
+        selection.append(" AND geocode IN (SELECT geocode FROM ");
         selection.append(dbTableCachesLists);
         selection.append(" WHERE list_id ");
         selection.append(listId != PseudoList.ALL_LIST.id ? "=" + Math.max(listId, 1) : ">= " + StoredList.STANDARD_LIST_ID);
@@ -2320,8 +2320,8 @@ public class DataStore {
         try {
             if (coords != null) {
                 return queryToColl(dbTableCaches,
-                        new String[]{"geocode", "(abs(latitude-" + String.format((Locale) null, "%.6f", coords.getLatitude()) +
-                                ") + abs(longitude-" + String.format((Locale) null, "%.6f", coords.getLongitude()) + ")) as dif"},
+                        new String[]{"geocode", "(ABS(latitude-" + String.format((Locale) null, "%.6f", coords.getLatitude()) +
+                                ") + ABS(longitude-" + String.format((Locale) null, "%.6f", coords.getLongitude()) + ")) AS dif"},
                         selection.toString(),
                         selectionArgs,
                         "dif",
@@ -2348,11 +2348,11 @@ public class DataStore {
         final StringBuilder selection = new StringBuilder("visiteddate > 0");
 
         if (detailedOnly) {
-            selection.append(" and detailed = 1");
+            selection.append(" AND detailed = 1");
         }
         String[] selectionArgs = null;
         if (cacheType != CacheType.ALL) {
-            selection.append(" and type = ?");
+            selection.append(" AND type = ?");
             selectionArgs = new String[] { String.valueOf(cacheType.id) };
         }
 
@@ -2407,13 +2407,13 @@ public class DataStore {
         // cacheType limitation
         String[] selectionArgs = null;
         if (cacheType != CacheType.ALL) {
-            selection.append(" and type = ?");
+            selection.append(" AND type = ?");
             selectionArgs = new String[] { String.valueOf(cacheType.id) };
         }
 
         // offline caches only
         if (stored) {
-            selection.append(" and geocode in (select geocode from " + dbTableCachesLists + " where list_id >= " + StoredList.STANDARD_LIST_ID + ")");
+            selection.append(" AND geocode IN (SELECT geocode FROM " + dbTableCachesLists + " WHERE list_id >= " + StoredList.STANDARD_LIST_ID + ")");
         }
 
         try {
@@ -2452,7 +2452,7 @@ public class DataStore {
                     if (version != Settings.getVersion()) {
                         queryToColl(dbTableCaches,
                                 new String[]{"geocode"},
-                                "geocode NOT IN (SELECT distinct (geocode) FROM " + dbTableCachesLists + ")",
+                                "geocode NOT IN (SELECT DISTINCT (geocode) FROM " + dbTableCachesLists + ")",
                                 null,
                                 null,
                                 null,
@@ -2463,7 +2463,7 @@ public class DataStore {
                         final String timestampString = Long.toString(timestamp);
                         queryToColl(dbTableCaches,
                                 new String[]{"geocode"},
-                                "detailed < ? and detailedupdate < ? and visiteddate < ? and geocode NOT IN (SELECT distinct (geocode) FROM " + dbTableCachesLists + ")",
+                                "detailed < ? AND detailedupdate < ? AND visiteddate < ? AND geocode NOT IN (SELECT DISTINCT (geocode) FROM " + dbTableCachesLists + ")",
                                 new String[]{timestampString, timestampString, timestampString},
                                 null,
                                 null,
@@ -2568,7 +2568,7 @@ public class DataStore {
                 database.delete(dbTableLogsOffline, baseWhereClause, null);
                 String wayPointClause = baseWhereClause;
                 if (!removeFlags.contains(RemoveFlag.OWN_WAYPOINTS_ONLY_FOR_TESTING)) {
-                    wayPointClause += " and type <> 'own'";
+                    wayPointClause += " AND type <> 'own'";
                 }
                 database.delete(dbTableWaypoints, wayPointClause, null);
                 database.delete(dbTableTrackables, baseWhereClause, null);
@@ -2627,7 +2627,7 @@ public class DataStore {
                 new String[]{geocode},
                 null,
                 null,
-                "_id desc",
+                "_id DESC",
                 "1");
 
         LogEntry log = null;
@@ -2722,7 +2722,7 @@ public class DataStore {
         lists.add(new StoredList(StoredList.STANDARD_LIST_ID, res.getString(R.string.list_inbox), (int) PreparedStatement.COUNT_CACHES_ON_STANDARD_LIST.simpleQueryForLong()));
 
         try {
-            final String query = "SELECT l._id as _id, l.title as title, COUNT(c.geocode) as count" +
+            final String query = "SELECT l._id AS _id, l.title AS title, COUNT(c.geocode) AS count" +
                     " FROM " + dbTableLists + " l LEFT OUTER JOIN " + dbTableCachesLists + " c" +
                     " ON l._id + " + customListIdOffset + " = c.list_id" +
                     " GROUP BY l._id" +
@@ -3147,14 +3147,14 @@ public class DataStore {
     public static Set<Waypoint> loadWaypoints(final Viewport viewport, final boolean excludeMine, final boolean excludeDisabled, final CacheType type) {
         final StringBuilder where = buildCoordinateWhere(dbTableWaypoints, viewport);
         if (excludeMine) {
-            where.append(" and ").append(dbTableCaches).append(".found == 0");
+            where.append(" AND ").append(dbTableCaches).append(".found == 0");
         }
         if (excludeDisabled) {
-            where.append(" and ").append(dbTableCaches).append(".disabled == 0");
-            where.append(" and ").append(dbTableCaches).append(".archived == 0");
+            where.append(" AND ").append(dbTableCaches).append(".disabled == 0");
+            where.append(" AND ").append(dbTableCaches).append(".archived == 0");
         }
         if (type != CacheType.ALL) {
-            where.append(" and ").append(dbTableCaches).append(".type == '").append(type.id).append('\'');
+            where.append(" AND ").append(dbTableCaches).append(".type == '").append(type.id).append('\'');
         }
 
         final StringBuilder query = new StringBuilder("SELECT ");
@@ -3162,7 +3162,7 @@ public class DataStore {
             query.append(i > 0 ? ", " : "").append(dbTableWaypoints).append('.').append(WAYPOINT_COLUMNS[i]).append(' ');
         }
         query.append(" FROM ").append(dbTableWaypoints).append(", ").append(dbTableCaches).append(" WHERE ").append(dbTableWaypoints)
-                .append(".geocode == ").append(dbTableCaches).append(".geocode and ").append(where)
+                .append(".geocode == ").append(dbTableCaches).append(".geocode AND ").append(where)
                 .append(" LIMIT " + (Settings.SHOW_WP_THRESHOLD_MAX * 2));  // Hardcoded limit to avoid memory overflow
 
         return cursorToColl(database.rawQuery(query.toString(), null), new HashSet<Waypoint>(), new Func1<Cursor, Waypoint>() {
@@ -3180,7 +3180,7 @@ public class DataStore {
     private enum PreparedStatement {
 
         HISTORY_COUNT("SELECT COUNT(_id) FROM " + dbTableCaches + " WHERE visiteddate > 0"),
-        MOVE_TO_STANDARD_LIST("UPDATE " + dbTableCachesLists + " SET list_id = " + StoredList.STANDARD_LIST_ID + " WHERE list_id = ? AND geocode NOT IN (SELECT distinct (geocode) FROM " + dbTableCachesLists + " WHERE list_id = " + StoredList.STANDARD_LIST_ID + ")"),
+        MOVE_TO_STANDARD_LIST("UPDATE " + dbTableCachesLists + " SET list_id = " + StoredList.STANDARD_LIST_ID + " WHERE list_id = ? AND geocode NOT IN (SELECT DISTINCT (geocode) FROM " + dbTableCachesLists + " WHERE list_id = " + StoredList.STANDARD_LIST_ID + ")"),
         REMOVE_FROM_LIST("DELETE FROM " + dbTableCachesLists + " WHERE list_id = ? AND geocode = ?"),
         REMOVE_FROM_ALL_LISTS("DELETE FROM " + dbTableCachesLists + " WHERE geocode = ?"),
         REMOVE_ALL_FROM_LIST("DELETE FROM " + dbTableCachesLists + " WHERE list_id = ?"),
@@ -3189,14 +3189,14 @@ public class DataStore {
         INSERT_LOG_COUNTS("INSERT INTO " + dbTableLogCount + " (geocode, updated, type, count) VALUES (?, ?, ?, ?)"),
         INSERT_SPOILER("INSERT INTO " + dbTableSpoilers + " (geocode, updated, url, title, description) VALUES (?, ?, ?, ?, ?)"),
         REMOVE_SPOILERS("DELETE FROM " + dbTableSpoilers + " WHERE geocode = ?"),
-        LOG_COUNT_OF_GEOCODE("SELECT count(_id) FROM " + dbTableLogsOffline + " WHERE geocode = ?"),
-        COUNT_CACHES_ON_STANDARD_LIST("SELECT count(geocode) FROM " + dbTableCachesLists + " WHERE list_id = " + StoredList.STANDARD_LIST_ID),
-        COUNT_ALL_CACHES("SELECT count(distinct(geocode)) FROM " + dbTableCachesLists + " WHERE list_id >= " + StoredList.STANDARD_LIST_ID),
+        LOG_COUNT_OF_GEOCODE("SELECT COUNT(_id) FROM " + dbTableLogsOffline + " WHERE geocode = ?"),
+        COUNT_CACHES_ON_STANDARD_LIST("SELECT COUNT(geocode) FROM " + dbTableCachesLists + " WHERE list_id = " + StoredList.STANDARD_LIST_ID),
+        COUNT_ALL_CACHES("SELECT COUNT(DISTINCT(geocode)) FROM " + dbTableCachesLists + " WHERE list_id >= " + StoredList.STANDARD_LIST_ID),
         INSERT_LOG("INSERT INTO " + dbTableLogs + " (geocode, updated, type, author, log, date, found, friend) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"),
         INSERT_ATTRIBUTE("INSERT INTO " + dbTableAttributes + " (geocode, updated, attribute) VALUES (?, ?, ?)"),
         ADD_TO_LIST("INSERT OR REPLACE INTO " + dbTableCachesLists + " (list_id, geocode) VALUES (?, ?)"),
-        GEOCODE_OFFLINE("SELECT count(list_id) FROM " + dbTableCachesLists + " WHERE geocode = ? AND list_id != " + StoredList.TEMPORARY_LIST.id),
-        GUID_OFFLINE("SELECT count(list_id) FROM " + dbTableCachesLists + " WHERE geocode = (SELECT geocode FROM " + dbTableCaches + " WHERE guid = ?) AND list_id != " + StoredList.TEMPORARY_LIST.id),
+        GEOCODE_OFFLINE("SELECT COUNT(list_id) FROM " + dbTableCachesLists + " WHERE geocode = ? AND list_id != " + StoredList.TEMPORARY_LIST.id),
+        GUID_OFFLINE("SELECT COUNT(list_id) FROM " + dbTableCachesLists + " WHERE geocode = (SELECT geocode FROM " + dbTableCaches + " WHERE guid = ?) AND list_id != " + StoredList.TEMPORARY_LIST.id),
         GEOCODE_OF_GUID("SELECT geocode FROM " + dbTableCaches + " WHERE guid = ?"),
         GEOCODE_FROM_TITLE("SELECT geocode FROM " + dbTableCaches + " WHERE name = ?"),
         INSERT_SEARCH_DESTINATION("INSERT INTO " + dbTableSearchDestinationHistory + " (date, latitude, longitude) VALUES (?, ?, ?)"),
