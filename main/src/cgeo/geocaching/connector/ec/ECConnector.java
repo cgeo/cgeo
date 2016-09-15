@@ -32,6 +32,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import io.reactivex.Single;
+import io.reactivex.functions.Function;
 import org.apache.commons.lang3.StringUtils;
 
 public class ECConnector extends AbstractConnector implements ISearchByGeocode, ISearchByCenter, ISearchByViewPort, ILogin, ICredentials {
@@ -102,10 +104,14 @@ public class ECConnector extends AbstractConnector implements ISearchByGeocode, 
 
     @Override
     @NonNull
-    public SearchResult searchByViewport(@NonNull final Viewport viewport, @Nullable final MapTokens tokens) {
-        final Collection<Geocache> caches = ECApi.searchByBBox(viewport);
-        final SearchResult searchResult = new SearchResult(caches);
-        return searchResult.filterSearchResults(false, Settings.getCacheType());
+    public Single<SearchResult> searchByViewport(@NonNull final Viewport viewport, @Nullable final MapTokens tokens) {
+        return ECApi.searchByBBox(viewport).map(new Function<Collection<Geocache>, SearchResult>() {
+            @Override
+            public SearchResult apply(final Collection<Geocache> caches) {
+                final SearchResult searchResult = new SearchResult(caches);
+                return searchResult.filterSearchResults(false, Settings.getCacheType());
+            }
+        });
     }
 
     @Override

@@ -11,7 +11,6 @@ import cgeo.geocaching.gcvote.GCVote;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.AndroidRxUtils;
-import cgeo.geocaching.utils.Log;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -29,6 +28,7 @@ import java.util.concurrent.Callable;
 
 import io.reactivex.Maybe;
 import io.reactivex.Observable;
+import io.reactivex.Single;
 import io.reactivex.functions.BiFunction;
 import io.reactivex.functions.Function;
 import org.apache.commons.collections4.CollectionUtils;
@@ -310,7 +310,7 @@ public class SearchResult implements Parcelable {
     }
 
     /**
-     * execute the given connector request in parallel on all active connectors
+     * Execute the given connector request in parallel on all active connectors
      *
      * @param connectors
      *            connectors to be considered in request
@@ -319,23 +319,33 @@ public class SearchResult implements Parcelable {
      */
     public static <C extends IConnector> SearchResult parallelCombineActive(final Collection<C> connectors,
                                                                             final Function<C, SearchResult> func) {
-        return Observable.fromIterable(connectors).flatMapMaybe(new Function<C, Maybe<SearchResult>>() {
+        return combineActive(connectors, new Function<C, Single<SearchResult>>() {
             @Override
-            public Maybe<SearchResult> apply(final C connector) {
-                if (!connector.isActive()) {
-                    return Maybe.empty();
-                }
-                return Maybe.fromCallable(new Callable<SearchResult>() {
+            public Single<SearchResult> apply(final C connector) {
+                return Single.fromCallable(new Callable<SearchResult>() {
                     @Override
                     public SearchResult call() throws Exception {
-                        try {
-                            return func.apply(connector);
-                        } catch (final Exception e) {
-                            Log.w("parallelCombineActive: swallowing error from connector " + connector, e);
-                            return null;
-                        }
+                        return func.apply(connector);
                     }
-                }).subscribeOn(AndroidRxUtils.networkScheduler);
+                });
+            }
+        }).blockingGet();
+    }
+    /**
+     * Execute the given connector request in parallel on all active connectors
+     *
+     * @param connectors
+     *            connectors to be considered in request
+     * @param func
+     *            connector request
+     */
+    public static <C extends IConnector> Single<SearchResult> combineActive(final Collection<C> connectors, final Function<C, Single<SearchResult>> func) {
+        return Observable.fromIterable(connectors).flatMapMaybe(new Function<C, Maybe<SearchResult>>() {
+            @Override
+            public Maybe<SearchResult> apply(final C connector) throws Exception {
+                return connector.isActive() ?
+                        func.apply(connector).subscribeOn(AndroidRxUtils.networkScheduler).toMaybe().onErrorComplete() :
+                        Maybe.<SearchResult>empty();
             }
         }).reduce(new SearchResult(), new BiFunction<SearchResult, SearchResult, SearchResult>() {
             @Override
@@ -343,7 +353,7 @@ public class SearchResult implements Parcelable {
                 searchResult.addSearchResult(searchResult2);
                 return searchResult;
             }
-        }).blockingGet();
+        });
     }
 
 }

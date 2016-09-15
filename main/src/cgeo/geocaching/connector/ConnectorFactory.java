@@ -46,6 +46,7 @@ import java.util.concurrent.Callable;
 
 import io.reactivex.Maybe;
 import io.reactivex.Observable;
+import io.reactivex.Single;
 import io.reactivex.functions.Function;
 import io.reactivex.functions.Predicate;
 import io.reactivex.schedulers.Schedulers;
@@ -307,10 +308,10 @@ public final class ConnectorFactory {
 
     /** @see ISearchByViewPort#searchByViewport */
     @NonNull
-    public static SearchResult searchByViewport(@NonNull final Viewport viewport, @Nullable final MapTokens tokens) {
-        return SearchResult.parallelCombineActive(searchByViewPortConns, new Function<ISearchByViewPort, SearchResult>() {
+    public static Single<SearchResult> searchByViewport(@NonNull final Viewport viewport, @NonNull final MapTokens tokens) {
+        return SearchResult.combineActive(searchByViewPortConns, new Function<ISearchByViewPort, Single<SearchResult>>() {
             @Override
-            public SearchResult apply(final ISearchByViewPort connector) {
+            public Single<SearchResult> apply(final ISearchByViewPort connector) {
                 return connector.searchByViewport(viewport, tokens);
             }
         });

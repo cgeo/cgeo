@@ -42,8 +42,6 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
  */
 public class CgeoApplicationTest extends CGeoTestCase {
 
-    private static final MapTokens INVALID_TOKEN = null;
-
     /**
      * The name 'test preconditions' is a convention to signal that if this test
      * doesn't pass, the test case was not set up properly and it might explain
@@ -305,7 +303,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
 
                     // check coords for DETAILED
                     Settings.setLiveMapStrategy(LivemapStrategy.DETAILED);
-                    SearchResult search = ConnectorFactory.searchByViewport(viewport, tokens);
+                    SearchResult search = ConnectorFactory.searchByViewport(viewport, tokens).blockingGet();
                     assertThat(search).isNotNull();
                     assertThat(search.getGeocodes()).contains(mockedCache.getGeocode());
                     Geocache parsedCache = DataStore.loadCache(mockedCache.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
@@ -319,7 +317,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
                     Settings.setLiveMapStrategy(LivemapStrategy.FAST);
                     Tile.cache.removeFromTileCache(mockedCache);
 
-                    search = ConnectorFactory.searchByViewport(viewport, tokens);
+                    search = ConnectorFactory.searchByViewport(viewport, tokens).blockingGet();
                     assertThat(search).isNotNull();
                     assertThat(search.getGeocodes()).contains(mockedCache.getGeocode());
                     parsedCache = DataStore.loadCache(mockedCache.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
@@ -360,7 +358,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
                         Settings.setCacheType(CacheType.ALL);
 
                         final Viewport viewport = new Viewport(cache, 0.003, 0.003);
-                        final SearchResult search = ConnectorFactory.searchByViewport(viewport, INVALID_TOKEN);
+                        final SearchResult search = ConnectorFactory.searchByViewport(viewport, MapTokens.INVALID_TOKENS).blockingGet();
 
                         assertThat(search).isNotNull();
                         assertThat(search.getGeocodes()).contains(cache.getGeocode());
@@ -388,7 +386,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
                         Settings.setCacheType(CacheType.ALL);
 
                         final Viewport viewport = new Viewport(cache, 0.003, 0.003);
-                        final SearchResult search = ConnectorFactory.searchByViewport(viewport, INVALID_TOKEN);
+                        final SearchResult search = ConnectorFactory.searchByViewport(viewport, MapTokens.INVALID_TOKENS).blockingGet();
 
                         assertThat(search).isNotNull();
                         assertThat(search.getGeocodes()).contains(cache.getGeocode());

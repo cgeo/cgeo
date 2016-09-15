@@ -47,6 +47,7 @@ final class ECApi {
 
     @NonNull
     private static final SynchronizedDateFormat LOG_DATE_FORMAT = new SynchronizedDateFormat("yyyy-MM-dd HH:mm:ss.SSSZ", TimeZone.getTimeZone("UTC"), Locale.US);
+    private static final Single<Collection<Geocache>> NO_GEOCACHES = Single.just((Collection<Geocache>) Collections.<Geocache>emptyList());
 
     private ECApi() {
         // utility class with static methods
@@ -73,10 +74,9 @@ final class ECApi {
     }
 
     @NonNull
-    static Collection<Geocache> searchByBBox(final Viewport viewport) {
-
+    static Single<Collection<Geocache>> searchByBBox(final Viewport viewport) {
         if (viewport.getLatitudeSpan() == 0 || viewport.getLongitudeSpan() == 0) {
-            return Collections.emptyList();
+            return NO_GEOCACHES;
         }
 
         final Parameters params = new Parameters("fnc", "bbox");
@@ -84,12 +84,12 @@ final class ECApi {
         params.add("lat2", String.valueOf(viewport.getLatitudeMax()));
         params.add("lon1", String.valueOf(viewport.getLongitudeMin()));
         params.add("lon2", String.valueOf(viewport.getLongitudeMax()));
-        try {
-            final Response response = apiRequest(params).blockingGet();
-            return importCachesFromJSON(response);
-        } catch (final Exception ignored) {
-            return Collections.emptyList();
-        }
+        return apiRequest(params).map(new Function<Response, Collection<Geocache>>() {
+            @Override
+            public Collection<Geocache> apply(final Response response) {
+                return importCachesFromJSON(response);
+            }
+        }).onErrorResumeNext(NO_GEOCACHES);
     }
 
     @NonNull

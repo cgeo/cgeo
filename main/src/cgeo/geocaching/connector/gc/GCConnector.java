@@ -52,6 +52,7 @@ import java.io.File;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import io.reactivex.Single;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -206,7 +207,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
 
     @Override
     @NonNull
-    public SearchResult searchByViewport(@NonNull final Viewport viewport, @Nullable final MapTokens tokens) {
+    public Single<SearchResult> searchByViewport(@NonNull final Viewport viewport, @NonNull final MapTokens tokens) {
         return GCMap.searchByViewport(viewport, tokens);
     }
 
