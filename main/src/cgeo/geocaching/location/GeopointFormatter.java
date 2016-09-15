@@ -45,7 +45,10 @@ public class GeopointFormatter {
         LON_DECMINUTE,
 
         /** Example: "W 5 12,345" */
-        LON_DECMINUTE_RAW
+        LON_DECMINUTE_RAW,
+
+        /** Example: "32U E 549996 N 5600860" */
+        UTM
     }
 
     /**
@@ -111,6 +114,10 @@ public class GeopointFormatter {
             case LON_DECMINUTE_RAW: {
                 final Geopoint rgp = gp.roundedAt(60 * 1000);
                 return String.format(Locale.getDefault(), "%c %03d %06.3f", rgp.getLonDir(), rgp.getLonDeg(), rgp.getLonMinRaw());
+            }
+
+            case UTM: {
+                return UTMPoint.latLong2UTM(gp).toString();
             }
 
         }

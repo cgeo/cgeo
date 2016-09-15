@@ -2,11 +2,12 @@ package cgeo.geocaching.location;
 
 import cgeo.geocaching.utils.MatcherWrapper;
 
-import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.StringUtils;
 import android.support.annotation.NonNull;
 
 import java.util.regex.Pattern;
+
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Parse coordinates.
@@ -70,7 +71,15 @@ class GeopointParser {
                 final double lon = Double.parseDouble(StringUtils.strip(parts[1], " \t\u00a0"));
                 return new Geopoint(lat, lon);
             }
-        } catch (final NumberFormatException e) {
+        } catch (final NumberFormatException ignored) {
+            // ignore and continue parsing textual formats
+        }
+
+        // try to parse UTM string
+        try {
+            final UTMPoint utmPoint = new UTMPoint(text);
+            return utmPoint.toLatLong();
+        } catch (final Exception ignored) {
             // ignore and continue parsing textual formats
         }
 

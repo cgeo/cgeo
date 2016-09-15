@@ -16,7 +16,8 @@ public class CoordinatesFormatSwitcher implements OnClickListener {
     private static final GeopointFormatter.Format[] availableFormats = {
             GeopointFormatter.Format.LAT_LON_DECMINUTE,
             GeopointFormatter.Format.LAT_LON_DECSECOND,
-            GeopointFormatter.Format.LAT_LON_DECDEGREE
+            GeopointFormatter.Format.LAT_LON_DECDEGREE,
+            GeopointFormatter.Format.UTM
     };
 
     private int position = 0;
