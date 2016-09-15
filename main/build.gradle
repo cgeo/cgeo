@@ -15,7 +15,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.getkeepsafe.dexcount'
 
 android {
-    compileSdkVersion "Google Inc.:Google APIs:22"
+    compileSdkVersion "Google Inc.:Google APIs:23"
     buildToolsVersion project.buildToolsVersion
 
     compileOptions {
@@ -28,7 +28,7 @@ android {
         // TODO fill this section and remove the values from AndroidManifest only after the full switch to gradle
         // As these values override the manifest, we might otherwise use different values in gradle and non-gradle builds.
         minSdkVersion project.minSdkVersion
-        targetSdkVersion 21
+        targetSdkVersion 22
         versionName versionNameFromDate()
         versionCode versionCodeFromDate(0)
 
