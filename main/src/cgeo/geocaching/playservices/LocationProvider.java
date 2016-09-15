@@ -49,15 +49,19 @@ public class LocationProvider extends LocationCallback implements GoogleApiClien
 
     private synchronized void updateRequest() {
         if (locationClient.isConnected()) {
-            if (mostPreciseCount.get() > 0) {
-                Log.d("LocationProvider: requesting most precise locations");
-                LocationServices.FusedLocationApi.requestLocationUpdates(locationClient, LOCATION_REQUEST, this, AndroidRxUtils.looperCallbacksLooper);
-            } else if (lowPowerCount.get() > 0) {
-                Log.d("LocationProvider: requesting low-power locations");
-                LocationServices.FusedLocationApi.requestLocationUpdates(locationClient, LOCATION_REQUEST_LOW_POWER, this, AndroidRxUtils.looperCallbacksLooper);
-            } else {
-                Log.d("LocationProvider: stopping location requests");
-                LocationServices.FusedLocationApi.removeLocationUpdates(locationClient, this);
+            try {
+                if (mostPreciseCount.get() > 0) {
+                    Log.d("LocationProvider: requesting most precise locations");
+                    LocationServices.FusedLocationApi.requestLocationUpdates(locationClient, LOCATION_REQUEST, this, AndroidRxUtils.looperCallbacksLooper);
+                } else if (lowPowerCount.get() > 0) {
+                    Log.d("LocationProvider: requesting low-power locations");
+                    LocationServices.FusedLocationApi.requestLocationUpdates(locationClient, LOCATION_REQUEST_LOW_POWER, this, AndroidRxUtils.looperCallbacksLooper);
+                } else {
+                    Log.d("LocationProvider: stopping location requests");
+                    LocationServices.FusedLocationApi.removeLocationUpdates(locationClient, this);
+                }
+            } catch (final SecurityException e) {
+                Log.w("Security exception when accessing fused location services", e);
             }
         }
     }
