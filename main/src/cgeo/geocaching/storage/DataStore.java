@@ -46,6 +46,8 @@ import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteDoneException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -72,8 +74,6 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import rx.Observable;
 import rx.Observable.OnSubscribe;
 import rx.Subscriber;
@@ -2652,7 +2652,9 @@ public class DataStore {
 
         init();
 
-        database.delete(dbTableLogsOffline, "geocode = ?", new String[]{geocode});
+        final String[] geocodeWhereArgs = {geocode};
+        database.delete(dbTableLogsOffline, "geocode = ?", geocodeWhereArgs);
+        database.execSQL(String.format("UPDATE %s SET visiteddate = 0 WHERE geocode = ?", dbTableCaches), geocodeWhereArgs);
     }
 
     public static void clearLogsOffline(final List<Geocache> caches) {
@@ -2666,7 +2668,9 @@ public class DataStore {
             cache.setLogOffline(false);
         }
 
-        database.execSQL(String.format("DELETE FROM %s where %s", dbTableLogsOffline, whereGeocodeIn(Geocache.getGeocodes(caches))));
+        final String geocodes = whereGeocodeIn(Geocache.getGeocodes(caches)).toString();
+        database.execSQL(String.format("DELETE FROM %s WHERE %s", dbTableLogsOffline, geocodes));
+        database.execSQL(String.format("UPDATE %s SET visiteddate = 0 WHERE %s", dbTableCaches, geocodes));
     }
 
     public static boolean hasLogOffline(final String geocode) {

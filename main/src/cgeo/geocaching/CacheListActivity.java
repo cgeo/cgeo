@@ -589,6 +589,11 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 refreshCurrentList();
             }
         }
+
+        // always refresh history, an offline log might have been deleted
+        if (type == CacheListType.HISTORY) {
+            refreshCurrentList();
+        }
     }
 
     private void setAdapterCurrentCoordinates(final boolean forceSort) {
