@@ -11,7 +11,6 @@ import static cgeo.geocaching.enumerations.CacheType.TRADITIONAL;
 import static cgeo.geocaching.enumerations.CacheType.VIRTUAL;
 import static cgeo.geocaching.enumerations.CacheType.WEBCAM;
 import static cgeo.geocaching.enumerations.CacheType.WHERIGO;
-import static cgeo.geocaching.test.R.raw;
 import static cgeo.geocaching.test.R.raw.map1;
 import static cgeo.geocaching.test.R.raw.map11;
 import static cgeo.geocaching.test.R.raw.map3;
@@ -27,8 +26,6 @@ import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 import cgeo.geocaching.test.R;
-import cgeo.geocaching.utils.Log;
-
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.annotation.RawRes;

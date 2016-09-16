@@ -6,7 +6,6 @@ import junit.framework.TestCase;
 
 import android.support.annotation.NonNull;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;

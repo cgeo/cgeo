@@ -4,19 +4,15 @@ import android.support.annotation.RawRes;
 
 import static cgeo.geocaching.enumerations.CacheSize.MICRO;
 import static cgeo.geocaching.enumerations.CacheSize.UNKNOWN;
-import static cgeo.geocaching.test.R.raw;
 import static cgeo.geocaching.test.R.raw.gc1bkp3_loc;
 import static cgeo.geocaching.test.R.raw.oc5952_loc;
 import static cgeo.geocaching.test.R.raw.waymarking_loc;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
-import cgeo.geocaching.test.R;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
