@@ -1,13 +1,16 @@
 package cgeo.geocaching.location;
 
-import java.util.Arrays;
-import java.util.Collection;
-
-import org.hamcrest.CoreMatchers;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+
+import java.util.Arrays;
+import java.util.Collection;
+
+import static cgeo.geocaching.location.UTMPoint.latLong2UTM;
+import static java.lang.String.valueOf;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.offset;
 
 /**
  * Test the UTMPoint class with testcases from an Excel sheet provided here: http://www.uwgb.edu/dutchs/UsefulData/UTMFormulas.htm
@@ -118,22 +121,22 @@ public class UTMPointConversionTest {
 
     @Test
     public void testLatLong2UTM() throws Exception {
-        final UTMPoint utm = UTMPoint.latLong2UTM(new Geopoint(this.lat, this.lon));
-        Assert.assertEquals(this.easting, utm.getEasting(), 1.1d);
-        Assert.assertEquals(this.northing, utm.getNorthing(), 1.1d);
-        Assert.assertEquals(this.zone, utm.getZoneNumber());
+        final UTMPoint utm = latLong2UTM(new Geopoint(this.lat, this.lon));
+        assertThat(utm.getEasting()).isEqualTo(this.easting, offset(1.1d));
+        assertThat(utm.getNorthing()).isEqualTo(this.northing, offset(1.1d));
+        assertThat(utm.getZoneNumber()).isEqualTo(zone);
         if ("ABY".contains(this.zoneLetter)) { // if we expect A,B or Y then Z is ok, too
-            Assert.assertThat(String.valueOf(utm.getZoneLetter()), CoreMatchers.anyOf(CoreMatchers.is("Z"), CoreMatchers.is(this.zoneLetter)));
+            assertThat(valueOf(utm.getZoneLetter())).isIn(zoneLetter, "Z");
         } else {
-            Assert.assertEquals(this.zoneLetter, String.valueOf(utm.getZoneLetter()));
+            assertThat(valueOf(utm.getZoneLetter())).isEqualTo(zoneLetter);
         }
     }
 
     @Test
     public void testUTM2LatLong() throws Exception {
         final Geopoint gp = new UTMPoint(this.zone, this.zoneLetter.charAt(0), this.easting, this.northing).toLatLong();
-        Assert.assertEquals(this.lat, gp.getLatitude(), 1.1d);
-        Assert.assertEquals(this.lon, gp.getLongitude(), 1.1d);
+        assertThat(gp.getLatitude()).isEqualTo(this.lat, offset(1.1d));
+        assertThat(gp.getLongitude()).isEqualTo(this.lon, offset(1.1d));
     }
 
 }

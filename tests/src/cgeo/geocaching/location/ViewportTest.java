@@ -13,6 +13,8 @@ import java.util.Set;
 
 import cgeo.geocaching.models.ICoordinates;
 
+import static cgeo.geocaching.location.Viewport.containing;
+import static java.util.Collections.singleton;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ViewportTest extends TestCase {
@@ -21,9 +23,9 @@ public class ViewportTest extends TestCase {
     private static final Viewport vpRef = new Viewport(new Geopoint(-1.0, -2.0), new Geopoint(3.0, 4.0));
 
     public static void assertBounds(final Viewport vp) {
-        assertEquals(new Geopoint(1.0, 1.0), vp.center);
-        assertEquals(new Geopoint(3.0, 4.0), vp.topRight);
-        assertEquals(new Geopoint(-1.0, -2.0), vp.bottomLeft);
+        assertThat(vp.center).isEqualTo(new Geopoint(1.0, 1.0));
+        assertThat(vp.topRight).isEqualTo(new Geopoint(3.0, 4.0));
+        assertThat(vp.bottomLeft).isEqualTo(new Geopoint(-1.0, -2.0));
     }
 
     public static void testCreationBounds() {
@@ -78,14 +80,14 @@ public class ViewportTest extends TestCase {
 
     public static void testEquals() {
         assertThat(vpRef).isEqualTo(vpRef);
-        assertEquals(vpRef, new Viewport(vpRef.bottomLeft, vpRef.topRight));
+        assertThat(new Viewport(vpRef.bottomLeft, vpRef.topRight)).isEqualTo(vpRef);
         assertThat(vpRef.equals(new Viewport(new Geopoint(0.0, 0.0), 1.0, 1.0))).isFalse();
     }
 
     public static void testResize() {
         assertThat(vpRef.resize(1.0)).isEqualTo(vpRef);
-        assertEquals(new Viewport(new Geopoint(-3.0, -5.0), new Geopoint(5.0, 7.0)), vpRef.resize(2.0));
-        assertEquals(new Viewport(new Geopoint(0.0, -0.5), new Geopoint(2.0, 2.5)), vpRef.resize(0.5));
+        assertThat(vpRef.resize(2.0)).isEqualTo(new Viewport(new Geopoint(-3.0, -5.0), new Geopoint(5.0, 7.0)));
+        assertThat(vpRef.resize(0.5)).isEqualTo(new Viewport(new Geopoint(0.0, -0.5), new Geopoint(2.0, 2.5)));
     }
 
     public static void testIncludes() {
@@ -95,14 +97,14 @@ public class ViewportTest extends TestCase {
     }
 
     public static void testContaining() {
-        assertThat(Viewport.containing(Collections.singleton((ICoordinates) null))).isNull();
+        assertThat(containing(singleton((ICoordinates) null))).isNull();
         final Set<Geopoint> points = new HashSet<>();
         points.add(vpRef.bottomLeft);
-        assertEquals(new Viewport(vpRef.bottomLeft, vpRef.bottomLeft), Viewport.containing(points));
+        assertThat(containing(points)).isEqualTo(new Viewport(vpRef.bottomLeft, vpRef.bottomLeft));
         points.add(vpRef.topRight);
-        assertThat(Viewport.containing(points)).isEqualTo(vpRef);
+        assertThat(containing(points)).isEqualTo(vpRef);
         points.add(vpRef.center);
-        assertThat(Viewport.containing(points)).isEqualTo(vpRef);
+        assertThat(containing(points)).isEqualTo(vpRef);
     }
 
 }

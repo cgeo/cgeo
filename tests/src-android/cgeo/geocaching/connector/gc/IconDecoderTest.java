@@ -1,5 +1,26 @@
 package cgeo.geocaching.connector.gc;
 
+import static cgeo.geocaching.enumerations.CacheType.CITO;
+import static cgeo.geocaching.enumerations.CacheType.EARTH;
+import static cgeo.geocaching.enumerations.CacheType.EVENT;
+import static cgeo.geocaching.enumerations.CacheType.LETTERBOX;
+import static cgeo.geocaching.enumerations.CacheType.MEGA_EVENT;
+import static cgeo.geocaching.enumerations.CacheType.MULTI;
+import static cgeo.geocaching.enumerations.CacheType.MYSTERY;
+import static cgeo.geocaching.enumerations.CacheType.TRADITIONAL;
+import static cgeo.geocaching.enumerations.CacheType.VIRTUAL;
+import static cgeo.geocaching.enumerations.CacheType.WEBCAM;
+import static cgeo.geocaching.enumerations.CacheType.WHERIGO;
+import static cgeo.geocaching.test.R.raw;
+import static cgeo.geocaching.test.R.raw.map1;
+import static cgeo.geocaching.test.R.raw.map11;
+import static cgeo.geocaching.test.R.raw.map3;
+import static cgeo.geocaching.test.R.raw.map4;
+import static cgeo.geocaching.test.R.raw.map5;
+import static cgeo.geocaching.test.R.raw.map_all14;
+import static cgeo.geocaching.test.R.raw.tile13;
+import static cgeo.geocaching.test.R.raw.tile14;
+import static cgeo.geocaching.utils.Log.d;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import cgeo.geocaching.enumerations.CacheType;
@@ -15,12 +36,12 @@ import android.support.annotation.RawRes;
 public class IconDecoderTest extends AbstractResourceInstrumentationTestCase {
 
     public void testparseMapPNG14() {
-        final Bitmap bitmap = getBitmap(R.raw.tile14);
-        Log.d("Bitmap=" + bitmap.getWidth() + "x" + bitmap.getHeight());
+        final Bitmap bitmap = getBitmap(tile14);
+        d("Bitmap=" + bitmap.getWidth() + "x" + bitmap.getHeight());
 
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 88, 124, 14).getType());
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 228, 104, 14).getType());
-        assertEquals(CacheType.MULTI, parseMapPNG(bitmap, 52, 92, 14).getType());
+        assertThat(parseMapPNG(bitmap, 88, 124, 14).getType()).isEqualTo(TRADITIONAL);
+        assertThat(parseMapPNG(bitmap, 228, 104, 14).getType()).isEqualTo(MYSTERY);
+        assertThat(parseMapPNG(bitmap, 52, 92, 14).getType()).isEqualTo(MULTI);
         assertThat(parseMapPNG(bitmap, 108, 112, 14).isFound()).isTrue();
     }
 
@@ -40,11 +61,11 @@ public class IconDecoderTest extends AbstractResourceInstrumentationTestCase {
     }
 
     public void testParseMap13() {
-        final Bitmap bitmap = getBitmap(R.raw.tile13);
+        final Bitmap bitmap = getBitmap(tile13);
 
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 146, 225, 13).getType());
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 181, 116, 13).getType());
-        assertEquals(CacheType.MULTI, parseMapPNG(bitmap, 118, 230, 13).getType());
+        assertThat(parseMapPNG(bitmap, 146, 225, 13).getType()).isEqualTo(TRADITIONAL);
+        assertThat(parseMapPNG(bitmap, 181, 116, 13).getType()).isEqualTo(MYSTERY);
+        assertThat(parseMapPNG(bitmap, 118, 230, 13).getType()).isEqualTo(MULTI);
     }
 
     public void testParseMap12() {
@@ -90,15 +111,15 @@ public class IconDecoderTest extends AbstractResourceInstrumentationTestCase {
     }
 
     public void testParseExtraMap1() {
-        final Bitmap bitmap = getBitmap(R.raw.map1);
+        final Bitmap bitmap = getBitmap(map1);
         assertThat(parseMapPNG(bitmap, 128, 168, 12).isFound()).isTrue(); // GC3AT8B
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 172, 164, 12).getType()); // GC39EXB
+        assertThat(parseMapPNG(bitmap, 172, 164, 12).getType()).isEqualTo(MYSTERY); // GC39EXB
         assertThat(parseMapPNG(bitmap, 164, 156, 12).isFound()).isTrue(); // GC30M7M
-        assertEquals(CacheType.MULTI, parseMapPNG(bitmap, 204, 72, 12).getType()); // GC3AN5Z
+        assertThat(parseMapPNG(bitmap, 204, 72, 12).getType()).isEqualTo(MULTI); // GC3AN5Z
         assertThat(parseMapPNG(bitmap, 188, 92, 12).isFound()).isTrue(); // GC37T3R
         assertThat(parseMapPNG(bitmap, 164, 132, 12).isFound()).isTrue(); // GC34JME
-        assertEquals(CacheType.MULTI, parseMapPNG(bitmap, 176, 148, 12).getType()); // GC37TCY
-        assertEquals(CacheType.EARTH, parseMapPNG(bitmap, 180, 136, 12).getType()); // GC3947Z
+        assertThat(parseMapPNG(bitmap, 176, 148, 12).getType()).isEqualTo(MULTI); // GC37TCY
+        assertThat(parseMapPNG(bitmap, 180, 136, 12).getType()).isEqualTo(EARTH); // GC3947Z
         assertThat(parseMapPNG(bitmap, 164, 100, 12).isFound()).isTrue(); // GC2ZY3X
         assertThat(parseMapPNG(bitmap, 52, 104, 12).isFound()).isTrue(); // GC29RCW
         assertThat(parseMapPNG(bitmap, 168, 88, 12).isFound()).isTrue(); // GC264JZ
@@ -132,263 +153,263 @@ public class IconDecoderTest extends AbstractResourceInstrumentationTestCase {
     }
 
     public void testParseExtraMap3() {
-        final Bitmap bitmap = getBitmap(R.raw.map3);
+        final Bitmap bitmap = getBitmap(map3);
 
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 44, 0, 12).getType()); // GC1THF5
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 176, 100, 12).getType()); // GC29EGE
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 212, 128, 12).getType()); // GC1VR64
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 220, 56, 12).getType()); // GC1M13A
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 120, 80, 12).getType()); // GC1ZA2Z
-        assertEquals(CacheType.MULTI, parseMapPNG(bitmap, 148, 56, 12).getType()); // GC1MRD8
-        assertEquals(CacheType.MULTI, parseMapPNG(bitmap, 252, 8, 12).getType()); // GC3AGEX
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 76, 108, 12).getType()); // GC2C5RB
-        assertEquals(CacheType.MULTI, parseMapPNG(bitmap, 228, 188, 12).getType()); // GC33TWE
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 232, 128, 12).getType()); // GC38QDJ
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 228, 160, 12).getType()); // GC2G8M1
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 184, 64, 12).getType()); // GC2FYH4
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 60, 132, 12).getType()); // GC299CV
-        assertEquals(CacheType.EVENT, parseMapPNG(bitmap, 244, 124, 12).getType()); // GC3E5FW
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 200, 160, 12).getType()); // GC29NR9
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 216, 116, 12).getType()); // GC17P5R
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 144, 92, 12).getType()); // GC1WYN3
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 80, 4, 12).getType()); // GC2Z90W
-        assertEquals(CacheType.MULTI, parseMapPNG(bitmap, 216, 148, 12).getType()); // GC29M3P
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 176, 148, 12).getType()); // GC2HJ88
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 68, 72, 12).getType()); // GC1VRB4
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 232, 100, 12).getType()); // GC29EG4
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 220, 68, 12).getType()); // GC2YXH8
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 248, 156, 12).getType()); // GC1F277
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 208, 80, 12).getType()); // GC2NV6T
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 60, 92, 12).getType()); // GC2Y2YY
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 188, 168, 12).getType()); // GC26RT7
-        assertEquals(CacheType.MULTI, parseMapPNG(bitmap, 224, 124, 12).getType()); // GC1ZBPC
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 144, 80, 12).getType()); // GC29NQJ
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 192, 124, 12).getType()); // GC1QRAP
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 104, 116, 12).getType()); // GC29NR1
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 240, 44, 12).getType()); // GC35KYR
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 168, 0, 12).getType()); // GC1VR78
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 200, 84, 12).getType()); // GC2YR8Z
-        assertEquals(CacheType.MULTI, parseMapPNG(bitmap, 52, 160, 12).getType()); // GC1MTD8
-        assertEquals(CacheType.MULTI, parseMapPNG(bitmap, 236, 156, 12).getType()); // GCYW8A
+        assertThat(parseMapPNG(bitmap, 44, 0, 12).getType()).isEqualTo(TRADITIONAL); // GC1THF5
+        assertThat(parseMapPNG(bitmap, 176, 100, 12).getType()).isEqualTo(MYSTERY); // GC29EGE
+        assertThat(parseMapPNG(bitmap, 212, 128, 12).getType()).isEqualTo(TRADITIONAL); // GC1VR64
+        assertThat(parseMapPNG(bitmap, 220, 56, 12).getType()).isEqualTo(MYSTERY); // GC1M13A
+        assertThat(parseMapPNG(bitmap, 120, 80, 12).getType()).isEqualTo(TRADITIONAL); // GC1ZA2Z
+        assertThat(parseMapPNG(bitmap, 148, 56, 12).getType()).isEqualTo(MULTI); // GC1MRD8
+        assertThat(parseMapPNG(bitmap, 252, 8, 12).getType()).isEqualTo(MULTI); // GC3AGEX
+        assertThat(parseMapPNG(bitmap, 76, 108, 12).getType()).isEqualTo(TRADITIONAL); // GC2C5RB
+        assertThat(parseMapPNG(bitmap, 228, 188, 12).getType()).isEqualTo(MULTI); // GC33TWE
+        assertThat(parseMapPNG(bitmap, 232, 128, 12).getType()).isEqualTo(TRADITIONAL); // GC38QDJ
+        assertThat(parseMapPNG(bitmap, 228, 160, 12).getType()).isEqualTo(TRADITIONAL); // GC2G8M1
+        assertThat(parseMapPNG(bitmap, 184, 64, 12).getType()).isEqualTo(TRADITIONAL); // GC2FYH4
+        assertThat(parseMapPNG(bitmap, 60, 132, 12).getType()).isEqualTo(TRADITIONAL); // GC299CV
+        assertThat(parseMapPNG(bitmap, 244, 124, 12).getType()).isEqualTo(EVENT); // GC3E5FW
+        assertThat(parseMapPNG(bitmap, 200, 160, 12).getType()).isEqualTo(MYSTERY); // GC29NR9
+        assertThat(parseMapPNG(bitmap, 216, 116, 12).getType()).isEqualTo(TRADITIONAL); // GC17P5R
+        assertThat(parseMapPNG(bitmap, 144, 92, 12).getType()).isEqualTo(MYSTERY); // GC1WYN3
+        assertThat(parseMapPNG(bitmap, 80, 4, 12).getType()).isEqualTo(TRADITIONAL); // GC2Z90W
+        assertThat(parseMapPNG(bitmap, 216, 148, 12).getType()).isEqualTo(MULTI); // GC29M3P
+        assertThat(parseMapPNG(bitmap, 176, 148, 12).getType()).isEqualTo(TRADITIONAL); // GC2HJ88
+        assertThat(parseMapPNG(bitmap, 68, 72, 12).getType()).isEqualTo(TRADITIONAL); // GC1VRB4
+        assertThat(parseMapPNG(bitmap, 232, 100, 12).getType()).isEqualTo(MYSTERY); // GC29EG4
+        assertThat(parseMapPNG(bitmap, 220, 68, 12).getType()).isEqualTo(TRADITIONAL); // GC2YXH8
+        assertThat(parseMapPNG(bitmap, 248, 156, 12).getType()).isEqualTo(TRADITIONAL); // GC1F277
+        assertThat(parseMapPNG(bitmap, 208, 80, 12).getType()).isEqualTo(MYSTERY); // GC2NV6T
+        assertThat(parseMapPNG(bitmap, 60, 92, 12).getType()).isEqualTo(TRADITIONAL); // GC2Y2YY
+        assertThat(parseMapPNG(bitmap, 188, 168, 12).getType()).isEqualTo(TRADITIONAL); // GC26RT7
+        assertThat(parseMapPNG(bitmap, 224, 124, 12).getType()).isEqualTo(MULTI); // GC1ZBPC
+        assertThat(parseMapPNG(bitmap, 144, 80, 12).getType()).isEqualTo(MYSTERY); // GC29NQJ
+        assertThat(parseMapPNG(bitmap, 192, 124, 12).getType()).isEqualTo(TRADITIONAL); // GC1QRAP
+        assertThat(parseMapPNG(bitmap, 104, 116, 12).getType()).isEqualTo(TRADITIONAL); // GC29NR1
+        assertThat(parseMapPNG(bitmap, 240, 44, 12).getType()).isEqualTo(TRADITIONAL); // GC35KYR
+        assertThat(parseMapPNG(bitmap, 168, 0, 12).getType()).isEqualTo(TRADITIONAL); // GC1VR78
+        assertThat(parseMapPNG(bitmap, 200, 84, 12).getType()).isEqualTo(TRADITIONAL); // GC2YR8Z
+        assertThat(parseMapPNG(bitmap, 52, 160, 12).getType()).isEqualTo(MULTI); // GC1MTD8
+        assertThat(parseMapPNG(bitmap, 236, 156, 12).getType()).isEqualTo(MULTI); // GCYW8A
 
     }
 
     public void testParseExtraMap4() {
-        final Bitmap bitmap = getBitmap(R.raw.map4);
+        final Bitmap bitmap = getBitmap(map4);
 
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 124, 84, 12).getType()); // GC2M3CD
-        assertEquals(CacheType.MULTI, parseMapPNG(bitmap, 92, 140, 12).getType()); // GC1W2A2
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 156, 108, 12).getType()); // GC3FR70
-        assertEquals(CacheType.MULTI, parseMapPNG(bitmap, 44, 72, 12).getType()); // GC10W91
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 104, 36, 12).getType()); // GCRC1W
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 88, 36, 12).getType()); // GC30PQF
+        assertThat(parseMapPNG(bitmap, 124, 84, 12).getType()).isEqualTo(MYSTERY); // GC2M3CD
+        assertThat(parseMapPNG(bitmap, 92, 140, 12).getType()).isEqualTo(MULTI); // GC1W2A2
+        assertThat(parseMapPNG(bitmap, 156, 108, 12).getType()).isEqualTo(MYSTERY); // GC3FR70
+        assertThat(parseMapPNG(bitmap, 44, 72, 12).getType()).isEqualTo(MULTI); // GC10W91
+        assertThat(parseMapPNG(bitmap, 104, 36, 12).getType()).isEqualTo(MYSTERY); // GCRC1W
+        assertThat(parseMapPNG(bitmap, 88, 36, 12).getType()).isEqualTo(TRADITIONAL); // GC30PQF
         assertThat(parseMapPNG(bitmap, 116, 36, 12).isFound()).isTrue(); // GC17VWA
-        assertEquals(CacheType.EARTH, parseMapPNG(bitmap, 28, 56, 12).getType()); // GC1E6A6
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 96, 72, 12).getType()); // GCMVAC
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 140, 48, 12).getType()); // GCZPE4
-        assertEquals(CacheType.MULTI, parseMapPNG(bitmap, 88, 84, 12).getType()); // GC16G8B
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 116, 48, 12).getType()); // GCZPEB
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 148, 8, 12).getType()); // GC19QQ4
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 68, 124, 12).getType()); // GCXJGD
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 88, 156, 12).getType()); // GC1VNAE
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 24, 24, 12).getType()); // GC1AY4H
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 180, 60, 12).getType()); // GC3K4HB
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 56, 104, 12).getType()); // GC2M4EH
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 12, 132, 12).getType()); // GC2B92G
-        assertEquals(CacheType.MULTI, parseMapPNG(bitmap, 240, 180, 12).getType()); // GC2YJ88
-        assertEquals(CacheType.MULTI, parseMapPNG(bitmap, 220, 140, 12).getType()); // GC2AWBC
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 124, 44, 12).getType()); // GC16V66
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 116, 104, 12).getType()); // GC2MN5V
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 212, 4, 12).getType()); // GC3BF7V
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 168, 40, 12).getType()); // GC1PB21
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 252, 56, 12).getType()); // GC22VTB
-        assertEquals(CacheType.MULTI, parseMapPNG(bitmap, 108, 64, 12).getType()); // GCVE3B
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 20, 140, 12).getType()); // GC1R041
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 124, 244, 12).getType()); // GC3DWEA
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 240, 136, 12).getType()); // GC249ZE
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 124, 56, 12).getType()); // GC1X0XJ
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 56, 16, 12).getType()); // GC2ZVGB
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 164, 164, 12).getType()); // GC3D65W
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 240, 128, 12).getType()); // GC33KV9
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 220, 244, 12).getType()); // GC21VT0
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 84, 24, 12).getType()); // GC1949K
-        assertEquals(CacheType.MULTI, parseMapPNG(bitmap, 104, 88, 12).getType()); // GC1FKZY
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 56, 248, 12).getType()); // GC2Y5Z4
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 72, 32, 12).getType()); // GC395J6
+        assertThat(parseMapPNG(bitmap, 28, 56, 12).getType()).isEqualTo(EARTH); // GC1E6A6
+        assertThat(parseMapPNG(bitmap, 96, 72, 12).getType()).isEqualTo(TRADITIONAL); // GCMVAC
+        assertThat(parseMapPNG(bitmap, 140, 48, 12).getType()).isEqualTo(MYSTERY); // GCZPE4
+        assertThat(parseMapPNG(bitmap, 88, 84, 12).getType()).isEqualTo(MULTI); // GC16G8B
+        assertThat(parseMapPNG(bitmap, 116, 48, 12).getType()).isEqualTo(MYSTERY); // GCZPEB
+        assertThat(parseMapPNG(bitmap, 148, 8, 12).getType()).isEqualTo(MYSTERY); // GC19QQ4
+        assertThat(parseMapPNG(bitmap, 68, 124, 12).getType()).isEqualTo(TRADITIONAL); // GCXJGD
+        assertThat(parseMapPNG(bitmap, 88, 156, 12).getType()).isEqualTo(TRADITIONAL); // GC1VNAE
+        assertThat(parseMapPNG(bitmap, 24, 24, 12).getType()).isEqualTo(TRADITIONAL); // GC1AY4H
+        assertThat(parseMapPNG(bitmap, 180, 60, 12).getType()).isEqualTo(MYSTERY); // GC3K4HB
+        assertThat(parseMapPNG(bitmap, 56, 104, 12).getType()).isEqualTo(MYSTERY); // GC2M4EH
+        assertThat(parseMapPNG(bitmap, 12, 132, 12).getType()).isEqualTo(MYSTERY); // GC2B92G
+        assertThat(parseMapPNG(bitmap, 240, 180, 12).getType()).isEqualTo(MULTI); // GC2YJ88
+        assertThat(parseMapPNG(bitmap, 220, 140, 12).getType()).isEqualTo(MULTI); // GC2AWBC
+        assertThat(parseMapPNG(bitmap, 124, 44, 12).getType()).isEqualTo(MYSTERY); // GC16V66
+        assertThat(parseMapPNG(bitmap, 116, 104, 12).getType()).isEqualTo(MYSTERY); // GC2MN5V
+        assertThat(parseMapPNG(bitmap, 212, 4, 12).getType()).isEqualTo(TRADITIONAL); // GC3BF7V
+        assertThat(parseMapPNG(bitmap, 168, 40, 12).getType()).isEqualTo(MYSTERY); // GC1PB21
+        assertThat(parseMapPNG(bitmap, 252, 56, 12).getType()).isEqualTo(TRADITIONAL); // GC22VTB
+        assertThat(parseMapPNG(bitmap, 108, 64, 12).getType()).isEqualTo(MULTI); // GCVE3B
+        assertThat(parseMapPNG(bitmap, 20, 140, 12).getType()).isEqualTo(TRADITIONAL); // GC1R041
+        assertThat(parseMapPNG(bitmap, 124, 244, 12).getType()).isEqualTo(MYSTERY); // GC3DWEA
+        assertThat(parseMapPNG(bitmap, 240, 136, 12).getType()).isEqualTo(MYSTERY); // GC249ZE
+        assertThat(parseMapPNG(bitmap, 124, 56, 12).getType()).isEqualTo(MYSTERY); // GC1X0XJ
+        assertThat(parseMapPNG(bitmap, 56, 16, 12).getType()).isEqualTo(TRADITIONAL); // GC2ZVGB
+        assertThat(parseMapPNG(bitmap, 164, 164, 12).getType()).isEqualTo(MYSTERY); // GC3D65W
+        assertThat(parseMapPNG(bitmap, 240, 128, 12).getType()).isEqualTo(TRADITIONAL); // GC33KV9
+        assertThat(parseMapPNG(bitmap, 220, 244, 12).getType()).isEqualTo(TRADITIONAL); // GC21VT0
+        assertThat(parseMapPNG(bitmap, 84, 24, 12).getType()).isEqualTo(TRADITIONAL); // GC1949K
+        assertThat(parseMapPNG(bitmap, 104, 88, 12).getType()).isEqualTo(MULTI); // GC1FKZY
+        assertThat(parseMapPNG(bitmap, 56, 248, 12).getType()).isEqualTo(TRADITIONAL); // GC2Y5Z4
+        assertThat(parseMapPNG(bitmap, 72, 32, 12).getType()).isEqualTo(TRADITIONAL); // GC395J6
         assertThat(parseMapPNG(bitmap, 180, 4, 12).isFound()).isTrue(); // GC21MFG
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 96, 100, 12).getType()); // GC1W45E
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 144, 160, 12).getType()); // GC37BA1
-        assertEquals(CacheType.MULTI, parseMapPNG(bitmap, 12, 4, 12).getType()); // GC1K8KR
-        assertEquals(CacheType.MULTI, parseMapPNG(bitmap, 172, 92, 12).getType()); // GC3EZZ4
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 188, 132, 12).getType()); // GC26T9J
-        assertEquals(CacheType.MULTI, parseMapPNG(bitmap, 68, 192, 12).getType()); // GC1ZAMG
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 176, 180, 12).getType()); // GC21EZE
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 172, 76, 12).getType()); // GC1G5PT
-        assertEquals(CacheType.MULTI, parseMapPNG(bitmap, 208, 112, 12).getType()); // GC132VV
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 156, 40, 12).getType()); // GC264J4
-        assertEquals(CacheType.MULTI, parseMapPNG(bitmap, 252, 140, 12).getType()); // GC2JBNE
-        assertEquals(CacheType.MULTI, parseMapPNG(bitmap, 112, 76, 12).getType()); // GC16VKJ
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 16, 156, 12).getType()); // GC2ADX3
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 68, 48, 12).getType()); // GC2AZT1
-        assertEquals(CacheType.MULTI, parseMapPNG(bitmap, 176, 252, 12).getType()); // GC3DWNM
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 4, 156, 12).getType()); // GC30VHE
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 156, 120, 12).getType()); // GC1T9WM
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 40, 48, 12).getType()); // GC30MTZ
-        assertEquals(CacheType.MULTI, parseMapPNG(bitmap, 180, 232, 12).getType()); // GC2XVQA
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 72, 92, 12).getType()); // GC1VVA9
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 0, 132, 12).getType()); // GC1XNN4
-        assertEquals(CacheType.MULTI, parseMapPNG(bitmap, 92, 192, 12).getType()); // GC11D9P
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 52, 84, 12).getType()); // GC2M693
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 176, 196, 12).getType()); // GCZHVE
+        assertThat(parseMapPNG(bitmap, 96, 100, 12).getType()).isEqualTo(TRADITIONAL); // GC1W45E
+        assertThat(parseMapPNG(bitmap, 144, 160, 12).getType()).isEqualTo(TRADITIONAL); // GC37BA1
+        assertThat(parseMapPNG(bitmap, 12, 4, 12).getType()).isEqualTo(MULTI); // GC1K8KR
+        assertThat(parseMapPNG(bitmap, 172, 92, 12).getType()).isEqualTo(MULTI); // GC3EZZ4
+        assertThat(parseMapPNG(bitmap, 188, 132, 12).getType()).isEqualTo(MYSTERY); // GC26T9J
+        assertThat(parseMapPNG(bitmap, 68, 192, 12).getType()).isEqualTo(MULTI); // GC1ZAMG
+        assertThat(parseMapPNG(bitmap, 176, 180, 12).getType()).isEqualTo(MYSTERY); // GC21EZE
+        assertThat(parseMapPNG(bitmap, 172, 76, 12).getType()).isEqualTo(MYSTERY); // GC1G5PT
+        assertThat(parseMapPNG(bitmap, 208, 112, 12).getType()).isEqualTo(MULTI); // GC132VV
+        assertThat(parseMapPNG(bitmap, 156, 40, 12).getType()).isEqualTo(MYSTERY); // GC264J4
+        assertThat(parseMapPNG(bitmap, 252, 140, 12).getType()).isEqualTo(MULTI); // GC2JBNE
+        assertThat(parseMapPNG(bitmap, 112, 76, 12).getType()).isEqualTo(MULTI); // GC16VKJ
+        assertThat(parseMapPNG(bitmap, 16, 156, 12).getType()).isEqualTo(MYSTERY); // GC2ADX3
+        assertThat(parseMapPNG(bitmap, 68, 48, 12).getType()).isEqualTo(MYSTERY); // GC2AZT1
+        assertThat(parseMapPNG(bitmap, 176, 252, 12).getType()).isEqualTo(MULTI); // GC3DWNM
+        assertThat(parseMapPNG(bitmap, 4, 156, 12).getType()).isEqualTo(TRADITIONAL); // GC30VHE
+        assertThat(parseMapPNG(bitmap, 156, 120, 12).getType()).isEqualTo(MYSTERY); // GC1T9WM
+        assertThat(parseMapPNG(bitmap, 40, 48, 12).getType()).isEqualTo(MYSTERY); // GC30MTZ
+        assertThat(parseMapPNG(bitmap, 180, 232, 12).getType()).isEqualTo(MULTI); // GC2XVQA
+        assertThat(parseMapPNG(bitmap, 72, 92, 12).getType()).isEqualTo(TRADITIONAL); // GC1VVA9
+        assertThat(parseMapPNG(bitmap, 0, 132, 12).getType()).isEqualTo(TRADITIONAL); // GC1XNN4
+        assertThat(parseMapPNG(bitmap, 92, 192, 12).getType()).isEqualTo(MULTI); // GC11D9P
+        assertThat(parseMapPNG(bitmap, 52, 84, 12).getType()).isEqualTo(MYSTERY); // GC2M693
+        assertThat(parseMapPNG(bitmap, 176, 196, 12).getType()).isEqualTo(MYSTERY); // GCZHVE
         assertThat(parseMapPNG(bitmap, 140, 108, 12).isFound()).isTrue(); // GC1Q5PW
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 108, 148, 12).getType()); // GC2ZR0C
-        assertEquals(CacheType.MULTI, parseMapPNG(bitmap, 168, 8, 12).getType()); // GCYWQH
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 196, 92, 12).getType()); // GC39VXN
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 148, 136, 12).getType()); // GC2MM6C
-        assertEquals(CacheType.MULTI, parseMapPNG(bitmap, 168, 28, 12).getType()); // GC2H1TG
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 240, 52, 12).getType()); // GC2QTXT
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 152, 148, 12).getType()); // GC3E7QD
+        assertThat(parseMapPNG(bitmap, 108, 148, 12).getType()).isEqualTo(MYSTERY); // GC2ZR0C
+        assertThat(parseMapPNG(bitmap, 168, 8, 12).getType()).isEqualTo(MULTI); // GCYWQH
+        assertThat(parseMapPNG(bitmap, 196, 92, 12).getType()).isEqualTo(MYSTERY); // GC39VXN
+        assertThat(parseMapPNG(bitmap, 148, 136, 12).getType()).isEqualTo(MYSTERY); // GC2MM6C
+        assertThat(parseMapPNG(bitmap, 168, 28, 12).getType()).isEqualTo(MULTI); // GC2H1TG
+        assertThat(parseMapPNG(bitmap, 240, 52, 12).getType()).isEqualTo(MYSTERY); // GC2QTXT
+        assertThat(parseMapPNG(bitmap, 152, 148, 12).getType()).isEqualTo(MYSTERY); // GC3E7QD
         assertThat(parseMapPNG(bitmap, 160, 60, 12).isFound()).isTrue(); // GC2J3G9
         assertThat(parseMapPNG(bitmap, 160, 100, 12).isFound()).isTrue(); // GC2327G
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 136, 32, 12).getType()); // GC2JVEH
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 208, 164, 12).getType()); // GC1NN15
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 84, 244, 12).getType()); // GC3E5JP
-        assertEquals(CacheType.MULTI, parseMapPNG(bitmap, 172, 16, 12).getType()); // GC1Z581
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 104, 20, 12).getType()); // GC2MENX
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 144, 60, 12).getType()); // GC1V3MG
+        assertThat(parseMapPNG(bitmap, 136, 32, 12).getType()).isEqualTo(MYSTERY); // GC2JVEH
+        assertThat(parseMapPNG(bitmap, 208, 164, 12).getType()).isEqualTo(TRADITIONAL); // GC1NN15
+        assertThat(parseMapPNG(bitmap, 84, 244, 12).getType()).isEqualTo(TRADITIONAL); // GC3E5JP
+        assertThat(parseMapPNG(bitmap, 172, 16, 12).getType()).isEqualTo(MULTI); // GC1Z581
+        assertThat(parseMapPNG(bitmap, 104, 20, 12).getType()).isEqualTo(MYSTERY); // GC2MENX
+        assertThat(parseMapPNG(bitmap, 144, 60, 12).getType()).isEqualTo(TRADITIONAL); // GC1V3MG
         assertThat(parseMapPNG(bitmap, 228, 56, 12).isFound()).isTrue(); // GC36WZN
-        assertEquals(CacheType.MULTI, parseMapPNG(bitmap, 144, 212, 12).getType()); // GCR9GB
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 180, 68, 12).getType()); // GC3JZ1K
-        assertEquals(CacheType.MULTI, parseMapPNG(bitmap, 228, 104, 12).getType()); // GCQ95T
-        assertEquals(CacheType.MULTI, parseMapPNG(bitmap, 84, 220, 12).getType()); // GCWTVM
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 200, 228, 12).getType()); // GC3CC1A
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 204, 56, 12).getType()); // GC1K0WX
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 244, 208, 12).getType()); // GC1JVXG
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 84, 128, 12).getType()); // GC2XQ6C
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 248, 164, 12).getType()); // GC3B1JK
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 232, 84, 12).getType()); // GC3AT8J
+        assertThat(parseMapPNG(bitmap, 144, 212, 12).getType()).isEqualTo(MULTI); // GCR9GB
+        assertThat(parseMapPNG(bitmap, 180, 68, 12).getType()).isEqualTo(MYSTERY); // GC3JZ1K
+        assertThat(parseMapPNG(bitmap, 228, 104, 12).getType()).isEqualTo(MULTI); // GCQ95T
+        assertThat(parseMapPNG(bitmap, 84, 220, 12).getType()).isEqualTo(MULTI); // GCWTVM
+        assertThat(parseMapPNG(bitmap, 200, 228, 12).getType()).isEqualTo(MYSTERY); // GC3CC1A
+        assertThat(parseMapPNG(bitmap, 204, 56, 12).getType()).isEqualTo(TRADITIONAL); // GC1K0WX
+        assertThat(parseMapPNG(bitmap, 244, 208, 12).getType()).isEqualTo(MYSTERY); // GC1JVXG
+        assertThat(parseMapPNG(bitmap, 84, 128, 12).getType()).isEqualTo(TRADITIONAL); // GC2XQ6C
+        assertThat(parseMapPNG(bitmap, 248, 164, 12).getType()).isEqualTo(MYSTERY); // GC3B1JK
+        assertThat(parseMapPNG(bitmap, 232, 84, 12).getType()).isEqualTo(MYSTERY); // GC3AT8J
         assertThat(parseMapPNG(bitmap, 160, 88, 12).isFound()).isTrue(); // GC2MB4P
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 132, 20, 12).getType()); // GC2NW3F
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 56, 132, 12).getType()); // GC22ERA
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 28, 32, 12).getType()); // GC2EFFK
+        assertThat(parseMapPNG(bitmap, 132, 20, 12).getType()).isEqualTo(MYSTERY); // GC2NW3F
+        assertThat(parseMapPNG(bitmap, 56, 132, 12).getType()).isEqualTo(MYSTERY); // GC22ERA
+        assertThat(parseMapPNG(bitmap, 28, 32, 12).getType()).isEqualTo(MYSTERY); // GC2EFFK
     }
 
     public void testParseExtraMap5() {
-        final Bitmap bitmap = getBitmap(R.raw.map5);
+        final Bitmap bitmap = getBitmap(map5);
 
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 60, 32, 12).getType()); // GC31DNK
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 200, 120, 12).getType()); // GCP89K
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 144, 152, 12).getType()); // GC22AR8
-        assertEquals(CacheType.MULTI, parseMapPNG(bitmap, 164, 92, 12).getType()); // GC1MFB7
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 16, 212, 12).getType()); // GC12F2K
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 188, 12, 12).getType()); // GC24J14
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 36, 72, 12).getType()); // GC2J8MY
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 152, 140, 12).getType()); // GC1H9WQ
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 44, 40, 12).getType()); // GC31DNZ
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 8, 152, 12).getType()); // GC34YFB
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 200, 216, 12).getType()); // GC30MK5
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 84, 20, 12).getType()); // GC304YY
-        assertEquals(CacheType.MULTI, parseMapPNG(bitmap, 192, 236, 12).getType()); // GC1D6AC
-        assertEquals(CacheType.MULTI, parseMapPNG(bitmap, 220, 48, 12).getType()); // GC1HQ8Y
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 136, 176, 12).getType()); // GC310B7
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 132, 232, 12).getType()); // GC12CR5
+        assertThat(parseMapPNG(bitmap, 60, 32, 12).getType()).isEqualTo(TRADITIONAL); // GC31DNK
+        assertThat(parseMapPNG(bitmap, 200, 120, 12).getType()).isEqualTo(TRADITIONAL); // GCP89K
+        assertThat(parseMapPNG(bitmap, 144, 152, 12).getType()).isEqualTo(TRADITIONAL); // GC22AR8
+        assertThat(parseMapPNG(bitmap, 164, 92, 12).getType()).isEqualTo(MULTI); // GC1MFB7
+        assertThat(parseMapPNG(bitmap, 16, 212, 12).getType()).isEqualTo(MYSTERY); // GC12F2K
+        assertThat(parseMapPNG(bitmap, 188, 12, 12).getType()).isEqualTo(MYSTERY); // GC24J14
+        assertThat(parseMapPNG(bitmap, 36, 72, 12).getType()).isEqualTo(MYSTERY); // GC2J8MY
+        assertThat(parseMapPNG(bitmap, 152, 140, 12).getType()).isEqualTo(MYSTERY); // GC1H9WQ
+        assertThat(parseMapPNG(bitmap, 44, 40, 12).getType()).isEqualTo(TRADITIONAL); // GC31DNZ
+        assertThat(parseMapPNG(bitmap, 8, 152, 12).getType()).isEqualTo(MYSTERY); // GC34YFB
+        assertThat(parseMapPNG(bitmap, 200, 216, 12).getType()).isEqualTo(MYSTERY); // GC30MK5
+        assertThat(parseMapPNG(bitmap, 84, 20, 12).getType()).isEqualTo(TRADITIONAL); // GC304YY
+        assertThat(parseMapPNG(bitmap, 192, 236, 12).getType()).isEqualTo(MULTI); // GC1D6AC
+        assertThat(parseMapPNG(bitmap, 220, 48, 12).getType()).isEqualTo(MULTI); // GC1HQ8Y
+        assertThat(parseMapPNG(bitmap, 136, 176, 12).getType()).isEqualTo(MYSTERY); // GC310B7
+        assertThat(parseMapPNG(bitmap, 132, 232, 12).getType()).isEqualTo(MYSTERY); // GC12CR5
         assertThat(parseMapPNG(bitmap, 240, 40, 12).isFound()).isTrue(); // GC24GW1
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 140, 116, 12).getType()); // GC2YYE7
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 124, 144, 12).getType()); // GC111RZ
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 48, 128, 12).getType()); // GC13A7V
-        assertEquals(CacheType.MULTI, parseMapPNG(bitmap, 136, 92, 12).getType()); // GC2BKW9
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 200, 184, 12).getType()); // GC30X0C
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 156, 200, 12).getType()); // GC17V4A
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 160, 120, 12).getType()); // GC2ZBWW
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 196, 36, 12).getType()); // GC14X25
-        assertEquals(CacheType.MULTI, parseMapPNG(bitmap, 192, 100, 12).getType()); // GC1HXAX
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 108, 168, 12).getType()); // GC3C043
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 232, 28, 12).getType()); // GC1TEAR
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 200, 204, 12).getType()); // GC3AKFV
+        assertThat(parseMapPNG(bitmap, 140, 116, 12).getType()).isEqualTo(MYSTERY); // GC2YYE7
+        assertThat(parseMapPNG(bitmap, 124, 144, 12).getType()).isEqualTo(MYSTERY); // GC111RZ
+        assertThat(parseMapPNG(bitmap, 48, 128, 12).getType()).isEqualTo(TRADITIONAL); // GC13A7V
+        assertThat(parseMapPNG(bitmap, 136, 92, 12).getType()).isEqualTo(MULTI); // GC2BKW9
+        assertThat(parseMapPNG(bitmap, 200, 184, 12).getType()).isEqualTo(MYSTERY); // GC30X0C
+        assertThat(parseMapPNG(bitmap, 156, 200, 12).getType()).isEqualTo(TRADITIONAL); // GC17V4A
+        assertThat(parseMapPNG(bitmap, 160, 120, 12).getType()).isEqualTo(MYSTERY); // GC2ZBWW
+        assertThat(parseMapPNG(bitmap, 196, 36, 12).getType()).isEqualTo(MYSTERY); // GC14X25
+        assertThat(parseMapPNG(bitmap, 192, 100, 12).getType()).isEqualTo(MULTI); // GC1HXAX
+        assertThat(parseMapPNG(bitmap, 108, 168, 12).getType()).isEqualTo(MYSTERY); // GC3C043
+        assertThat(parseMapPNG(bitmap, 232, 28, 12).getType()).isEqualTo(MYSTERY); // GC1TEAR
+        assertThat(parseMapPNG(bitmap, 200, 204, 12).getType()).isEqualTo(MYSTERY); // GC3AKFV
         assertThat(parseMapPNG(bitmap, 228, 28, 12).isFound()).isTrue(); // GC2NMPR
         //assertEquals(CacheType.VIRTUAL, parseMapPNG(bitmap, 232, 252, 12).getType()); // GC1AH0N - False detection
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 220, 188, 12).getType()); // GC1ZXDK
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 168, 212, 12).getType()); // GC3A919
-        assertEquals(CacheType.MULTI, parseMapPNG(bitmap, 152, 176, 12).getType()); // GC196WN
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 144, 180, 12).getType()); // GC12RE5
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 176, 116, 12).getType()); // GC1DY2M
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 44, 212, 12).getType()); // GC3MRNT
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 220, 36, 12).getType()); // GC3CWZD
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 48, 160, 12).getType()); // GC1A8E3
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 8, 252, 12).getType()); // GC10W6W
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 60, 92, 12).getType()); // GC2D9DD
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 96, 164, 12).getType()); // GC1Z4QX
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 220, 252, 12).getType()); // GCNEGK
-        assertEquals(CacheType.MULTI, parseMapPNG(bitmap, 32, 188, 12).getType()); // GC10916
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 204, 224, 12).getType()); // GC1CA2Y
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 120, 236, 12).getType()); // GC11B3J
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 248, 24, 12).getType()); // GCKX8C
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 128, 152, 12).getType()); // GC2V6AA
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 196, 48, 12).getType()); // GC2YG95
-        assertEquals(CacheType.MULTI, parseMapPNG(bitmap, 48, 64, 12).getType()); // GCHGR8
-        assertEquals(CacheType.EVENT, parseMapPNG(bitmap, 188, 96, 12).getType()); // GC3KBPK
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 208, 140, 12).getType()); // GC1C9B0
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 164, 100, 12).getType()); // GC29JGA
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 156, 28, 12).getType()); // GCN690
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 232, 20, 12).getType()); // GC18Z53
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 220, 152, 12).getType()); // GC18RB6
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 200, 248, 12).getType()); // GC2378H
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 248, 244, 12).getType()); // GCV8QA
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 12, 232, 12).getType()); // GC2MXDG
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 48, 248, 12).getType()); // GCTHJR
-        assertEquals(CacheType.MULTI, parseMapPNG(bitmap, 216, 200, 12).getType()); // GC1EPM5
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 232, 60, 12).getType()); // GC2N0PB
-        assertEquals(CacheType.MULTI, parseMapPNG(bitmap, 88, 56, 12).getType()); // GC1ZWNX
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 248, 56, 12).getType()); // GC1N11P
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 100, 180, 12).getType()); // GCM6AE
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 220, 124, 12).getType()); // GC2A1RQ
+        assertThat(parseMapPNG(bitmap, 220, 188, 12).getType()).isEqualTo(MYSTERY); // GC1ZXDK
+        assertThat(parseMapPNG(bitmap, 168, 212, 12).getType()).isEqualTo(MYSTERY); // GC3A919
+        assertThat(parseMapPNG(bitmap, 152, 176, 12).getType()).isEqualTo(MULTI); // GC196WN
+        assertThat(parseMapPNG(bitmap, 144, 180, 12).getType()).isEqualTo(MYSTERY); // GC12RE5
+        assertThat(parseMapPNG(bitmap, 176, 116, 12).getType()).isEqualTo(MYSTERY); // GC1DY2M
+        assertThat(parseMapPNG(bitmap, 44, 212, 12).getType()).isEqualTo(TRADITIONAL); // GC3MRNT
+        assertThat(parseMapPNG(bitmap, 220, 36, 12).getType()).isEqualTo(TRADITIONAL); // GC3CWZD
+        assertThat(parseMapPNG(bitmap, 48, 160, 12).getType()).isEqualTo(MYSTERY); // GC1A8E3
+        assertThat(parseMapPNG(bitmap, 8, 252, 12).getType()).isEqualTo(TRADITIONAL); // GC10W6W
+        assertThat(parseMapPNG(bitmap, 60, 92, 12).getType()).isEqualTo(MYSTERY); // GC2D9DD
+        assertThat(parseMapPNG(bitmap, 96, 164, 12).getType()).isEqualTo(MYSTERY); // GC1Z4QX
+        assertThat(parseMapPNG(bitmap, 220, 252, 12).getType()).isEqualTo(TRADITIONAL); // GCNEGK
+        assertThat(parseMapPNG(bitmap, 32, 188, 12).getType()).isEqualTo(MULTI); // GC10916
+        assertThat(parseMapPNG(bitmap, 204, 224, 12).getType()).isEqualTo(TRADITIONAL); // GC1CA2Y
+        assertThat(parseMapPNG(bitmap, 120, 236, 12).getType()).isEqualTo(MYSTERY); // GC11B3J
+        assertThat(parseMapPNG(bitmap, 248, 24, 12).getType()).isEqualTo(TRADITIONAL); // GCKX8C
+        assertThat(parseMapPNG(bitmap, 128, 152, 12).getType()).isEqualTo(TRADITIONAL); // GC2V6AA
+        assertThat(parseMapPNG(bitmap, 196, 48, 12).getType()).isEqualTo(TRADITIONAL); // GC2YG95
+        assertThat(parseMapPNG(bitmap, 48, 64, 12).getType()).isEqualTo(MULTI); // GCHGR8
+        assertThat(parseMapPNG(bitmap, 188, 96, 12).getType()).isEqualTo(EVENT); // GC3KBPK
+        assertThat(parseMapPNG(bitmap, 208, 140, 12).getType()).isEqualTo(MYSTERY); // GC1C9B0
+        assertThat(parseMapPNG(bitmap, 164, 100, 12).getType()).isEqualTo(MYSTERY); // GC29JGA
+        assertThat(parseMapPNG(bitmap, 156, 28, 12).getType()).isEqualTo(TRADITIONAL); // GCN690
+        assertThat(parseMapPNG(bitmap, 232, 20, 12).getType()).isEqualTo(MYSTERY); // GC18Z53
+        assertThat(parseMapPNG(bitmap, 220, 152, 12).getType()).isEqualTo(TRADITIONAL); // GC18RB6
+        assertThat(parseMapPNG(bitmap, 200, 248, 12).getType()).isEqualTo(MYSTERY); // GC2378H
+        assertThat(parseMapPNG(bitmap, 248, 244, 12).getType()).isEqualTo(TRADITIONAL); // GCV8QA
+        assertThat(parseMapPNG(bitmap, 12, 232, 12).getType()).isEqualTo(MYSTERY); // GC2MXDG
+        assertThat(parseMapPNG(bitmap, 48, 248, 12).getType()).isEqualTo(MYSTERY); // GCTHJR
+        assertThat(parseMapPNG(bitmap, 216, 200, 12).getType()).isEqualTo(MULTI); // GC1EPM5
+        assertThat(parseMapPNG(bitmap, 232, 60, 12).getType()).isEqualTo(MYSTERY); // GC2N0PB
+        assertThat(parseMapPNG(bitmap, 88, 56, 12).getType()).isEqualTo(MULTI); // GC1ZWNX
+        assertThat(parseMapPNG(bitmap, 248, 56, 12).getType()).isEqualTo(TRADITIONAL); // GC1N11P
+        assertThat(parseMapPNG(bitmap, 100, 180, 12).getType()).isEqualTo(MYSTERY); // GCM6AE
+        assertThat(parseMapPNG(bitmap, 220, 124, 12).getType()).isEqualTo(TRADITIONAL); // GC2A1RQ
         assertThat(parseMapPNG(bitmap, 212, 4, 12).isFound()).isTrue(); // GC1TVKE
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 28, 212, 12).getType()); // GC2A1RR
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 128, 84, 12).getType()); // GC16AWC
-        assertEquals(CacheType.MULTI, parseMapPNG(bitmap, 220, 16, 12).getType()); // GC282V9
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 112, 240, 12).getType()); // GC18VT5
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 80, 248, 12).getType()); // GC10YEK
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 224, 228, 12).getType()); // GC1EA70
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 232, 244, 12).getType()); // GC14PNY
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 108, 32, 12).getType()); // GC2MMPN
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 144, 188, 12).getType()); // GC1CCF4
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 228, 208, 12).getType()); // GCV8C2
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 104, 252, 12).getType()); // GCTRPF
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 176, 92, 12).getType()); // GCRF8G
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 120, 140, 12).getType()); // GC210B9
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 204, 240, 12).getType()); // GC16NTW
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 192, 224, 12).getType()); // GC2PTVN
-        assertEquals(CacheType.MULTI, parseMapPNG(bitmap, 76, 116, 12).getType()); // GC1RPG0
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 144, 200, 12).getType()); // GC1FZ4T
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 172, 36, 12).getType()); // GC1ZYG8
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 248, 196, 12).getType()); // GC17FJQ
-        assertEquals(CacheType.MULTI, parseMapPNG(bitmap, 88, 140, 12).getType()); // GC1KWK0
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 168, 196, 12).getType()); // GC17MNG
-        assertEquals(CacheType.MULTI, parseMapPNG(bitmap, 20, 252, 12).getType()); // GC13M6V
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 120, 172, 12).getType()); // GC3B30A
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 104, 92, 12).getType()); // GC2GY9D
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 128, 120, 12).getType()); // GC2Y90M
+        assertThat(parseMapPNG(bitmap, 28, 212, 12).getType()).isEqualTo(TRADITIONAL); // GC2A1RR
+        assertThat(parseMapPNG(bitmap, 128, 84, 12).getType()).isEqualTo(MYSTERY); // GC16AWC
+        assertThat(parseMapPNG(bitmap, 220, 16, 12).getType()).isEqualTo(MULTI); // GC282V9
+        assertThat(parseMapPNG(bitmap, 112, 240, 12).getType()).isEqualTo(MYSTERY); // GC18VT5
+        assertThat(parseMapPNG(bitmap, 80, 248, 12).getType()).isEqualTo(MYSTERY); // GC10YEK
+        assertThat(parseMapPNG(bitmap, 224, 228, 12).getType()).isEqualTo(MYSTERY); // GC1EA70
+        assertThat(parseMapPNG(bitmap, 232, 244, 12).getType()).isEqualTo(MYSTERY); // GC14PNY
+        assertThat(parseMapPNG(bitmap, 108, 32, 12).getType()).isEqualTo(TRADITIONAL); // GC2MMPN
+        assertThat(parseMapPNG(bitmap, 144, 188, 12).getType()).isEqualTo(TRADITIONAL); // GC1CCF4
+        assertThat(parseMapPNG(bitmap, 228, 208, 12).getType()).isEqualTo(TRADITIONAL); // GCV8C2
+        assertThat(parseMapPNG(bitmap, 104, 252, 12).getType()).isEqualTo(MYSTERY); // GCTRPF
+        assertThat(parseMapPNG(bitmap, 176, 92, 12).getType()).isEqualTo(TRADITIONAL); // GCRF8G
+        assertThat(parseMapPNG(bitmap, 120, 140, 12).getType()).isEqualTo(MYSTERY); // GC210B9
+        assertThat(parseMapPNG(bitmap, 204, 240, 12).getType()).isEqualTo(TRADITIONAL); // GC16NTW
+        assertThat(parseMapPNG(bitmap, 192, 224, 12).getType()).isEqualTo(MYSTERY); // GC2PTVN
+        assertThat(parseMapPNG(bitmap, 76, 116, 12).getType()).isEqualTo(MULTI); // GC1RPG0
+        assertThat(parseMapPNG(bitmap, 144, 200, 12).getType()).isEqualTo(MYSTERY); // GC1FZ4T
+        assertThat(parseMapPNG(bitmap, 172, 36, 12).getType()).isEqualTo(MYSTERY); // GC1ZYG8
+        assertThat(parseMapPNG(bitmap, 248, 196, 12).getType()).isEqualTo(TRADITIONAL); // GC17FJQ
+        assertThat(parseMapPNG(bitmap, 88, 140, 12).getType()).isEqualTo(MULTI); // GC1KWK0
+        assertThat(parseMapPNG(bitmap, 168, 196, 12).getType()).isEqualTo(MYSTERY); // GC17MNG
+        assertThat(parseMapPNG(bitmap, 20, 252, 12).getType()).isEqualTo(MULTI); // GC13M6V
+        assertThat(parseMapPNG(bitmap, 120, 172, 12).getType()).isEqualTo(MYSTERY); // GC3B30A
+        assertThat(parseMapPNG(bitmap, 104, 92, 12).getType()).isEqualTo(TRADITIONAL); // GC2GY9D
+        assertThat(parseMapPNG(bitmap, 128, 120, 12).getType()).isEqualTo(MYSTERY); // GC2Y90M
         assertThat(parseMapPNG(bitmap, 204, 40, 12).isFound()).isTrue(); // GC1BZ6P
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 56, 76, 12).getType()); // GC10K7X
-        assertEquals(CacheType.MULTI, parseMapPNG(bitmap, 196, 108, 12).getType()); // GC1F0R5
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 120, 196, 12).getType()); // GC1KQQW
+        assertThat(parseMapPNG(bitmap, 56, 76, 12).getType()).isEqualTo(MYSTERY); // GC10K7X
+        assertThat(parseMapPNG(bitmap, 196, 108, 12).getType()).isEqualTo(MULTI); // GC1F0R5
+        assertThat(parseMapPNG(bitmap, 120, 196, 12).getType()).isEqualTo(MYSTERY); // GC1KQQW
     }
 
     public void testParseExtraMap11() {
-        final Bitmap bitmap = getBitmap(R.raw.map11);
-        assertEquals(CacheType.EVENT, parseMapPNG(bitmap, 132, 16, 11).getType());
-        assertEquals(CacheType.MULTI, parseMapPNG(bitmap, 104, 48, 11).getType());
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 128, 124, 11).getType());
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 228, 8, 11).getType());
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 160, 156, 11).getType());
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 208, 176, 11).getType());
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 252, 24, 11).getType());
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 216, 96, 11).getType());
-        assertEquals(CacheType.EARTH, parseMapPNG(bitmap, 24, 212, 11).getType());
+        final Bitmap bitmap = getBitmap(map11);
+        assertThat(parseMapPNG(bitmap, 132, 16, 11).getType()).isEqualTo(EVENT);
+        assertThat(parseMapPNG(bitmap, 104, 48, 11).getType()).isEqualTo(MULTI);
+        assertThat(parseMapPNG(bitmap, 128, 124, 11).getType()).isEqualTo(TRADITIONAL);
+        assertThat(parseMapPNG(bitmap, 228, 8, 11).getType()).isEqualTo(TRADITIONAL);
+        assertThat(parseMapPNG(bitmap, 160, 156, 11).getType()).isEqualTo(TRADITIONAL);
+        assertThat(parseMapPNG(bitmap, 208, 176, 11).getType()).isEqualTo(MYSTERY);
+        assertThat(parseMapPNG(bitmap, 252, 24, 11).getType()).isEqualTo(MYSTERY);
+        assertThat(parseMapPNG(bitmap, 216, 96, 11).getType()).isEqualTo(MYSTERY);
+        assertThat(parseMapPNG(bitmap, 24, 212, 11).getType()).isEqualTo(EARTH);
     }
 
     public void testParseExtraMapall14() {
-        final Bitmap bitmap = getBitmap(R.raw.map_all14);
+        final Bitmap bitmap = getBitmap(map_all14);
         assertThat(parseMapPNG(bitmap, 40, 16, 14).isFound()).isTrue();
         assertThat(parseMapPNG(bitmap, 72, 16, 14).isFound()).isTrue();
         assertThat(parseMapPNG(bitmap, 100, 16, 14).isFound()).isTrue();
@@ -396,32 +417,32 @@ public class IconDecoderTest extends AbstractResourceInstrumentationTestCase {
         assertThat(parseMapPNG(bitmap, 44, 44, 14).isOwner()).isTrue();
         assertThat(parseMapPNG(bitmap, 76, 44, 14).isOwner()).isTrue();
         assertThat(parseMapPNG(bitmap, 132, 44, 14).isOwner()).isTrue();
-        assertEquals(CacheType.MULTI, parseMapPNG(bitmap, 40, 72, 14).getType());
-        assertEquals(CacheType.MULTI, parseMapPNG(bitmap, 72, 72, 14).getType());
-        assertEquals(CacheType.MULTI, parseMapPNG(bitmap, 100, 72, 14).getType());
-        assertEquals(CacheType.MULTI, parseMapPNG(bitmap, 128, 72, 14).getType());
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 40, 96, 14).getType());
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 72, 96, 14).getType());
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 100, 96, 14).getType());
-        assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 128, 96, 14).getType());
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 40, 124, 14).getType());
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 72, 124, 14).getType());
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 100, 124, 14).getType());
-        assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 128, 124, 14).getType());
-        assertEquals(CacheType.WHERIGO, parseMapPNG(bitmap, 40, 160, 14).getType());
-        assertEquals(CacheType.WHERIGO, parseMapPNG(bitmap, 72, 160, 14).getType());
-        assertEquals(CacheType.WHERIGO, parseMapPNG(bitmap, 100, 160, 14).getType());
-        assertEquals(CacheType.WHERIGO, parseMapPNG(bitmap, 128, 160, 14).getType());
-        assertEquals(CacheType.LETTERBOX, parseMapPNG(bitmap, 40, 184, 14).getType());
-        assertEquals(CacheType.LETTERBOX, parseMapPNG(bitmap, 72, 184, 14).getType());
-        assertEquals(CacheType.LETTERBOX, parseMapPNG(bitmap, 100, 184, 14).getType());
-        assertEquals(CacheType.LETTERBOX, parseMapPNG(bitmap, 128, 184, 14).getType());
+        assertThat(parseMapPNG(bitmap, 40, 72, 14).getType()).isEqualTo(MULTI);
+        assertThat(parseMapPNG(bitmap, 72, 72, 14).getType()).isEqualTo(MULTI);
+        assertThat(parseMapPNG(bitmap, 100, 72, 14).getType()).isEqualTo(MULTI);
+        assertThat(parseMapPNG(bitmap, 128, 72, 14).getType()).isEqualTo(MULTI);
+        assertThat(parseMapPNG(bitmap, 40, 96, 14).getType()).isEqualTo(MYSTERY);
+        assertThat(parseMapPNG(bitmap, 72, 96, 14).getType()).isEqualTo(MYSTERY);
+        assertThat(parseMapPNG(bitmap, 100, 96, 14).getType()).isEqualTo(MYSTERY);
+        assertThat(parseMapPNG(bitmap, 128, 96, 14).getType()).isEqualTo(MYSTERY);
+        assertThat(parseMapPNG(bitmap, 40, 124, 14).getType()).isEqualTo(TRADITIONAL);
+        assertThat(parseMapPNG(bitmap, 72, 124, 14).getType()).isEqualTo(TRADITIONAL);
+        assertThat(parseMapPNG(bitmap, 100, 124, 14).getType()).isEqualTo(TRADITIONAL);
+        assertThat(parseMapPNG(bitmap, 128, 124, 14).getType()).isEqualTo(TRADITIONAL);
+        assertThat(parseMapPNG(bitmap, 40, 160, 14).getType()).isEqualTo(WHERIGO);
+        assertThat(parseMapPNG(bitmap, 72, 160, 14).getType()).isEqualTo(WHERIGO);
+        assertThat(parseMapPNG(bitmap, 100, 160, 14).getType()).isEqualTo(WHERIGO);
+        assertThat(parseMapPNG(bitmap, 128, 160, 14).getType()).isEqualTo(WHERIGO);
+        assertThat(parseMapPNG(bitmap, 40, 184, 14).getType()).isEqualTo(LETTERBOX);
+        assertThat(parseMapPNG(bitmap, 72, 184, 14).getType()).isEqualTo(LETTERBOX);
+        assertThat(parseMapPNG(bitmap, 100, 184, 14).getType()).isEqualTo(LETTERBOX);
+        assertThat(parseMapPNG(bitmap, 128, 184, 14).getType()).isEqualTo(LETTERBOX);
 
-        assertEquals(CacheType.CITO, parseMapPNG(bitmap, 12, 224, 14).getType());
-        assertEquals(CacheType.EVENT, parseMapPNG(bitmap, 40, 220, 14).getType());
-        assertEquals(CacheType.EARTH, parseMapPNG(bitmap, 68, 224, 14).getType());
-        assertEquals(CacheType.MEGA_EVENT, parseMapPNG(bitmap, 96, 224, 14).getType());
-        assertEquals(CacheType.WEBCAM, parseMapPNG(bitmap, 120, 224, 14).getType());
-        assertEquals(CacheType.VIRTUAL, parseMapPNG(bitmap, 144, 224, 14).getType());
+        assertThat(parseMapPNG(bitmap, 12, 224, 14).getType()).isEqualTo(CITO);
+        assertThat(parseMapPNG(bitmap, 40, 220, 14).getType()).isEqualTo(EVENT);
+        assertThat(parseMapPNG(bitmap, 68, 224, 14).getType()).isEqualTo(EARTH);
+        assertThat(parseMapPNG(bitmap, 96, 224, 14).getType()).isEqualTo(MEGA_EVENT);
+        assertThat(parseMapPNG(bitmap, 120, 224, 14).getType()).isEqualTo(WEBCAM);
+        assertThat(parseMapPNG(bitmap, 144, 224, 14).getType()).isEqualTo(VIRTUAL);
     }
 }
