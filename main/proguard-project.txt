@@ -86,3 +86,6 @@
 -dontwarn com.caverock.androidsvg.R$styleable
 -dontwarn com.caverock.androidsvg.R
 -dontwarn org.kxml2.io.KXmlParser
+
+# ignore warning: Ignoring InnerClasses attribute for an anonymous inner class...
+-keepattributes EnclosingMethod
