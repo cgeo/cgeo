@@ -12,17 +12,20 @@ import cgeo.geocaching.sensors.RotationProvider;
 import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
 
-import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
-import android.support.annotation.NonNull;
-
+import android.Manifest;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Build.VERSION;
+import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 
 public final class SystemInformation {
 
@@ -63,6 +66,7 @@ public final class SystemInformation {
         if (Settings.useEnglish()) {
             body.append(" (cgeo forced to English)");
         }
+        appendPermissions(context, body);
         appendConnectors(body);
         appendAddons(body);
         body.append("\n--- End of system information ---\n");
@@ -89,7 +93,7 @@ public final class SystemInformation {
         body.append("\nGeocaching sites enabled:").append(connectorCount > 0 ? connectors : " None");
     }
 
-    private static void appendAddons(@NonNull final StringBuilder body) {
+    private static void appendAddons(final StringBuilder body) {
         final List<String> addons = new ArrayList<>(2);
         if (CalendarAddon.isAvailable()) {
             addons.add("calendar");
@@ -101,7 +105,16 @@ public final class SystemInformation {
         body.append(CollectionUtils.isNotEmpty(addons) ? StringUtils.join(addons, ", ") : " none");
     }
 
-    public static String presence(final boolean present) {
+    private static String presence(final boolean present) {
         return present ? "present" : "absent";
+    }
+
+    private static void appendPermission(final Context context, final StringBuilder body, final String name, final String permission) {
+        body.append('\n').append(name).append(" permission: ").append(ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED ? "granted" : "DENIED");
+    }
+
+    private static void appendPermissions(final Context context, final StringBuilder body) {
+        appendPermission(context, body, "Fine location", Manifest.permission.ACCESS_FINE_LOCATION);
+        appendPermission(context, body, "Write external storage", Manifest.permission.WRITE_EXTERNAL_STORAGE);
     }
 }
