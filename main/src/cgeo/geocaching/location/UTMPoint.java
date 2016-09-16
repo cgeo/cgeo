@@ -19,7 +19,7 @@ public class UTMPoint {
 
     private static final double WGS_84_RADIUS = 6378137.0d;
     private static final double WGS_84_ECC_SQUARED = 0.00669438d;
-    private static final double ECC_PRIME_SQUARED = (WGS_84_ECC_SQUARED) / (1 - WGS_84_ECC_SQUARED);
+    private static final double ECC_PRIME_SQUARED = WGS_84_ECC_SQUARED / (1 - WGS_84_ECC_SQUARED);
     private static final double ECC_SQUARED_2 = WGS_84_ECC_SQUARED * WGS_84_ECC_SQUARED;
     private static final double ECC_SQUARED_3 = ECC_SQUARED_2 * WGS_84_ECC_SQUARED;
     private static final double E_1 = (1 - Math.sqrt(1 - WGS_84_ECC_SQUARED)) / (1 + Math.sqrt(1 - WGS_84_ECC_SQUARED));
@@ -72,7 +72,7 @@ public class UTMPoint {
 
     /**
      * Constructs a new UTM instance.
-     * 
+     *
      * @param zoneNumber The zone of the coordinate.
      * @param zoneLetter For UTM, 'A' .. 'Z'
      * @param easting The easting component.
@@ -86,6 +86,7 @@ public class UTMPoint {
         this.northing = northing;
     }
 
+    @Override
     public boolean equals(final Object obj) {
         if (obj instanceof UTMPoint) {
             final UTMPoint pnt = (UTMPoint) obj;
@@ -100,10 +101,10 @@ public class UTMPoint {
     /**
      * Method that provides a check for UTM zone letters. Returns an uppercase
      * version of any valid letter passed in, 'A' .. 'Z'.
-     * 
+     *
      * @throws IllegalArgumentException if zone letter is invalid.
      */
-    private char checkZone(final char inZone) {
+    private static char checkZone(final char inZone) {
         final char zone = Character.toUpperCase(inZone);
 
         if (zone < 'A' || zone > 'Z') {
@@ -115,9 +116,10 @@ public class UTMPoint {
 
     /**
      * Returns a string representation of the object.
-     * 
+     *
      * @return String representation
      */
+    @Override
     public String toString() {
         return String.format("%d%c E %d N %d", zoneNumber, zoneLetter, Math.round(easting), Math.round(northing));
     }
@@ -204,16 +206,16 @@ public class UTMPoint {
                         * Math.sin(6 * latRad));
 
         final double utmEasting =
-                (K_0
+                K_0
                         * n
                         * (a + (1 - t + c) * a * a * a / 6.0d + (5 - 18 * t + t * t + 72 * c - 58 * ECC_PRIME_SQUARED) * a * a * a
-                        * a * a / 120.0d) + FALSE_EASTING);
+                                * a * a / 120.0d) + FALSE_EASTING;
 
         final double utmNorthing =
-                (K_0 * (m + n
+                K_0 * (m + n
                         * Math.tan(latRad)
                         * (a * a / 2 + (5 - t + 9 * c + 4 * c * c) * a * a * a * a / 24.0d + (61 - 58 * t + t * t + 600 * c - 330 * ECC_PRIME_SQUARED)
-                        * a * a * a * a * a * a / 720.0d)));
+                                * a * a * a * a * a * a / 720.0d));
 
         final char zoneLetter = getLetterDesignator(geopoint.getLatitude());
 
@@ -222,7 +224,7 @@ public class UTMPoint {
 
     /**
      * Find zone number based on the given latitude and longitude in *degrees*.
-     * 
+     *
      * @param lat in decimal degrees
      * @param lon in decimal degrees
      * @return zone number for UTM zone for lat, lon
