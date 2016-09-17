@@ -41,7 +41,7 @@ public abstract class MakeListUniqueCommand extends AbstractCommand {
             final HashSet<Integer> backupOfLists = new HashSet<>(geocache.getLists());
             final String geocode = geocache.getGeocode();
             // remove the current list, since that will ease the undo operation
-            backupOfLists.remove(geocode);
+            backupOfLists.remove(listId);
             oldLists.put(geocode, backupOfLists);
         }
 
