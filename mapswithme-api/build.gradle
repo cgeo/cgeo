@@ -3,7 +3,7 @@ apply plugin: 'android-library'
 android {
 
   // Define these properties in the gradle.properties file in the root project folder
-  compileSdkVersion 19
+  compileSdkVersion 23
   buildToolsVersion project.buildToolsVersion
 
   defaultConfig {
