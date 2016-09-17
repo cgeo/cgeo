@@ -1,14 +1,11 @@
 package cgeo.geocaching.location;
 
-import junit.framework.TestCase;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.offset;
 
 import cgeo.geocaching.utils.Formatter;
 
-import static cgeo.geocaching.location.GeopointParser.parse;
-import static cgeo.geocaching.location.GeopointParser.parseLatitude;
-import static cgeo.geocaching.location.GeopointParser.parseLongitude;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.offset;
+import junit.framework.TestCase;
 
 public class GeoPointParserTest extends TestCase {
 
@@ -52,15 +49,15 @@ public class GeoPointParserTest extends TestCase {
     }
 
     public static void testSouth() {
-        assertThat(parseLatitude("S 49° 56.031")).isEqualTo(-refLatitude, offset(1e-8));
+        assertThat(GeopointParser.parseLatitude("S 49° 56.031")).isEqualTo(-refLatitude, offset(1e-8));
     }
 
     public static void testWest() {
-        assertThat(parseLongitude("W 8° 38.564")).isEqualTo(-refLongitude, offset(1e-8));
+        assertThat(GeopointParser.parseLongitude("W 8° 38.564")).isEqualTo(-refLongitude, offset(1e-8));
     }
 
     public static void testLowerCase() {
-        assertThat(parseLongitude("e 8° 38.564")).isEqualTo(refLongitude, offset(1e-8));
+        assertThat(GeopointParser.parseLongitude("e 8° 38.564")).isEqualTo(refLongitude, offset(1e-8));
     }
 
     public static void testVariousFormats() {
@@ -104,23 +101,23 @@ public class GeoPointParserTest extends TestCase {
     }
 
     public static void testBlankAddedByAutocorrectionDot() {
-        assertThat(parseLatitude("N 49° 56. 031")).isEqualTo(refLatitude, offset(1e-8));
+        assertThat(GeopointParser.parseLatitude("N 49° 56. 031")).isEqualTo(refLatitude, offset(1e-8));
     }
 
     public static void testBlankAddedByAutocorrectionComma() {
-        assertThat(parseLatitude("N 49° 56, 031")).isEqualTo(refLatitude, offset(1e-8));
+        assertThat(GeopointParser.parseLatitude("N 49° 56, 031")).isEqualTo(refLatitude, offset(1e-8));
     }
 
     public static void testNonTrimmed() {
-        assertThat(parseLatitude("    N 49° 56, 031   ")).isEqualTo(refLatitude, offset(1e-8));
+        assertThat(GeopointParser.parseLatitude("    N 49° 56, 031   ")).isEqualTo(refLatitude, offset(1e-8));
     }
 
     public static void testEquatorGC53() {
-        assertThat(parse("00° 00.000 E 036° 00.000")).isEqualTo(new Geopoint(0, 36));
+        assertThat(GeopointParser.parse("00° 00.000 E 036° 00.000")).isEqualTo(new Geopoint(0, 36));
     }
 
     public static void testMeridian() {
-        assertThat(parse("N 23° 00.000 00° 00.000")).isEqualTo(new Geopoint(23, 0));
+        assertThat(GeopointParser.parse("N 23° 00.000 00° 00.000")).isEqualTo(new Geopoint(23, 0));
     }
 
     public static void testEquatorMeridian() {

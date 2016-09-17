@@ -22,10 +22,10 @@ import static cgeo.geocaching.test.R.raw.tile14;
 import static cgeo.geocaching.utils.Log.d;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 import cgeo.geocaching.test.R;
+
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.annotation.RawRes;
@@ -69,31 +69,31 @@ public class IconDecoderTest extends AbstractResourceInstrumentationTestCase {
         final Bitmap bitmap = getBitmap(R.raw.tile12);
 
         int multi = 0;
-        multi = parseMapPNG(bitmap, 130, 92, 12).getType() == CacheType.MULTI ? multi + 1 : multi;
-        multi = parseMapPNG(bitmap, 93, 222, 12).getType() == CacheType.MULTI ? multi + 1 : multi;
-        multi = parseMapPNG(bitmap, 129, 227, 12).getType() == CacheType.MULTI ? multi + 1 : multi;
-        multi = parseMapPNG(bitmap, 234, 170, 12).getType() == CacheType.MULTI ? multi + 1 : multi;
-        multi = parseMapPNG(bitmap, 195, 113, 12).getType() == CacheType.MULTI ? multi + 1 : multi;
-        multi = parseMapPNG(bitmap, 195, 124, 12).getType() == CacheType.MULTI ? multi + 1 : multi;
-        multi = parseMapPNG(bitmap, 111, 74, 12).getType() == CacheType.MULTI ? multi + 1 : multi;
+        multi = parseMapPNG(bitmap, 130, 92, 12).getType() == MULTI ? multi + 1 : multi;
+        multi = parseMapPNG(bitmap, 93, 222, 12).getType() == MULTI ? multi + 1 : multi;
+        multi = parseMapPNG(bitmap, 129, 227, 12).getType() == MULTI ? multi + 1 : multi;
+        multi = parseMapPNG(bitmap, 234, 170, 12).getType() == MULTI ? multi + 1 : multi;
+        multi = parseMapPNG(bitmap, 195, 113, 12).getType() == MULTI ? multi + 1 : multi;
+        multi = parseMapPNG(bitmap, 195, 124, 12).getType() == MULTI ? multi + 1 : multi;
+        multi = parseMapPNG(bitmap, 111, 74, 12).getType() == MULTI ? multi + 1 : multi;
 
         int mystery = 0;
-        mystery = parseMapPNG(bitmap, 37, 25, 12).getType() == CacheType.MYSTERY ? mystery + 1 : mystery;
-        mystery = parseMapPNG(bitmap, 49, 183, 12).getType() == CacheType.MYSTERY ? mystery + 1 : mystery;
-        mystery = parseMapPNG(bitmap, 184, 181, 12).getType() == CacheType.MYSTERY ? mystery + 1 : mystery;
-        mystery = parseMapPNG(bitmap, 176, 94, 12).getType() == CacheType.MYSTERY ? mystery + 1 : mystery;
-        mystery = parseMapPNG(bitmap, 161, 124, 12).getType() == CacheType.MYSTERY ? mystery + 1 : mystery;
-        mystery = parseMapPNG(bitmap, 168, 118, 12).getType() == CacheType.MYSTERY ? mystery + 1 : mystery;
-        mystery = parseMapPNG(bitmap, 231, 114, 12).getType() == CacheType.MYSTERY ? mystery + 1 : mystery;
+        mystery = parseMapPNG(bitmap, 37, 25, 12).getType() == MYSTERY ? mystery + 1 : mystery;
+        mystery = parseMapPNG(bitmap, 49, 183, 12).getType() == MYSTERY ? mystery + 1 : mystery;
+        mystery = parseMapPNG(bitmap, 184, 181, 12).getType() == MYSTERY ? mystery + 1 : mystery;
+        mystery = parseMapPNG(bitmap, 176, 94, 12).getType() == MYSTERY ? mystery + 1 : mystery;
+        mystery = parseMapPNG(bitmap, 161, 124, 12).getType() == MYSTERY ? mystery + 1 : mystery;
+        mystery = parseMapPNG(bitmap, 168, 118, 12).getType() == MYSTERY ? mystery + 1 : mystery;
+        mystery = parseMapPNG(bitmap, 231, 114, 12).getType() == MYSTERY ? mystery + 1 : mystery;
 
         int tradi = 0;
-        tradi = parseMapPNG(bitmap, 179, 27, 12).getType() == CacheType.TRADITIONAL ? tradi + 1 : tradi;
-        tradi = parseMapPNG(bitmap, 106, 93, 12).getType() == CacheType.TRADITIONAL ? tradi + 1 : tradi;
-        tradi = parseMapPNG(bitmap, 145, 147, 12).getType() == CacheType.TRADITIONAL ? tradi + 1 : tradi;
-        tradi = parseMapPNG(bitmap, 204, 163, 12).getType() == CacheType.TRADITIONAL ? tradi + 1 : tradi;
-        tradi = parseMapPNG(bitmap, 9, 146, 12).getType() == CacheType.TRADITIONAL ? tradi + 1 : tradi;
-        tradi = parseMapPNG(bitmap, 117, 225, 12).getType() == CacheType.TRADITIONAL ? tradi + 1 : tradi;
-        tradi = parseMapPNG(bitmap, 90, 107, 12).getType() == CacheType.TRADITIONAL ? tradi + 1 : tradi;
+        tradi = parseMapPNG(bitmap, 179, 27, 12).getType() == TRADITIONAL ? tradi + 1 : tradi;
+        tradi = parseMapPNG(bitmap, 106, 93, 12).getType() == TRADITIONAL ? tradi + 1 : tradi;
+        tradi = parseMapPNG(bitmap, 145, 147, 12).getType() == TRADITIONAL ? tradi + 1 : tradi;
+        tradi = parseMapPNG(bitmap, 204, 163, 12).getType() == TRADITIONAL ? tradi + 1 : tradi;
+        tradi = parseMapPNG(bitmap, 9, 146, 12).getType() == TRADITIONAL ? tradi + 1 : tradi;
+        tradi = parseMapPNG(bitmap, 117, 225, 12).getType() == TRADITIONAL ? tradi + 1 : tradi;
+        tradi = parseMapPNG(bitmap, 90, 107, 12).getType() == TRADITIONAL ? tradi + 1 : tradi;
 
         int found = 0;
         found = parseMapPNG(bitmap, 150, 124, 12).isFound() ? found + 1 : found;
@@ -324,7 +324,7 @@ public class IconDecoderTest extends AbstractResourceInstrumentationTestCase {
         assertThat(parseMapPNG(bitmap, 232, 28, 12).getType()).isEqualTo(MYSTERY); // GC1TEAR
         assertThat(parseMapPNG(bitmap, 200, 204, 12).getType()).isEqualTo(MYSTERY); // GC3AKFV
         assertThat(parseMapPNG(bitmap, 228, 28, 12).isFound()).isTrue(); // GC2NMPR
-        //assertEquals(CacheType.VIRTUAL, parseMapPNG(bitmap, 232, 252, 12).getType()); // GC1AH0N - False detection
+        //assertThat(parseMapPNG(bitmap, 232, 252, 12).getType()).isEqualTo(VIRTUAL); // GC1AH0N - False detection
         assertThat(parseMapPNG(bitmap, 220, 188, 12).getType()).isEqualTo(MYSTERY); // GC1ZXDK
         assertThat(parseMapPNG(bitmap, 168, 212, 12).getType()).isEqualTo(MYSTERY); // GC3A919
         assertThat(parseMapPNG(bitmap, 152, 176, 12).getType()).isEqualTo(MULTI); // GC196WN
