@@ -68,6 +68,11 @@ import org.apache.commons.lang3.StringUtils;
  */
 final class OkapiClient {
 
+    /**
+     * limit for the number of caches to be returned by any query
+     */
+    private static final String MAX_CACHES = "100";
+
     private static final String PARAMETER_LOGCOUNT_KEY = "lpc";
     private static final String PARAMETER_LOGCOUNT_VALUE = "all";
 
@@ -183,7 +188,7 @@ final class OkapiClient {
         final Parameters params = new Parameters("search_method", METHOD_SEARCH_NEAREST);
         final Map<String, String> valueMap = new LinkedHashMap<>();
         valueMap.put("center", centerString);
-        valueMap.put("limit", "20");
+        valueMap.put("limit", MAX_CACHES);
         valueMap.put("radius", "200");
 
         return requestCaches(connector, params, valueMap, false);
@@ -222,11 +227,10 @@ final class OkapiClient {
             final String centerString = GeopointFormatter.format(GeopointFormatter.Format.LAT_DECDEGREE_RAW, center) + SEPARATOR + GeopointFormatter.format(GeopointFormatter.Format.LON_DECDEGREE_RAW, center);
             params = new Parameters("search_method", METHOD_SEARCH_NEAREST);
             valueMap.put("center", centerString);
-            valueMap.put("limit", "20");
         } else {
             params = new Parameters("search_method", METHOD_SEARCH_ALL);
-            valueMap.put("limit", "20");
         }
+        valueMap.put("limit", MAX_CACHES);
 
         // full wildcard search, maybe we need to change this after some testing and evaluation
         valueMap.put("name", "*" + namePart + "*");
