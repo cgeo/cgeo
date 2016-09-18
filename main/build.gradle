@@ -270,17 +270,17 @@ dependencies {
     androidTestCompile 'com.google.code.findbugs:annotations:3.0.1u2'
 
     // Reactive extensions
-    compile 'io.reactivex:rxjava:1.1.10'
+    compile 'io.reactivex:rxjava:1.2.0'
     compile 'io.reactivex:rxandroid:0.25.0'
 
     // Jackson XML processing
-    def jacksonVersion = '2.8.2'
+    def jacksonVersion = '2.8.3'
     compile "com.fasterxml.jackson.core:jackson-core:$jacksonVersion"
     compile "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
     compile "com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion"
 
     // Zxing barcode reader integration
-    compile 'com.google.zxing:android-integration:3.2.1'
+    compile 'com.google.zxing:android-integration:3.3.0'
 
     // Undo toast
     compile 'com.github.jenzz.undobar:library:1.3:api8Release@aar'
@@ -290,7 +290,7 @@ dependencies {
     androidTestCompile 'com.android.support.test:runner:0.5'
 
     // enforce same version of the support annotations for the main app and the test app
-    def supportAnnotationsVersion = '24.2.0'
+    def supportAnnotationsVersion = '24.2.1'
     compile "com.android.support:support-annotations:$supportAnnotationsVersion"
     androidTestCompile "com.android.support:support-annotations:$supportAnnotationsVersion"
 
