@@ -94,6 +94,22 @@
     </setupTask>
     <setupTask
         xsi:type="setup:CompoundTask"
+        name="org.eclipse.mylyn.tasks.ui">
+      <setupTask
+          xsi:type="setup:PreferenceTask"
+          key="/instance/org.eclipse.mylyn.tasks.ui/org.eclipse.mylyn.tasks.ui.show.trim"
+          value="true"/>
+    </setupTask>
+    <setupTask
+        xsi:type="setup:CompoundTask"
+        name="org.eclipse.mylyn.team.ui">
+      <setupTask
+          xsi:type="setup:PreferenceTask"
+          key="/instance/org.eclipse.mylyn.team.ui/org.eclipse.mylyn.team.commit.template"
+          value="#$$$${task.key}: $$$${task.description}"/>
+    </setupTask>
+    <setupTask
+        xsi:type="setup:CompoundTask"
         name="org.eclipse.ui">
       <setupTask
           xsi:type="setup:PreferenceTask"
