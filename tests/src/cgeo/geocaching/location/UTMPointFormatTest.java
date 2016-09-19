@@ -1,9 +1,9 @@
 package cgeo.geocaching.location;
 
-import org.junit.Test;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.offset;
+
+import org.junit.Test;
 
 /**
  * Test the UTMPoint parsing and formatting.
@@ -80,6 +80,7 @@ public class UTMPointFormatTest {
         assertThat(utm.getNorthing()).isEqualTo(3915114, offset(1.1d));
     }
 
+    @SuppressWarnings("unused")
     @Test(expected = UTMPoint.ParseException.class)
     public void testParseUTMStringWithException() {
         new UTMPoint("5S blah blub");

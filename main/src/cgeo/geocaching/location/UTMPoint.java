@@ -4,6 +4,7 @@ import cgeo.geocaching.utils.MatcherWrapper;
 
 import android.support.annotation.NonNull;
 
+import java.util.Locale;
 import java.util.regex.Pattern;
 
 /**
@@ -86,18 +87,6 @@ public class UTMPoint {
         this.northing = northing;
     }
 
-    @Override
-    public boolean equals(final Object obj) {
-        if (obj instanceof UTMPoint) {
-            final UTMPoint pnt = (UTMPoint) obj;
-            return northing == pnt.northing
-                    && easting == pnt.easting
-                    && zoneNumber == pnt.zoneNumber
-                    && zoneLetter == pnt.zoneLetter;
-        }
-        return false;
-    }
-
     /**
      * Method that provides a check for UTM zone letters. Returns an uppercase
      * version of any valid letter passed in, 'A' .. 'Z'.
@@ -121,7 +110,7 @@ public class UTMPoint {
      */
     @Override
     public String toString() {
-        return String.format("%d%c E %d N %d", zoneNumber, zoneLetter, Math.round(easting), Math.round(northing));
+        return String.format(Locale.getDefault(), "%d%c E %d N %d", zoneNumber, zoneLetter, Math.round(easting), Math.round(northing));
     }
 
     /**
