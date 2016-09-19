@@ -276,8 +276,11 @@ dependencies {
     }
 
     // Reactive extensions
-    compile 'io.reactivex:rxjava:1.2.0'
+    def rxjavaVersion = '1.1.10'
+    compile "io.reactivex:rxjava:$rxjavaVersion"
     compile 'io.reactivex:rxandroid:0.25.0'
+    // ProGuard rules for RxJava
+    compile "com.artemzin.rxjava:proguard-rules:$rxjavaVersion.0"
 
     // Jackson XML processing
     def jacksonVersion = '2.8.3'
