@@ -30,6 +30,17 @@
 # ignore warning: Ignoring InnerClasses attribute for an anonymous inner class...
 -keepattributes EnclosingMethod
 
+# Android -----------------------------------------------------------------------------------------
+
+# Our build contains a legacy http client jar without any good reason
+# https://code.google.com/p/android/issues/detail?id=194513
+-dontnote android.net.http.SslCertificate
+-dontnote android.net.http.SslError
+-dontnote android.net.http.SslCertificate$DName
+-dontnote org.apache.http.conn.scheme.SocketFactory
+-dontnote org.apache.http.conn.scheme.HostNameResolver
+-dontnote org.apache.http.conn.ConnectTimeoutException
+-dontnote org.apache.http.params.HttpParams
 
 # Apache commons ----------------------------------------------------------------------------------
 
