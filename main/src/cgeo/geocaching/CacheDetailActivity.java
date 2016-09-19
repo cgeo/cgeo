@@ -97,6 +97,7 @@ import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.view.ActionMode;
@@ -1000,7 +1001,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 span.setSpan(new StrikethroughSpan(), 0, span.toString().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
             if (cache.isArchived()) {
-                span.setSpan(new ForegroundColorSpan(res.getColor(R.color.archived_cache_color)), 0, span.toString().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                span.setSpan(new ForegroundColorSpan(ContextCompat.getColor(app, R.color.archived_cache_color)), 0, span.toString().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
 
             addContextMenu(details.add(R.string.cache_name, span).right);

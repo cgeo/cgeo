@@ -1,36 +1,5 @@
 package cgeo.geocaching.ui;
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.content.res.Resources;
-import android.graphics.drawable.BitmapDrawable;
-import android.text.Spannable;
-import android.text.Spanned;
-import android.text.style.ForegroundColorSpan;
-import android.text.style.StrikethroughSpan;
-import android.view.GestureDetector;
-import android.view.LayoutInflater;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
-import android.widget.ImageView;
-import android.widget.TextView;
-
-import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
-import android.support.annotation.NonNull;
-
-import java.lang.ref.WeakReference;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
-
-import butterknife.BindView;
 import cgeo.geocaching.CacheDetailActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.CacheListType;
@@ -51,6 +20,38 @@ import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapUtils;
+
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.res.Resources;
+import android.graphics.drawable.BitmapDrawable;
+import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
+import android.text.Spannable;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.StrikethroughSpan;
+import android.view.GestureDetector;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
+
+import butterknife.BindView;
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 
@@ -436,7 +437,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
             if (spannable == null) {
                 spannable = Spannable.Factory.getInstance().newSpannable(cache.getName());
             }
-            spannable.setSpan(new ForegroundColorSpan(res.getColor(R.color.archived_cache_color)), 0, spannable.toString().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            spannable.setSpan(new ForegroundColorSpan(ContextCompat.getColor(getContext(), R.color.archived_cache_color)), 0, spannable.toString().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
 
         if (spannable != null) {
