@@ -148,6 +148,7 @@ android {
     }
 
     packagingOptions {
+        // you can double click an APK file in Android Studio 2.2+ to see what's in there
         // license files of libs are not needed in our APK
         exclude 'META-INF/DEPENDENCIES'
         exclude 'META-INF/dependencies'
@@ -162,9 +163,12 @@ android {
         exclude 'COPYING'
         exclude 'COPYING.LESSER'
         exclude '.readme'
+        // AndroidAnnotations
+        exclude 'androidannotations-api.properties'
         // findbugs
         exclude 'META-INF/maven/com.google.code.findbugs/jsr305/pom.properties'
         exclude 'META-INF/maven/com.google.code.findbugs/jsr305/pom.xml'
+        exclude 'jsr305_annotations/Jsr305_annotations.gwt.xml'
         // mapsforge
         exclude 'META-INF/maven/org.mapsforge/mapsforge-map-reader/pom.properties'
         exclude 'META-INF/maven/org.mapsforge/mapsforge-map-reader/pom.xml'
@@ -172,6 +176,11 @@ android {
         exclude 'META-INF/maven/org.mapsforge/mapsforge-map/pom.xml'
         exclude 'COPYING.LESSER.v3'
         exclude 'COPYING.v3'
+        // Play Services
+        exclude 'build-data.properties'
+        // rxjava
+        exclude 'META-INF/rxandroid.properties'
+        exclude 'META-INF/rxjava.properties'
     }
 
     productFlavors {
