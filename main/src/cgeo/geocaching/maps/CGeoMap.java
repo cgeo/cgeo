@@ -74,6 +74,7 @@ import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.List;
@@ -751,15 +752,14 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
                     if (Settings.getChooseList()) {
                         // let user select list to store cache in
-                        new StoredList.UserInterface(activity).promptForListSelection(R.string.list_title,
-                                new Action1<Integer>() {
+                        new StoredList.UserInterface(activity).promptForMultiListSelection(R.string.list_title, new Action1<Set<Integer>>() {
                                     @Override
-                                    public void call(final Integer selectedListId) {
-                                        storeCaches(geocodes, selectedListId);
+                            public void call(final Set<Integer> selectedListIds) {
+                                storeCaches(geocodes, selectedListIds);
                                     }
-                                }, true, StoredList.TEMPORARY_LIST.id);
+                        }, true, Collections.singleton(StoredList.TEMPORARY_LIST.id));
                     } else {
-                        storeCaches(geocodes, StoredList.STANDARD_LIST_ID);
+                        storeCaches(geocodes, Collections.singleton(StoredList.STANDARD_LIST_ID));
                     }
                 }
                 return true;
@@ -1368,10 +1368,10 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
     /**
      * store caches, invoked by "store offline" menu item
      *
-     * @param listId
-     *            the list to store the caches in
+     * @param listIds
+     *            the lists to store the caches in
      */
-    private void storeCaches(final List<String> geocodes, final int listId) {
+    private void storeCaches(final List<String> geocodes, final Set<Integer> listIds) {
         final LoadDetailsHandler loadDetailsHandler = new LoadDetailsHandler();
 
         waitDialog = new ProgressDialog(activity);
@@ -1404,7 +1404,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
         detailProgressTime = System.currentTimeMillis();
 
-        loadDetailsThread = new LoadDetails(loadDetailsHandler, geocodes, listId);
+        loadDetailsThread = new LoadDetails(loadDetailsHandler, geocodes, listIds);
         loadDetailsThread.start();
     }
 
@@ -1416,12 +1416,12 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
         private final CancellableHandler handler;
         private final List<String> geocodes;
-        private final int listId;
+        private final Set<Integer> listIds;
 
-        LoadDetails(final CancellableHandler handler, final List<String> geocodes, final int listId) {
+        LoadDetails(final CancellableHandler handler, final List<String> geocodes, final Set<Integer> listIds) {
             this.handler = handler;
             this.geocodes = geocodes;
-            this.listId = listId;
+            this.listIds = listIds;
         }
 
         public void stopIt() {
@@ -1441,9 +1441,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
                     }
 
                     if (!DataStore.isOffline(geocode, null)) {
-                        final Set<Integer> lists = new HashSet<>();
-                        lists.add(listId);
-                        Geocache.storeCache(null, geocode, lists, false, handler);
+                        Geocache.storeCache(null, geocode, listIds, false, handler);
                     }
                 } catch (final Exception e) {
                     Log.e("CGeoMap.LoadDetails.run", e);

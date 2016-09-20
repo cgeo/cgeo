@@ -76,7 +76,6 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Queue;
 import java.util.Set;
@@ -352,14 +351,14 @@ public class NewMap extends AbstractActionBarActivity {
 
                     if (Settings.getChooseList()) {
                         // let user select list to store cache in
-                        new StoredList.UserInterface(this).promptForListSelection(R.string.list_title, new Action1<Integer>() {
+                        new StoredList.UserInterface(this).promptForMultiListSelection(R.string.list_title, new Action1<Set<Integer>>() {
                             @Override
-                            public void call(final Integer selectedListId) {
-                                storeCaches(geocodes, selectedListId);
+                            public void call(final Set<Integer> selectedListIds) {
+                                storeCaches(geocodes, selectedListIds);
                             }
-                        }, true, StoredList.TEMPORARY_LIST.id);
+                        }, true, Collections.singleton(StoredList.TEMPORARY_LIST.id));
                     } else {
-                        storeCaches(geocodes, StoredList.STANDARD_LIST_ID);
+                        storeCaches(geocodes, Collections.singleton(StoredList.STANDARD_LIST_ID));
                     }
                 }
                 return true;
@@ -679,10 +678,10 @@ public class NewMap extends AbstractActionBarActivity {
     /**
      * store caches, invoked by "store offline" menu item
      *
-     * @param listId
-     *            the list to store the caches in
+     * @param listIds
+     *            the lists to store the caches in
      */
-    private void storeCaches(final Set<String> geocodes, final int listId) {
+    private void storeCaches(final Set<String> geocodes, final Set<Integer> listIds) {
 
         final int count = geocodes.size();
         final LoadDetailsHandler loadDetailsHandler = new LoadDetailsHandler(count, this);
@@ -717,7 +716,7 @@ public class NewMap extends AbstractActionBarActivity {
 
         waitDialog.show();
 
-        loadDetailsThread = new LoadDetails(loadDetailsHandler, geocodes, listId);
+        loadDetailsThread = new LoadDetails(loadDetailsHandler, geocodes, listIds);
         loadDetailsThread.start();
     }
 
@@ -1301,12 +1300,12 @@ public class NewMap extends AbstractActionBarActivity {
 
         private final CancellableHandler handler;
         private final Collection<String> geocodes;
-        private final int listId;
+        private final Set<Integer> listIds;
 
-        LoadDetails(final CancellableHandler handler, final Collection<String> geocodes, final int listId) {
+        LoadDetails(final CancellableHandler handler, final Collection<String> geocodes, final Set<Integer> listIds) {
             this.handler = handler;
             this.geocodes = geocodes;
-            this.listId = listId;
+            this.listIds = listIds;
         }
 
         public void stopIt() {
@@ -1326,9 +1325,7 @@ public class NewMap extends AbstractActionBarActivity {
                     }
 
                     if (!DataStore.isOffline(geocode, null)) {
-                        final Set<Integer> lists = new HashSet<>();
-                        lists.add(listId);
-                        Geocache.storeCache(null, geocode, lists, false, handler);
+                        Geocache.storeCache(null, geocode, listIds, false, handler);
                     }
                 } catch (final Exception e) {
                     Log.e("CGeoMap.LoadDetails.run", e);
