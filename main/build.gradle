@@ -285,7 +285,7 @@ dependencies {
     }
 
     // Reactive extensions
-    def rxjavaVersion = '1.1.10'
+    def rxjavaVersion = '1.2.0'
     compile "io.reactivex:rxjava:$rxjavaVersion"
     compile 'io.reactivex:rxandroid:0.25.0'
     // ProGuard rules for RxJava
