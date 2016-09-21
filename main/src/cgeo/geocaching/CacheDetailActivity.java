@@ -13,6 +13,7 @@ import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.capability.IgnoreCapability;
+import cgeo.geocaching.connector.capability.PersonalNoteCapability;
 import cgeo.geocaching.connector.capability.WatchListCapability;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.gc.GCConstants;
@@ -1471,7 +1472,8 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 }
             });
             final Button personalNoteUpload = ButterKnife.findById(view, R.id.upload_personalnote);
-            if (ConnectorFactory.getConnector(cache).supportsPersonalNote()) {
+            final PersonalNoteCapability connector = ConnectorFactory.getConnectorAs(cache, PersonalNoteCapability.class);
+            if (connector != null && connector.canAddPersonalNote(cache)) {
                 personalNoteUpload.setVisibility(View.VISIBLE);
                 personalNoteUpload.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -1550,8 +1552,8 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             myHandler.unsubscribeIfCancelled(AndroidRxUtils.networkScheduler.createWorker().schedule(new Action0() {
                 @Override
                 public void call() {
-                    final IConnector con = ConnectorFactory.getConnector(cache);
-                    final boolean success = con.uploadPersonalNote(cache);
+                    final PersonalNoteCapability connector = (PersonalNoteCapability) ConnectorFactory.getConnector(cache);
+                    final boolean success = connector.uploadPersonalNote(cache);
                     final Message msg = Message.obtain();
                     final Bundle bundle = new Bundle();
                     bundle.putString(SimpleCancellableHandler.MESSAGE_TEXT,

@@ -127,20 +127,6 @@ public interface IConnector {
     String getGeocodeFromUrl(@NonNull final String url);
 
     /**
-     * enable/disable uploading personal note
-     *
-     * @return true, when uploading is possible
-     */
-    boolean supportsPersonalNote();
-
-    /**
-     * Uploading personal note to website
-     *
-     * @return success
-     */
-    boolean uploadPersonalNote(@NonNull Geocache cache);
-
-    /**
      * enable/disable uploading modified coordinates to website
      *
      * @return true, when uploading is possible

@@ -185,9 +185,28 @@ public final class ConnectorFactory {
         return false;
     }
 
+    /**
+     * Get the connector handling all the operations available on this geocache. There is always a connector, it might
+     * be the {@link UnknownConnector} if the geocache can't be identified.
+     */
     @NonNull
     public static IConnector getConnector(final Geocache cache) {
         return getConnector(cache.getGeocode());
+    }
+
+    /**
+     * Get a connector capability for the given geocache. This might be {@code null} if the connector does not support
+     * the given capability.
+     *
+     * @return the connector cast to the requested capability or {@code null}.
+     */
+    @Nullable
+    public static <T extends IConnector> T getConnectorAs(final Geocache cache, @NonNull final Class<T> capabilityClass) {
+        final IConnector connector = getConnector(cache);
+        if (capabilityClass.isInstance(connector)) {
+            return capabilityClass.cast(connector);
+        }
+        return null;
     }
 
     @NonNull

@@ -12,6 +12,7 @@ import cgeo.geocaching.connector.capability.ISearchByGeocode;
 import cgeo.geocaching.connector.capability.ISearchByKeyword;
 import cgeo.geocaching.connector.capability.ISearchByOwner;
 import cgeo.geocaching.connector.capability.ISearchByViewPort;
+import cgeo.geocaching.connector.capability.PersonalNoteCapability;
 import cgeo.geocaching.connector.capability.WatchListCapability;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LogType;
@@ -47,16 +48,6 @@ public abstract class AbstractConnector implements IConnector {
             }
         }
         return strippedList;
-    }
-
-    @Override
-    public boolean supportsPersonalNote() {
-        return false;
-    }
-
-    @Override
-    public boolean uploadPersonalNote(@NonNull final Geocache cache) {
-        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -252,9 +243,7 @@ public abstract class AbstractConnector implements IConnector {
         if (supportsLogImages()) {
             list.add(feature(R.string.feature_log_images));
         }
-        if (supportsPersonalNote()) {
-            list.add(feature(R.string.feature_personal_notes));
-        }
+        addCapability(list, PersonalNoteCapability.class, R.string.feature_personal_notes);
         if (supportsOwnCoordinates()) {
             list.add(feature(R.string.feature_own_coordinates));
         }
