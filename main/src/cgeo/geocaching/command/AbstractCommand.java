@@ -2,21 +2,20 @@ package cgeo.geocaching.command;
 
 import cgeo.geocaching.utils.AsyncTaskWithProgress;
 
-import com.jensdriller.libs.undobar.UndoBar;
-import com.jensdriller.libs.undobar.UndoBar.Listener;
-
-import org.apache.commons.lang3.StringUtils;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-
 import android.app.Activity;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
+
+import com.jensdriller.libs.undobar.UndoBar;
+import com.jensdriller.libs.undobar.UndoBar.Listener;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Default implementation of the command interface with undo support and background processing.
  */
-abstract class AbstractCommand implements Command {
+public abstract class AbstractCommand implements Command {
 
     private static final int UNDO_DURATION_SECONDS = 5;
 
@@ -31,7 +30,7 @@ abstract class AbstractCommand implements Command {
         }
     }
 
-    AbstractCommand(final Activity context) {
+    protected AbstractCommand(final Activity context) {
         this(context, 0);
     }
 

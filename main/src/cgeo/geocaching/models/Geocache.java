@@ -164,7 +164,7 @@ public class Geocache implements IWaypoint {
     private final EnumSet<StorageLocation> storageLocation = EnumSet.of(StorageLocation.HEAP);
     private boolean finalDefined = false;
     private boolean logPasswordRequired = false;
-    private LogEntry offlineLogs = null;
+    private LogEntry offlineLog = null;
 
     private static final Pattern NUMBER_PATTERN = Pattern.compile("\\d+");
 
@@ -453,7 +453,7 @@ public class Geocache implements IWaypoint {
             DataStore.saveVisitDate(geocode);
             logOffline = Boolean.TRUE;
 
-            offlineLogs = DataStore.loadLogOffline(geocode);
+            offlineLog = DataStore.loadLogOffline(geocode);
             notifyChange();
         } else {
             ActivityMixin.showToast(fromActivity, res.getString(R.string.err_log_post_failed));
@@ -468,10 +468,10 @@ public class Geocache implements IWaypoint {
      */
     @Nullable
     public LogEntry getOfflineLog() {
-        if (isLogOffline() && offlineLogs == null) {
-            offlineLogs = DataStore.loadLogOffline(geocode);
+        if (isLogOffline() && offlineLog == null) {
+            offlineLog = DataStore.loadLogOffline(geocode);
         }
-        return offlineLogs;
+        return offlineLog;
     }
 
     /**

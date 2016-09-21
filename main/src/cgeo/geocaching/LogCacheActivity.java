@@ -1,6 +1,7 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.activity.ShowcaseViewBuilder;
+import cgeo.geocaching.command.AbstractCommand;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.ILoggingManager;
 import cgeo.geocaching.connector.ImageResult;
@@ -31,11 +32,6 @@ import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.LogTemplateProvider;
 import cgeo.geocaching.utils.LogTemplateProvider.LogContext;
 import cgeo.geocaching.utils.TextUtils;
-
-import com.github.amlcurran.showcaseview.targets.ActionItemTarget;
-
-import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
 
 import android.R.string;
 import android.app.Activity;
@@ -68,6 +64,9 @@ import java.util.Set;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import com.github.amlcurran.showcaseview.targets.ActionItemTarget;
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import rx.Observable;
 import rx.android.app.AppObservable;
 import rx.functions.Action1;
@@ -90,12 +89,15 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     private String text = null;
     private List<LogType> possibleLogTypes = new ArrayList<>();
     private final Set<TrackableLog> trackables = new HashSet<>();
+
     @BindView(R.id.tweet)
     protected CheckBox tweetCheck;
     @BindView(R.id.log_password_box)
     protected LinearLayout logPasswordBox;
     @BindView(R.id.favorite_check)
     protected CheckBox favCheck;
+    @BindView(R.id.log) protected EditText logEditText;
+
     private SparseArray<TrackableLog> actionButtons;
 
     private ILoggingManager loggingManager;
@@ -289,16 +291,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
             premFavPoints = savedInstanceState.getInt(SAVED_STATE_FAVPOINTS);
         } else {
             // If log had been previously saved, load it now, otherwise initialize signature as needed
-            final LogEntry log = DataStore.loadLogOffline(geocode);
-            if (log != null) {
-                typeSelected = log.getType();
-                date.setTime(new Date(log.date));
-                text = log.log;
-            } else if (StringUtils.isNotBlank(Settings.getSignature())
-                    && Settings.isAutoInsertSignature()
-                    && StringUtils.isBlank(currentLogText())) {
-                insertIntoLog(LogTemplateProvider.applyTemplates(Settings.getSignature(), new LogContext(cache, null)), false);
-            }
+            loadLogFromDatabase();
         }
         if (image == null) {
             image = Image.NONE;
@@ -319,10 +312,8 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         setDate(date);
         dateButton.setOnClickListener(new DateListener());
 
-        final EditText logView = ButterKnife.findById(this, R.id.log);
         if (StringUtils.isBlank(currentLogText()) && StringUtils.isNotBlank(text)) {
-            logView.setText(text);
-            Dialogs.moveCursorToEnd(logView);
+            setLogText();
         }
 
         tweetCheck.setChecked(true);
@@ -361,6 +352,22 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         requestKeyboardForLogging();
     }
 
+    private void setLogText() {
+        logEditText.setText(text);
+        Dialogs.moveCursorToEnd(logEditText);
+    }
+
+    private void loadLogFromDatabase() {
+        final LogEntry log = DataStore.loadLogOffline(geocode);
+        if (log != null) {
+            typeSelected = log.getType();
+            date.setTime(new Date(log.date));
+            text = log.log;
+        } else if (StringUtils.isNotBlank(Settings.getSignature()) && Settings.isAutoInsertSignature() && StringUtils.isBlank(currentLogText())) {
+            insertIntoLog(LogTemplateProvider.applyTemplates(Settings.getSignature(), new LogContext(cache, null)), false);
+        }
+    }
+
     private void initializeRatingBar() {
         if (GCVote.isVotingPossible(cache)) {
             GCVoteRatingBarUtil.initializeRatingBar(cache, getWindow().getDecorView().getRootView(), new OnRatingChangeListener() {
@@ -397,19 +404,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     }
 
     private void clearLog() {
-        cache.clearOfflineLog();
-
-        setDefaultValues();
-
-        setType(typeSelected);
-        setDate(date);
-
-        final EditText logView = ButterKnife.findById(this, R.id.log);
-        logView.setText(StringUtils.EMPTY);
-        final EditText logPasswordView = ButterKnife.findById(this, R.id.log_password);
-        logPasswordView.setText(StringUtils.EMPTY);
-
-        showToast(res.getString(R.string.info_log_cleared));
+        new ClearLogCommand(this).execute();
     }
 
     @Override
@@ -466,6 +461,57 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
             logPasswordBox.setVisibility(View.VISIBLE);
         } else {
             logPasswordBox.setVisibility(View.GONE);
+        }
+    }
+
+    private final class ClearLogCommand extends AbstractCommand {
+
+        private String oldText;
+        private LogType oldType;
+        private Calendar oldDate;
+
+        ClearLogCommand(final Activity context) {
+            super(context);
+        }
+
+        @Override
+        protected void doCommand() {
+            oldText = currentLogText();
+            oldType = typeSelected;
+            oldDate = date;
+            cache.clearOfflineLog();
+        }
+
+        @Override
+        protected void undoCommand() {
+            cache.logOffline(getContext(), oldText, oldDate, oldType);
+        }
+
+        @Override
+        protected String getResultMessage() {
+            return getContext().getResources().getString(R.string.info_log_cleared);
+        }
+
+        @Override
+        protected void onFinished() {
+            setDefaultValues();
+
+            setType(typeSelected);
+            setDate(date);
+            logEditText.setText(StringUtils.EMPTY);
+
+            final EditText logPasswordView = ButterKnife.findById(LogCacheActivity.this, R.id.log_password);
+            logPasswordView.setText(StringUtils.EMPTY);
+        }
+
+        @Override
+        protected void onFinishedUndo() {
+            text = oldText;
+            typeSelected = oldType;
+            date = oldDate;
+            setType(typeSelected);
+            setDate(date);
+            setLogText();
         }
     }
 
@@ -633,7 +679,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     }
 
     private String currentLogText() {
-        return ButterKnife.<EditText>findById(this, R.id.log).getText().toString();
+        return logEditText.getText().toString();
     }
 
     private String currentLogPassword() {
