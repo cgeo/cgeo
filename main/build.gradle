@@ -348,7 +348,7 @@ dependencies {
     compile 'com.github.renaudcerrato:ViewPagerIndicator:2.4.1-gradle'
     
     // reliable process restart
-    compile 'com.jakewharton:process-phoenix:1.0.2'
+    compile 'com.jakewharton:process-phoenix:1.1.0'
 
     // memory leak detection
     def leakCanaryVersion = '1.4-beta2'
