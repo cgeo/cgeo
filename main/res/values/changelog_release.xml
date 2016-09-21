@@ -2,7 +2,7 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-    <b>Next feature release:</b>\n
+    <b>Next bugfix release:</b>\n
     · Fix: Attribute filter now lists non GC attributes\n
     · Fix: Better GPX file compatibility with Garmin devices\n
     · Fix: Scan GeoKrety QRCodes from internal app\n
