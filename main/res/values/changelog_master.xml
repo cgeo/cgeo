@@ -6,7 +6,7 @@
     · Removed: No longer supports captchas for getting exact coordinates as basic member\n
     · New: Support ignoring caches on OpenCaching sites\n
     · New: Remove duplicate caches from all other lists\n
-    · Change: Fetch more caches from OC sites when searching\n
+    · Change: Fetch more caches from OC sites when GC is disabled in settings\n
     \n
     \n
   </string>
