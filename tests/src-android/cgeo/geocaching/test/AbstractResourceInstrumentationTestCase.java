@@ -2,8 +2,6 @@ package cgeo.geocaching.test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
@@ -11,6 +9,9 @@ import cgeo.geocaching.enumerations.LoadFlags.RemoveFlag;
 import cgeo.geocaching.files.GPX10Parser;
 import cgeo.geocaching.files.ParserException;
 import cgeo.geocaching.list.StoredList;
+import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.utils.ResourcesUtils;
 
 import android.content.ContentResolver;
 import android.content.res.Resources;
@@ -25,7 +26,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collection;
 import java.util.EnumSet;
-import java.util.Scanner;
 
 public abstract class AbstractResourceInstrumentationTestCase extends InstrumentationTestCase {
     private int temporaryListId;
@@ -41,20 +41,8 @@ public abstract class AbstractResourceInstrumentationTestCase extends Instrument
         return res.openRawResource(resourceId);
     }
 
-    protected String getFileContent(@RawRes final int resourceId) {
-        Scanner scanner = null;
-        try {
-            final InputStream ins = getResourceStream(resourceId);
-            scanner = new Scanner(ins);
-            return scanner.useDelimiter("\\A").next();
-        } catch (final Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (scanner != null) {
-                scanner.close();
-            }
-        }
-        return null;
+    protected static String getFileContent(@RawRes final int resourceId) {
+        return ResourcesUtils.getRawResourceString(resourceId);
     }
 
     protected void copyResourceToFile(@RawRes final int resourceId, final File file) throws IOException {

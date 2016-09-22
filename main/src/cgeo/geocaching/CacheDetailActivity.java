@@ -19,6 +19,7 @@ import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.gc.GCConstants;
 import cgeo.geocaching.connector.trackable.TrackableBrand;
 import cgeo.geocaching.connector.trackable.TrackableConnector;
+import cgeo.geocaching.details.WebViewCreator;
 import cgeo.geocaching.enumerations.CacheAttribute;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.RemoveFlag;
@@ -315,6 +316,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 // lazy loading of cache images
                 if (getPage(position) == Page.IMAGES) {
                     loadCacheImages();
+                }
+                if (getPage(position) == Page.WEBVIEW) {
+                    loadBrowserLazily();
                 }
                 requireGeodata = getPage(position) == Page.DETAILS;
                 startOrStopGeoDataListener(false);
@@ -880,7 +884,8 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         LOGSFRIENDS(R.string.cache_logs_friends_and_own),
         WAYPOINTS(R.string.cache_waypoints),
         INVENTORY(R.string.cache_inventory),
-        IMAGES(R.string.cache_images);
+        IMAGES(R.string.cache_images),
+        WEBVIEW(R.string.browser);
 
         private final int titleStringId;
 
@@ -1922,6 +1927,18 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         }
     }
 
+    /**
+     * We only want to load data from the Internet when the browser page is actually shown, not when it is created.
+     */
+    private void loadBrowserLazily() {
+        final WebViewCreator creator = (WebViewCreator) getViewCreator(Page.WEBVIEW);
+        if (creator == null) {
+            return;
+        }
+        creator.load(cache.getLongUrl());
+    }
+
+
     public static void startActivity(final Context context, final String geocode, final String cacheName) {
         final Intent cachesIntent = new Intent(context, CacheDetailActivity.class);
         cachesIntent.putExtra(Intents.EXTRA_GEOCODE, geocode);
@@ -2208,6 +2225,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         if (CollectionUtils.isNotEmpty(cache.getNonStaticImages())) {
             pages.add(Page.IMAGES);
         }
+        pages.add(Page.WEBVIEW);
         return new ImmutablePair<List<? extends Page>, Integer>(pages, detailsIndex);
     }
 
@@ -2235,6 +2253,8 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             case IMAGES:
                 return new ImagesViewCreator();
 
+            case WEBVIEW:
+                return new WebViewCreator(this);
         }
         throw new IllegalStateException(); // cannot happen as long as switch case is enum complete
     }
@@ -2423,4 +2443,5 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     public void setNeedsRefresh() {
         refreshOnResume = true;
     }
+
 }

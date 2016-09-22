@@ -6,6 +6,7 @@ import cgeo.geocaching.ui.AbstractCachingPageViewCreator;
 import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.ProcessUtils;
+import cgeo.geocaching.utils.ResourcesUtils;
 import cgeo.geocaching.utils.SystemInformation;
 import cgeo.geocaching.utils.Version;
 
@@ -13,7 +14,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.RawRes;
 import android.support.annotation.StringRes;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -22,15 +22,11 @@ import android.widget.Button;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.CharEncoding;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
@@ -49,24 +45,8 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
             final ScrollView view = (ScrollView) getLayoutInflater().inflate(R.layout.about_license_page, parentView, false);
             ButterKnife.bind(this, view);
             setClickListener(licenseLink, "http://www.apache.org/licenses/LICENSE-2.0.html");
-            licenseText.setText(getRawResourceString(R.raw.license));
+            licenseText.setText(ResourcesUtils.getRawResourceString(R.raw.license));
             return view;
-        }
-
-        private String getRawResourceString(@RawRes final int resourceId) {
-            InputStream ins = null;
-            Scanner scanner = null;
-            try {
-                ins = res.openRawResource(resourceId);
-                scanner = new Scanner(ins, CharEncoding.UTF_8);
-                return scanner.useDelimiter("\\A").next();
-            } finally {
-                IOUtils.closeQuietly(ins);
-                // Scanner does not implement Closeable on Android 4.1, so closeQuietly leads to crash there
-                if (scanner != null) {
-                    scanner.close();
-                }
-            }
         }
 
     }

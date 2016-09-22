@@ -314,7 +314,7 @@ public abstract class AbstractViewPagerActivity<Page extends Enum<Page>> extends
         return viewCreators.get(page);
     }
 
-    protected final boolean isCurrentPage(final Page page) {
+    public final boolean isCurrentPage(final Page page) {
         return getCurrentItem() == getPageIndex(page);
     }
 
