@@ -20,6 +20,8 @@ import org.xml.sax.SAXException;
 public class DirectionDrawer {
     private Geopoint currentCoords;
     private final Geopoint destinationCoords;
+    private Geopoint lastDirectionUpdatePoint;
+    private Geopoint[] lastRoutingPoints;
     private final MapItemFactory mapItemFactory;
     private final float width;
 
@@ -57,14 +59,22 @@ public class DirectionDrawer {
             line.setColor(0x80EB391E);
         }
 
-        final Point pos = new Point();
-        final Point dest = new Point();
 
         Geopoint[] routingPoints =  null;
-        try {
-            routingPoints = BRouter.getTrack(currentCoords, destinationCoords);
-        } catch (SAXException e) {
-            e.printStackTrace();
+
+        // Use cached route if current position has not changed more than 5m
+        // TODO: Maybe adjust this to current zoomlevel
+        if(lastDirectionUpdatePoint != null && currentCoords.distanceTo(lastDirectionUpdatePoint) < 0.005){
+            routingPoints = lastRoutingPoints;
+        }
+        else{
+            try {
+                routingPoints = BRouter.getTrack(currentCoords, destinationCoords);
+                lastRoutingPoints = routingPoints;
+                lastDirectionUpdatePoint = currentCoords;
+            } catch (SAXException e) {
+                e.printStackTrace();
+            }
         }
 
         if(routingPoints != null && routingPoints.length > 0){
@@ -85,6 +95,9 @@ public class DirectionDrawer {
         }
         else
         {
+            final Point pos = new Point();
+            final Point dest = new Point();
+
             projection.toPixels(mapItemFactory.getGeoPointBase(currentCoords), pos);
             projection.toPixels(mapItemFactory.getGeoPointBase(destinationCoords), dest);
 
