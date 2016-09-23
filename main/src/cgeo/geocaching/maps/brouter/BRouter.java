@@ -34,6 +34,13 @@ public class BRouter {
         }
     }
 
+    public static void disconnect(Context ctx) {
+        if (brouter != null && brouter.isConnected()) {
+            ctx.unbindService(brouter);
+            brouter = null;
+        }
+    }
+
     public static Geopoint[] getTrack(Geopoint start, Geopoint dest) throws SAXException {
         if (brouter == null) {
             return null; //Exception

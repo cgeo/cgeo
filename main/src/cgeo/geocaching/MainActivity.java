@@ -501,12 +501,6 @@ public class MainActivity extends AbstractActionBarActivity {
         setFilterTitle();
         checkRestore();
         DataStore.cleanIfNeeded(this);
-
-        try {
-            BRouter.connect(app);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     protected void selectGlobalTypeFilter() {
