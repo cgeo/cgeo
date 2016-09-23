@@ -6,9 +6,8 @@ import android.os.Bundle;
 import android.util.Xml;
 
 import org.xml.sax.Attributes;
-import org.xml.sax.ContentHandler;
-import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
+import org.xml.sax.helpers.DefaultHandler;
 
 import java.util.LinkedList;
 
@@ -20,8 +19,8 @@ import cgeo.geocaching.location.Geopoint;
 public class BRouter {
     private static BRouterServiceConnection brouter;
 
-    public static void connect(Context ctx){
-        if(brouter != null && brouter.isConnected()){
+    public static void connect(Context ctx) {
+        if (brouter != null && brouter.isConnected()) {
             //already connected
             return; //Exception?
         }
@@ -30,14 +29,14 @@ public class BRouter {
         Intent intent = new Intent();
         intent.setClassName("btools.routingapp", "btools.routingapp.BRouterService");
         boolean hasBRouter = ctx.bindService(intent, brouter, Context.BIND_AUTO_CREATE);
-        if(!hasBRouter) {
+        if (!hasBRouter) {
             brouter = null;
         }
     }
 
     public static Geopoint[] getTrack(Geopoint start, Geopoint dest) throws SAXException {
-        if(brouter == null){
-           return null; //Exception
+        if (brouter == null) {
+            return null; //Exception
         }
 
         Bundle params = new Bundle();
@@ -50,68 +49,18 @@ public class BRouter {
 
         final LinkedList<Geopoint> result = new LinkedList<>();
 
-        Xml.parse(gpx, new ContentHandler() {
-            @Override
-            public void setDocumentLocator(Locator locator) {
-
-            }
-
-            @Override
-            public void startDocument() throws SAXException {
-
-            }
-
-            @Override
-            public void endDocument() throws SAXException {
-
-            }
-
-            @Override
-            public void startPrefixMapping(String prefix, String uri) throws SAXException {
-
-            }
-
-            @Override
-            public void endPrefixMapping(String prefix) throws SAXException {
-
-            }
-
+        Xml.parse(gpx, new DefaultHandler() {
             @Override
             public void startElement(String uri, String localName, String qName, Attributes atts) throws SAXException {
                 if (qName.equalsIgnoreCase("trkpt")) {
                     String lat = atts.getValue("lat");
-                    if(lat != null){
+                    if (lat != null) {
                         String lon = atts.getValue("lon");
-                        if(lon != null){
+                        if (lon != null) {
                             result.add(new Geopoint(lat, lon));
                         }
                     }
                 }
-            }
-
-            @Override
-            public void endElement(String uri, String localName, String qName) throws SAXException {
-
-            }
-
-            @Override
-            public void characters(char[] ch, int start, int length) throws SAXException {
-
-            }
-
-            @Override
-            public void ignorableWhitespace(char[] ch, int start, int length) throws SAXException {
-
-            }
-
-            @Override
-            public void processingInstruction(String target, String data) throws SAXException {
-
-            }
-
-            @Override
-            public void skippedEntity(String name) throws SAXException {
-
             }
         });
 
