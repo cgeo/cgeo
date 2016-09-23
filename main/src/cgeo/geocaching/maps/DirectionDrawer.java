@@ -62,18 +62,21 @@ public class DirectionDrawer {
 
         Geopoint[] routingPoints =  null;
 
-        // Use cached route if current position has not changed more than 5m
-        // TODO: Maybe adjust this to current zoomlevel
-        if(lastDirectionUpdatePoint != null && currentCoords.distanceTo(lastDirectionUpdatePoint) < 0.005){
-            routingPoints = lastRoutingPoints;
-        }
-        else{
-            try {
-                routingPoints = BRouter.getTrack(currentCoords, destinationCoords);
-                lastRoutingPoints = routingPoints;
-                lastDirectionUpdatePoint = currentCoords;
-            } catch (SAXException e) {
-                e.printStackTrace();
+        // Disable routing for distances over 1500m
+        if(currentCoords.distanceTo(destinationCoords) <= 1.5) {
+            // Use cached route if current position has not changed more than 5m
+            // TODO: Maybe adjust this to current zoomlevel
+            if (lastDirectionUpdatePoint != null && currentCoords.distanceTo(lastDirectionUpdatePoint) < 0.005) {
+                routingPoints = lastRoutingPoints;
+            }
+            else {
+                try {
+                    routingPoints = BRouter.getTrack(currentCoords, destinationCoords);
+                    lastRoutingPoints = routingPoints;
+                    lastDirectionUpdatePoint = currentCoords;
+                } catch (SAXException e) {
+                    e.printStackTrace();
+                }
             }
         }
 
