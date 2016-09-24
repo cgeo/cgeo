@@ -13,7 +13,6 @@ import cgeo.geocaching.location.AndroidGeocoder;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Units;
 import cgeo.geocaching.maps.DefaultMap;
-import cgeo.geocaching.maps.brouter.BRouter;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.playservices.AppInvite;
 import cgeo.geocaching.sensors.GeoData;

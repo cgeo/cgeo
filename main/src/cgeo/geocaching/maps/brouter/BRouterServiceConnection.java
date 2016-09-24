@@ -9,9 +9,6 @@ import android.os.RemoteException;
 import btools.routingapp.IBRouterService;
 
 
-/**
- * Created by lukeIam on 11.09.2016.
- */
 public class BRouterServiceConnection implements ServiceConnection {
     private IBRouterService brouterService;
 

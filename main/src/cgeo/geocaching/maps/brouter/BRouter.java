@@ -13,23 +13,20 @@ import java.util.LinkedList;
 
 import cgeo.geocaching.location.Geopoint;
 
-/**
- * Created by lukeIam on 11.09.2016.
- */
 public class BRouter {
     private static BRouterServiceConnection brouter;
 
     public static void connect(Context ctx) {
         if (brouter != null && brouter.isConnected()) {
             //already connected
-            return; //Exception?
+            return;
         }
 
         brouter = new BRouterServiceConnection();
-        Intent intent = new Intent();
+        final Intent intent = new Intent();
         intent.setClassName("btools.routingapp", "btools.routingapp.BRouterService");
-        boolean hasBRouter = ctx.bindService(intent, brouter, Context.BIND_AUTO_CREATE);
-        if (!hasBRouter) {
+
+        if (!ctx.bindService(intent, brouter, Context.BIND_AUTO_CREATE)) {
             brouter = null;
         }
     }
@@ -43,16 +40,16 @@ public class BRouter {
 
     public static Geopoint[] getTrack(Geopoint start, Geopoint dest) throws SAXException {
         if (brouter == null) {
-            return null; //Exception
+            return null;
         }
 
-        Bundle params = new Bundle();
+        final Bundle params = new Bundle();
         params.putString("trackFormat", "gpx");
         params.putString("v", "foot");
         params.putDoubleArray("lats", new double[]{start.getLatitude(), dest.getLatitude()});
         params.putDoubleArray("lons", new double[]{start.getLongitude(), dest.getLongitude()});
 
-        String gpx = brouter.getTrackFromParams(params);
+        final String gpx = brouter.getTrackFromParams(params);
 
         final LinkedList<Geopoint> result = new LinkedList<>();
 
@@ -60,9 +57,9 @@ public class BRouter {
             @Override
             public void startElement(String uri, String localName, String qName, Attributes atts) throws SAXException {
                 if (qName.equalsIgnoreCase("trkpt")) {
-                    String lat = atts.getValue("lat");
+                    final String lat = atts.getValue("lat");
                     if (lat != null) {
-                        String lon = atts.getValue("lon");
+                        final String lon = atts.getValue("lon");
                         if (lon != null) {
                             result.add(new Geopoint(lat, lon));
                         }

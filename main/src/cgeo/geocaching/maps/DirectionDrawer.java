@@ -82,8 +82,8 @@ public class DirectionDrawer {
 
         if(routingPoints != null && routingPoints.length > 0){
             Point lastPoint = null;
-            Point currentPoint = new Point();
-            for (Geopoint currentGeoPoint: routingPoints) {
+            final Point currentPoint = new Point();
+            for (final Geopoint currentGeoPoint: routingPoints) {
                 projection.toPixels(mapItemFactory.getGeoPointBase(currentGeoPoint), currentPoint);
 
                 if(lastPoint != null){
