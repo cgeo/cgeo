@@ -21,7 +21,7 @@ public final class BRouter {
     private static BRouterServiceConnection brouter;
     private static Geopoint lastDirectionUpdatePoint;
     private static Geopoint[] lastRoutingPoints;
-
+    private static Geopoint lastDestination;
 
     private BRouter() {
         // utility class
@@ -50,24 +50,25 @@ public final class BRouter {
     }
 
     @Nullable
-    public static Geopoint[] getTrack(final Geopoint start, final Geopoint dest) {
+    public static Geopoint[] getTrack(final Geopoint start, final Geopoint destination) {
         if (brouter == null) {
             return null;
         }
 
         // Disable routing for huge distances
-        if (start.distanceTo(dest) > MAX_ROUTING_DISTANCE_KILOMETERS) {
+        if (start.distanceTo(destination) > MAX_ROUTING_DISTANCE_KILOMETERS) {
             return null;
         }
 
         // Use cached route if current position has not changed more than 5m
         // TODO: Maybe adjust this to current zoomlevel
-        if (lastDirectionUpdatePoint != null && start.distanceTo(lastDirectionUpdatePoint) < 0.005) {
+        if (lastDirectionUpdatePoint != null && destination == lastDestination && start.distanceTo(lastDirectionUpdatePoint) < 0.005) {
             return lastRoutingPoints;
         }
 
         // now really calculate a new route
-        lastRoutingPoints = calculateRouting(start, dest);
+        lastDestination = destination;
+        lastRoutingPoints = calculateRouting(start, destination);
         lastDirectionUpdatePoint = start;
         return lastRoutingPoints;
     }
