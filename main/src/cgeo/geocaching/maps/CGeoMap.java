@@ -17,6 +17,8 @@ import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
+import cgeo.geocaching.maps.brouter.BRouter;
+import cgeo.geocaching.maps.brouter.RoutingMode;
 import cgeo.geocaching.maps.interfaces.CachesOverlayItemImpl;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
 import cgeo.geocaching.maps.interfaces.MapActivityImpl;
@@ -690,15 +692,17 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
                 default: // DETAILED
                     menu.findItem(R.id.menu_strategy_detailed).setChecked(true);
             }
+
+            menu.findItem(R.id.submenu_routing).setVisible(BRouter.isAvailable());
             switch (Settings.getRoutingMode()) {
-                case "bicycle":
+                case WALK:
+                    menu.findItem(R.id.menu_routing_walk).setChecked(true);
+                    break;
+                case BIKE:
                     menu.findItem(R.id.menu_routing_bike).setChecked(true);
                     break;
-                case "car":
+                case CAR:
                     menu.findItem(R.id.menu_routing_car).setChecked(true);
-                    break;
-                default:
-                    menu.findItem(R.id.menu_routing_walk).setChecked(true);
                     break;
             }
             menu.findItem(R.id.menu_hint).setVisible(mapOptions.mapMode == MapMode.SINGLE);
@@ -824,19 +828,19 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
             }
             case R.id.menu_routing_walk: {
                 item.setChecked(true);
-                Settings.setRoutingMode("foot");
+                Settings.setRoutingMode(RoutingMode.WALK);
                 mapView.repaintRequired(overlayPositionAndScale);
                 return true;
             }
             case R.id.menu_routing_bike: {
                 item.setChecked(true);
-                Settings.setRoutingMode("bicycle");
+                Settings.setRoutingMode(RoutingMode.BIKE);
                 mapView.repaintRequired(overlayPositionAndScale);
                 return true;
             }
             case R.id.menu_routing_car: {
                 item.setChecked(true);
-                Settings.setRoutingMode("motorcar");
+                Settings.setRoutingMode(RoutingMode.CAR);
                 mapView.repaintRequired(overlayPositionAndScale);
                 return true;
             }

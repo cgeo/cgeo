@@ -14,6 +14,8 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.maps.LivemapStrategy;
 import cgeo.geocaching.maps.MapMode;
 import cgeo.geocaching.maps.MapProviderFactory;
+import cgeo.geocaching.maps.brouter.BRouter;
+import cgeo.geocaching.maps.brouter.RoutingMode;
 import cgeo.geocaching.maps.google.v1.GoogleMapProvider;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
 import cgeo.geocaching.maps.interfaces.MapProvider;
@@ -1307,12 +1309,13 @@ public class Settings {
         return Settings.useEnglish() ? Locale.ENGLISH : Locale.getDefault();
     }
 
-    public static void setRoutingMode(final String mode) {
-        putString(R.string.pref_map_routing, mode);
+    public static void setRoutingMode(@NonNull final RoutingMode mode) {
+        putString(R.string.pref_map_routing, mode.parameterValue);
+        BRouter.invalidateRouting();
     }
 
-    public static String getRoutingMode() {
-        return getString(R.string.pref_map_routing, "foot");
+    public static RoutingMode getRoutingMode() {
+        return RoutingMode.fromString(getString(R.string.pref_map_routing, "foot"));
     }
 
 }

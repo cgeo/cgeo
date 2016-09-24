@@ -15,13 +15,9 @@ import android.location.Location;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
-import org.xml.sax.SAXException;
-
 public class DirectionDrawer {
     private Geopoint currentCoords;
     private final Geopoint destinationCoords;
-    private Geopoint lastDirectionUpdatePoint;
-    private Geopoint[] lastRoutingPoints;
     private final MapItemFactory mapItemFactory;
     private final float width;
 
@@ -59,24 +55,8 @@ public class DirectionDrawer {
             line.setColor(0x80EB391E);
         }
 
-        Geopoint[] routingPoints = null;
 
-        // Disable routing for distances over 1500m
-        if (currentCoords.distanceTo(destinationCoords) <= 1.5) {
-            // Use cached route if current position has not changed more than 5m
-            // TODO: Maybe adjust this to current zoomlevel
-            if (lastDirectionUpdatePoint != null && currentCoords.distanceTo(lastDirectionUpdatePoint) < 0.005) {
-                routingPoints = lastRoutingPoints;
-            } else {
-                try {
-                    routingPoints = BRouter.getTrack(currentCoords, destinationCoords);
-                    lastRoutingPoints = routingPoints;
-                    lastDirectionUpdatePoint = currentCoords;
-                } catch (final SAXException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
+        final Geopoint[] routingPoints = BRouter.getTrack(currentCoords, destinationCoords);
 
         if (routingPoints != null && routingPoints.length > 0) {
             Point lastPoint = null;
