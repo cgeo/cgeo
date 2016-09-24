@@ -82,7 +82,6 @@ public final class Routing {
     private static Geopoint[] calculateRouting(final Geopoint start, final Geopoint dest) {
         final Bundle params = new Bundle();
         params.putString("trackFormat", "gpx");
-        params.putString("v", "foot");
         params.putDoubleArray("lats", new double[]{start.getLatitude(), dest.getLatitude()});
         params.putDoubleArray("lons", new double[]{start.getLongitude(), dest.getLongitude()});
         params.putString("v", Settings.getRoutingMode().parameterValue);
