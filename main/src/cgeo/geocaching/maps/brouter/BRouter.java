@@ -1,6 +1,7 @@
 package cgeo.geocaching.maps.brouter;
 
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.settings.Settings;
 
 import android.content.Context;
 import android.content.Intent;
@@ -52,6 +53,7 @@ public final class BRouter {
         params.putString("v", "foot");
         params.putDoubleArray("lats", new double[]{start.getLatitude(), dest.getLatitude()});
         params.putDoubleArray("lons", new double[]{start.getLongitude(), dest.getLongitude()});
+        params.putString("v", Settings.getRoutingMode());
 
         final String gpx = brouter.getTrackFromParams(params);
 

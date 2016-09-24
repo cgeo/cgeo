@@ -96,6 +96,31 @@
         </menu>
     </item>
     <item
+        android:id="@+id/submenu_routing"
+        android:showAsAction="ifRoom|withText"
+        android:title="@string/map_routing"
+        android:visible="false"
+        app:showAsAction="ifRoom|withText">
+        <menu>
+            <group
+                android:id="@+id/menu_group_routing"
+                android:checkableBehavior="single" >
+	            <item
+	                android:id="@+id/menu_routing_walk"
+	                android:title="@string/map_routing_walk">
+	            </item>
+	            <item
+	                android:id="@+id/menu_routing_bike"
+	                android:title="@string/map_routing_bike">
+	            </item>
+	            <item
+	                android:id="@+id/menu_routing_car"
+	                android:title="@string/map_routing_car">
+	            </item>
+	        </group>
+        </menu>
+    </item>
+    <item
         android:id="@+id/menu_theme_mode"
         android:icon="@drawable/ic_menu_preferences"
         android:showAsAction="ifRoom|withText"

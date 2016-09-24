@@ -690,6 +690,17 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
                 default: // DETAILED
                     menu.findItem(R.id.menu_strategy_detailed).setChecked(true);
             }
+            switch (Settings.getRoutingMode()) {
+                case "bicycle":
+                    menu.findItem(R.id.menu_routing_bike).setChecked(true);
+                    break;
+                case "car":
+                    menu.findItem(R.id.menu_routing_car).setChecked(true);
+                    break;
+                default:
+                    menu.findItem(R.id.menu_routing_walk).setChecked(true);
+                    break;
+            }
             menu.findItem(R.id.menu_hint).setVisible(mapOptions.mapMode == MapMode.SINGLE);
             menu.findItem(R.id.menu_compass).setVisible(mapOptions.mapMode == MapMode.SINGLE);
         } catch (final RuntimeException e) {
@@ -809,6 +820,24 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
             case R.id.menu_strategy_detailed: {
                 item.setChecked(true);
                 Settings.setLiveMapStrategy(LivemapStrategy.DETAILED);
+                return true;
+            }
+            case R.id.menu_routing_walk: {
+                item.setChecked(true);
+                Settings.setRoutingMode("foot");
+                mapView.repaintRequired(overlayPositionAndScale);
+                return true;
+            }
+            case R.id.menu_routing_bike: {
+                item.setChecked(true);
+                Settings.setRoutingMode("bicycle");
+                mapView.repaintRequired(overlayPositionAndScale);
+                return true;
+            }
+            case R.id.menu_routing_car: {
+                item.setChecked(true);
+                Settings.setRoutingMode("motorcar");
+                mapView.repaintRequired(overlayPositionAndScale);
                 return true;
             }
             case R.id.menu_hint:

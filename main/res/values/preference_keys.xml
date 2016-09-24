@@ -214,4 +214,5 @@
     <string translatable="false" name="pref_last_trackable_log">last_trackable_log</string>
     <string translatable="false" name="pref_home_location">home_location</string>
     <string translatable="false" name="pref_map_direction">map_direction</string>
+    <string translatable="false" name="pref_map_routing">map_routing</string>
 </resources>

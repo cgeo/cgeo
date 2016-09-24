@@ -11,8 +11,8 @@ import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LogTypeTrackable;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.maps.MapMode;
 import cgeo.geocaching.maps.LivemapStrategy;
+import cgeo.geocaching.maps.MapMode;
 import cgeo.geocaching.maps.MapProviderFactory;
 import cgeo.geocaching.maps.google.v1.GoogleMapProvider;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
@@ -1305,6 +1305,14 @@ public class Settings {
      */
     public static Locale getApplicationLocale() {
         return Settings.useEnglish() ? Locale.ENGLISH : Locale.getDefault();
+    }
+
+    public static void setRoutingMode(final String mode) {
+        putString(R.string.pref_map_routing, mode);
+    }
+
+    public static String getRoutingMode() {
+        return getString(R.string.pref_map_routing, "foot");
     }
 
 }
