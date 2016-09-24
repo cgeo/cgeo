@@ -8,29 +8,31 @@ import android.os.RemoteException;
 
 import btools.routingapp.IBRouterService;
 
-
 public class BRouterServiceConnection implements ServiceConnection {
     private IBRouterService brouterService;
 
-    public void onServiceConnected(ComponentName className, IBinder service) {
+    @Override
+    public void onServiceConnected(final ComponentName className, final IBinder service) {
         brouterService = IBRouterService.Stub.asInterface(service);
     }
 
-    public void onServiceDisconnected(ComponentName className) {
+    @Override
+    public void onServiceDisconnected(final ComponentName className) {
         brouterService = null;
     }
-    public boolean isConnected(){
+
+    public boolean isConnected() {
         return brouterService != null;
     }
 
-    public String getTrackFromParams(Bundle params){
-        if(!isConnected()){
+    public String getTrackFromParams(final Bundle params) {
+        if (!isConnected()) {
             return null;
         }
 
         try {
             return brouterService.getTrackFromParams(params);
-        } catch (RemoteException e) {
+        } catch (final RemoteException e) {
             return null;
         }
     }

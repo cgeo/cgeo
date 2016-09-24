@@ -59,45 +59,40 @@ public class DirectionDrawer {
             line.setColor(0x80EB391E);
         }
 
-
-        Geopoint[] routingPoints =  null;
+        Geopoint[] routingPoints = null;
 
         // Disable routing for distances over 1500m
-        if(currentCoords.distanceTo(destinationCoords) <= 1.5) {
+        if (currentCoords.distanceTo(destinationCoords) <= 1.5) {
             // Use cached route if current position has not changed more than 5m
             // TODO: Maybe adjust this to current zoomlevel
             if (lastDirectionUpdatePoint != null && currentCoords.distanceTo(lastDirectionUpdatePoint) < 0.005) {
                 routingPoints = lastRoutingPoints;
-            }
-            else {
+            } else {
                 try {
                     routingPoints = BRouter.getTrack(currentCoords, destinationCoords);
                     lastRoutingPoints = routingPoints;
                     lastDirectionUpdatePoint = currentCoords;
-                } catch (SAXException e) {
+                } catch (final SAXException e) {
                     e.printStackTrace();
                 }
             }
         }
 
-        if(routingPoints != null && routingPoints.length > 0){
+        if (routingPoints != null && routingPoints.length > 0) {
             Point lastPoint = null;
             final Point currentPoint = new Point();
-            for (final Geopoint currentGeoPoint: routingPoints) {
+            for (final Geopoint currentGeoPoint : routingPoints) {
                 projection.toPixels(mapItemFactory.getGeoPointBase(currentGeoPoint), currentPoint);
 
-                if(lastPoint != null){
+                if (lastPoint != null) {
                     canvas.drawLine(lastPoint.x, lastPoint.y, currentPoint.x, currentPoint.y, line);
-                }
-                else {
+                } else {
                     lastPoint = new Point();
                 }
                 lastPoint.x = currentPoint.x;
                 lastPoint.y = currentPoint.y;
             }
-        }
-        else
-        {
+        } else {
             final Point pos = new Point();
             final Point dest = new Point();
 

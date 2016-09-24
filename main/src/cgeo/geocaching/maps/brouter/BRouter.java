@@ -1,22 +1,26 @@
 package cgeo.geocaching.maps.brouter;
 
+import cgeo.geocaching.location.Geopoint;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Xml;
 
+import java.util.LinkedList;
+
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-import java.util.LinkedList;
-
-import cgeo.geocaching.location.Geopoint;
-
-public class BRouter {
+public final class BRouter {
     private static BRouterServiceConnection brouter;
 
-    public static void connect(Context ctx) {
+    private BRouter() {
+        // utility class
+    }
+
+    public static void connect(final Context ctx) {
         if (brouter != null && brouter.isConnected()) {
             //already connected
             return;
@@ -31,14 +35,14 @@ public class BRouter {
         }
     }
 
-    public static void disconnect(Context ctx) {
+    public static void disconnect(final Context ctx) {
         if (brouter != null && brouter.isConnected()) {
             ctx.unbindService(brouter);
             brouter = null;
         }
     }
 
-    public static Geopoint[] getTrack(Geopoint start, Geopoint dest) throws SAXException {
+    public static Geopoint[] getTrack(final Geopoint start, final Geopoint dest) throws SAXException {
         if (brouter == null) {
             return null;
         }
@@ -55,7 +59,7 @@ public class BRouter {
 
         Xml.parse(gpx, new DefaultHandler() {
             @Override
-            public void startElement(String uri, String localName, String qName, Attributes atts) throws SAXException {
+            public void startElement(final String uri, final String localName, final String qName, final Attributes atts) throws SAXException {
                 if (qName.equalsIgnoreCase("trkpt")) {
                     final String lat = atts.getValue("lat");
                     if (lat != null) {
