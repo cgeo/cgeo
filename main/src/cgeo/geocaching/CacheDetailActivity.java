@@ -885,7 +885,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         WAYPOINTS(R.string.cache_waypoints),
         INVENTORY(R.string.cache_inventory),
         IMAGES(R.string.cache_images),
-        WEBVIEW(R.string.browser);
+        WEBVIEW(R.string.cache_details_online);
 
         private final int titleStringId;
 
@@ -2254,7 +2254,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 return new ImagesViewCreator();
 
             case WEBVIEW:
-                return new WebViewCreator(this);
+                return new WebViewCreator(this, cache);
         }
         throw new IllegalStateException(); // cannot happen as long as switch case is enum complete
     }

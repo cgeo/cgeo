@@ -1,6 +1,10 @@
 package cgeo.geocaching.network;
 
-import org.apache.commons.lang3.StringUtils;
+import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.utils.Log;
+
+import android.webkit.CookieManager;
+import android.webkit.CookieSyncManager;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -10,6 +14,7 @@ import okhttp3.Cookie;
 import okhttp3.Cookie.Builder;
 import okhttp3.CookieJar;
 import okhttp3.HttpUrl;
+import org.apache.commons.lang3.StringUtils;
 
 public final class Cookies {
 
@@ -45,11 +50,11 @@ public final class Cookies {
             return cookies;
         }
 
-        public synchronized void clear() {
+        private synchronized void clear() {
             allCookies.clear();
         }
 
-        public synchronized void restoreCookieStore(final String oldCookies) {
+        private synchronized void restoreCookieStore(final String oldCookies) {
             if (!cookieStoreRestored) {
                 clearCookies();
                 if (oldCookies != null) {
@@ -68,7 +73,7 @@ public final class Cookies {
             }
         }
 
-        String dumpCookieStore() {
+        private String dumpCookieStore() {
             final StringBuilder cookies = new StringBuilder();
             for (final Cookie cookie : allCookies.values()) {
                 cookies.append(cookie.name());
@@ -80,6 +85,28 @@ public final class Cookies {
             }
             return cookies.toString();
         }
+
+        private void syncFromNetworkClientToWebView(final String url) {
+            Log.d("cookie jar size " + allCookies.size());
+            if (!allCookies.isEmpty()) {
+
+                // TODO: find out whether the sync manager is still needed or not
+                CookieSyncManager.createInstance(CgeoApplication.getInstance());
+                final android.webkit.CookieManager cookieManager = CookieManager.getInstance();
+
+                final HttpUrl targetUrl = HttpUrl.parse(url);
+                //sync all the cookies with the webview by generating cookie string
+                for (final Cookie cookie : allCookies.values()) {
+                    if (cookie.matches(targetUrl)) {
+                        Log.d("syncing cookie " + cookie.name());
+                        final String cookieString = cookie.name() + "=" + cookie.value() + "; domain=" + cookie.domain();
+                        cookieManager.setCookie(url, cookieString);
+                    }
+                }
+                CookieSyncManager.getInstance().sync();
+            }
+        }
+
     }
 
     private Cookies() {
@@ -96,5 +123,9 @@ public final class Cookies {
 
     public static void clearCookies() {
         cookieJar.clear();
+    }
+
+    public static void syncFromNetworkClientToWebView(final String url) {
+        cookieJar.syncFromNetworkClientToWebView(url);
     }
 }

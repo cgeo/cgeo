@@ -2,6 +2,8 @@ package cgeo.geocaching.details;
 
 import cgeo.geocaching.CacheDetailActivity;
 import cgeo.geocaching.R;
+import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.network.Cookies;
 import cgeo.geocaching.ui.AbstractCachingPageViewCreator;
 
 import android.annotation.SuppressLint;
@@ -19,8 +21,10 @@ public class WebViewCreator extends AbstractCachingPageViewCreator<WebView> {
 
     private final WeakReference<CacheDetailActivity> activityRef;
     private boolean hasLoaded = false;
+    private final Geocache geocache;
 
-    public WebViewCreator(final CacheDetailActivity activity) {
+    public WebViewCreator(final CacheDetailActivity activity, final Geocache geocache) {
+        this.geocache = geocache;
         this.activityRef = new WeakReference<>(activity);
     }
 
@@ -31,6 +35,7 @@ public class WebViewCreator extends AbstractCachingPageViewCreator<WebView> {
         if (activity == null) {
             return null;
         }
+        Cookies.syncFromNetworkClientToWebView(geocache.getLongUrl());
         view = (WebView) activity.getLayoutInflater().inflate(R.layout.cachedetail_webview_page, parentView, false);
         final WebSettings settings = view.getSettings();
         settings.setJavaScriptEnabled(true);

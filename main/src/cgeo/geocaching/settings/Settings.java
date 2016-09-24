@@ -11,8 +11,8 @@ import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LogTypeTrackable;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.maps.MapMode;
 import cgeo.geocaching.maps.LivemapStrategy;
+import cgeo.geocaching.maps.MapMode;
 import cgeo.geocaching.maps.MapProviderFactory;
 import cgeo.geocaching.maps.google.v1.GoogleMapProvider;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
@@ -20,6 +20,7 @@ import cgeo.geocaching.maps.interfaces.MapProvider;
 import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider;
 import cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider.OfflineMapSource;
+import cgeo.geocaching.network.Cookies;
 import cgeo.geocaching.playservices.GooglePlayServices;
 import cgeo.geocaching.sensors.MagnetometerAndAccelerometerProvider;
 import cgeo.geocaching.sensors.OrientationProvider;
@@ -432,6 +433,10 @@ public class Settings {
         putString(R.string.pref_cookiestore, cookies);
     }
 
+    /**
+     * return the serialized cookie store. This value should only be used with
+     * {@link Cookies#restoreCookieStore(String)} as the serialization format depends on that class.
+     */
     public static String getCookieStore() {
         return getString(R.string.pref_cookiestore, null);
     }
