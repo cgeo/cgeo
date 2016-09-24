@@ -102,6 +102,7 @@ android {
             java.srcDirs = ['src', 'thirdparty', '../common/src'] // no need for annotation generated sources
             res.srcDirs = ['res']
             assets.srcDirs = ['assets']
+            aidl.srcDirs = ['src'] // default src/main/aidl creates package name conflicts in Eclipse
         }
         // local unit tests, which can be executed without a device
         test {
