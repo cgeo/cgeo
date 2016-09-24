@@ -10,6 +10,7 @@ import cgeo.geocaching.settings.Settings;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.Point;
 import android.location.Location;
 import android.util.DisplayMetrics;
@@ -21,7 +22,7 @@ public class DirectionDrawer {
     private final MapItemFactory mapItemFactory;
     private final float width;
 
-    private Paint line = null;
+    private Paint linePaint = null;
 
     public DirectionDrawer(final Geopoint coords) {
         this.destinationCoords = coords;
@@ -31,7 +32,7 @@ public class DirectionDrawer {
         final WindowManager windowManager = (WindowManager) CgeoApplication.getInstance().getSystemService(Context.WINDOW_SERVICE);
         windowManager.getDefaultDisplay().getMetrics(metrics);
 
-        width = 4f * metrics.density;
+        width = 5f * metrics.density;
 
     }
 
@@ -48,30 +49,33 @@ public class DirectionDrawer {
             return;
         }
 
-        if (line == null) {
-            line = new Paint();
-            line.setAntiAlias(true);
-            line.setStrokeWidth(width);
-            line.setColor(0x80EB391E);
+        if (linePaint == null) {
+            linePaint = new Paint();
+            linePaint.setAntiAlias(true);
+            linePaint.setStrokeWidth(width);
+            linePaint.setStyle(Paint.Style.STROKE);
+            linePaint.setColor(0x80EB391E);
         }
 
 
         final Geopoint[] routingPoints = BRouter.getTrack(currentCoords, destinationCoords);
 
-        if (routingPoints != null && routingPoints.length > 0) {
-            Point lastPoint = null;
-            final Point currentPoint = new Point();
-            for (final Geopoint currentGeoPoint : routingPoints) {
-                projection.toPixels(mapItemFactory.getGeoPointBase(currentGeoPoint), currentPoint);
+        if (routingPoints != null && routingPoints.length > 1) {
 
-                if (lastPoint != null) {
-                    canvas.drawLine(lastPoint.x, lastPoint.y, currentPoint.x, currentPoint.y, line);
-                } else {
-                    lastPoint = new Point();
-                }
-                lastPoint.x = currentPoint.x;
-                lastPoint.y = currentPoint.y;
+            final Point pixelPoint = new Point();
+
+            // start a new path figure
+            final Path path = new Path();
+            projection.toPixels(mapItemFactory.getGeoPointBase(routingPoints[0]), pixelPoint);
+            path.moveTo(pixelPoint.x, pixelPoint.y);
+
+            for (int i = 1; i < routingPoints.length; i++) {
+                final Geopoint currentRoutingPoint = routingPoints[i];
+                projection.toPixels(mapItemFactory.getGeoPointBase(currentRoutingPoint), pixelPoint);
+                path.lineTo(pixelPoint.x, pixelPoint.y);
             }
+
+            canvas.drawPath(path, linePaint);
         } else {
             final Point pos = new Point();
             final Point dest = new Point();
@@ -79,7 +83,7 @@ public class DirectionDrawer {
             projection.toPixels(mapItemFactory.getGeoPointBase(currentCoords), pos);
             projection.toPixels(mapItemFactory.getGeoPointBase(destinationCoords), dest);
 
-            canvas.drawLine(pos.x, pos.y, dest.x, dest.y, line);
+            canvas.drawLine(pos.x, pos.y, dest.x, dest.y, linePaint);
         }
 
     }
