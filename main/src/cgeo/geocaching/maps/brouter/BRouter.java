@@ -17,6 +17,7 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 public final class BRouter {
+    private static final double MAX_ROUTING_DISTANCE_KILOMETERS = 5.0;
     private static BRouterServiceConnection brouter;
     private static Geopoint lastDirectionUpdatePoint;
     private static Geopoint[] lastRoutingPoints;
@@ -54,8 +55,8 @@ public final class BRouter {
             return null;
         }
 
-        // Disable routing for distances over 1500m
-        if (start.distanceTo(dest) > 1.5) {
+        // Disable routing for huge distances
+        if (start.distanceTo(dest) > MAX_ROUTING_DISTANCE_KILOMETERS) {
             return null;
         }
 
