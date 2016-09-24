@@ -17,8 +17,6 @@ import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
-import cgeo.geocaching.maps.brouter.BRouter;
-import cgeo.geocaching.maps.brouter.RoutingMode;
 import cgeo.geocaching.maps.interfaces.CachesOverlayItemImpl;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
 import cgeo.geocaching.maps.interfaces.MapActivityImpl;
@@ -28,6 +26,8 @@ import cgeo.geocaching.maps.interfaces.MapProvider;
 import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
 import cgeo.geocaching.maps.interfaces.OnMapDragListener;
+import cgeo.geocaching.maps.routing.Routing;
+import cgeo.geocaching.maps.routing.RoutingMode;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.network.AndroidBeam;
@@ -693,7 +693,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
                     menu.findItem(R.id.menu_strategy_detailed).setChecked(true);
             }
 
-            menu.findItem(R.id.submenu_routing).setVisible(BRouter.isAvailable());
+            menu.findItem(R.id.submenu_routing).setVisible(Routing.isAvailable());
             switch (Settings.getRoutingMode()) {
                 case WALK:
                     menu.findItem(R.id.menu_routing_walk).setChecked(true);

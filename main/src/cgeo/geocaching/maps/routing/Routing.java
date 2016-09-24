@@ -1,10 +1,12 @@
-package cgeo.geocaching.maps.brouter;
+package cgeo.geocaching.maps.routing;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
 
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -16,18 +18,18 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-public final class BRouter {
+public final class Routing {
     private static final double MAX_ROUTING_DISTANCE_KILOMETERS = 5.0;
     private static BRouterServiceConnection brouter;
     private static Geopoint lastDirectionUpdatePoint;
     private static Geopoint[] lastRoutingPoints;
     private static Geopoint lastDestination;
 
-    private BRouter() {
+    private Routing() {
         // utility class
     }
 
-    public static void connect(final Context ctx) {
+    public static void connect() {
         if (brouter != null && brouter.isConnected()) {
             //already connected
             return;
@@ -37,14 +39,18 @@ public final class BRouter {
         final Intent intent = new Intent();
         intent.setClassName("btools.routingapp", "btools.routingapp.BRouterService");
 
-        if (!ctx.bindService(intent, brouter, Context.BIND_AUTO_CREATE)) {
+        if (!getContext().bindService(intent, brouter, Context.BIND_AUTO_CREATE)) {
             brouter = null;
         }
     }
 
-    public static void disconnect(final Context ctx) {
+    private static ContextWrapper getContext() {
+        return CgeoApplication.getInstance();
+    }
+
+    public static void disconnect() {
         if (brouter != null && brouter.isConnected()) {
-            ctx.unbindService(brouter);
+            getContext().unbindService(brouter);
             brouter = null;
         }
     }

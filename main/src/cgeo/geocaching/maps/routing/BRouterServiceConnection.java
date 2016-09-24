@@ -1,10 +1,11 @@
-package cgeo.geocaching.maps.brouter;
+package cgeo.geocaching.maps.routing;
 
 import android.content.ComponentName;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
+import android.support.annotation.Nullable;
 
 import btools.routingapp.IBRouterService;
 
@@ -25,6 +26,7 @@ public class BRouterServiceConnection implements ServiceConnection {
         return brouterService != null;
     }
 
+    @Nullable
     public String getTrackFromParams(final Bundle params) {
         if (!isConnected()) {
             return null;

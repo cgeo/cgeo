@@ -14,14 +14,14 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.maps.LivemapStrategy;
 import cgeo.geocaching.maps.MapMode;
 import cgeo.geocaching.maps.MapProviderFactory;
-import cgeo.geocaching.maps.brouter.BRouter;
-import cgeo.geocaching.maps.brouter.RoutingMode;
 import cgeo.geocaching.maps.google.v1.GoogleMapProvider;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
 import cgeo.geocaching.maps.interfaces.MapProvider;
 import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider;
 import cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider.OfflineMapSource;
+import cgeo.geocaching.maps.routing.Routing;
+import cgeo.geocaching.maps.routing.RoutingMode;
 import cgeo.geocaching.playservices.GooglePlayServices;
 import cgeo.geocaching.sensors.MagnetometerAndAccelerometerProvider;
 import cgeo.geocaching.sensors.OrientationProvider;
@@ -1311,7 +1311,7 @@ public class Settings {
 
     public static void setRoutingMode(@NonNull final RoutingMode mode) {
         putString(R.string.pref_map_routing, mode.parameterValue);
-        BRouter.invalidateRouting();
+        Routing.invalidateRouting();
     }
 
     public static RoutingMode getRoutingMode() {

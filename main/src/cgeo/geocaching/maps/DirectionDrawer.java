@@ -2,9 +2,9 @@ package cgeo.geocaching.maps;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.maps.brouter.BRouter;
 import cgeo.geocaching.maps.interfaces.MapItemFactory;
 import cgeo.geocaching.maps.interfaces.MapProjectionImpl;
+import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.settings.Settings;
 
 import android.content.Context;
@@ -58,7 +58,7 @@ public class DirectionDrawer {
         }
 
 
-        final Geopoint[] routingPoints = BRouter.getTrack(currentCoords, destinationCoords);
+        final Geopoint[] routingPoints = Routing.getTrack(currentCoords, destinationCoords);
 
         if (routingPoints != null && routingPoints.length > 1) {
 

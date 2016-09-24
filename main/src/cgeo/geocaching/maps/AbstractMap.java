@@ -1,5 +1,9 @@
 package cgeo.geocaching.maps;
 
+import cgeo.geocaching.R;
+import cgeo.geocaching.maps.interfaces.MapActivityImpl;
+import cgeo.geocaching.maps.routing.Routing;
+
 import android.app.Activity;
 import android.content.res.Resources;
 import android.os.Build;
@@ -7,10 +11,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
-
-import cgeo.geocaching.R;
-import cgeo.geocaching.maps.brouter.BRouter;
-import cgeo.geocaching.maps.interfaces.MapActivityImpl;
 
 /**
  * Base class for the map activity. Delegates base class calls to the
@@ -38,12 +38,7 @@ public abstract class AbstractMap {
             mapActivity.getActivity().requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         }
 
-        // Connect to BRouter service
-        try {
-            BRouter.connect(getActivity().getApplication());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        Routing.connect();
     }
 
     public void onResume() {
@@ -60,7 +55,7 @@ public abstract class AbstractMap {
 
     public void onDestroy() {
         mapActivity.superOnDestroy();
-        BRouter.disconnect(getActivity().getApplication());
+        Routing.disconnect();
     }
 
     public boolean onCreateOptionsMenu(final Menu menu) {

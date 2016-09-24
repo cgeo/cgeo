@@ -1,7 +1,10 @@
-package cgeo.geocaching.maps.brouter;
+package cgeo.geocaching.maps.routing;
 
 import android.support.annotation.NonNull;
 
+/**
+ * Mapping of routing modes and {@link BRouterServiceConnection} implementation dependent parameter values.
+ */
 public enum RoutingMode {
     WALK("foot"),
     BIKE("bicycle"),
