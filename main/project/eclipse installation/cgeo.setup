@@ -22,6 +22,14 @@
         source="http://www.eclipse.org/oomph/setup/UserPreferences"/>
     <setupTask
         xsi:type="setup:CompoundTask"
+        name="org.eclipse.compare">
+      <setupTask
+          xsi:type="setup:PreferenceTask"
+          key="/instance/org.eclipse.compare/org.eclipse.compare.IgnoreWhitespace"
+          value="true"/>
+    </setupTask>
+    <setupTask
+        xsi:type="setup:CompoundTask"
         name="org.eclipse.core.resources">
       <setupTask
           xsi:type="setup:PreferenceTask"
@@ -47,6 +55,18 @@
     <setupTask
         xsi:type="setup:CompoundTask"
         name="org.eclipse.egit.ui">
+      <setupTask
+          xsi:type="setup:PreferenceTask"
+          key="/instance/org.eclipse.egit.ui/Blame_IgnoreWhitespace"
+          value="true"/>
+      <setupTask
+          xsi:type="setup:PreferenceTask"
+          key="/instance/org.eclipse.egit.ui/blockCommit"
+          value="true"/>
+      <setupTask
+          xsi:type="setup:PreferenceTask"
+          key="/instance/org.eclipse.egit.ui/blockCommitCombo"
+          value="2"/>
       <setupTask
           xsi:type="setup:PreferenceTask"
           key="/instance/org.eclipse.egit.ui/checkBeforeCommitting"
@@ -107,6 +127,14 @@
           xsi:type="setup:PreferenceTask"
           key="/instance/org.eclipse.mylyn.team.ui/org.eclipse.mylyn.team.commit.template"
           value="#$$$${task.key}: $$$${task.description}"/>
+    </setupTask>
+    <setupTask
+        xsi:type="setup:CompoundTask"
+        name="org.eclipse.team.ui">
+      <setupTask
+          xsi:type="setup:PreferenceTask"
+          key="/instance/org.eclipse.team.ui/org.eclipse.team.ui.show_author_in_compare_editor"
+          value="true"/>
     </setupTask>
     <setupTask
         xsi:type="setup:CompoundTask"
@@ -231,16 +259,6 @@
           name="edu.umd.cs.findbugs.plugin.eclipse.feature.group"/>
       <repository
           url="http://findbugs.cs.umd.edu/eclipse/"/>
-    </setupTask>
-    <setupTask
-        xsi:type="setup.p2:P2Task"
-        label="Genymoton"
-        licenseConfirmationDisabled="true">
-      <requirement
-          name="com.genymobile.genymotion.ide.eclipse.feature.group"/>
-      <repository
-          url="http://plugins.genymotion.com/eclipse"/>
-      <description></description>
     </setupTask>
     <setupTask
         xsi:type="setup.p2:P2Task"
