@@ -1,8 +1,14 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.activity.AbstractActionBarActivity;
+import cgeo.geocaching.compatibility.Compatibility;
+import cgeo.geocaching.ui.AbstractViewHolder;
+import cgeo.geocaching.utils.ProcessUtils;
+
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.text.Html;
 import android.view.View;
 import android.widget.AdapterView;
@@ -11,14 +17,8 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import android.support.annotation.NonNull;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import cgeo.geocaching.activity.AbstractActionBarActivity;
-import cgeo.geocaching.compatibility.Compatibility;
-import cgeo.geocaching.ui.AbstractViewHolder;
-import cgeo.geocaching.utils.ProcessUtils;
 
 public class UsefulAppsActivity extends AbstractActionBarActivity {
 
@@ -27,6 +27,7 @@ public class UsefulAppsActivity extends AbstractActionBarActivity {
             new HelperApp(R.string.helper_sendtocgeo_title, R.string.helper_sendtocgeo_description, R.drawable.cgeo, "http://send2.cgeo.org"),
             new HelperApp(R.string.helper_contacts_title, R.string.helper_contacts_description, R.drawable.cgeo, "cgeo.contacts"),
             new HelperApp(R.string.helper_wear_title, R.string.helper_wear_description, R.drawable.helper_wear, "com.javadog.cgeowear"),
+            new HelperApp(R.string.helper_brouter_title, R.string.helper_brouter_description, R.drawable.helper_brouter, "btools.routingapp"),
             new HelperApp(R.string.helper_pocketquery_title, R.string.helper_pocketquery_description, R.drawable.helper_pocketquery, "org.pquery"),
             new HelperApp(R.string.helper_google_translate_title, R.string.helper_google_translate_description, R.drawable.helper_google_translate, "com.google.android.apps.translate"),
             new HelperApp(R.string.helper_where_you_go_title, R.string.helper_where_you_go_description, R.drawable.helper_where_you_go, "menion.android.whereyougo"),

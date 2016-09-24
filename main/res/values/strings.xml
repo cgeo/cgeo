@@ -1148,6 +1148,8 @@
     <string name="helper_wear_description">c:geo Wear is a plugin for c:geo that lets you navigate to geocaches using your Android Wear smartwatch.</string>
     <string name="helper_where_you_go_title">WhereYouGo</string>
     <string name="helper_where_you_go_description">WhereYouGo allows playing and searching geocaches of type Wherigo. c:geo can automatically trigger the download of cartridges within this app.</string>
+    <string name="helper_brouter_title">BRouter Offline Navigation</string>
+    <string name="helper_brouter_description">BRouter provides offline routing. If it is installed and has the necessary files downloaded, c:geo will automatically show a route to the cache on the internal map.</string>
     
     <!-- add-ons -->
     <string name="addon_missing_title">Missing plugin</string>
