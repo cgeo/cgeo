@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.Window;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.maps.brouter.BRouter;
 import cgeo.geocaching.maps.interfaces.MapActivityImpl;
 
 /**
@@ -32,10 +33,16 @@ public abstract class AbstractMap {
     }
 
     public void onCreate(final Bundle savedInstanceState) {
-
         mapActivity.superOnCreate(savedInstanceState);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1) {
             mapActivity.getActivity().requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+        }
+
+        // Connect to BRouter service
+        try {
+            BRouter.connect(getActivity().getApplication());
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -53,6 +60,7 @@ public abstract class AbstractMap {
 
     public void onDestroy() {
         mapActivity.superOnDestroy();
+        BRouter.disconnect(getActivity().getApplication());
     }
 
     public boolean onCreateOptionsMenu(final Menu menu) {
