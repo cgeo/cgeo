@@ -92,7 +92,7 @@ public final class Cookies {
 
                 // TODO: find out whether the sync manager is still needed or not
                 CookieSyncManager.createInstance(CgeoApplication.getInstance());
-                final android.webkit.CookieManager cookieManager = CookieManager.getInstance();
+                final CookieManager cookieManager = CookieManager.getInstance();
 
                 final HttpUrl targetUrl = HttpUrl.parse(url);
                 //sync all the cookies with the webview by generating cookie string
