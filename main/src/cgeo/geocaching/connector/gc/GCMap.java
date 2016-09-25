@@ -22,6 +22,7 @@ import cgeo.geocaching.utils.LeastRecentlyUsedMap;
 import cgeo.geocaching.utils.Log;
 
 import android.graphics.Bitmap;
+import android.graphics.Bitmap.Config;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
@@ -47,6 +48,7 @@ import rx.functions.Func2;
 
 public class GCMap {
     private static Viewport lastSearchViewport = null;
+    private static final Single<Bitmap> ONE_ONE_BITMAP_SINGLE = Single.just(Bitmap.createBitmap(1, 1, Config.ARGB_8888));
 
     private GCMap() {
         // utility class
@@ -306,7 +308,7 @@ public class GCMap {
                     }
 
                     // The PNG must be requested first, otherwise the following request would always return with 204 - No Content
-                    final Single<Bitmap> bitmapObs = Tile.requestMapTile(params).onErrorResumeNext(Single.<Bitmap>just(null));
+                    final Single<Bitmap> bitmapObs = Tile.requestMapTile(params).onErrorResumeNext(ONE_ONE_BITMAP_SINGLE);
                     final Single<String> dataObs = Tile.requestMapInfo(GCConstants.URL_MAP_INFO, params, GCConstants.URL_LIVE_MAP).onErrorResumeNext(Single.just(""));
                     try {
                         Single.zip(bitmapObs, dataObs, new Func2<Bitmap, String, Void>() {
