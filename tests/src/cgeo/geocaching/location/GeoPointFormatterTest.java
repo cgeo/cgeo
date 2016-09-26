@@ -30,4 +30,12 @@ public class GeoPointFormatterTest extends TestCase {
         assertEquals(formatSecond, "N 51° 21' 06.240\"" + Formatter.SEPARATOR + "E 010° 15' 22.140\"", formatSecond);
     }
 
+    public static void testReformatForClipboardRemoveMiddleDot() {
+        assertThat(GeopointFormatter.reformatForClipboard("N 10° 12,345 · W 5° 12,345")).isEqualTo("N 10° 12,345 W 5° 12,345");
+    }
+
+    public static void testReformatForClipboardNoMiddleDotToRemove() {
+        assertThat(GeopointFormatter.reformatForClipboard("N 10° 12' 34\" W 5° 12' 34\"")).isEqualTo("N 10° 12' 34\" W 5° 12' 34\"");
+    }
+
 }

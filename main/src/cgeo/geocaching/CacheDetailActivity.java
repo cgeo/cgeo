@@ -31,6 +31,7 @@ import cgeo.geocaching.gcvote.GCVote;
 import cgeo.geocaching.gcvote.GCVoteDialog;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.location.Units;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Trackable;
@@ -484,7 +485,8 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 if (selectedWaypoint != null) {
                     final Geopoint coordinates = selectedWaypoint.getCoords();
                     if (coordinates != null) {
-                        ClipboardUtils.copyToClipboard(coordinates.toString());
+                        ClipboardUtils.copyToClipboard(
+                                GeopointFormatter.reformatForClipboard(coordinates.toString()));
                         showToast(getResources().getString(R.string.clipboard_copy_ok));
                     }
                 }
@@ -1998,8 +2000,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                                 clickedItemText = ((TextView) view).getText();
                                 final CharSequence itemTitle = ((TextView) ((View) view.getParent()).findViewById(R.id.name)).getText();
                                 if (itemTitle.equals(res.getText(R.string.cache_coordinates))) {
-                                    // remove middle dot from some coordinate formats before copying to clipboard
-                                    clickedItemText = clickedItemText.toString().replace("· ", "");
+                                    clickedItemText = GeopointFormatter.reformatForClipboard(clickedItemText);
                                 }
                                 buildDetailsContextMenu(actionMode, menu, itemTitle, true);
                                 return true;
