@@ -122,6 +122,8 @@ allprojects {
 	}
 
 	repositories {
+		mavenCentral()
+		jcenter()
 		// hosts e.g. viewpagerindicator
 		maven {
 			url "https://jitpack.io"
@@ -139,7 +141,12 @@ ext.minSdkVersion = 9
 
 subprojects {
     repositories {
-        jcenter()
+		mavenCentral()
+		jcenter()
+		// hosts e.g. viewpagerindicator
+		maven {
+			url "https://jitpack.io"
+		}
     }
 
     // disable warning of annotation processor about annotation types with no registered processor (like @NonNull)
