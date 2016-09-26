@@ -7,6 +7,7 @@
     · New: Support ignoring caches on OpenCaching sites\n
     · New: Remove duplicate caches from all other lists\n
     · New: Undo ability for clear log menu item\n
+    · New: Filter for found caches missing a voting\n
     · Change: Fetch more caches from OC sites when GC is disabled in settings\n
     \n
     \n
