@@ -12,7 +12,7 @@
 -allowaccessmodification
 -optimizations !code/simplification/arithmetic,!code/allocation/variable
 
--keep class cgeo.geocaching.** { *; }
+-keep,includedescriptorclasses class cgeo.geocaching.** { *; }
 -keep class android.support.v4.os.** { *; }
 
 # The backup agent class is not called from our code.
@@ -53,6 +53,8 @@
 -keep class org.apache.commons.lang3.StringUtils { *; }
 -keep class org.apache.commons.io.IOUtils { *; }
 -keep class org.apache.commons.io.FileUtils { *; }
+# IOFileFilter references FileUtils, suppress related notes
+-dontnote org.apache.commons.io.FileUtils
 
 # Butter Knife ------------------------------------------------------------------------------------
 
