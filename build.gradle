@@ -99,10 +99,6 @@ allprojects {
 						if (selection.candidate.group == 'com.google.auto.service') {
 							rejected = false
 						}
-						// leak canary release 1.3 produces too many exceptions, beta 1.4 is much better
-						if (selection.candidate.group == 'com.squareup.leakcanary') {
-							rejected = false
-						}
 						if (rejected) {
 							selection.reject('Release candidate')
 						}

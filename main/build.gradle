@@ -352,14 +352,12 @@ dependencies {
     compile 'com.jakewharton:process-phoenix:1.1.0'
 
     // memory leak detection
-    def leakCanaryVersion = '1.4-beta2'
+    def leakCanaryVersion = '1.4'
     debugCompile "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion"
     releaseCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
     nightlyCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
     rcCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
     testCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
-	// avoid innerclass proguard warnings http://stackoverflow.com/a/38255810/44089
-	debugCompile 'com.squareup.haha:haha:2.0.3'
 }
 
 /*
