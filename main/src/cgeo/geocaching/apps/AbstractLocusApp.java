@@ -256,6 +256,8 @@ public abstract class AbstractLocusApp extends AbstractApp {
                 return GeocachingData.CACHE_TYPE_EVENT;
             case MEGA_EVENT:
                 return GeocachingData.CACHE_TYPE_MEGA_EVENT;
+            case GIGA_EVENT:
+                return GeocachingData.CACHE_TYPE_GIGA_EVENT;
             case EARTH:
                 return GeocachingData.CACHE_TYPE_EARTH;
             case CITO:
@@ -266,6 +268,8 @@ public abstract class AbstractLocusApp extends AbstractApp {
                 return GeocachingData.CACHE_TYPE_VIRTUAL;
             case WHERIGO:
                 return GeocachingData.CACHE_TYPE_WHERIGO;
+            case LOSTANDFOUND:
+                return GeocachingData.CACHE_TYPE_LF_EVENT;
             case PROJECT_APE:
                 return GeocachingData.CACHE_TYPE_PROJECT_APE;
             case GPS_EXHIBIT:
