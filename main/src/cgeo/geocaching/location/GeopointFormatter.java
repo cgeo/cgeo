@@ -124,4 +124,12 @@ public class GeopointFormatter {
         throw new IllegalStateException(); // cannot happen, if switch case is enum complete
     }
 
+    /**
+     * Reformats coordinates for Clipboard.
+     * It removes the middle dot if present.
+     */
+    public static CharSequence reformatForClipboard(CharSequence coordinatesToCopy) {
+        return coordinatesToCopy.toString().replace("· ", "");
+    }
+
 }
