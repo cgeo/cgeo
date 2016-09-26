@@ -108,9 +108,7 @@ android {
         test {
             setRoot("../tests")
             manifest.srcFile '../tests/AndroidManifest.xml'
-            java {
-                srcDirs = ['../tests/src', 'src']
-            }
+            java.srcDir '../tests/src'
             resources.srcDirs = ['../tests/src']
             res.srcDirs = ['../tests/res']
         }
@@ -120,7 +118,7 @@ android {
             setRoot("../tests")
             manifest.srcFile '../tests/AndroidManifest.xml'
             java {
-                srcDirs = ['../tests/src-android', 'src']
+                srcDir '../tests/src-android'
 
                 // TODO: espresso causes some dependency conflicts, therefore disable espresso tests temporarily
                 exclude '**/*EspressoTest.java'
