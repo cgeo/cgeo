@@ -1,12 +1,13 @@
 package cgeo.geocaching.location;
 
+import cgeo.geocaching.utils.Formatter;
+
 import java.util.Locale;
 
 /**
  * Formatting of Geopoint.
  */
 public class GeopointFormatter {
-    private static final String SEPARATOR = " · ";
 
     private GeopointFormatter() {
         // utility class
@@ -75,19 +76,21 @@ public class GeopointFormatter {
 
             case LAT_LON_DECMINUTE: {
                 final Geopoint rgp = gp.roundedAt(60 * 1000);
-                return String.format(Locale.getDefault(), "%c %02d° %06.3f" + SEPARATOR + "%c %03d° %06.3f",
-                        rgp.getLatDir(), rgp.getLatDeg(), rgp.getLatMinRaw(), rgp.getLonDir(), rgp.getLonDeg(), rgp.getLonMinRaw());
+                return String.format(Locale.getDefault(), "%c %02d° %06.3f" + Formatter.SEPARATOR + "%c %03d° %06.3f",
+                        rgp.getLatDir(), rgp.getLatDeg(), rgp.getLatMinRaw(),
+                        rgp.getLonDir(), rgp.getLonDeg(), rgp.getLonMinRaw());
             }
 
             case LAT_LON_DECMINUTE_RAW: {
                 final Geopoint rgp = gp.roundedAt(60 * 1000);
                 return String.format((Locale) null, "%c %02d° %06.3f %c %03d° %06.3f",
-                        rgp.getLatDir(), rgp.getLatDeg(), rgp.getLatMinRaw(), rgp.getLonDir(), rgp.getLonDeg(), rgp.getLonMinRaw());
+                        rgp.getLatDir(), rgp.getLatDeg(), rgp.getLatMinRaw(),
+                        rgp.getLonDir(), rgp.getLonDeg(), rgp.getLonMinRaw());
             }
 
             case LAT_LON_DECSECOND: {
                 final Geopoint rgp = gp.roundedAt(3600 * 1000);
-                return String.format(Locale.getDefault(), "%c %02d° %02d' %06.3f\"" + SEPARATOR + "%c %03d° %02d' %06.3f\"",
+                return String.format(Locale.getDefault(), "%c %02d° %02d' %06.3f\"" + Formatter.SEPARATOR + "%c %03d° %02d' %06.3f\"",
                         rgp.getLatDir(), rgp.getLatDeg(), rgp.getLatMin(), rgp.getLatSecRaw(),
                         rgp.getLonDir(), rgp.getLonDeg(), rgp.getLonMin(), rgp.getLonSecRaw());
             }
@@ -131,7 +134,7 @@ public class GeopointFormatter {
      * It removes the middle dot if present.
      */
     public static CharSequence reformatForClipboard(final CharSequence coordinatesToCopy) {
-        return coordinatesToCopy.toString().replace(SEPARATOR, " ");
+        return coordinatesToCopy.toString().replace(Formatter.SEPARATOR, " ");
     }
 
 }

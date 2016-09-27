@@ -3,8 +3,6 @@ package cgeo.geocaching.location;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.offset;
 
-import cgeo.geocaching.utils.Formatter;
-
 import junit.framework.TestCase;
 
 public class GeoPointParserTest extends TestCase {
@@ -67,7 +65,7 @@ public class GeoPointParserTest extends TestCase {
     }
 
     public static void testParseOurOwnSeparator() {
-        final Geopoint separator = GeopointParser.parse("N 49° 43' 57\"" + Formatter.SEPARATOR + "E 2 12' 35");
+        final Geopoint separator = GeopointParser.parse("N 49° 43' 57\" · E 2 12' 35");
         final Geopoint noSeparator = GeopointParser.parse("N 49 43.95 E2°12.5833333333");
         assertGeopointEquals(separator, noSeparator, (float) 1e-6);
     }
