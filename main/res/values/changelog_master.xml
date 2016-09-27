@@ -3,12 +3,13 @@
   <!-- changelog for the master branch -->
   <string name="changelog_master" translatable="false">
     <b>Next feature release:</b>\n
-    · Removed: No longer supports captchas for getting exact coordinates as basic member\n
     · New: Support ignoring caches on OpenCaching sites\n
     · New: Remove duplicate caches from all other lists\n
     · New: Undo ability for clear log menu item\n
     · New: Filter for found caches missing a voting\n
+    · Fix: Better clipboard format when copying waypoint coordinates\n
     · Change: Fetch more caches from OC sites when GC is disabled in settings\n
+    · Removed: No longer supports captchas for getting exact coordinates as basic member\n
     \n
     \n
   </string>
