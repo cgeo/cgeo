@@ -138,11 +138,14 @@
         android:layout_marginRight="6dip"
         android:orientation="vertical" >
 
-        <LinearLayout
+        <ListView
             android:id="@+id/info_area"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" />
+            android:scrollbars="none"
+            android:orientation="vertical"
+            android:divider="@null"
+            tools:listitem="@layout/main_activity_connectorstatus" />
 
         <TextView
             android:id="@+id/nav_location"

@@ -31,13 +31,6 @@ import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.Version;
 
-import com.github.amlcurran.showcaseview.targets.ActionViewTarget;
-import com.google.zxing.integration.android.IntentIntegrator;
-import com.google.zxing.integration.android.IntentResult;
-import com.jakewharton.processphoenix.ProcessPhoenix;
-
-import org.apache.commons.lang3.StringUtils;
-
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.SearchManager;
@@ -56,13 +49,13 @@ import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.SearchView.OnQueryTextListener;
 import android.support.v7.widget.SearchView.OnSuggestionListener;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -73,6 +66,11 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import com.github.amlcurran.showcaseview.targets.ActionViewTarget;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
+import com.jakewharton.processphoenix.ProcessPhoenix;
+import org.apache.commons.lang3.StringUtils;
 import rx.Observable;
 import rx.android.app.AppObservable;
 import rx.android.schedulers.AndroidSchedulers;
@@ -93,7 +91,7 @@ public class MainActivity extends AbstractActionBarActivity {
     @BindView(R.id.nav_accuracy) protected TextView navAccuracy;
     @BindView(R.id.nav_location) protected TextView navLocation;
     @BindView(R.id.offline_count) protected TextView countBubble;
-    @BindView(R.id.info_area) protected LinearLayout infoArea;
+    @BindView(R.id.info_area) protected ListView infoArea;
 
     /**
      * view of the action bar search
@@ -118,33 +116,41 @@ public class MainActivity extends AbstractActionBarActivity {
             final ILogin[] loginConns = ConnectorFactory.getActiveLiveConnectors();
 
             // Update UI
-            infoArea.removeAllViews();
-            final LayoutInflater inflater = getLayoutInflater();
-
-            for (final ILogin conn : loginConns) {
-
-                final TextView connectorInfo = (TextView) inflater.inflate(R.layout.main_activity_connectorstatus, infoArea, false);
-                infoArea.addView(connectorInfo);
-
-                final StringBuilder userInfo = new StringBuilder(conn.getName()).append(Formatter.SEPARATOR);
-                if (conn.isLoggedIn()) {
-                    userInfo.append(conn.getUserName());
-                    if (conn.getCachesFound() >= 0) {
-                        userInfo.append(" (").append(conn.getCachesFound()).append(')');
+            infoArea.setAdapter(new ArrayAdapter<ILogin>(MainActivity.this, R.layout.main_activity_connectorstatus, loginConns) {
+                @Override
+                public View getView(final int position, final View convertView, final android.view.ViewGroup parent) {
+                    TextView rowView = (TextView) convertView;
+                    if (rowView == null) {
+                        rowView = (TextView) getLayoutInflater().inflate(R.layout.main_activity_connectorstatus, parent, false);
                     }
-                    userInfo.append(Formatter.SEPARATOR);
+
+                    final ILogin connector = getItem(position);
+                    fillView(rowView, connector);
+                    return rowView;
+
                 }
-                userInfo.append(conn.getLoginStatusString());
 
-                connectorInfo.setText(userInfo);
-                connectorInfo.setOnClickListener(new OnClickListener() {
-
-                    @Override
-                    public void onClick(final View v) {
-                        SettingsActivity.openForScreen(R.string.preference_screen_services, MainActivity.this);
+                private void fillView(final TextView connectorInfo, final ILogin conn) {
+                    final StringBuilder userInfo = new StringBuilder(conn.getName()).append(Formatter.SEPARATOR);
+                    if (conn.isLoggedIn()) {
+                        userInfo.append(conn.getUserName());
+                        if (conn.getCachesFound() >= 0) {
+                            userInfo.append(" (").append(conn.getCachesFound()).append(')');
+                        }
+                        userInfo.append(Formatter.SEPARATOR);
                     }
-                });
-            }
+                    userInfo.append(conn.getLoginStatusString());
+
+                    connectorInfo.setText(userInfo);
+                    connectorInfo.setOnClickListener(new OnClickListener() {
+
+                        @Override
+                        public void onClick(final View v) {
+                            SettingsActivity.openForScreen(R.string.preference_screen_services, MainActivity.this);
+                        }
+                    });
+                }
+            });
         }
     };
 
