@@ -33,8 +33,8 @@ public class UTMPointConversionTest {
 
     @Parameterized.Parameters
     public static Collection<Object[]> data() {
-        System.out.println("lat, lon; expected easting, northing; result easting, northing; diff easting, northing");
         return Arrays.asList(new Object[][]{
+                // lat, lon, zone, zoneLetter, easting, northing
                 {85d, 102d, 48, "Z", 470821.25d, 9440493.90d},
                 {84d, 102d, 48, "X", 465005.34493d, 9329005.2d},
                 {51d, 60d, 41, "U", 289511.142963d, 5654109.2d},

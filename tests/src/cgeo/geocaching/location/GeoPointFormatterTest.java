@@ -2,8 +2,6 @@ package cgeo.geocaching.location;
 
 import junit.framework.TestCase;
 
-import cgeo.geocaching.utils.Formatter;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class GeoPointFormatterTest extends TestCase {
@@ -16,18 +14,18 @@ public class GeoPointFormatterTest extends TestCase {
         final String formatMinute = GeopointFormatter.format(GeopointFormatter.Format.LAT_LON_DECMINUTE_RAW, point);
         assertThat(formatMinute).isEqualTo("N 50° 00.000 E 005° 00.000");
         final String formatSecond = GeopointFormatter.format(GeopointFormatter.Format.LAT_LON_DECSECOND, point).replaceAll(",", ".");
-        assertEquals(formatSecond, "N 50° 00' 00.000\"" + Formatter.SEPARATOR + "E 005° 00' 00.000\"", formatSecond);
+        assertThat(formatSecond).isEqualTo("N 50° 00' 00.000\" · E 005° 00' 00.000\"");
     }
 
     public static void testFormat() {
         // taken from GC30R6G
         final Geopoint point = new Geopoint("N 51° 21.104 E 010° 15.369");
         final String format = GeopointFormatter.format(GeopointFormatter.Format.LAT_LON_DECDEGREE_COMMA, point);
-        assertEquals(format, "51.351733,10.256150", format);
+        assertThat(format).isEqualTo("51.351733,10.256150");
         final String formatMinute = GeopointFormatter.format(GeopointFormatter.Format.LAT_LON_DECMINUTE_RAW, point);
-        assertEquals(formatMinute, "N 51° 21.104 E 010° 15.369", formatMinute);
+        assertThat(formatMinute).isEqualTo("N 51° 21.104 E 010° 15.369");
         final String formatSecond = GeopointFormatter.format(GeopointFormatter.Format.LAT_LON_DECSECOND, point).replaceAll(",", ".");
-        assertEquals(formatSecond, "N 51° 21' 06.240\"" + Formatter.SEPARATOR + "E 010° 15' 22.140\"", formatSecond);
+        assertThat(formatSecond).isEqualTo("N 51° 21' 06.240\" · E 010° 15' 22.140\"");
     }
 
     public static void testReformatForClipboardRemoveMiddleDot() {
