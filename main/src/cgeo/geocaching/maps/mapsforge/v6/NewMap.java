@@ -1189,7 +1189,12 @@ public class NewMap extends AbstractActionBarActivity {
                 }
             };
 
-            new AlertDialog.Builder(this).setTitle(res.getString(R.string.map_select_multiple_items)).setAdapter(adapter, new SelectionClickListener(sorted)).show();
+            AlertDialog dialog = new AlertDialog.Builder(this)
+                .setTitle(res.getString(R.string.map_select_multiple_items))
+                .setAdapter(adapter, new SelectionClickListener(sorted))
+                .create();
+            dialog.setCanceledOnTouchOutside(true);
+            dialog.show();
 
         } catch (final NotFoundException e) {
             Log.e("NewMap.showSelection", e);
