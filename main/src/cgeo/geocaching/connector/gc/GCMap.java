@@ -67,7 +67,7 @@ public class GCMap {
             final Parameters params = new Parameters("i", geocodeList, "_", String.valueOf(System.currentTimeMillis()));
             params.add("app", "cgeo");
             final String referer = GCConstants.URL_LIVE_MAP_DETAILS;
-            final String data = Tile.requestMapInfo(referer, params, referer).toBlocking().value();
+            final String data = Tile.requestMapInfo(referer, params, referer).onErrorResumeNext(Single.just("")).toBlocking().value();
 
             // Example JSON information
             // {"status":"success",
