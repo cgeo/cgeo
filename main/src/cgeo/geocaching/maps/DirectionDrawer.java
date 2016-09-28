@@ -6,15 +6,17 @@ import cgeo.geocaching.maps.interfaces.MapItemFactory;
 import cgeo.geocaching.maps.interfaces.MapProjectionImpl;
 import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.utils.CanvasUtils;
 
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.Path;
 import android.graphics.Point;
 import android.location.Location;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
+
+import java.util.ArrayList;
 
 public class DirectionDrawer {
     private Geopoint currentCoords;
@@ -57,34 +59,29 @@ public class DirectionDrawer {
             linePaint.setColor(0x80EB391E);
         }
 
-
         final Geopoint[] routingPoints = Routing.getTrack(currentCoords, destinationCoords);
+        final ArrayList<Point> pixelPoints = new ArrayList<>();
 
+        // add artificial line from current position to routing start
+        pixelPoints.add(translateToPixels(projection, currentCoords));
+
+        // add actual routing points if available
         if (routingPoints != null && routingPoints.length > 1) {
-
-            final Point pixelPoint = new Point();
-
-            // start a new path figure
-            final Path path = new Path();
-            projection.toPixels(mapItemFactory.getGeoPointBase(routingPoints[0]), pixelPoint);
-            path.moveTo(pixelPoint.x, pixelPoint.y);
-
-            for (int i = 1; i < routingPoints.length; i++) {
-                final Geopoint currentRoutingPoint = routingPoints[i];
-                projection.toPixels(mapItemFactory.getGeoPointBase(currentRoutingPoint), pixelPoint);
-                path.lineTo(pixelPoint.x, pixelPoint.y);
+            for (final Geopoint geopoint : routingPoints) {
+                pixelPoints.add(translateToPixels(projection, geopoint));
             }
-
-            canvas.drawPath(path, linePaint);
-        } else {
-            final Point pos = new Point();
-            final Point dest = new Point();
-
-            projection.toPixels(mapItemFactory.getGeoPointBase(currentCoords), pos);
-            projection.toPixels(mapItemFactory.getGeoPointBase(destinationCoords), dest);
-
-            canvas.drawLine(pos.x, pos.y, dest.x, dest.y, linePaint);
         }
 
+        // add artificial line from routing end to target
+        pixelPoints.add(translateToPixels(projection, destinationCoords));
+
+        CanvasUtils.drawPath(pixelPoints, canvas, linePaint);
+
+    }
+
+    private Point translateToPixels(final MapProjectionImpl projection, final Geopoint geopoint) {
+        final Point pixelPoint = new Point();
+        projection.toPixels(mapItemFactory.getGeoPointBase(geopoint), pixelPoint);
+        return pixelPoint;
     }
 }
