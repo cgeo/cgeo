@@ -1189,7 +1189,7 @@ public class NewMap extends AbstractActionBarActivity {
                 }
             };
 
-            AlertDialog dialog = new AlertDialog.Builder(this)
+            final AlertDialog dialog = new AlertDialog.Builder(this)
                 .setTitle(res.getString(R.string.map_select_multiple_items))
                 .setAdapter(adapter, new SelectionClickListener(sorted))
                 .create();
@@ -1290,7 +1290,12 @@ public class NewMap extends AbstractActionBarActivity {
                 return;
             }
             if (requestRequired()) {
+                try {
                 /* final SearchResult search = */GCMap.searchByGeocodes(Collections.singleton(cache.getGeocode()));
+                } catch (final Exception ex) {
+                    Log.w("Error requesting cache popup info", ex);
+                    ActivityMixin.showToast(map, R.string.err_request_popup_info);
+                }
             }
             map.popupGeocodes.add(cache.getGeocode());
             CachePopup.startActivityAllowTarget(map, cache.getGeocode());
