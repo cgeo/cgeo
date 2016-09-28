@@ -25,11 +25,11 @@ class GcvoteFilter extends AbstractFilter {
         }
     };
 
-    public GcvoteFilter() {
+    GcvoteFilter() {
         super(R.string.caches_filter_missing_gcvote);
     }
 
-    public GcvoteFilter(final Parcel in) {
+    GcvoteFilter(final Parcel in) {
         super(in);
     }
 
