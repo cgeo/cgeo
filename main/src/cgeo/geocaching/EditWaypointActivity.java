@@ -38,6 +38,7 @@ import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -47,6 +48,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -265,7 +267,26 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
     }
 
     private void initializeWaypointTypeSelector() {
-        final ArrayAdapter<WaypointType> wpAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, POSSIBLE_WAYPOINT_TYPES.toArray(new WaypointType[POSSIBLE_WAYPOINT_TYPES.size()]));
+        final ArrayAdapter<WaypointType> wpAdapter = new ArrayAdapter<WaypointType>(this, android.R.layout.simple_spinner_item, POSSIBLE_WAYPOINT_TYPES.toArray(new WaypointType[POSSIBLE_WAYPOINT_TYPES.size()])) {
+            @Override
+            public View getView(final int position, final View convertView, final ViewGroup parent) {
+                final View view = super.getView(position, convertView, parent);
+                addWaypointIcon(position, view);
+                return view;
+            }
+
+            @Override
+            public View getDropDownView(final int position, final View convertView, final ViewGroup parent) {
+                final View view = super.getDropDownView(position, convertView, parent);
+                addWaypointIcon(position, view);
+                return view;
+            }
+
+            private void addWaypointIcon(final int position, final View view) {
+                final TextView label = (TextView) view.findViewById(android.R.id.text1);
+                label.setCompoundDrawablesWithIntrinsicBounds(POSSIBLE_WAYPOINT_TYPES.get(position).markerId, 0, 0, 0);
+            }
+        };
         wpAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         waypointTypeSelector.setAdapter(wpAdapter);
 
