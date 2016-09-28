@@ -357,6 +357,8 @@
   <string name="caches_clear_offlinelogs">Offline-Logs löschen</string>
   <string name="caches_clear_offlinelogs_message">Möchtest du die Offline-Logs löschen?</string>
   <string name="caches_clear_offlinelogs_progress">Lösche Offline-Logs</string>
+  <string name="caches_make_list_unique">Caches nur auf diese Liste</string>
+  <string name="caches_filter_missing_gcvote">Gefundene Caches ohne Bewertung</string>
   <!-- caches lists -->
   <string name="list_menu_create">Neue Liste</string>
   <string name="list_menu_drop">Aktuelle Liste löschen</string>
@@ -985,6 +987,10 @@
   <string name="map_strategy_detailed">Detailliert</string>
   <string name="live_map_notification">Auf der neuen Live-Karte sind die Koordinaten nicht immer genau. Eventuell ungenaue Koordinaten sind mit einem orangen Kreis markiert.\nDas Öffnen der Cache-Details oder das Speichern des Cache liefert immer genaue Koordinaten.\n\nMehr Informationen über alle Änderungen befinden sich auf der „Über c:geo“-Seite in der App.</string>
   <string name="map_select_multiple_items">Element auswählen</string>
+  <string name="map_routing">Routing</string>
+  <string name="map_routing_walk">Gehen</string>
+  <string name="map_routing_bike">Fahrrad</string>
+  <string name="map_routing_car">Auto</string>
   <!-- search -->
   <string name="search_bar_hint">Suche nach Caches</string>
   <string name="search_bar_desc">Caches (Geocode, Stichwort), Trackables (TB-Code)</string>
@@ -1096,6 +1102,8 @@
   <string name="helper_wear_description">c:geo Wear ist eine Erweiterung für c:geo, mit der du mit deiner Android Wear Smartwatch zu Geocaches navigieren kannst.</string>
   <string name="helper_where_you_go_title">WhereYouGo</string>
   <string name="helper_where_you_go_description">Mit WhereYouGo kannst du Caches vom Typ Wherigo suchen. c:geo kann das Herunterladen von Cartridges in WhereYouGo automatisch starten.</string>
+  <string name="helper_brouter_title">BRouter Offline Navigation</string>
+  <string name="helper_brouter_description">BRouter ermöglicht offline routing. Wenn es installiert ist und die notwendigen Dateien heruntergeladen wurden, wird c:geo automatisch eine Route zum Cache auf der internen Karte zeigen.</string>
   <!-- add-ons -->
   <string name="addon_missing_title">Fehlendes Plugin</string>
   <string name="addon_download_prompt">Jetzt im Google Play Store herunterladen</string>
@@ -1452,6 +1460,7 @@
   </plurals>
   <string name="command_rename_list_result">Liste umbenannt</string>
   <string name="command_delete_list_result">Liste gelöscht</string>
+  <string name="command_unique_list_result">Caches wurden von anderen Listen entfernt</string>
   <string name="fav_points_remaining">"Füge den Cache zu Favoriten hinzu (%s verfügbar)"</string>
   <!-- distance units -->
   <string name="unit_m">m</string>
