@@ -1324,7 +1324,12 @@ public class NewMap extends AbstractActionBarActivity {
                 return;
             }
             if (requestRequired()) {
+                try {
                 /* final SearchResult search = */GCMap.searchByGeocodes(Collections.singleton(cache.getGeocode()));
+                } catch (final Exception ex) {
+                    Log.w("Error requesting cache popup info", ex);
+                    ActivityMixin.showToast(map, R.string.err_request_popup_info);
+                }
             }
             map.popupGeocodes.add(cache.getGeocode());
             CachePopup.startActivityAllowTarget(map, cache.getGeocode());

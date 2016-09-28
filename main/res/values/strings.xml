@@ -254,6 +254,7 @@
     <string name="err_trackable_log_not_anonymous">Logging %1$s from c:geo cannot be done anonymously. Do you want to open the settings to fill in your credentials from %2$s?</string>
     <string name="err_trackable_no_preference_activity">Sorry, cannot find a suitable preference screen.</string>
     <string name="warn_discard_changes">Unsaved waypoint changes discarded!</string>
+    <string name="err_request_popup_info">c:geo failed to get cache popup info.</string>
 
     <!-- location service -->
     <string name="loc_last">Last known</string>

@@ -3,6 +3,7 @@ package cgeo.geocaching.maps;
 import cgeo.geocaching.CachePopup;
 import cgeo.geocaching.R;
 import cgeo.geocaching.WaypointPopup;
+import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.connector.gc.GCMap;
 import cgeo.geocaching.enumerations.CacheType;
@@ -23,9 +24,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.Log;
 
-import org.apache.commons.lang3.StringUtils;
-import android.support.annotation.NonNull;
-
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources.NotFoundException;
 import android.graphics.Canvas;
@@ -35,10 +34,13 @@ import android.graphics.Paint.Style;
 import android.graphics.PaintFlagsDrawFilter;
 import android.graphics.Point;
 import android.location.Location;
+import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
 
 public class CachesOverlay extends AbstractItemizedOverlay {
 
@@ -292,7 +294,12 @@ public class CachesOverlay extends AbstractItemizedOverlay {
         @Override
         public void run() {
             if (requestRequired()) {
+                try {
                 /* final SearchResult search = */GCMap.searchByGeocodes(Collections.singleton(cache.getGeocode()));
+                } catch (final Exception ex) {
+                    Log.w("Error requesting cache popup info", ex);
+                    ActivityMixin.showToast((Activity) context, R.string.err_request_popup_info);
+                }
             }
             CGeoMap.markCacheAsDirty(cache.getGeocode());
             CachePopup.startActivity(context, cache.getGeocode());
