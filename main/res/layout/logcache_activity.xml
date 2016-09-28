@@ -124,12 +124,22 @@
                     android:text="@string/cache_inventory" />
             </RelativeLayout>
 
-            <LinearLayout
-                android:id="@+id/inventory"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical" >
-            </LinearLayout>
+		    <ListView
+		        android:id="@+id/inventory"
+		        android:layout_width="fill_parent"
+		        android:layout_height="fill_parent"
+		        android:cacheColorHint="?background_color"
+		        android:clipToPadding="false"
+		        android:divider="?background_color"
+		        android:footerDividersEnabled="false"
+		        android:headerDividersEnabled="false"
+		        android:listSelector="?background_color"
+		        android:padding="4dip"
+		        android:scrollbars="none"
+		        tools:ignore="NestedScrolling"
+		        tools:listitem="@layout/logcache_trackable_item" >
+
+		    </ListView>
 
             <LinearLayout
                 android:id="@+id/inventory_changeall"

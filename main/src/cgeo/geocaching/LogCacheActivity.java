@@ -1,5 +1,41 @@
 package cgeo.geocaching;
 
+import android.R.string;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import com.github.amlcurran.showcaseview.targets.ActionItemTarget;
+
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import cgeo.geocaching.activity.ShowcaseViewBuilder;
 import cgeo.geocaching.command.AbstractCommand;
 import cgeo.geocaching.connector.ConnectorFactory;
@@ -22,6 +58,7 @@ import cgeo.geocaching.models.TrackableLog;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.twitter.Twitter;
+import cgeo.geocaching.ui.AbstractViewHolder;
 import cgeo.geocaching.ui.dialog.DateDialog;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AndroidRxUtils;
@@ -32,41 +69,7 @@ import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.LogTemplateProvider;
 import cgeo.geocaching.utils.LogTemplateProvider.LogContext;
 import cgeo.geocaching.utils.TextUtils;
-
-import android.R.string;
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.SparseArray;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import com.github.amlcurran.showcaseview.targets.ActionItemTarget;
-import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
+import cgeo.geocaching.utils.ViewUtils;
 import rx.Observable;
 import rx.android.app.AppObservable;
 import rx.functions.Action1;
@@ -83,7 +86,6 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
 
     private static final int SELECT_IMAGE = 101;
 
-    private LayoutInflater inflater = null;
     private Geocache cache = null;
     private String geocode = null;
     private String text = null;
@@ -97,8 +99,6 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     @BindView(R.id.favorite_check)
     protected CheckBox favCheck;
     @BindView(R.id.log) protected EditText logEditText;
-
-    private SparseArray<TrackableLog> actionButtons;
 
     private ILoggingManager loggingManager;
 
@@ -166,73 +166,80 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         }
     }
 
+    protected static class ViewHolder extends AbstractViewHolder {
+        @BindView(R.id.trackable_image_brand) protected ImageView brandView;
+        @BindView(R.id.trackcode) protected TextView codeView;
+        @BindView(R.id.name) protected TextView nameView;
+        @BindView(R.id.action) protected TextView actionButton;
+        @BindView(R.id.info) protected View infoView;
+
+        public ViewHolder(final View rowView) {
+            super(rowView);
+        }
+    }
+
     private void updateTrackablesList() {
-        if (CollectionUtils.isEmpty(trackables)) {
-            return;
-        }
-        if (inflater == null) {
-            inflater = getLayoutInflater();
-        }
-        actionButtons = new SparseArray<>();
-
-        final LinearLayout inventoryView = ButterKnife.findById(this, R.id.inventory);
-        inventoryView.removeAllViews();
-
-        for (final TrackableLog tb : getSortedTrackables()) {
-            final LinearLayout inventoryItem = (LinearLayout) inflater.inflate(R.layout.logcache_trackable_item, inventoryView, false);
-
-            final ImageView brandView = ButterKnife.findById(inventoryItem, R.id.trackable_image_brand);
-            brandView.setImageResource(tb.brand.getIconResource());
-            final TextView codeView = ButterKnife.findById(inventoryItem, R.id.trackcode);
-            codeView.setText(tb.trackCode);
-            final TextView nameView = ButterKnife.findById(inventoryItem, R.id.name);
-            nameView.setText(tb.name);
-            final TextView actionButton = ButterKnife.findById(inventoryItem, R.id.action);
-            actionButton.setId(tb.id);
-            actionButtons.put(actionButton.getId(), tb);
-            actionButton.setText(tb.action.getLabel() + " ▼");
-            actionButton.setOnClickListener(new View.OnClickListener() {
-
-                @Override
-                public void onClick(final View view) {
-                    selectTrackableAction(view);
+        final TrackableLog[] trackablesArray = getSortedTrackables().toArray(new TrackableLog[trackables.size()]);
+        final ListView inventoryList = ButterKnife.findById(this, R.id.inventory);
+        inventoryList.setAdapter(new ArrayAdapter<TrackableLog>(this, R.layout.logcache_trackable_item, trackablesArray) {
+            @Override
+            public View getView(final int position, final View convertView, final ViewGroup parent) {
+                View rowView = convertView;
+                if (rowView == null) {
+                    rowView = getLayoutInflater().inflate(R.layout.logcache_trackable_item, parent, false);
                 }
-            });
-
-            inventoryItem.setClickable(true);
-            ButterKnife.findById(inventoryItem, R.id.info).setOnClickListener(new View.OnClickListener() {
-
-                @Override
-                public void onClick(final View view) {
-                    final Intent trackablesIntent = new Intent(LogCacheActivity.this, TrackableActivity.class);
-                    final String tbCode = StringUtils.isNotEmpty(tb.geocode) ? tb.geocode : tb.trackCode;
-                    trackablesIntent.putExtra(Intents.EXTRA_GEOCODE, tbCode);
-                    trackablesIntent.putExtra(Intents.EXTRA_BRAND, tb.brand.getId());
-                    trackablesIntent.putExtra(Intents.EXTRA_TRACKING_CODE, tb.trackCode);
-                    startActivity(trackablesIntent);
+                ViewHolder holder = (ViewHolder) rowView.getTag();
+                if (holder == null) {
+                    holder = new ViewHolder(rowView);
                 }
-            });
 
-            inventoryView.addView(inventoryItem);
-        }
+                final TrackableLog trackable = getItem(position);
+                fillViewHolder(holder, trackable);
+                return rowView;
+            }
 
-        if (inventoryView.getChildCount() > 0) {
-            ButterKnife.findById(this, R.id.inventory_box).setVisibility(View.VISIBLE);
-        }
-        if (inventoryView.getChildCount() > 1) {
-            final LinearLayout inventoryChangeAllView = ButterKnife.findById(this, R.id.inventory_changeall);
+            private void fillViewHolder(final ViewHolder holder, final TrackableLog trackable) {
+                holder.brandView.setImageResource(trackable.brand.getIconResource());
+                holder.codeView.setText(trackable.trackCode);
+                holder.nameView.setText(trackable.name);
+                holder.actionButton.setText(trackable.action.getLabel() + " ▼");
+                holder.actionButton.setOnClickListener(new View.OnClickListener() {
 
-            final Button changeButton = ButterKnife.findById(inventoryChangeAllView, R.id.changebutton);
-            changeButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(final View view) {
+                        selectTrackableAction(trackable);
+                    }
+                });
 
-                @Override
-                public void onClick(final View view) {
-                    selectAllTrackablesAction();
-                }
-            });
+                holder.infoView.setOnClickListener(new View.OnClickListener() {
 
-            inventoryChangeAllView.setVisibility(View.VISIBLE);
-        }
+                    @Override
+                    public void onClick(final View view) {
+                        final Intent trackablesIntent = new Intent(LogCacheActivity.this, TrackableActivity.class);
+                        final String tbCode = StringUtils.isNotEmpty(trackable.geocode) ? trackable.geocode : trackable.trackCode;
+                        trackablesIntent.putExtra(Intents.EXTRA_GEOCODE, tbCode);
+                        trackablesIntent.putExtra(Intents.EXTRA_BRAND, trackable.brand.getId());
+                        trackablesIntent.putExtra(Intents.EXTRA_TRACKING_CODE, trackable.trackCode);
+                        startActivity(trackablesIntent);
+                    }
+                });
+            }
+        });
+        ViewUtils.setListViewHeightBasedOnItems(inventoryList);
+
+        ButterKnife.findById(this, R.id.inventory_box).setVisibility(trackables.isEmpty() ? View.GONE : View.VISIBLE);
+
+        final LinearLayout inventoryChangeAllView = ButterKnife.findById(this, R.id.inventory_changeall);
+        inventoryChangeAllView.setVisibility(trackables.size() > 1 ? View.VISIBLE : View.GONE);
+
+        final Button changeButton = ButterKnife.findById(inventoryChangeAllView, R.id.changebutton);
+        changeButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(final View view) {
+                selectAllTrackablesAction();
+            }
+        });
     }
 
     private ArrayList<TrackableLog> getSortedTrackables() {
@@ -693,7 +700,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
 
     private void selectAllTrackablesAction() {
         final Builder alert = new AlertDialog.Builder(this);
-        alert.setTitle(res.getString(R.string.log_tb_changeall));
+        alert.setTitle(res.getString(R.string.log_tb_changeall) + " (" + trackables.size() + ')');
 
         final List<LogTypeTrackable> tbLogTypeValues = LogTypeTrackable.getLogTypeTrackableForLogCache();
         final String[] tbLogTypes = getTBLogTypes(tbLogTypeValues);
@@ -704,7 +711,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
                 final LogTypeTrackable logType = tbLogTypeValues.get(position);
                 for (final TrackableLog tb : trackables) {
                     tb.action = logType;
-                    Log.i("Trackable " + tb.trackCode + " (" + tb.name + ") has new action: #" + logType);
+                    Log.d("Trackable " + tb.trackCode + " (" + tb.name + ") has new action: #" + logType);
                 }
                 updateTrackablesList();
                 dialog.dismiss();
@@ -742,11 +749,9 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         alert.create().show();
     }
 
-    private void selectTrackableAction(final View view) {
-        final int realViewId = view.getId();
+    private void selectTrackableAction(final TrackableLog trackable) {
         final Builder alert = new AlertDialog.Builder(this);
-        final TrackableLog trackableLog = actionButtons.get(realViewId);
-        alert.setTitle(trackableLog.name);
+        alert.setTitle(trackable.name);
         final List<LogTypeTrackable> tbLogTypeValues = LogTypeTrackable.getLogTypeTrackableForLogCache();
         final String[] tbLogTypes = getTBLogTypes(tbLogTypeValues);
         alert.setItems(tbLogTypes, new OnClickListener() {
@@ -754,8 +759,8 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
             @Override
             public void onClick(final DialogInterface dialog, final int position) {
                 final LogTypeTrackable logType = tbLogTypeValues.get(position);
-                trackableLog.action = logType;
-                Log.i("Trackable " + trackableLog.trackCode + " (" + trackableLog.name + ") has new action: #" + logType);
+                trackable.action = logType;
+                Log.d("Trackable " + trackable.trackCode + " (" + trackable.name + ") has new action: #" + logType);
                 updateTrackablesList();
                 dialog.dismiss();
             }
