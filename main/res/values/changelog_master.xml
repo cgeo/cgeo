@@ -8,6 +8,7 @@
     · New: Undo ability for clear log menu item\n
     · New: Filter for found caches missing a voting\n
     · Fix: Better clipboard format when copying waypoint coordinates\n
+    · Fix: Wrong icon when navigating to a waypoint\n
     · Change: Fetch more caches from OC sites when GC is disabled in settings\n
     · Removed: No longer supports captchas for getting exact coordinates as basic member\n
     \n

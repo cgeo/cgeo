@@ -1,12 +1,5 @@
 package cgeo.geocaching.maps;
 
-import cgeo.geocaching.Intents;
-import cgeo.geocaching.R;
-import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.enumerations.WaypointType;
-import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.settings.Settings;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -14,6 +7,13 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import org.apache.commons.lang3.StringUtils;
+
+import cgeo.geocaching.Intents;
+import cgeo.geocaching.R;
+import cgeo.geocaching.SearchResult;
+import cgeo.geocaching.enumerations.WaypointType;
+import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.settings.Settings;
 
 public class MapOptions {
 
@@ -33,7 +33,7 @@ public class MapOptions {
             searchResult = extras.getParcelable(Intents.EXTRA_SEARCH);
             geocode = extras.getString(Intents.EXTRA_GEOCODE);
             coords = extras.getParcelable(Intents.EXTRA_COORDS);
-            waypointType = WaypointType.findById(extras.getString(Intents.EXTRA_WPTTYPE));
+            waypointType = (WaypointType) extras.get(Intents.EXTRA_WPTTYPE);
             mapState = extras.getParcelable(Intents.EXTRA_MAPSTATE);
             title = extras.getString(Intents.EXTRA_TITLE);
         } else {
