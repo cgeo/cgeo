@@ -35,6 +35,7 @@ import cgeo.geocaching.maps.mapsforge.v6.layers.NavigationLayer;
 import cgeo.geocaching.maps.mapsforge.v6.layers.PositionLayer;
 import cgeo.geocaching.maps.mapsforge.v6.layers.TapHandlerLayer;
 import cgeo.geocaching.maps.routing.Routing;
+import cgeo.geocaching.maps.routing.RoutingMode;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
@@ -300,6 +301,18 @@ public class NewMap extends AbstractActionBarActivity {
                     break;
             }
 
+            menu.findItem(R.id.submenu_routing).setVisible(Routing.isAvailable());
+            switch (Settings.getRoutingMode()) {
+                case WALK:
+                    menu.findItem(R.id.menu_routing_walk).setChecked(true);
+                    break;
+                case BIKE:
+                    menu.findItem(R.id.menu_routing_bike).setChecked(true);
+                    break;
+                case CAR:
+                    menu.findItem(R.id.menu_routing_car).setChecked(true);
+                    break;
+            }
             menu.findItem(R.id.menu_hint).setVisible(mapOptions.mapMode == MapMode.SINGLE);
             menu.findItem(R.id.menu_compass).setVisible(mapOptions.mapMode == MapMode.SINGLE);
 
@@ -410,6 +423,24 @@ public class NewMap extends AbstractActionBarActivity {
             case R.id.menu_strategy_detailed: {
                 item.setChecked(true);
                 Settings.setLiveMapStrategy(LivemapStrategy.DETAILED);
+                return true;
+            }
+            case R.id.menu_routing_walk: {
+                item.setChecked(true);
+                Settings.setRoutingMode(RoutingMode.WALK);
+                navigationLayer.requestRedraw();
+                return true;
+            }
+            case R.id.menu_routing_bike: {
+                item.setChecked(true);
+                Settings.setRoutingMode(RoutingMode.BIKE);
+                navigationLayer.requestRedraw();
+                return true;
+            }
+            case R.id.menu_routing_car: {
+                item.setChecked(true);
+                Settings.setRoutingMode(RoutingMode.CAR);
+                navigationLayer.requestRedraw();
                 return true;
             }
             case R.id.menu_hint:
