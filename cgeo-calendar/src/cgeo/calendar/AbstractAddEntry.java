@@ -1,7 +1,6 @@
 package cgeo.calendar;
 
 import android.support.annotation.NonNull;
-
 import android.util.Log;
 
 abstract class AbstractAddEntry {
@@ -19,7 +18,6 @@ abstract class AbstractAddEntry {
     void addEntryToCalendar() {
         try {
             addEntryToCalendarInternal();
-            activity.showToast(R.string.event_success);
         } catch (final Exception e) {
             activity.showToast(R.string.event_fail);
 
