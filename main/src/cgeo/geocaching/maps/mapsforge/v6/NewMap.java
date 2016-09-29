@@ -34,6 +34,7 @@ import cgeo.geocaching.maps.mapsforge.v6.layers.HistoryLayer;
 import cgeo.geocaching.maps.mapsforge.v6.layers.NavigationLayer;
 import cgeo.geocaching.maps.mapsforge.v6.layers.PositionLayer;
 import cgeo.geocaching.maps.mapsforge.v6.layers.TapHandlerLayer;
+import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
@@ -219,6 +220,7 @@ public class NewMap extends AbstractActionBarActivity {
             mapView.zoomToViewport(new Viewport(Settings.getMapCenter().getCoords(), 0, 0));
         }
         prepareFilterBar();
+        Routing.connect();
     }
 
     @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
@@ -727,6 +729,7 @@ public class NewMap extends AbstractActionBarActivity {
         this.mapView.destroy();
         AndroidResourceBitmap.clearResourceBitmaps();
 
+        Routing.disconnect();
         super.onDestroy();
     }
 
