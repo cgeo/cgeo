@@ -243,9 +243,10 @@ dependencies {
     // TODO replace by repository dependency. however, there is a conflict in min sdk, which needs to be solved then
     compile project(":showcaseview")
 
-    // Locus integration
-    compile files('libs/locus-api-1.37.jar')
-    compile files('libs/locus-api-android-1.37.41.jar')
+    // Locus Maps integration
+    def locusVersion = '0.2.6'
+    compile "com.asamm:locus-api:$locusVersion"
+    compile "com.asamm:locus-api-android:$locusVersion"
 
     // Mapsforge integration
     compile files('libs/mapsforge-map-0.3.0-jar-with-dependencies.jar')
