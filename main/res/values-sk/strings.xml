@@ -355,11 +355,12 @@
   <string name="caches_filter_personal_data">S osobnými údajmi</string>
   <string name="caches_filter_rating">S hodnotením</string>
   <string name="caches_filter_own_rating">S vlastným hodnotením</string>
-  <string name="caches_filter_multi_listing">Viacnásobne zobrazené s rôznym statusom</string>
+  <string name="caches_filter_multi_listing">Viacnásobne zobrazená s rôznym statusom</string>
   <string name="caches_removing_from_history">Odstraňovanie z histórie…</string>
   <string name="caches_clear_offlinelogs">Vymazať offline záznamy</string>
   <string name="caches_clear_offlinelogs_message">Prajete si vymazať offline logy?</string>
   <string name="caches_clear_offlinelogs_progress">Vymazanie logov v režime offline</string>
+  <string name="caches_filter_missing_gcvote">Nájdené skrýše bez GCvote hlasov</string>
   <!-- caches lists -->
   <string name="list_menu_create">Vytvoriť nový zoznam</string>
   <string name="list_menu_drop">Odstrániť tento zoznam</string>
@@ -804,6 +805,7 @@
   <string name="cache_menu_navigation_transit">Navigácia (Tranzit)</string>
   <string name="cache_menu_navigation_bike">Navigácia (bicykel)</string>
   <string name="cache_menu_maps_directions">Navigovanie na Google mape</string>
+  <string name="cache_menu_osmand">OsmAnd</string>
   <string name="cache_menu_sygic_walk">Sygic (chôdza)</string>
   <string name="cache_menu_sygic_drive">Sygic (autom)</string>
   <string name="cache_menu_radar">Radar</string>
@@ -840,8 +842,8 @@
   <string name="cache_status">Stav</string>
   <string name="cache_status_offline_log">Uložený log</string>
   <string name="cache_status_found">Nájdená</string>
-  <string name="cache_not_status_found">Nebol nájdený</string>
-  <string name="cache_never_found">Doteraz nenájdené</string>
+  <string name="cache_not_status_found">Nenájdená</string>
+  <string name="cache_never_found">Doteraz nenájdená</string>
   <string name="cache_found_last_30_days">Nálezy za posledných 30 dní</string>
   <string name="cache_status_archived">Archivovaná</string>
   <string name="cache_status_disabled">Deaktivovaná</string>
@@ -993,6 +995,10 @@
   <string name="map_strategy_detailed">Podrobná</string>
   <string name="live_map_notification">Na aktívnej mape nemusia byť súradnice vždy presné. Súradnice, ktoré môžu byť nepresné, sú označené oranžovým krúžkom.\nPo otvorení detailu skrýše alebo po jej uložení pre použitie offline, sú získané vždy presné súradnice.\n\nViac informácií nájdete na stránke „O c:geo“ v aplikácii.</string>
   <string name="map_select_multiple_items">Vybrať položku</string>
+  <string name="map_routing">Navigácia</string>
+  <string name="map_routing_walk">Chôdza</string>
+  <string name="map_routing_bike">Bicykel</string>
+  <string name="map_routing_car">Auto</string>
   <!-- search -->
   <string name="search_bar_hint">Hľadanie skrýš</string>
   <string name="search_bar_desc">Skrýše (geokód, kľúčové slovo), trasovateľné predmety (TB-kód)</string>
@@ -1073,6 +1079,7 @@
   <string name="navigation_direct_navigation">Priama navigácia</string>
   <string name="navigation_target">Cieľ</string>
   <string name="err_nav_no_coordinates">Nemožno spustiť navigáciu bez súradníc</string>
+  <string name="osmand_marker_cgeo">Značka z c:geo</string>
   <!-- license -->
   <string name="license">Licencia</string>
   <string name="license_show">Zobraziť licenciu</string>
@@ -1103,6 +1110,8 @@
   <string name="helper_wear_description">c:geo Wear je plugin pre c:geo, ktorý vás naviguje ku skrýšam cez Android Wear smartwatch.</string>
   <string name="helper_where_you_go_title">WhereYouGo</string>
   <string name="helper_where_you_go_description">WhereYouGo umožňuje hľadať skrýše typu Wherigo. c:geo môže automaticky spustiť sťahovanie súborov (cartridge) cez túto aplikáciu.</string>
+  <string name="helper_brouter_title">Offline navigácia BRouter</string>
+  <string name="helper_brouter_description">BRouter poskytuje offline navigáciu. Ak je nainštalovaný a má stiahnuté potrebné súbory, c:geo automaticky zobrazí cestu ku skrýši na internej mape.</string>
   <!-- add-ons -->
   <string name="addon_missing_title">Chýbajúci doplnok</string>
   <string name="addon_download_prompt">Získať doplnok teraz z Google Play.</string>
@@ -1468,7 +1477,8 @@
   </plurals>
   <string name="command_rename_list_result">Zoznam premenovaný</string>
   <string name="command_delete_list_result">Zoznam vymazaný</string>
-  <string name="fav_points_remaining">"Pridať túto kešku do obľúbených (%s zostávajúcich)"</string>
+  <string name="command_unique_list_result">Skrýše odstránené z iných zoznamov</string>
+  <string name="fav_points_remaining">"Pridať túto skrýšu do obľúbených (zostáva: %s)"</string>
   <!-- distance units -->
   <string name="unit_m">m</string>
   <string name="unit_km">km</string>

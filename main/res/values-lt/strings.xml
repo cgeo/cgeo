@@ -360,6 +360,8 @@
   <string name="caches_clear_offlinelogs">Išvalyti išsaugotus įrašus</string>
   <string name="caches_clear_offlinelogs_message">Ar norite išvalyti išsaugotus įrašus?</string>
   <string name="caches_clear_offlinelogs_progress">Išvalomi išsaugoti įrašai</string>
+  <string name="caches_make_list_unique">Sąrašą padaryti unikaliu</string>
+  <string name="caches_filter_missing_gcvote">Rastos slėptuvės be balsų</string>
   <!-- caches lists -->
   <string name="list_menu_create">Sukurti naują sąrašą</string>
   <string name="list_menu_drop">Išmesti dabartinį sąrašą</string>
@@ -977,6 +979,10 @@
   <string name="map_strategy_detailed">Išsami</string>
   <string name="live_map_notification">Koordinatės tiesioginiame žemėlapyje gali būti netikslios. Galimos netikslios koordinatės žymimos oranžinės spalvos apskritimu.\nAtidarius slėptuvės informaciją arba išsaugojus slėptuvę naudojimui be interneto bus visada gautos tikslios koordinatės.\n\nDaugiau informacijos rasite programos skiltyje \"Apie c:geo\".</string>
   <string name="map_select_multiple_items">Pasirinkite elementą</string>
+  <string name="map_routing">Maršrutizavimas</string>
+  <string name="map_routing_walk">Pėsčiomis</string>
+  <string name="map_routing_bike">Dviračiu</string>
+  <string name="map_routing_car">Automobiliu</string>
   <!-- search -->
   <string name="search_bar_hint">Ieškoti</string>
   <string name="search_bar_desc">Slėptuvės (geo kodas, raktažodis), Keliauninkai (TB kodas)</string>
@@ -1087,6 +1093,8 @@
   <string name="helper_wear_description">c:geo Wear tai priedas prie c:geo, kuris leis naviguoti iki slėptuvių naudojant jūsų Android Wear išmanujį laikrodį.</string>
   <string name="helper_where_you_go_title">WhereYouGo</string>
   <string name="helper_where_you_go_description">WhereYouGo leidžia žaisti ir ieškoti geocaches tipo Wherigo. c:Geo automatiškai gali sukelti kasetės per šią programą atsisiųsti.</string>
+  <string name="helper_brouter_title">BRouter Offline Navigation</string>
+  <string name="helper_brouter_description">BRouter suteikia maršrutizavimą be interneto. Jei jis yra įdiegtas ir atsisiųsti reikalingi failai, c:geo automatiškai žemėlapyje rodys maršrutą į slėptuvę.</string>
   <!-- add-ons -->
   <string name="addon_missing_title">Trūksta įskiepio</string>
   <string name="addon_download_prompt">Parsisiųsti iš Google Play dabar.</string>
@@ -1451,6 +1459,7 @@
   </plurals>
   <string name="command_rename_list_result">Pervadinti sąrašą</string>
   <string name="command_delete_list_result">Sąrašas ištrintas</string>
+  <string name="command_unique_list_result">Ištrintos slėptuvės iš kitų sąrašų</string>
   <string name="fav_points_remaining">"Šią slėptuvę pridėti prie megstamų (%s liko)"</string>
   <!-- distance units -->
   <string name="unit_m">m</string>

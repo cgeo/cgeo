@@ -299,7 +299,7 @@
   <string name="caches_sort_name">Navn</string>
   <string name="caches_sort_geocode">Geokode</string>
   <string name="caches_sort_rating">Vurdering</string>
-  <string name="caches_sort_vote">Afstemning (egen vurdering)</string>
+  <string name="caches_sort_vote">Bedømmelse (egen vurdering)</string>
   <string name="caches_sort_inventory">Antal Trackables</string>
   <string name="caches_sort_date_hidden">Dato for placering</string>
   <string name="caches_sort_date_logged">Dato for logbesked</string>
@@ -357,6 +357,8 @@
   <string name="caches_clear_offlinelogs">Fjern offline logbeskeder</string>
   <string name="caches_clear_offlinelogs_message">Vil du fjerne offline logbeskeder?</string>
   <string name="caches_clear_offlinelogs_progress">Fjerner offline logbeskeder</string>
+  <string name="caches_make_list_unique">Gør listen unik</string>
+  <string name="caches_filter_missing_gcvote">Fundne cacher er ikke bedømt</string>
   <!-- caches lists -->
   <string name="list_menu_create">Opret ny liste</string>
   <string name="list_menu_drop">Fjern aktuelle liste</string>
@@ -467,7 +469,7 @@
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_gcvote_password_description">For at kunne bedømme en cache skal du følge instruktionerne på GCVote.com og angive dit password til GCVote her.</string>
   <string name="err_gcvote_send_rating">Fejl under afsendelse af bedømmelse. Kontrollér eller fjern GCVote password under Indstillinger.</string>
-  <string name="gcvote_sent">Stemme blev afsendt</string>
+  <string name="gcvote_sent">Bedømmelse blev afsendt</string>
   <string name="init_twitter">Twitter</string>
   <string name="settings_activate_twitter">Aktivér</string>
   <string name="init_username">Brugernavn</string>
@@ -498,7 +500,7 @@
   <string name="init_signature_template_url">URL</string>
   <string name="init_signature_template_log">Logtekst</string>
   <string name="init_ratingwanted">GCVote vurdering</string>
-  <string name="init_summary_ratingwanted">Indlæs cachevurdering fra GCVote.com</string>
+  <string name="init_summary_ratingwanted">Indlæs cachebedømmelser fra GCVote.com</string>
   <string name="init_friends_and_own_logs_wanted">Vis venners/egne</string>
   <string name="init_summary_friends_and_own_logs_wanted">Vis en særskilt logbogsside med venners og egne logbeskeder</string>
   <string name="init_openlastdetailspage">Åbn sidste detaljeside</string>
@@ -795,6 +797,7 @@
   <string name="cache_menu_navigation_transit">Navigation (Transit)</string>
   <string name="cache_menu_navigation_bike">Navigation (cykel)</string>
   <string name="cache_menu_maps_directions">Google Maps rutevejledning</string>
+  <string name="cache_menu_osmand">OsmAnd</string>
   <string name="cache_menu_sygic_walk">Sygic (til fods)</string>
   <string name="cache_menu_sygic_drive">Sygic (kørsel)</string>
   <string name="cache_menu_radar">Radar</string>
@@ -821,7 +824,7 @@
   <string name="cache_menu_oruxmaps_online">OruxMaps (Online)</string>
   <string name="cache_menu_oruxmaps_offline">OruxMaps (Offline)</string>
   <string name="cache_menu_pebble">Pebble</string>
-  <string name="cache_menu_vote">Stem</string>
+  <string name="cache_menu_vote">Bedøm</string>
   <string name="cache_menu_checker">Åben Geochecker</string>
   <string name="cache_menu_ignore">Ignorér cache</string>
   <string name="ignore_confirm_title">Vær forsigtig</string>
@@ -982,6 +985,10 @@
   <string name="map_strategy_detailed">Detaljeret</string>
   <string name="live_map_notification">Positioner på Live-kortet er ikke altid præcise. Cacher med upræcis positionsangivelse er markeret med en orange cirkel.\nDen korrekte position vil dog altid blive indlæst når du åbner cachedetaljer eller gemmer cachen til offlinebrug.\n\nDu kan læse mere om dette under punktet \"Om c:geo\" i appen.</string>
   <string name="map_select_multiple_items">Vælg element</string>
+  <string name="map_routing">Navigation</string>
+  <string name="map_routing_walk">Til fods</string>
+  <string name="map_routing_bike">Cykel</string>
+  <string name="map_routing_car">Bil</string>
   <!-- search -->
   <string name="search_bar_hint">Søg efter cacher</string>
   <string name="search_bar_desc">Cacher (geokode, nøgleord), Trackables (TB-kode)</string>
@@ -1062,6 +1069,7 @@
   <string name="navigation_direct_navigation">Direkte navigation</string>
   <string name="navigation_target">Mål</string>
   <string name="err_nav_no_coordinates">Kan ikke starte navigation uden position</string>
+  <string name="osmand_marker_cgeo">Markør fra c:geo</string>
   <!-- license -->
   <string name="license">Licens</string>
   <string name="license_show">Vis licens</string>
@@ -1091,6 +1099,8 @@
   <string name="helper_wear_description">c:geo Wear er et plugin til c:geo, der lader dig navigere til geocacher ved hjælp af din Android Wear smartwatch.</string>
   <string name="helper_where_you_go_title">WhereYouGo</string>
   <string name="helper_where_you_go_description">WhereYouGo giver mulighed for at afspille og søge efter geocacher af typen Wherigo. c:geo kan automatisk starte download af cartridges i denne app.</string>
+  <string name="helper_brouter_title">BRouter offline navigation</string>
+  <string name="helper_brouter_description">BRouter kan udføre offline navigation. Hvis BRouter er installeret og de nødvendige datafiler er downloaded, så kan c:geo automatisk vise en rute til cachen på det interne kort.</string>
   <!-- add-ons -->
   <string name="addon_missing_title">Manglende plugin</string>
   <string name="addon_download_prompt">Hent fra Google Play nu.</string>
@@ -1447,6 +1457,7 @@
   </plurals>
   <string name="command_rename_list_result">Liste omdøbt</string>
   <string name="command_delete_list_result">Listen blev slettet</string>
+  <string name="command_unique_list_result">Slettede cacher fra andre lister</string>
   <string name="fav_points_remaining">"Tilføj denne cache til favoritter (%s resterende)"</string>
   <!-- distance units -->
   <string name="unit_m">m</string>

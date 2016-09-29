@@ -357,6 +357,8 @@
   <string name="caches_clear_offlinelogs">Verwijderen offline logs</string>
   <string name="caches_clear_offlinelogs_message">Wil je de offline logs wissen?</string>
   <string name="caches_clear_offlinelogs_progress">Offline logs worden verwijderd</string>
+  <string name="caches_make_list_unique">Lijst uniek maken</string>
+  <string name="caches_filter_missing_gcvote">Gevonden caches niet gestemd</string>
   <!-- caches lists -->
   <string name="list_menu_create">Maak nieuwe lijst</string>
   <string name="list_menu_drop">Verwijder huidige lijst</string>
@@ -985,6 +987,10 @@
   <string name="map_strategy_detailed">Gedetailleerd</string>
   <string name="live_map_notification">Op de nieuwe live-kaart zullen coördinaten niet altijd exact zijn. Mogelijke onnauwkeurige coördinaten zijn aangegeven met een oranje cirkel.\nHet openen of opslaan van de cache zorgt ervoor dat de exacte coördinaten gebruikt worden.\n\nMeer informatie over de wijzigingen kan gevonden worden op de \"Over c:geo\" pagina in de app.</string>
   <string name="map_select_multiple_items">Selecteer item</string>
+  <string name="map_routing">Routering</string>
+  <string name="map_routing_walk">Wandelen</string>
+  <string name="map_routing_bike">Fiets</string>
+  <string name="map_routing_car">Auto</string>
   <!-- search -->
   <string name="search_bar_hint">Zoek naar caches</string>
   <string name="search_bar_desc">Caches (geo code, trefwoord), Trackables (TB-code)</string>
@@ -1096,6 +1102,8 @@
   <string name="helper_wear_description">c:geo Wear is een plugin voor c:geo waarmee je naar geocaches kunt navigeren met behulp van een Android Wear smartwatch.</string>
   <string name="helper_where_you_go_title">WhereYouGo</string>
   <string name="helper_where_you_go_description">Met WhereYouGo kan je spelen en geocaches zoeken van het type Wherigo. c:geo kan automatisch cartridges downloaden binnen deze app.</string>
+  <string name="helper_brouter_title">BRouter Offline navigatie</string>
+  <string name="helper_brouter_description">BRouter biedt off line routering. Als het is geïnstalleerd en de benodigde bestanden gedownload heeft, zal c:geo een route naar de cache automatisch tonen op de interne kaart.</string>
   <!-- add-ons -->
   <string name="addon_missing_title">Add-On ontbreekt</string>
   <string name="addon_download_prompt">Haal de add-on nu op van Google Play.</string>
@@ -1452,6 +1460,7 @@
   </plurals>
   <string name="command_rename_list_result">Lijst hernoemd</string>
   <string name="command_delete_list_result">Lijst verwijderd</string>
+  <string name="command_unique_list_result">Verwijderde caches uit andere lijsten</string>
   <string name="fav_points_remaining">"Deze cache toevoegen aan favorieten (%s resterend)"</string>
   <!-- distance units -->
   <string name="unit_m">m</string>

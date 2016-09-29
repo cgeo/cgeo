@@ -357,6 +357,8 @@
   <string name="caches_clear_offlinelogs">Rensa offline loggar</string>
   <string name="caches_clear_offlinelogs_message">Vill du rensa offline loggarna?</string>
   <string name="caches_clear_offlinelogs_progress">Rensar offline loggar</string>
+  <string name="caches_make_list_unique">Gör listan unik</string>
+  <string name="caches_filter_missing_gcvote">Hittade cacher utan röster</string>
   <!-- caches lists -->
   <string name="list_menu_create">Skapa en ny lista</string>
   <string name="list_menu_drop">Ta bort den här listan</string>
@@ -655,6 +657,7 @@
   <string name="auth_authorize">Koppla c:geo mot Twitter</string>
   <string name="auth_check">Kolla autentisering</string>
   <string name="auth_check_again">Kolla autentisering igen</string>
+  <string name="auth_start">Kolla autentisering</string>
   <string name="auth_again">Koppla mot Twitter igen</string>
   <string name="auth_register">Skapa ett konto</string>
   <string name="auth_connected">Ansluten</string>
@@ -794,6 +797,7 @@
   <string name="cache_menu_navigation_transit">Navigering (kollektivt)</string>
   <string name="cache_menu_navigation_bike">Navigering (med cykel)</string>
   <string name="cache_menu_maps_directions">Google Maps Navigering</string>
+  <string name="cache_menu_osmand">OsmAnd</string>
   <string name="cache_menu_sygic_walk">Sygic (vandring)</string>
   <string name="cache_menu_sygic_drive">Sygic (körning)</string>
   <string name="cache_menu_radar">Radar</string>
@@ -983,6 +987,10 @@
   <string name="map_strategy_detailed">Exakta positioner</string>
   <string name="live_map_notification">I den nya Live kartan så är koordinaterna inte alltid exakta. En cache med potentiellt oexakta koordinater är markerad med en orange cirkel.\nGenom att visa detaljer för cachen eller genom att spara cachen för offline kommer alltid exakta koordinater att hämtas.\n\nMer information om alla förändringar finns på \"Om c:geo\" sidan, som kan nås från c:geo\'s startsida.</string>
   <string name="map_select_multiple_items">Välj objekt</string>
+  <string name="map_routing">Navigering</string>
+  <string name="map_routing_walk">Fotgängare</string>
+  <string name="map_routing_bike">Cykel</string>
+  <string name="map_routing_car">Bil</string>
   <!-- search -->
   <string name="search_bar_hint">Sök cache/TB</string>
   <string name="search_bar_desc">Cache (GC-kod, nyckelord), Trackable (TB-kod)</string>
@@ -1063,6 +1071,7 @@
   <string name="navigation_direct_navigation">Direkt navigering</string>
   <string name="navigation_target">Mål</string>
   <string name="err_nav_no_coordinates">Kan inte starta navigering utan koordinater</string>
+  <string name="osmand_marker_cgeo">Markör från c:geo</string>
   <!-- license -->
   <string name="license">Licens</string>
   <string name="license_show">Visa licens</string>
@@ -1093,6 +1102,8 @@
   <string name="helper_wear_description">c:geo Wear är en plugin till c:geo som låter dig navigera till geocacher med din Android Wear smartwatch.</string>
   <string name="helper_where_you_go_title">WhereYouGo</string>
   <string name="helper_where_you_go_description">Appen WhereYouGo gör att du kan spela och leta efter cacher av typen Wherigo. c:geo kan påbörja nedladdningar av spelfiler, s.k. cartridges, i denna app.</string>
+  <string name="helper_brouter_title">BRouter Offline-navigering</string>
+  <string name="helper_brouter_description">BRouter tillhandahåller offline-navigering. Om det är installerat och de nödvändiga filerna har laddats ned kommer c:geo automatiskt visa en rutt till cachen på den interna kartan.</string>
   <!-- add-ons -->
   <string name="addon_missing_title">Tillägg saknas</string>
   <string name="addon_download_prompt">Hämta det nu från Google Play.</string>
@@ -1449,6 +1460,7 @@
   </plurals>
   <string name="command_rename_list_result">Namn ändrat på lista</string>
   <string name="command_delete_list_result">Lista borttagen</string>
+  <string name="command_unique_list_result">Borttagna cacher från andra listor</string>
   <string name="fav_points_remaining">"Lägg till denna cache till dina favoriter (%s återstår)"</string>
   <!-- distance units -->
   <string name="unit_m">m</string>

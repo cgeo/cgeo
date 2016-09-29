@@ -357,6 +357,8 @@
   <string name="caches_clear_offlinelogs">Borrar registros sin conexión</string>
   <string name="caches_clear_offlinelogs_message">¿Quieres borrar los registros sin conexión?</string>
   <string name="caches_clear_offlinelogs_progress">Borrando registros sin conexión</string>
+  <string name="caches_make_list_unique">Crear lista única</string>
+  <string name="caches_filter_missing_gcvote">Cachés encontrados no votados</string>
   <!-- caches lists -->
   <string name="list_menu_create">Crear nueva lista</string>
   <string name="list_menu_drop">Borrar lista actual</string>
@@ -783,6 +785,7 @@
   <string name="cache_menu_navigation_transit">Navegación (Trans. público)</string>
   <string name="cache_menu_navigation_bike">Navegación (Bici)</string>
   <string name="cache_menu_maps_directions">Direcciones de Google Maps</string>
+  <string name="cache_menu_osmand">OsmAnd</string>
   <string name="cache_menu_sygic_walk">Sygic (A pie)</string>
   <string name="cache_menu_sygic_drive">Sygic (Coche)</string>
   <string name="cache_menu_radar">Radar</string>
@@ -970,6 +973,10 @@
   <string name="map_strategy_detailed">Detallado</string>
   <string name="live_map_notification">Las coordenadas en el mapa en vivo pueden no ser precisas. Posibles coordenadas imprecisas están marcadas con un círculo naranja.\nAbrir los detalles del caché o guardándolo para su uso sin conexión proporcionará siempre coordenadas precisas.\n\nPuedes encontrar más información en la página \"Sobre c:geo\" dentro de la app.</string>
   <string name="map_select_multiple_items">Seleccionar elemento</string>
+  <string name="map_routing">Enrutamiento</string>
+  <string name="map_routing_walk">Andando</string>
+  <string name="map_routing_bike">Bici</string>
+  <string name="map_routing_car">Coche</string>
   <!-- search -->
   <string name="search_bar_hint">Buscar cachés</string>
   <string name="search_bar_desc">Cachés (Código-GC, palabra clave), Rastreables (Código-TB)</string>
@@ -1050,6 +1057,7 @@
   <string name="navigation_direct_navigation">Navegación directa</string>
   <string name="navigation_target">Objetivo</string>
   <string name="err_nav_no_coordinates">No se puede iniciar la navegación sin coordenadas</string>
+  <string name="osmand_marker_cgeo">Marcador de c:geo</string>
   <!-- license -->
   <string name="license">Licencia</string>
   <string name="license_show">Mostrar licencia</string>
@@ -1079,6 +1087,8 @@
   <string name="helper_wear_description">c:geo Wear es un complemento para c:geo que te permite navegar a los cachés usando tu smartwatch Android Wear.</string>
   <string name="helper_where_you_go_title">WhereYouGo</string>
   <string name="helper_where_you_go_description">WhereYouGo te permite ejecutar y buscar cachés de tipo Wherigo. c:geo puede iniciar directamente la descarga de los cartuchos a esta aplicación.</string>
+  <string name="helper_brouter_title">Navegación sin conexión BRouter</string>
+  <string name="helper_brouter_description">BRouter proporciona enrutamiento sin conexión. Si está instalado y tiene los archivos necesarios descargados, c:geo mostrará de manera automática una ruta hasta el caché en el mapa interno.</string>
   <!-- add-ons -->
   <string name="addon_missing_title">No se encuentra el complemento</string>
   <string name="addon_download_prompt">Obtenlo ahora desde Google Play.</string>
@@ -1435,6 +1445,7 @@ Nombre de archivo:%2$s</string>
   </plurals>
   <string name="command_rename_list_result">Lista renombrada</string>
   <string name="command_delete_list_result">Lista borrada</string>
+  <string name="command_unique_list_result">Cachés borrados de otras listas</string>
   <string name="fav_points_remaining">"Añadir el caché a favoritos (te quedan %s)"</string>
   <!-- distance units -->
   <string name="unit_m">m</string>

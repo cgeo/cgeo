@@ -126,6 +126,7 @@
   <string name="log_hint_log_password">Angi passordet for logg</string>
   <string name="log_oc_team_comment">Kommentar fra OC-teamet</string>
   <string name="log_your_saved_log">Din lagrede logg</string>
+  <string name="log_empty_logbook">Loggboka på denne cachen er tom.</string>
   <string-array name="log_image_scales">
     <item>Ingen skalering</item>
     <item>512 px</item>
@@ -148,6 +149,8 @@
   <string name="err_unknown">Ukjent feil</string>
   <string name="err_unknown_address">c:geo klarte ikke finne et sted ut fra denne adressen</string>
   <string name="err_comm">Ukjent tilkoblingsfeil</string>
+  <string name="err_missing_auth">Brukernavn eller passord er ikke oppgitt</string>
+  <string name="err_wrong">Feil brukernavn og/eller passord</string>
   <string name="err_maintenance">Geocaching.com er nede for vedlikehold. c:geo arbeider offline med lagrede cacher.</string>
   <string name="err_license">Brukeren har ikke akseptert Geocaching.com sin lisens. c:geo kan ikke laste cachens koordinater.</string>
   <string name="err_unvalidated_account">Du må aktivere kontoen din på Geocaching.com først.</string>
@@ -357,6 +360,8 @@
   <string name="list_menu_rename">Endre navn på listen</string>
   <string name="list_menu_import">Importer</string>
   <string name="list_title">Velg en liste</string>
+  <string name="lists_title">Velg listene</string>
+  <string name="lists_remove_all">Ingen</string>
   <string name="list_inbox">Lagret</string>
   <string name="list_all_lists">Alle cacher</string>
   <string name="list_dialog_create_title">Ny liste</string>
@@ -452,6 +457,7 @@
   <string name="settings_activate_oc_uk">Aktiver</string>
   <string name="init_summary_oc_uk">Last cacher fra opencaching.org.uk</string>
   <string name="init_oc_uk_description">Gi c:geo tilgang til å bruke opencaching.org.uk for å søke etter cacher og vise/filtrere dine funnede cacher.</string>
+  <string name="init_su">Geocaching.su</string>
   <string name="settings_activate_su">Aktiver</string>
   <string name="init_gcvote">GCVote.com</string>
   <string name="init_gcvote_password_description">For å kunne vurdere en cache må du følge instruksjonene på GCVote.com og angi ditt GCVote passord her.</string>
@@ -617,7 +623,9 @@
   <string name="feature_search_geocode">Søk med GC-kode</string>
   <string name="feature_search_owner">Søk med eier</string>
   <string name="feature_search_finder">Søk med finner</string>
+  <string name="init_experimental_title">Eksperimentelle funksjoner</string>
   <string name="init_mfbeta">Mapsforge beta som standard</string>
+  <string name="init_mfbeta_description">Gjeldende versjon inneholder en betaversjon av vårt nye Mapsforge-kart som en et prøveprosjekt. Dette nye kartet kan aktiveres her som standard for live- og listekartene.</string>
   <!-- map sources -->
   <string name="map_source_google_map">Google: kart</string>
   <string name="map_source_google_satellite">Google: satellittbilder</string>
@@ -660,6 +668,11 @@
   <string name="auth_dialog_completed_twitter">c:geo har nå fått godkjenning til å kvitre på Twitter.</string>
   <!-- auth opencaching -->
   <string name="auth_ocde">opencaching.de</string>
+  <string name="auth_ocpl">opencaching.pl</string>
+  <string name="auth_ocnl">opencaching.nl</string>
+  <string name="auth_ocus">opencaching.us</string>
+  <string name="auth_ocro">opencaching.ro</string>
+  <string name="auth_ocuk">opencaching.org.uk</string>
   <string name="auth_dialog_completed_oc">c:geo har nå fått godkjenning til å kommunisere med %s.</string>
   <!-- auth geokrety -->
   <string name="auth_dialog_completed_geokrety">c:geo har nå fått godkjenning til å kommunisere med %s.</string>
@@ -771,6 +784,7 @@
   <string name="cache_menu_navigation_transit">Navigasjon (Transit)</string>
   <string name="cache_menu_navigation_bike">Navigasjon (sykkel)</string>
   <string name="cache_menu_maps_directions">Google Maps-veibeskrivelse</string>
+  <string name="cache_menu_osmand">OsmAnd</string>
   <string name="cache_menu_sygic_walk">Sygic (Gå)</string>
   <string name="cache_menu_sygic_drive">Sygic (Kjøre)</string>
   <string name="cache_menu_radar">Radar</string>
@@ -796,7 +810,9 @@
   <string name="cache_menu_whereyougo">WhereYouGo</string>
   <string name="cache_menu_oruxmaps_online">OruxMaps (Online)</string>
   <string name="cache_menu_oruxmaps_offline">OruxMaps (frakoblet)</string>
+  <string name="cache_menu_navigon">Navigon</string>
   <string name="cache_menu_pebble">Pebble</string>
+  <string name="cache_menu_android_wear">Android Wear</string>
   <string name="cache_menu_vote">Avgi stemme</string>
   <string name="cache_menu_checker">Åpne Geochecker</string>
   <string name="cache_menu_ignore">Ignorer cache</string>
@@ -840,6 +856,7 @@
   <string name="cache_image">Bilde</string>
   <string name="cache_image_open_file">Åpne som fil</string>
   <string name="cache_image_open_browser">Åpne i nettleser</string>
+  <string name="cache_image_add_waypoint">Legg til veipunkt</string>
   <string name="cache_share_field">Del</string>
   <string name="cache_time_full_hours">klokken</string>
   <string name="cache_listed_on">Oppført på %s</string>
@@ -954,6 +971,9 @@
   <string name="map_strategy_auto">Hastighetsavhengig</string>
   <string name="map_strategy_detailed">Detaljert</string>
   <string name="live_map_notification">Koordinatene på live-kartet er ikke alltid nøyaktige. En cache med potensielt unøyaktige koordinater blir markert med en oransje sirkel.\nNår du viser detaljene på en cache eller lagrer den vil nøyaktige koordinater bli lastet ned.\n\nMer infomasjon finner du ved å velge \"Om c:geo\" på åpningsbildet i appen.</string>
+  <string name="map_routing_walk">Gå</string>
+  <string name="map_routing_bike">Sykkel</string>
+  <string name="map_routing_car">Bil</string>
   <!-- search -->
   <string name="search_bar_hint">Søk etter cacher</string>
   <string name="search_bar_desc">Cacher (GC-kode, nøkkelord). Sporbare (TB-kode)</string>
@@ -1024,6 +1044,7 @@
   <string name="user_menu_open_browser">Åpne profil i nettleseren</string>
   <string name="user_menu_send_message">Send melding</string>
   <string name="user_menu_open_contact">Åpne kontaktinfo</string>
+  <string name="user_unknown">Ukjent bruker</string>
   <!-- navigation -->
   <string name="navigation">Navigasjon</string>
   <string name="compass_title">Kompass</string>
@@ -1375,9 +1396,11 @@
   <string name="showcase_logcache_title">Sender loggen</string>
   <string name="showcase_logcache_text">Husk, mange kommandoer er nå i tittellinjen. Der finner du knappen for å sende den ferdige loggen.</string>
   <string name="showcase_main_title">Menylinje</string>
+  <string name="showcase_main_text">Noen funksjoner i c:geo er tilgjengelige i menylinjen eller finnes i menyen du får opp ved å trykke på knappen med prikker. Du kan trykke og holde på knapper for å vise en beskrivelse av hva de gjør.</string>
   <string name="showcase_cachelist_title">Bytter lister.</string>
   <string name="showcase_cachelist_text">Du kan bytte mellom geocache lister ved å klikke på tittelen på listen.</string>
   <string name="showcase_compass_hint_title">Vis hint</string>
+  <string name="showcase_compass_hint_text">Dette punktet i menyen kan hjelpe deg med å finne cachen - her vises hintet, hvis det er tilgjengelig.</string>
   <string name="confirm_log_title">Uvanlig loggtype</string>
   <string name="confirm_log_message">Du vil logge \'%s\'. Er du sikker?</string>
   <!-- Geokrety -->

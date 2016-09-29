@@ -360,6 +360,8 @@
   <string name="caches_clear_offlinelogs">Usuń wpisy offline</string>
   <string name="caches_clear_offlinelogs_message">Czy chcesz wyczyścić wpisy offline?</string>
   <string name="caches_clear_offlinelogs_progress">Usuwanie wpisów offline</string>
+  <string name="caches_make_list_unique">Uczyń listę unikalną</string>
+  <string name="caches_filter_missing_gcvote">Znaleziono skrzynki bez głosów</string>
   <!-- caches lists -->
   <string name="list_menu_create">Utwórz nową listę</string>
   <string name="list_menu_drop">Usuń aktualną listę</string>
@@ -796,6 +798,7 @@
   <string name="cache_menu_navigation_transit">Nawigacja (Tranzyt)</string>
   <string name="cache_menu_navigation_bike">Nawigacja (rower)</string>
   <string name="cache_menu_maps_directions">Kierunki map Google</string>
+  <string name="cache_menu_osmand">OsmAnd</string>
   <string name="cache_menu_sygic_walk">Sygic (pieszo)</string>
   <string name="cache_menu_sygic_drive">Sygic (jazda)</string>
   <string name="cache_menu_radar">Radar</string>
@@ -984,6 +987,10 @@
   <string name="map_strategy_detailed">Szczegółowa</string>
   <string name="live_map_notification">Na nowej mapie live, współrzędnie nie zawsze muszą być dokładne. Prawdopodobne niedokładne współrzędne są zaznaczane za pomocą pomarańczowych okręgów.\nOtworzenie współrzędnych skrzynki lub zapisanie skrzynki do użytku offline zawsze używa precyzyjnych współrzędnych.\n\nWięcej informacji na temat wszystkich zmian można odnaleźć na stronie \"O c:geo\" wewnątrz programu.</string>
   <string name="map_select_multiple_items">Wybierz element</string>
+  <string name="map_routing">Nawigacja</string>
+  <string name="map_routing_walk">Pieszo</string>
+  <string name="map_routing_bike">Rower</string>
+  <string name="map_routing_car">Samochód</string>
   <!-- search -->
   <string name="search_bar_hint">Szukaj skrzynek</string>
   <string name="search_bar_desc">Skrzynki (GC-kod, słowo kluczowe), przedmioty podróżne (TB-kod)</string>
@@ -1064,6 +1071,7 @@
   <string name="navigation_direct_navigation">Bezpośrednia nawigacja</string>
   <string name="navigation_target">Cel</string>
   <string name="err_nav_no_coordinates">Nie można rozpocząć nawigacji - brak współrzędnych</string>
+  <string name="osmand_marker_cgeo">Marker z c:geo</string>
   <!-- license -->
   <string name="license">Licencja</string>
   <string name="license_show">Pokaż licencję</string>
@@ -1093,6 +1101,8 @@
   <string name="helper_wear_description">c:geo Wear to dodatek do c:geo, który pozwala na nawigację do skrzynki bezpośrednio z zegarka Android Wear.</string>
   <string name="helper_where_you_go_title">WhereYouGo</string>
   <string name="helper_where_you_go_description">WhereYouGo pozwala na poszukiwanie skrzynek typu Wherigo. c:geo może automatycznie pobierać kardridże dzięki tej aplikacji.</string>
+  <string name="helper_brouter_title">BRouter Nawigacja Offline</string>
+  <string name="helper_brouter_description">BRouter pozwala na nawigację offline. Jeśli jest zainstalowany i niezbędne pliki zostały pobrane, c:geo automatycznie pokaże trasę do skrzynki na wewnętrznej mapie.</string>
   <!-- add-ons -->
   <string name="addon_missing_title">Brakujący dodatek</string>
   <string name="addon_download_prompt">Pobierz teraz z Google Play.</string>
@@ -1458,6 +1468,7 @@
   </plurals>
   <string name="command_rename_list_result">Zmieniono nazwę listy</string>
   <string name="command_delete_list_result">Usunięto listę</string>
+  <string name="command_unique_list_result">Usunięte skrzynki z innych list</string>
   <string name="fav_points_remaining">"Dodaj tę skrzynkę do ulubionych (pozostało %s)"</string>
   <!-- distance units -->
   <string name="unit_m">m</string>

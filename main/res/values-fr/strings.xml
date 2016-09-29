@@ -357,6 +357,8 @@
   <string name="caches_clear_offlinelogs">Supprimer les visites hors-ligne</string>
   <string name="caches_clear_offlinelogs_message">Supprimer toutes les visites hors-ligne ?</string>
   <string name="caches_clear_offlinelogs_progress">Suppression des visites hors-ligne</string>
+  <string name="caches_make_list_unique">Rendre la liste unique</string>
+  <string name="caches_filter_missing_gcvote">Caches trouvées et sans vote</string>
   <!-- caches lists -->
   <string name="list_menu_create">Nouvelle liste</string>
   <string name="list_menu_drop">Supprimer la liste courante</string>
@@ -795,6 +797,7 @@
   <string name="cache_menu_navigation_transit">Navigation (transports publics)</string>
   <string name="cache_menu_navigation_bike">Navigation (vélo)</string>
   <string name="cache_menu_maps_directions">Directions Google Maps</string>
+  <string name="cache_menu_osmand">OsmAnd</string>
   <string name="cache_menu_sygic_walk">Sygic (à pied)</string>
   <string name="cache_menu_sygic_drive">Sygic (en voiture)</string>
   <string name="cache_menu_radar">Radar</string>
@@ -984,6 +987,10 @@
   <string name="map_strategy_detailed">Détaillée</string>
   <string name="live_map_notification">Lors de l\'affichage de la carte temps-réel, les coordonnées de certaines caches peuvent être imprécises, elles sont alors entourées d\'un cercle orange.\nConsultez les détails d\'une cache ou enregistrez-la pour une utilisation hors-ligne afin d\'obtenir ses coordonnées exactes.\n\nVous trouverez plus d\'informations sur la page d\'aide accessible depuis \"À propos de c:geo\".</string>
   <string name="map_select_multiple_items">Sélectionner l\'élément</string>
+  <string name="map_routing">Calcul de l\'itinéraire</string>
+  <string name="map_routing_walk">À pied</string>
+  <string name="map_routing_bike">En vélo</string>
+  <string name="map_routing_car">En voiture</string>
   <!-- search -->
   <string name="search_bar_hint">Recherche globale</string>
   <string name="search_bar_desc">Caches (géocode, mot-clé), Objets voyageurs (code TB)</string>
@@ -1064,6 +1071,7 @@
   <string name="navigation_direct_navigation">Navigation directe</string>
   <string name="navigation_target">Cible</string>
   <string name="err_nav_no_coordinates">Impossible de démarrer la navigation en l\'absence de coordonnées</string>
+  <string name="osmand_marker_cgeo">Repère de c:geo</string>
   <!-- license -->
   <string name="license">Licence</string>
   <string name="license_show">Afficher la licence</string>
@@ -1094,6 +1102,8 @@
   <string name="helper_wear_description">c:geo Wear vous permet de naviguer vers les caches en utilisant  votre smartwatch Android.</string>
   <string name="helper_where_you_go_title">WhereYouGo</string>
   <string name="helper_where_you_go_description">WhereYouGo permet de rechercher et de jouer avec les caches de type Wherigo. c:geo peut automatiquement lancer le téléchargement de cartouches utilisables ensuite dans l\'application WhereYouGo.</string>
+  <string name="helper_brouter_title">Navigation BRouter hors-ligne</string>
+  <string name="helper_brouter_description">BRouter permet la navigation hors ligne. Lorsque BRouter est installé et les fichiers nécessaires téléchargés, c:geo vous indiquera sur la carte l\'itinéraire vers la cache.</string>
   <!-- add-ons -->
   <string name="addon_missing_title">Module complémentaire manquant</string>
   <string name="addon_download_prompt">Le télécharger sur Google Play.</string>
@@ -1450,6 +1460,7 @@
   </plurals>
   <string name="command_rename_list_result">Liste renommée</string>
   <string name="command_delete_list_result">Liste supprimée</string>
+  <string name="command_unique_list_result">Caches supprimées des autres listes</string>
   <string name="fav_points_remaining">"Ajouter aux favoris (restant : %s)"</string>
   <!-- distance units -->
   <string name="unit_m">m</string>

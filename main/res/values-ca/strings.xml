@@ -357,6 +357,8 @@
   <string name="caches_clear_offlinelogs">Neteja els registres fora de línea</string>
   <string name="caches_clear_offlinelogs_message">Voleu esborrar els registres fora de línia?</string>
   <string name="caches_clear_offlinelogs_progress">S\'estan netejant els registres fora línia</string>
+  <string name="caches_make_list_unique">Fer llista única</string>
+  <string name="caches_filter_missing_gcvote">Cerca catxés no votats</string>
   <!-- caches lists -->
   <string name="list_menu_create">Crea una llista nova</string>
   <string name="list_menu_drop">Elimina la llista actual</string>
@@ -789,11 +791,12 @@
   <string name="cache_dialog_favorite_remove_message">S\'esta eliminant el catxé dels preferits…</string>
   <string name="cache_menu_navigate">Navega</string>
   <string name="cache_menu_navigation_drive">Navegació (conduint)</string>
-  <string name="cache_menu_navigation_drive_select_target">Catxé o plaça de pàrquing?</string>
+  <string name="cache_menu_navigation_drive_select_target">Catxé o plaça d\'aparcament?</string>
   <string name="cache_menu_navigation_walk">Navegació (caminant)</string>
   <string name="cache_menu_navigation_transit">Navegació (trànsit)</string>
   <string name="cache_menu_navigation_bike">Navegació (bicicleta)</string>
   <string name="cache_menu_maps_directions">Direccions del Google Maps</string>
+  <string name="cache_menu_osmand">OsmAnd</string>
   <string name="cache_menu_sygic_walk">Sygic (a peu)</string>
   <string name="cache_menu_sygic_drive">Sygic (Conduir)</string>
   <string name="cache_menu_radar">Radar</string>
@@ -982,6 +985,10 @@
   <string name="map_strategy_detailed">Detallada</string>
   <string name="live_map_notification">Les coordenades al mapa en viu poden no ser precises. Possiblement les coordenades imprecises estan marcades amb un cercle taronja.\nObrint els detalls del catxé o guardant el catxé per a ús fora de línia  obtindreu les coordenades precises.\n\nPodeu trobar més informació a la pàgina \"Quant al c:geo\" dins de l\'aplicació.</string>
   <string name="map_select_multiple_items">Seleccionar un element</string>
+  <string name="map_routing">Encaminant</string>
+  <string name="map_routing_walk">A peu</string>
+  <string name="map_routing_bike">En bici</string>
+  <string name="map_routing_car">En cotxe</string>
   <!-- search -->
   <string name="search_bar_hint">Cerca de catxés</string>
   <string name="search_bar_desc">Catxés (codi del catxé, paraula clau), Traçables (codi TB)</string>
@@ -1062,6 +1069,7 @@
   <string name="navigation_direct_navigation">Navegació directa</string>
   <string name="navigation_target">Objectiu</string>
   <string name="err_nav_no_coordinates">No es pot iniciar la navegació sense les coordenades</string>
+  <string name="osmand_marker_cgeo">Marcador de c:geo</string>
   <!-- license -->
   <string name="license">Llicència</string>
   <string name="license_show">Mostra la llicència</string>
@@ -1091,6 +1099,8 @@
   <string name="helper_wear_description">c:geo Wear és un complement per c:geo que et permet cercar catxés fent servir el teu smartwatch Android Wear.</string>
   <string name="helper_where_you_go_title">WhereYouGo</string>
   <string name="helper_where_you_go_description">WhereYouGo permet jugar i buscar catxés de tipus Wherigo. El c:geo pot descarregar automàticament els cartutxos dins d\'aquest aplicació.</string>
+  <string name="helper_brouter_title">Navegació fora de línia BRouter</string>
+  <string name="helper_brouter_description">BRouter proporciona enrutament fora de línia. Si s\'instal·la i té els arxius necessaris descarregats, c:geo automàticament mostrarà una ruta a l\'amagatall al mapa intern.</string>
   <!-- add-ons -->
   <string name="addon_missing_title">No es troba el complement</string>
   <string name="addon_download_prompt">Baixa-te\'l de Google Play.</string>
@@ -1447,6 +1457,7 @@
   </plurals>
   <string name="command_rename_list_result">Canvia el nom de la llista</string>
   <string name="command_delete_list_result">Llista suprimida</string>
+  <string name="command_unique_list_result">Catxés esborrats d\'altres llistes</string>
   <string name="fav_points_remaining">"Afegeix aquest catxé a preferits (%s restants)"</string>
   <!-- distance units -->
   <string name="unit_m">m</string>

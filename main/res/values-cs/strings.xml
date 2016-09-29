@@ -360,6 +360,8 @@
   <string name="caches_clear_offlinelogs">Smazat offline logy</string>
   <string name="caches_clear_offlinelogs_message">Opravdu chceš vymazat offline logy?</string>
   <string name="caches_clear_offlinelogs_progress">Mazání offline logů</string>
+  <string name="caches_make_list_unique">Vytvořit seznam jedinečných</string>
+  <string name="caches_filter_missing_gcvote">Nalezené keše bez GCVote hlasů</string>
   <!-- caches lists -->
   <string name="list_menu_create">Vytvořit nový seznam</string>
   <string name="list_menu_drop">Smazat aktuální seznam</string>
@@ -467,7 +469,7 @@
   <string name="init_su">Geocaching.su</string>
   <string name="init_summary_su">Načíst keše z geocaching.su</string>
   <string name="settings_activate_su">Aktivovat</string>
-  <string name="init_gcvote">GCvote.com</string>
+  <string name="init_gcvote">GCVote.com</string>
   <string name="init_gcvote_password_description">Pokud chceš hodnotit keše, je třeba postupovat dle pokynů na GCVote.com a zadat sem své heslo.</string>
   <string name="err_gcvote_send_rating">Chyba při odesílání hodnocení, zkontroluj GCVote heslo v nastavení nebo ho nech prázdné.</string>
   <string name="gcvote_sent">Hlas úspěšně odeslán</string>
@@ -501,7 +503,7 @@
   <string name="init_signature_template_url">URL adresa</string>
   <string name="init_signature_template_log">Text logu</string>
   <string name="init_ratingwanted">Načítat hodnocení</string>
-  <string name="init_summary_ratingwanted">Načítat hodnocení keší z GCvote.com</string>
+  <string name="init_summary_ratingwanted">Načítat hodnocení keší z GCVote.com</string>
   <string name="init_friends_and_own_logs_wanted">Zobrazovat mé logy a logy přátel</string>
   <string name="init_summary_friends_and_own_logs_wanted">Zobrazovat další logbook s mými logy a logy přátel</string>
   <string name="init_openlastdetailspage">Otevřít poslední stránku</string>
@@ -799,7 +801,7 @@
   <string name="cache_dialog_favorite_remove_message">Odstraňování keše z Oblíbených…</string>
   <string name="cache_menu_navigate">Navigovat</string>
   <string name="cache_menu_navigation_drive">Navigace (řízení)</string>
-  <string name="cache_menu_navigation_drive_select_target">Keš nebo parkovací místo?</string>
+  <string name="cache_menu_navigation_drive_select_target">Keš nebo parkoviště?</string>
   <string name="cache_menu_navigation_walk">Navigace (chůze)</string>
   <string name="cache_menu_navigation_transit">Navigace (Transit)</string>
   <string name="cache_menu_navigation_bike">Navigace (kolo)</string>
@@ -994,6 +996,10 @@
   <string name="map_strategy_detailed">Podrobná</string>
   <string name="live_map_notification">Na nové Aktivní mapě nemusí být souřadnice vždy přesné. Případné nepřesné souřadnice jsou na mapě označeny oranžovým kruhem.\nPři otevření detailů keše nebo jejím uložení pro offline použití jsou již souřadnice přesné.\n\nVíce informací o všech změnách lze najít v aplikaci na stránce „O aplikaci“.</string>
   <string name="map_select_multiple_items">Vybrat položku</string>
+  <string name="map_routing">Směrování</string>
+  <string name="map_routing_walk">Chůze</string>
+  <string name="map_routing_bike">Jízdní kolo</string>
+  <string name="map_routing_car">Auto</string>
   <!-- search -->
   <string name="search_bar_hint">Hledaní kešek</string>
   <string name="search_bar_desc">Keše (GC-kód, klíčové slovo), sledovatelné předměty (TB-kód)</string>
@@ -1104,6 +1110,8 @@
   <string name="helper_wear_description">c:geo Wear je doplněk pro c:geo, který umožňuje hledání keší pomocí chytrých hodinek Android Wear.</string>
   <string name="helper_where_you_go_title">WhereYouGo</string>
   <string name="helper_where_you_go_description">WhereYouGo umožňuje hledání keší typu Wherigo. S touto aplikací může c:geo automaticky stahovat údaje potřebné pro hru.</string>
+  <string name="helper_brouter_title">BRouter offline navigace</string>
+  <string name="helper_brouter_description">Aplikace BRouter poskytuje offline navigaci. Je-li nainstalována a jsou-li nezbytné soubory stažené, c:geo automaticky zobrazí cestu ke keši na interní mapě.</string>
   <!-- add-ons -->
   <string name="addon_missing_title">Chybějící modul</string>
   <string name="addon_download_prompt">Získat nyní z Google Play.</string>
