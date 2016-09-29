@@ -1189,7 +1189,7 @@ public class NewMap extends AbstractActionBarActivity {
                 }
             };
 
-            AlertDialog dialog = new AlertDialog.Builder(this)
+            final AlertDialog dialog = new AlertDialog.Builder(this)
                 .setTitle(res.getString(R.string.map_select_multiple_items))
                 .setAdapter(adapter, new SelectionClickListener(sorted))
                 .create();
