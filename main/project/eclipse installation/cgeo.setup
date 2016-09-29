@@ -335,6 +335,8 @@
           name="org.eclipse.mylyn.builds.feature.group"/>
       <requirement
           name="org.eclipse.mylyn.hudson.feature.group"/>
+      <requirement
+          name="org.eclipse.mylyn.bugzilla_feature.feature.group"/>
       <repository
           url="http://download.eclipse.org/mylyn/releases/latest"/>
     </setupTask>
