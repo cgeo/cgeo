@@ -1,6 +1,10 @@
-package cgeo.geocaching.connector;
+package cgeo.geocaching.connector.ge;
 
 import static org.assertj.core.api.Assertions.assertThat;
+
+import cgeo.geocaching.connector.ConnectorFactory;
+import cgeo.geocaching.connector.ConnectorFactoryTest;
+import cgeo.geocaching.connector.IConnector;
 
 import java.util.Set;
 

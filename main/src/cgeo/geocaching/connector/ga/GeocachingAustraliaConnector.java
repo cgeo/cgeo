@@ -1,11 +1,13 @@
-package cgeo.geocaching.connector;
+package cgeo.geocaching.connector.ga;
 
+import cgeo.geocaching.connector.AbstractConnector;
 import cgeo.geocaching.models.Geocache;
 
-import org.apache.commons.lang3.StringUtils;
 import android.support.annotation.NonNull;
 
-class GeocachingAustraliaConnector extends AbstractConnector {
+import org.apache.commons.lang3.StringUtils;
+
+public class GeocachingAustraliaConnector extends AbstractConnector {
 
     @Override
     @NonNull
