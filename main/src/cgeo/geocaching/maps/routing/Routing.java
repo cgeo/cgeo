@@ -19,11 +19,14 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 public final class Routing {
+    private static final double UPDATE_MIN_DISTANCE_KILOMETERS = 0.005;
     private static final double MAX_ROUTING_DISTANCE_KILOMETERS = 5.0;
+    private static final int UPDATE_MIN_DELAY_SECONDS = 3;
     private static BRouterServiceConnection brouter;
     private static Geopoint lastDirectionUpdatePoint;
     private static Geopoint[] lastRoutingPoints;
     private static Geopoint lastDestination;
+    private static long timeLastUpdate;
 
     private Routing() {
         // utility class
@@ -61,6 +64,12 @@ public final class Routing {
             return null;
         }
 
+        // avoid updating to frequently
+        final long timeNow = System.currentTimeMillis();
+        if ((timeNow - timeLastUpdate) < 1000 * UPDATE_MIN_DELAY_SECONDS) {
+            return lastRoutingPoints;
+        }
+
         // Disable routing for huge distances
         if (start.distanceTo(destination) > MAX_ROUTING_DISTANCE_KILOMETERS) {
             return null;
@@ -68,7 +77,7 @@ public final class Routing {
 
         // Use cached route if current position has not changed more than 5m
         // TODO: Maybe adjust this to current zoomlevel
-        if (lastDirectionUpdatePoint != null && destination == lastDestination && start.distanceTo(lastDirectionUpdatePoint) < 0.005) {
+        if (lastDirectionUpdatePoint != null && destination == lastDestination && start.distanceTo(lastDirectionUpdatePoint) < UPDATE_MIN_DISTANCE_KILOMETERS) {
             return lastRoutingPoints;
         }
 
@@ -76,6 +85,7 @@ public final class Routing {
         lastDestination = destination;
         lastRoutingPoints = calculateRouting(start, destination);
         lastDirectionUpdatePoint = start;
+        timeLastUpdate = timeNow;
         return lastRoutingPoints;
     }
 
@@ -120,6 +130,7 @@ public final class Routing {
 
     public static void invalidateRouting() {
         lastDirectionUpdatePoint = null;
+        timeLastUpdate = 0;
     }
 
     public static boolean isAvailable() {
