@@ -78,6 +78,9 @@ buildscript {
 
 		// monitor our application method limit
 		classpath 'com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.6.1'
+
+		// ribbonizer for easier distinction of non-release builds
+		classpath 'com.github.gfx.ribbonizer:plugin:0.6.0'
 	}
 }
 

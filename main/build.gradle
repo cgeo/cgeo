@@ -558,3 +558,10 @@ task checkstyle(type: Checkstyle) {
 
     classpath = files()
 }
+
+/*
+ * Ribbonizer, adds ribbons to launcher icon of debug builds
+ * https://github.com/gfx/gradle-android-ribbonizer-plugin
+ */
+apply plugin: 'com.github.gfx.ribbonizer'
+
