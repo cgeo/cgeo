@@ -6,8 +6,8 @@
     android:orientation="vertical"
     tools:context=".AddressListActivity" >
 
-    <ListView
-        android:id="@android:id/list"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/address_list"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_margin="0dip"

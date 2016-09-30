@@ -1,6 +1,7 @@
-package cgeo.geocaching.location;
+package cgeo.geocaching.address;
 
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.utils.AndroidRxUtils;
 
 import org.apache.commons.collections4.CollectionUtils;

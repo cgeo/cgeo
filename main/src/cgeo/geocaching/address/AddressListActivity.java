@@ -1,28 +1,36 @@
-package cgeo.geocaching;
+package cgeo.geocaching.address;
 
+import cgeo.geocaching.CacheListActivity;
+import cgeo.geocaching.Intents;
+import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractListActivity;
-import cgeo.geocaching.location.AndroidGeocoder;
-import cgeo.geocaching.location.MapQuestGeocoder;
-import cgeo.geocaching.ui.AddressListAdapter;
-
-import rx.Observable;
-import rx.android.app.AppObservable;
-import rx.functions.Action1;
+import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.ui.recyclerview.RecyclerViewProvider;
 
 import android.app.ProgressDialog;
 import android.location.Address;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class AddressListActivity extends AbstractListActivity {
+import org.apache.commons.lang3.StringUtils;
+import rx.Observable;
+import rx.android.app.AppObservable;
+import rx.functions.Action1;
+
+public class AddressListActivity extends AbstractListActivity implements AddressClickListener {
+
+    private final ArrayList<Address> addresses = new ArrayList<>();
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.addresslist_activity);
 
-        final AddressListAdapter adapter = new AddressListAdapter(this);
-        setListAdapter(adapter);
+        final AddressListAdapter adapter = new AddressListAdapter(addresses, this);
+        final RecyclerView view = RecyclerViewProvider.provideRecyclerView(this, R.id.address_list, false);
+        view.setAdapter(adapter);
 
         final String keyword = getIntent().getStringExtra(Intents.EXTRA_KEYWORD);
         final ProgressDialog waitDialog =
@@ -36,11 +44,10 @@ public class AddressListActivity extends AbstractListActivity {
                 .onErrorResumeNext(MapQuestGeocoder.getFromLocationName(keyword));
         AppObservable.bindActivity(this, geocoderObservable.toList()).subscribe(new Action1<List<Address>>() {
             @Override
-            public void call(final List<Address> addresses) {
+            public void call(final List<Address> foundAddresses) {
                 waitDialog.dismiss();
-                for (final Address address : addresses) {
-                    adapter.add(address); // don't use addAll, it's only available with API >= 11
-                }
+                addresses.addAll(foundAddresses);
+                adapter.notifyItemRangeInserted(0, foundAddresses.size());
             }
         }, new Action1<Throwable>() {
             @Override
@@ -50,4 +57,11 @@ public class AddressListActivity extends AbstractListActivity {
             }
         });
     }
+
+    @Override
+    public void onClickAddress(final Address address) {
+        CacheListActivity.startActivityAddress(this, new Geopoint(address.getLatitude(), address.getLongitude()), StringUtils.defaultString(address.getAddressLine(0)));
+        finish();
+    }
+
 }

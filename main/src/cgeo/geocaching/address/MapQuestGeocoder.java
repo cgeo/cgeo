@@ -1,5 +1,6 @@
-package cgeo.geocaching.location;
+package cgeo.geocaching.address;
 
+import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.utils.Log;

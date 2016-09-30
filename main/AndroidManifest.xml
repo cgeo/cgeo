@@ -187,7 +187,7 @@
                 android:value="cgeo.geocaching.MainActivity" />
         </activity>
         <activity
-            android:name=".AddressListActivity"
+            android:name="cgeo.geocaching.address.AddressListActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/search_address_result"
             android:parentActivityName="cgeo.geocaching.SearchActivity"

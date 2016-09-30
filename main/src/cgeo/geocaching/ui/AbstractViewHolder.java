@@ -1,12 +1,16 @@
 package cgeo.geocaching.ui;
 
-import butterknife.ButterKnife;
+import cgeo.geocaching.ui.recyclerview.AbstractRecyclerViewHolder;
 
 import android.view.View;
+
+import butterknife.ButterKnife;
 
 /**
  * Abstract super class for all view holders. It is responsible for the invocation of the view injection code and for
  * the tagging of views.
+ *
+ * TODO: Use {@link AbstractRecyclerViewHolder} and the recycler view instead.
  *
  */
 public abstract class AbstractViewHolder {

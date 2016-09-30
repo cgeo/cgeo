@@ -1,9 +1,10 @@
-package cgeo.geocaching.location;
+package cgeo.geocaching.address;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import cgeo.CGeoTestCase;
 import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
