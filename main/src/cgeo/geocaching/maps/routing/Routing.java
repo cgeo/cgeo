@@ -20,7 +20,7 @@ import org.xml.sax.helpers.DefaultHandler;
 
 public final class Routing {
     private static final double UPDATE_MIN_DISTANCE_KILOMETERS = 0.005;
-    private static final double MAX_ROUTING_DISTANCE_KILOMETERS = 5.0;
+    private static final double MAX_ROUTING_DISTANCE_KILOMETERS = 10.0;
     private static final int UPDATE_MIN_DELAY_SECONDS = 3;
     private static BRouterServiceConnection brouter;
     private static Geopoint lastDirectionUpdatePoint;
