@@ -256,10 +256,6 @@ dependencies {
         exclude group: 'com.google.code.findbugs', module: 'jsr305'
         exclude group: 'net.jcip', module: 'jcip-annotations'
     }
-    androidTestCompile ('com.google.code.findbugs:annotations:3.0.1u2') {
-        exclude group: 'com.google.code.findbugs', module: 'jsr305'
-        exclude group: 'net.jcip', module: 'jcip-annotations'
-    }
 
     // Jackson XML processing
     def jacksonVersion = '2.8.3'

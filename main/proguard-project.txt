@@ -49,12 +49,18 @@
 # ignore reflection warnings
 -dontnote org.apache.commons.compress.**
 
-# keep some test only utils classes
+# keep some test only utils classes for the plain unit tests
 -keep class org.apache.commons.lang3.StringUtils { *; }
 -keep class org.apache.commons.io.IOUtils { *; }
 -keep class org.apache.commons.io.FileUtils { *; }
+-dontnote org.apache.commons.io.IOUtils
+-dontnote org.apache.commons.lang3.StringUtils
 # IOFileFilter references FileUtils, suppress related notes
 -dontnote org.apache.commons.io.FileUtils
+
+# AssertJ -----------------------------------------------------------------------------------------
+# ignore all things in AssertJ, as long as tests are generally running fine
+-dontnote org.assertj.core.internal.**
 
 # Butter Knife ------------------------------------------------------------------------------------
 
@@ -69,6 +75,11 @@
 
 # this does not exist on jdk6 and is only loaded dynamically by jackson if needed
 -dontwarn java.nio.file.Path*
+
+# Junit -------------------------------------------------------------------------------------------
+
+# the Junit 4 library used for local tests conflicts with the Android bundled Junit 3 library
+-dontnote junit.**
 
 # Mapsforge ---------------------------------------------------------------------------------------
 
