@@ -230,18 +230,56 @@ apt {
 }
 
 dependencies {
-/*
- * cgeo library dependencies. add gradle plugin related dependencies further down below
- */
-    // network access
-    compile 'com.squareup.okhttp3:okhttp:3.4.1'
+    // AndroidAnnotations, https://github.com/excilys/androidannotations/wiki/building-project-gradle
+    def androidAnnotationsVersion = '4.1.0'
+    apt "org.androidannotations:androidannotations:$androidAnnotationsVersion"
+    compile "org.androidannotations:androidannotations-api:$androidAnnotationsVersion"
 
-    // Maps.ME integration
-    compile project(":mapswithme-api")
+    // Apache Commons
+    compile 'org.apache.commons:commons-collections4:4.1'
+    compile 'org.apache.commons:commons-lang3:3.4'
+    compile 'org.apache.commons:commons-compress:1.12'
+    compile 'commons-io:commons-io:2.5'
 
-    // Showcase view
-    // TODO replace by repository dependency. however, there is a conflict in min sdk, which needs to be solved then
-    compile project(":showcaseview")
+    // AssertJ for testing, needed both for local unit tests and Android instrumentation tests
+    def assertJVersion = '1.7.1'
+    testCompile "org.assertj:assertj-core:$assertJVersion"
+    androidTestCompile "org.assertj:assertj-core:$assertJVersion"
+
+    // ButterKnife view injection, https://github.com/JakeWharton/butterknife
+    def butterKnifeVersion = '8.4.0'
+    compile "com.jakewharton:butterknife:$butterKnifeVersion"
+    apt "com.jakewharton:butterknife-compiler:$butterKnifeVersion"
+
+    // Findbugs
+    compile ('com.google.code.findbugs:annotations:3.0.1u2') {
+        exclude group: 'com.google.code.findbugs', module: 'jsr305'
+        exclude group: 'net.jcip', module: 'jcip-annotations'
+    }
+    androidTestCompile ('com.google.code.findbugs:annotations:3.0.1u2') {
+        exclude group: 'com.google.code.findbugs', module: 'jsr305'
+        exclude group: 'net.jcip', module: 'jcip-annotations'
+    }
+
+    // Jackson XML processing
+    def jacksonVersion = '2.8.3'
+    compile "com.fasterxml.jackson.core:jackson-core:$jacksonVersion"
+    compile "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
+    compile "com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion"
+
+    // Jsoup HTML parsing
+    compile 'org.jsoup:jsoup:1.9.2'
+
+    // Junit only needed for local unit tests
+    testCompile 'junit:junit:4.12'
+
+    // Leak Canary, memory leak detection
+    def leakCanaryVersion = '1.4'
+    debugCompile "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion"
+    releaseCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
+    nightlyCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
+    rcCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
+    testCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
 
     // Locus Maps integration
     def locusVersion = '0.2.6'
@@ -260,103 +298,59 @@ dependencies {
         all*.exclude group: 'net.sf.kxml', module: 'kxml2' // duplicate XmlPullParser class
     }
 
-    compile 'com.android.support:appcompat-v7:20.0.0'
+    // Maps.ME integration
+    compile project(":mapswithme-api")
+
+    // Metadata Extractor, EXIF location extraction from images
+    compile 'com.drewnoakes:metadata-extractor:2.9.1'
+
+    // Okhttp network access
+    compile 'com.squareup.okhttp3:okhttp:3.4.1'
 
     // Play Services
     def playServicesVersion = '9.4.0'
     compile "com.google.android.gms:play-services-location:$playServicesVersion"
     compile "com.google.android.gms:play-services-appinvite:$playServicesVersion"
-
     // somehow there is a transitive play service dependency which we don't want
     configurations.all*.exclude module: "play-services-measurement"
 
-    // Apache Commons
-    compile 'org.apache.commons:commons-collections4:4.1'
-    compile 'org.apache.commons:commons-lang3:3.4'
-    compile 'org.apache.commons:commons-compress:1.12'
-    compile 'commons-io:commons-io:2.5'
-    compile ('com.google.code.findbugs:annotations:3.0.1u2') {
-        exclude group: 'com.google.code.findbugs', module: 'jsr305'
-        exclude group: 'net.jcip', module: 'jcip-annotations'
-    }
-    androidTestCompile ('com.google.code.findbugs:annotations:3.0.1u2') {
-        exclude group: 'com.google.code.findbugs', module: 'jsr305'
-        exclude group: 'net.jcip', module: 'jcip-annotations'
-    }
+    // ProcessPhoenix, reliable process restart
+    compile 'com.jakewharton:process-phoenix:1.1.0'
 
-    // Reactive extensions
+    // RxJava
     def rxjavaVersion = '1.2.0'
     compile "io.reactivex:rxjava:$rxjavaVersion"
     compile 'io.reactivex:rxandroid:0.25.0'
     // ProGuard rules for RxJava
     compile "com.artemzin.rxjava:proguard-rules:$rxjavaVersion.0"
 
-    // Jackson XML processing
-    def jacksonVersion = '2.8.3'
-    compile "com.fasterxml.jackson.core:jackson-core:$jacksonVersion"
-    compile "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
-    compile "com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion"
+    // Showcase view
+    // TODO replace by repository dependency. however, there is a conflict in min sdk, which needs to be solved then
+    compile project(":showcaseview")
 
-    // Zxing barcode reader integration
-    compile 'com.google.zxing:android-integration:3.3.0'
+    // Support Library. Appcompat
+    compile 'com.android.support:appcompat-v7:20.0.0'
+
+    // Support Annotations. enforce same version for the main app and the test app
+    def supportAnnotationsVersion = '24.2.1'
+    compile "com.android.support:support-annotations:$supportAnnotationsVersion"
+    androidTestCompile "com.android.support:support-annotations:$supportAnnotationsVersion"
+
+    // Testing Support Library. Android Studio recommended test runner, see https://developer.android.com/tools/testing-support-library/index.html#setup
+    androidTestCompile 'com.android.support.test:runner:0.5'
 
     // Undo toast
     compile 'com.github.jenzz.undobar:library:1.3:api8Release@aar'
     compile 'com.nineoldandroids:library:2.4.0'
 
-    // Android Studio recommended test runner, see https://developer.android.com/tools/testing-support-library/index.html#setup
-    androidTestCompile 'com.android.support.test:runner:0.5'
+    // ViewPagerIndicator, view pager titles for cache details and similar view pager based activities
+    compile 'com.github.renaudcerrato:ViewPagerIndicator:2.4.1-gradle'
 
-    // enforce same version of the support annotations for the main app and the test app
-    def supportAnnotationsVersion = '24.2.1'
-    compile "com.android.support:support-annotations:$supportAnnotationsVersion"
-    androidTestCompile "com.android.support:support-annotations:$supportAnnotationsVersion"
-
-    // Junit only needed for local unit tests
-    testCompile 'junit:junit:4.12'
-
-    // AssertJ for testing, needed both for local unit tests and Android instrumentation tests
-    def assertJVersion = '1.7.1'
-    testCompile "org.assertj:assertj-core:$assertJVersion"
-    androidTestCompile "org.assertj:assertj-core:$assertJVersion"
+    // Zxing barcode reader integration
+    compile 'com.google.zxing:android-integration:3.3.0'
 
     // Espresso TODO: disabled because of causing proguard errors en masse (due to including hamcrest and what else as own dependencies)
-//    androidTestCompile 'com.jakewharton.espresso:espresso:1.1-r3'
-
-/*
- * AndroidAnnotations, https://github.com/excilys/androidannotations/wiki/building-project-gradle
- */
-    def androidAnnotationsVersion = '4.1.0'
-    apt "org.androidannotations:androidannotations:$androidAnnotationsVersion"
-    compile "org.androidannotations:androidannotations-api:$androidAnnotationsVersion"
-
-/*
- * ButterKnife view injection, https://github.com/JakeWharton/butterknife
- */
-    def butterKnifeVersion = '8.4.0'
-    compile "com.jakewharton:butterknife:$butterKnifeVersion"
-    apt "com.jakewharton:butterknife-compiler:$butterKnifeVersion"
-/*
- * Jsoup HTML parsing
- */
-    compile 'org.jsoup:jsoup:1.9.2'
-
-    // EXIF location extraction from images
-    compile 'com.drewnoakes:metadata-extractor:2.9.1'
-
-    // view pager titles for cache details and similar view pager based activities
-    compile 'com.github.renaudcerrato:ViewPagerIndicator:2.4.1-gradle'
-    
-    // reliable process restart
-    compile 'com.jakewharton:process-phoenix:1.1.0'
-
-    // memory leak detection
-    def leakCanaryVersion = '1.4'
-    debugCompile "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion"
-    releaseCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
-    nightlyCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
-    rcCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
-    testCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
+    // androidTestCompile 'com.jakewharton.espresso:espresso:1.1-r3'
 }
 
 /*
