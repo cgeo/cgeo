@@ -22,7 +22,6 @@
         android:title="@string/log_image_attach"
         android:visible="false"
         app:showAsAction="ifRoom|withText">
-        <menu /> <!-- filled dynamically -->
     </item>
     <item
         android:id="@+id/menu_smilies"
