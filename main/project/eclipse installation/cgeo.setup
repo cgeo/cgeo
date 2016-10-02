@@ -22,6 +22,14 @@
         source="http://www.eclipse.org/oomph/setup/UserPreferences"/>
     <setupTask
         xsi:type="setup:CompoundTask"
+        name="net.nodj.AutoDerivPlugin">
+      <setupTask
+          xsi:type="setup:PreferenceTask"
+          key="/instance/net.nodj.AutoDerivPlugin/enabledMarker"
+          value="false"/>
+    </setupTask>
+    <setupTask
+        xsi:type="setup:CompoundTask"
         name="org.eclipse.compare">
       <setupTask
           xsi:type="setup:PreferenceTask"
