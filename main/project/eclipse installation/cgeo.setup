@@ -223,6 +223,15 @@
     </setupTask>
     <setupTask
         xsi:type="setup.p2:P2Task"
+        label="AutoDeriv"
+        licenseConfirmationDisabled="true">
+      <requirement
+          name="net.nodj.AutoDerivFeature.feature.group"/>
+      <repository
+          url="http://nodj.github.io/AutoDeriv/update"/>
+    </setupTask>
+    <setupTask
+        xsi:type="setup.p2:P2Task"
         label="Buildship"
         licenseConfirmationDisabled="true">
       <requirement
