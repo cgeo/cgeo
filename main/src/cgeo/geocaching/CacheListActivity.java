@@ -24,6 +24,7 @@ import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.export.FieldnoteExport;
 import cgeo.geocaching.export.GpxExport;
+import cgeo.geocaching.export.PersonalnoteExport;
 import cgeo.geocaching.files.GPXImporter;
 import cgeo.geocaching.filter.FilterActivity;
 import cgeo.geocaching.filter.IFilter;
@@ -803,6 +804,9 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 return true;
             case R.id.menu_export_fieldnotes:
                 new FieldnoteExport().export(adapter.getCheckedOrAllCaches(), this);
+                return true;
+            case R.id.menu_export_persnotes:
+                new PersonalnoteExport().export(adapter.getCheckedOrAllCaches(), this);
                 return true;
             case R.id.menu_remove_from_history:
                 removeFromHistoryCheck();
