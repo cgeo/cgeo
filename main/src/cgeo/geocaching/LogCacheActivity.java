@@ -277,11 +277,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         invalidateOptionsMenuCompatible();
         possibleLogTypes = cache.getPossibleLogTypes();
 
-        if (StringUtils.isNotBlank(cache.getName())) {
-            setTitle(res.getString(R.string.log_new_log) + ": " + cache.getName());
-        } else {
-            setTitle(res.getString(R.string.log_new_log) + ": " + cache.getGeocode());
-        }
+        setCacheTitleBar(cache);
 
         initializeRatingBar();
 
@@ -770,6 +766,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     private void selectImage() {
         final Intent selectImageIntent = new Intent(this, ImageSelectActivity.class);
         selectImageIntent.putExtra(Intents.EXTRA_IMAGE, image);
+        selectImageIntent.putExtra(Intents.EXTRA_GEOCODE, cache.getGeocode());
 
         startActivityForResult(selectImageIntent, SELECT_IMAGE);
     }

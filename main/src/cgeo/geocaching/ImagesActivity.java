@@ -5,9 +5,6 @@ import cgeo.geocaching.models.Image;
 import cgeo.geocaching.ui.ImagesList;
 import cgeo.geocaching.ui.ImagesList.ImageType;
 
-import org.apache.commons.collections4.CollectionUtils;
-import rx.Subscription;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,6 +15,9 @@ import android.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.commons.collections4.CollectionUtils;
+import rx.Subscription;
 
 public class ImagesActivity extends AbstractActionBarActivity {
 
@@ -48,7 +48,8 @@ public class ImagesActivity extends AbstractActionBarActivity {
         // init
         setTheme();
         setContentView(R.layout.images_activity);
-        setTitle(res.getString(imgType.getTitle()));
+
+        setCacheTitleBar(geocode);
 
         imagesList = new ImagesList(this, geocode, null);
 

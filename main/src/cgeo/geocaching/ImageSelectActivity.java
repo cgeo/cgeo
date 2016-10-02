@@ -71,6 +71,8 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
         if (extras != null) {
             image = extras.getParcelable(Intents.EXTRA_IMAGE);
             scaleChoiceIndex = extras.getInt(Intents.EXTRA_SCALE, scaleChoiceIndex);
+            final String geocode = extras.getString(Intents.EXTRA_GEOCODE);
+            setCacheTitleBar(geocode);
         }
 
         // Restore previous state

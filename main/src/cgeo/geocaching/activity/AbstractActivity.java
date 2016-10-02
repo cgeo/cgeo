@@ -1,26 +1,27 @@
 package cgeo.geocaching.activity;
 
 import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.enumerations.LoadFlags;
+import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.network.AndroidBeam;
 import cgeo.geocaching.network.Cookies;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.EditUtils;
 import cgeo.geocaching.utils.HtmlUtils;
+import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TranslationUtils;
-
-import org.apache.commons.lang3.StringUtils;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.view.ActionMode;
 import android.view.Menu;
@@ -31,6 +32,7 @@ import android.widget.EditText;
 import java.util.Locale;
 
 import butterknife.ButterKnife;
+import org.apache.commons.lang3.StringUtils;
 import rx.Subscription;
 import rx.subscriptions.Subscriptions;
 
@@ -221,8 +223,25 @@ public abstract class AbstractActivity extends ActionBarActivity implements IAbs
         }
     }
 
+    /**
+     * change the titlebar icon and text to show the current geocache
+     */
     protected void setCacheTitleBar(@NonNull final Geocache cache) {
         setCacheTitleBar(cache.getGeocode(), cache.getName(), cache.getType());
     }
 
+    /**
+     * change the titlebar icon and text to show the current geocache
+     */
+    protected void setCacheTitleBar(@Nullable final String geocode) {
+        if (StringUtils.isEmpty(geocode)) {
+            return;
+        }
+        final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+        if (cache == null) {
+            Log.e("AbstractActivity.setCacheTitleBar: cannot find the cache " + geocode);
+            return;
+        }
+        setCacheTitleBar(cache);
+    }
 }
