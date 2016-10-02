@@ -555,3 +555,12 @@ task checkstyle(type: Checkstyle) {
  */
 apply plugin: 'com.github.gfx.ribbonizer'
 
+ribbonizer {
+    // ribbonize also the about page logo, not only the application icon
+    iconNames "@drawable/cgeo_logo"
+
+    // use yellowish ribbon instead of default green
+    builder { variant, iconFile ->
+        return yellowRibbonFilter(variant, iconFile)
+    }
+}
