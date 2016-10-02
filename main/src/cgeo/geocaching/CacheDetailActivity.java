@@ -1533,7 +1533,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                             return;
                         }
 
-                        ImagesActivity.startActivitySpoilerImages(CacheDetailActivity.this, cache.getGeocode(), cache.getSpoilers());
+                        ImagesActivity.startActivity(CacheDetailActivity.this, cache.getGeocode(), cache.getSpoilers());
                     }
                 });
             } else {

@@ -3,7 +3,6 @@ package cgeo.geocaching;
 import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.ui.ImagesList;
-import cgeo.geocaching.ui.ImagesList.ImageType;
 
 import android.content.Context;
 import android.content.Intent;
@@ -22,7 +21,6 @@ import rx.Subscription;
 public class ImagesActivity extends AbstractActionBarActivity {
 
     private List<Image> imageNames;
-    private ImageType imgType = ImageType.SpoilerImages;
     private ImagesList imagesList;
     private Subscription subscription;
 
@@ -36,7 +34,6 @@ public class ImagesActivity extends AbstractActionBarActivity {
         String geocode = null;
         if (extras != null) {
             geocode = extras.getString(Intents.EXTRA_GEOCODE);
-            imgType = (ImageType) extras.getSerializable(Intents.EXTRA_TYPE);
         }
 
         if (extras == null || geocode == null) {
@@ -74,23 +71,14 @@ public class ImagesActivity extends AbstractActionBarActivity {
         super.onStop();
     }
 
-    public static void startActivityLogImages(final Context fromActivity, final String geocode, final List<Image> logImages) {
-        startActivity(fromActivity, geocode, logImages, ImageType.LogImages);
-    }
-
-    private static void startActivity(final Context fromActivity, final String geocode, final List<Image> logImages, final ImageType imageType) {
+    public static void startActivity(final Context fromActivity, final String geocode, final List<Image> logImages) {
         final Intent logImgIntent = new Intent(fromActivity, ImagesActivity.class)
-                .putExtra(Intents.EXTRA_GEOCODE, geocode)
-                .putExtra(Intents.EXTRA_TYPE, imageType);
+                .putExtra(Intents.EXTRA_GEOCODE, geocode);
 
         // avoid forcing the array list as parameter type
         final ArrayList<Image> arrayList = new ArrayList<>(logImages);
         logImgIntent.putParcelableArrayListExtra(Intents.EXTRA_IMAGES, arrayList);
         fromActivity.startActivity(logImgIntent);
-    }
-
-    public static void startActivitySpoilerImages(final Context fromActivity, final String geocode, final List<Image> spoilers) {
-        startActivity(fromActivity, geocode, spoilers, ImageType.SpoilerImages);
     }
 
     @Override

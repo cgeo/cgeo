@@ -96,7 +96,7 @@ public abstract class LogsViewCreator extends AbstractCachingListViewPageViewCre
             holder.images.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(final View v) {
-                    ImagesActivity.startActivityLogImages(activity, getGeocode(), new ArrayList<>(log.getLogImages()));
+                    ImagesActivity.startActivity(activity, getGeocode(), new ArrayList<>(log.getLogImages()));
                 }
             });
         } else {
