@@ -108,6 +108,10 @@
                 android:id="@+id/menu_export_fieldnotes"
                 android:title="@string/export_fieldnotes">
             </item>
+            <item
+                android:id="@+id/menu_export_persnotes"
+                android:title="@string/export_persnotes">
+            </item>
         </menu>
     </item>
     <item

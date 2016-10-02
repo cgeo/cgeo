@@ -27,6 +27,7 @@ import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.export.FieldnoteExport;
 import cgeo.geocaching.export.GpxExport;
+import cgeo.geocaching.export.PersonalnoteExport;
 import cgeo.geocaching.gcvote.GCVote;
 import cgeo.geocaching.gcvote.GCVoteDialog;
 import cgeo.geocaching.list.StoredList;
@@ -635,6 +636,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 return true;
             case R.id.menu_export_fieldnotes:
                 new FieldnoteExport().export(Collections.singletonList(cache), this);
+                return true;
+            case R.id.menu_export_persnotes:
+                new PersonalnoteExport().export(Collections.singletonList(cache), this);
                 return true;
             case R.id.menu_edit_fieldnote:
                 ensureSaved();
