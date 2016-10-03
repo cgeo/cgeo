@@ -357,7 +357,7 @@
   <string name="caches_clear_offlinelogs">Borrar registros sin conexión</string>
   <string name="caches_clear_offlinelogs_message">¿Quieres borrar los registros sin conexión?</string>
   <string name="caches_clear_offlinelogs_progress">Borrando registros sin conexión</string>
-  <string name="caches_make_list_unique">Crear lista única</string>
+  <string name="caches_make_list_unique">Hacer la lista exclusiva</string>
   <string name="caches_filter_missing_gcvote">Cachés encontrados no votados</string>
   <!-- caches lists -->
   <string name="list_menu_create">Crear nueva lista</string>

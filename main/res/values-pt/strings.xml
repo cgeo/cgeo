@@ -357,6 +357,8 @@
   <string name="caches_clear_offlinelogs">Limpar registos offline</string>
   <string name="caches_clear_offlinelogs_message">Quer apagar os registos offline?</string>
   <string name="caches_clear_offlinelogs_progress">A limpar registos offline</string>
+  <string name="caches_make_list_unique">Fazer uma única lista</string>
+  <string name="caches_filter_missing_gcvote">Caches encontradas não votadas</string>
   <!-- caches lists -->
   <string name="list_menu_create">Criar nova lista</string>
   <string name="list_menu_drop">Apagar lista actual</string>
@@ -679,7 +681,9 @@
   <string name="auth_ocde">opencaching.de</string>
   <string name="auth_ocpl">Opencaching.pl</string>
   <string name="auth_ocnl">opencaching.nl</string>
+  <string name="auth_ocus">opencaching.us</string>
   <string name="auth_ocro">opencaching.ro</string>
+  <string name="auth_ocuk">opencaching.org.uk</string>
   <string name="auth_dialog_completed_oc">c:geo está agora autorizado a interagir com %s.</string>
   <!-- auth geokrety -->
   <string name="auth_dialog_completed_geokrety">c:geo está agora autorizado a interagir com %s.</string>
@@ -793,6 +797,7 @@
   <string name="cache_menu_navigation_transit">Navegação (Transportes)</string>
   <string name="cache_menu_navigation_bike">Navegar (Andar de bicicleta)</string>
   <string name="cache_menu_maps_directions">Direcções pelo Google Maps</string>
+  <string name="cache_menu_osmand">OsmAnd</string>
   <string name="cache_menu_sygic_walk">Sygic (caminhar)</string>
   <string name="cache_menu_sygic_drive">Sygic (conduzir)</string>
   <string name="cache_menu_radar">Radar</string>
@@ -982,6 +987,10 @@
   <string name="map_strategy_detailed">Detalhado</string>
   <string name="live_map_notification">No novo mapa ao vivo as coordenadas podem nem sempre ser precisas. As coordenadas possivelmente imprecisas são marcadas com um círculo cor de laranja.\nAbrindo os detalhes da cache or gravando a cache para utilização offline fará com que obtenha as coordenadas precisas.\n\nMais informações em todas as alterações podem ser encontradas na página \"Sobre c:geo\" na aplicação.</string>
   <string name="map_select_multiple_items">Selecionar item</string>
+  <string name="map_routing">Rotas</string>
+  <string name="map_routing_walk">Caminhar</string>
+  <string name="map_routing_bike">Bicicleta</string>
+  <string name="map_routing_car">Carro</string>
   <!-- search -->
   <string name="search_bar_hint">Procurar caches</string>
   <string name="search_bar_desc">Caches (código-GC, palavra-chave), Trackables (código-TB)</string>
@@ -1062,6 +1071,7 @@
   <string name="navigation_direct_navigation">Navegação directa</string>
   <string name="navigation_target">Destino</string>
   <string name="err_nav_no_coordinates">Não pode iniciar a navegação sem coordenadas</string>
+  <string name="osmand_marker_cgeo">Marcador vindo do c:geo</string>
   <!-- license -->
   <string name="license">Licença</string>
   <string name="license_show">Mostrar licença</string>
@@ -1078,6 +1088,7 @@
   <string name="helper_sendtocgeo_description">Send to c:geo é uma extensão do navegador <strong>para o seu PC</strong>. Ao navegar geocaching.com, você pode enviar as caches directamente para seu smartphone com o clique de um botão no navegador.</string>
   <string name="helper_locus_title">Locus</string>
   <string name="helper_locus_description">Aplicação de navegação ao ar livre para o seu telefone ou tablet. Veja mapas topográficos offline, registe a sua rota, procure geocaches, use um guia de voz e muito mais.</string>
+  <string name="helper_gpsstatus_title">Status do GPS &amp; Ferramentas</string>
   <string name="helper_gpsstatus_description">Pode usar o radar a partir desta aplicação. Também fornece muitas outras informações relacionadas com o GPS.</string>
   <string name="helper_bluetoothgps_title">GPS por bluetooth</string>
   <string name="helper_bluetoothgps_description">Permite utilizar um GPS externo, para uma melhor recepção, localização mais precisa e permite poupar a bateria do seu telemóvel.</string>
@@ -1091,6 +1102,8 @@
   <string name="helper_wear_description">c:geo Wear é um plugin para o c:geo que permite que você navegue para geocaches usando seu smartwatch Android Wear.</string>
   <string name="helper_where_you_go_title">WhereYouGo</string>
   <string name="helper_where_you_go_description">WhereYouGo permite jogar e pesquisar geocaches do tipo Wherigo. c:Geo pode acionar o download automático dos cartuchos nesta aplicação.</string>
+  <string name="helper_brouter_title">BRouter navegação off-line</string>
+  <string name="helper_brouter_description">BRouter fornece cálculo de percursos off-line. Se está instalado e tem os ficheiros necessários descarregados, o c:geo exibirá automaticamente uma rota para a cache no mapa interno.</string>
   <!-- add-ons -->
   <string name="addon_missing_title">Add-On em falta</string>
   <string name="addon_download_prompt">Obter agora a partir de Google Play.</string>
@@ -1447,6 +1460,7 @@
   </plurals>
   <string name="command_rename_list_result">Lista renomeada</string>
   <string name="command_delete_list_result">Lista apagada</string>
+  <string name="command_unique_list_result">Caches eliminadas de outras listas</string>
   <string name="fav_points_remaining">"Adiciona esta cache aos favoritos (%s restantes)"</string>
   <!-- distance units -->
   <string name="unit_m">m</string>
