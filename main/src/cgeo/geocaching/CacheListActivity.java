@@ -1213,15 +1213,15 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                         }
                     }, true, Collections.singleton(StoredList.TEMPORARY_LIST.id), Collections.<Integer>emptySet(), listNameMemento);
         } else {
-            final Set<Integer> selectedListIds = new HashSet<>();
-            if (type != CacheListType.OFFLINE) {
-                selectedListIds.add(StoredList.STANDARD_LIST_ID);
+            final Set<Integer> additionalListIds = new HashSet<>();
+            if (type != CacheListType.OFFLINE && type != CacheListType.HISTORY) {
+                additionalListIds.add(StoredList.STANDARD_LIST_ID);
             }
-            refreshStoredInternal(caches, selectedListIds);
+            refreshStoredInternal(caches, additionalListIds);
         }
     }
 
-    private void refreshStoredInternal(final List<Geocache> caches, final Set<Integer> listIds) {
+    private void refreshStoredInternal(final List<Geocache> caches, final Set<Integer> additionalListIds) {
         detailProgress.set(0);
 
         showProgress(false);
@@ -1240,7 +1240,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
         detailProgressTime = System.currentTimeMillis();
 
-        loadDetails(loadDetailsHandler, caches, listIds);
+        loadDetails(loadDetailsHandler, caches, additionalListIds);
     }
 
     public void removeFromHistoryCheck() {
