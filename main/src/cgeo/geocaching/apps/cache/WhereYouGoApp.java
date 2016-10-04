@@ -41,7 +41,7 @@ public class WhereYouGoApp extends AbstractGeneralApp {
      */
     @Nullable
     protected static String getWhereIGoUrl(final Geocache cache) {
-        final Matcher matcher = PATTERN_CARTRIDGE.matcher(cache.getDescription());
+        final Matcher matcher = PATTERN_CARTRIDGE.matcher(cache.getShortDescription() + " " + cache.getDescription());
         final Set<String> urls = new HashSet<>();
         while (matcher.find()) {
             urls.add(matcher.group(1));
