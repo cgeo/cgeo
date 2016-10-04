@@ -201,7 +201,10 @@ public final class ConnectorFactory {
      * @return the connector cast to the requested capability or {@code null}.
      */
     @Nullable
-    public static <T extends IConnector> T getConnectorAs(final Geocache cache, @NonNull final Class<T> capabilityClass) {
+    public static <T extends IConnector> T getConnectorAs(@Nullable final Geocache cache, @NonNull final Class<T> capabilityClass) {
+        if (cache == null) {
+            return null;
+        }
         final IConnector connector = getConnector(cache);
         if (capabilityClass.isInstance(connector)) {
             return capabilityClass.cast(connector);

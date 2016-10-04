@@ -1,27 +1,30 @@
 package cgeo.geocaching;
 
-import butterknife.ButterKnife;
+import android.support.annotation.NonNull;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.SubMenu;
+import android.widget.EditText;
 
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.Collections;
+import java.util.List;
+
+import butterknife.ButterKnife;
 import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.Keyboard;
 import cgeo.geocaching.connector.ConnectorFactory;
-import cgeo.geocaching.connector.gc.GCConnector;
+import cgeo.geocaching.connector.capability.Smiley;
+import cgeo.geocaching.connector.capability.SmileyCapability;
 import cgeo.geocaching.connector.gc.GCSmiliesProvider;
-import cgeo.geocaching.connector.gc.GCSmiliesProvider.Smiley;
 import cgeo.geocaching.connector.trackable.TravelBugConnector;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.utils.LogTemplateProvider;
 import cgeo.geocaching.utils.LogTemplateProvider.LogContext;
 import cgeo.geocaching.utils.LogTemplateProvider.LogTemplate;
-
-import org.apache.commons.lang3.StringUtils;
-
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.SubMenu;
-import android.widget.EditText;
 
 public abstract class AbstractLoggingActivity extends AbstractActionBarActivity {
 
@@ -36,26 +39,29 @@ public abstract class AbstractLoggingActivity extends AbstractActionBarActivity 
 
         final SubMenu menuSmilies = menu.findItem(R.id.menu_smilies).getSubMenu();
         for (final Smiley smiley : GCSmiliesProvider.getSmilies()) {
-            menuSmilies.add(0, smiley.getItemId(), 0, smiley.text);
+            menuSmilies.add(Menu.NONE, Menu.NONE, Menu.NONE, smiley.text);
         }
 
         return true;
     }
 
-    @Override
-    public boolean onPrepareOptionsMenu(final Menu menu) {
-        boolean smileyVisible = false;
+    @NonNull
+    private List<Smiley> getSmilies() {
         final Geocache cache = getLogContext().getCache();
-        if (cache != null && ConnectorFactory.getConnector(cache).equals(GCConnector.getInstance())) {
-            smileyVisible = true;
+        final SmileyCapability connector = ConnectorFactory.getConnectorAs(cache, SmileyCapability.class);
+        if (connector != null) {
+            return connector.getSmileys();
         }
         final Trackable trackable = getLogContext().getTrackable();
         if (trackable != null && ConnectorFactory.getConnector(trackable).equals(TravelBugConnector.getInstance())) {
-            smileyVisible = true;
+            return GCSmiliesProvider.getSmilies();
         }
+        return Collections.emptyList();
+    }
 
-        menu.findItem(R.id.menu_smilies).setVisible(smileyVisible);
-
+    @Override
+    public boolean onPrepareOptionsMenu(final Menu menu) {
+        menu.findItem(R.id.menu_smilies).setVisible(!getSmilies().isEmpty());
         return true;
     }
 
@@ -73,10 +79,12 @@ public abstract class AbstractLoggingActivity extends AbstractActionBarActivity 
             return true;
         }
 
-        final Smiley smiley = GCSmiliesProvider.getSmiley(id);
-        if (smiley != null) {
-            insertIntoLog("[" + smiley.text + "]", true);
-            return true;
+        final CharSequence title = item.getTitle();
+        for (Smiley smiley : getSmilies()) {
+            if (smiley.text.equals(title)) {
+                insertIntoLog("[" + title + "]", true);
+                return true;
+            }
         }
 
         return super.onOptionsItemSelected(item);
