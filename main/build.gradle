@@ -328,7 +328,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:20.0.0'
     
     // Support Library RecyclerView
-    compile 'com.android.support:recyclerview-v7:24.2.1'
+    compile 'com.android.support:recyclerview-v7:22.0.0'
     // we don't want to implement decorators on our own
 	compile 'com.yqritc:recyclerview-flexibledivider:1.4.0'
 
