@@ -673,7 +673,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         // Do not erase the saved log if the user has removed all the characters
         // without using "Clear". This may be a manipulation mistake, and erasing
         // again will be easy using "Clear" while retyping the text may not be.
-        if (force || (StringUtils.isNotEmpty(log) && !StringUtils.equals(log, text))) {
+        if (force || (StringUtils.isNotEmpty(log) && !StringUtils.equals(log, text) && !StringUtils.equals(log, Settings.getSignature()))) {
             cache.logOffline(this, log, date, typeSelected);
             Settings.setLastCacheLog(log);
         }

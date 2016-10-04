@@ -11,6 +11,7 @@
     · Fix: Better clipboard format when copying waypoint coordinates\n
     · Fix: Wrong icon when navigating to a waypoint\n
     · Fix: Detect wherigo cartridge links in short description\n
+    · Fix: Don\'t store a signature only log when going back\n
     · Change: Fetch more caches from OC sites when GC is disabled in settings\n
     · Removed: No longer supports captchas for getting exact coordinates as basic member\n
     \n
