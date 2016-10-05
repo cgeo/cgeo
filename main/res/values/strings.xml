@@ -1179,7 +1179,10 @@
     <string name="export_confirm_message">To Path: %1$s\nFile Name: %2$s</string>
     <string name="export_persnotes">Personal notes</string>
     <string name="export_persnotes_uploading">Uploading personal note %1$d</string>
-    <string name="export_persnotes_upload_success">Uploaded %1$d notes successfully</string>
+    <plurals name="export_persnotes_upload_success">
+        <item quantity="one">Uploaded one note successfully</item>
+        <item quantity="other">Uploaded %1$d notes successfully</item>
+    </plurals>
 
     <!-- GC attributes -->
     <string name="attribute_dogs_yes">Dogs allowed</string>
