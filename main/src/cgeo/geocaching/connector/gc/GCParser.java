@@ -45,6 +45,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -1212,7 +1213,9 @@ public final class GCParser {
                 Log.i("Log successfully posted to cache #" + cacheid);
 
                 if (geocode != null) {
-                    DataStore.saveVisitDate(geocode);
+                    final Calendar visitedDate = Calendar.getInstance();
+                    visitedDate.set(year, month - 1, day);
+                    DataStore.saveVisitDate(geocode, visitedDate.getTimeInMillis());
                 }
 
                 gcLogin.getLoginStatus(page);

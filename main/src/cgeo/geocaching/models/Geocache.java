@@ -450,7 +450,7 @@ public class Geocache implements IWaypoint {
         final Resources res = fromActivity.getResources();
         if (status) {
             ActivityMixin.showToast(fromActivity, res.getString(R.string.info_log_saved));
-            DataStore.saveVisitDate(geocode);
+            DataStore.saveVisitDate(geocode, date.getTimeInMillis());
             logOffline = Boolean.TRUE;
 
             offlineLog = DataStore.loadLogOffline(geocode);

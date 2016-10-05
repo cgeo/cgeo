@@ -3246,8 +3246,8 @@ public class DataStore {
 
     }
 
-    public static void saveVisitDate(final String geocode) {
-        setVisitDate(Collections.singletonList(geocode), System.currentTimeMillis());
+    public static void saveVisitDate(final String geocode, final long visitedDate) {
+        setVisitDate(Collections.singletonList(geocode), visitedDate);
     }
 
     public static Map<String, Set<Integer>> markDropped(final Collection<Geocache> caches) {
