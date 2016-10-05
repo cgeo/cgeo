@@ -68,7 +68,7 @@ public class PersonalnoteExport extends AbstractExport {
             if (activity != null) {
                 final Context nonNullActivity = activity;
                 if (result) {
-                    ActivityMixin.showToast(activity, nonNullActivity.getString(R.string.export_persnotes_upload_success, persNotesCount));
+                    ActivityMixin.showToast(activity, nonNullActivity.getResources().getQuantityString(R.plurals.export_persnotes_upload_success, persNotesCount, persNotesCount));
                 } else {
                     ActivityMixin.showToast(activity, nonNullActivity.getString(R.string.export_failed));
                 }
