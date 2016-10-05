@@ -13,7 +13,7 @@
   <!-- actionbar -->
   <string name="settings_titlebar">c:geo Beállítások</string>
   <!-- caches -->
-  <string name="all_types">Minden láda típus</string>
+  <string name="all_types">Minden ládatípus</string>
   <string name="traditional">Hagyományos láda</string>
   <string name="multi">Multi-láda</string>
   <string name="mystery">Rejtvény láda</string>
@@ -214,6 +214,7 @@
   <string name="warn_no_coordinates">Nincsenek koordináták.</string>
   <string name="warn_no_keyword">Nincs kulcsszó.</string>
   <string name="warn_no_username">Nincs felhasználónév.</string>
+  <string name="warn_no_connector">Az ilyen típusú keresés aktivált geocaching szolgáltatás nélkül biztosított.</string>
   <string name="warn_search_help_title">Segítségre van szükséged?</string>
   <string name="warn_search_help_address">Add meg a címet vagy a hely nevét! Például használj postai címet \"Radlicka 100, P rague, Czech Republic\", városnevet \"Berlin\" vagy csak valaminek a nevét, mint például \"Yellowstone Park\".</string>
   <string name="warn_search_help_gccode">Írd be a láda kódját! Például \"GC1VCAZ\".</string>
@@ -356,6 +357,8 @@
   <string name="caches_clear_offlinelogs">Offline logok törlése</string>
   <string name="caches_clear_offlinelogs_message">Szeretnéd törölni az offline logokat?</string>
   <string name="caches_clear_offlinelogs_progress">Offline logok törlése folyamatban</string>
+  <string name="caches_make_list_unique">Ládák törlése más listákról</string>
+  <string name="caches_filter_missing_gcvote">Nem értékelt ládák</string>
   <!-- caches lists -->
   <string name="list_menu_create">Új lista létrehozása</string>
   <string name="list_menu_drop">Jelenlegi lista eltávolítása</string>
@@ -560,6 +563,7 @@
   <string name="init_maptrail">A nyomvonal mutatása a térképen</string>
   <string name="init_summary_maptrail">A nyomvonal mutatása a térképen</string>
   <string name="init_share_after_export">A megosztás menü megnyitása GPX exportálás után</string>
+  <string name="init_include_found_status">\"Megtaláltam\" jelölések exportálása</string>
   <string name="init_trackautovisit">Utazók logolása</string>
   <string name="init_summary_trackautovisit">Utazók automatikus \"Látogatás\" logolása</string>
   <string name="init_sigautoinsert">Aláírás automatikus beillesztése</string>
@@ -630,6 +634,8 @@
   <string name="feature_search_owner">Keresés tulajdonos alapján</string>
   <string name="feature_search_finder">Keresés megtalálók alapján</string>
   <string name="init_experimental_title">Kísérleti funkciók</string>
+  <string name="init_mfbeta">Mapsforge béta alapértelmezettként</string>
+  <string name="init_mfbeta_description">A jelenlegi kiadásban megtalálható az új Mapsforge térképünk béta verziója kísérleti funkcióként. Itt állítható be, hogy ez a térkép legyen az alapértelmezett élő és ládatérkép.</string>
   <!-- map sources -->
   <string name="map_source_google_map">Google: Térkép</string>
   <string name="map_source_google_satellite">Google: Műholdkép</string>
@@ -758,7 +764,7 @@
   </plurals>
   <string name="cache_waypoints_add">Útpont hozzáadása</string>
   <string name="cache_hint">Segítség</string>
-  <string name="cache_hint_not_available">Nincs elérhető tipp</string>
+  <string name="cache_hint_not_available">Nincs segítség megadva</string>
   <string name="cache_logs">Logok</string>
   <string name="cache_logs_friends_and_own">Barátok/saját logok</string>
   <string name="cache_dialog_loading_details">Láda adatainak betöltése…</string>
@@ -791,10 +797,12 @@
   <string name="cache_menu_navigation_transit">Tömegközlekedési navigáció</string>
   <string name="cache_menu_navigation_bike">Biciklis navigáció</string>
   <string name="cache_menu_maps_directions">Google Térkép Útvonalak</string>
+  <string name="cache_menu_osmand">OsmAnd</string>
   <string name="cache_menu_sygic_walk">Sygic (séta)</string>
   <string name="cache_menu_sygic_drive">Sygic (vezetés)</string>
   <string name="cache_menu_radar">Radar</string>
   <string name="cache_menu_map">Térkép</string>
+  <string name="cache_menu_mfbeta">Mapsforge béta</string>
   <string name="cache_menu_map_static">Statikus térképek</string>
   <string name="cache_menu_download_map_static">Statikus térképek letöltése</string>
   <string name="cache_menu_rmaps">Rmaps</string>
@@ -979,6 +987,10 @@
   <string name="map_strategy_detailed">Részletes</string>
   <string name="live_map_notification">A koordináták pontatlanok lehetnek az élő térképen. A vélhetően pontatlan koordinátákat narancssárga kör jelöli.\nA ládaolal megnyitásakor vagy a láda offline mentésekor mindig letöltődik a pontos koordináta.\n\nTovábbi információ található az alkalmazás \"A c:geo-ról\" oldalán.</string>
   <string name="map_select_multiple_items">Elem kiválasztása</string>
+  <string name="map_routing">Útvonal</string>
+  <string name="map_routing_walk">Gyalogos</string>
+  <string name="map_routing_bike">Kerékpáros</string>
+  <string name="map_routing_car">Autós</string>
   <!-- search -->
   <string name="search_bar_hint">Ládák keresése</string>
   <string name="search_bar_desc">Ládák (geokód, kulcsszó), utazók (követőkód)</string>
@@ -1049,6 +1061,7 @@
   <string name="user_menu_open_browser">Profil megnyitása a böngészőben</string>
   <string name="user_menu_send_message">Üzenet küldése</string>
   <string name="user_menu_open_contact">Névjegy megnyitása</string>
+  <string name="user_unknown">Ismeretlen felhasználó</string>
   <!-- navigation -->
   <string name="navigation">Navigáció</string>
   <string name="compass_title">Iránytű</string>
@@ -1058,6 +1071,7 @@
   <string name="navigation_direct_navigation">Közvetlen navigáció</string>
   <string name="navigation_target">Célpont</string>
   <string name="err_nav_no_coordinates">Koordináták hiányában nem lehet a navigációt indítani</string>
+  <string name="osmand_marker_cgeo">c:geo jelölő</string>
   <!-- license -->
   <string name="license">Licenc</string>
   <string name="license_show">Licenc mutatása</string>
@@ -1087,6 +1101,8 @@
   <string name="helper_wear_description">A c:geo Wear egy c:geo plugin Android Wear okosórához, amellyel a ládákhoz tudsz navigálni.</string>
   <string name="helper_where_you_go_title">WhereYouGo</string>
   <string name="helper_where_you_go_description">A WhereYouGo lehetővé teszi Wherigo ládák keresését és játszását. A c:geo képes automatikusan elindítani a cartridge fájlok létöltését a programon belül.</string>
+  <string name="helper_brouter_title">BRouter offline navigáció</string>
+  <string name="helper_brouter_description">A BRouter egy offline útvonaltervező. A c:geo automatikusan megmutatja az utat a ládához a belső térképen, ha telepítetted és letöltötted a szükséges fájlokat.</string>
   <!-- add-ons -->
   <string name="addon_missing_title">Hiányzó add-on</string>
   <string name="addon_download_prompt">Töltsd le most a Google Play-ről.</string>
@@ -1107,6 +1123,12 @@
   <string name="export_gpx_to">Az exportált GPX küldése ide</string>
   <string name="export_confirm_title">%1$s exportálása</string>
   <string name="export_confirm_message">Mappa: %1$s\nFájl: %2$s</string>
+  <string name="export_persnotes">Személyes megjegyzés</string>
+  <string name="export_persnotes_uploading">%1$d személyes megjegyzés feltöltése</string>
+  <plurals name="export_persnotes_upload_success">
+    <item quantity="one">1 személyes megjegyzés sikeresen feltöltve</item>
+    <item quantity="other">%1$d személyes megjegyzés sikeresen feltöltve</item>
+  </plurals>
   <!-- GC attributes -->
   <string name="attribute_dogs_yes">Kutyák engedélyezettek</string>
   <string name="attribute_dogs_no">Kutyák nem engedélyezettek</string>
@@ -1399,9 +1421,12 @@
   <string name="send">Küldés</string>
   <string name="showcase_logcache_title">Log küldése</string>
   <string name="showcase_logcache_text">Ne feledd, sok parancs található a címsorban. Ott találod a kész logot elküldő gombot is.</string>
+  <string name="showcase_main_title">Menüsor</string>
+  <string name="showcase_main_text">A c:geo néhány funkciója elindítható a menüsorból vagy a pontokkal jelölt menüből. A gombok hosszabb megnyomásakor megjelenik a leírásuk.</string>
   <string name="showcase_cachelist_title">Listák váltása</string>
   <string name="showcase_cachelist_text">Váltogathatsz a ládalistáid között a listák címére kattintva.</string>
-  <string name="showcase_compass_hint_title">Tipp mutatása</string>
+  <string name="showcase_compass_hint_title">Segítség mutatása</string>
+  <string name="showcase_compass_hint_text">Ez a menüelem ötletet adhat, hogy hol keresd a ládát - a segítséget is megmutatja, ha van.</string>
   <string name="confirm_log_title">Különleges logtípus</string>
   <string name="confirm_log_message">Logod a következő: \'%s\'. Biztosan ezt akarod?</string>
   <!-- Geokrety -->
@@ -1440,6 +1465,7 @@
   </plurals>
   <string name="command_rename_list_result">Átnevezett lista</string>
   <string name="command_delete_list_result">Törölt lista</string>
+  <string name="command_unique_list_result">Ládák törölve</string>
   <string name="fav_points_remaining">"Hozzáadás a kedvencekhez (%s pontod maradt)"</string>
   <!-- distance units -->
   <string name="unit_m">m</string>
