@@ -166,6 +166,9 @@ public class CachesBundle {
 
         final Set<String> result = new HashSet<>();
 
+        if (this.baseOverlay != null) {
+            result.addAll(this.baseOverlay.getVisibleGeocodes());
+        }
         if (this.liveOverlay != null) {
             result.addAll(this.liveOverlay.getVisibleGeocodes());
         }
