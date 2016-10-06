@@ -1546,7 +1546,7 @@ public final class GCParser {
 
         // trackable type
         if (StringUtils.isNotBlank(trackable.getName())) {
-            trackable.setType(TextUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_TYPE, true, trackable.getType()));
+            trackable.setType(Html.fromHtml(TextUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_TYPE, true, trackable.getType())).toString());
         }
 
         // trackable owner name
