@@ -1121,6 +1121,12 @@
   <string name="export_gpx_to">Send eksporteret GPX-fil til</string>
   <string name="export_confirm_title">Eksporterer %1$s</string>
   <string name="export_confirm_message">Sti: %1$s\nFilnavn: %2$s</string>
+  <string name="export_persnotes">Egne noter</string>
+  <string name="export_persnotes_uploading">Uploader personlig note %1$d</string>
+  <plurals name="export_persnotes_upload_success">
+    <item quantity="one">%1$d personlig note blev uploadet</item>
+    <item quantity="other">%1$d personlige noter blev uploadet</item>
+  </plurals>
   <!-- GC attributes -->
   <string name="attribute_dogs_yes">Hunde tilladt</string>
   <string name="attribute_dogs_no">Hunde ikke tilladt</string>

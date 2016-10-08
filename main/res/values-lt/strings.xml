@@ -616,7 +616,7 @@
   <string name="settings_ec_icons_oc">Kaip OC</string>
   <string name="settings_features">Palaikomos funkcijos</string>
   <string name="feature_description">c:geo palaiko sekančias šios svetainės funkcijas <b>prisijungus</b> (šalia funkcijų, kurios veikia neprisijungus):</string>
-  <string name="feature_personal_notes">Asmeninės pastabos</string>
+  <string name="feature_personal_notes">Asmeninė pastaba</string>
   <string name="feature_online_logging">Įrašų registravimas prisijungus</string>
   <string name="feature_log_images">Pridėti nuotraukas prie įrašų</string>
   <string name="feature_watch_list">Peržiūrėti įrašus</string>
@@ -1115,6 +1115,13 @@
   <string name="export_gpx_to">Siųsti eksportuotą GPX</string>
   <string name="export_confirm_title">Eksportuojama %1$s</string>
   <string name="export_confirm_message">Maršrutas: %1$s\nFailo vardas: %2$s</string>
+  <string name="export_persnotes">Asmeninės pastabos</string>
+  <string name="export_persnotes_uploading">Įkeliama asmeninė pastaba %1$d</string>
+  <plurals name="export_persnotes_upload_success">
+    <item quantity="one">Sėkmingai nusiųstas viena pastaba</item>
+    <item quantity="few">Sėkmingai nusiųstos %1$d pastabos</item>
+    <item quantity="other">Sėkmingai nusiųsta %1$d pastabų</item>
+  </plurals>
   <!-- GC attributes -->
   <string name="attribute_dogs_yes">Galima su šunimi</string>
   <string name="attribute_dogs_no">Negalima su šunimi</string>

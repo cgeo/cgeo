@@ -152,7 +152,7 @@
   <string name="err_missing_auth">Nincs megadva felhasználónév és/vagy jelszó</string>
   <string name="err_wrong">Hibás felhasználónév és/vagy jelszó</string>
   <string name="err_maintenance">A geocaching.com karbantartás miatt elérhetetlen. A c:geo offline módban működik elmentett ládákkal.</string>
-  <string name="err_license">Nem fogadtad el a geocaching.com licencmegállapodását, így a c:geo nem tudja betölteni a ládák koordinátáit.</string>
+  <string name="err_license">Nem fogadtad el a geocaching.com licencmegállapodását, így a c:geo nem tudja letölteni a ládák koordinátáit.</string>
   <string name="err_unvalidated_account">Előbb aktiválnod kell a fiókod a geocaching.com weboldalon.</string>
   <string name="err_unpublished">A kért geoládát eltávolították.</string>
   <string name="err_cache_not_found">A kért láda nem található.</string>
@@ -224,7 +224,7 @@
   <string name="warn_log_text_fill">Kérlek, írj szöveget a bejegyzéshez!</string>
   <string name="warn_load_images">Sajnáljuk, a c:geo nem tudta betölteni a képeket.</string>
   <string name="warn_invalid_mapfile">A kiválasztott térképfájl nem felel meg a mapsforge v0.3.0 formátumnak.\nAz offline térképek nem elérhetőék.</string>
-  <string name="warn_deprecated_mapfile">0.2.4-es verziójú térképfájlt használsz.\nFontold meg a 0.3.0 verziójú térképre váltást.\nA következő kiadás már nem fogja támogatni a 0.2.4-es verziót.</string>
+  <string name="warn_deprecated_mapfile">0.2.4-es verziójú térképfájlt használsz.\nFontold meg a váltást 0.3.0-ás verzióra.\nA következő kiadás már nem támogatja a 0.2.4-es verziót.</string>
   <string name="warn_nonexistant_mapfile">A kiválasztott térképfájl nem létezik.\nAz offline térképek nem elérhetőék.</string>
   <string name="warn_rendertheme_missing">Nem található térképstílus</string>
   <string name="warn_pocket_query_select">Nincs pocket lekérdezés kiválasztva.</string>
@@ -357,7 +357,7 @@
   <string name="caches_clear_offlinelogs">Offline logok törlése</string>
   <string name="caches_clear_offlinelogs_message">Szeretnéd törölni az offline logokat?</string>
   <string name="caches_clear_offlinelogs_progress">Offline logok törlése folyamatban</string>
-  <string name="caches_make_list_unique">Ládák törlése más listákról</string>
+  <string name="caches_make_list_unique">Törlés más listákról</string>
   <string name="caches_filter_missing_gcvote">Nem értékelt ládák</string>
   <!-- caches lists -->
   <string name="list_menu_create">Új lista létrehozása</string>
@@ -374,7 +374,7 @@
   <string name="list_dialog_create_ok">Az új lista létrejött</string>
   <string name="list_dialog_create_err">A c:geo-nak nem sikerült az új lista létrehozása</string>
   <string name="list_dialog_remove_title">Lista eltávolítása</string>
-  <string name="list_dialog_remove_description">Szeretnéd eltávolítani a jelenlegi listát? A listáról minden láda a Mentettek közé fog kerülni.</string>
+  <string name="list_dialog_remove_description">Szeretnéd eltávolítani a jelenlegi listát? A listáról minden láda a Mentettek közé kerül.</string>
   <string name="list_dialog_remove_nowempty">A lista üres. El akarod távolítani a jelenlegi listát?</string>
   <string name="list_dialog_remove">Eltávolítás</string>
   <string name="list_dialog_remove_ok">A lista el lett távolítva</string>
@@ -531,8 +531,8 @@
   <string name="init_summary_log_offline">Offline logolás használata (logoláskor nem jelenik meg az online log ablak, nem töltődik fel a log)</string>
   <string name="init_choose_list">Listaválasztás</string>
   <string name="init_summary_choose_list">Listaválasztás ládamentéséhez</string>
-  <string name="init_livelist">Ládák irányának jelzése a listában</string>
-  <string name="init_summary_livelist">Ládák irányának jelzése a listában</string>
+  <string name="init_livelist">Ládák irányának jelzése a listán</string>
+  <string name="init_summary_livelist">Ládák irányának jelzése a listán</string>
   <string name="init_backup">Biztonsági mentés</string>
   <string name="init_backup_backup">Biztonsági mentés</string>
   <string name="init_backup_running">A ládaadatbázis biztonsági mentése…</string>
@@ -705,7 +705,7 @@
   <string name="cache_offline_drop">Törlés</string>
   <string name="cache_offline_store">Mentés</string>
   <string name="cache_offline_manage">Kezelés</string>
-  <string name="cache_offline_store_in_list">Mentés listába</string>
+  <string name="cache_offline_store_in_list">Mentés listára</string>
   <string name="cache_offline_stored">Elmentve az eszközre</string>
   <string name="cache_offline_not_ready">Nem érhető el offline</string>
   <string name="cache_offline_time_about"> </string>
@@ -755,7 +755,7 @@
   <string name="cache_favpoint_remove">Eltávolítás</string>
   <string name="cache_list_text">Lista:</string>
   <string name="cache_list_change">Áthelyezés</string>
-  <string name="cache_list_unknown">Nem szerepel a listában</string>
+  <string name="cache_list_unknown">Nem szerepel a listán</string>
   <string name="cache_images">Képek</string>
   <string name="cache_waypoints">Útpontok</string>
   <plurals name="waypoints">
@@ -819,7 +819,7 @@
   <string name="cache_menu_refresh">Frissítés</string>
   <string name="cache_menu_share">Láda megosztása</string>
   <string name="cache_menu_move_list">Mozgatás másik listára</string>
-  <string name="cache_menu_copy_list">Másolás másik listába</string>
+  <string name="cache_menu_copy_list">Másolás másik listára</string>
   <string name="cache_menu_whereyougo">WhereYouGo</string>
   <string name="cache_menu_oruxmaps_online">OruxMaps (Online)</string>
   <string name="cache_menu_oruxmaps_offline">OruxMaps (Offline)</string>
@@ -830,7 +830,7 @@
   <string name="cache_menu_checker">Geochecker megnyitása</string>
   <string name="cache_menu_ignore">Láda mellőzése</string>
   <string name="ignore_confirm_title">Légy óvatos</string>
-  <string name="ignore_confirm_message">Egy láda mellőzése azt jelenti, hogy a láda soha többé nem fog letöltődni a geocaching.com-ról. Csak akkor láthatod ismét ezt a ládát, ha visszavonod a mellőzését a geocaching.com-on.</string>
+  <string name="ignore_confirm_message">Egy láda mellőzése azt jelenti, hogy a láda soha többé nem töltődik le a geocaching.com-ról. Csak akkor láthatod ismét ezt a ládát, ha visszavonod a mellőzését a geocaching.com-on.</string>
   <string name="cache_status">Állapot</string>
   <string name="cache_status_offline_log">Offline log</string>
   <string name="cache_status_found">Megtaláltam</string>
@@ -1448,12 +1448,12 @@
   <string name="settings_map_direction">Irány mutatása</string>
   <string name="settings_summary_map_direction">Navigációs cél irányvonalának megjelenítse</string>
   <string name="map_direction">Irány mutatása</string>
-  <string name="command_move_caches_progress">Ládák áthelyezése a(z) %1s listába</string>
+  <string name="command_move_caches_progress">Ládák áthelyezése a(z) %1s listára</string>
   <plurals name="command_move_caches_result">
     <item quantity="one">%d láda áthelyezve</item>
     <item quantity="other">%d láda áthelyezve</item>
   </plurals>
-  <string name="command_copy_caches_progress">Ládák másolás a(z) %1s listába</string>
+  <string name="command_copy_caches_progress">Ládák másolás a(z) %1s listára</string>
   <plurals name="command_copy_caches_result">
     <item quantity="one">%d láda átmásolva</item>
     <item quantity="other">%d láda átmásolva</item>
@@ -1482,7 +1482,7 @@
   <string name="invitation_action">Ajánlás barátoknak</string>
   <string name="invitation_title">c:geo ajánlása barátoknak</string>
   <string name="invitation_message">Próbáld ki a c:geo-t geoládázáshoz!</string>
-  <string name="cache_list_remove_from">Törlés listából</string>
+  <string name="cache_list_remove_from">Törlés listáról</string>
   <string name="list_list_headline">Listák:</string>
-  <string name="cache_store_list">Mentés listába</string>
+  <string name="cache_store_list">Mentés listára</string>
 </resources>

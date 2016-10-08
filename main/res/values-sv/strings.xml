@@ -1124,6 +1124,8 @@
   <string name="export_gpx_to">Skicka exporterad GPX till</string>
   <string name="export_confirm_title">Exporterar %1$s</string>
   <string name="export_confirm_message">Till katalog: %1$s\nFilnamn: %2$s</string>
+  <string name="export_persnotes">Personliga anteckningar</string>
+  <string name="export_persnotes_uploading">Laddar upp personlig anteckning %1$d</string>
   <!-- GC attributes -->
   <string name="attribute_dogs_yes">Hundar tillåtna</string>
   <string name="attribute_dogs_no">Hundar är inte tillåtna</string>

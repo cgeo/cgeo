@@ -1126,6 +1126,10 @@
   <string name="export_confirm_message">Dans le dossier : %1$s\nFichier : %2$s</string>
   <string name="export_persnotes">Notes personnelles</string>
   <string name="export_persnotes_uploading">Envoi de la note personnelle %1$d</string>
+  <plurals name="export_persnotes_upload_success">
+    <item quantity="one">Une note envoyée avec succès</item>
+    <item quantity="other">%1$d notes envoyées avec succès</item>
+  </plurals>
   <!-- GC attributes -->
   <string name="attribute_dogs_yes">Chiens autorisés</string>
   <string name="attribute_dogs_no">Chiens interdits</string>

@@ -1121,6 +1121,8 @@
   <string name="export_gpx_to">Envia el GPX exportat a</string>
   <string name="export_confirm_title">Exportant %1$s</string>
   <string name="export_confirm_message">Camí: %1$s\n Nom arxiu: %2$s</string>
+  <string name="export_persnotes">Notes personals</string>
+  <string name="export_persnotes_uploading">S\'està pujant la nota personal %1$d</string>
   <!-- GC attributes -->
   <string name="attribute_dogs_yes">Els gossos hi són admesos</string>
   <string name="attribute_dogs_no">No s\'admeten els gossos</string>

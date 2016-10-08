@@ -1133,6 +1133,11 @@
   <string name="export_confirm_title">Exportovanie %1$s</string>
   <string name="export_confirm_message">Priečinok: %1$s\nNázov súboru: %2$s</string>
   <string name="export_persnotes">Osobné poznámky</string>
+  <plurals name="export_persnotes_upload_success">
+    <item quantity="one">1 osobná poznámka bola úspešne nahraná</item>
+    <item quantity="few">%1$d osobné poznámky boli úspešne nahrané</item>
+    <item quantity="other">%1$d osobných poznámok bolo úspešne nahraných</item>
+  </plurals>
   <!-- GC attributes -->
   <string name="attribute_dogs_yes">Psy povolené</string>
   <string name="attribute_dogs_no">Psy nepovolené</string>

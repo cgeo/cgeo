@@ -1114,6 +1114,12 @@
   <string name="export_gpx_to">Invia il GPX esportato a</string>
   <string name="export_confirm_title">Esportazione di %1$s</string>
   <string name="export_confirm_message">Percorso: %1$s\nNome file: %2$s</string>
+  <string name="export_persnotes">Note personali</string>
+  <string name="export_persnotes_uploading">Carico la nota personale %1$d</string>
+  <plurals name="export_persnotes_upload_success">
+    <item quantity="one">Nota caricata con successo</item>
+    <item quantity="other">%1$d note caricate con successo</item>
+  </plurals>
   <!-- GC attributes -->
   <string name="attribute_dogs_yes">Cani permessi</string>
   <string name="attribute_dogs_no">Cani NON permessi</string>

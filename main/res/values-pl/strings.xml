@@ -1123,6 +1123,13 @@
   <string name="export_gpx_to">Wyślij wyeksportowany GPX do</string>
   <string name="export_confirm_title">Eksportowanie %1$s</string>
   <string name="export_confirm_message">Ścieżka: %1$s\nNazwa pliku: %2$s</string>
+  <string name="export_persnotes">Notatki osobiste</string>
+  <string name="export_persnotes_uploading">Wysyłam notatkę osobistą %1$d</string>
+  <plurals name="export_persnotes_upload_success">
+    <item quantity="one">Wysłano pomyślnie notatkę</item>
+    <item quantity="few">Wysłano pomyślnie %1$d notatki</item>
+    <item quantity="other">Wysłano pomyślnie %1$d notatek</item>
+  </plurals>
   <!-- GC attributes -->
   <string name="attribute_dogs_yes">Psy dozwolone</string>
   <string name="attribute_dogs_no">Psy niedozwolone</string>
