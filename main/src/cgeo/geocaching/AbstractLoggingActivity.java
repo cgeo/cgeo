@@ -18,7 +18,7 @@ import cgeo.geocaching.activity.Keyboard;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.capability.Smiley;
 import cgeo.geocaching.connector.capability.SmileyCapability;
-import cgeo.geocaching.connector.gc.GCSmiliesProvider;
+import cgeo.geocaching.connector.gc.GCSmileysProvider;
 import cgeo.geocaching.connector.trackable.TravelBugConnector;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Trackable;
@@ -38,7 +38,7 @@ public abstract class AbstractLoggingActivity extends AbstractActionBarActivity 
         }
 
         final SubMenu menuSmilies = menu.findItem(R.id.menu_smilies).getSubMenu();
-        for (final Smiley smiley : GCSmiliesProvider.getSmilies()) {
+        for (final Smiley smiley : getSmileys()) {
             menuSmilies.add(Menu.NONE, Menu.NONE, Menu.NONE, smiley.text);
         }
 
@@ -46,7 +46,7 @@ public abstract class AbstractLoggingActivity extends AbstractActionBarActivity 
     }
 
     @NonNull
-    private List<Smiley> getSmilies() {
+    private List<Smiley> getSmileys() {
         final Geocache cache = getLogContext().getCache();
         final SmileyCapability connector = ConnectorFactory.getConnectorAs(cache, SmileyCapability.class);
         if (connector != null) {
@@ -54,14 +54,14 @@ public abstract class AbstractLoggingActivity extends AbstractActionBarActivity 
         }
         final Trackable trackable = getLogContext().getTrackable();
         if (trackable != null && ConnectorFactory.getConnector(trackable).equals(TravelBugConnector.getInstance())) {
-            return GCSmiliesProvider.getSmilies();
+            return GCSmileysProvider.getSmileys();
         }
         return Collections.emptyList();
     }
 
     @Override
     public boolean onPrepareOptionsMenu(final Menu menu) {
-        menu.findItem(R.id.menu_smilies).setVisible(!getSmilies().isEmpty());
+        menu.findItem(R.id.menu_smilies).setVisible(!getSmileys().isEmpty());
         return true;
     }
 
@@ -80,7 +80,7 @@ public abstract class AbstractLoggingActivity extends AbstractActionBarActivity 
         }
 
         final CharSequence title = item.getTitle();
-        for (Smiley smiley : getSmilies()) {
+        for (final Smiley smiley : getSmileys()) {
             if (smiley.text.equals(title)) {
                 insertIntoLog("[" + title + "]", true);
                 return true;

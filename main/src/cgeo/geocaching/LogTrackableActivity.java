@@ -261,6 +261,9 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
         }
         init();
 
+        // only after loading we know which menu items for smileys need to be created
+        invalidateOptionsMenuCompatible();
+
         showProgress(false);
 
         requestKeyboardForLogging();

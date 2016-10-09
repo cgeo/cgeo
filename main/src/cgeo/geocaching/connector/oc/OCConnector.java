@@ -2,10 +2,11 @@ package cgeo.geocaching.connector.oc;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.AbstractConnector;
+import cgeo.geocaching.connector.capability.Smiley;
+import cgeo.geocaching.connector.capability.SmileyCapability;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.models.Geocache;
 
-import org.apache.commons.lang3.StringUtils;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
@@ -13,7 +14,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
 
-public class OCConnector extends AbstractConnector {
+import org.apache.commons.lang3.StringUtils;
+
+public class OCConnector extends AbstractConnector implements SmileyCapability {
 
     @NonNull
     private final String host;
@@ -109,5 +112,10 @@ public class OCConnector extends AbstractConnector {
     @Nullable
     public String getCreateAccountUrl() {
         return "http://" + host + "/register.php";
+    }
+
+    @Override
+    public List<Smiley> getSmileys() {
+        return OCSmileysProvider.getSmileys();
     }
 }

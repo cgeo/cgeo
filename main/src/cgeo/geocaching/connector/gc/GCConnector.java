@@ -533,6 +533,6 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
 
     @Override
     public List<Smiley> getSmileys() {
-        return GCSmiliesProvider.getSmilies();
+        return GCSmileysProvider.getSmileys();
     }
 }

@@ -8,9 +8,9 @@ import java.util.List;
 
 import cgeo.geocaching.connector.capability.Smiley;
 
-public class GCSmiliesProvider {
+public class GCSmileysProvider {
 
-    private GCSmiliesProvider() {
+    private GCSmileysProvider() {
         // utility class
     }
 
@@ -38,7 +38,7 @@ public class GCSmiliesProvider {
            ));
 
     @NonNull
-    public static List<Smiley> getSmilies() {
+    public static List<Smiley> getSmileys() {
         return SMILIES;
     }
 
