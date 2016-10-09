@@ -52,7 +52,7 @@ public class PersonalnoteExport extends AbstractExport {
                     final IConnector connector = ConnectorFactory.getConnector(cache);
                     publishProgress(++i);
                     if (connector instanceof PersonalNoteCapability && StringUtils.isNotBlank(cache.getPersonalNote())) {
-                        ((PersonalNoteCapability)connector).uploadPersonalNote(cache);
+                        ((PersonalNoteCapability) connector).uploadPersonalNote(cache);
                         persNotesCount++;
                     }
                 }
