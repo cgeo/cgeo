@@ -1132,6 +1132,13 @@
   <string name="export_gpx_to">Odeslat GPX</string>
   <string name="export_confirm_title">Exportovat %1$s</string>
   <string name="export_confirm_message">Umístění: %1$s\nNázev souboru: %2$s</string>
+  <string name="export_persnotes">Osobní poznámky</string>
+  <string name="export_persnotes_uploading">Nahrávání osobní poznámky %1$d</string>
+  <plurals name="export_persnotes_upload_success">
+    <item quantity="one">Poznámka byla úspěšně nahrána</item>
+    <item quantity="few">Poznámky (%1$d) byly úspěšně nahrány</item>
+    <item quantity="other">Poznámky (%1$d) byly úspěšně nahrány</item>
+  </plurals>
   <!-- GC attributes -->
   <string name="attribute_dogs_yes">Vstup se psy povolen</string>
   <string name="attribute_dogs_no">Vstup se psy zakázán</string>

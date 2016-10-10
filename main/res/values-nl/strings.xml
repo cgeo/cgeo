@@ -1124,6 +1124,12 @@
   <string name="export_gpx_to">Verstuur geëxporteerde GPX naar</string>
   <string name="export_confirm_title">Bezig met exporteren van %1$s</string>
   <string name="export_confirm_message">Naar pad: %1$s\nBestandsnaam: %2$s</string>
+  <string name="export_persnotes">Persoonlijke notities</string>
+  <string name="export_persnotes_uploading">Uploaden van persoonlijke notitie %1$d</string>
+  <plurals name="export_persnotes_upload_success">
+    <item quantity="one">Één notitie succesvol ge-upload</item>
+    <item quantity="other">%1$d notities succesvol ge-upload</item>
+  </plurals>
   <!-- GC attributes -->
   <string name="attribute_dogs_yes">Honden toegestaan</string>
   <string name="attribute_dogs_no">Honden niet toegestaan</string>
