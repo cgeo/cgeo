@@ -95,6 +95,7 @@ import org.mapsforge.map.layer.cache.TileCache;
 import org.mapsforge.map.layer.renderer.TileRendererLayer;
 import org.mapsforge.map.model.DisplayModel;
 import org.mapsforge.map.reader.MapFile;
+import org.mapsforge.map.reader.ReadBuffer;
 import org.mapsforge.map.rendertheme.ExternalRenderTheme;
 import org.mapsforge.map.rendertheme.InternalRenderTheme;
 import org.mapsforge.map.rendertheme.XmlRenderTheme;
@@ -158,6 +159,9 @@ public class NewMap extends AbstractActionBarActivity {
         super.onCreate(savedInstanceState);
 
         AndroidGraphicFactory.createInstance(this.getApplication());
+
+        // some tiles are rather big, see https://github.com/mapsforge/mapsforge/issues/868
+        ReadBuffer.setMaximumBufferSize(6500000);
 
         // Get parameters from the intent
         mapOptions = new MapOptions(this, getIntent().getExtras());
