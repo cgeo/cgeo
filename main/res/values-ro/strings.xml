@@ -607,6 +607,8 @@
   <string name="feature_search_geocode">Caută după geocod</string>
   <string name="feature_search_owner">Caută după proprietar</string>
   <string name="feature_search_finder">Caută după găsitor</string>
+  <string name="init_mfbeta">Mapsforge beta ca implicit</string>
+  <string name="init_mfbeta_description">Versiunea curentă conţine o versiune beta a noii hărţi Mapsforge ca funcţionalitate experimentală. Aceasta poate fi activată aici ca hartă implicită pentru harta curentă, respectiv harţile de liste.</string>
   <!-- map sources -->
   <string name="map_source_google_map">Google: hartă</string>
   <string name="map_source_google_satellite">Google: Satellite</string>
@@ -768,6 +770,7 @@
   <string name="cache_menu_sygic_drive">Sygic (cu maşina)</string>
   <string name="cache_menu_radar">Radar</string>
   <string name="cache_menu_map">Hartă</string>
+  <string name="cache_menu_mfbeta">Mapsforge Beta</string>
   <string name="cache_menu_map_static">Hărţi statice</string>
   <string name="cache_menu_download_map_static">Descarcă hărţi statice</string>
   <string name="cache_menu_rmaps">Rmaps</string>
@@ -833,6 +836,7 @@
   <string name="cache_image">Imagine</string>
   <string name="cache_image_open_file">Deschide ca fişier</string>
   <string name="cache_image_open_browser">Deschide în browser</string>
+  <string name="cache_image_add_waypoint">Adaugă punct</string>
   <string name="cache_share_field">ora</string>
   <string name="cache_time_full_hours">ora</string>
   <string name="cache_listed_on">Publicat pe %s</string>
@@ -1373,9 +1377,12 @@
   <string name="send">Trimite</string>
   <string name="showcase_logcache_title">Trimiterea însemnării</string>
   <string name="showcase_logcache_text">Reţine, multe comenzi sunt acum în bara de titlu. Acolo vei găsi butonul pentru a trimite o însemnare finalizată.</string>
+  <string name="showcase_main_title">Bară de meniu</string>
+  <string name="showcase_main_text">Unele funcţionalităţi ale c:geo sunt accesibile în bara de meniu sau în meniul din spatele simbolului cu puncte. Oricare buton poate fi apăsat lung pentru a vedea descrierea sa.</string>
   <string name="showcase_cachelist_title">Comutare între liste</string>
   <string name="showcase_cachelist_text">Poţi să schimbi lista afişată apăsând pe titlul listei.</string>
   <string name="showcase_compass_hint_title">Arată indiciu</string>
+  <string name="showcase_compass_hint_text">Această nouă opţiune în meniu îţi poate da informaţii suplimentare despre unde ar putea fi ascunsă geocutia - afişează indiciul, dacă există.</string>
   <string name="confirm_log_title">Tip neobişnuit de însemnare</string>
   <string name="confirm_log_message">Vrei să scrii o însemnare pentru \'%s\'. Eşti sigur?</string>
   <!-- Geokrety -->
