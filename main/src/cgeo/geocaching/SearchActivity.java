@@ -155,7 +155,7 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
         TrackableBrand trackableBrand = ConnectorFactory.getTrackableConnector(geocode).getBrand();
 
         // check if the query contains a TB code
-        if (trackableBrand.equals(TrackableBrand.UNKNOWN)) {
+        if (trackableBrand == TrackableBrand.UNKNOWN) {
             final String tbCode = ConnectorFactory.getTrackableFromURL(query);
             if (StringUtils.isNotBlank(tbCode)) {
                 trackableBrand = ConnectorFactory.getTrackableConnector(tbCode).getBrand();
@@ -164,7 +164,7 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
         }
 
         // check if the query contains a TB tracking code
-        if (trackableBrand.equals(TrackableBrand.UNKNOWN)) {
+        if (trackableBrand == TrackableBrand.UNKNOWN) {
             final TrackableTrackingCode tbTrackingCode = ConnectorFactory.getTrackableTrackingCodeFromURL(query);
             if (!tbTrackingCode.isEmpty()) {
                 trackableBrand = tbTrackingCode.brand;
@@ -172,7 +172,7 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
             }
         }
 
-        if (!trackableBrand.equals(TrackableBrand.UNKNOWN) && geocode != null) {
+        if (trackableBrand != TrackableBrand.UNKNOWN && geocode != null) {
             final Intent trackablesIntent = new Intent(this, TrackableActivity.class);
             trackablesIntent.putExtra(Intents.EXTRA_GEOCODE, geocode.toUpperCase(Locale.US));
             trackablesIntent.putExtra(Intents.EXTRA_BRAND, trackableBrand.getId());
