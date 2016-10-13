@@ -2,7 +2,7 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-    <b>Next bugfix release:</b>\n
+    <b>2016.10.13:</b>\n
     · Fix: TB type not shown correctly if it contains HTML\n
     · Fix: Picture upload shown as failed although OK\n
     · Fix: Caches in search result did not have coordinates\n
