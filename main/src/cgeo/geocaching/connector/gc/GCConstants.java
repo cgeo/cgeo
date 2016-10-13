@@ -140,7 +140,7 @@ public final class GCConstants {
     static final Pattern PATTERN_SEARCH_FAVORITE = Pattern.compile("favorite-rank\">([0-9,.]+)</span>");
     static final Pattern PATTERN_SEARCH_TOTALCOUNT = Pattern.compile("PageBuilderWidget\"><span>[^<]*?<b>(\\d+)<");
     static final Pattern PATTERN_SEARCH_HIDDEN_DATE = Pattern.compile("<td style=\"width:70px\" data-dateplaced=\"[^\"]+\">[^<]+<span class=\"small\">([^<]+)</span>");
-    static final Pattern PATTERN_SEARCH_POST_ACTION = Pattern.compile("<form name=\"aspnetForm\" method=\"post\" action=\"(.*)\" id=\"aspnetForm\"");
+    static final Pattern PATTERN_SEARCH_POST_ACTION = Pattern.compile("<form method=\"post\" action=\"(.*)\" id=\"aspnetForm\"");
 
     /**
      * Patterns for waypoints
