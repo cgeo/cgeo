@@ -7,8 +7,8 @@ import org.apache.commons.lang3.StringUtils;
 /**
  * Represent a Trackable Tracking code along with the brand.
  *
- * This is useful in some cases, as not all Trackable connectors are activated to handle tracking code lookup.
- * However, coupled with the brand, such lookup are possible.
+ * This is useful in some cases, as not all Trackable connectors are activated to handle tracking code lookups.
+ * However, coupled with the brand, such lookups are possible.
  */
 public final class TrackableTrackingCode {
 
@@ -23,11 +23,11 @@ public final class TrackableTrackingCode {
     }
 
     /**
-     * Check if the TrackableTrackingCode correspond the the EMPTY reference.
+     * Checks if the TrackableTrackingCode corresponds to the EMPTY reference.
      *
      * @return True if TrackableTrackingCode is empty
      */
     public boolean isEmpty() {
-        return trackingCode.equals(EMPTY.trackingCode) && brand.equals(EMPTY.brand);
+        return this == EMPTY;
     }
 }
