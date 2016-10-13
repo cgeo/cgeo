@@ -278,7 +278,7 @@ dependencies {
     testCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
 
     // Locus Maps integration
-    def locusVersion = '0.2.6'
+    def locusVersion = '0.2.7'
     compile "com.asamm:locus-api:$locusVersion"
     compile "com.asamm:locus-api-android:$locusVersion"
 
