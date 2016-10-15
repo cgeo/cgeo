@@ -27,7 +27,7 @@ public class PocketQueryListActivity extends AbstractListActivity {
         super.onCreate(savedInstanceState, R.layout.pocketquery_activity);
 
         final PocketQueryListAdapter adapter = new PocketQueryListAdapter(pocketQueries);
-        final RecyclerView view = RecyclerViewProvider.provideRecyclerView(this, R.id.pocketquery_list, false);
+        final RecyclerView view = RecyclerViewProvider.provideRecyclerView(this, R.id.pocketquery_list, true, true);
         view.setAdapter(adapter);
 
         final ProgressDialog waitDialog = ProgressDialog.show(this, getString(R.string.search_pocket_title), getString(R.string.search_pocket_loading), true, true);

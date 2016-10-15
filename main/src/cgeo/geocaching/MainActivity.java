@@ -8,6 +8,7 @@ import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.connector.gc.PocketQueryListActivity;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.StatusCode;
+import cgeo.geocaching.helper.UsefulAppsActivity;
 import cgeo.geocaching.list.PseudoList;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;

@@ -19,7 +19,7 @@ import java.util.List;
 
 import butterknife.BindView;
 
-public class PocketQueryListAdapter extends RecyclerView.Adapter<PocketQueryListAdapter.ViewHolder> {
+class PocketQueryListAdapter extends RecyclerView.Adapter<PocketQueryListAdapter.ViewHolder> {
 
     @NonNull private final List<PocketQuery> queries;
 
@@ -33,7 +33,7 @@ public class PocketQueryListAdapter extends RecyclerView.Adapter<PocketQueryList
         }
     }
 
-    public PocketQueryListAdapter(@NonNull final List<PocketQuery> queries) {
+    PocketQueryListAdapter(@NonNull final List<PocketQuery> queries) {
         this.queries = queries;
     }
 

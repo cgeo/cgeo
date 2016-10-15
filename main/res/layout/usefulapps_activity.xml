@@ -7,7 +7,7 @@
     android:orientation="vertical"
     tools:context=".UsefulAppsActivity" >
 
-    <ListView
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/apps_list"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
@@ -20,7 +20,6 @@
         android:listSelector="?background_color"
         android:padding="4dip"
         android:scrollbarStyle="outsideOverlay"
-        tools:listitem="@layout/usefulapps_item" >
-    </ListView>
+        tools:listitem="@layout/usefulapps_item" />
 
 </LinearLayout>

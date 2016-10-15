@@ -31,7 +31,7 @@ public class AddressListActivity extends AbstractListActivity implements Address
         super.onCreate(savedInstanceState, R.layout.addresslist_activity);
 
         final AddressListAdapter adapter = new AddressListAdapter(addresses, this);
-        final RecyclerView view = RecyclerViewProvider.provideRecyclerView(this, R.id.address_list, false);
+        final RecyclerView view = RecyclerViewProvider.provideRecyclerView(this, R.id.address_list, false, true);
         view.setAdapter(adapter);
 
         final String keyword = getIntent().getStringExtra(Intents.EXTRA_KEYWORD);

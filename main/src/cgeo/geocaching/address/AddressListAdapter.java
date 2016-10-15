@@ -21,7 +21,7 @@ import java.util.List;
 import butterknife.BindView;
 import org.apache.commons.lang3.StringUtils;
 
-public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.AddressListHolder> {
+class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.AddressListHolder> {
 
     @NonNull private final Geopoint location;
     @NonNull private final List<Address> addresses;
@@ -38,7 +38,7 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
 
     }
 
-    public AddressListAdapter(@NonNull final List<Address> addresses, @NonNull final AddressClickListener addressClickListener) {
+    AddressListAdapter(@NonNull final List<Address> addresses, @NonNull final AddressClickListener addressClickListener) {
         this.addresses = addresses;
         this.clickListener = addressClickListener;
         location = Sensors.getInstance().currentGeo().getCoords();
