@@ -14,6 +14,7 @@ import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.EditUtils;
 import cgeo.geocaching.utils.HtmlUtils;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.TranslationUtils;
 
 import android.content.Intent;
@@ -210,12 +211,19 @@ public abstract class AbstractActivity extends ActionBarActivity implements IAbs
         }
     }
 
-    protected void setCacheTitleBar(@Nullable final String geocode, @Nullable final String name, @Nullable final CacheType type) {
+    protected void setCacheTitleBar(@Nullable final String geocode, @Nullable final CharSequence name, @Nullable final CacheType type) {
+        final CharSequence title;
         if (StringUtils.isNotBlank(name)) {
-            setTitle(StringUtils.isNotBlank(geocode) ? name + " (" + geocode + ")" : name);
+            title = StringUtils.isNotBlank(geocode) ? name + " (" + geocode + ")" : name;
         } else {
-            setTitle(StringUtils.isNotBlank(geocode) ? geocode : res.getString(R.string.cache));
+            title = StringUtils.isNotBlank(geocode) ? geocode : res.getString(R.string.cache);
         }
+        assert title != null; // help Eclipse null analysis
+        setCacheTitleBar(title, type);
+    }
+
+    private void setCacheTitleBar(@NonNull final CharSequence title, @Nullable final CacheType type) {
+        setTitle(title);
         if (type != null) {
             getSupportActionBar().setIcon(Compatibility.getDrawable(getResources(), type.markerId));
         } else {
@@ -227,7 +235,7 @@ public abstract class AbstractActivity extends ActionBarActivity implements IAbs
      * change the titlebar icon and text to show the current geocache
      */
     protected void setCacheTitleBar(@NonNull final Geocache cache) {
-        setCacheTitleBar(cache.getGeocode(), cache.getName(), cache.getType());
+        setCacheTitleBar(TextUtils.coloredCacheText(cache, cache.getName() + " (" + cache.getGeocode() + ")"), cache.getType());
     }
 
     /**

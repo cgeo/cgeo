@@ -100,16 +100,14 @@ import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.view.ActionMode;
 import android.text.Editable;
 import android.text.Html;
 import android.text.Spannable;
+import android.text.SpannableString;
 import android.text.Spanned;
-import android.text.style.ForegroundColorSpan;
-import android.text.style.StrikethroughSpan;
 import android.text.style.StyleSpan;
 import android.text.util.Linkify;
 import android.util.TypedValue;
@@ -1003,13 +1001,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             final CacheDetailsCreator details = new CacheDetailsCreator(CacheDetailActivity.this, detailsList);
 
             // cache name (full name)
-            final Spannable span = (new Spannable.Factory()).newSpannable(cache.getName());
-            if (cache.isDisabled() || cache.isArchived()) { // strike
-                span.setSpan(new StrikethroughSpan(), 0, span.toString().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            }
-            if (cache.isArchived()) {
-                span.setSpan(new ForegroundColorSpan(ContextCompat.getColor(app, R.color.archived_cache_color)), 0, span.toString().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            }
+            final SpannableString span = TextUtils.coloredCacheText(cache, cache.getName());
 
             addContextMenu(details.add(R.string.cache_name, span).right);
             details.add(R.string.cache_type, cache.getType().getL10n());

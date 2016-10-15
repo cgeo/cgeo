@@ -3,10 +3,18 @@
  */
 package cgeo.geocaching.utils;
 
-import android.support.annotation.Nullable;
+import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.R;
+import cgeo.geocaching.models.Geocache;
 
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.text.Html;
+import android.text.SpannableString;
 import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.StrikethroughSpan;
 
 import java.nio.charset.Charset;
 import java.text.Collator;
@@ -229,5 +237,16 @@ public final class TextUtils {
      */
     public static String stripHtml(final String html) {
         return containsHtml(html) ? trimSpanned(Html.fromHtml(html)).toString() : html;
+    }
+
+    public static SpannableString coloredCacheText(@NonNull final Geocache cache, @NonNull final String text) {
+        final SpannableString span = new SpannableString(text);
+        if (cache.isDisabled() || cache.isArchived()) { // strike
+            span.setSpan(new StrikethroughSpan(), 0, span.toString().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        }
+        if (cache.isArchived()) {
+            span.setSpan(new ForegroundColorSpan(ContextCompat.getColor(CgeoApplication.getInstance(), R.color.archived_cache_color)), 0, span.toString().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        }
+        return span;
     }
 }
