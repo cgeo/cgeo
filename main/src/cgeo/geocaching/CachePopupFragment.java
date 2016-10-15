@@ -12,6 +12,7 @@ import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.TextUtils;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -114,7 +115,7 @@ public class CachePopupFragment extends AbstractDialogFragment {
 
         try {
             if (StringUtils.isNotBlank(cache.getName())) {
-                setTitle(cache.getName());
+                setTitle(TextUtils.coloredCacheText(cache, cache.getName()));
             } else {
                 setTitle(geocode);
             }
