@@ -4,25 +4,31 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractListActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.models.PocketQuery;
-
-import org.apache.commons.collections4.CollectionUtils;
+import cgeo.geocaching.ui.recyclerview.RecyclerViewProvider;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.collections4.CollectionUtils;
 import rx.android.app.AppObservable;
 import rx.functions.Action1;
 
 public class PocketQueryListActivity extends AbstractListActivity {
 
+    @NonNull private final List<PocketQuery> pocketQueries = new ArrayList<>();
+
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.pocketquery_activity);
 
-        final PocketQueryListAdapter adapter = new PocketQueryListAdapter(this);
-        setListAdapter(adapter);
+        final PocketQueryListAdapter adapter = new PocketQueryListAdapter(pocketQueries);
+        final RecyclerView view = RecyclerViewProvider.provideRecyclerView(this, R.id.pocketquery_list, false);
+        view.setAdapter(adapter);
 
         final ProgressDialog waitDialog = ProgressDialog.show(this, getString(R.string.search_pocket_title), getString(R.string.search_pocket_loading), true, true);
         waitDialog.setCancelable(true);
@@ -38,13 +44,8 @@ public class PocketQueryListActivity extends AbstractListActivity {
                     ActivityMixin.showToast(PocketQueryListActivity.this, getString(R.string.warn_no_pocket_query_found));
                     finish();
                 }
-                // adapter.addAll does not exist until API 11. We will notify the adapter ourselves as not to queue
-                // a call to notifyDataSetChanged() after every add.
-                adapter.setNotifyOnChange(false);
-                for (final PocketQuery pocketQuery : pocketQueryList) {
-                    adapter.add(pocketQuery);
-                }
-                adapter.notifyDataSetChanged();
+                pocketQueries.addAll(pocketQueryList);
+                adapter.notifyItemRangeInserted(0, pocketQueryList.size());
             }
         }, new Action1<Throwable>() {
             @Override

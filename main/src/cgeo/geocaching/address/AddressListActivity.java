@@ -10,6 +10,7 @@ import cgeo.geocaching.ui.recyclerview.RecyclerViewProvider;
 import android.app.ProgressDialog;
 import android.location.Address;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ import rx.functions.Action1;
 
 public class AddressListActivity extends AbstractListActivity implements AddressClickListener {
 
+    @NonNull
     private final ArrayList<Address> addresses = new ArrayList<>();
 
     @Override

@@ -4,6 +4,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Units;
 import cgeo.geocaching.sensors.Sensors;
+import cgeo.geocaching.ui.recyclerview.AbstractRecyclerViewHolder;
 
 import android.location.Address;
 import android.support.annotation.NonNull;
@@ -12,17 +13,30 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
 import org.apache.commons.lang3.StringUtils;
 
-public class AddressListAdapter extends RecyclerView.Adapter<AddressListHolder> {
+public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.AddressListHolder> {
 
     @NonNull private final Geopoint location;
     @NonNull private final List<Address> addresses;
     @NonNull private final AddressClickListener clickListener;
+
+    class AddressListHolder extends AbstractRecyclerViewHolder {
+
+        @BindView(R.id.label) TextView label;
+        @BindView(R.id.distance) TextView distance;
+
+        AddressListHolder(final View itemView) {
+            super(itemView);
+        }
+
+    }
 
     public AddressListAdapter(@NonNull final List<Address> addresses, @NonNull final AddressClickListener addressClickListener) {
         this.addresses = addresses;

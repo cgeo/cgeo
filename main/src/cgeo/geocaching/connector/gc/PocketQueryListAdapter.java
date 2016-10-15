@@ -1,25 +1,29 @@
 package cgeo.geocaching.connector.gc;
 
-import android.app.Activity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.TextView;
-
-import butterknife.BindView;
 import cgeo.geocaching.CacheListActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.models.PocketQuery;
-import cgeo.geocaching.ui.AbstractViewHolder;
+import cgeo.geocaching.ui.recyclerview.AbstractRecyclerViewHolder;
 import cgeo.geocaching.utils.Formatter;
 
-public class PocketQueryListAdapter extends ArrayAdapter<PocketQuery> {
+import android.app.Activity;
+import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
-    private final LayoutInflater inflater;
+import java.util.List;
 
-    protected static final class ViewHolder extends AbstractViewHolder {
+import butterknife.BindView;
+
+public class PocketQueryListAdapter extends RecyclerView.Adapter<PocketQueryListAdapter.ViewHolder> {
+
+    @NonNull private final List<PocketQuery> queries;
+
+    protected static final class ViewHolder extends AbstractRecyclerViewHolder {
         @BindView(R.id.label) TextView label;
         @BindView(R.id.download) Button download;
         @BindView(R.id.cachelist) Button cachelist;
@@ -29,26 +33,24 @@ public class PocketQueryListAdapter extends ArrayAdapter<PocketQuery> {
         }
     }
 
-    public PocketQueryListAdapter(final Activity context) {
-        super(context, 0);
-        inflater = context.getLayoutInflater();
+    public PocketQueryListAdapter(@NonNull final List<PocketQuery> queries) {
+        this.queries = queries;
     }
 
     @Override
-    public View getView(final int position, final View convertView, final ViewGroup parent) {
-        final PocketQuery pocketQuery = getItem(position);
+    public int getItemCount() {
+        return queries.size();
+    }
 
-        View view = convertView;
+    @Override
+    public ViewHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
+        final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.pocketquery_item, parent, false);
+        return new ViewHolder(view);
+    }
 
-        // holder pattern implementation
-        final ViewHolder holder;
-        if (view == null) {
-            view = inflater.inflate(R.layout.pocketquery_item, parent, false);
-            holder = new ViewHolder(view);
-        } else {
-            holder = (ViewHolder) view.getTag();
-        }
-
+    @Override
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
+        final PocketQuery pocketQuery = queries.get(position);
         holder.cachelist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
@@ -68,9 +70,6 @@ public class PocketQueryListAdapter extends ArrayAdapter<PocketQuery> {
         holder.download.setVisibility(pocketQuery.isDownloadable() ? View.VISIBLE : View.GONE);
         holder.label.setText(pocketQuery.getName());
         holder.info.setText(Formatter.formatPocketQueryInfo(pocketQuery));
-
-        return view;
     }
-
 
 }
