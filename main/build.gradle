@@ -258,7 +258,7 @@ dependencies {
     }
 
     // Jackson XML processing
-    def jacksonVersion = '2.8.3'
+    def jacksonVersion = '2.8.4'
     compile "com.fasterxml.jackson.core:jackson-core:$jacksonVersion"
     compile "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
     compile "com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion"
