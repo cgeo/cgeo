@@ -3,14 +3,19 @@ package cgeo.geocaching.enumerations;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 
-import org.apache.commons.lang3.StringUtils;
 import android.support.annotation.NonNull;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.EnumSet;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Enum listing waypoint types
@@ -50,7 +55,16 @@ public enum WaypointType {
         }
     }
     @NonNull
-    public static final Set<WaypointType> ALL_TYPES_EXCEPT_OWN_AND_ORIGINAL = Collections.unmodifiableSet(EnumSet.complementOf(EnumSet.of(OWN, ORIGINAL)));
+    public static final List<WaypointType> ALL_TYPES_EXCEPT_OWN_AND_ORIGINAL = orderedWaypointTypes();
+
+    private static List<WaypointType> orderedWaypointTypes() {
+        // enforce an order for these types
+        final Set<WaypointType> waypointTypes = new LinkedHashSet<>();
+        waypointTypes.addAll(Arrays.asList(PARKING, TRAILHEAD, PUZZLE, STAGE, FINAL));
+        // then add all remaining except "internal" types
+        waypointTypes.addAll(EnumSet.complementOf(EnumSet.of(OWN, ORIGINAL)));
+        return Collections.unmodifiableList(new ArrayList<>(waypointTypes));
+    }
 
     /**
      * inverse lookup of waypoint IDs<br/>

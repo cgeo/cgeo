@@ -182,11 +182,11 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         buttonLat.setOnClickListener(new CoordDialogListener());
         buttonLon.setOnClickListener(new CoordDialogListener());
 
-        final List<String> wayPointNames = new ArrayList<>();
+        final List<String> wayPointTypes = new ArrayList<>();
         for (final WaypointType wpt : WaypointType.ALL_TYPES_EXCEPT_OWN_AND_ORIGINAL) {
-            wayPointNames.add(wpt.getL10n());
+            wayPointTypes.add(wpt.getL10n());
         }
-        final ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, wayPointNames);
+        final ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, wayPointTypes);
         waypointName.setAdapter(adapter);
 
         if (savedInstanceState != null) {
