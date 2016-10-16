@@ -1,51 +1,60 @@
 package cgeo.geocaching.ui;
 
-import android.app.Activity;
+import cgeo.geocaching.R;
+import cgeo.geocaching.models.Trackable;
+import cgeo.geocaching.ui.recyclerview.AbstractRecyclerViewHolder;
+
 import android.graphics.Paint;
+import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.List;
+
 import butterknife.BindView;
-import cgeo.geocaching.R;
-import cgeo.geocaching.models.Trackable;
 
-public class TrackableListAdapter extends ArrayAdapter<Trackable> {
+public class TrackableListAdapter extends RecyclerView.Adapter<TrackableListAdapter.ViewHolder> {
 
-    private final LayoutInflater inflater;
+    public interface TrackableClickListener {
+        void onTrackableClicked(final Trackable trackable);
+    }
 
-    protected static final class ViewHolder extends AbstractViewHolder {
+    @NonNull private final List<Trackable> trackables;
+    @NonNull private final TrackableClickListener trackableClickListener;
+
+    protected static final class ViewHolder extends AbstractRecyclerViewHolder {
         @BindView(R.id.trackable_image_brand) ImageView imageBrand;
         @BindView(R.id.trackable_name) TextView name;
 
-        public ViewHolder(final View view) {
+        ViewHolder(final View view) {
             super(view);
         }
     }
 
-    public TrackableListAdapter(final Activity context) {
-        super(context, 0);
-        inflater = context.getLayoutInflater();
+    public TrackableListAdapter(@NonNull final List<Trackable> trackables, @NonNull final TrackableClickListener trackableClickListener) {
+        this.trackables = trackables;
+        this.trackableClickListener = trackableClickListener;
     }
 
     @Override
-    public View getView (final int position, final View convertView, final ViewGroup parent) {
-        final Trackable trackable = getItem(position);
+    public int getItemCount() {
+        return trackables.size();
+    }
 
-        View view = convertView;
+    @Override
+    public ViewHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
+        final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.trackable_item, parent, false);
+        return new ViewHolder(view);
+    }
 
-        // holder pattern implementation
-        final ViewHolder holder;
-        if (view == null) {
-            view = inflater.inflate(R.layout.trackable_item, parent, false);
-            holder = new ViewHolder(view);
-        } else {
-            holder = (ViewHolder) view.getTag();
-        }
+    @Override
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
+        final Trackable trackable = trackables.get(position);
 
         holder.imageBrand.setImageResource(trackable.getIconBrand());
         holder.name.setText(Html.fromHtml(trackable.getName()).toString());
@@ -53,6 +62,13 @@ public class TrackableListAdapter extends ArrayAdapter<Trackable> {
             holder.name.setPaintFlags(holder.name.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         }
 
-        return view;
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(final View v) {
+                trackableClickListener.onTrackableClicked(trackable);
+            }
+        });
     }
+
 }

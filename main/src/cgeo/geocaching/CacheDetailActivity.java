@@ -63,6 +63,7 @@ import cgeo.geocaching.ui.TrackableListAdapter;
 import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.logs.CacheLogsViewCreator;
+import cgeo.geocaching.ui.recyclerview.RecyclerViewProvider;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.CheckerUtils;
@@ -103,6 +104,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.view.ActionMode;
+import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.Html;
 import android.text.Spannable;
@@ -119,7 +121,6 @@ import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.GridView;
@@ -1866,39 +1867,32 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         }
     }
 
-    private class InventoryViewCreator extends AbstractCachingPageViewCreator<ListView> {
+    private class InventoryViewCreator extends AbstractCachingPageViewCreator<RecyclerView> {
 
         @Override
-        public ListView getDispatchedView(final ViewGroup parentView) {
+        public RecyclerView getDispatchedView(final ViewGroup parentView) {
             if (cache == null) {
                 // something is really wrong
                 return null;
             }
 
-            view = (ListView) getLayoutInflater().inflate(R.layout.cachedetail_inventory_page, parentView, false);
+
+            view = (RecyclerView) getLayoutInflater().inflate(R.layout.cachedetail_inventory_page, parentView, false);
+            final RecyclerView recyclerView = ButterKnife.findById(view, R.id.list);
 
             // TODO: fix layout, then switch back to Android-resource and delete copied one
             // this copy is modified to respect the text color
-            final TrackableListAdapter adapterTrackables = new TrackableListAdapter(CacheDetailActivity.this);
-            cache.mergeInventory(genericTrackables, processedBrands);
+            RecyclerViewProvider.provideRecyclerView(CacheDetailActivity.this, recyclerView, true, true);
 
-            // Todo: don't hesitate to use addAll() on adapter, once API Level reach 11 (as of today level is 9)
-            //adapterTrackables.addAll(cache.getInventory());
-            for (final Trackable trackable : cache.getInventory()) {
-                adapterTrackables.add(trackable);
-            }
+            final TrackableListAdapter adapterTrackables = new TrackableListAdapter(cache.getInventory(), new TrackableListAdapter.TrackableClickListener() {
 
-            view.setAdapter(adapterTrackables);
-            view.setOnItemClickListener(new OnItemClickListener() {
                 @Override
-                public void onItemClick(final AdapterView<?> arg0, final View arg1, final int arg2, final long arg3) {
-                    final Object selection = arg0.getItemAtPosition(arg2);
-                    if (selection instanceof Trackable) {
-                        final Trackable trackable = (Trackable) selection;
-                        TrackableActivity.startActivity(CacheDetailActivity.this, trackable.getGuid(), trackable.getGeocode(), trackable.getName(), cache.getGeocode(), trackable.getBrand().getId());
-                    }
+                public void onTrackableClicked(final Trackable trackable) {
+                    TrackableActivity.startActivity(CacheDetailActivity.this, trackable.getGuid(), trackable.getGeocode(), trackable.getName(), cache.getGeocode(), trackable.getBrand().getId());
                 }
             });
+            recyclerView.setAdapter(adapterTrackables);
+            cache.mergeInventory(genericTrackables, processedBrands);
 
             return view;
         }
