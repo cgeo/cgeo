@@ -1,13 +1,11 @@
 package cgeo.geocaching.files;
 
-import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.gc.GCConstants;
+import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.utils.CancellableHandler;
 
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.CharEncoding;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
@@ -21,7 +19,10 @@ import java.io.InputStreamReader;
 import java.util.Collection;
 import java.util.concurrent.CancellationException;
 
-public abstract class FileParser {
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.CharEncoding;
+
+abstract class FileParser {
     /**
      * Parses caches from input stream.
      *

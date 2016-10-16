@@ -2,25 +2,25 @@ package cgeo.geocaching.files;
 
 import cgeo.geocaching.utils.Log;
 
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.CharEncoding;
-import org.apache.commons.lang3.StringUtils;
-import android.support.annotation.NonNull;
-
 import android.content.ContentResolver;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-public class FileTypeDetector {
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.CharEncoding;
+import org.apache.commons.lang3.StringUtils;
+
+class FileTypeDetector {
 
     private final ContentResolver contentResolver;
     private final Uri uri;
 
-    public FileTypeDetector(final Uri uri, final ContentResolver contentResolver) {
+    FileTypeDetector(final Uri uri, final ContentResolver contentResolver) {
         this.uri = uri;
         this.contentResolver = contentResolver;
     }

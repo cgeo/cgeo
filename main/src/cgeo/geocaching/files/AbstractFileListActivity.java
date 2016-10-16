@@ -2,18 +2,15 @@ package cgeo.geocaching.files;
 
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
-import cgeo.geocaching.activity.AbstractListActivity;
+import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.ui.recyclerview.RecyclerViewProvider;
 import cgeo.geocaching.utils.EnvironmentUtils;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
-
-import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
-import android.support.annotation.NonNull;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -21,7 +18,8 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
-import android.widget.ArrayAdapter;
+import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -29,7 +27,10 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public abstract class AbstractFileListActivity<T extends ArrayAdapter<File>> extends AbstractListActivity {
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
+
+public abstract class AbstractFileListActivity<T extends RecyclerView.Adapter<? extends RecyclerView.ViewHolder>> extends AbstractActionBarActivity {
     private static final int MSG_SEARCH_WHOLE_SD_CARD = 1;
 
     private final List<File> files = new ArrayList<>();
@@ -93,7 +94,9 @@ public abstract class AbstractFileListActivity<T extends ArrayAdapter<File>> ext
             listId = StoredList.STANDARD_LIST_ID;
         }
 
-        setAdapter();
+        adapter = getAdapter(files);
+        final RecyclerView view = RecyclerViewProvider.provideRecyclerView(this, R.id.list, true, true);
+        view.setAdapter(adapter);
 
         waitDialog = ProgressDialog.show(
                 this,
@@ -130,13 +133,6 @@ public abstract class AbstractFileListActivity<T extends ArrayAdapter<File>> ext
     }
 
     protected abstract T getAdapter(List<File> files);
-
-    private void setAdapter() {
-        if (adapter == null) {
-            adapter = getAdapter(files);
-            setListAdapter(adapter);
-        }
-    }
 
     /**
      * Gets the base folder for file searches
@@ -188,6 +184,7 @@ public abstract class AbstractFileListActivity<T extends ArrayAdapter<File>> ext
                     return TextUtils.COLLATOR.compare(lhs.getName(), rhs.getName());
                 }
             });
+            adapter.notifyDataSetChanged();
 
             loadFilesHandler.sendMessage(Message.obtain(loadFilesHandler));
         }

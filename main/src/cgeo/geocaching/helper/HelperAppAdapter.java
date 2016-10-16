@@ -26,12 +26,12 @@ final class HelperAppAdapter extends RecyclerView.Adapter<HelperAppAdapter.ViewH
     @NonNull private final HelperAppClickListener clickListener;
     @NonNull private final Context context;
 
-    protected static class ViewHolder extends AbstractRecyclerViewHolder {
+    protected static final class ViewHolder extends AbstractRecyclerViewHolder {
         @BindView(R.id.title) protected TextView title;
         @BindView(R.id.image) protected ImageView image;
         @BindView(R.id.description) protected TextView description;
 
-        public ViewHolder(final View rowView) {
+        ViewHolder(final View rowView) {
             super(rowView);
         }
     }

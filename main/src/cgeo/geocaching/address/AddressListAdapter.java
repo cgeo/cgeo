@@ -27,7 +27,7 @@ class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.Address
     @NonNull private final List<Address> addresses;
     @NonNull private final AddressClickListener clickListener;
 
-    class AddressListHolder extends AbstractRecyclerViewHolder {
+    protected static final class AddressListHolder extends AbstractRecyclerViewHolder {
 
         @BindView(R.id.label) TextView label;
         @BindView(R.id.distance) TextView distance;

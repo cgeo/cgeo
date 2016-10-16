@@ -3,7 +3,7 @@ package cgeo.geocaching.address;
 import cgeo.geocaching.CacheListActivity;
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
-import cgeo.geocaching.activity.AbstractListActivity;
+import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.ui.recyclerview.RecyclerViewProvider;
 
@@ -21,7 +21,7 @@ import rx.Observable;
 import rx.android.app.AppObservable;
 import rx.functions.Action1;
 
-public class AddressListActivity extends AbstractListActivity implements AddressClickListener {
+public class AddressListActivity extends AbstractActionBarActivity implements AddressClickListener {
 
     @NonNull
     private final ArrayList<Address> addresses = new ArrayList<>();

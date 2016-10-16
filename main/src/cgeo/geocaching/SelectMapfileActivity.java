@@ -1,11 +1,11 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.files.AbstractFileListActivity;
+import cgeo.geocaching.files.FileSelectionListAdapter;
 import cgeo.geocaching.files.IFileSelectionView;
 import cgeo.geocaching.files.SimpleDirChooser;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.LocalStorage;
-import cgeo.geocaching.ui.FileSelectionListAdapter;
 
 import org.openintents.intents.FileManagerIntents;
 

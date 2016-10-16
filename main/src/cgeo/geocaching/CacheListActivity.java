@@ -26,6 +26,7 @@ import cgeo.geocaching.export.FieldnoteExport;
 import cgeo.geocaching.export.GpxExport;
 import cgeo.geocaching.export.PersonalnoteExport;
 import cgeo.geocaching.files.GPXImporter;
+import cgeo.geocaching.files.GpxFileListActivity;
 import cgeo.geocaching.filter.FilterActivity;
 import cgeo.geocaching.filter.IFilter;
 import cgeo.geocaching.list.AbstractList;

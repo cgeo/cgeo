@@ -1,51 +1,45 @@
-package cgeo.geocaching.ui;
+package cgeo.geocaching.files;
 
-import android.app.Activity;
+import cgeo.geocaching.R;
+import cgeo.geocaching.ui.recyclerview.AbstractRecyclerViewHolder;
+
 import android.graphics.Typeface;
+import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import java.io.File;
 import java.util.List;
 
 import butterknife.BindView;
-import cgeo.geocaching.R;
-import cgeo.geocaching.files.IFileSelectionView;
-import cgeo.geocaching.utils.Log;
 
-public class FileSelectionListAdapter extends ArrayAdapter<File> {
+public class FileSelectionListAdapter extends RecyclerView.Adapter<FileSelectionListAdapter.ViewHolder> {
 
     private final IFileSelectionView parentView;
-    private final LayoutInflater inflater;
+    @NonNull private final List<File> files;
 
-    public FileSelectionListAdapter(final IFileSelectionView parentIn, final List<File> listIn) {
-        super(parentIn.getContext(), 0, listIn);
-
+    public FileSelectionListAdapter(@NonNull final IFileSelectionView parentIn, @NonNull final List<File> listIn) {
+        files = listIn;
         parentView = parentIn;
-        inflater = ((Activity) getContext()).getLayoutInflater();
     }
 
     @Override
-    public View getView(final int position, final View rowView, final ViewGroup parent) {
-        if (position > getCount()) {
-            Log.w("FileSelectionListAdapter.getView: Attempt to access missing item #" + position);
-            return null;
-        }
+    public int getItemCount() {
+        return files.size();
+    }
 
-        final File file = getItem(position);
+    @Override
+    public ViewHolder onCreateViewHolder(final ViewGroup parent, final int position) {
+        final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.mapfile_item, parent, false);
+        return new ViewHolder(view);
+    }
 
-        View v = rowView;
-
-        final ViewHolder holder;
-        if (v == null) {
-            v = inflater.inflate(R.layout.mapfile_item, parent, false);
-            holder = new ViewHolder(v);
-        } else {
-            holder = (ViewHolder) v.getTag();
-        }
+    @Override
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
+        final File file = files.get(position);
 
         final String currentFile = parentView.getCurrentFile();
         if (currentFile != null && file.equals(new File(currentFile))) {
@@ -55,12 +49,10 @@ public class FileSelectionListAdapter extends ArrayAdapter<File> {
         }
 
         final TouchListener touchLst = new TouchListener(file);
-        v.setOnClickListener(touchLst);
+        holder.itemView.setOnClickListener(touchLst);
 
         holder.filepath.setText(file.getParent());
         holder.filename.setText(file.getName());
-
-        return v;
     }
 
     private class TouchListener implements View.OnClickListener {
@@ -78,11 +70,11 @@ public class FileSelectionListAdapter extends ArrayAdapter<File> {
         }
     }
 
-    protected static final class ViewHolder extends AbstractViewHolder {
+    protected static final class ViewHolder extends AbstractRecyclerViewHolder {
         @BindView(R.id.mapfilepath) TextView filepath;
         @BindView(R.id.mapfilename) TextView filename;
 
-        public ViewHolder(final View view) {
+        ViewHolder(final View view) {
             super(view);
         }
     }

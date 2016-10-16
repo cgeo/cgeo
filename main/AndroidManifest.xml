@@ -683,7 +683,7 @@
             android:label="@string/compass_title" >
         </activity>
         <activity
-            android:name=".GpxFileListActivity"
+            android:name="cgeo.geocaching.files.GpxFileListActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/gpx_import_title" >
         </activity>

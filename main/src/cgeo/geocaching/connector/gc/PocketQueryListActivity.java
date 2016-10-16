@@ -1,7 +1,7 @@
 package cgeo.geocaching.connector.gc;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.activity.AbstractListActivity;
+import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.models.PocketQuery;
 import cgeo.geocaching.ui.recyclerview.RecyclerViewProvider;
@@ -18,7 +18,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import rx.android.app.AppObservable;
 import rx.functions.Action1;
 
-public class PocketQueryListActivity extends AbstractListActivity {
+public class PocketQueryListActivity extends AbstractActionBarActivity {
 
     @NonNull private final List<PocketQuery> pocketQueries = new ArrayList<>();
 

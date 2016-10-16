@@ -1,6 +1,6 @@
 package cgeo.geocaching.files;
 
-public enum FileType {
+enum FileType {
     UNKNOWN,
     LOC,
     GPX,

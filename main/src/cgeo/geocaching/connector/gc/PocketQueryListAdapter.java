@@ -28,7 +28,8 @@ class PocketQueryListAdapter extends RecyclerView.Adapter<PocketQueryListAdapter
         @BindView(R.id.download) Button download;
         @BindView(R.id.cachelist) Button cachelist;
         @BindView(R.id.info) TextView info;
-        public ViewHolder(final View view) {
+
+        ViewHolder(final View view) {
             super(view);
         }
     }
