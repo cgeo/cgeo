@@ -37,7 +37,7 @@ public final class StaticMapsProvider {
     private static final String ROADMAP = "roadmap";
     private static final String WAYPOINT_PREFIX = "wp";
     private static final String MAP_FILENAME_PREFIX = "map_";
-    private static final String MARKERS_URL = "https://cgeo-status.herokuapp.com/assets/markers/";
+    private static final String MARKERS_URL = "https://status.cgeo.org/assets/markers/";
 
     private static volatile long last403 = 0;
 

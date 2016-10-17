@@ -63,7 +63,7 @@ public class StatusUpdater {
                 final Application app = CgeoApplication.getInstance();
                 final String installer = Version.getPackageInstaller(app);
                 final Parameters installerParameters = StringUtils.isNotBlank(installer) ? new Parameters("installer", installer) : null;
-                Network.requestJSON("https://cgeo-status.herokuapp.com/api/status.json",
+                Network.requestJSON("https://status.cgeo.org/api/status.json",
                         Parameters.merge(new Parameters("version_code", String.valueOf(Version.getVersionCode(app)),
                                 "version_name", Version.getVersionName(app),
                                 "locale", Locale.getDefault().toString()), installerParameters))
