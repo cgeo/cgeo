@@ -314,8 +314,8 @@
   <string name="caches_manage">Kezelés</string>
   <string name="caches_remove_all">Összes eltávolítása</string>
   <plurals name="caches_remove_all_confirm">
-    <item quantity="one">El akarod távolítani ezt a ládát a jelenlegi listáról?</item>
-    <item quantity="other">El akarod távolítani az összes (%d) ládát a jelenlegi listáról?</item>
+    <item quantity="one">El akarod távolítani ezt a ládát a listáról?</item>
+    <item quantity="other">El akarod távolítani az összes (%d) ládát a listáról?</item>
   </plurals>
   <string name="caches_remove_selected">Kijelöltek eltávolítása</string>
   <plurals name="caches_remove_selected_confirm">
@@ -361,8 +361,8 @@
   <string name="caches_filter_missing_gcvote">Nem értékelt ládák</string>
   <!-- caches lists -->
   <string name="list_menu_create">Új lista létrehozása</string>
-  <string name="list_menu_drop">Jelenlegi lista eltávolítása</string>
-  <string name="list_menu_rename">Jelenlegi lista átnevezése</string>
+  <string name="list_menu_drop">Lista eltávolítása</string>
+  <string name="list_menu_rename">Lista átnevezése</string>
   <string name="list_menu_import">Importálás</string>
   <string name="list_title">Válassz listát</string>
   <string name="lists_title">Lista választása</string>
@@ -374,11 +374,11 @@
   <string name="list_dialog_create_ok">Az új lista létrejött</string>
   <string name="list_dialog_create_err">A c:geo-nak nem sikerült az új lista létrehozása</string>
   <string name="list_dialog_remove_title">Lista eltávolítása</string>
-  <string name="list_dialog_remove_description">Szeretnéd eltávolítani a jelenlegi listát? A listáról minden láda a Mentettek közé kerül.</string>
-  <string name="list_dialog_remove_nowempty">A lista üres. El akarod távolítani a jelenlegi listát?</string>
+  <string name="list_dialog_remove_description">Szeretnéd eltávolítani a listát? A listáról minden láda a Mentettek közé kerül.</string>
+  <string name="list_dialog_remove_nowempty">A lista üres. El akarod távolítani a listát?</string>
   <string name="list_dialog_remove">Eltávolítás</string>
   <string name="list_dialog_remove_ok">A lista el lett távolítva</string>
-  <string name="list_dialog_remove_err">A c:geo-nak nem sikerült a jelenlegi lista eltávolítása</string>
+  <string name="list_dialog_remove_err">A c:geo-nak nem sikerült a lista eltávolítása</string>
   <string name="list_dialog_rename_title">Lista átnevezése</string>
   <string name="list_dialog_rename">Átnevezés</string>
   <string name="list_not_available">A lista már nem elérhető, váltás az alapértelmezett listára</string>

@@ -969,8 +969,8 @@
   <string name="map_modes">Paramètres carte</string>
   <string name="map_trail_show">Afficher le parcours</string>
   <string name="map_circles_show">Afficher les cercles</string>
-  <string name="map_mycaches_hide">Masquer les caches placées/trouvées</string>
-  <string name="map_disabled_hide">Cacher les caches désactivées</string>
+  <string name="map_mycaches_hide">Masquer caches placées/trouvées</string>
+  <string name="map_disabled_hide">Masquer caches désactivées</string>
   <string name="map_theme_builtin">Défault</string>
   <string name="map_theme_select">Sélectionner le thème</string>
   <string name="map_live_enable">Activer Temps réel</string>
@@ -994,7 +994,7 @@
   <!-- search -->
   <string name="search_bar_hint">Recherche globale</string>
   <string name="search_bar_desc">Caches (géocode, mot-clé), Objets voyageurs (code TB)</string>
-  <string name="search_coordinates">Coordonnées de départ</string>
+  <string name="search_coordinates">Coordonnées</string>
   <string name="search_coordinates_button">Rechercher par Coordonnées</string>
   <string name="search_address">Adresse</string>
   <string name="search_address_button">Rechercher par Adresse</string>
