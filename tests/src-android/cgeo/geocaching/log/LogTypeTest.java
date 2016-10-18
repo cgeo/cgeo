@@ -1,10 +1,8 @@
 package cgeo.geocaching.log;
 
-import junit.framework.TestCase;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
-import cgeo.geocaching.log.LogType;
+import junit.framework.TestCase;
 
 public class LogTypeTest extends TestCase {
 

@@ -23,9 +23,9 @@ import cgeo.geocaching.models.Image;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.twitter.Twitter;
+import cgeo.geocaching.ui.AbstractViewHolder;
 import cgeo.geocaching.ui.dialog.DateDialog;
 import cgeo.geocaching.ui.dialog.Dialogs;
-import cgeo.geocaching.ui.recyclerview.AbstractRecyclerViewHolder;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.AsyncTaskWithProgressText;
 import cgeo.geocaching.utils.CalendarUtils;
@@ -214,7 +214,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         }
     }
 
-    protected static class ViewHolder extends AbstractRecyclerViewHolder {
+    protected static class ViewHolder extends AbstractViewHolder {
         @BindView(R.id.trackable_image_brand) protected ImageView brandView;
         @BindView(R.id.trackcode) protected TextView codeView;
         @BindView(R.id.name) protected TextView nameView;
