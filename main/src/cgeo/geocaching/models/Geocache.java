@@ -1,7 +1,6 @@
 package cgeo.geocaching.models;
 
 import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.LogCacheActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.activity.ActivityMixin;
@@ -23,10 +22,14 @@ import cgeo.geocaching.enumerations.CoordinatesType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.RemoveFlag;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
-import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.log.LogCacheActivity;
+import cgeo.geocaching.log.LogEntry;
+import cgeo.geocaching.log.LogTemplateProvider;
+import cgeo.geocaching.log.LogType;
+import cgeo.geocaching.log.LogTemplateProvider.LogContext;
 import cgeo.geocaching.maps.mapsforge.v6.caches.GeoitemRef;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.settings.Settings;
@@ -38,8 +41,6 @@ import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.LazyInitializedList;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.LogTemplateProvider;
-import cgeo.geocaching.utils.LogTemplateProvider.LogContext;
 import cgeo.geocaching.utils.MatcherWrapper;
 
 import android.app.Activity;

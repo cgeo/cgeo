@@ -1,8 +1,8 @@
 package cgeo.geocaching.connector;
 
-import cgeo.geocaching.LogCacheActivity;
-import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.log.LogCacheActivity;
+import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Geocache;
 
 import android.support.annotation.NonNull;

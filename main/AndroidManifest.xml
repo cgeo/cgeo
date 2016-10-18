@@ -334,11 +334,11 @@
             android:label="@string/map_static_title" >
         </activity>
         <activity
-            android:name=".LogCacheActivity"
+            android:name="cgeo.geocaching.log.LogCacheActivity"
             android:label="@string/log_new_log" >
         </activity>
         <activity
-            android:name=".LogTrackableActivity"
+            android:name="cgeo.geocaching.log.LogTrackableActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/trackable_touch" >
 

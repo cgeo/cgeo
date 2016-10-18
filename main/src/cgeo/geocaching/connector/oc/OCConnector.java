@@ -4,7 +4,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.connector.AbstractConnector;
 import cgeo.geocaching.connector.capability.Smiley;
 import cgeo.geocaching.connector.capability.SmileyCapability;
-import cgeo.geocaching.enumerations.LogType;
+import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Geocache;
 
 import android.support.annotation.NonNull;

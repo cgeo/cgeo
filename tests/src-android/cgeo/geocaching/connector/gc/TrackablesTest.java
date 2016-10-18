@@ -2,11 +2,11 @@ package cgeo.geocaching.connector.gc;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import cgeo.geocaching.enumerations.LogType;
+import cgeo.geocaching.log.LogEntry;
+import cgeo.geocaching.log.LogType;
+import cgeo.geocaching.log.TrackableLog;
 import cgeo.geocaching.models.Image;
-import cgeo.geocaching.models.LogEntry;
 import cgeo.geocaching.models.Trackable;
-import cgeo.geocaching.models.TrackableLog;
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 import cgeo.geocaching.test.R;
 import cgeo.geocaching.utils.TextUtils;

@@ -1,13 +1,13 @@
-package cgeo.geocaching.utils;
+package cgeo.geocaching.log;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.models.LogEntry;
 import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.utils.Formatter;
 
 import org.apache.commons.lang3.StringUtils;
 import android.support.annotation.NonNull;

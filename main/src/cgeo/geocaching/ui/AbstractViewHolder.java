@@ -13,6 +13,7 @@ import butterknife.ButterKnife;
  * TODO: Use {@link AbstractRecyclerViewHolder} and the recycler view instead.
  *
  */
+@Deprecated
 public abstract class AbstractViewHolder {
 
     protected AbstractViewHolder(final View view) {

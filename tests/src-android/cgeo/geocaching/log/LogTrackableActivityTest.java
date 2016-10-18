@@ -1,4 +1,4 @@
-package cgeo.geocaching.activity.logtrackable;
+package cgeo.geocaching.log;
 
 import static com.google.android.apps.common.testing.ui.espresso.Espresso.onView;
 import static com.google.android.apps.common.testing.ui.espresso.assertion.ViewAssertions.doesNotExist;

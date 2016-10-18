@@ -1,7 +1,7 @@
 package cgeo.geocaching.export;
 
+import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.models.LogEntry;
 import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.SynchronizedDateFormat;

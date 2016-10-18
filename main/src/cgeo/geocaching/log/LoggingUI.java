@@ -1,11 +1,11 @@
-package cgeo.geocaching.ui;
+package cgeo.geocaching.log;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.models.LogEntry;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.ui.AbstractUIFactory;
+import cgeo.geocaching.ui.CacheListAdapter;
 import cgeo.geocaching.ui.CacheListAdapter.ViewHolder;
 
 import android.app.Activity;

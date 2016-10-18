@@ -1,9 +1,8 @@
-package cgeo.geocaching.ui.logs;
+package cgeo.geocaching.log;
 
 import cgeo.geocaching.ImagesActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractActionBarActivity;
-import cgeo.geocaching.models.LogEntry;
 import cgeo.geocaching.network.SmileyImage;
 import cgeo.geocaching.ui.AbstractCachingListViewPageViewCreator;
 import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;

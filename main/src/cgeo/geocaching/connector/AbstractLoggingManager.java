@@ -1,6 +1,6 @@
 package cgeo.geocaching.connector;
 
-import cgeo.geocaching.models.TrackableLog;
+import cgeo.geocaching.log.TrackableLog;
 
 import android.support.annotation.NonNull;
 

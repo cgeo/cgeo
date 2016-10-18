@@ -1,11 +1,11 @@
 package cgeo.geocaching.connector.trackable;
 
-import cgeo.geocaching.AbstractLoggingActivity;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.models.TrackableLog;
 import cgeo.geocaching.connector.LogResult;
-import cgeo.geocaching.enumerations.LogTypeTrackable;
 import cgeo.geocaching.enumerations.StatusCode;
+import cgeo.geocaching.log.AbstractLoggingActivity;
+import cgeo.geocaching.log.LogTypeTrackable;
+import cgeo.geocaching.log.TrackableLog;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;

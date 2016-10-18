@@ -4,7 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import cgeo.geocaching.connector.ConnectorFactoryTest;
 import cgeo.geocaching.enumerations.CacheType;
-import cgeo.geocaching.enumerations.LogType;
+import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Geocache;
 
 import java.util.List;

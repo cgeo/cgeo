@@ -2,13 +2,13 @@ package cgeo.test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.utils.CryptUtils;
 
-import org.apache.commons.lang3.StringUtils;
-
 import java.util.Date;
+
+import org.apache.commons.lang3.StringUtils;
 
 public abstract class Compare {
 

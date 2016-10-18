@@ -1,9 +1,8 @@
-package cgeo.geocaching.activity.logtrackable;
+package cgeo.geocaching.log;
 
-import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.LogTrackableActivity;
-import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.activity.AbstractEspressoTest;
+import cgeo.geocaching.models.Trackable;
+import cgeo.geocaching.storage.DataStore;
 
 public abstract class AbstractLogTrackableActivityTest extends AbstractEspressoTest<LogTrackableActivity> {
 

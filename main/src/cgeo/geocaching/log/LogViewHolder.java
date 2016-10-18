@@ -1,4 +1,4 @@
-package cgeo.geocaching.ui.logs;
+package cgeo.geocaching.log;
 
 import android.view.View;
 import android.widget.ImageView;

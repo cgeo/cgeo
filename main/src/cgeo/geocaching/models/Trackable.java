@@ -3,7 +3,8 @@ package cgeo.geocaching.models;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.trackable.TrackableBrand;
 import cgeo.geocaching.connector.trackable.TrackableConnector;
-import cgeo.geocaching.enumerations.LogTypeTrackable;
+import cgeo.geocaching.log.LogEntry;
+import cgeo.geocaching.log.LogTypeTrackable;
 import cgeo.geocaching.utils.HtmlUtils;
 import cgeo.geocaching.utils.ImageUtils;
 

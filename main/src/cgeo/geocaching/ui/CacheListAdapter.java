@@ -109,7 +109,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
      * view holder for the cache list adapter
      *
      */
-    protected static class ViewHolder extends AbstractViewHolder {
+    public static class ViewHolder extends AbstractViewHolder {
         @BindView(R.id.checkbox) protected CheckBox checkbox;
         @BindView(R.id.log_status_mark) protected ImageView logStatusMark;
         @BindView(R.id.text) protected TextView text;

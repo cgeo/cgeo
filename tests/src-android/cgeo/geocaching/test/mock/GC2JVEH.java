@@ -5,8 +5,8 @@ import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.connector.gc.GCLogin;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
-import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.log.LogType;
 
 import android.support.annotation.NonNull;
 

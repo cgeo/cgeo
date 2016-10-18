@@ -22,11 +22,11 @@ import org.apache.commons.lang3.StringUtils;
 /**
  * Exports personal notes.
  */
-public class PersonalnoteExport extends AbstractExport {
+public class PersonalNoteExport extends AbstractExport {
 
     private int persNotesCount = 0;
 
-    public PersonalnoteExport() {
+    public PersonalNoteExport() {
         super(R.string.export_persnotes);
     }
 
@@ -57,7 +57,7 @@ public class PersonalnoteExport extends AbstractExport {
                     }
                 }
             } catch (final Exception e) {
-                Log.e("PersonalnoteExport.ExportTask uploading personal notes", e);
+                Log.e("PersonalNoteExport.ExportTask uploading personal notes", e);
                 return false;
             }
             return true;

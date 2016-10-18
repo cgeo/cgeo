@@ -1,5 +1,7 @@
-package cgeo.geocaching;
+package cgeo.geocaching.log;
 
+import cgeo.geocaching.Intents;
+import cgeo.geocaching.R;
 import cgeo.geocaching.activity.Keyboard;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.LogResult;
@@ -9,13 +11,12 @@ import cgeo.geocaching.connector.trackable.TrackableConnector;
 import cgeo.geocaching.connector.trackable.TrackableTrackingCode;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.Loaders;
-import cgeo.geocaching.enumerations.LogTypeTrackable;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.log.LogTemplateProvider.LogContext;
+import cgeo.geocaching.log.LogTemplateProvider.LogTemplate;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.models.LogEntry;
 import cgeo.geocaching.models.Trackable;
-import cgeo.geocaching.models.TrackableLog;
 import cgeo.geocaching.network.AndroidBeam;
 import cgeo.geocaching.search.AutoCompleteAdapter;
 import cgeo.geocaching.settings.Settings;
@@ -32,9 +33,6 @@ import cgeo.geocaching.ui.dialog.TimeDialog.TimeDialogParent;
 import cgeo.geocaching.utils.AsyncTaskWithProgress;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.LogTemplateProvider;
-import cgeo.geocaching.utils.LogTemplateProvider.LogContext;
-import cgeo.geocaching.utils.LogTemplateProvider.LogTemplate;
 
 import android.R.layout;
 import android.R.string;

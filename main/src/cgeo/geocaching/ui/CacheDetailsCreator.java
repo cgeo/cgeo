@@ -2,11 +2,11 @@ package cgeo.geocaching.ui;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.ConnectorFactory;
-import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.location.Units;
+import cgeo.geocaching.log.LogEntry;
+import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.ICoordinates;
-import cgeo.geocaching.models.LogEntry;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.utils.Formatter;

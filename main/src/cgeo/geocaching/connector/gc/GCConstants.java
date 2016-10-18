@@ -1,6 +1,6 @@
 package cgeo.geocaching.connector.gc;
 
-import cgeo.geocaching.enumerations.LogType;
+import cgeo.geocaching.log.LogType;
 
 import android.support.annotation.NonNull;
 

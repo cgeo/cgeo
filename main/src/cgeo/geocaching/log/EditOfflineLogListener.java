@@ -1,4 +1,4 @@
-package cgeo.geocaching.ui.logs;
+package cgeo.geocaching.log;
 
 import cgeo.geocaching.CacheDetailActivity;
 import cgeo.geocaching.models.Geocache;

@@ -1,11 +1,11 @@
-package cgeo.geocaching.models;
+package cgeo.geocaching.log;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import cgeo.CGeoTestCase;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
-import cgeo.geocaching.enumerations.LogType;
+import cgeo.geocaching.models.Image;
 import cgeo.geocaching.settings.Settings;
 
 import java.util.ArrayList;

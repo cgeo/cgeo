@@ -1,4 +1,4 @@
-package cgeo.geocaching.enumerations;
+package cgeo.geocaching.log;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

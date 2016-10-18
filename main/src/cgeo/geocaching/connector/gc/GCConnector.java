@@ -15,7 +15,6 @@ import java.io.File;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import cgeo.geocaching.LogCacheActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.activity.ActivityMixin;
@@ -38,10 +37,11 @@ import cgeo.geocaching.connector.capability.PersonalNoteCapability;
 import cgeo.geocaching.connector.capability.Smiley;
 import cgeo.geocaching.connector.capability.SmileyCapability;
 import cgeo.geocaching.connector.capability.WatchListCapability;
-import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
+import cgeo.geocaching.log.LogCacheActivity;
+import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
@@ -484,7 +484,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
             // no need to upload (possibly large file) if we're not logged in
             final StatusCode loginState = GCLogin.getInstance().login();
             if (loginState != StatusCode.NO_ERROR) {
-                Log.e("FieldnoteExport.ExportTask upload: Login failed");
+                Log.e("FieldNoteExport.ExportTask upload: Login failed");
                 return false;
             }
         }
@@ -493,7 +493,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
         final String page = GCLogin.getInstance().getRequestLogged(uri, null);
 
         if (StringUtils.isBlank(page)) {
-            Log.e("FieldnoteExport.ExportTask get page: No data from server");
+            Log.e("FieldNoteExport.ExportTask get page: No data from server");
             return false;
         }
 
@@ -509,7 +509,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
         Network.getResponseData(Network.postRequest(uri, uploadParams, "ctl00$ContentBody$FieldNoteLoader", "text/plain", exportFile));
 
         if (StringUtils.isBlank(page)) {
-            Log.e("FieldnoteExport.ExportTask upload: No data from server");
+            Log.e("FieldNoteExport.ExportTask upload: No data from server");
             return false;
         }
         return true;

@@ -6,8 +6,8 @@ import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.capability.FieldNotesCapability;
+import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.models.LogEntry;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.AsyncTaskWithProgress;
@@ -42,12 +42,12 @@ import butterknife.ButterKnife;
  * Exports offline logs in the Groundspeak Field Note format.
  *
  */
-public class FieldnoteExport extends AbstractExport {
+public class FieldNoteExport extends AbstractExport {
     private static final File exportLocation = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/field-notes");
     private static int fieldNotesCount = 0;
     private final String fileName;
 
-    public FieldnoteExport() {
+    public FieldNoteExport() {
         super(R.string.export_fieldnotes);
         final SimpleDateFormat fileNameDateFormat = new SimpleDateFormat("yyyyMMddHHmmss", Locale.US);
         fileName = fileNameDateFormat.format(new Date()) + ".txt";
@@ -156,7 +156,7 @@ public class FieldnoteExport extends AbstractExport {
                     publishProgress(++i);
                 }
             } catch (final Exception e) {
-                Log.e("FieldnoteExport.ExportTask generation", e);
+                Log.e("FieldNoteExport.ExportTask generation", e);
                 return false;
             }
             fieldNotesCount += fieldNotes.size();

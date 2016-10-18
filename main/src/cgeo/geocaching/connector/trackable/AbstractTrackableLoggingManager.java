@@ -2,7 +2,7 @@ package cgeo.geocaching.connector.trackable;
 
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.connector.ImageResult;
-import cgeo.geocaching.enumerations.LogTypeTrackable;
+import cgeo.geocaching.log.LogTypeTrackable;
 
 import android.content.Context;
 import android.support.v4.content.AsyncTaskLoader;

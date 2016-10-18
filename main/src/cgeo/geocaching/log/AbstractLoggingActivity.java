@@ -1,17 +1,6 @@
-package cgeo.geocaching;
+package cgeo.geocaching.log;
 
-import android.support.annotation.NonNull;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.SubMenu;
-import android.widget.EditText;
-
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.Collections;
-import java.util.List;
-
-import butterknife.ButterKnife;
+import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.Keyboard;
@@ -20,11 +9,22 @@ import cgeo.geocaching.connector.capability.Smiley;
 import cgeo.geocaching.connector.capability.SmileyCapability;
 import cgeo.geocaching.connector.gc.GCSmileysProvider;
 import cgeo.geocaching.connector.trackable.TravelBugConnector;
+import cgeo.geocaching.log.LogTemplateProvider.LogContext;
+import cgeo.geocaching.log.LogTemplateProvider.LogTemplate;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Trackable;
-import cgeo.geocaching.utils.LogTemplateProvider;
-import cgeo.geocaching.utils.LogTemplateProvider.LogContext;
-import cgeo.geocaching.utils.LogTemplateProvider.LogTemplate;
+
+import android.support.annotation.NonNull;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.SubMenu;
+import android.widget.EditText;
+
+import java.util.Collections;
+import java.util.List;
+
+import butterknife.ButterKnife;
+import org.apache.commons.lang3.StringUtils;
 
 public abstract class AbstractLoggingActivity extends AbstractActionBarActivity {
 

@@ -22,9 +22,9 @@ import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.StatusCode;
-import cgeo.geocaching.export.FieldnoteExport;
+import cgeo.geocaching.export.FieldNoteExport;
 import cgeo.geocaching.export.GpxExport;
-import cgeo.geocaching.export.PersonalnoteExport;
+import cgeo.geocaching.export.PersonalNoteExport;
 import cgeo.geocaching.files.GPXImporter;
 import cgeo.geocaching.files.GpxFileListActivity;
 import cgeo.geocaching.filter.FilterActivity;
@@ -44,6 +44,7 @@ import cgeo.geocaching.loaders.OfflineGeocacheListLoader;
 import cgeo.geocaching.loaders.OwnerGeocacheListLoader;
 import cgeo.geocaching.loaders.PocketGeocacheListLoader;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.log.LoggingUI;
 import cgeo.geocaching.maps.DefaultMap;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.PocketQuery;
@@ -60,7 +61,6 @@ import cgeo.geocaching.sorting.CacheComparator;
 import cgeo.geocaching.sorting.SortActionProvider;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.CacheListAdapter;
-import cgeo.geocaching.ui.LoggingUI;
 import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AndroidRxUtils;
@@ -805,10 +805,10 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 new GpxExport().export(adapter.getCheckedOrAllCaches(), this);
                 return true;
             case R.id.menu_export_fieldnotes:
-                new FieldnoteExport().export(adapter.getCheckedOrAllCaches(), this);
+                new FieldNoteExport().export(adapter.getCheckedOrAllCaches(), this);
                 return true;
             case R.id.menu_export_persnotes:
-                new PersonalnoteExport().export(adapter.getCheckedOrAllCaches(), this);
+                new PersonalNoteExport().export(adapter.getCheckedOrAllCaches(), this);
                 return true;
             case R.id.menu_remove_from_history:
                 removeFromHistoryCheck();

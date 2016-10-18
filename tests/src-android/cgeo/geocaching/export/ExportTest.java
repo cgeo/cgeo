@@ -5,10 +5,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 import cgeo.CGeoTestCase;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.enumerations.LoadFlags;
-import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.log.LogEntry;
+import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.models.LogEntry;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.FileUtils;
 

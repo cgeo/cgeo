@@ -1,7 +1,7 @@
 package cgeo.geocaching.connector.trackable;
 
-import cgeo.geocaching.enumerations.LogType;
-import cgeo.geocaching.models.LogEntry;
+import cgeo.geocaching.log.LogEntry;
+import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.SynchronizedDateFormat;

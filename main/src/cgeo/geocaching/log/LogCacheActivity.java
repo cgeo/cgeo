@@ -1,5 +1,9 @@
-package cgeo.geocaching;
+package cgeo.geocaching.log;
 
+import cgeo.geocaching.ImageSelectActivity;
+import cgeo.geocaching.Intents;
+import cgeo.geocaching.R;
+import cgeo.geocaching.TrackableActivity;
 import cgeo.geocaching.activity.ShowcaseViewBuilder;
 import cgeo.geocaching.command.AbstractCommand;
 import cgeo.geocaching.connector.ConnectorFactory;
@@ -9,29 +13,24 @@ import cgeo.geocaching.connector.LogResult;
 import cgeo.geocaching.connector.trackable.TrackableConnector;
 import cgeo.geocaching.connector.trackable.TrackableLoggingManager;
 import cgeo.geocaching.enumerations.LoadFlags;
-import cgeo.geocaching.enumerations.LogType;
-import cgeo.geocaching.enumerations.LogTypeTrackable;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.gcvote.GCVote;
 import cgeo.geocaching.gcvote.GCVoteRatingBarUtil;
 import cgeo.geocaching.gcvote.GCVoteRatingBarUtil.OnRatingChangeListener;
+import cgeo.geocaching.log.LogTemplateProvider.LogContext;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
-import cgeo.geocaching.models.LogEntry;
-import cgeo.geocaching.models.TrackableLog;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.twitter.Twitter;
-import cgeo.geocaching.ui.AbstractViewHolder;
 import cgeo.geocaching.ui.dialog.DateDialog;
 import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.ui.recyclerview.AbstractRecyclerViewHolder;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.AsyncTaskWithProgressText;
 import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.LogTemplateProvider;
-import cgeo.geocaching.utils.LogTemplateProvider.LogContext;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.ViewUtils;
 
@@ -39,6 +38,7 @@ import android.R.string;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
@@ -165,7 +165,56 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         }
     }
 
-    protected static class ViewHolder extends AbstractViewHolder {
+    private final class TrackableLogAdapter extends ArrayAdapter<TrackableLog> {
+        private TrackableLogAdapter(final Context context, final int resource, final TrackableLog[] objects) {
+            super(context, resource, objects);
+        }
+
+        @Override
+        public View getView(final int position, final View convertView, final ViewGroup parent) {
+            View rowView = convertView;
+            if (rowView == null) {
+                rowView = getLayoutInflater().inflate(R.layout.logcache_trackable_item, parent, false);
+            }
+            ViewHolder holder = (ViewHolder) rowView.getTag();
+            if (holder == null) {
+                holder = new ViewHolder(rowView);
+            }
+
+            final TrackableLog trackable = getItem(position);
+            fillViewHolder(holder, trackable);
+            return rowView;
+        }
+
+        private void fillViewHolder(final ViewHolder holder, final TrackableLog trackable) {
+            holder.brandView.setImageResource(trackable.brand.getIconResource());
+            holder.codeView.setText(trackable.trackCode);
+            holder.nameView.setText(trackable.name);
+            holder.actionButton.setText(trackable.action.getLabel() + " ▼");
+            holder.actionButton.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(final View view) {
+                    selectTrackableAction(trackable);
+                }
+            });
+
+            holder.infoView.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(final View view) {
+                    final Intent trackablesIntent = new Intent(LogCacheActivity.this, TrackableActivity.class);
+                    final String tbCode = StringUtils.isNotEmpty(trackable.geocode) ? trackable.geocode : trackable.trackCode;
+                    trackablesIntent.putExtra(Intents.EXTRA_GEOCODE, tbCode);
+                    trackablesIntent.putExtra(Intents.EXTRA_BRAND, trackable.brand.getId());
+                    trackablesIntent.putExtra(Intents.EXTRA_TRACKING_CODE, trackable.trackCode);
+                    startActivity(trackablesIntent);
+                }
+            });
+        }
+    }
+
+    protected static class ViewHolder extends AbstractRecyclerViewHolder {
         @BindView(R.id.trackable_image_brand) protected ImageView brandView;
         @BindView(R.id.trackcode) protected TextView codeView;
         @BindView(R.id.name) protected TextView nameView;
@@ -180,50 +229,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     private void updateTrackablesList() {
         final TrackableLog[] trackablesArray = getSortedTrackables().toArray(new TrackableLog[trackables.size()]);
         final ListView inventoryList = ButterKnife.findById(this, R.id.inventory);
-        inventoryList.setAdapter(new ArrayAdapter<TrackableLog>(this, R.layout.logcache_trackable_item, trackablesArray) {
-            @Override
-            public View getView(final int position, final View convertView, final ViewGroup parent) {
-                View rowView = convertView;
-                if (rowView == null) {
-                    rowView = getLayoutInflater().inflate(R.layout.logcache_trackable_item, parent, false);
-                }
-                ViewHolder holder = (ViewHolder) rowView.getTag();
-                if (holder == null) {
-                    holder = new ViewHolder(rowView);
-                }
-
-                final TrackableLog trackable = getItem(position);
-                fillViewHolder(holder, trackable);
-                return rowView;
-            }
-
-            private void fillViewHolder(final ViewHolder holder, final TrackableLog trackable) {
-                holder.brandView.setImageResource(trackable.brand.getIconResource());
-                holder.codeView.setText(trackable.trackCode);
-                holder.nameView.setText(trackable.name);
-                holder.actionButton.setText(trackable.action.getLabel() + " ▼");
-                holder.actionButton.setOnClickListener(new View.OnClickListener() {
-
-                    @Override
-                    public void onClick(final View view) {
-                        selectTrackableAction(trackable);
-                    }
-                });
-
-                holder.infoView.setOnClickListener(new View.OnClickListener() {
-
-                    @Override
-                    public void onClick(final View view) {
-                        final Intent trackablesIntent = new Intent(LogCacheActivity.this, TrackableActivity.class);
-                        final String tbCode = StringUtils.isNotEmpty(trackable.geocode) ? trackable.geocode : trackable.trackCode;
-                        trackablesIntent.putExtra(Intents.EXTRA_GEOCODE, tbCode);
-                        trackablesIntent.putExtra(Intents.EXTRA_BRAND, trackable.brand.getId());
-                        trackablesIntent.putExtra(Intents.EXTRA_TRACKING_CODE, trackable.trackCode);
-                        startActivity(trackablesIntent);
-                    }
-                });
-            }
-        });
+        inventoryList.setAdapter(new TrackableLogAdapter(this, R.layout.logcache_trackable_item, trackablesArray));
         ViewUtils.setListViewHeightBasedOnItems(inventoryList);
 
         ButterKnife.findById(this, R.id.inventory_box).setVisibility(trackables.isEmpty() ? View.GONE : View.VISIBLE);

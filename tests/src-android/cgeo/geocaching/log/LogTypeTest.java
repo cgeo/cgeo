@@ -1,8 +1,10 @@
-package cgeo.geocaching.enumerations;
+package cgeo.geocaching.log;
 
 import junit.framework.TestCase;
 
 import static org.assertj.core.api.Assertions.assertThat;
+
+import cgeo.geocaching.log.LogType;
 
 public class LogTypeTest extends TestCase {
 

@@ -4,9 +4,9 @@ import butterknife.ButterKnife;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.log.LogTemplateProvider;
+import cgeo.geocaching.log.LogTemplateProvider.LogTemplate;
 import cgeo.geocaching.ui.dialog.Dialogs;
-import cgeo.geocaching.utils.LogTemplateProvider;
-import cgeo.geocaching.utils.LogTemplateProvider.LogTemplate;
 
 import org.apache.commons.lang3.StringUtils;
 

@@ -3,7 +3,8 @@ package cgeo.geocaching.models;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import cgeo.geocaching.connector.trackable.TrackableBrand;
-import cgeo.geocaching.enumerations.LogType;
+import cgeo.geocaching.log.LogEntry;
+import cgeo.geocaching.log.LogType;
 
 import java.util.AbstractList;
 import java.util.ArrayList;

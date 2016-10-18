@@ -1,8 +1,8 @@
 package cgeo.geocaching.filter;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.models.LogEntry;
 import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.TextUtils;
 

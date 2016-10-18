@@ -1,4 +1,4 @@
-package cgeo.geocaching.enumerations;
+package cgeo.geocaching.log;
 
 import org.apache.commons.lang3.StringUtils;
 import android.support.annotation.NonNull;

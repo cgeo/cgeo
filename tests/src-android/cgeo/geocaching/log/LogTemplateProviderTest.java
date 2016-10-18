@@ -1,12 +1,11 @@
-package cgeo.geocaching.utils;
+package cgeo.geocaching.log;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import cgeo.geocaching.log.LogTemplateProvider.LogContext;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.models.LogEntry;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.TestSettings;
-import cgeo.geocaching.utils.LogTemplateProvider.LogContext;
 
 import java.util.Calendar;
 

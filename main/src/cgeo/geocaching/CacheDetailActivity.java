@@ -25,15 +25,17 @@ import cgeo.geocaching.enumerations.LoadFlags.RemoveFlag;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.enumerations.WaypointType;
-import cgeo.geocaching.export.FieldnoteExport;
+import cgeo.geocaching.export.FieldNoteExport;
 import cgeo.geocaching.export.GpxExport;
-import cgeo.geocaching.export.PersonalnoteExport;
+import cgeo.geocaching.export.PersonalNoteExport;
 import cgeo.geocaching.gcvote.GCVote;
 import cgeo.geocaching.gcvote.GCVoteDialog;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.location.Units;
+import cgeo.geocaching.log.CacheLogsViewCreator;
+import cgeo.geocaching.log.LoggingUI;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.models.Waypoint;
@@ -56,13 +58,11 @@ import cgeo.geocaching.ui.EditNoteDialog;
 import cgeo.geocaching.ui.EditNoteDialog.EditNoteDialogListener;
 import cgeo.geocaching.ui.ImagesList;
 import cgeo.geocaching.ui.IndexOutOfBoundsAvoidingTextView;
-import cgeo.geocaching.ui.LoggingUI;
 import cgeo.geocaching.ui.NavigationActionProvider;
 import cgeo.geocaching.ui.OwnerActionsClickListener;
 import cgeo.geocaching.ui.TrackableListAdapter;
 import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.ui.dialog.Dialogs;
-import cgeo.geocaching.ui.logs.CacheLogsViewCreator;
 import cgeo.geocaching.ui.recyclerview.RecyclerViewProvider;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.CancellableHandler;
@@ -634,10 +634,10 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 new GpxExport().export(Collections.singletonList(cache), this);
                 return true;
             case R.id.menu_export_fieldnotes:
-                new FieldnoteExport().export(Collections.singletonList(cache), this);
+                new FieldNoteExport().export(Collections.singletonList(cache), this);
                 return true;
             case R.id.menu_export_persnotes:
-                new PersonalnoteExport().export(Collections.singletonList(cache), this);
+                new PersonalNoteExport().export(Collections.singletonList(cache), this);
                 return true;
             case R.id.menu_edit_fieldnote:
                 ensureSaved();

@@ -176,7 +176,7 @@ public final class FileUtils {
             fileWriter = new OutputStreamWriter(buffer, CharEncoding.UTF_16);
             fileWriter.write(content);
         } catch (final IOException e) {
-            Log.e("FieldnoteExport.ExportTask export", e);
+            Log.e("FieldNoteExport.ExportTask export", e);
             return false;
         } finally {
             IOUtils.closeQuietly(fileWriter);
