@@ -2357,7 +2357,7 @@ public class DataStore {
         }
 
         try {
-            return queryToColl(dbTableCaches,
+            final Set<String> historicCaches = queryToColl(dbTableCaches,
                     new String[]{"geocode"},
                     selection.toString(),
                     selectionArgs,
@@ -2365,6 +2365,17 @@ public class DataStore {
                     null,
                     new HashSet<String>(),
                     GET_STRING_0);
+
+            historicCaches.addAll(queryToColl(dbTableLogsOffline,
+                    new String[]{"geocode"},
+                    null,
+                    null,
+                    "date",
+                    null,
+                    new HashSet<String>(),
+                    GET_STRING_0));
+
+            return historicCaches;
         } catch (final Exception e) {
             Log.e("DataStore.loadBatchOfHistoricGeocodes", e);
         }
