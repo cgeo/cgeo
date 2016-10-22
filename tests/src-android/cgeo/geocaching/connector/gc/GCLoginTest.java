@@ -9,6 +9,7 @@ import junit.framework.TestCase;
 import org.apache.commons.lang3.StringUtils;
 
 import android.test.suitebuilder.annotation.Suppress;
+import android.text.Html;
 
 public class GCLoginTest extends TestCase {
 
@@ -30,6 +31,11 @@ public class GCLoginTest extends TestCase {
 
     public static void testValidHomeLocation() {
         assertThat(new Geopoint(blockingHomeLocation())).isInstanceOf(Geopoint.class);
+    }
+
+    public static void testNoHtmlInHomeLocation() {
+        final String homeLocation = blockingHomeLocation();
+        assertThat(homeLocation).isEqualTo(Html.fromHtml(homeLocation).toString());
     }
 
     @Suppress // It currently fails on CI
