@@ -29,12 +29,10 @@ Such a procedure is [described in the wiki](https://github.com/cgeo/cgeo/wiki/Ho
 Make sure to use Java 8 for your IDE and build process. Some of the involved tools require it, even though the source code is Java 7 only.
 
 ### Eclipse
-- Install an Eclipse distribution for your OS from http://eclipse.org/downloads/ (you may choose the Java developers distribution).
-- Start Eclipse, choose any directory as workspace. Close the welcome screen, if it appears.
-- After the workbench has started, select File | Import | Install | Install Software Items From File and select a locally downloaded copy of https://github.com/cgeo/cgeo/tree/master/main/project/eclipse%20installation/cgeo%20eclipse%20components.p2f. This way you can easily install all necessary plugins.
-- After forking the project you should import the Eclipse projects in your workspace with File | Import | Projects from Git.
-
-Please be warned, we might remove the support for development in Eclipse, once we switch to a gradle based build.
+- Install the Eclipse installer for your OS from http://eclipse.org/downloads/. Do **not** choose any of the pre-made distributions like "Eclipse for Java developers".
+- Start the installer, switch to advanced mode. On the first page of the wizard choose "Eclipse for Java developers" and use "Next".
+- On the second wizard page use the "Plus" icon, select the github catalog, and add the URI https://github.com/cgeo/cgeo/raw/master/main/project/eclipse%20installation/cgeo.setup. Now select the newly create tree node "cgeo" and use next.
+- On the third wizard page add your github user name and password. Adapt the "root installation folder", everything will be downloaded and copied there. Use Next and Finish to start the download of necessary Eclipse plugins and the cloning of the repository.
 
 ### Android Studio (or IntelliJ IDEA)
 - Install Android Studio from https://developer.android.com/sdk/index.html
