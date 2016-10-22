@@ -2486,11 +2486,6 @@ public class DataStore {
                     Log.d("Database clean: removing " + withoutOfflineLogs.size() + " geocaches");
                     removeCaches(withoutOfflineLogs, LoadFlags.REMOVE_ALL);
 
-                    // This cleanup needs to be kept in place for about one year so that older log images records are
-                    // cleaned. TO BE REMOVED AFTER 2015-03-24.
-                    Log.d("Database clean: removing obsolete log images records");
-                    database.delete(dbTableLogImages, "log_id NOT IN (SELECT _id FROM " + dbTableLogs + ")", null);
-
                     // remove non-existing caches from lists
                     Log.d("Database clean: removing non-existing caches from lists");
                     database.delete(dbTableCachesLists, "geocode NOT IN (SELECT geocode FROM " + dbTableCaches + ")", null);
