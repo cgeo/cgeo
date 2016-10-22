@@ -371,7 +371,7 @@ public class GCLogin extends AbstractLogin {
 
         final String customDate = TextUtils.getMatch(result, GCConstants.PATTERN_CUSTOMDATE, true, null);
         if (customDate != null) {
-            Settings.setGcCustomDate(customDate);
+            Settings.setGcCustomDate(Html.fromHtml(customDate).toString());
         }
     }
 

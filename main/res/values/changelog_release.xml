@@ -4,6 +4,7 @@
   <string name="changelog_release" translatable="false">\n
     <b>Next bugfix release:</b>\n
     · Fix: Correctly parse home location after web site change\n
+    · Fix: Correctly parse some date formats after web site change\n
     \n
     \n
     <b>2016.10.13:</b>\n
