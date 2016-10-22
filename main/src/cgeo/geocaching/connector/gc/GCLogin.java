@@ -17,6 +17,7 @@ import cgeo.geocaching.utils.TextUtils;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.text.Html;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -312,7 +313,7 @@ public class GCLogin extends AbstractLogin {
                 .map(new Func1<String, String>() {
                     @Override
                     public String call(final String page) {
-                        return TextUtils.getMatch(page, GCConstants.PATTERN_HOME_LOCATION, null);
+                        return Html.fromHtml(TextUtils.getMatch(page, GCConstants.PATTERN_HOME_LOCATION, null)).toString();
                     }
                 });
     }
