@@ -5,6 +5,7 @@
     <b>2016.10.23:</b>\n
     · Fix: Correctly get home location after web site change (You may need to restart the c:geo app twice to get the correct home location)\n
     · Fix: Correctly get some date formats after web site change\n
+    · New: Allow uploading modified coordinates for all cache types\n
     \n
     \n
     <b>2016.10.13:</b>\n
