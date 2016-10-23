@@ -81,9 +81,7 @@
         <RadioGroup
             android:id="@+id/modify_cache_coordinates_group"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            tools:visibility="visible">
+            android:layout_height="wrap_content">
 
             <RadioButton
                 android:id="@+id/modify_cache_coordinates_nothing"

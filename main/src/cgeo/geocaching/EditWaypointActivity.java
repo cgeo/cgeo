@@ -4,7 +4,6 @@ import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
-import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.WaypointType;
@@ -143,7 +142,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
 
                         @Override
                         protected void onPostExecute(final Geocache cache) {
-                            setCoordsModificationVisibility(ConnectorFactory.getConnector(geocode), cache);
+                            setCoordsModificationVisibility(ConnectorFactory.getConnector(geocode));
                         }
                     }.execute();
                 }
@@ -193,7 +192,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
 
         if (geocode != null) {
             cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
-            setCoordsModificationVisibility(ConnectorFactory.getConnector(geocode), cache);
+            setCoordsModificationVisibility(ConnectorFactory.getConnector(geocode));
         }
         if (waypointId > 0) { // existing waypoint
             waitDialog = ProgressDialog.show(this, null, res.getString(R.string.waypoint_loading), true);
@@ -214,18 +213,8 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         disableSuggestions(distanceView);
     }
 
-    private void setCoordsModificationVisibility(final IConnector con, final Geocache cache) {
-        final CacheType type = cache != null ? cache.getType() : null;
-        if (type == CacheType.MYSTERY || type == CacheType.MULTI) {
-            coordinatesGroup.setVisibility(View.VISIBLE);
-            modifyBoth.setVisibility(con.supportsOwnCoordinates() ? View.VISIBLE : View.GONE);
-        } else if (type == CacheType.LETTERBOX || type == CacheType.WHERIGO) {
-            coordinatesGroup.setVisibility(View.VISIBLE);
-            modifyBoth.setVisibility(View.GONE);
-        } else {
-            coordinatesGroup.setVisibility(View.GONE);
-            modifyBoth.setVisibility(View.GONE);
-        }
+    private void setCoordsModificationVisibility(final IConnector con) {
+        modifyBoth.setVisibility(con.supportsOwnCoordinates() ? View.VISIBLE : View.GONE);
     }
 
     @Override
