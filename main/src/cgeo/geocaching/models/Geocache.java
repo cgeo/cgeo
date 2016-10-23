@@ -1638,24 +1638,21 @@ public class Geocache implements IWaypoint {
 
     public static void storeCache(final Geocache origCache, final String geocode, final Set<Integer> lists, final boolean forceRedownload, final CancellableHandler handler) {
         try {
-            Geocache cache = null;
+            final Geocache cache;
             // get cache details, they may not yet be complete
             if (origCache != null) {
-                SearchResult search = null;
                 // only reload the cache if it was already stored or doesn't have full details (by checking the description)
                 if (origCache.isOffline() || StringUtils.isBlank(origCache.getDescription())) {
-                    search = searchByGeocode(origCache.getGeocode(), null, false, handler);
-                }
-                if (search != null) {
-                    cache = search.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
+                    final SearchResult search = searchByGeocode(origCache.getGeocode(), null, false, handler);
+                    cache = search != null ? search.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB) : origCache;
                 } else {
                     cache = origCache;
                 }
             } else if (StringUtils.isNotBlank(geocode)) {
                 final SearchResult search = searchByGeocode(geocode, null, forceRedownload, handler);
-                if (search != null) {
-                    cache = search.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
-                }
+                cache = search != null ? search.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB) : null;
+            } else {
+                cache = null;
             }
 
             if (cache == null) {
