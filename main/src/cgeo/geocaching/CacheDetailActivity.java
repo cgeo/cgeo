@@ -1504,6 +1504,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 } else {
                     hintView.setText(CryptUtils.rot13(cache.getHint()));
                 }
+                hintView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
                 hintView.setVisibility(View.VISIBLE);
                 hintView.setClickable(true);
                 hintView.setOnClickListener(new DecryptTextClickListener(hintView));
