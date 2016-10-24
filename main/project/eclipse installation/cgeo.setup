@@ -220,6 +220,13 @@
       name="Eclipse plugins">
     <setupTask
         xsi:type="setup.p2:P2Task"
+        label="Eclipse Release Repository"
+        licenseConfirmationDisabled="true">
+      <repository
+          url="http://download.eclipse.org/releases/neon/"/>
+    </setupTask>
+    <setupTask
+        xsi:type="setup.p2:P2Task"
         label="Android Development Tools"
         licenseConfirmationDisabled="true">
       <requirement
@@ -249,7 +256,7 @@
       <requirement
           name="org.eclipse.buildship.feature.group"/>
       <repository
-          url="http://download.eclipse.org/buildship/updates/e45/releases"/>
+          url="http://download.eclipse.org/buildship/updates/e46/releases"/>
       <description></description>
     </setupTask>
     <setupTask
@@ -287,8 +294,6 @@
         licenseConfirmationDisabled="true">
       <requirement
           name="org.eclipse.jdt.feature.group"/>
-      <repository
-          url="http://download.eclipse.org/releases/neon/"/>
       <description></description>
     </setupTask>
     <setupTask
@@ -297,8 +302,6 @@
         licenseConfirmationDisabled="true">
       <requirement
           name="org.eclipse.wst.jsdt.feature.feature.group"/>
-      <repository
-          url="http://download.eclipse.org/releases/neon/"/>
       <description></description>
     </setupTask>
     <setupTask
@@ -316,8 +319,6 @@
         licenseConfirmationDisabled="true">
       <requirement
           name="org.eclipse.epp.mpc.feature.group"/>
-      <repository
-          url="http://download.eclipse.org/releases/neon/"/>
       <description>Eclipse market place for manual installation of additional plugins</description>
     </setupTask>
     <setupTask
