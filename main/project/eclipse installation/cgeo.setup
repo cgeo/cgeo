@@ -289,8 +289,6 @@
           name="org.eclipse.jdt.feature.group"/>
       <repository
           url="http://download.eclipse.org/releases/neon/"/>
-      <repository
-          url="http://download.eclipse.org/eclipse/updates/4.7milestones/"/>
       <description></description>
     </setupTask>
     <setupTask
