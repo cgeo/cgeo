@@ -45,6 +45,12 @@
           value="UTF-8">
         <description>Encode all files as UTF-8</description>
       </setupTask>
+      <setupTask
+          xsi:type="setup:PreferenceTask"
+          key="/instance/org.eclipse.core.resources/refresh.enabled"
+          value="true">
+        <description>Automatically refresh workspace</description>
+      </setupTask>
     </setupTask>
     <setupTask
         xsi:type="setup:CompoundTask"
