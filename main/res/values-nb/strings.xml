@@ -149,7 +149,7 @@
   <string name="err_unknown">Ukjent feil</string>
   <string name="err_unknown_address">c:geo klarte ikke finne et sted ut fra denne adressen</string>
   <string name="err_comm">Ukjent tilkoblingsfeil</string>
-  <string name="err_missing_auth">Brukernavn eller passord er ikke oppgitt</string>
+  <string name="err_missing_auth">Brukernavn og/eller passord er ikke oppgitt</string>
   <string name="err_wrong">Feil brukernavn og/eller passord</string>
   <string name="err_maintenance">Geocaching.com er nede for vedlikehold. c:geo arbeider offline med lagrede cacher.</string>
   <string name="err_license">Brukeren har ikke akseptert Geocaching.com sin lisens. c:geo kan ikke laste cachens koordinater.</string>
@@ -354,6 +354,7 @@
   <string name="caches_clear_offlinelogs">Fjern offline-logger</string>
   <string name="caches_clear_offlinelogs_message">Vil du fjerne offline-loggene?</string>
   <string name="caches_clear_offlinelogs_progress">Fjerner offline-logger</string>
+  <string name="caches_make_list_unique">Gjør listen unik</string>
   <!-- caches lists -->
   <string name="list_menu_create">Opprett ny liste</string>
   <string name="list_menu_drop">Fjern liste</string>
@@ -472,6 +473,7 @@
   <string name="init_login_popup_working">Logger inn på Geocaching.com…</string>
   <string name="init_login_popup_ok">Innlogging fullført</string>
   <string name="init_login_popup_failed">Innlogging mislyktes.</string>
+  <string name="init_login_popup_failed_reason">Innlogging mislyktes: %s</string>
   <string name="init_login_popup_not_authorized">Ikke godkjent</string>
   <string name="init_login_popup_invalid_timestamp">Lokal tid er ugyldig. Still klokken på enheten</string>
   <string name="init_login_popup_invalid_token">Godkjenning ugyldig, prøv å godkjenn på nytt</string>
@@ -555,6 +557,7 @@
   <string name="init_maptrail">Vis spor</string>
   <string name="init_summary_maptrail">Vis spor på kart</string>
   <string name="init_share_after_export">Vis meny for å dele etter eksport av GPX</string>
+  <string name="init_include_found_status">Inkluder \"Funnet\"-status</string>
   <string name="init_trackautovisit">Besøkt av reisevenner</string>
   <string name="init_summary_trackautovisit">Sett sporbare automatisk til \"Besøkt\" ved logging av en cache</string>
   <string name="init_sigautoinsert">Sett inn automatisk</string>
@@ -693,6 +696,7 @@
   <string name="cache_offline_refresh">Oppdater</string>
   <string name="cache_offline_drop">Fjern</string>
   <string name="cache_offline_store">Lagre</string>
+  <string name="cache_offline_manage">Administrer</string>
   <string name="cache_offline_store_in_list">Lagre i liste</string>
   <string name="cache_offline_stored">Lagret på enheten for</string>
   <string name="cache_offline_not_ready">Kan ikke brukes\noffline (ikke lagret)</string>
@@ -780,6 +784,7 @@
   <string name="cache_dialog_favorite_remove_message">Fjerner cachen fra dine favoritter…</string>
   <string name="cache_menu_navigate">Navigér</string>
   <string name="cache_menu_navigation_drive">Navigasjon (kjøring)</string>
+  <string name="cache_menu_navigation_drive_select_target">Cache eller parkeringsplass?</string>
   <string name="cache_menu_navigation_walk">Navigasjon (gående)</string>
   <string name="cache_menu_navigation_transit">Navigasjon (Transit)</string>
   <string name="cache_menu_navigation_bike">Navigasjon (sykkel)</string>
@@ -873,7 +878,9 @@
   <string name="simple_dir_chooser_invalid_path">Ugyldig bane</string>
   <!-- gpx -->
   <string name="gpx_import_loading_caches">Laster cacher fra .*.GPX-fil</string>
+  <string name="gpx_import_loading_caches_with_filename">Laster cacher fra %1$s</string>
   <string name="gpx_import_loading_waypoints">Laster veipunktfil</string>
+  <string name="gpx_import_loading_waypoints_with_filename">Laster veipunkter fra %1$s</string>
   <string name="gpx_import_store_static_maps">Lagrer statisk kart</string>
   <string name="gpx_import_caches_imported">Cacher importert</string>
   <string name="gpx_import_caches_imported_with_filename">%1$d cacher importert fra %2$s</string>
@@ -971,6 +978,7 @@
   <string name="map_strategy_auto">Hastighetsavhengig</string>
   <string name="map_strategy_detailed">Detaljert</string>
   <string name="live_map_notification">Koordinatene på live-kartet er ikke alltid nøyaktige. En cache med potensielt unøyaktige koordinater blir markert med en oransje sirkel.\nNår du viser detaljene på en cache eller lagrer den vil nøyaktige koordinater bli lastet ned.\n\nMer infomasjon finner du ved å velge \"Om c:geo\" på åpningsbildet i appen.</string>
+  <string name="map_routing">Rute</string>
   <string name="map_routing_walk">Gå</string>
   <string name="map_routing_bike">Sykkel</string>
   <string name="map_routing_car">Bil</string>
@@ -1054,6 +1062,7 @@
   <string name="navigation_direct_navigation">Direkte navigering</string>
   <string name="navigation_target">Mål</string>
   <string name="err_nav_no_coordinates">Kan ikke starte navigering uten koordinater</string>
+  <string name="osmand_marker_cgeo">Markør fra c:geo</string>
   <!-- license -->
   <string name="license">Lisens</string>
   <string name="license_show">Vis lisens</string>
@@ -1070,6 +1079,7 @@
   <string name="helper_sendtocgeo_description">Send til c:geo (send2c:geo) er en nettleserutvidelse <strong>for din pc</strong>. På geocaching.com kan du sende cacher til din smarttelefon ved hjelp av en egen knapp i nettleseren.</string>
   <string name="helper_locus_title">Locus</string>
   <string name="helper_locus_description">App for utendørs navigasjon til din mobil eller tablet. I appen kan du se topo-kart offline, spore ruten din, lete etter turbokser, bruke en stemmeguide og mye annet.</string>
+  <string name="helper_gpsstatus_title">GPS-status &amp; Verktøykasse</string>
   <string name="helper_gpsstatus_description">Du kan bruke radaren i denne appen sammen med c:geo. Den gir mye GPS-relatert informasjon.</string>
   <string name="helper_bluetoothgps_title">Blåtann-GPS</string>
   <string name="helper_bluetoothgps_description">Lar deg bruke ekstern GPS-mottaker for å få mer nøyaktig posisjon og kan spare batteri på enheten.</string>
@@ -1083,6 +1093,7 @@
   <string name="helper_wear_description">c:geo Wear er et tillegg til c:geo som lar deg navigere til geocacher ved hjelp av Android Wear smartklokke.</string>
   <string name="helper_where_you_go_title">WhereYouGo</string>
   <string name="helper_where_you_go_description">Med WhereYouGo kan du lete etter Wherigo-geocacher. C:geo kan automatisk laste ned Wherigo-kassetter for deg.</string>
+  <string name="helper_brouter_title">BRouter frakoblet navigasjon</string>
   <!-- add-ons -->
   <string name="addon_missing_title">Manglende tillegg</string>
   <string name="addon_download_prompt">Last ned nå fra Google Play.</string>
@@ -1103,6 +1114,7 @@
   <string name="export_gpx_to">Send eksportert GPX til</string>
   <string name="export_confirm_title">Eksporterer %1$s</string>
   <string name="export_confirm_message">Bane: %1$s\nFilnavn: %2$s</string>
+  <string name="export_persnotes">Personlig notat</string>
   <!-- GC attributes -->
   <string name="attribute_dogs_yes">Hunder tillatt</string>
   <string name="attribute_dogs_no">Hunder ikke tillatt</string>

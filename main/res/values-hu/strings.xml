@@ -959,7 +959,7 @@
   <string name="search_history_cleared">Előzmények törölve</string>
   <string name="waypoint_coordinate_formats_plain">Egyszerű</string>
   <string name="from_clipboard">A vágólapról</string>
-  <string name="copy_to_clipboard">Vágólapra másolás</string>
+  <string name="copy_to_clipboard">Másolás a vágólapra</string>
   <!-- visit -->
   <string name="visit_tweet">Twitteld ki ezt a megtalálást</string>
   <!-- map -->

@@ -664,7 +664,7 @@
   <string name="auth_unconnected">Ainda não está conectado</string>
   <string name="auth_connected_as">Conectado como %s</string>
   <string name="auth_dialog_waiting">Esperando por %s…</string>
-  <string name="auth_explain_short">O processo a seguir permitirá que <b>c:geo</b> acesse o %s.</string>
+  <string name="auth_explain_short">O processo seguinte permitirá que o <b>c:geo</b> aceda a %s.</string>
   <string name="auth_explain_long">Pressionar o botão \"autorizar c:geo\" vai iniciar o processo. Este processo vai abrir um navegador web com uma página %s. Entre nesta página e permita que o <b>c:geo</b> tenha acesso à sua conta. E já está.</string>
   <string name="auth_forget_title">Esqueceu a autorização?</string>
   <string name="auth_forget_message">Será desconectado deste serviço. As suas credenciais atualmente guardadas serão perdidas.</string>
