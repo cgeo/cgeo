@@ -5,6 +5,7 @@ import cgeo.contacts.ContactsAddon;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.capability.ILogin;
+import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.playservices.GooglePlayServices;
 import cgeo.geocaching.sensors.MagnetometerAndAccelerometerProvider;
 import cgeo.geocaching.sensors.OrientationProvider;
@@ -64,6 +65,9 @@ public final class SystemInformation {
             body.append(" (cgeo forced to English)");
         }
         appendConnectors(body);
+        if (GCConnector.getInstance().isActive()) {
+            body.append("\nGeocaching.com date format: ").append(Settings.getGcCustomDate());
+        }
         appendAddons(body);
         body.append("\n--- End of system information ---\n");
         return body.toString();
