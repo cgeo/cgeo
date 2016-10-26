@@ -8,17 +8,11 @@ import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.RxOkHttpUtils;
 import cgeo.geocaching.utils.TextUtils;
 
-import com.fasterxml.jackson.databind.node.ObjectNode;
-
-import org.apache.commons.lang3.CharEncoding;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.ImmutablePair;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import java.io.File;
 import java.io.IOException;
@@ -29,6 +23,7 @@ import java.net.URLEncoder;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import okhttp3.FormBody;
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
@@ -39,6 +34,12 @@ import okhttp3.Request;
 import okhttp3.Request.Builder;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import org.apache.commons.compress.utils.IOUtils;
+import org.apache.commons.lang3.CharEncoding;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 import rx.Completable;
 import rx.Single;
 import rx.functions.Func1;
@@ -402,6 +403,40 @@ public final class Network {
         } catch (final Exception ignored) {
             return null;
         }
+    }
+
+    /**
+     * Get the HTML document corresponding to the body of a HTTP response.
+     *
+     * @param response a HTTP response
+     * @return a Single containing a document corresponding to the body if the response comes from a
+     *   successful HTTP request with Content-Type "text/html", or containing an IOException otherwise.
+     */
+    public static Single<Document> getResponseDocument(final Single<Response> response) {
+        return response.flatMap(new Func1<Response, Single<Document>>() {
+            @Override
+            public Single<Document> call(final Response resp) {
+                try {
+                    final String uri = resp.request().url().toString();
+                    if (resp.isSuccessful()) {
+                        final MediaType mediaType = MediaType.parse(resp.header("content-type", ""));
+                        if (mediaType == null || !StringUtils.equals(mediaType.type(), "text") || !StringUtils.equals(mediaType.subtype(), "html")) {
+                            throw new IOException("unable to parse non HTML page with media type " + mediaType + " for " + uri);
+                        }
+                        final InputStream inputStream = resp.body().byteStream();
+                        try {
+                            return Single.just(Jsoup.parse(inputStream, null, uri));
+                        } finally {
+                            IOUtils.closeQuietly(inputStream);
+                        }
+                    } else {
+                        throw new IOException("unsuccessful request " + uri);
+                    }
+                } catch (final Throwable t) {
+                    return Single.error(t);
+                }
+            }
+        });
     }
 
     /**
