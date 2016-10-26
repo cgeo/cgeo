@@ -24,12 +24,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
-import java.util.regex.Matcher;
 
 import okhttp3.Response;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import rx.Observable;
 import rx.Single;
 import rx.functions.Action1;
@@ -338,25 +338,25 @@ public class GCLogin extends AbstractLogin {
     }
 
     private static void refreshMemberStatus() {
-        Network.getRequest("https://www.geocaching.com/account/settings/membership")
-                .flatMap(Network.getResponseData).subscribe(new Action1<String>() {
-            @Override
-            public void call(final String page) {
-                final Matcher match = GCConstants.PATTERN_MEMBERSHIP.matcher(page);
-                if (match.find()) {
-                    final GCMemberState memberState = GCMemberState.fromString(match.group(1));
-                    Log.d("Setting member status to " + memberState);
-                    Settings.setGCMemberStatus(memberState);
-                } else {
-                    Log.w("Cannot determine member status");
-                }
-            }
-        }, new Action1<Throwable>() {
-            @Override
-            public void call(final Throwable throwable) {
-                Log.w("Unable to retrieve member status");
-            }
-        });
+        Network.getResponseDocument(Network.getRequest("https://www.geocaching.com/account/settings/membership"))
+                .subscribe(new Action1<Document>() {
+                    @Override
+                    public void call(final Document document) {
+                        final Element membership = document.select("dl.membership-details > dd:eq(3)").first();
+                        if (membership != null) {
+                            final GCMemberState memberState = GCMemberState.fromString(membership.text());
+                            Log.d("Setting member status to " + memberState);
+                            Settings.setGCMemberStatus(memberState);
+                        } else {
+                            Log.w("Cannot determine member status");
+                        }
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(final Throwable throwable) {
+                        Log.w("Unable to retrieve member status", throwable);
+                    }
+                });
     }
 
     /**
