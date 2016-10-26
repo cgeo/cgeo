@@ -17,7 +17,6 @@ import cgeo.geocaching.utils.TextUtils;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.text.Html;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -309,12 +308,11 @@ public class GCLogin extends AbstractLogin {
      * @return a Single containing the home location, or IOException
      */
     static Single<String> retrieveHomeLocation() {
-        return Network.getRequest("https://www.geocaching.com/account/settings/homelocation")
-                .flatMap(Network.getResponseData)
-                .map(new Func1<String, String>() {
+        return Network.getResponseDocument(Network.getRequest("https://www.geocaching.com/account/settings/homelocation"))
+                .map(new Func1<Document, String>() {
                     @Override
-                    public String call(final String page) {
-                        return Html.fromHtml(TextUtils.getMatch(page, GCConstants.PATTERN_HOME_LOCATION, null)).toString();
+                    public String call(final Document document) {
+                        return document.select("input.search-coordinates").attr("value");
                     }
                 });
     }
