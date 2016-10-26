@@ -29,6 +29,7 @@ import java.util.regex.Matcher;
 import okhttp3.Response;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.jsoup.nodes.Document;
 import rx.Observable;
 import rx.Single;
 import rx.functions.Action1;
@@ -362,16 +363,17 @@ public class GCLogin extends AbstractLogin {
      * Detect user date settings on geocaching.com
      */
     private static void detectGcCustomDate() {
-        final String result = Network.getResponseData(Network.getRequest("https://www.geocaching.com/account/settings/preferences"));
-
-        if (result == null) {
-            Log.w("Login.detectGcCustomDate: result is null");
-            return;
-        }
-
-        final String customDate = TextUtils.getMatch(result, GCConstants.PATTERN_CUSTOMDATE, true, null);
-        if (customDate != null) {
-            Settings.setGcCustomDate(Html.fromHtml(customDate).toString());
+        try {
+            final Document document = Network.getResponseDocument(Network.getRequest("https://www.geocaching.com/account/settings/preferences")).toBlocking().value();
+            final String customDate = document.select("select#SelectedDateFormat option[selected]").attr("value");
+            if (StringUtils.isNotBlank(customDate)) {
+                Log.d("Setting GC custom date to " + customDate);
+                Settings.setGcCustomDate(customDate);
+            } else {
+                Log.w("cannot find custom date format in geocaching.com preferences page");
+            }
+        } catch (final Exception e) {
+            Log.w("cannot set custom date from geocaching.com preferences page", e);
         }
     }
 
