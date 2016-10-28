@@ -8,8 +8,6 @@ Perfect! Please **tell us in the [issue tracker](https://github.com/cgeo/cgeo/is
 ## Project status
 
 [![Build Status](http://ci.cgeo.org/job/cgeo%20continuous%20integration/badge/icon)](http://ci.cgeo.org/job/cgeo%20continuous%20integration/)<br>
-[![Issue Stats](http://issuestats.com/github/cgeo/cgeo/badge/pr)](http://issuestats.com/github/cgeo/cgeo)<br>
-[![Issue Stats](http://issuestats.com/github/cgeo/cgeo/badge/issue)](http://issuestats.com/github/cgeo/cgeo)<br>
 [![Codacy Badge](https://api.codacy.com/project/badge/grade/3256314c8ba8457b9639bd2d4f4e7c91)](https://www.codacy.com/app/cgeo/cgeo)<br>
 
 ## Get the source
@@ -43,8 +41,8 @@ Make sure to use Java 8 for your IDE and build process. Some of the involved too
 
 ### Prerequisites
 
-- [Android SDK](http://developer.android.com/sdk) (latest version) including Google APIs V19, Google APIs V22, Google repository and Android support repository
-- If you use Microsoft Windows, [Google USB Driver](http://developer.android.com/sdk/win-usb.html) to install the application on the smartphone
+- [Android SDK](http://developer.android.com/sdk) (latest version) including Google APIs V23, Google repository and Android support repository.
+- If you use Microsoft Windows, [Google USB Driver](http://developer.android.com/sdk/win-usb.html) to install the application on the smartphone.
 - You need to provide several API keys for compiling the app. See next section for details.
 
 ### API keys
