@@ -58,26 +58,7 @@ Request your personal API key for the various [OpenCaching](http://www.opencachi
 
 ### Building with gradle
 
-Run `gradlew` from the root directory of the git repository. That will install the necessary build framework and display how to build cgeo.
-
-### Building with Ant (deprecated)
-
-1. copy `./templates/private.properties` to `./`
-2. edit `private.properties` (see comments in the file)
-3. copy `./main/templates/local.properties` to `./main/`
-4. copy `./main/templates/local.properties` to `./tests/`
-5. edit `local.properties` (see comments in the file)
-6. copy `local.properties` to all other projects (currently android-support-v7-appcompat, google-play-services_lib, mapswithme-api, showcaseview)
-7. copy `local.properties` to cgeo-calendar and cgeo-contacts if you plan to hack on the plugins
-
-Run one of the following commands in `./main`
-
-    ant help
-    ant clean
-    ant debug
-    ant release
-
-or use the Ant view of Eclipse
+Run `gradlew` from the root directory of the git repository. That will install the necessary build framework and display how to build cgeo. `gradlew assembleBasicDebug` might be a good start.
 
 ### Debugging
 
@@ -90,7 +71,7 @@ the class under test.
 Every class can be "Run As" (or "Debug As") an [Android JUnit Test](http://developer.android.com/guide/topics/testing/testing_android.html) from Eclipse.
 To run all tests use the same "Run As" menu item from the context menu of the test project.
 
-For tests to run successfully you need to configure c:geo on the emulator that runs the test with a valid geocaching.com account. In order for all tests to be successfull the account needs to be premium.
+For tests to run successfully you need to configure c:geo on the emulator that runs the test with a valid geocaching.com account. In order for all tests to be successfull the account needs to be a premium member.
 
 ## License
 
