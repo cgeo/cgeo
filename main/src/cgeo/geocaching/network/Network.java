@@ -429,9 +429,8 @@ public final class Network {
                         } finally {
                             IOUtils.closeQuietly(inputStream);
                         }
-                    } else {
-                        throw new IOException("unsuccessful request " + uri);
                     }
+                    throw new IOException("unsuccessful request " + uri);
                 } catch (final Throwable t) {
                     return Single.error(t);
                 }
