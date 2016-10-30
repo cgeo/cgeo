@@ -365,13 +365,17 @@ public class GCLogin extends AbstractLogin {
         final String result = Network.getResponseData(Network.getRequest("https://www.geocaching.com/account/settings/preferences"));
 
         if (result == null) {
-            Log.w("Login.detectGcCustomDate: result is null");
+            Settings.setGcCustomDate(GCConstants.DEFAULT_GC_DATE);
+            Log.w("Login.detectGcCustomDate: result is null, falling back to default");
             return;
         }
 
         final String customDate = TextUtils.getMatch(result, GCConstants.PATTERN_CUSTOMDATE, true, null);
         if (customDate != null) {
             Settings.setGcCustomDate(Html.fromHtml(customDate).toString());
+        } else {
+            Log.w("Login.detectGcCustomDate: text match is null, falling back to default");
+            Settings.setGcCustomDate(GCConstants.DEFAULT_GC_DATE);
         }
     }
 
