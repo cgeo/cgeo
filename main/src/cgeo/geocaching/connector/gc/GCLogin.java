@@ -368,10 +368,12 @@ public class GCLogin extends AbstractLogin {
                 Log.d("Setting GC custom date to " + customDate);
                 Settings.setGcCustomDate(customDate);
             } else {
-                Log.w("cannot find custom date format in geocaching.com preferences page");
+                Settings.setGcCustomDate(GCConstants.DEFAULT_GC_DATE);
+                Log.w("cannot find custom date format in geocaching.com preferences page, using default");
             }
         } catch (final Exception e) {
-            Log.w("cannot set custom date from geocaching.com preferences page", e);
+            Settings.setGcCustomDate(GCConstants.DEFAULT_GC_DATE);
+            Log.w("cannot set custom date from geocaching.com preferences page, using default", e);
         }
     }
 
