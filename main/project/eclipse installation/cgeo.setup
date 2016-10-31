@@ -294,6 +294,22 @@
     </setupTask>
     <setupTask
         xsi:type="setup.p2:P2Task"
+        label="Extras for Eclipse"
+        licenseConfirmationDisabled="true">
+      <requirement
+          name="com.codeaffine.extras.imageviewer.feature.feature.group"/>
+      <requirement
+          name="com.codeaffine.extras.launch.feature.feature.group"/>
+      <requirement
+          name="com.codeaffine.extras.ide.feature.feature.group"/>
+      <requirement
+          name="com.codeaffine.extras.jdt.feature.feature.group"/>
+      <repository
+          url="https://rherrmann.github.io/eclipse-extras/repository/"/>
+      <description></description>
+    </setupTask>
+    <setupTask
+        xsi:type="setup.p2:P2Task"
         label="Findbugs"
         licenseConfirmationDisabled="true">
       <requirement
