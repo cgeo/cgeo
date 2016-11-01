@@ -9,24 +9,23 @@ import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.LocalStorage;
-import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.AndroidRx2Utils;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
-
-import org.apache.commons.lang3.StringUtils;
-import android.support.annotation.NonNull;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
+import android.support.annotation.NonNull;
 
 import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.Callable;
 
+import io.reactivex.Completable;
 import okhttp3.Response;
-import rx.Completable;
-import rx.functions.Func0;
+import org.apache.commons.lang3.StringUtils;
 
 public final class StaticMapsProvider {
     static final int MAPS_LEVEL_MAX = 5;
@@ -58,7 +57,7 @@ public final class StaticMapsProvider {
     }
 
     private static Completable checkDownloadPermission(final Completable ifPermitted) {
-        return Completable.defer(new Func0<Completable>() {
+        return Completable.defer(new Callable<Completable>() {
             @Override
             public Completable call() {
                 if (System.currentTimeMillis() - last403 >= 30000) {
@@ -71,7 +70,7 @@ public final class StaticMapsProvider {
     }
 
     private static Completable downloadDifferentZooms(final String geocode, final String markerUrl, final String prefix, final String latlonMap, final int width, final int height, final Parameters waypoints) {
-        return checkDownloadPermission(Completable.merge(downloadMap(geocode, 20, SATELLITE, markerUrl, prefix + '1', "", latlonMap, width, height, waypoints),
+        return checkDownloadPermission(Completable.mergeArray(downloadMap(geocode, 20, SATELLITE, markerUrl, prefix + '1', "", latlonMap, width, height, waypoints),
                 downloadMap(geocode, 18, SATELLITE, markerUrl, prefix + '2', "", latlonMap, width, height, waypoints),
                 downloadMap(geocode, 16, ROADMAP, markerUrl, prefix + '3', "", latlonMap, width, height, waypoints),
                 downloadMap(geocode, 14, ROADMAP, markerUrl, prefix + '4', "", latlonMap, width, height, waypoints),
@@ -86,7 +85,7 @@ public final class StaticMapsProvider {
         final int requestWidth = Math.min(width / scale, GOOGLE_MAPS_MAX_SIZE);
         final int requestHeight = aspectRatio > 1 ? Math.round(requestWidth / aspectRatio) : requestWidth;
         final int requestZoom = Math.min(scale == 2 ? zoom + 1 : zoom, GOOGLE_MAX_ZOOM);
-        return checkDownloadPermission(Completable.defer(new Func0<Completable>() {
+        return checkDownloadPermission(Completable.defer(new Callable<Completable>() {
             @Override
             public Completable call() {
                 final Parameters params = new Parameters(
@@ -124,7 +123,7 @@ public final class StaticMapsProvider {
                 }
                 return Completable.complete();
             }
-        }).subscribeOn(AndroidRxUtils.networkScheduler));
+        }).subscribeOn(AndroidRx2Utils.networkScheduler));
     }
 
     public static Completable downloadMaps(final Geocache cache) {

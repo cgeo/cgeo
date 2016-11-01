@@ -4,7 +4,7 @@ import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.AndroidRx2Utils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.OOMDumpingUncaughtExceptionHandler;
 
@@ -73,7 +73,7 @@ public class CgeoApplication extends Application {
         sensors.setupDirectionObservable();
 
         // Attempt to acquire an initial location before any real activity happens.
-        sensors.geoDataObservable(true).subscribeOn(AndroidRxUtils.looperCallbacksScheduler).first().subscribe();
+        sensors.geoDataObservable(true).subscribeOn(AndroidRx2Utils.looperCallbacksScheduler).take(1).subscribe();
     }
 
     /**

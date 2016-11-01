@@ -13,7 +13,7 @@ import android.widget.Toast;
 import java.lang.ref.WeakReference;
 import java.util.Collection;
 
-import rx.functions.Func1;
+import io.reactivex.functions.Function;
 
 public abstract class AbstractSearchLoader extends AsyncTaskLoader<SearchResult> {
 
@@ -50,7 +50,7 @@ public abstract class AbstractSearchLoader extends AsyncTaskLoader<SearchResult>
     }
 
     /**
-     * Run {@link SearchResult#parallelCombineActive(Collection, Func1)} if there is at least one active connector
+     * Run {@link SearchResult#parallelCombineActive(Collection, Function)} if there is at least one active connector
      * in <tt>connectors</tt>, and throw <tt>NoConnectorException</tt> otherwise.
      *
      * @param connectors
@@ -59,11 +59,11 @@ public abstract class AbstractSearchLoader extends AsyncTaskLoader<SearchResult>
      *            a function to apply to every connector
      * @param <C>
      *            the type of connectors
-     * @return the result of {@link SearchResult#parallelCombineActive(Collection, Func1)} if there is at least one
+     * @return the result of {@link SearchResult#parallelCombineActive(Collection, Function)} if there is at least one
      *         active connector
      */
     protected static <C extends IConnector> SearchResult nonEmptyCombineActive(final Collection<C> connectors,
-                                                                        final Func1<C, SearchResult> func) {
+                                                                               final Function<C, SearchResult> func) {
         for (final IConnector connector : connectors) {
             if (connector.isActive()) {
                 return SearchResult.parallelCombineActive(connectors, func);

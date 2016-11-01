@@ -10,17 +10,8 @@ import cgeo.geocaching.models.Image;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.storage.LocalStorage;
+import cgeo.geocaching.utils.AndroidRx2Utils;
 import cgeo.geocaching.utils.Log;
-
-import com.drew.imaging.ImageMetadataReader;
-import com.drew.imaging.ImageProcessingException;
-import com.drew.lang.GeoLocation;
-import com.drew.metadata.Metadata;
-import com.drew.metadata.exif.GpsDirectory;
-
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.StringUtils;
-import android.support.annotation.Nullable;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -30,6 +21,7 @@ import android.graphics.Bitmap.CompressFormat;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.v4.content.LocalBroadcastManager;
 import android.text.Html;
@@ -53,12 +45,18 @@ import java.util.Collection;
 import java.util.LinkedList;
 
 import butterknife.ButterKnife;
-import rx.Subscription;
-import rx.android.app.AppObservable;
-import rx.functions.Action0;
-import rx.functions.Action1;
-import rx.subscriptions.CompositeSubscription;
-import rx.subscriptions.Subscriptions;
+import com.drew.imaging.ImageMetadataReader;
+import com.drew.imaging.ImageProcessingException;
+import com.drew.lang.GeoLocation;
+import com.drew.metadata.Metadata;
+import com.drew.metadata.exif.GpsDirectory;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Cancellable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.internal.disposables.CancellableDisposable;
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
 
 public class ImagesList {
 
@@ -107,14 +105,14 @@ public class ImagesList {
      *            a view to load the images into
      * @param images
      *            the images to load
-     * @return a subscription which, when unsubscribed, interrupts the loading and clears up resources
+     * @return a disposable which, when disposed, interrupts the loading and clears up resources
      */
-    public Subscription loadImages(final View parentView, final Collection<Image> images) {
-        // Start with a fresh subscription because of this method can be called several times if the
+    public Disposable loadImages(final View parentView, final Collection<Image> images) {
+        // Start with a fresh disposable because of this method can be called several times if the
         // enclosing activity is stopped/restarted.
-        final CompositeSubscription subscriptions = new CompositeSubscription(Subscriptions.create(new Action0() {
+        final CompositeDisposable disposables = new CompositeDisposable(new CancellableDisposable(new Cancellable() {
             @Override
-            public void call() {
+            public void cancel() throws Exception {
                 removeAllViews();
             }
         }));
@@ -143,15 +141,15 @@ public class ImagesList {
             assert imageView != null;
             rowView.addView(imageView);
             imagesView.addView(rowView);
-            subscriptions.add(AppObservable.bindActivity(activity, imgGetter.fetchDrawable(img.getUrl())).subscribe(new Action1<BitmapDrawable>() {
+            disposables.add(AndroidRx2Utils.bindActivity(activity, imgGetter.fetchDrawable(img.getUrl())).subscribe(new Consumer<BitmapDrawable>() {
                 @Override
-                public void call(final BitmapDrawable image) {
+                public void accept(final BitmapDrawable image) {
                     display(imageView, image, img, rowView);
                 }
             }));
         }
 
-        return subscriptions;
+        return disposables;
     }
 
     private void display(final RelativeLayout imageViewLayout, final BitmapDrawable image, final Image img, final LinearLayout view) {

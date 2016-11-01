@@ -125,7 +125,7 @@ public class StaticMapsActivity extends AbstractListActivity {
     private boolean downloadStaticMaps() {
         if (waypointId == null) {
             showToast(res.getString(R.string.info_storing_static_maps));
-            StaticMapsProvider.storeCacheStaticMap(cache).await();
+            StaticMapsProvider.storeCacheStaticMap(cache).blockingAwait();
             return cache.hasStaticMap();
         }
         final Waypoint waypoint = cache.getWaypointById(waypointId);
@@ -133,7 +133,7 @@ public class StaticMapsActivity extends AbstractListActivity {
             showToast(res.getString(R.string.info_storing_static_maps));
             // refresh always removes old waypoint files
             StaticMapsProvider.removeWpStaticMaps(waypoint, geocode);
-            StaticMapsProvider.storeWaypointStaticMap(cache, waypoint).await();
+            StaticMapsProvider.storeWaypointStaticMap(cache, waypoint).blockingAwait();
             return StaticMapsProvider.hasStaticMapForWaypoint(geocode, waypoint);
         }
         showToast(res.getString(R.string.err_detail_not_load_map_static));

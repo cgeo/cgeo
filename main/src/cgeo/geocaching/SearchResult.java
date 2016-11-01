@@ -10,20 +10,12 @@ import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.gcvote.GCVote;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.utils.AndroidRxUtils;
-
-import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-
-import rx.Observable;
-import rx.functions.Func0;
-import rx.functions.Func1;
-import rx.functions.Func2;
+import cgeo.geocaching.utils.AndroidRx2Utils;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -32,6 +24,13 @@ import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.Callable;
+
+import io.reactivex.Observable;
+import io.reactivex.functions.BiFunction;
+import io.reactivex.functions.Function;
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 
 public class SearchResult implements Parcelable {
 
@@ -317,27 +316,31 @@ public class SearchResult implements Parcelable {
      *            connector request
      */
     public static <C extends IConnector> SearchResult parallelCombineActive(final Collection<C> connectors,
-                                                                            final Func1<C, SearchResult> func) {
-        return Observable.from(connectors).flatMap(new Func1<C, Observable<SearchResult>>() {
+                                                                            final Function<C, SearchResult> func) {
+        return Observable.fromIterable(connectors).flatMap(new Function<C, Observable<SearchResult>>() {
             @Override
-            public Observable<SearchResult> call(final C connector) {
+            public Observable<SearchResult> apply(final C connector) {
                 if (!connector.isActive()) {
                     return Observable.empty();
                 }
-                return Observable.defer(new Func0<Observable<SearchResult>>() {
+                return Observable.defer(new Callable<Observable<SearchResult>>() {
                     @Override
                     public Observable<SearchResult> call() {
-                        return Observable.just(func.call(connector));
+                        try {
+                            return Observable.just(func.apply(connector));
+                        } catch (final Exception e) {
+                            return Observable.error(e);
+                        }
                     }
-                }).subscribeOn(AndroidRxUtils.networkScheduler);
+                }).subscribeOn(AndroidRx2Utils.networkScheduler);
             }
-        }).reduce(new SearchResult(), new Func2<SearchResult, SearchResult, SearchResult>() {
+        }).reduce(new SearchResult(), new BiFunction<SearchResult, SearchResult, SearchResult>() {
             @Override
-            public SearchResult call(final SearchResult searchResult, final SearchResult searchResult2) {
+            public SearchResult apply(final SearchResult searchResult, final SearchResult searchResult2) {
                 searchResult.addSearchResult(searchResult2);
                 return searchResult;
             }
-        }).toBlocking().first();
+        }).blockingGet();
     }
 
 }

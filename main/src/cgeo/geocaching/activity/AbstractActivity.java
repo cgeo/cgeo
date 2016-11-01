@@ -33,16 +33,16 @@ import android.widget.EditText;
 import java.util.Locale;
 
 import butterknife.ButterKnife;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
 import org.apache.commons.lang3.StringUtils;
-import rx.Subscription;
-import rx.subscriptions.Subscriptions;
 
 public abstract class AbstractActivity extends ActionBarActivity implements IAbstractActivity {
 
     protected CgeoApplication app = null;
     protected Resources res = null;
     private boolean keepScreenOn = false;
-    private Subscription resumeSubscription = Subscriptions.empty();
+    private final CompositeDisposable resumeDisposable = new CompositeDisposable();
 
     protected AbstractActivity() {
         this(false);
@@ -89,15 +89,14 @@ public abstract class AbstractActivity extends ActionBarActivity implements IAbs
         return super.onOptionsItemSelected(item);
     }
 
-    public void onResume(final Subscription... resumeSubscriptions) {
+    public void onResume(final Disposable... resumeDisposable) {
         super.onResume();
-        this.resumeSubscription = Subscriptions.from(resumeSubscriptions);
+        this.resumeDisposable.addAll(resumeDisposable);
     }
 
     @Override
     public void onPause() {
-        resumeSubscription.unsubscribe();
-        resumeSubscription = Subscriptions.empty();
+        resumeDisposable.clear();
         super.onPause();
     }
 

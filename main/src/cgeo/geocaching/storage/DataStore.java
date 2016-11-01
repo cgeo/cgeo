@@ -28,6 +28,7 @@ import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.search.SearchSuggestionCursor;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.utils.AndroidRx2Utils;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.Version;
@@ -67,22 +68,21 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
+import io.reactivex.Observable;
+import io.reactivex.Single;
+import io.reactivex.SingleEmitter;
+import io.reactivex.SingleOnSubscribe;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
-import rx.Observable;
-import rx.Observable.OnSubscribe;
-import rx.Subscriber;
-import rx.android.app.AppObservable;
-import rx.functions.Action0;
-import rx.functions.Action1;
-import rx.functions.Func0;
 import rx.functions.Func1;
-import rx.schedulers.Schedulers;
 
 public class DataStore {
 
@@ -334,12 +334,11 @@ public class DataStore {
             + "longitude DOUBLE "
             + "); ";
 
-    private static final Observable<Integer> allCachesCountObservable = Observable.create(new OnSubscribe<Integer>() {
+    private static final Single<Integer> allCachesCountObservable = Single.create(new SingleOnSubscribe<Integer>() {
         @Override
-        public void call(final Subscriber<? super Integer> subscriber) {
+        public void subscribe(final SingleEmitter<Integer> emitter) throws Exception {
             if (isInitialized()) {
-                subscriber.onNext(getAllCachesCount());
-                subscriber.onCompleted();
+                emitter.onSuccess(getAllCachesCount());
             }
         }
     }).timeout(500, TimeUnit.MILLISECONDS).retry(10).subscribeOn(Schedulers.io());
@@ -429,7 +428,7 @@ public class DataStore {
      */
     public static void moveDatabase(final Activity fromActivity) {
         final ProgressDialog dialog = ProgressDialog.show(fromActivity, fromActivity.getString(R.string.init_dbmove_dbmove), fromActivity.getString(R.string.init_dbmove_running), true, false);
-        AppObservable.bindActivity(fromActivity, Observable.defer(new Func0<Observable<Boolean>>() {
+        AndroidRx2Utils.bindActivity(fromActivity, Observable.defer(new Callable<Observable<Boolean>>() {
             @Override
             public Observable<Boolean> call() {
                 if (!LocalStorage.isExternalStorageAvailable()) {
@@ -454,9 +453,9 @@ public class DataStore {
                 init();
                 return Observable.just(true);
             }
-        })).subscribeOn(Schedulers.io()).subscribe(new Action1<Boolean>() {
+        }).subscribeOn(Schedulers.io())).subscribe(new Consumer<Boolean>() {
             @Override
-            public void call(final Boolean success) {
+            public void accept(final Boolean success) {
                 dialog.dismiss();
                 final String message = success ? fromActivity.getString(R.string.init_dbmove_success) : fromActivity.getString(R.string.init_dbmove_failed);
                 Dialogs.message(fromActivity, R.string.init_dbmove_dbmove, message);
@@ -970,9 +969,9 @@ public class DataStore {
 
             // Use a background thread for the real removal to avoid keeping the database locked
             // if we are called from within a transaction.
-            Schedulers.io().createWorker().schedule(new Action0() {
+            Schedulers.io().scheduleDirect(new Runnable() {
                 @Override
-                public void call() {
+                public void run() {
                     for (final File dir : toRemove) {
                         Log.i("Removing obsolete cache directory for " + dir.getName());
                         FileUtils.deleteDirectory(dir);
@@ -2453,9 +2452,9 @@ public class DataStore {
         }
         databaseCleaned = true;
 
-        Schedulers.io().createWorker().schedule(new Action0() {
+        Schedulers.io().scheduleDirect(new Runnable() {
             @Override
-            public void call() {
+            public void run() {
                 Log.d("Database clean: started");
                 try {
                     final int version = Version.getVersionCode(context);
@@ -2789,9 +2788,9 @@ public class DataStore {
     /**
      * Count all caches in the background.
      *
-     * @return an observable containing a unique element if the caches could be counted, or an error otherwise
+     * @return a single containing a unique element if the caches could be counted, or an error otherwise
      */
-    public static Observable<Integer> getAllCachesCountObservable() {
+    public static Single<Integer> getAllCachesCountObservable() {
         return allCachesCountObservable;
     }
 

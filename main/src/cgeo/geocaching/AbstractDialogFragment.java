@@ -14,7 +14,7 @@ import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.CacheDetailsCreator;
-import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.AndroidRx2Utils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.RxUtils;
 
@@ -39,18 +39,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import butterknife.ButterKnife;
-import rx.Subscription;
-import rx.android.app.AppObservable;
-import rx.functions.Action1;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.functions.Consumer;
 import rx.functions.Func0;
-import rx.subscriptions.Subscriptions;
 
 public abstract class AbstractDialogFragment extends DialogFragment implements CacheMenuHandler.ActivityInterface, PopupMenu.OnMenuItemClickListener, MenuItem.OnMenuItemClickListener {
     protected Resources res = null;
     protected String geocode;
     protected CacheDetailsCreator details;
 
-    private Subscription resumeSubscription = Subscriptions.empty();
+    private final CompositeDisposable resumeDisposables = new CompositeDisposable();
     private TextView cacheDistance = null;
 
     protected static final String GEOCODE_ARG = "GEOCODE";
@@ -203,15 +201,14 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
     @Override
     public void onResume() {
         super.onResume();
-        this.resumeSubscription = geoUpdate.start(GeoDirHandler.UPDATE_GEODATA);
+        resumeDisposables.add(geoUpdate.start(GeoDirHandler.UPDATE_GEODATA));
         init();
     }
 
 
     @Override
     public void onPause() {
-        resumeSubscription.unsubscribe();
-        resumeSubscription = Subscriptions.empty();
+        resumeDisposables.clear();
         super.onPause();
     }
 
@@ -223,14 +220,14 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
         if (!cache.supportsGCVote()) {
             return;
         }
-        AppObservable.bindActivity(getActivity(), RxUtils.deferredNullable(new Func0<GCVoteRating>() {
+        AndroidRx2Utils.bindActivity(getActivity(), RxUtils.deferredNullable(new Func0<GCVoteRating>() {
             @Override
             public GCVoteRating call() {
                 return GCVote.getRating(cache.getGuid(), geocode);
             }
-        })).subscribeOn(AndroidRxUtils.networkScheduler).subscribe(new Action1<GCVoteRating>() {
+        })).subscribeOn(AndroidRx2Utils.networkScheduler).subscribe(new Consumer<GCVoteRating>() {
             @Override
-            public void call(final GCVoteRating rating) {
+            public void accept(final GCVoteRating rating) {
                 cache.setRating(rating.getRating());
                 cache.setVotes(rating.getVotes());
                 DataStore.saveChangedCache(cache);

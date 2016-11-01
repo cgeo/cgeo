@@ -64,6 +64,7 @@ import cgeo.geocaching.ui.TrackableListAdapter;
 import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.recyclerview.RecyclerViewProvider;
+import cgeo.geocaching.utils.AndroidRx2Utils;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.CheckerUtils;
@@ -145,6 +146,7 @@ import java.util.regex.Pattern;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.reactivex.disposables.CompositeDisposable;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -153,15 +155,12 @@ import org.apache.commons.lang3.tuple.Pair;
 import rx.Observable;
 import rx.Observable.OnSubscribe;
 import rx.Subscriber;
-import rx.Subscription;
 import rx.android.app.AppObservable;
 import rx.functions.Action0;
 import rx.functions.Action1;
 import rx.functions.Func0;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
-import rx.subscriptions.CompositeSubscription;
-import rx.subscriptions.Subscriptions;
 
 /**
  * Activity to handle all single-cache-stuff.
@@ -205,22 +204,20 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     private TextView cacheDistanceView;
 
     protected ImagesList imagesList;
-    private CompositeSubscription createSubscriptions;
+    private final CompositeDisposable createDisposables = new CompositeDisposable();
     /**
      * waypoint selected in context menu. This variable will be gone when the waypoint context menu is a fragment.
      */
     private Waypoint selectedWaypoint;
 
     private boolean requireGeodata;
-    private Subscription geoDataSubscription = Subscriptions.empty();
+    private final CompositeDisposable geoDataDisposable = new CompositeDisposable();
 
     private final EnumSet<TrackableBrand> processedBrands = EnumSet.noneOf(TrackableBrand.class);
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.cachedetail_activity);
-
-        createSubscriptions = new CompositeSubscription();
 
         // get parameters
         final Bundle extras = getIntent().getExtras();
@@ -388,14 +385,13 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     private void startOrStopGeoDataListener(final boolean initial) {
         final boolean start;
         if (Settings.useLowPowerMode()) {
-            geoDataSubscription.unsubscribe();
-            geoDataSubscription = Subscriptions.empty();
+            geoDataDisposable.clear();
             start = requireGeodata;
         } else {
             start = initial;
         }
         if (start) {
-            geoDataSubscription = locationUpdater.start(GeoDirHandler.UPDATE_GEODATA);
+            geoDataDisposable.add(locationUpdater.start(GeoDirHandler.UPDATE_GEODATA));
         }
     }
 
@@ -419,15 +415,13 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
     @Override
     public void onPause() {
-        geoDataSubscription.unsubscribe();
-        geoDataSubscription = Subscriptions.empty();
+        geoDataDisposable.clear();
         super.onPause();
     }
 
     @Override
     public void onDestroy() {
-        createSubscriptions.unsubscribe();
-        createSubscriptions = null;
+        createDisposables.clear();
         super.onDestroy();
     }
 
@@ -866,7 +860,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             return;
         }
         imagesList = new ImagesList(this, cache.getGeocode(), cache);
-        createSubscriptions.add(imagesList.loadImages(imageView, cache.getNonStaticImages()));
+        createDisposables.add(imagesList.loadImages(imageView, cache.getNonStaticImages()));
     }
 
     public static void startActivity(final Context context, final String geocode) {
@@ -1411,7 +1405,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 Bitmap image = StaticMapsProvider.getPreviewMap(cache);
 
                 if (image == null && Settings.isStoreOfflineMaps() && cache.getCoords() != null) {
-                    StaticMapsProvider.storeCachePreviewMap(cache).await();
+                    StaticMapsProvider.storeCachePreviewMap(cache).blockingAwait();
                     image = StaticMapsProvider.getPreviewMap(cache);
                 }
 
@@ -1549,9 +1543,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             final Message cancelMessage = myHandler.cancelMessage(res.getString(R.string.cache_personal_note_upload_cancelled));
             progress.show(CacheDetailActivity.this, res.getString(R.string.cache_personal_note_uploading), res.getString(R.string.cache_personal_note_uploading), true, cancelMessage);
 
-            myHandler.unsubscribeIfCancelled(AndroidRxUtils.networkScheduler.createWorker().schedule(new Action0() {
+            myHandler.disposeIfCancelled(AndroidRx2Utils.networkScheduler.scheduleDirect(new Runnable() {
                 @Override
-                public void call() {
+                public void run() {
                     final PersonalNoteCapability connector = (PersonalNoteCapability) ConnectorFactory.getConnector(cache);
                     final boolean success = connector.uploadPersonalNote(cache);
                     final Message msg = Message.obtain();

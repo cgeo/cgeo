@@ -50,10 +50,10 @@ import java.util.List;
 import java.util.Set;
 
 import butterknife.BindView;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
 
 public class CacheListAdapter extends ArrayAdapter<Geocache> {
 
@@ -481,9 +481,9 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
             } else if (StringUtils.isNotBlank(cache.getDirectionImg())) {
                 holder.dirImg.setVisibility(View.INVISIBLE);
                 holder.direction.setVisibility(View.GONE);
-                DirectionImage.fetchDrawable(cache.getDirectionImg()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<BitmapDrawable>() {
+                DirectionImage.fetchDrawable(cache.getDirectionImg()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<BitmapDrawable>() {
                     @Override
-                    public void call(final BitmapDrawable bitmapDrawable) {
+                    public void accept(final BitmapDrawable bitmapDrawable) {
                         if (cache == holder.cache) {
                             holder.dirImg.setImageDrawable(bitmapDrawable);
                             holder.dirImg.setVisibility(View.VISIBLE);
