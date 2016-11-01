@@ -9,10 +9,10 @@ import cgeo.geocaching.log.TrackableLog;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import rx.Observable;
-
 import java.util.Collections;
 import java.util.List;
+
+import io.reactivex.Observable;
 
 public abstract class AbstractTrackableConnector implements TrackableConnector {
 

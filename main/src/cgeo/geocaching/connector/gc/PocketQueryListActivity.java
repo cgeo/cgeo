@@ -5,6 +5,7 @@ import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.models.PocketQuery;
 import cgeo.geocaching.ui.recyclerview.RecyclerViewProvider;
+import cgeo.geocaching.utils.AndroidRx2Utils;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
@@ -14,9 +15,8 @@ import android.support.v7.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.functions.Consumer;
 import org.apache.commons.collections4.CollectionUtils;
-import rx.android.app.AppObservable;
-import rx.functions.Action1;
 
 public class PocketQueryListActivity extends AbstractActionBarActivity {
 
@@ -36,9 +36,9 @@ public class PocketQueryListActivity extends AbstractActionBarActivity {
     }
 
     private void loadInBackground(final PocketQueryListAdapter adapter, final ProgressDialog waitDialog) {
-        AppObservable.bindActivity(this, GCParser.searchPocketQueryListObservable).subscribe(new Action1<List<PocketQuery>>() {
+        AndroidRx2Utils.bindActivity(this, GCParser.searchPocketQueryListObservable).subscribe(new Consumer<List<PocketQuery>>() {
             @Override
-            public void call(final List<PocketQuery> pocketQueryList) {
+            public void accept(final List<PocketQuery> pocketQueryList) {
                 waitDialog.dismiss();
                 if (CollectionUtils.isEmpty(pocketQueryList)) {
                     ActivityMixin.showToast(PocketQueryListActivity.this, getString(R.string.warn_no_pocket_query_found));
@@ -47,9 +47,9 @@ public class PocketQueryListActivity extends AbstractActionBarActivity {
                 pocketQueries.addAll(pocketQueryList);
                 adapter.notifyItemRangeInserted(0, pocketQueryList.size());
             }
-        }, new Action1<Throwable>() {
+        }, new Consumer<Throwable>() {
             @Override
-            public void call(final Throwable e) {
+            public void accept(final Throwable e) {
                 ActivityMixin.showToast(PocketQueryListActivity.this, getString(R.string.err_read_pocket_query_list));
                 finish();
             }

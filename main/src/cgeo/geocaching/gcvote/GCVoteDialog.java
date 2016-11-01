@@ -6,11 +6,8 @@ import cgeo.geocaching.gcvote.GCVoteRatingBarUtil.OnRatingChangeListener;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.AndroidRx2Utils;
 import cgeo.geocaching.utils.Log;
-
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -20,13 +17,16 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import rx.functions.Action1;
-import rx.functions.Func0;
+import java.util.concurrent.Callable;
+
+import io.reactivex.functions.Consumer;
 
 /**
  * Small dialog showing only a rating bar to vote on GCVote.com. Confirming the dialog will send the vote over the
@@ -82,7 +82,7 @@ public class GCVoteDialog {
     }
 
     private static void vote(@NonNull final Geocache cache, final float rating, @Nullable final Runnable afterVoteSent) {
-        AndroidRxUtils.andThenOnUi(AndroidRxUtils.networkScheduler, new Func0<Boolean>() {
+        AndroidRx2Utils.andThenOnUi(AndroidRx2Utils.networkScheduler, new Callable<Boolean>() {
             @Override
             public Boolean call() {
                 try {
@@ -102,9 +102,9 @@ public class GCVoteDialog {
 
                 return false;
             }
-        }, new Action1<Boolean>() {
+        }, new Consumer<Boolean>() {
             @Override
-            public void call(final Boolean status) {
+            public void accept(final Boolean status) {
                 final Application context = CgeoApplication.getInstance();
                 final String text = context.getString(status ? R.string.gcvote_sent : R.string.err_gcvote_send_rating);
                 Toast.makeText(context, text, Toast.LENGTH_SHORT).show();

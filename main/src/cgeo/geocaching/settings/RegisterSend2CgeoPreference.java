@@ -5,7 +5,7 @@ import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.ui.dialog.Dialogs;
-import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.AndroidRx2Utils;
 import cgeo.geocaching.utils.Log;
 
 import android.app.ProgressDialog;
@@ -13,12 +13,12 @@ import android.content.Context;
 import android.preference.Preference;
 import android.util.AttributeSet;
 
+import java.util.concurrent.Callable;
+
+import io.reactivex.Observable;
+import io.reactivex.functions.Consumer;
 import okhttp3.Response;
 import org.apache.commons.lang3.StringUtils;
-import rx.Observable;
-import rx.android.app.AppObservable;
-import rx.functions.Action1;
-import rx.functions.Func0;
 
 public class RegisterSend2CgeoPreference extends AbstractClickablePreference {
 
@@ -53,7 +53,7 @@ public class RegisterSend2CgeoPreference extends AbstractClickablePreference {
                         activity.getString(R.string.init_sendToCgeo_registering), true);
                 progressDialog.setCancelable(false);
 
-                AppObservable.bindActivity(activity, Observable.defer(new Func0<Observable<Integer>>() {
+                AndroidRx2Utils.bindActivity(activity, Observable.defer(new Callable<Observable<Integer>>() {
                     @Override
                     public Observable<Integer> call() {
                         final String nam = StringUtils.defaultString(deviceName);
@@ -76,9 +76,9 @@ public class RegisterSend2CgeoPreference extends AbstractClickablePreference {
 
                         return Observable.empty();
                     }
-                }).firstOrDefault(0)).subscribeOn(AndroidRxUtils.networkScheduler).subscribe(new Action1<Integer>() {
+                }).first(0)).subscribeOn(AndroidRx2Utils.networkScheduler).subscribe(new Consumer<Integer>() {
                     @Override
-                    public void call(final Integer pin) {
+                    public void accept(final Integer pin) {
                         progressDialog.dismiss();
                         if (pin > 0) {
                             Dialogs.message(activity, R.string.init_sendToCgeo,

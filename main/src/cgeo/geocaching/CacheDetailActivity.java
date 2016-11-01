@@ -65,7 +65,6 @@ import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.recyclerview.RecyclerViewProvider;
 import cgeo.geocaching.utils.AndroidRx2Utils;
-import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.CheckerUtils;
 import cgeo.geocaching.utils.ClipboardUtils;
@@ -142,25 +141,25 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
+import java.util.concurrent.Callable;
 import java.util.regex.Pattern;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.reactivex.Maybe;
+import io.reactivex.MaybeEmitter;
+import io.reactivex.MaybeOnSubscribe;
+import io.reactivex.Observable;
 import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
+import io.reactivex.schedulers.Schedulers;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
-import rx.Observable;
-import rx.Observable.OnSubscribe;
-import rx.Subscriber;
-import rx.android.app.AppObservable;
-import rx.functions.Action0;
 import rx.functions.Action1;
-import rx.functions.Func0;
-import rx.functions.Func1;
-import rx.schedulers.Schedulers;
 
 /**
  * Activity to handle all single-cache-stuff.
@@ -327,9 +326,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
         final String realGeocode = geocode;
         final String realGuid = guid;
-        AndroidRxUtils.networkScheduler.createWorker().schedule(new Action0() {
+        AndroidRx2Utils.networkScheduler.scheduleDirect(new Runnable() {
             @Override
-            public void call() {
+            public void run() {
                 search = Geocache.searchByGeocode(realGeocode, StringUtils.isBlank(realGeocode) ? realGuid : null, false, loadCacheHandler);
                 loadCacheHandler.sendMessage(Message.obtain());
             }
@@ -337,22 +336,22 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
         // Load Generic Trackables
         if (StringUtils.isNotBlank(geocode)) {
-            AppObservable.bindActivity(this,
+            AndroidRx2Utils.bindActivity(this,
             // Obtain the active connectors and load trackables in parallel.
-            Observable.from(ConnectorFactory.getGenericTrackablesConnectors()).flatMap(new Func1<TrackableConnector, Observable<Trackable>>() {
+                    Observable.fromIterable(ConnectorFactory.getGenericTrackablesConnectors()).flatMap(new Function<TrackableConnector, Observable<Trackable>>() {
                 @Override
-                public Observable<Trackable> call(final TrackableConnector trackableConnector) {
+                public Observable<Trackable> apply(final TrackableConnector trackableConnector) {
                     processedBrands.add(trackableConnector.getBrand());
-                    return Observable.defer(new Func0<Observable<Trackable>>() {
+                    return Observable.defer(new Callable<Observable<Trackable>>() {
                         @Override
                         public Observable<Trackable> call() {
-                            return Observable.from(trackableConnector.searchTrackables(geocode));
+                            return Observable.fromIterable(trackableConnector.searchTrackables(geocode));
                         }
-                    }).subscribeOn(AndroidRxUtils.networkScheduler);
+                    }).subscribeOn(AndroidRx2Utils.networkScheduler);
                 }
-            }).toList()).subscribe(new Action1<List<Trackable>>() {
+            }).toList()).subscribe(new Consumer<List<Trackable>>() {
                 @Override
-                public void call(final List<Trackable> trackables) {
+                public void accept(final List<Trackable> trackables) {
                     // Todo: this is not really a good method, it may lead to duplicates ; ie: in OC connectors.
                     // Store trackables.
                     genericTrackables.addAll(trackables);
@@ -662,9 +661,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
             @Override
             public void onClick(final DialogInterface dialog, final int which) {
-                AndroidRxUtils.networkScheduler.createWorker().schedule(new Action0() {
+                AndroidRx2Utils.networkScheduler.scheduleDirect(new Runnable() {
                     @Override
-                    public void call() {
+                    public void run() {
                         ((IgnoreCapability) ConnectorFactory.getConnector(cache)).ignoreCache(cache);
                     }
                 });
@@ -903,7 +902,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
         progress.show(this, res.getString(R.string.cache_dialog_refresh_title), res.getString(R.string.cache_dialog_refresh_message), true, refreshCacheHandler.cancelMessage());
 
-        cache.refresh(refreshCacheHandler, AndroidRxUtils.refreshScheduler);
+        cache.refresh(refreshCacheHandler, AndroidRx2Utils.refreshScheduler);
     }
 
     private void dropCache() {
@@ -979,10 +978,10 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             view = (ScrollView) getLayoutInflater().inflate(R.layout.cachedetail_details_page, parentView, false);
 
             // Start loading preview map
-            AppObservable.bindActivity(CacheDetailActivity.this, previewMap).subscribeOn(AndroidRxUtils.networkScheduler)
-                    .subscribe(new Action1<BitmapDrawable>() {
+            AndroidRx2Utils.bindActivity(CacheDetailActivity.this, previewMap).subscribeOn(AndroidRx2Utils.networkScheduler)
+                    .subscribe(new Consumer<BitmapDrawable>() {
                         @Override
-                        public void call(final BitmapDrawable image) {
+                        public void accept(final BitmapDrawable image) {
                             final Bitmap bitmap = image.getBitmap();
                             if (bitmap != null && bitmap.getWidth() > 10) {
                                 final ImageView imageView = ButterKnife.findById(view, R.id.map_preview);
@@ -1196,9 +1195,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     return;
                 }
                 progress.show(CacheDetailActivity.this, res.getString(titleId), res.getString(messageId), true, null);
-                AndroidRxUtils.networkScheduler.createWorker().schedule(new Action0() {
+                AndroidRx2Utils.networkScheduler.scheduleDirect(new Runnable() {
                     @Override
-                    public void call() {
+                    public void run() {
                         action.call(handler);
                     }
                 });
@@ -1397,9 +1396,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
     }
 
-    private final Observable<BitmapDrawable> previewMap = Observable.create(new OnSubscribe<BitmapDrawable>() {
+    private final Maybe<BitmapDrawable> previewMap = Maybe.create(new MaybeOnSubscribe<BitmapDrawable>() {
         @Override
-        public void call(final Subscriber<? super BitmapDrawable> subscriber) {
+        public void subscribe(final MaybeEmitter<BitmapDrawable> emitter) throws Exception {
             try {
                 // persistent preview from storage
                 Bitmap image = StaticMapsProvider.getPreviewMap(cache);
@@ -1410,12 +1409,13 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 }
 
                 if (image != null) {
-                    subscriber.onNext(ImageUtils.scaleBitmapToFitDisplay(image));
+                    emitter.onSuccess(ImageUtils.scaleBitmapToFitDisplay(image));
+                } else {
+                    emitter.onComplete();
                 }
-                subscriber.onCompleted();
             } catch (final Exception e) {
                 Log.w("CacheDetailActivity.previewMap", e);
-                subscriber.onError(e);
+                emitter.onError(e);
             }
         }
 
@@ -2116,9 +2116,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     }
 
     private void resetCoords(final Geocache cache, final Handler handler, final Waypoint wpt, final boolean local, final boolean remote, final ProgressDialog progress) {
-        AndroidRxUtils.networkScheduler.createWorker().schedule(new Action0() {
+        AndroidRx2Utils.networkScheduler.scheduleDirect(new Runnable() {
             @Override
-            public void call() {
+            public void run() {
                 if (local) {
                     runOnUiThread(new Runnable() {
                         @Override
@@ -2345,9 +2345,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     protected void storeCache(final Set<Integer> listIds) {
         final StoreCacheHandler storeCacheHandler = new StoreCacheHandler(CacheDetailActivity.this, progress);
         progress.show(this, res.getString(R.string.cache_dialog_offline_save_title), res.getString(R.string.cache_dialog_offline_save_message), true, storeCacheHandler.cancelMessage());
-        AndroidRxUtils.networkScheduler.createWorker().schedule(new Action0() {
+        AndroidRx2Utils.networkScheduler.scheduleDirect(new Runnable() {
             @Override
-            public void call() {
+            public void run() {
                 cache.store(listIds, storeCacheHandler);
             }
         });
@@ -2373,9 +2373,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             reinitializeViewPager();
         }
 
-        Schedulers.io().createWorker().schedule(new Action0() {
+        Schedulers.io().scheduleDirect(new Runnable() {
             @Override
-            public void call() {
+            public void run() {
                 DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
             }
         });

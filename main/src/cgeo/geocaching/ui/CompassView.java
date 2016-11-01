@@ -3,11 +3,6 @@ package cgeo.geocaching.ui;
 import cgeo.geocaching.R;
 import cgeo.geocaching.utils.AngleUtils;
 
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action0;
-import rx.subscriptions.Subscriptions;
-
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -20,6 +15,9 @@ import android.view.View;
 
 import java.lang.ref.WeakReference;
 import java.util.concurrent.TimeUnit;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
 
 public class CompassView extends View {
 
@@ -55,9 +53,9 @@ public class CompassView extends View {
     private int compassOverlayWidth = 0;
     private int compassOverlayHeight = 0;
     private boolean initialDisplay;
-    private Subscription periodicUpdate = Subscriptions.empty();
+    private final CompositeDisposable periodicUpdate = new CompositeDisposable();
 
-    private static final class UpdateAction implements Action0 {
+    private static final class UpdateAction implements Runnable {
 
         private final WeakReference<CompassView> compassViewRef;
 
@@ -66,7 +64,7 @@ public class CompassView extends View {
         }
 
         @Override
-        public void call() {
+        public void run() {
             final CompassView compassView = compassViewRef.get();
             if (compassView == null) {
                 return;
@@ -119,13 +117,12 @@ public class CompassView extends View {
 
         initialDisplay = true;
 
-        periodicUpdate = AndroidSchedulers.mainThread().createWorker().schedulePeriodically(new UpdateAction(this), 0, 40, TimeUnit.MILLISECONDS);
+        periodicUpdate.add(AndroidSchedulers.mainThread().schedulePeriodicallyDirect(new UpdateAction(this), 0, 40, TimeUnit.MILLISECONDS));
     }
 
     @Override
     public void onDetachedFromWindow() {
-        periodicUpdate.unsubscribe();
-        periodicUpdate = Subscriptions.empty();
+        periodicUpdate.clear();
 
         super.onDetachedFromWindow();
 
