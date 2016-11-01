@@ -41,14 +41,14 @@ import java.util.Set;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import io.reactivex.Single;
+import io.reactivex.functions.BiFunction;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
-import rx.Single;
-import rx.functions.Func2;
 
 public class GCMap {
     private static Viewport lastSearchViewport = null;
-    private static final Single<Bitmap> ONE_ONE_BITMAP_SINGLE = Single.just(Bitmap.createBitmap(1, 1, Config.ARGB_8888));
+    private static final Bitmap ONE_ONE_BITMAP = Bitmap.createBitmap(1, 1, Config.ARGB_8888);
 
     private GCMap() {
         // utility class
@@ -67,7 +67,7 @@ public class GCMap {
             final Parameters params = new Parameters("i", geocodeList, "_", String.valueOf(System.currentTimeMillis()));
             params.add("app", "cgeo");
             final String referer = GCConstants.URL_LIVE_MAP_DETAILS;
-            final String data = Tile.requestMapInfo(referer, params, referer).toBlocking().value();
+            final String data = Tile.requestMapInfo(referer, params, referer).blockingGet();
 
             // Example JSON information
             // {"status":"success",
@@ -308,13 +308,13 @@ public class GCMap {
                     }
 
                     // The PNG must be requested first, otherwise the following request would always return with 204 - No Content
-                    final Single<Bitmap> bitmapObs = Tile.requestMapTile(params).onErrorResumeNext(ONE_ONE_BITMAP_SINGLE);
+                    final Single<Bitmap> bitmapObs = Tile.requestMapTile(params).onErrorResumeNext(Single.just(ONE_ONE_BITMAP));
                     final Single<String> dataObs = Tile.requestMapInfo(GCConstants.URL_MAP_INFO, params, GCConstants.URL_LIVE_MAP).onErrorResumeNext(Single.just(""));
                     try {
-                        Single.zip(bitmapObs, dataObs, new Func2<Bitmap, String, Void>() {
+                        Single.zip(bitmapObs, dataObs, new BiFunction<Bitmap, String, String>() {
                             @Override
-                            public Void call(final Bitmap bitmap, final String data) {
-                                final boolean validBitmap = bitmap != null && bitmap.getWidth() == Tile.TILE_SIZE && bitmap.getHeight() == Tile.TILE_SIZE;
+                            public String apply(final Bitmap bitmap, final String data) {
+                                final boolean validBitmap = bitmap.getWidth() == Tile.TILE_SIZE && bitmap.getHeight() == Tile.TILE_SIZE;
 
                                 if (StringUtils.isEmpty(data)) {
                                     Log.w("GCMap.searchByViewport: No data from server for tile (" + tile.getX() + "/" + tile.getY() + ")");
@@ -332,16 +332,16 @@ public class GCMap {
                                     }
                                 }
 
-                                // release native bitmap memory
-                                if (bitmap != null) {
+                                // release native bitmap memory if we didn't get the placeholder
+                                if (bitmap != ONE_ONE_BITMAP) {
                                     bitmap.recycle();
                                 }
 
-                                return null;
+                                return data;
                             }
-                        }).toBlocking().value();
+                        }).toCompletable().blockingAwait();
                     } catch (final Exception e) {
-                        Log.e("GCMap.searchByViewPort: connection error");
+                        Log.e("GCMap.searchByViewPort: connection error", e);
                     }
                 }
             }

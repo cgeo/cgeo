@@ -1,15 +1,21 @@
 package cgeo.geocaching.utils;
 
+import android.app.Activity;
 import android.os.HandlerThread;
 import android.os.Looper;
 import android.os.Process;
 
+import java.lang.ref.WeakReference;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
 
+import io.reactivex.Maybe;
+import io.reactivex.Observable;
 import io.reactivex.Scheduler;
+import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Predicate;
 import io.reactivex.internal.schedulers.RxThreadFactory;
 import io.reactivex.schedulers.Schedulers;
 
@@ -65,6 +71,28 @@ public class AndroidRx2Utils {
             public void run() {
                 background.run();
                 AndroidSchedulers.mainThread().createWorker().schedule(foreground);
+            }
+        });
+    }
+
+    public static <T> Observable<T> bindActivity(final Activity activity, final Observable<T> source) {
+        final WeakReference<Activity> activityRef = new WeakReference<>(activity);
+        return source.observeOn(AndroidSchedulers.mainThread()).takeWhile(new Predicate<T>() {
+            @Override
+            public boolean test(final T t) throws Exception {
+                final Activity a = activityRef.get();
+                return a != null && !a.isFinishing();
+            }
+        });
+    }
+
+    public static <T> Maybe<T> bindActivity(final Activity activity, final Single<T> source) {
+        final WeakReference<Activity> activityRef = new WeakReference<>(activity);
+        return source.observeOn(AndroidSchedulers.mainThread()).filter(new Predicate<T>() {
+            @Override
+            public boolean test(final T t) throws Exception {
+                final Activity a = activityRef.get();
+                return a != null && !a.isFinishing();
             }
         });
     }

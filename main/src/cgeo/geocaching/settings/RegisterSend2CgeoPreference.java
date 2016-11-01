@@ -63,7 +63,7 @@ public class RegisterSend2CgeoPreference extends AbstractClickablePreference {
 
                         try {
                             final Response response = Network.getRequest("http://send2.cgeo.org/auth.html", params)
-                                    .flatMap(Network.withSuccess).toBlocking().value();
+                                    .flatMap(Network.withSuccess).blockingGet();
 
                             final String[] strings = StringUtils.split(Network.getResponseData(response), ',');
                             if (strings != null) {

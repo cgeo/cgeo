@@ -101,7 +101,7 @@ public final class StaticMapsProvider {
                     params.addAll(waypoints);
                 }
                 try {
-                    final Response httpResponse = Network.getRequest(GOOGLE_STATICMAP_URL, params).toBlocking().value();
+                    final Response httpResponse = Network.getRequest(GOOGLE_STATICMAP_URL, params).blockingGet();
 
                     final int statusCode = httpResponse.code();
                     if (statusCode != 200) {

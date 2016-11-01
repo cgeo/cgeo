@@ -12,9 +12,9 @@ import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import io.reactivex.functions.Consumer;
 import org.apache.commons.lang3.StringUtils;
 import rx.functions.Action0;
-import rx.functions.Action1;
 import rx.subjects.BehaviorSubject;
 
 public class StatusUpdater {
@@ -67,14 +67,14 @@ public class StatusUpdater {
                         Parameters.merge(new Parameters("version_code", String.valueOf(Version.getVersionCode(app)),
                                 "version_name", Version.getVersionName(app),
                                 "locale", Locale.getDefault().toString()), installerParameters))
-                        .subscribe(new Action1<ObjectNode>() {
+                        .subscribe(new Consumer<ObjectNode>() {
                             @Override
-                            public void call(final ObjectNode json) {
+                            public void accept(final ObjectNode json) {
                                 LATEST_STATUS.onNext(Status.defaultStatus(new Status(json)));
                             }
-                        }, new Action1<Throwable>() {
+                        }, new Consumer<Throwable>() {
                             @Override
-                            public void call(final Throwable throwable) {
+                            public void accept(final Throwable throwable) {
                                 // Error has already been signalled during the request
                             }
                         });

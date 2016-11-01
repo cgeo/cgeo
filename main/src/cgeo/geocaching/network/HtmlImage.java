@@ -307,7 +307,7 @@ public class HtmlImage implements Html.ImageGetter {
 
         if (absoluteURL != null) {
             try {
-                final Response httpResponse = Network.getRequest(absoluteURL, null, file).toBlocking().value();
+                final Response httpResponse = Network.getRequest(absoluteURL, null, file).blockingGet();
                 if (httpResponse.isSuccessful()) {
                     LocalStorage.saveEntityToFile(httpResponse, file);
                 } else if (httpResponse.code() == 304) {

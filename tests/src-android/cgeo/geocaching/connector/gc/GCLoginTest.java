@@ -5,11 +5,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.location.Geopoint;
 
-import junit.framework.TestCase;
-import org.apache.commons.lang3.StringUtils;
-
 import android.test.suitebuilder.annotation.Suppress;
 import android.text.Html;
+
+import junit.framework.TestCase;
+import org.apache.commons.lang3.StringUtils;
 
 public class GCLoginTest extends TestCase {
 
@@ -22,7 +22,7 @@ public class GCLoginTest extends TestCase {
     }
 
     private static String blockingHomeLocation() {
-        return GCLogin.retrieveHomeLocation().toBlocking().value();
+        return GCLogin.retrieveHomeLocation().blockingGet();
     }
 
     public static void testRetrieveHomeLocation() {

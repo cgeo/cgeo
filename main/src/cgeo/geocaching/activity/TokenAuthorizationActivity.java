@@ -137,7 +137,7 @@ public abstract class TokenAuthorizationActivity extends AbstractActivity {
         String message = StringUtils.EMPTY;
 
         try {
-            final Response response = Network.postRequest(urlToken, params).toBlocking().value();
+            final Response response = Network.postRequest(urlToken, params).blockingGet();
             if (response.isSuccessful()) {
                 final String line = StringUtils.defaultString(Network.getResponseData(response));
                 final MatcherWrapper errorMatcher = new MatcherWrapper(getPatternIsError(), line);

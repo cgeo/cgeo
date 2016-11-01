@@ -1,18 +1,17 @@
 package cgeo.geocaching.utils;
 
+import java.io.IOException;
+import java.util.concurrent.atomic.AtomicBoolean;
+
+import io.reactivex.Single;
+import io.reactivex.SingleEmitter;
+import io.reactivex.SingleOnSubscribe;
+import io.reactivex.functions.Cancellable;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-import rx.Single;
-import rx.Single.OnSubscribe;
-import rx.SingleSubscriber;
-import rx.functions.Action0;
-import rx.subscriptions.Subscriptions;
-
-import java.io.IOException;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public class RxOkHttpUtils {
 
@@ -28,30 +27,30 @@ public class RxOkHttpUtils {
      * @return a Single containing the response or an IOException
      */
     public static Single<Response> request(final OkHttpClient client, final Request request) {
-        return Single.create(new OnSubscribe<Response>() {
+        return Single.create(new SingleOnSubscribe<Response>() {
             @Override
-            public void call(final SingleSubscriber<? super Response> singleSubscriber) {
+            public void subscribe(final SingleEmitter<Response> singleEmitter) throws Exception {
                 final Call call = client.newCall(request);
                 final AtomicBoolean completed = new AtomicBoolean(false);
-                singleSubscriber.add(Subscriptions.create(new Action0() {
+                singleEmitter.setCancellable(new Cancellable() {
                     @Override
-                    public void call() {
+                    public void cancel() throws Exception {
                         if (!completed.get()) {
                             call.cancel();
                         }
                     }
-                }));
+                });
                 call.enqueue(new Callback() {
                     @Override
                     public void onFailure(final Call call, final IOException e) {
                         completed.set(true);
-                        singleSubscriber.onError(e);
+                        singleEmitter.onError(e);
                     }
 
                     @Override
                     public void onResponse(final Call call, final Response response) throws IOException {
                         completed.set(true);
-                        singleSubscriber.onSuccess(response);
+                        singleEmitter.onSuccess(response);
                     }
                 });
             }
