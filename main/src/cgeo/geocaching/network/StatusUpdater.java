@@ -1,21 +1,21 @@
 package cgeo.geocaching.network;
 
 import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.AndroidRx2Utils;
 import cgeo.geocaching.utils.Version;
 
 import android.app.Application;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
+import android.support.annotation.NonNull;
 
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.reactivex.functions.Consumer;
+import io.reactivex.subjects.BehaviorSubject;
 import org.apache.commons.lang3.StringUtils;
-import rx.functions.Action0;
-import rx.subjects.BehaviorSubject;
 
 public class StatusUpdater {
 
@@ -43,23 +43,26 @@ public class StatusUpdater {
             url = response.path("url").asText(null);
         }
 
-        public static final Status CLOSEOUT_STATUS =
+        static final Status CLOSEOUT_STATUS =
                 new Status("", "status_closeout_warning", "attribute_abandonedbuilding", "http://faq.cgeo.org/#legacy");
 
-        public static final Status defaultStatus(final Status upToDate) {
+        public static final Status NO_STATUS = new Status(null, null, null, null);
+
+        @NonNull
+        static Status defaultStatus(final Status upToDate) {
             if (upToDate != null && upToDate.message != null) {
                 return upToDate;
             }
-            return VERSION.SDK_INT < VERSION_CODES.ECLAIR_MR1 ? CLOSEOUT_STATUS : null;
+            return VERSION.SDK_INT < VERSION_CODES.ECLAIR_MR1 ? CLOSEOUT_STATUS : NO_STATUS;
         }
     }
 
-    public static final BehaviorSubject<Status> LATEST_STATUS = BehaviorSubject.create(Status.defaultStatus(null));
+    public static final BehaviorSubject<Status> LATEST_STATUS = BehaviorSubject.createDefault(Status.defaultStatus(null));
 
     static {
-        AndroidRxUtils.networkScheduler.createWorker().schedulePeriodically(new Action0() {
+        AndroidRx2Utils.networkScheduler.schedulePeriodicallyDirect(new Runnable() {
             @Override
-            public void call() {
+            public void run() {
                 final Application app = CgeoApplication.getInstance();
                 final String installer = Version.getPackageInstaller(app);
                 final Parameters installerParameters = StringUtils.isNotBlank(installer) ? new Parameters("installer", installer) : null;

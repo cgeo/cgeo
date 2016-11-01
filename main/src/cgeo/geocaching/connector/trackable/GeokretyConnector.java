@@ -16,14 +16,9 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.Version;
 
-import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.ImmutablePair;
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import org.xml.sax.InputSource;
-
-import android.content.Context;
 
 import java.io.InputStream;
 import java.net.URLEncoder;
@@ -33,8 +28,12 @@ import java.util.List;
 import java.util.Locale;
 import java.util.regex.Pattern;
 
-import rx.Observable;
-import rx.functions.Func1;
+import io.reactivex.Observable;
+import io.reactivex.functions.Function;
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.xml.sax.InputSource;
 
 public class GeokretyConnector extends AbstractTrackableConnector {
 
@@ -216,12 +215,12 @@ public class GeokretyConnector extends AbstractTrackableConnector {
     @Override
     @NonNull
     public Observable<TrackableLog> trackableLogInventory() {
-        return Observable.from(loadInventory()).map(new TrackableLogFunction());
+        return Observable.fromIterable(loadInventory()).map(new TrackableLogFunction());
     }
 
-    private static class TrackableLogFunction implements Func1<Trackable, TrackableLog> {
+    private static class TrackableLogFunction implements Function<Trackable, TrackableLog> {
         @Override
-        public TrackableLog call(final Trackable trackable) {
+        public TrackableLog apply(final Trackable trackable) {
             return new TrackableLog(
                     trackable.getGeocode(),
                     trackable.getTrackingcode(),

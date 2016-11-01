@@ -14,9 +14,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.Log;
 
-import org.apache.commons.lang3.StringUtils;
 import android.support.annotation.NonNull;
-import org.mapsforge.map.layer.Layer;
 
 import java.lang.ref.WeakReference;
 import java.util.EnumSet;
@@ -24,13 +22,14 @@ import java.util.Locale;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
-import rx.Subscription;
-import rx.functions.Action0;
-import rx.schedulers.Schedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
+import org.apache.commons.lang3.StringUtils;
+import org.mapsforge.map.layer.Layer;
 
 public class LiveCachesOverlay extends AbstractCachesOverlay {
 
-    private final Subscription timer;
+    private final Disposable timer;
     private boolean downloading = false;
     public long loadThreadRun = -1;
     private MapTokens tokens;
@@ -41,11 +40,11 @@ public class LiveCachesOverlay extends AbstractCachesOverlay {
         this.timer = startTimer();
     }
 
-    private Subscription startTimer() {
-        return Schedulers.newThread().createWorker().schedulePeriodically(new LoadTimerAction(this), 0, 250, TimeUnit.MILLISECONDS);
+    private Disposable startTimer() {
+        return Schedulers.newThread().schedulePeriodicallyDirect(new LoadTimerAction(this), 0, 250, TimeUnit.MILLISECONDS);
     }
 
-    private static final class LoadTimerAction implements Action0 {
+    private static final class LoadTimerAction implements Runnable {
 
         @NonNull private final WeakReference<LiveCachesOverlay> overlayRef;
         private int previousZoom = -100;
@@ -56,7 +55,7 @@ public class LiveCachesOverlay extends AbstractCachesOverlay {
         }
 
         @Override
-        public void call() {
+        public void run() {
             final LiveCachesOverlay overlay = overlayRef.get();
             if (overlay == null || overlay.isDownloading()) {
                 return;
@@ -130,7 +129,7 @@ public class LiveCachesOverlay extends AbstractCachesOverlay {
 
     @Override
     public void onDestroy() {
-        timer.unsubscribe();
+        timer.dispose();
 
         super.onDestroy();
     }

@@ -1,9 +1,30 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.activity.AbstractActionBarActivity;
+import cgeo.geocaching.activity.INavigationSource;
+import cgeo.geocaching.apps.navi.NavigationAppFactory;
+import cgeo.geocaching.location.DistanceParser;
+import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.location.GeopointFormatter;
+import cgeo.geocaching.models.Destination;
+import cgeo.geocaching.sensors.GeoData;
+import cgeo.geocaching.sensors.GeoDirHandler;
+import cgeo.geocaching.sensors.Sensors;
+import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.ui.AbstractViewHolder;
+import cgeo.geocaching.ui.NavigationActionProvider;
+import cgeo.geocaching.ui.dialog.CoordinatesInputDialog;
+import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.utils.AndroidRx2Utils;
+import cgeo.geocaching.utils.Formatter;
+import cgeo.geocaching.utils.Log;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.view.MenuItemCompat;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -23,34 +44,12 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import org.apache.commons.lang3.StringUtils;
-import android.support.annotation.Nullable;
-
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import cgeo.geocaching.activity.AbstractActionBarActivity;
-import cgeo.geocaching.activity.INavigationSource;
-import cgeo.geocaching.apps.navi.NavigationAppFactory;
-import cgeo.geocaching.location.DistanceParser;
-import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.location.GeopointFormatter;
-import cgeo.geocaching.models.Destination;
-import cgeo.geocaching.sensors.GeoData;
-import cgeo.geocaching.sensors.GeoDirHandler;
-import cgeo.geocaching.sensors.Sensors;
-import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.ui.AbstractViewHolder;
-import cgeo.geocaching.ui.NavigationActionProvider;
-import cgeo.geocaching.ui.dialog.CoordinatesInputDialog;
-import cgeo.geocaching.ui.dialog.Dialogs;
-import cgeo.geocaching.utils.AndroidRxUtils;
-import cgeo.geocaching.utils.Formatter;
-import cgeo.geocaching.utils.Log;
-import rx.functions.Action0;
-import rx.schedulers.Schedulers;
+import io.reactivex.schedulers.Schedulers;
+import org.apache.commons.lang3.StringUtils;
 
 public class NavigateAnyPointActivity extends AbstractActionBarActivity implements CoordinatesInputDialog.CoordinateUpdate, INavigationSource {
 
@@ -387,15 +386,15 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity implemen
 
         if (!getHistoryOfSearchedLocations().contains(loc)) {
             getHistoryOfSearchedLocations().add(0, loc);
-            AndroidRxUtils.andThenOnUi(Schedulers.io(), new Action0() {
+            AndroidRx2Utils.andThenOnUi(Schedulers.io(), new Runnable() {
                 @Override
-                public void call() {
+                public void run() {
                     // Save location
                     DataStore.saveSearchedDestination(loc);
                 }
-            }, new Action0() {
+            }, new Runnable() {
                 @Override
-                public void call() {
+                public void run() {
                     // Ensure to remove the footer
                     historyListView.removeFooterView(getEmptyHistoryFooter());
                     destinationHistoryAdapter.notifyDataSetChanged();

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.HandlerThread;
 import android.os.Looper;
 import android.os.Process;
+import android.support.v4.app.Fragment;
 
 import java.lang.ref.WeakReference;
 import java.util.concurrent.Callable;
@@ -104,6 +105,17 @@ public class AndroidRx2Utils {
             public boolean test(final T t) throws Exception {
                 final Activity a = activityRef.get();
                 return a != null && !a.isFinishing();
+            }
+        });
+    }
+
+    public static <T> Observable<T> bindFragment(final Fragment fragment, final Observable<T> source) {
+        final WeakReference<Fragment> fragmentRef = new WeakReference<Fragment>(fragment);
+        return source.observeOn(AndroidSchedulers.mainThread()).filter(new Predicate<T>() {
+            @Override
+            public boolean test(final T t) throws Exception {
+                final Fragment f = fragmentRef.get();
+                return f != null && f.isAdded() && !f.getActivity().isFinishing();
             }
         });
     }

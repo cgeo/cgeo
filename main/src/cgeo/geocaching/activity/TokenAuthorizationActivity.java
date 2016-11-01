@@ -5,7 +5,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.ui.dialog.Dialogs;
-import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.AndroidRx2Utils;
 import cgeo.geocaching.utils.BundleUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
@@ -31,7 +31,6 @@ import java.util.regex.Pattern;
 import butterknife.BindView;
 import okhttp3.Response;
 import org.apache.commons.lang3.StringUtils;
-import rx.functions.Action0;
 
 public abstract class TokenAuthorizationActivity extends AbstractActivity {
 
@@ -181,9 +180,9 @@ public abstract class TokenAuthorizationActivity extends AbstractActivity {
             final String username = usernameEditText.getText().toString();
             final String password = passwordEditText.getText().toString();
 
-            AndroidRxUtils.networkScheduler.createWorker().schedule(new Action0() {
+            AndroidRx2Utils.networkScheduler.scheduleDirect(new Runnable() {
                 @Override
-                public void call() {
+                public void run() {
                     requestToken(username, password);
                 }
             });

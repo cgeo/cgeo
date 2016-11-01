@@ -4,16 +4,17 @@ import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.capability.ISearchByGeocode;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.network.Parameters;
-import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.AndroidRx2Utils;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.CryptUtils;
 
-import org.apache.commons.lang3.StringUtils;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import rx.Observable;
-import rx.functions.Func0;
+import java.util.concurrent.Callable;
+
+import io.reactivex.Observable;
+import org.apache.commons.lang3.StringUtils;
 
 public class OCApiConnector extends OCConnector implements ISearchByGeocode {
 
@@ -126,12 +127,12 @@ public class OCApiConnector extends OCConnector implements ISearchByGeocode {
         final String id = StringUtils.trim(StringUtils.substringAfter(url, shortHost + "/viewcache.php?cacheid="));
         if (StringUtils.isNotBlank(id)) {
 
-            final String geocode = Observable.defer(new Func0<Observable<String>>() {
+            final String geocode = Observable.defer(new Callable<Observable<String>>() {
                 @Override
                 public Observable<String> call() {
                     return Observable.just(OkapiClient.getGeocodeByUrl(OCApiConnector.this, url));
                 }
-            }).subscribeOn(AndroidRxUtils.networkScheduler).toBlocking().first();
+            }).subscribeOn(AndroidRx2Utils.networkScheduler).blockingFirst();
 
             if (geocode != null && canHandle(geocode)) {
                 return geocode;

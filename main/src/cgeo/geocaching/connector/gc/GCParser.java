@@ -28,7 +28,7 @@ import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.AndroidRx2Utils;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.Log;
@@ -55,11 +55,19 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.Callable;
 import java.util.regex.Pattern;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.Single;
+import io.reactivex.functions.BiFunction;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -68,13 +76,6 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import rx.Observable;
-import rx.Observable.OnSubscribe;
-import rx.Subscriber;
-import rx.functions.Action1;
-import rx.functions.Func0;
-import rx.functions.Func2;
-import rx.schedulers.Schedulers;
 
 public final class GCParser {
     @NonNull
@@ -287,7 +288,7 @@ public final class GCParser {
 
         if (!cids.isEmpty() && Settings.isGCPremiumMember()) {
             Log.i("Trying to get .loc for " + cids.size() + " caches");
-            final Observable<Set<Geocache>> storedCaches = Observable.defer(new Func0<Observable<Set<Geocache>>>() {
+            final Observable<Set<Geocache>> storedCaches = Observable.defer(new Callable<Observable<Set<Geocache>>>() {
                 @Override
                 public Observable<Set<Geocache>> call() {
                     return Observable.just(DataStore.loadCaches(Geocache.getGeocodes(caches), LoadFlags.LOAD_CACHE_OR_DB));
@@ -322,7 +323,7 @@ public final class GCParser {
                         return searchResult;
                     }
 
-                    LocParser.parseLoc(coordinates, storedCaches.toBlocking().single());
+                    LocParser.parseLoc(coordinates, storedCaches.blockingSingle());
                 }
 
             } catch (final RuntimeException e) {
@@ -371,7 +372,7 @@ public final class GCParser {
         final SearchResult result = new SearchResult(parsed.left);
         if (parsed.left == StatusCode.NO_ERROR) {
             result.addAndPutInCache(Collections.singletonList(parsed.right));
-            DataStore.saveLogs(parsed.right.getGeocode(), getLogs(parseUserToken(page), Logs.ALL).toBlocking().toIterable());
+            DataStore.saveLogs(parsed.right.getGeocode(), getLogs(parseUserToken(page), Logs.ALL).blockingIterable());
         }
         return result;
     }
@@ -979,7 +980,7 @@ public final class GCParser {
      * Observable that fetches a list of pocket queries. Returns a single element (which may be an empty list).
      * Executes on the network scheduler.
      */
-    public static final Observable<List<PocketQuery>> searchPocketQueryListObservable = Observable.defer(new Func0<Observable<List<PocketQuery>>>() {
+    public static final Observable<List<PocketQuery>> searchPocketQueryListObservable = Observable.defer(new Callable<Observable<List<PocketQuery>>>() {
         @Override
         public Observable<List<PocketQuery>> call() {
             final Parameters params = new Parameters();
@@ -1025,7 +1026,7 @@ public final class GCParser {
                 return Observable.error(e);
             }
         }
-    }).subscribeOn(AndroidRxUtils.networkScheduler);
+    }).subscribeOn(AndroidRx2Utils.networkScheduler);
 
     /**
      * Reads the downloadable pocket queries from the uxOfflinePQTable
@@ -1754,7 +1755,7 @@ public final class GCParser {
             return Observable.empty();
         }
 
-        return Observable.defer(new Func0<Observable<LogEntry>>() {
+        return Observable.defer(new Callable<Observable<LogEntry>>() {
             @Override
             public Observable<LogEntry> call() {
                 final Parameters params = new Parameters(
@@ -1774,18 +1775,18 @@ public final class GCParser {
                     return Observable.empty();
                 }
             }
-        }).subscribeOn(AndroidRxUtils.networkScheduler);
+        }).subscribeOn(AndroidRx2Utils.networkScheduler);
     }
 
     private static Observable<LogEntry> parseLogs(final boolean markAsFriendsLog, final InputStream responseStream) {
-        return Observable.create(new OnSubscribe<LogEntry>() {
+        return Observable.create(new ObservableOnSubscribe<LogEntry>() {
             @Override
-            public void call(final Subscriber<? super LogEntry> subscriber) {
+            public void subscribe(final ObservableEmitter<LogEntry> emitter) throws Exception {
                 try {
                     final ObjectNode resp = (ObjectNode) JsonUtils.reader.readTree(responseStream);
                     if (!resp.path("status").asText().equals("success")) {
                         Log.w("GCParser.loadLogsFromDetails: status is " + resp.path("status").asText("[absent]"));
-                        subscriber.onCompleted();
+                        emitter.onComplete();
                         return;
                     }
 
@@ -1824,12 +1825,12 @@ public final class GCParser {
                             logDoneBuilder.addLogImage(logImage);
                         }
 
-                        subscriber.onNext(logDoneBuilder.build());
+                        emitter.onNext(logDoneBuilder.build());
                     }
                 } catch (final IOException e) {
                     Log.w("GCParser.loadLogsFromDetails: Failed to parse cache logs", e);
                 }
-                subscriber.onCompleted();
+                emitter.onComplete();
             }
         });
     }
@@ -1964,24 +1965,24 @@ public final class GCParser {
         final Observable<LogEntry> ownLogs = getLogs(userToken, Logs.OWN).cache();
         final Observable<LogEntry> specialLogs = Settings.isFriendLogsWanted() ?
                 Observable.merge(getLogs(userToken, Logs.FRIENDS), ownLogs) : Observable.<LogEntry>empty();
-        final Observable<List<LogEntry>> mergedLogs = Observable.zip(logs.toList(), specialLogs.toList(),
-                new Func2<List<LogEntry>, List<LogEntry>, List<LogEntry>>() {
+        final Single<List<LogEntry>> mergedLogs = Single.zip(logs.toList(), specialLogs.toList(),
+                new BiFunction<List<LogEntry>, List<LogEntry>, List<LogEntry>>() {
                     @Override
-                    public List<LogEntry> call(final List<LogEntry> logEntries, final List<LogEntry> specialLogEntries) {
+                    public List<LogEntry> apply(final List<LogEntry> logEntries, final List<LogEntry> specialLogEntries) {
                         mergeFriendsLogs(logEntries, specialLogEntries);
                         return logEntries;
                     }
                 }).cache();
-        mergedLogs.subscribe(new Action1<List<LogEntry>>() {
+        mergedLogs.subscribe(new Consumer<List<LogEntry>>() {
                                  @Override
-                                 public void call(final List<LogEntry> logEntries) {
+                                 public void accept(final List<LogEntry> logEntries) {
                                      DataStore.saveLogs(cache.getGeocode(), logEntries);
                                  }
                              });
         if (cache.isFound() && cache.getVisitedDate() == 0) {
-            ownLogs.subscribe(new Action1<LogEntry>() {
+            ownLogs.subscribe(new Consumer<LogEntry>() {
                 @Override
-                public void call(final LogEntry logEntry) {
+                public void accept(final LogEntry logEntry) {
                     if (logEntry.getType().isFoundLog()) {
                         cache.setVisitedDate(logEntry.date);
                     }
@@ -2000,7 +2001,7 @@ public final class GCParser {
         }
 
         // Wait for completion of logs parsing, retrieving and merging
-        mergedLogs.toCompletable().await();
+        mergedLogs.toCompletable().blockingAwait();
     }
 
     /**
