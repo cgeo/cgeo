@@ -320,6 +320,11 @@ dependencies {
     // ProGuard rules for RxJava
     compile "com.artemzin.rxjava:proguard-rules:$rxjavaVersion.0"
 
+    // RxJava 2
+    def rxjava2Version = '2.0.0'
+    compile "io.reactivex.rxjava2:rxjava:$rxjava2Version"
+    compile "io.reactivex.rxjava2:rxandroid:$rxjava2Version"
+
     // Showcase view
     // TODO replace by repository dependency. however, there is a conflict in min sdk, which needs to be solved then
     compile project(":showcaseview")
