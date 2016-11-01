@@ -181,7 +181,7 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
         OAuth.signOAuth(host, pathRequest, method, https, params, new OAuthTokens(null, null), consumerKey, consumerSecret);
 
         try {
-            final Response response = Network.getRequest(getUrlPrefix() + host + pathRequest, params).toBlocking().value();
+            final Response response = Network.getRequest(getUrlPrefix() + host + pathRequest, params).blockingGet();
 
             if (response.isSuccessful()) {
                 final String line = Network.getResponseData(response);

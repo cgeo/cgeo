@@ -6,6 +6,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.ui.recyclerview.RecyclerViewProvider;
+import cgeo.geocaching.utils.AndroidRx2Utils;
 
 import android.app.ProgressDialog;
 import android.location.Address;
@@ -16,10 +17,9 @@ import android.support.v7.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.Observable;
+import io.reactivex.functions.Consumer;
 import org.apache.commons.lang3.StringUtils;
-import rx.Observable;
-import rx.android.app.AppObservable;
-import rx.functions.Action1;
 
 public class AddressListActivity extends AbstractActionBarActivity implements AddressClickListener {
 
@@ -44,16 +44,16 @@ public class AddressListActivity extends AbstractActionBarActivity implements Ad
     private void lookupAddressInBackground(final String keyword, final AddressListAdapter adapter, final ProgressDialog waitDialog) {
         final Observable<Address> geocoderObservable = new AndroidGeocoder(this).getFromLocationName(keyword)
                 .onErrorResumeNext(MapQuestGeocoder.getFromLocationName(keyword));
-        AppObservable.bindActivity(this, geocoderObservable.toList()).subscribe(new Action1<List<Address>>() {
+        AndroidRx2Utils.bindActivity(this, geocoderObservable.toList()).subscribe(new Consumer<List<Address>>() {
             @Override
-            public void call(final List<Address> foundAddresses) {
+            public void accept(final List<Address> foundAddresses) {
                 waitDialog.dismiss();
                 addresses.addAll(foundAddresses);
                 adapter.notifyItemRangeInserted(0, foundAddresses.size());
             }
-        }, new Action1<Throwable>() {
+        }, new Consumer<Throwable>() {
             @Override
-            public void call(final Throwable throwable) {
+            public void accept(final Throwable throwable) {
                 finish();
                 showToast(res.getString(R.string.err_unknown_address));
             }

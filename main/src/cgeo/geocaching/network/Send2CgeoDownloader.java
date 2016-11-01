@@ -44,7 +44,7 @@ public class Send2CgeoDownloader {
                 // Download new code
                 try {
                     final Response responseFromWeb = Network.getRequest("http://send2.cgeo.org/read.html", params)
-                            .flatMap(Network.withSuccess).toBlocking().value();
+                            .flatMap(Network.withSuccess).blockingGet();
 
                     final String response = Network.getResponseData(responseFromWeb);
                     if (response != null && response.length() > 2) {

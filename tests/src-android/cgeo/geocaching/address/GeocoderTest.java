@@ -7,16 +7,15 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.utils.Log;
 
-import org.apache.commons.lang3.StringUtils;
-import org.assertj.core.data.Offset;
-
-import rx.Observable;
-
 import android.location.Address;
 import android.location.Geocoder;
 import android.test.suitebuilder.annotation.Suppress;
 
 import java.util.Locale;
+
+import io.reactivex.Single;
+import org.apache.commons.lang3.StringUtils;
+import org.assertj.core.data.Offset;
 
 public class GeocoderTest extends CGeoTestCase {
 
@@ -33,7 +32,7 @@ public class GeocoderTest extends CGeoTestCase {
             // Some emulators don't have access to Google Android geocoder
             if (Geocoder.isPresent()) {
                 final AndroidGeocoder geocoder = new AndroidGeocoder(CgeoApplication.getInstance());
-                testGeocoder(geocoder.getFromLocationName(TEST_ADDRESS), "Android", true);
+                testGeocoder(geocoder.getFromLocationName(TEST_ADDRESS).firstOrError(), "Android", true);
                 testGeocoder(geocoder.getFromLocation(TEST_COORDS), "Android reverse", true);
             } else {
                 Log.i("not testing absent Android geocoder");
@@ -48,15 +47,15 @@ public class GeocoderTest extends CGeoTestCase {
         final Locale locale = Locale.getDefault();
         try {
             Locale.setDefault(Locale.US);
-            testGeocoder(MapQuestGeocoder.getFromLocationName(TEST_ADDRESS), "MapQuest", true);
+            testGeocoder(MapQuestGeocoder.getFromLocationName(TEST_ADDRESS).firstOrError(), "MapQuest", true);
             testGeocoder(MapQuestGeocoder.getFromLocation(TEST_COORDS), "MapQuest reverse", true);
         } finally {
             Locale.setDefault(locale);
         }
     }
 
-    public static void testGeocoder(final Observable<Address> addressObservable, final String geocoder, final boolean withAddress) {
-        final Address address = addressObservable.toBlocking().first();
+    public static void testGeocoder(final Single<Address> addressObservable, final String geocoder, final boolean withAddress) {
+        final Address address = addressObservable.blockingGet();
         assertThat(address.getLatitude()).as(describe("latitude", geocoder)).isCloseTo(TEST_LATITUDE, TEST_OFFSET);
         assertThat(address.getLongitude()).as(describe("longitude", geocoder)).isCloseTo(TEST_LONGITUDE, TEST_OFFSET);
         if (withAddress) {

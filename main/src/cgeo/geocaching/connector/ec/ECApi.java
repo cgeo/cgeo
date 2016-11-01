@@ -18,14 +18,8 @@ import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.SynchronizedDateFormat;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import okhttp3.Response;
-import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import rx.Single;
-import rx.functions.Func1;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -35,6 +29,13 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import io.reactivex.Single;
+import io.reactivex.functions.Function;
+import okhttp3.Response;
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 
 final class ECApi {
 
@@ -59,7 +60,7 @@ final class ECApi {
     static Geocache searchByGeoCode(final String geocode) {
         final Parameters params = new Parameters("id", getIdFromGeocode(geocode));
         try {
-            final Response response = apiRequest("gpx.php", params).toBlocking().value();
+            final Response response = apiRequest("gpx.php", params).blockingGet();
 
             final Collection<Geocache> caches = importCachesFromGPXResponse(response);
             if (CollectionUtils.isNotEmpty(caches)) {
@@ -84,7 +85,7 @@ final class ECApi {
         params.add("lon1", String.valueOf(viewport.getLongitudeMin()));
         params.add("lon2", String.valueOf(viewport.getLongitudeMax()));
         try {
-            final Response response = apiRequest(params).toBlocking().value();
+            final Response response = apiRequest(params).blockingGet();
             return importCachesFromJSON(response);
         } catch (final Exception ignored) {
             return Collections.emptyList();
@@ -98,7 +99,7 @@ final class ECApi {
         params.add("lat", String.valueOf(center.getLatitude()));
         params.add("lon", String.valueOf(center.getLongitude()));
         try {
-            final Response response = apiRequest(params).toBlocking().value();
+            final Response response = apiRequest(params).blockingGet();
             return importCachesFromJSON(response);
         } catch (final Exception ignored) {
             return Collections.emptyList();
@@ -115,7 +116,7 @@ final class ECApi {
 
         final String uri = API_HOST + "log.php";
         try {
-            final Response response = Network.postRequest(uri, params).toBlocking().value();
+            final Response response = Network.postRequest(uri, params).blockingGet();
 
             if (response.code() == 403 && ecLogin.login() == StatusCode.NO_ERROR) {
                 apiRequest(uri, params, true);
@@ -160,9 +161,9 @@ final class ECApi {
         final Single<Response> response = Network.getRequest(API_HOST + uri, params);
 
         // retry at most one time
-        return response.flatMap(new Func1<Response, Single<Response>>() {
+        return response.flatMap(new Function<Response, Single<Response>>() {
             @Override
-            public Single<Response> call(final Response response) {
+            public Single<Response> apply(final Response response) {
                 if (!isRetry && response.code() == 403 && ecLogin.login() == StatusCode.NO_ERROR) {
                     return apiRequest(uri, params, true);
                 }

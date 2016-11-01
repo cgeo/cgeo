@@ -25,6 +25,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.utils.AndroidRx2Utils;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.DatabaseBackupUtils;
 import cgeo.geocaching.utils.Formatter;
@@ -71,13 +72,14 @@ import com.github.amlcurran.showcaseview.targets.ActionViewTarget;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.jakewharton.processphoenix.ProcessPhoenix;
+import io.reactivex.Single;
+import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
 import org.apache.commons.lang3.StringUtils;
-import rx.Observable;
 import rx.android.app.AppObservable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action0;
 import rx.functions.Action1;
-import rx.functions.Func1;
 
 public class MainActivity extends AbstractActionBarActivity {
     @BindView(R.id.nav_satellites) protected TextView navSatellites;
@@ -636,17 +638,17 @@ public class MainActivity extends AbstractActionBarActivity {
                 }
                 if (addCoords == null || currentCoords.distanceTo(addCoords) > 0.5) {
                     addCoords = currentCoords;
-                    final Observable<String> address = (new AndroidGeocoder(MainActivity.this).getFromLocation(currentCoords)).map(new Func1<Address, String>() {
+                    final Single<String> address = (new AndroidGeocoder(MainActivity.this).getFromLocation(currentCoords)).map(new Function<Address, String>() {
                         @Override
-                        public String call(final Address address) {
+                        public String apply(final Address address) {
                             return formatAddress(address);
                         }
-                    }).onErrorResumeNext(Observable.just(currentCoords.toString()));
-                    AppObservable.bindActivity(MainActivity.this, address)
-                            .subscribeOn(AndroidRxUtils.networkScheduler)
-                            .subscribe(new Action1<String>() {
+                    }).onErrorResumeNext(Single.just(currentCoords.toString()));
+                    AndroidRx2Utils.bindActivity(MainActivity.this, address)
+                            .subscribeOn(AndroidRx2Utils.networkScheduler)
+                            .subscribe(new Consumer<String>() {
                                 @Override
-                                public void call(final String address) {
+                                public void accept(final String address) {
                                     navLocation.setText(address);
                                 }
                             });

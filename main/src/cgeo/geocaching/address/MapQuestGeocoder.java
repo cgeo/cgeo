@@ -5,20 +5,19 @@ import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.utils.Log;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
-
-import org.apache.commons.lang3.StringUtils;
-import android.support.annotation.NonNull;
-
 import android.location.Address;
+import android.support.annotation.NonNull;
 
 import java.util.Locale;
 
-import rx.Observable;
-import rx.Observable.OnSubscribe;
-import rx.Subscriber;
-import rx.functions.Func1;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.Single;
+import io.reactivex.functions.Function;
+import org.apache.commons.lang3.StringUtils;
 
 public class MapQuestGeocoder {
 
@@ -48,32 +47,32 @@ public class MapQuestGeocoder {
      * @param coords the coordinates
      * @return an observable containing one location or an error
      */
-    public static Observable<Address> getFromLocation(@NonNull final Geopoint coords) {
-        return get("reverse", new Parameters("location", String.format(Locale.US, "%f,%f", coords.getLatitude(), coords.getLongitude()))).first();
+    public static Single<Address> getFromLocation(@NonNull final Geopoint coords) {
+        return get("reverse", new Parameters("location", String.format(Locale.US, "%f,%f", coords.getLatitude(), coords.getLongitude()))).firstOrError();
     }
 
     private static Observable<Address> get(@NonNull final String method, @NonNull final Parameters parameters) {
         return Network.requestJSON("https://open.mapquestapi.com/geocoding/v1/" + method,
                 parameters.put("key", MAPQUEST_KEY))
-                .flatMapObservable(new Func1<ObjectNode, Observable<Address>>() {
+                .flatMapObservable(new Function<ObjectNode, Observable<Address>>() {
                     @Override
-                    public Observable<Address> call(final ObjectNode response) {
+                    public Observable<Address> apply(final ObjectNode response) {
                         final int statusCode = response.path("info").path("statuscode").asInt(-1);
                         if (statusCode != 0) {
                             Log.w("MapQuest decoder error: statuscode is not 0");
                             throw new IllegalStateException("no correct answer from MapQuest geocoder");
                         }
-                        return Observable.create(new OnSubscribe<Address>() {
+                        return Observable.create(new ObservableOnSubscribe<Address>() {
                             @Override
-                            public void call(final Subscriber<? super Address> subscriber) {
+                            public void subscribe(final ObservableEmitter<Address> emitter) throws Exception {
                                 try {
                                     for (final JsonNode address : response.get("results").get(0).get("locations")) {
-                                        subscriber.onNext(mapquestToAddress(address));
+                                        emitter.onNext(mapquestToAddress(address));
                                     }
-                                    subscriber.onCompleted();
+                                    emitter.onComplete();
                                 } catch (final Exception e) {
                                     Log.e("Error decoding MapQuest address", e);
-                                    subscriber.onError(e);
+                                    emitter.onError(e);
                                 }
                             }
                         });
