@@ -2,6 +2,10 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
+    <b>Next bugfix release:</b>\n
+    · Fix: No logbook shown for users not having selected a date format on the geocaching website\n
+    \n
+    \n
     <b>2016.10.23:</b>\n
     · Fix: Correctly get home location after web site change (You may need to restart the c:geo app twice to get the correct home location)\n
     · Fix: Correctly get some date formats after web site change\n
