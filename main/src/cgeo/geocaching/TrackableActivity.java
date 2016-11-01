@@ -23,6 +23,7 @@ import cgeo.geocaching.ui.ImagesList;
 import cgeo.geocaching.ui.UserActionsClickListener;
 import cgeo.geocaching.ui.UserNameClickListener;
 import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.utils.AndroidRx2Utils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.HtmlUtils;
 import cgeo.geocaching.utils.Log;
@@ -59,21 +60,18 @@ import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.functions.Action;
+import io.reactivex.functions.Consumer;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
-import rx.Subscription;
-import rx.android.app.AppObservable;
 import rx.android.view.OnClickEvent;
 import rx.android.view.ViewObservable;
 import rx.functions.Action1;
-import rx.subscriptions.CompositeSubscription;
-import rx.subscriptions.Subscriptions;
 
 public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivity.Page> implements AndroidBeam.ActivitySharingInterface {
-
-    private CompositeSubscription createSubscriptions;
 
     public enum Page {
         DETAILS(R.string.detail),
@@ -100,7 +98,8 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
     private ProgressDialog waitDialog = null;
     private CharSequence clickedItemText = null;
     private ImagesList imagesList = null;
-    private Subscription geoDataSubscription = Subscriptions.empty();
+    private final CompositeDisposable createDisposables = new CompositeDisposable();
+    private final CompositeDisposable geoDataDisposable = new CompositeDisposable();
     private static final GeoDirHandler locationUpdater = new GeoDirHandler() {
         @Override
         public void updateGeoData(final GeoData geoData) {
@@ -116,7 +115,6 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         onCreate(savedInstanceState, R.layout.viewpager_activity);
-        createSubscriptions = new CompositeSubscription();
 
         // set title in code, as the activity needs a hard coded title due to the intent filters
         setTitle(res.getString(R.string.trackable));
@@ -203,39 +201,48 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
     public void onResume() {
         super.onResume();
         if (!Settings.useLowPowerMode()) {
-            geoDataSubscription = locationUpdater.start(GeoDirHandler.UPDATE_GEODATA);
+            geoDataDisposable.add(locationUpdater.start(GeoDirHandler.UPDATE_GEODATA));
         }
     }
 
     @Override
     public void onPause() {
-        geoDataSubscription.unsubscribe();
-        geoDataSubscription = Subscriptions.empty();
+        geoDataDisposable.clear();
         super.onPause();
+    }
+
+    private void act(final Trackable newTrackable) {
+        trackable = newTrackable;
+        displayTrackable();
+        // reset imagelist
+        imagesList = null;
+        lazyLoadTrackableImages();
     }
 
     private void refreshTrackable(final String message) {
         waitDialog = ProgressDialog.show(this, message, res.getString(R.string.trackable_details_loading), true, true);
-        createSubscriptions.add(AppObservable.bindActivity(this, ConnectorFactory.loadTrackable(geocode, guid, id, brand)).singleOrDefault(null).subscribe(new Action1<Trackable>() {
-            @Override
-            public void call(final Trackable newTrackable) {
-                if (newTrackable != null && trackingCode != null) {
-                    newTrackable.setTrackingcode(trackingCode);
-                }
-                trackable = newTrackable;
-                displayTrackable();
-                // reset imagelist
-                imagesList = null;
-                lazyLoadTrackableImages();
-            }
-        }, new Action1<Throwable>() {
-            @Override
-            public void call(final Throwable t) {
-                Log.e("unable to retrieve trackable information", t);
-                showToast(res.getString(R.string.err_tb_find_that));
-                finish();
-            }
-        }));
+        createDisposables.add((AndroidRx2Utils.bindActivity(this, ConnectorFactory.loadTrackable(geocode, guid, id, brand)).subscribe(
+                new Consumer<Trackable>() {
+                    @Override
+                    public void accept(final Trackable newTrackable) throws Exception {
+                        if (trackingCode != null) {
+                            newTrackable.setTrackingcode(trackingCode);
+                        }
+                        act(newTrackable);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(final Throwable throwable) throws Exception {
+                        Log.w("unable to retrieve trackable information", throwable);
+                        showToast(res.getString(R.string.err_tb_find_that));
+                        finish();
+                    }
+                }, new Action() {
+                    @Override
+                    public void run() throws Exception {
+                        act(null);
+                    }
+                })));
     }
 
     @Nullable
@@ -312,9 +319,9 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
 
     private void setupIcon(final ActionBar actionBar, final String url) {
         final HtmlImage imgGetter = new HtmlImage(HtmlImage.SHARED, false, false, false);
-        AppObservable.bindActivity(this, imgGetter.fetchDrawable(url)).subscribe(new Action1<BitmapDrawable>() {
+        AndroidRx2Utils.bindActivity(this, imgGetter.fetchDrawable(url)).subscribe(new Consumer<BitmapDrawable>() {
             @Override
-            public void call(final BitmapDrawable image) {
+            public void accept(final BitmapDrawable image) {
                 if (actionBar != null) {
                     final int height = actionBar.getHeight();
                     image.setBounds(0, 0, height, height);
@@ -376,7 +383,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
             return;
         }
         imagesList = new ImagesList(this, trackable.getGeocode(), null);
-        createSubscriptions.add(imagesList.loadImages(imageView, trackable.getImages()));
+        createDisposables.add(imagesList.loadImages(imageView, trackable.getImages()));
     }
 
     /**
@@ -575,9 +582,9 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
                     }
                 });
 
-                AppObservable.bindActivity(TrackableActivity.this, new HtmlImage(geocode, true, false, false).fetchDrawable(trackable.getImage())).subscribe(new Action1<BitmapDrawable>() {
+                AndroidRx2Utils.bindActivity(TrackableActivity.this, new HtmlImage(geocode, true, false, false).fetchDrawable(trackable.getImage())).subscribe(new Consumer<BitmapDrawable>() {
                     @Override
-                    public void call(final BitmapDrawable bitmapDrawable) {
+                    public void accept(final BitmapDrawable bitmapDrawable) {
                         trackableImage.setImageDrawable(bitmapDrawable);
                     }
                 });
@@ -671,8 +678,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
 
     @Override
     protected void onDestroy() {
-        createSubscriptions.unsubscribe();
-        createSubscriptions = null;
+        createDisposables.clear();
         super.onDestroy();
     }
 

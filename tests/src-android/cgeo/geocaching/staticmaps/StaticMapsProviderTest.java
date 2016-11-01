@@ -55,7 +55,7 @@ public class StaticMapsProviderTest extends TestCase {
             assertThat(StaticMapsProvider.hasStaticMapForWaypoint(geocode, trailhead)).isFalse();
 
             // download
-            StaticMapsProvider.downloadMaps(cache).await();
+            StaticMapsProvider.downloadMaps(cache).blockingAwait();
 
             try {
                 Thread.sleep(10000);

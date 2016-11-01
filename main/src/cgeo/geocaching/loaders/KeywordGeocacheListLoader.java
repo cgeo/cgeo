@@ -7,7 +7,7 @@ import cgeo.geocaching.connector.capability.ISearchByKeyword;
 import android.app.Activity;
 import android.support.annotation.NonNull;
 
-import rx.functions.Func1;
+import io.reactivex.functions.Function;
 
 public class KeywordGeocacheListLoader extends AbstractSearchLoader {
 
@@ -21,9 +21,9 @@ public class KeywordGeocacheListLoader extends AbstractSearchLoader {
     @Override
     public SearchResult runSearch() {
         return nonEmptyCombineActive(ConnectorFactory.getSearchByKeywordConnectors(),
-                new Func1<ISearchByKeyword, SearchResult>() {
+                new Function<ISearchByKeyword, SearchResult>() {
                     @Override
-                    public SearchResult call(final ISearchByKeyword connector) {
+                    public SearchResult apply(final ISearchByKeyword connector) {
                         return connector.searchByKeyword(keyword);
                     }
                 });

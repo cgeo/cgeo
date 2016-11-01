@@ -7,7 +7,7 @@ import cgeo.geocaching.connector.capability.ISearchByFinder;
 import android.app.Activity;
 import android.support.annotation.NonNull;
 
-import rx.functions.Func1;
+import io.reactivex.functions.Function;
 
 public class FinderGeocacheListLoader extends AbstractSearchLoader {
 
@@ -21,9 +21,9 @@ public class FinderGeocacheListLoader extends AbstractSearchLoader {
     @Override
     public SearchResult runSearch() {
         return nonEmptyCombineActive(ConnectorFactory.getSearchByFinderConnectors(),
-                new Func1<ISearchByFinder, SearchResult>() {
+                new Function<ISearchByFinder, SearchResult>() {
                     @Override
-                    public SearchResult call(final ISearchByFinder connector) {
+                    public SearchResult apply(final ISearchByFinder connector) {
                         return connector.searchByFinder(username);
                     }
                 });

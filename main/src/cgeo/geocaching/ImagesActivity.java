@@ -15,14 +15,14 @@ import android.view.View;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.disposables.CompositeDisposable;
 import org.apache.commons.collections4.CollectionUtils;
-import rx.Subscription;
 
 public class ImagesActivity extends AbstractActionBarActivity {
 
     private List<Image> imageNames;
     private ImagesList imagesList;
-    private Subscription subscription;
+    private final CompositeDisposable createDisposables = new CompositeDisposable();
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
@@ -60,14 +60,13 @@ public class ImagesActivity extends AbstractActionBarActivity {
     @Override
     public void onStart() {
         super.onStart();
-        subscription = imagesList.loadImages(findViewById(R.id.spoiler_list), imageNames);
+        createDisposables.add(imagesList.loadImages(findViewById(R.id.spoiler_list), imageNames));
     }
 
     @Override
     public void onStop() {
         // Reclaim native memory faster than the finalizers would
-        subscription.unsubscribe();
-        subscription = null;
+        createDisposables.clear();
         super.onStop();
     }
 

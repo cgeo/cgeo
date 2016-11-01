@@ -84,6 +84,7 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 import butterknife.ButterKnife;
+import io.reactivex.disposables.CompositeDisposable;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.mapsforge.core.model.LatLong;
@@ -101,9 +102,7 @@ import org.mapsforge.map.rendertheme.InternalRenderTheme;
 import org.mapsforge.map.rendertheme.XmlRenderTheme;
 import org.mapsforge.map.rendertheme.rule.RenderThemeHandler;
 import org.xmlpull.v1.XmlPullParserException;
-import rx.Subscription;
 import rx.functions.Action1;
-import rx.subscriptions.Subscriptions;
 
 @SuppressLint("ClickableViewAccessibility")
 public class NewMap extends AbstractActionBarActivity {
@@ -132,7 +131,7 @@ public class NewMap extends AbstractActionBarActivity {
     /**
      * initialization with an empty subscription to make static code analysis tools more happy
      */
-    private Subscription resumeSubscription = Subscriptions.empty();
+    private final CompositeDisposable resumeDisposables = new CompositeDisposable();
     private CheckBox myLocSwitch;
     private MapOptions mapOptions;
     private TargetView targetView;
@@ -670,7 +669,7 @@ public class NewMap extends AbstractActionBarActivity {
             targetView.setTarget(target.getGeocode(), target.getName());
         }
 
-        this.resumeSubscription = Subscriptions.from(this.geoDirUpdate.start(GeoDirHandler.UPDATE_GEODIR));
+        this.resumeDisposables.add(this.geoDirUpdate.start(GeoDirHandler.UPDATE_GEODIR));
     }
 
     @Override
@@ -691,9 +690,7 @@ public class NewMap extends AbstractActionBarActivity {
     }
 
     private void terminateLayers() {
-
-        this.resumeSubscription.unsubscribe();
-        this.resumeSubscription = Subscriptions.empty();
+        this.resumeDisposables.clear();
 
         this.caches.onDestroy();
         this.caches = null;

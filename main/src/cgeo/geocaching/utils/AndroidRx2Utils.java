@@ -96,4 +96,15 @@ public class AndroidRx2Utils {
             }
         });
     }
+
+    public static <T> Maybe<T> bindActivity(final Activity activity, final Maybe<T> source) {
+        final WeakReference<Activity> activityRef = new WeakReference<>(activity);
+        return source.observeOn(AndroidSchedulers.mainThread()).filter(new Predicate<T>() {
+            @Override
+            public boolean test(final T t) throws Exception {
+                final Activity a = activityRef.get();
+                return a != null && !a.isFinishing();
+            }
+        });
+    }
 }

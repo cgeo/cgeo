@@ -6,7 +6,7 @@ import cgeo.geocaching.connector.capability.ISearchByNextPage;
 
 import android.app.Activity;
 
-import rx.functions.Func1;
+import io.reactivex.functions.Function;
 
 public class NextPageGeocacheListLoader extends AbstractSearchLoader {
     private final SearchResult search;
@@ -19,9 +19,9 @@ public class NextPageGeocacheListLoader extends AbstractSearchLoader {
     @Override
     public SearchResult runSearch() {
         return SearchResult.parallelCombineActive(ConnectorFactory.getSearchByNextPageConnectors(),
-                new Func1<ISearchByNextPage, SearchResult>() {
+                new Function<ISearchByNextPage, SearchResult>() {
                     @Override
-                    public SearchResult call(final ISearchByNextPage connector) {
+                    public SearchResult apply(final ISearchByNextPage connector) {
                         return connector.searchByNextPage(search);
                     }
                 });

@@ -7,8 +7,8 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.widget.TextView;
 
+import io.reactivex.Observable;
 import org.apache.commons.lang3.tuple.ImmutablePair;
-import rx.Observable;
 
 /**
  * Specialized image class for fetching and displaying smileys in the log book.

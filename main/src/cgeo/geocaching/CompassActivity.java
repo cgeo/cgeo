@@ -1,25 +1,5 @@
 package cgeo.geocaching;
 
-import android.content.Context;
-import android.content.Intent;
-import android.content.res.Configuration;
-import android.media.AudioManager;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.TextView;
-import android.widget.ToggleButton;
-
-import com.github.amlcurran.showcaseview.targets.ActionItemTarget;
-
-import org.apache.commons.lang3.StringUtils;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.activity.ShowcaseViewBuilder;
 import cgeo.geocaching.enumerations.LoadFlags;
@@ -41,8 +21,27 @@ import cgeo.geocaching.ui.WaypointSelectionActionProvider;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
+
+import android.content.Context;
+import android.content.Intent;
+import android.content.res.Configuration;
+import android.media.AudioManager;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.TextView;
+import android.widget.ToggleButton;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import com.github.amlcurran.showcaseview.targets.ActionItemTarget;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import org.apache.commons.lang3.StringUtils;
 
 public class CompassActivity extends AbstractActionBarActivity {
 
@@ -287,9 +286,9 @@ public class CompassActivity extends AbstractActionBarActivity {
         headingView.setText(Math.round(cacheHeading) + "°");
     }
 
-    private final Action1<Status> gpsStatusHandler = new Action1<Status>() {
+    private final Consumer<Status> gpsStatusHandler = new Consumer<Status>() {
         @Override
-        public void call(final Status gpsStatus) {
+        public void accept(final Status gpsStatus) {
             if (gpsStatus.satellitesVisible >= 0) {
                 navSatellites.setText(res.getString(R.string.loc_sat) + ": " + gpsStatus.satellitesFixed + "/" + gpsStatus.satellitesVisible);
             } else {

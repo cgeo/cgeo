@@ -2,9 +2,9 @@ package cgeo.geocaching.ui;
 
 import cgeo.geocaching.network.HtmlImage;
 
-import rx.Observable;
-
 import android.graphics.drawable.BitmapDrawable;
+
+import io.reactivex.Observable;
 
 public class DirectionImage {
 

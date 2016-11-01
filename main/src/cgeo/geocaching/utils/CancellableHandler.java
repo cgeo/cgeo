@@ -2,13 +2,13 @@ package cgeo.geocaching.utils;
 
 import cgeo.geocaching.CgeoApplication;
 
-import rx.Subscription;
-import rx.subscriptions.CompositeSubscription;
-
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.support.annotation.StringRes;
+
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
 
 /**
  * Handler with a cancel policy. Once cancelled, the handler will not handle
@@ -19,7 +19,7 @@ public abstract class CancellableHandler extends Handler {
     public static final int DONE = -1000;
     protected static final int UPDATE_LOAD_PROGRESS_DETAIL = 42186;
     private volatile boolean cancelled = false;
-    private final CompositeSubscription subscriptions = new CompositeSubscription();
+    private final CompositeDisposable disposables = new CompositeDisposable();
 
     public CancellableHandler(final Looper serviceLooper) {
         super(serviceLooper);
@@ -45,7 +45,7 @@ public abstract class CancellableHandler extends Handler {
 
         if (message.obj instanceof CancelHolder) {
             cancelled = true;
-            subscriptions.unsubscribe();
+            disposables.dispose();
             handleCancel(((CancelHolder) message.obj).payload);
         } else {
             handleRegularMessage(message);
@@ -53,13 +53,13 @@ public abstract class CancellableHandler extends Handler {
     }
 
     /**
-     * Add a subscription to the list of subscriptions to be subscribed at cancellation time.
+     * Add a disposable to the list of disposables to be disposed at cancellation time.
      */
-    public final void unsubscribeIfCancelled(final Subscription subscription) {
-        subscriptions.add(subscription);
+    public final void disposeIfCancelled(final Disposable disposable) {
+        disposables.add(disposable);
         if (cancelled) {
             // Protect against race conditions
-            subscriptions.unsubscribe();
+            disposables.dispose();
         }
     }
 

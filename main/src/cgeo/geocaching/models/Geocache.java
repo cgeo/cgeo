@@ -28,8 +28,8 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.log.LogCacheActivity;
 import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogTemplateProvider;
-import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.log.LogTemplateProvider.LogContext;
+import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.maps.mapsforge.v6.caches.GeoitemRef;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.settings.Settings;
@@ -1711,7 +1711,7 @@ public class Geocache implements IWaypoint {
                 return;
             }
 
-            StaticMapsProvider.downloadMaps(cache).mergeWith(imgGetter.waitForEndCompletable(handler)).await();
+            StaticMapsProvider.downloadMaps(cache).mergeWith(imgGetter.waitForEndCompletable(handler)).blockingAwait();
 
             if (handler != null) {
                 handler.sendEmptyMessage(CancellableHandler.DONE);

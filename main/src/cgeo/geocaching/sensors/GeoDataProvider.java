@@ -1,10 +1,8 @@
 package cgeo.geocaching.sensors;
 
-import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.AndroidRx2Utils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.RxUtils.DelayedUnsubscription;
-
-import org.apache.commons.lang3.StringUtils;
 
 import android.content.Context;
 import android.location.Location;
@@ -15,11 +13,11 @@ import android.os.Bundle;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 
-import rx.Observable;
-import rx.Observable.OnSubscribe;
-import rx.Subscriber;
-import rx.functions.Action0;
-import rx.subscriptions.Subscriptions;
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.functions.Cancellable;
+import org.apache.commons.lang3.StringUtils;
 
 public class GeoDataProvider {
 
@@ -30,14 +28,14 @@ public class GeoDataProvider {
     public static Observable<GeoData> create(final Context context) {
         final LocationManager geoManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         final AtomicReference<Location> latestGPSLocation = new AtomicReference<>(null);
-        final Observable<GeoData> observable = Observable.create(new OnSubscribe<GeoData>() {
+        final Observable<GeoData> observable = Observable.create(new ObservableOnSubscribe<GeoData>() {
             @Override
-            public void call(final Subscriber<? super GeoData> subscriber) {
-                final Listener networkListener = new Listener(subscriber, latestGPSLocation);
-                final Listener gpsListener = new Listener(subscriber, latestGPSLocation);
+            public void subscribe(final ObservableEmitter<GeoData> emitter) throws Exception {
+                final Listener networkListener = new Listener(emitter, latestGPSLocation);
+                final Listener gpsListener = new Listener(emitter, latestGPSLocation);
                 final GeoData initialLocation = GeoData.getInitialLocation(context);
                 if (initialLocation != null) {
-                    subscriber.onNext(initialLocation);
+                    emitter.onNext(initialLocation);
                 }
                 Log.d("GeoDataProvider: starting the GPS and network listeners");
                 try {
@@ -50,30 +48,30 @@ public class GeoDataProvider {
                 } catch (final Exception e) {
                     Log.w("Unable to create network location provider: " + e.getMessage());
                 }
-                subscriber.add(Subscriptions.create(new Action0() {
+                emitter.setCancellable(new Cancellable() {
                     @Override
-                    public void call() {
-                        AndroidRxUtils.looperCallbacksWorker.schedule(new Action0() {
+                    public void cancel() throws Exception {
+                        AndroidRx2Utils.looperCallbacksScheduler.scheduleDirect(new Runnable() {
                             @Override
-                            public void call() {
+                            public void run() {
                                 geoManager.removeUpdates(networkListener);
                                 geoManager.removeUpdates(gpsListener);
                             }
                         });
                     }
-                }));
+                });
             }
         });
-        return observable.subscribeOn(AndroidRxUtils.looperCallbacksScheduler).share().lift(new DelayedUnsubscription<GeoData>(2500, TimeUnit.MILLISECONDS)).onBackpressureLatest();
+        return observable.subscribeOn(AndroidRx2Utils.looperCallbacksScheduler).share().lift(new DelayedUnsubscription<GeoData>(2500, TimeUnit.MILLISECONDS));
     }
 
     private static class Listener implements LocationListener {
 
-        final Subscriber<? super GeoData> subscriber;
+        final ObservableEmitter<GeoData> emitter;
         final AtomicReference<Location> latestGPSLocation;
 
-        Listener(final Subscriber<? super GeoData> subscriber, final AtomicReference<Location> latestGPSLocation) {
-            this.subscriber = subscriber;
+        Listener(final ObservableEmitter<GeoData> emitter, final AtomicReference<Location> latestGPSLocation) {
+            this.emitter = emitter;
             this.latestGPSLocation = latestGPSLocation;
         }
 
@@ -105,7 +103,7 @@ public class GeoDataProvider {
         private void assign(final Location location) {
             // We do not necessarily get signaled when satellites go to 0/0.
             final GeoData current = new GeoData(location);
-            subscriber.onNext(current);
+            emitter.onNext(current);
         }
 
     }

@@ -2,18 +2,16 @@ package cgeo.geocaching.network;
 
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.AndroidRx2Utils;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.Log;
-
-import org.apache.commons.lang3.StringUtils;
 
 import java.util.Collections;
 import java.util.concurrent.TimeUnit;
 
+import io.reactivex.Scheduler;
 import okhttp3.Response;
-import rx.Scheduler.Worker;
-import rx.functions.Action0;
+import org.apache.commons.lang3.StringUtils;
 
 public class Send2CgeoDownloader {
 
@@ -28,16 +26,17 @@ public class Send2CgeoDownloader {
      * @param listId the list into which caches will be stored
      */
     public static void loadFromWeb(final CancellableHandler handler, final int listId) {
-        final Worker worker = AndroidRxUtils.networkScheduler.createWorker();
-        handler.unsubscribeIfCancelled(worker);
-        worker.schedule(new Action0() {
+        final Scheduler.Worker worker = AndroidRx2Utils.networkScheduler.createWorker();
+        handler.disposeIfCancelled(worker);
+        AndroidRx2Utils.networkScheduler.scheduleDirect(new Runnable() {
             private final Parameters params = new Parameters("code", StringUtils.defaultString(Settings.getWebDeviceCode()));
             private long baseTime = System.currentTimeMillis();
 
             @Override
-            public void call() {
+            public void run() {
                 if (System.currentTimeMillis() - baseTime >= 3 * 60000) { // maximum: 3 minutes
                     handler.sendEmptyMessage(DownloadProgress.MSG_DONE);
+                    worker.dispose();
                     return;
                 }
 
