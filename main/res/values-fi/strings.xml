@@ -81,7 +81,6 @@
   <string name="log_tb_changeall">Muuta kaikki</string>
   <string name="log_tb_grabbed">Haettu jostain</string>
   <string name="log_tb_note">Muistiinpano</string>
-  <string name="log_tb_discovered">Löydetty</string>
   <string name="log_tb_archived">Arkistoitu</string>
   <string name="log_save">Offline-tallennus</string>
   <string name="log_saving">Lähetetään merkintää…</string>

@@ -323,7 +323,7 @@
     <item quantity="other">El akarod távolítani a kijelölt %d ládát a készülékedről?</item>
   </plurals>
   <string name="caches_remove_progress">Ládák törlése</string>
-  <string name="caches_delete_events">Korábbi események törlése</string>
+  <string name="caches_delete_events">Elmúlt események törlése</string>
   <string name="caches_refresh_selected">Kijelöltek frissítése</string>
   <string name="caches_refresh_all">Összes frissítése</string>
   <string name="caches_move_selected">Kijelöltek mozgatása</string>
@@ -806,7 +806,7 @@
   <string name="cache_menu_map_static">Statikus térképek</string>
   <string name="cache_menu_download_map_static">Statikus térképek letöltése</string>
   <string name="cache_menu_rmaps">Rmaps</string>
-  <string name="cache_menu_map_ext">Egyéb külső alkalmazások</string>
+  <string name="cache_menu_map_ext">Külső alkalmazás</string>
   <string name="cache_menu_streetview">Utcanézet</string>
   <string name="cache_menu_browser">Megnyitás böngészőben</string>
   <string name="cache_menu_visit">Megtalálás bejelentése</string>
@@ -836,7 +836,7 @@
   <string name="cache_status_found">Megtaláltam</string>
   <string name="cache_not_status_found">Nem találtam meg</string>
   <string name="cache_never_found">Szűz láda</string>
-  <string name="cache_found_last_30_days">Az elmúlt 30 nap találatai</string>
+  <string name="cache_found_last_30_days">Megtalálva az elmúlt 30 napban</string>
   <string name="cache_status_archived">Archiválva</string>
   <string name="cache_status_disabled">Letiltva</string>
   <string name="cache_status_premium">Csak prémium tagoknak</string>
@@ -1111,13 +1111,13 @@
   <string name="export_progress">Exportálás: %1$s</string>
   <string name="export_exportedto">exportálva</string>
   <string name="export_failed">Sikertelen exportálás</string>
-  <string name="export_fieldnotes">Helyszíni jegyzetek</string>
-  <string name="export_fieldnotes_info">A helyszíni jegyzetek a /sdcard/field-notes mappába lesznek exportálva. A fájlnév a jelenlegi dátum és időpont lesz.</string>
+  <string name="export_fieldnotes">Offline logok</string>
+  <string name="export_fieldnotes_info">Az offline logok a /sdcard/field-notes mappába lesznek exportálva. A fájlnév a jelenlegi dátum és időpont lesz.</string>
   <string name="export_fieldnotes_upload">Feltöltés a geocaching.com-ra</string>
   <string name="export_fieldnotes_uploading">Feltöltés…</string>
   <string name="export_fieldnotes_upload_success">Sikeres feltöltés a geocaching.com-ra</string>
   <string name="export_fieldnotes_onlynew">Csak az utolsó export óta</string>
-  <string name="export_fieldnotes_creating">Helyszíni jegyzetek létrehozása…</string>
+  <string name="export_fieldnotes_creating">Offline logok exportálása…</string>
   <string name="export_gpx">GPX</string>
   <string name="export_gpx_info">A GPX fájl ide lesz exportálva: %1$s a jelenlegi dátummal és időponttal a fájl nevében.</string>
   <string name="export_gpx_to">Az exportált GPX küldése ide</string>
