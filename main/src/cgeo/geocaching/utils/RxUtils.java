@@ -20,6 +20,7 @@ import io.reactivex.functions.Cancellable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.internal.disposables.CancellableDisposable;
+import io.reactivex.schedulers.Schedulers;
 
 public class RxUtils {
 
@@ -143,7 +144,7 @@ public class RxUtils {
                         @Override
                         public void cancel() throws Exception {
                             canceled.set(true);
-                            AndroidRxUtils.computationScheduler.scheduleDirect(new Runnable() {
+                            Schedulers.computation().scheduleDirect(new Runnable() {
                                 @Override
                                 public void run() {
                                     d.dispose();
