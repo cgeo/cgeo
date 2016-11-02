@@ -28,7 +28,7 @@ import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.search.SearchSuggestionCursor;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.dialog.Dialogs;
-import cgeo.geocaching.utils.AndroidRx2Utils;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.Version;
@@ -428,7 +428,7 @@ public class DataStore {
      */
     public static void moveDatabase(final Activity fromActivity) {
         final ProgressDialog dialog = ProgressDialog.show(fromActivity, fromActivity.getString(R.string.init_dbmove_dbmove), fromActivity.getString(R.string.init_dbmove_running), true, false);
-        AndroidRx2Utils.bindActivity(fromActivity, Observable.defer(new Callable<Observable<Boolean>>() {
+        AndroidRxUtils.bindActivity(fromActivity, Observable.defer(new Callable<Observable<Boolean>>() {
             @Override
             public Observable<Boolean> call() {
                 if (!LocalStorage.isExternalStorageAvailable()) {

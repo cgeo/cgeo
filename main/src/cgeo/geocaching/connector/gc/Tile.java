@@ -5,7 +5,7 @@ import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.models.ICoordinates;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
-import cgeo.geocaching.utils.AndroidRx2Utils;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.LeastRecentlyUsedSet;
 
 import android.graphics.Bitmap;
@@ -261,7 +261,7 @@ public class Tile {
                             }
                             return Single.error(new IOException("could not decode bitmap"));
                         }
-                    }).subscribeOn(AndroidRx2Utils.computationScheduler);
+                    }).subscribeOn(AndroidRxUtils.computationScheduler);
         } catch (final Exception e) {
             return Single.error(e);
         }

@@ -1,7 +1,7 @@
 package cgeo.geocaching.address;
 
 import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.utils.AndroidRx2Utils;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Log;
 
 import android.content.Context;
@@ -49,7 +49,7 @@ public class AndroidGeocoder {
                     return Observable.error(e);
                 }
             }
-        }).subscribeOn(AndroidRx2Utils.networkScheduler);
+        }).subscribeOn(AndroidRxUtils.networkScheduler);
     }
 
     /**
@@ -72,7 +72,7 @@ public class AndroidGeocoder {
                     return Observable.error(e);
                 }
             }
-        }).subscribeOn(AndroidRx2Utils.networkScheduler).firstOrError();
+        }).subscribeOn(AndroidRxUtils.networkScheduler).firstOrError();
     }
 
     private static Observable<Address> addressesToObservable(final List<Address> addresses) {

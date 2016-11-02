@@ -23,7 +23,7 @@ import cgeo.geocaching.ui.ImagesList;
 import cgeo.geocaching.ui.UserActionsClickListener;
 import cgeo.geocaching.ui.UserNameClickListener;
 import cgeo.geocaching.ui.dialog.Dialogs;
-import cgeo.geocaching.utils.AndroidRx2Utils;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.HtmlUtils;
 import cgeo.geocaching.utils.Log;
@@ -221,7 +221,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
 
     private void refreshTrackable(final String message) {
         waitDialog = ProgressDialog.show(this, message, res.getString(R.string.trackable_details_loading), true, true);
-        createDisposables.add((AndroidRx2Utils.bindActivity(this, ConnectorFactory.loadTrackable(geocode, guid, id, brand)).subscribe(
+        createDisposables.add((AndroidRxUtils.bindActivity(this, ConnectorFactory.loadTrackable(geocode, guid, id, brand)).subscribe(
                 new Consumer<Trackable>() {
                     @Override
                     public void accept(final Trackable newTrackable) throws Exception {
@@ -319,7 +319,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
 
     private void setupIcon(final ActionBar actionBar, final String url) {
         final HtmlImage imgGetter = new HtmlImage(HtmlImage.SHARED, false, false, false);
-        AndroidRx2Utils.bindActivity(this, imgGetter.fetchDrawable(url)).subscribe(new Consumer<BitmapDrawable>() {
+        AndroidRxUtils.bindActivity(this, imgGetter.fetchDrawable(url)).subscribe(new Consumer<BitmapDrawable>() {
             @Override
             public void accept(final BitmapDrawable image) {
                 if (actionBar != null) {
@@ -582,7 +582,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
                     }
                 });
 
-                AndroidRx2Utils.bindActivity(TrackableActivity.this, new HtmlImage(geocode, true, false, false).fetchDrawable(trackable.getImage())).subscribe(new Consumer<BitmapDrawable>() {
+                AndroidRxUtils.bindActivity(TrackableActivity.this, new HtmlImage(geocode, true, false, false).fetchDrawable(trackable.getImage())).subscribe(new Consumer<BitmapDrawable>() {
                     @Override
                     public void accept(final BitmapDrawable bitmapDrawable) {
                         trackableImage.setImageDrawable(bitmapDrawable);

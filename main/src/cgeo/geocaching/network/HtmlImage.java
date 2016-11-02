@@ -5,7 +5,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.storage.LocalStorage;
-import cgeo.geocaching.utils.AndroidRx2Utils;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.ImageUtils;
@@ -208,7 +208,7 @@ public class HtmlImage implements Html.ImageGetter {
                     final Bitmap bitmap = loadCachedImage(FileUtils.urlToFile(url), true).left;
                     return bitmap != null ? Observable.just(ImageUtils.scaleBitmapToFitDisplay(bitmap)) : Observable.<BitmapDrawable>empty();
                 }
-            }).subscribeOn(AndroidRx2Utils.computationScheduler);
+            }).subscribeOn(AndroidRxUtils.computationScheduler);
         }
 
         final boolean shared = url.contains("/images/icons/icon_");
@@ -226,7 +226,7 @@ public class HtmlImage implements Html.ImageGetter {
                 });
                 disposable.add(aborter);
                 // Canceling this subscription must cancel the data retrieval
-                emitter.setDisposable(AndroidRx2Utils.computationScheduler.scheduleDirect(new Runnable() {
+                emitter.setDisposable(AndroidRxUtils.computationScheduler.scheduleDirect(new Runnable() {
                     @Override
                     public void run() {
                         final ImmutablePair<BitmapDrawable, Boolean> loaded = loadFromDisk();
@@ -239,7 +239,7 @@ public class HtmlImage implements Html.ImageGetter {
                         if (bitmap != null && !onlySave) {
                             emitter.onNext(bitmap);
                         }
-                        AndroidRx2Utils.networkScheduler.scheduleDirect(new Runnable() {
+                        AndroidRxUtils.networkScheduler.scheduleDirect(new Runnable() {
                             @Override public void run() {
                                 downloadAndSave(emitter, aborter);
                             }
@@ -272,7 +272,7 @@ public class HtmlImage implements Html.ImageGetter {
                     emitter.onComplete();
                     return;
                 }
-                AndroidRx2Utils.computationScheduler.scheduleDirect(new Runnable() {
+                AndroidRxUtils.computationScheduler.scheduleDirect(new Runnable() {
                     @Override
                     public void run() {
                         final ImmutablePair<BitmapDrawable, Boolean> loaded = loadFromDisk();

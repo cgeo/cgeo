@@ -36,7 +36,7 @@ import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.utils.AndroidRx2Utils;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.Formatter;
@@ -555,7 +555,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         }
 
         if (!toRefresh.isEmpty()) {
-            AndroidRx2Utils.refreshScheduler.scheduleDirect(new Runnable() {
+            AndroidRxUtils.refreshScheduler.scheduleDirect(new Runnable() {
                 @Override
                 public void run() {
                     for (final String geocode: toRefresh) {

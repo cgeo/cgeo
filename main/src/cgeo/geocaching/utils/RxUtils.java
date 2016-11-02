@@ -143,7 +143,7 @@ public class RxUtils {
                         @Override
                         public void cancel() throws Exception {
                             canceled.set(true);
-                            AndroidRx2Utils.computationScheduler.scheduleDirect(new Runnable() {
+                            AndroidRxUtils.computationScheduler.scheduleDirect(new Runnable() {
                                 @Override
                                 public void run() {
                                     d.dispose();

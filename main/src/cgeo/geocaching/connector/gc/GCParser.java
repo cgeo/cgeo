@@ -28,7 +28,7 @@ import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.utils.AndroidRx2Utils;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.Log;
@@ -1026,7 +1026,7 @@ public final class GCParser {
                 return Observable.error(e);
             }
         }
-    }).subscribeOn(AndroidRx2Utils.networkScheduler);
+    }).subscribeOn(AndroidRxUtils.networkScheduler);
 
     /**
      * Reads the downloadable pocket queries from the uxOfflinePQTable
@@ -1775,7 +1775,7 @@ public final class GCParser {
                     return Observable.empty();
                 }
             }
-        }).subscribeOn(AndroidRx2Utils.networkScheduler);
+        }).subscribeOn(AndroidRxUtils.networkScheduler);
     }
 
     private static Observable<LogEntry> parseLogs(final boolean markAsFriendsLog, final InputStream responseStream) {

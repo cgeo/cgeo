@@ -6,7 +6,7 @@ import cgeo.geocaching.gcvote.GCVoteRatingBarUtil.OnRatingChangeListener;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.utils.AndroidRx2Utils;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
@@ -82,7 +82,7 @@ public class GCVoteDialog {
     }
 
     private static void vote(@NonNull final Geocache cache, final float rating, @Nullable final Runnable afterVoteSent) {
-        AndroidRx2Utils.andThenOnUi(AndroidRx2Utils.networkScheduler, new Callable<Boolean>() {
+        AndroidRxUtils.andThenOnUi(AndroidRxUtils.networkScheduler, new Callable<Boolean>() {
             @Override
             public Boolean call() {
                 try {
