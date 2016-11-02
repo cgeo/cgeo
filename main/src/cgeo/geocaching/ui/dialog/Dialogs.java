@@ -4,6 +4,7 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.ImageUtils;
+import cgeo.geocaching.utils.functions.Action1;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -37,7 +38,6 @@ import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import org.apache.commons.lang3.StringUtils;
-import rx.functions.Action1;
 
 /**
  * Wrapper for {@link AlertDialog}. If you want to show a simple text, use one of the

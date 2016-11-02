@@ -1,8 +1,8 @@
 package cgeo.geocaching.search;
 
-import org.apache.commons.lang3.StringUtils;
+import cgeo.geocaching.utils.functions.Func1;
 
-import rx.functions.Func1;
+import org.apache.commons.lang3.StringUtils;
 
 import android.content.Context;
 import android.support.annotation.LayoutRes;

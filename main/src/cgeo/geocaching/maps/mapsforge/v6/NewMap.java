@@ -46,6 +46,7 @@ import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.functions.Action1;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
@@ -102,7 +103,6 @@ import org.mapsforge.map.rendertheme.InternalRenderTheme;
 import org.mapsforge.map.rendertheme.XmlRenderTheme;
 import org.mapsforge.map.rendertheme.rule.RenderThemeHandler;
 import org.xmlpull.v1.XmlPullParserException;
-import rx.functions.Action1;
 
 @SuppressLint("ClickableViewAccessibility")
 public class NewMap extends AbstractActionBarActivity {

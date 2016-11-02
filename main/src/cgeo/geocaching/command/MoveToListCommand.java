@@ -5,15 +5,13 @@ import cgeo.geocaching.list.AbstractList;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.utils.functions.Action1;
 
+import android.app.Activity;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import android.app.Activity;
-
 import java.util.Collection;
-
-import rx.functions.Action1;
 
 public abstract class MoveToListCommand extends AbstractCachesCommand {
 

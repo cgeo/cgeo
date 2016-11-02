@@ -36,6 +36,7 @@ import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.functions.Action1;
 
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
@@ -51,7 +52,6 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
-import rx.functions.Action1;
 
 public class GCConnector extends AbstractConnector implements ISearchByGeocode, ISearchByCenter, ISearchByNextPage, ISearchByViewPort, ISearchByKeyword, ILogin, ICredentials, ISearchByOwner, ISearchByFinder, FieldNotesCapability, IgnoreCapability, WatchListCapability, PersonalNoteCapability, SmileyCapability {
 

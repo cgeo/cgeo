@@ -43,6 +43,7 @@ import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.LeastRecentlyUsedSet;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapUtils;
+import cgeo.geocaching.utils.functions.Action1;
 
 import android.annotation.TargetApi;
 import android.app.ActionBar;
@@ -92,7 +93,6 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
-import rx.functions.Action1;
 
 /**
  * Class representing the Map in c:geo

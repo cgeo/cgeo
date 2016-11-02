@@ -3,6 +3,7 @@ package cgeo.geocaching.sorting;
 import cgeo.geocaching.R;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
+import cgeo.geocaching.utils.functions.Action1;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -16,8 +17,6 @@ import android.view.View;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-
-import rx.functions.Action1;
 
 /**
  * Provides a sub menu for sorting caches. Register your listener in the onCreateOptionsMenu of the containing activity.
