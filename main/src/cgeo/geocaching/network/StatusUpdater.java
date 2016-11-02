@@ -19,11 +19,22 @@ import org.apache.commons.lang3.StringUtils;
 
 public class StatusUpdater {
 
+    /**
+     * An observable with the successive status. Contains {@link Status#NO_STATUS} if there is no status to display.
+     */
+    public static final BehaviorSubject<Status> LATEST_STATUS = BehaviorSubject.createDefault(Status.defaultStatus(null));
+
     private StatusUpdater() {
         // Utility class
     }
 
     public static class Status {
+
+        public static final Status NO_STATUS = new Status(null, null, null, null);
+
+        static final Status CLOSEOUT_STATUS =
+                new Status("", "status_closeout_warning", "attribute_abandonedbuilding", "http://faq.cgeo.org/#legacy");
+
         public final String message;
         public final String messageId;
         public final String icon;
@@ -43,11 +54,6 @@ public class StatusUpdater {
             url = response.path("url").asText(null);
         }
 
-        static final Status CLOSEOUT_STATUS =
-                new Status("", "status_closeout_warning", "attribute_abandonedbuilding", "http://faq.cgeo.org/#legacy");
-
-        public static final Status NO_STATUS = new Status(null, null, null, null);
-
         @NonNull
         static Status defaultStatus(final Status upToDate) {
             if (upToDate != null && upToDate.message != null) {
@@ -56,8 +62,6 @@ public class StatusUpdater {
             return VERSION.SDK_INT < VERSION_CODES.ECLAIR_MR1 ? CLOSEOUT_STATUS : NO_STATUS;
         }
     }
-
-    public static final BehaviorSubject<Status> LATEST_STATUS = BehaviorSubject.createDefault(Status.defaultStatus(null));
 
     static {
         AndroidRxUtils.networkScheduler.schedulePeriodicallyDirect(new Runnable() {
