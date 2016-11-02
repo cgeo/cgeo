@@ -2,7 +2,7 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.network.StatusUpdater;
 import cgeo.geocaching.network.StatusUpdater.Status;
-import cgeo.geocaching.utils.AndroidRx2Utils;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Log;
 
 import android.content.Intent;
@@ -38,7 +38,7 @@ public class StatusFragment extends Fragment {
         super.onCreateView(inflater, container, savedInstanceState);
         final ViewGroup statusGroup = (ViewGroup) inflater.inflate(R.layout.status, container, false);
         unbinder = ButterKnife.bind(this, statusGroup);
-        statusSubscription.add(AndroidRx2Utils.bindFragment(this, StatusUpdater.LATEST_STATUS)
+        statusSubscription.add(AndroidRxUtils.bindFragment(this, StatusUpdater.LATEST_STATUS)
                 .subscribe(new Consumer<Status>() {
                     @Override
                     public void accept(final Status status) {

@@ -2,7 +2,7 @@ package cgeo.geocaching.network;
 
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.utils.AndroidRx2Utils;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.Log;
 
@@ -26,9 +26,9 @@ public class Send2CgeoDownloader {
      * @param listId the list into which caches will be stored
      */
     public static void loadFromWeb(final CancellableHandler handler, final int listId) {
-        final Scheduler.Worker worker = AndroidRx2Utils.networkScheduler.createWorker();
+        final Scheduler.Worker worker = AndroidRxUtils.networkScheduler.createWorker();
         handler.disposeIfCancelled(worker);
-        AndroidRx2Utils.networkScheduler.scheduleDirect(new Runnable() {
+        AndroidRxUtils.networkScheduler.scheduleDirect(new Runnable() {
             private final Parameters params = new Parameters("code", StringUtils.defaultString(Settings.getWebDeviceCode()));
             private long baseTime = System.currentTimeMillis();
 

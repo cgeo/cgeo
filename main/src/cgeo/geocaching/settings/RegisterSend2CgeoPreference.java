@@ -5,7 +5,7 @@ import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.ui.dialog.Dialogs;
-import cgeo.geocaching.utils.AndroidRx2Utils;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Log;
 
 import android.app.ProgressDialog;
@@ -53,7 +53,7 @@ public class RegisterSend2CgeoPreference extends AbstractClickablePreference {
                         activity.getString(R.string.init_sendToCgeo_registering), true);
                 progressDialog.setCancelable(false);
 
-                AndroidRx2Utils.bindActivity(activity, Observable.defer(new Callable<Observable<Integer>>() {
+                AndroidRxUtils.bindActivity(activity, Observable.defer(new Callable<Observable<Integer>>() {
                     @Override
                     public Observable<Integer> call() {
                         final String nam = StringUtils.defaultString(deviceName);
@@ -76,7 +76,7 @@ public class RegisterSend2CgeoPreference extends AbstractClickablePreference {
 
                         return Observable.empty();
                     }
-                }).first(0)).subscribeOn(AndroidRx2Utils.networkScheduler).subscribe(new Consumer<Integer>() {
+                }).first(0)).subscribeOn(AndroidRxUtils.networkScheduler).subscribe(new Consumer<Integer>() {
                     @Override
                     public void accept(final Integer pin) {
                         progressDialog.dismiss();

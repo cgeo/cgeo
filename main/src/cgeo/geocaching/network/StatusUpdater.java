@@ -1,7 +1,7 @@
 package cgeo.geocaching.network;
 
 import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.utils.AndroidRx2Utils;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Version;
 
 import android.app.Application;
@@ -60,7 +60,7 @@ public class StatusUpdater {
     public static final BehaviorSubject<Status> LATEST_STATUS = BehaviorSubject.createDefault(Status.defaultStatus(null));
 
     static {
-        AndroidRx2Utils.networkScheduler.schedulePeriodicallyDirect(new Runnable() {
+        AndroidRxUtils.networkScheduler.schedulePeriodicallyDirect(new Runnable() {
             @Override
             public void run() {
                 final Application app = CgeoApplication.getInstance();

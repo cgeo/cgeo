@@ -6,7 +6,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.ui.recyclerview.RecyclerViewProvider;
-import cgeo.geocaching.utils.AndroidRx2Utils;
+import cgeo.geocaching.utils.AndroidRxUtils;
 
 import android.app.ProgressDialog;
 import android.location.Address;
@@ -44,7 +44,7 @@ public class AddressListActivity extends AbstractActionBarActivity implements Ad
     private void lookupAddressInBackground(final String keyword, final AddressListAdapter adapter, final ProgressDialog waitDialog) {
         final Observable<Address> geocoderObservable = new AndroidGeocoder(this).getFromLocationName(keyword)
                 .onErrorResumeNext(MapQuestGeocoder.getFromLocationName(keyword));
-        AndroidRx2Utils.bindActivity(this, geocoderObservable.toList()).subscribe(new Consumer<List<Address>>() {
+        AndroidRxUtils.bindActivity(this, geocoderObservable.toList()).subscribe(new Consumer<List<Address>>() {
             @Override
             public void accept(final List<Address> foundAddresses) {
                 waitDialog.dismiss();

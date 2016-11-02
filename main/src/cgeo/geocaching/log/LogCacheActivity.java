@@ -26,7 +26,7 @@ import cgeo.geocaching.twitter.Twitter;
 import cgeo.geocaching.ui.AbstractViewHolder;
 import cgeo.geocaching.ui.dialog.DateDialog;
 import cgeo.geocaching.ui.dialog.Dialogs;
-import cgeo.geocaching.utils.AndroidRx2Utils;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.AsyncTaskWithProgressText;
 import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.Formatter;
@@ -331,7 +331,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         loggingManager.init();
 
         // Load Generic Trackables
-        AndroidRx2Utils.bindActivity(this,
+        AndroidRxUtils.bindActivity(this,
             // Obtain the actives connectors
             Observable.fromIterable(ConnectorFactory.getLoggableGenericTrackablesConnectors())
             .flatMap(new Function<TrackableConnector, Observable<TrackableLog>>() {
@@ -342,7 +342,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
                         public Observable<TrackableLog> call() {
                             return trackableConnector.trackableLogInventory();
                         }
-                    }).subscribeOn(AndroidRx2Utils.networkScheduler);
+                    }).subscribeOn(AndroidRxUtils.networkScheduler);
                 }
             }).toList()
         ).subscribe(new Consumer<List<TrackableLog>>() {

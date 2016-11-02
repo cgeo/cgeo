@@ -5,7 +5,7 @@ import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.models.PocketQuery;
 import cgeo.geocaching.ui.recyclerview.RecyclerViewProvider;
-import cgeo.geocaching.utils.AndroidRx2Utils;
+import cgeo.geocaching.utils.AndroidRxUtils;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
@@ -36,7 +36,7 @@ public class PocketQueryListActivity extends AbstractActionBarActivity {
     }
 
     private void loadInBackground(final PocketQueryListAdapter adapter, final ProgressDialog waitDialog) {
-        AndroidRx2Utils.bindActivity(this, GCParser.searchPocketQueryListObservable).subscribe(new Consumer<List<PocketQuery>>() {
+        AndroidRxUtils.bindActivity(this, GCParser.searchPocketQueryListObservable).subscribe(new Consumer<List<PocketQuery>>() {
             @Override
             public void accept(final List<PocketQuery> pocketQueryList) {
                 waitDialog.dismiss();

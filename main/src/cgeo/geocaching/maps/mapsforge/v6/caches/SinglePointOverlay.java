@@ -5,7 +5,7 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.maps.mapsforge.v6.MapHandlers;
 import cgeo.geocaching.maps.mapsforge.v6.MfMapView;
 import cgeo.geocaching.models.Waypoint;
-import cgeo.geocaching.utils.AndroidRx2Utils;
+import cgeo.geocaching.utils.AndroidRxUtils;
 
 import java.util.Set;
 
@@ -22,7 +22,7 @@ public class SinglePointOverlay extends AbstractCachesOverlay {
         this.coords = coords;
         this.type = type;
 
-        AndroidRx2Utils.computationScheduler.scheduleDirect(new Runnable() {
+        AndroidRxUtils.computationScheduler.scheduleDirect(new Runnable() {
 
             @Override
             public void run() {

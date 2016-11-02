@@ -1,20 +1,24 @@
 package cgeo.geocaching.utils;
 
-import android.os.Handler;
+import android.app.Activity;
 import android.os.HandlerThread;
 import android.os.Looper;
 import android.os.Process;
+import android.support.v4.app.Fragment;
 
+import java.lang.ref.WeakReference;
+import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
 
-import rx.Scheduler;
-import rx.Scheduler.Worker;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action0;
-import rx.functions.Action1;
-import rx.functions.Func0;
-import rx.internal.util.RxThreadFactory;
-import rx.schedulers.Schedulers;
+import io.reactivex.Maybe;
+import io.reactivex.Observable;
+import io.reactivex.Scheduler;
+import io.reactivex.Single;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Predicate;
+import io.reactivex.internal.schedulers.RxThreadFactory;
+import io.reactivex.schedulers.Schedulers;
 
 public class AndroidRxUtils {
 
@@ -32,36 +36,87 @@ public class AndroidRxUtils {
     }
 
     public static final Looper looperCallbacksLooper = looperCallbacksThread.getLooper();
-    public static final Scheduler looperCallbacksScheduler = AndroidSchedulers.handlerThread(new Handler(looperCallbacksLooper));
-    public static final Worker looperCallbacksWorker = looperCallbacksScheduler.createWorker();
+    public static final Scheduler looperCallbacksScheduler = AndroidSchedulers.from(looperCallbacksLooper);
+    public static final Scheduler.Worker looperCallbacksWorker = looperCallbacksScheduler.createWorker();
 
     private AndroidRxUtils() {
         // Utility class, not to be instantiated
     }
 
-    public static <T> void andThenOnUi(final Scheduler scheduler, final Func0<T> background, final Action1<T> foreground) {
-        scheduler.createWorker().schedule(new Action0() {
+    public static <T> void andThenOnUi(final Scheduler scheduler, final Callable<T> background, final Consumer<T> foreground) {
+        scheduler.createWorker().schedule(new Runnable() {
             @Override
-            public void call() {
-                final T value = background.call();
-                AndroidSchedulers.mainThread().createWorker().schedule(new Action0() {
-                    @Override
-                    public void call() {
-                        foreground.call(value);
-                    }
-                });
+            public void run() {
+                try {
+                    final T value = background.call();
+                    AndroidSchedulers.mainThread().createWorker().schedule(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                foreground.accept(value);
+                            } catch (final Exception e) {
+                                Log.e("error when running the second part of andThenOnUi");
+                            }
+                        }
+                    });
+                } catch (final Exception e) {
+                    Log.e("error when running the first part of andThenOnUi", e);
+                }
             }
         });
     }
 
-    public static void andThenOnUi(final Scheduler scheduler, final Action0 background, final Action0 foreground) {
-        scheduler.createWorker().schedule(new Action0() {
+    public static void andThenOnUi(final Scheduler scheduler, final Runnable background, final Runnable foreground) {
+        scheduler.createWorker().schedule(new Runnable() {
             @Override
-            public void call() {
-                background.call();
+            public void run() {
+                background.run();
                 AndroidSchedulers.mainThread().createWorker().schedule(foreground);
             }
         });
     }
 
+    public static <T> Observable<T> bindActivity(final Activity activity, final Observable<T> source) {
+        final WeakReference<Activity> activityRef = new WeakReference<>(activity);
+        return source.observeOn(AndroidSchedulers.mainThread()).takeWhile(new Predicate<T>() {
+            @Override
+            public boolean test(final T t) throws Exception {
+                final Activity a = activityRef.get();
+                return a != null && !a.isFinishing();
+            }
+        });
+    }
+
+    public static <T> Maybe<T> bindActivity(final Activity activity, final Single<T> source) {
+        final WeakReference<Activity> activityRef = new WeakReference<>(activity);
+        return source.observeOn(AndroidSchedulers.mainThread()).filter(new Predicate<T>() {
+            @Override
+            public boolean test(final T t) throws Exception {
+                final Activity a = activityRef.get();
+                return a != null && !a.isFinishing();
+            }
+        });
+    }
+
+    public static <T> Maybe<T> bindActivity(final Activity activity, final Maybe<T> source) {
+        final WeakReference<Activity> activityRef = new WeakReference<>(activity);
+        return source.observeOn(AndroidSchedulers.mainThread()).filter(new Predicate<T>() {
+            @Override
+            public boolean test(final T t) throws Exception {
+                final Activity a = activityRef.get();
+                return a != null && !a.isFinishing();
+            }
+        });
+    }
+
+    public static <T> Observable<T> bindFragment(final Fragment fragment, final Observable<T> source) {
+        final WeakReference<Fragment> fragmentRef = new WeakReference<Fragment>(fragment);
+        return source.observeOn(AndroidSchedulers.mainThread()).filter(new Predicate<T>() {
+            @Override
+            public boolean test(final T t) throws Exception {
+                final Fragment f = fragmentRef.get();
+                return f != null && f.isAdded() && !f.getActivity().isFinishing();
+            }
+        });
+    }
 }

@@ -14,7 +14,7 @@ import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.CacheDetailsCreator;
-import cgeo.geocaching.utils.AndroidRx2Utils;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.RxUtils;
 
@@ -220,12 +220,12 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
         if (!cache.supportsGCVote()) {
             return;
         }
-        AndroidRx2Utils.bindActivity(getActivity(), RxUtils.deferredNullable(new Func0<GCVoteRating>() {
+        AndroidRxUtils.bindActivity(getActivity(), RxUtils.deferredNullable(new Func0<GCVoteRating>() {
             @Override
             public GCVoteRating call() {
                 return GCVote.getRating(cache.getGuid(), geocode);
             }
-        })).subscribeOn(AndroidRx2Utils.networkScheduler).subscribe(new Consumer<GCVoteRating>() {
+        })).subscribeOn(AndroidRxUtils.networkScheduler).subscribe(new Consumer<GCVoteRating>() {
             @Override
             public void accept(final GCVoteRating rating) {
                 cache.setRating(rating.getRating());

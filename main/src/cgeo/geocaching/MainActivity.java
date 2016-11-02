@@ -25,7 +25,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.dialog.Dialogs;
-import cgeo.geocaching.utils.AndroidRx2Utils;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.DatabaseBackupUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
@@ -263,7 +263,7 @@ public class MainActivity extends AbstractActionBarActivity {
 
         for (final ILogin conn : ConnectorFactory.getActiveLiveConnectors()) {
             if (mustLogin || !conn.isLoggedIn()) {
-                AndroidRx2Utils.networkScheduler.scheduleDirect(new Runnable() {
+                AndroidRxUtils.networkScheduler.scheduleDirect(new Runnable() {
                     @Override
                     public void run() {
                         if (mustLogin) {
@@ -557,7 +557,7 @@ public class MainActivity extends AbstractActionBarActivity {
     }
 
     public void updateCacheCounter() {
-        AndroidRx2Utils.bindActivity(this, DataStore.getAllCachesCountObservable()).subscribe(new Consumer<Integer>() {
+        AndroidRxUtils.bindActivity(this, DataStore.getAllCachesCountObservable()).subscribe(new Consumer<Integer>() {
             @Override
             public void accept(final Integer countBubbleCnt1) {
                 if (countBubbleCnt1 == 0) {
@@ -641,8 +641,8 @@ public class MainActivity extends AbstractActionBarActivity {
                             return formatAddress(address);
                         }
                     }).onErrorResumeNext(Single.just(currentCoords.toString()));
-                    AndroidRx2Utils.bindActivity(MainActivity.this, address)
-                            .subscribeOn(AndroidRx2Utils.networkScheduler)
+                    AndroidRxUtils.bindActivity(MainActivity.this, address)
+                            .subscribeOn(AndroidRxUtils.networkScheduler)
                             .subscribe(new Consumer<String>() {
                                 @Override
                                 public void accept(final String address) {

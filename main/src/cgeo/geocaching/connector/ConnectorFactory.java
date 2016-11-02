@@ -31,7 +31,7 @@ import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.utils.AndroidRx2Utils;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.RxUtils;
 
 import android.support.annotation.NonNull;
@@ -405,7 +405,7 @@ public final class ConnectorFactory {
                 public Trackable call() {
                     return TravelBugConnector.getInstance().searchTrackable(geocode, guid, id);
                 }
-            }).subscribeOn(AndroidRx2Utils.networkScheduler);
+            }).subscribeOn(AndroidRxUtils.networkScheduler);
         }
 
         final Observable<Trackable> fromNetwork =
@@ -422,7 +422,7 @@ public final class ConnectorFactory {
                             public Trackable call() {
                                 return trackableConnector.searchTrackable(geocode, guid, id);
                             }
-                        }).subscribeOn(AndroidRx2Utils.networkScheduler);
+                        }).subscribeOn(AndroidRxUtils.networkScheduler);
                     }
                 });
 

@@ -64,7 +64,7 @@ import cgeo.geocaching.ui.TrackableListAdapter;
 import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.recyclerview.RecyclerViewProvider;
-import cgeo.geocaching.utils.AndroidRx2Utils;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.CheckerUtils;
 import cgeo.geocaching.utils.ClipboardUtils;
@@ -326,7 +326,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
         final String realGeocode = geocode;
         final String realGuid = guid;
-        AndroidRx2Utils.networkScheduler.scheduleDirect(new Runnable() {
+        AndroidRxUtils.networkScheduler.scheduleDirect(new Runnable() {
             @Override
             public void run() {
                 search = Geocache.searchByGeocode(realGeocode, StringUtils.isBlank(realGeocode) ? realGuid : null, false, loadCacheHandler);
@@ -336,7 +336,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
         // Load Generic Trackables
         if (StringUtils.isNotBlank(geocode)) {
-            AndroidRx2Utils.bindActivity(this,
+            AndroidRxUtils.bindActivity(this,
             // Obtain the active connectors and load trackables in parallel.
                     Observable.fromIterable(ConnectorFactory.getGenericTrackablesConnectors()).flatMap(new Function<TrackableConnector, Observable<Trackable>>() {
                 @Override
@@ -347,7 +347,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                         public Observable<Trackable> call() {
                             return Observable.fromIterable(trackableConnector.searchTrackables(geocode));
                         }
-                    }).subscribeOn(AndroidRx2Utils.networkScheduler);
+                    }).subscribeOn(AndroidRxUtils.networkScheduler);
                 }
             }).toList()).subscribe(new Consumer<List<Trackable>>() {
                 @Override
@@ -661,7 +661,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
             @Override
             public void onClick(final DialogInterface dialog, final int which) {
-                AndroidRx2Utils.networkScheduler.scheduleDirect(new Runnable() {
+                AndroidRxUtils.networkScheduler.scheduleDirect(new Runnable() {
                     @Override
                     public void run() {
                         ((IgnoreCapability) ConnectorFactory.getConnector(cache)).ignoreCache(cache);
@@ -902,7 +902,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
         progress.show(this, res.getString(R.string.cache_dialog_refresh_title), res.getString(R.string.cache_dialog_refresh_message), true, refreshCacheHandler.cancelMessage());
 
-        cache.refresh(refreshCacheHandler, AndroidRx2Utils.refreshScheduler);
+        cache.refresh(refreshCacheHandler, AndroidRxUtils.refreshScheduler);
     }
 
     private void dropCache() {
@@ -978,7 +978,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             view = (ScrollView) getLayoutInflater().inflate(R.layout.cachedetail_details_page, parentView, false);
 
             // Start loading preview map
-            AndroidRx2Utils.bindActivity(CacheDetailActivity.this, previewMap).subscribeOn(AndroidRx2Utils.networkScheduler)
+            AndroidRxUtils.bindActivity(CacheDetailActivity.this, previewMap).subscribeOn(AndroidRxUtils.networkScheduler)
                     .subscribe(new Consumer<BitmapDrawable>() {
                         @Override
                         public void accept(final BitmapDrawable image) {
@@ -1195,7 +1195,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     return;
                 }
                 progress.show(CacheDetailActivity.this, res.getString(titleId), res.getString(messageId), true, null);
-                AndroidRx2Utils.networkScheduler.scheduleDirect(new Runnable() {
+                AndroidRxUtils.networkScheduler.scheduleDirect(new Runnable() {
                     @Override
                     public void run() {
                         action.call(handler);
@@ -1543,7 +1543,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             final Message cancelMessage = myHandler.cancelMessage(res.getString(R.string.cache_personal_note_upload_cancelled));
             progress.show(CacheDetailActivity.this, res.getString(R.string.cache_personal_note_uploading), res.getString(R.string.cache_personal_note_uploading), true, cancelMessage);
 
-            myHandler.disposeIfCancelled(AndroidRx2Utils.networkScheduler.scheduleDirect(new Runnable() {
+            myHandler.disposeIfCancelled(AndroidRxUtils.networkScheduler.scheduleDirect(new Runnable() {
                 @Override
                 public void run() {
                     final PersonalNoteCapability connector = (PersonalNoteCapability) ConnectorFactory.getConnector(cache);
@@ -2116,7 +2116,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     }
 
     private void resetCoords(final Geocache cache, final Handler handler, final Waypoint wpt, final boolean local, final boolean remote, final ProgressDialog progress) {
-        AndroidRx2Utils.networkScheduler.scheduleDirect(new Runnable() {
+        AndroidRxUtils.networkScheduler.scheduleDirect(new Runnable() {
             @Override
             public void run() {
                 if (local) {
@@ -2345,7 +2345,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     protected void storeCache(final Set<Integer> listIds) {
         final StoreCacheHandler storeCacheHandler = new StoreCacheHandler(CacheDetailActivity.this, progress);
         progress.show(this, res.getString(R.string.cache_dialog_offline_save_title), res.getString(R.string.cache_dialog_offline_save_message), true, storeCacheHandler.cancelMessage());
-        AndroidRx2Utils.networkScheduler.scheduleDirect(new Runnable() {
+        AndroidRxUtils.networkScheduler.scheduleDirect(new Runnable() {
             @Override
             public void run() {
                 cache.store(listIds, storeCacheHandler);

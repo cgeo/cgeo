@@ -1,6 +1,6 @@
 package cgeo.geocaching.sensors;
 
-import cgeo.geocaching.utils.AndroidRx2Utils;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Log;
 
 import android.annotation.TargetApi;
@@ -82,7 +82,7 @@ public class RotationProvider {
                 emitter.setCancellable(new Cancellable() {
                     @Override
                     public void cancel() throws Exception {
-                        AndroidRx2Utils.looperCallbacksScheduler.scheduleDirect(new Runnable() {
+                        AndroidRxUtils.looperCallbacksScheduler.scheduleDirect(new Runnable() {
                             @Override
                             public void run() {
                                 Log.d("RotationProvider: unregistering listener");
@@ -93,7 +93,7 @@ public class RotationProvider {
                 });
             }
         });
-        return observable.subscribeOn(AndroidRx2Utils.looperCallbacksScheduler).share();
+        return observable.subscribeOn(AndroidRxUtils.looperCallbacksScheduler).share();
     }
 
     public static boolean hasRotationSensor(final Context context) {

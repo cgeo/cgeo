@@ -10,7 +10,7 @@ import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.gcvote.GCVote;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.utils.AndroidRx2Utils;
+import cgeo.geocaching.utils.AndroidRxUtils;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -332,7 +332,7 @@ public class SearchResult implements Parcelable {
                             return Observable.error(e);
                         }
                     }
-                }).subscribeOn(AndroidRx2Utils.networkScheduler);
+                }).subscribeOn(AndroidRxUtils.networkScheduler);
             }
         }).reduce(new SearchResult(), new BiFunction<SearchResult, SearchResult, SearchResult>() {
             @Override

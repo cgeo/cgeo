@@ -30,7 +30,7 @@ import cgeo.geocaching.ui.dialog.DateDialog.DateDialogParent;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.TimeDialog;
 import cgeo.geocaching.ui.dialog.TimeDialog.TimeDialogParent;
-import cgeo.geocaching.utils.AndroidRx2Utils;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.AsyncTaskWithProgress;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
@@ -212,7 +212,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
         // Initialize the UI
         init();
 
-        createDisposables.add(AndroidRx2Utils.bindActivity(this, ConnectorFactory.loadTrackable(geocode, null, null, brand)).subscribe(new Consumer<Trackable>() {
+        createDisposables.add(AndroidRxUtils.bindActivity(this, ConnectorFactory.loadTrackable(geocode, null, null, brand)).subscribe(new Consumer<Trackable>() {
             @Override
             public void accept(final Trackable newTrackable) {
                 if (trackingCode != null) {

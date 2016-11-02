@@ -16,7 +16,7 @@ import cgeo.geocaching.ui.AbstractViewHolder;
 import cgeo.geocaching.ui.NavigationActionProvider;
 import cgeo.geocaching.ui.dialog.CoordinatesInputDialog;
 import cgeo.geocaching.ui.dialog.Dialogs;
-import cgeo.geocaching.utils.AndroidRx2Utils;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
 
@@ -386,7 +386,7 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity implemen
 
         if (!getHistoryOfSearchedLocations().contains(loc)) {
             getHistoryOfSearchedLocations().add(0, loc);
-            AndroidRx2Utils.andThenOnUi(Schedulers.io(), new Runnable() {
+            AndroidRxUtils.andThenOnUi(Schedulers.io(), new Runnable() {
                 @Override
                 public void run() {
                     // Save location

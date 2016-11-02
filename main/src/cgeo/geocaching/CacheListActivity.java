@@ -63,7 +63,7 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.CacheListAdapter;
 import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.ui.dialog.Dialogs;
-import cgeo.geocaching.utils.AndroidRx2Utils;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.CancellableHandler;
@@ -1346,7 +1346,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                         handler.obtainMessage(DownloadProgress.MSG_LOADED, cache).sendToTarget();
                         emitter.onComplete();
                     }
-                }).subscribeOn(AndroidRx2Utils.refreshScheduler);
+                }).subscribeOn(AndroidRxUtils.refreshScheduler);
             }
         }).doOnComplete(new Action() {
             @Override

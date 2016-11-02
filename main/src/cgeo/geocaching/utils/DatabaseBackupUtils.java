@@ -58,7 +58,7 @@ public class DatabaseBackupUtils {
         final Resources res = activity.getResources();
         final ProgressDialog dialog = ProgressDialog.show(activity, res.getString(R.string.init_backup_restore), res.getString(R.string.init_restore_running), true, false);
         final AtomicBoolean restoreSuccessful = new AtomicBoolean(false);
-        AndroidRx2Utils.andThenOnUi(Schedulers.io(), new Runnable() {
+        AndroidRxUtils.andThenOnUi(Schedulers.io(), new Runnable() {
             @Override
             public void run() {
                 restoreSuccessful.set(DataStore.restoreDatabaseInternal());
@@ -105,7 +105,7 @@ public class DatabaseBackupUtils {
         final ProgressDialog dialog = ProgressDialog.show(activity,
                 activity.getString(R.string.init_backup),
                 activity.getString(R.string.init_backup_running), true, false);
-        AndroidRx2Utils.andThenOnUi(Schedulers.io(), new Callable<String>() {
+        AndroidRxUtils.andThenOnUi(Schedulers.io(), new Callable<String>() {
             @Override
             public String call() {
                 return DataStore.backupDatabaseInternal();

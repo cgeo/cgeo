@@ -2,7 +2,7 @@ package cgeo.geocaching.playservices;
 
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.utils.AndroidRx2Utils;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Log;
 
 import android.content.Context;
@@ -52,10 +52,10 @@ public class LocationProvider extends LocationCallback implements GoogleApiClien
             try {
                 if (mostPreciseCount.get() > 0) {
                     Log.d("LocationProvider: requesting most precise locations");
-                    LocationServices.FusedLocationApi.requestLocationUpdates(locationClient, LOCATION_REQUEST, this, AndroidRx2Utils.looperCallbacksLooper);
+                    LocationServices.FusedLocationApi.requestLocationUpdates(locationClient, LOCATION_REQUEST, this, AndroidRxUtils.looperCallbacksLooper);
                 } else if (lowPowerCount.get() > 0) {
                     Log.d("LocationProvider: requesting low-power locations");
-                    LocationServices.FusedLocationApi.requestLocationUpdates(locationClient, LOCATION_REQUEST_LOW_POWER, this, AndroidRx2Utils.looperCallbacksLooper);
+                    LocationServices.FusedLocationApi.requestLocationUpdates(locationClient, LOCATION_REQUEST_LOW_POWER, this, AndroidRxUtils.looperCallbacksLooper);
                 } else {
                     Log.d("LocationProvider: stopping location requests");
                     LocationServices.FusedLocationApi.removeLocationUpdates(locationClient, this);
@@ -95,7 +95,7 @@ public class LocationProvider extends LocationCallback implements GoogleApiClien
                     @Override
                     public void cancel() throws Exception {
                         disposable.dispose();
-                        AndroidRx2Utils.looperCallbacksScheduler.scheduleDirect(new Runnable() {
+                        AndroidRxUtils.looperCallbacksScheduler.scheduleDirect(new Runnable() {
                             @Override
                             public void run() {
                                 if (reference.decrementAndGet() == 0) {

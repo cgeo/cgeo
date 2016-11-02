@@ -6,7 +6,7 @@ import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.ui.dialog.Dialogs;
-import cgeo.geocaching.utils.AndroidRx2Utils;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.BundleUtils;
 import cgeo.geocaching.utils.Log;
 
@@ -101,12 +101,12 @@ public abstract class AbstractCredentialsAuthorizationActivity extends AbstractA
                 res.getString(R.string.init_login_popup), getAuthDialogWait(), true);
         loginDialog.setCancelable(false);
 
-        AndroidRx2Utils.bindActivity(authorizationActivity, Observable.defer(new Callable<Observable<StatusCode>>() {
+        AndroidRxUtils.bindActivity(authorizationActivity, Observable.defer(new Callable<Observable<StatusCode>>() {
             @Override
             public Observable<StatusCode> call() {
                 return Observable.just(checkCredentials(credentials));
             }
-        })).subscribeOn(AndroidRx2Utils.networkScheduler).subscribe(new Consumer<StatusCode>() {
+        })).subscribeOn(AndroidRxUtils.networkScheduler).subscribe(new Consumer<StatusCode>() {
             @Override
             public void accept(final StatusCode statusCode) {
                 loginDialog.dismiss();

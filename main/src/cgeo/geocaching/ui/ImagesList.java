@@ -10,7 +10,7 @@ import cgeo.geocaching.models.Image;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.storage.LocalStorage;
-import cgeo.geocaching.utils.AndroidRx2Utils;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
@@ -141,7 +141,7 @@ public class ImagesList {
             assert imageView != null;
             rowView.addView(imageView);
             imagesView.addView(rowView);
-            disposables.add(AndroidRx2Utils.bindActivity(activity, imgGetter.fetchDrawable(img.getUrl())).subscribe(new Consumer<BitmapDrawable>() {
+            disposables.add(AndroidRxUtils.bindActivity(activity, imgGetter.fetchDrawable(img.getUrl())).subscribe(new Consumer<BitmapDrawable>() {
                 @Override
                 public void accept(final BitmapDrawable image) {
                     display(imageView, image, img, rowView);

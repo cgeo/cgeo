@@ -9,7 +9,7 @@ import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.LocalStorage;
-import cgeo.geocaching.utils.AndroidRx2Utils;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
 
@@ -123,7 +123,7 @@ public final class StaticMapsProvider {
                 }
                 return Completable.complete();
             }
-        }).subscribeOn(AndroidRx2Utils.networkScheduler));
+        }).subscribeOn(AndroidRxUtils.networkScheduler));
     }
 
     public static Completable downloadMaps(final Geocache cache) {
