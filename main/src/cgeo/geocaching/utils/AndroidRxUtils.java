@@ -110,7 +110,7 @@ public class AndroidRxUtils {
     }
 
     public static <T> Observable<T> bindFragment(final Fragment fragment, final Observable<T> source) {
-        final WeakReference<Fragment> fragmentRef = new WeakReference<Fragment>(fragment);
+        final WeakReference<Fragment> fragmentRef = new WeakReference<>(fragment);
         return source.observeOn(AndroidSchedulers.mainThread()).filter(new Predicate<T>() {
             @Override
             public boolean test(final T t) throws Exception {

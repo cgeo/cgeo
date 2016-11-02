@@ -218,7 +218,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
 
     private void refreshTrackable(final String message) {
         waitDialog = ProgressDialog.show(this, message, res.getString(R.string.trackable_details_loading), true, true);
-        createDisposables.add((AndroidRxUtils.bindActivity(this, ConnectorFactory.loadTrackable(geocode, guid, id, brand)).subscribe(
+        createDisposables.add(AndroidRxUtils.bindActivity(this, ConnectorFactory.loadTrackable(geocode, guid, id, brand)).subscribe(
                 new Consumer<Trackable>() {
                     @Override
                     public void accept(final Trackable newTrackable) throws Exception {
@@ -239,7 +239,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
                     public void run() throws Exception {
                         act(null);
                     }
-                })));
+                }));
     }
 
     @Nullable
