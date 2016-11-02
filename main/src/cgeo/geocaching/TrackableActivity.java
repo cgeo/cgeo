@@ -67,9 +67,6 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
-import rx.android.view.OnClickEvent;
-import rx.android.view.ViewObservable;
-import rx.functions.Action1;
 
 public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivity.Page> implements AndroidBeam.ActivitySharingInterface {
 
@@ -575,9 +572,9 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
 
                 trackableImage.setImageResource(R.drawable.image_not_loaded);
                 trackableImage.setClickable(true);
-                ViewObservable.clicks(trackableImage, false).subscribe(new Action1<OnClickEvent>() {
+                trackableImage.setOnClickListener(new OnClickListener() {
                     @Override
-                    public void call(final OnClickEvent onClickEvent) {
+                    public void onClick(final View view) {
                         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(trackable.getImage())));
                     }
                 });

@@ -38,10 +38,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.concurrent.Callable;
+
 import butterknife.ButterKnife;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Consumer;
-import rx.functions.Func0;
 
 public abstract class AbstractDialogFragment extends DialogFragment implements CacheMenuHandler.ActivityInterface, PopupMenu.OnMenuItemClickListener, MenuItem.OnMenuItemClickListener {
     protected Resources res = null;
@@ -220,7 +221,7 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
         if (!cache.supportsGCVote()) {
             return;
         }
-        AndroidRxUtils.bindActivity(getActivity(), RxUtils.deferredNullable(new Func0<GCVoteRating>() {
+        AndroidRxUtils.bindActivity(getActivity(), RxUtils.deferredNullable(new Callable<GCVoteRating>() {
             @Override
             public GCVoteRating call() {
                 return GCVote.getRating(cache.getGuid(), geocode);
