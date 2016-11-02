@@ -8,7 +8,7 @@ import cgeo.geocaching.location.Geopoint;
 import android.app.Activity;
 import android.support.annotation.NonNull;
 
-import rx.functions.Func1;
+import io.reactivex.functions.Function;
 
 public class CoordsGeocacheListLoader extends AbstractSearchLoader {
     @NonNull private final Geopoint coords;
@@ -21,9 +21,9 @@ public class CoordsGeocacheListLoader extends AbstractSearchLoader {
     @Override
     public SearchResult runSearch() {
         return nonEmptyCombineActive(ConnectorFactory.getSearchByCenterConnectors(),
-                new Func1<ISearchByCenter, SearchResult>() {
+                new Function<ISearchByCenter, SearchResult>() {
                     @Override
-                    public SearchResult call(final ISearchByCenter connector) {
+                    public SearchResult apply(final ISearchByCenter connector) {
                         return connector.searchByCenter(coords);
                     }
                 });

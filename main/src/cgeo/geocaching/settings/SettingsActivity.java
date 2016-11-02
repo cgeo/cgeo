@@ -55,10 +55,9 @@ import java.io.File;
 import java.util.List;
 import java.util.Locale;
 
+import io.reactivex.schedulers.Schedulers;
 import org.apache.commons.lang3.StringUtils;
 import org.openintents.intents.FileManagerIntents;
-import rx.functions.Action0;
-import rx.schedulers.Schedulers;
 
 /**
  * A {@link PreferenceActivity} that presents a set of application settings. On
@@ -383,14 +382,14 @@ public class SettingsActivity extends PreferenceActivity {
                 final Resources res = getResources();
                 final SettingsActivity activity = SettingsActivity.this;
                 final ProgressDialog dialog = ProgressDialog.show(activity, res.getString(R.string.init_maintenance), res.getString(R.string.init_maintenance_directories), true, false);
-                AndroidRxUtils.andThenOnUi(Schedulers.io(), new Action0() {
+                AndroidRxUtils.andThenOnUi(Schedulers.io(), new Runnable() {
                     @Override
-                    public void call() {
+                    public void run() {
                         DataStore.removeObsoleteCacheDirectories();
                     }
-                }, new Action0() {
+                }, new Runnable() {
                     @Override
-                    public void call() {
+                    public void run() {
                         dialog.dismiss();
                     }
                 });

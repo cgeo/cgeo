@@ -10,7 +10,7 @@ import android.support.annotation.Nullable;
 
 import java.util.List;
 
-import rx.Observable;
+import io.reactivex.Observable;
 
 /**
  * Methods to be implemented by any connector for handling trackables

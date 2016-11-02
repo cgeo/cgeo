@@ -1,35 +1,5 @@
 package cgeo.geocaching;
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.res.Configuration;
-import android.os.Bundle;
-import android.support.v4.view.MenuItemCompat;
-import android.view.ContextMenu;
-import android.view.ContextMenu.ContextMenuInfo;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.View.OnCreateContextMenuListener;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.Spinner;
-import android.widget.TextView;
-
-import org.apache.commons.lang3.StringUtils;
-import android.support.annotation.Nullable;
-
-import java.util.List;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.activity.INavigationSource;
 import cgeo.geocaching.apps.navi.NavigationAppFactory;
@@ -49,8 +19,37 @@ import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
-import rx.functions.Action0;
-import rx.schedulers.Schedulers;
+
+import android.app.Activity;
+import android.content.Context;
+import android.content.res.Configuration;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.view.MenuItemCompat;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnCreateContextMenuListener;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.TextView;
+
+import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import io.reactivex.schedulers.Schedulers;
+import org.apache.commons.lang3.StringUtils;
 
 public class NavigateAnyPointActivity extends AbstractActionBarActivity implements CoordinatesInputDialog.CoordinateUpdate, INavigationSource {
 
@@ -387,15 +386,15 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity implemen
 
         if (!getHistoryOfSearchedLocations().contains(loc)) {
             getHistoryOfSearchedLocations().add(0, loc);
-            AndroidRxUtils.andThenOnUi(Schedulers.io(), new Action0() {
+            AndroidRxUtils.andThenOnUi(Schedulers.io(), new Runnable() {
                 @Override
-                public void call() {
+                public void run() {
                     // Save location
                     DataStore.saveSearchedDestination(loc);
                 }
-            }, new Action0() {
+            }, new Runnable() {
                 @Override
-                public void call() {
+                public void run() {
                     // Ensure to remove the footer
                     historyListView.removeFooterView(getEmptyHistoryFooter());
                     destinationHistoryAdapter.notifyDataSetChanged();

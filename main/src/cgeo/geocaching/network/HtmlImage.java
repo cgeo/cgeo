@@ -31,20 +31,22 @@ import java.io.FileNotFoundException;
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.Callable;
 
+import io.reactivex.Completable;
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Cancellable;
+import io.reactivex.functions.Function;
+import io.reactivex.internal.disposables.CancellableDisposable;
+import io.reactivex.processors.PublishProcessor;
 import okhttp3.Response;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
-import rx.Completable;
-import rx.Observable;
-import rx.Observable.OnSubscribe;
-import rx.Subscriber;
-import rx.functions.Action0;
-import rx.functions.Func0;
-import rx.functions.Func1;
-import rx.subjects.PublishSubject;
-import rx.subscriptions.CompositeSubscription;
 
 /**
  * All-purpose image getter that can also be used as a ImageGetter interface when displaying caches.
@@ -83,19 +85,19 @@ public class HtmlImage implements Html.ImageGetter {
     protected final WeakReference<TextView> viewRef;
     private final Map<String, BitmapDrawable> cache = new HashMap<>();
 
-    private final ObservableCache<String, BitmapDrawable> observableCache = new ObservableCache<>(new Func1<String, Observable<BitmapDrawable>>() {
+    private final ObservableCache<String, BitmapDrawable> observableCache = new ObservableCache<>(new Function<String, Observable<BitmapDrawable>>() {
         @Override
-        public Observable<BitmapDrawable> call(final String url) {
+        public Observable<BitmapDrawable> apply(final String url) {
             return fetchDrawableUncached(url);
         }
     });
 
     // Background loading
-    // .cache() is not yet available on Completable instances as of RxJava 1.1.1, so we have to go back
+    // .cache() is not yet available on Completable instances as of RxJava 2.0.0, so we have to go back
     // to the observable world to achieve the caching.
-    private final PublishSubject<Completable> loading = PublishSubject.create();
-    private final Completable waitForEnd = Completable.merge(loading).toObservable().cache().toCompletable();
-    private final CompositeSubscription subscription = new CompositeSubscription(waitForEnd.subscribe());
+    private final PublishProcessor<Completable> loading = PublishProcessor.create();
+    private final Completable waitForEnd = Completable.merge(loading).toObservable().cache().ignoreElements();
+    private final CompositeDisposable disposable = new CompositeDisposable(waitForEnd.subscribe());
 
     /**
      * Create a new HtmlImage object with different behaviors depending on <tt>onlySave</tt> and <tt>view</tt> values.
@@ -171,12 +173,12 @@ public class HtmlImage implements Html.ImageGetter {
         }
         final Observable<BitmapDrawable> drawable = fetchDrawable(url);
         if (onlySave) {
-            loading.onNext(drawable.toCompletable());
+            loading.onNext(drawable.ignoreElements());
             cache.put(url, null);
             return null;
         }
         final TextView textView = viewRef.get();
-        final BitmapDrawable result = textView == null ? drawable.toBlocking().lastOrDefault(null) : getContainerDrawable(textView, drawable);
+        final BitmapDrawable result = textView == null ? drawable.blockingLast(null) : getContainerDrawable(textView, drawable);
         cache.put(url, result);
         return result;
     }
@@ -200,7 +202,7 @@ public class HtmlImage implements Html.ImageGetter {
         // Explicit local file URLs are loaded from the filesystem regardless of their age. The IO part is short
         // enough to make the whole operation on the computation scheduler.
         if (FileUtils.isFileUrl(url)) {
-            return Observable.defer(new Func0<Observable<BitmapDrawable>>() {
+            return Observable.defer(new Callable<Observable<BitmapDrawable>>() {
                 @Override
                 public Observable<BitmapDrawable> call() {
                     final Bitmap bitmap = loadCachedImage(FileUtils.urlToFile(url), true).left;
@@ -212,26 +214,34 @@ public class HtmlImage implements Html.ImageGetter {
         final boolean shared = url.contains("/images/icons/icon_");
         final String pseudoGeocode = shared ? SHARED : geocode;
 
-        return Observable.create(new OnSubscribe<BitmapDrawable>() {
+        return Observable.create(new ObservableOnSubscribe<BitmapDrawable>() {
             @Override
-            public void call(final Subscriber<? super BitmapDrawable> subscriber) {
-                subscription.add(subscriber);
-                subscriber.add(AndroidRxUtils.computationScheduler.createWorker().schedule(new Action0() {
+            public void subscribe(final ObservableEmitter<BitmapDrawable> emitter) throws Exception {
+                // Canceling disposable must sever this connection
+                final CancellableDisposable aborter = new CancellableDisposable(new Cancellable() {
                     @Override
-                    public void call() {
+                    public void cancel() throws Exception {
+                        emitter.onComplete();
+                    }
+                });
+                disposable.add(aborter);
+                // Canceling this subscription must cancel the data retrieval
+                emitter.setDisposable(AndroidRxUtils.computationScheduler.scheduleDirect(new Runnable() {
+                    @Override
+                    public void run() {
                         final ImmutablePair<BitmapDrawable, Boolean> loaded = loadFromDisk();
                         final BitmapDrawable bitmap = loaded.left;
                         if (loaded.right) {
-                            subscriber.onNext(bitmap);
-                            subscriber.onCompleted();
+                            emitter.onNext(bitmap);
+                            emitter.onComplete();
                             return;
                         }
                         if (bitmap != null && !onlySave) {
-                            subscriber.onNext(bitmap);
+                            emitter.onNext(bitmap);
                         }
-                        AndroidRxUtils.networkScheduler.createWorker().schedule(new Action0() {
-                            @Override public void call() {
-                                downloadAndSave(subscriber);
+                        AndroidRxUtils.networkScheduler.scheduleDirect(new Runnable() {
+                            @Override public void run() {
+                                downloadAndSave(emitter, aborter);
                             }
                         });
                     }
@@ -243,38 +253,38 @@ public class HtmlImage implements Html.ImageGetter {
                 return scaleImage(loadResult);
             }
 
-            private void downloadAndSave(final Subscriber<? super BitmapDrawable> subscriber) {
+            private void downloadAndSave(final ObservableEmitter<BitmapDrawable> emitter, final Disposable disposable) {
                 final File file = LocalStorage.getStorageFile(pseudoGeocode, url, true, true);
                 if (url.startsWith("data:image/")) {
                     if (url.contains(";base64,")) {
                         ImageUtils.decodeBase64ToFile(StringUtils.substringAfter(url, ";base64,"), file);
                     } else {
                         Log.e("HtmlImage.getDrawable: unable to decode non-base64 inline image");
-                        subscriber.onCompleted();
+                        emitter.onComplete();
                         return;
                     }
-                } else if (subscriber.isUnsubscribed() || downloadOrRefreshCopy(url, file)) {
+                } else if (disposable.isDisposed() || downloadOrRefreshCopy(url, file)) {
                         // The existing copy was fresh enough or we were unsubscribed earlier.
-                        subscriber.onCompleted();
+                        emitter.onComplete();
                         return;
                 }
                 if (onlySave) {
-                    subscriber.onCompleted();
+                    emitter.onComplete();
                     return;
                 }
-                AndroidRxUtils.computationScheduler.createWorker().schedule(new Action0() {
+                AndroidRxUtils.computationScheduler.scheduleDirect(new Runnable() {
                     @Override
-                    public void call() {
+                    public void run() {
                         final ImmutablePair<BitmapDrawable, Boolean> loaded = loadFromDisk();
                         final BitmapDrawable image = loaded.left;
                         if (image != null) {
-                            subscriber.onNext(image);
+                            emitter.onNext(image);
                         } else {
-                            subscriber.onNext(returnErrorImage ?
+                            emitter.onNext(returnErrorImage ?
                                     new BitmapDrawable(resources, BitmapFactory.decodeResource(resources, R.drawable.image_not_loaded)) :
                                     ImageUtils.getTransparent1x1Drawable(resources));
                         }
-                        subscriber.onCompleted();
+                        emitter.onComplete();
                     }
                 });
             }
@@ -289,9 +299,9 @@ public class HtmlImage implements Html.ImageGetter {
 
     public Completable waitForEndCompletable(@Nullable final CancellableHandler handler) {
         if (handler != null) {
-            handler.unsubscribeIfCancelled(subscription);
+            handler.disposeIfCancelled(disposable);
         }
-        loading.onCompleted();
+        loading.onComplete();
         return waitForEnd;
     }
 
@@ -307,7 +317,7 @@ public class HtmlImage implements Html.ImageGetter {
 
         if (absoluteURL != null) {
             try {
-                final Response httpResponse = Network.getRequest(absoluteURL, null, file).toBlocking().value();
+                final Response httpResponse = Network.getRequest(absoluteURL, null, file).blockingGet();
                 if (httpResponse.isSuccessful()) {
                     LocalStorage.saveEntityToFile(httpResponse, file);
                 } else if (httpResponse.code() == 304) {

@@ -10,11 +10,10 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 
-import rx.Observable;
-import rx.Observable.OnSubscribe;
-import rx.Subscriber;
-import rx.functions.Action0;
-import rx.subscriptions.Subscriptions;
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.functions.Cancellable;
 
 public class RotationProvider {
 
@@ -42,10 +41,9 @@ public class RotationProvider {
             Log.w("RotationProvider: no rotation sensor on this device");
             return Observable.error(new RuntimeException("no rotation sensor"));
         }
-        final Observable<Float> observable = Observable.create(new OnSubscribe<Float>() {
-
+        final Observable<Float> observable = Observable.create(new ObservableOnSubscribe<Float>() {
             @Override
-            public void call(final Subscriber<? super Float> subscriber) {
+            public void subscribe(final ObservableEmitter<Float> emitter) throws Exception {
                 final SensorEventListener listener = new SensorEventListener() {
 
                     private final float[] rotationMatrix = new float[16];
@@ -70,7 +68,7 @@ public class RotationProvider {
                             }
                         }
                         SensorManager.getOrientation(rotationMatrix, orientation);
-                        subscriber.onNext((float) (orientation[0] * 180 / Math.PI));
+                        emitter.onNext((float) (orientation[0] * 180 / Math.PI));
                     }
 
                     @Override
@@ -81,21 +79,21 @@ public class RotationProvider {
                 };
                 Log.d("RotationProvider: registering listener");
                 sensorManager.registerListener(listener, rotationSensor, SensorManager.SENSOR_DELAY_NORMAL);
-                subscriber.add(Subscriptions.create(new Action0() {
+                emitter.setCancellable(new Cancellable() {
                     @Override
-                    public void call() {
-                        AndroidRxUtils.looperCallbacksWorker.schedule(new Action0() {
+                    public void cancel() throws Exception {
+                        AndroidRxUtils.looperCallbacksScheduler.scheduleDirect(new Runnable() {
                             @Override
-                            public void call() {
+                            public void run() {
                                 Log.d("RotationProvider: unregistering listener");
                                 sensorManager.unregisterListener(listener, rotationSensor);
                             }
                         });
                     }
-                }));
+                });
             }
         });
-        return observable.subscribeOn(AndroidRxUtils.looperCallbacksScheduler).share().onBackpressureLatest();
+        return observable.subscribeOn(AndroidRxUtils.looperCallbacksScheduler).share();
     }
 
     public static boolean hasRotationSensor(final Context context) {

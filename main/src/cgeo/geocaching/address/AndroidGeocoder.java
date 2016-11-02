@@ -1,21 +1,22 @@
 package cgeo.geocaching.address;
 
-import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.utils.AndroidRxUtils;
-
-import org.apache.commons.collections4.CollectionUtils;
-import android.support.annotation.NonNull;
-
-import rx.Observable;
-import rx.functions.Func0;
+import cgeo.geocaching.utils.Log;
 
 import android.content.Context;
 import android.location.Address;
 import android.location.Geocoder;
+import android.support.annotation.NonNull;
 
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.Callable;
+
+import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
+import io.reactivex.Single;
+import org.apache.commons.collections4.CollectionUtils;
 
 public class AndroidGeocoder {
     private final Geocoder geocoder;
@@ -38,7 +39,7 @@ public class AndroidGeocoder {
         if (!Geocoder.isPresent()) {
             return Observable.error(new RuntimeException("no Android geocoder"));
         }
-        return Observable.defer(new Func0<Observable<Address>>() {
+        return Observable.defer(new Callable<ObservableSource<? extends Address>>() {
             @Override
             public Observable<Address> call() {
                 try {
@@ -55,13 +56,13 @@ public class AndroidGeocoder {
      * Retrieve the physical address for coordinates. The work happens on the network scheduler.
      *
      * @param coords the coordinates
-     * @return an observable containing one location or an error
+     * @return a single containing one location or an error
      */
-    public Observable<Address> getFromLocation(@NonNull final Geopoint coords) {
+    public Single<Address> getFromLocation(@NonNull final Geopoint coords) {
         if (!Geocoder.isPresent()) {
-            return Observable.error(new RuntimeException("no Android reverse geocoder"));
+            return Single.error(new RuntimeException("no Android reverse geocoder"));
         }
-        return Observable.defer(new Func0<Observable<Address>>() {
+        return Observable.defer(new Callable<Observable<Address>>() {
             @Override
             public Observable<Address> call() {
                 try {
@@ -71,13 +72,13 @@ public class AndroidGeocoder {
                     return Observable.error(e);
                 }
             }
-        }).subscribeOn(AndroidRxUtils.networkScheduler).first();
+        }).subscribeOn(AndroidRxUtils.networkScheduler).firstOrError();
     }
 
     private static Observable<Address> addressesToObservable(final List<Address> addresses) {
         return CollectionUtils.isEmpty(addresses) ?
                 Observable.<Address>error(new RuntimeException("no result from Android geocoder")) :
-                Observable.from(addresses);
+                Observable.fromIterable(addresses);
     }
 
 }

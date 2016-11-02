@@ -43,6 +43,7 @@ import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.LeastRecentlyUsedSet;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapUtils;
+import cgeo.geocaching.utils.functions.Action1;
 
 import android.annotation.TargetApi;
 import android.app.ActionBar;
@@ -87,13 +88,11 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.ButterKnife;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
-import rx.Subscription;
-import rx.functions.Action0;
-import rx.functions.Action1;
-import rx.schedulers.Schedulers;
-import rx.subscriptions.Subscriptions;
 
 /**
  * Class representing the Map in c:geo
@@ -105,7 +104,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
     /**
      * initialization with an empty subscription to make static code analysis tools more happy
      */
-    private Subscription resumeSubscription = Subscriptions.empty();
+    private final CompositeDisposable resumeDisposables = new CompositeDisposable();
 
     /** Handler Messages */
     private static final int HIDE_PROGRESS = 0;
@@ -138,7 +137,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
     // map status data
     private static boolean followMyLocation = true;
     // threads
-    private Subscription loadTimer;
+    private Disposable loadTimer;
     private LoadDetails loadDetailsThread = null;
     /** Time of last {@link LoadRunnable} run */
     private volatile long loadThreadRun = 0L;
@@ -547,7 +546,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
     @Override
     public void onResume() {
         super.onResume();
-        resumeSubscription = Subscriptions.from(geoDirUpdate.start(GeoDirHandler.UPDATE_GEODIR), startTimer());
+        resumeDisposables.addAll(geoDirUpdate.start(GeoDirHandler.UPDATE_GEODIR), startTimer());
 
         final List<String> toRefresh;
         synchronized (dirtyCaches) {
@@ -556,9 +555,9 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         }
 
         if (!toRefresh.isEmpty()) {
-            AndroidRxUtils.refreshScheduler.createWorker().schedule(new Action0() {
+            AndroidRxUtils.refreshScheduler.scheduleDirect(new Runnable() {
                 @Override
-                public void call() {
+                public void run() {
                     for (final String geocode: toRefresh) {
                         final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_WAYPOINTS);
                         if (cache != null) {
@@ -576,8 +575,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
     @Override
     public void onPause() {
-        resumeSubscription.unsubscribe();
-        resumeSubscription = Subscriptions.empty();
+        resumeDisposables.clear();
         savePrefs();
 
         mapView.destroyDrawingCache();
@@ -1102,18 +1100,18 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
      * Starts the load timer.
      */
 
-    private Subscription startTimer() {
+    private Disposable startTimer() {
         if (mapOptions.coords != null) {
             // display just one point
             displayPoint(mapOptions.coords);
-            loadTimer = Subscriptions.empty();
+            loadTimer = new CompositeDisposable();
         } else {
-            loadTimer = Schedulers.newThread().createWorker().schedulePeriodically(new LoadTimerAction(this), 0, 250, TimeUnit.MILLISECONDS);
+            loadTimer = Schedulers.newThread().schedulePeriodicallyDirect(new LoadTimerAction(this), 0, 250, TimeUnit.MILLISECONDS);
         }
         return loadTimer;
     }
 
-    private static final class LoadTimerAction implements Action0 {
+    private static final class LoadTimerAction implements Runnable {
 
         @NonNull private final WeakReference<CGeoMap> mapRef;
         private int previousZoom = -100;
@@ -1124,7 +1122,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         }
 
         @Override
-        public void call() {
+        public void run() {
             final CGeoMap map = mapRef.get();
             if (map == null) {
                 return;
@@ -1169,7 +1167,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
      *
      */
     private boolean isLoading() {
-        return !loadTimer.isUnsubscribed() &&
+        return !loadTimer.isDisposed() &&
                 (loadExecutor.getActiveCount() > 0 ||
                         downloadExecutor.getActiveCount() > 0 ||
                         displayExecutor.getActiveCount() > 0);

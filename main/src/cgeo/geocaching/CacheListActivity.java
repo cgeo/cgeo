@@ -68,6 +68,7 @@ import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.functions.Action1;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -119,16 +120,16 @@ import java.util.concurrent.atomic.AtomicInteger;
 import butterknife.ButterKnife;
 import com.github.amlcurran.showcaseview.targets.ActionViewTarget;
 import com.github.amlcurran.showcaseview.targets.ActionViewTarget.Type;
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.functions.Action;
+import io.reactivex.functions.Cancellable;
+import io.reactivex.functions.Function;
+import io.reactivex.schedulers.Schedulers;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
-import rx.Observable;
-import rx.Observable.OnSubscribe;
-import rx.Subscriber;
-import rx.Subscription;
-import rx.functions.Action0;
-import rx.functions.Action1;
-import rx.functions.Func1;
-import rx.schedulers.Schedulers;
 
 public class CacheListActivity extends AbstractListActivity implements FilteredActivity, LoaderManager.LoaderCallbacks<SearchResult> {
 
@@ -176,7 +177,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     };
     private ContextMenuInfo lastMenuInfo;
     private String contextMenuGeocode = "";
-    private Subscription resumeSubscription;
+    private final CompositeDisposable resumeDisposables = new CompositeDisposable();
     private final ListNameMemento listNameMemento = new ListNameMemento();
 
     private final Handler loadCachesHandler = new LoadCachesHandler(this);
@@ -574,7 +575,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     public void onResume() {
         super.onResume();
 
-        resumeSubscription = geoDirHandler.start(GeoDirHandler.UPDATE_GEODATA | GeoDirHandler.UPDATE_DIRECTION | GeoDirHandler.LOW_POWER, 250, TimeUnit.MILLISECONDS);
+        resumeDisposables.add(geoDirHandler.start(GeoDirHandler.UPDATE_GEODATA | GeoDirHandler.UPDATE_DIRECTION | GeoDirHandler.LOW_POWER, 250, TimeUnit.MILLISECONDS));
 
         adapter.setSelectMode(false);
         setAdapterCurrentCoordinates(true);
@@ -607,8 +608,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     @Override
     public void onPause() {
-        resumeSubscription.unsubscribe();
-        resumeSubscription = null;
+        resumeDisposables.clear();
         super.onPause();
     }
 
@@ -1301,52 +1301,60 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private void loadDetails(final CancellableHandler handler, final List<Geocache> caches, final Set<Integer> additionalListIds) {
         final Observable<Geocache> allCaches;
         if (Settings.isStoreOfflineMaps()) {
-            allCaches = Observable.create(new OnSubscribe<Geocache>() {
+            allCaches = Observable.create(new ObservableOnSubscribe<Geocache>() {
+                private volatile boolean canceled = false;
+
                 @Override
-                public void call(final Subscriber<? super Geocache> subscriber) {
+                public void subscribe(final ObservableEmitter<Geocache> emitter) throws Exception {
+                    emitter.setCancellable(new Cancellable() {
+                        @Override
+                        public void cancel() throws Exception {
+                            canceled = true;
+                        }
+                    });
                     final Deque<Geocache> withStaticMaps = new LinkedList<>();
                     for (final Geocache cache : caches) {
-                        if (subscriber.isUnsubscribed()) {
+                        if (canceled) {
                             return;
                         }
                         if (cache.hasStaticMap()) {
                             withStaticMaps.push(cache);
                         } else {
-                            subscriber.onNext(cache);
+                            emitter.onNext(cache);
                         }
                     }
                     for (final Geocache cache : withStaticMaps) {
-                        if (subscriber.isUnsubscribed()) {
+                        if (canceled) {
                             return;
                         }
-                        subscriber.onNext(cache);
+                        emitter.onNext(cache);
                     }
-                    subscriber.onCompleted();
+                    emitter.onComplete();
                 }
             }).subscribeOn(Schedulers.io());
         } else {
-            allCaches = Observable.from(caches);
+            allCaches = Observable.fromIterable(caches);
         }
-        final Observable<Geocache> loaded = allCaches.flatMap(new Func1<Geocache, Observable<Geocache>>() {
+        final Observable<Geocache> loaded = allCaches.flatMap(new Function<Geocache, Observable<Geocache>>() {
             @Override
-            public Observable<Geocache> call(final Geocache cache) {
-                return Observable.create(new OnSubscribe<Geocache>() {
+            public Observable<Geocache> apply(final Geocache cache) {
+                return Observable.create(new ObservableOnSubscribe<Geocache>() {
                     @Override
-                    public void call(final Subscriber<? super Geocache> subscriber) {
+                    public void subscribe(final ObservableEmitter<Geocache> emitter) throws Exception {
                         cache.refreshSynchronous(null, additionalListIds);
                         detailProgress.incrementAndGet();
                         handler.obtainMessage(DownloadProgress.MSG_LOADED, cache).sendToTarget();
-                        subscriber.onCompleted();
+                        emitter.onComplete();
                     }
                 }).subscribeOn(AndroidRxUtils.refreshScheduler);
             }
-        }).doOnCompleted(new Action0() {
+        }).doOnComplete(new Action() {
             @Override
-            public void call() {
+            public void run() {
                 handler.sendEmptyMessage(DownloadProgress.MSG_DONE);
             }
         });
-        handler.unsubscribeIfCancelled(loaded.subscribe());
+        handler.disposeIfCancelled(loaded.subscribe());
     }
 
     private static final class LastPositionHelper {
@@ -1414,9 +1422,9 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     private static void clearOfflineLogs(final Handler handler, final List<Geocache> selectedCaches) {
-        Schedulers.io().createWorker().schedule(new Action0() {
+        Schedulers.io().scheduleDirect(new Runnable() {
             @Override
-            public void call() {
+            public void run() {
                 DataStore.clearLogsOffline(selectedCaches);
                 handler.sendEmptyMessage(DownloadProgress.MSG_DONE);
             }

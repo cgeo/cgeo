@@ -1,19 +1,18 @@
 package cgeo.geocaching.sensors;
 
-import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.AndroidRxUtils;
-
-import rx.Observable;
-import rx.Observable.OnSubscribe;
-import rx.Subscriber;
-import rx.functions.Action0;
-import rx.subscriptions.Subscriptions;
+import cgeo.geocaching.utils.Log;
 
 import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.functions.Cancellable;
 
 public class OrientationProvider {
 
@@ -33,13 +32,13 @@ public class OrientationProvider {
         if (orientationSensor == null) {
             return Observable.error(new RuntimeException("no orientation sensor"));
         }
-        final Observable<Float> observable = Observable.create(new OnSubscribe<Float>() {
+        final Observable<Float> observable = Observable.create(new ObservableOnSubscribe<Float>() {
             @Override
-            public void call(final Subscriber<? super Float> subscriber) {
+            public void subscribe(final ObservableEmitter<Float> emitter) throws Exception {
                 final SensorEventListener listener = new SensorEventListener() {
                     @Override
                     public void onSensorChanged(final SensorEvent sensorEvent) {
-                        subscriber.onNext(sensorEvent.values[0]);
+                        emitter.onNext(sensorEvent.values[0]);
                     }
 
                     @Override
@@ -54,21 +53,21 @@ public class OrientationProvider {
                 };
                 Log.d("OrientationProvider: registering listener");
                 sensorManager.registerListener(listener, orientationSensor, SensorManager.SENSOR_DELAY_NORMAL);
-                subscriber.add(Subscriptions.create(new Action0() {
+                emitter.setCancellable(new Cancellable() {
                     @Override
-                    public void call() {
-                        AndroidRxUtils.looperCallbacksWorker.schedule(new Action0() {
+                    public void cancel() throws Exception {
+                        AndroidRxUtils.looperCallbacksScheduler.scheduleDirect(new Runnable() {
                             @Override
-                            public void call() {
+                            public void run() {
                                 Log.d("OrientationProvider: unregistering listener");
                                 sensorManager.unregisterListener(listener, orientationSensor);
                             }
                         });
                     }
-                }));
+                });
             }
         });
-        return observable.subscribeOn(AndroidRxUtils.looperCallbacksScheduler).share().onBackpressureLatest();
+        return observable.subscribeOn(AndroidRxUtils.looperCallbacksScheduler).share();
     }
 
 }

@@ -73,7 +73,7 @@ public class CgeoApplication extends Application {
         sensors.setupDirectionObservable();
 
         // Attempt to acquire an initial location before any real activity happens.
-        sensors.geoDataObservable(true).subscribeOn(AndroidRxUtils.looperCallbacksScheduler).first().subscribe();
+        sensors.geoDataObservable(true).subscribeOn(AndroidRxUtils.looperCallbacksScheduler).take(1).subscribe();
     }
 
     /**

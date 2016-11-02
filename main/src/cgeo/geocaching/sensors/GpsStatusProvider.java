@@ -2,17 +2,16 @@ package cgeo.geocaching.sensors;
 
 import cgeo.geocaching.utils.AndroidRxUtils;
 
-import rx.Observable;
-import rx.Observable.OnSubscribe;
-import rx.Subscriber;
-import rx.functions.Action0;
-import rx.subscriptions.Subscriptions;
-
 import android.content.Context;
 import android.location.GpsSatellite;
 import android.location.GpsStatus;
 import android.location.GpsStatus.Listener;
 import android.location.LocationManager;
+
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.functions.Cancellable;
 
 public class GpsStatusProvider {
 
@@ -35,9 +34,9 @@ public class GpsStatusProvider {
     private static final Status NO_GPS = new Status(false, 0, 0);
 
     public static Observable<Status> create(final Context context) {
-        final Observable<Status> observable = Observable.create(new OnSubscribe<Status>() {
+        final Observable<Status> observable = Observable.create(new ObservableOnSubscribe<Status>() {
             @Override
-            public void call(final Subscriber<? super Status> subscriber) {
+            public void subscribe(final ObservableEmitter<Status> subscriber) throws Exception {
                 final LocationManager geoManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
                 final Listener listener = new Listener() {
                     Status latest = new Status(false, 0, 0);
@@ -77,17 +76,17 @@ public class GpsStatusProvider {
                 };
                 subscriber.onNext(NO_GPS);
                 geoManager.addGpsStatusListener(listener);
-                subscriber.add(Subscriptions.create(new Action0() {
+                subscriber.setCancellable(new Cancellable() {
                     @Override
-                    public void call() {
-                        AndroidRxUtils.looperCallbacksWorker.schedule(new Action0() {
+                    public void cancel() throws Exception {
+                        AndroidRxUtils.looperCallbacksScheduler.scheduleDirect(new Runnable() {
                             @Override
-                            public void call() {
+                            public void run() {
                                 geoManager.removeGpsStatusListener(listener);
                             }
                         });
                     }
-                }));
+                });
             }
         });
         return observable.subscribeOn(AndroidRxUtils.looperCallbacksScheduler);

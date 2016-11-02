@@ -314,11 +314,9 @@ dependencies {
     compile 'com.jakewharton:process-phoenix:1.1.0'
 
     // RxJava
-    def rxjavaVersion = '1.2.1'
-    compile "io.reactivex:rxjava:$rxjavaVersion"
-    compile 'io.reactivex:rxandroid:0.25.0'
-    // ProGuard rules for RxJava
-    compile "com.artemzin.rxjava:proguard-rules:$rxjavaVersion.0"
+    def rxjavaVersion = '2.0.0'
+    compile "io.reactivex.rxjava2:rxjava:$rxjavaVersion"
+    compile "io.reactivex.rxjava2:rxandroid:$rxjavaVersion"
 
     // Showcase view
     // TODO replace by repository dependency. however, there is a conflict in min sdk, which needs to be solved then

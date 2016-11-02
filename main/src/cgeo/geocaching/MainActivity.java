@@ -31,6 +31,7 @@ import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.Version;
+import cgeo.geocaching.utils.functions.Action1;
 
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -71,13 +72,11 @@ import com.github.amlcurran.showcaseview.targets.ActionViewTarget;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.jakewharton.processphoenix.ProcessPhoenix;
+import io.reactivex.Single;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
 import org.apache.commons.lang3.StringUtils;
-import rx.Observable;
-import rx.android.app.AppObservable;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action0;
-import rx.functions.Action1;
-import rx.functions.Func1;
 
 public class MainActivity extends AbstractActionBarActivity {
     @BindView(R.id.nav_satellites) protected TextView navSatellites;
@@ -187,9 +186,9 @@ public class MainActivity extends AbstractActionBarActivity {
         return StringUtils.join(addressParts, ", ");
     }
 
-    private final Action1<GpsStatusProvider.Status> satellitesHandler = new Action1<Status>() {
+    private final Consumer<GpsStatusProvider.Status> satellitesHandler = new Consumer<Status>() {
         @Override
-        public void call(final Status gpsStatus) {
+        public void accept(final Status gpsStatus) {
             if (gpsStatus.gpsEnabled) {
                 navSatellites.setText(res.getString(R.string.loc_sat) + ": " + gpsStatus.satellitesFixed + '/' + gpsStatus.satellitesVisible);
             } else {
@@ -264,9 +263,9 @@ public class MainActivity extends AbstractActionBarActivity {
 
         for (final ILogin conn : ConnectorFactory.getActiveLiveConnectors()) {
             if (mustLogin || !conn.isLoggedIn()) {
-                AndroidRxUtils.networkScheduler.createWorker().schedule(new Action0() {
+                AndroidRxUtils.networkScheduler.scheduleDirect(new Runnable() {
                     @Override
-                    public void call() {
+                    public void run() {
                         if (mustLogin) {
                             // Properly log out from geocaching.com
                             conn.logout();
@@ -558,9 +557,9 @@ public class MainActivity extends AbstractActionBarActivity {
     }
 
     public void updateCacheCounter() {
-        AppObservable.bindActivity(this, DataStore.getAllCachesCountObservable()).subscribe(new Action1<Integer>() {
+        AndroidRxUtils.bindActivity(this, DataStore.getAllCachesCountObservable()).subscribe(new Consumer<Integer>() {
             @Override
-            public void call(final Integer countBubbleCnt1) {
+            public void accept(final Integer countBubbleCnt1) {
                 if (countBubbleCnt1 == 0) {
                     countBubble.setVisibility(View.GONE);
                 } else {
@@ -569,9 +568,9 @@ public class MainActivity extends AbstractActionBarActivity {
                     countBubble.setVisibility(View.VISIBLE);
                 }
             }
-        }, new Action1<Throwable>() {
+        }, new Consumer<Throwable>() {
             @Override
-            public void call(final Throwable throwable) {
+            public void accept(final Throwable throwable) {
                 Log.e("Unable to add bubble count", throwable);
             }
         });
@@ -636,17 +635,17 @@ public class MainActivity extends AbstractActionBarActivity {
                 }
                 if (addCoords == null || currentCoords.distanceTo(addCoords) > 0.5) {
                     addCoords = currentCoords;
-                    final Observable<String> address = (new AndroidGeocoder(MainActivity.this).getFromLocation(currentCoords)).map(new Func1<Address, String>() {
+                    final Single<String> address = (new AndroidGeocoder(MainActivity.this).getFromLocation(currentCoords)).map(new Function<Address, String>() {
                         @Override
-                        public String call(final Address address) {
+                        public String apply(final Address address) {
                             return formatAddress(address);
                         }
-                    }).onErrorResumeNext(Observable.just(currentCoords.toString()));
-                    AppObservable.bindActivity(MainActivity.this, address)
+                    }).onErrorResumeNext(Single.just(currentCoords.toString()));
+                    AndroidRxUtils.bindActivity(MainActivity.this, address)
                             .subscribeOn(AndroidRxUtils.networkScheduler)
-                            .subscribe(new Action1<String>() {
+                            .subscribe(new Consumer<String>() {
                                 @Override
-                                public void call(final String address) {
+                                public void accept(final String address) {
                                     navLocation.setText(address);
                                 }
                             });

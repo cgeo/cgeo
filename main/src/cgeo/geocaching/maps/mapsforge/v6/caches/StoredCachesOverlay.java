@@ -11,30 +11,29 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.Log;
 
 import android.support.annotation.NonNull;
-import org.mapsforge.map.layer.Layer;
 
 import java.lang.ref.WeakReference;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
-import rx.Subscription;
-import rx.functions.Action0;
-import rx.schedulers.Schedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
+import org.mapsforge.map.layer.Layer;
 
 public class StoredCachesOverlay extends AbstractCachesOverlay {
 
-    private final Subscription timer;
+    private final Disposable timer;
 
     public StoredCachesOverlay(final int overlayId, final Set<GeoEntry> geoEntries, final MfMapView mapView, final Layer anchorLayer, final MapHandlers mapHandlers) {
         super(overlayId, geoEntries, mapView, anchorLayer, mapHandlers);
         this.timer = startTimer();
     }
 
-    private Subscription startTimer() {
-        return Schedulers.newThread().createWorker().schedulePeriodically(new LoadTimerAction(this), 0, 250, TimeUnit.MILLISECONDS);
+    private Disposable startTimer() {
+        return Schedulers.newThread().schedulePeriodicallyDirect(new LoadTimerAction(this), 0, 250, TimeUnit.MILLISECONDS);
     }
 
-    private static final class LoadTimerAction implements Action0 {
+    private static final class LoadTimerAction implements Runnable {
 
         @NonNull private final WeakReference<StoredCachesOverlay> overlayRef;
         private int previousZoom = -100;
@@ -45,7 +44,7 @@ public class StoredCachesOverlay extends AbstractCachesOverlay {
         }
 
         @Override
-        public void call() {
+        public void run() {
             final StoredCachesOverlay overlay = overlayRef.get();
             if (overlay == null) {
                 return;
@@ -96,7 +95,7 @@ public class StoredCachesOverlay extends AbstractCachesOverlay {
 
     @Override
     public void onDestroy() {
-        timer.unsubscribe();
+        timer.dispose();
 
         super.onDestroy();
     }

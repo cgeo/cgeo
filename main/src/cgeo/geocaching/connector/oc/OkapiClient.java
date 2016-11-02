@@ -848,7 +848,7 @@ final class OkapiClient {
 
         final String uri = "http://" + host + service.methodName;
         try {
-            return new JSONResult(Network.getRequest(uri, params).toBlocking().value());
+            return new JSONResult(Network.getRequest(uri, params).blockingGet());
         } catch (final Exception e) {
             return new JSONResult("connection error");
         }

@@ -8,16 +8,16 @@ import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.RxUtils;
 
-import android.support.annotation.NonNull;
-
 import android.app.Application;
 import android.content.Context;
+import android.support.annotation.NonNull;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import rx.Observable;
-import rx.functions.Action1;
-import rx.functions.Func1;
+import io.reactivex.Observable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
+import io.reactivex.functions.Predicate;
 
 public class Sensors {
 
@@ -28,64 +28,65 @@ public class Sensors {
     @NonNull private volatile GeoData currentGeo = GeoData.DUMMY_LOCATION;
     private volatile float currentDirection = 0.0f;
     private final boolean hasCompassCapabilities;
-    private final Application app = CgeoApplication.getInstance();
 
     private static class InstanceHolder {
         static final Sensors INSTANCE = new Sensors();
     }
 
-    private final Action1<GeoData> rememberGeodataAction = new Action1<GeoData>() {
+    private final Consumer<GeoData> rememberGeodataAction = new Consumer<GeoData>() {
         @Override
-        public void call(final GeoData geoData) {
+        public void accept(final GeoData geoData) {
             currentGeo = geoData;
         }
     };
 
-    private final Action1<Float> onNextrememberDirectionAction = new Action1<Float>() {
+    private final Consumer<Float> onNextrememberDirectionAction = new Consumer<Float>() {
         @Override
-        public void call(final Float direction) {
+        public void accept(final Float direction) {
             currentDirection = direction;
         }
     };
 
     private Sensors() {
-        gpsStatusObservable = GpsStatusProvider.create(app).replay(1).refCount().onBackpressureLatest();
-        final Context context = CgeoApplication.getInstance().getApplicationContext();
+        final Application application = CgeoApplication.getInstance();
+        gpsStatusObservable = GpsStatusProvider.create(application).replay(1).refCount();
+        final Context context = application.getApplicationContext();
         hasCompassCapabilities = RotationProvider.hasRotationSensor(context) ||
-                                OrientationProvider.hasOrientationSensor(context) ||
-                                MagnetometerAndAccelerometerProvider.hasMagnetometerAndAccelerometerSensors(context);
+                OrientationProvider.hasOrientationSensor(context) ||
+                MagnetometerAndAccelerometerProvider.hasMagnetometerAndAccelerometerSensors(context);
     }
 
-    public static final Sensors getInstance() {
+    public static Sensors getInstance() {
         return InstanceHolder.INSTANCE;
     }
 
-    private final Func1<Throwable, Observable<GeoData>> fallbackToGeodataProvider = new Func1<Throwable, Observable<GeoData>>() {
+    private final Function<Throwable, Observable<GeoData>> fallbackToGeodataProvider = new Function<Throwable, Observable<GeoData>>() {
         @Override
-        public Observable<GeoData> call(final Throwable throwable) {
+        public Observable<GeoData> apply(final Throwable throwable) {
             Log.e("Cannot use Play Services location provider, falling back to GeoDataProvider", throwable);
             Settings.setUseGooglePlayServices(false);
-            return GeoDataProvider.create(app);
+            return GeoDataProvider.create(CgeoApplication.getInstance());
         }
     };
 
     public void setupGeoDataObservables(final boolean useGooglePlayServices, final boolean useLowPowerLocation) {
+        final Application application = CgeoApplication.getInstance();
         if (useGooglePlayServices) {
-            geoDataObservable = LocationProvider.getMostPrecise(app).onErrorResumeNext(fallbackToGeodataProvider).doOnNext(rememberGeodataAction);
+            geoDataObservable = LocationProvider.getMostPrecise(application).onErrorResumeNext(fallbackToGeodataProvider).doOnNext(rememberGeodataAction);
             if (useLowPowerLocation) {
-                geoDataObservableLowPower = LocationProvider.getLowPower(app).doOnNext(rememberGeodataAction).onErrorResumeNext(geoDataObservable);
+                geoDataObservableLowPower = LocationProvider.getLowPower(application).doOnNext(rememberGeodataAction).onErrorResumeNext(geoDataObservable);
             } else {
                 geoDataObservableLowPower = geoDataObservable;
             }
         } else {
-            geoDataObservable = RxUtils.rememberLast(GeoDataProvider.create(app).doOnNext(rememberGeodataAction), null);
+            geoDataObservable = RxUtils.rememberLast(GeoDataProvider.create(application).doOnNext(rememberGeodataAction), null);
             geoDataObservableLowPower = geoDataObservable;
         }
     }
 
-    private static final Func1<GeoData, Float> GPS_TO_DIRECTION = new Func1<GeoData, Float>() {
+    private static final Function<GeoData, Float> GPS_TO_DIRECTION = new Function<GeoData, Float>() {
         @Override
-        public Float call(final GeoData geoData) {
+        public Float apply(final GeoData geoData) {
             return AngleUtils.reverseDirectionNow(geoData.getBearing());
         }
     };
@@ -105,31 +106,32 @@ public class Sensors {
         // Use the rotation sensor if it is available unless the orientatation sensor is forced by the user.
         // After updating Moto G there is no rotation sensor anymore. Use magnetic field and accelerometer instead.
         final Observable<Float> sensorDirectionObservable;
-        if (Settings.useOrientationSensor(app)) {
-            sensorDirectionObservable = OrientationProvider.create(app);
-        } else if (RotationProvider.hasRotationSensor(app)) {
-            sensorDirectionObservable = RotationProvider.create(app);
+        final Application application = CgeoApplication.getInstance();
+        if (Settings.useOrientationSensor(application)) {
+            sensorDirectionObservable = OrientationProvider.create(application);
+        } else if (RotationProvider.hasRotationSensor(application)) {
+            sensorDirectionObservable = RotationProvider.create(application);
         } else {
-            sensorDirectionObservable = MagnetometerAndAccelerometerProvider.create(app);
+            sensorDirectionObservable = MagnetometerAndAccelerometerProvider.create(application);
         }
 
-        final Observable<Float> magneticDirectionObservable = sensorDirectionObservable.onErrorResumeNext(new Func1<Throwable, Observable<Float>>() {
+        final Observable<Float> magneticDirectionObservable = sensorDirectionObservable.onErrorResumeNext(new Function<Throwable, Observable<Float>>() {
             @Override
-            public Observable<Float> call(final Throwable throwable) {
+            public Observable<Float> apply(final Throwable throwable) {
                 Log.e("Device orientation is not available due to sensors error, disabling compass", throwable);
                 Settings.setUseCompass(false);
                 return Observable.<Float>never().startWith(0.0f);
             }
-        }).filter(new Func1<Float, Boolean>() {
+        }).filter(new Predicate<Float>() {
             @Override
-            public Boolean call(final Float aFloat) {
+            public boolean test(final Float aFloat) {
                 return Settings.isUseCompass() && !useDirectionFromGps.get();
             }
         });
 
-        final Observable<Float> directionFromGpsObservable = geoDataObservableLowPower.filter(new Func1<GeoData, Boolean>() {
+        final Observable<Float> directionFromGpsObservable = geoDataObservableLowPower.filter(new Predicate<GeoData>() {
             @Override
-            public Boolean call(final GeoData geoData) {
+            public boolean test(final GeoData geoData) {
                 final boolean useGps = geoData.getSpeed() > 5.0f;
                 useDirectionFromGps.set(useGps);
                 return useGps || !Settings.isUseCompass();

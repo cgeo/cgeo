@@ -64,16 +64,15 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.Callable;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.github.amlcurran.showcaseview.targets.ActionItemTarget;
+import io.reactivex.Observable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
 import org.apache.commons.lang3.StringUtils;
-import rx.Observable;
-import rx.android.app.AppObservable;
-import rx.functions.Action1;
-import rx.functions.Func0;
-import rx.functions.Func1;
 
 public class LogCacheActivity extends AbstractLoggingActivity implements DateDialog.DateDialogParent {
 
@@ -332,13 +331,13 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         loggingManager.init();
 
         // Load Generic Trackables
-        AppObservable.bindActivity(this,
+        AndroidRxUtils.bindActivity(this,
             // Obtain the actives connectors
-            Observable.from(ConnectorFactory.getLoggableGenericTrackablesConnectors())
-            .flatMap(new Func1<TrackableConnector, Observable<TrackableLog>>() {
+            Observable.fromIterable(ConnectorFactory.getLoggableGenericTrackablesConnectors())
+            .flatMap(new Function<TrackableConnector, Observable<TrackableLog>>() {
                 @Override
-                public Observable<TrackableLog> call(final TrackableConnector trackableConnector) {
-                    return Observable.defer(new Func0<Observable<TrackableLog>>() {
+                public Observable<TrackableLog> apply(final TrackableConnector trackableConnector) {
+                    return Observable.defer(new Callable<Observable<TrackableLog>>() {
                         @Override
                         public Observable<TrackableLog> call() {
                             return trackableConnector.trackableLogInventory();
@@ -346,9 +345,9 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
                     }).subscribeOn(AndroidRxUtils.networkScheduler);
                 }
             }).toList()
-        ).subscribe(new Action1<List<TrackableLog>>() {
+        ).subscribe(new Consumer<List<TrackableLog>>() {
             @Override
-            public void call(final List<TrackableLog> trackableLogs) {
+            public void accept(final List<TrackableLog> trackableLogs) {
                 // Store trackables
                 trackables.addAll(trackableLogs);
                 // Update the UI

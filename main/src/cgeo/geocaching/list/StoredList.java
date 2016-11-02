@@ -5,6 +5,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.utils.functions.Action1;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -23,7 +24,6 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
-import rx.functions.Action1;
 
 public final class StoredList extends AbstractList {
     private static final int TEMPORARY_LIST_ID = 0;

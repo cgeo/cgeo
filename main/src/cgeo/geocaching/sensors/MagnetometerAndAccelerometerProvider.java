@@ -1,19 +1,18 @@
 package cgeo.geocaching.sensors;
 
-import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.AndroidRxUtils;
-
-import rx.Observable;
-import rx.Observable.OnSubscribe;
-import rx.Subscriber;
-import rx.functions.Action0;
-import rx.subscriptions.Subscriptions;
+import cgeo.geocaching.utils.Log;
 
 import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.functions.Cancellable;
 
 public class MagnetometerAndAccelerometerProvider {
 
@@ -29,15 +28,16 @@ public class MagnetometerAndAccelerometerProvider {
         if (magnetometerSensor == null || accelerometerSensor == null) {
             return Observable.error(new RuntimeException("no magnetic or accelerometer sensor"));
         }
-        final Observable<Float> observable = Observable.create(new OnSubscribe<Float>() {
+        final Observable<Float> observable = Observable.create(new ObservableOnSubscribe<Float>() {
             private final float[] lastAccelerometer = new float[3];
             private final float[] lastMagnetometer = new float[3];
             private boolean lastAccelerometerSet = false;
             private boolean lastMagnetometerSet = false;
             private final float[] rotateMatrix = new float[9];
             private final float[] orientation = new float[3];
+
             @Override
-            public void call(final Subscriber<? super Float> subscriber) {
+            public void subscribe(final ObservableEmitter<Float> emitter) throws Exception {
                 final SensorEventListener listener = new SensorEventListener() {
                     @Override
                     public void onSensorChanged(final SensorEvent sensorEvent) {
@@ -52,7 +52,7 @@ public class MagnetometerAndAccelerometerProvider {
                         if (lastAccelerometerSet && lastMagnetometerSet) {
                             SensorManager.getRotationMatrix(rotateMatrix, null, lastAccelerometer, lastMagnetometer);
                             SensorManager.getOrientation(rotateMatrix, orientation);
-                            subscriber.onNext((float) (orientation[0] * 180 / Math.PI));
+                            emitter.onNext((float) (orientation[0] * 180 / Math.PI));
                         }
                     }
 
@@ -69,22 +69,22 @@ public class MagnetometerAndAccelerometerProvider {
                 Log.d("MagnetometerAndAccelerometerProvider: registering listener");
                 sensorManager.registerListener(listener, accelerometerSensor, SensorManager.SENSOR_DELAY_NORMAL);
                 sensorManager.registerListener(listener, magnetometerSensor, SensorManager.SENSOR_DELAY_NORMAL);
-                subscriber.add(Subscriptions.create(new Action0() {
+                emitter.setCancellable(new Cancellable() {
                     @Override
-                    public void call() {
-                        AndroidRxUtils.looperCallbacksWorker.schedule(new Action0() {
+                    public void cancel() throws Exception {
+                        AndroidRxUtils.looperCallbacksScheduler.scheduleDirect(new Runnable() {
                             @Override
-                            public void call() {
+                            public void run() {
                                 Log.d("MagnetometerAndAccelerometerProvider: unregistering listener");
                                 sensorManager.unregisterListener(listener, accelerometerSensor);
                                 sensorManager.unregisterListener(listener, magnetometerSensor);
                             }
                         });
                     }
-                }));
+                });
             }
         });
-        return observable.subscribeOn(AndroidRxUtils.looperCallbacksScheduler).share().onBackpressureLatest();
+        return observable.subscribeOn(AndroidRxUtils.looperCallbacksScheduler).share();
     }
 
     public static boolean hasMagnetometerAndAccelerometerSensors(final Context context) {

@@ -28,8 +28,8 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.log.LogCacheActivity;
 import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogTemplateProvider;
-import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.log.LogTemplateProvider.LogContext;
+import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.maps.mapsforge.v6.caches.GeoitemRef;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.settings.Settings;
@@ -72,15 +72,14 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import io.reactivex.Scheduler;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.ListUtils;
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
-import rx.Scheduler;
-import rx.Subscription;
-import rx.functions.Action0;
-import rx.schedulers.Schedulers;
 
 /**
  * Internal representation of a "cache"
@@ -1572,10 +1571,10 @@ public class Geocache implements IWaypoint {
         return CoordinatesType.CACHE;
     }
 
-    public Subscription drop(final Handler handler) {
-        return Schedulers.io().createWorker().schedule(new Action0() {
+    public Disposable drop(final Handler handler) {
+        return Schedulers.io().scheduleDirect(new Runnable() {
             @Override
-            public void call() {
+            public void run() {
                 try {
                     dropSynchronous();
                     handler.sendMessage(Message.obtain());
@@ -1617,10 +1616,10 @@ public class Geocache implements IWaypoint {
         warnIncorrectParsingIfBlank(getLocation(), "location");
     }
 
-    public Subscription refresh(final CancellableHandler handler, final Scheduler scheduler) {
-        return scheduler.createWorker().schedule(new Action0() {
+    public Disposable refresh(final CancellableHandler handler, final Scheduler scheduler) {
+        return scheduler.scheduleDirect(new Runnable() {
             @Override
-            public void call() {
+            public void run() {
                 refreshSynchronous(handler);
             }
         });
@@ -1711,7 +1710,7 @@ public class Geocache implements IWaypoint {
                 return;
             }
 
-            StaticMapsProvider.downloadMaps(cache).mergeWith(imgGetter.waitForEndCompletable(handler)).await();
+            StaticMapsProvider.downloadMaps(cache).mergeWith(imgGetter.waitForEndCompletable(handler)).blockingAwait();
 
             if (handler != null) {
                 handler.sendEmptyMessage(CancellableHandler.DONE);

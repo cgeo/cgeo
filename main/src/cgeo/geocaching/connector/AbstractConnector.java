@@ -18,6 +18,7 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.log.LogCacheActivity;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.utils.functions.Action1;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -30,7 +31,6 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
-import rx.functions.Action1;
 
 public abstract class AbstractConnector implements IConnector {
 

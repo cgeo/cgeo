@@ -30,9 +30,11 @@ import cgeo.geocaching.ui.dialog.DateDialog.DateDialogParent;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.TimeDialog;
 import cgeo.geocaching.ui.dialog.TimeDialog.TimeDialogParent;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.AsyncTaskWithProgress;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.functions.Func1;
 
 import android.R.layout;
 import android.R.string;
@@ -67,12 +69,11 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.functions.Action;
+import io.reactivex.functions.Consumer;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
-import rx.android.app.AppObservable;
-import rx.functions.Action1;
-import rx.functions.Func1;
-import rx.subscriptions.CompositeSubscription;
 
 public class LogTrackableActivity extends AbstractLoggingActivity implements DateDialogParent, TimeDialogParent, CoordinateUpdate, LoaderManager.LoaderCallbacks<List<LogTypeTrackable>> {
 
@@ -86,7 +87,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
     @BindView(R.id.tweet) protected CheckBox tweetCheck;
     @BindView(R.id.tweet_box) protected LinearLayout tweetBox;
 
-    private CompositeSubscription createSubscriptions;
+    private final CompositeDisposable createDisposables = new CompositeDisposable();
 
     private List<LogTypeTrackable> possibleLogTypesTrackable = new ArrayList<>();
     private String geocode = null;
@@ -150,7 +151,6 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
     public void onCreate(final Bundle savedInstanceState) {
         onCreate(savedInstanceState, R.layout.logtrackable_activity);
         ButterKnife.bind(this);
-        createSubscriptions = new CompositeSubscription();
 
         // get parameters
         final Bundle extras = getIntent().getExtras();
@@ -212,18 +212,31 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
         // Initialize the UI
         init();
 
-        createSubscriptions.add(AppObservable.bindActivity(this, ConnectorFactory.loadTrackable(geocode, null, null, brand)).singleOrDefault(null).subscribe(new Action1<Trackable>() {
+        createDisposables.add(AndroidRxUtils.bindActivity(this, ConnectorFactory.loadTrackable(geocode, null, null, brand)).subscribe(new Consumer<Trackable>() {
             @Override
-            public void call(final Trackable newTrackable) {
-                if (newTrackable != null && trackingCode != null) {
+            public void accept(final Trackable newTrackable) {
+                if (trackingCode != null) {
                     newTrackable.setTrackingcode(trackingCode);
                 }
-                trackable = newTrackable;
-                // Start loading in background
-                getSupportLoaderManager().initLoader(connector.getTrackableLoggingManagerLoaderId(), null, LogTrackableActivity.this).forceLoad();
-                displayTrackable();
+            }
+        }, new Consumer<Throwable>() {
+            @Override
+            public void accept(final Throwable throwable) throws Exception {
+                Log.e("refreshTrackable", throwable);
+            }
+        }, new Action() {
+            @Override
+            public void run() throws Exception {
+                act(null);
             }
         }));
+    }
+
+    private void act(final Trackable newTrackable) {
+        trackable = newTrackable;
+        // Start loading in background
+        getSupportLoaderManager().initLoader(connector.getTrackableLoggingManagerLoaderId(), null, LogTrackableActivity.this).forceLoad();
+        displayTrackable();
     }
 
     private void displayTrackable() {

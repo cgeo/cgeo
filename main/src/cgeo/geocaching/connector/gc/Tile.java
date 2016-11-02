@@ -8,19 +8,19 @@ import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.LeastRecentlyUsedSet;
 
-import okhttp3.Response;
-import android.support.annotation.NonNull;
-import rx.Single;
-import rx.functions.Func1;
-
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.support.annotation.NonNull;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
+
+import io.reactivex.Single;
+import io.reactivex.functions.Function;
+import okhttp3.Response;
 
 /**
  * All about tiles.
@@ -234,8 +234,7 @@ public class Tile {
 
     static Single<String> requestMapInfo(final String url, final Parameters params, final String referer) {
         try {
-            final Response response = Network.getRequest(url, params, new Parameters("Referer", referer))
-                    .toBlocking().value();
+            final Response response = Network.getRequest(url, params, new Parameters("Referer", referer)).blockingGet();
             return Single.just(response).flatMap(Network.getResponseData);
         } catch (final Exception e) {
             return Single.error(e);
@@ -249,12 +248,11 @@ public class Tile {
      */
     static Single<Bitmap> requestMapTile(final Parameters params) {
         try {
-            final Response response = Network.getRequest(GCConstants.URL_MAP_TILE, params, new Parameters("Referer", GCConstants.URL_LIVE_MAP))
-                    .toBlocking().value();
+            final Response response = Network.getRequest(GCConstants.URL_MAP_TILE, params, new Parameters("Referer", GCConstants.URL_LIVE_MAP)).blockingGet();
             return Single.just(response)
-                    .flatMap(new Func1<Response, Single<Bitmap>>() {
+                    .flatMap(new Function<Response, Single<Bitmap>>() {
                         @Override
-                        public Single<Bitmap> call(final Response response) {
+                        public Single<Bitmap> apply(final Response response) {
                             if (response.isSuccessful()) {
                                 final Bitmap bitmap = BitmapFactory.decodeStream(response.body().byteStream());
                                 if (bitmap != null) {

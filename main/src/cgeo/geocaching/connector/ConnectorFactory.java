@@ -42,12 +42,14 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.Callable;
 
+import io.reactivex.Maybe;
+import io.reactivex.Observable;
+import io.reactivex.functions.Function;
+import io.reactivex.functions.Predicate;
+import io.reactivex.schedulers.Schedulers;
 import org.apache.commons.lang3.StringUtils;
-import rx.Observable;
-import rx.functions.Func0;
-import rx.functions.Func1;
-import rx.schedulers.Schedulers;
 
 public final class ConnectorFactory {
     @NonNull public static final UnknownConnector UNKNOWN_CONNECTOR = new UnknownConnector();
@@ -310,9 +312,9 @@ public final class ConnectorFactory {
     /** @see ISearchByViewPort#searchByViewport */
     @NonNull
     public static SearchResult searchByViewport(@NonNull final Viewport viewport, @Nullable final MapTokens tokens) {
-        return SearchResult.parallelCombineActive(searchByViewPortConns, new Func1<ISearchByViewPort, SearchResult>() {
+        return SearchResult.parallelCombineActive(searchByViewPortConns, new Function<ISearchByViewPort, SearchResult>() {
             @Override
-            public SearchResult call(final ISearchByViewPort connector) {
+            public SearchResult apply(final ISearchByViewPort connector) {
                 return connector.searchByViewport(viewport, tokens);
             }
         });
@@ -395,10 +397,10 @@ public final class ConnectorFactory {
      * @return
      *          The Trackable observable
      */
-    public static Observable<Trackable> loadTrackable(final String geocode, final String guid, final String id, final TrackableBrand brand) {
+    public static Maybe<Trackable> loadTrackable(final String geocode, final String guid, final String id, final TrackableBrand brand) {
         if (StringUtils.isEmpty(geocode)) {
             // Only solution is GC search by uid
-            return RxUtils.deferredNullable(new Func0<Trackable>() {
+            return RxUtils.deferredNullable(new Callable<Trackable>() {
                 @Override
                 public Trackable call() {
                     return TravelBugConnector.getInstance().searchTrackable(geocode, guid, id);
@@ -407,15 +409,15 @@ public final class ConnectorFactory {
         }
 
         final Observable<Trackable> fromNetwork =
-                Observable.from(getTrackableConnectors()).filter(new Func1<TrackableConnector, Boolean>() {
+                Observable.fromIterable(getTrackableConnectors()).filter(new Predicate<TrackableConnector>() {
                     @Override
-                    public Boolean call(final TrackableConnector trackableConnector) {
+                    public boolean test(final TrackableConnector trackableConnector) {
                         return trackableConnector.canHandleTrackable(geocode, brand);
                     }
-                }).flatMap(new Func1<TrackableConnector, Observable<Trackable>>() {
+                }).flatMapMaybe(new Function<TrackableConnector, Maybe<Trackable>>() {
                     @Override
-                    public Observable<Trackable> call(final TrackableConnector trackableConnector) {
-                        return RxUtils.deferredNullable(new Func0<Trackable>() {
+                    public Maybe<Trackable> apply(final TrackableConnector trackableConnector) {
+                        return RxUtils.deferredNullable(new Callable<Trackable>() {
                             @Override
                             public Trackable call() {
                                 return trackableConnector.searchTrackable(geocode, guid, id);
@@ -424,14 +426,14 @@ public final class ConnectorFactory {
                     }
                 });
 
-        final Observable<Trackable> fromLocalStorage = RxUtils.deferredNullable(new Func0<Trackable>() {
+        final Maybe<Trackable> fromLocalStorage = RxUtils.deferredNullable(new Callable<Trackable>() {
             @Override
             public Trackable call() {
                 return DataStore.loadTrackable(geocode);
             }
         }).subscribeOn(Schedulers.io());
 
-        return fromNetwork.concatWith(fromLocalStorage).take(1);
+        return fromNetwork.firstElement().switchIfEmpty(fromLocalStorage);
     }
 
     /**

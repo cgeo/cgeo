@@ -24,6 +24,9 @@ import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import io.reactivex.Completable;
+import io.reactivex.Single;
+import io.reactivex.functions.Function;
 import okhttp3.FormBody;
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
@@ -40,9 +43,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import rx.Completable;
-import rx.Single;
-import rx.functions.Func1;
 
 public final class Network {
 
@@ -66,9 +66,9 @@ public final class Network {
 
     private static final MediaType MEDIA_TYPE_APPLICATION_JSON = MediaType.parse("application/json; charset=utf-8");
 
-    public static final Func1<String, Single<? extends ObjectNode>> stringToJson = new Func1<String, Single<? extends ObjectNode>>() {
+    public static final Function<String, Single<? extends ObjectNode>> stringToJson = new Function<String, Single<? extends ObjectNode>>() {
         @Override
-        public Single<? extends ObjectNode> call(final String s) {
+        public Single<? extends ObjectNode> apply(final String s) {
             try {
                 return Single.just((ObjectNode) JsonUtils.reader.readTree(s));
             } catch (final Throwable t) {
@@ -347,7 +347,7 @@ public final class Network {
     @Nullable
     public static InputStream getResponseStream(final Single<Response> response) {
         try {
-            return response.flatMap(withSuccess).toBlocking().value().body().byteStream();
+            return response.flatMap(withSuccess).blockingGet().body().byteStream();
         } catch (final Exception ignored) {
             return null;
         }
@@ -399,7 +399,7 @@ public final class Network {
     @Nullable
     public static String getResponseData(final Single<Response> response) {
         try {
-            return response.flatMap(getResponseDataReplaceWhitespace).toBlocking().value();
+            return response.flatMap(getResponseDataReplaceWhitespace).blockingGet();
         } catch (final Exception ignored) {
             return null;
         }
@@ -413,9 +413,9 @@ public final class Network {
      *   successful HTTP request with Content-Type "text/html", or containing an IOException otherwise.
      */
     public static Single<Document> getResponseDocument(final Single<Response> response) {
-        return response.flatMap(new Func1<Response, Single<Document>>() {
+        return response.flatMap(new Function<Response, Single<Document>>() {
             @Override
-            public Single<Document> call(final Response resp) {
+            public Single<Document> apply(final Response resp) {
                 try {
                     final String uri = resp.request().url().toString();
                     if (resp.isSuccessful()) {
@@ -449,15 +449,15 @@ public final class Network {
     @Nullable
     public static String getResponseData(final Single<Response> response, final boolean replaceWhitespace) {
         try {
-            return response.flatMap(replaceWhitespace ? getResponseDataReplaceWhitespace : getResponseData).toBlocking().value();
+            return response.flatMap(replaceWhitespace ? getResponseDataReplaceWhitespace : getResponseData).blockingGet();
         } catch (final Exception ignored) {
             return null;
         }
     }
 
-    public static final Func1<Response, Single<String>> getResponseData = new Func1<Response, Single<String>>() {
+    public static final Function<Response, Single<String>> getResponseData = new Function<Response, Single<String>>() {
         @Override
-        public Single<String> call(final Response response) {
+        public Single<String> apply(final Response response) {
             if (response.isSuccessful()) {
                 try {
                     return Single.just(response.body().string());
@@ -472,9 +472,9 @@ public final class Network {
     /**
      * Filter only successful responses for use with flatMap.
      */
-    public static final Func1<Response, Single<Response>> withSuccess = new Func1<Response, Single<Response>>() {
+    public static final Function<Response, Single<Response>> withSuccess = new Function<Response, Single<Response>>() {
         @Override
-        public Single<Response> call(final Response response) {
+        public Single<Response> apply(final Response response) {
             return response.isSuccessful() ? Single.just(response) : Single.<Response>error(new IOException("unsuccessful response: " + response));
         }
     };
@@ -486,15 +486,15 @@ public final class Network {
      * @param response the response to check
      */
     public static void completeWithSuccess(final Single<Response> response) {
-        Completable.fromSingle(response.flatMap(withSuccess)).await();
+        Completable.fromSingle(response.flatMap(withSuccess)).blockingAwait();
     }
 
-    public static final Func1<Response, Single<String>> getResponseDataReplaceWhitespace = new Func1<Response, Single<String>>() {
+    public static final Function<Response, Single<String>> getResponseDataReplaceWhitespace = new Function<Response, Single<String>>() {
         @Override
-        public Single<String> call(final Response response) {
-            return getResponseData.call(response).map(new Func1<String, String>() {
+        public Single<String> apply(final Response response) throws Exception {
+            return getResponseData.apply(response).map(new Function<String, String>() {
                 @Override
-                public String call(final String s) {
+                public String apply(final String s) {
                     return TextUtils.replaceWhitespace(s);
                 }
             });

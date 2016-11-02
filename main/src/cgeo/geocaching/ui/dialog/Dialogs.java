@@ -4,9 +4,7 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.ImageUtils;
-
-import org.apache.commons.lang3.StringUtils;
-import android.support.annotation.Nullable;
+import cgeo.geocaching.utils.functions.Action1;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -19,6 +17,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.support.annotation.DrawableRes;
+import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.text.Editable;
 import android.text.InputType;
@@ -35,9 +34,10 @@ import android.widget.TextView;
 import java.util.List;
 
 import butterknife.ButterKnife;
-import rx.Observable;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Wrapper for {@link AlertDialog}. If you want to show a simple text, use one of the
@@ -327,9 +327,9 @@ public final class Dialogs {
 
         final AlertDialog dialog = builder.create();
         if (iconObservable != null) {
-            iconObservable.observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<Drawable>() {
+            iconObservable.observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<Drawable>() {
                 @Override
-                public void call(final Drawable drawable) {
+                public void accept(final Drawable drawable) {
                     dialog.setIcon(drawable);
                 }
             });

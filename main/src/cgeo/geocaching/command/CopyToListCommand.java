@@ -12,7 +12,7 @@ import cgeo.geocaching.list.AbstractList;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.DataStore;
-import rx.functions.Action1;
+import cgeo.geocaching.utils.functions.Action1;
 
 public abstract class CopyToListCommand extends AbstractCachesCommand {
 

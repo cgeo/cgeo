@@ -1,11 +1,10 @@
 package cgeo.geocaching.connector;
 
-import android.support.annotation.NonNull;
+import cgeo.geocaching.utils.functions.Action1;
 
 import android.app.Activity;
+import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
-
-import rx.functions.Action1;
 
 public class UserAction {
 

@@ -5,11 +5,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 import cgeo.geocaching.MainActivity;
 import cgeo.geocaching.utils.AngleUtils;
 
-import rx.Observable;
-
 import android.test.ActivityInstrumentationTestCase2;
 
 import java.util.concurrent.TimeUnit;
+
+import io.reactivex.Observable;
 
 public class SensorsTest extends ActivityInstrumentationTestCase2<MainActivity> {
 
@@ -32,7 +32,7 @@ public class SensorsTest extends ActivityInstrumentationTestCase2<MainActivity> 
 
     private static <T> void assertDataAvailability(final Observable<T> observable) {
         try {
-            observable.timeout(2, TimeUnit.SECONDS).first().toBlocking().single();
+            observable.timeout(2, TimeUnit.SECONDS).blockingFirst();
         } catch (final Exception ignored) {
             fail("timeout while waiting for sensor data");
         }

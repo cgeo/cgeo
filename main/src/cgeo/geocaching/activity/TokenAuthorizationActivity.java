@@ -31,7 +31,6 @@ import java.util.regex.Pattern;
 import butterknife.BindView;
 import okhttp3.Response;
 import org.apache.commons.lang3.StringUtils;
-import rx.functions.Action0;
 
 public abstract class TokenAuthorizationActivity extends AbstractActivity {
 
@@ -137,7 +136,7 @@ public abstract class TokenAuthorizationActivity extends AbstractActivity {
         String message = StringUtils.EMPTY;
 
         try {
-            final Response response = Network.postRequest(urlToken, params).toBlocking().value();
+            final Response response = Network.postRequest(urlToken, params).blockingGet();
             if (response.isSuccessful()) {
                 final String line = StringUtils.defaultString(Network.getResponseData(response));
                 final MatcherWrapper errorMatcher = new MatcherWrapper(getPatternIsError(), line);
@@ -181,9 +180,9 @@ public abstract class TokenAuthorizationActivity extends AbstractActivity {
             final String username = usernameEditText.getText().toString();
             final String password = passwordEditText.getText().toString();
 
-            AndroidRxUtils.networkScheduler.createWorker().schedule(new Action0() {
+            AndroidRxUtils.networkScheduler.scheduleDirect(new Runnable() {
                 @Override
-                public void call() {
+                public void run() {
                     requestToken(username, password);
                 }
             });

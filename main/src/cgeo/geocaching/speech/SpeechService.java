@@ -16,12 +16,11 @@ import android.os.IBinder;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.TextToSpeech.Engine;
 import android.speech.tts.TextToSpeech.OnInitListener;
-
-import org.apache.commons.lang3.StringUtils;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import rx.Subscription;
-import rx.subscriptions.Subscriptions;
+
+import io.reactivex.disposables.CompositeDisposable;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Service to speak the compass directions.
@@ -82,7 +81,7 @@ public class SpeechService extends Service implements OnInitListener {
     private long lastSpeechTime = 0;
     private float lastSpeechDistance = 0.0f;
     private Geopoint target;
-    private Subscription initSubscription = Subscriptions.empty();
+    private final CompositeDisposable initDisposable = new CompositeDisposable();
 
     @Override
     public IBinder onBind(final Intent intent) {
@@ -114,8 +113,7 @@ public class SpeechService extends Service implements OnInitListener {
 
     @Override
     public void onDestroy() {
-        initSubscription.unsubscribe();
-        initSubscription = Subscriptions.empty();
+        initDisposable.clear();
         if (tts != null) {
             tts.stop();
             tts.shutdown();
@@ -156,7 +154,7 @@ public class SpeechService extends Service implements OnInitListener {
         synchronized (startingActivityLock) {
             final Activity startingActivityChecked = startingActivity;
             if (startingActivityChecked != null) {
-                initSubscription = geoDirHandler.start(GeoDirHandler.UPDATE_GEODIR);
+                initDisposable.add(geoDirHandler.start(GeoDirHandler.UPDATE_GEODIR));
                 ActivityMixin.showShortToast(startingActivity, startingActivityChecked.getString(R.string.tts_started));
             }
         }

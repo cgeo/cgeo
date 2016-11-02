@@ -13,6 +13,7 @@ import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
+import cgeo.geocaching.utils.functions.Action1;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -32,10 +33,8 @@ import java.util.Collections;
 import java.util.Set;
 
 import butterknife.ButterKnife;
+import io.reactivex.schedulers.Schedulers;
 import org.apache.commons.lang3.StringUtils;
-import rx.functions.Action0;
-import rx.functions.Action1;
-import rx.schedulers.Schedulers;
 
 public class CachePopupFragment extends AbstractDialogFragment {
     private final Progress progress = new Progress();
@@ -197,14 +196,14 @@ public class CachePopupFragment extends AbstractDialogFragment {
                 final StoreCacheHandler storeCacheHandler = new StoreCacheHandler(CachePopupFragment.this, R.string.cache_dialog_offline_save_message);
                 final FragmentActivity activity = getActivity();
                 progress.show(activity, res.getString(R.string.cache_dialog_offline_save_title), res.getString(R.string.cache_dialog_offline_save_message), true, storeCacheHandler.cancelMessage());
-                AndroidRxUtils.andThenOnUi(Schedulers.io(), new Action0() {
+                AndroidRxUtils.andThenOnUi(Schedulers.io(), new Runnable() {
                     @Override
-                    public void call() {
+                    public void run() {
                         cache.store(listIds, storeCacheHandler);
                     }
-                }, new Action0() {
+                }, new Runnable() {
                     @Override
-                    public void call() {
+                    public void run() {
                         activity.supportInvalidateOptionsMenu();
                         final View view = getView();
                         if (view != null) {

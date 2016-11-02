@@ -6,14 +6,12 @@ import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.Log;
 
-import org.apache.commons.lang3.StringUtils;
-
 import java.util.Collections;
 import java.util.concurrent.TimeUnit;
 
+import io.reactivex.Scheduler;
 import okhttp3.Response;
-import rx.Scheduler.Worker;
-import rx.functions.Action0;
+import org.apache.commons.lang3.StringUtils;
 
 public class Send2CgeoDownloader {
 
@@ -28,23 +26,24 @@ public class Send2CgeoDownloader {
      * @param listId the list into which caches will be stored
      */
     public static void loadFromWeb(final CancellableHandler handler, final int listId) {
-        final Worker worker = AndroidRxUtils.networkScheduler.createWorker();
-        handler.unsubscribeIfCancelled(worker);
-        worker.schedule(new Action0() {
+        final Scheduler.Worker worker = AndroidRxUtils.networkScheduler.createWorker();
+        handler.disposeIfCancelled(worker);
+        AndroidRxUtils.networkScheduler.scheduleDirect(new Runnable() {
             private final Parameters params = new Parameters("code", StringUtils.defaultString(Settings.getWebDeviceCode()));
             private long baseTime = System.currentTimeMillis();
 
             @Override
-            public void call() {
+            public void run() {
                 if (System.currentTimeMillis() - baseTime >= 3 * 60000) { // maximum: 3 minutes
                     handler.sendEmptyMessage(DownloadProgress.MSG_DONE);
+                    worker.dispose();
                     return;
                 }
 
                 // Download new code
                 try {
                     final Response responseFromWeb = Network.getRequest("http://send2.cgeo.org/read.html", params)
-                            .flatMap(Network.withSuccess).toBlocking().value();
+                            .flatMap(Network.withSuccess).blockingGet();
 
                     final String response = Network.getResponseData(responseFromWeb);
                     if (response != null && response.length() > 2) {

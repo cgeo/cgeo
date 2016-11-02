@@ -44,14 +44,12 @@ import java.util.Locale;
 import java.util.Set;
 import java.util.concurrent.LinkedBlockingQueue;
 
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
-import rx.Observable;
-import rx.Scheduler.Worker;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action0;
-import rx.functions.Action1;
 
 public final class ImageUtils {
     private static final int[] ORIENTATIONS = {
@@ -360,14 +358,13 @@ public final class ImageUtils {
      * elements arrived in the meantime) and ensures that the view is uploaded only once all the queued requests have
      * been handled.
      */
-    public static class ContainerDrawable extends BitmapDrawable implements Action1<Drawable> {
+    public static class ContainerDrawable extends BitmapDrawable implements Consumer<Drawable> {
         private static final Object lock = new Object(); // Used to lock the queue to determine if a refresh needs to be scheduled
         private static final LinkedBlockingQueue<ImmutablePair<ContainerDrawable, Drawable>> REDRAW_QUEUE = new LinkedBlockingQueue<>();
         private static final Set<TextView> VIEWS = new HashSet<>();  // Modified only on the UI thread, from redrawQueuedDrawables
-        private static final Worker UI_WORKER = AndroidSchedulers.mainThread().createWorker();
-        private static final Action0 REDRAW_QUEUED_DRAWABLES = new Action0() {
+        private static final Runnable REDRAW_QUEUED_DRAWABLES = new Runnable() {
             @Override
-            public void call() {
+            public void run() {
                 redrawQueuedDrawables();
             }
         };
@@ -391,7 +388,7 @@ public final class ImageUtils {
         }
 
         @Override
-        public final void call(final Drawable newDrawable) {
+        public final void accept(final Drawable newDrawable) {
             final boolean needsRedraw;
             synchronized (lock) {
                 // Check for emptiness inside the call to match the behaviour in redrawQueuedDrawables().
@@ -399,7 +396,7 @@ public final class ImageUtils {
                 REDRAW_QUEUE.add(ImmutablePair.of(this, newDrawable));
             }
             if (needsRedraw) {
-                UI_WORKER.schedule(REDRAW_QUEUED_DRAWABLES);
+                AndroidSchedulers.mainThread().scheduleDirect(REDRAW_QUEUED_DRAWABLES);
             }
         }
 

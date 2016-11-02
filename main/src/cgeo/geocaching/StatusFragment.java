@@ -1,5 +1,10 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.network.StatusUpdater;
+import cgeo.geocaching.network.StatusUpdater.Status;
+import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.Log;
+
 import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
@@ -15,13 +20,8 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import cgeo.geocaching.network.StatusUpdater;
-import cgeo.geocaching.network.StatusUpdater.Status;
-import cgeo.geocaching.utils.Log;
-import rx.Subscription;
-import rx.android.app.AppObservable;
-import rx.functions.Action1;
-import rx.subscriptions.Subscriptions;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.functions.Consumer;
 
 public class StatusFragment extends Fragment {
 
@@ -30,7 +30,7 @@ public class StatusFragment extends Fragment {
     @BindView(R.id.status_message)
     protected TextView statusMessage;
 
-    private Subscription statusSubscription = Subscriptions.empty();
+    private CompositeDisposable statusSubscription = new CompositeDisposable();
     private Unbinder unbinder;
 
     @Override
@@ -38,11 +38,11 @@ public class StatusFragment extends Fragment {
         super.onCreateView(inflater, container, savedInstanceState);
         final ViewGroup statusGroup = (ViewGroup) inflater.inflate(R.layout.status, container, false);
         unbinder = ButterKnife.bind(this, statusGroup);
-        statusSubscription = AppObservable.bindSupportFragment(this, StatusUpdater.LATEST_STATUS)
-                .subscribe(new Action1<Status>() {
+        statusSubscription.add(AndroidRxUtils.bindFragment(this, StatusUpdater.LATEST_STATUS)
+                .subscribe(new Consumer<Status>() {
                     @Override
-                    public void call(final Status status) {
-                        if (status == null) {
+                    public void accept(final Status status) {
+                        if (status == Status.NO_STATUS) {
                             statusGroup.setVisibility(View.INVISIBLE);
                             return;
                         }
@@ -85,14 +85,13 @@ public class StatusFragment extends Fragment {
                             statusGroup.setClickable(false);
                         }
                     }
-                });
+                }));
         return statusGroup;
     }
 
     @Override
     public void onDestroyView() {
-        statusSubscription.unsubscribe();
-        statusSubscription = Subscriptions.empty();
+        statusSubscription.clear();
         super.onDestroyView();
         unbinder.unbind();
     }

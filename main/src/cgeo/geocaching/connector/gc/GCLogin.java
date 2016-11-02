@@ -24,15 +24,15 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
+import io.reactivex.Observable;
+import io.reactivex.Single;
+import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
 import okhttp3.Response;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-import rx.Observable;
-import rx.Single;
-import rx.functions.Action1;
-import rx.functions.Func1;
 
 public class GCLogin extends AbstractLogin {
 
@@ -77,7 +77,7 @@ public class GCLogin extends AbstractLogin {
 
         setActualStatus(CgeoApplication.getInstance().getString(R.string.init_login_popup_working));
         try {
-            final Response tryLoggedInResponse = Network.getRequest("https://www.geocaching.com/login/default.aspx").toBlocking().value();
+            final Response tryLoggedInResponse = Network.getRequest("https://www.geocaching.com/login/default.aspx").blockingGet();
             final String tryLoggedInData = Network.getResponseData(tryLoggedInResponse);
             if (tryLoggedInResponse.code() == 503 && TextUtils.matches(tryLoggedInData, GCConstants.PATTERN_MAINTENANCE)) {
                 return StatusCode.MAINTENANCE;
@@ -164,7 +164,7 @@ public class GCLogin extends AbstractLogin {
     public StatusCode logout() {
         try {
             final Response logoutResponse = Network.getRequest("https://www.geocaching.com/login/default.aspx?RESET=Y&redir=http%3a%2f%2fwww.geocaching.com%2fdefault.aspx%3f")
-                    .toBlocking().value();
+                    .blockingGet();
             final String logoutData = Network.getResponseData(logoutResponse);
             if (logoutResponse.code() == 503 && TextUtils.matches(logoutData, GCConstants.PATTERN_MAINTENANCE)) {
                 return StatusCode.MAINTENANCE;
@@ -309,27 +309,27 @@ public class GCLogin extends AbstractLogin {
      */
     static Single<String> retrieveHomeLocation() {
         return Network.getResponseDocument(Network.getRequest("https://www.geocaching.com/account/settings/homelocation"))
-                .map(new Func1<Document, String>() {
+                .map(new Function<Document, String>() {
                     @Override
-                    public String call(final Document document) {
+                    public String apply(final Document document) {
                         return document.select("input.search-coordinates").attr("value");
                     }
                 });
     }
 
     private static void setHomeLocation() {
-        retrieveHomeLocation().subscribe(new Action1<String>() {
+        retrieveHomeLocation().subscribe(new Consumer<String>() {
             @Override
-            public void call(final String homeLocationStr) {
+            public void accept(final String homeLocationStr) throws Exception {
                 if (StringUtils.isNotBlank(homeLocationStr) && !StringUtils.equals(homeLocationStr, Settings.getHomeLocation())) {
                     assert homeLocationStr != null;
                     Log.i("Setting home location to " + homeLocationStr);
                     Settings.setHomeLocation(homeLocationStr);
                 }
             }
-        }, new Action1<Throwable>() {
+        }, new Consumer<Throwable>() {
             @Override
-            public void call(final Throwable throwable) {
+            public void accept(final Throwable throwable) throws Exception {
                 Log.w("Unable to retrieve the home location");
             }
         });
@@ -337,24 +337,25 @@ public class GCLogin extends AbstractLogin {
 
     private static void refreshMemberStatus() {
         Network.getResponseDocument(Network.getRequest("https://www.geocaching.com/account/settings/membership"))
-                .subscribe(new Action1<Document>() {
-                    @Override
-                    public void call(final Document document) {
-                        final Element membership = document.select("dl.membership-details > dd:eq(3)").first();
-                        if (membership != null) {
-                            final GCMemberState memberState = GCMemberState.fromString(membership.text());
-                            Log.d("Setting member status to " + memberState);
-                            Settings.setGCMemberStatus(memberState);
-                        } else {
-                            Log.w("Cannot determine member status");
-                        }
-                    }
-                }, new Action1<Throwable>() {
-                    @Override
-                    public void call(final Throwable throwable) {
-                        Log.w("Unable to retrieve member status", throwable);
-                    }
-                });
+                .subscribe(new Consumer<Document>() {
+                               @Override
+                               public void accept(final Document document) throws Exception {
+                                   final Element membership = document.select("dl.membership-details > dd:eq(3)").first();
+                                   if (membership != null) {
+                                       final GCMemberState memberState = GCMemberState.fromString(membership.text());
+                                       Log.d("Setting member status to " + memberState);
+                                       Settings.setGCMemberStatus(memberState);
+                                   } else {
+                                       Log.w("Cannot determine member status");
+                                   }
+                               }
+                           },
+                        new Consumer<Throwable>() {
+                            @Override
+                            public void accept(final Throwable throwable) throws Exception {
+                                Log.w("Unable to retrieve member status", throwable);
+                            }
+                        });
     }
 
     /**
@@ -362,7 +363,7 @@ public class GCLogin extends AbstractLogin {
      */
     private static void detectGcCustomDate() {
         try {
-            final Document document = Network.getResponseDocument(Network.getRequest("https://www.geocaching.com/account/settings/preferences")).toBlocking().value();
+            final Document document = Network.getResponseDocument(Network.getRequest("https://www.geocaching.com/account/settings/preferences")).blockingGet();
             final String customDate = document.select("select#SelectedDateFormat option[selected]").attr("value");
             if (StringUtils.isNotBlank(customDate)) {
                 Log.d("Setting GC custom date to " + customDate);
@@ -507,7 +508,7 @@ public class GCLogin extends AbstractLogin {
     @Nullable
     String getRequestLogged(@NonNull final String uri, @Nullable final Parameters params) {
         try {
-            final Response response = Network.getRequest(uri, params).toBlocking().value();
+            final Response response = Network.getRequest(uri, params).blockingGet();
             final String data = Network.getResponseData(response, canRemoveWhitespace(uri));
 
             // A page not found will not be found if the user logs in either

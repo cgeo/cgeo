@@ -7,23 +7,34 @@ import cgeo.geocaching.utils.Version;
 import android.app.Application;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
+import android.support.annotation.NonNull;
 
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import io.reactivex.functions.Consumer;
+import io.reactivex.subjects.BehaviorSubject;
 import org.apache.commons.lang3.StringUtils;
-import rx.functions.Action0;
-import rx.functions.Action1;
-import rx.subjects.BehaviorSubject;
 
 public class StatusUpdater {
+
+    /**
+     * An observable with the successive status. Contains {@link Status#NO_STATUS} if there is no status to display.
+     */
+    public static final BehaviorSubject<Status> LATEST_STATUS = BehaviorSubject.createDefault(Status.defaultStatus(null));
 
     private StatusUpdater() {
         // Utility class
     }
 
     public static class Status {
+
+        public static final Status NO_STATUS = new Status(null, null, null, null);
+
+        static final Status CLOSEOUT_STATUS =
+                new Status("", "status_closeout_warning", "attribute_abandonedbuilding", "http://faq.cgeo.org/#legacy");
+
         public final String message;
         public final String messageId;
         public final String icon;
@@ -43,23 +54,19 @@ public class StatusUpdater {
             url = response.path("url").asText(null);
         }
 
-        public static final Status CLOSEOUT_STATUS =
-                new Status("", "status_closeout_warning", "attribute_abandonedbuilding", "http://faq.cgeo.org/#legacy");
-
-        public static final Status defaultStatus(final Status upToDate) {
+        @NonNull
+        static Status defaultStatus(final Status upToDate) {
             if (upToDate != null && upToDate.message != null) {
                 return upToDate;
             }
-            return VERSION.SDK_INT < VERSION_CODES.ECLAIR_MR1 ? CLOSEOUT_STATUS : null;
+            return VERSION.SDK_INT < VERSION_CODES.ECLAIR_MR1 ? CLOSEOUT_STATUS : NO_STATUS;
         }
     }
 
-    public static final BehaviorSubject<Status> LATEST_STATUS = BehaviorSubject.create(Status.defaultStatus(null));
-
     static {
-        AndroidRxUtils.networkScheduler.createWorker().schedulePeriodically(new Action0() {
+        AndroidRxUtils.networkScheduler.schedulePeriodicallyDirect(new Runnable() {
             @Override
-            public void call() {
+            public void run() {
                 final Application app = CgeoApplication.getInstance();
                 final String installer = Version.getPackageInstaller(app);
                 final Parameters installerParameters = StringUtils.isNotBlank(installer) ? new Parameters("installer", installer) : null;
@@ -67,14 +74,14 @@ public class StatusUpdater {
                         Parameters.merge(new Parameters("version_code", String.valueOf(Version.getVersionCode(app)),
                                 "version_name", Version.getVersionName(app),
                                 "locale", Locale.getDefault().toString()), installerParameters))
-                        .subscribe(new Action1<ObjectNode>() {
+                        .subscribe(new Consumer<ObjectNode>() {
                             @Override
-                            public void call(final ObjectNode json) {
+                            public void accept(final ObjectNode json) {
                                 LATEST_STATUS.onNext(Status.defaultStatus(new Status(json)));
                             }
-                        }, new Action1<Throwable>() {
+                        }, new Consumer<Throwable>() {
                             @Override
-                            public void call(final Throwable throwable) {
+                            public void accept(final Throwable throwable) {
                                 // Error has already been signalled during the request
                             }
                         });
