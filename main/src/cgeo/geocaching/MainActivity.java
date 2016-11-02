@@ -31,6 +31,7 @@ import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.Version;
+import cgeo.geocaching.utils.functions.Action1;
 
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -76,7 +77,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import org.apache.commons.lang3.StringUtils;
-import rx.functions.Action1;
 
 public class MainActivity extends AbstractActionBarActivity {
     @BindView(R.id.nav_satellites) protected TextView navSatellites;

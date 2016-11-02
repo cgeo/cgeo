@@ -9,6 +9,7 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.Dialogs.ItemWithIcon;
 import cgeo.geocaching.utils.ImageUtils;
+import cgeo.geocaching.utils.functions.Action1;
 
 import android.content.Intent;
 import android.content.Intent.ShortcutIconResource;
@@ -21,8 +22,6 @@ import android.support.annotation.StringRes;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import rx.functions.Action1;
 
 public class CreateShortcutActivity extends AbstractActionBarActivity {
 

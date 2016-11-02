@@ -77,6 +77,7 @@ import cgeo.geocaching.utils.SimpleCancellableHandler;
 import cgeo.geocaching.utils.SimpleHandler;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.UnknownTagsHandler;
+import cgeo.geocaching.utils.functions.Action1;
 
 import android.R.color;
 import android.app.AlertDialog;
@@ -159,7 +160,6 @@ import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
-import rx.functions.Action1;
 
 /**
  * Activity to handle all single-cache-stuff.

@@ -13,6 +13,7 @@ import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
+import cgeo.geocaching.utils.functions.Action1;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -34,7 +35,6 @@ import java.util.Set;
 import butterknife.ButterKnife;
 import io.reactivex.schedulers.Schedulers;
 import org.apache.commons.lang3.StringUtils;
-import rx.functions.Action1;
 
 public class CachePopupFragment extends AbstractDialogFragment {
     private final Progress progress = new Progress();

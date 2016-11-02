@@ -32,6 +32,7 @@ import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.Version;
+import cgeo.geocaching.utils.functions.Func1;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -82,7 +83,6 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
-import rx.functions.Func1;
 
 public class DataStore {
 

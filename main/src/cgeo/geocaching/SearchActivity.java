@@ -38,7 +38,7 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.dialog.CoordinatesInputDialog;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.EditUtils;
-import rx.functions.Func1;
+import cgeo.geocaching.utils.functions.Func1;
 
 public class SearchActivity extends AbstractActionBarActivity implements CoordinatesInputDialog.CoordinateUpdate {
 
