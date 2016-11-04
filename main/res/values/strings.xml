@@ -379,7 +379,7 @@
     
     <!-- caches lists -->
     <string name="list_menu_create">Create new list</string>
-    <string name="list_menu_drop">Drop current list</string>
+    <string name="list_menu_drop">Remove current list</string>
     <string name="list_menu_rename">Rename current list</string>
     <string name="list_menu_import">Import</string>
     <string name="list_title">Pick a list</string>
@@ -735,7 +735,7 @@
 
     <string name="cache_offline">Offline</string>
     <string name="cache_offline_refresh">Refresh</string>
-    <string name="cache_offline_drop">Drop</string>
+    <string name="cache_offline_drop">Remove</string>
     <string name="cache_offline_store">Store</string>
     <string name="cache_offline_manage">Manage</string>
     <string name="cache_offline_store_in_list">Store in list</string>
