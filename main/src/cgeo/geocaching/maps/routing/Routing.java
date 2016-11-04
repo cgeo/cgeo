@@ -21,6 +21,7 @@ import org.xml.sax.helpers.DefaultHandler;
 public final class Routing {
     private static final double UPDATE_MIN_DISTANCE_KILOMETERS = 0.005;
     private static final double MAX_ROUTING_DISTANCE_KILOMETERS = 10.0;
+    private static final double MIN_ROUTING_DISTANCE_KILOMETERS = 0.04;
     private static final int UPDATE_MIN_DELAY_SECONDS = 3;
     private static BRouterServiceConnection brouter;
     private static Geopoint lastDirectionUpdatePoint;
@@ -71,7 +72,13 @@ public final class Routing {
         }
 
         // Disable routing for huge distances
-        if (start.distanceTo(destination) > MAX_ROUTING_DISTANCE_KILOMETERS) {
+        final float targetDistance = start.distanceTo(destination);
+        if (targetDistance > MAX_ROUTING_DISTANCE_KILOMETERS) {
+            return null;
+        }
+
+        // disable routing when near the target
+        if (targetDistance < MIN_ROUTING_DISTANCE_KILOMETERS) {
             return null;
         }
 
