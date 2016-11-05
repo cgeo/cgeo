@@ -23,7 +23,7 @@ import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Cancellable;
+import io.reactivex.disposables.Disposables;
 import io.reactivex.functions.Predicate;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.subjects.ReplaySubject;
@@ -91,9 +91,9 @@ public class LocationProvider extends LocationCallback implements GoogleApiClien
                         emitter.onComplete();
                     }
                 });
-                emitter.setCancellable(new Cancellable() {
+                emitter.setDisposable(Disposables.fromRunnable(new Runnable() {
                     @Override
-                    public void cancel() throws Exception {
+                    public void run() {
                         disposable.dispose();
                         AndroidRxUtils.looperCallbacksScheduler.scheduleDirect(new Runnable() {
                             @Override
@@ -104,7 +104,7 @@ public class LocationProvider extends LocationCallback implements GoogleApiClien
                             }
                         }, 2500, TimeUnit.MILLISECONDS);
                     }
-                });
+                }));
             }
         });
     }

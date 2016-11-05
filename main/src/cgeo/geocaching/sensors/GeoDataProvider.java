@@ -2,7 +2,7 @@ package cgeo.geocaching.sensors;
 
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.RxUtils.DelayedUnsubscription;
+import cgeo.geocaching.utils.RxUtils;
 
 import android.content.Context;
 import android.location.Location;
@@ -16,7 +16,6 @@ import java.util.concurrent.atomic.AtomicReference;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
-import io.reactivex.functions.Cancellable;
 import org.apache.commons.lang3.StringUtils;
 
 public class GeoDataProvider {
@@ -48,21 +47,16 @@ public class GeoDataProvider {
                 } catch (final Exception e) {
                     Log.w("Unable to create network location provider: " + e.getMessage());
                 }
-                emitter.setCancellable(new Cancellable() {
+                emitter.setDisposable(AndroidRxUtils.disposeOnCallbacksScheduler(new Runnable() {
                     @Override
-                    public void cancel() throws Exception {
-                        AndroidRxUtils.looperCallbacksScheduler.scheduleDirect(new Runnable() {
-                            @Override
-                            public void run() {
-                                geoManager.removeUpdates(networkListener);
-                                geoManager.removeUpdates(gpsListener);
-                            }
-                        });
+                    public void run() {
+                        geoManager.removeUpdates(networkListener);
+                        geoManager.removeUpdates(gpsListener);
                     }
-                });
+                }));
             }
         });
-        return observable.subscribeOn(AndroidRxUtils.looperCallbacksScheduler).share().lift(new DelayedUnsubscription<GeoData>(2500, TimeUnit.MILLISECONDS));
+        return observable.subscribeOn(AndroidRxUtils.looperCallbacksScheduler).share().lift(new RxUtils.DelayedUnsubscription<GeoData>(2500, TimeUnit.MILLISECONDS));
     }
 
     private static class Listener implements LocationListener {

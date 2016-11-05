@@ -124,8 +124,9 @@ import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.disposables.Disposables;
 import io.reactivex.functions.Action;
-import io.reactivex.functions.Cancellable;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import org.apache.commons.collections4.CollectionUtils;
@@ -1302,19 +1303,14 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         final Observable<Geocache> allCaches;
         if (Settings.isStoreOfflineMaps()) {
             allCaches = Observable.create(new ObservableOnSubscribe<Geocache>() {
-                private volatile boolean canceled = false;
+                private Disposable disposable = Disposables.empty();
 
                 @Override
                 public void subscribe(final ObservableEmitter<Geocache> emitter) throws Exception {
-                    emitter.setCancellable(new Cancellable() {
-                        @Override
-                        public void cancel() throws Exception {
-                            canceled = true;
-                        }
-                    });
+                    emitter.setDisposable(disposable);
                     final Deque<Geocache> withStaticMaps = new LinkedList<>();
                     for (final Geocache cache : caches) {
-                        if (canceled) {
+                        if (disposable.isDisposed()) {
                             return;
                         }
                         if (cache.hasStaticMap()) {
@@ -1324,7 +1320,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                         }
                     }
                     for (final Geocache cache : withStaticMaps) {
-                        if (canceled) {
+                        if (disposable.isDisposed()) {
                             return;
                         }
                         emitter.onNext(cache);

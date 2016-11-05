@@ -13,7 +13,6 @@ import android.hardware.SensorManager;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
-import io.reactivex.functions.Cancellable;
 
 public class RotationProvider {
 
@@ -79,18 +78,13 @@ public class RotationProvider {
                 };
                 Log.d("RotationProvider: registering listener");
                 sensorManager.registerListener(listener, rotationSensor, SensorManager.SENSOR_DELAY_NORMAL);
-                emitter.setCancellable(new Cancellable() {
+                emitter.setDisposable(AndroidRxUtils.disposeOnCallbacksScheduler(new Runnable() {
                     @Override
-                    public void cancel() throws Exception {
-                        AndroidRxUtils.looperCallbacksScheduler.scheduleDirect(new Runnable() {
-                            @Override
-                            public void run() {
-                                Log.d("RotationProvider: unregistering listener");
-                                sensorManager.unregisterListener(listener, rotationSensor);
-                            }
-                        });
+                    public void run() {
+                        Log.d("RotationProvider: unregistering listener");
+                        sensorManager.unregisterListener(listener, rotationSensor);
                     }
-                });
+                }));
             }
         });
         return observable.subscribeOn(AndroidRxUtils.looperCallbacksScheduler).share();

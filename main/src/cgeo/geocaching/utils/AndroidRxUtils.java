@@ -15,6 +15,8 @@ import io.reactivex.Observable;
 import io.reactivex.Scheduler;
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.disposables.Disposables;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Predicate;
 import io.reactivex.internal.schedulers.RxThreadFactory;
@@ -116,6 +118,15 @@ public class AndroidRxUtils {
             public boolean test(final T t) throws Exception {
                 final Fragment f = fragmentRef.get();
                 return f != null && f.isAdded() && !f.getActivity().isFinishing();
+            }
+        });
+    }
+
+    public static Disposable disposeOnCallbacksScheduler(final Runnable runnable) {
+        return Disposables.fromRunnable(new Runnable() {
+            @Override
+            public void run() {
+                looperCallbacksScheduler.scheduleDirect(runnable);
             }
         });
     }

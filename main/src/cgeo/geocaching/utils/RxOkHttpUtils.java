@@ -6,7 +6,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import io.reactivex.Single;
 import io.reactivex.SingleEmitter;
 import io.reactivex.SingleOnSubscribe;
-import io.reactivex.functions.Cancellable;
+import io.reactivex.disposables.Disposables;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
@@ -32,14 +32,14 @@ public class RxOkHttpUtils {
             public void subscribe(final SingleEmitter<Response> singleEmitter) throws Exception {
                 final Call call = client.newCall(request);
                 final AtomicBoolean completed = new AtomicBoolean(false);
-                singleEmitter.setCancellable(new Cancellable() {
+                singleEmitter.setDisposable(Disposables.fromRunnable(new Runnable() {
                     @Override
-                    public void cancel() throws Exception {
+                    public void run() {
                         if (!completed.get()) {
                             call.cancel();
                         }
                     }
-                });
+                }));
                 call.enqueue(new Callback() {
                     @Override
                     public void onFailure(final Call call, final IOException e) {

@@ -12,7 +12,6 @@ import android.hardware.SensorManager;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
-import io.reactivex.functions.Cancellable;
 
 public class MagnetometerAndAccelerometerProvider {
 
@@ -69,19 +68,14 @@ public class MagnetometerAndAccelerometerProvider {
                 Log.d("MagnetometerAndAccelerometerProvider: registering listener");
                 sensorManager.registerListener(listener, accelerometerSensor, SensorManager.SENSOR_DELAY_NORMAL);
                 sensorManager.registerListener(listener, magnetometerSensor, SensorManager.SENSOR_DELAY_NORMAL);
-                emitter.setCancellable(new Cancellable() {
+                emitter.setDisposable(AndroidRxUtils.disposeOnCallbacksScheduler(new Runnable() {
                     @Override
-                    public void cancel() throws Exception {
-                        AndroidRxUtils.looperCallbacksScheduler.scheduleDirect(new Runnable() {
-                            @Override
-                            public void run() {
-                                Log.d("MagnetometerAndAccelerometerProvider: unregistering listener");
-                                sensorManager.unregisterListener(listener, accelerometerSensor);
-                                sensorManager.unregisterListener(listener, magnetometerSensor);
-                            }
-                        });
+                    public void run() {
+                        Log.d("MagnetometerAndAccelerometerProvider: unregistering listener");
+                        sensorManager.unregisterListener(listener, accelerometerSensor);
+                        sensorManager.unregisterListener(listener, magnetometerSensor);
                     }
-                });
+                }));
             }
         });
         return observable.subscribeOn(AndroidRxUtils.looperCallbacksScheduler).share();

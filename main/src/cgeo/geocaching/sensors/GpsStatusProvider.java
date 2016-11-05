@@ -11,7 +11,6 @@ import android.location.LocationManager;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
-import io.reactivex.functions.Cancellable;
 
 public class GpsStatusProvider {
 
@@ -76,17 +75,12 @@ public class GpsStatusProvider {
                 };
                 subscriber.onNext(NO_GPS);
                 geoManager.addGpsStatusListener(listener);
-                subscriber.setCancellable(new Cancellable() {
+                subscriber.setDisposable(AndroidRxUtils.disposeOnCallbacksScheduler(new Runnable() {
                     @Override
-                    public void cancel() throws Exception {
-                        AndroidRxUtils.looperCallbacksScheduler.scheduleDirect(new Runnable() {
-                            @Override
-                            public void run() {
-                                geoManager.removeGpsStatusListener(listener);
-                            }
-                        });
+                    public void run() {
+                        geoManager.removeGpsStatusListener(listener);
                     }
-                });
+                }));
             }
         });
         return observable.subscribeOn(AndroidRxUtils.looperCallbacksScheduler);
