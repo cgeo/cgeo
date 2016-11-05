@@ -65,9 +65,6 @@ public class NavigationLayer extends Layer {
         final Geopoint[] routingPoints = Routing.getTrack(currentCoords, destinationCoords);
         final ArrayList<Pair<Integer, Integer>> pixelPoints = new ArrayList<>();
 
-        // add artificial line from current position to routing start
-        pixelPoints.add(translateToPixels(mapSize, topLeftPoint, currentCoords));
-
         // add actual routing points if available
         if (routingPoints != null && routingPoints.length > 1) {
             for (final Geopoint geopoint : routingPoints) {
