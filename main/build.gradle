@@ -301,7 +301,7 @@ dependencies {
     compile 'com.drewnoakes:metadata-extractor:2.9.1'
 
     // Okhttp network access
-    compile 'com.squareup.okhttp3:okhttp:3.4.1'
+    compile 'com.squareup.okhttp3:okhttp:3.4.2'
 
     // Play Services
     def playServicesVersion = '9.4.0'
