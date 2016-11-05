@@ -2,7 +2,7 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-    <b>Next bugfix release:</b>\n
+    <b>2016.11.05:</b>\n
     · Fix: No logbook shown for users not having selected a date format on the geocaching website\n
     \n
     \n
