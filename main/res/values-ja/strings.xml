@@ -422,7 +422,7 @@
   <string name="settings_activate_oc_ro">有効化</string>
   <string name="init_oc_ro_description">キャッシュを検索したり見つけたキャッシュにアクセス/フィルタリングしたりするためにc:geoにopencaching.roを認証させる。</string>
   <string name="settings_activate_oc_uk">有効化</string>
-  <string name="init_oc_uk_description">キャッシュを検索したり見つけたキャッシュにアクセス/フィルタリングしたりするためにc:geoにopencaching.org.ukを認証させる。</string>
+  <string name="init_oc_uk_description">キャッシュを検索したり見つけたキャッシュにアクセス/フィルタリングしたりするためにc:geoにopencache.ukを認証させる。</string>
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_gcvote_password_description">キャッシュを評価するためにGCVote.comにある指図を従ってここにGCVoteのパスワードを入力してください。</string>
   <string name="err_gcvote_send_rating">評価の送信が失敗しました。設定でGCVoteのパスワードを確認してください。</string>

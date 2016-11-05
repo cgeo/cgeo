@@ -556,7 +556,7 @@
                 <data android:pathPrefix="/viewcache.php" />
             </intent-filter>
 
-            <!-- opencaching.ORG.UK -->
+            <!-- opencache.uk -->
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <action android:name="android.nfc.action.NDEF_DISCOVERED" />
@@ -566,8 +566,8 @@
 
                 <data android:scheme="http" />
                 <data android:scheme="https" />
-                <data android:host="opencaching.org.uk" />
-                <data android:host="www.opencaching.org.uk" />
+                <data android:host="opencache.uk" />
+                <data android:host="www.opencache.uk" />
                 <data android:pathPrefix="/OK" />
                 <data android:pathPrefix="/ok" />
                 <data android:pathPrefix="/viewcache.php" />
@@ -729,10 +729,10 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
-                <data
-                    android:host="www.cgeo.org"
-                    android:pathPrefix="/opencaching"
-                    android:scheme="callback" />
+                <data android:host="www.cgeo.org"/>
+                <data android:pathPrefix="/opencaching"/>
+                <data android:pathPrefix="/opencache"/>
+                <data android:scheme="callback" />
             </intent-filter>
         </activity>
         <activity

@@ -460,10 +460,10 @@
   <string name="settings_activate_oc_ro">Activa</string>
   <string name="init_summary_oc_ro">Carregar catxés des de opencaching.ro</string>
   <string name="init_oc_ro_description">Autoritza al c:geo a opencaching.ro per buscar catxés i accedir/filtrar els teus catxés trobats.</string>
-  <string name="init_oc_uk">Opencaching.org.uk</string>
+  <string name="init_oc_uk">opencache.uk</string>
   <string name="settings_activate_oc_uk">Activa</string>
-  <string name="init_summary_oc_uk">Carregar catxés des de opencaching.org.uk</string>
-  <string name="init_oc_uk_description">Autoritza al c:geo a opencaching.org.uk per buscar catxés i accedir/filtrar els teus catxés trobats.</string>
+  <string name="init_summary_oc_uk">Carregar catxés des de opencache.uk</string>
+  <string name="init_oc_uk_description">Autoritza al c:geo a opencache.uk per buscar catxés i accedir/filtrar els teus catxés trobats.</string>
   <string name="init_su">Geocaching.su</string>
   <string name="init_summary_su">Carregar catxés des de Geocaching.su</string>
   <string name="settings_activate_su">Activa</string>

@@ -456,8 +456,8 @@
   <string name="init_summary_oc_ro">Įkelti slėptuves iš opencaching.ro</string>
   <string name="init_oc_ro_description">Leiskite c:geo prisijungti prie opencaching.ro tam, kad galėtumėt ieškoti slėptuvių ir pasiekti/filtruoti rastas slėptuves.</string>
   <string name="settings_activate_oc_uk">Aktyvuoti</string>
-  <string name="init_summary_oc_uk">Įkelti slėptuves iš opencaching.org.uk</string>
-  <string name="init_oc_uk_description">Leiskite c:geo prisijungti prie opencaching.org.uk tam, kad galėtumėt ieškoti slėptuvių ir pasiekti/filtruoti rastas slėptuves.</string>
+  <string name="init_summary_oc_uk">Įkelti slėptuves iš opencache.uk</string>
+  <string name="init_oc_uk_description">Leiskite c:geo prisijungti prie opencache.uk tam, kad galėtumėt ieškoti slėptuvių ir pasiekti/filtruoti rastas slėptuves.</string>
   <string name="init_su">Geocaching.su</string>
   <string name="init_summary_su">Įkelti slėptuves iš Geocaching.su</string>
   <string name="settings_activate_su">Aktyvuoti</string>

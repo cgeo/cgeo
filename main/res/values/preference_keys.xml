@@ -179,10 +179,10 @@
     <string translatable="false" name="pref_ocro_tokenpublic">ocro_tokenpublic</string>
     <string translatable="false" name="pref_temp_ocro_token_secret">ocro-temp-token-secret</string>
     <string translatable="false" name="pref_temp_ocro_token_public">ocro-temp-token-public</string>
-    <string translatable="false" name="pref_ocuk_tokensecret">ocuk_tokensecret</string>
-    <string translatable="false" name="pref_ocuk_tokenpublic">ocuk_tokenpublic</string>
-    <string translatable="false" name="pref_temp_ocuk_token_secret">ocuk-temp-token-secret</string>
-    <string translatable="false" name="pref_temp_ocuk_token_public">ocuk-temp-token-public</string>
+    <string translatable="false" name="pref_ocuk2_tokensecret">ocuk2_tokensecret</string>
+    <string translatable="false" name="pref_ocuk2_tokenpublic">ocuk2_tokenpublic</string>
+    <string translatable="false" name="pref_temp_ocuk2_token_secret">ocuk2-temp-token-secret</string>
+    <string translatable="false" name="pref_temp_ocuk2_token_public">ocuk2-temp-token-public</string>
     <string translatable="false" name="pref_fakekey_gc_website">fakekey_gc_website</string>
     <string translatable="false" name="pref_fakekey_ocde_register">fakekey_ocde_register</string>
     <string translatable="false" name="pref_fakekey_ocde_website">fakekey_ocde_website</string>

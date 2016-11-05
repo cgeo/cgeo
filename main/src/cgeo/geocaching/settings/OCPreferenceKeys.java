@@ -29,7 +29,7 @@ public enum OCPreferenceKeys {
             R.string.pref_ocro_tokenpublic, R.string.pref_ocro_tokensecret, OCAuthParams.OC_RO_AUTH_PARAMS),
     OC_UK("oc.uk", R.string.pref_connectorOCUKActive, R.string.preference_screen_ocuk,
  R.string.pref_fakekey_ocuk_authorization, R.string.pref_fakekey_ocuk_website, R.string.pref_fakekey_ocuk_register,
-            R.string.pref_ocuk_tokenpublic, R.string.pref_ocuk_tokensecret, OCAuthParams.OC_UK_AUTH_PARAMS);
+            R.string.pref_ocuk2_tokenpublic, R.string.pref_ocuk2_tokensecret, OCAuthParams.OC_UK_AUTH_PARAMS);
 
 
     OCPreferenceKeys(final String siteId, final int isActivePrefId, final int prefScreenId, final int authPrefId,

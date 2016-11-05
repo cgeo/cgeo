@@ -450,8 +450,8 @@
   <string name="init_summary_oc_ro">Загрузить тайники с opencaching.ro</string>
   <string name="init_oc_ro_description">Авторизовать c:geo для opencaching.ro, чтобы искать тайники и иметь доступ к найденным вами тайникам.</string>
   <string name="settings_activate_oc_uk">Активировать</string>
-  <string name="init_summary_oc_uk">Загрузить тайники с opencaching.org.uk</string>
-  <string name="init_oc_uk_description">Авторизовать c:geo для opencaching.org.uk, чтобы искать тайники и иметь доступ к найденным вами тайникам.</string>
+  <string name="init_summary_oc_uk">Загрузить тайники с opencache.uk</string>
+  <string name="init_oc_uk_description">Авторизовать c:geo для opencache.uk, чтобы искать тайники и иметь доступ к найденным вами тайникам.</string>
   <string name="init_su">Geocaching.su</string>
   <string name="init_summary_su">Загрузить тайники с Geocaching.su</string>
   <string name="settings_activate_su">Активировать</string>

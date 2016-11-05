@@ -460,10 +460,10 @@
   <string name="settings_activate_oc_ro">Aktivieren</string>
   <string name="init_summary_oc_ro">Caches von opencaching.ro laden</string>
   <string name="init_oc_ro_description">Autorisiere c:geo auf opencaching.ro zuzugreifen, um Caches zu suchen und nach deinen Funden zu filtern.</string>
-  <string name="init_oc_uk">Opencaching.org.uk</string>
+  <string name="init_oc_uk">opencache.uk</string>
   <string name="settings_activate_oc_uk">Aktivieren</string>
-  <string name="init_summary_oc_uk">Caches von opencaching.org.uk laden</string>
-  <string name="init_oc_uk_description">Autorisiere c:geo auf opencaching.org.uk zuzugreifen, um Caches zu suchen und nach deinen Funden zu filtern.</string>
+  <string name="init_summary_oc_uk">Caches von opencache.uk laden</string>
+  <string name="init_oc_uk_description">Autorisiere c:geo auf opencache.uk zuzugreifen, um Caches zu suchen und nach deinen Funden zu filtern.</string>
   <string name="init_su">Geocaching.su</string>
   <string name="init_summary_su">Caches von geocaching.su laden</string>
   <string name="settings_activate_su">Aktivieren</string>
@@ -684,7 +684,7 @@
   <string name="auth_ocnl">opencaching.nl</string>
   <string name="auth_ocus">opencaching.us</string>
   <string name="auth_ocro">opencaching.ro</string>
-  <string name="auth_ocuk">opencaching.org.uk</string>
+  <string name="auth_ocuk">opencache.uk</string>
   <string name="auth_dialog_completed_oc">c:geo ist nun autorisiert, Caches zu laden und auf %s zu loggen.</string>
   <!-- auth geokrety -->
   <string name="auth_dialog_completed_geokrety">c:geo ist nun autorisiert mit %s zu kommunizieren.</string>

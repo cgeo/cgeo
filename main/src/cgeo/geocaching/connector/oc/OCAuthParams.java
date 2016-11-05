@@ -1,14 +1,13 @@
 package cgeo.geocaching.connector.oc;
 
+import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.annotation.StringRes;
+
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.OAuthAuthorizationActivity.OAuthParameters;
-
-import android.support.annotation.NonNull;
-
-import android.content.Intent;
-import android.support.annotation.StringRes;
 
 public class OCAuthParams extends OAuthParameters {
 
@@ -32,9 +31,9 @@ public class OCAuthParams extends OAuthParameters {
             R.string.oc_ro_okapi_consumer_key, R.string.oc_ro_okapi_consumer_secret, "callback://www.cgeo.org/opencaching.ro/",
             R.string.auth_ocro, R.string.pref_ocro_tokenpublic, R.string.pref_ocro_tokensecret, R.string.pref_temp_ocro_token_public, R.string.pref_temp_ocro_token_secret);
 
-    public static final OCAuthParams OC_UK_AUTH_PARAMS = new OCAuthParams("www.opencaching.org.uk",
-            R.string.oc_uk_okapi_consumer_key, R.string.oc_uk_okapi_consumer_secret, "callback://www.cgeo.org/opencaching.org.uk/",
-            R.string.auth_ocuk, R.string.pref_ocuk_tokenpublic, R.string.pref_ocuk_tokensecret, R.string.pref_temp_ocuk_token_public, R.string.pref_temp_ocuk_token_secret);
+    public static final OCAuthParams OC_UK_AUTH_PARAMS = new OCAuthParams("opencache.uk",
+            R.string.oc_uk2_okapi_consumer_key, R.string.oc_uk2_okapi_consumer_secret, "callback://www.cgeo.org/opencache.uk/",
+            R.string.auth_ocuk, R.string.pref_ocuk2_tokenpublic, R.string.pref_ocuk2_tokensecret, R.string.pref_temp_ocuk2_token_public, R.string.pref_temp_ocuk2_token_secret);
 
     @StringRes
     public final int authTitleResId;
@@ -44,7 +43,7 @@ public class OCAuthParams extends OAuthParameters {
     public final int tempTokenSecretPrefKey;
 
     public OCAuthParams(@NonNull final String host, @StringRes final int consumerKeyResId, @StringRes final int consumerSecretResId, @NonNull final String callback,
-            @StringRes final int authTitleResId, final int tokenPublicPrefKey, final int tokenSecretPrefKey, final int tempTokePublicPrefKey, final int tempTokenSecretPrefKey) {
+            @StringRes final int authTitleResId, final int tokenPublicPrefKey, final int tokenSecretPrefKey, final int tempTokenPublicPrefKey, final int tempTokenSecretPrefKey) {
         super(host, "/okapi/services/oauth/request_token",
                 "/okapi/services/oauth/authorize",
                 "/okapi/services/oauth/access_token",
@@ -55,7 +54,7 @@ public class OCAuthParams extends OAuthParameters {
         this.authTitleResId = authTitleResId;
         this.tokenPublicPrefKey = tokenPublicPrefKey;
         this.tokenSecretPrefKey = tokenSecretPrefKey;
-        this.tempTokenPublicPrefKey = tempTokePublicPrefKey;
+        this.tempTokenPublicPrefKey = tempTokenPublicPrefKey;
         this.tempTokenSecretPrefKey = tempTokenSecretPrefKey;
     }
 

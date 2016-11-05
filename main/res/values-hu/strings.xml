@@ -460,10 +460,10 @@
   <string name="settings_activate_oc_ro">Aktiválás</string>
   <string name="init_summary_oc_ro">Ládák letöltése az opencaching.ro-ról</string>
   <string name="init_oc_ro_description">A c:geo hitelesítése az opencaching.ro-n ládák kereséséhez és találataid lekéréséhez, szűréséhez.</string>
-  <string name="init_oc_uk">Opencaching.org.uk</string>
+  <string name="init_oc_uk">opencache.uk</string>
   <string name="settings_activate_oc_uk">Aktiválás</string>
-  <string name="init_summary_oc_uk">Ládák letöltése az opencaching.org.uk-ról</string>
-  <string name="init_oc_uk_description">A c:geo hitelesítése az opencaching.org.uk-án ládák kereséséhez és találataid lekéréséhez, szűréséhez.</string>
+  <string name="init_summary_oc_uk">Ládák letöltése az opencache.uk-ról</string>
+  <string name="init_oc_uk_description">A c:geo hitelesítése az opencache.uk-án ládák kereséséhez és találataid lekéréséhez, szűréséhez.</string>
   <string name="init_su">Geocaching.su</string>
   <string name="init_summary_su">Ládák letöltése a geocaching.su-ról</string>
   <string name="settings_activate_su">Aktiválás</string>
@@ -684,7 +684,7 @@
   <string name="auth_ocnl">opencaching.nl</string>
   <string name="auth_ocus">opencaching.us</string>
   <string name="auth_ocro">opencaching.ro</string>
-  <string name="auth_ocuk">opencaching.org.uk</string>
+  <string name="auth_ocuk">opencache.uk</string>
   <string name="auth_dialog_completed_oc">%s: A c:geo engedélyt kapott az együttműködésre.</string>
   <!-- auth geokrety -->
   <string name="auth_dialog_completed_geokrety">%s: A c:geo engedélyt kapott az együttműködésre.</string>

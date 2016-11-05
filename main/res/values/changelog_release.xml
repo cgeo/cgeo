@@ -83,7 +83,7 @@
     · Fix: Hide export menu if list does not contain exportable caches\n
     · Fix: Hide showcase for hint in compass if no hint is available for that cache\n
     · Fix: Inconsistency in descriptions of user created waypoints\n
-    · Fix: Don\'t show unknown attribute icons for opencaching.org.uk\n
+    · Fix: Don\'t show unknown attribute icons for opencache.uk\n
     · Fix: Import pocket queries from bookmark lists with umlauts\n
     · Fix: Show progress indication on logging page while information is loaded in the background\n
     · Fix: Allow searching for trackable secret codes starting with GC\n

@@ -20,6 +20,7 @@
     · Fix: Add to favorite was not available when logging webcam caches\n
     · Fix: Store from map no longer stores to default list\n
     · Fix: Correctly recognize OpenCaching.FR/.IT/.ES URLs\n
+    · Fix: Connect with the new Opencache.uk\n
     · Change: Fetch more caches from OC sites when GC is disabled in settings\n
     · Removed: No longer supports captchas for getting exact coordinates as basic member\n
     \n
