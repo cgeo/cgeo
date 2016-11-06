@@ -232,7 +232,9 @@ public class HtmlImage implements Html.ImageGetter {
                         final ImmutablePair<BitmapDrawable, Boolean> loaded = loadFromDisk();
                         final BitmapDrawable bitmap = loaded.left;
                         if (loaded.right) {
-                            emitter.onNext(bitmap);
+                            if (!onlySave) {
+                                emitter.onNext(bitmap);
+                            }
                             emitter.onComplete();
                             return;
                         }
