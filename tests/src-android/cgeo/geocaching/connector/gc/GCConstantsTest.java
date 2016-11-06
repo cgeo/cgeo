@@ -11,8 +11,7 @@ import android.text.Html;
 public class GCConstantsTest extends AndroidTestCase {
 
     // adapt the following after downloading new mock html files
-    public static final String MOCK_LOGIN_NAME = "Bananeweizen";
-    public static final int MOCK_CACHES_FOUND = 743;
+    public static final int MOCK_CACHES_FOUND = 2814;
 
     public static void testLocation() {
         // GC37GFJ
