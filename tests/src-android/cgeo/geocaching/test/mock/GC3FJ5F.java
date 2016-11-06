@@ -5,46 +5,43 @@ import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.log.LogType;
+import cgeo.geocaching.models.Image;
 import cgeo.geocaching.settings.Settings;
 
 import android.support.annotation.NonNull;
 
 import java.text.ParseException;
+import java.util.Collections;
 import java.util.Date;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
-public class GC2CJPF extends MockedCache {
+public class GC3FJ5F extends MockedCache {
 
-    public GC2CJPF() {
-        super(new Geopoint(52.425067, 9.664200));
+    public GC3FJ5F() {
+        super(new Geopoint(51.3398833, 7.0304833));
     }
 
     @Override
     public String getName() {
-        return "Kinderwald KiC";
+        return "Herminghauspark";
     }
 
     @Override
     public float getDifficulty() {
-        return 2.5f;
+        return 1.0f;
     }
 
     @NonNull
     @Override
     public String getGeocode() {
-        return "GC2CJPF";
+        return "GC3FJ5F";
     }
 
     @Override
     public String getOwnerDisplayName() {
-        return "Tom03";
-    }
-
-    @Override
-    public boolean isArchived() {
-        return true;
+        return "Lineflyer";
     }
 
     @NonNull
@@ -56,7 +53,7 @@ public class GC2CJPF extends MockedCache {
     @NonNull
     @Override
     public CacheSize getSize() {
-        return CacheSize.SMALL;
+        return CacheSize.LARGE;
     }
 
     @Override
@@ -71,40 +68,32 @@ public class GC2CJPF extends MockedCache {
 
     @Override
     public String getHint() {
-        return "Das Final ist unter Steinen";
+        return "[FINAL] Geteilter Baumstumpf, dann ganz unten (Spoiler-Bild)";
     }
 
     @Override
     public String getDescription() {
-        return "Kleiner Multi über 7 Stationen";
+        return "<b>Update 31.12.2014:</b><br /> Koordinaten für Station 2 neu eingemessen.<br />";
     }
 
     @Override
     public String getShortDescription() {
-        return "Von Nachwuchs-Cachern für Nachwuchs-Cacher.";
+        return "<b>Spaziergang durch den Velberter Herminghauspark.</b><br /> <br /> Ich möchte euch einen Besuch im Velberter Herminghauspark nahelegen. Hier wurde in den letzten Jahren viel getan um den Park attraktiv für Besucher und insbesondere für Familien zu machen. Aber seht selbst...<br />";
     }
 
     @Override
     public String getCacheId() {
-        return "1811409";
+        return "2823776";
     }
 
     @Override
     public String getGuid() {
-        return "73246a5a-ebb9-4d4f-8db9-a951036f5376";
+        return "ba954eb7-29c5-4b4a-a6d8-8546b05b5bae";
     }
 
     @Override
     public String getLocation() {
-        return "Niedersachsen, Germany";
-    }
-
-    @Override
-    public boolean isFound() {
-        if ("blafoo".equals(this.getMockedDataUser())) {
-            return true;
-        }
-        return super.isFound();
+        return "Nordrhein-Westfalen, Germany";
     }
 
     /*
@@ -114,24 +103,16 @@ public class GC2CJPF extends MockedCache {
      */
     @Override
     public boolean isOwner() {
-        if ("Tom03".equals(Settings.getUserName())) {
+        if ("Lineflyer".equals(Settings.getUserName())) {
             return true;
         }
         return super.isOwner();
     }
 
     @Override
-    public boolean isFavorite() {
-        if ("blafoo".equals(this.getMockedDataUser())) {
-            return true;
-        }
-        return super.isFavorite();
-    }
-
-    @Override
     public Date getHiddenDate() {
         try {
-            return GCLogin.parseGcCustomDate("2010-07-31", getDateFormat());
+            return GCLogin.parseGcCustomDate("2012-03-29", getDateFormat());
         } catch (ParseException e) {
             // intentionally left blank
         }
@@ -142,15 +123,18 @@ public class GC2CJPF extends MockedCache {
     @Override
     public List<String> getAttributes() {
         final String[] attributes = {
-                "motorcycles_no",
-                "wheelchair_no",
+                "night_no",
+                "picnic_yes",
+                "restrooms_yes",
+                "touristok_yes",
+                "parking_yes",
+                "wheelchair_yes",
+                "food_yes",
+                "hike_med_yes",
                 "winter_yes",
-                "available_yes",
-                "wading_yes",
-                "scenic_yes",
                 "onehour_yes",
                 "kids_yes",
-                "bicycles_yes",
+                "stroller_yes",
                 "dogs_yes"
         };
         return new MockedLazyInitializedList<>(attributes);
@@ -160,19 +144,25 @@ public class GC2CJPF extends MockedCache {
     public Map<LogType, Integer> getLogCounts() {
         final Map<LogType, Integer> logCounts = new EnumMap<>(LogType.class);
         logCounts.put(LogType.PUBLISH_LISTING, 1);
-        logCounts.put(LogType.FOUND_IT, 119);
-        logCounts.put(LogType.DIDNT_FIND_IT, 3);
-        logCounts.put(LogType.NOTE, 7);
-        logCounts.put(LogType.ENABLE_LISTING, 2);
-        logCounts.put(LogType.TEMP_DISABLE_LISTING, 2);
-        logCounts.put(LogType.OWNER_MAINTENANCE, 3);
-        logCounts.put(LogType.NEEDS_MAINTENANCE, 2);
+        logCounts.put(LogType.FOUND_IT, 411);
+        logCounts.put(LogType.DIDNT_FIND_IT, 2);
+        logCounts.put(LogType.NOTE, 19);
+        logCounts.put(LogType.ENABLE_LISTING, 8);
+        logCounts.put(LogType.TEMP_DISABLE_LISTING, 8);
+        logCounts.put(LogType.OWNER_MAINTENANCE, 14);
+        logCounts.put(LogType.NEEDS_MAINTENANCE, 4);
         return logCounts;
     }
 
     @Override
     public int getFavoritePoints() {
-        return 7;
+        return 53;
+    }
+
+    @Override
+    @NonNull
+    public List<Image> getSpoilers() {
+        return Collections.singletonList(Image.NONE);
     }
 
 }

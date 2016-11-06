@@ -26,6 +26,7 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.test.mock.GC1ZXX2;
 import cgeo.geocaching.test.mock.GC2CJPF;
 import cgeo.geocaching.test.mock.GC2JVEH;
+import cgeo.geocaching.test.mock.GC3FJ5F;
 import cgeo.geocaching.test.mock.MockedCache;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.Log;
@@ -40,7 +41,6 @@ import java.util.GregorianCalendar;
  * The c:geo application test. It can be used for tests that require an
  * application and/or context.
  */
-
 public class CgeoApplicationTest extends CGeoTestCase {
 
     private static final MapTokens INVALID_TOKEN = null;
@@ -162,7 +162,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
             @Override
             public void run() {
                 // non premium cache
-                MockedCache cache = new GC2CJPF();
+                MockedCache cache = new GC3FJ5F();
 
                 deleteCacheFromDBAndLogout(cache.getGeocode());
 
@@ -299,7 +299,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
                     TestSettings.setExcludeMine(false);
                     Settings.setCacheType(CacheType.ALL);
 
-                    final GC2CJPF mockedCache = new GC2CJPF();
+                    final GC3FJ5F mockedCache = new GC3FJ5F();
                     deleteCacheFromDB(mockedCache.getGeocode());
 
                     final MapTokens tokens = GCLogin.getInstance().getMapTokens();
