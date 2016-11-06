@@ -107,7 +107,7 @@ public class SimpleDirChooser extends AbstractListActivity {
                     currentDir = newPathDir;
                     fill(currentDir);
                 } else {
-                    showToast(SimpleDirChooser.this.getResources().getString(R.string.simple_dir_chooser_invalid_path));
+                    showToast(SimpleDirChooser.this.getString(R.string.simple_dir_chooser_invalid_path));
                 }
             }
         });
@@ -137,7 +137,7 @@ public class SimpleDirChooser extends AbstractListActivity {
         lastPosition = -1;
         resetOkButton();
         final EditText path = ButterKnife.findById(this, R.id.simple_dir_chooser_path);
-        path.setText(this.getResources().getString(R.string.simple_dir_chooser_current_path) + " " + dir.getAbsolutePath());
+        path.setText(this.getString(R.string.simple_dir_chooser_current_path) + " " + dir.getAbsolutePath());
         final File[] dirs = dir.listFiles(new DirOnlyFilenameFilter());
         final List<Option> listDirs = new ArrayList<>();
         if (dirs != null) {

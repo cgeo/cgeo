@@ -133,7 +133,7 @@ public enum CacheAttribute {
      */
     @NonNull
     public String getL10n(final boolean enabled) {
-        return CgeoApplication.getInstance().getResources().getString(
+        return CgeoApplication.getInstance().getString(
                 enabled ? stringIdYes : stringIdNo);
     }
 

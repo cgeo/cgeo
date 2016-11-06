@@ -39,14 +39,14 @@ public class TravelBugLoggingManager extends AbstractTrackableLoggingManager {
     @Override
     public List<LogTypeTrackable> loadInBackground() {
         if (!Settings.hasGCCredentials()) { // allow offline logging
-            ActivityMixin.showToast(activity, activity.getResources().getString(R.string.err_login));
+            ActivityMixin.showToast(activity, activity.getString(R.string.err_login));
             return null;
         }
 
         final String page = TravelBugConnector.getTravelbugViewstates(guid);
 
         if (page == null) {
-            activity.showToast(activity.getResources().getString(R.string.err_log_load_data));
+            activity.showToast(activity.getString(R.string.err_log_load_data));
             hasLoaderError = true;
         } else {
             viewstates = GCLogin.getViewstates(page);

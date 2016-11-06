@@ -223,7 +223,7 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         if (resultCode == RESULT_CANCELED) {
             // User cancelled the image capture
-            showToast(getResources().getString(R.string.info_select_logimage_cancelled));
+            showToast(getString(R.string.info_select_logimage_cancelled));
             return;
         }
 
@@ -294,7 +294,7 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
         }
 
         if (requestCode == SELECT_NEW_IMAGE) {
-            showToast(getResources().getString(R.string.info_stored_image) + '\n' + image.getUrl());
+            showToast(getString(R.string.info_stored_image) + '\n' + image.getUrl());
         }
 
         loadImagePreview();
@@ -316,7 +316,7 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
     }
 
     private void showFailure() {
-        showToast(getResources().getString(R.string.err_acquire_image_failed));
+        showToast(getString(R.string.err_acquire_image_failed));
     }
 
     private void loadImagePreview() {

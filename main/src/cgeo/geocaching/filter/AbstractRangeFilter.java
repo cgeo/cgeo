@@ -13,7 +13,7 @@ abstract class AbstractRangeFilter extends AbstractFilter {
     protected final float rangeMax;
 
     protected AbstractRangeFilter(@StringRes final int resourceId, final int range, final int upperBound) {
-        super(CgeoApplication.getInstance().getResources().getString(resourceId) + ' ' +
+        super(CgeoApplication.getInstance().getString(resourceId) + ' ' +
                 (range == upperBound ? Integer.toString(upperBound) : range + " + " + String.format(Locale.getDefault(), "%.1f", range + 0.5)));
         rangeMin = range;
         rangeMax = rangeMin + 1f;

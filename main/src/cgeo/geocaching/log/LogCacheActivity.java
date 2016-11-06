@@ -498,7 +498,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
 
         @Override
         protected String getResultMessage() {
-            return getContext().getResources().getString(R.string.info_log_cleared);
+            return getContext().getString(R.string.info_log_cleared);
         }
 
         @Override
@@ -795,7 +795,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
                 image = data.getParcelableExtra(Intents.EXTRA_IMAGE);
             } else if (resultCode != RESULT_CANCELED) {
                 // Image capture failed, advise user
-                showToast(getResources().getString(R.string.err_select_logimage_failed));
+                showToast(getString(R.string.err_select_logimage_failed));
             }
         }
     }

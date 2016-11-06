@@ -62,7 +62,7 @@ class PopularityRatioFilter extends AbstractFilter {
         public List<IFilter> getFilters() {
             final List<IFilter> filters = new ArrayList<>(RATIOS.length);
             for (final int minRange : RATIOS) {
-                final String name = CgeoApplication.getInstance().getResources().getString(R.string.more_than_percent_favorite_points, minRange);
+                final String name = CgeoApplication.getInstance().getString(R.string.more_than_percent_favorite_points, minRange);
                 filters.add(new PopularityRatioFilter(name, minRange));
             }
             return filters;

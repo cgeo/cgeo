@@ -43,9 +43,9 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByCente
     private UserInfo userInfo = new UserInfo(StringUtils.EMPTY, 0, UserInfoStatus.NOT_RETRIEVED);
 
     public OCApiLiveConnector(final String name, final String host, final String prefix, final String licenseString, @StringRes final int cKResId, @StringRes final int cSResId, final int isActivePrefKeyId, final int tokenPublicPrefKeyId, final int tokenSecretPrefKeyId, final ApiSupport apiSupport) {
-        super(name, host, prefix, CryptUtils.rot13(CgeoApplication.getInstance().getResources().getString(cKResId)), licenseString, apiSupport);
+        super(name, host, prefix, CryptUtils.rot13(CgeoApplication.getInstance().getString(cKResId)), licenseString, apiSupport);
 
-        cS = CryptUtils.rot13(CgeoApplication.getInstance().getResources().getString(cSResId));
+        cS = CryptUtils.rot13(CgeoApplication.getInstance().getString(cSResId));
         this.isActivePrefKeyId = isActivePrefKeyId;
         this.tokenPublicPrefKeyId = tokenPublicPrefKeyId;
         this.tokenSecretPrefKeyId = tokenSecretPrefKeyId;

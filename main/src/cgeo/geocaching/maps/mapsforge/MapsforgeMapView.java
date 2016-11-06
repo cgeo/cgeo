@@ -205,7 +205,7 @@ public class MapsforgeMapView extends MapView implements MapViewImpl {
             if (!new File(Settings.getMapFile()).exists()) {
                 Toast.makeText(
                         getContext(),
-                        getContext().getResources().getString(R.string.warn_nonexistant_mapfile),
+                        getContext().getString(R.string.warn_nonexistant_mapfile),
                         Toast.LENGTH_LONG)
                         .show();
                 return;
@@ -214,7 +214,7 @@ public class MapsforgeMapView extends MapView implements MapViewImpl {
             if (!Settings.isValidMapFile(Settings.getMapFile())) {
                 Toast.makeText(
                         getContext(),
-                        getContext().getResources().getString(R.string.warn_invalid_mapfile),
+                        getContext().getString(R.string.warn_invalid_mapfile),
                         Toast.LENGTH_LONG)
                         .show();
             }
@@ -238,7 +238,7 @@ public class MapsforgeMapView extends MapView implements MapViewImpl {
             } catch (final FileNotFoundException ignored) {
                 Toast.makeText(
                         getContext(),
-                        getContext().getResources().getString(R.string.warn_rendertheme_missing),
+                        getContext().getString(R.string.warn_rendertheme_missing),
                         Toast.LENGTH_LONG)
                         .show();
             }

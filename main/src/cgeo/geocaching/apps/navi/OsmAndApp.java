@@ -48,7 +48,7 @@ public class OsmAndApp extends AbstractPointNavigationApp {
 
     @Override
     public void navigate(@NonNull final Activity activity, @NonNull final Geopoint coords) {
-        navigate(activity, coords, activity.getResources().getString(R.string.osmand_marker_cgeo));
+        navigate(activity, coords, activity.getString(R.string.osmand_marker_cgeo));
     }
 
     private static void navigate(@NonNull final Activity activity, @NonNull final Geopoint coords, @NonNull final String markerName) {

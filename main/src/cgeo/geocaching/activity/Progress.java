@@ -61,7 +61,7 @@ public class Progress {
         if (cancelMessage != null) {
             dialog.setCancelable(true);
             dialog.setCancelMessage(cancelMessage);
-            dialog.setButton(DialogInterface.BUTTON_NEGATIVE, context.getResources().getString(android.R.string.cancel), cancelMessage);
+            dialog.setButton(DialogInterface.BUTTON_NEGATIVE, context.getString(android.R.string.cancel), cancelMessage);
         } else {
             dialog.setCancelable(false);
         }

@@ -71,8 +71,8 @@ public final class CacheDetailsCreator {
         final TextView nameView = ButterKnife.findById(layout, R.id.name);
         final TextView valueView = ButterKnife.findById(layout, R.id.value);
 
-        nameView.setText(activity.getResources().getString(nameId));
-        valueView.setText(String.format(Locale.getDefault(), "%.1f", value) + ' ' + activity.getResources().getString(R.string.cache_rating_of) + ' ' + String.format(Locale.getDefault(), "%d", max));
+        nameView.setText(activity.getString(nameId));
+        valueView.setText(String.format(Locale.getDefault(), "%.1f", value) + ' ' + activity.getString(R.string.cache_rating_of) + ' ' + String.format(Locale.getDefault(), "%d", max));
 
         final RatingBar layoutStars = ButterKnife.findById(layout, R.id.stars);
         layoutStars.setNumStars(max);

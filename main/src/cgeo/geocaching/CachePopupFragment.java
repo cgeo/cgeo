@@ -77,7 +77,7 @@ public class CachePopupFragment extends AbstractDialogFragment {
             if (popup == null) {
                 return;
             }
-            popup.progress.setMessage(popup.getResources().getString(progressMessage)
+            popup.progress.setMessage(popup.getString(progressMessage)
                     + "\n\n"
                     + msg);
         }

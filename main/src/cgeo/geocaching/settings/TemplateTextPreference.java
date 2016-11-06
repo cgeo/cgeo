@@ -63,7 +63,7 @@ public class TemplateTextPreference extends DialogPreference {
                 final List<LogTemplate> templates = LogTemplateProvider.getTemplatesWithoutSignature();
                 final String[] items = new String[templates.size()];
                 for (int i = 0; i < templates.size(); i++) {
-                    items[i] = settingsActivity.getResources().getString(templates.get(i).getResourceId());
+                    items[i] = settingsActivity.getString(templates.get(i).getResourceId());
                 }
                 alert.setItems(items, new DialogInterface.OnClickListener() {
 

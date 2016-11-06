@@ -429,7 +429,7 @@ public class Geocache implements IWaypoint {
 
     public void logVisit(final Activity fromActivity) {
         if (!getConnector().canLog(this)) {
-            ActivityMixin.showToast(fromActivity, fromActivity.getResources().getString(R.string.err_cannot_log_visit));
+            ActivityMixin.showToast(fromActivity, fromActivity.getString(R.string.err_cannot_log_visit));
             return;
         }
         fromActivity.startActivity(LogCacheActivity.getLogCacheIntent(fromActivity, cacheId, geocode));

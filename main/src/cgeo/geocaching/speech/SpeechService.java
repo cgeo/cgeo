@@ -188,7 +188,7 @@ public class SpeechService extends Service implements OnInitListener {
     public static void stopService(final Activity activity) {
         synchronized (startingActivityLock) {
             if (activity.stopService(new Intent(activity, SpeechService.class))) {
-                ActivityMixin.showShortToast(activity, activity.getResources().getString(R.string.tts_stopped));
+                ActivityMixin.showShortToast(activity, activity.getString(R.string.tts_stopped));
             }
             startingActivity = null;
         }

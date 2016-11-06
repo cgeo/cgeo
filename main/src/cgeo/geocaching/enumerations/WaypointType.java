@@ -84,7 +84,7 @@ public enum WaypointType {
 
     @NonNull
     public final String getL10n() {
-        return CgeoApplication.getInstance().getBaseContext().getResources().getString(stringId);
+        return CgeoApplication.getInstance().getBaseContext().getString(stringId);
     }
 
     @Override

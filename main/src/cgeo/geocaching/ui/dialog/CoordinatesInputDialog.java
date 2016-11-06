@@ -467,7 +467,7 @@ public class CoordinatesInputDialog extends DialogFragment {
         }
         if (signalError) {
             final AbstractActivity activity = (AbstractActivity) getActivity();
-            activity.showToast(activity.getResources().getString(R.string.err_parse_lat_lon));
+            activity.showToast(activity.getString(R.string.err_parse_lat_lon));
         }
         return false;
     }
@@ -543,7 +543,7 @@ public class CoordinatesInputDialog extends DialogFragment {
         public void onClick(final View v) {
             if (cacheCoords == null) {
                 final AbstractActivity activity = (AbstractActivity) getActivity();
-                activity.showToast(activity.getResources().getString(R.string.err_location_unknown));
+                activity.showToast(activity.getString(R.string.err_location_unknown));
                 return;
             }
 

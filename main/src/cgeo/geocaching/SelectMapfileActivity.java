@@ -61,7 +61,7 @@ public class SelectMapfileActivity extends AbstractFileListActivity<FileSelectio
                 }
             }
         });
-        selectDirectory.setText(getResources().getString(R.string.simple_dir_chooser_title));
+        selectDirectory.setText(getString(R.string.simple_dir_chooser_title));
         selectDirectory.setVisibility(View.VISIBLE);
     }
 

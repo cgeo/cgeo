@@ -480,7 +480,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     if (coordinates != null) {
                         ClipboardUtils.copyToClipboard(
                                 GeopointFormatter.reformatForClipboard(coordinates.toString()));
-                        showToast(getResources().getString(R.string.clipboard_copy_ok));
+                        showToast(getString(R.string.clipboard_copy_ok));
                     }
                 }
                 return true;
@@ -742,7 +742,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     return;
                 }
 
-                updateStatusMsg(activity.getResources().getString(R.string.cache_dialog_loading_details_status_render));
+                updateStatusMsg(activity.getString(R.string.cache_dialog_loading_details_status_render));
 
                 // Data loaded, we're ready to show it!
                 activity.notifyDataSetChanged();
@@ -754,7 +754,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             if (activity == null) {
                 return;
             }
-            setProgressMessage(activity.getResources().getString(R.string.cache_dialog_loading_details)
+            setProgressMessage(activity.getString(R.string.cache_dialog_loading_details)
                     + "\n\n"
                     + msg);
         }

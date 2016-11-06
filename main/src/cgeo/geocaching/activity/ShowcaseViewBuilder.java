@@ -23,7 +23,7 @@ public class ShowcaseViewBuilder extends Builder {
 
     @Override
     public ShowcaseViewBuilder setContentTitle(@StringRes final int resId) {
-        setSingleshot(activity.getResources().getString(resId));
+        setSingleshot(activity.getString(resId));
         return (ShowcaseViewBuilder) super.setContentTitle(resId);
     }
 
