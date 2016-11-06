@@ -1,5 +1,12 @@
 package cgeo.geocaching.connector.oc;
 
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.concurrent.Callable;
+
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.capability.ISearchByGeocode;
 import cgeo.geocaching.models.Geocache;
@@ -7,14 +14,7 @@ import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.CryptUtils;
-
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-
-import java.util.concurrent.Callable;
-
 import io.reactivex.Observable;
-import org.apache.commons.lang3.StringUtils;
 
 public class OCApiConnector extends OCConnector implements ISearchByGeocode {
 
@@ -123,8 +123,20 @@ public class OCApiConnector extends OCConnector implements ISearchByGeocode {
     public String getGeocodeFromUrl(@NonNull final String url) {
         final String shortHost = StringUtils.remove(getHost(), "www.");
 
-        // host.tld/viewcache.php?cacheid
-        final String id = StringUtils.trim(StringUtils.substringAfter(url, shortHost + "/viewcache.php?cacheid="));
+        final String geocodeFromId = getGeocodeFromCacheId(url, shortHost);
+        if (geocodeFromId != null) {
+            return geocodeFromId;
+        }
+
+        return super.getGeocodeFromUrl(url);
+    }
+
+    /**
+     * get the OC1234 geocode from an internal cache id, for URLs like host.tld/viewcache.php?cacheid
+     */
+    @Nullable
+    protected String getGeocodeFromCacheId(final String url, final String host) {
+        final String id = StringUtils.trim(StringUtils.substringAfter(url, host + "/viewcache.php?cacheid="));
         if (StringUtils.isNotBlank(id)) {
 
             final String geocode = Observable.defer(new Callable<Observable<String>>() {
@@ -138,8 +150,7 @@ public class OCApiConnector extends OCConnector implements ISearchByGeocode {
                 return geocode;
             }
         }
-
-        return super.getGeocodeFromUrl(url);
+        return null;
     }
 
     @Override

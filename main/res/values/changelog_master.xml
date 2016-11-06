@@ -18,7 +18,8 @@
     · Fix: Don\'t store a signature only log when going back\n
     · Fix: Make URLs in hints clickable\n
     · Fix: Add to favorite was not available when logging webcam caches\n
-    · Fix: Store from map also stores to default list\n
+    · Fix: Store from map no longer stores to default list\n
+    · Fix: Correctly recognize OpenCaching.FR/.IT/.ES URLs\n
     · Change: Fetch more caches from OC sites when GC is disabled in settings\n
     · Removed: No longer supports captchas for getting exact coordinates as basic member\n
     \n
