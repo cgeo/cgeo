@@ -25,7 +25,18 @@ public class GeoPointFormatterTest extends TestCase {
         final String formatMinute = GeopointFormatter.format(GeopointFormatter.Format.LAT_LON_DECMINUTE_RAW, point);
         assertThat(formatMinute).isEqualTo("N 51° 21.104 E 010° 15.369");
         final String formatSecond = GeopointFormatter.format(GeopointFormatter.Format.LAT_LON_DECSECOND, point).replaceAll(",", ".");
-        assertThat(formatSecond).isEqualTo("N 51° 21' 06.240\" · E 010° 15' 22.140\"");
+        assertThat(formatSecond).isEqualTo("N 51° 21' 06.239\" · E 010° 15' 22.140\"");
+    }
+
+    public static void testFormatNeg() {
+        // taken from GC30R6G
+        final Geopoint point = new Geopoint("S 51° 21.104 W 010° 15.369");
+        final String format = GeopointFormatter.format(GeopointFormatter.Format.LAT_LON_DECDEGREE_COMMA, point);
+        assertThat(format).isEqualTo("-51.351733,-10.256150");
+        final String formatMinute = GeopointFormatter.format(GeopointFormatter.Format.LAT_LON_DECMINUTE_RAW, point);
+        assertThat(formatMinute).isEqualTo("S 51° 21.104 W 010° 15.369");
+        final String formatSecond = GeopointFormatter.format(GeopointFormatter.Format.LAT_LON_DECSECOND, point).replaceAll(",", ".");
+        assertThat(formatSecond).isEqualTo("S 51° 21' 06.239\" · W 010° 15' 22.140\"");
     }
 
     public static void testReformatForClipboardRemoveMiddleDot() {
