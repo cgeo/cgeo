@@ -24,7 +24,6 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.TestSettings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.test.mock.GC1ZXX2;
-import cgeo.geocaching.test.mock.GC2CJPF;
 import cgeo.geocaching.test.mock.GC2JVEH;
 import cgeo.geocaching.test.mock.GC3FJ5F;
 import cgeo.geocaching.test.mock.MockedCache;
@@ -356,7 +355,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
 
                 try {
                     { // non premium cache
-                        final MockedCache cache = new GC2CJPF();
+                        final MockedCache cache = new GC3FJ5F();
                         deleteCacheFromDBAndLogout(cache.getGeocode());
                         Tile.cache.removeFromTileCache(cache);
                         Settings.setCacheType(CacheType.ALL);
@@ -372,7 +371,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
                         assertThat(cacheFromViewport).isNotNull();
                         Log.d("cgeoApplicationTest.testSearchByViewportNotLoggedIn: Coords expected = " + cache.getCoords());
                         Log.d("cgeoApplicationTest.testSearchByViewportNotLoggedIn: Coords actual = " + cacheFromViewport.getCoords());
-                        assertThat(cache.getCoords().distanceTo(cacheFromViewport.getCoords()) <= 1e-3).isFalse();
+                        assertThat(cache.getCoords().distanceTo(cacheFromViewport.getCoords())).isGreaterThan(1e-4f);
                         // depending on the chosen strategy the coords can be reliable or not
                         // noinspection ConstantConditions
                         assertThat(cacheFromViewport.isReliableLatLon()).isEqualTo(testStrategy == LivemapStrategy.DETAILED);
