@@ -34,7 +34,7 @@ public class DirectionDrawer {
         final WindowManager windowManager = (WindowManager) CgeoApplication.getInstance().getSystemService(Context.WINDOW_SERVICE);
         windowManager.getDefaultDisplay().getMetrics(metrics);
 
-        width = 5f * metrics.density;
+        width = 8f * metrics.density;
 
     }
 
@@ -56,7 +56,7 @@ public class DirectionDrawer {
             linePaint.setAntiAlias(true);
             linePaint.setStrokeWidth(width);
             linePaint.setStyle(Paint.Style.STROKE);
-            linePaint.setColor(0x80EB391E);
+            linePaint.setColor(0xD0EB391E);
         }
 
         final Geopoint[] routingPoints = Routing.getTrack(currentCoords, destinationCoords);

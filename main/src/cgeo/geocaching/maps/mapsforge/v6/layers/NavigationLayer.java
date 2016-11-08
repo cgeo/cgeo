@@ -37,7 +37,7 @@ public class NavigationLayer extends Layer {
         final WindowManager windowManager = (WindowManager) CgeoApplication.getInstance().getSystemService(Context.WINDOW_SERVICE);
         windowManager.getDefaultDisplay().getMetrics(metrics);
 
-        width = 4f * metrics.density;
+        width = 8f * metrics.density;
     }
 
     public void setDestination(final Geopoint coords) {
@@ -58,7 +58,7 @@ public class NavigationLayer extends Layer {
             line = AndroidGraphicFactory.INSTANCE.createPaint();
             line.setStrokeWidth(width);
             line.setStyle(Style.STROKE);
-            line.setColor(0x80EB391E);
+            line.setColor(0xD0EB391E);
         }
         final long mapSize = MercatorProjection.getMapSize(zoomLevel, this.displayModel.getTileSize());
 
