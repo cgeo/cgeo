@@ -1,12 +1,5 @@
 package cgeo.geocaching.connector.oc;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.concurrent.Callable;
-
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.capability.ISearchByGeocode;
 import cgeo.geocaching.models.Geocache;
@@ -14,7 +7,14 @@ import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.CryptUtils;
-import io.reactivex.Observable;
+
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
+import java.util.concurrent.Callable;
+
+import io.reactivex.Maybe;
+import org.apache.commons.lang3.StringUtils;
 
 public class OCApiConnector extends OCConnector implements ISearchByGeocode {
 
@@ -139,12 +139,12 @@ public class OCApiConnector extends OCConnector implements ISearchByGeocode {
         final String id = StringUtils.trim(StringUtils.substringAfter(url, host + "/viewcache.php?cacheid="));
         if (StringUtils.isNotBlank(id)) {
 
-            final String geocode = Observable.defer(new Callable<Observable<String>>() {
+            final String geocode = Maybe.fromCallable(new Callable<String>() {
                 @Override
-                public Observable<String> call() {
-                    return Observable.just(OkapiClient.getGeocodeByUrl(OCApiConnector.this, url));
+                public String call() throws Exception {
+                    return OkapiClient.getGeocodeByUrl(OCApiConnector.this, url);
                 }
-            }).subscribeOn(AndroidRxUtils.networkScheduler).blockingFirst();
+            }).subscribeOn(AndroidRxUtils.networkScheduler).blockingGet();
 
             if (geocode != null && canHandle(geocode)) {
                 return geocode;
