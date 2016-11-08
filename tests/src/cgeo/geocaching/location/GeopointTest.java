@@ -87,6 +87,8 @@ public class GeopointTest extends TestCase {
     }
 
     public static void testDDD() {
+        // Maximum acceptable deviation for degrees is 1e-5 (fractional part is scaled up by 1e5)
+
         // case 1
         final Geopoint gp1 = new Geopoint(51.3d, 13.8d);
 
@@ -115,7 +117,7 @@ public class GeopointTest extends TestCase {
         final Geopoint gp3a = new Geopoint(String.valueOf(gp3.getLatDir()), String.valueOf(gp3.getLatDeg()), String.valueOf(gp3.getLatDegFrac()),
                 String.valueOf(gp3.getLonDir()), String.valueOf(gp3.getLonDeg()), String.valueOf(gp3.getLonDegFrac()));
 
-        checkTolerance(gp3, gp3a, 5e-5);
+        checkTolerance(gp3, gp3a, 1e-5);
 
         // case 4
         final Geopoint gp4 = new Geopoint(51.00012d, 13.00089d);
@@ -125,7 +127,17 @@ public class GeopointTest extends TestCase {
         final Geopoint gp4a = new Geopoint(String.valueOf(gp4.getLatDir()), String.valueOf(gp4.getLatDeg()), String.valueOf(gp4.getLatDegFrac()),
                 String.valueOf(gp4.getLonDir()), String.valueOf(gp4.getLonDeg()), String.valueOf(gp4.getLonDegFrac()));
 
-        checkTolerance(gp4, gp4a, 5e-5);
+        checkTolerance(gp4, gp4a, 1e-5);
+
+        // case 5
+        final Geopoint gp5 = new Geopoint(51.00012d, 13.9999999d);
+
+        checkDDD(gp5, 'N', 51, 12, 'E', 14, 0);
+
+        final Geopoint gp5a = new Geopoint(String.valueOf(gp5.getLatDir()), String.valueOf(gp5.getLatDeg()), String.valueOf(gp5.getLatDegFrac()),
+                String.valueOf(gp5.getLonDir()), String.valueOf(gp5.getLonDeg()), String.valueOf(gp5.getLonDegFrac()));
+
+        checkTolerance(gp5, gp5a, 1e-5);
     }
 
     private static void checkDDD(final Geopoint gp, final char latDir, final int latDeg, final int latDegFrac, final char lonDir, final int lonDeg, final int lonDegFrac) {
@@ -138,11 +150,35 @@ public class GeopointTest extends TestCase {
     }
 
     private static void checkTolerance(final Geopoint gp1, final Geopoint gp2, final double tolerance) {
-        assertThat(Math.abs(gp1.getLatitude() - gp2.getLatitude())).isLessThanOrEqualTo(tolerance);
-        assertThat(Math.abs(gp1.getLongitude() - gp2.getLongitude())).isLessThanOrEqualTo(tolerance);
+        assertThat(gp1.getLatitude()).isEqualTo(gp2.getLatitude(), offset(tolerance));
+        assertThat(gp1.getLongitude()).isEqualTo(gp2.getLongitude(), offset(tolerance));
+    }
+
+    public static void testRaw() {
+        final Geopoint gp1 = new Geopoint(51.3d, 13.8d);
+        assertThat(gp1.getLatMinRaw()).isEqualTo(18);
+        assertThat(gp1.getLonMinRaw()).isEqualTo(48);
+
+        final Geopoint gp2 = new Geopoint(51.345678d, 13.876543d);
+        assertThat(gp2.getLatMinRaw()).isEqualTo(20.74068, offset(1e-5));
+        assertThat(gp2.getLonMinRaw()).isEqualTo(52.59258, offset(1e-5));
+        assertThat(gp2.getLatSecRaw()).isEqualTo(44.4408, offset(1e-5));
+        assertThat(gp2.getLonSecRaw()).isEqualTo(35.5548, offset(1e-5));
+
+        final Geopoint gp3 = new Geopoint(-51.345678d, -13.876543d);
+        assertThat(gp3.getLatMinRaw()).isEqualTo(20.74068, offset(1e-5));
+        assertThat(gp3.getLonMinRaw()).isEqualTo(52.59258, offset(1e-5));
+        assertThat(gp3.getLatSecRaw()).isEqualTo(44.4408, offset(1e-5));
+        assertThat(gp3.getLonSecRaw()).isEqualTo(35.5548, offset(1e-5));
+
+        final Geopoint gp4 = new Geopoint(51.00012d, 13.00089d);
+        assertThat(gp4.getLatMinRaw()).isEqualTo(0.0072, offset(1e-4));
+        assertThat(gp4.getLonMinRaw()).isEqualTo(0.0534, offset(1e-4));
     }
 
     public static void testDMM() {
+        // Maximum acceptable deviation for degrees+minutes is 2e-5 (fractional part is scaled up by 1e3)
+
         // case 1
         final Geopoint gp1 = new Geopoint(51.3d, 13.8d);
 
@@ -153,6 +189,16 @@ public class GeopointTest extends TestCase {
 
         assertThat(gp1a).isEqualTo(gp1);
 
+        // case 1n
+        final Geopoint gp1n = new Geopoint(-51.3d, -13.8d);
+
+        checkDMM(gp1n, 'S', 51, 18, 0, 'W', 13, 48, 0);
+
+        final Geopoint gp1na = new Geopoint(String.valueOf(gp1n.getLatDir()), String.valueOf(gp1n.getLatDeg()), String.valueOf(gp1n.getLatMin()), String.valueOf(gp1n.getLatMinFrac()),
+                String.valueOf(gp1n.getLonDir()), String.valueOf(gp1n.getLonDeg()), String.valueOf(gp1n.getLonMin()), String.valueOf(gp1n.getLonMinFrac()));
+
+        assertThat(gp1na).isEqualTo(gp1n);
+
         // case 2
         final Geopoint gp2 = new Geopoint(51.34567d, 13.87654d);
 
@@ -161,7 +207,7 @@ public class GeopointTest extends TestCase {
         final Geopoint gp2a = new Geopoint(String.valueOf(gp2.getLatDir()), String.valueOf(gp2.getLatDeg()), String.valueOf(gp2.getLatMin()), String.valueOf(gp2.getLatMinFrac()),
                 String.valueOf(gp2.getLonDir()), String.valueOf(gp2.getLonDeg()), String.valueOf(gp2.getLonMin()), String.valueOf(gp2.getLonMinFrac()));
 
-        checkTolerance(gp2, gp2a, 5e-5);
+        checkTolerance(gp2, gp2a, 2e-5);
 
         // case 3
         final Geopoint gp3 = new Geopoint(51.3d, 13.8d);
@@ -171,7 +217,7 @@ public class GeopointTest extends TestCase {
         final Geopoint gp3a = new Geopoint(String.valueOf(gp3.getLatDir()), String.valueOf(gp3.getLatDeg()), String.valueOf(gp3.getLatMin()), String.valueOf(gp3.getLatMinFrac()),
                 String.valueOf(gp3.getLonDir()), String.valueOf(gp3.getLonDeg()), String.valueOf(gp3.getLonMin()), String.valueOf(gp3.getLonMinFrac()));
 
-        checkTolerance(gp3, gp3a, 5e-5);
+        checkTolerance(gp3, gp3a, 2e-5);
 
         // case 4
         final Geopoint gp4 = new Geopoint(51.00012d, 13.00089d);
@@ -181,7 +227,17 @@ public class GeopointTest extends TestCase {
         final Geopoint gp4a = new Geopoint(String.valueOf(gp4.getLatDir()), String.valueOf(gp4.getLatDeg()), String.valueOf(gp4.getLatMin()), String.valueOf(gp4.getLatMinFrac()),
                 String.valueOf(gp4.getLonDir()), String.valueOf(gp4.getLonDeg()), String.valueOf(gp4.getLonMin()), String.valueOf(gp4.getLonMinFrac()));
 
-        checkTolerance(gp4, gp4a, 5e-5);
+        checkTolerance(gp4, gp4a, 2e-5);
+
+        // case 5
+        final Geopoint gp5 = new Geopoint(51.00012d, 13.999999d);
+
+        checkDMM(gp5, 'N', 51, 0, 7, 'E', 13, 59, 999);
+
+        final Geopoint gp5a = new Geopoint(String.valueOf(gp5.getLatDir()), String.valueOf(gp5.getLatDeg()), String.valueOf(gp5.getLatMin()), String.valueOf(gp5.getLatMinFrac()),
+                String.valueOf(gp5.getLonDir()), String.valueOf(gp5.getLonDeg()), String.valueOf(gp5.getLonMin()), String.valueOf(gp5.getLonMinFrac()));
+
+        checkTolerance(gp5, gp5a, 2e-5);
     }
 
     private static void checkDMM(final Geopoint gp, final char latDir, final int latDeg, final int latMin, final int latMinFrac, final char lonDir, final int lonDeg, final int lonMin, final int lonMinFrac) {
@@ -214,17 +270,17 @@ public class GeopointTest extends TestCase {
         final Geopoint gp2a = new Geopoint(String.valueOf(gp2.getLatDir()), String.valueOf(gp2.getLatDeg()), String.valueOf(gp2.getLatMin()), String.valueOf(gp2.getLatSec()), String.valueOf(gp2.getLatSecFrac()),
                 String.valueOf(gp2.getLonDir()), String.valueOf(gp2.getLonDeg()), String.valueOf(gp2.getLonMin()), String.valueOf(gp2.getLonSec()), String.valueOf(gp2.getLonSecFrac()));
 
-        checkTolerance(gp2, gp2a, 5e-6);
+        checkTolerance(gp2, gp2a, 1e-6);
 
         // case 3
         final Geopoint gp3 = new Geopoint(51.29999833333333d, 13.8d);
 
-        checkDMS(gp3, 'N', 51, 17, 59, 994, 'E', 13, 48, 0, 0);
+        checkDMS(gp3, 'N', 51, 17, 59, 992, 'E', 13, 48, 0, 0);
 
         final Geopoint gp3a = new Geopoint(String.valueOf(gp3.getLatDir()), String.valueOf(gp3.getLatDeg()), String.valueOf(gp3.getLatMin()), String.valueOf(gp3.getLatSec()), String.valueOf(gp3.getLatSecFrac()),
                 String.valueOf(gp3.getLonDir()), String.valueOf(gp3.getLonDeg()), String.valueOf(gp3.getLonMin()), String.valueOf(gp3.getLonSec()), String.valueOf(gp3.getLonSecFrac()));
 
-        checkTolerance(gp3, gp3a, 5e-6);
+        checkTolerance(gp3, gp3a, 1e-6);
 
         // case 4
         final Geopoint gp4 = new Geopoint(51.00012d, 13.00089d);
@@ -234,7 +290,7 @@ public class GeopointTest extends TestCase {
         final Geopoint gp4a = new Geopoint(String.valueOf(gp4.getLatDir()), String.valueOf(gp4.getLatDeg()), String.valueOf(gp4.getLatMin()), String.valueOf(gp4.getLatSec()), String.valueOf(gp4.getLatSecFrac()),
                 String.valueOf(gp4.getLonDir()), String.valueOf(gp4.getLonDeg()), String.valueOf(gp4.getLonMin()), String.valueOf(gp4.getLonSec()), String.valueOf(gp4.getLonSecFrac()));
 
-        checkTolerance(gp4, gp4a, 5e-6);
+        checkTolerance(gp4, gp4a, 1e-6);
     }
 
     private static void checkDMS(final Geopoint gp, final char latDir, final int latDeg, final int latMin, final int latSec, final int latSecFrac, final char lonDir, final int lonDeg, final int lonMin, final int lonSec, final int lonSecFrac) {
@@ -312,5 +368,28 @@ public class GeopointTest extends TestCase {
                 new Geopoint("latDir", "latDeg", "latMin", "latSec", "latSecFrac", "lonDir", "lonDeg", "lonMin", "lonSec", "lonSecFrac");
             }
         });
+    }
+
+    public static void testValid() {
+        assertThat(new Geopoint(0, 0).isValid()).isTrue();
+        assertThat(new Geopoint(90, 0).isValid()).isTrue();
+        assertThat(new Geopoint(91, 0).isValid()).isFalse();
+        assertThat(new Geopoint(-90, 0).isValid()).isTrue();
+        assertThat(new Geopoint(-91, 0).isValid()).isFalse();
+        assertThat(new Geopoint(0, 180).isValid()).isTrue();
+        assertThat(new Geopoint(0, 181).isValid()).isFalse();
+        assertThat(new Geopoint(0, -180).isValid()).isTrue();
+        assertThat(new Geopoint(0, -181).isValid()).isFalse();
+    }
+
+    public static void testRounded() {
+        final Geopoint gp = new Geopoint(1.234567, 0.123456);
+        assertThat(gp.roundedAt(1)).isEqualTo(new Geopoint(1, 0));
+        assertThat(gp.roundedAt(10)).isEqualTo(new Geopoint(1.2, 0.1));
+        assertThat(gp.roundedAt(100)).isEqualTo(new Geopoint(1.23, 0.12));
+        assertThat(gp.roundedAt(1000)).isEqualTo(new Geopoint(1.235, 0.123));
+        assertThat(gp.roundedAt(10000)).isEqualTo(new Geopoint(1.2346, 0.1235));
+        assertThat(gp.roundedAt(100000)).isEqualTo(new Geopoint(1.23457, 0.12346));
+        assertThat(gp.roundedAt(1000000)).isEqualTo(new Geopoint(1.234567, 0.123456));
     }
 }
