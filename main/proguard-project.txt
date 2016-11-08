@@ -111,6 +111,8 @@
 # rxjava includes references to the test frameworks within their class files
 -dontwarn org.junit.**
 
+# used in tests
+-keepclassmembers public class * extends io.reactivex.Observable { public ** blockingFirst(); }
 
 # Showcaseview ------------------------------------------------------------------------------------
 
