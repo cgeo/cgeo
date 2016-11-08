@@ -27,10 +27,11 @@ Such a procedure is [described in the wiki](https://github.com/cgeo/cgeo/wiki/Ho
 Make sure to use Java 8 for your IDE and build process. Some of the involved tools require it, even though the source code is Java 7 only.
 
 ### Eclipse
-- Install the Eclipse installer for your OS from http://eclipse.org/downloads/. Do **not** choose any of the pre-made distributions like "Eclipse for Java developers".
-- Start the installer, switch to advanced mode. On the first page of the wizard choose "Eclipse for Java developers" and use "Next".
-- On the second wizard page use the "Plus" icon, select the github catalog, and add the URI https://github.com/cgeo/cgeo/raw/master/main/project/eclipse%20installation/cgeo.setup. Now select the newly create tree node "cgeo" and use next.
-- On the third wizard page add your github user name and password. Adapt the "root installation folder", everything will be downloaded and copied there. Use Next and Finish to start the download of necessary Eclipse plugins and the cloning of the repository.
+- Install the Eclipse installer for your OS from http://eclipse.org/downloads/. Do **not** choose any of the pre-made distributions like "Eclipse IDE for Java developers".
+- Start the installer, switch to advanced mode. On the first page of the wizard choose "Eclipse IDE for Java developers" and use "Next".
+- On the second wizard page use the "Plus" icon (you will have to search for it for a while), select the github catalog, and add the URI https://github.com/cgeo/cgeo/raw/master/main/project/eclipse%20installation/cgeo.setup. Now select the newly create tree node "cgeo" and use next.
+- On the third wizard page add your github user name and password. Adapt the "root installation folder", the folder cgeo will be created in there and everything will be downloaded and copied to the cgeo folder. That means that if you have a projects directory where you store many projects, it is a good candidate for root installation folder. The cgeo folder will ultimately consist of two folders, eclipse (that contains a whole eclipse installation) and git (that contains some git repository clones). Use Next and Finish to start the download of necessary Eclipse plugins and the cloning of the repositories.
+- In eclipse, the project will be uncompilable until you have copied the files keys.xml from main/templates to main/res/values (you need to do this because eclipse fails to create the file automatically from private.properties as Android Studio do). You have to change all values starting with @ and ending with @ (inclusive) with respective keys. If a key is missing, remove the respective value (together with the leading and trailing @).
 
 ### Android Studio (or IntelliJ IDEA)
 - Install Android Studio from https://developer.android.com/sdk/index.html
@@ -62,7 +63,7 @@ Run `gradlew` from the root directory of the git repository. That will install t
 
 ### Debugging
 
-In Eclipse, create a Debug Configuration for an Android Application using the menu Run | Debug Configurations
+In Eclipse, create a Debug Configuration by selecting the cgeo application (inside the cgeo) folder and press F11. Then choose to run as Android Application.
 
 ### Testing
 
