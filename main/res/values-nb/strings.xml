@@ -93,7 +93,6 @@
   <string name="log_posting_image">Laster opp bilde…</string>
   <string name="log_posting_generic_trackable">Logger %1$s %2$s/%3$s</string>
   <string name="log_clear">Tøm</string>
-  <string name="log_post_not_possible">Nedlastning pågår…\nPrøv igjen i noen sekunder eller kontroller Internett-tilkoblingen.</string>
   <string name="log_post_geocode_missing">GC-kode mangler…</string>
   <string name="log_date_future_not_allowed">Fremtidige loggdatoer er ikke tillatt.</string>
   <string name="log_add">Legg til</string>
@@ -357,7 +356,6 @@
   <string name="caches_make_list_unique">Gjør listen unik</string>
   <!-- caches lists -->
   <string name="list_menu_create">Opprett ny liste</string>
-  <string name="list_menu_drop">Fjern liste</string>
   <string name="list_menu_rename">Endre navn på listen</string>
   <string name="list_menu_import">Importer</string>
   <string name="list_title">Velg en liste</string>
@@ -694,7 +692,6 @@
   <string name="last_day_available">siste dag tilgjengelig</string>
   <string name="cache_offline">Offline</string>
   <string name="cache_offline_refresh">Oppdater</string>
-  <string name="cache_offline_drop">Fjern</string>
   <string name="cache_offline_store">Lagre</string>
   <string name="cache_offline_manage">Administrer</string>
   <string name="cache_offline_store_in_list">Lagre i liste</string>

@@ -93,7 +93,7 @@
   <string name="log_posting_image">Envoi de l\'image…</string>
   <string name="log_posting_generic_trackable">Envoi de %1$s %2$s/%3$s</string>
   <string name="log_clear">Effacer</string>
-  <string name="log_post_not_possible">Téléchargement des données en cours…\nRé-essayez à nouveau dans quelques secondes ou vérifiez votre connexion à Internet.</string>
+  <string name="log_post_not_possible">Téléchargement des données en cours…\nRé-essayez dans quelques secondes ou vérifiez votre connexion à Internet.</string>
   <string name="log_post_geocode_missing">Géocode manquant…</string>
   <string name="log_date_future_not_allowed">Les visites dans le futur sont interdites.</string>
   <string name="log_add">Ajouter</string>
@@ -245,6 +245,7 @@
   <string name="err_trackable_log_not_anonymous">S\'identifier sur %1$s depuis c:geo ne peut se faire anonymement. Souhaitez-vous ouvrir les paramètres et remplir vos informations d\'identification pour %2$s ?</string>
   <string name="err_trackable_no_preference_activity">Désolé, impossible de trouver l\'écran de préférences.</string>
   <string name="warn_discard_changes">Étape non enregistrée, vos modifications seront perdues !</string>
+  <string name="err_request_popup_info">c:geo n\'a pas pu récupérer le contenu du popup de la cache.</string>
   <!-- location service -->
   <string name="loc_last">Dernière position</string>
   <string name="loc_net">Réseau</string>

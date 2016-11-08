@@ -57,11 +57,11 @@
   <string name="log_published">Julkaistu</string>
   <string name="log_enabled">Käytössä</string>
   <string name="log_disabled">Ei käytössä</string>
-  <string name="log_attend">Osallistumismerkintä</string>
+  <string name="log_attend">Osallistuu</string>
   <string name="log_attended">Osallistui</string>
-  <string name="log_retrieved">Haettu</string>
+  <string name="log_retrieved">Otettu kätköstä</string>
   <string name="log_placed">Asetettu</string>
-  <string name="log_grabbed">Haettu jostain</string>
+  <string name="log_grabbed">Otettu muualta</string>
   <string name="log_movecollection">Siirrä kokoelmaan</string>
   <string name="log_moveinventory">Siirrä inventaarioon</string>
   <string name="log_maintained">Huolto suoritettu</string>
@@ -70,7 +70,7 @@
   <string name="log_archived">Arkistoitu</string>
   <string name="log_unarchived">Palautettu arkistosta</string>
   <string name="log_needs_archived">Tarvitsee arkistoida</string>
-  <string name="log_discovered">Löydetty</string>
+  <string name="log_discovered">Nähty</string>
   <string name="log_reviewer">Tarkastusmuistiinpano</string>
   <string name="log_submit_for_review">Lähetä tarkistettavaksi</string>
   <string name="log_retractlisting">Vedetty pois</string>
@@ -79,8 +79,9 @@
   <string name="log_tb_visit">Vieraili</string>
   <string name="log_tb_drop">Jätetty paikalle</string>
   <string name="log_tb_changeall">Muuta kaikki</string>
-  <string name="log_tb_grabbed">Haettu jostain</string>
+  <string name="log_tb_grabbed">Otettu muualta</string>
   <string name="log_tb_note">Muistiinpano</string>
+  <string name="log_tb_discovered">Nähty</string>
   <string name="log_tb_archived">Arkistoitu</string>
   <string name="log_save">Offline-tallennus</string>
   <string name="log_saving">Lähetetään merkintää…</string>
@@ -91,7 +92,6 @@
   <string name="log_posting_image">Lähetetään kuvaa…</string>
   <string name="log_posting_generic_trackable">Lähetetään %1$s %2$s/%3$s</string>
   <string name="log_clear">Tyhjennä</string>
-  <string name="log_post_not_possible">Datan lataus käynnissä …\n Ole hyvä ja yritä uudelleen muutaman sekunnin kuluttua tai tarkista internet-yhteytesi.</string>
   <string name="log_post_geocode_missing">Geokoodi puuttuu…</string>
   <string name="log_date_future_not_allowed">Tulevaisuuden päivämäärät eivät ole sallittuja lokissa.</string>
   <string name="log_add">Lisää</string>
@@ -124,6 +124,7 @@
   <string name="log_hint_log_password">Kirjoita salasanasi</string>
   <string name="log_oc_team_comment">OC-tiimin kommentti</string>
   <string name="log_your_saved_log">Tallennetut lokisi</string>
+  <string name="log_empty_logbook">Tämän kätkön lokikirja on tyhjä.</string>
   <string-array name="log_image_scales">
     <item>Ei skaalausta</item>
     <item>512 p</item>
@@ -211,6 +212,7 @@
   <string name="warn_no_coordinates">Koordinaatteja ei ole annettu.</string>
   <string name="warn_no_keyword">Avainsanaa ei annettu.</string>
   <string name="warn_no_username">Käyttäjänimeä ei ole annettu.</string>
+  <string name="warn_no_connector">Ei aktiivista geokätköpalveluntarjoajaa tämän tyyppisellä haulla.</string>
   <string name="warn_search_help_title">Tarvitsetko apua?</string>
   <string name="warn_search_help_address">Syötä osoite tai paikan nimi. Esimerkiksi käytä postiosoitetta \"Radlicka 100, Prague, Czech Republic\", kaupungin nimeä \"Berlin\" tai jonkin nimeä, kuten \"Yellowstone Park\".</string>
   <string name="warn_search_help_gccode">Syötä geokätkön koodi. Esimerkiksi \"GC1VCAZ\".</string>
@@ -355,7 +357,6 @@
   <string name="caches_clear_offlinelogs_progress">Poistetaan offline-lokit</string>
   <!-- caches lists -->
   <string name="list_menu_create">Luo uusi lista</string>
-  <string name="list_menu_drop">Poista valittu lista</string>
   <string name="list_menu_rename">Nimeä uudelleen nykyinen lista</string>
   <string name="list_menu_import">Tuo</string>
   <string name="list_title">Valitse lista</string>
@@ -668,6 +669,10 @@
     <item quantity="other">%1$d kätköä</item>
   </plurals>
   <!-- days remaining -->
+  <plurals name="days_remaining">
+    <item quantity="one">yksi päivä jäljellä</item>
+    <item quantity="other">%1$d päivää jäljellä</item>
+  </plurals>
   <string name="last_day_available">saatavilla enää tänään</string>
   <string name="cache_offline">Offline</string>
   <string name="cache_offline_refresh">Päivitä</string>

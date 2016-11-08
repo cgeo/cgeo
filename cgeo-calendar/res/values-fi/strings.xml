@@ -3,4 +3,6 @@
 <resources>
   <string name="app_name">c:geo - kalenteri (lisäosa)</string>
   <string name="calendars">Kalenterit</string>
+  <string name="event_success">Tapahtumakätkö lisätty kalenteriin</string>
+  <string name="event_fail">Tapahtumakätkön lisääminen kalenteriin epäonnistui</string>
 </resources>

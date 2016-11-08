@@ -93,7 +93,7 @@
   <string name="log_posting_image">Sender billede…</string>
   <string name="log_posting_generic_trackable">Sender %1$s %2$s/%3$s</string>
   <string name="log_clear">Fjern</string>
-  <string name="log_post_not_possible">Download af data er i gang…\nPrøv venligst igen om nogle sekunder eller kontrollér din internetforbindelse.</string>
+  <string name="log_post_not_possible">Download af data er i gang…\nPrøv venligst igen om et øjeblik eller kontrollér din internetforbindelse.</string>
   <string name="log_post_geocode_missing">Geocode mangler…</string>
   <string name="log_date_future_not_allowed">Logdatoer, der ligger i fremtiden, er ikke tilladt.</string>
   <string name="log_add">Tilføj</string>
@@ -245,6 +245,7 @@
   <string name="err_trackable_log_not_anonymous">Logning af %1$s kan ikke udføres anonymt fra c:geo. Ønsker du at konfigurere dine legitimationsoplysninger til %2$s?</string>
   <string name="err_trackable_no_preference_activity">Der findes ingen egnet indstillingsskærm.</string>
   <string name="warn_discard_changes">Ændringer til waypoints kasseret!</string>
+  <string name="err_request_popup_info">Det lykkedes ikke c:geo at hente popup info for cachen.</string>
   <!-- location service -->
   <string name="loc_last">Sidst kendte</string>
   <string name="loc_net">Netværk</string>
@@ -702,7 +703,6 @@
   <string name="last_day_available">tilgængelig for sidste dag</string>
   <string name="cache_offline">Offline</string>
   <string name="cache_offline_refresh">Genindlæs</string>
-  <string name="cache_offline_drop">Fjern</string>
   <string name="cache_offline_store">Gem</string>
   <string name="cache_offline_manage">Administrér</string>
   <string name="cache_offline_store_in_list">Gem i liste</string>

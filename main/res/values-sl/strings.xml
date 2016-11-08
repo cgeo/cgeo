@@ -324,7 +324,6 @@
   <string name="caches_clear_offlinelogs_progress">Izbris shranjenih zapisov</string>
   <!-- caches lists -->
   <string name="list_menu_create">Ustvari nov seznam</string>
-  <string name="list_menu_drop">Izbriši trenutni seznam</string>
   <string name="list_menu_rename">Preimenuj trenutni seznam</string>
   <string name="list_menu_import">Uvozi</string>
   <string name="list_title">Izberi seznam</string>
@@ -589,7 +588,6 @@
   <!-- days remaining -->
   <string name="cache_offline">Brez povezave</string>
   <string name="cache_offline_refresh">Osveži</string>
-  <string name="cache_offline_drop">Izbriši</string>
   <string name="cache_offline_store">Shrani</string>
   <string name="cache_offline_stored">Shranjeno na napravi</string>
   <string name="cache_offline_not_ready">Ni na voljo brez povezave</string>

@@ -245,6 +245,7 @@
   <string name="err_trackable_log_not_anonymous">Anonimiškai užregistruoti %1$s per c:geo negalima. Ar norite atidaryti nustatymus ir užpildyti savo duomenis iš %2$s?</string>
   <string name="err_trackable_no_preference_activity">Atsiprašome, negalime rasti tinkamo nustatymų ekrano.</string>
   <string name="warn_discard_changes">Neišsaugoti kelio taškai atmesti!</string>
+  <string name="err_request_popup_info">c:geo nepavyko gauti slėptuvės iškylančios informacijos.</string>
   <!-- location service -->
   <string name="loc_last">Paskutinė žinoma vieta</string>
   <string name="loc_net">Tinklas</string>
@@ -364,7 +365,7 @@
   <string name="caches_filter_missing_gcvote">Rastos slėptuvės be balsų</string>
   <!-- caches lists -->
   <string name="list_menu_create">Sukurti naują sąrašą</string>
-  <string name="list_menu_drop">Išmesti dabartinį sąrašą</string>
+  <string name="list_menu_drop">Pašalinti dabartinį sąrašą</string>
   <string name="list_menu_rename">Pervadinti dabartinį sąrašą</string>
   <string name="list_menu_import">Importuoti</string>
   <string name="list_title">Pasirinkite sąraša(us)</string>
@@ -692,7 +693,7 @@
   <string name="last_day_available">liko paskutine diena</string>
   <string name="cache_offline">Išsaugota</string>
   <string name="cache_offline_refresh">Naujinti</string>
-  <string name="cache_offline_drop">Išmesti</string>
+  <string name="cache_offline_drop">Pašalinti</string>
   <string name="cache_offline_store">Saugoti</string>
   <string name="cache_offline_manage">Valdyti</string>
   <string name="cache_offline_store_in_list">Išsaugoti sąraše</string>

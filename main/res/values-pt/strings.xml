@@ -93,7 +93,6 @@
   <string name="log_posting_image">A publicar imagem…</string>
   <string name="log_posting_generic_trackable">A publicar %1$s %2$s/%3$s</string>
   <string name="log_clear">Limpar</string>
-  <string name="log_post_not_possible">Download de dados em progresso…\n Por favor tente novamente dentro de alguns segundos ou verifique sua conexão de internet.</string>
   <string name="log_post_geocode_missing">Geocodigo em falta…</string>
   <string name="log_date_future_not_allowed">Registos com datas futuras não são permitidos.</string>
   <string name="log_add">Adicionar</string>
@@ -361,7 +360,6 @@
   <string name="caches_filter_missing_gcvote">Caches encontradas não votadas</string>
   <!-- caches lists -->
   <string name="list_menu_create">Criar nova lista</string>
-  <string name="list_menu_drop">Apagar lista actual</string>
   <string name="list_menu_rename">Mudar o nome da lista corrente.</string>
   <string name="list_menu_import">Importar</string>
   <string name="list_title">Escolha uma lista</string>
@@ -702,7 +700,7 @@
   <string name="last_day_available">último dia disponível</string>
   <string name="cache_offline">Arquivo</string>
   <string name="cache_offline_refresh">Actualizar</string>
-  <string name="cache_offline_drop">Apagar</string>
+  <string name="cache_offline_drop">Remover</string>
   <string name="cache_offline_store">Arquivar</string>
   <string name="cache_offline_manage">Gerir</string>
   <string name="cache_offline_store_in_list">Armazenar na lista</string>
@@ -1124,6 +1122,12 @@
   <string name="export_gpx_to">Enviar GPX exportado para</string>
   <string name="export_confirm_title">Exportar %1$s</string>
   <string name="export_confirm_message">Para: %1$s\nNome de ficheiro: %2$s</string>
+  <string name="export_persnotes">Notas pessoais</string>
+  <string name="export_persnotes_uploading">A enviar nota pessoal %1$d</string>
+  <plurals name="export_persnotes_upload_success">
+    <item quantity="one">Nota enviada com sucesso</item>
+    <item quantity="other">%1$d notas enviadas com sucesso</item>
+  </plurals>
   <!-- GC attributes -->
   <string name="attribute_dogs_yes">Cães permitidos</string>
   <string name="attribute_dogs_no">Cães não permitidos</string>

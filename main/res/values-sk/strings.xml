@@ -245,6 +245,7 @@
   <string name="err_trackable_log_not_anonymous">V c:geo nie je možné zalogovať %1$s anonymne. Chcete otvoriť nastavenia a vyplniť prihlasovacie údaje pre %2$s?</string>
   <string name="err_trackable_no_preference_activity">Prepáčte, c:geo nedokáže nájsť príslušnú obrazovku s nastaveniami.</string>
   <string name="warn_discard_changes">Neuložené zmeny bodu trasy boli zrušené!</string>
+  <string name="err_request_popup_info">c:geo sa nepodarilo otvoriť informácie o skrýši.</string>
   <!-- location service -->
   <string name="loc_last">posledná známa</string>
   <string name="loc_net">sieť</string>
@@ -360,6 +361,7 @@
   <string name="caches_clear_offlinelogs">Vymazať offline záznamy</string>
   <string name="caches_clear_offlinelogs_message">Prajete si vymazať offline logy?</string>
   <string name="caches_clear_offlinelogs_progress">Vymazanie logov v režime offline</string>
+  <string name="caches_make_list_unique">Odstrániť tieto skrýše z iných zoznamov</string>
   <string name="caches_filter_missing_gcvote">Nájdené skrýše bez GCvote hlasov</string>
   <!-- caches lists -->
   <string name="list_menu_create">Vytvoriť nový zoznam</string>
@@ -706,7 +708,7 @@
   <string name="last_day_available">ostáva posledný deň</string>
   <string name="cache_offline">Offline</string>
   <string name="cache_offline_refresh">Obnoviť</string>
-  <string name="cache_offline_drop">Zmazať</string>
+  <string name="cache_offline_drop">Odstrániť</string>
   <string name="cache_offline_store">Uložiť</string>
   <string name="cache_offline_manage">Spravovať</string>
   <string name="cache_offline_store_in_list">Uložiť do zoznamu</string>
@@ -1133,6 +1135,7 @@
   <string name="export_confirm_title">Exportovanie %1$s</string>
   <string name="export_confirm_message">Priečinok: %1$s\nNázov súboru: %2$s</string>
   <string name="export_persnotes">Osobné poznámky</string>
+  <string name="export_persnotes_uploading">Nahrávanie osobnej poznámky %1$d</string>
   <plurals name="export_persnotes_upload_success">
     <item quantity="one">1 osobná poznámka bola úspešne nahraná</item>
     <item quantity="few">%1$d osobné poznámky boli úspešne nahrané</item>

@@ -154,7 +154,7 @@
   <string name="err_maintenance">A geocaching.com karbantartás miatt elérhetetlen. A c:geo offline módban működik elmentett ládákkal.</string>
   <string name="err_license">Nem fogadtad el a geocaching.com licencmegállapodását, így a c:geo nem tudja letölteni a ládák koordinátáit.</string>
   <string name="err_unvalidated_account">Előbb aktiválnod kell a fiókod a geocaching.com weboldalon.</string>
-  <string name="err_unpublished">A kért geoládát eltávolították.</string>
+  <string name="err_unpublished">A kért ládát törölték.</string>
   <string name="err_cache_not_found">A kért láda nem található.</string>
   <string name="err_premium_only">Ez a láda csak a geocaching.com prémium felhasználói számára hozzáférhető.</string>
   <string name="err_detail_open">Sajnáljuk, a c:geo nem tudja megnyitni a láda adatait.</string>
@@ -245,6 +245,7 @@
   <string name="err_trackable_log_not_anonymous">%1$s logolása a c:geo-ból nem végezhető el névtelenül. Meg akarod nyitni a beállításokat, hogy kitöltsd a %2$s-ra vonatkozó adatokat?</string>
   <string name="err_trackable_no_preference_activity">Sajnáljuk, de nem található megfelelő beállítási képernyő.</string>
   <string name="warn_discard_changes">Nem mentett útpontmódosítások elvetve!</string>
+  <string name="err_request_popup_info">A láda előnézeti adatainak letöltése sikertelen.</string>
   <!-- location service -->
   <string name="loc_last">Utolsó ismert</string>
   <string name="loc_net">Hálózat</string>
@@ -312,12 +313,12 @@
   <string name="caches_select_invert">Kijelölés megfordítása</string>
   <string name="caches_nearby">Közeli</string>
   <string name="caches_manage">Kezelés</string>
-  <string name="caches_remove_all">Összes eltávolítása</string>
+  <string name="caches_remove_all">Összes törlése</string>
   <plurals name="caches_remove_all_confirm">
     <item quantity="one">El akarod távolítani ezt a ládát a listáról?</item>
     <item quantity="other">El akarod távolítani az összes (%d) ládát a listáról?</item>
   </plurals>
-  <string name="caches_remove_selected">Kijelöltek eltávolítása</string>
+  <string name="caches_remove_selected">Kijelöltek törlése</string>
   <plurals name="caches_remove_selected_confirm">
     <item quantity="one">El akarod távolítani ezt a ládát a készülékedről?</item>
     <item quantity="other">El akarod távolítani a kijelölt %d ládát a készülékedről?</item>
@@ -353,7 +354,7 @@
   <string name="caches_filter_rating">Értékelve</string>
   <string name="caches_filter_own_rating">Saját értékelés</string>
   <string name="caches_filter_multi_listing">Különböző állapotú multik listázása</string>
-  <string name="caches_removing_from_history">Eltávolítás a Előzményekből…</string>
+  <string name="caches_removing_from_history">Törlés az Előzményekből…</string>
   <string name="caches_clear_offlinelogs">Offline logok törlése</string>
   <string name="caches_clear_offlinelogs_message">Szeretnéd törölni az offline logokat?</string>
   <string name="caches_clear_offlinelogs_progress">Offline logok törlése folyamatban</string>
@@ -361,7 +362,7 @@
   <string name="caches_filter_missing_gcvote">Nem értékelt ládák</string>
   <!-- caches lists -->
   <string name="list_menu_create">Új lista létrehozása</string>
-  <string name="list_menu_drop">Lista eltávolítása</string>
+  <string name="list_menu_drop">Lista törlése</string>
   <string name="list_menu_rename">Lista átnevezése</string>
   <string name="list_menu_import">Importálás</string>
   <string name="list_title">Válassz listát</string>
@@ -373,12 +374,12 @@
   <string name="list_dialog_create">Létrehozás</string>
   <string name="list_dialog_create_ok">Az új lista létrejött</string>
   <string name="list_dialog_create_err">A c:geo-nak nem sikerült az új lista létrehozása</string>
-  <string name="list_dialog_remove_title">Lista eltávolítása</string>
-  <string name="list_dialog_remove_description">Szeretnéd eltávolítani a listát? A listáról minden láda a Mentettek közé kerül.</string>
+  <string name="list_dialog_remove_title">Lista törlése</string>
+  <string name="list_dialog_remove_description">Szeretnéd törölni a listát? A listáról minden láda a Mentettek közé kerül.</string>
   <string name="list_dialog_remove_nowempty">A lista üres. El akarod távolítani a listát?</string>
-  <string name="list_dialog_remove">Eltávolítás</string>
+  <string name="list_dialog_remove">Törlés</string>
   <string name="list_dialog_remove_ok">A lista el lett távolítva</string>
-  <string name="list_dialog_remove_err">A c:geo-nak nem sikerült a lista eltávolítása</string>
+  <string name="list_dialog_remove_err">A lista törlése sikertelen</string>
   <string name="list_dialog_rename_title">Lista átnevezése</string>
   <string name="list_dialog_rename">Átnevezés</string>
   <string name="list_not_available">A lista már nem elérhető, váltás az alapértelmezett listára</string>
@@ -748,11 +749,11 @@
   <string name="cache_watchlist_not_on">Ez a láda nincs a figyelőlistádon.</string>
   <string name="cache_watchlist_not_on_extra">Ez a láda nincs a figyelőlistádon (figyelők száma: %1d).</string>
   <string name="cache_watchlist_add">Hozzáadás</string>
-  <string name="cache_watchlist_remove">Eltávolítás</string>
+  <string name="cache_watchlist_remove">Törlés</string>
   <string name="cache_favpoint_on">Ez a láda a kedvenceid egyike.</string>
   <string name="cache_favpoint_not_on">Ez a láda nem szerepel a kedvenceid között.</string>
   <string name="cache_favpoint_add">Hozzáadás</string>
-  <string name="cache_favpoint_remove">Eltávolítás</string>
+  <string name="cache_favpoint_remove">Törlés</string>
   <string name="cache_list_text">Lista:</string>
   <string name="cache_list_change">Áthelyezés</string>
   <string name="cache_list_unknown">Nem szerepel a listán</string>
@@ -779,17 +780,17 @@
   <string name="cache_dialog_offline_save_title">Offline</string>
   <string name="cache_dialog_offline_save_message">Láda mentése offline használathoz…</string>
   <string name="cache_dialog_offline_drop_title">Offline</string>
-  <string name="cache_dialog_offline_drop_message">Láda eltávolítása a memóriából…</string>
+  <string name="cache_dialog_offline_drop_message">Láda törlése a memóriából…</string>
   <string name="cache_dialog_refresh_title">Frissítés</string>
   <string name="cache_dialog_refresh_message">Láda adatainak újratöltése…</string>
   <string name="cache_dialog_watchlist_add_title">Figyelőlista</string>
   <string name="cache_dialog_watchlist_add_message">Láda hozzáadása a figyelőlistádhoz…</string>
   <string name="cache_dialog_watchlist_remove_title">Figyelőlista</string>
-  <string name="cache_dialog_watchlist_remove_message">Láda eltávolítása a figyelőlistádról…</string>
+  <string name="cache_dialog_watchlist_remove_message">Láda törlése a figyelőlistádról…</string>
   <string name="cache_dialog_favorite_add_title">Kedvenc</string>
   <string name="cache_dialog_favorite_add_message">Láda hozzáadása a kedvencekhez…</string>
   <string name="cache_dialog_favorite_remove_title">Kedvenc</string>
-  <string name="cache_dialog_favorite_remove_message">Láda eltávolítása a kedvencek közül…</string>
+  <string name="cache_dialog_favorite_remove_message">Láda törlése a kedvencek közül…</string>
   <string name="cache_menu_navigate">Navigáció</string>
   <string name="cache_menu_navigation_drive">Autós navigáció</string>
   <string name="cache_menu_navigation_drive_select_target">Láda vagy parkolóhely?</string>
@@ -864,7 +865,7 @@
   <string name="cache_log_types">Bejegyzés típusok</string>
   <string name="cache_coordinates_no">Ennek a ládának nincsenek koordinátái.</string>
   <string name="cache_clear_history">Előzmények törlése</string>
-  <string name="cache_remove_from_history">Eltávolítás az előzményekből</string>
+  <string name="cache_remove_from_history">Törlés az előzményekből</string>
   <string name="cache_license">Licenc</string>
   <string name="cache_image">Kép</string>
   <string name="cache_image_open_file">Megnyitás fájlként</string>
@@ -954,7 +955,7 @@
   <string name="waypoint_copy_of">Másolt</string>
   <string name="search_history">Előzmény</string>
   <string name="search_history_empty">Nincsenek előző célpontok</string>
-  <string name="search_remove_destination">Célpont eltávolítva</string>
+  <string name="search_remove_destination">Célpont törlése</string>
   <string name="search_clear_history">Előzmények törlése</string>
   <string name="search_history_cleared">Előzmények törölve</string>
   <string name="waypoint_coordinate_formats_plain">Egyszerű</string>
@@ -1123,7 +1124,7 @@
   <string name="export_gpx_to">Az exportált GPX küldése ide</string>
   <string name="export_confirm_title">%1$s exportálása</string>
   <string name="export_confirm_message">Mappa: %1$s\nFájl: %2$s</string>
-  <string name="export_persnotes">Személyes megjegyzés</string>
+  <string name="export_persnotes">Személyes megjegyzések</string>
   <string name="export_persnotes_uploading">%1$d személyes megjegyzés feltöltése</string>
   <plurals name="export_persnotes_upload_success">
     <item quantity="one">1 személyes megjegyzés sikeresen feltöltve</item>

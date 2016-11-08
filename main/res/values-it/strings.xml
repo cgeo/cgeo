@@ -245,6 +245,7 @@
   <string name="err_trackable_log_not_anonymous">Log di %1$s da c:geo non può essere fatto in forma anonima. Si desidera aprire le impostazioni per completare le credenziali da %2$s?</string>
   <string name="err_trackable_no_preference_activity">La pagina di configurazione del servizio associato al trackable non è disponibile.</string>
   <string name="warn_discard_changes">Le modifiche non salvate ai waypoint vengono annullate!</string>
+  <string name="err_request_popup_info">c:geo non riesce ad ottenere le informazioni popup del cache.</string>
   <!-- location service -->
   <string name="loc_last">Ultima nota</string>
   <string name="loc_net">Network</string>
@@ -694,7 +695,7 @@
   <string name="last_day_available">ultimo giorno disponibile</string>
   <string name="cache_offline">Offline</string>
   <string name="cache_offline_refresh">Aggiorna</string>
-  <string name="cache_offline_drop">Elimina</string>
+  <string name="cache_offline_drop">Rimuovi</string>
   <string name="cache_offline_store">Salva</string>
   <string name="cache_offline_manage">Organizza</string>
   <string name="cache_offline_store_in_list">Salva nella lista</string>

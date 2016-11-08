@@ -93,7 +93,6 @@
   <string name="log_posting_image">Odesílání obrázku…</string>
   <string name="log_posting_generic_trackable">Odesílání %1$s %2$s/%3$s</string>
   <string name="log_clear">Vyčistit</string>
-  <string name="log_post_not_possible">Probíhá stahování dat…\nProsím, zkus to znovu za chvíli nebo zkontroluj připojení k Internetu.</string>
   <string name="log_post_geocode_missing">Geokód chybí…</string>
   <string name="log_date_future_not_allowed">Log s nadcházejícím datem není povolen.</string>
   <string name="log_add">Přidat</string>
@@ -245,6 +244,7 @@
   <string name="err_trackable_log_not_anonymous">Zalogování %1$s v c:geu nelze provést anonymně. Chceš otevřít nastavení a vyplnit přihlašovací údaje z %2$s?</string>
   <string name="err_trackable_no_preference_activity">Omlouváme se, požadovanou obrazovku nastavení nelze nalézt.</string>
   <string name="warn_discard_changes">Neuložené změny bodu trasy byly zahozeny!</string>
+  <string name="err_request_popup_info">c:geu se nepodařilo otevřít informace o keši.</string>
   <!-- location service -->
   <string name="loc_last">Poslední známá</string>
   <string name="loc_net">Síť</string>
@@ -364,7 +364,7 @@
   <string name="caches_filter_missing_gcvote">Nalezené keše bez GCVote hlasů</string>
   <!-- caches lists -->
   <string name="list_menu_create">Vytvořit nový seznam</string>
-  <string name="list_menu_drop">Smazat aktuální seznam</string>
+  <string name="list_menu_drop">Odstranit aktuální seznam</string>
   <string name="list_menu_rename">Přejmenovat aktuální seznam</string>
   <string name="list_menu_import">Import</string>
   <string name="list_title">Vyber seznam</string>
@@ -707,7 +707,7 @@
   <string name="last_day_available">zbývá poslední den</string>
   <string name="cache_offline">Offline</string>
   <string name="cache_offline_refresh">Obnovit</string>
-  <string name="cache_offline_drop">Smazat</string>
+  <string name="cache_offline_drop">Odstranit</string>
   <string name="cache_offline_store">Uložit</string>
   <string name="cache_offline_manage">Správa</string>
   <string name="cache_offline_store_in_list">Uložit do seznamu</string>

@@ -93,7 +93,6 @@
   <string name="log_posting_image">画像を投稿中…</string>
   <string name="log_posting_generic_trackable">投稿中 %1$s %2$s/%3$s</string>
   <string name="log_clear">消去</string>
-  <string name="log_post_not_possible">データをダウンロード中…\n再度お試しください。または、インターネットの接続をご確認ください。</string>
   <string name="log_post_geocode_missing">GCコードがありません…</string>
   <string name="log_date_future_not_allowed">ログに将来の日付けを選べません</string>
   <string name="log_add">挿入</string>
@@ -345,7 +344,6 @@
   <string name="caches_clear_offlinelogs_progress">全てのオフラインログを削除中</string>
   <!-- caches lists -->
   <string name="list_menu_create">新しいリストを作成</string>
-  <string name="list_menu_drop">このリストを消去</string>
   <string name="list_menu_rename">このリスト名を変更</string>
   <string name="list_menu_import">インポート</string>
   <string name="list_title">リストの選択</string>
@@ -613,7 +611,6 @@
   <!-- days remaining -->
   <string name="cache_offline">オフライン</string>
   <string name="cache_offline_refresh">更新</string>
-  <string name="cache_offline_drop">削除</string>
   <string name="cache_offline_store">保存</string>
   <string name="cache_offline_stored">デバイスに保存済み</string>
   <string name="cache_offline_not_ready">オフライン用に保存されていません</string>

@@ -3,7 +3,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
   <string name="app_name">c:geo</string>
   <!-- basics -->
-  <string name="cache">Catxé</string>
+  <string name="cache">geoamagatall</string>
   <string name="detail">Detalls</string>
   <string name="search">Cerca</string>
   <string name="helpers">Aplicacions útils</string>
@@ -93,7 +93,7 @@
   <string name="log_posting_image">Publicant imatge…</string>
   <string name="log_posting_generic_trackable">Publicant %1$s%2$s/%3$s</string>
   <string name="log_clear">Esborra</string>
-  <string name="log_post_not_possible">Descàrrega de dades en procés…\nProva una altra vegada en uns segons o comprova la connexió a internet.</string>
+  <string name="log_post_not_possible">Descàrrega de dades en procés…\nProva-ho una altra vegada en uns segons o comprova la connexió a internet.</string>
   <string name="log_post_geocode_missing">Falta el geocodi…</string>
   <string name="log_date_future_not_allowed">No estan permesos els registres amb data futura.</string>
   <string name="log_add">Afegeix</string>
@@ -229,7 +229,7 @@
   <string name="warn_rendertheme_missing">No s\'ha trobat l\'esquema de colors del mapa.</string>
   <string name="warn_pocket_query_select">No hi ha cap pocket query seleccionada.</string>
   <string name="warn_no_pocket_query_found">No s\'ha trobat cap pocket query en línia.</string>
-  <string name="err_read_pocket_query_list">Error llegint la llista de pocket querys.</string>
+  <string name="err_read_pocket_query_list">Error llegint la llista de consultes a mida.</string>
   <string name="info_log_posted">El c:geo ha tramès el registre correctament.</string>
   <string name="info_log_saved">El c:geo ha desat correctament el registre.</string>
   <string name="info_log_post_failed">Ha fallat la publicació del registre.</string>
@@ -245,6 +245,7 @@
   <string name="err_trackable_log_not_anonymous">Entreu %1$s des de c:geo no es pot fer anònimament. Voleu obrir la configuració per omplir les vostres credencials de %2$s?</string>
   <string name="err_trackable_no_preference_activity">No es troba la pantalla indicada de preferència.</string>
   <string name="warn_discard_changes">Descartat els canvis del punt de referència!</string>
+  <string name="err_request_popup_info">El c:geo no ha pogut obtenir la informació emergent del catxé.</string>
   <!-- location service -->
   <string name="loc_last">Última coneguda</string>
   <string name="loc_net">Xarxa</string>
@@ -361,7 +362,7 @@
   <string name="caches_filter_missing_gcvote">Cerca catxés no votats</string>
   <!-- caches lists -->
   <string name="list_menu_create">Crea una llista nova</string>
-  <string name="list_menu_drop">Elimina la llista actual</string>
+  <string name="list_menu_drop">Esborra la llista actual</string>
   <string name="list_menu_rename">Reanomena la llista actual</string>
   <string name="list_menu_import">Importa</string>
   <string name="list_title">Trieu una llista</string>
@@ -1123,6 +1124,10 @@
   <string name="export_confirm_message">Camí: %1$s\n Nom arxiu: %2$s</string>
   <string name="export_persnotes">Notes personals</string>
   <string name="export_persnotes_uploading">S\'està pujant la nota personal %1$d</string>
+  <plurals name="export_persnotes_upload_success">
+    <item quantity="one">S\'ha pujat una nota correctament</item>
+    <item quantity="other">S\'han pujat %1$d notes correctament</item>
+  </plurals>
   <!-- GC attributes -->
   <string name="attribute_dogs_yes">Els gossos hi són admesos</string>
   <string name="attribute_dogs_no">No s\'admeten els gossos</string>

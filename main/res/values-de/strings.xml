@@ -245,6 +245,7 @@
   <string name="err_trackable_log_not_anonymous">Loggen von %1$s aus c:geo kann nicht anonym erfolgen. Möchtest du die Einstellungen öffnen, um deine Anmeldeinformation für %2$s einzugeben?</string>
   <string name="err_trackable_no_preference_activity">Tut mir leid, es kann kein geeignetes Einstellungs-Menü gefunden werden.</string>
   <string name="warn_discard_changes">Wegpunktänderungen verworfen!</string>
+  <string name="err_request_popup_info">c:geo konnte die Cache-Popup Informationen nicht herunterladen.</string>
   <!-- location service -->
   <string name="loc_last">Letzte Position</string>
   <string name="loc_net">Netzwerk</string>
@@ -702,7 +703,7 @@
   <string name="last_day_available">letzter Tag verfügbar</string>
   <string name="cache_offline">Offline</string>
   <string name="cache_offline_refresh">Aktualisieren</string>
-  <string name="cache_offline_drop">Löschen</string>
+  <string name="cache_offline_drop">Entfernen</string>
   <string name="cache_offline_store">Speichern</string>
   <string name="cache_offline_manage">Verwalten</string>
   <string name="cache_offline_store_in_list">In Liste speichern</string>

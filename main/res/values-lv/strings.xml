@@ -93,7 +93,6 @@
   <string name="log_posting_image">Publicē attēlu…</string>
   <string name="log_posting_generic_trackable">Publicē %1$s %2$s/%3$s</string>
   <string name="log_clear">Notīrīt</string>
-  <string name="log_post_not_possible">Datu lejupielādēšana ir procesā…\nLūdzu mēģini vēlreiz pēc dažām sekundēm vai pārbaudi interneta savienojumu.</string>
   <string name="log_post_geocode_missing">Pietrūkst geo kods…</string>
   <string name="log_date_future_not_allowed">Nākotnē veikti ieraksti nav atļauti.</string>
   <string name="log_add">Pievienot</string>
@@ -363,7 +362,6 @@
   <string name="caches_clear_offlinelogs_progress">Bezsaistes pierakstu dzēšana</string>
   <!-- caches lists -->
   <string name="list_menu_create">Izveidot jaunu sarakstu</string>
-  <string name="list_menu_drop">Noņemt pašreizējo sarakstu</string>
   <string name="list_menu_rename">Pārdēvēt pašreizējo sarakstu</string>
   <string name="list_menu_import">Importēt</string>
   <string name="list_title">Izvēlēties sarakstu</string>
@@ -668,7 +666,6 @@
   <string name="last_day_available">pieejama pēdējo dienu</string>
   <string name="cache_offline">Bezsaistes režīmā</string>
   <string name="cache_offline_refresh">Atjaunot</string>
-  <string name="cache_offline_drop">Izmest</string>
   <string name="cache_offline_store">Saglabāt</string>
   <string name="cache_offline_stored">Saglabāts bezsaistē tavā ierīcē</string>
   <string name="cache_offline_not_ready">Nav pieejams bezsaistē</string>

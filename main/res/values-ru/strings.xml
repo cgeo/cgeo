@@ -92,7 +92,6 @@
   <string name="log_posting_image">Отправка изображения…</string>
   <string name="log_posting_generic_trackable">Отправка %1$s %2$s/%3$s</string>
   <string name="log_clear">Очистить</string>
-  <string name="log_post_not_possible">Идет загрузка данных…\nПожалуйста, попробуйте снова через несколько секунд или проверьте подключение к интернету.</string>
   <string name="log_post_geocode_missing">Отсутствует геокод…</string>
   <string name="log_date_future_not_allowed">Невозможно отправить запись из будущего.</string>
   <string name="log_add">Добавить</string>
@@ -361,7 +360,6 @@
   <string name="caches_clear_offlinelogs_progress">Очистка сохраненных записей</string>
   <!-- caches lists -->
   <string name="list_menu_create">Создать новый список</string>
-  <string name="list_menu_drop">Удалить текущий список</string>
   <string name="list_menu_rename">Переименовать текущий список</string>
   <string name="list_menu_import">Импортировать</string>
   <string name="list_title">Выбрать список</string>
@@ -689,7 +687,6 @@
   <string name="last_day_available">остался один день</string>
   <string name="cache_offline">Оффлайн</string>
   <string name="cache_offline_refresh">Обновить</string>
-  <string name="cache_offline_drop">Удалить</string>
   <string name="cache_offline_store">Сохранить</string>
   <string name="cache_offline_manage">Управление</string>
   <string name="cache_offline_store_in_list">Сохранить в список</string>

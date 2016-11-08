@@ -244,6 +244,7 @@
   <string name="err_trackable_log_not_anonymous">c:geo에서 익명으로 %1$s를 로그할 수 없습니다. 설정을 열어 %2$s 의 계정정보를 입력하시겠습니까?</string>
   <string name="err_trackable_no_preference_activity">죄송합니다만, 적절한 해당 서비스 설정화면이 없습니다.</string>
   <string name="warn_discard_changes">저장되지 않은 웨이포인트 정보가 삭제됩니다!</string>
+  <string name="err_request_popup_info">캐시 팝업 정보를 가져오지 못했습니다.</string>
   <!-- location service -->
   <string name="loc_last">마지막 알려진</string>
   <string name="loc_net">네트워크</string>
@@ -357,7 +358,7 @@
   <string name="caches_filter_missing_gcvote">투표하지 않은 캐시 찾기</string>
   <!-- caches lists -->
   <string name="list_menu_create">새 목록 만들기</string>
-  <string name="list_menu_drop">현재 목록 없애기</string>
+  <string name="list_menu_drop">현재 목록 제거</string>
   <string name="list_menu_rename">현재 목록 이름바꾸기</string>
   <string name="list_menu_import">가져오기</string>
   <string name="list_title">목록 선택</string>
@@ -681,7 +682,6 @@
   <string name="last_day_available">오늘만 가능합니다.</string>
   <string name="cache_offline">오프라인</string>
   <string name="cache_offline_refresh">새로 고침</string>
-  <string name="cache_offline_drop">버리기</string>
   <string name="cache_offline_store">저장</string>
   <string name="cache_offline_manage">관리</string>
   <string name="cache_offline_store_in_list">목록에 저장하기</string>

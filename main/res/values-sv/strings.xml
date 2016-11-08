@@ -361,7 +361,7 @@
   <string name="caches_filter_missing_gcvote">Hittade cacher utan röster</string>
   <!-- caches lists -->
   <string name="list_menu_create">Skapa en ny lista</string>
-  <string name="list_menu_drop">Ta bort den här listan</string>
+  <string name="list_menu_drop">Ta bort aktuell lista</string>
   <string name="list_menu_rename">Byt namn på den här listan</string>
   <string name="list_menu_import">Importera</string>
   <string name="list_title">Välj en lista</string>
@@ -702,7 +702,6 @@
   <string name="last_day_available">sista dagen tillgänglig</string>
   <string name="cache_offline">Offline</string>
   <string name="cache_offline_refresh">Uppdatera</string>
-  <string name="cache_offline_drop">Radera</string>
   <string name="cache_offline_store">Spara</string>
   <string name="cache_offline_manage">Hantera</string>
   <string name="cache_offline_store_in_list">Lagra i lista</string>

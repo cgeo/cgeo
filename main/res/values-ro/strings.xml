@@ -93,7 +93,7 @@
   <string name="log_posting_image">Se publică imaginea…</string>
   <string name="log_posting_generic_trackable">Se publică %1$s %2$s/%3$s</string>
   <string name="log_clear">Şterge</string>
-  <string name="log_post_not_possible">Descărcare date în curs…\nTe rog încearcă din nou peste câteva secunde sau verifică-ţi conexiunea la internet.</string>
+  <string name="log_post_not_possible">Descărcare în curs…\nTe rog încearcă din nou peste câteva secunde sau verifică-ţi conexiunea la internet.</string>
   <string name="log_post_geocode_missing">Lipsă Geocod…</string>
   <string name="log_date_future_not_allowed">Nu sunt permise însemnări datate în viitor.</string>
   <string name="log_add">Adaugă</string>
@@ -245,6 +245,7 @@
   <string name="err_trackable_log_not_anonymous">Prin intermediul c:geo nu se poate publica anonim însemnarea %1$s. Vrei să mergi la setări şi să-ţi configurezi contul la %2$s?</string>
   <string name="err_trackable_no_preference_activity">Ecranul de configurare adecvat nu a fost găsit.</string>
   <string name="warn_discard_changes">Modificările nesalvate vor fi anulate!</string>
+  <string name="err_request_popup_info">c:geo nu a reuşit să obţină informaţiile minime despre geocutie.</string>
   <!-- location service -->
   <string name="loc_last">Ultima poziţie cunoscută</string>
   <string name="loc_net">Reţea</string>

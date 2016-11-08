@@ -93,7 +93,7 @@
   <string name="log_posting_image">Posten afbeelding…</string>
   <string name="log_posting_generic_trackable">Posten %1$s %2$s/%3$s</string>
   <string name="log_clear">Wissen</string>
-  <string name="log_post_not_possible">Bezig met downloaden van gegevens…\nProbeer a.u.b. over enkele seconden nogmaals of controleer de internetverbinding.</string>
+  <string name="log_post_not_possible">Bezig met downloaden van gegevens…\nProbeer over enkele seconden nogmaals of controleer de internetverbinding.</string>
   <string name="log_post_geocode_missing">Geocode ontbreekt…</string>
   <string name="log_date_future_not_allowed">Log datums in de toekomst zijn niet toegestaan.</string>
   <string name="log_add">Toevoegen</string>
@@ -245,6 +245,7 @@
   <string name="err_trackable_log_not_anonymous">Loggen van %1$s in c:geo kan niet anoniem worden gedaan. Wilt u de instellingen openen om uw referenties van %2$s in te vullen?</string>
   <string name="err_trackable_no_preference_activity">Sorry, kan geen geschikt voorkeuren scherm vinden.</string>
   <string name="warn_discard_changes">Niet opgeslagen waypoint wijzigingen werden verwijderd!</string>
+  <string name="err_request_popup_info">Het is c:geo niet gelukt om de cache popup info te verkrijgen.</string>
   <!-- location service -->
   <string name="loc_last">Laatst bekende</string>
   <string name="loc_net">Netwerk</string>
@@ -702,7 +703,6 @@
   <string name="last_day_available">laatste dag beschikbaar</string>
   <string name="cache_offline">Offline</string>
   <string name="cache_offline_refresh">Verversen</string>
-  <string name="cache_offline_drop">Laten vervallen</string>
   <string name="cache_offline_store">Opslaan</string>
   <string name="cache_offline_manage">Beheren</string>
   <string name="cache_offline_store_in_list">Opslaan in lijst</string>

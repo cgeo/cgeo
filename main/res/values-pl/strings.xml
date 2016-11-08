@@ -93,7 +93,7 @@
   <string name="log_posting_image">Wysyłanie obrazka…</string>
   <string name="log_posting_generic_trackable">Wysyłanie %1$s %2$s/%3$s</string>
   <string name="log_clear">Wyczyść</string>
-  <string name="log_post_not_possible">Pobieranie danych w toku…\nProszę spróbować za parę sekund albo sprawdzić połączenie z internetem.</string>
+  <string name="log_post_not_possible">Pobieranie danych w toku…\nProszę spróbować ponownie za parę sekund albo sprawdzić połączenie z internetem.</string>
   <string name="log_post_geocode_missing">Brak kodu GC skrzynki…</string>
   <string name="log_date_future_not_allowed">Wpisy z przyszłą datą nie są dozwolone.</string>
   <string name="log_add">Dodaj</string>
@@ -245,6 +245,7 @@
   <string name="err_trackable_log_not_anonymous">Zalogowanie %1$s poprzez c:geo nie może być wykonane anonimowo. Czy chcesz otworzyć ustawienia, aby uzupełnić swoje dane do %2$s?</string>
   <string name="err_trackable_no_preference_activity">Przepraszamy, brak odpowiedniego ekranu preferencji.</string>
   <string name="warn_discard_changes">Niezapisane zmiany punktu nawigacji zostały odrzucone!</string>
+  <string name="err_request_popup_info">c:geo nie mogło wyświetlić wyskakującego okienka z informacjami o skrzynce.</string>
   <!-- location service -->
   <string name="loc_last">Ostatnia pozycja</string>
   <string name="loc_net">Sieć</string>

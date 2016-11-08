@@ -245,6 +245,7 @@
   <string name="err_trackable_log_not_anonymous">No puedes registrar %1$s desde c:geo de manera anónima. ¿Quieres abrir los ajustes para rellenar tu identificación desde %2$s?</string>
   <string name="err_trackable_no_preference_activity">Disculpa, no se ha encontrado una pantalla de preferencia adecuada.</string>
   <string name="warn_discard_changes">¡Cambios no guardados en el waypoint descartados!</string>
+  <string name="err_request_popup_info">c:geo no ha podido obtener la información emergente del caché.</string>
   <!-- location service -->
   <string name="loc_last">Última conocida</string>
   <string name="loc_net">Red</string>
@@ -690,7 +691,7 @@
   <string name="last_day_available">último día disponible</string>
   <string name="cache_offline">Guardado</string>
   <string name="cache_offline_refresh">Actualizar</string>
-  <string name="cache_offline_drop">Tirar</string>
+  <string name="cache_offline_drop">Eliminar</string>
   <string name="cache_offline_store">Guardar</string>
   <string name="cache_offline_manage">Gestionar</string>
   <string name="cache_offline_store_in_list">Guardar en lista</string>
