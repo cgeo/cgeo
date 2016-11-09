@@ -45,8 +45,10 @@ import android.support.annotation.Nullable;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -60,7 +62,12 @@ public class Settings {
      * On opening a map, we limit the _initial_ zoom. The user can still zoom out afterwards.
      */
     private static final int INITIAL_MAP_ZOOM_LIMIT = 16;
-    private static final char HISTORY_SEPARATOR = ',';
+
+    /**
+     * Separator char for preferences with multiple elements.
+     */
+    private static final char SEPARATOR_CHAR = ',';
+
     private static final int SHOW_WP_THRESHOLD_DEFAULT = 10;
     public static final int SHOW_WP_THRESHOLD_MAX = 50;
     private static final int MAP_SOURCE_DEFAULT = GoogleMapProvider.GOOGLE_MAP_ID.hashCode();
@@ -249,6 +256,10 @@ public class Settings {
         return sharedPrefs.getString(getKey(prefKeyId), defaultValue);
     }
 
+    private static List<String> getStringList(final int prefKeyId, final String defaultValue) {
+        return Arrays.asList(StringUtils.split(getString(prefKeyId, defaultValue), SEPARATOR_CHAR));
+    }
+
     private static int getInt(final int prefKeyId, final int defaultValue) {
         return sharedPrefs.getInt(getKey(prefKeyId), defaultValue);
     }
@@ -270,6 +281,11 @@ public class Settings {
         edit.putString(getKey(prefKeyId), value);
         edit.apply();
     }
+
+    private static void putStringList(final int prefKeyId, final Iterable<?> elements) {
+        putString(prefKeyId, StringUtils.join(elements, SEPARATOR_CHAR));
+    }
+
 
     protected static void putBoolean(final int prefKeyId, final boolean value) {
         final SharedPreferences.Editor edit = sharedPrefs.edit();
@@ -473,6 +489,20 @@ public class Settings {
 
     public static void saveLastList(final int listId) {
         putInt(R.string.pref_lastusedlist, listId);
+    }
+
+    public static Set<Integer> getLastSelectedLists() {
+        final Set<Integer> lastSelectedLists = new HashSet<>();
+        for (final String lastSelectedListString : getStringList(R.string.pref_last_selected_lists, StringUtils.EMPTY)) {
+            try {
+                lastSelectedLists.add(Integer.valueOf(lastSelectedListString));
+            } catch (NumberFormatException ignored) { }
+        }
+        return lastSelectedLists;
+    }
+
+    public static void saveLastSelectedLists(final Set<Integer> lastSelectedLists) {
+        putStringList(R.string.pref_last_selected_lists, lastSelectedLists);
     }
 
     public static void setWebNameCode(final String name, final String code) {
@@ -1205,7 +1235,7 @@ public class Settings {
     }
 
     public static List<String> getLastOpenedCaches() {
-        final List<String> history = Arrays.asList(StringUtils.split(getString(R.string.pref_caches_history, StringUtils.EMPTY), HISTORY_SEPARATOR));
+        final List<String> history = getStringList(R.string.pref_caches_history, StringUtils.EMPTY);
         return history.subList(0, Math.min(HISTORY_SIZE, history.size()));
     }
 
@@ -1214,7 +1244,7 @@ public class Settings {
         // bring entry to front, if it already existed
         history.remove(geocode);
         history.add(0, geocode);
-        putString(R.string.pref_caches_history, StringUtils.join(history, HISTORY_SEPARATOR));
+        putStringList(R.string.pref_caches_history, history);
     }
 
     public static boolean useNewMapAsDefault() {
