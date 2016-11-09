@@ -3,6 +3,7 @@ package cgeo.geocaching.list;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.functions.Action1;
@@ -84,16 +85,24 @@ public final class StoredList extends AbstractList {
         }
 
         public void promptForMultiListSelection(final int titleId, @NonNull final Action1<Set<Integer>> runAfterwards, final boolean onlyConcreteLists, final Set<Integer> exceptListIds, final Set<Integer> currentListIds, @NonNull final ListNameMemento listNameMemento) {
-            final List<AbstractList> lists = getMenuLists(onlyConcreteLists, exceptListIds, currentListIds);
+            final Set<Integer> selectedListIds = new HashSet<>(currentListIds);
+            if (currentListIds.isEmpty()) {
+                selectedListIds.addAll(Settings.getLastSelectedLists());
+            }
+            final List<AbstractList> lists = getMenuLists(onlyConcreteLists, exceptListIds, selectedListIds);
 
             final CharSequence[] listTitles = new CharSequence[lists.size()];
             final boolean[] selectedItems = new boolean[lists.size()];
+            final Set<Integer> allListIds = new HashSet<>(lists.size());
             for (int i = 0 ; i < lists.size() ; i++) {
                 final AbstractList list = lists.get(i);
                 listTitles[i] = list.getTitleAndCount();
-                selectedItems[i] = currentListIds.contains(list.id);
+                selectedItems[i] = selectedListIds.contains(list.id);
+                allListIds.add(list.id);
             }
-            final Set<Integer> selectedListIds = new HashSet<>(currentListIds);
+            // remove from selected which are not available anymore
+            selectedListIds.retainAll(allListIds);
+
 
             final Activity activity = activityRef.get();
             final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
@@ -117,6 +126,7 @@ public final class StoredList extends AbstractList {
                                 // create new list on the fly
                                 promptForListCreation(runAfterwards, selectedListIds, listNameMemento.getTerm());
                             } else {
+                                Settings.saveLastSelectedLists(selectedListIds);
                                 runAfterwards.call(selectedListIds);
                             }
                             dialog.cancel();
@@ -262,6 +272,7 @@ public final class StoredList extends AbstractList {
                     if (newId >= DataStore.customListIdOffset) {
                         selectedLists.remove(PseudoList.NEW_LIST.id);
                         selectedLists.add(newId);
+                        Settings.saveLastSelectedLists(selectedLists);
                         runAfterwards.call(selectedLists);
                     } else {
                         ActivityMixin.showToast(activity, res.getString(R.string.list_dialog_create_err));
