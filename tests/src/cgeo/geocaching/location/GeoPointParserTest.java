@@ -139,4 +139,18 @@ public class GeoPointParserTest extends TestCase {
         assertGeopointEquals(GeopointParser.parse("47.648883  122.348067\u00a0"), GeopointParser.parse("N 47° 38.933 E 122° 20.884"), 1e-4f);
     }
 
+    public static void test6090() {
+        // Issue #6090
+        final Geopoint ref = new Geopoint(12.576117, -1.390933);
+
+        final Geopoint gp1 = GeopointParser.parse("N12 34. 567\nW001 23.456");
+        assertGeopointEquals(gp1, ref, 1e-4f);
+
+        final Geopoint gp2 = GeopointParser.parse("N12 34.567\nW001 23. 456");
+        assertGeopointEquals(gp2, ref, 1e-4f);
+
+        final Geopoint gp3 = GeopointParser.parse("N12 34. 567\nW001 23. 456");
+        assertGeopointEquals(gp3, ref, 1e-4f);
+    }
+
 }
