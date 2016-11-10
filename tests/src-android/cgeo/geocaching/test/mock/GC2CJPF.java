@@ -5,11 +5,13 @@ import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.log.LogType;
+import cgeo.geocaching.models.Image;
 import cgeo.geocaching.settings.Settings;
 
 import android.support.annotation.NonNull;
 
 import java.text.ParseException;
+import java.util.Collections;
 import java.util.Date;
 import java.util.EnumMap;
 import java.util.List;
@@ -175,4 +177,9 @@ public class GC2CJPF extends MockedCache {
         return 7;
     }
 
+    @NonNull
+    @Override
+    public List<Image> getSpoilers() {
+        return Collections.singletonList(new Image.Builder().setUrl("http://www.blafoo.de/images/Kinderwald.jpg").setTitle("Cache listing background image").build());
+    }
 }

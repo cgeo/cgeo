@@ -5,11 +5,13 @@ import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.log.LogType;
+import cgeo.geocaching.models.Image;
 import cgeo.geocaching.settings.Settings;
 
 import android.support.annotation.NonNull;
 
 import java.text.ParseException;
+import java.util.Collections;
 import java.util.Date;
 import java.util.EnumMap;
 import java.util.List;
@@ -145,6 +147,12 @@ public class GC3XX5J extends MockedCache {
     @Override
     public boolean isFound() {
         return Settings.getUserName().equals("mucek4");
+    }
+
+    @NonNull
+    @Override
+    public List<Image> getSpoilers() {
+        return Collections.singletonList(new Image.Builder().setUrl("https://lh6.googleusercontent.com/-PoDn9PmtYmg/UGnOZLEQboI/AAAAAAAAAHM/hBXxerWnSdA/s254/lek-verovskova.jpg").setTitle("Cache listing background image").build());
     }
 
 }

@@ -260,4 +260,20 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
         assertThat(spoiler.getTitle()).isEqualTo("SPOILER");
         assertThat(spoiler.getDescription()).isEqualTo("Suche diese Schraube");
     }
+
+    public void testSpoilerBackgroundImage() {
+        final Geocache cache = parseCache(R.raw.gc45w92);
+        assertThat(cache).isNotNull();
+        final List<Image> spoilers = cache.getSpoilers();
+        // We know that the background image has been parsed last
+        final Image spoiler = spoilers.get(spoilers.size() - 1);
+        assertThat(spoiler.getUrl()).isEqualTo("https://www.dropbox.com/s/1kakwnpny8698hm/QR_Hintergrund.jpg?dl=1");
+    }
+
+    public void testFullScaleImageUrl() {
+        assertThat(GCParser.fullScaleImageUrl("https://www.dropbox.com/s/1kakwnpny8698hm/QR_Hintergrund.jpg?dl=1"))
+                .isEqualTo("https://www.dropbox.com/s/1kakwnpny8698hm/QR_Hintergrund.jpg?dl=1");
+        assertThat(GCParser.fullScaleImageUrl("http://imgcdn.geocaching.com/track/display/33cee358-f692-4f90-ace0-80c5a2c60a5c.jpg"))
+                .isEqualTo("http://imgcdn.geocaching.com/track/33cee358-f692-4f90-ace0-80c5a2c60a5c.jpg");
+    }
 }
