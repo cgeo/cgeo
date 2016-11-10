@@ -604,9 +604,7 @@ public final class GCParser {
             final MatcherWrapper matcherSpoilersInside = new MatcherWrapper(GCConstants.PATTERN_SPOILER_IMAGE, page);
 
             while (matcherSpoilersInside.find()) {
-                // the original spoiler URL (include .../display/... contains a low-resolution image
-                // if we shorten the URL we get the original-resolution image
-                final String url = matcherSpoilersInside.group(1).replace("/display", "");
+                final String url = fullScaleImageUrl(matcherSpoilersInside.group(1));
 
                 String title = null;
                 if (matcherSpoilersInside.group(2) != null) {
@@ -623,6 +621,22 @@ public final class GCParser {
         } catch (final RuntimeException e) {
             // failed to parse cache spoilers
             Log.w("GCParser.parseCache: Failed to parse cache spoilers", e);
+        }
+
+        // background image, to be added only if the image is not already present in the cache listing
+        final MatcherWrapper matcherBackgroundImage = new MatcherWrapper(GCConstants.PATTERN_BACKGROUND_IMAGE, page);
+        if (matcherBackgroundImage.find()) {
+            final String url = fullScaleImageUrl(matcherBackgroundImage.group(1));
+            boolean present = false;
+            for (final Image image : cache.getSpoilers()) {
+                if (StringUtils.equals(image.getUrl(), url)) {
+                    present = true;
+                    break;
+                }
+            }
+            if (!present) {
+                cache.addSpoiler(new Image.Builder().setUrl(url).setTitle(CgeoApplication.getInstance().getString(R.string.cache_image_background)).build());
+            }
         }
 
         // cache inventory
@@ -787,6 +801,14 @@ public final class GCParser {
     @Nullable
     private static String getNumberString(final String numberWithPunctuation) {
         return StringUtils.replaceChars(numberWithPunctuation, ".,", "");
+    }
+
+    @NonNull
+    static String fullScaleImageUrl(@NonNull final String imageUrl) {
+        // For images from geocaching.com: the original spoiler URL
+        // (include .../display/... contains a low-resolution image
+        // if we shorten the URL we get the original-resolution image
+        return GCConstants.PATTERN_GC_HOSTED_IMAGE.matcher(imageUrl).find() ? imageUrl.replace("/display", "") : imageUrl;
     }
 
     @Nullable
