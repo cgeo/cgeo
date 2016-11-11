@@ -110,6 +110,11 @@ public final class StaticMapsProvider {
                         }
                         return Completable.complete();
                     }
+                    // Record warning in log, see https://developers.google.com/maps/documentation/static-maps/error-messages#warnings
+                    final String warning = httpResponse.header("X-Staticmap-API-Warning");
+                    if (warning != null) {
+                        Log.w("Static maps download API warning: " + warning);
+                    }
                     final File file = getMapFile(geocode, prefix, true);
                     if (LocalStorage.saveEntityToFile(httpResponse, file)) {
                         // Delete image if it has no contents
