@@ -85,7 +85,9 @@ public class Settings {
             StringUtils.equals(Build.MODEL, "bq Aquaris 5") || // bq Aquaris 5
             StringUtils.equals(Build.MODEL, "A1-810")       || // Unknown A1-810
             StringUtils.equals(Build.MODEL, "GT-I9195")     || // Samsung S4 mini
-            StringUtils.equals(Build.MODEL, "GT-I8200N");      // Samsung S3 mini
+            StringUtils.equals(Build.MODEL, "GT-I8200N")    || // Samsung S3 mini
+            StringUtils.equals(Build.MODEL, "Q800")         || // XOLO Q800
+            StringUtils.equals(Build.MODEL, "P5_Quad");        // Allview P5 Quad
 
     private static final String PHONE_MODEL_AND_SDK = Build.MODEL + "/" + Build.VERSION.SDK_INT;
 
