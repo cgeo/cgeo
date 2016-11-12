@@ -13,7 +13,7 @@
   <string name="settings_titlebar">c:geo 설정</string>
   <!-- caches -->
   <string name="all_types">모든 형식의 캐시</string>
-  <string name="traditional">트레디셔널 캐시</string>
+  <string name="traditional">일반 캐시</string>
   <string name="multi">멀티 캐시</string>
   <string name="mystery">미스테리 캐시</string>
   <string name="letterbox">레터박스 하이브리드</string>
@@ -34,7 +34,7 @@
   <!-- cache sizes -->
   <string name="cache_size_micro">마이크로</string>
   <string name="cache_size_small">소형</string>
-  <string name="cache_size_regular">일반</string>
+  <string name="cache_size_regular">표준</string>
   <string name="cache_size_large">대형</string>
   <string name="cache_size_other">기타</string>
   <string name="cache_size_virtual">버추얼</string>
@@ -248,7 +248,7 @@
   <!-- location service -->
   <string name="loc_last">마지막 알려진</string>
   <string name="loc_net">네트워크</string>
-  <string name="loc_fused">합성된</string>
+  <string name="loc_fused">합성 좌표</string>
   <string name="loc_low_power">저전력</string>
   <string name="loc_home">기본 위치</string>
   <string name="loc_gps">GPS</string>
@@ -268,7 +268,7 @@
   <string name="menu_scan_description">QR코드에 인쇄된 지오코드를 스캔할 수 있으나 적절한 앱이 없습니다. 구글플레이에서 설치하시겠습니까?</string>
   <!-- main screen -->
   <string name="live_map_button">라이브 지도</string>
-  <string name="caches_nearby_button">인근</string>
+  <string name="caches_nearby_button">인근 캐시</string>
   <string name="advanced_search_button">검색</string>
   <string name="stored_caches_button">저장된 캐시</string>
   <string name="any_button">위치 이동</string>
@@ -309,7 +309,7 @@
   <string name="caches_select_mode">선택 모드</string>
   <string name="caches_select_mode_exit">선택 모드 나오기</string>
   <string name="caches_select_invert">선택 반전</string>
-  <string name="caches_nearby">인근</string>
+  <string name="caches_nearby">인근 캐시</string>
   <string name="caches_manage">관리</string>
   <string name="caches_remove_all">모두 제거</string>
   <plurals name="caches_remove_all_confirm">
@@ -397,7 +397,7 @@
   <!-- settings -->
   <string name="settings_title_open_settings">설정 열기?</string>
   <string name="settings_title_services">서비스</string>
-  <string name="settings_summary_services">기타 서비스에 대한 계정정보 및 접근권한 설정하기</string>
+  <string name="settings_summary_services">지오캐싱 서비스에 대한 계정정보 및 접근권한 설정하기</string>
   <string name="settings_title_appearance">외관 디자인</string>
   <string name="settings_summary_appearance">단위, 언어 및 앱 색상 설정하기</string>
   <string name="settings_title_cachedetails">캐시 상세정보</string>
@@ -490,17 +490,17 @@
   <string name="init_ratingwanted">GCvote 평점</string>
   <string name="init_summary_ratingwanted">GCvote.com으로부터 캐시 평점 불러오기</string>
   <string name="init_friends_and_own_logs_wanted">친구/나의 로그 보기</string>
-  <string name="init_summary_friends_and_own_logs_wanted">친구와 내 로그를 별도의 페이지에 표시</string>
+  <string name="init_summary_friends_and_own_logs_wanted">친구와 내 로그를 별도의 페이지에 표시합니다.</string>
   <string name="init_openlastdetailspage">마지막 상세내용 페이지</string>
-  <string name="init_summary_openlastdetailspage">마지막으로 사용된 페이지의 상세내용 열기</string>
+  <string name="init_summary_openlastdetailspage">마지막으로 사용된 상세내용을 엽니다.</string>
   <string name="init_skin">간단한 스킨</string>
-  <string name="init_summary_skin">간단한 스킨 사용하기(재시작됨)</string>
+  <string name="init_summary_skin">간단한 스킨을 사용합니다.(재시작 필요)</string>
   <string name="init_address">주소 보기</string>
-  <string name="init_summary_address">주 화면에 좌표 대신 주소 보기</string>
+  <string name="init_summary_address">주 화면에 좌표 대신 주소를 표시합니다.</string>
   <string name="init_captcha">CAPTCHA 보기</string>
   <string name="init_summary_captcha">필요시 CAPTCHA 표시하기(일반 회원)</string>
   <string name="init_useenglish">영어를 사용하기</string>
-  <string name="init_summary_useenglish">c:geo을 영어로만 사용하기 (재시작)</string>
+  <string name="init_summary_useenglish">C:geo을 영어로만 사용합니다. (재시작 필요)</string>
   <string name="init_exclude">자신의 캐시와 찾은 캐시 제외</string>
   <string name="init_summary_exclude">자신이 숨긴 캐시와 이미 찾은 캐시를 제외합니다.</string>
   <string name="init_showwaypoints">웨이포인트 보기</string>
@@ -508,9 +508,9 @@
   <string name="init_disabled">비활성캐시 제외하기</string>
   <string name="init_summary_disabled">일시정지된 캐시 숨기기</string>
   <string name="init_offline">정적 지도</string>
-  <string name="init_summary_offline">오프라인용으로 정적지도를 저장하기</string>
+  <string name="init_summary_offline">오프라인용으로 정적지도를 저장합니다.</string>
   <string name="init_offline_wp">정적 지도(WP)</string>
-  <string name="init_summary_offline_wp">오프라인용으로 웨이포인트 정적 지도를 저장하기</string>
+  <string name="init_summary_offline_wp">오프라인용으로 웨이포인트 정적 지도를 저장합니다.</string>
   <string name="init_save_log_img">사진 저장하기</string>
   <string name="init_summary_save_log_img">로그에 있는 사진을 저장합니다.</string>
   <string name="init_units">영미식 단위 사용하기</string>
@@ -682,6 +682,7 @@
   <string name="last_day_available">오늘만 가능합니다.</string>
   <string name="cache_offline">오프라인</string>
   <string name="cache_offline_refresh">새로 고침</string>
+  <string name="cache_offline_drop">제거</string>
   <string name="cache_offline_store">저장</string>
   <string name="cache_offline_manage">관리</string>
   <string name="cache_offline_store_in_list">목록에 저장하기</string>
@@ -952,8 +953,8 @@
   <string name="map_static_loading">정적 지도 불러오는 중…</string>
   <string name="map_token_err">c:geo는 일부데이터만 불러올 수 있어서, 캐시 좌표가 부정확할 수 있습니다.</string>
   <string name="map_as_list">목록으로 보기</string>
-  <string name="map_strategy">전략</string>
-  <string name="map_strategy_title">라이브 지도 전략</string>
+  <string name="map_strategy">그리기 속도</string>
+  <string name="map_strategy_title">라이브 지도 속도</string>
   <string name="map_strategy_fastest">가장 빠름</string>
   <string name="map_strategy_fast">빠름</string>
   <string name="map_strategy_auto">성능에 따라 다름</string>
@@ -1442,7 +1443,7 @@
   <string name="pq_my_finds">내가 찾은것</string>
   <string name="caches_refresh_all_warning">이 작업은 네트워크 트래픽이 과다 발생할 수 있습니다. 정말 모든 캐시를 새로 고치시겠습니까?</string>
   <string name="invitation_action">친구 초대</string>
-  <string name="invitation_title">친구를 c:geo로 초대</string>
+  <string name="invitation_title">친구를 c:geo로 초대하기</string>
   <string name="invitation_message">c:geo앱을 지오캐싱을 위해 시도</string>
   <string name="cache_list_remove_from">목록에서 제거</string>
   <string name="list_list_headline">목록 :</string>
