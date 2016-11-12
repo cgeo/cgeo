@@ -1,8 +1,5 @@
 package cgeo.geocaching.utils;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Callable;
@@ -10,7 +7,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 
-import io.reactivex.Maybe;
 import io.reactivex.Observable;
 import io.reactivex.ObservableOperator;
 import io.reactivex.Observer;
@@ -41,36 +37,6 @@ public class RxUtils {
                 return last != null ? Observable.just(last) : Observable.<T>empty();
             }
         })).replay(1).refCount();
-    }
-
-    /**
-     * Transform a nullable value into a Maybe
-     *
-     * @param value the value to be returned, or {@code null}
-     * @return a Maybe with only {@code value} if it is not {@code null}, empty otherwise
-     */
-    @NonNull
-    public static <T> Maybe<T> fromNullable(@Nullable final T value) {
-        return value != null ? Maybe.just(value) : Maybe.<T>empty();
-    }
-
-    /**
-     * Transform a nullable return value into a Maybe
-     *
-     * @param func the function to call
-     * @return a Maybe with only the result of calling {@code func} if it is not {@code null}, empty otherwise
-     */
-    public static <T> Maybe<T> deferredNullable(@NonNull final Callable<T> func) {
-        return Maybe.defer(new Callable<Maybe<T>>() {
-            @Override
-            public Maybe<T> call() {
-                try {
-                    return fromNullable(func.call());
-                } catch (final Exception e) {
-                    return Maybe.error(e);
-                }
-            }
-        });
     }
 
     /**

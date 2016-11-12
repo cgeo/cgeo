@@ -16,7 +16,6 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.RxUtils;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -41,6 +40,7 @@ import android.widget.TextView;
 import java.util.concurrent.Callable;
 
 import butterknife.ButterKnife;
+import io.reactivex.Maybe;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Consumer;
 
@@ -221,7 +221,7 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
         if (!cache.supportsGCVote()) {
             return;
         }
-        AndroidRxUtils.bindActivity(getActivity(), RxUtils.deferredNullable(new Callable<GCVoteRating>() {
+        AndroidRxUtils.bindActivity(getActivity(), Maybe.fromCallable(new Callable<GCVoteRating>() {
             @Override
             public GCVoteRating call() {
                 return GCVote.getRating(cache.getGuid(), geocode);

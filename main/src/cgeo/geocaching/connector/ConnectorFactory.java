@@ -33,7 +33,6 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.AndroidRxUtils;
-import cgeo.geocaching.utils.RxUtils;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -397,7 +396,7 @@ public final class ConnectorFactory {
     public static Maybe<Trackable> loadTrackable(final String geocode, final String guid, final String id, final TrackableBrand brand) {
         if (StringUtils.isEmpty(geocode)) {
             // Only solution is GC search by uid
-            return RxUtils.deferredNullable(new Callable<Trackable>() {
+            return Maybe.fromCallable(new Callable<Trackable>() {
                 @Override
                 public Trackable call() {
                     return TravelBugConnector.getInstance().searchTrackable(geocode, guid, id);
@@ -414,7 +413,7 @@ public final class ConnectorFactory {
                 }).flatMapMaybe(new Function<TrackableConnector, Maybe<Trackable>>() {
                     @Override
                     public Maybe<Trackable> apply(final TrackableConnector trackableConnector) {
-                        return RxUtils.deferredNullable(new Callable<Trackable>() {
+                        return Maybe.fromCallable(new Callable<Trackable>() {
                             @Override
                             public Trackable call() {
                                 return trackableConnector.searchTrackable(geocode, guid, id);
@@ -423,7 +422,7 @@ public final class ConnectorFactory {
                     }
                 });
 
-        final Maybe<Trackable> fromLocalStorage = RxUtils.deferredNullable(new Callable<Trackable>() {
+        final Maybe<Trackable> fromLocalStorage = Maybe.fromCallable(new Callable<Trackable>() {
             @Override
             public Trackable call() {
                 return DataStore.loadTrackable(geocode);

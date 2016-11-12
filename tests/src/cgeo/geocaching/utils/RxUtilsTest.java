@@ -2,12 +2,10 @@ package cgeo.geocaching.utils;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import io.reactivex.Maybe;
 import io.reactivex.Observable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Action;
@@ -36,32 +34,6 @@ public class RxUtilsTest extends TestCase {
         assertThat(observable.blockingFirst()).isEqualTo("first");
         disposable.dispose();
         assertThat(observable.blockingFirst()).isEqualTo("first");
-    }
-
-    public static void testFromNullable() {
-        final Maybe<String> fromNull = RxUtils.fromNullable(null);
-        assertThat(fromNull.blockingGet()).isNull();
-
-        final Maybe<String> fromNonNull = RxUtils.fromNullable("foo");
-        assertThat(fromNonNull.blockingGet()).isEqualTo("foo");
-    }
-
-    public static void testDeferredNullable() {
-        final Maybe<String> fromNull = RxUtils.deferredNullable(new Callable<String>() {
-            @Override
-            public String call() {
-                return null;
-            }
-        });
-        assertThat(fromNull.blockingGet()).isNull();
-
-        final Maybe<String> fromNonNull = RxUtils.deferredNullable(new Callable<String>() {
-            @Override
-            public String call() {
-                return "foo";
-            }
-        });
-        assertThat(fromNonNull.blockingGet()).isEqualTo("foo");
     }
 
     public static void testObservableCache() {
