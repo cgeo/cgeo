@@ -382,14 +382,4 @@ public class GeopointTest extends TestCase {
         assertThat(new Geopoint(0, -181).isValid()).isFalse();
     }
 
-    public static void testRounded() {
-        final Geopoint gp = new Geopoint(1.234567, 0.123456);
-        assertThat(gp.roundedAt(1)).isEqualTo(new Geopoint(1, 0));
-        assertThat(gp.roundedAt(10)).isEqualTo(new Geopoint(1.2, 0.1));
-        assertThat(gp.roundedAt(100)).isEqualTo(new Geopoint(1.23, 0.12));
-        assertThat(gp.roundedAt(1000)).isEqualTo(new Geopoint(1.235, 0.123));
-        assertThat(gp.roundedAt(10000)).isEqualTo(new Geopoint(1.2346, 0.1235));
-        assertThat(gp.roundedAt(100000)).isEqualTo(new Geopoint(1.23457, 0.12346));
-        assertThat(gp.roundedAt(1000000)).isEqualTo(new Geopoint(1.234567, 0.123456));
-    }
 }
