@@ -16,12 +16,8 @@ import android.view.View;
 import java.lang.ref.WeakReference;
 import java.util.concurrent.TimeUnit;
 
-import io.reactivex.BackpressureStrategy;
-import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
 
 public class CompassView extends View {
 
@@ -121,16 +117,7 @@ public class CompassView extends View {
 
         initialDisplay = true;
 
-        // FIXME: this causes an exception with RxAndroid 2.0.0 (see https://github.com/cgeo/cgeo/issues/6087)
-        // periodicUpdate.add(AndroidSchedulers.mainThread().schedulePeriodicallyDirect(new UpdateAction(this), 0, 40, TimeUnit.MILLISECONDS));
-        // Use a workaround in the meantime.
-        periodicUpdate.add(Observable.interval(40, 40, TimeUnit.MILLISECONDS, Schedulers.computation()).observeOn(AndroidSchedulers.mainThread()).toFlowable(BackpressureStrategy.DROP).subscribe(new Consumer<Long>() {
-            final UpdateAction action = new UpdateAction(CompassView.this);
-            @Override
-            public void accept(final Long aLong) throws Exception {
-                action.run();
-            }
-        }));
+        periodicUpdate.add(AndroidSchedulers.mainThread().schedulePeriodicallyDirect(new UpdateAction(this), 0, 40, TimeUnit.MILLISECONDS));
     }
 
     @Override
