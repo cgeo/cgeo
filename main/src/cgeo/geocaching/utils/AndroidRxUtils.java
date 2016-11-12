@@ -39,7 +39,6 @@ public class AndroidRxUtils {
 
     public static final Looper looperCallbacksLooper = looperCallbacksThread.getLooper();
     public static final Scheduler looperCallbacksScheduler = AndroidSchedulers.from(looperCallbacksLooper);
-    public static final Scheduler.Worker looperCallbacksWorker = looperCallbacksScheduler.createWorker();
 
     private AndroidRxUtils() {
         // Utility class, not to be instantiated
