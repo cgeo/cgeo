@@ -311,7 +311,7 @@ dependencies {
     configurations.all*.exclude module: "play-services-measurement"
 
     // ProcessPhoenix, reliable process restart
-    compile 'com.jakewharton:process-phoenix:1.1.0'
+    compile 'com.jakewharton:process-phoenix:1.1.1'
 
     // RxJava
     def rxjavaVersion = '2.0.0'
