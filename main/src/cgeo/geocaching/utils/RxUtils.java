@@ -14,7 +14,6 @@ import io.reactivex.Maybe;
 import io.reactivex.Observable;
 import io.reactivex.ObservableOperator;
 import io.reactivex.Observer;
-import io.reactivex.Single;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Cancellable;
 import io.reactivex.functions.Consumer;
@@ -175,22 +174,6 @@ public class RxUtils {
                     }
                 }
             };
-        }
-    }
-
-    /**
-     * Block until a Single is resolved, and return either the value if it succeeds or `null` if it fails.
-     *
-     * @param single the single to wait for
-     * @param <T> the type of the Single content
-     * @return the resolved value or `null` if an error occurred
-     */
-    @Nullable
-    public static <T> T nullableSingleValue(final Single<T> single) {
-        try {
-            return single.blockingGet();
-        } catch (final Throwable ignored) {
-            return null;
         }
     }
 

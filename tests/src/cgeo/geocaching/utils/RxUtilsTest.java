@@ -9,7 +9,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import io.reactivex.Maybe;
 import io.reactivex.Observable;
-import io.reactivex.Single;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Action;
 import io.reactivex.functions.Function;
@@ -101,14 +100,6 @@ public class RxUtilsTest extends TestCase {
             // ignore for tests
         }
         assertThat(unsubscribed.get()).isTrue();
-    }
-
-    public static void testNullableSingleValue() {
-        final Single<Integer> single = Single.just(42);
-        assertThat(RxUtils.nullableSingleValue(single)).isEqualTo(42);
-
-        final Single<Integer> errorSingle = Single.error(new RuntimeException("error-ed single"));
-        assertThat(RxUtils.nullableSingleValue(errorSingle)).isNull();
     }
 
 }
