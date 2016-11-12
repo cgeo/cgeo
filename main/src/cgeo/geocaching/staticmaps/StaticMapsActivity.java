@@ -11,55 +11,53 @@ import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.Log;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
+import android.support.annotation.NonNull;
+import android.view.Menu;
+import android.view.MenuItem;
 
+import java.util.concurrent.Callable;
+
+import io.reactivex.Maybe;
+import io.reactivex.Observable;
+import io.reactivex.Single;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Action;
+import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
+import io.reactivex.schedulers.Schedulers;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.Extra;
 import org.androidannotations.annotations.OptionsItem;
-import org.androidannotations.annotations.OptionsMenu;
 
 @EActivity
-@OptionsMenu(R.menu.static_maps_activity_options)
 public class StaticMapsActivity extends AbstractListActivity {
 
-    @Extra(Intents.EXTRA_DOWNLOAD) boolean download = false;
-    @Extra(Intents.EXTRA_WAYPOINT_ID) Integer waypointId = null;
-    @Extra(Intents.EXTRA_GEOCODE) String geocode = null;
+    @Extra(Intents.EXTRA_DOWNLOAD)
+    boolean download = false;
+    @Extra(Intents.EXTRA_WAYPOINT_ID)
+    Integer waypointId = null;
+    @Extra(Intents.EXTRA_GEOCODE)
+    String geocode = null;
 
     private Geocache cache;
     private ProgressDialog waitDialog = null;
-    private final Handler loadMapsHandler = new Handler() {
-
-        @Override
-        public void handleMessage(final Message msg) {
-            Dialogs.dismiss(waitDialog);
-            try {
-                if (adapter.isEmpty()) {
-                    if (download) {
-                        final boolean succeeded = downloadStaticMaps();
-                        if (succeeded) {
-                            startActivity(StaticMapsActivity.this.getIntent());
-                        } else {
-                            showToast(res.getString(R.string.err_detail_google_maps_limit_reached));
-                        }
-                    } else {
-                        showToast(res.getString(R.string.err_detail_not_load_map_static));
-                    }
-                    finish();
-                }
-            } catch (final Exception e) {
-                Log.e("StaticMapsActivity.loadMapsHandler", e);
-            }
-        }
-    };
     private StaticMapsAdapter adapter;
+    private MenuItem menuRefresh;
+    private CompositeDisposable resumeDisposables = new CompositeDisposable();
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.staticmaps_activity);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
 
         cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
 
@@ -74,70 +72,134 @@ public class StaticMapsActivity extends AbstractListActivity {
         adapter = new StaticMapsAdapter(this);
         setListAdapter(adapter);
 
-        waitDialog = ProgressDialog.show(this, null, res.getString(R.string.map_static_loading), true);
-        waitDialog.setCancelable(true);
-
-        (new LoadMapsThread()).start();
     }
 
-    private class LoadMapsThread extends Thread {
+    @Override
+    public boolean onCreateOptionsMenu(final Menu menu) {
+        getMenuInflater().inflate(R.menu.static_maps_activity_options, menu);
+        menuRefresh = menu.findItem(R.id.menu_refresh);
+        return super.onCreateOptionsMenu(menu);
+    }
 
-        @Override
-        public void run() {
-            try {
-                // try downloading 2 times
-                for (int trials = 0; trials < 2; trials++) {
-                    for (int level = 1; level <= StaticMapsProvider.MAPS_LEVEL_MAX; level++) {
-                        try {
-                            if (waypointId != null) {
-                                final Bitmap image = StaticMapsProvider.getWaypointMap(geocode, cache.getWaypointById(waypointId), level);
-                                if (image != null) {
-                                    adapter.add(image);
-                                }
-                            } else {
-                                final Bitmap image = StaticMapsProvider.getCacheMap(geocode, level);
-                                if (image != null) {
-                                    adapter.add(image);
+    @Override
+    public void onResume() {
+        super.onResume();
+        adapter.clear();
+
+        final Disposable load = loadAndDisplay();
+        resumeDisposables.add(load);
+        waitDialog = ProgressDialog.show(this, null, res.getString(R.string.map_static_loading), true);
+        waitDialog.setCancelable(true);
+        waitDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(final DialogInterface dialog) {
+                load.dispose();
+            }
+        });
+    }
+
+    @Override
+    public void onPause() {
+        resumeDisposables.clear();
+        super.onPause();
+    }
+
+    @NonNull
+    private Disposable loadAndDisplay() {
+        return loadMaps().observeOn(AndroidSchedulers.mainThread()).map(new Function<Bitmap, Bitmap>() {
+            @Override
+            public Bitmap apply(final Bitmap bitmap) throws Exception {
+                adapter.add(bitmap);
+                return bitmap;
+            }
+        }).ignoreElements().subscribe(new Action() {
+            @Override
+            public void run() {
+                Dialogs.dismiss(waitDialog);
+                if (adapter.isEmpty()) {
+                    if (download) {
+                        resumeDisposables.add(downloadStaticMaps().subscribe(new Consumer<Boolean>() {
+                            @Override
+                            public void accept(final Boolean succeeded) throws Exception {
+                                if (succeeded) {
+                                    // Loading from disk will succeed this time
+                                    AndroidSchedulers.mainThread().scheduleDirect(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            adapter.clear();
+                                            resumeDisposables.add(loadAndDisplay());
+                                        }
+                                    });
+                                } else {
+                                    showToast(res.getString(R.string.err_detail_google_maps_limit_reached));
                                 }
                             }
-                        } catch (final Exception e) {
-                            Log.e("StaticMapsActivity.LoadMapsThread.run", e);
-                        }
+                        }));
+                    } else {
+                        showToast(res.getString(R.string.err_detail_not_load_map_static));
+                        finish();
                     }
-                    if (!adapter.isEmpty()) {
-                        break;
+                } else {
+                    if (menuRefresh != null) {
+                        menuRefresh.setEnabled(true);
                     }
                 }
-
-                loadMapsHandler.sendMessage(Message.obtain());
-            } catch (final Exception e) {
-                Log.e("StaticMapsActivity.LoadMapsThread.run", e);
             }
-        }
+        });
+    }
+
+    private Observable<Bitmap> loadMaps() {
+        return Observable.range(1, StaticMapsProvider.MAPS_LEVEL_MAX).concatMap(new Function<Integer, Observable<Bitmap>>() {
+            @Override
+            public Observable<Bitmap> apply(final Integer zoomLevel) throws Exception {
+                return Maybe.fromCallable(new Callable<Bitmap>() {
+                    @Override
+                    public Bitmap call() throws Exception {
+                        return waypointId != null ?
+                                StaticMapsProvider.getWaypointMap(geocode, cache.getWaypointById(waypointId), zoomLevel) :
+                                StaticMapsProvider.getCacheMap(geocode, zoomLevel);
+                    }
+                }).toObservable().subscribeOn(Schedulers.io());
+            }
+        });
     }
 
     @OptionsItem(R.id.menu_refresh)
     void refreshMaps() {
-        downloadStaticMaps();
-        restartActivity();
+        menuRefresh.setEnabled(false);
+        downloadStaticMaps().toCompletable().observeOn(AndroidSchedulers.mainThread()).subscribe(new Action() {
+            @Override
+            public void run() throws Exception {
+                menuRefresh.setEnabled(true);
+                loadMaps();
+            }
+        });
     }
 
-    private boolean downloadStaticMaps() {
+    private Single<Boolean> downloadStaticMaps() {
         if (waypointId == null) {
             showToast(res.getString(R.string.info_storing_static_maps));
-            StaticMapsProvider.storeCacheStaticMap(cache).blockingAwait();
-            return cache.hasStaticMap();
+            return StaticMapsProvider.storeCacheStaticMap(cache).andThen(Single.fromCallable(new Callable<Boolean>() {
+                @Override
+                public Boolean call() throws Exception {
+                    return cache.hasStaticMap();
+                }
+            }));
         }
         final Waypoint waypoint = cache.getWaypointById(waypointId);
         if (waypoint != null) {
             showToast(res.getString(R.string.info_storing_static_maps));
             // refresh always removes old waypoint files
             StaticMapsProvider.removeWpStaticMaps(waypoint, geocode);
-            StaticMapsProvider.storeWaypointStaticMap(cache, waypoint).blockingAwait();
-            return StaticMapsProvider.hasStaticMapForWaypoint(geocode, waypoint);
+            return StaticMapsProvider.storeWaypointStaticMap(cache, waypoint).andThen(Single.fromCallable(new Callable<Boolean>() {
+                @Override
+                public Boolean call() throws Exception {
+                    return StaticMapsProvider.hasStaticMapForWaypoint(geocode, waypoint);
+                }
+            }));
         }
         showToast(res.getString(R.string.err_detail_not_load_map_static));
-        return false;
+        return Single.just(false);
     }
 
     @Override
