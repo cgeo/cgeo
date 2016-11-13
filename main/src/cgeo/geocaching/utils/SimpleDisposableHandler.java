@@ -13,6 +13,7 @@ import java.lang.ref.WeakReference;
 
 public class SimpleDisposableHandler extends DisposableHandler {
     public static final String MESSAGE_TEXT = "message_text";
+    private static final int DISPOSE_WITH_MESSAGE = -738434;
     protected final WeakReference<AbstractActivity> activityRef;
     protected final WeakReference<Progress> progressDialogRef;
 
@@ -28,14 +29,21 @@ public class SimpleDisposableHandler extends DisposableHandler {
             activity.showToast(msg.getData().getString(MESSAGE_TEXT));
         }
         dismissProgress();
+        if (msg.what == DISPOSE_WITH_MESSAGE) {
+            dispose();
+        }
+    }
+
+    public Message cancelMessage(final String text) {
+        final Message msg = obtainMessage(DISPOSE_WITH_MESSAGE);
+        final Bundle bundle = new Bundle();
+        bundle.putString(MESSAGE_TEXT, text);
+        msg.setData(bundle);
+        return msg;
     }
 
     @Override
-    protected void handleDispose(final Object extra) {
-        final AbstractActivity activity = activityRef.get();
-        if (activity != null) {
-            activity.showToast((String) extra);
-        }
+    protected void handleDispose() {
         dismissProgress();
     }
 

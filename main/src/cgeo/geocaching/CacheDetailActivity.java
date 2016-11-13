@@ -294,7 +294,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             } else if (geocode != null && StringUtils.isNotBlank(geocode)) { // can't be null, but the compiler doesn't understand StringUtils.isNotBlank()
                 title = geocode;
             }
-            progress.show(this, title, res.getString(R.string.cache_dialog_loading_details), true, loadCacheHandler.cancelMessage());
+            progress.show(this, title, res.getString(R.string.cache_dialog_loading_details), true, loadCacheHandler.disposeMessage());
         } catch (final RuntimeException ignored) {
             // nothing, we lost the window
         }
@@ -760,7 +760,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         }
 
         @Override
-        public void handleDispose(final Object extra) {
+        public void handleDispose() {
             finishActivity();
         }
 
@@ -900,7 +900,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
         final RefreshCacheHandler refreshCacheHandler = new RefreshCacheHandler(this, progress);
 
-        progress.show(this, res.getString(R.string.cache_dialog_refresh_title), res.getString(R.string.cache_dialog_refresh_message), true, refreshCacheHandler.cancelMessage());
+        progress.show(this, res.getString(R.string.cache_dialog_refresh_title), res.getString(R.string.cache_dialog_refresh_message), true, refreshCacheHandler.disposeMessage());
 
         cache.refresh(refreshCacheHandler, AndroidRxUtils.refreshScheduler);
     }
@@ -2344,7 +2344,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
     protected void storeCache(final Set<Integer> listIds) {
         final StoreCacheHandler storeCacheHandler = new StoreCacheHandler(CacheDetailActivity.this, progress);
-        progress.show(this, res.getString(R.string.cache_dialog_offline_save_title), res.getString(R.string.cache_dialog_offline_save_message), true, storeCacheHandler.cancelMessage());
+        progress.show(this, res.getString(R.string.cache_dialog_offline_save_title), res.getString(R.string.cache_dialog_offline_save_message), true, storeCacheHandler.disposeMessage());
         AndroidRxUtils.networkScheduler.scheduleDirect(new Runnable() {
             @Override
             public void run() {

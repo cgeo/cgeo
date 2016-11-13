@@ -375,7 +375,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
             }
         }
         @Override
-        public void handleDispose(final Object extra) {
+        public void handleDispose() {
             if (loadDetailsThread != null) {
                 loadDetailsThread.stopIt();
             }
@@ -1408,7 +1408,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         waitDialog = new ProgressDialog(activity);
         waitDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         waitDialog.setCancelable(true);
-        waitDialog.setCancelMessage(loadDetailsHandler.cancelMessage());
+        waitDialog.setCancelMessage(loadDetailsHandler.disposeMessage());
         waitDialog.setMax(detailTotal);
         waitDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
 

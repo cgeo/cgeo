@@ -195,7 +195,7 @@ public class CachePopupFragment extends AbstractDialogFragment {
             } else {
                 final StoreCacheHandler storeCacheHandler = new StoreCacheHandler(CachePopupFragment.this, R.string.cache_dialog_offline_save_message);
                 final FragmentActivity activity = getActivity();
-                progress.show(activity, res.getString(R.string.cache_dialog_offline_save_title), res.getString(R.string.cache_dialog_offline_save_message), true, storeCacheHandler.cancelMessage());
+                progress.show(activity, res.getString(R.string.cache_dialog_offline_save_title), res.getString(R.string.cache_dialog_offline_save_message), true, storeCacheHandler.disposeMessage());
                 AndroidRxUtils.andThenOnUi(Schedulers.io(), new Runnable() {
                     @Override
                     public void run() {
@@ -230,7 +230,7 @@ public class CachePopupFragment extends AbstractDialogFragment {
             }
 
             final StoreCacheHandler refreshCacheHandler = new StoreCacheHandler(CachePopupFragment.this, R.string.cache_dialog_offline_save_message);
-            progress.show(getActivity(), res.getString(R.string.cache_dialog_refresh_title), res.getString(R.string.cache_dialog_refresh_message), true, refreshCacheHandler.cancelMessage());
+            progress.show(getActivity(), res.getString(R.string.cache_dialog_refresh_title), res.getString(R.string.cache_dialog_refresh_message), true, refreshCacheHandler.disposeMessage());
             cache.refresh(refreshCacheHandler, AndroidRxUtils.networkScheduler);
         }
     }
