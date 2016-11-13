@@ -2,7 +2,7 @@ package cgeo.geocaching.files;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.utils.CancellableHandler;
+import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.Log;
 
 import android.os.Handler;
@@ -14,7 +14,7 @@ import java.util.Collection;
 class ImportLocFileThread extends AbstractImportThread {
     private final File file;
 
-    ImportLocFileThread(final File file, final int listId, final Handler importStepHandler, final CancellableHandler progressHandler) {
+    ImportLocFileThread(final File file, final int listId, final Handler importStepHandler, final DisposableHandler progressHandler) {
         super(listId, importStepHandler, progressHandler);
         this.file = file;
     }

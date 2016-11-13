@@ -14,7 +14,7 @@ import cgeo.geocaching.settings.TestSettings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 import cgeo.geocaching.test.R;
-import cgeo.geocaching.utils.CancellableHandler;
+import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.Log;
 
 import android.net.Uri;
@@ -196,7 +196,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         final File gc31j2h = new File(tempDir, "gc31j2h.gpx");
         copyResourceToFile(R.raw.gc31j2h, gc31j2h);
 
-        progressHandler.cancel();
+        progressHandler.dispose();
         final ImportGpxFileThread importThread = new ImportGpxFileThread(gc31j2h, listId, importStepHandler, progressHandler);
         runImportThread(importThread);
 
@@ -299,7 +299,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         assertThat(importThread.getSourceDisplayName()).isEqualTo("17157285_Großer Ümlaut Täst.gpx");
     }
 
-    static class TestHandler extends CancellableHandler {
+    static class TestHandler extends DisposableHandler {
         private final List<Message> messages = new ArrayList<>();
         private long lastMessage = System.currentTimeMillis();
         private boolean receivedTerminationMessage = false;

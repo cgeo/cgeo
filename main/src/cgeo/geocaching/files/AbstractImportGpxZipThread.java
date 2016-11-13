@@ -2,7 +2,7 @@ package cgeo.geocaching.files;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.utils.CancellableHandler;
+import cgeo.geocaching.utils.DisposableHandler;
 
 import org.apache.commons.compress.archivers.zip.ZipArchiveInputStream;
 import org.apache.commons.lang3.StringUtils;
@@ -22,7 +22,7 @@ abstract class AbstractImportGpxZipThread extends AbstractImportGpxThread {
     public static final String ENCODING = "cp437"; // Geocaching.com used windows cp 437 encoding
     private String gpxFileName = null;
 
-    protected AbstractImportGpxZipThread(final int listId, final Handler importStepHandler, final CancellableHandler progressHandler) {
+    protected AbstractImportGpxZipThread(final int listId, final Handler importStepHandler, final DisposableHandler progressHandler) {
         super(listId, importStepHandler, progressHandler);
     }
 

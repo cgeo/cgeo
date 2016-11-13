@@ -4,7 +4,7 @@ import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.utils.CancellableHandler;
+import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.Charsets;
 import cgeo.geocaching.utils.Log;
 
@@ -160,7 +160,7 @@ public final class LocParser extends FileParser {
 
     @Override
     @NonNull
-    public Collection<Geocache> parse(@NonNull final InputStream stream, @Nullable final CancellableHandler progressHandler) throws IOException, ParserException {
+    public Collection<Geocache> parse(@NonNull final InputStream stream, @Nullable final DisposableHandler progressHandler) throws IOException, ParserException {
         final int maxSize = stream.available();
         final Map<String, Geocache> coords = parseLoc(stream);
         final List<Geocache> caches = new ArrayList<>();

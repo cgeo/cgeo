@@ -21,7 +21,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 import cgeo.geocaching.test.R;
 import cgeo.geocaching.test.mock.MockedCache;
-import cgeo.geocaching.utils.CancellableHandler;
+import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.test.Compare;
 
 import android.support.annotation.RawRes;
@@ -98,7 +98,7 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
     }
 
     /**
-     * Test {@link GCParser#parseAndSaveCacheFromText(String, CancellableHandler)} with "mocked" data
+     * Test {@link GCParser#parseAndSaveCacheFromText(String, DisposableHandler)} with "mocked" data
      *
      */
     @MediumTest

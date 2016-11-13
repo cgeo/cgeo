@@ -29,7 +29,7 @@ import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.AndroidRxUtils;
-import cgeo.geocaching.utils.CancellableHandler;
+import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
@@ -341,7 +341,7 @@ public final class GCParser {
     }
 
     @Nullable
-    static SearchResult parseCache(final String page, final CancellableHandler handler) {
+    static SearchResult parseCache(final String page, final DisposableHandler handler) {
         final ImmutablePair<StatusCode, Geocache> parsed = parseCacheFromText(page, handler);
         // attention: parseCacheFromText already stores implicitly through searchResult.addCache
         if (parsed.left != StatusCode.NO_ERROR) {
@@ -352,22 +352,22 @@ public final class GCParser {
         getExtraOnlineInfo(cache, page, handler);
         // too late: it is already stored through parseCacheFromText
         cache.setDetailedUpdatedNow();
-        if (CancellableHandler.isCancelled(handler)) {
+        if (DisposableHandler.isDisposed(handler)) {
             return null;
         }
 
         // save full detailed caches
-        CancellableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_cache);
+        DisposableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_cache);
         DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
 
         // update progress message so user knows we're still working. This is more of a place holder than
         // actual indication of what the program is doing
-        CancellableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_render);
+        DisposableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_render);
         return new SearchResult(cache);
     }
 
     @NonNull
-    static SearchResult parseAndSaveCacheFromText(final String page, @Nullable final CancellableHandler handler) {
+    static SearchResult parseAndSaveCacheFromText(final String page, @Nullable final DisposableHandler handler) {
         final ImmutablePair<StatusCode, Geocache> parsed = parseCacheFromText(page, handler);
         final SearchResult result = new SearchResult(parsed.left);
         if (parsed.left == StatusCode.NO_ERROR) {
@@ -389,8 +389,8 @@ public final class GCParser {
      *         iff the status code is {@link StatusCode#NO_ERROR}.
      */
     @NonNull
-    private static ImmutablePair<StatusCode, Geocache> parseCacheFromText(final String pageIn, @Nullable final CancellableHandler handler) {
-        CancellableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_details);
+    private static ImmutablePair<StatusCode, Geocache> parseCacheFromText(final String pageIn, @Nullable final DisposableHandler handler) {
+        DisposableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_details);
 
         if (StringUtils.isBlank(pageIn)) {
             Log.e("GCParser.parseCache: No page given");
@@ -596,10 +596,10 @@ public final class GCParser {
 
         // cache spoilers
         try {
-            if (CancellableHandler.isCancelled(handler)) {
+            if (DisposableHandler.isDisposed(handler)) {
                 return UNKNOWN_PARSE_ERROR;
             }
-            CancellableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_spoilers);
+            DisposableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_spoilers);
 
             final MatcherWrapper matcherSpoilersInside = new MatcherWrapper(GCConstants.PATTERN_SPOILER_IMAGE, page);
 
@@ -710,10 +710,10 @@ public final class GCParser {
 
         int wpBegin = page.indexOf("<table class=\"Table\" id=\"ctl00_ContentBody_Waypoints\">");
         if (wpBegin != -1) { // parse waypoints
-            if (CancellableHandler.isCancelled(handler)) {
+            if (DisposableHandler.isDisposed(handler)) {
                 return UNKNOWN_PARSE_ERROR;
             }
-            CancellableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_waypoints);
+            DisposableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_waypoints);
 
             String wpList = page.substring(wpBegin);
 
@@ -1973,15 +1973,15 @@ public final class GCParser {
         params.put("tx", cacheType.guid);
     }
 
-    private static void getExtraOnlineInfo(@NonNull final Geocache cache, final String page, final CancellableHandler handler) {
+    private static void getExtraOnlineInfo(@NonNull final Geocache cache, final String page, final DisposableHandler handler) {
         // This method starts the page parsing for logs in the background, as well as retrieve the friends and own logs
         // if requested. It merges them and stores them in the background, while the rating is retrieved if needed and
         // stored. Then we wait for the log merging and saving to be completed before returning.
-        if (CancellableHandler.isCancelled(handler)) {
+        if (DisposableHandler.isDisposed(handler)) {
             return;
         }
 
-        CancellableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_logs);
+        DisposableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_logs);
         final String userToken = parseUserToken(page);
         final Observable<LogEntry> logs = getLogs(userToken, Logs.ALL);
         final Observable<LogEntry> ownLogs = getLogs(userToken, Logs.OWN).cache();
@@ -2012,8 +2012,8 @@ public final class GCParser {
             });
         }
 
-        if (Settings.isRatingWanted() && !CancellableHandler.isCancelled(handler)) {
-            CancellableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_gcvote);
+        if (Settings.isRatingWanted() && !DisposableHandler.isDisposed(handler)) {
+            DisposableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_gcvote);
             final GCVoteRating rating = GCVote.getRating(cache.getGuid(), cache.getGeocode());
             if (rating != null) {
                 cache.setRating(rating.getRating());

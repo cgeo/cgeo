@@ -6,7 +6,7 @@ import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.utils.AndroidRxUtils;
-import cgeo.geocaching.utils.CancellableHandler;
+import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.ImageUtils.ContainerDrawable;
@@ -105,7 +105,7 @@ public class HtmlImage implements Html.ImageGetter {
      * <ul>
      * <li>If onlySave is true, {@link #getDrawable(String)} will return <tt>null</tt> immediately and will queue the
      * image retrieval and saving in the loading subject. Downloads will start in parallel when the blocking
-     * {@link #waitForEndCompletable(CancellableHandler)} method is called, and they can be
+     * {@link #waitForEndCompletable(DisposableHandler)} method is called, and they can be
      * cancelled through the given handler.</li>
      * <li>If <tt>onlySave</tt> is <tt>false</tt> and the instance is called through {@link #fetchDrawable(String)},
      * then an observable for the given URL will be returned. This observable will emit the local copy of the image if
@@ -225,7 +225,7 @@ public class HtmlImage implements Html.ImageGetter {
                     }
                 });
                 disposable.add(aborter);
-                // Canceling this subscription must cancel the data retrieval
+                // Canceling this subscription must dispose the data retrieval
                 emitter.setDisposable(AndroidRxUtils.computationScheduler.scheduleDirect(new Runnable() {
                     @Override
                     public void run() {
@@ -299,9 +299,9 @@ public class HtmlImage implements Html.ImageGetter {
         return ImmutablePair.of(bitmap != null ? ImageUtils.scaleBitmapToFitDisplay(bitmap) : null, loadResult.right);
     }
 
-    public Completable waitForEndCompletable(@Nullable final CancellableHandler handler) {
+    public Completable waitForEndCompletable(@Nullable final DisposableHandler handler) {
         if (handler != null) {
-            handler.disposeIfCancelled(disposable);
+            handler.add(disposable);
         }
         loading.onComplete();
         return waitForEnd;

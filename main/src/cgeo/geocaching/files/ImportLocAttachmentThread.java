@@ -2,7 +2,7 @@ package cgeo.geocaching.files;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.utils.CancellableHandler;
+import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.io.IOUtils;
@@ -19,7 +19,7 @@ class ImportLocAttachmentThread extends AbstractImportThread {
     private final Uri uri;
     private final ContentResolver contentResolver;
 
-    ImportLocAttachmentThread(final Uri uri, final ContentResolver contentResolver, final int listId, final Handler importStepHandler, final CancellableHandler progressHandler) {
+    ImportLocAttachmentThread(final Uri uri, final ContentResolver contentResolver, final int listId, final Handler importStepHandler, final DisposableHandler progressHandler) {
         super(listId, importStepHandler, progressHandler);
         this.uri = uri;
         this.contentResolver = contentResolver;

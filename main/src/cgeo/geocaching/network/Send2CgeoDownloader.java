@@ -3,7 +3,7 @@ package cgeo.geocaching.network;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.AndroidRxUtils;
-import cgeo.geocaching.utils.CancellableHandler;
+import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.Log;
 
 import java.util.Collections;
@@ -25,9 +25,9 @@ public class Send2CgeoDownloader {
      * @param handler the handler to which progress information will be sent
      * @param listId the list into which caches will be stored
      */
-    public static void loadFromWeb(final CancellableHandler handler, final int listId) {
+    public static void loadFromWeb(final DisposableHandler handler, final int listId) {
         final Scheduler.Worker worker = AndroidRxUtils.networkScheduler.createWorker();
-        handler.disposeIfCancelled(worker);
+        handler.add(worker);
         AndroidRxUtils.networkScheduler.scheduleDirect(new Runnable() {
             private final Parameters params = new Parameters("code", StringUtils.defaultString(Settings.getWebDeviceCode()));
             private long baseTime = System.currentTimeMillis();
@@ -56,7 +56,7 @@ public class Send2CgeoDownloader {
                         //Server returned RG (registration) and this device no longer registered.
                         Settings.setWebNameCode(null, null);
                         handler.sendEmptyMessage(DownloadProgress.MSG_NO_REGISTRATION);
-                        handler.cancel();
+                        handler.dispose();
                     } else {
                         worker.schedule(this, 5, TimeUnit.SECONDS);
                         handler.sendEmptyMessage(DownloadProgress.MSG_WAITING);
@@ -64,7 +64,7 @@ public class Send2CgeoDownloader {
                 } catch (final Exception e) {
                     Log.e("loadFromWeb", e);
                     handler.sendEmptyMessage(DownloadProgress.MSG_SERVER_FAIL);
-                    handler.cancel();
+                    handler.dispose();
                 }
             }
         });

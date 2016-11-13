@@ -13,7 +13,7 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.utils.CancellableHandler;
+import cgeo.geocaching.utils.DisposableHandler;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -118,7 +118,7 @@ public class GeocachingSuConnector extends AbstractConnector implements ISearchB
     }
 
     @Override
-    public SearchResult searchByGeocode(@Nullable final String geocode, @Nullable final String guid, final CancellableHandler handler) {
+    public SearchResult searchByGeocode(@Nullable final String geocode, @Nullable final String guid, final DisposableHandler handler) {
         final String id = StringUtils.substring(geocode, 2);
         return searchCaches("data", new Parameters(PARAMETER_REQUEST_TYPE, REQUEST_TYPE_CACHE, "cid", id, PARAMETER_RESULT_FIELDS, RESULT_FIELDS_DETAILED));
     }

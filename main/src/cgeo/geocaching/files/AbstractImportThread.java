@@ -7,7 +7,7 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.staticmaps.StaticMapsProvider;
 import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.utils.CancellableHandler;
+import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.Log;
 
 import android.os.Handler;
@@ -19,9 +19,9 @@ import java.util.concurrent.CancellationException;
 abstract class AbstractImportThread extends Thread {
     final int listId;
     final Handler importStepHandler;
-    final CancellableHandler progressHandler;
+    final DisposableHandler progressHandler;
 
-    protected AbstractImportThread(final int listId, final Handler importStepHandler, final CancellableHandler progressHandler) {
+    protected AbstractImportThread(final int listId, final Handler importStepHandler, final DisposableHandler progressHandler) {
         this.listId = listId;
         this.importStepHandler = importStepHandler;
         this.progressHandler = progressHandler;
@@ -82,7 +82,7 @@ abstract class AbstractImportThread extends Thread {
                 Log.d("GPXImporter.ImportThread.importStaticMaps: no data found for " + geocode);
             }
             storedCacheMaps++;
-            if (progressHandler.isCancelled()) {
+            if (progressHandler.isDisposed()) {
                 return false;
             }
             progressHandler.sendMessage(progressHandler.obtainMessage(0, storedCacheMaps, 0));

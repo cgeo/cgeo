@@ -65,7 +65,7 @@ import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.recyclerview.RecyclerViewProvider;
 import cgeo.geocaching.utils.AndroidRxUtils;
-import cgeo.geocaching.utils.CancellableHandler;
+import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.CheckerUtils;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.CryptUtils;
@@ -73,7 +73,7 @@ import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
-import cgeo.geocaching.utils.SimpleCancellableHandler;
+import cgeo.geocaching.utils.SimpleDisposableHandler;
 import cgeo.geocaching.utils.SimpleHandler;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.UnknownTagsHandler;
@@ -316,7 +316,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 requireGeodata = getPage(position) == Page.DETAILS;
                 startOrStopGeoDataListener(false);
 
-                // cancel contextual actions on page change
+                // dispose contextual actions on page change
                 if (currentActionMode != null) {
                     currentActionMode.finish();
                 }
@@ -709,7 +709,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         }
     }
 
-    private static final class LoadCacheHandler extends SimpleCancellableHandler {
+    private static final class LoadCacheHandler extends SimpleDisposableHandler {
 
         LoadCacheHandler(final CacheDetailActivity activity, final Progress progress) {
             super(activity, progress);
@@ -760,7 +760,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         }
 
         @Override
-        public void handleCancel(final Object extra) {
+        public void handleDispose(final Object extra) {
             finishActivity();
         }
 
@@ -954,7 +954,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         if (cache.isOffline()) {
             // cache already offline, just add to another list
             DataStore.saveLists(Collections.singletonList(cache), selectedListIds);
-            new StoreCacheHandler(CacheDetailActivity.this, progress).sendEmptyMessage(CancellableHandler.DONE);
+            new StoreCacheHandler(CacheDetailActivity.this, progress).sendEmptyMessage(DisposableHandler.DONE);
         } else {
             storeCache(selectedListIds);
         }
@@ -1180,7 +1180,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
          */
         private abstract class AbstractPropertyListener implements View.OnClickListener {
 
-            private final SimpleCancellableHandler handler = new SimpleCancellableHandler(CacheDetailActivity.this, progress) {
+            private final SimpleDisposableHandler handler = new SimpleDisposableHandler(CacheDetailActivity.this, progress) {
                 @Override
                 public void handleRegularMessage(final Message message) {
                     super.handleRegularMessage(message);
@@ -1189,7 +1189,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 }
             };
 
-            public void doExecute(final int titleId, final int messageId, final Action1<SimpleCancellableHandler> action) {
+            public void doExecute(final int titleId, final int messageId, final Action1<SimpleDisposableHandler> action) {
                 if (progress.isShowing()) {
                     showToast(res.getString(R.string.err_watchlist_still_managing));
                     return;
@@ -1212,9 +1212,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             public void onClick(final View arg0) {
                 doExecute(R.string.cache_dialog_watchlist_add_title,
                         R.string.cache_dialog_watchlist_add_message,
-                        new Action1<SimpleCancellableHandler>() {
+                        new Action1<SimpleDisposableHandler>() {
                             @Override
-                            public void call(final SimpleCancellableHandler simpleCancellableHandler) {
+                            public void call(final SimpleDisposableHandler simpleCancellableHandler) {
                                 watchListAdd(simpleCancellableHandler);
                             }
                         });
@@ -1229,9 +1229,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             public void onClick(final View arg0) {
                 doExecute(R.string.cache_dialog_watchlist_remove_title,
                         R.string.cache_dialog_watchlist_remove_message,
-                        new Action1<SimpleCancellableHandler>() {
+                        new Action1<SimpleDisposableHandler>() {
                             @Override
-                            public void call(final SimpleCancellableHandler simpleCancellableHandler) {
+                            public void call(final SimpleDisposableHandler simpleCancellableHandler) {
                                 watchListRemove(simpleCancellableHandler);
                             }
                         });
@@ -1239,7 +1239,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         }
 
         /** Add this cache to the watchlist of the user */
-        private void watchListAdd(final SimpleCancellableHandler handler) {
+        private void watchListAdd(final SimpleDisposableHandler handler) {
             final WatchListCapability connector = (WatchListCapability) ConnectorFactory.getConnector(cache);
             if (connector.addToWatchlist(cache)) {
                 handler.obtainMessage(MESSAGE_SUCCEEDED).sendToTarget();
@@ -1249,7 +1249,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         }
 
         /** Remove this cache from the watchlist of the user */
-        private void watchListRemove(final SimpleCancellableHandler handler) {
+        private void watchListRemove(final SimpleDisposableHandler handler) {
             final WatchListCapability connector = (WatchListCapability) ConnectorFactory.getConnector(cache);
             if (connector.removeFromWatchlist(cache)) {
                 handler.obtainMessage(MESSAGE_SUCCEEDED).sendToTarget();
@@ -1259,7 +1259,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         }
 
         /** Add this cache to the favorite list of the user */
-        private void favoriteAdd(final SimpleCancellableHandler handler) {
+        private void favoriteAdd(final SimpleDisposableHandler handler) {
             if (GCConnector.addToFavorites(cache)) {
                 handler.obtainMessage(MESSAGE_SUCCEEDED).sendToTarget();
             } else {
@@ -1268,7 +1268,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         }
 
         /** Remove this cache to the favorite list of the user */
-        private void favoriteRemove(final SimpleCancellableHandler handler) {
+        private void favoriteRemove(final SimpleDisposableHandler handler) {
             if (GCConnector.removeFromFavorites(cache)) {
                 handler.obtainMessage(MESSAGE_SUCCEEDED).sendToTarget();
             } else {
@@ -1284,9 +1284,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             public void onClick(final View arg0) {
                 doExecute(R.string.cache_dialog_favorite_add_title,
                         R.string.cache_dialog_favorite_add_message,
-                        new Action1<SimpleCancellableHandler>() {
+                        new Action1<SimpleDisposableHandler>() {
                             @Override
-                            public void call(final SimpleCancellableHandler simpleCancellableHandler) {
+                            public void call(final SimpleDisposableHandler simpleCancellableHandler) {
                                 favoriteAdd(simpleCancellableHandler);
                             }
                         });
@@ -1301,9 +1301,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             public void onClick(final View arg0) {
                 doExecute(R.string.cache_dialog_favorite_remove_title,
                         R.string.cache_dialog_favorite_remove_message,
-                        new Action1<SimpleCancellableHandler>() {
+                        new Action1<SimpleDisposableHandler>() {
                             @Override
-                            public void call(final SimpleCancellableHandler simpleCancellableHandler) {
+                            public void call(final SimpleDisposableHandler simpleCancellableHandler) {
                                 favoriteRemove(simpleCancellableHandler);
                             }
                         });
@@ -1538,19 +1538,19 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         }
 
         private void uploadPersonalNote() {
-            final SimpleCancellableHandler myHandler = new SimpleCancellableHandler(CacheDetailActivity.this, progress);
+            final SimpleDisposableHandler myHandler = new SimpleDisposableHandler(CacheDetailActivity.this, progress);
 
             final Message cancelMessage = myHandler.cancelMessage(res.getString(R.string.cache_personal_note_upload_cancelled));
             progress.show(CacheDetailActivity.this, res.getString(R.string.cache_personal_note_uploading), res.getString(R.string.cache_personal_note_uploading), true, cancelMessage);
 
-            myHandler.disposeIfCancelled(AndroidRxUtils.networkScheduler.scheduleDirect(new Runnable() {
+            myHandler.add(AndroidRxUtils.networkScheduler.scheduleDirect(new Runnable() {
                 @Override
                 public void run() {
                     final PersonalNoteCapability connector = (PersonalNoteCapability) ConnectorFactory.getConnector(cache);
                     final boolean success = connector.uploadPersonalNote(cache);
                     final Message msg = Message.obtain();
                     final Bundle bundle = new Bundle();
-                    bundle.putString(SimpleCancellableHandler.MESSAGE_TEXT,
+                    bundle.putString(SimpleDisposableHandler.MESSAGE_TEXT,
                             CgeoApplication.getInstance().getString(success ? R.string.cache_personal_note_upload_done : R.string.cache_personal_note_upload_error));
                     msg.setData(bundle);
                     myHandler.sendMessage(msg);
@@ -2291,7 +2291,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         return cache;
     }
 
-    private static class StoreCacheHandler extends SimpleCancellableHandler {
+    private static class StoreCacheHandler extends SimpleDisposableHandler {
 
         StoreCacheHandler(final CacheDetailActivity activity, final Progress progress) {
             super(activity, progress);
@@ -2307,7 +2307,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         }
     }
 
-    private static final class RefreshCacheHandler extends SimpleCancellableHandler {
+    private static final class RefreshCacheHandler extends SimpleDisposableHandler {
 
         RefreshCacheHandler(final CacheDetailActivity activity, final Progress progress) {
             super(activity, progress);

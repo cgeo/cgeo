@@ -38,7 +38,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.AngleUtils;
-import cgeo.geocaching.utils.CancellableHandler;
+import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.LeastRecentlyUsedSet;
 import cgeo.geocaching.utils.Log;
@@ -352,7 +352,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
     private final Handler showProgressHandler = new ShowProgressHandler(this);
 
-    private final class LoadDetailsHandler extends CancellableHandler {
+    private final class LoadDetailsHandler extends DisposableHandler {
 
         @Override
         public void handleRegularMessage(final Message msg) {
@@ -375,7 +375,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
             }
         }
         @Override
-        public void handleCancel(final Object extra) {
+        public void handleDispose(final Object extra) {
             if (loadDetailsThread != null) {
                 loadDetailsThread.stopIt();
             }
@@ -1445,18 +1445,18 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
     private class LoadDetails extends Thread {
 
-        private final CancellableHandler handler;
+        private final DisposableHandler handler;
         private final List<String> geocodes;
         private final Set<Integer> listIds;
 
-        LoadDetails(final CancellableHandler handler, final List<String> geocodes, final Set<Integer> listIds) {
+        LoadDetails(final DisposableHandler handler, final List<String> geocodes, final Set<Integer> listIds) {
             this.handler = handler;
             this.geocodes = geocodes;
             this.listIds = listIds;
         }
 
         public void stopIt() {
-            handler.cancel();
+            handler.dispose();
         }
 
         @Override
@@ -1467,7 +1467,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
             for (final String geocode : geocodes) {
                 try {
-                    if (handler.isCancelled()) {
+                    if (handler.isDisposed()) {
                         break;
                     }
 

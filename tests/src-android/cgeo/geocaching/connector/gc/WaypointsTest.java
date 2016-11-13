@@ -7,13 +7,13 @@ import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.utils.CancellableHandler;
+import cgeo.geocaching.utils.DisposableHandler;
 
 import android.os.Message;
 
 public class WaypointsTest extends CGeoTestCase {
 
-    public static final CancellableHandler handler = new CancellableHandler() {
+    public static final DisposableHandler handler = new DisposableHandler() {
         @Override
         protected void handleRegularMessage(final Message message) {
             // Dummy
