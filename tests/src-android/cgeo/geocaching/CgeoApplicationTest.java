@@ -27,7 +27,7 @@ import cgeo.geocaching.test.mock.GC1ZXX2;
 import cgeo.geocaching.test.mock.GC2JVEH;
 import cgeo.geocaching.test.mock.GC3FJ5F;
 import cgeo.geocaching.test.mock.MockedCache;
-import cgeo.geocaching.utils.CancellableHandler;
+import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.Log;
 import cgeo.test.Compare;
 
@@ -109,7 +109,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
     }
 
     /**
-     * Test {@link Geocache#searchByGeocode(String, String, boolean, CancellableHandler)}
+     * Test {@link Geocache#searchByGeocode(String, String, boolean, DisposableHandler)}
      */
     @MediumTest
     public static Geocache testSearchByGeocode(final String geocode) {
@@ -124,7 +124,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
     }
 
     /**
-     * Test {@link Geocache#searchByGeocode(String, String, boolean, CancellableHandler)}
+     * Test {@link Geocache#searchByGeocode(String, String, boolean, DisposableHandler)}
      */
     @MediumTest
     public static void testSearchByGeocodeNotExisting() {
@@ -152,7 +152,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
     }
 
     /**
-     * Test {@link Geocache#searchByGeocode(String, String, boolean, CancellableHandler)}
+     * Test {@link Geocache#searchByGeocode(String, String, boolean, DisposableHandler)}
      */
     @MediumTest
     public static void testSearchByGeocodeNotLoggedIn() {
@@ -187,7 +187,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
     }
 
     /**
-     * Test {@link Geocache#searchByGeocode(String, String, boolean, CancellableHandler)}
+     * Test {@link Geocache#searchByGeocode(String, String, boolean, DisposableHandler)}
      */
     @MediumTest
     public static void testSearchErrorOccured() {

@@ -43,7 +43,7 @@ import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.AngleUtils;
-import cgeo.geocaching.utils.CancellableHandler;
+import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.functions.Action1;
@@ -999,7 +999,7 @@ public class NewMap extends AbstractActionBarActivity {
 
     }
 
-    private static final class LoadDetailsHandler extends CancellableHandler {
+    private static final class LoadDetailsHandler extends DisposableHandler {
 
         private final int detailTotal;
         private int detailProgress;
@@ -1052,7 +1052,7 @@ public class NewMap extends AbstractActionBarActivity {
         }
 
         @Override
-        public void handleCancel(final Object extra) {
+        public void handleDispose(final Object extra) {
             final NewMap map = mapRef.get();
             if (map == null) {
                 return;
@@ -1343,18 +1343,18 @@ public class NewMap extends AbstractActionBarActivity {
 
     private class LoadDetails extends Thread {
 
-        private final CancellableHandler handler;
+        private final DisposableHandler handler;
         private final Collection<String> geocodes;
         private final Set<Integer> listIds;
 
-        LoadDetails(final CancellableHandler handler, final Collection<String> geocodes, final Set<Integer> listIds) {
+        LoadDetails(final DisposableHandler handler, final Collection<String> geocodes, final Set<Integer> listIds) {
             this.handler = handler;
             this.geocodes = geocodes;
             this.listIds = listIds;
         }
 
         public void stopIt() {
-            handler.cancel();
+            handler.dispose();
         }
 
         @Override
@@ -1365,7 +1365,7 @@ public class NewMap extends AbstractActionBarActivity {
 
             for (final String geocode : geocodes) {
                 try {
-                    if (handler.isCancelled()) {
+                    if (handler.isDisposed()) {
                         break;
                     }
 

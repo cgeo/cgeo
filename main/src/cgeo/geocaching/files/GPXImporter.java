@@ -4,7 +4,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.ui.dialog.Dialogs;
-import cgeo.geocaching.utils.CancellableHandler;
+import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
@@ -162,7 +162,7 @@ public class GPXImporter {
         importGPX(uri, mimeType, null);
     }
 
-    private final CancellableHandler progressHandler = new CancellableHandler() {
+    private final DisposableHandler progressHandler = new DisposableHandler() {
         @Override
         public void handleRegularMessage(final Message msg) {
             progress.setProgress(msg.arg1);
@@ -193,7 +193,7 @@ public class GPXImporter {
 
                 case IMPORT_STEP_STATIC_MAPS_SKIPPED:
                     progress.dismiss();
-                    progressHandler.cancel();
+                    progressHandler.dispose();
                     final StringBuilder bufferSkipped = new StringBuilder(20);
                     bufferSkipped.append(res.getString(R.string.gpx_import_static_maps_skipped)).append(", ").append(res.getString(R.string.gpx_import_caches_imported_with_filename, msg.arg1, msg.obj));
                     Dialogs.message(fromActivity, R.string.gpx_import_title_caches_imported, bufferSkipped.toString());
@@ -214,7 +214,7 @@ public class GPXImporter {
 
                 case IMPORT_STEP_CANCEL:
                     progress.dismiss();
-                    progressHandler.cancel();
+                    progressHandler.dispose();
                     break;
 
                 case IMPORT_STEP_CANCELED:

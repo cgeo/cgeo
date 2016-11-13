@@ -2,7 +2,7 @@ package cgeo.geocaching.connector.capability;
 
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.IConnector;
-import cgeo.geocaching.utils.CancellableHandler;
+import cgeo.geocaching.utils.DisposableHandler;
 
 import android.support.annotation.Nullable;
 
@@ -11,5 +11,5 @@ import android.support.annotation.Nullable;
  *
  */
 public interface ISearchByGeocode extends IConnector {
-    SearchResult searchByGeocode(@Nullable final String geocode, @Nullable final String guid, final CancellableHandler handler);
+    SearchResult searchByGeocode(@Nullable final String geocode, @Nullable final String guid, final DisposableHandler handler);
 }

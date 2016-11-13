@@ -66,7 +66,7 @@ import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.CalendarUtils;
-import cgeo.geocaching.utils.CancellableHandler;
+import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.functions.Action1;
 
@@ -304,11 +304,11 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         refreshSpinnerAdapter();
     }
 
-    private class LoadDetailsHandler extends CancellableHandler {
+    private class LoadDetailsHandler extends DisposableHandler {
 
         @Override
-        protected void handleCancel(final Object extra) {
-            super.handleCancel(extra);
+        protected void handleDispose(final Object extra) {
+            super.handleDispose(extra);
             replaceCacheListFromSearch();
         }
 
@@ -358,7 +358,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     /**
      * TODO Possibly parts should be a Thread not a Handler
      */
-    private class DownloadFromWebHandler extends CancellableHandler {
+    private class DownloadFromWebHandler extends DisposableHandler {
         @Override
         public void handleRegularMessage(final Message msg) {
             updateAdapter();
@@ -395,7 +395,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         }
     }
 
-    private final CancellableHandler clearOfflineLogsHandler = new CancellableHandler() {
+    private final DisposableHandler clearOfflineLogsHandler = new DisposableHandler() {
 
         @Override
         public void handleRegularMessage(final Message msg) {
@@ -1299,7 +1299,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     /**
      * Method to asynchronously refresh the caches details.
      */
-    private void loadDetails(final CancellableHandler handler, final List<Geocache> caches, final Set<Integer> additionalListIds) {
+    private void loadDetails(final DisposableHandler handler, final List<Geocache> caches, final Set<Integer> additionalListIds) {
         final Observable<Geocache> allCaches;
         if (Settings.isStoreOfflineMaps()) {
             allCaches = Observable.create(new ObservableOnSubscribe<Geocache>() {
@@ -1350,7 +1350,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 handler.sendEmptyMessage(DownloadProgress.MSG_DONE);
             }
         });
-        handler.disposeIfCancelled(loaded.subscribe());
+        handler.add(loaded.subscribe());
     }
 
     private static final class LastPositionHelper {

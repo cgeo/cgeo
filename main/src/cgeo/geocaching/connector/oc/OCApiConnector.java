@@ -5,7 +5,7 @@ import cgeo.geocaching.connector.capability.ISearchByGeocode;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.utils.AndroidRxUtils;
-import cgeo.geocaching.utils.CancellableHandler;
+import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.CryptUtils;
 
 import android.support.annotation.NonNull;
@@ -64,7 +64,7 @@ public class OCApiConnector extends OCConnector implements ISearchByGeocode {
     }
 
     @Override
-    public SearchResult searchByGeocode(@Nullable final String geocode, @Nullable final String guid, final CancellableHandler handler) {
+    public SearchResult searchByGeocode(@Nullable final String geocode, @Nullable final String guid, final DisposableHandler handler) {
         final Geocache cache = OkapiClient.getCache(geocode);
         if (cache == null) {
             return null;

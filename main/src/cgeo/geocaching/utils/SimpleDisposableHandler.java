@@ -11,12 +11,12 @@ import android.support.annotation.StringRes;
 
 import java.lang.ref.WeakReference;
 
-public class SimpleCancellableHandler extends CancellableHandler {
+public class SimpleDisposableHandler extends DisposableHandler {
     public static final String MESSAGE_TEXT = "message_text";
     protected final WeakReference<AbstractActivity> activityRef;
     protected final WeakReference<Progress> progressDialogRef;
 
-    public SimpleCancellableHandler(final AbstractActivity activity, final Progress progress) {
+    public SimpleDisposableHandler(final AbstractActivity activity, final Progress progress) {
         this.activityRef = new WeakReference<>(activity);
         this.progressDialogRef = new WeakReference<>(progress);
     }
@@ -31,7 +31,7 @@ public class SimpleCancellableHandler extends CancellableHandler {
     }
 
     @Override
-    protected void handleCancel(final Object extra) {
+    protected void handleDispose(final Object extra) {
         final AbstractActivity activity = activityRef.get();
         if (activity != null) {
             activity.showToast((String) extra);

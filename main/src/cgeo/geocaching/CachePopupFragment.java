@@ -10,7 +10,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.utils.AndroidRxUtils;
-import cgeo.geocaching.utils.CancellableHandler;
+import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.functions.Action1;
@@ -51,7 +51,7 @@ public class CachePopupFragment extends AbstractDialogFragment {
         return f;
     }
 
-    private static class StoreCacheHandler extends CancellableHandler {
+    private static class StoreCacheHandler extends DisposableHandler {
         private final int progressMessage;
         private final WeakReference<CachePopupFragment> popupRef;
 

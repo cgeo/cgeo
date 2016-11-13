@@ -1,7 +1,7 @@
 package cgeo.geocaching.files;
 
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.utils.CancellableHandler;
+import cgeo.geocaching.utils.DisposableHandler;
 
 import android.os.Handler;
 
@@ -10,7 +10,7 @@ import java.util.Collection;
 
 abstract class AbstractImportGpxThread extends AbstractImportThread {
 
-    protected AbstractImportGpxThread(final int listId, final Handler importStepHandler, final CancellableHandler progressHandler) {
+    protected AbstractImportGpxThread(final int listId, final Handler importStepHandler, final DisposableHandler progressHandler) {
         super(listId, importStepHandler, progressHandler);
     }
 

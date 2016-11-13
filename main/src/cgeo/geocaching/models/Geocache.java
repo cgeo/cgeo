@@ -37,7 +37,7 @@ import cgeo.geocaching.staticmaps.StaticMapsProvider;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.DataStore.StorageLocation;
 import cgeo.geocaching.utils.CalendarUtils;
-import cgeo.geocaching.utils.CancellableHandler;
+import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.LazyInitializedList;
 import cgeo.geocaching.utils.Log;
@@ -1550,7 +1550,7 @@ public class Geocache implements IWaypoint {
         store(Collections.singleton(StoredList.STANDARD_LIST_ID), null);
     }
 
-    public void store(final Set<Integer> listIds, final CancellableHandler handler) {
+    public void store(final Set<Integer> listIds, final DisposableHandler handler) {
         lists.clear();
         lists.addAll(listIds);
         storeCache(this, null, lists, false, handler);
@@ -1616,7 +1616,7 @@ public class Geocache implements IWaypoint {
         warnIncorrectParsingIfBlank(getLocation(), "location");
     }
 
-    public Disposable refresh(final CancellableHandler handler, final Scheduler scheduler) {
+    public Disposable refresh(final DisposableHandler handler, final Scheduler scheduler) {
         return scheduler.scheduleDirect(new Runnable() {
             @Override
             public void run() {
@@ -1625,17 +1625,17 @@ public class Geocache implements IWaypoint {
         });
     }
 
-    public void refreshSynchronous(final CancellableHandler handler) {
+    public void refreshSynchronous(final DisposableHandler handler) {
         refreshSynchronous(handler, lists);
     }
 
-    public void refreshSynchronous(final CancellableHandler handler, final Set<Integer> additionalListIds) {
+    public void refreshSynchronous(final DisposableHandler handler, final Set<Integer> additionalListIds) {
         final Set<Integer> combinedListIds = new HashSet<>(lists);
         combinedListIds.addAll(additionalListIds);
         storeCache(null, geocode, combinedListIds, true, handler);
     }
 
-    public static void storeCache(final Geocache origCache, final String geocode, final Set<Integer> lists, final boolean forceRedownload, final CancellableHandler handler) {
+    public static void storeCache(final Geocache origCache, final String geocode, final Set<Integer> lists, final boolean forceRedownload, final DisposableHandler handler) {
         try {
             final Geocache cache;
             // get cache details, they may not yet be complete
@@ -1662,7 +1662,7 @@ public class Geocache implements IWaypoint {
                 return;
             }
 
-            if (CancellableHandler.isCancelled(handler)) {
+            if (DisposableHandler.isDisposed(handler)) {
                 return;
             }
 
@@ -1673,7 +1673,7 @@ public class Geocache implements IWaypoint {
                 Html.fromHtml(cache.getDescription(), imgGetter, null);
             }
 
-            if (CancellableHandler.isCancelled(handler)) {
+            if (DisposableHandler.isDisposed(handler)) {
                 return;
             }
 
@@ -1684,7 +1684,7 @@ public class Geocache implements IWaypoint {
                 }
             }
 
-            if (CancellableHandler.isCancelled(handler)) {
+            if (DisposableHandler.isDisposed(handler)) {
                 return;
             }
 
@@ -1699,28 +1699,28 @@ public class Geocache implements IWaypoint {
                 }
             }
 
-            if (CancellableHandler.isCancelled(handler)) {
+            if (DisposableHandler.isDisposed(handler)) {
                 return;
             }
 
             cache.setLists(lists);
             DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
 
-            if (CancellableHandler.isCancelled(handler)) {
+            if (DisposableHandler.isDisposed(handler)) {
                 return;
             }
 
             StaticMapsProvider.downloadMaps(cache).mergeWith(imgGetter.waitForEndCompletable(handler)).blockingAwait();
 
             if (handler != null) {
-                handler.sendEmptyMessage(CancellableHandler.DONE);
+                handler.sendEmptyMessage(DisposableHandler.DONE);
             }
         } catch (final Exception e) {
             Log.e("Geocache.storeCache", e);
         }
     }
 
-    public static SearchResult searchByGeocode(final String geocode, final String guid, final boolean forceReload, final CancellableHandler handler) {
+    public static SearchResult searchByGeocode(final String geocode, final String guid, final boolean forceReload, final DisposableHandler handler) {
         if (StringUtils.isBlank(geocode) && StringUtils.isBlank(guid)) {
             Log.e("Geocache.searchByGeocode: No geocode nor guid given");
             return null;

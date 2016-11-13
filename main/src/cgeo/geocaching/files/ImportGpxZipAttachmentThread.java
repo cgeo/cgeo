@@ -1,7 +1,7 @@
 package cgeo.geocaching.files;
 
 import cgeo.geocaching.network.Network;
-import cgeo.geocaching.utils.CancellableHandler;
+import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.Log;
 
 import android.content.ContentResolver;
@@ -16,7 +16,7 @@ class ImportGpxZipAttachmentThread extends AbstractImportGpxZipThread {
     private final Uri uri;
     private final ContentResolver contentResolver;
 
-    ImportGpxZipAttachmentThread(final Uri uri, final ContentResolver contentResolver, final int listId, final Handler importStepHandler, final CancellableHandler progressHandler) {
+    ImportGpxZipAttachmentThread(final Uri uri, final ContentResolver contentResolver, final int listId, final Handler importStepHandler, final DisposableHandler progressHandler) {
         super(listId, importStepHandler, progressHandler);
         this.uri = uri;
         this.contentResolver = contentResolver;
