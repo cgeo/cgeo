@@ -7,6 +7,7 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.compress.utils.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -89,12 +90,16 @@ public final class GeolutinsConnector extends AbstractTrackableConnector {
                 Log.e("GeolutinsConnector.searchTrackable: No data from server");
                 return null;
             }
-            final InputSource is = new InputSource(response);
-            final List<Trackable> trackables = GeolutinsParser.parse(is);
+            try {
+                final InputSource is = new InputSource(response);
+                final List<Trackable> trackables = GeolutinsParser.parse(is);
 
-            if (CollectionUtils.isNotEmpty(trackables)) {
-                DataStore.saveTrackable(trackables.get(0));
-                return trackables.get(0);
+                if (CollectionUtils.isNotEmpty(trackables)) {
+                    DataStore.saveTrackable(trackables.get(0));
+                    return trackables.get(0);
+                }
+            } finally {
+                IOUtils.closeQuietly(response);
             }
         } catch (final Exception e) {
             Log.w("GeolutinsConnector.searchTrackable", e);
@@ -143,11 +148,15 @@ public final class GeolutinsConnector extends AbstractTrackableConnector {
 
         final Parameters params = new Parameters("G", trackingCode);
         final InputStream response = Network.getResponseStream(Network.getRequest(URL + "/xml/decode.php", params));
-        final List<Trackable> trackables = GeolutinsParser.parse(new InputSource(response));
+        try {
+            final List<Trackable> trackables = GeolutinsParser.parse(new InputSource(response));
 
-        if (CollectionUtils.isNotEmpty(trackables)) {
-            return trackables.get(0).getGeocode();
+            if (CollectionUtils.isNotEmpty(trackables)) {
+                return trackables.get(0).getGeocode();
+            }
+            return null;
+        } finally {
+            IOUtils.closeQuietly(response);
         }
-        return null;
     }
 }

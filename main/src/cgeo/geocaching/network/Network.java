@@ -344,6 +344,12 @@ public final class Network {
                 .flatMap(stringToJson);
     }
 
+    /**
+     * Get the response stream. The stream must be closed after use.
+     *
+     * @param response the response
+     * @return the body stream
+     */
     @Nullable
     public static InputStream getResponseStream(final Single<Response> response) {
         try {
@@ -361,6 +367,8 @@ public final class Network {
         } catch (final Exception e) {
             Log.e("getResponseData", e);
             return null;
+        } finally {
+            response.close();
         }
     }
 
@@ -428,6 +436,7 @@ public final class Network {
                             return Single.just(Jsoup.parse(inputStream, null, uri));
                         } finally {
                             IOUtils.closeQuietly(inputStream);
+                            resp.close();
                         }
                     }
                     throw new IOException("unsuccessful request " + uri);
@@ -463,6 +472,8 @@ public final class Network {
                     return Single.just(response.body().string());
                 } catch (final IOException e) {
                     return Single.error(e);
+                } finally {
+                    response.close();
                 }
             }
             return Single.error(new IOException("request was not successful"));

@@ -7,6 +7,7 @@ import cgeo.geocaching.network.Network;
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 import cgeo.geocaching.test.R;
 
+import org.apache.commons.compress.utils.IOUtils;
 import org.xml.sax.InputSource;
 
 import java.io.InputStream;
@@ -52,14 +53,18 @@ public class GeolutinsParserTest extends AbstractResourceInstrumentationTestCase
         final InputStream page = Network.getResponseStream(Network.getRequest("http://www.geolutins.com/xml/api.php?G=GL007B8"));
         assertThat(page).isNotNull();
 
-        final List<Trackable> trackables1 = GeolutinsParser.parse(new InputSource(page));
-        assertThat(trackables1).hasSize(1);
+        try {
+            final List<Trackable> trackables1 = GeolutinsParser.parse(new InputSource(page));
+            assertThat(trackables1).hasSize(1);
 
-        // Check Geolutins in list
-        final Trackable trackable1 = trackables1.get(0);
-        assertThat(trackable1.getName()).isEqualTo("c:geo tests");
-        assertThat(trackable1.getGeocode()).isEqualTo("GL007B8");
-        assertThat(trackable1.getDetails()).isEqualTo("Virtual GeoLutins for testing c:geo android application.");
-        assertThat(trackable1.getOwner()).isEqualTo("kumy");
+            // Check Geolutins in list
+            final Trackable trackable1 = trackables1.get(0);
+            assertThat(trackable1.getName()).isEqualTo("c:geo tests");
+            assertThat(trackable1.getGeocode()).isEqualTo("GL007B8");
+            assertThat(trackable1.getDetails()).isEqualTo("Virtual GeoLutins for testing c:geo android application.");
+            assertThat(trackable1.getOwner()).isEqualTo("kumy");
+        } finally {
+            IOUtils.closeQuietly(page);
+        }
     }
 }

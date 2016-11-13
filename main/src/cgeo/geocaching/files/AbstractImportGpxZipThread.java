@@ -5,6 +5,7 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.utils.DisposableHandler;
 
 import org.apache.commons.compress.archivers.zip.ZipArchiveInputStream;
+import org.apache.commons.compress.utils.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import android.os.Handler;
@@ -55,7 +56,8 @@ abstract class AbstractImportGpxZipThread extends AbstractImportGpxThread {
         }
 
         // 2. parse waypoint files
-        final ZipArchiveInputStream zisPass2 = new ZipArchiveInputStream(new BufferedInputStream(getInputStream()), ENCODING);
+        final InputStream inputStream = getInputStream();
+        final ZipArchiveInputStream zisPass2 = new ZipArchiveInputStream(new BufferedInputStream(inputStream), ENCODING);
         try {
             for (ZipEntry zipEntry = zisPass2.getNextZipEntry(); zipEntry != null; zipEntry = zisPass2.getNextZipEntry()) {
                 if (StringUtils.endsWithIgnoreCase(zipEntry.getName(), GPXImporter.WAYPOINTS_FILE_SUFFIX_AND_EXTENSION)) {
@@ -65,6 +67,7 @@ abstract class AbstractImportGpxZipThread extends AbstractImportGpxThread {
             }
         } finally {
             zisPass2.close();
+            IOUtils.closeQuietly(inputStream);
         }
 
         return caches;

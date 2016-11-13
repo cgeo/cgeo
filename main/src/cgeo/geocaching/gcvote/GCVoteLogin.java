@@ -11,6 +11,7 @@ import cgeo.geocaching.utils.Log;
 
 import java.io.InputStream;
 
+import org.apache.commons.compress.utils.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import android.support.annotation.NonNull;
 import org.xmlpull.v1.XmlPullParser;
@@ -73,6 +74,8 @@ public class GCVoteLogin extends AbstractLogin {
         } catch (final Exception e) {
             Log.w("Cannot parse GCVote result", e);
             return StatusCode.UNKNOWN_ERROR;
+        } finally {
+            IOUtils.closeQuietly(response);
         }
 
         return StatusCode.UNKNOWN_ERROR;
