@@ -75,50 +75,43 @@ public class GeopointFormatter {
                 return String.format((Locale) null, "%.6f,%.6f", latSigned, lonSigned);
 
             case LAT_LON_DECMINUTE: {
-                final Geopoint rgp = gp.roundedAt(60 * 1000);
                 return String.format(Locale.getDefault(), "%c %02d° %06.3f" + Formatter.SEPARATOR + "%c %03d° %06.3f",
-                        rgp.getLatDir(), rgp.getLatDeg(), rgp.getLatMinRaw(),
-                        rgp.getLonDir(), rgp.getLonDeg(), rgp.getLonMinRaw());
+                        gp.getLatDir(), gp.getLatDeg(), gp.getLatMinRaw(),
+                        gp.getLonDir(), gp.getLonDeg(), gp.getLonMinRaw());
             }
 
             case LAT_LON_DECMINUTE_RAW: {
-                final Geopoint rgp = gp.roundedAt(60 * 1000);
                 return String.format((Locale) null, "%c %02d° %06.3f %c %03d° %06.3f",
-                        rgp.getLatDir(), rgp.getLatDeg(), rgp.getLatMinRaw(),
-                        rgp.getLonDir(), rgp.getLonDeg(), rgp.getLonMinRaw());
+                        gp.getLatDir(), gp.getLatDeg(), gp.getLatMinRaw(),
+                        gp.getLonDir(), gp.getLonDeg(), gp.getLonMinRaw());
             }
 
             case LAT_LON_DECSECOND: {
-                final Geopoint rgp = gp.roundedAt(3600 * 1000);
                 return String.format(Locale.getDefault(), "%c %02d° %02d' %06.3f\"" + Formatter.SEPARATOR + "%c %03d° %02d' %06.3f\"",
-                        rgp.getLatDir(), rgp.getLatDeg(), rgp.getLatMin(), rgp.getLatSecRaw(),
-                        rgp.getLonDir(), rgp.getLonDeg(), rgp.getLonMin(), rgp.getLonSecRaw());
+                        gp.getLatDir(), gp.getLatDeg(), gp.getLatMin(), gp.getLatSecRaw(),
+                        gp.getLonDir(), gp.getLonDeg(), gp.getLonMin(), gp.getLonSecRaw());
             }
 
             case LAT_DECDEGREE_RAW:
                 return String.format((Locale) null, "%.6f", latSigned);
 
             case LAT_DECMINUTE: {
-                final Geopoint rgp = gp.roundedAt(60 * 1000);
-                return String.format(Locale.getDefault(), "%c %02d° %06.3f", rgp.getLatDir(), rgp.getLatDeg(), rgp.getLatMinRaw());
+                return String.format(Locale.getDefault(), "%c %02d° %06.3f", gp.getLatDir(), gp.getLatDeg(), gp.getLatMinRaw());
             }
 
             case LAT_DECMINUTE_RAW: {
-                final Geopoint rgp = gp.roundedAt(60 * 1000);
-                return String.format(Locale.getDefault(), "%c %02d %06.3f", rgp.getLatDir(), rgp.getLatDeg(), rgp.getLatMinRaw());
+                return String.format(Locale.getDefault(), "%c %02d %06.3f", gp.getLatDir(), gp.getLatDeg(), gp.getLatMinRaw());
             }
 
             case LON_DECDEGREE_RAW:
                 return String.format((Locale) null, "%.6f", lonSigned);
 
             case LON_DECMINUTE: {
-                final Geopoint rgp = gp.roundedAt(60 * 1000);
-                return String.format(Locale.getDefault(), "%c %03d° %06.3f", rgp.getLonDir(), rgp.getLonDeg(), rgp.getLonMinRaw());
+                return String.format(Locale.getDefault(), "%c %03d° %06.3f", gp.getLonDir(), gp.getLonDeg(), gp.getLonMinRaw());
             }
 
             case LON_DECMINUTE_RAW: {
-                final Geopoint rgp = gp.roundedAt(60 * 1000);
-                return String.format(Locale.getDefault(), "%c %03d %06.3f", rgp.getLonDir(), rgp.getLonDeg(), rgp.getLonMinRaw());
+                return String.format(Locale.getDefault(), "%c %03d %06.3f", gp.getLonDir(), gp.getLonDeg(), gp.getLonMinRaw());
             }
 
             case UTM: {

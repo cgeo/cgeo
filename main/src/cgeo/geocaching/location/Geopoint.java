@@ -46,20 +46,6 @@ public final class Geopoint implements ICoordinates, Parcelable {
     }
 
     /**
-     * Creates new Geopoint with given latitude and longitude in microdegrees.
-     * The <tt>dummy</tt> parameter is ignored and is only used to prevent the wrong
-     * constructor from being used.
-     *
-     * @param latE6 latitude in microdegrees
-     * @param lonE6 longitude in microdegrees
-     * @param dummy ignored parameter
-     */
-    public Geopoint(final int latE6, final int lonE6, @SuppressWarnings("unused") final Object dummy) {
-        latitudeE6 = latE6;
-        longitudeE6 = lonE6;
-    }
-
-    /**
      * Creates new Geopoint with latitude and longitude parsed from string.
      *
      * @param text
@@ -164,18 +150,6 @@ public final class Geopoint implements ICoordinates, Parcelable {
      */
     public double getLongitude() {
         return longitudeE6 / 1e6;
-    }
-
-    /*
-     * Return a waypoint which is the copy of this one rounded to the given limit.
-     * For example, to get a waypoint adapter to a display with 3 digits after the
-     * seconds decimal point, a rounding factor of 3600*1000 would be appropriate.
-     */
-    Geopoint roundedAt(final long factor) {
-        final double df = 1e6d / factor;
-        return new Geopoint((int) Math.round(Math.round(getLatitudeE6() / df) * df),
-                (int) Math.round(Math.round(getLongitudeE6() / df) * df),
-                this);
     }
 
     /**
