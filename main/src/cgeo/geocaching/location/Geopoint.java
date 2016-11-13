@@ -1,8 +1,5 @@
 package cgeo.geocaching.location;
 
-import cgeo.geocaching.R;
-import cgeo.geocaching.models.ICoordinates;
-
 import android.location.Location;
 import android.os.Build;
 import android.os.Parcel;
@@ -11,6 +8,9 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import org.apache.commons.lang3.StringUtils;
+
+import cgeo.geocaching.R;
+import cgeo.geocaching.models.ICoordinates;
 
 /**
  * Abstraction of geographic point. This class is immutable.
@@ -43,20 +43,6 @@ public final class Geopoint implements ICoordinates, Parcelable {
     public Geopoint(final double lat, final double lon) {
         latitudeE6 = (int) Math.round(lat * 1e6);
         longitudeE6 = (int) Math.round(lon * 1e6);
-    }
-
-    /**
-     * Creates new Geopoint with given latitude and longitude in microdegrees.
-     * The <tt>dummy</tt> parameter is ignored and is only used to prevent the wrong
-     * constructor from being used.
-     *
-     * @param latE6 latitude in microdegrees
-     * @param lonE6 longitude in microdegrees
-     * @param dummy ignored parameter
-     */
-    public Geopoint(final int latE6, final int lonE6, @SuppressWarnings("unused") final Object dummy) {
-        latitudeE6 = latE6;
-        longitudeE6 = lonE6;
     }
 
     /**
@@ -173,9 +159,7 @@ public final class Geopoint implements ICoordinates, Parcelable {
      */
     Geopoint roundedAt(final long factor) {
         final double df = 1e6d / factor;
-        return new Geopoint((int) Math.round(Math.round(getLatitudeE6() / df) * df),
-                (int) Math.round(Math.round(getLongitudeE6() / df) * df),
-                this);
+        return new Geopoint(Math.round(Math.round(getLatitudeE6() / df) * df) / 1e6d, Math.round(Math.round(getLongitudeE6() / df) * df) / 1e6d);
     }
 
     /**
