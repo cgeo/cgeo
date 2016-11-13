@@ -723,7 +723,7 @@ public class NewMap extends AbstractActionBarActivity {
         waitDialog = new ProgressDialog(this);
         waitDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         waitDialog.setCancelable(true);
-        waitDialog.setCancelMessage(loadDetailsHandler.cancelMessage());
+        waitDialog.setCancelMessage(loadDetailsHandler.disposeMessage());
         waitDialog.setMax(count);
         waitDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
 
@@ -1052,7 +1052,7 @@ public class NewMap extends AbstractActionBarActivity {
         }
 
         @Override
-        public void handleDispose(final Object extra) {
+        public void handleDispose() {
             final NewMap map = mapRef.get();
             if (map == null) {
                 return;

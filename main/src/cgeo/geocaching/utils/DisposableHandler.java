@@ -33,11 +33,9 @@ public abstract class DisposableHandler extends Handler implements Disposable {
         static final int CANCEL_CALLBACK = -2;
 
         final int kind;
-        final Object payload;
 
-        CancelHolder(final int kind, final Object payload) {
+        CancelHolder(final int kind) {
             this.kind = kind;
-            this.payload = payload;
         }
     }
 
@@ -47,9 +45,9 @@ public abstract class DisposableHandler extends Handler implements Disposable {
             final CancelHolder holder = (CancelHolder) message.obj;
             if (holder.kind == CancelHolder.CANCEL && !isDisposed()) {
                 disposables.dispose();
-                handleDispose(holder.payload);
+                handleDispose();
             } else if (holder.kind == CancelHolder.CANCEL_CALLBACK) {
-                handleDispose(holder.payload);
+                handleDispose();
             }
         } else if (!isDisposed()) {
             handleRegularMessage(message);
@@ -57,7 +55,7 @@ public abstract class DisposableHandler extends Handler implements Disposable {
     }
 
     /**
-     * Add a disposable to the list of disposables to be disposed at cancellation time.
+     * Add a disposable to the list of disposables to be disposed at disposition time.
      */
     public final void add(final Disposable disposable) {
         disposables.add(disposable);
@@ -75,39 +73,27 @@ public abstract class DisposableHandler extends Handler implements Disposable {
     /**
      * Handle a dispose message.
      *
-     * @param extra
-     *            the additional payload given by the canceller
      */
-    protected void handleDispose(final Object extra) {
+    protected void handleDispose() {
     }
 
     /**
      * Get a dispose message that can later be sent to this handler to dispose it.
      *
-     * @return a dispose message
+     * @return a message that, when sent, will dispose the current handler.
      */
-    public Message cancelMessage() {
-        return cancelMessage(null);
+    public Message disposeMessage() {
+        return obtainMessage(0, new CancelHolder(CancelHolder.CANCEL));
     }
 
     /**
-     * Get a dispose message with an additional parameter that can later be sent to
-     * this handler to dispose it.
-     *
-     * @param extra
-     *            the extra parameter to give to the dispose handler
-     * @return a dispose message
-     */
-    public Message cancelMessage(final Object extra) {
-        return obtainMessage(0, new CancelHolder(CancelHolder.CANCEL, extra));
-    }
-
-    /**
-     * Cancel the current handler. This can be called from any thread.
+     * Cancel the current handler. This can be called from any thread. The disposables
+     * added with {@link #add(Disposable)} will be disposed immediately, while the
+     * {@link #handleDispose()} callback will be called synchronously by the handler.
      */
     public void dispose() {
         disposables.dispose();
-        obtainMessage(0, new CancelHolder(CancelHolder.CANCEL_CALLBACK, null)).sendToTarget();
+        obtainMessage(0, new CancelHolder(CancelHolder.CANCEL_CALLBACK)).sendToTarget();
     }
 
     /**

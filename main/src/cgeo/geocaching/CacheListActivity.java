@@ -307,8 +307,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private class LoadDetailsHandler extends DisposableHandler {
 
         @Override
-        protected void handleDispose(final Object extra) {
-            super.handleDispose(extra);
+        protected void handleDispose() {
+            super.handleDispose();
             replaceCacheListFromSearch();
         }
 
@@ -898,7 +898,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
             @Override
             public void onClick(final DialogInterface dialog, final int which) {
-                progress.show(CacheListActivity.this, null, res.getString(R.string.caches_clear_offlinelogs_progress), true, clearOfflineLogsHandler.cancelMessage());
+                progress.show(CacheListActivity.this, null, res.getString(R.string.caches_clear_offlinelogs_progress), true, clearOfflineLogsHandler.disposeMessage());
                 clearOfflineLogs(clearOfflineLogsHandler, adapter.getCheckedOrAllCaches());
             }
         });
@@ -1242,7 +1242,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         }
 
         final LoadDetailsHandler loadDetailsHandler = new LoadDetailsHandler();
-        progress.show(this, null, message, ProgressDialog.STYLE_HORIZONTAL, loadDetailsHandler.cancelMessage());
+        progress.show(this, null, message, ProgressDialog.STYLE_HORIZONTAL, loadDetailsHandler.disposeMessage());
         progress.setMaxProgressAndReset(detailTotal);
 
         detailProgressTime = System.currentTimeMillis();
@@ -1288,7 +1288,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         detailProgress.set(0);
         showProgress(false);
         final DownloadFromWebHandler downloadFromWebHandler = new DownloadFromWebHandler();
-        progress.show(this, null, res.getString(R.string.web_import_waiting), true, downloadFromWebHandler.cancelMessage());
+        progress.show(this, null, res.getString(R.string.web_import_waiting), true, downloadFromWebHandler.disposeMessage());
         Send2CgeoDownloader.loadFromWeb(downloadFromWebHandler, listId);
     }
 
