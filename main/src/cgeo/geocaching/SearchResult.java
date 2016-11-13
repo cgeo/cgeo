@@ -11,6 +11,7 @@ import cgeo.geocaching.gcvote.GCVote;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.Log;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -26,6 +27,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.Callable;
 
+import io.reactivex.Maybe;
 import io.reactivex.Observable;
 import io.reactivex.functions.BiFunction;
 import io.reactivex.functions.Function;
@@ -317,19 +319,20 @@ public class SearchResult implements Parcelable {
      */
     public static <C extends IConnector> SearchResult parallelCombineActive(final Collection<C> connectors,
                                                                             final Function<C, SearchResult> func) {
-        return Observable.fromIterable(connectors).flatMap(new Function<C, Observable<SearchResult>>() {
+        return Observable.fromIterable(connectors).flatMapMaybe(new Function<C, Maybe<SearchResult>>() {
             @Override
-            public Observable<SearchResult> apply(final C connector) {
+            public Maybe<SearchResult> apply(final C connector) {
                 if (!connector.isActive()) {
-                    return Observable.empty();
+                    return Maybe.empty();
                 }
-                return Observable.defer(new Callable<Observable<SearchResult>>() {
+                return Maybe.fromCallable(new Callable<SearchResult>() {
                     @Override
-                    public Observable<SearchResult> call() {
+                    public SearchResult call() throws Exception {
                         try {
-                            return Observable.just(func.apply(connector));
+                            return func.apply(connector);
                         } catch (final Exception e) {
-                            return Observable.error(e);
+                            Log.w("parallelCombineActive: swallowing error from connector " + connector, e);
+                            return null;
                         }
                     }
                 }).subscribeOn(AndroidRxUtils.networkScheduler);
