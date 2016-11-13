@@ -29,7 +29,11 @@ public abstract class DisposableHandler extends Handler implements Disposable {
     }
 
     private static class CancelHolder {
+        // CANCEL is used to synchronously dispose the DisposableHandler and call
+        // the appropriate callback.
         static final int CANCEL = -1;
+        // When dispose() has been called, CANCEL_CALLBACK is used to synchronously
+        // call the appropriate callback.
         static final int CANCEL_CALLBACK = -2;
 
         final int kind;
@@ -47,6 +51,7 @@ public abstract class DisposableHandler extends Handler implements Disposable {
                 disposables.dispose();
                 handleDispose();
             } else if (holder.kind == CancelHolder.CANCEL_CALLBACK) {
+                // We have been disposed already but the callback has not been called yet.
                 handleDispose();
             }
         } else if (!isDisposed()) {
@@ -73,8 +78,10 @@ public abstract class DisposableHandler extends Handler implements Disposable {
     /**
      * Handle a dispose message.
      *
+     * This is called on the handler looper thread when the handler gets disposed.
      */
     protected void handleDispose() {
+        // May be overwritten by inheriting classes.
     }
 
     /**
