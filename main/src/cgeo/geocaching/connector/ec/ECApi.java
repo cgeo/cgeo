@@ -179,6 +179,8 @@ final class ECApi {
         } catch (final Exception e) {
             Log.e("Error importing gpx from extremcaching.com", e);
             return Collections.emptyList();
+        } finally {
+            response.close();
         }
     }
 

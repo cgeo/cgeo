@@ -20,6 +20,7 @@ import android.support.annotation.Nullable;
 
 import java.io.InputStream;
 
+import org.apache.commons.compress.utils.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 
 public class GeocachingSuConnector extends AbstractConnector implements ISearchByCenter, ISearchByGeocode, ISearchByViewPort {
@@ -132,7 +133,12 @@ public class GeocachingSuConnector extends AbstractConnector implements ISearchB
     }
 
     private static SearchResult searchCaches(@NonNull final String endTag, @NonNull final Parameters parameters) {
-        return parseCaches(endTag, Network.getResponseStream(Network.getRequest(API_URL, parameters)));
+        final InputStream responseStream = Network.getResponseStream(Network.getRequest(API_URL, parameters));
+        try {
+            return parseCaches(endTag, responseStream);
+        } finally {
+            IOUtils.closeQuietly(responseStream);
+        }
     }
 
     private static SearchResult parseCaches(@NonNull final String endTag, final InputStream inputStream) {

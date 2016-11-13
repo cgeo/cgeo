@@ -69,6 +69,7 @@ import io.reactivex.functions.BiFunction;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.compress.utils.IOUtils;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -1791,7 +1792,11 @@ public final class GCParser {
                 try {
                     final InputStream responseStream =
                             Network.getResponseStream(Network.getRequest("https://www.geocaching.com/seek/geocache.logbook", params));
-                    return parseLogs(logType != Logs.ALL, responseStream);
+                    try {
+                        return parseLogs(logType != Logs.ALL, responseStream);
+                    } finally {
+                        IOUtils.closeQuietly(responseStream);
+                    }
                 } catch (final Exception e) {
                     Log.e("unable to read logs", e);
                     return Observable.empty();

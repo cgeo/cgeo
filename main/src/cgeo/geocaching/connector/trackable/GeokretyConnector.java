@@ -31,6 +31,7 @@ import java.util.regex.Pattern;
 import io.reactivex.Observable;
 import io.reactivex.functions.Function;
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.compress.utils.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.xml.sax.InputSource;
@@ -145,13 +146,17 @@ public class GeokretyConnector extends AbstractTrackableConnector {
                 Log.d("GeokretyConnector.searchTrackable: No data from server");
                 return null;
             }
-            final InputSource is = new InputSource(response);
-            final List<Trackable> trackables = GeokretyParser.parse(is);
+            try {
+                final InputSource is = new InputSource(response);
+                final List<Trackable> trackables = GeokretyParser.parse(is);
 
-            if (CollectionUtils.isNotEmpty(trackables)) {
-                final Trackable trackable = trackables.get(0);
-                DataStore.saveTrackable(trackable);
-                return trackable;
+                if (CollectionUtils.isNotEmpty(trackables)) {
+                    final Trackable trackable = trackables.get(0);
+                    DataStore.saveTrackable(trackable);
+                    return trackable;
+                }
+            } finally {
+                IOUtils.closeQuietly(response);
             }
         } catch (final Exception e) {
             Log.w("GeokretyConnector.searchTrackable", e);
@@ -170,8 +175,12 @@ public class GeokretyConnector extends AbstractTrackableConnector {
                 Log.d("GeokretyConnector.searchTrackable: No data from server");
                 return Collections.emptyList();
             }
-            final InputSource is = new InputSource(response);
-            return GeokretyParser.parse(is);
+            try {
+                final InputSource is = new InputSource(response);
+                return GeokretyParser.parse(is);
+            } finally {
+                IOUtils.closeQuietly(response);
+            }
         } catch (final Exception e) {
             Log.w("GeokretyConnector.searchTrackables", e);
             return Collections.emptyList();
@@ -204,8 +213,12 @@ public class GeokretyConnector extends AbstractTrackableConnector {
                 Log.d("GeokretyConnector.loadInventory: No data from server");
                 return Collections.emptyList();
             }
-            final InputSource is = new InputSource(response);
-            return GeokretyParser.parse(is);
+            try {
+                final InputSource is = new InputSource(response);
+                return GeokretyParser.parse(is);
+            } finally {
+                IOUtils.closeQuietly(response);
+            }
         } catch (final Exception e) {
             Log.w("GeokretyConnector.loadInventory", e);
             return Collections.emptyList();

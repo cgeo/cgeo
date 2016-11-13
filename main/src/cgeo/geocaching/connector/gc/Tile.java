@@ -253,13 +253,17 @@ public class Tile {
                     .flatMap(new Function<Response, Single<Bitmap>>() {
                         @Override
                         public Single<Bitmap> apply(final Response response) {
-                            if (response.isSuccessful()) {
-                                final Bitmap bitmap = BitmapFactory.decodeStream(response.body().byteStream());
-                                if (bitmap != null) {
-                                    return Single.just(bitmap);
+                            try {
+                                if (response.isSuccessful()) {
+                                    final Bitmap bitmap = BitmapFactory.decodeStream(response.body().byteStream());
+                                    if (bitmap != null) {
+                                        return Single.just(bitmap);
+                                    }
                                 }
+                                return Single.error(new IOException("could not decode bitmap"));
+                            } finally {
+                                response.close();
                             }
-                            return Single.error(new IOException("could not decode bitmap"));
                         }
                     }).subscribeOn(AndroidRxUtils.computationScheduler);
         } catch (final Exception e) {
