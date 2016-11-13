@@ -29,12 +29,19 @@ Such a procedure is [described in the wiki](https://github.com/cgeo/cgeo/wiki/Ho
 Make sure to use Java 8 for your IDE and build process. Some of the involved tools require it, even though the source code is Java 7 only.
 
 ### Eclipse
+We removed the support for development in Eclipse, once we switched to a gradle based build.
+The cause for this is that Google dropped the ADT for eclipse support
+(https://android-developers.blogspot.de/2016/11/support-ended-for-eclipse-android.html).
+
+Still, there are developers in the project that uses both eclipse and Android Studio (or IntelliJ IDEA), even if eclipse have problems building the project.
+They use eclipse for writing code/testing and Android Studio (or IntelliJ IDEA) for building.
+
+Here are instructions on how to setup the eclipse environment and clone the repositories as part of that setup.
+
 - Install an Eclipse distribution for your OS from http://eclipse.org/downloads/ (you may choose the Java developers distribution).
 - Start Eclipse, choose any directory as workspace. Close the welcome screen, if it appears.
 - After the workbench has started, select File | Import | Install | Install Software Items From File and select a locally downloaded copy of https://github.com/cgeo/cgeo/tree/master/main/project/eclipse%20installation/cgeo%20eclipse%20components.p2f. This way you can easily install all necessary plugins.
 - After forking the project you should import the Eclipse projects in your workspace with File | Import | Projects from Git.
-
-Please be warned, we might remove the support for development in Eclipse, once we switch to a gradle based build.
 
 ### Android Studio (or IntelliJ IDEA)
 - Install Android Studio from https://developer.android.com/sdk/index.html
