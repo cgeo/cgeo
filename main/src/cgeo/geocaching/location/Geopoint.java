@@ -54,7 +54,7 @@ public final class Geopoint implements ICoordinates, Parcelable {
      * @param lonE6 longitude in microdegrees
      * @param dummy ignored parameter
      */
-    public Geopoint(final int latE6, final int lonE6, @SuppressWarnings("unused") final Object dummy) {
+    private Geopoint(final int latE6, final int lonE6, @SuppressWarnings("unused") final Object dummy) {
         latitudeE6 = latE6;
         longitudeE6 = lonE6;
     }
