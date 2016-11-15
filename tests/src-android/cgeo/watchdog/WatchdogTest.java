@@ -46,11 +46,10 @@ public class WatchdogTest extends CGeoTestCase {
         downloadOpenCaching("OR011D");
     }
 
-    // Temporarily disabled due to longer website outage
-    //@NotForIntegrationTests
-    //public static void testOpenCachingUK() {
-    //    downloadOpenCaching("OK0345");
-    //}
+    @NotForIntegrationTests
+    public static void testOpenCacheUK() {
+        downloadOpenCaching("OK0384");
+    }
 
     @NotForIntegrationTests
     public static void testOpenCachingUS() {
