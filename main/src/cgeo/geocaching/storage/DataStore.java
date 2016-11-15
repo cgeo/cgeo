@@ -1046,18 +1046,18 @@ public class DataStore {
         init();
 
         try {
-            final SQLiteStatement offlineListCound;
+            final SQLiteStatement offlineListCount;
             final String value;
             if (StringUtils.isNotBlank(geocode)) {
-                offlineListCound = PreparedStatement.GEOCODE_OFFLINE.getStatement();
+                offlineListCount = PreparedStatement.GEOCODE_OFFLINE.getStatement();
                 value = geocode;
             } else {
-                offlineListCound = PreparedStatement.GUID_OFFLINE.getStatement();
+                offlineListCount = PreparedStatement.GUID_OFFLINE.getStatement();
                 value = guid;
             }
-            synchronized (offlineListCound) {
-                offlineListCound.bindString(1, value);
-                return offlineListCound.simpleQueryForLong() > 0;
+            synchronized (offlineListCount) {
+                offlineListCount.bindString(1, value);
+                return offlineListCount.simpleQueryForLong() > 0;
             }
         } catch (final SQLiteDoneException ignored) {
             // Do nothing, it only means we have no information on the cache
@@ -2558,7 +2558,7 @@ public class DataStore {
                 quotedGeocodes.add(DatabaseUtils.sqlEscapeString(geocode));
             }
             final String geocodeList = StringUtils.join(quotedGeocodes.toArray(), ',');
-            final String baseWhereClause = "geocode in (" + geocodeList + ")";
+            final String baseWhereClause = "geocode IN (" + geocodeList + ")";
             database.beginTransaction();
             try {
                 database.delete(dbTableCaches, baseWhereClause, null);
@@ -3128,7 +3128,7 @@ public class DataStore {
      */
     @NonNull
     private static StringBuilder whereGeocodeIn(final Collection<String> geocodes) {
-        final StringBuilder whereExpr = new StringBuilder("geocode in (");
+        final StringBuilder whereExpr = new StringBuilder("geocode IN (");
         final Iterator<String> iterator = geocodes.iterator();
         while (true) {
             DatabaseUtils.appendEscapedSQLString(whereExpr, StringUtils.upperCase(iterator.next()));
