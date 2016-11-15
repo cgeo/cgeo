@@ -92,6 +92,7 @@
   <string name="log_posting_image">Lähetetään kuvaa…</string>
   <string name="log_posting_generic_trackable">Lähetetään %1$s %2$s/%3$s</string>
   <string name="log_clear">Tyhjennä</string>
+  <string name="log_post_not_possible">Datan lataus käynnissä...\nYritäthän hetken kuluttua uudelleen tai tarkista internet yhteytesi.</string>
   <string name="log_post_geocode_missing">Geokoodi puuttuu…</string>
   <string name="log_date_future_not_allowed">Tulevaisuuden päivämäärät eivät ole sallittuja lokissa.</string>
   <string name="log_add">Lisää</string>
@@ -355,8 +356,10 @@
   <string name="caches_clear_offlinelogs">Poista offline-lokit</string>
   <string name="caches_clear_offlinelogs_message">Haluatko poistaa offline lokit?</string>
   <string name="caches_clear_offlinelogs_progress">Poistetaan offline-lokit</string>
+  <string name="caches_make_list_unique">Poista listan kätköt muilta listoilta</string>
   <!-- caches lists -->
   <string name="list_menu_create">Luo uusi lista</string>
+  <string name="list_menu_drop">Poista valittu lista</string>
   <string name="list_menu_rename">Nimeä uudelleen nykyinen lista</string>
   <string name="list_menu_import">Tuo</string>
   <string name="list_title">Valitse lista</string>
@@ -430,6 +433,7 @@
   <string name="settings_reauthorize">Valtuuta c:geo uudelleen</string>
   <string name="settings_gc_description">Anna c:geolle lupa geocaching.com-palvelun käyttöön etsiäksesi kätköjä.</string>
   <string name="settings_ec_description">Anna c:geolle lupa extremcaching.com-palvelun käyttöön voidaksesi etsiä kätköjä sekä nähdä/valikoida löytämiäsi kätköjä.</string>
+  <string name="settings_su_description">Anna c:geolle lupa geocaching.su-palvelun käyttöön etsiäksesi kätköjä.</string>
   <string name="settings_activate_oc">Aktivoi</string>
   <string name="init_summary_oc_de">Lataa kätköt palvelusta opencaching.de</string>
   <string name="init_oc_de_description">Anna c:geolle lupa opencaching.de:n käyttöön voidaksesi etsiä kätköjä sekä nähdä/valikoida löytämiäsi kätköjä.</string>
@@ -446,8 +450,8 @@
   <string name="init_summary_oc_ro">Lataa kätköt palvelusta opencaching.ro</string>
   <string name="init_oc_ro_description">Anna c:geolle lupa opencaching.ro:n käyttöön voidaksesi etsiä kätköjä sekä nähdä/valikoida löytämiäsi kätköjä.</string>
   <string name="settings_activate_oc_uk">Aktivoi</string>
-  <string name="init_summary_oc_uk">Lataa kätköt palvelusta opencache.uk</string>
-  <string name="init_oc_uk_description">Anna c:geolle lupa opencache.uk:n käyttöön voidaksesi etsiä kätköjä sekä nähdä/valikoida löytämiäsi kätköjä.</string>
+  <string name="init_summary_oc_uk">Lataa kätköt palvelusta opencaching.org.uk</string>
+  <string name="init_oc_uk_description">Anna c:geolle lupa opencaching.org.uk:n käyttöön voidaksesi etsiä kätköjä sekä nähdä/valikoida löytämiäsi kätköjä.</string>
   <string name="init_su">Geocaching.su</string>
   <string name="init_summary_su">Lataa kätköt palvelusta Geocaching.su</string>
   <string name="settings_activate_su">Aktivoi</string>
@@ -957,6 +961,10 @@
   <string name="map_strategy_detailed">Yksityiskohtainen</string>
   <string name="live_map_notification">Koordinaatit livekartalla eivät välttämättä aina ole tarkat. Mahdollisesti epätarkat koordinaatit on merkitty oranssilla ympyrällä. \nKätkön tietojen avaaminen tai kätkön tallentaminen offline-käyttöä varten antaa aina tarkat koordinaatit.\n\nLisää tietoa löytyy ohjelmasta \"tietoja c:geo\"-sivulla.</string>
   <string name="map_select_multiple_items">Valitse kohde</string>
+  <string name="map_routing">Reititys</string>
+  <string name="map_routing_walk">Kävely</string>
+  <string name="map_routing_bike">Pyöräily</string>
+  <string name="map_routing_car">Auto</string>
   <!-- search -->
   <string name="search_bar_hint">Etsi kätköjä</string>
   <string name="search_bar_desc">Kätköt (GC-koodi, avainsana), reissaajat (TB-koodi)</string>
@@ -1027,6 +1035,7 @@
   <string name="user_menu_open_browser">Avaa profiili selaimessa</string>
   <string name="user_menu_send_message">Lähetä viesti</string>
   <string name="user_menu_open_contact">Avaa yhteystiedot</string>
+  <string name="user_unknown">Tuntematon käyttäjä</string>
   <!-- navigation -->
   <string name="navigation">Navigointi</string>
   <string name="compass_title">Kompassi</string>
@@ -1085,6 +1094,7 @@
   <string name="export_gpx_to">Lähetä tallennettu GPX kohteeseen</string>
   <string name="export_confirm_title">Viedään %1$s</string>
   <string name="export_confirm_message">Polku: %1$s\nTiedostonimi: %2$s</string>
+  <string name="export_persnotes">Omat merkinnät</string>
   <!-- GC attributes -->
   <string name="attribute_dogs_yes">Koirat sallittu</string>
   <string name="attribute_dogs_no">Koiria ei sallittu</string>
@@ -1417,6 +1427,7 @@
   </plurals>
   <string name="command_rename_list_result">Uudelleen nimetty luettelo</string>
   <string name="command_delete_list_result">Poistettu luettelo</string>
+  <string name="command_unique_list_result">Kätköt poistettiin muilta listoilta</string>
   <string name="fav_points_remaining">"Lisää kätkö suosikkeihin (%s jäljellä)"</string>
   <!-- distance units -->
   <string name="unit_m">m</string>

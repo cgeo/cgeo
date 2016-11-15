@@ -396,7 +396,7 @@
   <string name="settings_activate_oc_ro">Aktiviraj</string>
   <string name="init_oc_ro_description">Poveži c:geo z opencaching.ro za iskanje zakladov in dostop in filter najdenih zakladov.</string>
   <string name="settings_activate_oc_uk">Aktiviraj</string>
-  <string name="init_oc_uk_description">Poveži c:geo z opencache.uk za iskanje zakladov in dostop in filter najdenih zakladov.</string>
+  <string name="init_oc_uk_description">Poveži c:geo z opencaching.org.uk za iskanje zakladov in dostop in filter najdenih zakladov.</string>
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_twitter">Twitter</string>
   <string name="settings_activate_twitter">Aktiviraj</string>

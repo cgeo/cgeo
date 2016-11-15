@@ -462,10 +462,10 @@
   <string name="settings_activate_oc_ro">Aktivovat</string>
   <string name="init_summary_oc_ro">Načíst keše z opencaching.ro</string>
   <string name="init_oc_ro_description">Autorizovat c:geo pro hledání keší a přístup/filtrování tvých nalezených keší služby opencaching.ro.</string>
-  <string name="init_oc_uk">opencache.uk</string>
+  <string name="init_oc_uk">Opencaching.org.uk</string>
   <string name="settings_activate_oc_uk">Aktivovat</string>
-  <string name="init_summary_oc_uk">Načíst keše z opencache.uk</string>
-  <string name="init_oc_uk_description">Autorizovat c:geo pro hledání keší a přístup/filtrování tvých nalezených keší služby opencache.uk.</string>
+  <string name="init_summary_oc_uk">Načíst keše z opencaching.org.uk</string>
+  <string name="init_oc_uk_description">Autorizovat c:geo pro hledání keší a přístup/filtrování tvých nalezených keší služby opencaching.org.uk.</string>
   <string name="init_su">Geocaching.su</string>
   <string name="init_summary_su">Načíst keše z geocaching.su</string>
   <string name="settings_activate_su">Aktivovat</string>
@@ -686,7 +686,7 @@
   <string name="auth_ocnl">opencaching.nl</string>
   <string name="auth_ocus">opencaching.us</string>
   <string name="auth_ocro">opencaching.ro</string>
-  <string name="auth_ocuk">opencache.uk</string>
+  <string name="auth_ocuk">opencaching.org.uk</string>
   <string name="auth_dialog_completed_oc">c:geo je nyní autorizováno pro interakce s %s.</string>
   <!-- auth geokrety -->
   <string name="auth_dialog_completed_geokrety">c:geo je nyní autorizováno pro interakce s %s.</string>

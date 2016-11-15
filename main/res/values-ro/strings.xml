@@ -463,10 +463,10 @@
   <string name="settings_activate_oc_ro">Activează</string>
   <string name="init_summary_oc_ro">Încarcă geocutii de la opencaching.ro</string>
   <string name="init_oc_ro_description">Autorizează c:geo cu opencaching.ro pentru a putea căuta geocutii şi a putea accesa/filtra pe cele găsite de tine.</string>
-  <string name="init_oc_uk">opencache.uk</string>
+  <string name="init_oc_uk">Opencaching.org.uk</string>
   <string name="settings_activate_oc_uk">Activează</string>
-  <string name="init_summary_oc_uk">Încarcă geocutii de la opencache.uk</string>
-  <string name="init_oc_uk_description">Autorizează c:geo cu opencache.uk pentru a putea căuta geocutii şi a putea accesa/filtra pe cele găsite de tine.</string>
+  <string name="init_summary_oc_uk">Încarcă geocutii de la opencaching.org.uk</string>
+  <string name="init_oc_uk_description">Autorizează c:geo cu opencaching.org.uk pentru a putea căuta geocutii şi a putea accesa/filtra pe cele găsite de tine.</string>
   <string name="init_su">Geocaching.su</string>
   <string name="init_summary_su">Încarcă geocutii de la Geocaching.su</string>
   <string name="settings_activate_su">Activează</string>
@@ -687,7 +687,7 @@
   <string name="auth_ocnl">opencaching.nl</string>
   <string name="auth_ocus">opencaching.us</string>
   <string name="auth_ocro">opencaching.ro</string>
-  <string name="auth_ocuk">opencache.uk</string>
+  <string name="auth_ocuk">opencaching.org.uk</string>
   <string name="auth_dialog_completed_oc">c:geo este acum autorizat să comunice cu %s.</string>
   <!-- auth geokrety -->
   <string name="auth_dialog_completed_geokrety">c:geo este acum autorizat să comunice cu %s.</string>
@@ -880,6 +880,7 @@
   <string name="cache_image_open_file">Deschide ca fişier</string>
   <string name="cache_image_open_browser">Deschide în browser</string>
   <string name="cache_image_add_waypoint">Adaugă punct</string>
+  <string name="cache_image_background">Imagine de fundal pentru descrierea geocutiei</string>
   <string name="cache_share_field">ora</string>
   <string name="cache_time_full_hours">ora</string>
   <string name="cache_listed_on">Publicat pe %s</string>

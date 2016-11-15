@@ -460,10 +460,10 @@
   <string name="settings_activate_oc_ro">Activeren</string>
   <string name="init_summary_oc_ro">Laad caches van opencaching.ro</string>
   <string name="init_oc_ro_description">c:geo Autoriseren met opencaching.ro naar caches te zoeken en je gevonden caches te benaderen/filteren.</string>
-  <string name="init_oc_uk">opencache.uk</string>
+  <string name="init_oc_uk">Opencaching.org.uk</string>
   <string name="settings_activate_oc_uk">Activeren</string>
-  <string name="init_summary_oc_uk">Laad caches van opencache.uk</string>
-  <string name="init_oc_uk_description">c:geo authoriseren met opencache.uk om naar caches te zoeken en het filteren van gevonden caches.</string>
+  <string name="init_summary_oc_uk">Laad caches van opencaching.org.uk</string>
+  <string name="init_oc_uk_description">c:geo authoriseren met opencaching.org.uk om naar caches te zoeken en het filteren van gevonden caches.</string>
   <string name="init_su">Geocaching.su</string>
   <string name="init_summary_su">Laad caches van Geocaching.su</string>
   <string name="settings_activate_su">Activeer</string>
@@ -684,7 +684,7 @@
   <string name="auth_ocnl">opencaching.nl</string>
   <string name="auth_ocus">opencaching.us</string>
   <string name="auth_ocro">opencaching.ro</string>
-  <string name="auth_ocuk">opencache.uk</string>
+  <string name="auth_ocuk">opencaching.org.uk</string>
   <string name="auth_dialog_completed_oc">c:geo is nu gekoppeld met %s.</string>
   <!-- auth geokrety -->
   <string name="auth_dialog_completed_geokrety">c:geo is nu geautoriseerd om met %s te communiceren.</string>
@@ -703,6 +703,7 @@
   <string name="last_day_available">laatste dag beschikbaar</string>
   <string name="cache_offline">Offline</string>
   <string name="cache_offline_refresh">Verversen</string>
+  <string name="cache_offline_drop">Verwijderen</string>
   <string name="cache_offline_store">Opslaan</string>
   <string name="cache_offline_manage">Beheren</string>
   <string name="cache_offline_store_in_list">Opslaan in lijst</string>
@@ -870,6 +871,7 @@
   <string name="cache_image_open_file">Open als bestand</string>
   <string name="cache_image_open_browser">Open in browser</string>
   <string name="cache_image_add_waypoint">Waypoint toevoegen</string>
+  <string name="cache_image_background">Achtergrondafbeelding van de cache-lijst</string>
   <string name="cache_share_field">Delen</string>
   <string name="cache_time_full_hours">uur</string>
   <string name="cache_listed_on">Opgenomen in %s</string>

@@ -461,8 +461,8 @@
   <string name="init_summary_oc_ro">Załaduj skrzynki z opencaching.ro</string>
   <string name="init_oc_ro_description">Autoryzuj c:geo z opencaching.ro aby wyszukiwać skrzynki i mieć dostęp/filtrować znalezione skrzynki.</string>
   <string name="settings_activate_oc_uk">Aktywuj</string>
-  <string name="init_summary_oc_uk">Załaduj skrzynki z opencache.uk</string>
-  <string name="init_oc_uk_description">Autoryzuj c:geo z opencache.uk aby wyszukiwać skrzynki i mieć dostęp/filtrować znalezione skrzynki.</string>
+  <string name="init_summary_oc_uk">Załaduj skrzynki z opencaching.org.uk</string>
+  <string name="init_oc_uk_description">Autoryzuj c:geo z opencaching.org.uk aby wyszukiwać skrzynki i mieć dostęp/filtrować znalezione skrzynki.</string>
   <string name="init_su">Geocaching.su</string>
   <string name="init_summary_su">Załaduj skrzynki z Geocaching.su</string>
   <string name="settings_activate_su">Aktywuj</string>

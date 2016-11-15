@@ -460,10 +460,10 @@
   <string name="settings_activate_oc_ro">Activer</string>
   <string name="init_summary_oc_ro">Charger les caches depuis opencaching.ro</string>
   <string name="init_oc_ro_description">Autoriser c:geo à utiliser opencaching.ro pour chercher des caches et accéder/filtrer vos caches trouvées.</string>
-  <string name="init_oc_uk">opencache.uk</string>
+  <string name="init_oc_uk">Opencaching.org.uk</string>
   <string name="settings_activate_oc_uk">Activer</string>
-  <string name="init_summary_oc_uk">Charger les caches depuis opencache.uk</string>
-  <string name="init_oc_uk_description">Autoriser c:geo à utiliser opencache.uk pour chercher des caches et accéder/filtrer vos caches trouvées.</string>
+  <string name="init_summary_oc_uk">Charger les caches depuis opencaching.org.uk</string>
+  <string name="init_oc_uk_description">Autoriser c:geo à utiliser opencaching.org.uk pour chercher des caches et accéder/filtrer vos caches trouvées.</string>
   <string name="init_su">Geocaching.su</string>
   <string name="init_summary_su">Charger les caches depuis Geocaching.su</string>
   <string name="settings_activate_su">Activer</string>
@@ -684,7 +684,7 @@
   <string name="auth_ocnl">Opencaching.nl</string>
   <string name="auth_ocus">Opencaching.us</string>
   <string name="auth_ocro">Opencaching.ro</string>
-  <string name="auth_ocuk">opencache.uk</string>
+  <string name="auth_ocuk">Opencaching.org.uk</string>
   <string name="auth_dialog_completed_oc">c:geo est désormais autorisé à interagir avec %s.</string>
   <!-- auth geokrety -->
   <string name="auth_dialog_completed_geokrety">Désormais c:geo est autorisé à utiliser %s.</string>
@@ -871,6 +871,7 @@
   <string name="cache_image_open_file">Ouvrir en tant que fichier</string>
   <string name="cache_image_open_browser">Ouvrir dans le navigateur</string>
   <string name="cache_image_add_waypoint">Ajouter une étape</string>
+  <string name="cache_image_background">Image d\'arrière-plan pour la liste des caches</string>
   <string name="cache_share_field">Partager</string>
   <string name="cache_time_full_hours">heures</string>
   <string name="cache_listed_on">Listée le %s</string>

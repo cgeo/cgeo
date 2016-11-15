@@ -463,10 +463,10 @@
   <string name="settings_activate_oc_ro">Aktivovať</string>
   <string name="init_summary_oc_ro">Načítať skrýše z opencaching.ro</string>
   <string name="init_oc_ro_description">Autorizovať c:geo pre opencaching.ro na vyhľadávanie, zobrazenie a filtrovanie nájdených skrýš.</string>
-  <string name="init_oc_uk">opencache.uk</string>
+  <string name="init_oc_uk">Opencaching.org.uk</string>
   <string name="settings_activate_oc_uk">Aktivovať</string>
-  <string name="init_summary_oc_uk">Načítať skrýše z opencache.uk</string>
-  <string name="init_oc_uk_description">Autorizovať c:geo pre opencache.uk na vyhľadávanie, zobrazenie a filtrovanie nájdených skrýš.</string>
+  <string name="init_summary_oc_uk">Načítať skrýše z opencaching.org.uk</string>
+  <string name="init_oc_uk_description">Autorizovať c:geo pre opencaching.org.uk na vyhľadávanie, zobrazenie a filtrovanie nájdených skrýš.</string>
   <string name="init_su">Geocaching.su</string>
   <string name="init_summary_su">Načítať skrýše z Geocaching.su</string>
   <string name="settings_activate_su">Aktivovať</string>
@@ -687,7 +687,7 @@
   <string name="auth_ocnl">opencaching.nl</string>
   <string name="auth_ocus">opencaching.us</string>
   <string name="auth_ocro">opencaching.ro</string>
-  <string name="auth_ocuk">opencache.uk</string>
+  <string name="auth_ocuk">opencaching.org.uk</string>
   <string name="auth_dialog_completed_oc">c:Geo je teraz autorizované komunikovať s %s.</string>
   <!-- auth geokrety -->
   <string name="auth_dialog_completed_geokrety">c:geo  je teraz autorizované pre prístup k %s.</string>
@@ -880,6 +880,7 @@
   <string name="cache_image_open_file">Otvoriť ako súbor</string>
   <string name="cache_image_open_browser">Otvoriť v prehliadači</string>
   <string name="cache_image_add_waypoint">Nový bod trasy</string>
+  <string name="cache_image_background">Obrázok na pozadí listingu</string>
   <string name="cache_share_field">Zdieľať</string>
   <string name="cache_time_full_hours">hodín</string>
   <string name="cache_listed_on">Uvedené na %s</string>

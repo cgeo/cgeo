@@ -457,10 +457,10 @@
   <string name="settings_activate_oc_ro">Activar</string>
   <string name="init_summary_oc_ro">Carregar caches de opencaching.ro</string>
   <string name="init_oc_ro_description">Permitir que c:geo pesquise, aceda e filtre as suas caches encontradas em opencaching.ro.</string>
-  <string name="init_oc_uk">opencache.uk</string>
+  <string name="init_oc_uk">Opencaching.org.uk</string>
   <string name="settings_activate_oc_uk">Ativar</string>
-  <string name="init_summary_oc_uk">Carregar caches de opencache.uk</string>
-  <string name="init_oc_uk_description">Autorizar o c:geo em opencache.uk para que pesquise por caches e aceder/filtrar as suas caches encontradas.</string>
+  <string name="init_summary_oc_uk">Carregar caches de opencaching.org.uk</string>
+  <string name="init_oc_uk_description">Autorizar o c:geo em opencaching.org.uk para que pesquise por caches e aceder/filtrar as suas caches encontradas.</string>
   <string name="init_su">Geocaching.su</string>
   <string name="init_summary_su">Carregar caches de Geocaching.su</string>
   <string name="settings_activate_su">Activar</string>
@@ -681,7 +681,7 @@
   <string name="auth_ocnl">opencaching.nl</string>
   <string name="auth_ocus">opencaching.us</string>
   <string name="auth_ocro">opencaching.ro</string>
-  <string name="auth_ocuk">opencache.uk</string>
+  <string name="auth_ocuk">opencaching.org.uk</string>
   <string name="auth_dialog_completed_oc">c:geo está agora autorizado a interagir com %s.</string>
   <!-- auth geokrety -->
   <string name="auth_dialog_completed_geokrety">c:geo está agora autorizado a interagir com %s.</string>

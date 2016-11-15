@@ -458,8 +458,8 @@
   <string name="init_summary_oc_ro">Carica cache da opencaching.ro</string>
   <string name="init_oc_ro_description">Autorizza c:geo a cercare cache ed accedere/filtrare i ritrovamenti su opencaching.ro.</string>
   <string name="settings_activate_oc_uk">Attiva</string>
-  <string name="init_summary_oc_uk">Carica cache da opencache.uk</string>
-  <string name="init_oc_uk_description">Autorizza c:geo a cercare cache ed accedere/filtrare i ritrovamenti su opencache.uk.</string>
+  <string name="init_summary_oc_uk">Carica cache da opencaching.org.uk</string>
+  <string name="init_oc_uk_description">Autorizza c:geo a cercare cache ed accedere/filtrare i ritrovamenti su opencaching.org.uk.</string>
   <string name="init_su">Geocaching.su</string>
   <string name="init_summary_su">Carica cache da Geocaching.su</string>
   <string name="settings_activate_su">Attiva</string>
@@ -862,6 +862,7 @@
   <string name="cache_image_open_file">Apri come file</string>
   <string name="cache_image_open_browser">Apri nel browser</string>
   <string name="cache_image_add_waypoint">Aggiungi waypoint</string>
+  <string name="cache_image_background">Immagine di sfondo della lista cache</string>
   <string name="cache_share_field">Condividi</string>
   <string name="cache_time_full_hours">Precise</string>
   <string name="cache_listed_on">Elencato su %s</string>
