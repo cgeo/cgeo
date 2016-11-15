@@ -528,12 +528,48 @@ task downloadLibs {
     group "cgeo"
     description "Downloads the dependency JARs for use with Eclipse"
     doFirst {
-        configurations.compile.resolvedConfiguration.resolvedArtifacts.each { artifact ->
+        configurations.compile.resolvedConfiguration.resolvedArtifacts.each { ResolvedArtifact artifact ->
         	if (artifact.extension == 'jar') {
 	            project.copy {
 	                from artifact.file
 	                into "libs"
 	            }
+            }
+        }
+        // download javadoc
+        configurations.compile.dependencies.each { Dependency dependency ->
+            try {
+                def vendor = dependency.group.replace(".","/")
+                def version = dependency.version
+                def name = dependency.name
+                def javaDocFile = new File(".\\main\\libs\\src\\${name}-${version}-javadoc.jar")
+                if (!javaDocFile.exists()) {
+                    try {
+                        new URL("https://search.maven.org/remotecontent?filepath=${vendor}/${name}/${version}/${name}-${version}-javadoc.jar").withInputStream{ i -> javaDocFile.withOutputStream{ it << i }}
+                    }
+                    catch (FileNotFoundException e) {
+                        // not all dependencies have javadoc
+                        println(e.message)
+                    }
+                }
+                def sourcesFile = new File(".\\main\\libs\\src\\${name}-${version}-sources.jar")
+                if (!sourcesFile.exists()) {
+                    try {
+                        new URL("https://search.maven.org/remotecontent?filepath=${vendor}/${name}/${version}/${name}-${version}-sources.jar").withInputStream{ i -> sourcesFile.withOutputStream{ it << i }}
+                    }
+                    catch (FileNotFoundException e) {
+                        // not all dependencies have sources
+                        println(e.message)
+                    }
+                }
+                def propFile = new File(".\\main\\libs\\${name}-${version}.jar.properties")
+                if (!propFile.exists()) {
+                    propFile.write("src=src/${name}-${version}-sources.jar\ndoc=src/${name}-${version}-javadoc.jar\n")
+                }
+            }
+            catch (RuntimeException e) {
+                // ???
+                println(e.message)
             }
         }
     }
