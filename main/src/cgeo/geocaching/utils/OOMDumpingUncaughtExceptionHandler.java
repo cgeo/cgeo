@@ -56,17 +56,17 @@ public class OOMDumpingUncaughtExceptionHandler implements UncaughtExceptionHand
 
     @Override
     public void uncaughtException(final Thread thread, final Throwable ex) {
-        Log.e("UncaughtException", ex);
+        Log.w("UncaughtException", ex);
         Throwable exx = ex;
         while (exx.getCause() != null) {
             exx = exx.getCause();
         }
         if (exx.getClass().equals(OutOfMemoryError.class)) {
             try {
-                Log.e("OutOfMemory");
+                Log.w("OutOfMemory");
                 android.os.Debug.dumpHprofData(Environment.getExternalStorageDirectory().getPath() + "/dump.hprof");
             } catch (final IOException e) {
-                Log.e("Error writing dump", e);
+                Log.w("Error writing dump", e);
             }
         }
         defaultHandler.uncaughtException(thread, ex);
