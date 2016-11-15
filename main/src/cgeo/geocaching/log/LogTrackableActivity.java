@@ -218,6 +218,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
                 if (trackingCode != null) {
                     newTrackable.setTrackingcode(trackingCode);
                 }
+                startLoader(newTrackable);
             }
         }, new Consumer<Throwable>() {
             @Override
@@ -227,12 +228,12 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
         }, new Action() {
             @Override
             public void run() throws Exception {
-                act(null);
+                startLoader(null);
             }
         }));
     }
 
-    private void act(final Trackable newTrackable) {
+    private void startLoader(final Trackable newTrackable) {
         trackable = newTrackable;
         // Start loading in background
         getSupportLoaderManager().initLoader(connector.getTrackableLoggingManagerLoaderId(), null, LogTrackableActivity.this).forceLoad();
