@@ -1792,11 +1792,7 @@ public final class GCParser {
                 try {
                     final InputStream responseStream =
                             Network.getResponseStream(Network.getRequest("https://www.geocaching.com/seek/geocache.logbook", params));
-                    try {
-                        return parseLogs(logType != Logs.ALL, responseStream);
-                    } finally {
-                        IOUtils.closeQuietly(responseStream);
-                    }
+                    return parseLogsAndClose(logType != Logs.ALL, responseStream);
                 } catch (final Exception e) {
                     Log.e("unable to read logs", e);
                     return Observable.empty();
@@ -1805,7 +1801,7 @@ public final class GCParser {
         }).subscribeOn(AndroidRxUtils.networkScheduler);
     }
 
-    private static Observable<LogEntry> parseLogs(final boolean markAsFriendsLog, final InputStream responseStream) {
+    private static Observable<LogEntry> parseLogsAndClose(final boolean markAsFriendsLog, final InputStream responseStream) {
         return Observable.create(new ObservableOnSubscribe<LogEntry>() {
             @Override
             public void subscribe(final ObservableEmitter<LogEntry> emitter) throws Exception {
@@ -1856,6 +1852,8 @@ public final class GCParser {
                     }
                 } catch (final IOException e) {
                     Log.w("GCParser.loadLogsFromDetails: Failed to parse cache logs", e);
+                } finally {
+                    IOUtils.closeQuietly(responseStream);
                 }
                 emitter.onComplete();
             }
