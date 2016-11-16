@@ -460,10 +460,10 @@
   <string name="settings_activate_oc_ro">Activa</string>
   <string name="init_summary_oc_ro">Carregar catxés des de opencaching.ro</string>
   <string name="init_oc_ro_description">Autoritza al c:geo a opencaching.ro per buscar catxés i accedir/filtrar els teus catxés trobats.</string>
-  <string name="init_oc_uk">Opencaching.org.uk</string>
+  <string name="init_oc_uk">opencache.uk</string>
   <string name="settings_activate_oc_uk">Activa</string>
-  <string name="init_summary_oc_uk">Carregar catxés des de opencaching.org.uk</string>
-  <string name="init_oc_uk_description">Autoritza al c:geo a opencaching.org.uk per buscar catxés i accedir/filtrar els teus catxés trobats.</string>
+  <string name="init_summary_oc_uk">Carrega geoamagatalls des d\'opencache.uk</string>
+  <string name="init_oc_uk_description">Autoritza al c:geo amb opencache.uk a buscar geoamagatalls i accedir/filtrar els teus geoamagatalls trobats.</string>
   <string name="init_su">Geocaching.su</string>
   <string name="init_summary_su">Carregar catxés des de Geocaching.su</string>
   <string name="settings_activate_su">Activa</string>
@@ -684,6 +684,7 @@
   <string name="auth_ocnl">opencaching.nl</string>
   <string name="auth_ocus">opencaching.us</string>
   <string name="auth_ocro">opencaching.ro</string>
+  <string name="auth_ocuk">opencache.uk</string>
   <string name="auth_dialog_completed_oc">El c:geo ara està autoritzat a interactuar amb %s.</string>
   <!-- auth geokrety -->
   <string name="auth_dialog_completed_geokrety">El c:geo ara està autoritzat a interactuar amb %s.</string>

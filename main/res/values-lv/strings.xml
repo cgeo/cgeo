@@ -447,7 +447,6 @@
   <string name="settings_activate_oc_ro">Aktivizēt</string>
   <string name="init_oc_ro_description">Atļaut c:geo un opencaching.ro meklēt slēpņus un piekļūt/filtrēt tavus atrastos slēpņus.</string>
   <string name="settings_activate_oc_uk">Aktivizēt</string>
-  <string name="init_oc_uk_description">Atļaut c:geo un opencaching.org.uk meklēt slēpņus un piekļūt/filtrēt tavus atrastos slēpņus.</string>
   <string name="init_su">Geocaching.su</string>
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_gcvote_password_description">Lai spētu novērtēt slēpni, tev jāseko instrukcijām GCVote.com mājas lapā un jāievada sava GCVote parole šeit.</string>

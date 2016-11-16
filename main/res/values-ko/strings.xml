@@ -449,8 +449,6 @@
   <string name="init_summary_oc_ro">Opencaching.ro 에서 캐시 불러오기</string>
   <string name="init_oc_ro_description">캐시 검색과 찾은 캐시 접근을 위하여 opencaching.ro에 c:geo를 인증하기</string>
   <string name="settings_activate_oc_uk">활성화</string>
-  <string name="init_summary_oc_uk">Opencaching.org.uk 에서 캐시 불러오기</string>
-  <string name="init_oc_uk_description">캐시 검색과 찾은 캐시 접근을 위하여 opencaching.org.uk에 c:geo를 인증하기</string>
   <string name="init_su">Geocaching.su</string>
   <string name="init_summary_su">Geocaching.su 에서 캐시 불러오기</string>
   <string name="settings_activate_su">활성화</string>
