@@ -98,6 +98,7 @@ public abstract class DisposableHandler extends Handler implements Disposable {
      * added with {@link #add(Disposable)} will be disposed immediately, while the
      * {@link #handleDispose()} callback will be called synchronously by the handler.
      */
+    @Override
     public void dispose() {
         disposables.dispose();
         obtainMessage(0, new CancelHolder(CancelHolder.CANCEL_CALLBACK)).sendToTarget();
@@ -108,6 +109,7 @@ public abstract class DisposableHandler extends Handler implements Disposable {
      *
      * @return true if the handler has been disposed
      */
+    @Override
     public boolean isDisposed() {
         return disposables.isDisposed();
     }

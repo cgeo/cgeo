@@ -2,12 +2,12 @@ package cgeo.geocaching.maps.mapsforge.v6.caches;
 
 import android.support.annotation.NonNull;
 
+import org.mapsforge.map.layer.Layer;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
-
-import org.mapsforge.map.layer.Layer;
 
 public class GeoitemLayers implements Collection<GeoitemLayer> {
 
@@ -129,7 +129,7 @@ public class GeoitemLayers implements Collection<GeoitemLayer> {
     @SuppressWarnings("hiding")
     @Override
     @NonNull
-    public synchronized <GeoitemLayer> GeoitemLayer[] toArray(@NonNull final GeoitemLayer[] array) {
+    public synchronized <GeoitemLayer> GeoitemLayer[] toArray(final GeoitemLayer[] array) {
 
         return this.geoitems.values().toArray(array);
     }
