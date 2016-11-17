@@ -430,7 +430,7 @@ final class OkapiClient {
                 final String gccode = response.get("gc_code").asText();
                 description.append(CgeoApplication.getInstance().getResources()
                         .getString(R.string.cache_listed_on, GCConnector.getInstance().getName()))
-                        .append(": <a href=\"http://coord.info/")
+                        .append(": <a href=\"https://coord.info/")
                         .append(gccode)
                         .append("\">")
                         .append(gccode)
@@ -513,9 +513,9 @@ final class OkapiClient {
 
         if (!uri.isAbsolute()) {
             final IConnector connector = ConnectorFactory.getConnector(geocode);
-            final String host = connector.getHost();
-            if (StringUtils.isNotBlank(host)) {
-                return "http://" + host + "/" + url;
+            final String hostUrl = connector.getHostUrl();
+            if (StringUtils.isNotBlank(hostUrl)) {
+                return hostUrl + "/" + url;
             }
         }
         return url;
@@ -821,8 +821,8 @@ final class OkapiClient {
 
     @NonNull
     private static JSONResult request(@NonNull final OCApiConnector connector, @NonNull final OkapiService service, @NonNull final Parameters params) {
-        final String host = connector.getHost();
-        if (StringUtils.isBlank(host)) {
+        final String hostUrl = connector.getHostUrl();
+        if (StringUtils.isBlank(hostUrl)) {
             return new JSONResult("unknown OKAPI connector host");
         }
 
@@ -834,7 +834,7 @@ final class OkapiClient {
                 if (!tokens.isValid()) {
                     return new JSONResult("invalid oauth tokens");
                 }
-                OAuth.signOAuth(host, service.methodName, "GET", false, params, tokens, connector.getCK(), connector.getCS());
+                OAuth.signOAuth(hostUrl, service.methodName, "GET", false, params, tokens, connector.getCK(), connector.getCS());
                 break;
             }
             case Level1 : {
@@ -846,7 +846,7 @@ final class OkapiClient {
                 break;
         }
 
-        final String uri = "http://" + host + service.methodName;
+        final String uri = hostUrl + service.methodName;
         try {
             return new JSONResult(Network.getRequest(uri, params).blockingGet());
         } catch (final Exception e) {

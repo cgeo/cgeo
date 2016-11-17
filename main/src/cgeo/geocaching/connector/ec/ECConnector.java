@@ -36,6 +36,7 @@ import org.apache.commons.lang3.StringUtils;
 
 public class ECConnector extends AbstractConnector implements ISearchByGeocode, ISearchByCenter, ISearchByViewPort, ILogin, ICredentials {
 
+    // As of 2016-11-17, using https redirects to http
     @NonNull
     private static final String CACHE_URL = "http://extremcaching.com/index.php/output-2/";
 

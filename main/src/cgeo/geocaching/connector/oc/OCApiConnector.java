@@ -37,8 +37,8 @@ public class OCApiConnector extends OCConnector implements ISearchByGeocode {
     private final ApiSupport apiSupport;
     private final String licenseString;
 
-    public OCApiConnector(@NonNull final String name, @NonNull final String host, final String prefix, final String cK, final String licenseString, final ApiSupport apiSupport) {
-        super(name, host, prefix);
+    public OCApiConnector(@NonNull final String name, @NonNull final String host, final boolean https, final String prefix, final String cK, final String licenseString, final ApiSupport apiSupport) {
+        super(name, host, https, prefix);
         this.cK = cK;
         this.apiSupport = apiSupport;
         this.licenseString = licenseString;

@@ -85,8 +85,14 @@ public interface IConnector {
     String getHost();
 
     /**
+     * Return <tt>true<tt> if https must be used.
+     */
+    boolean getHttps();
+
+    /**
      * Get url of the connector server for dynamic loading of data.
      *
+     * @return the host prepended with "https://" or "http://" unless the host is blank, in which case the empty string is returned
      */
     @NonNull
     String getHostUrl();

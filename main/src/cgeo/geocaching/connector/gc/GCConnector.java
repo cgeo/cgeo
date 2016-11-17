@@ -56,7 +56,7 @@ import org.apache.commons.lang3.StringUtils;
 public class GCConnector extends AbstractConnector implements ISearchByGeocode, ISearchByCenter, ISearchByNextPage, ISearchByViewPort, ISearchByKeyword, ILogin, ICredentials, ISearchByOwner, ISearchByFinder, FieldNotesCapability, IgnoreCapability, WatchListCapability, PersonalNoteCapability, SmileyCapability {
 
     @NonNull
-    private static final String CACHE_URL_SHORT = "http://coord.info/";
+    private static final String CACHE_URL_SHORT = "https://coord.info/";
     // Double slash is used to force open in browser
     @NonNull
     private static final String CACHE_URL_LONG = "https://www.geocaching.com/seek/cache_details.aspx?wp=";

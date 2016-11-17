@@ -12,7 +12,7 @@ public final class OCDEConnector extends OCApiLiveConnector {
     private static final String[] MAPPED_DOMAINS = new String[] { "opencachingspain.es", "opencaching.it", "opencaching.fr" };
 
     public OCDEConnector() {
-        super("opencaching.de", "www.opencaching.de", "OC", "CC BY-NC-ND, alle Logeinträge © jeweiliger Autor",
+        super("opencaching.de", "www.opencaching.de", true, "OC", "CC BY-NC-ND, alle Logeinträge © jeweiliger Autor",
                 R.string.oc_de_okapi_consumer_key, R.string.oc_de_okapi_consumer_secret,
                 R.string.pref_connectorOCActive, R.string.pref_ocde_tokenpublic, R.string.pref_ocde_tokensecret, ApiSupport.current);
     }

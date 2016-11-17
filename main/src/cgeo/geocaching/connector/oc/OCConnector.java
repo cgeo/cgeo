@@ -20,6 +20,7 @@ public class OCConnector extends AbstractConnector implements SmileyCapability {
 
     @NonNull
     private final String host;
+    private final boolean https;
     @NonNull
     private final String name;
     private final Pattern codePattern;
@@ -28,9 +29,10 @@ public class OCConnector extends AbstractConnector implements SmileyCapability {
     private static final List<LogType> STANDARD_LOG_TYPES = Arrays.asList(LogType.FOUND_IT, LogType.DIDNT_FIND_IT, LogType.NOTE);
     private static final List<LogType> EVENT_LOG_TYPES = Arrays.asList(LogType.WILL_ATTEND, LogType.ATTENDED, LogType.NOTE);
 
-    public OCConnector(@NonNull final String name, @NonNull final String host, final String prefix) {
+    public OCConnector(@NonNull final String name, @NonNull final String host, final boolean https, final String prefix) {
         this.name = name;
         this.host = host;
+        this.https = https;
         codePattern = Pattern.compile(prefix + "[A-Z0-9]+", Pattern.CASE_INSENSITIVE);
     }
 
@@ -70,7 +72,7 @@ public class OCConnector extends AbstractConnector implements SmileyCapability {
     @Override
     @NonNull
     protected String getCacheUrlPrefix() {
-        return "http://" + host + "/viewcache.php?wp=";
+        return getSchemeAndHost() + "/viewcache.php?wp=";
     }
 
     @Override
@@ -111,11 +113,32 @@ public class OCConnector extends AbstractConnector implements SmileyCapability {
     @Override
     @Nullable
     public String getCreateAccountUrl() {
-        return "http://" + host + "/register.php";
+        return getSchemeAndHost() + "/register.php";
     }
 
     @Override
     public List<Smiley> getSmileys() {
         return OCSmileysProvider.getSmileys();
+    }
+
+    @Override
+    public boolean getHttps() {
+        return https;
+    }
+
+    /**
+     * Return the scheme part including the colon and the slashes.
+     *
+     * @return either "https://" or "http://"
+     */
+    protected String getSchemePart() {
+        return https ? "https://" : "http://";
+    }
+
+    /**
+     * Return the scheme part and the host (e.g., "https://opencache.uk").
+     */
+    protected String getSchemeAndHost() {
+        return getSchemePart() + host;
     }
 }

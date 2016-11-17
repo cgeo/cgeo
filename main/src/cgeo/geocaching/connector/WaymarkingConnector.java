@@ -2,9 +2,10 @@ package cgeo.geocaching.connector;
 
 import cgeo.geocaching.models.Geocache;
 
-import org.apache.commons.lang3.StringUtils;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+
+import org.apache.commons.lang3.StringUtils;
 
 class WaymarkingConnector extends AbstractConnector {
 
@@ -24,6 +25,11 @@ class WaymarkingConnector extends AbstractConnector {
     @NonNull
     public String getHost() {
         return "www.waymarking.com";
+    }
+
+    @Override
+    public boolean getHttps() {
+        return false;
     }
 
     @Override

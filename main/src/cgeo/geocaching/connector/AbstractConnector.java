@@ -142,9 +142,17 @@ public abstract class AbstractConnector implements IConnector {
     protected abstract String getCacheUrlPrefix();
 
     @Override
+    public boolean getHttps() {
+        return true;
+    }
+
+    @Override
     @NonNull
     public String getHostUrl() {
-        return "http://" + getHost();
+        if (StringUtils.isBlank(getHost())) {
+            return "";
+        }
+        return (getHttps() ? "https://" : "http://") + getHost();
     }
 
     @Override

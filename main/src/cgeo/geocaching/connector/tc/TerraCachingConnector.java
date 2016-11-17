@@ -31,6 +31,11 @@ public class TerraCachingConnector extends AbstractConnector {
     }
 
     @Override
+    public boolean getHttps() {
+        return false;
+    }
+
+    @Override
     public boolean isOwner(@NonNull final Geocache cache) {
         return false;
     }

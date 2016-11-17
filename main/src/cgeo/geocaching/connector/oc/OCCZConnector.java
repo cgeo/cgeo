@@ -2,16 +2,17 @@ package cgeo.geocaching.connector.oc;
 
 import cgeo.geocaching.utils.Log;
 
-import org.apache.commons.lang3.StringUtils;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+
+import org.apache.commons.lang3.StringUtils;
 
 public class OCCZConnector extends OCConnector {
 
     private static final String GEOCODE_PREFIX = "OZ";
 
     public OCCZConnector() {
-        super("OpenCaching.CZ", "www.opencaching.cz", GEOCODE_PREFIX);
+        super("OpenCaching.CZ", "www.opencaching.cz", true, GEOCODE_PREFIX);
     }
 
     @Override

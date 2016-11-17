@@ -87,6 +87,11 @@ public class GeocachingSuConnector extends AbstractConnector implements ISearchB
     }
 
     @Override
+    public boolean getHttps() {
+        return false;
+    }
+
+    @Override
     @NonNull
     public String getHost() {
         return "www.geocaching.su";
