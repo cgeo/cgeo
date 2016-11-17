@@ -1,13 +1,13 @@
 package cgeo.geocaching.connector.oc;
 
-import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.annotation.StringRes;
-
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.OAuthAuthorizationActivity.OAuthParameters;
+
+import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.annotation.StringRes;
 
 public class OCAuthParams extends OAuthParameters {
 
@@ -19,7 +19,7 @@ public class OCAuthParams extends OAuthParameters {
             R.string.oc_nl_okapi_consumer_key, R.string.oc_nl_okapi_consumer_secret, "callback://www.cgeo.org/opencaching.nl/",
             R.string.auth_ocnl, R.string.pref_ocnl_tokenpublic, R.string.pref_ocnl_tokensecret, R.string.pref_temp_ocnl_token_public, R.string.pref_temp_ocnl_token_secret);
 
-    public static final OCAuthParams OC_PL_AUTH_PARAMS = new OCAuthParams("www.opencaching.pl",
+    public static final OCAuthParams OC_PL_AUTH_PARAMS = new OCAuthParams("opencaching.pl",
             R.string.oc_pl_okapi_consumer_key, R.string.oc_pl_okapi_consumer_secret, "callback://www.cgeo.org/opencaching.pl/",
             R.string.auth_ocpl, R.string.pref_ocpl_tokenpublic, R.string.pref_ocpl_tokensecret, R.string.pref_temp_ocpl_token_public, R.string.pref_temp_ocpl_token_secret);
 
