@@ -52,7 +52,6 @@ abstract class AbstractClickablePreference extends Preference implements View.On
 
     protected abstract OnPreferenceClickListener getOnPreferenceClickListener(final SettingsActivity settingsActivity);
 
-    @SuppressWarnings("static-method")
     protected boolean isAuthorized() {
         return false;
     }

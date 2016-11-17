@@ -127,7 +127,6 @@ public abstract class AbstractFileListActivity<T extends RecyclerView.Adapter<? 
 
     }
 
-    @SuppressWarnings("static-method")
     protected boolean requireFiles() {
         return true;
     }

@@ -8,7 +8,6 @@ import org.junit.Test;
 /**
  * Test the UTMPoint parsing and formatting.
  */
-@SuppressWarnings("static-method")
 public class UTMPointFormatTest {
 
     @Test

@@ -5,8 +5,8 @@ import cgeo.geocaching.connector.capability.ISearchByGeocode;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.utils.AndroidRxUtils;
-import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.CryptUtils;
+import cgeo.geocaching.utils.DisposableHandler;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -78,7 +78,6 @@ public class OCApiConnector extends OCConnector implements ISearchByGeocode {
         return true;
     }
 
-    @SuppressWarnings("static-method")
     public OAuthLevel getSupportedAuthLevel() {
         return OAuthLevel.Level1;
     }
@@ -87,7 +86,6 @@ public class OCApiConnector extends OCConnector implements ISearchByGeocode {
         return CryptUtils.rot13(cK);
     }
 
-    @SuppressWarnings("static-method")
     public String getCS() {
         return StringUtils.EMPTY;
     }
@@ -96,12 +94,10 @@ public class OCApiConnector extends OCConnector implements ISearchByGeocode {
         return apiSupport;
     }
 
-    @SuppressWarnings("static-method")
     public int getTokenPublicPrefKeyId() {
         return 0;
     }
 
-    @SuppressWarnings("static-method")
     public int getTokenSecretPrefKeyId() {
         return 0;
     }
@@ -113,7 +109,6 @@ public class OCApiConnector extends OCConnector implements ISearchByGeocode {
      *            Name of the user the query is searching after
      * @return True - search target and current is same, False - current user not known or not the same as username
      */
-    @SuppressWarnings("static-method")
     public boolean isSearchForMyCaches(final String username) {
         return false;
     }

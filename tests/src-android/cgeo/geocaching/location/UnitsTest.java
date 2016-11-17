@@ -20,7 +20,6 @@ public class UnitsTest extends CGeoTestCase {
     }
 
     // Make method non-static so that Settings is initialized
-    @SuppressWarnings("static-method")
     public void testDistance() {
         assertThat(Units.getDistanceFromKilometers(null)).isEqualTo("?");
         final boolean savedImperial = Settings.useImperialUnits();
@@ -42,8 +41,6 @@ public class UnitsTest extends CGeoTestCase {
         }
     }
 
-    // Make method non-static so that Settings is initialized
-    @SuppressWarnings("static-method")
     public void testSpeed() {
         assertThat(Units.getDistanceFromKilometers(null)).isEqualTo("?");
         final boolean savedImperial = Settings.useImperialUnits();

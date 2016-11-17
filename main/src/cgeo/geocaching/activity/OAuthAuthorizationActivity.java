@@ -356,7 +356,6 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
      *            The error response of the token request
      * @return String with a more detailed error message (user-facing, localized), can be empty
      */
-    @SuppressWarnings("static-method")
     protected String getExtendedErrorMsg(final Response response) {
         return StringUtils.EMPTY;
     }

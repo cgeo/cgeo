@@ -42,7 +42,6 @@ abstract class AbstractCacheComparator implements CacheComparator {
      *
      * @return {@code true} if the cache holds the necessary data to be compared meaningfully
      */
-    @SuppressWarnings("static-method")
     protected boolean canCompare(final Geocache cache) {
         return true;
     }

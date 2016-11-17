@@ -213,12 +213,10 @@ public abstract class TokenAuthorizationActivity extends AbstractActivity {
 
     protected abstract String getAuthTitle();
 
-    @SuppressWarnings("static-method")
     protected Pattern getPatternIsError() {
         return PATTERN_IS_ERROR;
     }
 
-    @SuppressWarnings("static-method")
     protected Pattern getPatternToken() {
         return PATTERN_TOKEN;
     }
@@ -248,12 +246,10 @@ public abstract class TokenAuthorizationActivity extends AbstractActivity {
      *            The error response of the token request
      * @return String with a more detailed error message (user-facing, localized), can be empty
      */
-    @SuppressWarnings("static-method")
     protected String getExtendedErrorMsg(final Response response) {
         return StringUtils.EMPTY;
     }
 
-    @SuppressWarnings("static-method")
     protected String getExtendedErrorMsg(@SuppressWarnings("unused") final String response) {
         return StringUtils.EMPTY;
     }

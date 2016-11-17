@@ -37,7 +37,6 @@ public abstract class AbstractCommand implements Command {
     /**
      * checks whether the command can be executed, before running the {@link #execute()} method
      */
-    @SuppressWarnings("static-method")
     protected boolean canExecute() {
         return true;
     }

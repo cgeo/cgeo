@@ -1044,7 +1044,6 @@ abstract class GPXParser extends FileParser {
      * @param cache
      *            currently imported cache
      */
-    @SuppressWarnings("static-method")
     protected void afterParsing(final Geocache cache) {
         if ("GC_WayPoint1".equals(cache.getShortDescription())) {
             cache.setShortDescription("");

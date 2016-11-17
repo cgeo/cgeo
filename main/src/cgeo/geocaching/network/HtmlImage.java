@@ -183,7 +183,6 @@ public class HtmlImage implements Html.ImageGetter {
         return result;
     }
 
-    @SuppressWarnings("static-method")
     protected BitmapDrawable getContainerDrawable(final TextView textView, final Observable<BitmapDrawable> drawable) {
         return new ContainerDrawable(textView, drawable);
     }
@@ -293,7 +292,6 @@ public class HtmlImage implements Html.ImageGetter {
         });
     }
 
-    @SuppressWarnings("static-method")
     protected ImmutablePair<BitmapDrawable, Boolean> scaleImage(final ImmutablePair<Bitmap, Boolean> loadResult) {
         final Bitmap bitmap = loadResult.left;
         return ImmutablePair.of(bitmap != null ? ImageUtils.scaleBitmapToFitDisplay(bitmap) : null, loadResult.right);

@@ -42,7 +42,6 @@ public abstract class AbstractWaypointActivityTest extends AbstractEspressoTest<
         assertThat(DataStore.loadCache(cache.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB)).isNull();
     }
 
-    @SuppressWarnings("static-method")
     protected Geocache createTestCache() {
         final Geocache testCache = new Geocache();
         testCache.setGeocode("TEST");

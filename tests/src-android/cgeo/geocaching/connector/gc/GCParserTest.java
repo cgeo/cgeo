@@ -270,7 +270,6 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
         assertThat(spoiler.getUrl()).isEqualTo("https://www.dropbox.com/s/1kakwnpny8698hm/QR_Hintergrund.jpg?dl=1");
     }
 
-    @SuppressWarnings("static-method")
     public void testFullScaleImageUrl() {
         assertThat(GCParser.fullScaleImageUrl("https://www.dropbox.com/s/1kakwnpny8698hm/QR_Hintergrund.jpg?dl=1"))
                 .isEqualTo("https://www.dropbox.com/s/1kakwnpny8698hm/QR_Hintergrund.jpg?dl=1");

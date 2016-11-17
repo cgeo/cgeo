@@ -50,7 +50,6 @@ public class CgeoApplicationTest extends CGeoTestCase {
      * any and all failures in other tests. This is not guaranteed to run before
      * other tests, as junit uses reflection to find the tests.
      */
-    @SuppressWarnings("static-method")
     @SmallTest
     public void testPreconditions() {
         assertThat(GCLogin.getInstance().login()).as("User and password must be provided").isEqualTo(StatusCode.NO_ERROR);

@@ -31,7 +31,6 @@ class DateComparator extends AbstractCacheComparator {
         return 0;
     }
 
-    @SuppressWarnings("static-method")
     protected int sortSameDate(final Geocache cache1, final Geocache cache2) {
         final ArrayList<Geocache> list = new ArrayList<>();
         list.add(cache1);
