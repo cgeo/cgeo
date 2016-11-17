@@ -478,7 +478,7 @@ final class OkapiClient {
             cache.setDetailedUpdatedNow();
             // save full detailed caches
             DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
-            DataStore.saveLogs(cache.getGeocode(), parseLogs((ArrayNode) response.path(CACHE_LATEST_LOGS)));
+            DataStore.saveLogs(cache.getGeocode(), parseLogs((ArrayNode) response.path(CACHE_LATEST_LOGS), cache.getGeocode()));
         } catch (ClassCastException | NullPointerException e) {
             Log.e("OkapiClient.parseCache", e);
         }
@@ -526,7 +526,7 @@ final class OkapiClient {
     }
 
     @NonNull
-    private static List<LogEntry> parseLogs(final ArrayNode logsJSON) {
+    private static List<LogEntry> parseLogs(final ArrayNode logsJSON, final String geocode) {
         final List<LogEntry> result = new LinkedList<>();
         for (final JsonNode logResponse: logsJSON) {
             try {
@@ -538,7 +538,7 @@ final class OkapiClient {
                         .setAuthor(parseUser(logResponse.get(LOG_USER)))
                         .setDate(date.getTime())
                         .setLogType(parseLogType(logResponse.get(LOG_TYPE).asText()))
-                        .setLogImages(parseLogImages((ArrayNode) logResponse.path(LOG_IMAGES)))
+                        .setLogImages(parseLogImages((ArrayNode) logResponse.path(LOG_IMAGES), geocode))
                         .setLog(logResponse.get(LOG_COMMENT).asText().trim()).build();
                 result.add(log);
             } catch (final NullPointerException e) {
@@ -548,10 +548,10 @@ final class OkapiClient {
         return result;
     }
 
-    private static List<Image> parseLogImages(final ArrayNode imagesNode) {
+    private static List<Image> parseLogImages(final ArrayNode imagesNode, final String geocode) {
         final List<Image> images = new ArrayList<>();
         for (final JsonNode image : imagesNode) {
-            images.add(new Image.Builder().setUrl(image.get(IMAGE_URL).asText()).setTitle(image.get(IMAGE_CAPTION).asText()).build());
+            images.add(new Image.Builder().setUrl(absoluteUrl(image.get(IMAGE_URL).asText(), geocode)).setTitle(image.get(IMAGE_CAPTION).asText()).build());
         }
         return images;
     }
