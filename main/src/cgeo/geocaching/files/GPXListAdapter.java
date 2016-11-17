@@ -69,9 +69,12 @@ class GPXListAdapter extends RecyclerView.Adapter<GPXListAdapter.ViewHolder> {
                 Dialogs.confirmYesNo(activity, R.string.gpx_import_delete_title, activity.getString(R.string.gpx_import_delete_message, file.getName()), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(final DialogInterface dialog, final int id) {
-                        FileUtils.deleteIgnoringFailure(file);
-                        files.remove(position);
-                        notifyItemRemoved(position);
+                        final int currentPosition = holder.getAdapterPosition();
+                        if (currentPosition != RecyclerView.NO_POSITION) {
+                            FileUtils.deleteIgnoringFailure(file);
+                            files.remove(currentPosition);
+                            notifyItemRemoved(currentPosition);
+                        }
                     }
                 });
                 return true;

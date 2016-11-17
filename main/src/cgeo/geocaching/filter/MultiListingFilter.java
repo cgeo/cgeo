@@ -1,16 +1,11 @@
 package cgeo.geocaching.filter;
 
-import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.R;
-import cgeo.geocaching.connector.ConnectorFactory;
-import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.sensors.GeoData;
-import cgeo.geocaching.sensors.Sensors;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.support.annotation.NonNull;
+import android.util.Pair;
 
 import org.apache.commons.lang3.StringUtils;
-import android.support.annotation.NonNull;
-
-import android.util.Pair;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -18,12 +13,36 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 
+import cgeo.geocaching.R;
+import cgeo.geocaching.connector.ConnectorFactory;
+import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.sensors.GeoData;
+import cgeo.geocaching.sensors.Sensors;
+
 public class MultiListingFilter extends AbstractFilter {
 
     private static final double MAX_DISTANCE_KILOMETERS = 0.02;
 
+    public static final Creator<MultiListingFilter> CREATOR = new Parcelable.Creator<MultiListingFilter>() {
+
+        @Override
+        public MultiListingFilter createFromParcel(final Parcel in) {
+            return new MultiListingFilter(in);
+        }
+
+        @Override
+        public MultiListingFilter[] newArray(final int size) {
+            return new MultiListingFilter[size];
+        }
+    };
+
     protected MultiListingFilter() {
         super(R.string.caches_filter_multi_listing);
+    }
+
+    public MultiListingFilter(final Parcel in) {
+        super(in);
     }
 
     @Override
