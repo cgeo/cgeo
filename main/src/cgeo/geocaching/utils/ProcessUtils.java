@@ -4,10 +4,6 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 
-import org.apache.commons.collections4.CollectionUtils;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
@@ -15,8 +11,12 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import java.util.List;
+
+import org.apache.commons.collections4.CollectionUtils;
 
 public final class ProcessUtils {
 
@@ -116,7 +116,7 @@ public final class ProcessUtils {
 
         } catch (final RuntimeException ignored) {
             // market not available, fall back to browser
-            final String uri = "http://play.google.com/store/apps/details?id=" + packageName;
+            final String uri = "https://play.google.com/store/apps/details?id=" + packageName;
             openUri(uri, activity);
         }
     }

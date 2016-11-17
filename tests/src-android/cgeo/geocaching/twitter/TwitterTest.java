@@ -33,7 +33,7 @@ public class TwitterTest extends TestCase {
             final Geocache cache = new Geocache();
             cache.setGeocode("GC1234");
             cache.setName("TwitterTest");
-            assertThat(Twitter.getStatusMessage(cache, null)).isEqualTo("I found TwitterTest (http://coord.info/GC1234). #cgeo #geocaching");
+            assertThat(Twitter.getStatusMessage(cache, null)).isEqualTo("I found TwitterTest (https://coord.info/GC1234). #cgeo #geocaching");
         } finally {
             TestSettings.setCacheTwitterMessage(oldMessage);
         }

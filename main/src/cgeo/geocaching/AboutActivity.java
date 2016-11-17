@@ -48,7 +48,7 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
         public ScrollView getDispatchedView(final ViewGroup parentView) {
             final ScrollView view = (ScrollView) getLayoutInflater().inflate(R.layout.about_license_page, parentView, false);
             ButterKnife.bind(this, view);
-            setClickListener(licenseLink, "http://www.apache.org/licenses/LICENSE-2.0.html");
+            setClickListener(licenseLink, "https://www.apache.org/licenses/LICENSE-2.0.html");
             licenseText.setText(getRawResourceString(R.raw.license));
             return view;
         }
@@ -167,8 +167,8 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
             setClickListener(support, "mailto:support@cgeo.org?subject=" + Uri.encode("cgeo " + Version.getVersionName(AboutActivity.this)) +
                     "&body=" + Uri.encode(SystemInformation.getSystemInformation(AboutActivity.this)) + "\n");
             setClickListener(website, "http://www.cgeo.org/");
-            setClickListener(facebook, "http://www.facebook.com/pages/cgeo/297269860090");
-            setClickListener(twitter, "http://twitter.com/android_gc");
+            setClickListener(facebook, "https://www.facebook.com/pages/cgeo/297269860090");
+            setClickListener(twitter, "https://twitter.com/android_gc");
             setClickListener(faq, "http://faq.cgeo.org/");
             market.setOnClickListener(new View.OnClickListener() {
 
