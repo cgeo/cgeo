@@ -973,7 +973,7 @@ final class OkapiClient {
         JSONResult(final Response response) {
             ObjectNode tempData = null;
             try {
-                tempData = (ObjectNode) JsonUtils.reader.readTree(response.body().string());
+                tempData = (ObjectNode) JsonUtils.reader.readTree(response.body().byteStream());
             } catch (final Exception e) {
                 // ignore
             } finally {
