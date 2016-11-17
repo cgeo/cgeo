@@ -61,7 +61,7 @@ public final class Network {
             .followSslRedirects(true)
             .cookieJar(Cookies.cookieJar)
             .addInterceptor(new HeadersInterceptor())
-            .addNetworkInterceptor(new LoggingInterceptor())
+            .addInterceptor(new LoggingInterceptor())
             .build();
 
     private static final MediaType MEDIA_TYPE_APPLICATION_JSON = MediaType.parse("application/json; charset=utf-8");
@@ -230,13 +230,14 @@ public final class Network {
             try {
                 final Response response = chain.proceed(request);
                 final String protocol = " (" + response.protocol() + ')';
+                final String redirect = request.url().equals(response.request().url()) ? "" : " (=> " + response.request().url() + ")";
                 if (response.isSuccessful()) {
-                    Log.d(response.code() + formatTimeSpan(before) + reqLogStr + protocol);
+                    Log.d(response.code() + formatTimeSpan(before) + reqLogStr + protocol + redirect);
                 } else {
                     Log.d(response.code() + " [" + response.message() + "]" + formatTimeSpan(before) + reqLogStr + protocol);
                 }
                 return response;
-            } catch (final Exception e) {
+            } catch (final IOException e) {
                 Log.w("Failure" + formatTimeSpan(before) + reqLogStr + " (" + e + ")");
                 throw new IOException("Invalid response", e);
             }
