@@ -437,9 +437,7 @@ public class SettingsActivity extends PreferenceActivity {
         p.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(final Preference preference, final Object newValue) {
-                final boolean isDebug = (Boolean) newValue;
-                Log.setDebug(isDebug);
-                CgeoApplication.dumpOnOutOfMemory(isDebug);
+                Log.setDebug((Boolean) newValue);
                 return true;
             }
         });

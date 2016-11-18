@@ -5,70 +5,44 @@ import android.os.Environment;
 import java.io.IOException;
 import java.lang.Thread.UncaughtExceptionHandler;
 
-public class OOMDumpingUncaughtExceptionHandler implements UncaughtExceptionHandler {
+import org.apache.commons.lang3.StringUtils;
 
-    private UncaughtExceptionHandler defaultHandler = null;
-    private boolean defaultReplaced = false;
+public class OOMDumpingUncaughtExceptionHandler {
 
-    public static boolean activateHandler() {
-        final OOMDumpingUncaughtExceptionHandler handler = new OOMDumpingUncaughtExceptionHandler();
+    static public void installUncaughtExceptionHandler() {
+        final UncaughtExceptionHandler previousHandler = Thread.getDefaultUncaughtExceptionHandler();
+        Thread.setDefaultUncaughtExceptionHandler(new UncaughtExceptionHandler() {
+            @Override
+            public void uncaughtException(final Thread thread, final Throwable ex) {
+                // OkHttp threads can be interrupted when a request cancellation occurs, this should
+                // be ignored.
+                if (StringUtils.startsWith(thread.getName(), "OkHttp ")) {
+                    return;
+                }
 
-        return handler.activate();
-    }
+                // If debug is enabled, log the exception
+                if (Log.isDebug()) {
+                    Log.w("UncaughtException", ex);
+                    Throwable exx = ex;
+                    while (exx.getCause() != null) {
+                        exx = exx.getCause();
+                    }
+                    if (exx.getClass().equals(OutOfMemoryError.class)) {
+                        try {
+                            Log.w("OutOfMemory");
+                            android.os.Debug.dumpHprofData(Environment.getExternalStorageDirectory().getPath() + "/dump.hprof");
+                        } catch (final IOException e) {
+                            Log.w("Error writing dump", e);
+                        }
+                    }
+                }
 
-    private boolean activate() {
-        defaultHandler = Thread.getDefaultUncaughtExceptionHandler();
-
-        // replace default handler if that has not been done already
-        if (!(defaultHandler instanceof OOMDumpingUncaughtExceptionHandler)) {
-            Thread.setDefaultUncaughtExceptionHandler(this);
-            defaultReplaced = true;
-        } else {
-            defaultHandler = null;
-            defaultReplaced = false;
-        }
-
-        return defaultReplaced;
-    }
-
-    public static boolean resetToDefault() {
-        final UncaughtExceptionHandler unspecificHandler = Thread.getDefaultUncaughtExceptionHandler();
-        boolean defaultResetted = unspecificHandler != null;
-
-        if (unspecificHandler instanceof OOMDumpingUncaughtExceptionHandler) {
-            final OOMDumpingUncaughtExceptionHandler handler = (OOMDumpingUncaughtExceptionHandler) unspecificHandler;
-            defaultResetted = handler.reset();
-        }
-
-        return defaultResetted;
-    }
-
-    private boolean reset() {
-        final boolean resetted = defaultReplaced;
-
-        if (defaultReplaced) {
-            Thread.setDefaultUncaughtExceptionHandler(defaultHandler);
-            defaultReplaced = false;
-        }
-
-        return resetted;
-    }
-
-    @Override
-    public void uncaughtException(final Thread thread, final Throwable ex) {
-        Log.w("UncaughtException", ex);
-        Throwable exx = ex;
-        while (exx.getCause() != null) {
-            exx = exx.getCause();
-        }
-        if (exx.getClass().equals(OutOfMemoryError.class)) {
-            try {
-                Log.w("OutOfMemory");
-                android.os.Debug.dumpHprofData(Environment.getExternalStorageDirectory().getPath() + "/dump.hprof");
-            } catch (final IOException e) {
-                Log.w("Error writing dump", e);
+                // Call the default handler
+                if (previousHandler != null) {
+                    previousHandler.uncaughtException(thread, ex);
+                }
             }
-        }
-        defaultHandler.uncaughtException(thread, ex);
+        });
     }
+
 }
