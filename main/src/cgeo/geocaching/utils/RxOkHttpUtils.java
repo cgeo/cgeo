@@ -1,12 +1,10 @@
 package cgeo.geocaching.utils;
 
 import java.io.IOException;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 import io.reactivex.Single;
 import io.reactivex.SingleEmitter;
 import io.reactivex.SingleOnSubscribe;
-import io.reactivex.disposables.Disposables;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
@@ -30,26 +28,18 @@ public class RxOkHttpUtils {
         return Single.create(new SingleOnSubscribe<Response>() {
             @Override
             public void subscribe(final SingleEmitter<Response> singleEmitter) throws Exception {
-                final Call call = client.newCall(request);
-                final AtomicBoolean completed = new AtomicBoolean(false);
-                singleEmitter.setDisposable(Disposables.fromRunnable(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (!completed.get()) {
-                            call.cancel();
-                        }
-                    }
-                }));
-                call.enqueue(new Callback() {
+                // A disposible should be set on singleEmitter to cancel the request. However,
+                // canceling seems to kill the application because of an IOException not caught
+                // at the thread top-level.
+                // See https://github.com/cgeo/cgeo/issues/6114 for more details.
+                client.newCall(request).enqueue(new Callback() {
                     @Override
                     public void onFailure(final Call call, final IOException e) {
-                        completed.set(true);
                         singleEmitter.onError(e);
                     }
 
                     @Override
                     public void onResponse(final Call call, final Response response) throws IOException {
-                        completed.set(true);
                         singleEmitter.onSuccess(response);
                     }
                 });
