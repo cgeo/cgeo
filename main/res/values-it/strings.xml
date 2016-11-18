@@ -457,7 +457,10 @@
   <string name="settings_activate_oc_ro">Attiva</string>
   <string name="init_summary_oc_ro">Carica cache da opencaching.ro</string>
   <string name="init_oc_ro_description">Autorizza c:geo a cercare cache ed accedere/filtrare i ritrovamenti su opencaching.ro.</string>
+  <string name="init_oc_uk">opencache.uk</string>
   <string name="settings_activate_oc_uk">Attiva</string>
+  <string name="init_summary_oc_uk">Carica cache da opencache.uk</string>
+  <string name="init_oc_uk_description">Autorizza c:geo a cercare cache su opencache.uk.</string>
   <string name="init_su">Geocaching.su</string>
   <string name="init_summary_su">Carica cache da Geocaching.su</string>
   <string name="settings_activate_su">Attiva</string>
@@ -675,6 +678,7 @@
   <!-- auth opencaching -->
   <string name="auth_ocde">opencaching.de</string>
   <string name="auth_ocpl">opencaching.pl</string>
+  <string name="auth_ocuk">opencache.uk</string>
   <string name="auth_dialog_completed_oc">c:geo è ora autorizzato ad accedere a %s.</string>
   <!-- auth geokrety -->
   <string name="auth_dialog_completed_geokrety">c:geo è ora autorizzato ad interagire con %s.</string>

@@ -466,6 +466,7 @@
   <string name="init_oc_uk">opencache.uk</string>
   <string name="settings_activate_oc_uk">Aktivovat</string>
   <string name="init_summary_oc_uk">Načíst keše z opencache.uk</string>
+  <string name="init_oc_uk_description">Autorizovat c:geo s opencache.uk pro vyhledávání keší a přístup/filtrování nalezených keší.</string>
   <string name="init_su">Geocaching.su</string>
   <string name="init_summary_su">Načíst keše z geocaching.su</string>
   <string name="settings_activate_su">Aktivovat</string>
@@ -879,6 +880,7 @@
   <string name="cache_image_open_file">Otevřít jako soubor</string>
   <string name="cache_image_open_browser">Otevřít v prohlížeči</string>
   <string name="cache_image_add_waypoint">Přidat bod trasy</string>
+  <string name="cache_image_background">Obrázek na pozadí popisu keše</string>
   <string name="cache_share_field">Sdílet</string>
   <string name="cache_time_full_hours">hodin</string>
   <string name="cache_listed_on">Zveřejněno na %s</string>
@@ -1484,6 +1486,7 @@
   </plurals>
   <string name="command_rename_list_result">Seznam přejmenován</string>
   <string name="command_delete_list_result">Seznam odstraněn</string>
+  <string name="command_unique_list_result">Keše smazány z ostatních seznamů</string>
   <string name="fav_points_remaining">"Přidat tuto keš do oblíbených (zbývá %s)"</string>
   <!-- distance units -->
   <string name="unit_m">m</string>

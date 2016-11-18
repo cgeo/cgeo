@@ -460,7 +460,10 @@
   <string name="settings_activate_oc_ro">Aktivér</string>
   <string name="init_summary_oc_ro">Indlæs cacher fra opencaching.ro</string>
   <string name="init_oc_ro_description">Giv c:geo tilladelse til at søge efter cacher samt tilgå og filtrere dine fundne cacher på opencaching.ro.</string>
+  <string name="init_oc_uk">opencache.uk</string>
   <string name="settings_activate_oc_uk">Aktivér</string>
+  <string name="init_summary_oc_uk">Indlæs cacher fra opencache.uk</string>
+  <string name="init_oc_uk_description">Giv c:geo tilladelse til at søge efter cacher samt tilgå og filtrere dine fundne cacher på opencache.uk.</string>
   <string name="init_su">Geocaching.su</string>
   <string name="init_summary_su">Indlæs cacher fra Geocaching.su</string>
   <string name="settings_activate_su">Aktivér</string>
@@ -681,6 +684,7 @@
   <string name="auth_ocnl">opencaching.nl</string>
   <string name="auth_ocus">opencaching.us</string>
   <string name="auth_ocro">opencaching.ro</string>
+  <string name="auth_ocuk">opencache.uk</string>
   <string name="auth_dialog_completed_oc">c:geo er nu godkendt til at arbejde sammen med %s.</string>
   <!-- auth geokrety -->
   <string name="auth_dialog_completed_geokrety">c:geo er nu autoriseret til at interagere med %s.</string>

@@ -460,7 +460,10 @@
   <string name="settings_activate_oc_ro">Activeren</string>
   <string name="init_summary_oc_ro">Laad caches van opencaching.ro</string>
   <string name="init_oc_ro_description">c:geo Autoriseren met opencaching.ro naar caches te zoeken en je gevonden caches te benaderen/filteren.</string>
+  <string name="init_oc_uk">opencache.uk</string>
   <string name="settings_activate_oc_uk">Activeren</string>
+  <string name="init_summary_oc_uk">Laad caches van opencaching.uk</string>
+  <string name="init_oc_uk_description">Autoriseer c:geo met opencache.uk om naar caches te zoeken en je gevonden caches te benaderen/filteren.</string>
   <string name="init_su">Geocaching.su</string>
   <string name="init_summary_su">Laad caches van Geocaching.su</string>
   <string name="settings_activate_su">Activeer</string>
@@ -681,6 +684,7 @@
   <string name="auth_ocnl">opencaching.nl</string>
   <string name="auth_ocus">opencaching.us</string>
   <string name="auth_ocro">opencaching.ro</string>
+  <string name="auth_ocuk">opencache.uk</string>
   <string name="auth_dialog_completed_oc">c:geo is nu gekoppeld met %s.</string>
   <!-- auth geokrety -->
   <string name="auth_dialog_completed_geokrety">c:geo is nu geautoriseerd om met %s te communiceren.</string>
