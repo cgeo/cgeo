@@ -118,9 +118,7 @@ public class Settings {
             .getDefaultSharedPreferences(CgeoApplication.getInstance().getBaseContext());
     static {
         migrateSettings();
-        final boolean isDebug = sharedPrefs.getBoolean(getKey(R.string.pref_debug), false);
-        Log.setDebug(isDebug);
-        CgeoApplication.dumpOnOutOfMemory(isDebug);
+        Log.setDebug(sharedPrefs.getBoolean(getKey(R.string.pref_debug), false));
     }
 
     /**
