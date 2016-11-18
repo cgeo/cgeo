@@ -239,7 +239,7 @@ public final class Network {
                 return response;
             } catch (final IOException e) {
                 Log.w("Failure" + formatTimeSpan(before) + reqLogStr + " (" + e + ")");
-                throw new IOException("Invalid response", e);
+                throw e;
             }
         }
 
