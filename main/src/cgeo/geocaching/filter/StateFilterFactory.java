@@ -110,16 +110,16 @@ class StateFilterFactory implements IFilterFactory {
     static class StateFoundLastMonthFilter extends AbstractFilter {
 
         private static final double THIRTY_DAYS_MSECS = 30d * 86400d * 1000d;
-        public static final Creator<StateNeverFoundFilter> CREATOR = new Parcelable.Creator<StateNeverFoundFilter>() {
+        public static final Creator<StateFoundLastMonthFilter> CREATOR = new Parcelable.Creator<StateFoundLastMonthFilter>() {
 
             @Override
-            public StateNeverFoundFilter createFromParcel(final Parcel in) {
-                return new StateNeverFoundFilter(in);
+            public StateFoundLastMonthFilter createFromParcel(final Parcel in) {
+                return new StateFoundLastMonthFilter(in);
             }
 
             @Override
-            public StateNeverFoundFilter[] newArray(final int size) {
-                return new StateNeverFoundFilter[size];
+            public StateFoundLastMonthFilter[] newArray(final int size) {
+                return new StateFoundLastMonthFilter[size];
             }
         };
 
