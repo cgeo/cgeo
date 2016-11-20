@@ -60,7 +60,7 @@ public final class ConnectorFactory {
             new OCCZConnector(),
             new OCApiLiveConnector("opencache.uk", "opencache.uk", false, "OK", "CC BY-NC-SA 2.5",
                     R.string.oc_uk2_okapi_consumer_key, R.string.oc_uk2_okapi_consumer_secret,
-                    R.string.pref_connectorOCUKActive, R.string.pref_ocuk2_tokenpublic, R.string.pref_ocuk2_tokensecret, ApiSupport.oldapi),
+                    R.string.pref_connectorOCUKActive, R.string.pref_ocuk2_tokenpublic, R.string.pref_ocuk2_tokensecret, ApiSupport.current),
             new OCConnector("OpenCaching.NO/SE", "www.opencaching.se", false, "OS"),
             new OCApiLiveConnector("opencaching.nl", "www.opencaching.nl", false, "OB", "CC BY-SA 3.0",
                     R.string.oc_nl_okapi_consumer_key, R.string.oc_nl_okapi_consumer_secret,
