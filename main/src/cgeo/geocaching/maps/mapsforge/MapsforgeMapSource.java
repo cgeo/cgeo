@@ -5,7 +5,7 @@ import cgeo.geocaching.maps.interfaces.MapProvider;
 
 import org.mapsforge.v3.android.maps.mapgenerator.MapGeneratorInternal;
 
-class MapsforgeMapSource extends AbstractMapSource {
+public class MapsforgeMapSource extends AbstractMapSource {
 
     private final MapGeneratorInternal generator;
 
