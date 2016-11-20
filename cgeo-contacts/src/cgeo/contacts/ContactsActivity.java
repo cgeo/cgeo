@@ -1,9 +1,5 @@
 package cgeo.contacts;
 
-import org.apache.commons.lang3.CharEncoding;
-import org.apache.commons.lang3.StringUtils;
-import android.support.annotation.NonNull;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -15,6 +11,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.BaseColumns;
 import android.provider.ContactsContract;
+import android.support.annotation.NonNull;
 import android.util.Log;
 import android.util.Pair;
 import android.view.Gravity;
@@ -24,6 +21,10 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.commons.lang3.CharEncoding;
+import org.apache.commons.lang3.StringUtils;
+import org.mapsforge.v3.core.IOUtils;
 
 public final class ContactsActivity extends Activity {
     static final String LOG_TAG = "cgeo.contacts";
@@ -128,9 +129,7 @@ public final class ContactsActivity extends Activity {
         } catch (final Exception e) {
             Log.e(LOG_TAG, "ContactsActivity.getContactId", e);
         } finally {
-            if (cursor != null) {
-                cursor.close();
-            }
+            IOUtils.closeQuietly(cursor);
         }
         return result;
     }

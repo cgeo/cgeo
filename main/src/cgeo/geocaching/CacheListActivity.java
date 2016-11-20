@@ -131,6 +131,7 @@ import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.mapsforge.v3.core.IOUtils;
 
 public class CacheListActivity extends AbstractListActivity implements FilteredActivity, LoaderManager.LoaderCallbacks<SearchResult> {
 
@@ -1178,9 +1179,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 return cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
             }
         } finally {
-            if (cursor != null) {
-                cursor.close();
-            }
+            IOUtils.closeQuietly(cursor);
         }
         return null;
     }
@@ -1303,7 +1302,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         final Observable<Geocache> allCaches;
         if (Settings.isStoreOfflineMaps()) {
             allCaches = Observable.create(new ObservableOnSubscribe<Geocache>() {
-                private Disposable disposable = Disposables.empty();
+                private final Disposable disposable = Disposables.empty();
 
                 @Override
                 public void subscribe(final ObservableEmitter<Geocache> emitter) throws Exception {

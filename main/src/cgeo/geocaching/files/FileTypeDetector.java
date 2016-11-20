@@ -37,7 +37,6 @@ class FileTypeDetector {
             }
             reader = new BufferedReader(new InputStreamReader(is, CharEncoding.UTF_8));
             type = detectHeader(reader);
-            reader.close();
         } catch (final IOException e) {
             if (!uri.toString().startsWith("http")) {
                 Log.e("FileTypeDetector", e);

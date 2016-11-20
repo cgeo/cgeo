@@ -2,22 +2,25 @@ package cgeo.geocaching.files;
 
 import android.support.annotation.RawRes;
 
+import org.apache.commons.io.IOUtils;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
+
 import static cgeo.geocaching.enumerations.CacheSize.MICRO;
 import static cgeo.geocaching.enumerations.CacheSize.UNKNOWN;
 import static cgeo.geocaching.test.R.raw.gc1bkp3_loc;
 import static cgeo.geocaching.test.R.raw.oc5952_loc;
 import static cgeo.geocaching.test.R.raw.waymarking_loc;
 import static org.assertj.core.api.Assertions.assertThat;
-
-import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.enumerations.CacheType;
-import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 
 public class LocParserTest extends AbstractResourceInstrumentationTestCase {
     private List<Geocache> readLoc(@RawRes final int resourceId) throws IOException, ParserException {
@@ -29,7 +32,7 @@ public class LocParserTest extends AbstractResourceInstrumentationTestCase {
             assertThat(caches).isNotNull();
             assertThat(caches).isNotEmpty();
         } finally {
-            instream.close();
+            IOUtils.closeQuietly(instream);
         }
 
         return new ArrayList<>(caches);

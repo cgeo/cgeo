@@ -1,19 +1,12 @@
 package cgeo.geocaching.storage;
 
-import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.utils.CryptUtils;
-import cgeo.geocaching.utils.EnvironmentUtils;
-import cgeo.geocaching.utils.FileUtils;
-import cgeo.geocaching.utils.Log;
-
-import okhttp3.Response;
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.CharEncoding;
-import org.apache.commons.lang3.StringUtils;
+import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import android.os.Environment;
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.CharEncoding;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -32,6 +25,13 @@ import java.io.Reader;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
+
+import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.utils.CryptUtils;
+import cgeo.geocaching.utils.EnvironmentUtils;
+import cgeo.geocaching.utils.FileUtils;
+import cgeo.geocaching.utils.Log;
+import okhttp3.Response;
 
 /**
  * Handle local storage issues on phone and SD card.
@@ -262,7 +262,7 @@ public final class LocalStorage {
                 final int count = reader.read(value);
                 return new String(value, 0, count);
             } finally {
-                reader.close();
+                IOUtils.closeQuietly(reader);
             }
         } catch (final FileNotFoundException ignored) {
             // Do nothing, the file does not exist

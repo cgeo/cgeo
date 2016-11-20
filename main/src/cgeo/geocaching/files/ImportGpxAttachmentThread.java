@@ -1,22 +1,23 @@
 package cgeo.geocaching.files;
 
-import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.R;
-import cgeo.geocaching.network.Network;
-import cgeo.geocaching.utils.DisposableHandler;
-import cgeo.geocaching.utils.Log;
-
-import android.support.annotation.Nullable;
-
 import android.content.ContentResolver;
 import android.net.Uri;
 import android.os.Handler;
+import android.support.annotation.Nullable;
+
+import org.apache.commons.compress.utils.IOUtils;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collection;
 import java.util.Collections;
+
+import cgeo.geocaching.R;
+import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.network.Network;
+import cgeo.geocaching.utils.DisposableHandler;
+import cgeo.geocaching.utils.Log;
 
 public class ImportGpxAttachmentThread extends AbstractImportGpxThread {
     private final Uri uri;
@@ -43,7 +44,7 @@ public class ImportGpxAttachmentThread extends AbstractImportGpxThread {
         try {
             return parser.parse(inputStream, progressHandler);
         } finally {
-            inputStream.close();
+            IOUtils.closeQuietly(inputStream);
         }
     }
 

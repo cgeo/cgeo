@@ -1,17 +1,18 @@
 package cgeo.calendar;
 
-import android.support.annotation.NonNull;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.Gravity;
 import android.widget.Toast;
+
+import org.mapsforge.v3.core.IOUtils;
 
 public final class CalendarActivity extends Activity {
     static final String LOG_TAG = "cgeo.calendar";
@@ -118,9 +119,7 @@ public final class CalendarActivity extends Activity {
                 }
             } while (cursor.moveToNext());
         } finally {
-            if (cursor != null) {
-                cursor.close();
-            }
+            IOUtils.closeQuietly(cursor);
         }
         return calendars;
     }

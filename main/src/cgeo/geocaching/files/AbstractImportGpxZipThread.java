@@ -1,15 +1,11 @@
 package cgeo.geocaching.files;
 
-import cgeo.geocaching.R;
-import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.utils.DisposableHandler;
+import android.os.Handler;
+import android.text.Html;
 
 import org.apache.commons.compress.archivers.zip.ZipArchiveInputStream;
 import org.apache.commons.compress.utils.IOUtils;
 import org.apache.commons.lang3.StringUtils;
-
-import android.os.Handler;
-import android.text.Html;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -17,6 +13,10 @@ import java.io.InputStream;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.zip.ZipEntry;
+
+import cgeo.geocaching.R;
+import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.utils.DisposableHandler;
 
 abstract class AbstractImportGpxZipThread extends AbstractImportGpxThread {
 
@@ -52,7 +52,7 @@ abstract class AbstractImportGpxZipThread extends AbstractImportGpxThread {
                 throw new ParserException("Imported ZIP does not contain a GPX file.");
             }
         } finally {
-            zisPass1.close();
+            IOUtils.closeQuietly(zisPass1);
         }
 
         // 2. parse waypoint files
@@ -66,7 +66,7 @@ abstract class AbstractImportGpxZipThread extends AbstractImportGpxThread {
                 }
             }
         } finally {
-            zisPass2.close();
+            IOUtils.closeQuietly(zisPass2);
             IOUtils.closeQuietly(inputStream);
         }
 

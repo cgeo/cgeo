@@ -2,8 +2,6 @@ package cgeo.geocaching.test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
@@ -11,6 +9,8 @@ import cgeo.geocaching.enumerations.LoadFlags.RemoveFlag;
 import cgeo.geocaching.files.GPX10Parser;
 import cgeo.geocaching.files.ParserException;
 import cgeo.geocaching.list.StoredList;
+import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.storage.DataStore;
 
 import android.content.ContentResolver;
 import android.content.res.Resources;
@@ -26,6 +26,8 @@ import java.io.InputStream;
 import java.util.Collection;
 import java.util.EnumSet;
 import java.util.Scanner;
+
+import org.apache.commons.compress.utils.IOUtils;
 
 public abstract class AbstractResourceInstrumentationTestCase extends InstrumentationTestCase {
     private int temporaryListId;
@@ -51,7 +53,7 @@ public abstract class AbstractResourceInstrumentationTestCase extends Instrument
             e.printStackTrace();
         } finally {
             if (scanner != null) {
-                scanner.close();
+                scanner.close(); // don't use IOUtils.closeQuietly, since Scanner does not implement Closable
             }
         }
         return null;
@@ -68,8 +70,8 @@ public abstract class AbstractResourceInstrumentationTestCase extends Instrument
                 os.write(buffer, 0, byteCount);
             }
         } finally {
-            os.close();
-            is.close();
+            IOUtils.closeQuietly(os);
+            IOUtils.closeQuietly(is);
         }
     }
 
@@ -103,7 +105,7 @@ public abstract class AbstractResourceInstrumentationTestCase extends Instrument
             assertThat(caches).isNotEmpty();
             return caches.iterator().next();
         } finally {
-            instream.close();
+            IOUtils.closeQuietly(instream);
         }
     }
 

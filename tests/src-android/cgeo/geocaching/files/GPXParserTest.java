@@ -2,6 +2,8 @@ package cgeo.geocaching.files;
 
 import android.support.annotation.RawRes;
 
+import org.apache.commons.compress.utils.IOUtils;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.ParseException;
@@ -244,7 +246,7 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
                     result.add(cache.getGeocode());
                 }
             } finally {
-                instream.close();
+                IOUtils.closeQuietly(instream);
             }
         }
         // reload caches, because the parser only returns the minimum version of each cache

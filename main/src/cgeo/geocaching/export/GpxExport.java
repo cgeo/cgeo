@@ -11,10 +11,6 @@ import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ShareUtils;
 
-import org.apache.commons.lang3.CharEncoding;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -22,6 +18,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.CheckBox;
@@ -40,6 +38,8 @@ import java.util.List;
 import java.util.Locale;
 
 import butterknife.ButterKnife;
+import org.apache.commons.lang3.CharEncoding;
+import org.mapsforge.v3.core.IOUtils;
 
 public class GpxExport extends AbstractExport {
 
@@ -160,14 +160,7 @@ public class GpxExport extends AbstractExport {
                 });
             } catch (final IOException e) {
                 Log.e("GpxExport.ExportTask export", e);
-
-                if (writer != null) {
-                    try {
-                        writer.close();
-                    } catch (final IOException ignored) {
-                        // Ignore double error
-                    }
-                }
+                IOUtils.closeQuietly(writer);
                 // delete partial GPX file on error
                 if (exportFile.exists()) {
                     FileUtils.deleteIgnoringFailure(exportFile);
