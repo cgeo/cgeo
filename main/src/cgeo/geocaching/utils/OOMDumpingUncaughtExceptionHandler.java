@@ -7,9 +7,13 @@ import java.lang.Thread.UncaughtExceptionHandler;
 
 import org.apache.commons.lang3.StringUtils;
 
-public class OOMDumpingUncaughtExceptionHandler {
+public final class OOMDumpingUncaughtExceptionHandler {
 
-    static public void installUncaughtExceptionHandler() {
+    private OOMDumpingUncaughtExceptionHandler() {
+        // utility class
+    }
+
+    public static void installUncaughtExceptionHandler() {
         final UncaughtExceptionHandler previousHandler = Thread.getDefaultUncaughtExceptionHandler();
         Thread.setDefaultUncaughtExceptionHandler(new UncaughtExceptionHandler() {
             @Override
