@@ -28,11 +28,15 @@ import cgeo.geocaching.maps.MapState;
 import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.maps.interfaces.OnMapDragListener;
 import cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider;
+import cgeo.geocaching.maps.mapsforge.MapsforgeMapSource;
 import cgeo.geocaching.maps.mapsforge.v6.caches.CachesBundle;
 import cgeo.geocaching.maps.mapsforge.v6.caches.GeoitemRef;
+import cgeo.geocaching.maps.mapsforge.v6.layers.DownloadLayer;
 import cgeo.geocaching.maps.mapsforge.v6.layers.HistoryLayer;
+import cgeo.geocaching.maps.mapsforge.v6.layers.ITileLayer;
 import cgeo.geocaching.maps.mapsforge.v6.layers.NavigationLayer;
 import cgeo.geocaching.maps.mapsforge.v6.layers.PositionLayer;
+import cgeo.geocaching.maps.mapsforge.v6.layers.RendererLayer;
 import cgeo.geocaching.maps.mapsforge.v6.layers.TapHandlerLayer;
 import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.maps.routing.RoutingMode;
@@ -94,6 +98,8 @@ import org.mapsforge.map.android.graphics.AndroidResourceBitmap;
 import org.mapsforge.map.android.util.AndroidUtil;
 import org.mapsforge.map.layer.Layers;
 import org.mapsforge.map.layer.cache.TileCache;
+import org.mapsforge.map.layer.download.tilesource.OpenCycleMap;
+import org.mapsforge.map.layer.download.tilesource.OpenStreetMapMapnik;
 import org.mapsforge.map.layer.renderer.TileRendererLayer;
 import org.mapsforge.map.model.DisplayModel;
 import org.mapsforge.map.reader.MapFile;
@@ -109,7 +115,7 @@ public class NewMap extends AbstractActionBarActivity {
 
     private MfMapView mapView;
     private TileCache tileCache;
-    private TileRendererLayer tileRendererLayer;
+    private ITileLayer tileLayer;
     private HistoryLayer historyLayer;
     private PositionLayer positionLayer;
     private NavigationLayer navigationLayer;
@@ -191,14 +197,14 @@ public class NewMap extends AbstractActionBarActivity {
         mapView.getMapZoomControls().setZoomLevelMin((byte) 10);
         mapView.getMapZoomControls().setZoomLevelMax((byte) 20);
 
-        // create a tile cache of suitable size
-        tileCache = AndroidUtil.createTileCache(this, "mapcache", mapView.getModel().displayModel.getTileSize(), 1f, this.mapView.getModel().frameBufferModel.getOverdrawFactor());
+        // create a tile cache of suitable size. always initialize it based on the smallest tile size to expect (256 for online tiles)
+        tileCache = AndroidUtil.createTileCache(this, "mapcache", 256, 1f, this.mapView.getModel().frameBufferModel.getOverdrawFactor());
 
         // attach drag handler
         final DragHandler dragHandler = new DragHandler(this);
         mapView.setOnMapDragListener(dragHandler);
 
-        // prepare initial settings of mapview
+        // prepare initial settings of mapView
         if (mapOptions.mapState != null) {
             this.mapView.getModel().mapViewPosition.setCenter(MapsforgeUtils.toLatLong(mapOptions.mapState.getCenter()));
             this.mapView.getModel().mapViewPosition.setZoomLevel((byte) mapOptions.mapState.getZoomLevel());
@@ -258,6 +264,8 @@ public class NewMap extends AbstractActionBarActivity {
             if (menuItem != null) {
                 if (mapSource instanceof MapsforgeMapProvider.OfflineMapSource) {
                     menuItem.setVisible(mapSource.isAvailable());
+                } else if (mapSource instanceof MapsforgeMapSource) {
+                    menuItem.setVisible(mapSource.isAvailable());
                 } else {
                     menuItem.setVisible(false);
                 }
@@ -283,7 +291,7 @@ public class NewMap extends AbstractActionBarActivity {
             menu.findItem(R.id.menu_circle_mode).setVisible(false);
             menu.findItem(R.id.menu_trail_mode).setChecked(Settings.isMapTrail());
 
-            menu.findItem(R.id.menu_theme_mode).setVisible(true);
+            menu.findItem(R.id.menu_theme_mode).setVisible(tileLayer.hasThemes());
 
             menu.findItem(R.id.menu_as_list).setVisible(!caches.isDownloading() && caches.getVisibleItemsCount() > 0);
 
@@ -546,58 +554,107 @@ public class NewMap extends AbstractActionBarActivity {
 
     protected void setMapTheme() {
 
-        if (tileRendererLayer == null) {
+        if (tileLayer == null || tileLayer.getTileLayer() == null) {
             return;
         }
+
+        if (!tileLayer.hasThemes()) {
+            tileLayer.getTileLayer().requestRedraw();
+            return;
+        }
+
+        final TileRendererLayer rendererLayer = (TileRendererLayer) tileLayer.getTileLayer();
 
         final String themePath = Settings.getCustomRenderThemeFilePath();
 
         if (StringUtils.isEmpty(themePath)) {
-            tileRendererLayer.setXmlRenderTheme(InternalRenderTheme.OSMARENDER);
+            rendererLayer.setXmlRenderTheme(InternalRenderTheme.OSMARENDER);
         } else {
             try {
                 final XmlRenderTheme xmlRenderTheme = new ExternalRenderTheme(new File(themePath));
                 // Validate the theme file
                 RenderThemeHandler.getRenderTheme(AndroidGraphicFactory.INSTANCE, new DisplayModel(), xmlRenderTheme);
-                tileRendererLayer.setXmlRenderTheme(xmlRenderTheme);
+                rendererLayer.setXmlRenderTheme(xmlRenderTheme);
             } catch (final IOException e) {
                 Log.w("Failed to set render theme", e);
                 ActivityMixin.showApplicationToast(getString(R.string.err_rendertheme_file_unreadable));
-                tileRendererLayer.setXmlRenderTheme(InternalRenderTheme.OSMARENDER);
+                rendererLayer.setXmlRenderTheme(InternalRenderTheme.OSMARENDER);
             } catch (final XmlPullParserException e) {
                 Log.w("render theme invalid", e);
                 ActivityMixin.showApplicationToast(getString(R.string.err_rendertheme_invalid));
-                tileRendererLayer.setXmlRenderTheme(InternalRenderTheme.OSMARENDER);
+                rendererLayer.setXmlRenderTheme(InternalRenderTheme.OSMARENDER);
             }
         }
-        tileCache.destroy();
-        tileRendererLayer.requestRedraw();
+        tileCache.purge();
+        rendererLayer.requestRedraw();
     }
 
     private void setMapSource(@NonNull final MapSource mapSource) {
         // Update mapsource in settings
         Settings.setMapSource(mapSource);
 
-        // Create new render layer, if mapfile exists
-        final TileRendererLayer oldLayer = this.tileRendererLayer;
-        final File mapFile = NewMap.getMapFile();
-        if (mapFile != null && mapFile.exists()) {
-            final TileRendererLayer newLayer = new TileRendererLayer(tileCache, new MapFile(mapFile), this.mapView.getModel().mapViewPosition, false, true, false, AndroidGraphicFactory.INSTANCE);
+        switchTileLayer(mapSource);
+    }
 
-            // Exchange layer
-            final Layers layers = this.mapView.getLayerManager().getLayers();
-            final int index = layers.indexOf(oldLayer) + 1;
-            layers.add(index, newLayer);
-            this.tileRendererLayer = newLayer;
-            this.setMapTheme();
+    private void switchTileLayer(final MapSource mapSource) {
+        // Create new render layer, if mapfile exists
+        final ITileLayer oldLayer = this.tileLayer;
+        ITileLayer newLayer = null;
+        if (mapSource instanceof MapsforgeMapProvider.OfflineMapSource) {
+            this.mapView.getModel().displayModel.setFixedTileSize(0);
+            final File mapFile = NewMap.getMapFile();
+            if (mapFile != null && mapFile.exists()) {
+                newLayer = new RendererLayer(tileCache, new MapFile(mapFile), this.mapView.getModel().mapViewPosition, false, true, false, AndroidGraphicFactory.INSTANCE);
+
+            }
         } else {
-            this.tileRendererLayer = null;
+            this.mapView.getModel().displayModel.setFixedTileSize(256);
+            if (mapSource.getNumericalId() == MapsforgeMapProvider.MAPSFORGE_MAPNIK_ID.hashCode()) {
+                newLayer = new DownloadLayer(tileCache, this.mapView.getModel().mapViewPosition, OpenStreetMapMapnik.INSTANCE, AndroidGraphicFactory.INSTANCE);
+            } else if (mapSource.getNumericalId() == MapsforgeMapProvider.MAPSFORGE_CYCLEMAP_ID.hashCode()) {
+                newLayer = new DownloadLayer(tileCache, this.mapView.getModel().mapViewPosition, OpenCycleMap.INSTANCE, AndroidGraphicFactory.INSTANCE);
+            }
+        }
+        // Exchange layer
+        if (newLayer != null) {
+            final Layers layers = this.mapView.getLayerManager().getLayers();
+            int index = 0;
+            if (oldLayer != null) {
+                index = layers.indexOf(oldLayer.getTileLayer()) + 1;
+            }
+            layers.add(index, newLayer.getTileLayer());
+            this.tileLayer = newLayer;
+            this.setMapTheme();
+            newLayer.onResume();
+        } else {
+            this.tileLayer = null;
         }
 
         // Cleanup
-        this.mapView.getLayerManager().getLayers().remove(oldLayer);
-        oldLayer.onDestroy();
-        tileCache.destroy();
+        if (oldLayer != null) {
+            this.mapView.getLayerManager().getLayers().remove(oldLayer.getTileLayer());
+            oldLayer.getTileLayer().onDestroy();
+        }
+        tileCache.purge();
+    }
+
+    private void resumeTileLayer() {
+        if (this.tileLayer != null) {
+            this.tileLayer.onResume();
+        }
+    }
+
+    private void pauseTileLayer() {
+        if (this.tileLayer != null) {
+            this.tileLayer.onPause();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        resumeTileLayer();
     }
 
     @Override
@@ -609,15 +666,7 @@ public class NewMap extends AbstractActionBarActivity {
 
     private void initializeLayers() {
 
-        // tile renderer layer (if map file is defined)
-        final File mapFile = NewMap.getMapFile();
-        if (mapFile != null && mapFile.exists()) {
-            this.tileRendererLayer = new TileRendererLayer(tileCache, new MapFile(mapFile), this.mapView.getModel().mapViewPosition, false, true, false, AndroidGraphicFactory.INSTANCE);
-            this.setMapTheme();
-
-            // only once a layer is associated with a mapView the rendering starts
-            this.mapView.getLayerManager().getLayers().add(this.tileRendererLayer);
-        }
+        switchTileLayer(Settings.getMapSource());
 
         // History Layer
         this.historyLayer = new HistoryLayer(trailHistory);
@@ -677,6 +726,8 @@ public class NewMap extends AbstractActionBarActivity {
 
         savePrefs();
 
+        pauseTileLayer();
+
         super.onPause();
     }
 
@@ -702,10 +753,10 @@ public class NewMap extends AbstractActionBarActivity {
         this.mapView.getLayerManager().getLayers().remove(this.historyLayer);
         this.historyLayer = null;
 
-        if (this.tileRendererLayer != null) {
-            this.mapView.getLayerManager().getLayers().remove(this.tileRendererLayer);
-            this.tileRendererLayer.onDestroy();
-            this.tileRendererLayer = null;
+        if (this.tileLayer != null) {
+            this.mapView.getLayerManager().getLayers().remove(this.tileLayer.getTileLayer());
+            this.tileLayer.getTileLayer().onDestroy();
+            this.tileLayer = null;
         }
     }
 
