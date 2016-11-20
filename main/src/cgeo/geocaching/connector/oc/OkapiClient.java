@@ -821,8 +821,8 @@ final class OkapiClient {
 
     @NonNull
     private static JSONResult request(@NonNull final OCApiConnector connector, @NonNull final OkapiService service, @NonNull final Parameters params) {
-        final String hostUrl = connector.getHostUrl();
-        if (StringUtils.isBlank(hostUrl)) {
+        final String host = connector.getHost();
+        if (StringUtils.isBlank(host)) {
             return new JSONResult("unknown OKAPI connector host");
         }
 
@@ -834,7 +834,7 @@ final class OkapiClient {
                 if (!tokens.isValid()) {
                     return new JSONResult("invalid oauth tokens");
                 }
-                OAuth.signOAuth(hostUrl, service.methodName, "GET", false, params, tokens, connector.getCK(), connector.getCS());
+                OAuth.signOAuth(host, service.methodName, "GET", connector.getHttps(), params, tokens, connector.getCK(), connector.getCS());
                 break;
             }
             case Level1 : {
@@ -846,7 +846,7 @@ final class OkapiClient {
                 break;
         }
 
-        final String uri = hostUrl + service.methodName;
+        final String uri = connector.getHostUrl() + service.methodName;
         try {
             return new JSONResult(Network.getRequest(uri, params).blockingGet());
         } catch (final Exception e) {
