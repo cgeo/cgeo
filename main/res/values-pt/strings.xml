@@ -93,6 +93,7 @@
   <string name="log_posting_image">A publicar imagem…</string>
   <string name="log_posting_generic_trackable">A publicar %1$s %2$s/%3$s</string>
   <string name="log_clear">Limpar</string>
+  <string name="log_post_not_possible">Download de dados em progresso…\n Por favor tente novamente dentro de alguns segundos ou verifique sua conexão à internet.</string>
   <string name="log_post_geocode_missing">Geocodigo em falta…</string>
   <string name="log_date_future_not_allowed">Registos com datas futuras não são permitidos.</string>
   <string name="log_add">Adicionar</string>
@@ -244,6 +245,7 @@
   <string name="err_trackable_log_not_anonymous">Logar %1$s a partir do c:geo não pode ser feito de forma anónima. Quer abrir as configurações para preencher as suas credenciais de %2$s?</string>
   <string name="err_trackable_no_preference_activity">Desculpa, não posso encontrar uma tela de preferência apropriada.</string>
   <string name="warn_discard_changes">As alterações ao waypoint não salvas foram descartadas!</string>
+  <string name="err_request_popup_info">c:geo falhou ao obter o pop-up com as informações da cache.</string>
   <!-- location service -->
   <string name="loc_last">Último conhecido</string>
   <string name="loc_net">Rede</string>
@@ -360,6 +362,7 @@
   <string name="caches_filter_missing_gcvote">Caches encontradas não votadas</string>
   <!-- caches lists -->
   <string name="list_menu_create">Criar nova lista</string>
+  <string name="list_menu_drop">Remover a lista atual</string>
   <string name="list_menu_rename">Mudar o nome da lista corrente.</string>
   <string name="list_menu_import">Importar</string>
   <string name="list_title">Escolha uma lista</string>
@@ -457,6 +460,7 @@
   <string name="settings_activate_oc_ro">Activar</string>
   <string name="init_summary_oc_ro">Carregar caches de opencaching.ro</string>
   <string name="init_oc_ro_description">Permitir que c:geo pesquise, aceda e filtre as suas caches encontradas em opencaching.ro.</string>
+  <string name="init_oc_uk">opencache.uk</string>
   <string name="settings_activate_oc_uk">Ativar</string>
   <string name="init_su">Geocaching.su</string>
   <string name="init_summary_su">Carregar caches de Geocaching.su</string>

@@ -619,6 +619,8 @@
   <string name="feature_search_owner">Etsi omistajan mukaan</string>
   <string name="feature_search_finder">Etsi löytäjän mukaan</string>
   <string name="init_experimental_title">Kokeelliset ominaisuudet</string>
+  <string name="init_mfbeta">Mapsforge beta oletuksena</string>
+  <string name="init_mfbeta_description">Nykyinen julkaisu sisältää kokeellisena ominaisuutena beetaversion uudesta Mapsforge kartasta. Tämä uusi kartta voidaan aktivoida täällä oletus live- ja listakartaksi.</string>
   <!-- map sources -->
   <string name="map_source_google_map">Google Map</string>
   <string name="map_source_google_satellite">Google: Satelliitti</string>
@@ -777,6 +779,7 @@
   <string name="cache_menu_sygic_drive">Sygic (ajaessa)</string>
   <string name="cache_menu_radar">Tutka</string>
   <string name="cache_menu_map">Kartta</string>
+  <string name="cache_menu_mfbeta">Mapsforge Beta</string>
   <string name="cache_menu_map_static">Staattinen kartta</string>
   <string name="cache_menu_download_map_static">Lataa Staattinen kartta</string>
   <string name="cache_menu_rmaps">Rmaps</string>
@@ -1384,9 +1387,12 @@
   <string name="send">Lähetä</string>
   <string name="showcase_logcache_title">Lähetetään lokia</string>
   <string name="showcase_logcache_text">Muista, useat toiminnot ovat nyt otsikkopalkissa. Sieltä löydät napin valmiin lokin lähettämiseen.</string>
+  <string name="showcase_main_title">Valikkorivi</string>
+  <string name="showcase_main_text">Jotkin c:geon toiminnot ovat saavutettavissa valikkorivillä tai sisällytetty pistekuvakkeen kautta päästävään valikkoon. Saat kuvauksen painamalla painiketta pitkään.</string>
   <string name="showcase_cachelist_title">Luetteloiden valitseminen</string>
   <string name="showcase_cachelist_text">Voit siirtyä geokätköluettelosta toiseen klikkaamalla luettelon nimeä.</string>
   <string name="showcase_compass_hint_title">Näytä vihje</string>
+  <string name="showcase_compass_hint_text">Tämä valikkokohde saattaa antaa käsityksen mistä kätkö löytyy - se näyttää vihjeen, jos saatavilla.</string>
   <string name="confirm_log_title">Epätavallinen lokityyppi</string>
   <string name="confirm_log_message">Haluat lokata \'%s\'. Oletko varma?</string>
   <!-- Geokrety -->
