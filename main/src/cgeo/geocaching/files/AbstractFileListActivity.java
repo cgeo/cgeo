@@ -183,7 +183,13 @@ public abstract class AbstractFileListActivity<T extends RecyclerView.Adapter<? 
                     return TextUtils.COLLATOR.compare(lhs.getName(), rhs.getName());
                 }
             });
-            adapter.notifyDataSetChanged();
+
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    adapter.notifyDataSetChanged();
+                }
+            });
 
             loadFilesHandler.sendMessage(Message.obtain(loadFilesHandler));
         }
