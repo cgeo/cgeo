@@ -2,28 +2,5 @@
 <resources>
   <!-- changelog for the master branch -->
   <string name="changelog_master" translatable="false">
-    <b>Next feature release:</b>\n
-    · New: Archived or disabled caches stroken trough in titles\n
-    · New: Offline routing in our maps (you need the \'BRouter\' app on your device)\n
-    · New: Support ignoring caches on OpenCaching sites\n
-    · New: Function to remove duplicate caches from all other lists\n
-    · New: Undo ability for clear log menu item\n
-    · New: Filter for found caches missing a voting\n
-    · New: Korean translation\n
-    · New: Cache history now also fetches all caches with saved offline log wich are not saved\n
-    · New: Use cache type icon in header bar of logging screen\n
-    · Fix: Better clipboard format when copying waypoint coordinates\n
-    · Fix: Wrong icon when navigating to a waypoint\n
-    · Fix: Detect wherigo cartridge links in short description\n
-    · Fix: Don\'t store a signature only log when going back\n
-    · Fix: Make URLs in hints clickable\n
-    · Fix: Add to favorite was not available when logging webcam caches\n
-    · Fix: Store from map no longer stores to default list\n
-    · Fix: Correctly recognize OpenCaching.FR/.IT/.ES URLs\n
-    · Fix: Connect with the new Opencache.uk\n
-    · Change: Fetch more caches from OC sites when GC is disabled in settings\n
-    · Removed: No longer supports captchas for getting exact coordinates as basic member\n
-    \n
-    \n
   </string>
 </resources>
