@@ -634,7 +634,6 @@ public class NewMap extends AbstractActionBarActivity {
             layers.add(index, newLayer.getTileLayer());
             this.tileLayer = newLayer;
             this.setMapTheme();
-            newLayer.onResume();
         } else {
             this.tileLayer = null;
         }
