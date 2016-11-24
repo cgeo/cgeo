@@ -291,7 +291,7 @@ public class NewMap extends AbstractActionBarActivity {
             menu.findItem(R.id.menu_circle_mode).setVisible(false);
             menu.findItem(R.id.menu_trail_mode).setChecked(Settings.isMapTrail());
 
-            menu.findItem(R.id.menu_theme_mode).setVisible(tileLayer.hasThemes());
+            menu.findItem(R.id.menu_theme_mode).setVisible(tileLayerHasThemes());
 
             menu.findItem(R.id.menu_as_list).setVisible(!caches.isDownloading() && caches.getVisibleItemsCount() > 0);
 
@@ -648,6 +648,14 @@ public class NewMap extends AbstractActionBarActivity {
         if (this.tileLayer != null) {
             this.tileLayer.onPause();
         }
+    }
+
+    private boolean tileLayerHasThemes() {
+        if (tileLayer != null) {
+            return tileLayer.hasThemes();
+        }
+
+        return false;
     }
 
     @Override
