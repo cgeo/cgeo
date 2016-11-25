@@ -62,18 +62,11 @@ public class DirectionDrawer {
         final Geopoint[] routingPoints = Routing.getTrack(currentCoords, destinationCoords);
         final ArrayList<Point> pixelPoints = new ArrayList<>();
 
-        // add actual routing points if available
-        if (routingPoints != null && routingPoints.length > 1) {
-            for (final Geopoint geopoint : routingPoints) {
-                pixelPoints.add(translateToPixels(projection, geopoint));
-            }
+        for (final Geopoint geopoint : routingPoints) {
+            pixelPoints.add(translateToPixels(projection, geopoint));
         }
 
-        // add artificial line from routing end to target
-        pixelPoints.add(translateToPixels(projection, destinationCoords));
-
         CanvasUtils.drawPath(pixelPoints, canvas, linePaint);
-
     }
 
     private Point translateToPixels(final MapProjectionImpl projection, final Geopoint geopoint) {
