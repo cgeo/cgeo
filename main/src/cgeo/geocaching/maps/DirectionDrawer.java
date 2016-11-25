@@ -60,7 +60,7 @@ public class DirectionDrawer {
         }
 
         final Geopoint[] routingPoints = Routing.getTrack(currentCoords, destinationCoords);
-        final ArrayList<Point> pixelPoints = new ArrayList<>();
+        final ArrayList<Point> pixelPoints = new ArrayList<>(routingPoints.length);
 
         for (final Geopoint geopoint : routingPoints) {
             pixelPoints.add(translateToPixels(projection, geopoint));

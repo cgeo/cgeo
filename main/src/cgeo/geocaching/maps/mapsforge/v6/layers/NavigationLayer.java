@@ -63,7 +63,7 @@ public class NavigationLayer extends Layer {
         final long mapSize = MercatorProjection.getMapSize(zoomLevel, this.displayModel.getTileSize());
 
         final Geopoint[] routingPoints = Routing.getTrack(currentCoords, destinationCoords);
-        final ArrayList<Pair<Integer, Integer>> pixelPoints = new ArrayList<>();
+        final ArrayList<Pair<Integer, Integer>> pixelPoints = new ArrayList<>(routingPoints.length);
 
         for (final Geopoint geopoint : routingPoints) {
             pixelPoints.add(translateToPixels(mapSize, topLeftPoint, geopoint));
