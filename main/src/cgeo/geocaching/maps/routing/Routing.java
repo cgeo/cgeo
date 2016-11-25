@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Xml;
 
@@ -59,10 +60,10 @@ public final class Routing {
         }
     }
 
-    @Nullable
+    @NonNull
     public static Geopoint[] getTrack(final Geopoint start, final Geopoint destination) {
         if (brouter == null) {
-            return null;
+            return defaultTrack(start, destination);
         }
 
         // avoid updating to frequently
@@ -74,12 +75,12 @@ public final class Routing {
         // Disable routing for huge distances
         final float targetDistance = start.distanceTo(destination);
         if (targetDistance > MAX_ROUTING_DISTANCE_KILOMETERS) {
-            return null;
+            return defaultTrack(start, destination);
         }
 
         // disable routing when near the target
         if (targetDistance < MIN_ROUTING_DISTANCE_KILOMETERS) {
-            return null;
+            return defaultTrack(start, destination);
         }
 
         // Use cached route if current position has not changed more than 5m
@@ -96,6 +97,10 @@ public final class Routing {
         return lastRoutingPoints;
     }
 
+    private static Geopoint[] defaultTrack(final Geopoint start, final Geopoint destination) {
+        return new Geopoint[] { start, destination };
+    }
+
     private static Geopoint[] calculateRouting(final Geopoint start, final Geopoint dest) {
         final Bundle params = new Bundle();
         params.putString("trackFormat", "gpx");
@@ -105,11 +110,11 @@ public final class Routing {
 
         final String gpx = brouter.getTrackFromParams(params);
 
-        return parseGpxTrack(gpx);
+        return parseGpxTrack(gpx, dest);
     }
 
     @Nullable
-    private static Geopoint[] parseGpxTrack(final String gpx) {
+    private static Geopoint[] parseGpxTrack(final String gpx, final Geopoint destination) {
         try {
             final LinkedList<Geopoint> result = new LinkedList<>();
             Xml.parse(gpx, new DefaultHandler() {
@@ -126,6 +131,9 @@ public final class Routing {
                     }
                 }
             });
+
+            // artificial straight line from track to target
+            result.add(destination);
 
             return result.toArray(new Geopoint[result.size()]);
 
