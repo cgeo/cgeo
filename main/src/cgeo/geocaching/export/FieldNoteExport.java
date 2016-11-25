@@ -14,9 +14,6 @@ import cgeo.geocaching.utils.AsyncTaskWithProgress;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -25,6 +22,8 @@ import android.content.DialogInterface;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.os.Environment;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.CheckBox;
@@ -132,48 +131,52 @@ public class FieldNoteExport extends AbstractExport {
 
         @Override
         protected Boolean doInBackgroundInternal(final Geocache[] caches) {
-            // export field notes separately for each connector, so the file can be uploaded to the respective site afterwards
-            boolean success = true;
-            for (final IConnector connector : ConnectorFactory.getConnectors()) {
-                if (connector instanceof FieldNotesCapability) {
-                    success &= exportFieldNotes((FieldNotesCapability) connector, caches);
-                }
+            // export all field notes, without any filtering by connector
+            final FieldNotes fieldNotes = createFieldNotes(caches);
+            if (fieldNotes == null) {
+                return false;
             }
-            return success;
+            // write to file
+            exportFile = fieldNotes.writeToDirectory(exportLocation, fileName);
+            if (exportFile == null) {
+                return false;
+            }
+            fieldNotesCount = fieldNotes.size();
+            // upload same file to multiple connectors, if they support the upload
+            return uploadFieldNotes();
         }
 
-        private boolean exportFieldNotes(final FieldNotesCapability connector, final Geocache[] caches) {
+        private Boolean uploadFieldNotes() {
+            boolean uploadResult = true;
+            if (upload) {
+                publishProgress(STATUS_UPLOAD);
+                for (final IConnector connector : ConnectorFactory.getConnectors()) {
+                    if (connector instanceof FieldNotesCapability) {
+                        uploadResult &= ((FieldNotesCapability) connector).uploadFieldNotes(exportFile);
+                    }
+                }
+            }
+            return uploadResult;
+        }
+
+        @Nullable
+        private FieldNotes createFieldNotes(final Geocache[] caches) {
             final FieldNotes fieldNotes = new FieldNotes();
             try {
-                int i = 0;
                 for (final Geocache cache : caches) {
-                    if (ConnectorFactory.getConnector(cache).equals(connector) && cache.isLogOffline()) {
+                    if (cache.isLogOffline()) {
                         final LogEntry log = DataStore.loadLogOffline(cache.getGeocode());
                         if (log != null && (!onlyNew || log.date > Settings.getFieldnoteExportDate())) {
                             fieldNotes.add(cache, log);
                         }
                     }
-                    publishProgress(++i);
+                    publishProgress(fieldNotes.size());
                 }
             } catch (final Exception e) {
                 Log.e("FieldNoteExport.ExportTask generation", e);
-                return false;
+                return null;
             }
-            fieldNotesCount += fieldNotes.size();
-
-            exportFile = fieldNotes.writeToDirectory(exportLocation, fileName);
-            if (exportFile == null) {
-                return false;
-            }
-
-            if (upload) {
-                publishProgress(STATUS_UPLOAD);
-                if (!connector.uploadFieldNotes(exportFile)) {
-                    return false;
-                }
-            }
-
-            return true;
+            return fieldNotes;
         }
 
         @Override
