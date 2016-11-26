@@ -460,7 +460,10 @@
   <string name="settings_activate_oc_ro">Aktywuj</string>
   <string name="init_summary_oc_ro">Załaduj skrzynki z opencaching.ro</string>
   <string name="init_oc_ro_description">Autoryzuj c:geo z opencaching.ro aby wyszukiwać skrzynki i mieć dostęp/filtrować znalezione skrzynki.</string>
+  <string name="init_oc_uk">opencache.uk</string>
   <string name="settings_activate_oc_uk">Aktywuj</string>
+  <string name="init_summary_oc_uk">Załaduj skrzynki z opencache.uk</string>
+  <string name="init_oc_uk_description">Autoryzuj c:geo z opencache.uk aby wyszukiwać skrzynki i mieć dostęp/filtrować znalezione skrzynki.</string>
   <string name="init_su">Geocaching.su</string>
   <string name="init_summary_su">Załaduj skrzynki z Geocaching.su</string>
   <string name="settings_activate_su">Aktywuj</string>
@@ -678,6 +681,7 @@
   <!-- auth opencaching -->
   <string name="auth_ocde">opencaching.de</string>
   <string name="auth_ocpl">opencaching.pl</string>
+  <string name="auth_ocuk">opencache.uk</string>
   <string name="auth_dialog_completed_oc">c:geo został zautoryzowany by komunikować się z %s.</string>
   <!-- auth geokrety -->
   <string name="auth_dialog_completed_geokrety">Aplikacja c:geo jest teraz upoważniona do interakcji z %s.</string>
@@ -869,6 +873,7 @@
   <string name="cache_image_open_file">Otwórz jako plik</string>
   <string name="cache_image_open_browser">Otwórz w przeglądarce</string>
   <string name="cache_image_add_waypoint">Dodaj punkt nawigacyjny</string>
+  <string name="cache_image_background">Obrazek tła listy skrzynek</string>
   <string name="cache_share_field">Współdziel</string>
   <string name="cache_time_full_hours">godzina</string>
   <string name="cache_listed_on">Zapisana w %s</string>
