@@ -2,16 +2,20 @@ package cgeo.geocaching.maps.mapsforge.v6.caches;
 
 import android.support.annotation.NonNull;
 
-import org.mapsforge.map.layer.Layer;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
+
+import org.mapsforge.map.layer.Layer;
 
 public class GeoitemLayers implements Collection<GeoitemLayer> {
 
-    private final HashMap<String, GeoitemLayer> geoitems = new HashMap<>();
+    /**
+     * ordered set of items to be displayed
+     */
+    private final HashMap<String, GeoitemLayer> geoitems = new LinkedHashMap<>();
 
     public synchronized Collection<String> getGeocodes() {
         return new ArrayList<>(geoitems.keySet());
