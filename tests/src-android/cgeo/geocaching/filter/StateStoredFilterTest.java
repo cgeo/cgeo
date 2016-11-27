@@ -4,7 +4,7 @@ import junit.framework.TestCase;
 
 import cgeo.geocaching.models.Geocache;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class StateStoredFilterTest extends TestCase {
 

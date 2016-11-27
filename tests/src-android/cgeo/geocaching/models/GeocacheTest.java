@@ -1,5 +1,7 @@
 package cgeo.geocaching.models;
 
+import static org.assertj.core.api.Java6Assertions.assertThat;
+
 import cgeo.CGeoTestCase;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
@@ -20,7 +22,6 @@ import java.util.HashSet;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class GeocacheTest extends CGeoTestCase {
 

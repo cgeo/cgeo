@@ -4,7 +4,7 @@ import junit.framework.TestCase;
 
 import cgeo.geocaching.connector.gc.GCConstants;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class CryptUtilsTest extends TestCase {
     public static void testROT13() {

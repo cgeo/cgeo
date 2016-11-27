@@ -1,6 +1,6 @@
 package cgeo.geocaching.sensors;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 import cgeo.geocaching.MainActivity;
 import cgeo.geocaching.utils.AngleUtils;

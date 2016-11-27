@@ -4,7 +4,7 @@ import static cgeo.geocaching.connector.gc.GCParser.deleteModifiedCoordinates;
 import static cgeo.geocaching.connector.gc.GCParser.editModifiedCoordinates;
 import static cgeo.geocaching.connector.gc.GCParser.requestHtmlPage;
 import static cgeo.geocaching.enumerations.LoadFlags.LOAD_CACHE_ONLY;
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.CgeoApplicationTest;

@@ -1,5 +1,7 @@
 package cgeo.geocaching.models;
 
+import static org.assertj.core.api.Java6Assertions.assertThat;
+
 import cgeo.geocaching.sorting.GeocodeComparator;
 
 import android.support.annotation.NonNull;
@@ -9,7 +11,6 @@ import java.util.Collections;
 import java.util.List;
 
 import junit.framework.TestCase;
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class GeocodeComparatorTest extends TestCase {
 

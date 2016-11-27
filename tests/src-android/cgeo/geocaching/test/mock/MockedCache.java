@@ -1,6 +1,6 @@
 package cgeo.geocaching.test.mock;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 import cgeo.geocaching.connector.gc.GCConstants;
 import cgeo.geocaching.location.Geopoint;
