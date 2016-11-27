@@ -7,7 +7,7 @@ import java.util.Calendar;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.enumerations.CacheType;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class CalendarUtilsTest extends TestCase {
 

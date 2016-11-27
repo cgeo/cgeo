@@ -1,6 +1,6 @@
 package cgeo.geocaching.location;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 import static org.assertj.core.api.Assertions.offset;
 
 import junit.framework.TestCase;

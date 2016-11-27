@@ -1,6 +1,6 @@
 package cgeo.geocaching.activity.waypoint;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 import cgeo.geocaching.EditWaypointActivity_;
 import cgeo.geocaching.activity.AbstractEspressoTest;

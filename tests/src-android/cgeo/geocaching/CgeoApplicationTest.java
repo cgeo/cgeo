@@ -1,6 +1,9 @@
 package cgeo.geocaching;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import android.test.suitebuilder.annotation.MediumTest;
+import android.test.suitebuilder.annotation.SmallTest;
+
+import java.util.GregorianCalendar;
 
 import cgeo.CGeoTestCase;
 import cgeo.geocaching.connector.ConnectorFactory;
@@ -31,10 +34,7 @@ import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.Log;
 import cgeo.test.Compare;
 
-import android.test.suitebuilder.annotation.MediumTest;
-import android.test.suitebuilder.annotation.SmallTest;
-
-import java.util.GregorianCalendar;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 /**
  * The c:geo application test. It can be used for tests that require an

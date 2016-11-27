@@ -106,10 +106,6 @@ allprojects {
 							selection.reject('Release candidate')
 						}
 
-						// https://github.com/joel-costigliola/assertj-core/issues/345
-						if (selection.candidate.group == 'org.assertj' && selection.candidate.module == 'assertj-core' && selection.candidate.version.substring(0,1).toInteger() > 1) {
-							selection.reject("assertj 2.x or higher require Java 7 SE classes not available in Android")
-						}
 						// findbugs team has some release trouble
 						if (selection.candidate.group == 'com.google.code.findbugs' && selection.candidate.module == 'annotations' && selection.candidate.version == '3.0.1') {
 							selection.reject("3.0.1 is not an upgrade of 3.0.1u2")

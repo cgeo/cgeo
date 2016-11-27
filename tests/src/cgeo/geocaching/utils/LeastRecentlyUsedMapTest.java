@@ -6,7 +6,7 @@ import java.util.Map;
 
 import cgeo.geocaching.models.Geocache;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class LeastRecentlyUsedMapTest extends TestCase {
 

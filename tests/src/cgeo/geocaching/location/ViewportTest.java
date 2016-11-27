@@ -14,7 +14,7 @@ import cgeo.geocaching.models.ICoordinates;
 
 import static cgeo.geocaching.location.Viewport.containing;
 import static java.util.Collections.singleton;
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class ViewportTest extends TestCase {
 

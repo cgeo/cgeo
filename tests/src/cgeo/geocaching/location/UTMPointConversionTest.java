@@ -9,7 +9,7 @@ import java.util.Collection;
 
 import static cgeo.geocaching.location.UTMPoint.latLong2UTM;
 import static java.lang.String.valueOf;
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 import static org.assertj.core.api.Assertions.offset;
 
 /**
