@@ -1,13 +1,13 @@
 package cgeo.geocaching.models;
 
+import static org.assertj.core.api.Java6Assertions.assertThat;
+
 import cgeo.CGeoTestCase;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.location.Geopoint;
 
 import java.util.Collection;
 import java.util.Iterator;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class WaypointTest extends CGeoTestCase {
 

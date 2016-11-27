@@ -1,14 +1,14 @@
 package cgeo.geocaching.connector.trackable;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import org.xml.sax.InputSource;
+
+import java.util.List;
 
 import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 import cgeo.geocaching.test.R;
 
-import org.xml.sax.InputSource;
-
-import java.util.List;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 /**
  * test for {@link GeokretyConnector}
@@ -56,13 +56,17 @@ public class GeokretyConnectorTest extends AbstractResourceInstrumentationTestCa
     }
 
     public void testSearchTrackable() throws Exception {
-        final List<Trackable> trackables = GeokretyParser.parse(new InputSource(getResourceStream(R.raw.geokret141_xml)));
-        assertThat(trackables).hasSize(2);
-        final Trackable trackable1 = trackables.get(0);
-        final Trackable trackable2 = trackables.get(1);
-
-        assertThat(GeokretyConnector.searchTrackable("GKB580")).isEqualToComparingFieldByField(trackable1);
-        assertThat(GeokretyConnector.searchTrackable("GKB581")).isEqualToComparingFieldByField(trackable2);
+        final Trackable geokret = GeokretyConnector.searchTrackable("GKB580");
+        assertThat(geokret).isNotNull();
+        assert geokret != null;
+        assertThat(geokret.getBrand()).isEqualTo(TrackableBrand.GEOKRETY);
+        assertThat(geokret.getName()).isEqualTo("c:geo One");
+        assertThat(geokret.getDetails()).isEqualTo("GeoKret for the c:geo project :)<br />DO NOT MOVE");
+        assertThat(geokret.getOwner()).isEqualTo("kumy");
+        assertThat(geokret.isMissing()).isTrue();
+        assertThat(geokret.isLoggable()).isTrue();
+        assertThat(geokret.getSpottedName()).isEqualTo("OX5BRQK");
+        assertThat(geokret.getSpottedType()).isEqualTo(Trackable.SPOTTED_CACHE);
     }
 
     public void testSearchTrackables() throws Exception {
@@ -70,12 +74,10 @@ public class GeokretyConnectorTest extends AbstractResourceInstrumentationTestCa
         // * cache OX5BRQK contains these 2 objects only...
         // * objects never been moved
         // * GK website always return list in the same order
-        final List<Trackable> trackables1 = GeokretyParser.parse(new InputSource(getResourceStream(R.raw.geokret141_xml)));
-        final List<Trackable> trackables2 = new GeokretyConnector().searchTrackables("OX5BRQK");
-        assertThat(trackables1).hasSize(2);
-        assertThat(trackables2).hasSize(2);
-        assertThat(trackables1.get(0)).isEqualToComparingFieldByField(trackables2.get(0));
-        assertThat(trackables1.get(1)).isEqualToComparingFieldByField(trackables2.get(1));
+        final List<Trackable> trackables = new GeokretyConnector().searchTrackables("OX5BRQK");
+        assertThat(trackables).hasSize(2);
+        assertThat(trackables.get(0).getName()).isEqualTo("c:geo Two");
+        assertThat(trackables.get(1).getName()).isEqualTo("c:geo One");
     }
 
     public void testGetIconBrand() throws Exception {

@@ -1,5 +1,7 @@
 package cgeo.geocaching.files;
 
+import static org.assertj.core.api.Java6Assertions.assertThat;
+
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.gc.GCConstants;
@@ -35,7 +37,6 @@ import java.util.Locale;
 import java.util.Set;
 
 import org.apache.commons.compress.utils.IOUtils;
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
     private static final SynchronizedDateFormat LOG_DATE_FORMAT = new SynchronizedDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US); // 2010-04-20T07:00:00Z

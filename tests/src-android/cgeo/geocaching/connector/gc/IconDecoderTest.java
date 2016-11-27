@@ -1,12 +1,5 @@
 package cgeo.geocaching.connector.gc;
 
-import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
-
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.support.annotation.RawRes;
-
 import static cgeo.geocaching.enumerations.CacheType.CITO;
 import static cgeo.geocaching.enumerations.CacheType.EARTH;
 import static cgeo.geocaching.enumerations.CacheType.EVENT;
@@ -23,7 +16,14 @@ import static cgeo.geocaching.test.R.raw.map5_z15;
 import static cgeo.geocaching.test.R.raw.map6_z11;
 import static cgeo.geocaching.test.R.raw.map7_z14;
 import static cgeo.geocaching.test.R.raw.map_all14;
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Java6Assertions.assertThat;
+
+import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
+
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.support.annotation.RawRes;
 
 public class IconDecoderTest extends AbstractResourceInstrumentationTestCase {
 

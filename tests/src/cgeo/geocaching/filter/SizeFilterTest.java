@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.enumerations.CacheSize;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class SizeFilterTest extends TestCase {
 

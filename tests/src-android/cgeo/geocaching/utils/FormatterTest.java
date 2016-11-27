@@ -1,5 +1,7 @@
 package cgeo.geocaching.utils;
 
+import static org.assertj.core.api.Java6Assertions.assertThat;
+
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.WaypointType;
@@ -9,7 +11,6 @@ import java.text.SimpleDateFormat;
 import java.util.Locale;
 
 import junit.framework.TestCase;
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class FormatterTest extends TestCase {
 

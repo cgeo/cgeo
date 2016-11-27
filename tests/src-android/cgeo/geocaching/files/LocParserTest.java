@@ -20,7 +20,7 @@ import static cgeo.geocaching.enumerations.CacheSize.UNKNOWN;
 import static cgeo.geocaching.test.R.raw.gc1bkp3_loc;
 import static cgeo.geocaching.test.R.raw.oc5952_loc;
 import static cgeo.geocaching.test.R.raw.waymarking_loc;
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class LocParserTest extends AbstractResourceInstrumentationTestCase {
     private List<Geocache> readLoc(@RawRes final int resourceId) throws IOException, ParserException {

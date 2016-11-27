@@ -1,6 +1,6 @@
 package cgeo.geocaching.connector.ge;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.ConnectorFactoryTest;
