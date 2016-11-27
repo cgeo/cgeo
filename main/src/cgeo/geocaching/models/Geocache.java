@@ -1547,7 +1547,10 @@ public class Geocache implements IWaypoint {
     }
 
     public void store() {
-        store(Collections.singleton(StoredList.STANDARD_LIST_ID), null);
+        if (lists.isEmpty()) {
+            lists.add(StoredList.STANDARD_LIST_ID);
+        }
+        storeCache(this, null, lists, false, null);
     }
 
     public void store(final Set<Integer> listIds, final DisposableHandler handler) {
