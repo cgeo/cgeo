@@ -12,6 +12,7 @@
     · New: Korean translation\n
     · New: Cache history now also fetches all caches with saved offline log wich are not saved\n
     · New: Use cache type icon in header bar of logging screen\n
+    · New: Export field notes also for opencaching websites\n
     · Fix: Better clipboard format when copying waypoint coordinates\n
     · Fix: Wrong icon when navigating to a waypoint\n
     · Fix: Detect wherigo cartridge links in short description\n
