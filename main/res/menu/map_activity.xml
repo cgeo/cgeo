@@ -105,6 +105,10 @@
             <group
                 android:id="@+id/menu_group_routing"
                 android:checkableBehavior="single" >
+                <item
+                    android:id="@+id/menu_routing_straight"
+                    android:title="@string/map_routing_straight">
+                </item>
 	            <item
 	                android:id="@+id/menu_routing_walk"
 	                android:title="@string/map_routing_walk">

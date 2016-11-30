@@ -62,7 +62,7 @@ public final class Routing {
 
     @NonNull
     public static Geopoint[] getTrack(final Geopoint start, final Geopoint destination) {
-        if (brouter == null) {
+        if (brouter == null || Settings.getRoutingMode() == RoutingMode.STRAIGHT) {
             return defaultTrack(start, destination);
         }
 
