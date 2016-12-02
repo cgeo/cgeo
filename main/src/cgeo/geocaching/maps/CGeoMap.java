@@ -693,6 +693,9 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
             menu.findItem(R.id.submenu_routing).setVisible(Routing.isAvailable());
             switch (Settings.getRoutingMode()) {
+                case STRAIGHT:
+                    menu.findItem(R.id.menu_routing_straight).setChecked(true);
+                    break;
                 case WALK:
                     menu.findItem(R.id.menu_routing_walk).setChecked(true);
                     break;
@@ -822,6 +825,12 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
             case R.id.menu_strategy_detailed: {
                 item.setChecked(true);
                 Settings.setLiveMapStrategy(LivemapStrategy.DETAILED);
+                return true;
+            }
+            case R.id.menu_routing_straight: {
+                item.setChecked(true);
+                Settings.setRoutingMode(RoutingMode.STRAIGHT);
+                mapView.repaintRequired(overlayPositionAndScale);
                 return true;
             }
             case R.id.menu_routing_walk: {

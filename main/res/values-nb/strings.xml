@@ -688,6 +688,7 @@
   <string name="last_day_available">siste dag tilgjengelig</string>
   <string name="cache_offline">Offline</string>
   <string name="cache_offline_refresh">Oppdater</string>
+  <string name="cache_offline_drop">Fjern</string>
   <string name="cache_offline_store">Lagre</string>
   <string name="cache_offline_manage">Administrer</string>
   <string name="cache_offline_store_in_list">Lagre i liste</string>
@@ -972,6 +973,7 @@
   <string name="map_strategy_detailed">Detaljert</string>
   <string name="live_map_notification">Koordinatene på live-kartet er ikke alltid nøyaktige. En cache med potensielt unøyaktige koordinater blir markert med en oransje sirkel.\nNår du viser detaljene på en cache eller lagrer den vil nøyaktige koordinater bli lastet ned.\n\nMer infomasjon finner du ved å velge \"Om c:geo\" på åpningsbildet i appen.</string>
   <string name="map_routing">Rute</string>
+  <string name="map_routing_straight">Rett linje</string>
   <string name="map_routing_walk">Gå</string>
   <string name="map_routing_bike">Sykkel</string>
   <string name="map_routing_car">Bil</string>

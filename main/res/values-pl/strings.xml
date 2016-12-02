@@ -992,6 +992,7 @@
   <string name="live_map_notification">Na nowej mapie live, współrzędnie nie zawsze muszą być dokładne. Prawdopodobne niedokładne współrzędne są zaznaczane za pomocą pomarańczowych okręgów.\nOtworzenie współrzędnych skrzynki lub zapisanie skrzynki do użytku offline zawsze używa precyzyjnych współrzędnych.\n\nWięcej informacji na temat wszystkich zmian można odnaleźć na stronie \"O c:geo\" wewnątrz programu.</string>
   <string name="map_select_multiple_items">Wybierz element</string>
   <string name="map_routing">Nawigacja</string>
+  <string name="map_routing_straight">Linia prosta</string>
   <string name="map_routing_walk">Pieszo</string>
   <string name="map_routing_bike">Rower</string>
   <string name="map_routing_car">Samochód</string>

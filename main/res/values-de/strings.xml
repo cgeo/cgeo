@@ -990,6 +990,7 @@
   <string name="live_map_notification">Auf der neuen Live-Karte sind die Koordinaten nicht immer genau. Eventuell ungenaue Koordinaten sind mit einem orangen Kreis markiert.\nDas Öffnen der Cache-Details oder das Speichern des Cache liefert immer genaue Koordinaten.\n\nMehr Informationen über alle Änderungen befinden sich auf der „Über c:geo“-Seite in der App.</string>
   <string name="map_select_multiple_items">Element auswählen</string>
   <string name="map_routing">Routing</string>
+  <string name="map_routing_straight">Luftlinie</string>
   <string name="map_routing_walk">Gehen</string>
   <string name="map_routing_bike">Fahrrad</string>
   <string name="map_routing_car">Auto</string>
