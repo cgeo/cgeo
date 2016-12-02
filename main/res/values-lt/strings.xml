@@ -865,6 +865,7 @@
   <string name="cache_image_open_file">Atidaryti kaip failą</string>
   <string name="cache_image_open_browser">Atidaryti naršyklėje</string>
   <string name="cache_image_add_waypoint">Pridėti papildomą tašką</string>
+  <string name="cache_image_background">Lobių sąrašo fono paveikslėlis</string>
   <string name="cache_share_field">Bendrinti</string>
   <string name="cache_time_full_hours">valanda (-os)</string>
   <string name="cache_listed_on">Publikuota %s</string>
@@ -983,6 +984,7 @@
   <string name="live_map_notification">Koordinatės tiesioginiame žemėlapyje gali būti netikslios. Galimos netikslios koordinatės žymimos oranžinės spalvos apskritimu.\nAtidarius slėptuvės informaciją arba išsaugojus slėptuvę naudojimui be interneto bus visada gautos tikslios koordinatės.\n\nDaugiau informacijos rasite programos skiltyje \"Apie c:geo\".</string>
   <string name="map_select_multiple_items">Pasirinkite elementą</string>
   <string name="map_routing">Maršrutizavimas</string>
+  <string name="map_routing_straight">Tiesi linija</string>
   <string name="map_routing_walk">Pėsčiomis</string>
   <string name="map_routing_bike">Dviračiu</string>
   <string name="map_routing_car">Automobiliu</string>

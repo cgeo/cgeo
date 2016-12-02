@@ -999,6 +999,7 @@
   <string name="live_map_notification">Na nové Aktivní mapě nemusí být souřadnice vždy přesné. Případné nepřesné souřadnice jsou na mapě označeny oranžovým kruhem.\nPři otevření detailů keše nebo jejím uložení pro offline použití jsou již souřadnice přesné.\n\nVíce informací o všech změnách lze najít v aplikaci na stránce „O aplikaci“.</string>
   <string name="map_select_multiple_items">Vybrat položku</string>
   <string name="map_routing">Směrování</string>
+  <string name="map_routing_straight">Přímá čára</string>
   <string name="map_routing_walk">Chůze</string>
   <string name="map_routing_bike">Jízdní kolo</string>
   <string name="map_routing_car">Auto</string>
