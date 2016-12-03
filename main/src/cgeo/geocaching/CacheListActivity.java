@@ -1488,7 +1488,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             extras.putAll(OfflineGeocacheListLoader.getBundleForList(listId));
             currentLoader = (OfflineGeocacheListLoader) getSupportLoaderManager().restartLoader(CacheListType.OFFLINE.getLoaderId(), extras, this);
 
-            Settings.saveLastList(listId);
+            Settings.setLastDisplayedList(listId);
         }
 
         initAdapter();
@@ -1747,7 +1747,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 if (extras.containsKey(Intents.EXTRA_LIST_ID)) {
                     listId = extras.getInt(Intents.EXTRA_LIST_ID);
                 } else {
-                    listId = Settings.getLastList();
+                    listId = Settings.getLastDisplayedList();
                 }
                 if (listId == PseudoList.ALL_LIST.id) {
                     title = res.getString(R.string.list_all_lists);
