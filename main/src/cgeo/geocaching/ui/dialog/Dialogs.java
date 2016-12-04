@@ -1,8 +1,6 @@
 package cgeo.geocaching.ui.dialog;
 
 import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.R;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.functions.Action1;
 
@@ -10,19 +8,15 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.graphics.drawable.Drawable;
-import android.os.Build.VERSION;
-import android.os.Build.VERSION_CODES;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
-import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -396,19 +390,11 @@ public final class Dialogs {
      *            listener to be run on okay
      */
     public static void input(final Activity context, final int title, final String defaultValue, final int buttonTitle, final Action1<String> okayListener) {
-        final Context themedContext;
-
-        if (Settings.isLightSkin() && VERSION.SDK_INT < VERSION_CODES.HONEYCOMB) {
-            themedContext = new ContextThemeWrapper(context, R.style.dark);
-        } else {
-            themedContext = context;
-        }
-
-        final EditText input = new EditText(themedContext);
+        final EditText input = new EditText(context);
         input.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS | InputType.TYPE_CLASS_TEXT);
         input.setText(defaultValue);
 
-        final AlertDialog.Builder builder = new AlertDialog.Builder(themedContext);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle(title);
         builder.setView(input);
         builder.setPositiveButton(buttonTitle, new OnClickListener() {

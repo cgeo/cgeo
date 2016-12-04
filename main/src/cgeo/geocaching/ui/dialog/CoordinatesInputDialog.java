@@ -14,8 +14,6 @@ import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.EditUtils;
 
 import android.app.Dialog;
-import android.os.Build.VERSION;
-import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
@@ -96,10 +94,6 @@ public class CoordinatesInputDialog extends DialogFragment {
 
         if (savedInstanceState != null && savedInstanceState.getParcelable(GEOPOINT_ARG) != null) {
             gp = savedInstanceState.getParcelable(GEOPOINT_ARG);
-        }
-
-        if (VERSION.SDK_INT < VERSION_CODES.HONEYCOMB && Settings.isLightSkin()) {
-            setStyle(STYLE_NORMAL, R.style.DialogFixGingerbread);
         }
     }
 

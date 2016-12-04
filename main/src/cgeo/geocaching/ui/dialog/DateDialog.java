@@ -1,10 +1,8 @@
 package cgeo.geocaching.ui.dialog;
 
-import android.annotation.TargetApi;
 import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.app.Dialog;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
@@ -40,16 +38,8 @@ public class DateDialog extends DialogFragment implements OnDateSetListener {
 
         // Create a new instance of DatePickerDialog and return it
         final DatePickerDialog dialog = new DatePickerDialog(getActivity(), this, year, month, day);
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            forceTitleUpdate(year, month, day, dialog);
-        }
-        return dialog;
-    }
-
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    private static void forceTitleUpdate(final int year, final int month, final int day, final DatePickerDialog dialog) {
         dialog.onDateChanged(dialog.getDatePicker(), year, month, day);
+        return dialog;
     }
 
     @Override

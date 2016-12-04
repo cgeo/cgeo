@@ -45,7 +45,6 @@ import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapUtils;
 import cgeo.geocaching.utils.functions.Action1;
 
-import android.annotation.TargetApi;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -53,14 +52,12 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.location.Location;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
@@ -161,8 +158,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
     private boolean centered = false; // if map is already centered
     private boolean alreadyCentered = false; // -""- for setting my location
     private static final Set<String> dirtyCaches = new HashSet<>();
-    // flag for honeycomb special popup menu handling
-    private boolean honeycombMenu = false;
 
     /**
      * if live map is enabled, this is the minimum zoom level, independent of the stored setting
@@ -214,16 +209,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
     private final Handler displayHandler = new DisplayHandler(this);
 
     private void setTitle() {
-        final String title = calculateTitle();
-        /* Compatibility for the old Action Bar, only used by the maps activity at the moment */
-        final TextView titleview = ButterKnife.findById(activity, R.id.actionbar_title);
-        if (titleview != null) {
-            titleview.setText(title);
-        }
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
-            setTitleIceCreamSandwich(title);
-        }
+        getActionBar().setTitle(calculateTitle());
     }
 
     private String calculateTitle() {
@@ -256,14 +242,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
             return;
         }
 
-        /* Compatibility for the old Action Bar, only used by the maps activity at the moment */
-        final TextView titleView = ButterKnife.findById(activity, R.id.actionbar_title);
-        if (titleView != null) {
-            titleView.setText(titleView.getText().toString() + ' ' + subtitle);
-        }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
-            setSubtitleIceCreamSandwich(subtitle);
-        }
+        getActionBar().setSubtitle(subtitle);
     }
 
     private String calculateSubtitle() {
@@ -293,22 +272,11 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         return subtitle.toString();
     }
 
-    @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     @NonNull
     private ActionBar getActionBar() {
         final ActionBar actionBar = activity.getActionBar();
         assert actionBar != null;
         return actionBar;
-    }
-
-    @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
-    private void setTitleIceCreamSandwich(final String title) {
-        getActionBar().setTitle(title);
-    }
-
-    @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
-    private void setSubtitleIceCreamSandwich(final String subtitle) {
-        getActionBar().setSubtitle(subtitle);
     }
 
     /** Updates the progress. */
@@ -343,9 +311,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
                 final int visibility = show ? View.VISIBLE : View.GONE;
                 progress.setVisibility(visibility);
             }
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-                map.activity.setProgressBarIndeterminateVisibility(show);
-            }
+            map.activity.setProgressBarIndeterminateVisibility(show);
         }
 
     }
@@ -442,7 +408,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
         // set layout
         ActivityMixin.setTheme(activity);
-        setDisplayHomeAsUpEnabled();
+        getActionBar().setDisplayHomeAsUpEnabled(true);
         activity.setContentView(mapProvider.getMapLayoutId());
         setTitle();
 
@@ -490,27 +456,8 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         }
         prepareFilterBar();
 
-        // Check for Honeycomb fake overflow button and attach popup
-        final View overflowActionBar = ButterKnife.findById(activity, R.id.overflowActionBar);
-        if (overflowActionBar != null) {
-            honeycombMenu = true;
-            overflowActionBar.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(final View v) {
-                    showPopupHoneycomb(v);
-                }
-            });
-        }
-
         LiveMapHint.getInstance().showHint(activity);
         AndroidBeam.disable(activity);
-    }
-
-    @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
-    private void setDisplayHomeAsUpEnabled() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
-            getActionBar().setDisplayHomeAsUpEnabled(true);
-        }
     }
 
     private void initMyLocationSwitchButton(final CheckBox locSwitch) {
@@ -592,56 +539,21 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         super.onStop();
     }
 
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    private void showPopupHoneycomb(final View view) {
-        // Inflate the core menu ourselves
-        final android.widget.PopupMenu popupMenu = new android.widget.PopupMenu(getActivity(), view);
-        final MenuInflater inflater = new MenuInflater(getActivity());
-        inflater.inflate(R.menu.map_activity, popupMenu.getMenu());
-
-        // continue processing menu items as usual
-        onCreateOptionsMenu(popupMenu.getMenu());
-
-        onPrepareOptionsMenu(popupMenu.getMenu());
-
-        popupMenu.setOnMenuItemClickListener(
-                new android.widget.PopupMenu.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(final MenuItem item) {
-                        return onOptionsItemSelected(item);
-                    }
-                }
-                );
-        // display menu
-        popupMenu.show();
-    }
-
-    @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
-        // menu inflation happens in Google/Mapsforge specific classes
-        // skip it for honeycomb - handled specially in @see showPopupHoneycomb
-        if (!honeycombMenu) {
-            super.onCreateOptionsMenu(menu);
-        }
+        super.onCreateOptionsMenu(menu);
 
         MapProviderFactory.addMapviewMenuItems(menu);
 
         final SubMenu subMenuStrategy = menu.findItem(R.id.submenu_strategy).getSubMenu();
         subMenuStrategy.setHeaderTitle(res.getString(R.string.map_strategy_title));
 
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
             /* if we have an Actionbar find the my position toggle */
-            final MenuItem item = menu.findItem(R.id.menu_toggle_mypos);
-            myLocSwitch = new CheckBox(activity);
-            myLocSwitch.setButtonDrawable(R.drawable.ic_menu_myposition);
-            item.setActionView(myLocSwitch);
-            initMyLocationSwitchButton(myLocSwitch);
-        } else {
-            // Already on the fake Actionbar
-            menu.removeItem(R.id.menu_toggle_mypos);
-        }
+        final MenuItem item = menu.findItem(R.id.menu_toggle_mypos);
+        myLocSwitch = new CheckBox(activity);
+        myLocSwitch.setButtonDrawable(R.drawable.ic_menu_myposition);
+        item.setActionView(myLocSwitch);
+        initMyLocationSwitchButton(myLocSwitch);
         return true;
     }
 

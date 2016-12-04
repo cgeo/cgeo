@@ -14,13 +14,9 @@ import cgeo.geocaching.utils.ShareUtils;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.os.Build.VERSION;
-import android.os.Build.VERSION_CODES;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
@@ -80,14 +76,7 @@ public class GpxExport extends AbstractExport {
         final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setTitle(activity.getString(R.string.export_confirm_title, activity.getString(R.string.export_gpx)));
 
-        final Context themedContext;
-        if (Settings.isLightSkin() && VERSION.SDK_INT < VERSION_CODES.HONEYCOMB) {
-            themedContext = new ContextThemeWrapper(activity, R.style.dark);
-        } else {
-            themedContext = activity;
-        }
-
-        final View layout = View.inflate(themedContext, R.layout.gpx_export_dialog, null);
+        final View layout = View.inflate(activity, R.layout.gpx_export_dialog, null);
         builder.setView(layout);
 
         final TextView text = ButterKnife.findById(layout, R.id.info);

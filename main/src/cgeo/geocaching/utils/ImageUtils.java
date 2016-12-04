@@ -2,7 +2,6 @@ package cgeo.geocaching.utils;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
-import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.models.Image;
 
 import android.app.Application;
@@ -78,7 +77,7 @@ public final class ImageUtils {
      */
     @NonNull
     public static BitmapDrawable scaleBitmapToFitDisplay(@NonNull final Bitmap image) {
-        final Point displaySize = Compatibility.getDisplaySize();
+        final Point displaySize = DisplayUtils.getDisplaySize();
         final int maxWidth = displaySize.x - 25;
         final int maxHeight = displaySize.y - 25;
         return scaleBitmapTo(image, maxWidth, maxHeight);
@@ -93,7 +92,7 @@ public final class ImageUtils {
      */
     @Nullable
     public static Bitmap readAndScaleImageToFitDisplay(@NonNull final String filename) {
-        final Point displaySize = Compatibility.getDisplaySize();
+        final Point displaySize = DisplayUtils.getDisplaySize();
         // Restrict image size to 800 x 800 to prevent OOM on tablets
         final int maxWidth = Math.min(displaySize.x - 25, MAX_DISPLAY_IMAGE_XY);
         final int maxHeight = Math.min(displaySize.y - 25, MAX_DISPLAY_IMAGE_XY);

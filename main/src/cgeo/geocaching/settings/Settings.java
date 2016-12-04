@@ -35,8 +35,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Build;
-import android.os.Build.VERSION;
-import android.os.Build.VERSION_CODES;
 import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
@@ -462,9 +460,7 @@ public class Settings {
         if (!GooglePlayServices.isAvailable()) {
             return false;
         }
-        final boolean defaultForPhone = VERSION.SDK_INT >= VERSION_CODES.ICE_CREAM_SANDWICH;
-        // By default, enable play services starting from ICS.
-        return outdatedPhoneModelOrSdk() ? defaultForPhone : getBoolean(R.string.pref_googleplayservices, defaultForPhone);
+        return outdatedPhoneModelOrSdk() || getBoolean(R.string.pref_googleplayservices, true);
     }
 
     public static boolean useLowPowerMode() {

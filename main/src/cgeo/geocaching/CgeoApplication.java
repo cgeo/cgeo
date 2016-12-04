@@ -1,6 +1,5 @@
 package cgeo.geocaching;
 
-import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
@@ -103,7 +102,7 @@ public class CgeoApplication extends Application {
     @Override
     public void onLowMemory() {
         super.onLowMemory();
-        onTrimMemory(Compatibility.TRIM_MEMORY_COMPLETE);
+        onTrimMemory(Application.TRIM_MEMORY_COMPLETE);
     }
 
     @SuppressLint("NewApi")
