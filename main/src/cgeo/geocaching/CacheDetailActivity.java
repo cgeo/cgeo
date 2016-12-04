@@ -65,10 +65,10 @@ import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.recyclerview.RecyclerViewProvider;
 import cgeo.geocaching.utils.AndroidRxUtils;
-import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.CheckerUtils;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.CryptUtils;
+import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.Log;
@@ -95,7 +95,6 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -1966,8 +1965,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
             @Override
             public boolean onLongClick(final View v) {
-                if (Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.HONEYCOMB
-                        && (view.getId() == R.id.description || view.getId() == R.id.hint)) {
+                if (view.getId() == R.id.description || view.getId() == R.id.hint) {
                     selectedTextView = (IndexOutOfBoundsAvoidingTextView) view;
                     mSelectionModeActive = true;
                     return false;

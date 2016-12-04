@@ -59,7 +59,7 @@ public class StatusUpdater {
             if (upToDate != null && upToDate.message != null) {
                 return upToDate;
             }
-            return VERSION.SDK_INT < VERSION_CODES.ECLAIR_MR1 ? CLOSEOUT_STATUS : NO_STATUS;
+            return VERSION.SDK_INT < VERSION_CODES.ICE_CREAM_SANDWICH ? CLOSEOUT_STATUS : NO_STATUS;
         }
     }
 

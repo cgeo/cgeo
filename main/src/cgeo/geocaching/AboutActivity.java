@@ -1,7 +1,6 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractViewPagerActivity;
-import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.ui.AbstractCachingPageViewCreator;
 import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
 import cgeo.geocaching.utils.ClipboardUtils;
@@ -127,7 +126,7 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
             final String systemInfo = SystemInformation.getSystemInformation(AboutActivity.this);
             system.setText(systemInfo);
             system.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
-            Compatibility.setTextIsSelectable(system, true);
+            system.setTextIsSelectable(true);
             copy.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(final View view) {
