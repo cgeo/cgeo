@@ -343,7 +343,7 @@ dependencies {
 
     // ViewPagerIndicator, view pager titles for cache details and similar view pager based activities
     // this is a fork of the original viewpager library which still works with android level 9. we can use 'com.github.JakeWharton:ViewPagerIndicator:2.4.1@aar' when switching to min sdk 11.
-    compile 'fr.baloomba:viewpagerindicator:2.4.2'
+    compile 'com.viewpagerindicator:viewpagerindicator:2.4.3'
 
     // Zxing barcode reader integration
     compile 'com.google.zxing:android-integration:3.3.0'

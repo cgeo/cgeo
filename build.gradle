@@ -127,6 +127,10 @@ allprojects {
 		maven {
 			url "https://jitpack.io"
 		}
+		// viewpager fork
+		maven {
+			url 'https://dl.bintray.com/alexeydanilov/maven'
+		}
 	}
 }
 
