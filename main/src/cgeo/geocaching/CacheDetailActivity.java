@@ -96,7 +96,6 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -1974,8 +1973,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
             @Override
             public boolean onLongClick(final View v) {
-                if (Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.HONEYCOMB
-                        && (view.getId() == R.id.description || view.getId() == R.id.hint)) {
+                if (view.getId() == R.id.description || view.getId() == R.id.hint) {
                     selectedTextView = (IndexOutOfBoundsAvoidingTextView) view;
                     mSelectionModeActive = true;
                     return false;

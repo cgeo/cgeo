@@ -2,10 +2,10 @@ package cgeo.geocaching.network;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
-import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.DisplayUtils;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.ImageUtils;
@@ -140,7 +140,7 @@ public class HtmlImage implements Html.ImageGetter {
         this.viewRef = new WeakReference<>(view);
         this.userInitiatedRefresh = userInitiatedRefresh;
 
-        final Point displaySize = Compatibility.getDisplaySize();
+        final Point displaySize = DisplayUtils.getDisplaySize();
         this.maxWidth = displaySize.x - 25;
         this.maxHeight = displaySize.y - 25;
         this.resources = CgeoApplication.getInstance().getResources();

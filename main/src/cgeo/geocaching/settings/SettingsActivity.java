@@ -36,7 +36,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.preference.ListPreference;
@@ -103,7 +102,7 @@ public class SettingsActivity extends PreferenceActivity {
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         // Set light skin in preferences only for devices > 2.x, it doesn't work under 2.x
-        setTheme(Settings.isLightSkin() && Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB ? R.style.settings_light : R.style.settings);
+        setTheme(Settings.isLightSkin() ? R.style.settings_light : R.style.settings);
         super.onCreate(savedInstanceState);
 
         initDeviceSpecificPreferences();

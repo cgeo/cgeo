@@ -5,12 +5,9 @@ import cgeo.geocaching.MainActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.settings.Settings;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build.VERSION;
-import android.os.Build.VERSION_CODES;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 import android.support.v4.app.ActivityCompat;
@@ -69,7 +66,7 @@ public final class ActivityMixin {
 
     public static int getDialogTheme() {
         // Light theme dialogs don't work on Android Api < 11
-        if (Settings.isLightSkin() && VERSION.SDK_INT >= VERSION_CODES.HONEYCOMB) {
+        if (Settings.isLightSkin()) {
             return R.style.popup_light;
         }
         return R.style.popup_dark;
@@ -141,7 +138,6 @@ public final class ActivityMixin {
         }
     }
 
-    @TargetApi(VERSION_CODES.HONEYCOMB)
     private static void enableHardwareAcceleration(final Window window) {
         window.addFlags(LayoutParams.FLAG_HARDWARE_ACCELERATED);
     }
@@ -208,9 +204,6 @@ public final class ActivityMixin {
     }
 
     public static void presentShowcase(final IAbstractActivity activity) {
-        if (VERSION.SDK_INT < 14) {
-            return;
-        }
         final ShowcaseViewBuilder builder = activity.getShowcase();
         if (builder != null) {
             builder.setStyle(R.style.ShowcaseView);
