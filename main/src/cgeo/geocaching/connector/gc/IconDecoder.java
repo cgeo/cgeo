@@ -1,7 +1,7 @@
 package cgeo.geocaching.connector.gc;
 
-import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
 
 import android.graphics.Bitmap;
@@ -36,15 +36,12 @@ final class IconDecoder {
         final int bitmapHeight = bitmap.getHeight();
 
         if ((topX < 0) || (topY < 0) || (topX + 4 > bitmapWidth) || (topY + 4 > bitmapHeight)) {
-            return false; //out of image position
+            return false; // out of image position
         }
 
-        int numberOfDetections = 7; //for level 12 and 13
-        if (zoomlevel < 12) {
-            numberOfDetections = 5;
-        }
+        int numberOfDetections = 7; // for level 13 and less
         if (zoomlevel > 13) {
-            numberOfDetections = 13;
+            numberOfDetections = 9;
         }
 
         final int[] pngType = new int[numberOfDetections];
@@ -53,7 +50,8 @@ final class IconDecoder {
                 final int color = bitmap.getPixel(x, y);
 
                 if ((color >>> 24) != 255) {
-                    continue; //transparent pixels (or semi_transparent) are only shadows of border
+                    continue; // transparent pixels (or semi_transparent) are
+                              // only shadows of border
                 }
 
                 final int r = (color & 0xFF0000) >> 16;
@@ -65,9 +63,7 @@ final class IconDecoder {
                 }
 
                 final int type;
-                if (zoomlevel < 12) {
-                    type = getCacheTypeFromPixel11(r, g, b);
-                } else if (zoomlevel > 13) {
+                if (zoomlevel > 13) {
                     type = getCacheTypeFromPixel14(r, g, b);
                 } else {
                     type = getCacheTypeFromPixel13(r, g, b);
@@ -86,7 +82,8 @@ final class IconDecoder {
             }
         }
 
-        if (count > 1) { // 2 pixels need to detect same type and we say good to go
+        if (count > 1) { // 2 pixels need to detect same type and we say good to
+                         // go
             switch (type) {
                 case CT_TRADITIONAL:
                     cache.setType(CacheType.TRADITIONAL, zoomlevel);
@@ -133,7 +130,8 @@ final class IconDecoder {
     }
 
     /**
-     * A method that returns true if pixel color appears on more than one cache type and shall be excluded from parsing
+     * A method that returns true if pixel color appears on more than one cache
+     * type and shall be excluded from parsing
      *
      * @param r
      *            red value
@@ -146,47 +144,27 @@ final class IconDecoder {
      * @return true if parsing should not be performed
      */
     private static boolean isPixelDuplicated(final int r, final int g, final int b, final int zoomlevel) {
-        if (zoomlevel < 12) {
-            if (((r == g) && (g == b)) || ((r == 233) && (g == 233) && (b == 234))) {
-                return true;
-            }
-            return false;
-        }
         if (zoomlevel > 13) {
             if ((r == g) && (g == b)) {
-                if ((r == 119) || (r == 231) || (r == 5) || (r == 230) || (r == 244) || (r == 93) || (r == 238) || (r == 73) || (r == 9) || (r == 225) || (r == 162) || (r == 153) || (r == 32) ||
-                        (r == 50) || (r == 20) || (r == 232) || (r == 224) || (r == 192) || (r == 248) || (r == 152) || (r == 128) || (r == 176) || (r == 184) || (r == 200)) {
-                    return false;
-                }
                 return true;
             }
-            if ((r == 44) && (b == 44) && (g == 17) ||
-                    (r == 228) && (b == 228) && (g == 255) ||
-                    (r == 236) && (b == 236) && (g == 255) ||
-                    (r == 252) && (b == 225) && (g == 83) ||
-                    (r == 252) && (b == 221) && (g == 81) ||
-                    (r == 252) && (b == 216) && (g == 79) ||
-                    (r == 252) && (b == 211) && (g == 77) ||
-                    (r == 251) && (b == 206) && (g == 75) ||
-                    (r == 251) && (b == 201) && (g == 73) ||
-                    (r == 251) && (b == 196) && (g == 71) ||
-                    (r == 251) && (b == 191) && (g == 69) ||
-                    (r == 243) && (b == 153) && (g == 36)) {
+            if ((r == 252) && (b == 252) && (g == 251) || (r == 206) && (b == 219) && (g == 230) || (r == 178) && (b == 198) && (g == 215) || (r == 162) && (b == 186) && (g == 209) || (r == 187) && (b == 205) && (g == 222) || (r == 216) && (b == 226) && (g == 235) || (r == 243) && (b == 247) && (g == 249) || (r == 136) && (b == 166) && (g == 195) || (r == 222) && (b == 231) && (g == 239) || (r == 240) && (b == 244) && (g == 248) || (r == 194) && (b == 209) && (g == 221) || (r == 153) && (b == 178) && (g == 199) || (r == 228) && (b == 238) && (g == 242) || (r == 109) && (b == 165) && (g == 141) || (r == 124) && (b == 194) && (g == 165) || (r == 206) && (b == 229) && (g == 220) || (r == 199) && (b == 224) && (g == 210) || (r == 244) && (b == 247) && (g == 243) || (r == 197) && (b == 212) && (g == 227) || (r == 171) && (b == 172) && (g == 172) || (r == 160) && (b == 161) && (g == 161) || (r == 232) && (b == 249) && (g == 250) || (r == 253) && (b == 241) && (g == 227) || (r == 254) && (b == 248) && (g == 240) || (r == 72) && (b == 112) && (g == 48) || (r == 251) && (b == 239) && (g == 217) || (r == 214) && (b == 239) && (g == 244) || (r == 202) && (b == 214) && (g == 194) || (r == 168) && (b == 186) && (g == 156) || (r == 254) && (b == 249) && (g == 247) || (r == 132) && (b == 166) && (g == 130) || (r == 238) && (b == 238) && (g == 233) || (r == 241) && (b == 252) && (g == 253) || (r == 101) && (b == 135) && (g == 80) || (r == 193) && (b == 208) && (g == 184)) {
                 return true;
             }
             return false;
         }
-        //zoom level 12, 13
-        if ((r == 95) && (g == 95) && (b == 95)) {
+        // zoom 13 or less
+        if ((r == 255) && (g == 255) && (b == 255)) {
             return true;
         }
         return false;
     }
 
     /**
-     * This method returns detected type from specific pixel from geocaching.com live map.
-     * It was constructed based on classification tree made by Orange (http://orange.biolab.si/)
-     * Input file was made from every non-transparent pixel of every possible "middle" cache icon from GC map
+     * This method returns detected type from specific pixel from geocaching.com
+     * live map. It was constructed based on classification tree made by Orange
+     * (http://orange.biolab.si/) Input file was made from every non-transparent
+     * pixel of every possible "middle" cache icon from GC map
      *
      * @param r
      *            Red component of pixel (from 0 - 255)
@@ -194,61 +172,109 @@ final class IconDecoder {
      *            Green component of pixel (from 0 - 255)
      * @param b
      *            Blue component of pixel (from 0 - 255)
-     * @return Value from 0 to 6 representing detected type or state of the cache.
+     * @return Value from 0 to 6 representing detected type or state of the
+     *         cache.
      */
     private static int getCacheTypeFromPixel13(final int r, final int g, final int b) {
-        if (b < 130) {
-            if (r < 41) {
-                return CT_MYSTERY;
-            }
-            if (g < 74) {
-                return CT_EVENT;
-            }
-            if (r < 130) {
+        if (b < 24) {
+            return CT_OWN;
+        }
+        if (b < 49) {
+            if (r < 88) {
                 return CT_TRADITIONAL;
             }
-            if (b < 31) {
-                return CT_MULTI;
-            }
-            if (b < 101) {
-                if (g < 99) {
-                    return r < 178 ? CT_FOUND : CT_EVENT;
+            return g < 50 ? CT_EVENT : CT_FOUND;
+        }
+        if (r < 215) {
+            if (b < 214) {
+                if (r < 79) {
+                    return CT_MYSTERY;
                 }
-                if (b < 58) {
-                    if (g < 174) {
-                        return CT_FOUND;
+                if (b < 200) {
+                    if (r < 106) {
+                        return g < 133 ? CT_TRADITIONAL : CT_MYSTERY;
                     }
-                    if (r < 224) {
+                    if (b < 90) {
                         return CT_OWN;
                     }
-                    if (b < 49) {
-                        return g < 210 ? CT_FOUND : CT_OWN;
+                    if (g < 219) {
+                        if (r < 205) {
+                            if (b < 114) {
+                                return g < 172 ? CT_TRADITIONAL : CT_OWN;
+                            }
+                            return g < 158 ? CT_FOUND : CT_TRADITIONAL;
+                        }
+                        return CT_FOUND;
                     }
-                    if (g < 205) {
-                        return g < 202 ? CT_FOUND : CT_OWN;
-                    }
-                    return CT_FOUND;
+                    return CT_OWN;
                 }
-                if (r < 255) {
-                    return CT_FOUND;
-                }
-                return g < 236 ? CT_MULTI : CT_FOUND;
+                return CT_MYSTERY;
             }
-            return g < 182 ? CT_EVENT : CT_MULTI;
-        }
-        if (r < 136) {
+            if (r < 211) {
+                if (g < 200) {
+                    return CT_MYSTERY;
+                }
+                if (r < 188) {
+                    return CT_EARTH;
+                }
+                return r < 200 ? CT_MYSTERY : CT_EARTH;
+            }
             return CT_MYSTERY;
         }
-        if (b < 168) {
-            return g < 174 ? CT_EARTH : CT_TRADITIONAL;
+        if (b < 253) {
+            if (g < 227) {
+                if (r < 241) {
+                    return CT_EVENT;
+                }
+                if (b < 206) {
+                    if (r < 243) {
+                        return g < 166 ? CT_MULTI : CT_EVENT;
+                    }
+                    return CT_MULTI;
+                }
+                return CT_EVENT;
+            }
+            if (r < 252) {
+                if (b < 252) {
+                    if (b < 246) {
+                        if (b < 207) {
+                            return CT_OWN;
+                        }
+                        if (g < 248) {
+                            if (g < 233) {
+                                return CT_TRADITIONAL;
+                            }
+                            return r < 241 ? CT_FOUND : CT_TRADITIONAL;
+                        }
+                        return CT_OWN;
+                    }
+                    return g < 249 ? CT_MYSTERY : CT_FOUND;
+                }
+                return CT_EARTH;
+            }
+            if (g < 253) {
+                if (g < 237) {
+                    return CT_MULTI;
+                }
+                if (g < 245) {
+                    return CT_EVENT;
+                }
+                return b < 248 ? CT_MULTI : CT_EVENT;
+            }
+            return r < 255 ? CT_TRADITIONAL : CT_MULTI;
+        }
+        if (g < 255) {
+            return r < 247 ? CT_EARTH : CT_MYSTERY;
         }
         return CT_EARTH;
     }
 
     /**
-     * This method returns detected type from specific pixel from geocaching.com live map level 14 or higher.
-     * It was constructed based on classification tree made by Orange (http://orange.biolab.si/)
-     * Input file was made from every non-transparent pixel of every possible "full" cache icon from GC map
+     * This method returns detected type from specific pixel from geocaching.com
+     * live map level 14 or higher. It was constructed based on classification
+     * tree made by Orange (http://orange.biolab.si/) Input file was made from
+     * every non-transparent pixel of every possible "full" cache icon from GC
+     * map
      *
      * @param r
      *            Red component of pixel (from 0 - 255)
@@ -256,252 +282,80 @@ final class IconDecoder {
      *            Green component of pixel (from 0 - 255)
      * @param b
      *            Blue component of pixel (from 0 - 255)
-     * @return Value from 0 to 6 representing detected type or state of the cache.
+     * @return Value from 0 to 6 representing detected type or state of the
+     *         cache.
      */
     private static int getCacheTypeFromPixel14(final int r, final int g, final int b) {
-        if (b < 128) {
-            if (r < 214) {
-                if (b < 37) {
-                    if (g < 50) {
-                        if (b < 19) {
-                            if (g < 16) {
-                                if (b < 4) {
-                                    return CT_FOUND;
-                                }
-                                return r < 8 ? CT_VIRTUAL : CT_WEBCAM;
-                            }
-                            return CT_FOUND;
+        if (r < 195) {
+            if (b < 151) {
+                if (r < 103) {
+                    if (b < 80) {
+                        if (r < 54) {
+                            return g < 128 ? CT_EARTH : CT_CITO;
                         }
-                        return CT_WEBCAM;
+                        return b < 75 ? CT_TRADITIONAL : CT_EARTH;
                     }
-                    if (b < 24) {
-                        if (b < 18) {
-                            return CT_EARTH;
-                        }
-                        return r < 127 ? CT_TRADITIONAL : CT_EARTH;
+                    if (r < 86) {
+                        return b < 142 ? CT_CITO : CT_MYSTERY;
                     }
+                    return CT_EARTH;
+                }
+                if (g < 141) {
                     return CT_FOUND;
                 }
-                if (r < 142) {
-                    if (r < 63) {
-                        if (r < 26) {
-                            return CT_CITO;
-                        }
-                        return r < 51 ? CT_WEBCAM : CT_CITO;
-                    }
-                    return g < 107 ? CT_WEBCAM : CT_MULTI;
+                if (r < 163) {
+                    return b < 89 ? CT_OWN : CT_TRADITIONAL;
                 }
-                if (g < 138) {
-                    return r < 178 ? CT_MEGAEVENT : CT_EVENT;
-                }
-                return b < 71 ? CT_FOUND : CT_EARTH;
+                return g < 181 ? CT_FOUND : CT_OWN;
             }
-            if (b < 77) {
-                if (g < 166) {
-                    if (r < 238) {
-                        return g < 120 ? CT_MULTI : CT_OWN;
+            if (b < 208) {
+                if (g < 185) {
+                    if (b < 168) {
+                        return g < 124 ? CT_MYSTERY : CT_CITO;
                     }
-                    if (b < 57) {
-                        if (r < 254) {
-                            if (b < 39) {
-                                if (r < 239) {
-                                    return CT_OWN;
-                                }
-                                if (b < 36) {
-                                    if (g < 150) {
-                                        if (b < 24) {
-                                            return b < 22 ? CT_FOUND : CT_OWN;
-                                        }
-                                        if (g < 138) {
-                                            return b < 25 ? CT_FOUND : CT_OWN;
-                                        }
-                                        return CT_FOUND;
-                                    }
-                                    return CT_OWN;
-                                }
-                                if (b < 38) {
-                                    if (b < 37) {
-                                        if (g < 153) {
-                                            return r < 242 ? CT_OWN : CT_FOUND;
-                                        }
-                                        return CT_OWN;
-                                    }
-                                    return CT_FOUND;
-                                }
-                                return CT_OWN;
-                            }
-                            if (g < 148) {
-                                return CT_OWN;
-                            }
-                            if (r < 244) {
-                                return CT_FOUND;
-                            }
-                            if (b < 45) {
-                                if (b < 42) {
-                                    return CT_FOUND;
-                                }
-                                if (g < 162) {
-                                    return r < 245 ? CT_OWN : CT_FOUND;
-                                }
-                                return CT_OWN;
-                            }
-                            return CT_FOUND;
-                        }
-                        return g < 3 ? CT_FOUND : CT_VIRTUAL;
-                    }
-                    return CT_OWN;
+                    return CT_MYSTERY;
                 }
-                if (b < 51) {
-                    if (r < 251) {
-                        return CT_OWN;
-                    }
-                    return g < 208 ? CT_EARTH : CT_MULTI;
+                if (g < 207) {
+                    return r < 164 ? CT_EARTH : CT_TRADITIONAL;
                 }
-                if (b < 63) {
-                    if (r < 247) {
-                        return CT_FOUND;
-                    }
-                    if (r < 250) {
-                        if (g < 169) {
-                            return CT_FOUND;
-                        }
-                        if (g < 192) {
-                            if (b < 54) {
-                                return CT_OWN;
-                            }
-                            if (r < 248) {
-                                return g < 180 ? CT_FOUND : CT_OWN;
-                            }
-                            return CT_OWN;
-                        }
-                        return g < 193 ? CT_FOUND : CT_OWN;
-                    }
-                    return CT_FOUND;
-                }
-                return CT_FOUND;
-            }
-            if (g < 177) {
-                return CT_OWN;
-            }
-            if (r < 239) {
-                return CT_FOUND;
-            }
-            if (g < 207) {
-                return CT_OWN;
-            }
-            return r < 254 ? CT_FOUND : CT_EARTH;
-        }
-        if (r < 203) {
-            if (b < 218) {
-                if (g < 158) {
-                    if (g < 71) {
-                        return CT_MYSTERY;
-                    }
-                    return r < 153 ? CT_WHERIGO : CT_WEBCAM;
-                }
-                if (b < 167) {
-                    return r < 157 ? CT_TRADITIONAL : CT_WEBCAM;
-                }
-                return CT_WHERIGO;
-            }
-            if (g < 199) {
-                if (r < 142) {
-                    return CT_LETTERBOX;
-                }
-                return r < 175 ? CT_CITO : CT_LETTERBOX;
-            }
-            if (g < 207) {
-                return r < 167 ? CT_MEGAEVENT : CT_CITO;
-            }
-            return CT_EARTH;
-        }
-        if (b < 224) {
-            if (g < 235) {
-                if (b < 163) {
-                    if (r < 249) {
-                        return b < 133 ? CT_FOUND : CT_OWN;
-                    }
-                    return CT_FOUND;
-                }
-                if (r < 235) {
-                    if (r < 213) {
-                        if (r < 207) {
-                            return CT_FOUND;
-                        }
-                        if (g < 206) {
-                            return CT_OWN;
-                        }
-                        return g < 207 ? CT_FOUND : CT_OWN;
-                    }
-                    return g < 194 ? CT_OWN : CT_FOUND;
-                }
-                if (g < 230) {
-                    return CT_OWN;
-                }
-                return b < 205 ? CT_FOUND : CT_OWN;
-            }
-            if (r < 238) {
                 return CT_CITO;
             }
-            return b < 170 ? CT_EVENT : CT_FOUND;
-        }
-        if (r < 251) {
-            if (r < 210) {
-                return CT_MYSTERY;
+            if (r < 156) {
+                return CT_WEBCAM;
             }
-            if (b < 252) {
-                if (r < 243) {
-                    if (r < 225) {
-                        return CT_WHERIGO;
-                    }
-                    if (b < 232) {
-                        if (g < 228) {
-                            return CT_WEBCAM;
-                        }
-                        return r < 231 ? CT_VIRTUAL : CT_TRADITIONAL;
-                    }
-                    if (r < 236) {
-                        return CT_WHERIGO;
-                    }
-                    return r < 240 ? CT_WEBCAM : CT_WHERIGO;
-                }
-                if (g < 247) {
-                    return r < 245 ? CT_WEBCAM : CT_FOUND;
-                }
-                return CT_WHERIGO;
+            return g < 233 ? CT_EARTH : CT_WEBCAM;
+        }
+        if (r < 235) {
+            if (g < 161) {
+                return CT_EVENT;
             }
-            return CT_LETTERBOX;
-        }
-        if (r < 255) {
-            return CT_OWN;
-        }
-        return g < 254 ? CT_FOUND : CT_OWN;
-    }
-
-    /**
-     * This method returns detected type from specific pixel from geocaching.com live map level 11 or lower.
-     * It was constructed based on classification tree made by Orange (http://orange.biolab.si/)
-     * Input file was made from every non-transparent pixel of every possible "full" cache icon from GC map
-     *
-     * @param r
-     *            Red component of pixel (from 0 - 255)
-     * @param g
-     *            Green component of pixel (from 0 - 255)
-     * @param b
-     *            Blue component of pixel (from 0 - 255)
-     * @return Value from 0 to 4 representing detected type or state of the cache.
-     */
-    private static int getCacheTypeFromPixel11(final int r, final int g, final int b) {
-        if (g < 136) {
-            if (r < 90) {
-                return g < 111 ? CT_MYSTERY : CT_TRADITIONAL;
+            if (g < 216) {
+                return CT_FOUND;
             }
-            return b < 176 ? CT_EVENT : CT_MYSTERY;
+            if (b < 201) {
+                return CT_OWN;
+            }
+            if (b < 239) {
+                return r < 233 ? CT_TRADITIONAL : CT_FOUND;
+            }
+            return CT_WEBCAM;
         }
-        if (r < 197) {
-            return CT_TRADITIONAL;
+        if (b < 145) {
+            if (g < 199) {
+                return b < 31 ? CT_EARTH : CT_MULTI;
+            }
+            return b < 49 ? CT_FOUND : CT_EARTH;
         }
-        return b < 155 ? CT_MULTI : CT_EARTH;
+        if (b < 220) {
+            if (g < 210) {
+                return r < 248 ? CT_EVENT : CT_MULTI;
+            }
+            return r < 250 ? CT_EARTH : CT_MULTI;
+        }
+        if (r < 252) {
+            return g < 232 ? CT_EVENT : CT_OWN;
+        }
+        return CT_EVENT;
     }
 
 }
