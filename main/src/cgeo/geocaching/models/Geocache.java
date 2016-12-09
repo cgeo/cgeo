@@ -491,9 +491,10 @@ public class Geocache implements IWaypoint {
 
     /**
      * Drop offline log for a given geocode.
+     * @param resetVisitedDate
      */
-    public void clearOfflineLog() {
-        DataStore.clearLogOffline(geocode);
+    public void clearOfflineLog(final boolean resetVisitedDate) {
+        DataStore.clearLogOffline(geocode, resetVisitedDate);
         setLogOffline(false);
         notifyChange();
     }
@@ -1547,7 +1548,10 @@ public class Geocache implements IWaypoint {
     }
 
     public void store() {
-        store(Collections.singleton(StoredList.STANDARD_LIST_ID), null);
+        if (lists.isEmpty()) {
+            lists.add(StoredList.STANDARD_LIST_ID);
+        }
+        storeCache(this, null, lists, false, null);
     }
 
     public void store(final Set<Integer> listIds, final DisposableHandler handler) {
