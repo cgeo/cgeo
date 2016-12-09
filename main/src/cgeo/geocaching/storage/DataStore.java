@@ -2647,7 +2647,7 @@ public class DataStore {
         return log;
     }
 
-    public static void clearLogOffline(final String geocode) {
+    public static void clearLogOffline(final String geocode, final boolean resetVisitedDate) {
         if (StringUtils.isBlank(geocode)) {
             return;
         }
@@ -2655,8 +2655,12 @@ public class DataStore {
         init();
 
         final String[] geocodeWhereArgs = {geocode};
+        if (resetVisitedDate) {
+            database.execSQL(
+                String.format("UPDATE %s SET visiteddate = 0 WHERE geocode IN (SELECT geocode FROM %s WHERE geocode = ?)",
+                    dbTableCaches, dbTableLogsOffline), geocodeWhereArgs);
+        }
         database.delete(dbTableLogsOffline, "geocode = ?", geocodeWhereArgs);
-        database.execSQL(String.format("UPDATE %s SET visiteddate = 0 WHERE geocode = ?", dbTableCaches), geocodeWhereArgs);
     }
 
     public static void clearLogsOffline(final List<Geocache> caches) {
@@ -2671,8 +2675,10 @@ public class DataStore {
         }
 
         final String geocodes = whereGeocodeIn(Geocache.getGeocodes(caches)).toString();
+        database.execSQL(
+            String.format("UPDATE %s SET visiteddate = 0 WHERE geocode IN (SELECT geocode FROM %s WHERE %s)",
+                dbTableCaches, dbTableLogsOffline, geocodes));
         database.execSQL(String.format("DELETE FROM %s WHERE %s", dbTableLogsOffline, geocodes));
-        database.execSQL(String.format("UPDATE %s SET visiteddate = 0 WHERE %s", dbTableCaches, geocodes));
     }
 
     public static boolean hasLogOffline(final String geocode) {
@@ -3181,7 +3187,7 @@ public class DataStore {
 
     private enum PreparedStatement {
 
-        HISTORY_COUNT("SELECT COUNT(_id) FROM " + dbTableCaches + " WHERE visiteddate > 0"),
+        HISTORY_COUNT("SELECT COUNT(geocode) FROM (SELECT geocode FROM " + dbTableCaches + " WHERE visiteddate > 0 UNION SELECT geocode from " + dbTableLogsOffline + ")"),
         MOVE_TO_STANDARD_LIST("UPDATE " + dbTableCachesLists + " SET list_id = " + StoredList.STANDARD_LIST_ID + " WHERE list_id = ? AND geocode NOT IN (SELECT DISTINCT (geocode) FROM " + dbTableCachesLists + " WHERE list_id = " + StoredList.STANDARD_LIST_ID + ")"),
         REMOVE_FROM_LIST("DELETE FROM " + dbTableCachesLists + " WHERE list_id = ? AND geocode = ?"),
         REMOVE_FROM_ALL_LISTS("DELETE FROM " + dbTableCachesLists + " WHERE geocode = ?"),

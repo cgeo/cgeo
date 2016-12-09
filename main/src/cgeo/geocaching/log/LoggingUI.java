@@ -113,7 +113,7 @@ public final class LoggingUI extends AbstractUIFactory {
                             break;
 
                         case CLEAR_LOG:
-                            cache.clearOfflineLog();
+                            cache.clearOfflineLog(true);
                             break;
                     }
                 } else {
