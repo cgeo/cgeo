@@ -489,9 +489,11 @@ if (privatePropertiesFile.exists()) {
 }
 
 // check existence of private properties, show an error message
-task verifyPrivateProperties << {
-    if (!rootProject.file('private.properties').exists()) {
-        throw new InvalidUserDataException("For signing the release build you must provide a file private.properties in the root directory. Copy templates/private.properties and change the values.")
+task verifyPrivateProperties {
+    doLast {
+        if (!rootProject.file('private.properties').exists()) {
+            throw new InvalidUserDataException("For signing the release build you must provide a file private.properties in the root directory. Copy templates/private.properties and change the values.")
+        }
     }
 }
 
