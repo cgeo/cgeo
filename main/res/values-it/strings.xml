@@ -983,6 +983,7 @@
   <string name="live_map_notification">Nella nuova Mappa Live le coordinate potrebbero non essere sempre precise. Coordinate possibilmente imprecise sono marcate da un cerchio arancione.\nAprendo i dettagli del cache o salvando il cache per uso offline farà calcolare sempre coordinate precise.\n\nInformazioni addizionali su tutte le modifiche si possono trovare nel menu \"Info su c:geo\" sulla pagina principale di questa app.</string>
   <string name="map_select_multiple_items">Seleziona elemento</string>
   <string name="map_routing">Instradamento</string>
+  <string name="map_routing_straight">Linea diretta</string>
   <string name="map_routing_walk">A piedi</string>
   <string name="map_routing_bike">Bicicletta</string>
   <string name="map_routing_car">Automobile</string>
@@ -1421,7 +1422,7 @@
   <string name="showcase_cachelist_title">Cambio di liste</string>
   <string name="showcase_cachelist_text">Puoi cambiare la lista attiva cliccando sul titolo.</string>
   <string name="showcase_compass_hint_title">Visualizza l\'hint</string>
-  <string name="showcase_compass_hint_text">Questa voce di menu potrebbe darvi un\'idea dove trovare cache - mostrando un suggerimento, se è disponibile.</string>
+  <string name="showcase_compass_hint_text">Questa voce di menu potrebbe darvi un\'idea dove trovare il cache - mostrando un suggerimento, se disponibile.</string>
   <string name="confirm_log_title">Tipo di Log non usuale</string>
   <string name="confirm_log_message">Si desidera registrare \'%s\'. Sei sicuro?</string>
   <!-- Geokrety -->

@@ -990,6 +990,7 @@
   <string name="live_map_notification">Op de nieuwe live-kaart zullen coördinaten niet altijd exact zijn. Mogelijke onnauwkeurige coördinaten zijn aangegeven met een oranje cirkel.\nHet openen of opslaan van de cache zorgt ervoor dat de exacte coördinaten gebruikt worden.\n\nMeer informatie over de wijzigingen kan gevonden worden op de \"Over c:geo\" pagina in de app.</string>
   <string name="map_select_multiple_items">Selecteer item</string>
   <string name="map_routing">Routering</string>
+  <string name="map_routing_straight">Rechte lijn</string>
   <string name="map_routing_walk">Wandelen</string>
   <string name="map_routing_bike">Fiets</string>
   <string name="map_routing_car">Auto</string>

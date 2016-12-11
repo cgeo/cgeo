@@ -703,6 +703,7 @@
   <string name="last_day_available">tilgængelig for sidste dag</string>
   <string name="cache_offline">Offline</string>
   <string name="cache_offline_refresh">Genindlæs</string>
+  <string name="cache_offline_drop">Fjern</string>
   <string name="cache_offline_store">Gem</string>
   <string name="cache_offline_manage">Administrér</string>
   <string name="cache_offline_store_in_list">Gem i liste</string>
@@ -987,6 +988,7 @@
   <string name="live_map_notification">Positioner på Live-kortet er ikke altid præcise. Cacher med upræcis positionsangivelse er markeret med en orange cirkel.\nDen korrekte position vil dog altid blive indlæst når du åbner cachedetaljer eller gemmer cachen til offlinebrug.\n\nDu kan læse mere om dette under punktet \"Om c:geo\" i appen.</string>
   <string name="map_select_multiple_items">Vælg element</string>
   <string name="map_routing">Navigation</string>
+  <string name="map_routing_straight">Lige linje</string>
   <string name="map_routing_walk">Til fods</string>
   <string name="map_routing_bike">Cykel</string>
   <string name="map_routing_car">Bil</string>
