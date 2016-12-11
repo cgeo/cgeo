@@ -126,7 +126,7 @@ public final class StoredList extends AbstractList {
                                 // create new list on the fly
                                 promptForListCreation(runAfterwards, selectedListIds, listNameMemento.getTerm());
                             } else {
-                                Settings.saveLastSelectedLists(selectedListIds);
+                                Settings.setLastSelectedLists(selectedListIds);
                                 runAfterwards.call(selectedListIds);
                             }
                             dialog.cancel();
@@ -272,7 +272,7 @@ public final class StoredList extends AbstractList {
                     if (newId >= DataStore.customListIdOffset) {
                         selectedLists.remove(PseudoList.NEW_LIST.id);
                         selectedLists.add(newId);
-                        Settings.saveLastSelectedLists(selectedLists);
+                        Settings.setLastSelectedLists(selectedLists);
                         runAfterwards.call(selectedLists);
                     } else {
                         ActivityMixin.showToast(activity, res.getString(R.string.list_dialog_create_err));
