@@ -12,7 +12,7 @@ import android.util.SparseArray;
 import android.view.Gravity;
 import android.widget.Toast;
 
-import org.mapsforge.v3.core.IOUtils;
+import org.apache.commons.io.IOUtils;
 
 public final class CalendarActivity extends Activity {
     static final String LOG_TAG = "cgeo.calendar";
