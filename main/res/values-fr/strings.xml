@@ -990,6 +990,7 @@
   <string name="live_map_notification">Lors de l\'affichage de la carte temps-réel, les coordonnées de certaines caches peuvent être imprécises, elles sont alors entourées d\'un cercle orange.\nConsultez les détails d\'une cache ou enregistrez-la pour une utilisation hors-ligne afin d\'obtenir ses coordonnées exactes.\n\nVous trouverez plus d\'informations sur la page d\'aide accessible depuis \"À propos de c:geo\".</string>
   <string name="map_select_multiple_items">Sélectionner l\'élément</string>
   <string name="map_routing">Calcul de l\'itinéraire</string>
+  <string name="map_routing_straight">À vol d\'oiseau</string>
   <string name="map_routing_walk">À pied</string>
   <string name="map_routing_bike">À vélo</string>
   <string name="map_routing_car">En voiture</string>

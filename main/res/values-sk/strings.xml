@@ -999,6 +999,7 @@
   <string name="live_map_notification">Na aktívnej mape nemusia byť súradnice vždy presné. Súradnice, ktoré môžu byť nepresné, sú označené oranžovým krúžkom.\nPo otvorení detailu skrýše alebo po jej uložení pre použitie offline, sú získané vždy presné súradnice.\n\nViac informácií nájdete na stránke „O c:geo“ v aplikácii.</string>
   <string name="map_select_multiple_items">Vybrať položku</string>
   <string name="map_routing">Navigácia</string>
+  <string name="map_routing_straight">Priama čiara</string>
   <string name="map_routing_walk">Chôdza</string>
   <string name="map_routing_bike">Bicykel</string>
   <string name="map_routing_car">Auto</string>
