@@ -41,6 +41,7 @@ android {
 
 dependencies {
     // Apache Commons
+    compile 'commons-io:commons-io:2.5'
     compile 'org.apache.commons:commons-lang3:3.5'
 
     // Android annotations
