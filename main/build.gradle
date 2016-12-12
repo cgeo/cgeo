@@ -387,6 +387,7 @@ task verifyCgeoKeys {
                         properties.load(it);
                     }
                     filter(ReplaceTokens, tokens: properties)
+                    filter { it.replaceAll("@.+?@", "") }
                 }
             }
         }
