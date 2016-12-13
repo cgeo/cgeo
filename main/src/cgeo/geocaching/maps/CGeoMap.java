@@ -449,11 +449,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
             centerMap(mapOptions.geocode, mapOptions.searchResult, mapOptions.coords, mapOptions.mapState);
         }
 
-
-        final CheckBox locSwitch = ButterKnife.findById(activity, R.id.my_position);
-        if (locSwitch != null) {
-            initMyLocationSwitchButton(locSwitch);
-        }
         prepareFilterBar();
 
         LiveMapHint.getInstance().showHint(activity);
