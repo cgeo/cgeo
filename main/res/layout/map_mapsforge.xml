@@ -6,8 +6,6 @@
     android:orientation="vertical"
     tools:context=".maps.mapsforge.MapsforgeMapProvider" >
 
-    <include layout="@layout/actionbar_maps" />
-
     <include layout="@layout/filter_bar" />
 
     <RelativeLayout
