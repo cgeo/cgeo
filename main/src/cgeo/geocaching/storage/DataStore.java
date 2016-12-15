@@ -3264,14 +3264,18 @@ public class DataStore {
 
         database.beginTransaction();
         try {
+            final Set<String> geocodes = new HashSet<>(caches.size());
             for (final Geocache cache : caches) {
                 oldLists.put(cache.getGeocode(), loadLists(cache.getGeocode()));
 
                 remove.bindString(1, cache.getGeocode());
                 remove.execute();
+                geocodes.add(cache.getGeocode());
 
                 cache.getLists().clear();
             }
+            clearVisitDate(geocodes);
+
             database.setTransactionSuccessful();
         } finally {
             database.endTransaction();
