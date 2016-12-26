@@ -491,9 +491,12 @@ public class Geocache implements IWaypoint {
 
     /**
      * Drop offline log for a given geocode.
+     * 
+     * @param resetVisitedDate
+     *            {@code true} to remove any existing visited date in addition to the log
      */
-    public void clearOfflineLog() {
-        DataStore.clearLogOffline(geocode);
+    public void clearOfflineLog(final boolean resetVisitedDate) {
+        DataStore.clearLogOffline(geocode, resetVisitedDate);
         setLogOffline(false);
         notifyChange();
     }

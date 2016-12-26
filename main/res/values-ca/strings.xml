@@ -989,6 +989,7 @@
   <string name="live_map_notification">Les coordenades al mapa en viu poden no ser precises. Possiblement les coordenades imprecises estan marcades amb un cercle taronja.\nObrint els detalls del catxé o guardant el catxé per a ús fora de línia  obtindreu les coordenades precises.\n\nPodeu trobar més informació a la pàgina \"Quant al c:geo\" dins de l\'aplicació.</string>
   <string name="map_select_multiple_items">Seleccionar un element</string>
   <string name="map_routing">Encaminant</string>
+  <string name="map_routing_straight">Línia recta</string>
   <string name="map_routing_walk">A peu</string>
   <string name="map_routing_bike">En bici</string>
   <string name="map_routing_car">En cotxe</string>

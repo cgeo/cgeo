@@ -990,6 +990,7 @@
   <string name="live_map_notification">A koordináták pontatlanok lehetnek az élő térképen. A vélhetően pontatlan koordinátákat narancssárga kör jelöli.\nA ládaolal megnyitásakor vagy a láda offline mentésekor mindig letöltődik a pontos koordináta.\n\nTovábbi információ található az alkalmazás \"A c:geo-ról\" oldalán.</string>
   <string name="map_select_multiple_items">Elem kiválasztása</string>
   <string name="map_routing">Útvonal</string>
+  <string name="map_routing_straight">Egyenes vonal</string>
   <string name="map_routing_walk">Gyalogos</string>
   <string name="map_routing_bike">Kerékpáros</string>
   <string name="map_routing_car">Autós</string>

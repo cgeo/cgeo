@@ -231,15 +231,15 @@ apt {
 
 dependencies {
     // AndroidAnnotations, https://github.com/excilys/androidannotations/wiki/building-project-gradle
-    def androidAnnotationsVersion = '4.1.0'
+    def androidAnnotationsVersion = '4.2.0'
     apt "org.androidannotations:androidannotations:$androidAnnotationsVersion"
     compile "org.androidannotations:androidannotations-api:$androidAnnotationsVersion"
 
     // Apache Commons
     compile 'org.apache.commons:commons-collections4:4.1'
-    compile 'org.apache.commons:commons-lang3:3.5'
     compile 'org.apache.commons:commons-compress:1.12'
     compile 'commons-io:commons-io:2.5'
+    compile 'org.apache.commons:commons-lang3:3.5'
 
     // AssertJ for testing, needed both for local unit tests and Android instrumentation tests
     def assertJVersion = '1.7.1'
@@ -314,7 +314,7 @@ dependencies {
     compile 'com.jakewharton:process-phoenix:1.1.1'
 
     // RxJava
-    compile "io.reactivex.rxjava2:rxjava:2.0.2"
+    compile "io.reactivex.rxjava2:rxjava:2.0.3"
     compile "io.reactivex.rxjava2:rxandroid:2.0.1"
 
     // Showcase view
@@ -387,6 +387,7 @@ task verifyCgeoKeys {
                         properties.load(it);
                     }
                     filter(ReplaceTokens, tokens: properties)
+                    filter { it.replaceAll("@.+?@", "") }
                 }
             }
         }
@@ -489,9 +490,11 @@ if (privatePropertiesFile.exists()) {
 }
 
 // check existence of private properties, show an error message
-task verifyPrivateProperties << {
-    if (!rootProject.file('private.properties').exists()) {
-        throw new InvalidUserDataException("For signing the release build you must provide a file private.properties in the root directory. Copy templates/private.properties and change the values.")
+task verifyPrivateProperties {
+    doLast {
+        if (!rootProject.file('private.properties').exists()) {
+            throw new InvalidUserDataException("For signing the release build you must provide a file private.properties in the root directory. Copy templates/private.properties and change the values.")
+        }
     }
 }
 

@@ -462,6 +462,8 @@
   <string name="init_oc_ro_description">Permitir que c:geo pesquise, aceda e filtre as suas caches encontradas em opencaching.ro.</string>
   <string name="init_oc_uk">opencache.uk</string>
   <string name="settings_activate_oc_uk">Ativar</string>
+  <string name="init_summary_oc_uk">Carregar caches de opencache.uk</string>
+  <string name="init_oc_uk_description">Permitir que c:geo pesquise, aceda e filtre as suas caches encontradas em opencache.uk.</string>
   <string name="init_su">Geocaching.su</string>
   <string name="init_summary_su">Carregar caches de Geocaching.su</string>
   <string name="settings_activate_su">Activar</string>
@@ -682,6 +684,7 @@
   <string name="auth_ocnl">opencaching.nl</string>
   <string name="auth_ocus">opencaching.us</string>
   <string name="auth_ocro">opencaching.ro</string>
+  <string name="auth_ocuk">opencache.uk</string>
   <string name="auth_dialog_completed_oc">c:geo está agora autorizado a interagir com %s.</string>
   <!-- auth geokrety -->
   <string name="auth_dialog_completed_geokrety">c:geo está agora autorizado a interagir com %s.</string>
@@ -868,6 +871,7 @@
   <string name="cache_image_open_file">Abrir como ficheiro</string>
   <string name="cache_image_open_browser">Abrir no browser</string>
   <string name="cache_image_add_waypoint">Adicionar ponto de referência</string>
+  <string name="cache_image_background">Imagem de fundo da descrição da cache</string>
   <string name="cache_share_field">Partilhar</string>
   <string name="cache_time_full_hours">o\'clock</string>
   <string name="cache_listed_on">Listada em %s</string>
@@ -986,6 +990,7 @@
   <string name="live_map_notification">No novo mapa ao vivo as coordenadas podem nem sempre ser precisas. As coordenadas possivelmente imprecisas são marcadas com um círculo cor de laranja.\nAbrindo os detalhes da cache or gravando a cache para utilização offline fará com que obtenha as coordenadas precisas.\n\nMais informações em todas as alterações podem ser encontradas na página \"Sobre c:geo\" na aplicação.</string>
   <string name="map_select_multiple_items">Selecionar item</string>
   <string name="map_routing">Rotas</string>
+  <string name="map_routing_straight">Linha a direito</string>
   <string name="map_routing_walk">Caminhar</string>
   <string name="map_routing_bike">Bicicleta</string>
   <string name="map_routing_car">Carro</string>
@@ -1086,6 +1091,7 @@
   <string name="helper_sendtocgeo_description">Send to c:geo é uma extensão do navegador <strong>para o seu PC</strong>. Ao navegar geocaching.com, você pode enviar as caches directamente para seu smartphone com o clique de um botão no navegador.</string>
   <string name="helper_locus_title">Locus</string>
   <string name="helper_locus_description">Aplicação de navegação ao ar livre para o seu telefone ou tablet. Veja mapas topográficos offline, registe a sua rota, procure geocaches, use um guia de voz e muito mais.</string>
+  <string name="helper_gpsstatus_title">GPS Status &amp; Toolbox</string>
   <string name="helper_gpsstatus_description">Pode usar o radar a partir desta aplicação. Também fornece muitas outras informações relacionadas com o GPS.</string>
   <string name="helper_bluetoothgps_title">GPS por bluetooth</string>
   <string name="helper_bluetoothgps_description">Permite utilizar um GPS externo, para uma melhor recepção, localização mais precisa e permite poupar a bateria do seu telemóvel.</string>

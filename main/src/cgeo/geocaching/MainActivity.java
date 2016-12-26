@@ -459,7 +459,7 @@ public class MainActivity extends AbstractActionBarActivity {
 
                     @Override
                     public void call(final Integer selectedListId) {
-                        Settings.saveLastList(selectedListId);
+                        Settings.setLastDisplayedList(selectedListId);
                         CacheListActivity.startActivityOffline(MainActivity.this);
                     }
                 }, false, PseudoList.HISTORY_LIST.id);

@@ -2301,15 +2301,13 @@ public class DataStore {
         }
         final StringBuilder selection = new StringBuilder();
 
-        selection.append(" detailed = 1 ");
-
         String[] selectionArgs = null;
         if (cacheType != CacheType.ALL) {
-            selection.append(" AND type = ?");
+            selection.append(" type = ? AND");
             selectionArgs = new String[] { String.valueOf(cacheType.id) };
         }
 
-        selection.append(" AND geocode IN (SELECT geocode FROM ");
+        selection.append(" geocode IN (SELECT geocode FROM ");
         selection.append(dbTableCachesLists);
         selection.append(" WHERE list_id ");
         selection.append(listId != PseudoList.ALL_LIST.id ? "=" + Math.max(listId, 1) : ">= " + StoredList.STANDARD_LIST_ID);
@@ -2647,7 +2645,7 @@ public class DataStore {
         return log;
     }
 
-    public static void clearLogOffline(final String geocode) {
+    public static void clearLogOffline(final String geocode, final boolean resetVisitedDate) {
         if (StringUtils.isBlank(geocode)) {
             return;
         }
@@ -2655,8 +2653,12 @@ public class DataStore {
         init();
 
         final String[] geocodeWhereArgs = {geocode};
+        if (resetVisitedDate) {
+            database.execSQL(
+               String.format("UPDATE %s SET visiteddate = 0 WHERE geocode IN (SELECT geocode FROM %s WHERE geocode = ?)",
+                    dbTableCaches, dbTableLogsOffline), geocodeWhereArgs);
+        }
         database.delete(dbTableLogsOffline, "geocode = ?", geocodeWhereArgs);
-        database.execSQL(String.format("UPDATE %s SET visiteddate = 0 WHERE geocode = ?", dbTableCaches), geocodeWhereArgs);
     }
 
     public static void clearLogsOffline(final List<Geocache> caches) {
@@ -2671,8 +2673,10 @@ public class DataStore {
         }
 
         final String geocodes = whereGeocodeIn(Geocache.getGeocodes(caches)).toString();
+        database.execSQL(
+            String.format("UPDATE %s SET visiteddate = 0 WHERE geocode IN (SELECT geocode FROM %s WHERE %s)",
+                dbTableCaches, dbTableLogsOffline, geocodes));
         database.execSQL(String.format("DELETE FROM %s WHERE %s", dbTableLogsOffline, geocodes));
-        database.execSQL(String.format("UPDATE %s SET visiteddate = 0 WHERE %s", dbTableCaches, geocodes));
     }
 
     public static boolean hasLogOffline(final String geocode) {
@@ -3181,7 +3185,7 @@ public class DataStore {
 
     private enum PreparedStatement {
 
-        HISTORY_COUNT("SELECT COUNT(_id) FROM " + dbTableCaches + " WHERE visiteddate > 0"),
+        HISTORY_COUNT("SELECT COUNT(geocode) FROM (SELECT geocode FROM " + dbTableCaches + " WHERE visiteddate > 0 UNION SELECT geocode from " + dbTableLogsOffline + ")"),
         MOVE_TO_STANDARD_LIST("UPDATE " + dbTableCachesLists + " SET list_id = " + StoredList.STANDARD_LIST_ID + " WHERE list_id = ? AND geocode NOT IN (SELECT DISTINCT (geocode) FROM " + dbTableCachesLists + " WHERE list_id = " + StoredList.STANDARD_LIST_ID + ")"),
         REMOVE_FROM_LIST("DELETE FROM " + dbTableCachesLists + " WHERE list_id = ? AND geocode = ?"),
         REMOVE_FROM_ALL_LISTS("DELETE FROM " + dbTableCachesLists + " WHERE geocode = ?"),
@@ -3202,10 +3206,10 @@ public class DataStore {
         GEOCODE_OF_GUID("SELECT geocode FROM " + dbTableCaches + " WHERE guid = ?"),
         GEOCODE_FROM_TITLE("SELECT geocode FROM " + dbTableCaches + " WHERE name = ?"),
         INSERT_SEARCH_DESTINATION("INSERT INTO " + dbTableSearchDestinationHistory + " (date, latitude, longitude) VALUES (?, ?, ?)"),
-        COUNT_TYPE_ALL_LIST("SELECT COUNT(c._id) FROM " + dbTableCaches + " c, " + dbTableCachesLists + " l  WHERE c.detailed = 1 AND c.type = ? AND c.geocode = l.geocode AND l.list_id > 0"), // See use of COUNT_TYPE_LIST for synchronization
-        COUNT_ALL_TYPES_ALL_LIST("SELECT COUNT(c._id) FROM " + dbTableCaches + " c, " + dbTableCachesLists + " l WHERE c.detailed = 1 AND c.geocode = l.geocode AND l.list_id  > 0"), // See use of COUNT_TYPE_LIST for synchronization
-        COUNT_TYPE_LIST("SELECT COUNT(c._id) FROM " + dbTableCaches + " c, " + dbTableCachesLists + " l WHERE c.detailed = 1 AND c.type = ? AND c.geocode = l.geocode AND l.list_id = ?"),
-        COUNT_ALL_TYPES_LIST("SELECT COUNT(c._id) FROM " + dbTableCaches + " c, " + dbTableCachesLists + " l WHERE c.detailed = 1 AND c.geocode = l.geocode AND l.list_id = ?"), // See use of COUNT_TYPE_LIST for synchronization
+        COUNT_TYPE_ALL_LIST("SELECT COUNT(c._id) FROM " + dbTableCaches + " c, " + dbTableCachesLists + " l  WHERE c.type = ? AND c.geocode = l.geocode AND l.list_id > 0"), // See use of COUNT_TYPE_LIST for synchronization
+        COUNT_ALL_TYPES_ALL_LIST("SELECT COUNT(c._id) FROM " + dbTableCaches + " c, " + dbTableCachesLists + " l WHERE c.geocode = l.geocode AND l.list_id  > 0"), // See use of COUNT_TYPE_LIST for synchronization
+        COUNT_TYPE_LIST("SELECT COUNT(c._id) FROM " + dbTableCaches + " c, " + dbTableCachesLists + " l WHERE c.type = ? AND c.geocode = l.geocode AND l.list_id = ?"),
+        COUNT_ALL_TYPES_LIST("SELECT COUNT(c._id) FROM " + dbTableCaches + " c, " + dbTableCachesLists + " l WHERE c.geocode = l.geocode AND l.list_id = ?"), // See use of COUNT_TYPE_LIST for synchronization
         CHECK_IF_PRESENT("SELECT COUNT(*) FROM " + dbTableCaches + " WHERE geocode = ?");
 
         private static final List<PreparedStatement> statements = new ArrayList<>();
@@ -3258,14 +3262,18 @@ public class DataStore {
 
         database.beginTransaction();
         try {
+            final Set<String> geocodes = new HashSet<>(caches.size());
             for (final Geocache cache : caches) {
                 oldLists.put(cache.getGeocode(), loadLists(cache.getGeocode()));
 
                 remove.bindString(1, cache.getGeocode());
                 remove.execute();
+                geocodes.add(cache.getGeocode());
 
                 cache.getLists().clear();
             }
+            clearVisitDate(geocodes);
+
             database.setTransactionSuccessful();
         } finally {
             database.endTransaction();

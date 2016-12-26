@@ -22,9 +22,9 @@ import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.CharEncoding;
 import org.apache.commons.lang3.StringUtils;
-import org.mapsforge.v3.core.IOUtils;
 
 public final class ContactsActivity extends Activity {
     static final String LOG_TAG = "cgeo.contacts";

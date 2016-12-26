@@ -130,8 +130,8 @@ import io.reactivex.functions.Action;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.mapsforge.v3.core.IOUtils;
 
 public class CacheListActivity extends AbstractListActivity implements FilteredActivity, LoaderManager.LoaderCallbacks<SearchResult> {
 
@@ -1392,16 +1392,20 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
         @Override
         protected void doCommand() {
-            if (listId == PseudoList.ALL_LIST.id) {
+            if (appliesToAllLists()) {
                 oldCachesLists.putAll(DataStore.markDropped(getCaches()));
             } else {
                 DataStore.removeFromList(getCaches(), listId);
             }
         }
 
+        private boolean appliesToAllLists() {
+            return listId == PseudoList.ALL_LIST.id || listId == PseudoList.HISTORY_LIST.id || listId == StoredList.TEMPORARY_LIST.id;
+        }
+
         @Override
         protected void undoCommand() {
-            if (listId == PseudoList.ALL_LIST.id) {
+            if (appliesToAllLists()) {
                 DataStore.addToLists(getCaches(), oldCachesLists);
             } else {
                 DataStore.addToList(getCaches(), listId);
@@ -1488,7 +1492,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             extras.putAll(OfflineGeocacheListLoader.getBundleForList(listId));
             currentLoader = (OfflineGeocacheListLoader) getSupportLoaderManager().restartLoader(CacheListType.OFFLINE.getLoaderId(), extras, this);
 
-            Settings.saveLastList(listId);
+            Settings.setLastDisplayedList(listId);
         }
 
         initAdapter();
@@ -1747,7 +1751,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 if (extras.containsKey(Intents.EXTRA_LIST_ID)) {
                     listId = extras.getInt(Intents.EXTRA_LIST_ID);
                 } else {
-                    listId = Settings.getLastList();
+                    listId = Settings.getLastDisplayedList();
                 }
                 if (listId == PseudoList.ALL_LIST.id) {
                     title = res.getString(R.string.list_all_lists);

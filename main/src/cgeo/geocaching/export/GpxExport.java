@@ -34,8 +34,8 @@ import java.util.List;
 import java.util.Locale;
 
 import butterknife.ButterKnife;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.CharEncoding;
-import org.mapsforge.v3.core.IOUtils;
 
 public class GpxExport extends AbstractExport {
 
