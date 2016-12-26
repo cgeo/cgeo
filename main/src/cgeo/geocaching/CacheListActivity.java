@@ -1392,16 +1392,20 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
         @Override
         protected void doCommand() {
-            if (listId == PseudoList.ALL_LIST.id) {
+            if (appliesToAllLists()) {
                 oldCachesLists.putAll(DataStore.markDropped(getCaches()));
             } else {
                 DataStore.removeFromList(getCaches(), listId);
             }
         }
 
+        private boolean appliesToAllLists() {
+            return listId == PseudoList.ALL_LIST.id || listId == PseudoList.HISTORY_LIST.id || listId == StoredList.TEMPORARY_LIST.id;
+        }
+
         @Override
         protected void undoCommand() {
-            if (listId == PseudoList.ALL_LIST.id) {
+            if (appliesToAllLists()) {
                 DataStore.addToLists(getCaches(), oldCachesLists);
             } else {
                 DataStore.addToList(getCaches(), listId);
