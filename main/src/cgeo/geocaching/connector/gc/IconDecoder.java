@@ -18,9 +18,9 @@ final class IconDecoder {
     private static final int CT_EARTH = 4;
     private static final int CT_FOUND = 5;
     private static final int CT_OWN = 6;
-    private static final int CT_MEGAEVENT = 7;
-    private static final int CT_CITO = 8;
-    private static final int CT_WEBCAM = 9;
+    private static final int CT_CITO = 7;
+    private static final int CT_WEBCAM = 8;
+    private static final int CT_MEGAEVENT = 9;
     private static final int CT_WHERIGO = 10;
     private static final int CT_VIRTUAL = 11;
     private static final int CT_LETTERBOX = 12;
