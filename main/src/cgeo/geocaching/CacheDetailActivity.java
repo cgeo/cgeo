@@ -14,6 +14,7 @@ import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.capability.IgnoreCapability;
 import cgeo.geocaching.connector.capability.PersonalNoteCapability;
+import cgeo.geocaching.connector.capability.PgcChallengeCheckerCapability;
 import cgeo.geocaching.connector.capability.WatchListCapability;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.gc.GCConstants;
@@ -592,6 +593,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             if (connector instanceof IgnoreCapability) {
                 menu.findItem(R.id.menu_ignore).setVisible(((IgnoreCapability) connector).canIgnoreCache(cache));
             }
+            if (connector instanceof PgcChallengeCheckerCapability) {
+                menu.findItem(R.id.menu_challenge_checker).setVisible(((PgcChallengeCheckerCapability) connector).isChallengeCache(cache));
+            }
         }
         return super.onPrepareOptionsMenu(menu);
     }
@@ -619,6 +623,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 return true;
             case R.id.menu_checker:
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(CheckerUtils.getCheckerUrl(cache))));
+                return true;
+            case R.id.menu_challenge_checker:
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://project-gc.com/Challenges/" + cache.getGeocode())));
                 return true;
             case R.id.menu_ignore:
                 ignoreCache();

@@ -863,6 +863,7 @@
     <string name="cache_menu_android_wear">Android Wear</string>
     <string name="cache_menu_vote">Vote</string>
     <string name="cache_menu_checker">Open Geochecker</string>
+    <string name="cache_menu_challenge_checker">Search challenge checker</string>
     <string name="cache_menu_ignore">Ignore cache</string>
     <string name="ignore_confirm_title">Be careful</string>
     <string name="ignore_confirm_message">Ignoring a cache means that this cache will never occur again when loading data from geocaching.com. You will only be able to see the cache again by unignoring it on the website.</string>
