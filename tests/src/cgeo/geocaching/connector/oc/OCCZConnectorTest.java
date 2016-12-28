@@ -1,6 +1,6 @@
 package cgeo.geocaching.connector.oc;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 import junit.framework.TestCase;
 
 public class OCCZConnectorTest extends TestCase {

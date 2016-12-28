@@ -20,7 +20,7 @@ import static cgeo.geocaching.test.R.raw.map_all14;
 import static cgeo.geocaching.test.R.raw.tile13;
 import static cgeo.geocaching.test.R.raw.tile14;
 import static cgeo.geocaching.utils.Log.d;
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;

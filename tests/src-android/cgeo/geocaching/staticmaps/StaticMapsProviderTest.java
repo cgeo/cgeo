@@ -1,6 +1,6 @@
 package cgeo.geocaching.staticmaps;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.location.Geopoint;

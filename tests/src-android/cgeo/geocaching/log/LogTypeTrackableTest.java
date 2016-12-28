@@ -1,6 +1,6 @@
 package cgeo.geocaching.log;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 import org.apache.commons.lang3.StringUtils;
 

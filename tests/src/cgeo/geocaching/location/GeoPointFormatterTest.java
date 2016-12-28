@@ -2,7 +2,7 @@ package cgeo.geocaching.location;
 
 import junit.framework.TestCase;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class GeoPointFormatterTest extends TestCase {
 

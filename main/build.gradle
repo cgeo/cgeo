@@ -242,7 +242,7 @@ dependencies {
     compile 'org.apache.commons:commons-lang3:3.5'
 
     // AssertJ for testing, needed both for local unit tests and Android instrumentation tests
-    def assertJVersion = '1.7.1'
+    def assertJVersion = '2.6.0'
     testCompile "org.assertj:assertj-core:$assertJVersion"
     androidTestCompile "org.assertj:assertj-core:$assertJVersion"
 

@@ -1,6 +1,21 @@
 package cgeo.geocaching.test;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import android.content.ContentResolver;
+import android.content.res.Resources;
+import android.net.Uri;
+import android.support.annotation.AnyRes;
+import android.support.annotation.RawRes;
+import android.test.InstrumentationTestCase;
+
+import org.apache.commons.compress.utils.IOUtils;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Collection;
+import java.util.EnumSet;
+import java.util.Scanner;
 
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.enumerations.CacheType;
@@ -12,22 +27,7 @@ import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.DataStore;
 
-import android.content.ContentResolver;
-import android.content.res.Resources;
-import android.net.Uri;
-import android.support.annotation.AnyRes;
-import android.support.annotation.RawRes;
-import android.test.InstrumentationTestCase;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Collection;
-import java.util.EnumSet;
-import java.util.Scanner;
-
-import org.apache.commons.compress.utils.IOUtils;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public abstract class AbstractResourceInstrumentationTestCase extends InstrumentationTestCase {
     private int temporaryListId;

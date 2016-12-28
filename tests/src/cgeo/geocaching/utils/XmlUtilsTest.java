@@ -10,7 +10,7 @@ import java.io.StringWriter;
 
 import cgeo.org.kxml2.io.KXmlSerializer;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class XmlUtilsTest extends TestCase {
 

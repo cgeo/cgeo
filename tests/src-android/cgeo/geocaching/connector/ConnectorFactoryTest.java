@@ -9,7 +9,7 @@ import cgeo.geocaching.connector.oc.OCConnector;
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 import cgeo.geocaching.test.mock.GC1ZXX2;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class ConnectorFactoryTest extends AbstractResourceInstrumentationTestCase {
 

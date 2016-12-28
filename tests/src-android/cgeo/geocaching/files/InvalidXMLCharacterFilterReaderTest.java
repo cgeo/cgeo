@@ -1,6 +1,6 @@
 package cgeo.geocaching.files;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 import android.sax.EndTextElementListener;
 import android.sax.RootElement;
