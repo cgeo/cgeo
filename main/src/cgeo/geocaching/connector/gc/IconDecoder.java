@@ -19,10 +19,10 @@ final class IconDecoder {
     private static final int CT_FOUND = 5;
     private static final int CT_OWN = 6;
     private static final int CT_CITO = 7;
-    private static final int CT_WEBCAM = 8;
+    private static final int CT_VIRTUAL = 8;
     private static final int CT_MEGAEVENT = 9;
     private static final int CT_WHERIGO = 10;
-    private static final int CT_VIRTUAL = 11;
+    private static final int CT_WEBCAM = 11;
     private static final int CT_LETTERBOX = 12;
 
     private IconDecoder() {
@@ -260,7 +260,7 @@ final class IconDecoder {
                     }
                     return g < 92 ? CT_EVENT : CT_MYSTERY;
                 }
-                return CT_WEBCAM;
+                return CT_VIRTUAL;
             }
             if (b < 211) {
                 if (r < 164) {
@@ -348,7 +348,7 @@ final class IconDecoder {
             }
             if (r < 174) {
                 if (r < 156) {
-                    return CT_WEBCAM;
+                    return CT_VIRTUAL;
                 }
                 if (g < 201) {
                     return CT_MYSTERY;
@@ -357,9 +357,9 @@ final class IconDecoder {
                     return CT_EARTH;
                 }
                 if (r < 173) {
-                    return CT_WEBCAM;
+                    return CT_VIRTUAL;
                 }
-                return g < 221 ? CT_EARTH : CT_WEBCAM;
+                return g < 221 ? CT_EARTH : CT_VIRTUAL;
             }
             if (b < 227) {
                 if (g < 222) {
@@ -382,11 +382,11 @@ final class IconDecoder {
                 }
                 if (b < 240) {
                     if (r < 190) {
-                        return b < 233 ? CT_EARTH : CT_WEBCAM;
+                        return b < 233 ? CT_EARTH : CT_VIRTUAL;
                     }
                     return CT_EARTH;
                 }
-                return CT_WEBCAM;
+                return CT_VIRTUAL;
             }
             if (g < 233) {
                 if (b < 233) {
@@ -414,9 +414,9 @@ final class IconDecoder {
             }
             if (r < 224) {
                 if (b < 244) {
-                    return r < 216 ? CT_WEBCAM : CT_EARTH;
+                    return r < 216 ? CT_VIRTUAL : CT_EARTH;
                 }
-                return CT_WEBCAM;
+                return CT_VIRTUAL;
             }
             return g < 241 ? CT_MYSTERY : CT_EARTH;
         }
@@ -497,9 +497,9 @@ final class IconDecoder {
                 return CT_CITO;
             }
             if (g < 249) {
-                return r < 241 ? CT_WEBCAM : CT_MYSTERY;
+                return r < 241 ? CT_VIRTUAL : CT_MYSTERY;
             }
-            return CT_WEBCAM;
+            return CT_VIRTUAL;
         }
         if (r < 253) {
             if (b < 252) {
@@ -677,7 +677,7 @@ final class IconDecoder {
                         }
                         return b < 158 ? CT_EVENT : CT_MYSTERY;
                     }
-                    return CT_WEBCAM;
+                    return CT_VIRTUAL;
                 }
                 if (g < 171) {
                     if (b < 172) {
@@ -740,7 +740,7 @@ final class IconDecoder {
             }
             if (b < 216) {
                 if (r < 125) {
-                    return CT_WEBCAM;
+                    return CT_VIRTUAL;
                 }
                 if (g < 212) {
                     if (r < 158) {
@@ -757,27 +757,27 @@ final class IconDecoder {
                 return g < 227 ? CT_CITO : CT_OWN;
             }
             if (r < 156) {
-                return CT_WEBCAM;
+                return CT_VIRTUAL;
             }
             if (b < 229) {
                 if (r < 175) {
                     if (r < 160) {
-                        return g < 214 ? CT_EARTH : CT_WEBCAM;
+                        return g < 214 ? CT_EARTH : CT_VIRTUAL;
                     }
                     return CT_EARTH;
                 }
                 return CT_MYSTERY;
             }
             if (r < 174) {
-                return CT_WEBCAM;
+                return CT_VIRTUAL;
             }
             if (b < 234) {
                 if (r < 176) {
-                    return g < 222 ? CT_EARTH : CT_WEBCAM;
+                    return g < 222 ? CT_EARTH : CT_VIRTUAL;
                 }
                 return CT_EARTH;
             }
-            return CT_WEBCAM;
+            return CT_VIRTUAL;
         }
         if (b < 212) {
             if (r < 240) {
@@ -864,14 +864,14 @@ final class IconDecoder {
             if (r < 215) {
                 if (b < 243) {
                     if (r < 198) {
-                        return b < 238 ? CT_EARTH : CT_WEBCAM;
+                        return b < 238 ? CT_EARTH : CT_VIRTUAL;
                     }
                     if (r < 201) {
-                        return b < 240 ? CT_EARTH : CT_WEBCAM;
+                        return b < 240 ? CT_EARTH : CT_VIRTUAL;
                     }
                     return CT_EARTH;
                 }
-                return CT_WEBCAM;
+                return CT_VIRTUAL;
             }
             if (b < 247) {
                 if (r < 229) {
@@ -881,7 +881,7 @@ final class IconDecoder {
                     if (b < 244) {
                         return CT_EARTH;
                     }
-                    return r < 225 ? CT_WEBCAM : CT_EARTH;
+                    return r < 225 ? CT_VIRTUAL : CT_EARTH;
             }
                 if (g < 244) {
                     if (b < 239) {
@@ -898,9 +898,9 @@ final class IconDecoder {
                 return r < 233 ? CT_CITO : CT_TRADITIONAL;
             }
             if (b < 248) {
-                return r < 230 ? CT_WEBCAM : CT_EARTH;
+                return r < 230 ? CT_VIRTUAL : CT_EARTH;
             }
-            return CT_WEBCAM;
+            return CT_VIRTUAL;
             }
         if (b < 245) {
             if (r < 251) {
@@ -956,14 +956,14 @@ final class IconDecoder {
         if (r < 252) {
             if (b < 253) {
                 if (r < 249) {
-                    return CT_WEBCAM;
+                    return CT_VIRTUAL;
                 }
                 return g < 253 ? CT_CITO : CT_OWN;
             }
             if (r < 251) {
-                return CT_WEBCAM;
+                return CT_VIRTUAL;
             }
-            return g < 253 ? CT_MYSTERY : CT_WEBCAM;
+            return g < 253 ? CT_MYSTERY : CT_VIRTUAL;
         }
         if (g < 255) {
             if (r < 253) {
@@ -978,7 +978,7 @@ final class IconDecoder {
             return CT_MYSTERY;
         }
         if (r < 255) {
-            return b < 255 ? CT_OWN : CT_WEBCAM;
+            return b < 255 ? CT_OWN : CT_VIRTUAL;
         }
         return CT_MULTI;
     }
