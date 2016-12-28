@@ -4,6 +4,7 @@
   <string name="changelog_release" translatable="false">\n
     <b>Next feature release:</b>\n
     · Fix: Wrong cache types shown on live map\n
+    · New: Provide link to geochecker also for gc-apps.com checker\n
     · New: Archived or disabled caches stroken trough in titles\n
     · New: Offline routing in our maps (you need the \'BRouter\' app on your device)\n
     · New: Support ignoring caches on OpenCaching sites\n
