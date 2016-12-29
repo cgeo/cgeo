@@ -539,8 +539,8 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
-    public boolean isChallengeCache(@NonNull Geocache cache) {
-        return cache.getType() == CacheType.MYSTERY && cache.getName().toLowerCase().contains("challenge");
+    public boolean isChallengeCache(@NonNull final Geocache cache) {
+        return cache.getType() == CacheType.MYSTERY && StringUtils.containsIgnoreCase(cache.getName(), "challenge");
     }
 
 }
