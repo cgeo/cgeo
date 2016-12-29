@@ -23,7 +23,7 @@ public class FileTypeDetectorTest extends AbstractResourceInstrumentationTestCas
 
     public void testUnknown() throws Exception {
         assertFileType(R.raw.gc2cjpf_html, FileType.UNKNOWN);
-        assertFileType(R.raw.map1, FileType.UNKNOWN);
+        assertFileType(R.raw.map1_z13, FileType.UNKNOWN);
     }
 
     public void testLoc() throws Exception {
