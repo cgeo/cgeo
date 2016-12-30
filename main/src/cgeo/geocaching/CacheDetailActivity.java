@@ -156,7 +156,6 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.collections4.ListUtils;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -1886,7 +1885,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             // this copy is modified to respect the text color
             RecyclerViewProvider.provideRecyclerView(CacheDetailActivity.this, recyclerView, true, true);
 
-            final TrackableListAdapter adapterTrackables = new TrackableListAdapter(ListUtils.emptyIfNull(cache.getInventory()), new TrackableListAdapter.TrackableClickListener() {
+            final TrackableListAdapter adapterTrackables = new TrackableListAdapter(cache.getInventory(), new TrackableListAdapter.TrackableClickListener() {
 
                 @Override
                 public void onTrackableClicked(final Trackable trackable) {
