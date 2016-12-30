@@ -2,8 +2,12 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-    <b>Next feature release:</b>\n
+    <b>Next bugfix release:</b>\n
+    · Fix: Avoid crash in logbook under special conditions if Geokrety is enabled\n
+    \n
+    <b>2016.12.28:</b>\n
     · Fix: Wrong cache types shown on live map\n
+    · New: Provide link to geochecker also for gc-apps.com checker\n
     · New: Archived or disabled caches stroken trough in titles\n
     · New: Offline routing in our maps (you need the \'BRouter\' app on your device)\n
     · New: Support ignoring caches on OpenCaching sites\n
