@@ -491,7 +491,7 @@ public class Geocache implements IWaypoint {
 
     /**
      * Drop offline log for a given geocode.
-     * 
+     *
      * @param resetVisitedDate
      *            {@code true} to remove any existing visited date in addition to the log
      */
@@ -995,10 +995,12 @@ public class Geocache implements IWaypoint {
     /**
      * Get the current inventory
      *
-     * @return the Geocache inventory
+     * @return the inventory of Trackables as unmodifiable collection. Use {@link #setInventory(List)} or
+     *         {@link #addInventoryItem(Trackable)} for modifications.
      */
+    @NonNull
     public List<Trackable> getInventory() {
-        return inventory;
+        return inventory == null ? Collections.<Trackable> emptyList() : Collections.unmodifiableList(inventory);
     }
 
     /**

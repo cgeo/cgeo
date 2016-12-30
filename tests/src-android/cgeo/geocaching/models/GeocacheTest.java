@@ -11,8 +11,6 @@ import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.log.LogType;
 
-import org.apache.commons.lang3.StringUtils;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -21,6 +19,8 @@ import java.util.Date;
 import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
 
 public class GeocacheTest extends CGeoTestCase {
 
@@ -512,7 +512,7 @@ public class GeocacheTest extends CGeoTestCase {
         // test null inventory
         final Geocache cache1 = new Geocache();
         final List<Trackable> inventory3 = Collections.singletonList(trackable1);
-        assertThat(cache1.getInventory()).isNull();
+        assertThat(cache1.getInventory()).isEmpty();
 
         cache1.mergeInventory(inventory3, EnumSet.of(TrackableBrand.TRAVELBUG));
 
@@ -529,7 +529,7 @@ public class GeocacheTest extends CGeoTestCase {
 
     public static void testAddInventoryItem() {
         final Geocache cache = new Geocache();
-        assertThat(cache.getInventory()).isNull();
+        assertThat(cache.getInventory()).isEmpty();
         assertThat(cache.getInventoryItems()).isEqualTo(0);
 
         // 1st TB

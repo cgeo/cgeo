@@ -4,6 +4,7 @@ import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.gc.GCConstants;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.utils.DisposableHandler;
 
 import android.support.annotation.NonNull;
@@ -17,6 +18,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Collection;
+import java.util.List;
 import java.util.concurrent.CancellationException;
 
 import org.apache.commons.io.IOUtils;
@@ -80,11 +82,8 @@ abstract class FileParser {
     }
 
     protected static void fixCache(final Geocache cache) {
-        if (cache.getInventory() != null) {
-            cache.setInventoryItems(cache.getInventory().size());
-        } else {
-            cache.setInventoryItems(0);
-        }
+        final List<Trackable> inventory = cache.getInventory();
+        cache.setInventoryItems(inventory.size());
         final long time = System.currentTimeMillis();
         cache.setUpdated(time);
         cache.setDetailedUpdate(time);

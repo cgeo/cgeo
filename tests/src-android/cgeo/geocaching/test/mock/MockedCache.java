@@ -1,9 +1,14 @@
 package cgeo.geocaching.test.mock;
 
-import junit.framework.Assert;
+import static org.assertj.core.api.Assertions.assertThat;
 
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.StringUtils;
+import cgeo.geocaching.connector.gc.GCConstants;
+import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.Image;
+import cgeo.geocaching.models.Trackable;
+import cgeo.geocaching.utils.TextUtils;
+
 import android.support.annotation.NonNull;
 
 import java.io.BufferedReader;
@@ -14,14 +19,9 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import cgeo.geocaching.connector.gc.GCConstants;
-import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.models.Image;
-import cgeo.geocaching.models.Trackable;
-import cgeo.geocaching.utils.TextUtils;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import junit.framework.Assert;
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
 
 public abstract class MockedCache extends Geocache {
 
@@ -145,7 +145,7 @@ public abstract class MockedCache extends Geocache {
 
     @Override
     public List<Trackable> getInventory() {
-        return null;
+        return Collections.emptyList();
     }
 
     @Override
