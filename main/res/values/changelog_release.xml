@@ -3,7 +3,7 @@
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
     <b>Next bugfix release:</b>\n
-    \n
+    · Fix: Avoid crash in logbook under special conditions if Geokrety is enabled\n
     \n
     <b>2016.12.28:</b>\n
     · Fix: Wrong cache types shown on live map\n
