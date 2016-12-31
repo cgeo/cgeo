@@ -3,21 +3,18 @@ package cgeo.geocaching.command;
 import cgeo.geocaching.utils.AsyncTaskWithProgress;
 
 import android.app.Activity;
-import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
+import android.support.design.widget.Snackbar;
+import android.view.View;
 
-import com.jensdriller.libs.undobar.UndoBar;
-import com.jensdriller.libs.undobar.UndoBar.Listener;
 import org.apache.commons.lang3.StringUtils;
 
 /**
  * Default implementation of the command interface with undo support and background processing.
  */
 public abstract class AbstractCommand implements Command {
-
-    private static final int UNDO_DURATION_SECONDS = 5;
 
     @NonNull
     private final Activity context;
@@ -100,7 +97,7 @@ public abstract class AbstractCommand implements Command {
         this.progressMessage = progressMessage;
     }
 
-    private final class ActionAsyncTask extends AsyncTaskWithProgress<Void, Void> implements Listener {
+    private final class ActionAsyncTask extends AsyncTaskWithProgress<Void, Void> implements View.OnClickListener {
         private ActionAsyncTask(final Activity activity, final String progressTitle, final String progressMessage, final boolean indeterminate) {
             super(activity, progressTitle, progressMessage, indeterminate);
         }
@@ -120,21 +117,12 @@ public abstract class AbstractCommand implements Command {
 
         private void showUndoToast(final String resultMessage) {
             if (StringUtils.isNotEmpty(resultMessage)) {
-                new UndoBar.Builder(context)
-                        .setMessage(resultMessage)
-                        .setListener(this)
-                        .setDuration(UNDO_DURATION_SECONDS * 1000)
-                        .show();
+                Snackbar.make(context.findViewById(android.R.id.content), resultMessage, Snackbar.LENGTH_LONG).setAction("Undo", this).show();
             }
         }
 
         @Override
-        public void onHide() {
-            // do nothing
-        }
-
-        @Override
-        public void onUndo(final Parcelable arg0) {
+        public void onClick(final View view) {
             new UndoTask(context).execute();
         }
     }
