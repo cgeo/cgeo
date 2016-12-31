@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import com.google.android.gms.common.GoogleApiAvailability;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -36,7 +37,6 @@ public final class SystemInformation {
 
     @NonNull
     public static String getSystemInformation(@NonNull final Context context) {
-        final boolean googlePlayServicesAvailable = GooglePlayServices.isAvailable();
         final String usedDirectionSensor;
         if (Settings.useOrientationSensor(context)) {
             usedDirectionSensor = "orientation";
@@ -49,8 +49,9 @@ public final class SystemInformation {
                 .append("\nDevice: ").append(Build.MODEL).append(" (").append(Build.PRODUCT).append(", ").append(Build.BRAND).append(')')
                 .append("\nAndroid version: ").append(VERSION.RELEASE)
                 .append("\nAndroid build: ").append(Build.DISPLAY)
-                .append("\nCgeo version: ").append(Version.getVersionName(context))
-                .append("\nGoogle Play services: ").append(googlePlayServicesAvailable ? (Settings.useGooglePlayServices() ? "enabled" : "disabled") : "unavailable")
+                .append("\nCgeo version: ").append(Version.getVersionName(context));
+        appendGooglePlayServicesVersion(context, body);
+        body
                 .append("\nLow power mode: ").append(Settings.useLowPowerMode() ? "active" : "inactive")
                 .append("\nCompass capabilities: ").append(Sensors.getInstance().hasCompassCapabilities() ? "yes" : "no")
                 .append("\nRotation vector sensor: ").append(presence(RotationProvider.hasRotationSensor(context)))
@@ -120,5 +121,18 @@ public final class SystemInformation {
     private static void appendPermissions(final Context context, final StringBuilder body) {
         appendPermission(context, body, "Fine location", Manifest.permission.ACCESS_FINE_LOCATION);
         appendPermission(context, body, "Write external storage", Manifest.permission.WRITE_EXTERNAL_STORAGE);
+    }
+
+    private static void appendGooglePlayServicesVersion(final Context context, final StringBuilder body) {
+        final boolean googlePlayServicesAvailable = GooglePlayServices.isAvailable();
+        body.append("\nGoogle Play services: ").append(googlePlayServicesAvailable ? (Settings.useGooglePlayServices() ? "enabled" : "disabled") : "unavailable");
+        if (googlePlayServicesAvailable) {
+            body.append(" - ");
+            try {
+                body.append(StringUtils.defaultIfBlank(context.getPackageManager().getPackageInfo(GoogleApiAvailability.GOOGLE_PLAY_SERVICES_PACKAGE, 0).versionName, "unknown version"));
+            } catch (final PackageManager.NameNotFoundException e) {
+                body.append("unretrievable version (").append(e.getMessage()).append(')');
+            }
+        }
     }
 }
