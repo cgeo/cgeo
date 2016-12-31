@@ -15,6 +15,7 @@ import android.util.Xml;
 
 import java.util.LinkedList;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -26,7 +27,7 @@ public final class Routing {
     private static final int UPDATE_MIN_DELAY_SECONDS = 3;
     private static BRouterServiceConnection brouter;
     private static Geopoint lastDirectionUpdatePoint;
-    private static Geopoint[] lastRoutingPoints;
+    @NonNull private static Geopoint[] lastRoutingPoints = {};
     private static Geopoint lastDestination;
     private static long timeLastUpdate;
 
@@ -91,7 +92,7 @@ public final class Routing {
 
         // now really calculate a new route
         lastDestination = destination;
-        lastRoutingPoints = calculateRouting(start, destination);
+        lastRoutingPoints = ArrayUtils.nullToEmpty(calculateRouting(start, destination), Geopoint[].class);
         lastDirectionUpdatePoint = start;
         timeLastUpdate = timeNow;
         return lastRoutingPoints;
@@ -101,6 +102,7 @@ public final class Routing {
         return new Geopoint[] { start, destination };
     }
 
+    @Nullable
     private static Geopoint[] calculateRouting(final Geopoint start, final Geopoint dest) {
         final Bundle params = new Bundle();
         params.putString("trackFormat", "gpx");
