@@ -1,16 +1,17 @@
 package cgeo.geocaching.command;
 
+import cgeo.geocaching.R;
 import cgeo.geocaching.utils.AsyncTaskWithProgress;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.os.Parcelable;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
-import com.jensdriller.libs.undobar.UndoBar;
-import com.jensdriller.libs.undobar.UndoBar.Listener;
+import com.google.android.material.snackbar.Snackbar;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -18,7 +19,7 @@ import org.apache.commons.lang3.StringUtils;
  */
 public abstract class AbstractCommand implements Command {
 
-    private static final int UNDO_DURATION_SECONDS = 5;
+    private static final int UNDO_DURATION_MILLISEC = 5_000;
 
     @NonNull
     private final Activity context;
@@ -101,7 +102,8 @@ public abstract class AbstractCommand implements Command {
         this.progressMessage = progressMessage;
     }
 
-    private final class ActionAsyncTask extends AsyncTaskWithProgress<Void, Void> implements Listener {
+    @SuppressLint("StaticFieldLeak")
+    private final class ActionAsyncTask extends AsyncTaskWithProgress<Void, Void> implements View.OnClickListener {
         private ActionAsyncTask(final Activity activity, final String progressTitle, final String progressMessage, final boolean indeterminate) {
             super(activity, progressTitle, progressMessage, indeterminate);
         }
@@ -119,27 +121,22 @@ public abstract class AbstractCommand implements Command {
             showUndoToast(resultMessage);
         }
 
+        @SuppressLint("WrongConstant")
         private void showUndoToast(final String resultMessage) {
             if (StringUtils.isNotEmpty(resultMessage)) {
-                new UndoBar.Builder(context)
-                        .setMessage(resultMessage)
-                        .setListener(this)
-                        .setDuration(UNDO_DURATION_SECONDS * 1000)
+                Snackbar.make(context.findViewById(android.R.id.content), resultMessage, UNDO_DURATION_MILLISEC)
+                        .setAction(context.getString(R.string.undo), this)
                         .show();
             }
         }
 
         @Override
-        public void onHide() {
-            // do nothing
-        }
-
-        @Override
-        public void onUndo(final Parcelable arg0) {
+        public void onClick(final View view) {
             new UndoTask(context).execute();
         }
     }
 
+    @SuppressLint("StaticFieldLeak")
     private final class UndoTask extends AsyncTaskWithProgress<Void, Void> {
 
         UndoTask(final Activity activity) {
@@ -156,7 +153,5 @@ public abstract class AbstractCommand implements Command {
         protected void onPostExecuteInternal(final Void result) {
             onFinishedUndo();
         }
-
     }
-
 }
