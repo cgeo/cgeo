@@ -2,8 +2,9 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-    <b>Next bugfix release:</b>\n
+    <b>Next bugfix release (Beta version):</b>\n
     · Fix: Avoid crash in logbook under special conditions if Geokrety is enabled\n
+    · Fix: Crash on some devices when opening the map for a cache\n
     \n
     <b>2016.12.28:</b>\n
     · Fix: Wrong cache types shown on live map\n
