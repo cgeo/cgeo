@@ -1422,7 +1422,7 @@
   <string name="showcase_cachelist_title">Cambio di liste</string>
   <string name="showcase_cachelist_text">Puoi cambiare la lista attiva cliccando sul titolo.</string>
   <string name="showcase_compass_hint_title">Visualizza l\'hint</string>
-  <string name="showcase_compass_hint_text">Questa voce di menu potrebbe darvi un\'idea dove trovare il cache - mostrando un suggerimento, se disponibile.</string>
+  <string name="showcase_compass_hint_text">Questa funzione di menu potrebbe darti un\'idea dove trovare il cache - mostrandoti un suggerimento, se è disponibile.</string>
   <string name="confirm_log_title">Tipo di Log non usuale</string>
   <string name="confirm_log_message">Si desidera registrare \'%s\'. Sei sicuro?</string>
   <!-- Geokrety -->
