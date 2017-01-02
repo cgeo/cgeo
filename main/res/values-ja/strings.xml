@@ -93,6 +93,7 @@
   <string name="log_posting_image">画像を投稿中…</string>
   <string name="log_posting_generic_trackable">投稿中 %1$s %2$s/%3$s</string>
   <string name="log_clear">消去</string>
+  <string name="log_post_not_possible">データをダウンロード中…\nしばらく待ってもう一度やり直すか、インターネットの接続をご確認ください。</string>
   <string name="log_post_geocode_missing">GCコードがありません…</string>
   <string name="log_date_future_not_allowed">ログに将来の日付けを選べません</string>
   <string name="log_add">挿入</string>
@@ -125,6 +126,7 @@
   <string name="log_hint_log_password">パスワードを入力してください</string>
   <string name="log_oc_team_comment">OCチームのコメント</string>
   <string name="log_your_saved_log">あなたの保存したログ</string>
+  <string name="log_empty_logbook">このキャッシュのログブックは空です。</string>
   <string-array name="log_image_scales">
     <item>実サイズ</item>
     <item>512 px</item>
@@ -147,10 +149,13 @@
   <string name="err_unknown">未知のエラー</string>
   <string name="err_unknown_address">c:geoがこのアドレスを既存の場所に合わせられませんでした</string>
   <string name="err_comm">未知の通信エラー</string>
+  <string name="err_missing_auth">ユーザ名またはパスワードが設定されていません</string>
+  <string name="err_wrong">ユーザ名またはパスワードが間違っています</string>
   <string name="err_maintenance">Geocaching.comはメンテナンス中で接続できません。 保存済みキャッシュのみでオフラインで動作します。</string>
   <string name="err_license">Geocaching.comのライセンス契約に同意しなかったのでキャッシュの座標を見ることはできません。</string>
   <string name="err_unvalidated_account">Geocaching.comでアカウントを有効化してください。</string>
   <string name="err_unpublished">要求したキャッシュが公開されていません。</string>
+  <string name="err_cache_not_found">要求したキャッシュは見つかりませんでした。</string>
   <string name="err_premium_only">このキャッシュはプレミアム会員のみ有効です。</string>
   <string name="err_detail_open">キャッシュの詳細を開くことができません。</string>
   <string name="err_detail_cache">キャッシュ情報を表示することができません。これは本当にジオキャッシュですか?</string>
@@ -202,11 +207,14 @@
   <string name="err_parse_lon">経度の解析ができません。</string>
   <string name="err_parse_dist">距離の解析ができません。</string>
   <string name="err_parse_lat_lon">緯度または経度の解析ができません。</string>
+  <string name="err_rendertheme_file_unreadable">選択した描画テーマをロードできませんでした。組み込みのものに戻します。</string>
+  <string name="err_rendertheme_invalid">選択した描画テーマはこのMapsforgeバージョンに対して有効ではありません。組み込みのものに戻します。</string>
   <string name="warn_save_nothing">保存すべきものがありません。</string>
   <string name="warn_no_cache_coord">座標のあるキャッシュがありません。</string>
   <string name="warn_no_coordinates">座標が入力されていません。</string>
   <string name="warn_no_keyword">キーワードが入力されていません。</string>
   <string name="warn_no_username">ユーザ名が入力されていません。</string>
+  <string name="warn_no_connector">現在この種類の検索に有効なジオキャッシング サービスは提供されていません。</string>
   <string name="warn_search_help_title">ヘルプが必要?</string>
   <string name="warn_search_help_address">住所、地名や名称を入力してください。例:住所の「Radlicka 100, Prague, Czech Republic」、都市名の「ベルリン」、または「イエローストーン国立公園」のような名称。</string>
   <string name="warn_search_help_gccode">ジオキャッシュコード(GCコード)を入力してください。例:「GC1VCAZ」。</string>
@@ -221,6 +229,7 @@
   <string name="warn_rendertheme_missing">地図のテーマファイルが見つかりません。</string>
   <string name="warn_pocket_query_select">ポケット・クエリが選択されていません。</string>
   <string name="warn_no_pocket_query_found">オンラインのポケット・クエリが見つかりませんでした。</string>
+  <string name="err_read_pocket_query_list">ポケット・クエリ リストの読み取りエラー。</string>
   <string name="info_log_posted">ログを投稿しました。</string>
   <string name="info_log_saved">ログを保存しました。</string>
   <string name="info_log_post_failed">ログの投稿に失敗しました。</string>
@@ -236,6 +245,7 @@
   <string name="err_trackable_log_not_anonymous">c:geoから%1$sに匿名によるログインはできません。設定を開き、%2$s からあなたの認証情報を入力しますか?</string>
   <string name="err_trackable_no_preference_activity">申し訳ありませんが、適切な環境設定の画面が見つかりませんでした。</string>
   <string name="warn_discard_changes">保存されてないウェイポイントの変更が廃棄されました！</string>
+  <string name="err_request_popup_info">c:geo がキャッシュ ポップアップ情報の取得に失敗しました。</string>
   <!-- location service -->
   <string name="loc_last">判明した最後の位置</string>
   <string name="loc_net">ネットワーク</string>
@@ -316,6 +326,8 @@
   <string name="caches_refresh_all">全てのキャッシュを更新</string>
   <string name="caches_move_selected">選択したキャッシュを移動</string>
   <string name="caches_move_all">全てのキャッシュを移動</string>
+  <string name="caches_copy_selected">選択内容のコピー</string>
+  <string name="caches_copy_all">すべてコピー</string>
   <string name="caches_map_locus">Locus</string>
   <string name="caches_map_locus_export">Locusにエクスポート</string>
   <string name="caches_recaptcha_title">reCAPTCHA</string>
@@ -338,15 +350,21 @@
   <string name="caches_filter_personal_data">個人データあり</string>
   <string name="caches_filter_rating">評価あり</string>
   <string name="caches_filter_own_rating">自己評価あり</string>
+  <string name="caches_filter_multi_listing">異なる状態で複数のリストに存在</string>
   <string name="caches_removing_from_history">履歴から削除中…</string>
   <string name="caches_clear_offlinelogs">全てのオフラインログを削除</string>
   <string name="caches_clear_offlinelogs_message">オフラインのログを削除します？</string>
   <string name="caches_clear_offlinelogs_progress">全てのオフラインログを削除中</string>
+  <string name="caches_make_list_unique">リストを一意にする</string>
+  <string name="caches_filter_missing_gcvote">発見したキャッシュは評価されていません</string>
   <!-- caches lists -->
   <string name="list_menu_create">新しいリストを作成</string>
+  <string name="list_menu_drop">このリストを削除</string>
   <string name="list_menu_rename">このリスト名を変更</string>
   <string name="list_menu_import">インポート</string>
   <string name="list_title">リストの選択</string>
+  <string name="lists_title">リストの選択</string>
+  <string name="lists_remove_all">なし</string>
   <string name="list_inbox">保存済み</string>
   <string name="list_all_lists">全てのキャッシュ</string>
   <string name="list_dialog_create_title">新しいリスト</string>
@@ -373,13 +391,18 @@
   <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
   <string name="about_help">ヘルプ</string>
   <string name="about_system_include">バグ報告を送信するときに、またはc:geoについてインフォを要求するときに次のシステムの情報を含めて送信してください：</string>
+  <string name="about_system_info_send_button">メールで送信…</string>
+  <string name="about_system_info">c:geo システム情報</string>
+  <string name="about_system_info_send_chooser">システム情報を送信</string>
   <string name="changelog_github">すべての変更の一覧</string>
   <!-- settings -->
+  <string name="settings_title_open_settings">設定を開きますか?</string>
   <string name="settings_title_services">サービス</string>
   <string name="settings_summary_services">ユーザー・アカウントの情報と任意なサービスへのアクセスの設定。</string>
   <string name="settings_title_appearance">外観</string>
   <string name="settings_summary_appearance">距離単位や言語やアプリの色の設定。</string>
   <string name="settings_title_cachedetails">キャッシュの詳細</string>
+  <string name="settings_summary_cachedetails">キャッシュ情報の表示をカスタマイズします。</string>
   <string name="settings_title_offlinedata">オフラインデータ</string>
   <string name="settings_summary_offlinedata">オフライン地図やオフラインデータ保存の設定。</string>
   <string name="settings_title_logging">ログ</string>
@@ -410,18 +433,32 @@
   <string name="settings_info_facebook_login">c:geoからFacebookのアカウントでgeocaching.comにログインすることはできません。 しかし簡単に回避することはできます…</string>
   <string name="settings_authorize">c:geoを認証</string>
   <string name="settings_reauthorize">再度c:geoを認証</string>
+  <string name="settings_gc_description">geocaching.comでc:geoを認証し、キャッシュを検索します。</string>
+  <string name="settings_ec_description">c:geoをextremcaching.comで認証して、キャッシュを検索したり、見つけたキャッシュにアクセス/フィルタリングします。</string>
+  <string name="settings_su_description">c:geoをgeocaching.suで認証し、キャッシュを検索します。</string>
   <string name="init_oc">Opencaching.de</string>
   <string name="settings_activate_oc">有効化</string>
+  <string name="init_summary_oc_de">opencaching.de からキャッシュをロード</string>
   <string name="init_oc_de_description">キャッシュを検索したり見つけたキャッシュにアクセス/フィルタリングしたりするためにc:geoにopencaching.deを認証させる。</string>
   <string name="settings_activate_oc_pl">有効化</string>
+  <string name="init_summary_oc_pl">opencaching.pl からキャッシュをロード</string>
   <string name="init_oc_pl_description">キャッシュを検索したり見つけたキャッシュにアクセス/フィルタリングしたりするためにc:geoにopencaching.plを認証させる。</string>
   <string name="settings_activate_oc_nl">有効化</string>
+  <string name="init_summary_oc_nl">opencaching.nl からキャッシュをロード</string>
   <string name="init_oc_nl_description">キャッシュを検索したり見つけたキャッシュにアクセス/フィルタリングしたりするためにc:geoにopencaching.nlを認証させる。</string>
   <string name="settings_activate_oc_us">有効化</string>
+  <string name="init_summary_oc_us">opencaching.us からキャッシュをロード</string>
   <string name="init_oc_us_description">キャッシュを検索したり見つけたキャッシュにアクセス/フィルタリングしたりするためにc:geoにopencaching.usを認証させる。</string>
   <string name="settings_activate_oc_ro">有効化</string>
+  <string name="init_summary_oc_ro">opencaching.ro からキャッシュをロード</string>
   <string name="init_oc_ro_description">キャッシュを検索したり見つけたキャッシュにアクセス/フィルタリングしたりするためにc:geoにopencaching.roを認証させる。</string>
+  <string name="init_oc_uk">opencache.uk</string>
   <string name="settings_activate_oc_uk">有効化</string>
+  <string name="init_summary_oc_uk">opencache.uk からキャッシュをロード</string>
+  <string name="init_oc_uk_description">c:geoをopencache.ukで認証して、キャッシュを検索したり、見つけたキャッシュにアクセス/フィルタリングします。</string>
+  <string name="init_su">Geocaching.su</string>
+  <string name="init_summary_su">Geocaching.su からキャッシュをロード</string>
+  <string name="settings_activate_su">有効化</string>
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_gcvote_password_description">キャッシュを評価するためにGCVote.comにある指図を従ってここにGCVoteのパスワードを入力してください。</string>
   <string name="err_gcvote_send_rating">評価の送信が失敗しました。設定でGCVoteのパスワードを確認してください。</string>
@@ -435,6 +472,7 @@
   <string name="init_login_popup_working">ログイン中…</string>
   <string name="init_login_popup_ok">ログイン完了</string>
   <string name="init_login_popup_failed">ログイン失敗</string>
+  <string name="init_login_popup_failed_reason">ログインに失敗しました: %s</string>
   <string name="init_login_popup_not_authorized">認証できませんでした</string>
   <string name="init_login_popup_invalid_timestamp">デバイスの時刻が正しくありません。時刻の設定をしてください。</string>
   <string name="init_login_popup_invalid_token">認証できませんでした。再度認証してください。</string>
@@ -496,7 +534,9 @@
   <string name="init_backup_success">キャッシュのデータベースは正常にバックアップされました。</string>
   <string name="init_backup_failed">キャッシュのデータベースをバックアップできませんでした。</string>
   <string name="init_backup_unnecessary">キャッシュのデータベースは空です。バックアップの必要はありません。</string>
+  <string name="init_backup_no_backup_available">バックアップ ファイルはありません。</string>
   <string name="backup_confirm_overwrite">%sの既存バックアップを上書きしますか？</string>
+  <string name="restore_confirm_overwrite">バックアップでお使いのデバイス上の %s を上書きしますか?</string>
   <string name="init_restore_success">キャッシュのデータベースは正常にリストアされました。</string>
   <string name="init_restore_failed">キャッシュのデータベースをリストアできませんでした。</string>
   <string name="init_restore_running">キャッシュのデータベースをリストア中…</string>
@@ -516,6 +556,7 @@
   <string name="init_maptrail">軌跡表示</string>
   <string name="init_summary_maptrail">地図に軌跡を表示</string>
   <string name="init_share_after_export">エクスポートした後に共有メニューを表示</string>
+  <string name="init_include_found_status">\"見つかった\"ステータスを含める</string>
   <string name="init_trackautovisit">トラッカブル「訪れた」設定</string>
   <string name="init_summary_trackautovisit">「見つけた」ログを書く際に、持っているトラッカブルを自動的に「訪れた」にする</string>
   <string name="init_sigautoinsert">署名を自動的に挿入</string>
@@ -528,6 +569,7 @@
   <string name="init_default_navigation_tool_2_description">2番目にお好きなナビツールを選択できます。キャッシュ情報のタイトルの右隣にあるナビアイコンを長押しすると起動できます。</string>
   <string name="init_navigation_menu_description">ここでキャッシュまたはウェイポイントのナビゲーションメニューに表示される利用可能なナビゲーション方法を選択できる。暗くなっているツールはこのデバイスではインストールされていない。</string>
   <string name="init_debug_title">デバッグ情報</string>
+  <string name="init_debug_note">c:geoは、多くのデバッグ情報を生成することができます。しかし、この設定を有効にするとc:geoの安定性に影響を与えることがあります。開発者にログを送信するように求められた場合にのみお勧めします。</string>
   <string name="init_debug">デバッグ情報を作成する</string>
   <string name="init_dbonsdcard_title">データベースの保存場所</string>
   <string name="init_dbonsdcard_note">c:geoのデータベースを外部メディア(SDカード)に保存することもできます。その場合は端末の内蔵メモリの空き容量は増えますが、c:geoはSDカードなしでは使用できなくなり動作も少し遅くなるかもしれません。</string>
@@ -548,10 +590,21 @@
   <string name="init_location_note">グーグルプレイサービスのあるデバイスにはc:geoが自動的により正確な位置情報プロバイダーを使える。しかし、外部のBluetooth GPSが使えなくなる。</string>
   <string name="init_location_googleplayservices">グーグルプレイサービスを使用する</string>
   <string name="init_low_power">低消費電力モード</string>
+  <string name="init_low_power_note">低消費電力モードは、長い測位時間をかけて非常に正確な場所が必要ない場合に、GPSとジャイロスコープの使用を回避します。</string>
+  <string name="init_low_power_mode">低消費電力モードを有効にする</string>
+  <string name="init_force_orientation_sensor_title">方位センサー</string>
+  <string name="init_force_orientation_sensor_note">一部のデバイスでは、通常の回転ベクトル センサーの動作が不安定で、間違った方向を与えます。この場合、代替センサー (方位センサー) がより良い結果を得られることがあります。</string>
+  <string name="init_force_orientation_sensor">方位センサーを強制的に使用する</string>
   <string name="init_create_memory_dump">メモリ・ダンプを作成</string>
   <string name="init_memory_dump">メモリ・ダンプ</string>
   <string name="init_memory_dumped">%sへメモリがダンプされた</string>
+  <string name="init_hardware_acceleration_title">ハードウェアアクセラレーテッドレンダリング</string>
+  <string name="init_hardware_acceleration_note">ハードウェア アクセラレーションは、画面のグラフィカルな要素を高速にレンダリングします。しかし一部のデバイスで、Android オペレーティング システムにバグが含まれていて、一部のテキスト (特に太字の文字) がぼやけて表示されます。これが発生する場合は、ハードウェア アクセラレーションを無効にしてください。</string>
+  <string name="init_hardware_acceleration">ハードウェアアクセラレーションを有効にする</string>
+  <string name="settings_create_account">アカウントを作成</string>
   <string name="settings_open_website">サイトを開く</string>
+  <string name="settings_open_geokrety_register">GeoKrety.org 登録ページを開く</string>
+  <string name="settings_open_geokretymap_website">GeoKretyMap.org webサイトを開く</string>
   <string name="settings_settings">設定</string>
   <string name="settings_information">情報</string>
   <string name="settings_advanced">詳細設定</string>
@@ -561,6 +614,7 @@
   <string name="settings_ec_icons_other">独自のスタイル</string>
   <string name="settings_ec_icons_oc">OCと同じ</string>
   <string name="settings_features">サポートされている機能</string>
+  <string name="feature_description">このwebサイトの次の <b>オンライン</b> 機能は、(オフライン機能に加えて) c:geo でサポートされます:</string>
   <string name="feature_personal_notes">パーソナルノート</string>
   <string name="feature_online_logging">オンラインでログを投稿する</string>
   <string name="feature_log_images">ログに画像を添付する</string>
@@ -572,6 +626,9 @@
   <string name="feature_search_geocode">GCコードで検索</string>
   <string name="feature_search_owner">隠したユーザー名で検索</string>
   <string name="feature_search_finder">発見したユーザー名で検索</string>
+  <string name="init_experimental_title">実験的な機能</string>
+  <string name="init_mfbeta">デフォルトとして Mapsforge ベータ版</string>
+  <string name="init_mfbeta_description">現在のリリースには、実験的な機能として新しいMapsforge地図のベータ版が含まれています。ここで、ライブと一覧のデフォルトとして、この新しい地図を有効にすることができます。</string>
   <!-- map sources -->
   <string name="map_source_google_map">Googleマップ:地図</string>
   <string name="map_source_google_satellite">Googleマップ:航空写真</string>
@@ -584,33 +641,58 @@
   <string name="init_sendToCgeo_description"><b>Send2cgeo</b>はPCのブラウザ(FirefoxとChrome)で表示してるキャッシュ情報をアンドロイド端末に直接送ることができます。 登録する前に<a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a> (英語)をお読みください。簡単な登録とブラウザに拡張機能のインストールが必要です。このSend2cgeo 機能を使用しないのなら登録は不要です。</string>
   <string name="init_sendToCgeo_register">登録を申請</string>
   <string name="init_sendToCgeo_registering">send2cgeo にこの端末を登録しています…</string>
+  <string name="init_sendToCgeo_register_ok">登録しました。PIN コードは %d です。お使いのブラウザーにc:geoウェブサイトでこれを使用してこのデバイスを接続します。</string>
   <string name="init_sendToCgeo_register_fail">登録に失敗しました。</string>
   <string name="sendToCgeo_download_fail">キャッシュ情報がダウンロードできませんでした。インターネットに未接続かSend2cgeoのサーバが停止中です。</string>
   <string name="sendToCgeo_no_registration">キャッシュ情報がダウンロードできませんでした。 send2 cgeoの登録期限が過ぎました。再度、設定画面から登録してください。</string>
   <!-- auth generic -->
   <string name="auth_twitter">Twitter</string>
   <string name="auth_authorize">c:geoを認証</string>
+  <string name="auth_check">認証を確認</string>
+  <string name="auth_check_again">もう一度認証を確認</string>
   <string name="auth_start">認証を開始</string>
   <string name="auth_again">再度認証を開始</string>
+  <string name="auth_register">アカウントを作成</string>
+  <string name="auth_connected">接続しました</string>
+  <string name="auth_unconnected">まだ接続されていません</string>
+  <string name="auth_connected_as">%s として接続しました</string>
   <string name="auth_dialog_waiting">%sからの返答を待っています…</string>
   <string name="auth_explain_short">次のプロセスは<b>c:geo</b>に%sへのアクセスを許可させる。</string>
+  <string name="auth_explain_long">「c:geoを認証」ボタンを押すと、処理が開始されます。この処理は、webブラウザーで %s ページを開きます。このページにログインして、アカウントに <b>c:geo</b> のアクセスを許可します。以上です。</string>
+  <string name="auth_forget_title">認証を忘れますか?</string>
+  <string name="auth_forget_message">このサービスから切断します。現在保存されている資格情報は失われます。</string>
   <!-- auth credentials -->
+  <string name="auth_credentials_explain_short">次の処理で、<b>c:geo</b> が %s にアクセスできるようになります。</string>
+  <string name="auth_credentials_explain_long">資格情報を入力して、「認証を確認」ボタンを押すと処理を開始します。この処理は %s に接続し、資格情報を検証します。以上です。</string>
   <!-- auth token -->
   <string name="auth_token_register">アカウントを作成</string>
+  <string name="auth_token_explain_short">次の処理で、<b>c:geo</b> が %s にアクセスできるようになります。</string>
+  <string name="auth_token_explain_long">資格情報を入力して「c:geoを承認」ボタンを押すと、処理を開始します。この処理は %s に接続して、認証トークンを取得します。以上です。</string>
   <!-- auth Twitter -->
   <string name="auth_dialog_completed_twitter">c:geoはTwitterにポストするための認証を受けました。</string>
   <!-- auth opencaching -->
   <string name="auth_ocde">opencaching.de</string>
+  <string name="auth_ocuk">opencache.uk</string>
   <string name="auth_dialog_completed_oc">c:geoは%sと連携するための認証を受けました。</string>
   <!-- auth geokrety -->
+  <string name="auth_dialog_completed_geokrety">c:geoは%sと連携するための認証を受けました。</string>
+  <string name="err_auth_geokrety_bad_password">ユーザ名/パスワードが正しくないようです。</string>
+  <string name="err_auth_geokrety_unknown">%1$s の戻り: %2$s。</string>
   <!-- cache -->
   <plurals name="cache_counts">
     <item quantity="other">%1$d キャッシュ</item>
   </plurals>
   <!-- days remaining -->
+  <plurals name="days_remaining">
+    <item quantity="other">あと %1$d 日</item>
+  </plurals>
+  <string name="last_day_available">利用可能な最後の日</string>
   <string name="cache_offline">オフライン</string>
   <string name="cache_offline_refresh">更新</string>
+  <string name="cache_offline_drop">削除</string>
   <string name="cache_offline_store">保存</string>
+  <string name="cache_offline_manage">管理</string>
+  <string name="cache_offline_store_in_list">リストに保存</string>
   <string name="cache_offline_stored">デバイスに保存済み</string>
   <string name="cache_offline_not_ready">オフライン用に保存されていません</string>
   <string name="cache_offline_time_about">約</string>
@@ -640,6 +722,7 @@
   <string name="cache_personal_note_upload">アップロード</string>
   <string name="cache_personal_note_uploading">パーソナルノートをアップロード中</string>
   <string name="cache_personal_note_upload_done">パーソナルノートをアップロードしました</string>
+  <string name="cache_personal_note_upload_error">パーソナルノートのアップロードに失敗しました</string>
   <string name="cache_personal_note_upload_cancelled">パーソナルノートのアップロードをキャンセルしました</string>
   <string name="cache_description">説明</string>
   <string name="cache_description_long">全て表示</string>
@@ -692,14 +775,21 @@
   <string name="cache_dialog_favorite_remove_message">お気に入りから削除中…</string>
   <string name="cache_menu_navigate">ナビゲーション</string>
   <string name="cache_menu_navigation_drive">ナビゲーション(自動車)</string>
+  <string name="cache_menu_navigation_drive_select_target">キャッシュそれとも駐車場?</string>
   <string name="cache_menu_navigation_walk">ナビゲーション(徒歩)</string>
+  <string name="cache_menu_navigation_transit">ナビゲーション(トランジット)</string>
   <string name="cache_menu_navigation_bike">ナビゲーション(自転車)</string>
   <string name="cache_menu_maps_directions">Googleマップ 経路・乗換</string>
+  <string name="cache_menu_osmand">OsmAnd</string>
+  <string name="cache_menu_sygic_walk">Sygic (徒歩)</string>
+  <string name="cache_menu_sygic_drive">Sygic (自動車)</string>
   <string name="cache_menu_radar">レーダー</string>
   <string name="cache_menu_map">地図</string>
+  <string name="cache_menu_mfbeta">Mapsforge ベータ版</string>
   <string name="cache_menu_map_static">オフライン地図</string>
   <string name="cache_menu_download_map_static">オフライン用に地図をダウンロード</string>
   <string name="cache_menu_rmaps">Rmaps</string>
+  <string name="cache_menu_map_ext">他の外部アプリ</string>
   <string name="cache_menu_streetview">Googleストリートビュー</string>
   <string name="cache_menu_browser">ブラウザで開く</string>
   <string name="cache_menu_visit">ログを書く</string>
@@ -712,14 +802,22 @@
   <string name="cache_menu_refresh">更新</string>
   <string name="cache_menu_share">キャッシュを共有</string>
   <string name="cache_menu_move_list">他のリストに移動</string>
+  <string name="cache_menu_copy_list">他のリストにコピー</string>
   <string name="cache_menu_whereyougo">WhereYouGo</string>
+  <string name="cache_menu_oruxmaps_online">OruxMaps (オンライン)</string>
+  <string name="cache_menu_oruxmaps_offline">OruxMaps (オフライン)</string>
   <string name="cache_menu_pebble">Pebble</string>
   <string name="cache_menu_vote">投票する</string>
+  <string name="cache_menu_checker">Geochecker を開く</string>
+  <string name="cache_menu_ignore">キャッシュを無視</string>
+  <string name="ignore_confirm_title">ご注意ください</string>
+  <string name="ignore_confirm_message">キャッシュを無視すると geocaching.com からデータをロードするとき、このキャッシュがもう二度と発生しないことを意味します。ウェブサイトで無視を解除しないと、もう一度キャッシュを参照することはできません。</string>
   <string name="cache_status">状態</string>
   <string name="cache_status_offline_log">保存済みのログ</string>
   <string name="cache_status_found">見つかった</string>
   <string name="cache_not_status_found">未発見</string>
   <string name="cache_never_found">未発見</string>
+  <string name="cache_found_last_30_days">過去 30 日間に発見</string>
   <string name="cache_status_archived">アーカイブ済み</string>
   <string name="cache_status_disabled">無効化</string>
   <string name="cache_status_premium">プレミア会員のみ</string>
@@ -752,6 +850,8 @@
   <string name="cache_image">画像</string>
   <string name="cache_image_open_file">他のアプリで開く</string>
   <string name="cache_image_open_browser">ブラウザで開く</string>
+  <string name="cache_image_add_waypoint">ウェイポイントを追加</string>
+  <string name="cache_image_background">リストの背景画像をキャッシュ</string>
   <string name="cache_share_field">共有</string>
   <string name="cache_time_full_hours">時</string>
   <string name="cache_listed_on">Listed on %s</string>
@@ -765,11 +865,15 @@
   <!-- simple_dir_chooser -->
   <string name="simple_dir_chooser_title">フォルダの選択</string>
   <string name="simple_dir_chooser_current_path">パス:</string>
+  <string name="simple_dir_chooser_invalid_path">無効なパス</string>
   <!-- gpx -->
   <string name="gpx_import_loading_caches">GPXファイルからキャッシュをロード中</string>
+  <string name="gpx_import_loading_caches_with_filename">%1$s からキャッシュをロード中</string>
   <string name="gpx_import_loading_waypoints">ウェイポイントファイルをロード中</string>
+  <string name="gpx_import_loading_waypoints_with_filename">%1$s からウェイポイントをロード中</string>
   <string name="gpx_import_store_static_maps">オフライン地図を保存中</string>
   <string name="gpx_import_caches_imported">個のキャッシュをインポートしました</string>
+  <string name="gpx_import_caches_imported_with_filename">%2$s から %1$d キャッシュをインポートしました</string>
   <string name="gpx_import_static_maps_skipped">オフライン用地図のダウンロードを中止しました</string>
   <string name="gpx_import_title_static_maps">オフライン用に地図を保存</string>
   <string name="gpx_import_title_reading_file">ファイル読み込み中</string>
@@ -780,6 +884,7 @@
   <string name="gpx_import_error_parser">ファイルフォーマットが正しくありません</string>
   <string name="gpx_import_error_unexpected">予期せぬエラー</string>
   <string name="gpx_import_canceled">GPXファイルのインポートがキャンセルされました</string>
+  <string name="gpx_import_canceled_with_filename">%1$s からのGPXファイルのインポートがキャンセルされました</string>
   <string name="gpx_import_delete_title">ファイル削除</string>
   <string name="gpx_import_delete_message">%sを削除しますか?</string>
   <string name="gpx_import_select_list_title">GPXファイルをリストへインポート</string>
@@ -788,6 +893,8 @@
   <string name="map_file_select_title">地図ファイルの選択</string>
   <!-- theme file select -->
   <!-- import -->
+  <string name="web_import_title">send2cgeoからインポート</string>
+  <string name="web_import_waiting">send2cgeoから新しいキャッシュ情報を確認中…</string>
   <string name="web_downloading">ダウンロード中</string>
   <string name="web_downloaded">ダウンロード完了</string>
   <!-- popup -->
@@ -801,12 +908,14 @@
   <string name="waypoint_distance">距離</string>
   <string name="waypoint_name">名前</string>
   <string name="waypoint_edit">編集</string>
+  <string name="waypoint_copy_coordinates">座標をコピー</string>
   <string name="waypoint_delete">削除</string>
   <string name="waypoint_edit_title">ウェイポイントを編集</string>
   <string name="waypoint_add_title">ウェイポイントを追加</string>
   <string name="waypoint_note">メモ</string>
   <string name="waypoint_visited">訪問済み</string>
   <string name="waypoint_save">保存</string>
+  <string name="waypoint_cancel_edit">キャンセル</string>
   <string name="waypoint_loading">ウェイポイントをロード中…</string>
   <string name="waypoint_do_not_touch_cache_coordinates">キャッシュ座標を変更しない</string>
   <string name="waypoint_set_as_cache_coords">c:geo内部のみでキャッシュ座標を変更</string>
@@ -832,6 +941,7 @@
   <string name="search_history_cleared">全履歴を削除しました</string>
   <string name="waypoint_coordinate_formats_plain">プレーン</string>
   <string name="from_clipboard">クリップボードから</string>
+  <string name="copy_to_clipboard">クリップボードにコピー</string>
   <!-- visit -->
   <string name="visit_tweet">この発見をTwitterでつぶやく</string>
   <!-- map -->
@@ -842,6 +952,7 @@
   <string name="map_trail_show">軌跡を表示</string>
   <string name="map_circles_show">0.1マイル円を表示</string>
   <string name="map_mycaches_hide">所有/見つけたキャッシュを非表示</string>
+  <string name="map_disabled_hide">無効化キャッシュを非表示</string>
   <string name="map_theme_builtin">デフォルト</string>
   <string name="map_theme_select">地図のテーマを選択</string>
   <string name="map_live_enable">オンラインで取得</string>
@@ -857,6 +968,12 @@
   <string name="map_strategy_auto">自動(移動速度に依存)</string>
   <string name="map_strategy_detailed">詳細(「速い」+詳細)</string>
   <string name="live_map_notification">現バージョンではオンライン地図の座標は正確とは限りません。不正確と思われる座標のキャッシュはオレンジ色の丸で表示されます。\nキャッシュの詳細を表示したりオフライン用に保存する際には正確な座標を取得します。\n\n詳しくはアプリ内の「c:geoについて」の変更履歴(英語)をご覧ください。</string>
+  <string name="map_select_multiple_items">アイテムを選択</string>
+  <string name="map_routing">ルート検索</string>
+  <string name="map_routing_straight">直線</string>
+  <string name="map_routing_walk">徒歩</string>
+  <string name="map_routing_bike">自転車</string>
+  <string name="map_routing_car">車</string>
   <!-- search -->
   <string name="search_bar_hint">キャッシュ検索</string>
   <string name="search_bar_desc">キャッシュ(GCコード,キーワード), トラッカブル(TBコード)</string>
@@ -891,10 +1008,13 @@
   <string name="trackable_details_loading">トラッカブルの詳細をロード中…</string>
   <string name="trackable_log_touch">ログを書く</string>
   <string name="trackable_browser_open">ブラウザで開く</string>
+  <string name="trackable_refresh">更新</string>
   <string name="trackable_goal">目的</string>
   <string name="trackable_details">詳細</string>
   <string name="trackable_image">画像</string>
+  <string name="trackable_code">トラッキング・コード</string>
   <string name="trackable_name">名前</string>
+  <string name="trackable_brand">ブランド</string>
   <string name="trackable_type">タイプ</string>
   <string name="trackable_owner">オーナー</string>
   <string name="trackable_spotted">現在地</string>
@@ -902,13 +1022,16 @@
   <string name="trackable_spotted_at_user">持っている人:</string>
   <string name="trackable_spotted_unknown_location">不明</string>
   <string name="trackable_spotted_owner">オーナーの手元</string>
+  <string name="trackable_spotted_archived">アーカイブ済み</string>
   <string name="trackable_origin">出発地</string>
   <string name="trackable_unknown">不明</string>
   <string name="trackable_released">リリース</string>
   <string name="trackable_distance">総移動距離</string>
   <string name="trackable_touch">見つけた</string>
   <string name="trackable_not_activated">有効化されていないトラッカブル</string>
+  <string name="trackable_travelbug">Travelbug</string>
   <string name="trackable_geokrety">GeoKrety</string>
+  <string name="trackable_geolutins">GeoLutins</string>
   <string name="geokret_type_traditional">トラディショナル</string>
   <string name="geokret_type_book_or_media">本または電子メディア</string>
   <string name="geokret_type_human">人</string>
@@ -921,13 +1044,17 @@
   <string name="user_menu_open_browser">ブラウザでプロフィールを開く</string>
   <string name="user_menu_send_message">メッセージを送信</string>
   <string name="user_menu_open_contact">連絡先を開く</string>
+  <string name="user_unknown">不明なユーザ</string>
   <!-- navigation -->
   <string name="navigation">ナビゲーション</string>
   <string name="compass_title">コンパス</string>
+  <string name="use_gps">GPS のみ使用</string>
+  <string name="use_compass">GPS と磁気コンパスを使用</string>
   <string name="destination_select">目的地を選択</string>
   <string name="navigation_direct_navigation">Direct Navigation</string>
   <string name="navigation_target">Target</string>
   <string name="err_nav_no_coordinates">座標値が未入力なのでナビゲーションが開始できません</string>
+  <string name="osmand_marker_cgeo">c:geoからのマーカー</string>
   <!-- license -->
   <string name="license">ライセンス</string>
   <string name="license_show">ライセンスを表示</string>
@@ -936,10 +1063,14 @@
   <string name="helper_calendar_title">c:geo - カレンダーアドオン</string>
   <string name="helper_calendar_missing">c:geo - カレンダーアドオンはインストールされていません。</string>
   <string name="helper_calendar_description">イベントキャッシュをカレンダーアプリに登録することができます。</string>
+  <string name="helper_calendar_pastevent_title">過去のイベント</string>
+  <string name="helper_calendar_pastevent_question">イベントの日付が過去です。それでも追加しますか?</string>
   <string name="helper_sendtocgeo_title">Send to c:geo</string>
   <string name="helper_contacts_title">c:geo - 連絡先アドオン</string>
+  <string name="helper_contacts_description">友達にヘルプをより簡単に求めることができるように、ログ エントリから直接 (アドレス帳の) 連絡先カードを開くことができるようになります。</string>
   <string name="helper_sendtocgeo_description">Send to c:geoは<strong>PC用</strong>ブラウザの拡張機能です。PCのブラウザで表示してるキャッシュ情報をアンドロイド端末に直接送ることができます。</string>
   <string name="helper_locus_title">Locus</string>
+  <string name="helper_locus_description">お使いの携帯電話またはタブレット用の屋外ナビゲーション アプリ。地形図をオフラインで表示、ルートを追跡、ジオキャッシュを獲得、音声ガイドを使用、などを行います。</string>
   <string name="helper_gpsstatus_description">c:geoでこのアプリのレーダーを利用することができます。その他、GPSに関するたくさんの情報が得られます。</string>
   <string name="helper_bluetoothgps_title">Bluetooth GPS</string>
   <string name="helper_bluetoothgps_description">外部GPSデバイスを利用することができます。より正確な位置情報を得られ、アンドロイド端末のバッテリ消費が少なくなるかもしれません。</string>
@@ -950,12 +1081,18 @@
   <string name="helper_google_translate_title">Google 翻訳</string>
   <string name="helper_google_translate_description">キャッシュの詳細でロングタップすればGoogle翻訳アプリで簡単に翻訳できます。
 Google翻訳アプリで各言語の辞書をダウンロードしておけばオフラインでも使用できます。</string>
+  <string name="helper_wear_title">c:geo Wear</string>
+  <string name="helper_wear_description">c:geo Wearは、Android Wear のスマートウォッチを使用してジオキャッシュに移動することができる c:geo 用のプラグインです。</string>
   <string name="helper_where_you_go_title">WhereYouGo</string>
   <string name="helper_where_you_go_description">WhereYouGo は、再生型 Wherigo のジオキャッシュを検索ことができます。c:geo は、このアプリ内でカートリッジのダウンロードを自動的にトリガーできます。</string>
+  <string name="helper_brouter_title">BRouter オフライン ナビゲーション</string>
+  <string name="helper_brouter_description">BRouterは、オフラインのルート検索を提供します。インストールされていて、必要なファイルがダウンロードされている場合、c:geoは自動的に内部の地図にキャッシュへのルートを表示します。</string>
   <!-- add-ons -->
   <string name="addon_missing_title">アドオンが見つかりません</string>
   <string name="addon_download_prompt">Google Playからインストールしますか?</string>
   <!-- export -->
+  <string name="export">エクスポート</string>
+  <string name="export_progress">エクスポート: %1$s</string>
   <string name="export_exportedto">にエクスポートしました</string>
   <string name="export_failed">エクスポートに失敗しました</string>
   <string name="export_fieldnotes">フィールドノート</string>
@@ -968,6 +1105,13 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
   <string name="export_gpx">GPX</string>
   <string name="export_gpx_info">GPXファイルは%1$sフォルダに保存され、ファイル名は現在の日時になります。</string>
   <string name="export_gpx_to">エクスポートしたGPXファイルを送る:</string>
+  <string name="export_confirm_title">エクスポート中 %1$s</string>
+  <string name="export_confirm_message">パス: %1$s\nファイル名: %2$s</string>
+  <string name="export_persnotes">パーソナルノート</string>
+  <string name="export_persnotes_uploading">パーソナルノート%1$dをアップロード中</string>
+  <plurals name="export_persnotes_upload_success">
+    <item quantity="other">%1$dノートを正常にアップロードしました</item>
+  </plurals>
   <!-- GC attributes -->
   <string name="attribute_dogs_yes">犬の同伴可</string>
   <string name="attribute_dogs_no">犬の同伴不可</string>
@@ -1165,10 +1309,45 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
   <string name="attribute_kids_2_no">子供向けではない</string>
   <string name="attribute_historic_site_yes">史跡</string>
   <string name="attribute_historic_site_no">史跡ではない</string>
+  <string name="attribute_magnetic_yes">磁気キャッシュ</string>
+  <string name="attribute_magnetic_no">磁気キャッシュはありません</string>
+  <string name="attribute_usb_cache_yes">Dead drop USB キャッシュ</string>
+  <string name="attribute_usb_cache_no">Dead drop USB キャッシュはありません</string>
+  <string name="attribute_shovel_yes">シャベルが必要な場合があります!</string>
+  <string name="attribute_shovel_no">シャベルは必要はありません!</string>
+  <string name="attribute_specific_access_yes">指定した時間で利用可能 (アクセス料が必要な場合があります)</string>
+  <string name="attribute_specific_access_no">24時間有効</string>
+  <string name="attribute_pedestrian_only_yes">徒歩でのみアクセス可能</string>
+  <string name="attribute_pedestrian_only_no">徒歩以外のアクセスも可能</string>
+  <string name="attribute_nature_cache_yes">自然環境 (森林、山など) に隠されています</string>
+  <string name="attribute_nature_cache_no">自然環境に隠れていません</string>
+  <string name="attribute_byop_yes">何か書くものを持ってください</string>
+  <string name="attribute_byop_no">自分の鉛筆は必要ありません</string>
+  <string name="attribute_safari_cache_yes">リバース キャッシュ</string>
+  <string name="attribute_safari_cache_no">リバース キャッシュはありません</string>
+  <string name="attribute_quick_cache_yes">クイック キャッシュ</string>
+  <string name="attribute_quick_cache_no">クイック キャッシュではありません</string>
+  <string name="attribute_wherigo_yes">Wherigoキャッシュ</string>
+  <string name="attribute_wherigo_no">Wherigoキャッシュはありません</string>
+  <string name="attribute_audio_cache_yes">説明にオーディオ ファイルが含まれています</string>
+  <string name="attribute_audio_cache_no">説明にオーディオ ファイルは含まれていせん</string>
+  <string name="attribute_geohotel_yes">ジオホテル キャッシュ</string>
+  <string name="attribute_geohotel_no">ジオホテル キャッシュはありません</string>
+  <string name="attribute_survey_marker_yes">測量マーカー付近</string>
+  <string name="attribute_survey_marker_no">測量マーカー付近ではありません</string>
+  <string name="attribute_offset_cache_yes">オフセット キャッシュ</string>
+  <string name="attribute_offset_cache_no">オフセット キャッシュなし</string>
   <!-- next things -->
   <string name="quote">To make geocaching easier, to make users lazier.</string>
   <string name="powered_by">carnero</string>
   <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
+  <string name="support_title">サポート</string>
+  <string name="website_title">Webサイト</string>
+  <string name="facebook_title">Facebook</string>
+  <string name="facebook_link"><a href="">c:geo ページ</a></string>
+  <string name="twitter_title">Twitter</string>
+  <string name="market_title">Google Play</string>
+  <string name="market_link"><a href="">Google Play の c:geo</a></string>
   <string name="about_twitter">キャッシュのログを書いたら<b>c:geo</b>にTwitterでつぶやいてほしい?</string>
   <string name="faq_title">よくある質問</string>
   <!-- status (used via string based resource loading) -->
@@ -1177,11 +1356,15 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
   <string name="status_new_rc" tools:ignore="UnusedResources">新しいRCバージョンがあります。\nクリックしてインストールしてください。</string>
   <string name="status_geocaching_change" tools:ignore="UnusedResources">geocaching.comが更新されましたがc:geoはまだ未対応です。\n現在、作業中です。しばらくお待ちください。</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">geocaching.comが更新されましたがオンライン地図機能はまだ未対応です。\n現在、作業中です。しばらくお待ちください。</string>
+  <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com はメンテナンス中です。 \nさまざまな問題が発生する可能性があります。</string>
   <string name="status_closeout_warning" tools:ignore="UnusedResources">Android OS 2.1未満のバージョンをご使用中ですね。申し訳ありませんがc:geoは次期リリースからOS2.1必須になりますので使用できなくなります。</string>
   <!-- text-to-speech for compass view -->
   <string name="tts_service">Talking compass</string>
   <string name="tts_start">音声案内開始</string>
   <string name="tts_stop">音声案内終了</string>
+  <string name="tts_started">音声開始</string>
+  <string name="tts_stopped">音声停止</string>
+  <string name="err_tts_lang_not_supported">現在の言語で、音声読み上げはサポートされていません。</string>
   <string name="tts_one_kilometer">1 km</string>
   <plurals name="tts_kilometers">
     <item quantity="other">%s キロメートル</item>
@@ -1205,9 +1388,75 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
   <plurals name="days_ago">
     <item quantity="other">%d日前</item>
   </plurals>
+  <plurals name="favorite_points">
+    <item quantity="other">%s のお気に入り</item>
+  </plurals>
+  <string name="more_than_percent_favorite_points">&gt; %d%% お気に入り</string>
   <!-- shortcuts -->
+  <string name="cgeo_shortcut">c:geo ショートカット</string>
+  <string name="create_shortcut">ショートカットを作成</string>
+  <string name="send">送信</string>
+  <string name="showcase_logcache_title">ログを送信中</string>
+  <string name="showcase_logcache_text">ご注意ください。多くのコマンドがタイトル バーに入りました。完了したログを送信するボタンもあります。</string>
+  <string name="showcase_main_title">メニュー バー</string>
+  <string name="showcase_main_text">c:geoのいくつかの機能は、メニューバーでアクセスできるか、ドット記号の後ろのメニューに含まれています。ボタンを長押しすると説明を表示することができます。</string>
   <string name="showcase_cachelist_title">リストを切り替え</string>
+  <string name="showcase_cachelist_text">リストのタイトルをクリックして、ジオキャッシュのリストを切り替えることができます。</string>
+  <string name="showcase_compass_hint_title">ヒントを表示</string>
+  <string name="showcase_compass_hint_text">このメニュー項目は、キャッシュを見つけるアイデアを与えてくれる可能性があります - 可能な場合、ヒントを示しています。</string>
+  <string name="confirm_log_title">異常なログのタイプ</string>
+  <string name="confirm_log_message">\'%s\' をログに記録します。よろしいですか?</string>
   <!-- Geokrety -->
+  <string name="settings_activate_geokrety">有効化</string>
   <string name="init_geokrety">GeoKrety.org</string>
+  <string name="init_connectorGeokretyActive">Geokrety トラッカブル</string>
+  <string name="init_summary_geokrety">GeoKrety.org からトラッカブルを有効にする</string>
+  <string name="init_summary_geokrety_account">アカウントが設定されていません。</string>
+  <string name="init_geokrety_register_ok">ログインに成功しました</string>
+  <string name="init_geokrety_register_fail">ログインに失敗しました</string>
+  <string name="init_geokrety_description">GeoKrety.org で c:geo を認証して、GeoKrety トラッカブルをログに記録します。</string>
+  <string name="init_geokrety_cache_description">GeokretyMap.org は GeoKrety トラッカブルのキャッシュされたデータを提供します。\n利用可能なデータには \'説明\' または \'行方不明\' 状態のようなより多くの GeoKrety 情報が含まれています。\n\nデータはライブではありません!\n位置: ~30 分。\n説明: ~24時間。</string>
+  <string name="init_geokrety_cache">GeoKretyMap.org を使用する</string>
+  <string name="init_geokrety_userid">ユーザID: %s</string>
+  <string name="trackable_title_log_without_geocode">ジオコードが設定されていません</string>
+  <string name="trackable_log_without_geocode">ジオコードのないログを送信しようとしています。それは設定することが奨励されています。今すぐ追加しますか?</string>
+  <string name="do_not_ask_me_again">次回から表示しない</string>
+  <string name="geokrety_parsing_failed">GeoKrety レスポンスを解析できませんでした。</string>
+  <string name="settings_map_direction">方向を表示</string>
+  <string name="settings_summary_map_direction">ナビゲーション ターゲットへの方向線を表示します</string>
+  <string name="map_direction">方向を表示</string>
+  <string name="command_move_caches_progress">リスト %1s にキャッシュを移動中</string>
+  <plurals name="command_move_caches_result">
+    <item quantity="other">%d キャッシュを移動しました</item>
+  </plurals>
+  <string name="command_copy_caches_progress">リスト %1s にキャッシュをコピー中</string>
+  <plurals name="command_copy_caches_result">
+    <item quantity="other">%d キャッシュをコピーしました</item>
+  </plurals>
+  <string name="command_delete_caches_progress">キャッシュを削除中</string>
+  <plurals name="command_delete_caches_result">
+    <item quantity="other">%d キャッシュを削除しました</item>
+  </plurals>
+  <string name="command_rename_list_result">リスト名を変更しました</string>
+  <string name="command_delete_list_result">リストを削除しました</string>
+  <string name="command_unique_list_result">他のリストからキャッシュを削除しました</string>
+  <string name="fav_points_remaining">"このキャッシュをお気に入りに追加 (残り %s)"</string>
   <!-- distance units -->
+  <string name="unit_m">m</string>
+  <string name="unit_km">km</string>
+  <string name="unit_ft">ft</string>
+  <string name="unit_yd">yd</string>
+  <string name="unit_mi">mi</string>
+  <string name="pq_available_for_download">ポケット・クエリのダウンロードが可能</string>
+  <string name="pq_available_for_download_description">このポケット・クエリは、1 つのファイル (gpx) としてダウンロード可能です。ダウンロードしてインポート、それともキャッシュをリストとして表示しますか?</string>
+  <string name="pq_as_cache_list">キャッシュリストを表示</string>
+  <string name="pq_download_and_import">ポケット・クエリのインポート</string>
+  <string name="pq_my_finds">自分の発見</string>
+  <string name="caches_refresh_all_warning">この操作は、ネットワーク通信量が高くなる可能性があります。すべてのキャッシュを一括更新してもよろしいですか?</string>
+  <string name="invitation_action">友達を招待</string>
+  <string name="invitation_title">c:geo を使用するように友達を招待します</string>
+  <string name="invitation_message">ジオキャッシングのc:geo アプリを試してみてください</string>
+  <string name="cache_list_remove_from">リストから削除</string>
+  <string name="list_list_headline">リスト:</string>
+  <string name="cache_store_list">リストに保存</string>
 </resources>

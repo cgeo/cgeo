@@ -92,7 +92,7 @@
   <string name="log_posting_image">Lähetetään kuvaa…</string>
   <string name="log_posting_generic_trackable">Lähetetään %1$s %2$s/%3$s</string>
   <string name="log_clear">Tyhjennä</string>
-  <string name="log_post_not_possible">Datan lataus käynnissä...\nYritäthän hetken kuluttua uudelleen tai tarkista internet yhteytesi.</string>
+  <string name="log_post_not_possible">Datan lataus käynnissä…\nYritäthän hetken kuluttua uudelleen tai tarkista internet yhteytesi.</string>
   <string name="log_post_geocode_missing">Geokoodi puuttuu…</string>
   <string name="log_date_future_not_allowed">Tulevaisuuden päivämäärät eivät ole sallittuja lokissa.</string>
   <string name="log_add">Lisää</string>
@@ -1412,7 +1412,7 @@
   <string name="do_not_ask_me_again">Älä kysy uudelleen</string>
   <string name="geokrety_parsing_failed">GeoKretyn vastauksen jäsentäminen epäonnistui.</string>
   <string name="settings_map_direction">Näytä suunta</string>
-  <string name="settings_summary_map_direction">Näytä suuntaviiva navigointi kohteelle</string>
+  <string name="settings_summary_map_direction">Näytä suuntaviiva navigointikohteelle</string>
   <string name="map_direction">Näytä suunta</string>
   <string name="command_move_caches_progress">Siirretään kätköjä luetteloon %1s</string>
   <plurals name="command_move_caches_result">
