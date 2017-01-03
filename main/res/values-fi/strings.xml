@@ -244,6 +244,7 @@
   <string name="err_trackable_log_not_anonymous">Kirjautumista %1$s c:geosta ei voi tehdä anonyymisti. Haluatko avata asetukset täyttääksesi tarvittavat tiedot %2$s?</string>
   <string name="err_trackable_no_preference_activity">Valitettavasti ei löydy sopivaa asetusnäyttöä.</string>
   <string name="warn_discard_changes">Tallentamattomat etappimuutokset hylätty!</string>
+  <string name="err_request_popup_info">c:geo ei pystynyt lataamaan kätkön popupin tietoja.</string>
   <!-- location service -->
   <string name="loc_last">Viimeisin tunnettu</string>
   <string name="loc_net">Verkkoyhteys</string>
@@ -357,6 +358,7 @@
   <string name="caches_clear_offlinelogs_message">Haluatko poistaa offline lokit?</string>
   <string name="caches_clear_offlinelogs_progress">Poistetaan offline-lokit</string>
   <string name="caches_make_list_unique">Poista listan kätköt muilta listoilta</string>
+  <string name="caches_filter_missing_gcvote">Löydettyjä kätköjä ei ole äänestetty</string>
   <!-- caches lists -->
   <string name="list_menu_create">Luo uusi lista</string>
   <string name="list_menu_drop">Poista valittu lista</string>
@@ -449,7 +451,10 @@
   <string name="settings_activate_oc_ro">Aktivoi</string>
   <string name="init_summary_oc_ro">Lataa kätköt palvelusta opencaching.ro</string>
   <string name="init_oc_ro_description">Anna c:geolle lupa opencaching.ro:n käyttöön voidaksesi etsiä kätköjä sekä nähdä/valikoida löytämiäsi kätköjä.</string>
+  <string name="init_oc_uk">opencache.uk</string>
   <string name="settings_activate_oc_uk">Aktivoi</string>
+  <string name="init_summary_oc_uk">Lataa kätköt palvelusta opencache.uk</string>
+  <string name="init_oc_uk_description">Anna c:geolle lupa opencache.uk:n käyttöön voidaksesi etsiä kätköjä sekä nähdä/valikoida löytämiäsi kätköjä.</string>
   <string name="init_su">Geocaching.su</string>
   <string name="init_summary_su">Lataa kätköt palvelusta Geocaching.su</string>
   <string name="settings_activate_su">Aktivoi</string>
@@ -662,6 +667,7 @@
   <!-- auth Twitter -->
   <string name="auth_dialog_completed_twitter">c:geo on nyt valtuutettu julkaisemaan Twitterissä.</string>
   <!-- auth opencaching -->
+  <string name="auth_ocuk">opencache.uk</string>
   <string name="auth_dialog_completed_oc">c:geo on nyt valtuutettu toimimaan %s kanssa.</string>
   <!-- auth geokrety -->
   <string name="auth_dialog_completed_geokrety">c:geo on nyt valtuutettu toimimaan %s kanssa.</string>
@@ -775,6 +781,7 @@
   <string name="cache_menu_navigation_transit">Navigointi (liikenteessä)</string>
   <string name="cache_menu_navigation_bike">Navigointi (Pyöräily)</string>
   <string name="cache_menu_maps_directions">Google Maps ajo-ohjeet</string>
+  <string name="cache_menu_osmand">OsmAnd</string>
   <string name="cache_menu_sygic_walk">Sygic (kävellessä)</string>
   <string name="cache_menu_sygic_drive">Sygic (ajaessa)</string>
   <string name="cache_menu_radar">Tutka</string>
@@ -845,6 +852,7 @@
   <string name="cache_image_open_file">Avaa tiedosto</string>
   <string name="cache_image_open_browser">Avaa selaimessa</string>
   <string name="cache_image_add_waypoint">Lisää reittipiste</string>
+  <string name="cache_image_background">Kätkölistauksen taustakuva</string>
   <string name="cache_share_field">Jaa</string>
   <string name="cache_time_full_hours">Kello</string>
   <string name="cache_listed_on">Listattu %s</string>
@@ -963,6 +971,7 @@
   <string name="live_map_notification">Koordinaatit livekartalla eivät välttämättä aina ole tarkat. Mahdollisesti epätarkat koordinaatit on merkitty oranssilla ympyrällä. \nKätkön tietojen avaaminen tai kätkön tallentaminen offline-käyttöä varten antaa aina tarkat koordinaatit.\n\nLisää tietoa löytyy ohjelmasta \"tietoja c:geo\"-sivulla.</string>
   <string name="map_select_multiple_items">Valitse kohde</string>
   <string name="map_routing">Reititys</string>
+  <string name="map_routing_straight">Linnuntie</string>
   <string name="map_routing_walk">Kävely</string>
   <string name="map_routing_bike">Pyöräily</string>
   <string name="map_routing_car">Auto</string>
@@ -1046,6 +1055,7 @@
   <string name="navigation_direct_navigation">Suora navigointi</string>
   <string name="navigation_target">kohde</string>
   <string name="err_nav_no_coordinates">Ei voida aloittaa suunnistusta ilman koordinaatteja</string>
+  <string name="osmand_marker_cgeo">Merkki c:geosta</string>
   <!-- license -->
   <string name="license">Lisenssi</string>
   <string name="license_show">Näytä lisenssi</string>
