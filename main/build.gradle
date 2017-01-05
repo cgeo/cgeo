@@ -282,14 +282,17 @@ dependencies {
     compile "com.asamm:locus-api:$locusVersion"
     compile "com.asamm:locus-api-android:$locusVersion"
 
-    // Mapsforge integration
+    // Mapsforge old version
     compile files('libs/mapsforge-map-0.3.0-jar-with-dependencies.jar')
     compile 'com.caverock:androidsvg:1.2.2-beta-1'
-    def mapsforgeVersion = '0.6.1'
+
+    // Mapsforge new version
+    def mapsforgeVersion = '0.7.0'
     compile "org.mapsforge:mapsforge-core:$mapsforgeVersion"
     compile "org.mapsforge:mapsforge-map:$mapsforgeVersion"
     compile "org.mapsforge:mapsforge-map-android:$mapsforgeVersion"
     compile "org.mapsforge:mapsforge-map-reader:$mapsforgeVersion"
+    compile "org.mapsforge:mapsforge-themes:$mapsforgeVersion"
     configurations {
         all*.exclude group: 'net.sf.kxml', module: 'kxml2' // duplicate XmlPullParser class
     }
