@@ -237,7 +237,7 @@ dependencies {
 
     // Apache Commons
     compile 'org.apache.commons:commons-collections4:4.1'
-    compile 'org.apache.commons:commons-compress:1.12'
+    compile 'org.apache.commons:commons-compress:1.13'
     compile 'commons-io:commons-io:2.5'
     compile 'org.apache.commons:commons-lang3:3.5'
 
@@ -264,7 +264,7 @@ dependencies {
     compile "com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion"
 
     // Jsoup HTML parsing
-    compile 'org.jsoup:jsoup:1.10.1'
+    compile 'org.jsoup:jsoup:1.10.2'
 
     // Junit only needed for local unit tests
     testCompile 'junit:junit:4.12'
@@ -314,7 +314,7 @@ dependencies {
     compile 'com.jakewharton:process-phoenix:1.1.1'
 
     // RxJava
-    compile "io.reactivex.rxjava2:rxjava:2.0.3"
+    compile "io.reactivex.rxjava2:rxjava:2.0.4"
     compile "io.reactivex.rxjava2:rxandroid:2.0.1"
 
     // Showcase view

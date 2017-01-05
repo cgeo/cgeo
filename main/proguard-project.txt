@@ -58,6 +58,11 @@
 # IOFileFilter references FileUtils, suppress related notes
 -dontnote org.apache.commons.io.FileUtils
 
+# commons compress
+-dontwarn java.nio.channels.SeekableByteChannel
+-dontwarn java.nio.file.attribute.FileAttribute
+-dontwarn java.io.File
+
 # AssertJ -----------------------------------------------------------------------------------------
 # ignore all things in AssertJ, as long as tests are generally running fine
 -dontnote org.assertj.core.internal.**
