@@ -488,7 +488,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
             oldText = currentLogText();
             oldType = typeSelected;
             oldDate = date;
-            cache.clearOfflineLog(true);
+            cache.clearOfflineLog();
         }
 
         @Override
@@ -584,7 +584,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
                     DataStore.saveLogs(cache.getGeocode(), newLogs);
 
                     // update offline log in DB
-                    cache.clearOfflineLog(false);
+                    cache.clearOfflineLog();
 
                     if (typeSelected == LogType.FOUND_IT && tweetCheck.isChecked() && tweetCheck.getVisibility() == View.VISIBLE) {
                         publishProgress(res.getString(R.string.log_posting_twitter));
