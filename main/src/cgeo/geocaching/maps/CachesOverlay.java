@@ -103,9 +103,15 @@ public class CachesOverlay extends AbstractItemizedOverlay {
     @Override
     public void draw(final Canvas canvas, final MapViewImpl mapView, final boolean shadow) {
 
-        drawInternal(canvas, mapView.getMapProjection());
+        // prevent content changes
+        getOverlayImpl().lock();
+        try {
+            drawInternal(canvas, mapView.getMapProjection());
 
-        super.draw(canvas, mapView, false);
+            super.draw(canvas, mapView, false);
+        } finally {
+            getOverlayImpl().unlock();
+        }
     }
 
     @Override
@@ -122,39 +128,33 @@ public class CachesOverlay extends AbstractItemizedOverlay {
             return;
         }
 
-        // prevent content changes
-        getOverlayImpl().lock();
-        try {
-            lazyInitializeDrawingObjects();
-            canvas.setDrawFilter(setFilter);
-            final int height = canvas.getHeight();
-            final int width = canvas.getWidth();
+        lazyInitializeDrawingObjects();
+        canvas.setDrawFilter(setFilter);
+        final int height = canvas.getHeight();
+        final int width = canvas.getWidth();
 
-            final int radius = calculateDrawingRadius(projection);
-            final Point center = new Point();
+        final int radius = calculateDrawingRadius(projection);
+        final Point center = new Point();
 
-            for (final CachesOverlayItemImpl item : items) {
-                if (item.applyDistanceRule()) {
-                    final Geopoint itemCoord = item.getCoord().getCoords();
-                    final GeoPointImpl itemGeo = mapItemFactory.getGeoPointBase(itemCoord);
-                    projection.toPixels(itemGeo, center);
-                    if (center.x > -radius && center.y > -radius && center.x < width + radius && center.y < height + radius) {
-                        // dashed circle around the waypoint
-                        blockedCircle.setColor(0x66BB0000);
-                        blockedCircle.setStyle(Style.STROKE);
-                        canvas.drawCircle(center.x, center.y, radius, blockedCircle);
+        for (final CachesOverlayItemImpl item : items) {
+            if (item.applyDistanceRule()) {
+                final Geopoint itemCoord = item.getCoord().getCoords();
+                final GeoPointImpl itemGeo = mapItemFactory.getGeoPointBase(itemCoord);
+                projection.toPixels(itemGeo, center);
+                if (center.x > -radius && center.y > -radius && center.x < width + radius && center.y < height + radius) {
+                    // dashed circle around the waypoint
+                    blockedCircle.setColor(0x66BB0000);
+                    blockedCircle.setStyle(Style.STROKE);
+                    canvas.drawCircle(center.x, center.y, radius, blockedCircle);
 
-                        // filling the circle area with a transparent color
-                        blockedCircle.setColor(0x44BB0000);
-                        blockedCircle.setStyle(Style.FILL);
-                        canvas.drawCircle(center.x, center.y, radius, blockedCircle);
-                    }
+                    // filling the circle area with a transparent color
+                    blockedCircle.setColor(0x44BB0000);
+                    blockedCircle.setStyle(Style.FILL);
+                    canvas.drawCircle(center.x, center.y, radius, blockedCircle);
                 }
             }
-            canvas.setDrawFilter(removeFilter);
-        } finally {
-            getOverlayImpl().unlock();
         }
+        canvas.setDrawFilter(removeFilter);
     }
 
     /**
