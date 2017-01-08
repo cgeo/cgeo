@@ -2340,34 +2340,17 @@ public class DataStore {
 
     @NonNull
     private static Set<String> loadBatchOfHistoricGeocodes(final CacheType cacheType) {
-        final StringBuilder selection = new StringBuilder("visiteddate > 0");
+        final StringBuilder selection = new StringBuilder("c.visiteddate > 0");
 
         String[] selectionArgs = null;
         if (cacheType != CacheType.ALL) {
-            selection.append(" AND type = ?");
+            selection.append(" AND c.type = ?");
             selectionArgs = new String[] { String.valueOf(cacheType.id) };
         }
 
         try {
-            final Set<String> historicCaches = queryToColl(dbTableCaches,
-                    new String[]{"geocode"},
-                    selection.toString(),
-                    selectionArgs,
-                    "visiteddate",
-                    null,
-                    new HashSet<String>(),
-                    GET_STRING_0);
-
-            historicCaches.addAll(queryToColl(dbTableLogsOffline,
-                    new String[]{"geocode"},
-                    null,
-                    null,
-                    "date",
-                    null,
-                    new HashSet<String>(),
-                    GET_STRING_0));
-
-            return historicCaches;
+            final Cursor cursor = database.rawQuery("SELECT c.geocode FROM " + dbTableCaches + " c LEFT OUTER JOIN " + dbTableLogsOffline + " l ON c.geocode = l.geocode WHERE " + selection, selectionArgs);
+            return cursorToColl(cursor, new HashSet<String>(), GET_STRING_0);
         } catch (final Exception e) {
             Log.e("DataStore.loadBatchOfHistoricGeocodes", e);
         }
@@ -2661,7 +2644,7 @@ public class DataStore {
         return log;
     }
 
-    public static void clearLogOffline(final String geocode, final boolean resetVisitedDate) {
+    public static void clearLogOffline(final String geocode) {
         if (StringUtils.isBlank(geocode)) {
             return;
         }
@@ -2669,15 +2652,10 @@ public class DataStore {
         init();
 
         final String[] geocodeWhereArgs = {geocode};
-        if (resetVisitedDate) {
-            database.execSQL(
-               String.format("UPDATE %s SET visiteddate = 0 WHERE geocode IN (SELECT geocode FROM %s WHERE geocode = ?)",
-                    dbTableCaches, dbTableLogsOffline), geocodeWhereArgs);
-        }
         database.delete(dbTableLogsOffline, "geocode = ?", geocodeWhereArgs);
     }
 
-    public static void clearLogsOffline(final List<Geocache> caches) {
+    public static void clearLogsOffline(final Collection<Geocache> caches) {
         if (CollectionUtils.isEmpty(caches)) {
             return;
         }
@@ -2689,9 +2667,6 @@ public class DataStore {
         }
 
         final String geocodes = whereGeocodeIn(Geocache.getGeocodes(caches)).toString();
-        database.execSQL(
-            String.format("UPDATE %s SET visiteddate = 0 WHERE geocode IN (SELECT geocode FROM %s WHERE %s)",
-                dbTableCaches, dbTableLogsOffline, geocodes));
         database.execSQL(String.format("DELETE FROM %s WHERE %s", dbTableLogsOffline, geocodes));
     }
 
@@ -3201,7 +3176,7 @@ public class DataStore {
 
     private enum PreparedStatement {
 
-        HISTORY_COUNT("SELECT COUNT(geocode) FROM (SELECT geocode FROM " + dbTableCaches + " WHERE visiteddate > 0 UNION SELECT geocode from " + dbTableLogsOffline + ")"),
+        HISTORY_COUNT("SELECT COUNT(*) FROM " + dbTableCaches + " c LEFT OUTER JOIN " + dbTableLogsOffline + " l ON c.geocode = l.geocode WHERE c.visiteddate > 0"),
         MOVE_TO_STANDARD_LIST("UPDATE " + dbTableCachesLists + " SET list_id = " + StoredList.STANDARD_LIST_ID + " WHERE list_id = ? AND geocode NOT IN (SELECT DISTINCT (geocode) FROM " + dbTableCachesLists + " WHERE list_id = " + StoredList.STANDARD_LIST_ID + ")"),
         REMOVE_FROM_LIST("DELETE FROM " + dbTableCachesLists + " WHERE list_id = ? AND geocode = ?"),
         REMOVE_FROM_ALL_LISTS("DELETE FROM " + dbTableCachesLists + " WHERE geocode = ?"),
@@ -3289,6 +3264,7 @@ public class DataStore {
                 cache.getLists().clear();
             }
             clearVisitDate(geocodes);
+            clearLogsOffline(caches);
 
             database.setTransactionSuccessful();
         } finally {
