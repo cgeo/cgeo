@@ -370,6 +370,7 @@
     <string name="caches_filter_rating">With rating</string>
     <string name="caches_filter_own_rating">With own rating</string>
     <string name="caches_filter_multi_listing">Multi listing with different state</string>
+    <string name="caches_filter_own_waypoint">With user defined waypoints</string>
     <string name="caches_removing_from_history">Removing from History…</string>
     <string name="caches_clear_offlinelogs">Clear offline logs</string>
     <string name="caches_clear_offlinelogs_message">Do you want to clear the offline logs?</string>
@@ -863,6 +864,7 @@
     <string name="cache_menu_android_wear">Android Wear</string>
     <string name="cache_menu_vote">Vote</string>
     <string name="cache_menu_checker">Open Geochecker</string>
+    <string name="cache_menu_challenge_checker">Search challenge checker</string>
     <string name="cache_menu_ignore">Ignore cache</string>
     <string name="ignore_confirm_title">Be careful</string>
     <string name="ignore_confirm_message">Ignoring a cache means that this cache will never occur again when loading data from geocaching.com. You will only be able to see the cache again by unignoring it on the website.</string>
@@ -1031,7 +1033,7 @@
     <string name="map_strategy_fast">Fast</string>
     <string name="map_strategy_auto">Speed dependent</string>
     <string name="map_strategy_detailed">Detailed</string>
-    <string name="live_map_notification">Coordinates on the live map may not always be precise. Possibly imprecise coordinates are marked by an orange circle.\nOpening the cache details or saving the cache for offline use will always obtain precise coordinates.\n\nMore information can be found on the \"About c:geo\" page inside the app.</string>
+    <string name="live_map_notification">Coordinates on the live map may not always be precise!\nPossibly imprecise coordinates are marked by an orange circle.\n\nOpening the cache details or saving the cache for offline use will always obtain precise coordinates.</string>
     <string name="map_select_multiple_items">Select item</string>
     <string name="map_routing">Routing</string>
     <string name="map_routing_straight">Straight line</string>

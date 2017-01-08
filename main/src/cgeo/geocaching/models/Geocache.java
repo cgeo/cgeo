@@ -992,10 +992,12 @@ public class Geocache implements IWaypoint {
     /**
      * Get the current inventory
      *
-     * @return the Geocache inventory
+     * @return the inventory of Trackables as unmodifiable collection. Use {@link #setInventory(List)} or
+     *         {@link #addInventoryItem(Trackable)} for modifications.
      */
+    @NonNull
     public List<Trackable> getInventory() {
-        return inventory;
+        return inventory == null ? Collections.<Trackable> emptyList() : Collections.unmodifiableList(inventory);
     }
 
     /**
@@ -1547,7 +1549,10 @@ public class Geocache implements IWaypoint {
     }
 
     public void store() {
-        store(Collections.singleton(StoredList.STANDARD_LIST_ID), null);
+        if (lists.isEmpty()) {
+            lists.add(StoredList.STANDARD_LIST_ID);
+        }
+        storeCache(this, null, lists, false, null);
     }
 
     public void store(final Set<Integer> listIds, final DisposableHandler handler) {

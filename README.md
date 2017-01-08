@@ -27,6 +27,15 @@ Such a procedure is [described in the wiki](https://github.com/cgeo/cgeo/wiki/Ho
 Make sure to use Java 8 for your IDE and build process. Some of the involved tools require it, even though the source code is Java 7 only.
 
 ### Eclipse
+We removed the support for development in Eclipse, once we switched to a gradle based build.
+The cause for this is that Google dropped the ADT for eclipse support
+(https://android-developers.blogspot.de/2016/11/support-ended-for-eclipse-android.html).
+
+Still, there are developers in the project that uses both eclipse and Android Studio (or IntelliJ IDEA).
+They use eclipse for writing code/testing and Android Studio (or IntelliJ IDEA) for building.
+
+Here are instructions on how to setup the eclipse environment and clone the repositories as part of that setup.
+
 - Install the Eclipse installer for your OS from http://eclipse.org/downloads/. Do **not** choose any of the pre-made distributions like "Eclipse IDE for Java developers".
 - Start the installer, switch to advanced mode. On the first page of the wizard choose "Eclipse IDE for Java developers" and use "Next".
 - On the second wizard page use the "Plus" icon (you will have to search for it for a while), select the github catalog, and add the URI https://github.com/cgeo/cgeo/raw/master/main/project/eclipse%20installation/cgeo.setup. Now select the newly create tree node "cgeo" and use next.

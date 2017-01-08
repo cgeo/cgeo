@@ -53,14 +53,12 @@ import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.functions.Action1;
 
 import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources.NotFoundException;
 import android.location.Location;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -158,7 +156,6 @@ public class NewMap extends AbstractActionBarActivity {
     public static final int UPDATE_PROGRESS = 0;
     public static final int FINISHED_LOADING_DETAILS = 1;
 
-    @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -233,7 +230,6 @@ public class NewMap extends AbstractActionBarActivity {
         Routing.connect();
     }
 
-    @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
         final boolean result = super.onCreateOptionsMenu(menu);
@@ -241,17 +237,11 @@ public class NewMap extends AbstractActionBarActivity {
 
         MapProviderFactory.addMapviewMenuItems(menu);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
-            /* if we have an Actionbar find the my position toggle */
-            final MenuItem item = menu.findItem(R.id.menu_toggle_mypos);
-            myLocSwitch = new CheckBox(this);
-            myLocSwitch.setButtonDrawable(R.drawable.ic_menu_myposition);
-            item.setActionView(myLocSwitch);
-            initMyLocationSwitchButton(myLocSwitch);
-        } else {
-            // Already on the fake Actionbar
-            menu.removeItem(R.id.menu_toggle_mypos);
-        }
+        final MenuItem item = menu.findItem(R.id.menu_toggle_mypos);
+        myLocSwitch = new CheckBox(this);
+        myLocSwitch.setButtonDrawable(R.drawable.ic_menu_myposition);
+        item.setActionView(myLocSwitch);
+        initMyLocationSwitchButton(myLocSwitch);
 
         return result;
     }

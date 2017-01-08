@@ -4,7 +4,6 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.gcvote.GCVoteRatingBarUtil.OnRatingChangeListener;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Log;
@@ -12,14 +11,10 @@ import cgeo.geocaching.utils.Log;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Application;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
-import android.os.Build.VERSION;
-import android.os.Build.VERSION_CODES;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -39,17 +34,9 @@ public class GCVoteDialog {
     }
 
     public static void show(final Activity context, @NonNull final Geocache cache, @Nullable final Runnable afterVoteSent) {
-        final Context themedContext;
+        final View votingLayout = View.inflate(context, R.layout.gcvote_dialog, null);
 
-        if (Settings.isLightSkin() && VERSION.SDK_INT < VERSION_CODES.HONEYCOMB) {
-            themedContext = new ContextThemeWrapper(context, R.style.dark);
-        } else {
-            themedContext = context;
-        }
-
-        final View votingLayout = View.inflate(themedContext, R.layout.gcvote_dialog, null);
-
-        final AlertDialog.Builder builder = new AlertDialog.Builder(themedContext);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setView(votingLayout);
         builder.setPositiveButton(R.string.cache_menu_vote, new OnClickListener() {
 

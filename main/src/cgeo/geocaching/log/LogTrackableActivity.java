@@ -46,13 +46,10 @@ import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.Uri;
-import android.os.Build.VERSION;
-import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.view.ContextMenu;
-import android.view.ContextThemeWrapper;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -674,9 +671,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
             final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
             builder.setTitle(R.string.trackable_title_log_without_geocode);
 
-            final Context themedContext = Settings.isLightSkin() && VERSION.SDK_INT < VERSION_CODES.HONEYCOMB ? new ContextThemeWrapper(activity, R.style.dark) : activity;
-
-            final View layout = View.inflate(themedContext, R.layout.logtrackable_without_geocode, null);
+            final View layout = View.inflate(activity, R.layout.logtrackable_without_geocode, null);
             builder.setView(layout);
 
             doNotAskAgain = (CheckBox) layout.findViewById(R.id.logtrackable_do_not_ask_me_again);

@@ -15,7 +15,8 @@ public class PersonalDataFilterFactory implements IFilterFactory {
                 new PersonalNoteFilter(), 
                 new ModifiedFilter(), 
                 new OfflineLogFilter(),
-                new GcvoteFilter());
+                new GcvoteFilter(),
+                new OwnWaypointFilter());
     }
 
 }

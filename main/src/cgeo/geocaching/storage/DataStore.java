@@ -584,8 +584,6 @@ public class DataStore {
                 }
 
                 if (oldVersion > 0) {
-                    db.execSQL("DELETE FROM " + dbTableCaches + " WHERE reason = 0");
-
                     if (oldVersion < 52) { // upgrade to 52
                         try {
                             db.execSQL(dbCreateSearchDestinationHistory);
@@ -2435,41 +2433,27 @@ public class DataStore {
             public void run() {
                 Log.d("Database clean: started");
                 try {
-                    final int version = Version.getVersionCode(context);
                     final Set<String> geocodes = new HashSet<>();
-                    if (version != Settings.getVersion()) {
-                        queryToColl(dbTableCaches,
-                                new String[]{"geocode"},
-                                "geocode NOT IN (SELECT DISTINCT (geocode) FROM " + dbTableCachesLists + ")",
-                                null,
-                                null,
-                                null,
-                                geocodes,
-                                GET_STRING_0);
-                    } else {
-                        final long timestamp = System.currentTimeMillis() - DAYS_AFTER_CACHE_IS_DELETED;
-                        final String timestampString = Long.toString(timestamp);
-                        queryToColl(dbTableCaches,
-                                new String[]{"geocode"},
-                                "detailed < ? AND detailedupdate < ? AND visiteddate < ? AND geocode NOT IN (SELECT DISTINCT (geocode) FROM " + dbTableCachesLists + ")",
-                                new String[]{timestampString, timestampString, timestampString},
-                                null,
-                                null,
-                                geocodes,
-                                GET_STRING_0);
-                    }
+                    final String timestampString = Long.toString(System.currentTimeMillis() - DAYS_AFTER_CACHE_IS_DELETED);
+                    queryToColl(dbTableCaches,
+                            new String[]{"geocode"},
+                            "detailedupdate < ? AND visiteddate < ? AND geocode NOT IN (SELECT DISTINCT (geocode) FROM " + dbTableCachesLists + ")",
+                            new String[]{timestampString, timestampString},
+                            null,
+                            null,
+                            geocodes,
+                            GET_STRING_0);
 
                     final Set<String> withoutOfflineLogs = exceptCachesWithOfflineLog(geocodes);
                     Log.d("Database clean: removing " + withoutOfflineLogs.size() + " geocaches");
                     removeCaches(withoutOfflineLogs, LoadFlags.REMOVE_ALL);
 
-                    // remove non-existing caches from lists
-                    Log.d("Database clean: removing non-existing caches from lists");
-                    database.delete(dbTableCachesLists, "geocode NOT IN (SELECT geocode FROM " + dbTableCaches + ")", null);
+                    deleteOrphanedRecords();
 
                     // Remove the obsolete "_others" directory where the user avatar used to be stored.
                     FileUtils.deleteDirectory(LocalStorage.getStorageDir("_others"));
 
+                    final int version = Version.getVersionCode(context);
                     if (version > -1) {
                         Settings.setVersion(version);
                     }
@@ -2480,6 +2464,38 @@ public class DataStore {
                 Log.d("Database clean: finished");
             }
         });
+    }
+
+    private static void deleteOrphanedRecords() {
+        Log.d("Database clean: removing non-existing lists");
+        database.delete(dbTableCachesLists, "list_id NOT IN (SELECT _id FROM " + dbTableLists + ")", null);
+
+        Log.d("Database clean: removing non-existing caches from attributes");
+        database.delete(dbTableAttributes, "geocode NOT IN (SELECT geocode FROM " + dbTableCaches + ")", null);
+
+        Log.d("Database clean: removing non-existing caches from spoilers");
+        database.delete(dbTableSpoilers, "geocode NOT IN (SELECT geocode FROM " + dbTableCaches + ")", null);
+
+        Log.d("Database clean: removing non-existing caches from lists");
+        database.delete(dbTableCachesLists, "geocode NOT IN (SELECT geocode FROM " + dbTableCaches + ")", null);
+
+        Log.d("Database clean: removing non-existing caches from waypoints");
+        database.delete(dbTableWaypoints, "geocode NOT IN (SELECT geocode FROM " + dbTableCaches + ")", null);
+
+        Log.d("Database clean: removing non-existing caches from trackables");
+        database.delete(dbTableTrackables, "geocode NOT IN (SELECT geocode FROM " + dbTableCaches + ")", null);
+
+        Log.d("Database clean: removing non-existing caches from logcount");
+        database.delete(dbTableLogCount, "geocode NOT IN (SELECT geocode FROM " + dbTableCaches + ")", null);
+
+        Log.d("Database clean: removing non-existing caches from logs offline");
+        database.delete(dbTableLogsOffline, "geocode NOT IN (SELECT geocode FROM " + dbTableCaches + ")", null);
+
+        Log.d("Database clean: removing non-existing caches from logs");
+        database.delete(dbTableLogs, "geocode NOT IN (SELECT geocode FROM " + dbTableCaches + ")", null);
+
+        Log.d("Database clean: removing non-existing logs from logimages");
+        database.delete(dbTableLogImages, "log_id NOT IN (SELECT _id FROM " + dbTableLogs + ")", null);
     }
 
     /**

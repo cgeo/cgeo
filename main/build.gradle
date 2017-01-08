@@ -231,13 +231,13 @@ apt {
 
 dependencies {
     // AndroidAnnotations, https://github.com/excilys/androidannotations/wiki/building-project-gradle
-    def androidAnnotationsVersion = '4.1.0'
+    def androidAnnotationsVersion = '4.2.0'
     apt "org.androidannotations:androidannotations:$androidAnnotationsVersion"
     compile "org.androidannotations:androidannotations-api:$androidAnnotationsVersion"
 
     // Apache Commons
     compile 'org.apache.commons:commons-collections4:4.1'
-    compile 'org.apache.commons:commons-compress:1.12'
+    compile 'org.apache.commons:commons-compress:1.13'
     compile 'commons-io:commons-io:2.5'
     compile 'org.apache.commons:commons-lang3:3.5'
 
@@ -264,7 +264,7 @@ dependencies {
     compile "com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion"
 
     // Jsoup HTML parsing
-    compile 'org.jsoup:jsoup:1.10.1'
+    compile 'org.jsoup:jsoup:1.10.2'
 
     // Junit only needed for local unit tests
     testCompile 'junit:junit:4.12'
@@ -282,14 +282,17 @@ dependencies {
     compile "com.asamm:locus-api:$locusVersion"
     compile "com.asamm:locus-api-android:$locusVersion"
 
-    // Mapsforge integration
+    // Mapsforge old version
     compile files('libs/mapsforge-map-0.3.0-jar-with-dependencies.jar')
     compile 'com.caverock:androidsvg:1.2.2-beta-1'
-    def mapsforgeVersion = '0.6.1'
+
+    // Mapsforge new version
+    def mapsforgeVersion = '0.7.0'
     compile "org.mapsforge:mapsforge-core:$mapsforgeVersion"
     compile "org.mapsforge:mapsforge-map:$mapsforgeVersion"
     compile "org.mapsforge:mapsforge-map-android:$mapsforgeVersion"
     compile "org.mapsforge:mapsforge-map-reader:$mapsforgeVersion"
+    compile "org.mapsforge:mapsforge-themes:$mapsforgeVersion"
     configurations {
         all*.exclude group: 'net.sf.kxml', module: 'kxml2' // duplicate XmlPullParser class
     }
@@ -301,7 +304,7 @@ dependencies {
     compile 'com.drewnoakes:metadata-extractor:2.9.1'
 
     // Okhttp network access
-    compile 'com.squareup.okhttp3:okhttp:3.4.2'
+    compile 'com.squareup.okhttp3:okhttp:3.5.0'
 
     // Play Services
     def playServicesVersion = '9.4.0'
@@ -314,7 +317,7 @@ dependencies {
     compile 'com.jakewharton:process-phoenix:1.1.1'
 
     // RxJava
-    compile "io.reactivex.rxjava2:rxjava:2.0.1"
+    compile "io.reactivex.rxjava2:rxjava:2.0.4"
     compile "io.reactivex.rxjava2:rxandroid:2.0.1"
 
     // Showcase view
@@ -342,7 +345,8 @@ dependencies {
     compile 'com.nineoldandroids:library:2.4.0'
 
     // ViewPagerIndicator, view pager titles for cache details and similar view pager based activities
-    compile 'com.github.renaudcerrato:ViewPagerIndicator:2.4.1-gradle'
+    // this is a fork of the original viewpager library which still works with android level 9. we can use 'com.github.JakeWharton:ViewPagerIndicator:2.4.1@aar' when switching to min sdk 11.
+    compile 'com.viewpagerindicator:viewpagerindicator:2.4.3'
 
     // Zxing barcode reader integration
     compile 'com.google.zxing:android-integration:3.3.0'
@@ -386,6 +390,7 @@ task verifyCgeoKeys {
                         properties.load(it);
                     }
                     filter(ReplaceTokens, tokens: properties)
+                    filter { it.replaceAll("@.+?@", "") }
                 }
             }
         }
@@ -488,9 +493,11 @@ if (privatePropertiesFile.exists()) {
 }
 
 // check existence of private properties, show an error message
-task verifyPrivateProperties << {
-    if (!rootProject.file('private.properties').exists()) {
-        throw new InvalidUserDataException("For signing the release build you must provide a file private.properties in the root directory. Copy templates/private.properties and change the values.")
+task verifyPrivateProperties {
+    doLast {
+        if (!rootProject.file('private.properties').exists()) {
+            throw new InvalidUserDataException("For signing the release build you must provide a file private.properties in the root directory. Copy templates/private.properties and change the values.")
+        }
     }
 }
 

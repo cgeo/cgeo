@@ -1,6 +1,5 @@
 package cgeo.geocaching.staticmaps;
 
-import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointFormatter.Format;
 import cgeo.geocaching.models.Geocache;
@@ -10,6 +9,7 @@ import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.DisplayUtils;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
 
@@ -136,7 +136,7 @@ public final class StaticMapsProvider {
             return Completable.complete();
         }
         // TODO Check if this is also OK, was width -25
-        final Point displaySize = Compatibility.getDisplaySize();
+        final Point displaySize = DisplayUtils.getDisplaySize();
 
         final List<Completable> downloaders = new LinkedList<>();
 
@@ -172,7 +172,7 @@ public final class StaticMapsProvider {
 
     public static Completable storeWaypointStaticMap(final Geocache cache, final Waypoint waypoint) {
         // TODO Check if this is also OK, was width -25
-        final Point displaySize = Compatibility.getDisplaySize();
+        final Point displaySize = DisplayUtils.getDisplaySize();
         return storeWaypointStaticMap(cache.getGeocode(), displaySize.x, displaySize.y, waypoint);
     }
 
@@ -200,7 +200,7 @@ public final class StaticMapsProvider {
 
     public static Completable storeCacheStaticMap(final Geocache cache) {
         // TODO Check if this is also OK, was width -25
-        final Point displaySize = Compatibility.getDisplaySize();
+        final Point displaySize = DisplayUtils.getDisplaySize();
         return storeCacheStaticMap(cache, displaySize.x, displaySize.y);
     }
 
@@ -222,7 +222,7 @@ public final class StaticMapsProvider {
 
     public static Completable storeCachePreviewMap(final Geocache cache) {
         final String latlonMap = cache.getCoords().format(Format.LAT_LON_DECDEGREE_COMMA);
-        final Point displaySize = Compatibility.getDisplaySize();
+        final Point displaySize = DisplayUtils.getDisplaySize();
         final String markerUrl = MARKERS_URL + "my_location_mdpi.png";
         return downloadMap(cache.getGeocode(), 15, ROADMAP, markerUrl, PREFIX_PREVIEW, "shadow:false|", latlonMap, displaySize.x, displaySize.y, null);
     }

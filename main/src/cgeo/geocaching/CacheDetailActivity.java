@@ -14,6 +14,7 @@ import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.capability.IgnoreCapability;
 import cgeo.geocaching.connector.capability.PersonalNoteCapability;
+import cgeo.geocaching.connector.capability.PgcChallengeCheckerCapability;
 import cgeo.geocaching.connector.capability.WatchListCapability;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.gc.GCConstants;
@@ -95,7 +96,6 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -156,7 +156,6 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.collections4.ListUtils;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -593,6 +592,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             if (connector instanceof IgnoreCapability) {
                 menu.findItem(R.id.menu_ignore).setVisible(((IgnoreCapability) connector).canIgnoreCache(cache));
             }
+            if (connector instanceof PgcChallengeCheckerCapability) {
+                menu.findItem(R.id.menu_challenge_checker).setVisible(((PgcChallengeCheckerCapability) connector).isChallengeCache(cache));
+            }
         }
         return super.onPrepareOptionsMenu(menu);
     }
@@ -620,6 +622,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 return true;
             case R.id.menu_checker:
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(CheckerUtils.getCheckerUrl(cache))));
+                return true;
+            case R.id.menu_challenge_checker:
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://project-gc.com/Challenges/" + cache.getGeocode())));
                 return true;
             case R.id.menu_ignore:
                 ignoreCache();
@@ -1880,7 +1885,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             // this copy is modified to respect the text color
             RecyclerViewProvider.provideRecyclerView(CacheDetailActivity.this, recyclerView, true, true);
 
-            final TrackableListAdapter adapterTrackables = new TrackableListAdapter(ListUtils.emptyIfNull(cache.getInventory()), new TrackableListAdapter.TrackableClickListener() {
+            final TrackableListAdapter adapterTrackables = new TrackableListAdapter(cache.getInventory(), new TrackableListAdapter.TrackableClickListener() {
 
                 @Override
                 public void onTrackableClicked(final Trackable trackable) {
@@ -1967,8 +1972,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
             @Override
             public boolean onLongClick(final View v) {
-                if (Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.HONEYCOMB
-                        && (view.getId() == R.id.description || view.getId() == R.id.hint)) {
+                if (view.getId() == R.id.description || view.getId() == R.id.hint) {
                     selectedTextView = (IndexOutOfBoundsAvoidingTextView) view;
                     mSelectionModeActive = true;
                     return false;

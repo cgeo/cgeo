@@ -1,6 +1,5 @@
 package cgeo.geocaching;
 
-import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
@@ -11,6 +10,7 @@ import cgeo.geocaching.utils.OOMDumpingUncaughtExceptionHandler;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Application;
+import android.content.ComponentCallbacks2;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -103,7 +103,7 @@ public class CgeoApplication extends Application {
     @Override
     public void onLowMemory() {
         super.onLowMemory();
-        onTrimMemory(Compatibility.TRIM_MEMORY_COMPLETE);
+        onTrimMemory(ComponentCallbacks2.TRIM_MEMORY_COMPLETE);
     }
 
     @SuppressLint("NewApi")

@@ -2,5 +2,8 @@
 <resources>
   <!-- changelog for the master branch -->
   <string name="changelog_master" translatable="false">
+    <b>Next feature release:</b>\n
+    · New: Link to project-gc.com challenge checker for mystery caches having challenge in their title\n
+    \n
   </string>
 </resources>

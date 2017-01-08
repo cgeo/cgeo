@@ -1,7 +1,5 @@
 package cgeo.geocaching.connector.gc;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.ConnectorFactoryTest;
@@ -9,13 +7,15 @@ import cgeo.geocaching.connector.trackable.TravelBugConnector;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
+import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.TestSettings;
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 
-import org.assertj.core.api.AbstractBooleanAssert;
-
 import java.util.Set;
+
+import org.assertj.core.api.AbstractBooleanAssert;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class GCConnectorTest extends AbstractResourceInstrumentationTestCase {
 
@@ -120,5 +120,18 @@ public class GCConnectorTest extends AbstractResourceInstrumentationTestCase {
     public static void testHandledGeocodes() {
         final Set<String> geocodes = ConnectorFactoryTest.getGeocodeSample();
         assertThat(GCConnector.getInstance().handledGeocodes(geocodes)).containsOnly("GC1234", "GC5678");
+    }
+
+    public static void testIsChallengeCache() {
+        assertIsChallengeCache("Some Challenge Cache", CacheType.MYSTERY).isTrue();
+        assertIsChallengeCache("Some None Challenge Traditional", CacheType.TRADITIONAL).isFalse();
+        assertIsChallengeCache("Some ordinary Mystery", CacheType.MYSTERY).isFalse();
+    }
+
+    private static AbstractBooleanAssert<?> assertIsChallengeCache(final String name, final CacheType type) {
+        final Geocache geocache = new Geocache();
+        geocache.setName(name);
+        geocache.setType(type);
+        return assertThat(GCConnector.getInstance().isChallengeCache(geocache));
     }
 }

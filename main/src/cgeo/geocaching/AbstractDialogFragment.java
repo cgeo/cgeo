@@ -17,12 +17,10 @@ import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Log;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -122,11 +120,6 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
                 showPopup(v);
             }
         });
-        /* Use a context menu instead popup where the popup menu is not working */
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
-            registerForContextMenu(overflowActionBar);
-        }
-
     }
 
     public final void setTitle(final CharSequence title) {
@@ -146,20 +139,6 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
 
 
     protected void showPopup(final View view) {
-        // For reason I totally not understand the PopupMenu from Appcompat is broken beyond
-        // repair. Chicken out here and show the old menu on Gingerbread.
-        // The "correct" way of implementing this is still in
-        // showPopupCompat(view)
-
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
-            view.showContextMenu();
-        } else {
-            showPopupHoneycomb(view);
-        }
-    }
-
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    private void showPopupHoneycomb(final View view) {
         final android.widget.PopupMenu popupMenu = new android.widget.PopupMenu(getActivity(), view);
         CacheMenuHandler.addMenuItems(new MenuInflater(getActivity()), popupMenu.getMenu(), cache);
         popupMenu.setOnMenuItemClickListener(
@@ -172,19 +151,6 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
         );
         popupMenu.show();
     }
-
-    protected void showPopupCompat(final View view) {
-        final PopupMenu popupMenu = new PopupMenu(getActivity(), view);
-
-        // Directly instantiate SupportMenuInflater instead of getActivity().getMenuinflator
-        // getMenuinflator will throw a NPE since it tries to get the not displayed ActionBar
-        // menuinflator = getActivity().getMenuInflater();
-        // MenuInflater menuinflator = new SupportMenuInflater(getActivity());
-        CacheMenuHandler.addMenuItems(popupMenu.getMenuInflater(), popupMenu.getMenu(), cache);
-        popupMenu.setOnMenuItemClickListener(this);
-        popupMenu.show();
-    }
-
 
     protected void init() {
         cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
