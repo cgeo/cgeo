@@ -22,8 +22,6 @@ import java.util.List;
 
 public final class LoggingUI extends AbstractUIFactory {
 
-    private static WeakReference<View> selectedViewRef;
-
     private LoggingUI() {
         // utility class
     }
@@ -70,20 +68,20 @@ public final class LoggingUI extends AbstractUIFactory {
         }
     }
 
-    public static boolean onMenuItemSelected(final MenuItem item, final Activity activity, final Geocache cache) {
+    public static boolean onMenuItemSelected(final MenuItem item, final Activity activity, final Geocache cache, final DialogInterface.OnDismissListener listener) {
         switch (item.getItemId()) {
             case R.id.menu_log_visit:
                 cache.logVisit(activity);
                 return true;
             case R.id.menu_log_visit_offline:
-                showOfflineMenu(cache, activity);
+                showOfflineMenu(cache, activity, listener);
                 return true;
             default:
                 return false;
         }
     }
 
-    private static void showOfflineMenu(final Geocache cache, final Activity activity) {
+    private static void showOfflineMenu(final Geocache cache, final Activity activity, final DialogInterface.OnDismissListener listener) {
         final LogEntry currentLog = DataStore.loadLogOffline(cache.getGeocode());
         final LogType currentLogType = currentLog == null ? null : currentLog.getType();
 
@@ -119,18 +117,13 @@ public final class LoggingUI extends AbstractUIFactory {
                 } else {
                     cache.logOffline(activity, logTypeEntry.logType);
                 }
-                final View selectedView = selectedViewRef != null ? selectedViewRef.get() : null;
-                if (selectedView != null) {
-                    final ViewHolder holder = (ViewHolder) selectedView.getTag();
-                    if (holder != null) {
-                        CacheListAdapter.updateViewHolder(holder, cache, res);
-                    }
-                }
+                dialog.dismiss();
             }
         });
 
-        builder.create().show();
-
+        final AlertDialog alertDialog = builder.create();
+        alertDialog.setOnDismissListener(listener);
+        alertDialog.show();
     }
 
     public static void onPrepareOptionsMenu(final Menu menu, final Geocache cache) {
@@ -142,11 +135,6 @@ public final class LoggingUI extends AbstractUIFactory {
 
         final MenuItem itemOffline = menu.findItem(R.id.menu_log_visit_offline);
         itemOffline.setVisible(cache.supportsLogging() && Settings.getLogOffline());
-    }
-
-    public static void onPrepareOptionsMenu(final Menu menu, final Geocache cache, final View view) {
-        onPrepareOptionsMenu(menu, cache);
-        selectedViewRef = new WeakReference<>(view);
     }
 
     public static void addMenuItems(final Activity activity, final Menu menu, final Geocache cache) {
