@@ -952,7 +952,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         menu.findItem(R.id.menu_refresh).setVisible(isOffline);
         menu.findItem(R.id.menu_store_cache).setVisible(!isOffline);
 
-        LoggingUI.onPrepareOptionsMenu(menu, cache, adapterInfo.targetView);
+        LoggingUI.onPrepareOptionsMenu(menu, cache);
     }
 
     private void moveCachesToOtherList(final Collection<Geocache> caches) {
@@ -1038,7 +1038,18 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 // in Android:
                 // https://code.google.com/p/android/issues/detail?id=7139
                 lastMenuInfo = info;
-                LoggingUI.onMenuItemSelected(item, this, cache);
+                final View selectedView = adapterInfo.targetView;
+                LoggingUI.onMenuItemSelected(item, this, cache, new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialog) {
+                        if (selectedView != null) {
+                            final CacheListAdapter.ViewHolder holder = (CacheListAdapter.ViewHolder) selectedView.getTag();
+                            if (holder != null) {
+                                CacheListAdapter.updateViewHolder(holder, cache, res);
+                            }
+                        }
+                    }
+                });
         }
 
         return true;

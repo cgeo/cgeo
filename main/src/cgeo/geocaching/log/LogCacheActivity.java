@@ -684,10 +684,6 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
             new AsyncTask<Void, Void, Void>() {
                 @Override
                 protected Void doInBackground(final Void... params) {
-                    if (!cache.isOffline()) {
-                        cache.getLists().add(StoredList.STANDARD_LIST_ID);
-                        DataStore.saveCache(cache, LoadFlags.SAVE_ALL);
-                    }
                     cache.logOffline(LogCacheActivity.this, log, date, typeSelected);
                     Settings.setLastCacheLog(log);
                     return null;

@@ -337,7 +337,12 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
         if (CacheMenuHandler.onMenuItemSelected(item, this, cache)) {
             return true;
         }
-        if (LoggingUI.onMenuItemSelected(item, getActivity(), cache)) {
+        if (LoggingUI.onMenuItemSelected(item, getActivity(), cache, new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                init();
+            }
+        })) {
             return true;
         }
 
