@@ -2248,7 +2248,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         offlineRefresh.setOnClickListener(refreshCacheClickListener);
 
         if (cache.isOffline()) {
-            final long diff = (System.currentTimeMillis() / (60 * 1000)) - (cache.getDetailedUpdate() / (60 * 1000)); // minutes
+            final long diff = (System.currentTimeMillis() / (60 * 1000)) - (cache.getUpdated() / (60 * 1000)); // minutes
 
             final String ago;
             if (diff < 15) {
