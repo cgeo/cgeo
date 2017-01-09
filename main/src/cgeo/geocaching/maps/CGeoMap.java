@@ -678,9 +678,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
             menu.findItem(R.id.submenu_strategy).setVisible(mapOptions.isLiveEnabled);
 
             switch (Settings.getLiveMapStrategy()) {
-                case FASTEST:
-                    menu.findItem(R.id.menu_strategy_fastest).setChecked(true);
-                    break;
                 case FAST:
                     menu.findItem(R.id.menu_strategy_fast).setChecked(true);
                     break;
@@ -805,11 +802,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
                 return true;
             case R.id.menu_as_list: {
                 CacheListActivity.startActivityMap(activity, new SearchResult(getGeocodesForCachesInViewport()));
-                return true;
-            }
-            case R.id.menu_strategy_fastest: {
-                item.setChecked(true);
-                Settings.setLiveMapStrategy(LivemapStrategy.FASTEST);
                 return true;
             }
             case R.id.menu_strategy_fast: {
