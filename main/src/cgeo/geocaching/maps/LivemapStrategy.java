@@ -9,7 +9,7 @@ import java.util.EnumSet;
  * Defines the strategy for the Live Map
  */
 public enum LivemapStrategy {
-    FASTEST(1, EnumSet.of(Flag.LOAD_TILES), R.string.map_strategy_fastest),
+    // id = 1 was used by an obsolete strategy, which is not supported anymore, see #6106
     FAST(2, EnumSet.of(Flag.LOAD_TILES, Flag.PARSE_TILES), R.string.map_strategy_fast),
     AUTO(3, EnumSet.noneOf(Flag.class), R.string.map_strategy_auto),
     DETAILED(4, EnumSet.allOf(Flag.class), R.string.map_strategy_detailed);

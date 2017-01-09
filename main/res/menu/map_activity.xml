@@ -142,10 +142,6 @@
                 android:id="@+id/menu_group_strategy"
                 android:checkableBehavior="single" >
                 <item
-                    android:id="@+id/menu_strategy_fastest"
-                    android:title="@string/map_strategy_fastest">
-                </item>
-                <item
                     android:id="@+id/menu_strategy_fast"
                     android:title="@string/map_strategy_fast">
                 </item>
