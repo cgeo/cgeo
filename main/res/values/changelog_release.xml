@@ -8,6 +8,7 @@
     · Fix: Crash when moving map and debug logging is active\n
       Remark: Please do not switch on debug logging unless needed!\n
     · Fix: History management was inconsistent and cache count was wrong in some cases\n
+    · Removed: Strategy \"Fastest\" has been removed from live map as it lead to confusion and provided less information\n
     \n
     <b>2016.12.28:</b>\n
     · Fix: Wrong cache types shown on live map\n
