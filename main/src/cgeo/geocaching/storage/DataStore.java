@@ -2340,16 +2340,18 @@ public class DataStore {
 
     @NonNull
     private static Set<String> loadBatchOfHistoricGeocodes(final CacheType cacheType) {
-        final StringBuilder selection = new StringBuilder("c.visiteddate > 0");
+        final StringBuilder selection = new StringBuilder();
 
         String[] selectionArgs = null;
         if (cacheType != CacheType.ALL) {
-            selection.append(" AND c.type = ?");
+            selection.append(" type = ? AND ");
             selectionArgs = new String[] { String.valueOf(cacheType.id) };
         }
 
+        selection.append(" ( visiteddate > 0 OR geocode IN (SELECT geocode FROM " + dbTableLogsOffline + ") )");
+
         try {
-            final Cursor cursor = database.rawQuery("SELECT c.geocode FROM " + dbTableCaches + " c LEFT OUTER JOIN " + dbTableLogsOffline + " l ON c.geocode = l.geocode WHERE " + selection, selectionArgs);
+            final Cursor cursor = database.rawQuery("SELECT geocode FROM " + dbTableCaches + " WHERE " + selection, selectionArgs);
             return cursorToColl(cursor, new HashSet<String>(), GET_STRING_0);
         } catch (final Exception e) {
             Log.e("DataStore.loadBatchOfHistoricGeocodes", e);
@@ -3176,7 +3178,7 @@ public class DataStore {
 
     private enum PreparedStatement {
 
-        HISTORY_COUNT("SELECT COUNT(*) FROM " + dbTableCaches + " c LEFT OUTER JOIN " + dbTableLogsOffline + " l ON c.geocode = l.geocode WHERE c.visiteddate > 0"),
+        HISTORY_COUNT("SELECT COUNT(*) FROM " + dbTableCaches + " WHERE visiteddate > 0 OR geocode IN (SELECT geocode FROM " + dbTableLogsOffline + ")"),
         MOVE_TO_STANDARD_LIST("UPDATE " + dbTableCachesLists + " SET list_id = " + StoredList.STANDARD_LIST_ID + " WHERE list_id = ? AND geocode NOT IN (SELECT DISTINCT (geocode) FROM " + dbTableCachesLists + " WHERE list_id = " + StoredList.STANDARD_LIST_ID + ")"),
         REMOVE_FROM_LIST("DELETE FROM " + dbTableCachesLists + " WHERE list_id = ? AND geocode = ?"),
         REMOVE_FROM_ALL_LISTS("DELETE FROM " + dbTableCachesLists + " WHERE geocode = ?"),
