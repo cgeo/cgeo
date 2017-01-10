@@ -27,7 +27,7 @@ public final class Routing {
     private static final int UPDATE_MIN_DELAY_SECONDS = 3;
     private static BRouterServiceConnection brouter;
     private static Geopoint lastDirectionUpdatePoint;
-    @NonNull private static Geopoint[] lastRoutingPoints = {};
+    @Nullable private static Geopoint[] lastRoutingPoints = null;
     private static Geopoint lastDestination;
     private static long timeLastUpdate;
 
@@ -61,6 +61,15 @@ public final class Routing {
         }
     }
 
+    /**
+     * Return a valid track (with at least two points, including the start and destination).
+     * In some cases (e.g., destination is too close or too far, path could not be found),
+     * a straight line will be returned.
+     *
+     * @param start the starting point
+     * @param destination the destination point
+     * @return a track with at least two points including the start and destination points
+     */
     @NonNull
     public static Geopoint[] getTrack(final Geopoint start, final Geopoint destination) {
         if (brouter == null || Settings.getRoutingMode() == RoutingMode.STRAIGHT) {
@@ -70,7 +79,7 @@ public final class Routing {
         // avoid updating to frequently
         final long timeNow = System.currentTimeMillis();
         if ((timeNow - timeLastUpdate) < 1000 * UPDATE_MIN_DELAY_SECONDS) {
-            return lastRoutingPoints;
+            return ensureTrack(lastRoutingPoints, start, destination);
         }
 
         // Disable routing for huge distances
@@ -84,9 +93,10 @@ public final class Routing {
             return defaultTrack(start, destination);
         }
 
-        // Use cached route if current position has not changed more than 5m
+        // Use cached route if current position has not changed more than 5m and we had a route
         // TODO: Maybe adjust this to current zoomlevel
-        if (lastDirectionUpdatePoint != null && destination == lastDestination && start.distanceTo(lastDirectionUpdatePoint) < UPDATE_MIN_DISTANCE_KILOMETERS) {
+        if (lastRoutingPoints != null && lastDirectionUpdatePoint != null && destination == lastDestination &&
+                start.distanceTo(lastDirectionUpdatePoint) < UPDATE_MIN_DISTANCE_KILOMETERS) {
             return lastRoutingPoints;
         }
 
@@ -95,9 +105,15 @@ public final class Routing {
         lastRoutingPoints = ArrayUtils.nullToEmpty(calculateRouting(start, destination), Geopoint[].class);
         lastDirectionUpdatePoint = start;
         timeLastUpdate = timeNow;
-        return lastRoutingPoints;
+        return ensureTrack(lastRoutingPoints, start, destination);
     }
 
+    @NonNull
+    private static Geopoint[] ensureTrack(@Nullable final Geopoint[] routingPoints, final Geopoint start, final Geopoint destination) {
+        return routingPoints != null ? routingPoints : defaultTrack(start, destination);
+    }
+
+    @NonNull
     private static Geopoint[] defaultTrack(final Geopoint start, final Geopoint destination) {
         return new Geopoint[] { start, destination };
     }
