@@ -130,7 +130,7 @@ public class CachePopupFragment extends AbstractDialogFragment {
             addCacheDetails();
 
             // offline use
-            CacheDetailActivity.updateOfflineBox(view, cache, res, new RefreshCacheClickListener(), new DropCacheClickListener(), new StoreCacheClickListener(), null);
+            CacheDetailActivity.updateOfflineBox(view, cache, res, new RefreshCacheClickListener(), new DropCacheClickListener(), new StoreCacheClickListener(), null, new StoreCacheClickListener());
 
             CacheDetailActivity.updateCacheLists(view, cache, res);
         } catch (final Exception e) {
@@ -164,9 +164,19 @@ public class CachePopupFragment extends AbstractDialogFragment {
         init();
     }
 
-    private class StoreCacheClickListener implements View.OnClickListener {
+    private class StoreCacheClickListener implements View.OnClickListener, View.OnLongClickListener {
         @Override
         public void onClick(final View arg0) {
+            selectListsAndStore(false);
+        }
+
+        @Override
+        public boolean onLongClick(View v) {
+            selectListsAndStore(true);
+            return true;
+        }
+
+        private void selectListsAndStore(final boolean preselect) {
             if (progress.isShowing()) {
                 showToast(res.getString(R.string.err_detail_still_working));
                 return;
@@ -178,19 +188,21 @@ public class CachePopupFragment extends AbstractDialogFragment {
                         new Action1<Set<Integer>>() {
                             @Override
                             public void call(final Set<Integer> selectedListIds) {
-                                storeCache(selectedListIds);
+                                storeCacheOnLists(selectedListIds);
                             }
-                        }, true, cache.getLists());
+                        }, true, cache.getLists(), preselect);
             } else {
-                storeCache(Collections.singleton(StoredList.STANDARD_LIST_ID));
+                storeCacheOnLists(Collections.singleton(StoredList.STANDARD_LIST_ID));
             }
         }
 
-        protected void storeCache(final Set<Integer> listIds) {
+        private void storeCacheOnLists(final Set<Integer> listIds) {
             if (cache.isOffline()) {
                 // cache already offline, just add to another list
                 DataStore.saveLists(Collections.singletonList(cache), listIds);
-                CacheDetailActivity.updateOfflineBox(getView(), cache, res, new RefreshCacheClickListener(), new DropCacheClickListener(), new StoreCacheClickListener(), null);
+                CacheDetailActivity.updateOfflineBox(getView(), cache, res,
+                        new RefreshCacheClickListener(), new DropCacheClickListener(),
+                        new StoreCacheClickListener(), null, new StoreCacheClickListener());
                 CacheDetailActivity.updateCacheLists(getView(), cache, res);
             } else {
                 final StoreCacheHandler storeCacheHandler = new StoreCacheHandler(CachePopupFragment.this, R.string.cache_dialog_offline_save_message);
@@ -207,7 +219,9 @@ public class CachePopupFragment extends AbstractDialogFragment {
                         activity.supportInvalidateOptionsMenu();
                         final View view = getView();
                         if (view != null) {
-                            CacheDetailActivity.updateOfflineBox(view, cache, res, new RefreshCacheClickListener(), new DropCacheClickListener(), new StoreCacheClickListener(), null);
+                            CacheDetailActivity.updateOfflineBox(view, cache, res,
+                                    new RefreshCacheClickListener(), new DropCacheClickListener(),
+                                    new StoreCacheClickListener(), null, new StoreCacheClickListener());
                             CacheDetailActivity.updateCacheLists(view, cache, res);
                         }
                     }

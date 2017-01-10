@@ -1217,7 +1217,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                         public void call(final Set<Integer> selectedListIds) {
                             refreshStoredInternal(caches, selectedListIds);
                         }
-                    }, true, Collections.singleton(StoredList.TEMPORARY_LIST.id), Collections.<Integer>emptySet(), listNameMemento);
+                    }, true, Collections.singleton(StoredList.TEMPORARY_LIST.id), Collections.<Integer>emptySet(), listNameMemento, false);
         } else {
             final Set<Integer> additionalListIds = new HashSet<>();
             if (type != CacheListType.OFFLINE && type != CacheListType.HISTORY) {
