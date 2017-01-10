@@ -790,6 +790,7 @@
     <string name="cache_list_text">List:</string>
     <string name="cache_list_change">Move</string>
     <string name="cache_list_unknown">Not in a list</string>
+    <string name="cache_list_select_last">Last Selection</string>
     <string name="cache_images">Images</string>
     <string name="cache_waypoints">Waypoints</string>
 

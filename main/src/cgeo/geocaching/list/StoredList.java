@@ -14,6 +14,8 @@ import android.app.Application;
 import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.support.annotation.NonNull;
+import android.view.View;
+import android.widget.ListView;
 
 import java.lang.ref.WeakReference;
 import java.text.Collator;
@@ -76,19 +78,16 @@ public final class StoredList extends AbstractList {
             promptForListSelection(titleId, runAfterwards, onlyConcreteLists, Collections.singleton(exceptListId), ListNameMemento.EMPTY);
         }
 
-        public void promptForMultiListSelection(final int titleId, @NonNull final Action1<Set<Integer>> runAfterwards, final boolean onlyConcreteLists, final Set<Integer> currentListIds) {
-            promptForMultiListSelection(titleId, runAfterwards, onlyConcreteLists, Collections.<Integer>emptySet(), currentListIds, ListNameMemento.EMPTY);
+        public void promptForMultiListSelection(final int titleId, @NonNull final Action1<Set<Integer>> runAfterwards, final boolean onlyConcreteLists, final Set<Integer> currentListIds, final boolean fastStoreOnLastSelection) {
+            promptForMultiListSelection(titleId, runAfterwards, onlyConcreteLists, Collections.<Integer>emptySet(), currentListIds, ListNameMemento.EMPTY, fastStoreOnLastSelection);
         }
 
         public void promptForListSelection(final int titleId, @NonNull final Action1<Integer> runAfterwards, final boolean onlyConcreteLists, final int exceptListId, @NonNull final ListNameMemento listNameMemento) {
             promptForListSelection(titleId, runAfterwards, onlyConcreteLists, Collections.singleton(exceptListId), listNameMemento);
         }
 
-        public void promptForMultiListSelection(final int titleId, @NonNull final Action1<Set<Integer>> runAfterwards, final boolean onlyConcreteLists, final Set<Integer> exceptListIds, final Set<Integer> currentListIds, @NonNull final ListNameMemento listNameMemento) {
-            final Set<Integer> selectedListIds = new HashSet<>(currentListIds);
-            if (currentListIds.isEmpty()) {
-                selectedListIds.addAll(Settings.getLastSelectedLists());
-            }
+        public void promptForMultiListSelection(final int titleId, @NonNull final Action1<Set<Integer>> runAfterwards, final boolean onlyConcreteLists, final Set<Integer> exceptListIds, final Set<Integer> currentListIds, @NonNull final ListNameMemento listNameMemento, final boolean fastStoreOnLastSelection) {
+            final Set<Integer> selectedListIds = new HashSet<>(fastStoreOnLastSelection ? Settings.getLastSelectedLists() : currentListIds);
             final List<AbstractList> lists = getMenuLists(onlyConcreteLists, exceptListIds, selectedListIds);
 
             final CharSequence[] listTitles = new CharSequence[lists.size()];
@@ -103,46 +102,26 @@ public final class StoredList extends AbstractList {
             // remove from selected which are not available anymore
             selectedListIds.retainAll(allListIds);
 
+            if (fastStoreOnLastSelection && !selectedListIds.isEmpty()) {
+                runAfterwards.call(selectedListIds);
+                return;
+            }
 
             final Activity activity = activityRef.get();
             final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
             builder.setTitle(res.getString(titleId));
-            builder.setMultiChoiceItems(listTitles, selectedItems, new DialogInterface.OnMultiChoiceClickListener() {
-                @Override
-                public void onClick(final DialogInterface dialog, final int itemId, final boolean isChecked) {
-                    final AbstractList list = lists.get(itemId);
-                    if (isChecked) {
-                        selectedListIds.add(list.id);
-                    } else {
-                        selectedListIds.remove(list.id);
-                    }
-                    ((AlertDialog) dialog).getButton(DialogInterface.BUTTON_POSITIVE).setEnabled(!selectedListIds.isEmpty());
-                }
-            });
-            builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                @Override
-                        public void onClick(final DialogInterface dialog, final int id) {
-                            if (selectedListIds.contains(PseudoList.NEW_LIST.id)) {
-                                // create new list on the fly
-                                promptForListCreation(runAfterwards, selectedListIds, listNameMemento.getTerm());
-                            } else {
-                                Settings.setLastSelectedLists(selectedListIds);
-                                runAfterwards.call(selectedListIds);
-                            }
-                            dialog.cancel();
-                        }
-                    }
-            );
-            builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-                @Override
-                        public void onClick(final DialogInterface dialog, final int id) {
-                            dialog.dismiss();
-                        }
-                    }
-            );
+            builder.setMultiChoiceItems(listTitles, selectedItems, new MultiChoiceClickListener(lists, selectedListIds));
+            builder.setPositiveButton(android.R.string.ok, new OnOkClickListener(selectedListIds, runAfterwards, listNameMemento));
+            final Set<Integer> lastSelectedLists = Settings.getLastSelectedLists();
+            if (currentListIds.isEmpty() && !lastSelectedLists.isEmpty()) {
+                // onClickListener is null because it is handled below to prevent closing of the dialog
+                builder.setNeutralButton(R.string.cache_list_select_last, null);
+            }
+            builder.setNegativeButton(android.R.string.cancel, null);
             final AlertDialog dialog = builder.create();
             dialog.show();
             dialog.getButton(DialogInterface.BUTTON_POSITIVE).setEnabled(!selectedListIds.isEmpty());
+            dialog.getButton(DialogInterface.BUTTON_NEUTRAL).setOnClickListener(new OnLastSelectionClickListener(selectedListIds, lastSelectedLists, dialog, lists, selectedItems));
         }
 
         public void promptForListSelection(final int titleId, @NonNull final Action1<Integer> runAfterwards, final boolean onlyConcreteLists, final Set<Integer> exceptListIds, @NonNull final ListNameMemento listNameMemento) {
@@ -311,6 +290,78 @@ public final class StoredList extends AbstractList {
             });
         }
 
+        private static class MultiChoiceClickListener implements DialogInterface.OnMultiChoiceClickListener {
+            private final List<AbstractList> lists;
+            private final Set<Integer> selectedListIds;
+
+            public MultiChoiceClickListener(final List<AbstractList> lists, final Set<Integer> selectedListIds) {
+                this.lists = lists;
+                this.selectedListIds = selectedListIds;
+            }
+
+            @Override
+            public void onClick(final DialogInterface dialog, final int itemId, final boolean isChecked) {
+                final AbstractList list = lists.get(itemId);
+                if (isChecked) {
+                    selectedListIds.add(list.id);
+                } else {
+                    selectedListIds.remove(list.id);
+                }
+                ((AlertDialog) dialog).getButton(DialogInterface.BUTTON_POSITIVE).setEnabled(!selectedListIds.isEmpty());
+            }
+        }
+
+        private static class OnLastSelectionClickListener implements View.OnClickListener {
+            private final Set<Integer> selectedListIds;
+            private final Set<Integer> lastSelectedLists;
+            private final AlertDialog dialog;
+            private final List<AbstractList> lists;
+            private final boolean[] selectedItems;
+
+            public OnLastSelectionClickListener(final Set<Integer> selectedListIds, final Set<Integer> lastSelectedLists, final AlertDialog dialog, final List<AbstractList> lists, final boolean[] selectedItems) {
+                this.selectedListIds = selectedListIds;
+                this.lastSelectedLists = lastSelectedLists;
+                this.dialog = dialog;
+                this.lists = lists;
+                this.selectedItems = selectedItems;
+            }
+
+            @Override
+            public void onClick(final View v) {
+                selectedListIds.clear();
+                selectedListIds.addAll(lastSelectedLists);
+                final ListView listView = dialog.getListView();
+                for (int i = 0; i < lists.size() ; i++) {
+                    selectedItems[i] = selectedListIds.contains(lists.get(i).id);
+                    listView.setItemChecked(i, selectedItems[i]);
+                }
+                dialog.getButton(DialogInterface.BUTTON_POSITIVE).setEnabled(!selectedListIds.isEmpty());
+            }
+        }
+
+        private class OnOkClickListener implements DialogInterface.OnClickListener {
+            private final Set<Integer> selectedListIds;
+            private final Action1<Set<Integer>> runAfterwards;
+            private final ListNameMemento listNameMemento;
+
+            public OnOkClickListener(final Set<Integer> selectedListIds, final Action1<Set<Integer>> runAfterwards, final ListNameMemento listNameMemento) {
+                this.selectedListIds = selectedListIds;
+                this.runAfterwards = runAfterwards;
+                this.listNameMemento = listNameMemento;
+            }
+
+            @Override
+            public void onClick(final DialogInterface dialog, final int id) {
+                if (selectedListIds.contains(PseudoList.NEW_LIST.id)) {
+                    // create new list on the fly
+                    promptForListCreation(runAfterwards, selectedListIds, listNameMemento.getTerm());
+                } else {
+                    Settings.setLastSelectedLists(selectedListIds);
+                    runAfterwards.call(selectedListIds);
+                }
+                dialog.cancel();
+            }
+        }
     }
 
     /**

@@ -677,7 +677,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
                             public void call(final Set<Integer> selectedListIds) {
                                 storeCaches(geocodes, selectedListIds);
                                     }
-                        }, true, Collections.<Integer>emptySet());
+                        }, true, Collections.<Integer>emptySet(), false);
                     } else {
                         storeCaches(geocodes, Collections.singleton(StoredList.STANDARD_LIST_ID));
                     }
