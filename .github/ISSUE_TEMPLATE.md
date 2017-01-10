@@ -23,8 +23,9 @@ Yes/No
 ##### System information:
 ```
 Attach system information here if available (see c:geo menu -> About c:geo -> System)
+Keep the apostrophe at beginning and end to have it properly formatted
 ```
 
 
 ##### Other comments and remarks:
-
+e.g. Reference to other issues, projects, sources, etc.
