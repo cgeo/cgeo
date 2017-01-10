@@ -610,7 +610,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 dropCache();
                 return true;
             case R.id.menu_store_in_list:
-                storeCache();
+                storeCache(false);
                 return true;
             case R.id.menu_refresh:
                 refreshCache();
@@ -916,7 +916,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         cache.drop(new ChangeNotificationHandler(this, progress));
     }
 
-    private void storeCache() {
+    private void storeCache(final boolean fastStoreOnLastSelection) {
         if (progress.isShowing()) {
             showToast(res.getString(R.string.err_detail_still_working));
             return;
@@ -930,7 +930,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                         public void call(final Set<Integer> selectedListIds) {
                             storeCacheInLists(selectedListIds);
                         }
-                    }, true, cache.getLists());
+                    }, true, cache.getLists(), fastStoreOnLastSelection);
         } else {
             storeCacheInLists(Collections.singleton(StoredList.STANDARD_LIST_ID));
         }
@@ -1052,14 +1052,8 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             updateAttributesText();
             ButterKnife.findById(view, R.id.attributes_box).setVisibility(cache.getAttributes().isEmpty() ? View.GONE : View.VISIBLE);
 
-            updateOfflineBox(view, cache, res, new RefreshCacheClickListener(), new DropCacheClickListener(), new StoreCacheClickListener(), new OnLongClickListener() {
-
-                @Override
-                public boolean onLongClick(final View v) {
-                    moveCache();
-                    return true;
-                }
-            });
+            updateOfflineBox(view, cache, res, new RefreshCacheClickListener(), new DropCacheClickListener(),
+                    new StoreCacheClickListener(), new MoveCacheClickListener(), new StoreCacheClickListener());
 
             // list
             updateCacheLists(view, cache, res);
@@ -1154,12 +1148,25 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             }
         }
 
-        private class StoreCacheClickListener implements View.OnClickListener {
+        private class StoreCacheClickListener implements View.OnClickListener, View.OnLongClickListener {
             @Override
             public void onClick(final View arg0) {
-                storeCache();
+                storeCache(false);
             }
 
+            @Override
+            public boolean onLongClick(View v) {
+                storeCache(true);
+                return true;
+            }
+        }
+
+        private class MoveCacheClickListener implements OnLongClickListener {
+            @Override
+            public boolean onLongClick(final View v) {
+                moveCache();
+                return true;
+            }
         }
 
         private class DropCacheClickListener implements View.OnClickListener {
@@ -2230,7 +2237,8 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             final OnClickListener refreshCacheClickListener,
             final OnClickListener dropCacheClickListener,
             final OnClickListener storeCacheClickListener,
-            final OnLongClickListener moveCacheListener) {
+            final OnLongClickListener moveCacheListener,
+            final OnLongClickListener storeCachePreselectedListener) {
         // offline use
         final TextView offlineText = ButterKnife.findById(view, R.id.offline_text);
         final ImageButton offlineRefresh = ButterKnife.findById(view, R.id.offline_refresh);
@@ -2239,6 +2247,8 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
         offlineStoreDrop.setClickable(true);
         offlineStoreDrop.setOnClickListener(storeCacheClickListener);
+        offlineStoreDrop.setOnLongClickListener(storeCachePreselectedListener);
+
         if (moveCacheListener != null) {
             offlineEdit.setOnLongClickListener(moveCacheListener);
         }
@@ -2264,6 +2274,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             offlineText.setText(res.getString(R.string.cache_offline_stored) + "\n" + ago);
 
             offlineStoreDrop.setOnClickListener(dropCacheClickListener);
+            offlineStoreDrop.setOnLongClickListener(null);
             offlineStoreDrop.setClickable(true);
             offlineStoreDrop.setImageResource(R.drawable.ic_menu_delete);
 
