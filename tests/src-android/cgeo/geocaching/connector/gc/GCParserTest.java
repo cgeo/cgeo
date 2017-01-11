@@ -261,6 +261,19 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
         assertThat(spoiler.getDescription()).isEqualTo("Suche diese Schraube");
     }
 
+    public void testSpoilerWithoutTitleAndLinkToLargerImage() {
+        final Geocache cache = parseCache(R.raw.gc6xyb6);
+        assertThat(cache).isNotNull();
+        final List<Image> spoilers = cache.getSpoilers();
+
+        assertThat(spoilers).hasSize(1);
+
+        final Image spoiler = spoilers.get(0);
+        assertThat(spoiler.getTitle()).isEqualTo("");
+        assertThat(spoiler.getDescription()).isEqualTo("FOTO SPOILER");
+        assertThat(spoiler.getUrl()).isEqualTo("https://img.geocaching.com/cache/large/124a14b5-87dd-42c6-8c83-52c184e07389.jpg");
+    }
+
     public void testSpoilerBackgroundImage() {
         final Geocache cache = parseCache(R.raw.gc45w92);
         assertThat(cache).isNotNull();
