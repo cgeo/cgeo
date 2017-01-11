@@ -128,11 +128,16 @@ public final class Routing {
 
         final String gpx = brouter.getTrackFromParams(params);
 
+        if (gpx == null) {
+            Log.i("brouter returned no data");
+            return null;
+        }
+
         return parseGpxTrack(gpx, dest);
     }
 
     @Nullable
-    private static Geopoint[] parseGpxTrack(final String gpx, final Geopoint destination) {
+    private static Geopoint[] parseGpxTrack(@NonNull final String gpx, final Geopoint destination) {
         try {
             final LinkedList<Geopoint> result = new LinkedList<>();
             Xml.parse(gpx, new DefaultHandler() {
@@ -156,7 +161,7 @@ public final class Routing {
             return result.toArray(new Geopoint[result.size()]);
 
         } catch (final SAXException e) {
-            Log.e("cannot parse brouter output", e);
+            Log.w("cannot parse brouter output of length " + gpx.length(), e);
         }
         return null;
     }
