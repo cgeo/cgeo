@@ -597,7 +597,9 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
         // always refresh history, an offline log might have been deleted
         if (type == CacheListType.HISTORY) {
+            final LastPositionHelper lastPositionHelper = new LastPositionHelper(this);
             refreshCurrentList();
+            lastPositionHelper.refreshListAtLastPosition();
         }
     }
 
