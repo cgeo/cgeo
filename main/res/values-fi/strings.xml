@@ -530,7 +530,7 @@
   <string name="init_backup_running">Luodaan varmuuskopiota kätkötietokannasta…</string>
   <string name="init_backup_note">Huomaathan että tämä ominaisuus tallentaa/palauttaa tietokannan joka sisältää kätköt sekä reittipisteet, mutta ei asetuksiasi.  \n Kirjautumistietosi ja salasanasi eivät poistu tästä sovelluksesta.</string>
   <string name="init_backup_restore">Palauta</string>
-  <string name="init_backup_success">c: geo:n tietokanta kopioitu onnistuneesti:</string>
+  <string name="init_backup_success">c: geon tietokanta kopioitu onnistuneesti:</string>
   <string name="init_backup_failed">c:geon tietokannan varmuuskopiointi epäonnistui.</string>
   <string name="init_backup_unnecessary">Tietokanta on tyhjä, varmuuskopiointia ei tarvita.</string>
   <string name="init_backup_no_backup_available">Ei varmuuskopiota käytettävissä.</string>
@@ -555,6 +555,7 @@
   <string name="init_maptrail">Näytä reitti</string>
   <string name="init_summary_maptrail">Näytä reitti kartalla</string>
   <string name="init_share_after_export">Avaa jakovalikko GPX-tiedoston tuomisen jälkeen</string>
+  <string name="init_include_found_status">Sisällytä \"Löydetty\" status</string>
   <string name="init_trackautovisit">Reissaajien vierailu</string>
   <string name="init_summary_trackautovisit">Reissaajat vierailevat automaattisesti</string>
   <string name="init_sigautoinsert">Lisää automaattisesti</string>
@@ -612,7 +613,7 @@
   <string name="settings_ec_icons_other">Oma tyyli</string>
   <string name="settings_ec_icons_oc">Kuten OC</string>
   <string name="settings_features">Tuetut ominaisuudet</string>
-  <string name="feature_description">Seuraavat <b>online</b>-ominaisuudet tällä sivustolla ovat tuettuja c:geo:ssa (offline-ominaisuuksien lisäksi):</string>
+  <string name="feature_description">Seuraavat <b>online</b>-ominaisuudet tällä sivustolla ovat tuettuja c:geossa (offline-ominaisuuksien lisäksi):</string>
   <string name="feature_personal_notes">Omat merkinnät</string>
   <string name="feature_online_logging">Online-lokkaaminen</string>
   <string name="feature_log_images">Liitä kuvia lokeihin</string>
@@ -633,7 +634,7 @@
   <string name="map_source_osm_mapnik">OSM: Mapnik</string>
   <string name="map_source_osm_cyclemap">OSM: Pyöräilykartta</string>
   <string name="map_source_osm_offline">Offline</string>
-  <string name="init_sendToCgeo">Lähetä c:geo:on</string>
+  <string name="init_sendToCgeo">Lähetä c:geoon</string>
   <string name="settings_info_send2cgeo_title">Send2cgeo tiedot</string>
   <string name="init_sendToCgeo_name">Laitteen nimi</string>
   <string name="init_sendToCgeo_description"><b>Send2cgeo</b> voit lähettää kätköt Android-laitteeseen suoraan geocaching.com sivulta, käyttäen erityistä laajennusta Firefox- ja Chrome-selaimissa. Ennen rekisteröitymistä, katso <a href="http://send2.cgeo.org/"> http://send2.cgeo.org/</a>. Sinun tarvitsee vain rekisteröityä, jos haluat käyttää send2cgeo. c:geo toimii normaalisti ilman laitteen rekisteröitymistä.</string>
@@ -661,6 +662,7 @@
   <string name="auth_forget_message">Yhteytesi katkaistaan tästä palvelusta. Tällä hetkellä tallennettuna olevat kirjautumistietosi menetetään.</string>
   <!-- auth credentials -->
   <string name="auth_credentials_explain_short">Seuraava prosessi sallii <b>c:geo</b>:lle pääsyn %s.</string>
+  <string name="auth_credentials_explain_long">Täyttämällä käyttäjätietosi ja painamalla \"Tarkista todennus\"-painiketta aloitat prosessin. Tämä prosessi yhdistää %s ja käyttäjätiedot. Siinä kaikki.</string>
   <!-- auth token -->
   <string name="auth_token_register">Luo käyttäjätili</string>
   <string name="auth_token_explain_short">Seuraava prosessi sallii <b>c:geo</b>:lle pääsyn %s.</string>
@@ -920,14 +922,14 @@
   <string name="waypoint_cancel_edit">Peruuta</string>
   <string name="waypoint_loading">Ladataan reittipistettä…</string>
   <string name="waypoint_do_not_touch_cache_coordinates">Ei muutoksia kätkön koordinaatteihin</string>
-  <string name="waypoint_set_as_cache_coords">Muuta kätkön koordinaateiksi c:geo:ssa</string>
+  <string name="waypoint_set_as_cache_coords">Muuta kätkön koordinaateiksi c:geossa</string>
   <string name="waypoint_save_and_modify_on_website">Muuta kätkön koordinaateiksi c:geossa ja nettisivulla</string>
   <string name="waypoint_reset_cache_coords">Palauta kätkön koordinaatit</string>
   <string name="waypoint_coordinates_has_been_reset_on_website">Kätkön koordinaatit palautettu nettisivulla.</string>
   <string name="waypoint_coordinates_being_reset_on_website">Palautetaan kätkökoordinaatteja nettisivulla…</string>
   <string name="waypoint_reset">Nollaa muutokset</string>
-  <string name="waypoint_localy_reset_cache_coords">Nollaa muutokset c:geo:ssa</string>
-  <string name="waypoint_reset_local_and_remote_cache_coords">Nollaa muutokset c:geo:ssa sekä nettisivulla</string>
+  <string name="waypoint_localy_reset_cache_coords">Nollaa muutokset c:geossa</string>
+  <string name="waypoint_reset_local_and_remote_cache_coords">Nollaa muutokset c:geossa sekä nettisivulla</string>
   <string name="waypoint_being_saved">Reittipistettä tallennetaan…</string>
   <string name="waypoint_coordinates_couldnt_be_modified_on_website">Nettisivu ei tue kätkökoordinaattien muuttamista.</string>
   <string name="waypoint_coordinates_upload_error">Virhe koordinaattien muuttamisessa nettisivulle.</string>
@@ -1067,7 +1069,7 @@
   <string name="helper_calendar_description">Mahdollistaa tapahtumakätköjen siirron laitteesi kalenteriin.</string>
   <string name="helper_calendar_pastevent_title">Mennyt tapahtuma</string>
   <string name="helper_calendar_pastevent_question">Päivämäärä on menneisyydessä. Lisätäänkö tästä huolimatta?</string>
-  <string name="helper_sendtocgeo_title">Lähetä c:geo:on</string>
+  <string name="helper_sendtocgeo_title">Lähetä c:geoon</string>
   <string name="helper_contacts_title">c:geo yhteystiedot -lisäosa</string>
   <string name="helper_contacts_description">Voit avata kontaktit (puhelimen osoitekirjasta) suoraan kätkön sivulta, joten voit helpommin pyytää ystävän apua.</string>
   <string name="helper_sendtocgeo_description">Lähetä c:geo on selaimen laajennus <strong>tietokoneellesi</strong>. Geocaching.com sivua selattaessa kätköt voi lähettää älypuhelimeen napin painalluksella suoraan selaimesta.</string>
@@ -1081,11 +1083,13 @@
   <string name="helper_pocketquery_title">Luo Pocket Query</string>
   <string name="helper_pocketquery_description">Tämän avulla on helppo luoda ja ladata Pocket Queryja nykyisestä sijainnistasi tai kartalta valitun pisteen ympäriltä. Vaatii Premium Geocaching.com-tilin.</string>
   <string name="helper_google_translate_title">Google-kääntäjä</string>
-  <string name="helper_google_translate_description">Jos lataat käännöspaketteja Google Translate -sovellukseen, voit helposti kääntää kätkökuvaukset c:geo:ssa painamalla pitkään kätkökuvauksen tekstiä (ilman Internet-yhteyttä).</string>
+  <string name="helper_google_translate_description">Jos lataat käännöspaketteja Google Translate -sovellukseen, voit helposti kääntää kätkökuvaukset c:geossa painamalla pitkään kätkökuvauksen tekstiä (ilman Internet-yhteyttä).</string>
   <string name="helper_wear_title">c:geo Wear</string>
   <string name="helper_wear_description">c:geo Wear -lisäosalla voit navigoida kätköille käyttäen Android Wear -älykelloa.</string>
   <string name="helper_where_you_go_title">WhereYouGo</string>
   <string name="helper_where_you_go_description">WhereYouGo-sovelluksen avulla pystyy pelaamaan ja etsimään Wherigo-kätköjä. c:geo osaa ladata suoraan Wherigo-kasetit tämän sovelluksen avulla.</string>
+  <string name="helper_brouter_title">BRouter Offline Navigation</string>
+  <string name="helper_brouter_description">BRouter tarjoaa offline-navigoinnin. Jos on asennettuna ja tarvittavat tiedostot ladattuna, c:geo näyttää kartalla reitin kätkölle automaattisesti.</string>
   <!-- add-ons -->
   <string name="addon_missing_title">Puuttuva plugin</string>
   <string name="addon_download_prompt">Hanki se nyt Google Playsta.</string>
@@ -1343,7 +1347,7 @@
   <string name="support_title">Tuki</string>
   <string name="website_title">Verkkosivu</string>
   <string name="facebook_title">Facebook</string>
-  <string name="facebook_link"><a href="">c:geo:n sivu</a></string>
+  <string name="facebook_link"><a href="">c:geon sivu</a></string>
   <string name="twitter_title">Twitter</string>
   <string name="market_title">Google Play</string>
   <string name="market_link"><a href=""> c:geo Google Play:ssä</a></string>
