@@ -1367,7 +1367,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
         public void refreshListAtLastPosition() {
             final CacheListActivity activity = activityRef.get();
-            if (activity != null) {
+            if (lastListPosition > 0 && activity != null) {
                 activity.adapter.setSelectMode(false);
                 activity.refreshCurrentList(AfterLoadAction.CHECK_IF_EMPTY);
                 activity.replaceCacheListFromSearch();
