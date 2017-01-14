@@ -2470,7 +2470,7 @@ public class DataStore {
 
     private static void deleteOrphanedRecords() {
         Log.d("Database clean: removing non-existing lists");
-        database.delete(dbTableCachesLists, "list_id NOT IN (SELECT _id FROM " + dbTableLists + ")", null);
+        database.delete(dbTableCachesLists, "list_id <> " + StoredList.STANDARD_LIST_ID + " AND list_id NOT IN (SELECT _id + " + customListIdOffset + " FROM " + dbTableLists + ")", null);
 
         Log.d("Database clean: removing non-existing caches from attributes");
         database.delete(dbTableAttributes, "geocode NOT IN (SELECT geocode FROM " + dbTableCaches + ")", null);
