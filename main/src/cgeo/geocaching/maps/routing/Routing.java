@@ -15,7 +15,6 @@ import android.util.Xml;
 
 import java.util.LinkedList;
 
-import org.apache.commons.lang3.ArrayUtils;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -102,7 +101,7 @@ public final class Routing {
 
         // now really calculate a new route
         lastDestination = destination;
-        lastRoutingPoints = ArrayUtils.nullToEmpty(calculateRouting(start, destination), Geopoint[].class);
+        lastRoutingPoints = calculateRouting(start, destination);
         lastDirectionUpdatePoint = start;
         timeLastUpdate = timeNow;
         return ensureTrack(lastRoutingPoints, start, destination);
