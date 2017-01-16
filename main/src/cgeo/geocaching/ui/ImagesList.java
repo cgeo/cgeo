@@ -40,13 +40,11 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.Collection;
 import java.util.LinkedList;
 
 import butterknife.ButterKnife;
 import com.drew.imaging.ImageMetadataReader;
-import com.drew.imaging.ImageProcessingException;
 import com.drew.lang.GeoLocation;
 import com.drew.metadata.Metadata;
 import com.drew.metadata.exif.GpsDirectory;
@@ -205,7 +203,7 @@ public class ImagesList {
                     return new Geopoint(geoLocation.getLatitude(), geoLocation.getLongitude());
                 }
             }
-        } catch (ImageProcessingException | IOException e) {
+        } catch (final Exception e) {
             Log.i("ImagesList.getImageLocation", e);
         }
         return null;

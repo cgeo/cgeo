@@ -2,7 +2,7 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-    <b>Next bugfix release (Beta version):</b>\n
+    <b>2017.01.15:</b>\n
     · Fix: Avoid crash in logbook under special conditions if Geokrety is enabled\n
     · Fix: Crash on some devices when opening the map for a cache\n
     · Fix: Crash when moving map and debug logging is active\n
