@@ -96,7 +96,7 @@ public class HtmlImage implements Html.ImageGetter {
     // .cache() is not yet available on Completable instances as of RxJava 2.0.0, so we have to go back
     // to the observable world to achieve the caching.
     private final PublishProcessor<Completable> loading = PublishProcessor.create();
-    private final Completable waitForEnd = Completable.merge(loading).toObservable().cache().ignoreElements();
+    private final Completable waitForEnd = Completable.merge(loading).cache();
     private final CompositeDisposable disposable = new CompositeDisposable(waitForEnd.subscribe());
 
     /**
