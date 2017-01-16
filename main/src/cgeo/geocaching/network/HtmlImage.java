@@ -82,7 +82,7 @@ public class HtmlImage implements Html.ImageGetter {
     private final int maxWidth;
     private final int maxHeight;
     private final Resources resources;
-    protected final WeakReference<TextView> viewRef;
+    final WeakReference<TextView> viewRef;
     private final Map<String, BitmapDrawable> cache = new HashMap<>();
 
     private final ObservableCache<String, BitmapDrawable> observableCache = new ObservableCache<>(new Function<String, Observable<BitmapDrawable>>() {
