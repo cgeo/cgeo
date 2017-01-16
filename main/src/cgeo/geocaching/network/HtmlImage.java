@@ -387,7 +387,6 @@ public class HtmlImage implements Html.ImageGetter {
         final String hostUrl = ConnectorFactory.getConnector(geocode).getHostUrl();
         if (StringUtils.isNotEmpty(hostUrl)) {
             final StringBuilder builder = new StringBuilder(hostUrl);
-            builder.append(hostUrl);
             if (!StringUtils.startsWith(url, "/")) {
                 // FIXME: explain why the result URL would be valid if the path does not start with
                 // a '/', or signal an error.
