@@ -180,7 +180,6 @@ public class Settings {
             e.putBoolean(getKey(R.string.pref_loaddirectionimg), prefsV0.getBoolean(getKey(R.string.pref_loaddirectionimg), true));
             e.putString(getKey(R.string.pref_gccustomdate), prefsV0.getString(getKey(R.string.pref_gccustomdate), GCConstants.DEFAULT_GC_DATE));
             e.putInt(getKey(R.string.pref_showwaypointsthreshold), prefsV0.getInt(getKey(R.string.pref_showwaypointsthreshold), SHOW_WP_THRESHOLD_DEFAULT));
-            e.putString(getKey(R.string.pref_cookiestore), prefsV0.getString(getKey(R.string.pref_cookiestore), null));
             e.putBoolean(getKey(R.string.pref_opendetailslastpage), prefsV0.getBoolean(getKey(R.string.pref_opendetailslastpage), false));
             e.putInt(getKey(R.string.pref_lastdetailspage), prefsV0.getInt(getKey(R.string.pref_lastdetailspage), 1));
             e.putInt(getKey(R.string.pref_defaultNavigationTool), prefsV0.getInt(getKey(R.string.pref_defaultNavigationTool), NavigationAppsEnum.COMPASS.id));
@@ -421,19 +420,6 @@ public class Settings {
     @NonNull
     public static String getSignature() {
         return StringUtils.defaultString(getString(R.string.pref_signature, StringUtils.EMPTY));
-    }
-
-    public static void setCookieStore(final String cookies) {
-        if (StringUtils.isBlank(cookies)) {
-            // erase cookies
-            remove(R.string.pref_cookiestore);
-        }
-        // save cookies
-        putString(R.string.pref_cookiestore, cookies);
-    }
-
-    public static String getCookieStore() {
-        return getString(R.string.pref_cookiestore, null);
     }
 
     public static void setUseGooglePlayServices(final boolean value) {

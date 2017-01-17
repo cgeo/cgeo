@@ -8,7 +8,7 @@ import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.network.AndroidBeam;
 import cgeo.geocaching.network.Cookies;
-import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.settings.DiskCookieStore;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.EditUtils;
@@ -153,7 +153,7 @@ public abstract class AbstractActivity extends ActionBarActivity implements IAbs
         app = (CgeoApplication) this.getApplication();
 
         // only needed in some activities, but implemented in super class nonetheless
-        Cookies.restoreCookieStore(Settings.getCookieStore());
+        Cookies.restoreCookieStore(DiskCookieStore.getCookieStore());
         ActivityMixin.onCreate(this, keepScreenOn);
     }
 

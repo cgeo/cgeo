@@ -9,6 +9,7 @@ import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.settings.Credentials;
+import cgeo.geocaching.settings.DiskCookieStore;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
@@ -100,7 +101,7 @@ public class GCLogin extends AbstractLogin {
             }
 
             Cookies.clearCookies();
-            Settings.setCookieStore(null);
+            DiskCookieStore.setCookieStore(null);
 
             final String[] viewstates = getViewstates(tryLoggedInData);
             if (isEmpty(viewstates)) {
@@ -131,7 +132,7 @@ public class GCLogin extends AbstractLogin {
                     return login(false, credentials);
                 }
                 Log.i("Successfully logged in Geocaching.com as " + username + " (" + Settings.getGCMemberStatus() + ')');
-                Settings.setCookieStore(Cookies.dumpCookieStore());
+                DiskCookieStore.setCookieStore(Cookies.dumpCookieStore());
                 setHomeLocation();
                 refreshMemberStatus();
                 detectGcCustomDate();
