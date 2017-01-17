@@ -168,6 +168,9 @@ public class HtmlImage implements Html.ImageGetter {
     @Nullable
     @Override
     public BitmapDrawable getDrawable(final String url) {
+        if (url == null) {
+            throw new IllegalArgumentException("url cannot be null");
+        }
         if (cache.containsKey(url)) {
             return cache.get(url);
         }
@@ -187,13 +190,13 @@ public class HtmlImage implements Html.ImageGetter {
         return new ContainerDrawable(textView, drawable);
     }
 
-    public Observable<BitmapDrawable> fetchDrawable(final String url) {
+    public Observable<BitmapDrawable> fetchDrawable(@NonNull final String url) {
         return observableCache.get(url);
     }
 
     // Caches are loaded from disk on a computation scheduler to avoid using more threads than cores while decoding
     // the image. Downloads happen on downloadScheduler, in parallel with image decoding.
-    private Observable<BitmapDrawable> fetchDrawableUncached(final String url) {
+    private Observable<BitmapDrawable> fetchDrawableUncached(@NonNull final String url) {
         if (StringUtils.isBlank(url) || ImageUtils.containsPattern(url, BLOCKED)) {
             return Observable.just(ImageUtils.getTransparent1x1Drawable(resources));
         }
@@ -312,7 +315,7 @@ public class HtmlImage implements Html.ImageGetter {
      * @param file the file to save the document in
      * @return {@code true} if the existing file was up-to-date, {@code false} otherwise
      */
-    private boolean downloadOrRefreshCopy(final String url, final File file) {
+    private boolean downloadOrRefreshCopy(@NonNull final String url, final File file) {
         final String absoluteURL = makeAbsoluteURL(url);
 
         if (absoluteURL != null) {
@@ -377,26 +380,24 @@ public class HtmlImage implements Html.ImageGetter {
     }
 
     @Nullable
-    private String makeAbsoluteURL(final String url) {
+    private String makeAbsoluteURL(@NonNull final String url) {
         // Check if uri is absolute or not, if not attach the connector hostname
-        // FIXME: that should also include the scheme
         if (Uri.parse(url).isAbsolute()) {
             return url;
         }
 
-        final String hostUrl = ConnectorFactory.getConnector(geocode).getHostUrl();
-        if (StringUtils.isNotEmpty(hostUrl)) {
-            final StringBuilder builder = new StringBuilder(hostUrl);
-            if (!StringUtils.startsWith(url, "/")) {
-                // FIXME: explain why the result URL would be valid if the path does not start with
-                // a '/', or signal an error.
-                builder.append('/');
-            }
-            builder.append(url);
-            return builder.toString();
+        if (!StringUtils.startsWith(url, "/")) {
+            Log.w("unusable relative URL for geocache " + geocode + ": " + url);
+            return null;
         }
 
-        return null;
+        final String hostUrl = ConnectorFactory.getConnector(geocode).getHostUrl();
+        if (StringUtils.isEmpty(hostUrl)) {
+            Log.w("unable to compute relative images URL for " + geocode);
+            return null;
+        }
+
+        return hostUrl + url;
     }
 
     /**
