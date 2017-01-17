@@ -71,23 +71,6 @@ public class Settings {
     public static final int SHOW_WP_THRESHOLD_MAX = 50;
     private static final int MAP_SOURCE_DEFAULT = GoogleMapProvider.GOOGLE_MAP_ID.hashCode();
 
-    public static final boolean HW_ACCEL_DISABLED_BY_DEFAULT =
-            Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1 ||
-            StringUtils.equals(Build.MODEL, "HTC One X")    || // HTC One X
-            StringUtils.equals(Build.MODEL, "HTC One S")    || // HTC One S
-            StringUtils.equals(Build.MODEL, "GT-I8190")     || // Samsung S3 mini
-            StringUtils.equals(Build.MODEL, "GT-S6310L")    || // Samsung Galaxy Young
-            StringUtils.equals(Build.MODEL, "GT-P5210")     || // Samsung Galaxy Tab 3
-            StringUtils.equals(Build.MODEL, "GT-S7580")     || // Samsung Galaxy Trend Plus
-            StringUtils.equals(Build.MODEL, "GT-I9105P")    || // Samsung Galaxy SII Plus
-            StringUtils.equals(Build.MODEL, "ST25i")        || // Sony Xperia U
-            StringUtils.equals(Build.MODEL, "bq Aquaris 5") || // bq Aquaris 5
-            StringUtils.equals(Build.MODEL, "A1-810")       || // Unknown A1-810
-            StringUtils.equals(Build.MODEL, "GT-I9195")     || // Samsung S4 mini
-            StringUtils.equals(Build.MODEL, "GT-I8200N")    || // Samsung S3 mini
-            StringUtils.equals(Build.MODEL, "Q800")         || // XOLO Q800
-            StringUtils.equals(Build.MODEL, "P5_Quad");        // Allview P5 Quad
-
     private static final String PHONE_MODEL_AND_SDK = Build.MODEL + "/" + Build.VERSION.SDK_INT;
 
     // twitter api keys
@@ -1265,8 +1248,8 @@ public class Settings {
     }
 
     public static boolean useHardwareAcceleration() {
-        return outdatedPhoneModelOrSdk() ? !HW_ACCEL_DISABLED_BY_DEFAULT :
-                getBoolean(R.string.pref_hardware_acceleration, !HW_ACCEL_DISABLED_BY_DEFAULT);
+        return outdatedPhoneModelOrSdk() ? HwAccel.hwAccelShouldBeEnabled() :
+                getBoolean(R.string.pref_hardware_acceleration, HwAccel.hwAccelShouldBeEnabled());
     }
 
     static void setUseHardwareAcceleration(final boolean useHardwareAcceleration) {

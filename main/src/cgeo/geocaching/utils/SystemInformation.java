@@ -11,6 +11,7 @@ import cgeo.geocaching.sensors.MagnetometerAndAccelerometerProvider;
 import cgeo.geocaching.sensors.OrientationProvider;
 import cgeo.geocaching.sensors.RotationProvider;
 import cgeo.geocaching.sensors.Sensors;
+import cgeo.geocaching.settings.HwAccel;
 import cgeo.geocaching.settings.Settings;
 
 import android.Manifest;
@@ -61,7 +62,7 @@ public final class SystemInformation {
                 .append("\nHide own/found: ").append(Settings.isExcludeMyCaches())
                 .append("\nMap strategy: ").append(Settings.getLiveMapStrategy().toString().toLowerCase(Locale.getDefault()))
                 .append("\nHW acceleration: ").append(Settings.useHardwareAcceleration() ? "enabled" : "disabled")
-                .append(" (").append(Settings.useHardwareAcceleration() == Settings.HW_ACCEL_DISABLED_BY_DEFAULT ? "manually changed" : "default state").append(')')
+                .append(" (").append(Settings.useHardwareAcceleration() == HwAccel.hwAccelShouldBeEnabled() ? "default state" : "manually changed").append(')')
                 .append("\nSystem language: ").append(Locale.getDefault());
         if (Settings.useEnglish()) {
             body.append(" (cgeo forced to English)");
