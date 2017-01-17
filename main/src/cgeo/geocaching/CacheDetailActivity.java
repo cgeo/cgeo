@@ -653,7 +653,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 }
                 return true;
             default:
-                if (LoggingUI.onMenuItemSelected(item, this, cache)) {
+                if (LoggingUI.onMenuItemSelected(item, this, cache, null)) {
                     refreshOnResume = true;
                     return true;
                 }

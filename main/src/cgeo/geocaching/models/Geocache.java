@@ -445,6 +445,12 @@ public class Geocache implements IWaypoint {
         if (logType == LogType.UNKNOWN) {
             return;
         }
+
+        if (!isOffline()) {
+            getLists().add(StoredList.STANDARD_LIST_ID);
+            DataStore.saveCache(this, LoadFlags.SAVE_ALL);
+        }
+
         final boolean status = DataStore.saveLogOffline(geocode, date.getTime(), logType, log);
 
         final Resources res = fromActivity.getResources();

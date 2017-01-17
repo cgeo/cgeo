@@ -219,7 +219,7 @@ public class CompassActivity extends AbstractActionBarActivity {
                 cache.showHintToast(this);
                 return true;
             default:
-                if (LoggingUI.onMenuItemSelected(item, this, cache)) {
+                if (LoggingUI.onMenuItemSelected(item, this, cache, null)) {
                     return true;
                 }
         }
