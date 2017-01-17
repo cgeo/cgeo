@@ -1958,7 +1958,7 @@ public class DataStore {
                 "geocode = ?",
                 new String[]{geocode},
                 "_id",
-                "100",
+                null,
                 new LinkedList<Waypoint>(),
                 new Func1<Cursor, Waypoint>() {
                     @Override
