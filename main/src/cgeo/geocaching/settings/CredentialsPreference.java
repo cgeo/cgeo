@@ -7,6 +7,7 @@ import cgeo.geocaching.connector.capability.ICredentials;
 import cgeo.geocaching.connector.ec.ECConnector;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.gcvote.GCVote;
+import cgeo.geocaching.network.Cookies;
 import cgeo.geocaching.network.HtmlImage;
 
 import org.apache.commons.lang3.StringUtils;
@@ -135,6 +136,9 @@ public class CredentialsPreference extends AbstractClickablePreference {
 
     @Override
     protected void revokeAuthorization() {
+        if (credentialsMapping == CredentialActivityMapping.GEOCACHING) {
+            Cookies.clearCookies();
+        }
         Settings.setCredentials(credentialsMapping.getConnector(), Credentials.EMPTY);
         Settings.setAvatarUrl(credentialsMapping.getConnector(), StringUtils.EMPTY);
     }
