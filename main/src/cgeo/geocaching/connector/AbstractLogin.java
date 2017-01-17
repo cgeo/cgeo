@@ -6,7 +6,7 @@ import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.network.Cookies;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.settings.Credentials;
-import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.settings.DiskCookieStore;
 
 import org.apache.commons.lang3.StringUtils;
 import android.support.annotation.NonNull;
@@ -60,7 +60,7 @@ public abstract class AbstractLogin {
 
     protected void resetLoginStatus() {
         Cookies.clearCookies();
-        Settings.setCookieStore(null);
+        DiskCookieStore.setCookieStore(null);
 
         setActualLoginStatus(false);
     }
