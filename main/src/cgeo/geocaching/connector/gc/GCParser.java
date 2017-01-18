@@ -1119,7 +1119,7 @@ public final class GCParser {
         }
 
         if (StringUtils.isBlank(log)) {
-            Log.e("GCParser.postLog: No log text given");
+            Log.w("GCParser.postLog: No log text given");
             return new ImmutablePair<>(StatusCode.NO_LOG_TEXT, "");
         }
 
@@ -1323,7 +1323,7 @@ public final class GCParser {
         }
 
         if (StringUtils.isBlank(log)) {
-            Log.e("GCParser.postLogTrackable: No log text given");
+            Log.w("GCParser.postLogTrackable: No log text given");
             return StatusCode.NO_LOG_TEXT;
         }
 
