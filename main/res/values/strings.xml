@@ -852,6 +852,7 @@
     <string name="cache_menu_around">Caches around</string>
     <string name="around">Around %s</string>
     <string name="cache_menu_event">Add to calendar</string>
+    <string name="cache_menu_extract_waypoints">Extract waypoints</string>
     <string name="cache_menu_details">Details</string>
     <string name="cache_menu_refresh">Refresh</string>
     <string name="cache_menu_share">Share cache</string>

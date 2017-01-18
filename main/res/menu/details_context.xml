@@ -31,5 +31,11 @@
         android:visible="false"
         app:showAsAction="ifRoom">
     </item>
+    <item
+        android:id="@+id/menu_extract_waypoints"
+        android:title="@string/cache_menu_extract_waypoints"
+        android:visible="false"
+        app:showAsAction="ifRoom">
+    </item>
 
 </menu>

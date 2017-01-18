@@ -1940,7 +1940,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             final int startSelection = selectedTextView.getSelectionStart();
             final int endSelection = selectedTextView.getSelectionEnd();
             clickedItemText = selectedTextView.getText().subSequence(startSelection, endSelection);
-            return onClipboardItemSelected(mActionMode, menuItem, clickedItemText);
+            return onClipboardItemSelected(mActionMode, menuItem, clickedItemText, cache);
         }
     }
 
@@ -1955,6 +1955,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             menu.findItem(R.id.menu_cache_share_field).setOnMenuItemClickListener(new TextMenuItemClickListener());
             menu.findItem(R.id.menu_translate_to_sys_lang).setOnMenuItemClickListener(new TextMenuItemClickListener());
             menu.findItem(R.id.menu_translate_to_english).setOnMenuItemClickListener(new TextMenuItemClickListener());
+            final MenuItem extWpts = menu.findItem(R.id.menu_extract_waypoints);
+            extWpts.setVisible(true);
+            extWpts.setOnMenuItemClickListener(new TextMenuItemClickListener());
             buildDetailsContextMenu(mode, menu, res.getString(R.string.cache_description), false);
             selectedTextView.setWindowFocusWait(true);
         }
@@ -2055,7 +2058,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                                 return true;
                             // handle clipboard actions in base
                             default:
-                                return onClipboardItemSelected(actionMode, menuItem, clickedItemText);
+                                return onClipboardItemSelected(actionMode, menuItem, clickedItemText, cache);
                         }
                     }
                 });
