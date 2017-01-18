@@ -1006,7 +1006,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         final Geocache cache = adapterInfo != null ? getCacheFromAdapter(adapterInfo) : null;
 
         // just in case the list got resorted while we are executing this code
-        if (cache == null) {
+        if (cache == null || adapterInfo == null) {
             return true;
         }
 
@@ -1041,7 +1041,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 final View selectedView = adapterInfo.targetView;
                 LoggingUI.onMenuItemSelected(item, this, cache, new DialogInterface.OnDismissListener() {
                     @Override
-                    public void onDismiss(DialogInterface dialog) {
+                    public void onDismiss(final DialogInterface dialog) {
                         if (selectedView != null) {
                             final CacheListAdapter.ViewHolder holder = (CacheListAdapter.ViewHolder) selectedView.getTag();
                             if (holder != null) {
