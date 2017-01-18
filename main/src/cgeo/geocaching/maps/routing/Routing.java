@@ -94,8 +94,7 @@ public final class Routing {
 
         // Use cached route if current position has not changed more than 5m and we had a route
         // TODO: Maybe adjust this to current zoomlevel
-        if (lastRoutingPoints != null && lastDirectionUpdatePoint != null && destination == lastDestination &&
-                start.distanceTo(lastDirectionUpdatePoint) < UPDATE_MIN_DISTANCE_KILOMETERS) {
+        if (lastDirectionUpdatePoint != null && destination == lastDestination && start.distanceTo(lastDirectionUpdatePoint) < UPDATE_MIN_DISTANCE_KILOMETERS && lastRoutingPoints != null) {
             return lastRoutingPoints;
         }
 

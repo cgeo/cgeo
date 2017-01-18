@@ -17,7 +17,6 @@ import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.gcvote.GCVote;
 import cgeo.geocaching.gcvote.GCVoteRatingBarUtil;
 import cgeo.geocaching.gcvote.GCVoteRatingBarUtil.OnRatingChangeListener;
-import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.log.LogTemplateProvider.LogContext;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
