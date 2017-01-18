@@ -659,7 +659,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
 
             @Override
             public boolean onActionItemClicked(final ActionMode actionMode, final MenuItem menuItem) {
-                return onClipboardItemSelected(actionMode, menuItem, clickedItemText);
+                return onClipboardItemSelected(actionMode, menuItem, clickedItemText, null);
             }
         });
         return false;

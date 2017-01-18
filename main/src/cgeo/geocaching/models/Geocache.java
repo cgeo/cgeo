@@ -1510,10 +1510,14 @@ public class Geocache implements IWaypoint {
      * Detect coordinates in the personal note and convert them to user defined waypoints. Works by rule of thumb.
      */
     public boolean parseWaypointsFromNote() {
+        return parseWaypointsFromText(getPersonalNote(), false);
+    }
+
+    public boolean parseWaypointsFromText(@Nullable final String text, final boolean updateDb) {
         boolean changed = false;
-        for (final Waypoint waypoint : Waypoint.parseWaypointsFromNote(StringUtils.defaultString(getPersonalNote()))) {
+        for (final Waypoint waypoint : Waypoint.parseWaypointsFromNote(StringUtils.defaultString(text))) {
             if (!hasIdenticalWaypoint(waypoint.getCoords())) {
-                addOrChangeWaypoint(waypoint, false);
+                addOrChangeWaypoint(waypoint, updateDb);
                 changed = true;
             }
         }
@@ -1971,5 +1975,4 @@ public class Geocache implements IWaypoint {
     public GeoitemRef getGeoitemRef() {
         return new GeoitemRef(getGeocode(), getCoordType(), getGeocode(), 0, getName(), getType().markerId);
     }
-
 }

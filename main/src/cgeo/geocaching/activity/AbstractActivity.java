@@ -1,6 +1,7 @@
 package cgeo.geocaching.activity;
 
 import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.enumerations.CacheType;
@@ -23,6 +24,7 @@ import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.view.ActionMode;
 import android.view.Menu;
@@ -179,7 +181,7 @@ public abstract class AbstractActivity extends ActionBarActivity implements IAbs
         menu.findItem(R.id.menu_translate_to_english).setVisible(!copyOnly && !localeIsEnglish);
     }
 
-    protected boolean onClipboardItemSelected(@NonNull final ActionMode actionMode, final MenuItem item, final CharSequence clickedItemText) {
+    protected boolean onClipboardItemSelected(@NonNull final ActionMode actionMode, final MenuItem item, final CharSequence clickedItemText, @Nullable final Geocache cache) {
         if (clickedItemText == null) {
             return false;
         }
@@ -196,6 +198,14 @@ public abstract class AbstractActivity extends ActionBarActivity implements IAbs
                 return true;
             case R.id.menu_translate_to_english:
                 TranslationUtils.startActivityTranslate(this, Locale.ENGLISH.getLanguage(), HtmlUtils.extractText(clickedItemText));
+                actionMode.finish();
+                return true;
+            case R.id.menu_extract_waypoints:
+                if (cache != null && cache.parseWaypointsFromText(HtmlUtils.extractText(clickedItemText), true)) {
+                    final Intent intent = new Intent(Intents.INTENT_CACHE_CHANGED);
+                    intent.putExtra(Intents.EXTRA_WPT_PAGE_UPDATE, true);
+                    LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
+                }
                 actionMode.finish();
                 return true;
             case R.id.menu_cache_share_field:
