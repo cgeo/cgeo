@@ -71,6 +71,7 @@ import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.CryptUtils;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.Formatter;
+import cgeo.geocaching.utils.HtmlUtils;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
@@ -587,6 +588,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         menu.findItem(R.id.menu_gcvote).setVisible(cache != null && GCVote.isVotingPossible(cache));
         menu.findItem(R.id.menu_checker).setVisible(cache != null && StringUtils.isNotEmpty(CheckerUtils.getCheckerUrl(cache)));
         menu.findItem(R.id.menu_app_invite).setVisible(cache != null && AppInvite.isAvailable());
+        menu.findItem(R.id.menu_extract_waypoints).setVisible(cache != null && cache.isOffline());
         if (cache != null) {
             final IConnector connector = ConnectorFactory.getConnector(cache);
             if (connector instanceof IgnoreCapability) {
@@ -628,6 +630,10 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 return true;
             case R.id.menu_ignore:
                 ignoreCache();
+                return true;
+            case R.id.menu_extract_waypoints:
+                cache.parseWaypointsFromText(HtmlUtils.extractText(cache.getDescription()), true);
+                getViewCreator(Page.WAYPOINTS).notifyDataSetChanged();
                 return true;
             case R.id.menu_export_gpx:
                 new GpxExport().export(Collections.singletonList(cache), this);
