@@ -1507,15 +1507,22 @@ public class Geocache implements IWaypoint {
     }
 
     /**
-     * Detect coordinates in the personal note and convert them to user defined waypoints. Works by rule of thumb.
+     * Detect coordinates in the personal note and add them to user defined waypoints.
      */
-    public boolean parseWaypointsFromNote() {
-        return parseWaypointsFromText(getPersonalNote(), false);
+    public boolean addWaypointsFromNote() {
+        return addWaypointsFromText(getPersonalNote(), false, CgeoApplication.getInstance().getString(R.string.cache_personal_note));
     }
 
-    public boolean parseWaypointsFromText(@Nullable final String text, final boolean updateDb) {
+    /**
+     * Detect coordinates in the given text and add them to user defined waypoints.
+     *
+     * @param text text which might contain coordinates
+     * @param updateDb if true the added waypoints are stored in DB right away
+     * @param namePrefix prefix for waypoint names
+     */
+    public boolean addWaypointsFromText(@Nullable final String text, final boolean updateDb, @NonNull final String namePrefix) {
         boolean changed = false;
-        for (final Waypoint waypoint : Waypoint.parseWaypointsFromNote(StringUtils.defaultString(text))) {
+        for (final Waypoint waypoint : Waypoint.parseWaypoints(StringUtils.defaultString(text), namePrefix)) {
             if (!hasIdenticalWaypoint(waypoint.getCoords())) {
                 addOrChangeWaypoint(waypoint, updateDb);
                 changed = true;

@@ -201,7 +201,7 @@ public abstract class AbstractActivity extends ActionBarActivity implements IAbs
                 actionMode.finish();
                 return true;
             case R.id.menu_extract_waypoints:
-                if (cache != null && cache.parseWaypointsFromText(HtmlUtils.extractText(clickedItemText), true)) {
+                if (cache != null && cache.addWaypointsFromText(HtmlUtils.extractText(clickedItemText), true, res.getString(R.string.cache_description))) {
                     final Intent intent = new Intent(Intents.INTENT_CACHE_CHANGED);
                     intent.putExtra(Intents.EXTRA_WPT_PAGE_UPDATE, true);
                     LocalBroadcastManager.getInstance(this).sendBroadcast(intent);

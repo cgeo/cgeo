@@ -1,16 +1,13 @@
 package cgeo.geocaching.models;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.enumerations.CoordinatesType;
-import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.maps.mapsforge.v6.caches.GeoitemRef;
+import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.MatcherWrapper;
 
-import org.apache.commons.lang3.StringUtils;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
@@ -22,6 +19,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Pattern;
+
+import org.apache.commons.lang3.StringUtils;
 
 public class Waypoint implements IWaypoint {
 
@@ -281,25 +280,27 @@ public class Waypoint implements IWaypoint {
     }
 
     /**
-     * Detect coordinates in the personal note and convert them to user defined waypoints. Works by rule of thumb.
+     * Detect coordinates in the given text and converts them to user defined waypoints.
+     * Works by rule of thumb.
      *
-     * @param initialNote Note content
+     * @param initialText Text to parse for waypoints
+     * @param namePrefix Prefix of the name of the waypoint
      * @return a collection of found waypoints
      */
-    public static Collection<Waypoint> parseWaypointsFromNote(@NonNull final String initialNote) {
+    public static Collection<Waypoint> parseWaypoints(@NonNull final String initialText, @NonNull final String namePrefix) {
         final List<Waypoint> waypoints = new LinkedList<>();
 
-        String note = initialNote;
-        MatcherWrapper matcher = new MatcherWrapper(PATTERN_COORDS, note);
+        String text = initialText;
+        MatcherWrapper matcher = new MatcherWrapper(PATTERN_COORDS, text);
         int count = 1;
         while (matcher.find()) {
             try {
-                final Geopoint point = new Geopoint(note.substring(matcher.start()));
+                final Geopoint point = new Geopoint(text.substring(matcher.start()));
                 // Coords must have non zero latitude and longitude and at least one part shall have fractional degrees.
                 if (point.getLatitudeE6() != 0 && point.getLongitudeE6() != 0 &&
                         ((point.getLatitudeE6() % 1000) != 0 || (point.getLongitudeE6() % 1000) != 0)) {
-                    final String name = CgeoApplication.getInstance().getString(R.string.cache_personal_note) + " " + count;
-                    final String potentialWaypointType = note.substring(Math.max(0, matcher.start() - 15));
+                    final String name = namePrefix + " " + count;
+                    final String potentialWaypointType = text.substring(Math.max(0, matcher.start() - 15));
                     final Waypoint waypoint = new Waypoint(name, parseWaypointType(potentialWaypointType), true);
                     waypoint.setCoords(point);
                     waypoints.add(waypoint);
@@ -308,8 +309,8 @@ public class Waypoint implements IWaypoint {
             } catch (final Geopoint.ParseException ignored) {
             }
 
-            note = note.substring(matcher.start() + 1);
-            matcher = new MatcherWrapper(PATTERN_COORDS, note);
+            text = text.substring(matcher.start() + 1);
+            matcher = new MatcherWrapper(PATTERN_COORDS, text);
         }
         return waypoints;
     }

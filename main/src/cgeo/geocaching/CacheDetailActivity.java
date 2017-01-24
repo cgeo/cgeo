@@ -632,7 +632,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 ignoreCache();
                 return true;
             case R.id.menu_extract_waypoints:
-                cache.parseWaypointsFromText(HtmlUtils.extractText(cache.getDescription()), true);
+                cache.addWaypointsFromText(HtmlUtils.extractText(cache.getDescription()), true, res.getString(R.string.cache_description));
                 getViewCreator(Page.WAYPOINTS).notifyDataSetChanged();
                 return true;
             case R.id.menu_export_gpx:
@@ -2387,7 +2387,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     @Override
     public void onFinishEditNoteDialog(final String note) {
         cache.setPersonalNote(note);
-        if (cache.parseWaypointsFromNote()) {
+        if (cache.addWaypointsFromNote()) {
             getViewCreator(Page.WAYPOINTS).notifyDataSetChanged();
         }
 

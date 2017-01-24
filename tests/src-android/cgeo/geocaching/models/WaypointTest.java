@@ -1,15 +1,15 @@
 package cgeo.geocaching.models;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
+import cgeo.CGeoTestCase;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.location.Geopoint;
 
-import android.test.AndroidTestCase;
-
 import java.util.Collection;
+import java.util.Iterator;
 
-public class WaypointTest extends AndroidTestCase {
+import static org.assertj.core.api.Assertions.assertThat;
+
+public class WaypointTest extends CGeoTestCase {
 
     public static void testOrder() {
         final Waypoint cache = new Waypoint("Final", WaypointType.FINAL, false);
@@ -48,7 +48,7 @@ public class WaypointTest extends AndroidTestCase {
         assertThat(waypoint.getGeocode()).isEqualTo("P1");
     }
 
-    public static void testParseNoWaypointFromNote() {
+    public static void testParseNoWaypoints() {
         final String note = "1 T 126\n" +
                 "2 B 12\n" +
                 "3 S 630\n" +
@@ -61,23 +61,44 @@ public class WaypointTest extends AndroidTestCase {
                 "M 7\n" +
                 "N 5\n" +
                 "5 IFG 257";
-        assertThat(Waypoint.parseWaypointsFromNote(note)).isEmpty();
+        assertThat(Waypoint.parseWaypoints(note, "Prefix")).isEmpty();
     }
 
-    public static void testParseWaypointFromNote() {
+    public static void testParseWaypointsOneLine() {
         final String note = "Dummy note\nn 45° 3.5 e 27° 7.5\nNothing else";
-        final Collection<Waypoint> waypoints = Waypoint.parseWaypointsFromNote(note);
+        final Collection<Waypoint> waypoints = Waypoint.parseWaypoints(note, "Prefix");
         assertThat(waypoints).hasSize(1);
-        final Geopoint coords = waypoints.iterator().next().getCoords();
-        assertThat(coords).isNotNull();
-        assert coords != null; // eclipse null analysis
-        assertThat(coords.getLatDeg()).isEqualTo(45);
-        assertThat(coords.getLatMinRaw()).isEqualTo(3.5);
-        assertThat(coords.getLonDeg()).isEqualTo(27);
-        assertThat(coords.getLonMinRaw()).isEqualTo(7.5);
-        final String note2 = "Waypoint on two lines\nN 45°3.5\nE 27°7.5\nNothing else";
-        final Collection<Waypoint> waypoints2 = Waypoint.parseWaypointsFromNote(note2);
-        assertThat(waypoints2).hasSize(1);
-        assertThat(waypoints2.iterator().next().getCoords()).isEqualTo(coords);
+        assertWaypoint(waypoints.iterator().next(), "Prefix 1", new Geopoint("N 45°3.5 E 27°7.5"));
     }
+
+    private static void assertWaypoint(final Waypoint waypoint, final String name, final Geopoint geopoint) {
+        assertThat(waypoint.getName()).isEqualTo(name);
+        assertThat(waypoint.getCoords()).isEqualTo(geopoint);
+    }
+
+    public static void testParseWaypointsMultiLine() {
+        final String note2 = "Waypoint on two lines\nN 45°3.5\nE 27°7.5\nNothing else";
+        final Collection<Waypoint> waypoints = Waypoint.parseWaypoints(note2, "Prefix");
+        assertThat(waypoints).hasSize(1);
+        assertWaypoint(waypoints.iterator().next(), "Prefix 1", new Geopoint("N 45°3.5 E 27°7.5"));
+    }
+
+    /**
+     * Taken from GCM4Y8
+     */
+    public static void testParseWaypointsMultiLineWithDuplicates() {
+        final String text = "La cache si ... (N45 49.739 E9 45.038 altitudine 860 m. s.l.m.), si prosegue ...\n" +
+                "Proseguendo ancora nel sentiero ... all’agriturismo La Peta (N45 50.305 E9 43.991) vi è possibilità di pranzare e soggiornare.\n" +
+                "You go to Costa Serina ... sanctuary “Mother of the snow” (N45 49.739 E9 45.038); then you have a walk towards Tagliata...\n" +
+                "The path is part of two paths ... is a rural restaurant called \"la Peta\" (N45 50.305 E9 43.991): here you are able to have lunch ...";
+
+        final Collection<Waypoint> waypoints = Waypoint.parseWaypoints(text, "Prefix");
+        assertThat(waypoints).hasSize(4);
+        final Iterator<Waypoint> iterator = waypoints.iterator();
+        assertWaypoint(iterator.next(), "Prefix 1", new Geopoint("N 45°49.739 E 9°45.038"));
+        assertWaypoint(iterator.next(), "Prefix 2", new Geopoint("N 45°50.305 E 9°43.991"));
+        assertWaypoint(iterator.next(), "Prefix 3", new Geopoint("N 45°49.739 E 9°45.038"));
+        assertWaypoint(iterator.next(), "Prefix 4", new Geopoint("N 45°50.305 E 9°43.991"));
+    }
+
 }
