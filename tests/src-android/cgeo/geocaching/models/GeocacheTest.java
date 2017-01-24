@@ -1,7 +1,5 @@
 package cgeo.geocaching.models;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import cgeo.CGeoTestCase;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
@@ -21,6 +19,7 @@ import java.util.HashSet;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class GeocacheTest extends CGeoTestCase {
 
@@ -72,6 +71,14 @@ public class GeocacheTest extends CGeoTestCase {
         assertWaypointsParsed("Test N51 13.888 E007 03.444 Test N51 13.233 E007 03.444 Test N51 09.123 E007 03.444", 3);
     }
 
+    /**
+     * The first and the third waypoints are identical.
+     * Duplicates should be ignored, so expected size is 2.
+     */
+    public final void testUpdateWaypointsFromNoteWithDuplicates() {
+        assertWaypointsParsed("Test N51 13.888 E007 03.444 Test N51 13.233 E007 03.444 Test N51 13.888 E007 03.444", 2);
+    }
+
     private void assertWaypointsParsed(final String note, final int expectedWaypoints) {
         recordMapStoreFlags();
 
@@ -84,13 +91,12 @@ public class GeocacheTest extends CGeoTestCase {
             cache.setWaypoints(new ArrayList<Waypoint>(), false);
             for (int i = 0; i < 2; i++) {
                 cache.setPersonalNote(note);
-                cache.parseWaypointsFromNote();
+                cache.addWaypointsFromNote();
                 final List<Waypoint> waypoints = cache.getWaypoints();
                 assertThat(waypoints).isNotNull();
                 assertThat(waypoints).hasSize(expectedWaypoints);
                 final Waypoint waypoint = waypoints.get(0);
                 assertThat(waypoint.getCoords()).isEqualTo(new Geopoint("N51 13.888 E007 03.444"));
-                //            assertThat(waypoint.getNote()).isEqualTo("Test");
                 assertThat(waypoint.getName()).isEqualTo(CgeoApplication.getInstance().getString(R.string.cache_personal_note) + " 1");
                 cache.store(Collections.singleton(StoredList.TEMPORARY_LIST.id), null);
             }
