@@ -762,6 +762,8 @@ public final class GCParser {
                     latlon = Html.fromHtml(TextUtils.getMatch(wp[7], GCConstants.PATTERN_WPPREFIXORLOOKUPORLATLON, false, 2, "", false)).toString().trim();
                     if (!StringUtils.startsWith(latlon, "???")) {
                         waypoint.setCoords(new Geopoint(latlon));
+                    } else {
+                        waypoint.setOriginalCoordsEmpty(true);
                     }
 
                     if (wpItems.length >= j) {

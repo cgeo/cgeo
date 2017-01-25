@@ -95,6 +95,19 @@
         tools:visiblity="visible"
         tools:text="Note"/>
 
+    <TextView
+        android:id="@+id/user_note"
+        android:autoLink="all"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:focusable="false"
+        android:textColor="?text_color"
+        android:textSize="14sp"
+        android:visibility="gone"
+        tools:visiblity="visible"
+        tools:text="User Note"/>
+
     <View
         style="@style/separator_horizontal"
         android:layout_marginTop="9dp" />

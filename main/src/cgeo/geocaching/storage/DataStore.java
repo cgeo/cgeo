@@ -158,7 +158,7 @@ public class DataStore {
                     "cg_caches.watchlistCount";          // 42
 
     /** The list of fields needed for mapping. */
-    private static final String[] WAYPOINT_COLUMNS = { "_id", "geocode", "updated", "type", "prefix", "lookup", "name", "latitude", "longitude", "note", "own", "visited" };
+    private static final String[] WAYPOINT_COLUMNS = { "_id", "geocode", "updated", "type", "prefix", "lookup", "name", "latitude", "longitude", "note", "own", "visited", "user_note", "org_coords_empty" };
 
     /** Number of days (as ms) after temporarily saved caches are deleted */
     private static final long DAYS_AFTER_CACHE_IS_DELETED = 3 * 24 * 60 * 60 * 1000;
@@ -168,7 +168,7 @@ public class DataStore {
      */
     private static final CacheCache cacheCache = new CacheCache();
     private static volatile SQLiteDatabase database = null;
-    private static final int dbVersion = 71;
+    private static final int dbVersion = 72;
     public static final int customListIdOffset = 10;
     @NonNull private static final String dbName = "data";
     @NonNull private static final String dbTableCaches = "cg_caches";
@@ -263,7 +263,9 @@ public class DataStore {
             + "longitude DOUBLE, "
             + "note TEXT, "
             + "own INTEGER DEFAULT 0, "
-            + "visited INTEGER DEFAULT 0"
+            + "visited INTEGER DEFAULT 0, "
+            + "user_note TEXT, "
+            + "org_coords_empty INTEGER DEFAULT 0"
             + "); ";
     private static final String dbCreateSpoilers = ""
             + "CREATE TABLE " + dbTableSpoilers + " ("
@@ -856,6 +858,18 @@ public class DataStore {
                             Log.e("Failed to upgrade to ver. 71", e);
                         }
                     }
+                    // User notes in waypoints and local coords changes of WPs without coords on server
+                    if (oldVersion < 72) {
+                        try {
+                            db.execSQL("ALTER TABLE " + dbTableWaypoints + " ADD COLUMN user_note TEXT");
+                            db.execSQL("ALTER TABLE " + dbTableWaypoints + " ADD COLUMN org_coords_empty INTEGER DEFAULT 0");
+                            db.execSQL("UPDATE " + dbTableWaypoints + " SET user_note = note");
+                            db.execSQL("UPDATE " + dbTableWaypoints + " SET note = ''");
+                            db.execSQL("UPDATE " + dbTableWaypoints + " SET org_coords_empty = 1 WHERE latitude IS NULL AND longitude IS NULL");
+                        } catch (final Exception e) {
+                            Log.e("Failed to upgrade to ver. 72", e);
+                        }
+                    }
                 }
 
                 db.setTransactionSuccessful();
@@ -1367,6 +1381,8 @@ public class DataStore {
                 values.put("note", oneWaypoint.getNote());
                 values.put("own", oneWaypoint.isUserDefined() ? 1 : 0);
                 values.put("visited", oneWaypoint.isVisited() ? 1 : 0);
+                values.put("user_note", oneWaypoint.getUserNote());
+                values.put("org_coords_empty", oneWaypoint.isOriginalCoordsEmpty() ? 1 : 0);
                 if (oneWaypoint.getId() < 0) {
                     final long rowId = database.insert(dbTableWaypoints, null, values);
                     oneWaypoint.setId((int) rowId);
@@ -1443,8 +1459,10 @@ public class DataStore {
             values.put("name", waypoint.getName());
             putCoords(values, waypoint.getCoords());
             values.put("note", waypoint.getNote());
+            values.put("user_note", waypoint.getUserNote());
             values.put("own", waypoint.isUserDefined() ? 1 : 0);
             values.put("visited", waypoint.isVisited() ? 1 : 0);
+            values.put("org_coords_empty", waypoint.isOriginalCoordsEmpty() ? 1 : 0);
             if (id <= 0) {
                 final long rowId = database.insert(dbTableWaypoints, null, values);
                 waypoint.setId((int) rowId);
@@ -1981,6 +1999,8 @@ public class DataStore {
         waypoint.setLookup(cursor.getString(cursor.getColumnIndex("lookup")));
         waypoint.setCoords(getCoords(cursor, cursor.getColumnIndex("latitude"), cursor.getColumnIndex("longitude")));
         waypoint.setNote(cursor.getString(cursor.getColumnIndex("note")));
+        waypoint.setUserNote(cursor.getString(cursor.getColumnIndex("user_note")));
+        waypoint.setOriginalCoordsEmpty(cursor.getInt(cursor.getColumnIndex("org_coords_empty")) != 0);
 
         return waypoint;
     }

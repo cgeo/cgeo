@@ -101,4 +101,54 @@ public class WaypointTest extends CGeoTestCase {
         assertWaypoint(iterator.next(), "Prefix 4", new Geopoint("N 45°50.305 E 9°43.991"));
     }
 
+    public static void testMerge() {
+        final Waypoint local = new Waypoint("Stage 1", WaypointType.STAGE, false);
+        local.setPrefix("S1");
+        local.setCoords(new Geopoint("N 45°49.739 E 9°45.038"));
+        local.setNote("Note");
+        local.setUserNote("User Note");
+        local.setVisited(true);
+        local.setId(4711);
+
+        final Waypoint server = new Waypoint("", WaypointType.STAGE, false);
+        server.merge(local);
+
+        assertThat(server.getPrefix()).isEqualTo("S1");
+        assertThat(server.getCoords()).isEqualTo(new Geopoint("N 45°49.739 E 9°45.038"));
+        assertThat(server.getNote()).isEqualTo("Note");
+        assertThat(server.getUserNote()).isEqualTo("User Note");
+        assertThat(server.isVisited()).isTrue();
+        assertThat(server.getId()).isEqualTo(4711);
+    }
+
+    public static void testMergeFinalWPWithLocalCoords() {
+        final Waypoint local = new Waypoint("Final", WaypointType.FINAL, false);
+        local.setCoords(new Geopoint("N 45°49.739 E 9°45.038"));
+        final Waypoint server = new Waypoint("Final", WaypointType.FINAL, false);
+        server.merge(local);
+        assertThat(server.getCoords()).isEqualTo(new Geopoint("N 45°49.739 E 9°45.038"));
+    }
+
+    public static void testMergeNote() {
+        final Waypoint local = new Waypoint("Stage 1", WaypointType.STAGE, false);
+        local.setNote("Old Note");
+        local.setUserNote("Local User Note");
+        final Waypoint server = new Waypoint("Stage 1", WaypointType.STAGE, false);
+        server.setNote("New Note");
+        server.merge(local);
+        assertThat(server.getNote()).isEqualTo("New Note");
+        assertThat(server.getUserNote()).isEqualTo("Local User Note");
+    }
+
+    public static void testMergeNoteCleaningUpMigratedNote() {
+        final Waypoint local = new Waypoint("Stage 1", WaypointType.STAGE, false);
+        local.setNote("");
+        local.setUserNote("Note");
+        final Waypoint server = new Waypoint("Stage 1", WaypointType.STAGE, false);
+        server.setNote("Note");
+        server.merge(local);
+        assertThat(server.getNote()).isEqualTo("Note");
+        assertThat(server.getUserNote()).isEqualTo("");
+    }
+
 }

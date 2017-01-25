@@ -71,6 +71,14 @@
             android:layout_height="wrap_content"
             android:hint="@string/waypoint_note"
             android:inputType="textMultiLine|textCapSentences"
+            android:minLines="5"/>
+
+        <EditText
+            android:id="@+id/user_note"
+            style="@style/edittext_full"
+            android:layout_height="wrap_content"
+            android:hint="@string/waypoint_user_note"
+            android:inputType="textMultiLine|textCapSentences"
             android:minLines="5" />
 
         <CheckBox

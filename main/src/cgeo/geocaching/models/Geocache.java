@@ -1447,7 +1447,7 @@ public class Geocache implements IWaypoint {
         if (waypoint.getId() < 0) {
             return false;
         }
-        if (waypoint.isUserDefined()) {
+        if (waypoint.getWaypointType() != WaypointType.ORIGINAL) {
             final int index = getWaypointIndex(waypoint);
             waypoints.remove(index);
             DataStore.deleteWaypoint(waypoint.getId());

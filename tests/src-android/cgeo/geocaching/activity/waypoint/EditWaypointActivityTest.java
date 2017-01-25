@@ -23,6 +23,10 @@ public class EditWaypointActivityTest extends AbstractEditWaypointActivityTest {
         assertThat(note).isNotEmpty();
         onView(withId(R.id.note)).check(matches(withText(note)));
 
+        final String userNote = getWaypoint().getUserNote();
+        assertThat(userNote).isNotEmpty();
+        onView(withId(R.id.user_note)).check(matches(withText(userNote)));
+
         onView(withId(R.id.type)).check(matches(withChild(withText(getWaypoint().getWaypointType().getL10n()))));
     }
 

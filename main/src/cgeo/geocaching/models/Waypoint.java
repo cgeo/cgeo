@@ -35,9 +35,12 @@ public class Waypoint implements IWaypoint {
     private String name = "";
     private Geopoint coords = null;
     private String note = "";
+    private String userNote = "";
     private int cachedOrder = ORDER_UNDEFINED;
     private boolean own = false;
+
     private boolean visited = false;
+    private boolean originalCoordsEmpty = false;
 
     /**
      * require name and type for every waypoint
@@ -67,7 +70,7 @@ public class Waypoint implements IWaypoint {
             lookup = old.lookup;
         }
         if (StringUtils.isBlank(name)) {
-            setName(old.name);
+            name = old.name;
         }
         if (coords == null) {
             coords = old.coords;
@@ -75,8 +78,11 @@ public class Waypoint implements IWaypoint {
         if (StringUtils.isBlank(note)) {
             note = old.note;
         }
-        if (note != null && old.note != null && old.note.length() > note.length()) {
-            note = old.note;
+        if (StringUtils.isBlank(userNote)) {
+            userNote = old.userNote;
+        }
+        if (StringUtils.equals(note, userNote)) {
+            userNote = "";
         }
         if (id < 0) {
             id = old.id;
@@ -111,32 +117,9 @@ public class Waypoint implements IWaypoint {
         setPrefix(PREFIX_OWN);
     }
 
-    private int computeOrder() {
-        // first parking, then trailhead (as start of the journey)
-        // puzzles, stages, waypoints can all be mixed
-        // at last the final and the original coordinates of the final
-        switch (waypointType) {
-            case PARKING:
-                return -1;
-            case TRAILHEAD:
-                return 1;
-            case STAGE:
-            case PUZZLE:
-            case WAYPOINT:
-                return 2;
-            case FINAL:
-                return 3;
-            case ORIGINAL:
-                return 4;
-            case OWN:
-                return 5;
-        }
-        return 0;
-    }
-
     private int order() {
         if (cachedOrder == ORDER_UNDEFINED) {
-            cachedOrder = computeOrder();
+            cachedOrder = waypointType.order;
         }
         return cachedOrder;
     }
@@ -338,4 +321,19 @@ public class Waypoint implements IWaypoint {
         return new GeoitemRef(getGpxId(), getCoordType(), getGeocode(), getId(), getName(), getWaypointType().markerId);
     }
 
+    public String getUserNote() {
+        return userNote;
+    }
+
+    public void setUserNote(final String userNote) {
+        this.userNote = userNote;
+    }
+
+    public boolean isOriginalCoordsEmpty() {
+        return originalCoordsEmpty;
+    }
+
+    public void setOriginalCoordsEmpty(boolean originalCoordsEmpty) {
+        this.originalCoordsEmpty = originalCoordsEmpty;
+    }
 }
