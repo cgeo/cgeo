@@ -21,14 +21,14 @@ import org.apache.commons.lang3.StringUtils;
  * Enum listing waypoint types
  */
 public enum WaypointType {
-    FINAL("flag", "Final Location", R.string.wp_final, R.drawable.waypoint_flag),
-    OWN("own", "Own", R.string.wp_waypoint, R.drawable.waypoint_waypoint),
-    PARKING("pkg", "Parking Area", R.string.wp_pkg, R.drawable.waypoint_pkg),
-    PUZZLE("puzzle", "Virtual Stage", R.string.wp_puzzle, R.drawable.waypoint_puzzle),
-    STAGE("stage", "Physical Stage", R.string.wp_stage, R.drawable.waypoint_stage),
-    TRAILHEAD("trailhead", "Trailhead", R.string.wp_trailhead, R.drawable.waypoint_trailhead),
-    WAYPOINT("waypoint", "Reference Point", R.string.wp_waypoint, R.drawable.waypoint_waypoint),
-    ORIGINAL("original", "Original Coordinates", R.string.wp_original, R.drawable.waypoint_waypoint);
+    FINAL("flag", "Final Location", R.string.wp_final, R.drawable.waypoint_flag, 3),
+    OWN("own", "Own", R.string.wp_waypoint, R.drawable.waypoint_waypoint, 5),
+    PARKING("pkg", "Parking Area", R.string.wp_pkg, R.drawable.waypoint_pkg, -1),
+    PUZZLE("puzzle", "Virtual Stage", R.string.wp_puzzle, R.drawable.waypoint_puzzle, 2),
+    STAGE("stage", "Physical Stage", R.string.wp_stage, R.drawable.waypoint_stage, 2),
+    TRAILHEAD("trailhead", "Trailhead", R.string.wp_trailhead, R.drawable.waypoint_trailhead, 1),
+    WAYPOINT("waypoint", "Reference Point", R.string.wp_waypoint, R.drawable.waypoint_waypoint, 2),
+    ORIGINAL("original", "Original Coordinates", R.string.wp_original, R.drawable.waypoint_waypoint, 4);
 
     @NonNull
     public final String id;
@@ -37,11 +37,14 @@ public enum WaypointType {
     public final int stringId;
     public final int markerId;
 
-    WaypointType(@NonNull final String id, @NonNull final String gpx, final int stringId, final int markerId) {
+    public final int order;
+
+    WaypointType(@NonNull final String id, @NonNull final String gpx, final int stringId, final int markerId, final int order) {
         this.id = id;
         this.gpx = gpx;
         this.stringId = stringId;
         this.markerId = markerId;
+        this.order = order;
     }
 
     /**

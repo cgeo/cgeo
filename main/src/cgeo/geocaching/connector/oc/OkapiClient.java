@@ -568,6 +568,8 @@ final class OkapiClient {
                 final Geopoint pt = parseCoords(wptResponse.get(WPT_LOCATION).asText());
                 if (pt != null) {
                     wpt.setCoords(pt);
+                } else {
+                    wpt.setOriginalCoordsEmpty(true);
                 }
                 if (result == null) {
                     result = new ArrayList<>();

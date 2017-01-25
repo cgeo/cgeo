@@ -446,8 +446,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 menu.findItem(R.id.menu_waypoint_reset_cache_coords).setVisible(isOriginalWaypoint);
                 menu.findItem(R.id.menu_waypoint_edit).setVisible(!isOriginalWaypoint);
                 menu.findItem(R.id.menu_waypoint_duplicate).setVisible(!isOriginalWaypoint);
-                final boolean userDefined = selectedWaypoint.isUserDefined() && selectedWaypoint.getWaypointType() != WaypointType.ORIGINAL;
-                menu.findItem(R.id.menu_waypoint_delete).setVisible(userDefined);
+                menu.findItem(R.id.menu_waypoint_delete).setVisible(!isOriginalWaypoint);
                 final boolean hasCoords = selectedWaypoint.getCoords() != null;
                 final MenuItem defaultNavigationMenu = menu.findItem(R.id.menu_waypoint_navigate_default);
                 defaultNavigationMenu.setVisible(hasCoords);
@@ -1826,6 +1825,20 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 }
             } else {
                 noteView.setVisibility(View.GONE);
+            }
+
+            // user note
+            final TextView userNoteView = holder.userNoteView;
+            if (StringUtils.isNotBlank(wpt.getUserNote()) && !StringUtils.equals(wpt.getNote(), wpt.getUserNote())) {
+                userNoteView.setOnClickListener(new DecryptTextClickListener(userNoteView));
+                userNoteView.setVisibility(View.VISIBLE);
+                if (TextUtils.containsHtml(wpt.getUserNote())) {
+                    userNoteView.setText(Html.fromHtml(wpt.getUserNote(), new SmileyImage(cache.getGeocode(), userNoteView), new UnknownTagsHandler()), TextView.BufferType.SPANNABLE);
+                } else {
+                    userNoteView.setText(wpt.getUserNote());
+                }
+            } else {
+                userNoteView.setVisibility(View.GONE);
             }
 
             final View wpNavView = holder.wpNavView;

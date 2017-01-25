@@ -75,6 +75,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
     @ViewById(R.id.buttonLatitude) protected Button buttonLat;
     @ViewById(R.id.buttonLongitude) protected Button buttonLon;
     @ViewById(R.id.note) protected EditText note;
+    @ViewById(R.id.user_note) protected EditText userNote;
     @ViewById(R.id.wpt_visited_checkbox) protected CheckBox visitedCheckBox;
     @ViewById(R.id.name) protected AutoCompleteTextView waypointName;
     @ViewById(R.id.type) protected Spinner waypointTypeSelector;
@@ -96,6 +97,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
     private String prefix = "";
     private String lookup = "---";
     private boolean own = true;
+    private boolean originalCoordsEmpty = false;
     List<String> distanceUnits = null;
     /**
      * {@code true} if the activity is newly created, {@code false} if it is restored from an instance state
@@ -119,6 +121,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
                     prefix = waypoint.getPrefix();
                     lookup = waypoint.getLookup();
                     own = waypoint.isUserDefined();
+                    originalCoordsEmpty = waypoint.isOriginalCoordsEmpty();
 
                     if (initViews) {
                         visitedCheckBox.setChecked(waypoint.isVisited());
@@ -134,7 +137,12 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
                         } else {
                             note.setText(StringUtils.trimToEmpty(waypoint.getNote()));
                         }
-                        Dialogs.moveCursorToEnd(note);
+                        if (TextUtils.containsHtml(waypoint.getUserNote())) {
+                            userNote.setText(Html.fromHtml(StringUtils.trimToEmpty(waypoint.getUserNote())).toString());
+                        } else {
+                            userNote.setText(StringUtils.trimToEmpty(waypoint.getUserNote()));
+                        }
+                        Dialogs.moveCursorToEnd(userNote);
                     }
                     new AsyncTask<Void, Void, Geocache>() {
                         @Override
@@ -151,6 +159,13 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
 
                 if (own) {
                     initializeWaypointTypeSelector();
+                } else {
+                    waypointName.setEnabled(false);
+                    note.setEnabled(false);
+                    if (!waypoint.isOriginalCoordsEmpty()) {
+                        buttonLat.setEnabled(false);
+                        buttonLon.setEnabled(false);
+                    }
                 }
             } catch (final RuntimeException e) {
                 Log.e("EditWaypointActivity.loadWaypointHandler", e);
@@ -484,6 +499,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         final String givenName = waypointName.getText().toString().trim();
         currentState.name = StringUtils.defaultIfBlank(givenName, getDefaultWaypointName(getSelectedWaypointType()));
         currentState.noteText = note.getText().toString().trim();
+        currentState.userNoteText = userNote.getText().toString().trim();
         currentState.type = getSelectedWaypointType();
         currentState.visited = visitedCheckBox.isChecked();
 
@@ -495,6 +511,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
                 || !Geopoint.equals(currentState.coords, waypoint.getCoords())
                 || !StringUtils.equals(currentState.name, waypoint.getName())
                 || !StringUtils.equals(currentState.noteText, waypoint.getNote())
+                || !StringUtils.equals(currentState.userNoteText, waypoint.getUserNote())
                 || currentState.visited != waypoint.isVisited()
                 || currentState.type != waypoint.getWaypointType();
 
@@ -556,8 +573,10 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
                 waypoint.setLookup(lookup);
                 waypoint.setCoords(currentState.coords);
                 waypoint.setNote(currentState.noteText);
+                waypoint.setUserNote(currentState.userNoteText);
                 waypoint.setVisited(currentState.visited);
                 waypoint.setId(waypointId);
+                waypoint.setOriginalCoordsEmpty(originalCoordsEmpty);
 
                 final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_WAYPOINTS);
                 if (cache == null) {
@@ -616,6 +635,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         public WaypointType type;
         public Geopoint coords;
         public String noteText;
+        public String userNoteText;
         public boolean visited;
     }
 

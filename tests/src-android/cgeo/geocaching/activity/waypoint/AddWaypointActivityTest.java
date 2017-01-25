@@ -37,6 +37,7 @@ public class AddWaypointActivityTest extends AbstractAddWaypointActivityTest {
     @Suppress
     public static void testFieldsAreEmpty() {
         onView(withId(R.id.note)).check(matches(withText("")));
+        onView(withId(R.id.user_note)).check(matches(withText("")));
         onView(withId(R.id.bearing)).check(matches(withText("")));
         onView(withId(R.id.distance)).check(matches(withText("")));
     }
