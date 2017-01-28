@@ -258,7 +258,7 @@ dependencies {
     }
 
     // Jackson XML processing
-    def jacksonVersion = '2.8.5'
+    def jacksonVersion = '2.8.6'
     compile "com.fasterxml.jackson.core:jackson-core:$jacksonVersion"
     compile "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
     compile "com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion"
@@ -317,7 +317,7 @@ dependencies {
     compile 'com.jakewharton:process-phoenix:1.1.1'
 
     // RxJava
-    compile "io.reactivex.rxjava2:rxjava:2.0.4"
+    compile "io.reactivex.rxjava2:rxjava:2.0.5"
     compile "io.reactivex.rxjava2:rxandroid:2.0.1"
 
     // Showcase view
