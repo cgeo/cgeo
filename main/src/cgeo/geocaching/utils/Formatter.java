@@ -8,28 +8,31 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.PocketQuery;
 import cgeo.geocaching.models.Waypoint;
 
-import org.apache.commons.lang3.StringUtils;
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-
-import android.content.Context;
 import android.text.format.DateUtils;
 
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+
+import org.apache.commons.lang3.StringUtils;
 
 public final class Formatter {
 
     /** Text separator used for formatting texts */
     public static final String SEPARATOR = " · ";
 
-    private static final Context context = CgeoApplication.getInstance().getBaseContext();
-
     private Formatter() {
         // Utility class
+    }
+
+    private static Context getContext() {
+        return CgeoApplication.getInstance().getBaseContext();
     }
 
     /**
@@ -42,7 +45,7 @@ public final class Formatter {
      */
     @NonNull
     public static String formatTime(final long date) {
-        return DateUtils.formatDateTime(context, date, DateUtils.FORMAT_SHOW_TIME);
+        return DateUtils.formatDateTime(getContext(), date, DateUtils.FORMAT_SHOW_TIME);
     }
 
     /**
@@ -55,7 +58,7 @@ public final class Formatter {
      */
     @NonNull
     public static String formatDate(final long date) {
-        return DateUtils.formatDateTime(context, date, DateUtils.FORMAT_SHOW_DATE);
+        return DateUtils.formatDateTime(getContext(), date, DateUtils.FORMAT_SHOW_DATE);
     }
 
     /**
@@ -69,8 +72,22 @@ public final class Formatter {
      */
     @NonNull
     public static String formatFullDate(final long date) {
-        return DateUtils.formatDateTime(context, date, DateUtils.FORMAT_SHOW_DATE
+        return DateUtils.formatDateTime(getContext(), date, DateUtils.FORMAT_SHOW_DATE
                 | DateUtils.FORMAT_SHOW_YEAR);
+    }
+
+    /**
+     * Tries to get the date format pattern of the system short date.
+     *
+     * @return format pattern or empty String if it can't be retrieved
+     */
+    @NonNull
+    public static String getShortDateFormat() {
+        final DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getContext());
+        if (dateFormat instanceof SimpleDateFormat) {
+            return ((SimpleDateFormat)dateFormat).toPattern();
+        }
+        return StringUtils.EMPTY; // should not happen
     }
 
     /**
@@ -83,7 +100,7 @@ public final class Formatter {
      */
     @NonNull
     public static String formatShortDate(final long date) {
-        final DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(context);
+        final DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getContext());
         return dateFormat.format(date);
     }
 
@@ -130,7 +147,7 @@ public final class Formatter {
      */
     @NonNull
     public static String formatShortDateTime(final long date) {
-        return DateUtils.formatDateTime(context, date, DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_ABBREV_ALL);
+        return DateUtils.formatDateTime(getContext(), date, DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_ABBREV_ALL);
     }
 
     /**
@@ -143,7 +160,7 @@ public final class Formatter {
      */
     @NonNull
     public static String formatDateTime(final long date) {
-        return DateUtils.formatDateTime(context, date, DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_TIME);
+        return DateUtils.formatDateTime(getContext(), date, DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_TIME);
     }
 
     @NonNull
