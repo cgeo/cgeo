@@ -1,7 +1,5 @@
 package cgeo.geocaching.models;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import cgeo.CGeoTestCase;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
@@ -11,8 +9,6 @@ import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.log.LogType;
 
-import org.apache.commons.lang3.StringUtils;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -21,6 +17,9 @@ import java.util.Date;
 import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class GeocacheTest extends CGeoTestCase {
 
@@ -327,6 +326,9 @@ public class GeocacheTest extends CGeoTestCase {
         assertTime("von 11 bis 13" + timeHours, 11, 00);
         assertTime("from 11 to 13" + timeHours, 11, 00);
         assertTime("von 19.15" + timeHours + " bis ca.20.30 " + timeHours + " statt", 19, 15);
+
+        // #6285
+        assertTime("Dienstag den 31. Januar ab 18:00" + timeHours + " (das Logbuch liegt bis mind. 20:30 " + timeHours + " aus)", 18, 00);
     }
 
     public static void testGuessEventTimeShortDescription() {

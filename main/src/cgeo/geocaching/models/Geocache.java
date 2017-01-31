@@ -1780,6 +1780,8 @@ public class Geocache implements IWaypoint {
         }
 
         final String searchText = getShortDescription() + ' ' + getDescription();
+        int start = -1;
+        int eventTimeMinutes = -1;
         for (final Pattern pattern : patterns) {
             final MatcherWrapper matcher = new MatcherWrapper(pattern, searchText);
             while (matcher.find()) {
@@ -1789,15 +1791,17 @@ public class Geocache implements IWaypoint {
                     if (matcher.groupCount() >= 2 && StringUtils.isNotEmpty(matcher.group(2))) {
                         minutes = Integer.parseInt(matcher.group(2));
                     }
-                    if (hours >= 0 && hours < 24 && minutes >= 0 && minutes < 60) {
-                        return hours * 60 + minutes;
+                    if (hours >= 0 && hours < 24 && minutes >= 0 && minutes < 60
+                         && (eventTimeMinutes == -1 || matcher.start() < start)) {
+                            eventTimeMinutes = hours * 60 + minutes;
+                            start = matcher.start();
                     }
                 } catch (final NumberFormatException ignored) {
                     // cannot happen, but static code analysis doesn't know
                 }
             }
         }
-        return -1;
+        return eventTimeMinutes;
     }
 
     public boolean hasStaticMap() {
