@@ -123,9 +123,7 @@ android {
                 // TODO: espresso causes some dependency conflicts, therefore disable espresso tests temporarily
                 exclude '**/*EspressoTest.java'
                 exclude '**/*LogTrackableActivityTest.java'
-                // there is a valid test WaypointTest which should run, so the pattern must be more specific
-                exclude '**/A*Waypoint*Test.java'
-                exclude '**/EditWaypoint*Test.java'
+                exclude '**/activity/waypoint/*Waypoint*Test.java'
             }
             resources.srcDirs = ['../tests/src']
             res.srcDirs = ['../tests/res']
