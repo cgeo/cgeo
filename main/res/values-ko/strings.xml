@@ -84,16 +84,16 @@
   <string name="log_tb_discovered">발견했음</string>
   <string name="log_tb_archived">영구보관됨</string>
   <string name="log_save">오프라인 저장</string>
-  <string name="log_saving">로그 발송중...</string>
-  <string name="log_saving_and_uploading">로그 및 사진 올리는 중...</string>
-  <string name="log_posting_log">로그 올리는 중...</string>
-  <string name="log_posting_twitter">트위터에 올리는 중...</string>
+  <string name="log_saving">로그 발송중…</string>
+  <string name="log_saving_and_uploading">로그 및 사진 올리는 중…</string>
+  <string name="log_posting_log">로그 올리는 중…</string>
+  <string name="log_posting_twitter">트위터에 올리는 중…</string>
   <string name="log_posting_gcvote">GCVote에 올리는 중...</string>
-  <string name="log_posting_image">사진 올리는 중...</string>
+  <string name="log_posting_image">사진 올리는 중…</string>
   <string name="log_posting_generic_trackable">%1$s %2$s/%3$s를 올리는 중</string>
   <string name="log_clear">지우기</string>
   <string name="log_post_not_possible">데이터 다운로드 진행 중…\n몇초 후 다시 시도해 보거나, 인터넷 연결상태를 확인 해 보세요.</string>
-  <string name="log_post_geocode_missing">지오코드가 없음...</string>
+  <string name="log_post_geocode_missing">지오코드가 없음…</string>
   <string name="log_date_future_not_allowed">오늘 이후 로그 날짜는 허용 되지 않습니다.</string>
   <string name="log_add">추가</string>
   <string name="log_repeat">마지막 로그를 반복하기</string>
@@ -277,9 +277,9 @@
   <string name="caches_no_cache">캐시가 없습니다.</string>
   <string name="caches_more_caches">더 많은 캐시 불러오기</string>
   <string name="caches_more_caches_no">더이상 캐시가 없습니다.</string>
-  <string name="caches_more_caches_loading">캐시 불러오는 중...</string>
+  <string name="caches_more_caches_loading">캐시 불러오는 중…</string>
   <string name="caches_more_caches_currently">현재</string>
-  <string name="caches_downloading">캐시 다운로드 중...…\n남은시간: </string>
+  <string name="caches_downloading">캐시 다운로드 중…\n남은시간: </string>
   <string name="caches_eta_ltm">1분 이내</string>
   <plurals name="caches_eta_mins">
     <item quantity="other">%d 분</item>
@@ -350,7 +350,8 @@
   <string name="caches_filter_rating">평점이 있는 것</string>
   <string name="caches_filter_own_rating">자신이 평가 한 것</string>
   <string name="caches_filter_multi_listing">여러 서비스에 동시에 올려진 것</string>
-  <string name="caches_removing_from_history">이전 기록에서 제거중...</string>
+  <string name="caches_filter_own_waypoint">사용자 정의 지점을 사용하기</string>
+  <string name="caches_removing_from_history">이전 기록에서 제거중…</string>
   <string name="caches_clear_offlinelogs">오프라인 로그 삭제</string>
   <string name="caches_clear_offlinelogs_message">오프라인 로그를 모두 지우시겠습니까?</string>
   <string name="caches_clear_offlinelogs_progress">오프라인 로그 삭제중</string>
@@ -420,14 +421,14 @@
   <string name="settings_category_browser">브라우저</string>
   <string name="settings_category_social">SNS</string>
   <string name="settings_category_logging_other">기타 로그 옵션</string>
-  <string name="settings_goto_url_button">더보기...</string>
+  <string name="settings_goto_url_button">더보기…</string>
   <string name="settings_title_ec">Extremcaching.com</string>
   <string name="settings_activate_gc">활성화</string>
   <string name="settings_activate_ec">활성화</string>
   <string name="settings_activate_ox">활성화</string>
   <string name="settings_gc_legal_note">geocaching.com 서비스를 사용하시면, 그라운드스픽사의 사용약관에 동의하시는 것입니다.</string>
   <string name="settings_info_facebook_login_title">Facebook로그인</string>
-  <string name="settings_info_facebook_login">c:geo 에서 페이스북 계정으로 geocaching.com에 로그인할 수 없습니다. 하지만, 간단한 편법이 있습니다...</string>
+  <string name="settings_info_facebook_login">c:geo 에서 페이스북 계정으로 geocaching.com에 로그인할 수 없습니다. 하지만, 간단한 편법이 있습니다…</string>
   <string name="settings_authorize">c:geo 인증받기</string>
   <string name="settings_reauthorize">c:geo 다시 인증받기</string>
   <string name="settings_gc_description">캐시 검색을 위하여 geocaching.com에 c:geo를 인증하기</string>
@@ -524,7 +525,7 @@
   <string name="init_summary_livelist">목록에서 캐시의 방향을 표시합니다.</string>
   <string name="init_backup">백업하기</string>
   <string name="init_backup_backup">백업하기</string>
-  <string name="init_backup_running">캐시 데이터베이스의 백업본 생성중...</string>
+  <string name="init_backup_running">캐시 데이터베이스의 백업본 생성중…</string>
   <string name="init_backup_note">참고로 이 기능은 캐시 및 웨이포인트 데이터베이스를 백업하고 복원합니다. 설정은 저장하지 않습니다.\n로그인 데이터와 비밀번호는 결코 이 앱 외부로 나가지 않습니다.</string>
   <string name="init_backup_restore">복원하기</string>
   <string name="init_backup_success">c:geo 데이터베이스가 다음 위치로 성공적으로 복사되었습니다. :</string>
@@ -636,7 +637,7 @@
   <string name="init_sendToCgeo_name">장치 이름</string>
   <string name="init_sendToCgeo_description"><b>Send2cgeo</b> 는 Firefox 나 Chrome 브라우저용 특수 플러그인을 사용하여, geocaching.com으로부터 안드로이드 기기로 지오캐시를 직접 전송하는 기능입니다. 등록하기 전에 미리 <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>를 보시기 바랍니다. send2cgeo를 사용하려면 등록만 하면 됩니다. c:geo는 일반적으로 기기를 등록하지 않아도 작동됩니다.</string>
   <string name="init_sendToCgeo_register">등록 요청</string>
-  <string name="init_sendToCgeo_registering">send2cgeo에 기기를 등록중...</string>
+  <string name="init_sendToCgeo_registering">send2cgeo에 기기를 등록중…</string>
   <string name="init_sendToCgeo_register_ok">등록이 설공했습니다. PIN 코드는 %d입니다. 이 코드를 사용하면 c:geo 웹사이트에서 이 기기를 연결할 수 있습니다.</string>
   <string name="init_sendToCgeo_register_fail">등록이 실패했습니다.</string>
   <string name="sendToCgeo_download_fail">캐시를 다운로드 하지 못했습니다. 인터넷 연결이 끊어졌거나, send2cgeo 가 문제가 있는 것 같습니다.</string>
@@ -652,7 +653,7 @@
   <string name="auth_connected">연결됨</string>
   <string name="auth_unconnected">연결되지 않음</string>
   <string name="auth_connected_as">%s로 연결됨</string>
-  <string name="auth_dialog_waiting">%s를 기다리는 중...</string>
+  <string name="auth_dialog_waiting">%s를 기다리는 중…</string>
   <string name="auth_explain_short">아래 프로세스는 <b>c:geo</b>의 %s 접근을 필요로 합니다</string>
   <string name="auth_explain_long">\"c:geo 인증받기\" 버튼을 누르면 시작됩니다. 이 과정에서 %s 페이지가 들어있는 웹브라우저가 열립니다. 이 페이지에서 로그인하고 <b>c:geo</b>가 당신의 계정에 접근하도록 허용하세요. 그게 다입니다.</string>
   <string name="auth_forget_title">인증을 잊으셨나요?</string>
@@ -804,6 +805,7 @@
   <string name="cache_menu_pebble">Pebble</string>
   <string name="cache_menu_vote">투표</string>
   <string name="cache_menu_checker">Geochecker 열기</string>
+  <string name="cache_menu_challenge_checker">도전 확인프로그램 찾기</string>
   <string name="cache_menu_ignore">캐시 제외시키기</string>
   <string name="ignore_confirm_title">조심하세요</string>
   <string name="ignore_confirm_message">캐시를 제외시키는 것은 geocaching.com에서 데이터를 불러올 때 다시는 나타나지 않는다는 뜻입니다. 웹사이트에서 제외를 취소시켜야만 캐시를 다시 볼 수 있습니다.</string>
@@ -962,7 +964,7 @@
   <string name="map_strategy_fast">빠름</string>
   <string name="map_strategy_auto">성능에 따라 다름</string>
   <string name="map_strategy_detailed">상세하게</string>
-  <string name="live_map_notification">라이브 지도의 좌표는 정확하지 않을 수 있습니다. 부정확한 좌표는 오렌지색 원으로 표시됩니다.\n캐시 상세정보를 열거나 오프라인용으로 저장하면 항상 정확한 좌표를 가져오게 됩니다.\n\n더 상세한 정보는 \"c:geo에 대하여\" 페이지를 보시기 바랍니다.</string>
+  <string name="live_map_notification">라이브 지도의 좌표는 정확하지 않을 수 있습니다!.\n 부정확한 좌표는 오렌지색 원으로 표시됩니다.\n\n캐시 상세정보를 열거나 오프라인용으로 저장하면 항상 정확한 좌표를 가져오게 됩니다.</string>
   <string name="map_select_multiple_items">항목 선택</string>
   <string name="map_routing">길찾기</string>
   <string name="map_routing_straight">직선</string>
@@ -1092,7 +1094,7 @@
   <string name="export_fieldnotes">현장 기록</string>
   <string name="export_fieldnotes_info">현장 기록이 현재 날짜/시간과 함께 /sdcard/field-notes에 저장됩니다.</string>
   <string name="export_fieldnotes_upload">Geocaching.com에 올리기</string>
-  <string name="export_fieldnotes_uploading">올리는 중...</string>
+  <string name="export_fieldnotes_uploading">올리는 중…</string>
   <string name="export_fieldnotes_upload_success">Geocaching.com 에 올리기 성공</string>
   <string name="export_fieldnotes_onlynew">마지막 내보내기 이후만</string>
   <string name="export_fieldnotes_creating">현장 기록 생성 중…</string>
@@ -1350,7 +1352,7 @@
   <string name="status_geocaching_change" tools:ignore="UnusedResources">geocaching.com 의 최근변화로 c:geo에 문제가 생겼습니다.\n작업중이오니, 조만간 확인해 보세요.</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">geocaching.com 의 최근변화로 라이브 지도기능에 문제가 생겼습니다.\n작업중이오니, 잠시 후 확인해 보세요.</string>
   <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com 이 유지보수중입니다.\n여러가지 문제를 만날 수 있습니다.</string>
-  <string name="status_closeout_warning" tools:ignore="UnusedResources">안드로이드버전이 2.1 이하인 것 같습니다. c:geo 의 새로운 버전을 받지 못할 수 있습니다.</string>
+  <string name="status_closeout_warning" tools:ignore="UnusedResources">사용하시는 안드로이드 버전이 4.0 이하인 것 같습니다. 이후에는 새로운 c:geo 버전을 받지 못할 수 있습니다.</string>
   <!-- text-to-speech for compass view -->
   <string name="tts_service">말하는 나침반</string>
   <string name="tts_start">말하기 시작</string>

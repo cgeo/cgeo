@@ -354,6 +354,7 @@
   <string name="caches_filter_rating">Értékelve</string>
   <string name="caches_filter_own_rating">Saját értékelés</string>
   <string name="caches_filter_multi_listing">Különböző állapotú multik listázása</string>
+  <string name="caches_filter_own_waypoint">Saját útpont</string>
   <string name="caches_removing_from_history">Törlés az Előzményekből…</string>
   <string name="caches_clear_offlinelogs">Offline logok törlése</string>
   <string name="caches_clear_offlinelogs_message">Szeretnéd törölni az offline logokat?</string>
@@ -829,6 +830,8 @@
   <string name="cache_menu_android_wear">Android Wear</string>
   <string name="cache_menu_vote">Értékelés</string>
   <string name="cache_menu_checker">Geochecker megnyitása</string>
+  <string name="cache_menu_challenge_checker">Kihívásellenőrző keresése
+</string>
   <string name="cache_menu_ignore">Láda mellőzése</string>
   <string name="ignore_confirm_title">Légy óvatos</string>
   <string name="ignore_confirm_message">Egy láda mellőzése azt jelenti, hogy a láda soha többé nem töltődik le a geocaching.com-ról. Csak akkor láthatod ismét ezt a ládát, ha visszavonod a mellőzését a geocaching.com-on.</string>
@@ -987,7 +990,7 @@
   <string name="map_strategy_fast">Gyors</string>
   <string name="map_strategy_auto">Sebességfüggő</string>
   <string name="map_strategy_detailed">Részletes</string>
-  <string name="live_map_notification">A koordináták pontatlanok lehetnek az élő térképen. A vélhetően pontatlan koordinátákat narancssárga kör jelöli.\nA ládaolal megnyitásakor vagy a láda offline mentésekor mindig letöltődik a pontos koordináta.\n\nTovábbi információ található az alkalmazás \"A c:geo-ról\" oldalán.</string>
+  <string name="live_map_notification">A koordináták pontatlanok lehetnek az élő térképen. A vélhetően pontatlan koordinátákat narancssárga kör jelöli.\nA ládaoldal megnyitásakor vagy a láda offline mentésekor mindig letöltődik a pontos koordináta.\n\nTovábbi információ található az alkalmazás \"A c:geo-ról\" oldalán.</string>
   <string name="map_select_multiple_items">Elem kiválasztása</string>
   <string name="map_routing">Útvonal</string>
   <string name="map_routing_straight">Egyenes vonal</string>
@@ -1091,7 +1094,6 @@
   <string name="helper_sendtocgeo_description">A Send2cgeo egy böngészőbővítmény <strong>PC-re</strong>. A geocaching.com böngészése közben, egy kattintással tudsz geoládákat küldeni a készülékedre.</string>
   <string name="helper_locus_title">Locus</string>
   <string name="helper_locus_description">Telefonon, tableten használható szabadtéri navigációs program. Offline térképek használata, útvonalkövetés, ládavadászat, hangos útikalauz, stb.</string>
-  <string name="helper_gpsstatus_title">GPS Status &amp; Toolbox</string>
   <string name="helper_gpsstatus_description">A programban található radart a c:geo-hoz is használhatod. Sok egyéb GPS-szel kapcsolatos információt is megmutat.</string>
   <string name="helper_bluetoothgps_title">Bluetooth GPS</string>
   <string name="helper_bluetoothgps_description">Ez a program külső GPS vevők használatát teszi lehetővé, amelyek segítségével jobb vételt és pontosabb koordinátákat kaphatsz. Külső GPS használatával a telefonod akkumulátora is tovább bírja.</string>
@@ -1378,7 +1380,7 @@
   <string name="status_geocaching_change" tools:ignore="UnusedResources">A c:geo működésképtelen a geocaching.com-on történt aktuális változások miatt.\nDolgozunk a megoldáson. Nézz vissza minél hamarabb!</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Az élő térkép működésképtelen a geocaching.com-on történt aktuális változások miatt.\nDolgozunk a megoldáson. Nézz vissza minél hamarabb!</string>
   <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">A geocaching.com karbantartás alatt van. \nEsetleg egyéb hiba lépett fel.</string>
-  <string name="status_closeout_warning" tools:ignore="UnusedResources">Úgy tűnik, az Android 2.1-es verziójánál régebbit használsz. A c:geo jövőbeli frissítései lehet, hogy nem lesznek elérhetők az eszközödre.</string>
+  <string name="status_closeout_warning" tools:ignore="UnusedResources">Úgy tűnik, az Android 4.0-ás verziójánál régebbit használsz. A c:geo jövőbeli frissítései lehet, hogy nem lesznek elérhetők az eszközödre.</string>
   <!-- text-to-speech for compass view -->
   <string name="tts_service">Beszélő iránytű</string>
   <string name="tts_start">Beszéd indítása</string>

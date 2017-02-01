@@ -346,13 +346,14 @@
   <string name="caches_filter_offline_log">Offline-lokeja</string>
   <string name="caches_filter_origin">Alkuperä</string>
   <string name="caches_filter_distance">Etäisyys</string>
-  <string name="caches_filter_personal_note">Omalla kirjauksella</string>
+  <string name="caches_filter_personal_note">Omia merkintöjä</string>
   <string name="caches_filter_popularity">Suosikit</string>
   <string name="caches_filter_popularity_ratio">Suosikit [%]</string>
   <string name="caches_filter_personal_data">Omia tietoja</string>
   <string name="caches_filter_rating">Luokitus</string>
   <string name="caches_filter_own_rating">Oma luokitus</string>
   <string name="caches_filter_multi_listing">Sama kätkö eri sivustoilla, osittain lokattu</string>
+  <string name="caches_filter_own_waypoint">Käyttäjän määrittämiä välipisteitä</string>
   <string name="caches_removing_from_history">Poistetaan historiasta…</string>
   <string name="caches_clear_offlinelogs">Poista offline-lokit</string>
   <string name="caches_clear_offlinelogs_message">Haluatko poistaa offline lokit?</string>
@@ -530,7 +531,7 @@
   <string name="init_backup_running">Luodaan varmuuskopiota kätkötietokannasta…</string>
   <string name="init_backup_note">Huomaathan että tämä ominaisuus tallentaa/palauttaa tietokannan joka sisältää kätköt sekä reittipisteet, mutta ei asetuksiasi.  \n Kirjautumistietosi ja salasanasi eivät poistu tästä sovelluksesta.</string>
   <string name="init_backup_restore">Palauta</string>
-  <string name="init_backup_success">c: geon tietokanta kopioitu onnistuneesti:</string>
+  <string name="init_backup_success">c:geon tietokanta kopioitu onnistuneesti:</string>
   <string name="init_backup_failed">c:geon tietokannan varmuuskopiointi epäonnistui.</string>
   <string name="init_backup_unnecessary">Tietokanta on tyhjä, varmuuskopiointia ei tarvita.</string>
   <string name="init_backup_no_backup_available">Ei varmuuskopiota käytettävissä.</string>
@@ -782,7 +783,7 @@
   <string name="cache_menu_navigation_drive_select_target">Kätkö vai pysäköintialue?</string>
   <string name="cache_menu_navigation_walk">Navigointi (kävely)</string>
   <string name="cache_menu_navigation_transit">Navigointi (liikenteessä)</string>
-  <string name="cache_menu_navigation_bike">Navigointi (Pyöräily)</string>
+  <string name="cache_menu_navigation_bike">Navigointi (pyöräily)</string>
   <string name="cache_menu_maps_directions">Google Maps ajo-ohjeet</string>
   <string name="cache_menu_osmand">OsmAnd</string>
   <string name="cache_menu_sygic_walk">Sygic (kävellessä)</string>
@@ -971,7 +972,7 @@
   <string name="map_strategy_fast">Nopea</string>
   <string name="map_strategy_auto">Nopeuden mukaan</string>
   <string name="map_strategy_detailed">Yksityiskohtainen</string>
-  <string name="live_map_notification">Koordinaatit livekartalla eivät välttämättä aina ole tarkat. Mahdollisesti epätarkat koordinaatit on merkitty oranssilla ympyrällä. \nKätkön tietojen avaaminen tai kätkön tallentaminen offline-käyttöä varten antaa aina tarkat koordinaatit.\n\nLisää tietoa löytyy ohjelmasta \"tietoja c:geo\"-sivulla.</string>
+  <string name="live_map_notification">Koordinaatit livekartalla eivät välttämättä aina ole tarkat.\nMahdollisesti epätarkat koordinaatit on merkitty oranssilla ympyrällä.\n\nKätkön tietojen avaaminen tai kätkön tallentaminen offline-käyttöä varten antaa aina tarkat koordinaatit.</string>
   <string name="map_select_multiple_items">Valitse kohde</string>
   <string name="map_routing">Reititys</string>
   <string name="map_routing_straight">Linnuntie</string>
@@ -1360,7 +1361,7 @@
   <string name="status_geocaching_change" tools:ignore="UnusedResources">Viimeaikaiset muutokset geocaching.com:issa rikkoivat c:geon. \n Korjaamme tilannetta, tarkistathan tilanteen pian uudestaan.</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Viimeaikaiset muutokset geocaching.com-sivulla hajoittivat livekartta-ominaisuuden.\nAsiaa korjataan, yritä lähiaikoina uudelleen.</string>
   <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com-sivua huolletaan.\nSaatat törmätä useisiin ongelmiin.</string>
-  <string name="status_closeout_warning" tools:ignore="UnusedResources">Käyttämäsi Android-versio näyttää olevan vanhempi kuin 2.1. Tulevat versiot c:geosta eivät ole välttämättä enää saatavissa sinun laitteellesi.</string>
+  <string name="status_closeout_warning" tools:ignore="UnusedResources">Käyttämäsi Android-versio näyttää olevan vanhempi kuin 4.0. Tulevat versiot c:geosta eivät ole välttämättä enää saatavissa sinun laitteellesi.</string>
   <!-- text-to-speech for compass view -->
   <string name="tts_service">Puhuva kompassi</string>
   <string name="tts_start">Aloita puhuminen</string>
@@ -1432,7 +1433,7 @@
   <string name="do_not_ask_me_again">Älä kysy uudelleen</string>
   <string name="geokrety_parsing_failed">GeoKretyn vastauksen jäsentäminen epäonnistui.</string>
   <string name="settings_map_direction">Näytä suunta</string>
-  <string name="settings_summary_map_direction">Näytä suuntaviiva navigointikohteelle</string>
+  <string name="settings_summary_map_direction">Näytä suuntaviiva navigointi kohteelle</string>
   <string name="map_direction">Näytä suunta</string>
   <string name="command_move_caches_progress">Siirretään kätköjä luetteloon %1s</string>
   <plurals name="command_move_caches_result">

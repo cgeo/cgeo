@@ -354,6 +354,7 @@
   <string name="caches_filter_rating">Com classificação</string>
   <string name="caches_filter_own_rating">Com própria classificação</string>
   <string name="caches_filter_multi_listing">Multi-listagem com estado diferente</string>
+  <string name="caches_filter_own_waypoint">Com waypoints definidos pelo utilizador</string>
   <string name="caches_removing_from_history">A remover do histórico…</string>
   <string name="caches_clear_offlinelogs">Limpar registos offline</string>
   <string name="caches_clear_offlinelogs_message">Quer apagar os registos offline?</string>
@@ -829,6 +830,7 @@
   <string name="cache_menu_android_wear">Android Wear</string>
   <string name="cache_menu_vote">Voto</string>
   <string name="cache_menu_checker">Abrir Geochecker</string>
+  <string name="cache_menu_challenge_checker">Procurar verificador de Challenge</string>
   <string name="cache_menu_ignore">Ignorar a cache</string>
   <string name="ignore_confirm_title">Tenha Cuidado</string>
   <string name="ignore_confirm_message">Ignorar uma cache significa que essa cache nunca aparecerá novamente ao consultar dados de geocaching.com. Só será capaz de ver novamente a cache reativando-a no site.</string>
@@ -987,7 +989,7 @@
   <string name="map_strategy_fast">Rápido</string>
   <string name="map_strategy_auto">Dependente da velocidade</string>
   <string name="map_strategy_detailed">Detalhado</string>
-  <string name="live_map_notification">No novo mapa ao vivo as coordenadas podem nem sempre ser precisas. As coordenadas possivelmente imprecisas são marcadas com um círculo cor de laranja.\nAbrindo os detalhes da cache or gravando a cache para utilização offline fará com que obtenha as coordenadas precisas.\n\nMais informações em todas as alterações podem ser encontradas na página \"Sobre c:geo\" na aplicação.</string>
+  <string name="live_map_notification">As coordenadas no mapa ao vivo podem nem sempre ser precisas!\nAs coordenadas possivelmente imprecisas estão marcadas por um circulo laranja.\n\nAo abrir os detalhes da geocache ou ao gravar a geocache para uso offline obterá sempre as coordenadas precisas.</string>
   <string name="map_select_multiple_items">Selecionar item</string>
   <string name="map_routing">Rotas</string>
   <string name="map_routing_straight">Linha a direito</string>
@@ -1091,7 +1093,7 @@
   <string name="helper_sendtocgeo_description">Send to c:geo é uma extensão do navegador <strong>para o seu PC</strong>. Ao navegar geocaching.com, você pode enviar as caches directamente para seu smartphone com o clique de um botão no navegador.</string>
   <string name="helper_locus_title">Locus</string>
   <string name="helper_locus_description">Aplicação de navegação ao ar livre para o seu telefone ou tablet. Veja mapas topográficos offline, registe a sua rota, procure geocaches, use um guia de voz e muito mais.</string>
-  <string name="helper_gpsstatus_title">GPS Status &amp; Toolbox</string>
+  <string name="helper_gpsstatus_title">Status do GPS &amp; Ferramentas</string>
   <string name="helper_gpsstatus_description">Pode usar o radar a partir desta aplicação. Também fornece muitas outras informações relacionadas com o GPS.</string>
   <string name="helper_bluetoothgps_title">GPS por bluetooth</string>
   <string name="helper_bluetoothgps_description">Permite utilizar um GPS externo, para uma melhor recepção, localização mais precisa e permite poupar a bateria do seu telemóvel.</string>
@@ -1378,7 +1380,7 @@
   <string name="status_geocaching_change" tools:ignore="UnusedResources">Alterações recentes em geocaching.com fizeram com que c:geo funcione mal.\nEstamos a trabalhar nisto, verifique de novo mais tarde.</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Alterações recentes em geocaching.com fizeram com o mapa ao vivo não funcione bem.\nEstamos a trabalhar nisto, verifique de novo mais tarde.</string>
   <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com está em manutenção.\nPode encontrar algumas dificuldades de comunicação.</string>
-  <string name="status_closeout_warning" tools:ignore="UnusedResources">Parece estar a utilizar uma versão do Android inferior a 2.1. Futuras versões do c: geo podem deixar de ficar disponíveis para o seu dispositivo.</string>
+  <string name="status_closeout_warning" tools:ignore="UnusedResources">Parece estar a usar uma versão de Android inferior a 4.0. Versões futuras do c:geo poderão não estar disponíveis para o seu dispositivo.</string>
   <!-- text-to-speech for compass view -->
   <string name="tts_service">Bússola que fala</string>
   <string name="tts_start">Comece a falar</string>

@@ -354,6 +354,7 @@
   <string name="caches_filter_rating">Con valutazione (rating)</string>
   <string name="caches_filter_own_rating">Con propria valutazione (rating)</string>
   <string name="caches_filter_multi_listing">Lista cache con stato diverso tra i siti di logging</string>
+  <string name="caches_filter_own_waypoint">Con waypoint definiti dall\'utente</string>
   <string name="caches_removing_from_history">Rimozione dalla cronologia…</string>
   <string name="caches_clear_offlinelogs">Cancella i log offline</string>
   <string name="caches_clear_offlinelogs_message">Vuoi cancellare tutti i log offline?</string>
@@ -822,6 +823,7 @@
   <string name="cache_menu_pebble">Pebble</string>
   <string name="cache_menu_vote">Vota</string>
   <string name="cache_menu_checker">Open Geochecker</string>
+  <string name="cache_menu_challenge_checker">Cerca le sfide (challenge)</string>
   <string name="cache_menu_ignore">Ignora cache</string>
   <string name="ignore_confirm_title">Stai attento</string>
   <string name="ignore_confirm_message">Ignorando una cache significa che questo cache non si ripresenterà quando si caricano dati da geocaching.com. Sarai in grado di vederlo nuovamente solo agendo da sito Web (unignore).</string>
@@ -980,7 +982,7 @@
   <string name="map_strategy_fast">Veloce</string>
   <string name="map_strategy_auto">In base alla tua velocità di movimento</string>
   <string name="map_strategy_detailed">Dettagliata</string>
-  <string name="live_map_notification">Nella nuova Mappa Live le coordinate potrebbero non essere sempre precise. Coordinate possibilmente imprecise sono marcate da un cerchio arancione.\nAprendo i dettagli del cache o salvando il cache per uso offline farà calcolare sempre coordinate precise.\n\nInformazioni addizionali su tutte le modifiche si possono trovare nel menu \"Info su c:geo\" sulla pagina principale di questa app.</string>
+  <string name="live_map_notification">Le coordinate sulla mappa live potrebbero non essere sempre precise! \nLe coordinate che potrebbero essere imprecise sono contrassegnate da un cerchio arancione.\n\nAprendo i dettagli del cache o salvando il cache per l\'utilizzo offline produrrà invece sempre coordinate precise.</string>
   <string name="map_select_multiple_items">Seleziona elemento</string>
   <string name="map_routing">Instradamento</string>
   <string name="map_routing_straight">Linea diretta</string>
@@ -1370,7 +1372,7 @@
   <string name="status_geocaching_change" tools:ignore="UnusedResources">Modifiche recenti al sito geocaching hanno disattivato c:geo.\nCi stiamo lavorando, riprova più tardi.</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Modifiche recenti al sito geocaching hanno disattivato la mappa live.\nCi stiamo lavorando, riprova più tardi.</string>
   <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Geocaching.com è sotto manutenzione. \nCi potrebbero essere dei problemi di collegamento.</string>
-  <string name="status_closeout_warning" tools:ignore="UnusedResources">Sembra che tu stia utilizzando una versione di Android precedente alla 2.1. Le future versioni di c:geo potrebbero non supportare il tuo dispositivo.</string>
+  <string name="status_closeout_warning" tools:ignore="UnusedResources">Sembra che tu stia utilizzando una versione di Android precedente alla 4.0. Le future versioni di c:geo potrebbero non supportare il tuo dispositivo.</string>
   <!-- text-to-speech for compass view -->
   <string name="tts_service">Bussola parlante</string>
   <string name="tts_start">Start voce</string>

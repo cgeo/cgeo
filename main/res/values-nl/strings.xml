@@ -354,6 +354,7 @@
   <string name="caches_filter_rating">Met rating</string>
   <string name="caches_filter_own_rating">Met eigen rating</string>
   <string name="caches_filter_multi_listing">Meerdere listings met verschillende status</string>
+  <string name="caches_filter_own_waypoint">Met door de gebruiker gedefinieerde waypoints</string>
   <string name="caches_removing_from_history">Verwijderen uit geschiedenis…</string>
   <string name="caches_clear_offlinelogs">Verwijderen offline logs</string>
   <string name="caches_clear_offlinelogs_message">Wil je de offline logs wissen?</string>
@@ -803,7 +804,7 @@
   <string name="cache_menu_sygic_drive">Sygic (rijden)</string>
   <string name="cache_menu_radar">Radar</string>
   <string name="cache_menu_map">Toon op kaart</string>
-  <string name="cache_menu_mfbeta">Mapsforge Bèta</string>
+  <string name="cache_menu_mfbeta">Mapsforge Beta</string>
   <string name="cache_menu_map_static">Statische kaarten</string>
   <string name="cache_menu_download_map_static">Download statische kaarten</string>
   <string name="cache_menu_rmaps">Rmaps</string>
@@ -829,6 +830,7 @@
   <string name="cache_menu_android_wear">Android Wear</string>
   <string name="cache_menu_vote">Stem</string>
   <string name="cache_menu_checker">Open Geochecker</string>
+  <string name="cache_menu_challenge_checker">Zoek challenge checker</string>
   <string name="cache_menu_ignore">Negeer cache</string>
   <string name="ignore_confirm_title">Wees voorzichtig</string>
   <string name="ignore_confirm_message">Een cache negeren betekent dat deze cache nooit meer geladen zal worden van geocaching.com. Je kunt deze cache alleen weer zichtbaar maken door dit te annuleren op geocaching.com.</string>
@@ -987,7 +989,7 @@
   <string name="map_strategy_fast">Snel</string>
   <string name="map_strategy_auto">Afhankelijk van snelheid</string>
   <string name="map_strategy_detailed">Gedetailleerd</string>
-  <string name="live_map_notification">Op de nieuwe live-kaart zullen coördinaten niet altijd exact zijn. Mogelijke onnauwkeurige coördinaten zijn aangegeven met een oranje cirkel.\nHet openen of opslaan van de cache zorgt ervoor dat de exacte coördinaten gebruikt worden.\n\nMeer informatie over de wijzigingen kan gevonden worden op de \"Over c:geo\" pagina in de app.</string>
+  <string name="live_map_notification">Coördinaten op de nieuwe live-kaart zullen niet altijd exact zijn. Mogelijk onnauwkeurige coördinaten zijn aangegeven met een oranje cirkel.\nHet openen of opslaan van de cache zorgt ervoor dat de exacte coördinaten gebruikt worden.\n\nMeer informatie over de wijzigingen kan gevonden worden op de \"Over c:geo\" pagina in de app.</string>
   <string name="map_select_multiple_items">Selecteer item</string>
   <string name="map_routing">Routering</string>
   <string name="map_routing_straight">Rechte lijn</string>
@@ -1091,7 +1093,7 @@
   <string name="helper_sendtocgeo_description">Verzenden naar c:geo is een browserextensie <strong>voor uw PC</strong>. Tijdens het browsen op geocaching.com, kunt u caches verzenden naar uw smartphone met een klik direct in de browser.</string>
   <string name="helper_locus_title">Locus</string>
   <string name="helper_locus_description">Outdoor navigatie app voor uw telefoon of Tablet. Topo kaarten offline bekijken, uw route vastleggen, geocaches zoeken, gebruik een stem gids en meer.</string>
-  <string name="helper_gpsstatus_title">GPS Status &amp; Toolbox</string>
+  <string name="helper_gpsstatus_title">GPS-Status &amp; Toolbox</string>
   <string name="helper_gpsstatus_description">De radar van deze applicatie kan gebruikt worden samen met c:geo. Het bied ook vele andere GPS gerelateerde informatie.</string>
   <string name="helper_bluetoothgps_title">Bluetooth GPS</string>
   <string name="helper_bluetoothgps_description">Maakt het mogelijk om een externe GPS ontvanger te gebruiken voor betere ontvangst, betere locatiebepaling en kan gebruik van de telefoonbatterij verminderen.</string>
@@ -1378,7 +1380,7 @@
   <string name="status_geocaching_change" tools:ignore="UnusedResources">Recente aanpassingen op geocaching.com zorgen dat c:geo niet meer (100%) correct werkt.\nWe werken aan het probleem, controleer binnenkort nogmaals.</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Recente aanpassingen op geocaching.com zorgen dat de live-kaart niet meer werkt.\nWe werken aan het probleem, controleer binnenkort nogmaals.</string>
   <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com is in onderhoud.\nJe kan verschillende problemen ondervinden.</string>
-  <string name="status_closeout_warning" tools:ignore="UnusedResources">U lijkt gebruik te maken van een versie van Android ouder dan 2.1. Toekomstige versies van c:geo zijn mogelijk niet meer beschikbaar voor uw apparaat.</string>
+  <string name="status_closeout_warning" tools:ignore="UnusedResources">Je lijkt gebruik te maken van een Android versie ouder dan 4.0. Toekomstige versies van c:geo zijn mogelijk niet meer beschikbaar voor jouw apparaat.</string>
   <!-- text-to-speech for compass view -->
   <string name="tts_service">Pratend kompas</string>
   <string name="tts_start">Begin met praten</string>

@@ -354,6 +354,7 @@
   <string name="caches_filter_rating">Con puntuación</string>
   <string name="caches_filter_own_rating">Con puntuación propia</string>
   <string name="caches_filter_multi_listing">Multi ficha con distinto registro</string>
+  <string name="caches_filter_own_waypoint">Con waypoints definidos por el usuario</string>
   <string name="caches_removing_from_history">Borrando del historial…</string>
   <string name="caches_clear_offlinelogs">Borrar registros sin conexión</string>
   <string name="caches_clear_offlinelogs_message">¿Quieres borrar los registros sin conexión?</string>
@@ -817,6 +818,7 @@
   <string name="cache_menu_pebble">Pebble</string>
   <string name="cache_menu_vote">Votar</string>
   <string name="cache_menu_checker">Abrir Geochecker</string>
+  <string name="cache_menu_challenge_checker">Buscar checker del challenge</string>
   <string name="cache_menu_ignore">Ignorar caché</string>
   <string name="ignore_confirm_title">Ten cuidado</string>
   <string name="ignore_confirm_message">Ignorar un caché significa que este caché no aparecerá más cuando cargues datos de geocaching.com. Sólo podrás verlo de nuevo si dejas de ignorarlo desde la página web.</string>
@@ -975,7 +977,7 @@
   <string name="map_strategy_fast">Rápido</string>
   <string name="map_strategy_auto">En función de la velocidad</string>
   <string name="map_strategy_detailed">Detallado</string>
-  <string name="live_map_notification">Las coordenadas en el mapa en vivo pueden no ser precisas. Posibles coordenadas imprecisas están marcadas con un círculo naranja.\nAbrir los detalles del caché o guardándolo para su uso sin conexión proporcionará siempre coordenadas precisas.\n\nPuedes encontrar más información en la página \"Sobre c:geo\" dentro de la app.</string>
+  <string name="live_map_notification">Las coordenadas en el mapa en vivo pueden no ser precisas.\nLas posibles coordenadas imprecisas están marcadas con un círculo naranja.\n\nAbrir los detalles del caché o guardándolo para su uso sin conexión proporcionará siempre coordenadas precisas.</string>
   <string name="map_select_multiple_items">Seleccionar elemento</string>
   <string name="map_routing">Enrutamiento</string>
   <string name="map_routing_straight">Línea recta</string>
@@ -1365,7 +1367,7 @@ Nombre de archivo:%2$s</string>
   <string name="status_geocaching_change" tools:ignore="UnusedResources">Cambios recientes en geocaching.com han roto c:geo.\nEstamos trabajando en ello, pruébalo de nuevo más tarde.</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Cambios recientes en geocaching.com han roto la función de mapas en vivo.\nEstamos trabajando en ello, pruébalo de nuevo más tarde.</string>
   <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com está en mantenimiento.\nPuedes encontrarte algunos problemas.</string>
-  <string name="status_closeout_warning" tools:ignore="UnusedResources">Parece que usas una versión de Android anterior a 2.1. Es posible que las futuras versiones de c:geo no estén disponibles para tu dispositivo.</string>
+  <string name="status_closeout_warning" tools:ignore="UnusedResources">Parece que usas una versión de Android anterior a 4.0. Es posible que las futuras versiones de c:geo no estén disponibles para tu dispositivo.</string>
   <!-- text-to-speech for compass view -->
   <string name="tts_service">Brújula con voz</string>
   <string name="tts_start">Empezar a hablar</string>

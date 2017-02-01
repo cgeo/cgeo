@@ -300,7 +300,7 @@
   <string name="caches_sort_name">Navn</string>
   <string name="caches_sort_geocode">Geokode</string>
   <string name="caches_sort_rating">Vurdering</string>
-  <string name="caches_sort_vote">Afstemning (egen vurdering)</string>
+  <string name="caches_sort_vote">Bedømmelse (egen vurdering)</string>
   <string name="caches_sort_inventory">Antal Trackables</string>
   <string name="caches_sort_date_hidden">Dato for placering</string>
   <string name="caches_sort_date_logged">Dato for logbesked</string>
@@ -354,6 +354,7 @@
   <string name="caches_filter_rating">Med vurdering</string>
   <string name="caches_filter_own_rating">Med egen vurdering</string>
   <string name="caches_filter_multi_listing">Flere lister med forskellige tilstand</string>
+  <string name="caches_filter_own_waypoint">Med brugerdefinerede waypoints</string>
   <string name="caches_removing_from_history">Fjerner fra historik…</string>
   <string name="caches_clear_offlinelogs">Fjern offline logbeskeder</string>
   <string name="caches_clear_offlinelogs_message">Vil du fjerne offline logbeskeder?</string>
@@ -470,7 +471,7 @@
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_gcvote_password_description">For at kunne bedømme en cache skal du følge instruktionerne på GCVote.com og angive dit password til GCVote her.</string>
   <string name="err_gcvote_send_rating">Fejl under afsendelse af bedømmelse. Kontrollér eller fjern GCVote password under Indstillinger.</string>
-  <string name="gcvote_sent">Stemme blev afsendt</string>
+  <string name="gcvote_sent">Bedømmelse blev afsendt</string>
   <string name="init_twitter">Twitter</string>
   <string name="settings_activate_twitter">Aktivér</string>
   <string name="init_username">Brugernavn</string>
@@ -501,7 +502,7 @@
   <string name="init_signature_template_url">URL</string>
   <string name="init_signature_template_log">Logtekst</string>
   <string name="init_ratingwanted">GCVote vurdering</string>
-  <string name="init_summary_ratingwanted">Indlæs cachevurdering fra GCVote.com</string>
+  <string name="init_summary_ratingwanted">Indlæs cachebedømmelser fra GCVote.com</string>
   <string name="init_friends_and_own_logs_wanted">Vis venners/egne</string>
   <string name="init_summary_friends_and_own_logs_wanted">Vis en særskilt logbogsside med venners og egne logbeskeder</string>
   <string name="init_openlastdetailspage">Åbn sidste detaljeside</string>
@@ -554,7 +555,7 @@
   <string name="settings_info_offline_maps_title">Oplysninger om offline kort</string>
   <string name="settings_info_offline_maps">c:geo understøtter kort til offline brug. Du kan downloade kort fra Mapsforge eller lave dine egne kort ved hjælp af OSM data. Du skal vælge en mappe, som indeholder offline kort, før du kan bruge offline kort.</string>
   <string name="settings_info_themes_title">Oplysninger om korttemaer</string>
-  <string name="settings_info_themes">c:geo understøtter tilpassede temaer til offline kort. Temaer kan bruges til at ændre farvestil på kortet (f.eks. farver som egne sig til brug i mørke) eller til at fremhæve bestemte typer af objekter, som cykelstier eller højdekurver, på kortet.</string>
+  <string name="settings_info_themes">c:geo understøtter tilpassede temaer til offline kort. Temaer kan bruges til at ændre farvestil på kortet (f.eks. farver som egne sig til brug i mørke) eller til at fremhæve bestemte typer af objekter, som cykelstier eller højdekurver.</string>
   <string name="init_mapsource_select">Vælg kortkilde</string>
   <string name="settings_title_scale_map_text">Tilpas tekst på kort</string>
   <string name="settings_summary_scale_map_text">Tilpas størrelsen af tekster på offline kort, så de passer til enhedens skærmopløsning,</string>
@@ -825,8 +826,9 @@
   <string name="cache_menu_oruxmaps_online">OruxMaps (Online)</string>
   <string name="cache_menu_oruxmaps_offline">OruxMaps (Offline)</string>
   <string name="cache_menu_pebble">Pebble</string>
-  <string name="cache_menu_vote">Stem</string>
+  <string name="cache_menu_vote">Bedøm</string>
   <string name="cache_menu_checker">Åben Geochecker</string>
+  <string name="cache_menu_challenge_checker">Søg efter cacher med geo-checker</string>
   <string name="cache_menu_ignore">Ignorér cache</string>
   <string name="ignore_confirm_title">Vær forsigtig</string>
   <string name="ignore_confirm_message">Hvis du vælger at ignorere denne cache, vil den ikke længere blive vist, når der hentes data fra geocaching.com. Cachen vil kun blive vist, hvis du på websiden vælger, at den ikke længere skal ignoreres.</string>
@@ -985,7 +987,7 @@
   <string name="map_strategy_fast">Hurtig</string>
   <string name="map_strategy_auto">Hastighedsafhængig</string>
   <string name="map_strategy_detailed">Detaljeret</string>
-  <string name="live_map_notification">Positioner på Live-kortet er ikke altid præcise. Cacher med upræcis positionsangivelse er markeret med en orange cirkel.\nDen korrekte position vil dog altid blive indlæst når du åbner cachedetaljer eller gemmer cachen til offlinebrug.\n\nDu kan læse mere om dette under punktet \"Om c:geo\" i appen.</string>
+  <string name="live_map_notification">Positioner på Live-kortet er ikke altid præcise!\nCacher med upræcis positionsangivelse er markeret med en orange cirkel.\n\nDen korrekte position vil dog altid blive indlæst når du åbner cachedetaljer eller gemmer cachen til offlinebrug.</string>
   <string name="map_select_multiple_items">Vælg element</string>
   <string name="map_routing">Navigation</string>
   <string name="map_routing_straight">Lige linje</string>
@@ -1375,7 +1377,6 @@
   <string name="status_geocaching_change" tools:ignore="UnusedResources">Ændringer på geocaching.com forhindrer c:geo i at fungere.\nVi arbejder på at løse problemet. Prøv igen senere.</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Ændringer på geocaching.com forhindrer Live-kortet i at fungere.\nVi arbejder på at løse problemet. Prøv igen senere.</string>
   <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Geocaching.com er under vedligeholdelse.\nDu kan opleve uregelmæssigheder.</string>
-  <string name="status_closeout_warning" tools:ignore="UnusedResources">Du bruger en udgave af Android ældre end version 2.1. Fremtidige udgaver af c:geo vil måske ikke være understøttet på din enhed.</string>
   <!-- text-to-speech for compass view -->
   <string name="tts_service">Talende kompas</string>
   <string name="tts_start">Start tale</string>

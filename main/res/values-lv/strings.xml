@@ -427,7 +427,6 @@
   <string name="settings_goto_url_button">vairāk…</string>
   <string name="settings_title_gc">Geocaching.com</string>
   <string name="settings_title_ec">Extremcaching.com</string>
-  <string name="settings_title_ox">Opencaching.com (Garmin)</string>
   <string name="settings_activate_gc">Aktivizēt</string>
   <string name="settings_activate_ec">Aktivizēt</string>
   <string name="settings_activate_ox">Aktivizēt</string>
@@ -941,7 +940,6 @@
   <string name="map_strategy_fast">Ātrs</string>
   <string name="map_strategy_auto">Atkarībā no ātruma</string>
   <string name="map_strategy_detailed">Detalizēts</string>
-  <string name="live_map_notification">Koordinātas tiešsaistes kartē ne vienmēr var būt precīzas. Iespējamās neprecīzās koordinātas ir atzīmētas ar oranžu apļi.\nAtverot slēpņa informāciju vai saglabājot slēpni lietošanai bezsaistē iegūsiet precīzas koordinātas.\n\nVairāk informācijas varat atrast iekš aplikācijas sadaļas \"Par c:geo\".</string>
   <!-- search -->
   <string name="search_bar_hint">Meklēt slēpņus</string>
   <string name="search_bar_desc">Slēpnis (geo kods, atslēgasvārds), Trackables (TB kods)</string>
@@ -1011,6 +1009,7 @@
   <string name="user_menu_open_browser">Atvērt profilu pārlūkprogrammā</string>
   <string name="user_menu_send_message">Nosūtīt ziņu</string>
   <string name="user_menu_open_contact">Atvērt kontakta kartīti</string>
+  <string name="user_unknown">Nezināms lietotājs</string>
   <!-- navigation -->
   <string name="navigation">Navigācija</string>
   <string name="compass_title">Kompass</string>
@@ -1313,7 +1312,6 @@
   <string name="status_geocaching_change" tools:ignore="UnusedResources">Nesenās izmaiņas geocaching.com lapā \"salauza\" c:geo.\nMēs strādājam lai to salabotu, pārbaudiet pēc brīža.</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Dēļ izmaiņām geocaching.com lapā, traucēta tiešsaistes karšu darbība. \nMēs strādājam lai to salabotu, pārbaudiet pēc brīža.</string>
   <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com tiek atjaunots. \nYou.Jūs varat saskarties ar dažādām nepilnībām.</string>
-  <string name="status_closeout_warning" tools:ignore="UnusedResources">Izskatās ka izmanto vecāku versiju par Android 2.1. Turpmākās c:geo versijas vairs var nebūt pieejamas tavā ierīcē.</string>
   <!-- text-to-speech for compass view -->
   <string name="tts_service">Runājošais kompass</string>
   <string name="tts_start">Sākt runu</string>

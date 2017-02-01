@@ -354,6 +354,7 @@
   <string name="caches_filter_rating">Med vurdering</string>
   <string name="caches_filter_own_rating">Med egen vurdering</string>
   <string name="caches_filter_multi_listing">Oppført på flere sider, men ikke logget på alle</string>
+  <string name="caches_filter_own_waypoint">Med brukerdefinerte veipunkter</string>
   <string name="caches_removing_from_history">Fjerner fra historikken…</string>
   <string name="caches_clear_offlinelogs">Fjern offline-logger</string>
   <string name="caches_clear_offlinelogs_message">Vil du fjerne offline-loggene?</string>
@@ -829,6 +830,7 @@
   <string name="cache_menu_android_wear">Android Wear</string>
   <string name="cache_menu_vote">Avgi stemme</string>
   <string name="cache_menu_checker">Åpne Geochecker</string>
+  <string name="cache_menu_challenge_checker">Søk etter utfordringssjekkere</string>
   <string name="cache_menu_ignore">Ignorer cache</string>
   <string name="ignore_confirm_title">Vær forsiktig</string>
   <string name="ignore_confirm_message">Hvis du ignorerer en cache, betyr det at den aldri vil bli med blant data som hentes fra geocaching.com igjen. Du må fjerne den fra ignoreringslista på nettsiden for å kunne hente den på nytt.</string>
@@ -987,7 +989,7 @@
   <string name="map_strategy_fast">Rask</string>
   <string name="map_strategy_auto">Hastighetsavhengig</string>
   <string name="map_strategy_detailed">Detaljert</string>
-  <string name="live_map_notification">Koordinatene på live-kartet er ikke alltid nøyaktige. En cache med potensielt unøyaktige koordinater blir markert med en oransje sirkel.\nNår du viser detaljene på en cache eller lagrer den vil nøyaktige koordinater bli lastet ned.\n\nMer infomasjon finner du ved å velge \"Om c:geo\" på åpningsbildet i appen.</string>
+  <string name="live_map_notification">Koordinatene på live-kartet er ikke alltid nøyaktige.\nEn cache med potensielt unøyaktige koordinater blir markert med en oransje sirkel.\n\nNår du viser detaljene på en cache eller lagrer den vil nøyaktige koordinater bli lastet ned.</string>
   <string name="map_select_multiple_items">Velg objekt</string>
   <string name="map_routing">Rute</string>
   <string name="map_routing_straight">Rett linje</string>
@@ -1378,7 +1380,7 @@
   <string name="status_geocaching_change" tools:ignore="UnusedResources">Nylige endringer på geocaching.com har medført at c:geo ikke virker.\nVi jobber med å løste problemet. Forsøk igjen senere.</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Nylige endringer på geocaching.com har gjort at live-kartet ikke fungerer.\nVi jobber med saken. Prøv igjen senere.</string>
   <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Geocaching.com er nede på grunn av vedlikehold. \nDet kan oppstå ymse problemer.</string>
-  <string name="status_closeout_warning" tools:ignore="UnusedResources">Det ser ut som du bruker en versjon av Android som er eldre enn 2.1. Fremtidige utgivelser av c:geo vil trolig ikke virke på din enhet.</string>
+  <string name="status_closeout_warning" tools:ignore="UnusedResources">Det ser ut som du bruker Andoid 4.0 eller eldre. Fremtidige utgivelser av c:geo vil trolig ikke virke på din enhet.</string>
   <!-- text-to-speech for compass view -->
   <string name="tts_service">Talende kompass</string>
   <string name="tts_start">Start tale</string>

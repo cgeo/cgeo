@@ -354,6 +354,7 @@
   <string name="caches_filter_rating">Amb puntuació</string>
   <string name="caches_filter_own_rating">Amb puntuació pròpia</string>
   <string name="caches_filter_multi_listing">Multi llista amb diferents estats</string>
+  <string name="caches_filter_own_waypoint">Amb fites definides per l\'usuari</string>
   <string name="caches_removing_from_history">S\'està eliminant de l\'historial…</string>
   <string name="caches_clear_offlinelogs">Neteja els registres fora de línea</string>
   <string name="caches_clear_offlinelogs_message">Voleu esborrar els registres fora de línia?</string>
@@ -828,6 +829,7 @@
   <string name="cache_menu_pebble">Pebble</string>
   <string name="cache_menu_vote">Vota</string>
   <string name="cache_menu_checker">Obre el Geochecker</string>
+  <string name="cache_menu_challenge_checker">Cerca comprovador de reptes</string>
   <string name="cache_menu_ignore">Ignora el catxé</string>
   <string name="ignore_confirm_title">Aneu amb compte</string>
   <string name="ignore_confirm_message">Al ignorar un catxé , farà que aquest catxé no torni a aparèixer a les càrregues de dades de geocaching.com. Només serà capaç de veure\'l  designorant-ho a la pàgina web.</string>
@@ -986,7 +988,7 @@
   <string name="map_strategy_fast">Ràpida</string>
   <string name="map_strategy_auto">Sensible a la velocitat</string>
   <string name="map_strategy_detailed">Detallada</string>
-  <string name="live_map_notification">Les coordenades al mapa en viu poden no ser precises. Possiblement les coordenades imprecises estan marcades amb un cercle taronja.\nObrint els detalls del catxé o guardant el catxé per a ús fora de línia  obtindreu les coordenades precises.\n\nPodeu trobar més informació a la pàgina \"Quant al c:geo\" dins de l\'aplicació.</string>
+  <string name="live_map_notification">Les coordenades del mapa en viu no sempre són precises! \nLes coordenades que poden ser imprecises estan marcades amb un cercle taronja.\n\nObrint els detalls del geoamagatall o desant-lo fora de línia s\'obtenen sempre les coordenades precises.</string>
   <string name="map_select_multiple_items">Seleccionar un element</string>
   <string name="map_routing">Encaminant</string>
   <string name="map_routing_straight">Línia recta</string>
@@ -1376,7 +1378,6 @@
   <string name="status_geocaching_change" tools:ignore="UnusedResources">Uns canvis recents a geocaching.com han espatllat el c:geo.\nHi estem treballant, torneu-ho a provar aviat.</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Uns canvis recents a geocaching.com han espatllat la funcionalitat del mapa en viu.\nHi estem treballant, torneu-ho a provar aviat.</string>
   <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">El web de geocaching.com està en manteniment.\nPer aquest motiu podeu tenir alguna dificultat.</string>
-  <string name="status_closeout_warning" tools:ignore="UnusedResources">Sembla que esteu utilitzant una versió d\'Android 2.1 o inferior. Futures versions del c:geo poden no estar disponibles per al vostre dispositiu.</string>
   <!-- text-to-speech for compass view -->
   <string name="tts_service">Brúixola parlant</string>
   <string name="tts_start">Comença a parlar</string>

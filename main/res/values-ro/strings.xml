@@ -992,7 +992,6 @@
   <string name="map_strategy_fast">Rapid</string>
   <string name="map_strategy_auto">În funcţie de viteză</string>
   <string name="map_strategy_detailed">Detaliat</string>
-  <string name="live_map_notification">Coordonatele pe hartă s-ar putea să nu fie întotdeauna precise. Coordontele imprecise sunt marcate cu un cerc portocaliu.\nAfişând detaliile cutiei sau salvând cutia se vor obţine întotdeauna coordonatele exacte.\n\nMai multe informaţii se pot găsi în secţiunea \"Despre c:geo\".</string>
   <string name="map_select_multiple_items">Selectează un element</string>
   <string name="map_routing">Dirijare</string>
   <string name="map_routing_walk">Pe jos</string>
@@ -1383,7 +1382,6 @@
   <string name="status_geocaching_change" tools:ignore="UnusedResources">Modificările recente de pe geocaching.com fac c:geo nefuncţional.\nLucrăm la asta, revin-o.</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Modificările recente de pe geocaching.com fac harta nefuncţională.\nLucrăm la asta, revin-o.</string>
   <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Se efectuează lucrări de întreţinere la geocaching.com.\nEste posibil ca în această perioadă să apară diverse probleme.</string>
-  <string name="status_closeout_warning" tools:ignore="UnusedResources">Foloseşti o versiune de Android mai veche de 2.1. Versiuni ulterioare a c:geo s-ar putea să nu mai fie disponibile pentru dispozitivul tău.</string>
   <!-- text-to-speech for compass view -->
   <string name="tts_service">Busolă vorbitoare</string>
   <string name="tts_start">Vorbeşte</string>

@@ -354,6 +354,7 @@
   <string name="caches_filter_rating">Ayant reçu une évaluation</string>
   <string name="caches_filter_own_rating">Ayant reçu une évaluation de votre part</string>
   <string name="caches_filter_multi_listing">Listing multi-états</string>
+  <string name="caches_filter_own_waypoint">Avec points de passage définis par l’utilisateur</string>
   <string name="caches_removing_from_history">Suppression de l\'historique…</string>
   <string name="caches_clear_offlinelogs">Supprimer les visites hors-ligne</string>
   <string name="caches_clear_offlinelogs_message">Supprimer toutes les visites hors-ligne ?</string>
@@ -829,6 +830,7 @@
   <string name="cache_menu_android_wear">Android Wear</string>
   <string name="cache_menu_vote">Voter</string>
   <string name="cache_menu_checker">Ouvrir le geovérificateur</string>
+  <string name="cache_menu_challenge_checker">Chercher le vérificateur de défis</string>
   <string name="cache_menu_ignore">Ignorer la cache</string>
   <string name="ignore_confirm_title">Soyez prudent</string>
   <string name="ignore_confirm_message">Ignorer une cache signifie que cette cache n\'apparaîtra plus lors du chargement de données depuis geocaching.com. Pour voir à nouveau cette cache : réactivez-la sur le site Web.</string>
@@ -987,7 +989,7 @@
   <string name="map_strategy_fast">Rapide</string>
   <string name="map_strategy_auto">En fonction du déplacement</string>
   <string name="map_strategy_detailed">Détaillée</string>
-  <string name="live_map_notification">Lors de l\'affichage de la carte temps-réel, les coordonnées de certaines caches peuvent être imprécises, elles sont alors entourées d\'un cercle orange.\nConsultez les détails d\'une cache ou enregistrez-la pour une utilisation hors-ligne afin d\'obtenir ses coordonnées exactes.\n\nVous trouverez plus d\'informations sur la page d\'aide accessible depuis \"À propos de c:geo\".</string>
+  <string name="live_map_notification">Sur la carte temps-réel, les coordonnées de certaines caches peuvent être imprécises, elles sont alors entourées d\'un cercle orange.\nConsultez les détails de la cache ou enregistrez-la pour une utilisation hors-ligne afin d\'obtenir ses coordonnées exactes.</string>
   <string name="map_select_multiple_items">Sélectionner l\'élément</string>
   <string name="map_routing">Calcul de l\'itinéraire</string>
   <string name="map_routing_straight">À vol d\'oiseau</string>
@@ -1377,8 +1379,8 @@
   <string name="status_new_rc" tools:ignore="UnusedResources">Une nouvelle version candidate est disponible.\nAppuyez ici pour l\'installer.</string>
   <string name="status_geocaching_change" tools:ignore="UnusedResources">Des changements récents sur Geocaching.com ont cassé c:geo.\nNous sommes en train de corriger. Revenez plus tard.</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Des changements récents sur Geocaching.com ont cassé la carte temps-réel.\nNous sommes en train de corriger. Revenez plus tard.</string>
-  <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Maintenant en cours sur geocaching.com.\nIl se peut que vous rencontriez des problèmes.</string>
-  <string name="status_closeout_warning" tools:ignore="UnusedResources">Vous utilisez une version d\'Android inférieure à 2.1. Les futures versions de c:geo pourront ne pas être disponibles pour votre appareil.</string>
+  <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Maintenance en cours sur geocaching.com.\nIl se peut que vous rencontriez des problèmes.</string>
+  <string name="status_closeout_warning" tools:ignore="UnusedResources">Vous utilisez une version d\'Android plus ancienne que 4.0. Les futures versions de c:geo pourraient ne pas être disponibles pour votre appareil.</string>
   <!-- text-to-speech for compass view -->
   <string name="tts_service">Boussole parlante</string>
   <string name="tts_start">Commencer à parler</string>

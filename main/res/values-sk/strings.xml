@@ -996,7 +996,6 @@
   <string name="map_strategy_fast">Rýchla</string>
   <string name="map_strategy_auto">Podľa rýchlosti</string>
   <string name="map_strategy_detailed">Podrobná</string>
-  <string name="live_map_notification">Na aktívnej mape nemusia byť súradnice vždy presné. Súradnice, ktoré môžu byť nepresné, sú označené oranžovým krúžkom.\nPo otvorení detailu skrýše alebo po jej uložení pre použitie offline, sú získané vždy presné súradnice.\n\nViac informácií nájdete na stránke „O c:geo“ v aplikácii.</string>
   <string name="map_select_multiple_items">Vybrať položku</string>
   <string name="map_routing">Navigácia</string>
   <string name="map_routing_straight">Priama čiara</string>
@@ -1388,7 +1387,6 @@
   <string name="status_geocaching_change" tools:ignore="UnusedResources">Nedávne zmeny na geocaching.com znefunkčnili c:geo.\nPracujeme na tom, skúste onedlho skontrolovať aktualizácie.</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Nedávne zmeny na geocaching.com znefunkčnili aktívnu mapu.\nPracujeme na tom, skúste skontrolovať aktualizácie onedlho.</string>
   <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Prebieha údržba na Geocaching.com \n Môžu nastať rôzne problémy.</string>
-  <string name="status_closeout_warning" tools:ignore="UnusedResources">Zdá sa, že používate verziu Android staršiu ako 2.1. Budúce verzie z c:geo už nemusia byť k dispozícii pre vaše zariadenie.</string>
   <!-- text-to-speech for compass view -->
   <string name="tts_service">Hovoriaci kompas</string>
   <string name="tts_start">Začať hovoriť</string>

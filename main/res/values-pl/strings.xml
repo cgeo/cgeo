@@ -357,6 +357,7 @@
   <string name="caches_filter_rating">Z oceną</string>
   <string name="caches_filter_own_rating">Z własną oceną</string>
   <string name="caches_filter_multi_listing">Wielokrotne wyświetlanie z różnym stanem</string>
+  <string name="caches_filter_own_waypoint">Z punktami orientacyjnymi użytkownika</string>
   <string name="caches_removing_from_history">Usuwam z Historii…</string>
   <string name="caches_clear_offlinelogs">Usuń wpisy offline</string>
   <string name="caches_clear_offlinelogs_message">Czy chcesz wyczyścić wpisy offline?</string>
@@ -831,6 +832,7 @@
   <string name="cache_menu_pebble">Zegarek Pebble</string>
   <string name="cache_menu_vote">Głosuj</string>
   <string name="cache_menu_checker">Otwórz Geochecker\'a</string>
+  <string name="cache_menu_challenge_checker">Szukaj Challenge-Checker</string>
   <string name="cache_menu_ignore">Ignoruj skrzynkę</string>
   <string name="ignore_confirm_title">Ostrożnie</string>
   <string name="ignore_confirm_message">Zignorowanie tej skrzynki oznacza, że nie pojawi się ona ponownie podczas ładowania danych z geocaching.com. Będziesz w stanie widzieć skrzynkę ponownie jedynie kiedy usuniesz ignorowanie na stronie.</string>
@@ -989,7 +991,7 @@
   <string name="map_strategy_fast">Szybka</string>
   <string name="map_strategy_auto">Zależna od prędkości</string>
   <string name="map_strategy_detailed">Szczegółowa</string>
-  <string name="live_map_notification">Na nowej mapie live, współrzędnie nie zawsze muszą być dokładne. Prawdopodobne niedokładne współrzędne są zaznaczane za pomocą pomarańczowych okręgów.\nOtworzenie współrzędnych skrzynki lub zapisanie skrzynki do użytku offline zawsze używa precyzyjnych współrzędnych.\n\nWięcej informacji na temat wszystkich zmian można odnaleźć na stronie \"O c:geo\" wewnątrz programu.</string>
+  <string name="live_map_notification">Na nowej mapie live, współrzędne nie zawsze muszą być dokładne!\nPrawdopodobne niedokładne współrzędne są zaznaczane za pomocą pomarańczowych okręgów.\n\nOtworzenie szczegółów skrzynki lub zapisanie skrzynki do użytku offline zawsze używa precyzyjnych współrzędnych.</string>
   <string name="map_select_multiple_items">Wybierz element</string>
   <string name="map_routing">Nawigacja</string>
   <string name="map_routing_straight">Linia prosta</string>
@@ -1380,7 +1382,7 @@
   <string name="status_geocaching_change" tools:ignore="UnusedResources">Ostatnie zmiany na geocaching.com popsuły c:geo.\nPracujemy nad tym, sprawdź ponownie niedługo.</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Ostatnie zmiany na geocaching.com popsuły funkcjonalność map online.\nPracujemy nad tym, sprawdź ponownie niedługo.</string>
   <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com jest w trakcie konserwacji.\nMogą wystąpić różnorodne problemy.</string>
-  <string name="status_closeout_warning" tools:ignore="UnusedResources">Wygląda, że używasz wersji Android starszej niż 2.1. Następne wydania c:geo mogą być niedostępne dla Twojego urządzenia.</string>
+  <string name="status_closeout_warning" tools:ignore="UnusedResources">Wygląda, że używasz wersji Android starszej niż 4.0. Następne wydania c:geo mogą być niedostępne dla Twojego urządzenia.</string>
   <!-- text-to-speech for compass view -->
   <string name="tts_service">Mówiący kompas</string>
   <string name="tts_start">Zacznij mówić</string>

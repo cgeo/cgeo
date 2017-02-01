@@ -354,6 +354,7 @@
   <string name="caches_filter_rating">Mit Bewertung</string>
   <string name="caches_filter_own_rating">Mit eigener Bewertung</string>
   <string name="caches_filter_multi_listing">Mehrfach gelistet mit unterschiedlichem Status</string>
+  <string name="caches_filter_own_waypoint">Mit eigenen Wegpunkten</string>
   <string name="caches_removing_from_history">Lösche aus Verlauf…</string>
   <string name="caches_clear_offlinelogs">Offline-Logs löschen</string>
   <string name="caches_clear_offlinelogs_message">Möchtest du die Offline-Logs löschen?</string>
@@ -757,6 +758,7 @@
   <string name="cache_list_text">Liste:</string>
   <string name="cache_list_change">Verschieben</string>
   <string name="cache_list_unknown">In keiner Liste</string>
+  <string name="cache_list_select_last">Letzte Auswahl</string>
   <string name="cache_images">Bilder</string>
   <string name="cache_waypoints">Wegpunkte</string>
   <plurals name="waypoints">
@@ -816,6 +818,7 @@
   <string name="cache_menu_around">Caches im Umkreis</string>
   <string name="around">In der Nähe von %s</string>
   <string name="cache_menu_event">Zum Kalender hinzufügen</string>
+  <string name="cache_menu_extract_waypoints">Extrahiere Wegpunkte</string>
   <string name="cache_menu_details">Details</string>
   <string name="cache_menu_refresh">Aktualisieren</string>
   <string name="cache_menu_share">Weiterleiten</string>
@@ -829,6 +832,7 @@
   <string name="cache_menu_android_wear">Android Wear</string>
   <string name="cache_menu_vote">Bewerten</string>
   <string name="cache_menu_checker">Öffne Geochecker</string>
+  <string name="cache_menu_challenge_checker">Suche Challenge-Checker</string>
   <string name="cache_menu_ignore">Cache ignorieren</string>
   <string name="ignore_confirm_title">Sei vorsichtig</string>
   <string name="ignore_confirm_message">Ignorieren bedeutet, dass dieser Cache nicht mehr auftaucht, wenn du Daten von Geocaching.com lädst. Du kannst ihn nur wieder sichtbar machen, indem du das Ignorieren auf der Webseite aufhebst.</string>
@@ -933,6 +937,7 @@
   <string name="waypoint_edit_title">Wegpunkt bearbeiten</string>
   <string name="waypoint_add_title">Wegpunkt hinzufügen</string>
   <string name="waypoint_note">Notiz</string>
+  <string name="waypoint_user_note">Eigene Notiz</string>
   <string name="waypoint_visited">Besucht</string>
   <string name="waypoint_save">Speichern</string>
   <string name="waypoint_cancel_edit">Abbrechen</string>
@@ -987,7 +992,7 @@
   <string name="map_strategy_fast">Schnell</string>
   <string name="map_strategy_auto">Geschwindigkeitsabhängig</string>
   <string name="map_strategy_detailed">Detailliert</string>
-  <string name="live_map_notification">Auf der neuen Live-Karte sind die Koordinaten nicht immer genau. Eventuell ungenaue Koordinaten sind mit einem orangen Kreis markiert.\nDas Öffnen der Cache-Details oder das Speichern des Cache liefert immer genaue Koordinaten.\n\nMehr Informationen über alle Änderungen befinden sich auf der „Über c:geo“-Seite in der App.</string>
+  <string name="live_map_notification">Auf der neuen Live-Karte sind die Koordinaten nicht immer genau!\nEventuell ungenaue Koordinaten sind mit einem orangen Kreis markiert.\n\nDas Öffnen der Cache-Details oder das Speichern des Cache liefert immer genaue Koordinaten.</string>
   <string name="map_select_multiple_items">Element auswählen</string>
   <string name="map_routing">Routing</string>
   <string name="map_routing_straight">Luftlinie</string>
@@ -1378,7 +1383,7 @@
   <string name="status_geocaching_change" tools:ignore="UnusedResources">Änderungen auf Geocaching.com führen zu Problemen mit c:geo.\nWir arbeiten daran.</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Änderungen auf Geocaching.com führen zu Problemen mit der Live Map.\nWir arbeiten daran.</string>
   <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Geocaching.com wird gerade gewartet.\nDaher könnten einige Dinge nicht funktionieren.</string>
-  <string name="status_closeout_warning" tools:ignore="UnusedResources">Deine Android-Version scheint älter als 2.1 zu sein. Zukünftige Versionen von c:geo sind für dein Gerät vermutlich nicht mehr verfügbar.</string>
+  <string name="status_closeout_warning" tools:ignore="UnusedResources">Deine Android-Version scheint älter als 4.0 zu sein. Zukünftige Versionen von c:geo sind für dein Gerät vermutlich nicht mehr verfügbar.</string>
   <!-- text-to-speech for compass view -->
   <string name="tts_service">Sprechender Kompass</string>
   <string name="tts_start">Starte Sprache</string>

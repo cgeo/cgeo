@@ -357,6 +357,7 @@
   <string name="caches_filter_rating">Su reitingu</string>
   <string name="caches_filter_own_rating">Su savo reitingu</string>
   <string name="caches_filter_multi_listing">Daugiafunkciniai sąrašai su skirtingu statusu</string>
+  <string name="caches_filter_own_waypoint">Su vartotojo nustatytais taškais</string>
   <string name="caches_removing_from_history">Pašalinama iš Istorijos…</string>
   <string name="caches_clear_offlinelogs">Išvalyti išsaugotus įrašus</string>
   <string name="caches_clear_offlinelogs_message">Ar norite išvalyti išsaugotus įrašus?</string>
@@ -823,6 +824,7 @@
   <string name="cache_menu_pebble">Pebble</string>
   <string name="cache_menu_vote">Balsuoti</string>
   <string name="cache_menu_checker">Atidaryti Geochecker</string>
+  <string name="cache_menu_challenge_checker">Ieškoti iššukio tikrintuvo</string>
   <string name="cache_menu_ignore">Ignoruoti slėptuvę</string>
   <string name="ignore_confirm_title">Būk atsargus</string>
   <string name="ignore_confirm_message">Ignoruota slėptuvė reiškia, kad ši slėptuvė niekada neatsiras įkeliant duomenis iš geocaching.com. Jūs galėsite pamatyti slėptuvę tik nebeignoruojant svetainėje.</string>
@@ -981,7 +983,7 @@
   <string name="map_strategy_fast">Greita</string>
   <string name="map_strategy_auto">Priklausoma nuo greičio</string>
   <string name="map_strategy_detailed">Išsami</string>
-  <string name="live_map_notification">Koordinatės tiesioginiame žemėlapyje gali būti netikslios. Galimos netikslios koordinatės žymimos oranžinės spalvos apskritimu.\nAtidarius slėptuvės informaciją arba išsaugojus slėptuvę naudojimui be interneto bus visada gautos tikslios koordinatės.\n\nDaugiau informacijos rasite programos skiltyje \"Apie c:geo\".</string>
+  <string name="live_map_notification">Koordinatės tiesioginiame žemėlapyje gali būti netikslios!\n Galimos netikslios koordinatės žymimos oranžinės spalvos apskritimu.\n\nAtidarius slėptuvės informaciją arba išsaugojus slėptuvę naudojimui be interneto bus visada gautos tikslios koordinatės.</string>
   <string name="map_select_multiple_items">Pasirinkite elementą</string>
   <string name="map_routing">Maršrutizavimas</string>
   <string name="map_routing_straight">Tiesi linija</string>
@@ -1371,7 +1373,7 @@
   <string name="status_geocaching_change" tools:ignore="UnusedResources">Geocaching.com svetainės pakeitimai sugadino c:geo.\nMes tai tvarkome, patikrinkite tai vėliau.</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Geocaching.com svetainės pakeitimai sugadino tiesioginio žemėlapio funkcijas.\nMes tai tvarkome, patikrinkite tai vėliau.</string>
   <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com tinklapyje vyksta priežiūros darbai.\nJums gali kilti įvairių problemų.</string>
-  <string name="status_closeout_warning" tools:ignore="UnusedResources">Panašu, kad jūs naudojate senesnė nei 2.1 Android versiją. Ateityje c:geo gali nebeveikti jūsų prietaise.</string>
+  <string name="status_closeout_warning" tools:ignore="UnusedResources">Panašu, kad jūs naudojate senesnė nei 4.0 Android versiją. Ateityje c:geo gali nebeveikti jūsų prietaise.</string>
   <!-- text-to-speech for compass view -->
   <string name="tts_service">Kalbantis kompasas</string>
   <string name="tts_start">Kalbėti</string>

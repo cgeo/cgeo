@@ -354,6 +354,7 @@
   <string name="caches_filter_rating">Med betyg</string>
   <string name="caches_filter_own_rating">Med eget betyg</string>
   <string name="caches_filter_multi_listing">Listade på flera sajter men inte loggad på alla</string>
+  <string name="caches_filter_own_waypoint">Med egna punkter</string>
   <string name="caches_removing_from_history">Tar bort från historik…</string>
   <string name="caches_clear_offlinelogs">Rensa offline loggar</string>
   <string name="caches_clear_offlinelogs_message">Vill du rensa offline loggarna?</string>
@@ -658,7 +659,7 @@
   <string name="auth_authorize">Koppla c:geo mot Twitter</string>
   <string name="auth_check">Kolla autentisering</string>
   <string name="auth_check_again">Kolla autentisering igen</string>
-  <string name="auth_start">Påbörja koppling mot Twitter</string>
+  <string name="auth_start">Kolla autentisering</string>
   <string name="auth_again">Koppla mot Twitter igen</string>
   <string name="auth_register">Skapa ett konto</string>
   <string name="auth_connected">Ansluten</string>
@@ -987,7 +988,6 @@
   <string name="map_strategy_fast">Snabbt</string>
   <string name="map_strategy_auto">Hastighetsberoende (gps)</string>
   <string name="map_strategy_detailed">Exakta positioner</string>
-  <string name="live_map_notification">I den nya Live kartan så är koordinaterna inte alltid exakta. En cache med potentiellt oexakta koordinater är markerad med en orange cirkel.\nGenom att visa detaljer för cachen eller genom att spara cachen för offline kommer alltid exakta koordinater att hämtas.\n\nMer information om alla förändringar finns på \"Om c:geo\" sidan, som kan nås från c:geo\'s startsida.</string>
   <string name="map_select_multiple_items">Välj objekt</string>
   <string name="map_routing">Navigering</string>
   <string name="map_routing_straight">Rak linje</string>
@@ -1378,7 +1378,6 @@
   <string name="status_geocaching_change" tools:ignore="UnusedResources">Ändringar som gjorts på geocaching.com har gjort så att c:geo inte fungerar.\nVi jobbar för att lösa problemen, försök igen om en stund.</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Ändringar som gjorts på geocaching.com har gjort så att Live kartan inte fungerar.\nVi jobbar för att lösa problemen, försök igen om en stund.</string>
   <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com utför underhåll.\nDu kan råka ut för olika problem.</string>
-  <string name="status_closeout_warning" tools:ignore="UnusedResources">Du verkar använda en version av Android som är äldre än 2.1. Framtida versioner av c:geo kommer troligtvis inte fungera på din telefon.</string>
   <!-- text-to-speech for compass view -->
   <string name="tts_service">Talande kompass</string>
   <string name="tts_start">Starta tal</string>

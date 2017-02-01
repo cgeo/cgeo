@@ -357,6 +357,7 @@
   <string name="caches_filter_rating">S hodnocením</string>
   <string name="caches_filter_own_rating">S vlastním hodnocením</string>
   <string name="caches_filter_multi_listing">Multi listing s různým stavem</string>
+  <string name="caches_filter_own_waypoint">S vlastními body trasy</string>
   <string name="caches_removing_from_history">Čištění Historie…</string>
   <string name="caches_clear_offlinelogs">Smazat offline logy</string>
   <string name="caches_clear_offlinelogs_message">Opravdu chceš vymazat offline logy?</string>
@@ -504,7 +505,7 @@
   <string name="init_signature_template_url">URL adresa</string>
   <string name="init_signature_template_log">Text logu</string>
   <string name="init_ratingwanted">Načítat hodnocení</string>
-  <string name="init_summary_ratingwanted">Načítat hodnocení keší z GCvote.com</string>
+  <string name="init_summary_ratingwanted">Načítat hodnocení keší z GCVote.com</string>
   <string name="init_friends_and_own_logs_wanted">Zobrazovat mé logy a logy přátel</string>
   <string name="init_summary_friends_and_own_logs_wanted">Zobrazovat další logbook s mými logy a logy přátel</string>
   <string name="init_openlastdetailspage">Otevřít poslední stránku</string>
@@ -996,7 +997,7 @@
   <string name="map_strategy_fast">Rychlá</string>
   <string name="map_strategy_auto">Závislá na rychlosti</string>
   <string name="map_strategy_detailed">Podrobná</string>
-  <string name="live_map_notification">Na nové Aktivní mapě nemusí být souřadnice vždy přesné. Případné nepřesné souřadnice jsou na mapě označeny oranžovým kruhem.\nPři otevření detailů keše nebo jejím uložení pro offline použití jsou již souřadnice přesné.\n\nVíce informací o všech změnách lze najít v aplikaci na stránce „O aplikaci“.</string>
+  <string name="live_map_notification">Na nové Aktivní mapě nemusí být souřadnice vždy přesné!\nPřípadné nepřesné souřadnice jsou na mapě označeny oranžovým kruhem.\n\nOtevřením detailů keše nebo jejím uložením pro offline použití zíkáte přesné souřadnice.</string>
   <string name="map_select_multiple_items">Vybrat položku</string>
   <string name="map_routing">Směrování</string>
   <string name="map_routing_straight">Vzdušná čára</string>
@@ -1089,13 +1090,13 @@
   <string name="license_show">Zobrazit licenci</string>
   <string name="license_dismiss">Zamítnout</string>
   <!-- helpers -->
-  <string name="helper_calendar_title">c:geo - Kalendář (doplněk)</string>
-  <string name="helper_calendar_missing">Doplněk pro c:geo - Kalendář není nainstalován.</string>
+  <string name="helper_calendar_title">c:geo – Kalendář (doplněk)</string>
+  <string name="helper_calendar_missing">Doplněk pro c:geo – Kalendář není nainstalován.</string>
   <string name="helper_calendar_description">Umožňuje exportovat události keší do tvého kalendáře.</string>
   <string name="helper_calendar_pastevent_title">Uplynulá událost</string>
   <string name="helper_calendar_pastevent_question">Datum události již uplynulo. Chceš ji i přesto přidat?</string>
   <string name="helper_sendtocgeo_title">Poslat do c:geo</string>
-  <string name="helper_contacts_title">c:geo - Kontakty (doplněk)</string>
+  <string name="helper_contacts_title">c:geo – Kontakty (doplněk)</string>
   <string name="helper_contacts_description">Umožňuje otevřít vizitku (z tvého seznamu kontaktů) přímo z logu keše, můžeš tak snadněji kontaktovat kamarády o pomoc.</string>
   <string name="helper_sendtocgeo_description">Poslat do c:geo je rozšíření prohlížeče <strong>pro tvůj počítač</strong>. Umožňuje zaslání keše do tvého mobilního zařízení jediným klepnutím, přímo z prohlížeče, při procházení webu Geocaching.com.</string>
   <string name="helper_locus_title">Locus</string>
@@ -1387,7 +1388,7 @@
   <string name="status_geocaching_change" tools:ignore="UnusedResources">Nedávné změny na geocaching.com rozbily c:geo.\nPracujeme na opravě, proveď kontrolu později.</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Nedávné změny na geocaching.com rozbily Aktivní mapu c:geo.\nPracujeme na opravě, proveď kontrolu později.</string>
   <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Právě probíhá údržba geocaching.com.\nMohou se vyskytnout různé potíže.</string>
-  <string name="status_closeout_warning" tools:ignore="UnusedResources">Pravděpodobně používáš Android starší než 2.1. Budoucí verze c:geo nemusí být k dispozici pro tvoje zařízení.</string>
+  <string name="status_closeout_warning" tools:ignore="UnusedResources">Pravděpodobně používáš Android starší než 4.0. Budoucí verze c:geo nemusí být k dispozici pro tvoje zařízení.</string>
   <!-- text-to-speech for compass view -->
   <string name="tts_service">Mluvící kompas</string>
   <string name="tts_start">Začít mluvit</string>
@@ -1445,7 +1446,7 @@
   <string name="showcase_cachelist_title">Přepínání seznamů</string>
   <string name="showcase_cachelist_text">Mezi seznamy s keškami můžeš přepínat klepnutím na název seznamu.</string>
   <string name="showcase_compass_hint_title">Zobrazit nápovědu</string>
-  <string name="showcase_compass_hint_text">Tato položka ti může poradit, kde kešku hledat - zobrazuje nápovědu, pokud je k dispozici.</string>
+  <string name="showcase_compass_hint_text">Tato položka ti může poradit, kde kešku hledat – zobrazuje nápovědu, pokud je k dispozici.</string>
   <string name="confirm_log_title">Neobvyklý typ logu</string>
   <string name="confirm_log_message">Opravdu chceš zalogovat „%s“?</string>
   <!-- Geokrety -->
