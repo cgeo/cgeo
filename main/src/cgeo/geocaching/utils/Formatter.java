@@ -85,7 +85,7 @@ public final class Formatter {
     public static String getShortDateFormat() {
         final DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getContext());
         if (dateFormat instanceof SimpleDateFormat) {
-            return ((SimpleDateFormat)dateFormat).toPattern();
+            return ((SimpleDateFormat) dateFormat).toPattern();
         }
         return StringUtils.EMPTY; // should not happen
     }
