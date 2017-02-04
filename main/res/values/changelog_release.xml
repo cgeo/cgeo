@@ -2,6 +2,14 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
+    <b>Next bugfix release (Beta version):</b>\n
+    · Fix: calendar time recognition\n
+    · Fix: log date format in system information\n
+    · Fix: number of waypoints is limited to 100\n
+    · Fix: one-click offline log does not save cache\n
+    · Fix: wrong URL used for smilies in log\n
+    · Fix: Crash when extracting location from exif data\n
+    \n
     <b>2017.01.15:</b>\n
     · Fix: Avoid crash in logbook under special conditions if Geokrety is enabled\n
     · Fix: Crash on some devices when opening the map for a cache\n
