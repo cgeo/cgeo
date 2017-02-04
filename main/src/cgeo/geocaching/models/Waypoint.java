@@ -333,7 +333,7 @@ public class Waypoint implements IWaypoint {
         return originalCoordsEmpty;
     }
 
-    public void setOriginalCoordsEmpty(boolean originalCoordsEmpty) {
+    public void setOriginalCoordsEmpty(final boolean originalCoordsEmpty) {
         this.originalCoordsEmpty = originalCoordsEmpty;
     }
 }

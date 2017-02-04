@@ -171,7 +171,7 @@ public class CachePopupFragment extends AbstractDialogFragment {
         }
 
         @Override
-        public boolean onLongClick(View v) {
+        public boolean onLongClick(final View v) {
             selectListsAndStore(true);
             return true;
         }

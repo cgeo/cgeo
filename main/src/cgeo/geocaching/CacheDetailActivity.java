@@ -1165,7 +1165,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             }
 
             @Override
-            public boolean onLongClick(View v) {
+            public boolean onLongClick(final View v) {
                 storeCache(true);
                 return true;
             }
