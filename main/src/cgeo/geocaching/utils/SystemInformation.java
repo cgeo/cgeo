@@ -67,7 +67,7 @@ public final class SystemInformation {
         if (Settings.useEnglish()) {
             body.append(" (cgeo forced to English)");
         }
-        body.append("\nLog date format: ").append(Formatter.formatShortDate(System.currentTimeMillis()))
+        body.append("\nSystem date format: ").append(Formatter.getShortDateFormat())
                 .append("\nDebug mode active: ").append(Settings.isDebug() ? "yes" : "no");
         appendPermissions(context, body);
         appendConnectors(body);

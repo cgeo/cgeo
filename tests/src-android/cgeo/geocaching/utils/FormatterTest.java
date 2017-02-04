@@ -1,15 +1,27 @@
 package cgeo.geocaching.utils;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.models.Waypoint;
 
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+
 import junit.framework.TestCase;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class FormatterTest extends TestCase {
+
+    /**
+     * The pattern we get from {@link Formatter#getShortDateFormat()} should be the one used by {@link Formatter#formatShortDate(long)}.
+     */
+    public static void testShortDateFormat() {
+        final long currentTimeMillis = System.currentTimeMillis();
+        final String formattedDate = Formatter.formatShortDate(currentTimeMillis);
+        final String pattern = Formatter.getShortDateFormat();
+        assertThat(new SimpleDateFormat(pattern, Locale.getDefault()).format(currentTimeMillis)).isEqualTo(formattedDate);
+    }
 
     public static void testParkingWaypoint() {
         assertFormatting(new Waypoint("you can park here", WaypointType.PARKING, false), WaypointType.PARKING.getL10n());

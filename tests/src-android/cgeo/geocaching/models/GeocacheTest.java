@@ -333,6 +333,9 @@ public class GeocacheTest extends CGeoTestCase {
         assertTime("von 11 bis 13" + timeHours, 11, 00);
         assertTime("from 11 to 13" + timeHours, 11, 00);
         assertTime("von 19.15" + timeHours + " bis ca.20.30 " + timeHours + " statt", 19, 15);
+
+        // #6285
+        assertTime("Dienstag den 31. Januar ab 18:00" + timeHours + " (das Logbuch liegt bis mind. 20:30 " + timeHours + " aus)", 18, 00);
     }
 
     public static void testGuessEventTimeShortDescription() {
