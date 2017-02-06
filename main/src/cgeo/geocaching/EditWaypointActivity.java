@@ -21,11 +21,14 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.ui.dialog.CoordinatesInputDialog;
 import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -44,6 +47,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -85,6 +89,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
     @ViewById(R.id.distanceUnit) protected Spinner distanceUnitSelector;
     @ViewById(R.id.bearing) protected EditText bearing;
     @ViewById(R.id.modify_cache_coordinates_local) protected RadioButton modifyLocal;
+    @ViewById(R.id.projection) protected LinearLayout projection;
 
     @Extra(Intents.EXTRA_GEOCODE) protected String geocode = null;
     @Extra(Intents.EXTRA_WAYPOINT_ID) protected int waypointId = -1;
@@ -163,8 +168,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
                     waypointName.setEnabled(false);
                     note.setEnabled(false);
                     if (!waypoint.isOriginalCoordsEmpty()) {
-                        buttonLat.setEnabled(false);
-                        buttonLon.setEnabled(false);
+                        projection.setVisibility(View.GONE);
                     }
                 }
             } catch (final RuntimeException e) {
@@ -372,7 +376,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
     private class CoordDialogListener implements View.OnClickListener {
 
         @Override
-        public void onClick(final View arg0) {
+        public void onClick(final View view) {
             Geopoint gp = null;
             try {
                 gp = new Geopoint(buttonLat.getText().toString(), buttonLon.getText().toString());
@@ -388,6 +392,34 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
 
                 @Override
                 protected void onPostExecute(final Geocache cache) {
+                    if (waypoint.isUserDefined() || waypoint.isOriginalCoordsEmpty()) {
+                        showCoordinatesInputDialog(cache);
+                    } else {
+                        showCoordinateOptionsDialog(cache);
+                    }
+                }
+
+                private void showCoordinateOptionsDialog(final Geocache cache) {
+                    final AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+                    builder.setTitle(res.getString(R.string.waypoint_coordinates));
+                    builder.setItems(R.array.waypoint_coordinates_options, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(final DialogInterface dialog, final int item) {
+                        final String selectedOption = res.getStringArray(R.array.waypoint_coordinates_options)[item];
+                        if (res.getString(R.string.waypoint_copy_coordinates).equals(selectedOption)) {
+                            ClipboardUtils.copyToClipboard(GeopointFormatter.reformatForClipboard(geopoint.toString()));
+                            showToast(res.getString(R.string.clipboard_copy_ok));
+                        } else if (res.getString(R.string.waypoint_duplicate).equals(selectedOption) && cache.duplicateWaypoint(waypoint)) {
+                            DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
+                            showToast(res.getString(R.string.waypoint_duplicated));
+                        }
+                        }
+                    });
+                    final AlertDialog alert = builder.create();
+                    alert.show();
+                }
+
+                private void showCoordinatesInputDialog(final Geocache cache) {
                     final CoordinatesInputDialog coordsDialog = CoordinatesInputDialog.getInstance(cache, geopoint);
                     coordsDialog.setCancelable(true);
                     coordsDialog.show(getSupportFragmentManager(), "wpeditdialog");
