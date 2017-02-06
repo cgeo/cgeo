@@ -71,7 +71,6 @@ import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.CryptUtils;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.Formatter;
-import cgeo.geocaching.utils.HtmlUtils;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
@@ -631,8 +630,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 ignoreCache();
                 return true;
             case R.id.menu_extract_waypoints:
-                cache.addWaypointsFromText(HtmlUtils.extractText(cache.getDescription()), true, res.getString(R.string.cache_description));
-                getViewCreator(Page.WAYPOINTS).notifyDataSetChanged();
+                extractWaypoints(cache.getDescription(), cache);
                 return true;
             case R.id.menu_export_gpx:
                 new GpxExport().export(Collections.singletonList(cache), this);
@@ -819,11 +817,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
         @Override
         public void onReceive(final Context context, final Intent intent) {
-            if (intent.getBooleanExtra(Intents.EXTRA_WPT_PAGE_UPDATE, false)) {
-                getViewCreator(Page.WAYPOINTS).notifyDataSetChanged();
-            } else {
-                notifyDataSetChanged();
-            }
+            notifyDataSetChanged();
         }
     };
 
