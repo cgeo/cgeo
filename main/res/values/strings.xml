@@ -1563,5 +1563,9 @@
     <string name="cache_list_remove_from">Remove from list</string>
     <string name="list_list_headline">Lists:</string>
     <string name="cache_store_list">Store in list</string>
+    <plurals name="extract_waypoints_result">
+        <item quantity="one">%d waypoint extracted</item>
+        <item quantity="other">%d waypoints extracted</item>
+    </plurals>
 
 </resources>

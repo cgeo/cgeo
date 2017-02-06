@@ -201,11 +201,7 @@ public abstract class AbstractActivity extends ActionBarActivity implements IAbs
                 actionMode.finish();
                 return true;
             case R.id.menu_extract_waypoints:
-                if (cache != null && cache.addWaypointsFromText(HtmlUtils.extractText(clickedItemText), true, res.getString(R.string.cache_description))) {
-                    final Intent intent = new Intent(Intents.INTENT_CACHE_CHANGED);
-                    intent.putExtra(Intents.EXTRA_WPT_PAGE_UPDATE, true);
-                    LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
-                }
+                extractWaypoints(clickedItemText, cache);
                 actionMode.finish();
                 return true;
             case R.id.menu_cache_share_field:
@@ -217,6 +213,22 @@ public abstract class AbstractActivity extends ActionBarActivity implements IAbs
                 return true;
             default:
                 return false;
+        }
+    }
+
+    protected void extractWaypoints(@Nullable final CharSequence text, @Nullable final Geocache cache) {
+        if (cache != null) {
+            final int previousNumberOfWaypoints = cache.getWaypoints().size();
+            final boolean success = cache.addWaypointsFromText(HtmlUtils.extractText(text), true, res.getString(R.string.cache_description));
+            final int waypointsAdded = cache.getWaypoints().size() - previousNumberOfWaypoints;
+            showToast(res.getQuantityString(R.plurals.extract_waypoints_result, waypointsAdded, waypointsAdded));
+            if (success) {
+                final Intent intent = new Intent(Intents.INTENT_CACHE_CHANGED);
+                intent.putExtra(Intents.EXTRA_WPT_PAGE_UPDATE, true);
+                LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
+            }
+        } else {
+            showToast(res.getQuantityString(R.plurals.extract_waypoints_result, 0));
         }
     }
 
