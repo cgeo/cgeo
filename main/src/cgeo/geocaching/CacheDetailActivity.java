@@ -586,7 +586,8 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         menu.findItem(R.id.menu_gcvote).setVisible(cache != null && GCVote.isVotingPossible(cache));
         menu.findItem(R.id.menu_checker).setVisible(cache != null && StringUtils.isNotEmpty(CheckerUtils.getCheckerUrl(cache)));
         menu.findItem(R.id.menu_app_invite).setVisible(cache != null && AppInvite.isAvailable());
-        menu.findItem(R.id.menu_extract_waypoints).setVisible(cache != null && cache.isOffline());
+        menu.findItem(R.id.menu_extract_waypoints).setVisible(cache != null);
+        menu.findItem(R.id.menu_export).setVisible(cache != null);
         if (cache != null) {
             final IConnector connector = ConnectorFactory.getConnector(cache);
             if (connector instanceof IgnoreCapability) {
