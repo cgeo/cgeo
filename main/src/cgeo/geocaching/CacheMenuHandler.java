@@ -7,9 +7,8 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.AbstractUIFactory;
 
-import android.support.annotation.NonNull;
-
 import android.app.Activity;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.ShareActionProvider;
@@ -78,6 +77,7 @@ public final class CacheMenuHandler extends AbstractUIFactory {
             case R.id.menu_calendar:
                 CalendarAddon.addToCalendarWithIntent(activity, cache);
                 return true;
+
             default:
                 return false;
         }
