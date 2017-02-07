@@ -5,6 +5,7 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.trackable.TrackableBrand;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.log.LogType;
@@ -171,6 +172,54 @@ public class GeocacheTest extends CGeoTestCase {
         assertThat(download.getShortDescription()).as("merged short description").isEmpty();
         assertThat(download.getAttributes()).as("merged attributes").isEmpty();
         assertThat(download.getHint()).as("merged hint").isEmpty();
+    }
+
+    public static void testMergeLocalUserModifiedCoordsNotServerSideModified() {
+        final Geocache stored = new Geocache();
+        stored.setGeocode("GC12345");
+        stored.setUserModifiedCoords(true);
+        stored.setCoords(new Geopoint(40.0, 8.0));
+        final Waypoint original = new Waypoint("ORIGINAL", WaypointType.ORIGINAL, false);
+        original.setCoords(new Geopoint(42.0, 10.0));
+        stored.addOrChangeWaypoint(original, false);
+        saveFreshCacheToDB(stored);
+
+        final Geocache download = new Geocache();
+        download.setGeocode("GC12345");
+        download.setCoords(new Geopoint(41.0, 9.0));
+        download.setUserModifiedCoords(false);
+
+        download.gatherMissingFrom(stored);
+
+        assertThat(download.hasUserModifiedCoords()).as("merged user modified").isEqualTo(true);
+        assertThat(download.getCoords()).as("merged coordinates").isEqualTo(new Geopoint(40.0, 8.0));
+        assertThat(download.getOriginalWaypoint().getCoords()).as("merged original wp").isEqualTo(new Geopoint(41.0, 9.0));
+    }
+
+    public static void testMergeLocalUserModifiedCoordsAndServerSideModified() {
+        final Geocache stored = new Geocache();
+        stored.setGeocode("GC12345");
+        stored.setUserModifiedCoords(true);
+        stored.setCoords(new Geopoint(40.0, 8.0));
+        final Waypoint originalStored = new Waypoint("ORIGINAL", WaypointType.ORIGINAL, false);
+        originalStored.setCoords(new Geopoint(42.0, 10.0));
+        stored.addOrChangeWaypoint(originalStored, false);
+        saveFreshCacheToDB(stored);
+
+        final Geocache download = new Geocache();
+        download.setGeocode("GC12345");
+        download.setCoords(new Geopoint(41.0, 9.0));
+        final Waypoint originalDownloaded = new Waypoint("ORIGINAL", WaypointType.ORIGINAL, false);
+        originalDownloaded.setCoords(new Geopoint(43.0, 11.0));
+        download.addOrChangeWaypoint(originalDownloaded, false);
+        download.setUserModifiedCoords(true);
+
+        download.gatherMissingFrom(stored);
+
+        assertThat(download.hasUserModifiedCoords()).as("merged user modified").isEqualTo(true);
+        assertThat(download.getCoords()).as("merged coordinates").isEqualTo(new Geopoint(41.0, 9.0));
+        assertThat(download.getWaypoints().size()).as("merged waypoints size").isEqualTo(1);
+        assertThat(download.getOriginalWaypoint().getCoords()).as("merged original wp").isEqualTo(new Geopoint(43.0, 11.0));
     }
 
     public static void testMergeLivemap() {
