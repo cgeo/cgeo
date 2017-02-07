@@ -1378,7 +1378,7 @@
   <string name="status_geocaching_change" tools:ignore="UnusedResources">A c:geo működésképtelen a geocaching.com-on történt aktuális változások miatt.\nDolgozunk a megoldáson. Nézz vissza minél hamarabb!</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Az élő térkép működésképtelen a geocaching.com-on történt aktuális változások miatt.\nDolgozunk a megoldáson. Nézz vissza minél hamarabb!</string>
   <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">A geocaching.com karbantartás alatt van. \nEsetleg egyéb hiba lépett fel.</string>
-  <string name="status_closeout_warning" tools:ignore="UnusedResources">Úgy tűnik, az Android 2.1-es verziójánál régebbit használsz. A c:geo jövőbeli frissítései lehet, hogy nem lesznek elérhetők az eszközödre.</string>
+  <string name="status_closeout_warning" tools:ignore="UnusedResources">Úgy tűnik, az Android 4.0-ás verziójánál régebbit használsz. A c:geo jövőbeli frissítései lehet, hogy nem lesznek elérhetők az eszközödre.</string>
   <!-- text-to-speech for compass view -->
   <string name="tts_service">Beszélő iránytű</string>
   <string name="tts_start">Beszéd indítása</string>

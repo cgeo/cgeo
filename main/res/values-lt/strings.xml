@@ -1371,7 +1371,7 @@
   <string name="status_geocaching_change" tools:ignore="UnusedResources">Geocaching.com svetainės pakeitimai sugadino c:geo.\nMes tai tvarkome, patikrinkite tai vėliau.</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Geocaching.com svetainės pakeitimai sugadino tiesioginio žemėlapio funkcijas.\nMes tai tvarkome, patikrinkite tai vėliau.</string>
   <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com tinklapyje vyksta priežiūros darbai.\nJums gali kilti įvairių problemų.</string>
-  <string name="status_closeout_warning" tools:ignore="UnusedResources">Panašu, kad jūs naudojate senesnė nei 2.1 Android versiją. Ateityje c:geo gali nebeveikti jūsų prietaise.</string>
+  <string name="status_closeout_warning" tools:ignore="UnusedResources">Panašu, kad jūs naudojate senesnė nei 4.0 Android versiją. Ateityje c:geo gali nebeveikti jūsų prietaise.</string>
   <!-- text-to-speech for compass view -->
   <string name="tts_service">Kalbantis kompasas</string>
   <string name="tts_start">Kalbėti</string>

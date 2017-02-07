@@ -1376,7 +1376,7 @@
   <string name="status_geocaching_change" tools:ignore="UnusedResources">Uns canvis recents a geocaching.com han espatllat el c:geo.\nHi estem treballant, torneu-ho a provar aviat.</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Uns canvis recents a geocaching.com han espatllat la funcionalitat del mapa en viu.\nHi estem treballant, torneu-ho a provar aviat.</string>
   <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">El web de geocaching.com està en manteniment.\nPer aquest motiu podeu tenir alguna dificultat.</string>
-  <string name="status_closeout_warning" tools:ignore="UnusedResources">Sembla que esteu utilitzant una versió d\'Android 2.1 o inferior. Futures versions del c:geo poden no estar disponibles per al vostre dispositiu.</string>
+  <string name="status_closeout_warning" tools:ignore="UnusedResources">Sembla que teniu una versió d\'Android anterior a la 4.0. Futures versions del c:geo poden no funcionar en el vostre dispositiu.</string>
   <!-- text-to-speech for compass view -->
   <string name="tts_service">Brúixola parlant</string>
   <string name="tts_start">Comença a parlar</string>

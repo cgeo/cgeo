@@ -1378,7 +1378,7 @@
   <string name="status_geocaching_change" tools:ignore="UnusedResources">Recente aanpassingen op geocaching.com zorgen dat c:geo niet meer (100%) correct werkt.\nWe werken aan het probleem, controleer binnenkort nogmaals.</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Recente aanpassingen op geocaching.com zorgen dat de live-kaart niet meer werkt.\nWe werken aan het probleem, controleer binnenkort nogmaals.</string>
   <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com is in onderhoud.\nJe kan verschillende problemen ondervinden.</string>
-  <string name="status_closeout_warning" tools:ignore="UnusedResources">U lijkt gebruik te maken van een versie van Android ouder dan 2.1. Toekomstige versies van c:geo zijn mogelijk niet meer beschikbaar voor uw apparaat.</string>
+  <string name="status_closeout_warning" tools:ignore="UnusedResources">Je lijkt gebruik te maken van een Android versie ouder dan 4.0. Toekomstige versies van c:geo zijn mogelijk niet meer beschikbaar voor jouw apparaat.</string>
   <!-- text-to-speech for compass view -->
   <string name="tts_service">Pratend kompas</string>
   <string name="tts_start">Begin met praten</string>

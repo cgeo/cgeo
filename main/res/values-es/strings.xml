@@ -1365,7 +1365,7 @@ Nombre de archivo:%2$s</string>
   <string name="status_geocaching_change" tools:ignore="UnusedResources">Cambios recientes en geocaching.com han roto c:geo.\nEstamos trabajando en ello, pruébalo de nuevo más tarde.</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Cambios recientes en geocaching.com han roto la función de mapas en vivo.\nEstamos trabajando en ello, pruébalo de nuevo más tarde.</string>
   <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com está en mantenimiento.\nPuedes encontrarte algunos problemas.</string>
-  <string name="status_closeout_warning" tools:ignore="UnusedResources">Parece que usas una versión de Android anterior a 2.1. Es posible que las futuras versiones de c:geo no estén disponibles para tu dispositivo.</string>
+  <string name="status_closeout_warning" tools:ignore="UnusedResources">Parece que usas una versión de Android anterior a 4.0. Es posible que las futuras versiones de c:geo no estén disponibles para tu dispositivo.</string>
   <!-- text-to-speech for compass view -->
   <string name="tts_service">Brújula con voz</string>
   <string name="tts_start">Empezar a hablar</string>

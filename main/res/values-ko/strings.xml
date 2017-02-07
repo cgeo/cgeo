@@ -1350,7 +1350,7 @@
   <string name="status_geocaching_change" tools:ignore="UnusedResources">geocaching.com 의 최근변화로 c:geo에 문제가 생겼습니다.\n작업중이오니, 조만간 확인해 보세요.</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">geocaching.com 의 최근변화로 라이브 지도기능에 문제가 생겼습니다.\n작업중이오니, 잠시 후 확인해 보세요.</string>
   <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com 이 유지보수중입니다.\n여러가지 문제를 만날 수 있습니다.</string>
-  <string name="status_closeout_warning" tools:ignore="UnusedResources">안드로이드버전이 2.1 이하인 것 같습니다. c:geo 의 새로운 버전을 받지 못할 수 있습니다.</string>
+  <string name="status_closeout_warning" tools:ignore="UnusedResources">사용하시는 안드로이드 버전이 4.0 이하인 것 같습니다. 이후에는 새로운 c:geo 버전을 받지 못할 수 있습니다.</string>
   <!-- text-to-speech for compass view -->
   <string name="tts_service">말하는 나침반</string>
   <string name="tts_start">말하기 시작</string>

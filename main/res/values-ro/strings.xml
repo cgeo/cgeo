@@ -1383,7 +1383,6 @@
   <string name="status_geocaching_change" tools:ignore="UnusedResources">Modificările recente de pe geocaching.com fac c:geo nefuncţional.\nLucrăm la asta, revin-o.</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Modificările recente de pe geocaching.com fac harta nefuncţională.\nLucrăm la asta, revin-o.</string>
   <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Se efectuează lucrări de întreţinere la geocaching.com.\nEste posibil ca în această perioadă să apară diverse probleme.</string>
-  <string name="status_closeout_warning" tools:ignore="UnusedResources">Foloseşti o versiune de Android mai veche de 2.1. Versiuni ulterioare a c:geo s-ar putea să nu mai fie disponibile pentru dispozitivul tău.</string>
   <!-- text-to-speech for compass view -->
   <string name="tts_service">Busolă vorbitoare</string>
   <string name="tts_start">Vorbeşte</string>

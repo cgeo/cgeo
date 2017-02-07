@@ -1380,7 +1380,7 @@
   <string name="status_geocaching_change" tools:ignore="UnusedResources">Ostatnie zmiany na geocaching.com popsuły c:geo.\nPracujemy nad tym, sprawdź ponownie niedługo.</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Ostatnie zmiany na geocaching.com popsuły funkcjonalność map online.\nPracujemy nad tym, sprawdź ponownie niedługo.</string>
   <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com jest w trakcie konserwacji.\nMogą wystąpić różnorodne problemy.</string>
-  <string name="status_closeout_warning" tools:ignore="UnusedResources">Wygląda, że używasz wersji Android starszej niż 2.1. Następne wydania c:geo mogą być niedostępne dla Twojego urządzenia.</string>
+  <string name="status_closeout_warning" tools:ignore="UnusedResources">Wygląda, że używasz wersji Android starszej niż 4.0. Następne wydania c:geo mogą być niedostępne dla Twojego urządzenia.</string>
   <!-- text-to-speech for compass view -->
   <string name="tts_service">Mówiący kompas</string>
   <string name="tts_start">Zacznij mówić</string>
