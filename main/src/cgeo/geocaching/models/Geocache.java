@@ -281,7 +281,7 @@ public class Geocache implements IWaypoint {
         if (StringUtils.isBlank(getLocation())) {
             location = other.getLocation();
         }
-        coords = UncertainProperty.getMergedProperty(coords, other.coords);
+
         // don't use StringUtils.isBlank here. Otherwise we cannot recognize a note which was deleted on GC
         if (personalNote == null) {
             personalNote = other.personalNote;
@@ -335,20 +335,35 @@ public class Geocache implements IWaypoint {
             logCounts = other.logCounts;
         }
 
-        // if cache has ORIGINAL type waypoint ... it is considered that it has modified coordinates, otherwise not
-        userModifiedCoords = false;
-        for (final Waypoint wpt : waypoints) {
-            if (wpt.getWaypointType() == WaypointType.ORIGINAL) {
-                userModifiedCoords = true;
-                break;
+        if (!userModifiedCoords && other.hasUserModifiedCoords()) {
+            final Waypoint original = other.getOriginalWaypoint();
+            if (original != null) {
+                original.setCoords(getCoords());
             }
+            setCoords(other.getCoords());
+        } else {
+            coords = UncertainProperty.getMergedProperty(coords, other.coords);
         }
+        // if cache has ORIGINAL type waypoint ... it is considered that it has modified coordinates, otherwise not
+        userModifiedCoords = getOriginalWaypoint() != null;
 
         if (!reliableLatLon) {
             reliableLatLon = other.reliableLatLon;
         }
 
         return isEqualTo(other);
+    }
+
+    /**
+     * Returns the Original Waypoint if exists
+     */
+    public Waypoint getOriginalWaypoint() {
+        for (final Waypoint wpt : waypoints) {
+            if (wpt.getWaypointType() == WaypointType.ORIGINAL) {
+                return wpt;
+            }
+        }
+        return null;
     }
 
     /**
