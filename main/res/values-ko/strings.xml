@@ -736,6 +736,7 @@
   <string name="cache_list_text">목록 :</string>
   <string name="cache_list_change">이동</string>
   <string name="cache_list_unknown">목록에 없는</string>
+  <string name="cache_list_select_last">최근 선택</string>
   <string name="cache_images">사진</string>
   <string name="cache_waypoints">지점</string>
   <plurals name="waypoints">
@@ -794,6 +795,7 @@
   <string name="cache_menu_around">주변의 캐시</string>
   <string name="around"> %s 주변</string>
   <string name="cache_menu_event">캘린더에 추가</string>
+  <string name="cache_menu_extract_waypoints">중간 지점 추출</string>
   <string name="cache_menu_details">상세내용</string>
   <string name="cache_menu_refresh">새로 고침</string>
   <string name="cache_menu_share">캐시 공유</string>
@@ -910,6 +912,7 @@
   <string name="waypoint_edit_title">지점 편집하기</string>
   <string name="waypoint_add_title">지점 추가</string>
   <string name="waypoint_note">메모</string>
+  <string name="waypoint_user_note">사용자 노트</string>
   <string name="waypoint_visited">방문했음</string>
   <string name="waypoint_save">저장</string>
   <string name="waypoint_cancel_edit">취소 </string>

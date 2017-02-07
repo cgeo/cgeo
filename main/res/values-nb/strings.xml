@@ -758,6 +758,7 @@
   <string name="cache_list_text">Liste:</string>
   <string name="cache_list_change">Flytt</string>
   <string name="cache_list_unknown">Ikke i en liste</string>
+  <string name="cache_list_select_last">Forrige merking</string>
   <string name="cache_images">Bilder</string>
   <string name="cache_waypoints">Veipunkter</string>
   <plurals name="waypoints">
@@ -817,6 +818,7 @@
   <string name="cache_menu_around">Cacher i nærheten</string>
   <string name="around">Rundt %s</string>
   <string name="cache_menu_event">Eksporter til kalender</string>
+  <string name="cache_menu_extract_waypoints">Trekk ut veipunkter</string>
   <string name="cache_menu_details">Detaljer</string>
   <string name="cache_menu_refresh">Oppdater</string>
   <string name="cache_menu_share">Del cachen</string>
@@ -935,6 +937,7 @@
   <string name="waypoint_edit_title">Rediger veipunkt</string>
   <string name="waypoint_add_title">Add waypoint</string>
   <string name="waypoint_note">Note</string>
+  <string name="waypoint_user_note">Personlig notat</string>
   <string name="waypoint_visited">Besøkte</string>
   <string name="waypoint_save">Save</string>
   <string name="waypoint_cancel_edit">Avbryt</string>

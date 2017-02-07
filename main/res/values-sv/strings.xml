@@ -758,6 +758,7 @@
   <string name="cache_list_text">Lista:</string>
   <string name="cache_list_change">Flytta</string>
   <string name="cache_list_unknown">Ej i någon lista</string>
+  <string name="cache_list_select_last">Senaste val</string>
   <string name="cache_images">Bilder</string>
   <string name="cache_waypoints">Punkter</string>
   <plurals name="waypoints">
@@ -817,6 +818,7 @@
   <string name="cache_menu_around">Cacher i närheten</string>
   <string name="around">Kring %s</string>
   <string name="cache_menu_event">Lägg till i kalender</string>
+  <string name="cache_menu_extract_waypoints">Extrahera punkter</string>
   <string name="cache_menu_details">Detaljer</string>
   <string name="cache_menu_refresh">Uppdatera</string>
   <string name="cache_menu_share">Skicka länk</string>
@@ -830,6 +832,7 @@
   <string name="cache_menu_android_wear">Android Wear</string>
   <string name="cache_menu_vote">Rösta</string>
   <string name="cache_menu_checker">Öppna Geochecker</string>
+  <string name="cache_menu_challenge_checker">Sök efter challenge checker</string>
   <string name="cache_menu_ignore">Ignorera cache</string>
   <string name="ignore_confirm_title">Var försiktig</string>
   <string name="ignore_confirm_message">Genom att ignorera en cache så kommer den aldrig mer visas när data laddas ned från geocaching.com. Det enda sätt att visa den igen är genom att ändra inställningar på cachens webbsida.</string>
@@ -934,6 +937,7 @@
   <string name="waypoint_edit_title">Redigera punkt</string>
   <string name="waypoint_add_title">Lägg till punkt</string>
   <string name="waypoint_note">Kommentar</string>
+  <string name="waypoint_user_note">Personlig anteckning</string>
   <string name="waypoint_visited">Besökt</string>
   <string name="waypoint_save">Spara</string>
   <string name="waypoint_cancel_edit">Avbryt</string>
@@ -988,6 +992,7 @@
   <string name="map_strategy_fast">Snabbt</string>
   <string name="map_strategy_auto">Hastighetsberoende (gps)</string>
   <string name="map_strategy_detailed">Exakta positioner</string>
+  <string name="live_map_notification">Koordinater på live kartan är inte alltid exakta!\nKoordinater som inte är exakta är markerade med en orange cirkel.\n\nÖppna cachen eller spara cachen för användning offline för att hämta de exakta koordinaterna.</string>
   <string name="map_select_multiple_items">Välj objekt</string>
   <string name="map_routing">Navigering</string>
   <string name="map_routing_straight">Rak linje</string>
@@ -1378,6 +1383,7 @@
   <string name="status_geocaching_change" tools:ignore="UnusedResources">Ändringar som gjorts på geocaching.com har gjort så att c:geo inte fungerar.\nVi jobbar för att lösa problemen, försök igen om en stund.</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Ändringar som gjorts på geocaching.com har gjort så att Live kartan inte fungerar.\nVi jobbar för att lösa problemen, försök igen om en stund.</string>
   <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com utför underhåll.\nDu kan råka ut för olika problem.</string>
+  <string name="status_closeout_warning" tools:ignore="UnusedResources">Du verkar använda en version av Android som är äldre än 4.0. Framtida versioner av c:geo kommer kanske inte vara tillgänglig för din enhet.</string>
   <!-- text-to-speech for compass view -->
   <string name="tts_service">Talande kompass</string>
   <string name="tts_start">Starta tal</string>

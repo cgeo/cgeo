@@ -752,6 +752,7 @@
   <string name="cache_list_text">Lista:</string>
   <string name="cache_list_change">Sposta</string>
   <string name="cache_list_unknown">Non in una lista</string>
+  <string name="cache_list_select_last">Ultima selezione</string>
   <string name="cache_images">Immagini</string>
   <string name="cache_waypoints">Waypoints</string>
   <plurals name="waypoints">
@@ -811,6 +812,7 @@
   <string name="cache_menu_around">Cache qui intorno</string>
   <string name="around">Nei dintorni di %s</string>
   <string name="cache_menu_event">Aggiungi al calendario</string>
+  <string name="cache_menu_extract_waypoints">Estrazione dei waypoint</string>
   <string name="cache_menu_details">Dettagli</string>
   <string name="cache_menu_refresh">Aggiorna</string>
   <string name="cache_menu_share">Condividi cache</string>
@@ -928,6 +930,7 @@
   <string name="waypoint_edit_title">Modifica waypoint</string>
   <string name="waypoint_add_title">Aggiungi waypoint</string>
   <string name="waypoint_note">Note</string>
+  <string name="waypoint_user_note">Nota utente</string>
   <string name="waypoint_visited">Visitato</string>
   <string name="waypoint_save">Salva</string>
   <string name="waypoint_cancel_edit">Annulla</string>

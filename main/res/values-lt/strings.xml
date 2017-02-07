@@ -753,6 +753,7 @@
   <string name="cache_list_text">Sąrašas:</string>
   <string name="cache_list_change">Perkelti</string>
   <string name="cache_list_unknown">Nėra sąraše</string>
+  <string name="cache_list_select_last">Paskutinis pasirinkimas</string>
   <string name="cache_images">Nuotraukos</string>
   <string name="cache_waypoints">Papildomi taškai</string>
   <plurals name="waypoints">
@@ -813,6 +814,7 @@
   <string name="cache_menu_around">Slėptuvės aplink</string>
   <string name="around">Aplink %s</string>
   <string name="cache_menu_event">Įtraukti į kalendorių</string>
+  <string name="cache_menu_extract_waypoints">Išskleisti nuorodų taškus</string>
   <string name="cache_menu_details">Informacija</string>
   <string name="cache_menu_refresh">Atnaujinti</string>
   <string name="cache_menu_share">Bendrinti slėptuvę</string>
@@ -929,6 +931,7 @@
   <string name="waypoint_edit_title">Redaguoti papildomą tašką</string>
   <string name="waypoint_add_title">Pridėti papildomą tašką</string>
   <string name="waypoint_note">Pastaba</string>
+  <string name="waypoint_user_note">Vartotojo pastabos</string>
   <string name="waypoint_visited">Aplankytas</string>
   <string name="waypoint_save">Išsaugoti</string>
   <string name="waypoint_cancel_edit">Atšaukti</string>

@@ -45,8 +45,8 @@
   <string name="cache_size_very_large">Muito grande</string>
   <!-- waypoints -->
   <string name="wp_final">Localização final</string>
-  <string name="wp_stage">Estado da multi-cache</string>
-  <string name="wp_puzzle">Pergunta para a resposta</string>
+  <string name="wp_stage">Etapa da multi-cache</string>
+  <string name="wp_puzzle">Pergunta para responder</string>
   <string name="wp_pkg">Parque de estacionamento</string>
   <string name="wp_trailhead">Início</string>
   <string name="wp_waypoint">Ponto de referência</string>
@@ -62,7 +62,7 @@
   <string name="log_attended">Participei</string>
   <string name="log_retrieved">Retirado</string>
   <string name="log_placed">Colocado</string>
-  <string name="log_grabbed">Agarrado</string>
+  <string name="log_grabbed">Recolhido algures</string>
   <string name="log_movecollection">Mover para colecção</string>
   <string name="log_moveinventory">Mover para inventário</string>
   <string name="log_maintained">Manutenção efectuada</string>
@@ -94,18 +94,18 @@
   <string name="log_posting_generic_trackable">A publicar %1$s %2$s/%3$s</string>
   <string name="log_clear">Limpar</string>
   <string name="log_post_not_possible">Download de dados em progresso…\n Por favor tente novamente dentro de alguns segundos ou verifique sua conexão à internet.</string>
-  <string name="log_post_geocode_missing">Geocodigo em falta…</string>
+  <string name="log_post_geocode_missing">Geocódigo em falta…</string>
   <string name="log_date_future_not_allowed">Registos com datas futuras não são permitidos.</string>
   <string name="log_add">Adicionar</string>
   <string name="log_repeat">Repetir último registo</string>
   <string name="log_no_rating">Não votar</string>
-  <string name="log_stars_1_description">Terrível</string>
-  <string name="log_stars_15_description">Muito má</string>
-  <string name="log_stars_2_description">Má</string>
-  <string name="log_stars_25_description">Abaixo da média</string>
-  <string name="log_stars_3_description">Mediana</string>
-  <string name="log_stars_35_description">Acima da média</string>
-  <string name="log_stars_4_description">Boa</string>
+  <string name="log_stars_1_description">Má</string>
+  <string name="log_stars_15_description">Fraca</string>
+  <string name="log_stars_2_description">Abaixo da média</string>
+  <string name="log_stars_25_description">Razoável</string>
+  <string name="log_stars_3_description">Normal</string>
+  <string name="log_stars_35_description">Nada má</string>
+  <string name="log_stars_4_description">Acima da média</string>
   <string name="log_stars_45_description">Muito boa</string>
   <string name="log_stars_5_description">Excelente</string>
   <string name="log_webcam">Fotografia tirada pela webcam</string>
@@ -122,8 +122,8 @@
   <string name="log_image_caption">Título</string>
   <string name="log_image_description">Descrição</string>
   <string name="log_image_scale">Dimensionamento</string>
-  <string name="log_password_title">Password do registo:</string>
-  <string name="log_hint_log_password">Inserira a password do registo</string>
+  <string name="log_password_title">Palavra-passe do registo:</string>
+  <string name="log_hint_log_password">Insira a palavra-passe do seu registo</string>
   <string name="log_oc_team_comment">Comentário da OC Team</string>
   <string name="log_your_saved_log">O seu registo gravado</string>
   <string name="log_empty_logbook">O logbook desta cache está vazio.</string>
@@ -141,11 +141,11 @@
   <!-- errors, warnings, info toasts -->
   <string name="err_none">Ok</string>
   <string name="err_parse">Falha na análise da página de login</string>
-  <string name="err_server">Falha na ligação a Geocaching.com (servidor ou ligação em baixo?)</string>
-  <string name="err_server_ec">Não é possível entrar em contato com Extremcaching.com. O site pode estar em baixo ou sua conexão de internet não está a funcionar.</string>
-  <string name="err_server_gk">Não é possível ligar a GeoKrety.org. A página web pode estar em baixo ou a tua ligação à internet desligada.</string>
-  <string name="err_login">Informação de login não gravada</string>
-  <string name="err_login_failed_toast">O c:geo não consegue fazer login. O c:geo funciona offline com as caches Arquivadas. Verifique as definições de login ou habilite a ligação de dados.</string>
+  <string name="err_server">Falha ao estabelecer ligação a \"Geocaching.com\". O sítio web pode estar inoperante ou a sua ligação à Internet não está a funcionar.</string>
+  <string name="err_server_ec">Impossível estabelecer ligação com Extremcaching.com. O sítio web pode estar inoperante ou a sua ligação à Internet não está a funcionar.</string>
+  <string name="err_server_gk">Impossível estabelecer ligação com GeoKrety.org. O sítio web pode estar inoperante ou a sua ligação à Internet não está a funcionar.</string>
+  <string name="err_login">Nenhuma informação de inicio de sessão gravada</string>
+  <string name="err_login_failed_toast">O c:geo não consegue iniciar sessão. O c:geo funciona offline com as caches Arquivadas. Verifique as definições de inicio de sessão ou active a sua ligação à Internet.</string>
   <string name="err_unknown">Erro desconhecido</string>
   <string name="err_unknown_address">c:geo não conseguiu mapear a morada para uma localização existente</string>
   <string name="err_comm">Erro de comunicação desconhecido</string>
@@ -247,10 +247,10 @@
   <string name="warn_discard_changes">As alterações ao waypoint não salvas foram descartadas!</string>
   <string name="err_request_popup_info">c:geo falhou ao obter o pop-up com as informações da cache.</string>
   <!-- location service -->
-  <string name="loc_last">Último conhecido</string>
+  <string name="loc_last">Última conhecida</string>
   <string name="loc_net">Rede</string>
   <string name="loc_fused">Combinados</string>
-  <string name="loc_low_power">Bateria fraca</string>
+  <string name="loc_low_power">Modo bateria fraca</string>
   <string name="loc_home">Coordenadas de casa</string>
   <string name="loc_gps">GPS</string>
   <string name="loc_sat">Sat</string>
@@ -280,7 +280,7 @@
   <string name="caches_more_caches_no">Mais nenhuma cache</string>
   <string name="caches_more_caches_loading">A carregar caches…</string>
   <string name="caches_more_caches_currently">actualmente</string>
-  <string name="caches_downloading">Downloading caches…\nETE: </string>
+  <string name="caches_downloading">A descarregar caches…\nTempo estimado: </string>
   <string name="caches_eta_ltm">Menos de um minuto</string>
   <plurals name="caches_eta_mins">
     <item quantity="one">%d minuto</item>
@@ -486,7 +486,7 @@
   <string name="init_login_popup_invalid_timestamp">Hora local inválida, altere a hora do aparelho</string>
   <string name="init_login_popup_invalid_token">Autorização inválida, re-autorizar</string>
   <string name="init_authorization_credential_username">Utilizador</string>
-  <string name="init_authorization_credential_password">Senha</string>
+  <string name="init_authorization_credential_password">Palavra-passe</string>
   <string name="settings_service_active">Activo</string>
   <string name="settings_navigation_disabled">Esta aplicação parece não estar instalada</string>
   <string name="init_signature">Assinatura</string>
@@ -537,7 +537,7 @@
   <string name="init_summary_livelist">Mostrar a direcção para a cache na lista</string>
   <string name="init_backup">Backup</string>
   <string name="init_backup_backup">Backup</string>
-  <string name="init_backup_running">A criar um backup da base de dados de caches…</string>
+  <string name="init_backup_running">A criar uma cópia de segurança da base de dados de caches…</string>
   <string name="init_backup_note">Por favor note que esta opção irá fazer backup/restauro da base de dados de caches e pontos de referência, mas não das definições. A sua informação de login (passwords) não irá deixar esta aplicação.</string>
   <string name="init_backup_restore">Restaurar</string>
   <string name="init_backup_success">A base de dados do c:geo foi copiada com sucesso</string>
@@ -574,7 +574,7 @@
   <string name="init_default_navigation_tool">Navegador principal</string>
   <string name="init_secondary_navigation_tool">Navegação secundária</string>
   <string name="init_default_navigation_tool_description">Aqui pode selecionar o seu navegador preferido.</string>
-  <string name="init_default_navigation_tool_select">Ferramenta de selecção</string>
+  <string name="init_default_navigation_tool_select">Escolher ferramenta</string>
   <string name="init_default_navigation_tool_2_description">Aqui define a sua segunda preferida ferramenta de navefação. É activada com clique longo no ícone ao lado do títula da cache.</string>
   <string name="init_navigation_menu_description">Aqui você pode selecionar qual dos métodos de navegação disponíveis serão mostrados no menu de navegação para um cache ou um ponto de referência. Métodos desativados não estão instalados neste dispositivo.</string>
   <string name="init_debug_title">Informação de depuração</string>
@@ -758,6 +758,7 @@
   <string name="cache_list_text">Lista:</string>
   <string name="cache_list_change">Mover</string>
   <string name="cache_list_unknown">Não está numa lista</string>
+  <string name="cache_list_select_last">Última seleção</string>
   <string name="cache_images">Imagens</string>
   <string name="cache_waypoints">Pontos de referência</string>
   <plurals name="waypoints">
@@ -817,6 +818,7 @@
   <string name="cache_menu_around">Caches próximas</string>
   <string name="around">Perto de %s</string>
   <string name="cache_menu_event">Adicionar ao calendário</string>
+  <string name="cache_menu_extract_waypoints">Extrair waypoints</string>
   <string name="cache_menu_details">Detalhes</string>
   <string name="cache_menu_refresh">Actualizar</string>
   <string name="cache_menu_share">Partilhar cache</string>
@@ -935,6 +937,7 @@
   <string name="waypoint_edit_title">Editar ponto de referência</string>
   <string name="waypoint_add_title">Adicionar ponto de referência</string>
   <string name="waypoint_note">Nota</string>
+  <string name="waypoint_user_note">Nota do utilizador</string>
   <string name="waypoint_visited">Visitado</string>
   <string name="waypoint_save">Gravar</string>
   <string name="waypoint_cancel_edit">Cancelar</string>

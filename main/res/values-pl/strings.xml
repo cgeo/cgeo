@@ -760,6 +760,7 @@
   <string name="cache_list_text">Lista:</string>
   <string name="cache_list_change">Przenieś</string>
   <string name="cache_list_unknown">Nie znajduje się na liście</string>
+  <string name="cache_list_select_last">Ostatni wybór</string>
   <string name="cache_images">Zdjęcia</string>
   <string name="cache_waypoints">Punkty nawigacji</string>
   <plurals name="waypoints">
@@ -820,6 +821,7 @@
   <string name="cache_menu_around">Skrzynki w pobliżu</string>
   <string name="around">W pobliżu %s</string>
   <string name="cache_menu_event">Dodaj do kalendarza</string>
+  <string name="cache_menu_extract_waypoints">Wyciągnij punkty orientacyjne</string>
   <string name="cache_menu_details">Szczegóły</string>
   <string name="cache_menu_refresh">Odśwież</string>
   <string name="cache_menu_share">Podziel się skrzynką</string>
@@ -937,6 +939,7 @@
   <string name="waypoint_edit_title">Edytuj punkt nawigacji</string>
   <string name="waypoint_add_title">Dodaj punkt nawigacji</string>
   <string name="waypoint_note">Notatka</string>
+  <string name="waypoint_user_note">Notatka użytkownika</string>
   <string name="waypoint_visited">Odwiedzony</string>
   <string name="waypoint_save">Zapisz</string>
   <string name="waypoint_cancel_edit">Anuluj</string>

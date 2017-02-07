@@ -758,6 +758,7 @@
   <string name="cache_list_text">Lijst:</string>
   <string name="cache_list_change">Verplaatsen</string>
   <string name="cache_list_unknown">Niet in een lijst</string>
+  <string name="cache_list_select_last">Laatste selectie</string>
   <string name="cache_images">Afbeeldingen</string>
   <string name="cache_waypoints">Waypoints</string>
   <plurals name="waypoints">
@@ -817,6 +818,7 @@
   <string name="cache_menu_around">Caches rondom</string>
   <string name="around">Rondom %s</string>
   <string name="cache_menu_event">Toevoegen aan kalender</string>
+  <string name="cache_menu_extract_waypoints">Exporteer waypoints</string>
   <string name="cache_menu_details">Details</string>
   <string name="cache_menu_refresh">Verversen</string>
   <string name="cache_menu_share">Deel cache</string>
@@ -935,6 +937,7 @@
   <string name="waypoint_edit_title">Waypoint bewerken</string>
   <string name="waypoint_add_title">Waypoint toevoegen</string>
   <string name="waypoint_note">Notitie</string>
+  <string name="waypoint_user_note">Gebruikersnotitie</string>
   <string name="waypoint_visited">Bezocht</string>
   <string name="waypoint_save">Opslaan</string>
   <string name="waypoint_cancel_edit">Annuleren</string>

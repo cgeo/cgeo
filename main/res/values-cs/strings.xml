@@ -766,6 +766,7 @@
   <string name="cache_list_text">Seznam:</string>
   <string name="cache_list_change">Přesunout</string>
   <string name="cache_list_unknown">Není v seznamu</string>
+  <string name="cache_list_select_last">Poslední vývěr</string>
   <string name="cache_images">Obrázky</string>
   <string name="cache_waypoints">Body trasy</string>
   <plurals name="waypoints">
@@ -826,6 +827,7 @@
   <string name="cache_menu_around">Keš v okolí</string>
   <string name="around">V okolí %s</string>
   <string name="cache_menu_event">Přidat do kalendáře</string>
+  <string name="cache_menu_extract_waypoints">Extrahovat waypointy</string>
   <string name="cache_menu_details">Detaily</string>
   <string name="cache_menu_refresh">Obnovit</string>
   <string name="cache_menu_share">Sdílet keš</string>
@@ -839,6 +841,7 @@
   <string name="cache_menu_android_wear">Android Wear</string>
   <string name="cache_menu_vote">Hlasovat</string>
   <string name="cache_menu_checker">Otevřít Geocheck</string>
+  <string name="cache_menu_challenge_checker">Hledat ověření výzvy</string>
   <string name="cache_menu_ignore">Ignorovat keš</string>
   <string name="ignore_confirm_title">Buď opatrný</string>
   <string name="ignore_confirm_message">Ignorace keše znamená, že tato keš nebude nikdy znovu zobrazena při načítání dat z geocaching.com. Jediná možnost, jak keš znovu zobrazit je její vyškrtnutí ze seznamu ignorovaných přímo na webu.</string>
@@ -943,6 +946,7 @@
   <string name="waypoint_edit_title">Upravit bod trasy</string>
   <string name="waypoint_add_title">Přidat bod trasy</string>
   <string name="waypoint_note">Poznámka</string>
+  <string name="waypoint_user_note">Osobní poznámka</string>
   <string name="waypoint_visited">Navštíven</string>
   <string name="waypoint_save">Uložit</string>
   <string name="waypoint_cancel_edit">Zrušit</string>

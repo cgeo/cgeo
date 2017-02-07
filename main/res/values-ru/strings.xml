@@ -864,6 +864,7 @@
   <string name="cache_image_open_file">Открыть файл</string>
   <string name="cache_image_open_browser">Открыть в браузере</string>
   <string name="cache_image_add_waypoint">Добавить путевую точку</string>
+  <string name="cache_image_background">Фоновая картинка для списка тайников</string>
   <string name="cache_share_field">Поделиться</string>
   <string name="cache_time_full_hours">часов</string>
   <string name="cache_listed_on">Упомянут на %s</string>

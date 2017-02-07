@@ -758,6 +758,7 @@
   <string name="cache_list_text">Liste:</string>
   <string name="cache_list_change">Flyt</string>
   <string name="cache_list_unknown">Ikke i nogen liste</string>
+  <string name="cache_list_select_last">Sidste markering</string>
   <string name="cache_images">Billeder</string>
   <string name="cache_waypoints">Waypoints</string>
   <plurals name="waypoints">
@@ -817,6 +818,7 @@
   <string name="cache_menu_around">Cacher i nærheden</string>
   <string name="around">I nærheden af %s</string>
   <string name="cache_menu_event">Tilføj til kalender</string>
+  <string name="cache_menu_extract_waypoints">Udtræk waypoints</string>
   <string name="cache_menu_details">Detaljer</string>
   <string name="cache_menu_refresh">Genindlæs</string>
   <string name="cache_menu_share">Del cache</string>
@@ -933,6 +935,7 @@
   <string name="waypoint_edit_title">Rediger waypoint</string>
   <string name="waypoint_add_title">Tilføj waypoint</string>
   <string name="waypoint_note">Note</string>
+  <string name="waypoint_user_note">Brugernotat</string>
   <string name="waypoint_visited">Besøgt</string>
   <string name="waypoint_save">Gem</string>
   <string name="waypoint_cancel_edit">Annullér</string>
@@ -1377,6 +1380,7 @@
   <string name="status_geocaching_change" tools:ignore="UnusedResources">Ændringer på geocaching.com forhindrer c:geo i at fungere.\nVi arbejder på at løse problemet. Prøv igen senere.</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Ændringer på geocaching.com forhindrer Live-kortet i at fungere.\nVi arbejder på at løse problemet. Prøv igen senere.</string>
   <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Geocaching.com er under vedligeholdelse.\nDu kan opleve uregelmæssigheder.</string>
+  <string name="status_closeout_warning" tools:ignore="UnusedResources">Du bruger en udgave af Android ældre end version 4.0. Kommende udgaver af c:geo vil måske ikke være understøttet på din enhed.</string>
   <!-- text-to-speech for compass view -->
   <string name="tts_service">Talende kompas</string>
   <string name="tts_start">Start tale</string>

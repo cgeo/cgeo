@@ -351,6 +351,7 @@
   <string name="caches_filter_rating">評価あり</string>
   <string name="caches_filter_own_rating">自己評価あり</string>
   <string name="caches_filter_multi_listing">異なる状態で複数のリストに存在</string>
+  <string name="caches_filter_own_waypoint">ユーザー定義のウェイ ポイントを使用</string>
   <string name="caches_removing_from_history">履歴から削除中…</string>
   <string name="caches_clear_offlinelogs">全てのオフラインログを削除</string>
   <string name="caches_clear_offlinelogs_message">オフラインのログを削除します？</string>
@@ -740,6 +741,7 @@
   <string name="cache_list_text">リスト:</string>
   <string name="cache_list_change">移動</string>
   <string name="cache_list_unknown">Not in a list</string>
+  <string name="cache_list_select_last">最後に選択</string>
   <string name="cache_images">画像</string>
   <string name="cache_waypoints">ウェイポイント</string>
   <plurals name="waypoints">
@@ -798,6 +800,7 @@
   <string name="cache_menu_around">近くのキャッシュ</string>
   <string name="around">%sの近く</string>
   <string name="cache_menu_event">カレンダーに登録</string>
+  <string name="cache_menu_extract_waypoints">ウェイポイントを抽出</string>
   <string name="cache_menu_details">詳細</string>
   <string name="cache_menu_refresh">更新</string>
   <string name="cache_menu_share">キャッシュを共有</string>
@@ -809,6 +812,7 @@
   <string name="cache_menu_pebble">Pebble</string>
   <string name="cache_menu_vote">投票する</string>
   <string name="cache_menu_checker">Geochecker を開く</string>
+  <string name="cache_menu_challenge_checker">チャレンジチェッカーを検索</string>
   <string name="cache_menu_ignore">キャッシュを無視</string>
   <string name="ignore_confirm_title">ご注意ください</string>
   <string name="ignore_confirm_message">キャッシュを無視すると geocaching.com からデータをロードするとき、このキャッシュがもう二度と発生しないことを意味します。ウェブサイトで無視を解除しないと、もう一度キャッシュを参照することはできません。</string>
@@ -913,6 +917,7 @@
   <string name="waypoint_edit_title">ウェイポイントを編集</string>
   <string name="waypoint_add_title">ウェイポイントを追加</string>
   <string name="waypoint_note">メモ</string>
+  <string name="waypoint_user_note">ユーザー メモ</string>
   <string name="waypoint_visited">訪問済み</string>
   <string name="waypoint_save">保存</string>
   <string name="waypoint_cancel_edit">キャンセル</string>
@@ -967,6 +972,7 @@
   <string name="map_strategy_fast">速い(「最速」+タイプ)</string>
   <string name="map_strategy_auto">自動(移動速度に依存)</string>
   <string name="map_strategy_detailed">詳細(「速い」+詳細)</string>
+  <string name="live_map_notification">オンライン地図の座標は、常に正確とは限りません!\n不正確と思われる座標はオレンジ色の円で表示されます。\n\nキャッシュの詳細を表示したり、オフライン用にキャッシュを保存する際に正確な座標を取得します。</string>
   <string name="map_select_multiple_items">アイテムを選択</string>
   <string name="map_routing">ルート検索</string>
   <string name="map_routing_straight">直線</string>
@@ -1356,6 +1362,7 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
   <string name="status_geocaching_change" tools:ignore="UnusedResources">geocaching.comが更新されましたがc:geoはまだ未対応です。\n現在、作業中です。しばらくお待ちください。</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">geocaching.comが更新されましたがオンライン地図機能はまだ未対応です。\n現在、作業中です。しばらくお待ちください。</string>
   <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com はメンテナンス中です。 \nさまざまな問題が発生する可能性があります。</string>
+  <string name="status_closeout_warning" tools:ignore="UnusedResources">Android 4.0 よりも以前のバージョンを使用しているようです。c:geo の今後のリリースはお使いのデバイスで利用できない可能性があります。</string>
   <!-- text-to-speech for compass view -->
   <string name="tts_service">Talking compass</string>
   <string name="tts_start">音声案内開始</string>

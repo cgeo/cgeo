@@ -357,6 +357,7 @@
   <string name="caches_filter_rating">S hodnotením</string>
   <string name="caches_filter_own_rating">S vlastným hodnotením</string>
   <string name="caches_filter_multi_listing">Viacnásobne zobrazená s rôznym statusom</string>
+  <string name="caches_filter_own_waypoint">S vlastnými bodmi trasy (waypoint)</string>
   <string name="caches_removing_from_history">Odstraňovanie z histórie…</string>
   <string name="caches_clear_offlinelogs">Vymazať offline záznamy</string>
   <string name="caches_clear_offlinelogs_message">Prajete si vymazať offline logy?</string>
@@ -765,6 +766,7 @@
   <string name="cache_list_text">Zoznam:</string>
   <string name="cache_list_change">Presunúť</string>
   <string name="cache_list_unknown">Nie je v zozname</string>
+  <string name="cache_list_select_last">Posledný výber</string>
   <string name="cache_images">Obrázky</string>
   <string name="cache_waypoints">Body trasy</string>
   <plurals name="waypoints">
@@ -825,6 +827,7 @@
   <string name="cache_menu_around">Skrýše v okolí</string>
   <string name="around">Okolo %s</string>
   <string name="cache_menu_event">Pridať do kalendára</string>
+  <string name="cache_menu_extract_waypoints">Extrahovať body trasy</string>
   <string name="cache_menu_details">Detaily</string>
   <string name="cache_menu_refresh">Obnoviť</string>
   <string name="cache_menu_share">Zdieľať skrýšu</string>
@@ -838,6 +841,7 @@
   <string name="cache_menu_android_wear">Android Wear</string>
   <string name="cache_menu_vote">Hlasovať</string>
   <string name="cache_menu_checker">Otvoriť Geochecker</string>
+  <string name="cache_menu_challenge_checker">Hľadať challenge checker</string>
   <string name="cache_menu_ignore">Ignorovať skrýšu</string>
   <string name="ignore_confirm_title">Buď opatrný</string>
   <string name="ignore_confirm_message">Ignorovanie skrýše znamená, že údaje o skrýši sa viac nebudú zobrazovať pri sťahovaní dát z geocaching.com. Túto skrýšu budete môcť vidieť, keď ju zrušíte ignorovanie na webe.</string>
@@ -942,6 +946,7 @@
   <string name="waypoint_edit_title">Úprava bodu trasy</string>
   <string name="waypoint_add_title">Nový bod trasy</string>
   <string name="waypoint_note">poznámka</string>
+  <string name="waypoint_user_note">Osobná poznámka</string>
   <string name="waypoint_visited">navštívený</string>
   <string name="waypoint_save">Uložiť</string>
   <string name="waypoint_cancel_edit">Zrušiť</string>
@@ -996,6 +1001,7 @@
   <string name="map_strategy_fast">Rýchla</string>
   <string name="map_strategy_auto">Podľa rýchlosti</string>
   <string name="map_strategy_detailed">Podrobná</string>
+  <string name="live_map_notification">Na aktívnej mape nemusia byť súradnice vždy presné.\nSúradnice, ktoré môžu byť nepresné, sú označené oranžovým krúžkom.\n\nPo otvorení detailu skrýše alebo po jej uložení pre použitie offline, budú vždy získané presné súradnice.</string>
   <string name="map_select_multiple_items">Vybrať položku</string>
   <string name="map_routing">Navigácia</string>
   <string name="map_routing_straight">Priama čiara</string>
@@ -1387,6 +1393,7 @@
   <string name="status_geocaching_change" tools:ignore="UnusedResources">Nedávne zmeny na geocaching.com znefunkčnili c:geo.\nPracujeme na tom, skúste onedlho skontrolovať aktualizácie.</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Nedávne zmeny na geocaching.com znefunkčnili aktívnu mapu.\nPracujeme na tom, skúste skontrolovať aktualizácie onedlho.</string>
   <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Prebieha údržba na Geocaching.com \n Môžu nastať rôzne problémy.</string>
+  <string name="status_closeout_warning" tools:ignore="UnusedResources">Zdá sa, že používate verziu Android staršiu ako 4.0. Budúce verzie c:geo už nemusia byť pre vaše zariadenie k dispozícii.</string>
   <!-- text-to-speech for compass view -->
   <string name="tts_service">Hovoriaci kompas</string>
   <string name="tts_start">Začať hovoriť</string>
