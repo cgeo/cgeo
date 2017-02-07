@@ -2,7 +2,7 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-    <b>Next bugfix release (Beta version):</b>\n
+    <b>2017.02.07:</b>\n
     · Fix: Calendar time recognition\n
     · Fix: Log date format in system information\n
     · Fix: Number of waypoints is limited to 100\n
