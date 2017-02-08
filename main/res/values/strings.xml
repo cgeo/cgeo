@@ -1004,7 +1004,7 @@
     <string name="waypoint_coordinates_uploading_to_website">Uploading coordinates %s to website.</string>
     <string name="waypoint_coordinates_has_been_modified_on_website">Cache coordinates on website have been modified to: %s.</string>
     <string name="waypoint_done">Done</string>
-    <string name="waypoint_duplicate">Duplicate</string>
+    <string name="waypoint_duplicate">Duplicate waypoint</string>
     <string name="waypoint_duplicated">Waypoint duplicated</string>
     <string name="waypoint_copy_of">Copy of</string>
     <string name="search_history">History</string>
