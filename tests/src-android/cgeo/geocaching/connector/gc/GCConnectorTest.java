@@ -79,6 +79,10 @@ public class GCConnectorTest extends AbstractResourceInstrumentationTestCase {
         assertThat(GCConstants.gccodeToGCId("GC2MEGA")).isEqualTo(2045702);
     }
 
+    public static void testBaseCodingsNull() {
+        assertThat(GCConstants.gccodeToGCId(null)).isEqualTo(0);
+    }
+
     /** Tile computation with different zoom levels */
     public static void testTile() {
         // http://coord.info/GC2CT8K = N 52° 30.462 E 013° 27.906

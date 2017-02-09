@@ -210,6 +210,9 @@ public final class GCConstants {
      * see http://support.groundspeak.com/index.php?pg=kb.printer.friendly&id=1#p221
      */
     public static long gccodeToGCId(final String gccode) {
+        if (StringUtils.isBlank(gccode) || gccode.length() < 3) {
+            return 0;
+        }
         long base = GC_BASE31;
         final String geocodeWO = gccode.substring(2).toUpperCase(Locale.US);
 
