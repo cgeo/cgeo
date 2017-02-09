@@ -392,7 +392,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
 
                 @Override
                 protected void onPostExecute(final Geocache cache) {
-                    if (waypoint.isUserDefined() || waypoint.isOriginalCoordsEmpty()) {
+                    if (waypoint == null || waypoint.isUserDefined() || waypoint.isOriginalCoordsEmpty()) {
                         showCoordinatesInputDialog(cache);
                     } else {
                         showCoordinateOptionsDialog(cache);
