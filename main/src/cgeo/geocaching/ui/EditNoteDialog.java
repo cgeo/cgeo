@@ -66,8 +66,8 @@ public class EditNoteDialog extends DialogFragment {
         String initialNote = getArguments().getString(ARGUMENT_INITIAL_NOTE);
         if (initialNote != null) {
             // add a new line when editing existing text, to avoid accidental overwriting of the last line
-            if (StringUtils.isNotBlank(initialNote)) {
-                initialNote = StringUtils.appendIfMissing(initialNote, "\n");
+            if (StringUtils.isNotBlank(initialNote) && !initialNote.endsWith("\n")) {
+                initialNote = initialNote + "\n";
             }
             mEditText.setText(initialNote);
             Dialogs.moveCursorToEnd(mEditText);
