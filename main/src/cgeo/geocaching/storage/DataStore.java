@@ -20,6 +20,7 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
+import cgeo.geocaching.models.CalcState;
 import cgeo.geocaching.models.Destination;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
@@ -83,16 +84,13 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.json.JSONException;
 
 public class DataStore {
 
     public static final String DB_FILE_NAME = "data";
     public static final String DB_FILE_NAME_BACKUP = "cgeo.sqlite";
     public static final String DB_FILE_CORRUPTED_EXTENSION = ".corrupted";
-
-    private DataStore() {
-        // utility class
-    }
 
     public enum StorageLocation {
         HEAP,
@@ -162,7 +160,7 @@ public class DataStore {
                     "cg_caches.watchlistCount";          // 42
 
     /** The list of fields needed for mapping. */
-    private static final String[] WAYPOINT_COLUMNS = { "_id", "geocode", "updated", "type", "prefix", "lookup", "name", "latitude", "longitude", "note", "own", "visited", "user_note", "org_coords_empty" };
+    private static final String[] WAYPOINT_COLUMNS = { "_id", "geocode", "updated", "type", "prefix", "lookup", "name", "latitude", "longitude", "note", "own", "visited", "user_note", "org_coords_empty", "calc_state" };
 
     /** Number of days (as ms) after temporarily saved caches are deleted */
     private static final long DAYS_AFTER_CACHE_IS_DELETED = 3 * 24 * 60 * 60 * 1000;
@@ -172,7 +170,7 @@ public class DataStore {
      */
     private static final CacheCache cacheCache = new CacheCache();
     private static volatile SQLiteDatabase database = null;
-    private static final int dbVersion = 72;
+    private static final int dbVersion = 73;
     public static final int customListIdOffset = 10;
 
     @NonNull private static final String dbTableCaches = "cg_caches";
@@ -269,7 +267,8 @@ public class DataStore {
             + "own INTEGER DEFAULT 0, "
             + "visited INTEGER DEFAULT 0, "
             + "user_note TEXT, "
-            + "org_coords_empty INTEGER DEFAULT 0"
+            + "org_coords_empty INTEGER DEFAULT 0, "
+            + "calc_state TEXT"
             + "); ";
     private static final String dbCreateSpoilers = ""
             + "CREATE TABLE " + dbTableSpoilers + " ("
@@ -339,6 +338,10 @@ public class DataStore {
             + "latitude DOUBLE, "
             + "longitude DOUBLE "
             + "); ";
+
+    private DataStore() {
+        // utility class
+    }
 
     private static final Single<Integer> allCachesCountObservable = Single.create(new SingleOnSubscribe<Integer>() {
         @Override
@@ -871,6 +874,14 @@ public class DataStore {
                             Log.e("Failed to upgrade to ver. 72", e);
                         }
                     }
+                    // Adds coord calculator state to the waypoint
+                    if (oldVersion < 73) {
+                        try {
+                            db.execSQL("ALTER TABLE " + dbTableWaypoints + " ADD COLUMN calc_state TEXT");
+                        } catch (final Exception e) {
+                            Log.e("Failed to upgrade to ver. 73", e);
+                        }
+                    }
                 }
 
                 db.setTransactionSuccessful();
@@ -1383,6 +1394,8 @@ public class DataStore {
                 values.put("visited", oneWaypoint.isVisited() ? 1 : 0);
                 values.put("user_note", oneWaypoint.getUserNote());
                 values.put("org_coords_empty", oneWaypoint.isOriginalCoordsEmpty() ? 1 : 0);
+                putCalcState(values, oneWaypoint.getCalculatorStoredState());
+
                 if (oneWaypoint.getId() < 0) {
                     final long rowId = database.insert(dbTableWaypoints, null, values);
                     oneWaypoint.setId((int) rowId);
@@ -1418,6 +1431,16 @@ public class DataStore {
     private static void putCoords(final ContentValues values, final Geopoint coords) {
         values.put("latitude", coords == null ? null : coords.getLatitude());
         values.put("longitude", coords == null ? null : coords.getLongitude());
+    }
+
+    private static void putCalcState(final ContentValues values, final CalcState calcState) {
+        if (calcState != null) {
+            try {
+                values.put("calc_state", calcState.toJSON().toString());
+            } catch (final JSONException e) {
+                Log.e("Unable to write calculator state information", e);
+            }
+        }
     }
 
     /**
@@ -1463,6 +1486,8 @@ public class DataStore {
             values.put("own", waypoint.isUserDefined() ? 1 : 0);
             values.put("visited", waypoint.isVisited() ? 1 : 0);
             values.put("org_coords_empty", waypoint.isOriginalCoordsEmpty() ? 1 : 0);
+            putCalcState(values, waypoint.getCalculatorStoredState());
+
             if (id <= 0) {
                 final long rowId = database.insert(dbTableWaypoints, null, values);
                 waypoint.setId((int) rowId);
@@ -2003,6 +2028,11 @@ public class DataStore {
         waypoint.setNote(cursor.getString(cursor.getColumnIndex("note")));
         waypoint.setUserNote(cursor.getString(cursor.getColumnIndex("user_note")));
         waypoint.setOriginalCoordsEmpty(cursor.getInt(cursor.getColumnIndex("org_coords_empty")) != 0);
+        try {
+            waypoint.setCalculatorStoredState(CalcState.fromJSON(cursor.getString(cursor.getColumnIndex("calc_state"))));
+        } catch (final JSONException e) {
+            Log.e("Unable to read calculator state information", e);
+        }
 
         return waypoint;
     }
