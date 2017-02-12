@@ -1479,14 +1479,10 @@ public class DataStore {
             values.put("own", waypoint.isUserDefined() ? 1 : 0);
             values.put("visited", waypoint.isVisited() ? 1 : 0);
             values.put("org_coords_empty", waypoint.isOriginalCoordsEmpty() ? 1 : 0);
-
-            CalcState calcState = waypoint.getCalculatorStoredState();
-            if (calcState != null) {
-                try {
-                    values.put("calc_state", waypoint.getCalculatorStoredState().toJSON().toString());
-                } catch (final JSONException e) {
-                    Log.e("Unable to write calculator state information", e);
-                }
+            try {
+                values.put("calc_state", waypoint.getCalculatorStoredState().toJSON().toString());
+            } catch (final JSONException e) {
+                values.put("calc_state", "");
             }
 
             if (id <= 0) {
@@ -2033,7 +2029,7 @@ public class DataStore {
         try {
             waypoint.setCalculatorStoredState(CalcState.fromJSON(cursor.getString(cursor.getColumnIndex("calc_state"))));
         } catch (final JSONException e) {
-            Log.e("Unable to read calculator state information", e);
+            waypoint.setCalculatorStoredState(null);
         }
 
         return waypoint;
