@@ -1729,8 +1729,8 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
             view = (ListView) getLayoutInflater().inflate(R.layout.cachedetail_waypoints_page, parentView, false);
             view.setClickable(true);
-            final View addWaypointButton = getLayoutInflater().inflate(R.layout.cachedetail_waypoints_footer, view, false);
-            view.addFooterView(addWaypointButton);
+            final View addWaypointButton = getLayoutInflater().inflate(R.layout.cachedetail_waypoints_header, view, false);
+            view.addHeaderView(addWaypointButton);
             addWaypointButton.setOnClickListener(new View.OnClickListener() {
 
                 @Override
