@@ -10,7 +10,7 @@ import java.util.LinkedHashMap;
 
 import org.mapsforge.map.layer.Layer;
 
-public class GeoitemLayers implements Collection<GeoitemLayer> {
+public class GeoitemLayers implements Iterable<GeoitemLayer> {
 
     /**
      * ordered set of items to be displayed
@@ -39,44 +39,12 @@ public class GeoitemLayers implements Collection<GeoitemLayer> {
         return result;
     }
 
-    private boolean addInternal(final GeoitemLayer geoitem) {
+    public synchronized boolean add(final GeoitemLayer geoitem) {
         return geoitems.put(geoitem.getItemCode(), geoitem) != null;
     }
 
-    @Override
-    public synchronized boolean add(final GeoitemLayer geoitem) {
-        return addInternal(geoitem);
-    }
-
-    @Override
-    public synchronized boolean addAll(@NonNull final Collection<? extends GeoitemLayer> geoitemsIn) {
-        boolean result = true;
-        for (final GeoitemLayer geoitem : geoitemsIn) {
-            if (!this.addInternal(geoitem)) {
-                result = false;
-            }
-        }
-        return result;
-    }
-
-    @Override
     public synchronized void clear() {
         this.geoitems.clear();
-    }
-
-    @Override
-    public synchronized boolean contains(final Object object) {
-        return this.geoitems.containsValue(object);
-    }
-
-    @Override
-    public synchronized boolean containsAll(@NonNull final Collection<?> items) {
-        return this.geoitems.values().containsAll(items);
-    }
-
-    @Override
-    public synchronized boolean isEmpty() {
-        return this.geoitems.isEmpty();
     }
 
     @Override
@@ -85,7 +53,7 @@ public class GeoitemLayers implements Collection<GeoitemLayer> {
         return new ArrayList<>(this.geoitems.values()).iterator();
     }
 
-    private boolean removeInternal(final Object object) {
+    public synchronized boolean remove(final Object object) {
         if (object instanceof GeoitemLayer) {
             final GeoitemLayer item = (GeoitemLayer) object;
             return this.geoitems.remove(item.getItem().getItemCode()) != null;
@@ -95,47 +63,9 @@ public class GeoitemLayers implements Collection<GeoitemLayer> {
         return false;
     }
 
-    @Override
-    public synchronized boolean remove(final Object object) {
-        return removeInternal(object);
-    }
-
-    @Override
-    public synchronized boolean removeAll(@NonNull final Collection<?> items) {
-        boolean result = true;
-        for (final Object item : items) {
-            if (!this.removeInternal(item)) {
-                result = false;
-            }
-        }
-        return result;
-    }
-
-    @Override
-    public synchronized boolean retainAll(@NonNull final Collection<?> items) {
-
-        return this.geoitems.values().retainAll(items);
-    }
-
-    @Override
     public synchronized int size() {
 
         return this.geoitems.size();
-    }
-
-    @Override
-    @NonNull
-    public synchronized Object[] toArray() {
-
-        return this.geoitems.values().toArray();
-    }
-
-    @SuppressWarnings("hiding")
-    @Override
-    @NonNull
-    public synchronized <GeoitemLayer> GeoitemLayer[] toArray(final GeoitemLayer[] array) {
-
-        return this.geoitems.values().toArray(array);
     }
 
 }
