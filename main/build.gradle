@@ -301,10 +301,10 @@ dependencies {
     compile project(":mapswithme-api")
 
     // Metadata Extractor, EXIF location extraction from images
-    compile 'com.drewnoakes:metadata-extractor:2.9.1'
+    compile 'com.drewnoakes:metadata-extractor:2.10.0'
 
     // Okhttp network access
-    compile 'com.squareup.okhttp3:okhttp:3.5.0'
+    compile 'com.squareup.okhttp3:okhttp:3.6.0'
 
     // Play Services
     def playServicesVersion = '9.4.0'
