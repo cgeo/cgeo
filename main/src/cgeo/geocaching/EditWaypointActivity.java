@@ -405,14 +405,14 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
                     builder.setItems(R.array.waypoint_coordinates_options, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(final DialogInterface dialog, final int item) {
-                        final String selectedOption = res.getStringArray(R.array.waypoint_coordinates_options)[item];
-                        if (res.getString(R.string.waypoint_copy_coordinates).equals(selectedOption)) {
-                            ClipboardUtils.copyToClipboard(GeopointFormatter.reformatForClipboard(geopoint.toString()));
-                            showToast(res.getString(R.string.clipboard_copy_ok));
-                        } else if (res.getString(R.string.waypoint_duplicate).equals(selectedOption) && cache.duplicateWaypoint(waypoint)) {
-                            DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
-                            showToast(res.getString(R.string.waypoint_duplicated));
-                        }
+                            final String selectedOption = res.getStringArray(R.array.waypoint_coordinates_options)[item];
+                            if (res.getString(R.string.waypoint_copy_coordinates).equals(selectedOption) && geopoint != null) {
+                                ClipboardUtils.copyToClipboard(GeopointFormatter.reformatForClipboard(geopoint.toString()));
+                                showToast(res.getString(R.string.clipboard_copy_ok));
+                            } else if (res.getString(R.string.waypoint_duplicate).equals(selectedOption) && cache.duplicateWaypoint(waypoint)) {
+                                DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
+                                showToast(res.getString(R.string.waypoint_duplicated));
+                            }
                         }
                     });
                     final AlertDialog alert = builder.create();
