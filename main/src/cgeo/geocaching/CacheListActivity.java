@@ -547,7 +547,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     /**
      * Action bar spinner adapter. {@code null} for list types that don't allow switching (search results, ...).
      */
-    CacheListSpinnerAdapter mCacheListSpinnerAdapter;
+    CacheListSpinnerAdapter cacheListSpinnerAdapter;
 
     /**
      * remember current filter when switching between lists, so it can be re-applied afterwards
@@ -558,13 +558,13 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private SortActionProvider sortProvider;
 
     private void initActionBarSpinner() {
-        mCacheListSpinnerAdapter = new CacheListSpinnerAdapter(this, R.layout.support_simple_spinner_dropdown_item);
+        cacheListSpinnerAdapter = new CacheListSpinnerAdapter(this, R.layout.support_simple_spinner_dropdown_item);
         getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        getSupportActionBar().setListNavigationCallbacks(mCacheListSpinnerAdapter, new ActionBar.OnNavigationListener() {
+        getSupportActionBar().setListNavigationCallbacks(cacheListSpinnerAdapter, new ActionBar.OnNavigationListener() {
             @Override
             public boolean onNavigationItemSelected(final int i, final long l) {
-                final int newListId = mCacheListSpinnerAdapter.getItem(i).id;
+                final int newListId = cacheListSpinnerAdapter.getItem(i).id;
                 if (newListId != listId) {
                     switchListById(newListId);
                 }
@@ -575,18 +575,18 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     private void refreshSpinnerAdapter() {
         /* If the activity does not use the Spinner this will be null */
-        if (mCacheListSpinnerAdapter == null) {
+        if (cacheListSpinnerAdapter == null) {
             return;
         }
-        mCacheListSpinnerAdapter.clear();
+        cacheListSpinnerAdapter.clear();
 
         final AbstractList list = AbstractList.getListById(listId);
 
         for (final AbstractList l: StoredList.UserInterface.getMenuLists(false, PseudoList.NEW_LIST.id)) {
-            mCacheListSpinnerAdapter.add(l);
+            cacheListSpinnerAdapter.add(l);
         }
 
-        getSupportActionBar().setSelectedNavigationItem(mCacheListSpinnerAdapter.getPosition(list));
+        getSupportActionBar().setSelectedNavigationItem(cacheListSpinnerAdapter.getPosition(list));
     }
 
     @Override

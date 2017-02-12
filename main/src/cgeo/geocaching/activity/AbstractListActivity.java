@@ -14,12 +14,12 @@ public abstract class AbstractListActivity extends AbstractActionBarActivity {
         super(keepScreenOn);
     }
 
-    private ListView mListView;
+    private ListView listView;
     protected ListView getListView() {
-        if (mListView == null) {
-            mListView = (ListView) findViewById(android.R.id.list);
+        if (listView == null) {
+            listView = (ListView) findViewById(android.R.id.list);
         }
-        return mListView;
+        return listView;
     }
 
     protected void setListAdapter(final ListAdapter adapter) {

@@ -310,8 +310,7 @@ public class FragmentListActivity extends FragmentActivity {
 
     private final AdapterView.OnItemClickListener mOnClickListener = new AdapterView.OnItemClickListener() {
         @Override
-        public void onItemClick(final AdapterView<?> parent, final View v, final int position, final long id)
-        {
+        public void onItemClick(final AdapterView<?> parent, final View v, final int position, final long id) {
             onListItemClick((ListView)parent, v, position, id);
         }
     };
