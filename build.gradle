@@ -39,7 +39,7 @@ task cgeoHelp {
 		println 'Use "gradlew tasks" for more available tasks.'
 		println ''
 		println ''
-		println 'Available build types are: debug, nightly (requires an env var named NB),' +
+		println 'Available build types are: debug, nightly (requires an env var named NB), ' +
 				'rc (requires an env var named RC), release.'
 	}
 }
