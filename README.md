@@ -64,7 +64,7 @@ Request your personal API key for the various [OpenCaching](http://www.opencachi
 * [opencaching.ro OKAPI signup](http://www.opencaching.ro/okapi/signup.html)
 * [opencaching.nl OKAPI signup](http://www.opencaching.nl/okapi/signup.html)
 * [opencaching.us OKAPI signup](http://www.opencaching.us/okapi/signup.html)
-* [opencaching.org.uk OKAPI signup](http://www.opencaching.org.uk/okapi/signup.html)
+* [opencache.uk OKAPI signup](http://www.opencache.uk/okapi/signup.html)
 
 ### Building with gradle
 
