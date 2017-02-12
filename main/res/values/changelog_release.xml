@@ -2,6 +2,9 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
+    <b>Next bugfix release (Beta version):</b>\n
+    · Fix: Crash on some devices when editing or saving personal note\n
+    \n
     <b>2017.02.07:</b>\n
     · Fix: Calendar time recognition\n
     · Fix: Log date format in system information\n
