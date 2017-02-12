@@ -1,0 +1,59 @@
+/*
+ * cgeo calendar addon
+ */
+
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion project.buildToolsVersion
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+
+    defaultConfig {
+        // TODO fill this section and remove the values from AndroidManifest only after the full switch to gradle
+        // As these values override the manifest, we might otherwise use different values in gradle and non-gradle builds.
+        minSdkVersion project.minSdkVersion
+        targetSdkVersion 22
+    }
+
+    packagingOptions {
+    	// license files of libs are not needed in our APK
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+    }
+
+    sourceSets {
+        main {
+            manifest.srcFile 'AndroidManifest.xml'
+            java.srcDirs = ['src', '../common/src']
+            res.srcDirs = ['res']
+            assets.srcDirs = ['assets']
+        }
+    }
+
+    lintOptions {
+    	// generally we accept lint errors when building 
+        abortOnError false
+        
+    	// abort release builds in case of FATAL errors
+        checkReleaseBuilds true
+    }
+    buildToolsVersion '25.0.0'
+}
+
+
+dependencies {
+    // Apache Commons
+    compile 'commons-io:commons-io:2.5'
+    compile 'org.apache.commons:commons-lang3:3.5'
+
+    // Android annotations
+    compile 'com.android.support:support-annotations:24.2.1'
+}

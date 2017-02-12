@@ -22,7 +22,7 @@ public class EditNoteDialog extends DialogFragment {
 
     public static final String ARGUMENT_INITIAL_NOTE = "initialNote";
 
-    private EditText mEditText;
+    private EditText editText;
 
     public interface EditNoteDialogListener {
         void onFinishEditNoteDialog(final String inputText);
@@ -50,15 +50,15 @@ public class EditNoteDialog extends DialogFragment {
         final FragmentActivity activity = getActivity();
 
         final View view = View.inflate(activity, R.layout.fragment_edit_note, null);
-        mEditText = ButterKnife.findById(view, R.id.note);
+        editText = ButterKnife.findById(view, R.id.note);
         String initialNote = getArguments().getString(ARGUMENT_INITIAL_NOTE);
         if (initialNote != null) {
             // add a new line when editing existing text, to avoid accidental overwriting of the last line
             if (StringUtils.isNotBlank(initialNote) && !initialNote.endsWith("\n")) {
                 initialNote = initialNote + "\n";
             }
-            mEditText.setText(initialNote);
-            Dialogs.moveCursorToEnd(mEditText);
+            editText.setText(initialNote);
+            Dialogs.moveCursorToEnd(editText);
             getArguments().remove(ARGUMENT_INITIAL_NOTE);
         }
 
@@ -85,14 +85,14 @@ public class EditNoteDialog extends DialogFragment {
             @Override
             public void onClick(final View view) {
                 // trim note to avoid unnecessary uploads for whitespace only changes
-                final String personalNote = StringUtils.trim(mEditText.getText().toString());
+                final String personalNote = StringUtils.trim(editText.getText().toString());
                 ((EditNoteDialogListener) getActivity()).onFinishEditNoteDialog(personalNote);
                 dialog.dismiss();
             }
         });
         done.setVisibility(View.VISIBLE);
 
-        new Keyboard(activity).showDelayed(mEditText);
+        new Keyboard(activity).showDelayed(editText);
         return dialog;
     }
 }
