@@ -28,7 +28,7 @@ public class CustomProgressDialog extends ProgressDialog {
             final Field field = getClass().getSuperclass().getDeclaredField("mProgressNumber");
             field.setAccessible(true);
             ((View) field.get(this)).setVisibility(View.GONE);
-        } catch (Exception e) { // no multi-catch below SDK 19
+        } catch (final Exception e) { // no multi-catch below SDK 19
             Log.e("Failed to find the progressDialog field 'mProgressNumber'", e);
         }
     }
