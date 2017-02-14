@@ -268,7 +268,7 @@ public class CachesOverlay extends AbstractItemizedOverlay {
         try {
             return items.get(index);
         } catch (final Exception e) {
-            Log.e("CachesOverlay.createItem", e);
+            Log.w("CachesOverlay.createItem", e);
         }
 
         return null;
