@@ -115,10 +115,7 @@ public class CachesBundle {
             final SeparatorLayer separator2 = this.separators.get(LIVE_SEPARATOR);
             this.liveOverlay = new LiveCachesOverlay(LIVE_OVERLAY_ID, this.geoEntries, this.mapView, separator2, this.mapHandlers);
         } else {
-            if (this.storedOverlay != null) {
-                this.storedOverlay.onDestroy();
-                this.storedOverlay = null;
-            }
+            // Disable only download, keep stored caches
             if (this.liveOverlay != null) {
                 this.liveOverlay.onDestroy();
                 this.liveOverlay = null;
