@@ -3,12 +3,16 @@
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
     <b>Next bugfix release (Beta version):</b>\n
+    · Fix: Crash on some devices when editing or saving personal note\n
+    \n
+    <b>2017.02.07:</b>\n
     · Fix: Calendar time recognition\n
     · Fix: Log date format in system information\n
     · Fix: Number of waypoints is limited to 100\n
     · Fix: One-click offline log does not save cache\n
     · Fix: Wrong URL used for smilies in log\n
     · Fix: Crash when extracting location from exif data\n
+    · Info: Starting with this version we show a closeout warning on the main screen if your device is running on an Android version below 4.0. We will drop the support for these old Android versions with one of the next releases.
     \n
     <b>2017.01.15:</b>\n
     · Fix: Avoid crash in logbook under special conditions if Geokrety is enabled\n
