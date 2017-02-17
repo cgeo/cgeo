@@ -126,7 +126,6 @@ public class ImagesList {
             if (StringUtils.isNotBlank(img.getTitle())) {
                 final TextView titleView = ButterKnife.findById(rowView, R.id.title);
                 titleView.setText(Html.fromHtml(img.getTitle()));
-                rowView.findViewById(R.id.titleLayout).setVisibility(View.VISIBLE);
             }
 
             if (StringUtils.isNotBlank(img.getDescription())) {
