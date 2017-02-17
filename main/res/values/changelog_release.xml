@@ -3,6 +3,9 @@
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
     <b>Next bugfix release (Beta version):</b>\n
+    · Fix: Missing ellipsis of long cache names in list\n
+    · Fix: Missing visual separation in gallery\n
+    · Fix: Don't delete logs on refresh error\n
     · Fix: Crash on some devices when editing or saving personal note\n
     \n
     <b>2017.02.07:</b>\n
