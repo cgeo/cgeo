@@ -7,16 +7,14 @@
 
     <RelativeLayout
         android:id="@+id/titleLayout"
-        style="@style/separator_horizontal_layout"
-        android:visibility="gone"
-        tools:visibility="visible">
+        style="@style/separator_horizontal_layout">
 
         <View style="@style/separator_horizontal" />
 
         <TextView
             android:id="@+id/title"
             style="@style/separator_horizontal_headline"
-            android:text="@null"
+            android:text="@string/log_image"
             tools:text="image title"/>
     </RelativeLayout>
 

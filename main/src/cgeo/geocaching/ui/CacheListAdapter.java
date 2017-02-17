@@ -443,7 +443,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
         if (spannable != null) {
             holder.text.setText(spannable, TextView.BufferType.SPANNABLE);
         } else {
-            holder.text.setText(cache.getName());
+            holder.text.setText(cache.getName(), TextView.BufferType.NORMAL);
         }
         holder.cacheListType = cacheListType;
         updateViewHolder(holder, cache, res);
