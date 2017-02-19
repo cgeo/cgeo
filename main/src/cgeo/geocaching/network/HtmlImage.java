@@ -263,7 +263,7 @@ public class HtmlImage implements Html.ImageGetter {
                     if (url.contains(";base64,")) {
                         ImageUtils.decodeBase64ToFile(StringUtils.substringAfter(url, ";base64,"), file);
                     } else {
-                        Log.e("HtmlImage.getDrawable: unable to decode non-base64 inline image");
+                        Log.e("HtmlImage.fetchDrawableUncached: unable to decode non-base64 inline image");
                         emitter.onComplete();
                         return;
                     }
