@@ -11,6 +11,8 @@
     · New: Have a button \"Previous selection\" in list selection while saving a cache\n
     · New: Allow long press on \"Store\" icon to directly save cache to previously selected lists\n
     · Fix: Locally changed listing coords have been overwritten on refresh\n
+    · New: \"Add Waypoint\" button on top of the waypoint list\n
+    · Fix: Workaround for faulty devices crashing while editing the personal note\n
     \n
   </string>
 </resources>
