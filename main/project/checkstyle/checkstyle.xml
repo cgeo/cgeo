@@ -15,7 +15,7 @@
     <property name="fileExtensions" value="java"/>
   </module>
   <module name="NewlineAtEndOfFile">
-    <property name="severity" value="ignore" />
+    <property name="severity" value="warning" />
   </module>
   <module name="TreeWalker">
     <property name="tabWidth" value="1" />
