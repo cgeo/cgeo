@@ -65,7 +65,7 @@ android {
 			testProguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt', '../tests/proguard-project.txt'
 
             // code coverage
-            testCoverageEnabled true
+            //testCoverageEnabled true
         }
         nightly {
             def nightlyName = System.getenv('NB') // NB, NB1, ...
