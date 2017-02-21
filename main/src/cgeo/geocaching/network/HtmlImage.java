@@ -255,7 +255,7 @@ public class HtmlImage implements Html.ImageGetter {
             }
 
             private void downloadAndSave(final ObservableEmitter<BitmapDrawable> emitter, final Disposable disposable) {
-                final File file = LocalStorage.getStorageFile(pseudoGeocode, url, true, true);
+                final File file = LocalStorage.getGeocacheDataFile(pseudoGeocode, url, true, true);
                 if (url.startsWith("data:image/")) {
                     if (url.contains(";base64,")) {
                         ImageUtils.decodeBase64ToFile(StringUtils.substringAfter(url, ";base64,"), file);
@@ -319,7 +319,7 @@ public class HtmlImage implements Html.ImageGetter {
             try {
                 final Response httpResponse = Network.getRequest(absoluteURL, null, file).blockingGet();
                 if (httpResponse.isSuccessful()) {
-                    LocalStorage.saveEntityToFile(httpResponse, file);
+                    FileUtils.saveEntityToFile(httpResponse, file);
                 } else if (httpResponse.code() == 304) {
                     if (!file.setLastModified(System.currentTimeMillis())) {
                         makeFreshCopy(file);
@@ -345,7 +345,7 @@ public class HtmlImage implements Html.ImageGetter {
     private static void makeFreshCopy(final File file) {
         final File tempFile = new File(file.getParentFile(), file.getName() + "-temp");
         if (file.renameTo(tempFile)) {
-            LocalStorage.copy(tempFile, file);
+            FileUtils.copy(tempFile, file);
             FileUtils.deleteIgnoringFailure(tempFile);
         } else {
             Log.e("Could not reset timestamp of file " + file.getAbsolutePath());
@@ -363,13 +363,11 @@ public class HtmlImage implements Html.ImageGetter {
     @NonNull
     private ImmutablePair<Bitmap, Boolean> loadImageFromStorage(final String url, @NonNull final String pseudoGeocode, final boolean forceKeep) {
         try {
-            final File file = LocalStorage.getStorageFile(pseudoGeocode, url, true, false);
+            final File file = LocalStorage.getGeocacheDataFile(pseudoGeocode, url, true, false);
             final ImmutablePair<Bitmap, Boolean> image = loadCachedImage(file, forceKeep);
             if (image.right || image.left != null) {
                 return image;
             }
-            final File fileSec = LocalStorage.getStorageSecFile(pseudoGeocode, url, true);
-            return loadCachedImage(fileSec, forceKeep);
         } catch (final Exception e) {
             Log.w("HtmlImage.loadImageFromStorage", e);
         }

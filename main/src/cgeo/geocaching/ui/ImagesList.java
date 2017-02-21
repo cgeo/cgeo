@@ -188,7 +188,7 @@ public class ImagesList {
     @Nullable
     private Geopoint getImageLocation(final Image image) {
         try {
-            final File file = LocalStorage.getStorageFile(geocode, image.getUrl(), true, false);
+            final File file = LocalStorage.getGeocacheDataFile(geocode, image.getUrl(), true, false);
             final Metadata metadata = ImageMetadataReader.readMetadata(file);
             final Collection<GpsDirectory> gpsDirectories = metadata.getDirectoriesOfType(GpsDirectory.class);
             if (gpsDirectories == null) {
@@ -291,7 +291,7 @@ public class ImagesList {
     }
 
     private static File saveToTemporaryJPGFile(final BitmapDrawable image) throws FileNotFoundException {
-        final File file = LocalStorage.getStorageFile(HtmlImage.SHARED, "temp.jpg", false, true);
+        final File file = LocalStorage.getGeocacheDataFile(HtmlImage.SHARED, "temp.jpg", false, true);
         BufferedOutputStream stream = null;
         try {
             stream = new BufferedOutputStream(new FileOutputStream(file));
@@ -306,7 +306,7 @@ public class ImagesList {
     private void viewImageInStandardApp(final Image img, final BitmapDrawable image) {
         try {
             final Intent intent = new Intent().setAction(Intent.ACTION_VIEW);
-            final File file = img.isLocalFile() ? img.localFile() : LocalStorage.getStorageFile(geocode, img.getUrl(), true, true);
+            final File file = img.isLocalFile() ? img.localFile() : LocalStorage.getGeocacheDataFile(geocode, img.getUrl(), true, true);
             if (file.exists()) {
                 intent.setDataAndType(Uri.fromFile(file), mimeTypeForUrl(img.getUrl()));
             } else {

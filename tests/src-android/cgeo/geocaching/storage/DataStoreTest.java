@@ -58,7 +58,7 @@ public class DataStoreTest extends CGeoTestCase {
             DataStore.saveCache(cache2, LoadFlags.SAVE_ALL);
             assertThat(DataStore.getAllCachesCount()).isGreaterThanOrEqualTo(2);
 
-            // rename list (cache1=listId1, cache2=listId1)
+            // move list (cache1=listId1, cache2=listId1)
             assertThat(DataStore.renameList(listId1, "DataStore Test (renamed)")).isEqualTo(1);
 
             // get list

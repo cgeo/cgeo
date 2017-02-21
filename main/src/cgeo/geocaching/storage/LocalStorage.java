@@ -1,156 +1,158 @@
 package cgeo.geocaching.storage;
 
-import android.os.Environment;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.CharEncoding;
-import org.apache.commons.lang3.StringUtils;
-
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FilenameFilter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.Reader;
-import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.List;
-
 import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.utils.CryptUtils;
+import cgeo.geocaching.R;
+import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.settings.SettingsActivity;
+import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.EnvironmentUtils;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
-import okhttp3.Response;
+
+import android.app.ProgressDialog;
+import android.os.Environment;
+import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.os.EnvironmentCompat;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.regex.Pattern;
+
+import io.reactivex.Observable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
+import org.apache.commons.lang3.CharEncoding;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Handle local storage issues on phone and SD card.
- *
  */
 public final class LocalStorage {
 
     private static final String FILE_SYSTEM_TABLE_PATH = "/system/etc/vold.fstab";
-    public static final String HEADER_LAST_MODIFIED = "last-modified";
-    public static final String HEADER_ETAG = "etag";
+    private static final String CGEO_DIRNAME = "cgeo";
+    private static final String DATABASES_DIRNAME = "databases";
+    private static final String BACKUP_DIR_NAME = "backup";
+    private static final String GPX_DIR_NAME = "gpx";
+    private static final String FIELD_NOTES_DIR_NAME = "field-notes";
+    private static final String LEGACY_CGEO_DIR_NAME = ".cgeo";
+    private static final String GEOCACHE_PHOTOS_DIR_NAME = "GeocachePhotos";
+    private static final String GEOCACHE_DATA_DIR_NAME = "GeocacheData";
 
-    /** Name of the local private directory used to hold cached information */
-    public static final String CACHE_DIRNAME = ".cgeo";
+    public static final Pattern GEOCACHE_FILE_PATTERN = Pattern.compile("^(GC|TB|EC|GK|O)[A-Z0-9]{2,7}$");
 
-    private static File internalStorageBase;
+    private static File internalCgeoDirectory;
+    private static File externalPrivateCgeoDirectory;
 
     private LocalStorage() {
         // utility class
     }
 
     /**
-     * Return the primary storage cache root (external media if mounted, phone otherwise).
-     *
-     * @return the root of the cache directory
+     * Usually <pre>/data/data/cgeo.geocaching</pre>
      */
     @NonNull
-    public static File getStorage() {
-        return getStorageSpecific(false);
+    private static File getInternalCgeoDirectory() {
+        if (internalCgeoDirectory == null) {
+            // A race condition will do no harm as the operation is idempotent. No need to synchronize.
+            internalCgeoDirectory = CgeoApplication.getInstance().getApplicationContext().getFilesDir().getParentFile();
+        }
+        return internalCgeoDirectory;
     }
 
     /**
-     * Return the secondary storage cache root (phone if external media is mounted, external media otherwise).
-     *
-     * @return the root of the cache directory
+     * Returns all available external private cgeo directories, e.g.:
+     * <pre>
+     *     /sdcard/Android/data/cgeo.geocaching
+     *     /storage/emulated/0/Android/data/cgeo.geocaching/files
+     *     /storage/extSdCard/Android/data/cgeo.geocaching/files
+     * </pre>
      */
     @NonNull
-    public static File getStorageSec() {
-        return getStorageSpecific(true);
+    public static List<File> getAvailableExternalPrivateCgeoDirectories() {
+        final List<File> extDirs = new ArrayList<>();
+        final File[] externalFilesDirs = ContextCompat.getExternalFilesDirs(CgeoApplication.getInstance(), null);
+        for (final File dir : externalFilesDirs) {
+            if (EnvironmentCompat.getStorageState(dir).equals(Environment.MEDIA_MOUNTED)) {
+                extDirs.add(dir);
+            }
+        }
+        return extDirs;
     }
 
+    /**
+     * Usually one of {@link LocalStorage#getAvailableExternalPrivateCgeoDirectories()}.
+     * Fallback to {@link LocalStorage#getFirstExternalPrivateCgeoDirectory()}
+     */
     @NonNull
-    private static File getStorageSpecific(final boolean secondary) {
-        return EnvironmentUtils.isExternalStorageAvailable() ^ secondary ?
-                getExternalStorageBase() :
-                new File(getInternalStorageBase(), CACHE_DIRNAME);
+    public static File getExternalPrivateCgeoDirectory() {
+        if (externalPrivateCgeoDirectory == null) {
+            // find the one selected in preferences
+            final String prefDirectory = Settings.getExternalPrivateCgeoDirectory();
+            for (final File dir : getAvailableExternalPrivateCgeoDirectories()) {
+                if (dir.getAbsolutePath().equals(prefDirectory)) {
+                    externalPrivateCgeoDirectory = dir;
+                    break;
+                }
+            }
+
+            // fallback to default external files dir
+            if (externalPrivateCgeoDirectory == null) {
+                Log.w("Chosen extCgeoDir " + prefDirectory + " is not available, falling back to default extCgeoDir");
+                externalPrivateCgeoDirectory = getFirstExternalPrivateCgeoDirectory();
+            }
+
+            if (prefDirectory == null) {
+                Settings.setExternalPrivateCgeoDirectory(externalPrivateCgeoDirectory.getAbsolutePath());
+            }
+        }
+        return externalPrivateCgeoDirectory;
+    }
+
+    /**
+     * Uses {@link android.content.Context#getExternalFilesDir(String)} with "null".
+     * This is usually the emulated external storage.
+     * It falls back to {@link LocalStorage#getInternalCgeoDirectory()}.
+     */
+    @NonNull
+    public static File getFirstExternalPrivateCgeoDirectory() {
+        final File externalFilesDir = CgeoApplication.getInstance().getExternalFilesDir(null);
+
+        // fallback to internal dir
+        if (externalFilesDir == null) {
+            Log.w("No extCgeoDir is available, falling back to internal storage");
+            return getInternalCgeoDirectory();
+        }
+
+        return externalFilesDir;
     }
 
     @NonNull
     public static File getExternalDbDirectory() {
-        return getExternalStorageBase();
+        return new File(getFirstExternalPrivateCgeoDirectory(), DATABASES_DIRNAME);
     }
 
     @NonNull
     public static File getInternalDbDirectory() {
-        return new File(getInternalStorageBase(), "databases");
-    }
-
-    @NonNull
-    private static File getExternalStorageBase() {
-        return new File(Environment.getExternalStorageDirectory(), CACHE_DIRNAME);
-    }
-
-    private static File getInternalStorageBase() {
-        if (internalStorageBase == null) {
-            // A race condition will do no harm as the operation is idempotent. No need to synchronize.
-            internalStorageBase = CgeoApplication.getInstance().getApplicationContext().getFilesDir().getParentFile();
-        }
-        return internalStorageBase;
+        return new File(getInternalCgeoDirectory(), DATABASES_DIRNAME);
     }
 
     /**
-     * Get the guessed file extension of an URL. A file extension can contain up-to 4 characters in addition to the dot.
-     *
-     * @param url
-     *            the relative or absolute URL
-     * @return the file extension, including the leading dot, or the empty string if none could be determined
-     */
-    @NonNull
-    static String getExtension(@NonNull final String url) {
-        final String urlExt;
-        if (url.startsWith("data:")) {
-            // "data:image/png;base64,i53…" -> ".png"
-            urlExt = StringUtils.substringAfter(StringUtils.substringBefore(url, ";"), "/");
-        } else {
-            // "http://example.com/foo/bar.png" -> ".png"
-            urlExt = StringUtils.substringAfterLast(url, ".");
-        }
-        return urlExt.length() >= 1 && urlExt.length() <= 4 ? "." + urlExt : "";
-    }
-
-    /**
-     * Get the primary storage cache directory for a geocode. A null or empty geocode will be replaced by a default
+     * Get the primary geocache data directory for a geocode. A null or empty geocode will be replaced by a default
      * value.
      *
      * @param geocode
      *            the geocode
-     * @return the cache directory
+     * @return the geocache data directory
      */
     @NonNull
-    public static File getStorageDir(@NonNull final String geocode) {
-        return storageDir(getStorage(), geocode);
-    }
-
-    /**
-     * Get the secondary storage cache directory for a geocode. A null or empty geocode will be replaced by a default
-     * value.
-     *
-     * @param geocode
-     *            the geocode
-     * @return the cache directory
-     */
-    @NonNull
-    private static File getStorageSecDir(@NonNull final String geocode) {
-        return storageDir(getStorageSec(), geocode);
-    }
-
-    @NonNull
-    private static File storageDir(final File base, @NonNull final String geocode) {
-        return new File(base, geocode);
+    public static File getGeocacheDataDirectory(@NonNull final String geocode) {
+        return new File(getGeocacheDataDirectory(), geocode);
     }
 
     /**
@@ -167,203 +169,8 @@ public final class LocalStorage {
      * @return the file
      */
     @NonNull
-    public static File getStorageFile(@NonNull final String geocode, @NonNull final String fileNameOrUrl, final boolean isUrl, final boolean createDirs) {
-        return buildFile(getStorageDir(geocode), fileNameOrUrl, isUrl, createDirs);
-    }
-
-    /**
-     * Get the secondary file corresponding to a geocode and a file name or an url. If it is an url, an appropriate
-     * filename will be built by hashing it. The directory structure will not be created automatically.
-     * A null or empty geocode will be replaced by a default value.
-     *
-     * @param geocode
-     *            the geocode
-     * @param fileNameOrUrl
-     *            the file name or url
-     * @param isUrl
-     *            true if an url was given, false if a file name was given
-     * @return the file
-     */
-    @NonNull
-    public static File getStorageSecFile(@NonNull final String geocode, @NonNull final String fileNameOrUrl, final boolean isUrl) {
-        return buildFile(getStorageSecDir(geocode), fileNameOrUrl, isUrl, false);
-    }
-
-    @NonNull
-    private static File buildFile(final File base, @NonNull final String fileName, final boolean isUrl, final boolean createDirs) {
-        if (createDirs) {
-            FileUtils.mkdirs(base);
-        }
-        return new File(base, isUrl ? CryptUtils.md5(fileName) + getExtension(fileName) : fileName);
-    }
-
-    /**
-     * Save an HTTP response to a file.
-     *
-     * @param response
-     *            the response whose entity content will be saved
-     * @param targetFile
-     *            the target file, which will be created if necessary
-     * @return true if the operation was successful, false otherwise, in which case the file will not exist
-     */
-    public static boolean saveEntityToFile(@NonNull final Response response, @NonNull final File targetFile) {
-        try {
-            final boolean saved = saveToFile(response.body().byteStream(), targetFile);
-            if (saved) {
-                saveHeader(HEADER_ETAG, response, targetFile);
-                saveHeader(HEADER_LAST_MODIFIED, response, targetFile);
-            }
-            return saved;
-        } catch (final Exception e) {
-            Log.e("LocalStorage.saveEntityToFile", e);
-        }
-
-        return false;
-    }
-
-    private static void saveHeader(final String name, @NonNull final Response response, @NonNull final File baseFile) {
-        final String header = response.header(name);
-        final File file = filenameForHeader(baseFile, name);
-        if (header == null) {
-            FileUtils.deleteIgnoringFailure(file);
-        } else {
-            try {
-                saveToFile(new ByteArrayInputStream(header.getBytes("UTF-8")), file);
-            } catch (final UnsupportedEncodingException e) {
-                // Do not try to display the header in the log message, as our default encoding is
-                // likely to be UTF-8 and it will fail as well.
-                Log.e("LocalStorage.saveHeader: unable to decode header", e);
-            }
-        }
-    }
-
-    @NonNull
-    private static File filenameForHeader(@NonNull final File baseFile, final String name) {
-        return new File(baseFile.getAbsolutePath() + "-" + name);
-    }
-
-    /**
-     * Get the saved header value for this file.
-     *
-     * @param baseFile
-     *            the name of the cached resource
-     * @param name
-     *            the name of the header ("etag" or "last-modified")
-     * @return the cached value, or <tt>null</tt> if none has been cached
-     */
-    @Nullable
-    public static String getSavedHeader(@NonNull final File baseFile, final String name) {
-        try {
-            final File file = filenameForHeader(baseFile, name);
-            final Reader reader = new InputStreamReader(new FileInputStream(file), CharEncoding.UTF_8);
-            try {
-                // No header will be more than 256 bytes
-                final char[] value = new char[256];
-                final int count = reader.read(value);
-                return new String(value, 0, count);
-            } finally {
-                IOUtils.closeQuietly(reader);
-            }
-        } catch (final FileNotFoundException ignored) {
-            // Do nothing, the file does not exist
-        } catch (final Exception e) {
-            Log.w("could not read saved header " + name + " for " + baseFile, e);
-        }
-        return null;
-    }
-
-    /**
-     * Save a stream to a file.
-     * <p/>
-     * If the response could not be saved to the file due, for example, to a network error, the file will not exist when
-     * this method returns.
-     *
-     * @param inputStream
-     *            the stream whose content will be saved
-     * @param targetFile
-     *            the target file, which will be created if necessary
-     * @return true if the operation was successful, false otherwise
-     */
-    public static boolean saveToFile(@Nullable final InputStream inputStream, @NonNull final File targetFile) {
-        if (inputStream == null) {
-            return false;
-        }
-
-
-        try {
-            try {
-                final File tempFile = File.createTempFile("download", null, targetFile.getParentFile());
-                final FileOutputStream fos = new FileOutputStream(tempFile);
-                final boolean written = copy(inputStream, fos);
-                fos.close();
-                if (written) {
-                    return tempFile.renameTo(targetFile);
-                }
-                FileUtils.deleteIgnoringFailure(tempFile);
-                return false;
-            } finally {
-                IOUtils.closeQuietly(inputStream);
-            }
-        } catch (final IOException e) {
-            Log.e("LocalStorage.saveToFile", e);
-            FileUtils.deleteIgnoringFailure(targetFile);
-        }
-        return false;
-    }
-
-    /**
-     * Copy a file into another. The directory structure of target file will be created if needed.
-     *
-     * @param source
-     *            the source file
-     * @param destination
-     *            the target file
-     * @return true if the copy happened without error, false otherwise
-     */
-    public static boolean copy(@NonNull final File source, @NonNull final File destination) {
-        FileUtils.mkdirs(destination.getParentFile());
-
-        InputStream input = null;
-        OutputStream output = null;
-        boolean copyDone = false;
-
-        try {
-            input = new BufferedInputStream(new FileInputStream(source));
-            output = new BufferedOutputStream(new FileOutputStream(destination));
-            copyDone = copy(input, output);
-            // close here already to catch any issue with closing
-            input.close();
-            output.close();
-        } catch (final FileNotFoundException e) {
-            Log.e("LocalStorage.copy: could not copy file", e);
-            return false;
-        } catch (final IOException e) {
-            Log.e("LocalStorage.copy: could not copy file", e);
-            return false;
-        } finally {
-            // close here quietly to clean up in all situations
-            IOUtils.closeQuietly(input);
-            IOUtils.closeQuietly(output);
-        }
-
-        return copyDone;
-    }
-
-    public static boolean copy(@NonNull final InputStream input, @NonNull final OutputStream output) {
-        try {
-            int length;
-            final byte[] buffer = new byte[4096];
-            while ((length = input.read(buffer)) > 0) {
-                output.write(buffer, 0, length);
-            }
-            // Flushing is only necessary if the stream is not immediately closed afterwards.
-            // We rely on all callers to do that correctly outside of this method
-        } catch (final IOException e) {
-            Log.e("LocalStorage.copy: error when copying data", e);
-            return false;
-        }
-
-        return true;
+    public static File getGeocacheDataFile(@NonNull final String geocode, @NonNull final String fileNameOrUrl, final boolean isUrl, final boolean createDirs) {
+        return FileUtils.buildFile(getGeocacheDataDirectory(geocode), fileNameOrUrl, isUrl, createDirs);
     }
 
     /**
@@ -376,47 +183,15 @@ public final class LocalStorage {
     }
 
     /**
-     * Deletes all files from directory geocode with the given prefix.
+     * Deletes all files from geocode cache directory with the given prefix.
      *
      * @param geocode
      *            The geocode identifying the cache directory
      * @param prefix
      *            The filename prefix
      */
-    public static void deleteFilesWithPrefix(@NonNull final String geocode, @NonNull final String prefix) {
-        final File[] filesToDelete = getFilesWithPrefix(geocode, prefix);
-        if (filesToDelete == null) {
-            return;
-        }
-        for (final File file : filesToDelete) {
-            try {
-                if (!FileUtils.delete(file)) {
-                    Log.w("LocalStorage.deleteFilesPrefix: Can't delete file " + file.getName());
-                }
-            } catch (final Exception e) {
-                Log.e("LocalStorage.deleteFilesPrefix", e);
-            }
-        }
-    }
-
-    /**
-     * Get an array of all files of the geocode directory starting with
-     * the given filenamePrefix.
-     *
-     * @param geocode
-     *            The geocode identifying the cache data directory
-     * @param filenamePrefix
-     *            The prefix of the files
-     * @return File[] the array of files starting with filenamePrefix in geocode directory
-     */
-    public static File[] getFilesWithPrefix(@NonNull final String geocode, @NonNull final String filenamePrefix) {
-        final FilenameFilter filter = new FilenameFilter() {
-            @Override
-            public boolean accept(final File dir, @NonNull final String filename) {
-                return filename.startsWith(filenamePrefix);
-            }
-        };
-        return getStorageDir(geocode).listFiles(filter);
+    public static void deleteCacheFilesWithPrefix(@NonNull final String geocode, @NonNull final String prefix) {
+        FileUtils.deleteFilesWithPrefix(getGeocacheDataDirectory(geocode), prefix);
     }
 
     /**
@@ -425,19 +200,13 @@ public final class LocalStorage {
      */
     @NonNull
     public static List<File> getStorages() {
-
         final String extStorage = Environment.getExternalStorageDirectory().getAbsolutePath();
         final List<File> storages = new ArrayList<>();
         storages.add(new File(extStorage));
         final File file = new File(FILE_SYSTEM_TABLE_PATH);
         if (file.canRead()) {
-            Reader fr = null;
-            BufferedReader br = null;
             try {
-                fr = new InputStreamReader(new FileInputStream(file), CharEncoding.UTF_8);
-                br = new BufferedReader(fr);
-                String str = br.readLine();
-                while (str != null) {
+                for (final String str : org.apache.commons.io.FileUtils.readLines(file, CharEncoding.UTF_8)) {
                     if (str.startsWith("dev_mount")) {
                         final String[] tokens = StringUtils.split(str);
                         if (tokens.length >= 3) {
@@ -450,16 +219,124 @@ public final class LocalStorage {
                             }
                         }
                     }
-                    str = br.readLine();
                 }
             } catch (final IOException e) {
                 Log.e("Could not get additional mount points for user content. " +
                         "Proceeding with external storage only (" + extStorage + ")", e);
-            } finally {
-                IOUtils.closeQuietly(fr);
-                IOUtils.closeQuietly(br);
             }
         }
         return storages;
     }
+
+    @NonNull
+    public static File getExternalPublicCgeoDirectory() {
+        final File cgeo = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), CGEO_DIRNAME);
+        FileUtils.mkdirs(cgeo);
+        return cgeo;
+    }
+
+    @NonNull
+    public static File getFieldNotesDirectory() {
+        return new File(getExternalPublicCgeoDirectory(), FIELD_NOTES_DIR_NAME);
+    }
+
+    @NonNull
+    public static File getLegacyFieldNotesDirectory() {
+        return new File(Environment.getExternalStorageDirectory(), FIELD_NOTES_DIR_NAME);
+    }
+
+    @NonNull
+    public static File getDefaultGpxDirectory() {
+        return new File(getExternalPublicCgeoDirectory(), GPX_DIR_NAME);
+    }
+
+    @NonNull
+    public static File getGpxExportDirectory() {
+        return new File(Settings.getGpxExportDir());
+    }
+
+    @NonNull
+    public static File getGpxImportDirectory() {
+        return new File(Settings.getGpxImportDir());
+    }
+
+    @NonNull
+    public static File getLegacyGpxDirectory() {
+        return new File(Environment.getExternalStorageDirectory(), GPX_DIR_NAME);
+    }
+
+    @NonNull
+    public static File getLegacyExternalCgeoDirectory() {
+        return new File(Environment.getExternalStorageDirectory(), LEGACY_CGEO_DIR_NAME);
+    }
+
+    @NonNull
+    public static File getBackupDirectory() {
+        return new File(getExternalPublicCgeoDirectory(), BACKUP_DIR_NAME);
+    }
+
+    @NonNull
+    public static File getGeocacheDataDirectory() {
+        return new File(getExternalPrivateCgeoDirectory(), GEOCACHE_DATA_DIR_NAME);
+    }
+
+    @NonNull
+    public static File getLocalSpoilersDirectory() {
+        return new File(getExternalPublicCgeoDirectory(), GEOCACHE_PHOTOS_DIR_NAME);
+    }
+
+    @NonNull
+    public static File getLegacyLocalSpoilersDirectory() {
+        return new File(Environment.getExternalStorageDirectory(), GEOCACHE_PHOTOS_DIR_NAME);
+    }
+
+    @NonNull
+    public static List<File> getMapDirectories() {
+        final List<File> folders = new ArrayList<>();
+        for (final File dir : getStorages()) {
+            folders.add(new File(dir, "mfmaps"));
+            folders.add(new File(new File(dir, "Locus"), "mapsVector"));
+            folders.add(new File(dir, CGEO_DIRNAME));
+        }
+        return folders;
+    }
+
+    @NonNull
+    public static File getLogPictureDirectory() {
+        return new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), CGEO_DIRNAME);
+    }
+
+    public static void changeExternalPrivateCgeoDir(final SettingsActivity fromActivity, final String newExtDir) {
+        if (StringUtils.equals(getExternalPrivateCgeoDirectory().getAbsolutePath(), newExtDir)) {
+            Settings.setExternalPrivateCgeoDirectory(newExtDir);
+            return;
+        }
+        final ProgressDialog dialog = ProgressDialog.show(fromActivity, fromActivity.getString(R.string.init_datadirmove_datadirmove), fromActivity.getString(R.string.init_datadirmove_running), true, false);
+        AndroidRxUtils.bindActivity(fromActivity, Observable.defer(new Callable<Observable<Boolean>>() {
+            @Override
+            public Observable<Boolean> call() {
+                final File newDataDir = new File(newExtDir, GEOCACHE_DATA_DIR_NAME);
+                final File currentDataDir = new File(getExternalPrivateCgeoDirectory(), GEOCACHE_DATA_DIR_NAME);
+                Log.i("Moving geocache data to " + newDataDir.getAbsolutePath());
+                for (final File geocacheDataDir : currentDataDir.listFiles()) {
+                    FileUtils.moveTo(geocacheDataDir, newDataDir);
+                }
+
+                Settings.setExternalPrivateCgeoDirectory(newExtDir);
+                Log.i("Ext private c:geo dir was moved to " + newExtDir);
+
+                externalPrivateCgeoDirectory = new File(newExtDir);
+                return Observable.just(true);
+            }
+        }).subscribeOn(Schedulers.io())).subscribe(new Consumer<Boolean>() {
+            @Override
+            public void accept(final Boolean success) {
+                dialog.dismiss();
+                final String message = success ? fromActivity.getString(R.string.init_datadirmove_success) : fromActivity.getString(R.string.init_datadirmove_failed);
+                Dialogs.message(fromActivity, R.string.init_datadirmove_datadirmove, message);
+            }
+        });
+    }
+
+
 }

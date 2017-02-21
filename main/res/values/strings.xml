@@ -436,6 +436,7 @@
     <string name="settings_title_map_data">Map Data</string>
     <string name="settings_title_map_content">Map Content</string>
     <string name="settings_title_gpx">GPX</string>
+    <string name="settings_title_data_dir">Geocache Data</string>
     <string name="settings_title_basicmembers">Options for Basic Members</string>
     <string name="settings_title_navigation">Navigation</string>
     <string name="settings_summary_navigation">Choose preferred navigation methods and select external navigation apps.</string>
@@ -585,6 +586,8 @@
     <string name="init_map_directory_description">Directory with offline maps</string>
     <string name="init_gpx_exportdir">GPX Export Directory</string>
     <string name="init_gpx_importdir">GPX Import Directory</string>
+    <string name="init_dataDir">Select Geocache data directory</string>
+    <string name="init_dataDir_note">You may choose to store the geocache data (e.g. spoilers, log images, …) on emulated or real external storage. Depending on your device if a real external SD card is available or not.</string>
     <string name="init_maptrail">Show Trail</string>
     <string name="init_summary_maptrail">Show trail on Map</string>
     <string name="init_share_after_export">Open share menu after GPX export</string>
@@ -610,6 +613,10 @@
     <string name="init_dbmove_running">Moving Database</string>
     <string name="init_dbmove_success">Successfully moved the database.</string>
     <string name="init_dbmove_failed">Failed to move database</string>
+    <string name="init_datadirmove_datadirmove">Moving Geocache data directory</string>
+    <string name="init_datadirmove_running">Moving Geocache data directory</string>
+    <string name="init_datadirmove_success">Successfully moved Geocache data directory.</string>
+    <string name="init_datadirmove_failed">Failed to move Geocache data directory</string>
     <string name="init_plain_logs">Plain Logs</string>
     <string name="init_summary_plain_logs">Display log entries without colors</string>
     <string name="init_use_native_ua">Android browser</string>

@@ -71,7 +71,6 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
-import java.util.regex.Pattern;
 
 import io.reactivex.Observable;
 import io.reactivex.Single;
@@ -85,6 +84,10 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
 public class DataStore {
+
+    public static final String DB_FILE_NAME = "data";
+    public static final String DB_FILE_NAME_BACKUP = "cgeo.sqlite";
+    public static final String DB_FILE_CORRUPTED_EXTENSION = ".corrupted";
 
     private DataStore() {
         // utility class
@@ -170,7 +173,7 @@ public class DataStore {
     private static volatile SQLiteDatabase database = null;
     private static final int dbVersion = 72;
     public static final int customListIdOffset = 10;
-    @NonNull private static final String dbName = "data";
+
     @NonNull private static final String dbTableCaches = "cg_caches";
     @NonNull private static final String dbTableLists = "cg_lists";
     @NonNull private static final String dbTableCachesLists = "cg_caches_lists";
@@ -374,11 +377,11 @@ public class DataStore {
      */
     private static void recreateDatabase(final DbHelper dbHelper) {
         final File dbPath = databasePath();
-        final File corruptedPath = new File(LocalStorage.getStorage(), dbPath.getName() + ".corrupted");
-        if (LocalStorage.copy(dbPath, corruptedPath)) {
+        final File corruptedPath = new File(LocalStorage.getBackupDirectory(), dbPath.getName() + DB_FILE_CORRUPTED_EXTENSION);
+        if (FileUtils.copy(dbPath, corruptedPath)) {
             Log.i("DataStore.init: renamed " + dbPath + " into " + corruptedPath);
         } else {
-            Log.e("DataStore.init: unable to rename corrupted database");
+            Log.e("DataStore.init: unable to move corrupted database");
         }
         try {
             database = dbHelper.getWritableDatabase();
@@ -400,7 +403,7 @@ public class DataStore {
 
     @NonNull
     public static File getBackupFileInternal() {
-        return new File(LocalStorage.getStorage(), "cgeo.sqlite");
+        return new File(LocalStorage.getBackupDirectory(), DB_FILE_NAME_BACKUP);
     }
 
     public static String backupDatabaseInternal() {
@@ -411,7 +414,7 @@ public class DataStore {
 
         final File target = getBackupFileInternal();
         closeDb();
-        final boolean backupDone = LocalStorage.copy(databasePath(), target);
+        final boolean backupDone = FileUtils.copy(databasePath(), target);
         init();
 
         if (!backupDone) {
@@ -441,7 +444,7 @@ public class DataStore {
 
                 final File source = databasePath();
                 final File target = databaseAlternatePath();
-                if (!LocalStorage.copy(source, target)) {
+                if (!FileUtils.copy(source, target)) {
                     Log.e("Database could not be moved to " + target);
                     init();
                     return Observable.just(false);
@@ -467,7 +470,7 @@ public class DataStore {
 
     @NonNull
     private static File databasePath(final boolean internal) {
-        return new File(internal ? LocalStorage.getInternalDbDirectory() : LocalStorage.getExternalDbDirectory(), dbName);
+        return new File(internal ? LocalStorage.getInternalDbDirectory() : LocalStorage.getExternalDbDirectory(), DB_FILE_NAME);
     }
 
     @NonNull
@@ -488,7 +491,7 @@ public class DataStore {
 
         final File sourceFile = getBackupFileInternal();
         closeDb();
-        final boolean restoreDone = LocalStorage.copy(sourceFile, databasePath());
+        final boolean restoreDone = FileUtils.copy(sourceFile, databasePath());
         init();
 
         if (restoreDone) {
@@ -743,7 +746,7 @@ public class DataStore {
                         try {
                             // Add new indices and remove obsolete cache files
                             createIndices(db);
-                            removeObsoleteCacheDirectories();
+                            removeObsoleteGeocacheDataDirectories();
                         } catch (final Exception e) {
                             Log.e("Failed to upgrade to ver. 59", e);
                         }
@@ -908,7 +911,7 @@ public class DataStore {
          * introduced with release on 2012-05-24.
          */
         private static void removeDoubleUnderscoreMapFiles() {
-            final File[] geocodeDirs = LocalStorage.getStorage().listFiles();
+            final File[] geocodeDirs = LocalStorage.getGeocacheDataDirectory().listFiles();
             if (ArrayUtils.isNotEmpty(geocodeDirs)) {
                 final FilenameFilter filter = new FilenameFilter() {
                     @Override
@@ -931,7 +934,7 @@ public class DataStore {
          * Remove empty directories created in the secondary storage area.
          */
         private static void removeSecEmptyDirs() {
-            final File[] files = LocalStorage.getStorageSec().listFiles();
+            final File[] files = LocalStorage.getLegacyExternalCgeoDirectory().listFiles();
             if (ArrayUtils.isNotEmpty(files)) {
                 for (final File file : files) {
                     if (file.isDirectory()) {
@@ -959,16 +962,15 @@ public class DataStore {
     /**
      * Remove obsolete cache directories in c:geo private storage.
      */
-    public static void removeObsoleteCacheDirectories() {
-        final File[] files = LocalStorage.getStorage().listFiles();
+    public static void removeObsoleteGeocacheDataDirectories() {
+        final File[] files = LocalStorage.getGeocacheDataDirectory().listFiles();
         if (ArrayUtils.isNotEmpty(files)) {
-            final Pattern oldFilePattern = Pattern.compile("^(GC|TB|EC|GK|O)[A-Z0-9]{2,7}$");
             final SQLiteStatement select = PreparedStatement.CHECK_IF_PRESENT.getStatement();
             final List<File> toRemove = new ArrayList<>(files.length);
             for (final File file : files) {
                 if (file.isDirectory()) {
                     final String geocode = file.getName();
-                    if (oldFilePattern.matcher(geocode).find()) {
+                    if (LocalStorage.GEOCACHE_FILE_PATTERN.matcher(geocode).find()) {
                         synchronized (select) {
                             select.bindString(1, geocode);
                             if (select.simpleQueryForLong() == 0) {
@@ -2476,7 +2478,7 @@ public class DataStore {
                     deleteOrphanedRecords();
 
                     // Remove the obsolete "_others" directory where the user avatar used to be stored.
-                    FileUtils.deleteDirectory(LocalStorage.getStorageDir("_others"));
+                    FileUtils.deleteDirectory(LocalStorage.getGeocacheDataDirectory("_others"));
 
                     final int version = Version.getVersionCode(context);
                     if (version > -1) {
@@ -2603,7 +2605,7 @@ public class DataStore {
 
             // Delete cache directories
             for (final String geocode : geocodes) {
-                FileUtils.deleteDirectory(LocalStorage.getStorageDir(geocode));
+                FileUtils.deleteDirectory(LocalStorage.getGeocacheDataDirectory(geocode));
             }
         }
     }

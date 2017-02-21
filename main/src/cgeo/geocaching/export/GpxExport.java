@@ -5,6 +5,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.utils.AsyncTaskWithProgress;
 import cgeo.geocaching.utils.EnvironmentUtils;
 import cgeo.geocaching.utils.FileUtils;
@@ -119,7 +120,7 @@ public class GpxExport extends AbstractExport {
         }
 
         private File getExportFile() {
-            return FileUtils.getUniqueNamedFile(new File(Settings.getGpxExportDir(), fileName));
+            return FileUtils.getUniqueNamedFile(new File(LocalStorage.getGpxExportDirectory(), fileName));
         }
 
         @Override
@@ -136,7 +137,7 @@ public class GpxExport extends AbstractExport {
             final File exportFile = getExportFile();
             BufferedWriter writer = null;
             try {
-                final File exportLocation = new File(Settings.getGpxExportDir());
+                final File exportLocation = LocalStorage.getGpxExportDirectory();
                 FileUtils.mkdirs(exportLocation);
 
                 writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(exportFile), CharEncoding.UTF_8));

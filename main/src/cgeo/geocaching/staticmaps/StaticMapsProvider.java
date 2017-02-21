@@ -53,7 +53,7 @@ public final class StaticMapsProvider {
     }
 
     private static File getMapFile(final String geocode, final String prefix, final boolean createDirs) {
-        return LocalStorage.getStorageFile(geocode, MAP_FILENAME_PREFIX + prefix, false, createDirs);
+        return LocalStorage.getGeocacheDataFile(geocode, MAP_FILENAME_PREFIX + prefix, false, createDirs);
     }
 
     private static Completable checkDownloadPermission(final Completable ifPermitted) {
@@ -116,7 +116,7 @@ public final class StaticMapsProvider {
                         Log.w("Static maps download API warning: " + warning);
                     }
                     final File file = getMapFile(geocode, prefix, true);
-                    if (LocalStorage.saveEntityToFile(httpResponse, file)) {
+                    if (FileUtils.saveEntityToFile(httpResponse, file)) {
                         // Delete image if it has no contents
                         final long fileSize = file.length();
                         if (fileSize < MIN_MAP_IMAGE_BYTES) {
@@ -162,7 +162,7 @@ public final class StaticMapsProvider {
      * Deletes and download all Waypoints static maps.
      */
     private static Completable refreshAllWpStaticMaps(final Geocache cache, final int width, final int height) {
-        LocalStorage.deleteFilesWithPrefix(cache.getGeocode(), MAP_FILENAME_PREFIX + WAYPOINT_PREFIX);
+        LocalStorage.deleteCacheFilesWithPrefix(cache.getGeocode(), MAP_FILENAME_PREFIX + WAYPOINT_PREFIX);
         final List<Completable> downloaders = new LinkedList<>();
         for (final Waypoint waypoint : cache.getWaypoints()) {
             downloaders.add(storeWaypointStaticMap(cache.getGeocode(), width, height, waypoint));

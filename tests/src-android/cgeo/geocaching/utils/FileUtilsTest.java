@@ -1,17 +1,16 @@
 package cgeo.geocaching.utils;
 
-import junit.framework.TestCase;
+import cgeo.geocaching.storage.LocalStorage;
 
 import java.io.File;
 import java.io.IOException;
 
-import cgeo.geocaching.storage.LocalStorage;
-
+import junit.framework.TestCase;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class FileUtilsTest extends TestCase {
 
-    final File testDir = LocalStorage.getStorageDir("automated-tests");
+    final File testDir = LocalStorage.getGeocacheDataDirectory("automated-tests");
 
     public void testGetUniqueNamedFile() throws IOException {
         FileUtils.deleteDirectory(testDir);
@@ -47,4 +46,12 @@ public class FileUtilsTest extends TestCase {
         FileUtils.deleteDirectory(testDir);
         assertThat(testDir).doesNotExist();
     }
+
+    public static void testGetExtension() {
+        assertThat(FileUtils.getExtension("foo/bar/xyzzy")).isEqualTo("");
+        assertThat(FileUtils.getExtension("foo/bar/xyzzy.jpg")).isEqualTo(".jpg");
+        assertThat(FileUtils.getExtension("foo/bar/xyzzy.jpeg")).isEqualTo(".jpeg");
+        assertThat(FileUtils.getExtension("foo/bar/xyzzy.mjpeg")).isEqualTo("");
+    }
+
 }
