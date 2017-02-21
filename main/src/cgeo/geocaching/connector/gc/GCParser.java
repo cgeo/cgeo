@@ -256,16 +256,12 @@ public final class GCParser {
             // found it
             cache.setFound(row.contains("/images/icons/16/found.png") || row.contains("uxUserLogDate\" class=\"Success\""));
 
-            // id
-            String result = TextUtils.getMatch(row, GCConstants.PATTERN_SEARCH_ID, null);
-            if (result != null) {
-                cache.setCacheId(result);
-                cids.add(cache.getCacheId());
-            }
+            // infer cache id from geocode
+            cids.add(cache.getCacheId());
 
             // favorite count
             try {
-                result = getNumberString(TextUtils.getMatch(row, GCConstants.PATTERN_SEARCH_FAVORITE, false, 1, null, true));
+                final String result = getNumberString(TextUtils.getMatch(row, GCConstants.PATTERN_SEARCH_FAVORITE, false, 1, null, true));
                 if (result != null) {
                     cache.setFavoritePoints(Integer.parseInt(result));
                 }
@@ -436,9 +432,6 @@ public final class GCParser {
 
         // cache geocode
         cache.setGeocode(TextUtils.getMatch(page, GCConstants.PATTERN_GEOCODE, true, cache.getGeocode()));
-
-        // cache id
-        cache.setCacheId(TextUtils.getMatch(page, GCConstants.PATTERN_CACHEID, true, cache.getCacheId()));
 
         // cache guid
         cache.setGuid(TextUtils.getMatch(page, GCConstants.PATTERN_GUID, true, cache.getGuid()));
