@@ -22,7 +22,7 @@ Yes/No
 
 ##### System information:
 ```
-Attach system information here if available (see c:geo menu -> About c:geo -> System)
+Attach system information here if available (see c:geo menu -> About c:geo -> Swipe right to System)
 Keep the apostrophe at beginning and end to have it properly formatted
 ```
 
