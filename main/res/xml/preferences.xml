@@ -812,6 +812,14 @@
                 android:key="@string/pref_dbonsdcard"
                 android:title="@string/init_dbonsdcard" />
         </PreferenceCategory>
+        <PreferenceCategory android:title="@string/settings_title_data_dir" >
+            <ListPreference
+                android:defaultValue="0"
+                android:dialogTitle="@string/init_dataDir"
+                android:key="@string/pref_dataDir"
+                android:title="@string/init_dataDir"
+                android:summary="@string/init_dataDir_note"/>
+        </PreferenceCategory>
         <PreferenceCategory android:title="@string/init_maintenance" >
             <cgeo.geocaching.settings.TextPreference
                 android:layout="@layout/text_preference"

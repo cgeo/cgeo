@@ -2,7 +2,7 @@ package cgeo.geocaching.network;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.storage.LocalStorage;
+import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.RxOkHttpUtils;
@@ -259,14 +259,14 @@ public final class Network {
             return null;
         }
 
-        final String etag = LocalStorage.getSavedHeader(cacheFile, LocalStorage.HEADER_ETAG);
+        final String etag = FileUtils.getSavedHeader(cacheFile, FileUtils.HEADER_ETAG);
         if (etag != null) {
             // The ETag is a more robust check than a timestamp. If we have an ETag, it is enough
             // to identify the right version of the resource.
             return new Parameters("If-None-Match", etag);
         }
 
-        final String lastModified = LocalStorage.getSavedHeader(cacheFile, LocalStorage.HEADER_LAST_MODIFIED);
+        final String lastModified = FileUtils.getSavedHeader(cacheFile, FileUtils.HEADER_LAST_MODIFIED);
         if (lastModified != null) {
             return new Parameters("If-Modified-Since", lastModified);
         }

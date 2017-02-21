@@ -22,10 +22,13 @@ import cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider;
 import cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider.OfflineMapSource;
 import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.maps.routing.RoutingMode;
+import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.playservices.GooglePlayServices;
 import cgeo.geocaching.sensors.MagnetometerAndAccelerometerProvider;
 import cgeo.geocaching.sensors.OrientationProvider;
 import cgeo.geocaching.sensors.RotationProvider;
+import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.utils.CryptUtils;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.FileUtils.FileSelector;
@@ -35,12 +38,12 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Build;
-import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import java.io.File;
+import java.io.FileFilter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -113,7 +116,7 @@ public class Settings {
     }
 
     private static void migrateSettings() {
-        final int latestPreferencesVersion = 2;
+        final int latestPreferencesVersion = 3;
         final int currentVersion = getInt(R.string.pref_settingsversion, 0);
 
         // No need to migrate if we are up to date.
@@ -220,10 +223,58 @@ public class Settings {
             e.putString(getKey(R.string.pref_defaultNavigationTool2), String.valueOf(dnt2));
 
             // defaults for gpx directories
-            e.putString(getKey(R.string.pref_gpxImportDir), getGpxImportDir());
-            e.putString(getKey(R.string.pref_gpxExportDir), getGpxExportDir());
+            e.putString(getKey(R.string.pref_gpxImportDir), LocalStorage.getDefaultGpxDirectory().getPath());
+            e.putString(getKey(R.string.pref_gpxExportDir), LocalStorage.getDefaultGpxDirectory().getPath());
 
             e.putInt(getKey(R.string.pref_settingsversion), 2); // mark migrated
+            e.apply();
+        }
+
+        if (currentVersion < 3) {
+            final Editor e = sharedPrefs.edit();
+
+            Log.i("Moving field-notes");
+            FileUtils.move(LocalStorage.getLegacyFieldNotesDirectory(), LocalStorage.getFieldNotesDirectory());
+
+            Log.i("Moving gpx ex- and import dirs");
+            if (getGpxExportDir().equals(LocalStorage.getLegacyGpxDirectory().getPath())) {
+                e.putString(getKey(R.string.pref_gpxExportDir), LocalStorage.getDefaultGpxDirectory().getPath());
+            }
+            if (getGpxImportDir().equals(LocalStorage.getLegacyGpxDirectory().getPath())) {
+                e.putString(getKey(R.string.pref_gpxImportDir), LocalStorage.getDefaultGpxDirectory().getPath());
+            }
+            FileUtils.move(LocalStorage.getLegacyGpxDirectory(), LocalStorage.getDefaultGpxDirectory());
+
+            Log.i("Moving local spoilers");
+            FileUtils.move(LocalStorage.getLegacyLocalSpoilersDirectory(), LocalStorage.getLocalSpoilersDirectory());
+
+            Log.i("Moving db files");
+            FileUtils.moveTo(new File(LocalStorage.getLegacyExternalCgeoDirectory(), DataStore.DB_FILE_NAME), LocalStorage.getExternalDbDirectory());
+            FileUtils.moveTo(new File(LocalStorage.getLegacyExternalCgeoDirectory(), DataStore.DB_FILE_NAME + DataStore.DB_FILE_CORRUPTED_EXTENSION), LocalStorage.getBackupDirectory());
+            FileUtils.moveTo(new File(LocalStorage.getLegacyExternalCgeoDirectory(), DataStore.DB_FILE_NAME_BACKUP), LocalStorage.getBackupDirectory());
+            FileUtils.moveTo(new File(LocalStorage.getLegacyExternalCgeoDirectory(), DataStore.DB_FILE_NAME_BACKUP + DataStore.DB_FILE_CORRUPTED_EXTENSION), LocalStorage.getBackupDirectory());
+
+            Log.i("Moving geocache data");
+            final FileFilter geocacheDirectories = new FileFilter() {
+                @Override
+                public boolean accept(final File pathname) {
+                    final String name = pathname.getName();
+                    return pathname.isDirectory() &&
+                            (HtmlImage.SHARED.equals(name) || LocalStorage.GEOCACHE_FILE_PATTERN.matcher(name).find());
+                }
+            };
+            final File[] list = LocalStorage.getLegacyExternalCgeoDirectory().listFiles(geocacheDirectories);
+            if (list != null) {
+                for (final File file : list) {
+                    FileUtils.moveTo(file, LocalStorage.getGeocacheDataDirectory());
+                }
+            }
+
+            Log.i("Deleting legacy .cgeo dir");
+            FileUtils.deleteIgnoringFailure(LocalStorage.getLegacyExternalCgeoDirectory());
+
+            e.putString(getKey(R.string.pref_dataDir), LocalStorage.getExternalPrivateCgeoDirectory().getAbsolutePath());
+            e.putInt(getKey(R.string.pref_settingsversion), 3); // mark migrated
             e.apply();
         }
     }
@@ -1009,12 +1060,20 @@ public class Settings {
 
     public static String getGpxExportDir() {
         return getString(R.string.pref_gpxExportDir,
-                Environment.getExternalStorageDirectory().getPath() + "/gpx");
+                LocalStorage.getDefaultGpxDirectory().getPath());
     }
 
     public static String getGpxImportDir() {
         return getString(R.string.pref_gpxImportDir,
-                Environment.getExternalStorageDirectory().getPath() + "/gpx");
+                LocalStorage.getDefaultGpxDirectory().getPath());
+    }
+
+    public static String getExternalPrivateCgeoDirectory() {
+        return getString(R.string.pref_dataDir, null);
+    }
+
+    public static void setExternalPrivateCgeoDirectory(final String extDir) {
+        putString(R.string.pref_dataDir, extDir);
     }
 
     public static boolean getShareAfterExport() {

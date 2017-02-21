@@ -79,7 +79,7 @@ public class StaticMapsProviderTest extends TestCase {
     }
 
     private static void deleteCacheDirectory(final String geocode) {
-        final File cacheDir = LocalStorage.getStorageDir(geocode);
+        final File cacheDir = LocalStorage.getGeocacheDataDirectory(geocode);
         FileUtils.deleteDirectory(cacheDir);
     }
 

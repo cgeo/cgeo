@@ -36,6 +36,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.staticmaps.StaticMapsProvider;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.DataStore.StorageLocation;
+import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.ImageUtils;
@@ -47,7 +48,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Parcelable;
@@ -1872,16 +1872,15 @@ public class Geocache implements IWaypoint {
     }
 
     /**
-     * Add spoilers stored locally in <tt>/sdcard/GeocachePhotos</tt>. If a cache is named GC123ABC, the
-     * directory will be <tt>/sdcard/GeocachePhotos/C/B/GC123ABC/</tt>.
+     * Add spoilers stored locally in <tt>/sdcard/cgeo/GeocachePhotos</tt>. If a cache is named GC123ABC, the
+     * directory will be <tt>/sdcard/cgeo/GeocachePhotos/C/B/GC123ABC/</tt>.
      *
      * @param spoilers the list to add to
      */
     private void addLocalSpoilersTo(final List<Image> spoilers) {
         if (StringUtils.length(geocode) >= 2) {
             final String suffix = StringUtils.right(geocode, 2);
-            final File baseDir = new File(Environment.getExternalStorageDirectory(), "GeocachePhotos");
-            final File lastCharDir = new File(baseDir, suffix.substring(1));
+            final File lastCharDir = new File(LocalStorage.getLocalSpoilersDirectory(), suffix.substring(1));
             final File secondToLastCharDir = new File(lastCharDir, suffix.substring(0, 1));
             final File finalDir = new File(secondToLastCharDir, geocode);
             final File[] files = finalDir.listFiles();

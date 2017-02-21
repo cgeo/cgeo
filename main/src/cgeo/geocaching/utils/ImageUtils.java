@@ -3,6 +3,7 @@ package cgeo.geocaching.utils;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.models.Image;
+import cgeo.geocaching.storage.LocalStorage;
 
 import android.app.Application;
 import android.content.res.Resources;
@@ -16,7 +17,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.ExifInterface;
 import android.net.Uri;
-import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.Html;
@@ -237,7 +237,7 @@ public final class ImageUtils {
     public static File getOutputImageFile() {
         // To be safe, you should check that the SDCard is mounted
         // using Environment.getExternalStorageState() before doing this.
-        final File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "cgeo");
+        final File mediaStorageDir = LocalStorage.getLogPictureDirectory();
 
         // This location works best if you want the created images to be shared
         // between applications and persist after your app has been uninstalled.

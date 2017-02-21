@@ -28,8 +28,8 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
@@ -276,11 +276,11 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
                         final File outputFile = ImageUtils.getOutputImageFile();
                         if (outputFile != null) {
                             output = new FileOutputStream(outputFile);
-                            LocalStorage.copy(input, output);
+                            IOUtils.copy(input, output);
                             image = new Image.Builder().setUrl(outputFile).build();
                         }
-                    } catch (final FileNotFoundException e) {
-                        Log.e("ImageSelectActivity.onStartResult", e);
+                    } catch (final IOException e) {
+                        Log.e("ImageSelectActivity.onActivityResult", e);
                     } finally {
                         IOUtils.closeQuietly(input);
                         IOUtils.closeQuietly(output);

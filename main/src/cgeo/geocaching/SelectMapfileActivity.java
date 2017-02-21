@@ -7,8 +7,6 @@ import cgeo.geocaching.files.SimpleDirChooser;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.LocalStorage;
 
-import org.openintents.intents.FileManagerIntents;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,11 +15,11 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import org.openintents.intents.FileManagerIntents;
 
 public class SelectMapfileActivity extends AbstractFileListActivity<FileSelectionListAdapter> implements IFileSelectionView {
 
@@ -56,7 +54,7 @@ public class SelectMapfileActivity extends AbstractFileListActivity<FileSelectio
                 } catch (final android.content.ActivityNotFoundException ignored) {
                     // OI file manager not available
                     final Intent dirChooser = new Intent(SelectMapfileActivity.this, SimpleDirChooser.class);
-                    dirChooser.putExtra(Intents.EXTRA_START_DIR, LocalStorage.getStorage().getAbsolutePath());
+                    dirChooser.putExtra(Intents.EXTRA_START_DIR, LocalStorage.getExternalPublicCgeoDirectory().getAbsolutePath());
                     startActivityForResult(dirChooser, REQUEST_DIRECTORY);
                 }
             }
@@ -83,13 +81,7 @@ public class SelectMapfileActivity extends AbstractFileListActivity<FileSelectio
 
     @Override
     protected List<File> getBaseFolders() {
-        final List<File> folders = new ArrayList<>();
-        for (final File dir : LocalStorage.getStorages()) {
-            folders.add(new File(dir, "mfmaps"));
-            folders.add(new File(new File(dir, "Locus"), "mapsVector"));
-            folders.add(new File(dir, LocalStorage.CACHE_DIRNAME));
-        }
-        return folders;
+        return LocalStorage.getMapDirectories();
     }
 
     @Override
