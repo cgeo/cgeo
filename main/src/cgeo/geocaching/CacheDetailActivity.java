@@ -1879,7 +1879,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             // TODO: fix layout, then switch back to Android-resource and delete copied one
             // this copy is modified to respect the text color
             RecyclerViewProvider.provideRecyclerView(CacheDetailActivity.this, recyclerView, true, true);
-
+            cache.mergeInventory(genericTrackables, processedBrands);
             final TrackableListAdapter adapterTrackables = new TrackableListAdapter(ListUtils.emptyIfNull(cache.getInventory()), new TrackableListAdapter.TrackableClickListener() {
 
                 @Override
