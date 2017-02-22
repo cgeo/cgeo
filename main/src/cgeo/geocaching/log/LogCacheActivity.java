@@ -791,7 +791,6 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         return tbLogTypes;
     }
 
-
     private void selectLogType() {
         // use a local copy of the possible types, as that one might be modified in the background by the loader
         final List<LogType> possible = new ArrayList<>(possibleLogTypes);
