@@ -127,6 +127,7 @@
     <string translatable="false" name="pref_logtrackablewithoutgeocodeshowcount">logtrackablewithoutgeocodeshowcount</string>
     <string translatable="false" name="pref_settingsversion">settingsversion</string>
     <string translatable="false" name="pref_trackableaction">trackableaction</string>
+    <string translatable="false" name="pref_trackable_inventory_sort">trackableInventorySort</string>
     <string translatable="false" name="pref_shareafterexport">shareafterexport</string>
     <string translatable="false" name="pref_includefoundstatus">includefoundstatus</string>
     <string translatable="false" name="pref_renderthemefile">renderthemefile</string>
