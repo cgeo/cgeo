@@ -267,11 +267,11 @@ public abstract class TokenAuthorizationActivity extends AbstractActivity {
     }
 
     protected String getAuthAuthorize() {
-        return res.getString(R.string.auth_authorize, getAuthTitle());
+        return res.getString(R.string.auth_authorize);
     }
 
     protected String getAuthRegister() {
-        return res.getString(R.string.auth_register, getAuthTitle());
+        return res.getString(R.string.auth_register);
     }
 
     /**

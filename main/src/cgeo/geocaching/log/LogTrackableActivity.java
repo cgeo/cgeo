@@ -586,7 +586,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
                             if (connector.getPreferenceActivity() > 0) {
                                 SettingsActivity.openForScreen(connector.getPreferenceActivity(), LogTrackableActivity.this);
                             } else {
-                                showToast(res.getString(R.string.err_trackable_no_preference_activity, connector.getServiceTitle()));
+                                showToast(res.getString(R.string.err_trackable_no_preference_activity));
                             }
                         }
                     });
