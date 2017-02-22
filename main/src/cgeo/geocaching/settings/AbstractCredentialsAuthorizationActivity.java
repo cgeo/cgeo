@@ -185,15 +185,15 @@ public abstract class AbstractCredentialsAuthorizationActivity extends AbstractA
     }
 
     protected String getAuthCheck() {
-        return res.getString(R.string.auth_check, getAuthTitle());
+        return res.getString(R.string.auth_check);
     }
 
     protected String getAuthCheckAgain() {
-        return res.getString(R.string.auth_check_again, getAuthTitle());
+        return res.getString(R.string.auth_check_again);
     }
 
     protected String getAuthRegister() {
-        return res.getString(R.string.auth_register, getAuthTitle());
+        return res.getString(R.string.auth_register);
     }
 
     /**
