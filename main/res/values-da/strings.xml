@@ -79,6 +79,7 @@
   <string name="log_tb_nothing">Gør intet</string>
   <string name="log_tb_visit">Besøgt</string>
   <string name="log_tb_drop">Læg her</string>
+  <string name="log_tb_sortby">Sortér trackable</string>
   <string name="log_tb_changeall">Ændr alle</string>
   <string name="log_tb_grabbed">Taget fra andet sted</string>
   <string name="log_tb_note">Note</string>
@@ -923,6 +924,7 @@
   <string name="popup_more">Flere detaljer</string>
   <!-- waypoint -->
   <string name="waypoint">Waypoint</string>
+  <string name="waypoint_coordinates">Koordinater</string>
   <string name="waypoint_cache_coordinates">Cacheposition</string>
   <string name="waypoint_custom">Tilpasset</string>
   <string name="waypoint_my_coordinates">Mine koordinater</string>
@@ -955,7 +957,8 @@
   <string name="waypoint_coordinates_uploading_to_website">Sender positionen %s til websitet.</string>
   <string name="waypoint_coordinates_has_been_modified_on_website">Cachepositionen på websitet blev ændret til: %s.</string>
   <string name="waypoint_done">Udført</string>
-  <string name="waypoint_duplicate">Kopier</string>
+  <string name="waypoint_duplicate">Duplikér waypoint</string>
+  <string name="waypoint_duplicated">Waypoint duplikeret</string>
   <string name="waypoint_copy_of">Kopi af</string>
   <string name="search_history">Historik</string>
   <string name="search_history_empty">Ingen tidligere destinationer</string>

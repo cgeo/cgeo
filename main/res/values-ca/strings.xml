@@ -953,7 +953,6 @@
   <string name="waypoint_coordinates_uploading_to_website">S\'estan carregant les coordenades %s a la pàgina web.</string>
   <string name="waypoint_coordinates_has_been_modified_on_website">Les coordenades del catxé a la pàgina web s\'han modificat per: %s.</string>
   <string name="waypoint_done">Fet</string>
-  <string name="waypoint_duplicate">Duplica</string>
   <string name="waypoint_copy_of">Còpia de</string>
   <string name="search_history">Historial</string>
   <string name="search_history_empty">No hi ha destinacions prèvies</string>

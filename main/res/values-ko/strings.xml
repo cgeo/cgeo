@@ -932,7 +932,6 @@
   <string name="waypoint_coordinates_uploading_to_website">좌표 %s 를 웹사이트에 올리는 중</string>
   <string name="waypoint_coordinates_has_been_modified_on_website">웹사이트의 캐시 좌표가 %s로 변경되었습니다.</string>
   <string name="waypoint_done">완료</string>
-  <string name="waypoint_duplicate">복제</string>
   <string name="waypoint_copy_of">복사 :</string>
   <string name="search_history">기록</string>
   <string name="search_history_empty">이전 목적지가 없습니다.</string>

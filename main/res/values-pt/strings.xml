@@ -957,7 +957,6 @@
   <string name="waypoint_coordinates_uploading_to_website">A enviar as coordenadas para o site %s.</string>
   <string name="waypoint_coordinates_has_been_modified_on_website">As coordenadas da cache no site foram modificados para: %s.</string>
   <string name="waypoint_done">Feito</string>
-  <string name="waypoint_duplicate">Duplicar</string>
   <string name="waypoint_copy_of">Cópia de</string>
   <string name="search_history">Histórico</string>
   <string name="search_history_empty">Não existem destinos recentes</string>

@@ -943,7 +943,6 @@
   <string name="waypoint_coordinates_uploading_to_website">Tiek augšupielādētas koordinātas %s mājas lapā.</string>
   <string name="waypoint_coordinates_has_been_modified_on_website">Slēpņa koordinātas mājas lapā tika modificētas uz: %s.</string>
   <string name="waypoint_done">Izpildīts</string>
-  <string name="waypoint_duplicate">Dublicēt</string>
   <string name="waypoint_copy_of">Kopija</string>
   <string name="search_history">Vēsture</string>
   <string name="search_history_empty">Nav iepriekšējo galamērķu</string>

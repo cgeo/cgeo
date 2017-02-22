@@ -957,7 +957,6 @@
   <string name="waypoint_coordinates_uploading_to_website">Bezig met uploaden van coördinaten %s naar de website.</string>
   <string name="waypoint_coordinates_has_been_modified_on_website">Cachecoördinaten op de website zijn aangepast naar: %s.</string>
   <string name="waypoint_done">Afgerond</string>
-  <string name="waypoint_duplicate">Duplicaat</string>
   <string name="waypoint_copy_of">Kopie van</string>
   <string name="search_history">Geschiedenis</string>
   <string name="search_history_empty">Geen eerdere bestemmingen</string>

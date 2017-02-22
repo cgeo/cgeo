@@ -937,7 +937,6 @@
   <string name="waypoint_coordinates_uploading_to_website">Webサイトに座標 %s をアップロードしています。</string>
   <string name="waypoint_coordinates_has_been_modified_on_website">Webサイトのキャッシュ座標は %s に修正されました。</string>
   <string name="waypoint_done">決定</string>
-  <string name="waypoint_duplicate">複製</string>
   <string name="waypoint_copy_of">コピー ～ </string>
   <string name="search_history">履歴</string>
   <string name="search_history_empty">履歴はありません</string>

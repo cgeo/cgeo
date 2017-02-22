@@ -957,7 +957,6 @@
   <string name="waypoint_coordinates_uploading_to_website">Încărcare coordonate %s în site.</string>
   <string name="waypoint_coordinates_has_been_modified_on_website">Coordonatele geocutiei de pe site au fost modificate la: %s.</string>
   <string name="waypoint_done">Gata</string>
-  <string name="waypoint_duplicate">Duplică</string>
   <string name="waypoint_copy_of">Copie după</string>
   <string name="search_history">Istoric</string>
   <string name="search_history_empty">Nu există destinaţii</string>

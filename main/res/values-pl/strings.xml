@@ -79,6 +79,7 @@
   <string name="log_tb_nothing">Nie rób nic</string>
   <string name="log_tb_visit">Odwiedzony</string>
   <string name="log_tb_drop">Odłożony</string>
+  <string name="log_tb_sortby">Sortuj przedmioty podróżne</string>
   <string name="log_tb_changeall">Zmień wszystko</string>
   <string name="log_tb_grabbed">Znalazłem gdzieś indziej</string>
   <string name="log_tb_note">Notatka</string>
@@ -927,6 +928,7 @@
   <string name="popup_more">Więcej szczegółów</string>
   <!-- waypoint -->
   <string name="waypoint">Punkt nawigacji</string>
+  <string name="waypoint_coordinates">Współrzędne</string>
   <string name="waypoint_cache_coordinates">Współrzędne skrzynki</string>
   <string name="waypoint_custom">Zdefiniowane przez użytkownika</string>
   <string name="waypoint_my_coordinates">Moje współrzędne</string>
@@ -959,7 +961,8 @@
   <string name="waypoint_coordinates_uploading_to_website">Wysyłanie współrzędnych %s do strony WWW.</string>
   <string name="waypoint_coordinates_has_been_modified_on_website">Współrzędne skrzynki zostały zmienione na stronie WWW na: %s.</string>
   <string name="waypoint_done">Wykonane</string>
-  <string name="waypoint_duplicate">Duplikat</string>
+  <string name="waypoint_duplicate">Duplikuj punkt orientacyjny</string>
+  <string name="waypoint_duplicated">Punkt orientacyjny zduplikowany</string>
   <string name="waypoint_copy_of">Kopia</string>
   <string name="search_history">Historia</string>
   <string name="search_history_empty">Brak poprzednich celów</string>
@@ -1505,4 +1508,9 @@
   <string name="cache_list_remove_from">Usuń z listy</string>
   <string name="list_list_headline">Lista:</string>
   <string name="cache_store_list">Zapisz na liście</string>
+  <plurals name="extract_waypoints_result">
+    <item quantity="one">%d punkt orientacyjny został wyciągnięty</item>
+    <item quantity="few">%d punkty orientacyjne zostały wyciągnięte</item>
+    <item quantity="other">%d punktów orientacyjnych zostało wyciągniętych</item>
+  </plurals>
 </resources>

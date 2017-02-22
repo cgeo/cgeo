@@ -950,7 +950,6 @@
   <string name="waypoint_coordinates_uploading_to_website">Caricamento delle coordinate %s su web</string>
   <string name="waypoint_coordinates_has_been_modified_on_website">Le coordinate cache su web sono state modificate in: %s.</string>
   <string name="waypoint_done">Fatto</string>
-  <string name="waypoint_duplicate">Duplicato</string>
   <string name="waypoint_copy_of">Copia di</string>
   <string name="search_history">Cronologia</string>
   <string name="search_history_empty">Nessuna precedente destinazione</string>
