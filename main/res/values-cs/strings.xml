@@ -966,7 +966,6 @@
   <string name="waypoint_coordinates_uploading_to_website">Nahrávání %s na web</string>
   <string name="waypoint_coordinates_has_been_modified_on_website">Souřadnice keše na webu byly změněny na %s.</string>
   <string name="waypoint_done">Hotovo</string>
-  <string name="waypoint_duplicate">Duplikovat</string>
   <string name="waypoint_copy_of">Kopie</string>
   <string name="search_history">Historie</string>
   <string name="search_history_empty">Žádné předchozí destinace</string>

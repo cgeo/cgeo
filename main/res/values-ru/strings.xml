@@ -945,7 +945,6 @@
   <string name="waypoint_coordinates_uploading_to_website">Загрузка координат %s на сайт.</string>
   <string name="waypoint_coordinates_has_been_modified_on_website">Координаты тайника на сайте были изменены на %s.</string>
   <string name="waypoint_done">Готово</string>
-  <string name="waypoint_duplicate">Дублировать</string>
   <string name="waypoint_copy_of">Копия</string>
   <string name="search_history">История</string>
   <string name="search_history_empty">История поиска пуста</string>

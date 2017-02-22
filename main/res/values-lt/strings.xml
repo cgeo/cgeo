@@ -951,7 +951,6 @@
   <string name="waypoint_coordinates_uploading_to_website">Įkeliamos %s koordinatės į svetainę.</string>
   <string name="waypoint_coordinates_has_been_modified_on_website">Slėptuvės koordinatės svetainėje buvo pakeistos į: %s.</string>
   <string name="waypoint_done">Atlikta</string>
-  <string name="waypoint_duplicate">Sukurti kopiją</string>
   <string name="waypoint_copy_of">Kopija</string>
   <string name="search_history">Istorija</string>
   <string name="search_history_empty">Nėra ankstesnių kelionės tikslų</string>

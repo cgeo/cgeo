@@ -957,7 +957,6 @@
   <string name="waypoint_coordinates_uploading_to_website">Laddar upp koordinaterna %s till hemsidan.</string>
   <string name="waypoint_coordinates_has_been_modified_on_website">Cachens koordinater på hemsidan har ändrats till: %s.</string>
   <string name="waypoint_done">Klar</string>
-  <string name="waypoint_duplicate">Duplicera</string>
   <string name="waypoint_copy_of">Kopia av</string>
   <string name="search_history">Historik</string>
   <string name="search_history_empty">Inga tidigare målpunkter</string>

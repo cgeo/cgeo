@@ -21,7 +21,7 @@
   <string name="mega">Mega-tapahtuman kätkö</string>
   <string name="giga">Giga-tapahtuman kätkö</string>
   <string name="earth">Geokohde</string>
-  <string name="cito">Kätkö sisään roska ulos (CITO) -tapahtuma</string>
+  <string name="cito">Siivoustapahtuma (CITO)</string>
   <string name="webcam">Web-kamerakätkö</string>
   <string name="virtual">Virtuaalikätkö</string>
   <string name="wherigo">Wherigo-kätkö</string>
@@ -906,6 +906,7 @@
   <string name="popup_more">Lisätietoja</string>
   <!-- waypoint -->
   <string name="waypoint">Reittipiste</string>
+  <string name="waypoint_coordinates">Koordinaatit</string>
   <string name="waypoint_cache_coordinates">Kätkön koordinaatit</string>
   <string name="waypoint_custom">Oma</string>
   <string name="waypoint_my_coordinates">Sijaintini</string>
@@ -937,7 +938,6 @@
   <string name="waypoint_coordinates_uploading_to_website">Ladataan koordinaatteja %s nettisivulle.</string>
   <string name="waypoint_coordinates_has_been_modified_on_website">Kätkökoordinaatit nettisivulla on muutettu: %s.</string>
   <string name="waypoint_done">Valmis</string>
-  <string name="waypoint_duplicate">Monista</string>
   <string name="waypoint_copy_of">Kopio</string>
   <string name="search_history">Historiatiedot</string>
   <string name="search_history_empty">Ei aikaisempia kohteita</string>

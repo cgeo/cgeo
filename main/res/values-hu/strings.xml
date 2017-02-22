@@ -955,7 +955,6 @@
   <string name="waypoint_coordinates_uploading_to_website">Koordináták feltöltése %s weboldalra.</string>
   <string name="waypoint_coordinates_has_been_modified_on_website">A %s koordinátáinak módosítása megtörtént a weboldalon.</string>
   <string name="waypoint_done">Kész</string>
-  <string name="waypoint_duplicate">Duplikálás</string>
   <string name="waypoint_copy_of">Másolt</string>
   <string name="search_history">Előzmény</string>
   <string name="search_history_empty">Nincsenek előző célpontok</string>

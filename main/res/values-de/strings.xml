@@ -79,6 +79,7 @@
   <string name="log_tb_nothing">Keine Aktion</string>
   <string name="log_tb_visit">Besucht</string>
   <string name="log_tb_drop">Abgelegt</string>
+  <string name="log_tb_sortby">Trackables sortieren</string>
   <string name="log_tb_changeall">Alle ändern</string>
   <string name="log_tb_grabbed">Woanders mitgenommen</string>
   <string name="log_tb_note">Bemerkung</string>
@@ -957,7 +958,8 @@
   <string name="waypoint_coordinates_uploading_to_website">Setze %s auf der Webseite</string>
   <string name="waypoint_coordinates_has_been_modified_on_website">Koordinaten wurden auf der Webseite geändert: %s</string>
   <string name="waypoint_done">Fertig</string>
-  <string name="waypoint_duplicate">Duplizieren</string>
+  <string name="waypoint_duplicate">Wegpunkt duplizieren</string>
+  <string name="waypoint_duplicated">Wegpunkt dupliziert</string>
   <string name="waypoint_copy_of">Kopie von</string>
   <string name="search_history">Verlauf</string>
   <string name="search_history_empty">Keine Ziele bisher</string>
@@ -1446,7 +1448,7 @@
   <string name="init_summary_geokrety_account">Kein Konto konfiguriert.</string>
   <string name="init_geokrety_register_ok">Anmeldung OK</string>
   <string name="init_geokrety_register_fail">Anmeldung fehlgeschlagen</string>
-  <string name="init_geokrety_description">Autorisiere c:geo auf GeoKrety.org zuzugreifen, um GeoKrety-Trackables zu loggen.</string>
+  <string name="init_geokrety_description">Autorisiere c:geo, auf GeoKrety.org zuzugreifen, um GeoKrety-Trackables zu loggen.</string>
   <string name="init_geokrety_cache_description">GeoKretyMap.org stellt zwischengespeicherte Daten für GeoKrety Trackables zur Verfügung.\nDie Daten enthalten mehr Infos zu GeoKretys wie z. B. „Beschreibung“ oder „Vermisst“-Status.\n\nDie Daten sind nicht immer aktuell!\nPositionen: ~30min.\nBeschreibungen: ~24h.</string>
   <string name="init_geokrety_cache">Benutze GeoKretyMap.org</string>
   <string name="init_geokrety_userid">Nutzer-ID: %s</string>
@@ -1494,4 +1496,8 @@
   <string name="cache_list_remove_from">Aus Liste entfernen</string>
   <string name="list_list_headline">Listen:</string>
   <string name="cache_store_list">In Liste speichern</string>
+  <plurals name="extract_waypoints_result">
+    <item quantity="one">%d Wegpunkt extrahiert</item>
+    <item quantity="other">%d Wegpunkte extrahiert</item>
+  </plurals>
 </resources>

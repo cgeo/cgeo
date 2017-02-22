@@ -795,7 +795,6 @@
   <string name="waypoint_coordinates_uploading_to_website">Nalaganje koordinat %s na spletno stran.</string>
   <string name="waypoint_coordinates_has_been_modified_on_website">Koordinate na spletni strani so bile nastavljene na: %s.</string>
   <string name="waypoint_done">Končano</string>
-  <string name="waypoint_duplicate">Kopiraj</string>
   <string name="waypoint_copy_of">Kopija od</string>
   <string name="search_history">Zgodovina</string>
   <string name="search_history_empty">Ni prejšnjih destinacij</string>

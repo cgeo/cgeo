@@ -79,6 +79,7 @@
   <string name="log_tb_nothing">Ne rien faire</string>
   <string name="log_tb_visit">A visité</string>
   <string name="log_tb_drop">Déposé ici</string>
+  <string name="log_tb_sortby">Trier les objets voyageurs</string>
   <string name="log_tb_changeall">Tout modifier</string>
   <string name="log_tb_grabbed">Pris ailleurs</string>
   <string name="log_tb_note">Note</string>
@@ -957,7 +958,8 @@
   <string name="waypoint_coordinates_uploading_to_website">Envoi des coordonnées %s sur le site web.</string>
   <string name="waypoint_coordinates_has_been_modified_on_website">Les coordonnées de la cache ont été modifiées sur le site web en : %s</string>
   <string name="waypoint_done">Ok</string>
-  <string name="waypoint_duplicate">Dupliquer</string>
+  <string name="waypoint_duplicate">Dupliquer le point de passage</string>
+  <string name="waypoint_duplicated">Point de passage dupliqué</string>
   <string name="waypoint_copy_of">Copie de</string>
   <string name="search_history">Historique</string>
   <string name="search_history_empty">Aucune destination récente</string>
@@ -1494,4 +1496,8 @@
   <string name="cache_list_remove_from">Supprimer de la liste</string>
   <string name="list_list_headline">Listes :</string>
   <string name="cache_store_list">Stocker dans la liste</string>
+  <plurals name="extract_waypoints_result">
+    <item quantity="one">%d point de passage extrait</item>
+    <item quantity="other">%d points de passage extraits</item>
+  </plurals>
 </resources>

@@ -945,7 +945,6 @@
   <string name="waypoint_coordinates_uploading_to_website">Subiendo coordenadas %s a la web.</string>
   <string name="waypoint_coordinates_has_been_modified_on_website">Las coordenadas del caché en la web modificadas a: %s.</string>
   <string name="waypoint_done">Hecho</string>
-  <string name="waypoint_duplicate">Duplicar</string>
   <string name="waypoint_copy_of">Copia de</string>
   <string name="search_history">Historial</string>
   <string name="search_history_empty">No hay destinos anteriores</string>
