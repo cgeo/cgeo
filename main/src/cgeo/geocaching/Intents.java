@@ -40,6 +40,7 @@ public class Intents {
     public static final String EXTRA_TITLE = PREFIX + "title";
     public static final String EXTRA_MAP_MODE = PREFIX + "mapMode";
     public static final String EXTRA_LIVE_ENABLED = PREFIX + "liveEnabled";
+    public static final String EXTRA_STORED_ENABLED = PREFIX + "storedEnabled";
 
     public static final String EXTRA_DOWNLOAD = PREFIX + "download";
 

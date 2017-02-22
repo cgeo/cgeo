@@ -208,6 +208,7 @@ public class NewMap extends AbstractActionBarActivity {
             this.targetGeocode = mapOptions.mapState.getTargetGeocode();
             this.lastNavTarget = mapOptions.mapState.getLastNavTarget();
             mapOptions.isLiveEnabled = mapOptions.mapState.isLiveEnabled();
+            mapOptions.isStoredEnabled = mapOptions.mapState.isStoredEnabled();
         } else if (mapOptions.searchResult != null) {
             final Viewport viewport = DataStore.getBounds(mapOptions.searchResult.getGeocodes());
 
@@ -343,9 +344,14 @@ public class NewMap extends AbstractActionBarActivity {
                 return true;
             case R.id.menu_map_live:
                 mapOptions.isLiveEnabled = !mapOptions.isLiveEnabled;
+                if (mapOptions.isLiveEnabled) {
+                    mapOptions.isStoredEnabled = true;
+                }
+
                 if (mapOptions.mapMode == MapMode.LIVE) {
                     Settings.setLiveMap(mapOptions.isLiveEnabled);
                 }
+                caches.enableStoredLayers(mapOptions.isStoredEnabled);
                 caches.handleLiveLayers(mapOptions.isLiveEnabled);
                 ActivityMixin.invalidateOptionsMenu(this);
                 if (mapOptions.mapMode != MapMode.SINGLE) {
@@ -699,7 +705,9 @@ public class NewMap extends AbstractActionBarActivity {
             caches = new CachesBundle(this.mapView, this.mapHandlers);
         }
 
-        // Live map
+        // Stored enabled map
+        caches.enableStoredLayers(mapOptions.isStoredEnabled);
+        // Live enabled map
         caches.handleLiveLayers(mapOptions.isLiveEnabled);
 
         // Position layer
@@ -825,7 +833,7 @@ public class NewMap extends AbstractActionBarActivity {
     }
 
     private MapState prepareMapState() {
-        return new MapState(MapsforgeUtils.toGeopoint(mapView.getModel().mapViewPosition.getCenter()), mapView.getModel().mapViewPosition.getZoomLevel(), followMyLocation, false, targetGeocode, lastNavTarget, mapOptions.isLiveEnabled);
+        return new MapState(MapsforgeUtils.toGeopoint(mapView.getModel().mapViewPosition.getCenter()), mapView.getModel().mapViewPosition.getZoomLevel(), followMyLocation, false, targetGeocode, lastNavTarget, mapOptions.isLiveEnabled, mapOptions.isStoredEnabled);
     }
 
     private void centerMap(final Geopoint geopoint) {

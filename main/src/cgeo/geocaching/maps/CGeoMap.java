@@ -894,7 +894,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
             return null;
         }
         final GeoPointImpl mapCenter = mapView.getMapViewCenter();
-        return new MapState(mapCenter.getCoords(), mapView.getMapZoomLevel(), followMyLocation, overlayCaches.getCircles(), null, null, mapOptions.isLiveEnabled);
+        return new MapState(mapCenter.getCoords(), mapView.getMapZoomLevel(), followMyLocation, overlayCaches.getCircles(), null, null, mapOptions.isLiveEnabled, false);
     }
 
     private void savePrefs() {
