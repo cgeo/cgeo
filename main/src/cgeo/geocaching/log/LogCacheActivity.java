@@ -86,13 +86,13 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     private static final int SELECT_IMAGE = 101;
 
     private enum TrackableComparator {
-        TRACKABLE_COMPARATOR_TRACKCODE(0,R.string.trackable_code, new Comparator<TrackableLog>() {
+        TRACKABLE_COMPARATOR_TRACKCODE(0, R.string.trackable_code, new Comparator<TrackableLog>() {
             @Override
             public int compare(final TrackableLog lhs, final TrackableLog rhs) {
                 return TextUtils.COLLATOR.compare(lhs.trackCode, rhs.trackCode);
             }
         }),
-        TRACKABLE_COMPARATOR_NAME(1,R.string.trackable_name, new Comparator<TrackableLog>() {
+        TRACKABLE_COMPARATOR_NAME(1, R.string.trackable_name, new Comparator<TrackableLog>() {
             @Override
             public int compare(final TrackableLog lhs,  final TrackableLog rhs) {
                 return TextUtils.COLLATOR.compare(lhs.name, rhs.name);
