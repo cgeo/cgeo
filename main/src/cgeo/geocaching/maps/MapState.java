@@ -14,8 +14,9 @@ public class MapState implements Parcelable {
     private final String targetGeocode;
     private final Geopoint lastNavTarget;
     private final boolean liveEnabled;
+    private final boolean storedEnabled;
 
-    public MapState(final Geopoint center, final int zoomLevel, final boolean followMyLocation, final boolean showCircles, final String targetGeocode, final Geopoint lastNavTarget, final boolean liveEnabled) {
+    public MapState(final Geopoint center, final int zoomLevel, final boolean followMyLocation, final boolean showCircles, final String targetGeocode, final Geopoint lastNavTarget, final boolean liveEnabled, final boolean storedEnabled) {
         this.center = center;
         this.zoomLevel = zoomLevel;
         this.followMyLocation = followMyLocation;
@@ -23,6 +24,7 @@ public class MapState implements Parcelable {
         this.targetGeocode = targetGeocode;
         this.lastNavTarget = lastNavTarget;
         this.liveEnabled = liveEnabled;
+        this.storedEnabled = storedEnabled;
     }
 
     public MapState(final Parcel in) {
@@ -33,6 +35,7 @@ public class MapState implements Parcelable {
         targetGeocode = in.readString();
         lastNavTarget = in.readParcelable(Geopoint.class.getClassLoader());
         liveEnabled = in.readInt() > 0;
+        storedEnabled = in.readInt() > 0;
     }
 
     public Geopoint getCenter() {
@@ -63,6 +66,10 @@ public class MapState implements Parcelable {
         return liveEnabled;
     }
 
+    public boolean isStoredEnabled() {
+        return storedEnabled;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -77,6 +84,7 @@ public class MapState implements Parcelable {
         dest.writeString(targetGeocode);
         dest.writeParcelable(lastNavTarget, PARCELABLE_WRITE_RETURN_VALUE);
         dest.writeInt(liveEnabled ? 1 : 0);
+        dest.writeInt(storedEnabled ? 1 : 0);
     }
 
     public static final Parcelable.Creator<MapState> CREATOR = new Parcelable.Creator<MapState>() {

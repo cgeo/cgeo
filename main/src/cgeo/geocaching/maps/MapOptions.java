@@ -19,6 +19,7 @@ public class MapOptions {
 
     public MapMode mapMode;
     public boolean isLiveEnabled;
+    public boolean isStoredEnabled;
     public SearchResult searchResult;
     public String geocode;
     public Geopoint coords;
@@ -30,6 +31,7 @@ public class MapOptions {
         if (extras != null) {
             mapMode = (MapMode) extras.get(Intents.EXTRA_MAP_MODE);
             isLiveEnabled = extras.getBoolean(Intents.EXTRA_LIVE_ENABLED, false);
+            isStoredEnabled = extras.getBoolean(Intents.EXTRA_STORED_ENABLED, false);
             searchResult = extras.getParcelable(Intents.EXTRA_SEARCH);
             geocode = extras.getString(Intents.EXTRA_GEOCODE);
             coords = extras.getParcelable(Intents.EXTRA_COORDS);
@@ -38,6 +40,7 @@ public class MapOptions {
             title = extras.getString(Intents.EXTRA_TITLE);
         } else {
             mapMode = MapMode.LIVE;
+            isStoredEnabled = true;
             isLiveEnabled = Settings.isLiveMap();
         }
         if (StringUtils.isBlank(title)) {
@@ -54,6 +57,7 @@ public class MapOptions {
 
     public MapOptions() {
         mapMode = MapMode.LIVE;
+        isStoredEnabled = true;
         isLiveEnabled = Settings.isLiveMap();
     }
 
@@ -75,6 +79,7 @@ public class MapOptions {
         final Intent intent = new Intent(context, cls);
         intent.putExtra(Intents.EXTRA_MAP_MODE, mapMode);
         intent.putExtra(Intents.EXTRA_LIVE_ENABLED, isLiveEnabled);
+        intent.putExtra(Intents.EXTRA_STORED_ENABLED, isStoredEnabled);
         intent.putExtra(Intents.EXTRA_SEARCH, searchResult);
         intent.putExtra(Intents.EXTRA_GEOCODE, geocode);
         intent.putExtra(Intents.EXTRA_COORDS, coords);

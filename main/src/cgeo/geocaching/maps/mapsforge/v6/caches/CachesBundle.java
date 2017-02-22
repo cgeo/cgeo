@@ -110,10 +110,10 @@ public class CachesBundle {
 
     public void handleLiveLayers(final boolean enable) {
         if (enable) {
-            final SeparatorLayer separator1 = this.separators.get(STORED_SEPARATOR);
-            this.storedOverlay = new StoredCachesOverlay(STORED_OVERLAY_ID, this.geoEntries, this.mapView, separator1, this.mapHandlers);
-            final SeparatorLayer separator2 = this.separators.get(LIVE_SEPARATOR);
-            this.liveOverlay = new LiveCachesOverlay(LIVE_OVERLAY_ID, this.geoEntries, this.mapView, separator2, this.mapHandlers);
+            if (this.liveOverlay == null) {
+                final SeparatorLayer separator2 = this.separators.get(LIVE_SEPARATOR);
+                this.liveOverlay = new LiveCachesOverlay(LIVE_OVERLAY_ID, this.geoEntries, this.mapView, separator2, this.mapHandlers);
+            }
         } else {
             // Disable only download, keep stored caches
             if (this.liveOverlay != null) {
@@ -121,6 +121,20 @@ public class CachesBundle {
                 this.liveOverlay = null;
             }
         }
+    }
+
+    /**
+     * Enables the stored cache layer. No disabling again!
+     * @param enable
+     *          true - enable stored layer, false - leave untouched
+     */
+    public void enableStoredLayers(final boolean enable) {
+        if (!enable || this.storedOverlay != null) {
+            return;
+        }
+
+        final SeparatorLayer separator1 = this.separators.get(STORED_SEPARATOR);
+        this.storedOverlay = new StoredCachesOverlay(STORED_OVERLAY_ID, this.geoEntries, this.mapView, separator1, this.mapHandlers);
     }
 
     public void onDestroy() {
