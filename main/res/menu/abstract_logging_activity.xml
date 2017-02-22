@@ -43,6 +43,11 @@
         app:showAsAction="ifRoom|withText">
     </item>
     <item
+        android:id="@+id/menu_sort_trackables_by"
+        android:title="@string/log_tb_sortby"
+        app:showAsAction="ifRoom|withText">
+    </item>
+    <item
         android:id="@+id/clear"
         android:icon="@drawable/ic_menu_delete"
         android:title="@string/log_clear"

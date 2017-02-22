@@ -22,7 +22,23 @@
         android:layout_width="0dip"
         android:layout_height="wrap_content"
         android:layout_weight="2"
-        android:orientation="vertical" >
+        android:orientation="horizontal" >
+        <TextView
+            android:id="@+id/trackcode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:ellipsize="end"
+            android:gravity="left"
+            android:lines="1"
+            android:maxLines="1"
+            android:scrollHorizontally="true"
+            android:textColor="?text_color"
+            android:textIsSelectable="false"
+            android:textSize="14sp"
+            android:layout_marginRight="5dip"
+            tools:ignore="SmallSp"
+            tools:text="tracking code" />
 
         <TextView
             android:id="@+id/name"
@@ -39,21 +55,7 @@
             tools:text="name"
             android:maxLines="1" />
 
-        <TextView
-            android:id="@+id/trackcode"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:ellipsize="end"
-            android:gravity="left"
-            android:lines="1"
-            android:maxLines="1"
-            android:scrollHorizontally="true"
-            android:textColor="?text_color"
-            android:textIsSelectable="false"
-            android:textSize="10sp"
-            tools:ignore="SmallSp"
-            tools:text="tracking code" />
+
 
     </LinearLayout>
 

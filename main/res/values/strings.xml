@@ -85,6 +85,7 @@
     <string name="log_tb_nothing">Do Nothing</string>
     <string name="log_tb_visit">Visited</string>
     <string name="log_tb_drop">Dropped Off</string>
+    <string name="log_tb_sortby">Sort Trackable</string>
     <string name="log_tb_changeall">Change All</string>
     <string name="log_tb_grabbed">Grabbed Somewhere</string>
     <string name="log_tb_note">Note</string>

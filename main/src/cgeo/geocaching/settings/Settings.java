@@ -1032,7 +1032,25 @@ public class Settings {
     public static void setIncludeFoundStatus(final boolean includeFoundStatus) {
         putBoolean(R.string.pref_includefoundstatus, includeFoundStatus);
     }
+    /**
+     * Get Trackable inventory sort method based on the last Trackable inventory sort method.
+     *
+     * @return
+     *          The Trackable Sort Method position previously used.
+     */
+    public static int getTrackableInventorySortMethod() {
+        return getInt(R.string.pref_trackable_inventory_sort, 0);
+    }
 
+    /**
+     * Set Trackable inventory sort method.
+     *
+     * @param trackableSortMethod
+     *          The Trackable Sort Method to remember
+     */
+    public static void setTrackableInventorySortMethod(final int trackableSortMethod) {
+        putInt(R.string.pref_trackable_inventory_sort, trackableSortMethod);
+    }
     /**
      * Obtain Trackable action from the last Trackable log.
      *

@@ -85,6 +85,47 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
 
     private static final int SELECT_IMAGE = 101;
 
+    private enum TrackableComparator {
+        TRACKABLE_COMPARATOR_TRACKCODE(0,R.string.trackable_code, new Comparator<TrackableLog>() {
+            @Override
+            public int compare(final TrackableLog lhs, final TrackableLog rhs) {
+                return TextUtils.COLLATOR.compare(lhs.trackCode, rhs.trackCode);
+            }
+        }),
+        TRACKABLE_COMPARATOR_NAME(1,R.string.trackable_name, new Comparator<TrackableLog>() {
+            @Override
+            public int compare(final TrackableLog lhs,  final TrackableLog rhs) {
+                return TextUtils.COLLATOR.compare(lhs.name, rhs.name);
+            }
+        });
+
+        private final int position;
+        private final int label;
+        private final Comparator<TrackableLog> comparator;
+
+        TrackableComparator(final int position, final int label, final Comparator<TrackableLog> comparator) {
+            this.position = position;
+            this.label = label;
+            this.comparator = comparator;
+        }
+
+        public int getPosition() {
+            return position;
+        }
+        public int getLabel() {
+            return label;
+        }
+
+        public Comparator<TrackableLog> getComparator() {
+            return comparator;
+        }
+
+        public static TrackableComparator findByPosition(final int position) {
+            final TrackableComparator[] comparators = values();
+            return comparators[position];
+        }
+    }
+
     private Geocache cache = null;
     private String geocode = null;
     private String text = null;
@@ -247,15 +288,30 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         });
     }
 
-    private ArrayList<TrackableLog> getSortedTrackables() {
-        final ArrayList<TrackableLog> sortedTrackables = new ArrayList<>(trackables);
-        Collections.sort(sortedTrackables, new Comparator<TrackableLog>() {
+    private void selectTrackableSort() {
+        final Builder alert = new AlertDialog.Builder(this);
+        alert.setTitle(res.getString(R.string.log_tb_sortby));
+        
+        final String[] tbSortLabels = new String[TrackableComparator.values().length];
+        for (final TrackableComparator tc: TrackableComparator.values()) {
+            tbSortLabels[tc.getPosition()] = res.getString(tc.getLabel());
+        }
 
+        alert.setSingleChoiceItems(tbSortLabels, Settings.getTrackableInventorySortMethod() , new OnClickListener() {
             @Override
-            public int compare(final TrackableLog lhs, final TrackableLog rhs) {
-                return TextUtils.COLLATOR.compare(lhs.name, rhs.name);
+            public void onClick(final DialogInterface dialog, final int position) {
+                Settings.setTrackableInventorySortMethod(position);
+                updateTrackablesList();
+                dialog.dismiss();
             }
         });
+        alert.create().show();
+    }
+
+    private ArrayList<TrackableLog> getSortedTrackables() {
+        final int position = Settings.getTrackableInventorySortMethod();
+        final ArrayList<TrackableLog> sortedTrackables = new ArrayList<>(trackables);
+        Collections.sort(sortedTrackables, TrackableComparator.findByPosition(position).getComparator());
         return sortedTrackables;
     }
 
@@ -803,6 +859,9 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
                 return true;
             case R.id.menu_image:
                 selectImage();
+                return true;
+            case R.id.menu_sort_trackables_by:
+                selectTrackableSort();
                 return true;
             case R.id.save:
                 saveLog(true);
