@@ -962,7 +962,7 @@ public class DataStore {
     public static void removeObsoleteCacheDirectories() {
         final File[] files = LocalStorage.getStorage().listFiles();
         if (ArrayUtils.isNotEmpty(files)) {
-            final Pattern oldFilePattern = Pattern.compile("^[GC|TB|EC|GK|O][A-Z0-9]{4,7}$");
+            final Pattern oldFilePattern = Pattern.compile("^(GC|TB|EC|GK|O)[A-Z0-9]{2,7}$");
             final SQLiteStatement select = PreparedStatement.CHECK_IF_PRESENT.getStatement();
             final List<File> toRemove = new ArrayList<>(files.length);
             for (final File file : files) {
