@@ -13,6 +13,7 @@
     · Fix: Locally changed listing coords have been overwritten on refresh\n
     · New: \"Add Waypoint\" button on top of the waypoint list\n
     · Fix: Workaround for faulty devices crashing while editing the personal note\n
+    · New: Sort trackables on logging screen by tracking code (configurable)\n
     \n
   </string>
 </resources>
