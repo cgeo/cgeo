@@ -79,6 +79,7 @@
   <string name="log_tb_nothing">Nu face nimic</string>
   <string name="log_tb_visit">Vizitat</string>
   <string name="log_tb_drop">Lăsat</string>
+  <string name="log_tb_sortby">Sortează obiecte călătoare</string>
   <string name="log_tb_changeall">Schimbă toate</string>
   <string name="log_tb_grabbed">Preluat de undeva</string>
   <string name="log_tb_note">Notă</string>
@@ -357,6 +358,7 @@
   <string name="caches_filter_rating">Cu voturi</string>
   <string name="caches_filter_own_rating">Cu votul tău</string>
   <string name="caches_filter_multi_listing">Afişare multiplă cu statut diferit</string>
+  <string name="caches_filter_own_waypoint">Cu puncte definite de utilizator</string>
   <string name="caches_removing_from_history">Şterge din istoric…</string>
   <string name="caches_clear_offlinelogs">Şterge însemnări stocate local</string>
   <string name="caches_clear_offlinelogs_message">Vrei să ştergi însemnările stocate local?</string>
@@ -463,7 +465,10 @@
   <string name="settings_activate_oc_ro">Activează</string>
   <string name="init_summary_oc_ro">Încarcă geocutii de la opencaching.ro</string>
   <string name="init_oc_ro_description">Autorizează c:geo cu opencaching.ro pentru a putea căuta geocutii şi a putea accesa/filtra pe cele găsite de tine.</string>
+  <string name="init_oc_uk">opencache.uk</string>
   <string name="settings_activate_oc_uk">Activează</string>
+  <string name="init_summary_oc_uk">Încarcă geocutii de la opencache.uk</string>
+  <string name="init_oc_uk_description">Autorizează c:geo cu opencache.uk pentru a putea căuta geocutii şi a putea accesa/filtra pe cele găsite de tine.</string>
   <string name="init_su">Geocaching.su</string>
   <string name="init_summary_su">Încarcă geocutii de la Geocaching.su</string>
   <string name="settings_activate_su">Activează</string>
@@ -684,6 +689,7 @@
   <string name="auth_ocnl">opencaching.nl</string>
   <string name="auth_ocus">opencaching.us</string>
   <string name="auth_ocro">opencaching.ro</string>
+  <string name="auth_ocuk">opencache.uk</string>
   <string name="auth_dialog_completed_oc">c:geo este acum autorizat să comunice cu %s.</string>
   <!-- auth geokrety -->
   <string name="auth_dialog_completed_geokrety">c:geo este acum autorizat să comunice cu %s.</string>
@@ -761,6 +767,7 @@
   <string name="cache_list_text">Listă:</string>
   <string name="cache_list_change">Mută</string>
   <string name="cache_list_unknown">În nici o listă</string>
+  <string name="cache_list_select_last">Ultima selecţie</string>
   <string name="cache_images">Imagini</string>
   <string name="cache_waypoints">Puncte</string>
   <plurals name="waypoints">
@@ -821,6 +828,7 @@
   <string name="cache_menu_around">Cutii din împrejurimi</string>
   <string name="around">Aproximativ %s</string>
   <string name="cache_menu_event">Adaugă la calendar</string>
+  <string name="cache_menu_extract_waypoints">Extrage puncte</string>
   <string name="cache_menu_details">Detalii</string>
   <string name="cache_menu_refresh">Împrospătează</string>
   <string name="cache_menu_share">Distribuie geocutie</string>
@@ -834,6 +842,7 @@
   <string name="cache_menu_android_wear">Android Wear</string>
   <string name="cache_menu_vote">Votează</string>
   <string name="cache_menu_checker">Accesează Geochecker</string>
+  <string name="cache_menu_challenge_checker">Caută provocări</string>
   <string name="cache_menu_ignore">Ignoră geocutia</string>
   <string name="ignore_confirm_title">Atenţie</string>
   <string name="ignore_confirm_message">Ignorarea unei geocutii înseamnă că aceasta nu va mai apărea niciodată atunci când se încarcă date de la geocaching.com. Singura modalitate de a o vedea din nou va fi să dezactivezi ignorarea ei cu ajutorul website-ului.</string>
@@ -926,6 +935,7 @@
   <string name="popup_more">Mai multe detalii</string>
   <!-- waypoint -->
   <string name="waypoint">Punct</string>
+  <string name="waypoint_coordinates">Coordonate</string>
   <string name="waypoint_cache_coordinates">Coordonate cutie</string>
   <string name="waypoint_custom">Personalizat</string>
   <string name="waypoint_my_coordinates">Coordonatele mele</string>
@@ -938,6 +948,7 @@
   <string name="waypoint_edit_title">Modifică punct</string>
   <string name="waypoint_add_title">Adaugă punct</string>
   <string name="waypoint_note">Notă</string>
+  <string name="waypoint_user_note">Notă utilizator</string>
   <string name="waypoint_visited">Vizitat</string>
   <string name="waypoint_save">Salvează</string>
   <string name="waypoint_cancel_edit">Anulează</string>
@@ -957,6 +968,8 @@
   <string name="waypoint_coordinates_uploading_to_website">Încărcare coordonate %s în site.</string>
   <string name="waypoint_coordinates_has_been_modified_on_website">Coordonatele geocutiei de pe site au fost modificate la: %s.</string>
   <string name="waypoint_done">Gata</string>
+  <string name="waypoint_duplicate">Duplică punct</string>
+  <string name="waypoint_duplicated">Punct duplicat</string>
   <string name="waypoint_copy_of">Copie după</string>
   <string name="search_history">Istoric</string>
   <string name="search_history_empty">Nu există destinaţii</string>
@@ -991,8 +1004,10 @@
   <string name="map_strategy_fast">Rapid</string>
   <string name="map_strategy_auto">În funcţie de viteză</string>
   <string name="map_strategy_detailed">Detaliat</string>
+  <string name="live_map_notification">Coordonatele pe hartă s-ar putea să nu fie întotdeauna precise!\nCoordontele imprecise sunt marcate cu un cerc portocaliu.\n\nAfişând detaliile cutiei sau salvând cutia se vor obţine întotdeauna coordonatele exacte.</string>
   <string name="map_select_multiple_items">Selectează un element</string>
   <string name="map_routing">Dirijare</string>
+  <string name="map_routing_straight">Linie dreaptă</string>
   <string name="map_routing_walk">Pe jos</string>
   <string name="map_routing_bike">Bicicletă</string>
   <string name="map_routing_car">Maşină</string>
@@ -1381,6 +1396,7 @@
   <string name="status_geocaching_change" tools:ignore="UnusedResources">Modificările recente de pe geocaching.com fac c:geo nefuncţional.\nLucrăm la asta, revin-o.</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Modificările recente de pe geocaching.com fac harta nefuncţională.\nLucrăm la asta, revin-o.</string>
   <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Se efectuează lucrări de întreţinere la geocaching.com.\nEste posibil ca în această perioadă să apară diverse probleme.</string>
+  <string name="status_closeout_warning" tools:ignore="UnusedResources">Se pare că foloseşti o versiune de Android mai veche de 4.0. Versiuni ulterioare de c:geo s-ar putea să nu mai fie disponibile pentru dispozitivul tău.</string>
   <!-- text-to-speech for compass view -->
   <string name="tts_service">Busolă vorbitoare</string>
   <string name="tts_start">Vorbeşte</string>
