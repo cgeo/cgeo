@@ -79,6 +79,7 @@
   <string name="log_tb_nothing">Niets doen</string>
   <string name="log_tb_visit">Bezoek</string>
   <string name="log_tb_drop">Hier droppen</string>
+  <string name="log_tb_sortby">Trackable sorteren</string>
   <string name="log_tb_changeall">Wijzig alles</string>
   <string name="log_tb_grabbed">Ergens gepakt</string>
   <string name="log_tb_note">Notitie</string>
@@ -925,6 +926,7 @@
   <string name="popup_more">Meer details</string>
   <!-- waypoint -->
   <string name="waypoint">Waypoint</string>
+  <string name="waypoint_coordinates">Coördinaten</string>
   <string name="waypoint_cache_coordinates">Cache coördinaten</string>
   <string name="waypoint_custom">Aangepast</string>
   <string name="waypoint_my_coordinates">Mijn coördinaten</string>
@@ -957,6 +959,8 @@
   <string name="waypoint_coordinates_uploading_to_website">Bezig met uploaden van coördinaten %s naar de website.</string>
   <string name="waypoint_coordinates_has_been_modified_on_website">Cachecoördinaten op de website zijn aangepast naar: %s.</string>
   <string name="waypoint_done">Afgerond</string>
+  <string name="waypoint_duplicate">Dubbel waypoint</string>
+  <string name="waypoint_duplicated">Waypoint gedupliceerd</string>
   <string name="waypoint_copy_of">Kopie van</string>
   <string name="search_history">Geschiedenis</string>
   <string name="search_history_empty">Geen eerdere bestemmingen</string>
@@ -1493,4 +1497,8 @@
   <string name="cache_list_remove_from">Verwijder uit lijst</string>
   <string name="list_list_headline">Lijsten:</string>
   <string name="cache_store_list">Opslaan in lijst</string>
+  <plurals name="extract_waypoints_result">
+    <item quantity="one">%d waypoint geëxtraheerd</item>
+    <item quantity="other">%d waypoints geëxtraheerd</item>
+  </plurals>
 </resources>

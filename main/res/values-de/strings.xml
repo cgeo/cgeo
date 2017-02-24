@@ -926,6 +926,7 @@
   <string name="popup_more">Mehr Details</string>
   <!-- waypoint -->
   <string name="waypoint">Wegpunkt</string>
+  <string name="waypoint_coordinates">Koordinaten</string>
   <string name="waypoint_cache_coordinates">Cache-Koordinaten</string>
   <string name="waypoint_custom">Benutzerdefiniert</string>
   <string name="waypoint_my_coordinates">Meine Koordinaten</string>

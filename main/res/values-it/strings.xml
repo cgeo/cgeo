@@ -79,6 +79,7 @@
   <string name="log_tb_nothing">Non fare nulla</string>
   <string name="log_tb_visit">Visitato</string>
   <string name="log_tb_drop">Lasciato</string>
+  <string name="log_tb_sortby">Ordinamento Trackable</string>
   <string name="log_tb_changeall">Cambia tutto</string>
   <string name="log_tb_grabbed">Preso da qualche parte</string>
   <string name="log_tb_note">Nota</string>
@@ -918,6 +919,7 @@
   <string name="popup_more">Altri dettagli</string>
   <!-- waypoint -->
   <string name="waypoint">Waypoint</string>
+  <string name="waypoint_coordinates">Coordinate</string>
   <string name="waypoint_cache_coordinates">Coordinate cache</string>
   <string name="waypoint_custom">Custom</string>
   <string name="waypoint_my_coordinates">Coordinate attuali</string>
@@ -950,6 +952,8 @@
   <string name="waypoint_coordinates_uploading_to_website">Caricamento delle coordinate %s su web</string>
   <string name="waypoint_coordinates_has_been_modified_on_website">Le coordinate cache su web sono state modificate in: %s.</string>
   <string name="waypoint_done">Fatto</string>
+  <string name="waypoint_duplicate">Duplica waypoint</string>
+  <string name="waypoint_duplicated">Waypoint duplicato</string>
   <string name="waypoint_copy_of">Copia di</string>
   <string name="search_history">Cronologia</string>
   <string name="search_history_empty">Nessuna precedente destinazione</string>
@@ -1485,4 +1489,8 @@
   <string name="cache_list_remove_from">Rimuovi dalla lista</string>
   <string name="list_list_headline">Liste:</string>
   <string name="cache_store_list">Salva nella lista</string>
+  <plurals name="extract_waypoints_result">
+    <item quantity="one">%d waypoint estratto</item>
+    <item quantity="other">%d waypoint estratti</item>
+  </plurals>
 </resources>
