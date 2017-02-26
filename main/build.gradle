@@ -65,7 +65,7 @@ android {
 			testProguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt', '../tests/proguard-project.txt'
 
             // code coverage
-            testCoverageEnabled true
+            testCoverageEnabled isContinuousIntegrationServer()
         }
         nightly {
             def nightlyName = System.getenv('NB') // NB, NB1, ...
@@ -434,6 +434,13 @@ def gitCommitId() {
         standardOutput = stdout
     }
     return stdout.toString().trim()
+}
+
+/*
+ * checker whether this is a local build or a CI server build
+ */
+def isContinuousIntegrationServer() {
+    return System.getenv('BUILD_NUMBER') != null
 }
 
 /*
