@@ -496,11 +496,6 @@ public class Settings {
     }
 
     public static Set<Integer> getLastSelectedLists() {
-        // only remember the last selected lists over a short period of time
-        final long lastSelectionTimeMillis = getLong(R.string.pref_last_selected_lists_time, 0);
-        if (System.currentTimeMillis() - lastSelectionTimeMillis > 600 * 1000) {
-            return Collections.emptySet();
-        }
         final Set<Integer> lastSelectedLists = new HashSet<>();
         for (final String lastSelectedListString : getStringList(R.string.pref_last_selected_lists, StringUtils.EMPTY)) {
             try {
@@ -515,7 +510,6 @@ public class Settings {
      */
     public static void setLastSelectedLists(final Set<Integer> lastSelectedLists) {
         putStringList(R.string.pref_last_selected_lists, lastSelectedLists);
-        putLong(R.string.pref_last_selected_lists_time, System.currentTimeMillis());
     }
 
     public static void setWebNameCode(final String name, final String code) {
