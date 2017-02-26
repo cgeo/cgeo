@@ -437,7 +437,7 @@ def gitCommitId() {
 }
 
 /*
- * checker whether this is a local build or a CI server build
+ * check whether this is a local build or a CI server build
  */
 def isContinuousIntegrationServer() {
     return System.getenv('BUILD_NUMBER') != null
