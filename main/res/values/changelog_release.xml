@@ -7,6 +7,7 @@
     · Fix: Missing visual separation in gallery\n
     · Fix: Don\'t delete logs on refresh error\n
     · Fix: Crash on some devices when editing or saving personal note\n
+    · Fix: Sometimes wrong geokrety name was shown\n
     \n
     <b>2017.02.07:</b>\n
     · Fix: Calendar time recognition\n
