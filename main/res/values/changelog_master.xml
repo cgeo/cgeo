@@ -2,18 +2,5 @@
 <resources>
   <!-- changelog for the master branch -->
   <string name="changelog_master" translatable="false">
-    <b>Next feature release:</b>\n
-    · New: Link to project-gc.com challenge checker for mystery caches having challenge in their title\n
-    · New: New waypoint handling to make sure, that no user defined waypoint data is overwritten when refreshing the cache from server\n
-    · Info: Waypoint projection on server defined waypoints no longer possible to avoid conflicts (Use \"Duplicate Waypoint\" to create a user defined waypoint instead)\n
-    · New: Function to extract waypoints from cache description\n
-    · Fix: Do not store website cookies with Google backup to avoid login problems after version upgrade or reinstallation\n
-    · New: Have a button \"Previous selection\" in list selection while saving a cache\n
-    · New: Allow long press on \"Store\" icon to directly save cache to previously selected lists\n
-    · Fix: Locally changed listing coords have been overwritten on refresh\n
-    · New: \"Add Waypoint\" button on top of the waypoint list\n
-    · Fix: Workaround for faulty devices crashing while editing the personal note\n
-    · New: Sort trackables on logging screen by tracking code (configurable)\n
-    \n
   </string>
 </resources>
