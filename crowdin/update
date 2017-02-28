@@ -4,7 +4,6 @@
 #
 # This script updates 
 #   main/res/values/strings.xml
-#   cgeo-calendar/res/values/strings.xml
 #   cgeo-contacts/res/values/strings.xml
 # in crowdin by uploading the files from master to crowdin.
 #
@@ -40,13 +39,11 @@ sleep 5
 
 # update files on target branch
 update_file main/res/values/strings.xml cgeo/strings.xml
-update_file cgeo-calendar/res/values/strings.xml cgeo-calendar/strings.xml
 update_file cgeo-contacts/res/values/strings.xml cgeo-contacts/strings.xml
 
 # for master, update global files as well
 if [ $CURRENT_BRANCH = master ]; then
     BRANCH_TARGET=
     update_file main/res/values/strings.xml cgeo/strings.xml
-    update_file cgeo-calendar/res/values/strings.xml cgeo-calendar/strings.xml
     update_file cgeo-contacts/res/values/strings.xml cgeo-contacts/strings.xml
 fi

@@ -1,6 +1,5 @@
 package cgeo.geocaching.utils;
 
-import cgeo.calendar.CalendarAddon;
 import cgeo.contacts.ContactsAddon;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
@@ -101,9 +100,6 @@ public final class SystemInformation {
 
     private static void appendAddons(final StringBuilder body) {
         final List<String> addons = new ArrayList<>(2);
-        if (CalendarAddon.isAvailable()) {
-            addons.add("calendar");
-        }
         if (ContactsAddon.isAvailable()) {
             addons.add("contacts");
         }

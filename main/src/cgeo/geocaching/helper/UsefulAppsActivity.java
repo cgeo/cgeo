@@ -15,7 +15,6 @@ import butterknife.ButterKnife;
 public final class UsefulAppsActivity extends AbstractActionBarActivity {
 
     private static final HelperApp[] HELPER_APPS = {
-            new HelperApp(R.string.helper_calendar_title, R.string.helper_calendar_description, R.drawable.cgeo, "cgeo.calendar"),
             new HelperApp(R.string.helper_sendtocgeo_title, R.string.helper_sendtocgeo_description, R.drawable.cgeo, "http://send2.cgeo.org"),
             new HelperApp(R.string.helper_contacts_title, R.string.helper_contacts_description, R.drawable.cgeo, "cgeo.contacts"),
             new HelperApp(R.string.helper_wear_title, R.string.helper_wear_description, R.drawable.helper_wear, "com.javadog.cgeowear"),

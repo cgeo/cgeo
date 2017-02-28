@@ -1143,9 +1143,6 @@
     <string name="license_dismiss">Dismiss</string>
 
     <!-- helpers -->
-    <string name="helper_calendar_title">c:geo calendar plugin</string>
-    <string name="helper_calendar_missing">c:geo calendar plugin not installed.</string>
-    <string name="helper_calendar_description">Enables you to export event caches to the calendar on your device.</string>
     <string name="helper_calendar_pastevent_title">Past event</string>
     <string name="helper_calendar_pastevent_question">The event date is in the past. Add it anyway?</string>
     <string name="helper_sendtocgeo_title">Send to c:geo</string>
@@ -1574,5 +1571,8 @@
         <item quantity="one">%d waypoint extracted</item>
         <item quantity="other">%d waypoints extracted</item>
     </plurals>
+
+    <!-- calendar adder -->
+    <string name="event_fail">Failed to add event cache to calendar</string>
 
 </resources>
