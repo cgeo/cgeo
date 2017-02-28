@@ -6,7 +6,6 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -108,7 +107,7 @@ class CalendarEntry {
         return description.toString();
     }
 
-    private void addEntryToCalendarInternal(final Activity activity) {
+    private void addEntryToCalendarInternal(final Context context) {
         final Date eventDate = parseDate();
         final String description = parseDescription();
 
@@ -129,15 +128,14 @@ class CalendarEntry {
         if (StringUtils.isNotEmpty(coords)) {
             intent.putExtra(CalendarContract.Events.EVENT_LOCATION, coords);
         }
-        activity.startActivity(intent);
+        context.startActivity(intent);
     }
 
-    void addEntryToCalendar(final Activity activity) {
+    void addEntryToCalendar(final Context context) {
         try {
-            addEntryToCalendarInternal(activity);
+            addEntryToCalendarInternal(context);
         } catch (final Exception e) {
-            showToast(activity, R.string.event_fail);
-
+            showToast(context, R.string.event_fail);
             Log.e("addEntryToCalendar", e);
         }
     }
