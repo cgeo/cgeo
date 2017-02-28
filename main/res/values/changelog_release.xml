@@ -2,7 +2,7 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-    <b>Next bugfix release (Beta version):</b>\n
+    <b>Next legacy release:</b>\n
     · Fix: Missing ellipsis of long cache names in list\n
     · Fix: Missing visual separation in gallery\n
     · Fix: Don\'t delete logs on refresh error\n
