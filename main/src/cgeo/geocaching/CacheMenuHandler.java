@@ -1,8 +1,8 @@
 package cgeo.geocaching;
 
-import cgeo.calendar.CalendarAddon;
 import cgeo.geocaching.apps.navi.NavigationAppFactory;
 import cgeo.geocaching.apps.navi.NavigationSelectionActionProvider;
+import cgeo.geocaching.calendar.CalendarAdder;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.AbstractUIFactory;
@@ -75,7 +75,7 @@ public final class CacheMenuHandler extends AbstractUIFactory {
                 }
                 return false;
             case R.id.menu_calendar:
-                CalendarAddon.addToCalendarWithIntent(activity, cache);
+                CalendarAdder.addToCalendar(activity, cache);
                 return true;
 
             default:

@@ -1,6 +1,5 @@
 package cgeo.geocaching;
 
-import cgeo.calendar.CalendarAddon;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.AbstractViewPagerActivity;
 import cgeo.geocaching.activity.INavigationSource;
@@ -8,6 +7,7 @@ import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.apps.cachelist.MapsMeCacheListApp;
 import cgeo.geocaching.apps.navi.NavigationAppFactory;
 import cgeo.geocaching.apps.navi.NavigationSelectionActionProvider;
+import cgeo.geocaching.calendar.CalendarAdder;
 import cgeo.geocaching.command.MoveToListAndRemoveFromOthersCommand;
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.connector.ConnectorFactory;
@@ -552,7 +552,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 }
                 return true;
             case R.id.menu_calendar:
-                CalendarAddon.addToCalendarWithIntent(this, cache);
+                CalendarAdder.addToCalendar(this, cache);
                 return true;
             default:
                 break;
@@ -2067,7 +2067,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                         switch (menuItem.getItemId()) {
                             // detail fields
                             case R.id.menu_calendar:
-                                CalendarAddon.addToCalendarWithIntent(CacheDetailActivity.this, cache);
+                                CalendarAdder.addToCalendar(CacheDetailActivity.this, cache);
                                 actionMode.finish();
                                 return true;
                             // handle clipboard actions in base
