@@ -4,6 +4,7 @@ import cgeo.contacts.ContactsAddon;
 import cgeo.geocaching.CacheListActivity;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
+import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.UserAction.Context;
 import cgeo.geocaching.connector.capability.ISearchByCenter;
 import cgeo.geocaching.connector.capability.ISearchByFinder;
@@ -18,6 +19,7 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.log.LogCacheActivity;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.functions.Action1;
 
 import android.support.annotation.NonNull;
@@ -293,6 +295,14 @@ public abstract class AbstractConnector implements IConnector {
                 }
             }));
         }
+        actions.add(new UserAction(R.string.copy_to_clipboard, new Action1<UserAction.Context>() {
+
+            @Override
+            public void call(final UserAction.Context context) {
+                ClipboardUtils.copyToClipboard(context.userName);
+                ActivityMixin.showToast(context.activity,R.string.clipboard_copy_ok);
+            }
+        }));
         return actions;
     }
 
