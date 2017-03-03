@@ -160,9 +160,13 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
                     return;
                 }
             } else if (uriHost.endsWith("geokrety.org")) {
-                brand = tbTrackingCode.brand;
-                trackingCode = tbTrackingCode.trackingCode;
-                geocode = trackingCode;
+                brand = TrackableBrand.GEOKRETY;
+
+                // If geocode isn't found, try to find by Tracking Code
+                if (geocode == null && !tbTrackingCode.isEmpty()) {
+                    trackingCode = tbTrackingCode.trackingCode;
+                    geocode = tbTrackingCode.trackingCode;
+                }
             }
         }
 
