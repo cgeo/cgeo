@@ -300,7 +300,7 @@ public abstract class AbstractConnector implements IConnector {
             @Override
             public void call(final UserAction.Context context) {
                 ClipboardUtils.copyToClipboard(context.userName);
-                ActivityMixin.showToast(context.activity,R.string.clipboard_copy_ok);
+                ActivityMixin.showToast(context.activity, R.string.clipboard_copy_ok);
             }
         }));
         return actions;
