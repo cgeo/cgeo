@@ -102,8 +102,8 @@ allprojects {
 			resolutionStrategy {
 				componentSelection {
 					all { ComponentSelection selection ->
-						boolean rejected = ['alpha', 'beta', 'rc', 'cr', 'm'].any { qualifier ->
-							selection.candidate.version ==~ /(?i).*[.-]${qualifier}[.\d-]*/
+						boolean rejected = ['alpha', 'beta', 'rc', 'cr', 'm', 'pr'].any { qualifier ->
+							selection.candidate.version.contains(qualifier)
 						}
 						// allow beta version of androidsvg
 						if (selection.candidate.group == 'com.caverock') {
