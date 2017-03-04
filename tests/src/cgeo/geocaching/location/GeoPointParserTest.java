@@ -29,15 +29,18 @@ public class GeoPointParserTest extends TestCase {
         assertThat(expected.distanceTo(actual)).isLessThanOrEqualTo(tolerance);
     }
 
-    public static void testCoordinateMissingPart() {
-        // we are trying to parse a _point_, but have only a latitude. Don't accept the numerical part as longitude!
-        Geopoint point = null;
+    private assertParsingFails(final String geopointToParse) {
         try {
-            point = GeopointParser.parse("N 49° 56.031");
+            GeopointParser.parse(geopointToParse);
+            fail();
         } catch (final Geopoint.ParseException e) {
             // expected
         }
-        assertThat(point).isNull();
+    }
+
+    public static void testCoordinateMissingPart() {
+        // we are trying to parse a _point_, but have only a latitude. Don't accept the numerical part as longitude!
+        assertParsingFails("N 49° 56.031");
     }
 
     public static void testCoordinateMissingDegree() {
@@ -79,13 +82,7 @@ public class GeoPointParserTest extends TestCase {
     }
 
     public static void testUnrelatedParts() {
-        Geopoint point = null;
-        try {
-            point = GeopointParser.parse("N51 21.523 and some words in between, so there is no relation E07 02.680");
-        } catch (final Geopoint.ParseException e) {
-            // expected
-        }
-        assertThat(point).isNull();
+        assertParsingFails("N51 21.523 and some words in between, so there is no relation E07 02.680");
     }
 
     public static void testComma() {
