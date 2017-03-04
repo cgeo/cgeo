@@ -3,10 +3,13 @@ package cgeo.geocaching.location;
 import cgeo.geocaching.utils.MatcherWrapper;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Pattern;
 
-import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -14,11 +17,9 @@ import org.apache.commons.lang3.StringUtils;
  */
 class GeopointParser {
 
-    //                                                             (  1  )    (   2    )       ( 3  )       ( 4  )             (        5        )
-    private static final Pattern PATTERN_LAT = Pattern.compile("\\b([NS]|)\\s*(\\d+°?|°)(?:\\s*(\\d+)(?:[.,](\\d+)|(?:'|′)?\\s*(\\d+(?:[.,]\\d+)?)(?:''|\"|″)?)?)?", Pattern.CASE_INSENSITIVE);
-    private static final Pattern PATTERN_LON = Pattern.compile("\\b([WE]|)\\s*(\\d+°?|°)(?:\\s*(\\d+)(?:[.,](\\d+)|(?:'|′)?\\s*(\\d+(?:[.,]\\d+)?)(?:''|\"|″)?)?)?", Pattern.CASE_INSENSITIVE);
-
     private static final Pattern PATTERN_BAD_BLANK = Pattern.compile("(\\d)[,.] (\\d{2,})");
+
+    private static final List<AbstractParser> parsers = Arrays.asList(new MinDecParser(), new MinParser(), new DegParser(), new DMSParser(), new ShortDMSParser(), new DegDecParser(), new ShortDegDecParser(), new UTMParser());
 
     private GeopointParser() {
         // utility class
@@ -26,13 +27,455 @@ class GeopointParser {
 
     private static class ResultWrapper {
         final double result;
-        final int matcherPos;
         final int matcherLength;
 
-        ResultWrapper(final double result, final int matcherPos, final int stringLength) {
+        ResultWrapper(final double result, final int stringLength) {
             this.result = result;
-            this.matcherPos = matcherPos;
             this.matcherLength = stringLength;
+        }
+    }
+
+    private static class GeopointWrapper {
+        final Geopoint geopoint;
+        final int matcherLength;
+
+        GeopointWrapper(final Geopoint geopoint, final int stringLength) {
+            this.geopoint = geopoint;
+            this.matcherLength = stringLength;
+        }
+    }
+
+    /**
+     * Abstract parser for coordinate formats.
+     */
+    private abstract static class AbstractParser {
+        /**
+         * Parses coordinates out of the given string.
+         *
+         * @param text
+         *            the string to be parsed
+         * @return a wrapper with the parsed coordinates and the length of the match, or null if parsing failed
+         */
+        @Nullable
+        abstract GeopointWrapper parse(@NonNull String text);
+
+        /**
+         * Parses latitude or longitude out of the given string.
+         *
+         * @param text
+         *            the string to be parsed
+         * @param latlon
+         *            whether to parse latitude or longitude
+         * @return a wrapper with the parsed latitude/longitude and the length of the match, or null if parsing failed
+         */
+        @Nullable
+        abstract ResultWrapper parse(@NonNull String text, @NonNull LatLon latlon);
+    }
+
+    /**
+     * Abstract parser for coordinates that consist of two syntactic parts: latitude and longitude.
+     */
+    private abstract static class AbstractLatLonParser extends AbstractParser {
+        private final Pattern latPattern;
+        private final Pattern lonPattern;
+        private final Pattern latLonPattern;
+
+        AbstractLatLonParser(@NonNull final Pattern latPattern, @NonNull final Pattern lonPattern, @NonNull final Pattern latLonPattern) {
+            this.latPattern = latPattern;
+            this.lonPattern = lonPattern;
+            this.latLonPattern = latLonPattern;
+        }
+
+        /**
+         * Creates latitude or longitude out of matches groups for sign, degrees, minutes and seconds.
+         *
+         * @param signGroup
+         *            a string representing the sign of the coordinate, ignored if empty
+         * @param degreesGroup
+         *            a string representing the degrees of the coordinate, ignored if empty
+         * @param minutesGroup
+         *            a string representing the minutes of the coordinate, ignored if empty
+         * @param secondsGroup
+         *            a string representing the seconds of the coordinate, ignored if empty
+         * @return the latitude/longitude in decimal degrees, or null if creation failed
+         */
+        @Nullable
+        Double createCoordinate(@NonNull final String signGroup, @NonNull final String degreesGroup, @NonNull final String minutesGroup, @NonNull final String secondsGroup) {
+            try {
+                final double seconds = Double.parseDouble(StringUtils.defaultIfEmpty(secondsGroup.replace(",", "."), "0"));
+                if (seconds >= 60.0) {
+                    return null;
+                }
+
+                final double minutes = Double.parseDouble(StringUtils.defaultIfEmpty(minutesGroup.replace(",", "."), "0"));
+                if (minutes >= 60.0) {
+                    return null;
+                }
+
+                final double degrees = Double.parseDouble(StringUtils.defaultIfEmpty(degreesGroup.replace(",", "."), "0"));
+                final double sign = signGroup.equalsIgnoreCase("S") || signGroup.equalsIgnoreCase("W") ? -1.0 : 1.0;
+                return sign * (degrees + minutes / 60.0 + seconds / 3600.0);
+            } catch (final NumberFormatException ignored) {
+                // We might have encountered too large a number
+            }
+
+            return null;
+        }
+
+        /**
+         * Checks whether is not zero.
+         *
+         * @return true if the given coordinate does not represent a zero.
+         */
+        boolean isNotZero(@Nullable final Double coordinate) {
+            return coordinate == null || Double.doubleToRawLongBits(coordinate) != 0L;
+        }
+
+        /**
+         * Parses latitude or longitude out of a given range of matched groups.
+         *
+         * @param matcher
+         *            the matcher that holds the matches groups
+         * @param first
+         *            the first group to parse
+         * @param last
+         *            the last group to parse
+         * @return the parsed latitude/longitude, or null if parsing failed
+         */
+        @Nullable
+        private Double parseGroups(@NonNull final MatcherWrapper matcher, final int first, final int last) {
+            final List<String> groups = new ArrayList<>(last - first + 1);
+            for (int i = first; i <= last; i++) {
+                groups.add(matcher.group(i));
+            }
+
+            return parse(groups);
+        }
+
+        /**
+         * @see AbstractParser#parse(String)
+         */
+        @Nullable
+        final GeopointWrapper parse(@NonNull final String text) {
+            final String withoutSpaceAfterComma = removeAllSpaceAfterComma(text);
+            final MatcherWrapper matcher = new MatcherWrapper(latLonPattern, withoutSpaceAfterComma);
+            if (matcher.find()) {
+                final int groupCount = matcher.groupCount();
+                final int partCount = groupCount / 2;
+
+                final Double lat = parseGroups(matcher, 1, partCount);
+                if (lat == null || !Geopoint.isValidLatitude(lat)) {
+                    return null;
+                }
+
+                final Double lon = parseGroups(matcher, partCount + 1, groupCount);
+                if (lon == null || !Geopoint.isValidLongitude(lon)) {
+                    return null;
+                }
+
+                return new GeopointWrapper(new Geopoint(lat, lon), matcher.group().length());
+            }
+
+            return null;
+        }
+
+        /**
+         * @see AbstractParser#parse(String, LatLon)
+         */
+        @Nullable
+        final ResultWrapper parse(@NonNull final String text, @NonNull final LatLon latlon) {
+            final MatcherWrapper matcher = new MatcherWrapper(latlon == LatLon.LAT ? latPattern : lonPattern, text);
+            if (matcher.find()) {
+                final Double res = parseGroups(matcher, 1, matcher.groupCount());
+                if (res != null) {
+                    return new ResultWrapper(res, matcher.group().length());
+                }
+            }
+
+            return null;
+        }
+
+        /**
+         * Parses latitude or longitude from matched groups of corresponding pattern.
+         *
+         * @param groups
+         *            the groups matched by latitude/longitude pattern
+         * @return parsed latitude/longitude, or null if parsing failed
+         */
+        @Nullable
+        abstract Double parse(@NonNull List<String> groups);
+    }
+
+    /**
+     * Parser for partial MinDec format: X DD°.
+     */
+    private static final class DegParser extends AbstractLatLonParser {
+        //                                           (  1  )    (  2  )
+        private static final String STRING_LAT = "\\b([NS]?)\\s*(\\d++)°";
+
+        //                                        (   1  )    (  2  )
+        private static final String STRING_LON = "([WEO]?)\\s*(\\d++)\\b°";
+        private static final String STRING_SEPARATOR = "[^\\w'′\"″°]*";
+        private static final Pattern PATTERN_LAT = Pattern.compile(STRING_LAT, Pattern.CASE_INSENSITIVE);
+        private static final Pattern PATTERN_LON = Pattern.compile("\\b" + STRING_LON, Pattern.CASE_INSENSITIVE);
+        private static final Pattern PATTERN_LATLON = Pattern.compile(STRING_LAT + STRING_SEPARATOR + STRING_LON, Pattern.CASE_INSENSITIVE);
+
+        DegParser() {
+            super(PATTERN_LAT, PATTERN_LON, PATTERN_LATLON);
+        }
+
+        /**
+         * @see AbstractLatLonParser#parse(List)
+         */
+        @Override
+        @Nullable
+        Double parse(@NonNull final List<String> groups) {
+            final String group1 = groups.get(0);
+            final String group2 = groups.get(1);
+            final Double result = createCoordinate(group1, group2, "", "");
+            if (StringUtils.isBlank(group1) && isNotZero(result)) {
+                return null;
+            }
+
+            return result;
+        }
+    }
+
+    /**
+     * Parser for partial MinDec format: X DD° MM'.
+     */
+    private static final class MinParser extends AbstractLatLonParser {
+        //                                           (  1  )    (  2  )( 3)    (  4  )
+        private static final String STRING_LAT = "\\b([NS]?)\\s*(\\d++)(°?)\\s*(\\d++)['′]?";
+
+        //                                        (   1  )    (  2  )( 3)    (  4  )
+        private static final String STRING_LON = "([WEO]?)\\s*(\\d++)(°?)\\s*(\\d++)\\b['′]?";
+        private static final String STRING_SEPARATOR = "[^\\w'′\"″°]*";
+        private static final Pattern PATTERN_LAT = Pattern.compile(STRING_LAT, Pattern.CASE_INSENSITIVE);
+        private static final Pattern PATTERN_LON = Pattern.compile("\\b" + STRING_LON, Pattern.CASE_INSENSITIVE);
+        private static final Pattern PATTERN_LATLON = Pattern.compile(STRING_LAT + STRING_SEPARATOR + STRING_LON, Pattern.CASE_INSENSITIVE);
+
+        MinParser() {
+            super(PATTERN_LAT, PATTERN_LON, PATTERN_LATLON);
+        }
+
+        /**
+         * @see AbstractLatLonParser#parse(List)
+         */
+        @Override
+        @Nullable
+        Double parse(@NonNull final List<String> groups) {
+            final String group1 = groups.get(0);
+            final String group2 = groups.get(1);
+            final String group3 = groups.get(2);
+            final String group4 = groups.get(3);
+            final Double result = createCoordinate(group1, group2, group4, "");
+            if (StringUtils.isBlank(group1) && (StringUtils.isBlank(group3) || isNotZero(result))) {
+                return null;
+            }
+
+            return result;
+        }
+    }
+
+    /**
+     * Parser for MinDec format: X DD° MM.MMM'.
+     */
+    private static final class MinDecParser extends AbstractLatLonParser {
+        //                                           (  1  )    (    2    )    (       3      )
+        private static final String STRING_LAT = "\\b([NS]?)\\s*(\\d++°?|°)\\s*(\\d++[.,]\\d++)['′]?";
+
+        //                                        (   1  )    (    2    )    (       3      )
+        private static final String STRING_LON = "([WEO]?)\\s*(\\d++°?|°)\\s*(\\d++[.,]\\d++)\\b['′]?";
+        private static final String STRING_SEPARATOR = "[^\\w'′\"″°]*";
+        private static final Pattern PATTERN_LAT = Pattern.compile(STRING_LAT, Pattern.CASE_INSENSITIVE);
+        private static final Pattern PATTERN_LON = Pattern.compile("\\b" + STRING_LON, Pattern.CASE_INSENSITIVE);
+        private static final Pattern PATTERN_LATLON = Pattern.compile(STRING_LAT + STRING_SEPARATOR + STRING_LON, Pattern.CASE_INSENSITIVE);
+
+        MinDecParser() {
+            super(PATTERN_LAT, PATTERN_LON, PATTERN_LATLON);
+        }
+
+        /**
+         * @see AbstractLatLonParser#parse(List)
+         */
+        @Override
+        @Nullable
+        Double parse(@NonNull final List<String> groups) {
+            final String group1 = groups.get(0);
+            final String group2 = groups.get(1);
+            final String group3 = groups.get(2);
+
+            // Handle empty degrees part (see #4620)
+            final String strippedGroup2 = StringUtils.stripEnd(group2, "°");
+            final Double result = createCoordinate(group1, strippedGroup2, group3, "");
+            if (StringUtils.isBlank(group1) && (!StringUtils.endsWith(group2, "°") || isNotZero(result))) {
+                return null;
+            }
+
+            return result;
+        }
+    }
+
+    /**
+     * Parser for DMS format: X DD° MM' SS.SS".
+     */
+    private static final class DMSParser extends AbstractLatLonParser {
+        //                                           (  1  )    (  2  )( 3)    (  4  )         (       5      )
+        private static final String STRING_LAT = "\\b([NS]?)\\s*(\\d++)(°?)\\s*(\\d++)['′]?\\s*(\\d++[.,]\\d++)(?:''|\"|″)?";
+
+        //                                        (   1  )    (  2  )( 3)    (  4  )         (       5      )
+        private static final String STRING_LON = "([WEO]?)\\s*(\\d++)(°?)\\s*(\\d++)['′]?\\s*(\\d++[.,]\\d++)\\b(?:''|\"|″)?";
+        private static final String STRING_SEPARATOR = "[^\\w'′\"″°]*";
+        private static final Pattern PATTERN_LAT = Pattern.compile(STRING_LAT, Pattern.CASE_INSENSITIVE);
+        private static final Pattern PATTERN_LON = Pattern.compile("\\b" + STRING_LON, Pattern.CASE_INSENSITIVE);
+        private static final Pattern PATTERN_LATLON = Pattern.compile(STRING_LAT + STRING_SEPARATOR + STRING_LON, Pattern.CASE_INSENSITIVE);
+
+        DMSParser() {
+            super(PATTERN_LAT, PATTERN_LON, PATTERN_LATLON);
+        }
+
+        /**
+         * @see AbstractLatLonParser#parse(List)
+         */
+        @Override
+        @Nullable
+        Double parse(@NonNull final List<String> groups) {
+            final String group1 = groups.get(0);
+            final String group2 = groups.get(1);
+            final String group3 = groups.get(2);
+            final String group4 = groups.get(3);
+            final String group5 = groups.get(4);
+            final Double result = createCoordinate(group1, group2, group4, group5);
+            if (StringUtils.isBlank(group1) && (StringUtils.isBlank(group3) || isNotZero(result))) {
+                return null;
+            }
+
+            return result;
+        }
+    }
+
+    /**
+     * Parser for DMS format: X DD° MM' SS".
+     */
+    private static final class ShortDMSParser extends AbstractLatLonParser {
+        //                                           (  1  )    (  2  )( 3)    (  4  )         (  5  )
+        private static final String STRING_LAT = "\\b([NS]?)\\s*(\\d++)(°?)\\s*(\\d++)['′]?\\s*(\\d++)(?:''|\"|″)?";
+
+        //                                        (   1  )    (  2  )( 3)    (  4  )         (  5  )
+        private static final String STRING_LON = "([WEO]?)\\s*(\\d++)(°?)\\s*(\\d++)['′]?\\s*(\\d++)\\b(?:''|\"|″)?";
+        private static final String STRING_SEPARATOR = "[^\\w'′\"″°]*";
+        private static final Pattern PATTERN_LAT = Pattern.compile(STRING_LAT, Pattern.CASE_INSENSITIVE);
+        private static final Pattern PATTERN_LON = Pattern.compile("\\b" + STRING_LON, Pattern.CASE_INSENSITIVE);
+        private static final Pattern PATTERN_LATLON = Pattern.compile(STRING_LAT + STRING_SEPARATOR + STRING_LON, Pattern.CASE_INSENSITIVE);
+
+        ShortDMSParser() {
+            super(PATTERN_LAT, PATTERN_LON, PATTERN_LATLON);
+        }
+
+        /**
+         * @see AbstractLatLonParser#parse(List)
+         */
+        @Override
+        @Nullable
+        Double parse(@NonNull final List<String> groups) {
+            final String group1 = groups.get(0);
+            final String group2 = groups.get(1);
+            final String group3 = groups.get(2);
+            final String group4 = groups.get(3);
+            final String group5 = groups.get(4);
+            final Double result = createCoordinate(group1, group2, group4, group5);
+            if (StringUtils.isBlank(group1) && (StringUtils.isBlank(group3) || isNotZero(result))) {
+                return null;
+            }
+
+            return result;
+        }
+    }
+
+    /**
+     * Parser for DegDec format: DD.DDDDDDD°.
+     */
+    private static final class DegDecParser extends AbstractLatLonParser {
+        //                                        (        1       )
+        private static final String STRING_LAT = "(-?\\d++[.,]\\d++)°?";
+
+        //                                        (        1       )
+        private static final String STRING_LON = "(-?\\d++[.,]\\d++)\\b°?";
+        private static final String STRING_SEPARATOR = "[^\\w'′\"″°-]*";
+        private static final Pattern PATTERN_LAT = Pattern.compile(STRING_LAT, Pattern.CASE_INSENSITIVE);
+        private static final Pattern PATTERN_LON = Pattern.compile(STRING_LON, Pattern.CASE_INSENSITIVE);
+        private static final Pattern PATTERN_LATLON = Pattern.compile(STRING_LAT + STRING_SEPARATOR + STRING_LON, Pattern.CASE_INSENSITIVE);
+
+        DegDecParser() {
+            super(PATTERN_LAT, PATTERN_LON, PATTERN_LATLON);
+        }
+
+        /**
+         * @see AbstractLatLonParser#parse(List)
+         */
+        @Override
+        @Nullable
+        Double parse(@NonNull final List<String> groups) {
+            final String group1 = groups.get(0);
+            return createCoordinate("", group1, "", "");
+        }
+    }
+
+    /**
+     * Parser for DegDec format: -DD°.
+     */
+    private static final class ShortDegDecParser extends AbstractLatLonParser {
+        //                                               (   1   )
+        private static final String STRING_LAT_OR_LON = "(-?\\d++)°";
+        private static final String STRING_SEPARATOR = "[^\\w'′\"″°-]*";
+        private static final Pattern PATTERN_LAT_OR_LON = Pattern.compile(STRING_LAT_OR_LON, Pattern.CASE_INSENSITIVE);
+        private static final Pattern PATTERN_LATLON = Pattern.compile(STRING_LAT_OR_LON + STRING_SEPARATOR + STRING_LAT_OR_LON, Pattern.CASE_INSENSITIVE);
+
+        ShortDegDecParser() {
+            super(PATTERN_LAT_OR_LON, PATTERN_LAT_OR_LON, PATTERN_LATLON);
+        }
+
+        /**
+         * @see AbstractLatLonParser#parse(List)
+         */
+        @Override
+        @Nullable
+        Double parse(@NonNull final List<String> groups) {
+            final String group1 = groups.get(0);
+            return createCoordinate("", group1, "", "");
+        }
+    }
+
+    /**
+     * Parser for UTM format: ZZZ E EEEEEE N NNNNNNN
+     */
+    private static final class UTMParser extends AbstractParser {
+        /**
+         * @see AbstractParser#parse(String)
+         */
+        @Override
+        @Nullable
+        GeopointWrapper parse(@NonNull final String text) {
+            final MatcherWrapper matcher = new MatcherWrapper(UTMPoint.PATTERN_UTM, text);
+            if (matcher.find()) {
+                try {
+                    final UTMPoint utmPoint = new UTMPoint(text);
+                    return new GeopointWrapper(utmPoint.toLatLong(), matcher.group().length());
+                } catch (final Exception ignored) {
+                    // Ignore parse errors
+                }
+            }
+            return null;
+        }
+
+        /**
+         * @see AbstractParser#parse(String, LatLon)
+         */
+        @Override
+        @Nullable
+        ResultWrapper parse(@NonNull final String text, @NonNull final LatLon latlon) {
+            return null;
         }
     }
 
@@ -42,154 +485,121 @@ class GeopointParser {
     }
 
     /**
-     * Parses a pair of coordinates (latitude and longitude) out of a String.
-     * Accepts following formats and combinations of it:
-     * X DD
-     * X DD°
-     * X DD° MM
-     * X DD° MM.MMM
-     * X DD° MM SS
-     *
-     * as well as:
-     * DD.DDDDDDD
-     *
-     * Both . and , are accepted, also variable count of spaces (also 0)
+     * Removes all single spaces after a comma (see #2404)
      *
      * @param text
-     *            the string to parse
-     * @return an Geopoint with parsed latitude and longitude
-     * @throws Geopoint.ParseException
-     *             if lat or lon could not be parsed
+     *            the string to substitute
+     * @return the substituted string without the single spaces
      */
-    public static Geopoint parse(@NonNull final String text) {
-        // first try if these are simply 2 double values
-        try {
-            final String[] parts = StringUtils.split(StringUtils.trim(text));
-            if (parts.length == 2) {
-                // strip space, tab and &nbsp;
-                final double lat = Double.parseDouble(StringUtils.strip(parts[0], " \t\u00a0"));
-                final double lon = Double.parseDouble(StringUtils.strip(parts[1], " \t\u00a0"));
-                return new Geopoint(lat, lon);
-            }
-        } catch (final NumberFormatException ignored) {
-            // ignore and continue parsing textual formats
-        }
-
-        // try to parse UTM string
-        try {
-            final UTMPoint utmPoint = new UTMPoint(text);
-            return utmPoint.toLatLong();
-        } catch (final Exception ignored) {
-            // ignore and continue parsing textual formats
-        }
-
-        final String withoutSpaceAfterComma = removeAllSpaceAfterComma(text);
-        final ResultWrapper latitudeWrapper = parseHelper(withoutSpaceAfterComma, LatLon.LAT);
-        // cut away the latitude part when parsing the longitude
-        final ResultWrapper longitudeWrapper = parseHelper(withoutSpaceAfterComma.substring(latitudeWrapper.matcherPos + latitudeWrapper.matcherLength), LatLon.LON);
-
-        if (longitudeWrapper.matcherPos - (latitudeWrapper.matcherPos + latitudeWrapper.matcherLength) >= 10) {
-            throw new Geopoint.ParseException("Distance between latitude and longitude text is to large.", LatLon.LON);
-        }
-
-        final double lat = latitudeWrapper.result;
-        if (!Geopoint.isValidLatitude(lat)) {
-            throw new Geopoint.ParseException(text, LatLon.LAT);
-        }
-        final double lon = longitudeWrapper.result;
-        if (!Geopoint.isValidLongitude(lon)) {
-            throw new Geopoint.ParseException(text, LatLon.LON);
-        }
-        return new Geopoint(lat, lon);
-    }
-
     @NonNull
     private static String removeAllSpaceAfterComma(@NonNull final String text) {
         return new MatcherWrapper(PATTERN_BAD_BLANK, text).replaceAll("$1.$2");
     }
 
     /**
-     * Helper for coordinates-parsing
+     * Parses latitude/longitude from the given string.
      *
-     * @param text the text to parse
-     * @param latlon the kind of coordinate to parse
-     * @return a wrapper with the result and the corresponding matching part
-     * @throws Geopoint.ParseException if the text cannot be parsed
+     * @param text
+     *            the text to parse
+     * @param latlon
+     *            whether to parse latitude or longitude
+     * @return a wrapper with the best latitude/longitude and the length of the match, or null if parsing failed
      */
-    private static ResultWrapper parseHelper(@NonNull final String text, final LatLon latlon) {
-        try {
-            return new ResultWrapper(Double.parseDouble(text), 0, text.length());
-        } catch (final NumberFormatException ignored) {
-            // fall through to advanced parsing
-        }
+    @Nullable
+    private static ResultWrapper parseHelper(@NonNull final String text, @NonNull final LatLon latlon) {
+        final String withoutSpaceAfterComma = removeAllSpaceAfterComma(text);
 
-        final MatcherWrapper matcher = new MatcherWrapper(latlon == LatLon.LAT ? PATTERN_LAT : PATTERN_LON, text);
-        try {
-            if (matcher.find()) {
-                final double sign = matcher.group(1).equalsIgnoreCase("S") || matcher.group(1).equalsIgnoreCase("W") ? -1.0 : 1.0;
-                final double degree = Double.parseDouble(StringUtils.defaultIfEmpty(StringUtils.stripEnd(matcher.group(2), "°"), "0"));
-
-                double minutes = 0.0;
-                double seconds = 0.0;
-
-                if (matcher.group(3) != null) {
-                    minutes = Double.parseDouble(matcher.group(3));
-
-                    if (matcher.group(4) != null) {
-                        seconds = Double.parseDouble("0." + matcher.group(4)) * 60.0;
-                    } else if (matcher.group(5) != null) {
-                        seconds = Double.parseDouble(matcher.group(5).replace(",", "."));
-                    }
-                }
-
-                return new ResultWrapper(sign * (degree + minutes / 60.0 + seconds / 3600.0), matcher.start(), matcher.group().length());
+        ResultWrapper best = null;
+        for (final AbstractParser parser : parsers) {
+            final ResultWrapper wrapper = parser.parse(withoutSpaceAfterComma, latlon);
+            if (wrapper != null && (best == null || wrapper.matcherLength > best.matcherLength)) {
+                best = wrapper;
             }
-        } catch (final NumberFormatException ignored) {
-            // We might have encountered too large a number. This was not the right way to do it, try another.
         }
 
-        // Nothing found with "N 52...", try to match string as decimal degree parts (i.e. multiple doubles)
-        try {
-            final String[] items = StringUtils.split(StringUtils.trimToEmpty(text));
-            final int length = ArrayUtils.getLength(items);
-            if (length > 0 && length <= 2) {
-                final int index = latlon == LatLon.LON ? length - 1 : 0;
-                final String textPart = items[index];
-                final int pos = latlon == LatLon.LON ? text.lastIndexOf(textPart) : text.indexOf(textPart);
-                return new ResultWrapper(Double.parseDouble(textPart), pos, textPart.length());
-            }
-        } catch (final NumberFormatException ignored) {
-            // The right exception will be raised below.
-        }
-
-        throw new Geopoint.ParseException("Could not parse coordinates as " + latlon + ": \"" + text + "\"", latlon);
+        return best;
     }
 
     /**
-     * Parses latitude out of a given string.
+     * Parses a pair of coordinates (latitude and longitude) out of the given string.
+     *
+     * Accepts following formats:
+     * - X DD
+     * - X DD°
+     * - X DD° MM
+     * - X DD° MM.MMM
+     * - X DD° MM SS
+     * - DD.DDDDDDD
+     * - UTM
+     *
+     * Both . and , are accepted, also variable count of spaces (also 0)
+     *
+     * @param text
+     *            the string to be parsed
+     * @return an Geopoint with parsed latitude and longitude
+     * @throws Geopoint.ParseException
+     *             if coordinates could not be parsed
+     */
+    @NonNull
+    public static Geopoint parse(@NonNull final String text) {
+        final String withoutSpaceAfterComma = removeAllSpaceAfterComma(text);
+        GeopointWrapper best = null;
+        for (final AbstractParser parser : parsers) {
+            final GeopointWrapper geopointWrapper = parser.parse(withoutSpaceAfterComma);
+            if (geopointWrapper == null) {
+                continue;
+            }
+            if (best == null || geopointWrapper.matcherLength > best.matcherLength) {
+                best = geopointWrapper;
+            }
+        }
+
+        if (best != null) {
+            return best.geopoint;
+        }
+
+        throw new Geopoint.ParseException("Cannot parse coordinates");
+    }
+
+    /**
+     * Parses latitude out of the given string.
      *
      * @see #parse(String)
      * @param text
      *            the string to be parsed
-     * @return the latitude as decimal degree
+     * @return the latitude as decimal degrees
      * @throws Geopoint.ParseException
      *             if latitude could not be parsed
      */
-    public static double parseLatitude(final String text) {
-        return parseHelper(removeAllSpaceAfterComma(text), LatLon.LAT).result;
+    public static double parseLatitude(@Nullable final String text) {
+        if (text != null) {
+            final ResultWrapper wrapper = parseHelper(text, LatLon.LAT);
+            if (wrapper != null) {
+                return wrapper.result;
+            }
+        }
+
+        throw new Geopoint.ParseException("Cannot parse latitude", LatLon.LAT);
     }
 
     /**
-     * Parses longitude out of a given string.
+     * Parses longitude out of the given string.
      *
      * @see #parse(String)
      * @param text
      *            the string to be parsed
-     * @return the longitude as decimal degree
+     * @return the longitude as decimal degrees
      * @throws Geopoint.ParseException
      *             if longitude could not be parsed
      */
-    public static double parseLongitude(final String text) {
-        return parseHelper(removeAllSpaceAfterComma(text), LatLon.LON).result;
+    public static double parseLongitude(@Nullable final String text) {
+        if (text != null) {
+            final ResultWrapper wrapper = parseHelper(text, LatLon.LON);
+            if (wrapper != null) {
+                return wrapper.result;
+            }
+        }
+
+        throw new Geopoint.ParseException("Cannot parse longitude", LatLon.LON);
     }
 }

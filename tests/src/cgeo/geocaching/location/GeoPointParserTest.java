@@ -136,6 +136,114 @@ public class GeoPointParserTest extends TestCase {
         assertGeopointEquals(GeopointParser.parse("47.648883  122.348067\u00a0"), GeopointParser.parse("N 47° 38.933 E 122° 20.884"), 1e-4f);
     }
 
+    public static void testDoubleComma() {
+        assertThat(GeopointParser.parse("47.648883,122.348067").equals(GeopointParser.parse("47.648883 122.348067")));
+    }
+
+    public static void testGerman() {
+        assertThat(GeopointParser.parse("N 47° 38.933 O 122° 20.884")).isEqualTo(GeopointParser.parse("N 47° 38.933 E 122° 20.884"));
+    }
+
+    public static void testNoSpace() {
+        assertThat(GeopointParser.parse("N47°38.933E122°20.884")).isEqualTo(GeopointParser.parse("N 47° 38.933 E 122° 20.884"));
+    }
+
+    public static void testUTM() {
+        GeopointParser.parse("54S E 293848 N 3915114");
+    }
+
+    public static void testZero() {
+        GeopointParser.parse("00° 00.000′ 000° 00.00′");
+        GeopointParser.parse("00° 00′ 00.00″ 000° 00′ 00.00″");
+        GeopointParser.parse("00° 00′ 000° 00′");
+        GeopointParser.parse("00° E 000°");
+        assertParsingFails("00° 00.001′ 000° 00.01′");
+        assertParsingFails("00° 00′ 00.01″ 000° 00′ 00.01″");
+        assertParsingFails("00° 01′ 000° 01′");
+        assertParsingFails("01° E 000°");
+    }
+
+    public static void testFormula() {
+        assertParsingFails("N 12° 23.345′ E 123° 34.5AB′");
+        assertParsingFails("N 12° 23′ E 123° 3A′");
+        assertParsingFails("N 12° E 12A°");
+        assertParsingFails("N 12° 23′ 34″ E 123° 34′ 5A″");
+        assertParsingFails("N 12° 23′ 34.56″ E 123° 34′ 56.7A″");
+        assertParsingFails("-12.345678° 23.4ABCDE°");
+    }
+
+    public static void testInvalidCombinations() {
+        assertParsingFails("N 07° 59.999′ W 059° 42′ 17.12″");
+        assertParsingFails("S 59° 42′ 17.12″ -0.497234");
+        assertParsingFails("0.497234 E 007° 59.999′");
+    }
+
+    public static void testDMSBounds() {
+        GeopointParser.parse("S 90° 00′ 00.00″ W 180° 00′ 00.00″");
+        GeopointParser.parse("S 89° 59′ 59.99″ W 179° 59′ 59.99″");
+        assertParsingFails("S 90° 00′ 00.01″ W 180° 00′ 00.00″");
+        assertParsingFails("S 90° 00′ 00.00″ W 180° 00′ 00.01″");
+        assertParsingFails("S 89° 59′ 60.00″ W 179° 59′ 59.99″");
+        assertParsingFails("S 89° 59′ 59.99″ W 179° 59′ 60.00″");
+        assertParsingFails("S 89° 60′ 00.00″ W 179° 59′ 59.99″");
+        assertParsingFails("S 89° 59′ 59.99″ W 179° 60′ 00.00″");
+    }
+
+    public static void testMinBounds() {
+        GeopointParser.parse("S 90° 00′ W 180° 00′");
+        GeopointParser.parse("S 89° 59′ W 179° 59′");
+        assertParsingFails("S 90° 01′ W 180° 00′");
+        assertParsingFails("S 90° 00′ W 180° 01′");
+        assertParsingFails("S 89° 60′ W 180° 00′");
+        assertParsingFails("S 90° 00′ W 179° 60′");
+    }
+
+    public static void testMinDecBounds() {
+        GeopointParser.parse("S 90° 00.000′ W 180° 00.000′");
+        GeopointParser.parse("S 89° 59.999′ W 179° 59.999′");
+        assertParsingFails("S 90° 00.001′ W 180° 00.000′");
+        assertParsingFails("S 90° 00.000′ W 180° 00.001′");
+        assertParsingFails("S 89° 60.000′ W 180° 00.000′");
+        assertParsingFails("S 90° 00.000′ W 179° 60.000′");
+    }
+
+    public static void testNull() {
+        try {
+            GeopointParser.parseLatitude(null);
+            fail();
+        } catch (final Geopoint.ParseException e) {
+            // expected
+        }
+        try {
+            GeopointParser.parseLongitude(null);
+            fail();
+        } catch (final Geopoint.ParseException e) {
+            // expected
+        }
+    }
+
+    public static void test922() {
+        assertParsingFails("L 12\n M 13\n N 14\n O 15");
+    }
+
+    public static void test5538() {
+        assertParsingFails("A=6 B=0 C=5 D=4 E=13\n" +
+                           "N 48° 53.(A*C*E)+194   E 009° 11.((D*71)-0)-1\n" +
+                           "N 48° 53.(6*5*13)+194  E 009° 11.((4*71)-0)-1\n" +
+                           "N 48° 53.(390)+194     E 009° 11.((284)-0)-1");
+        assertParsingFails("S1: N 49 27.253");
+    }
+
+    public static void test5790() {
+        GeopointParser.parse("N 52° 36.123 E 010° 06.456'");
+        GeopointParser.parse("N52° 36.123 E010°06.456");
+        GeopointParser.parse("N52 36.123 E010 06.456");
+        GeopointParser.parse("52° 10°");
+        GeopointParser.parse("52° -10°");
+        GeopointParser.parse("52.55123 10,56789");
+        GeopointParser.parse("52.55123° 10.56789°");
+    }
+
     public static void test6090() {
         // Issue #6090
         final Geopoint ref = new Geopoint(12.576117, -1.390933);
