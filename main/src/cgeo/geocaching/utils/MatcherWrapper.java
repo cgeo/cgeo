@@ -79,6 +79,13 @@ public class MatcherWrapper {
     }
 
     /**
+     * see {@link Matcher#start(int)}
+     */
+    public int start(final int group) {
+        return matcher.start(group);
+    }
+
+    /**
      * see {@link Matcher#replaceAll(String)}
      */
     public String replaceAll(final String replacement) {

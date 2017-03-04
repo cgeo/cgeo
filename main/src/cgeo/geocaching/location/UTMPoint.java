@@ -48,8 +48,8 @@ public class UTMPoint {
      */
     private char zoneLetter;
 
-    //                                                          ( 1   )(  2    )       (  3  )       (         4       )       (        5        )
-    private static final Pattern PATTERN_UTM = Pattern.compile("(^|\\s)(\\d\\d?)[ \\t]*([A-Z])[\\sE]+(\\d+(?:[.,]\\d+)?)[\\sN]+(\\d+(?:[.,]\\d+)?)", Pattern.CASE_INSENSITIVE);
+    //                                                  ( 1   )(  2    )       (  3  )       (         4       )       (        5        )
+    static final Pattern PATTERN_UTM = Pattern.compile("(^|\\s)(\\d\\d?)[ \\t]*([A-Z])[\\sE]+(\\d+(?:[.,]\\d+)?)[\\sN]+(\\d+(?:[.,]\\d+)?)", Pattern.CASE_INSENSITIVE);
 
     /**
      * Point to create if you are going to use the static methods to fill the

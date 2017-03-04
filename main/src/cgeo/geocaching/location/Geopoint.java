@@ -279,6 +279,11 @@ public final class Geopoint implements ICoordinates, Parcelable {
         private static final long serialVersionUID = 1L;
         public final int resource;
 
+        public ParseException(final String msg) {
+            super(msg);
+            resource = R.string.err_parse_lat_lon;
+        }
+
         public ParseException(final String msg, final GeopointParser.LatLon faulty) {
             super(msg);
             resource = faulty == GeopointParser.LatLon.LAT ? R.string.err_parse_lat : R.string.err_parse_lon;
