@@ -134,7 +134,7 @@ public class GeopointFormatter {
      * It removes the middle dot if present.
      */
     public static CharSequence reformatForClipboard(final CharSequence coordinatesToCopy) {
-        return coordinatesToCopy.toString().replace(Formatter.SEPARATOR, " ");
+        return coordinatesToCopy.toString().replace(Formatter.SEPARATOR, " ").replaceAll(",", ".");
     }
 
 }

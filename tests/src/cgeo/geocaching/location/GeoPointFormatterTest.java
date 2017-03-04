@@ -39,12 +39,17 @@ public class GeoPointFormatterTest extends TestCase {
         assertThat(formatSecond).isEqualTo("S 51° 21' 06.239\" · W 010° 15' 22.140\"");
     }
 
-    public static void testReformatForClipboardRemoveMiddleDot() {
-        assertThat(GeopointFormatter.reformatForClipboard("N 10° 12,345 · W 5° 12,345")).isEqualTo("N 10° 12,345 W 5° 12,345");
+    public static void testReformatForClipboardRemoveMiddleDotReplaceCommaWithPoint() {
+        assertThat(GeopointFormatter.reformatForClipboard("N 10° 12,345 · W 5° 12,345")).isEqualTo("N 10° 12.345 W 5° 12.345");
     }
 
-    public static void testReformatForClipboardNoMiddleDotToRemove() {
+    public static void testReformatForClipboardNoChange() {
         assertThat(GeopointFormatter.reformatForClipboard("N 10° 12' 34\" W 5° 12' 34\"")).isEqualTo("N 10° 12' 34\" W 5° 12' 34\"");
     }
+
+    public static void testReformatForClipboardReplaceCommaWithPoint() {
+        assertThat(GeopointFormatter.reformatForClipboard("10,123456 -0,123456")).isEqualTo("10.123456 -0.123456");
+    }
+
 
 }
