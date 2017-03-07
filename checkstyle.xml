@@ -8,7 +8,7 @@
     <property name="influenceFormat" value="$2"/>
   </module>
   <module name="SuppressionFilter">
-    <property name="file" value="https://raw.githubusercontent.com/cgeo/cgeo/master/main/project/checkstyle/suppressions.xml"/>
+    <property name="file" value="main/project/checkstyle/suppressions.xml"/>
   </module>
   <module name="FileTabCharacter">
     <property name="eachLine" value="true"/>
