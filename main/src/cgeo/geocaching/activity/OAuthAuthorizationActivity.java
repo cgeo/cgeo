@@ -240,7 +240,7 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
                 oAtoken = paramsMatcher1.group(1);
             }
             final MatcherWrapper paramsMatcher2 = new MatcherWrapper(PARAMS_PATTERN_2, line);
-            if (paramsMatcher2.find() && paramsMatcher2.groupCount() > 0) {
+            if (paramsMatcher2.find()) {
                 oAtokenSecret = paramsMatcher2.group(1);
             }
 
