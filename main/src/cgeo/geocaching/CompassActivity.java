@@ -156,7 +156,6 @@ public class CompassActivity extends AbstractActionBarActivity {
         // reset the visibility of the compass toggle button if the device does not support it.
         if (sensors.hasCompassCapabilities()) {
             useCompassSwitch.setChecked(Settings.isUseCompass());
-
         } else {
             useCompassSwitch.setVisibility(View.GONE);
         }

@@ -139,10 +139,8 @@ public class StaticMapsActivity extends AbstractListActivity {
                         showToast(res.getString(R.string.err_detail_not_load_map_static));
                         finish();
                     }
-                } else {
-                    if (menuRefresh != null) {
-                        menuRefresh.setEnabled(true);
-                    }
+                } else if (menuRefresh != null) {
+                    menuRefresh.setEnabled(true);
                 }
             }
         });

@@ -77,13 +77,12 @@ public class TextPreference extends AbstractAttributeBasedPreference {
         }
 
         // if summaryText is null, take it from the previously saved summary
-        if (summaryText == null) {
-            if (this.summaryText == null) {
-                return;
-            }
+        if (summaryText != null) {
+            summaryView.setText(summaryText);
+        } else if (this.summaryText != null) {
             summaryView.setText(this.summaryText);
         } else {
-            summaryView.setText(summaryText);
+            return;
         }
         this.summaryView.setVisibility(View.VISIBLE);
     }
