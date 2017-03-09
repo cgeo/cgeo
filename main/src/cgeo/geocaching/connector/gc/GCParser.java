@@ -146,20 +146,18 @@ public final class GCParser {
                 final MatcherWrapper matcherGuidAndDisabled = new MatcherWrapper(GCConstants.PATTERN_SEARCH_GUIDANDDISABLED, row);
 
                 while (matcherGuidAndDisabled.find()) {
-                    if (matcherGuidAndDisabled.groupCount() > 0) {
-                        if (matcherGuidAndDisabled.group(2) != null) {
-                            cache.setName(Html.fromHtml(matcherGuidAndDisabled.group(2).trim()).toString());
-                        }
-                        if (matcherGuidAndDisabled.group(3) != null) {
-                            cache.setLocation(Html.fromHtml(matcherGuidAndDisabled.group(3).trim()).toString());
-                        }
+                    if (matcherGuidAndDisabled.group(2) != null) {
+                        cache.setName(Html.fromHtml(matcherGuidAndDisabled.group(2).trim()).toString());
+                    }
+                    if (matcherGuidAndDisabled.group(3) != null) {
+                        cache.setLocation(Html.fromHtml(matcherGuidAndDisabled.group(3).trim()).toString());
+                    }
 
-                        final String attr = matcherGuidAndDisabled.group(1);
-                        if (attr != null) {
-                            cache.setDisabled(attr.contains("Strike"));
+                    final String attr = matcherGuidAndDisabled.group(1);
+                    if (attr != null) {
+                        cache.setDisabled(attr.contains("Strike"));
 
-                            cache.setArchived(attr.contains("OldWarning"));
-                        }
+                        cache.setArchived(attr.contains("OldWarning"));
                     }
                 }
             } catch (final RuntimeException e) {
@@ -227,22 +225,19 @@ public final class GCParser {
             final MatcherWrapper matcherTbs = new MatcherWrapper(GCConstants.PATTERN_SEARCH_TRACKABLES, row);
             String inventoryPre = null;
             while (matcherTbs.find()) {
-                if (matcherTbs.groupCount() > 0) {
-                    try {
-                        cache.setInventoryItems(Integer.parseInt(matcherTbs.group(1)));
-                    } catch (final NumberFormatException e) {
-                        Log.e("Error parsing trackables count", e);
-                    }
-                    inventoryPre = matcherTbs.group(2);
+                try {
+                    cache.setInventoryItems(Integer.parseInt(matcherTbs.group(1)));
+                } catch (final NumberFormatException e) {
+                    Log.e("Error parsing trackables count", e);
                 }
+                inventoryPre = matcherTbs.group(2);
             }
 
             if (StringUtils.isNotBlank(inventoryPre)) {
                 assert inventoryPre != null;
                 final MatcherWrapper matcherTbsInside = new MatcherWrapper(GCConstants.PATTERN_SEARCH_TRACKABLESINSIDE, inventoryPre);
                 while (matcherTbsInside.find()) {
-                    if (matcherTbsInside.groupCount() == 2 &&
-                            matcherTbsInside.group(2) != null &&
+                    if (matcherTbsInside.group(2) != null &&
                             !matcherTbsInside.group(2).equalsIgnoreCase("premium member only cache") &&
                             cache.getInventoryItems() <= 0) {
                         cache.setInventoryItems(1);
@@ -569,7 +564,7 @@ public final class GCParser {
                 final MatcherWrapper matcherAttributesInside = new MatcherWrapper(GCConstants.PATTERN_ATTRIBUTESINSIDE, attributesPre);
 
                 while (matcherAttributesInside.find()) {
-                    if (matcherAttributesInside.groupCount() > 1 && !matcherAttributesInside.group(2).equalsIgnoreCase("blank")) {
+                    if (!matcherAttributesInside.group(2).equalsIgnoreCase("blank")) {
                         // by default, use the tooltip of the attribute
                         String attribute = matcherAttributesInside.group(2).toLowerCase(Locale.US);
 
@@ -648,14 +643,12 @@ public final class GCParser {
                     final MatcherWrapper matcherInventoryInside = new MatcherWrapper(GCConstants.PATTERN_INVENTORYINSIDE, inventoryPre);
 
                     while (matcherInventoryInside.find()) {
-                        if (matcherInventoryInside.groupCount() > 0) {
-                            final Trackable inventoryItem = new Trackable();
-                            inventoryItem.forceSetBrand(TrackableBrand.TRAVELBUG);
-                            inventoryItem.setGuid(matcherInventoryInside.group(1));
-                            inventoryItem.setName(matcherInventoryInside.group(2));
+                        final Trackable inventoryItem = new Trackable();
+                        inventoryItem.forceSetBrand(TrackableBrand.TRAVELBUG);
+                        inventoryItem.setGuid(matcherInventoryInside.group(1));
+                        inventoryItem.setName(matcherInventoryInside.group(2));
 
-                            inventory.add(inventoryItem);
-                        }
+                        inventory.add(inventoryItem);
                     }
                 }
                 cache.mergeInventory(inventory, EnumSet.of(TrackableBrand.TRAVELBUG));
@@ -1180,7 +1173,7 @@ public final class GCParser {
         final MatcherWrapper matcher = new MatcherWrapper(GCConstants.PATTERN_MAINTENANCE, page);
 
         try {
-            if (matcher.find() && matcher.groupCount() > 0) {
+            if (matcher.find()) {
                 final String[] viewstatesConfirm = GCLogin.getViewstates(page);
 
                 if (GCLogin.isEmpty(viewstatesConfirm)) {
@@ -1578,7 +1571,7 @@ public final class GCParser {
         // trackable owner name
         try {
             final MatcherWrapper matcherOwner = new MatcherWrapper(GCConstants.PATTERN_TRACKABLE_OWNER, page);
-            if (matcherOwner.find() && matcherOwner.groupCount() > 0) {
+            if (matcherOwner.find()) {
                 trackable.setOwnerGuid(matcherOwner.group(1));
                 trackable.setOwner(matcherOwner.group(2).trim());
             }
@@ -1593,14 +1586,14 @@ public final class GCParser {
         // trackable spotted
         try {
             final MatcherWrapper matcherSpottedCache = new MatcherWrapper(GCConstants.PATTERN_TRACKABLE_SPOTTEDCACHE, page);
-            if (matcherSpottedCache.find() && matcherSpottedCache.groupCount() > 0) {
+            if (matcherSpottedCache.find()) {
                 trackable.setSpottedGuid(matcherSpottedCache.group(1));
                 trackable.setSpottedName(matcherSpottedCache.group(2).trim());
                 trackable.setSpottedType(Trackable.SPOTTED_CACHE);
             }
 
             final MatcherWrapper matcherSpottedUser = new MatcherWrapper(GCConstants.PATTERN_TRACKABLE_SPOTTEDUSER, page);
-            if (matcherSpottedUser.find() && matcherSpottedUser.groupCount() > 0) {
+            if (matcherSpottedUser.find()) {
                 trackable.setSpottedGuid(matcherSpottedUser.group(1));
                 trackable.setSpottedName(matcherSpottedUser.group(2).trim());
                 trackable.setSpottedType(Trackable.SPOTTED_USER);
@@ -1651,7 +1644,7 @@ public final class GCParser {
         // trackable details & image
         try {
             final MatcherWrapper matcherDetailsImage = new MatcherWrapper(GCConstants.PATTERN_TRACKABLE_DETAILSIMAGE, page);
-            if (matcherDetailsImage.find() && matcherDetailsImage.groupCount() > 0) {
+            if (matcherDetailsImage.find()) {
                 final String image = StringUtils.trim(matcherDetailsImage.group(3));
                 final String details = StringUtils.trim(matcherDetailsImage.group(4));
 
@@ -1868,19 +1861,17 @@ public final class GCParser {
         final List<LogType> types = new ArrayList<>();
 
         final MatcherWrapper typeBoxMatcher = new MatcherWrapper(GCConstants.PATTERN_TYPEBOX, page);
-        if (typeBoxMatcher.find() && typeBoxMatcher.groupCount() > 0) {
+        if (typeBoxMatcher.find()) {
             final String typesText = typeBoxMatcher.group(1);
             final MatcherWrapper typeMatcher = new MatcherWrapper(GCConstants.PATTERN_TYPE2, typesText);
             while (typeMatcher.find()) {
-                if (typeMatcher.groupCount() > 1) {
-                    try {
-                        final int type = Integer.parseInt(typeMatcher.group(2));
-                        if (type > 0) {
-                            types.add(LogType.getById(type));
-                        }
-                    } catch (final NumberFormatException e) {
-                        Log.e("Error parsing log types", e);
+                try {
+                    final int type = Integer.parseInt(typeMatcher.group(2));
+                    if (type > 0) {
+                        types.add(LogType.getById(type));
                     }
+                } catch (final NumberFormatException e) {
+                    Log.e("Error parsing log types", e);
                 }
             }
         }
@@ -1900,19 +1891,17 @@ public final class GCParser {
         final List<LogTypeTrackable> types = new ArrayList<>();
 
         final MatcherWrapper typeBoxMatcher = new MatcherWrapper(GCConstants.PATTERN_TYPEBOX, page);
-        if (typeBoxMatcher.find() && typeBoxMatcher.groupCount() > 0) {
+        if (typeBoxMatcher.find()) {
             final String typesText = typeBoxMatcher.group(1);
             final MatcherWrapper typeMatcher = new MatcherWrapper(GCConstants.PATTERN_TYPE2, typesText);
             while (typeMatcher.find()) {
-                if (typeMatcher.groupCount() > 1) {
-                    try {
-                        final int type = Integer.parseInt(typeMatcher.group(2));
-                        if (type > 0) {
-                            types.add(LogTypeTrackable.getById(type));
-                        }
-                    } catch (final NumberFormatException e) {
-                        Log.e("Error parsing trackable log types", e);
+                try {
+                    final int type = Integer.parseInt(typeMatcher.group(2));
+                    if (type > 0) {
+                        types.add(LogTypeTrackable.getById(type));
                     }
+                } catch (final NumberFormatException e) {
+                    Log.e("Error parsing trackable log types", e);
                 }
             }
         }
@@ -1941,22 +1930,19 @@ public final class GCParser {
 
         final MatcherWrapper trackableMatcher = new MatcherWrapper(GCConstants.PATTERN_TRACKABLE, page);
         while (trackableMatcher.find()) {
-            if (trackableMatcher.groupCount() > 0) {
+            final String trackCode = trackableMatcher.group(1);
+            final String name = Html.fromHtml(trackableMatcher.group(2)).toString();
+            try {
+                final Integer ctl = Integer.valueOf(trackableMatcher.group(3));
+                final Integer id = Integer.valueOf(trackableMatcher.group(5));
+                if (trackCode != null && ctl != null && id != null) {
+                    final TrackableLog entry = new TrackableLog("", trackCode, name, id, ctl, TrackableBrand.TRAVELBUG);
 
-                final String trackCode = trackableMatcher.group(1);
-                final String name = Html.fromHtml(trackableMatcher.group(2)).toString();
-                try {
-                    final Integer ctl = Integer.valueOf(trackableMatcher.group(3));
-                    final Integer id = Integer.valueOf(trackableMatcher.group(5));
-                    if (trackCode != null && ctl != null && id != null) {
-                        final TrackableLog entry = new TrackableLog("", trackCode, name, id, ctl, TrackableBrand.TRAVELBUG);
-
-                        Log.i("Trackable in inventory (#" + entry.ctl + "/" + entry.id + "): " + entry.trackCode + " - " + entry.name);
-                        trackableLogs.add(entry);
-                    }
-                } catch (final NumberFormatException e) {
-                    Log.e("GCParser.parseTrackableLog", e);
+                    Log.i("Trackable in inventory (#" + entry.ctl + "/" + entry.id + "): " + entry.trackCode + " - " + entry.name);
+                    trackableLogs.add(entry);
                 }
+            } catch (final NumberFormatException e) {
+                Log.e("GCParser.parseTrackableLog", e);
             }
         }
 
