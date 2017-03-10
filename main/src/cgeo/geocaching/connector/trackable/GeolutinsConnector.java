@@ -19,7 +19,7 @@ import java.util.regex.Pattern;
 
 public final class GeolutinsConnector extends AbstractTrackableConnector {
 
-    private static final Pattern PATTERN_GL_CODE = Pattern.compile("(GL[0-9A-F]{5}|[0-9]{7,8}-[0-9]{3,4})");
+    private static final Pattern PATTERN_GL_CODE = Pattern.compile("GL[0-9A-F]{5}|[0-9]{7,8}-[0-9]{3,4}");
     private static final String HOST = "www.geolutins.com";
     private static final String URL = "http://" + HOST;
 

@@ -237,8 +237,8 @@ public final class GCParser {
                 assert inventoryPre != null;
                 final MatcherWrapper matcherTbsInside = new MatcherWrapper(GCConstants.PATTERN_SEARCH_TRACKABLESINSIDE, inventoryPre);
                 while (matcherTbsInside.find()) {
-                    if (matcherTbsInside.group(2) != null &&
-                            !matcherTbsInside.group(2).equalsIgnoreCase("premium member only cache") &&
+                    if (matcherTbsInside.group(1) != null &&
+                            !matcherTbsInside.group(1).equalsIgnoreCase("premium member only cache") &&
                             cache.getInventoryItems() <= 0) {
                         cache.setInventoryItems(1);
                     }
