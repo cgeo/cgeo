@@ -1086,9 +1086,6 @@
   <string name="license_show">Vis licens</string>
   <string name="license_dismiss">Afvis</string>
   <!-- helpers -->
-  <string name="helper_calendar_title">c:geo kalender-plugin</string>
-  <string name="helper_calendar_missing">c:geo kalender-plugin er ikke installeret.</string>
-  <string name="helper_calendar_description">Giver dig mulighed for at eksportere arrangementcacher til din kalender på din enhed.</string>
   <string name="helper_calendar_pastevent_title">Tidligere arrangement</string>
   <string name="helper_calendar_pastevent_question">Arrangementsdato er i fortiden. Tilføj den alligevel?</string>
   <string name="helper_sendtocgeo_title">Send2c:geo</string>

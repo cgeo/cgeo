@@ -1087,9 +1087,6 @@
   <string name="license_show">Afficher la licence</string>
   <string name="license_dismiss">Rejeter</string>
   <!-- helpers -->
-  <string name="helper_calendar_title">c:geo agenda</string>
-  <string name="helper_calendar_missing">c:geo agenda non installé.</string>
-  <string name="helper_calendar_description">Permet d\'exporter les événements liés aux caches dans le calendrier Android.</string>
   <string name="helper_calendar_pastevent_title">Événement passé</string>
   <string name="helper_calendar_pastevent_question">La date de l\'événement est dans le passé. Ajouter quand même ?</string>
   <string name="helper_sendtocgeo_title">Envoyer vers c:geo</string>

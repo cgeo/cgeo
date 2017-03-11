@@ -1070,9 +1070,6 @@
   <string name="license_show">Показать лицензию</string>
   <string name="license_dismiss">Отклонить</string>
   <!-- helpers -->
-  <string name="helper_calendar_title">Плагин календаря c:geo</string>
-  <string name="helper_calendar_missing">Плагин календаря c:geo не установлен.</string>
-  <string name="helper_calendar_description">Позволяет экспортировать тайники-события в календарь на устройстве.</string>
   <string name="helper_calendar_pastevent_title">Прошедшее событие</string>
   <string name="helper_calendar_pastevent_question">Вы собираетесь создать событие в прошлом. Продолжить?</string>
   <string name="helper_sendtocgeo_title">Отправить в c:geo</string>

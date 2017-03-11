@@ -1090,9 +1090,6 @@
   <string name="license_show">Pokaż licencję</string>
   <string name="license_dismiss">Odmów</string>
   <!-- helpers -->
-  <string name="helper_calendar_title">Dodatek Kalendarz c:geo</string>
-  <string name="helper_calendar_missing">Dodatek Kalendarz c:geo nie jest zainstalowany.</string>
-  <string name="helper_calendar_description">Umożliwia Tobie eksport skrzynek Wydarzenie do kalendarza w Twoim urządzeniu.</string>
   <string name="helper_calendar_pastevent_title">Przeszłe wydarzenie</string>
   <string name="helper_calendar_pastevent_question">Przeszłe wydarzenie. Dodać mimo wszystko?</string>
   <string name="helper_sendtocgeo_title">Wyślij do c:geo</string>

@@ -1078,9 +1078,6 @@
   <string name="license_show">Rodyti licenciją</string>
   <string name="license_dismiss">Atmesti</string>
   <!-- helpers -->
-  <string name="helper_calendar_title">c:geo kalendorius (įskiepis)</string>
-  <string name="helper_calendar_missing">c:geo kalendoriaus įskiepis neįdiegtas.</string>
-  <string name="helper_calendar_description">Leidžia eksportuoti renginius į prietaiso kalendorių.</string>
   <string name="helper_calendar_pastevent_title">Buvę įvykiai</string>
   <string name="helper_calendar_pastevent_question">Renginio data yra praeityje. Vis tiek pridėti?</string>
   <string name="helper_sendtocgeo_title">Siųsti į c:geo</string>

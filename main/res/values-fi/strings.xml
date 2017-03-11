@@ -1065,9 +1065,6 @@
   <string name="license_show">Näytä lisenssi</string>
   <string name="license_dismiss">Hylkää</string>
   <!-- helpers -->
-  <string name="helper_calendar_title">c:geon kalenteriliitännäinen</string>
-  <string name="helper_calendar_missing">c:geon kalenteriliitännäinen ei ole asennettuna.</string>
-  <string name="helper_calendar_description">Mahdollistaa tapahtumakätköjen siirron laitteesi kalenteriin.</string>
   <string name="helper_calendar_pastevent_title">Mennyt tapahtuma</string>
   <string name="helper_calendar_pastevent_question">Päivämäärä on menneisyydessä. Lisätäänkö tästä huolimatta?</string>
   <string name="helper_sendtocgeo_title">Lähetä c:geoon</string>

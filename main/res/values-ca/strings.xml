@@ -1083,9 +1083,6 @@
   <string name="license_show">Mostra la llicència</string>
   <string name="license_dismiss">Omet</string>
   <!-- helpers -->
-  <string name="helper_calendar_title">Complement del calendari del c:geo</string>
-  <string name="helper_calendar_missing">No s\'ha instal·lat el complement del calendari del c:geo.</string>
-  <string name="helper_calendar_description">Permet exportar trobades al calendari del vostre dispositiu.</string>
   <string name="helper_calendar_pastevent_title">Trobada passada</string>
   <string name="helper_calendar_pastevent_question">La trobada ja ha passat. Voleu afegir-la de totes maneres?</string>
   <string name="helper_sendtocgeo_title">Send to c:geo</string>

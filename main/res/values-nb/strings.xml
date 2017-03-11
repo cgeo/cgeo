@@ -1084,9 +1084,6 @@
   <string name="license_show">Vis lisens</string>
   <string name="license_dismiss">Dismiss</string>
   <!-- helpers -->
-  <string name="helper_calendar_title">c:geo kalender-tillegg</string>
-  <string name="helper_calendar_missing">Kalendertillegget i c:geo er ikke installert.</string>
-  <string name="helper_calendar_description">Gjør det mulig å eksportere eventcacher til kalenderen på enheten din.</string>
   <string name="helper_calendar_pastevent_title">Tidligere eventer</string>
   <string name="helper_calendar_pastevent_question">Eventdatoen har allerede vært. Legge til likevel?</string>
   <string name="helper_sendtocgeo_title">Send til c:geo</string>

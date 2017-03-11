@@ -1072,9 +1072,6 @@
   <string name="license_show">Mostrar licencia</string>
   <string name="license_dismiss">Descartar</string>
   <!-- helpers -->
-  <string name="helper_calendar_title">Complemento de calendario de c:geo</string>
-  <string name="helper_calendar_missing">Complemento de calendario de c:geo no está instalado.</string>
-  <string name="helper_calendar_description">Permite exportar eventos al calendario de tu dispositivo.</string>
   <string name="helper_calendar_pastevent_title">Evento pasado</string>
   <string name="helper_calendar_pastevent_question">La fecha del evento ya ha pasado. ¿Añadirlo de todos modos?</string>
   <string name="helper_sendtocgeo_title">Send to c:geo</string>

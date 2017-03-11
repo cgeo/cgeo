@@ -906,9 +906,6 @@
   <string name="license_show">Pokaži licenco</string>
   <string name="license_dismiss">Zapri</string>
   <!-- helpers -->
-  <string name="helper_calendar_title">c:geo dodatek za koledar</string>
-  <string name="helper_calendar_missing">c:geo dodatek za koledar ni nameščen.</string>
-  <string name="helper_calendar_description">Dodatek vam omogoča izvoz srečanj na vaš koledar.</string>
   <string name="helper_sendtocgeo_title">Pošlji v c:geo</string>
   <string name="helper_contacts_title">Kontakti - dodatek za c:geo</string>
   <string name="helper_contacts_description">Omogoča vam odpiranje vizitke kontakta (v vašem adresarju) direktno iz zapisa, tako da lahko lažje vprašate prijatelje za pomoč.</string>

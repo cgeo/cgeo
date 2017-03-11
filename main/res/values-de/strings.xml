@@ -1088,9 +1088,6 @@
   <string name="license_show">Zeige Lizenz</string>
   <string name="license_dismiss">Ablehnen</string>
   <!-- helpers -->
-  <string name="helper_calendar_title">c:geo Kalender-Plugin</string>
-  <string name="helper_calendar_missing">c:geo Kalendar-Plugin nicht installiert.</string>
-  <string name="helper_calendar_description">Ermöglicht die Übernahme von Event-Caches in den Kalender.</string>
   <string name="helper_calendar_pastevent_title">Event in der Vergangenheit</string>
   <string name="helper_calendar_pastevent_question">Das Event-Datum liegt in der Vergangenheit. Trotzdem hinzufügen?</string>
   <string name="helper_sendtocgeo_title">Send to c:geo</string>

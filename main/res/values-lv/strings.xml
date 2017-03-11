@@ -1068,9 +1068,6 @@
   <string name="license_show">Rādīt licenci</string>
   <string name="license_dismiss">Izlaist</string>
   <!-- helpers -->
-  <string name="helper_calendar_title">c:geo kalendāra spraudnis</string>
-  <string name="helper_calendar_missing">c:geo kalendāra spraudnis nav instalēts.</string>
-  <string name="helper_calendar_description">Dod iespēju eksportēt pasākuma (event) slēpni tavā ierīces kalendārā.</string>
   <string name="helper_calendar_pastevent_title">Pagājušie notikumi (events)</string>
   <string name="helper_calendar_pastevent_question">Pasākuma (Eventa) datums ir pagājis. Vai tomēr pievienot?</string>
   <string name="helper_sendtocgeo_title">Send to c:geo</string>

@@ -1064,9 +1064,6 @@
   <string name="license_show">ライセンスを表示</string>
   <string name="license_dismiss">閉じる</string>
   <!-- helpers -->
-  <string name="helper_calendar_title">c:geo - カレンダーアドオン</string>
-  <string name="helper_calendar_missing">c:geo - カレンダーアドオンはインストールされていません。</string>
-  <string name="helper_calendar_description">イベントキャッシュをカレンダーアプリに登録することができます。</string>
   <string name="helper_calendar_pastevent_title">過去のイベント</string>
   <string name="helper_calendar_pastevent_question">イベントの日付が過去です。それでも追加しますか?</string>
   <string name="helper_sendtocgeo_title">Send to c:geo</string>

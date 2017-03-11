@@ -1084,9 +1084,6 @@
   <string name="license_show">Mostrar licença</string>
   <string name="license_dismiss">Dispensar</string>
   <!-- helpers -->
-  <string name="helper_calendar_title">Add on calendário para c:geo </string>
-  <string name="helper_calendar_missing">Add on calendário para o c:geo não está instalado.</string>
-  <string name="helper_calendar_description">Permite exportar caches evento para o calendário do seu dispositivo.</string>
   <string name="helper_calendar_pastevent_title">Eventos passados</string>
   <string name="helper_calendar_pastevent_question">A data do evento está no passado. Adicionar de qualquer maneira?</string>
   <string name="helper_sendtocgeo_title">Enviar para o c:geo</string>

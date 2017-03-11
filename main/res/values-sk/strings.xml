@@ -1093,9 +1093,6 @@
   <string name="license_show">Zobraziť licenciu</string>
   <string name="license_dismiss">Zamietnutie</string>
   <!-- helpers -->
-  <string name="helper_calendar_title">Doplnok c:geo calendar</string>
-  <string name="helper_calendar_missing">Doplnok c:geo calendar nie je nainštalovaný</string>
-  <string name="helper_calendar_description">Umožní vám exportovať Event cache do kalendára na vašom zariadení.</string>
   <string name="helper_calendar_pastevent_title">Minulá udalosť</string>
   <string name="helper_calendar_pastevent_question">Dátum udalosti je v minulosti. Pridať napriek tomu?</string>
   <string name="helper_sendtocgeo_title">Poslať do c:geo</string>

@@ -1082,9 +1082,6 @@
   <string name="license_show">Licenc mutatása</string>
   <string name="license_dismiss">Elutasítás</string>
   <!-- helpers -->
-  <string name="helper_calendar_title">c:geo naptár add-on</string>
-  <string name="helper_calendar_missing">c:geo naptár add-on nincs telepítve.</string>
-  <string name="helper_calendar_description">Események exportálása a készüléked naptárába.</string>
   <string name="helper_calendar_pastevent_title">Múltbéli esemény</string>
   <string name="helper_calendar_pastevent_question">Az esemény időpontja már elmúlt. Mégis hozzáadod?</string>
   <string name="helper_sendtocgeo_title">Send2cgeo</string>
