@@ -966,6 +966,26 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         }
     }
 
+    private static final class CheckboxHandler extends SimpleDisposableHandler {
+        private final WeakReference<DetailsViewCreator> creatorRef;
+
+        CheckboxHandler(final DetailsViewCreator creator, final CacheDetailActivity activity, final Progress progress) {
+            super(activity, progress);
+
+            creatorRef = new WeakReference<>(creator);
+        }
+
+        @Override
+        public void handleRegularMessage(final Message message) {
+            final DetailsViewCreator creator = creatorRef.get();
+            if (creator != null) {
+                super.handleRegularMessage(message);
+                creator.updateWatchlistBox();
+                creator.updateFavPointBox();
+            }
+        }
+    }
+
     /**
      * Creator for details-view.
      */
@@ -1192,15 +1212,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
          * Abstract Listener for add / remove buttons for watchlist
          */
         private abstract class AbstractPropertyListener implements View.OnClickListener {
-
-            private final SimpleDisposableHandler handler = new SimpleDisposableHandler(CacheDetailActivity.this, progress) {
-                @Override
-                public void handleRegularMessage(final Message message) {
-                    super.handleRegularMessage(message);
-                    updateWatchlistBox();
-                    updateFavPointBox();
-                }
-            };
+            private final SimpleDisposableHandler handler = new CheckboxHandler(DetailsViewCreator.this, CacheDetailActivity.this, progress);
 
             public void doExecute(final int titleId, final int messageId, final Action1<SimpleDisposableHandler> action) {
                 if (progress.isShowing()) {

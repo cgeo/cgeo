@@ -5,6 +5,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.storage.LocalStorage;
+import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.recyclerview.RecyclerViewProvider;
 import cgeo.geocaching.utils.EnvironmentUtils;
@@ -40,44 +41,58 @@ public abstract class AbstractFileListActivity<T extends RecyclerView.Adapter<? 
     protected int listId = StoredList.STANDARD_LIST_ID;
     private String[] extensions;
 
-    private final Handler changeWaitDialogHandler = new Handler() {
+    private final Handler changeWaitDialogHandler = new ChangeWaitDialogHandler<>(this);
+    private final Handler loadFilesHandler = new LoadFilesHandler<>(this);
+
+    private static final class ChangeWaitDialogHandler<T extends RecyclerView.Adapter<? extends RecyclerView.ViewHolder>> extends WeakReferenceHandler<AbstractFileListActivity<T>> {
         private String searchInfo;
+
+        ChangeWaitDialogHandler(final AbstractFileListActivity<T> activity) {
+            super(activity);
+        }
 
         @Override
         public void handleMessage(final Message msg) {
-            if (msg.obj != null && waitDialog != null) {
+            final AbstractFileListActivity<T> activity = getReference();
+            if (activity != null && msg.obj != null && activity.waitDialog != null) {
                 if (searchInfo == null) {
-                    searchInfo = res.getString(R.string.file_searching_in) + " ";
+                    searchInfo = activity.res.getString(R.string.file_searching_in) + " ";
                 }
                 if (msg.what == MSG_SEARCH_WHOLE_SD_CARD) {
-                    searchInfo = String.format(res.getString(R.string.file_searching_sdcard_in), getDefaultFolders());
+                    searchInfo = String.format(activity.res.getString(R.string.file_searching_sdcard_in), getDefaultFolders(activity));
                 }
-                waitDialog.setMessage(searchInfo + msg.obj);
+                activity.waitDialog.setMessage(searchInfo + msg.obj);
             }
         }
 
-        private String getDefaultFolders() {
+        private String getDefaultFolders(@NonNull final AbstractFileListActivity<T> activity) {
             final List<String> names = new ArrayList<>();
-            for (final File dir : getExistingBaseFolders()) {
+            for (final File dir : activity.getExistingBaseFolders()) {
                 names.add(dir.getPath());
             }
             return StringUtils.join(names, '\n');
         }
-    };
+    }
 
-    private final Handler loadFilesHandler = new Handler() {
+    private static final class LoadFilesHandler<T extends RecyclerView.Adapter<? extends RecyclerView.ViewHolder>> extends WeakReferenceHandler<AbstractFileListActivity<T>> {
+        LoadFilesHandler(final AbstractFileListActivity<T> activity) {
+            super(activity);
+        }
 
         @Override
         public void handleMessage(final Message msg) {
-            Dialogs.dismiss(waitDialog);
-            if (CollectionUtils.isEmpty(files) && requireFiles()) {
-                showToast(res.getString(R.string.file_list_no_files));
-                finish();
-            } else if (adapter != null) {
-                adapter.notifyDataSetChanged();
+            final AbstractFileListActivity<T> activity = getReference();
+            if (activity != null) {
+                Dialogs.dismiss(activity.waitDialog);
+                if (CollectionUtils.isEmpty(activity.files) && activity.requireFiles()) {
+                    activity.showToast(activity.res.getString(R.string.file_list_no_files));
+                    activity.finish();
+                } else if (activity.adapter != null) {
+                    activity.adapter.notifyDataSetChanged();
+                }
             }
         }
-    };
+    }
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {

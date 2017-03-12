@@ -179,6 +179,10 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private final ListNameMemento listNameMemento = new ListNameMemento();
 
     private final Handler loadCachesHandler = new LoadCachesHandler(this);
+    private final DisposableHandler clearOfflineLogsHandler = new ClearOfflineLogsHandler(this);
+    private final Handler importGpxAttachementFinishedHandler = new ImportGpxAttachementFinishedHandler(this);
+
+    private AbstractSearchLoader currentLoader;
 
     private static class LoadCachesHandler extends WeakReferenceHandler<CacheListActivity> {
 
@@ -301,53 +305,69 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         refreshSpinnerAdapter();
     }
 
-    private class LoadDetailsHandler extends DisposableHandler {
+    private static final class LoadDetailsHandler extends DisposableHandler {
+        private final WeakReference<CacheListActivity> activityRef;
+
+        LoadDetailsHandler(final CacheListActivity activity) {
+            activityRef = new WeakReference<>(activity);
+        }
 
         @Override
         protected void handleDispose() {
-            super.handleDispose();
-            replaceCacheListFromSearch();
+            final CacheListActivity activity = activityRef.get();
+            if (activity != null) {
+                super.handleDispose();
+                activity.replaceCacheListFromSearch();
+            }
         }
 
         @Override
         public void handleRegularMessage(final Message msg) {
-            updateAdapter();
+            final CacheListActivity activity = activityRef.get();
+            if (activity != null) {
+                activity.updateAdapter();
 
-            if (msg.what == DownloadProgress.MSG_LOADED) {
-                ((Geocache) msg.obj).setStatusChecked(false);
+                final Progress progress = activity.progress;
+                if (msg.what == DownloadProgress.MSG_LOADED) {
+                    ((Geocache) msg.obj).setStatusChecked(false);
 
-                adapter.notifyDataSetChanged();
+                    final CacheListAdapter adapter = activity.adapter;
+                    adapter.notifyDataSetChanged();
 
-                final int dp = detailProgress.get();
-                final int secondsElapsed = (int) ((System.currentTimeMillis() - detailProgressTime) / 1000);
-                final int minutesRemaining = (detailTotal - dp) * secondsElapsed / (dp > 0 ? dp : 1) / 60;
+                    final int dp = activity.detailProgress.get();
+                    final int secondsElapsed = (int) ((System.currentTimeMillis() - activity.detailProgressTime) / 1000);
+                    final int minutesRemaining = (activity.detailTotal - dp) * secondsElapsed / (dp > 0 ? dp : 1) / 60;
 
-                progress.setProgress(dp);
-                if (minutesRemaining < 1) {
-                    progress.setMessage(res.getString(R.string.caches_downloading) + " " + res.getString(R.string.caches_eta_ltm));
+                    final Resources res = activity.res;
+                    progress.setProgress(dp);
+                    if (minutesRemaining < 1) {
+                        progress.setMessage(res.getString(R.string.caches_downloading) + " " + res.getString(R.string.caches_eta_ltm));
+                    } else {
+                        progress.setMessage(res.getString(R.string.caches_downloading) + " " + res.getQuantityString(R.plurals.caches_eta_mins, minutesRemaining, minutesRemaining));
+                    }
                 } else {
-                    progress.setMessage(res.getString(R.string.caches_downloading) + " " + res.getQuantityString(R.plurals.caches_eta_mins, minutesRemaining, minutesRemaining));
-                }
-            } else {
-                new AsyncTask<Void, Void, Set<Geocache>>() {
-                    @Override
-                    protected Set<Geocache> doInBackground(final Void... params) {
-                        return search != null ? search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB) : null;
-                    }
-
-                    @Override
-                    protected void onPostExecute(final Set<Geocache> result) {
-                        if (CollectionUtils.isNotEmpty(result)) {
-                            cacheList.clear();
-                            cacheList.addAll(result);
-                            adapter.reFilter();
+                    new AsyncTask<Void, Void, Set<Geocache>>() {
+                        @Override
+                        protected Set<Geocache> doInBackground(final Void... params) {
+                            final SearchResult search = activity.search;
+                            return search != null ? search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB) : null;
                         }
-                        setAdapterCurrentCoordinates(false);
 
-                        showProgress(false);
-                        progress.dismiss();
-                    }
-                }.execute();
+                        @Override
+                        protected void onPostExecute(final Set<Geocache> result) {
+                            if (CollectionUtils.isNotEmpty(result)) {
+                                final List<Geocache> cacheList = activity.cacheList;
+                                cacheList.clear();
+                                cacheList.addAll(result);
+                                activity.adapter.reFilter();
+                            }
+                            activity.setAdapterCurrentCoordinates(false);
+
+                            activity.showProgress(false);
+                            progress.dismiss();
+                        }
+                    }.execute();
+                }
             }
         }
     }
@@ -355,64 +375,94 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     /**
      * TODO Possibly parts should be a Thread not a Handler
      */
-    private class DownloadFromWebHandler extends DisposableHandler {
+    private static final class DownloadFromWebHandler extends DisposableHandler {
+        private final WeakReference<CacheListActivity> activityRef;
+
+        DownloadFromWebHandler(final CacheListActivity activity) {
+            activityRef = new WeakReference<>(activity);
+        }
+
         @Override
         public void handleRegularMessage(final Message msg) {
-            updateAdapter();
+            final CacheListActivity activity = activityRef.get();
+            if (activity != null) {
+                activity.updateAdapter();
 
-            adapter.notifyDataSetChanged();
+                final CacheListAdapter adapter = activity.adapter;
+                adapter.notifyDataSetChanged();
 
-            switch (msg.what) {
-                case DownloadProgress.MSG_WAITING:  //no caches
-                    progress.setMessage(res.getString(R.string.web_import_waiting));
-                    break;
-                case DownloadProgress.MSG_LOADING:  //cache downloading
-                    progress.setMessage(res.getString(R.string.web_downloading) + ' ' + msg.obj + res.getString(R.string.ellipsis));
-                    break;
-                case DownloadProgress.MSG_LOADED:  //Cache downloaded
-                    progress.setMessage(res.getString(R.string.web_downloaded) + ' ' + msg.obj + res.getString(R.string.ellipsis));
-                    refreshCurrentList();
-                    break;
-                case DownloadProgress.MSG_SERVER_FAIL:
-                    progress.dismiss();
-                    showToast(res.getString(R.string.sendToCgeo_download_fail));
-                    finish();
-                    break;
-                case DownloadProgress.MSG_NO_REGISTRATION:
-                    progress.dismiss();
-                    showToast(res.getString(R.string.sendToCgeo_no_registration));
-                    finish();
-                    break;
-                default:  // MSG_DONE
-                    adapter.setSelectMode(false);
-                    replaceCacheListFromSearch();
-                    progress.dismiss();
-                    break;
+                final Progress progress = activity.progress;
+                switch (msg.what) {
+                    case DownloadProgress.MSG_WAITING:  //no caches
+                        progress.setMessage(activity.res.getString(R.string.web_import_waiting));
+                        break;
+                    case DownloadProgress.MSG_LOADING: {  //cache downloading
+                        final Resources res = activity.res;
+                        progress.setMessage(res.getString(R.string.web_downloading) + ' ' + msg.obj + res.getString(R.string.ellipsis));
+                        break;
+                    }
+                    case DownloadProgress.MSG_LOADED: {  //Cache downloaded
+                        final Resources res = activity.res;
+                        progress.setMessage(res.getString(R.string.web_downloaded) + ' ' + msg.obj + res.getString(R.string.ellipsis));
+                        activity.refreshCurrentList();
+                        break;
+                    }
+                    case DownloadProgress.MSG_SERVER_FAIL:
+                        progress.dismiss();
+                        activity.showToast(activity.res.getString(R.string.sendToCgeo_download_fail));
+                        activity.finish();
+                        break;
+                    case DownloadProgress.MSG_NO_REGISTRATION:
+                        progress.dismiss();
+                        activity.showToast(activity.res.getString(R.string.sendToCgeo_no_registration));
+                        activity.finish();
+                        break;
+                    default:  // MSG_DONE
+                        adapter.setSelectMode(false);
+                        activity.replaceCacheListFromSearch();
+                        progress.dismiss();
+                        break;
+                }
             }
         }
     }
 
-    private final DisposableHandler clearOfflineLogsHandler = new DisposableHandler() {
+    private static final class ClearOfflineLogsHandler extends DisposableHandler {
+        private final WeakReference<CacheListActivity> activityRef;
+
+        ClearOfflineLogsHandler(final CacheListActivity activity) {
+            activityRef = new WeakReference<>(activity);
+        }
 
         @Override
         public void handleRegularMessage(final Message msg) {
-            adapter.setSelectMode(false);
+            final CacheListActivity activity = activityRef.get();
+            if (activity != null) {
+                activity.adapter.setSelectMode(false);
 
-            refreshCurrentList();
+                activity.refreshCurrentList();
 
-            replaceCacheListFromSearch();
+                activity.replaceCacheListFromSearch();
 
-            progress.dismiss();
+                activity.progress.dismiss();
+            }
         }
-    };
+    }
 
-    private final Handler importGpxAttachementFinishedHandler = new Handler() {
+    private static final class ImportGpxAttachementFinishedHandler extends WeakReferenceHandler<CacheListActivity> {
+
+        ImportGpxAttachementFinishedHandler(final CacheListActivity activity) {
+            super(activity);
+        }
+
         @Override
         public void handleMessage(final Message msg) {
-            refreshCurrentList();
+            final CacheListActivity activity = getReference();
+            if (activity != null) {
+                activity.refreshCurrentList();
+            }
         }
-    };
-    private AbstractSearchLoader currentLoader;
+    }
 
     public CacheListActivity() {
         super(true);
@@ -1247,7 +1297,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             message = res.getString(R.string.caches_downloading) + " " + res.getQuantityString(R.plurals.caches_eta_mins, etaTime, etaTime);
         }
 
-        final LoadDetailsHandler loadDetailsHandler = new LoadDetailsHandler();
+        final LoadDetailsHandler loadDetailsHandler = new LoadDetailsHandler(this);
         progress.show(this, null, message, ProgressDialog.STYLE_HORIZONTAL, loadDetailsHandler.disposeMessage());
         progress.setMaxProgressAndReset(detailTotal);
 
@@ -1294,7 +1344,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
         detailProgress.set(0);
         showProgress(false);
-        final DownloadFromWebHandler downloadFromWebHandler = new DownloadFromWebHandler();
+        final DownloadFromWebHandler downloadFromWebHandler = new DownloadFromWebHandler(this);
         progress.show(this, null, res.getString(R.string.web_import_waiting), true, downloadFromWebHandler.disposeMessage());
         Send2CgeoDownloader.loadFromWeb(downloadFromWebHandler, listId);
     }

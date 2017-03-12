@@ -4,6 +4,7 @@ import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
+import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.BundleUtils;
@@ -54,31 +55,39 @@ public abstract class TokenAuthorizationActivity extends AbstractActivity {
 
     private ProgressDialog requestTokenDialog = null;
 
-    protected final Handler requestTokenHandler = new Handler() {
+    protected final Handler requestTokenHandler = new RequestTokenHandler(this);
+
+    private static final class RequestTokenHandler extends WeakReferenceHandler<TokenAuthorizationActivity> {
+        RequestTokenHandler(final TokenAuthorizationActivity activity) {
+            super(activity);
+        }
 
         @Override
         public void handleMessage(final Message msg) {
-            Dialogs.dismiss(requestTokenDialog);
+            final TokenAuthorizationActivity activity = getReference();
+            if (activity != null) {
+                Dialogs.dismiss(activity.requestTokenDialog);
 
-            startButton.setOnClickListener(new StartListener());
-            startButton.setEnabled(true);
+                final Button startButton = activity.startButton;
+                startButton.setOnClickListener(new StartListener(activity));
+                startButton.setEnabled(true);
 
-            if (msg.what == AUTHENTICATED) {
-                showToast(getAuthDialogCompleted());
-                setResult(RESULT_OK);
-                finish();
-            } else if (msg.what == ERROR_EXT_MSG) {
-                String errMsg = getErrAuthInitialize();
-                errMsg += msg.obj != null ? '\n' + msg.obj.toString() : "";
-                showToast(errMsg);
-                startButton.setText(getAuthStart());
-            } else {
-                showToast(getErrAuthProcess());
-                startButton.setText(getAuthStart());
+                if (msg.what == AUTHENTICATED) {
+                    activity.showToast(activity.getAuthDialogCompleted());
+                    activity.setResult(RESULT_OK);
+                    activity.finish();
+                } else if (msg.what == ERROR_EXT_MSG) {
+                    String errMsg = activity.getErrAuthInitialize();
+                    errMsg += msg.obj != null ? '\n' + msg.obj.toString() : "";
+                    activity.showToast(errMsg);
+                    startButton.setText(activity.getAuthStart());
+                } else {
+                    activity.showToast(activity.getErrAuthProcess());
+                    startButton.setText(activity.getAuthStart());
+                }
             }
         }
-
-    };
+    }
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
@@ -97,7 +106,7 @@ public abstract class TokenAuthorizationActivity extends AbstractActivity {
         auth2.setText(getAuthExplainLong());
 
         startButton.setText(getAuthAuthorize());
-        startButton.setOnClickListener(new StartListener());
+        startButton.setOnClickListener(new StartListener(this));
         enableStartButtonIfReady();
 
         if (StringUtils.isEmpty(getCreateAccountUrl())) {
@@ -163,29 +172,37 @@ public abstract class TokenAuthorizationActivity extends AbstractActivity {
         }
     }
 
-    private class StartListener implements View.OnClickListener {
+    private static class StartListener extends WeakReferenceHandler<TokenAuthorizationActivity> implements View.OnClickListener {
+        StartListener(final TokenAuthorizationActivity activity) {
+            super(activity);
+        }
 
         @Override
         public void onClick(final View view) {
-            if (requestTokenDialog == null) {
-                requestTokenDialog = new ProgressDialog(TokenAuthorizationActivity.this);
-                requestTokenDialog.setCancelable(false);
-                requestTokenDialog.setMessage(getAuthDialogWait());
-            }
-            requestTokenDialog.show();
-            startButton.setEnabled(false);
-            startButton.setOnTouchListener(null);
-            startButton.setOnClickListener(null);
-
-            final String username = usernameEditText.getText().toString();
-            final String password = passwordEditText.getText().toString();
-
-            AndroidRxUtils.networkScheduler.scheduleDirect(new Runnable() {
-                @Override
-                public void run() {
-                    requestToken(username, password);
+            final TokenAuthorizationActivity activity = getReference();
+            if (activity != null) {
+                if (activity.requestTokenDialog == null) {
+                    activity.requestTokenDialog = new ProgressDialog(activity);
+                    activity.requestTokenDialog.setCancelable(false);
+                    activity.requestTokenDialog.setMessage(activity.getAuthDialogWait());
                 }
-            });
+                activity.requestTokenDialog.show();
+
+                final Button startButton = activity.startButton;
+                startButton.setEnabled(false);
+                startButton.setOnTouchListener(null);
+                startButton.setOnClickListener(null);
+
+                final String username = activity.usernameEditText.getText().toString();
+                final String password = activity.passwordEditText.getText().toString();
+
+                AndroidRxUtils.networkScheduler.scheduleDirect(new Runnable() {
+                    @Override
+                    public void run() {
+                        activity.requestToken(username, password);
+                    }
+                });
+            }
         }
     }
 

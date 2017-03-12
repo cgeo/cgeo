@@ -112,35 +112,48 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
      */
     private Geocache cache;
 
-    private final Handler loadWaypointHandler = new Handler() {
+    private final Handler loadWaypointHandler = new LoadWaypointHandler(this);
+
+    private static final class LoadWaypointHandler extends WeakReferenceHandler<EditWaypointActivity> {
+        LoadWaypointHandler(final EditWaypointActivity activity) {
+            super(activity);
+        }
 
         @Override
         public void handleMessage(final Message msg) {
-            try {
-                if (waypoint == null) {
-                    Log.d("No waypoint loaded to edit. id= " + waypointId);
-                    waypointId = -1;
-                } else {
-                    geocode = waypoint.getGeocode();
-                    prefix = waypoint.getPrefix();
-                    lookup = waypoint.getLookup();
-                    own = waypoint.isUserDefined();
-                    originalCoordsEmpty = waypoint.isOriginalCoordsEmpty();
+            final EditWaypointActivity activity = getReference();
+            if (activity == null) {
+                return;
+            }
 
-                    if (initViews) {
-                        visitedCheckBox.setChecked(waypoint.isVisited());
+            try {
+                final Waypoint waypoint = activity.waypoint;
+                if (waypoint == null) {
+                    Log.d("No waypoint loaded to edit. id= " + activity.waypointId);
+                    activity.waypointId = -1;
+                } else {
+                    activity.geocode = waypoint.getGeocode();
+                    activity.prefix = waypoint.getPrefix();
+                    activity.lookup = waypoint.getLookup();
+                    activity.own = waypoint.isUserDefined();
+                    activity.originalCoordsEmpty = waypoint.isOriginalCoordsEmpty();
+
+                    if (activity.initViews) {
+                        activity.visitedCheckBox.setChecked(waypoint.isVisited());
                         final Geopoint coordinates = waypoint.getCoords();
                         if (coordinates != null) {
-                            buttonLat.setText(coordinates.format(GeopointFormatter.Format.LAT_DECMINUTE));
-                            buttonLon.setText(coordinates.format(GeopointFormatter.Format.LON_DECMINUTE));
+                            activity.buttonLat.setText(coordinates.format(GeopointFormatter.Format.LAT_DECMINUTE));
+                            activity.buttonLon.setText(coordinates.format(GeopointFormatter.Format.LON_DECMINUTE));
                         }
+                        final AutoCompleteTextView waypointName = activity.waypointName;
                         waypointName.setText(TextUtils.stripHtml(StringUtils.trimToEmpty(waypoint.getName())));
                         Dialogs.moveCursorToEnd(waypointName);
                         if (TextUtils.containsHtml(waypoint.getNote())) {
-                            note.setText(TextUtils.stripHtml(StringUtils.trimToEmpty(waypoint.getNote())));
+                            activity.note.setText(TextUtils.stripHtml(StringUtils.trimToEmpty(waypoint.getNote())));
                         } else {
-                            note.setText(StringUtils.trimToEmpty(waypoint.getNote()));
+                            activity.note.setText(StringUtils.trimToEmpty(waypoint.getNote()));
                         }
+                        final EditText userNote = activity.userNote;
                         if (TextUtils.containsHtml(waypoint.getUserNote())) {
                             userNote.setText(TextUtils.stripHtml(StringUtils.trimToEmpty(waypoint.getUserNote())));
                         } else {
@@ -151,33 +164,33 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
                     new AsyncTask<Void, Void, Geocache>() {
                         @Override
                         protected Geocache doInBackground(final Void... params) {
-                            return DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_ONLY);
+                            return DataStore.loadCache(activity.geocode, LoadFlags.LOAD_CACHE_ONLY);
                         }
 
                         @Override
                         protected void onPostExecute(final Geocache cache) {
-                            setCoordsModificationVisibility(ConnectorFactory.getConnector(geocode));
+                            activity.setCoordsModificationVisibility(ConnectorFactory.getConnector(activity.geocode));
                         }
                     }.execute();
                 }
 
-                if (own) {
-                    initializeWaypointTypeSelector();
+                if (activity.own) {
+                    activity.initializeWaypointTypeSelector();
                 } else {
-                    waypointName.setEnabled(false);
-                    note.setEnabled(false);
+                    activity.waypointName.setEnabled(false);
+                    activity.note.setEnabled(false);
                     if (!waypoint.isOriginalCoordsEmpty()) {
-                        projection.setVisibility(View.GONE);
+                        activity.projection.setVisibility(View.GONE);
                     }
                 }
             } catch (final RuntimeException e) {
                 Log.e("EditWaypointActivity.loadWaypointHandler", e);
             } finally {
-                Dialogs.dismiss(waitDialog);
-                waitDialog = null;
+                Dialogs.dismiss(activity.waitDialog);
+                activity.waitDialog = null;
             }
         }
-    };
+    }
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {

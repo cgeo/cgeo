@@ -318,35 +318,50 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
     private final Handler showProgressHandler = new ShowProgressHandler(this);
 
-    private final class LoadDetailsHandler extends DisposableHandler {
+    private static final class LoadDetailsHandler extends DisposableHandler {
+        private final WeakReference<CGeoMap> mapRef;
+
+        LoadDetailsHandler(final CGeoMap map) {
+            mapRef = new WeakReference<>(map);
+        }
 
         @Override
         public void handleRegularMessage(final Message msg) {
-            if (waitDialog != null) {
-                if (msg.what == UPDATE_PROGRESS) {
-                    final int secondsElapsed = (int) ((System.currentTimeMillis() - detailProgressTime) / 1000);
-                    // FIXME: the Math.max below is purely defensive programming around an issue reported
-                    // in https://github.com/cgeo/cgeo/issues/6447. This code should be rewritten to, at least,
-                    // no longer use global variables to pass information between the handler and its user.
-                    final int secondsRemaining = (detailTotal - detailProgress) * secondsElapsed / Math.max(detailProgress, 1);
+            final CGeoMap map = mapRef.get();
+            if (map != null) {
+                final ProgressDialog waitDialog = map.waitDialog;
+                if (waitDialog != null) {
+                    if (msg.what == UPDATE_PROGRESS) {
+                        final int detailProgress = map.detailProgress;
+                        final int secondsElapsed = (int) ((System.currentTimeMillis() - map.detailProgressTime) / 1000);
+                        // FIXME: the Math.max below is purely defensive programming around an issue reported
+                        // in https://github.com/cgeo/cgeo/issues/6447. This code should be rewritten to, at least,
+                        // no longer use global variables to pass information between the handler and its user.
+                        final int secondsRemaining = (map.detailTotal - detailProgress) * secondsElapsed / Math.max(detailProgress, 1);
 
-                    waitDialog.setProgress(detailProgress);
-                    if (secondsRemaining < 40) {
-                        waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + res.getString(R.string.caches_eta_ltm));
-                    } else {
-                        final int minsRemaining = secondsRemaining / 60;
-                        waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + res.getQuantityString(R.plurals.caches_eta_mins, minsRemaining, minsRemaining));
+                        final Resources res = map.res;
+                        waitDialog.setProgress(detailProgress);
+                        if (secondsRemaining < 40) {
+                            waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + res.getString(R.string.caches_eta_ltm));
+                        } else {
+                            final int minsRemaining = secondsRemaining / 60;
+                            waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + res.getQuantityString(R.plurals.caches_eta_mins, minsRemaining, minsRemaining));
+                        }
+                    } else if (msg.what == FINISHED_LOADING_DETAILS) {
+                        waitDialog.dismiss();
+                        waitDialog.setOnCancelListener(null);
                     }
-                } else if (msg.what == FINISHED_LOADING_DETAILS) {
-                    waitDialog.dismiss();
-                    waitDialog.setOnCancelListener(null);
                 }
             }
         }
         @Override
         public void handleDispose() {
-            if (loadDetailsThread != null) {
-                loadDetailsThread.stopIt();
+            final CGeoMap map = mapRef.get();
+            if (map != null) {
+                final LoadDetails loadDetailsThread = map.loadDetailsThread;
+                if (loadDetailsThread != null) {
+                    loadDetailsThread.stopIt();
+                }
             }
         }
 
@@ -1314,7 +1329,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
      *            the lists to store the caches in
      */
     private void storeCaches(final List<String> geocodes, final Set<Integer> listIds) {
-        final LoadDetailsHandler loadDetailsHandler = new LoadDetailsHandler();
+        final LoadDetailsHandler loadDetailsHandler = new LoadDetailsHandler(this);
 
         waitDialog = new ProgressDialog(activity);
         waitDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
