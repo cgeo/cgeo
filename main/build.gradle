@@ -10,9 +10,11 @@ import org.apache.tools.ant.filters.ReplaceTokens
  */
 apply plugin: 'com.android.application'
 /*
- * https://github.com/KeepSafe/dexcount-gradle-plugin
+ * https://github.com/KeepSafe/dexcount-gradle-plugin. dex counting can take several seconds, therefore do this only on the CI server
  */
-apply plugin: 'com.getkeepsafe.dexcount'
+if (isContinuousIntegrationServer()) {
+    apply plugin: 'com.getkeepsafe.dexcount'
+}
 
 android {
     compileSdkVersion "Google Inc.:Google APIs:23"
