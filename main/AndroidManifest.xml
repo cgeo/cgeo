@@ -3,7 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="cgeo.geocaching"
-    android:installLocation="auto">
+    android:installLocation="auto"
+    android:versionCode="20170230"
+    android:versionName="2017.02.30-legacy" >
 
     <uses-sdk
         android:minSdkVersion="9"
