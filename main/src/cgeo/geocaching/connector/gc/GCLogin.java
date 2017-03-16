@@ -18,6 +18,7 @@ import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -31,6 +32,7 @@ import io.reactivex.functions.Function;
 import okhttp3.Response;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
@@ -39,6 +41,17 @@ public class GCLogin extends AbstractLogin {
     private static final String ENGLISH = "<a href=\"#\">English</a>";
 
     private static final String LANGUAGE_CHANGE_URI = "https://www.geocaching.com/my/souvenirs.aspx";
+    private static final String LOGIN_URI = "https://www.geocaching.com/account/login?ReturnUrl=/play";
+    private static final String REQUEST_VERIFICATION_TOKEN = "__RequestVerificationToken";
+
+    private class StatusException extends RuntimeException {
+        final StatusCode statusCode;
+
+        StatusException(final StatusCode statusCode) {
+            super("Status code: " + statusCode);
+            this.statusCode = statusCode;
+        }
+    }
 
     private GCLogin() {
         // singleton
@@ -73,15 +86,10 @@ public class GCLogin extends AbstractLogin {
         }
 
         final String username = credentials.getUserName();
-        final String password = credentials.getPassword();
 
         setActualStatus(CgeoApplication.getInstance().getString(R.string.init_login_popup_working));
         try {
-            final Response tryLoggedInResponse = Network.getRequest("https://www.geocaching.com/login/default.aspx").blockingGet();
-            final String tryLoggedInData = Network.getResponseData(tryLoggedInResponse);
-            if (tryLoggedInResponse.code() == 503 && TextUtils.matches(tryLoggedInData, GCConstants.PATTERN_MAINTENANCE)) {
-                return StatusCode.MAINTENANCE;
-            }
+            final String tryLoggedInData = getLoginPage();
 
             if (StringUtils.isBlank(tryLoggedInData)) {
                 Log.e("Login.login: Failed to retrieve login page (1st)");
@@ -102,25 +110,18 @@ public class GCLogin extends AbstractLogin {
             Cookies.clearCookies();
             Settings.setCookieStore(null);
 
-            final String[] viewstates = getViewstates(tryLoggedInData);
-            if (isEmpty(viewstates)) {
-                Log.e("Login.login: Failed to find viewstates");
-                return StatusCode.LOGIN_PARSE_ERROR; // no viewstates
+            // Since the cookie store just got cleared, we need to do an extra request to get the
+            // request verification token cookie corresponding to the request verification token
+            // in the login page.
+            final String requestVerificationToken = extractRequestVerificationToken(getLoginPage());
+            if (StringUtils.isEmpty(requestVerificationToken)) {
+                Log.w("GCLogin.login: failed to find request verification token");
+                return StatusCode.LOGIN_PARSE_ERROR;
             }
 
-            final Parameters params = new Parameters(
-                    "__EVENTTARGET", "",
-                    "__EVENTARGUMENT", "",
-                    "ctl00$ContentBody$tbUsername", username,
-                    "ctl00$ContentBody$tbPassword", password,
-                    "ctl00$ContentBody$cbRememberMe", "on",
-                    "ctl00$ContentBody$btnSignIn", "Login");
-            putViewstates(params, viewstates);
-
-            final String loginData = Network.getResponseData(Network.postRequest("https://www.geocaching.com/login/default.aspx", params));
-
+            final String loginData = postCredentials(credentials, requestVerificationToken);
             if (StringUtils.isBlank(loginData)) {
-                Log.e("Login.login: Failed to retrieve login page (2nd)");
+                Log.w("Login.login: Failed to retrieve login page (2nd)");
                 // FIXME: should it be CONNECTION_FAILED to match the first attempt?
                 return StatusCode.COMMUNICATION_ERROR; // no login page
             }
@@ -155,25 +156,56 @@ public class GCLogin extends AbstractLogin {
             }
 
             return resetGcCustomDate(StatusCode.UNKNOWN_ERROR); // can't login
+        } catch (final StatusException status) {
+            return status.statusCode;
         } catch (final Exception ignored) {
-            Log.e("Login.login: communication error");
+            Log.w("Login.login: communication error");
             return StatusCode.CONNECTION_FAILED;
         }
     }
 
     public StatusCode logout() {
         try {
-            final Response logoutResponse = Network.getRequest("https://www.geocaching.com/login/default.aspx?RESET=Y&redir=http%3a%2f%2fwww.geocaching.com%2fdefault.aspx%3f")
-                    .blockingGet();
-            final String logoutData = Network.getResponseData(logoutResponse);
-            if (logoutResponse.code() == 503 && TextUtils.matches(logoutData, GCConstants.PATTERN_MAINTENANCE)) {
-                return StatusCode.MAINTENANCE;
-            }
+            getResponseBodyOrStatus(Network.postRequest("https://www.geocaching.com/account/logout?ReturnUrl=/play", null).blockingGet());
+        } catch (final StatusException status) {
+            return status.statusCode;
         } catch (final Exception ignored) {
         }
 
         resetLoginStatus();
         return StatusCode.NO_ERROR;
+    }
+
+    private String getResponseBodyOrStatus(final Response response) {
+        final String body;
+        try {
+            body = response.body().string();
+        } catch (final IOException ignore) {
+            throw new StatusException(StatusCode.COMMUNICATION_ERROR);
+        }
+        if (response.code() == 503 && TextUtils.matches(body, GCConstants.PATTERN_MAINTENANCE)) {
+            throw new StatusException(StatusCode.MAINTENANCE);
+        } else if (!response.isSuccessful()) {
+            throw new StatusException(StatusCode.COMMUNICATION_ERROR);
+        }
+        return body;
+    }
+
+    private String getLoginPage() {
+        return getResponseBodyOrStatus(Network.getRequest(LOGIN_URI).blockingGet());
+    }
+
+    @Nullable
+    private String extractRequestVerificationToken(final String page) {
+        final Document document = Jsoup.parse(page);
+        final String value = document.select(".login > form > input[name=\"" + REQUEST_VERIFICATION_TOKEN + "\"]").attr("value");
+        return StringUtils.isNotEmpty(value) ? value : null;
+    }
+
+    private String postCredentials(final Credentials credentials, final String requestVerificationToken) {
+        final Parameters params = new Parameters("Username", credentials.getUserName(),
+                "Password", credentials.getPassword(), REQUEST_VERIFICATION_TOKEN, requestVerificationToken);
+        return getResponseBodyOrStatus(Network.postRequest(LOGIN_URI, params).blockingGet());
     }
 
     private static String removeDotAndComma(final String str) {
