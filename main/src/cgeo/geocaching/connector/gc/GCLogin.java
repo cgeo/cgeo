@@ -92,7 +92,7 @@ public class GCLogin extends AbstractLogin {
             final String tryLoggedInData = getLoginPage();
 
             if (StringUtils.isBlank(tryLoggedInData)) {
-                Log.e("Login.login: Failed to retrieve login page (1st)");
+                Log.w("Login.login: Failed to retrieve login page (1st)");
                 return StatusCode.CONNECTION_FAILED; // no login page
             }
 
