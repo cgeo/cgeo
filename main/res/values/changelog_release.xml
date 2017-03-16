@@ -19,6 +19,7 @@
     · Fix: Don\'t delete logs on refresh error\n
     · Fix: Crash on some devices when editing or saving personal note\n
     · Fix: Sometimes wrong geokrety name was shown\n
+    · Fix: Export coordinates to clipboard in non-localized format\n
     \n
     \n
 </string>
