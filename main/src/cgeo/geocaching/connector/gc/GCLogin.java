@@ -4,7 +4,6 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.AbstractLogin;
 import cgeo.geocaching.enumerations.StatusCode;
-import cgeo.geocaching.network.Cookies;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
@@ -38,10 +37,8 @@ import org.jsoup.nodes.Element;
 
 public class GCLogin extends AbstractLogin {
 
-    private static final String ENGLISH = "<a href=\"#\">English</a>";
-
     private static final String LANGUAGE_CHANGE_URI = "https://www.geocaching.com/my/souvenirs.aspx";
-    private static final String LOGIN_URI = "https://www.geocaching.com/account/login?ReturnUrl=/play";
+    private static final String LOGIN_URI = "https://www.geocaching.com/account/login";
     private static final String REQUEST_VERIFICATION_TOKEN = "__RequestVerificationToken";
 
     private class StatusException extends RuntimeException {
@@ -107,13 +104,7 @@ public class GCLogin extends AbstractLogin {
                 return StatusCode.NO_ERROR; // logged in
             }
 
-            Cookies.clearCookies();
-            Settings.setCookieStore(null);
-
-            // Since the cookie store just got cleared, we need to do an extra request to get the
-            // request verification token cookie corresponding to the request verification token
-            // in the login page.
-            final String requestVerificationToken = extractRequestVerificationToken(getLoginPage());
+            final String requestVerificationToken = extractRequestVerificationToken(tryLoggedInData);
             if (StringUtils.isEmpty(requestVerificationToken)) {
                 Log.w("GCLogin.login: failed to find request verification token");
                 return StatusCode.LOGIN_PARSE_ERROR;
@@ -132,7 +123,6 @@ public class GCLogin extends AbstractLogin {
                     return login(false, credentials);
                 }
                 Log.i("Successfully logged in Geocaching.com as " + username + " (" + Settings.getGCMemberStatus() + ')');
-                Settings.setCookieStore(Cookies.dumpCookieStore());
                 setHomeLocation();
                 refreshMemberStatus();
                 detectGcCustomDate();
@@ -166,7 +156,7 @@ public class GCLogin extends AbstractLogin {
 
     public StatusCode logout() {
         try {
-            getResponseBodyOrStatus(Network.postRequest("https://www.geocaching.com/account/logout?ReturnUrl=/play", null).blockingGet());
+            getResponseBodyOrStatus(Network.postRequest("https://www.geocaching.com/account/logout", null).blockingGet());
         } catch (final StatusException status) {
             return status.statusCode;
         } catch (final Exception ignored) {
@@ -256,6 +246,10 @@ public class GCLogin extends AbstractLogin {
         return false;
     }
 
+    private boolean isLanguageEnglish(@NonNull final String page) {
+        return StringUtils.equals(Jsoup.parse(page).select("div.language-dropdown > select > option[selected=\"selected\"]").first().text(), "English");
+    }
+
     /**
      * Ensure that the web site is in English.
      *
@@ -264,7 +258,7 @@ public class GCLogin extends AbstractLogin {
      * @return {@code true} if a switch was necessary and successfully performed (non-English -> English)
      */
     private boolean switchToEnglish(final String previousPage) {
-        if (previousPage != null && previousPage.contains(ENGLISH)) {
+        if (previousPage != null && isLanguageEnglish(previousPage)) {
             Log.i("Geocaching.com language already set to English");
             // get find count
             getLoginStatus(Network.getResponseData(Network.getRequest("https://www.geocaching.com/email/")));
