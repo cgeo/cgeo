@@ -1,5 +1,6 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.network.Cookies;
 import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
@@ -57,6 +58,9 @@ public class CgeoApplication extends Application {
 
         // ensure initialization of lists
         DataStore.getLists();
+
+        // Restore cookies
+        Cookies.restoreCookies();
 
         final Sensors sensors = Sensors.getInstance();
         sensors.setupGeoDataObservables(Settings.useGooglePlayServices(), Settings.useLowPowerMode());
