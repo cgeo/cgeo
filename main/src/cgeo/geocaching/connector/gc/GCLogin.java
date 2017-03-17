@@ -37,7 +37,6 @@ import org.jsoup.nodes.Element;
 
 public class GCLogin extends AbstractLogin {
 
-    private static final String LANGUAGE_CHANGE_URI = "https://www.geocaching.com/my/souvenirs.aspx";
     private static final String LOGIN_URI = "https://www.geocaching.com/account/login";
     private static final String REQUEST_VERIFICATION_TOKEN = "__RequestVerificationToken";
 
@@ -261,23 +260,12 @@ public class GCLogin extends AbstractLogin {
         if (previousPage != null && isLanguageEnglish(previousPage)) {
             Log.i("Geocaching.com language already set to English");
             // get find count
-            getLoginStatus(Network.getResponseData(Network.getRequest("https://www.geocaching.com/email/")));
+            getLoginStatus(previousPage);
         } else {
-            final String page = Network.getResponseData(Network.getRequest(LANGUAGE_CHANGE_URI));
-            getLoginStatus(page);
-            if (page == null) {
-                Log.e("Failed to read viewstates to set geocaching.com language");
-            }
-            final String paramEnglish = TextUtils.getMatch(page, GCConstants.PATTERN_ENGLISH_SELECTION, null);
-            if (paramEnglish == null) {
-                Log.e("Failed to find English language selector");
-            }
-            // switch to English
-            final Parameters params = new Parameters("__EVENTTARGET", paramEnglish, "__EVENTARGUMENT", "");
-            transferViewstates(page, params);
             try {
-                Network.completeWithSuccess(Network.postRequest(LANGUAGE_CHANGE_URI, params, new Parameters("Referer", LANGUAGE_CHANGE_URI)));
+                final String page = Network.getResponseData(Network.getRequest("https://www.geocaching.com/play/culture/set?model.SelectedCultureCode=en-US"));
                 Log.i("changed language on geocaching.com to English");
+                getLoginStatus(page);
                 return true;
             } catch (final Exception ignored) {
                 Log.e("Failed to set geocaching.com language to English");
