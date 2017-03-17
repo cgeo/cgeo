@@ -134,7 +134,6 @@ public final class GCConstants {
     static final Pattern PATTERN_SEARCH_DIFFICULTY_TERRAIN = Pattern.compile("<span class=\"small\">([0-5]([\\.,]5)?)/([0-5]([\\.,]5)?)</span><br />");
     static final Pattern PATTERN_SEARCH_CONTAINER = Pattern.compile("<img src=\"/images/icons/container/([^\\.]+)\\.gif\"");
     static final Pattern PATTERN_SEARCH_GEOCODE = Pattern.compile("\\|\\W*(GC[0-9A-Z&&[^ILOSU]]+)[^\\|]*\\|");
-    static final Pattern PATTERN_SEARCH_ID = Pattern.compile("name=\"CID\"[^v]*value=\"(\\d+)\"");
     static final Pattern PATTERN_SEARCH_FAVORITE = Pattern.compile("favorite-rank\">([0-9,.]+)</span>");
     static final Pattern PATTERN_SEARCH_TOTALCOUNT = Pattern.compile("PageBuilderWidget\"><span>[^<]*?<b>(\\d+)<");
     static final Pattern PATTERN_SEARCH_HIDDEN_DATE = Pattern.compile("<td style=\"width:70px\" data-dateplaced=\"[^\"]+\">[^<]+<span class=\"small\">([^<]+)</span>");
