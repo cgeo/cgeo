@@ -1,6 +1,6 @@
 package cgeo.geocaching.network;
 
-import org.apache.commons.lang3.StringUtils;
+import cgeo.geocaching.settings.DiskCookieStore;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -10,26 +10,35 @@ import okhttp3.Cookie;
 import okhttp3.Cookie.Builder;
 import okhttp3.CookieJar;
 import okhttp3.HttpUrl;
+import org.apache.commons.lang3.StringUtils;
 
 public final class Cookies {
 
     static final InMemoryCookieJar cookieJar = new InMemoryCookieJar();
 
-    static class InMemoryCookieJar implements CookieJar {
+    private static class InMemoryCookieJar implements CookieJar {
 
         final HashMap<String, Cookie> allCookies = new HashMap<>();
-        private boolean cookieStoreRestored = false;
 
         @Override
         public synchronized void saveFromResponse(final HttpUrl url, final List<Cookie> cookies) {
+            boolean needStoreUpdate = false;
             for (final Cookie cookie : cookies) {
-                addCookie(cookie);
+                needStoreUpdate |= addCookie(cookie);
+            }
+            if (needStoreUpdate) {
+                DiskCookieStore.setCookieStore(dumpCookieStore());
             }
         }
 
-        private void addCookie(final Cookie cookie) {
+        private boolean addCookie(final Cookie cookie) {
             final String key = cookie.domain() + ';' + cookie.name();
-            allCookies.put(key, cookie);
+            final Cookie oldCookie = allCookies.get(key);
+            if (oldCookie == null || !oldCookie.equals(cookie)) {
+                allCookies.put(key, cookie);
+                return true;
+            }
+            return false;
         }
 
         @Override
@@ -47,28 +56,26 @@ public final class Cookies {
 
         public synchronized void clear() {
             allCookies.clear();
+            dumpCookieStore();
         }
 
-        public synchronized void restoreCookieStore(final String oldCookies) {
-            if (!cookieStoreRestored) {
-                clearCookies();
-                if (oldCookies != null) {
-                    for (final String cookie : StringUtils.split(oldCookies, ';')) {
-                        final String[] split = StringUtils.split(cookie, "=", 3);
-                        if (split.length == 3) {
-                            try {
-                                addCookie(new Builder().name(split[0]).value(split[1]).domain(split[2]).build());
-                            } catch (final RuntimeException ignored) {
-                                // ignore
-                            }
+        private synchronized void restoreCookieStore() {
+            final String oldCookies = DiskCookieStore.getCookieStore();
+            if (oldCookies != null) {
+                for (final String cookie : StringUtils.split(oldCookies, ';')) {
+                    final String[] split = StringUtils.split(cookie, "=", 3);
+                    if (split.length == 3) {
+                        try {
+                            addCookie(new Builder().name(split[0]).value(split[1]).domain(split[2]).build());
+                        } catch (final RuntimeException ignored) {
+                            // ignore
                         }
                     }
                 }
-                cookieStoreRestored = true;
             }
         }
 
-        String dumpCookieStore() {
+        private String dumpCookieStore() {
             final StringBuilder cookies = new StringBuilder();
             for (final Cookie cookie : allCookies.values()) {
                 cookies.append(cookie.name());
@@ -86,15 +93,13 @@ public final class Cookies {
         // Utility class
     }
 
-    public static void restoreCookieStore(final String oldCookies) {
-        cookieJar.restoreCookieStore(oldCookies);
-    }
-
-    public static String dumpCookieStore() {
-        return cookieJar.dumpCookieStore();
-    }
-
     public static void clearCookies() {
         cookieJar.clear();
+        cookieJar.dumpCookieStore();
+    }
+
+    // To be called once when starting the application
+    public static void restoreCookies() {
+        cookieJar.restoreCookieStore();
     }
 }
