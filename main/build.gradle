@@ -82,6 +82,11 @@ android {
         release {
             signingConfig signingConfigs.release
         }
+        legacy {
+            defaultConfig.versionName = System.getenv('LEGACY_VERSION_NAME')
+            defaultConfig.versionCode = System.getenv('LEGACY_VERSION_CODE') as Integer
+            signingConfig signingConfigs.release
+        }
     }
     
     buildTypes.all { buildType ->
@@ -276,6 +281,7 @@ dependencies {
     def leakCanaryVersion = '1.5'
     debugCompile "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion"
     releaseCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
+    legacyCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
     nightlyCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
     rcCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
     testCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
