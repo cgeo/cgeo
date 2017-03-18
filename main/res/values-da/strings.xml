@@ -79,7 +79,7 @@
   <string name="log_tb_nothing">Gør intet</string>
   <string name="log_tb_visit">Besøgt</string>
   <string name="log_tb_drop">Læg her</string>
-  <string name="log_tb_sortby">Sortér trackable</string>
+  <string name="log_tb_sortby">Sortér Trackable</string>
   <string name="log_tb_changeall">Ændr alle</string>
   <string name="log_tb_grabbed">Taget fra andet sted</string>
   <string name="log_tb_note">Note</string>
@@ -301,7 +301,7 @@
   <string name="caches_sort_name">Navn</string>
   <string name="caches_sort_geocode">Geokode</string>
   <string name="caches_sort_rating">Vurdering</string>
-  <string name="caches_sort_vote">Bedømmelse (egen vurdering)</string>
+  <string name="caches_sort_vote">Afstemning (egen vurdering)</string>
   <string name="caches_sort_inventory">Antal Trackables</string>
   <string name="caches_sort_date_hidden">Dato for placering</string>
   <string name="caches_sort_date_logged">Dato for logbesked</string>
@@ -472,7 +472,7 @@
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_gcvote_password_description">For at kunne bedømme en cache skal du følge instruktionerne på GCVote.com og angive dit password til GCVote her.</string>
   <string name="err_gcvote_send_rating">Fejl under afsendelse af bedømmelse. Kontrollér eller fjern GCVote password under Indstillinger.</string>
-  <string name="gcvote_sent">Bedømmelse blev afsendt</string>
+  <string name="gcvote_sent">Stemme blev afsendt</string>
   <string name="init_twitter">Twitter</string>
   <string name="settings_activate_twitter">Aktivér</string>
   <string name="init_username">Brugernavn</string>
@@ -503,7 +503,7 @@
   <string name="init_signature_template_url">URL</string>
   <string name="init_signature_template_log">Logtekst</string>
   <string name="init_ratingwanted">GCVote vurdering</string>
-  <string name="init_summary_ratingwanted">Indlæs cachebedømmelser fra GCVote.com</string>
+  <string name="init_summary_ratingwanted">Indlæs cachevurdering fra GCVote.com</string>
   <string name="init_friends_and_own_logs_wanted">Vis venners/egne</string>
   <string name="init_summary_friends_and_own_logs_wanted">Vis en særskilt logbogsside med venners og egne logbeskeder</string>
   <string name="init_openlastdetailspage">Åbn sidste detaljeside</string>
@@ -556,7 +556,7 @@
   <string name="settings_info_offline_maps_title">Oplysninger om offline kort</string>
   <string name="settings_info_offline_maps">c:geo understøtter kort til offline brug. Du kan downloade kort fra Mapsforge eller lave dine egne kort ved hjælp af OSM data. Du skal vælge en mappe, som indeholder offline kort, før du kan bruge offline kort.</string>
   <string name="settings_info_themes_title">Oplysninger om korttemaer</string>
-  <string name="settings_info_themes">c:geo understøtter tilpassede temaer til offline kort. Temaer kan bruges til at ændre farvestil på kortet (f.eks. farver som egne sig til brug i mørke) eller til at fremhæve bestemte typer af objekter, som cykelstier eller højdekurver.</string>
+  <string name="settings_info_themes">c:geo understøtter tilpassede temaer til offline kort. Temaer kan bruges til at ændre farvestil på kortet (f.eks. farver som egne sig til brug i mørke) eller til at fremhæve bestemte typer af objekter, som cykelstier eller højdekurver, på kortet.</string>
   <string name="init_mapsource_select">Vælg kortkilde</string>
   <string name="settings_title_scale_map_text">Tilpas tekst på kort</string>
   <string name="settings_summary_scale_map_text">Tilpas størrelsen af tekster på offline kort, så de passer til enhedens skærmopløsning,</string>
@@ -579,7 +579,7 @@
   <string name="init_default_navigation_tool_2_description">Her kan du vælge din sekundære navigationsmetode. Aktivér den ved at holde på navigationssymbolet det vises i cachens titel.</string>
   <string name="init_navigation_menu_description">Her kan du vælge hvilke af de tilgængelige navigationsmetoder, der skal vises i navigationsmenuen for en cache eller et waypoint. Metoder som ikke er installeret på denne enhed kan ikke vælges.</string>
   <string name="init_debug_title">Debug-information</string>
-  <string name="init_debug_note">c:geo kan generere en stor mængde fejlretningsinformation. Aktivering af denne indstilling kan imidlertid påvirke stabiliteten af c:geo og det anbefales kun at bruge dem såfremt du er blevet bedt om at sende fejlretningsloggen til udviklerne.</string>
+  <string name="init_debug_note">c:geo kan generere en stor mængde fejlretningsinformation. Aktivering af denne indstilling kan imidlertid påvirke stabiliteten af c:geo og det anbefales kun at bruge den såfremt du er blevet bedt om at sende fejlretningsloggen til udviklerne.</string>
   <string name="init_debug">Aktivér debug-log</string>
   <string name="init_dbonsdcard_title">Databaseplacering</string>
   <string name="init_dbonsdcard_note">Du kan gemme c:geos database på dit eksterne SD-kort. Dermed vil du spare intern hukommelse, men c:geo vil fungere lidt langsommere og vil ikke fungere hvis dit eksterne SD-kort ikke er tilgængeligt.</string>
@@ -636,7 +636,7 @@
   <string name="feature_search_geocode">Søg efter geokode</string>
   <string name="feature_search_owner">Søg efter ejer</string>
   <string name="feature_search_finder">Søg efter finder</string>
-  <string name="init_experimental_title">Eksperimentelle funktioner</string>
+  <string name="init_experimental_title">Eksperimentel funktionalitet</string>
   <string name="init_mfbeta">Mapsforge Beta som standard</string>
   <string name="init_mfbeta_description">c:geo indeholder eksperimentel understøttelse af Mapsforge-kort. Mapsforge-kort kan aktiveres her som standard for live og offline kort.</string>
   <!-- map sources -->
@@ -664,7 +664,7 @@
   <string name="auth_again">Start igen</string>
   <string name="auth_register">Opret en konto</string>
   <string name="auth_connected">Forbundet</string>
-  <string name="auth_unconnected">Endnu ikke forbundet</string>
+  <string name="auth_unconnected">Ikke forbundet endnu</string>
   <string name="auth_connected_as">Forbundet som %s</string>
   <string name="auth_dialog_waiting">Venter på %s…</string>
   <string name="auth_explain_short">Den følgende proces vil give <b>c:geo</b> tilladelse til at tilgå %s.</string>
@@ -829,7 +829,7 @@
   <string name="cache_menu_oruxmaps_online">OruxMaps (Online)</string>
   <string name="cache_menu_oruxmaps_offline">OruxMaps (Offline)</string>
   <string name="cache_menu_pebble">Pebble</string>
-  <string name="cache_menu_vote">Bedøm</string>
+  <string name="cache_menu_vote">Stem</string>
   <string name="cache_menu_checker">Åben Geochecker</string>
   <string name="cache_menu_challenge_checker">Søg efter cacher med geo-checker</string>
   <string name="cache_menu_ignore">Ignorér cache</string>

@@ -79,6 +79,7 @@
   <string name="log_tb_nothing">何もしない</string>
   <string name="log_tb_visit">訪れた</string>
   <string name="log_tb_drop">ここに置く</string>
+  <string name="log_tb_sortby">トラッカブルの並び替え</string>
   <string name="log_tb_changeall">すべてを変更する</string>
   <string name="log_tb_grabbed">どこかで捕まえた</string>
   <string name="log_tb_note">メモ</string>
@@ -905,6 +906,7 @@
   <string name="popup_more">詳細を見る</string>
   <!-- waypoint -->
   <string name="waypoint">ウェイポイント</string>
+  <string name="waypoint_coordinates">座標</string>
   <string name="waypoint_cache_coordinates">キャッシュ座標</string>
   <string name="waypoint_custom">カスタム</string>
   <string name="waypoint_my_coordinates">現在地</string>
@@ -937,6 +939,8 @@
   <string name="waypoint_coordinates_uploading_to_website">Webサイトに座標 %s をアップロードしています。</string>
   <string name="waypoint_coordinates_has_been_modified_on_website">Webサイトのキャッシュ座標は %s に修正されました。</string>
   <string name="waypoint_done">決定</string>
+  <string name="waypoint_duplicate">ウェイポイントを複製</string>
+  <string name="waypoint_duplicated">ウェイポイントを複製しました</string>
   <string name="waypoint_copy_of">コピー ～ </string>
   <string name="search_history">履歴</string>
   <string name="search_history_empty">履歴はありません</string>
@@ -1460,4 +1464,7 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
   <string name="cache_list_remove_from">リストから削除</string>
   <string name="list_list_headline">リスト:</string>
   <string name="cache_store_list">リストに保存</string>
+  <plurals name="extract_waypoints_result">
+    <item quantity="other">%d ウェイポイントを抽出しました</item>
+  </plurals>
 </resources>

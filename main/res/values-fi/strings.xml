@@ -783,7 +783,7 @@
   <string name="cache_menu_navigation_drive_select_target">Kätkö vai pysäköintialue?</string>
   <string name="cache_menu_navigation_walk">Navigointi (kävely)</string>
   <string name="cache_menu_navigation_transit">Navigointi (liikenteessä)</string>
-  <string name="cache_menu_navigation_bike">Navigointi (pyöräily)</string>
+  <string name="cache_menu_navigation_bike">Navigointi (Pyöräily)</string>
   <string name="cache_menu_maps_directions">Google Maps ajo-ohjeet</string>
   <string name="cache_menu_osmand">OsmAnd</string>
   <string name="cache_menu_sygic_walk">Sygic (kävellessä)</string>
@@ -1430,7 +1430,7 @@
   <string name="do_not_ask_me_again">Älä kysy uudelleen</string>
   <string name="geokrety_parsing_failed">GeoKretyn vastauksen jäsentäminen epäonnistui.</string>
   <string name="settings_map_direction">Näytä suunta</string>
-  <string name="settings_summary_map_direction">Näytä suuntaviiva navigointi kohteelle</string>
+  <string name="settings_summary_map_direction">Näytä suuntaviiva navigointikohteelle</string>
   <string name="map_direction">Näytä suunta</string>
   <string name="command_move_caches_progress">Siirretään kätköjä luetteloon %1s</string>
   <plurals name="command_move_caches_result">
@@ -1469,4 +1469,8 @@
   <string name="cache_list_remove_from">Poista listalta</string>
   <string name="list_list_headline">Listat:</string>
   <string name="cache_store_list">Tallenna listaan</string>
+  <plurals name="extract_waypoints_result">
+    <item quantity="one">%d reittipiste purettu</item>
+    <item quantity="other">%d reittipistettä purettu</item>
+  </plurals>
 </resources>

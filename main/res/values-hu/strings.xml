@@ -79,6 +79,7 @@
   <string name="log_tb_nothing">Ne csinálj semmit</string>
   <string name="log_tb_visit">Látogatás</string>
   <string name="log_tb_drop">Ládába helyezés</string>
+  <string name="log_tb_sortby">Rendezés</string>
   <string name="log_tb_changeall">Az összes megváltoztatása</string>
   <string name="log_tb_grabbed">Mástól átvéve</string>
   <string name="log_tb_note">Megjegyzés</string>
@@ -151,7 +152,7 @@
   <string name="err_comm">Ismeretlen kommunikációs hiba</string>
   <string name="err_missing_auth">Nincs megadva felhasználónév és/vagy jelszó</string>
   <string name="err_wrong">Hibás felhasználónév és/vagy jelszó</string>
-  <string name="err_maintenance">A geocaching.com karbantartás miatt elérhetetlen. A c:geo offline módban működik elmentett ládákkal.</string>
+  <string name="err_maintenance">A geocaching.com karbantartás miatt elérhetetlen. A c:geo offline módban fut elmentett ládákkal.</string>
   <string name="err_license">Nem fogadtad el a geocaching.com licencmegállapodását, így a c:geo nem tudja letölteni a ládák koordinátáit.</string>
   <string name="err_unvalidated_account">Előbb aktiválnod kell a fiókod a geocaching.com weboldalon.</string>
   <string name="err_unpublished">A kért ládát törölték.</string>
@@ -159,9 +160,9 @@
   <string name="err_premium_only">Ez a láda csak a geocaching.com prémium felhasználói számára hozzáférhető.</string>
   <string name="err_detail_open">Sajnáljuk, a c:geo nem tudja megnyitni a láda adatait.</string>
   <string name="err_detail_cache">Sajnáljuk, a c:geo nem tudja megmutatni a kért ládát. Biztos, hogy ez egy láda?</string>
-  <string name="err_detail_cache_find">Sajnáljuk, a c:geo nem találja a geoládát.</string>
-  <string name="err_detail_cache_find_some">Sajnáljuk, a c:geo nem találja azt a geoládát.</string>
-  <string name="err_detail_cache_find_any">Sajnáljuk, a c:geo nem talál geoládákat.</string>
+  <string name="err_detail_cache_find">Sajnos a c:geo nem találja a ládát.</string>
+  <string name="err_detail_cache_find_some">Sajnos a c:geo nem találja azt a ládát.</string>
+  <string name="err_detail_cache_find_any">Sajnos a c:geo nem talál ládákat.</string>
   <string name="err_detail_google_maps_limit_reached">A c:geo nem tudta letölteni a statikus térképeket. Lehet, hogy elérted a Google Térkép API limitet.</string>
   <string name="err_detail_no_spoiler">A c:geo nem talált spoiler képeket ehhez a ládához.</string>
   <string name="err_detail_no_map_static">A c:geo nem talált statikus térképeket ehhez a ládához.</string>
@@ -593,7 +594,7 @@
   <string name="init_summary_use_native_ua">Azonosítás Android böngészőként. Ez megoldja a bejelentkezési problémákat bizonyos szolgáltatóknál.</string>
   <string name="init_rendertheme_folder">Térképstílusok mappája</string>
   <string name="init_maintenance">Karbantartás</string>
-  <string name="init_maintenance_directories_note">A c:geo az egyes geoládákhoz képeket, logokat és egyéb fájlokat tárol egy külön mappában. Bizonyos esetekben (pl. adatbázis importja vagy exportja) ez a mappa már fölösleges adatokat tartalmazhat, amelyek ezzel a funkcióval törölhetők.</string>
+  <string name="init_maintenance_directories_note">A c:geo az egyes ládákhoz képeket, logokat és egyéb fájlokat tárol egy külön mappában. Bizonyos esetekben (pl. adatbázis importja vagy exportja) ez a mappa már fölösleges adatokat tartalmazhat, melyek ezzel a funkcióval törölhetőek.</string>
   <string name="init_maintenance_directories">Fölösleges fájlok törlése</string>
   <string name="init_location">Helymeghatározás</string>
   <string name="init_location_note">A Google Play-szolgáltatásokat használó készülékeken a c:geo automatikusan egy jobb helymeghatározó technikát használhat. Ez azonban lehetetlenné teszi külső, BlueTooth-os GPS vevő alkalmazását.</string>
@@ -758,6 +759,7 @@
   <string name="cache_list_text">Lista:</string>
   <string name="cache_list_change">Áthelyezés</string>
   <string name="cache_list_unknown">Nem szerepel a listán</string>
+  <string name="cache_list_select_last">Utolsó választás</string>
   <string name="cache_images">Képek</string>
   <string name="cache_waypoints">Útpontok</string>
   <plurals name="waypoints">
@@ -817,6 +819,7 @@
   <string name="cache_menu_around">Közeli ládák</string>
   <string name="around">%s környékén</string>
   <string name="cache_menu_event">Hozzáadás a naptárhoz</string>
+  <string name="cache_menu_extract_waypoints">Útpontok kigyűjtése</string>
   <string name="cache_menu_details">Adatok</string>
   <string name="cache_menu_refresh">Frissítés</string>
   <string name="cache_menu_share">Láda megosztása</string>
@@ -890,7 +893,7 @@
   <string name="simple_dir_chooser_current_path">Útvonal:</string>
   <string name="simple_dir_chooser_invalid_path">Érvénytelen útvonal</string>
   <!-- gpx -->
-  <string name="gpx_import_loading_caches">Geoládák betöltése .gpx fájlból</string>
+  <string name="gpx_import_loading_caches">Ládák betöltése .gpx fájlból</string>
   <string name="gpx_import_loading_caches_with_filename">%1$s: ládák betöltése</string>
   <string name="gpx_import_loading_waypoints">Útpontfájl betöltése</string>
   <string name="gpx_import_loading_waypoints_with_filename">%1$s: útpontok betöltése</string>
@@ -924,6 +927,7 @@
   <string name="popup_more">További adatok</string>
   <!-- waypoint -->
   <string name="waypoint">Útpont</string>
+  <string name="waypoint_coordinates">Koordináták</string>
   <string name="waypoint_cache_coordinates">A láda koordinátái</string>
   <string name="waypoint_custom">Egyedi</string>
   <string name="waypoint_my_coordinates">Az én koordinátáim</string>
@@ -936,6 +940,7 @@
   <string name="waypoint_edit_title">Útpont szerkesztése</string>
   <string name="waypoint_add_title">Útpont hozzáadása</string>
   <string name="waypoint_note">Megjegyzés</string>
+  <string name="waypoint_user_note">Felhasználói megjegyzés</string>
   <string name="waypoint_visited">Meglátogatva</string>
   <string name="waypoint_save">Mentés</string>
   <string name="waypoint_cancel_edit">Mégsem</string>
@@ -955,6 +960,8 @@
   <string name="waypoint_coordinates_uploading_to_website">Koordináták feltöltése %s weboldalra.</string>
   <string name="waypoint_coordinates_has_been_modified_on_website">A %s koordinátáinak módosítása megtörtént a weboldalon.</string>
   <string name="waypoint_done">Kész</string>
+  <string name="waypoint_duplicate">Másolás</string>
+  <string name="waypoint_duplicated">Útpont megduplázva</string>
   <string name="waypoint_copy_of">Másolt</string>
   <string name="search_history">Előzmény</string>
   <string name="search_history_empty">Nincsenek előző célpontok</string>
@@ -970,13 +977,13 @@
   <string name="map_map">Térkép</string>
   <string name="map_live">Élő térkép</string>
   <string name="map_view_map">Térkép nézet</string>
-  <string name="map_modes">Térkép módok</string>
+  <string name="map_modes">Térképmódok</string>
   <string name="map_trail_show">Ösvény mutatása</string>
   <string name="map_circles_show">Körök mutatása</string>
-  <string name="map_mycaches_hide">Saját/megtalált geoládák elrejtése</string>
+  <string name="map_mycaches_hide">Saját/megtalált ládák elrejtése</string>
   <string name="map_disabled_hide">Letiltott ládák elrejtése</string>
   <string name="map_theme_builtin">Alapértelmezett</string>
-  <string name="map_theme_select">Válassz térképtémát</string>
+  <string name="map_theme_select">Térképstílusok</string>
   <string name="map_live_enable">Élő mód engedélyezése</string>
   <string name="map_live_disable">Élő mód tiltása</string>
   <string name="map_static_title">Statikus térképek</string>
@@ -1036,7 +1043,7 @@
   <string name="trackable_image">Kép</string>
   <string name="trackable_code">Követőkód</string>
   <string name="trackable_name">Név</string>
-  <string name="trackable_brand">Márka</string>
+  <string name="trackable_brand">Osztály</string>
   <string name="trackable_type">Típus</string>
   <string name="trackable_owner">Tulajdonos</string>
   <string name="trackable_spotted">Itt látták</string>
@@ -1087,9 +1094,10 @@
   <string name="helper_sendtocgeo_title">Send2cgeo</string>
   <string name="helper_contacts_title">c:geo kapcsolatok add-on</string>
   <string name="helper_contacts_description">Lehetővé teszi egy névjegy közvetlen megnyitását a log bejegyzésekből, így könnyebben segítséget tudsz kérni.</string>
-  <string name="helper_sendtocgeo_description">A Send2cgeo egy böngészőbővítmény <strong>PC-re</strong>. A geocaching.com böngészése közben, egy kattintással tudsz geoládákat küldeni a készülékedre.</string>
+  <string name="helper_sendtocgeo_description">A Send2cgeo egy böngészőbővítmény <strong>PC-re</strong>. A geocaching.com böngészése közben, egy kattintással tudsz ládákat küldeni a készülékedre.</string>
   <string name="helper_locus_title">Locus</string>
   <string name="helper_locus_description">Telefonon, tableten használható szabadtéri navigációs program. Offline térképek használata, útvonalkövetés, ládavadászat, hangos útikalauz, stb.</string>
+  <string name="helper_gpsstatus_title">GPS Status &amp; Toolbox</string>
   <string name="helper_gpsstatus_description">A programban található radart a c:geo-hoz is használhatod. Sok egyéb GPS-szel kapcsolatos információt is megmutat.</string>
   <string name="helper_bluetoothgps_title">Bluetooth GPS</string>
   <string name="helper_bluetoothgps_description">Ez a program külső GPS vevők használatát teszi lehetővé, amelyek segítségével jobb vételt és pontosabb koordinátákat kaphatsz. Külső GPS használatával a telefonod akkumulátora is tovább bírja.</string>
@@ -1487,4 +1495,8 @@
   <string name="cache_list_remove_from">Törlés listáról</string>
   <string name="list_list_headline">Listák:</string>
   <string name="cache_store_list">Mentés listára</string>
+  <plurals name="extract_waypoints_result">
+    <item quantity="one">%d kigyűjtött útpont</item>
+    <item quantity="other">%d kigyűjtött útpont</item>
+  </plurals>
 </resources>

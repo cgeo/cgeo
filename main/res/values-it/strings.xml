@@ -450,6 +450,7 @@
   <string name="settings_activate_oc_pl">Attiva</string>
   <string name="init_summary_oc_pl">Carica cache da opencaching.pl</string>
   <string name="init_oc_pl_description">Autorizza c:geo a cercare cache ed accedere/filtrare i ritrovamenti su opencaching.pl.</string>
+  <string name="init_oc_nl">Opencaching.nl</string>
   <string name="settings_activate_oc_nl">Attiva</string>
   <string name="init_summary_oc_nl">Carica cache da opencaching.nl</string>
   <string name="init_oc_nl_description">Autorizza c:geo a cercare cache ed accedere/filtrare i ritrovamenti su opencaching.nl.</string>

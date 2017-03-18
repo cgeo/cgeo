@@ -79,6 +79,7 @@
   <string name="log_tb_nothing">Ikke gjør noe</string>
   <string name="log_tb_visit">Besøkte</string>
   <string name="log_tb_drop">Legg igjen</string>
+  <string name="log_tb_sortby">Sorter sporbare</string>
   <string name="log_tb_changeall">Endre alle</string>
   <string name="log_tb_grabbed">Tatt fra en plass den ikke skulle vært</string>
   <string name="log_tb_note">Note</string>
@@ -543,7 +544,7 @@
   <string name="init_backup_success">Databasen til c:geo ble kopiert til:</string>
   <string name="init_backup_failed">Sikkerhetskopi av databasen til c:geo mislyktes.</string>
   <string name="init_backup_unnecessary">Databasen er tom, sikkerhetskopiering er ikke nødvendig.</string>
-  <string name="init_backup_no_backup_available">Det finnes ingen sikkerhetskopier.</string>
+  <string name="init_backup_no_backup_available">Det finnes ingen fil med sikkerhetskopi nå.</string>
   <string name="backup_confirm_overwrite">Vil du overskrive den eksisterende sikkerhetskopien fra %s?</string>
   <string name="restore_confirm_overwrite">Vil du overskrive %s på enheten din med sikkerhetskopien?</string>
   <string name="init_restore_success">Gjenoppretting fullført.</string>
@@ -596,10 +597,9 @@
   <string name="init_maintenance_directories_note">c:geo lagrer bilder, loggbilder og andre filer knyttet til en cache i en egen mappe. I noen situasjoner (som importering/eksportering av databasen) vil denne mappen inneholde utdaterte filer som kan slettes her.</string>
   <string name="init_maintenance_directories">Slett utdaterte filer</string>
   <string name="init_location">Geolokasjon</string>
-  <string name="init_location_note">På enheter utstyrt med Google spill tjenester, kan c:geo automatisk bruke en bedre geolocation-leverandør. Men dette forhindrer bruk av en ekstern BlueTooth GPS-mottaker.</string>
+  <string name="init_location_note">På enheter utstyrt med Google Play-tjenester kan c:geo automatisk bruke en bedre posisjonstjeneste. Vær obs på at dette forhindrer bruk av en ekstern BlueTooth GPS-mottaker.</string>
   <string name="init_location_googleplayservices">Bruk Google Play Services</string>
   <string name="init_low_power">Strømsparingsmodus</string>
-  <string name="init_low_power_note">Strømsparingsmodus unngår GPS og gyroskop når en svært nøyaktig plassering ikke er strengt nødvendig, men det gir lengere behandlingstid.</string>
   <string name="init_low_power_mode">Aktivere strømsparingsmodus</string>
   <string name="init_force_orientation_sensor_title">Retningssensor</string>
   <string name="init_force_orientation_sensor_note">På noen enheter vil den normale retningssensoren feilaktig endre retning. Isåfall kan en alternativ sensor (orienteringssensor) gi bedre resultat.</string>
@@ -925,6 +925,7 @@
   <string name="popup_more">Mer detaljer</string>
   <!-- waypoint -->
   <string name="waypoint">Veipunkt</string>
+  <string name="waypoint_coordinates">Koordinater</string>
   <string name="waypoint_cache_coordinates">Cachens koordinater</string>
   <string name="waypoint_custom">Eget veipunkt</string>
   <string name="waypoint_my_coordinates">Mine koordinater</string>
@@ -957,6 +958,8 @@
   <string name="waypoint_coordinates_uploading_to_website">Laster opp koordinater %s til nettsiden.</string>
   <string name="waypoint_coordinates_has_been_modified_on_website">Cachens koordinater på nettsiden er endret til: %s.</string>
   <string name="waypoint_done">Ferdig</string>
+  <string name="waypoint_duplicate">Dupliser veipunktet</string>
+  <string name="waypoint_duplicated">Veipunktet er duplisert</string>
   <string name="waypoint_copy_of">Kopi av</string>
   <string name="search_history">Historikk</string>
   <string name="search_history_empty">Ingen tidligere destinasjoner</string>
@@ -1490,4 +1493,8 @@
   <string name="cache_list_remove_from">Fjern fra liste</string>
   <string name="list_list_headline">Lister:</string>
   <string name="cache_store_list">Lagre i liste</string>
+  <plurals name="extract_waypoints_result">
+    <item quantity="one">%d veipunkt trukket ut</item>
+    <item quantity="other">%d veipunkter trukket ut</item>
+  </plurals>
 </resources>

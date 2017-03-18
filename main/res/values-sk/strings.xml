@@ -79,6 +79,7 @@
   <string name="log_tb_nothing">Žiadna akcia</string>
   <string name="log_tb_visit">Navštívené</string>
   <string name="log_tb_drop">Nechať tu</string>
+  <string name="log_tb_sortby">Zoradiť trasovateľné predmety</string>
   <string name="log_tb_changeall">Zmeniť všetko</string>
   <string name="log_tb_grabbed">Prevzatý</string>
   <string name="log_tb_note">Poznámka</string>
@@ -934,6 +935,7 @@
   <string name="popup_more">Viac detailov</string>
   <!-- waypoint -->
   <string name="waypoint">Bod trasy</string>
+  <string name="waypoint_coordinates">Súradnice</string>
   <string name="waypoint_cache_coordinates">Súradnice skrýše</string>
   <string name="waypoint_custom">vlastný</string>
   <string name="waypoint_my_coordinates">Aktuálna poloha</string>
@@ -966,6 +968,8 @@
   <string name="waypoint_coordinates_uploading_to_website">Nahrávanie súradníc %s na web.</string>
   <string name="waypoint_coordinates_has_been_modified_on_website">Súradnice skrýše na webe boli zmenené na: %s.</string>
   <string name="waypoint_done">Hotovo</string>
+  <string name="waypoint_duplicate">Duplikovať bod trasy</string>
+  <string name="waypoint_duplicated">Bod trasy bol duplikovaný</string>
   <string name="waypoint_copy_of">Kópia</string>
   <string name="search_history">História</string>
   <string name="search_history_empty">Bez predchádzajúcich cieľov</string>
@@ -1509,4 +1513,9 @@
   <string name="cache_list_remove_from">Odstrániť zo zoznamu</string>
   <string name="list_list_headline">Zoznamy:</string>
   <string name="cache_store_list">Uložiť do zoznamu</string>
+  <plurals name="extract_waypoints_result">
+    <item quantity="one">Bol extrahovaný %d bod trasy</item>
+    <item quantity="few">Boli extrahované %d body trasy</item>
+    <item quantity="other">Bolo extrahovaných %d bodov trasy</item>
+  </plurals>
 </resources>
