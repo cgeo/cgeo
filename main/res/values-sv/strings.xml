@@ -79,6 +79,7 @@
   <string name="log_tb_nothing">Gör inget</string>
   <string name="log_tb_visit">Besök</string>
   <string name="log_tb_drop">Lämna här</string>
+  <string name="log_tb_sortby">Sortera Trackable</string>
   <string name="log_tb_changeall">Ändra alla</string>
   <string name="log_tb_grabbed">Tog den någonstans</string>
   <string name="log_tb_note">Kommentar</string>
@@ -659,7 +660,7 @@
   <string name="auth_authorize">Koppla c:geo mot Twitter</string>
   <string name="auth_check">Kolla autentisering</string>
   <string name="auth_check_again">Kolla autentisering igen</string>
-  <string name="auth_start">Kolla autentisering</string>
+  <string name="auth_start">Påbörja koppling mot Twitter</string>
   <string name="auth_again">Koppla mot Twitter igen</string>
   <string name="auth_register">Skapa ett konto</string>
   <string name="auth_connected">Ansluten</string>
@@ -925,6 +926,7 @@
   <string name="popup_more">Mer information</string>
   <!-- waypoint -->
   <string name="waypoint">Punkt</string>
+  <string name="waypoint_coordinates">Koordinater</string>
   <string name="waypoint_cache_coordinates">Cache koordinater</string>
   <string name="waypoint_custom">Egen</string>
   <string name="waypoint_my_coordinates">Mina koordinater</string>
@@ -957,6 +959,8 @@
   <string name="waypoint_coordinates_uploading_to_website">Laddar upp koordinaterna %s till hemsidan.</string>
   <string name="waypoint_coordinates_has_been_modified_on_website">Cachens koordinater på hemsidan har ändrats till: %s.</string>
   <string name="waypoint_done">Klar</string>
+  <string name="waypoint_duplicate">Duplicera punkt</string>
+  <string name="waypoint_duplicated">Punkten har duplicerats</string>
   <string name="waypoint_copy_of">Kopia av</string>
   <string name="search_history">Historik</string>
   <string name="search_history_empty">Inga tidigare målpunkter</string>
@@ -1493,4 +1497,8 @@
   <string name="cache_list_remove_from">Ta bort från lista</string>
   <string name="list_list_headline">Listor:</string>
   <string name="cache_store_list">Spara i lista</string>
+  <plurals name="extract_waypoints_result">
+    <item quantity="one">%d punkt har extraherats</item>
+    <item quantity="other">%d punkter har extraherats</item>
+  </plurals>
 </resources>

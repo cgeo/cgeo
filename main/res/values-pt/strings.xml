@@ -79,6 +79,7 @@
   <string name="log_tb_nothing">Não fazer nada</string>
   <string name="log_tb_visit">Visitei</string>
   <string name="log_tb_drop">Deixei aqui</string>
+  <string name="log_tb_sortby">Ordenar Trackable</string>
   <string name="log_tb_changeall">Alterar todos</string>
   <string name="log_tb_grabbed">Agarrado noutro lugar</string>
   <string name="log_tb_note">Nota</string>
@@ -93,7 +94,7 @@
   <string name="log_posting_image">A publicar imagem…</string>
   <string name="log_posting_generic_trackable">A publicar %1$s %2$s/%3$s</string>
   <string name="log_clear">Limpar</string>
-  <string name="log_post_not_possible">Download de dados em progresso…\n Por favor tente novamente dentro de alguns segundos ou verifique sua conexão à internet.</string>
+  <string name="log_post_not_possible">Transferência de dados em curso…\nPor favor tente novamente dentro de alguns segundos ou verifique a sua ligação à internet.</string>
   <string name="log_post_geocode_missing">Geocódigo em falta…</string>
   <string name="log_date_future_not_allowed">Registos com datas futuras não são permitidos.</string>
   <string name="log_add">Adicionar</string>
@@ -137,12 +138,12 @@
   <!-- translation -->
   <string name="translate_to_sys_lang">Traduzir para %s</string>
   <string name="translate_to_english">Traduzir para inglês</string>
-  <string name="translate_length_warning">A tradução pode falhar se o texto fôr muito grande.</string>
+  <string name="translate_length_warning">A tradução pode falhar se o texto for muito grande.</string>
   <!-- errors, warnings, info toasts -->
   <string name="err_none">Ok</string>
-  <string name="err_parse">Falha na análise da página de login</string>
+  <string name="err_parse">Falha ao lidar com a página de Início de Sessão</string>
   <string name="err_server">Falha ao estabelecer ligação a \"Geocaching.com\". O sítio web pode estar inoperante ou a sua ligação à Internet não está a funcionar.</string>
-  <string name="err_server_ec">Impossível estabelecer ligação com Extremcaching.com. O sítio web pode estar inoperante ou a sua ligação à Internet não está a funcionar.</string>
+  <string name="err_server_ec">Impossível estabelecer ligação com \"Extremcaching.com\". O sítio web pode estar inoperante ou a sua ligação à Internet não está a funcionar.</string>
   <string name="err_server_gk">Impossível estabelecer ligação com GeoKrety.org. O sítio web pode estar inoperante ou a sua ligação à Internet não está a funcionar.</string>
   <string name="err_login">Nenhuma informação de inicio de sessão gravada</string>
   <string name="err_login_failed_toast">O c:geo não consegue iniciar sessão. O c:geo funciona offline com as caches Arquivadas. Verifique as definições de inicio de sessão ou active a sua ligação à Internet.</string>
@@ -386,7 +387,7 @@
   <string name="list_not_available">A lista já não se encontra disponível, alterando para lista padrão</string>
   <!-- about -->
   <string name="about_version">Versão</string>
-  <string name="about_changelog">Changelog</string>
+  <string name="about_changelog">Registo de alterações</string>
   <string name="about_system">Sistema</string>
   <string name="about_donate">Doar</string>
   <string name="about_donation_more">Doar\ndesenvolvimento</string>
@@ -535,8 +536,8 @@
   <string name="init_summary_choose_list">Pedir lista quando guarda as caches</string>
   <string name="init_livelist">Mostrar a direcção para a cache na lista</string>
   <string name="init_summary_livelist">Mostrar a direcção para a cache na lista</string>
-  <string name="init_backup">Backup</string>
-  <string name="init_backup_backup">Backup</string>
+  <string name="init_backup">Cópia de segurança</string>
+  <string name="init_backup_backup">Cópia de segurança</string>
   <string name="init_backup_running">A criar uma cópia de segurança da base de dados de caches…</string>
   <string name="init_backup_note">Por favor note que esta opção irá fazer backup/restauro da base de dados de caches e pontos de referência, mas não das definições. A sua informação de login (passwords) não irá deixar esta aplicação.</string>
   <string name="init_backup_restore">Restaurar</string>
@@ -925,6 +926,7 @@
   <string name="popup_more">Mais detalhes</string>
   <!-- waypoint -->
   <string name="waypoint">Ponto de referência</string>
+  <string name="waypoint_coordinates">Coordenadas</string>
   <string name="waypoint_cache_coordinates">Coordenadas da cache</string>
   <string name="waypoint_custom">Personalizado</string>
   <string name="waypoint_my_coordinates">Minhas coordenadas</string>
@@ -957,6 +959,8 @@
   <string name="waypoint_coordinates_uploading_to_website">A enviar as coordenadas para o site %s.</string>
   <string name="waypoint_coordinates_has_been_modified_on_website">As coordenadas da cache no site foram modificados para: %s.</string>
   <string name="waypoint_done">Feito</string>
+  <string name="waypoint_duplicate">Duplicar ponto de referência</string>
+  <string name="waypoint_duplicated">Ponto de referência duplicado</string>
   <string name="waypoint_copy_of">Cópia de</string>
   <string name="search_history">Histórico</string>
   <string name="search_history_empty">Não existem destinos recentes</string>
@@ -1095,7 +1099,7 @@
   <string name="helper_sendtocgeo_description">Send to c:geo é uma extensão do navegador <strong>para o seu PC</strong>. Ao navegar geocaching.com, você pode enviar as caches directamente para seu smartphone com o clique de um botão no navegador.</string>
   <string name="helper_locus_title">Locus</string>
   <string name="helper_locus_description">Aplicação de navegação ao ar livre para o seu telefone ou tablet. Veja mapas topográficos offline, registe a sua rota, procure geocaches, use um guia de voz e muito mais.</string>
-  <string name="helper_gpsstatus_title">Status do GPS &amp; Ferramentas</string>
+  <string name="helper_gpsstatus_title">GPS Status &amp; Toolbox</string>
   <string name="helper_gpsstatus_description">Pode usar o radar a partir desta aplicação. Também fornece muitas outras informações relacionadas com o GPS.</string>
   <string name="helper_bluetoothgps_title">GPS por bluetooth</string>
   <string name="helper_bluetoothgps_description">Permite utilizar um GPS externo, para uma melhor recepção, localização mais precisa e permite poupar a bateria do seu telemóvel.</string>
@@ -1493,4 +1497,8 @@
   <string name="cache_list_remove_from">Remover da lista</string>
   <string name="list_list_headline">Listas:</string>
   <string name="cache_store_list">Armazenar na lista</string>
+  <plurals name="extract_waypoints_result">
+    <item quantity="one">%d ponto de referência extraído</item>
+    <item quantity="other">%d pontos de referência extraídos</item>
+  </plurals>
 </resources>

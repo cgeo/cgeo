@@ -79,6 +79,7 @@
   <string name="log_tb_nothing">Beze změny</string>
   <string name="log_tb_visit">Navštíveno</string>
   <string name="log_tb_drop">Nechat zde</string>
+  <string name="log_tb_sortby">Seřadit sledovatelné předměty</string>
   <string name="log_tb_changeall">Změnit vše</string>
   <string name="log_tb_grabbed">Převzat</string>
   <string name="log_tb_note">Poznámka</string>
@@ -505,7 +506,7 @@
   <string name="init_signature_template_url">URL adresa</string>
   <string name="init_signature_template_log">Text logu</string>
   <string name="init_ratingwanted">Načítat hodnocení</string>
-  <string name="init_summary_ratingwanted">Načítat hodnocení keší z GCVote.com</string>
+  <string name="init_summary_ratingwanted">Načítat hodnocení keší z GCvote.com</string>
   <string name="init_friends_and_own_logs_wanted">Zobrazovat mé logy a logy přátel</string>
   <string name="init_summary_friends_and_own_logs_wanted">Zobrazovat další logbook s mými logy a logy přátel</string>
   <string name="init_openlastdetailspage">Otevřít poslední stránku</string>
@@ -766,7 +767,7 @@
   <string name="cache_list_text">Seznam:</string>
   <string name="cache_list_change">Přesunout</string>
   <string name="cache_list_unknown">Není v seznamu</string>
-  <string name="cache_list_select_last">Poslední vývěr</string>
+  <string name="cache_list_select_last">Poslední výběr</string>
   <string name="cache_images">Obrázky</string>
   <string name="cache_waypoints">Body trasy</string>
   <plurals name="waypoints">
@@ -827,7 +828,7 @@
   <string name="cache_menu_around">Keš v okolí</string>
   <string name="around">V okolí %s</string>
   <string name="cache_menu_event">Přidat do kalendáře</string>
-  <string name="cache_menu_extract_waypoints">Extrahovat waypointy</string>
+  <string name="cache_menu_extract_waypoints">Extrahovat body trasy</string>
   <string name="cache_menu_details">Detaily</string>
   <string name="cache_menu_refresh">Obnovit</string>
   <string name="cache_menu_share">Sdílet keš</string>
@@ -934,6 +935,7 @@
   <string name="popup_more">Více detailů</string>
   <!-- waypoint -->
   <string name="waypoint">Bod trasy</string>
+  <string name="waypoint_coordinates">Souřadnice</string>
   <string name="waypoint_cache_coordinates">Souřadnice keše</string>
   <string name="waypoint_custom">Vlastní</string>
   <string name="waypoint_my_coordinates">Moje souřadnice</string>
@@ -966,6 +968,8 @@
   <string name="waypoint_coordinates_uploading_to_website">Nahrávání %s na web</string>
   <string name="waypoint_coordinates_has_been_modified_on_website">Souřadnice keše na webu byly změněny na %s.</string>
   <string name="waypoint_done">Hotovo</string>
+  <string name="waypoint_duplicate">Vytvořit kopii bodu trasy</string>
+  <string name="waypoint_duplicated">Kopie bodu trasy vytvořena</string>
   <string name="waypoint_copy_of">Kopie</string>
   <string name="search_history">Historie</string>
   <string name="search_history_empty">Žádné předchozí destinace</string>
@@ -1511,4 +1515,9 @@
   <string name="cache_list_remove_from">Odebrat ze seznamu</string>
   <string name="list_list_headline">Seznamy:</string>
   <string name="cache_store_list">Uložit do seznamu</string>
+  <plurals name="extract_waypoints_result">
+    <item quantity="one">%d bod trasy extrahován</item>
+    <item quantity="few">%d body trasy extrahovány</item>
+    <item quantity="other">%d bodů trasy extrahováno</item>
+  </plurals>
 </resources>

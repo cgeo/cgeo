@@ -79,6 +79,7 @@
   <string name="log_tb_nothing">Nieko nedaryti</string>
   <string name="log_tb_visit">Apsilankė</string>
   <string name="log_tb_drop">Paliktas</string>
+  <string name="log_tb_sortby">Rūšiuoti keliauninkus</string>
   <string name="log_tb_changeall">Keisti visus</string>
   <string name="log_tb_grabbed">Paimtas kažkur</string>
   <string name="log_tb_note">Pastaba</string>
@@ -919,6 +920,7 @@
   <string name="popup_more">Daugiau informacijos</string>
   <!-- waypoint -->
   <string name="waypoint">Papildomas taškas</string>
+  <string name="waypoint_coordinates">Koordinatės</string>
   <string name="waypoint_cache_coordinates">Slėptuvės koordinatės</string>
   <string name="waypoint_custom">Savas</string>
   <string name="waypoint_my_coordinates">Mano koordinates</string>
@@ -951,6 +953,8 @@
   <string name="waypoint_coordinates_uploading_to_website">Įkeliamos %s koordinatės į svetainę.</string>
   <string name="waypoint_coordinates_has_been_modified_on_website">Slėptuvės koordinatės svetainėje buvo pakeistos į: %s.</string>
   <string name="waypoint_done">Atlikta</string>
+  <string name="waypoint_duplicate">Kopijuoti nuorodos tašką</string>
+  <string name="waypoint_duplicated">Nuorodos taškas nukopijuotas</string>
   <string name="waypoint_copy_of">Kopija</string>
   <string name="search_history">Istorija</string>
   <string name="search_history_empty">Nėra ankstesnių kelionės tikslų</string>
