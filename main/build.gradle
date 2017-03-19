@@ -77,6 +77,9 @@ android {
             versionNameSuffix "-$rcName"
             signingConfig signingConfigs.release
         }
+        legacy {
+            signingConfig signingConfigs.release
+        }
         release {
             signingConfig signingConfigs.release
         }
@@ -210,6 +213,10 @@ android {
         if (variant.buildType.name.equals('rc')) {
             variant.mergedFlavor.versionCode = versionCodeFromDate(-1)
         }
+        if (variant.buildType.name.equals('legacy')) {
+            variant.mergedFlavor.versionName = System.getenv('LEGACY_VERSION_NAME')
+            variant.mergedFlavor.versionCode = System.getenv('LEGACY_VERSION_CODE') as Integer
+        }
         // debug and release builds have offset zero, no special handling here
     }
 }
@@ -275,6 +282,7 @@ dependencies {
     releaseCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
     nightlyCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
     rcCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
+    legacyCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
     testCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
 
     // Locus Maps integration
