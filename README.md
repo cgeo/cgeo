@@ -85,7 +85,7 @@ For tests to run successfully you need to configure c:geo on the emulator that r
 
 ## License
 
-c:geo is distributed under [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0).
+c:geo is distributed under [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0).
 
 ## Contact
 
