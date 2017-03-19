@@ -241,7 +241,7 @@ apt {
 
 dependencies {
     // AndroidAnnotations, https://github.com/excilys/androidannotations/wiki/building-project-gradle
-    def androidAnnotationsVersion = '4.2.0'
+    def androidAnnotationsVersion = '4.3.0'
     apt "org.androidannotations:androidannotations:$androidAnnotationsVersion"
     compile "org.androidannotations:androidannotations-api:$androidAnnotationsVersion"
 
@@ -289,9 +289,8 @@ dependencies {
     testCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
 
     // Locus Maps integration
-    def locusVersion = '0.2.7'
-    compile "com.asamm:locus-api:$locusVersion"
-    compile "com.asamm:locus-api-android:$locusVersion"
+    compile "com.asamm:locus-api:0.2.8"
+    compile "com.asamm:locus-api-android:0.2.7"
 
     // Mapsforge old version
     compile files('libs/mapsforge-map-0.3.0-jar-with-dependencies.jar')
@@ -325,7 +324,7 @@ dependencies {
     configurations.all*.exclude module: "play-services-measurement"
 
     // ProcessPhoenix, reliable process restart
-    compile 'com.jakewharton:process-phoenix:1.1.1'
+    compile 'com.jakewharton:process-phoenix:2.0.0'
 
     // RxJava
     compile "io.reactivex.rxjava2:rxjava:2.0.7"
