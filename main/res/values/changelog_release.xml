@@ -2,7 +2,7 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-    <b>Next feature release (Beta version):</b>\n
+    <b>2017.03.19:</b>\n
     · New: New login page used for gc.com\n
     · New: Link to project-gc.com challenge checker for mystery caches having challenge in their title\n
     · New: New waypoint handling to make sure, that no user defined waypoint data is overwritten when refreshing the cache from server\n
