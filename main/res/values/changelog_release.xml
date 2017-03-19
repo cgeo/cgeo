@@ -2,7 +2,7 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-    <b>Next legacy release:</b>\n
+    <b>2017.02.30-legacy:</b>\n
     · New: New login page used for gc.com\n
     · Fix: Missing ellipsis of long cache names in list\n
     · Fix: Missing visual separation in gallery\n
