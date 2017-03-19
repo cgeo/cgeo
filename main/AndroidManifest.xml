@@ -9,7 +9,8 @@
 
     <uses-sdk
         android:minSdkVersion="9"
-        android:targetSdkVersion="22"
+        android:targetSdkVersion="13"
+        android:maxSdkVersion="13"
         tools:overrideLibrary="locus.api.android"/>
     
     <uses-permission android:name="android.permission.INTERNET" />
