@@ -3,7 +3,8 @@
   <!-- changelog for the master branch -->
   <string name="changelog_master" translatable="false">
     <b>Next feature release:</b>\n
-    · [nothing yet]
+    · New: Allow export of owner name to clipboard when clicking on it\n
+    \n
     \n
   </string>
 </resources>
