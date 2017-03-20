@@ -41,6 +41,7 @@ public class GCLogin extends AbstractLogin {
     private static final String REQUEST_VERIFICATION_TOKEN = "__RequestVerificationToken";
 
     private class StatusException extends RuntimeException {
+        private static final long serialVersionUID = -597420116705938433L;
         final StatusCode statusCode;
 
         StatusException(final StatusCode statusCode) {
