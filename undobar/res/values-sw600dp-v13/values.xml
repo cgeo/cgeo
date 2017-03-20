@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- From: file:/Users/jenzz/Developer/Android-UndoBar/library/src/main/res/values-sw600dp/bools.xml -->
+    <eat-comment/>
+    <bool name="is_align_bottom_possible">false</bool>
+    <!-- From: file:/Users/jenzz/Developer/Android-UndoBar/library/src/main/res/values-sw600dp/dimens.xml -->
+    <eat-comment/>
+    <dimen name="undo_bar_max_width_lollipop">500dp</dimen>
+</resources>

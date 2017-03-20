@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- From: file:/Users/jenzz/Developer/Android-UndoBar/library/src/main/res/values-v21/layouts.xml -->
+    <eat-comment/>
+    <item name="undo_bar" type="layout">@layout/undo_bar_lollipop</item>
+</resources>
