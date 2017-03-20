@@ -1574,5 +1574,6 @@
 
     <!-- calendar adder -->
     <string name="event_fail">Failed to add event cache to calendar</string>
+    <string name="undo">Undo</string>
 
 </resources>
