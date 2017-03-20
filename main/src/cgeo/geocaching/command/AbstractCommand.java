@@ -1,6 +1,5 @@
 package cgeo.geocaching.command;
 
-import cgeo.geocaching.R;
 import cgeo.geocaching.utils.AsyncTaskWithProgress;
 
 import android.app.Activity;
@@ -118,7 +117,7 @@ public abstract class AbstractCommand implements Command {
 
         private void showUndoToast(final String resultMessage) {
             if (StringUtils.isNotEmpty(resultMessage)) {
-                Snackbar.make(context.findViewById(android.R.id.content), resultMessage, Snackbar.LENGTH_LONG).setAction(context.getString(R.string.undo), this).show();
+                Snackbar.make(context.findViewById(android.R.id.content), resultMessage, Snackbar.LENGTH_LONG).setAction("Undo", this).show();
             }
         }
 
