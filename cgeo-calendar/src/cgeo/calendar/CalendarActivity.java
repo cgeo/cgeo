@@ -119,7 +119,9 @@ public final class CalendarActivity extends Activity {
                 }
             } while (cursor.moveToNext());
         } finally {
-            IOUtils.closeQuietly(cursor);
+            if (cursor != null) {
+                cursor.close();
+            }
         }
         return calendars;
     }
