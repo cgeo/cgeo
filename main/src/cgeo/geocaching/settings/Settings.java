@@ -323,7 +323,7 @@ public class Settings {
      */
     @NonNull
     public static Credentials getCredentials(final int usernamePreferenceKey, final int passwordPreferenceKey) {
-        final String username = getString(usernamePreferenceKey, StringUtils.EMPTY);
+        final String username = StringUtils.trim(getString(usernamePreferenceKey, StringUtils.EMPTY));
         final String password = getString(passwordPreferenceKey, StringUtils.EMPTY);
         return new Credentials(username, password);
     }
@@ -351,7 +351,7 @@ public class Settings {
     }
 
     public static String getUserName() {
-        return getString(R.string.pref_username, StringUtils.EMPTY);
+        return StringUtils.trim(getString(R.string.pref_username, StringUtils.EMPTY));
     }
 
     public static boolean isGCConnectorActive() {
@@ -411,7 +411,7 @@ public class Settings {
 
     @NonNull
     public static Credentials getGCVoteLogin() {
-        final String username = getString(R.string.pref_username, null);
+        final String username = StringUtils.trimToNull(getString(R.string.pref_username, null));
         final String password = getString(R.string.pref_pass_vote, null);
         return new Credentials(username, password);
     }
@@ -1169,7 +1169,7 @@ public class Settings {
             return;
         }
         // save username and password
-        putString(R.string.pref_username, username);
+        putString(R.string.pref_username, StringUtils.trim(username));
         putString(R.string.pref_password, password);
     }
 
