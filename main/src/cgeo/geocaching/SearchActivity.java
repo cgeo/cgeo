@@ -21,7 +21,6 @@ import java.util.Locale;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cgeo.geocaching.activity.AbstractActionBarActivity;
-import cgeo.geocaching.activity.ShowcaseViewBuilder;
 import cgeo.geocaching.address.AddressListActivity;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
@@ -411,7 +410,6 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
     @Override
     public final boolean onCreateOptionsMenu(final Menu menu) {
         getMenuInflater().inflate(R.menu.search_activity_options, menu);
-        presentShowcase();
         return true;
     }
 
@@ -432,12 +430,4 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
         fromActivity.startActivityForResult(searchIntent, Intents.SEARCH_REQUEST_CODE);
     }
 
-    @Override
-    public ShowcaseViewBuilder getShowcase() {
-        // The showcase doesn't work well with the search activity, because on searching a geocode (or
-        // selecting a cache from the search field) we immediately close the activity. That in turn confuses the delayed
-        // creation of the showcase bitmap. To avoid someone running into this issue again, this method explicitly overrides
-        // the parent method with the same implementation.
-        return null;
-    }
 }

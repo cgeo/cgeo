@@ -202,12 +202,4 @@ public final class ActivityMixin {
         }
         return true;
     }
-
-    public static void presentShowcase(final IAbstractActivity activity) {
-        final ShowcaseViewBuilder builder = activity.getShowcase();
-        if (builder != null) {
-            builder.setStyle(R.style.ShowcaseView);
-            builder.build();
-        }
-    }
 }

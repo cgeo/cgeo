@@ -71,17 +71,6 @@ public abstract class AbstractActivity extends ActionBarActivity implements IAbs
     }
 
     @Override
-    public final void presentShowcase() {
-        ActivityMixin.presentShowcase(this);
-    }
-
-    @Override
-    public ShowcaseViewBuilder getShowcase() {
-        // do nothing by default
-        return null;
-    }
-
-    @Override
     public boolean onOptionsItemSelected(final MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             return ActivityMixin.navigateUp(this);
