@@ -1,15 +1,16 @@
 package cgeo.geocaching.connector.gc;
 
+import android.graphics.Bitmap;
+
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
-
-import android.graphics.Bitmap;
 
 /**
  * icon decoder for cache icons
  *
  */
+@SuppressWarnings("RedundantIfStatement")
 final class IconDecoder {
     private static final int CT_TRADITIONAL = 0;
     private static final int CT_MULTI = 1;

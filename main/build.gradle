@@ -210,13 +210,13 @@ android {
 
     // special version code for nightly and rc builds
     applicationVariants.all { variant ->
-        if (variant.buildType.name.equals('nightly')) {
+        if (variant.buildType.name == 'nightly') {
             variant.mergedFlavor.versionCode = versionCodeFromDate(10000000)
         }
-        if (variant.buildType.name.equals('rc')) {
+        if (variant.buildType.name == 'rc') {
             variant.mergedFlavor.versionCode = versionCodeFromDate(-1)
         }
-        if (variant.buildType.name.equals('legacy')) {
+        if (variant.buildType.name == 'legacy') {
             variant.mergedFlavor.versionName = System.getenv('LEGACY_VERSION_NAME')
             variant.mergedFlavor.versionCode = System.getenv('LEGACY_VERSION_CODE') as Integer
         }
@@ -415,7 +415,7 @@ configure (verifyCgeoKeys) {
 /*
  * version number from the current date, plus an offset defined by the build type (to define which versions overwrite each other)
  */
-def versionCodeFromDate(offset) {
+static def versionCodeFromDate(offset) {
     def date = new Date()
     def formattedDate = date.format('yyyyMMdd')
     return Integer.valueOf(formattedDate) + offset
@@ -424,7 +424,7 @@ def versionCodeFromDate(offset) {
 /*
  * version name based on current date
  */ 
-def versionNameFromDate() {
+static def versionNameFromDate() {
     def date = new Date()
     def formattedDate = date.format('yyyy.MM.dd')
     return formattedDate
@@ -445,7 +445,7 @@ def gitCommitId() {
 /*
  * check whether this is a local build or a CI server build
  */
-def isContinuousIntegrationServer() {
+static def isContinuousIntegrationServer() {
     return System.getenv('BUILD_NUMBER') != null
 }
 
@@ -535,11 +535,11 @@ task copyDefaultPreferencesToAndroid(dependsOn: 'installBasicDebug') {
 
 tasks.whenTaskAdded { theTask ->
     // only verify the existence of private.properties, when the file is really needed
-    if (theTask.name.equals("packageRelease")) {
+    if (theTask.name == "packageRelease") {
         theTask.dependsOn "verifyPrivateProperties"
     }
     // copy default preferences before starting the app
-    if (theTask.name.equals("runBasicDebug") || theTask.name.equals("connectedBasicDebugAndroidTest")) {
+    if (theTask.name == "runBasicDebug" || theTask.name == "connectedBasicDebugAndroidTest") {
         theTask.dependsOn "copyDefaultPreferencesToAndroid"
     }
 }

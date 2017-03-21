@@ -47,6 +47,7 @@ public class MatcherWrapper {
      * Do not change this method, even if Findbugs and other tools will report a violation for that line!
      *
      */
+    @SuppressWarnings("RedundantStringConstructorCall")
     @Nullable
     @SuppressFBWarnings("DM_STRING_CTOR")
     private static String newString(final String input) {

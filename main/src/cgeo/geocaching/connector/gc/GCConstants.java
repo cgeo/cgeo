@@ -1,15 +1,15 @@
 package cgeo.geocaching.connector.gc;
 
-import cgeo.geocaching.log.LogType;
-
 import android.support.annotation.NonNull;
+
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import java.util.regex.Pattern;
 
-import org.apache.commons.lang3.StringUtils;
+import cgeo.geocaching.log.LogType;
 
 /**
  * These patterns have been optimized for speed. Improve them only if you can prove
@@ -33,9 +33,8 @@ public final class GCConstants {
     /** Format used by geocaching.com when user is not logged in. */
     public static final String DEFAULT_GC_DATE = "MM/dd/yyyy";
 
-    /**
-     * Patterns for parsing the result of a (detailed) search
-     */
+    // Patterns for parsing the result of a (detailed) search
+
     static final Pattern PATTERN_HINT = Pattern.compile("<div id=\"div_hint\"[^>]*>(.*?)</div>", Pattern.DOTALL);
     static final Pattern PATTERN_DESC = Pattern.compile("<span id=\"ctl00_ContentBody_LongDescription\">(.*?)</span>\\s*</div>\\s*<p>\\s*</p>\\s*<p id=\"ctl00_ContentBody_hints\">", Pattern.DOTALL);
     static final Pattern PATTERN_SHORTDESC = Pattern.compile("<span id=\"ctl00_ContentBody_ShortDescription\">(.*?)</span>\\s*</div>", Pattern.DOTALL);
@@ -84,13 +83,13 @@ public final class GCConstants {
     static final Pattern PATTERN_LOGIN_NAME_LOGIN_PAGE = Pattern.compile("ctl00_ContentBody_lbUsername\">.*<strong>(.*)</strong>");
     static final Pattern PATTERN_MAP_LOGGED_IN = Pattern.compile("<a href=\"https?://www.geocaching.com/my/\" class=\"CommonUsername\"");
 
-    /**
-     * Patterns for parsing trackables
-     */
+    // Patterns for parsing trackables
+
     static final Pattern PATTERN_TRACKABLE_GUID = Pattern.compile("<a id=\"ctl00_ContentBody_lnkPrint\" title=\"[^\"]*\" href=\".*sheet\\.aspx\\?guid=([a-z0-9\\-]+)\"[^>]*>[^<]*</a>");
     static final Pattern PATTERN_TRACKABLE_GEOCODE = Pattern.compile(Pattern.quote("CoordInfoCode\">") + "(TB[0-9A-Z&&[^ILOSU]]+)<");
 
     // multiple error codes, depending on the search term for the trackable code
+
     static final String ERROR_TB_DOES_NOT_EXIST = "does not exist in the system";
     static final String ERROR_TB_ELEMENT_EXCEPTION = "ElementNotFound Exception";
     static final String ERROR_TB_ARITHMETIC_OVERFLOW = "operation resulted in an overflow";
@@ -120,9 +119,8 @@ public final class GCConstants {
     static final Pattern PATTERN_TRACKABLE_LOG_IMAGES = Pattern.compile("<li><a href=\"([^\"]+)\".+?LogImgTitle.+?>([^<]*)</");
     static final String TRACKABLE_IS_LOCKED = ">Found it? Log it! (locked)</a></td>";
 
-    /**
-     * Patterns for parsing the result of a search (next)
-     */
+    // Patterns for parsing the result of a search (next)
+
     static final Pattern PATTERN_SEARCH_TYPE = Pattern.compile("<img src=\"[^\"]*/images/wpttypes/(.*?)\\.");
     static final Pattern PATTERN_SEARCH_GUIDANDDISABLED = Pattern.compile("SearchResultsWptType.*?<a href=\"[^\"]*\" class=\"lnk ([^\"]*)\"><span>([^<]*)</span>[^|]*[|][^|]*[|]([^<]*)<");
     /** Two groups **/
@@ -138,17 +136,15 @@ public final class GCConstants {
     static final Pattern PATTERN_SEARCH_HIDDEN_DATE = Pattern.compile("<td style=\"width:70px\" data-dateplaced=\"[^\"]+\">[^<]+<span class=\"small\">([^<]+)</span>");
     static final Pattern PATTERN_SEARCH_POST_ACTION = Pattern.compile("<form method=\"post\" action=\"(.*)\" id=\"aspnetForm\"");
 
-    /**
-     * Patterns for waypoints
-     */
+    // Patterns for waypoints
+
     static final Pattern PATTERN_WPTYPE = Pattern.compile("\\/wpttypes\\/sm\\/(.+)\\.jpg");
     static final Pattern PATTERN_WPPREFIXORLOOKUPORLATLON = Pattern.compile(">([^<]*<[^>]+>)?([^<]+)(<[^>]+>[^<]*)?<\\/td>");
     static final Pattern PATTERN_WPNAME = Pattern.compile(">[^<]*<a[^>]+>([^<]*)<\\/a>");
     static final Pattern PATTERN_WPNOTE = Pattern.compile("colspan=\"6\">(.*)" + Pattern.quote("</td>"), Pattern.DOTALL);
 
-    /**
-     * Patterns for different purposes
-     */
+    // Patterns for different purposes
+
     /** replace line break and paragraph tags */
     static final Pattern PATTERN_LINEBREAK = Pattern.compile("<(br|p)[^>]*>");
     static final Pattern PATTERN_TYPEBOX = Pattern.compile("<select name=\"ctl00\\$ContentBody\\$LogBookPanel1\\$ddLogType\" id=\"ctl00_ContentBody_LogBookPanel1_ddLogType\"[^>]*>"
@@ -168,7 +164,7 @@ public final class GCConstants {
     static final Pattern PATTERN_VIEWSTATES = Pattern.compile("id=\"__VIEWSTATE(\\d*)\"[^(value)]+value=\"([^\"]+)\"[^>]+>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
     static final Pattern PATTERN_USERTOKEN = Pattern.compile("userToken\\s*=\\s*'([^']+)'");
 
-    // downloadable PQs,
+    /** downloadable PQs */
     static final Pattern PATTERN_PQ_LAST_GEN = Pattern.compile("([^(]*)(\\(([\\d]+)?)?");
 
     /** Live Map since 14.02.2012 */

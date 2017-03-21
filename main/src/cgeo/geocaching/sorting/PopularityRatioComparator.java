@@ -1,6 +1,3 @@
-/**
- *
- */
 package cgeo.geocaching.sorting;
 
 import cgeo.geocaching.models.Geocache;

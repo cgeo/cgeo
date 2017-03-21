@@ -1,6 +1,15 @@
 package cgeo.geocaching.models;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.Date;
+import java.util.EnumSet;
+import java.util.HashSet;
+import java.util.List;
 
 import cgeo.CGeoTestCase;
 import cgeo.geocaching.CgeoApplication;
@@ -12,16 +21,7 @@ import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.log.LogType;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.Date;
-import java.util.EnumSet;
-import java.util.HashSet;
-import java.util.List;
-
-import org.apache.commons.lang3.StringUtils;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class GeocacheTest extends CGeoTestCase {
 
@@ -47,6 +47,7 @@ public class GeocacheTest extends CGeoTestCase {
         final Geocache two = new Geocache();
 
         // identity
+        //noinspection EqualsWithItself
         assertThat(one.equals(one)).isTrue();
 
         // different objects without geocode shall not be equal
@@ -369,9 +370,9 @@ public class GeocacheTest extends CGeoTestCase {
         assertTime("<b>14:20</b>", 14, 20);
 
         // time ranges
-        assertTime("<u><em>Uhrzeit:</em></u> 17-20 " + timeHours + "</span></strong>", 17, 00);
-        assertTime("von 11 bis 13 " + timeHours, 11, 00);
-        assertTime("from 11 to 13 " + timeHours, 11, 00);
+        assertTime("<u><em>Uhrzeit:</em></u> 17-20 " + timeHours + "</span></strong>", 17, 0);
+        assertTime("von 11 bis 13 " + timeHours, 11, 0);
+        assertTime("from 11 to 13 " + timeHours, 11, 0);
         assertTime("von 19.15 " + timeHours + " bis ca.20.30 " + timeHours + " statt", 19, 15);
 
         // same without space between time and time string
@@ -379,13 +380,13 @@ public class GeocacheTest extends CGeoTestCase {
         assertTime("text 16" + StringUtils.lowerCase(timeHours), 16, 0);
         assertTime("text 16:00" + timeHours, 16, 0);
         assertTime("text 16.00" + timeHours, 16, 0);
-        assertTime("<u><em>Uhrzeit:</em></u> 17-20" + timeHours + "</span></strong>", 17, 00);
-        assertTime("von 11 bis 13" + timeHours, 11, 00);
-        assertTime("from 11 to 13" + timeHours, 11, 00);
+        assertTime("<u><em>Uhrzeit:</em></u> 17-20" + timeHours + "</span></strong>", 17, 0);
+        assertTime("von 11 bis 13" + timeHours, 11, 0);
+        assertTime("from 11 to 13" + timeHours, 11, 0);
         assertTime("von 19.15" + timeHours + " bis ca.20.30 " + timeHours + " statt", 19, 15);
 
         // #6285
-        assertTime("Dienstag den 31. Januar ab 18:00" + timeHours + " (das Logbuch liegt bis mind. 20:30 " + timeHours + " aus)", 18, 00);
+        assertTime("Dienstag den 31. Januar ab 18:00" + timeHours + " (das Logbuch liegt bis mind. 20:30 " + timeHours + " aus)", 18, 0);
     }
 
     public static void testGuessEventTimeShortDescription() {

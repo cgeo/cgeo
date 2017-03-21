@@ -325,6 +325,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
             public void accept(final BitmapDrawable image) {
                 if (actionBar != null) {
                     final int height = actionBar.getHeight();
+                    //noinspection SuspiciousNameCombination
                     image.setBounds(0, 0, height, height);
                     actionBar.setIcon(image);
                 }

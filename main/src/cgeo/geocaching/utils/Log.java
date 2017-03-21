@@ -1,9 +1,9 @@
 package cgeo.geocaching.utils;
 
+import android.os.Environment;
+
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.CharEncoding;
-
-import android.os.Environment;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -45,7 +45,7 @@ public final class Log {
     private static String addThreadInfo(final String msg) {
         final String threadName = Thread.currentThread().getName();
         final String shortName = threadName.startsWith("OkHttp") ? "OkHttp" : threadName;
-        return new StringBuilder("[").append(shortName).append("] ").append(msg).toString();
+        return "[" + shortName + "] " + msg;
     }
 
     public static void v(final String msg) {

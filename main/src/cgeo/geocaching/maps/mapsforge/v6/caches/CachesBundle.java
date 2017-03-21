@@ -1,11 +1,5 @@
 package cgeo.geocaching.maps.mapsforge.v6.caches;
 
-import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.enumerations.WaypointType;
-import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.maps.mapsforge.v6.MapHandlers;
-import cgeo.geocaching.maps.mapsforge.v6.MfMapView;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -13,9 +7,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-/**
- * Created by rsudev on 11.12.15.
- */
+import cgeo.geocaching.SearchResult;
+import cgeo.geocaching.enumerations.WaypointType;
+import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.maps.mapsforge.v6.MapHandlers;
+import cgeo.geocaching.maps.mapsforge.v6.MfMapView;
+
 public class CachesBundle {
 
     private static final int BASE_SEPARATOR = 0;

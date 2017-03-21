@@ -1,12 +1,12 @@
 package cgeo.geocaching.location;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
-import static org.assertj.core.api.Assertions.offset;
-
 import android.os.Build;
 import android.os.Bundle;
 
 import junit.framework.TestCase;
+
+import static org.assertj.core.api.Assertions.offset;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class GeopointTest extends TestCase {
 
@@ -36,6 +36,7 @@ public class GeopointTest extends TestCase {
 
     public static void testEqual() {
         final Geopoint gp1 = new Geopoint(48.2, 2.31);
+        //noinspection EqualsWithItself
         assertThat(gp1.equals(gp1)).isTrue();
         final Geopoint gp2 = new Geopoint(48.3, 2.31);
         assertThat(gp1.equals(gp2)).isFalse();

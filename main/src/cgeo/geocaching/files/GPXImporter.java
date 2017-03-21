@@ -1,12 +1,5 @@
 package cgeo.geocaching.files;
 
-import cgeo.geocaching.R;
-import cgeo.geocaching.activity.ActivityMixin;
-import cgeo.geocaching.activity.Progress;
-import cgeo.geocaching.ui.dialog.Dialogs;
-import cgeo.geocaching.utils.DisposableHandler;
-import cgeo.geocaching.utils.Log;
-
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
@@ -16,13 +9,20 @@ import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
-import android.support.annotation.Nullable;
+import cgeo.geocaching.R;
+import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.activity.Progress;
+import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.utils.DisposableHandler;
+import cgeo.geocaching.utils.Log;
 
 public class GPXImporter {
     static final int IMPORT_STEP_START = 0;
@@ -194,9 +194,7 @@ public class GPXImporter {
                 case IMPORT_STEP_STATIC_MAPS_SKIPPED:
                     progress.dismiss();
                     progressHandler.dispose();
-                    final StringBuilder bufferSkipped = new StringBuilder(20);
-                    bufferSkipped.append(res.getString(R.string.gpx_import_static_maps_skipped)).append(", ").append(res.getString(R.string.gpx_import_caches_imported_with_filename, msg.arg1, msg.obj));
-                    Dialogs.message(fromActivity, R.string.gpx_import_title_caches_imported, bufferSkipped.toString());
+                    Dialogs.message(fromActivity, R.string.gpx_import_title_caches_imported, res.getString(R.string.gpx_import_static_maps_skipped) + ", " + res.getString(R.string.gpx_import_caches_imported_with_filename, msg.arg1, msg.obj));
                     importFinished();
                     break;
 
@@ -218,9 +216,7 @@ public class GPXImporter {
                     break;
 
                 case IMPORT_STEP_CANCELED:
-                    final StringBuilder bufferCanceled = new StringBuilder(30);
-                    bufferCanceled.append(res.getString(R.string.gpx_import_canceled_with_filename, msg.obj));
-                    ActivityMixin.showShortToast(fromActivity, bufferCanceled.toString());
+                    ActivityMixin.showShortToast(fromActivity, res.getString(R.string.gpx_import_canceled_with_filename, msg.obj));
                     importFinished();
                     break;
 

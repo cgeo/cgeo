@@ -2,9 +2,6 @@ package cgeo.geocaching.maps.mapsforge.v6;
 
 import android.os.Handler;
 
-/**
- * Created by rainer on 13.12.15.
- */
 public class MapHandlers {
 
     private final TapHandler tapHandler;

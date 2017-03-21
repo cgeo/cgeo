@@ -148,7 +148,7 @@ public final class MWMPoint implements Serializable
 
     private String name;
 
-    private Style(String name)
+    Style(String name)
     {
       this.name = name;
     }

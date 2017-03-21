@@ -2,9 +2,6 @@ package cgeo.geocaching.maps.mapsforge.v6.caches;
 
 import android.support.annotation.NonNull;
 
-/**
- * Created by rsudev on 13.12.15.
- */
 public class GeoEntry {
 
     public final String geocode;

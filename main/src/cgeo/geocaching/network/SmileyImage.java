@@ -1,14 +1,14 @@
 package cgeo.geocaching.network;
 
-import cgeo.geocaching.utils.ImageUtils;
-import cgeo.geocaching.utils.ImageUtils.LineHeightContainerDrawable;
-
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.widget.TextView;
 
-import io.reactivex.Observable;
 import org.apache.commons.lang3.tuple.ImmutablePair;
+
+import cgeo.geocaching.utils.ImageUtils;
+import cgeo.geocaching.utils.ImageUtils.LineHeightContainerDrawable;
+import io.reactivex.Observable;
 
 /**
  * Specialized image class for fetching and displaying smileys in the log book.
@@ -23,7 +23,7 @@ public class SmileyImage extends HtmlImage {
     protected ImmutablePair<BitmapDrawable, Boolean> scaleImage(final ImmutablePair<Bitmap, Boolean> loadResult) {
         final Bitmap bitmap = loadResult.left;
         if (bitmap == null) {
-            return ImmutablePair.of((BitmapDrawable) null, loadResult.right);
+            return ImmutablePair.of(null, loadResult.right);
         }
         final TextView view = viewRef.get();
         final BitmapDrawable drawable = new BitmapDrawable(view.getResources(), bitmap);
