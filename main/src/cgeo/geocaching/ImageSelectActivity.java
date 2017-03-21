@@ -3,7 +3,6 @@ package cgeo.geocaching;
 import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.Log;
@@ -28,8 +27,8 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
@@ -276,10 +275,10 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
                         final File outputFile = ImageUtils.getOutputImageFile();
                         if (outputFile != null) {
                             output = new FileOutputStream(outputFile);
-                            LocalStorage.copy(input, output);
+                            IOUtils.copy(input, output);
                             image = new Image.Builder().setUrl(outputFile).build();
                         }
-                    } catch (final FileNotFoundException e) {
+                    } catch (final IOException e) {
                         Log.e("ImageSelectActivity.onStartResult", e);
                     } finally {
                         IOUtils.closeQuietly(input);

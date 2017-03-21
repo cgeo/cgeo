@@ -1,12 +1,14 @@
 package cgeo.geocaching.storage;
 
+import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.utils.CryptUtils;
+import cgeo.geocaching.utils.EnvironmentUtils;
+import cgeo.geocaching.utils.FileUtils;
+import cgeo.geocaching.utils.Log;
+
 import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.CharEncoding;
-import org.apache.commons.lang3.StringUtils;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -26,12 +28,10 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
-import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.utils.CryptUtils;
-import cgeo.geocaching.utils.EnvironmentUtils;
-import cgeo.geocaching.utils.FileUtils;
-import cgeo.geocaching.utils.Log;
 import okhttp3.Response;
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.CharEncoding;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Handle local storage issues on phone and SD card.
@@ -284,7 +284,7 @@ public final class LocalStorage {
      *            the target file, which will be created if necessary
      * @return true if the operation was successful, false otherwise
      */
-    public static boolean saveToFile(@Nullable final InputStream inputStream, @NonNull final File targetFile) {
+    private static boolean saveToFile(@Nullable final InputStream inputStream, @NonNull final File targetFile) {
         if (inputStream == null) {
             return false;
         }
@@ -294,13 +294,14 @@ public final class LocalStorage {
             try {
                 final File tempFile = File.createTempFile("download", null, targetFile.getParentFile());
                 final FileOutputStream fos = new FileOutputStream(tempFile);
-                final boolean written = copy(inputStream, fos);
-                fos.close();
-                if (written) {
-                    return tempFile.renameTo(targetFile);
+                try {
+                    IOUtils.copy(inputStream, fos);
+                } catch (final IOException e) {
+                    FileUtils.deleteIgnoringFailure(tempFile);
+                    throw e;
                 }
-                FileUtils.deleteIgnoringFailure(tempFile);
-                return false;
+                fos.close();
+                return tempFile.renameTo(targetFile);
             } finally {
                 IOUtils.closeQuietly(inputStream);
             }
@@ -325,18 +326,15 @@ public final class LocalStorage {
 
         InputStream input = null;
         OutputStream output = null;
-        boolean copyDone = false;
 
         try {
             input = new BufferedInputStream(new FileInputStream(source));
             output = new BufferedOutputStream(new FileOutputStream(destination));
-            copyDone = copy(input, output);
+            IOUtils.copy(input, output);
             // close here already to catch any issue with closing
             input.close();
             output.close();
-        } catch (final FileNotFoundException e) {
-            Log.e("LocalStorage.copy: could not copy file", e);
-            return false;
+            return true;
         } catch (final IOException e) {
             Log.e("LocalStorage.copy: could not copy file", e);
             return false;
@@ -345,25 +343,6 @@ public final class LocalStorage {
             IOUtils.closeQuietly(input);
             IOUtils.closeQuietly(output);
         }
-
-        return copyDone;
-    }
-
-    public static boolean copy(@NonNull final InputStream input, @NonNull final OutputStream output) {
-        try {
-            int length;
-            final byte[] buffer = new byte[4096];
-            while ((length = input.read(buffer)) > 0) {
-                output.write(buffer, 0, length);
-            }
-            // Flushing is only necessary if the stream is not immediately closed afterwards.
-            // We rely on all callers to do that correctly outside of this method
-        } catch (final IOException e) {
-            Log.e("LocalStorage.copy: error when copying data", e);
-            return false;
-        }
-
-        return true;
     }
 
     /**
