@@ -1,4 +1,3 @@
 include ':mapswithme-api'
-include ':showcaseview'
 include ':main'
 include ':cgeo-contacts'
