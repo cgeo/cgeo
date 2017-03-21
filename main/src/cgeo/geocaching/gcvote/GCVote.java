@@ -35,6 +35,11 @@ import java.util.Locale;
 import java.util.Map;
 
 public final class GCVote implements ICredentials {
+
+    // gcvote.com does not have a https certificate. However, Guido (the owner of gcvote.com) told
+    // us on 2017-03-21 that the site is accessible through its provider https endpoint at
+    // https://ssl.webpack.de/gcvote.com
+
     public static final float NO_RATING = 0;
 
     private static final int MAX_CACHED_RATINGS = 1000;
@@ -97,7 +102,7 @@ public final class GCVote implements ICredentials {
         } else {
             params.put("waypoints", StringUtils.join(geocodes, ','));
         }
-        final InputStream response = Network.getResponseStream(Network.getRequest("http://gcvote.com/getVotes.php", params));
+        final InputStream response = Network.getResponseStream(Network.getRequest("https://ssl.webpack.de/gcvote.com/getVotes.php", params));
         if (response == null) {
             return Collections.emptyMap();
         }
@@ -170,7 +175,7 @@ public final class GCVote implements ICredentials {
                 "voteUser", String.format(Locale.US, "%.1f", rating),
                 "version", "cgeo");
 
-        final String result = StringUtils.trim(Network.getResponseData(Network.getRequest("http://gcvote.com/setVote.php", params)));
+        final String result = StringUtils.trim(Network.getResponseData(Network.getRequest("https://ssl.webpack.de/gcvote.com/setVote.php", params)));
         if (!StringUtils.equalsIgnoreCase(result, "ok")) {
             Log.e("GCVote.setRating: could not post rating, answer was " + result);
             return false;
