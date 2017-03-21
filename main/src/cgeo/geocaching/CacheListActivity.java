@@ -33,9 +33,6 @@ import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.github.amlcurran.showcaseview.targets.ActionViewTarget;
-import com.github.amlcurran.showcaseview.targets.ActionViewTarget.Type;
-
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -59,7 +56,6 @@ import cgeo.geocaching.activity.AbstractListActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.FilteredActivity;
 import cgeo.geocaching.activity.Progress;
-import cgeo.geocaching.activity.ShowcaseViewBuilder;
 import cgeo.geocaching.apps.cachelist.CacheListApp;
 import cgeo.geocaching.apps.cachelist.CacheListAppUtils;
 import cgeo.geocaching.apps.cachelist.CacheListApps;
@@ -482,8 +478,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         if (isInvokedFromAttachment()) {
             listNameMemento.rememberTerm(extras.getString(Intents.EXTRA_NAME));
             importGpxAttachement();
-        } else {
-            presentShowcase();
         }
     }
 
@@ -1924,16 +1918,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         }
         result.append(getCacheNumberString(getResources(), search.getCount()));
         return result.toString();
-    }
-
-    @Override
-    public ShowcaseViewBuilder getShowcase() {
-        if (mCacheListSpinnerAdapter != null) {
-            return new ShowcaseViewBuilder(this)
-                    .setTarget(new ActionViewTarget(this, Type.SPINNER))
-                    .setContent(R.string.showcase_cachelist_title, R.string.showcase_cachelist_text);
-        }
-        return null;
     }
 
     /**

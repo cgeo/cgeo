@@ -4,7 +4,6 @@ import cgeo.geocaching.ImageSelectActivity;
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.TrackableActivity;
-import cgeo.geocaching.activity.ShowcaseViewBuilder;
 import cgeo.geocaching.command.AbstractCommand;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.ILoggingManager;
@@ -69,7 +68,6 @@ import java.util.concurrent.Callable;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import com.github.amlcurran.showcaseview.targets.ActionItemTarget;
 import io.reactivex.Observable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
@@ -909,15 +907,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         menu.findItem(R.id.menu_image).setVisible(cache.supportsLogImages());
         menu.findItem(R.id.save).setVisible(true);
         menu.findItem(R.id.clear).setVisible(true);
-        presentShowcase();
         return true;
-    }
-
-    @Override
-    public ShowcaseViewBuilder getShowcase() {
-        return new ShowcaseViewBuilder(this)
-                .setTarget(new ActionItemTarget(this, R.id.menu_send))
-                .setContent(R.string.showcase_logcache_title, R.string.showcase_logcache_text);
     }
 
     public static Intent getLogCacheIntent(final Activity context, final String cacheId, final String geocode) {

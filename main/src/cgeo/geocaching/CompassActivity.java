@@ -1,7 +1,6 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActionBarActivity;
-import cgeo.geocaching.activity.ShowcaseViewBuilder;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Units;
@@ -38,7 +37,6 @@ import android.widget.ToggleButton;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import com.github.amlcurran.showcaseview.targets.ActionItemTarget;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import org.apache.commons.lang3.StringUtils;
@@ -123,8 +121,6 @@ public class CompassActivity extends AbstractActionBarActivity {
 
         // make sure we can control the TTS volume
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
-
-        presentShowcase();
     }
 
     @Override
@@ -233,17 +229,6 @@ public class CompassActivity extends AbstractActionBarActivity {
                 }
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public ShowcaseViewBuilder getShowcase() {
-        // present showcase only if hint menu item is available
-        if (cache != null) {
-            return new ShowcaseViewBuilder(this)
-                    .setTarget(new ActionItemTarget(this, R.id.menu_hint))
-                    .setContent(R.string.showcase_compass_hint_title, R.string.showcase_compass_hint_text);
-        }
-        return null;
     }
 
     private void setTarget(@NonNull final Geopoint coords, final String newDescription) {
