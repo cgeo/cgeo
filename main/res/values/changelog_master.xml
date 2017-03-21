@@ -3,6 +3,8 @@
   <!-- changelog for the master branch -->
   <string name="changelog_master" translatable="false">
     <b>Next feature release:</b>\n
+    · New: Implemented new data storage structure\n
+    · New: Allow moving additional geocache data to external SD\n
     · New: Allow export of owner name to clipboard when clicking on it\n
     \n
     \n
