@@ -17,14 +17,13 @@ import android.util.Pair;
 import android.view.Gravity;
 import android.widget.Toast;
 
+import org.apache.commons.lang3.CharEncoding;
+import org.apache.commons.lang3.StringUtils;
+
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.CharEncoding;
-import org.apache.commons.lang3.StringUtils;
 
 public final class ContactsActivity extends Activity {
     static final String LOG_TAG = "cgeo.contacts";
@@ -129,7 +128,9 @@ public final class ContactsActivity extends Activity {
         } catch (final Exception e) {
             Log.e(LOG_TAG, "ContactsActivity.getContactId", e);
         } finally {
-            IOUtils.closeQuietly(cursor);
+            if (cursor != null) {
+                cursor.close(); // no Closable Cursor below sdk 16
+            }
         }
         return result;
     }

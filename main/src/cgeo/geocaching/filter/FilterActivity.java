@@ -124,7 +124,7 @@ public class FilterActivity extends AbstractActionBarActivity {
     private static IFilterFactory createFilterFactory(final Class<? extends IFilterFactory> class1) {
         try {
             return class1.newInstance();
-        } catch (final InstantiationException | IllegalAccessException e) {
+        } catch (Exception e) { // no multi-catch below SDK 19
             Log.e("createFilterFactory", e);
         }
         return null;

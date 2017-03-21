@@ -262,7 +262,9 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
                         Log.e("ImageSelectActivity.onActivityResult", e);
                         showFailure();
                     } finally {
-                        IOUtils.closeQuietly(cursor);
+                        if (cursor != null) {
+                            cursor.close(); // no Closable Cursor below sdk 16
+                        }
                     }
 
                     Log.d("SELECT IMAGE data = " + data.toString());
