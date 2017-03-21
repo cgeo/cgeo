@@ -895,7 +895,10 @@ public class Geocache implements IWaypoint {
     }
 
     public void setLists(final Set<Integer> lists) {
-        this.lists = lists;
+        // Create a new set to allow immutable structures such as SingletonSet to be
+        // given by the caller. We want the value returned by getLists() to be mutable
+        // since remove or add operations may be done on it.
+        this.lists = new HashSet<>(lists);
     }
 
     public boolean isDetailed() {

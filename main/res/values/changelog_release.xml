@@ -2,6 +2,12 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
+    <b>Next bugfix release (Beta version):</b>\n
+    · Fix: Avoid possible crashes during file operation on Android devices below 4.1\n
+    · Fix: Avoid possible crashes on Android devices below 4.4\n
+    · Fix: Prevent crash when moving a cache freshly loaded through send2cgeo to another list\n
+    \n
+    \n
     <b>2017.03.19:</b>\n
     · New: New login page used for gc.com\n
     · New: Link to project-gc.com challenge checker for mystery caches having challenge in their title\n
