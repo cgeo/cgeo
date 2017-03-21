@@ -12,8 +12,6 @@ import android.util.SparseArray;
 import android.view.Gravity;
 import android.widget.Toast;
 
-import org.apache.commons.io.IOUtils;
-
 public final class CalendarActivity extends Activity {
     static final String LOG_TAG = "cgeo.calendar";
 
@@ -120,7 +118,7 @@ public final class CalendarActivity extends Activity {
             } while (cursor.moveToNext());
         } finally {
             if (cursor != null) {
-                cursor.close();
+                cursor.close(); // no Closable Cursor below sdk 16
             }
         }
         return calendars;
