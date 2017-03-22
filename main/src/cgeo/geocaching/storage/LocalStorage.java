@@ -44,7 +44,7 @@ public final class LocalStorage {
     private static final String GEOCACHE_PHOTOS_DIR_NAME = "GeocachePhotos";
     private static final String GEOCACHE_DATA_DIR_NAME = "GeocacheData";
 
-    public static final Pattern GEOCACHE_FILE_PATTERN = Pattern.compile("^(GC|TB|EC|GK|O)[A-Z0-9]{2,7}$");
+    public static final Pattern GEOCACHE_FILE_PATTERN = Pattern.compile("^(GC|TB|TC|CC|LC|EC|GK|MV|TR|VI|MS|EV|CT|GE|GA|WM|O)[A-Z0-9]{2,7}$");
 
     private static File internalCgeoDirectory;
     private static File externalPrivateCgeoDirectory;
