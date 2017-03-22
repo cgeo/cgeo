@@ -101,7 +101,7 @@ class CalendarEntry {
         }
 
         if (StringUtils.isNotBlank(personalNote)) {
-            description.append("\n\n").append(Html.fromHtml(personalNote).toString());
+            description.append("\n\n").append(TextUtils.stripHtml(personalNote));
         }
 
         return description.toString();
@@ -113,7 +113,7 @@ class CalendarEntry {
 
         final Intent intent = new Intent(Intent.ACTION_INSERT)
                 .setData(Uri.parse("content://com.android.calendar/events"))
-                .putExtra(CalendarContract.Events.TITLE, Html.fromHtml(name).toString())
+                .putExtra(CalendarContract.Events.TITLE, TextUtils.stripHtml(name))
                 .putExtra(CalendarContract.Events.DESCRIPTION, description)
                 .putExtra(CalendarContract.Events.HAS_ALARM, false)
                 .putExtra(CalendarContract.Events.EVENT_TIMEZONE, "UTC");

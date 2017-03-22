@@ -3,14 +3,13 @@ package cgeo.geocaching;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
 import cgeo.geocaching.utils.Log;
-
-import org.apache.commons.lang3.StringEscapeUtils;
+import cgeo.geocaching.utils.TextUtils;
 
 import android.os.SystemClock;
 import android.test.AndroidTestCase;
-import android.text.Html;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import org.apache.commons.lang3.StringEscapeUtils;
 
 public class HtmlPerformanceTest extends AndroidTestCase {
     private String input;
@@ -31,7 +30,7 @@ public class HtmlPerformanceTest extends AndroidTestCase {
     }
 
     private String unescapeAndroid() {
-        return Html.fromHtml(input).toString();
+        return TextUtils.stripHtml(input);
     }
 
     public void testUnescapePerformance() {

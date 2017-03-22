@@ -1,17 +1,18 @@
 package cgeo.geocaching.log;
 
 import cgeo.geocaching.CacheDetailActivity;
+import cgeo.geocaching.TrackableActivity;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.models.Trackable;
-import cgeo.geocaching.TrackableActivity;
 import cgeo.geocaching.ui.UserActionsClickListener;
-
-import org.apache.commons.lang3.StringUtils;
+import cgeo.geocaching.utils.TextUtils;
 
 import android.text.Html;
 import android.view.View;
 
 import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
 
 public class TrackableLogsViewCreator extends LogsViewCreator {
 
@@ -53,7 +54,7 @@ public class TrackableLogsViewCreator extends LogsViewCreator {
                 @Override
                 public void onClick(final View arg0) {
                     if (StringUtils.isNotBlank(cacheGuid)) {
-                        CacheDetailActivity.startActivityGuid(activity, cacheGuid, Html.fromHtml(cacheName).toString());
+                        CacheDetailActivity.startActivityGuid(activity, cacheGuid, TextUtils.stripHtml(cacheName));
                     } else {
                         // for GeoKrety we only know the cache geocode
                         final String cacheGeocode = log.cacheGeocode;

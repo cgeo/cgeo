@@ -3,11 +3,11 @@ package cgeo.geocaching.ui;
 import cgeo.geocaching.R;
 import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.ui.recyclerview.AbstractRecyclerViewHolder;
+import cgeo.geocaching.utils.TextUtils;
 
 import android.graphics.Paint;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,7 +57,7 @@ public class TrackableListAdapter extends RecyclerView.Adapter<TrackableListAdap
         final Trackable trackable = trackables.get(position);
 
         holder.imageBrand.setImageResource(trackable.getIconBrand());
-        holder.name.setText(Html.fromHtml(trackable.getName()).toString());
+        holder.name.setText(TextUtils.stripHtml(trackable.getName()));
         if (trackable.isMissing()) {
             holder.name.setPaintFlags(holder.name.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         }

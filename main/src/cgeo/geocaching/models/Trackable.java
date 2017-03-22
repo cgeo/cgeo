@@ -7,14 +7,11 @@ import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogTypeTrackable;
 import cgeo.geocaching.utils.HtmlUtils;
 import cgeo.geocaching.utils.ImageUtils;
-
-import org.apache.commons.lang3.ObjectUtils;
-import org.apache.commons.lang3.StringUtils;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import cgeo.geocaching.utils.TextUtils;
 
 import android.support.annotation.DrawableRes;
-import android.text.Html;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -22,6 +19,9 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+
+import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
 
 public class Trackable implements ILogable {
     private static final int SPOTTED_UNSET = 0;
@@ -326,7 +326,7 @@ public class Trackable implements ILogable {
     @Override
     public String toString() {
         if (name != null) {
-            return Html.fromHtml(name).toString();
+            return TextUtils.stripHtml(name);
         }
 
         if (guid != null) {

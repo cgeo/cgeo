@@ -1,11 +1,11 @@
 package cgeo.geocaching.files;
 
-import android.os.Handler;
-import android.text.Html;
+import cgeo.geocaching.R;
+import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.utils.DisposableHandler;
+import cgeo.geocaching.utils.TextUtils;
 
-import org.apache.commons.compress.archivers.zip.ZipArchiveInputStream;
-import org.apache.commons.compress.utils.IOUtils;
-import org.apache.commons.lang3.StringUtils;
+import android.os.Handler;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -14,9 +14,9 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.zip.ZipEntry;
 
-import cgeo.geocaching.R;
-import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.utils.DisposableHandler;
+import org.apache.commons.compress.archivers.zip.ZipArchiveInputStream;
+import org.apache.commons.compress.utils.IOUtils;
+import org.apache.commons.lang3.StringUtils;
 
 abstract class AbstractImportGpxZipThread extends AbstractImportGpxThread {
 
@@ -75,7 +75,7 @@ abstract class AbstractImportGpxZipThread extends AbstractImportGpxThread {
 
     @Override
     protected String getSourceDisplayName() {
-        return gpxFileName == null ? ".gpx" : Html.fromHtml(gpxFileName).toString();
+        return gpxFileName == null ? ".gpx" : TextUtils.stripHtml(gpxFileName);
     }
 
     protected abstract InputStream getInputStream() throws IOException;

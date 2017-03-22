@@ -6,7 +6,6 @@ import cgeo.geocaching.test.mock.MockedCache;
 import cgeo.geocaching.utils.TextUtils;
 
 import android.test.AndroidTestCase;
-import android.text.Html;
 
 public class GCConstantsTest extends AndroidTestCase {
 
@@ -61,9 +60,9 @@ public class GCConstantsTest extends AndroidTestCase {
     public static void testTBWithSpecialChar() {
         // Incidentally, the site incorrectly escapes the "&" into "&amp;"
         final String page = "<span id=\"ctl00_ContentBody_lbHeading\">Schlauchen&amp;ravestorm</span>";
-        assertThat(Html.fromHtml(TextUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_NAME, "")).toString()).isEqualTo("Schlauchen&ravestorm");
+        assertThat(TextUtils.stripHtml(TextUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_NAME, ""))).isEqualTo("Schlauchen&ravestorm");
         // Test with the current incorrect form as well
         final String page2 = "<span id=\"ctl00_ContentBody_lbHeading\">Schlauchen&ravestorm</span>";
-        assertThat(Html.fromHtml(TextUtils.getMatch(page2, GCConstants.PATTERN_TRACKABLE_NAME, "")).toString()).isEqualTo("Schlauchen&ravestorm");
+        assertThat(TextUtils.stripHtml(TextUtils.getMatch(page2, GCConstants.PATTERN_TRACKABLE_NAME, ""))).isEqualTo("Schlauchen&ravestorm");
     }
 }

@@ -27,6 +27,7 @@ import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.HtmlUtils;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.UnknownTagsHandler;
 
 import android.app.ProgressDialog;
@@ -179,7 +180,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
 
         final String message;
         if (StringUtils.isNotBlank(name)) {
-            message = Html.fromHtml(name).toString();
+            message = TextUtils.stripHtml(name);
         } else if (StringUtils.isNotBlank(geocode)) {
             message = geocode;
         } else {
@@ -303,7 +304,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
             geocode = trackable.getGeocode();
 
             if (StringUtils.isNotBlank(trackable.getName())) {
-                setTitle(Html.fromHtml(trackable.getName()).toString());
+                setTitle(TextUtils.stripHtml(trackable.getName()));
             } else {
                 setTitle(trackable.getName());
             }
@@ -440,7 +441,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
             }
 
             // trackable name
-            final TextView nameTxtView = details.add(R.string.trackable_name, StringUtils.isNotBlank(trackable.getName()) ? Html.fromHtml(trackable.getName()).toString() : res.getString(R.string.trackable_unknown)).right;
+            final TextView nameTxtView = details.add(R.string.trackable_name, StringUtils.isNotBlank(trackable.getName()) ? TextUtils.stripHtml(trackable.getName()) : res.getString(R.string.trackable_unknown)).right;
             addContextMenu(nameTxtView);
 
             // missing status
@@ -451,7 +452,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
             // trackable type
             final String tbType;
             if (StringUtils.isNotBlank(trackable.getType())) {
-                tbType = Html.fromHtml(trackable.getType()).toString();
+                tbType = TextUtils.stripHtml(trackable.getType());
             } else {
                 tbType = res.getString(R.string.trackable_unknown);
             }
@@ -528,9 +529,9 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
                         }
                     });
                 } else if (trackable.getSpottedType() == Trackable.SPOTTED_USER) {
-                    spotted.setOnClickListener(new UserNameClickListener(trackable, Html.fromHtml(trackable.getSpottedName()).toString()));
+                    spotted.setOnClickListener(new UserNameClickListener(trackable, TextUtils.stripHtml(trackable.getSpottedName())));
                 } else if (trackable.getSpottedType() == Trackable.SPOTTED_OWNER) {
-                    spotted.setOnClickListener(new UserNameClickListener(trackable, Html.fromHtml(trackable.getOwner()).toString()));
+                    spotted.setOnClickListener(new UserNameClickListener(trackable, TextUtils.stripHtml(trackable.getOwner())));
                 }
             }
 

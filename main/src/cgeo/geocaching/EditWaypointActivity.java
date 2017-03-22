@@ -36,7 +36,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.v4.content.LocalBroadcastManager;
-import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -135,15 +134,15 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
                             buttonLat.setText(coordinates.format(GeopointFormatter.Format.LAT_DECMINUTE));
                             buttonLon.setText(coordinates.format(GeopointFormatter.Format.LON_DECMINUTE));
                         }
-                        waypointName.setText(Html.fromHtml(StringUtils.trimToEmpty(waypoint.getName())).toString());
+                        waypointName.setText(TextUtils.stripHtml(StringUtils.trimToEmpty(waypoint.getName())));
                         Dialogs.moveCursorToEnd(waypointName);
                         if (TextUtils.containsHtml(waypoint.getNote())) {
-                            note.setText(Html.fromHtml(StringUtils.trimToEmpty(waypoint.getNote())).toString());
+                            note.setText(TextUtils.stripHtml(StringUtils.trimToEmpty(waypoint.getNote())));
                         } else {
                             note.setText(StringUtils.trimToEmpty(waypoint.getNote()));
                         }
                         if (TextUtils.containsHtml(waypoint.getUserNote())) {
-                            userNote.setText(Html.fromHtml(StringUtils.trimToEmpty(waypoint.getUserNote())).toString());
+                            userNote.setText(TextUtils.stripHtml(StringUtils.trimToEmpty(waypoint.getUserNote())));
                         } else {
                             userNote.setText(StringUtils.trimToEmpty(waypoint.getUserNote()));
                         }

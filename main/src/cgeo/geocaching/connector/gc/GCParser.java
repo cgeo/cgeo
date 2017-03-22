@@ -39,7 +39,6 @@ import cgeo.geocaching.utils.TextUtils;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.text.Html;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -147,10 +146,10 @@ public final class GCParser {
 
                 while (matcherGuidAndDisabled.find()) {
                     if (matcherGuidAndDisabled.group(2) != null) {
-                        cache.setName(Html.fromHtml(matcherGuidAndDisabled.group(2).trim()).toString());
+                        cache.setName(TextUtils.stripHtml(matcherGuidAndDisabled.group(2).trim()));
                     }
                     if (matcherGuidAndDisabled.group(3) != null) {
-                        cache.setLocation(Html.fromHtml(matcherGuidAndDisabled.group(3).trim()).toString());
+                        cache.setLocation(TextUtils.stripHtml(matcherGuidAndDisabled.group(3).trim()));
                     }
 
                     final String attr = matcherGuidAndDisabled.group(1);
@@ -402,7 +401,7 @@ public final class GCParser {
             return ImmutablePair.of(StatusCode.PREMIUM_ONLY, null);
         }
 
-        final String cacheName = Html.fromHtml(TextUtils.getMatch(pageIn, GCConstants.PATTERN_NAME, true, "")).toString();
+        final String cacheName = TextUtils.stripHtml(TextUtils.getMatch(pageIn, GCConstants.PATTERN_NAME, true, ""));
         if (GCConstants.STRING_UNKNOWN_ERROR.equalsIgnoreCase(cacheName)) {
             return UNKNOWN_PARSE_ERROR;
         }
@@ -749,7 +748,7 @@ public final class GCParser {
                     waypoint.setLookup(TextUtils.getMatch(wp[5], GCConstants.PATTERN_WPPREFIXORLOOKUPORLATLON, true, 2, waypoint.getLookup(), false));
 
                     // waypoint latitude and longitude
-                    latlon = Html.fromHtml(TextUtils.getMatch(wp[7], GCConstants.PATTERN_WPPREFIXORLOOKUPORLATLON, false, 2, "", false)).toString().trim();
+                    latlon = TextUtils.stripHtml(TextUtils.getMatch(wp[7], GCConstants.PATTERN_WPPREFIXORLOOKUPORLATLON, false, 2, "", false)).trim();
                     if (!StringUtils.startsWith(latlon, "???")) {
                         waypoint.setCoords(new Geopoint(latlon));
                     } else {
@@ -1561,11 +1560,11 @@ public final class GCParser {
         trackable.setIconUrl(iconUrl.startsWith("/") ? "https://www.geocaching.com" + iconUrl : iconUrl);
 
         // trackable name
-        trackable.setName(Html.fromHtml(TextUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_NAME, true, "")).toString());
+        trackable.setName(TextUtils.stripHtml(TextUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_NAME, true, "")));
 
         // trackable type
         if (StringUtils.isNotBlank(trackable.getName())) {
-            trackable.setType(Html.fromHtml(TextUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_TYPE, true, trackable.getType())).toString());
+            trackable.setType(TextUtils.stripHtml(TextUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_TYPE, true, trackable.getType())));
         }
 
         // trackable owner name
@@ -1688,7 +1687,7 @@ public final class GCParser {
                 }
 
                 final LogEntry.Builder logDoneBuilder = new LogEntry.Builder()
-                        .setAuthor(Html.fromHtml(matcherLogs.group(3)).toString().trim())
+                        .setAuthor(TextUtils.stripHtml(matcherLogs.group(3)).trim())
                         .setDate(date)
                         .setLogType(LogType.getByIconName(matcherLogs.group(1)))
                         .setLog(matcherLogs.group(7).trim());
@@ -1931,7 +1930,7 @@ public final class GCParser {
         final MatcherWrapper trackableMatcher = new MatcherWrapper(GCConstants.PATTERN_TRACKABLE, page);
         while (trackableMatcher.find()) {
             final String trackCode = trackableMatcher.group(1);
-            final String name = Html.fromHtml(trackableMatcher.group(2)).toString();
+            final String name = TextUtils.stripHtml(trackableMatcher.group(2));
             try {
                 final Integer ctl = Integer.valueOf(trackableMatcher.group(3));
                 final Integer id = Integer.valueOf(trackableMatcher.group(5));
