@@ -7,6 +7,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Message;
+import android.view.Window;
 import android.view.WindowManager;
 
 /**
@@ -16,7 +17,6 @@ public class Progress {
 
     private ProgressDialog dialog;
     private int progress = 0;
-    private int progressDivider = 1;
     private final boolean hideAbsolute;
 
     public Progress(final boolean hideAbsolute) {
@@ -67,8 +67,11 @@ public class Progress {
         }
         dialog.setProgress(0);
         dialog.setCanceledOnTouchOutside(false);
-        dialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        this.progress = 0;
+        final Window window = dialog.getWindow();
+        if (window != null) {
+            window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        }
+        progress = 0;
     }
 
     public synchronized void setMessage(final String message) {
@@ -83,29 +86,25 @@ public class Progress {
 
     public synchronized void setMaxProgressAndReset(final int max) {
         if (isShowing()) {
-            final int modMax = max / this.progressDivider;
-            dialog.setMax(modMax);
+            dialog.setMax(max);
             dialog.setProgress(0);
         }
-        this.progress = 0;
+        progress = 0;
     }
 
     public synchronized void setProgress(final int progress) {
-        final int modProgress = progress / this.progressDivider;
+        this.progress = progress;
         if (isShowing()) {
-            dialog.setProgress(modProgress);
+            dialog.setProgress(progress);
         }
-        this.progress = modProgress;
     }
 
-    public synchronized int getProgress() {
-        if (dialog != null) {
-            dialog.getProgress();
-        }
-        return this.progress;
+    public int getProgress() {
+        return progress;
     }
 
-    public synchronized void setProgressDivider(final int progressDivider) {
-        this.progressDivider = progressDivider;
+    public void incrementProgressBy(final int increment) {
+        setProgress(progress + increment);
     }
+
 }

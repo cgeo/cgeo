@@ -2,6 +2,7 @@ package cgeo.geocaching.storage;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
+import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.ui.dialog.Dialogs;
@@ -307,19 +308,20 @@ public final class LocalStorage {
     }
 
     public static void changeExternalPrivateCgeoDir(final SettingsActivity fromActivity, final String newExtDir) {
-        if (StringUtils.equals(getExternalPrivateCgeoDirectory().getAbsolutePath(), newExtDir)) {
-            Settings.setExternalPrivateCgeoDirectory(newExtDir);
-            return;
-        }
-        final ProgressDialog dialog = ProgressDialog.show(fromActivity, fromActivity.getString(R.string.init_datadirmove_datadirmove), fromActivity.getString(R.string.init_datadirmove_running), true, false);
+        final Progress progress = new Progress(true);
+        progress.show(fromActivity, fromActivity.getString(R.string.init_datadirmove_datadirmove), fromActivity.getString(R.string.init_datadirmove_running), ProgressDialog.STYLE_HORIZONTAL, null);
         AndroidRxUtils.bindActivity(fromActivity, Observable.defer(new Callable<Observable<Boolean>>() {
             @Override
             public Observable<Boolean> call() {
                 final File newDataDir = new File(newExtDir, GEOCACHE_DATA_DIR_NAME);
                 final File currentDataDir = new File(getExternalPrivateCgeoDirectory(), GEOCACHE_DATA_DIR_NAME);
                 Log.i("Moving geocache data to " + newDataDir.getAbsolutePath());
-                for (final File geocacheDataDir : currentDataDir.listFiles()) {
+                final File[] files = currentDataDir.listFiles();
+                progress.setMaxProgressAndReset(files.length);
+                progress.setProgress(0);
+                for (final File geocacheDataDir : files) {
                     FileUtils.moveTo(geocacheDataDir, newDataDir);
+                    progress.incrementProgressBy(1);
                 }
 
                 Settings.setExternalPrivateCgeoDirectory(newExtDir);
@@ -331,7 +333,7 @@ public final class LocalStorage {
         }).subscribeOn(Schedulers.io())).subscribe(new Consumer<Boolean>() {
             @Override
             public void accept(final Boolean success) {
-                dialog.dismiss();
+                progress.dismiss();
                 final String message = success ? fromActivity.getString(R.string.init_datadirmove_success) : fromActivity.getString(R.string.init_datadirmove_failed);
                 Dialogs.message(fromActivity, R.string.init_datadirmove_datadirmove, message);
             }
