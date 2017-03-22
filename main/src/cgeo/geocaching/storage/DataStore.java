@@ -25,6 +25,7 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.models.Waypoint;
+import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.search.SearchSuggestionCursor;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.dialog.Dialogs;
@@ -970,7 +971,7 @@ public class DataStore {
             for (final File file : files) {
                 if (file.isDirectory()) {
                     final String geocode = file.getName();
-                    if (LocalStorage.GEOCACHE_FILE_PATTERN.matcher(geocode).find()) {
+                    if (!HtmlImage.SHARED.equals(geocode)) {
                         synchronized (select) {
                             select.bindString(1, geocode);
                             if (select.simpleQueryForLong() == 0) {
