@@ -507,7 +507,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
                     }
                 }
                 // Display errors to the user
-                if (StringUtils.isNoneEmpty(logResult.getLogId())) {
+                if (StringUtils.isNotEmpty(logResult.getLogId())) {
                     showToast(logResult.getLogId());
                 }
 
