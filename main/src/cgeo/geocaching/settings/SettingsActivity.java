@@ -759,6 +759,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
         } else if (isPreference(preference, R.string.pref_dataDir)) {
             LocalStorage.changeExternalPrivateCgeoDir(SettingsActivity.this, stringValue);
             Settings.setExternalPrivateCgeoDirectory(stringValue);
+            preference.setSummary(Settings.getExternalPrivateCgeoDirectory());
         } else if (isPreference(preference, R.string.pref_connectorOCActive)
                 || isPreference(preference, R.string.pref_connectorOCPLActive)
                 || isPreference(preference, R.string.pref_connectorOCNLActive)
