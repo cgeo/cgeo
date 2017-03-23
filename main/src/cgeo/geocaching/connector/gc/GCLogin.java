@@ -223,7 +223,7 @@ public class GCLogin extends AbstractLogin {
         // on every page except login page
         setActualLoginStatus(TextUtils.matches(page, GCConstants.PATTERN_LOGIN_NAME));
         if (isActualLoginStatus()) {
-            setActualUserName(TextUtils.getMatch(page, GCConstants.PATTERN_LOGIN_NAME, true, "???"));
+            setActualUserName(TextUtils.stripHtml(TextUtils.getMatch(page, GCConstants.PATTERN_LOGIN_NAME, true, "???")));
             int cachesCount = 0;
             try {
                 cachesCount = Integer.parseInt(removeDotAndComma(TextUtils.getMatch(page, GCConstants.PATTERN_CACHES_FOUND, true, "0")));

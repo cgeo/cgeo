@@ -7,6 +7,7 @@
     · Fix: Avoid possible crashes on Android devices below 4.4\n
     · Fix: Prevent crash when moving a cache freshly loaded through send2cgeo to another list\n
     · Fix: Prevent crash when logging a trackable on some Xiaomi devices\n
+    · Fix: Correctly display user name containing &amp; on main screen\n
     \n
     \n
     <b>2017.03.19:</b>\n
