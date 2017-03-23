@@ -436,7 +436,7 @@
     <string name="settings_title_map_data">Map Data</string>
     <string name="settings_title_map_content">Map Content</string>
     <string name="settings_title_gpx">GPX</string>
-    <string name="settings_title_data_dir">Geocache Data</string>
+    <string name="settings_title_data_dir">Geocache Data Location</string>
     <string name="settings_title_basicmembers">Options for Basic Members</string>
     <string name="settings_title_navigation">Navigation</string>
     <string name="settings_summary_navigation">Choose preferred navigation methods and select external navigation apps.</string>
