@@ -325,7 +325,10 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
             if (waitDialog != null) {
                 if (msg.what == UPDATE_PROGRESS) {
                     final int secondsElapsed = (int) ((System.currentTimeMillis() - detailProgressTime) / 1000);
-                    final int secondsRemaining = (detailTotal - detailProgress) * secondsElapsed / detailProgress;
+                    // FIXME: the Math.max below is purely defensive programming around an issue reported
+                    // in https://github.com/cgeo/cgeo/issues/6447. This code should be rewritten to, at least,
+                    // no longer use global variables to pass information between the handler and its user.
+                    final int secondsRemaining = (detailTotal - detailProgress) * secondsElapsed / Math.max(detailProgress, 1);
 
                     waitDialog.setProgress(detailProgress);
                     if (secondsRemaining < 40) {
