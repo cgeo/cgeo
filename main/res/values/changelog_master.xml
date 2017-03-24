@@ -6,6 +6,7 @@
     · New: Implemented new data storage structure\n
     · New: Allow moving additional geocache data to external SD\n
     · New: Allow export of owner name to clipboard when clicking on it\n
+    · New: More precise distance / azimuth / projection computations\n
     \n
     \n
   </string>

@@ -4,12 +4,14 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.models.ICoordinates;
 
 import android.location.Location;
-import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import net.sf.geographiclib.Geodesic;
+import net.sf.geographiclib.GeodesicData;
+import net.sf.geographiclib.GeodesicMask;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -20,14 +22,6 @@ public final class Geopoint implements ICoordinates, Parcelable {
      * Reusable default object
      */
     @NonNull public static final Geopoint ZERO = new Geopoint(0.0, 0.0);
-
-    private static final double DEG_TO_RAD = Math.PI / 180;
-    private static final double RAD_TO_DEG = 180 / Math.PI;
-    private static final float EARTH_RADIUS = 6371.0f;
-    /**
-     * JIT bug in Android 4.2.1
-     */
-    private static final boolean DISTANCE_BROKEN = Build.VERSION.SDK_INT == Build.VERSION_CODES.JELLY_BEAN_MR1;
 
     private final int latitudeE6;
     private final int longitudeE6;
@@ -188,19 +182,6 @@ public final class Geopoint implements ICoordinates, Parcelable {
     }
 
     /**
-     * Get distance and bearing from the current point to a target.
-     *
-     * @param target
-     *            The target
-     * @return An array of floats: the distance in meters, then the bearing in degrees
-     */
-    private float[] pathTo(final Geopoint target) {
-        final float[] results = new float[2];
-        Location.distanceBetween(getLatitude(), getLongitude(), target.getLatitude(), target.getLongitude(), results);
-        return results;
-    }
-
-    /**
      * Calculates distance to given Geopoint in km.
      *
      * @param point
@@ -211,10 +192,9 @@ public final class Geopoint implements ICoordinates, Parcelable {
      */
     public float distanceTo(@NonNull final ICoordinates point) {
         final Geopoint otherCoords = point.getCoords();
-        if (DISTANCE_BROKEN) {
-            return (float) (getDistance(getLatitude(), getLongitude(), otherCoords.getLatitude(), otherCoords.getLongitude()) / 1000);
-        }
-        return pathTo(otherCoords)[0] / 1000;
+        final GeodesicData g = Geodesic.WGS84.Inverse(getLatitude(), getLongitude(), otherCoords.getLatitude(), otherCoords.getLongitude(),
+                GeodesicMask.DISTANCE);
+        return (float) g.s12 / 1000;
     }
 
     /**
@@ -225,9 +205,11 @@ public final class Geopoint implements ICoordinates, Parcelable {
      * @return bearing in degree, in the [0,360[ range
      */
     public float bearingTo(final ICoordinates point) {
-        // Android library returns a bearing in the [-180;180] range
-        final float bearing = pathTo(point.getCoords())[1];
-        return bearing < 0 ? bearing + 360 : bearing;
+        final Geopoint otherCoords = point.getCoords();
+        final GeodesicData g = Geodesic.WGS84.Inverse(getLatitude(), getLongitude(), otherCoords.getLatitude(), otherCoords.getLongitude(),
+                GeodesicMask.AZIMUTH);
+        final float b = (float) g.azi1;
+        return b < 0 ? b + 360 : b;
     }
 
     /**
@@ -240,15 +222,9 @@ public final class Geopoint implements ICoordinates, Parcelable {
      * @return the projected geopoint
      */
     public Geopoint project(final double bearing, final double distance) {
-        final double rlat1 = getLatitude() * DEG_TO_RAD;
-        final double rlon1 = getLongitude() * DEG_TO_RAD;
-        final double rbearing = bearing * DEG_TO_RAD;
-        final double rdistance = distance / EARTH_RADIUS;
-
-        final double rlat = Math.asin(Math.sin(rlat1) * Math.cos(rdistance) + Math.cos(rlat1) * Math.sin(rdistance) * Math.cos(rbearing));
-        final double rlon = rlon1 + Math.atan2(Math.sin(rbearing) * Math.sin(rdistance) * Math.cos(rlat1), Math.cos(rdistance) - Math.sin(rlat1) * Math.sin(rlat));
-
-        return new Geopoint(rlat * RAD_TO_DEG, rlon * RAD_TO_DEG);
+        final GeodesicData g = Geodesic.WGS84.Direct(getLatitude(), getLongitude(), bearing, distance * 1000,
+                GeodesicMask.LATITUDE | GeodesicMask.LONGITUDE);
+        return new Geopoint(g.lat2, g.lon2);
     }
 
     @Override
@@ -525,25 +501,6 @@ public final class Geopoint implements ICoordinates, Parcelable {
 
     private static String getLatSign(final String latDir) {
         return "S".equalsIgnoreCase(latDir) ? "-" : "";
-    }
-
-    /**
-     * Gets distance in meters (workaround for 4.2.1 JIT bug).
-     */
-    private static double getDistance(final double lat1, final double lon1, final double lat2, final double lon2) {
-        // for haversine use R = 6372.8 km instead of 6371 km
-        final double earthRadius = 6372.8;
-        final double dLat = toRadians(lat2 - lat1);
-        final double dLon = toRadians(lon2 - lon1);
-        final double a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-                Math.cos(toRadians(lat1)) * Math.cos(toRadians(lat2)) *
-                Math.sin(dLon / 2) * Math.sin(dLon / 2);
-        // simplify haversine
-        return 2 * earthRadius * 1000 * Math.asin(Math.sqrt(a));
-    }
-
-    private static double toRadians(final double angdeg) {
-        return angdeg * DEG_TO_RAD;
     }
 
     /**

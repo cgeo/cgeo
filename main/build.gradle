@@ -267,6 +267,9 @@ dependencies {
         exclude group: 'net.jcip', module: 'jcip-annotations'
     }
 
+    // GeographicLib
+    compile "net.sf.geographiclib:GeographicLib-Java:1.47"
+
     // Jackson XML processing
     def jacksonVersion = '2.8.7'
     compile "com.fasterxml.jackson.core:jackson-core:$jacksonVersion"
