@@ -107,17 +107,8 @@ public class CgeoApplication extends Application {
     @Override
     public void onLowMemory() {
         super.onLowMemory();
-        onTrimMemory(Compatibility.TRIM_MEMORY_COMPLETE);
-    }
-
-    @SuppressLint("NewApi")
-    @Override
-    public void onTrimMemory(final int level) {
-        super.onTrimMemory(level);
-        if (level >= TRIM_MEMORY_MODERATE) {
-            Log.i("Cleaning applications cache to trim memory");
-            DataStore.removeAllFromCache();
-        }
+        Log.i("Cleaning applications cache to trim memory");
+        DataStore.removeAllFromCache();
     }
 
     /**
