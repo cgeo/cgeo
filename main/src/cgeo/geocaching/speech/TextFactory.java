@@ -1,14 +1,14 @@
 package cgeo.geocaching.speech;
 
-import android.support.annotation.PluralsRes;
-import android.support.annotation.StringRes;
-
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.IConversion;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.AngleUtils;
+
+import android.support.annotation.PluralsRes;
+import android.support.annotation.StringRes;
 
 import java.util.Locale;
 
@@ -100,16 +100,21 @@ public class TextFactory {
     }
 
     private static String getDirection(final Geopoint position, final Geopoint target, final float direction) {
-        final int bearing = (int) position.bearingTo(target);
-        final int degrees = (int) AngleUtils.normalize(bearing - direction);
+        int hours;
 
-        int hours = (degrees + 15) / 30;
-        if (hours == 0) {
+        if (position.distanceTo(target) < 1e-4) {
+            // By convention, distance smaller than ten centimers will be represented as 12 o'clock.
             hours = 12;
+        } else {
+            final int bearing = (int) position.bearingTo(target);
+            final int degrees = (int) AngleUtils.normalize(bearing - direction);
+
+            hours = (degrees + 15) / 30;
+            if (hours == 0) {
+                hours = 12;
+            }
         }
-        if (hours == 1) {
-            return getString(R.string.tts_one_oclock, String.valueOf(hours));
-        }
-        return getString(R.string.tts_oclock, String.valueOf(hours));
+
+        return getString(hours == 1 ? R.string.tts_one_oclock : R.string.tts_oclock, String.valueOf(hours));
     }
 }
