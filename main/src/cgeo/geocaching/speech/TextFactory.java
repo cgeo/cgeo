@@ -106,10 +106,10 @@ public class TextFactory {
             // By convention, distance smaller than ten centimers will be represented as 12 o'clock.
             hours = 12;
         } else {
-            final int bearing = (int) position.bearingTo(target);
-            final int degrees = (int) AngleUtils.normalize(bearing - direction);
+            final float bearing = position.bearingTo(target);
+            final float degrees = AngleUtils.normalize(bearing - direction);
 
-            hours = (degrees + 15) / 30;
+            hours = Math.round(degrees / 30);
             if (hours == 0) {
                 hours = 12;
             }
