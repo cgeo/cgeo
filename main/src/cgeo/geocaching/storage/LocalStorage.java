@@ -79,7 +79,7 @@ public final class LocalStorage {
         final List<File> extDirs = new ArrayList<>();
         final File[] externalFilesDirs = ContextCompat.getExternalFilesDirs(CgeoApplication.getInstance(), null);
         for (final File dir : externalFilesDirs) {
-            if (EnvironmentCompat.getStorageState(dir).equals(Environment.MEDIA_MOUNTED)) {
+            if (dir != null && EnvironmentCompat.getStorageState(dir).equals(Environment.MEDIA_MOUNTED)) {
                 extDirs.add(dir);
             }
         }
