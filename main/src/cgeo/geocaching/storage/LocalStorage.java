@@ -308,7 +308,7 @@ public final class LocalStorage {
     }
 
     public static void changeExternalPrivateCgeoDir(final SettingsActivity fromActivity, final String newExtDir) {
-        final Progress progress = new Progress(true);
+        final Progress progress = new Progress();
         progress.show(fromActivity, fromActivity.getString(R.string.init_datadirmove_datadirmove), fromActivity.getString(R.string.init_datadirmove_running), ProgressDialog.STYLE_HORIZONTAL, null);
         AndroidRxUtils.bindActivity(fromActivity, Observable.defer(new Callable<Observable<Boolean>>() {
             @Override
