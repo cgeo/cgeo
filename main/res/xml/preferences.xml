@@ -816,11 +816,9 @@
             <cgeo.geocaching.settings.TextPreference
                 android:layout="@layout/text_preference"
                 android:text="@string/init_dataDir_note" />
-            <ListPreference
-                android:defaultValue="0"
-                android:dialogTitle="@string/init_dataDir"
-                android:key="@string/pref_dataDir"
-                android:title="@string/init_dataDir"/>
+            <Preference
+                android:key="@string/pref_fakekey_dataDir"
+                android:title="@string/init_dataDir" />
         </PreferenceCategory>
         <PreferenceCategory android:title="@string/init_maintenance" >
             <cgeo.geocaching.settings.TextPreference

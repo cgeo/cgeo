@@ -23,17 +23,22 @@ import cgeo.geocaching.sensors.RotationProvider;
 import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.LocalStorage;
+import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.DatabaseBackupUtils;
 import cgeo.geocaching.utils.DebugUtils;
+import cgeo.geocaching.utils.FileUtils;
+import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ProcessUtils;
 
 import android.R.string;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.app.backup.BackupManager;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
@@ -47,12 +52,15 @@ import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.support.annotation.AnyRes;
 import android.support.annotation.NonNull;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ListAdapter;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.atomic.AtomicLong;
 
 import io.reactivex.schedulers.Schedulers;
 import org.apache.commons.lang3.StringUtils;
@@ -160,7 +168,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
                 R.string.pref_pass_vote, R.string.pref_signature,
                 R.string.pref_mapsource, R.string.pref_renderthemepath,
                 R.string.pref_gpxExportDir, R.string.pref_gpxImportDir,
-                R.string.pref_dataDir,
+                R.string.pref_fakekey_dataDir,
                 R.string.pref_mapDirectory, R.string.pref_defaultNavigationTool,
                 R.string.pref_defaultNavigationTool2, R.string.pref_webDeviceName,
                 R.string.pref_fakekey_preference_backup_info, R.string.pref_twitter_cache_message, R.string.pref_twitter_trackable_message,
@@ -260,21 +268,85 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
      * Fill the choice list for external private cgeo directory.
      */
     private void initExtCgeoDirPreference() {
-        final ListPreference pref = (ListPreference) getPreference(R.string.pref_dataDir);
-
-        final List<File> extDirs = LocalStorage.getAvailableExternalPrivateCgeoDirectories();
-        if (extDirs.size() > 1) {
-            final CharSequence[] entries = new CharSequence[extDirs.size()];
-            final CharSequence[] values = new CharSequence[extDirs.size()];
-            for (int i = 0; i < extDirs.size(); ++i) {
-                entries[i] = extDirs.get(i).getAbsolutePath();
-                values[i] = entries[i];
+        final Preference dataDirPref = getPreference(R.string.pref_fakekey_dataDir);
+        final AtomicLong usedBytes = new AtomicLong();
+        dataDirPref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(final Preference preference) {
+                final ProgressDialog progress = ProgressDialog.show(SettingsActivity.this, getString(R.string.calculate_dataDir_title), getString(R.string.calculate_dataDir), true, false);
+                AndroidRxUtils.andThenOnUi(Schedulers.io(), new Runnable() {
+                    @Override
+                    public void run() {
+                        // calculate disk usage
+                        usedBytes.set(FileUtils.getSize(LocalStorage.getExternalPrivateCgeoDirectory()));
+                    }
+                }, new Runnable() {
+                    @Override
+                    public void run() {
+                        progress.dismiss();
+                        showExtCgeoDirChooser(usedBytes.get());
+                    }
+                });
+                return true;
             }
-            pref.setEntries(entries);
-            pref.setEntryValues(values);
-        } else {
-            pref.setEnabled(false);
+        });
+
+    }
+
+    /**
+     * Shows a list of available mount points.
+     */
+    private void showExtCgeoDirChooser(final long usedBytes) {
+        final List<File> extDirs = LocalStorage.getAvailableExternalPrivateCgeoDirectories();
+        final String currentExtDir = LocalStorage.getExternalPrivateCgeoDirectory().getAbsolutePath();
+        final List<CharSequence> dirsTitle = new ArrayList<>();
+        final List<Long> freeSpaces = new ArrayList<>();
+        int selectedDirIndex = -1;
+        for (final File dir : extDirs) {
+            if (StringUtils.equals(currentExtDir, dir.getAbsolutePath())) {
+                selectedDirIndex = dirsTitle.size();
+            }
+            final long freeSpace = FileUtils.getFreeDiskSpace(dir);
+            freeSpaces.add(freeSpace);
+            dirsTitle.add(getString(R.string.settings_data_dir_item, dir.getAbsolutePath(), Formatter.formatBytes(freeSpace)));
         }
+
+        final AlertDialog.Builder builder = new AlertDialog.Builder(SettingsActivity.this);
+        builder.setTitle(getString(R.string.settings_title_data_dir_usage, Formatter.formatBytes(usedBytes)));
+        builder.setSingleChoiceItems(new ArrayAdapter<CharSequence>(SettingsActivity.this, android.R.layout.simple_list_item_single_choice, dirsTitle) {
+            @Override
+            public boolean areAllItemsEnabled() {
+                return false;
+            }
+
+            @Override
+            public boolean isEnabled(final int position) {
+                return usedBytes < freeSpaces.get(position);
+            }
+        }, selectedDirIndex, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(final DialogInterface dialog, final int itemId) {
+                Dialogs.confirm(SettingsActivity.this, R.string.confirm_data_dir_move_title, R.string.confirm_data_dir_move, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(final DialogInterface dialog, final int which) {
+                        final File dir = extDirs.get(itemId);
+                        if (!StringUtils.equals(currentExtDir, dir.getAbsolutePath())) {
+                            LocalStorage.changeExternalPrivateCgeoDir(SettingsActivity.this, dir.getAbsolutePath());
+                        }
+                        Settings.setExternalPrivateCgeoDirectory(dir.getAbsolutePath());
+                        onPreferenceChange(getPreference(R.string.pref_fakekey_dataDir), dir.getAbsolutePath());
+                    }
+                });
+                dialog.dismiss();
+            }
+        });
+        builder.setNegativeButton(string.cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(final DialogInterface dialog, final int which) {
+                dialog.cancel();
+            }
+        });
+        builder.create().show();
     }
 
     /**
@@ -679,8 +751,8 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
                 initMapSourcePreference();
                 getPreference(R.string.pref_mapDirectory).setSummary(StringUtils.defaultString(Settings.getMapFileDirectory()));
                 break;
-            case R.string.pref_dataDir:
-                initExtCgeoDirPreference();
+            case R.string.pref_fakekey_dataDir:
+                getPreference(R.string.pref_fakekey_dataDir).setSummary(Settings.getExternalPrivateCgeoDirectory());
                 break;
             case R.string.pref_fakekey_ocde_authorization:
             case R.string.pref_fakekey_ocpl_authorization:
@@ -756,11 +828,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
             }
             Settings.setMapSource(mapSource);
             preference.setSummary(mapSource.getName());
-        } else if (isPreference(preference, R.string.pref_dataDir)) {
-            if (!StringUtils.equals(LocalStorage.getExternalPrivateCgeoDirectory().getAbsolutePath(), stringValue)) {
-                LocalStorage.changeExternalPrivateCgeoDir(SettingsActivity.this, stringValue);
-            }
-            Settings.setExternalPrivateCgeoDirectory(stringValue);
+        } else if (isPreference(preference, R.string.pref_fakekey_dataDir)) {
             preference.setSummary(Settings.getExternalPrivateCgeoDirectory());
         } else if (isPreference(preference, R.string.pref_connectorOCActive)
                 || isPreference(preference, R.string.pref_connectorOCPLActive)
