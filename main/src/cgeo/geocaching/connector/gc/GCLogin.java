@@ -209,7 +209,7 @@ public class GCLogin extends AbstractLogin {
      */
     boolean getLoginStatus(@Nullable final String page) {
         if (StringUtils.isBlank(page)) {
-            Log.e("Login.checkLogin: No page given");
+            Log.w("Login.checkLogin: No page given");
             return false;
         }
         assert page != null;
