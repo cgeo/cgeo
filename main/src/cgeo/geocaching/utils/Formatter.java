@@ -313,4 +313,16 @@ public final class Formatter {
 
         return StringUtils.join(infos, SEPARATOR);
     }
+
+    public static String formatBytes(final long bytes) {
+        if (bytes < 1024) {
+            return bytes + " B";
+        }
+        final int exp = (int) (Math.log(bytes) / Math.log(1024));
+        final String pre = Character.toString("KMGTPE".charAt(exp - 1));
+
+        return String.format(Locale.getDefault(), "%.1f %sB", bytes / Math.pow(1024, exp), pre);
+    }
+
+
 }

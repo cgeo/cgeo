@@ -5,6 +5,7 @@ import cgeo.geocaching.R;
 
 import android.os.Handler;
 import android.os.Message;
+import android.os.StatFs;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
@@ -441,4 +442,32 @@ public final class FileUtils {
     public static File urlToFile(final String url) {
         return new File(StringUtils.substring(url, FILE_PROTOCOL.length()));
     }
+
+    /**
+     * Returns the size in bytes of a file or directory.
+     */
+    public static long getSize(final File file) {
+        if (file == null || !file.exists()) {
+            return 0;
+        }
+        if (file.isDirectory()) {
+            long result = 0;
+            final File[] fileList = file.listFiles();
+            for (final File aFileList : fileList) {
+                result += getSize(aFileList);
+            }
+            return result; // return the file size
+        } else {
+            return file.length();
+        }
+    }
+
+    /**
+     * Returns the available space in bytes on the mount point used by the given dir.
+     */
+    public static long getFreeDiskSpace(final File dir) {
+        final StatFs statFs = new StatFs(dir.getAbsolutePath());
+        return (long) statFs.getAvailableBlocks() * (long) statFs.getBlockSize();
+    }
+
 }
