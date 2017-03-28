@@ -604,7 +604,7 @@
     <string name="init_default_navigation_tool_2_description">Here you can select your second preferred navigation tool. Activate it by long pressing the navigation icon next to the title of the cache.</string>
     <string name="init_navigation_menu_description">Here you can select which of the available navigation methods will be shown in the navigation menu for a cache or waypoint. Disabled tools are not installed on this device.</string>
     <string name="init_debug_title">Debug information</string>
-    <string name="init_debug_note">c:geo can generate a lot of debugging information. Activating this setting can however affect the stability of c:geo and is only recommended if you are asked to send a log to the developers.</string>
+    <string name="init_debug_note">c:geo can generate a lot of debugging information. Activating this setting will affect the stability of c:geo and is only recommended if you are asked to send a log to the developers. Please keep debug logging disabled during normal usage of c:geo!</string>
     <string name="init_debug">Activate debug log</string>
     <string name="init_dbonsdcard_title">Database location</string>
     <string name="init_dbonsdcard_note">You may store the database of c:geo either system internally or in a directory on the public file system. Depending on the file system setup of your device, having it on the public filesystem may free some internal memory, but you may lose a bit of performance and c:geo and will not work if the external file system is not accessible or you remove the database file.</string>
