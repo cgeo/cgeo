@@ -2,12 +2,12 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-    <b>Next bugfix release (Beta version):</b>\n
+    <b>2017.03.29:</b>\n
     · Fix: Avoid possible crashes during file operation on Android devices below 4.1\n
     · Fix: Avoid possible crashes on Android devices below 4.4\n
     · Fix: Prevent crash when moving a cache freshly loaded through send2cgeo to another list\n
     · Fix: Prevent crash when logging a trackable on some Xiaomi devices\n
-    · Fix: Correctly display user name containing &amp; on main screen\n
+    · Fix: Correctly display user name containing \"&amp;\" on main screen\n
     · Fix: Fix crash when dismissing cache popup dialog at the wrong time\n
     · Fix: Fix rare crash when downloading caches\n
     \n
