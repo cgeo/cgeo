@@ -11,7 +11,6 @@
     · Fix: Fix crash when dismissing cache popup dialog at the wrong time\n
     · Fix: Fix rare crash when downloading caches\n
     \n
-    \n
     <b>2017.03.19:</b>\n
     · New: New login page used for gc.com\n
     · New: Link to project-gc.com challenge checker for mystery caches having challenge in their title\n
