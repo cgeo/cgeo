@@ -624,7 +624,7 @@
     <string name="init_datadirmove_datadirmove">Moving Geocache data directory</string>
     <string name="init_datadirmove_running">Moving Geocache data directory</string>
     <string name="init_datadirmove_success">Successfully moved Geocache data directory.</string>
-    <string name="init_datadirmove_failed">Failed to move Geocache data directory</string>
+    <string name="init_datadirmove_failed">Moving the Geocache data directory partly or completely failed. Please check old and new directories and move by hand if necessary.</string>
     <string name="init_plain_logs">Plain Logs</string>
     <string name="init_summary_plain_logs">Display log entries without colors</string>
     <string name="init_use_native_ua">Android browser</string>

@@ -116,7 +116,7 @@ public final class FileUtils {
      * @return true, if successfully
      */
     public static boolean move(final File source, final File target) {
-        if (!source.exists() || target.exists()) {
+        if (!source.exists()) {
             return false;
         }
         FileUtils.mkdirs(target.getParentFile());
@@ -138,9 +138,10 @@ public final class FileUtils {
      *
      * @param source
      * @param targetDirectory
+     * @return success true or false
      */
-    public static void moveTo(final File source, final File targetDirectory) {
-        move(source, new File(targetDirectory, source.getName()));
+    public static boolean moveTo(final File source, final File targetDirectory) {
+        return move(source, new File(targetDirectory, source.getName()));
     }
 
     /**

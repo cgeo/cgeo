@@ -319,8 +319,9 @@ public final class LocalStorage {
                 final File[] files = currentDataDir.listFiles();
                 progress.setMaxProgressAndReset(files.length);
                 progress.setProgress(0);
+                boolean success = true;
                 for (final File geocacheDataDir : files) {
-                    FileUtils.moveTo(geocacheDataDir, newDataDir);
+                    success &= FileUtils.moveTo(geocacheDataDir, newDataDir);
                     progress.incrementProgressBy(1);
                 }
 
@@ -328,7 +329,7 @@ public final class LocalStorage {
                 Log.i("Ext private c:geo dir was moved to " + newExtDir);
 
                 externalPrivateCgeoDirectory = new File(newExtDir);
-                return Observable.just(true);
+                return Observable.just(success);
             }
         }).subscribeOn(Schedulers.io())).subscribe(new Consumer<Boolean>() {
             @Override
