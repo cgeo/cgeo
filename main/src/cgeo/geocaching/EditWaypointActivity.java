@@ -559,7 +559,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
 
         @Override
         public void handleMessage(final Message msg) {
-            final EditWaypointActivity activity = getActivity();
+            final EditWaypointActivity activity = getReference();
             if (activity == null) {
                 return;
             }

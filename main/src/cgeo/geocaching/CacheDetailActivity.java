@@ -2135,7 +2135,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
             if (localFinished && (remoteFinished || !resetRemote)) {
                 progressDialog.dismiss();
-                final CacheDetailActivity activity = getActivity();
+                final CacheDetailActivity activity = getReference();
                 if (activity != null) {
                     activity.notifyDataSetChanged();
                 }

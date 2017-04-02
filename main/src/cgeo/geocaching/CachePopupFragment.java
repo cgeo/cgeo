@@ -9,6 +9,7 @@ import cgeo.geocaching.network.Network;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.CacheDetailsCreator;
+import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.Log;
@@ -17,7 +18,6 @@ import cgeo.geocaching.utils.functions.Action1;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
@@ -83,17 +83,15 @@ public class CachePopupFragment extends AbstractDialogFragment {
         }
     }
 
-    private static class DropCacheHandler extends Handler {
-
-        private final WeakReference<CachePopupFragment> popupRef;
+    private static class DropCacheHandler extends WeakReferenceHandler<CachePopupFragment> {
 
         DropCacheHandler(final CachePopupFragment popup) {
-            this.popupRef = new WeakReference<>(popup);
+            super(popup);
         }
 
         @Override
         public void handleMessage(final Message msg) {
-            final CachePopupFragment popup = popupRef.get();
+            final CachePopupFragment popup = getReference();
             if (popup == null) {
                 return;
             }

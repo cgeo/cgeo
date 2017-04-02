@@ -188,7 +188,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
         @Override
         public void handleMessage(final Message msg) {
-            final CacheListActivity activity = getActivity();
+            final CacheListActivity activity = getReference();
             if (activity == null) {
                 return;
             }

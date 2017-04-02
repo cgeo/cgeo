@@ -36,6 +36,7 @@ import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.DisposableHandler;
@@ -174,16 +175,15 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
     // handlers
     /** Updates the titles */
 
-    private static final class DisplayHandler extends Handler {
-
-        private final WeakReference<CGeoMap> mapRef;
+    private static final class DisplayHandler extends WeakReferenceHandler<CGeoMap> {
 
         DisplayHandler(@NonNull final CGeoMap map) {
-            this.mapRef = new WeakReference<>(map);
+            super(map);
         }
+
         @Override
         public void handleMessage(final Message msg) {
-            final CGeoMap map = mapRef.get();
+            final CGeoMap map = getReference();
             if (map == null) {
                 return;
             }

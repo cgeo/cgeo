@@ -1,6 +1,5 @@
 package cgeo.geocaching.ui;
 
-import android.app.Activity;
 import android.os.Handler;
 
 import java.lang.ref.WeakReference;
@@ -12,7 +11,7 @@ import java.lang.ref.WeakReference;
  * Create static private subclasses of this handler class in your activity.
  *
  */
-public abstract class WeakReferenceHandler<ActivityType extends Activity> extends Handler {
+public abstract class WeakReferenceHandler<ActivityType> extends Handler {
 
     private final WeakReference<ActivityType> activityRef;
 
@@ -20,7 +19,7 @@ public abstract class WeakReferenceHandler<ActivityType extends Activity> extend
         this.activityRef = new WeakReference<>(activity);
     }
 
-    protected ActivityType getActivity() {
+    protected ActivityType getReference() {
         return activityRef.get();
     }
 }
