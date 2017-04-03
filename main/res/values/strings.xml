@@ -595,7 +595,7 @@
     <string name="init_gpx_exportdir">GPX Export Directory</string>
     <string name="init_gpx_importdir">GPX Import Directory</string>
     <string name="init_dataDir">Select Geocache data directory</string>
-    <string name="init_dataDir_note">You may choose to store the additional data for geocaches (spoilers, log images, …) on emulated or real external storage. It is depending on your device if a real external SD card is available or not.</string>
+    <string name="init_dataDir_note">You may choose to store the additional data for geocaches (spoilers, log images, …) on your external storage. It is depending on your device if a real or an emulated external SD card is available in this selection.</string>
     <string name="init_maptrail">Show Trail</string>
     <string name="init_summary_maptrail">Show trail on Map</string>
     <string name="init_share_after_export">Open share menu after GPX export</string>
@@ -615,8 +615,8 @@
     <string name="init_debug_note">c:geo can generate a lot of debugging information. Activating this setting will affect the stability of c:geo and is only recommended if you are asked to send a log to the developers. Please keep debug logging disabled during normal usage of c:geo!</string>
     <string name="init_debug">Activate debug log</string>
     <string name="init_dbonsdcard_title">Database location</string>
-    <string name="init_dbonsdcard_note">You may store the database of c:geo either system internally or in a directory on the public file system. Depending on the file system setup of your device, having it on the public filesystem may free some internal memory, but you may lose a bit of performance and c:geo and will not work if the external file system is not accessible or you remove the database file.</string>
-    <string name="init_dbonsdcard">On public file system</string>
+    <string name="init_dbonsdcard_note">You may store the database of c:geo either system internally or in a directory of your user accessible internal storage. Having it on the user accessible storage may free some memory, but you may lose a bit of performance and c:geo and will not work if the storage is not accessible or you remove the database file.</string>
+    <string name="init_dbonsdcard">On internal storage directory</string>
     <string name="init_dbmove_dbmove">Moving Database</string>
     <string name="init_dbmove_running">Moving Database</string>
     <string name="init_dbmove_success">Successfully moved the database.</string>
