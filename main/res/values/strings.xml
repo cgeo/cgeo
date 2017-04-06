@@ -615,7 +615,7 @@
     <string name="init_debug_note">c:geo can generate a lot of debugging information. Activating this setting will affect the stability of c:geo and is only recommended if you are asked to send a log to the developers. Please keep debug logging disabled during normal usage of c:geo!</string>
     <string name="init_debug">Activate debug log</string>
     <string name="init_dbonsdcard_title">Database location</string>
-    <string name="init_dbonsdcard_note">You may store the database of c:geo either system internally or in a directory on your user storage. Having it on the user storage may free some memory, but you may lose a bit of performance and c:geo and will not work if the storage is not accessible or you remove the database file.</string>
+    <string name="init_dbonsdcard_note">You may store the database of c:geo either system internally or in a directory on your user storage. Having it on the user storage may free some memory, but you may lose a bit of performance and c:geo will not work if the storage is not accessible or you remove the database file.</string>
     <string name="init_dbonsdcard">On user storage</string>
     <string name="init_dbmove_dbmove">Moving Database</string>
     <string name="init_dbmove_running">Moving Database</string>
