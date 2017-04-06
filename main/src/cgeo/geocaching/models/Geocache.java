@@ -1437,18 +1437,18 @@ public class Geocache implements IWaypoint {
      *
      * @param original
      *            the waypoint to duplicate
-     * @return {@code true} if the waypoint was duplicated, {@code false} otherwise (invalid index)
+     * @return the copy of the waypoint if it was duplicated, {@code null} otherwise (invalid index)
      */
-    public boolean duplicateWaypoint(final Waypoint original) {
+    public Waypoint duplicateWaypoint(final Waypoint original) {
         if (original == null) {
-            return false;
+            return null;
         }
         final int index = getWaypointIndex(original);
         final Waypoint copy = new Waypoint(original);
         copy.setUserDefined();
         copy.setName(CgeoApplication.getInstance().getString(R.string.waypoint_copy_of) + " " + copy.getName());
         waypoints.add(index + 1, copy);
-        return DataStore.saveWaypoint(-1, geocode, copy);
+        return DataStore.saveWaypoint(-1, geocode, copy) ? copy : null;
     }
 
     /**

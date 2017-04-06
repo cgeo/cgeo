@@ -408,9 +408,12 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
                             if (res.getString(R.string.waypoint_copy_coordinates).equals(selectedOption) && geopoint != null) {
                                 ClipboardUtils.copyToClipboard(GeopointFormatter.reformatForClipboard(geopoint.toString()));
                                 showToast(res.getString(R.string.clipboard_copy_ok));
-                            } else if (res.getString(R.string.waypoint_duplicate).equals(selectedOption) && cache.duplicateWaypoint(waypoint)) {
-                                DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
-                                showToast(res.getString(R.string.waypoint_duplicated));
+                            } else if (res.getString(R.string.waypoint_duplicate).equals(selectedOption)) {
+                                final Waypoint copy = cache.duplicateWaypoint(waypoint);
+                                if (copy != null) {
+                                    DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
+                                    EditWaypointActivity.startActivityEditWaypoint(EditWaypointActivity.this, cache, copy.getId());
+                                }
                             }
                         }
                     });

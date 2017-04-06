@@ -488,7 +488,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 new AsyncTask<Void, Void, Boolean>() {
                     @Override
                     protected Boolean doInBackground(final Void... params) {
-                        if (cache.duplicateWaypoint(selectedWaypoint)) {
+                        if (cache.duplicateWaypoint(selectedWaypoint) != null) {
                             DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
                             return true;
                         }
