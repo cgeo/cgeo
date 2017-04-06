@@ -164,8 +164,8 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
                 if (own) {
                     initializeWaypointTypeSelector();
                 } else {
-                    waypointName.setEnabled(false);
-                    note.setEnabled(false);
+                    nonEditable(waypointName);
+                    nonEditable(note);
                     if (!waypoint.isOriginalCoordsEmpty()) {
                         projection.setVisibility(View.GONE);
                     }
@@ -178,6 +178,11 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
             }
         }
     };
+
+    private void nonEditable(final TextView textView) {
+        textView.setKeyListener(null);
+        textView.setTextIsSelectable(true);
+    }
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
