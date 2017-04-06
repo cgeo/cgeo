@@ -112,7 +112,9 @@ public final class FileUtils {
      * to a copy + delete. Target directories are created if needed.
      *
      * @param source
+     *            source file or directory
      * @param target
+     *            target file or directory
      * @return true, if successfully
      */
     public static boolean move(final File source, final File target) {
@@ -137,7 +139,9 @@ public final class FileUtils {
      * Moves a file/directory into the targetDirectory.
      *
      * @param source
+     *            source file or directory
      * @param targetDirectory
+     *            target directory
      * @return success true or false
      */
     public static boolean moveTo(final File source, final File targetDirectory) {
@@ -458,14 +462,14 @@ public final class FileUtils {
                 result += getSize(aFileList);
             }
             return result; // return the file size
-        } else {
-            return file.length();
         }
+        return file.length();
     }
 
     /**
      * Returns the available space in bytes on the mount point used by the given dir.
      */
+    @SuppressWarnings("deprecation")
     public static long getFreeDiskSpace(final File dir) {
         final StatFs statFs = new StatFs(dir.getAbsolutePath());
         return (long) statFs.getAvailableBlocks() * (long) statFs.getBlockSize();
