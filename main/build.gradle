@@ -547,6 +547,22 @@ tasks.whenTaskAdded { theTask ->
     }
 }
 
+def downloadFromMaven(mavenFilePath, localFilePath) {
+    def localFile = new File(localFilePath)
+    if (!localFile.exists()) {
+        try {
+            new URL("https://search.maven.org/remotecontent?filepath=${mavenFilePath}").withInputStream { i ->
+                localFile.withOutputStream {
+                    it << i
+                }
+            }
+        }
+        catch (FileNotFoundException e) {
+            println(e.message)
+        }
+    }
+}
+
 task downloadLibs {
     group "cgeo"
     description "Downloads the dependency JARs for use with Eclipse"
@@ -560,31 +576,14 @@ task downloadLibs {
             }
         }
         // download javadoc
+        new File(".\\main\\libs\\src").mkdirs()
         configurations.compile.dependencies.each { Dependency dependency ->
             try {
                 def vendor = dependency.group.replace(".","/")
                 def version = dependency.version
                 def name = dependency.name
-                def javaDocFile = new File(".\\main\\libs\\src\\${name}-${version}-javadoc.jar")
-                if (!javaDocFile.exists()) {
-                    try {
-                        new URL("https://search.maven.org/remotecontent?filepath=${vendor}/${name}/${version}/${name}-${version}-javadoc.jar").withInputStream{ i -> javaDocFile.withOutputStream{ it << i }}
-                    }
-                    catch (FileNotFoundException e) {
-                        // not all dependencies have javadoc
-                        println(e.message)
-                    }
-                }
-                def sourcesFile = new File(".\\main\\libs\\src\\${name}-${version}-sources.jar")
-                if (!sourcesFile.exists()) {
-                    try {
-                        new URL("https://search.maven.org/remotecontent?filepath=${vendor}/${name}/${version}/${name}-${version}-sources.jar").withInputStream{ i -> sourcesFile.withOutputStream{ it << i }}
-                    }
-                    catch (FileNotFoundException e) {
-                        // not all dependencies have sources
-                        println(e.message)
-                    }
-                }
+                downloadFromMaven("${vendor}/${name}/${version}/${name}-${version}-javadoc.jar", ".\\main\\libs\\src\\${name}-${version}-javadoc.jar")
+                downloadFromMaven("${vendor}/${name}/${version}/${name}-${version}-sources.jar", ".\\main\\libs\\src\\${name}-${version}-sources.jar")
                 def propFile = new File(".\\main\\libs\\${name}-${version}.jar.properties")
                 if (!propFile.exists()) {
                     propFile.write("src=src/${name}-${version}-sources.jar\ndoc=src/${name}-${version}-javadoc.jar\n")
@@ -595,6 +594,16 @@ task downloadLibs {
                 println(e.message)
             }
         }
+
+        // remove unwanted artifacts
+        delete fileTree('libs') {
+            include '**/library-*'
+            include '**/xmpcore*'
+            include '**/*unspecified*' // mapswithme
+            include '**/*androidannotations-api-4*' // Eclipse can only deal with AndroidAnnotations 3.x
+        }
+
+        // TODO: download and unzip AAR dependencies
     }
 }
 
