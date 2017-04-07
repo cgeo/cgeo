@@ -563,18 +563,38 @@ def downloadFromMaven(mavenFilePath, localFilePath) {
     }
 }
 
+def unzipAAR(aarFileName) {
+    def dir = new File(".\\libs")
+    def aarFile = new File(dir, aarFileName)
+    ant.unzip( src: aarFile, dest: dir, overwrite: "true" ) {
+        patternset( ) {
+            include( name: 'classes.jar' )
+        }
+
+    }
+    def libName = aarFileName.substring(0, aarFileName.length() - 3) + "jar"
+    def extractedFile = new File(".\\main\\libs", 'classes.jar')
+    def renamedFile = new File(".\\main\\libs", libName)
+    extractedFile.renameTo(renamedFile)
+    new File(".\\main\\libs", aarFileName).delete()
+}
+
 task downloadLibs {
     group "cgeo"
     description "Downloads the dependency JARs for use with Eclipse"
     doFirst {
         configurations.compile.resolvedConfiguration.resolvedArtifacts.each { ResolvedArtifact artifact ->
-        	if (artifact.extension == 'jar') {
+        	if (artifact.extension == 'jar' || artifact.extension == 'aar') {
 	            project.copy {
 	                from artifact.file
 	                into "libs"
 	            }
             }
+            if (artifact.extension == 'aar') {
+                unzipAAR(artifact.file.name)
+            }
         }
+
         // download javadoc
         new File(".\\main\\libs\\src").mkdirs()
         configurations.compile.dependencies.each { Dependency dependency ->
@@ -597,13 +617,12 @@ task downloadLibs {
 
         // remove unwanted artifacts
         delete fileTree('libs') {
-            include '**/library-*'
-            include '**/xmpcore*'
+            include '**/library-*' // transitive dependency?
+            include '**/xmpcore*' // transitive dependency?
             include '**/*unspecified*' // mapswithme
             include '**/*androidannotations-api-4*' // Eclipse can only deal with AndroidAnnotations 3.x
+            include '**/*play-services-tasks*' // transitive dependency?
         }
-
-        // TODO: download and unzip AAR dependencies
     }
 }
 
