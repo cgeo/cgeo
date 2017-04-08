@@ -70,9 +70,11 @@ public final class LocalStorage {
     /**
      * Returns all available external private cgeo directories, e.g.:
      * <pre>
-     *     /sdcard/Android/data/cgeo.geocaching
+     *     /sdcard/Android/data/cgeo.geocaching/files
      *     /storage/emulated/0/Android/data/cgeo.geocaching/files
      *     /storage/extSdCard/Android/data/cgeo.geocaching/files
+     *     /mnt/sdcard/Android/data/cgeo.geocaching/files
+     *     /storage/sdcard1/Android/data/cgeo.geocaching/files
      * </pre>
      */
     @NonNull

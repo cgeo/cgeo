@@ -304,21 +304,23 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
     private void showExtCgeoDirChooser(final long usedBytes) {
         final List<File> extDirs = LocalStorage.getAvailableExternalPrivateCgeoDirectories();
         final String currentExtDir = LocalStorage.getExternalPrivateCgeoDirectory().getAbsolutePath();
-        final List<CharSequence> dirsTitle = new ArrayList<>();
+        final List<CharSequence> directories = new ArrayList<>();
         final List<Long> freeSpaces = new ArrayList<>();
         int selectedDirIndex = -1;
         for (final File dir : extDirs) {
             if (StringUtils.equals(currentExtDir, dir.getAbsolutePath())) {
-                selectedDirIndex = dirsTitle.size();
+                selectedDirIndex = directories.size();
             }
             final long freeSpace = FileUtils.getFreeDiskSpace(dir);
             freeSpaces.add(freeSpace);
-            dirsTitle.add(getString(R.string.settings_data_dir_item, dir.getAbsolutePath(), Formatter.formatBytes(freeSpace)));
+            directories.add(dir.getAbsolutePath());
         }
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(SettingsActivity.this);
         builder.setTitle(getString(R.string.settings_title_data_dir_usage, Formatter.formatBytes(usedBytes)));
-        builder.setSingleChoiceItems(new ArrayAdapter<CharSequence>(SettingsActivity.this, android.R.layout.simple_list_item_single_choice, dirsTitle) {
+        builder.setSingleChoiceItems(new ArrayAdapter<CharSequence>(SettingsActivity.this,
+                                        android.R.layout.simple_list_item_single_choice,
+                                        formatDirectoryNames(directories, freeSpaces)) {
             @Override
             public boolean areAllItemsEnabled() {
                 return false;
@@ -352,6 +354,15 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
             }
         });
         builder.create().show();
+    }
+
+    private List<CharSequence> formatDirectoryNames(final List<CharSequence> directories, final List<Long> freeSpaces) {
+        final List<CharSequence> truncated = Formatter.truncateCommonSubdir(directories);
+        final List<CharSequence> formatted = new ArrayList<>(truncated.size());
+        for (int i = 0; i < truncated.size(); i++) {
+            formatted.add(getString(R.string.settings_data_dir_item, truncated.get(i), Formatter.formatBytes(freeSpaces.get(i))));
+        }
+        return formatted;
     }
 
     /**
