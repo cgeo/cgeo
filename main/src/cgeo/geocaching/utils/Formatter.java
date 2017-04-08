@@ -324,5 +324,33 @@ public final class Formatter {
         return String.format(Locale.getDefault(), "%.1f %sB", bytes / Math.pow(1024, exp), pre);
     }
 
+    public static List<CharSequence> truncateCommonSubdir(@NonNull final List<CharSequence> directories) {
+        if (directories.size() < 2) {
+            return directories;
+        }
+        final String firstDir = directories.get(0).toString();
+        String commonEnding = null;
+        int offset = 0;
+        LOOP:
+        while (true) {
+            final String newEnding = firstDir.substring(firstDir.lastIndexOf('/', firstDir.length() - offset));
+            for (int i = 1; i < directories.size(); i++) {
+                if (!directories.get(i).toString().endsWith(newEnding)) {
+                    break LOOP;
+                }
+            }
+            commonEnding = newEnding;
+            offset = commonEnding.length() + 1;
+        }
+        final List<CharSequence> truncatedDirs = new ArrayList<>(directories.size());
+        for (final CharSequence title : directories) {
+            CharSequence truncated = title;
+            if (commonEnding != null) {
+                truncated = title.subSequence(0, title.length() - commonEnding.length() + 1) + "\u2026";
+            }
+            truncatedDirs.add(truncated);
+        }
+        return truncatedDirs;
+    }
 
 }
