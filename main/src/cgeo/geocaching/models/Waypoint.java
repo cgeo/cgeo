@@ -4,9 +4,9 @@ import cgeo.geocaching.enumerations.CoordinatesType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.location.GeopointParser;
 import cgeo.geocaching.maps.mapsforge.v6.caches.GeoitemRef;
 import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.utils.MatcherWrapper;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -18,15 +18,14 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 
 public class Waypoint implements IWaypoint {
 
     public static final String PREFIX_OWN = "OWN";
     private static final int ORDER_UNDEFINED = -2;
-    private static final Pattern PATTERN_COORDS = Pattern.compile("\\b[nNsS]\\s*\\d");
     private int id = -1;
     private String geocode = "geocode";
     private WaypointType waypointType = WaypointType.WAYPOINT;
@@ -266,35 +265,26 @@ public class Waypoint implements IWaypoint {
      * Detect coordinates in the given text and converts them to user defined waypoints.
      * Works by rule of thumb.
      *
-     * @param initialText Text to parse for waypoints
+     * @param text Text to parse for waypoints
      * @param namePrefix Prefix of the name of the waypoint
      * @return a collection of found waypoints
      */
-    public static Collection<Waypoint> parseWaypoints(@NonNull final String initialText, @NonNull final String namePrefix) {
+    public static Collection<Waypoint> parseWaypoints(@NonNull final String text, @NonNull final String namePrefix) {
         final List<Waypoint> waypoints = new LinkedList<>();
+        final Collection<ImmutablePair<Geopoint, Integer>> matches = GeopointParser.parseAll(text);
 
-        String text = initialText;
-        MatcherWrapper matcher = new MatcherWrapper(PATTERN_COORDS, text);
         int count = 1;
-        while (matcher.find()) {
-            try {
-                final Geopoint point = new Geopoint(text.substring(matcher.start()));
-                // Coords must have non zero latitude and longitude and at least one part shall have fractional degrees.
-                if (point.getLatitudeE6() != 0 && point.getLongitudeE6() != 0 &&
-                        ((point.getLatitudeE6() % 1000) != 0 || (point.getLongitudeE6() % 1000) != 0)) {
-                    final String name = namePrefix + " " + count;
-                    final String potentialWaypointType = text.substring(Math.max(0, matcher.start() - 15));
-                    final Waypoint waypoint = new Waypoint(name, parseWaypointType(potentialWaypointType), true);
-                    waypoint.setCoords(point);
-                    waypoints.add(waypoint);
-                    count++;
-                }
-            } catch (final Geopoint.ParseException ignored) {
-            }
-
-            text = text.substring(matcher.start() + 1);
-            matcher = new MatcherWrapper(PATTERN_COORDS, text);
+        for (final ImmutablePair<Geopoint, Integer> match : matches) {
+            final Geopoint point = match.getLeft();
+            final Integer start = match.getRight();
+            final String name = namePrefix + " " + count;
+            final String potentialWaypointType = text.substring(Math.max(0, start - 15));
+            final Waypoint waypoint = new Waypoint(name, parseWaypointType(potentialWaypointType), true);
+            waypoint.setCoords(point);
+            waypoints.add(waypoint);
+            count++;
         }
+
         return waypoints;
     }
 

@@ -159,6 +159,16 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
                 new Geopoint("N51 21.733", "E07 02.378"),
                 new Geopoint("N51 21.544", "E07 02.566") },
                 "Station3: N51 21.444 / E07 02.600\r\nStation4: N51 21.789 / E07 02.800\r\nStation5: N51 21.667 / E07 02.800\r\nStation6: N51 21.444 / E07 02.706\r\nStation7: N51 21.321 / E07 02.700\r\nStation8: N51 21.123 / E07 02.477\r\nStation9: N51 21.734 / E07 02.500\r\nStation10: N51 21.733 / E07 02.378\r\nFinal: N51 21.544 / E07 02.566");
+        assertWaypointsFromNote(cache, new Geopoint[] {
+                new Geopoint("S 51° 21.444′ W 007° 02.600′"),
+                new Geopoint("S 51° 21′ W 007° 02′"),
+                new Geopoint("S 51° W 007°"),
+                new Geopoint("S 52° 21′ 43.44″ W 008° 02′ 06.60″"),
+                new Geopoint("S 52° 21′ 43″ W 008° 02′ 06″"),
+                new Geopoint("-53.21544° 8.0206°"),
+                new Geopoint("-53° 8°"),
+                new Geopoint("32U E 458301 N 5434062") },
+                "S1 S 51° 21.444′ W 007° 02.600′\r\nS2 S 51° 21′ W 007° 02′\r\nS3 S 51° W 007°\r\nS4 S 52° 21′ 43.44″ W 008° 02′ 06.60″\r\nS5 S 52° 21′ 43″ W 008° 02′ 06″\r\nS6 -53.21544° 8.0206°\r\nS7 -53° 8°\r\nS8 32U E 458301 N 5434062");
     }
 
     @MediumTest

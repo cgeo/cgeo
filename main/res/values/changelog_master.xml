@@ -4,6 +4,7 @@
   <string name="changelog_master" translatable="false">
     <b>Next feature release:</b>\n
     · Fix: Do not parse formulas in personal notes as waypoint coordinates\n
+    · New: Support extraction of DMS, DegDec and UTM waypoint coordinates out of personal notes\n
     · New: Implemented new data storage structure\n
     · New: Allow moving additional geocache data to external SD\n
     · New: Allow export of owner name to clipboard when clicking on it\n
