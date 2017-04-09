@@ -7,15 +7,18 @@ import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 
 /**
  * Parse coordinates.
  */
-class GeopointParser {
+public class GeopointParser {
 
     private static final Pattern PATTERN_BAD_BLANK = Pattern.compile("(\\d)[,.] (\\d{2,})");
 
@@ -37,10 +40,12 @@ class GeopointParser {
 
     private static class GeopointWrapper {
         final Geopoint geopoint;
+        final int matcherStart;
         final int matcherLength;
 
-        GeopointWrapper(final Geopoint geopoint, final int stringLength) {
+        GeopointWrapper(final Geopoint geopoint, final int stringStart, final int stringLength) {
             this.geopoint = geopoint;
+            this.matcherStart = stringStart;
             this.matcherLength = stringLength;
         }
     }
@@ -173,7 +178,7 @@ class GeopointParser {
                     return null;
                 }
 
-                return new GeopointWrapper(new Geopoint(lat, lon), matcher.group().length());
+                return new GeopointWrapper(new Geopoint(lat, lon), matcher.start(), matcher.group().length());
             }
 
             return null;
@@ -461,7 +466,7 @@ class GeopointParser {
             if (matcher.find()) {
                 try {
                     final UTMPoint utmPoint = new UTMPoint(text);
-                    return new GeopointWrapper(utmPoint.toLatLong(), matcher.group().length());
+                    return new GeopointWrapper(utmPoint.toLatLong(), matcher.start(), matcher.group().length());
                 } catch (final Exception ignored) {
                     // Ignore parse errors
                 }
@@ -559,6 +564,44 @@ class GeopointParser {
         }
 
         throw new Geopoint.ParseException("Cannot parse coordinates");
+    }
+
+    /**
+     * Detects all coordinates in the given text.
+     *
+     * @param initialText Text to parse for coordinates
+     * @return a collection of parsed geopoints and their starting position in the given text
+     */
+    @NonNull
+    public static Collection<ImmutablePair<Geopoint, Integer>> parseAll(@NonNull final String initialText) {
+        final List<ImmutablePair<Geopoint, Integer>> waypoints = new LinkedList<>();
+
+        String text = initialText;
+        int start = 0;
+        GeopointWrapper best;
+        do {
+            best = null;
+            final String withoutSpaceAfterComma = removeAllSpaceAfterComma(text);
+            for (final AbstractParser parser : parsers) {
+                final GeopointWrapper geopointWrapper = parser.parse(withoutSpaceAfterComma);
+                if (geopointWrapper == null) {
+                    continue;
+                }
+                if (best == null || geopointWrapper.matcherStart < best.matcherStart || (geopointWrapper.matcherStart == best.matcherStart && geopointWrapper.matcherLength > best.matcherLength)) {
+                    best = geopointWrapper;
+                }
+            }
+
+            if (best != null) {
+                waypoints.add(new ImmutablePair<>(best.geopoint, start + best.matcherStart));
+
+                final int nextOffset = best.matcherStart + best.matcherLength;
+                text = text.substring(nextOffset);
+                start += nextOffset;
+            }
+        } while (best != null);
+
+        return waypoints;
     }
 
     /**
