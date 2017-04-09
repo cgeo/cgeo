@@ -76,14 +76,17 @@ public final class LocalStorage {
      */
     @NonNull
     public static List<File> getAvailableExternalPrivateCgeoDirectories() {
-        final List<File> extDirs = new ArrayList<>();
+        final List<File> availableExtDirs = new ArrayList<>();
         final File[] externalFilesDirs = ContextCompat.getExternalFilesDirs(CgeoApplication.getInstance(), null);
         for (final File dir : externalFilesDirs) {
             if (dir != null && EnvironmentCompat.getStorageState(dir).equals(Environment.MEDIA_MOUNTED)) {
-                extDirs.add(dir);
+                availableExtDirs.add(dir);
+                Log.i("Added '" + dir + "' as available external dir");
+            } else {
+                Log.w("'" + dir + "' is NOT available as external dir");
             }
         }
-        return extDirs;
+        return availableExtDirs;
     }
 
     /**
