@@ -269,6 +269,11 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
      */
     private void initExtCgeoDirPreference() {
         final Preference dataDirPref = getPreference(R.string.pref_fakekey_dataDir);
+        if (LocalStorage.getAvailableExternalPrivateCgeoDirectories().size() < 2) {
+            dataDirPref.setEnabled(false);
+            return;
+        }
+
         final AtomicLong usedBytes = new AtomicLong();
         dataDirPref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
             @Override
