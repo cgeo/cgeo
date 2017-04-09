@@ -63,6 +63,17 @@ public class UTMPoint {
                 this.zoneLetter = checkZone(matcher.group(3).charAt(0));
                 this.easting = Double.parseDouble(matcher.group(4).replace(",", "."));
                 this.northing = Double.parseDouble(matcher.group(5).replace(",", "."));
+                if (zoneNumber < 0 || zoneNumber > 60) {
+                    throw new ParseException("ZoneNumber out of range [0-60] in String '" + utmString + "'");
+                }
+
+                // Filter some invalid combinations with small numbers
+                if (easting < 160000) {
+                    throw new ParseException("Easting too small for UTM format in String '" + utmString + "'");
+                }
+                if (northing < 650000 && "ABNZ".indexOf(zoneNumber) == -1) {
+                    throw new ParseException("Northing too small for UTM zone in String '" + utmString + "'");
+                }
             } else {
                 throw new ParseException("Unable to recognize UTM format in String '" + utmString + "'");
             }
@@ -249,7 +260,7 @@ public class UTMPoint {
      * Determines the correct MGRS letter designator for the given latitude
      * returns 'Z' if latitude is outside the MGRS limits of 84N to 80S.
      *
-     * TODO: maybe we should handle the zones A,B, Y and Z
+     * TODO: maybe we should handle the zones A, B, Y and Z
      *
      * @param lat The float value of the latitude.
      * @return A char value which is the MGRS zone letter.
