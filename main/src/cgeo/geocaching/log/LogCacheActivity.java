@@ -173,12 +173,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
             return;
         }
 
-        if (!possibleLogTypes.contains(typeSelected)) {
-            typeSelected = possibleLogTypes.get(0);
-            setType(typeSelected);
-
-            showToast(res.getString(R.string.info_log_type_changed));
-        }
+        verifySelectedLogType();
 
         initializeRatingBar();
 
@@ -189,6 +184,19 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         initializeFavoriteCheck();
 
         showProgress(false);
+    }
+
+    /**
+     * Checks that the currently selected log type is still available as a possible log type. If it is not available,
+     * the selected log type will be set to the first possible type.
+     */
+    private void verifySelectedLogType() {
+        if (!possibleLogTypes.contains(typeSelected)) {
+            typeSelected = possibleLogTypes.get(0);
+            setType(typeSelected);
+
+            showToast(res.getString(R.string.info_log_type_changed));
+        }
     }
 
     private void showErrorLoadingData() {
@@ -289,7 +297,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     private void selectTrackableSort() {
         final Builder alert = new AlertDialog.Builder(this);
         alert.setTitle(res.getString(R.string.log_tb_sortby));
-        
+
         final String[] tbSortLabels = new String[TrackableComparator.values().length];
         for (final TrackableComparator tc: TrackableComparator.values()) {
             tbSortLabels[tc.getPosition()] = res.getString(tc.getLabel());
@@ -360,6 +368,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         }
         enablePostButton(false);
 
+        verifySelectedLogType();
         final Button typeButton = ButterKnife.findById(this, R.id.type);
         typeButton.setText(typeSelected.getL10n());
         typeButton.setOnClickListener(new View.OnClickListener() {
