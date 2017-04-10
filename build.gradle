@@ -86,7 +86,7 @@ buildscript {
 		classpath 'com.google.gms:google-services:2.1.0'
 
 		// monitor our application method limit
-		classpath 'com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.6.3'
+		classpath 'com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.6.4'
 
 		// ribbonizer for easier distinction of non-release builds
 		classpath 'com.github.gfx.ribbonizer:plugin:1.0.0'
