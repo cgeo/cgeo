@@ -268,7 +268,7 @@ dependencies {
     }
 
     // GeographicLib
-    compile "net.sf.geographiclib:GeographicLib-Java:1.47"
+    compile "net.sf.geographiclib:GeographicLib-Java:1.48"
 
     // Jackson XML processing
     def jacksonVersion = '2.8.8'
@@ -619,9 +619,19 @@ task downloadLibs {
         delete fileTree('libs') {
             include '**/library-*' // transitive dependency?
             include '**/xmpcore*' // transitive dependency?
-            include '**/*unspecified*' // mapswithme
             include '**/*androidannotations-api-4*' // Eclipse can only deal with AndroidAnnotations 3.x
-            include '**/*play-services-tasks*' // transitive dependency?
+            // Play Services are real Eclipse projects
+            include '**/*play-services*'
+            exclude '**/play-services-appinvite*' // except this one
+
+            // more real Eclipse projects
+            include '**/*mapswithme*'
+            include '**/viewpagerindicator*'
+
+            // Support libraries as Eclipse projects because they contain resources
+            include '**/recyclerview-v7*'
+            include '**/appcompat-v7*'
+            include '**/support-v4*'
         }
     }
 }
