@@ -403,7 +403,7 @@ public final class FileUtils {
     public static boolean mkdirs(final File file) {
         final boolean success = file.mkdirs() || file.isDirectory(); // mkdirs returns false on existing directories
         if (!success) {
-            Log.e("Could not make directories " + file.getAbsolutePath());
+            Log.w("Could not make directories " + file.getAbsolutePath());
         }
         return success;
     }
