@@ -232,10 +232,18 @@ public final class LocalStorage {
         return storages;
     }
 
+    /**
+     * Returns the external public cgeo directory, something like <pre>/sdcard/cgeo</pre>.
+     * It falls back to the internal cgeo directory if the external is not available.
+     */
     @NonNull
     public static File getExternalPublicCgeoDirectory() {
         final File cgeo = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), CGEO_DIRNAME);
         FileUtils.mkdirs(cgeo);
+        if (!cgeo.exists() || !cgeo.canWrite()) {
+            Log.w("External public cgeo directory not available, using internal storage: " + cgeo);
+            return getInternalCgeoDirectory();
+        }
         return cgeo;
     }
 
