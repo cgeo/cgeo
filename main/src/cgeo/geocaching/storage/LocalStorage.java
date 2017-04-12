@@ -49,6 +49,7 @@ public final class LocalStorage {
 
     private static File internalCgeoDirectory;
     private static File externalPrivateCgeoDirectory;
+    private static File externalPublicCgeoDirectory;
 
     private LocalStorage() {
         // utility class
@@ -107,7 +108,7 @@ public final class LocalStorage {
 
             // fallback to default external files dir
             if (externalPrivateCgeoDirectory == null) {
-                Log.w("Chosen extCgeoDir " + prefDirectory + " is not available, falling back to default extCgeoDir");
+                Log.w("Chosen extCgeoDir " + prefDirectory + " is not an available external dir, falling back to default extCgeoDir");
                 externalPrivateCgeoDirectory = getFirstExternalPrivateCgeoDirectory();
             }
 
@@ -238,13 +239,16 @@ public final class LocalStorage {
      */
     @NonNull
     public static File getExternalPublicCgeoDirectory() {
-        final File cgeo = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), CGEO_DIRNAME);
-        FileUtils.mkdirs(cgeo);
-        if (!cgeo.exists() || !cgeo.canWrite()) {
-            Log.w("External public cgeo directory not available, using internal storage: " + cgeo);
-            return getInternalCgeoDirectory();
+        if (externalPublicCgeoDirectory == null) {
+            externalPublicCgeoDirectory = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), CGEO_DIRNAME);
+            FileUtils.mkdirs(externalPublicCgeoDirectory);
+            if (!externalPublicCgeoDirectory.exists() || !externalPublicCgeoDirectory.canWrite()) {
+                Log.w("External public cgeo directory '" + externalPublicCgeoDirectory + "' not available");
+                externalPublicCgeoDirectory = getInternalCgeoDirectory();
+                Log.i("Fallback to internal storage: " + externalPublicCgeoDirectory);
+            }
         }
-        return cgeo;
+        return externalPublicCgeoDirectory;
     }
 
     @NonNull

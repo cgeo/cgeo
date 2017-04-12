@@ -408,11 +408,6 @@ public class DataStore {
     }
 
     public static String backupDatabaseInternal() {
-        if (!LocalStorage.isExternalStorageAvailable()) {
-            Log.w("Database wasn't backed up: no external memory");
-            return null;
-        }
-
         final File target = getBackupFileInternal();
         closeDb();
         final boolean backupDone = FileUtils.copy(databasePath(), target);
