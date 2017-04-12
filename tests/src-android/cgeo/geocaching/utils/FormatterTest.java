@@ -72,6 +72,16 @@ public class FormatterTest extends TestCase {
         assertThat(truncated.get(0)).isEqualTo("/\u2026");
     }
 
+    public static void testTruncateNothingInCommon() {
+        final List<CharSequence> dirs = new ArrayList<>();
+        dirs.add("/one/directory/files");
+        dirs.add("/some/other/directory");
+
+        final List<CharSequence> truncated = Formatter.truncateCommonSubdir(dirs);
+        assertThat(truncated.get(0)).isEqualTo("/one/directory/files");
+        assertThat(truncated.get(1)).isEqualTo("/some/other/directory");
+    }
+
     @SuppressLint("SdCardPath")
     public static void testTruncateCommonSubdirSingleEntry() {
         final List<CharSequence> dirs = new ArrayList<>();
