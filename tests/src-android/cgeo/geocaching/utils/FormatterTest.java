@@ -63,6 +63,16 @@ public class FormatterTest extends TestCase {
     }
 
     @SuppressLint("SdCardPath")
+    public static void testTruncateDuplicate() {
+        final List<CharSequence> dirs = new ArrayList<>();
+        dirs.add("/data/data/cgeo.geocaching/files");
+        dirs.add("/data/data/cgeo.geocaching/files");
+
+        final List<CharSequence> truncated = Formatter.truncateCommonSubdir(dirs);
+        assertThat(truncated.get(0)).isEqualTo("/\u2026");
+    }
+
+    @SuppressLint("SdCardPath")
     public static void testTruncateCommonSubdirSingleEntry() {
         final List<CharSequence> dirs = new ArrayList<>();
         dirs.add("/data/data/cgeo.geocaching/files");
