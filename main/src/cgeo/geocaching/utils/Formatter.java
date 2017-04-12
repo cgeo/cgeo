@@ -341,8 +341,7 @@ public final class Formatter {
         }
         final List<CharSequence> truncatedDirs = new ArrayList<>(directories.size());
         for (final CharSequence title : directories) {
-            final CharSequence truncated = title.subSequence(0, title.length() - commonEnding.length() + 1) + "\u2026";
-            truncatedDirs.add(truncated);
+            truncatedDirs.add(title.subSequence(0, title.length() - commonEnding.length() + 1) + "\u2026");
         }
         return truncatedDirs;
     }
