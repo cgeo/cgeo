@@ -473,6 +473,26 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     refreshOnResume = true;
                 }
                 return true;
+            case R.id.menu_waypoint_visited:
+                if (selectedWaypoint != null) {
+                    ensureSaved();
+                    new AsyncTask<Void, Void, Boolean>() {
+                        @Override
+                        protected Boolean doInBackground(final Void... params) {
+                            selectedWaypoint.setVisited(true);
+                            DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
+                            return true;
+                        }
+
+                        @Override
+                        protected void onPostExecute(final Boolean result) {
+                            if (result) {
+                                notifyDataSetChanged();
+                            }
+                        }
+                    }.execute();
+                }
+                return true;
             case R.id.menu_waypoint_copy_coordinates:
                 if (selectedWaypoint != null) {
                     final Geopoint coordinates = selectedWaypoint.getCoords();
