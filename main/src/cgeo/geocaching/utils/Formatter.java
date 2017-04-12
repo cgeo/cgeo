@@ -328,26 +328,20 @@ public final class Formatter {
         if (directories.size() < 2) {
             return directories;
         }
-        final String firstDir = directories.get(0).toString();
-        String commonEnding = null;
-        int offset = 0;
-        LOOP:
-        while (true) {
-            final String newEnding = firstDir.substring(firstDir.lastIndexOf('/', firstDir.length() - offset));
-            for (int i = 1; i < directories.size(); i++) {
-                if (!directories.get(i).toString().endsWith(newEnding)) {
-                    break LOOP;
+        String commonEnding = directories.get(0).toString();
+        for (int i = 1; i < directories.size(); i++) {
+            final String directory = directories.get(i).toString();
+            while (!directory.endsWith(commonEnding)) {
+                final int offset = commonEnding.indexOf('/', 1);
+                if (offset == -1) {
+                    return directories;
                 }
+                commonEnding = commonEnding.substring(offset);
             }
-            commonEnding = newEnding;
-            offset = commonEnding.length() + 1;
         }
         final List<CharSequence> truncatedDirs = new ArrayList<>(directories.size());
         for (final CharSequence title : directories) {
-            CharSequence truncated = title;
-            if (commonEnding != null) {
-                truncated = title.subSequence(0, title.length() - commonEnding.length() + 1) + "\u2026";
-            }
+            final CharSequence truncated = title.subSequence(0, title.length() - commonEnding.length() + 1) + "\u2026";
             truncatedDirs.add(truncated);
         }
         return truncatedDirs;
