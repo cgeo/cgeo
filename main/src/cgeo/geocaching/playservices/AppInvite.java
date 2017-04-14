@@ -23,7 +23,7 @@ public class AppInvite {
         // utility class
     }
 
-    public static final boolean isAvailable() {
+    public static boolean isAvailable() {
         return ProcessUtils.isIntentAvailable("com.google.android.gms.appinvite.ACTION_APP_INVITE");
     }
 
