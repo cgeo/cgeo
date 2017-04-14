@@ -179,3 +179,10 @@ subprojects {
         downloadSources = true
     }
 }
+
+/*
+ * Make sure that we use the source distribution when updating the wrapper from the command line.
+ */
+task wrapper(type: Wrapper) {
+	distributionType = "all"
+}
