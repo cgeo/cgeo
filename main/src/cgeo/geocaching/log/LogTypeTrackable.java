@@ -62,7 +62,7 @@ public enum LogTypeTrackable {
     }
 
     // Specify the list of trackable action when in LogCacheActivity
-    public static final List<LogTypeTrackable> getLogTypeTrackableForLogCache() {
+    public static List<LogTypeTrackable> getLogTypeTrackableForLogCache() {
         final List<LogTypeTrackable> list = new ArrayList<>();
         list.add(DO_NOTHING);
         list.add(VISITED);
