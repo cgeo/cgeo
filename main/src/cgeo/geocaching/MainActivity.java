@@ -23,6 +23,7 @@ import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.DatabaseBackupUtils;
@@ -101,56 +102,61 @@ public class MainActivity extends AbstractActionBarActivity {
     private ConnectivityChangeReceiver connectivityChangeReceiver;
 
     private final UpdateLocation locationUpdater = new UpdateLocation();
+    private final Handler updateUserInfoHandler = new UpdateUserInfoHandler(this);
+    private final Handler firstLoginHandler = new FirstLoginHandler(this);
 
-    private final Handler updateUserInfoHandler = new Handler() {
+    private static final class UpdateUserInfoHandler extends WeakReferenceHandler<MainActivity> {
+
+        UpdateUserInfoHandler(final MainActivity activity) {
+            super(activity);
+        }
 
         @Override
         public void handleMessage(final Message msg) {
-            updateAccountInfo();
-        }
+            final MainActivity activity = getReference();
+            if (activity != null) {
+                // Get active connectors with login status
+                final ILogin[] loginConns = ConnectorFactory.getActiveLiveConnectors();
 
-        private void updateAccountInfo() {
-            // Get active connectors with login status
-            final ILogin[] loginConns = ConnectorFactory.getActiveLiveConnectors();
+                // Update UI
+                activity.infoArea.setAdapter(new ArrayAdapter<ILogin>(activity, R.layout.main_activity_connectorstatus, loginConns) {
+                    @Override
+                    public View getView(final int position, final View convertView, final android.view.ViewGroup parent) {
+                        TextView rowView = (TextView) convertView;
+                        if (rowView == null) {
+                            rowView = (TextView) activity.getLayoutInflater().inflate(R.layout.main_activity_connectorstatus, parent, false);
+                        }
 
-            // Update UI
-            infoArea.setAdapter(new ArrayAdapter<ILogin>(MainActivity.this, R.layout.main_activity_connectorstatus, loginConns) {
-                @Override
-                public View getView(final int position, final View convertView, final android.view.ViewGroup parent) {
-                    TextView rowView = (TextView) convertView;
-                    if (rowView == null) {
-                        rowView = (TextView) getLayoutInflater().inflate(R.layout.main_activity_connectorstatus, parent, false);
+                        final ILogin connector = getItem(position);
+                        fillView(rowView, connector);
+                        return rowView;
+
                     }
 
-                    final ILogin connector = getItem(position);
-                    fillView(rowView, connector);
-                    return rowView;
-
-                }
-
-                private void fillView(final TextView connectorInfo, final ILogin conn) {
-                    final StringBuilder userInfo = new StringBuilder(conn.getName()).append(Formatter.SEPARATOR);
-                    if (conn.isLoggedIn()) {
-                        userInfo.append(conn.getUserName());
-                        if (conn.getCachesFound() >= 0) {
-                            userInfo.append(" (").append(conn.getCachesFound()).append(')');
+                    private void fillView(final TextView connectorInfo, final ILogin conn) {
+                        final StringBuilder userInfo = new StringBuilder(conn.getName()).append(Formatter.SEPARATOR);
+                        if (conn.isLoggedIn()) {
+                            userInfo.append(conn.getUserName());
+                            if (conn.getCachesFound() >= 0) {
+                                userInfo.append(" (").append(conn.getCachesFound()).append(')');
+                            }
+                            userInfo.append(Formatter.SEPARATOR);
                         }
-                        userInfo.append(Formatter.SEPARATOR);
+                        userInfo.append(conn.getLoginStatusString());
+
+                        connectorInfo.setText(userInfo);
+                        connectorInfo.setOnClickListener(new OnClickListener() {
+
+                            @Override
+                            public void onClick(final View v) {
+                                SettingsActivity.openForScreen(R.string.preference_screen_services, activity);
+                            }
+                        });
                     }
-                    userInfo.append(conn.getLoginStatusString());
-
-                    connectorInfo.setText(userInfo);
-                    connectorInfo.setOnClickListener(new OnClickListener() {
-
-                        @Override
-                        public void onClick(final View v) {
-                            SettingsActivity.openForScreen(R.string.preference_screen_services, MainActivity.this);
-                        }
-                    });
-                }
-            });
+                });
+            }
         }
-    };
+    }
 
     private final class ConnectivityChangeReceiver extends BroadcastReceiver {
         private boolean isConnected = Network.isConnected();
@@ -195,21 +201,28 @@ public class MainActivity extends AbstractActionBarActivity {
         }
     };
 
-    private final Handler firstLoginHandler = new Handler() {
+    private static final class FirstLoginHandler extends WeakReferenceHandler<MainActivity> {
+
+        FirstLoginHandler(final MainActivity activity) {
+            super(activity);
+        }
 
         @Override
         public void handleMessage(final Message msg) {
-            try {
-                final StatusCode reason = (StatusCode) msg.obj;
+            final MainActivity activity = getReference();
+            if (activity != null) {
+                try {
+                    final StatusCode reason = (StatusCode) msg.obj;
 
-                if (reason != null && reason != StatusCode.NO_ERROR) { //LoginFailed
-                    showToast(res.getString(reason == StatusCode.MAINTENANCE ? reason.getErrorString() : R.string.err_login_failed_toast));
+                    if (reason != null && reason != StatusCode.NO_ERROR) { //LoginFailed
+                        activity.showToast(activity.res.getString(reason == StatusCode.MAINTENANCE ? reason.getErrorString() : R.string.err_login_failed_toast));
+                    }
+                } catch (final Exception e) {
+                    Log.w("MainActivity.firstLoginHander", e);
                 }
-            } catch (final Exception e) {
-                Log.w("MainActivity.firstLoginHander", e);
             }
         }
-    };
+    }
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {

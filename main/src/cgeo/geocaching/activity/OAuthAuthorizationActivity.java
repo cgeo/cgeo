@@ -6,6 +6,7 @@ import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.OAuth;
 import cgeo.geocaching.network.OAuthTokens;
 import cgeo.geocaching.network.Parameters;
+import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.BundleUtils;
@@ -63,47 +64,65 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
     private ProgressDialog requestTokenDialog = null;
     private ProgressDialog changeTokensDialog = null;
 
-    private final Handler requestTokenHandler = new Handler() {
+    private final Handler requestTokenHandler = new RequestTokenHandler(this);
+    private final Handler changeTokensHandler = new ChangeTokensHandler(this);
+
+    private static final class RequestTokenHandler extends WeakReferenceHandler<OAuthAuthorizationActivity> {
+
+        RequestTokenHandler(final OAuthAuthorizationActivity activity) {
+            super(activity);
+        }
 
         @Override
         public void handleMessage(final Message msg) {
-            if (requestTokenDialog != null && requestTokenDialog.isShowing()) {
-                requestTokenDialog.dismiss();
-            }
+            final OAuthAuthorizationActivity activity = getReference();
+            if (activity != null) {
+                final ProgressDialog requestTokenDialog = activity.requestTokenDialog;
+                if (requestTokenDialog != null && requestTokenDialog.isShowing()) {
+                    requestTokenDialog.dismiss();
+                }
 
-            startButton.setOnClickListener(new StartListener());
-            startButton.setEnabled(true);
+                final Button startButton = activity.startButton;
+                startButton.setOnClickListener(new StartListener(activity));
+                startButton.setEnabled(true);
 
-            if (msg.what == STATUS_SUCCESS) {
-                startButton.setText(getAuthAgain());
-            } else if (msg.what == STATUS_ERROR_EXT_MSG) {
-                String errMsg = getErrAuthInitialize();
-                errMsg += msg.obj != null ? "\n" + msg.obj.toString() : "";
-                showToast(errMsg);
-                startButton.setText(getAuthStart());
-            } else {
-                showToast(getErrAuthInitialize());
-                startButton.setText(getAuthStart());
+                if (msg.what == STATUS_SUCCESS) {
+                    startButton.setText(activity.getAuthAgain());
+                } else if (msg.what == STATUS_ERROR_EXT_MSG) {
+                    String errMsg = activity.getErrAuthInitialize();
+                    errMsg += msg.obj != null ? "\n" + msg.obj.toString() : "";
+                    activity.showToast(errMsg);
+                    startButton.setText(activity.getAuthStart());
+                } else {
+                    activity.showToast(activity.getErrAuthInitialize());
+                    startButton.setText(activity.getAuthStart());
+                }
             }
         }
+    }
 
-    };
+    private static final class ChangeTokensHandler extends WeakReferenceHandler<OAuthAuthorizationActivity> {
 
-    private final Handler changeTokensHandler = new Handler() {
+        ChangeTokensHandler(final OAuthAuthorizationActivity activity) {
+            super(activity);
+        }
 
         @Override
         public void handleMessage(final Message msg) {
-            Dialogs.dismiss(changeTokensDialog);
-            if (msg.what == AUTHENTICATED) {
-                showToast(getAuthDialogCompleted());
-                setResult(RESULT_OK);
-                finish();
-            } else {
-                showToast(getErrAuthProcess());
-                startButton.setText(getAuthStart());
+            final OAuthAuthorizationActivity activity = getReference();
+            if (activity != null) {
+                Dialogs.dismiss(activity.changeTokensDialog);
+                if (msg.what == AUTHENTICATED) {
+                    activity.showToast(activity.getAuthDialogCompleted());
+                    activity.setResult(RESULT_OK);
+                    activity.finish();
+                } else {
+                    activity.showToast(activity.getErrAuthProcess());
+                    activity.startButton.setText(activity.getAuthStart());
+                }
             }
         }
-    };
+    }
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
@@ -132,7 +151,7 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
 
         startButton.setText(getAuthAuthorize());
         startButton.setEnabled(true);
-        startButton.setOnClickListener(new StartListener());
+        startButton.setOnClickListener(new StartListener(this));
 
         if (StringUtils.isEmpty(getCreateAccountUrl())) {
             registerButton.setVisibility(View.GONE);
@@ -263,27 +282,36 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
         return https ? "https://" : "http://";
     }
 
-    private class StartListener implements View.OnClickListener {
+    private static final class StartListener extends WeakReferenceHandler<OAuthAuthorizationActivity> implements View.OnClickListener {
+
+        StartListener(final OAuthAuthorizationActivity actitity) {
+            super(actitity);
+        }
 
         @Override
         public void onClick(final View arg0) {
-            if (requestTokenDialog == null) {
-                requestTokenDialog = new ProgressDialog(OAuthAuthorizationActivity.this);
-                requestTokenDialog.setCancelable(false);
-                requestTokenDialog.setMessage(getAuthDialogWait());
-            }
-            requestTokenDialog.show();
-            startButton.setEnabled(false);
-            startButton.setOnTouchListener(null);
-            startButton.setOnClickListener(null);
-
-            setTempTokens(null, null);
-            AndroidRxUtils.networkScheduler.scheduleDirect(new Runnable() {
-                @Override
-                public void run() {
-                    requestToken();
+            final OAuthAuthorizationActivity actitity = getReference();
+            if (actitity != null) {
+                if (actitity.requestTokenDialog == null) {
+                    actitity.requestTokenDialog = new ProgressDialog(actitity);
+                    actitity.requestTokenDialog.setCancelable(false);
+                    actitity.requestTokenDialog.setMessage(actitity.getAuthDialogWait());
                 }
-            });
+                actitity.requestTokenDialog.show();
+
+                final Button startButton = actitity.startButton;
+                startButton.setEnabled(false);
+                startButton.setOnTouchListener(null);
+                startButton.setOnClickListener(null);
+
+                actitity.setTempTokens(null, null);
+                AndroidRxUtils.networkScheduler.scheduleDirect(new Runnable() {
+                    @Override
+                    public void run() {
+                        actitity.requestToken();
+                    }
+                });
+            }
         }
     }
 
