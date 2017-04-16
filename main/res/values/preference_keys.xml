@@ -111,7 +111,6 @@
     <string translatable="false" name="pref_livelist">livelist</string>
     <string translatable="false" name="pref_lastusedlist">lastlist</string>
     <string translatable="false" name="pref_last_selected_lists">last_selected_lists</string>
-    <string translatable="false" name="pref_last_selected_lists_time">last_selected_lists_time</string>
     <string translatable="false" name="pref_cachetype">cachetype</string>
     <string translatable="false" name="pref_twitter_token_secret">tokensecret</string>
     <string translatable="false" name="pref_twitter_token_public">tokenpublic</string>
