@@ -11,7 +11,7 @@
     android:paddingLeft="5dip"
     android:paddingRight="5dip"
     android:paddingTop="7dip"
-    tools:context=".ui.FileSelectionListAdapter" >
+    tools:context=".files.FileSelectionListAdapter" >
 
     <TextView
         android:id="@+id/mapfilepath"

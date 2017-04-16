@@ -5,7 +5,7 @@
     android:layout_height="fill_parent"
     android:background="?background_color"
     android:orientation="vertical"
-    tools:context=".UsefulAppsActivity" >
+    tools:context=".helper.UsefulAppsActivity" >
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/apps_list"

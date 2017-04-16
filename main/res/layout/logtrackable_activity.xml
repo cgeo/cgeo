@@ -6,7 +6,7 @@
     android:background="?background_color"
     android:orientation="vertical"
     android:padding="4dip"
-    tools:context=".LogTrackableActivity" >
+    tools:context=".log.LogTrackableActivity" >
 
     <LinearLayout
         android:layout_width="fill_parent"

@@ -4,7 +4,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    tools:context=".AddressListActivity" >
+    tools:context=".address.AddressListActivity" >
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/address_list"

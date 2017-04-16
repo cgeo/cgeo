@@ -8,7 +8,7 @@
     android:paddingBottom="10dip"
     android:paddingLeft="10dip"
     android:paddingRight="10dip"
-    tools:context=".LogCacheActivity" >
+    tools:context=".log.LogCacheActivity" >
 
     <ImageView
         android:id="@+id/trackable_image_brand"

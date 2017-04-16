@@ -7,7 +7,7 @@
     android:layout_marginBottom="10dip"
     android:descendantFocusability="blocksDescendants"
     android:orientation="vertical"
-    tools:context=".UsefulAppsActivity" >
+    tools:context=".helper.UsefulAppsActivity" >
 
     <RelativeLayout style="@style/separator_horizontal_layout" >
 

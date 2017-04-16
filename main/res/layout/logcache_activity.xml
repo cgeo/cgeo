@@ -6,7 +6,7 @@
     android:background="?background_color"
     android:orientation="vertical"
     android:padding="4dip"
-    tools:context=".LogCacheActivity" >
+    tools:context=".log.LogCacheActivity" >
 
     <LinearLayout
         android:layout_width="fill_parent"

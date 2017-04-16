@@ -9,4 +9,4 @@
     android:gravity="center"
     android:padding="3dip"
     android:scaleType="fitCenter"
-    tools:context=".StaticMapsActivity" />
+    tools:context=".staticmaps.StaticMapsActivity" />

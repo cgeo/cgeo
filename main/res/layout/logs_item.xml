@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:paddingBottom="3dip"
     android:paddingTop="3dip"
-    tools:context=".ui.logs.LogsViewCreator$1" >
+    tools:context=".log.LogsViewCreator$1" >
 
     <TextView
         android:id="@+id/author"
