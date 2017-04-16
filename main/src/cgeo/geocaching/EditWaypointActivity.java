@@ -179,7 +179,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
                 } else {
                     activity.nonEditable(activity.waypointName);
                     activity.nonEditable(activity.note);
-                    if (!waypoint.isOriginalCoordsEmpty()) {
+                    if (waypoint != null && !waypoint.isOriginalCoordsEmpty()) {
                         activity.projection.setVisibility(View.GONE);
                     }
                 }
