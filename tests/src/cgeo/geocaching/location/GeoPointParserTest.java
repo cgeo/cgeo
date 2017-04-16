@@ -1,7 +1,7 @@
 package cgeo.geocaching.location;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
 import static org.assertj.core.api.Assertions.offset;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 import junit.framework.TestCase;
 
@@ -29,7 +29,7 @@ public class GeoPointParserTest extends TestCase {
         assertThat(expected.distanceTo(actual)).isLessThanOrEqualTo(tolerance);
     }
 
-    private assertParsingFails(final String geopointToParse) {
+    private static void assertParsingFails(final String geopointToParse) {
         try {
             GeopointParser.parse(geopointToParse);
             fail();

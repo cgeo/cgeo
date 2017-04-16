@@ -160,6 +160,7 @@ public class GeopointParser {
         /**
          * @see AbstractParser#parse(String)
          */
+        @Override
         @Nullable
         final GeopointWrapper parse(@NonNull final String text) {
             final String withoutSpaceAfterComma = removeAllSpaceAfterComma(text);
@@ -187,6 +188,7 @@ public class GeopointParser {
         /**
          * @see AbstractParser#parse(String, LatLon)
          */
+        @Override
         @Nullable
         final ResultWrapper parse(@NonNull final String text, @NonNull final LatLon latlon) {
             final MatcherWrapper matcher = new MatcherWrapper(latlon == LatLon.LAT ? latPattern : lonPattern, text);
