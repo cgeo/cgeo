@@ -301,7 +301,7 @@
   <string name="caches_sort_name">Navn</string>
   <string name="caches_sort_geocode">Geokode</string>
   <string name="caches_sort_rating">Vurdering</string>
-  <string name="caches_sort_vote">Afstemning (egen vurdering)</string>
+  <string name="caches_sort_vote">Bedømmelse (egen vurdering)</string>
   <string name="caches_sort_inventory">Antal Trackables</string>
   <string name="caches_sort_date_hidden">Dato for placering</string>
   <string name="caches_sort_date_logged">Dato for logbesked</string>
@@ -360,7 +360,7 @@
   <string name="caches_clear_offlinelogs">Fjern offline logbeskeder</string>
   <string name="caches_clear_offlinelogs_message">Vil du fjerne offline logbeskeder?</string>
   <string name="caches_clear_offlinelogs_progress">Fjerner offline logbeskeder</string>
-  <string name="caches_make_list_unique">Gør listen unik</string>
+  <string name="caches_make_list_unique">Fjern cacherne i denne liste fra øvrige lister</string>
   <string name="caches_filter_missing_gcvote">Fundne cacher er ikke bedømt</string>
   <!-- caches lists -->
   <string name="list_menu_create">Opret ny liste</string>
@@ -417,6 +417,13 @@
   <string name="settings_title_map_data">Kortdata</string>
   <string name="settings_title_map_content">Kortindhold</string>
   <string name="settings_title_gpx">GPX</string>
+  <string name="settings_title_data_dir">Geocache-datamappe</string>
+  <string name="settings_title_data_dir_usage">Geocache-datamappe (%1$s bytes i brug)</string>
+  <string name="calculate_dataDir_title">Geocache dataforbrug</string>
+  <string name="calculate_dataDir">Beregner geocache diskforbrug</string>
+  <string name="settings_data_dir_item">%1$s bytes (%2$s ledig)</string>
+  <string name="confirm_data_dir_move_title">Flyt geocache-datamappe?</string>
+  <string name="confirm_data_dir_move">Flytning af geocache-datamappen kan tage meget lang tid afhængig af din enhed og mængden af data.</string>
   <string name="settings_title_basicmembers">Valgmuligheder for Basismedlemmer</string>
   <string name="settings_title_navigation">Navigation</string>
   <string name="settings_summary_navigation">Vælg foretrukken navigationsmetode og vælg eksterne apps.</string>
@@ -472,7 +479,7 @@
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_gcvote_password_description">For at kunne bedømme en cache skal du følge instruktionerne på GCVote.com og angive dit password til GCVote her.</string>
   <string name="err_gcvote_send_rating">Fejl under afsendelse af bedømmelse. Kontrollér eller fjern GCVote password under Indstillinger.</string>
-  <string name="gcvote_sent">Stemme blev afsendt</string>
+  <string name="gcvote_sent">Bedømmelse blev afsendt</string>
   <string name="init_twitter">Twitter</string>
   <string name="settings_activate_twitter">Aktivér</string>
   <string name="init_username">Brugernavn</string>
@@ -503,7 +510,7 @@
   <string name="init_signature_template_url">URL</string>
   <string name="init_signature_template_log">Logtekst</string>
   <string name="init_ratingwanted">GCVote vurdering</string>
-  <string name="init_summary_ratingwanted">Indlæs cachevurdering fra GCVote.com</string>
+  <string name="init_summary_ratingwanted">Indlæs cachebedømmelser fra GCVote.com</string>
   <string name="init_friends_and_own_logs_wanted">Vis venners/egne</string>
   <string name="init_summary_friends_and_own_logs_wanted">Vis en særskilt logbogsside med venners og egne logbeskeder</string>
   <string name="init_openlastdetailspage">Åbn sidste detaljeside</string>
@@ -556,13 +563,14 @@
   <string name="settings_info_offline_maps_title">Oplysninger om offline kort</string>
   <string name="settings_info_offline_maps">c:geo understøtter kort til offline brug. Du kan downloade kort fra Mapsforge eller lave dine egne kort ved hjælp af OSM data. Du skal vælge en mappe, som indeholder offline kort, før du kan bruge offline kort.</string>
   <string name="settings_info_themes_title">Oplysninger om korttemaer</string>
-  <string name="settings_info_themes">c:geo understøtter tilpassede temaer til offline kort. Temaer kan bruges til at ændre farvestil på kortet (f.eks. farver som egne sig til brug i mørke) eller til at fremhæve bestemte typer af objekter, som cykelstier eller højdekurver, på kortet.</string>
+  <string name="settings_info_themes">c:geo understøtter tilpassede temaer til offline kort. Temaer kan bruges til at ændre farvestil på kortet (f.eks. farver som egne sig til brug i mørke) eller til at fremhæve bestemte typer af objekter, som cykelstier eller højdekurver.</string>
   <string name="init_mapsource_select">Vælg kortkilde</string>
   <string name="settings_title_scale_map_text">Tilpas tekst på kort</string>
   <string name="settings_summary_scale_map_text">Tilpas størrelsen af tekster på offline kort, så de passer til enhedens skærmopløsning,</string>
   <string name="init_map_directory_description">Mappe med offline kort</string>
   <string name="init_gpx_exportdir">GPX eksportmappe</string>
   <string name="init_gpx_importdir">GPX importmappe</string>
+  <string name="init_dataDir">Vælg geocache-datamappe</string>
   <string name="init_maptrail">Vis spor</string>
   <string name="init_summary_maptrail">Vis dit spor på kortet</string>
   <string name="init_share_after_export">Åbn Del-menu efter GPX eksport</string>
@@ -579,15 +587,17 @@
   <string name="init_default_navigation_tool_2_description">Her kan du vælge din sekundære navigationsmetode. Aktivér den ved at holde på navigationssymbolet det vises i cachens titel.</string>
   <string name="init_navigation_menu_description">Her kan du vælge hvilke af de tilgængelige navigationsmetoder, der skal vises i navigationsmenuen for en cache eller et waypoint. Metoder som ikke er installeret på denne enhed kan ikke vælges.</string>
   <string name="init_debug_title">Debug-information</string>
-  <string name="init_debug_note">c:geo kan generere en stor mængde fejlretningsinformation. Aktivering af denne indstilling kan imidlertid påvirke stabiliteten af c:geo og det anbefales kun at bruge den såfremt du er blevet bedt om at sende fejlretningsloggen til udviklerne.</string>
+  <string name="init_debug_note">c:geo kan generere en stor mængde fejlfindingsoplysninger. Aktivering af denne indstilling vil påvirke stabiliteten af c:geo og kan kun anbefales, hvis du bliver bedt om at sende en fejlfindingslog til udviklerne. Denne indstilling bør være deaktiveret under normal brug af c:geo!</string>
   <string name="init_debug">Aktivér debug-log</string>
   <string name="init_dbonsdcard_title">Databaseplacering</string>
-  <string name="init_dbonsdcard_note">Du kan gemme c:geos database på dit eksterne SD-kort. Dermed vil du spare intern hukommelse, men c:geo vil fungere lidt langsommere og vil ikke fungere hvis dit eksterne SD-kort ikke er tilgængeligt.</string>
-  <string name="init_dbonsdcard">På eksternt SD-kort</string>
   <string name="init_dbmove_dbmove">Flytter database</string>
   <string name="init_dbmove_running">Flytter database</string>
   <string name="init_dbmove_success">Databasen blev flyttet.</string>
   <string name="init_dbmove_failed">Flytning af database fejlede</string>
+  <string name="init_datadirmove_datadirmove">Flytter geocache-datamappe</string>
+  <string name="init_datadirmove_running">Flytter geocache-datamappe</string>
+  <string name="init_datadirmove_success">Flytning af geocache-datamappe er udført.</string>
+  <string name="init_datadirmove_failed">Flytning af geocache-datamappe fejlede. Det kan være nødvendigt at fortage en manuel flytning af eventuelt resterende filer, som ikke blev flyttet til den nye mappe.</string>
   <string name="init_plain_logs">Simple logbeskeder</string>
   <string name="init_summary_plain_logs">Vis logbeskeder uden farver</string>
   <string name="init_use_native_ua">Android-browser</string>
@@ -829,7 +839,7 @@
   <string name="cache_menu_oruxmaps_online">OruxMaps (Online)</string>
   <string name="cache_menu_oruxmaps_offline">OruxMaps (Offline)</string>
   <string name="cache_menu_pebble">Pebble</string>
-  <string name="cache_menu_vote">Stem</string>
+  <string name="cache_menu_vote">Bedøm</string>
   <string name="cache_menu_checker">Åben Geochecker</string>
   <string name="cache_menu_challenge_checker">Søg efter cacher med geo-checker</string>
   <string name="cache_menu_ignore">Ignorér cache</string>
@@ -1425,14 +1435,6 @@
   <string name="cgeo_shortcut">c:geo genvej</string>
   <string name="create_shortcut">Opret genvej</string>
   <string name="send">Send</string>
-  <string name="showcase_logcache_title">Afsendelse af logbesked</string>
-  <string name="showcase_logcache_text">Husk, at mange funktioner nu er i titellinien, hvor du også kan finde knappen til at sende den færdige logbesked.</string>
-  <string name="showcase_main_title">Menubjælke</string>
-  <string name="showcase_main_text">Nogle funktioner i c:geo er tilgængelige gennem menubjælken eller gennem menuen med prikkerne. Ved at holde på en knap, kan du få vist en beskrivelse af knappens funktion.</string>
-  <string name="showcase_cachelist_title">Skift af liste</string>
-  <string name="showcase_cachelist_text">Du kan skifte mellem dine lister ved at trykke på listens titel.</string>
-  <string name="showcase_compass_hint_title">Vis tip</string>
-  <string name="showcase_compass_hint_text">Dette menupunkt kan give dig et hint om hvordan du finder cachen, hvis det er tilgængeligt.</string>
   <string name="confirm_log_title">Usædvanlig logtype</string>
   <string name="confirm_log_message">Du er ved at logge \"%s\". Er du sikker?</string>
   <!-- Geokrety -->
@@ -1491,4 +1493,6 @@
   <string name="cache_list_remove_from">Fjern fra liste</string>
   <string name="list_list_headline">Lister:</string>
   <string name="cache_store_list">Gem i liste</string>
+  <!-- calendar adder -->
+  <string name="event_fail">Kunne ikke tilføje eventcachen til kalenderen</string>
 </resources>

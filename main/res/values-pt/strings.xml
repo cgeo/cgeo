@@ -26,7 +26,7 @@
   <string name="webcam">Cache webcam</string>
   <string name="virtual">Cache virtual</string>
   <string name="wherigo">Cache wherigo</string>
-  <string name="lostfound">Perdidos e achados</string>
+  <string name="lostfound">Cache evento Perdidos e achados</string>
   <string name="ape">Cache projecto APE</string>
   <string name="gchq">Groundspeak hq</string>
   <string name="gps">Cache exposição GPS</string>
@@ -579,11 +579,8 @@
   <string name="init_default_navigation_tool_2_description">Aqui define a sua segunda preferida ferramenta de navefação. É activada com clique longo no ícone ao lado do títula da cache.</string>
   <string name="init_navigation_menu_description">Aqui você pode selecionar qual dos métodos de navegação disponíveis serão mostrados no menu de navegação para um cache ou um ponto de referência. Métodos desativados não estão instalados neste dispositivo.</string>
   <string name="init_debug_title">Informação de depuração</string>
-  <string name="init_debug_note">c:Geo pode gerar uma grande quantidade de informações de depuração. Ativar essa configuração pode, no entanto, afetar a estabilidade do c:geo e só é recomendado se for solicitado a enviar um log para os desenvolvedores.</string>
   <string name="init_debug">Activar depuração</string>
   <string name="init_dbonsdcard_title">Localização da base de dados</string>
-  <string name="init_dbonsdcard_note">Pode armazenar a base de dados do c:geo no armazenamento externo. Se o fizer vai poupar memória interna, mas pode perder um pouco de performance e o c:geo pode não funcionar se o armazenamento externo não estiver disponível.</string>
-  <string name="init_dbonsdcard">No armazenamento externo</string>
   <string name="init_dbmove_dbmove">A mover a base de dados</string>
   <string name="init_dbmove_running">A mover a base de dados</string>
   <string name="init_dbmove_success">Base de dados movida com sucesso.</string>
@@ -1096,7 +1093,7 @@
   <string name="helper_sendtocgeo_description">Send to c:geo é uma extensão do navegador <strong>para o seu PC</strong>. Ao navegar geocaching.com, você pode enviar as caches directamente para seu smartphone com o clique de um botão no navegador.</string>
   <string name="helper_locus_title">Locus</string>
   <string name="helper_locus_description">Aplicação de navegação ao ar livre para o seu telefone ou tablet. Veja mapas topográficos offline, registe a sua rota, procure geocaches, use um guia de voz e muito mais.</string>
-  <string name="helper_gpsstatus_title">GPS Status &amp; Toolbox</string>
+  <string name="helper_gpsstatus_title">Status do GPS &amp; Ferramentas</string>
   <string name="helper_gpsstatus_description">Pode usar o radar a partir desta aplicação. Também fornece muitas outras informações relacionadas com o GPS.</string>
   <string name="helper_bluetoothgps_title">GPS por bluetooth</string>
   <string name="helper_bluetoothgps_description">Permite utilizar um GPS externo, para uma melhor recepção, localização mais precisa e permite poupar a bateria do seu telemóvel.</string>
@@ -1428,14 +1425,6 @@
   <string name="cgeo_shortcut">Atalho c:geo</string>
   <string name="create_shortcut">Criar atalho</string>
   <string name="send">Enviar</string>
-  <string name="showcase_logcache_title">Enviando o registo</string>
-  <string name="showcase_logcache_text">Lembre-se, muitos comandos estão agora na barra de título. Lá encontra o botão para enviar o registo terminado.</string>
-  <string name="showcase_main_title">Barra de menu</string>
-  <string name="showcase_main_text">Algumas funções de c:geo são acessíveis na barra de menu ou no menu com o símbolo pontilhado. Manter um botão pressionado para ver a sua descrição.</string>
-  <string name="showcase_cachelist_title">A trocar de listas</string>
-  <string name="showcase_cachelist_text">Pode alternar entre listas de caches clicando no título da lista.</string>
-  <string name="showcase_compass_hint_title">Mostrar a dica</string>
-  <string name="showcase_compass_hint_text">Este novo item do menu pode dar-te uma ideia onde encontrar a cache - Mostra a dica, caso disponível.</string>
   <string name="confirm_log_title">Tipo de registo invulgar</string>
   <string name="confirm_log_message">Quer fazer o registo \'%s\'. Tem a certeza?</string>
   <!-- Geokrety -->
@@ -1498,4 +1487,6 @@
     <item quantity="one">%d ponto de referência extraído</item>
     <item quantity="other">%d pontos de referência extraídos</item>
   </plurals>
+  <!-- calendar adder -->
+  <string name="event_fail">Falha ao adicionar cache evento ao calendário</string>
 </resources>

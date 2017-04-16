@@ -579,11 +579,8 @@
   <string name="init_default_navigation_tool_2_description">Tutaj możesz wybrać drugie preferowane narzędzie nawigacji. Jest aktywowane przez długie kliknięcie ikony nawigacji obok nazwy skrzynki.</string>
   <string name="init_navigation_menu_description">Możesz tu wybrać jakie dostępne metody nawigacji będą widoczne w menu nawigacji. Pozycje wyłączone nie są zainstalowane na urządzeniu.</string>
   <string name="init_debug_title">Informacja o błędach</string>
-  <string name="init_debug_note">c:geo może wygenerować bardzo dużo informacji debugujących. Aktywowanie tego ustawienia może jednak wpłynąć na stabilność c:geo i jest zalecene tylko, jeśli poproszono Ciebie o wysłanie logów do deweloperów.</string>
   <string name="init_debug">Włącz logowanie błędów</string>
   <string name="init_dbonsdcard_title">Położenie bazy danych</string>
-  <string name="init_dbonsdcard_note">Możesz przechowywać bazę danych c:geo na zewnętrznym urządzeniu. Dzięki temu zaoszczędzisz miejsce w pamięci wewnętrznej, ale wydajność może zmniejszyć się trochę, a c:geo nie będzie mógł pracować jeśli Twoja karta SD będzie niedostępna.</string>
-  <string name="init_dbonsdcard">Na zewnętrznym urządzeniu</string>
   <string name="init_dbmove_dbmove">Przenoszę bazę danych</string>
   <string name="init_dbmove_running">Przenoszę bazę danych</string>
   <string name="init_dbmove_success">Baza danych została przeniesiona.</string>
@@ -1436,14 +1433,6 @@
   <string name="cgeo_shortcut">skrót do c:geo</string>
   <string name="create_shortcut">Utwórz skrót</string>
   <string name="send">Wyślij</string>
-  <string name="showcase_logcache_title">Wysyłanie wpisu</string>
-  <string name="showcase_logcache_text">Pamiętaj, wiele poleceń jest teraz dostępnych w pasku tytułowym. Tam znajdziesz przycisk wysyłający gotowy wpis.</string>
-  <string name="showcase_main_title">Pasek menu</string>
-  <string name="showcase_main_text">Niektóre funkcje c:geo są dostępne z paska menu albo są zawarte w menu kryjącym się za przyciskiem z trzema kropkami. Możesz przytrzymać przycisk aby zobaczyć jego opis.</string>
-  <string name="showcase_cachelist_title">Przełączanie list</string>
-  <string name="showcase_cachelist_text">Możesz przełączać między listami skrzynek klikając tytuł listy.</string>
-  <string name="showcase_compass_hint_title">Podpowiedź</string>
-  <string name="showcase_compass_hint_text">Ten element menu może pomóc Ci w znalezieniu skrzynki - pokazuje podpowiedź, jeśli jest ona dostępna.</string>
   <string name="confirm_log_title">Niezwykły typ wpisu</string>
   <string name="confirm_log_message">Chcesz wpisać \'%s\'. Czy jesteś pewien?</string>
   <!-- Geokrety -->
@@ -1510,4 +1499,6 @@
     <item quantity="few">%d punkty orientacyjne zostały wyciągnięte</item>
     <item quantity="other">%d punktów orientacyjnych zostało wyciągniętych</item>
   </plurals>
+  <!-- calendar adder -->
+  <string name="event_fail">Nie udało się dodać wydarzenia do kalendarza</string>
 </resources>

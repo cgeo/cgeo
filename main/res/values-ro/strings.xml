@@ -420,6 +420,13 @@
   <string name="settings_title_map_data">Configurare hărţi</string>
   <string name="settings_title_map_content">Informaţii afişate pe hartă</string>
   <string name="settings_title_gpx">GPX</string>
+  <string name="settings_title_data_dir">Dosar geocutii</string>
+  <string name="settings_title_data_dir_usage">Dosar geocutii (utilizat %1$s)</string>
+  <string name="calculate_dataDir_title">Spaţiu utilizat de geocutii</string>
+  <string name="calculate_dataDir">Se determină spaţiul de stocare utilizat de geocutii</string>
+  <string name="settings_data_dir_item">%1$s (%2$s disponibil)</string>
+  <string name="confirm_data_dir_move_title">Mută dosarul cu geocutii?</string>
+  <string name="confirm_data_dir_move">Mutarea dosarului cu geocutii ar putea dura un timp mai îndelungat, în funcţie de disăpzitivul tău şi de volumul de informaţii.</string>
   <string name="settings_title_basicmembers">Opţiuni pentru Basic Members</string>
   <string name="settings_title_navigation">Navigare</string>
   <string name="settings_summary_navigation">Alege metodele de navigare preferate şi aplicaţii externe pentru navigare.</string>
@@ -566,6 +573,7 @@
   <string name="init_map_directory_description">Dosar cu hărţi salvate local</string>
   <string name="init_gpx_exportdir">Dosar Exporturi GPX</string>
   <string name="init_gpx_importdir">Dosar Importuri GPX</string>
+  <string name="init_dataDir">Alege dosar geocutii</string>
   <string name="init_maptrail">Arată traseul parcus</string>
   <string name="init_summary_maptrail">Arată traseul parcus pe Hartă</string>
   <string name="init_share_after_export">Afişează meniul \"Distribuie\" după exportul GPX</string>
@@ -582,15 +590,16 @@
   <string name="init_default_navigation_tool_2_description">Aici poţi alege metoda de navigare secundară. Aceasta se poate activa apăsând prelungit pe icoana de navigare alături de numele cutiei.</string>
   <string name="init_navigation_menu_description">Aici poţi alege care dintre metodele de navigare vor fi afişate în meniul de navigaţie pentru cutii si puncte. Uneltele inactive nu sunt instalate pe acest dispozitiv.</string>
   <string name="init_debug_title">Informaţii pentru depanare</string>
-  <string name="init_debug_note">c:geo poate genera o mulţime de informaţii de depanare. Activând această setare poate afecta însă stabilitatea c:geo şi este recomandată numai dacă vi se cere pentru a trimite un jurnal de depanare dezvoltatorilor.</string>
+  <string name="init_debug_note">c:geo poate genera o mulţime de informaţii de depanare. Activând această setare va afecta stabilitatea lui c:geo şi este recomandată numai dacă vi se cer astfel de informaţii de către dezvoltatori (de exemplu atunci când raportezi o eroare în funcţionare). Te rog să ţii dezactivată această opţiune în timpul utilizării normale a c:geo!</string>
   <string name="init_debug">Activează jurnal de depanare</string>
   <string name="init_dbonsdcard_title">Locaţia bazei de date</string>
-  <string name="init_dbonsdcard_note">Poţi păstra baza de date a c:geo pe card. În acest fel vei economisi spaţiu din memoria internă, dar c:geo va funcţiona puţin mai lent. Dacă cardul nu este disponibil, c:geo nu va putea funcţiona.</string>
-  <string name="init_dbonsdcard">Pe card</string>
   <string name="init_dbmove_dbmove">Mutare bază de date</string>
   <string name="init_dbmove_running">Mutare bază de date în curs</string>
   <string name="init_dbmove_success">Baza de date a fost mutată.</string>
   <string name="init_dbmove_failed">Mutarea bazei de date a eşuat</string>
+  <string name="init_datadirmove_running">Mutare dosar geocutii în curs</string>
+  <string name="init_datadirmove_success">A fost mutat dosarul cu geocutii.</string>
+  <string name="init_datadirmove_failed">Mutarea dosarului cu geocutii a eşuat parţial sau total. Te rog verifică atât dosarul vechi cât şi cel nou şi mută fişierele manual, dacă este necesar.</string>
   <string name="init_plain_logs">Însemnări simple</string>
   <string name="init_summary_plain_logs">Afişează însemnările fără culori</string>
   <string name="init_use_native_ua">Browser Android</string>
@@ -1444,14 +1453,6 @@
   <string name="cgeo_shortcut">legătură la c:geo</string>
   <string name="create_shortcut">Crează scurtătură</string>
   <string name="send">Trimite</string>
-  <string name="showcase_logcache_title">Trimiterea însemnării</string>
-  <string name="showcase_logcache_text">Reţine, multe comenzi sunt acum în bara de titlu. Acolo vei găsi butonul pentru a trimite o însemnare finalizată.</string>
-  <string name="showcase_main_title">Bară de meniu</string>
-  <string name="showcase_main_text">Unele funcţionalităţi ale c:geo sunt accesibile în bara de meniu sau în meniul din spatele simbolului cu puncte. Oricare buton poate fi apăsat lung pentru a vedea descrierea sa.</string>
-  <string name="showcase_cachelist_title">Comutare între liste</string>
-  <string name="showcase_cachelist_text">Poţi să schimbi lista afişată apăsând pe titlul listei.</string>
-  <string name="showcase_compass_hint_title">Arată indiciu</string>
-  <string name="showcase_compass_hint_text">Această nouă opţiune în meniu îţi poate da informaţii suplimentare despre unde ar putea fi ascunsă geocutia - afişează indiciul, dacă există.</string>
   <string name="confirm_log_title">Tip neobişnuit de însemnare</string>
   <string name="confirm_log_message">Vrei să scrii o însemnare pentru \'%s\'. Eşti sigur?</string>
   <!-- Geokrety -->
@@ -1513,4 +1514,11 @@
   <string name="cache_list_remove_from">Şterge din listă</string>
   <string name="list_list_headline">Liste:</string>
   <string name="cache_store_list">Salvează în listă</string>
+  <plurals name="extract_waypoints_result">
+    <item quantity="one">%d punct extras</item>
+    <item quantity="few">%d puncte extrase</item>
+    <item quantity="other">%d puncte extrase</item>
+  </plurals>
+  <!-- calendar adder -->
+  <string name="event_fail">Evenimentul nu a putut fi adăugat la calendar</string>
 </resources>

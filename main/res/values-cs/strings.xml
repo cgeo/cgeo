@@ -228,8 +228,8 @@
   <string name="warn_deprecated_mapfile">Používáš zastaralou verzi 0.2.4 mapového souboru.\nZvaž přepnutí na mapovou verzi 0.3.0.\nV příštím vydání již nebude verze 0.2.4 podporována.</string>
   <string name="warn_nonexistant_mapfile">Zvolený soubor map neexistuje.\nOffline mapy nejsou dostupné.</string>
   <string name="warn_rendertheme_missing">Téma pro mapu není k dispozici.</string>
-  <string name="warn_pocket_query_select">Nevybrán žádný Databázový požadavek.</string>
-  <string name="warn_no_pocket_query_found">V síti nebyl nalezen žádný Databázový požadavek.</string>
+  <string name="warn_pocket_query_select">Nevybrána žádná Pocket Query.</string>
+  <string name="warn_no_pocket_query_found">Na webu nebyla nalezena žádná Pocket Query.</string>
   <string name="err_read_pocket_query_list">Chyba čtení seznamu databázových požadavků.</string>
   <string name="info_log_posted">Log byl úspěšně odeslán.</string>
   <string name="info_log_saved">Log byl úspěšně uložen.</string>
@@ -266,7 +266,7 @@
   <string name="menu_history">Historie</string>
   <string name="menu_filter">Filtr</string>
   <string name="menu_scan_geo">Naskenovat geokód</string>
-  <string name="menu_pocket_queries">Databázové požadavky</string>
+  <string name="menu_pocket_queries">Pocket Queries</string>
   <string name="menu_scan_description">C:geo může skenovat geokódy, které jsou vytištěné jako QR kód. K tomu nezbytná aplikace však není nainstalována. Chceš přejít na Google Play a nainstalovat ji?</string>
   <!-- main screen -->
   <string name="live_map_button">Aktivní mapa</string>
@@ -506,7 +506,7 @@
   <string name="init_signature_template_url">URL adresa</string>
   <string name="init_signature_template_log">Text logu</string>
   <string name="init_ratingwanted">Načítat hodnocení</string>
-  <string name="init_summary_ratingwanted">Načítat hodnocení keší z GCvote.com</string>
+  <string name="init_summary_ratingwanted">Načítat hodnocení keší z GCVote.com</string>
   <string name="init_friends_and_own_logs_wanted">Zobrazovat mé logy a logy přátel</string>
   <string name="init_summary_friends_and_own_logs_wanted">Zobrazovat další logbook s mými logy a logy přátel</string>
   <string name="init_openlastdetailspage">Otevřít poslední stránku</string>
@@ -582,11 +582,8 @@
   <string name="init_default_navigation_tool_2_description">Zde můžeš vybrat druhý preferovaný navigační nástroj. Ten se aktivuje dlouhým klepnutím na navigační ikonu vedle názvu keše.</string>
   <string name="init_navigation_menu_description">Zde můžeš zvolit, které z dostupných metod navigace budou zobrazovány v navigačním menu keše nebo bodu trasy. Nedostupné nástroje nejsou na tomto zařízení nainstalovány.</string>
   <string name="init_debug_title">Ladící informace</string>
-  <string name="init_debug_note">c:geo může generovat mnoho ladících informací. Aktivace této volby může negativně ovlivnit stabilitu aplikace, proto je doporučena pouze v případě, že si vývojáři vyžádají zaslání protokolu.</string>
   <string name="init_debug">Aktivovat ladící protokolování</string>
   <string name="init_dbonsdcard_title">Umístění databáze</string>
-  <string name="init_dbonsdcard_note">Databáze c:geo může být umístěna na SD kartě. Ušetříš tím část interní paměti, avšak za cenu případného snížení rychlosti aplikace. Bez SD karty aplikace nebude následně fungovat.</string>
-  <string name="init_dbonsdcard">Databáze na SD kartě</string>
   <string name="init_dbmove_dbmove">Přesun databáze</string>
   <string name="init_dbmove_running">Přesouvání databáze</string>
   <string name="init_dbmove_success">Databáze úspěšně přesunuta.</string>
@@ -1037,9 +1034,9 @@
   <string name="search_address_started">Vyhledávání míst</string>
   <string name="search_address_result">Nalezená místa</string>
   <string name="search_own_caches">Hledat moje keše</string>
-  <string name="search_pocket_title">Databázový požadavek</string>
-  <string name="search_pocket_loading">Načítání seznamu Databázových požadavků</string>
-  <string name="search_pocket_select">Zvol Databázový požadavek</string>
+  <string name="search_pocket_title">Pocket Query</string>
+  <string name="search_pocket_loading">Načítání seznamu Pocket Queries</string>
+  <string name="search_pocket_select">Zvol Pocket Query</string>
   <!-- trackable -->
   <string name="trackable">Sledovatelný předmět</string>
   <string name="trackable_details_loading">Načítání detailů…</string>
@@ -1443,14 +1440,6 @@
   <string name="cgeo_shortcut">c:geo zástupce</string>
   <string name="create_shortcut">Vytvořit zástupce</string>
   <string name="send">Odeslat</string>
-  <string name="showcase_logcache_title">Odesílání logu</string>
-  <string name="showcase_logcache_text">Pamatuj, mnoho příkazů je teď umístěno v záhlaví. Zde také najdeš tlačítko pro odeslání hotových logů.</string>
-  <string name="showcase_main_title">Nabídková lišta</string>
-  <string name="showcase_main_text">Některé funkce c:gea jsou dostupné z nabídkové lišty a nebo se nachází skryty v menu za třemi tečkami. Dlouhým stiskem tlačítka lze zobrazit jeho popis.</string>
-  <string name="showcase_cachelist_title">Přepínání seznamů</string>
-  <string name="showcase_cachelist_text">Mezi seznamy s keškami můžeš přepínat klepnutím na název seznamu.</string>
-  <string name="showcase_compass_hint_title">Zobrazit nápovědu</string>
-  <string name="showcase_compass_hint_text">Tato položka ti může poradit, kde kešku hledat – zobrazuje nápovědu, pokud je k dispozici.</string>
   <string name="confirm_log_title">Neobvyklý typ logu</string>
   <string name="confirm_log_message">Opravdu chceš zalogovat „%s“?</string>
   <!-- Geokrety -->
@@ -1501,9 +1490,9 @@
   <string name="unit_yd">yd</string>
   <string name="unit_mi">mil</string>
   <string name="pq_available_for_download">Pocket query ke stažení</string>
-  <string name="pq_available_for_download_description">Tento databázový požadavek je dostupný pro stažení jako jeden soubor (GPX). Chceš jej stáhnout a importovat nebo zobrazit keše jako seznam?</string>
+  <string name="pq_available_for_download_description">Tato Pocket Query je dostupná pro stažení jako jeden soubor (GPX). Chceš jej stáhnout a importovat nebo zobrazit keše jako seznam?</string>
   <string name="pq_as_cache_list">Zobrazit seznam keší</string>
-  <string name="pq_download_and_import">Importovat databázový požadavek</string>
+  <string name="pq_download_and_import">Importovat Pocket Query</string>
   <string name="pq_my_finds">Moje nálezy</string>
   <string name="caches_refresh_all_warning">Tato akce může vést k vysokému zatížení sítě. Opravdu chceš provést hromadnou aktualizaci všech keší?</string>
   <string name="invitation_action">Pozvat přátele</string>
@@ -1517,4 +1506,5 @@
     <item quantity="few">%d body trasy extrahovány</item>
     <item quantity="other">%d bodů trasy extrahováno</item>
   </plurals>
+  <!-- calendar adder -->
 </resources>

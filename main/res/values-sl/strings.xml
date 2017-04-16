@@ -497,8 +497,6 @@
   <string name="init_debug_title">Informacije za razhroščevanje</string>
   <string name="init_debug">Poročilo za razhroščevanje</string>
   <string name="init_dbonsdcard_title">Lokacija podatkovne baze</string>
-  <string name="init_dbonsdcard_note">Podatkovno bazo aplikacije c:geo lahko shranite tudi na zunanji pomnilniški medij. S tem načinom lahko sprostite veliko internega pomnilnika, vendar lahko zaradi tega c:geo deluje počasneje, če pa SD kartice ne bo na voljo pa c:geo sploh ne bo deloval.</string>
-  <string name="init_dbonsdcard">Baza na zunanjem pomnilniku</string>
   <string name="init_dbmove_dbmove">Premikanje podatkovne baze</string>
   <string name="init_dbmove_running">Premikanje podatkovne baze</string>
   <string name="init_dbmove_success">Premikanje baze je uspelo.</string>
@@ -1241,10 +1239,6 @@
   <string name="cgeo_shortcut">Bližnjica c:geo</string>
   <string name="create_shortcut">Ustvari bližnjico</string>
   <string name="send">Pošlji</string>
-  <string name="showcase_logcache_title">Pošiljanje zapisa</string>
-  <string name="showcase_logcache_text">Ne pozabite! Veliko ukazov je sedaj v naslovni vrstici. Tam boste našli tudi gumb za pošiljanje zapisa.</string>
-  <string name="showcase_cachelist_title">Premikanje med seznami</string>
-  <string name="showcase_cachelist_text">S klikom na ime seznama lahko preklapljate med različnimi seznami zakladov.</string>
   <string name="confirm_log_title">Nenavaden zapis</string>
   <string name="confirm_log_message">Poslali boste zapis \'%s\'. Ali ste prepričani?</string>
   <!-- Geokrety -->
@@ -1252,4 +1246,5 @@
   <string name="init_geokrety">GeoKrety.org</string>
   <string name="init_summary_geokrety_account">Ni nastavljenih uporabniških računov.</string>
   <!-- distance units -->
+  <!-- calendar adder -->
 </resources>

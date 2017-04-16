@@ -417,6 +417,13 @@
   <string name="settings_title_map_data">Kartendaten</string>
   <string name="settings_title_map_content">Karteninhalt</string>
   <string name="settings_title_gpx">GPX</string>
+  <string name="settings_title_data_dir">Geocache-Datenverzeichnis</string>
+  <string name="settings_title_data_dir_usage">Geocache-Datenverzeichnis (%1$s genutzt)</string>
+  <string name="calculate_dataDir_title">Geocache-Datennutzung</string>
+  <string name="calculate_dataDir">Berechne Speicherbedarf für Geocache-Daten</string>
+  <string name="settings_data_dir_item">%1$s (%2$s frei)</string>
+  <string name="confirm_data_dir_move_title">Geocache-Datenverzeichnis verschieben?</string>
+  <string name="confirm_data_dir_move">Das Verschieben der Geocache-Daten könnte eine sehr lange Zeit dauern, abhängig von Ihrem Gerät und der Datenmenge.</string>
   <string name="settings_title_basicmembers">Optionen für Basis-Mitglieder</string>
   <string name="settings_title_navigation">Navigation</string>
   <string name="settings_summary_navigation">Wähle die Standardnavigation und externe Navigations-Apps.</string>
@@ -563,6 +570,8 @@
   <string name="init_map_directory_description">Verzeichnis mit Offline-Karten</string>
   <string name="init_gpx_exportdir">Verzeichnis für GPX-Exporte</string>
   <string name="init_gpx_importdir">Verzeichnis für GPX-Importe</string>
+  <string name="init_dataDir">Geocache-Datenverzeichnis auswählen</string>
+  <string name="init_dataDir_note">Sie können den Ablageort für die zusätzlichen Daten für Geocaches (z. B. Spoiler- und Logbilder) auf Ihrem externen Speicher (emulierte oder echte SD-Karte, gerätespezifisch) wählen.</string>
   <string name="init_maptrail">Zeige Spur</string>
   <string name="init_summary_maptrail">Zeige Spur auf Karte</string>
   <string name="init_share_after_export">Weiterleiten nach dem Export</string>
@@ -579,15 +588,19 @@
   <string name="init_default_navigation_tool_2_description">Hier kann das zweite bevorzugte Navigationswerkzeug festgelegt werden. Es ist durch langen Klick auf das Navigationssymbol in der Titelzeile eines Caches erreichbar.</string>
   <string name="init_navigation_menu_description">Hier kann ausgewählt werden, welche der verfügbaren Navigationswerkzeuge im Navigationsmenü für einen Cache oder Wegpunkt angezeigt werden. Nicht auswählbare Optionen sind auf diesem Gerät nicht installiert.</string>
   <string name="init_debug_title">Fehlersuche</string>
-  <string name="init_debug_note">Erlaubt c:geo Debug-Informationen zu generieren. Das Aktivieren der Einstellung kann sich negativ auf die Stabilität von c:geo auswirken und wird nur empfohlen, wenn du von den Entwicklern dazu aufgefordert werden.</string>
+  <string name="init_debug_note">c:geo kann viele Debug-Informationen generieren. Das Aktivieren dieser Einstellung wird die Stabilität von c:geo beeinträchtigen und wird nur empfohlen, um den Entwicklern eine Logdatei zu senden. Bitte Debug-Logging bei der normalen Nutzung von c:geo immer abgeschaltet lassen!</string>
   <string name="init_debug">Debug-Log aktivieren</string>
   <string name="init_dbonsdcard_title">Datenspeicherung</string>
-  <string name="init_dbonsdcard_note">Die Datenbank von c:geo kann auf eine externe Speicherkarte verschoben werden. Hiermit kann interner Speicher gespart werden, allerdings wird sich die Leistung etwas reduzieren und c:geo funktioniert nicht mehr ohne verfügbare Speicherkarte.</string>
-  <string name="init_dbonsdcard">Auf externe Karte</string>
+  <string name="init_dbonsdcard_note">Sie können die Datenbank von c:geo entweder systemintern oder in einem benutzerdefiniertem Verzeichnis speichern. Je nach Konfiguration des Gerätes kann die Speicherung im Benutzerbereich internen Speicherplatz freigeben, aber Sie verlieren etwas Leistung und c:geo wird nicht funktionieren, wenn der Benutzerspeicher nicht verfügbar ist oder die Datenbank-Datei gelöscht wird.</string>
+  <string name="init_dbonsdcard">Im Benutzerspeicher</string>
   <string name="init_dbmove_dbmove">Verschiebe Datenbank</string>
   <string name="init_dbmove_running">Verschiebe Datenbank</string>
   <string name="init_dbmove_success">Die Datenbank wurde erfolgreich verschoben.</string>
   <string name="init_dbmove_failed">Fehler beim Verschieben der Datenbank.</string>
+  <string name="init_datadirmove_datadirmove">Verschiebe Geocache-Datenverzeichnis</string>
+  <string name="init_datadirmove_running">Verschiebe Geocache-Datenverzeichnis</string>
+  <string name="init_datadirmove_success">Geocache-Datenverzeichnis erfolgreich verschoben.</string>
+  <string name="init_datadirmove_failed">Das Verschieben des Geocache-Datenverzeichnisses ist teilweise oder komplett fehlgeschlagen. Bitte prüfen Sie die alten und neuen Verzeichnisse und verschieben Sie die Daten ggf. manuell.</string>
   <string name="init_plain_logs">Logs ohne Farben</string>
   <string name="init_summary_plain_logs">Logeinträge ohne Farben anzeigen</string>
   <string name="init_use_native_ua">Android-Browser</string>
@@ -1428,14 +1441,6 @@
   <string name="cgeo_shortcut">c:geo Shortcut</string>
   <string name="create_shortcut">Shortcut erstellen</string>
   <string name="send">Senden</string>
-  <string name="showcase_logcache_title">Log senden</string>
-  <string name="showcase_logcache_text">Denk daran, viele Optionen findest du jetzt in der Titelzeile. Dort findest du auch die Schaltfläche zum Senden des Logs.</string>
-  <string name="showcase_main_title">Menüleiste</string>
-  <string name="showcase_main_text">Einige Funktionen von c:geo sind in der Menüleiste oder im Menü hinter den Symbol mit den Punkten verfügbar. Durch langes Drücken auf einen Eintrag wird eine Beschreibung angezeigt.</string>
-  <string name="showcase_cachelist_title">Liste wechseln</string>
-  <string name="showcase_cachelist_text">Du kannst zwischen deinen Listen wechseln, indem du auf den Titel der Liste klickst.</string>
-  <string name="showcase_compass_hint_title">Zeige den Hint</string>
-  <string name="showcase_compass_hint_text">Diese Option könnte dir helfen den Cache zu finden - sie zeigt den Hint an, wenn es einen gibt.</string>
   <string name="confirm_log_title">Ungewöhnlicher Log-Typ</string>
   <string name="confirm_log_message">Du möchtest „%s“ loggen. Bist du dir sicher?</string>
   <!-- Geokrety -->
@@ -1498,4 +1503,6 @@
     <item quantity="one">%d Wegpunkt extrahiert</item>
     <item quantity="other">%d Wegpunkte extrahiert</item>
   </plurals>
+  <!-- calendar adder -->
+  <string name="event_fail">Hinzufügen des Events zum Kalender fehlgeschlagen</string>
 </resources>

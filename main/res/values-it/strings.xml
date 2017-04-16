@@ -417,6 +417,13 @@
   <string name="settings_title_map_data">Dati mappa</string>
   <string name="settings_title_map_content">Contenuto Mappa</string>
   <string name="settings_title_gpx">GPX</string>
+  <string name="settings_title_data_dir">Directory dati geocache</string>
+  <string name="settings_title_data_dir_usage">Directory dati geocache (%1$s usati)</string>
+  <string name="calculate_dataDir_title">Dati Geocache usati</string>
+  <string name="calculate_dataDir">Calcola lo spazio disco usato dai Geocache</string>
+  <string name="settings_data_dir_item">%1$s (%2$s liberi)</string>
+  <string name="confirm_data_dir_move_title">Spostare la directory geocache?</string>
+  <string name="confirm_data_dir_move">Lo spostamento dei dati geocache potrebbe richiedere molto tempo, a seconda del dispositivo e la quantità di dati.</string>
   <string name="settings_title_basicmembers">Opzioni per i membri di base (non Premium)</string>
   <string name="settings_title_navigation">Navigazione</string>
   <string name="settings_summary_navigation">Sceglie il metodo di navigazione preferito e seleziona le app di navigazione esterna.</string>
@@ -450,7 +457,6 @@
   <string name="settings_activate_oc_pl">Attiva</string>
   <string name="init_summary_oc_pl">Carica cache da opencaching.pl</string>
   <string name="init_oc_pl_description">Autorizza c:geo a cercare cache ed accedere/filtrare i ritrovamenti su opencaching.pl.</string>
-  <string name="init_oc_nl">Opencaching.nl</string>
   <string name="settings_activate_oc_nl">Attiva</string>
   <string name="init_summary_oc_nl">Carica cache da opencaching.nl</string>
   <string name="init_oc_nl_description">Autorizza c:geo a cercare cache ed accedere/filtrare i ritrovamenti su opencaching.nl.</string>
@@ -561,6 +567,7 @@
   <string name="init_map_directory_description">Cartella con le mappe offline</string>
   <string name="init_gpx_exportdir">Cartella di export GPX</string>
   <string name="init_gpx_importdir">Cartella di import GPX</string>
+  <string name="init_dataDir">Seleziona la directory di dati Geocache</string>
   <string name="init_maptrail">Mostra scia</string>
   <string name="init_summary_maptrail">Mostra la scia nella mappa</string>
   <string name="init_share_after_export">Apri menu condivisione dopo export GPX</string>
@@ -577,15 +584,17 @@
   <string name="init_default_navigation_tool_2_description">Qui puoi scegliere il tuo secondo navigatore preferito. Sarà attivato tenendo premuto l\'icona di navigazione vicino al titolo del cache.</string>
   <string name="init_navigation_menu_description">Qui è possibile selezionare quale dei metodi disponibili di navigazione sarà visualizzato nel menu di navigazione per un cache o un waypoint. Gli strumenti non installati su questo dispositivo sono disabilitati.</string>
   <string name="init_debug_title">Informazioni di Debug</string>
-  <string name="init_debug_note">c:geo può generare molte informazioni di debug. Attivando questa impostazione può tuttavia pregiudicare la stabilità di c:geo ed è consigliata solo se vi viene chiesto di inviare un log da parte degli sviluppatori.</string>
+  <string name="init_debug_note">c:geo può generare molte informazioni di debug. Attivando questa impostazione pregiudica la stabilità di c:geo ed è consigliata solo se vi viene chiesto di inviare un log agli sviluppatori. Si prega di tenere la registrazione di debug disabilitata durante l\'uso normale di c:geo!</string>
   <string name="init_debug">Attiva informazioni di debug</string>
   <string name="init_dbonsdcard_title">Posizione Database</string>
-  <string name="init_dbonsdcard_note">Puoi decidere di salvare il database su memoria esterna. In questo caso risparmierai memoria interna ma potresti perdere un pochino di velocità e c:geo non funzionerà se la tua scheda SD non sarà disponibile.</string>
-  <string name="init_dbonsdcard">Su memoria esterna</string>
   <string name="init_dbmove_dbmove">Spostamento Database</string>
   <string name="init_dbmove_running">Spostamento Database</string>
   <string name="init_dbmove_success">Database spostato con successo.</string>
   <string name="init_dbmove_failed">Spostamento fallito</string>
+  <string name="init_datadirmove_datadirmove">Spostamento della directory dei dati Geocache</string>
+  <string name="init_datadirmove_running">Spostamento della directory dei dati Geocache</string>
+  <string name="init_datadirmove_success">Dati Geocache spostati con successo.</string>
+  <string name="init_datadirmove_failed">Lo spostamento dei dati Geocache è parzialmente o completamente fallito. Controlla la vecchia e la nuova directory e sposta manualmente se necessario.</string>
   <string name="init_plain_logs">LOG semplificati</string>
   <string name="init_summary_plain_logs">Visualizza i LOG senza colori</string>
   <string name="init_use_native_ua">Browser Android</string>
@@ -1421,14 +1430,6 @@
   <string name="cgeo_shortcut">collegamento a c:geo</string>
   <string name="create_shortcut">Crea collegamento</string>
   <string name="send">Invia</string>
-  <string name="showcase_logcache_title">Invio del Log</string>
-  <string name="showcase_logcache_text">Ricorda, molti comandi sono ora nella barra del titolo. Qui trovate il pulsante per l\'invio del log.</string>
-  <string name="showcase_main_title">Barra dei menu</string>
-  <string name="showcase_main_text">Alcune funzioni di c:geo sono accessibili nella barra dei menu o contenute nel menu dietro il simbolo punteggiato. Tenendo premuto il pulsante a lungo è possibile visualizzarne la descrizione.</string>
-  <string name="showcase_cachelist_title">Cambio di liste</string>
-  <string name="showcase_cachelist_text">Puoi cambiare la lista attiva cliccando sul titolo.</string>
-  <string name="showcase_compass_hint_title">Visualizza l\'hint</string>
-  <string name="showcase_compass_hint_text">Questa funzione di menu potrebbe darti un\'idea dove trovare il cache - mostrandoti un suggerimento, se è disponibile.</string>
   <string name="confirm_log_title">Tipo di Log non usuale</string>
   <string name="confirm_log_message">Si desidera registrare \'%s\'. Sei sicuro?</string>
   <!-- Geokrety -->
@@ -1491,4 +1492,6 @@
     <item quantity="one">%d waypoint estratto</item>
     <item quantity="other">%d waypoint estratti</item>
   </plurals>
+  <!-- calendar adder -->
+  <string name="event_fail">Impossibile aggiungere l\'evento al calendario</string>
 </resources>

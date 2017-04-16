@@ -417,6 +417,13 @@
   <string name="settings_title_map_data">Kartdata</string>
   <string name="settings_title_map_content">Kartinnehåll</string>
   <string name="settings_title_gpx">GPX</string>
+  <string name="settings_title_data_dir">Katalog för geocache-data</string>
+  <string name="settings_title_data_dir_usage">Katalog för geocache-data (%1$s används)</string>
+  <string name="calculate_dataDir_title">Användning av geocache-data katalog</string>
+  <string name="calculate_dataDir">Beräknar användning i katalog för Geocache data</string>
+  <string name="settings_data_dir_item">%1$s (%2$s ledigt)</string>
+  <string name="confirm_data_dir_move_title">Flytta geocache-datakatalog?</string>
+  <string name="confirm_data_dir_move">Att flytta katalogen för geocache-data kan, beroende på din enhet och mängden data, ta riktigt lång tid.</string>
   <string name="settings_title_basicmembers">Inställningar för Basic Members</string>
   <string name="settings_title_navigation">Navigering</string>
   <string name="settings_summary_navigation">Välj standardmetoder för navigering och välj externa navigationsappar.</string>
@@ -563,6 +570,7 @@
   <string name="init_map_directory_description">Katalog med offline-kartor</string>
   <string name="init_gpx_exportdir">GPX-exportkatalog</string>
   <string name="init_gpx_importdir">GPX-importkatalog</string>
+  <string name="init_dataDir">Välj katalog för geocache-data</string>
   <string name="init_maptrail">Spår på kartan</string>
   <string name="init_summary_maptrail">Visa spår på kartan</string>
   <string name="init_share_after_export">Visa meny för att dela efter slutförd exportering</string>
@@ -579,15 +587,16 @@
   <string name="init_default_navigation_tool_2_description">Här kan du välja ditt andra förvalda navigeringsprogram. Det kan aktiveras genom att klicka länge på navigationsikonen i listen överst i en cachebeskrivning.</string>
   <string name="init_navigation_menu_description">Här kan du välja program som ska visas navigeringsmenyn i en cache eller punkt. Program som är gråa är inte installerade på enheten.</string>
   <string name="init_debug_title">Debug information</string>
-  <string name="init_debug_note">c:geo kan generera en hel del felsökningsinformation. Att aktivera denna inställning kan dock påverka stabiliteten av c:geo och är endast rekommenderat om du är uppmanad att skicka en logg till utvecklarna.</string>
   <string name="init_debug">Generera debug info</string>
   <string name="init_dbonsdcard_title">Databasplacering</string>
-  <string name="init_dbonsdcard_note">Du kan placera c:geos databas på ditt minneskort. På detta sätt kan du spara internminne, men du kan också få något sämre prestanda och c:geo kommer inte fungera om ditt minneskort inte är tillgängligt (exempelvis när den är kopplad till en dator).</string>
-  <string name="init_dbonsdcard">På minneskort</string>
   <string name="init_dbmove_dbmove">Flyttar databasen</string>
   <string name="init_dbmove_running">Flyttar databasen</string>
   <string name="init_dbmove_success">Databasen har nu flyttats.</string>
   <string name="init_dbmove_failed">Misslyckades att flytta databasen</string>
+  <string name="init_datadirmove_datadirmove">Flyttar katalog för geocache-data</string>
+  <string name="init_datadirmove_running">Flyttar katalog för geocache-data</string>
+  <string name="init_datadirmove_success">Flyttade katalogen för geocache-data.</string>
+  <string name="init_datadirmove_failed">Förflyttningen av katalogen för geocache-data misslyckats helt eller delvis. Kontrollera gamla och nya kataloger och flytta för hand om det behövs.</string>
   <string name="init_plain_logs">Loggfärger</string>
   <string name="init_summary_plain_logs">Visa loggar utan färger</string>
   <string name="init_use_native_ua">Identifiering</string>
@@ -660,7 +669,7 @@
   <string name="auth_authorize">Koppla c:geo mot Twitter</string>
   <string name="auth_check">Kolla autentisering</string>
   <string name="auth_check_again">Kolla autentisering igen</string>
-  <string name="auth_start">Påbörja koppling mot Twitter</string>
+  <string name="auth_start">Kolla autentisering</string>
   <string name="auth_again">Koppla mot Twitter igen</string>
   <string name="auth_register">Skapa ett konto</string>
   <string name="auth_connected">Ansluten</string>
@@ -1428,14 +1437,6 @@
   <string name="cgeo_shortcut">c:geo genväg</string>
   <string name="create_shortcut">Skapa genväg</string>
   <string name="send">Skicka</string>
-  <string name="showcase_logcache_title">Skicka loggen</string>
-  <string name="showcase_logcache_text">Kom ihåg, många kommandon hittar du nu i titelraden. Där hittar du knappen för att skicka den avslutade loggen.</string>
-  <string name="showcase_main_title">Menyrad</string>
-  <string name="showcase_main_text">Vissa funktioner i c:geo är tillgängliga i menyraden eller i menyn bakom den prickiga symbolen. Du kan långtrycka på en knapp för att se dess beskrivning.</string>
-  <string name="showcase_cachelist_title">Byt listor</string>
-  <string name="showcase_cachelist_text">Du kan växla mellan dina geocachelistor genom att klicka på rubriken för listan.</string>
-  <string name="showcase_compass_hint_title">Visa ledtråd</string>
-  <string name="showcase_compass_hint_text">Det här menyalternativet kan ge dig en aning var du kan hitta cachen - det visar tipset, om något sådant finns.</string>
   <string name="confirm_log_title">Ovanlig loggtyp</string>
   <string name="confirm_log_message">Du vill logga \'%s\'. Är du säker?</string>
   <!-- Geokrety -->
@@ -1498,4 +1499,6 @@
     <item quantity="one">%d punkt har extraherats</item>
     <item quantity="other">%d punkter har extraherats</item>
   </plurals>
+  <!-- calendar adder -->
+  <string name="event_fail">Det gick inte att lägga till event cache i kalender</string>
 </resources>

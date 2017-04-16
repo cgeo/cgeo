@@ -579,11 +579,8 @@
   <string name="init_default_navigation_tool_2_description">Aquí podeu seleccionar la segona eina de navegació preferida. Serà activada prement de manera continuada la icona de navegació al costat el nom del catxé.</string>
   <string name="init_navigation_menu_description">Aquí podeu seleccionar els mètodes de navegació disponibles que es mostraran en el menú de navegació d\'un catxé o fita. Les eines desactivades no estan instal·lades en aquest dispositiu.</string>
   <string name="init_debug_title">Informació de depuració</string>
-  <string name="init_debug_note">El c:geo pot generar una gran quantitat d\'informació en la depuració. Activant aquesta opció pot afectar l\'estabilitat de c:geo i es recomana només si se us demana per enviar un registre als desenvolupadors.</string>
   <string name="init_debug">Activa el registre de depuració</string>
   <string name="init_dbonsdcard_title">Localització de la base de dades</string>
-  <string name="init_dbonsdcard_note">Podeu desar la base de dades de c:geo a una targeta de memòria externa. D\'aquesta manera estalviareu memòria interna, però podeu perdre una mica de rendiment i el c:geo no funcionarà si la vostra targeta SD no està disponible.</string>
-  <string name="init_dbonsdcard">A l\'emmagatzematge extern</string>
   <string name="init_dbmove_dbmove">S\'està movent la base de dades</string>
   <string name="init_dbmove_running">S\'està movent la base de dades</string>
   <string name="init_dbmove_success">S\'ha mogut la base de dades amb èxit.</string>
@@ -1426,14 +1423,6 @@
   <string name="cgeo_shortcut">Drecera del c:geo</string>
   <string name="create_shortcut">Crea una drecera</string>
   <string name="send">Envia</string>
-  <string name="showcase_logcache_title">Enviant el registre</string>
-  <string name="showcase_logcache_text">Recordeu, ara moltes comandes es troben a la barra de títol. Allà trobareu el botó per enviar el registre acabat.</string>
-  <string name="showcase_main_title">Barra de menú</string>
-  <string name="showcase_main_text">Algunes funcions del c:geo són accessibles a la barra del menú o apretant el símbol dels tres punts que desplega un menú ocult. Per conèixer la funcionalitat d\'un botó determinat, només cal apretar-lo durant uns segons.</string>
-  <string name="showcase_cachelist_title">Llista de canvis</string>
-  <string name="showcase_cachelist_text">Es pot canviar entre les diferents llistes fent un clic al nom de la llista actual.</string>
-  <string name="showcase_compass_hint_title">Mostrar la pista</string>
-  <string name="showcase_compass_hint_text">Aquest element del menú podria donar una idea d\'on trobar l\'amagatall - li mostrarà la pista, si n\'hi ha.</string>
   <string name="confirm_log_title">Tipus de registre poc habitual</string>
   <string name="confirm_log_message">Voleu registrar \'%s\'. N\'esteu segurs?</string>
   <!-- Geokrety -->
@@ -1496,4 +1485,6 @@
     <item quantity="one">%d punt de ruta extret</item>
     <item quantity="other">%d punts de ruta extrets</item>
   </plurals>
+  <!-- calendar adder -->
+  <string name="event_fail">S\'ha produït un error en afegir la trobada al calendari</string>
 </resources>

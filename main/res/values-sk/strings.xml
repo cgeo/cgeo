@@ -582,11 +582,8 @@
   <string name="init_default_navigation_tool_2_description">Môžete vybrať druhý preferovaný nástroj pre navigáciu. Spustíte ho dlhým stlačením ikony navigácie vedľa názvu skrýše.</string>
   <string name="init_navigation_menu_description">Tu môžete vybrať, ktoré z dostupných navigačných metód sa zobrazia v navigačnom menu pre skrýšu alebo bod trasy. Nástroje, ktoré nie sú nainštalované na tomto zariadení, nie je možné vybrať.</string>
   <string name="init_debug_title">Ladiace informácie</string>
-  <string name="init_debug_note">c:geo môže generovať mnoho ladiacich informácií. Aktivovanie tohto nastavenia môže negatívne ovplyvniť stabilitu aplikácie, preto sa odporúča iba v prípade, ak vás vývojár požiadal o zaslanie protokolu.</string>
   <string name="init_debug">Aktivovať denník ladenia</string>
   <string name="init_dbonsdcard_title">Umiestnenie databázy</string>
-  <string name="init_dbonsdcard_note">Databázu c:geo môžete umiestniť na externé úložisko. Ak to spravíte, ušetríte vnútornú pamäť, ale môžete stratiť časť z výkonu a c:geo nebude fungovať, keď vaša SD karta nebude dostupná.</string>
-  <string name="init_dbonsdcard">Na externom úložisku</string>
   <string name="init_dbmove_dbmove">Presúvanie databázy</string>
   <string name="init_dbmove_running">Prebieha presúvanie databázy</string>
   <string name="init_dbmove_success">Databáza bola úspešne presunutá.</string>
@@ -1444,14 +1441,6 @@
   <string name="cgeo_shortcut">c:Geo odkaz</string>
   <string name="create_shortcut">Vytvoriť odkaz</string>
   <string name="send">Odoslať</string>
-  <string name="showcase_logcache_title">Odosielam log</string>
-  <string name="showcase_logcache_text">Pamätaj, že mnohé príkazy sú teraz v záhlaví. Tam nájdeš tlačidlo pre odoslanie hotového logu.</string>
-  <string name="showcase_main_title">Panel s ponukami</string>
-  <string name="showcase_main_text">Niektoré z funkcií c:geo sú prístupné v paneli s ponukami alebo v menu za troma bodkami. Dlhým podržaním tlačidla je možné zobraziť jeho popis.</string>
-  <string name="showcase_cachelist_title">Prepínanie zoznamov</string>
-  <string name="showcase_cachelist_text">Môžete prepínať medzi svojimi zoznamami skrýš kliknutím na názov zoznamu.</string>
-  <string name="showcase_compass_hint_title">Zobraziť nápovedu</string>
-  <string name="showcase_compass_hint_text">Táto položka ti môže pomôcť pri hľadaní skrýše - ukazuje nápovedu, ak je dostupná.</string>
   <string name="confirm_log_title">Nezvyčajný typ logu</string>
   <string name="confirm_log_message">Chceš zalogovať \'%s\'. Určite?</string>
   <!-- Geokrety -->
@@ -1518,4 +1507,6 @@
     <item quantity="few">Boli extrahované %d body trasy</item>
     <item quantity="other">Bolo extrahovaných %d bodov trasy</item>
   </plurals>
+  <!-- calendar adder -->
+  <string name="event_fail">Nepodarilo sa pridať Event cache do kalendára</string>
 </resources>

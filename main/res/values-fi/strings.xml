@@ -569,15 +569,14 @@
   <string name="init_default_navigation_tool_2_description">Tästä voi valita toissijaisen navigointitavan. Aktivoidaksesi sen paina navigointi-ikonia kätkön nimen vieressä pitkään.</string>
   <string name="init_navigation_menu_description">Tästä voit valita mitkä käytettävissä olevista navigointitavoista näytetään kätkön/reittipisteen navigointivalikossa. Valitsemattomia ei tulla asentamaan laitteeseesi.</string>
   <string name="init_debug_title">Virheenjäljitystiedot</string>
-  <string name="init_debug_note">c:geo voi tuottaa runsaasti vianmääritystietoja. Tämän asetuksen aktivointi voi vaikuttaa c:geon vakauteen ja se on suositeltavaa tehdä ainoastaan mikäli sinua on pyydetty lähettämään loki kehittäjille.</string>
+  <string name="init_debug_note">c:geo voi tuottaa runsaasti vianmääritystietoja. Tämän asetuksen aktivointi voi vaikuttaa c:geon vakauteen ja se on suositeltavaa tehdä ainoastaan mikäli sinua on pyydetty lähetämään loki kehittäjille. Pidä vianjäljitysloki pois päältä c:geon normaalin käytön aikana!</string>
   <string name="init_debug">Aktivoi vianjäljitysloki</string>
   <string name="init_dbonsdcard_title">Tietokannan sijainti</string>
-  <string name="init_dbonsdcard_note">Voit tallentaa c:geon tiedot myös ulkoiselle muistille. Tämä säästää sisäisen muistin käyttöä, mutta saattaa hieman heikentää suorituskykyä. Lisäksi c:geo ei toimi, jos ulkoinen muisti ei ole saatavilla.</string>
-  <string name="init_dbonsdcard">Ulkoisessa muistissa</string>
   <string name="init_dbmove_dbmove">Siirretään tietoja</string>
   <string name="init_dbmove_running">Siirretään tietoja</string>
   <string name="init_dbmove_success">Tiedot siirretty onnistuneesti.</string>
   <string name="init_dbmove_failed">Tietojen siirto epäonnistui</string>
+  <string name="init_datadirmove_running">Siirretään kätködataa toiseen kansioon</string>
   <string name="init_plain_logs">Yksinkertaiset lokit</string>
   <string name="init_summary_plain_logs">Näytä loki ilman värejä</string>
   <string name="init_use_native_ua">Android-selain</string>
@@ -783,7 +782,7 @@
   <string name="cache_menu_navigation_drive_select_target">Kätkö vai pysäköintialue?</string>
   <string name="cache_menu_navigation_walk">Navigointi (kävely)</string>
   <string name="cache_menu_navigation_transit">Navigointi (liikenteessä)</string>
-  <string name="cache_menu_navigation_bike">Navigointi (Pyöräily)</string>
+  <string name="cache_menu_navigation_bike">Navigointi (pyöräily)</string>
   <string name="cache_menu_maps_directions">Google Maps ajo-ohjeet</string>
   <string name="cache_menu_osmand">OsmAnd</string>
   <string name="cache_menu_sygic_walk">Sygic (kävellessä)</string>
@@ -1403,14 +1402,6 @@
   <string name="cgeo_shortcut">c:geo pikakuvake</string>
   <string name="create_shortcut">Luo pikakuvake</string>
   <string name="send">Lähetä</string>
-  <string name="showcase_logcache_title">Lähetetään lokia</string>
-  <string name="showcase_logcache_text">Muista, useat toiminnot ovat nyt otsikkopalkissa. Sieltä löydät napin valmiin lokin lähettämiseen.</string>
-  <string name="showcase_main_title">Valikkorivi</string>
-  <string name="showcase_main_text">Jotkin c:geon toiminnot ovat saavutettavissa valikkorivillä tai sisällytetty pistekuvakkeen kautta päästävään valikkoon. Saat kuvauksen painamalla painiketta pitkään.</string>
-  <string name="showcase_cachelist_title">Luetteloiden valitseminen</string>
-  <string name="showcase_cachelist_text">Voit siirtyä geokätköluettelosta toiseen klikkaamalla luettelon nimeä.</string>
-  <string name="showcase_compass_hint_title">Näytä vihje</string>
-  <string name="showcase_compass_hint_text">Tämä valikkokohde saattaa antaa käsityksen mistä kätkö löytyy - se näyttää vihjeen, jos saatavilla.</string>
   <string name="confirm_log_title">Epätavallinen lokityyppi</string>
   <string name="confirm_log_message">Haluat lokata \'%s\'. Oletko varma?</string>
   <!-- Geokrety -->
@@ -1430,7 +1421,7 @@
   <string name="do_not_ask_me_again">Älä kysy uudelleen</string>
   <string name="geokrety_parsing_failed">GeoKretyn vastauksen jäsentäminen epäonnistui.</string>
   <string name="settings_map_direction">Näytä suunta</string>
-  <string name="settings_summary_map_direction">Näytä suuntaviiva navigointikohteelle</string>
+  <string name="settings_summary_map_direction">Näytä suuntaviiva navigointi kohteelle</string>
   <string name="map_direction">Näytä suunta</string>
   <string name="command_move_caches_progress">Siirretään kätköjä luetteloon %1s</string>
   <plurals name="command_move_caches_result">
@@ -1473,4 +1464,6 @@
     <item quantity="one">%d reittipiste purettu</item>
     <item quantity="other">%d reittipistettä purettu</item>
   </plurals>
+  <!-- calendar adder -->
+  <string name="event_fail">Tapahtumakätkön lisääminen kalenteriin epäonnistui</string>
 </resources>

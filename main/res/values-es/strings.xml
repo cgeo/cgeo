@@ -417,6 +417,8 @@
   <string name="settings_title_map_data">Datos del mapa</string>
   <string name="settings_title_map_content">Contenido del mapa</string>
   <string name="settings_title_gpx">GPX</string>
+  <string name="settings_title_data_dir">Directorio de datos de los cachés</string>
+  <string name="settings_title_data_dir_usage">Directorio de datos de los cachés (%1$s usado)</string>
   <string name="settings_title_basicmembers">Opciones para miembros básicos</string>
   <string name="settings_title_navigation">Navegación</string>
   <string name="settings_summary_navigation">Elige tus métodos de navegación preferidos y apps de navegación externas.</string>
@@ -573,11 +575,8 @@
   <string name="init_default_navigation_tool_2_description">Aquí puedes seleccionar tu segunda herramienta de navegación. Actívala presionando unos segundos el icono de navegación al lado del título del caché.</string>
   <string name="init_navigation_menu_description">Aquí puedes seleccionar qué métodos de navegación de los disponibles serán mostrados en el menú de navegación de un caché o waypoint. Las herramientas deshabilitadas no están instaladas en este dispositivo.</string>
   <string name="init_debug_title">Información de depuración</string>
-  <string name="init_debug_note">c:geo puede generar una gran cantidad de información de depuración. Sin embargo, activar este ajuste puede afectar a la estabilidad de c:geo, y sólo se recomienda si te piden que envíes un registro para los desarrolladores.</string>
   <string name="init_debug">Activar el registro de depuración</string>
   <string name="init_dbonsdcard_title">Ubicación de la base de datos</string>
-  <string name="init_dbonsdcard_note">Puedes almacenar la base de datos de c:geo en tu tarjeta de memoria externa. Haciendo esto ahorras espacio en tu memoria interna, pero puedes perder algo de rendimiento de la aplicación, y ésta no funcionará si la tarjeta SD no está disponible.</string>
-  <string name="init_dbonsdcard">En memoria externa</string>
   <string name="init_dbmove_dbmove">Moviendo base de datos</string>
   <string name="init_dbmove_running">Moviendo base de datos</string>
   <string name="init_dbmove_success">Base de datos movida con éxito.</string>
@@ -1415,14 +1414,6 @@ Nombre de archivo:%2$s</string>
   <string name="cgeo_shortcut">Atajo de c:geo</string>
   <string name="create_shortcut">Crear atajo</string>
   <string name="send">Enviar</string>
-  <string name="showcase_logcache_title">Enviando el registro</string>
-  <string name="showcase_logcache_text">Recuerda, muchos de los comandos están ahora en la barra de título. Allí encontrarás el botón para enviar el registro terminado.</string>
-  <string name="showcase_main_title">Barra de menú</string>
-  <string name="showcase_main_text">Algunas funciones de c:geo son accesibles desde la barra de menú o pulsando el símbolo de tres puntos. Si mantienes apretado un botón aparecerá su descripción.</string>
-  <string name="showcase_cachelist_title">Cambio entre listas</string>
-  <string name="showcase_cachelist_text">Puedes cambiar entre tus listas de cachés haciendo clic sobre el nombre de la lista.</string>
-  <string name="showcase_compass_hint_title">Mostrar la pista</string>
-  <string name="showcase_compass_hint_text">Este elemento del menú puede darte una idea de dónde encontrar el caché - muestra la pista, si está disponible.</string>
   <string name="confirm_log_title">Tipo de registro inusual</string>
   <string name="confirm_log_message">Vas a registrar \'%s\'. ¿Estás seguro?</string>
   <!-- Geokrety -->
@@ -1485,4 +1476,6 @@ Nombre de archivo:%2$s</string>
     <item quantity="one">%d waypoint extraído</item>
     <item quantity="other">%d waypoints extraídos</item>
   </plurals>
+  <!-- calendar adder -->
+  <string name="event_fail">Error al añadir el evento al calendario</string>
 </resources>

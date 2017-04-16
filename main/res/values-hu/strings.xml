@@ -417,6 +417,13 @@
   <string name="settings_title_map_data">Térképek beállításai</string>
   <string name="settings_title_map_content">Térképek részletessége</string>
   <string name="settings_title_gpx">GPX</string>
+  <string name="settings_title_data_dir">Ládaadat mappa</string>
+  <string name="settings_title_data_dir_usage">Ládaadat mappa (%1$s adat)</string>
+  <string name="calculate_dataDir_title">Ládaadatok keresése</string>
+  <string name="calculate_dataDir">Ládaadatok méretének összegzése</string>
+  <string name="settings_data_dir_item">%1$s (%2$s szabad)</string>
+  <string name="confirm_data_dir_move_title">Ládaadat mappa beállítása</string>
+  <string name="confirm_data_dir_move">A ládaadatok mozgatása hosszú ideig is eltarthat az adatok mennyiségétől és az eszközödtől függően.</string>
   <string name="settings_title_basicmembers">Normál tagok beállításai</string>
   <string name="settings_title_navigation">Navigáció</string>
   <string name="settings_summary_navigation">Preferált navigációs eszközök és külső navigációs programok kiválasztása</string>
@@ -563,6 +570,7 @@
   <string name="init_map_directory_description">Offline térképek mappája</string>
   <string name="init_gpx_exportdir">GPX export mappa</string>
   <string name="init_gpx_importdir">GPX import mappa</string>
+  <string name="init_dataDir">Ládaadat mappa beállítása</string>
   <string name="init_maptrail">A nyomvonal mutatása a térképen</string>
   <string name="init_summary_maptrail">A nyomvonal mutatása a térképen</string>
   <string name="init_share_after_export">A megosztás menü megnyitása GPX exportálás után</string>
@@ -579,15 +587,17 @@
   <string name="init_default_navigation_tool_2_description">Itt választhatod ki a másodlagos navigációs eszközödet. A láda neve melletti navigációs ikon hosszabb megnyomásával aktiválhatod.</string>
   <string name="init_navigation_menu_description">Itt adhatod meg, hogy mely navigációs lehetőségek jelenjenek meg egy láda vagy útpont számára a navigációs menüben. A letiltott alkalmazások nincsenek telepítve.</string>
   <string name="init_debug_title">Hibakeresési információ</string>
-  <string name="init_debug_note">A c:geo nagy mennyiségű hibakeresési információt képes generálni. Ennek bekapcsolása azonban hatással lehet a c:geo stabil működésére. Ez csak akkor ajánlott, ha a fejlesztők logok küldését kérték.</string>
+  <string name="init_debug_note">A c:geo nagy mennyiségű hibakeresési információt képes generálni, de ennek bekapcsolása hatással lehet a stabil működésére. Ez csak akkor ajánlott, ha a fejlesztők logok küldését kérték. Kérjük, tartsd kikapcsolt állapotban a normal használat során!</string>
   <string name="init_debug">Hibakeresési napló aktiválása</string>
   <string name="init_dbonsdcard_title">Adatbázis helye</string>
-  <string name="init_dbonsdcard_note">Az adatbázist elmentheted a külső tárolódra is. Ezzel belső memóriát takaríthatsz meg, de csökkenhet a teljesítmény és a c:geo nem fog működni, ha az SD kártyád nem hozzáférhető.</string>
-  <string name="init_dbonsdcard">Külső tárolón</string>
   <string name="init_dbmove_dbmove">Adatbázis mozgatása</string>
   <string name="init_dbmove_running">Adatbázis mozgatása</string>
   <string name="init_dbmove_success">Az adatbázis mozgatása sikeresen lezajlott</string>
   <string name="init_dbmove_failed">Az adatbázis mozgatása sikertelen</string>
+  <string name="init_datadirmove_datadirmove">Ládaadatok mozgatása</string>
+  <string name="init_datadirmove_running">Ládaadatok mozgatása</string>
+  <string name="init_datadirmove_success">A ládaadatok mozgatása sikeresen befejeződött.</string>
+  <string name="init_datadirmove_failed">A ládaadatok mozgatása részben vagy teljesen sikertelen. Kérjük, ellenőrizd a régi és az új mappákat és saját kezűleg fejezd be a műveletet!</string>
   <string name="init_plain_logs">Log bejegyzések mutatása színek nélkül</string>
   <string name="init_summary_plain_logs">Log bejegyzések mutatása színek nélkül</string>
   <string name="init_use_native_ua">Azonosítás Android böngészőként.</string>
@@ -976,16 +986,16 @@
   <!-- map -->
   <string name="map_map">Térkép</string>
   <string name="map_live">Élő térkép</string>
-  <string name="map_view_map">Térkép nézet</string>
+  <string name="map_view_map">Térképek</string>
   <string name="map_modes">Térképmódok</string>
-  <string name="map_trail_show">Ösvény mutatása</string>
-  <string name="map_circles_show">Körök mutatása</string>
-  <string name="map_mycaches_hide">Saját/megtalált ládák elrejtése</string>
-  <string name="map_disabled_hide">Letiltott ládák elrejtése</string>
+  <string name="map_trail_show">Ösvény be</string>
+  <string name="map_circles_show">Ládahatárok be</string>
+  <string name="map_mycaches_hide">Saját/megtalált ládák ki</string>
+  <string name="map_disabled_hide">Letiltott ládák ki</string>
   <string name="map_theme_builtin">Alapértelmezett</string>
   <string name="map_theme_select">Térképstílusok</string>
-  <string name="map_live_enable">Élő mód engedélyezése</string>
-  <string name="map_live_disable">Élő mód tiltása</string>
+  <string name="map_live_enable">Élő mód</string>
+  <string name="map_live_disable">Élő mód vége</string>
   <string name="map_static_title">Statikus térképek</string>
   <string name="map_static_loading">Statikus térképek betöltése…</string>
   <string name="map_token_err">Mivel a c:geo csak részleges adatokat tud letölteni, a ládák koordinátái pontatlanok lehetnek.</string>
@@ -1097,7 +1107,6 @@
   <string name="helper_sendtocgeo_description">A Send2cgeo egy böngészőbővítmény <strong>PC-re</strong>. A geocaching.com böngészése közben, egy kattintással tudsz ládákat küldeni a készülékedre.</string>
   <string name="helper_locus_title">Locus</string>
   <string name="helper_locus_description">Telefonon, tableten használható szabadtéri navigációs program. Offline térképek használata, útvonalkövetés, ládavadászat, hangos útikalauz, stb.</string>
-  <string name="helper_gpsstatus_title">GPS Status &amp; Toolbox</string>
   <string name="helper_gpsstatus_description">A programban található radart a c:geo-hoz is használhatod. Sok egyéb GPS-szel kapcsolatos információt is megmutat.</string>
   <string name="helper_bluetoothgps_title">Bluetooth GPS</string>
   <string name="helper_bluetoothgps_description">Ez a program külső GPS vevők használatát teszi lehetővé, amelyek segítségével jobb vételt és pontosabb koordinátákat kaphatsz. Külső GPS használatával a telefonod akkumulátora is tovább bírja.</string>
@@ -1429,14 +1438,6 @@
   <string name="cgeo_shortcut">c:geo parancsikon</string>
   <string name="create_shortcut">Parancsikon létrehozása</string>
   <string name="send">Küldés</string>
-  <string name="showcase_logcache_title">Log küldése</string>
-  <string name="showcase_logcache_text">Ne feledd, sok parancs található a címsorban. Ott találod a kész logot elküldő gombot is.</string>
-  <string name="showcase_main_title">Menüsor</string>
-  <string name="showcase_main_text">A c:geo néhány funkciója elindítható a menüsorból vagy a pontokkal jelölt menüből. A gombok hosszabb megnyomásakor megjelenik a leírásuk.</string>
-  <string name="showcase_cachelist_title">Listák váltása</string>
-  <string name="showcase_cachelist_text">Váltogathatsz a ládalistáid között a listák címére kattintva.</string>
-  <string name="showcase_compass_hint_title">Segítség mutatása</string>
-  <string name="showcase_compass_hint_text">Ez a menüelem ötletet adhat, hogy hol keresd a ládát - a segítséget is megmutatja, ha van.</string>
   <string name="confirm_log_title">Különleges logtípus</string>
   <string name="confirm_log_message">Logod a következő: \'%s\'. Biztosan ezt akarod?</string>
   <!-- Geokrety -->
@@ -1457,7 +1458,7 @@
   <string name="geokrety_parsing_failed">Nem sikerült értelmezni a GeoKrety választ.</string>
   <string name="settings_map_direction">Irány mutatása</string>
   <string name="settings_summary_map_direction">Navigációs cél irányvonalának megjelenítse</string>
-  <string name="map_direction">Irány mutatása</string>
+  <string name="map_direction">Irány be</string>
   <string name="command_move_caches_progress">Ládák áthelyezése a(z) %1s listára</string>
   <plurals name="command_move_caches_result">
     <item quantity="one">%d láda áthelyezve</item>
@@ -1499,4 +1500,6 @@
     <item quantity="one">%d kigyűjtött útpont</item>
     <item quantity="other">%d kigyűjtött útpont</item>
   </plurals>
+  <!-- calendar adder -->
+  <string name="event_fail">Az esemény hozzáadása a naptárhoz sikertelen.</string>
 </resources>

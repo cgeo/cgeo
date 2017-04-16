@@ -368,7 +368,7 @@
   <string name="list_menu_rename">Hernoem huidige lijst</string>
   <string name="list_menu_import">Importeer</string>
   <string name="list_title">Selecteer een lijst</string>
-  <string name="lists_title">Kies een lijst</string>
+  <string name="lists_title">Kies de lijsten</string>
   <string name="lists_remove_all">Geen</string>
   <string name="list_inbox">Opgeslagen</string>
   <string name="list_all_lists">Alle caches</string>
@@ -417,6 +417,13 @@
   <string name="settings_title_map_data">Kaartgegevens</string>
   <string name="settings_title_map_content">Kaartinhoud</string>
   <string name="settings_title_gpx">GPX</string>
+  <string name="settings_title_data_dir">Geocache gegevensmap</string>
+  <string name="settings_title_data_dir_usage">Geocache gegevensmap (%1$s in gebruik)</string>
+  <string name="calculate_dataDir_title">Geocache dataverbruik</string>
+  <string name="calculate_dataDir">Schijfgebruik van Geocache-gegevens berekenen</string>
+  <string name="settings_data_dir_item">%1$s (%2$s beschikbaar)</string>
+  <string name="confirm_data_dir_move_title">Geocache gegevensmap verplaatsen?</string>
+  <string name="confirm_data_dir_move">Het verplaatsen van de geocache-gegevens kan mogelijk erg lang duren, afhankelijk van uw apparaat en de hoeveelheid gegevens.</string>
   <string name="settings_title_basicmembers">Opties voor Basis leden</string>
   <string name="settings_title_navigation">Navigatie</string>
   <string name="settings_summary_navigation">Kies uw voorkeur voor navigatiemethoden en externe navigatie apps.</string>
@@ -563,6 +570,8 @@
   <string name="init_map_directory_description">Map met offline kaarten</string>
   <string name="init_gpx_exportdir">GPX Export map</string>
   <string name="init_gpx_importdir">GPX Import map</string>
+  <string name="init_dataDir">Selecteer Geocache gegevensmap</string>
+  <string name="init_dataDir_note">Je kunt de extra gegevens voor geocaches (spoilers, log afbeeldingen, ...) opslaan op je externe opslag (geëmuleerde of echte externe SD kaart afhankelijk van uw apparaat).</string>
   <string name="init_maptrail">Pad tonen</string>
   <string name="init_summary_maptrail">Laat pad op kaart zien</string>
   <string name="init_share_after_export">Open deel-menu na GPX export</string>
@@ -579,15 +588,19 @@
   <string name="init_default_navigation_tool_2_description">Hier kan je de tweede navigatie-tool van jouw voorkeur instellen. Je kan deze activeren door lang op de navigatie-icoon naast de titel van de cache te klikken.</string>
   <string name="init_navigation_menu_description">Here kun je selecteren welke beschikbare navigatie methodes getoond worden in het navigatie menu voor een cache of waypoint. Uitgeschakelde tools zijn niet geïnstalleerd op uw apparaat.</string>
   <string name="init_debug_title">Foutopsporings informatie</string>
-  <string name="init_debug_note">c:geo kan een heleboel debugging informatie genereren. Het activeren van deze instelling kan echter invloed hebben op de stabiliteit van c:geo en wordt alleen aanbevolen als je wordt gevraagd een logboek naar de ontwikkelaars sturen.</string>
+  <string name="init_debug_note">c:geo kan een heleboel debug informatie genereren. Het activeren van deze instelling is van invloed op de stabiliteit van c:geo en wordt alleen aanbevolen als je wordt gevraagd een logboek naar de ontwikkelaars te sturen. Houd de logboekregistratie voor foutopsporing uitgeschakeld tijdens normaal gebruik van c:geo!</string>
   <string name="init_debug">Activeer foutopsporings informatie</string>
   <string name="init_dbonsdcard_title">Database locatie</string>
-  <string name="init_dbonsdcard_note">Je kan de c:geo database op een externe locatie opslaan. Dit zal intern geheugen besparen maar kan de applicatie iets trager maken en c:geo zal niet werken als het externe medium (zoals een (micro-)SD-kaart) verwijderd is.</string>
-  <string name="init_dbonsdcard">Op externe locatie.</string>
+  <string name="init_dbonsdcard_note">Je kunt de database van c:geo intern of in een map op de gebruiker-opslag opslaan. De gebruiker-opslag scheelt intern geheugen maar kost performance en c:geo zal niet werken als de gebruiker-opslag niet toegankelijk is of u het databasebestand verwijdert.</string>
+  <string name="init_dbonsdcard">Op gebruiker-opslag</string>
   <string name="init_dbmove_dbmove">Verplaats database</string>
   <string name="init_dbmove_running">Verplaatsen database…</string>
   <string name="init_dbmove_success">Database succesvol verplaatst.</string>
   <string name="init_dbmove_failed">Database kon niet verplaatst worden.</string>
+  <string name="init_datadirmove_datadirmove">Verplaatsen Geocache gegevensmap</string>
+  <string name="init_datadirmove_running">Verplaatsen Geocache gegevensmap</string>
+  <string name="init_datadirmove_success">Geocache gegevensmap is succesvol verplaatst.</string>
+  <string name="init_datadirmove_failed">Verplaatsen van de Geocache-gegevensmap is deels of volledig mislukt. Controleer de oude en nieuwe mappen en verplaats met de hand indien nodig.</string>
   <string name="init_plain_logs">Logs zonder opmaak tonen</string>
   <string name="init_summary_plain_logs">Laat logs zien zonder kleuren.</string>
   <string name="init_use_native_ua">Identificeer als Android browser</string>
@@ -806,7 +819,7 @@
   <string name="cache_menu_sygic_drive">Sygic (rijden)</string>
   <string name="cache_menu_radar">Radar</string>
   <string name="cache_menu_map">Toon op kaart</string>
-  <string name="cache_menu_mfbeta">Mapsforge Bèta</string>
+  <string name="cache_menu_mfbeta">Mapsforge Beta</string>
   <string name="cache_menu_map_static">Statische kaarten</string>
   <string name="cache_menu_download_map_static">Download statische kaarten</string>
   <string name="cache_menu_rmaps">Rmaps</string>
@@ -1096,7 +1109,7 @@
   <string name="helper_sendtocgeo_description">Verzenden naar c:geo is een browserextensie <strong>voor uw PC</strong>. Tijdens het browsen op geocaching.com, kunt u caches verzenden naar uw smartphone met een klik direct in de browser.</string>
   <string name="helper_locus_title">Locus</string>
   <string name="helper_locus_description">Outdoor navigatie app voor uw telefoon of Tablet. Topo kaarten offline bekijken, uw route vastleggen, geocaches zoeken, gebruik een stem gids en meer.</string>
-  <string name="helper_gpsstatus_title">GPS Status &amp; Toolbox</string>
+  <string name="helper_gpsstatus_title">GPS-Status &amp; Toolbox</string>
   <string name="helper_gpsstatus_description">De radar van deze applicatie kan gebruikt worden samen met c:geo. Het bied ook vele andere GPS gerelateerde informatie.</string>
   <string name="helper_bluetoothgps_title">Bluetooth GPS</string>
   <string name="helper_bluetoothgps_description">Maakt het mogelijk om een externe GPS ontvanger te gebruiken voor betere ontvangst, betere locatiebepaling en kan gebruik van de telefoonbatterij verminderen.</string>
@@ -1428,14 +1441,6 @@
   <string name="cgeo_shortcut">c:geo snelkoppeling</string>
   <string name="create_shortcut">Maak snelkoppeling</string>
   <string name="send">Verzenden</string>
-  <string name="showcase_logcache_title">Verstuurt de log</string>
-  <string name="showcase_logcache_text">Onthoud, veel commando\'s zijn nu te vinden in de titelbalk. Daar is de knop te vinden voor het verzenden van de log.</string>
-  <string name="showcase_main_title">Menubalk</string>
-  <string name="showcase_main_text">Sommige functies van c:geo zijn toegankelijk in de menubalk of onderdeel van het menu achter het puntjes symbool. U kunt lang drukken op een knop om de omschrijving te zien.</string>
-  <string name="showcase_cachelist_title">Wisselen van lijst</string>
-  <string name="showcase_cachelist_text">Je kan wisselen tussen geocache lijsten door te klikken op de titel van de lijst.</string>
-  <string name="showcase_compass_hint_title">Toon hint</string>
-  <string name="showcase_compass_hint_text">Dit menu-item geeft je een idee waar de cache zich bevindt - het toont de hint, indien beschikbaar.</string>
   <string name="confirm_log_title">Ongebruikelijk logtype</string>
   <string name="confirm_log_message">Je wilt \'%s\' loggen. Weet je het zeker?</string>
   <!-- Geokrety -->
@@ -1498,4 +1503,6 @@
     <item quantity="one">%d waypoint geëxtraheerd</item>
     <item quantity="other">%d waypoints geëxtraheerd</item>
   </plurals>
+  <!-- calendar adder -->
+  <string name="event_fail">Niet gelukt om event cache toe te voegen aan kalender</string>
 </resources>

@@ -433,7 +433,6 @@
   <string name="settings_goto_url_button">vairāk…</string>
   <string name="settings_title_gc">Geocaching.com</string>
   <string name="settings_title_ec">Extremcaching.com</string>
-  <string name="settings_title_ox">Opencaching.com (Garmin)</string>
   <string name="settings_activate_gc">Aktivizēt</string>
   <string name="settings_activate_ec">Aktivizēt</string>
   <string name="settings_activate_ox">Aktivizēt</string>
@@ -576,11 +575,8 @@
   <string name="init_default_navigation_tool_2_description">Šeit var izvēlēties sekundāro navigācijas rīku. Aktivizē to ilgi turot nospiestu navigācijas ikonu blakus slēpņa nosaukumam.</string>
   <string name="init_navigation_menu_description">Šeit vari atlasīt, kuras pieejamās navigācijas metodes tiks parādītas navigācijas izvēlnē slēpnim vai Starpposmam. Neaktīvie rīki nav instalēti šajā ierīcē.</string>
   <string name="init_debug_title">Atkļūdošanas informācija</string>
-  <string name="init_debug_note">c:geo var radīt daudz atkļūdošanas informācijas. Šī iestatījuma aktivizēšana var ietekmēt c:geo stabilitāti un to darīt ir ieteicams tikai tad, ja ir lūgums no izstrādātājiem, lai azsūta tiem šo informāciju.</string>
   <string name="init_debug">Aktivizētu atkļūdošanas žurnālu</string>
   <string name="init_dbonsdcard_title">Datu bāzes atrašanās vieta</string>
-  <string name="init_dbonsdcard_note">c:geo datu bāze var tikt saglabāt ārējā glabāšanas vietā. Darot to, tas ļaus ietaupīt iekšējo atmiņu, bet tu vari mazliet zaudēt ātrdarbību un c:geo nedarbosies, ja SD karte nav pieejama.</string>
-  <string name="init_dbonsdcard">Ārējā glabāšanas vietā</string>
   <string name="init_dbmove_dbmove">Tiek pārvietota datu bāze</string>
   <string name="init_dbmove_running">Tiek pārvietota datu bāze</string>
   <string name="init_dbmove_success">Datu bāze ir veiksmīgi pārvietota.</string>
@@ -1054,6 +1050,7 @@
   <string name="user_menu_open_browser">Atvērt profilu pārlūkprogrammā</string>
   <string name="user_menu_send_message">Nosūtīt ziņu</string>
   <string name="user_menu_open_contact">Atvērt kontakta kartīti</string>
+  <string name="user_unknown">Nezināms lietotājs</string>
   <!-- navigation -->
   <string name="navigation">Navigācija</string>
   <string name="compass_title">Kompass</string>
@@ -1404,14 +1401,6 @@
   <string name="cgeo_shortcut">c:geo saīsne</string>
   <string name="create_shortcut">Izveidot saīsni</string>
   <string name="send">Nosūtīt</string>
-  <string name="showcase_logcache_title">Tiek sūtīts apmeklējuma pieraksts</string>
-  <string name="showcase_logcache_text">Atcerieties, ka daudzas komandas ir tagad redzams pogās virspusē. Tur jūs atradīsiet pogu apmeklējuma pieraksta nosūtīšanai.</string>
-  <string name="showcase_main_title">Izvēlnes josla</string>
-  <string name="showcase_main_text">Dažas funkcijas c:geo ir pieejamas izvēlņu joslā vai atrodas izvēlnē aiz punktotajiem simboliem. Vari paturēt nospiestu pogu, lai apskatītu tās aprakstu.</string>
-  <string name="showcase_cachelist_title">Saraksti pārslēdzas</string>
-  <string name="showcase_cachelist_text">Vari pārslēgties starp slēpņu sarakstiem, noklikšķinot uz saraksta nosaukuma.</string>
-  <string name="showcase_compass_hint_title">Rādīt mājienu</string>
-  <string name="showcase_compass_hint_text">Šis jaunais izvēlnes elements, iespējams, dos idejas, kur atrast slēpni - tiks parādīts mājiens, ja tas ir pieejams.</string>
   <string name="confirm_log_title">Neparasts pierakstīšanās tips</string>
   <string name="confirm_log_message">You want to log \'%s\'. Are you sure?</string>
   <!-- Geokrety -->
@@ -1473,4 +1462,5 @@
   <string name="cache_list_remove_from">Dzēst no saraksta</string>
   <string name="list_list_headline">Saraksti:</string>
   <string name="cache_store_list">Saglabāt sarakstā</string>
+  <!-- calendar adder -->
 </resources>

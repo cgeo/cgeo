@@ -417,6 +417,11 @@
   <string name="settings_title_map_data">Données cartographiques</string>
   <string name="settings_title_map_content">Contenu de la carte</string>
   <string name="settings_title_gpx">GPX</string>
+  <string name="settings_title_data_dir">Dossier de stockage des Geocaches</string>
+  <string name="calculate_dataDir_title">Espace utilisé par les Geocaches</string>
+  <string name="calculate_dataDir">Calcul de l\'espace utilisé pour les données des Geocaches</string>
+  <string name="settings_data_dir_item">%1$s (%2$s disponible)</string>
+  <string name="confirm_data_dir_move_title">Déplacer le dossier de stockage des Geocaches ?</string>
   <string name="settings_title_basicmembers">Options pour les membres non-premium</string>
   <string name="settings_title_navigation">Navigation</string>
   <string name="settings_summary_navigation">Sélectionner les méthodes de navigation préférées et les applications de navigation externe.</string>
@@ -563,6 +568,7 @@
   <string name="init_map_directory_description">Dossier cartes hors-ligne</string>
   <string name="init_gpx_exportdir">Dossier d\'export GPX</string>
   <string name="init_gpx_importdir">Dossier d\'import GPX</string>
+  <string name="init_dataDir">Sélectionnez le dossier de stockage des Geocaches</string>
   <string name="init_maptrail">Afficher la trace</string>
   <string name="init_summary_maptrail">Afficher la trace sur la carte</string>
   <string name="init_share_after_export">Ouvrir le menu de partage après les exports GPX</string>
@@ -579,15 +585,18 @@
   <string name="init_default_navigation_tool_2_description">Vous pouvez choisir ici votre deuxième outil de navigation préféré. Il sera activé par un appui long sur l\'icône de navigation situé près du nom de la cache.</string>
   <string name="init_navigation_menu_description">Vous pouvez choisir ici les méthodes de navigation qui seront actives dans le menu de navigation d\'une géocache ou d\'un point intermédiaire. Les outils non sélectionnables ne sont pas installés sur cet appareil.</string>
   <string name="init_debug_title">Déverminage</string>
-  <string name="init_debug_note">c:geo peut générer un grand nombre d’informations de débogage. L’activation de ce paramètre peut cependant affecter la stabilité de c:geo et n’est recommandée que si vous êtes invité par les développeurs à envoyer un fichier journal.</string>
   <string name="init_debug">Activer le débogage</string>
   <string name="init_dbonsdcard_title">Emplacement de la base</string>
-  <string name="init_dbonsdcard_note">La base de données de c:geo peut être enregistrée sur un support externe. En choisissant cette option, vous récupérerez de l\'espace de stockage sur votre appareil mais vous risquez de perdre en performances et c:geo ne fonctionnera pas si votre carte SD est absente.</string>
-  <string name="init_dbonsdcard">Base de données sur stockage externe</string>
+  <string name="init_dbonsdcard_note">Vous pouvez enregistrer la base de données de c:geo soit en interne du système soit dans un répertoire de votre stockage utilisateur. Utiliser le stockage utilisateur peut libérer de la mémoire, mais vous pouvez perdre un peu en performance et c:geo ne fonctionnera pas si le stockage n\'est pas accessible ou si vous supprimez le fichier de la base de données.</string>
+  <string name="init_dbonsdcard">Sur le stockage utilisateur</string>
   <string name="init_dbmove_dbmove">Déplacement de la base de données</string>
   <string name="init_dbmove_running">Déplacement de la base de données</string>
   <string name="init_dbmove_success">Base de données déplacée</string>
   <string name="init_dbmove_failed">Erreur lors du déplacement de la base de données</string>
+  <string name="init_datadirmove_datadirmove">Déplacement des Geocaches</string>
+  <string name="init_datadirmove_running">Déplacement des Geocaches</string>
+  <string name="init_datadirmove_success">Les Geocaches ont été déplacées avec succès.</string>
+  <string name="init_datadirmove_failed">Des erreurs se sont produites lors du déplacement des Geocaches. Vérifiez l\'ancien et le nouveau dossier de stockage et si besoin déplacez manuellement les éléments.</string>
   <string name="init_plain_logs">Texte brut</string>
   <string name="init_summary_plain_logs">Afficher les visites sans les couleurs</string>
   <string name="init_use_native_ua">Navigateur web Android</string>
@@ -1382,7 +1391,7 @@
   <string name="status_new_rc" tools:ignore="UnusedResources">Une nouvelle version candidate est disponible.\nAppuyez ici pour l\'installer.</string>
   <string name="status_geocaching_change" tools:ignore="UnusedResources">Des changements récents sur Geocaching.com ont cassé c:geo.\nNous sommes en train de corriger. Revenez plus tard.</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Des changements récents sur Geocaching.com ont cassé la carte temps-réel.\nNous sommes en train de corriger. Revenez plus tard.</string>
-  <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Maintenant en cours sur geocaching.com.\nIl se peut que vous rencontriez des problèmes.</string>
+  <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Maintenance en cours sur geocaching.com.\nIl se peut que vous rencontriez des problèmes.</string>
   <string name="status_closeout_warning" tools:ignore="UnusedResources">Vous utilisez une version d\'Android plus ancienne que 4.0. Les futures versions de c:geo pourraient ne pas être disponibles pour votre appareil.</string>
   <!-- text-to-speech for compass view -->
   <string name="tts_service">Boussole parlante</string>
@@ -1428,14 +1437,6 @@
   <string name="cgeo_shortcut">Raccourci c:geo</string>
   <string name="create_shortcut">Créer un raccourci</string>
   <string name="send">Envoyer</string>
-  <string name="showcase_logcache_title">Envoi de la visite</string>
-  <string name="showcase_logcache_text">N\'oubliez pas, beaucoup de commandes sont maintenant dans la barre de titre. Ici, l\'envoi d\'une visite.</string>
-  <string name="showcase_main_title">Barre de menu</string>
-  <string name="showcase_main_text">Certaines fonctions de c:geo sont accessibles dans la barre de menu ou figurent dans le menu \"trois points\". Vous pouvez effectuer un appui long sur un bouton pour voir sa description.</string>
-  <string name="showcase_cachelist_title">Changer de liste</string>
-  <string name="showcase_cachelist_text">Vous pouvez basculer entre vos différentes listes en appuyant sur le nom de la liste courante.</string>
-  <string name="showcase_compass_hint_title">Afficher l\'indice</string>
-  <string name="showcase_compass_hint_text">Cette entrée de menu peut vous aider à trouver la cache en affichant l\'indice lorsqu\'il existe.</string>
   <string name="confirm_log_title">Type inhabituel pour une visite</string>
   <string name="confirm_log_message">Vous allez envoyer \'%s\'. Êtes-vous sûr(e) ?</string>
   <!-- Geokrety -->
@@ -1498,4 +1499,6 @@
     <item quantity="one">%d point de passage extrait</item>
     <item quantity="other">%d points de passage extraits</item>
   </plurals>
+  <!-- calendar adder -->
+  <string name="event_fail">Impossible d\'ajouter l\'Événement au calendrier</string>
 </resources>

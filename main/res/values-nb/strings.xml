@@ -537,10 +537,10 @@
   <string name="init_livelist">Vis cachers retning i listen</string>
   <string name="init_summary_livelist">Vis cachers retning i listen</string>
   <string name="init_backup">Sikkerhetskopiering</string>
-  <string name="init_backup_backup">Sikkerhetskopi</string>
+  <string name="init_backup_backup">Lag sikkerhetskopi</string>
   <string name="init_backup_running">Oppretter sikkerhetskopi av database…</string>
   <string name="init_backup_note">Merk at denne funksjonen vil sikkerhetskopiere/gjenopprette en database som inneholder cacher og veipunkter, men ikke dine innstillinger. \nDin innloggingsinformasjon og passord vil aldri forlate dette programmet.</string>
-  <string name="init_backup_restore">Gjenopprett</string>
+  <string name="init_backup_restore">Gjenopprett fra sikkerhetskopi</string>
   <string name="init_backup_success">Databasen til c:geo ble kopiert til:</string>
   <string name="init_backup_failed">Sikkerhetskopi av databasen til c:geo mislyktes.</string>
   <string name="init_backup_unnecessary">Databasen er tom, sikkerhetskopiering er ikke nødvendig.</string>
@@ -579,11 +579,8 @@
   <string name="init_default_navigation_tool_2_description">Her kan du velge ditt andre foretrukne navigasjonsverktøy. Aktiver det ved å trykke lenge på navigasjonsikonet ved siden av tittelen på cachen.</string>
   <string name="init_navigation_menu_description">Her kan du velge hvilke av de tilgjengelige navigasjonsmetodene som vises i navigasjonsmenyen for en cache eller veipunkt. Deaktiverte verktøy er ikke installert på denne enheten.</string>
   <string name="init_debug_title">Feilsøkingsinformasjon</string>
-  <string name="init_debug_note">c:geo kan lage mye informasjon som er nyttig ved feilsøking av appen. Dessverre vil ytelsen og stabiliteten bli negativt påvirket hvis du aktiverer dette, og vi anbefaler derfor at du bare aktiverer denne funksjonen når du blir bedt om å sende en logg til en av utviklerne.</string>
   <string name="init_debug">Aktiver logging av feilsøkingsinformasjon</string>
   <string name="init_dbonsdcard_title">Lagringssted for databasen</string>
-  <string name="init_dbonsdcard_note">Du kan lagre c:geos database på et eksternt minnekort. Du vil spare intern lagringsplass, men mister noe ytelse og c:geo vil ikke virke uten at minnekortet er satt i.</string>
-  <string name="init_dbonsdcard">På minnekort</string>
   <string name="init_dbmove_dbmove">Flytter databasen</string>
   <string name="init_dbmove_running">Flytter databasen</string>
   <string name="init_dbmove_success">Databasen er nå flyttet.</string>
@@ -597,9 +594,10 @@
   <string name="init_maintenance_directories_note">c:geo lagrer bilder, loggbilder og andre filer knyttet til en cache i en egen mappe. I noen situasjoner (som importering/eksportering av databasen) vil denne mappen inneholde utdaterte filer som kan slettes her.</string>
   <string name="init_maintenance_directories">Slett utdaterte filer</string>
   <string name="init_location">Geolokasjon</string>
-  <string name="init_location_note">På enheter utstyrt med Google Play-tjenester kan c:geo automatisk bruke en bedre posisjonstjeneste. Vær obs på at dette forhindrer bruk av en ekstern BlueTooth GPS-mottaker.</string>
+  <string name="init_location_note">På enheter utstyrt med Google Play-tjenester, kan c:geo automatisk bruke en bedre geolocation-leverandør. Men dette forhindrer bruk av en ekstern BlueTooth GPS-mottaker.</string>
   <string name="init_location_googleplayservices">Bruk Google Play Services</string>
   <string name="init_low_power">Strømsparingsmodus</string>
+  <string name="init_low_power_note">Strømsparingsmodus unngår GPS og gyroskop når en svært nøyaktig plassering ikke er strengt nødvendig, men det gir lengere behandlingstid.</string>
   <string name="init_low_power_mode">Aktivere strømsparingsmodus</string>
   <string name="init_force_orientation_sensor_title">Retningssensor</string>
   <string name="init_force_orientation_sensor_note">På noen enheter vil den normale retningssensoren feilaktig endre retning. Isåfall kan en alternativ sensor (orienteringssensor) gi bedre resultat.</string>
@@ -1427,14 +1425,6 @@
   <string name="cgeo_shortcut">c:geo-snartvei</string>
   <string name="create_shortcut">Opprett snarvei</string>
   <string name="send">Send</string>
-  <string name="showcase_logcache_title">Sender loggen</string>
-  <string name="showcase_logcache_text">Husk, mange kommandoer er nå i tittellinjen. Der finner du knappen for å sende den ferdige loggen.</string>
-  <string name="showcase_main_title">Menylinje</string>
-  <string name="showcase_main_text">Noen funksjoner i c:geo er tilgjengelige i menylinjen eller finnes i menyen du får opp ved å trykke på knappen med prikker. Du kan trykke og holde på knapper for å vise en beskrivelse av hva de gjør.</string>
-  <string name="showcase_cachelist_title">Bytter lister.</string>
-  <string name="showcase_cachelist_text">Du kan bytte mellom geocache lister ved å klikke på tittelen på listen.</string>
-  <string name="showcase_compass_hint_title">Vis hint</string>
-  <string name="showcase_compass_hint_text">Dette punktet i menyen kan hjelpe deg med å finne cachen - her vises hintet, hvis det er tilgjengelig.</string>
   <string name="confirm_log_title">Uvanlig loggtype</string>
   <string name="confirm_log_message">Du vil logge \'%s\'. Er du sikker?</string>
   <!-- Geokrety -->
@@ -1497,4 +1487,5 @@
     <item quantity="one">%d veipunkt trukket ut</item>
     <item quantity="other">%d veipunkter trukket ut</item>
   </plurals>
+  <!-- calendar adder -->
 </resources>
