@@ -57,6 +57,8 @@ import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.regex.Pattern;
 
+import javax.annotation.Nonnull;
+
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -1765,7 +1767,7 @@ public final class GCParser {
      */
     private static Observable<LogEntry> getLogs(final String userToken, final Logs logType) {
         if (userToken.isEmpty()) {
-            Log.e("GCParser.loadLogsFromDetails: unable to extract userToken");
+            Log.e("GCParser.getLogs: unable to extract userToken");
             return Observable.empty();
         }
 
@@ -1783,23 +1785,27 @@ public final class GCParser {
                 try {
                     final InputStream responseStream =
                             Network.getResponseStream(Network.getRequest("https://www.geocaching.com/seek/geocache.logbook", params));
+                    if (responseStream == null) {
+                        Log.w("getLogs: no logs were returned");
+                        return Observable.empty();
+                    }
                     return parseLogsAndClose(logType != Logs.ALL, responseStream);
                 } catch (final Exception e) {
-                    Log.e("unable to read logs", e);
+                    Log.w("unable to read logs", e);
                     return Observable.empty();
                 }
             }
         }).subscribeOn(AndroidRxUtils.networkScheduler);
     }
 
-    private static Observable<LogEntry> parseLogsAndClose(final boolean markAsFriendsLog, final InputStream responseStream) {
+    private static Observable<LogEntry> parseLogsAndClose(final boolean markAsFriendsLog, @Nonnull final InputStream responseStream) {
         return Observable.create(new ObservableOnSubscribe<LogEntry>() {
             @Override
             public void subscribe(final ObservableEmitter<LogEntry> emitter) throws Exception {
                 try {
                     final ObjectNode resp = (ObjectNode) JsonUtils.reader.readTree(responseStream);
                     if (!resp.path("status").asText().equals("success")) {
-                        Log.w("GCParser.loadLogsFromDetails: status is " + resp.path("status").asText("[absent]"));
+                        Log.w("GCParser.parseLogsAndClose: status is " + resp.path("status").asText("[absent]"));
                         emitter.onComplete();
                         return;
                     }
@@ -1812,7 +1818,7 @@ public final class GCParser {
                         try {
                             date = GCLogin.parseGcCustomDate(entry.get("Visited").asText()).getTime();
                         } catch (ParseException | NullPointerException e) {
-                            Log.e("GCParser.loadLogsFromDetails: failed to parse log date", e);
+                            Log.e("Failed to parse log date", e);
                             continue;
                         }
 
@@ -1842,7 +1848,7 @@ public final class GCParser {
                         emitter.onNext(logDoneBuilder.build());
                     }
                 } catch (final IOException e) {
-                    Log.w("GCParser.loadLogsFromDetails: Failed to parse cache logs", e);
+                    Log.w("Failed to parse cache logs", e);
                 } finally {
                     IOUtils.closeQuietly(responseStream);
                 }
