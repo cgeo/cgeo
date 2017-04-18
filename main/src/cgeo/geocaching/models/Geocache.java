@@ -1026,9 +1026,10 @@ public class Geocache implements IWaypoint {
 
     /**
      * Replace the inventory with new content.
-     * No check are performed.
+     * No checks are performed.
      *
-     * @param newInventory to set on Geocache
+     * @param newInventory
+     *            to set on Geocache
      */
     public void setInventory(final List<Trackable> newInventory) {
         inventory = newInventory;
