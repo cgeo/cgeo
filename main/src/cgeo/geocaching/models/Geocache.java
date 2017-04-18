@@ -953,7 +953,7 @@ public class Geocache implements IWaypoint {
     }
 
     /**
-     * @return true if the coords are from the cache details page and the user has been logged in
+     * @return true if the coordinates are from the cache details page and the user has been logged in
      */
     public boolean isReliableLatLon() {
         return getConnector().isReliableLatLon(reliableLatLon);
