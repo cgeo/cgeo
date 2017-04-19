@@ -442,7 +442,7 @@
     <string name="calculate_dataDir_title">Geocache data usage</string>
     <string name="calculate_dataDir">Calculating Geocache data disk usage</string>
     <string name="settings_data_dir_item">%1$s (%2$s free)</string>
-    <string name="confirm_data_dir_move_title">Move geocache data dir?</string>
+    <string name="confirm_data_dir_move_title">Move geocache data directory?</string>
     <string name="confirm_data_dir_move">Moving the geocache data might take a really long time, depending on your device and the amount of data.</string>
 
     <string name="settings_title_basicmembers">Options for Basic Members</string>
