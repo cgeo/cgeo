@@ -4,5 +4,5 @@
 <listEntry value="org.eclipse.ui.externaltools.launchGroup"/>
 </listAttribute>
 <stringAttribute key="org.eclipse.ui.externaltools.ATTR_LOCATION" value="${system_path:cmd.exe}"/>
-<stringAttribute key="org.eclipse.ui.externaltools.ATTR_TOOL_ARGUMENTS" value="/c start ${project_loc:/cgeo}/build/reports/androidTests/connected/flavors/BASIC/index.html"/>
+<stringAttribute key="org.eclipse.ui.externaltools.ATTR_TOOL_ARGUMENTS" value="/c start ${project_loc:/main}/build/reports/androidTests/connected/flavors/BASIC/index.html"/>
 </launchConfiguration>

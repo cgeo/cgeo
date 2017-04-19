@@ -476,8 +476,14 @@
     <workingSet
         name="cgeo">
       <predicate
-          xsi:type="predicates:NamePredicate"
-          pattern=".*cgeo.*"/>
+          xsi:type="predicates:OrPredicate">
+        <operand
+            xsi:type="predicates:NamePredicate"
+            pattern=".*cgeo.*"/>
+        <operand
+            xsi:type="predicates:NamePredicate"
+            pattern="main"/>
+      </predicate>
     </workingSet>
     <workingSet
         name="Android libraries">
@@ -485,7 +491,7 @@
           xsi:type="predicates:AndPredicate">
         <operand
             xsi:type="predicates:RepositoryPredicate"
-            project="cgeo"/>
+            project="main"/>
         <operand
             xsi:type="workingsets:ExclusionPredicate"
             excludedWorkingSet="//@setupTasks.5/@workingSets.0"/>

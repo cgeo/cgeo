@@ -8,5 +8,6 @@
 <listAttribute key="tasks">
 <listEntry value=":main:assembleBasicDebug"/>
 </listAttribute>
-<stringAttribute key="working_dir" value="${git_work_tree:/cgeo}"/>
+<booleanAttribute key="use_gradle_distribution_from_import" value="false"/>
+<stringAttribute key="working_dir" value="${git_work_tree:/main}"/>
 </launchConfiguration>
