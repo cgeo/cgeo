@@ -403,12 +403,19 @@ public class DataStore {
     }
 
     @NonNull
-    public static File getBackupFileInternal() {
-        return new File(LocalStorage.getBackupDirectory(), DB_FILE_NAME_BACKUP);
+    public static File getBackupFileInternal(final boolean checkDeprecated) {
+        final File currentBackupFile = new File(LocalStorage.getBackupDirectory(), DB_FILE_NAME_BACKUP);
+        if (!currentBackupFile.exists() && checkDeprecated) {
+            final File deprecatedBackupFile = new File(LocalStorage.getLegacyExternalCgeoDirectory(), DB_FILE_NAME_BACKUP);
+            if (deprecatedBackupFile.exists()) {
+                return deprecatedBackupFile;
+            }
+        }
+        return currentBackupFile;
     }
 
     public static String backupDatabaseInternal() {
-        final File target = getBackupFileInternal();
+        final File target = getBackupFileInternal(false);
         closeDb();
         final boolean backupDone = FileUtils.copy(databasePath(), target);
         init();
@@ -485,7 +492,7 @@ public class DataStore {
             return false;
         }
 
-        final File sourceFile = getBackupFileInternal();
+        final File sourceFile = getBackupFileInternal(true);
         closeDb();
         final boolean restoreDone = FileUtils.copy(sourceFile, databasePath());
         init();

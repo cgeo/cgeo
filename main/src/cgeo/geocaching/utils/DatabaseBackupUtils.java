@@ -129,7 +129,7 @@ public class DatabaseBackupUtils {
 
     @Nullable
     public static File getRestoreFile() {
-        final File fileSourceFile = DataStore.getBackupFileInternal();
+        final File fileSourceFile = DataStore.getBackupFileInternal(true);
         return fileSourceFile.exists() && fileSourceFile.length() > 0 ? fileSourceFile : null;
     }
 
