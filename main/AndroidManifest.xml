@@ -222,11 +222,8 @@
             android:name=".CacheListActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
-            android:label="@string/app_name"
-            android:parentActivityName="cgeo.geocaching.MainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="cgeo.geocaching.MainActivity" />
+            android:label="@string/app_name">
+            <!-- don't use fixed parent activity, since we may come from main activity, pocket query activity or search activity -->
 
             <!-- intent filter for local gpx files -->
             <intent-filter>
