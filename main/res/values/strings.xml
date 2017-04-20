@@ -1581,5 +1581,7 @@
 
     <!-- calendar adder -->
     <string name="event_fail">Failed to add event cache to calendar</string>
+    <string name="init_low_disk_space">Running low on disk space</string>
+    <string name="init_low_disk_space_message">The geocache data directory is running low on disk space. This can cause malfunctions of c:geo. Please free up some space.</string>
 
 </resources>

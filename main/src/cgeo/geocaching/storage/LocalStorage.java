@@ -35,6 +35,8 @@ import org.apache.commons.lang3.StringUtils;
  */
 public final class LocalStorage {
 
+    public static final Pattern GEOCACHE_FILE_PATTERN = Pattern.compile("^(GC|TB|TC|CC|LC|EC|GK|MV|TR|VI|MS|EV|CT|GE|GA|WM|O)[A-Z0-9]{2,7}$");
+
     private static final String FILE_SYSTEM_TABLE_PATH = "/system/etc/vold.fstab";
     private static final String CGEO_DIRNAME = "cgeo";
     private static final String DATABASES_DIRNAME = "databases";
@@ -44,8 +46,7 @@ public final class LocalStorage {
     private static final String LEGACY_CGEO_DIR_NAME = ".cgeo";
     private static final String GEOCACHE_PHOTOS_DIR_NAME = "GeocachePhotos";
     private static final String GEOCACHE_DATA_DIR_NAME = "GeocacheData";
-
-    public static final Pattern GEOCACHE_FILE_PATTERN = Pattern.compile("^(GC|TB|TC|CC|LC|EC|GK|MV|TR|VI|MS|EV|CT|GE|GA|WM|O)[A-Z0-9]{2,7}$");
+    private static final long LOW_DISKSPACE_THRESHOLD = 1024 * 1024 * 100; // 100 MB in bytes
 
     private static File internalCgeoDirectory;
     private static File externalPrivateCgeoDirectory;
@@ -358,5 +359,7 @@ public final class LocalStorage {
         });
     }
 
-
+    public static boolean isRunningLowOnDiskSpace() {
+        return FileUtils.getFreeDiskSpace(getExternalPrivateCgeoDirectory()) < LOW_DISKSPACE_THRESHOLD;
+    }
 }
