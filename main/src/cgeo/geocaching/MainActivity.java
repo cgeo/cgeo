@@ -23,6 +23,7 @@ import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AndroidRxUtils;
@@ -248,6 +249,10 @@ public class MainActivity extends AbstractActionBarActivity {
         init();
 
         checkShowChangelog();
+
+        if (LocalStorage.isRunningLowOnDiskSpace()) {
+            Dialogs.message(this, res.getString(R.string.init_low_disk_space), res.getString(R.string.init_low_disk_space_message));
+        }
     }
 
     @Override
