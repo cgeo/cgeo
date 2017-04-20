@@ -487,11 +487,6 @@ public class DataStore {
     }
 
     public static boolean restoreDatabaseInternal() {
-        if (!LocalStorage.isExternalStorageAvailable()) {
-            Log.w("Database wasn't restored: no external memory");
-            return false;
-        }
-
         final File sourceFile = getBackupFileInternal(true);
         closeDb();
         final boolean restoreDone = FileUtils.copy(sourceFile, databasePath());
