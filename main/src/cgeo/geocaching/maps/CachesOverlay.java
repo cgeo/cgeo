@@ -24,7 +24,6 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.Log;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources.NotFoundException;
 import android.graphics.Canvas;
@@ -298,7 +297,7 @@ public class CachesOverlay extends AbstractItemizedOverlay {
                 /* final SearchResult search = */GCMap.searchByGeocodes(Collections.singleton(cache.getGeocode()));
                 } catch (final Exception ex) {
                     Log.w("Error requesting cache popup info", ex);
-                    ActivityMixin.showToast((Activity) context, R.string.err_request_popup_info);
+                    ActivityMixin.showToast(context, R.string.err_request_popup_info);
                 }
             }
             CGeoMap.markCacheAsDirty(cache.getGeocode());

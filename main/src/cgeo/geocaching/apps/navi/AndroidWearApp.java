@@ -7,10 +7,9 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.utils.ProcessUtils;
 
-import android.support.annotation.NonNull;
-
-import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 
 /**
  * For use with any Android Wear geocaching apps which can handle the intent action below.
@@ -29,21 +28,21 @@ class AndroidWearApp extends AbstractPointNavigationApp {
     }
 
     @Override
-    public void navigate(@NonNull final Activity activity, @NonNull final Geopoint coords) {
-        navigate(activity, null, null, coords);
+    public void navigate(@NonNull final Context context, @NonNull final Geopoint coords) {
+        navigate(context, null, null, coords);
     }
 
     @Override
-    public void navigate(@NonNull final Activity activity, @NonNull final Geocache cache) {
-        navigate(activity, cache.getName(), cache.getGeocode(), cache.getCoords());
+    public void navigate(@NonNull final Context context, @NonNull final Geocache cache) {
+        navigate(context, cache.getName(), cache.getGeocode(), cache.getCoords());
     }
 
     @Override
-    public void navigate(@NonNull final Activity activity, @NonNull final Waypoint waypoint) {
-        navigate(activity, waypoint.getName(), waypoint.getGeocode(), waypoint.getCoords());
+    public void navigate(@NonNull final Context context, @NonNull final Waypoint waypoint) {
+        navigate(context, waypoint.getName(), waypoint.getGeocode(), waypoint.getCoords());
     }
 
-    private static void navigate(final Activity activity, final String destName,
+    private static void navigate(final Context context, final String destName,
                                  final String destCode, final Geopoint coords) {
         final Intent launchIntent = new Intent(INTENT_ACTION);
         launchIntent.setPackage(INTENT_PACKAGE);
@@ -51,6 +50,6 @@ class AndroidWearApp extends AbstractPointNavigationApp {
                 .putExtra(Intents.EXTRA_GEOCODE, destCode)
                 .putExtra(Intents.EXTRA_LATITUDE, coords.getLatitude())
                 .putExtra(Intents.EXTRA_LONGITUDE, coords.getLongitude());
-        activity.startService(launchIntent);
+        context.startService(launchIntent);
     }
 }

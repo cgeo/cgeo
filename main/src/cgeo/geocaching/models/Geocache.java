@@ -45,6 +45,7 @@ import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
@@ -524,25 +525,25 @@ public class Geocache implements IWaypoint {
         return getConnector().getPossibleLogTypes(this);
     }
 
-    public void openInBrowser(final Activity fromActivity) {
+    public void openInBrowser(final Context context) {
         if (getUrl() == null) {
             return;
         }
         final Intent viewIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getLongUrl()));
 
         // Check if cgeo is the default, show the chooser to let the user choose a browser
-        if (viewIntent.resolveActivity(fromActivity.getPackageManager()).getPackageName().equals(fromActivity.getPackageName())) {
-            final Intent chooser = Intent.createChooser(viewIntent, fromActivity.getString(R.string.cache_menu_browser));
+        if (viewIntent.resolveActivity(context.getPackageManager()).getPackageName().equals(context.getPackageName())) {
+            final Intent chooser = Intent.createChooser(viewIntent, context.getString(R.string.cache_menu_browser));
 
-            final Intent internalBrowser = new Intent(fromActivity, SimpleWebviewActivity.class);
+            final Intent internalBrowser = new Intent(context, SimpleWebviewActivity.class);
             internalBrowser.setData(Uri.parse(getUrl()));
 
             chooser.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Parcelable[] {internalBrowser});
 
 
-            fromActivity.startActivity(chooser);
+            context.startActivity(chooser);
         } else {
-            fromActivity.startActivity(viewIntent);
+            context.startActivity(viewIntent);
         }
     }
 

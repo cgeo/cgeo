@@ -6,7 +6,6 @@ import cgeo.geocaching.models.PocketQuery;
 import cgeo.geocaching.ui.recyclerview.AbstractRecyclerViewHolder;
 import cgeo.geocaching.utils.Formatter;
 
-import android.app.Activity;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -55,16 +54,14 @@ class PocketQueryListAdapter extends RecyclerView.Adapter<PocketQueryListAdapter
         holder.cachelist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
-                final Activity activity = (Activity) v.getContext();
-                CacheListActivity.startActivityPocket(activity, pocketQuery);
+                CacheListActivity.startActivityPocket(v.getContext(), pocketQuery);
             }
         });
 
         holder.download.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
-                final Activity activity = (Activity) v.getContext();
-                CacheListActivity.startActivityPocketDownload(activity, pocketQuery);
+                CacheListActivity.startActivityPocketDownload(v.getContext(), pocketQuery);
             }
         });
 

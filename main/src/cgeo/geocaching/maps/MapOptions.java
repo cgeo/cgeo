@@ -1,19 +1,18 @@
 package cgeo.geocaching.maps;
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-
-import org.apache.commons.lang3.StringUtils;
-
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.settings.Settings;
+
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+
+import org.apache.commons.lang3.StringUtils;
 
 public class MapOptions {
 
@@ -89,7 +88,7 @@ public class MapOptions {
         return intent;
     }
 
-    public void startIntent(final Activity fromActivity, final Class<?> cls) {
+    public void startIntent(final Context fromActivity, final Class<?> cls) {
         fromActivity.startActivity(newIntent(fromActivity, cls));
     }
 

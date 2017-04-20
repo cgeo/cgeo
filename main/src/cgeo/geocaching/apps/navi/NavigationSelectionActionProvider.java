@@ -4,7 +4,6 @@ import cgeo.geocaching.apps.navi.NavigationAppFactory.NavigationAppsEnum;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.ui.AbstractMenuActionProvider;
 
-import android.app.Activity;
 import android.content.Context;
 import android.support.v4.view.ActionProvider;
 import android.support.v4.view.MenuItemCompat;
@@ -19,11 +18,11 @@ import android.view.SubMenu;
 public class NavigationSelectionActionProvider extends AbstractMenuActionProvider {
 
     private Geocache geocache;
-    private final Activity activity;
+    private final Context context;
 
     public NavigationSelectionActionProvider(final Context context) {
         super(context);
-        activity = (Activity) context;
+        this.context = context;
     }
 
     public void setTarget(final Geocache cache) {
@@ -46,7 +45,7 @@ public class NavigationSelectionActionProvider extends AbstractMenuActionProvide
 
                     @Override
                     public boolean onMenuItemClick(final MenuItem item) {
-                        cacheApp.navigate(activity, geocache);
+                        cacheApp.navigate(context, geocache);
                         return true;
                     }
                 });

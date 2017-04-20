@@ -1,56 +1,5 @@
 package cgeo.geocaching;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
-import android.content.Intent;
-import android.content.res.Configuration;
-import android.content.res.Resources;
-import android.database.Cursor;
-import android.net.Uri;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.provider.OpenableColumns;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.annotation.StringRes;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.Loader;
-import android.support.v4.view.MenuItemCompat;
-import android.support.v7.app.ActionBar;
-import android.view.ContextMenu;
-import android.view.ContextMenu.ContextMenuInfo;
-import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView.AdapterContextMenuInfo;
-import android.widget.ListView;
-import android.widget.TextView;
-
-import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
-
-import java.lang.ref.WeakReference;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Deque;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicInteger;
-
-import butterknife.ButterKnife;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.AbstractListActivity;
 import cgeo.geocaching.activity.ActivityMixin;
@@ -119,6 +68,55 @@ import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.functions.Action1;
+
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
+import android.database.Cursor;
+import android.net.Uri;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.provider.OpenableColumns;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.annotation.StringRes;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.ActionBar;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
+import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView.AdapterContextMenuInfo;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Deque;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
+
+import butterknife.ButterKnife;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
@@ -128,6 +126,8 @@ import io.reactivex.disposables.Disposables;
 import io.reactivex.functions.Action;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 
 public class CacheListActivity extends AbstractListActivity implements FilteredActivity, LoaderManager.LoaderCallbacks<SearchResult> {
 
@@ -1762,7 +1762,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         context.startActivity(cachesIntent);
     }
 
-    public static void startActivityPocketDownload(@NonNull final Activity context, @NonNull final PocketQuery pocketQuery) {
+    public static void startActivityPocketDownload(@NonNull final Context context, @NonNull final PocketQuery pocketQuery) {
         final String guid = pocketQuery.getGuid();
         if (guid == null) {
             ActivityMixin.showToast(context, CgeoApplication.getInstance().getString(R.string.warn_pocket_query_select));
@@ -1771,7 +1771,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         startActivityWithAttachment(context, pocketQuery);
     }
 
-    public static void startActivityPocket(@NonNull final Activity context, @NonNull final PocketQuery pocketQuery) {
+    public static void startActivityPocket(@NonNull final Context context, @NonNull final PocketQuery pocketQuery) {
         final String guid = pocketQuery.getGuid();
         if (guid == null) {
             ActivityMixin.showToast(context, CgeoApplication.getInstance().getString(R.string.warn_pocket_query_select));
@@ -1780,7 +1780,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         startActivityPocket(context, pocketQuery, CacheListType.POCKET);
     }
 
-    private static void startActivityWithAttachment(@NonNull final Activity context, @NonNull final PocketQuery pocketQuery) {
+    private static void startActivityWithAttachment(@NonNull final Context context, @NonNull final PocketQuery pocketQuery) {
         final Uri uri = Uri.parse("https://www.geocaching.com/pocket/downloadpq.ashx?g=" + pocketQuery.getGuid() + "&src=web");
         final Intent cachesIntent = new Intent(Intent.ACTION_VIEW, uri, context, CacheListActivity.class);
         cachesIntent.setDataAndType(uri, "application/zip");
@@ -1788,7 +1788,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         context.startActivity(cachesIntent);
     }
 
-    private static void startActivityPocket(@NonNull final Activity context, @NonNull final PocketQuery pocketQuery, final CacheListType cacheListType) {
+    private static void startActivityPocket(@NonNull final Context context, @NonNull final PocketQuery pocketQuery, final CacheListType cacheListType) {
         final Intent cachesIntent = new Intent(context, CacheListActivity.class);
         Intents.putListType(cachesIntent, cacheListType);
         cachesIntent.putExtra(Intents.EXTRA_NAME, pocketQuery.getName());

@@ -10,13 +10,10 @@ import cgeo.geocaching.gcvote.GCVote;
 import cgeo.geocaching.network.Cookies;
 import cgeo.geocaching.network.HtmlImage;
 
-import org.apache.commons.lang3.StringUtils;
-import android.support.annotation.NonNull;
-
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.preference.Preference;
+import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import butterknife.ButterKnife;
+import org.apache.commons.lang3.StringUtils;
 
 public class CredentialsPreference extends AbstractClickablePreference {
 
@@ -80,7 +78,7 @@ public class CredentialsPreference extends AbstractClickablePreference {
     }
 
     private void init(final Context context) {
-        inflater = ((Activity) context).getLayoutInflater();
+        inflater = LayoutInflater.from(context);
     }
 
     @Override

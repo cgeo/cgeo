@@ -390,7 +390,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
     @Override
     public View getView(final int position, final View rowView, final ViewGroup parent) {
         if (inflater == null) {
-            inflater = ((Activity) getContext()).getLayoutInflater();
+            inflater = LayoutInflater.from(getContext());
         }
 
         if (position > getCount()) {

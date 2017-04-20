@@ -75,11 +75,13 @@ public final class ActivityMixin {
     /**
      * Show a long toast message to the user. This can be called from any thread.
      *
-     * @param activity the activity the user is facing
-     * @param resId the message
+     * @param context
+     *            the activity the user is facing
+     * @param resId
+     *            the message
      */
-    public static void showToast(final Activity activity, @StringRes final int resId) {
-        showToast(activity, activity.getString(resId));
+    public static void showToast(final Context context, @StringRes final int resId) {
+        showToast(context, context.getString(resId));
     }
 
     private static void showCgeoToast(final Context context, final String text, final int toastDuration) {
@@ -119,10 +121,28 @@ public final class ActivityMixin {
     }
 
     /**
+     * Show a long toast message to the user. This can be called from any thread.
+     *
+     * @param context
+     *            any context. If this is not an activity, then the application context will be used.
+     * @param text
+     *            the message
+     */
+    public static void showToast(final Context context, final String text) {
+        if (context instanceof Activity) {
+            showToast((Activity) context, text);
+        } else {
+            showApplicationToast(text);
+        }
+    }
+
+    /**
      * Show a short toast message to the user. This can be called from any thread.
      *
-     * @param activity the activity the user is facing
-     * @param text the message
+     * @param activity
+     *            the activity the user is facing
+     * @param text
+     *            the message
      */
     public static void showShortToast(final Activity activity, final String text) {
         postShowToast(activity, text, Toast.LENGTH_SHORT);

@@ -4,7 +4,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.models.Geocache;
 
-import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
@@ -30,8 +30,8 @@ public class WhereYouGoApp extends AbstractGeneralApp {
     }
 
     @Override
-    public void navigate(@NonNull final Activity activity, @NonNull final Geocache cache) {
-        activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getWhereIGoUrl(cache))));
+    public void navigate(@NonNull final Context context, @NonNull final Geocache cache) {
+        context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getWhereIGoUrl(cache))));
     }
 
     /**

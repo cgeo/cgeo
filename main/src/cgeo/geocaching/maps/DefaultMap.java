@@ -7,6 +7,7 @@ import cgeo.geocaching.maps.mapsforge.v6.NewMap;
 import cgeo.geocaching.settings.Settings;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 
 public final class DefaultMap {
@@ -27,7 +28,7 @@ public final class DefaultMap {
         return getLiveMapIntent(fromActivity, getDefaultMapClass());
     }
 
-    public static void startActivityCoords(final Activity fromActivity, final Class<?> cls, final Geopoint coords, final WaypointType type, final String title) {
+    public static void startActivityCoords(final Context fromActivity, final Class<?> cls, final Geopoint coords, final WaypointType type, final String title) {
         new MapOptions(coords, type, title).startIntent(fromActivity, cls);
     }
 
@@ -35,7 +36,7 @@ public final class DefaultMap {
         startActivityCoords(fromActivity, getDefaultMapClass(), coords, type, title);
     }
 
-    public static void startActivityGeoCode(final Activity fromActivity, final Class<?> cls, final String geocode) {
+    public static void startActivityGeoCode(final Context fromActivity, final Class<?> cls, final String geocode) {
         new MapOptions(geocode).startIntent(fromActivity, cls);
     }
 

@@ -6,12 +6,11 @@ import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.utils.ProcessUtils;
 
-import android.support.annotation.NonNull;
-
-import android.app.Activity;
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 
 class StreetviewApp extends AbstractPointNavigationApp {
 
@@ -28,12 +27,12 @@ class StreetviewApp extends AbstractPointNavigationApp {
     }
 
     @Override
-    public void navigate(@NonNull final Activity activity, @NonNull final Geopoint point) {
+    public void navigate(@NonNull final Context context, @NonNull final Geopoint point) {
         try {
-            activity.startActivity(new Intent(Intent.ACTION_VIEW,
+            context.startActivity(new Intent(Intent.ACTION_VIEW,
                     Uri.parse("google.streetview:cbll=" + point.getLatitude() + "," + point.getLongitude())));
         } catch (final ActivityNotFoundException ignored) {
-            ActivityMixin.showToast(activity, CgeoApplication.getInstance().getString(R.string.err_application_no));
+            ActivityMixin.showToast(context, CgeoApplication.getInstance().getString(R.string.err_application_no));
         }
     }
 }

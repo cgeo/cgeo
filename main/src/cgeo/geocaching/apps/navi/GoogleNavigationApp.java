@@ -8,14 +8,13 @@ import cgeo.geocaching.models.IWaypoint;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.utils.Log;
 
-import android.support.annotation.NonNull;
-
-import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,9 +40,9 @@ abstract class GoogleNavigationApp extends AbstractPointNavigationApp {
     }
 
     @Override
-    public void navigate(@NonNull final Activity activity, @NonNull final Geopoint coords) {
+    public void navigate(@NonNull final Context context, @NonNull final Geopoint coords) {
         try {
-            activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri
+            context.startActivity(new Intent(Intent.ACTION_VIEW, Uri
                     .parse("google.navigation:ll=" + coords.getLatitude() + ","
                             + coords.getLongitude() + "&mode=" + mode)));
 
@@ -70,7 +69,7 @@ abstract class GoogleNavigationApp extends AbstractPointNavigationApp {
         }
 
         @Override
-        public void navigate(@NonNull final Activity activity, @NonNull final Geocache cache) {
+        public void navigate(@NonNull final Context context, @NonNull final Geocache cache) {
             final ArrayList<IWaypoint> targets = new ArrayList<>();
             targets.add(cache);
             for (final Waypoint waypoint : cache.getWaypoints()) {
@@ -79,16 +78,16 @@ abstract class GoogleNavigationApp extends AbstractPointNavigationApp {
                 }
             }
             if (targets.size() > 1) {
-                selectDriveTarget(activity, targets);
+                selectDriveTarget(context, targets);
             } else {
-                super.navigate(activity, cache);
+                super.navigate(context, cache);
             }
         }
 
         /**
          * show a selection of all parking places and the cache itself, when using the navigation for driving
          */
-        private void selectDriveTarget(final Activity context, final ArrayList<IWaypoint> targets) {
+        private void selectDriveTarget(final Context context, final ArrayList<IWaypoint> targets) {
             final LayoutInflater inflater = LayoutInflater.from(context);
             final ListAdapter adapter = new ArrayAdapter<IWaypoint>(context, R.layout.cacheslist_item_select, targets) {
                 @Override

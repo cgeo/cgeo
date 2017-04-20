@@ -1,11 +1,8 @@
 package cgeo.geocaching.settings;
 
-import butterknife.ButterKnife;
-
 import cgeo.geocaching.R;
 import cgeo.geocaching.ui.UrlPopup;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.preference.Preference;
@@ -15,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+
+import butterknife.ButterKnife;
 
 /**
  * Preference which shows a dialog containing textual explanation. The dialog has two buttons, where one will open a
@@ -57,7 +56,7 @@ public class InfoPreference extends AbstractAttributeBasedPreference {
     }
 
     private void init(final Context context) {
-        inflater = ((Activity) context).getLayoutInflater();
+        inflater = LayoutInflater.from(context);
         setPersistent(false);
     }
 

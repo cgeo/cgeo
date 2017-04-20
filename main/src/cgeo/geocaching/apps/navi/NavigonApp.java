@@ -3,10 +3,9 @@ package cgeo.geocaching.apps.navi;
 import cgeo.geocaching.R;
 import cgeo.geocaching.location.Geopoint;
 
-import android.support.annotation.NonNull;
-
-import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 
 class NavigonApp extends AbstractPointNavigationApp {
 
@@ -19,7 +18,7 @@ class NavigonApp extends AbstractPointNavigationApp {
     }
 
     @Override
-    public void navigate(@NonNull final Activity activity, @NonNull final Geopoint point) {
+    public void navigate(@NonNull final Context context, @NonNull final Geopoint point) {
         final Intent intent = new Intent(INTENT);
 
         /*
@@ -31,6 +30,6 @@ class NavigonApp extends AbstractPointNavigationApp {
         intent.putExtra(INTENT_EXTRA_KEY_LATITUDE, (float) point.getLatitude());
         intent.putExtra(INTENT_EXTRA_KEY_LONGITUDE, (float) point.getLongitude());
 
-        activity.startActivity(intent);
+        context.startActivity(intent);
     }
 }

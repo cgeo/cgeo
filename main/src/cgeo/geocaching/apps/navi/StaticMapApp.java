@@ -1,12 +1,11 @@
 package cgeo.geocaching.apps.navi;
 
-import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.R;
+import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
-
-import android.app.Activity;
 
 class StaticMapApp extends AbstractStaticMapsApp {
 
@@ -25,12 +24,12 @@ class StaticMapApp extends AbstractStaticMapsApp {
     }
 
     @Override
-    public void navigate(@NonNull final Activity activity, @NonNull final Geocache cache) {
-        invokeStaticMaps(activity, cache, null, false);
+    public void navigate(@NonNull final Context context, @NonNull final Geocache cache) {
+        invokeStaticMaps(context, cache, null, false);
     }
 
     @Override
-    public void navigate(@NonNull final Activity activity, @NonNull final Waypoint waypoint) {
-        invokeStaticMaps(activity, null, waypoint, false);
+    public void navigate(@NonNull final Context context, @NonNull final Waypoint waypoint) {
+        invokeStaticMaps(context, null, waypoint, false);
     }
 }

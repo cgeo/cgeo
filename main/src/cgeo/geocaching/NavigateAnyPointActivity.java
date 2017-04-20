@@ -20,7 +20,6 @@ import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -122,7 +121,7 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity implemen
 
         private LayoutInflater getInflater() {
             if (inflater == null) {
-                inflater = ((Activity) getContext()).getLayoutInflater();
+                inflater = LayoutInflater.from(getContext());
             }
 
             return inflater;

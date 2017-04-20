@@ -8,11 +8,10 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.utils.Log;
 
+import android.content.Context;
+import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-
-import android.app.Activity;
-import android.os.Environment;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -57,7 +56,7 @@ public abstract class AbstractLocusApp extends AbstractApp {
      *            Whether to give waypoints of caches to Locus or not
      */
     protected static boolean showInLocus(final List<?> objectsToShow, final boolean withCacheWaypoints, final boolean export,
-            final Activity activity) {
+            final Context context) {
         if (objectsToShow == null || objectsToShow.isEmpty()) {
             return false;
         }
@@ -83,7 +82,7 @@ public abstract class AbstractLocusApp extends AbstractApp {
 
         if (pd.getWaypoints().size() <= 1000) {
             try {
-                ActionDisplayPoints.sendPack(activity, pd, export ? ActionDisplay.ExtraAction.IMPORT : ActionDisplay.ExtraAction.CENTER);
+                ActionDisplayPoints.sendPack(context, pd, export ? ActionDisplay.ExtraAction.IMPORT : ActionDisplay.ExtraAction.CENTER);
             } catch (final RequiredVersionMissingException e) {
                 Log.e("AbstractLocusApp.showInLocus: problem in sendPack", e);
                 return false;
@@ -105,7 +104,7 @@ public abstract class AbstractLocusApp extends AbstractApp {
             data.add(pd);
 
             try {
-                ActionDisplayPoints.sendPacksFile(activity, data, filePath, export ? ActionDisplay.ExtraAction.IMPORT : ActionDisplay.ExtraAction.CENTER);
+                ActionDisplayPoints.sendPacksFile(context, data, filePath, export ? ActionDisplay.ExtraAction.IMPORT : ActionDisplay.ExtraAction.CENTER);
             } catch (final RequiredVersionMissingException e) {
                 Log.e("AbstractLocusApp.showInLocus: problem in sendPacksFile", e);
                 return false;
