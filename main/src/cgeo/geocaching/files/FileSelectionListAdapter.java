@@ -1,13 +1,14 @@
 package cgeo.geocaching.files;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.ui.recyclerview.AbstractRecyclerViewAdapter;
 import cgeo.geocaching.ui.recyclerview.AbstractRecyclerViewHolder;
 
 import android.graphics.Typeface;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
@@ -16,7 +17,7 @@ import java.util.List;
 
 import butterknife.BindView;
 
-public class FileSelectionListAdapter extends RecyclerView.Adapter<FileSelectionListAdapter.ViewHolder> {
+public class FileSelectionListAdapter extends AbstractRecyclerViewAdapter<FileSelectionListAdapter.ViewHolder> {
 
     private final IFileSelectionView parentView;
     @NonNull private final List<File> files;
@@ -34,11 +35,23 @@ public class FileSelectionListAdapter extends RecyclerView.Adapter<FileSelection
     @Override
     public ViewHolder onCreateViewHolder(final ViewGroup parent, final int position) {
         final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.mapfile_item, parent, false);
-        return new ViewHolder(view);
+        final ViewHolder viewHolder = new ViewHolder(view);
+        viewHolder.itemView.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(final View view) {
+                final File file = files.get(viewHolder.getItemPosition());
+                parentView.setCurrentFile(file.toString());
+                parentView.close();
+            }
+        });
+
+        return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
+        super.onBindViewHolder(holder, position);
         final File file = files.get(position);
 
         final String currentFile = parentView.getCurrentFile();
@@ -48,26 +61,8 @@ public class FileSelectionListAdapter extends RecyclerView.Adapter<FileSelection
             holder.filename.setTypeface(holder.filename.getTypeface(), Typeface.NORMAL);
         }
 
-        final TouchListener touchLst = new TouchListener(file);
-        holder.itemView.setOnClickListener(touchLst);
-
         holder.filepath.setText(file.getParent());
         holder.filename.setText(file.getName());
-    }
-
-    private class TouchListener implements View.OnClickListener {
-        private File file = null;
-
-        TouchListener(final File fileIn) {
-            file = fileIn;
-        }
-
-        // tap on item
-        @Override
-        public void onClick(final View view) {
-            parentView.setCurrentFile(file.toString());
-            parentView.close();
-        }
     }
 
     protected static final class ViewHolder extends AbstractRecyclerViewHolder {

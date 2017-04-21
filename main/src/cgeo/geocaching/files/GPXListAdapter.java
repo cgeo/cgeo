@@ -2,6 +2,7 @@ package cgeo.geocaching.files;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.ui.recyclerview.AbstractRecyclerViewAdapter;
 import cgeo.geocaching.ui.recyclerview.AbstractRecyclerViewHolder;
 import cgeo.geocaching.utils.FileUtils;
 
@@ -18,7 +19,7 @@ import java.util.List;
 
 import butterknife.BindView;
 
-class GPXListAdapter extends RecyclerView.Adapter<GPXListAdapter.ViewHolder> {
+class GPXListAdapter extends AbstractRecyclerViewAdapter<GPXListAdapter.ViewHolder> {
     private final GpxFileListActivity activity;
     @NonNull private final List<File> files;
 
@@ -44,32 +45,24 @@ class GPXListAdapter extends RecyclerView.Adapter<GPXListAdapter.ViewHolder> {
     @Override
     public ViewHolder onCreateViewHolder(final ViewGroup parent, final int position) {
         final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.gpx_item, parent, false);
-        return new ViewHolder(view);
-    }
-
-    @Override
-    public void onBindViewHolder(final ViewHolder holder, final int position) {
-        final File file = files.get(position);
-
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+        final ViewHolder viewHolder = new ViewHolder(view);
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
 
             @Override
-            public void onClick(final View v) {
+            public void onClick(final View view) {
+                final File file = files.get(viewHolder.getItemPosition());
                 (new GPXImporter(activity, activity.getListId(), null)).importGPX(file);
             }
         });
-
-        holder.filepath.setText(file.getParent());
-        holder.filename.setText(file.getName());
-
-        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+        viewHolder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
 
             @Override
-            public boolean onLongClick(final View v) {
+            public boolean onLongClick(final View view) {
+                final File file = files.get(viewHolder.getItemPosition());
                 Dialogs.confirmYesNo(activity, R.string.gpx_import_delete_title, activity.getString(R.string.gpx_import_delete_message, file.getName()), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(final DialogInterface dialog, final int id) {
-                        final int currentPosition = holder.getAdapterPosition();
+                        final int currentPosition = viewHolder.getAdapterPosition();
                         if (currentPosition != RecyclerView.NO_POSITION) {
                             FileUtils.deleteIgnoringFailure(file);
                             files.remove(currentPosition);
@@ -80,6 +73,17 @@ class GPXListAdapter extends RecyclerView.Adapter<GPXListAdapter.ViewHolder> {
                 return true;
             }
         });
+
+        return viewHolder;
+    }
+
+    @Override
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
+        super.onBindViewHolder(holder, position);
+        final File file = files.get(position);
+
+        holder.filepath.setText(file.getParent());
+        holder.filename.setText(file.getName());
     }
 
 }

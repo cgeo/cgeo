@@ -4,11 +4,11 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Units;
 import cgeo.geocaching.sensors.Sensors;
+import cgeo.geocaching.ui.recyclerview.AbstractRecyclerViewAdapter;
 import cgeo.geocaching.ui.recyclerview.AbstractRecyclerViewHolder;
 
 import android.location.Address;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -21,7 +21,7 @@ import java.util.List;
 import butterknife.BindView;
 import org.apache.commons.lang3.StringUtils;
 
-class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.AddressListHolder> {
+class AddressListAdapter extends AbstractRecyclerViewAdapter<AddressListAdapter.AddressListHolder> {
 
     @NonNull private final Geopoint location;
     @NonNull private final List<Address> addresses;
@@ -52,21 +52,23 @@ class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.Address
     @Override
     public AddressListHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
         final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.addresslist_item, parent, false);
-        return new AddressListHolder(view);
+        final AddressListHolder viewHolder = new AddressListHolder(view);
+        viewHolder.itemView.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(final View view) {
+                clickListener.onClickAddress(addresses.get(viewHolder.getItemPosition()));
+            }
+        });
+        return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(final AddressListHolder holder, final int position) {
+        super.onBindViewHolder(holder, position);
         final Address address = addresses.get(position);
         holder.label.setText(getAddressText(address));
         holder.distance.setText(getDistanceText(address));
-        holder.itemView.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(final View v) {
-                clickListener.onClickAddress(address);
-            }
-        });
     }
 
     private CharSequence getDistanceText(final Address address) {

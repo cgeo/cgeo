@@ -2,12 +2,12 @@ package cgeo.geocaching.helper;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.compatibility.Compatibility;
+import cgeo.geocaching.ui.recyclerview.AbstractRecyclerViewAdapter;
 import cgeo.geocaching.ui.recyclerview.AbstractRecyclerViewHolder;
 
 import android.content.Context;
 import android.content.res.Resources;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,7 +20,7 @@ import java.util.List;
 
 import butterknife.BindView;
 
-final class HelperAppAdapter extends RecyclerView.Adapter<HelperAppAdapter.ViewHolder> {
+final class HelperAppAdapter extends AbstractRecyclerViewAdapter<HelperAppAdapter.ViewHolder> {
 
     @NonNull private final List<HelperApp> helperApps;
     @NonNull private final HelperAppClickListener clickListener;
@@ -50,21 +50,24 @@ final class HelperAppAdapter extends RecyclerView.Adapter<HelperAppAdapter.ViewH
     @Override
     public ViewHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
         final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.usefulapps_item, parent, false);
-        return new ViewHolder(view);
-    }
-
-    @Override
-    public void onBindViewHolder(final ViewHolder holder, final int position) {
-        final HelperApp app = helperApps.get(position);
-
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+        final ViewHolder viewHolder = new ViewHolder(view);
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
 
             @Override
-            public void onClick(final View v) {
+            public void onClick(final View view) {
+                final HelperApp app = helperApps.get(viewHolder.getItemPosition());
                 clickListener.onClickHelperApp(app);
             }
         });
 
+        return viewHolder;
+    }
+
+    @Override
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
+        super.onBindViewHolder(holder, position);
+
+        final HelperApp app = helperApps.get(position);
         final Resources resources = context.getResources();
         holder.title.setText(resources.getString(app.titleId));
         holder.image.setImageDrawable(Compatibility.getDrawable(resources, app.iconId));

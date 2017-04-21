@@ -3,11 +3,11 @@ package cgeo.geocaching.connector.gc;
 import cgeo.geocaching.CacheListActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.models.PocketQuery;
+import cgeo.geocaching.ui.recyclerview.AbstractRecyclerViewAdapter;
 import cgeo.geocaching.ui.recyclerview.AbstractRecyclerViewHolder;
 import cgeo.geocaching.utils.Formatter;
 
 import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +18,7 @@ import java.util.List;
 
 import butterknife.BindView;
 
-class PocketQueryListAdapter extends RecyclerView.Adapter<PocketQueryListAdapter.ViewHolder> {
+class PocketQueryListAdapter extends AbstractRecyclerViewAdapter<PocketQueryListAdapter.ViewHolder> {
 
     @NonNull private final List<PocketQuery> queries;
 
@@ -45,26 +45,28 @@ class PocketQueryListAdapter extends RecyclerView.Adapter<PocketQueryListAdapter
     @Override
     public ViewHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
         final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.pocketquery_item, parent, false);
-        return new ViewHolder(view);
+        final ViewHolder viewHolder = new ViewHolder(view);
+        viewHolder.cachelist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View view) {
+                CacheListActivity.startActivityPocket(view.getContext(), queries.get(viewHolder.getItemPosition()));
+            }
+        });
+
+        viewHolder.download.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View v) {
+                CacheListActivity.startActivityPocketDownload(view.getContext(), queries.get(viewHolder.getItemPosition()));
+            }
+        });
+
+        return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
+        super.onBindViewHolder(holder, position);
         final PocketQuery pocketQuery = queries.get(position);
-        holder.cachelist.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(final View v) {
-                CacheListActivity.startActivityPocket(v.getContext(), pocketQuery);
-            }
-        });
-
-        holder.download.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(final View v) {
-                CacheListActivity.startActivityPocketDownload(v.getContext(), pocketQuery);
-            }
-        });
-
         holder.download.setVisibility(pocketQuery.isDownloadable() ? View.VISIBLE : View.GONE);
         holder.label.setText(pocketQuery.getName());
         holder.info.setText(Formatter.formatPocketQueryInfo(pocketQuery));
