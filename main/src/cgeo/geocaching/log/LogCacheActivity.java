@@ -916,6 +916,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         menu.findItem(R.id.menu_image).setVisible(cache.supportsLogImages());
         menu.findItem(R.id.save).setVisible(true);
         menu.findItem(R.id.clear).setVisible(true);
+        menu.findItem(R.id.menu_sort_trackables_by).setVisible(true);
         return true;
     }
 

@@ -41,6 +41,7 @@ public abstract class AbstractLoggingActivity extends AbstractActionBarActivity 
         for (final Smiley smiley : getSmileys()) {
             menuSmilies.add(Menu.NONE, Menu.NONE, Menu.NONE, smiley.text);
         }
+        menu.findItem(R.id.menu_sort_trackables_by).setVisible(false);
 
         return true;
     }

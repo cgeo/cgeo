@@ -4,11 +4,12 @@
   <string name="changelog_release" translatable="false">\n
     <b>Next feature release:</b>\n
     · Fix: Do not parse formulas in personal notes as waypoint coordinates\n
-    · New: Support extraction of DMS, DegDec and UTM waypoint coordinates out of personal notes\n
+    · Fix: Remove wrong menu item from trackable logging screen\n
+    · New: Extract DMS, DegDec and UTM waypoint coordinates out of personal note\n
     · New: Implemented new data storage structure\n
     · New: Allow moving additional geocache data to external SD\n
-    · New: Allow export of owner name to clipboard when clicking on it\n
-    · New: More precise distance / azimuth / projection computations\n
+    · New: Export owner name to clipboard by clicking it\n
+    · New: More precise computation of distance, azimuth or projection\n
     \n
     <b>2017.03.29:</b>\n
     · Fix: Avoid possible crashes during file operation on Android devices below 4.1\n
