@@ -2,43 +2,14 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-    <b>Next feature release:</b>\n
-    · Fix: Do not parse formulas in personal notes as waypoint coordinates\n
-    · Fix: Remove wrong menu item from trackable logging screen\n
-    · New: Extract DMS, DegDec and UTM waypoint coordinates out of personal note\n
+    <b>Next feature release (Beta version):</b>\n
     · New: Implemented new data storage structure\n
     · New: Allow moving additional geocache data to external SD\n
+    · New: Extract DMS, DegDec and UTM waypoint coordinates out of personal note\n
     · New: Export owner name to clipboard by clicking it\n
     · New: More precise computation of distance, azimuth or projection\n
-    \n
-    <b>2017.03.29:</b>\n
-    · Fix: Avoid possible crashes during file operation on Android devices below 4.1\n
-    · Fix: Avoid possible crashes on Android devices below 4.4\n
-    · Fix: Prevent crash when moving a cache freshly loaded through send2cgeo to another list\n
-    · Fix: Prevent crash when logging a trackable on some Xiaomi devices\n
-    · Fix: Correctly display user name containing \"&amp;\" on main screen\n
-    · Fix: Fix crash when dismissing cache popup dialog at the wrong time\n
-    · Fix: Fix rare crash when downloading caches\n
-    \n
-    <b>2017.03.19:</b>\n
-    · New: New login page used for gc.com\n
-    · New: Link to project-gc.com challenge checker for mystery caches having challenge in their title\n
-    · New: New waypoint handling to make sure, that no user defined waypoint data is overwritten when refreshing the cache from server\n
-    · Info: Waypoint projection on server defined waypoints no longer possible to avoid conflicts (Use \"Duplicate Waypoint\" to create a user defined waypoint instead)\n
-    · New: Function to extract waypoints from cache description\n
-    · Fix: Do not store website cookies with Google backup to avoid login problems after version upgrade or reinstallation\n
-    · New: Have a button \"Previous selection\" in list selection while saving a cache\n
-    · New: Allow long press on \"Store\" icon to directly save cache to previously selected lists\n
-    · Fix: Locally changed listing coords have been overwritten on refresh\n
-    · New: \"Add Waypoint\" button on top of the waypoint list\n
-    · Fix: Workaround for faulty devices crashing while editing the personal note\n
-    · New: Sort trackables on logging screen by tracking code (configurable)\n
-    · Fix: Missing ellipsis of long cache names in list\n
-    · Fix: Missing visual separation in gallery\n
-    · Fix: Don\'t delete logs on refresh error\n
-    · Fix: Crash on some devices when editing or saving personal note\n
-    · Fix: Sometimes wrong geokrety name was shown\n
-    · Fix: Export coordinates to clipboard in non-localized format\n
+    · Fix: Do not parse formulas in personal notes as waypoint coordinates\n
+    · Fix: Remove wrong menu item from trackable logging screen\n
     \n
     \n
 </string>
