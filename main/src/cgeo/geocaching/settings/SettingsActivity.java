@@ -52,6 +52,9 @@ import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.support.annotation.AnyRes;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ListAdapter;
@@ -324,6 +327,14 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
             @Override
             public boolean areAllItemsEnabled() {
                 return false;
+            }
+
+            @NonNull
+            @Override
+            public View getView(final int position, @Nullable final View convertView, @NonNull final ViewGroup parent) {
+                final View view = super.getView(position, convertView, parent);
+                view.setEnabled(isEnabled(position));
+                return view;
             }
 
             @Override
