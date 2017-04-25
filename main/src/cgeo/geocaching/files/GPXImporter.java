@@ -117,12 +117,12 @@ public class GPXImporter {
     private static FileType getFileTypeFromPathName(
             final String pathName) {
         if (StringUtils.endsWithIgnoreCase(pathName, GPX_FILE_EXTENSION)) {
-                return FileType.GPX;
+            return FileType.GPX;
         }
 
-    if (StringUtils.endsWithIgnoreCase(pathName, LOC_FILE_EXTENSION)) {
-        return FileType.LOC;
-    }
+        if (StringUtils.endsWithIgnoreCase(pathName, LOC_FILE_EXTENSION)) {
+            return FileType.LOC;
+        }
         return FileType.UNKNOWN;
     }
 
@@ -141,17 +141,17 @@ public class GPXImporter {
     private AbstractImportThread getImporterFromFileType(final Uri uri,
             final ContentResolver contentResolver, final FileType fileType) {
         switch (fileType) {
-        case ZIP:
-            return new ImportGpxZipAttachmentThread(uri, contentResolver,
-                    listId, importStepHandler, progressHandler);
-        case GPX:
-            return new ImportGpxAttachmentThread(uri, contentResolver, listId,
-                    importStepHandler, progressHandler);
-        case LOC:
-            return new ImportLocAttachmentThread(uri, contentResolver, listId,
-                    importStepHandler, progressHandler);
-        default:
-            return null;
+            case ZIP:
+                return new ImportGpxZipAttachmentThread(uri, contentResolver,
+                        listId, importStepHandler, progressHandler);
+            case GPX:
+                return new ImportGpxAttachmentThread(uri, contentResolver, listId,
+                        importStepHandler, progressHandler);
+            case LOC:
+                return new ImportLocAttachmentThread(uri, contentResolver, listId,
+                        importStepHandler, progressHandler);
+            default:
+                return null;
         }
     }
 
