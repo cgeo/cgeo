@@ -38,6 +38,7 @@ import cgeo.geocaching.maps.mapsforge.v6.layers.NavigationLayer;
 import cgeo.geocaching.maps.mapsforge.v6.layers.PositionLayer;
 import cgeo.geocaching.maps.mapsforge.v6.layers.RendererLayer;
 import cgeo.geocaching.maps.mapsforge.v6.layers.TapHandlerLayer;
+import cgeo.geocaching.maps.mapsforge.v6.layers.ThunderforestMap;
 import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.maps.routing.RoutingMode;
 import cgeo.geocaching.models.Geocache;
@@ -96,7 +97,6 @@ import org.mapsforge.map.android.graphics.AndroidResourceBitmap;
 import org.mapsforge.map.android.util.AndroidUtil;
 import org.mapsforge.map.layer.Layers;
 import org.mapsforge.map.layer.cache.TileCache;
-import org.mapsforge.map.layer.download.tilesource.OpenCycleMap;
 import org.mapsforge.map.layer.download.tilesource.OpenStreetMapMapnik;
 import org.mapsforge.map.layer.renderer.TileRendererLayer;
 import org.mapsforge.map.model.DisplayModel;
@@ -609,7 +609,7 @@ public class NewMap extends AbstractActionBarActivity {
             if (mapSource.getNumericalId() == MapsforgeMapProvider.MAPSFORGE_MAPNIK_ID.hashCode()) {
                 newLayer = new DownloadLayer(tileCache, this.mapView.getModel().mapViewPosition, OpenStreetMapMapnik.INSTANCE, AndroidGraphicFactory.INSTANCE);
             } else if (mapSource.getNumericalId() == MapsforgeMapProvider.MAPSFORGE_CYCLEMAP_ID.hashCode()) {
-                newLayer = new DownloadLayer(tileCache, this.mapView.getModel().mapViewPosition, OpenCycleMap.INSTANCE, AndroidGraphicFactory.INSTANCE);
+                newLayer = new DownloadLayer(tileCache, this.mapView.getModel().mapViewPosition, ThunderforestMap.INSTANCE, AndroidGraphicFactory.INSTANCE);
             }
         }
         // Exchange layer
