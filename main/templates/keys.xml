@@ -3,6 +3,9 @@
     <!-- Google Maps -->
     <string name="maps_api_key" translatable="false">@maps.api.key@</string>
 
+    <!-- Thunderforest OpenCycleMap -->
+    <string name="thunderforest_api_key" translatable="false">@thunderforest.api.key@</string>
+
     <!-- Opencaching.de -->
     <string name="oc_de_okapi_consumer_key" translatable="false">@ocde.okapi.consumer.key@</string>
     <string name="oc_de_okapi_consumer_secret" translatable="false">@ocde.okapi.consumer.secret@</string>
