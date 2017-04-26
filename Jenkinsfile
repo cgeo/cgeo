@@ -100,11 +100,12 @@ node('has-emulator') {
             }
 
             matcher = manager.getLogMatcher('.*(https://gradle\\S+).*')
-            if (matcher != null && matcher.matches()) {
+            if (matcher != null) {
                 url = matcher.group(1)
+	            matcher = null // groovy cannot serialize Matcher for saving pipeline state, therefore remove it
                 manager.createSummary("monitor.png").appendText('Gradle build scan result available at <a href="' + url + '">' + url + '</a>', false, false, false, "black")
             }
-            matcher = null // groovy cannot serialize Matcher for saving pipeline state, therefore remove it
+            matcher = null
         }
     }
 }
