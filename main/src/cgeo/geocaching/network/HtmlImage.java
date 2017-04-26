@@ -168,6 +168,9 @@ public class HtmlImage implements Html.ImageGetter {
     @Nullable
     @Override
     public BitmapDrawable getDrawable(final String url) {
+        if (url == null) {
+            throw new IllegalArgumentException("url cannot be null");
+        }
         if (cache.containsKey(url)) {
             return cache.get(url);
         }
@@ -187,13 +190,13 @@ public class HtmlImage implements Html.ImageGetter {
         return new ContainerDrawable(textView, drawable);
     }
 
-    public Observable<BitmapDrawable> fetchDrawable(final String url) {
+    public Observable<BitmapDrawable> fetchDrawable(@NonNull final String url) {
         return observableCache.get(url);
     }
 
     // Caches are loaded from disk on a computation scheduler to avoid using more threads than cores while decoding
     // the image. Downloads happen on downloadScheduler, in parallel with image decoding.
-    private Observable<BitmapDrawable> fetchDrawableUncached(final String url) {
+    private Observable<BitmapDrawable> fetchDrawableUncached(@NonNull final String url) {
         if (StringUtils.isBlank(url) || ImageUtils.containsPattern(url, BLOCKED)) {
             return Observable.just(ImageUtils.getTransparent1x1Drawable(resources));
         }
