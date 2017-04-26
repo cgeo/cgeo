@@ -119,6 +119,16 @@ public class CompassActivity extends AbstractActionBarActivity {
             useCompassSwitch.setVisibility(View.GONE);
         }
 
+        // set the shortcut to map by clicking on the destination coordinates or cache info at the top of the compass
+        final View info = findViewById(R.id.info1);
+        info.setClickable(true);
+        info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CGeoMap.startActivityCoords(CompassActivity.this, dstCoords, null, title);
+            }
+        });
+
         // make sure we can control the TTS volume
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
     }
