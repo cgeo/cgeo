@@ -7,6 +7,7 @@ import io.reactivex.Single;
 import io.reactivex.SingleEmitter;
 import io.reactivex.SingleOnSubscribe;
 import io.reactivex.disposables.Disposables;
+import io.reactivex.schedulers.Schedulers;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
@@ -35,8 +36,16 @@ public class RxOkHttpUtils {
                 singleEmitter.setDisposable(Disposables.fromRunnable(new Runnable() {
                     @Override
                     public void run() {
-                        if (!completed.get()) {
-                            call.cancel();
+                        if (!completed.getAndSet(true)) {
+                            // Cancel request on a non-UI thread as operations such as close()
+                            // may trigger strict-mode errors even though they are executed
+                            // very quickly and without blocking.
+                            Schedulers.io().scheduleDirect(new Runnable() {
+                                @Override
+                                public void run() {
+                                    call.cancel();
+                                }
+                            });
                         }
                     }
                 }));
