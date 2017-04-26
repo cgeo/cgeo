@@ -61,6 +61,7 @@ apply plugin: 'idea'
 
 buildscript {
     repositories {
+        mavenCentral()
         jcenter()
 		// gradle build-scan
 		maven {
