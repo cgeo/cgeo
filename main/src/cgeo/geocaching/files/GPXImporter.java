@@ -21,7 +21,6 @@ import java.util.List;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.Progress;
-import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.Log;
@@ -49,18 +48,17 @@ public class GPXImporter {
 
     private final Progress progress = new Progress(true);
 
-    private final Resources res;
     private final int listId;
     private final Activity fromActivity;
     private final Handler importFinishedHandler;
-    private final DisposableHandler progressHandler = new ProgressHandler(this);
-    private final Handler importStepHandler = new ImportStepHandler(this);
+    private final DisposableHandler progressHandler = new ProgressHandler(progress);
+    private final Handler importStepHandler;
 
     public GPXImporter(final Activity fromActivity, final int listId, final Handler importFinishedHandler) {
         this.listId = listId;
         this.fromActivity = fromActivity;
-        res = fromActivity.getResources();
         this.importFinishedHandler = importFinishedHandler;
+        importStepHandler = new ImportStepHandler(this, fromActivity);
     }
 
     /**
@@ -117,12 +115,12 @@ public class GPXImporter {
     private static FileType getFileTypeFromPathName(
             final String pathName) {
         if (StringUtils.endsWithIgnoreCase(pathName, GPX_FILE_EXTENSION)) {
-                return FileType.GPX;
+            return FileType.GPX;
         }
 
-    if (StringUtils.endsWithIgnoreCase(pathName, LOC_FILE_EXTENSION)) {
-        return FileType.LOC;
-    }
+        if (StringUtils.endsWithIgnoreCase(pathName, LOC_FILE_EXTENSION)) {
+            return FileType.LOC;
+        }
         return FileType.UNKNOWN;
     }
 
@@ -141,17 +139,17 @@ public class GPXImporter {
     private AbstractImportThread getImporterFromFileType(final Uri uri,
             final ContentResolver contentResolver, final FileType fileType) {
         switch (fileType) {
-        case ZIP:
-            return new ImportGpxZipAttachmentThread(uri, contentResolver,
-                    listId, importStepHandler, progressHandler);
-        case GPX:
-            return new ImportGpxAttachmentThread(uri, contentResolver, listId,
-                    importStepHandler, progressHandler);
-        case LOC:
-            return new ImportLocAttachmentThread(uri, contentResolver, listId,
-                    importStepHandler, progressHandler);
-        default:
-            return null;
+            case ZIP:
+                return new ImportGpxZipAttachmentThread(uri, contentResolver,
+                        listId, importStepHandler, progressHandler);
+            case GPX:
+                return new ImportGpxAttachmentThread(uri, contentResolver, listId,
+                        importStepHandler, progressHandler);
+            case LOC:
+                return new ImportLocAttachmentThread(uri, contentResolver, listId,
+                        importStepHandler, progressHandler);
+            default:
+                return null;
         }
     }
 
@@ -167,91 +165,101 @@ public class GPXImporter {
     }
 
     private static final class ProgressHandler extends DisposableHandler {
-        private final WeakReference<GPXImporter> importerRef;
+        private final WeakReference<Progress> progressRef;
 
-        ProgressHandler(final GPXImporter importer) {
-            importerRef = new WeakReference<>(importer);
+        ProgressHandler(final Progress progress) {
+            progressRef = new WeakReference<>(progress);
         }
 
         @Override
         public void handleRegularMessage(final Message msg) {
-            final GPXImporter importer = importerRef.get();
-            if (importer != null) {
-                importer.progress.setProgress(msg.arg1);
+            final Progress progress = progressRef.get();
+            if (progress != null) {
+                progress.setProgress(msg.arg1);
             }
         }
     }
 
-    private static final class ImportStepHandler extends WeakReferenceHandler<GPXImporter> {
+    private static final class ImportStepHandler extends Handler {
+        private final Activity fromActivity;
+        private final Handler importFinishedHandler;
+        private final Progress progress;
+        private final WeakReference<DisposableHandler> progressHandlerRef;
+        private final Resources res;
 
-        ImportStepHandler(final GPXImporter importer) {
-            super(importer);
+        ImportStepHandler(final GPXImporter importer, final Activity fromActivity) {
+            this.fromActivity = importer.fromActivity;
+            this.importFinishedHandler = importer.importFinishedHandler;
+            this.progress = importer.progress;
+            progressHandlerRef = new WeakReference<>(importer.progressHandler);
+            res = fromActivity.getResources();
+        }
+
+        private void disposeProgressHandler() {
+            final DisposableHandler progressHandler = progressHandlerRef.get();
+            if (progressHandler != null) {
+                progressHandler.dispose();
+            }
+        }
+
+        private void importFinished() {
+            if (importFinishedHandler != null) {
+                importFinishedHandler.sendEmptyMessage(0);
+            }
         }
 
         @Override
         public void handleMessage(final Message msg) {
-            final GPXImporter importer = getReference();
-            if (importer != null) {
-                switch (msg.what) {
-                    case IMPORT_STEP_START: {
-                        final Message cancelMessage = importer.importStepHandler.obtainMessage(IMPORT_STEP_CANCEL);
-                        final Resources res = importer.res;
-                        importer.progress.show(importer.fromActivity, res.getString(R.string.gpx_import_title_reading_file), res.getString(R.string.gpx_import_loading_caches_with_filename, msg.obj), ProgressDialog.STYLE_HORIZONTAL, cancelMessage);
-                        break;
-                    }
+            switch (msg.what) {
+                case IMPORT_STEP_START:
+                    final Message cancelMessage = obtainMessage(IMPORT_STEP_CANCEL);
+                    progress.show(fromActivity, res.getString(R.string.gpx_import_title_reading_file), res.getString(R.string.gpx_import_loading_caches_with_filename, msg.obj), ProgressDialog.STYLE_HORIZONTAL, cancelMessage);
+                    break;
 
-                    case IMPORT_STEP_READ_FILE:
-                    case IMPORT_STEP_READ_WPT_FILE: {
-                        final Progress progress = importer.progress;
-                        progress.setMessage(importer.res.getString(msg.arg1, msg.obj));
-                        progress.setMaxProgressAndReset(msg.arg2);
-                        break;
-                    }
+                case IMPORT_STEP_READ_FILE:
+                case IMPORT_STEP_READ_WPT_FILE:
+                    progress.setMessage(res.getString(msg.arg1, msg.obj));
+                    progress.setMaxProgressAndReset(msg.arg2);
+                    break;
 
-                    case IMPORT_STEP_STORE_STATIC_MAPS: {
-                        final Progress progress = importer.progress;
-                        progress.dismiss();
-                        final Resources res = importer.res;
-                        final Message skipMessage = importer.importStepHandler.obtainMessage(IMPORT_STEP_STATIC_MAPS_SKIPPED, msg.arg2, 0, msg.obj);
-                        progress.show(importer.fromActivity, res.getString(R.string.gpx_import_title_static_maps), res.getString(R.string.gpx_import_store_static_maps), ProgressDialog.STYLE_HORIZONTAL, skipMessage);
-                        progress.setMaxProgressAndReset(msg.arg2);
-                        break;
-                    }
+                case IMPORT_STEP_STORE_STATIC_MAPS:
+                    progress.dismiss();
+                    final Message skipMessage = obtainMessage(IMPORT_STEP_STATIC_MAPS_SKIPPED, msg.arg2, 0, msg.obj);
+                    progress.show(fromActivity, res.getString(R.string.gpx_import_title_static_maps), res.getString(R.string.gpx_import_store_static_maps), ProgressDialog.STYLE_HORIZONTAL, skipMessage);
+                    progress.setMaxProgressAndReset(msg.arg2);
+                    break;
 
-                    case IMPORT_STEP_STATIC_MAPS_SKIPPED: {
-                        final Resources res = importer.res;
-                        importer.progress.dismiss();
-                        importer.progressHandler.dispose();
-                        Dialogs.message(importer.fromActivity, R.string.gpx_import_title_caches_imported, res.getString(R.string.gpx_import_static_maps_skipped) + ", " + res.getString(R.string.gpx_import_caches_imported_with_filename, msg.arg1, msg.obj));
-                        importer.importFinished();
-                        break;
-                    }
+                case IMPORT_STEP_STATIC_MAPS_SKIPPED:
+                    progress.dismiss();
+                    disposeProgressHandler();
+                    Dialogs.message(fromActivity, R.string.gpx_import_title_caches_imported, res.getString(R.string.gpx_import_static_maps_skipped) + ", " + res.getString(R.string.gpx_import_caches_imported_with_filename, msg.arg1, msg.obj));
+                    importFinished();
+                    break;
 
-                    case IMPORT_STEP_FINISHED:
-                        importer.progress.dismiss();
-                        Dialogs.message(importer.fromActivity, R.string.gpx_import_title_caches_imported, importer.res.getString(R.string.gpx_import_caches_imported_with_filename, msg.arg1, msg.obj));
-                        importer.importFinished();
-                        break;
+                case IMPORT_STEP_FINISHED:
+                    progress.dismiss();
+                    Dialogs.message(fromActivity, R.string.gpx_import_title_caches_imported, res.getString(R.string.gpx_import_caches_imported_with_filename, msg.arg1, msg.obj));
+                    importFinished();
+                    break;
 
-                    case IMPORT_STEP_FINISHED_WITH_ERROR:
-                        importer.progress.dismiss();
-                        Dialogs.message(importer.fromActivity, R.string.gpx_import_title_caches_import_failed, importer.res.getString(msg.arg1) + "\n\n" + msg.obj);
-                        importer.importFinished();
-                        break;
+                case IMPORT_STEP_FINISHED_WITH_ERROR:
+                    progress.dismiss();
+                    Dialogs.message(fromActivity, R.string.gpx_import_title_caches_import_failed, res.getString(msg.arg1) + "\n\n" + msg.obj);
+                    importFinished();
+                    break;
 
-                    case IMPORT_STEP_CANCEL:
-                        importer.progress.dismiss();
-                        importer.progressHandler.dispose();
-                        break;
+                case IMPORT_STEP_CANCEL:
+                    progress.dismiss();
+                    disposeProgressHandler();
+                    break;
 
-                    case IMPORT_STEP_CANCELED:
-                        ActivityMixin.showShortToast(importer.fromActivity, importer.res.getString(R.string.gpx_import_canceled_with_filename, msg.obj));
-                        importer.importFinished();
-                        break;
+                case IMPORT_STEP_CANCELED:
+                    ActivityMixin.showShortToast(fromActivity, res.getString(R.string.gpx_import_canceled_with_filename, msg.obj));
+                    importFinished();
+                    break;
 
-                    default:
-                        break;
-                }
+                default:
+                    break;
             }
         }
     }
