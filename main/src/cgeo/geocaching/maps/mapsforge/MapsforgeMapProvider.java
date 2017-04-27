@@ -11,12 +11,6 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
 
-import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.mapsforge.v3.android.maps.mapgenerator.MapGeneratorInternal;
-import org.mapsforge.v3.map.reader.MapDatabase;
-import org.mapsforge.v3.map.reader.header.FileOpenResult;
-
 import android.app.Activity;
 import android.content.res.Resources;
 
@@ -24,6 +18,12 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.mapsforge.v3.android.maps.mapgenerator.MapGeneratorInternal;
+import org.mapsforge.v3.map.reader.MapDatabase;
+import org.mapsforge.v3.map.reader.header.FileOpenResult;
 
 public final class MapsforgeMapProvider extends AbstractMapProvider {
 
@@ -35,7 +35,7 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
         final Resources resources = CgeoApplication.getInstance().getResources();
 
         registerMapSource(new MapsforgeMapSource(MAPSFORGE_MAPNIK_ID, this, resources.getString(R.string.map_source_osm_mapnik), MapGeneratorInternal.MAPNIK));
-        registerMapSource(new MapsforgeMapSource(MAPSFORGE_CYCLEMAP_ID, this, resources.getString(R.string.map_source_osm_cyclemap), MapGeneratorInternal.OPENCYCLEMAP));
+        registerMapSource(new MapsforgeMapSource(MAPSFORGE_CYCLEMAP_ID, this, resources.getString(R.string.map_source_osm_cyclemap), MapGeneratorInternal.THUNDERFOREST));
 
         updateOfflineMaps();
     }
