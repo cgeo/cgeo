@@ -1467,6 +1467,7 @@
   <string name="command_rename_list_result">Список переименован</string>
   <string name="command_delete_list_result">Список удален</string>
   <string name="command_unique_list_result">Удаленные тайники из других списков</string>
+  <string name="command_remove_not_unique_result">Удаленные тайники из списка</string>
   <string name="fav_points_remaining">"Рекомендовать тайник (%s осталось)"</string>
   <!-- distance units -->
   <string name="pq_available_for_download">Выборка доступна для скачивания</string>

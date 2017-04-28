@@ -1481,6 +1481,7 @@
   <string name="command_rename_list_result">Liste umbenannt</string>
   <string name="command_delete_list_result">Liste gelöscht</string>
   <string name="command_unique_list_result">Caches wurden von anderen Listen entfernt</string>
+  <string name="command_remove_not_unique_result">Caches wurden von dieser Liste entfernt</string>
   <string name="fav_points_remaining">"Füge den Cache zu Favoriten hinzu (%s verfügbar)"</string>
   <!-- distance units -->
   <string name="unit_m">m</string>
