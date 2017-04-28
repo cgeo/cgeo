@@ -15,6 +15,7 @@ import cgeo.geocaching.command.CopyToListCommand;
 import cgeo.geocaching.command.DeleteListCommand;
 import cgeo.geocaching.command.MakeListUniqueCommand;
 import cgeo.geocaching.command.MoveToListCommand;
+import cgeo.geocaching.command.RemoveNotUniqueCommand;
 import cgeo.geocaching.command.RenameListCommand;
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.enumerations.CacheListType;
@@ -101,6 +102,7 @@ import android.view.View;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -882,22 +884,45 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 }
                 return true;
             case R.id.menu_make_list_unique:
-                new MakeListUniqueCommand(this, listId) {
-
-                    @Override
-                    protected void onFinished() {
-                        refreshSpinnerAdapter();
-                    }
-
-                    @Override
-                    protected void onFinishedUndo() {
-                        refreshSpinnerAdapter();
-                    }
-
-                }.execute();
+                makeListUnique();
+                return true;
+            case R.id.menu_delete_not_singles:
+                deleteNotSingleCaches();
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void makeListUnique() {
+        new MakeListUniqueCommand(this, listId) {
+
+            @Override
+            protected void onFinished() {
+                refreshSpinnerAdapter();
+            }
+
+            @Override
+            protected void onFinishedUndo() {
+                refreshSpinnerAdapter();
+            }
+
+        }.execute();
+    }
+
+    private void deleteNotSingleCaches() {
+        new RemoveNotUniqueCommand(this, listId) {
+
+            @Override
+            protected void onFinished() {
+                refreshSpinnerAdapter();
+            }
+
+            @Override
+            protected void onFinishedUndo() {
+                refreshSpinnerAdapter();
+            }
+
+        }.execute();
     }
 
     private void checkIfEmptyAndRemoveAfterConfirm() {

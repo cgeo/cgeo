@@ -363,6 +363,7 @@
   <string name="caches_clear_offlinelogs_message">Вы действительно хотите удалить сохраненные записи?</string>
   <string name="caches_clear_offlinelogs_progress">Очистка сохраненных записей</string>
   <string name="caches_make_list_unique">Удалить эти тайники из других списков</string>
+  <string name="caches_delete_not_singles">Удалить неодиночные тайники из списка</string>
   <string name="caches_filter_missing_gcvote">Найденные без оценок</string>
   <!-- caches lists -->
   <string name="list_menu_create">Создать новый список</string>
