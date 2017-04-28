@@ -924,6 +924,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             }
 
         }.execute();
+        refreshCurrentList();
     }
 
     private void checkIfEmptyAndRemoveAfterConfirm() {
