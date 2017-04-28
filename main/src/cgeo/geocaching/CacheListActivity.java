@@ -889,6 +889,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 return true;
             case R.id.menu_delete_not_singles:
                 deleteNotSingleCaches();
+                invalidateOptionsMenuCompatible();
+                refreshCurrentList();
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -924,7 +926,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             }
 
         }.execute();
-        refreshCurrentList();
     }
 
     private void checkIfEmptyAndRemoveAfterConfirm() {
