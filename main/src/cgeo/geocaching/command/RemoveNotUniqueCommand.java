@@ -19,7 +19,7 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.DataStore;
 
 /**
- * Removes the caches of the selected list from all other lists.
+ * Removes caches from the current list which are already stored on other lists.
  */
 public abstract class RemoveNotUniqueCommand extends AbstractCommand {
 
