@@ -361,6 +361,7 @@
   <string name="caches_clear_offlinelogs_message">Möchtest du die Offline-Logs löschen?</string>
   <string name="caches_clear_offlinelogs_progress">Lösche Offline-Logs</string>
   <string name="caches_make_list_unique">Caches nur auf diese Liste</string>
+  <string name="caches_delete_not_singles">Entferne Nicht-Single-Caches</string>
   <string name="caches_filter_missing_gcvote">Gefundene Caches ohne Bewertung</string>
   <!-- caches lists -->
   <string name="list_menu_create">Neue Liste</string>
