@@ -1,5 +1,25 @@
 package cgeo.geocaching.settings;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
+import android.os.Build;
+import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+
+import java.io.File;
+import java.io.FileFilter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Locale;
+import java.util.Set;
+
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.apps.navi.NavigationAppFactory.NavigationAppsEnum;
@@ -11,6 +31,7 @@ import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.log.LogTypeTrackable;
+import cgeo.geocaching.log.TrackableComparator;
 import cgeo.geocaching.maps.LivemapStrategy;
 import cgeo.geocaching.maps.MapMode;
 import cgeo.geocaching.maps.MapProviderFactory;
@@ -33,26 +54,6 @@ import cgeo.geocaching.utils.CryptUtils;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.FileUtils.FileSelector;
 import cgeo.geocaching.utils.Log;
-
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
-import android.os.Build;
-import android.preference.PreferenceManager;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-
-import java.io.File;
-import java.io.FileFilter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Locale;
-import java.util.Set;
-
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.ImmutablePair;
 
 /**
  * General c:geo preferences/settings set by the user
@@ -1090,14 +1091,15 @@ public class Settings {
     public static void setIncludeFoundStatus(final boolean includeFoundStatus) {
         putBoolean(R.string.pref_includefoundstatus, includeFoundStatus);
     }
+
     /**
      * Get Trackable inventory sort method based on the last Trackable inventory sort method.
      *
      * @return
-     *          The Trackable Sort Method position previously used.
+     *         The Trackable Sort Method previously used.
      */
-    public static int getTrackableInventorySortMethod() {
-        return getInt(R.string.pref_trackable_inventory_sort, 0);
+    public static TrackableComparator getTrackableComparator() {
+        return TrackableComparator.findByName(getString(R.string.pref_trackable_inventory_sort, ""));
     }
 
     /**
@@ -1106,8 +1108,8 @@ public class Settings {
      * @param trackableSortMethod
      *          The Trackable Sort Method to remember
      */
-    public static void setTrackableInventorySortMethod(final int trackableSortMethod) {
-        putInt(R.string.pref_trackable_inventory_sort, trackableSortMethod);
+    public static void setTrackableComparator(final TrackableComparator trackableSortMethod) {
+        putString(R.string.pref_trackable_inventory_sort, trackableSortMethod.name());
     }
     /**
      * Obtain Trackable action from the last Trackable log.

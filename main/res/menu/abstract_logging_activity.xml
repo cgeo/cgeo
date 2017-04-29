@@ -46,6 +46,21 @@
         android:id="@+id/menu_sort_trackables_by"
         android:title="@string/log_tb_sortby"
         app:showAsAction="ifRoom|withText">
+        <menu>
+            <group
+                android:id="@+id/menu_group_sort_trackables"
+                android:checkableBehavior="single" >
+	            <item
+	                android:id="@+id/menu_sort_trackables_name"
+                    android:checked="true"
+	                android:title="@string/trackable_name">
+	            </item>
+	            <item
+	                android:id="@+id/menu_sort_trackables_code"
+	                android:title="@string/trackable_code">
+	            </item>
+	        </group>
+        </menu>
     </item>
     <item
         android:id="@+id/clear"

@@ -1,5 +1,41 @@
 package cgeo.geocaching.log;
 
+import android.R.string;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.concurrent.Callable;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import cgeo.geocaching.ImageSelectActivity;
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
@@ -30,48 +66,10 @@ import cgeo.geocaching.utils.AsyncTaskWithProgressText;
 import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.ViewUtils;
-
-import android.R.string;
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
-import android.content.Intent;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.TextView;
-
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.concurrent.Callable;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import io.reactivex.Observable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
-import org.apache.commons.lang3.StringUtils;
 
 public class LogCacheActivity extends AbstractLoggingActivity implements DateDialog.DateDialogParent {
 
@@ -82,47 +80,6 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     private static final String SAVED_STATE_FAVPOINTS = "cgeo.geocaching.saved_state_favpoints";
 
     private static final int SELECT_IMAGE = 101;
-
-    private enum TrackableComparator {
-        TRACKABLE_COMPARATOR_TRACKCODE(0, R.string.trackable_code, new Comparator<TrackableLog>() {
-            @Override
-            public int compare(final TrackableLog lhs, final TrackableLog rhs) {
-                return TextUtils.COLLATOR.compare(lhs.trackCode, rhs.trackCode);
-            }
-        }),
-        TRACKABLE_COMPARATOR_NAME(1, R.string.trackable_name, new Comparator<TrackableLog>() {
-            @Override
-            public int compare(final TrackableLog lhs,  final TrackableLog rhs) {
-                return TextUtils.COLLATOR.compare(lhs.name, rhs.name);
-            }
-        });
-
-        private final int position;
-        private final int label;
-        private final Comparator<TrackableLog> comparator;
-
-        TrackableComparator(final int position, final int label, final Comparator<TrackableLog> comparator) {
-            this.position = position;
-            this.label = label;
-            this.comparator = comparator;
-        }
-
-        public int getPosition() {
-            return position;
-        }
-        public int getLabel() {
-            return label;
-        }
-
-        public Comparator<TrackableLog> getComparator() {
-            return comparator;
-        }
-
-        public static TrackableComparator findByPosition(final int position) {
-            final TrackableComparator[] comparators = values();
-            return comparators[position];
-        }
-    }
 
     private Geocache cache = null;
     private String geocode = null;
@@ -294,30 +251,10 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         });
     }
 
-    private void selectTrackableSort() {
-        final Builder alert = new AlertDialog.Builder(this);
-        alert.setTitle(res.getString(R.string.log_tb_sortby));
-
-        final String[] tbSortLabels = new String[TrackableComparator.values().length];
-        for (final TrackableComparator tc: TrackableComparator.values()) {
-            tbSortLabels[tc.getPosition()] = res.getString(tc.getLabel());
-        }
-
-        alert.setSingleChoiceItems(tbSortLabels, Settings.getTrackableInventorySortMethod() , new OnClickListener() {
-            @Override
-            public void onClick(final DialogInterface dialog, final int position) {
-                Settings.setTrackableInventorySortMethod(position);
-                updateTrackablesList();
-                dialog.dismiss();
-            }
-        });
-        alert.create().show();
-    }
-
     private ArrayList<TrackableLog> getSortedTrackables() {
-        final int position = Settings.getTrackableInventorySortMethod();
+        final TrackableComparator comparator = Settings.getTrackableComparator();
         final ArrayList<TrackableLog> sortedTrackables = new ArrayList<>(trackables);
-        Collections.sort(sortedTrackables, TrackableComparator.findByPosition(position).getComparator());
+        Collections.sort(sortedTrackables, comparator.getComparator());
         return sortedTrackables;
     }
 
@@ -866,15 +803,20 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
             case R.id.menu_image:
                 selectImage();
                 return true;
-            case R.id.menu_sort_trackables_by:
-                selectTrackableSort();
-                return true;
             case R.id.save:
                 saveLog(true);
                 finish();
                 return true;
             case R.id.clear:
                 clearLog();
+                return true;
+            case R.id.menu_sort_trackables_name:
+//                item.setChecked(true);
+                sortTrackables(TrackableComparator.TRACKABLE_COMPARATOR_NAME);
+                return true;
+            case R.id.menu_sort_trackables_code:
+//                item.setChecked(true);
+                sortTrackables(TrackableComparator.TRACKABLE_COMPARATOR_TRACKCODE);
                 return true;
             default:
                 break;
@@ -917,6 +859,16 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         menu.findItem(R.id.save).setVisible(true);
         menu.findItem(R.id.clear).setVisible(true);
         menu.findItem(R.id.menu_sort_trackables_by).setVisible(true);
+        switch (Settings.getTrackableComparator()) {
+            case TRACKABLE_COMPARATOR_NAME:
+                menu.findItem(R.id.menu_sort_trackables_name).setChecked(true);
+                break;
+            case TRACKABLE_COMPARATOR_TRACKCODE:
+                menu.findItem(R.id.menu_sort_trackables_code).setChecked(true);
+                break;
+            default:
+                menu.findItem(R.id.menu_sort_trackables_name).setChecked(true);
+        }
         return true;
     }
 
@@ -931,4 +883,11 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     protected String getLastLog() {
         return Settings.getLastCacheLog();
     }
+
+    private void sortTrackables(final TrackableComparator comparator) {
+        Settings.setTrackableComparator(comparator);
+        updateTrackablesList();
+        invalidateOptionsMenuCompatible();
+    }
+
 }
