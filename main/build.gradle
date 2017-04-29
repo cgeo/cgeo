@@ -283,7 +283,7 @@ dependencies {
     testCompile 'junit:junit:4.12'
 
     // Leak Canary, memory leak detection
-    def leakCanaryVersion = '1.5'
+    def leakCanaryVersion = '1.5.1'
     debugCompile "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion"
     releaseCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
     nightlyCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
@@ -330,7 +330,7 @@ dependencies {
     compile 'com.jakewharton:process-phoenix:2.0.0'
 
     // RxJava
-    compile "io.reactivex.rxjava2:rxjava:2.0.9"
+    compile "io.reactivex.rxjava2:rxjava:2.1.0"
     compile "io.reactivex.rxjava2:rxandroid:2.0.1"
 
     // Support Library. Appcompat
