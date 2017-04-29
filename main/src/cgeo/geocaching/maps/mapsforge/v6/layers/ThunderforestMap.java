@@ -22,22 +22,27 @@ public class ThunderforestMap extends AbstractTileSource {
         apiKey = CgeoApplication.getInstance().getString(R.string.thunderforest_api_key);
     }
 
+    @Override
     public int getParallelRequestsLimit() {
         return 8;
     }
 
+    @Override
     public URL getTileUrl(final Tile tile) throws MalformedURLException {
         return new URL("https", this.getHostName(), this.port, "/cycle/" + tile.zoomLevel + '/' + tile.tileX + '/' + tile.tileY + ".png?apikey=" + apiKey);
     }
 
+    @Override
     public byte getZoomLevelMax() {
         return 22;
     }
 
+    @Override
     public byte getZoomLevelMin() {
         return 0;
     }
 
+    @Override
     public boolean hasAlpha() {
         return false;
     }
