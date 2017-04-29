@@ -7,10 +7,10 @@ import java.nio.charset.Charset;
  */
 public final class Charsets {
     /**
-     * We cannot use the recommend java.nio charset, this that is not available in old android target versions
+     * We cannot use the recommend java.nio.charset.StandardCharsets, since that is only available for target >= 19.
      */
     // CHECKSTYLE IGNORE StaticVariableNameCheck FOR NEXT 1 LINES
-    @SuppressWarnings("deprecation") public static final Charset UTF_8 = org.apache.commons.io.Charsets.UTF_8;
+    public static final Charset UTF_8 = Charset.forName("UTF-8");
 
     private Charsets() {
         // utility class
