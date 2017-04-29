@@ -477,7 +477,7 @@ public class DataStore {
     }
 
     @NonNull
-    private static File databasePath() {
+    public static File databasePath() {
         return databasePath(!Settings.isDbOnSDCard());
     }
 
