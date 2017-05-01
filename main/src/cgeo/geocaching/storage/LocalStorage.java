@@ -60,7 +60,7 @@ public final class LocalStorage {
      * Usually <pre>/data/data/cgeo.geocaching</pre>
      */
     @NonNull
-    private static File getInternalCgeoDirectory() {
+    public static File getInternalCgeoDirectory() {
         if (internalCgeoDirectory == null) {
             // A race condition will do no harm as the operation is idempotent. No need to synchronize.
             internalCgeoDirectory = CgeoApplication.getInstance().getApplicationContext().getFilesDir().getParentFile();

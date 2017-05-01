@@ -471,8 +471,16 @@ public final class FileUtils {
      */
     @SuppressWarnings("deprecation")
     public static long getFreeDiskSpace(final File dir) {
-        final StatFs statFs = new StatFs(dir.getAbsolutePath());
-        return (long) statFs.getAvailableBlocks() * (long) statFs.getBlockSize();
+        if (dir == null) {
+            return 0;
+        }
+        try {
+            final StatFs statFs = new StatFs(dir.getAbsolutePath());
+            return (long) statFs.getAvailableBlocks() * (long) statFs.getBlockSize();
+        } catch (final IllegalArgumentException ignored) {
+            // thrown if the directory isn't pointing to an external storage
+        }
+        return 0;
     }
 
 }

@@ -12,15 +12,19 @@ import cgeo.geocaching.sensors.RotationProvider;
 import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.HwAccel;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.storage.LocalStorage;
 
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Build.VERSION;
+import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -49,7 +53,7 @@ public final class SystemInformation {
                 .append("\nDevice: ").append(Build.MODEL).append(" (").append(Build.PRODUCT).append(", ").append(Build.BRAND).append(')')
                 .append("\nAndroid version: ").append(VERSION.RELEASE)
                 .append("\nAndroid build: ").append(Build.DISPLAY)
-                .append("\nCgeo version: ").append(Version.getVersionName(context));
+                .append("\nc:geo version: ").append(Version.getVersionName(context));
         appendGooglePlayServicesVersion(context, body);
         body
                 .append("\nLow power mode: ").append(Settings.useLowPowerMode() ? "active" : "inactive")
@@ -64,10 +68,14 @@ public final class SystemInformation {
                 .append(" (").append(Settings.useHardwareAcceleration() == HwAccel.hwAccelShouldBeEnabled() ? "default state" : "manually changed").append(')')
                 .append("\nSystem language: ").append(Locale.getDefault());
         if (Settings.useEnglish()) {
-            body.append(" (cgeo forced to English)");
+            body.append(" (c:geo forced to English)");
         }
         body.append("\nSystem date format: ").append(Formatter.getShortDateFormat())
                 .append("\nDebug mode active: ").append(Settings.isDebug() ? "yes" : "no");
+        appendDirectory(body, "\nSystem internal c:geo dir: ", LocalStorage.getInternalCgeoDirectory());
+        appendDirectory(body, "\nUser storage c:geo dir: ", LocalStorage.getExternalPublicCgeoDirectory());
+        appendDirectory(body, "\nGeocache data: ", LocalStorage.getGeocacheDataDirectory());
+        appendDatabase(body);
         appendPermissions(context, body);
         appendConnectors(body);
         if (GCConnector.getInstance().isActive()) {
@@ -76,6 +84,31 @@ public final class SystemInformation {
         appendAddons(body);
         body.append("\n--- End of system information ---\n");
         return body.toString();
+    }
+
+    private static void appendDatabase(@NonNull final StringBuilder body) {
+        final File dbFile = DataStore.databasePath();
+        body.append("\nDatabase: ").append(dbFile)
+                .append(" (").append(Formatter.formatBytes(dbFile.length())).append(") on ")
+                .append(Settings.isDbOnSDCard() ? "user storage" : "system internal storage");
+    }
+
+    private static void appendDirectory(@NonNull final StringBuilder body, @NonNull final String label, @NonNull final File directory) {
+        body.append(label).append(directory).append(" (").append(Formatter.formatBytes(FileUtils.getFreeDiskSpace(directory))).append(" free)");
+        try {
+            if (directory.getAbsolutePath().startsWith(LocalStorage.getInternalCgeoDirectory().getAbsolutePath())) {
+                body.append(" internal");
+            } else if (VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                body.append(" external");
+            } else if (Environment.isExternalStorageRemovable(directory)) {
+                body.append(" external removable");
+            } else {
+                body.append(" external non-removable");
+            }
+        } catch (final IllegalArgumentException ignored) {
+            // thrown if the directory isn't pointing to an external storage
+            body.append(" internal");
+        }
     }
 
     private static void appendConnectors(@NonNull final StringBuilder body) {
@@ -103,7 +136,7 @@ public final class SystemInformation {
         if (ContactsAddon.isAvailable()) {
             addons.add("contacts");
         }
-        body.append("\nInstalled cgeo plugins: ");
+        body.append("\nInstalled c:geo plugins: ");
         body.append(CollectionUtils.isNotEmpty(addons) ? StringUtils.join(addons, ", ") : " none");
     }
 
