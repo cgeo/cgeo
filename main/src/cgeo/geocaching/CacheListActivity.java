@@ -954,7 +954,16 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
      */
     @Override
     public void showFilterMenu(final View view) {
-        FilterActivity.selectFilter(this);
+        if (view != null && Settings.getCacheType() != CacheType.ALL) {
+            Dialogs.selectGlobalTypeFilter(this, new Action1<CacheType>() {
+                @Override
+                public void call(final CacheType cacheType) {
+                    refreshCurrentList();
+                }
+            });
+        } else {
+            FilterActivity.selectFilter(this);
+        }
     }
 
     private void setComparator(final CacheComparator comparator) {
