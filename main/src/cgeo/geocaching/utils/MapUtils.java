@@ -179,6 +179,11 @@ public final class MapUtils {
         // background: disabled or not
         final Drawable marker = Compatibility.getDrawable(res, cache.getMapMarkerId());
         final int resolution = calculateResolution(marker);
+
+        // Add a fake marker, with the expected total size.
+        layers.add(Compatibility.getDrawable(res, R.drawable.marker_fake));
+        insets.add(INSET_RELIABLE[resolution]);
+
         // Show the background circle only on map
         if (showBackground(cacheListType)) {
             layers.add(marker);
