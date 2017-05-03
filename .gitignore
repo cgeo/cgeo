@@ -23,10 +23,25 @@ private.properties
 /main/project/settings/drawable-mdpi/
 .directory
 .gradle/
-.idea/
-*.iml
 main/build/
 mapswithme-api/build/
 build
 main/usage.txt
 main/gradle.properties
+
+# IDEA/Android Studio ignores
+*.iml
+*.ipr
+*.iws
+/.idea/*
+/projectFilesBackup/*
+
+# IDEA/Android Studio Ignore exceptions
+!/.idea/vcs.xml
+!/.idea/fileTemplates/
+!/.idea/inspectionProfiles/
+!/.idea/scopes/
+!/.idea/codeStyleSettings.xml
+!/.idea/encodings.xml
+!/.idea/copyright/
+!/.idea/compiler.xml
