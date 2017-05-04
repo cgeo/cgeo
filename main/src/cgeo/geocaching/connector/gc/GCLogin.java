@@ -246,7 +246,8 @@ public class GCLogin extends AbstractLogin {
     }
 
     private boolean isLanguageEnglish(@NonNull final String page) {
-        return StringUtils.equals(Jsoup.parse(page).select("div.language-dropdown > select > option[selected=\"selected\"]").first().text(), "English");
+        final Element languageElement = Jsoup.parse(page).select("div.language-dropdown > select > option[selected=\"selected\"]").first();
+        return languageElement != null && StringUtils.equals(languageElement.text(), "English");
     }
 
     /**
