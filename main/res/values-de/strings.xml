@@ -361,7 +361,6 @@
   <string name="caches_clear_offlinelogs_message">Möchtest du die Offline-Logs löschen?</string>
   <string name="caches_clear_offlinelogs_progress">Lösche Offline-Logs</string>
   <string name="caches_make_list_unique">Caches nur auf diese Liste</string>
-  <string name="caches_delete_not_singles">Entferne Nicht-Single-Caches</string>
   <string name="caches_filter_missing_gcvote">Gefundene Caches ohne Bewertung</string>
   <!-- caches lists -->
   <string name="list_menu_create">Neue Liste</string>
@@ -1481,7 +1480,6 @@
   <string name="command_rename_list_result">Liste umbenannt</string>
   <string name="command_delete_list_result">Liste gelöscht</string>
   <string name="command_unique_list_result">Caches wurden von anderen Listen entfernt</string>
-  <string name="command_remove_not_unique_result">Caches wurden von dieser Liste entfernt</string>
   <string name="fav_points_remaining">"Füge den Cache zu Favoriten hinzu (%s verfügbar)"</string>
   <!-- distance units -->
   <string name="unit_m">m</string>
