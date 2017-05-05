@@ -35,7 +35,6 @@ import cgeo.geocaching.utils.Version;
 import cgeo.geocaching.utils.functions.Action1;
 
 import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
 import android.app.SearchManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -62,9 +61,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import butterknife.BindView;
@@ -524,51 +520,12 @@ public class MainActivity extends AbstractActionBarActivity {
     }
 
     protected void selectGlobalTypeFilter() {
-        final List<CacheType> cacheTypes = new ArrayList<>();
-
-        //first add the most used types
-        cacheTypes.add(CacheType.ALL);
-        cacheTypes.add(CacheType.TRADITIONAL);
-        cacheTypes.add(CacheType.MULTI);
-        cacheTypes.add(CacheType.MYSTERY);
-
-        // then add all other cache types sorted alphabetically
-        final List<CacheType> sorted = new ArrayList<>(Arrays.asList(CacheType.values()));
-        sorted.removeAll(cacheTypes);
-
-        Collections.sort(sorted, new Comparator<CacheType>() {
+        Dialogs.selectGlobalTypeFilter(this, new Action1<CacheType>() {
             @Override
-            public int compare(final CacheType left, final CacheType right) {
-                return TextUtils.COLLATOR.compare(left.getL10n(), right.getL10n());
-            }
-        });
-
-        cacheTypes.addAll(sorted);
-
-        int checkedItem = cacheTypes.indexOf(Settings.getCacheType());
-        if (checkedItem < 0) {
-            checkedItem = 0;
-        }
-
-        final String[] items = new String[cacheTypes.size()];
-        for (int i = 0; i < cacheTypes.size(); i++) {
-            items[i] = cacheTypes.get(i).getL10n();
-        }
-
-        final Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(R.string.menu_filter);
-        builder.setSingleChoiceItems(items, checkedItem, new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(final DialogInterface dialog, final int position) {
-                final CacheType cacheType = cacheTypes.get(position);
-                Settings.setCacheType(cacheType);
+            public void call(final CacheType cacheType) {
                 setFilterTitle();
-                dialog.dismiss();
             }
-
         });
-        builder.create().show();
     }
 
     public void updateCacheCounter() {

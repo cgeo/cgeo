@@ -11,6 +11,7 @@
     · Fix: Do not parse formulas in personal notes as waypoint coordinates\n
     · Fix: Remove wrong menu item from trackable logging screen\n
     · Fix: Apply API key for OSM:Cyclemap\n 
+    · Fix: Detect that no language has been selected on geocaching.com\n
     \n
     \n
 </string>
