@@ -923,6 +923,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             @Override
             protected void onFinishedUndo() {
                 refreshSpinnerAdapter();
+                refreshCurrentList();
             }
 
         }.execute();
