@@ -1841,7 +1841,7 @@ public final class GCParser {
                             final String url = "https://imgcdn.geocaching.com/cache/log/large/" + image.path("FileName").asText();
                             final String title = TextUtils.removeControlCharacters(image.path("Name").asText());
                             String description = image.path("Descr").asText();
-                            if (StringUtils.startsWith(description, "Image uploaded from")) {
+                            if (StringUtils.contains(description, "Geocaching®") && description.length() < 60) {
                                 description = null;
                             }
                             final Image logImage = new Image.Builder().setUrl(url).setTitle(title).setDescription(description).build();
