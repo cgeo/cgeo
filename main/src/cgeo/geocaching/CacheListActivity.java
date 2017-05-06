@@ -92,6 +92,7 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBar;
+import android.text.TextUtils;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.KeyEvent;
@@ -959,6 +960,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 @Override
                 public void call(final CacheType cacheType) {
                     refreshCurrentList();
+                    prepareFilterBar();
                 }
             });
         } else {
@@ -1694,19 +1696,26 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     private void prepareFilterBar() {
-        if (Settings.getCacheType() != CacheType.ALL || adapter.isFiltered()) {
-            final StringBuilder output = new StringBuilder(Settings.getCacheType().getL10n());
-
-            if (adapter.isFiltered()) {
-                output.append(", ").append(adapter.getFilterName());
-            }
-
-            final TextView filterTextView = ButterKnife.findById(this, R.id.filter_text);
-            filterTextView.setText(output.toString());
-            findViewById(R.id.filter_bar).setVisibility(View.VISIBLE);
-        } else {
+        final List<String> filterNames = getFilterNames();
+        if (filterNames.isEmpty()) {
             findViewById(R.id.filter_bar).setVisibility(View.GONE);
+        } else {
+            final TextView filterTextView = ButterKnife.findById(this, R.id.filter_text);
+            filterTextView.setText(TextUtils.join(", ", filterNames));
+            findViewById(R.id.filter_bar).setVisibility(View.VISIBLE);
         }
+    }
+
+    @NonNull
+    private List<String> getFilterNames() {
+        final List<String> filters = new ArrayList<>();
+        if (Settings.getCacheType() != CacheType.ALL) {
+            filters.add(Settings.getCacheType().getL10n());
+        }
+        if (adapter.isFiltered()) {
+            filters.add(adapter.getFilterName());
+        }
+        return filters;
     }
 
     public static Intent getNearestIntent(final Activity context) {
