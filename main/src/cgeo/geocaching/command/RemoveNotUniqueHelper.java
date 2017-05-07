@@ -11,7 +11,7 @@ final class RemoveNotUniqueHelper {
     }
 
     static Set<Geocache> removeNonUniqueCaches(final Set<Geocache> caches) {
-        Set<Geocache> toBeRemoved = new HashSet<>();
+        final Set<Geocache> toBeRemoved = new HashSet<>();
         for (final Geocache geocache : caches) {
         if (geocache.getLists().size() > 1) {
           // stored on more than this list
