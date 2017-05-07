@@ -152,7 +152,7 @@
     </item>
     <item
         android:id="@+id/menu_delete_not_singles"
-        android:title="@string/caches_delete_not_singles"
+        android:title="@string/caches_remove_non_unique"
         app:showAsAction="never|withText">
     </item>
 
