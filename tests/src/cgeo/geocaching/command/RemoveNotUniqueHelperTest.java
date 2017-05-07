@@ -1,12 +1,13 @@
 package cgeo.geocaching.command;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
 import junit.framework.TestCase;
 
 import java.util.HashSet;
 import java.util.Set;
 
 import cgeo.geocaching.models.Geocache;
+
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class RemoveNotUniqueHelperTest extends TestCase {
 
@@ -44,7 +45,7 @@ public class RemoveNotUniqueHelperTest extends TestCase {
         lists3 = gc3.getLists();
     }
 
-    public void testRemoveNonUniqueCaches() throws Exception {
+    public void testRemoveNonUniqueCaches() {
         // GIVEN
         lists1.add(LIST_ID1);
         lists1.add(LIST_ID2);
@@ -60,7 +61,7 @@ public class RemoveNotUniqueHelperTest extends TestCase {
         assertThat(toBeRemoved.contains(gc3)).isTrue();
     }
 
-    public void testShouldRemoveAllCaches() throws Exception {
+    public void testShouldRemoveAllCaches() {
         // GIVEN
         lists1.add(LIST_ID1);
         lists1.add(LIST_ID2);
@@ -76,18 +77,18 @@ public class RemoveNotUniqueHelperTest extends TestCase {
         assertThat(toBeRemoved.contains(gc2)).isTrue();
         assertThat(toBeRemoved.contains(gc3)).isTrue();
     }
-    public void testShouldRemoveNoCache() throws Exception {
+
+    public void testShouldRemoveNoCache() {
         // GIVEN
         lists1.add(LIST_ID1);
         lists2.add(LIST_ID3);
         lists3.add(LIST_ID3);
-
+        // WHEN
         final Set<Geocache> toBeRemoved = RemoveNotUniqueHelper.removeNonUniqueCaches(geoCaches);
-
+        // THEN
         assertThat(toBeRemoved.size()).isEqualTo(0);
         assertThat(toBeRemoved.contains(gc1)).isFalse();
         assertThat(toBeRemoved.contains(gc2)).isFalse();
         assertThat(toBeRemoved.contains(gc3)).isFalse();
     }
-
 }
