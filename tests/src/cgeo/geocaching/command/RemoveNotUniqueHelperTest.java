@@ -52,12 +52,12 @@ public class RemoveNotUniqueHelperTest extends TestCase {
         lists3.add(LIST_ID2);
         lists3.add(LIST_ID3);
         // WHEN
-        Set<Geocache> result = RemoveNotUniqueHelper.removeNonUniqueCaches(geoCaches);
+        final Set<Geocache> toBeRemoved = RemoveNotUniqueHelper.removeNonUniqueCaches(geoCaches);
         // THEN
-        assertThat(result.size()).isEqualTo(2);
-        assertThat(result.contains(gc1)).isTrue();
-        assertThat(result.contains(gc2)).isFalse();
-        assertThat(result.contains(gc3)).isTrue();
+        assertThat(toBeRemoved.size()).isEqualTo(2);
+        assertThat(toBeRemoved.contains(gc1)).isTrue();
+        assertThat(toBeRemoved.contains(gc2)).isFalse();
+        assertThat(toBeRemoved.contains(gc3)).isTrue();
     }
 
     public void testShouldRemoveAllCaches() throws Exception {
@@ -68,9 +68,9 @@ public class RemoveNotUniqueHelperTest extends TestCase {
         lists2.add(LIST_ID3);
         lists3.add(LIST_ID2);
         lists3.add(LIST_ID3);
-
-        Set<Geocache> toBeRemoved = RemoveNotUniqueHelper.removeNonUniqueCaches(geoCaches);
-
+        // WHEN
+        final Set<Geocache> toBeRemoved = RemoveNotUniqueHelper.removeNonUniqueCaches(geoCaches);
+        // THEN
         assertThat(toBeRemoved.size()).isEqualTo(3);
         assertThat(toBeRemoved.contains(gc1)).isTrue();
         assertThat(toBeRemoved.contains(gc2)).isTrue();
@@ -82,12 +82,12 @@ public class RemoveNotUniqueHelperTest extends TestCase {
         lists2.add(LIST_ID3);
         lists3.add(LIST_ID3);
 
-        Set<Geocache> result = RemoveNotUniqueHelper.removeNonUniqueCaches(geoCaches);
+        final Set<Geocache> toBeRemoved = RemoveNotUniqueHelper.removeNonUniqueCaches(geoCaches);
 
-        assertThat(result.size()).isEqualTo(0);
-        assertThat(result.contains(gc1)).isFalse();
-        assertThat(result.contains(gc2)).isFalse();
-        assertThat(result.contains(gc3)).isFalse();
+        assertThat(toBeRemoved.size()).isEqualTo(0);
+        assertThat(toBeRemoved.contains(gc1)).isFalse();
+        assertThat(toBeRemoved.contains(gc2)).isFalse();
+        assertThat(toBeRemoved.contains(gc3)).isFalse();
     }
 
 }
