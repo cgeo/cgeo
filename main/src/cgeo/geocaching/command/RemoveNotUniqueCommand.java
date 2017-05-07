@@ -17,32 +17,32 @@ import cgeo.geocaching.storage.DataStore;
  */
 public abstract class RemoveNotUniqueCommand extends AbstractCommand {
 
-  private final SearchResult searchResult;
-  private final int listId;
+    private final SearchResult searchResult;
+    private final int listId;
 
-  private Set<Geocache> removedCaches;
+    private Set<Geocache> removedCaches;
 
-  protected RemoveNotUniqueCommand(@NonNull final Activity context, final int listId, final SearchResult searchResult) {
-    super(context);
-    this.listId = listId;
-    this.searchResult = searchResult;
-  }
+    protected RemoveNotUniqueCommand(@NonNull final Activity context, final int listId, final SearchResult searchResult) {
+        super(context);
+        this.listId = listId;
+        this.searchResult = searchResult;
+    }
 
-  @Override
-  protected void doCommand() {
-    final Set<Geocache> caches = DataStore.loadCaches(searchResult.getGeocodes(), LoadFlags.LOAD_CACHE_OR_DB);
-    removedCaches = RemoveNotUniqueHelper.removeNonUniqueCaches(caches);
-    DataStore.removeFromList(removedCaches, listId); // remove from this one
-  }
+    @Override
+    protected void doCommand() {
+        final Set<Geocache> caches = DataStore.loadCaches(searchResult.getGeocodes(), LoadFlags.LOAD_CACHE_OR_DB);
+        removedCaches = RemoveNotUniqueHelper.removeNonUniqueCaches(caches);
+        DataStore.removeFromList(removedCaches, listId); // remove from this one
+    }
 
-  @Override
-  protected void undoCommand() {
-    DataStore.addToList(removedCaches, listId);
-  }
+    @Override
+    protected void undoCommand() {
+        DataStore.addToList(removedCaches, listId);
+    }
 
-  @Override
-  @Nullable
-  protected String getResultMessage() {
-    return getContext().getString(R.string.command_remove_not_unique_result);
-  }
+    @Override
+    @Nullable
+    protected String getResultMessage() {
+        return getContext().getString(R.string.command_remove_not_unique_result);
+    }
 }
