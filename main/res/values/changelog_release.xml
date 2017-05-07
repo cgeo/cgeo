@@ -12,6 +12,7 @@
     · Fix: Remove wrong menu item from trackable logging screen\n
     · Fix: Apply API key for OSM:Cyclemap\n 
     · Fix: Detect that no language has been selected on geocaching.com\n
+    · Fix: Allow resetting global cache type filter by clicking on filter info in lists\n
     \n
     \n
 </string>
