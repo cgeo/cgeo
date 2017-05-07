@@ -22,7 +22,7 @@ public abstract class RemoveNotUniqueCommand extends AbstractCommand {
   @NonNull
   private final Set<Geocache> removedCaches = new HashSet<>();
 
-  protected RemoveNotUniqueCommand(@NonNull final Activity context, final int listId, SearchResult searchResult) {
+  protected RemoveNotUniqueCommand(@NonNull final Activity context, final int listId, final SearchResult searchResult) {
     super(context);
     this.listId = listId;
     this.searchResult = searchResult;
