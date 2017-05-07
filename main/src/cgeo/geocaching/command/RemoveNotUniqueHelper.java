@@ -5,9 +5,12 @@ import java.util.Set;
 
 import cgeo.geocaching.models.Geocache;
 
-class RemoveNotUniqueHelper {
+final class RemoveNotUniqueHelper {
 
-    static Set<Geocache> removeNonUniqueCaches(Set<Geocache> caches) {
+    private RemoveNotUniqueHelper() {
+    }
+
+    static Set<Geocache> removeNonUniqueCaches(final Set<Geocache> caches) {
         Set<Geocache> toBeRemoved = new HashSet<>();
         for (final Geocache geocache : caches) {
         if (geocache.getLists().size() > 1) {
