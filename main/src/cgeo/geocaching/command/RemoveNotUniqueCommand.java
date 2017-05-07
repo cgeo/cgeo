@@ -29,7 +29,7 @@ public abstract class RemoveNotUniqueCommand extends AbstractCommand {
 
   @Override
   protected void doCommand() {
-    Set<Geocache> caches = DataStore.loadCaches(searchResult.getGeocodes(), LoadFlags.LOAD_CACHE_OR_DB);
+    final Set<Geocache> caches = DataStore.loadCaches(searchResult.getGeocodes(), LoadFlags.LOAD_CACHE_OR_DB);
     removedCaches = RemoveNotUniqueHelper.removeNonUniqueCaches(caches);
     DataStore.removeFromList(removedCaches, listId); // remove from this one
   }
