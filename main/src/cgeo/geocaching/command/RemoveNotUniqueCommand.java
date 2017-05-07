@@ -19,8 +19,7 @@ public abstract class RemoveNotUniqueCommand extends AbstractCommand {
   private final SearchResult searchResult;
   private final int listId;
 
-  @NonNull
-  private final Set<Geocache> removedCaches = new HashSet<>();
+  private Set<Geocache> removedCaches;
 
   protected RemoveNotUniqueCommand(@NonNull final Activity context, final int listId, final SearchResult searchResult) {
     super(context);
@@ -30,14 +29,8 @@ public abstract class RemoveNotUniqueCommand extends AbstractCommand {
 
   @Override
   protected void doCommand() {
-    final Set<Geocache> caches = DataStore.loadCaches(searchResult.getGeocodes(), LoadFlags.LOAD_CACHE_OR_DB);
-
-    for (final Geocache geocache : caches) {
-      if (geocache.getLists().size() > 1) {
-        // stored on more than this list
-        removedCaches.add(geocache); // remember deleted geocaches
-      }
-    }
+    Set<Geocache> caches = DataStore.loadCaches(searchResult.getGeocodes(), LoadFlags.LOAD_CACHE_OR_DB);
+    removedCaches = RemoveNotUniqueHelper.removeNonUniqueCaches(caches);
     DataStore.removeFromList(removedCaches, listId); // remove from this one
   }
 
