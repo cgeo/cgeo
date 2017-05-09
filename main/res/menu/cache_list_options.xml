@@ -72,21 +72,26 @@
         app:showAsAction="ifRoom|withText">
     </item>
     <item
-        android:id="@+id/menu_create_list"
-        android:icon="@drawable/ic_menu_add"
-        android:title="@string/list_menu_create"
-        app:showAsAction="ifRoom|withText">
-    </item>
-    <item
-        android:id="@+id/menu_drop_list"
-        android:icon="@drawable/ic_menu_delete"
-        android:title="@string/list_menu_drop"
-        app:showAsAction="ifRoom|withText">
-    </item>
-    <item
-        android:id="@+id/menu_rename_list"
-        android:title="@string/list_menu_rename"
-        app:showAsAction="ifRoom|withText">
+        android:title="@string/list_menu"
+        app:showAsAction="never|withText">
+        <!-- List operations -->
+        <item
+            android:id="@+id/menu_create_list"
+            android:icon="@drawable/ic_menu_add"
+            android:title="@string/list_menu_create"
+            app:showAsAction="ifRoom|withText">
+        </item>
+        <item
+            android:id="@+id/menu_drop_list"
+            android:icon="@drawable/ic_menu_delete"
+            android:title="@string/list_menu_drop"
+            app:showAsAction="ifRoom|withText">
+        </item>
+        <item
+            android:id="@+id/menu_rename_list"
+            android:title="@string/list_menu_rename"
+            app:showAsAction="ifRoom|withText">
+        </item>
     </item>
     <item
         android:title="@string/list_menu_io"
