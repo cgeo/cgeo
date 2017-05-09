@@ -380,9 +380,11 @@
     <string name="caches_filter_missing_gcvote">Found caches not voted</string>
     
     <!-- caches lists -->
+    <string name="menu_lists">Lists</string>
     <string name="list_menu_create">Create new list</string>
     <string name="list_menu_drop">Remove current list</string>
     <string name="list_menu_rename">Rename current list</string>
+    <string name="menu_io">I/O</string>
     <string name="list_menu_import">Import</string>
     <string name="list_title">Pick a list</string>
     <string name="lists_title">Pick the lists</string>
@@ -867,6 +869,7 @@
     <string name="cache_menu_spoilers">Spoiler images</string>
     <string name="cache_menu_around">Caches around</string>
     <string name="around">Around %s</string>
+    <string name="menu_caches">Caches</string>
     <string name="cache_menu_event">Add to calendar</string>
     <string name="cache_menu_extract_waypoints">Extract waypoints</string>
     <string name="cache_menu_details">Details</string>
