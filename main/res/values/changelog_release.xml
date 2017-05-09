@@ -2,6 +2,10 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
+    <b>2017.05.09-legacy:</b>\n
+    · Fix: Apply API key for OSM:Cyclemap\n
+    · Fix: Detect that no language has been selected on geocaching.com\n
+    \n
     <b>2017.03.29-legacy:</b>\n
     · Fix: Crashes during memory optimization\n
     \n
