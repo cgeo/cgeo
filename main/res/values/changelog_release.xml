@@ -2,7 +2,7 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-    <b>Next feature release (Beta version):</b>\n
+    <b>2017.05.09:</b>\n
     · New: Implemented new data storage structure\n
     · New: Allow moving additional geocache data to external SD\n
     · New: Extract DMS, DegDec and UTM waypoint coordinates out of personal note\n
