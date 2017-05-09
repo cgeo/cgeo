@@ -89,42 +89,46 @@
         app:showAsAction="ifRoom|withText">
     </item>
     <item
-        android:id="@+id/menu_import"
-        android:title="@string/list_menu_import"
+        android:title="@string/list_menu_io"
         app:showAsAction="never|withText">
-        <menu>
-            <item
-                android:id="@+id/menu_import_gpx"
-                android:title="@string/gpx_import_title">
-            </item>
-            <item
-                android:id="@+id/menu_import_web"
-                android:title="@string/web_import_title">
-            </item>
-            <item
-                android:id="@+id/menu_import_android"
-                android:title="@string/gpx_import_android">
-            </item>
-        </menu>
-    </item>
-    <item
-        android:id="@+id/menu_export"
-        android:title="@string/export"
-        app:showAsAction="never|withText">
-        <menu>
-            <item
-                android:id="@+id/menu_export_gpx"
-                android:title="@string/export_gpx">
-            </item>
-            <item
-                android:id="@+id/menu_export_fieldnotes"
-                android:title="@string/export_fieldnotes">
-            </item>
-            <item
-                android:id="@+id/menu_export_persnotes"
-                android:title="@string/export_persnotes">
-            </item>
-        </menu>
+        <item
+            android:id="@+id/menu_import"
+            android:title="@string/list_menu_import"
+            app:showAsAction="never|withText">
+            <menu>
+                <item
+                    android:id="@+id/menu_import_gpx"
+                    android:title="@string/gpx_import_title">
+                </item>
+                <item
+                    android:id="@+id/menu_import_web"
+                    android:title="@string/web_import_title">
+                </item>
+                <item
+                    android:id="@+id/menu_import_android"
+                    android:title="@string/gpx_import_android">
+                </item>
+            </menu>
+        </item>
+        <item
+            android:id="@+id/menu_export"
+            android:title="@string/export"
+            app:showAsAction="never|withText">
+            <menu>
+                <item
+                    android:id="@+id/menu_export_gpx"
+                    android:title="@string/export_gpx">
+                </item>
+                <item
+                    android:id="@+id/menu_export_fieldnotes"
+                    android:title="@string/export_fieldnotes">
+                </item>
+                <item
+                    android:id="@+id/menu_export_persnotes"
+                    android:title="@string/export_persnotes">
+                </item>
+            </menu>
+        </item>
     </item>
     <item
         android:id="@+id/menu_delete_events"
