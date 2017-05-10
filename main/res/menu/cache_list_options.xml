@@ -71,6 +71,13 @@
                 android:visible="false"
                 app:showAsAction="never|withText"/>
             <item
+                android:id="@+id/menu_cache_list_app_provider"
+                android:icon="@drawable/ic_menu_goto"
+                android:title="@string/caches_on_map"
+                android:visible="false"
+                app:actionProviderClass="cgeo.geocaching.apps.cachelist.ListNavigationSelectionActionProvider"
+                app:showAsAction="ifRoom|withText"/>
+            <item
                 android:id="@+id/menu_clear_offline_logs"
                 android:title="@string/caches_clear_offlinelogs"
                 android:visible="false"
