@@ -101,7 +101,7 @@
                 android:id="@+id/menu_rename_list"
                 android:title="@string/list_menu_rename"
                 app:showAsAction="ifRoom|withText"/>
-      </menu>
+        </menu>
     </item>
     <item
         android:title="@string/menu_io"
