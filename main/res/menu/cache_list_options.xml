@@ -69,6 +69,11 @@
                 android:title="@string/caches_clear_offlinelogs"
                 android:visible="false"
                 app:showAsAction="never|withText"/>
+            <item
+                android:id="@+id/menu_make_list_unique"
+                android:title="@string/caches_make_list_unique"
+                android:visible="false"
+                app:showAsAction="never|withText"/>
         </menu>
     </item>
     <item
@@ -96,12 +101,7 @@
                 android:id="@+id/menu_rename_list"
                 android:title="@string/list_menu_rename"
                 app:showAsAction="ifRoom|withText"/>
-            <item
-                android:id="@+id/menu_make_list_unique"
-                android:title="@string/caches_make_list_unique"
-                android:visible="false"
-                app:showAsAction="never|withText"/>
-      </menu>
+        </menu>
     </item>
     <item
         android:id="@+id/menu_import"
