@@ -69,7 +69,6 @@
                 android:title="@string/caches_clear_offlinelogs"
                 android:visible="false"
                 app:showAsAction="never|withText"/>
-
         </menu>
     </item>
     <item
