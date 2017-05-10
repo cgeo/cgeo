@@ -104,7 +104,6 @@
                 app:showAsAction="never|withText"/>
       </menu>
     </item>
-
     <item
         android:id="@+id/menu_import"
         android:title="@string/list_menu_import"
