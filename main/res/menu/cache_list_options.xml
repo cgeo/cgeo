@@ -103,45 +103,39 @@
                 app:showAsAction="ifRoom|withText"/>
         </menu>
     </item>
+
     <item
-        android:title="@string/menu_io"
+        android:id="@+id/menu_import"
+        android:title="@string/list_menu_import"
         app:showAsAction="never|withText">
-        <!-- I/O -->
         <menu>
             <item
-                android:id="@+id/menu_import"
-                android:title="@string/list_menu_import"
-                app:showAsAction="never|withText">
-                <menu>
-                    <item
-                        android:id="@+id/menu_import_gpx"
-                        android:title="@string/gpx_import_title"/>
-                    <item
-                        android:id="@+id/menu_import_web"
-                        android:title="@string/web_import_title"/>
-                    <item
-                        android:id="@+id/menu_import_android"
-                        android:title="@string/gpx_import_android"/>
-                </menu>
-            </item>
+                android:id="@+id/menu_import_gpx"
+                android:title="@string/gpx_import_title"/>
             <item
-                  android:id="@+id/menu_export"
-                  android:title="@string/export"
-                  app:showAsAction="never|withText">
-                  <menu>
-                      <item
-                          android:id="@+id/menu_export_gpx"
-                          android:title="@string/export_gpx"/>
-                      <item
-                          android:id="@+id/menu_export_fieldnotes"
-                          android:title="@string/export_fieldnotes"/>
-                      <item
-                          android:id="@+id/menu_export_persnotes"
-                          android:title="@string/export_persnotes"/>
-                  </menu>
-             </item>
+                android:id="@+id/menu_import_web"
+                android:title="@string/web_import_title"/>
+            <item
+                android:id="@+id/menu_import_android"
+                android:title="@string/gpx_import_android"/>
         </menu>
     </item>
+    <item
+          android:id="@+id/menu_export"
+          android:title="@string/export"
+          app:showAsAction="never|withText">
+          <menu>
+              <item
+                  android:id="@+id/menu_export_gpx"
+                  android:title="@string/export_gpx"/>
+              <item
+                  android:id="@+id/menu_export_fieldnotes"
+                  android:title="@string/export_fieldnotes"/>
+              <item
+                  android:id="@+id/menu_export_persnotes"
+                  android:title="@string/export_persnotes"/>
+          </menu>
+     </item>
     <item
         android:id="@+id/menu_remove_from_history"
         android:title="@string/cache_clear_history"
