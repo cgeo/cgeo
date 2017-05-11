@@ -44,7 +44,12 @@ public abstract class AbstractLocusApp extends AbstractApp {
 
     @Override
     public boolean isInstalled() {
-        return LocusUtils.getActiveVersion(CgeoApplication.getInstance()) != null;
+        try {
+            return LocusUtils.getActiveVersion(CgeoApplication.getInstance()) != null;
+        } catch (final Exception ignored) {
+            Log.w("Couldn't get active Locus version", ignored);
+        }
+        return false;
     }
 
     /**
