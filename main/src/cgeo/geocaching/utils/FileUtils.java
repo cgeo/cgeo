@@ -458,8 +458,10 @@ public final class FileUtils {
         if (file.isDirectory()) {
             long result = 0;
             final File[] fileList = file.listFiles();
-            for (final File aFileList : fileList) {
-                result += getSize(aFileList);
+            if (ArrayUtils.isNotEmpty(fileList)) {
+                for (final File aFileList : fileList) {
+                    result += getSize(aFileList);
+                }
             }
             return result; // return the file size
         }
