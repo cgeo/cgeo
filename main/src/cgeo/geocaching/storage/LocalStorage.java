@@ -27,6 +27,7 @@ import java.util.regex.Pattern;
 import io.reactivex.Observable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.CharEncoding;
 import org.apache.commons.lang3.StringUtils;
 
@@ -335,12 +336,14 @@ public final class LocalStorage {
                 final File currentDataDir = new File(getExternalPrivateCgeoDirectory(), GEOCACHE_DATA_DIR_NAME);
                 Log.i("Moving geocache data to " + newDataDir.getAbsolutePath());
                 final File[] files = currentDataDir.listFiles();
-                progress.setMaxProgressAndReset(files.length);
-                progress.setProgress(0);
                 boolean success = true;
-                for (final File geocacheDataDir : files) {
-                    success &= FileUtils.moveTo(geocacheDataDir, newDataDir);
-                    progress.incrementProgressBy(1);
+                if (ArrayUtils.isNotEmpty(files)) {
+                    progress.setMaxProgressAndReset(files.length);
+                    progress.setProgress(0);
+                    for (final File geocacheDataDir : files) {
+                        success &= FileUtils.moveTo(geocacheDataDir, newDataDir);
+                        progress.incrementProgressBy(1);
+                    }
                 }
 
                 Settings.setExternalPrivateCgeoDirectory(newExtDir);
