@@ -16,17 +16,29 @@ private.properties
 /crowdin/credentials
 /main/res/values/mapsapikey.xml
 /main/cgeo.geocaching_preferences.xml
+# but do not ignore the settings from the template directories
+!main/templates/*
+!templates/*
 
+# attribute generation, localization testing temporary files
 /main/project/localization/*.missing
 /main/project/attributes/drawable-mdpi/
 /main/project/attributes/iconlist1res.html
 /main/project/settings/drawable-mdpi/
+
+# KDE directory settings
 .directory
+
+# build system temporary files
 .gradle/
-.idea/
-*.iml
 main/build/
 mapswithme-api/build/
 build
-main/usage.txt
+# build system user specific files
 main/gradle.properties
+
+# IDEA
+.idea/
+*.iml
+
+main/usage.txt
