@@ -76,9 +76,6 @@ buildscript {
 		// Android gradle plugin
         classpath 'com.android.tools.build:gradle:2.3.2'
     
-		// Android annotation processor
-        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
-
 		// un-mocking of portable Android classes
 		classpath 'de.mobilej.unmock:UnMockPlugin:0.6.0'
 

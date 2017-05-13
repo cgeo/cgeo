@@ -224,25 +224,10 @@ android {
     }
 }
 
-/*
- * AndroidAnnotations, https://github.com/excilys/androidannotations/wiki/building-project-gradle
- */
-apply plugin: 'android-apt'
-
-apt {
-    arguments {
-        // AndroidAnnotations needs to know the manifest of the current flavor
-        androidManifestFile variant.outputs[0]?.processResources?.manifestFile
-
-        // suppress verbose output of the AndroidAnnotations processor during build
-        logLevel 'error'
-    }
-}
-
 dependencies {
     // AndroidAnnotations, https://github.com/excilys/androidannotations/wiki/building-project-gradle
     def androidAnnotationsVersion = '4.3.0'
-    apt "org.androidannotations:androidannotations:$androidAnnotationsVersion"
+    annotationProcessor "org.androidannotations:androidannotations:$androidAnnotationsVersion"
     compile "org.androidannotations:androidannotations-api:$androidAnnotationsVersion"
 
     // Apache Commons
@@ -259,7 +244,7 @@ dependencies {
     // ButterKnife view injection, https://github.com/JakeWharton/butterknife
     def butterKnifeVersion = '8.4.0'
     compile "com.jakewharton:butterknife:$butterKnifeVersion"
-    apt "com.jakewharton:butterknife-compiler:$butterKnifeVersion"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$butterKnifeVersion"
 
     // Findbugs
     compile ('com.google.code.findbugs:annotations:3.0.1u2') {
