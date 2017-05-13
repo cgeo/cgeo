@@ -418,16 +418,24 @@ static def versionNameFromDate() {
     return formattedDate
 }
 
+class GitCommit {
+    static String commitId
+}
+
 /*
  * get the most recent git commit ID
  */
 def gitCommitId() {
-    def stdout = new ByteArrayOutputStream()
-    exec {
-        commandLine 'git', 'rev-parse', 'HEAD'
-        standardOutput = stdout
+    // TODO: someone with proper groovy knowledge should make this a method at the above class
+    if (GitCommit.commitId == null) {
+        def stdout = new ByteArrayOutputStream()
+        exec {
+            commandLine 'git', 'rev-parse', 'HEAD'
+            standardOutput = stdout
+        }
+        GitCommit.commitId = stdout.toString().trim()
     }
-    return stdout.toString().trim()
+    return GitCommit.commitId
 }
 
 /*
