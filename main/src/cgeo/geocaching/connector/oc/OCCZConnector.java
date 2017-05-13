@@ -12,7 +12,7 @@ public class OCCZConnector extends OCConnector {
     private static final String GEOCODE_PREFIX = "OZ";
 
     public OCCZConnector() {
-        super("OpenCaching.CZ", "www.opencaching.cz", true, GEOCODE_PREFIX);
+        super("OpenCaching.CZ", "www.opencaching.cz", true, GEOCODE_PREFIX, "OC.CZ");
     }
 
     @Override

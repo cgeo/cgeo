@@ -16,6 +16,12 @@ public class GeocachingAustraliaConnector extends AbstractConnector {
     }
 
     @Override
+    @NonNull
+    public String getNameAbbreviated() {
+        return "GCAU";
+    }
+
+    @Override
     public boolean getHttps() {
         return false;
     }

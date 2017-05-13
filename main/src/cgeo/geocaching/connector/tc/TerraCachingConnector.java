@@ -1,7 +1,7 @@
 package cgeo.geocaching.connector.tc;
 
-import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.connector.AbstractConnector;
+import cgeo.geocaching.models.Geocache;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -16,6 +16,12 @@ public class TerraCachingConnector extends AbstractConnector {
     @NonNull
     public String getName() {
         return "TerraCaching";
+    }
+
+    @Override
+    @NonNull
+    public String getNameAbbreviated() {
+        return "TC";
     }
 
     @Override

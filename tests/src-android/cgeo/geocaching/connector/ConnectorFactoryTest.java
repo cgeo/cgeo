@@ -1,15 +1,15 @@
 package cgeo.geocaching.connector;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.oc.OCConnector;
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 import cgeo.geocaching.test.mock.GC1ZXX2;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 public class ConnectorFactoryTest extends AbstractResourceInstrumentationTestCase {
 
@@ -121,4 +121,5 @@ public class ConnectorFactoryTest extends AbstractResourceInstrumentationTestCas
 
         return geocodes;
     }
+
 }

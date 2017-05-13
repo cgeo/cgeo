@@ -239,4 +239,10 @@ public interface IConnector {
      */
     @Nullable
     String getCreateAccountUrl();
+
+    /**
+     * abbreviation of the connector name for shorter display, e.g. for main page login status
+     */
+    @NonNull
+    String getNameAbbreviated();
 }

@@ -2,9 +2,10 @@ package cgeo.geocaching.connector;
 
 import cgeo.geocaching.models.Geocache;
 
-import org.apache.commons.lang3.StringUtils;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+
+import org.apache.commons.lang3.StringUtils;
 
 class UnknownConnector extends AbstractConnector {
 
@@ -12,6 +13,12 @@ class UnknownConnector extends AbstractConnector {
     @NonNull
     public String getName() {
         return "Unknown caches";
+    }
+
+    @Override
+    @NonNull
+    public String getNameAbbreviated() {
+        throw new IllegalStateException("no valid name for unknown connector");
     }
 
     @Override

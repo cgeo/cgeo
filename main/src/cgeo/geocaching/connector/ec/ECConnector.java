@@ -84,6 +84,12 @@ public class ECConnector extends AbstractConnector implements ISearchByGeocode, 
 
     @Override
     @NonNull
+    public String getNameAbbreviated() {
+        return "EC";
+    }
+
+    @Override
+    @NonNull
     public String getHost() {
         return "extremcaching.com";
     }
