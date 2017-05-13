@@ -131,7 +131,7 @@ public class MainActivity extends AbstractActionBarActivity {
                     }
 
                     private void fillView(final TextView connectorInfo, final ILogin conn) {
-                        final StringBuilder userInfo = new StringBuilder(conn.getName()).append(Formatter.SEPARATOR);
+                        final StringBuilder userInfo = new StringBuilder(conn.getNameAbbreviated()).append(Formatter.SEPARATOR);
                         if (conn.isLoggedIn()) {
                             userInfo.append(conn.getUserName());
                             if (conn.getCachesFound() >= 0) {

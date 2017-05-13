@@ -28,11 +28,13 @@ public class OCConnector extends AbstractConnector implements SmileyCapability {
 
     private static final List<LogType> STANDARD_LOG_TYPES = Arrays.asList(LogType.FOUND_IT, LogType.DIDNT_FIND_IT, LogType.NOTE);
     private static final List<LogType> EVENT_LOG_TYPES = Arrays.asList(LogType.WILL_ATTEND, LogType.ATTENDED, LogType.NOTE);
+    @NonNull private final String abbreviation;
 
-    public OCConnector(@NonNull final String name, @NonNull final String host, final boolean https, final String prefix) {
+    public OCConnector(@NonNull final String name, @NonNull final String host, final boolean https, final String prefix, @NonNull final String abbreviation) {
         this.name = name;
         this.host = host;
         this.https = https;
+        this.abbreviation = abbreviation;
         codePattern = Pattern.compile(prefix + "[A-Z0-9]+", Pattern.CASE_INSENSITIVE);
     }
 
@@ -45,6 +47,12 @@ public class OCConnector extends AbstractConnector implements SmileyCapability {
     @NonNull
     public String getName() {
         return name;
+    }
+
+    @Override
+    @NonNull
+    public String getNameAbbreviated() {
+        return abbreviation;
     }
 
     @Override

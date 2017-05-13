@@ -75,6 +75,12 @@ public class GeocachingSuConnector extends AbstractConnector implements ISearchB
 
     @Override
     @NonNull
+    public String getNameAbbreviated() {
+        return "GCSU";
+    }
+
+    @Override
+    @NonNull
     public String getCacheUrl(@NonNull final Geocache cache) {
         return getCacheUrlPrefix() + "&cid=" + getCacheId(cache.getGeocode());
     }
