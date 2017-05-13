@@ -36,7 +36,7 @@
             android:layout_margin="1dip"
             android:gravity="center"
             android:scaleType="fitXY"
-            tools:src="@drawable/helper_wear"/>
+            tools:src="@drawable/helper_pocketquery"/>
 
         <TextView
             android:id="@+id/description"

@@ -82,7 +82,6 @@ public final class NavigationAppFactory {
 
         WHERE_YOU_GO(new WhereYouGoApp(), 16, R.string.pref_navigation_menu_where_you_go),
         PEBBLE(new PebbleApp(), 17, R.string.pref_navigation_menu_pebble),
-        ANDROID_WEAR(new AndroidWearApp(), 18, R.string.pref_navigation_menu_android_wear),
         MAPSWITHME(new MapsMeApp(), 22, R.string.pref_navigation_menu_mapswithme);
 
         NavigationAppsEnum(final App app, final int id, final int preferenceKey) {

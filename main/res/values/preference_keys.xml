@@ -163,7 +163,6 @@
     <string translatable="false" name="pref_navigation_menu_google_maps_directions">navigationMapsDirections</string>
     <string translatable="false" name="pref_navigation_menu_where_you_go">navigationWhereYouGo</string>
     <string translatable="false" name="pref_navigation_menu_pebble">navigationPebble</string>
-    <string translatable="false" name="pref_navigation_menu_android_wear">navigationAndroidWear</string>
     <string translatable="false" name="pref_navigation_menu_mapswithme">navigationMapsWithMe</string>
     <string translatable="false" name="pref_ocpl_tokensecret">ocpl_tokensecret</string>
     <string translatable="false" name="pref_ocpl_tokenpublic">ocpl_tokenpublic</string>
