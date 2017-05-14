@@ -2,6 +2,12 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
+    <b>Next bugfix release:</b>\n
+    · Fix: Avoid crash during file operation\n
+    · Fix: Avoid crash when checking for Locus installation\n
+    · Removed: Link to Android Wear app in useful apps\n
+    \n
+    \n
     <b>2017.05.09:</b>\n
     · New: Implemented new data storage structure\n
     · New: Allow moving additional geocache data to external SD\n
