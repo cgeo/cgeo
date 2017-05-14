@@ -30,6 +30,19 @@
         android:title="@string/caches_select_invert"
         app:showAsAction="ifRoom|withText"/>
     <item
+        android:id="@+id/menu_cache_list_app_provider"
+        android:icon="@drawable/ic_menu_goto"
+        android:title="@string/caches_on_map"
+        android:visible="false"
+        app:actionProviderClass="cgeo.geocaching.apps.cachelist.ListNavigationSelectionActionProvider"
+        app:showAsAction="ifRoom|withText"/>
+    <item
+        android:id="@+id/menu_cache_list_app"
+        android:icon="@drawable/ic_menu_goto"
+        android:title="@null"
+        android:visible="false"
+        app:showAsAction="ifRoom|withText"/>
+    <item
         android:title="@string/menu_caches"
         app:showAsAction="never|withText">
         <!-- Cache operations -->
@@ -58,13 +71,6 @@
                 android:visible="false"
                 app:showAsAction="never|withText"/>
             <item
-                android:id="@+id/menu_cache_list_app_provider"
-                android:icon="@drawable/ic_menu_goto"
-                android:title="@string/caches_on_map"
-                android:visible="false"
-                app:actionProviderClass="cgeo.geocaching.apps.cachelist.ListNavigationSelectionActionProvider"
-                app:showAsAction="ifRoom|withText"/>
-            <item
                 android:id="@+id/menu_clear_offline_logs"
                 android:title="@string/caches_clear_offlinelogs"
                 android:visible="false"
@@ -76,12 +82,6 @@
                 app:showAsAction="never|withText"/>
         </menu>
     </item>
-    <item
-        android:id="@+id/menu_cache_list_app"
-        android:icon="@drawable/ic_menu_goto"
-        android:title="@null"
-        android:visible="false"
-        app:showAsAction="ifRoom|withText"/>
     <item
         android:title="@string/menu_lists"
         app:showAsAction="never|withText">
@@ -134,7 +134,7 @@
                   android:id="@+id/menu_export_persnotes"
                   android:title="@string/export_persnotes"/>
           </menu>
-     </item>
+    </item>
     <item
         android:id="@+id/menu_remove_from_history"
         android:title="@string/cache_clear_history"
