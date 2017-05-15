@@ -272,7 +272,12 @@ public final class LocalStorage {
 
     @NonNull
     public static File getGpxExportDirectory() {
-        return new File(Settings.getGpxExportDir());
+        final File gpxExportDir =  new File(Settings.getGpxExportDir());
+        FileUtils.mkdirs(gpxExportDir);
+        if (!gpxExportDir.isDirectory() || !gpxExportDir.canWrite()) {
+            return getDefaultGpxDirectory();
+        }
+        return gpxExportDir;
     }
 
     @NonNull
