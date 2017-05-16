@@ -246,6 +246,7 @@ public class MainActivity extends AbstractActionBarActivity {
 
         checkShowChangelog();
 
+        LocalStorage.initGeocacheDataDir();
         if (LocalStorage.isRunningLowOnDiskSpace()) {
             Dialogs.message(this, res.getString(R.string.init_low_disk_space), res.getString(R.string.init_low_disk_space_message));
         }

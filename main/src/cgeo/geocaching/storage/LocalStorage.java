@@ -370,4 +370,15 @@ public final class LocalStorage {
     public static boolean isRunningLowOnDiskSpace() {
         return FileUtils.getFreeDiskSpace(getExternalPrivateCgeoDirectory()) < LOW_DISKSPACE_THRESHOLD;
     }
+
+    public static void initGeocacheDataDir() {
+        final File nomedia = new File(getGeocacheDataDirectory(), ".nomedia");
+        if (!nomedia.exists()) {
+            try {
+                nomedia.createNewFile();
+            } catch (final IOException e) {
+                Log.w("Couldn't create the .nomedia file in " + getGeocacheDataDirectory(), e);
+            }
+        }
+    }
 }
