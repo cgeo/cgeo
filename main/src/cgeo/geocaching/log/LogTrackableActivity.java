@@ -47,6 +47,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.view.ContextMenu;
@@ -209,7 +210,9 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
         // Initialize the UI
         init();
 
-        createDisposables.add(AndroidRxUtils.bindActivity(this, ConnectorFactory.loadTrackable(geocode, null, null, brand)).subscribe(new Consumer<Trackable>() {
+        createDisposables.add(AndroidRxUtils.bindActivity(this, ConnectorFactory.loadTrackable(geocode, null, null, brand))
+                .toSingle()
+                .subscribe(new Consumer<Trackable>() {
             @Override
             public void accept(final Trackable newTrackable) {
                 if (trackingCode != null) {
@@ -220,17 +223,22 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
         }, new Consumer<Throwable>() {
             @Override
             public void accept(final Throwable throwable) throws Exception {
-                Log.e("refreshTrackable", throwable);
-            }
-        }, new Action() {
-            @Override
-            public void run() throws Exception {
-                startLoader(null);
+                Log.e("cannot load trackable " + geocode, throwable);
+                showProgress(false);
+
+                if (StringUtils.isNotBlank(geocode)) {
+                    showToast(res.getString(R.string.err_tb_find) + ' ' + geocode + '.');
+                } else {
+                    showToast(res.getString(R.string.err_tb_find_that));
+                }
+
+                setResult(RESULT_CANCELED);
+                finish();
             }
         }));
     }
 
-    private void startLoader(final Trackable newTrackable) {
+    private void startLoader(@NonNull final Trackable newTrackable) {
         trackable = newTrackable;
         // Start loading in background
         getSupportLoaderManager().initLoader(connector.getTrackableLoggingManagerLoaderId(), null, LogTrackableActivity.this).forceLoad();
@@ -238,21 +246,6 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
     }
 
     private void displayTrackable() {
-        if (trackable == null) {
-            Log.e("LogTrackableActivity.onCreate, cannot load trackable: " + geocode);
-            showProgress(false);
-
-            if (StringUtils.isNotBlank(geocode)) {
-                showToast(res.getString(R.string.err_tb_find) + ' ' + geocode + '.');
-            } else {
-                showToast(res.getString(R.string.err_tb_find_that));
-            }
-
-            setResult(RESULT_CANCELED);
-            finish();
-            return;
-        }
-
         // We're in LogTrackableActivity, so trackable must be loggable ;)
         if (!trackable.isLoggable()) {
             showProgress(false);
