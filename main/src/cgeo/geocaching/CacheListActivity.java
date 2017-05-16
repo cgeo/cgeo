@@ -15,6 +15,7 @@ import cgeo.geocaching.command.CopyToListCommand;
 import cgeo.geocaching.command.DeleteListCommand;
 import cgeo.geocaching.command.MakeListUniqueCommand;
 import cgeo.geocaching.command.MoveToListCommand;
+import cgeo.geocaching.command.RemoveNotUniqueCommand;
 import cgeo.geocaching.command.RenameListCommand;
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.enumerations.CacheListType;
@@ -736,6 +737,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             setVisible(menu, R.id.menu_import_gpx, isOffline);
             setVisible(menu, R.id.menu_export, !isEmpty && (isHistory || isOffline));
             setVisible(menu, R.id.menu_make_list_unique, !isEmpty && isOffline && listId != PseudoList.ALL_LIST.id);
+            setVisible(menu, R.id.menu_delete_not_singles, !isEmpty && isOffline && listId != PseudoList.ALL_LIST.id);
 
             if (!isOffline && !isHistory) {
                 menu.findItem(R.id.menu_refresh_stored).setTitle(R.string.caches_store_offline);
@@ -883,22 +885,48 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 }
                 return true;
             case R.id.menu_make_list_unique:
-                new MakeListUniqueCommand(this, listId) {
-
-                    @Override
-                    protected void onFinished() {
-                        refreshSpinnerAdapter();
-                    }
-
-                    @Override
-                    protected void onFinishedUndo() {
-                        refreshSpinnerAdapter();
-                    }
-
-                }.execute();
+                makeListUnique();
+                return true;
+            case R.id.menu_delete_not_singles:
+                deleteNotSingleCaches();
+                invalidateOptionsMenuCompatible();
+                refreshCurrentList();
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void makeListUnique() {
+        new MakeListUniqueCommand(this, listId) {
+
+            @Override
+            protected void onFinished() {
+                refreshSpinnerAdapter();
+            }
+
+            @Override
+            protected void onFinishedUndo() {
+                refreshSpinnerAdapter();
+            }
+
+        }.execute();
+    }
+
+    private void deleteNotSingleCaches() {
+        new RemoveNotUniqueCommand(this, listId, getFilteredSearch()) {
+
+            @Override
+            protected void onFinished() {
+                refreshSpinnerAdapter();
+            }
+
+            @Override
+            protected void onFinishedUndo() {
+                refreshSpinnerAdapter();
+                refreshCurrentList();
+            }
+
+        }.execute();
     }
 
     private void checkIfEmptyAndRemoveAfterConfirm() {
