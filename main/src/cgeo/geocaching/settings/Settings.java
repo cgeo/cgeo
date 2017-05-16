@@ -1042,6 +1042,11 @@ public class Settings {
         return Log.isDebug();
     }
 
+    public static void setDebug(final boolean debug) {
+        Log.setDebug(debug);
+        putBoolean(R.string.pref_debug, debug);
+    }
+
     public static int getLiveMapHintShowCount() {
         return getInt(R.string.pref_livemaphintshowcount, 0);
     }
