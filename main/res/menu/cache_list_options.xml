@@ -3,6 +3,33 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
   <item
+      android:id="@+id/menu_show_on_map"
+      android:icon="@drawable/ic_menu_mapmode"
+      android:title="@string/caches_on_map"
+      app:showAsAction="ifRoom"/>
+  <item
+      android:id="@+id/menu_filter"
+      android:icon="@drawable/ic_menu_filter"
+      android:title="@string/caches_filter"
+      app:showAsAction="ifRoom|withText"/>
+  <item
+      android:id="@+id/menu_sort"
+      android:icon="@drawable/ic_menu_sort_alphabetically"
+      android:showAsAction="always"
+      android:title="@string/caches_sort"
+      app:actionProviderClass="cgeo.geocaching.sorting.SortActionProvider"
+      app:showAsAction="ifRoom|withText"/>
+  <item
+      android:id="@+id/menu_switch_select_mode"
+      android:icon="@drawable/ic_menu_agenda"
+      android:title="@string/caches_select_mode"
+      app:showAsAction="ifRoom|withText"/>
+  <item
+      android:id="@+id/menu_invert_selection"
+      android:icon="@drawable/ic_menu_mark"
+      android:title="@string/caches_select_invert"
+      app:showAsAction="ifRoom|withText"/>
+  <item
       android:id="@+id/menu_cache_list_app"
       android:icon="@drawable/ic_menu_goto"
       android:title="@null"
