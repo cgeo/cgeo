@@ -43,6 +43,7 @@
         app:actionProviderClass="cgeo.geocaching.apps.cachelist.ListNavigationSelectionActionProvider"
         app:showAsAction="ifRoom|withText"/>
     <item
+        android:id="@+id/menu_caches"
         android:title="@string/menu_caches"
         app:showAsAction="never|withText">
         <!-- Cache operations -->
