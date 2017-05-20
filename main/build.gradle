@@ -232,12 +232,12 @@ dependencies {
 
     // Apache Commons
     compile 'org.apache.commons:commons-collections4:4.1'
-    compile 'org.apache.commons:commons-compress:1.13'
+    compile 'org.apache.commons:commons-compress:1.14'
     compile 'commons-io:commons-io:2.5'
     compile 'org.apache.commons:commons-lang3:3.5'
 
     // AssertJ for testing, needed both for local unit tests and Android instrumentation tests
-    def assertJVersion = '2.6.0'
+    def assertJVersion = '2.7.0'
     testCompile "org.assertj:assertj-core:$assertJVersion"
     androidTestCompile "org.assertj:assertj-core:$assertJVersion"
 
@@ -277,8 +277,8 @@ dependencies {
     testCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
 
     // Locus Maps integration
-    compile "com.asamm:locus-api:0.2.8"
-    compile "com.asamm:locus-api-android:0.2.7"
+    compile "com.asamm:locus-api:0.2.9"
+    compile "com.asamm:locus-api-android:0.2.9"
 
     // Mapsforge old version
     compile files('libs/mapsforge-map-0.3.0-jar-with-dependencies.jar')
@@ -302,7 +302,7 @@ dependencies {
     compile 'com.drewnoakes:metadata-extractor:2.10.1'
 
     // Okhttp network access
-    compile 'com.squareup.okhttp3:okhttp:3.7.0'
+    compile 'com.squareup.okhttp3:okhttp:3.8.0'
 
     // Play Services
     def playServicesVersion = '9.4.0'
