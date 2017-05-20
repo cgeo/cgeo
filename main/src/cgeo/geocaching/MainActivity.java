@@ -246,8 +246,18 @@ public class MainActivity extends AbstractActionBarActivity {
 
         checkShowChangelog();
 
+        LocalStorage.initGeocacheDataDir();
         if (LocalStorage.isRunningLowOnDiskSpace()) {
             Dialogs.message(this, res.getString(R.string.init_low_disk_space), res.getString(R.string.init_low_disk_space_message));
+        }
+
+        if (Settings.isDebug()) {
+            Dialogs.confirmYesNo(this, R.string.init_confirm_debug, R.string.list_confirm_debug_message, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(final DialogInterface dialog, final int whichButton) {
+                    Settings.setDebug(false);
+                }
+            });
         }
     }
 
