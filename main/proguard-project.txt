@@ -48,6 +48,7 @@
 -dontwarn java.beans.*
 # ignore reflection warnings
 -dontnote org.apache.commons.compress.**
+-dontwarn org.apache.commons.compress.**
 
 # keep some test only utils classes for the plain unit tests
 -keep class org.apache.commons.lang3.StringUtils { *; }
