@@ -1007,7 +1007,7 @@ abstract class GPXParser extends FileParser {
     protected void addOriginalCoordinates() {
         if (StringUtils.isNotEmpty(originalLat) && StringUtils.isNotEmpty(originalLon)) {
             final Waypoint waypoint = new Waypoint(CgeoApplication.getInstance().getString(R.string.cache_coordinates_original), WaypointType.ORIGINAL, false);
-            waypoint.setCoords(new Geopoint(originalLat, originalLon));
+            waypoint.setCoords(new Geopoint(Double.parseDouble(originalLat), Double.parseDouble(originalLon)));
             cache.addOrChangeWaypoint(waypoint, false);
             cache.setUserModifiedCoords(true);
         }
