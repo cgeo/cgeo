@@ -2,7 +2,7 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-    <b>Next bugfix release:</b>\n
+    <b>2017.05.22:</b>\n
     · Fix: Avoid crash during file operation\n
     · Fix: Avoid crash when checking for Locus installation\n
     · Fix: Avoid failure when parsing original coordinates of a GPX file\n
