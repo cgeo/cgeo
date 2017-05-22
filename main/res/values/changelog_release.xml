@@ -5,6 +5,10 @@
     <b>Next bugfix release:</b>\n
     · Fix: Avoid crash during file operation\n
     · Fix: Avoid crash when checking for Locus installation\n
+    · Fix: Avoid failure when parsing original coordinates of a GPX file\n
+    · New: Show warning when c:geo is running in debug mode\n
+    · Fix: Fallback if selected GPX export dir is not writeable\n
+    · Fix: Add .nomedia file to geocache data dir to prevent log photos from showing up in gallery apps\n
     · Removed: Link to Android Wear app in useful apps\n
     \n
     \n
