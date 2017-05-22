@@ -389,7 +389,7 @@ public final class FileUtils {
     public static boolean delete(final File file) {
         final boolean success = file.delete() || !file.exists();
         if (!success) {
-            Log.e("Could not delete " + file.getAbsolutePath());
+            Log.w("Could not delete " + file.getAbsolutePath());
         }
         return success;
     }
