@@ -251,6 +251,11 @@ public class MainActivity extends AbstractActionBarActivity {
             Dialogs.message(this, res.getString(R.string.init_low_disk_space), res.getString(R.string.init_low_disk_space_message));
         }
 
+        confirmDebug();
+    }
+
+    @SuppressWarnings("unused") // in Eclipse, BuildConfig.DEBUG is always true
+    private void confirmDebug() {
         if (Settings.isDebug() && !BuildConfig.DEBUG) {
             Dialogs.confirmYesNo(this, R.string.init_confirm_debug, R.string.list_confirm_debug_message, new DialogInterface.OnClickListener() {
                 @Override
