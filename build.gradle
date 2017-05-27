@@ -131,13 +131,18 @@ allprojects {
 	repositories {
 		mavenCentral()
 		jcenter()
-		// hosts e.g. viewpagerindicator
 		maven {
+			// hosts e.g. viewpagerindicator
 			url "https://jitpack.io"
 		}
-		// viewpager fork
 		maven {
+			// viewpager fork
 			url 'https://dl.bintray.com/alexeydanilov/maven'
+		}
+		maven {
+			// support libraries are no longer maintained in SDK manager, but in this maven repo
+			url 'https://maven.google.com'
+			// Alternative URL is 'https://dl.google.com/dl/android/maven2/'
 		}
 	}
 }
