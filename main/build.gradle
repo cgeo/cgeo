@@ -327,7 +327,7 @@ dependencies {
 	compile 'com.yqritc:recyclerview-flexibledivider:1.4.0'
 
     // Support Annotations. enforce same version for the main app and the test app
-    def supportAnnotationsVersion = '24.2.1'
+    def supportAnnotationsVersion = '25.3.1'
     compile "com.android.support:support-annotations:$supportAnnotationsVersion"
     androidTestCompile "com.android.support:support-annotations:$supportAnnotationsVersion"
 
