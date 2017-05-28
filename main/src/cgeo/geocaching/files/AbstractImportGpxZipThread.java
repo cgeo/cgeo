@@ -60,8 +60,9 @@ abstract class AbstractImportGpxZipThread extends AbstractImportGpxThread {
         final ZipArchiveInputStream zisPass2 = new ZipArchiveInputStream(new BufferedInputStream(inputStream), ENCODING);
         try {
             for (ZipEntry zipEntry = zisPass2.getNextZipEntry(); zipEntry != null; zipEntry = zisPass2.getNextZipEntry()) {
-                if (StringUtils.endsWithIgnoreCase(zipEntry.getName(), GPXImporter.WAYPOINTS_FILE_SUFFIX_AND_EXTENSION)) {
-                    importStepHandler.sendMessage(importStepHandler.obtainMessage(GPXImporter.IMPORT_STEP_READ_WPT_FILE, R.string.gpx_import_loading_waypoints_with_filename, (int) zipEntry.getSize(), zipEntry.getName()));
+                gpxFileName = zipEntry.getName();
+                if (StringUtils.endsWithIgnoreCase(gpxFileName, GPXImporter.WAYPOINTS_FILE_SUFFIX_AND_EXTENSION)) {
+                    importStepHandler.sendMessage(importStepHandler.obtainMessage(GPXImporter.IMPORT_STEP_READ_WPT_FILE, R.string.gpx_import_loading_waypoints_with_filename, (int) zipEntry.getSize(), gpxFileName));
                     caches = parser.parse(new NoCloseInputStream(zisPass2), progressHandler);
                 }
             }
