@@ -695,10 +695,27 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         return true;
     }
 
+    private static void setVisibleEnabled(final Menu menu, final int itemId, final boolean visible, final boolean enabled) {
+        final MenuItem item = menu.findItem(itemId);
+        item.setVisible(visible);
+        item.setEnabled(enabled);
+    }
+
     private static void setVisible(final Menu menu, final int itemId, final boolean visible) {
         menu.findItem(itemId).setVisible(visible);
     }
 
+    private static void setEnabled(final Menu menu, final int itemId, final boolean enabled) {
+        menu.findItem(itemId).setEnabled(enabled);
+    }
+
+    /**
+     * Menu items which are not at all usable with the current list type should be hidden.
+     * Menu items which are usable with the current list type but not in the current situation should be disabled.
+     *
+     * @param menu
+     * @return
+     */
     @Override
     public boolean onPrepareOptionsMenu(final Menu menu) {
         super.onPrepareOptionsMenu(menu);
@@ -707,8 +724,14 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         final boolean isOffline = type == CacheListType.OFFLINE;
         final boolean isEmpty = cacheList.isEmpty();
         final boolean isConcrete = isConcreteList();
+        final boolean isNonDefaultList = isConcrete && listId != StoredList.STANDARD_LIST_ID;
+        final List<CacheListApp> listNavigationApps = CacheListApps.getActiveApps();
 
         try {
+            // toplevel menu items
+            setEnabled(menu, R.id.menu_show_on_map, !isEmpty);
+            setEnabled(menu, R.id.menu_filter, search != null && search.getCount() > 0);
+            setVisibleEnabled(menu, R.id.menu_sort, !isHistory, !isEmpty);
             if (adapter.isSelectMode()) {
                 menu.findItem(R.id.menu_switch_select_mode).setTitle(res.getString(R.string.caches_select_mode_exit))
                         .setIcon(R.drawable.ic_menu_clear_playlist);
@@ -716,34 +739,23 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 menu.findItem(R.id.menu_switch_select_mode).setTitle(res.getString(R.string.caches_select_mode))
                         .setIcon(R.drawable.ic_menu_agenda);
             }
-            menu.findItem(R.id.menu_invert_selection).setVisible(adapter.isSelectMode());
+            setEnabled(menu, R.id.menu_switch_select_mode, !isEmpty);
+            setVisible(menu, R.id.menu_invert_selection, adapter.isSelectMode()); // exception to the general rule: only show in select mode
+            setVisibleEnabled(menu, R.id.menu_cache_list_app_provider, listNavigationApps.size() > 1, !isEmpty);
+            setVisibleEnabled(menu, R.id.menu_cache_list_app, listNavigationApps.size() == 1, !isEmpty);
 
-            setVisible(menu, R.id.menu_show_on_map, !isEmpty);
-            setVisible(menu, R.id.menu_filter, search != null && search.getCount() > 0);
-            setVisible(menu, R.id.menu_switch_select_mode, !isEmpty);
-            setVisible(menu, R.id.menu_create_list, isOffline);
-
-            setVisible(menu, R.id.menu_sort, !isEmpty && !isHistory);
-            setVisible(menu, R.id.menu_caches, !isEmpty);
-            setVisible(menu, R.id.menu_refresh_stored, !isEmpty);
-            setVisible(menu, R.id.menu_drop_caches, !isEmpty && (isHistory || isOffline));
-            setVisible(menu, R.id.menu_delete_events, isConcrete && !isEmpty && containsPastEvents());
-            setVisible(menu, R.id.menu_move_to_list, isOffline && !isEmpty);
-            setVisible(menu, R.id.menu_copy_to_list, isOffline && !isEmpty);
-            setVisible(menu, R.id.menu_remove_from_history, !isEmpty && isHistory);
-            setVisible(menu, R.id.menu_clear_offline_logs, !isEmpty && (isHistory || isOffline) && containsOfflineLogs());
-            setVisible(menu, R.id.menu_import, isOffline);
-            setVisible(menu, R.id.menu_import_web, isOffline);
-            setVisible(menu, R.id.menu_import_gpx, isOffline);
-            setVisible(menu, R.id.menu_export, !isEmpty && (isHistory || isOffline));
-            setVisible(menu, R.id.menu_make_list_unique, !isEmpty && isOffline && listId != PseudoList.ALL_LIST.id);
-
+            // Manage Caches submenu
+            setEnabled(menu, R.id.menu_refresh_stored, !isEmpty);
             if (!isOffline && !isHistory) {
                 menu.findItem(R.id.menu_refresh_stored).setTitle(R.string.caches_store_offline);
             }
-
-            final boolean isNonDefaultList = isConcrete && listId != StoredList.STANDARD_LIST_ID;
-
+            setVisibleEnabled(menu, R.id.menu_move_to_list, isOffline, !isEmpty);
+            setVisibleEnabled(menu, R.id.menu_copy_to_list, isOffline, !isEmpty);
+            setVisibleEnabled(menu, R.id.menu_drop_caches, isHistory || isOffline, !isEmpty);
+            setVisibleEnabled(menu, R.id.menu_delete_events, isConcrete, !isEmpty && containsPastEvents());
+            setVisibleEnabled(menu, R.id.menu_clear_offline_logs, isHistory || isOffline, !isEmpty && containsOfflineLogs());
+            setVisibleEnabled(menu, R.id.menu_remove_from_history, isHistory, !isEmpty);
+            setMenuItemLabel(menu, R.id.menu_remove_from_history, R.string.cache_remove_from_history, R.string.cache_clear_history);
             if (isOffline || type == CacheListType.HISTORY) { // only offline list
                 setMenuItemLabel(menu, R.id.menu_drop_caches, R.string.caches_remove_selected, R.string.caches_remove_all);
                 setMenuItemLabel(menu, R.id.menu_refresh_stored, R.string.caches_refresh_selected, R.string.caches_refresh_all);
@@ -753,16 +765,18 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 setMenuItemLabel(menu, R.id.menu_refresh_stored, R.string.caches_store_selected, R.string.caches_store_offline);
             }
 
-            menu.findItem(R.id.menu_drop_list).setVisible(isNonDefaultList);
-            menu.findItem(R.id.menu_rename_list).setVisible(isNonDefaultList);
+            // Manage Lists submenu
+            setVisible(menu, R.id.menu_lists, isOffline);
+            setVisible(menu, R.id.menu_drop_list, isNonDefaultList);
+            setVisible(menu, R.id.menu_rename_list, isNonDefaultList);
+            setVisibleEnabled(menu, R.id.menu_make_list_unique, listId != PseudoList.ALL_LIST.id, !isEmpty);
 
-            setMenuItemLabel(menu, R.id.menu_remove_from_history, R.string.cache_remove_from_history, R.string.cache_clear_history);
-            menu.findItem(R.id.menu_import_android).setVisible(Compatibility.isStorageAccessFrameworkAvailable() && isOffline);
+            // Import submenu
+            setVisible(menu, R.id.menu_import, isOffline && listId != PseudoList.ALL_LIST.id);
+            setEnabled(menu, R.id.menu_import_android, Compatibility.isStorageAccessFrameworkAvailable());
 
-            final List<CacheListApp> listNavigationApps = CacheListApps.getActiveApps();
-            menu.findItem(R.id.menu_cache_list_app_provider).setVisible(!isEmpty && listNavigationApps.size() > 1);
-            menu.findItem(R.id.menu_cache_list_app).setVisible(!isEmpty && listNavigationApps.size() == 1);
-
+            // Export
+            setVisibleEnabled(menu, R.id.menu_export, isHistory || isOffline, !isEmpty);
         } catch (final RuntimeException e) {
             Log.e("CacheListActivity.onPrepareOptionsMenu", e);
         }
