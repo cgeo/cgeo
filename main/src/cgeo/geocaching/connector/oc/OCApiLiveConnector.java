@@ -208,6 +208,11 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByCente
     }
 
     @Override
+    public int getPersonalNoteMaxChars() {
+        return 20000;
+    }
+
+    @Override
     public boolean canIgnoreCache(final Geocache cache) {
         return true;
     }

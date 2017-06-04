@@ -2,12 +2,12 @@ package cgeo.geocaching.models;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-import cgeo.geocaching.connector.gc.GCConstants;
+import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.list.StoredList;
 
-import org.apache.commons.lang3.StringUtils;
 
 import junit.framework.TestCase;
+import org.apache.commons.lang3.StringUtils;
 
 public class PersonalNoteTest extends TestCase {
 
@@ -31,9 +31,9 @@ public class PersonalNoteTest extends TestCase {
     }
 
     public static void testLocalNoteExceedsLimit() {
-        final String testString = StringUtils.repeat("x", GCConstants.PERSONAL_NOTE_MAX_CHARS + 1);
         final Geocache truncCache = new Geocache();
-        truncCache.setPersonalNote(testString.substring(0, GCConstants.PERSONAL_NOTE_MAX_CHARS));
+        final String testString = StringUtils.repeat("x", GCConnector.getInstance().getPersonalNoteMaxChars() + 1);
+        truncCache.setPersonalNote(testString.substring(0, GCConnector.getInstance().getPersonalNoteMaxChars()));
         final PersonalNote parsedNote = new PersonalNote(truncCache);
 
         final Geocache exceedingCache = new Geocache();

@@ -23,4 +23,11 @@ public interface PersonalNoteCapability extends IConnector {
      */
     boolean uploadPersonalNote(@NonNull final Geocache cache);
 
+    /**
+     * Returns the maximum number of characters allowed in personal notes.
+     *
+     * @return max number of characters
+     */
+    int getPersonalNoteMaxChars();
+
 }
