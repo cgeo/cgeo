@@ -315,6 +315,11 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
+    public int getPersonalNoteMaxChars() {
+        return 2500;
+    }
+
+    @Override
     public SearchResult searchByCenter(@NonNull final Geopoint center) {
         return GCParser.searchByCoords(center, Settings.getCacheType());
     }

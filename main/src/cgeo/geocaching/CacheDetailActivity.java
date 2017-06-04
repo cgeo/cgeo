@@ -1476,6 +1476,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         @BindView(R.id.personalnote) protected TextView personalNoteView;
         @BindView(R.id.description) protected IndexOutOfBoundsAvoidingTextView descView;
         @BindView(R.id.loading) protected View loadingView;
+        private int maxPersonalNotesChars = 0;
 
         @Override
         public ScrollView getDispatchedView(final ViewGroup parentView) {
@@ -1512,11 +1513,12 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             final Button personalNoteUpload = ButterKnife.findById(view, R.id.upload_personalnote);
             final PersonalNoteCapability connector = ConnectorFactory.getConnectorAs(cache, PersonalNoteCapability.class);
             if (connector != null && connector.canAddPersonalNote(cache)) {
+                maxPersonalNotesChars = connector.getPersonalNoteMaxChars();
                 personalNoteUpload.setVisibility(View.VISIBLE);
                 personalNoteUpload.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(final View v) {
-                        if (StringUtils.length(cache.getPersonalNote()) > GCConstants.PERSONAL_NOTE_MAX_CHARS) {
+                        if (StringUtils.length(cache.getPersonalNote()) > maxPersonalNotesChars) {
                             warnPersonalNoteExceedsLimit();
                         } else {
                             uploadPersonalNote();
@@ -1611,7 +1613,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         }
 
         private void warnPersonalNoteExceedsLimit() {
-            Dialogs.confirm(CacheDetailActivity.this, R.string.cache_personal_note_limit, getString(R.string.cache_personal_note_truncation, GCConstants.PERSONAL_NOTE_MAX_CHARS),
+            Dialogs.confirm(CacheDetailActivity.this, R.string.cache_personal_note_limit, getString(R.string.cache_personal_note_truncation, maxPersonalNotesChars),
                     new DialogInterface.OnClickListener() {
 
                         @Override

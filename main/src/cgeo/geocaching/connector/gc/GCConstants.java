@@ -1,15 +1,16 @@
 package cgeo.geocaching.connector.gc;
 
-import android.support.annotation.NonNull;
+import cgeo.geocaching.log.LogType;
 
-import org.apache.commons.lang3.StringUtils;
+import android.support.annotation.NonNull;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import java.util.regex.Pattern;
 
-import cgeo.geocaching.log.LogType;
+
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * These patterns have been optimized for speed. Improve them only if you can prove
@@ -190,8 +191,6 @@ public final class GCConstants {
 
     /** Number of logs to retrieve from GC.com */
     static final int NUMBER_OF_LOGS = 35;
-    /** Maximum number of chars for personal note. **/
-    public static final int PERSONAL_NOTE_MAX_CHARS = 500;
 
     private static final String SEQUENCE_GCID = "0123456789ABCDEFGHJKMNPQRTVWXYZ";
     private static final long GC_BASE31 = 31;
