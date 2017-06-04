@@ -50,7 +50,6 @@
         <menu>
             <item
                 android:id="@+id/menu_refresh_stored"
-                android:icon="@drawable/ic_menu_set_as"
                 android:title="@string/cache_offline_refresh"
                 app:showAsAction="ifRoom|withText"/>
             <item
@@ -63,7 +62,6 @@
                 app:showAsAction="ifRoom|withText"/>
             <item
                 android:id="@+id/menu_drop_caches"
-                android:icon="@drawable/ic_menu_delete"
                 android:title="@string/caches_remove_all"
                 app:showAsAction="ifRoom|withText"/>
             <item
@@ -90,12 +88,10 @@
         <menu>
             <item
                 android:id="@+id/menu_create_list"
-                android:icon="@drawable/ic_menu_add"
                 android:title="@string/list_menu_create"
                 app:showAsAction="ifRoom|withText"/>
             <item
                 android:id="@+id/menu_drop_list"
-                android:icon="@drawable/ic_menu_delete"
                 android:title="@string/list_menu_drop"
                 app:showAsAction="ifRoom|withText"/>
             <item
