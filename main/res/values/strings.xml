@@ -1553,7 +1553,10 @@
     <string name="command_rename_list_result">Renamed list</string>
     <string name="command_delete_list_result">Deleted list</string>
     <string name="command_unique_list_result">Deleted caches from other lists</string>
-    <string name="fav_points_remaining">"Add this cache to favorites (%d remaining)"</string>
+    <plurals name="fav_points_remaining">
+        <item quantity="one">Add this cache to favorites (%d remaining)</item>
+        <item quantity="other">Add this cache to favorites (%d remaining)</item>
+    </plurals>
 
     <!-- distance units -->
     <string name="unit_m">m</string>

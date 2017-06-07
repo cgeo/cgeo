@@ -83,7 +83,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
-                android:text="@string/fav_points_remaining"
                 android:layout_marginBottom="5dip"
                 android:layout_marginLeft="10dip"
                 android:layout_marginRight="10dip"
