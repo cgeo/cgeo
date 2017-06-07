@@ -17,7 +17,6 @@ import cgeo.geocaching.connector.capability.PersonalNoteCapability;
 import cgeo.geocaching.connector.capability.PgcChallengeCheckerCapability;
 import cgeo.geocaching.connector.capability.WatchListCapability;
 import cgeo.geocaching.connector.gc.GCConnector;
-import cgeo.geocaching.connector.gc.GCConstants;
 import cgeo.geocaching.connector.trackable.TrackableBrand;
 import cgeo.geocaching.connector.trackable.TrackableConnector;
 import cgeo.geocaching.enumerations.CacheAttribute;
