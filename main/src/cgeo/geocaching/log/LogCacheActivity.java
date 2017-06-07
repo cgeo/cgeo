@@ -392,7 +392,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         if (ConnectorFactory.getConnector(cache).supportsAddToFavorite(cache, typeSelected)) {
             if (premFavPoints > 0) {
                 favCheck.setVisibility(View.VISIBLE);
-                favCheck.setText(getString(R.string.fav_points_remaining, premFavPoints));
+                favCheck.setText(res.getQuantityString(R.plurals.fav_points_remaining, premFavPoints, premFavPoints));
             }
         } else {
             favCheck.setVisibility(View.GONE);
