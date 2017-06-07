@@ -1,8 +1,8 @@
-#!/bin/sh
+#!/bin/bash
 
 #
 #
-# This script updates 
+# This script updates
 #   main/res/values/strings.xml
 #   cgeo-contacts/res/values/strings.xml
 # in crowdin by uploading the files from master to crowdin.
@@ -11,7 +11,7 @@
 
 # see: http://crowdin.net/page/api/update-file
 
-# update_file uploads the file in parameter 1 to the crowdin file name in parameter 2 
+# update_file uploads the file in parameter 1 to the crowdin file name in parameter 2
 update_file() {
     crowdin_surf -F "files[$2]=@$1" $BRANCH_TARGET \
         "http://api.crowdin.net/api/project/cgeo/update-file?key=${CROWDIN_APIKEY}"
