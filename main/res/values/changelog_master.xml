@@ -4,6 +4,7 @@
   <string name="changelog_master" translatable="false">
     <b>Next feature release:</b>\n
     · New: Use abbreviation for name of geocaching service on main screen\n
+    · New: Caches with the same GCVote rating are sorted by the number of votes\n
     \n
     \n
   </string>
