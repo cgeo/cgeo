@@ -92,7 +92,7 @@
   <string name="log_posting_twitter">Posten tweet…</string>
   <string name="log_posting_gcvote">Posten GCVote…</string>
   <string name="log_posting_image">Posten afbeelding…</string>
-  <string name="log_posting_generic_trackable">Posten %1$s %2$s/%3$s</string>
+  <string name="log_posting_generic_trackable">Posten %1$s %2$d/%3$d</string>
   <string name="log_clear">Wissen</string>
   <string name="log_post_not_possible">Bezig met downloaden van gegevens…\nProbeer over enkele seconden nogmaals of controleer de internetverbinding.</string>
   <string name="log_post_geocode_missing">Geocode ontbreekt…</string>
@@ -363,6 +363,7 @@
   <string name="caches_make_list_unique">Lijst uniek maken</string>
   <string name="caches_filter_missing_gcvote">Gevonden caches niet gestemd</string>
   <!-- caches lists -->
+  <string name="menu_lists">Lijsten beheren</string>
   <string name="list_menu_create">Maak nieuwe lijst</string>
   <string name="list_menu_drop">Verwijder huidige lijst</string>
   <string name="list_menu_rename">Hernoem huidige lijst</string>
@@ -571,7 +572,7 @@
   <string name="init_gpx_exportdir">GPX Export map</string>
   <string name="init_gpx_importdir">GPX Import map</string>
   <string name="init_dataDir">Selecteer Geocache gegevensmap</string>
-  <string name="init_dataDir_note">Je kunt de extra gegevens voor geocaches (spoilers, log afbeeldingen, ...) opslaan op je externe opslag (geëmuleerde of echte externe SD kaart afhankelijk van uw apparaat).</string>
+  <string name="init_dataDir_note">Je kunt de extra gegevens voor geocaches (spoilers, log afbeeldingen, …) opslaan op je externe opslag (geëmuleerde of echte externe SD kaart afhankelijk van uw apparaat).</string>
   <string name="init_maptrail">Pad tonen</string>
   <string name="init_summary_maptrail">Laat pad op kaart zien</string>
   <string name="init_share_after_export">Open deel-menu na GPX export</string>
@@ -831,6 +832,7 @@
   <string name="cache_menu_spoilers">Spoiler afbeeldingen</string>
   <string name="cache_menu_around">Caches rondom</string>
   <string name="around">Rondom %s</string>
+  <string name="menu_caches">Caches beheren</string>
   <string name="cache_menu_event">Toevoegen aan kalender</string>
   <string name="cache_menu_extract_waypoints">Exporteer waypoints</string>
   <string name="cache_menu_details">Details</string>
@@ -1480,7 +1482,10 @@
   <string name="command_rename_list_result">Lijst hernoemd</string>
   <string name="command_delete_list_result">Lijst verwijderd</string>
   <string name="command_unique_list_result">Verwijderde caches uit andere lijsten</string>
-  <string name="fav_points_remaining">"Deze cache toevoegen aan favorieten (%s resterend)"</string>
+  <plurals name="fav_points_remaining">
+    <item quantity="one">Deze cache toevoegen aan favorieten (%d resterend)</item>
+    <item quantity="other">Deze cache toevoegen aan favorieten (%d resterend)</item>
+  </plurals>
   <!-- distance units -->
   <string name="unit_m">m</string>
   <string name="unit_km">km</string>
@@ -1505,4 +1510,8 @@
   </plurals>
   <!-- calendar adder -->
   <string name="event_fail">Niet gelukt om event cache toe te voegen aan kalender</string>
+  <string name="init_low_disk_space">Weinig schijfruimte</string>
+  <string name="init_low_disk_space_message">De geocache-gegevensmap heeft nog maar weinig schijfruimte. Dit kan leiden tot storingen van c:geo. Gelieve ruimte vrij te maken.</string>
+  <string name="init_confirm_debug">c:geo wordt uitgevoerd in de foutopsporingsmodus!</string>
+  <string name="list_confirm_debug_message">De debug-modus zorgt voor instabiliteit! Wil je de debug-modus uitschakelen?</string>
 </resources>

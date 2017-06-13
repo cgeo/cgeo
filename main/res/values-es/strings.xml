@@ -92,7 +92,7 @@
   <string name="log_posting_twitter">Publicando tweet…</string>
   <string name="log_posting_gcvote">Publicando GCVote…</string>
   <string name="log_posting_image">Publicando imagen…</string>
-  <string name="log_posting_generic_trackable">Publicando %1$s %2$s/%3$s</string>
+  <string name="log_posting_generic_trackable">Publicando %1$s %2$d/%3$d</string>
   <string name="log_clear">Limpiar</string>
   <string name="log_post_not_possible">Descargando datos…\nPor favor, inténtalo de nuevo en unos segundos o comprueba tu conexión a internet.</string>
   <string name="log_post_geocode_missing">Falta el geocódigo…</string>
@@ -317,7 +317,7 @@
   <string name="caches_remove_all">Eliminar todos</string>
   <plurals name="caches_remove_all_confirm">
     <item quantity="one">¿Quieres eliminar este caché de la lista actual?</item>
-    <item quantity="other">¿Quieres eliminar los %d cachés de la lista actual?</item>
+    <item quantity="other">¿Quieres eliminar todos los cachés (%d) de la lista actual?</item>
   </plurals>
   <string name="caches_remove_selected">Eliminar seleccionados</string>
   <plurals name="caches_remove_selected_confirm">
@@ -363,6 +363,7 @@
   <string name="caches_make_list_unique">Hacer la lista exclusiva</string>
   <string name="caches_filter_missing_gcvote">Cachés encontrados no votados</string>
   <!-- caches lists -->
+  <string name="menu_lists">Gestionar listas</string>
   <string name="list_menu_create">Crear nueva lista</string>
   <string name="list_menu_drop">Borrar lista actual</string>
   <string name="list_menu_rename">Renombrar la lista actual</string>
@@ -419,6 +420,11 @@
   <string name="settings_title_gpx">GPX</string>
   <string name="settings_title_data_dir">Directorio de datos de los cachés</string>
   <string name="settings_title_data_dir_usage">Directorio de datos de los cachés (%1$s usado)</string>
+  <string name="calculate_dataDir_title">Uso de datos de los cachés</string>
+  <string name="calculate_dataDir">Calculando el uso de datos de los cachés en el disco</string>
+  <string name="settings_data_dir_item">%1$s (%2$s libre)</string>
+  <string name="confirm_data_dir_move_title">¿Mover el directorio de datos de los cachés?</string>
+  <string name="confirm_data_dir_move">Mover los datos de los cachés puede llevar bastante rato, dependiendo de tu dispositivo y la cantidad de datos.</string>
   <string name="settings_title_basicmembers">Opciones para miembros básicos</string>
   <string name="settings_title_navigation">Navegación</string>
   <string name="settings_summary_navigation">Elige tus métodos de navegación preferidos y apps de navegación externas.</string>
@@ -559,6 +565,8 @@
   <string name="init_map_directory_description">Directorio de mapas sin conexión</string>
   <string name="init_gpx_exportdir">Directorio para exportar GPX</string>
   <string name="init_gpx_importdir">Directorio para importar GPX</string>
+  <string name="init_dataDir">Seleccionar directorio de datos de los cachés</string>
+  <string name="init_dataDir_note">Puedes elegir almacenar los datos adicionales de los cachés (spoilers, imágenes de los registros, …) en tu almacenamiento externo (emulado o en una tarjeta SD real externa, dependiendo de tu dispositivo).</string>
   <string name="init_maptrail">Mostrar rastro</string>
   <string name="init_summary_maptrail">Muestra el rastro en el mapa</string>
   <string name="init_share_after_export">Abrir el menú de compartir tras exportar GPX</string>
@@ -575,12 +583,19 @@
   <string name="init_default_navigation_tool_2_description">Aquí puedes seleccionar tu segunda herramienta de navegación. Actívala presionando unos segundos el icono de navegación al lado del título del caché.</string>
   <string name="init_navigation_menu_description">Aquí puedes seleccionar qué métodos de navegación de los disponibles serán mostrados en el menú de navegación de un caché o waypoint. Las herramientas deshabilitadas no están instaladas en este dispositivo.</string>
   <string name="init_debug_title">Información de depuración</string>
+  <string name="init_debug_note">c:geo puede generar una gran cantidad de información de depuración. Activar este ajuste afectará a la estabilidad de c:geo y sólo se recomienda si te han pedido que envíes un registro a los desarrolladores. ¡Por favor mantén el registro de depuración desactivado durante el uso normal de c:geo!</string>
   <string name="init_debug">Activar el registro de depuración</string>
   <string name="init_dbonsdcard_title">Ubicación de la base de datos</string>
+  <string name="init_dbonsdcard_note">Puedes almacenar la base de datos de c:geo tanto internamente en el sistema como en un directorio en tu almacenamiento de usuario. Almacenarla en tu almacenamiento de usuario puede liberar algo de memoria, pero puedes perder un poco de rendimiento y c:geo no funcionará si el sistema de almacenamiento no es accesible o eliminas el archivo de base de datos.</string>
+  <string name="init_dbonsdcard">En almacenamiento de usuario</string>
   <string name="init_dbmove_dbmove">Moviendo base de datos</string>
   <string name="init_dbmove_running">Moviendo base de datos</string>
   <string name="init_dbmove_success">Base de datos movida con éxito.</string>
   <string name="init_dbmove_failed">Error al mover la base de datos</string>
+  <string name="init_datadirmove_datadirmove">Moviendo el directorio de datos de los cachés</string>
+  <string name="init_datadirmove_running">Moviendo el directorio de datos de los cachés</string>
+  <string name="init_datadirmove_success">Directorio de datos de los cachés movido con éxito.</string>
+  <string name="init_datadirmove_failed">Error parcial o total al mover el directorio de datos de los cachés. Por favor comprueba el directorio antiguo y el nuevo y mueve los datos manualmente si es necesario.</string>
   <string name="init_plain_logs">Registros sencillos</string>
   <string name="init_summary_plain_logs">Muestra los registros sin usar colores</string>
   <string name="init_use_native_ua">Navegador de Android</string>
@@ -807,6 +822,7 @@
   <string name="cache_menu_spoilers">Revelaciones</string>
   <string name="cache_menu_around">Cachés cercanos</string>
   <string name="around">Cerca de %s</string>
+  <string name="menu_caches">Gestionar cachés</string>
   <string name="cache_menu_event">Añadir al calendario</string>
   <string name="cache_menu_extract_waypoints">Extraer waypoints</string>
   <string name="cache_menu_details">Detalles</string>
@@ -1453,7 +1469,10 @@ Nombre de archivo:%2$s</string>
   <string name="command_rename_list_result">Lista renombrada</string>
   <string name="command_delete_list_result">Lista borrada</string>
   <string name="command_unique_list_result">Cachés borrados de otras listas</string>
-  <string name="fav_points_remaining">"Añadir el caché a favoritos (te quedan %s)"</string>
+  <plurals name="fav_points_remaining">
+    <item quantity="one">Añadir el caché a favoritos (te queda %d)</item>
+    <item quantity="other">Añadir el caché a favoritos (te quedan %d)</item>
+  </plurals>
   <!-- distance units -->
   <string name="unit_m">m</string>
   <string name="unit_km">km</string>
@@ -1478,4 +1497,8 @@ Nombre de archivo:%2$s</string>
   </plurals>
   <!-- calendar adder -->
   <string name="event_fail">Error al añadir el evento al calendario</string>
+  <string name="init_low_disk_space">Queda poco espacio de almacenamiento</string>
+  <string name="init_low_disk_space_message">El directorio de datos de los cachés se está quedando sin espacio de almacenamiento. Esto puede causar fallos en c:geo. Por favor, libera algo de espacio.</string>
+  <string name="init_confirm_debug">¡c:geo se está ejecutando en modo de depuración!</string>
+  <string name="list_confirm_debug_message">¡El modo de depuración provoca inestabilidades! ¿Quieres desactivar el modo depuración?</string>
 </resources>

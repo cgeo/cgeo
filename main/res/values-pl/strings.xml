@@ -92,7 +92,6 @@
   <string name="log_posting_twitter">Wysyłanie tweetu…</string>
   <string name="log_posting_gcvote">Wysyłanie GCVote…</string>
   <string name="log_posting_image">Wysyłanie obrazka…</string>
-  <string name="log_posting_generic_trackable">Wysyłanie %1$s %2$s/%3$s</string>
   <string name="log_clear">Wyczyść</string>
   <string name="log_post_not_possible">Pobieranie danych w toku…\nProszę spróbować ponownie za parę sekund albo sprawdzić połączenie z internetem.</string>
   <string name="log_post_geocode_missing">Brak kodu GC skrzynki…</string>
@@ -316,11 +315,6 @@
   <string name="caches_nearby">Najbliższe</string>
   <string name="caches_manage">Zarządzaj</string>
   <string name="caches_remove_all">Usuń wszystkie</string>
-  <plurals name="caches_remove_all_confirm">
-    <item quantity="one">Czy chcesz usunąć wybraną skrzynkę z obecnej listy?</item>
-    <item quantity="few">Czy chcesz usunąć wszystkie %d skrzynki z obecnej listy?</item>
-    <item quantity="other">Czy chcesz usunąć wszystkie %d skrzynek z obecnej listy?</item>
-  </plurals>
   <string name="caches_remove_selected">Usuń wybrane</string>
   <plurals name="caches_remove_selected_confirm">
     <item quantity="one">Czy chcesz usunąć wybraną skrzynkę z urządzenia?</item>
@@ -1475,7 +1469,6 @@
   <string name="command_rename_list_result">Zmieniono nazwę listy</string>
   <string name="command_delete_list_result">Usunięto listę</string>
   <string name="command_unique_list_result">Usunięte skrzynki z innych list</string>
-  <string name="fav_points_remaining">"Dodaj tę skrzynkę do ulubionych (pozostało %s)"</string>
   <!-- distance units -->
   <string name="unit_m">m</string>
   <string name="unit_km">km</string>

@@ -91,7 +91,6 @@
   <string name="log_posting_twitter">Publicē ierakstu (Twitter\'ī)…</string>
   <string name="log_posting_gcvote">Publicē GCVote…</string>
   <string name="log_posting_image">Publicē attēlu…</string>
-  <string name="log_posting_generic_trackable">Publicē %1$s %2$s/%3$s</string>
   <string name="log_clear">Notīrīt</string>
   <string name="log_post_not_possible">Datu lejupielādēšana ir procesā…\nLūdzu mēģini vēlreiz pēc dažām sekundēm vai pārbaudi interneta savienojumu.</string>
   <string name="log_post_geocode_missing">Pietrūkst geo kods…</string>
@@ -316,11 +315,6 @@
   <string name="caches_nearby">Tuvumā</string>
   <string name="caches_manage">Pārvaldīt</string>
   <string name="caches_remove_all">Izdzēst visus</string>
-  <plurals name="caches_remove_all_confirm">
-    <item quantity="zero">Vai vēlaties izdzēst šo slēpni no pašreizējā saraksta?</item>
-    <item quantity="one">Vai vēlaties izdzēst šo slēpni no pašreizējā saraksta?</item>
-    <item quantity="other">Vai vēlaties dzēst visus %d slēpņus no pašreizējā saraksta?</item>
-  </plurals>
   <string name="caches_remove_selected">Izdzēst atlasīto</string>
   <plurals name="caches_remove_selected_confirm">
     <item quantity="zero">Vai vēlies dzēst šo slēpni no ierīces?</item>
@@ -1443,7 +1437,6 @@
   <string name="command_rename_list_result">Pārdēvēts saraksts</string>
   <string name="command_delete_list_result">Dzēsts saraksts</string>
   <string name="command_unique_list_result">Dzēst slēpņus no citiem sarakstiem</string>
-  <string name="fav_points_remaining">"Pievienot šo slēpni manai favorītu izlasei (%s paliekuši)"</string>
   <!-- distance units -->
   <string name="unit_m">m</string>
   <string name="unit_km">km</string>

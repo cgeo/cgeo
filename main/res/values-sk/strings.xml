@@ -92,7 +92,7 @@
   <string name="log_posting_twitter">Odosielanie tweetu…</string>
   <string name="log_posting_gcvote">Odosielanie GCVote…</string>
   <string name="log_posting_image">Odosielanie obrázka…</string>
-  <string name="log_posting_generic_trackable">Odosielanie %1$s %2$s/%3$s</string>
+  <string name="log_posting_generic_trackable">Odosielanie %1$s %2$d/%3$d</string>
   <string name="log_clear">Vyčistiť</string>
   <string name="log_post_not_possible">Prebieha sťahovanie dát…\nProsím, skúste to o chvíľu znova alebo skontrolujte internetové pripojenie.</string>
   <string name="log_post_geocode_missing">Geokód chýba…</string>
@@ -317,9 +317,9 @@
   <string name="caches_manage">Spravovať</string>
   <string name="caches_remove_all">Odstrániť všetky</string>
   <plurals name="caches_remove_all_confirm">
-    <item quantity="one">Chcete odstrániť túto skrýšu z tohto zoznamu?</item>
-    <item quantity="few">Chcete odstrániť tieto %d skrýše z tohto zoznamu?</item>
-    <item quantity="other">Chcete odstrániť týchto %d skrýš z tohto zoznamu?</item>
+    <item quantity="one">Chcete odstrániť skrýšu z aktuálneho zoznamu?</item>
+    <item quantity="few">Chcete odstrániť %d skrýše z aktuálneho zoznamu?</item>
+    <item quantity="other">Chcete odstrániť všetkých %d skrýš z aktuálneho zoznamu?</item>
   </plurals>
   <string name="caches_remove_selected">Odstrániť vybraté</string>
   <plurals name="caches_remove_selected_confirm">
@@ -366,6 +366,7 @@
   <string name="caches_make_list_unique">Odstrániť tieto skrýše z iných zoznamov</string>
   <string name="caches_filter_missing_gcvote">Nájdené skrýše bez GCvote hlasov</string>
   <!-- caches lists -->
+  <string name="menu_lists">Spravovať zoznamy</string>
   <string name="list_menu_create">Vytvoriť nový zoznam</string>
   <string name="list_menu_drop">Odstrániť tento zoznam</string>
   <string name="list_menu_rename">Premenovať tento zoznam</string>
@@ -420,6 +421,13 @@
   <string name="settings_title_map_data">Mapové podklady</string>
   <string name="settings_title_map_content">Obsah máp</string>
   <string name="settings_title_gpx">GPX</string>
+  <string name="settings_title_data_dir">Adresár údajov skrýš</string>
+  <string name="settings_title_data_dir_usage">Adresár údajov skrýš (%1$s využité)</string>
+  <string name="calculate_dataDir_title">Využitie údajov skrýš</string>
+  <string name="calculate_dataDir">Počíta sa veľkosť údajov skrýš na disku</string>
+  <string name="settings_data_dir_item">%1$s (%2$s voľné)</string>
+  <string name="confirm_data_dir_move_title">Presunúť adresár s údajmi skrýš?</string>
+  <string name="confirm_data_dir_move">Presúvanie údajov skrýš môže trvať naozaj dlho, závisí to od zariadenia a množstva údajov.</string>
   <string name="settings_title_basicmembers">Možnosti pre bežných členov</string>
   <string name="settings_title_navigation">Navigácia</string>
   <string name="settings_summary_navigation">Vyberte preferované metódy navigácie a externé navigačné aplikácie.</string>
@@ -566,6 +574,8 @@
   <string name="init_map_directory_description">Priečinok s offline mapami</string>
   <string name="init_gpx_exportdir">Priečinok pre GPX Export</string>
   <string name="init_gpx_importdir">Priečinok pre GPX Import</string>
+  <string name="init_dataDir">Vyberte adresár pre údaje skrýš</string>
+  <string name="init_dataDir_note">Môžete zvoliť ukladanie ďalších údajov k skrýšam (spoilery, obrázky z logov...) do externej pamäte (emulovaná alebo skutočná externá SD karta, závisí to od zariadenia).</string>
   <string name="init_maptrail">Zobraziť stopu</string>
   <string name="init_summary_maptrail">Zobraziť stopu na mape</string>
   <string name="init_share_after_export">Po exporte GPX otvoriť menu pre zdieľanie</string>
@@ -582,12 +592,19 @@
   <string name="init_default_navigation_tool_2_description">Môžete vybrať druhý preferovaný nástroj pre navigáciu. Spustíte ho dlhým stlačením ikony navigácie vedľa názvu skrýše.</string>
   <string name="init_navigation_menu_description">Tu môžete vybrať, ktoré z dostupných navigačných metód sa zobrazia v navigačnom menu pre skrýšu alebo bod trasy. Nástroje, ktoré nie sú nainštalované na tomto zariadení, nie je možné vybrať.</string>
   <string name="init_debug_title">Ladiace informácie</string>
+  <string name="init_debug_note">c:geo môže vytvárať množstvo údajov ladenia. Aktivovanie tohto nastavenia bude mať vplyv na stabilitu c:geo a odporúča sa len v prípade, že je potrebné odoslať protokol vývojárom. Počas bežného používania c:geo nechajte zaznamenávanie údajov pre ladenie vypnuté!</string>
   <string name="init_debug">Aktivovať denník ladenia</string>
   <string name="init_dbonsdcard_title">Umiestnenie databázy</string>
+  <string name="init_dbonsdcard_note">Databázu c:geo môžete uložiť buď interne do systému, prípadne do priečinka v používateľskej pamäti. Keď ju budete mať v používateľskej pamäti, môžete ušetriť nejaké miesto, ale výkon sa trochu zníži a c:geo nebude fungovať, ak nebude pamäť k dispozícii, prípadne ak odstránite databázový súbor.</string>
+  <string name="init_dbonsdcard">V používateľskej pamäti</string>
   <string name="init_dbmove_dbmove">Presúvanie databázy</string>
   <string name="init_dbmove_running">Prebieha presúvanie databázy</string>
   <string name="init_dbmove_success">Databáza bola úspešne presunutá.</string>
   <string name="init_dbmove_failed">Presun databázy zlyhal.</string>
+  <string name="init_datadirmove_datadirmove">Presúvanie adresára údajov skrýš</string>
+  <string name="init_datadirmove_running">Presúvanie adresára údajov skrýš</string>
+  <string name="init_datadirmove_success">Adresár údajov skrýš úspešne presunutý.</string>
+  <string name="init_datadirmove_failed">Presúvanie adresára údajov skrýš čiastočne alebo úplne neúspešné. Skontrolujte starý a nový priečinok a presuňte ručne, ak to bude potrebné.</string>
   <string name="init_plain_logs">Jednoduché logy</string>
   <string name="init_summary_plain_logs">Zobraziť záznamy logu bez farieb</string>
   <string name="init_use_native_ua">Android prehliadač</string>
@@ -785,7 +802,7 @@
   <string name="cache_dialog_loading_details_status_waypoints">Spracovanie bodov trasy</string>
   <string name="cache_dialog_loading_details_status_gcvote">Načítanie GCVote</string>
   <string name="cache_dialog_loading_details_status_cache">Kešovanie údajov</string>
-  <string name="cache_dialog_loading_details_status_render">Vykresľovanie pohľadu</string>
+  <string name="cache_dialog_loading_details_status_render">Pripravuje sa stránka</string>
   <string name="cache_dialog_offline_save_title">Offline</string>
   <string name="cache_dialog_offline_save_message">Ukladanie skrýše pre použitie offline…</string>
   <string name="cache_dialog_offline_drop_title">Offline</string>
@@ -824,6 +841,7 @@
   <string name="cache_menu_spoilers">Obrázky s nápovedou</string>
   <string name="cache_menu_around">Skrýše v okolí</string>
   <string name="around">Okolo %s</string>
+  <string name="menu_caches">Spravovať skrýše</string>
   <string name="cache_menu_event">Pridať do kalendára</string>
   <string name="cache_menu_extract_waypoints">Extrahovať body trasy</string>
   <string name="cache_menu_details">Detaily</string>
@@ -1483,7 +1501,11 @@
   <string name="command_rename_list_result">Zoznam premenovaný</string>
   <string name="command_delete_list_result">Zoznam vymazaný</string>
   <string name="command_unique_list_result">Skrýše odstránené z iných zoznamov</string>
-  <string name="fav_points_remaining">"Pridať túto skrýšu do obľúbených (zostáva: %s)"</string>
+  <plurals name="fav_points_remaining">
+    <item quantity="one">Pridať túto skrýšu medzi obľúbené (%d zostáva)</item>
+    <item quantity="few">Pridať túto skrýšu medzi obľúbené (%d zostávajú)</item>
+    <item quantity="other">Pridať túto skrýšu medzi obľúbené (%d zostáva)</item>
+  </plurals>
   <!-- distance units -->
   <string name="unit_m">m</string>
   <string name="unit_km">km</string>
@@ -1509,4 +1531,8 @@
   </plurals>
   <!-- calendar adder -->
   <string name="event_fail">Nepodarilo sa pridať Event cache do kalendára</string>
+  <string name="init_low_disk_space">Málo miesta na ukladanie</string>
+  <string name="init_low_disk_space_message">V adresári údajov skrýš je málo miesta. Môže dôjsť k nesprávnemu fungovaniu c:geo. Uvoľnite nejaké miesto.</string>
+  <string name="init_confirm_debug">c:geo je spustené v režime ladenia!</string>
+  <string name="list_confirm_debug_message">V režime ladenia dochádza k nestabilnému správaniu aplikácie! Chcete deaktivovať režim ladenia?</string>
 </resources>

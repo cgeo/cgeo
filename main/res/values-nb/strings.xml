@@ -92,7 +92,6 @@
   <string name="log_posting_twitter">Laster opp tweet…</string>
   <string name="log_posting_gcvote">Laster opp GCVote…</string>
   <string name="log_posting_image">Laster opp bilde…</string>
-  <string name="log_posting_generic_trackable">Logger %1$s %2$s/%3$s</string>
   <string name="log_clear">Tøm</string>
   <string name="log_post_not_possible">Nedlastning pågår…\nPrøv igjen om noen sekunder eller kontroller Internett-tilkoblingen.</string>
   <string name="log_post_geocode_missing">GC-kode mangler…</string>
@@ -315,10 +314,6 @@
   <string name="caches_nearby">I nærheten</string>
   <string name="caches_manage">Administrer</string>
   <string name="caches_remove_all">Fjern alle</string>
-  <plurals name="caches_remove_all_confirm">
-    <item quantity="one">Vil du fjerne denne cachen fra listen?</item>
-    <item quantity="other">Vil du fjerne alle %d cachene fra listen din?</item>
-  </plurals>
   <string name="caches_remove_selected">Fjern valgte</string>
   <plurals name="caches_remove_selected_confirm">
     <item quantity="one">Vil du fjerne denne cachen fra enheten?</item>
@@ -795,7 +790,6 @@
   <string name="cache_menu_navigation_drive">Navigasjon (kjøring)</string>
   <string name="cache_menu_navigation_drive_select_target">Cache eller parkeringsplass?</string>
   <string name="cache_menu_navigation_walk">Navigasjon (gående)</string>
-  <string name="cache_menu_navigation_transit">Navigasjon (Transit)</string>
   <string name="cache_menu_navigation_bike">Navigasjon (sykkel)</string>
   <string name="cache_menu_maps_directions">Google Maps-veibeskrivelse</string>
   <string name="cache_menu_osmand">OsmAnd</string>
@@ -1464,7 +1458,6 @@
   <string name="command_rename_list_result">Endret listenavn</string>
   <string name="command_delete_list_result">Slettet listen</string>
   <string name="command_unique_list_result">Slettede cacher fra andre lister</string>
-  <string name="fav_points_remaining">"Legg cachen til favoritter (%s igjen)"</string>
   <!-- distance units -->
   <string name="unit_m">m</string>
   <string name="unit_km">km</string>

@@ -92,7 +92,7 @@
   <string name="log_posting_twitter">Sende Tweet…</string>
   <string name="log_posting_gcvote">Sende Bewertung…</string>
   <string name="log_posting_image">Sende Bild…</string>
-  <string name="log_posting_generic_trackable">Sende %1$s %2$s/%3$s</string>
+  <string name="log_posting_generic_trackable">Sende %1$s %2$d/%3$d</string>
   <string name="log_clear">Leeren</string>
   <string name="log_post_not_possible">Daten werden heruntergeladen…\nBitte in ein paar Sekunden noch einmal versuchen, oder die Internetverbindung prüfen.</string>
   <string name="log_post_geocode_missing">Geocode fehlt…</string>
@@ -363,6 +363,7 @@
   <string name="caches_make_list_unique">Caches nur auf diese Liste</string>
   <string name="caches_filter_missing_gcvote">Gefundene Caches ohne Bewertung</string>
   <!-- caches lists -->
+  <string name="menu_lists">Listen verwalten</string>
   <string name="list_menu_create">Neue Liste</string>
   <string name="list_menu_drop">Aktuelle Liste löschen</string>
   <string name="list_menu_rename">Aktuelle Liste umbenennen</string>
@@ -590,7 +591,7 @@
   <string name="init_debug_title">Fehlersuche</string>
   <string name="init_debug_note">c:geo kann viele Debug-Informationen generieren. Das Aktivieren dieser Einstellung wird die Stabilität von c:geo beeinträchtigen und wird nur empfohlen, um den Entwicklern eine Logdatei zu senden. Bitte Debug-Logging bei der normalen Nutzung von c:geo immer abgeschaltet lassen!</string>
   <string name="init_debug">Debug-Log aktivieren</string>
-  <string name="init_dbonsdcard_title">Datenspeicherung</string>
+  <string name="init_dbonsdcard_title">Speicherort der Datenbank</string>
   <string name="init_dbonsdcard_note">Sie können die Datenbank von c:geo entweder systemintern oder in einem benutzerdefiniertem Verzeichnis speichern. Je nach Konfiguration des Gerätes kann die Speicherung im Benutzerbereich internen Speicherplatz freigeben, aber Sie verlieren etwas Leistung und c:geo wird nicht funktionieren, wenn der Benutzerspeicher nicht verfügbar ist oder die Datenbank-Datei gelöscht wird.</string>
   <string name="init_dbonsdcard">Im Benutzerspeicher</string>
   <string name="init_dbmove_dbmove">Verschiebe Datenbank</string>
@@ -831,6 +832,7 @@
   <string name="cache_menu_spoilers">Hinweisbild</string>
   <string name="cache_menu_around">Caches im Umkreis</string>
   <string name="around">In der Nähe von %s</string>
+  <string name="menu_caches">Caches verwalten</string>
   <string name="cache_menu_event">Zum Kalender hinzufügen</string>
   <string name="cache_menu_extract_waypoints">Extrahiere Wegpunkte</string>
   <string name="cache_menu_details">Details</string>
@@ -1480,7 +1482,10 @@
   <string name="command_rename_list_result">Liste umbenannt</string>
   <string name="command_delete_list_result">Liste gelöscht</string>
   <string name="command_unique_list_result">Caches wurden von anderen Listen entfernt</string>
-  <string name="fav_points_remaining">"Füge den Cache zu Favoriten hinzu (%s verfügbar)"</string>
+  <plurals name="fav_points_remaining">
+    <item quantity="one">Füge den Cache zu Favoriten hinzu (%d verfügbar)</item>
+    <item quantity="other">Füge den Cache zu Favoriten hinzu (%d verfügbar)</item>
+  </plurals>
   <!-- distance units -->
   <string name="unit_m">m</string>
   <string name="unit_km">km</string>
@@ -1505,4 +1510,8 @@
   </plurals>
   <!-- calendar adder -->
   <string name="event_fail">Hinzufügen des Events zum Kalender fehlgeschlagen</string>
+  <string name="init_low_disk_space">Wenig Speicherplatz verfügbar</string>
+  <string name="init_low_disk_space_message">Das Geocache-Datenverzeichnis hat wenig Speicherplatz. Dies kann Fehlfunktionen in c:geo verursachen. Bitte Speicherplatz freimachen.</string>
+  <string name="init_confirm_debug">c:geo arbeitet im Debug-Modus!</string>
+  <string name="list_confirm_debug_message">Der Debug-Modus verursacht Instabilität! Debug-Modus beenden?</string>
 </resources>

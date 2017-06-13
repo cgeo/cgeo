@@ -92,9 +92,9 @@
   <string name="log_posting_twitter">Sender tweet…</string>
   <string name="log_posting_gcvote">Sender GCVote…</string>
   <string name="log_posting_image">Sender billede…</string>
-  <string name="log_posting_generic_trackable">Sender %1$s %2$s/%3$s</string>
+  <string name="log_posting_generic_trackable">Sender %1$s %2$d/%3$d</string>
   <string name="log_clear">Fjern</string>
-  <string name="log_post_not_possible">Download af data er i gang…\nPrøv venligst igen om et øjeblik eller kontrollér din internetforbindelse.</string>
+  <string name="log_post_not_possible">Download af data er i gang…\nPrøv venligst igen om et øjeblik eller kontrollér din Internetforbindelse.</string>
   <string name="log_post_geocode_missing">Geocode mangler…</string>
   <string name="log_date_future_not_allowed">Logdatoer, der ligger i fremtiden, er ikke tilladt.</string>
   <string name="log_add">Tilføj</string>
@@ -363,6 +363,7 @@
   <string name="caches_make_list_unique">Fjern cacherne i denne liste fra øvrige lister</string>
   <string name="caches_filter_missing_gcvote">Fundne cacher er ikke bedømt</string>
   <!-- caches lists -->
+  <string name="menu_lists">Administrér lister</string>
   <string name="list_menu_create">Opret ny liste</string>
   <string name="list_menu_drop">Fjern aktuelle liste</string>
   <string name="list_menu_rename">Omdøb aktuelle liste</string>
@@ -586,9 +587,9 @@
   <string name="init_default_navigation_tool_select">Vælg metode</string>
   <string name="init_default_navigation_tool_2_description">Her kan du vælge din sekundære navigationsmetode. Aktivér den ved at holde på navigationssymbolet det vises i cachens titel.</string>
   <string name="init_navigation_menu_description">Her kan du vælge hvilke af de tilgængelige navigationsmetoder, der skal vises i navigationsmenuen for en cache eller et waypoint. Metoder som ikke er installeret på denne enhed kan ikke vælges.</string>
-  <string name="init_debug_title">Debug-information</string>
+  <string name="init_debug_title">Fejlfindingsinformation</string>
   <string name="init_debug_note">c:geo kan generere en stor mængde fejlfindingsoplysninger. Aktivering af denne indstilling vil påvirke stabiliteten af c:geo og kan kun anbefales, hvis du bliver bedt om at sende en fejlfindingslog til udviklerne. Denne indstilling bør være deaktiveret under normal brug af c:geo!</string>
-  <string name="init_debug">Aktivér debug-log</string>
+  <string name="init_debug">Aktivér fejlfindingslogning</string>
   <string name="init_dbonsdcard_title">Databaseplacering</string>
   <string name="init_dbmove_dbmove">Flytter database</string>
   <string name="init_dbmove_running">Flytter database</string>
@@ -828,6 +829,7 @@
   <string name="cache_menu_spoilers">Spoilerbilleder</string>
   <string name="cache_menu_around">Cacher i nærheden</string>
   <string name="around">I nærheden af %s</string>
+  <string name="menu_caches">Administrér cacher</string>
   <string name="cache_menu_event">Tilføj til kalender</string>
   <string name="cache_menu_extract_waypoints">Udtræk waypoints</string>
   <string name="cache_menu_details">Detaljer</string>
@@ -1474,7 +1476,10 @@
   <string name="command_rename_list_result">Liste omdøbt</string>
   <string name="command_delete_list_result">Listen blev slettet</string>
   <string name="command_unique_list_result">Slettede cacher fra andre lister</string>
-  <string name="fav_points_remaining">"Tilføj denne cache til favoritter (%s resterende)"</string>
+  <plurals name="fav_points_remaining">
+    <item quantity="one">Tilføj denne cache til favoritter (%d resterende)</item>
+    <item quantity="other">Tilføj denne cache til favoritter (%d resterende)</item>
+  </plurals>
   <!-- distance units -->
   <string name="unit_m">m</string>
   <string name="unit_km">km</string>
@@ -1495,4 +1500,8 @@
   <string name="cache_store_list">Gem i liste</string>
   <!-- calendar adder -->
   <string name="event_fail">Kunne ikke tilføje eventcachen til kalenderen</string>
+  <string name="init_low_disk_space">Datalageret er næsten fyldt</string>
+  <string name="init_low_disk_space_message">Datalageret, hvor geocache-datamappen er placeret, er ved at være fyldt. Du bør frigøre plads på lageret for at undgå funktionsfejl af c:geo.</string>
+  <string name="init_confirm_debug">c:geo kører i fejlfindingstilstand!</string>
+  <string name="list_confirm_debug_message">Fejlfindingstilstand kan forårsage ustabilitet! Ønsker du at deaktivere fejlfindingstilstand?</string>
 </resources>

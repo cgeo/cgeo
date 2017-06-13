@@ -91,7 +91,6 @@
   <string name="log_posting_twitter">Отправка твита…</string>
   <string name="log_posting_gcvote">Отправка GCVote…</string>
   <string name="log_posting_image">Отправка изображения…</string>
-  <string name="log_posting_generic_trackable">Отправка %1$s %2$s/%3$s</string>
   <string name="log_clear">Очистить</string>
   <string name="log_post_not_possible">Идет загрузка данных…\nПожалуйста, попробуйте снова через несколько секунд или проверьте подключение к интернету.</string>
   <string name="log_post_geocode_missing">Отсутствует геокод…</string>
@@ -315,11 +314,6 @@
   <string name="caches_nearby">Поблизости</string>
   <string name="caches_manage">Опции</string>
   <string name="caches_remove_all">Удалить все</string>
-  <plurals name="caches_remove_all_confirm">
-    <item quantity="one">Вы действительно хотите удалить %d тайник из текущего списка?</item>
-    <item quantity="few">Вы действительно хотите удалить %d тайника из текущего списка?</item>
-    <item quantity="other">Вы действительно хотите удалить все %d тайников из текущего списка?</item>
-  </plurals>
   <string name="caches_remove_selected">Удалить выбранные</string>
   <plurals name="caches_remove_selected_confirm">
     <item quantity="one">Вы действительно хотите удалить %d тайник с вашего устройства?</item>
@@ -1466,7 +1460,6 @@
   <string name="command_rename_list_result">Список переименован</string>
   <string name="command_delete_list_result">Список удален</string>
   <string name="command_unique_list_result">Удаленные тайники из других списков</string>
-  <string name="fav_points_remaining">"Рекомендовать тайник (%s осталось)"</string>
   <!-- distance units -->
   <string name="pq_available_for_download">Выборка доступна для скачивания</string>
   <string name="pq_available_for_download_description">Эта выборка доступна для загрузки одним файлом (gpx). Вы хотите скачать и импортировать ее или посмотреть тайники списком?</string>

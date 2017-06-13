@@ -92,7 +92,7 @@
   <string name="log_posting_twitter">A publicar tweet…</string>
   <string name="log_posting_gcvote">A publicar GCVote…</string>
   <string name="log_posting_image">A publicar imagem…</string>
-  <string name="log_posting_generic_trackable">A publicar %1$s %2$s/%3$s</string>
+  <string name="log_posting_generic_trackable">A publicar %1$s %2$d/%3$d</string>
   <string name="log_clear">Limpar</string>
   <string name="log_post_not_possible">Transferência de dados em curso…\nPor favor tente novamente dentro de alguns segundos ou verifique a sua ligação à internet.</string>
   <string name="log_post_geocode_missing">Geocódigo em falta…</string>
@@ -363,6 +363,7 @@
   <string name="caches_make_list_unique">Fazer uma única lista</string>
   <string name="caches_filter_missing_gcvote">Caches encontradas não votadas</string>
   <!-- caches lists -->
+  <string name="menu_lists">Gerir listas</string>
   <string name="list_menu_create">Criar nova lista</string>
   <string name="list_menu_drop">Remover a lista atual</string>
   <string name="list_menu_rename">Mudar o nome da lista corrente.</string>
@@ -417,6 +418,13 @@
   <string name="settings_title_map_data">Dados do Mapa</string>
   <string name="settings_title_map_content">Conteúdo do Mapa</string>
   <string name="settings_title_gpx">GPX</string>
+  <string name="settings_title_data_dir">Pasta de dados de geocache</string>
+  <string name="settings_title_data_dir_usage">Pasta de dados de geocache (%1$s em uso)</string>
+  <string name="calculate_dataDir_title">Utilização de dados de geocache</string>
+  <string name="calculate_dataDir">A calcular utilização de memória para Geocache</string>
+  <string name="settings_data_dir_item">%1$s (%2$s livres)</string>
+  <string name="confirm_data_dir_move_title">Mover a pasta dos dados de geocaches?</string>
+  <string name="confirm_data_dir_move">Mover pasta de dados de geocache pode demorar muito tempo, dependendo do seu dispositivo e volume de dados.</string>
   <string name="settings_title_basicmembers">Opções para Membros Básicos</string>
   <string name="settings_title_navigation">Navegação</string>
   <string name="settings_summary_navigation">Escolher métodos de navegação preferidos e selecione aplicações de navegação externa.</string>
@@ -563,6 +571,8 @@
   <string name="init_map_directory_description">Directório com os mapas offline</string>
   <string name="init_gpx_exportdir">Directório para exportar GPX</string>
   <string name="init_gpx_importdir">Directório para importar GPX</string>
+  <string name="init_dataDir">Selecione pasta de dados de geocache</string>
+  <string name="init_dataDir_note">Pode optar por armazenar os dados adicionais de geocaches (spoilers, imagens de registos, ...) no seu armazenamento externo (cartão SD emulado ou externo real, dependendo do seu dispositivo).</string>
   <string name="init_maptrail">Mostrar rasto no mapa</string>
   <string name="init_summary_maptrail">Mostrar rasto no mapa</string>
   <string name="init_share_after_export">Abrir o menu de partilha depois da exportação GPX</string>
@@ -579,12 +589,19 @@
   <string name="init_default_navigation_tool_2_description">Aqui define a sua segunda preferida ferramenta de navefação. É activada com clique longo no ícone ao lado do títula da cache.</string>
   <string name="init_navigation_menu_description">Aqui você pode selecionar qual dos métodos de navegação disponíveis serão mostrados no menu de navegação para um cache ou um ponto de referência. Métodos desativados não estão instalados neste dispositivo.</string>
   <string name="init_debug_title">Informação de depuração</string>
+  <string name="init_debug_note">c:Geo pode gerar uma grande quantidade de informações de depuração. Ativar essa configuração afetará a estabilidade do c:geo e só é recomendado se for solicitado o envio de um log para os programadores. Por favor, mantenha o registo de depuração desativado durante o uso normal do c:geo!</string>
   <string name="init_debug">Activar depuração</string>
   <string name="init_dbonsdcard_title">Localização da base de dados</string>
+  <string name="init_dbonsdcard_note">Pode armazenar a base de dados de c:geo numa paste interna de sistema ou numa pasta do armazenamento de utilizador. Guardá-la no armazenamento de utilizador pode libertar alguma memória, mas pode perder um pouco de desempenho e o c:geo não funcionará se o armazenamento não estiver acessível ou remover o ficheiro da base de dados.</string>
+  <string name="init_dbonsdcard">No armazenamento do utilizador</string>
   <string name="init_dbmove_dbmove">A mover a base de dados</string>
   <string name="init_dbmove_running">A mover a base de dados</string>
   <string name="init_dbmove_success">Base de dados movida com sucesso.</string>
   <string name="init_dbmove_failed">Falha ao mover a base de dados.</string>
+  <string name="init_datadirmove_datadirmove">A mover pasta de dados de geocache</string>
+  <string name="init_datadirmove_running">A mover pasta de dados de geocache</string>
+  <string name="init_datadirmove_success">Pasta de dados de geocache movida com sucesso.</string>
+  <string name="init_datadirmove_failed">A transferência da pasta de dados de geocache falhou parcial ou totalmente. Verifique, por favor, antigas e novas pastas e transfira manualmente se necessário.</string>
   <string name="init_plain_logs">Mostrar os logs sem as cores</string>
   <string name="init_summary_plain_logs">Mostrar os logs sem as cores</string>
   <string name="init_use_native_ua">Identificar como se fosse o browser do Android. Resolve os problemas de login em alguns provedores de rede.</string>
@@ -815,6 +832,7 @@
   <string name="cache_menu_spoilers">Imagens spoiler</string>
   <string name="cache_menu_around">Caches próximas</string>
   <string name="around">Perto de %s</string>
+  <string name="menu_caches">Gerir caches</string>
   <string name="cache_menu_event">Adicionar ao calendário</string>
   <string name="cache_menu_extract_waypoints">Extrair waypoints</string>
   <string name="cache_menu_details">Detalhes</string>
@@ -1464,7 +1482,10 @@
   <string name="command_rename_list_result">Lista renomeada</string>
   <string name="command_delete_list_result">Lista apagada</string>
   <string name="command_unique_list_result">Caches eliminadas de outras listas</string>
-  <string name="fav_points_remaining">"Adiciona esta cache aos favoritos (%s restantes)"</string>
+  <plurals name="fav_points_remaining">
+    <item quantity="one">Adicionar esta cache aos favoritos (%d restante)</item>
+    <item quantity="other">Adicionar esta cache aos favoritos (%d restantes)</item>
+  </plurals>
   <!-- distance units -->
   <string name="unit_m">m</string>
   <string name="unit_km">km</string>
@@ -1489,4 +1510,8 @@
   </plurals>
   <!-- calendar adder -->
   <string name="event_fail">Falha ao adicionar cache evento ao calendário</string>
+  <string name="init_low_disk_space">A ficar sem espaço de armazenamento</string>
+  <string name="init_low_disk_space_message">O directório de dados de geocache está a ficar sem espaço de armazenamento. Isto pode causar anomalias do c:geo. Por favor, liberte algum espaço.</string>
+  <string name="init_confirm_debug">c:geo está a ser executado no modo de depuração!</string>
+  <string name="list_confirm_debug_message">O modo de depuração provoca instabilidades! Quer desactivar o modo de depuração?</string>
 </resources>

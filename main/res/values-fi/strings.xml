@@ -90,7 +90,7 @@
   <string name="log_posting_twitter">Lähetetään twiittiä…</string>
   <string name="log_posting_gcvote">Lähetetään GCVotea…</string>
   <string name="log_posting_image">Lähetetään kuvaa…</string>
-  <string name="log_posting_generic_trackable">Lähetetään %1$s %2$s/%3$s</string>
+  <string name="log_posting_generic_trackable">Lähetetään %1$s %2$d/%3$d</string>
   <string name="log_clear">Tyhjennä</string>
   <string name="log_post_not_possible">Datan lataus käynnissä…\nYritäthän hetken kuluttua uudelleen tai tarkista internet yhteytesi.</string>
   <string name="log_post_geocode_missing">Geokoodi puuttuu…</string>
@@ -314,8 +314,8 @@
   <string name="caches_manage">Hallinnoi</string>
   <string name="caches_remove_all">Poista kaikki</string>
   <plurals name="caches_remove_all_confirm">
-    <item quantity="one">Haluatko poistaa tämän kätkön valitusta luettelosta?</item>
-    <item quantity="other">Haluatko poistaa kaikki %d kätköä listalta?</item>
+    <item quantity="one">Haluatko poistaa tämän kätkön nykyisestä listasta?</item>
+    <item quantity="other">Haluatko poistaa kaikki %d kätköä nykyisestä listasta?</item>
   </plurals>
   <string name="caches_remove_selected">Poista valitut</string>
   <plurals name="caches_remove_selected_confirm">
@@ -361,6 +361,7 @@
   <string name="caches_make_list_unique">Poista listan kätköt muilta listoilta</string>
   <string name="caches_filter_missing_gcvote">Löydettyjä kätköjä ei ole äänestetty</string>
   <!-- caches lists -->
+  <string name="menu_lists">Hallitse listoja</string>
   <string name="list_menu_create">Luo uusi lista</string>
   <string name="list_menu_drop">Poista valittu lista</string>
   <string name="list_menu_rename">Nimeä uudelleen nykyinen lista</string>
@@ -415,6 +416,7 @@
   <string name="settings_title_map_data">Kartan tiedot</string>
   <string name="settings_title_map_content">Kartan sisältö</string>
   <string name="settings_title_gpx">GPX</string>
+  <string name="confirm_data_dir_move">Kätködatan siirtäminen voi kestää todella kauan riippuen laitteestasi sekä datan määrästä.</string>
   <string name="settings_title_basicmembers">Peruskäyttäjän asetukset</string>
   <string name="settings_title_navigation">Navigointi</string>
   <string name="settings_summary_navigation">Määritä ensisijainen navigointitapa ja valitse ulkoiset navigointisovellukset.</string>
@@ -569,13 +571,14 @@
   <string name="init_default_navigation_tool_2_description">Tästä voi valita toissijaisen navigointitavan. Aktivoidaksesi sen paina navigointi-ikonia kätkön nimen vieressä pitkään.</string>
   <string name="init_navigation_menu_description">Tästä voit valita mitkä käytettävissä olevista navigointitavoista näytetään kätkön/reittipisteen navigointivalikossa. Valitsemattomia ei tulla asentamaan laitteeseesi.</string>
   <string name="init_debug_title">Virheenjäljitystiedot</string>
-  <string name="init_debug_note">c:geo voi tuottaa runsaasti vianmääritystietoja. Tämän asetuksen aktivointi voi vaikuttaa c:geon vakauteen ja se on suositeltavaa tehdä ainoastaan mikäli sinua on pyydetty lähetämään loki kehittäjille. Pidä vianjäljitysloki pois päältä c:geon normaalin käytön aikana!</string>
+  <string name="init_debug_note">c:geo voi tuottaa runsaasti vianmääritystietoja. Tämän asetuksen aktivointi voi vaikuttaa c:geon vakauteen ja se on suositeltavaa tehdä ainoastaan mikäli sinua on pyydetty lähettämään loki kehittäjille. Pidä vianjäljitysloki pois päältä c:geon normaalin käytön aikana!</string>
   <string name="init_debug">Aktivoi vianjäljitysloki</string>
   <string name="init_dbonsdcard_title">Tietokannan sijainti</string>
   <string name="init_dbmove_dbmove">Siirretään tietoja</string>
   <string name="init_dbmove_running">Siirretään tietoja</string>
   <string name="init_dbmove_success">Tiedot siirretty onnistuneesti.</string>
   <string name="init_dbmove_failed">Tietojen siirto epäonnistui</string>
+  <string name="init_datadirmove_datadirmove">Siirretään kätködataa toiseen kansioon</string>
   <string name="init_datadirmove_running">Siirretään kätködataa toiseen kansioon</string>
   <string name="init_plain_logs">Yksinkertaiset lokit</string>
   <string name="init_summary_plain_logs">Näytä loki ilman värejä</string>
@@ -743,6 +746,7 @@
   <string name="cache_list_text">Lista:</string>
   <string name="cache_list_change">Siirrä</string>
   <string name="cache_list_unknown">Ei listauksessa</string>
+  <string name="cache_list_select_last">Viimeisin valinta</string>
   <string name="cache_images">Kuvat</string>
   <string name="cache_waypoints">Reittipisteet</string>
   <plurals name="waypoints">
@@ -802,6 +806,7 @@
   <string name="cache_menu_around">Kätköt lähistöllä</string>
   <string name="around">%s:n ympärillä</string>
   <string name="cache_menu_event">Lisää kalenteriin</string>
+  <string name="cache_menu_extract_waypoints">Poimi reittipisteet</string>
   <string name="cache_menu_details">Tarkat tiedot</string>
   <string name="cache_menu_refresh">Päivitä</string>
   <string name="cache_menu_share">Jaa kätkö</string>
@@ -813,6 +818,7 @@
   <string name="cache_menu_pebble">Peddle</string>
   <string name="cache_menu_vote">Anna ääni</string>
   <string name="cache_menu_checker">Avaa Geochecker</string>
+  <string name="cache_menu_challenge_checker">Etsi Haastetarkistin</string>
   <string name="cache_menu_ignore">Ohita kätkö</string>
   <string name="ignore_confirm_title">Ole varovainen</string>
   <string name="ignore_confirm_message">Ohita kätkö tarkoittaa, että kätkö ei enää koskaan näy ladattaessa tietoja geocaching.com sivulta. Voit nähdä kätkön uudelleen vain poistamalla ohituksen verkkosivun kautta.</string>
@@ -918,6 +924,7 @@
   <string name="waypoint_edit_title">Muokkaa reittipistettä</string>
   <string name="waypoint_add_title">Lisää reittipiste</string>
   <string name="waypoint_note">Muistiinpano</string>
+  <string name="waypoint_user_note">Käyttäjän muistiinpanot</string>
   <string name="waypoint_visited">Vierailtu</string>
   <string name="waypoint_save">Tallenna</string>
   <string name="waypoint_cancel_edit">Peruuta</string>
@@ -1421,7 +1428,7 @@
   <string name="do_not_ask_me_again">Älä kysy uudelleen</string>
   <string name="geokrety_parsing_failed">GeoKretyn vastauksen jäsentäminen epäonnistui.</string>
   <string name="settings_map_direction">Näytä suunta</string>
-  <string name="settings_summary_map_direction">Näytä suuntaviiva navigointi kohteelle</string>
+  <string name="settings_summary_map_direction">Näytä suuntaviiva navigointikohteelle</string>
   <string name="map_direction">Näytä suunta</string>
   <string name="command_move_caches_progress">Siirretään kätköjä luetteloon %1s</string>
   <plurals name="command_move_caches_result">
@@ -1441,7 +1448,6 @@
   <string name="command_rename_list_result">Uudelleen nimetty luettelo</string>
   <string name="command_delete_list_result">Poistettu luettelo</string>
   <string name="command_unique_list_result">Kätköt poistettiin muilta listoilta</string>
-  <string name="fav_points_remaining">"Lisää kätkö suosikkeihin (%s jäljellä)"</string>
   <!-- distance units -->
   <string name="unit_m">m</string>
   <string name="unit_km">km</string>

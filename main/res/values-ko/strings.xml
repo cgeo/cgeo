@@ -91,7 +91,7 @@
   <string name="log_posting_twitter">트위터에 올리는 중…</string>
   <string name="log_posting_gcvote">GCVote에 올리는 중…</string>
   <string name="log_posting_image">사진 올리는 중…</string>
-  <string name="log_posting_generic_trackable">%1$s %2$s/%3$s를 올리는 중</string>
+  <string name="log_posting_generic_trackable">%1$s %2$d/%3$d 를 올리는 중</string>
   <string name="log_clear">지우기</string>
   <string name="log_post_not_possible">데이터 다운로드 진행 중…\n몇초 후 다시 시도해 보거나, 인터넷 연결상태를 확인 해 보세요.</string>
   <string name="log_post_geocode_missing">지오코드가 없음…</string>
@@ -314,7 +314,7 @@
   <string name="caches_manage">관리</string>
   <string name="caches_remove_all">모두 제거</string>
   <plurals name="caches_remove_all_confirm">
-    <item quantity="other">현재 목록에서 %d 개의 캐시를 모두 제거하시겠습니까?</item>
+    <item quantity="other">현재 목록에서 이 캐시를 제거하시겠습니까?</item>
   </plurals>
   <string name="caches_remove_selected">선택 항목 제거</string>
   <plurals name="caches_remove_selected_confirm">
@@ -359,6 +359,7 @@
   <string name="caches_make_list_unique">고유 목록 만들기</string>
   <string name="caches_filter_missing_gcvote">투표하지 않은 캐시 찾기</string>
   <!-- caches lists -->
+  <string name="menu_lists">목록 관리</string>
   <string name="list_menu_create">새 목록 만들기</string>
   <string name="list_menu_drop">현재 목록 제거</string>
   <string name="list_menu_rename">현재 목록 이름바꾸기</string>
@@ -418,7 +419,7 @@
   <string name="calculate_dataDir_title">지오캐시 데이터 사용</string>
   <string name="calculate_dataDir">지오캐시 데이터 디스크 사용량 계산</string>
   <string name="settings_data_dir_item">%1$s (%2$s 남음)</string>
-  <string name="confirm_data_dir_move_title">지오캐시 데이터 디렉토리를 이동?</string>
+  <string name="confirm_data_dir_move_title">지오캐시 데이터 폴터를 이동하시겠습니까?</string>
   <string name="confirm_data_dir_move">장치 및 데이터양에 따라, 지오캐시 데이터를 이동하려면 시간이 많이 걸릴 수 있습니다.</string>
   <string name="settings_title_basicmembers">일반 회원을 위한 선택사항</string>
   <string name="settings_title_navigation">길찾기</string>
@@ -559,7 +560,7 @@
   <string name="init_gpx_exportdir">GPX 내보내기 폴더</string>
   <string name="init_gpx_importdir">GPX를 가져올 폴더</string>
   <string name="init_dataDir">지오캐시 데이터 디렉토리 선택</string>
-  <string name="init_dataDir_note">지오캐시 관련 추가자료(스포일러, 로그 사진...) 를 외부 저장장치(장치에 따라 에뮬레이션 또는 진짜 외부 SD 카드) 에 저장하도록 선택할 수 있습니다.</string>
+  <string name="init_dataDir_note">지오캐시 관련 추가자료(스포일러, 로그 사진…) 를 외부 저장장치(장치에 따라 에뮬레이션 또는 진짜 외부 SD 카드) 에 저장하도록 선택할 수 있습니다.</string>
   <string name="init_maptrail">트레일 보기</string>
   <string name="init_summary_maptrail">지도에서 트레일이 나타나게 합니다.</string>
   <string name="init_share_after_export">GPX 내보내기 후 공유메뉴 열기</string>
@@ -808,6 +809,7 @@
   <string name="cache_menu_spoilers">스포일러 사진</string>
   <string name="cache_menu_around">주변의 캐시</string>
   <string name="around"> %s 주변</string>
+  <string name="menu_caches">캐시 관리</string>
   <string name="cache_menu_event">캘린더에 추가</string>
   <string name="cache_menu_extract_waypoints">중간 지점 추출</string>
   <string name="cache_menu_details">상세내용</string>
@@ -1443,7 +1445,9 @@
   <string name="command_rename_list_result">목록 이름 변경됨</string>
   <string name="command_delete_list_result">목록 삭제됨</string>
   <string name="command_unique_list_result">다른 목록에서 캐시 삭제함</string>
-  <string name="fav_points_remaining">"이 캐시를 호감캐시에 추가 (%s 남음)"</string>
+  <plurals name="fav_points_remaining">
+    <item quantity="other">이 캐시를 호감캐시에 추가 (%d 남음)</item>
+  </plurals>
   <!-- distance units -->
   <string name="unit_m">m</string>
   <string name="unit_km">km</string>
@@ -1467,4 +1471,8 @@
   </plurals>
   <!-- calendar adder -->
   <string name="event_fail">이벤트 캐시를 캘린더에 추가하지 못했습니다.</string>
+  <string name="init_low_disk_space">디스크 공간 부족</string>
+  <string name="init_low_disk_space_message">지오캐시 데이터폴더의 공간이 모자랍니다. 이는 c:geo의 오작동을 초래할 수 있습니다. 여유공간을 확보해 주세요.</string>
+  <string name="init_confirm_debug">c:geo가 디버그 모드에서 실행됩니다!</string>
+  <string name="list_confirm_debug_message">디버그 모드는 불안정해질 수 있습니다. 정상 모드로 돌아가시겠습니까?</string>
 </resources>

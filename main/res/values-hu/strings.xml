@@ -92,7 +92,6 @@
   <string name="log_posting_twitter">Twittelés…</string>
   <string name="log_posting_gcvote">Értékelés küldése…</string>
   <string name="log_posting_image">Kép küldése…</string>
-  <string name="log_posting_generic_trackable">%1$s %2$s/%3$s log küldése</string>
   <string name="log_clear">Törlés</string>
   <string name="log_post_not_possible">Az adatok letöltése folyamatban van…\nKérlek, próbáld újra néhány másodperc múlva vagy ellenőrizd az internetkapcsolatodat!</string>
   <string name="log_post_geocode_missing">Hiányzó geokód…</string>
@@ -315,10 +314,6 @@
   <string name="caches_nearby">Közeli</string>
   <string name="caches_manage">Kezelés</string>
   <string name="caches_remove_all">Összes törlése</string>
-  <plurals name="caches_remove_all_confirm">
-    <item quantity="one">El akarod távolítani ezt a ládát a listáról?</item>
-    <item quantity="other">El akarod távolítani az összes (%d) ládát a listáról?</item>
-  </plurals>
   <string name="caches_remove_selected">Kijelöltek törlése</string>
   <plurals name="caches_remove_selected_confirm">
     <item quantity="one">El akarod távolítani ezt a ládát a készülékedről?</item>
@@ -422,7 +417,6 @@
   <string name="calculate_dataDir_title">Ládaadatok keresése</string>
   <string name="calculate_dataDir">Ládaadatok méretének összegzése</string>
   <string name="settings_data_dir_item">%1$s (%2$s szabad)</string>
-  <string name="confirm_data_dir_move_title">Ládaadat mappa beállítása</string>
   <string name="confirm_data_dir_move">A ládaadatok mozgatása hosszú ideig is eltarthat az adatok mennyiségétől és az eszközödtől függően.</string>
   <string name="settings_title_basicmembers">Normál tagok beállításai</string>
   <string name="settings_title_navigation">Navigáció</string>
@@ -604,8 +598,8 @@
   <string name="init_summary_use_native_ua">Azonosítás Android böngészőként. Ez megoldja a bejelentkezési problémákat bizonyos szolgáltatóknál.</string>
   <string name="init_rendertheme_folder">Térképstílusok mappája</string>
   <string name="init_maintenance">Karbantartás</string>
-  <string name="init_maintenance_directories_note">A c:geo az egyes ládákhoz képeket, logokat és egyéb fájlokat tárol egy külön mappában. Bizonyos esetekben (pl. adatbázis importja vagy exportja) ez a mappa már fölösleges adatokat tartalmazhat, melyek ezzel a funkcióval törölhetőek.</string>
-  <string name="init_maintenance_directories">Fölösleges fájlok törlése</string>
+  <string name="init_maintenance_directories_note">A c:geo az egyes ládákhoz képeket, logokat és egyéb fájlokat tárol egy külön mappában. Bizonyos esetekben (pl. adatbázis importja vagy exportja) ez a mappa már felesleges adatokat tartalmazhat, melyek ezzel a funkcióval törölhetőek.</string>
+  <string name="init_maintenance_directories">Felesleges fájlok törlése</string>
   <string name="init_location">Helymeghatározás</string>
   <string name="init_location_note">A Google Play-szolgáltatásokat használó készülékeken a c:geo automatikusan egy jobb helymeghatározó technikát használhat. Ez azonban lehetetlenné teszi külső, BlueTooth-os GPS vevő alkalmazását.</string>
   <string name="init_location_googleplayservices">Google Play-szolgáltatások használata</string>
@@ -1477,7 +1471,6 @@
   <string name="command_rename_list_result">Átnevezett lista</string>
   <string name="command_delete_list_result">Törölt lista</string>
   <string name="command_unique_list_result">Ládák törölve</string>
-  <string name="fav_points_remaining">"Hozzáadás a kedvencekhez (%s pontod maradt)"</string>
   <!-- distance units -->
   <string name="unit_m">m</string>
   <string name="unit_km">km</string>

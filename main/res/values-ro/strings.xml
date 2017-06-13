@@ -92,7 +92,7 @@
   <string name="log_posting_twitter">Se publică tweet…</string>
   <string name="log_posting_gcvote">Se publică GCVote…</string>
   <string name="log_posting_image">Se publică imaginea…</string>
-  <string name="log_posting_generic_trackable">Se publică %1$s %2$s/%3$s</string>
+  <string name="log_posting_generic_trackable">Postare %1$s %2$d/%3$d</string>
   <string name="log_clear">Şterge</string>
   <string name="log_post_not_possible">Descărcare în curs…\nTe rog încearcă din nou peste câteva secunde sau verifică-ţi conexiunea la internet.</string>
   <string name="log_post_geocode_missing">Lipsă Geocod…</string>
@@ -110,7 +110,7 @@
   <string name="log_stars_45_description">Foarte bună</string>
   <string name="log_stars_5_description">Superbă</string>
   <string name="log_webcam">Poză cu camera web</string>
-  <string name="log_new_log">Jurnal</string>
+  <string name="log_new_log">Scrie în jurnal</string>
   <string name="log_new_log_text">text însemnare</string>
   <string name="log_announcement">Anunţ</string>
   <string name="log_today">Azi</string>
@@ -318,8 +318,8 @@
   <string name="caches_remove_all">Șterge toate</string>
   <plurals name="caches_remove_all_confirm">
     <item quantity="one">Vrei să ştergi această geocutie din lista curentă?</item>
-    <item quantity="few">Vrei să ştergi toate cele %d geocutii din lista curentă?</item>
-    <item quantity="other">Vrei să ştergi toate cele %d geocutii din lista curentă?</item>
+    <item quantity="few">Vrei să ştergi toate %d geocutiile din lista curentă?</item>
+    <item quantity="other">Vrei să ştergi toate %d geocutiile din lista curentă?</item>
   </plurals>
   <string name="caches_remove_selected">Şterge geocutiile selectate</string>
   <plurals name="caches_remove_selected_confirm">
@@ -366,6 +366,7 @@
   <string name="caches_make_list_unique">Marchează lista unică</string>
   <string name="caches_filter_missing_gcvote">Geocutii găsite, fără votul tău</string>
   <!-- caches lists -->
+  <string name="menu_lists">Gestiune liste</string>
   <string name="list_menu_create">Crează listă nouă</string>
   <string name="list_menu_drop">Şterge lista curentă</string>
   <string name="list_menu_rename">Redenumeşte lista curentă</string>
@@ -425,7 +426,7 @@
   <string name="calculate_dataDir_title">Spaţiu utilizat de geocutii</string>
   <string name="calculate_dataDir">Se determină spaţiul de stocare utilizat de geocutii</string>
   <string name="settings_data_dir_item">%1$s (%2$s disponibil)</string>
-  <string name="confirm_data_dir_move_title">Mută dosarul cu geocutii?</string>
+  <string name="confirm_data_dir_move_title">Vrei să muţi dosarul cu datele geocutiilor?</string>
   <string name="confirm_data_dir_move">Mutarea dosarului cu geocutii ar putea dura un timp mai îndelungat, în funcţie de disăpzitivul tău şi de volumul de informaţii.</string>
   <string name="settings_title_basicmembers">Opţiuni pentru Basic Members</string>
   <string name="settings_title_navigation">Navigare</string>
@@ -574,6 +575,7 @@
   <string name="init_gpx_exportdir">Dosar Exporturi GPX</string>
   <string name="init_gpx_importdir">Dosar Importuri GPX</string>
   <string name="init_dataDir">Alege dosar geocutii</string>
+  <string name="init_dataDir_note">Poţi alege să salvezi informaţii suplimentare despre geocutii (spoilere, imagini din jurnal, …) în spaţiul de stocare extern (SDcard real sau virtual, în funcţie de dispozitivul tău).</string>
   <string name="init_maptrail">Arată traseul parcus</string>
   <string name="init_summary_maptrail">Arată traseul parcus pe Hartă</string>
   <string name="init_share_after_export">Afişează meniul \"Distribuie\" după exportul GPX</string>
@@ -593,10 +595,13 @@
   <string name="init_debug_note">c:geo poate genera o mulţime de informaţii de depanare. Activând această setare va afecta stabilitatea lui c:geo şi este recomandată numai dacă vi se cer astfel de informaţii de către dezvoltatori (de exemplu atunci când raportezi o eroare în funcţionare). Te rog să ţii dezactivată această opţiune în timpul utilizării normale a c:geo!</string>
   <string name="init_debug">Activează jurnal de depanare</string>
   <string name="init_dbonsdcard_title">Locaţia bazei de date</string>
+  <string name="init_dbonsdcard_note">Poţi păstra baza de date a c:geo fie în memoria internă, fie într-un dosar în spaţiul de stocare accesibil utilizatorului. Alegând a doua opţiune îţi va elibera din memoria internă, dar va funcţiona cu o performaţă mai redusă, iar c:geo va înceta să mai funcţioneze daca ştergi fişierul bazei de date sau suportul de stocare extern nu este accesibil (de ex. ai scos SDcard-ul).</string>
+  <string name="init_dbonsdcard">Spaţiu stocare utilizator</string>
   <string name="init_dbmove_dbmove">Mutare bază de date</string>
   <string name="init_dbmove_running">Mutare bază de date în curs</string>
   <string name="init_dbmove_success">Baza de date a fost mutată.</string>
   <string name="init_dbmove_failed">Mutarea bazei de date a eşuat</string>
+  <string name="init_datadirmove_datadirmove">Mutare dosar cu geocutii</string>
   <string name="init_datadirmove_running">Mutare dosar geocutii în curs</string>
   <string name="init_datadirmove_success">A fost mutat dosarul cu geocutii.</string>
   <string name="init_datadirmove_failed">Mutarea dosarului cu geocutii a eşuat parţial sau total. Te rog verifică atât dosarul vechi cât şi cel nou şi mută fişierele manual, dacă este necesar.</string>
@@ -836,6 +841,7 @@
   <string name="cache_menu_spoilers">Imagini (indicii?)</string>
   <string name="cache_menu_around">Cutii din împrejurimi</string>
   <string name="around">Aproximativ %s</string>
+  <string name="menu_caches">Gestiune geocutii</string>
   <string name="cache_menu_event">Adaugă la calendar</string>
   <string name="cache_menu_extract_waypoints">Extrage puncte</string>
   <string name="cache_menu_details">Detalii</string>
@@ -1495,7 +1501,11 @@
   <string name="command_rename_list_result">Lista a fost redenumită</string>
   <string name="command_delete_list_result">Lista a fost ştearsă</string>
   <string name="command_unique_list_result">Geocutii şterse din alte liste</string>
-  <string name="fav_points_remaining">"Adaugă această geocutie la favorite (au mai rămas %s)"</string>
+  <plurals name="fav_points_remaining">
+    <item quantity="one">Adaugă această geocutie la favorite (%d disponibil)</item>
+    <item quantity="few">Adaugă această geocutie la favorite (%d disponibile)</item>
+    <item quantity="other">Adaugă această geocutie la favorite (%d disponibile)</item>
+  </plurals>
   <!-- distance units -->
   <string name="unit_m">m</string>
   <string name="unit_km">km</string>
@@ -1521,4 +1531,8 @@
   </plurals>
   <!-- calendar adder -->
   <string name="event_fail">Evenimentul nu a putut fi adăugat la calendar</string>
+  <string name="init_low_disk_space">Nu mai este suficient spaţiu de stocare disponibil</string>
+  <string name="init_low_disk_space_message">Nu mai este suficient spaţiu de stocare disponibil pentru geocutii. Aceasta poate împiedica buna funcţionare a c:geo. Te rog eliberează nişte spaţiu de stocare.</string>
+  <string name="init_confirm_debug">c:geo funcţionează acum în mod \"depanare\"!</string>
+  <string name="list_confirm_debug_message">Modul \"depanare\" poate cauza instabilitate. Vrei să revii la modul normal de funcţionare?</string>
 </resources>

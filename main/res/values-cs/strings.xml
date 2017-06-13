@@ -92,7 +92,7 @@
   <string name="log_posting_twitter">Odesílání tweetu…</string>
   <string name="log_posting_gcvote">Odesílání GCVote…</string>
   <string name="log_posting_image">Odesílání obrázku…</string>
-  <string name="log_posting_generic_trackable">Odesílání %1$s %2$s/%3$s</string>
+  <string name="log_posting_generic_trackable">Odesílání %1$s %2$d/%3$d</string>
   <string name="log_clear">Vyčistit</string>
   <string name="log_post_not_possible">Probíhá stahování dat…\nProsím, zkus to znovu za chvíli nebo zkontroluj připojení k internetu.</string>
   <string name="log_post_geocode_missing">Geokód chybí…</string>
@@ -317,9 +317,9 @@
   <string name="caches_manage">Správa</string>
   <string name="caches_remove_all">Odstranit vše</string>
   <plurals name="caches_remove_all_confirm">
-    <item quantity="one">Opravdu chceš smazat tuto keš z aktuálního seznamu?</item>
-    <item quantity="few">Opravdu chceš smazat všechny keše (%d) ze seznamu?</item>
-    <item quantity="other">Opravdu chceš smazat všechny keše (%d) ze seznamu?</item>
+    <item quantity="one">Chcete odstranit tuto keš ze seznamu?</item>
+    <item quantity="few">Chcete odstranit všechny %d keše ze seznamu?</item>
+    <item quantity="other">Chcete odstranit všech %d keší ze seznamu?</item>
   </plurals>
   <string name="caches_remove_selected">Odstranit vybrané</string>
   <plurals name="caches_remove_selected_confirm">
@@ -366,6 +366,7 @@
   <string name="caches_make_list_unique">Vytvořit seznam jedinečných</string>
   <string name="caches_filter_missing_gcvote">Nalezené keše bez GCVote hlasů</string>
   <!-- caches lists -->
+  <string name="menu_lists">Spravovat seznamy</string>
   <string name="list_menu_create">Vytvořit nový seznam</string>
   <string name="list_menu_drop">Odstranit aktuální seznam</string>
   <string name="list_menu_rename">Přejmenovat aktuální seznam</string>
@@ -420,6 +421,13 @@
   <string name="settings_title_map_data">Data map</string>
   <string name="settings_title_map_content">Obsah map</string>
   <string name="settings_title_gpx">GPX</string>
+  <string name="settings_title_data_dir">Umístění dat keše</string>
+  <string name="settings_title_data_dir_usage">Adresář dat keše (%1$s použito)</string>
+  <string name="calculate_dataDir_title">Použití úložistě kešemi</string>
+  <string name="calculate_dataDir">Propočítávání využití úložiště kešemi</string>
+  <string name="settings_data_dir_item">%1$s (%2$s volných)</string>
+  <string name="confirm_data_dir_move_title">Přesunout adresář s daty keší?</string>
+  <string name="confirm_data_dir_move">Přesun dat keší může trvat dlouhou dobu v závislosti na zařízení a množství dat.</string>
   <string name="settings_title_basicmembers">Možnosti pro běžné členy</string>
   <string name="settings_title_navigation">Navigace</string>
   <string name="settings_summary_navigation">Výběr preferované navigační metody a externích navigačních aplikací.</string>
@@ -566,6 +574,8 @@
   <string name="init_map_directory_description">Složka s offline mapami</string>
   <string name="init_gpx_exportdir">Složka pro GPX export</string>
   <string name="init_gpx_importdir">Složka pro GPX import</string>
+  <string name="init_dataDir">Vyber adresář dat keší</string>
+  <string name="init_dataDir_note">Můžete se rozhodnout k uložení dalších dat pro geocache (nápovědy, obrázky,...) na externí úložiště (emulované nebo skutečné externí SD kartu ve vašem zařízení).</string>
   <string name="init_maptrail">Zobrazovat trasu cesty</string>
   <string name="init_summary_maptrail">Zobrazovat na mapě trasu cesty</string>
   <string name="init_share_after_export">Po exportování GPX otevřít menu sdílení</string>
@@ -582,12 +592,19 @@
   <string name="init_default_navigation_tool_2_description">Zde můžeš vybrat druhý preferovaný navigační nástroj. Ten se aktivuje dlouhým klepnutím na navigační ikonu vedle názvu keše.</string>
   <string name="init_navigation_menu_description">Zde můžeš zvolit, které z dostupných metod navigace budou zobrazovány v navigačním menu keše nebo bodu trasy. Nedostupné nástroje nejsou na tomto zařízení nainstalovány.</string>
   <string name="init_debug_title">Ladící informace</string>
+  <string name="init_debug_note">c:geo umí generovat mnoho ladících informací. Aktivace tohoto nastavení se dotkne stability c:geo a doporučuje se pouze tehdy, jste-li požádáni o poslání záznamu vývojářům. Prosím nechte toto nastavení vypnuté při normálním používání c:geo!</string>
   <string name="init_debug">Aktivovat ladící protokolování</string>
   <string name="init_dbonsdcard_title">Umístění databáze</string>
+  <string name="init_dbonsdcard_note">Databáze c:geo může být uložena v interním souborovém systému nebo v adresáři veřejného souborového systému. V závislosti na nastavení souborového systému tvého zařízení, může uložení databáze ve veřejném souborovém systému ušetřit část vnitřní paměti. Může to však mít vliv na výkon a c:geo nebude s databází pracovat, pokud bude externí souborový systém nedostupný nebo pokud bude soubor databáze odstraněn.</string>
+  <string name="init_dbonsdcard">Na úložišti uživatele</string>
   <string name="init_dbmove_dbmove">Přesun databáze</string>
   <string name="init_dbmove_running">Přesouvání databáze</string>
   <string name="init_dbmove_success">Databáze úspěšně přesunuta.</string>
   <string name="init_dbmove_failed">Přesun databáze selhal</string>
+  <string name="init_datadirmove_datadirmove">Přesouvání adresáře dat keší</string>
+  <string name="init_datadirmove_running">Přesouvání adresáře dat keší</string>
+  <string name="init_datadirmove_success">Adresář dat keší byl úspěšně přesunut.</string>
+  <string name="init_datadirmove_failed">Přesun adresáře dat keší se částečně nebo zcela nezdařil. Porovnej ručně starý a nový adresář a v případě potřeby přesuň data ručně.</string>
   <string name="init_plain_logs">Zobrazovat logy bez barev</string>
   <string name="init_summary_plain_logs">Zobrazovat logy bez barev</string>
   <string name="init_use_native_ua">Identifikovat se jako webový prohlížeč Android. Řeší problémy v některých sítích.</string>
@@ -824,6 +841,7 @@
   <string name="cache_menu_spoilers">Obrázky</string>
   <string name="cache_menu_around">Keš v okolí</string>
   <string name="around">V okolí %s</string>
+  <string name="menu_caches">Spravovat keše</string>
   <string name="cache_menu_event">Přidat do kalendáře</string>
   <string name="cache_menu_extract_waypoints">Extrahovat body trasy</string>
   <string name="cache_menu_details">Detaily</string>
@@ -1482,7 +1500,11 @@
   <string name="command_rename_list_result">Seznam přejmenován</string>
   <string name="command_delete_list_result">Seznam odstraněn</string>
   <string name="command_unique_list_result">Keše smazány z ostatních seznamů</string>
-  <string name="fav_points_remaining">"Přidat tuto keš do oblíbených (zbývá %s)"</string>
+  <plurals name="fav_points_remaining">
+    <item quantity="one">Přidat tuto keš do oblíbených (zbývá %d)</item>
+    <item quantity="few">Přidat tuto keš do oblíbených (zbývá %d)</item>
+    <item quantity="other">Přidat tuto keš do oblíbených (zbývá %d)</item>
+  </plurals>
   <!-- distance units -->
   <string name="unit_m">m</string>
   <string name="unit_km">km</string>
@@ -1507,4 +1529,9 @@
     <item quantity="other">%d bodů trasy extrahováno</item>
   </plurals>
   <!-- calendar adder -->
+  <string name="event_fail">Přidat událost do kalendáře se nepodařilo</string>
+  <string name="init_low_disk_space">V úložišti dochází volné místo</string>
+  <string name="init_low_disk_space_message">V adresáři dat keší dochází volné místo. To může způsobit nesprávné fungování aplikace c:geo. Uvolni nějaké místo.</string>
+  <string name="init_confirm_debug">c:geo běží v režimu ladění!</string>
+  <string name="list_confirm_debug_message">Režim ladění může způsobit nestabilitu aplikace. Chcete režim ladění vypnout?</string>
 </resources>

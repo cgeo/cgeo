@@ -92,7 +92,6 @@
   <string name="log_posting_twitter">Caricamento tweet…</string>
   <string name="log_posting_gcvote">Caricamento GCVote…</string>
   <string name="log_posting_image">Caricamento immagine…</string>
-  <string name="log_posting_generic_trackable">Caricamento %1$s %2$s/%3$s</string>
   <string name="log_clear">Azzera</string>
   <string name="log_post_not_possible">Download dei dati in corso…\nRiprovare tra alcuni secondi o controllare la connessione a internet.</string>
   <string name="log_post_geocode_missing">Geocode mancante…</string>
@@ -315,10 +314,6 @@
   <string name="caches_nearby">Qui vicino</string>
   <string name="caches_manage">Gestisci</string>
   <string name="caches_remove_all">Elimina tutti</string>
-  <plurals name="caches_remove_all_confirm">
-    <item quantity="one">Desideri rimuovere questo cache dalla lista corrente?</item>
-    <item quantity="other">Vuoi rimuovere tutti i %d cache dalla lista corrente?</item>
-  </plurals>
   <string name="caches_remove_selected">Elimina selezionati</string>
   <plurals name="caches_remove_selected_confirm">
     <item quantity="one">Si desidera rimuovere questo cache dal tuo dispositivo?</item>
@@ -422,7 +417,6 @@
   <string name="calculate_dataDir_title">Dati Geocache usati</string>
   <string name="calculate_dataDir">Calcola lo spazio disco usato dai Geocache</string>
   <string name="settings_data_dir_item">%1$s (%2$s liberi)</string>
-  <string name="confirm_data_dir_move_title">Spostare la directory geocache?</string>
   <string name="confirm_data_dir_move">Lo spostamento dei dati geocache potrebbe richiedere molto tempo, a seconda del dispositivo e la quantità di dati.</string>
   <string name="settings_title_basicmembers">Opzioni per i membri di base (non Premium)</string>
   <string name="settings_title_navigation">Navigazione</string>
@@ -568,6 +562,7 @@
   <string name="init_gpx_exportdir">Cartella di export GPX</string>
   <string name="init_gpx_importdir">Cartella di import GPX</string>
   <string name="init_dataDir">Seleziona la directory di dati Geocache</string>
+  <string name="init_dataDir_note">È possibile memorizzare i dati aggiuntivi delle cache (spoiler, immagini log,...) su uno storage esterno (scheda SD reale o simulata a seconda del dispositivo).</string>
   <string name="init_maptrail">Mostra scia</string>
   <string name="init_summary_maptrail">Mostra la scia nella mappa</string>
   <string name="init_share_after_export">Apri menu condivisione dopo export GPX</string>
@@ -587,6 +582,8 @@
   <string name="init_debug_note">c:geo può generare molte informazioni di debug. Attivando questa impostazione pregiudica la stabilità di c:geo ed è consigliata solo se vi viene chiesto di inviare un log agli sviluppatori. Si prega di tenere la registrazione di debug disabilitata durante l\'uso normale di c:geo!</string>
   <string name="init_debug">Attiva informazioni di debug</string>
   <string name="init_dbonsdcard_title">Posizione Database</string>
+  <string name="init_dbonsdcard_note">È possibile archiviare il database di c:geo internamente in una directory oppure online su un server pubblico. Mantenere l\'archivio online consente di liberare la memoria interna, ma potrebbe ridurre leggermente le prestazioni e c:geo non funzionerebbe se il server esterno non fosse accessibile o il database venisse rimosso.</string>
+  <string name="init_dbonsdcard">Sullo spazio utente</string>
   <string name="init_dbmove_dbmove">Spostamento Database</string>
   <string name="init_dbmove_running">Spostamento Database</string>
   <string name="init_dbmove_success">Database spostato con successo.</string>
@@ -1469,7 +1466,6 @@
   <string name="command_rename_list_result">Lista rinominata</string>
   <string name="command_delete_list_result">Lista eliminata</string>
   <string name="command_unique_list_result">Cache eliminati da altri elenchi</string>
-  <string name="fav_points_remaining">"Aggiungi questo cache ai preferiti (%s rimanenti)"</string>
   <!-- distance units -->
   <string name="unit_m">m</string>
   <string name="unit_km">km</string>

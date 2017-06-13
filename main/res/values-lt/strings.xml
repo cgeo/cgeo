@@ -92,7 +92,7 @@
   <string name="log_posting_twitter">Skelbiamas Tweet…</string>
   <string name="log_posting_gcvote">Skelbiama GCVote…</string>
   <string name="log_posting_image">Talpinamas vaizdas…</string>
-  <string name="log_posting_generic_trackable">Talpinama %1$s %2$s %3$s</string>
+  <string name="log_posting_generic_trackable">Talpinama %1$s %2$d/%3$d</string>
   <string name="log_clear">Išvalyti</string>
   <string name="log_post_not_possible">Duomenys atsiunčiami…\nPrašome bandyti dar kartą po keletos sekundžių arba patikrinti interneto jungtį.</string>
   <string name="log_post_geocode_missing">Trūksta geo kodo…</string>
@@ -317,9 +317,9 @@
   <string name="caches_manage">Valdyti</string>
   <string name="caches_remove_all">Pašalinti visas</string>
   <plurals name="caches_remove_all_confirm">
-    <item quantity="one">Ar norite pašalinti slėptuvę iš dabartinio sąrašo?</item>
+    <item quantity="one">Ar norite pašalinti šią slėptuvę iš dabartinio sąrašo?</item>
     <item quantity="few">Ar norite pašalinti visas %d slėptuves iš dabartinio sąrašo?</item>
-    <item quantity="other">Ar norite pašalinti visas %d slėptuvių iš dabartinio sąrašo?</item>
+    <item quantity="other">Ar norite pašalinti visas %d slėptuves iš dabartinio sąrašo?</item>
   </plurals>
   <string name="caches_remove_selected">Pašalinti pasirinktas</string>
   <plurals name="caches_remove_selected_confirm">
@@ -366,6 +366,7 @@
   <string name="caches_make_list_unique">Sąrašą padaryti unikaliu</string>
   <string name="caches_filter_missing_gcvote">Rastos slėptuvės be balsų</string>
   <!-- caches lists -->
+  <string name="menu_lists">Tvarkyti sąrašus</string>
   <string name="list_menu_create">Sukurti naują sąrašą</string>
   <string name="list_menu_drop">Pašalinti dabartinį sąrašą</string>
   <string name="list_menu_rename">Pervadinti dabartinį sąrašą</string>
@@ -420,6 +421,13 @@
   <string name="settings_title_map_data">Žemėlapio duomenys</string>
   <string name="settings_title_map_content">Žemėlapio turinys</string>
   <string name="settings_title_gpx">GPX</string>
+  <string name="settings_title_data_dir">Slėptuvių duomenų katalogas</string>
+  <string name="settings_title_data_dir_usage">Slėptuvių duomenų katalogas (%1$s naudojama)</string>
+  <string name="calculate_dataDir_title">Slėptuvių duomenų naudojimas</string>
+  <string name="calculate_dataDir">Apskaičiuojamas slėptuvių duomenų disko naudojimas</string>
+  <string name="settings_data_dir_item">%1$s (%2$s laisva)</string>
+  <string name="confirm_data_dir_move_title">Perkelti slėptuvių duomenų katalogą?</string>
+  <string name="confirm_data_dir_move">Slėptuvių duomenų perkėlimas gali užtrukti, priklausomai nuo jūsų įrenginio ir duomenų apimties.</string>
   <string name="settings_title_basicmembers">Parinktys paprastiesiems nariams</string>
   <string name="settings_title_navigation">Navigacija</string>
   <string name="settings_summary_navigation">Pasirinkti pirminį navigacijos būdą ir pasirinkti išorinę navigacijos programą.</string>
@@ -558,6 +566,8 @@
   <string name="init_map_directory_description">Katalogas su išsaugotais žemėlapiais</string>
   <string name="init_gpx_exportdir">GPX eksportavimo katalogas</string>
   <string name="init_gpx_importdir">GPX importavimo katalogas</string>
+  <string name="init_dataDir">Pasirinkite slėptuvių duomenų katalogą</string>
+  <string name="init_dataDir_note">Galite pasirinkti saugoti papildomus slėptuvių duomenis (užuominas, nuotraukas, ...) išorinėje atmintinėje (pseudo ar tikroje išorinėje SD atmintinėje, priklausomai nuo jūsų įrenginio).</string>
   <string name="init_maptrail">Rodyti pėdsaką</string>
   <string name="init_summary_maptrail">Rodyti pėdsaką žemėlapyje</string>
   <string name="init_share_after_export">Po GPX eksportavimo atidaryti bendrinimo meniu</string>
@@ -574,12 +584,19 @@
   <string name="init_default_navigation_tool_2_description">Čia galite pasirinkti savo antrą pageidaujamą navigacijos įrankį. Aktyvinkite jį ilgai paspausdami navigacijos piktogramą šalia slėptuvės pavadinimo.</string>
   <string name="init_navigation_menu_description">Čia galite pasirinkti, kuris iš navigacinių metodų bus rodomas slėptuvės arba papildomo taško navigacijos meniu. Išjungti įrankiai šiame prietaise yra neįdiegti.</string>
   <string name="init_debug_title">Derinimo informacija</string>
+  <string name="init_debug_note">c:geo gali generuoti daug derinimo informacijos. Įgalinus šį nustatymą gali pablogėti c:geo stabilumas; tai daryti rekomenduojama tik tuomet, jei c:geo kūrėjai paprašė jūsų atsiųsti jiems programėlės veiklos žurnalą. Normaliomis programėlės naudojimo aplinkybėmis prašome neįgalinti šio nustatymo!</string>
   <string name="init_debug">Aktyvinti derinimo ataskaitą</string>
   <string name="init_dbonsdcard_title">Duomenų bazės vieta</string>
+  <string name="init_dbonsdcard_note">Galite c:geo duomenų bazę laikyti sistemos arba savo nustatytame kataloge. Laikydami ją pastarajame galite atlaisvinti atminties, bet dėl to gali suprastėti sparta, beje, c:geo neveiks, jei atmintis nepasiekiama ir/ar jūs pašalinsite duomenų bazės failą.</string>
+  <string name="init_dbonsdcard">Vartotojo saugykloje</string>
   <string name="init_dbmove_dbmove">Perkeliama duomenų bazė</string>
   <string name="init_dbmove_running">Perkeliama duomenų bazė</string>
   <string name="init_dbmove_success">Duomenų bazė sėkmingai perkelta.</string>
   <string name="init_dbmove_failed">Duomenų bazės perkelti nepavyko</string>
+  <string name="init_datadirmove_datadirmove">Perkeliamas slėptuvių duomenų katalogas</string>
+  <string name="init_datadirmove_running">Perkeliamas slėptuvių duomenų katalogas</string>
+  <string name="init_datadirmove_success">Sėkmingai perkeltas slėptuvių duomenų katalogas.</string>
+  <string name="init_datadirmove_failed">Slėptuvių duomenų katalogo perkėlimas dalinai/visiškai nepavyko. Patikrinkite senus bei naujus katalogus ir, jei reikia, perkelkite rankiniu būdu.</string>
   <string name="init_plain_logs">Nespalvoti įrašai</string>
   <string name="init_summary_plain_logs">Žurnalo įrašus rodyti be spalvų</string>
   <string name="init_use_native_ua">\"Android\" naršyklė</string>
@@ -811,6 +828,7 @@
   <string name="cache_menu_spoilers">Užuominų nuotraukos</string>
   <string name="cache_menu_around">Slėptuvės aplink</string>
   <string name="around">Aplink %s</string>
+  <string name="menu_caches">Tvarkyti slėptuves</string>
   <string name="cache_menu_event">Įtraukti į kalendorių</string>
   <string name="cache_menu_extract_waypoints">Išskleisti nuorodų taškus</string>
   <string name="cache_menu_details">Informacija</string>
@@ -1466,7 +1484,11 @@
   <string name="command_rename_list_result">Pervadinti sąrašą</string>
   <string name="command_delete_list_result">Sąrašas ištrintas</string>
   <string name="command_unique_list_result">Ištrintos slėptuvės iš kitų sąrašų</string>
-  <string name="fav_points_remaining">"Šią slėptuvę pridėti prie megstamų (%s liko)"</string>
+  <plurals name="fav_points_remaining">
+    <item quantity="one">Pridėti šią slėptuvę prie mėgstamųjų (liko %d)</item>
+    <item quantity="few">Pridėti šias slėptuves prie mėgstamųjų (liko %d)</item>
+    <item quantity="other">Pridėti šią slėptuvę prie mėgstamųjų (liko %d)</item>
+  </plurals>
   <!-- distance units -->
   <string name="unit_m">m</string>
   <string name="unit_km">km</string>
@@ -1485,6 +1507,15 @@
   <string name="cache_list_remove_from">Pašalinti iš sąrašo</string>
   <string name="list_list_headline">Sąrašas:</string>
   <string name="cache_store_list">Išsaugoti sąraše</string>
+  <plurals name="extract_waypoints_result">
+    <item quantity="one">%d papildomas taškas išskleistas</item>
+    <item quantity="few">%d papildomi taškai išskleisti</item>
+    <item quantity="other">%d papildomų taškų išskleista</item>
+  </plurals>
   <!-- calendar adder -->
   <string name="event_fail">Nepavyko įtraukti renginio į kalendorių</string>
+  <string name="init_low_disk_space">Mažai talpyklos vietos</string>
+  <string name="init_low_disk_space_message">Slėptuvių duomenų kataloge liko mažai vietos. Tas gali sukelti c:geo sutrikimus. Atlaisvinkite vietos.</string>
+  <string name="init_confirm_debug">c:geo veikia derinimo režimu!</string>
+  <string name="list_confirm_debug_message">Derinimo režimas sukelia nestabilumų! Ar norite jį išjungti?</string>
 </resources>
