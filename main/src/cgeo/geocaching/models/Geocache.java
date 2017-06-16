@@ -166,10 +166,30 @@ public class Geocache implements IWaypoint {
     private boolean finalDefined = false;
     private boolean logPasswordRequired = false;
     private LogEntry offlineLog = null;
+    private Integer eventTimeMinutes = null;
 
     private static final Pattern NUMBER_PATTERN = Pattern.compile("\\d+");
 
     private Handler changeNotificationHandler = null;
+
+    private static final List<Pattern> eventTimePatterns;
+
+    static {
+        eventTimePatterns = new ArrayList<>();
+
+        final String hourLocalized = CgeoApplication.getInstance().getString(R.string.cache_time_full_hours);
+
+        // 12:34
+        eventTimePatterns.add(Pattern.compile("\\b(\\d{1,2})\\:(\\d\\d)\\b"));
+        if (StringUtils.isNotBlank(hourLocalized)) {
+            // 12:34o'clock
+            eventTimePatterns.add(Pattern.compile("\\b(\\d{1,2})\\:(\\d\\d)" + Pattern.quote(hourLocalized), Pattern.CASE_INSENSITIVE));
+            // 17 - 20 o'clock
+            eventTimePatterns.add(Pattern.compile("\\b(\\d{1,2})(?:\\.00)?" + "\\s*(?:-|[a-z]+)\\s?" + "(?:\\d{1,2})(?:\\.00)?" + "\\s?" + Pattern.quote(hourLocalized), Pattern.CASE_INSENSITIVE));
+            // 12 o'clock, 12.00 o'clock
+            eventTimePatterns.add(Pattern.compile("\\b(\\d{1,2})(?:\\.(00|15|30|45))?\\s?" + Pattern.quote(hourLocalized), Pattern.CASE_INSENSITIVE));
+        }
+    }
 
     public void setChangeNotificationHandler(final Handler newNotificationHandler) {
         changeNotificationHandler = newNotificationHandler;
@@ -1791,34 +1811,28 @@ public class Geocache implements IWaypoint {
         return !lists.isEmpty() && (lists.size() > 1 || lists.iterator().next() != StoredList.TEMPORARY_LIST.id);
     }
 
+    public int getEventTimeMinutes(){
+        if(eventTimeMinutes == null)
+        {
+            eventTimeMinutes = guessEventTimeMinutes();
+        }
+        return eventTimeMinutes.intValue();
+    }
+
     /**
      * guess an event start time from the description
      *
      * @return start time in minutes after midnight
      */
-    public int guessEventTimeMinutes() {
+    private int guessEventTimeMinutes() {
         if (!isEventCache()) {
             return -1;
-        }
-
-        final String hourLocalized = CgeoApplication.getInstance().getString(R.string.cache_time_full_hours);
-        final List<Pattern> patterns = new ArrayList<>();
-
-        // 12:34
-        patterns.add(Pattern.compile("\\b(\\d{1,2})\\:(\\d\\d)\\b"));
-        if (StringUtils.isNotBlank(hourLocalized)) {
-            // 12:34o'clock
-            patterns.add(Pattern.compile("\\b(\\d{1,2})\\:(\\d\\d)" + Pattern.quote(hourLocalized), Pattern.CASE_INSENSITIVE));
-            // 17 - 20 o'clock
-            patterns.add(Pattern.compile("\\b(\\d{1,2})(?:\\.00)?" + "\\s*(?:-|[a-z]+)\\s?" + "(?:\\d{1,2})(?:\\.00)?" + "\\s?" + Pattern.quote(hourLocalized), Pattern.CASE_INSENSITIVE));
-            // 12 o'clock, 12.00 o'clock
-            patterns.add(Pattern.compile("\\b(\\d{1,2})(?:\\.(00|15|30|45))?\\s?" + Pattern.quote(hourLocalized), Pattern.CASE_INSENSITIVE));
         }
 
         final String searchText = getShortDescription() + ' ' + getDescription();
         int start = -1;
         int eventTimeMinutes = -1;
-        for (final Pattern pattern : patterns) {
+        for (final Pattern pattern : eventTimePatterns) {
             final MatcherWrapper matcher = new MatcherWrapper(pattern, searchText);
             while (matcher.find()) {
                 try {
