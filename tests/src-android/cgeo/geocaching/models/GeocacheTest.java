@@ -20,7 +20,6 @@ import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.log.LogType;
-import cgeo.geocaching.utils.Log;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 

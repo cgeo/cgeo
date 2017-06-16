@@ -1811,9 +1811,8 @@ public class Geocache implements IWaypoint {
         return !lists.isEmpty() && (lists.size() > 1 || lists.iterator().next() != StoredList.TEMPORARY_LIST.id);
     }
 
-    public int getEventTimeMinutes(){
-        if(eventTimeMinutes == null)
-        {
+    public int getEventTimeMinutes() {
+        if (eventTimeMinutes == null) {
             eventTimeMinutes = guessEventTimeMinutes();
         }
         return eventTimeMinutes.intValue();
