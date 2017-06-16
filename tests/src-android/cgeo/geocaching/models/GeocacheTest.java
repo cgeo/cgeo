@@ -20,6 +20,7 @@ import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.log.LogType;
+import cgeo.geocaching.utils.Log;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
@@ -394,7 +395,7 @@ public class GeocacheTest extends CGeoTestCase {
         cache.setType(CacheType.EVENT);
         cache.setDescription(StringUtils.EMPTY);
         cache.setShortDescription("text 14:20 text");
-        assertThat(cache.guessEventTimeMinutes()).isEqualTo(14 * 60 + 20);
+        assertThat(cache.getEventTimeMinutes()).isEqualTo(14 * 60 + 20);
     }
 
     private static void assertTime(final String description, final int hours, final int minutes) {
@@ -402,14 +403,14 @@ public class GeocacheTest extends CGeoTestCase {
         cache.setDescription(description);
         cache.setType(CacheType.EVENT);
         final int minutesAfterMidnight = hours * 60 + minutes;
-        assertThat(cache.guessEventTimeMinutes()).isEqualTo(minutesAfterMidnight);
+        assertThat(cache.getEventTimeMinutes()).isEqualTo(minutesAfterMidnight);
     }
 
     private static void assertNoTime(final String description) {
         final Geocache cache = new Geocache();
         cache.setDescription(description);
         cache.setType(CacheType.EVENT);
-        assertThat(cache.guessEventTimeMinutes()).isEqualTo(-1);
+        assertThat(cache.getEventTimeMinutes()).isEqualTo(-1);
     }
 
     public static void testGetPossibleLogTypes() throws Exception {
