@@ -62,7 +62,7 @@ apply plugin: 'idea'
 buildscript {
     repositories {
         jcenter()
-		// gradle build-scan
+		// gradle build-scan for profiling our build script
 		maven {
 			url 'https://plugins.gradle.org/m2'
 		}
@@ -89,7 +89,8 @@ buildscript {
 		// ribbonizer for easier distinction of non-release builds
 		classpath 'com.github.gfx.ribbonizer:plugin:1.0.0'
 
-		classpath 'com.gradle:build-scan-plugin:1.4'
+		// gradle build script profiling
+		classpath 'com.gradle:build-scan-plugin:1.8'
 	}
 }
 
@@ -140,6 +141,8 @@ allprojects {
 		maven {
 			url 'https://dl.bintray.com/alexeydanilov/maven'
 		}
+		// Android Support libraries are now in an online Maven repository
+		google()
 	}
 }
 
