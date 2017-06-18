@@ -1,12 +1,11 @@
 package cgeo.geocaching.location;
 
-import android.os.Build;
-import android.os.Bundle;
-
-import junit.framework.TestCase;
-
 import static org.assertj.core.api.Assertions.offset;
 import static org.assertj.core.api.Java6Assertions.assertThat;
+
+import android.os.Build;
+
+import junit.framework.TestCase;
 
 public class GeopointTest extends TestCase {
 
@@ -77,14 +76,6 @@ public class GeopointTest extends TestCase {
         // the initial bearing of the path in both cases.
         assertThat((double) gp1.bearingTo(gp2)).isEqualTo(287.162, offset(1e-3));
         assertThat((double) gp2.bearingTo(gp1)).isEqualTo(107.715, offset(1e-3));
-    }
-
-    public static void testParcelable() {
-        final Geopoint gp = new Geopoint(1.2, 3.4);
-        final String key = "geopoint";
-        final Bundle bundle = new Bundle();
-        bundle.putParcelable(key, gp);
-        assertThat(bundle.getParcelable(key)).isEqualTo(gp);
     }
 
     public static void testDDD() {
