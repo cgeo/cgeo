@@ -71,19 +71,19 @@ buildscript {
 		// these dependencies are used by gradle plugins, not by our projects
 		
 		// check for updates of gradle plugin dependencies
-		classpath 'com.github.ben-manes:gradle-versions-plugin:0.14.0'
+		classpath 'com.github.ben-manes:gradle-versions-plugin:0.15.0'
 	
 		// Android gradle plugin
-        classpath 'com.android.tools.build:gradle:2.3.2'
+        classpath 'com.android.tools.build:gradle:2.3.3'
     
 		// un-mocking of portable Android classes
-		classpath 'de.mobilej.unmock:UnMockPlugin:0.6.0'
+		classpath 'de.mobilej.unmock:UnMockPlugin:0.6.2'
 
 		// Google Services (App Invite) has its own Gradle plugin
 		classpath 'com.google.gms:google-services:2.1.0'
 
 		// monitor our application method limit
-		classpath 'com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.6.4'
+		classpath 'com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.7.0'
 
 		// ribbonizer for easier distinction of non-release builds
 		classpath 'com.github.gfx.ribbonizer:plugin:1.0.0'

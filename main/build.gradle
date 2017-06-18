@@ -226,7 +226,7 @@ android {
 
 dependencies {
     // AndroidAnnotations, https://github.com/excilys/androidannotations/wiki/building-project-gradle
-    def androidAnnotationsVersion = '4.3.0'
+    def androidAnnotationsVersion = '4.3.1'
     annotationProcessor "org.androidannotations:androidannotations:$androidAnnotationsVersion"
     compile "org.androidannotations:androidannotations-api:$androidAnnotationsVersion"
 
@@ -234,7 +234,7 @@ dependencies {
     compile 'org.apache.commons:commons-collections4:4.1'
     compile 'org.apache.commons:commons-compress:1.14'
     compile 'commons-io:commons-io:2.5'
-    compile 'org.apache.commons:commons-lang3:3.5'
+    compile 'org.apache.commons:commons-lang3:3.6'
 
     // AssertJ for testing, needed both for local unit tests and Android instrumentation tests
     def assertJVersion = '2.8.0'
@@ -256,13 +256,13 @@ dependencies {
     compile "net.sf.geographiclib:GeographicLib-Java:1.48"
 
     // Jackson XML processing
-    def jacksonVersion = '2.8.8'
+    def jacksonVersion = '2.8.9'
     compile "com.fasterxml.jackson.core:jackson-core:$jacksonVersion"
     compile "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
     compile "com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion"
 
     // Jsoup HTML parsing
-    compile 'org.jsoup:jsoup:1.10.2'
+    compile 'org.jsoup:jsoup:1.10.3'
 
     // Junit only needed for local unit tests
     testCompile 'junit:junit:4.12'
