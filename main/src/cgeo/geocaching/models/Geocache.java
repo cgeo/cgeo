@@ -372,6 +372,7 @@ public class Geocache implements IWaypoint {
             reliableLatLon = other.reliableLatLon;
         }
 
+        this.eventTimeMinutes = null; // will be recalculated if/when necessary
         return isEqualTo(other);
     }
 
@@ -710,10 +711,10 @@ public class Geocache implements IWaypoint {
                     setLocation(partial.getLocation());
                 }
             } else {
-                description = StringUtils.defaultString(description);
-                shortdesc = StringUtils.defaultString(shortdesc);
-                hint = StringUtils.defaultString(hint);
-                location = StringUtils.defaultString(location);
+                setDescription(StringUtils.defaultString(description));
+                setShortDescription(StringUtils.defaultString(shortdesc));
+                setHint(StringUtils.defaultString(hint));
+                setLocation(StringUtils.defaultString(location));
             }
         }
     }
@@ -806,6 +807,7 @@ public class Geocache implements IWaypoint {
 
     public void setDescription(final String description) {
         this.description = description;
+        this.eventTimeMinutes = null; // will be recalculated if/when necessary
     }
 
     public boolean isFound() {
@@ -986,6 +988,7 @@ public class Geocache implements IWaypoint {
 
     public void setShortDescription(final String shortdesc) {
         this.shortdesc = shortdesc;
+        this.eventTimeMinutes = null; // will be recalculated if/when necessary
     }
 
     public void setFavoritePoints(final int favoriteCnt) {
@@ -1322,6 +1325,7 @@ public class Geocache implements IWaypoint {
             throw new IllegalArgumentException("Illegal cache type");
         }
         this.cacheType = new UncertainProperty<>(cacheType);
+        this.eventTimeMinutes = null; // will be recalculated if/when necessary
     }
 
     public void setType(final CacheType cacheType, final int zoomlevel) {
@@ -1329,6 +1333,7 @@ public class Geocache implements IWaypoint {
             throw new IllegalArgumentException("Illegal cache type");
         }
         this.cacheType = new UncertainProperty<>(cacheType, zoomlevel);
+        this.eventTimeMinutes = null; // will be recalculated if/when necessary
     }
 
     public boolean hasDifficulty() {
