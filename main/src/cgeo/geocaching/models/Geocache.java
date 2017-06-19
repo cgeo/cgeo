@@ -172,22 +172,22 @@ public class Geocache implements IWaypoint {
 
     private Handler changeNotificationHandler = null;
 
-    private static final List<Pattern> eventTimePatterns;
+    private static final List<Pattern> EVENT_TIME_PATTERNS;
 
     static {
-        eventTimePatterns = new ArrayList<>();
+        EVENT_TIME_PATTERNS = new ArrayList<>();
 
         final String hourLocalized = CgeoApplication.getInstance().getString(R.string.cache_time_full_hours);
 
         // 12:34
-        eventTimePatterns.add(Pattern.compile("\\b(\\d{1,2})\\:(\\d\\d)\\b"));
+        EVENT_TIME_PATTERNS.add(Pattern.compile("\\b(\\d{1,2})\\:(\\d\\d)\\b"));
         if (StringUtils.isNotBlank(hourLocalized)) {
             // 12:34o'clock
-            eventTimePatterns.add(Pattern.compile("\\b(\\d{1,2})\\:(\\d\\d)" + Pattern.quote(hourLocalized), Pattern.CASE_INSENSITIVE));
+            EVENT_TIME_PATTERNS.add(Pattern.compile("\\b(\\d{1,2})\\:(\\d\\d)" + Pattern.quote(hourLocalized), Pattern.CASE_INSENSITIVE));
             // 17 - 20 o'clock
-            eventTimePatterns.add(Pattern.compile("\\b(\\d{1,2})(?:\\.00)?" + "\\s*(?:-|[a-z]+)\\s?" + "(?:\\d{1,2})(?:\\.00)?" + "\\s?" + Pattern.quote(hourLocalized), Pattern.CASE_INSENSITIVE));
+            EVENT_TIME_PATTERNS.add(Pattern.compile("\\b(\\d{1,2})(?:\\.00)?" + "\\s*(?:-|[a-z]+)\\s?" + "(?:\\d{1,2})(?:\\.00)?" + "\\s?" + Pattern.quote(hourLocalized), Pattern.CASE_INSENSITIVE));
             // 12 o'clock, 12.00 o'clock
-            eventTimePatterns.add(Pattern.compile("\\b(\\d{1,2})(?:\\.(00|15|30|45))?\\s?" + Pattern.quote(hourLocalized), Pattern.CASE_INSENSITIVE));
+            EVENT_TIME_PATTERNS.add(Pattern.compile("\\b(\\d{1,2})(?:\\.(00|15|30|45))?\\s?" + Pattern.quote(hourLocalized), Pattern.CASE_INSENSITIVE));
         }
     }
 
@@ -1836,7 +1836,7 @@ public class Geocache implements IWaypoint {
         final String searchText = getShortDescription() + ' ' + getDescription();
         int start = -1;
         int eventTimeMinutes = -1;
-        for (final Pattern pattern : eventTimePatterns) {
+        for (final Pattern pattern : EVENT_TIME_PATTERNS) {
             final MatcherWrapper matcher = new MatcherWrapper(pattern, searchText);
             while (matcher.find()) {
                 try {
