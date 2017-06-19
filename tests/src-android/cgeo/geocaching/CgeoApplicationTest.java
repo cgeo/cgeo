@@ -312,8 +312,8 @@ public class CgeoApplicationTest extends CGeoTestCase {
                     assert parsedCache != null;
                     assertThat(parsedCache).isNotNull();
 
-                    assertThat(mockedCache.getCoords().equals(parsedCache.getCoords())).isEqualTo(Settings.isGCPremiumMember());
-                    assertThat(parsedCache.isReliableLatLon()).isEqualTo(Settings.isGCPremiumMember());
+                    assertThat(mockedCache.getCoords().equals(parsedCache.getCoords())).isTrue();
+                    assertThat(parsedCache.isReliableLatLon()).isTrue();
 
                     // check update after switch strategy to FAST
                     Settings.setLiveMapStrategy(LivemapStrategy.FAST);

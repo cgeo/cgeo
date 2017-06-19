@@ -23,6 +23,7 @@ import java.net.URLEncoder;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.reactivex.Completable;
 import io.reactivex.Single;
@@ -52,6 +53,8 @@ public final class Network {
     private static final String NATIVE_USER_AGENT = "Mozilla/5.0 (Linux; U; Android 2.2; en-us; Nexus One Build/FRF91) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1";
 
     private static final Pattern PATTERN_PASSWORD = Pattern.compile("(?<=[\\?&])[Pp]ass(w(or)?d)?=[^&#$]+");
+
+    private static final ObjectMapper mapper = new ObjectMapper();
 
     private static final OkHttpClient OK_HTTP_CLIENT = new OkHttpClient.Builder()
             .connectTimeout(30, TimeUnit.SECONDS)
@@ -318,6 +321,26 @@ public final class Network {
     @NonNull
     public static Single<Response> getRequest(final String uri, @Nullable final Parameters params, @Nullable final Parameters headers) {
         return request("GET", uri, params, headers, null);
+    }
+
+    /**
+     * Get HTTP request and deserialize JSON answer
+     *
+     * @param uri the URI to request
+     * @param clazz the class to deserialize the JSON result to
+     * @param params the parameters to add to the GET request
+     * @param headers the headers to add to the GET request
+     * @param <T> the type to deserialize to
+     * @return a single with the deserialized value, or an IO exception
+     */
+    @NonNull
+    public static <T> Single<T> getRequest(final String uri, final Class<T> clazz, @Nullable final Parameters params, @Nullable final Parameters headers) {
+        return getRequest(uri, params, headers).flatMap(getResponseData).map(new Function<String, T>() {
+            @Override
+            public T apply(@NonNull final String js) throws Exception {
+                return mapper.readValue(js, clazz);
+            }
+        });
     }
 
     /**

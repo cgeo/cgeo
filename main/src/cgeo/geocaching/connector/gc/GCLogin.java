@@ -98,10 +98,7 @@ public class GCLogin extends AbstractLogin {
                 if (switchToEnglish(tryLoggedInData) && retry) {
                     return login(false, credentials);
                 }
-                setHomeLocation();
-                refreshMemberStatus();
-                detectGcCustomDate();
-                return StatusCode.NO_ERROR; // logged in
+                return completeLoginProcess();
             }
 
             final String requestVerificationToken = extractRequestVerificationToken(tryLoggedInData);
@@ -123,10 +120,7 @@ public class GCLogin extends AbstractLogin {
                     return login(false, credentials);
                 }
                 Log.i("Successfully logged in Geocaching.com as " + username + " (" + Settings.getGCMemberStatus() + ')');
-                setHomeLocation();
-                refreshMemberStatus();
-                detectGcCustomDate();
-                return StatusCode.NO_ERROR; // logged in
+                return completeLoginProcess();
             }
 
             if (loginData.contains("your username or password is incorrect")) {
@@ -152,6 +146,15 @@ public class GCLogin extends AbstractLogin {
             Log.w("Login.login: communication error");
             return StatusCode.CONNECTION_FAILED;
         }
+    }
+
+    private StatusCode completeLoginProcess() {
+        setHomeLocation();
+        refreshMemberStatus();
+        detectGcCustomDate();
+        // Force token retrieval to avoid avalanche requests
+        API.getAuthorizationHeader().subscribe();
+        return StatusCode.NO_ERROR; // logged in
     }
 
     public StatusCode logout() {

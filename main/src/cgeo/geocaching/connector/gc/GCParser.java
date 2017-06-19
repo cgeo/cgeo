@@ -10,7 +10,6 @@ import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.enumerations.WaypointType;
-import cgeo.geocaching.files.LocParser;
 import cgeo.geocaching.gcvote.GCVote;
 import cgeo.geocaching.gcvote.GCVoteRating;
 import cgeo.geocaching.location.DistanceParser;
@@ -62,12 +61,15 @@ import javax.annotation.Nonnull;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import io.reactivex.Maybe;
+import io.reactivex.MaybeSource;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.Single;
 import io.reactivex.functions.BiFunction;
 import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.compress.utils.IOUtils;
@@ -280,6 +282,8 @@ public final class GCParser {
             Log.w("GCParser.parseSearch: Failed to parse cache count", e);
         }
 
+        Log.i("Getting location for " + cids.size() + " caches");
+
         if (!cids.isEmpty() && Settings.isGCPremiumMember()) {
             Log.i("Trying to get .loc for " + cids.size() + " caches");
             final Observable<Set<Geocache>> storedCaches = Observable.defer(new Callable<Observable<Set<Geocache>>>() {
@@ -290,39 +294,39 @@ public final class GCParser {
             }).subscribeOn(Schedulers.io()).cache();
             storedCaches.subscribe();  // Force asynchronous start of database loading
 
-            try {
-                // get coordinates for parsed caches
-                final Parameters params = new Parameters(
-                        "__EVENTTARGET", "",
-                        "__EVENTARGUMENT", "");
-                GCLogin.putViewstates(params, searchResult.getViewstates());
-                for (final String cid : cids) {
-                    params.put("CID", cid);
+            // Load coordinates using API
+            final Map<String, Geopoint> allCoords = Observable.fromIterable(Geocache.getGeocodes(caches))
+                    .flatMapMaybe(new Function<String, MaybeSource<ImmutablePair<String, Geopoint>>>() {
+                        @Override
+                        public MaybeSource<ImmutablePair<String, Geopoint>> apply(@NonNull final String geocode) throws Exception {
+                            return API.getCacheDetails(geocode).flatMapMaybe(new Function<API.CacheDetails, MaybeSource<? extends ImmutablePair<String, Geopoint>>>() {
+                                @Override
+                                public MaybeSource<? extends ImmutablePair<String, Geopoint>> apply(@NonNull final API.CacheDetails cacheDetails) throws Exception {
+                                    return Maybe.just(ImmutablePair.of(geocode, cacheDetails.postedCoordinates.toCoords()));
+                                }
+                            }).onErrorComplete();
+                        }
+                    })
+                    .toMap(new Function<ImmutablePair<String, Geopoint>, String>() {
+                        @Override
+                        public String apply(@NonNull final ImmutablePair<String, Geopoint> pair) throws Exception {
+                            return pair.left;
+                        }
+                    }, new Function<ImmutablePair<String, Geopoint>, Geopoint>() {
+                        @Override
+                        public Geopoint apply(@NonNull final ImmutablePair<String, Geopoint> pair) throws Exception {
+                            return pair.right;
+                        }
+                    }).blockingGet();
+
+            for (final Geocache cache: storedCaches.blockingSingle()) {
+                final Geopoint coords = allCoords.get(cache.getGeocode());
+                if (coords != null) {
+                    cache.setCoords(coords);
+                    cache.setReliableLatLon(true);
                 }
-
-                params.put("Download", "Download Waypoints");
-
-                // retrieve target url
-                final String queryUrl = TextUtils.getMatch(pageContent, GCConstants.PATTERN_SEARCH_POST_ACTION, "");
-
-                if (StringUtils.isEmpty(queryUrl)) {
-                    Log.w("Loc download url not found");
-                } else {
-
-                    final String coordinates = Network.getResponseData(Network.postRequest("https://www.geocaching.com/seek/" + queryUrl, params), false);
-
-                    if (StringUtils.contains(coordinates, "You have not agreed to the license agreement. The license agreement is required before you can start downloading GPX or LOC files from Geocaching.com")) {
-                        Log.i("User has not agreed to the license agreement. Can\'t download .loc file.");
-                        searchResult.setError(StatusCode.UNAPPROVED_LICENSE);
-                        return searchResult;
-                    }
-
-                    LocParser.parseLoc(coordinates, storedCaches.blockingSingle());
-                }
-
-            } catch (final RuntimeException e) {
-                Log.e("GCParser.parseSearch.CIDs", e);
             }
+
         }
 
         return searchResult;
