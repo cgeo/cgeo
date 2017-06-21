@@ -124,6 +124,11 @@ allprojects {
 						if (selection.candidate.group == 'com.google.code.findbugs' && selection.candidate.module == 'annotations' && selection.candidate.version == '3.0.1') {
 							selection.reject("3.0.1 is not an upgrade of 3.0.1u2")
 						}
+						// Apache Commons Lang 3.6 requires Java7, https://github.com/apache/commons-lang/commit/9b481a97010a19e375cf423ffe25dda1b40e0e47
+						if (selection.candidate.group == 'org.apache.commons' && selection.candidate.module == 'commons-lang3' && selection.candidate.version.substring(0,1).toInteger()*10+selection.candidate.version.substring(2,3).toInteger() > 35) {
+							selection.reject("Apache Commons Lang3 3.5 or higher requires Java 7.")
+						}
+
 					}
 				}
 			}

@@ -234,7 +234,7 @@ dependencies {
     compile 'org.apache.commons:commons-collections4:4.1'
     compile 'org.apache.commons:commons-compress:1.14'
     compile 'commons-io:commons-io:2.5'
-    compile 'org.apache.commons:commons-lang3:3.6'
+    compile 'org.apache.commons:commons-lang3:3.5'
 
     // AssertJ for testing, needed both for local unit tests and Android instrumentation tests
     def assertJVersion = '2.8.0'

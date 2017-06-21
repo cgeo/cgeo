@@ -56,8 +56,6 @@
 -keep class org.apache.commons.io.FileUtils { *; }
 -dontnote org.apache.commons.io.IOUtils
 -dontnote org.apache.commons.lang3.StringUtils
-# java.util.Calendar.getWeekYear() from Java7 not supported in FastDatePrinter
--dontwarn org.apache.commons.lang3.time.FastDatePrinter$WeekYear
 # IOFileFilter references FileUtils, suppress related notes
 -dontnote org.apache.commons.io.FileUtils
 
