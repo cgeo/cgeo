@@ -1,7 +1,7 @@
 /*
  * Just run this script using "gradlew", and it will show you typical examples of how to use it.
  */
- 
+
 defaultTasks 'cgeoHelp'
 
 task cgeoHelp {
@@ -69,13 +69,13 @@ buildscript {
     }
     dependencies {
 		// these dependencies are used by gradle plugins, not by our projects
-		
+
 		// check for updates of gradle plugin dependencies
 		classpath 'com.github.ben-manes:gradle-versions-plugin:0.15.0'
-	
+
 		// Android gradle plugin
         classpath 'com.android.tools.build:gradle:2.3.3'
-    
+
 		// un-mocking of portable Android classes
 		classpath 'de.mobilej.unmock:UnMockPlugin:0.6.2'
 
@@ -126,7 +126,7 @@ allprojects {
 						}
 						// Apache Commons Lang 3.6 requires Java7, https://github.com/apache/commons-lang/commit/9b481a97010a19e375cf423ffe25dda1b40e0e47
 						if (selection.candidate.group == 'org.apache.commons' && selection.candidate.module == 'commons-lang3' && selection.candidate.version.substring(0,1).toInteger()*10+selection.candidate.version.substring(2,3).toInteger() > 35) {
-							selection.reject("Apache Commons Lang3 3.5 or higher requires Java 7.")
+							selection.reject("Apache Commons Lang3 3.6 or higher requires Java 7.")
 						}
 
 					}
