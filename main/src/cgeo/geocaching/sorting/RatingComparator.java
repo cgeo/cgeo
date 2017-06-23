@@ -10,16 +10,19 @@ class RatingComparator extends AbstractCacheComparator {
 
     @Override
     protected int compareCaches(final Geocache cache1, final Geocache cache2) {
-        final float rating1 = cache1.getRating();
-        final float rating2 = cache2.getRating();
+        return Float.compare(getWeightedArithmeticMean(cache2), getWeightedArithmeticMean(cache1));
+    }
 
-        // Voting can be disabled for caches, then assume an average rating instead
-        final int ratingComparison = Float.compare(rating2 != 0.0 ? rating2 : 2.5f, rating1 != 0.0 ? rating1 : 2.5f);
-        if (ratingComparison != 0) {
-            return ratingComparison;
-        }
+    private static float getWeightedArithmeticMean(final Geocache cache) {
+        // Add some artificial average ratings to weight caches with few ratings towards the average rating.
+        final int averageVotes = 5;
 
-        return compare(cache2.getVotes(), cache1.getVotes());
+        // Average rating of GC50*** determined on June 26th, 2017
+        final float averageRating = 3.4f;
+        final float rating = cache.getRating();
+        final int votes = cache.getVotes();
+
+        return (votes * rating + averageVotes * averageRating) / (votes + averageVotes);
     }
 
     /**
