@@ -1,5 +1,6 @@
 package cgeo.geocaching.maps.mapsforge;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
@@ -15,19 +16,10 @@ import cgeo.geocaching.maps.interfaces.OnMapDragListener;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
 
-import org.apache.commons.lang3.StringUtils;
-import android.support.annotation.NonNull;
-import org.mapsforge.v3.android.maps.MapView;
-import org.mapsforge.v3.android.maps.Projection;
-import org.mapsforge.v3.android.maps.mapgenerator.MapGenerator;
-import org.mapsforge.v3.android.maps.mapgenerator.MapGeneratorFactory;
-import org.mapsforge.v3.android.maps.mapgenerator.MapGeneratorInternal;
-import org.mapsforge.v3.android.maps.overlay.Overlay;
-import org.mapsforge.v3.core.GeoPoint;
-
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
@@ -36,6 +28,17 @@ import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+
+
+import org.apache.commons.lang3.StringUtils;
+import org.mapsforge.v3.android.maps.MapView;
+import org.mapsforge.v3.android.maps.Projection;
+import org.mapsforge.v3.android.maps.mapgenerator.MapGenerator;
+import org.mapsforge.v3.android.maps.mapgenerator.MapGeneratorFactory;
+import org.mapsforge.v3.android.maps.mapgenerator.MapGeneratorInternal;
+import org.mapsforge.v3.android.maps.mapgenerator.tiledownloader.ThunderforestTileDownloader;
+import org.mapsforge.v3.android.maps.overlay.Overlay;
+import org.mapsforge.v3.core.GeoPoint;
 public class MapsforgeMapView extends MapView implements MapViewImpl {
     private GestureDetector gestureDetector;
     private OnMapDragListener onDragListener;
@@ -193,6 +196,10 @@ public class MapsforgeMapView extends MapView implements MapViewImpl {
         }
 
         final MapGenerator mapGenerator = MapGeneratorFactory.createMapGenerator(newMapType);
+        if (mapGenerator instanceof ThunderforestTileDownloader) {
+            // need to inject apiKey after creation
+            ((ThunderforestTileDownloader) mapGenerator).setApiKey(CgeoApplication.getInstance().getString(R.string.thunderforest_api_key));
+        }
 
         // When swapping map sources, make sure we aren't exceeding max zoom. See bug #1535
         final int maxZoom = mapGenerator.getZoomLevelMax();

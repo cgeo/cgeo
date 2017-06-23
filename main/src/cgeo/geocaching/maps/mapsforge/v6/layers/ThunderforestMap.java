@@ -6,6 +6,8 @@ import cgeo.geocaching.R;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+
+import org.apache.commons.lang3.StringUtils;
 import org.mapsforge.core.model.Tile;
 import org.mapsforge.map.layer.download.tilesource.AbstractTileSource;
 
@@ -29,7 +31,12 @@ public class ThunderforestMap extends AbstractTileSource {
 
     @Override
     public URL getTileUrl(final Tile tile) throws MalformedURLException {
-        return new URL("https", this.getHostName(), this.port, "/cycle/" + tile.zoomLevel + '/' + tile.tileX + '/' + tile.tileY + ".png?apikey=" + apiKey);
+        final StringBuilder builder = new StringBuilder("/cycle/");
+        builder.append(tile.zoomLevel).append('/').append(tile.tileX).append('/').append(tile.tileY).append(".png");
+        if (StringUtils.isNotBlank(apiKey)) {
+            builder.append("?apikey=").append(apiKey);
+        }
+        return new URL("https", this.getHostName(), this.port, builder.toString());
     }
 
     @Override
