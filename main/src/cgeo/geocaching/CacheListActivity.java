@@ -712,9 +712,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     /**
      * Menu items which are not at all usable with the current list type should be hidden.
      * Menu items which are usable with the current list type but not in the current situation should be disabled.
-     *
-     * @param menu
-     * @return
      */
     @Override
     public boolean onPrepareOptionsMenu(final Menu menu) {
