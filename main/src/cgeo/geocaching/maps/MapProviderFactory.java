@@ -9,15 +9,16 @@ import cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
 
-import org.apache.commons.lang3.StringUtils;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-
 import android.view.Menu;
 import android.view.SubMenu;
 
 import java.util.ArrayList;
 import java.util.List;
+
+
+import org.apache.commons.lang3.StringUtils;
 
 public class MapProviderFactory {
 
@@ -121,4 +122,18 @@ public class MapProviderFactory {
         }
         mapSources.removeAll(deletion);
     }
+
+    /**
+     * remove map sources by id after changes of the settings
+     */
+    public static void deleteMapSourceById(final String id) {
+        final List<MapSource> deletion = new ArrayList<>();
+        for (final MapSource mapSource : mapSources) {
+            if (mapSource.getId().equals(id)) {
+                deletion.add(mapSource);
+            }
+        }
+        mapSources.removeAll(deletion);
+    }
+
 }

@@ -539,6 +539,20 @@
                 android:summary="@string/settings_summary_scale_map_text"
                 android:title="@string/settings_title_scale_map_text" />
         </PreferenceCategory>
+
+        <PreferenceCategory android:title="@string/map_source_osm_cyclemap" >
+            <cgeo.geocaching.settings.TextPreference
+                android:layout="@layout/text_preference"
+                android:text="@string/init_thunderforest_api_key_note" />
+            <EditTextPreference
+                android:dialogTitle="@string/init_thunderforest_api_key_name"
+                android:imeOptions="actionDone"
+                android:singleLine="true"
+                android:title="@string/init_thunderforest_api_key_name"
+                android:key="@string/pref_thunderforest_api_key"
+                />
+        </PreferenceCategory>
+
         <PreferenceCategory android:title="@string/settings_title_map_content" >
             <Preference
                 android:selectable="false"

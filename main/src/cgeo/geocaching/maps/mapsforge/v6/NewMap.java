@@ -609,7 +609,7 @@ public class NewMap extends AbstractActionBarActivity {
             if (mapSource.getNumericalId() == MapsforgeMapProvider.MAPSFORGE_MAPNIK_ID.hashCode()) {
                 newLayer = new DownloadLayer(tileCache, this.mapView.getModel().mapViewPosition, OpenStreetMapMapnik.INSTANCE, AndroidGraphicFactory.INSTANCE);
             } else if (mapSource.getNumericalId() == MapsforgeMapProvider.MAPSFORGE_CYCLEMAP_ID.hashCode()) {
-                newLayer = new DownloadLayer(tileCache, this.mapView.getModel().mapViewPosition, ThunderforestMap.INSTANCE, AndroidGraphicFactory.INSTANCE);
+                newLayer = new DownloadLayer(tileCache, this.mapView.getModel().mapViewPosition, new ThunderforestMap(), AndroidGraphicFactory.INSTANCE);
             }
         }
         // Exchange layer

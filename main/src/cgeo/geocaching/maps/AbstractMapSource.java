@@ -40,6 +40,11 @@ public abstract class AbstractMapSource implements MapSource {
     }
 
     @Override
+    public String getId() {
+        return id;
+    }
+
+    @Override
     @NonNull
     public MapProvider getMapProvider() {
         return mapProvider;

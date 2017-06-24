@@ -35,9 +35,15 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
         final Resources resources = CgeoApplication.getInstance().getResources();
 
         registerMapSource(new MapsforgeMapSource(MAPSFORGE_MAPNIK_ID, this, resources.getString(R.string.map_source_osm_mapnik), MapGeneratorInternal.MAPNIK));
-        registerMapSource(new MapsforgeMapSource(MAPSFORGE_CYCLEMAP_ID, this, resources.getString(R.string.map_source_osm_cyclemap), MapGeneratorInternal.THUNDERFOREST));
-
+        updateThunderforestOpenCycleMap();
         updateOfflineMaps();
+    }
+
+    public void updateThunderforestOpenCycleMap() {
+        MapProviderFactory.deleteMapSourceById(MAPSFORGE_CYCLEMAP_ID);
+        if (StringUtils.isNotBlank(Settings.getThunderForestApiKey())) {
+            registerMapSource(new MapsforgeMapSource(MAPSFORGE_CYCLEMAP_ID, this, CgeoApplication.getInstance().getResources().getString(R.string.map_source_osm_cyclemap), MapGeneratorInternal.THUNDERFOREST));
+        }
     }
 
     private static final class Holder {
