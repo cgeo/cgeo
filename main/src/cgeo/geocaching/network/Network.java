@@ -83,7 +83,7 @@ public final class Network {
     }
 
     private static OkHttpClient.Builder enableTls12OnPreLollipop(final OkHttpClient.Builder builder) {
-        if (Build.VERSION.SDK_INT >= 16 && Build.VERSION.SDK_INT < 22) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN && Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP_MR1) {
             try {
                 final TrustManagerFactory trustManagerFactory = TrustManagerFactory.getInstance(
                         TrustManagerFactory.getDefaultAlgorithm());
