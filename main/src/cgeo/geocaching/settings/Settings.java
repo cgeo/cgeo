@@ -1195,8 +1195,8 @@ public class Settings {
         putBoolean(R.string.pref_plainLogs, plainLogs);
     }
 
-    public static boolean getUseNativeUa() {
-        return getBoolean(R.string.pref_nativeUa, false);
+    public static boolean useDesktopUserAgent() {
+        return getBoolean(R.string.pref_desktopUserAgent, false);
     }
 
     @NonNull

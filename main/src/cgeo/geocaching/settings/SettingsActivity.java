@@ -17,6 +17,7 @@ import cgeo.geocaching.gcvote.GCVote;
 import cgeo.geocaching.maps.MapProviderFactory;
 import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.network.AndroidBeam;
+import cgeo.geocaching.network.Network;
 import cgeo.geocaching.playservices.GooglePlayServices;
 import cgeo.geocaching.sensors.OrientationProvider;
 import cgeo.geocaching.sensors.RotationProvider;
@@ -224,6 +225,8 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
 
         setWebsite(R.string.pref_fakekey_sendtocgeo_website, "send2.cgeo.org");
         getPreference(R.string.preference_screen_sendtocgeo).setSummary(getServiceSummary(Settings.isRegisteredForSend2cgeo()));
+
+        getPreference(R.string.pref_desktopUserAgent).setOnPreferenceChangeListener(this);
     }
 
     private void setWebsite(final int preferenceKey, final String urlOrHost) {
@@ -908,6 +911,8 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
         } else if (isPreference(preference, R.string.pref_connectorGeokretyActive)) {
             preferenceManager.findPreference(getKey(R.string.preference_screen_geokrety)).setSummary(getServiceSummary((Boolean) value));
             redrawScreen(preferenceManager.findPreference(getKey(R.string.preference_screen_services)));
+        } else if (isPreference(preference, R.string.pref_desktopUserAgent)) {
+            Network.resetUserAgent();
         } else {
             // For all other preferences, set the summary to the value's
             // simple string representation.

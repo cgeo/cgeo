@@ -436,9 +436,9 @@
         <PreferenceCategory android:title="@string/settings_category_browser" >
             <CheckBoxPreference
                 android:defaultValue="false"
-                android:key="@string/pref_nativeUa"
-                android:summary="@string/init_summary_use_native_ua"
-                android:title="@string/init_use_native_ua" />
+                android:key="@string/pref_desktopUserAgent"
+                android:summary="@string/init_summary_use_desktop_ua"
+                android:title="@string/init_use_desktop_ua" />
         </PreferenceCategory>
     </PreferenceScreen>
     <PreferenceScreen
