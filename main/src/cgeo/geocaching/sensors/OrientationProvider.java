@@ -51,7 +51,7 @@ public class OrientationProvider {
                     }
                 };
                 Log.d("OrientationProvider: registering listener");
-                sensorManager.registerListener(listener, orientationSensor, SensorManager.SENSOR_DELAY_NORMAL);
+                sensorManager.registerListener(listener, orientationSensor, SensorManager.SENSOR_DELAY_GAME);
                 emitter.setDisposable(AndroidRxUtils.disposeOnCallbacksScheduler(new Runnable() {
                     @Override
                     public void run() {

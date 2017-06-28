@@ -77,7 +77,7 @@ public class RotationProvider {
 
                 };
                 Log.d("RotationProvider: registering listener");
-                sensorManager.registerListener(listener, rotationSensor, SensorManager.SENSOR_DELAY_NORMAL);
+                sensorManager.registerListener(listener, rotationSensor, SensorManager.SENSOR_DELAY_GAME);
                 emitter.setDisposable(AndroidRxUtils.disposeOnCallbacksScheduler(new Runnable() {
                     @Override
                     public void run() {
