@@ -77,14 +77,13 @@ buildscript {
         classpath 'com.android.tools.build:gradle:2.3.3'
 
 		// un-mocking of portable Android classes
-		classpath 'de.mobilej.unmock:UnMockPlugin:0.6.2'
+		classpath 'de.mobilej.unmock:UnMockPlugin:0.6.3'
 
 		// Google Services (App Invite) has its own Gradle plugin
 		classpath 'com.google.gms:google-services:2.1.0'
 
 		// monitor our application method limit
-		// upgrade to 0.7.0 blocked by https://github.com/KeepSafe/dexcount-gradle-plugin/issues/181
-		classpath 'com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.6.4'
+		classpath 'com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.7.1'
 
 		// ribbonizer for easier distinction of non-release builds
 		classpath 'com.github.gfx.ribbonizer:plugin:1.0.0'
