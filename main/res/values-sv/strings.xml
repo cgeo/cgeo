@@ -1501,5 +1501,6 @@
   </plurals>
   <!-- calendar adder -->
   <string name="event_fail">Det gick inte att lägga till event cache i kalender</string>
+  <string name="init_low_disk_space">Snart slut på diskutrymme</string>
   <string name="init_confirm_debug">c:geo körs i debugläge!</string>
 </resources>

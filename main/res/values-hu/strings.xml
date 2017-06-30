@@ -92,6 +92,7 @@
   <string name="log_posting_twitter">Twittelés…</string>
   <string name="log_posting_gcvote">Értékelés küldése…</string>
   <string name="log_posting_image">Kép küldése…</string>
+  <string name="log_posting_generic_trackable">%1$s %2$d/%3$d log küldése</string>
   <string name="log_clear">Törlés</string>
   <string name="log_post_not_possible">Az adatok letöltése folyamatban van…\nKérlek, próbáld újra néhány másodperc múlva vagy ellenőrizd az internetkapcsolatodat!</string>
   <string name="log_post_geocode_missing">Hiányzó geokód…</string>
@@ -314,6 +315,10 @@
   <string name="caches_nearby">Közeli</string>
   <string name="caches_manage">Kezelés</string>
   <string name="caches_remove_all">Összes törlése</string>
+  <plurals name="caches_remove_all_confirm">
+    <item quantity="one">El akarod távolítani ezt a ládát a listáról?</item>
+    <item quantity="other">El akarod távolítani az összes (%d) ládát a listáról?</item>
+  </plurals>
   <string name="caches_remove_selected">Kijelöltek törlése</string>
   <plurals name="caches_remove_selected_confirm">
     <item quantity="one">El akarod távolítani ezt a ládát a készülékedről?</item>
@@ -358,7 +363,8 @@
   <string name="caches_make_list_unique">Törlés más listákról</string>
   <string name="caches_filter_missing_gcvote">Nem értékelt ládák</string>
   <!-- caches lists -->
-  <string name="list_menu_create">Új lista létrehozása</string>
+  <string name="menu_lists">Listák kezelése</string>
+  <string name="list_menu_create">Lista létrehozása</string>
   <string name="list_menu_drop">Lista törlése</string>
   <string name="list_menu_rename">Lista átnevezése</string>
   <string name="list_menu_import">Importálás</string>
@@ -417,7 +423,8 @@
   <string name="calculate_dataDir_title">Ládaadatok keresése</string>
   <string name="calculate_dataDir">Ládaadatok méretének összegzése</string>
   <string name="settings_data_dir_item">%1$s (%2$s szabad)</string>
-  <string name="confirm_data_dir_move">A ládaadatok mozgatása hosszú ideig is eltarthat az adatok mennyiségétől és az eszközödtől függően.</string>
+  <string name="confirm_data_dir_move_title">Ládaadatok mozgatása?</string>
+  <string name="confirm_data_dir_move">A ládaadatok mozgatása hosszú ideig is eltarthat az adatok mennyiségétől, a készülékedtől függően.</string>
   <string name="settings_title_basicmembers">Normál tagok beállításai</string>
   <string name="settings_title_navigation">Navigáció</string>
   <string name="settings_summary_navigation">Preferált navigációs eszközök és külső navigációs programok kiválasztása</string>
@@ -565,6 +572,7 @@
   <string name="init_gpx_exportdir">GPX export mappa</string>
   <string name="init_gpx_importdir">GPX import mappa</string>
   <string name="init_dataDir">Ládaadat mappa beállítása</string>
+  <string name="init_dataDir_note">A ládák kiegészítő adatait (spolier képek, logfotók, ...) külső tárolón is tarthatod (a készülékedtől függően ez lehet emulált vagy valódi, külső SD kártya is).</string>
   <string name="init_maptrail">A nyomvonal mutatása a térképen</string>
   <string name="init_summary_maptrail">A nyomvonal mutatása a térképen</string>
   <string name="init_share_after_export">A megosztás menü megnyitása GPX exportálás után</string>
@@ -584,6 +592,8 @@
   <string name="init_debug_note">A c:geo nagy mennyiségű hibakeresési információt képes generálni, de ennek bekapcsolása hatással lehet a stabil működésére. Ez csak akkor ajánlott, ha a fejlesztők logok küldését kérték. Kérjük, tartsd kikapcsolt állapotban a normal használat során!</string>
   <string name="init_debug">Hibakeresési napló aktiválása</string>
   <string name="init_dbonsdcard_title">Adatbázis helye</string>
+  <string name="init_dbonsdcard_note">A c:geo adatbázisát tarthatod a belső vagy egy saját tárolón is. Saját tároló használatával memóriát szabadíthatsz fel, de ez teljesítményvesztéssel is járhat, továbbá a c:geo nem fog működni, ha a tároló nem elérhető vagy törölted az adatbázisfájlt.</string>
+  <string name="init_dbonsdcard">Saját tároló</string>
   <string name="init_dbmove_dbmove">Adatbázis mozgatása</string>
   <string name="init_dbmove_running">Adatbázis mozgatása</string>
   <string name="init_dbmove_success">Az adatbázis mozgatása sikeresen lezajlott</string>
@@ -822,6 +832,7 @@
   <string name="cache_menu_spoilers">Spoiler képek</string>
   <string name="cache_menu_around">Közeli ládák</string>
   <string name="around">%s környékén</string>
+  <string name="menu_caches">Ládák kezelése</string>
   <string name="cache_menu_event">Hozzáadás a naptárhoz</string>
   <string name="cache_menu_extract_waypoints">Útpontok kigyűjtése</string>
   <string name="cache_menu_details">Adatok</string>
@@ -1471,6 +1482,10 @@
   <string name="command_rename_list_result">Átnevezett lista</string>
   <string name="command_delete_list_result">Törölt lista</string>
   <string name="command_unique_list_result">Ládák törölve</string>
+  <plurals name="fav_points_remaining">
+    <item quantity="one">Hozzáadás a kedvencekhez (%d pontod maradt)</item>
+    <item quantity="other">Hozzáadás a kedvencekhez (%d pontod maradt)</item>
+  </plurals>
   <!-- distance units -->
   <string name="unit_m">m</string>
   <string name="unit_km">km</string>
@@ -1495,4 +1510,8 @@
   </plurals>
   <!-- calendar adder -->
   <string name="event_fail">Az esemény hozzáadása a naptárhoz sikertelen.</string>
+  <string name="init_low_disk_space">A szabad hely kezd elfogyni</string>
+  <string name="init_low_disk_space_message">A ládaadatok tarolásához szükséges hely kezd elfogyni. Ez a c:geo hibás működését okozhatja. Kérlek, csinálj több szabad helyet!</string>
+  <string name="init_confirm_debug">A c:geo hibakeresési módban fut!</string>
+  <string name="list_confirm_debug_message">A hibakeresési mód stabilitási problémákat okoz. Kikapcsolod a hibakeresési módot?</string>
 </resources>

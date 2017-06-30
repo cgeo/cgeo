@@ -92,6 +92,7 @@
   <string name="log_posting_twitter">Wysyłanie tweetu…</string>
   <string name="log_posting_gcvote">Wysyłanie GCVote…</string>
   <string name="log_posting_image">Wysyłanie obrazka…</string>
+  <string name="log_posting_generic_trackable">Wysyłanie %1$s %2$d/%3$d</string>
   <string name="log_clear">Wyczyść</string>
   <string name="log_post_not_possible">Pobieranie danych w toku…\nProszę spróbować ponownie za parę sekund albo sprawdzić połączenie z internetem.</string>
   <string name="log_post_geocode_missing">Brak kodu GC skrzynki…</string>
@@ -315,6 +316,11 @@
   <string name="caches_nearby">Najbliższe</string>
   <string name="caches_manage">Zarządzaj</string>
   <string name="caches_remove_all">Usuń wszystkie</string>
+  <plurals name="caches_remove_all_confirm">
+    <item quantity="one">Czy chcesz usunąć wybraną skrzynkę z obecnej listy?</item>
+    <item quantity="few">Czy chcesz usunąć %d skrzynki z obecnej listy?</item>
+    <item quantity="other">Czy chcesz usunąć %d skrzynek z obecnej listy?</item>
+  </plurals>
   <string name="caches_remove_selected">Usuń wybrane</string>
   <plurals name="caches_remove_selected_confirm">
     <item quantity="one">Czy chcesz usunąć wybraną skrzynkę z urządzenia?</item>
@@ -360,6 +366,7 @@
   <string name="caches_make_list_unique">Uczyń listę unikalną</string>
   <string name="caches_filter_missing_gcvote">Znaleziono skrzynki bez głosów</string>
   <!-- caches lists -->
+  <string name="menu_lists">Zarządzaj listami</string>
   <string name="list_menu_create">Utwórz nową listę</string>
   <string name="list_menu_drop">Usuń aktualną listę</string>
   <string name="list_menu_rename">Zmień nazwę aktualnej listy</string>
@@ -414,6 +421,13 @@
   <string name="settings_title_map_data">Dane mapy</string>
   <string name="settings_title_map_content">Zawartość mapy</string>
   <string name="settings_title_gpx">GPX</string>
+  <string name="settings_title_data_dir">Katalog z danymi skrzynek</string>
+  <string name="settings_title_data_dir_usage">Katalog z danymi skrzynek (użyto %1$s)</string>
+  <string name="calculate_dataDir_title">Użycie danych</string>
+  <string name="calculate_dataDir">Obliczanie użycia dysku</string>
+  <string name="settings_data_dir_item">%1$s (%2$s wolne)</string>
+  <string name="confirm_data_dir_move_title">Czy przenieść katalog z danymi?</string>
+  <string name="confirm_data_dir_move">Przeniesienie katalogu z danymi może zająć bardzo długo, zależnie od Twojego urządzenia i wielkości danych.</string>
   <string name="settings_title_basicmembers">Opcje dla użytkowników Basic</string>
   <string name="settings_title_navigation">Nawigacja</string>
   <string name="settings_summary_navigation">Wybierz preferowane metody nawigacji i zewnętrzne aplikacje nawigacyjne.</string>
@@ -557,6 +571,8 @@
   <string name="init_map_directory_description">Katalog z mapami offline</string>
   <string name="init_gpx_exportdir">Katalog do eksportu plików GPX</string>
   <string name="init_gpx_importdir">Katalog do importu plików GPX</string>
+  <string name="init_dataDir">Wybierz katalog z danymi</string>
+  <string name="init_dataDir_note">Możesz zdecydować się na przechowywanie dodatkowych danych dla skrzynek (spoilers, zdjęcia z wpisu) na Twoim zewnętrznym urządzeniu (emulowana lub rzeczywista karta SD zależnie od urządzenia).</string>
   <string name="init_maptrail">Pokaż szlak na mapie</string>
   <string name="init_summary_maptrail">Pokaż szlak na mapie</string>
   <string name="init_share_after_export">Otwórz menu udostępniania po wyeksportowaniu plików GPX</string>
@@ -573,12 +589,19 @@
   <string name="init_default_navigation_tool_2_description">Tutaj możesz wybrać drugie preferowane narzędzie nawigacji. Jest aktywowane przez długie kliknięcie ikony nawigacji obok nazwy skrzynki.</string>
   <string name="init_navigation_menu_description">Możesz tu wybrać jakie dostępne metody nawigacji będą widoczne w menu nawigacji. Pozycje wyłączone nie są zainstalowane na urządzeniu.</string>
   <string name="init_debug_title">Informacja o błędach</string>
+  <string name="init_debug_note">c:geo może generować wiele informacji związanych z debugowaniem. Aktywacja tego ustawienia będzie mieć wpływ na stabilność c:geo i jest zalecana tylko, jeśli zostanie wyświetlona prośba o wysyłanie logu do programistów. Prosimy o zachowanie tego logowania wyłączonego podczas normalnego korzystania z c:geo!</string>
   <string name="init_debug">Włącz logowanie błędów</string>
   <string name="init_dbonsdcard_title">Położenie bazy danych</string>
+  <string name="init_dbonsdcard_note">Możesz przechowywać bazy danych c:geo na wewnętrznym lub zewnętrznym dysku. Przechowywanie na dysku użytkownika może uwolnić część pamięci, ale możesz stracić część wydajności, a c:geo nie będzie działać, jeśli pamięć nie jest dostępna lub usuniesz plik bazy danych.</string>
+  <string name="init_dbonsdcard">Na dysku użytkownika</string>
   <string name="init_dbmove_dbmove">Przenoszę bazę danych</string>
   <string name="init_dbmove_running">Przenoszę bazę danych</string>
   <string name="init_dbmove_success">Baza danych została przeniesiona.</string>
   <string name="init_dbmove_failed">Nie udało się przenieść bazy danych</string>
+  <string name="init_datadirmove_datadirmove">Przenoszenie katalogu danych skrzynek</string>
+  <string name="init_datadirmove_running">Przenoszenie katalogu danych skrzynek</string>
+  <string name="init_datadirmove_success">Pomyślnie przeniesiono katalog danych skrzynek.</string>
+  <string name="init_datadirmove_failed">Przenoszenie katalogu danych skrzynek częściowo lub całkowicie nie powiodło się. Sprawdź stare i nowe katalogi i przenieś ręcznie w razie potrzeby.</string>
   <string name="init_plain_logs">Wyświetlaj wpisy dziennika bez kolorów</string>
   <string name="init_summary_plain_logs">Wyświetlaj wpisy dziennika bez kolorów</string>
   <string name="init_use_native_ua">Identyfikuj jako przeglądarka Android. Rozwiązuje problemy z logowaniem w niektórych sieciach.</string>
@@ -812,6 +835,7 @@
   <string name="cache_menu_spoilers">Zdjęcia spoiler</string>
   <string name="cache_menu_around">Skrzynki w pobliżu</string>
   <string name="around">W pobliżu %s</string>
+  <string name="menu_caches">Zarządzaj skrzynkami</string>
   <string name="cache_menu_event">Dodaj do kalendarza</string>
   <string name="cache_menu_extract_waypoints">Wyciągnij punkty orientacyjne</string>
   <string name="cache_menu_details">Szczegóły</string>
@@ -1469,6 +1493,11 @@
   <string name="command_rename_list_result">Zmieniono nazwę listy</string>
   <string name="command_delete_list_result">Usunięto listę</string>
   <string name="command_unique_list_result">Usunięte skrzynki z innych list</string>
+  <plurals name="fav_points_remaining">
+    <item quantity="one">Dodaj tę skrzynkę do ulubionych (pozostało %d)</item>
+    <item quantity="few">Dodaj tę skrzynkę do ulubionych (pozostało %d)</item>
+    <item quantity="other">Dodaj tę skrzynkę do ulubionych (pozostało %d)</item>
+  </plurals>
   <!-- distance units -->
   <string name="unit_m">m</string>
   <string name="unit_km">km</string>
@@ -1494,4 +1523,8 @@
   </plurals>
   <!-- calendar adder -->
   <string name="event_fail">Nie udało się dodać wydarzenia do kalendarza</string>
+  <string name="init_low_disk_space">Zaczyna brakować miejsca</string>
+  <string name="init_low_disk_space_message">Zaczyna brakować miejsca w katalog z danymi, To może powodować nieprawidłowe działanie c:geo. Zwolnij trochę miejsca.</string>
+  <string name="init_confirm_debug">c: geo jest uruchomiony w trybie debugowania!</string>
+  <string name="list_confirm_debug_message">Tryb debugowania może powodować niestabilność. Czy chcesz wyłączyć ten tryb?</string>
 </resources>
