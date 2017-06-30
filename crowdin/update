@@ -9,12 +9,12 @@
 #
 #
 
-# see: http://crowdin.net/page/api/update-file
+# see: https://crowdin.com/page/api/update-file
 
 # update_file uploads the file in parameter 1 to the crowdin file name in parameter 2
 update_file() {
     crowdin_surf -F "files[$2]=@$1" $BRANCH_TARGET \
-        "http://api.crowdin.net/api/project/cgeo/update-file?key=${CROWDIN_APIKEY}"
+        "https://api.crowdin.com/api/project/cgeo/update-file?key=${CROWDIN_APIKEY}"
 }
 
 . "$(dirname $0)/globals"

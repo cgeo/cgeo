@@ -7,8 +7,8 @@
 #
 #
 
-# see: http://crowdin.net/page/api/export
-# see: http://crowdin.net/page/api/download
+# see: https://crowdin.com/page/api/export
+# see: https://crowdin.com/page/api/download
 
 . "$(dirname $0)/globals"
 
@@ -77,11 +77,11 @@ fi
 
 # package the language files (allowed every 30 min)
 debug "packaging language files."
-crowdin_surf "http://api.crowdin.net/api/project/cgeo/export?key=${CROWDIN_APIKEY}${BRANCH_SOURCE}"
+crowdin_surf "https://api.crowdin.com/api/project/cgeo/export?key=${CROWDIN_APIKEY}${BRANCH_SOURCE}"
 
 # download and unpack translations
 [[ -f ${ZIPFILE} ]] && rm ${ZIPFILE}
-_do wget "http://api.crowdin.net/api/project/cgeo/download/all.zip?key=${CROWDIN_APIKEY}${BRANCH_SOURCE}" -O ${ZIPFILE} \
+_do wget "https://api.crowdin.com/api/project/cgeo/download/all.zip?key=${CROWDIN_APIKEY}${BRANCH_SOURCE}" -O ${ZIPFILE} \
      || die "crowdin download failed."
 _do unzip -o ${ZIPFILE} || die "unzip of ${ZIPFILE} failed."
 
