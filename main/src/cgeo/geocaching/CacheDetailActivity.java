@@ -111,6 +111,7 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.StyleSpan;
+import android.text.style.URLSpan;
 import android.text.util.Linkify;
 import android.util.TypedValue;
 import android.view.ContextMenu;
@@ -143,6 +144,7 @@ import java.util.Locale;
 import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.regex.Pattern;
+
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -1653,6 +1655,8 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                         // remove the formatting by converting to a simple string
                         descriptionView.append(description.toString());
                     }
+
+                    fixRelativeLinks(descriptionView);
                     descriptionView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
                     fixTextColor(descriptionString, descriptionView);
                     descriptionView.setVisibility(View.VISIBLE);
@@ -1664,6 +1668,23 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 }
             } catch (final RuntimeException ignored) {
                 showToast(res.getString(R.string.err_load_descr_failed));
+            }
+        }
+
+        private void fixRelativeLinks(final TextView descriptionView) {
+            final String baseUrl = ConnectorFactory.getConnector(cache).getHostUrl() + "/";
+            final Spannable spannable = (Spannable) descriptionView.getText();
+            final URLSpan[] spans = spannable.getSpans(0, spannable.length(), URLSpan.class);
+            for (final URLSpan span : spans) {
+                final Uri uri = Uri.parse(span.getURL());
+                if (uri.getScheme() == null && uri.getHost() == null) {
+                    final int start = spannable.getSpanStart(span);
+                    final int end = spannable.getSpanEnd(span);
+                    final int flags = spannable.getSpanFlags(span);
+                    final Uri absoluteUri = Uri.parse(baseUrl + uri.toString());
+                    spannable.removeSpan(span);
+                    spannable.setSpan(new URLSpan(absoluteUri.toString()), start, end, flags);
+                }
             }
         }
 
