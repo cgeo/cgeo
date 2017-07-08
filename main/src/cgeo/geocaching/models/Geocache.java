@@ -69,6 +69,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.regex.Pattern;
 
@@ -1964,11 +1965,16 @@ public class Geocache implements IWaypoint {
         if (getLogCounts().isEmpty()) {
             setLogCounts(inDatabase() ? DataStore.loadLogCounts(getGeocode()) : Collections.<LogType, Integer>emptyMap());
         }
-        final Integer logged = getLogCounts().get(LogType.FOUND_IT);
-        if (logged != null) {
-            return logged;
+        int sumFound = 0;
+        for (final Entry<LogType, Integer> logCount : getLogCounts().entrySet()) {
+            if (logCount.getKey().isFoundLog()) {
+                final Integer logged = logCount.getValue();
+                if (logged != null) {
+                    sumFound += logged;
+                }
+            }
         }
-        return 0;
+        return sumFound;
     }
 
     public boolean applyDistanceRule() {
