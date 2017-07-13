@@ -1,16 +1,16 @@
 package cgeo.geocaching.utils;
 
-import junit.framework.TestCase;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
-import org.apache.commons.lang3.CharEncoding;
-import org.xmlpull.v1.XmlSerializer;
+import cgeo.org.kxml2.io.KXmlSerializer;
 
 import java.io.IOException;
 import java.io.StringWriter;
 
-import cgeo.org.kxml2.io.KXmlSerializer;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
+import junit.framework.TestCase;
+import org.apache.commons.lang3.CharEncoding;
+import org.xmlpull.v1.XmlSerializer;
 
 public class XmlUtilsTest extends TestCase {
 
@@ -46,6 +46,11 @@ public class XmlUtilsTest extends TestCase {
     public void testMultipleTexts() throws Exception {
         XmlUtils.multipleTexts(xml, "", "tag1", "text1", "tag2", "text2");
         assertXmlEquals("<tag1>text1</tag1><tag2>text2</tag2>");
+    }
+
+    public void testSkipIllegalChars() throws Exception {
+        XmlUtils.simpleText(xml, "", "tag", "Vom\u0001 Gasthaus\u000f zur \u000bPyramide\u0020aus \u0018Glas\u0009");
+        assertXmlEquals("<tag>Vom Gasthaus zur Pyramide\u0020aus Glas\u0009</tag>");
     }
 
 }

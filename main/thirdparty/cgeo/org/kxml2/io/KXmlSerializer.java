@@ -22,8 +22,7 @@
 
 package cgeo.org.kxml2.io;
 
-import org.apache.commons.lang3.StringUtils;
-import org.xmlpull.v1.XmlSerializer;
+import cgeo.geocaching.utils.Log;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -31,6 +30,10 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.Locale;
+
+
+import org.apache.commons.lang3.StringUtils;
+import org.xmlpull.v1.XmlSerializer;
 
 @SuppressWarnings("ALL")
 public class KXmlSerializer implements XmlSerializer {
@@ -147,13 +150,14 @@ public class KXmlSerializer implements XmlSerializer {
                         reportInvalidCharacter(c);
                     }
                     boolean valid = (c >= 0x20 && c <= 0xd7ff) || (c >= 0xe000 && c <= 0xfffd);
-                    if (!valid) {
-                        reportInvalidCharacter(c);
-                    }
-                    if (unicode || c < 127) {
-                        writer.write(c);
+                    if (valid) {
+                        if (unicode || c < 127) {
+                            writer.write(c);
+                        } else {
+                            writer.write("&#" + ((int) c) + ";");
+                        }
                     } else {
-                        writer.write("&#" + ((int) c) + ";");
+                        reportInvalidCharacter(c);
                     }
                     // END android-changed
             }
@@ -162,7 +166,7 @@ public class KXmlSerializer implements XmlSerializer {
 
     // BEGIN android-added
     private static void reportInvalidCharacter(char ch) {
-        throw new IllegalArgumentException("Illegal character (" + Integer.toHexString((int) ch) + ")");
+        Log.w("Skipping illegal character (" + Integer.toHexString((int) ch) + ")");
     }
     // END android-added
 
