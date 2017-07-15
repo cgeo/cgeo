@@ -152,6 +152,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
 
     private void initPreferences() {
         initMapSourcePreference();
+        initThunderforestApiKeyPreferences();
         initExtCgeoDirPreference();
         initDirChoosers();
         initDefaultNavigationPreferences();
@@ -169,7 +170,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
 
         for (final int k : new int[] {
                 R.string.pref_pass_vote, R.string.pref_signature,
-                R.string.pref_mapsource, R.string.pref_renderthemepath,
+                R.string.pref_thunderforest_api_key, R.string.pref_mapsource, R.string.pref_renderthemepath,
                 R.string.pref_gpxExportDir, R.string.pref_gpxImportDir,
                 R.string.pref_fakekey_dataDir,
                 R.string.pref_mapDirectory, R.string.pref_defaultNavigationTool,
@@ -647,6 +648,10 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
         Settings.putString(R.string.pref_webDeviceName, Settings.getWebDeviceName());
     }
 
+    private static void initThunderforestApiKeyPreferences() {
+        Settings.setThunderForestApiKey(Settings.getThunderForestApiKey());
+    }
+
     public void setAuthTitle(final int prefKeyId) {
         switch (prefKeyId) {
             case R.string.pref_fakekey_gc_authorization:
@@ -908,6 +913,13 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
         } else if (isPreference(preference, R.string.pref_connectorGeokretyActive)) {
             preferenceManager.findPreference(getKey(R.string.preference_screen_geokrety)).setSummary(getServiceSummary((Boolean) value));
             redrawScreen(preferenceManager.findPreference(getKey(R.string.preference_screen_services)));
+        } else if (isPreference(preference, R.string.pref_thunderforest_api_key)) {
+            Settings.setThunderForestApiKey(stringValue);
+            preference.setSummary(stringValue);
+            final ListPreference mapSourcePref = (ListPreference) getPreference(R.string.pref_mapsource);
+            mapSourcePref.setValue(String.valueOf(Settings.getMapSource().getNumericalId()));
+            bindSummaryToStringValue(R.string.pref_mapsource);
+            initMapSourcePreference();
         } else {
             // For all other preferences, set the summary to the value's
             // simple string representation.

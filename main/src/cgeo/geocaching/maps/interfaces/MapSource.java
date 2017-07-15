@@ -9,6 +9,8 @@ public interface MapSource {
 
     int getNumericalId();
 
+    String getId();
+
     @NonNull
     MapProvider getMapProvider();
 }

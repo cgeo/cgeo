@@ -117,6 +117,7 @@
     <string translatable="false" name="pref_version">version</string>
     <string translatable="false" name="pref_usecompass">usecompass</string>
     <string translatable="false" name="pref_mapfile">mfmapfile</string>
+    <string translatable="false" name="pref_thunderforest_api_key">thunder_forest_api_key</string>
     <string translatable="false" name="pref_memberstatus">memberstatus</string>
     <string translatable="false" name="pref_coordinputformat">coordinputformat</string>
     <string translatable="false" name="pref_gccustomdate">gccustomdate</string>

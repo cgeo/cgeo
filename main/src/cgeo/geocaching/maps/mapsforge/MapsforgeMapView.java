@@ -1,6 +1,5 @@
 package cgeo.geocaching.maps.mapsforge;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
@@ -198,7 +197,7 @@ public class MapsforgeMapView extends MapView implements MapViewImpl {
         final MapGenerator mapGenerator = MapGeneratorFactory.createMapGenerator(newMapType);
         if (mapGenerator instanceof ThunderforestTileDownloader) {
             // need to inject apiKey after creation
-            ((ThunderforestTileDownloader) mapGenerator).setApiKey(CgeoApplication.getInstance().getString(R.string.thunderforest_api_key));
+            ((ThunderforestTileDownloader) mapGenerator).setApiKey(Settings.getThunderForestApiKey());
         }
 
         // When swapping map sources, make sure we aren't exceeding max zoom. See bug #1535

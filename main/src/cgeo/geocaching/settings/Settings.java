@@ -1,25 +1,5 @@
 package cgeo.geocaching.settings;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
-import android.os.Build;
-import android.preference.PreferenceManager;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.ImmutablePair;
-
-import java.io.File;
-import java.io.FileFilter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Locale;
-import java.util.Set;
-
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.apps.navi.NavigationAppFactory.NavigationAppsEnum;
@@ -54,6 +34,27 @@ import cgeo.geocaching.utils.CryptUtils;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.FileUtils.FileSelector;
 import cgeo.geocaching.utils.Log;
+
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
+import android.os.Build;
+import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
+import java.io.File;
+import java.io.FileFilter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Locale;
+import java.util.Set;
+
+
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 
 /**
  * General c:geo preferences/settings set by the user
@@ -531,6 +532,18 @@ public class Settings {
     public static void setWebNameCode(final String name, final String code) {
         putString(R.string.pref_webDeviceName, name);
         putString(R.string.pref_webDeviceCode, code);
+    }
+
+    public static String getThunderForestApiKey() {
+        return getString(R.string.pref_thunderforest_api_key, StringUtils.EMPTY);
+    }
+
+    public static void setThunderForestApiKey(final String apiKey) {
+        putString(R.string.pref_thunderforest_api_key, apiKey);
+        MapsforgeMapProvider.getInstance().updateThunderforestOpenCycleMap();
+        if (StringUtils.isBlank(apiKey) && getMapSource().getId().equals(MapsforgeMapProvider.MAPSFORGE_CYCLEMAP_ID)) {
+            setMapSource(MapProviderFactory.getDefaultSource());
+        }
     }
 
     public static MapProvider getMapProvider() {
