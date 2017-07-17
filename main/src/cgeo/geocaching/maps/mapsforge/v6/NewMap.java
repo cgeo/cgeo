@@ -38,7 +38,6 @@ import cgeo.geocaching.maps.mapsforge.v6.layers.NavigationLayer;
 import cgeo.geocaching.maps.mapsforge.v6.layers.PositionLayer;
 import cgeo.geocaching.maps.mapsforge.v6.layers.RendererLayer;
 import cgeo.geocaching.maps.mapsforge.v6.layers.TapHandlerLayer;
-import cgeo.geocaching.maps.mapsforge.v6.layers.ThunderforestMap;
 import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.maps.routing.RoutingMode;
 import cgeo.geocaching.models.Geocache;
@@ -608,8 +607,6 @@ public class NewMap extends AbstractActionBarActivity {
             this.mapView.getModel().displayModel.setFixedTileSize(256);
             if (mapSource.getNumericalId() == MapsforgeMapProvider.MAPSFORGE_MAPNIK_ID.hashCode()) {
                 newLayer = new DownloadLayer(tileCache, this.mapView.getModel().mapViewPosition, OpenStreetMapMapnik.INSTANCE, AndroidGraphicFactory.INSTANCE);
-            } else if (mapSource.getNumericalId() == MapsforgeMapProvider.MAPSFORGE_CYCLEMAP_ID.hashCode()) {
-                newLayer = new DownloadLayer(tileCache, this.mapView.getModel().mapViewPosition, ThunderforestMap.INSTANCE, AndroidGraphicFactory.INSTANCE);
             }
         }
         // Exchange layer

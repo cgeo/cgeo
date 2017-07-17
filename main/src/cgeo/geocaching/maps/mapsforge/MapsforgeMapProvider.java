@@ -27,7 +27,6 @@ import org.mapsforge.v3.map.reader.header.FileOpenResult;
 
 public final class MapsforgeMapProvider extends AbstractMapProvider {
 
-    public static final String MAPSFORGE_CYCLEMAP_ID = "MAPSFORGE_CYCLEMAP";
     public static final String MAPSFORGE_MAPNIK_ID = "MAPSFORGE_MAPNIK";
     private MapItemFactory mapItemFactory = new MapsforgeMapItemFactory();
 
@@ -35,7 +34,6 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
         final Resources resources = CgeoApplication.getInstance().getResources();
 
         registerMapSource(new MapsforgeMapSource(MAPSFORGE_MAPNIK_ID, this, resources.getString(R.string.map_source_osm_mapnik), MapGeneratorInternal.MAPNIK));
-        registerMapSource(new MapsforgeMapSource(MAPSFORGE_CYCLEMAP_ID, this, resources.getString(R.string.map_source_osm_cyclemap), MapGeneratorInternal.THUNDERFOREST));
 
         updateOfflineMaps();
     }

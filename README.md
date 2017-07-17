@@ -66,8 +66,6 @@ Request your personal API key for the various [OpenCaching](http://www.opencachi
 * [opencaching.us OKAPI signup](http://www.opencaching.us/okapi/signup.html)
 * [opencache.uk OKAPI signup](http://www.opencache.uk/okapi/signup.html)
 
-Request API key for OpenCycleMap from [Thunderforest](https://manage.thunderforest.com/users/sign_up?plan_id=5).
-
 ### Building with gradle
 
 Run `gradlew` from the root directory of the git repository. That will install the necessary build framework and display how to build cgeo. `gradlew assembleBasicDebug` might be a good start.

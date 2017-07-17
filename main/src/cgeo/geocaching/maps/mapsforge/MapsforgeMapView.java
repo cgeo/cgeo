@@ -1,6 +1,5 @@
 package cgeo.geocaching.maps.mapsforge;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
@@ -36,7 +35,6 @@ import org.mapsforge.v3.android.maps.Projection;
 import org.mapsforge.v3.android.maps.mapgenerator.MapGenerator;
 import org.mapsforge.v3.android.maps.mapgenerator.MapGeneratorFactory;
 import org.mapsforge.v3.android.maps.mapgenerator.MapGeneratorInternal;
-import org.mapsforge.v3.android.maps.mapgenerator.tiledownloader.ThunderforestTileDownloader;
 import org.mapsforge.v3.android.maps.overlay.Overlay;
 import org.mapsforge.v3.core.GeoPoint;
 public class MapsforgeMapView extends MapView implements MapViewImpl {
@@ -196,10 +194,6 @@ public class MapsforgeMapView extends MapView implements MapViewImpl {
         }
 
         final MapGenerator mapGenerator = MapGeneratorFactory.createMapGenerator(newMapType);
-        if (mapGenerator instanceof ThunderforestTileDownloader) {
-            // need to inject apiKey after creation
-            ((ThunderforestTileDownloader) mapGenerator).setApiKey(CgeoApplication.getInstance().getString(R.string.thunderforest_api_key));
-        }
 
         // When swapping map sources, make sure we aren't exceeding max zoom. See bug #1535
         final int maxZoom = mapGenerator.getZoomLevelMax();
