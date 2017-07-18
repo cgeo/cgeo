@@ -3,10 +3,17 @@
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
     <b>Next feature release:</b>\n
-    · New: cache list menu restructured\n
+    · New: Cache list menu restructured\n
     · New: Use abbreviation for name of geocaching service on main screen\n
     · New: GCVote ratings are now sorted by a weighted arithmetic mean that also considers the number of votes\n
     · Removed: OpenCylceMap due to licensing issues, see FAQ\n
+    · Fix: Ignore invalid characters when exporting to GPX\n
+    · Fix: Sort by favorite percent now respects attended/photo taken\n
+    · Fix: Relative URLs in cache descriptions\n
+    · Fix: Use weighted arithmetic mean to sort GCVote ratings\n
+    · Fix: TLS v1.2 Support for Android 4.1 - 4.4 devices\n
+    · Fix: Improve sort of events\n
+    · Fix: Raise personal note character limit\n
     \n
     \n
     <b>2017.05.22:</b>\n
