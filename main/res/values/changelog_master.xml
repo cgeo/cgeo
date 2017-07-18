@@ -2,11 +2,5 @@
 <resources>
   <!-- changelog for the master branch -->
   <string name="changelog_master" translatable="false">
-    <b>Next feature release:</b>\n
-    · New: Use abbreviation for name of geocaching service on main screen\n
-    · New: GCVote ratings are now sorted by a weighted arithmetic mean that also considers the number of votes\n
-    · Removed: OpenCylceMap due to licensing issues, see FAQ\n
-    \n
-    \n
   </string>
 </resources>
