@@ -1,7 +1,7 @@
 /*
  * Just run this script using "gradlew", and it will show you typical examples of how to use it.
  */
- 
+
 defaultTasks 'cgeoHelp'
 
 task cgeoHelp {
@@ -62,36 +62,34 @@ apply plugin: 'idea'
 buildscript {
     repositories {
         jcenter()
-		// gradle build-scan
+		// gradle build-scan for profiling our build script
 		maven {
 			url 'https://plugins.gradle.org/m2'
 		}
     }
     dependencies {
 		// these dependencies are used by gradle plugins, not by our projects
-		
+
 		// check for updates of gradle plugin dependencies
-		classpath 'com.github.ben-manes:gradle-versions-plugin:0.14.0'
-	
+		classpath 'com.github.ben-manes:gradle-versions-plugin:0.15.0'
+
 		// Android gradle plugin
         classpath 'com.android.tools.build:gradle:2.3.3'
-    
-		// Android annotation processor
-        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
 
 		// un-mocking of portable Android classes
-		classpath 'de.mobilej.unmock:UnMockPlugin:0.6.0'
+		classpath 'de.mobilej.unmock:UnMockPlugin:0.6.3'
 
 		// Google Services (App Invite) has its own Gradle plugin
 		classpath 'com.google.gms:google-services:2.1.0'
 
 		// monitor our application method limit
-		classpath 'com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.6.2'
+		classpath 'com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.7.1'
 
 		// ribbonizer for easier distinction of non-release builds
 		classpath 'com.github.gfx.ribbonizer:plugin:1.0.0'
 
-		classpath 'com.gradle:build-scan-plugin:1.4'
+		// gradle build script profiling
+		classpath 'com.gradle:build-scan-plugin:1.8'
 	}
 }
 
@@ -102,8 +100,8 @@ allprojects {
 			resolutionStrategy {
 				componentSelection {
 					all { ComponentSelection selection ->
-						boolean rejected = ['alpha', 'beta', 'rc', 'cr', 'm'].any { qualifier ->
-							selection.candidate.version ==~ /(?i).*[.-]${qualifier}[.\d-]*/
+						boolean rejected = ['alpha', 'beta', 'rc', 'cr', 'm', 'pr'].any { qualifier ->
+							selection.candidate.version.contains(qualifier)
 						}
 						// allow beta version of androidsvg
 						if (selection.candidate.group == 'com.caverock') {
@@ -118,13 +116,18 @@ allprojects {
 						}
 
 						// https://github.com/joel-costigliola/assertj-core/issues/345
-						if (selection.candidate.group == 'org.assertj' && selection.candidate.module == 'assertj-core' && selection.candidate.version.substring(0,1).toInteger() > 1) {
-							selection.reject("assertj 2.x or higher require Java 7 SE classes not available in Android")
+						if (selection.candidate.group == 'org.assertj' && selection.candidate.module == 'assertj-core' && selection.candidate.version.substring(0,1).toInteger() > 2) {
+							selection.reject("assertj 3.x or higher require Java 7 SE classes not available in Android")
 						}
 						// findbugs team has some release trouble
 						if (selection.candidate.group == 'com.google.code.findbugs' && selection.candidate.module == 'annotations' && selection.candidate.version == '3.0.1') {
 							selection.reject("3.0.1 is not an upgrade of 3.0.1u2")
 						}
+						// Apache Commons Lang 3.6 requires Java7, https://github.com/apache/commons-lang/commit/9b481a97010a19e375cf423ffe25dda1b40e0e47
+						if (selection.candidate.group == 'org.apache.commons' && selection.candidate.module == 'commons-lang3' && selection.candidate.version.substring(0,1).toInteger()*10+selection.candidate.version.substring(2,3).toInteger() > 35) {
+							selection.reject("Apache Commons Lang3 3.6 or higher requires Java 7.")
+						}
+
 					}
 				}
 			}
@@ -142,6 +145,8 @@ allprojects {
 		maven {
 			url 'https://dl.bintray.com/alexeydanilov/maven'
 		}
+		// Android Support libraries are now in an online Maven repository
+		google()
 	}
 }
 
@@ -156,7 +161,7 @@ buildScan {
  * common configuration for the Java projects
  */
 
-ext.buildToolsVersion = "23.0.3"
+ext.buildToolsVersion = "25.0.2" // android-gradle 2.3 requires at least 25.0
 ext.minSdkVersion = 14
 
 subprojects {
@@ -178,4 +183,11 @@ subprojects {
         downloadJavadoc = true
         downloadSources = true
     }
+}
+
+/*
+ * Make sure that we use the source distribution when updating the wrapper from the command line.
+ */
+task wrapper(type: Wrapper) {
+	distributionType = "all"
 }

@@ -87,7 +87,13 @@ public class CalcState implements Serializable {
     }
 
     public static CalcState fromJSON(final String json) throws JSONException {
-        return new CalcState(new JSONObject(json));
+
+        CalcState rv = null;
+        if (json != null) {
+            rv = new CalcState(new JSONObject(json));
+        }
+
+        return rv;
     }
 
     public JSONObject toJSON() throws JSONException {
