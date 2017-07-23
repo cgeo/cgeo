@@ -56,7 +56,7 @@ public class CoordinatesCalculateDialog extends DialogFragment {
     private Geopoint gp;
     private CalcState calcState;
 
-    // Throught this implementation:
+    // Through out this implementation:
     //
     // 'Equations' are used to represent 'Variables' that appear in the description of the cache coordinated themselves.
     //             As in "N 42° 127.ABC".  In this example 'A', 'B' and 'C' are all 'equations'.
