@@ -96,9 +96,22 @@
     <style name="button_full" parent="button">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
+
         <item name="android:layout_marginLeft">10dip</item>
         <item name="android:layout_marginRight">10dip</item>
         <item name="android:layout_marginBottom">5dip</item>
+    </style>
+
+    <!-- button: digit -->
+    <style name="button_digit" parent="button">
+        <item name="android:padding">0dp</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_marginLeft">1dip</item>
+        <item name="android:layout_marginRight">1dip</item>
+        <item name="android:layout_marginTop">2dip</item>
+        <item name="android:layout_marginBottom">2dip</item>
+        <item name="android:layout_columnWeight">1</item>
     </style>
 
     <!-- button: small -->

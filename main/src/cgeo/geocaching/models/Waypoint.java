@@ -41,6 +41,8 @@ public class Waypoint implements IWaypoint {
     private boolean visited = false;
     private boolean originalCoordsEmpty = false;
 
+    private CalcState calculatorSaveState = null;
+
     /**
      * require name and type for every waypoint
      *
@@ -325,5 +327,13 @@ public class Waypoint implements IWaypoint {
 
     public void setOriginalCoordsEmpty(final boolean originalCoordsEmpty) {
         this.originalCoordsEmpty = originalCoordsEmpty;
+    }
+
+    public CalcState getCalculatorStoredState()     {
+        return calculatorSaveState;
+    }
+
+    public void setCalculatorStoredState(final CalcState calculatorStoredState) {
+        this.calculatorSaveState = calculatorStoredState;
     }
 }
