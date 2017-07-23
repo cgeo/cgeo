@@ -1480,7 +1480,7 @@ public class DataStore {
             values.put("visited", waypoint.isVisited() ? 1 : 0);
             values.put("org_coords_empty", waypoint.isOriginalCoordsEmpty() ? 1 : 0);
 
-            CalcState calcState = waypoint.getCalculatorStoredState();
+            final CalcState calcState = waypoint.getCalculatorStoredState();
             if (calcState != null) {
                 try {
                     values.put("calc_state", waypoint.getCalculatorStoredState().toJSON().toString());
