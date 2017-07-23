@@ -102,7 +102,6 @@ public class CoordinatesCalculateDialog extends DialogFragment {
     private List<CalculateButton> latButtons;
     private List<CalculateButton> lonButtons;
     private List<CalculateButton> coordButtons;
-    private List<View> degButtons;
     private List<View> minButtons;
     private List<View> secButtons;
     private List<CalculateButton> pointLowButtons;
@@ -957,21 +956,6 @@ public class CoordinatesCalculateDialog extends DialogFragment {
                 setCoordValue(gp.getLonSecFrac(), bLonPnt_10000, bLonPnt_01000, bLonPnt_00100);
                 break;
         }
-    }
-
-    /**
-     * Find if a button exists with the given name.
-     * @param name: The name to search for.
-     * @return: The first occurrence of the button if it can found, 'null' otherwise.
-     */
-    private EditButton findButton(final char name) {
-        for (final EditButton button : coordButtons) {
-            if (button.getLabel() == name) {
-                return button;
-            }
-        }
-
-        return null;
     }
 
     /**
