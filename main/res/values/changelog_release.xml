@@ -2,7 +2,7 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-    <b>Next feature release:</b>\n
+    <b>2017.07.24:</b>\n
     · New: Cache list menu restructured, see <a href="http://www.cgeo.org/faq#new-list-menu">FAQ</a> for details.\n
     · New: Use abbreviation for name of geocaching service on main screen\n
     · New: GCVote ratings are now sorted by a weighted arithmetic mean that also considers the number of votes\n
