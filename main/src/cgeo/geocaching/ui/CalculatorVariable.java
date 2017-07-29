@@ -1,5 +1,11 @@
 package cgeo.geocaching.ui;
 
+import static cgeo.geocaching.models.CalcState.ERROR_CHAR;
+import static cgeo.geocaching.models.CalcState.ERROR_STRING;
+
+import cgeo.geocaching.R;
+import cgeo.geocaching.utils.CalculationUtils;
+
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -14,16 +20,12 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.Serializable;
 import java.util.List;
 
-import cgeo.geocaching.R;
 
-import static cgeo.geocaching.models.CalcState.ERROR_CHAR;
-import static cgeo.geocaching.models.CalcState.ERROR_STRING;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * Class used to display a variable with an equation, such as:
@@ -217,7 +219,7 @@ public class CalculatorVariable extends LinearLayout {
             }
 
             try {
-                setCachedValue(cgeo.geocaching.utils.CalculationUtils.eval(expression));
+                setCachedValue(new CalculationUtils(expression).eval());
             } catch (final Exception e) {
                 setCachedValue(Double.NaN);
             }
