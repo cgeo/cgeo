@@ -1,5 +1,21 @@
 package cgeo.geocaching.ui.dialog;
 
+import static cgeo.geocaching.R.id.PlainFormat;
+import static cgeo.geocaching.R.id.coordTable;
+import static cgeo.geocaching.models.CalcState.ERROR_CHAR;
+
+import cgeo.geocaching.R;
+import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.location.GeopointFormatter;
+import cgeo.geocaching.models.CalcState;
+import cgeo.geocaching.sensors.Sensors;
+import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.ui.CalculateButton;
+import cgeo.geocaching.ui.CalculatorVariable;
+import cgeo.geocaching.ui.EditButton;
+import cgeo.geocaching.ui.JSONAble;
+
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
@@ -21,29 +37,14 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import org.apache.commons.lang3.SerializationUtils;
-import org.apache.commons.lang3.StringUtils;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import butterknife.ButterKnife;
-import cgeo.geocaching.R;
-import cgeo.geocaching.activity.AbstractActivity;
-import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.location.GeopointFormatter;
-import cgeo.geocaching.models.CalcState;
-import cgeo.geocaching.sensors.Sensors;
-import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.ui.CalculateButton;
-import cgeo.geocaching.ui.EditButton;
-import cgeo.geocaching.ui.CalculatorVariable;
-import cgeo.geocaching.ui.JSONAble;
 
-import static cgeo.geocaching.R.id.PlainFormat;
-import static cgeo.geocaching.R.id.coordTable;
-import static cgeo.geocaching.models.CalcState.ERROR_CHAR;
+import butterknife.ButterKnife;
+import org.apache.commons.lang3.SerializationUtils;
+import org.apache.commons.lang3.StringUtils;
 
 public class CoordinatesCalculateDialog extends DialogFragment implements ClickCompleteCallback, LongClickCompleteCallback {
 
@@ -406,13 +407,13 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
 
         notes = ButterKnife.findById(v, R.id.notes_text);
 
-        inputLatHem = gp.getLatitude() > 0 ? "N" : "S";
+        inputLatHem = String.valueOf(gp.getLatDir());
         bLatHem.setText(inputLatHem);
         setCoordValue(gp.getLatDeg(), bLatDeg[0], bLatDeg[1], bLatDeg[2]);
         setCoordValue(gp.getLatMin(), bLatMin[0], bLatMin[1]);
         setCoordValue(gp.getLatSec(), bLatSec[0], bLatSec[1]);
 
-        inputLonHem = gp.getLatitude() > 0 ? "E" : "W";
+        inputLonHem = String.valueOf(gp.getLonDir());
         bLatHem.setText(inputLonHem);
         setCoordValue(gp.getLonDeg(), bLonDeg[0], bLonDeg[1], bLonDeg[2]);
         setCoordValue(gp.getLonMin(), bLonMin[0], bLonMin[1]);
