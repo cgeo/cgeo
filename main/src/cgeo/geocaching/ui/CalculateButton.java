@@ -1,5 +1,9 @@
 package cgeo.geocaching.ui;
 
+import static cgeo.geocaching.models.CalcState.ERROR_CHAR;
+
+import cgeo.geocaching.R;
+
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -8,14 +12,11 @@ import android.text.Editable;
 import android.util.AttributeSet;
 import android.view.View;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.Serializable;
 
-import cgeo.geocaching.R;
 
-import static cgeo.geocaching.models.CalcState.ERROR_CHAR;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * This class derives from EditButton and handles all the attributes that are unique to this particular application of button.
@@ -29,10 +30,10 @@ import static cgeo.geocaching.models.CalcState.ERROR_CHAR;
  */
 public class CalculateButton extends EditButton {
 
-    // Flag values used to designate that no AutoChar has been set
+    /** Flag values used to designate that no AutoChar has been set */
     private static final char EMPTY_CHAR = '-';
 
-    // The three stated the button can be put into
+    /** The three states the button can be put into */
     private enum ValueType {
         INPUT_VAL {
             @Override
@@ -83,19 +84,28 @@ public class CalculateButton extends EditButton {
         abstract char setAutoChar(ButtonData buttonData, char nextChar);
     }
 
-    // Every button (but the last) has a reference to the next button in the calculator.
-    // This reference is used to determine the alphabetic progression of the 'AutoChars'.
+    /**
+     * Every button (but the last) has a reference to the next button in the calculator.
+     * This reference is used to determine the alphabetic progression of the 'AutoChars'.
+     */
     private CalculateButton nextButton = null;
 
-    // The buttons own state is stored in a 'state' object to facilitate easy saving and restoring.
+    /**
+     * The buttons own state is stored in a 'state' object to facilitate easy saving and restoring
+     */
     private ButtonData buttonData;
 
-    // Data used to capture the state of this particular button such that it can be restored again later.
+    /**
+     * Data used to capture the state of this particular button such that it can be restored again later
+     */
     public static class ButtonData implements Serializable, JSONAble {
         ValueType type = ValueType.INPUT_VAL;
-        char inputVal;                  // Value obtained from CoordinateInputDialog.
-        char autoChar = EMPTY_CHAR;     // Character obtained by automatically 'counting up' variable names.
-        char customChar;                // User defined character.
+        /** Value obtained from CoordinateInputDialog */
+        char inputVal;
+        /** Character obtained by automatically 'counting up' variable names */
+        char autoChar = EMPTY_CHAR;
+        /** User defined character */
+        char customChar;
 
         public ButtonData() { }
 
@@ -153,7 +163,9 @@ public class CalculateButton extends EditButton {
         butt.setOnClickListener(new CoordDigitClickListener());
     }
 
-    // The 'Label' is the 'name' that is to be displayed on the button
+    /**
+     * The 'Label' is the 'name' that is to be displayed on the button
+     */
     public char getLabel() {
         return getType().getLabel(getData());
     }
@@ -171,7 +183,9 @@ public class CalculateButton extends EditButton {
         setBackgroundColour();
     }
 
-    // Buttons displaying a custom value are given a 'steel-like' appearance so as to distinguish them from regular buttons.
+    /**
+     * Buttons displaying a custom value are given a 'steel-like' appearance so as to distinguish them from regular buttons
+     */
     private  void setBackgroundColour() {
         switch (buttonData.type) {
 
@@ -189,7 +203,9 @@ public class CalculateButton extends EditButton {
         }
     }
 
-    // Data used to preserve this buttons state between sessions.
+    /**
+     * Data used to preserve this buttons state between sessions
+     */
     public ButtonData getData() {
         return buttonData;
     }
@@ -220,8 +236,9 @@ public class CalculateButton extends EditButton {
     }
 
     /**
-     * This method is used to assign buttons alphabetically increasing names.
-     * @param currentChar:  values indicated that the autoChar will be and is updated appropriately for the next button based on the current button's state.
+     * This method is used to assign buttons alphabetically increasing names
+     *
+     * @param currentChar values indicated that the autoChar will be and is updated appropriately for the next button based on the current button's state
      */
     private void setAutoChar(final char currentChar) {
         char nextChar = currentChar;
@@ -247,7 +264,8 @@ public class CalculateButton extends EditButton {
 
     /**
      * Sets a custom character for this button and updates the 'AutoChar' of subsequent buttons appropriately
-     * @param customChar: The 'name' to be assigned to this button
+     *
+     * @param customChar name to be assigned to this button
      */
     @Override
     public void setCustomChar(final char customChar) {
@@ -269,6 +287,7 @@ public class CalculateButton extends EditButton {
 
     /**
      * Restore this button to its original state (as in then the calculator was first created)
+     *
      * This method is called whenever the coordinate-format cache is manually changed.
      * This is prevent the values of unseen buttons (such as say 'Seconds' buttons) from confusing the user when they change formats.
      * It is also a nice way to clear the calculator and restart afresh.
@@ -284,7 +303,8 @@ public class CalculateButton extends EditButton {
     }
 
     /**
-     * When the user clicks on a button it's type is switched between 'AutoChar' and 'InputVal'.
+     * When the user clicks on a button it's type is switched between 'AutoChar' and 'InputVal'
+     *
      * Note: 'CustomValues' buttons will also be assigned to 'InputVal' as well.
      */
     private void toggleType() {
@@ -300,4 +320,5 @@ public class CalculateButton extends EditButton {
     private void updateButtonText() {
         setLabel(getLabel());
     }
+
 }

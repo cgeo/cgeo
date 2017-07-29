@@ -1,25 +1,24 @@
 package cgeo.geocaching.models;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-
 import cgeo.geocaching.settings.Settings.CoordInputFormatEnum;
 import cgeo.geocaching.ui.CalculateButton;
 import cgeo.geocaching.ui.CalculatorVariable;
 import cgeo.geocaching.ui.JSONAble;
 import cgeo.geocaching.ui.JSONAbleFactory;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 /**
- * This class is designed to capture the current state of the coordinate calculator such that it can be preserver for latter use.
+ * This class is designed to capture the current state of the coordinate calculator such that it can be preserver for latter use
  *
  * All the relevant information is in a serializable form such that it can be stored as a bundle in waypoint's 'ContentValues'.
  */
-
 public class CalcState implements Serializable {
     public static final char ERROR_CHAR = '#';
     public static final String ERROR_STRING = "???";
@@ -33,7 +32,9 @@ public class CalcState implements Serializable {
     public final List<? extends JSONAble> equations;
     public final List<? extends JSONAble> freeVariables;
     public final List<? extends JSONAble> variableBank;
-    public final String notes; // Note, we have to use a String rather than an Editable as Editable's can't be serialized
+
+    /** Note, we have to use a String rather than an Editable as Editable's can't be serialized */
+    public final String notes;
 
     public CalcState(final CoordInputFormatEnum format,
                      final String plainLat,
@@ -115,4 +116,5 @@ public class CalcState implements Serializable {
 
         return returnValue;
     }
+
 }

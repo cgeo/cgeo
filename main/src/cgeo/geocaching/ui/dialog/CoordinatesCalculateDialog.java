@@ -46,9 +46,21 @@ import butterknife.ButterKnife;
 import org.apache.commons.lang3.SerializationUtils;
 import org.apache.commons.lang3.StringUtils;
 
+/**
+ * Through out this implementation:
+ *
+ * 'Equations' are used to represent 'Variables' that appear in the description of the cache coordinated themselves.
+ *             As in "N 42° 127.ABC".  In this example 'A', 'B' and 'C' are all 'equations'.
+ *             All 'equations' must have a CAPITAL-LETTER name.
+ *
+ * 'FreeVariables' are used to represent 'Variables' that appear in the 'expression' of an equation
+ *                 As in "X = a^2 + b^2".  In this example 'a' and 'b' are both 'freeVariables'.
+ *                 All 'freeVariables' must have a lower-case name.
+ */
 public class CoordinatesCalculateDialog extends DialogFragment implements ClickCompleteCallback, LongClickCompleteCallback {
 
-    private static final String PLACE_HOLDER = "~"; // Character used to represent a "blanked-out' CoordinateButton.
+    /** Character used to represent a "blanked-out" CoordinateButton */
+    private static final String PLACE_HOLDER = "~";
 
     private static final String SYMBOL_DEG = "°";
     private static final String SYMBOL_MIN = "'";
@@ -58,31 +70,26 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
     private Geopoint gp;
     private CalcState savedState;
 
-    // Through out this implementation:
-    //
-    // 'Equations' are used to represent 'Variables' that appear in the description of the cache coordinated themselves.
-    //             As in "N 42° 127.ABC".  In this example 'A', 'B' and 'C' are all 'equations'.
-    //             All 'equations' must have a CAPITAL-LETTER name.
-    //
-    // 'FreeVariables' are used to represent 'Variables' that appear in the 'expression' of an equation
-    //                 As in "X = a^2 + b^2".  In this example 'a' and 'b' are both 'freeVariables'.
-    //                 All 'freeVariables' must have a lower-case name.
-    private List<CalculatorVariable> equations;       // List of equations to be displayed in the calculator.
-    private List<CalculatorVariable> freeVariables;   // List of freeVariables to be displayed in the calculator.
-
-    private List<CalculatorVariable.VariableData> variableBank;    // List of previously assigned variables that have since been removed.
+    /** List of equations to be displayed in the calculator */
+    private List<CalculatorVariable> equations;
+    /** List of freeVariables to be displayed in the calculator */
+    private List<CalculatorVariable> freeVariables;
+    /** List of previously assigned variables that have since been removed */
+    private List<CalculatorVariable.VariableData> variableBank;
 
     private Spinner spinner;
 
     private String inputLatHem;
-    private Button bLatHem;  // Latitude hemisphere (North or South)
+    /** Latitude hemisphere (North or South) */
+    private Button bLatHem;
     private final CalculateButton[] bLatDeg = new CalculateButton[3],
                                     bLatMin = new CalculateButton[2],
                                     bLatSec = new CalculateButton[2],
                                     bLatPnt = new CalculateButton[5];
 
     private String inputLonHem;
-    private Button bLonHem;  // Longitude hemisphere (East or West)
+    /** Longitude hemisphere (East or West) */
+    private Button bLonHem;
     private final CalculateButton[] bLonDeg = new CalculateButton[3],
                                     bLonMin = new CalculateButton[2],
                                     bLonSec = new CalculateButton[2],
@@ -112,8 +119,10 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
 
     private static final String GEOPOINT_ARG = "GEOPOINT";
 
-    // Class used for checking that a value is with in a given range.
-    // This is used to check for upper-case an lower-case letters.
+    /**
+     * Class used for checking that a value is with in a given range.
+     * This is used to check for upper-case an lower-case letters.
+     */
     private class Range {
         final int min;
         final int max;
@@ -220,7 +229,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
     }
 
     private class CoordinateFormatListener implements AdapterView.OnItemSelectedListener {
-        // One Shot marker
+        /** One shot marker */
         private boolean shot = false;
 
         @Override
@@ -282,9 +291,8 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
     }
 
     /**
-     *
-     * @param gp: Geopoint representing the coordinates from the CoordinateInputDialog
-     * @param calculationState: State to set the calculator to when created
+     * @param gp Geopoint representing the coordinates from the CoordinateInputDialog
+     * @param calculationState State to set the calculator to when created
      */
     public static CoordinatesCalculateDialog getInstance(final Geopoint gp, final CalcState calculationState) {
         final Bundle args = new Bundle();
@@ -491,7 +499,9 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         return v;
     }
 
-    // Make this dialog completely fill the screen
+    /**
+     * Make this dialog completely fill the screen
+     */
     @Override
     public void onStart() {
         super.onStart();
@@ -501,7 +511,9 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         }
     }
 
-    // Save the current state of the calculator such that it can be restored after screen rotation (or similar).
+    /**
+     * Save the current state of the calculator such that it can be restored after screen rotation (or similar)
+     */
     @Override
     public void onSaveInstanceState(final Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -521,10 +533,12 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         }
     }
 
-    // This method has largely been lifted from the CoordinateInputDialog and is used to validate
-    // coordinate specifications prior to assigning them to the Geopoint.
+    /**
+     * This method has largely been lifted from the CoordinateInputDialog and is used to validate
+     * coordinate specifications prior to assigning them to the Geopoint.
+     */
     private boolean areCurrentCoordinatesValid() {
-        // then convert text to geopoint
+        // convert text to geopoint
         final Geopoint current;
         final String lat = getLatResult();
         final String lon = getLonResult();
@@ -711,10 +725,10 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
 
     /**
      * Format the given string into the appropriate 'pretty' representation:  42ABCDE -> 42° AB.CDE'
-     * @param values: The string of values to be formatted.
+     *
+     * @param values The string of values to be formatted.
      */
     private String format(final String values) {
-        // Add degrees
         final String returnValue;
 
         switch (currentFormat) {
@@ -748,9 +762,10 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
     }
 
     /**
-     * Replace 'equation' Variables with there computer values: 42° AB.CDE' -> 42° 12.345'
-     * @param values: The string to perform the substitutions on.
-     * @return String with the substitutions performed.
+     * Replace 'equation' variables with their computed values: 42° AB.CDE' -> 42° 12.345'
+     *
+     * @param values The string to perform the substitutions on
+     * @return String with the substitutions performed
      */
     private String substitute(final String values) {
         String returnValue = "";
@@ -759,7 +774,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
             final char first = values.charAt(0);
             String substitutionString;
 
-            // Trim of the leading hemisphere character is it exists.
+            // Trim of the leading hemisphere character if it exists.
             if (first == 'N' || first == 'S' || first == 'E' || first == 'W') {
                 returnValue = returnValue.concat(String.valueOf(first));
                 substitutionString = values.substring(1);
@@ -788,12 +803,13 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
     }
 
     /**
-     * Retrieve all the values from the calculation buttons.
-     * @param buttons: List of button from which to extract the values.
-     * @return Button values as a string.
+     * Retrieve all the values from the calculation buttons
      *
      * Note that a special 'place-holder' character is used to represent "blanked-out" buttons.
      * This is needed to preserve formatting when multi digit calculations are used.
+     *
+     * @param buttons List of button from which to extract the values
+     * @return Button values as a string
      */
     private String getValues(final List<CalculateButton> buttons) {
         String returnValue = "";
@@ -813,8 +829,9 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
     }
 
     /**
-     * Retrieves the current representation of the computed longitudinal result.
-     * @return: The result as a string.
+     * Retrieves the current representation of the computed latitudinal result
+     *
+     * @return The result as a string
      */
     private String getLatResult() {
         final String returnValue;
@@ -829,8 +846,9 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
     }
 
     /**
-     * Retrieves the current representation of the computed latitudinal result.
-     * @return: The result as a string.
+     * Retrieves the current representation of the computed longitudinal result
+     *
+     * @return The result as a string
      */
     private String getLonResult() {
         final String returnValue;
@@ -845,22 +863,16 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
     }
 
     /**
-     * Updates the supplies with the list of variables supplies.
-     * @param variables: Variables to be included in the table.
-     * @param grid: The table the variables are to be placed in.
-     * @param startId: ID to be used for the first variable in the list.
+     * Updates the supplies with the list of variables supplies
      *
      * The ID's are used to assign an ordering such that the 'next' button on the keyboard (">")
      * will take you to the appropriate variable.
+     *
+     * @param variables Variables to be included in the table
+     * @param grid The table the variables are to be placed in
+     * @param startId ID to be used for the first variable in the list
      */
     private void updateGrid(final List<CalculatorVariable> variables, final GridLayout grid, final int startId) {
-        /**************************
-         *   A = 2+2    F = 2+2   *
-         *   B = 2+2    G = 2+2   *
-         *   C = 2+2    H = 2+2   *
-         *   D = 2+2    I = 2+2   *
-         *   E = 2+2              *
-         **************************/
         int id = startId;
 
         // If 'freeVariables' are to be displayed include a border around the tables
@@ -970,9 +982,11 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
     }
 
     /**
-     * Find if a variable exists in the supplied list with the given name.
-     * @param name: The name to search for.
-     * @return: The first occurrence of the variable if it can found, 'null' otherwise.
+     * Find if a variable exists in the supplied list with the given name
+     *
+     * @param name name to search for
+     * @param list list of variables
+     * @return first occurrence of the variable if it can found, 'null' otherwise
      */
     private CalculatorVariable findAndRemoveVariable(final char name, final List<CalculatorVariable> list) {
         for (final CalculatorVariable equ : list) {
@@ -986,9 +1000,10 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
     }
 
     /**
-     * Find if variable data exists in the supplied list with the given name.
-     * @param name: The name to search for.
-     * @return: The first occurrence of the data if it can found, 'null' otherwise.
+     * Find if variable data exists in the supplied list with the given name
+     *
+     * @param name name to search for
+     * @return first occurrence of the data if it can found, 'null' otherwise
      */
     private CalculatorVariable.VariableData findAndRemoveData(final char name, final List<CalculatorVariable.VariableData> list) {
         for (final CalculatorVariable.VariableData var : list) {
@@ -1004,15 +1019,15 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
     /**
      * Create a list of variables in the order provided by the 'variableNames' string
      *
-     * @param variables: List of variables as they currently are.
-     * @param variableNames: String containing all the names for which variables are required
-     * @param range: Range of which variables are to be created (eg. 'A' <= ch && ch <= 'Z')
-     * @param hintText: Text to be used as a hint when new variables are created
-     * @return: Full list of variables in the appropriate order
-     *
      * The purpose of this method is to create a list of all the variables needed to satisfy all the characters the supplied 'names' and no more.
      * The list returned will return the variables in the order in which they first appear in the 'names' string.
      * This method is responsible for using and maintaining the 'variableBank'.
+     *
+     * @param variables List of variables as they currently are.
+     * @param variableNames String containing all the names for which variables are required
+     * @param range range of which variables are to be created (eg. 'A' <= ch && ch <= 'Z')
+     * @param hintText text to be used as a hint when new variables are created
+     * @return full list of variables in the appropriate order
      */
     private List<CalculatorVariable> sortVariables(final List<CalculatorVariable> variables,
                                                    final String variableNames,
@@ -1055,9 +1070,10 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         return returnList;
     }
 
-    // Re-sort the equations into the order in which they first appear in the 'buttons' or 'plain-text' fields as appropriate.
+    /**
+     * Re-sort the equations into the order in which they first appear in the 'buttons' or 'plain-text' fields as appropriate
+     */
     private void resortEquations() {
-
         String coordinateChars = ""; // All the characters that appear in the coordinate representation.
 
         if (currentFormat == Settings.CoordInputFormatEnum.Plain) {
@@ -1088,13 +1104,15 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
             }
         }
 
-        // replace the old equation list with a newly created ones.
+        // replace the old equation list with a newly created ones
         equations = sortVariables(equations, coordinateChars, new Range('A', 'Z'), getString(R.string.equation_hint), new EquationWatcher());
         updateGrid(equations, equationGrid, 0);
         resortFreeVariables();
     }
 
-    // Resort the free-variables into the order in which they first appear in the 'equations'.
+    /**
+     * Resort the free-variables into the order in which they first appear in the 'equations'
+     */
     private void resortFreeVariables() {
         String equationStrings = "";
 
@@ -1119,16 +1137,18 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         bLatDeg[2].resetButton();
     }
 
-    // This method displays a reminder about saving the calculator state then closes both this dialog as well as the 'CoordinateInputDialog'.
-    // Note that clicking the back arrow on the device does not run this method so in that case the user will be returned to the 'CoordinateInputDialog'.
+    /**
+     * This method displays a reminder about saving the calculator state then closes both this dialog as well as the 'CoordinateInputDialog'
+     *
+     * Note that clicking the back arrow on the device does not run this method so in that case the user will be returned to the 'CoordinateInputDialog'.
+     */
     private void close() {
         if (savedState != null) {
             displayToast(R.string.warn_calculator_state_save);
         }
 
-        // Close the 'CoordinateInputDialog'.
+        // Close the 'CoordinateInputDialog'
         getTargetFragment().onActivityResult(0, 0, null);
         dismiss();
     }
 }
-

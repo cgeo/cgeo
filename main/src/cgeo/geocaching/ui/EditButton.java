@@ -1,5 +1,12 @@
 package cgeo.geocaching.ui;
 
+import static android.text.InputType.TYPE_TEXT_FLAG_CAP_CHARACTERS;
+import static android.text.InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS;
+
+import cgeo.geocaching.R;
+import cgeo.geocaching.ui.dialog.ClickCompleteCallback;
+import cgeo.geocaching.ui.dialog.LongClickCompleteCallback;
+
 import android.content.Context;
 import android.text.Editable;
 import android.text.InputType;
@@ -16,35 +23,33 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import cgeo.geocaching.R;
-import cgeo.geocaching.ui.dialog.ClickCompleteCallback;
-import cgeo.geocaching.ui.dialog.LongClickCompleteCallback;
-
-import static android.text.InputType.TYPE_TEXT_FLAG_CAP_CHARACTERS;
-import static android.text.InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS;
-
 /**
  * This class allows for a user to change the text on a button with a long-click.
  */
 public class EditButton extends RelativeLayout {
 
-    private EditText edit;  // EditText used to facilitate keyboard entry.
-    Button butt;    // The actual button used for the most part.
+    /** EditText used to facilitate keyboard entry */
+    private EditText edit;
+    /** The actual button used for the most part */
+    Button butt;
 
     private ArrayList<ClickCompleteCallback> clickCompleteCallbacks;
     private ArrayList<LongClickCompleteCallback> longClickCompleteCallbacks;
 
+    /**
+     * This implementation was obtained from 'Adithya' via the stack overflow question 'Long-press on Button to Change Text':
+     * https://stackoverflow.com/questions/44858720/long-press-on-button-to-change-text/44859328#44859328
+     */
     private class CoordDigitLongClickListener implements View.OnLongClickListener {
-        // This implementation was obtained from 'Adithya' via the stack overflow question 'Long-press on Button to Change Text':
-        // https://stackoverflow.com/questions/44858720/long-press-on-button-to-change-text/44859328#44859328
-
         @Override
         public boolean onLongClick(final View view) {
             return handleLongClick();
         }
     }
 
-    // These variables are accessed from the derived class 'CalculateButton'.
+    /**
+     * These variables are accessed from the derived class 'CalculateButton'
+     */
     public EditButton(final Context context) {
         super(context);
         addViews(context);

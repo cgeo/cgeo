@@ -28,27 +28,32 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- * Class used to display a variable with an equation, such as:
- *  X = a^2 = b^2
+ * Class used to display a variable with an equation, such as: X = a^2 = b^2
  */
 public class CalculatorVariable extends LinearLayout {
 
+    /** actual name and expression used */
     private final VariableData variableData;
 
-    // Views used to display the name and expression of the variable.
-    // Note that the actual name and expression used are stored in the variableData 'struct'
-    // and these views are only used to display that information
+    /** view to display the name of the variable */
     private final TextView name;
+
+    /** view to display the expression of the variable */
     private final EditText expression;
 
-    // Variables used to save unnecessary re-computing.
+    /** cached result of the expression */
     private double cachedValue;
+
+    /** indicates if recomputation needs to be done */
     private boolean cacheDirty;
 
-    // Data used to capture the state of this Variable such that it can be restored again later.
+    /**
+     * Data used to capture the state of this Variable such that it can be restored again later
+     */
     public static class VariableData implements Serializable, JSONAble {
         private final char name;
-        private String expression; // Note, we have to use a String rather than an Editable as Editable's can't be serialized
+        /** Note, we have to use a String rather than an Editable as Editable's can't be serialized */
+        private String expression;
 
         public VariableData(final char name) {
             this.name = name;
@@ -112,8 +117,10 @@ public class CalculatorVariable extends LinearLayout {
                 // Intentionally left empty
             }
 
+            /**
+             * Only use afterTextChanged
+             */
             @Override
-            // Only use afterTextChanged
             public void onTextChanged(final CharSequence s, final int start, final int before, final int count) {
                 // Intentionally left empty
             }
@@ -153,8 +160,11 @@ public class CalculatorVariable extends LinearLayout {
         this.cacheDirty = cacheDirty;
     }
 
-    // Method to returned the cached values as a String
-    // This is used to display the result in the UI.
+    /**
+     * This is used to display the result in the UI
+     *
+     * @return cached values as a String
+     */
     private String getCachedString() {
         final String returnValue;
 
@@ -169,8 +179,11 @@ public class CalculatorVariable extends LinearLayout {
         return returnValue;
     }
 
-    // Method to returned the cached values as a Double
-    // This is used to compute the value of another variable.
+    /**
+     * This is used to compute the value of another variable
+     *
+     * @return cached values as a Double
+     */
     private double getCachedValue() {
         return cachedValue;
     }
