@@ -33,4 +33,13 @@ public class CalculationUtilsTest extends TestCase {
         }
     }
 
+    public static void testUnbalancedParentheses() {
+        try {
+            new CalculationUtils("3 * (2 + 4 * 2").eval();
+            fail("should throw IllegalArgumentException on missing ')'");
+        } catch (final IllegalArgumentException ignored) {
+
+        }
+    }
+
 }
