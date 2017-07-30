@@ -90,7 +90,9 @@ public final class CalculationUtils {
         final int startPos = this.pos;
         if (eat('(')) { // parentheses
             x = parseExpression();
-            eat(')');
+            if (!eat(')')) {
+                throw new IllegalArgumentException("Expected ')'");
+            }
         } else if ((ch >= '0' && ch <= '9') || ch == '.') { // numbers
             while ((ch >= '0' && ch <= '9') || ch == '.') {
                 nextChar();
