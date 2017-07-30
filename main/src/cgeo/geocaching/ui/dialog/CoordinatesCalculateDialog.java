@@ -988,10 +988,12 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
      * @param list list of variables
      * @return first occurrence of the variable if it can found, 'null' otherwise
      */
-    private CalculatorVariable findAndRemoveVariable(final char name, final List<CalculatorVariable> list) {
+    private CalculatorVariable getVariable(final char name, final List<CalculatorVariable> list, final boolean remove) {
         for (final CalculatorVariable equ : list) {
             if (equ.getName() == name) {
-                list.remove(equ);
+                if (remove) {
+                    list.remove(equ);
+                }
                 return equ;
             }
         }
@@ -1040,11 +1042,11 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
             final char ch = variableNames.charAt(i);
 
             if (range.check(ch)) {
-                if (findAndRemoveVariable(ch, returnList) != null) {
+                if (getVariable(ch, returnList, false) != null) {
                     continue;
                 }
 
-                CalculatorVariable thisEquation = findAndRemoveVariable(ch, variables);
+                CalculatorVariable thisEquation = getVariable(ch, variables, true);
                 if (thisEquation == null) {
                     CalculatorVariable.VariableData data = findAndRemoveData(ch, variableBank);
 
