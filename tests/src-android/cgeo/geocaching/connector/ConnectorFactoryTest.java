@@ -3,7 +3,9 @@ package cgeo.geocaching.connector;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
 import cgeo.geocaching.connector.gc.GCConnector;
+import cgeo.geocaching.connector.oc.OCCZConnector;
 import cgeo.geocaching.connector.oc.OCConnector;
+import cgeo.geocaching.connector.oc.OCDEConnector;
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 import cgeo.geocaching.test.mock.GC1ZXX2;
 
@@ -72,6 +74,18 @@ public class ConnectorFactoryTest extends AbstractResourceInstrumentationTestCas
         assertThat(GCConnector.getInstance().getGeocodeFromUrl("http://www.coord.info/GC12ABC")).isEqualTo("GC12ABC");
         assertThat(GCConnector.getInstance().getGeocodeFromUrl("https://www.geocaching.com/geocache/GC12ABC_die-muhlen-im-schondratal-muhle-munchau")).isEqualTo("GC12ABC");
         assertThat(GCConnector.getInstance().getGeocodeFromUrl("http://geocaching.com/geocache/GC12ABC_die-muhlen-im-schondratal-muhle-munchau")).isEqualTo("GC12ABC");
+
+        // OC
+        assertThat(ConnectorFactory.getGeocodeFromURL("https://www.opencaching.de/viewcache.php?wp=OC10F41&log=A#log1186982")).isEqualTo("OC10F41");
+        assertThat(ConnectorFactory.getGeocodeFromURL("https://www.OpenCaching.de/viewcache.php?cacheid=172530&log=A#log1186982")).isEqualTo("OC10F41");
+        assertThat(ConnectorFactory.getGeocodeFromURL("https://opencaching.de/OC10DA9")).isEqualTo("OC10DA9");
+        assertThat(new OCDEConnector().getGeocodeFromUrl("https://www.opencaching.cz/viewcache.php?cacheid=172530&log=A#log1186982")).isNull();
+        assertThat(new OCDEConnector().getGeocodeFromUrl("https://www.opencaching.cz/viewcache.php?wp=OZ10F41&log=A#log1186982")).isNull();
+
+        // CZ
+        assertThat(new OCCZConnector().getGeocodeFromUrl("https://www.opencaching.cz/viewcache.php?wp=OZ10F41&log=A#log1186982")).isEqualTo("OZ10F41");
+        assertThat(new OCCZConnector().getGeocodeFromUrl("https://www.opencaching.cz/viewcache.php?cacheid=123456&log=A#log1186982")).isEqualTo("OZ1e240");
+        assertThat(new OCCZConnector().getGeocodeFromUrl("https://www.opencaching.de/viewcache.php?cacheid=123456&log=A#log1186982")).isNull();
 
         // trackable URLs
         assertThat(GCConnector.getInstance().getGeocodeFromUrl("http://coord.info/TB1234")).isNull();

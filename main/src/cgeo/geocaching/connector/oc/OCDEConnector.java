@@ -23,7 +23,7 @@ public final class OCDEConnector extends OCApiLiveConnector {
             if (StringUtils.containsIgnoreCase(url, mappedDomain)) {
                 // replace the country specific URL to not confuse the OKAPI interface
                 final String deUrl = StringUtils.replaceIgnoreCase(url, mappedDomain, "opencaching.de");
-                final String geocodeFromId = getGeocodeFromCacheId(deUrl, getHost());
+                final String geocodeFromId = getGeocodeFromCacheId(deUrl, getShortHost());
                 if (geocodeFromId != null) {
                     return geocodeFromId;
                 }

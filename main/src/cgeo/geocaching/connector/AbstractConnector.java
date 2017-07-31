@@ -328,6 +328,10 @@ public abstract class AbstractConnector implements IConnector {
     public void logout() {
     }
 
+    public String getShortHost() {
+        return StringUtils.remove(getHost(), "www.");
+    }
+
     @Override
     @Nullable
     public String getCreateAccountUrl() {
