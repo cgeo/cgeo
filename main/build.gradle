@@ -256,7 +256,7 @@ dependencies {
     compile "net.sf.geographiclib:GeographicLib-Java:1.48"
 
     // Jackson XML processing
-    def jacksonVersion = '2.8.9'
+    def jacksonVersion = '2.9.0'
     compile "com.fasterxml.jackson.core:jackson-core:$jacksonVersion"
     compile "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
     compile "com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion"
@@ -277,8 +277,8 @@ dependencies {
     testCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
 
     // Locus Maps integration
-    compile "com.asamm:locus-api:0.2.9"
-    compile "com.asamm:locus-api-android:0.2.9"
+    compile "com.asamm:locus-api:0.2.10"
+    compile "com.asamm:locus-api-android:0.2.10"
 
     // Mapsforge old version
     compile files('libs/mapsforge-map-0.3.0-jar-with-dependencies.jar')
