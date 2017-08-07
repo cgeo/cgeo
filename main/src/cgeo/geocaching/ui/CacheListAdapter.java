@@ -24,13 +24,10 @@ import cgeo.geocaching.utils.MapUtils;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.res.Resources;
+import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
-import android.text.Spannable;
-import android.text.Spanned;
-import android.text.style.ForegroundColorSpan;
-import android.text.style.StrikethroughSpan;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -48,6 +45,7 @@ import java.util.Comparator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+
 
 import butterknife.BindView;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -428,23 +426,18 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
         compasses.add(holder.direction);
         holder.direction.setTargetCoords(cache.getCoords());
 
-        Spannable spannable = null;
         if (cache.isDisabled() || cache.isArchived() || CalendarUtils.isPastEvent(cache)) { // strike
-            spannable = Spannable.Factory.getInstance().newSpannable(cache.getName());
-            spannable.setSpan(new StrikethroughSpan(), 0, spannable.toString().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            holder.text.setPaintFlags(holder.text.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+        } else {
+            holder.text.setPaintFlags(holder.text.getPaintFlags() & ~Paint.STRIKE_THRU_TEXT_FLAG);
         }
         if (cache.isArchived()) { // red color
-            if (spannable == null) {
-                spannable = Spannable.Factory.getInstance().newSpannable(cache.getName());
-            }
-            spannable.setSpan(new ForegroundColorSpan(ContextCompat.getColor(getContext(), R.color.archived_cache_color)), 0, spannable.toString().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            holder.text.setTextColor(ContextCompat.getColor(getContext(), R.color.archived_cache_color));
+        } else {
+            holder.text.setTextColor(ContextCompat.getColor(getContext(), lightSkin ? R.color.text_light : R.color.text_dark));
         }
 
-        if (spannable != null) {
-            holder.text.setText(spannable, TextView.BufferType.SPANNABLE);
-        } else {
-            holder.text.setText(cache.getName(), TextView.BufferType.NORMAL);
-        }
+        holder.text.setText(cache.getName(), TextView.BufferType.NORMAL);
         holder.cacheListType = cacheListType;
         updateViewHolder(holder, cache, res);
 
