@@ -19,7 +19,9 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import java.io.InputStream;
+import java.util.concurrent.Callable;
 
+import io.reactivex.Single;
 import org.apache.commons.compress.utils.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -137,10 +139,15 @@ public class GeocachingSuConnector extends AbstractConnector implements ISearchB
 
     @Override
     @NonNull
-    public SearchResult searchByViewport(@NonNull final Viewport viewport, @Nullable final MapTokens tokens) {
+    public Single<SearchResult> searchByViewport(@NonNull final Viewport viewport, @Nullable final MapTokens tokens) {
         final Geopoint min = viewport.bottomLeft;
         final Geopoint max = viewport.topRight;
-        return searchCaches("cache", new Parameters(PARAMETER_REQUEST_TYPE, REQUEST_TYPE_BOUNDING_BOX, "lngmax", GeopointFormatter.format(GeopointFormatter.Format.LON_DECDEGREE_RAW, max), "lngmin", GeopointFormatter.format(GeopointFormatter.Format.LON_DECDEGREE_RAW, min), "latmax", GeopointFormatter.format(GeopointFormatter.Format.LAT_DECDEGREE_RAW, max), "latmin", GeopointFormatter.format(GeopointFormatter.Format.LAT_DECDEGREE_RAW, min), PARAMETER_RESULT_FIELDS, RESULT_FIELDS_SEARCH));
+        return Single.fromCallable(new Callable<SearchResult>() {
+            @Override
+            public SearchResult call() throws Exception {
+                return searchCaches("cache", new Parameters(PARAMETER_REQUEST_TYPE, REQUEST_TYPE_BOUNDING_BOX, "lngmax", GeopointFormatter.format(GeopointFormatter.Format.LON_DECDEGREE_RAW, max), "lngmin", GeopointFormatter.format(GeopointFormatter.Format.LON_DECDEGREE_RAW, min), "latmax", GeopointFormatter.format(GeopointFormatter.Format.LAT_DECDEGREE_RAW, max), "latmin", GeopointFormatter.format(GeopointFormatter.Format.LAT_DECDEGREE_RAW, min), PARAMETER_RESULT_FIELDS, RESULT_FIELDS_SEARCH));
+            }
+        });
     }
 
     private static SearchResult searchCaches(@NonNull final String endTag, @NonNull final Parameters parameters) {
