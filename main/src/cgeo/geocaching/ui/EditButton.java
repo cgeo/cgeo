@@ -110,10 +110,12 @@ public class EditButton extends RelativeLayout {
         return butt.getText().charAt(0);
     }
 
+    @Override
     public void setOnClickListener(final OnClickListener listener) {
         butt.setOnClickListener(listener);
     }
 
+    @Override
     public void setOnLongClickListener(final OnLongClickListener listener) {
         butt.setOnLongClickListener(listener);
     }

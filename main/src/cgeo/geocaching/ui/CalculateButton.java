@@ -14,7 +14,6 @@ import android.view.View;
 
 import java.io.Serializable;
 
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -116,6 +115,7 @@ public class CalculateButton extends EditButton {
             customChar = (char) json.optInt("customChar", ERROR_CHAR);
         }
 
+        @Override
         public JSONObject toJSON() throws JSONException {
             final JSONObject returnValue = new JSONObject();
 
@@ -166,6 +166,7 @@ public class CalculateButton extends EditButton {
     /**
      * The 'Label' is the 'name' that is to be displayed on the button
      */
+    @Override
     public char getLabel() {
         return getType().getLabel(getData());
     }

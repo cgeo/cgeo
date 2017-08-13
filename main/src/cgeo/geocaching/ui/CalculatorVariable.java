@@ -23,7 +23,6 @@ import android.widget.TextView;
 import java.io.Serializable;
 import java.util.List;
 
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -69,6 +68,7 @@ public class CalculatorVariable extends LinearLayout {
             return name;
         }
 
+        @Override
         public JSONObject toJSON() throws JSONException {
             final JSONObject returnValue = new JSONObject();
 
@@ -103,7 +103,7 @@ public class CalculatorVariable extends LinearLayout {
         name.setText(variableData.name + " = ");
 
         expression = new EditText(context);
-        expression.setLayoutParams(new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f));
+        expression.setLayoutParams(new LinearLayout.LayoutParams(0, android.view.ViewGroup.LayoutParams.WRAP_CONTENT, 1f));
         expression.setMaxLines(Integer.MAX_VALUE);
         expression.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
         expression.setHint(hintText);
