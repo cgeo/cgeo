@@ -328,7 +328,8 @@ public class GCLogin extends AbstractLogin {
                 .map(new Function<Document, String>() {
                     @Override
                     public String apply(final Document document) {
-                        return document.select("input.search-coordinates").attr("value");
+                        final Document innerHtml = Jsoup.parse(document.getElementById("tplSearchCoords").html());
+                        return innerHtml.select("input.search-coordinates").attr("value");
                     }
                 });
     }
