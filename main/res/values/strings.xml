@@ -1595,7 +1595,7 @@
     <string name="init_low_disk_space_message">The geocache data directory is running low on storage space. This can cause malfunctions of c:geo. Please free up some space.</string>
     <string name="init_confirm_debug">c:geo is running in debug mode!</string>
     <string name="list_confirm_debug_message">The debug mode causes instabilities! Do you want to deactivate the debug mode?</string>
-    <string name="equation_hint">a^2 + b^2</string>
+    <string name="equation_hint">a + b</string>
     <string name="free_variable_hint">2 + 2</string>
     <string name="empty_equation_result">_</string>
     <string name="equation_error_result">*</string>
