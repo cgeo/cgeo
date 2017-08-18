@@ -12,6 +12,7 @@ import cgeo.geocaching.maps.interfaces.MapProjectionImpl;
 import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
 import cgeo.geocaching.maps.interfaces.OnMapDragListener;
+import cgeo.geocaching.network.Network;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
 
@@ -35,6 +36,7 @@ import org.mapsforge.v3.android.maps.Projection;
 import org.mapsforge.v3.android.maps.mapgenerator.MapGenerator;
 import org.mapsforge.v3.android.maps.mapgenerator.MapGeneratorFactory;
 import org.mapsforge.v3.android.maps.mapgenerator.MapGeneratorInternal;
+import org.mapsforge.v3.android.maps.mapgenerator.tiledownloader.TileDownloader;
 import org.mapsforge.v3.android.maps.overlay.Overlay;
 import org.mapsforge.v3.core.GeoPoint;
 public class MapsforgeMapView extends MapView implements MapViewImpl {
@@ -194,6 +196,9 @@ public class MapsforgeMapView extends MapView implements MapViewImpl {
         }
 
         final MapGenerator mapGenerator = MapGeneratorFactory.createMapGenerator(newMapType);
+        if (mapGenerator instanceof TileDownloader) {
+            ((TileDownloader) mapGenerator).setUserAgent(Network.getUserAgent());
+        }
 
         // When swapping map sources, make sure we aren't exceeding max zoom. See bug #1535
         final int maxZoom = mapGenerator.getZoomLevelMax();

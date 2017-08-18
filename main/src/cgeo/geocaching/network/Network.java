@@ -7,18 +7,23 @@ import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.RxOkHttpUtils;
 import cgeo.geocaching.utils.TextUtils;
+import cgeo.geocaching.utils.Version;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Constructor;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.security.KeyStore;
@@ -60,13 +65,13 @@ import org.jsoup.nodes.Document;
 public final class Network {
 
     /** User agent id */
-    private static final String PC_USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64; rv:9.0.1) Gecko/20100101 Firefox/9.0.1";
-    /** Native user agent, taken from a Android 2.2 Nexus **/
-    private static final String NATIVE_USER_AGENT = "Mozilla/5.0 (Linux; U; Android 2.2; en-us; Nexus One Build/FRF91) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1";
+    private static final String DESKTOP_USER_AGENT = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:54.0) Gecko/20100101 Firefox/54.0";
 
     private static final Pattern PATTERN_PASSWORD = Pattern.compile("(?<=[\\?&])[Pp]ass(w(or)?d)?=[^&#$]+");
 
     private static final OkHttpClient OK_HTTP_CLIENT = getNewHttpClient();
+
+    private static String userAgent = null;
 
     private static OkHttpClient getNewHttpClient() {
         final OkHttpClient.Builder client = new OkHttpClient.Builder()
@@ -260,11 +265,12 @@ public final class Network {
 
         @Override
         public Response intercept(final Interceptor.Chain chain) throws IOException {
-            final Request request = chain.request().newBuilder()
+            final Builder builder = chain.request().newBuilder();
+            final Request request = builder
                     .header("Accept-Charset", "utf-8,iso-8859-1;q=0.8,utf-16;q=0.8,*;q=0.7")
                     .header("Accept-Language", "en-US,*;q=0.9")
                     .header("X-Requested-With", "XMLHttpRequest")
-                    .header("User-Agent", Settings.getUseNativeUa() ? NATIVE_USER_AGENT : PC_USER_AGENT)
+                    .header("User-Agent", getUserAgent())
                     .build();
             return chain.proceed(request);
         }
@@ -303,6 +309,46 @@ public final class Network {
         private static String formatTimeSpan(final long before) {
             // don't use String.format in a pure logging routine, it has very bad performance
             return " (" + (System.currentTimeMillis() - before) + " ms) ";
+        }
+    }
+
+    public static String getUserAgent() {
+        if (userAgent == null) {
+            final Context context = CgeoApplication.getInstance().getBaseContext();
+            userAgent = Settings.useDesktopUserAgent() ? DESKTOP_USER_AGENT : getDefaultUserAgentString(context) + " [cgeo/" + Version.getVersionName(context) + "]";
+            Log.i("UserAgent: " + userAgent);
+        }
+        return userAgent;
+    }
+
+    public static void resetUserAgent() {
+        userAgent = null;
+    }
+
+    @android.support.annotation.UiThread
+    public static String getDefaultUserAgentString(final Context context) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            return NewApiWrapper.getDefaultUserAgent(context);
+        }
+
+        try {
+            final Constructor<WebSettings> constructor = WebSettings.class.getDeclaredConstructor(Context.class, WebView.class);
+            constructor.setAccessible(true);
+            try {
+                final WebSettings settings = constructor.newInstance(context, null);
+                return settings.getUserAgentString();
+            } finally {
+                constructor.setAccessible(false);
+            }
+        } catch (final Exception e) {
+            return new WebView(context).getSettings().getUserAgentString();
+        }
+    }
+
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
+    static class NewApiWrapper {
+        static String getDefaultUserAgent(final Context context) {
+            return WebSettings.getDefaultUserAgent(context);
         }
     }
 

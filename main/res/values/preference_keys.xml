@@ -56,7 +56,7 @@
     <string translatable="false" name="pref_pass_vote">pass-vote</string>
     <string translatable="false" name="pref_twitter">twitter</string>
     <string translatable="false" name="pref_webDeviceName">webDeviceName</string>
-    <string translatable="false" name="pref_nativeUa">nativeUa</string>
+    <string translatable="false" name="pref_desktopUserAgent">desktopUserAgent</string>
     <string translatable="false" name="pref_skin">skin</string>
     <string translatable="false" name="pref_showaddress">showaddress</string>
     <string translatable="false" name="pref_useenglish">useenglish</string>
