@@ -29,7 +29,7 @@ node('has-emulator') {
                         sh '[ -x "$HOME"/restart-emulator.sh ] && "$HOME"/restart-emulator.sh'
 
                         // accept Android licenses. these are the MD5 hashes of the license texts, so they may need to be adapted on license changes
-                        sh 'mkdir "/opt/android-sdk-linux/licenses" || true'
+                        sh '[ ! -d "/opt/android-sdk-linux/licenses" ] && mkdir "/opt/android-sdk-linux/licenses"'
                         sh 'echo -e "\\n8933bad161af4178b1185d1a37fbf41ea5269c55" > "/opt/android-sdk-linux/licenses/android-sdk-license"'
 
                         // gradle needs the sdk.dir in local.properties. Not sure if a template exists on the server, therefore we create it on demand.
@@ -50,9 +50,9 @@ node('has-emulator') {
                     }
                     finally {
                         // cleanup
-                        sh 'rm private.properties'
-                        sh 'rm main/cgeo.geocaching_preferences.xml'
-                        sh 'rm main/res/values/keys.xml'
+                        sh '[ -f private.properties ] && rm private.properties'
+                        sh '[ -f main/cgeo.geocaching_preferences.xml ] && rm main/cgeo.geocaching_preferences.xml'
+                        sh '[ -f main/res/values/keys.xml ] && rm main/res/values/keys.xml'
                     }
                 }
             }
