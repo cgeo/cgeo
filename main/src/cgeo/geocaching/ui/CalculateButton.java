@@ -3,6 +3,7 @@ package cgeo.geocaching.ui;
 import static cgeo.geocaching.models.CalcState.ERROR_CHAR;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.settings.Settings;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -197,8 +198,11 @@ public class CalculateButton extends EditButton {
                 break;
 
             default:
+                final boolean lightSkin = Settings.isLightSkin();
+                final int normalText = ContextCompat.getColor(getContext(), lightSkin ? R.color.text_light : R.color.text_dark);
+
                 butt.setBackgroundResource(R.drawable.button_background_kitkat);
-                butt.setTextColor(Color.WHITE);
+                butt.setTextColor(normalText);
                 butt.setTypeface(null, Typeface.NORMAL);
                 break;
         }
