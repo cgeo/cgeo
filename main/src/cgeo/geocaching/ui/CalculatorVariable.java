@@ -4,6 +4,7 @@ import static cgeo.geocaching.models.CalcState.ERROR_CHAR;
 import static cgeo.geocaching.models.CalcState.ERROR_STRING;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.CalculationUtils;
 
 import android.content.Context;
@@ -192,9 +193,12 @@ public class CalculatorVariable extends LinearLayout {
         this.cachedValue = cachedValue;
         setCacheDirty(false);
 
+        final boolean lightSkin = Settings.isLightSkin();
+        final int validColour = ContextCompat.getColor(getContext(), lightSkin ? R.color.text_light : R.color.text_dark);
+        final int invalidColour = ContextCompat.getColor(getContext(), lightSkin ? R.color.text_hint_light : R.color.text_hint_dark);
+
         // Make the name colour grey if value is invalid
-        final int nameColour = Double.isNaN(getCachedValue()) ? ContextCompat.getColor(getContext(), R.color.text_hint_dark) : Color.WHITE;
-        name.setTextColor(nameColour);
+        name.setTextColor(Double.isNaN(getCachedValue()) ? invalidColour : validColour);
     }
 
     public char getName() {
