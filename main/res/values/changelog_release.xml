@@ -2,34 +2,18 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-    <b>Next feature release:</b>\n
-    · New: cache list menu restructured\n
+    <b>2017.07.24:</b>\n
+    · New: Cache list menu restructured, see <a href="http://www.cgeo.org/faq#new-list-menu">FAQ</a> for details.\n
     · New: Use abbreviation for name of geocaching service on main screen\n
     · New: GCVote ratings are now sorted by a weighted arithmetic mean that also considers the number of votes\n
-    · Removed: OpenCylceMap due to licensing issues, see FAQ\n
-    \n
-    \n
-    <b>2017.05.22:</b>\n
-    · Fix: Avoid crash during file operation\n
-    · Fix: Avoid crash when checking for Locus installation\n
-    · Fix: Avoid failure when parsing original coordinates of a GPX file\n
-    · New: Show warning when c:geo is running in debug mode\n
-    · Fix: Fallback if selected GPX export dir is not writeable\n
-    · Fix: Add .nomedia file to geocache data dir to prevent log photos from showing up in gallery apps\n
-    · Removed: Link to Android Wear app in useful apps\n
-    \n
-    \n
-    <b>2017.05.09:</b>\n
-    · New: Implemented new data storage structure\n
-    · New: Allow moving additional geocache data to external SD\n
-    · New: Extract DMS, DegDec and UTM waypoint coordinates out of personal note\n
-    · New: Export owner name to clipboard by clicking it\n
-    · New: More precise computation of distance, azimuth or projection\n
-    · Fix: Do not parse formulas in personal notes as waypoint coordinates\n
-    · Fix: Remove wrong menu item from trackable logging screen\n
-    · Fix: Apply API key for OSM:Cyclemap\n 
-    · Fix: Detect that no language has been selected on geocaching.com\n
-    · Fix: Allow resetting global cache type filter by clicking on filter info in lists\n
+    · Removed: OpenCylceMap due to licensing issues, see <a href="http://www.cgeo.org/faq#cyclemap">FAQ</a>\n
+    · Fix: Ignore invalid characters when exporting to GPX\n
+    · Fix: Sort by favorite percent now respects attended/photo taken\n
+    · Fix: Relative URLs in cache descriptions\n
+    · Fix: Use weighted arithmetic mean to sort GCVote ratings\n
+    · Fix: TLS v1.2 Support for Android 4.1 - 4.4 devices\n
+    · Fix: Improve sort of events\n
+    · Fix: Raise personal note character limit\n
     \n
     \n
 </string>

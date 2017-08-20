@@ -377,10 +377,10 @@ public class CgeoApplicationTest extends CGeoTestCase {
                     }
 
                     { // premium cache
-                        final MockedCache cache = new MockedCache(new Geopoint(49.010183, 2.566117)) {
+                        final MockedCache cache = new MockedCache(new Geopoint(51.338717, 7.032750)) {
                             @Override
                             public String getGeocode() {
-                                return "GC1K1W4";
+                                return "GC6K70B";
                             }
                         };
                         deleteCacheFromDBAndLogout(cache.getGeocode());
