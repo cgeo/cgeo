@@ -3,7 +3,11 @@
   <!-- changelog for the master branch -->
   <string name="changelog_master" translatable="false">
     <b>Next feature release:</b>\n
-     · [placeholder]
+    · New: Coordinate calculator (New Waypoint - Calculate Coordinates)\n
+    · Fix: Improve parsing of home coordinates\n
+    · Fix: Disabled caches might be shown with truncated title\n
+    · Fix: Some OC cache URL not detected correctly\n
+    · Fix: Some possible crashes on map\n
      \n
      \n
   </string>
