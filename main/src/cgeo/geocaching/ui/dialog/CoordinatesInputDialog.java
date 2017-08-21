@@ -570,13 +570,6 @@ public class CoordinatesInputDialog extends DialogFragment {
 
         @Override
         public void onClick(final View v) {
-            if (cacheCoords == null) {
-                final AbstractActivity activity = (AbstractActivity) getActivity();
-                activity.showToast(activity.getString(R.string.err_location_unknown));
-                return;
-            }
-
-
             final CalcState newState = ((CalculateState) getActivity()).fetchCalculatorState();
             final CoordinatesCalculateDialog calculateDialog = CoordinatesCalculateDialog.getInstance(gp, newState);
              // Assign this fragment as the target fragment so the calculate dialog can automatically close this one on completion
