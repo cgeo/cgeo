@@ -299,4 +299,11 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
         assertThat(GCParser.fullScaleImageUrl("http://imgcdn.geocaching.com/track/display/33cee358-f692-4f90-ace0-80c5a2c60a5c.jpg"))
                 .isEqualTo("http://imgcdn.geocaching.com/track/33cee358-f692-4f90-ace0-80c5a2c60a5c.jpg");
     }
+
+    public void testGetUsername() {
+        // Old style page
+        assertThat(GCParser.getUsername(MockedCache.readCachePage("GC2CJPF"))).isEqualTo("storc");
+        // New style page
+        assertThat(GCParser.getUsername(MockedCache.readCachePage("GC5BRQK"))).isEqualTo("kumy");
+    }
 }
