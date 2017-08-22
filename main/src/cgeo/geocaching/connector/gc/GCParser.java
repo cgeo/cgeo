@@ -2131,4 +2131,20 @@ public final class GCParser {
         }
         return 0;
     }
+
+    @Nullable
+    public static String getUsername(final String page) {
+        final Document document = Jsoup.parse(page);
+
+        // New website top bar
+        final String username = TextUtils.stripHtml(document.select("span.user-name").text());
+        if (StringUtils.isNotEmpty(username)) {
+            return username;
+        }
+
+        // Old style webpage fallback
+        final String usernameOld = TextUtils.stripHtml(document.select("span.li-user-info > span:first-child").text());
+
+        return StringUtils.isNotEmpty(usernameOld) ? usernameOld : null;
+    }
 }
