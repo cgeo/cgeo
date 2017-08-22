@@ -221,9 +221,10 @@ public class GCLogin extends AbstractLogin {
         setActualStatus(CgeoApplication.getInstance().getString(R.string.init_login_popup_ok));
 
         // on every page except login page
-        setActualLoginStatus(TextUtils.matches(page, GCConstants.PATTERN_LOGIN_NAME));
+        final String username = GCParser.getUsername(page);
+        setActualLoginStatus(StringUtils.isNotBlank(username));
         if (isActualLoginStatus()) {
-            setActualUserName(TextUtils.stripHtml(TextUtils.getMatch(page, GCConstants.PATTERN_LOGIN_NAME, true, "???")));
+            setActualUserName(username);
             int cachesCount = 0;
             try {
                 cachesCount = Integer.parseInt(removeDotAndComma(TextUtils.getMatch(page, GCConstants.PATTERN_CACHES_FOUND, true, "0")));
