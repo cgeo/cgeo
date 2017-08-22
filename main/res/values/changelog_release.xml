@@ -2,6 +2,11 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
+    <b>2017.08.22-RC (Beta):</b>\n
+    · Fix: Logging caches might fail due to website changes\n
+    · Fix: Username not shown on main screen login status\n
+    \n
+    \n
     <b>2017.07.24:</b>\n
     · New: Cache list menu restructured, see <a href="http://www.cgeo.org/faq#new-list-menu">FAQ</a> for details.\n
     · New: Use abbreviation for name of geocaching service on main screen\n
