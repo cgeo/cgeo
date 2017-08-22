@@ -208,7 +208,7 @@ public class GCLogin extends AbstractLogin {
      */
     boolean getLoginStatus(@Nullable final String page) {
         if (StringUtils.isBlank(page)) {
-            Log.e("Login.checkLogin: No page given");
+            Log.w("Login.checkLogin: No page given");
             return false;
         }
         assert page != null;
@@ -220,9 +220,10 @@ public class GCLogin extends AbstractLogin {
         setActualStatus(CgeoApplication.getInstance().getString(R.string.init_login_popup_ok));
 
         // on every page except login page
-        setActualLoginStatus(TextUtils.matches(page, GCConstants.PATTERN_LOGIN_NAME));
+        final String username = GCParser.getUsername(page);
+        setActualLoginStatus(StringUtils.isNotBlank(username));
         if (isActualLoginStatus()) {
-            setActualUserName(TextUtils.getMatch(page, GCConstants.PATTERN_LOGIN_NAME, true, "???"));
+            setActualUserName(username);
             int cachesCount = 0;
             try {
                 cachesCount = Integer.parseInt(removeDotAndComma(TextUtils.getMatch(page, GCConstants.PATTERN_CACHES_FOUND, true, "0")));
@@ -327,7 +328,8 @@ public class GCLogin extends AbstractLogin {
                 .map(new Function<Document, String>() {
                     @Override
                     public String apply(final Document document) {
-                        return document.select("input.search-coordinates").attr("value");
+                        final Document innerHtml = Jsoup.parse(document.getElementById("tplSearchCoords").html());
+                        return innerHtml.select("input.search-coordinates").attr("value");
                     }
                 });
     }
