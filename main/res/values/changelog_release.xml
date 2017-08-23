@@ -2,7 +2,7 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-    <b>2017.08.22-RC (Beta):</b>\n
+    <b>2017.08.23:</b>\n
     · Fix: Logging caches might fail due to website changes\n
     · Fix: Username not shown on main screen login status\n
     \n
