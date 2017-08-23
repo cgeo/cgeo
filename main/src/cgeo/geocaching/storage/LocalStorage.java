@@ -375,6 +375,7 @@ public final class LocalStorage {
         final File nomedia = new File(getGeocacheDataDirectory(), ".nomedia");
         if (!nomedia.exists()) {
             try {
+                FileUtils.mkdirs(nomedia.getParentFile());
                 nomedia.createNewFile();
             } catch (final IOException e) {
                 Log.w("Couldn't create the .nomedia file in " + getGeocacheDataDirectory(), e);
