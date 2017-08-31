@@ -6,7 +6,6 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.settings.Settings;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.v4.content.ContextCompat;
 import android.text.Editable;
