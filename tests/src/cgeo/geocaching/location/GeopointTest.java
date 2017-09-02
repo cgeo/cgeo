@@ -1,27 +1,31 @@
 package cgeo.geocaching.location;
 
+import static org.assertj.core.api.Assertions.fail;
 import static org.assertj.core.api.Assertions.offset;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
 import android.os.Build;
 
-import junit.framework.TestCase;
+import org.junit.Test;
 
-public class GeopointTest extends TestCase {
+public class GeopointTest {
 
-    public static void testCreation() {
+    @Test
+    public void testCreation() {
         final Geopoint gp = new Geopoint(48.2, 3.5);
         assertThat(gp.getLatitude()).isEqualTo(48.2, offset(1e-8));
         assertThat(gp.getLongitude()).isEqualTo(3.5, offset(1e-8));
     }
 
-    public static void testCreationWithParsing() {
+    @Test
+    public void testCreationWithParsing() {
         final Geopoint gp = new Geopoint("N 52° 25,111 E 009° 39,111");
         assertThat(gp.getLatitude()).isEqualTo(52.41852, offset(1e-4));
         assertThat(gp.getLongitude()).isEqualTo(9.65185, offset(1e-4));
     }
 
-    public static void testCreationAtLimit() {
+    @Test
+    public void testCreationAtLimit() {
         // No exception should be raised.
         final Geopoint gp1 = new Geopoint(90.0, 10.0);
         assertThat(gp1.getLatitude()).isEqualTo(90, offset(1e-8));
@@ -33,7 +37,8 @@ public class GeopointTest extends TestCase {
         assertThat(gp3.getLongitude()).isEqualTo(180, offset(1e-8));
     }
 
-    public static void testEqual() {
+    @Test
+    public void testEqual() {
         final Geopoint gp1 = new Geopoint(48.2, 2.31);
         //noinspection EqualsWithItself
         assertThat(gp1.equals(gp1)).isTrue();
@@ -41,7 +46,8 @@ public class GeopointTest extends TestCase {
         assertThat(gp1.equals(gp2)).isFalse();
     }
 
-    public static void testEqualExternal() {
+    @Test
+    public void testEqualExternal() {
         final Geopoint gp1 = new Geopoint(48.2, 2.31);
         assertThat(Geopoint.equals(gp1, gp1)).isTrue();
         final Geopoint gp2 = new Geopoint(48.3, 2.31);
@@ -51,13 +57,15 @@ public class GeopointTest extends TestCase {
         assertThat(Geopoint.equals(gp1, null)).isFalse();
     }
 
-    public static void testGetE6() {
+    @Test
+    public void testGetE6() {
         final Geopoint gp = new Geopoint(41.2, -3.4);
         assertThat((double) gp.getLatitudeE6()).isEqualTo(41200000.0, offset(1e-6));
         assertThat((double) gp.getLongitudeE6()).isEqualTo(-3400000.0, offset(1e-6));
     }
 
-    public static void testBearingDistance() {
+    @Test
+    public void testBearingDistance() {
         final Geopoint gp1 = new Geopoint(-30.4, -1.2);
         final Geopoint gp2 = new Geopoint(-30.1, -2.3);
 
@@ -78,7 +86,8 @@ public class GeopointTest extends TestCase {
         assertThat((double) gp2.bearingTo(gp1)).isEqualTo(107.715, offset(1e-3));
     }
 
-    public static void testDDD() {
+    @Test
+    public void testDDD() {
         // Maximum acceptable deviation for degrees is 1e-5 (fractional part is scaled up by 1e5)
 
         // case 1
@@ -146,7 +155,8 @@ public class GeopointTest extends TestCase {
         assertThat(gp1.getLongitude()).isEqualTo(gp2.getLongitude(), offset(tolerance));
     }
 
-    public static void testRaw() {
+    @Test
+    public void testRaw() {
         final Geopoint gp1 = new Geopoint(51.3d, 13.8d);
         assertThat(gp1.getLatMinRaw()).isEqualTo(18);
         assertThat(gp1.getLonMinRaw()).isEqualTo(48);
@@ -168,7 +178,8 @@ public class GeopointTest extends TestCase {
         assertThat(gp4.getLonMinRaw()).isEqualTo(0.0534, offset(1e-4));
     }
 
-    public static void testDMM() {
+    @Test
+    public void testDMM() {
         // Maximum acceptable deviation for degrees+minutes is 2e-5 (fractional part is scaled up by 1e3)
 
         // case 1
@@ -243,7 +254,8 @@ public class GeopointTest extends TestCase {
         assertThat(gp.getLonMinFrac()).isEqualTo(lonMinFrac);
     }
 
-    public static void testDMS() {
+    @Test
+    public void testDMS() {
         // case 1
         final Geopoint gp1 = new Geopoint(51.3d, 13.8d);
 
@@ -307,7 +319,8 @@ public class GeopointTest extends TestCase {
         }
     }
 
-    public static void testParseParam1() {
+    @Test
+    public void testParseParam1() {
         assertParseException(new Runnable() {
 
             @SuppressWarnings("unused")
@@ -318,7 +331,8 @@ public class GeopointTest extends TestCase {
         });
     }
 
-    public static void testParseParam2() {
+    @Test
+    public void testParseParam2() {
         assertParseException(new Runnable() {
 
             @SuppressWarnings("unused")
@@ -329,7 +343,8 @@ public class GeopointTest extends TestCase {
         });
     }
 
-    public static void testParseParam6() {
+    @Test
+    public void testParseParam6() {
         assertParseException(new Runnable() {
 
             @SuppressWarnings("unused")
@@ -340,7 +355,8 @@ public class GeopointTest extends TestCase {
         });
     }
 
-    public static void testParseParam8() {
+    @Test
+    public void testParseParam8() {
         assertParseException(new Runnable() {
 
             @SuppressWarnings("unused")
@@ -351,7 +367,8 @@ public class GeopointTest extends TestCase {
         });
     }
 
-    public static void testParseParam10() {
+    @Test
+    public void testParseParam10() {
         assertParseException(new Runnable() {
 
             @SuppressWarnings("unused")
@@ -362,7 +379,8 @@ public class GeopointTest extends TestCase {
         });
     }
 
-    public static void testValid() {
+    @Test
+    public void testValid() {
         assertThat(new Geopoint(0, 0).isValid()).isTrue();
         assertThat(new Geopoint(90, 0).isValid()).isTrue();
         assertThat(new Geopoint(91, 0).isValid()).isFalse();
@@ -374,7 +392,8 @@ public class GeopointTest extends TestCase {
         assertThat(new Geopoint(0, -181).isValid()).isFalse();
     }
 
-    public static void testRounded() {
+    @Test
+    public void testRounded() {
         final Geopoint gp = new Geopoint(1.234567, 0.123456);
         assertThat(gp.roundedAt(1)).isEqualTo(new Geopoint(1, 0));
         assertThat(gp.roundedAt(10)).isEqualTo(new Geopoint(1.2, 0.1));

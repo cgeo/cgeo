@@ -6,14 +6,15 @@ import cgeo.geocaching.sorting.GeocodeComparator;
 
 import android.support.annotation.NonNull;
 
+import org.junit.Test;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import junit.framework.TestCase;
+public class GeocodeComparatorTest {
 
-public class GeocodeComparatorTest extends TestCase {
-
+    @Test
     public void testSomething() {
         final List<Geocache> caches = new ArrayList<>();
         caches.add(createGeocache("GC1ABCD"));

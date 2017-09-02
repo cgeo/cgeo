@@ -1,6 +1,6 @@
 package cgeo.geocaching.utils;
 
-import junit.framework.TestCase;
+import org.junit.Test;
 
 import java.util.Calendar;
 
@@ -9,9 +9,10 @@ import cgeo.geocaching.enumerations.CacheType;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-public class CalendarUtilsTest extends TestCase {
+public class CalendarUtilsTest {
 
-    public static void testDaysSince() {
+    @Test
+    public void testDaysSince() {
         final Calendar start = Calendar.getInstance();
         for (int hour = 0; hour < 24; hour++) {
             start.set(Calendar.HOUR_OF_DAY, hour);
@@ -19,7 +20,8 @@ public class CalendarUtilsTest extends TestCase {
         }
     }
 
-    public static void testIsPastEvent() {
+    @Test
+    public void testIsPastEvent() {
         final Calendar start = Calendar.getInstance();
         start.set(Calendar.HOUR_OF_DAY, 0);
         start.set(Calendar.MINUTE, 10);
@@ -40,7 +42,8 @@ public class CalendarUtilsTest extends TestCase {
         assertThat(CalendarUtils.isPastEvent(cache)).isEqualTo(expectedPast);
     }
 
-    public static void testIsFuture() {
+    @Test
+    public void testIsFuture() {
         final Calendar date = Calendar.getInstance();
         assertThat(CalendarUtils.isFuture(date)).isFalse();
 

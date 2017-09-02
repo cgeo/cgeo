@@ -1,13 +1,16 @@
 package cgeo.geocaching.network;
 
+import org.junit.Test;
+
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-import junit.framework.TestCase;
+public class OAuthTest {
 
-public class OAuthTest extends TestCase {
-
-   // Test example from https://dev.twitter.com/oauth/overview/creating-signatures
-   public static void testOAuthSignature() {
+    /**
+     * Test example from https://dev.twitter.com/oauth/overview/creating-signatures
+     */
+   @Test
+   public void testOAuthSignature() {
        final Parameters params = new Parameters(
                "status", "Hello Ladies + Gentlemen, a signed OAuth request!",
                "include_entities", "true",

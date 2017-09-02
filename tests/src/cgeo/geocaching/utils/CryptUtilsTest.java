@@ -1,13 +1,14 @@
 package cgeo.geocaching.utils;
 
-import junit.framework.TestCase;
+import org.junit.Test;
 
 import cgeo.geocaching.connector.gc.GCConstants;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-public class CryptUtilsTest extends TestCase {
-    public static void testROT13() {
+public class CryptUtilsTest {
+    @Test
+    public void testROT13() {
         assertThat(CryptUtils.rot13("")).isEqualTo("");
         assertThat(CryptUtils.rot13((String) null)).isEqualTo("");
         assertThat(CryptUtils.rot13("Cache hint")).isEqualTo("Pnpur uvag");
@@ -16,17 +17,20 @@ public class CryptUtilsTest extends TestCase {
         assertThat(CryptUtils.rot13("123")).isEqualTo("123");
     }
 
-    public static void testConvertToGcBase31() {
+    @Test
+    public void testConvertToGcBase31() {
         assertThat(GCConstants.gccodeToGCId("GC1PKK9")).isEqualTo(1186660);
         assertThat(GCConstants.gccodeToGCId("GC1234")).isEqualTo(4660);
         assertThat(GCConstants.gccodeToGCId("GCF123")).isEqualTo(61731);
     }
 
-    public static void testIssue1902() {
+    @Test
+    public void testIssue1902() {
         assertThat(CryptUtils.rot13("ƖƖyƖƖƖƖ")).isEqualTo("ƖƖlƖƖƖƖ");
     }
 
-    public static void testMd5() {
+    @Test
+    public void testMd5() {
         assertThat(CryptUtils.md5("")).isEqualTo("d41d8cd98f00b204e9800998ecf8427e");
         // expected value taken from debugger. should assure every developer uses UTF-8
         assertThat(CryptUtils.md5("äöü")).isEqualTo("a7f4e3ec08f09be2ef7ecb4eea5f8981");

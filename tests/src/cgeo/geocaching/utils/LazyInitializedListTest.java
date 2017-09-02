@@ -1,13 +1,13 @@
 package cgeo.geocaching.utils;
 
+import org.junit.Test;
+
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import junit.framework.TestCase;
-
-public class LazyInitializedListTest extends TestCase {
+public class LazyInitializedListTest {
 
     private static final class MockedLazyInitializedList extends LazyInitializedList<String> {
         @Override
@@ -16,7 +16,8 @@ public class LazyInitializedListTest extends TestCase {
         }
     }
 
-    public static void testAccess() {
+    @Test
+    public void testAccess() {
         final LazyInitializedList<String> list = new MockedLazyInitializedList();
         assertThat(list).isEmpty();
         list.add("Test");
