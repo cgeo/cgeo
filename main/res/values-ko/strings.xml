@@ -1409,7 +1409,7 @@
   <string name="cgeo_shortcut">c:geo 바로가기</string>
   <string name="create_shortcut">바로가기 만들기</string>
   <string name="send">보내기</string>
-  <string name="confirm_log_title">특이한 로그 유형</string>
+  <string name="confirm_log_title">특별 로그 유형</string>
   <string name="confirm_log_message">정말 \'%s\'를 로그하시겠습니까?</string>
   <!-- Geokrety -->
   <string name="settings_activate_geokrety">활성화</string>

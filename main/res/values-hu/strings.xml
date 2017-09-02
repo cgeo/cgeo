@@ -883,7 +883,7 @@
   <string name="cache_coordinates">Koordináták</string>
   <string name="cache_coordinates_original">Eredeti koordináták</string>
   <string name="cache_spoiler_images_title">Spoiler képek</string>
-  <string name="cache_log_types">Bejegyzés típusok</string>
+  <string name="cache_log_types">Bejegyzéstípusok</string>
   <string name="cache_coordinates_no">Ennek a ládának nincsenek koordinátái.</string>
   <string name="cache_clear_history">Előzmények törlése</string>
   <string name="cache_remove_from_history">Törlés az előzményekből</string>
@@ -1443,7 +1443,7 @@
   <string name="cgeo_shortcut">c:geo parancsikon</string>
   <string name="create_shortcut">Parancsikon létrehozása</string>
   <string name="send">Küldés</string>
-  <string name="confirm_log_title">Különleges logtípus</string>
+  <string name="confirm_log_title">Speciális bejegyzéstípus</string>
   <string name="confirm_log_message">Logod a következő: \'%s\'. Biztosan ezt akarod?</string>
   <!-- Geokrety -->
   <string name="settings_activate_geokrety">Aktiválás</string>

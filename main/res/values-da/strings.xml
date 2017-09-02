@@ -591,6 +591,7 @@
   <string name="init_debug_note">c:geo kan generere en stor mængde fejlfindingsoplysninger. Aktivering af denne indstilling vil påvirke stabiliteten af c:geo og kan kun anbefales, hvis du bliver bedt om at sende en fejlfindingslog til udviklerne. Denne indstilling bør være deaktiveret under normal brug af c:geo!</string>
   <string name="init_debug">Aktivér fejlfindingslogning</string>
   <string name="init_dbonsdcard_title">Databaseplacering</string>
+  <string name="init_dbonsdcard">På brugerlager</string>
   <string name="init_dbmove_dbmove">Flytter database</string>
   <string name="init_dbmove_running">Flytter database</string>
   <string name="init_dbmove_success">Databasen blev flyttet.</string>
@@ -1437,7 +1438,7 @@
   <string name="cgeo_shortcut">c:geo genvej</string>
   <string name="create_shortcut">Opret genvej</string>
   <string name="send">Send</string>
-  <string name="confirm_log_title">Usædvanlig logtype</string>
+  <string name="confirm_log_title">Særlig logtype</string>
   <string name="confirm_log_message">Du er ved at logge \"%s\". Er du sikker?</string>
   <!-- Geokrety -->
   <string name="settings_activate_geokrety">Aktivér</string>
@@ -1498,6 +1499,10 @@
   <string name="cache_list_remove_from">Fjern fra liste</string>
   <string name="list_list_headline">Lister:</string>
   <string name="cache_store_list">Gem i liste</string>
+  <plurals name="extract_waypoints_result">
+    <item quantity="one">%d waypoint udtrukket</item>
+    <item quantity="other">%d waypoints udtrukket</item>
+  </plurals>
   <!-- calendar adder -->
   <string name="event_fail">Kunne ikke tilføje eventcachen til kalenderen</string>
   <string name="init_low_disk_space">Datalageret er næsten fyldt</string>
