@@ -1443,7 +1443,7 @@
   <string name="cgeo_shortcut">c:geo Shortcut</string>
   <string name="create_shortcut">Shortcut erstellen</string>
   <string name="send">Senden</string>
-  <string name="confirm_log_title">Ungewöhnlicher Log-Typ</string>
+  <string name="confirm_log_title">Spezieller Log Typ</string>
   <string name="confirm_log_message">Du möchtest „%s“ loggen. Bist du dir sicher?</string>
   <!-- Geokrety -->
   <string name="settings_activate_geokrety">Aktivieren</string>

@@ -92,6 +92,7 @@
   <string name="log_posting_twitter">Caricamento tweet…</string>
   <string name="log_posting_gcvote">Caricamento GCVote…</string>
   <string name="log_posting_image">Caricamento immagine…</string>
+  <string name="log_posting_generic_trackable">Sto pubblicando %1$s %2$d/%3$d</string>
   <string name="log_clear">Azzera</string>
   <string name="log_post_not_possible">Download dei dati in corso…\nRiprovare tra alcuni secondi o controllare la connessione a internet.</string>
   <string name="log_post_geocode_missing">Geocode mancante…</string>
@@ -314,6 +315,10 @@
   <string name="caches_nearby">Qui vicino</string>
   <string name="caches_manage">Gestisci</string>
   <string name="caches_remove_all">Elimina tutti</string>
+  <plurals name="caches_remove_all_confirm">
+    <item quantity="one">Vuoi rimuovere questo cache da questa lista?</item>
+    <item quantity="other">Vuoi rimuovere tutti i %d cache da questa lista?</item>
+  </plurals>
   <string name="caches_remove_selected">Elimina selezionati</string>
   <plurals name="caches_remove_selected_confirm">
     <item quantity="one">Si desidera rimuovere questo cache dal tuo dispositivo?</item>
@@ -358,6 +363,7 @@
   <string name="caches_make_list_unique">Marca la lista come unica</string>
   <string name="caches_filter_missing_gcvote">Trovati cache non votati</string>
   <!-- caches lists -->
+  <string name="menu_lists">Gestisci liste</string>
   <string name="list_menu_create">Crea nuova lista</string>
   <string name="list_menu_drop">Elimina la lista corrente</string>
   <string name="list_menu_rename">Rinomina la lista corrente</string>
@@ -417,6 +423,7 @@
   <string name="calculate_dataDir_title">Dati Geocache usati</string>
   <string name="calculate_dataDir">Calcola lo spazio disco usato dai Geocache</string>
   <string name="settings_data_dir_item">%1$s (%2$s liberi)</string>
+  <string name="confirm_data_dir_move_title">Vuoi spostare la directory geocache?</string>
   <string name="confirm_data_dir_move">Lo spostamento dei dati geocache potrebbe richiedere molto tempo, a seconda del dispositivo e la quantità di dati.</string>
   <string name="settings_title_basicmembers">Opzioni per i membri di base (non Premium)</string>
   <string name="settings_title_navigation">Navigazione</string>
@@ -819,6 +826,7 @@
   <string name="cache_menu_spoilers">Immagini spoiler</string>
   <string name="cache_menu_around">Cache qui intorno</string>
   <string name="around">Nei dintorni di %s</string>
+  <string name="menu_caches">Gestisci i cache</string>
   <string name="cache_menu_event">Aggiungi al calendario</string>
   <string name="cache_menu_extract_waypoints">Estrazione dei waypoint</string>
   <string name="cache_menu_details">Dettagli</string>
@@ -1427,7 +1435,7 @@
   <string name="cgeo_shortcut">collegamento a c:geo</string>
   <string name="create_shortcut">Crea collegamento</string>
   <string name="send">Invia</string>
-  <string name="confirm_log_title">Tipo di Log non usuale</string>
+  <string name="confirm_log_title">Tipo di log speciale</string>
   <string name="confirm_log_message">Si desidera registrare \'%s\'. Sei sicuro?</string>
   <!-- Geokrety -->
   <string name="settings_activate_geokrety">Attiva</string>
@@ -1466,6 +1474,10 @@
   <string name="command_rename_list_result">Lista rinominata</string>
   <string name="command_delete_list_result">Lista eliminata</string>
   <string name="command_unique_list_result">Cache eliminati da altri elenchi</string>
+  <plurals name="fav_points_remaining">
+    <item quantity="one">Aggiungi questo cache ai preferiti (%d restanti)</item>
+    <item quantity="other">Aggiungi questo cache ai preferiti (%d restanti)</item>
+  </plurals>
   <!-- distance units -->
   <string name="unit_m">m</string>
   <string name="unit_km">km</string>
@@ -1490,4 +1502,8 @@
   </plurals>
   <!-- calendar adder -->
   <string name="event_fail">Impossibile aggiungere l\'evento al calendario</string>
+  <string name="init_low_disk_space">Sto esaurendo lo spazio su disco</string>
+  <string name="init_low_disk_space_message">La directory dei dati geocache sta esaurendo lo spazio su disco. Questo può causare malfunzionamenti di c:geo. Si prega di liberare spazio.</string>
+  <string name="init_confirm_debug">c:geo è in esecuzione in modalità di debug!</string>
+  <string name="list_confirm_debug_message">La modalità di debug può causare instabilità! Vuoi tornare alla modalità normale?</string>
 </resources>
