@@ -1,22 +1,25 @@
 package cgeo.geocaching.connector.trackable;
 
+import org.junit.Test;
+
+import static org.assertj.core.api.Assertions.fail;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
 import cgeo.geocaching.models.Trackable;
 
-import junit.framework.TestCase;
-
-public class UnknownTrackableConnectorTest extends TestCase {
+public class UnknownTrackableConnectorTest {
 
     private static UnknownTrackableConnector getConnector() {
         return new UnknownTrackableConnector();
     }
 
-    public static void testCanHandleTrackable() throws Exception {
+    @Test
+    public void testCanHandleTrackable() throws Exception {
         assertThat(getConnector().canHandleTrackable("TB1234")).isFalse();
     }
 
-    public static void testGetUrl() throws Exception {
+    @Test
+    public void testGetUrl() throws Exception {
         try {
             getConnector().getUrl(new Trackable());
             fail("IllegalStateException expected");
@@ -25,23 +28,28 @@ public class UnknownTrackableConnectorTest extends TestCase {
         }
     }
 
-    public static void testSearchTrackable() throws Exception {
+    @Test
+    public void testSearchTrackable() throws Exception {
         assertThat(getConnector().searchTrackable("TB1234", null, null)).isNull();
     }
 
-    public static void testIsLoggable() throws Exception {
+    @Test
+    public void testIsLoggable() throws Exception {
         assertThat(getConnector().isLoggable()).isFalse();
     }
 
-    public static void testGetTrackableCodeFromUrl() throws Exception {
+    @Test
+    public void testGetTrackableCodeFromUrl() throws Exception {
         assertThat(getConnector().getTrackableCodeFromUrl("http://www.sometrackable.com/1234")).isNull();
     }
 
-    public static void testGetUserActions() throws Exception {
+    @Test
+    public void testGetUserActions() throws Exception {
         assertThat(getConnector().getUserActions()).isEmpty();
     }
 
-    public static void testRecommendGeocode() throws Exception {
+    @Test
+    public void testRecommendGeocode() throws Exception {
         assertThat(getConnector().recommendLogWithGeocode()).isFalse();
     }
 

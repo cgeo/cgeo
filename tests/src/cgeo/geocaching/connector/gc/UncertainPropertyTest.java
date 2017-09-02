@@ -1,17 +1,20 @@
 package cgeo.geocaching.connector.gc;
 
+import org.junit.Test;
+
 import static org.assertj.core.api.Java6Assertions.assertThat;
-import junit.framework.TestCase;
 
-public class UncertainPropertyTest extends TestCase {
+public class UncertainPropertyTest {
 
-    public static void testHigherCertaintyWins() {
+    @Test
+    public void testHigherCertaintyWins() {
         final UncertainProperty<String> prop1 = new UncertainProperty<>("prop1", 10);
         final UncertainProperty<String> prop2 = new UncertainProperty<>("prop2", 20);
         assertThat(UncertainProperty.getMergedProperty(prop1, prop2)).isEqualTo(prop2);
     }
 
-    public static void testAvoidNull() {
+    @Test
+    public void testAvoidNull() {
         final UncertainProperty<String> prop1 = new UncertainProperty<>("prop1", 10);
         final UncertainProperty<String> prop2 = new UncertainProperty<>(null, 20);
         assertThat(UncertainProperty.getMergedProperty(prop1, prop2)).isEqualTo(prop1);
@@ -23,7 +26,8 @@ public class UncertainPropertyTest extends TestCase {
         assertThat(UncertainProperty.getMergedProperty(null, null)).isEqualTo(null);
     }
 
-    public static void testEquals() {
+    @Test
+    public void testEquals() {
         final UncertainProperty<String> prop1 = new UncertainProperty<>("prop1", 10);
         final UncertainProperty<String> prop2 = new UncertainProperty<>(null, 20);
         assertThat(UncertainProperty.equalValues(null, null)).isTrue();

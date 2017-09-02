@@ -1,12 +1,13 @@
 package cgeo.geocaching.models;
 
-import junit.framework.TestCase;
+import org.junit.Test;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-public class PersonalNoteTest extends TestCase {
+public class PersonalNoteTest {
 
-    public static void testParse() {
+    @Test
+    public void testParse() {
         final String testString = "Simple cgeo note\n--\nSimple provider note";
         final Geocache cache = new Geocache();
         cache.setPersonalNote(testString);
@@ -16,7 +17,8 @@ public class PersonalNoteTest extends TestCase {
 
     }
 
-    public static void testParseProviderOnly() {
+    @Test
+    public void testParseProviderOnly() {
         final String testString = "Simple provider note";
         final Geocache cache = new Geocache();
         cache.setPersonalNote(testString);
@@ -25,7 +27,8 @@ public class PersonalNoteTest extends TestCase {
         assertPersonalNote(parsedNote, null, "Simple provider note");
     }
 
-    public static void testParseCgeoOnly() {
+    @Test
+    public void testParseCgeoOnly() {
         final String testString = "Simple cgeo note";
         final Geocache cache = new Geocache();
         cache.setPersonalNote(testString);

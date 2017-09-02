@@ -2,15 +2,17 @@ package cgeo.geocaching.connector.gc;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-import junit.framework.TestCase;
+import org.junit.Test;
 
-public class UTFGridPositionTest extends TestCase {
+public class UTFGridPositionTest {
 
-    public static void testValidUTFGridPosition() {
+    @Test
+    public void testValidUTFGridPosition() {
         assertThat(new UTFGridPosition(0, 0)).isNotNull();
     }
 
-    public static void testInvalidUTFGridPosition() {
+    @Test
+    public void testInvalidUTFGridPosition() {
         boolean valid = true;
         try {
             assertThat(new UTFGridPosition(-1, 0)).isNotNull();
@@ -20,7 +22,8 @@ public class UTFGridPositionTest extends TestCase {
         assertThat(valid).isFalse();
     }
 
-    public static void testFromString() throws Exception {
+    @Test
+    public void testFromString() throws Exception {
         assertXYFromString("(1, 2)", 1, 2);
         assertXYFromString("(12, 34)", 12, 34);
         assertXYFromString("(34,56)", 34, 56);
