@@ -170,7 +170,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         }
     }
 
-    private class InputCancelListener implements View.OnClickListener {
+    private class CalculateCancelListener implements View.OnClickListener {
         @Override
         public void onClick(final View v) {
             close();
@@ -343,12 +343,12 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         } else {
             final TextView title = ButterKnife.findById(v, R.id.dialog_title_title);
             if (title != null) {
-                title.setText(R.string.cache_coordinates);
+                title.setText(R.string.cache_calculator);
                 title.setVisibility(View.VISIBLE);
             }
             final ImageButton cancel = ButterKnife.findById(v, R.id.dialog_title_cancel);
             if (cancel != null) {
-                cancel.setOnClickListener(new InputCancelListener());
+                cancel.setOnClickListener(new CalculateCancelListener());
                 cancel.setVisibility(View.VISIBLE);
             }
             final ImageButton done = ButterKnife.findById(v, R.id.dialog_title_done);
