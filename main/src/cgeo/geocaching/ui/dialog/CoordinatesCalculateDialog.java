@@ -1038,8 +1038,11 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
                                                    final TextWatcher textWatcher) {
         final List<CalculatorVariable> returnList = new ArrayList<>();
 
-        for (int i = 0; i < variableNames.length(); i++) {
-            final char ch = variableNames.charAt(i);
+        char[] sortedVariables = variableNames.toCharArray();
+        Arrays.sort(sortedVariables);
+
+        for (int i = 0; i < sortedVariables.length; i++) {
+            final char ch = sortedVariables[i];
 
             if (range.check(ch)) {
                 if (getVariable(ch, returnList, false) != null) {
