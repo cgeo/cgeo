@@ -174,12 +174,21 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     private static final int MESSAGE_SUCCEEDED = 1;
 
     private static final Pattern[] DARK_COLOR_PATTERNS = {
+            // html attributes
             Pattern.compile("((?<!bg)color)=\"#" + "(0[0-9]){3}" + "\"", Pattern.CASE_INSENSITIVE),
             Pattern.compile("((?<!bg)color)=\"" + "black" + "\"", Pattern.CASE_INSENSITIVE),
-            Pattern.compile("((?<!bg)color)=\"#" + "000080" + "\"", Pattern.CASE_INSENSITIVE) };
+            Pattern.compile("((?<!bg)color)=\"#" + "000080" + "\"", Pattern.CASE_INSENSITIVE),
+            // styles
+            Pattern.compile("((?<!background-)color):#" + "(0[0-9]){3}" + "(;|\")", Pattern.CASE_INSENSITIVE),
+            Pattern.compile("((?<!background-)color):" + "black" + "(;|\")", Pattern.CASE_INSENSITIVE),
+            Pattern.compile("((?<!background-)color):#" + "000080" + "(;|\")", Pattern.CASE_INSENSITIVE) };
     private static final Pattern[] LIGHT_COLOR_PATTERNS = {
+            // html attributes
             Pattern.compile("((?<!bg)color)=\"#" + "([F][6-9A-F]){3}" + "\"", Pattern.CASE_INSENSITIVE),
-            Pattern.compile("((?<!bg)color)=\"" + "white" + "\"", Pattern.CASE_INSENSITIVE) };
+            Pattern.compile("((?<!bg)color)=\"" + "white" + "\"", Pattern.CASE_INSENSITIVE),
+            // styles
+            Pattern.compile("((?<!background-)color):#" + "([F][6-9A-F]){3}" + "(;|\")", Pattern.CASE_INSENSITIVE),
+            Pattern.compile("((?<!background-)color):" + "white" + "(;|\")", Pattern.CASE_INSENSITIVE) };
     public static final String STATE_PAGE_INDEX = "cgeo.geocaching.pageIndex";
 
     // Store Geocode here, as 'cache' is loaded Async.
