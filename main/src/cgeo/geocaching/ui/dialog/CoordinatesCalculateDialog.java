@@ -21,6 +21,7 @@ import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v4.BuildConfig;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayout;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -543,6 +544,9 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         final String lat = getLatResult();
         final String lon = getLonResult();
 
+        if (lat.contains("_") || lat.contains("*") || lon.contains("_") || lon.contains("*"))
+            return false;
+
         final String delimiters = "[ °'\"\\.]+";
         final String[] latTokens = lat.split(delimiters);
         final String[] lonTokens = lon.split(delimiters);
@@ -905,8 +909,52 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
     }
 
     private void updateResult() {
-        tLatResult.setText(getLatResult());
-        tLonResult.setText(getLonResult());
+        String lat, lon;
+
+        final boolean lightSkin = Settings.isLightSkin();
+        final int validColour = ContextCompat.getColor(getContext(), lightSkin ? R.color.text_light : R.color.text_dark);
+        final int invalidColour = ContextCompat.getColor(getContext(), lightSkin ? R.color.text_hint_light : R.color.text_hint_dark);
+        int resultColour;
+
+        if (areCurrentCoordinatesValid())
+        {
+            resultColour = validColour;
+
+            switch (currentFormat)
+            {
+                case Deg:
+                    lat = gp.format(GeopointFormatter.Format.LAT_DECDEGREE);
+                    lon = gp.format(GeopointFormatter.Format.LON_DECDEGREE);
+                    break;
+
+                case Min:
+                case Plain:
+                    lat = gp.format(GeopointFormatter.Format.LAT_DECMINUTE);
+                    lon = gp.format(GeopointFormatter.Format.LON_DECMINUTE);
+                    break;
+
+                case Sec:
+                    lat = gp.format(GeopointFormatter.Format.LAT_DECMINSEC);
+                    lon = gp.format(GeopointFormatter.Format.LON_DECMINSEC);
+                    break;
+
+                default:
+                    lat = getLatResult();
+                    lon = getLonResult();
+                    break;
+            }
+        }
+        else
+        {
+            resultColour = invalidColour;
+            lat = getLatResult();
+            lon = getLonResult();
+        }
+
+        tLatResult.setText(lat);
+        tLonResult.setText(lon);
+        tLatResult.setTextColor(resultColour);
+        tLonResult.setTextColor(resultColour);
     }
 
     private void setFormat() {
