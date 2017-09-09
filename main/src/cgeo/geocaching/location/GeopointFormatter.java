@@ -108,7 +108,7 @@ public class GeopointFormatter {
             }
 
             case LAT_DECDEGREE:
-                return String.format((Locale) null, "%c %.5f°", gp.getLatDir(), latSigned);
+                return String.format((Locale) null, "%c %.5f°", gp.getLatDir(), Math.abs(latSigned));
 
             case LAT_DECDEGREE_RAW:
                 return String.format((Locale) null, "%.6f", latSigned);
@@ -129,7 +129,7 @@ public class GeopointFormatter {
             }
 
             case LON_DECDEGREE:
-                return String.format((Locale) null, "%c %.5f°", gp.getLonDir(), lonSigned);
+                return String.format((Locale) null, "%c %.5f°", gp.getLonDir(), Math.abs(lonSigned));
 
             case LON_DECDEGREE_RAW:
                 return String.format((Locale) null, "%.6f", lonSigned);
