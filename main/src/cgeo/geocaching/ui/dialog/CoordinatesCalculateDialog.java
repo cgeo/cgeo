@@ -552,8 +552,9 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         final String lat = getLatResult();
         final String lon = getLonResult();
 
-        if (lat.contains("_") || lat.contains("*") || lon.contains("_") || lon.contains("*"))
+        if (lat.contains("_") || lat.contains("*") || lon.contains("_") || lon.contains("*")) {
             return false;
+        }
 
         final String delimiters = "[ °'\"\\.]+";
         final String[] latTokens = lat.split(delimiters);
@@ -591,8 +592,9 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         this.savedState = savedState;
         stateSaved = true;
 
-        if (doneButton != null)
+        if (doneButton != null) {
             doneButton.setImageResource(stateSaved ? R.drawable.ic_menu_saved : R.drawable.ic_menu_save);
+        }
     }
 
     private void loadCalcState() {
@@ -743,7 +745,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
      *
      * @param values The string of values to be formatted.
      */
-    private String format(final String values, int degDigits) {
+    private String format(final String values, final int degDigits) {
         final String returnValue;
 
         switch (currentFormat) {
@@ -752,21 +754,21 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
                 break;
 
             case Sec:
-                returnValue = " " + values.substring(0,  degDigits)   + SYMBOL_DEG
-                   + " " + values.substring(degDigits,   degDigits+2) + SYMBOL_MIN
-                   + " " + values.substring(degDigits+2, degDigits+4) + SYMBOL_POINT
-                         + values.substring(degDigits+4)              + SYMBOL_SEC;
+                returnValue = " " + values.substring(0, degDigits) + SYMBOL_DEG
+                            + " " + values.substring(degDigits, degDigits + 2) + SYMBOL_MIN
+                            + " " + values.substring(degDigits + 2, degDigits + 4) + SYMBOL_POINT
+                                  + values.substring(degDigits + 4) + SYMBOL_SEC;
                 break;
 
             case Min:
-                returnValue = " " + values.substring(0, degDigits)   + SYMBOL_DEG
-                   + " " + values.substring(degDigits,  degDigits+2) + SYMBOL_POINT
-                         + values.substring(degDigits+2)             + SYMBOL_MIN;
+                returnValue = " " + values.substring(0, degDigits) + SYMBOL_DEG
+                            + " " + values.substring(degDigits, degDigits + 2) + SYMBOL_POINT
+                                  + values.substring(degDigits + 2) + SYMBOL_MIN;
                 break;
 
             case Deg:
                 returnValue = " " + values.substring(0, degDigits) + SYMBOL_POINT
-                         + values.substring(degDigits)             + SYMBOL_DEG;
+                                  + values.substring(degDigits) + SYMBOL_DEG;
                 break;
 
             default:
@@ -826,7 +828,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
      * @param buttons List of button from which to extract the values
      * @return Button values as a string
      */
-    private String getValues(final List<CalculateButton> buttons, int degDigits) {
+    private String getValues(final List<CalculateButton> buttons, final int degDigits) {
         String returnValue = "";
         for (final EditButton button : buttons) {
             // Remove inactive and blank digits from result
@@ -920,21 +922,20 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
     }
 
     private void updateResult() {
-        String lat, lon;
+        final String lat;
+        final String lon;
 
         final boolean lightSkin = Settings.isLightSkin();
         final int validColour = ContextCompat.getColor(getContext(), lightSkin ? R.color.text_light : R.color.text_dark);
         final int invalidColour = ContextCompat.getColor(getContext(), lightSkin ? R.color.text_hint_light : R.color.text_hint_dark);
-        int resultColour;
-        int doneIcon;
+        final int resultColour;
+        final int doneIcon;
 
-        if (areCurrentCoordinatesValid())
-        {
+        if (areCurrentCoordinatesValid()) {
             resultColour = validColour;
             doneIcon = R.drawable.ic_menu_done_holo_dark;
 
-            switch (currentFormat)
-            {
+            switch (currentFormat) {
                 case Deg:
                     lat = gp.format(GeopointFormatter.Format.LAT_DECDEGREE);
                     lon = gp.format(GeopointFormatter.Format.LON_DECDEGREE);
@@ -956,9 +957,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
                     lon = getLonResult();
                     break;
             }
-        }
-        else
-        {
+        } else {
             resultColour = invalidColour;
             doneIcon = stateSaved ? R.drawable.ic_menu_saved : R.drawable.ic_menu_save;
 
@@ -1102,7 +1101,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
                                                    final TextWatcher textWatcher) {
         final List<CalculatorVariable> returnList = new ArrayList<>();
 
-        char[] sortedVariables = variableNames.toCharArray();
+        final char[] sortedVariables = variableNames.toCharArray();
         Arrays.sort(sortedVariables);
 
         for (int i = 0; i < sortedVariables.length; i++) {
