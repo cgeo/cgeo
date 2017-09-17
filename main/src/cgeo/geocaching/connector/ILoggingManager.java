@@ -40,4 +40,9 @@ public interface ILoggingManager {
     void init();
 
     int getPremFavoritePoints();
+
+    Long getMaxImageUploadSize();
+
+    Long getMaxImagePixels();
+
 }

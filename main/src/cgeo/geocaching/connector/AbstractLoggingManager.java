@@ -24,4 +24,15 @@ public abstract class AbstractLoggingManager implements ILoggingManager {
     public int getPremFavoritePoints() {
         return 0;
     }
+
+    @Override
+    public Long getMaxImageUploadSize() {
+        return null;
+    }
+
+    @Override
+    public Long getMaxImagePixels() {
+        return null;
+    }
+
 }
