@@ -1602,5 +1602,6 @@
     <string name="equation_error_result">*</string>
     <string name="lat_point_min_format">N DDD° MM.PPP</string>
     <string name="lon_point_min_format">E DDD° MM.PPP</string>
+    <string name="err_select_logimage_upload_size">Image too big, please select a smaler scale.</string>
 
 </resources>

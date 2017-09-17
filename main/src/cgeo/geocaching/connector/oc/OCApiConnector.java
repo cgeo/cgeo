@@ -19,6 +19,19 @@ import org.apache.commons.lang3.StringUtils;
 
 public class OCApiConnector extends OCConnector implements ISearchByGeocode {
 
+    private final String cK;
+    private final ApiSupport apiSupport;
+    private final String licenseString;
+    private OkapiClient.InstallationInformation installationInformation;
+
+    public void setInstallationInformation(final OkapiClient.InstallationInformation installationInformation) {
+        this.installationInformation = installationInformation;
+    }
+
+    public OkapiClient.InstallationInformation getInstallationInformation() {
+        return installationInformation;
+    }
+
     // Levels of Okapi we support
     // oldapi is around rev 500
     // current is from rev 798 onwards
@@ -33,10 +46,6 @@ public class OCApiConnector extends OCConnector implements ISearchByGeocode {
         Level1,
         Level3
     }
-
-    private final String cK;
-    private final ApiSupport apiSupport;
-    private final String licenseString;
 
     public OCApiConnector(@NonNull final String name, @NonNull final String host, final boolean https, final String prefix, final String cK, final String licenseString, final ApiSupport apiSupport, @NonNull final String abbreviation) {
         super(name, host, https, prefix, abbreviation);
@@ -125,6 +134,11 @@ public class OCApiConnector extends OCConnector implements ISearchByGeocode {
         }
 
         return super.getGeocodeFromUrl(url);
+    }
+
+    @Override
+    public boolean supportsLogImages() {
+        return true;
     }
 
     /**
