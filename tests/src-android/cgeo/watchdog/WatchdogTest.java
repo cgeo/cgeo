@@ -76,11 +76,6 @@ public class WatchdogTest extends CGeoTestCase {
             return;
         }
 
-        // temporarily disable extremcaching.com
-        if (connectorName.equalsIgnoreCase("geocaching website extremcaching.com")) {
-            return;
-        }
-
         final String page = Network.getResponseData(Network.getRequest(url));
         assertThat(page).overridingErrorMessage("Failed to get response from " + connectorName).isNotEmpty();
     }
