@@ -685,7 +685,7 @@ final class OkapiClient {
         final String latitude = StringUtils.substringBefore(location, SEPARATOR_STRING);
         final String longitude = StringUtils.substringAfter(location, SEPARATOR_STRING);
         if (StringUtils.isNotBlank(latitude) && StringUtils.isNotBlank(longitude)) {
-            return new Geopoint(latitude, longitude);
+            return new Geopoint(Double.parseDouble(latitude), Double.parseDouble(longitude));
         }
 
         return null;
@@ -718,7 +718,7 @@ final class OkapiClient {
     private static void setLocation(@NonNull final Geocache cache, final String location) {
         final String latitude = StringUtils.substringBefore(location, SEPARATOR_STRING);
         final String longitude = StringUtils.substringAfter(location, SEPARATOR_STRING);
-        cache.setCoords(new Geopoint(latitude, longitude));
+        cache.setCoords(new Geopoint(Double.parseDouble(latitude), Double.parseDouble(longitude)));
     }
 
     @NonNull

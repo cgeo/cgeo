@@ -19,6 +19,7 @@
     · Fix: TLS v1.2 Support for Android 4.1 - 4.4 devices\n
     · Fix: Improve sort of events\n
     · Fix: Raise personal note character limit\n
+    · Fix: Avoid failure when parsing OC coordinates\n
     \n
     \n
 </string>
