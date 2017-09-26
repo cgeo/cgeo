@@ -74,12 +74,12 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         final ImportGpxFileThread importThread = new ImportGpxFileThread(gc31j2h, listId, importStepHandler, progressHandler);
         runImportThread(importThread);
 
-        assertThat(importStepHandler.messages).hasSize(4);
         final Iterator<Message> iMsg = importStepHandler.messages.iterator();
         assertThat(iMsg.next().what).isEqualTo(GPXImporter.IMPORT_STEP_START);
         assertThat(iMsg.next().what).isEqualTo(GPXImporter.IMPORT_STEP_READ_FILE);
         assertThat(iMsg.next().what).isEqualTo(GPXImporter.IMPORT_STEP_STORE_STATIC_MAPS);
         assertThat(iMsg.next().what).isEqualTo(GPXImporter.IMPORT_STEP_FINISHED);
+        assertThat(iMsg.hasNext()).isFalse();
         final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
         assert cache != null;
         assertThat(cache).isNotNull();
@@ -97,12 +97,12 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         final ImportGpxFileThread importThread = new ImportGpxFileThread(ocddd2, listId, importStepHandler, progressHandler);
         runImportThread(importThread);
 
-        assertThat(importStepHandler.messages).hasSize(4);
         final Iterator<Message> iMsg = importStepHandler.messages.iterator();
         assertThat(iMsg.next().what).isEqualTo(GPXImporter.IMPORT_STEP_START);
         assertThat(iMsg.next().what).isEqualTo(GPXImporter.IMPORT_STEP_READ_FILE);
         assertThat(iMsg.next().what).isEqualTo(GPXImporter.IMPORT_STEP_STORE_STATIC_MAPS);
         assertThat(iMsg.next().what).isEqualTo(GPXImporter.IMPORT_STEP_FINISHED);
+        assertThat(iMsg.hasNext()).isFalse();
         final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
         assert cache != null;
         assertThat(cache).isNotNull();
