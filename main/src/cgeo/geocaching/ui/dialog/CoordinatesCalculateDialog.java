@@ -1081,10 +1081,9 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         if (currentFormat == Settings.CoordInputFormatEnum.Plain) {
             final String lat = ePlainLat.getText().toString();
             final String lon = ePlainLon.getText().toString();
-            char first;
 
             if (lat.length() > 0) {
-                first = lat.charAt(0);
+                final char first = lat.charAt(0);
                 if (first == 'N' || first == 'S') {
                     coordinateChars = coordinateChars.concat(lat.substring(1));
                 } else {
@@ -1093,7 +1092,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
             }
 
             if (lon.length() > 0) {
-                first = lon.charAt(0);
+                final char first = lon.charAt(0);
                 if (first == 'E' || first == 'W') {
                     coordinateChars = coordinateChars.concat(lon.substring(1));
                 } else {
