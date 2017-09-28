@@ -933,7 +933,7 @@ public final class GCParser {
             return null;
         }
 
-        final Parameters params = new Parameters("ul", userName);
+        final Parameters params = new Parameters("ul", escapePlus(userName));
 
         return searchByAny(cacheType, isSearchForMyCaches(userName), params);
     }
@@ -955,8 +955,15 @@ public final class GCParser {
             return null;
         }
 
-        final Parameters params = new Parameters("u", userName);
+        final Parameters params = new Parameters("u", escapePlus(userName));
         return searchByAny(cacheType, isSearchForMyCaches(userName), params);
+    }
+
+    /**
+     * GC needs a double escaping of the + sign.
+     */
+    private static String escapePlus(@NonNull final String name) {
+        return name.replace("+", "%2b");
     }
 
     @Nullable
