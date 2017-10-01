@@ -34,6 +34,8 @@ import javax.net.ssl.TrustManagerFactory;
 import javax.net.ssl.X509TrustManager;
 
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.reactivex.Completable;
 import io.reactivex.Single;
@@ -65,6 +67,8 @@ public final class Network {
     private static final String NATIVE_USER_AGENT = "Mozilla/5.0 (Linux; U; Android 2.2; en-us; Nexus One Build/FRF91) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1";
 
     private static final Pattern PATTERN_PASSWORD = Pattern.compile("(?<=[\\?&])[Pp]ass(w(or)?d)?=[^&#$]+");
+
+    private static final ObjectMapper mapper = new ObjectMapper();
 
     private static final OkHttpClient OK_HTTP_CLIENT = getNewHttpClient();
 
@@ -137,6 +141,18 @@ public final class Network {
     }
 
     /**
+     * PATCH HTTP request
+     *
+     * @param uri the URI to request
+     * @param headers the headers to add to the request
+     * @return a Single with the HTTP response, or an IOException
+     */
+    @NonNull
+    public static Single<Response> patchRequest(final String uri, final Parameters headers) {
+        return request("PATCH", uri, null, headers, null);
+    }
+
+    /**
      * POST HTTP request
      *
      * @param uri the URI to request
@@ -162,6 +178,65 @@ public final class Network {
     }
 
     /**
+     * POST HTTP request and deserialize JSON answer
+     *
+     * @param uri the URI to request
+     * @param clazz the class to deserialize the JSON result to
+     * @param params the parameters to add to the GET request
+     * @param headers the headers to add to the GET request
+     * @param <T> the type to deserialize to
+     * @return a single with the deserialized value, or an IO exception
+     */
+    public static <T> Single<T> postRequest(final String uri, final Class<T> clazz, final Parameters params, final Parameters headers) {
+        return request("POST", uri, params, headers, null).flatMap(getResponseData).map(new Function<String, T>() {
+            @Override
+            public T apply(@NonNull final String js) throws Exception {
+                return mapper.readValue(js, clazz);
+            }
+        });
+    }
+
+    /**
+     * POST HTTP request and deserialize JSON answer
+     *
+     * @param uri the URI to request
+     * @param clazz the class to deserialize the JSON result to
+     * @param params the parameters to add to the GET request
+     * @param headers the headers to add to the GET request
+     * @param fileFieldName the name of the file field name
+     * @param fileContentType the content-type of the file
+     * @param file the file to include in the request
+     * @param <T> the type to deserialize to
+     * @return a single with the deserialized value, or an IO exception
+     */
+    public static <T> Single<T> postRequest(final String uri, final Class<T> clazz, final Parameters params, final Parameters headers,
+                                            final String fileFieldName, final String fileContentType, final File file) {
+        return postRequest(uri, params, headers, fileFieldName, fileContentType, file).flatMap(getResponseData).map(new Function<String, T>() {
+            @Override
+            public T apply(@NonNull final String js) throws Exception {
+                return mapper.readValue(js, clazz);
+            }
+        });
+    }
+
+
+    /**
+     *  POST HTTP request with Json POST DATA
+     *
+     * @param uri the URI to request
+     * @param headers http headers
+     * @param jsonObject the object to be serialized as json and added to the POST request
+     * @return a single with the HTTP response, or an IOException
+     */
+    @NonNull
+    public static Single<Response> postJsonRequest(final String uri, final Parameters headers, final Object jsonObject) throws JsonProcessingException {
+        final Builder request = new Builder().url(uri).post(RequestBody.create(MEDIA_TYPE_APPLICATION_JSON,
+                mapper.writeValueAsString(jsonObject)));
+        addHeaders(request, headers, null);
+        return RxOkHttpUtils.request(OK_HTTP_CLIENT, request.build());
+    }
+
+    /**
      *  POST HTTP request with Json POST DATA
      *
      * @param uri the URI to request
@@ -180,13 +255,14 @@ public final class Network {
      *
      * @param uri the URI to request
      * @param params the parameters to add to the POST request
+     * @param headers the headers to add to the POST request
      * @param fileFieldName the name of the file field name
      * @param fileContentType the content-type of the file
      * @param file the file to include in the request
      * @return a single with the HTTP response, or an IOException
      */
     @NonNull
-    public static Single<Response> postRequest(final String uri, final Parameters params,
+    public static Single<Response> postRequest(final String uri, final Parameters params, final Parameters headers,
             final String fileFieldName, final String fileContentType, final File file) {
         final MultipartBody.Builder entity = new MultipartBody.Builder().setType(MultipartBody.FORM);
         for (final ImmutablePair<String, String> param : params) {
@@ -195,7 +271,7 @@ public final class Network {
         entity.addFormDataPart(fileFieldName, file.getName(),
                 RequestBody.create(MediaType.parse(fileContentType), file));
         final Builder request = new Request.Builder().url(uri).post(entity.build());
-        addHeaders(request, null, null);
+        addHeaders(request, headers, null);
         return RxOkHttpUtils.request(OK_HTTP_CLIENT, request.build());
     }
 
@@ -234,7 +310,11 @@ public final class Network {
                     body.add(param.left, param.right);
                 }
             }
-            builder.post(body.build());
+            if ("PATCH".equals(method)) {
+                builder.patch(body.build());
+            } else {
+                builder.post(body.build());
+            }
         }
 
         addHeaders(builder, headers, cacheFile);
@@ -325,6 +405,26 @@ public final class Network {
         }
 
         return null;
+    }
+
+    /**
+     * Get HTTP request and deserialize JSON answer
+     *
+     * @param uri the URI to request
+     * @param clazz the class to deserialize the JSON result to
+     * @param params the parameters to add to the GET request
+     * @param headers the headers to add to the GET request
+     * @param <T> the type to deserialize to
+     * @return a single with the deserialized value, or an IO exception
+     */
+    @NonNull
+    public static <T> Single<T> getRequest(final String uri, final Class<T> clazz, @Nullable final Parameters params, @Nullable final Parameters headers) {
+         return getRequest(uri, params, headers).flatMap(getResponseData).map(new Function<String, T>() {
+             @Override
+             public T apply(@NonNull final String js) throws Exception {
+                 return mapper.readValue(js, clazz);
+             }
+         });
     }
 
     /**
