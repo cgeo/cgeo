@@ -5,6 +5,7 @@
     <b>2017.08.23:</b>\n
     · Fix: Logging caches might fail due to website changes\n
     · Fix: Username not shown on main screen login status\n
+    · Fix: Potential crash in map directory selection\n
     \n
     \n
     <b>2017.07.24:</b>\n
