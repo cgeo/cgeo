@@ -4,7 +4,6 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 
 import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
-import cgeo.geocaching.log.TrackableLog;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
@@ -14,22 +13,6 @@ import cgeo.geocaching.utils.TextUtils;
 import java.util.List;
 
 public class TrackablesTest extends AbstractResourceInstrumentationTestCase {
-
-    public void testLogPageWithTrackables() {
-        final List<TrackableLog> tbLogs = GCParser.parseTrackableLog(getFileContent(R.raw.log_with_2tb));
-        assertThat(tbLogs).isNotNull();
-        assert tbLogs != null;
-        assertThat(tbLogs).hasSize(2);
-        final TrackableLog log = tbLogs.get(0);
-        assertThat(log.name).isEqualTo("Steffen's Kaiserwagen");
-        assertThat(log.trackCode).isEqualTo("1QG1EE");
-    }
-
-    public void testLogPageWithoutTrackables() {
-        final List<TrackableLog> tbLogs = GCParser.parseTrackableLog(getFileContent(R.raw.log_without_tb));
-        assertThat(tbLogs).isNotNull();
-        assertThat(tbLogs).isEmpty();
-    }
 
     public void testTrackable() {
         final Trackable trackable = getTB2R124();

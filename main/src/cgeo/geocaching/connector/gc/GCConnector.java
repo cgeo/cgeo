@@ -513,7 +513,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
 
         GCLogin.putViewstates(uploadParams, viewstates);
 
-        Network.getResponseData(Network.postRequest(uri, uploadParams, "ctl00$ContentBody$FieldNoteLoader", "text/plain", exportFile));
+        Network.getResponseData(Network.postRequest(uri, uploadParams, null, "ctl00$ContentBody$FieldNoteLoader", "text/plain", exportFile));
 
         if (StringUtils.isBlank(page)) {
             Log.e("FieldNoteExport.ExportTask upload: No data from server");
