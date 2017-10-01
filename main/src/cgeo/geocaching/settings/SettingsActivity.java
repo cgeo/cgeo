@@ -445,7 +445,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
             dirChooser.putExtra(FileManagerIntents.EXTRA_BUTTON_TEXT,
                     getString(string.ok));
             startActivityForResult(dirChooser, dct.requestCode);
-        } catch (final ActivityNotFoundException ignored) {
+        } catch (final RuntimeException ignored) {
             // OI file manager not available
             final Intent dirChooser = new Intent(this, SimpleDirChooser.class);
             dirChooser.putExtra(Intents.EXTRA_START_DIR, startDirectory);
