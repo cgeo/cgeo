@@ -15,7 +15,7 @@
     · New: Cache list menu restructured, see <a href="http://www.cgeo.org/faq#new-list-menu">FAQ</a> for details.\n
     · New: Use abbreviation for name of geocaching service on main screen\n
     · New: GCVote ratings are now sorted by a weighted arithmetic mean that also considers the number of votes\n
-    · Removed: OpenCylceMap due to licensing issues, see <a href="http://www.cgeo.org/faq#cyclemap">FAQ</a>\n
+    · Removed: OpenCycleMap due to licensing issues, see <a href="http://www.cgeo.org/faq#cyclemap">FAQ</a>\n
     · Fix: Ignore invalid characters when exporting to GPX\n
     · Fix: Sort by favorite percent now respects attended/photo taken\n
     · Fix: Relative URLs in cache descriptions\n
