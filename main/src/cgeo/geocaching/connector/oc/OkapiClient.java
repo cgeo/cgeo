@@ -364,7 +364,7 @@ final class OkapiClient {
             }
 
             if (data.get("success").asBoolean()) {
-                return new ImageResult(StatusCode.NO_ERROR, "");
+                return new ImageResult(StatusCode.NO_ERROR, connector.getSchemeAndHost() + "/images/uploads/" + data.get("image_uuid").asText() + ".jpg");
             }
 
             return new ImageResult(StatusCode.LOGIMAGE_POST_ERROR, "");
