@@ -68,8 +68,8 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
     private static final String SYMBOL_SEC = "\"";
     private static final String SYMBOL_POINT = ".";
 
-    ImageButton doneButton;
-    boolean stateSaved = false;
+    private ImageButton doneButton;
+    private boolean stateSaved = false;
 
     private Geopoint gp;
     private CalcState savedState;
