@@ -745,7 +745,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
      *
      * @param values The string of values to be formatted.
      */
-    private String format(final String values, int degDigits) {
+    private String format(final String values, final int degDigits) {
         final String returnValue;
 
         switch (currentFormat) {
@@ -755,15 +755,15 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
 
             case Sec:
                 returnValue = " " + values.substring(0, degDigits) + SYMBOL_DEG
-                            + " " + values.substring(degDigits, degDigits+2) + SYMBOL_MIN
-                            + " " + values.substring(degDigits+2, degDigits+4) + SYMBOL_POINT
-                                  + values.substring(degDigits+4) + SYMBOL_SEC;
+                            + " " + values.substring(degDigits, degDigits + 2) + SYMBOL_MIN
+                            + " " + values.substring(degDigits + 2, degDigits + 4) + SYMBOL_POINT
+                                  + values.substring(degDigits + 4) + SYMBOL_SEC;
                 break;
 
             case Min:
                 returnValue = " " + values.substring(0, degDigits) + SYMBOL_DEG
-                            + " " + values.substring(degDigits, degDigits+2) + SYMBOL_POINT
-                                  + values.substring(degDigits+2) + SYMBOL_MIN;
+                            + " " + values.substring(degDigits, degDigits + 2) + SYMBOL_POINT
+                                  + values.substring(degDigits + 2) + SYMBOL_MIN;
                 break;
 
             case Deg:
@@ -922,12 +922,14 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
     }
 
     private void updateResult() {
-        final String lat, lon;
+        final String lat;
+        final String lon;
 
         final boolean lightSkin = Settings.isLightSkin();
         final int validColour = ContextCompat.getColor(getContext(), lightSkin ? R.color.text_light : R.color.text_dark);
         final int invalidColour = ContextCompat.getColor(getContext(), lightSkin ? R.color.text_hint_light : R.color.text_hint_dark);
-        final int resultColour, doneIcon;
+        final int resultColour;
+        final int doneIcon;
 
         if (areCurrentCoordinatesValid()) {
             resultColour = validColour;
