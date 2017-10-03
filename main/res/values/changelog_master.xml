@@ -4,10 +4,12 @@
   <string name="changelog_master" translatable="false">
     <b>Next feature release:</b>\n
     · New: Coordinate calculator (New Waypoint - Calculate Coordinates)\n
+    · New: Log image upload for OC\n
     · Fix: Improve parsing of home coordinates\n
     · Fix: Disabled caches might be shown with truncated title\n
     · Fix: Some OC cache URL not detected correctly\n
     · Fix: Some possible crashes on map\n
+    · Fix: Search caches by users with a \'+\' in the name\n
      \n
   </string>
 </resources>
