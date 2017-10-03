@@ -273,7 +273,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
             public void run() {
                 final SearchResult search = GCParser.searchByUsername("blafoo", CacheType.WEBCAM);
                 assertThat(search).isNotNull();
-                assertThat(search.getTotalCountGC()).isEqualTo(9);
+                assertThat(search.getTotalCountGC()).isEqualTo(10);
                 assertThat(search.getGeocodes()).contains("GCP0A9");
             }
         });
