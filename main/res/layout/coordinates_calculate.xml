@@ -54,10 +54,9 @@
             android:layout_marginBottom="2dip" />
 
         <cgeo.geocaching.ui.CalculateButton
-            android:id="@+id/ButtonLatDeg_100"
-            style="@style/button_digit" />
-        <cgeo.geocaching.ui.CalculateButton
             android:id="@+id/ButtonLatDeg_010"
+            android:layout_column="2"
+            android:layout_row="0"
             style="@style/button_digit" />
         <cgeo.geocaching.ui.CalculateButton
             android:id="@+id/ButtonLatDeg_001"

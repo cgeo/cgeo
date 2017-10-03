@@ -21,6 +21,7 @@ import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v4.BuildConfig;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayout;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -67,6 +68,9 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
     private static final String SYMBOL_SEC = "\"";
     private static final String SYMBOL_POINT = ".";
 
+    ImageButton doneButton;
+    boolean stateSaved = false;
+
     private Geopoint gp;
     private CalcState savedState;
 
@@ -82,7 +86,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
     private String inputLatHem;
     /** Latitude hemisphere (North or South) */
     private Button bLatHem;
-    private final CalculateButton[] bLatDeg = new CalculateButton[3],
+    private final CalculateButton[] bLatDeg = new CalculateButton[2],
                                     bLatMin = new CalculateButton[2],
                                     bLatSec = new CalculateButton[2],
                                     bLatPnt = new CalculateButton[5];
@@ -139,12 +143,14 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
 
     @Override
     public void onClickCompleteCallback() {
+        stateSaved = false;
         resortEquations();
         updateResult();
     }
 
     @Override
     public void onLongClickCompleteCallback() {
+        stateSaved = false;
         resortEquations();
         updateResult();
     }
@@ -156,7 +162,6 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
             final CalcState currentState = getCurrentState();
             setSavedState(currentState);
             ((CoordinatesInputDialog.CalculateState) getActivity()).saveCalculatorState(currentState);
-            displayToast(R.string.info_calculator_state_saved, true);
 
             if (!areCurrentCoordinatesValid()) {
                 return;
@@ -188,6 +193,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         }
         @Override
         public void afterTextChanged(final Editable s) {
+            stateSaved = false;
             resortEquations();
             updateResult();
         }
@@ -204,6 +210,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         }
         @Override
         public void afterTextChanged(final Editable s) {
+            stateSaved = false;
             resortFreeVariables();
             updateResult();
         }
@@ -220,6 +227,8 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         }
         @Override
         public void afterTextChanged(final Editable s) {
+            stateSaved = false;
+
             for (final CalculatorVariable equ : equations) {
                 equ.setCacheDirty();
             }
@@ -257,6 +266,8 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
     private class HemisphereClickListener implements View.OnClickListener {
         @Override
         public void onClick(final View view) {
+            stateSaved = false;
+
             final Button button = (Button) view;
             final CharSequence text = button.getText();
             if (StringUtils.isBlank(text)) {
@@ -351,10 +362,10 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
                 cancel.setOnClickListener(new CalculateCancelListener());
                 cancel.setVisibility(View.VISIBLE);
             }
-            final ImageButton done = ButterKnife.findById(v, R.id.dialog_title_done);
-            if (done != null) {
-                done.setOnClickListener(inputDone);
-                done.setVisibility(View.VISIBLE);
+            doneButton = ButterKnife.findById(v, R.id.dialog_title_done);
+            if (doneButton != null) {
+                doneButton.setOnClickListener(inputDone);
+                doneButton.setVisibility(View.VISIBLE);
             }
         }
 
@@ -371,7 +382,6 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         ePlainLon = ButterKnife.findById(v, R.id.PlainLon);
 
         bLatHem = ButterKnife.findById(v, R.id.ButtonLatHem);
-        bLatDeg[2] = ButterKnife.findById(v, R.id.ButtonLatDeg_100);
         bLatDeg[1] = ButterKnife.findById(v, R.id.ButtonLatDeg_010);
         bLatDeg[0] = ButterKnife.findById(v, R.id.ButtonLatDeg_001);
         tLatDegChar = ButterKnife.findById(v, R.id.LatDegChar);
@@ -417,7 +427,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
 
         inputLatHem = String.valueOf(gp.getLatDir());
         bLatHem.setText(inputLatHem);
-        setCoordValue(gp.getLatDeg(), bLatDeg[0], bLatDeg[1], bLatDeg[2]);
+        setCoordValue(gp.getLatDeg(), bLatDeg[0], bLatDeg[1]);
         setCoordValue(gp.getLatMin(), bLatMin[0], bLatMin[1]);
         setCoordValue(gp.getLatSec(), bLatSec[0], bLatSec[1]);
 
@@ -427,7 +437,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         setCoordValue(gp.getLonMin(), bLonMin[0], bLonMin[1]);
         setCoordValue(gp.getLonSec(), bLonSec[0], bLonSec[1]);
 
-        latButtons = Arrays.asList(bLatDeg[2], bLatDeg[1], bLatDeg[0],
+        latButtons = Arrays.asList(            bLatDeg[1], bLatDeg[0],
                                                bLatMin[1], bLatMin[0],
                                                bLatSec[1], bLatSec[0],
            bLatPnt[4], bLatPnt[3], bLatPnt[2], bLatPnt[1], bLatPnt[0]);
@@ -449,8 +459,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
                                         bLonPnt[4], bLonPnt[3]);
         lastUnits = Arrays.asList(tLatLastUnits, tLonLastUnits);
 
-        bLatDeg[2].setNextButton(bLatDeg[1])
-                  .setNextButton(bLatDeg[0])
+        bLatDeg[1].setNextButton(bLatDeg[0])
                   .setNextButton(bLatMin[1])
                   .setNextButton(bLatMin[0])
                   .setNextButton(bLatSec[1])
@@ -543,6 +552,10 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         final String lat = getLatResult();
         final String lon = getLonResult();
 
+        if (lat.contains("_") || lat.contains("*") || lon.contains("_") || lon.contains("*")) {
+            return false;
+        }
+
         final String delimiters = "[ °'\"\\.]+";
         final String[] latTokens = lat.split(delimiters);
         final String[] lonTokens = lon.split(delimiters);
@@ -572,12 +585,16 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
             // Signaled and returned below
         }
 
-        displayToast(R.string.err_parse_lat_lon);
         return false;
     }
 
     private void setSavedState(final CalcState savedState) {
         this.savedState = savedState;
+        stateSaved = true;
+
+        if (doneButton != null) {
+            doneButton.setImageResource(stateSaved ? R.drawable.ic_menu_saved : R.drawable.ic_menu_save);
+        }
     }
 
     private void loadCalcState() {
@@ -589,7 +606,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
             bLonHem.setText(String.valueOf(savedState.lonHemisphere));
 
             int i = 0;
-            CalculateButton b = bLatDeg[2];
+            CalculateButton b = bLatDeg[1];
             while (b != null && i < buttons.size()) {
                 b.setData((CalculateButton.ButtonData) buttons.get(i++));
                 b = b.getNextButton();
@@ -649,7 +666,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
             lonHem = 'W';
         }
 
-        CalculateButton b = bLatDeg[2];
+        CalculateButton b = bLatDeg[1];
         while (b != null) {
             butData.add(b.getData());
             b = b.getNextButton();
@@ -728,7 +745,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
      *
      * @param values The string of values to be formatted.
      */
-    private String format(final String values) {
+    private String format(final String values, final int degDigits) {
         final String returnValue;
 
         switch (currentFormat) {
@@ -737,21 +754,21 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
                 break;
 
             case Sec:
-                returnValue = " " + values.substring(0, 3) + SYMBOL_DEG
-                   + " " + values.substring(3, 5) + SYMBOL_MIN
-                   + " " + values.substring(5, 7) + SYMBOL_POINT
-                         + values.substring(7)    + SYMBOL_SEC;
+                returnValue = " " + values.substring(0, degDigits) + SYMBOL_DEG
+                            + " " + values.substring(degDigits, degDigits + 2) + SYMBOL_MIN
+                            + " " + values.substring(degDigits + 2, degDigits + 4) + SYMBOL_POINT
+                                  + values.substring(degDigits + 4) + SYMBOL_SEC;
                 break;
 
             case Min:
-                returnValue = " " + values.substring(0, 3) + SYMBOL_DEG
-                   + " " + values.substring(3, 5) + SYMBOL_POINT
-                         + values.substring(5)    + SYMBOL_MIN;
+                returnValue = " " + values.substring(0, degDigits) + SYMBOL_DEG
+                            + " " + values.substring(degDigits, degDigits + 2) + SYMBOL_POINT
+                                  + values.substring(degDigits + 2) + SYMBOL_MIN;
                 break;
 
             case Deg:
-                returnValue = " " + values.substring(0, 3) + SYMBOL_POINT
-                         + values.substring(3)    + SYMBOL_DEG;
+                returnValue = " " + values.substring(0, degDigits) + SYMBOL_POINT
+                                  + values.substring(degDigits) + SYMBOL_DEG;
                 break;
 
             default:
@@ -767,7 +784,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
      * @param values The string to perform the substitutions on
      * @return String with the substitutions performed
      */
-    private String substitute(final String values) {
+    private String substituteVariables(final String values) {
         String returnValue = "";
 
         if (values.length() > 0) {
@@ -811,7 +828,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
      * @param buttons List of button from which to extract the values
      * @return Button values as a string
      */
-    private String getValues(final List<CalculateButton> buttons) {
+    private String getValues(final List<CalculateButton> buttons, final int degDigits) {
         String returnValue = "";
         for (final EditButton button : buttons) {
             // Remove inactive and blank digits from result
@@ -825,7 +842,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         }
 
         // Formatting intentionally done first in case the substitution changes number of characters.
-        return format(returnValue);
+        return format(returnValue, degDigits);
     }
 
     /**
@@ -839,10 +856,10 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         if (currentFormat == Settings.CoordInputFormatEnum.Plain) {
             returnValue = ePlainLat.getText().toString();
         } else {
-            returnValue = bLatHem.getText() + getValues(latButtons);
+            returnValue = bLatHem.getText() + getValues(latButtons, 2);
         }
 
-        return substitute(returnValue);
+        return substituteVariables(returnValue);
     }
 
     /**
@@ -856,10 +873,10 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         if (currentFormat == Settings.CoordInputFormatEnum.Plain) {
             returnValue = ePlainLon.getText().toString();
         } else {
-            returnValue =  bLonHem.getText() + getValues(lonButtons);
+            returnValue =  bLonHem.getText() + getValues(lonButtons, 3);
         }
 
-        return substitute(returnValue);
+        return substituteVariables(returnValue);
     }
 
     /**
@@ -905,8 +922,54 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
     }
 
     private void updateResult() {
-        tLatResult.setText(getLatResult());
-        tLonResult.setText(getLonResult());
+        final String lat;
+        final String lon;
+
+        final boolean lightSkin = Settings.isLightSkin();
+        final int validColour = ContextCompat.getColor(getContext(), lightSkin ? R.color.text_light : R.color.text_dark);
+        final int invalidColour = ContextCompat.getColor(getContext(), lightSkin ? R.color.text_hint_light : R.color.text_hint_dark);
+        final int resultColour;
+        final int doneIcon;
+
+        if (areCurrentCoordinatesValid()) {
+            resultColour = validColour;
+            doneIcon = R.drawable.ic_menu_done_holo_dark;
+
+            switch (currentFormat) {
+                case Deg:
+                    lat = gp.format(GeopointFormatter.Format.LAT_DECDEGREE);
+                    lon = gp.format(GeopointFormatter.Format.LON_DECDEGREE);
+                    break;
+
+                case Min:
+                case Plain:
+                    lat = gp.format(GeopointFormatter.Format.LAT_DECMINUTE);
+                    lon = gp.format(GeopointFormatter.Format.LON_DECMINUTE);
+                    break;
+
+                case Sec:
+                    lat = gp.format(GeopointFormatter.Format.LAT_DECMINSEC);
+                    lon = gp.format(GeopointFormatter.Format.LON_DECMINSEC);
+                    break;
+
+                default:
+                    lat = getLatResult();
+                    lon = getLonResult();
+                    break;
+            }
+        } else {
+            resultColour = invalidColour;
+            doneIcon = stateSaved ? R.drawable.ic_menu_saved : R.drawable.ic_menu_save;
+
+            lat = getLatResult();
+            lon = getLonResult();
+        }
+
+        doneButton.setImageResource(doneIcon);
+        tLatResult.setText(lat);
+        tLonResult.setText(lon);
+        tLatResult.setTextColor(resultColour);
+        tLonResult.setTextColor(resultColour);
     }
 
     private void setFormat() {
@@ -1038,8 +1101,11 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
                                                    final TextWatcher textWatcher) {
         final List<CalculatorVariable> returnList = new ArrayList<>();
 
-        for (int i = 0; i < variableNames.length(); i++) {
-            final char ch = variableNames.charAt(i);
+        final char[] sortedVariables = variableNames.toCharArray();
+        Arrays.sort(sortedVariables);
+
+        for (int i = 0; i < sortedVariables.length; i++) {
+            final char ch = sortedVariables[i];
 
             if (range.check(ch)) {
                 if (getVariable(ch, returnList, false) != null) {
@@ -1135,7 +1201,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         bLonHem.setText(inputLonHem);
 
         // Resetting the 'first' button causes all subsequent buttons to be reset as well
-        bLatDeg[2].resetButton();
+        bLatDeg[1].resetButton();
     }
 
     /**
