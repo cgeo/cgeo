@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
        xmlns:tools="http://schemas.android.com/tools"
+       xmlns:app="http://schemas.android.com/apk/res-auto"
        android:layout_width="match_parent"
        android:layout_height="match_parent" >
 
@@ -36,16 +37,16 @@
     </LinearLayout>
 
     <!-- H DDD°MM'SS.PPPPP" -->
-    <GridLayout
+    <android.support.v7.widget.GridLayout
         android:id="@+id/coordTable"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:columnCount="17">
+        app:columnCount="17">
 
         <Button
             android:id="@+id/ButtonLatHem"
             android:layout_width="33dp"
-            android:layout_gravity="center_horizontal|center_vertical"
+            app:layout_gravity="center_horizontal|center_vertical"
             style="@style/button"
 
             android:layout_marginLeft="1dip"
@@ -55,8 +56,8 @@
 
         <cgeo.geocaching.ui.CalculateButton
             android:id="@+id/ButtonLatDeg_010"
-            android:layout_column="2"
-            android:layout_row="0"
+            app:layout_column="2"
+            app:layout_row="0"
             style="@style/button_digit" />
         <cgeo.geocaching.ui.CalculateButton
             android:id="@+id/ButtonLatDeg_001"
@@ -94,7 +95,7 @@
             android:id="@+id/LatPointChar"
             android:text="."
             android:textSize="22sp"
-            android:layout_gravity="center_vertical|left"
+            app:layout_gravity="center_vertical|left"
             android:layout_marginLeft="0dp"
             android:layout_marginRight="0dp"
             tools:ignore="HardcodedText" />
@@ -124,7 +125,7 @@
         <Button
             android:id="@+id/ButtonLonHem"
             android:layout_width="33dp"
-            android:layout_gravity="center_horizontal|center_vertical"
+            app:layout_gravity="center_horizontal|center_vertical"
             style="@style/button"
 
             android:layout_marginLeft="1dip"
@@ -174,7 +175,7 @@
             android:id="@+id/LonPointChar"
             android:text="."
             android:textSize="22sp"
-            android:layout_gravity="center_vertical"
+            app:layout_gravity="center_vertical"
             tools:ignore="HardcodedText" />
 
         <cgeo.geocaching.ui.CalculateButton
@@ -199,5 +200,5 @@
             android:textSize="22sp"
             android:layout_marginRight="1dp"
             tools:ignore="HardcodedText" />
-    </GridLayout>
+    </android.support.v7.widget.GridLayout>
 </merge>

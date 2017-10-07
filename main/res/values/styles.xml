@@ -111,7 +111,7 @@
         <item name="android:layout_marginRight">1dip</item>
         <item name="android:layout_marginTop">2dip</item>
         <item name="android:layout_marginBottom">2dip</item>
-        <item name="android:layout_columnWeight">1</item>
+        <item name="layout_columnWeight">1</item>
     </style>
 
     <!-- button: small -->
