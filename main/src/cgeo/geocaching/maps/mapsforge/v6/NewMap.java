@@ -283,7 +283,7 @@ public class NewMap extends AbstractActionBarActivity {
 
             menu.findItem(R.id.menu_theme_mode).setVisible(tileLayerHasThemes());
 
-            menu.findItem(R.id.menu_as_list).setVisible(!caches.isDownloading() && caches.getVisibleItemsCount() > 0);
+            menu.findItem(R.id.menu_as_list).setVisible(!caches.isDownloading() && caches.getVisibleItemsCount() > 1);
 
             menu.findItem(R.id.submenu_strategy).setVisible(mapOptions.isLiveEnabled);
 
