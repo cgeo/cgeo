@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="cgeo.geocaching"
     android:installLocation="auto"
-    android:versionCode="20170233"
+    android:versionCode="20170333"
     android:versionName="2017.10.10-legacy" >
 
     <uses-sdk
