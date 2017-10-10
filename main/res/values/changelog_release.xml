@@ -2,65 +2,16 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-    <b>2017.05.09-legacy:</b>\n
-    · Fix: Apply API key for OSM:Cyclemap\n
-    · Fix: Detect that no language has been selected on geocaching.com\n
+    <b>2017.10.10-legacy:</b>\n
     \n
-    <b>2017.03.29-legacy:</b>\n
-    · Fix: Crashes during memory optimization\n
+    <b>Be aware:\n
+    There will most probably be no more bugfixes after this release for devices on Android <4.0!\n
+    This version might stop working unexpectedly, if there are server side changes.</b>\n
     \n
-    <b>2017.02.30-legacy:</b>\n
-    · New: New login page used for gc.com\n
-    · Fix: Missing ellipsis of long cache names in list\n
-    · Fix: Missing visual separation in gallery\n
-    · Fix: Don\'t delete logs on refresh error\n
-    · Fix: Crash on some devices when editing or saving personal note\n
-    · Fix: Sometimes wrong geokrety name was shown\n
-    \n
-    <b>2017.02.07:</b>\n
-    · Fix: Calendar time recognition\n
-    · Fix: Log date format in system information\n
-    · Fix: Number of waypoints is limited to 100\n
-    · Fix: One-click offline log does not save cache\n
-    · Fix: Wrong URL used for smilies in log\n
-    · Fix: Crash when extracting location from exif data\n
-    · Info: Starting with this version we show a closeout warning on the main screen if your device is running on an Android version below 4.0. We will drop the support for these old Android versions with one of the next releases.
-    \n
-    <b>2017.01.15:</b>\n
-    · Fix: Avoid crash in logbook under special conditions if Geokrety is enabled\n
-    · Fix: Crash on some devices when opening the map for a cache\n
-    · Fix: Crash when moving map and debug logging is active\n
-      Remark: Please do not switch on debug logging unless needed!\n
-    · Fix: History management was inconsistent and cache count was wrong in some cases\n
-    · Removed: Strategy \"Fastest\" has been removed from live map as it lead to confusion and provided less information\n
-    · Fix: Some spoiler images were missing\n
-    · Fix: History list jumped to top after single cache was deleted\n
-    \n
-    <b>2016.12.28:</b>\n
-    · Fix: Wrong cache types shown on live map\n
-    · New: Provide link to geochecker also for gc-apps.com checker\n
-    · New: Archived or disabled caches stroken trough in titles\n
-    · New: Offline routing in our maps (you need the \'BRouter\' app on your device)\n
-    · New: Support ignoring caches on OpenCaching sites\n
-    · New: Function to remove duplicate caches from all other lists\n
-    · New: Undo ability for clear log menu item\n
-    · New: Filter for found caches missing a voting\n
-    · New: Korean translation\n
-    · New: Cache history now also fetches all caches with saved offline log wich are not saved\n
-    · New: Use cache type icon in header bar of logging screen\n
-    · New: Export field notes also for opencaching websites\n
-    · Fix: Better clipboard format when copying waypoint coordinates\n
-    · Fix: Wrong icon when navigating to a waypoint\n
-    · Fix: Detect wherigo cartridge links in short description\n
-    · Fix: Don\'t store a signature only log when going back\n
-    · Fix: Make URLs in hints clickable\n
-    · Fix: Add to favorite was not available when logging webcam caches\n
-    · Fix: Store from map no longer stores to default list\n
-    · Fix: Correctly recognize OpenCaching.FR/.IT/.ES URLs\n
-    · Fix: Connect with the new Opencache.uk\n
-    · Change: Fetch more caches from OC sites when GC is disabled in settings\n
-    · Removed: No longer supports captchas for getting exact coordinates as basic member\n
-    \n
+    · Fix: Login failed on geocaching.com\n
+    · Fix: Failed to load more caches in search results\n
+    · Fix: Username no longer shown on mainscreen\n 
+    \n                                                                                             
     \n
 </string>
 </resources>
