@@ -5,7 +5,7 @@
     <b>2017.10.10-legacy:</b>\n
     \n
     <b>Be aware:\n
-    There will most probably be no more bugfixes after this release for devices on Android <4.0!\n
+    There will most probably be no more bugfixes after this release for devices on Android below 4.0!\n
     This version might stop working unexpectedly, if there are server side changes.</b>\n
     \n
     · Fix: Login failed on geocaching.com\n
