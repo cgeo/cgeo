@@ -190,7 +190,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
             }
 
             Log.e("GCConnector.searchByGeocode: No data from server");
-            search.setError(StatusCode.COMMUNICATION_ERROR);
+            search.setError(StatusCode.CACHE_NOT_FOUND);
             return search;
         }
         assert page != null;
