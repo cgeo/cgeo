@@ -36,7 +36,6 @@ import android.R.string;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.app.backup.BackupManager;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
