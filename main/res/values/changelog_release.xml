@@ -2,7 +2,7 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-    <b>Next bugfix release (Beta version):</b>\n
+    <b>2017.10.10:</b>\n
     · Fix: Search broken for user names containing plus sign\n
     · Fix: Crash in map directory selection on some devices\n
     · Fix: OC cache coordinates parsing crashed seldomly\n
