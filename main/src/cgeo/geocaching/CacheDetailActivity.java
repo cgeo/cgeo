@@ -2484,7 +2484,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         personalNoteView.setText(personalNote, TextView.BufferType.SPANNABLE);
         if (StringUtils.isNotBlank(personalNote)) {
             personalNoteView.setVisibility(View.VISIBLE);
-            Linkify.addLinks(personalNoteView, Linkify.ALL);
+            Linkify.addLinks(personalNoteView, Linkify.MAP_ADDRESSES | Linkify.WEB_URLS);
         } else {
             personalNoteView.setVisibility(View.GONE);
         }
