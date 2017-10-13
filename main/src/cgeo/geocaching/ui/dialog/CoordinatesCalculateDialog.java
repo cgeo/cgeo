@@ -425,18 +425,6 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
 
         notes = ButterKnife.findById(v, R.id.notes_text);
 
-        inputLatHem = String.valueOf(gp.getLatDir());
-        bLatHem.setText(inputLatHem);
-        setCoordValue(gp.getLatDeg(), bLatDeg[0], bLatDeg[1]);
-        setCoordValue(gp.getLatMin(), bLatMin[0], bLatMin[1]);
-        setCoordValue(gp.getLatSec(), bLatSec[0], bLatSec[1]);
-
-        inputLonHem = String.valueOf(gp.getLonDir());
-        bLatHem.setText(inputLonHem);
-        setCoordValue(gp.getLonDeg(), bLonDeg[0], bLonDeg[1], bLonDeg[2]);
-        setCoordValue(gp.getLonMin(), bLonMin[0], bLonMin[1]);
-        setCoordValue(gp.getLonSec(), bLonSec[0], bLonSec[1]);
-
         latButtons = Arrays.asList(            bLatDeg[1], bLatDeg[0],
                                                bLatMin[1], bLatMin[0],
                                                bLatSec[1], bLatSec[0],
@@ -490,10 +478,6 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
             buttonDone.setOnClickListener(inputDone);
         }
 
-        loadCalcState();
-        resortEquations();
-        updateResult();
-
         ePlainLat.addTextChangedListener(new PlainWatcher());
         ePlainLon.addTextChangedListener(new PlainWatcher());
 
@@ -520,6 +504,22 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if (savedState != null) {
+            loadCalcState();
+        } else {
+            setCoordFormat(Settings.getCoordInputFormat());
+            setButtonInputValuesFromGP();
+            resetCalculator();
+        }
+
+        resortEquations();
+        updateResult();
+    }
+
     /**
      * Save the current state of the calculator such that it can be restored after screen rotation (or similar)
      */
@@ -539,6 +539,37 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
             activity.showShortToast(activity.getString(message));
         } else {
             activity.showToast(activity.getString(message));
+        }
+    }
+
+    private void setButtonInputValuesFromGP() {
+        inputLatHem = String.valueOf(gp.getLatDir());
+        bLatHem.setText(inputLatHem);
+        setCoordValue(gp.getLatDeg(), bLatDeg[0], bLatDeg[1]);
+        setCoordValue(gp.getLatMin(), bLatMin[0], bLatMin[1]);
+        setCoordValue(gp.getLatSec(), bLatSec[0], bLatSec[1]);
+
+        inputLonHem = String.valueOf(gp.getLonDir());
+        bLatHem.setText(inputLonHem);
+        setCoordValue(gp.getLonDeg(), bLonDeg[0], bLonDeg[1], bLonDeg[2]);
+        setCoordValue(gp.getLonMin(), bLonMin[0], bLonMin[1]);
+        setCoordValue(gp.getLonSec(), bLonSec[0], bLonSec[1]);
+
+        switch (currentFormat) {
+            case Deg:
+                setCoordValue(gp.getLatDegFrac(), bLatPnt[0], bLatPnt[1], bLatPnt[2], bLatPnt[3], bLatPnt[4]);
+                setCoordValue(gp.getLonDegFrac(), bLonPnt[0], bLonPnt[1], bLonPnt[2], bLonPnt[3], bLonPnt[4]);
+                break;
+
+            case Min:
+                setCoordValue(gp.getLatMinFrac(), bLatPnt[0], bLatPnt[1], bLatPnt[2]);
+                setCoordValue(gp.getLonMinFrac(), bLonPnt[0], bLonPnt[1], bLonPnt[2]);
+                break;
+
+            case Sec:
+                setCoordValue(gp.getLatSecFrac(), bLatPnt[0], bLatPnt[1], bLatPnt[2]);
+                setCoordValue(gp.getLonSecFrac(), bLonPnt[0], bLonPnt[1], bLonPnt[2]);
+                break;
         }
     }
 
@@ -598,51 +629,46 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
     }
 
     private void loadCalcState() {
-        if (savedState != null) {
-            setCoordFormat(savedState.format);
-            final List<? extends JSONAble> buttons = savedState.buttons;
+        setCoordFormat(savedState.format);
+        final List<? extends JSONAble> buttons = savedState.buttons;
 
-            bLatHem.setText(String.valueOf(savedState.latHemisphere));
-            bLonHem.setText(String.valueOf(savedState.lonHemisphere));
+        bLatHem.setText(String.valueOf(savedState.latHemisphere));
+        bLonHem.setText(String.valueOf(savedState.lonHemisphere));
 
-            int i = 0;
-            CalculateButton b = bLatDeg[1];
-            while (b != null && i < buttons.size()) {
-                b.setData((CalculateButton.ButtonData) buttons.get(i++));
-                b = b.getNextButton();
-            }
-
-            if (BuildConfig.DEBUG && b == null && i == buttons.size()) {
-                throw new AssertionError("Number of ButtonData objects differ from the number of Buttons");
-            }
-
-            for (final JSONAble equ : savedState.equations) {
-                equations.add(new CalculatorVariable(getContext(),
-                        (CalculatorVariable.VariableData) equ,
-                        getString(R.string.equation_hint),
-                        new EquationWatcher()));
-            }
-
-            for (final JSONAble var : savedState.freeVariables) {
-                freeVariables.add(new CalculatorVariable(getContext(),
-                        (CalculatorVariable.VariableData) var,
-                        getString(R.string.free_variable_hint),
-                        new VariableWatcher()));
-            }
-
-            for (final JSONAble bnk : savedState.variableBank) {
-                variableBank.add((CalculatorVariable.VariableData) bnk);
-            }
-
-            // Text must be set after Equations have been loaded as the TextWatcher will be triggered when the text is set
-            ePlainLat.setText(savedState.plainLat);
-            ePlainLon.setText(savedState.plainLon);
-
-            notes.setText(savedState.notes);
-        } else {
-            resetCalculator();
-            setCoordFormat(Settings.getCoordInputFormat());
+        int i = 0;
+        CalculateButton b = bLatDeg[1];
+        while (b != null && i < buttons.size()) {
+            b.setData((CalculateButton.ButtonData) buttons.get(i++));
+            b = b.getNextButton();
         }
+
+        if (BuildConfig.DEBUG && b == null && i == buttons.size()) {
+            throw new AssertionError("Number of ButtonData objects differ from the number of Buttons");
+        }
+
+        for (final JSONAble equ : savedState.equations) {
+            equations.add(new CalculatorVariable(getContext(),
+                    (CalculatorVariable.VariableData) equ,
+                    getString(R.string.equation_hint),
+                    new EquationWatcher()));
+        }
+
+        for (final JSONAble var : savedState.freeVariables) {
+            freeVariables.add(new CalculatorVariable(getContext(),
+                    (CalculatorVariable.VariableData) var,
+                    getString(R.string.free_variable_hint),
+                    new VariableWatcher()));
+        }
+
+        for (final JSONAble bnk : savedState.variableBank) {
+            variableBank.add((CalculatorVariable.VariableData) bnk);
+        }
+
+        // Text must be set after Equations have been loaded as the TextWatcher will be triggered when the text is set
+        ePlainLat.setText(savedState.plainLat);
+        ePlainLon.setText(savedState.plainLon);
+
+        notes.setText(savedState.notes);
     }
 
     private CalcState getCurrentState() {
@@ -738,6 +764,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
     private void setCoordFormat(final Settings.CoordInputFormatEnum currentFormat) {
         this.currentFormat = currentFormat;
         spinner.setSelection(currentFormat.ordinal(), false);
+        setFormat();
     }
 
     /**
