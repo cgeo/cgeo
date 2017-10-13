@@ -74,12 +74,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         final ImportGpxFileThread importThread = new ImportGpxFileThread(gc31j2h, listId, importStepHandler, progressHandler);
         runImportThread(importThread);
 
-        assertThat(importStepHandler.messages).hasSize(4);
-        final Iterator<Message> iMsg = importStepHandler.messages.iterator();
-        assertThat(iMsg.next().what).isEqualTo(GPXImporter.IMPORT_STEP_START);
-        assertThat(iMsg.next().what).isEqualTo(GPXImporter.IMPORT_STEP_READ_FILE);
-        assertThat(iMsg.next().what).isEqualTo(GPXImporter.IMPORT_STEP_STORE_STATIC_MAPS);
-        assertThat(iMsg.next().what).isEqualTo(GPXImporter.IMPORT_STEP_FINISHED);
+        assertImportStepMessages(GPXImporter.IMPORT_STEP_START, GPXImporter.IMPORT_STEP_READ_FILE, GPXImporter.IMPORT_STEP_STORE_STATIC_MAPS, GPXImporter.IMPORT_STEP_FINISHED);
         final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
         assert cache != null;
         assertThat(cache).isNotNull();
@@ -97,12 +92,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         final ImportGpxFileThread importThread = new ImportGpxFileThread(ocddd2, listId, importStepHandler, progressHandler);
         runImportThread(importThread);
 
-        assertThat(importStepHandler.messages).hasSize(4);
-        final Iterator<Message> iMsg = importStepHandler.messages.iterator();
-        assertThat(iMsg.next().what).isEqualTo(GPXImporter.IMPORT_STEP_START);
-        assertThat(iMsg.next().what).isEqualTo(GPXImporter.IMPORT_STEP_READ_FILE);
-        assertThat(iMsg.next().what).isEqualTo(GPXImporter.IMPORT_STEP_STORE_STATIC_MAPS);
-        assertThat(iMsg.next().what).isEqualTo(GPXImporter.IMPORT_STEP_FINISHED);
+        assertImportStepMessages(GPXImporter.IMPORT_STEP_START, GPXImporter.IMPORT_STEP_READ_FILE, GPXImporter.IMPORT_STEP_STORE_STATIC_MAPS, GPXImporter.IMPORT_STEP_FINISHED);
         final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
         assert cache != null;
         assertThat(cache).isNotNull();
@@ -154,11 +144,12 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         assertThat(cache.getName()).isEqualTo("First Aid Station #1");
     }
 
-    private void assertImportStepMessages(final int... importSteps) {
-        for (int i = 0; i < Math.min(importSteps.length, importStepHandler.messages.size()); i++) {
-            assertThat(importStepHandler.messages.get(i).what).isEqualTo(importSteps[i]);
+    private void assertImportStepMessages(final int... expectedSteps) {
+        final ArrayList<Message> messages = new ArrayList<>(importStepHandler.messages); // copy to avoid CME
+        assertThat(messages).hasSize(expectedSteps.length);
+        for (int i = 0; i < Math.min(expectedSteps.length, messages.size()); i++) {
+            assertThat(messages.get(i).what).isEqualTo(expectedSteps[i]);
         }
-        assertThat(importStepHandler.messages).hasSize(importSteps.length);
     }
 
     public void testImportLoc() throws IOException {
