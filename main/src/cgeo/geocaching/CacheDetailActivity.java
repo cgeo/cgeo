@@ -2120,7 +2120,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     @Override
                     public boolean onCreateActionMode(final ActionMode actionMode, final Menu menu) {
                         actionMode.getMenuInflater().inflate(R.menu.details_context, menu);
-                        // prepareClipboardActionMode(view, actionMode, menu); // Calling method in lifecycle..
+                        prepareClipboardActionMode(view, actionMode, menu); // Calling method in lifecycle api level 22 and down...
                         // Return true so that the action mode is shown
                         return true;
                     }
