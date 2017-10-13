@@ -76,15 +76,13 @@ public class GeokretyConnectorTest extends AbstractResourceInstrumentationTestCa
         // * GK website always return list in the same order
         final List<Trackable> trackables = new GeokretyConnector().searchTrackables("OX5BRQK");
         assertThat(trackables).hasSize(2);
-        assertThat(trackables.get(0).getName()).isEqualTo("c:geo One");
-        assertThat(trackables.get(1).getName()).isEqualTo("c:geo Two");
+        assertThat(trackables).extracting("name").containsOnly("c:geo One", "c:geo Two");
     }
 
     public void testGetIconBrand() throws Exception {
         final List<Trackable> trackables = GeokretyParser.parse(new InputSource(getResourceStream(R.raw.geokret141_xml)));
         assertThat(trackables).hasSize(2);
-        assertThat(trackables.get(0).getIconBrand()).isEqualTo(TrackableBrand.GEOKRETY.getIconResource());
-        assertThat(trackables.get(1).getIconBrand()).isEqualTo(TrackableBrand.GEOKRETY.getIconResource());
+        assertThat(trackables).extracting("brand").containsOnly(TrackableBrand.GEOKRETY, TrackableBrand.GEOKRETY);
     }
 
     private static GeokretyConnector getConnector() {
