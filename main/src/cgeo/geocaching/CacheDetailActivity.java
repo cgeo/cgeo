@@ -2099,6 +2099,12 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                                 buildDetailsContextMenu(actionMode, menu, res.getString(R.string.cache_event), true);
                                 menu.findItem(R.id.menu_calendar).setVisible(cache.canBeAddedToCalendar());
                                 return true;
+                            case R.id.coordinates:
+                                clickedItemText = ((TextView) view).getText();
+                                clickedItemText = GeopointFormatter.reformatForClipboard(clickedItemText);
+                                buildDetailsContextMenu(actionMode, menu, res.getText(R.string.cache_coordinates), true);
+                                return true;
+
                         }
                         return false;
                     }
