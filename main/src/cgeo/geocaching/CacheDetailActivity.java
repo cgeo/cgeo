@@ -1831,7 +1831,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             } else {
                 coordinatesView.setVisibility(View.GONE);
             }
-            
+
             // info
             final String waypointInfo = Formatter.formatWaypointInfo(wpt);
             final TextView infoView = holder.infoView;
