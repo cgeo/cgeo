@@ -135,7 +135,6 @@ final class OkapiClient {
     private static final String TRK_GEOCODE = "code";
     private static final String TRK_NAME = "name";
 
-    private static final String LOG_UUID = "log_uuid";
     private static final String LOG_TYPE = "type";
     private static final String LOG_COMMENT = "comment";
     private static final String LOG_DATE = "date";
@@ -149,7 +148,6 @@ final class OkapiClient {
 
     private static final String IMAGE_CAPTION = "caption";
     private static final String IMAGE_URL = "url";
-    private static final String IMAGE_UUID = "uuid";
 
     // the several realms of possible fields for cache retrieval:
     // Core: for livemap requests (L3 - only with level 3 auth)
@@ -366,7 +364,7 @@ final class OkapiClient {
             }
 
             if (data.get("success").asBoolean()) {
-                return new ImageResult(StatusCode.NO_ERROR, getLogImageUrl(logId, data.get("image_uuid").asText(), connector));
+                return new ImageResult(StatusCode.NO_ERROR, data.get("image_url").asText());
             }
 
             return new ImageResult(StatusCode.LOGIMAGE_POST_ERROR, "");
@@ -374,27 +372,6 @@ final class OkapiClient {
             Log.e("OkapiClient.postLogImage", e);
         }
         return new ImageResult(StatusCode.LOGIMAGE_POST_ERROR, "");
-    }
-
-    @NonNull
-    private static String getLogImageUrl(@NonNull final String logUuid, @NonNull final String imageUuid, @NonNull final OCApiConnector connector) {
-        final Parameters params = new Parameters(LOG_UUID, logUuid);
-        params.add("fields", LOG_IMAGES);
-
-        final JSONResult result = getRequest(connector, OkapiService.SERVICE_LOG_ENTRY, params);
-        if (!result.isSuccess) {
-            return "";
-        }
-
-        final ArrayNode images = (ArrayNode) result.data.get(LOG_IMAGES);
-        if (images != null) {
-            for (final JsonNode imageResponse: images) {
-                if (imageUuid.equalsIgnoreCase(imageResponse.get(IMAGE_UUID).asText())) {
-                    return imageResponse.get(IMAGE_URL).asText();
-                }
-            }
-        }
-        return "";
     }
 
     @NonNull
