@@ -111,9 +111,4 @@ public class OkapiLoggingManager extends AbstractLoggingManager implements Loade
         return installationInformation != null ? installationInformation.imageMaxUploadSize : null;
     }
 
-    @Override
-    public Long getMaxImagePixels() {
-        return installationInformation != null ? installationInformation.imageRcmdMaxPixels : null;
-    }
-
 }

@@ -51,7 +51,6 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
     private static final String SAVED_STATE_IMAGE = "cgeo.geocaching.saved_state_image";
     private static final String SAVED_STATE_IMAGE_SCALE = "cgeo.geocaching.saved_state_image_scale";
     private static final String SAVED_STATE_MAX_IMAGE_UPLOAD_SIZE = "cgeo.geocaching.saved_state_max_image_upload_size";
-    private static final String SAVED_STATE_MAX_IMAGE_PIXELS = "cgeo.geocaching.saved_state_max_image_pixels";
 
     private static final int SELECT_NEW_IMAGE = 1;
     private static final int SELECT_STORED_IMAGE = 2;
@@ -59,7 +58,6 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
     // Data to be saved while reconfiguring
     private Image image;
     private int scaleChoiceIndex;
-    private long maxImagePixels;
     private long maxImageUploadSize;
 
     @Override
@@ -74,7 +72,6 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
         if (extras != null) {
             image = extras.getParcelable(Intents.EXTRA_IMAGE);
             scaleChoiceIndex = extras.getInt(Intents.EXTRA_SCALE, scaleChoiceIndex);
-            maxImagePixels = extras.getLong(Intents.EXTRA_MAX_IMAGE_PIXELS);
             maxImageUploadSize = extras.getLong(Intents.EXTRA_MAX_IMAGE_UPLOAD_SIZE);
             final String geocode = extras.getString(Intents.EXTRA_GEOCODE);
             setCacheTitleBar(geocode);
@@ -85,7 +82,6 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
             image = savedInstanceState.getParcelable(SAVED_STATE_IMAGE);
             scaleChoiceIndex = savedInstanceState.getInt(SAVED_STATE_IMAGE_SCALE);
             maxImageUploadSize = savedInstanceState.getLong(SAVED_STATE_MAX_IMAGE_UPLOAD_SIZE);
-            maxImagePixels = savedInstanceState.getLong(SAVED_STATE_MAX_IMAGE_PIXELS);
         }
 
         if (image == null) {
@@ -157,7 +153,6 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
         outState.putParcelable(SAVED_STATE_IMAGE, image);
         outState.putInt(SAVED_STATE_IMAGE_SCALE, scaleChoiceIndex);
         outState.putLong(SAVED_STATE_MAX_IMAGE_UPLOAD_SIZE, maxImageUploadSize);
-        outState.putLong(SAVED_STATE_MAX_IMAGE_PIXELS, maxImagePixels);
     }
 
     public void saveImageInfo(final boolean saveInfo) {
@@ -174,11 +169,6 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
                         image = new Image.Builder().setUrl(scaleImageResult.getFilename()).build();
 
                         if (maxImageUploadSize > 0 && image.getFile().length() > maxImageUploadSize) {
-                            showToast(res.getString(R.string.err_select_logimage_upload_size));
-                            return;
-                        }
-
-                        if (maxImagePixels > 0 && scaleImageResult.getWidth() * scaleImageResult.getHeight() > maxImagePixels) {
                             showToast(res.getString(R.string.err_select_logimage_upload_size));
                             return;
                         }
