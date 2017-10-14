@@ -30,9 +30,4 @@ public abstract class AbstractLoggingManager implements ILoggingManager {
         return null;
     }
 
-    @Override
-    public Long getMaxImagePixels() {
-        return null;
-    }
-
 }

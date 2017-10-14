@@ -43,6 +43,4 @@ public interface ILoggingManager {
 
     Long getMaxImageUploadSize();
 
-    Long getMaxImagePixels();
-
 }
