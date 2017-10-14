@@ -1835,6 +1835,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             if (coordinates != null) {
                 coordinatesView.setOnClickListener(new CoordinatesFormatSwitcher(coordinates));
                 coordinatesView.setText(coordinates.toString());
+                addContextMenu(coordinatesView);
                 coordinatesView.setVisibility(View.VISIBLE);
             } else {
                 coordinatesView.setVisibility(View.GONE);
@@ -2108,6 +2109,11 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                                 buildDetailsContextMenu(actionMode, menu, res.getString(R.string.cache_event), true);
                                 menu.findItem(R.id.menu_calendar).setVisible(cache.canBeAddedToCalendar());
                                 return true;
+                            case R.id.coordinates:
+                                clickedItemText = ((TextView) view).getText();
+                                clickedItemText = GeopointFormatter.reformatForClipboard(clickedItemText);
+                                buildDetailsContextMenu(actionMode, menu, res.getText(R.string.cache_coordinates), true);
+                                return true;
                         }
                         return false;
                     }
@@ -2120,7 +2126,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     @Override
                     public boolean onCreateActionMode(final ActionMode actionMode, final Menu menu) {
                         actionMode.getMenuInflater().inflate(R.menu.details_context, menu);
-                        prepareClipboardActionMode(view, actionMode, menu);
+                        prepareClipboardActionMode(view, actionMode, menu); // Calling method in lifecycle api level 22 and down...
                         // Return true so that the action mode is shown
                         return true;
                     }
