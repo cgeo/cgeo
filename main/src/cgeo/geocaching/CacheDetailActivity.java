@@ -1831,7 +1831,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             } else {
                 coordinatesView.setVisibility(View.GONE);
             }
-            
+
             // info
             final String waypointInfo = Formatter.formatWaypointInfo(wpt);
             final TextView infoView = holder.infoView;
@@ -2101,9 +2101,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                                 menu.findItem(R.id.menu_calendar).setVisible(cache.canBeAddedToCalendar());
                                 return true;
                             case R.id.coordinates:
-                                clickedItemText = ((TextView)view).getText();
+                                clickedItemText = ((TextView) view).getText();
                                 clickedItemText = GeopointFormatter.reformatForClipboard(clickedItemText);
-                                buildDetailsContextMenu(actionMode,menu,res.getText(R.string.cache_coordinates),true);
+                                buildDetailsContextMenu(actionMode, menu, res.getText(R.string.cache_coordinates), true);
                                 return true;
                         }
                         return false;
