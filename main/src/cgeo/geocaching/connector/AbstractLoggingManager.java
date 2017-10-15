@@ -30,4 +30,9 @@ public abstract class AbstractLoggingManager implements ILoggingManager {
         return null;
     }
 
+    @Override
+    public boolean isImageCaptionMandatory() {
+        return false;
+    }
+
 }

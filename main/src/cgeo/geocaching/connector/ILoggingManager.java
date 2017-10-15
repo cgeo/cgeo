@@ -43,4 +43,6 @@ public interface ILoggingManager {
 
     Long getMaxImageUploadSize();
 
+    boolean isImageCaptionMandatory();
+
 }

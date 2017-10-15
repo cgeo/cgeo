@@ -28,6 +28,7 @@ public class Intents {
     public static final String EXTRA_IMAGE = PREFIX + "image";
     public static final String EXTRA_IMAGES = PREFIX + "images";
     public static final String EXTRA_MAX_IMAGE_UPLOAD_SIZE = PREFIX + "max-image-upload-size";
+    public static final String EXTRA_IMAGE_CAPTION_MANDATORY = PREFIX + "image-caption-mandatory";
     public static final String EXTRA_ID = PREFIX + "id";
     public static final String EXTRA_KEYWORD = PREFIX + "keyword";
     public static final String EXTRA_KEYWORD_SEARCH = PREFIX + "keyword_search";
