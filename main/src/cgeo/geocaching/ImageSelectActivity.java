@@ -51,6 +51,7 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
     private static final String SAVED_STATE_IMAGE = "cgeo.geocaching.saved_state_image";
     private static final String SAVED_STATE_IMAGE_SCALE = "cgeo.geocaching.saved_state_image_scale";
     private static final String SAVED_STATE_MAX_IMAGE_UPLOAD_SIZE = "cgeo.geocaching.saved_state_max_image_upload_size";
+    private static final String SAVED_STATE_IMAGE_CAPTION_MANDATORY = "cgeo.geocaching.saved_state_image_caption_mandatory";
 
     private static final int SELECT_NEW_IMAGE = 1;
     private static final int SELECT_STORED_IMAGE = 2;
@@ -59,6 +60,7 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
     private Image image;
     private int scaleChoiceIndex;
     private long maxImageUploadSize;
+    private boolean imageCaptionMandatory;
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
@@ -73,6 +75,7 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
             image = extras.getParcelable(Intents.EXTRA_IMAGE);
             scaleChoiceIndex = extras.getInt(Intents.EXTRA_SCALE, scaleChoiceIndex);
             maxImageUploadSize = extras.getLong(Intents.EXTRA_MAX_IMAGE_UPLOAD_SIZE);
+            imageCaptionMandatory = extras.getBoolean(Intents.EXTRA_IMAGE_CAPTION_MANDATORY);
             final String geocode = extras.getString(Intents.EXTRA_GEOCODE);
             setCacheTitleBar(geocode);
         }
@@ -82,6 +85,7 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
             image = savedInstanceState.getParcelable(SAVED_STATE_IMAGE);
             scaleChoiceIndex = savedInstanceState.getInt(SAVED_STATE_IMAGE_SCALE);
             maxImageUploadSize = savedInstanceState.getLong(SAVED_STATE_MAX_IMAGE_UPLOAD_SIZE);
+            imageCaptionMandatory = savedInstanceState.getBoolean(SAVED_STATE_IMAGE_CAPTION_MANDATORY);
         }
 
         if (image == null) {
@@ -153,6 +157,7 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
         outState.putParcelable(SAVED_STATE_IMAGE, image);
         outState.putInt(SAVED_STATE_IMAGE_SCALE, scaleChoiceIndex);
         outState.putLong(SAVED_STATE_MAX_IMAGE_UPLOAD_SIZE, maxImageUploadSize);
+        outState.putBoolean(SAVED_STATE_IMAGE_CAPTION_MANDATORY, imageCaptionMandatory);
     }
 
     public void saveImageInfo(final boolean saveInfo) {
@@ -170,6 +175,11 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
 
                         if (maxImageUploadSize > 0 && image.getFile().length() > maxImageUploadSize) {
                             showToast(res.getString(R.string.err_select_logimage_upload_size));
+                            return;
+                        }
+
+                        if (imageCaptionMandatory && StringUtils.isBlank(captionView.getText())) {
+                            showToast(res.getString(R.string.err_logimage_caption_required));
                             return;
                         }
 
