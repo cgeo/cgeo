@@ -157,8 +157,7 @@ public class EditButton extends RelativeLayout {
 
                     if ('A' <= customChar && customChar <= 'Z'
                             || 'a' <= customChar && customChar <= 'z'
-                            || '0' <= customChar && customChar <= '9'
-                            || customChar == ' ') {
+                            || '0' <= customChar && customChar <= '9') {
                         setCustomChar(Character.toUpperCase(customChar));
                     } else {
                         final Context context = getContext();
