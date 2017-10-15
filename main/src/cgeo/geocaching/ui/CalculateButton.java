@@ -60,6 +60,18 @@ public class CalculateButton extends EditButton {
                 return nextChar;
             }
         },
+        BLANK {
+            @Override
+            char getLabel(final ButtonData buttonData) {
+                return ButtonData.BLANK;
+            }
+
+            @Override
+            char setAutoChar(final ButtonData buttonData, final char autoChar) {
+                buttonData.autoChar = autoChar;
+                return autoChar;
+            }
+        },
         CUSTOM {
             @Override
             char getLabel(final ButtonData buttonData) {
@@ -98,6 +110,9 @@ public class CalculateButton extends EditButton {
      * Data used to capture the state of this particular button such that it can be restored again later
      */
     public static class ButtonData implements Serializable, JSONAble {
+        /** Character used to 'hide' button **/
+        static final char BLANK = ' ';
+
         ValueType type = ValueType.INPUT_VAL;
         /** Value obtained from CoordinateInputDialog */
         char inputVal;
@@ -191,6 +206,7 @@ public class CalculateButton extends EditButton {
         switch (buttonData.type) {
 
             case CUSTOM:
+            case BLANK:
                 butt.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.button_default));
                 butt.setTextColor(ContextCompat.getColor(getContext(), R.color.steel));
                 butt.setTypeface(null, Typeface.BOLD);
@@ -312,10 +328,17 @@ public class CalculateButton extends EditButton {
      * Note: 'CustomValues' buttons will also be assigned to 'InputVal' as well.
      */
     private void toggleType() {
-        if (getType() == ValueType.INPUT_VAL) {
-            setType(ValueType.AUTO_CHAR);
-        } else {
-            setType(ValueType.INPUT_VAL);
+        switch (getType()) {
+            case INPUT_VAL:
+                setType(ValueType.AUTO_CHAR);
+                break;
+
+            case AUTO_CHAR:
+                setType(ValueType.BLANK);
+                break;
+
+            default:
+                setType(ValueType.INPUT_VAL);
         }
 
         setAutoChar(buttonData.autoChar);
