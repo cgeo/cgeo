@@ -584,7 +584,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         final String lat = getLatResult();
         final String lon = getLonResult();
 
-        if (lat.contains("_") || lat.contains("*") || lon.contains("_") || lon.contains("*")) {
+        if (currentFormat == null || lat.contains("_") || lat.contains("*") || lon.contains("_") || lon.contains("*")) {
             return false;
         }
 
@@ -756,6 +756,9 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
      * @param values The string of values to be formatted.
      */
     private String format(final String values, final int degDigits) {
+        if (currentFormat == null) {
+            return "";
+        }
         final String returnValue;
 
         switch (currentFormat) {
