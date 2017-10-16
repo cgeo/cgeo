@@ -18,9 +18,6 @@ public class Intents {
 
     public static final String EXTRA_ADDRESS = PREFIX + "address";
     public static final String EXTRA_COORDS = PREFIX + "coords";
-    public static final String EXTRA_LATITUDE = PREFIX + "latitude";
-    public static final String EXTRA_LONGITUDE = PREFIX + "longitude";
-    public static final String EXTRA_COUNT = PREFIX + "count";
     public static final String EXTRA_GEOCODE = PREFIX + "geocode";
     public static final String EXTRA_GEOCACHE = PREFIX + "geocache";
     public static final String EXTRA_GUID = PREFIX + "guid";
@@ -59,7 +56,6 @@ public class Intents {
     public static final String EXTRA_TRACKING_CODE = PREFIX + "tracking_code";
     public static final String EXTRA_USERNAME = PREFIX + "username";
     public static final String EXTRA_WAYPOINT_ID = PREFIX + "waypoint_id";
-    public static final String EXTRA_CACHELIST = PREFIX + "cache_list";
     public static final String EXTRA_POCKET_GUID = PREFIX + "pocket_guid";
 
     private static final String PREFIX_ACTION = "cgeo.geocaching.intent.action.";
@@ -84,7 +80,6 @@ public class Intents {
 
     private static final String PREFIX_TOKEN_AUTH = "cgeo.geocaching.intent.tokenauth.";
     public static final String EXTRA_TOKEN_AUTH_URL_TOKEN = PREFIX_TOKEN_AUTH + "token";
-    public static final String EXTRA_TOKEN_AUTH_URL_REGISTER = PREFIX_TOKEN_AUTH + "register";
     public static final String EXTRA_TOKEN_AUTH_USERNAME = PREFIX_TOKEN_AUTH + "username";
     public static final String EXTRA_TOKEN_AUTH_PASSWORD = PREFIX_TOKEN_AUTH + "password";
 
