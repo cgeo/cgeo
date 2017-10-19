@@ -88,7 +88,8 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class Geocache implements IWaypoint {
 
-    private static final int OWN_WP_PREFIX_OFFSET = 17;
+    private static final String WP_PREFIX_CHARS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
     private long updated = 0;
     private long detailedUpdate = 0;
     private long visitedDate = 0;
@@ -1388,7 +1389,7 @@ public class Geocache implements IWaypoint {
     }
 
     /*
-     * Assigns a unique two-digit (compatibility with gc.com)
+     * Assigns a unique two-character (compatibility with gc.com)
      * prefix within the scope of this cache.
      */
     private void assignUniquePrefix(final Waypoint waypoint) {
@@ -1398,8 +1399,9 @@ public class Geocache implements IWaypoint {
             assignedPrefixes.add(wp.getPrefix());
         }
 
-        for (int i = OWN_WP_PREFIX_OFFSET; i < 100; i++) {
-            final String prefixCandidate = String.valueOf(i);
+        final int length = WP_PREFIX_CHARS.length();
+        for (int i = 0; i < length * length; i++) {
+            final String prefixCandidate = "" + WP_PREFIX_CHARS.charAt(i / length) + WP_PREFIX_CHARS.charAt(i % length);
             if (!assignedPrefixes.contains(prefixCandidate)) {
                 waypoint.setPrefix(prefixCandidate);
                 return;
