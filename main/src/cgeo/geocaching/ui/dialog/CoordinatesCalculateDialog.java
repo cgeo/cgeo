@@ -580,6 +580,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
     private boolean areCurrentCoordinatesValid() {
         // convert text to geopoint
         final Geopoint current;
+
         final String lat = getLatResult();
         final String lon = getLonResult();
 
@@ -587,27 +588,9 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
             return false;
         }
 
-        final String delimiters = "[ °'\"\\.]+";
-        final String[] latTokens = lat.split(delimiters);
-        final String[] lonTokens = lon.split(delimiters);
-
         try {
-            switch (currentFormat) {
-                case Deg:
-                    current = new Geopoint(latTokens[0], latTokens[1], latTokens[2], lonTokens[0], lonTokens[1], lonTokens[2]);
-                    break;
-                case Min:
-                    current = new Geopoint(latTokens[0], latTokens[1], latTokens[2], latTokens[3], lonTokens[0], lonTokens[1], lonTokens[2], lonTokens[3]);
-                    break;
-                case Sec:
-                    current = new Geopoint(latTokens[0], latTokens[1], latTokens[2], latTokens[3], latTokens[4], lonTokens[0], lonTokens[1], lonTokens[2], lonTokens[3], lonTokens[4]);
-                    break;
-                case Plain:
-                    current = new Geopoint(lat, lon);
-                    break;
-                default:
-                    throw new IllegalStateException("can never happen, keep tools happy");
-            }
+            current = new Geopoint(lat, lon);
+
             if (current.isValid()) {
                 gp = current;
                 return true;

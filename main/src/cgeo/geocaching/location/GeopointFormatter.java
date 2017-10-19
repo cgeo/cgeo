@@ -38,13 +38,13 @@ public class GeopointFormatter {
         /** Example: "-0.123456" (unlocalized latitude) */
         LAT_DECDEGREE_RAW,
 
-        /** Example: "N 10° 12.345" */
+        /** Example: "N 01° 02.034" */
         LAT_DECMINUTE,
 
         /** Example: "N 10 12,345" */
         LAT_DECMINUTE_RAW,
 
-        /** Example: "N 10° 12' 34.567" */
+        /** Example: "n 01° 02' 03.045" */
         LAT_DECMINSEC,
 
         /** Example: "W 0.123456°" */
@@ -53,13 +53,13 @@ public class GeopointFormatter {
         /** Example: "-0.123456" (unlocalized longitude) */
         LON_DECDEGREE_RAW,
 
-        /** Example: "W 5° 12.345" */
+        /** Example: "W 001° 02.034" */
         LON_DECMINUTE,
 
         /** Example: "W 5 12,345" */
         LON_DECMINUTE_RAW,
 
-        /** Example: "W 5° 12' 34.567" */
+        /** Example: "W 001° 02' 03.045" */
         LON_DECMINSEC,
 
         /** Example: "32U E 549996 N 5600860" */
@@ -136,7 +136,7 @@ public class GeopointFormatter {
 
             case LON_DECMINUTE: {
                 final Geopoint rgp = gp.roundedAt(60 * 1000);
-                return String.format(Locale.getDefault(), "%c %02d° %06.3f\'", rgp.getLonDir(), rgp.getLonDeg(), rgp.getLonMinRaw());
+                return String.format(Locale.getDefault(), "%c %03d° %06.3f\'", rgp.getLonDir(), rgp.getLonDeg(), rgp.getLonMinRaw());
             }
 
             case LON_DECMINUTE_RAW: {
