@@ -2,6 +2,9 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
+    <b>2017.10.22:</b>\n
+    · Fix: Cache description not shown completely if it contains the new gc.com coord checker\n
+    \n
     <b>2017.10.10:</b>\n
     · Fix: Search broken for user names containing plus sign\n
     · Fix: Crash in map directory selection on some devices\n
