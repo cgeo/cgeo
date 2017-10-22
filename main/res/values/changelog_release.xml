@@ -2,12 +2,14 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-    <b>2017.10.10-legacy:</b>\n
+    <b>2017.10.22-legacy:</b>\n
+     · Fix: Cache description not shown completely if it contains the new gc.com coord checker\n
     \n
     <b>Be aware:\n
     There will most probably be no more bugfixes after this release for devices on Android below 4.0!\n
     This version might stop working unexpectedly, if there are server side changes.</b>\n
     \n
+    <b>2017.10.10-legacy:</b>\n
     · Fix: Login failed on geocaching.com\n
     · Fix: Failed to load more caches in search results\n
     · Fix: Username no longer shown on mainscreen\n 
