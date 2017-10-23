@@ -2,7 +2,7 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-    <b>2017.10.22:</b>\n
+    <b>2017.10.23:</b>\n
     · Fix: Cache description not shown completely if it contains the new gc.com coord checker\n
     \n
     \n
