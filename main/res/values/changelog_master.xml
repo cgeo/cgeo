@@ -4,12 +4,19 @@
   <string name="changelog_master" translatable="false">
     <b>Next feature release:</b>\n
     · New: Coordinate calculator (New Waypoint - Calculate Coordinates)\n
-    · New: Log image upload for OC\n
+    · New: Log image upload for Opencaching\n
+    · New: Detect certitude as checker and support opening it via menu\n
+    · New: Show as list menu now only active if more than one cache is on map\n
     · Fix: Improve parsing of home coordinates\n
     · Fix: Disabled caches might be shown with truncated title\n
     · Fix: Some OC cache URL not detected correctly\n
     · Fix: Some possible crashes on map\n
     · Fix: Search caches by users with a \'+\' in the name\n
+    · Fix: Correctly display pictures with relative URLS\n
+    · Fix: Disable phone number linking in personal note field\n
+    · Fix: Possible crash when starting directory selection\n
+    · Fix: Improved detection of dark text to allow contrast improvement\n
+    · Fix: Improve creation of nomedia file in geocache data directories\n
      \n
   </string>
 </resources>
