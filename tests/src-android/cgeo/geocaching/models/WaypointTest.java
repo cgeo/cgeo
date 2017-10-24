@@ -6,7 +6,9 @@ import cgeo.CGeoTestCase;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.location.Geopoint;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Iterator;
 
 public class WaypointTest extends CGeoTestCase {
@@ -111,7 +113,13 @@ public class WaypointTest extends CGeoTestCase {
         local.setId(4711);
 
         final Waypoint server = new Waypoint("", WaypointType.STAGE, false);
-        server.merge(local);
+        server.setPrefix("S1");
+        final ArrayList<Waypoint> newWaypoints = new ArrayList<>();
+        newWaypoints.add(server);
+        Waypoint.mergeWayPoints(newWaypoints, Collections.singletonList(local), false);
+
+        assertThat(newWaypoints.size()).isEqualTo(1);
+        assertThat(newWaypoints.contains(server)).isTrue();
 
         assertThat(server.getPrefix()).isEqualTo("S1");
         assertThat(server.getCoords()).isEqualTo(new Geopoint("N 45°49.739 E 9°45.038"));
@@ -119,6 +127,46 @@ public class WaypointTest extends CGeoTestCase {
         assertThat(server.getUserNote()).isEqualTo("User Note");
         assertThat(server.isVisited()).isTrue();
         assertThat(server.getId()).isEqualTo(4711);
+    }
+
+    public static void testMergeLocalOwnWPConflictsWithServerWP() {
+        final Waypoint local = new Waypoint("Stage 1", WaypointType.STAGE, true);
+        local.setPrefix("01");
+        local.setCoords(new Geopoint("N 45°49.739 E 9°45.038"));
+        local.setNote("Note");
+        local.setUserNote("User Note");
+        local.setVisited(true);
+        local.setId(4711);
+
+        final Waypoint server = new Waypoint("Reference Point 1", WaypointType.TRAILHEAD, false);
+        server.setPrefix("01");
+        server.setCoords(new Geopoint("N 45°49.001 E 9°45.945"));
+        server.setNote("Here turn right");
+
+        final ArrayList<Waypoint> newWaypoints = new ArrayList<>();
+        newWaypoints.add(server);
+        Waypoint.mergeWayPoints(newWaypoints, Collections.singletonList(local), false);
+
+        assertThat(newWaypoints.size()).isEqualTo(2);
+        assertThat(newWaypoints.contains(local)).isTrue();
+
+        // server wp is untouched
+        assertThat(server.getPrefix()).isEqualTo("01");
+        assertThat(server.getCoords()).isEqualTo(new Geopoint("N 45°49.001 E 9°45.945"));
+        assertThat(server.getNote()).isEqualTo("Here turn right");
+        assertThat(server.getUserNote()).isEqualTo("");
+        assertThat(server.isVisited()).isFalse();
+        assertThat(server.getId()).isEqualTo(-1);
+        assertThat(server.isUserDefined()).isFalse();
+
+        // local user defined wp got new prefix
+        assertThat(local.getPrefix()).isNotEqualTo("01");
+        assertThat(local.getCoords()).isEqualTo(new Geopoint("N 45°49.739 E 9°45.038"));
+        assertThat(local.getNote()).isEqualTo("Note");
+        assertThat(local.getUserNote()).isEqualTo("User Note");
+        assertThat(local.isVisited()).isTrue();
+        assertThat(local.getId()).isEqualTo(4711);
+        assertThat(local.isUserDefined()).isTrue();
     }
 
     public static void testMergeFinalWPWithLocalCoords() {

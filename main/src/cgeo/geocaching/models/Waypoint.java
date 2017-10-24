@@ -14,10 +14,13 @@ import android.support.annotation.Nullable;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
+
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -25,7 +28,10 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 public class Waypoint implements IWaypoint {
 
     public static final String PREFIX_OWN = "OWN";
+
+    private static final String WP_PREFIX_CHARS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private static final int ORDER_UNDEFINED = -2;
+
     private int id = -1;
     private String geocode = "geocode";
     private WaypointType waypointType = WaypointType.WAYPOINT;
@@ -102,7 +108,13 @@ public class Waypoint implements IWaypoint {
         for (final Waypoint oldWaypoint : oldPoints) {
             final String prefix = oldWaypoint.getPrefix();
             if (newPrefixes.containsKey(prefix)) {
-                newPrefixes.get(prefix).merge(oldWaypoint);
+                final Waypoint newWaypoint = newPrefixes.get(prefix);
+                if (oldWaypoint.isUserDefined() && !newWaypoint.isUserDefined()) {
+                    assignUniquePrefix(oldWaypoint, newPoints);
+                    newPoints.add(oldWaypoint);
+                } else {
+                    newWaypoint.merge(oldWaypoint);
+                }
             } else if (oldWaypoint.isUserDefined() || forceMerge) {
                 newPoints.add(oldWaypoint);
             }
@@ -336,4 +348,28 @@ public class Waypoint implements IWaypoint {
     public void setCalculatorStoredState(final CalcState calculatorStoredState) {
         this.calculatorSaveState = calculatorStoredState;
     }
+
+    /*
+     * Assigns a unique two-character (compatibility with gc.com)
+     * prefix within the scope of this cache.
+     */
+    public static void assignUniquePrefix(final Waypoint waypoint, final Collection<Waypoint> existingWaypoints) {
+        // gather existing prefixes
+        final Set<String> assignedPrefixes = new HashSet<>();
+        for (final Waypoint wp : existingWaypoints) {
+            assignedPrefixes.add(wp.getPrefix());
+        }
+
+        final int length = WP_PREFIX_CHARS.length();
+        for (int i = 0; i < length * length; i++) {
+            final String prefixCandidate = Character.toString(WP_PREFIX_CHARS.charAt(i / length)) + WP_PREFIX_CHARS.charAt(i % length);
+            if (!assignedPrefixes.contains(prefixCandidate)) {
+                waypoint.setPrefix(prefixCandidate);
+                return;
+            }
+        }
+
+        throw new IllegalStateException("too many waypoints, unable to assign unique prefix");
+    }
+
 }
