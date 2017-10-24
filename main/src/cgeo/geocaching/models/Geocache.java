@@ -88,8 +88,6 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class Geocache implements IWaypoint {
 
-    private static final String WP_PREFIX_CHARS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
     private long updated = 0;
     private long detailedUpdate = 0;
     private long visitedDate = 0;
@@ -1388,27 +1386,8 @@ public class Geocache implements IWaypoint {
         return saveToDatabase && DataStore.saveWaypoint(waypoint.getId(), geocode, waypoint);
     }
 
-    /*
-     * Assigns a unique two-character (compatibility with gc.com)
-     * prefix within the scope of this cache.
-     */
     private void assignUniquePrefix(final Waypoint waypoint) {
-        // gather existing prefixes
-        final Set<String> assignedPrefixes = new HashSet<>();
-        for (final Waypoint wp : waypoints) {
-            assignedPrefixes.add(wp.getPrefix());
-        }
-
-        final int length = WP_PREFIX_CHARS.length();
-        for (int i = 0; i < length * length; i++) {
-            final String prefixCandidate = "" + WP_PREFIX_CHARS.charAt(i / length) + WP_PREFIX_CHARS.charAt(i % length);
-            if (!assignedPrefixes.contains(prefixCandidate)) {
-                waypoint.setPrefix(prefixCandidate);
-                return;
-            }
-        }
-
-        throw new IllegalStateException("too many waypoints, unable to assign unique prefix");
+        Waypoint.assignUniquePrefix(waypoint, waypoints);
     }
 
     public boolean hasWaypoints() {
