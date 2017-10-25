@@ -860,7 +860,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         for (final EditButton button : buttons) {
             // Remove inactive and blank digits from result
             if (button.getVisibility() == View.VISIBLE) {
-                if (button.getLabel() == ' ') {
+                if (button.getLabel() == CalculateButton.ButtonData.BLANK) {
                     returnValue = returnValue.concat(PLACE_HOLDER);
                 } else {
                     returnValue = returnValue.concat(String.valueOf(button.getLabel()));

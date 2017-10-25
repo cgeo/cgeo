@@ -111,7 +111,7 @@ public class CalculateButton extends EditButton {
      */
     public static class ButtonData implements Serializable, JSONAble {
         /** Character used to 'hide' button **/
-        static final char BLANK = ' ';
+        public static final char BLANK = ' ';
 
         ValueType type = ValueType.INPUT_VAL;
         /** Value obtained from CoordinateInputDialog */
