@@ -1114,9 +1114,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         final char[] sortedVariables = variableNames.toCharArray();
         Arrays.sort(sortedVariables);
 
-        for (int i = 0; i < sortedVariables.length; i++) {
-            final char ch = sortedVariables[i];
-
+        for (final char ch : sortedVariables) {
             if (range.check(ch)) {
                 if (getVariable(ch, returnList, false) != null) {
                     continue;
