@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<gpx xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" version="1.0" creator="Opencaching.de - https://www.opencaching.de/" xsi:schemaLocation="http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd http://www.groundspeak.com/cache/1/0/1 http://www.groundspeak.com/cache/1/0/1/cache.xsd https://github.com/opencaching/gpx-extension-v1 https://raw.githubusercontent.com/opencaching/gpx-extension-v1/master/schema.xsd http://www.gsak.net/xmlv1/4 http://www.gsak.net/xmlv1/4/gsak.xsd" xmlns="http://www.topografix.com/GPX/1/0">
+  <name>Cache listing generated from Opencaching.de</name>
+  <desc>This is a waypoint file generated from Opencaching.de</desc>
+  <author>Opencaching.de</author>
+  <email>kontakt@opencaching.de</email>
+  <url>www.opencaching.de</url>
+  <urlname>Opencaching.de - Geocaching in Deutschland, Österreich und der Schweiz</urlname>
+  <time>2017-10-16T08:28:24Z</time>
+  <keywords>cache, geocache, opencaching, waypoint</keywords>
+  <wpt lat="49.04193" lon="9.09242">
+    <time>2010-05-12T00:00:00Z</time>
+    <name>OCA521</name>
+    <desc>rlc: Schwäbisches Schnapsmuseum</desc>
+    <src>www.opencaching.de</src>
+    <url>https://www.opencaching.de/viewcache.php?cacheid=145364</url>
+    <urlname>rlc: Schwäbisches Schnapsmuseum</urlname>
+    <sym>Geocache Found</sym>
+    <type>Geocache|Traditional Cache</type>
+    <groundspeak:cache id="145364" available="True" archived="False" xmlns:groundspeak="http://www.groundspeak.com/cache/1/0/1">
+      <groundspeak:name>rlc: Schwäbisches Schnapsmuseum</groundspeak:name>
+      <groundspeak:placed_by>langlurch</groundspeak:placed_by>
+      <groundspeak:owner id="131507">langlurch</groundspeak:owner>
+      <groundspeak:type>Traditional Cache</groundspeak:type>
+      <groundspeak:container>Micro</groundspeak:container>
+      <groundspeak:attributes>
+           <groundspeak:attribute id="25" inc="1">Parking available</groundspeak:attribute>
+           <groundspeak:attribute id="26" inc="1">Public transportation</groundspeak:attribute>
+           <groundspeak:attribute id="130" inc="1">Point of interest</groundspeak:attribute>
+           <groundspeak:attribute id="13" inc="1">Available at all times</groundspeak:attribute>
+           <groundspeak:attribute id="62" inc="0">Seasonal access</groundspeak:attribute>
+           <groundspeak:attribute id="15" inc="1">Available during winter</groundspeak:attribute>
+      </groundspeak:attributes>
+      <groundspeak:difficulty>2</groundspeak:difficulty>
+      <groundspeak:terrain>1</groundspeak:terrain>
+      <groundspeak:country>Germany</groundspeak:country>
+      <groundspeak:state>Baden-Württemberg</groundspeak:state>
+      <groundspeak:short_description html="True">Schneller Micro, der Euch zum Besuch des in unmittelbarer Nähe gelegenen "Schwäbischen Schnapsmuseums" anregen soll.</groundspeak:short_description>
+      <groundspeak:long_description html="True">&lt;p&gt;&lt;b&gt;Eigenen Stift mitbringen! - Bring your own pen!&lt;/b&gt;&lt;/p&gt;
+&lt;h4&gt;Schwäbisches Schnapsmuseum:&lt;/h4&gt;
+&lt;p&gt;Die Stadt Bönnigheim verfügt über ein wahres und absolut
+sehenswertes Kleinod: das &lt;a href="http://www.schwaebisches-schnapsmuseum.de"&gt;Schwäbische
+Schnapsmuseum&lt;/a&gt;. Es handelt sich hierbei um die größte
+Ausstellung zur Kulturgeschichte und Technik der Alkoholbrennerei
+Deutschlands, wenn nicht sogar weltweit.&lt;/p&gt;
+&lt;p&gt;Besonders interessant finde ich persönlich die umfangreiche
+Sammlung an beschlagnahmten Destillierapparaten. Zwei der
+beschlagnahmten Destillierapparate wurden sogar von
+Gefängnisinsassen im Geheimen zusammengebaut!&lt;/p&gt;
+&lt;p&gt;Da die Sammlung primär auf Liebhaberei und ehrenamtlicher
+Tätigkeit beruht, sind die normalen Öffnungszeiten leider nicht
+übermäßig üppig, nämlich zwischen Mai und September sonntags von 14
+bis 17 Uhr (oder nach Vereinbarung). Einen Besuch empfehle ich
+jedoch ausdrücklich!&lt;/p&gt;
+&lt;p&gt;Da der Museumsleiter über den Cache informiert ist, wäre es
+nett, wenn ihr ihm sagen würdet, falls ihr über diesen Cache auf
+das Museum gekommen seid.&lt;/p&gt;
+&lt;p /&gt;Ach ja: Aufgrund der umstehenden Gebäude sind die Koordinaten leider nicht die Allerbesten.&lt;/P&gt;&lt;p&gt;&lt;em&gt;© &lt;a href='https://www.opencaching.de/viewprofile.php?userid=131507' target='_blank'&gt;langlurch&lt;/a&gt;, &lt;a href='https://www.opencaching.de/viewcache.php?cacheid=145364' target='_blank'&gt;Opencaching.de&lt;/a&gt;, &lt;a href='http://creativecommons.org/licenses/by-nc-nd/3.0/de/' target='_blank'&gt;CC BY-NC-ND&lt;/a&gt;, Stand: 16.10.2017; alle Logeinträge © jeweiliger Autor&lt;/em&gt;&lt;/p&gt;
+&lt;br /&gt;</groundspeak:long_description>
+      <groundspeak:encoded_hints>Rechte Distille</groundspeak:encoded_hints>      <groundspeak:logs>
+      <groundspeak:log id="1047971">
+        <groundspeak:date>2015-04-26T17:23:00Z</groundspeak:date>
+        <groundspeak:type>Found it</groundspeak:type>
+        <groundspeak:finder id="251704">Bananeweizen</groundspeak:finder>
+        <groundspeak:text encoded="False">&lt;p&gt;Wenn mich nicht die netten Kollegen drauf hingewiesen hätten, dann wäre ich an dem hier wohl vorbeimarschiert. Aber so wurde beim Abschied vom geistreichen Event auch noch eine reale Dose gesucht. Und man könnte meinen, der Likör hätte schon angeschlagen: Wir sahen die Dose doch tatsächlich zweimal, links und rechts! :)&lt;/p&gt;</groundspeak:text>
+      </groundspeak:log>
+      <groundspeak:log id="1165855">
+        <groundspeak:date>2017-03-05T14:08:19Z</groundspeak:date>
+        <groundspeak:type>Found it</groundspeak:type>
+        <groundspeak:finder id="308765">Wolli T</groundspeak:finder>
+        <groundspeak:text encoded="False">Schnell gefunden&lt;br /&gt;
+Tftc said Wolli T    Team Geo-Jedi </groundspeak:text>
+      </groundspeak:log>
+      <groundspeak:log id="1143827">
+        <groundspeak:date>2016-08-13T18:00:00Z</groundspeak:date>
+        <groundspeak:type>Found it</groundspeak:type>
+        <groundspeak:finder id="334418">HJLA</groundspeak:finder>
+        <groundspeak:text encoded="False">&lt;p&gt;&lt;i&gt;&lt;span style="color:#00c000"&gt;Cache ist ok&lt;/span&gt;&lt;/i&gt;&lt;/p&gt;
+&lt;p&gt;Wir mussten schon ein bisschen suchen, die Halterung ist super. &lt;img title="Lächelnd" src="resource2/tinymce/plugins/emotions/img/smiley-smile.gif" border="0" alt="Lächelnd" /&gt;&lt;/p&gt;
+&lt;p&gt;Der Hinweis hilft vom Museum aus gesehen, nicht wenn man in Richtung Museum blickt. &lt;/p&gt;
+&lt;p&gt;DfdD&lt;/p&gt;</groundspeak:text>
+      </groundspeak:log>
+      <groundspeak:log id="1076774">
+        <groundspeak:date>2015-11-01T18:31:58Z</groundspeak:date>
+        <groundspeak:type>Found it</groundspeak:type>
+        <groundspeak:finder id="322227">Schwaabe</groundspeak:finder>
+        <groundspeak:text encoded="False">Beim ersten Mal nix gefunden, diesmal mit Untetstützung vom Sohnemann easy gefunden. Danke für die Dose.</groundspeak:text>
+      </groundspeak:log>
+      <groundspeak:log id="1042597">
+        <groundspeak:date>2015-04-26T22:59:40Z</groundspeak:date>
+        <groundspeak:type>Found it</groundspeak:type>
+        <groundspeak:finder id="270336">RailrunnerMvC</groundspeak:finder>
+        <groundspeak:text encoded="False">Beim besuch auf dem Geistreichen Geocachen auch diesen kleinen gefunden&lt;br /&gt;
+RailrunnerMvC 26 . April 2015 22:59 29</groundspeak:text>
+      </groundspeak:log>
+      <groundspeak:log id="1041785">
+        <groundspeak:date>2015-04-26T00:00:00Z</groundspeak:date>
+        <groundspeak:type>Found it</groundspeak:type>
+        <groundspeak:finder id="240142">Schnullebacke</groundspeak:finder>
+        <groundspeak:text encoded="False">&lt;p&gt;Bevor wir zum Event Geistreiches Geocachen ins Museum verschwunden sind,
+ haben wir uns diese Distillen schonmal näher betrachtet. Wir wussten ja
+ - hier war doch was ... Nach kurzer Zeit wurde das kleine Dösle 
+gefunden und wir konnten uns im Logbuch verewigen. &lt;br /&gt;Jetzt ab ins Museum&lt;br /&gt;&lt;br /&gt;DfdC sagt schnullebacke&lt;/p&gt;</groundspeak:text>
+      </groundspeak:log>
+      <groundspeak:log id="1018715">
+        <groundspeak:date>2014-12-19T00:00:00Z</groundspeak:date>
+        <groundspeak:type>Found it</groundspeak:type>
+        <groundspeak:finder id="190927">Le-go-mez</groundspeak:finder>
+        <groundspeak:text encoded="False">&lt;p&gt;Beim letzten Besuch in dieser Ecke war er nicht da, heute war der Cache gleich entdeckt und geloggt.&lt;br /&gt;TFTC&lt;br /&gt;Le-go-mez&lt;/p&gt;</groundspeak:text>
+      </groundspeak:log>
+      <groundspeak:log id="995427">
+        <groundspeak:date>2014-08-20T00:00:00Z</groundspeak:date>
+        <groundspeak:type>Found it</groundspeak:type>
+        <groundspeak:finder id="307190">DanyRi</groundspeak:finder>
+        <groundspeak:text encoded="False">&lt;p&gt;schnell gefunden aber cooles Versteck &lt;img title="Lachend" src="resource2/tinymce/plugins/emotions/img/smiley-laughing.gif" border="0" alt="Lachend" /&gt;&lt;/p&gt;</groundspeak:text>
+      </groundspeak:log>
+      <groundspeak:log id="844426">
+        <groundspeak:date>2012-08-26T00:00:00Z</groundspeak:date>
+        <groundspeak:type>Found it</groundspeak:type>
+        <groundspeak:finder id="128162">Gamid</groundspeak:finder>
+        <groundspeak:text encoded="False">&lt;p&gt;Wir hatten in der "Alten Apotheke" gegessen und von Außen das wiederhergestellte Apothekenlabor bewundert. Offen ist es nur an jedem ersten Sonntag  im Monat. Da dort besonders auf die Geschichte der Destillation eingegangen wird, liegt eine Verbindung zum Schnapsmuseum nahe, der in einem Gespräch dort bestätigt werden konnte. Den das hatte zufällig gerade offen :) .&lt;/p&gt;
+&lt;p&gt; &lt;/p&gt;
+&lt;p&gt;Schnell gefunden, vielen Dank!&lt;/p&gt;</groundspeak:text>
+      </groundspeak:log>
+      <groundspeak:log id="801243">
+        <groundspeak:date>2012-02-26T00:00:00Z</groundspeak:date>
+        <groundspeak:type>Found it</groundspeak:type>
+        <groundspeak:finder id="175552">XXX Schwabe XXX</groundspeak:finder>
+        <groundspeak:text encoded="False">&lt;p&gt;Nichts los beim Schnapsmuseum. Daher in aller Ruhe gesucht, gefunden und
+ die Geräte angeschaut. Die Infos aus der Beschreibung hören sich 
+interessant an und machen Lust auf einen Besuch im Museum.&lt;br /&gt;Danke für den Cache.&lt;br /&gt;&lt;br /&gt;Gruß Oli&lt;/p&gt;</groundspeak:text>
+      </groundspeak:log>
+      <groundspeak:log id="775078">
+        <groundspeak:date>2011-09-24T00:00:00Z</groundspeak:date>
+        <groundspeak:type>Found it</groundspeak:type>
+        <groundspeak:finder id="112331">BoersenbaerBen</groundspeak:finder>
+        <groundspeak:text encoded="False">&lt;p&gt;&lt;span&gt;Das Museum hat sich 
+offensichtlich auf eine Besuchergruppe vorbereitet (die ich später im 
+Ort auch noch gesehen habe). Vorher konnte ich ungestört loggen. TFTC.&lt;/span&gt;&lt;/p&gt;</groundspeak:text>
+      </groundspeak:log>
+      <groundspeak:log id="847185">
+        <groundspeak:date>2011-07-04T00:00:00Z</groundspeak:date>
+        <groundspeak:type>Found it</groundspeak:type>
+        <groundspeak:finder id="105244">elebaerg</groundspeak:finder>
+        <groundspeak:text encoded="False">&lt;p&gt;
+&lt;/p&gt;&lt;p class="LogText" style="margin:0px;padding:.5em 0px 0px;font-size:12px;font-family:Verdana, Arial, Helvetica, Geneva, sans-serif;vertical-align:baseline;color:#594a42;line-height:18px;"&gt;Sehr einfach und sehr schnell gefunden.&lt;br /&gt;&lt;br /&gt;Danke sagen&lt;br /&gt;elebaerg &amp;amp; C. &amp;amp; L.&lt;/p&gt;
+</groundspeak:text>
+      </groundspeak:log>
+      <groundspeak:log id="863494">
+        <groundspeak:date>2011-07-03T00:00:00Z</groundspeak:date>
+        <groundspeak:type>Found it</groundspeak:type>
+        <groundspeak:finder id="250842">btowncrew</groundspeak:finder>
+        <groundspeak:text encoded="False">&lt;p&gt;Schön versteckt. Eigentlich Magnet erwartet ...&lt;/p&gt;</groundspeak:text>
+      </groundspeak:log>
+      <groundspeak:log id="743179">
+        <groundspeak:date>2011-06-03T00:00:00Z</groundspeak:date>
+        <groundspeak:type>Found it</groundspeak:type>
+        <groundspeak:finder id="199776">Zwunikat</groundspeak:finder>
+        <groundspeak:text encoded="False">&lt;p&gt;Bönnigheim ist wunderschönes kleines Örtchen. Haben uns hier sehr wohl gefühlt. Den Cache haben wir auf dem Weg in den Biergarten abends mitgenommen. Sehr gemütlich und recht leicht zu finden.&lt;/p&gt;
+&lt;p&gt;Gruß Zwunikat&lt;/p&gt;</groundspeak:text>
+      </groundspeak:log>
+      <groundspeak:log id="722514">
+        <groundspeak:date>2011-04-19T00:00:00Z</groundspeak:date>
+        <groundspeak:type>Found it</groundspeak:type>
+        <groundspeak:finder id="189445">cleminguin</groundspeak:finder>
+        <groundspeak:text encoded="False">&lt;p&gt;Auf dem Nach Hause Weg noch schnell geloggt&lt;/p&gt;
+&lt;p&gt;Museum war allerdings schon zu&lt;/p&gt;</groundspeak:text>
+      </groundspeak:log>
+      <groundspeak:log id="705863">
+        <groundspeak:date>2011-02-27T00:00:00Z</groundspeak:date>
+        <groundspeak:type>Found it</groundspeak:type>
+        <groundspeak:finder id="146241">braveknight</groundspeak:finder>
+        <groundspeak:text encoded="False">&lt;p class="MsoNormal"&gt;gecached :o) tolle Idee, das Versteck! &lt;/p&gt;
+&lt;p class="MsoNormal"&gt;Tftc&lt;/p&gt;</groundspeak:text>
+      </groundspeak:log>
+      <groundspeak:log id="875524">
+        <groundspeak:date>2011-01-08T00:00:00Z</groundspeak:date>
+        <groundspeak:type>Found it</groundspeak:type>
+        <groundspeak:finder id="236481">gps-guru</groundspeak:finder>
+        <groundspeak:text encoded="False">Nach dem Einkaufen in Bönnigheim noch schnell einen Abstecher zum Schnapsmuseum gemacht, das wir schon vor einiger Zeit besichtigt haben. Wenn das Museum offen ist, sollte man sich die Besichtigung auf keinen Fall entgehen lassen, denn es ist wirklich sehr sehenswert und interessant.&lt;br /&gt;&lt;br /&gt;Danke und viele Grüße&lt;br /&gt;gps-guru(s)</groundspeak:text>
+      </groundspeak:log>
+      <groundspeak:log id="713304">
+        <groundspeak:date>2010-11-21T00:00:00Z</groundspeak:date>
+        <groundspeak:type>Found it</groundspeak:type>
+        <groundspeak:finder id="190411">frosch95</groundspeak:finder>
+        <groundspeak:text encoded="False">Netter kleiner Cache bei einer gemütlichen Runde durch Bönnigheim.</groundspeak:text>
+      </groundspeak:log>
+      <groundspeak:log id="1020402">
+        <groundspeak:date>2010-10-22T00:00:00Z</groundspeak:date>
+        <groundspeak:type>Found it</groundspeak:type>
+        <groundspeak:finder id="105553">aukue</groundspeak:finder>
+        <groundspeak:text encoded="False">&lt;p&gt;Nach jahrelanger Opencaching-Abstinenz bin ich hier nun wieder häufiger unterwegs und logge daher alle meine Funde nach.&lt;/p&gt;
+&lt;p&gt;&lt;span&gt;Dösle schnell gefunden, dabei mag ich doch gar keinen Schnaps!!!&lt;br /&gt;Gruß aukue&lt;/span&gt; &lt;/p&gt;</groundspeak:text>
+      </groundspeak:log>
+      <groundspeak:log id="664520">
+        <groundspeak:date>2010-09-19T00:00:00Z</groundspeak:date>
+        <groundspeak:type>Found it</groundspeak:type>
+        <groundspeak:finder id="172402">RamsesIV2k</groundspeak:finder>
+        <groundspeak:text encoded="False">Im Team mit Seahawk2K schnell gefunden.&lt;br /&gt;
+TFTC</groundspeak:text>
+      </groundspeak:log>
+      <groundspeak:log id="664515">
+        <groundspeak:date>2010-09-19T00:00:00Z</groundspeak:date>
+        <groundspeak:type>Found it</groundspeak:type>
+        <groundspeak:finder id="172026">Seahawk2k</groundspeak:finder>
+        <groundspeak:text encoded="False">Im Team mit RamsesIV2K schnell gefunden.&lt;br /&gt;
+TFTC</groundspeak:text>
+      </groundspeak:log>
+      </groundspeak:logs>
+      <groundspeak:travelbugs>
+      </groundspeak:travelbugs>
+    </groundspeak:cache>
+    <oc:cache xmlns:oc="https://github.com/opencaching/gpx-extension-v1">
+      <oc:type>Traditional Cache</oc:type>
+      <oc:size>Micro</oc:size>
+      <oc:trip_time>0.25</oc:trip_time>
+      <oc:requires_password>false</oc:requires_password>
+      <oc:other_code>GC287WQ</oc:other_code>
+      <oc:logs>
+        <oc:log id="1047971" uuid="1a7c0974-03d9-11e5-bc5c-525400e33611">
+        </oc:log>
+        <oc:log id="1165855" uuid="be45face-c787-4a28-9dfd-46f0e787cc00">
+        </oc:log>
+        <oc:log id="1143827" uuid="b55b8335-8183-11e6-8eb1-221140618237">
+        </oc:log>
+        <oc:log id="1076774" uuid="ec16756a-2a8b-4d80-a35b-43ffae145355">
+        </oc:log>
+        <oc:log id="1042597" uuid="9c91d888-087b-4a0f-af58-9ccf02bd9535">
+        </oc:log>
+        <oc:log id="1041785" uuid="653126ce-ec56-11e4-89ed-525400e33611">
+        </oc:log>
+        <oc:log id="1018715" uuid="e4da5924-8840-11e4-9018-525400e33611">
+        </oc:log>
+        <oc:log id="995427" uuid="974ea6de-28ae-11e4-a39c-525400e33611">
+        </oc:log>
+        <oc:log id="844426" uuid="c18ee7c8-f120-11e1-aae3-00163e0af0a3">
+        </oc:log>
+        <oc:log id="801243" uuid="27e7b670-60c7-11e1-a3f2-00163e239302">
+        </oc:log>
+        <oc:log id="775078" uuid="dbc8e0a2-f76c-11e0-a3f2-00163e239302">
+        </oc:log>
+        <oc:log id="847185" uuid="8956b924-fa6e-11e1-aae3-00163e0af0a3">
+        </oc:log>
+        <oc:log id="863494" uuid="31221f76-4eb2-11e2-a8dc-00163e0af0a3">
+        </oc:log>
+        <oc:log id="743179" uuid="be0091de-9f2c-11e0-b2ac-00163e3ac09b">
+        </oc:log>
+        <oc:log id="722514" uuid="cdb0e5f0-6aae-11e0-b2ac-00163e3ac09b">
+        </oc:log>
+        <oc:log id="705863" uuid="6f049a24-4272-11e0-b2ac-00163e3ac09b">
+        </oc:log>
+        <oc:log id="875524" uuid="c7d47796-95f9-11e2-a4fc-525400a7f25b">
+        </oc:log>
+        <oc:log id="713304" uuid="a576a61e-56d7-11e0-b2ac-00163e3ac09b">
+        </oc:log>
+        <oc:log id="1020402" uuid="fc0ed05e-9252-11e4-9018-525400e33611">
+        </oc:log>
+        <oc:log id="664520" uuid="78f6fa54-cc34-11df-b2ac-00163e3ac09b">
+        </oc:log>
+        <oc:log id="664515" uuid="9d2dac08-cc32-11df-b2ac-00163e3ac09b">
+        </oc:log>
+      </oc:logs>
+    </oc:cache>
+  </wpt>
+</gpx>

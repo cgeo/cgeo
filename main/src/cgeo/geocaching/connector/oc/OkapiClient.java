@@ -1,9 +1,39 @@
 package cgeo.geocaching.connector.oc;
 
-import static android.util.Base64.DEFAULT;
+import android.net.Uri;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.util.Base64;
 
-import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.R;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.Date;
+import java.util.EnumSet;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.TimeZone;
+import java.util.regex.Pattern;
+
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.ImageResult;
@@ -37,41 +67,9 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.SynchronizedDateFormat;
-
-import android.net.Uri;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.util.Base64;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.Date;
-import java.util.EnumSet;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.TimeZone;
-import java.util.regex.Pattern;
-
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import okhttp3.Response;
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.StringUtils;
+
+import static android.util.Base64.DEFAULT;
 
 /**
  * Client for the OpenCaching API (Okapi).
@@ -478,13 +476,7 @@ final class OkapiClient {
             final StringBuilder description = new StringBuilder(500);
             if (response.hasNonNull("gc_code")) {
                 final String gccode = response.get("gc_code").asText();
-                description.append(CgeoApplication.getInstance().getResources()
-                        .getString(R.string.cache_listed_on, GCConnector.getInstance().getName()))
-                        .append(": <a href=\"https://coord.info/")
-                        .append(gccode)
-                        .append("\">")
-                        .append(gccode)
-                        .append("</a><br /><br />");
+                description.append(Geocache.getAlternativeListingText(gccode));
             }
             description.append(response.get(CACHE_DESCRIPTION).asText());
             cache.setDescription(description.toString());

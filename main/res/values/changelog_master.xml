@@ -7,6 +7,7 @@
     · New: Log image upload for Opencaching\n
     · New: Detect certitude as checker and support opening it via menu\n
     · New: Show as list menu now only active if more than one cache is on map\n
+    · New: Support OpenCaching GPX format extensions\n
     · Fix: Improve parsing of home coordinates\n
     · Fix: Disabled caches might be shown with truncated title\n
     · Fix: Some OC cache URL not detected correctly\n
