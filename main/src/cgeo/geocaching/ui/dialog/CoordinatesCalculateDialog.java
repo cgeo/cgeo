@@ -127,17 +127,23 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
      * Class used for checking that a value is with in a given range.
      * This is used to check for upper-case an lower-case letters.
      */
-    private class Range {
-        final int min;
-        final int max;
+    private class CaseCheck {
+        final boolean useUpper;
 
-        Range(final int min, final int max) {
-            this.min = min;
-            this.max = max;
+        CaseCheck(final boolean upper) {
+            useUpper = upper;
         }
 
-        boolean check(final int ch) {
-            return min <= ch && ch <= max;
+        boolean check(final char ch) {
+
+            boolean returnValue = Character.isLetterOrDigit(ch);
+            if (useUpper) {
+                returnValue &= Character.isUpperCase(ch);
+            } else {
+                returnValue &= Character.isLowerCase(ch);
+            }
+
+            return returnValue;
         }
     }
 
@@ -580,7 +586,6 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
     private boolean areCurrentCoordinatesValid() {
         // convert text to geopoint
         final Geopoint current;
-
         final String lat = getLatResult();
         final String lon = getLonResult();
 
@@ -1103,13 +1108,13 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
      *
      * @param variables List of variables as they currently are.
      * @param variableNames String containing all the names for which variables are required
-     * @param range range of which variables are to be created (eg. 'A' <= ch && ch <= 'Z')
+     * @param theCase case for which variables are to be created (ie. Uppercase or Lowercase)
      * @param hintText text to be used as a hint when new variables are created
      * @return full list of variables in the appropriate order
      */
     private List<CalculatorVariable> sortVariables(final List<CalculatorVariable> variables,
                                                    final String variableNames,
-                                                   final Range range,
+                                                   final CaseCheck theCase,
                                                    final String hintText,
                                                    final TextWatcher textWatcher) {
         final List<CalculatorVariable> returnList = new ArrayList<>();
@@ -1118,7 +1123,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         Arrays.sort(sortedVariables);
 
         for (final char ch : sortedVariables) {
-            if (range.check(ch)) {
+            if (theCase.check(ch)) {
                 if (getVariable(ch, returnList, false) != null) {
                     continue;
                 }
@@ -1183,7 +1188,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         }
 
         // replace the old equation list with a newly created ones
-        equations = sortVariables(equations, coordinateChars, new Range('A', 'Z'), getString(R.string.equation_hint), new EquationWatcher());
+        equations = sortVariables(equations, coordinateChars, new CaseCheck(true), getString(R.string.equation_hint), new EquationWatcher());
         updateGrid(equations, equationGrid, 0);
         resortFreeVariables();
     }
@@ -1199,7 +1204,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         }
 
         // replace the old free variables list with a newly created ones.
-        freeVariables = sortVariables(freeVariables, equationStrings, new Range('a', 'z'), getString(R.string.free_variable_hint), new VariableWatcher());
+        freeVariables = sortVariables(freeVariables, equationStrings, new CaseCheck(false), getString(R.string.free_variable_hint), new VariableWatcher());
         updateGrid(freeVariables, variableGrid, equations.size());
     }
 
