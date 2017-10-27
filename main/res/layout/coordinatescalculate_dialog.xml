@@ -33,8 +33,7 @@
                 android:clickable="false"
 
                 android:gravity="right"
-                android:textAlignment="gravity"
-                android:text="@string/lat_point_min_format"/>
+                android:textAlignment="gravity"/>
 
             <TextView
                 android:id="@+id/lonRes"
@@ -48,8 +47,7 @@
 
                 android:paddingRight="16dp"
                 android:gravity="end"
-                android:textAlignment="gravity"
-                android:text="@string/lon_point_min_format"/>
+                android:textAlignment="gravity"/>
 
             <EditText
                 android:id="@+id/notes_text"

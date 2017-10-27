@@ -95,4 +95,8 @@
     <string name="ellipsis" translatable="false">…</string>
     <string name="triple_dash_vertical" translatable="false">┆</string>
 
+    <string name="equation_hint" translatable="false">a + b</string>
+    <string name="free_variable_hint" translatable="false">2 + 2</string>
+    <string name="empty_equation_result" translatable="false">_</string>
+    <string name="equation_error_result" translatable="false">*</string>
 </resources>
