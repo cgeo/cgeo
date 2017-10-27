@@ -230,6 +230,7 @@
   <string name="warn_rendertheme_missing">Nem található térképstílus</string>
   <string name="warn_pocket_query_select">Nincs pocket lekérdezés kiválasztva.</string>
   <string name="warn_no_pocket_query_found">Online pocket lekérdezés nem található.</string>
+  <string name="warn_invalid_character">A karakter BETŰ vagy SZÁMJEGY lehet</string>
   <string name="err_read_pocket_query_list">Hiba a pocket lekérdezések listájának olvasásakor.</string>
   <string name="info_log_posted">A c:geo sikeresen elküldte a bejegyzést.</string>
   <string name="info_log_saved">A c:geo sikeresen elmentette a bejegyzést.</string>
@@ -243,6 +244,7 @@
   <string name="info_stored_image">Új kép mentési helyének megadása:</string>
   <string name="info_storing_static_maps">Kísérlet a statikus térképek mentésére.</string>
   <string name="info_cache_saved">Láda adati letöltve</string>
+  <string name="warn_calculator_state_save">Mentsd el az útpontot, ha meg akarod tartani a számológép aktuális állapotát!</string>
   <string name="err_trackable_log_not_anonymous">%1$s logolása a c:geo-ból nem végezhető el névtelenül. Meg akarod nyitni a beállításokat, hogy kitöltsd a %2$s-ra vonatkozó adatokat?</string>
   <string name="err_trackable_no_preference_activity">Sajnáljuk, de nem található megfelelő beállítási képernyő.</string>
   <string name="warn_discard_changes">Nem mentett útpontmódosítások elvetve!</string>
@@ -881,6 +883,7 @@
   <string name="cache_event">Dátum</string>
   <string name="cache_location">Helyszín</string>
   <string name="cache_coordinates">Koordináták</string>
+  <string name="cache_calculator">Számológép</string>
   <string name="cache_coordinates_original">Eredeti koordináták</string>
   <string name="cache_spoiler_images_title">Spoiler képek</string>
   <string name="cache_log_types">Bejegyzéstípusok</string>
@@ -944,6 +947,7 @@
   <string name="waypoint">Útpont</string>
   <string name="waypoint_coordinates">Koordináták</string>
   <string name="waypoint_cache_coordinates">A láda koordinátái</string>
+  <string name="waypoint_calculate_coordinates">Koordinátaszámolás</string>
   <string name="waypoint_custom">Egyedi</string>
   <string name="waypoint_my_coordinates">Az én koordinátáim</string>
   <string name="waypoint_bearing">Irány</string>
@@ -978,6 +982,7 @@
   <string name="waypoint_duplicate">Másolás</string>
   <string name="waypoint_duplicated">Útpont megduplázva</string>
   <string name="waypoint_copy_of">Másolt</string>
+  <string name="waypointcalc_notes_prompt">Megjegyzések ...</string>
   <string name="search_history">Előzmény</string>
   <string name="search_history_empty">Nincsenek előző célpontok</string>
   <string name="search_remove_destination">Célpont törlése</string>
@@ -1514,4 +1519,6 @@
   <string name="init_low_disk_space_message">A ládaadatok tarolásához szükséges hely kezd elfogyni. Ez a c:geo hibás működését okozhatja. Kérlek, csinálj több szabad helyet!</string>
   <string name="init_confirm_debug">A c:geo hibakeresési módban fut!</string>
   <string name="list_confirm_debug_message">A hibakeresési mód stabilitási problémákat okoz. Kikapcsolod a hibakeresési módot?</string>
+  <string name="err_select_logimage_upload_size">Túl nagy a kép. Kérlek, válassz kisebb méretet!</string>
+  <string name="err_logimage_caption_required">Képfelirat megadása szükséges</string>
 </resources>

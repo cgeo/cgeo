@@ -1441,7 +1441,6 @@
   <string name="cgeo_shortcut">Drecera del c:geo</string>
   <string name="create_shortcut">Crea una drecera</string>
   <string name="send">Envia</string>
-  <string name="confirm_log_title">Tipus de registre poc habitual</string>
   <string name="confirm_log_message">Voleu registrar \'%s\'. N\'esteu segurs?</string>
   <!-- Geokrety -->
   <string name="settings_activate_geokrety">Activa</string>

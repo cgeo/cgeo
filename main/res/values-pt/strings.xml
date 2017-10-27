@@ -164,7 +164,7 @@
   <string name="err_detail_cache_find_some">O c:geo não encontra essa geocache.</string>
   <string name="err_detail_cache_find_any">O c:geo não encontra qualquer geocache.</string>
   <string name="err_detail_google_maps_limit_reached">O c:geo falhou no download dos mapas. Talvez o tenha atingido o limite do Google Maps.</string>
-  <string name="err_detail_no_spoiler">O c:geo não encontrou images spoiler para esta cache.</string>
+  <string name="err_detail_no_spoiler">O c:geo não encontrou imagens spoiler para esta cache.</string>
   <string name="err_detail_no_map_static">O c:geo não encontrou mapas estáticos para esta cache.</string>
   <string name="err_detail_not_load_map_static">O c:geo falhou o carregamento de mapas estáticos.</string>
   <string name="err_detail_still_working">A trabalhar noutra tarefa.</string>
@@ -230,6 +230,7 @@
   <string name="warn_rendertheme_missing">Tema de mapa não encontrado.</string>
   <string name="warn_pocket_query_select">Nenhuma pocket query seleccionada.</string>
   <string name="warn_no_pocket_query_found">Nenhuma pocket query encontrada on-line.</string>
+  <string name="warn_invalid_character">O carácter deve ser uma LETRA ou um DÍGITO</string>
   <string name="err_read_pocket_query_list">Erro ao ler a lista de Pocket Query.</string>
   <string name="info_log_posted">O c:geo publicou o registo com sucesso.</string>
   <string name="info_log_saved">O c:geo gravou o registo com sucesso.</string>
@@ -243,6 +244,7 @@
   <string name="info_stored_image">Nova imagem guardada em:</string>
   <string name="info_storing_static_maps">A tentar armazenar mapas estáticos</string>
   <string name="info_cache_saved">A cache foi armazenada localmente</string>
+  <string name="warn_calculator_state_save">Assegure que guarda um waypoint se quiser manter o estado da calculadora.</string>
   <string name="err_trackable_log_not_anonymous">Logar %1$s a partir do c:geo não pode ser feito de forma anónima. Quer abrir as configurações para preencher as suas credenciais de %2$s?</string>
   <string name="err_trackable_no_preference_activity">Desculpa, não posso encontrar uma tela de preferência apropriada.</string>
   <string name="warn_discard_changes">As alterações ao waypoint não salvas foram descartadas!</string>
@@ -267,14 +269,14 @@
   <string name="menu_filter">Filtro</string>
   <string name="menu_scan_geo">Scan geocode</string>
   <string name="menu_pocket_queries">Pocket queries</string>
-  <string name="menu_scan_description">O c:geo pode fazer a leitura de geo-códigos impressos num código QR. A aplicação necessária não está instalada. Deseja abrir o Google Play para a instalar?</string>
+  <string name="menu_scan_description">O c:geo pode interpretar códigos GC impressos num código QR. A aplicação necessária não está instalada. Deseja abrir o Google Play para a instalar?</string>
   <!-- main screen -->
   <string name="live_map_button">Ao vivo</string>
   <string name="caches_nearby_button">Por perto</string>
   <string name="advanced_search_button">Pesquisar</string>
   <string name="stored_caches_button">Arquivo</string>
   <string name="any_button">Ir para</string>
-  <string name="unknown_scan">Não se encontrou geo-códigos na leitura realizada.</string>
+  <string name="unknown_scan">A leitura realizada não determinou qualquer código GC.</string>
   <!-- caches -->
   <string name="caches_no_cache">Nenhuma cache</string>
   <string name="caches_more_caches">Carregar mais caches</string>
@@ -880,6 +882,7 @@
   <string name="cache_event">Data</string>
   <string name="cache_location">Localização</string>
   <string name="cache_coordinates">Coordenadas</string>
+  <string name="cache_calculator">Calculadora</string>
   <string name="cache_coordinates_original">Coordenadas originais</string>
   <string name="cache_spoiler_images_title">Imagens spoiler</string>
   <string name="cache_log_types">Tipos de log</string>
@@ -943,6 +946,7 @@
   <string name="waypoint">Ponto de referência</string>
   <string name="waypoint_coordinates">Coordenadas</string>
   <string name="waypoint_cache_coordinates">Coordenadas da cache</string>
+  <string name="waypoint_calculate_coordinates">Calcular coordenadas</string>
   <string name="waypoint_custom">Personalizado</string>
   <string name="waypoint_my_coordinates">Minhas coordenadas</string>
   <string name="waypoint_bearing">Direcção em º</string>
@@ -977,6 +981,7 @@
   <string name="waypoint_duplicate">Duplicar ponto de referência</string>
   <string name="waypoint_duplicated">Ponto de referência duplicado</string>
   <string name="waypoint_copy_of">Cópia de</string>
+  <string name="waypointcalc_notes_prompt">Introduzir notas aqui…</string>
   <string name="search_history">Histórico</string>
   <string name="search_history_empty">Não existem destinos recentes</string>
   <string name="search_remove_destination">Destino removido</string>
@@ -1514,4 +1519,6 @@
   <string name="init_low_disk_space_message">O directório de dados de geocache está a ficar sem espaço de armazenamento. Isto pode causar anomalias do c:geo. Por favor, liberte algum espaço.</string>
   <string name="init_confirm_debug">c:geo está a ser executado no modo de depuração!</string>
   <string name="list_confirm_debug_message">O modo de depuração provoca instabilidades! Quer desactivar o modo de depuração?</string>
+  <string name="err_select_logimage_upload_size">Imagem muito grande, por favor, seleccione uma escala menor.</string>
+  <string name="err_logimage_caption_required">É necessária uma legenda para a imagem</string>
 </resources>

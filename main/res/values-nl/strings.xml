@@ -230,6 +230,7 @@
   <string name="warn_rendertheme_missing">Map thema niet gevonden.</string>
   <string name="warn_pocket_query_select">Geen Pocket query geselecteerd.</string>
   <string name="warn_no_pocket_query_found">Geen Pocket query online gevonden.</string>
+  <string name="warn_invalid_character">Teken moet een LETTER of een CIJFER zijn</string>
   <string name="err_read_pocket_query_list">Fout bij het lezen van de Pocket query lijst.</string>
   <string name="info_log_posted">c:geo heeft log succesvol gepost.</string>
   <string name="info_log_saved">c:geo heeft log succesvol opgeslagen.</string>
@@ -243,6 +244,7 @@
   <string name="info_stored_image">Nieuwe foto opgeslagen in:</string>
   <string name="info_storing_static_maps">Proberen statische kaarten op te slaan</string>
   <string name="info_cache_saved">De cache is lokaal opgeslagen</string>
+  <string name="warn_calculator_state_save">Zorg dat je een waypoint opslaat als je de staat van de rekenmachine wil behouden.</string>
   <string name="err_trackable_log_not_anonymous">Loggen van %1$s in c:geo kan niet anoniem worden gedaan. Wilt u de instellingen openen om uw referenties van %2$s in te vullen?</string>
   <string name="err_trackable_no_preference_activity">Sorry, kan geen geschikt voorkeuren scherm vinden.</string>
   <string name="warn_discard_changes">Niet opgeslagen waypoint wijzigingen werden verwijderd!</string>
@@ -880,6 +882,7 @@
   <string name="cache_event">Datum</string>
   <string name="cache_location">Locatie</string>
   <string name="cache_coordinates">Coördinaten</string>
+  <string name="cache_calculator">Rekenmachine</string>
   <string name="cache_coordinates_original">Originele coordinaten</string>
   <string name="cache_spoiler_images_title">Spoiler afbeeldingen</string>
   <string name="cache_log_types">Log types</string>
@@ -943,6 +946,7 @@
   <string name="waypoint">Waypoint</string>
   <string name="waypoint_coordinates">Coördinaten</string>
   <string name="waypoint_cache_coordinates">Cache coördinaten</string>
+  <string name="waypoint_calculate_coordinates">Coördinaten berekenen</string>
   <string name="waypoint_custom">Aangepast</string>
   <string name="waypoint_my_coordinates">Mijn coördinaten</string>
   <string name="waypoint_bearing">Richting</string>
@@ -977,6 +981,7 @@
   <string name="waypoint_duplicate">Dubbel waypoint</string>
   <string name="waypoint_duplicated">Waypoint gedupliceerd</string>
   <string name="waypoint_copy_of">Kopie van</string>
+  <string name="waypointcalc_notes_prompt">Voer hier opmerkingen in…</string>
   <string name="search_history">Geschiedenis</string>
   <string name="search_history_empty">Geen eerdere bestemmingen</string>
   <string name="search_remove_destination">Bestemming verwijderd</string>
@@ -1514,4 +1519,6 @@
   <string name="init_low_disk_space_message">De geocache-gegevensmap heeft nog maar weinig schijfruimte. Dit kan leiden tot storingen van c:geo. Gelieve ruimte vrij te maken.</string>
   <string name="init_confirm_debug">c:geo wordt uitgevoerd in de foutopsporingsmodus!</string>
   <string name="list_confirm_debug_message">De debug-modus zorgt voor instabiliteit! Wil je de debug-modus uitschakelen?</string>
+  <string name="err_select_logimage_upload_size">Afbeelding te groot, selecteer een kleinere schaal.</string>
+  <string name="err_logimage_caption_required">Een bijschrift is vereist voor de afbeelding</string>
 </resources>

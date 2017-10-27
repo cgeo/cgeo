@@ -1416,7 +1416,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
   <string name="cgeo_shortcut">c:geo ショートカット</string>
   <string name="create_shortcut">ショートカットを作成</string>
   <string name="send">送信</string>
-  <string name="confirm_log_title">異常なログのタイプ</string>
   <string name="confirm_log_message">\'%s\' をログに記録します。よろしいですか?</string>
   <!-- Geokrety -->
   <string name="settings_activate_geokrety">有効化</string>

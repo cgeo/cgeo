@@ -230,6 +230,7 @@
   <string name="warn_rendertheme_missing">Tema mappa non trovato.</string>
   <string name="warn_pocket_query_select">Nessuna Pocket query selezionata.</string>
   <string name="warn_no_pocket_query_found">Nessuna Pocket query trovata online.</string>
+  <string name="warn_invalid_character">Il carattere deve essere una lettera o una cifra</string>
   <string name="err_read_pocket_query_list">Errore nella lettura della lista di Pocket query.</string>
   <string name="info_log_posted">c:geo ha inviato il log con successo.</string>
   <string name="info_log_saved">c:geo ha salvato il log.</string>
@@ -243,6 +244,7 @@
   <string name="info_stored_image">Nuova immagine salvata su:</string>
   <string name="info_storing_static_maps">Tento di salvare le mappe statiche</string>
   <string name="info_cache_saved">Il cache è stato salvato localmente</string>
+  <string name="warn_calculator_state_save">Assicurarsi di salvare il waypoint se si desidera mantenere lo stato della calcolatrice.</string>
   <string name="err_trackable_log_not_anonymous">Log di %1$s da c:geo non può essere fatto in forma anonima. Si desidera aprire le impostazioni per completare le credenziali da %2$s?</string>
   <string name="err_trackable_no_preference_activity">La pagina di configurazione del servizio associato al trackable non è disponibile.</string>
   <string name="warn_discard_changes">Le modifiche non salvate ai waypoint vengono annullate!</string>
@@ -873,6 +875,7 @@
   <string name="cache_event">Data</string>
   <string name="cache_location">Luogo</string>
   <string name="cache_coordinates">Coordinate</string>
+  <string name="cache_calculator">Calcolatrice</string>
   <string name="cache_coordinates_original">Coordinate originali</string>
   <string name="cache_spoiler_images_title">Immagini spoiler</string>
   <string name="cache_log_types">Tipi di Log</string>
@@ -936,6 +939,7 @@
   <string name="waypoint">Waypoint</string>
   <string name="waypoint_coordinates">Coordinate</string>
   <string name="waypoint_cache_coordinates">Coordinate cache</string>
+  <string name="waypoint_calculate_coordinates">Calcola coordinate</string>
   <string name="waypoint_custom">Custom</string>
   <string name="waypoint_my_coordinates">Coordinate attuali</string>
   <string name="waypoint_bearing">Angolo in gradi</string>
@@ -970,6 +974,7 @@
   <string name="waypoint_duplicate">Duplica waypoint</string>
   <string name="waypoint_duplicated">Waypoint duplicato</string>
   <string name="waypoint_copy_of">Copia di</string>
+  <string name="waypointcalc_notes_prompt">Inserire le note qui…</string>
   <string name="search_history">Cronologia</string>
   <string name="search_history_empty">Nessuna precedente destinazione</string>
   <string name="search_remove_destination">Destinazione rimossa</string>
@@ -1506,4 +1511,6 @@
   <string name="init_low_disk_space_message">La directory dei dati geocache sta esaurendo lo spazio su disco. Questo può causare malfunzionamenti di c:geo. Si prega di liberare spazio.</string>
   <string name="init_confirm_debug">c:geo è in esecuzione in modalità di debug!</string>
   <string name="list_confirm_debug_message">La modalità di debug può causare instabilità! Vuoi tornare alla modalità normale?</string>
+  <string name="err_select_logimage_upload_size">Immagine troppo grande, si prega di selezionare una scala inferiore.</string>
+  <string name="err_logimage_caption_required">Una didascalia è richiesta per l\'immagine</string>
 </resources>

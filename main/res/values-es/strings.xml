@@ -1430,7 +1430,6 @@ Nombre de archivo:%2$s</string>
   <string name="cgeo_shortcut">Atajo de c:geo</string>
   <string name="create_shortcut">Crear atajo</string>
   <string name="send">Enviar</string>
-  <string name="confirm_log_title">Tipo de registro inusual</string>
   <string name="confirm_log_message">Vas a registrar \'%s\'. ¿Estás seguro?</string>
   <!-- Geokrety -->
   <string name="settings_activate_geokrety">Activar</string>

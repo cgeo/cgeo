@@ -84,7 +84,7 @@
   <string name="log_tb_grabbed">Prevzatý</string>
   <string name="log_tb_note">Poznámka</string>
   <string name="log_tb_discovered">Zahliadnutý</string>
-  <string name="log_tb_archived">Archivácia</string>
+  <string name="log_tb_archived">Archivované</string>
   <string name="log_save">Uložiť offline</string>
   <string name="log_saving">Ukladanie logu…</string>
   <string name="log_saving_and_uploading">Odosielanie logu a obrázka…</string>
@@ -199,10 +199,10 @@
   <string name="err_log_load_data_still">c:geo stále načítava dáta potrebné pre zalogovanie návštevy. Prosím, počkajte chvíľu.</string>
   <string name="err_log_post_missing_tracking_code">Chýba kód trasovateľného predmetu (TB kód).</string>
   <string name="err_log_post_missing_coordinates">Súradnice chýbajú.</string>
-  <string name="err_log_post_failed">Zdá sa, že tvoj log nebol uverejnený. Skontroluj to na webovej stránke skrýše.</string>
+  <string name="err_log_post_failed">Zdá sa, že log nebol uverejnený. Skontrolujte to na webovej stránke skrýše.</string>
   <string name="err_log_post_failed_ec">c:geo pravdepodobne nemohlo odoslať log. Skontrolujte to, prosím, na Extremcaching.com.</string>
   <string name="err_log_post_failed_gk">c:geo pravdepodobne nemohlo odoslať log. Skontrolujte to, prosím, na GeoKrety.org.</string>
-  <string name="err_logimage_post_failed">Zdá sa, že obrázok logu nebol nahratý. Skontroluj to na webovej stránke skrýše.</string>
+  <string name="err_logimage_post_failed">Zdá sa, že obrázok logu nebol nahratý. Skontrolujte to na webovej stránke skrýše.</string>
   <string name="err_search_address_forgot">c:geo zabudlo adresu, ktorú sa pokúšate nájsť.</string>
   <string name="err_parse_lat">c:geo nemôže zistiť zemepisnú šírku.</string>
   <string name="err_parse_lon">c:geo nemôže dopočítať zemepisnú dĺžku.</string>
@@ -1459,7 +1459,6 @@
   <string name="cgeo_shortcut">c:Geo odkaz</string>
   <string name="create_shortcut">Vytvoriť odkaz</string>
   <string name="send">Odoslať</string>
-  <string name="confirm_log_title">Nezvyčajný typ logu</string>
   <string name="confirm_log_message">Chceš zalogovať \'%s\'. Určite?</string>
   <!-- Geokrety -->
   <string name="settings_activate_geokrety">Aktivovať</string>
