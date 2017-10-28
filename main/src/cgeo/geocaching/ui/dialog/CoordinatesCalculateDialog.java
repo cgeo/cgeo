@@ -644,9 +644,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
                     new VariableWatcher()));
         }
 
-        for (final CalculatorVariable.VariableData bnk : savedState.variableBank) {
-            variableBank.add(bnk);
-        }
+        variableBank.addAll(savedState.variableBank);
 
         // Text must be set after Equations have been loaded as the TextWatcher will be triggered when the text is set
         ePlainLat.setText(savedState.plainLat);
@@ -659,7 +657,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         final List<CalculateButton.ButtonData> butData = new ArrayList<>(coordButtons.size());
         final List<CalculatorVariable.VariableData> equData = new ArrayList<>(equations.size());
         final List<CalculatorVariable.VariableData> freeVarData = new ArrayList<>(freeVariables.size());
-        final List<CalculatorVariable.VariableData> varBankData = new ArrayList<>(variableBank.size());
+        final List<CalculatorVariable.VariableData> varBankData = new ArrayList<>(variableBank);
 
         final char latHem;
         final char lonHem;
@@ -688,10 +686,6 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
 
         for (final CalculatorVariable var : freeVariables) {
             freeVarData.add(var.getData());
-        }
-
-        for (final CalculatorVariable.VariableData bnk : variableBank) {
-            varBankData.add(bnk);
         }
 
         return new CalcState(currentFormat,
