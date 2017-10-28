@@ -1500,4 +1500,5 @@ Nombre de archivo:%2$s</string>
   <string name="init_low_disk_space_message">El directorio de datos de los cachés se está quedando sin espacio de almacenamiento. Esto puede causar fallos en c:geo. Por favor, libera algo de espacio.</string>
   <string name="init_confirm_debug">¡c:geo se está ejecutando en modo de depuración!</string>
   <string name="list_confirm_debug_message">¡El modo de depuración provoca inestabilidades! ¿Quieres desactivar el modo depuración?</string>
+  <string name="err_select_logimage_upload_size">La imagen es muy grande, por favor selecciona una escala menor.</string>
 </resources>

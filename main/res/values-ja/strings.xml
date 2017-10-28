@@ -1127,7 +1127,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
   <string name="export_gpx_to">エクスポートしたGPXファイルを送る:</string>
   <string name="export_confirm_title">エクスポート中 %1$s</string>
   <string name="export_confirm_message">パス: %1$s\nファイル名: %2$s</string>
-  <string name="export_persnotes">パーソナルノート</string>
   <string name="export_persnotes_uploading">パーソナルノート%1$dをアップロード中</string>
   <plurals name="export_persnotes_upload_success">
     <item quantity="other">%1$dノートを正常にアップロードしました</item>

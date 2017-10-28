@@ -230,6 +230,7 @@
   <string name="warn_rendertheme_missing">Téma mapy nebola nájdená.</string>
   <string name="warn_pocket_query_select">Najprv vyber pocket query.</string>
   <string name="warn_no_pocket_query_found">Na webe sa nenašlo žiadne Pocket query.</string>
+  <string name="warn_invalid_character">Znak musí byť PÍSMENO alebo ČÍSLICA</string>
   <string name="err_read_pocket_query_list">Chyba pri čítaní Pocket Query.</string>
   <string name="info_log_posted">c:geo úspešne zaslalo log.</string>
   <string name="info_log_saved">c:geo úspešne uložilo log.</string>
@@ -243,6 +244,7 @@
   <string name="info_stored_image">Nový obrázok uložený do:</string>
   <string name="info_storing_static_maps">Pokus o uloženie statických máp</string>
   <string name="info_cache_saved">Skrýša bola uložená v zariadení</string>
+  <string name="warn_calculator_state_save">Nezabudnite uložiť bod trasy, ak chcete zachovať stav kalkulačky.</string>
   <string name="err_trackable_log_not_anonymous">V c:geo nie je možné zalogovať %1$s anonymne. Chcete otvoriť nastavenia a vyplniť prihlasovacie údaje pre %2$s?</string>
   <string name="err_trackable_no_preference_activity">Prepáčte, c:geo nedokáže nájsť príslušnú obrazovku s nastaveniami.</string>
   <string name="warn_discard_changes">Neuložené zmeny bodu trasy boli zrušené!</string>
@@ -889,6 +891,7 @@
   <string name="cache_event">Dátum</string>
   <string name="cache_location">Miesto</string>
   <string name="cache_coordinates">Súradnice</string>
+  <string name="cache_calculator">Kalkulačka</string>
   <string name="cache_coordinates_original">Pôvodné súradnice</string>
   <string name="cache_spoiler_images_title">Obrázky s nápovedou</string>
   <string name="cache_log_types">Typy záznamov</string>
@@ -952,6 +955,7 @@
   <string name="waypoint">Bod trasy</string>
   <string name="waypoint_coordinates">Súradnice</string>
   <string name="waypoint_cache_coordinates">Súradnice skrýše</string>
+  <string name="waypoint_calculate_coordinates">Vypočítať súradnice</string>
   <string name="waypoint_custom">vlastný</string>
   <string name="waypoint_my_coordinates">Aktuálna poloha</string>
   <string name="waypoint_bearing">Azimut v °</string>
@@ -986,6 +990,7 @@
   <string name="waypoint_duplicate">Duplikovať bod trasy</string>
   <string name="waypoint_duplicated">Bod trasy bol duplikovaný</string>
   <string name="waypoint_copy_of">Kópia</string>
+  <string name="waypointcalc_notes_prompt">Text poznámky…</string>
   <string name="search_history">História</string>
   <string name="search_history_empty">Bez predchádzajúcich cieľov</string>
   <string name="search_remove_destination">Cieľ odstránený</string>
@@ -1459,6 +1464,7 @@
   <string name="cgeo_shortcut">c:Geo odkaz</string>
   <string name="create_shortcut">Vytvoriť odkaz</string>
   <string name="send">Odoslať</string>
+  <string name="confirm_log_title">Špeciálny typ logu</string>
   <string name="confirm_log_message">Chceš zalogovať \'%s\'. Určite?</string>
   <!-- Geokrety -->
   <string name="settings_activate_geokrety">Aktivovať</string>
@@ -1534,4 +1540,6 @@
   <string name="init_low_disk_space_message">V adresári údajov skrýš je málo miesta. Môže dôjsť k nesprávnemu fungovaniu c:geo. Uvoľnite nejaké miesto.</string>
   <string name="init_confirm_debug">c:geo je spustené v režime ladenia!</string>
   <string name="list_confirm_debug_message">V režime ladenia dochádza k nestabilnému správaniu aplikácie! Chcete deaktivovať režim ladenia?</string>
+  <string name="err_select_logimage_upload_size">Obrázok je príliš veľký, vyberte menší obrázok.</string>
+  <string name="err_logimage_caption_required">Obrázok musí mať popis</string>
 </resources>
