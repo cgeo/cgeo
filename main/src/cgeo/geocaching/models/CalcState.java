@@ -28,10 +28,10 @@ public class CalcState implements Serializable {
     public final String plainLon;
     public final char latHemisphere;
     public final char lonHemisphere;
-    public final List<? extends JSONAble> buttons;
-    public final List<? extends JSONAble> equations;
-    public final List<? extends JSONAble> freeVariables;
-    public final List<? extends JSONAble> variableBank;
+    public final List<CalculateButton.ButtonData> buttons;
+    public final List<CalculatorVariable.VariableData> equations;
+    public final List<CalculatorVariable.VariableData> freeVariables;
+    public final List<CalculatorVariable.VariableData> variableBank;
 
     /** Note, we have to use a String rather than an Editable as Editable's can't be serialized */
     public final String notes;
@@ -71,9 +71,9 @@ public class CalcState implements Serializable {
         notes = json.optString("notes");
     }
 
-    private static ArrayList<? extends JSONAble> createJSONAbleList(final JSONArray json, final JSONAbleFactory factory) {
+    private static <T extends JSONAble> ArrayList<T> createJSONAbleList(final JSONArray json, final JSONAbleFactory<T> factory) {
         final int length = json != null ? json.length() : 0;
-        final ArrayList<JSONAble> returnValue = new ArrayList<>(length);
+        final ArrayList<T> returnValue = new ArrayList<>(length);
 
         for (int i = 0; i < length; i++) {
             returnValue.add(factory.fromJSON(json.optJSONObject(i)));

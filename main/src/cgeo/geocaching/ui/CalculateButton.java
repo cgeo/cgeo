@@ -143,9 +143,9 @@ public class CalculateButton extends EditButton {
         }
     }
 
-    public static class ButtonDataFactory implements JSONAbleFactory {
+    public static class ButtonDataFactory implements JSONAbleFactory<ButtonData> {
         @Override
-        public JSONAble fromJSON(final JSONObject json) {
+        public ButtonData fromJSON(final JSONObject json) {
             return new ButtonData(json);
         }
     }

@@ -79,9 +79,9 @@ public class CalculatorVariable extends LinearLayout {
         }
     }
 
-    public static class VariableDataFactory implements JSONAbleFactory {
+    public static class VariableDataFactory implements JSONAbleFactory<VariableData> {
         @Override
-        public JSONAble fromJSON(final JSONObject json) {
+        public VariableData fromJSON(final JSONObject json) {
             return new VariableData(json);
         }
     }
