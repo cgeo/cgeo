@@ -14,7 +14,6 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.CalculateButton;
 import cgeo.geocaching.ui.CalculatorVariable;
 import cgeo.geocaching.ui.EditButton;
-import cgeo.geocaching.ui.JSONAble;
 
 import android.app.Dialog;
 import android.os.Bundle;
@@ -615,7 +614,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
 
     private void loadCalcState() {
         setCoordFormat(savedState.format);
-        final List<? extends JSONAble> buttons = savedState.buttons;
+        final List<CalculateButton.ButtonData> buttons = savedState.buttons;
 
         bLatHem.setText(String.valueOf(savedState.latHemisphere));
         bLonHem.setText(String.valueOf(savedState.lonHemisphere));
@@ -623,7 +622,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         int i = 0;
         CalculateButton b = bLatDeg[1];
         while (b != null && i < buttons.size()) {
-            b.setData((CalculateButton.ButtonData) buttons.get(i++));
+            b.setData(buttons.get(i++));
             b = b.getNextButton();
         }
 
@@ -631,22 +630,22 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
             throw new AssertionError("Number of ButtonData objects differ from the number of Buttons");
         }
 
-        for (final JSONAble equ : savedState.equations) {
+        for (final CalculatorVariable.VariableData equ : savedState.equations) {
             equations.add(new CalculatorVariable(getContext(),
-                    (CalculatorVariable.VariableData) equ,
+                    equ,
                     getString(R.string.equation_hint),
                     new EquationWatcher()));
         }
 
-        for (final JSONAble var : savedState.freeVariables) {
+        for (final CalculatorVariable.VariableData var : savedState.freeVariables) {
             freeVariables.add(new CalculatorVariable(getContext(),
-                    (CalculatorVariable.VariableData) var,
+                    var,
                     getString(R.string.free_variable_hint),
                     new VariableWatcher()));
         }
 
-        for (final JSONAble bnk : savedState.variableBank) {
-            variableBank.add((CalculatorVariable.VariableData) bnk);
+        for (final CalculatorVariable.VariableData bnk : savedState.variableBank) {
+            variableBank.add(bnk);
         }
 
         // Text must be set after Equations have been loaded as the TextWatcher will be triggered when the text is set
