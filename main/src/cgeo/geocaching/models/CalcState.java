@@ -75,10 +75,8 @@ public class CalcState implements Serializable {
         final int length = json != null ? json.length() : 0;
         final ArrayList<JSONAble> returnValue = new ArrayList<>(length);
 
-        if (json != null) {
-            for (int i = 0; i < length; i++) {
-                returnValue.add(factory.fromJSON(json.optJSONObject(i)));
-            }
+        for (int i = 0; i < length; i++) {
+            returnValue.add(factory.fromJSON(json.optJSONObject(i)));
         }
 
         return returnValue;
