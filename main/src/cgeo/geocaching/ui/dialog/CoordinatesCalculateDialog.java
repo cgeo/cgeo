@@ -99,9 +99,6 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
                                     bLonSec = new CalculateButton[2],
                                     bLonPnt = new CalculateButton[5];
 
-    private TextView tLatDegChar, tLatMinChar, tLatLastUnits,
-                     tLonDegChar, tLonMinChar, tLonLastUnits;
-
     private EditText ePlainLat, ePlainLon;
 
     private HorizontalScrollView variablesPanel;
@@ -390,10 +387,10 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         bLatHem = ButterKnife.findById(v, R.id.ButtonLatHem);
         bLatDeg[1] = ButterKnife.findById(v, R.id.ButtonLatDeg_010);
         bLatDeg[0] = ButterKnife.findById(v, R.id.ButtonLatDeg_001);
-        tLatDegChar = ButterKnife.findById(v, R.id.LatDegChar);
+        final TextView tLatDegChar = ButterKnife.findById(v, R.id.LatDegChar);
         bLatMin[1] = ButterKnife.findById(v, R.id.ButtonLatMin_10);
         bLatMin[0] = ButterKnife.findById(v, R.id.ButtonLatMin_01);
-        tLatMinChar = ButterKnife.findById(v, R.id.LatMinChar);
+        final TextView tLatMinChar = ButterKnife.findById(v, R.id.LatMinChar);
         bLatSec[1] = ButterKnife.findById(v, R.id.ButtonLatSec_10);
         bLatSec[0] = ButterKnife.findById(v, R.id.ButtonLatSec_01);
         bLatPnt[4] = ButterKnife.findById(v, R.id.ButtonLatPnt_10000);
@@ -401,16 +398,16 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         bLatPnt[2] = ButterKnife.findById(v, R.id.ButtonLatPnt_00100);
         bLatPnt[1] = ButterKnife.findById(v, R.id.ButtonLatPnt_00010);
         bLatPnt[0] = ButterKnife.findById(v, R.id.ButtonLatPnt_00001);
-        tLatLastUnits = ButterKnife.findById(v, R.id.LatLastUnitsChar);
+        final TextView tLatLastUnits = ButterKnife.findById(v, R.id.LatLastUnitsChar);
 
         bLonHem = ButterKnife.findById(v, R.id.ButtonLonHem);
         bLonDeg[2] = ButterKnife.findById(v, R.id.ButtonLonDeg_100);
         bLonDeg[1] = ButterKnife.findById(v, R.id.ButtonLonDeg_010);
         bLonDeg[0] = ButterKnife.findById(v, R.id.ButtonLonDeg_001);
-        tLonDegChar = ButterKnife.findById(v, R.id.LonDegChar);
+        final TextView tLonDegChar = ButterKnife.findById(v, R.id.LonDegChar);
         bLonMin[1] = ButterKnife.findById(v, R.id.ButtonLonMin_10);
         bLonMin[0] = ButterKnife.findById(v, R.id.ButtonLonMin_01);
-        tLonMinChar = ButterKnife.findById(v, R.id.LonMinChar);
+        final TextView tLonMinChar = ButterKnife.findById(v, R.id.LonMinChar);
         bLonSec[1] = ButterKnife.findById(v, R.id.ButtonLonSec_10);
         bLonSec[0] = ButterKnife.findById(v, R.id.ButtonLonSec_01);
         bLonPnt[4] = ButterKnife.findById(v, R.id.ButtonLonPnt_10000);
@@ -418,7 +415,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         bLonPnt[2] = ButterKnife.findById(v, R.id.ButtonLonPnt_00100);
         bLonPnt[1] = ButterKnife.findById(v, R.id.ButtonLonPnt_00010);
         bLonPnt[0] = ButterKnife.findById(v, R.id.ButtonLonPnt_00001);
-        tLonLastUnits = ButterKnife.findById(v, R.id.LonLastUnitsChar);
+        final TextView tLonLastUnits = ButterKnife.findById(v, R.id.LonLastUnitsChar);
 
         variablesPanel = ButterKnife.findById(v, R.id.VariablesPanel);
         variablesScrollableContent = ButterKnife.findById(v, R.id.VariablesScrollpane);
