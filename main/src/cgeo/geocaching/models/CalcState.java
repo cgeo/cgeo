@@ -58,6 +58,11 @@ public class CalcState implements Serializable {
         this.notes = notes;
     }
 
+    public CalcState(final CalcState calcState, final String notes) {
+        this(calcState.format, calcState.plainLat, calcState.plainLon, calcState.latHemisphere, calcState.lonHemisphere,
+                calcState.buttons, calcState.equations, calcState.freeVariables, calcState.variableBank, notes);
+    }
+
     private CalcState(final JSONObject json) {
         format = CoordInputFormatEnum.values()[json.optInt("format", 2)];
         plainLat = json.optString("plainLat");
@@ -68,7 +73,7 @@ public class CalcState implements Serializable {
         equations     = createJSONAbleList(json.optJSONArray("equations"),     new CalculatorVariable.VariableDataFactory());
         freeVariables = createJSONAbleList(json.optJSONArray("freeVariables"), new CalculatorVariable.VariableDataFactory());
         variableBank = new ArrayList<>(); // "variableBank" intentionally not loaded.
-        notes = json.optString("notes");
+        notes = ""; // "notes" is read from "user_note" db column, not this json
     }
 
     private static <T extends JSONAble> ArrayList<T> createJSONAbleList(final JSONArray json, final JSONAbleFactory<T> factory) {
@@ -112,7 +117,7 @@ public class CalcState implements Serializable {
         returnValue.put("equations", toJSON(equations));
         returnValue.put("freeVariables", toJSON(freeVariables));
         // "variableBank" intentionally left out.
-        returnValue.put("notes", notes);
+        // "notes" is written to another db column
 
         return returnValue;
     }

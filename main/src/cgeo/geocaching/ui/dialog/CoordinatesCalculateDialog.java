@@ -3,6 +3,7 @@ package cgeo.geocaching.ui.dialog;
 import static cgeo.geocaching.R.id.PlainFormat;
 import static cgeo.geocaching.R.id.coordTable;
 import static cgeo.geocaching.models.CalcState.ERROR_CHAR;
+import static cgeo.geocaching.ui.dialog.CoordinatesInputDialog.GEOPOINT_ARG;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractActivity;
@@ -66,6 +67,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
     private static final String SYMBOL_MIN = "'";
     private static final String SYMBOL_SEC = "\"";
     private static final String SYMBOL_POINT = ".";
+    public static final String CALC_STATE = "calc_state";
 
     private ImageButton doneButton;
     private boolean stateSaved = false;
@@ -116,8 +118,6 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
     private List<View> secButtons;
     private List<CalculateButton> pointLowButtons;
     private List<TextView> lastUnits;
-
-    private static final String GEOPOINT_ARG = "GEOPOINT";
 
     /**
      * Class used for checking that a value is with in a given range.
@@ -304,7 +304,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
     }
 
     /**
-     * @param gp Geopoint representing the coordinates from the CoordinateInputDialog
+     * @param gp               Geopoint representing the coordinates from the CoordinateInputDialog
      * @param calculationState State to set the calculator to when created
      */
     public static CoordinatesCalculateDialog getInstance(final Geopoint gp, final CalcState calculationState) {
@@ -336,7 +336,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
                 gp = savedInstanceState.getParcelable(GEOPOINT_ARG);
             }
 
-            final byte[] bytes = savedInstanceState.getByteArray("calc_state");
+            final byte[] bytes = savedInstanceState.getByteArray(CALC_STATE);
             if (bytes != null) {
                 setSavedState((CalcState) SerializationUtils.deserialize(bytes));
             }
@@ -528,7 +528,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
     @Override
     public void onSaveInstanceState(final Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putByteArray("calc_state", SerializationUtils.serialize(getCurrentState()));
+        outState.putByteArray(CALC_STATE, SerializationUtils.serialize(getCurrentState()));
     }
 
     private void displayToast(final int message) {

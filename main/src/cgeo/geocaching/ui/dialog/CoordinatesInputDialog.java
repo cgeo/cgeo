@@ -62,7 +62,7 @@ public class CoordinatesInputDialog extends DialogFragment {
     private CoordInputFormatEnum currentFormat = null;
     private List<EditText> orderedInputs;
 
-    private static final String GEOPOINT_ARG = "GEOPOINT";
+    public static final String GEOPOINT_ARG = "GEOPOINT";
     private static final String CACHECOORDS_ARG = "CACHECOORDS";
 
     private FragmentActivity myContext;
@@ -194,7 +194,10 @@ public class CoordinatesInputDialog extends DialogFragment {
             buttonCache.setVisibility(View.GONE);
         }
         final Button buttonCalculate = ButterKnife.findById(v, R.id.calculate);
-        buttonCalculate.setOnClickListener(new CalculateListener());
+        if (getActivity() instanceof CalculateState) {
+            buttonCalculate.setOnClickListener(new CalculateListener());
+            buttonCalculate.setVisibility(View.VISIBLE);
+        }
 
         if (hasClipboardCoordinates()) {
             final Button buttonClipboard = ButterKnife.findById(v, R.id.clipboard);
@@ -570,12 +573,15 @@ public class CoordinatesInputDialog extends DialogFragment {
 
         @Override
         public void onClick(final View v) {
-            final CalcState newState = ((CalculateState) getActivity()).fetchCalculatorState();
-            final CoordinatesCalculateDialog calculateDialog = CoordinatesCalculateDialog.getInstance(gp, newState);
-             // Assign this fragment as the target fragment so the calculate dialog can automatically close this one on completion
-            calculateDialog.setTargetFragment(CoordinatesInputDialog.this, 1);
-            calculateDialog.setCancelable(true);
-            calculateDialog.show(myContext.getSupportFragmentManager(), "wpcalcdialog");
+            if (getActivity() instanceof  CalculateState) {
+                final CalculateState calculateState = (CalculateState) getActivity();
+                final CalcState newState = calculateState.fetchCalculatorState();
+                final CoordinatesCalculateDialog calculateDialog = CoordinatesCalculateDialog.getInstance(gp, newState);
+                // Assign this fragment as the target fragment so the calculate dialog can automatically close this one on completion
+                calculateDialog.setTargetFragment(CoordinatesInputDialog.this, 1);
+                calculateDialog.setCancelable(true);
+                calculateDialog.show(myContext.getSupportFragmentManager(), "wpcalcdialog");
+            }
         }
     }
 

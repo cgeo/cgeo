@@ -34,7 +34,8 @@
             style="@style/button_full"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="@string/waypoint_calculate_coordinates" />
+            android:text="@string/waypoint_calculate_coordinates"
+            android:visibility="gone" />
 
         <Button
             android:id="@+id/clipboard"
