@@ -468,11 +468,12 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
     @Override
     public void saveCalculatorState(final CalcState calcState) {
         this.calcState = calcState;
+        this.userNote.setText(calcState.notes);
     }
 
     @Override
     public CalcState fetchCalculatorState() {
-        return calcState;
+        return new CalcState(calcState, userNote.getText().toString());
     }
 
     /**
