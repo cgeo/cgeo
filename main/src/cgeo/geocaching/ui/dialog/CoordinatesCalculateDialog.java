@@ -608,7 +608,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         stateSaved = true;
 
         if (doneButton != null) {
-            doneButton.setImageResource(stateSaved ? R.drawable.ic_menu_saved : R.drawable.ic_menu_save);
+            doneButton.setImageResource(R.drawable.ic_menu_saved);
         }
     }
 
