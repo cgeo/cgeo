@@ -2,32 +2,22 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-    <b>2017.10.23:</b>\n
-    · Fix: Cache description not shown completely if it contains the new gc.com coord checker\n
-    \n
-    \n
-    <b>2017.10.10:</b>\n
-    · Fix: Search broken for user names containing plus sign\n
-    · Fix: Crash in map directory selection on some devices\n
-    · Fix: OC cache coordinates parsing crashed seldomly\n
-    \n
-    <b>2017.08.23:</b>\n
-    · Fix: Logging caches might fail due to website changes\n
-    · Fix: Username not shown on main screen login status\n
-    \n
-    <b>2017.07.24:</b>\n
-    · New: Cache list menu restructured, see <a href="http://www.cgeo.org/faq#new-list-menu">FAQ</a> for details.\n
-    · New: Use abbreviation for name of geocaching service on main screen\n
-    · New: GCVote ratings are now sorted by a weighted arithmetic mean that also considers the number of votes\n
-    · Removed: OpenCycleMap due to licensing issues, see <a href="http://www.cgeo.org/faq#cyclemap">FAQ</a>\n
-    · Fix: Ignore invalid characters when exporting to GPX\n
-    · Fix: Sort by favorite percent now respects attended/photo taken\n
-    · Fix: Relative URLs in cache descriptions\n
-    · Fix: Use weighted arithmetic mean to sort GCVote ratings\n
-    · Fix: TLS v1.2 Support for Android 4.1 - 4.4 devices\n
-    · Fix: Improve sort of events\n
-    · Fix: Raise personal note character limit\n
-    · Fix: Avoid failure when parsing OC coordinates\n
+    <b>Next beta version:</b>\n
+    · New: Coordinate calculator (New Waypoint - Calculate Coordinates)\n
+    · New: Log image upload for Opencaching\n
+    · New: Detect certitude as checker and support opening it via menu\n
+    · New: Show as list menu now only active if more than one cache is on map\n
+    · New: Support OpenCaching GPX format extensions\n
+    · Fix: Improve parsing of home coordinates\n
+    · Fix: Disabled caches might be shown with truncated title\n
+    · Fix: Some OC cache URL not detected correctly\n
+    · Fix: Some possible crashes on map\n
+    · Fix: Search caches by users with a \'+\' in the name\n
+    · Fix: Correctly display pictures with relative URLS\n
+    · Fix: Disable phone number linking in personal note field\n
+    · Fix: Possible crash when starting directory selection\n
+    · Fix: Improved detection of dark text to allow contrast improvement\n
+    · Fix: Improve creation of nomedia file in geocache data directories\n
     \n
 </string>
 </resources>
