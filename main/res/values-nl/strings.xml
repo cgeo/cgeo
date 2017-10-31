@@ -981,7 +981,7 @@
   <string name="waypoint_duplicate">Dubbel waypoint</string>
   <string name="waypoint_duplicated">Waypoint gedupliceerd</string>
   <string name="waypoint_copy_of">Kopie van</string>
-  <string name="waypointcalc_notes_prompt">Voer hier opmerkingen in…</string>
+  <string name="waypointcalc_notes_prompt">Voer hier notities in…</string>
   <string name="search_history">Geschiedenis</string>
   <string name="search_history_empty">Geen eerdere bestemmingen</string>
   <string name="search_remove_destination">Bestemming verwijderd</string>

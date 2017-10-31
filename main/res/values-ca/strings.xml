@@ -230,6 +230,7 @@
   <string name="warn_rendertheme_missing">No s\'ha trobat l\'esquema de colors del mapa.</string>
   <string name="warn_pocket_query_select">No hi ha cap pocket query seleccionada.</string>
   <string name="warn_no_pocket_query_found">No s\'ha trobat cap pocket query en línia.</string>
+  <string name="warn_invalid_character">El caràcter ha de ser una LLETRA o un DÍGIT</string>
   <string name="err_read_pocket_query_list">Error llegint la llista de consultes a mida.</string>
   <string name="info_log_posted">El c:geo ha tramès el registre correctament.</string>
   <string name="info_log_saved">El c:geo ha desat correctament el registre.</string>
@@ -243,6 +244,7 @@
   <string name="info_stored_image">La nova imatge s\'ha desat a:</string>
   <string name="info_storing_static_maps">S\'està intentant desar els mapes estàtics</string>
   <string name="info_cache_saved">El catxé ha estat desat localment</string>
+  <string name="warn_calculator_state_save">Assegura\'t de desar el punt de ruta si vols mantenir l\'estat de la calculadora.</string>
   <string name="err_trackable_log_not_anonymous">Entreu %1$s des de c:geo no es pot fer anònimament. Voleu obrir la configuració per omplir les vostres credencials de %2$s?</string>
   <string name="err_trackable_no_preference_activity">No es troba la pantalla indicada de preferència.</string>
   <string name="warn_discard_changes">Descartat els canvis del punt de referència!</string>
@@ -879,6 +881,7 @@
   <string name="cache_event">Data</string>
   <string name="cache_location">Ubicació</string>
   <string name="cache_coordinates">Coordenades</string>
+  <string name="cache_calculator">Calculadora</string>
   <string name="cache_coordinates_original">Coordenades originals</string>
   <string name="cache_spoiler_images_title">Imatges d\'ajuda</string>
   <string name="cache_log_types">Tipus de registre</string>
@@ -942,6 +945,7 @@
   <string name="waypoint">Fita</string>
   <string name="waypoint_coordinates">Coordenades</string>
   <string name="waypoint_cache_coordinates">Coordenades del catxé</string>
+  <string name="waypoint_calculate_coordinates">Calcula coordenades</string>
   <string name="waypoint_custom">Personal</string>
   <string name="waypoint_my_coordinates">Les meves coordenades</string>
   <string name="waypoint_bearing">Direcció en º</string>
@@ -976,6 +980,7 @@
   <string name="waypoint_duplicate">Duplica punt de ruta</string>
   <string name="waypoint_duplicated">Punt de ruta duplicat</string>
   <string name="waypoint_copy_of">Còpia de</string>
+  <string name="waypointcalc_notes_prompt">Afegeix aquí les notes…</string>
   <string name="search_history">Historial</string>
   <string name="search_history_empty">No hi ha destinacions prèvies</string>
   <string name="search_remove_destination">S\'ha esborrat la destinació</string>
@@ -1441,6 +1446,7 @@
   <string name="cgeo_shortcut">Drecera del c:geo</string>
   <string name="create_shortcut">Crea una drecera</string>
   <string name="send">Envia</string>
+  <string name="confirm_log_title">Tipus de registre especial</string>
   <string name="confirm_log_message">Voleu registrar \'%s\'. N\'esteu segurs?</string>
   <!-- Geokrety -->
   <string name="settings_activate_geokrety">Activa</string>
@@ -1479,6 +1485,10 @@
   <string name="command_rename_list_result">Canvia el nom de la llista</string>
   <string name="command_delete_list_result">Llista suprimida</string>
   <string name="command_unique_list_result">Catxés esborrats d\'altres llistes</string>
+  <plurals name="fav_points_remaining">
+    <item quantity="one">Afegeix aquest geoamagatall als preferits (%d restants)</item>
+    <item quantity="other">Afegeix aquests geoamagatalls als preferits (%d restants)</item>
+  </plurals>
   <!-- distance units -->
   <string name="unit_m">m</string>
   <string name="unit_km">km</string>
@@ -1507,4 +1517,6 @@
   <string name="init_low_disk_space_message">S\'està exhaurint l\'espai d\'emmagatzematge del directori de dades de geoamagatalls. Això pot provocar un funcionament incorrecte del c:geo. Si us plau, allibera una mica d\'espai.</string>
   <string name="init_confirm_debug">c:Geo s\'està executant en mode de depuració!</string>
   <string name="list_confirm_debug_message">El mode de depuració provoca inestabilitat! Voleu desactivar el mode de depuració?</string>
+  <string name="err_select_logimage_upload_size">Imatge massa gran, si us plau seleccioneu una escala més petita.</string>
+  <string name="err_logimage_caption_required">Cal un títol per a la imatge</string>
 </resources>

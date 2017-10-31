@@ -1534,4 +1534,5 @@
   <string name="init_low_disk_space_message">V adresáři dat keší dochází volné místo. To může způsobit nesprávné fungování aplikace c:geo. Uvolni nějaké místo.</string>
   <string name="init_confirm_debug">c:geo běží v režimu ladění!</string>
   <string name="list_confirm_debug_message">Režim ladění může způsobit nestabilitu aplikace. Chceš režim ladění vypnout?</string>
+  <string name="err_select_logimage_upload_size">Obrázek je příliš velký. Prosím, vyber menší.</string>
 </resources>
