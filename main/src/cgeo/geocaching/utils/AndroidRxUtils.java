@@ -8,7 +8,10 @@ import android.support.v4.app.Fragment;
 
 import java.lang.ref.WeakReference;
 import java.util.concurrent.Callable;
-import java.util.concurrent.Executors;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Maybe;
 import io.reactivex.Observable;
@@ -26,9 +29,11 @@ public class AndroidRxUtils {
 
     public static final Scheduler computationScheduler = Schedulers.computation();
 
-    public static final Scheduler networkScheduler = Schedulers.from(Executors.newFixedThreadPool(10, new RxThreadFactory("network-")));
+    private static final ThreadPoolExecutor.DiscardPolicy DISCARD_POLICY = new ThreadPoolExecutor.DiscardPolicy();
 
-    public static final Scheduler refreshScheduler = Schedulers.from(Executors.newFixedThreadPool(3, new RxThreadFactory("refresh-")));
+    public static final Scheduler networkScheduler = Schedulers.from(newFixedDiscardingThreadPool(10, "network-"));
+
+    public static final Scheduler refreshScheduler = Schedulers.from(newFixedDiscardingThreadPool(3, "refresh-"));
 
     private static final HandlerThread looperCallbacksThread =
             new HandlerThread("looper callbacks", Process.THREAD_PRIORITY_DEFAULT);
@@ -129,4 +134,17 @@ public class AndroidRxUtils {
             }
         });
     }
+
+    /**
+     * Provide an executor service with a fixed number of threads and an unbounded queue. If the
+     * service is shutdown while tasks are still queued, jobs will be silently discarded.
+     */
+    private static ExecutorService newFixedDiscardingThreadPool(final int nThreads, final String prefix) {
+        return new ThreadPoolExecutor(nThreads, nThreads,
+                0L, TimeUnit.MILLISECONDS,
+                new LinkedBlockingQueue<Runnable>(),
+                new RxThreadFactory(prefix),
+                DISCARD_POLICY);
+    }
+
 }

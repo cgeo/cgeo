@@ -6,6 +6,7 @@ import cgeo.geocaching.activity.Keyboard;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Geopoint.ParseException;
 import cgeo.geocaching.location.GeopointFormatter;
+import cgeo.geocaching.models.CalcState;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
@@ -13,12 +14,15 @@ import cgeo.geocaching.settings.Settings.CoordInputFormatEnum;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.EditUtils;
 
+import android.app.Activity;
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Gravity;
@@ -58,8 +62,10 @@ public class CoordinatesInputDialog extends DialogFragment {
     private CoordInputFormatEnum currentFormat = null;
     private List<EditText> orderedInputs;
 
-    private static final String GEOPOINT_ARG = "GEOPOINT";
+    public static final String GEOPOINT_ARG = "GEOPOINT";
     private static final String CACHECOORDS_ARG = "CACHECOORDS";
+
+    private FragmentActivity myContext;
 
     @NonNull
     private static Geopoint currentCoords() {
@@ -187,6 +193,11 @@ public class CoordinatesInputDialog extends DialogFragment {
         } else {
             buttonCache.setVisibility(View.GONE);
         }
+        final Button buttonCalculate = ButterKnife.findById(v, R.id.calculate);
+        if (getActivity() instanceof CalculateState) {
+            buttonCalculate.setOnClickListener(new CalculateListener());
+            buttonCalculate.setVisibility(View.VISIBLE);
+        }
 
         if (hasClipboardCoordinates()) {
             final Button buttonClipboard = ButterKnife.findById(v, R.id.clipboard);
@@ -200,7 +211,14 @@ public class CoordinatesInputDialog extends DialogFragment {
         } else {
             buttonDone.setOnClickListener(inputdone);
         }
+
         return v;
+    }
+
+    @Override
+    public void onAttach(final Activity activity) {
+        myContext = (FragmentActivity) activity;
+        super.onAttach(activity);
     }
 
     @SuppressWarnings("unused")
@@ -546,6 +564,27 @@ public class CoordinatesInputDialog extends DialogFragment {
         }
     }
 
+    @Override
+    public void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
+        dismiss();
+    }
+
+    private class CalculateListener implements View.OnClickListener {
+
+        @Override
+        public void onClick(final View v) {
+            if (getActivity() instanceof  CalculateState) {
+                final CalculateState calculateState = (CalculateState) getActivity();
+                final CalcState newState = calculateState.fetchCalculatorState();
+                final CoordinatesCalculateDialog calculateDialog = CoordinatesCalculateDialog.getInstance(gp, newState);
+                // Assign this fragment as the target fragment so the calculate dialog can automatically close this one on completion
+                calculateDialog.setTargetFragment(CoordinatesInputDialog.this, 1);
+                calculateDialog.setCancelable(true);
+                calculateDialog.show(myContext.getSupportFragmentManager(), "wpcalcdialog");
+            }
+        }
+    }
+
     private class ClipboardListener implements View.OnClickListener {
 
         @Override
@@ -584,6 +623,12 @@ public class CoordinatesInputDialog extends DialogFragment {
         void updateCoordinates(final Geopoint gp);
     }
 
+    // Interface used by the coordinate calculator dialog too preserve its state in the waypoint itself.
+    public interface CalculateState {
+        void saveCalculatorState(final CalcState calc);
+        CalcState fetchCalculatorState();
+    }
+
     private class PadZerosOnFocusLostListener implements OnFocusChangeListener {
 
         @Override
@@ -601,5 +646,4 @@ public class CoordinatesInputDialog extends DialogFragment {
             }
         }
     }
-
 }

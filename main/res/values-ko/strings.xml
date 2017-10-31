@@ -229,6 +229,7 @@
   <string name="warn_rendertheme_missing">지도 테마를 찾을 수 없습니다.</string>
   <string name="warn_pocket_query_select">포켓쿼리를 선택하지 않았습니다.</string>
   <string name="warn_no_pocket_query_found">온라인에 포켓쿼리가 없습니다.</string>
+  <string name="warn_invalid_character">문자 또는 숫자만 허용됩니다.</string>
   <string name="err_read_pocket_query_list">포켓쿼리 목록을 불러오지 못했습니다.</string>
   <string name="info_log_posted">로그를 성공적으로 제출했습니다.</string>
   <string name="info_log_saved">로그를 성공적으로 저장했습니다.</string>
@@ -242,6 +243,7 @@
   <string name="info_stored_image">새로운 사진 저장 위치 :</string>
   <string name="info_storing_static_maps">정적 지도를 저장하는 중입니다.</string>
   <string name="info_cache_saved">캐시가 기기에 저장되었습니다.</string>
+  <string name="warn_calculator_state_save">계산기 상태를 유지하려면 웨이포인트를 저장해야 합니다.</string>
   <string name="err_trackable_log_not_anonymous">c:geo에서 익명으로 %1$s를 로그할 수 없습니다. 설정을 열어 %2$s 의 계정정보를 입력하시겠습니까?</string>
   <string name="err_trackable_no_preference_activity">죄송합니다만, 적절한 해당 서비스 설정화면이 없습니다.</string>
   <string name="warn_discard_changes">저장되지 않은 웨이포인트 정보가 삭제됩니다!</string>
@@ -855,6 +857,7 @@
   <string name="cache_event">날짜</string>
   <string name="cache_location">위치</string>
   <string name="cache_coordinates">좌표</string>
+  <string name="cache_calculator">계산기</string>
   <string name="cache_coordinates_original">원래 좌표</string>
   <string name="cache_spoiler_images_title">스포일러 사진</string>
   <string name="cache_log_types">로그 유형</string>
@@ -918,6 +921,7 @@
   <string name="waypoint">지점</string>
   <string name="waypoint_coordinates">좌표</string>
   <string name="waypoint_cache_coordinates">캐시 좌표</string>
+  <string name="waypoint_calculate_coordinates">좌표 계산</string>
   <string name="waypoint_custom">맞춤형</string>
   <string name="waypoint_my_coordinates">내 위치</string>
   <string name="waypoint_bearing">방위각(°)</string>
@@ -952,6 +956,7 @@
   <string name="waypoint_duplicate">웨이포인트 복제</string>
   <string name="waypoint_duplicated">웨이포인트가 복제됨</string>
   <string name="waypoint_copy_of">복사 :</string>
+  <string name="waypointcalc_notes_prompt">여기에 메모를 입력...</string>
   <string name="search_history">기록</string>
   <string name="search_history_empty">이전 목적지가 없습니다.</string>
   <string name="search_remove_destination">목적지가 제거됨</string>
@@ -1409,7 +1414,7 @@
   <string name="cgeo_shortcut">c:geo 바로가기</string>
   <string name="create_shortcut">바로가기 만들기</string>
   <string name="send">보내기</string>
-  <string name="confirm_log_title">특이한 로그 유형</string>
+  <string name="confirm_log_title">특별 로그 유형</string>
   <string name="confirm_log_message">정말 \'%s\'를 로그하시겠습니까?</string>
   <!-- Geokrety -->
   <string name="settings_activate_geokrety">활성화</string>
@@ -1475,4 +1480,6 @@
   <string name="init_low_disk_space_message">지오캐시 데이터폴더의 공간이 모자랍니다. 이는 c:geo의 오작동을 초래할 수 있습니다. 여유공간을 확보해 주세요.</string>
   <string name="init_confirm_debug">c:geo가 디버그 모드에서 실행됩니다!</string>
   <string name="list_confirm_debug_message">디버그 모드는 불안정해질 수 있습니다. 정상 모드로 돌아가시겠습니까?</string>
+  <string name="err_select_logimage_upload_size">이미지가 너무큽니다. 작은 것을 선택해주세요.</string>
+  <string name="err_logimage_caption_required">영상에 설명이 필요합니다.</string>
 </resources>

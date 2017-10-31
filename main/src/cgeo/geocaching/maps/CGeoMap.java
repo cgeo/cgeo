@@ -588,7 +588,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
 
             final Set<String> geocodesInViewport = getGeocodesForCachesInViewport();
-            menu.findItem(R.id.menu_store_caches).setVisible(!isLoading() && CollectionUtils.isNotEmpty(geocodesInViewport) && new SearchResult(geocodesInViewport).hasUnsavedCaches());
+            menu.findItem(R.id.menu_store_caches).setVisible(!isLoading() && CollectionUtils.isNotEmpty(geocodesInViewport));
 
             menu.findItem(R.id.menu_mycaches_mode).setChecked(Settings.isExcludeMyCaches());
             menu.findItem(R.id.menu_disabled_mode).setChecked(Settings.isExcludeDisabledCaches());
@@ -671,15 +671,8 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
             case R.id.menu_store_caches:
                 if (!isLoading()) {
                     final Set<String> geocodesInViewport = getGeocodesForCachesInViewport();
-                    final List<String> geocodes = new ArrayList<>();
 
-                    for (final String geocode : geocodesInViewport) {
-                        if (!DataStore.isOffline(geocode, null)) {
-                            geocodes.add(geocode);
-                        }
-                    }
-
-                    detailTotal = geocodes.size();
+                    detailTotal = geocodesInViewport.size();
                     detailProgress = 0;
 
                     if (detailTotal == 0) {
@@ -693,11 +686,11 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
                         new StoredList.UserInterface(activity).promptForMultiListSelection(R.string.list_title, new Action1<Set<Integer>>() {
                                     @Override
                             public void call(final Set<Integer> selectedListIds) {
-                                storeCaches(geocodes, selectedListIds);
+                                storeCaches(geocodesInViewport, selectedListIds);
                                     }
                         }, true, Collections.<Integer>emptySet(), false);
                     } else {
-                        storeCaches(geocodes, Collections.singleton(StoredList.STANDARD_LIST_ID));
+                        storeCaches(geocodesInViewport, Collections.singleton(StoredList.STANDARD_LIST_ID));
                     }
                 }
                 return true;
@@ -1328,7 +1321,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
      * @param listIds
      *            the lists to store the caches in
      */
-    private void storeCaches(final List<String> geocodes, final Set<Integer> listIds) {
+    private void storeCaches(final Set<String> geocodes, final Set<Integer> listIds) {
         final LoadDetailsHandler loadDetailsHandler = new LoadDetailsHandler(this);
 
         waitDialog = new ProgressDialog(activity);
@@ -1372,10 +1365,10 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
     private class LoadDetails extends Thread {
 
         private final DisposableHandler handler;
-        private final List<String> geocodes;
+        private final Set<String> geocodes;
         private final Set<Integer> listIds;
 
-        LoadDetails(final DisposableHandler handler, final List<String> geocodes, final Set<Integer> listIds) {
+        LoadDetails(final DisposableHandler handler, final Set<String> geocodes, final Set<Integer> listIds) {
             this.handler = handler;
             this.geocodes = geocodes;
             this.listIds = listIds;
@@ -1396,10 +1389,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
                     if (handler.isDisposed()) {
                         break;
                     }
-
-                    if (!DataStore.isOffline(geocode, null)) {
-                        Geocache.storeCache(null, geocode, listIds, false, handler);
-                    }
+                    Geocache.storeCache(null, geocode, listIds, false, handler);
                 } catch (final Exception e) {
                     Log.e("CGeoMap.LoadDetails.run", e);
                 } finally {

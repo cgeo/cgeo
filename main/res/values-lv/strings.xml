@@ -1395,7 +1395,6 @@
   <string name="cgeo_shortcut">c:geo saīsne</string>
   <string name="create_shortcut">Izveidot saīsni</string>
   <string name="send">Nosūtīt</string>
-  <string name="confirm_log_title">Neparasts pierakstīšanās tips</string>
   <string name="confirm_log_message">You want to log \'%s\'. Are you sure?</string>
   <!-- Geokrety -->
   <string name="settings_activate_geokrety">Aktivizēt</string>

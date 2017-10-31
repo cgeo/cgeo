@@ -83,6 +83,8 @@ To run all tests use the same "Run As" menu item from the context menu of the te
 
 For tests to run successfully you need to configure c:geo on the emulator that runs the test with a valid geocaching.com account. In order for all tests to be successfull the account needs to be a premium member.
 
+Tests may also be launched from command line. Use `gradlew assembleBasicDebug` from the root directory of the git repository.
+
 ## License
 
 c:geo is distributed under [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0).

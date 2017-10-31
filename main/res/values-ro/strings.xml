@@ -1459,7 +1459,6 @@
   <string name="cgeo_shortcut">legătură la c:geo</string>
   <string name="create_shortcut">Crează scurtătură</string>
   <string name="send">Trimite</string>
-  <string name="confirm_log_title">Tip neobişnuit de însemnare</string>
   <string name="confirm_log_message">Vrei să scrii o însemnare pentru \'%s\'. Eşti sigur?</string>
   <!-- Geokrety -->
   <string name="settings_activate_geokrety">Activează</string>

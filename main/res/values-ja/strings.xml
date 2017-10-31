@@ -1127,7 +1127,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
   <string name="export_gpx_to">エクスポートしたGPXファイルを送る:</string>
   <string name="export_confirm_title">エクスポート中 %1$s</string>
   <string name="export_confirm_message">パス: %1$s\nファイル名: %2$s</string>
-  <string name="export_persnotes">パーソナルノート</string>
   <string name="export_persnotes_uploading">パーソナルノート%1$dをアップロード中</string>
   <plurals name="export_persnotes_upload_success">
     <item quantity="other">%1$dノートを正常にアップロードしました</item>
@@ -1416,7 +1415,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
   <string name="cgeo_shortcut">c:geo ショートカット</string>
   <string name="create_shortcut">ショートカットを作成</string>
   <string name="send">送信</string>
-  <string name="confirm_log_title">異常なログのタイプ</string>
   <string name="confirm_log_message">\'%s\' をログに記録します。よろしいですか?</string>
   <!-- Geokrety -->
   <string name="settings_activate_geokrety">有効化</string>

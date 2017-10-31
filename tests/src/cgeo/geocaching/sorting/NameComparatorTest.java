@@ -1,5 +1,7 @@
 package cgeo.geocaching.sorting;
 
+import org.junit.Test;
+
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
 import cgeo.geocaching.models.Geocache;
@@ -7,9 +9,7 @@ import cgeo.geocaching.models.Geocache;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import junit.framework.TestCase;
-
-public class NameComparatorTest extends TestCase {
+public class NameComparatorTest {
 
     private static class NamedCache extends Geocache {
 
@@ -20,17 +20,20 @@ public class NameComparatorTest extends TestCase {
 
     private final NameComparator comp = new NameComparator();
 
+    @Test
     public void testLexical() {
         assertSorted(new NamedCache("A"), new NamedCache("Z"));
         assertNotSorted(new NamedCache("Z"), new NamedCache("A"));
     }
 
+    @Test
     public void testNumericalNamePart() {
         assertSorted(new NamedCache("AHR#2"), new NamedCache("AHR#11"));
         assertSorted(new NamedCache("AHR#7 LP"), new NamedCache("AHR#11 Bonsaibuche"));
         assertSorted(new NamedCache("2"), new NamedCache("11"));
     }
 
+    @Test
     public void testDuplicateNumericalParts() {
         assertSortedNames("GR8 01-01", "GR8 01-02", "GR8 01-03", "GR8 01-04", "GR8 01-05", "GR8 01-06", "GR8 01-07", "GR8 01-08", "GR8 01-09");
     }
@@ -50,6 +53,7 @@ public class NameComparatorTest extends TestCase {
         }
     }
 
+    @Test
     public void testNumericalWithSuffix() {
         assertSorted(new NamedCache("abc123def"), new NamedCache("abc123xyz"));
         assertThat((new NamedCache("abc123def456")).getNameForSorting()).isEqualTo("abc000123def000456");

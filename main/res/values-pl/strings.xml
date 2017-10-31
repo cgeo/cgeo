@@ -1451,7 +1451,7 @@
   <string name="cgeo_shortcut">skrót do c:geo</string>
   <string name="create_shortcut">Utwórz skrót</string>
   <string name="send">Wyślij</string>
-  <string name="confirm_log_title">Niezwykły typ wpisu</string>
+  <string name="confirm_log_title">Specjalny typ wpisu</string>
   <string name="confirm_log_message">Chcesz wpisać \'%s\'. Czy jesteś pewien?</string>
   <!-- Geokrety -->
   <string name="settings_activate_geokrety">Aktywuj</string>

@@ -1,6 +1,20 @@
 package cgeo.geocaching.files;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
+import android.support.annotation.RawRes;
+
+import org.apache.commons.compress.utils.IOUtils;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.EnumSet;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Locale;
+import java.util.Set;
 
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
@@ -22,21 +36,7 @@ import cgeo.geocaching.test.R;
 import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.SynchronizedDateFormat;
 
-import android.support.annotation.RawRes;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.EnumSet;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Locale;
-import java.util.Set;
-
-import org.apache.commons.compress.utils.IOUtils;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
     private static final SynchronizedDateFormat LOG_DATE_FORMAT = new SynchronizedDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US); // 2010-04-20T07:00:00Z
@@ -507,6 +507,22 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         final Geocache cache = caches.get(0);
         final List<String> attributes = cache.getAttributes();
         assertThat(attributes).hasSize(2);
+    }
+
+    public void testOpenCachingGpxExtensionOtherCode() throws Exception {
+        final List<Geocache> caches = readGPX10(R.raw.oca521_gpx);
+        assertThat(caches).hasSize(1);
+
+        final Geocache cache = caches.get(0);
+        assertThat(cache.getDescription()).contains("GC287WQ");
+    }
+
+    public void testOpenCachingGpxExtensionRequiresPassword() throws Exception {
+        final List<Geocache> caches = readGPX10(R.raw.ocbb4a_gpx);
+        assertThat(caches).hasSize(1);
+
+        final Geocache cache = caches.get(0);
+        assertThat(cache.isLogPasswordRequired()).isTrue();
     }
 
 }

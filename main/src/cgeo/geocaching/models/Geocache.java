@@ -1,5 +1,40 @@
 package cgeo.geocaching.models;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.content.res.Resources;
+import android.net.Uri;
+import android.os.Handler;
+import android.os.Message;
+import android.os.Parcelable;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.text.Html;
+
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.collections4.ListUtils;
+import org.apache.commons.lang3.BooleanUtils;
+import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Date;
+import java.util.EnumMap;
+import java.util.EnumSet;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+import java.util.regex.Pattern;
+
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
@@ -43,52 +78,16 @@ import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.LazyInitializedList;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
-
-import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
-import android.content.res.Resources;
-import android.net.Uri;
-import android.os.Handler;
-import android.os.Message;
-import android.os.Parcelable;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.text.Html;
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Date;
-import java.util.EnumMap;
-import java.util.EnumSet;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-import java.util.regex.Pattern;
-
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import io.reactivex.Scheduler;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.collections4.ListUtils;
-import org.apache.commons.lang3.BooleanUtils;
-import org.apache.commons.lang3.ObjectUtils;
-import org.apache.commons.lang3.StringUtils;
 
 /**
  * Internal representation of a "cache"
  */
 public class Geocache implements IWaypoint {
 
-    private static final int OWN_WP_PREFIX_OFFSET = 17;
     private long updated = 0;
     private long detailedUpdate = 0;
     private long visitedDate = 0;
@@ -1387,26 +1386,8 @@ public class Geocache implements IWaypoint {
         return saveToDatabase && DataStore.saveWaypoint(waypoint.getId(), geocode, waypoint);
     }
 
-    /*
-     * Assigns a unique two-digit (compatibility with gc.com)
-     * prefix within the scope of this cache.
-     */
     private void assignUniquePrefix(final Waypoint waypoint) {
-        // gather existing prefixes
-        final Set<String> assignedPrefixes = new HashSet<>();
-        for (final Waypoint wp : waypoints) {
-            assignedPrefixes.add(wp.getPrefix());
-        }
-
-        for (int i = OWN_WP_PREFIX_OFFSET; i < 100; i++) {
-            final String prefixCandidate = String.valueOf(i);
-            if (!assignedPrefixes.contains(prefixCandidate)) {
-                waypoint.setPrefix(prefixCandidate);
-                return;
-            }
-        }
-
-        throw new IllegalStateException("too many waypoints, unable to assign unique prefix");
+        Waypoint.assignUniquePrefix(waypoint, waypoints);
     }
 
     public boolean hasWaypoints() {
@@ -2029,5 +2010,16 @@ public class Geocache implements IWaypoint {
 
     public GeoitemRef getGeoitemRef() {
         return new GeoitemRef(getGeocode(), getCoordType(), getGeocode(), 0, getName(), getType().markerId);
+    }
+
+    public static String getAlternativeListingText(final String alternativeCode) {
+        return new StringBuilder()
+                .append(CgeoApplication.getInstance().getResources()
+                        .getString(R.string.cache_listed_on, GCConnector.getInstance().getName()))
+                .append(": <a href=\"https://coord.info/")
+                .append(alternativeCode)
+                .append("\">")
+                .append(alternativeCode)
+                .append("</a><br /><br />").toString();
     }
 }

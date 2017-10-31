@@ -778,6 +778,8 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         final Intent selectImageIntent = new Intent(this, ImageSelectActivity.class);
         selectImageIntent.putExtra(Intents.EXTRA_IMAGE, image);
         selectImageIntent.putExtra(Intents.EXTRA_GEOCODE, cache.getGeocode());
+        selectImageIntent.putExtra(Intents.EXTRA_MAX_IMAGE_UPLOAD_SIZE, loggingManager.getMaxImageUploadSize());
+        selectImageIntent.putExtra(Intents.EXTRA_IMAGE_CAPTION_MANDATORY, loggingManager.isImageCaptionMandatory());
 
         startActivityForResult(selectImageIntent, SELECT_IMAGE);
     }

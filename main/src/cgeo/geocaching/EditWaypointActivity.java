@@ -10,6 +10,7 @@ import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.location.DistanceParser;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointFormatter;
+import cgeo.geocaching.models.CalcState;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.sensors.GeoData;
@@ -64,7 +65,7 @@ import org.androidannotations.annotations.ViewById;
 import org.apache.commons.lang3.StringUtils;
 
 @EActivity
-public class EditWaypointActivity extends AbstractActionBarActivity implements CoordinatesInputDialog.CoordinateUpdate {
+public class EditWaypointActivity extends AbstractActionBarActivity implements CoordinatesInputDialog.CoordinateUpdate, CoordinatesInputDialog.CalculateState {
 
     public static final int SUCCESS = 0;
     public static final int UPLOAD_START = 1;
@@ -111,6 +112,10 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
      * This is the cache that the waypoint belongs to.
      */
     private Geocache cache;
+    /**
+     * State the Coordinate Calculator was last left in.
+     */
+    private CalcState calcState;
 
     private final Handler loadWaypointHandler = new LoadWaypointHandler(this);
 
@@ -137,6 +142,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
                     activity.lookup = waypoint.getLookup();
                     activity.own = waypoint.isUserDefined();
                     activity.originalCoordsEmpty = waypoint.isOriginalCoordsEmpty();
+                    activity.calcState = waypoint.getCalculatorStoredState();
 
                     if (activity.initViews) {
                         activity.visitedCheckBox.setChecked(waypoint.isVisited());
@@ -245,6 +251,8 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
                 updateCoordinates(initialCoords);
             }
         }
+
+        calcState = null;
 
         initializeDistanceUnitSelector();
 
@@ -382,6 +390,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         public void run() {
             try {
                 waypoint = DataStore.loadWaypoint(waypointId);
+                calcState = waypoint.getCalculatorStoredState();
 
                 loadWaypointHandler.sendMessage(Message.obtain());
             } catch (final Exception e) {
@@ -454,6 +463,17 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
     public void updateCoordinates(final Geopoint gp) {
         buttonLat.setText(gp.format(GeopointFormatter.Format.LAT_DECMINUTE));
         buttonLon.setText(gp.format(GeopointFormatter.Format.LON_DECMINUTE));
+    }
+
+    @Override
+    public void saveCalculatorState(final CalcState calcState) {
+        this.calcState = calcState;
+        this.userNote.setText(calcState.notes);
+    }
+
+    @Override
+    public CalcState fetchCalculatorState() {
+        return new CalcState(calcState, userNote.getText().toString());
     }
 
     /**
@@ -629,6 +649,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
                 waypoint.setVisited(currentState.visited);
                 waypoint.setId(waypointId);
                 waypoint.setOriginalCoordsEmpty(originalCoordsEmpty);
+                waypoint.setCalculatorStoredState(calcState);
 
                 final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_WAYPOINTS);
                 if (cache == null) {

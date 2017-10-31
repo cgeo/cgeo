@@ -1,21 +1,22 @@
 package cgeo.geocaching.models;
 
+import org.junit.Before;
+import org.junit.Test;
+
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
 import cgeo.geocaching.location.Geopoint;
 
-import junit.framework.TestCase;
-
-public class DestinationTest extends TestCase {
+public class DestinationTest {
 
     private Destination dest = null;
 
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
+    @Before
+    public void setUp() throws Exception {
         dest = new Destination(1, 10000, new Geopoint(52.5, 9.33));
     }
 
+    @Test
     public void testSomething() {
         assertThat(dest.getId()).isEqualTo(1);
         assertThat(dest.getDate()).isEqualTo(10000);

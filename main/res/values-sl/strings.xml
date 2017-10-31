@@ -1239,7 +1239,6 @@
   <string name="cgeo_shortcut">Bližnjica c:geo</string>
   <string name="create_shortcut">Ustvari bližnjico</string>
   <string name="send">Pošlji</string>
-  <string name="confirm_log_title">Nenavaden zapis</string>
   <string name="confirm_log_message">Poslali boste zapis \'%s\'. Ali ste prepričani?</string>
   <!-- Geokrety -->
   <string name="settings_activate_geokrety">Aktiviraj</string>

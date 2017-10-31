@@ -230,6 +230,7 @@
   <string name="warn_rendertheme_missing">Karttema kunde inte hittas.</string>
   <string name="warn_pocket_query_select">Ingen Pocket query vald.</string>
   <string name="warn_no_pocket_query_found">Ingen Pocket query hittades på nätet.</string>
+  <string name="warn_invalid_character">Tecknet måste vara en bokstav eller en siffra</string>
   <string name="err_read_pocket_query_list">Fel vid inläsning av Pocket Query-lista.</string>
   <string name="info_log_posted">c:geo har postat din logg.</string>
   <string name="info_log_saved">c:geo har sparat din logg.</string>
@@ -243,6 +244,7 @@
   <string name="info_stored_image">Ny bild sparad som:</string>
   <string name="info_storing_static_maps">Försöker ladda ner statiska kartor</string>
   <string name="info_cache_saved">Cachen har lagrats lokalt</string>
+  <string name="warn_calculator_state_save">Glöm inte att spara punkten om du vill behålla kalkylatorläget.</string>
   <string name="err_trackable_log_not_anonymous">Loggning av %1$s från c:geo kan inte göras anonymt. Vill du öppna inställningarna för att fylla i din inloggningsinformation från %2$s?</string>
   <string name="err_trackable_no_preference_activity">Tyvärr kan inte en lämplig inställningsskärm hittas.</string>
   <string name="warn_discard_changes">Ej sparade ändringar av punkt slängdes!</string>
@@ -315,6 +317,10 @@
   <string name="caches_nearby">Nära</string>
   <string name="caches_manage">Hantera</string>
   <string name="caches_remove_all">Ta bort alla</string>
+  <plurals name="caches_remove_all_confirm">
+    <item quantity="one">Vill du ta bort denna cache från aktuell lista?</item>
+    <item quantity="other">Vill du ta bort alla %d cacher från aktuell lista?</item>
+  </plurals>
   <string name="caches_remove_selected">Ta bort valda</string>
   <plurals name="caches_remove_selected_confirm">
     <item quantity="one">Vill du radera den här cachen från din enhet?</item>
@@ -419,6 +425,7 @@
   <string name="calculate_dataDir_title">Användning av geocache-data katalog</string>
   <string name="calculate_dataDir">Beräknar användning i katalog för Geocache data</string>
   <string name="settings_data_dir_item">%1$s (%2$s ledigt)</string>
+  <string name="confirm_data_dir_move_title">Flytta datakatalog för geocacher?</string>
   <string name="confirm_data_dir_move">Att flytta katalogen för geocache-data kan, beroende på din enhet och mängden data, ta riktigt lång tid.</string>
   <string name="settings_title_basicmembers">Inställningar för Basic Members</string>
   <string name="settings_title_navigation">Navigering</string>
@@ -875,6 +882,7 @@
   <string name="cache_event">Datum</string>
   <string name="cache_location">Plats</string>
   <string name="cache_coordinates">Koordinater</string>
+  <string name="cache_calculator">Kalkylator</string>
   <string name="cache_coordinates_original">Ursprungliga koordinater</string>
   <string name="cache_spoiler_images_title">Spoiler bilder</string>
   <string name="cache_log_types">Loggtyper</string>
@@ -938,6 +946,7 @@
   <string name="waypoint">Punkt</string>
   <string name="waypoint_coordinates">Koordinater</string>
   <string name="waypoint_cache_coordinates">Cache koordinater</string>
+  <string name="waypoint_calculate_coordinates">Koordinatkalkylator</string>
   <string name="waypoint_custom">Egen</string>
   <string name="waypoint_my_coordinates">Mina koordinater</string>
   <string name="waypoint_bearing">Riktning (°)</string>
@@ -972,6 +981,7 @@
   <string name="waypoint_duplicate">Duplicera punkt</string>
   <string name="waypoint_duplicated">Punkten har duplicerats</string>
   <string name="waypoint_copy_of">Kopia av</string>
+  <string name="waypointcalc_notes_prompt">Skriv anteckningar här…</string>
   <string name="search_history">Historik</string>
   <string name="search_history_empty">Inga tidigare målpunkter</string>
   <string name="search_remove_destination">Punkten borttagen</string>
@@ -1438,7 +1448,7 @@
   <string name="cgeo_shortcut">c:geo genväg</string>
   <string name="create_shortcut">Skapa genväg</string>
   <string name="send">Skicka</string>
-  <string name="confirm_log_title">Ovanlig loggtyp</string>
+  <string name="confirm_log_title">Särskild logtyp</string>
   <string name="confirm_log_message">Du vill logga \'%s\'. Är du säker?</string>
   <!-- Geokrety -->
   <string name="settings_activate_geokrety">Aktivera</string>
@@ -1477,6 +1487,10 @@
   <string name="command_rename_list_result">Namn ändrat på lista</string>
   <string name="command_delete_list_result">Lista borttagen</string>
   <string name="command_unique_list_result">Borttagna cacher från andra listor</string>
+  <plurals name="fav_points_remaining">
+    <item quantity="one">Lägg till cachen bland dina favoriter (%d kvar)</item>
+    <item quantity="other">Lägg till cachen bland dina favoriter (%d kvar)</item>
+  </plurals>
   <!-- distance units -->
   <string name="unit_m">m</string>
   <string name="unit_km">km</string>
@@ -1502,5 +1516,9 @@
   <!-- calendar adder -->
   <string name="event_fail">Det gick inte att lägga till event cache i kalender</string>
   <string name="init_low_disk_space">Snart slut på diskutrymme</string>
+  <string name="init_low_disk_space_message">Katalogen för geocachedata håller på att få slut på utrymme. Detta kan orsaka problem med c:geo. Vänligen försök frigöra lite utrymme.</string>
   <string name="init_confirm_debug">c:geo körs i debugläge!</string>
+  <string name="list_confirm_debug_message">Debug-läge kan orsaka instabilitet! Vill du återgå till normalläge?</string>
+  <string name="err_select_logimage_upload_size">Bilden är för stor, vänligen välj en mindre skala.</string>
+  <string name="err_logimage_caption_required">En text krävs till bilden</string>
 </resources>

@@ -317,9 +317,9 @@
   <string name="caches_manage">Správa</string>
   <string name="caches_remove_all">Odstranit vše</string>
   <plurals name="caches_remove_all_confirm">
-    <item quantity="one">Chcete odstranit tuto keš ze seznamu?</item>
-    <item quantity="few">Chcete odstranit všechny %d keše ze seznamu?</item>
-    <item quantity="other">Chcete odstranit všech %d keší ze seznamu?</item>
+    <item quantity="one">Chceš odstranit tuto keš ze seznamu?</item>
+    <item quantity="few">Chceš odstranit všechny %d keše ze seznamu?</item>
+    <item quantity="other">Chceš odstranit všech %d keší ze seznamu?</item>
   </plurals>
   <string name="caches_remove_selected">Odstranit vybrané</string>
   <plurals name="caches_remove_selected_confirm">
@@ -423,7 +423,7 @@
   <string name="settings_title_gpx">GPX</string>
   <string name="settings_title_data_dir">Umístění dat keše</string>
   <string name="settings_title_data_dir_usage">Adresář dat keše (%1$s použito)</string>
-  <string name="calculate_dataDir_title">Použití úložistě kešemi</string>
+  <string name="calculate_dataDir_title">Využití úložiště kešemi</string>
   <string name="calculate_dataDir">Propočítávání využití úložiště kešemi</string>
   <string name="settings_data_dir_item">%1$s (%2$s volných)</string>
   <string name="confirm_data_dir_move_title">Přesunout adresář s daty keší?</string>
@@ -1458,7 +1458,7 @@
   <string name="cgeo_shortcut">c:geo zástupce</string>
   <string name="create_shortcut">Vytvořit zástupce</string>
   <string name="send">Odeslat</string>
-  <string name="confirm_log_title">Neobvyklý typ logu</string>
+  <string name="confirm_log_title">Speciální typ logu</string>
   <string name="confirm_log_message">Opravdu chceš zalogovat „%s“?</string>
   <!-- Geokrety -->
   <string name="settings_activate_geokrety">Aktivovat</string>
@@ -1533,5 +1533,6 @@
   <string name="init_low_disk_space">V úložišti dochází volné místo</string>
   <string name="init_low_disk_space_message">V adresáři dat keší dochází volné místo. To může způsobit nesprávné fungování aplikace c:geo. Uvolni nějaké místo.</string>
   <string name="init_confirm_debug">c:geo běží v režimu ladění!</string>
-  <string name="list_confirm_debug_message">Režim ladění může způsobit nestabilitu aplikace. Chcete režim ladění vypnout?</string>
+  <string name="list_confirm_debug_message">Režim ladění může způsobit nestabilitu aplikace. Chceš režim ladění vypnout?</string>
+  <string name="err_select_logimage_upload_size">Obrázek je příliš velký. Prosím, vyber menší.</string>
 </resources>

@@ -1,12 +1,13 @@
 package cgeo.geocaching.network;
 
+import org.junit.Test;
+
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-import junit.framework.TestCase;
+public class NetworkTest {
 
-public class NetworkTest extends TestCase {
-
-    public static void testRfc3986URLEncode() {
+    @Test
+    public void testRfc3986URLEncode() {
         assertThat(Network.rfc3986URLEncode("*")).isEqualTo("*");
         assertThat(Network.rfc3986URLEncode("~")).isEqualTo("~");
         assertThat(Network.rfc3986URLEncode(" ")).isEqualTo("%20");

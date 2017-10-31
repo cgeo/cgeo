@@ -1,6 +1,6 @@
 package cgeo.geocaching.utils;
 
-import junit.framework.TestCase;
+import org.junit.Test;
 
 import java.util.Set;
 
@@ -8,9 +8,10 @@ import cgeo.geocaching.models.Geocache;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-public class LeastRecentlyUsedSetTest extends TestCase {
+public class LeastRecentlyUsedSetTest {
 
-    public static void testLruMode() {
+    @Test
+    public void testLruMode() {
         final Set<String> set = new LeastRecentlyUsedSet<>(5);
         set.add("one");
         set.add("two");
@@ -29,7 +30,8 @@ public class LeastRecentlyUsedSetTest extends TestCase {
         assertThat(set).containsExactly("four", "three", "five", "six", "seven");
     }
 
-    public static void testRemoveEldestEntry() {
+    @Test
+    public void testRemoveEldestEntry() {
         final LeastRecentlyUsedSet<Geocache> caches = new LeastRecentlyUsedSet<>(10);
         final Geocache first = new Geocache();
         first.setGeocode("1");

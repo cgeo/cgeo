@@ -154,6 +154,30 @@ public final class ImageUtils {
         }
     }
 
+    public static class ScaleImageResult {
+        final String filename;
+        final int width;
+        final int height;
+
+        public ScaleImageResult(final String filename, final int width, final int height) {
+            this.filename = filename;
+            this.width = width;
+            this.height = height;
+        }
+
+        public String getFilename() {
+            return filename;
+        }
+
+        public int getWidth() {
+            return width;
+        }
+
+        public int getHeight() {
+            return height;
+        }
+    }
+
     /**
      * Scales an image to the desired bounds and encodes to file.
      *
@@ -161,12 +185,13 @@ public final class ImageUtils {
      *            Image to read
      * @param maxXY
      *            bounds
-     * @return filename and path, <tt>null</tt> if something fails
+     * @return scale image result with filename and size, <tt>null</tt> if something fails
      */
     @Nullable
-    public static String readScaleAndWriteImage(@NonNull final String filePath, final int maxXY) {
+    public static ScaleImageResult readScaleAndWriteImage(@NonNull final String filePath, final int maxXY) {
         if (maxXY <= 0) {
-            return filePath;
+            final BitmapFactory.Options sizeOnlyOptions = getBitmapSizeOptions(filePath);
+            return new ScaleImageResult(filePath, sizeOnlyOptions.outWidth, sizeOnlyOptions.outHeight);
         }
         final Bitmap image = readDownsampledImage(filePath, maxXY, maxXY);
         if (image == null) {
@@ -182,7 +207,7 @@ public final class ImageUtils {
 
         final BitmapDrawable scaledImage = scaleBitmapTo(image, maxXY, maxXY);
         storeBitmap(scaledImage.getBitmap(), Bitmap.CompressFormat.JPEG, 75, uploadFilename);
-        return uploadFilename;
+        return new ScaleImageResult(uploadFilename, scaledImage.getBitmap().getWidth(), scaledImage.getBitmap().getHeight());
     }
 
     /**
@@ -205,9 +230,7 @@ public final class ImageUtils {
         } catch (final IOException e) {
             Log.e("ImageUtils.readDownsampledImage", e);
         }
-        final BitmapFactory.Options sizeOnlyOptions = new BitmapFactory.Options();
-        sizeOnlyOptions.inJustDecodeBounds = true;
-        BitmapFactory.decodeFile(filePath, sizeOnlyOptions);
+        final BitmapFactory.Options sizeOnlyOptions = getBitmapSizeOptions(filePath);
         final int myMaxXY = Math.max(sizeOnlyOptions.outHeight, sizeOnlyOptions.outWidth);
         final int maxXY = Math.max(maxX, maxY);
         final int sampleSize = myMaxXY / maxXY;
@@ -226,6 +249,14 @@ public final class ImageUtils {
             }
         }
         return decodedImage;
+    }
+
+    @NonNull
+    private static BitmapFactory.Options getBitmapSizeOptions(@NonNull final String filePath) {
+        final BitmapFactory.Options sizeOnlyOptions = new BitmapFactory.Options();
+        sizeOnlyOptions.inJustDecodeBounds = true;
+        BitmapFactory.decodeFile(filePath, sizeOnlyOptions);
+        return sizeOnlyOptions;
     }
 
     /** Create a File for saving an image or video

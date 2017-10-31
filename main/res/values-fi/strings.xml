@@ -78,6 +78,7 @@
   <string name="log_tb_nothing">Ei toimintoa</string>
   <string name="log_tb_visit">Vieraili</string>
   <string name="log_tb_drop">Jätetty paikalle</string>
+  <string name="log_tb_sortby">Järjestä reissaajat</string>
   <string name="log_tb_changeall">Muuta kaikki</string>
   <string name="log_tb_grabbed">Otettu muualta</string>
   <string name="log_tb_note">Muistiinpano</string>
@@ -416,6 +417,11 @@
   <string name="settings_title_map_data">Kartan tiedot</string>
   <string name="settings_title_map_content">Kartan sisältö</string>
   <string name="settings_title_gpx">GPX</string>
+  <string name="settings_title_data_dir">Kätködatan kansio</string>
+  <string name="settings_title_data_dir_usage">Kätködatan kansio (%1$s käytetty)</string>
+  <string name="calculate_dataDir">Lasketaan kätködatan määrä levyllä</string>
+  <string name="settings_data_dir_item">%1$s (%2$s vapaana)</string>
+  <string name="confirm_data_dir_move_title">Siirrä kätködatan kansio?</string>
   <string name="confirm_data_dir_move">Kätködatan siirtäminen voi kestää todella kauan riippuen laitteestasi sekä datan määrästä.</string>
   <string name="settings_title_basicmembers">Peruskäyttäjän asetukset</string>
   <string name="settings_title_navigation">Navigointi</string>
@@ -462,7 +468,7 @@
   <string name="init_summary_su">Lataa kätköt palvelusta Geocaching.su</string>
   <string name="settings_activate_su">Aktivoi</string>
   <string name="init_gcvote">GCvote.com</string>
-  <string name="init_gcvote_password_description">Voidaksesi arvostella kätköjä, sinun täytyy hyväksyä GCVote,com:in ehdot ja antaa salasanasi GCvote:en.</string>
+  <string name="init_gcvote_password_description">Voidaksesi arvostella kätköjä, seuraa ohjeita GCVote.com:ssa ja syötä GCvoten salasanasi tänne.</string>
   <string name="err_gcvote_send_rating">Virhe arvostelun lähettämisessä, tarkista GCVote:n salasana asetuksista tai poista arvostelu käytöstä tyhjentämällä salasana-kenttä.</string>
   <string name="gcvote_sent">Ääni lähetetty onnistuneesti</string>
   <string name="init_twitter">Twitter</string>
@@ -494,8 +500,8 @@
   <string name="init_signature_template_name">Nimi</string>
   <string name="init_signature_template_url">URL</string>
   <string name="init_signature_template_log">Lokiteksti</string>
-  <string name="init_ratingwanted">GCVote arvostelu</string>
-  <string name="init_summary_ratingwanted">Lataa kätkön arvostelu GCVote:sta</string>
+  <string name="init_ratingwanted">GCVote-arvostelu</string>
+  <string name="init_summary_ratingwanted">Lataa kätkön arvostelu GCVotesta</string>
   <string name="init_friends_and_own_logs_wanted">Näytä ystävien/omat</string>
   <string name="init_summary_friends_and_own_logs_wanted">Näytä erillinen lokikirjan sivu omille sekä ystävien lokeille</string>
   <string name="init_openlastdetailspage">Viimeisimmät tiedot -sivu</string>
@@ -555,6 +561,7 @@
   <string name="init_map_directory_description">Offline-karttojen polku</string>
   <string name="init_gpx_exportdir">GPX:n vientikansio</string>
   <string name="init_gpx_importdir">GPX:n tuontikansio</string>
+  <string name="init_dataDir">Valitse kätködatan kansio</string>
   <string name="init_maptrail">Näytä reitti</string>
   <string name="init_summary_maptrail">Näytä reitti kartalla</string>
   <string name="init_share_after_export">Avaa jakovalikko GPX-tiedoston tuomisen jälkeen</string>
@@ -580,6 +587,7 @@
   <string name="init_dbmove_failed">Tietojen siirto epäonnistui</string>
   <string name="init_datadirmove_datadirmove">Siirretään kätködataa toiseen kansioon</string>
   <string name="init_datadirmove_running">Siirretään kätködataa toiseen kansioon</string>
+  <string name="init_datadirmove_success">Kätködatan kansion siirto onnistui.</string>
   <string name="init_plain_logs">Yksinkertaiset lokit</string>
   <string name="init_summary_plain_logs">Näytä loki ilman värejä</string>
   <string name="init_use_native_ua">Android-selain</string>
@@ -805,6 +813,7 @@
   <string name="cache_menu_spoilers">Spoiler-kuvat</string>
   <string name="cache_menu_around">Kätköt lähistöllä</string>
   <string name="around">%s:n ympärillä</string>
+  <string name="menu_caches">Hallitse kätköjä</string>
   <string name="cache_menu_event">Lisää kalenteriin</string>
   <string name="cache_menu_extract_waypoints">Poimi reittipisteet</string>
   <string name="cache_menu_details">Tarkat tiedot</string>
@@ -944,6 +953,8 @@
   <string name="waypoint_coordinates_uploading_to_website">Ladataan koordinaatteja %s nettisivulle.</string>
   <string name="waypoint_coordinates_has_been_modified_on_website">Kätkökoordinaatit nettisivulla on muutettu: %s.</string>
   <string name="waypoint_done">Valmis</string>
+  <string name="waypoint_duplicate">Monista reittipiste</string>
+  <string name="waypoint_duplicated">Reittipiste monistettu</string>
   <string name="waypoint_copy_of">Kopio</string>
   <string name="search_history">Historiatiedot</string>
   <string name="search_history_empty">Ei aikaisempia kohteita</string>
@@ -1409,7 +1420,6 @@
   <string name="cgeo_shortcut">c:geo pikakuvake</string>
   <string name="create_shortcut">Luo pikakuvake</string>
   <string name="send">Lähetä</string>
-  <string name="confirm_log_title">Epätavallinen lokityyppi</string>
   <string name="confirm_log_message">Haluat lokata \'%s\'. Oletko varma?</string>
   <!-- Geokrety -->
   <string name="settings_activate_geokrety">Aktivoi</string>
@@ -1448,6 +1458,10 @@
   <string name="command_rename_list_result">Uudelleen nimetty luettelo</string>
   <string name="command_delete_list_result">Poistettu luettelo</string>
   <string name="command_unique_list_result">Kätköt poistettiin muilta listoilta</string>
+  <plurals name="fav_points_remaining">
+    <item quantity="one">Lisää kätkö suosikkeihin (%d jäljellä)</item>
+    <item quantity="other">Lisää kätkö suosikkeihin (%d jäljellä)</item>
+  </plurals>
   <!-- distance units -->
   <string name="unit_m">m</string>
   <string name="unit_km">km</string>
@@ -1472,4 +1486,7 @@
   </plurals>
   <!-- calendar adder -->
   <string name="event_fail">Tapahtumakätkön lisääminen kalenteriin epäonnistui</string>
+  <string name="init_low_disk_space">Tallennustila on vähissä</string>
+  <string name="init_confirm_debug">c:geo on vianmääritystilassa!</string>
+  <string name="list_confirm_debug_message">Vianmääritystila aiheuttaa epävakautta! Haluatko poistaa sen käytöstä?</string>
 </resources>

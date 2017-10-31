@@ -84,7 +84,7 @@
 
     <TextView
         android:id="@+id/note"
-        android:autoLink="all"
+        android:autoLink="web|map"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="12dp"
@@ -97,7 +97,7 @@
 
     <TextView
         android:id="@+id/user_note"
-        android:autoLink="all"
+        android:autoLink="web|map"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="12dp"

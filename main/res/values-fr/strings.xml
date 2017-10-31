@@ -1443,7 +1443,7 @@
   <string name="cgeo_shortcut">Raccourci c:geo</string>
   <string name="create_shortcut">Créer un raccourci</string>
   <string name="send">Envoyer</string>
-  <string name="confirm_log_title">Type inhabituel pour une visite</string>
+  <string name="confirm_log_title">Type de visite spécial</string>
   <string name="confirm_log_message">Vous allez envoyer \'%s\'. Êtes-vous sûr(e) ?</string>
   <!-- Geokrety -->
   <string name="settings_activate_geokrety">Activer</string>

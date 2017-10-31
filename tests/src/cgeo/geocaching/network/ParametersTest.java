@@ -1,16 +1,17 @@
 package cgeo.geocaching.network;
 
+import org.junit.Test;
+
+import static org.assertj.core.api.Assertions.fail;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
 
-import junit.framework.TestCase;
+public class ParametersTest {
 
-public class ParametersTest extends TestCase {
-
-    static final List<Character> UNRESERVED = new ArrayList<>();
+    private static final List<Character> UNRESERVED = new ArrayList<>();
 
     static {
         // unreserved characters: ALPHA / DIGIT / "-" / "." / "_" / "~"
@@ -27,7 +28,8 @@ public class ParametersTest extends TestCase {
         UNRESERVED.add('~');
     }
 
-    public static void testException() {
+    @Test
+    public void testException() {
         try {
             final Parameters params = new Parameters("aaa", "AAA", "bbb");
             params.clear(); // this will never be invoked, but suppresses warnings about unused objects
@@ -44,13 +46,15 @@ public class ParametersTest extends TestCase {
         }
     }
 
-    public static void testMultipleValues() {
+    @Test
+    public void testMultipleValues() {
         final Parameters params = new Parameters("aaa", "AAA", "bbb", "BBB");
         params.put("ccc", "CCC", "ddd", "DDD");
         assertThat(params.toString()).isEqualTo("aaa=AAA&bbb=BBB&ccc=CCC&ddd=DDD");
     }
 
-    public static void testSort() {
+    @Test
+    public void testSort() {
         final Parameters params = new Parameters();
         params.put("aaa", "AAA");
         params.put("ccc", "CCC");
@@ -60,21 +64,24 @@ public class ParametersTest extends TestCase {
         assertThat(params.toString()).isEqualTo("aaa=AAA&bbb=BBB&ccc=CCC");
     }
 
-    public static void testToString() {
+    @Test
+    public void testToString() {
         final Parameters params = new Parameters();
         params.put("name", "foo&bar");
         params.put("type", "moving");
         assertThat(params.toString()).isEqualTo("name=foo%26bar&type=moving");
     }
 
-    public static void testUnreservedCharactersMustNotBeEncoded() {
+    @Test
+    public void testUnreservedCharactersMustNotBeEncoded() {
         for (final Character c : UNRESERVED) {
             final String charAsString = String.valueOf(c);
-            assertEquals("wrong OAuth encoding for " + c, charAsString, Parameters.percentEncode(charAsString));
+            assertThat(charAsString).isEqualTo(Parameters.percentEncode(charAsString));
         }
     }
 
-    public static void testOtherCharactersMustBeEncoded() {
+    @Test
+    public void testOtherCharactersMustBeEncoded() {
         for (int i = 32; i < 127; i++) {
             final Character c = (char) i;
             if (!UNRESERVED.contains(c)) {
@@ -86,11 +93,13 @@ public class ParametersTest extends TestCase {
         }
     }
 
-    public static void testAsterisk() {
+    @Test
+    public void testAsterisk() {
         assertThat("*".equals(Parameters.percentEncode("*"))).isFalse();
     }
 
-    public static void testPercentEncoding() {
+    @Test
+    public void testPercentEncoding() {
         final Parameters params = new Parameters("oauth_callback", "callback://www.cgeo.org/");
         assertThat(params.toString()).isEqualTo("oauth_callback=callback://www.cgeo.org/");
         params.usePercentEncoding();

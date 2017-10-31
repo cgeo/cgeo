@@ -381,12 +381,18 @@ public class HtmlImage implements Html.ImageGetter {
             return url;
         }
 
+        final String hostUrl = ConnectorFactory.getConnector(geocode).getHostUrl();
+
+        // special case for scheme relative URLs
+        if (StringUtils.startsWith(url, "//")) {
+            return StringUtils.isEmpty(hostUrl) ? "https:" + url : Uri.parse(hostUrl).getScheme() + ":" + url;
+        }
+
         if (!StringUtils.startsWith(url, "/")) {
             Log.w("unusable relative URL for geocache " + geocode + ": " + url);
             return null;
         }
 
-        final String hostUrl = ConnectorFactory.getConnector(geocode).getHostUrl();
         if (StringUtils.isEmpty(hostUrl)) {
             Log.w("unable to compute relative images URL for " + geocode);
             return null;

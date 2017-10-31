@@ -1442,7 +1442,6 @@
   <string name="cgeo_shortcut">c:geo nuoroda</string>
   <string name="create_shortcut">Sukurti nuorodą</string>
   <string name="send">Siųsti</string>
-  <string name="confirm_log_title">Neįprastas įrašo tipas</string>
   <string name="confirm_log_message">Norite registruoti \'%s\'. Ar tikrai?</string>
   <!-- Geokrety -->
   <string name="settings_activate_geokrety">Aktyvuoti</string>

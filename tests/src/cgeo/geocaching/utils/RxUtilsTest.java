@@ -1,5 +1,7 @@
 package cgeo.geocaching.utils;
 
+import org.junit.Test;
+
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
 import java.util.concurrent.TimeUnit;
@@ -11,11 +13,11 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Action;
 import io.reactivex.functions.Function;
 import io.reactivex.subjects.PublishSubject;
-import junit.framework.TestCase;
 
-public class RxUtilsTest extends TestCase {
+public class RxUtilsTest {
 
-    public static void testRememberLast() {
+    @Test
+    public void testRememberLast() {
         final PublishSubject<String> rawObservable = PublishSubject.create();
         final Observable<String> observable = RxUtils.rememberLast(rawObservable, "initial");
 
@@ -36,7 +38,8 @@ public class RxUtilsTest extends TestCase {
         assertThat(observable.blockingFirst()).isEqualTo("first");
     }
 
-    public static void testObservableCache() {
+    @Test
+    public void testObservableCache() {
         final AtomicInteger counter = new AtomicInteger(0);
         final RxUtils.ObservableCache<String, Integer> cache = new RxUtils.ObservableCache<>(new Function<String, Observable<Integer>>() {
             @Override
@@ -57,7 +60,8 @@ public class RxUtilsTest extends TestCase {
         assertThat(counter.get()).isEqualTo(2);
     }
 
-    public static void testDelayedUnsubscription() {
+    @Test
+    public void testDelayedUnsubscription() {
         final AtomicBoolean unsubscribed = new AtomicBoolean(false);
         Observable.never().doOnDispose(new Action() {
             @Override

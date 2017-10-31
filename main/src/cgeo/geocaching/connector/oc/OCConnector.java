@@ -7,6 +7,7 @@ import cgeo.geocaching.connector.capability.SmileyCapability;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Geocache;
 
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
@@ -107,15 +108,23 @@ public class OCConnector extends AbstractConnector implements SmileyCapability {
         // different opencaching installations have different supported URLs
 
         // host.tld/geocode
-        final String shortHost = StringUtils.remove(getHost(), "www.");
-        final String firstLevel = StringUtils.substringAfter(url, shortHost + "/");
+        final String shortHost = getShortHost();
+        final Uri uri = Uri.parse(url);
+        if (!StringUtils.containsIgnoreCase(uri.getHost(), shortHost)) {
+            return null;
+        }
+        final String path = uri.getPath();
+        if (StringUtils.isBlank(path)) {
+            return null;
+        }
+        final String firstLevel = path.substring(1);
         if (canHandle(firstLevel)) {
             return firstLevel;
         }
 
         // host.tld/viewcache.php?wp=geocode
-        final String secondLevel = StringUtils.substringAfter(url, shortHost + "/viewcache.php?wp=");
-        return canHandle(secondLevel) ? secondLevel : super.getGeocodeFromUrl(url);
+        final String secondLevel = path.startsWith("/viewcache.php") ? uri.getQueryParameter("wp") : "";
+        return (secondLevel != null && canHandle(secondLevel)) ? secondLevel : super.getGeocodeFromUrl(url);
     }
 
     @Override

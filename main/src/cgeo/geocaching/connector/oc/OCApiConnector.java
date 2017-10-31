@@ -8,6 +8,7 @@ import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.CryptUtils;
 import cgeo.geocaching.utils.DisposableHandler;
 
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
@@ -17,6 +18,19 @@ import io.reactivex.Maybe;
 import org.apache.commons.lang3.StringUtils;
 
 public class OCApiConnector extends OCConnector implements ISearchByGeocode {
+
+    private final String cK;
+    private final ApiSupport apiSupport;
+    private final String licenseString;
+    private OkapiClient.InstallationInformation installationInformation;
+
+    public void setInstallationInformation(final OkapiClient.InstallationInformation installationInformation) {
+        this.installationInformation = installationInformation;
+    }
+
+    public OkapiClient.InstallationInformation getInstallationInformation() {
+        return installationInformation;
+    }
 
     // Levels of Okapi we support
     // oldapi is around rev 500
@@ -32,10 +46,6 @@ public class OCApiConnector extends OCConnector implements ISearchByGeocode {
         Level1,
         Level3
     }
-
-    private final String cK;
-    private final ApiSupport apiSupport;
-    private final String licenseString;
 
     public OCApiConnector(@NonNull final String name, @NonNull final String host, final boolean https, final String prefix, final String cK, final String licenseString, final ApiSupport apiSupport, @NonNull final String abbreviation) {
         super(name, host, https, prefix, abbreviation);
@@ -116,7 +126,7 @@ public class OCApiConnector extends OCConnector implements ISearchByGeocode {
     @Override
     @Nullable
     public String getGeocodeFromUrl(@NonNull final String url) {
-        final String shortHost = StringUtils.remove(getHost(), "www.");
+        final String shortHost = getShortHost();
 
         final String geocodeFromId = getGeocodeFromCacheId(url, shortHost);
         if (geocodeFromId != null) {
@@ -126,18 +136,29 @@ public class OCApiConnector extends OCConnector implements ISearchByGeocode {
         return super.getGeocodeFromUrl(url);
     }
 
+    @Override
+    public boolean supportsLogImages() {
+        return true;
+    }
+
     /**
      * get the OC1234 geocode from an internal cache id, for URLs like host.tld/viewcache.php?cacheid
      */
     @Nullable
     protected String getGeocodeFromCacheId(final String url, final String host) {
-        final String id = StringUtils.trim(StringUtils.substringAfter(url, host + "/viewcache.php?cacheid="));
-        if (StringUtils.isNotBlank(id)) {
+        final Uri uri = Uri.parse(url);
+        if (!StringUtils.containsIgnoreCase(uri.getHost(), host)) {
+            return null;
+        }
 
+        // host.tld/viewcache.php?cacheid=cacheid
+        final String id = uri.getPath().startsWith("/viewcache.php") ? uri.getQueryParameter("cacheid") : "";
+        if (StringUtils.isNotBlank(id)) {
             final String geocode = Maybe.fromCallable(new Callable<String>() {
                 @Override
                 public String call() throws Exception {
-                    return OkapiClient.getGeocodeByUrl(OCApiConnector.this, url);
+                    final String normalizedUrl = StringUtils.replaceIgnoreCase(url, getShortHost(), getShortHost());
+                    return OkapiClient.getGeocodeByUrl(OCApiConnector.this, normalizedUrl);
                 }
             }).subscribeOn(AndroidRxUtils.networkScheduler).blockingGet();
 

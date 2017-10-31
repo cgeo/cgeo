@@ -239,6 +239,7 @@
     <string name="warn_rendertheme_missing">Map theme not found.</string>
     <string name="warn_pocket_query_select">No Pocket query selected.</string>
     <string name="warn_no_pocket_query_found">No Pocket query found online.</string>
+    <string name="warn_invalid_character">Character must be a LETTER or a DIGIT</string>
     <string name="err_read_pocket_query_list">Error reading Pocket query list.</string>
     <string name="info_log_posted">c:geo successfully submitted the log.</string>
     <string name="info_log_saved">c:geo successfully saved the log.</string>
@@ -252,6 +253,7 @@
     <string name="info_stored_image">New image saved to:</string>
     <string name="info_storing_static_maps">Trying to store static maps</string>
     <string name="info_cache_saved">The cache has been stored locally</string>
+    <string name="warn_calculator_state_save">Be sure to save waypoint if you want to keep the calculator state.</string>
     <string name="err_trackable_log_not_anonymous">Logging %1$s from c:geo cannot be done anonymously. Do you want to open the settings to fill in your credentials from %2$s?</string>
     <string name="err_trackable_no_preference_activity">Sorry, cannot find a suitable preference screen.</string>
     <string name="warn_discard_changes">Unsaved waypoint changes discarded!</string>
@@ -916,6 +918,7 @@
     <string name="cache_event">Date</string>
     <string name="cache_location">Location</string>
     <string name="cache_coordinates">Coordinates</string>
+    <string name="cache_calculator">Calculator</string>
     <string name="cache_coordinates_original">Original Coordinates</string>
     <string name="cache_spoiler_images_title">Spoiler images</string>
     <string name="cache_log_types">Log types</string>
@@ -991,6 +994,7 @@
         <item>@string/waypoint_duplicate</item>
     </array>
     <string name="waypoint_cache_coordinates">Cache coordinates</string>
+    <string name="waypoint_calculate_coordinates">Calculate coordinates</string>
     <string name="waypoint_custom">Custom</string>
     <string name="waypoint_my_coordinates">My coordinates</string>
     <string name="waypoint_bearing">Bearing in °</string>
@@ -1025,6 +1029,7 @@
     <string name="waypoint_duplicate">Duplicate waypoint</string>
     <string name="waypoint_duplicated">Waypoint duplicated</string>
     <string name="waypoint_copy_of">Copy of</string>
+    <string name="waypointcalc_notes_prompt">Enter notes here…</string>
     <string name="search_history">History</string>
     <string name="search_history_empty">No previous destinations</string>
     <string name="search_remove_destination">Destination removed</string>
@@ -1511,7 +1516,7 @@
     <string name="create_shortcut">Create shortcut</string>
     <string name="send">Send</string>
     
-    <string name="confirm_log_title">Unusual log type</string>
+    <string name="confirm_log_title">Special log type</string>
     <string name="confirm_log_message">You want to log \'%s\'. Are you sure?</string>
 
     <!-- Geokrety -->
@@ -1590,5 +1595,7 @@
     <string name="init_low_disk_space_message">The geocache data directory is running low on storage space. This can cause malfunctions of c:geo. Please free up some space.</string>
     <string name="init_confirm_debug">c:geo is running in debug mode!</string>
     <string name="list_confirm_debug_message">The debug mode causes instabilities! Do you want to deactivate the debug mode?</string>
+    <string name="err_select_logimage_upload_size">Image too big, please select a smaller scale.</string>
+    <string name="err_logimage_caption_required">A caption is required for the image</string>
 
 </resources>

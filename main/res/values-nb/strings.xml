@@ -1419,7 +1419,6 @@
   <string name="cgeo_shortcut">c:geo-snartvei</string>
   <string name="create_shortcut">Opprett snarvei</string>
   <string name="send">Send</string>
-  <string name="confirm_log_title">Uvanlig loggtype</string>
   <string name="confirm_log_message">Du vil logge \'%s\'. Er du sikker?</string>
   <!-- Geokrety -->
   <string name="settings_activate_geokrety">Aktiver</string>
