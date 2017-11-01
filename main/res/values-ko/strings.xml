@@ -1117,7 +1117,7 @@
   <string name="export_fieldnotes">현장 기록</string>
   <string name="export_fieldnotes_info">현장 기록이 현재 날짜/시간과 함께 /sdcard/field-notes에 저장됩니다.</string>
   <string name="export_fieldnotes_upload">Geocaching.com에 올리기</string>
-  <string name="export_fieldnotes_uploading">올리는 중…</string>
+  <string name="export_fieldnotes_uploading">올리는 중</string>
   <string name="export_fieldnotes_upload_success">Geocaching.com 에 올리기 성공</string>
   <string name="export_fieldnotes_onlynew">마지막 내보내기 이후만</string>
   <string name="export_fieldnotes_creating">현장 기록 생성 중…</string>
