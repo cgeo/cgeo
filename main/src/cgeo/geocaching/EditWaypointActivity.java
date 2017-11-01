@@ -473,6 +473,9 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
 
     @Override
     public CalcState fetchCalculatorState() {
+        if (calcState == null) {
+            return null;
+        }
         return new CalcState(calcState, userNote.getText().toString());
     }
 

@@ -2,7 +2,7 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-    <b>Next beta version:</b>\n
+    <b>2017.11.01-RC:</b>\n
     · New: Coordinate calculator (New Waypoint - Calculate Coordinates)\n
     · New: Log image upload for Opencaching\n
     · New: Detect certitude as checker and support opening it via menu\n
