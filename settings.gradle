@@ -1,3 +1,8 @@
+// Make the root project name independent of the directory name where we checked out the repository.
+// This can avoid problems with directory names like "cgeo pull request" containing blanks on CI.
+rootProject.name = "cgeo"
+
+// included sub projects
 include ':mapswithme-api'
 include ':main'
 include ':cgeo-contacts'
