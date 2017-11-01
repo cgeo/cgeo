@@ -73,14 +73,20 @@ android {
             def nightlyName = System.getenv('NB') // NB, NB1, ...
             versionNameSuffix "-$nightlyName-" + gitCommitId().substring(0, 7)
             signingConfig signingConfigs.release
+            // use release version of source code library dependencies
+            matchingFallbacks = ['release']
         }
         rc {
             def rcName = System.getenv('RC') // RC, RC1, RC2 ...
             versionNameSuffix "-$rcName"
             signingConfig signingConfigs.release
+            // use release version of source code library dependencies
+            matchingFallbacks = ['release']
         }
         legacy {
             signingConfig signingConfigs.release
+            // use release version of source code library dependencies
+            matchingFallbacks = ['release']
         }
         release {
             signingConfig signingConfigs.release
@@ -188,23 +194,24 @@ android {
         exclude 'META-INF/rxjava.properties'
     }
 
+    flavorDimensions "javaCompilerTime" // all flavours must be assigned a dimension
     productFlavors {
         // make sure to not have any flavour lexicographically smaller than "basic". Android Studio takes the first alphabetical flavor in new installations.
         basic {
+            dimension "javaCompilerTime"
             buildConfigField "String", "SPECIAL_BUILD", '""'
         }
 
         nojit {
+            dimension "javaCompilerTime"
             buildConfigField "String", "SPECIAL_BUILD", '"Disabled JIT"'
         }
     }
 
     // remove the "-basic" flavour name from the generated APK, have the flavor remain only for special builds
     applicationVariants.all { variant ->
-        variant.outputs.each { output ->
-            output.outputFile = new File(
-                    output.outputFile.parent,
-                    output.outputFile.name.replace('-basic-', '-'))
+        variant.outputs.all { output ->
+            outputFileName = outputFileName.replace('-basic-', '-')
         }
     }
 
@@ -228,125 +235,125 @@ dependencies {
     // AndroidAnnotations, https://github.com/excilys/androidannotations/wiki/building-project-gradle
     def androidAnnotationsVersion = '4.3.1'
     annotationProcessor "org.androidannotations:androidannotations:$androidAnnotationsVersion"
-    compile "org.androidannotations:androidannotations-api:$androidAnnotationsVersion"
+    implementation "org.androidannotations:androidannotations-api:$androidAnnotationsVersion"
 
     // Apache Commons
-    compile 'org.apache.commons:commons-collections4:4.1'
-    compile 'org.apache.commons:commons-compress:1.14'
-    compile 'commons-io:commons-io:2.5'
-    compile 'org.apache.commons:commons-lang3:3.5'
+    implementation 'org.apache.commons:commons-collections4:4.1'
+    implementation 'org.apache.commons:commons-compress:1.14'
+    implementation 'commons-io:commons-io:2.5'
+    implementation 'org.apache.commons:commons-lang3:3.5'
 
     // AssertJ for testing, needed both for local unit tests and Android instrumentation tests
     def assertJVersion = '2.8.0'
-    testCompile "org.assertj:assertj-core:$assertJVersion"
-    androidTestCompile "org.assertj:assertj-core:$assertJVersion"
+    testImplementation "org.assertj:assertj-core:$assertJVersion"
+    androidTestImplementation "org.assertj:assertj-core:$assertJVersion"
 
     // ButterKnife view injection, https://github.com/JakeWharton/butterknife
     def butterKnifeVersion = '8.4.0'
-    compile "com.jakewharton:butterknife:$butterKnifeVersion"
+    implementation "com.jakewharton:butterknife:$butterKnifeVersion"
     annotationProcessor "com.jakewharton:butterknife-compiler:$butterKnifeVersion"
 
     // Findbugs
-    compile ('com.google.code.findbugs:annotations:3.0.1u2') {
+    implementation ('com.google.code.findbugs:annotations:3.0.1u2') {
         exclude group: 'com.google.code.findbugs', module: 'jsr305'
         exclude group: 'net.jcip', module: 'jcip-annotations'
     }
 
     // GeographicLib
-    compile "net.sf.geographiclib:GeographicLib-Java:1.48"
+    implementation "net.sf.geographiclib:GeographicLib-Java:1.48"
 
     // Jackson XML processing
     def jacksonVersion = '2.9.1'
-    compile "com.fasterxml.jackson.core:jackson-core:$jacksonVersion"
-    compile "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
-    compile "com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion"
+    implementation "com.fasterxml.jackson.core:jackson-core:$jacksonVersion"
+    implementation "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
+    implementation "com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion"
 
     // Jsoup HTML parsing
-    compile 'org.jsoup:jsoup:1.10.3'
+    implementation 'org.jsoup:jsoup:1.10.3'
 
     // Junit only needed for local unit tests
-    testCompile 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.12'
 
     // Leak Canary, memory leak detection
     def leakCanaryVersion = '1.5.4'
-    debugCompile "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion"
-    releaseCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
-    nightlyCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
-    rcCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
-    legacyCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
-    testCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
+    debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion"
+    releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
+    nightlyImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
+    rcImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
+    legacyImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
+    testImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
 
     // Locus Maps integration
-    compile "com.asamm:locus-api:0.2.11"
-    compile "com.asamm:locus-api-android:0.2.11"
+    implementation "com.asamm:locus-api:0.2.11"
+    implementation "com.asamm:locus-api-android:0.2.11"
 
     // Mapsforge old version
-    compile files('libs/mapsforge-map-0.3.0-jar-with-dependencies.jar')
-    compile 'com.caverock:androidsvg:1.2.2-beta-1'
+    implementation files('libs/mapsforge-map-0.3.0-jar-with-dependencies.jar')
+    implementation 'com.caverock:androidsvg:1.2.2-beta-1'
 
     // Mapsforge new version
     def mapsforgeVersion = '0.8.0'
-    compile "org.mapsforge:mapsforge-core:$mapsforgeVersion"
-    compile "org.mapsforge:mapsforge-map:$mapsforgeVersion"
-    compile "org.mapsforge:mapsforge-map-android:$mapsforgeVersion"
-    compile "org.mapsforge:mapsforge-map-reader:$mapsforgeVersion"
-    compile "org.mapsforge:mapsforge-themes:$mapsforgeVersion"
+    implementation "org.mapsforge:mapsforge-core:$mapsforgeVersion"
+    implementation "org.mapsforge:mapsforge-map:$mapsforgeVersion"
+    implementation "org.mapsforge:mapsforge-map-android:$mapsforgeVersion"
+    implementation "org.mapsforge:mapsforge-map-reader:$mapsforgeVersion"
+    implementation "org.mapsforge:mapsforge-themes:$mapsforgeVersion"
     configurations {
         all*.exclude group: 'net.sf.kxml', module: 'kxml2' // duplicate XmlPullParser class
     }
 
     // Maps.ME integration
-    compile project(":mapswithme-api")
+    implementation project(":mapswithme-api")
 
     // Metadata Extractor, EXIF location extraction from images
-    compile 'com.drewnoakes:metadata-extractor:2.10.1'
+    implementation 'com.drewnoakes:metadata-extractor:2.10.1'
 
     // Okhttp network access
-    compile 'com.squareup.okhttp3:okhttp:3.9.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.9.0'
 
     // Play Services
     def playServicesVersion = '9.4.0'
-    compile "com.google.android.gms:play-services-location:$playServicesVersion"
-    compile "com.google.android.gms:play-services-appinvite:$playServicesVersion"
+    implementation "com.google.android.gms:play-services-location:$playServicesVersion"
+    implementation "com.google.android.gms:play-services-appinvite:$playServicesVersion"
     // somehow there is a transitive play service dependency which we don't want
     configurations.all*.exclude module: "play-services-measurement"
 
     // ProcessPhoenix, reliable process restart
-    compile 'com.jakewharton:process-phoenix:2.0.0'
+    implementation 'com.jakewharton:process-phoenix:2.0.0'
 
     // RxJava
-    compile "io.reactivex.rxjava2:rxjava:2.1.4"
-    compile "io.reactivex.rxjava2:rxandroid:2.0.1"
+    implementation "io.reactivex.rxjava2:rxjava:2.1.4"
+    implementation "io.reactivex.rxjava2:rxandroid:2.0.1"
 
     // Support Library. Appcompat
-    compile 'com.android.support:appcompat-v7:20.0.0'
+    implementation 'com.android.support:appcompat-v7:20.0.0'
     
     // Support Library RecyclerView
-    compile 'com.android.support:recyclerview-v7:22.0.0'
+    implementation 'com.android.support:recyclerview-v7:22.0.0'
     // we don't want to implement decorators on our own
-	compile 'com.yqritc:recyclerview-flexibledivider:1.4.0'
+    implementation 'com.yqritc:recyclerview-flexibledivider:1.4.0'
 
     // Support Annotations. enforce same version for the main app and the test app
     def supportAnnotationsVersion = '24.2.1'
-    compile "com.android.support:support-annotations:$supportAnnotationsVersion"
-    androidTestCompile "com.android.support:support-annotations:$supportAnnotationsVersion"
+    implementation "com.android.support:support-annotations:$supportAnnotationsVersion"
+    androidTestImplementation "com.android.support:support-annotations:$supportAnnotationsVersion"
 
     // Testing Support Library. Android Studio recommended test runner, see https://developer.android.com/tools/testing-support-library/index.html#setup
-    androidTestCompile 'com.android.support.test:runner:0.5'
+    androidTestImplementation 'com.android.support.test:runner:0.5'
 
     // Undo toast
-    compile 'com.github.jenzz.undobar:library:1.3:api8Release@aar'
-    compile 'com.nineoldandroids:library:2.4.0'
+    implementation 'com.github.jenzz.undobar:library:1.3:api8Release@aar'
+    implementation 'com.nineoldandroids:library:2.4.0'
 
     // ViewPagerIndicator, view pager titles for cache details and similar view pager based activities
     // this is a fork of the original viewpager library which still works with android level 9. we can use 'com.github.JakeWharton:ViewPagerIndicator:2.4.1@aar' when switching to min sdk 11.
-    compile 'com.viewpagerindicator:viewpagerindicator:2.4.3'
+    implementation 'com.viewpagerindicator:viewpagerindicator:2.4.3'
 
     // Zxing barcode reader integration
-    compile 'com.google.zxing:android-integration:3.3.0'
+    implementation 'com.google.zxing:android-integration:3.3.0'
 
     // GridLayout used by the coordinate calculator
-    compile 'com.android.support:gridlayout-v7:23.0.1'
+    implementation 'com.android.support:gridlayout-v7:23.0.1'
 
     // Espresso TODO: disabled because of causing proguard errors en masse (due to including hamcrest and what else as own dependencies)
     // androidTestCompile 'com.jakewharton.espresso:espresso:1.1-r3'
@@ -595,7 +602,7 @@ task downloadLibs {
     group "cgeo"
     description "Downloads the dependency JARs for use with Eclipse"
     doFirst {
-        configurations.compile.resolvedConfiguration.resolvedArtifacts.each { ResolvedArtifact artifact ->
+        configurations.implementation.resolvedConfiguration.resolvedArtifacts.each { ResolvedArtifact artifact ->
         	if (artifact.extension == 'jar' || artifact.extension == 'aar') {
 	            project.copy {
 	                from artifact.file
@@ -609,7 +616,7 @@ task downloadLibs {
 
         // download javadoc
         new File(".\\main\\libs\\src").mkdirs()
-        configurations.compile.dependencies.each { Dependency dependency ->
+        configurations.implementation.dependencies.each { Dependency dependency ->
             try {
                 def vendor = dependency.group.replace(".","/")
                 def version = dependency.version
