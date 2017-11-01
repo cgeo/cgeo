@@ -42,6 +42,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 import butterknife.ButterKnife;
@@ -577,6 +579,40 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         }
     }
 
+    private String addLeadingZerosToDecimal(final String coordinate) {
+        final Pattern wholePatern = Pattern.compile("(.*)[.,]");
+        final Pattern decimalPatern = Pattern.compile("[.,](\\d*)");
+
+        final Matcher wholeMatcher = wholePatern.matcher(coordinate);
+        final Matcher decimalMatcher = decimalPatern.matcher(coordinate);
+
+        if (!wholeMatcher.find() || !decimalMatcher.find()) {
+            return coordinate;
+        }
+
+        final String leadingString = wholeMatcher.group(1);
+        String trailingString = decimalMatcher.group(1);
+
+        final int decimalPoints;
+        switch (currentFormat) {
+            case Deg:
+                decimalPoints = 5;
+                break;
+
+            case Min:
+            case Sec:
+            case Plain:
+            default:
+                decimalPoints = 3;
+        }
+
+        while (trailingString.length() < decimalPoints) {
+            trailingString = "0".concat(trailingString);
+        }
+
+        return leadingString + "." + trailingString;
+    }
+
     /**
      * This method has largely been lifted from the CoordinateInputDialog and is used to validate
      * coordinate specifications prior to assigning them to the Geopoint.
@@ -584,12 +620,16 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
     private boolean areCurrentCoordinatesValid() {
         // convert text to geopoint
         final Geopoint current;
-        final String lat = getLatResult();
-        final String lon = getLonResult();
+        String lat = getLatResult();
+        String lon = getLonResult();
 
         if (currentFormat == null || lat.contains("_") || lat.contains("*") || lon.contains("_") || lon.contains("*")) {
             return false;
         }
+
+        // Pad decimal field with leading zeros
+        lat = addLeadingZerosToDecimal(lat);
+        lon = addLeadingZerosToDecimal(lon);
 
         try {
             current = new Geopoint(lat, lon);
