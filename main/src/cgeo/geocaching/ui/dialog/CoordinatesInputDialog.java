@@ -46,6 +46,7 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 
 public class CoordinatesInputDialog extends DialogFragment {
 
@@ -575,8 +576,8 @@ public class CoordinatesInputDialog extends DialogFragment {
         public void onClick(final View v) {
             if (getActivity() instanceof  CalculateState) {
                 final CalculateState calculateState = (CalculateState) getActivity();
-                final CalcState newState = calculateState.fetchCalculatorState();
-                final CoordinatesCalculateDialog calculateDialog = CoordinatesCalculateDialog.getInstance(gp, newState);
+                final ImmutablePair<CalcState, String> newState = calculateState.fetchCalculatorState();
+                final CoordinatesCalculateDialog calculateDialog = CoordinatesCalculateDialog.getInstance(gp, newState.getLeft(), newState.getRight());
                 // Assign this fragment as the target fragment so the calculate dialog can automatically close this one on completion
                 calculateDialog.setTargetFragment(CoordinatesInputDialog.this, 1);
                 calculateDialog.setCancelable(true);
@@ -625,8 +626,8 @@ public class CoordinatesInputDialog extends DialogFragment {
 
     // Interface used by the coordinate calculator dialog too preserve its state in the waypoint itself.
     public interface CalculateState {
-        void saveCalculatorState(final CalcState calc);
-        CalcState fetchCalculatorState();
+        void saveCalculatorState(final CalcState calc, final String notes);
+        ImmutablePair<CalcState, String> fetchCalculatorState();
     }
 
     private class PadZerosOnFocusLostListener implements OnFocusChangeListener {

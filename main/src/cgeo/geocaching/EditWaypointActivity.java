@@ -63,6 +63,7 @@ import org.androidannotations.annotations.Extra;
 import org.androidannotations.annotations.InstanceState;
 import org.androidannotations.annotations.ViewById;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 
 @EActivity
 public class EditWaypointActivity extends AbstractActionBarActivity implements CoordinatesInputDialog.CoordinateUpdate, CoordinatesInputDialog.CalculateState {
@@ -466,17 +467,14 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
     }
 
     @Override
-    public void saveCalculatorState(final CalcState calcState) {
+    public void saveCalculatorState(final CalcState calcState, final String notes) {
         this.calcState = calcState;
-        this.userNote.setText(calcState.notes);
+        this.userNote.setText(notes);
     }
 
     @Override
-    public CalcState fetchCalculatorState() {
-        if (calcState == null) {
-            return null;
-        }
-        return new CalcState(calcState, userNote.getText().toString());
+    public ImmutablePair<CalcState, String> fetchCalculatorState() {
+        return new ImmutablePair<>(calcState, userNote.getText().toString());
     }
 
     /**
