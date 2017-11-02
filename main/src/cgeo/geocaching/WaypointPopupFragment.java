@@ -1,19 +1,5 @@
 package cgeo.geocaching;
 
-import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-
-import org.apache.commons.lang3.StringUtils;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import cgeo.geocaching.apps.navi.NavigationAppFactory;
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.location.Geopoint;
@@ -24,6 +10,21 @@ import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.utils.Log;
+
+import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import org.apache.commons.lang3.StringUtils;
 
 public class WaypointPopupFragment extends AbstractDialogFragment {
     @BindView(R.id.actionbar_title) protected TextView actionBarTitle;
@@ -90,7 +91,7 @@ public class WaypointPopupFragment extends AbstractDialogFragment {
             //Waypoint geocode
             details.add(R.string.cache_geocode, waypoint.getPrefix() + waypoint.getGeocode().substring(2));
             waypointDistance = details.addDistance(waypoint, waypointDistance);
-            details.add(R.string.waypoint_note, waypoint.getNote());
+            details.addHtml(R.string.waypoint_note, waypoint.getNote(), waypoint.getGeocode());
 
             buttonEdit.setOnClickListener(new OnClickListener() {
 

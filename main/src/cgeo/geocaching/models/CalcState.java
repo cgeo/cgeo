@@ -33,9 +33,6 @@ public class CalcState implements Serializable {
     public final List<CalculatorVariable.VariableData> freeVariables;
     public final List<CalculatorVariable.VariableData> variableBank;
 
-    /** Note, we have to use a String rather than an Editable as Editable's can't be serialized */
-    public final String notes;
-
     public CalcState(final CoordInputFormatEnum format,
                      final String plainLat,
                      final String plainLon,
@@ -44,8 +41,7 @@ public class CalcState implements Serializable {
                      final List<CalculateButton.ButtonData> buttons,
                      final List<CalculatorVariable.VariableData> equations,
                      final List<CalculatorVariable.VariableData> freeVariables,
-                     final List<CalculatorVariable.VariableData> bankVariables,
-                     final String notes) {
+                     final List<CalculatorVariable.VariableData> bankVariables) {
         this.format = format;
         this.plainLat = plainLat;
         this.plainLon = plainLon;
@@ -55,16 +51,10 @@ public class CalcState implements Serializable {
         this.equations = equations;
         this.freeVariables = freeVariables;
         this.variableBank  = bankVariables;
-        this.notes = notes;
     }
 
-    public CalcState(final CalcState calcState, final String notes) {
-        this(calcState.format, calcState.plainLat, calcState.plainLon, calcState.latHemisphere, calcState.lonHemisphere,
-                calcState.buttons, calcState.equations, calcState.freeVariables, calcState.variableBank, notes);
-    }
-
-    private CalcState(final JSONObject json) {
-        format = CoordInputFormatEnum.values()[json.optInt("format", 2)];
+    public CalcState(final JSONObject json) {
+        format = CoordInputFormatEnum.fromInt(json.optInt("format", CoordInputFormatEnum.DEFAULT_INT_VALUE));
         plainLat = json.optString("plainLat");
         plainLon = json.optString("plainLon");
         latHemisphere = (char) json.optInt("latHemisphere", ERROR_CHAR);
@@ -73,7 +63,6 @@ public class CalcState implements Serializable {
         equations     = createJSONAbleList(json.optJSONArray("equations"),     new CalculatorVariable.VariableDataFactory());
         freeVariables = createJSONAbleList(json.optJSONArray("freeVariables"), new CalculatorVariable.VariableDataFactory());
         variableBank = new ArrayList<>(); // "variableBank" intentionally not loaded.
-        notes = ""; // "notes" is read from "user_note" db column, not this json
     }
 
     private static <T extends JSONAble> ArrayList<T> createJSONAbleList(final JSONArray json, final JSONAbleFactory<T> factory) {
@@ -117,7 +106,6 @@ public class CalcState implements Serializable {
         returnValue.put("equations", toJSON(equations));
         returnValue.put("freeVariables", toJSON(freeVariables));
         // "variableBank" intentionally left out.
-        // "notes" is written to another db column
 
         return returnValue;
     }

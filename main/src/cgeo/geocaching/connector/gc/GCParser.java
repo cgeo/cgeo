@@ -765,8 +765,9 @@ public final class GCParser {
                             continue;
                         }
 
-                        // waypoint note
-                        waypoint.setNote(TextUtils.getMatch(wpNote[3], GCConstants.PATTERN_WPNOTE, waypoint.getNote()));
+                        // waypoint note, cleanup via Jsoup
+                        final Document document = Jsoup.parse(TextUtils.getMatch(wpNote[3], GCConstants.PATTERN_WPNOTE, waypoint.getNote()));
+                        waypoint.setNote(document.outerHtml());
                     }
 
                     cache.addOrChangeWaypoint(waypoint, false);

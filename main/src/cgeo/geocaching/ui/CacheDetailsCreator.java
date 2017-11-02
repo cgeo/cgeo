@@ -8,16 +8,16 @@ import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.ICoordinates;
 import cgeo.geocaching.models.Waypoint;
+import cgeo.geocaching.network.SmileyImage;
 import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.utils.Formatter;
-
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.ImmutablePair;
-import android.support.annotation.NonNull;
+import cgeo.geocaching.utils.UnknownTagsHandler;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.res.Resources;
+import android.support.annotation.NonNull;
+import android.text.Html;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RatingBar;
@@ -28,7 +28,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+
 import butterknife.ButterKnife;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 
 // TODO The suppression of this lint finding is bad. But to fix it, someone needs to rework the layout of the cache
 // details also, not just only change the code here.
@@ -53,11 +56,32 @@ public final class CacheDetailsCreator {
      * @return a pair made of the whole "name: value" line (to be able to hide it for example) and of the value (to update it)
      */
     public ImmutablePair<RelativeLayout, TextView> add(final int nameId, final CharSequence value) {
+        final ImmutablePair<RelativeLayout, TextView> nameValue = createNameValueLine(nameId);
+        nameValue.getRight().setText(value);
+        return nameValue;
+    }
+
+    /**
+     * Create a "name: value" line with html content.
+     *
+     * @param nameId the resource of the name field
+     * @param value the initial value
+     * @param geocode the geocode for image getter
+     * @return a pair made of the whole "name: value" line (to be able to hide it for example) and of the value (to update it)
+     */
+    public ImmutablePair<RelativeLayout, TextView> addHtml(final int nameId, final CharSequence value, final String geocode) {
+        final ImmutablePair<RelativeLayout, TextView> nameValue = createNameValueLine(nameId);
+        final TextView valueView = nameValue.getRight();
+        valueView.setText(Html.fromHtml(value.toString(), new SmileyImage(geocode, valueView), new UnknownTagsHandler()), TextView.BufferType.SPANNABLE);
+        return nameValue;
+    }
+
+    @NonNull
+    private ImmutablePair<RelativeLayout, TextView> createNameValueLine(final int nameId) {
         final RelativeLayout layout = (RelativeLayout) activity.getLayoutInflater().inflate(R.layout.cache_information_item, null, false);
         final TextView nameView = ButterKnife.findById(layout, R.id.name);
         nameView.setText(res.getString(nameId));
         final TextView valueView = ButterKnife.findById(layout, R.id.value);
-        valueView.setText(value);
         parentView.addView(layout);
         return ImmutablePair.of(layout, valueView);
     }

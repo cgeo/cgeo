@@ -14,6 +14,7 @@ import cgeo.geocaching.command.AbstractCachesCommand;
 import cgeo.geocaching.command.CopyToListCommand;
 import cgeo.geocaching.command.DeleteListCommand;
 import cgeo.geocaching.command.MakeListUniqueCommand;
+import cgeo.geocaching.command.MoveToListAndRemoveFromOthersCommand;
 import cgeo.geocaching.command.MoveToListCommand;
 import cgeo.geocaching.command.RenameListCommand;
 import cgeo.geocaching.compatibility.Compatibility;
@@ -746,8 +747,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             if (!isOffline && !isHistory) {
                 menu.findItem(R.id.menu_refresh_stored).setTitle(R.string.caches_store_offline);
             }
-            setVisibleEnabled(menu, R.id.menu_move_to_list, isOffline, !isEmpty);
-            setVisibleEnabled(menu, R.id.menu_copy_to_list, isOffline, !isEmpty);
+            setVisibleEnabled(menu, R.id.menu_move_to_list, isHistory || isOffline, !isEmpty);
+            setVisibleEnabled(menu, R.id.menu_copy_to_list, isHistory || isOffline, !isEmpty);
             setVisibleEnabled(menu, R.id.menu_drop_caches, isHistory || isOffline, !isEmpty);
             setVisibleEnabled(menu, R.id.menu_delete_events, isConcrete, !isEmpty && containsPastEvents());
             setVisibleEnabled(menu, R.id.menu_clear_offline_logs, isHistory || isOffline, !isEmpty && containsOfflineLogs());
@@ -1023,21 +1024,39 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     private void moveCachesToOtherList(final Collection<Geocache> caches) {
-        new MoveToListCommand(this, caches, listId) {
-            private LastPositionHelper lastPositionHelper;
+        if (isConcreteList()) {
+            new MoveToListCommand(this, caches, listId) {
+                private LastPositionHelper lastPositionHelper;
 
-            @Override
-            protected void doCommand() {
-                lastPositionHelper = new LastPositionHelper(CacheListActivity.this);
-                super.doCommand();
-            }
+                @Override
+                protected void doCommand() {
+                    lastPositionHelper = new LastPositionHelper(CacheListActivity.this);
+                    super.doCommand();
+                }
 
-            @Override
-            protected void onFinished() {
-                lastPositionHelper.refreshListAtLastPosition();
-            }
+                @Override
+                protected void onFinished() {
+                    lastPositionHelper.refreshListAtLastPosition();
+                }
 
-        }.execute();
+            }.execute();
+        } else {
+            new MoveToListAndRemoveFromOthersCommand(this, caches) {
+                private LastPositionHelper lastPositionHelper;
+
+                @Override
+                protected void doCommand() {
+                    lastPositionHelper = new LastPositionHelper(CacheListActivity.this);
+                    super.doCommand();
+                }
+
+                @Override
+                protected void onFinished() {
+                    lastPositionHelper.refreshListAtLastPosition();
+                }
+
+            }.execute();
+        }
     }
 
     private void copyCachesToOtherList(final Collection<Geocache> caches) {
