@@ -230,6 +230,7 @@
   <string name="warn_rendertheme_missing">Stilul hărţii nu a fost găsit.</string>
   <string name="warn_pocket_query_select">Nu a fost selectat nici un \"Pocket Query\".</string>
   <string name="warn_no_pocket_query_found">Nu a fost găsit nici un \"Pocket Query\".</string>
+  <string name="warn_invalid_character">Trebuie să tastezi numai LITERE sau CIFRE</string>
   <string name="err_read_pocket_query_list">Eroare la citirea listei \"Pocket query\".</string>
   <string name="info_log_posted">c:geo a trimis însemnarea.</string>
   <string name="info_log_saved">c:geo a salvat însemnarea.</string>
@@ -243,6 +244,7 @@
   <string name="info_stored_image">Imaginea a fost salvată aici:</string>
   <string name="info_storing_static_maps">Încerc să salvez hărţi</string>
   <string name="info_cache_saved">Geocutia a fost salvată local</string>
+  <string name="warn_calculator_state_save">Asigură-te că ai salvat punctul dacă vrei să păstrezi stearea în care se află calculatorul de coordonate.</string>
   <string name="err_trackable_log_not_anonymous">Prin intermediul c:geo nu se poate publica anonim însemnarea %1$s. Vrei să mergi la setări şi să-ţi configurezi contul la %2$s?</string>
   <string name="err_trackable_no_preference_activity">Ecranul de configurare adecvat nu a fost găsit.</string>
   <string name="warn_discard_changes">Modificările nesalvate vor fi anulate!</string>
@@ -889,6 +891,7 @@
   <string name="cache_event">Data</string>
   <string name="cache_location">Locaţie</string>
   <string name="cache_coordinates">Coordonate</string>
+  <string name="cache_calculator">Calculator</string>
   <string name="cache_coordinates_original">Coordonatele iniţiale</string>
   <string name="cache_spoiler_images_title">Imagini (indicii?)</string>
   <string name="cache_log_types">Tipuri de însemnări</string>
@@ -952,6 +955,7 @@
   <string name="waypoint">Punct</string>
   <string name="waypoint_coordinates">Coordonate</string>
   <string name="waypoint_cache_coordinates">Coordonate cutie</string>
+  <string name="waypoint_calculate_coordinates">Calculator de coordonate</string>
   <string name="waypoint_custom">Personalizat</string>
   <string name="waypoint_my_coordinates">Coordonatele mele</string>
   <string name="waypoint_bearing">Azimut în °</string>
@@ -986,6 +990,7 @@
   <string name="waypoint_duplicate">Duplică punct</string>
   <string name="waypoint_duplicated">Punct duplicat</string>
   <string name="waypoint_copy_of">Copie după</string>
+  <string name="waypointcalc_notes_prompt">Introduceţi aici observaţiile…</string>
   <string name="search_history">Istoric</string>
   <string name="search_history_empty">Nu există destinaţii</string>
   <string name="search_remove_destination">Destinaţie ştearsă</string>
@@ -1459,6 +1464,7 @@
   <string name="cgeo_shortcut">legătură la c:geo</string>
   <string name="create_shortcut">Crează scurtătură</string>
   <string name="send">Trimite</string>
+  <string name="confirm_log_title">Însemnare specială</string>
   <string name="confirm_log_message">Vrei să scrii o însemnare pentru \'%s\'. Eşti sigur?</string>
   <!-- Geokrety -->
   <string name="settings_activate_geokrety">Activează</string>
@@ -1534,4 +1540,6 @@
   <string name="init_low_disk_space_message">Nu mai este suficient spaţiu de stocare disponibil pentru geocutii. Aceasta poate împiedica buna funcţionare a c:geo. Te rog eliberează nişte spaţiu de stocare.</string>
   <string name="init_confirm_debug">c:geo funcţionează acum în mod \"depanare\"!</string>
   <string name="list_confirm_debug_message">Modul \"depanare\" poate cauza instabilitate. Vrei să revii la modul normal de funcţionare?</string>
+  <string name="err_select_logimage_upload_size">Imaginea este prea mare, te rog alege o rezoluţie mai mică.</string>
+  <string name="err_logimage_caption_required">Trebuie introdusă o scurtă descriere pentru această imagine</string>
 </resources>
