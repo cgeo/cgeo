@@ -576,8 +576,8 @@ public class CoordinatesInputDialog extends DialogFragment {
         public void onClick(final View v) {
             if (getActivity() instanceof  CalculateState) {
                 final CalculateState calculateState = (CalculateState) getActivity();
-                final ImmutablePair<CalcState, String> newState = calculateState.fetchCalculatorState();
-                final CoordinatesCalculateDialog calculateDialog = CoordinatesCalculateDialog.getInstance(gp, newState.getLeft(), newState.getRight());
+                final CalcState theState = calculateState.fetchCalculatorState();
+                final CoordinatesCalculateDialog calculateDialog = CoordinatesCalculateDialog.getInstance(gp, theState);
                 // Assign this fragment as the target fragment so the calculate dialog can automatically close this one on completion
                 calculateDialog.setTargetFragment(CoordinatesInputDialog.this, 1);
                 calculateDialog.setCancelable(true);
@@ -626,8 +626,8 @@ public class CoordinatesInputDialog extends DialogFragment {
 
     // Interface used by the coordinate calculator dialog too preserve its state in the waypoint itself.
     public interface CalculateState {
-        void saveCalculatorState(final CalcState calc, final String notes);
-        ImmutablePair<CalcState, String> fetchCalculatorState();
+        void saveCalculatorState(final CalcState calc);
+        CalcState fetchCalculatorState();
     }
 
     private class PadZerosOnFocusLostListener implements OnFocusChangeListener {
