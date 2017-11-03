@@ -5,6 +5,7 @@ import static cgeo.geocaching.R.id.coordTable;
 import static cgeo.geocaching.models.CalcState.ERROR_CHAR;
 import static cgeo.geocaching.ui.dialog.CoordinatesInputDialog.GEOPOINT_ARG;
 
+import cgeo.geocaching.EditWaypointActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.location.Geopoint;
@@ -46,6 +47,8 @@ import java.util.regex.Pattern;
 
 
 import butterknife.ButterKnife;
+import cgeo.geocaching.utils.CalculationUtils;
+
 import org.apache.commons.lang3.SerializationUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -70,14 +73,14 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
     private static final String SYMBOL_SEC = "\"";
     private static final String SYMBOL_POINT = ".";
     public static final String CALC_STATE = "calc_state";
-    public static final String NOTES = "notes";
+    static final char BRACKET_OPENINGS[] = {'(', '[', '{'};
+    static final char BRACKET_CLOSEINGS[] = {')', ']', '}'};
 
     private ImageButton doneButton;
     private boolean stateSaved = false;
 
     private Geopoint gp;
     private CalcState savedState;
-    private String savedNotes;
 
     /** List of equations to be displayed in the calculator */
     private List<CalculatorVariable> equations;
@@ -166,9 +169,9 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         public void onClick(final View v) {
             // Save calculator state regardless of weather the coordinates are valid or not.
             final CalcState currentState = getCurrentState();
-            final String currentNotes = notes.getText().toString();
-            setSavedState(currentState, currentNotes);
-            ((CoordinatesInputDialog.CalculateState) getActivity()).saveCalculatorState(currentState, currentNotes);
+            setSavedState(currentState);
+            ((CoordinatesInputDialog.CalculateState) getActivity()).saveCalculatorState(currentState);
+            ((EditWaypointActivity) getActivity()).getUserNotes().setText(notes.getText());
 
             if (!areCurrentCoordinatesValid()) {
                 return;
@@ -311,9 +314,8 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
     /**
      * @param gp               Geopoint representing the coordinates from the CoordinateInputDialog
      * @param calculationState State to set the calculator to when created
-     * @param notes            user notes
      */
-    public static CoordinatesCalculateDialog getInstance(final Geopoint gp, final CalcState calculationState, final String notes) {
+    public static CoordinatesCalculateDialog getInstance(final Geopoint gp, final CalcState calculationState) {
         final Bundle args = new Bundle();
 
         if (gp != null) {
@@ -322,7 +324,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
 
         final CoordinatesCalculateDialog ccd = new CoordinatesCalculateDialog();
         ccd.setArguments(args);
-        ccd.setSavedState(calculationState, notes);
+        ccd.setSavedState(calculationState);
         return ccd;
     }
 
@@ -342,9 +344,8 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
                 gp = savedInstanceState.getParcelable(GEOPOINT_ARG);
             }
 
-            final String savedNotes = savedInstanceState.getString(NOTES);
             final byte[] bytes = savedInstanceState.getByteArray(CALC_STATE);
-            setSavedState(bytes != null ? (CalcState) SerializationUtils.deserialize(bytes) : null, savedNotes);
+            setSavedState(bytes != null ? (CalcState) SerializationUtils.deserialize(bytes) : null);
         }
     }
 
@@ -431,6 +432,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         tLonResult = ButterKnife.findById(v, R.id.lonRes);
 
         notes = ButterKnife.findById(v, R.id.notes_text);
+        notes.setText(((EditWaypointActivity) getActivity()).getUserNotes().getText());
 
         latButtons = Arrays.asList(            bLatDeg[1], bLatDeg[0],
                                                bLatMin[1], bLatMin[0],
@@ -523,9 +525,6 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
             resetCalculator();
         }
 
-        if (savedNotes != null) {
-            notes.setText(savedNotes);
-        }
 
         resortEquations();
         updateResult();
@@ -538,7 +537,6 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
     public void onSaveInstanceState(final Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putByteArray(CALC_STATE, SerializationUtils.serialize(getCurrentState()));
-        outState.putString(NOTES, notes.getText().toString());
     }
 
     private void displayToast(final int message) {
@@ -586,18 +584,21 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
     }
 
     private String addLeadingZerosToDecimal(final String coordinate) {
-        final Pattern wholePatern = Pattern.compile("(.*)[.,]");
-        final Pattern decimalPatern = Pattern.compile("[.,](\\d*)");
+        final Pattern preDecimalPattern = Pattern.compile("(.*)[.,]");
+        final Pattern decimalPattern = Pattern.compile("[.,](\\d*)");
+        final Pattern trailingPattern = Pattern.compile("[.,]\\d*(.*)");
 
-        final Matcher wholeMatcher = wholePatern.matcher(coordinate);
-        final Matcher decimalMatcher = decimalPatern.matcher(coordinate);
+        final Matcher wholeMatcher = preDecimalPattern.matcher(coordinate);
+        final Matcher decimalMatcher = decimalPattern.matcher(coordinate);
+        final Matcher trailingMatcher = trailingPattern.matcher(coordinate);
 
         if (!wholeMatcher.find() || !decimalMatcher.find()) {
             return coordinate;
         }
 
         final String leadingString = wholeMatcher.group(1);
-        String trailingString = decimalMatcher.group(1);
+        String decimnalsString = decimalMatcher.group(1);
+        final String trailingString = trailingMatcher.find() ? trailingMatcher.group(1) : "";
 
         final int decimalPoints;
         switch (currentFormat) {
@@ -612,11 +613,11 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
                 decimalPoints = 3;
         }
 
-        while (trailingString.length() < decimalPoints) {
-            trailingString = "0".concat(trailingString);
+        while (decimnalsString.length() < decimalPoints) {
+            decimnalsString = "0".concat(decimnalsString);
         }
 
-        return leadingString + "." + trailingString;
+        return leadingString + "." + decimnalsString + trailingString;
     }
 
     /**
@@ -651,9 +652,8 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         return false;
     }
 
-    private void setSavedState(final CalcState savedState, final String savedNotes) {
+    private void setSavedState(final CalcState savedState) {
         this.savedState = savedState;
-        this.savedNotes = savedNotes;
         stateSaved = true;
 
         if (doneButton != null) {
@@ -832,6 +832,59 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         return returnValue;
     }
 
+    String evaluateBrackets(final String original) {
+        String returnValue = original;
+        int openIndex;
+        int closeIndex;
+
+        try {
+            for (int bracketIndex = 0; bracketIndex < BRACKET_OPENINGS.length; bracketIndex++) {
+                for (int returnValueIndex = 0; returnValueIndex < returnValue.length(); returnValueIndex++) {
+                    char ch = returnValue.charAt(returnValueIndex);
+
+                    if (ch == BRACKET_OPENINGS[bracketIndex]) {
+                        int nestedBrackerCount = 1;
+                        openIndex = returnValueIndex;
+                        closeIndex = returnValueIndex;
+
+                        while (nestedBrackerCount > 0 && closeIndex < returnValue.length() - 1) {
+                            closeIndex++;
+                            ch = returnValue.charAt(closeIndex);
+
+                            if (ch == BRACKET_OPENINGS[bracketIndex]) {
+                                nestedBrackerCount++;
+                            } else if (ch == BRACKET_CLOSEINGS[bracketIndex]) {
+                                nestedBrackerCount--;
+                            }
+                        }
+
+                        if (nestedBrackerCount == 0) {
+                            String result = "";
+
+                            if (closeIndex > openIndex + 1) {
+                                final int resInt = (int) (new CalculationUtils(returnValue.substring(openIndex + 1, closeIndex)).eval());
+                                result = String.valueOf(resInt);
+                            }
+
+                            returnValue = returnValue.substring(0, openIndex) + result + returnValue.substring(closeIndex + 1, returnValue.length());
+                        } else {
+                            // Reached end without finding enough closing brackets
+                            throw new IllegalArgumentException("Unmatched opening bracket '" + returnValue.charAt(openIndex) + "' at index " + openIndex + " of \"" + returnValue + "\"/");
+                        }
+                    } else if (ch == BRACKET_CLOSEINGS[bracketIndex]) {
+                        // Negative nested bracket count.
+                        throw new IllegalArgumentException("Unmatched closing bracket '" + ch + "' at index " + returnValueIndex + " of \"" + returnValue + "\"/");
+                    }
+                }
+            }
+        } catch (final Exception e) {
+            // section can't be evaluated
+            returnValue = original;
+        }
+
+        return returnValue;
+    }
+
     /**
      * Replace 'equation' variables with their computed values: 42° AB.CDE' -> 42° 12.345'
      *
@@ -853,10 +906,13 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
                 substitutionString = values;
             }
 
-            // Perform the substitutions on the remainder of teh string.
+            // Perform the substitutions on the remainder of the string.
             for (final CalculatorVariable equ : equations) {
                 substitutionString = substitutionString.replace(String.valueOf(equ.getName()), equ.evaluateString(freeVariables));
             }
+
+            // If the string contains matching brackets evaluate the enclosed expression (for use in PLANE format)
+            substitutionString = evaluateBrackets(substitutionString);
 
             // Recombine the hemisphere and substituted string.
             returnValue = returnValue.concat(substitutionString);
