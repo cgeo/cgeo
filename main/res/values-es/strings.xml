@@ -230,6 +230,7 @@
   <string name="warn_rendertheme_missing">No se ha encontrado el esquema de colores del mapa.</string>
   <string name="warn_pocket_query_select">No ha seleccionado ninguna Pocket Query.</string>
   <string name="warn_no_pocket_query_found">No se ha encontrado ninguna Pocket Query en Geocaching.com.</string>
+  <string name="warn_invalid_character">El carácter debe ser una LETRA o un DÍGITO</string>
   <string name="err_read_pocket_query_list">Error al leer la lista de Pocket queries.</string>
   <string name="info_log_posted">c:geo envió el registro sin problemas.</string>
   <string name="info_log_saved">c:geo guardó el registro sin problemas.</string>
@@ -243,6 +244,7 @@
   <string name="info_stored_image">Nueva imagen guardada en:</string>
   <string name="info_storing_static_maps">Intentando almacenar los mapas estáticos</string>
   <string name="info_cache_saved">El caché se ha guardado en el disco local</string>
+  <string name="warn_calculator_state_save">Asegúrate de guardar el waypoint si quieres conservar el estado de la calculadora.</string>
   <string name="err_trackable_log_not_anonymous">No puedes registrar %1$s desde c:geo de manera anónima. ¿Quieres abrir los ajustes para rellenar tu identificación desde %2$s?</string>
   <string name="err_trackable_no_preference_activity">Disculpa, no se ha encontrado una pantalla de preferencia adecuada.</string>
   <string name="warn_discard_changes">¡Cambios no guardados en el waypoint descartados!</string>
@@ -868,6 +870,7 @@
   <string name="cache_event">Fecha</string>
   <string name="cache_location">Ubicación</string>
   <string name="cache_coordinates">Coordenadas</string>
+  <string name="cache_calculator">Calculadora</string>
   <string name="cache_coordinates_original">Coordenadas originales</string>
   <string name="cache_spoiler_images_title">Imágenes reveladoras</string>
   <string name="cache_log_types">Tipos de registro</string>
@@ -931,6 +934,7 @@
   <string name="waypoint">Waypoint</string>
   <string name="waypoint_coordinates">Coordenadas</string>
   <string name="waypoint_cache_coordinates">Coordenadas del caché</string>
+  <string name="waypoint_calculate_coordinates">Calcular coordenadas</string>
   <string name="waypoint_custom">A medida</string>
   <string name="waypoint_my_coordinates">Mis coordenadas</string>
   <string name="waypoint_bearing">Orientación en º</string>
@@ -965,6 +969,7 @@
   <string name="waypoint_duplicate">Duplicar waypoint</string>
   <string name="waypoint_duplicated">Waypoint duplicado</string>
   <string name="waypoint_copy_of">Copia de</string>
+  <string name="waypointcalc_notes_prompt">Introduce aquí las notas…</string>
   <string name="search_history">Historial</string>
   <string name="search_history_empty">No hay destinos anteriores</string>
   <string name="search_remove_destination">Destino borrado</string>
@@ -1430,6 +1435,7 @@ Nombre de archivo:%2$s</string>
   <string name="cgeo_shortcut">Atajo de c:geo</string>
   <string name="create_shortcut">Crear atajo</string>
   <string name="send">Enviar</string>
+  <string name="confirm_log_title">Tipo de registro especial</string>
   <string name="confirm_log_message">Vas a registrar \'%s\'. ¿Estás seguro?</string>
   <!-- Geokrety -->
   <string name="settings_activate_geokrety">Activar</string>
@@ -1501,4 +1507,5 @@ Nombre de archivo:%2$s</string>
   <string name="init_confirm_debug">¡c:geo se está ejecutando en modo de depuración!</string>
   <string name="list_confirm_debug_message">¡El modo de depuración provoca inestabilidades! ¿Quieres desactivar el modo depuración?</string>
   <string name="err_select_logimage_upload_size">La imagen es muy grande, por favor selecciona una escala menor.</string>
+  <string name="err_logimage_caption_required">Se necesita un título para la imagen</string>
 </resources>

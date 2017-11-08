@@ -574,6 +574,7 @@
   <string name="init_gpx_exportdir">GPX eksportmappe</string>
   <string name="init_gpx_importdir">GPX importmappe</string>
   <string name="init_dataDir">Vælg geocache-datamappe</string>
+  <string name="init_dataDir_note">Du kan vælge at gemme yderligere data for geocacher (spoilere, logbilleder osv.) i din eksterne hukommelse (emuleret eller ægte SD-kort, afhængig af din enhed).</string>
   <string name="init_maptrail">Vis spor</string>
   <string name="init_summary_maptrail">Vis dit spor på kortet</string>
   <string name="init_share_after_export">Åbn Del-menu efter GPX eksport</string>

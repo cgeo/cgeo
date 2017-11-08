@@ -230,6 +230,7 @@
   <string name="warn_rendertheme_missing">Nie znaleziono tematu mapy.</string>
   <string name="warn_pocket_query_select">Nie wybrano Pocket query.</string>
   <string name="warn_no_pocket_query_found">Nie znaleziono Pocket query online.</string>
+  <string name="warn_invalid_character">Znak musi być liter lub cyfrą</string>
   <string name="err_read_pocket_query_list">Błąd podczas odczytu listy Pocket query.</string>
   <string name="info_log_posted">Wpis został wysłany.</string>
   <string name="info_log_saved">Wpis został zapisany.</string>
@@ -243,6 +244,7 @@
   <string name="info_stored_image">Nowy obraz zapisany w:</string>
   <string name="info_storing_static_maps">Próbuję zapisać mapy statyczne</string>
   <string name="info_cache_saved">Skrzynka jest przechowywana lokalnie</string>
+  <string name="warn_calculator_state_save">Pamiętaj aby zapisać punkt orientacyjny jeśli chcesz zachować stan kalkulatora.</string>
   <string name="err_trackable_log_not_anonymous">Zalogowanie %1$s poprzez c:geo nie może być wykonane anonimowo. Czy chcesz otworzyć ustawienia, aby uzupełnić swoje dane do %2$s?</string>
   <string name="err_trackable_no_preference_activity">Przepraszamy, brak odpowiedniego ekranu preferencji.</string>
   <string name="warn_discard_changes">Niezapisane zmiany punktu nawigacji zostały odrzucone!</string>
@@ -882,6 +884,7 @@
   <string name="cache_event">Data</string>
   <string name="cache_location">Położenie</string>
   <string name="cache_coordinates">Współrzędne</string>
+  <string name="cache_calculator">Kalkulator</string>
   <string name="cache_coordinates_original">Oryginalne współrzędne</string>
   <string name="cache_spoiler_images_title">Zdjęcia spoiler</string>
   <string name="cache_log_types">Rodzaj wpisu</string>
@@ -945,6 +948,7 @@
   <string name="waypoint">Punkt nawigacji</string>
   <string name="waypoint_coordinates">Współrzędne</string>
   <string name="waypoint_cache_coordinates">Współrzędne skrzynki</string>
+  <string name="waypoint_calculate_coordinates">Oblicz współrzędne</string>
   <string name="waypoint_custom">Zdefiniowane przez użytkownika</string>
   <string name="waypoint_my_coordinates">Moje współrzędne</string>
   <string name="waypoint_bearing">Kierunek w stopniach</string>
@@ -979,6 +983,7 @@
   <string name="waypoint_duplicate">Duplikuj punkt orientacyjny</string>
   <string name="waypoint_duplicated">Punkt orientacyjny zduplikowany</string>
   <string name="waypoint_copy_of">Kopia</string>
+  <string name="waypointcalc_notes_prompt">Wprowadź uwagi tutaj…</string>
   <string name="search_history">Historia</string>
   <string name="search_history_empty">Brak poprzednich celów</string>
   <string name="search_remove_destination">Cel usunięty</string>
@@ -1527,4 +1532,6 @@
   <string name="init_low_disk_space_message">Zaczyna brakować miejsca w katalog z danymi, To może powodować nieprawidłowe działanie c:geo. Zwolnij trochę miejsca.</string>
   <string name="init_confirm_debug">c: geo jest uruchomiony w trybie debugowania!</string>
   <string name="list_confirm_debug_message">Tryb debugowania może powodować niestabilność. Czy chcesz wyłączyć ten tryb?</string>
+  <string name="err_select_logimage_upload_size">Zbyt duże zdjęcie, wybierz mniejszą skalę.</string>
+  <string name="err_logimage_caption_required">Podpis jest wymagany dla obrazu</string>
 </resources>
