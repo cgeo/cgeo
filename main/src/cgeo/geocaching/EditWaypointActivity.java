@@ -13,6 +13,7 @@ import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.models.CalcState;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
+import cgeo.geocaching.network.SmileyImage;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.Sensors;
@@ -25,6 +26,7 @@ import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
+import cgeo.geocaching.utils.UnknownTagsHandler;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -37,6 +39,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.v4.content.LocalBroadcastManager;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -58,12 +61,12 @@ import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.List;
 
+
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.Extra;
 import org.androidannotations.annotations.InstanceState;
 import org.androidannotations.annotations.ViewById;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.ImmutablePair;
 
 @EActivity
 public class EditWaypointActivity extends AbstractActionBarActivity implements CoordinatesInputDialog.CoordinateUpdate, CoordinatesInputDialog.CalculateState {
@@ -155,17 +158,9 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
                         final AutoCompleteTextView waypointName = activity.waypointName;
                         waypointName.setText(TextUtils.stripHtml(StringUtils.trimToEmpty(waypoint.getName())));
                         Dialogs.moveCursorToEnd(waypointName);
-                        if (TextUtils.containsHtml(waypoint.getNote())) {
-                            activity.note.setText(TextUtils.stripHtml(StringUtils.trimToEmpty(waypoint.getNote())));
-                        } else {
-                            activity.note.setText(StringUtils.trimToEmpty(waypoint.getNote()));
-                        }
+                        activity.note.setText(Html.fromHtml(StringUtils.trimToEmpty(waypoint.getNote()), new SmileyImage(activity.geocode, activity.note), new UnknownTagsHandler()), TextView.BufferType.SPANNABLE);
                         final EditText userNote = activity.userNote;
-                        if (TextUtils.containsHtml(waypoint.getUserNote())) {
-                            userNote.setText(TextUtils.stripHtml(StringUtils.trimToEmpty(waypoint.getUserNote())));
-                        } else {
-                            userNote.setText(StringUtils.trimToEmpty(waypoint.getUserNote()));
-                        }
+                        userNote.setText(StringUtils.trimToEmpty(waypoint.getUserNote()));
                         Dialogs.moveCursorToEnd(userNote);
                     }
                     new AsyncTask<Void, Void, Geocache>() {
@@ -183,6 +178,10 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
 
                 if (activity.own) {
                     activity.initializeWaypointTypeSelector();
+                    if (StringUtils.isNotBlank(activity.note.getText())) {
+                        activity.userNote.setText(activity.note.getText().append("\n").append(activity.userNote.getText()));
+                        activity.note.setText("");
+                    }
                 } else {
                     activity.nonEditable(activity.waypointName);
                     activity.nonEditable(activity.note);
@@ -190,6 +189,11 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
                         activity.projection.setVisibility(View.GONE);
                     }
                 }
+
+                if (StringUtils.isBlank(activity.note.getText().toString())) {
+                    activity.note.setVisibility(View.GONE);
+                }
+
             } catch (final RuntimeException e) {
                 Log.e("EditWaypointActivity.loadWaypointHandler", e);
             } finally {
@@ -247,6 +251,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
 
         } else { // new waypoint
             initializeWaypointTypeSelector();
+            note.setVisibility(View.GONE);
 
             if (initialCoords != null) {
                 updateCoordinates(initialCoords);
@@ -574,7 +579,11 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
 
         final String givenName = waypointName.getText().toString().trim();
         currentState.name = StringUtils.defaultIfBlank(givenName, getDefaultWaypointName(getSelectedWaypointType()));
-        currentState.noteText = note.getText().toString().trim();
+        if (own) {
+            currentState.noteText = "";
+        } else { // keep original note
+            currentState.noteText = waypoint.getNote();
+        }
         currentState.userNoteText = userNote.getText().toString().trim();
         currentState.type = getSelectedWaypointType();
         currentState.visited = visitedCheckBox.isChecked();

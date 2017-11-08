@@ -1890,11 +1890,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             if (StringUtils.isNotBlank(wpt.getUserNote()) && !StringUtils.equals(wpt.getNote(), wpt.getUserNote())) {
                 userNoteView.setOnClickListener(new DecryptTextClickListener(userNoteView));
                 userNoteView.setVisibility(View.VISIBLE);
-                if (TextUtils.containsHtml(wpt.getUserNote())) {
-                    userNoteView.setText(Html.fromHtml(wpt.getUserNote(), new SmileyImage(cache.getGeocode(), userNoteView), new UnknownTagsHandler()), TextView.BufferType.SPANNABLE);
-                } else {
-                    userNoteView.setText(wpt.getUserNote());
-                }
+                userNoteView.setText(wpt.getUserNote());
             } else {
                 userNoteView.setVisibility(View.GONE);
             }
