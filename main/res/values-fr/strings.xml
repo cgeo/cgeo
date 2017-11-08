@@ -230,6 +230,7 @@
   <string name="warn_rendertheme_missing">Le thème de la carte n\'a pas été trouvé.</string>
   <string name="warn_pocket_query_select">Aucune Pocket Query sélectionnée.</string>
   <string name="warn_no_pocket_query_found">Aucune Pocket Query trouvée en ligne.</string>
+  <string name="warn_invalid_character">Le caractère doit être une LETTRE ou un CHIFFRE</string>
   <string name="err_read_pocket_query_list">Erreur de lecture de la liste des Pocket Queries.</string>
   <string name="info_log_posted">Envoi de la visite réussi.</string>
   <string name="info_log_saved">Enregistrement de la visite réussie.</string>
@@ -243,6 +244,7 @@
   <string name="info_stored_image">Nouvelle image sauvée dans :</string>
   <string name="info_storing_static_maps">Sauvegarde des cartes statiques</string>
   <string name="info_cache_saved">La cache a été enregistrée en local</string>
+  <string name="warn_calculator_state_save">Veillez à enregistrer l\'étape si vous souhaitez conserver l\'état du calculateur.</string>
   <string name="err_trackable_log_not_anonymous">S\'identifier sur %1$s depuis c:geo ne peut se faire anonymement. Souhaitez-vous ouvrir les paramètres et remplir vos informations d\'identification pour %2$s ?</string>
   <string name="err_trackable_no_preference_activity">Désolé, impossible de trouver l\'écran de préférences.</string>
   <string name="warn_discard_changes">Étape non enregistrée, vos modifications seront perdues !</string>
@@ -880,6 +882,7 @@
   <string name="cache_event">Date</string>
   <string name="cache_location">Localisation</string>
   <string name="cache_coordinates">Coordonnées</string>
+  <string name="cache_calculator">Calculateur</string>
   <string name="cache_coordinates_original">Coordonnées d\'origine</string>
   <string name="cache_spoiler_images_title">Images indices</string>
   <string name="cache_log_types">Types de visite</string>
@@ -943,6 +946,7 @@
   <string name="waypoint">Étape</string>
   <string name="waypoint_coordinates">Coordonnées</string>
   <string name="waypoint_cache_coordinates">Coordonnées de la cache</string>
+  <string name="waypoint_calculate_coordinates">Calculer les coordonnées</string>
   <string name="waypoint_custom">Personnalisé</string>
   <string name="waypoint_my_coordinates">Ma position</string>
   <string name="waypoint_bearing">Relèvement</string>
@@ -977,6 +981,7 @@
   <string name="waypoint_duplicate">Dupliquer le point de passage</string>
   <string name="waypoint_duplicated">Point de passage dupliqué</string>
   <string name="waypoint_copy_of">Copie de</string>
+  <string name="waypointcalc_notes_prompt">Entrez les notes ici…</string>
   <string name="search_history">Historique</string>
   <string name="search_history_empty">Aucune destination récente</string>
   <string name="search_remove_destination">Destination supprimée</string>
@@ -1514,4 +1519,6 @@
   <string name="init_low_disk_space_message">L\'espace libre pour le répertoire de données est faible. Cela peut provoquer des dysfonctionnements de c:geo. Merci de libérer de l’espace.</string>
   <string name="init_confirm_debug">c:geo s’exécute en mode de débogage !</string>
   <string name="list_confirm_debug_message">Le mode débogage génère de l\'instabilité ! Souhaitez-vous désactiver le mode débogage ?</string>
+  <string name="err_select_logimage_upload_size">Image trop grande, merci de sélectionner une résolution inférieure.</string>
+  <string name="err_logimage_caption_required">Une légende est requise pour l’image</string>
 </resources>
