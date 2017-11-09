@@ -47,6 +47,8 @@ import java.util.regex.Pattern;
 
 
 import butterknife.ButterKnife;
+import cgeo.geocaching.utils.CalculationUtils;
+
 import org.apache.commons.lang3.SerializationUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -71,6 +73,8 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
     private static final String SYMBOL_SEC = "\"";
     private static final String SYMBOL_POINT = ".";
     public static final String CALC_STATE = "calc_state";
+    static final char BRACKET_OPENINGS[] = {'(', '[', '{'};
+    static final char BRACKET_CLOSEINGS[] = {')', ']', '}'};
 
     private ImageButton doneButton;
     private boolean stateSaved = false;
@@ -825,6 +829,59 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         return returnValue;
     }
 
+    String evaluateBrackets(final String original) {
+        String returnValue = original;
+        int openIndex;
+        int closeIndex;
+
+        try {
+            for (int bracketIndex = 0; bracketIndex < BRACKET_OPENINGS.length; bracketIndex++) {
+                for (int returnValueIndex = 0; returnValueIndex < returnValue.length(); returnValueIndex++) {
+                    char ch = returnValue.charAt(returnValueIndex);
+
+                    if (ch == BRACKET_OPENINGS[bracketIndex]) {
+                        int nestedBrackerCount = 1;
+                        openIndex = returnValueIndex;
+                        closeIndex = returnValueIndex;
+
+                        while (nestedBrackerCount > 0 && closeIndex < returnValue.length() - 1) {
+                            closeIndex++;
+                            ch = returnValue.charAt(closeIndex);
+
+                            if (ch == BRACKET_OPENINGS[bracketIndex]) {
+                                nestedBrackerCount++;
+                            } else if (ch == BRACKET_CLOSEINGS[bracketIndex]) {
+                                nestedBrackerCount--;
+                            }
+                        }
+
+                        if (nestedBrackerCount == 0) {
+                            String result = "";
+
+                            if (closeIndex > openIndex + 1) {
+                                final int resInt = (int) (new CalculationUtils(returnValue.substring(openIndex + 1, closeIndex)).eval());
+                                result = String.valueOf(resInt);
+                            }
+
+                            returnValue = returnValue.substring(0, openIndex) + result + returnValue.substring(closeIndex + 1, returnValue.length());
+                        } else {
+                            // Reached end without finding enough closing brackets
+                            throw new IllegalArgumentException("Unmatched opening bracket '" + returnValue.charAt(openIndex) + "' at index " + openIndex + " of \"" + returnValue + "\"/");
+                        }
+                    } else if (ch == BRACKET_CLOSEINGS[bracketIndex]) {
+                        // Negative nested bracket count.
+                        throw new IllegalArgumentException("Unmatched closing bracket '" + ch + "' at index " + returnValueIndex + " of \"" + returnValue + "\"/");
+                    }
+                }
+            }
+        } catch (final Exception e) {
+            // section can't be evaluated
+            returnValue = original;
+        }
+
+        return returnValue;
+    }
+
     /**
      * Replace 'equation' variables with their computed values: 42° AB.CDE' -> 42° 12.345'
      *
@@ -846,10 +903,13 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
                 substitutionString = values;
             }
 
-            // Perform the substitutions on the remainder of teh string.
+            // Perform the substitutions on the remainder of the string.
             for (final CalculatorVariable equ : equations) {
                 substitutionString = substitutionString.replace(String.valueOf(equ.getName()), equ.evaluateString(freeVariables));
             }
+
+            // If the string contains matching brackets evaluate the enclosed expression (for use in PLANE format)
+            substitutionString = evaluateBrackets(substitutionString);
 
             // Recombine the hemisphere and substituted string.
             returnValue = returnValue.concat(substitutionString);
