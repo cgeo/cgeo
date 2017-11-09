@@ -1540,6 +1540,9 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             showFooterLoadingCaches();
 
             getSupportLoaderManager().restartLoader(CacheListLoaderType.NEXT_PAGE.getLoaderId(), null, CacheListActivity.this);
+            if (type == CacheListType.NEAREST) {
+                getSupportLoaderManager().destroyLoader(CacheListType.NEAREST.getLoaderId());
+            }
         }
     }
 
