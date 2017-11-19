@@ -25,7 +25,11 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayout;
 import android.text.Editable;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.Spanned;
 import android.text.TextWatcher;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -80,6 +84,8 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
     private boolean stateSaved = false;
 
     private Geopoint gp;
+    private int latLeadingZerosAdded;
+    private int lonLeadingZerosAdded;
     private CalcState savedState;
 
     /** List of equations to be displayed in the calculator */
@@ -583,7 +589,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         }
     }
 
-    private String addLeadingZerosToDecimal(final String coordinate) {
+    private String addLeadingZerosToDecimal(final String coordinate, final boolean lat) {
         final Pattern preDecimalPattern = Pattern.compile("(.*)[.,]");
         final Pattern decimalPattern = Pattern.compile("[.,](\\d*)");
         final Pattern trailingPattern = Pattern.compile("[.,]\\d*(.*)");
@@ -592,12 +598,18 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         final Matcher decimalMatcher = decimalPattern.matcher(coordinate);
         final Matcher trailingMatcher = trailingPattern.matcher(coordinate);
 
+        if (lat) {
+            latLeadingZerosAdded = 0;
+        } else {
+            lonLeadingZerosAdded = 0;
+        }
+
         if (!wholeMatcher.find() || !decimalMatcher.find()) {
             return coordinate;
         }
 
         final String leadingString = wholeMatcher.group(1);
-        String decimnalsString = decimalMatcher.group(1);
+        String decimalsString = decimalMatcher.group(1);
         final String trailingString = trailingMatcher.find() ? trailingMatcher.group(1) : "";
 
         final int decimalPoints;
@@ -613,11 +625,16 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
                 decimalPoints = 3;
         }
 
-        while (decimnalsString.length() < decimalPoints) {
-            decimnalsString = "0".concat(decimnalsString);
+        while (decimalsString.length() < decimalPoints) {
+            decimalsString = "0".concat(decimalsString);
+            if (lat) {
+                latLeadingZerosAdded++;
+            } else {
+                lonLeadingZerosAdded++;
+            }
         }
 
-        return leadingString + "." + decimnalsString + trailingString;
+        return leadingString + "." + decimalsString + trailingString;
     }
 
     /**
@@ -635,8 +652,8 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         }
 
         // Pad decimal field with leading zeros
-        lat = addLeadingZerosToDecimal(lat);
-        lon = addLeadingZerosToDecimal(lon);
+        lat = addLeadingZerosToDecimal(lat, true);
+        lon = addLeadingZerosToDecimal(lon, false);
 
         try {
             current = new Geopoint(lat, lon);
@@ -1032,8 +1049,8 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
     }
 
     private void updateResult() {
-        final String lat;
-        final String lon;
+        final Spannable latFormatted;
+        final Spannable lonFormatted;
 
         final boolean lightSkin = Settings.isLightSkin();
         final int validColour = ContextCompat.getColor(getContext(), lightSkin ? R.color.text_light : R.color.text_dark);
@@ -1045,7 +1062,11 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
             resultColour = validColour;
             doneIcon = R.drawable.ic_menu_done_holo_dark;
 
+            final String lat;
+            final String lon;
+
             switch (currentFormat) {
+
                 case Deg:
                     lat = gp.format(GeopointFormatter.Format.LAT_DECDEGREE);
                     lon = gp.format(GeopointFormatter.Format.LON_DECDEGREE);
@@ -1067,19 +1088,37 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
                     lon = getLonResult();
                     break;
             }
+
+            latFormatted = formatCoordinateString(lat, latLeadingZerosAdded, invalidColour);
+            lonFormatted = formatCoordinateString(lon, lonLeadingZerosAdded, invalidColour);
         } else {
             resultColour = invalidColour;
             doneIcon = stateSaved ? R.drawable.ic_menu_saved : R.drawable.ic_menu_save;
 
-            lat = getLatResult();
-            lon = getLonResult();
+            latFormatted = new SpannableString(getLatResult());
+            lonFormatted = new SpannableString(getLonResult());
         }
 
         doneButton.setImageResource(doneIcon);
-        tLatResult.setText(lat);
-        tLonResult.setText(lon);
+        tLatResult.setText(latFormatted);
+        tLonResult.setText(lonFormatted);
         tLatResult.setTextColor(resultColour);
         tLonResult.setTextColor(resultColour);
+    }
+
+    private Spannable formatCoordinateString(final String coordinateString, final int leadingZeros, final int paddingColour) {
+        final Spannable returnValue = new SpannableString(coordinateString);
+
+        if (leadingZeros > 0) {
+            final Pattern pat = Pattern.compile("[\\.,]");
+            final Matcher match = pat.matcher(coordinateString);
+            if (match.find()) {
+                final int point = match.start() + 1;
+                returnValue.setSpan(new ForegroundColorSpan(paddingColour), point, point + leadingZeros, Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
+            }
+        }
+
+        return returnValue;
     }
 
     private void setFormat() {
