@@ -514,17 +514,16 @@ public class GeopointParser {
      */
     @Nullable
     private static ResultWrapper parseHelper(@NonNull final String text, @NonNull final LatLon latlon) {
-        final String withoutSpaceAfterComma = removeAllSpaceAfterComma(text);
+        final String withoutSpaceAfterComma = removeAllSpaceAfterComma(text.trim());
 
-        ResultWrapper best = null;
         for (final AbstractParser parser : parsers) {
             final ResultWrapper wrapper = parser.parse(withoutSpaceAfterComma, latlon);
-            if (wrapper != null && (best == null || wrapper.matcherLength > best.matcherLength)) {
-                best = wrapper;
+            if (wrapper != null && wrapper.matcherLength == withoutSpaceAfterComma.length()) {
+                return wrapper;
             }
         }
 
-        return best;
+        return null;
     }
 
     /**
@@ -609,6 +608,8 @@ public class GeopointParser {
     /**
      * Parses latitude out of the given string.
      *
+     * The parsing fails if the string contains additional characters (except whitespaces).
+     *
      * @see #parse(String)
      * @param text
      *            the string to be parsed
@@ -629,6 +630,8 @@ public class GeopointParser {
 
     /**
      * Parses longitude out of the given string.
+     *
+     * The parsing fails if the string contains additional characters (except whitespaces).
      *
      * @see #parse(String)
      * @param text
