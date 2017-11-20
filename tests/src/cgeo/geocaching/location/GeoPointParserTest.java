@@ -299,4 +299,20 @@ public class GeoPointParserTest {
         assertGeopointEquals(gp3, ref, 1e-4f);
     }
 
+    @Test
+    public void test6802() {
+        try {
+            GeopointParser.parseLatitude("N 1.1.1.1.1.1.1");
+            failBecauseExceptionWasNotThrown(Geopoint.ParseException.class);
+        } catch (final Geopoint.ParseException e) {
+            // expected
+        }
+        try {
+            GeopointParser.parseLongitude("E 99?++?9.93@#$%&-+777");
+            failBecauseExceptionWasNotThrown(Geopoint.ParseException.class);
+        } catch (final Geopoint.ParseException e) {
+            // expected
+        }
+    }
+
 }
