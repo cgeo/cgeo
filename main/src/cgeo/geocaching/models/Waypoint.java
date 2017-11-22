@@ -91,6 +91,9 @@ public class Waypoint implements IWaypoint {
         if (StringUtils.equals(note, userNote)) {
             userNote = "";
         }
+        if (calculatorSaveState == null) {
+            calculatorSaveState = old.calculatorSaveState;
+        }
         if (id < 0) {
             id = old.id;
         }
