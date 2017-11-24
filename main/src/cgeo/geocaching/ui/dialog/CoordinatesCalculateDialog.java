@@ -584,18 +584,21 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
     }
 
     private String addLeadingZerosToDecimal(final String coordinate) {
-        final Pattern wholePatern = Pattern.compile("(.*)[.,]");
-        final Pattern decimalPatern = Pattern.compile("[.,](\\d*)");
+        final Pattern preDecimalPattern = Pattern.compile("(.*)[.,]");
+        final Pattern decimalPattern = Pattern.compile("[.,](\\d*)");
+        final Pattern trailingPattern = Pattern.compile("[.,]\\d*(.*)");
 
-        final Matcher wholeMatcher = wholePatern.matcher(coordinate);
-        final Matcher decimalMatcher = decimalPatern.matcher(coordinate);
+        final Matcher wholeMatcher = preDecimalPattern.matcher(coordinate);
+        final Matcher decimalMatcher = decimalPattern.matcher(coordinate);
+        final Matcher trailingMatcher = trailingPattern.matcher(coordinate);
 
         if (!wholeMatcher.find() || !decimalMatcher.find()) {
             return coordinate;
         }
 
         final String leadingString = wholeMatcher.group(1);
-        String trailingString = decimalMatcher.group(1);
+        String decimnalsString = decimalMatcher.group(1);
+        final String trailingString = trailingMatcher.find() ? trailingMatcher.group(1) : "";
 
         final int decimalPoints;
         switch (currentFormat) {
@@ -610,11 +613,11 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
                 decimalPoints = 3;
         }
 
-        while (trailingString.length() < decimalPoints) {
-            trailingString = "0".concat(trailingString);
+        while (decimnalsString.length() < decimalPoints) {
+            decimnalsString = "0".concat(decimnalsString);
         }
 
-        return leadingString + "." + trailingString;
+        return leadingString + "." + decimnalsString + trailingString;
     }
 
     /**
