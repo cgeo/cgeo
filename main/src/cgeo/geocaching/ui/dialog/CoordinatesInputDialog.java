@@ -46,7 +46,6 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.ImmutablePair;
 
 public class CoordinatesInputDialog extends DialogFragment {
 
