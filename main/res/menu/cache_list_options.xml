@@ -112,6 +112,9 @@
         app:showAsAction="never|withText">
         <menu>
             <item
+                android:id="@+id/menu_import_pq"
+                android:title="@string/pq_download_and_import"/>
+            <item
                 android:id="@+id/menu_import_gpx"
                 android:title="@string/gpx_import_title"/>
             <item
