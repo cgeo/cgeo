@@ -515,7 +515,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
 
         if (savedState != null) {
             loadCalcState();
-        } else {
+        } else if (currentFormat == null) {
             setCoordFormat(Settings.getCoordInputFormat());
             setButtonInputValuesFromGP();
             resetCalculator();
