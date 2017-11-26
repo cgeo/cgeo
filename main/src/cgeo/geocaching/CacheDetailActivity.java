@@ -463,6 +463,8 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 menu.findItem(R.id.menu_waypoint_navigate).setVisible(hasCoords);
                 menu.findItem(R.id.menu_waypoint_caches_around).setVisible(hasCoords);
                 menu.findItem(R.id.menu_waypoint_copy_coordinates).setVisible(hasCoords);
+                final boolean notBlank = StringUtils.isNotBlank(stripAndMergeNotes(selectedWaypoint));
+                menu.findItem(R.id.menu_waypoint_copy_notes).setVisible(notBlank);
                 break;
             default:
                 if (imagesList != null) {
@@ -509,6 +511,15 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     if (coordinates != null) {
                         ClipboardUtils.copyToClipboard(
                                 GeopointFormatter.reformatForClipboard(coordinates.toString()));
+                        showToast(getString(R.string.clipboard_copy_ok));
+                    }
+                }
+                return true;
+            case R.id.menu_waypoint_copy_notes:
+                if (selectedWaypoint != null) {
+                    final String mergedNote = stripAndMergeNotes(selectedWaypoint);
+                    if (!mergedNote.isEmpty()) {
+                        ClipboardUtils.copyToClipboard(mergedNote);
                         showToast(getString(R.string.clipboard_copy_ok));
                     }
                 }
@@ -591,6 +602,18 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             return true;
         }
         return onOptionsItemSelected(item);
+    }
+
+    private static String stripAndMergeNotes(Waypoint waypoint) {
+        final String note = Html.fromHtml(StringUtils.trimToEmpty(waypoint.getNote())).toString();
+        final String userNote = StringUtils.trimToEmpty(waypoint.getUserNote());
+        if (StringUtils.isBlank(note)) {
+            return userNote;
+        }
+        if (StringUtils.isBlank(userNote)) {
+            return note;
+        }
+        return note + "\n" + userNote;
     }
 
     @Override
