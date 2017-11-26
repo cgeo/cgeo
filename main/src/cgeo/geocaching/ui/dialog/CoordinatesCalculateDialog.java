@@ -16,6 +16,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.CalculateButton;
 import cgeo.geocaching.ui.CalculatorVariable;
 import cgeo.geocaching.ui.EditButton;
+import cgeo.geocaching.utils.CalculationUtils;
 
 import android.app.Dialog;
 import android.os.Bundle;
@@ -51,8 +52,6 @@ import java.util.regex.Pattern;
 
 
 import butterknife.ButterKnife;
-import cgeo.geocaching.utils.CalculationUtils;
-
 import org.apache.commons.lang3.SerializationUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -71,14 +70,17 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
 
     /** Character used to represent a "blanked-out" CoordinateButton */
     private static final String PLACE_HOLDER = "~";
-
+    private static final Pattern PRE_DECIMAL_PATTERN = Pattern.compile("(.*)[.,]");
+    private static final Pattern DECIMAL_PATTERN = Pattern.compile("[.,](\\d*)");
+    private static final Pattern TRAILING_PATTERN = Pattern.compile("[.,]\\d*(.*)");
     private static final String SYMBOL_DEG = "°";
     private static final String SYMBOL_MIN = "'";
     private static final String SYMBOL_SEC = "\"";
     private static final String SYMBOL_POINT = ".";
+    private static final char BRACKET_OPENINGS[] = {'(', '[', '{'};
+    private static final char BRACKET_CLOSEINGS[] = {')', ']', '}'};
+
     public static final String CALC_STATE = "calc_state";
-    static final char BRACKET_OPENINGS[] = {'(', '[', '{'};
-    static final char BRACKET_CLOSEINGS[] = {')', ']', '}'};
 
     private ImageButton doneButton;
     private boolean stateSaved = false;
@@ -590,13 +592,8 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
     }
 
     private String addLeadingZerosToDecimal(final String coordinate, final boolean lat) {
-        final Pattern preDecimalPattern = Pattern.compile("(.*)[.,]");
-        final Pattern decimalPattern = Pattern.compile("[.,](\\d*)");
-        final Pattern trailingPattern = Pattern.compile("[.,]\\d*(.*)");
-
-        final Matcher wholeMatcher = preDecimalPattern.matcher(coordinate);
-        final Matcher decimalMatcher = decimalPattern.matcher(coordinate);
-        final Matcher trailingMatcher = trailingPattern.matcher(coordinate);
+        final Matcher wholeMatcher = PRE_DECIMAL_PATTERN.matcher(coordinate);
+        final Matcher decimalMatcher = DECIMAL_PATTERN.matcher(coordinate);
 
         if (lat) {
             latLeadingZerosAdded = 0;
@@ -610,6 +607,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
 
         final String leadingString = wholeMatcher.group(1);
         String decimalsString = decimalMatcher.group(1);
+        final Matcher trailingMatcher = TRAILING_PATTERN.matcher(coordinate);
         final String trailingString = trailingMatcher.find() ? trailingMatcher.group(1) : "";
 
         final int decimalPoints;
