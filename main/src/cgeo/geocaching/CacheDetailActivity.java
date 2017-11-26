@@ -605,8 +605,8 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     }
 
     private static String stripAndMergeNotes(Waypoint waypoint) {
-        String note = Html.fromHtml(StringUtils.trimToEmpty(waypoint.getNote())).toString();
-        String userNote = StringUtils.trimToEmpty(waypoint.getUserNote());
+        final String note = Html.fromHtml(StringUtils.trimToEmpty(waypoint.getNote())).toString();
+        final String userNote = StringUtils.trimToEmpty(waypoint.getUserNote());
         if (StringUtils.isBlank(note)) {
             return userNote;
         }
