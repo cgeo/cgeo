@@ -18,6 +18,7 @@ import cgeo.geocaching.command.MoveToListAndRemoveFromOthersCommand;
 import cgeo.geocaching.command.MoveToListCommand;
 import cgeo.geocaching.command.RenameListCommand;
 import cgeo.geocaching.compatibility.Compatibility;
+import cgeo.geocaching.connector.gc.PocketQueryListActivity;
 import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
@@ -138,6 +139,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     private static final int REQUEST_CODE_IMPORT_GPX = 1;
     private static final int REQUEST_CODE_RESTART = 2;
+    private static final int REQUEST_CODE_IMPORT_PQ = 3;
 
     private static final String STATE_FILTER = "currentFilter";
     private static final String STATE_INVERSE_SORT = "currentInverseSort";
@@ -772,6 +774,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             // Import submenu
             setVisible(menu, R.id.menu_import, isOffline && listId != PseudoList.ALL_LIST.id);
             setEnabled(menu, R.id.menu_import_android, Compatibility.isStorageAccessFrameworkAvailable());
+            setEnabled(menu, R.id.menu_import_pq, Settings.isGCConnectorActive() && Settings.isGCPremiumMember());
 
             // Export
             setVisibleEnabled(menu, R.id.menu_export, isHistory || isOffline, !isEmpty);
@@ -829,6 +832,10 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 return true;
             case R.id.menu_drop_caches:
                 deleteCaches(adapter.getCheckedOrAllCaches());
+                invalidateOptionsMenuCompatible();
+                return true;
+            case R.id.menu_import_pq:
+                importPq();
                 invalidateOptionsMenuCompatible();
                 return true;
             case R.id.menu_import_gpx:
@@ -1244,6 +1251,10 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         Compatibility.importGpxFromStorageAccessFramework(this, REQUEST_CODE_IMPORT_GPX);
     }
 
+    private void importPq() {
+        PocketQueryListActivity.startSubActivity(this, REQUEST_CODE_IMPORT_PQ);
+    }
+
     @Override
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -1255,6 +1266,11 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             if (data != null) {
                 final Uri uri = data.getData();
                 new GPXImporter(this, listId, importGpxAttachementFinishedHandler).importGPX(uri, null, getDisplayName(uri));
+            }
+        } else if (requestCode == REQUEST_CODE_IMPORT_PQ && resultCode == Activity.RESULT_OK) {
+            if (data != null) {
+                final Uri uri = data.getData();
+                new GPXImporter(this, listId, importGpxAttachementFinishedHandler).importGPX(uri, data.getType(), null);
             }
         } else if (requestCode == FilterActivity.REQUEST_SELECT_FILTER && resultCode == Activity.RESULT_OK) {
             final int[] filterIndex = data.getIntArrayExtra(FilterActivity.EXTRA_FILTER_RESULT);
@@ -1833,7 +1849,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     private static void startActivityWithAttachment(@NonNull final Context context, @NonNull final PocketQuery pocketQuery) {
-        final Uri uri = Uri.parse("https://www.geocaching.com/pocket/downloadpq.ashx?g=" + pocketQuery.getGuid() + "&src=web");
+        final Uri uri = pocketQuery.getUri();
         final Intent cachesIntent = new Intent(Intent.ACTION_VIEW, uri, context, CacheListActivity.class);
         cachesIntent.setDataAndType(uri, "application/zip");
         cachesIntent.putExtra(Intents.EXTRA_NAME, pocketQuery.getName());

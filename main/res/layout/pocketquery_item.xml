@@ -12,23 +12,27 @@
     android:paddingTop="7dip"
     tools:context=".connector.gc.PocketQueryListAdapter">
 
-    <Button
-        android:id="@+id/cachelist"
+    <LinearLayout android:id="@+id/buttons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/abc_ic_search"
-        android:gravity="left|center_vertical"
-        android:layout_alignParentRight="true"
-        android:text="@null"/>
+        android:layout_alignParentRight="true">
 
-    <Button
-        android:id="@+id/download"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toLeftOf="@id/cachelist"
-        android:drawableLeft="@drawable/ic_menu_save"
-        android:gravity="left|center_vertical"
-        android:text="@null"/>
+        <Button
+            android:id="@+id/download"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_menu_save"
+            android:gravity="left|center_vertical"
+            android:text="@null"/>
+
+        <Button
+            android:id="@+id/cachelist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/abc_ic_search"
+            android:gravity="left|center_vertical"
+            android:text="@null"/>
+    </LinearLayout>
 
     <TextView
         android:id="@+id/label"
@@ -41,7 +45,7 @@
         android:textIsSelectable="false"
         android:textSize="22sp"
         android:paddingRight="5dip"
-        android:layout_toLeftOf="@id/download"
+        android:layout_toLeftOf="@id/buttons"
         tools:text="name"/>
 
     <TextView

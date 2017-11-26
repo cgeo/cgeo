@@ -1,5 +1,7 @@
 package cgeo.geocaching.models;
 
+import android.net.Uri;
+
 public final class PocketQuery {
 
     private final String guid;
@@ -40,6 +42,10 @@ public final class PocketQuery {
 
     public int getDaysRemaining() {
         return daysRemaining;
+    }
+
+    public Uri getUri() {
+        return Uri.parse("https://www.geocaching.com/pocket/downloadpq.ashx?g=" + guid + "&src=web");
     }
 
 }
