@@ -8,6 +8,7 @@ import cgeo.geocaching.apps.cachelist.MapsMeCacheListApp;
 import cgeo.geocaching.apps.navi.NavigationAppFactory;
 import cgeo.geocaching.apps.navi.NavigationSelectionActionProvider;
 import cgeo.geocaching.calendar.CalendarAdder;
+import cgeo.geocaching.command.AbstractCommand;
 import cgeo.geocaching.command.MoveToListAndRemoveFromOthersCommand;
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.connector.ConnectorFactory;
@@ -80,6 +81,7 @@ import cgeo.geocaching.utils.UnknownTagsHandler;
 import cgeo.geocaching.utils.functions.Action1;
 
 import android.R.color;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
@@ -463,6 +465,8 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 menu.findItem(R.id.menu_waypoint_navigate).setVisible(hasCoords);
                 menu.findItem(R.id.menu_waypoint_caches_around).setVisible(hasCoords);
                 menu.findItem(R.id.menu_waypoint_copy_coordinates).setVisible(hasCoords);
+                final boolean canClearCoords = hasCoords && (selectedWaypoint.isUserDefined() || selectedWaypoint.isOriginalCoordsEmpty());
+                menu.findItem(R.id.menu_waypoint_clear_coordinates).setVisible(canClearCoords);
                 break;
             default:
                 if (imagesList != null) {
@@ -511,6 +515,12 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                                 GeopointFormatter.reformatForClipboard(coordinates.toString()));
                         showToast(getString(R.string.clipboard_copy_ok));
                     }
+                }
+                return true;
+            case R.id.menu_waypoint_clear_coordinates:
+                if (selectedWaypoint != null) {
+                    ensureSaved();
+                    new ClearCoordinatesCommand(this, cache, selectedWaypoint).execute();
                 }
                 return true;
             case R.id.menu_waypoint_duplicate:
@@ -591,6 +601,54 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             return true;
         }
         return onOptionsItemSelected(item);
+    }
+
+    private abstract class WaypointModificationCommand extends AbstractCommand {
+        protected final Waypoint waypoint;
+        protected final Geocache cache;
+
+        WaypointModificationCommand(final Activity context, final Geocache cache, final Waypoint waypoint) {
+            super(context);
+            this.cache = cache;
+            this.waypoint = waypoint;
+        }
+
+        @Override
+        protected void onFinished() {
+            notifyDataSetChanged();
+        }
+
+        @Override
+        protected void onFinishedUndo() {
+            notifyDataSetChanged();
+        }
+    }
+
+    private final class ClearCoordinatesCommand extends WaypointModificationCommand {
+
+        private Geopoint coords;
+
+        ClearCoordinatesCommand(final Activity context, final Geocache cache, final Waypoint waypoint) {
+            super(context, cache, waypoint);
+        }
+
+        @Override
+        protected void doCommand() {
+            coords = waypoint.getCoords();
+            waypoint.setCoords(null);
+            DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
+        }
+
+        @Override
+        protected void undoCommand() {
+            waypoint.setCoords(coords);
+            DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
+        }
+
+        @Override
+        protected String getResultMessage() {
+            return getContext().getString(R.string.info_waypoint_coordinates_cleared);
+        }
     }
 
     @Override
