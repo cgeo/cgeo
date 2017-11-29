@@ -248,6 +248,7 @@
     <string name="info_log_post_retry">Retry</string>
     <string name="info_log_post_save">Save offline</string>
     <string name="info_log_cleared">Log was cleared.</string>
+    <string name="info_waypoint_coordinates_cleared">Coordinates cleared.</string>
     <string name="info_log_type_changed">Type of log has been changed!</string>
     <string name="info_select_logimage_cancelled">Image selection or capture was cancelled.</string>
     <string name="info_stored_image">New image saved to:</string>
@@ -1002,6 +1003,7 @@
     <string name="waypoint_name">Name</string>
     <string name="waypoint_edit">Edit</string>
     <string name="waypoint_copy_coordinates">Copy coordinates</string>
+    <string name="waypoint_clear_coordinates">Clear coordinates</string>
     <string name="waypoint_delete">Delete</string>
     <string name="waypoint_edit_title">Edit waypoint</string>
     <string name="waypoint_add_title">Add waypoint</string>
