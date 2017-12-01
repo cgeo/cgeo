@@ -1,8 +1,8 @@
 package cgeo.geocaching.location;
 
-import org.junit.Test;
-
 import static org.assertj.core.api.Java6Assertions.assertThat;
+
+import org.junit.Test;
 
 public class GeoPointFormatterTest {
 
