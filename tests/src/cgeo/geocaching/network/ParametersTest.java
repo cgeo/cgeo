@@ -1,13 +1,12 @@
 package cgeo.geocaching.network;
 
-import org.junit.Test;
-
-import static org.assertj.core.api.Assertions.fail;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.junit.Test;
 
 public class ParametersTest {
 
@@ -28,22 +27,16 @@ public class ParametersTest {
         UNRESERVED.add('~');
     }
 
-    @Test
-    public void testException() {
-        try {
-            final Parameters params = new Parameters("aaa", "AAA", "bbb");
-            params.clear(); // this will never be invoked, but suppresses warnings about unused objects
-            fail("Exception not raised");
-        } catch (final InvalidParameterException e) {
-            // Ok
-        }
-        try {
-            final Parameters params = new Parameters("aaa", "AAA");
-            params.put("bbb", "BBB", "ccc");
-            fail("Exception not raised");
-        } catch (final InvalidParameterException e) {
-            // Ok
-        }
+    @Test(expected = InvalidParameterException.class)
+    public void testOddNumberExceptionInConstructor() {
+        final Parameters params = new Parameters("aaa", "AAA", "bbb");
+        params.clear(); // this will never be invoked, but suppresses warnings about unused objects
+    }
+
+    @Test(expected = InvalidParameterException.class)
+    public void testOddNumberExceptionInPut() {
+        final Parameters params = new Parameters("aaa", "AAA");
+        params.put("bbb", "BBB", "ccc");
     }
 
     @Test

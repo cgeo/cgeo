@@ -1,6 +1,5 @@
 package cgeo.geocaching.location;
 
-import static org.assertj.core.api.Assertions.fail;
 import static org.assertj.core.api.Assertions.offset;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
@@ -310,73 +309,34 @@ public class GeopointTest {
         assertThat(gp.getLonSecFrac()).isEqualTo(lonSecFrac);
     }
 
-    private static void assertParseException(final Runnable runnable) {
-        try {
-            runnable.run();
-            fail("Should have thrown Geopoint.ParseException");
-        } catch (final Geopoint.ParseException e) {
-            //success
-        }
-    }
-
-    @Test
+    @SuppressWarnings("unused")
+    @Test(expected = Geopoint.ParseException.class)
     public void testParseParam1() {
-        assertParseException(new Runnable() {
-
-            @SuppressWarnings("unused")
-            @Override
-            public void run() {
-                new Geopoint("some nonsense text");
-            }
-        });
+        new Geopoint("some nonsense text");
     }
 
-    @Test
+    @SuppressWarnings("unused")
+    @Test(expected = Geopoint.ParseException.class)
     public void testParseParam2() {
-        assertParseException(new Runnable() {
-
-            @SuppressWarnings("unused")
-            @Override
-            public void run() {
-                new Geopoint("latitude", "longitude");
-            }
-        });
+        new Geopoint("latitude", "longitude");
     }
 
-    @Test
+    @SuppressWarnings("unused")
+    @Test(expected = Geopoint.ParseException.class)
     public void testParseParam6() {
-        assertParseException(new Runnable() {
-
-            @SuppressWarnings("unused")
-            @Override
-            public void run() {
-                new Geopoint("latDir", "latDeg", "latDegFrac", "lonDir", "lonDeg", "lonDegFrac");
-            }
-        });
+        new Geopoint("latDir", "latDeg", "latDegFrac", "lonDir", "lonDeg", "lonDegFrac");
     }
 
-    @Test
+    @SuppressWarnings("unused")
+    @Test(expected = Geopoint.ParseException.class)
     public void testParseParam8() {
-        assertParseException(new Runnable() {
-
-            @SuppressWarnings("unused")
-            @Override
-            public void run() {
-                new Geopoint("latDir", "latDeg", "latMin", "latMinFrac", "lonDir", "lonDeg", "lonMin", "lonMinFrac");
-            }
-        });
+        new Geopoint("latDir", "latDeg", "latMin", "latMinFrac", "lonDir", "lonDeg", "lonMin", "lonMinFrac");
     }
 
-    @Test
+    @SuppressWarnings("unused")
+    @Test(expected = Geopoint.ParseException.class)
     public void testParseParam10() {
-        assertParseException(new Runnable() {
-
-            @SuppressWarnings("unused")
-            @Override
-            public void run() {
-                new Geopoint("latDir", "latDeg", "latMin", "latSec", "latSecFrac", "lonDir", "lonDeg", "lonMin", "lonSec", "lonSecFrac");
-            }
-        });
+        new Geopoint("latDir", "latDeg", "latMin", "latSec", "latSecFrac", "lonDir", "lonDeg", "lonMin", "lonSec", "lonSecFrac");
     }
 
     @Test

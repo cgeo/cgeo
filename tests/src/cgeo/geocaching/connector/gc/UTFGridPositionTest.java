@@ -1,8 +1,8 @@
 package cgeo.geocaching.connector.gc;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
-
 import org.junit.Test;
+
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class UTFGridPositionTest {
 
@@ -11,15 +11,9 @@ public class UTFGridPositionTest {
         assertThat(new UTFGridPosition(0, 0)).isNotNull();
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void testInvalidUTFGridPosition() {
-        boolean valid = true;
-        try {
-            assertThat(new UTFGridPosition(-1, 0)).isNotNull();
-        } catch (final Exception e) {
-            valid = false;
-        }
-        assertThat(valid).isFalse();
+        assertThat(new UTFGridPosition(-1, 0)).isNotNull();
     }
 
     @Test

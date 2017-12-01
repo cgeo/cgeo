@@ -1,11 +1,10 @@
 package cgeo.geocaching.connector.trackable;
 
-import org.junit.Test;
-
-import static org.assertj.core.api.Assertions.fail;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
 import cgeo.geocaching.models.Trackable;
+
+import org.junit.Test;
 
 public class UnknownTrackableConnectorTest {
 
@@ -18,14 +17,9 @@ public class UnknownTrackableConnectorTest {
         assertThat(getConnector().canHandleTrackable("TB1234")).isFalse();
     }
 
-    @Test
+    @Test(expected = IllegalStateException.class)
     public void testGetUrl() throws Exception {
-        try {
-            getConnector().getUrl(new Trackable());
-            fail("IllegalStateException expected");
-        } catch (final IllegalStateException e) {
-            // empty
-        }
+        getConnector().getUrl(new Trackable());
     }
 
     @Test

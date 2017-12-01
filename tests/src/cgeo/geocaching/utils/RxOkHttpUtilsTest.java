@@ -1,7 +1,7 @@
 package cgeo.geocaching.utils;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
 import static org.assertj.core.api.Assertions.fail;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 import java.net.ConnectException;
 import java.net.ServerSocket;
