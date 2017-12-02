@@ -346,7 +346,7 @@ dependencies {
     compile 'com.google.zxing:android-integration:3.3.0'
 
     // GridLayout used by the coordinate calculator
-    compile 'com.android.support:gridlayout-v7:23.0.+'
+    compile 'com.android.support:gridlayout-v7:23.0.1'
 
     // Espresso TODO: disabled because of causing proguard errors en masse (due to including hamcrest and what else as own dependencies)
     // androidTestCompile 'com.jakewharton.espresso:espresso:1.1-r3'
