@@ -69,7 +69,6 @@ import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.Extra;
 import org.androidannotations.annotations.InstanceState;
 import org.androidannotations.annotations.ViewById;
-import org.apache.commons.lang3.SerializationUtils;
 import org.apache.commons.lang3.StringUtils;
 
 @EActivity
@@ -82,7 +81,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
     public static final int UPLOAD_SUCCESS = 4;
     public static final int SAVE_ERROR = 5;
 
-    private static final String CALC_STATE = "calc_state";
+    private static final String CALC_STATE_JSON = "calc_state_json";
     private static final ArrayList<WaypointType> POSSIBLE_WAYPOINT_TYPES = new ArrayList<>(WaypointType.ALL_TYPES_EXCEPT_OWN_AND_ORIGINAL);
 
     @ViewById(R.id.buttonLatitude) protected Button buttonLat;
@@ -124,7 +123,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
     /**
      * State the Coordinate Calculator was last left in.
      */
-    private CalcState calcState;
+    private String calcStateJson;
 
     private final Handler loadWaypointHandler = new LoadWaypointHandler(this);
 
@@ -151,7 +150,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
                     activity.lookup = waypoint.getLookup();
                     activity.own = waypoint.isUserDefined();
                     activity.originalCoordsEmpty = waypoint.isOriginalCoordsEmpty();
-                    activity.calcState = waypoint.getCalculatorStoredState();
+                    activity.calcStateJson = waypoint.getCalcStateJson();
 
                     if (activity.initViews) {
                         activity.visitedCheckBox.setChecked(waypoint.isVisited());
@@ -242,10 +241,9 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
 
         if (savedInstanceState != null) {
             initViews = false;
-            final byte[] bytes = savedInstanceState.getByteArray(CALC_STATE);
-            calcState = bytes != null ? (CalcState) SerializationUtils.deserialize(bytes) : null;
+            calcStateJson = savedInstanceState.getString(CALC_STATE_JSON);
         } else {
-            calcState = null;
+            calcStateJson = null;
         }
 
         if (geocode != null) {
@@ -294,8 +292,8 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
                 finish();
                 return true;
             case android.R.id.home:
-                toastOnChanged();
-                break;
+                finishConfirmDiscard();
+                return true;
         }
 
         return super.onOptionsItemSelected(item);
@@ -303,8 +301,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
 
     @Override
     public void onBackPressed() {
-        toastOnChanged();
-        super.onBackPressed();
+        finishConfirmDiscard();
     }
 
     @Override
@@ -408,7 +405,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
                     return;
                 }
 
-                calcState = waypoint.getCalculatorStoredState();
+                calcStateJson = waypoint.getCalcStateJson();
                 loadWaypointHandler.sendMessage(Message.obtain());
             } catch (final Exception e) {
                 Log.e("EditWaypointActivity.loadWaypoint.run", e);
@@ -485,12 +482,12 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
 
     @Override
     public void saveCalculatorState(final CalcState calcState) {
-        this.calcState = calcState;
+        this.calcStateJson = calcState != null ? calcState.toJSON().toString() : null;
     }
 
     @Override
     public CalcState fetchCalculatorState() {
-        return calcState;
+        return CalcState.fromJSON(calcStateJson);
     }
 
     /**
@@ -499,7 +496,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
     @Override
     public void onSaveInstanceState(final Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putByteArray(CALC_STATE, SerializationUtils.serialize(calcState));
+        outState.putString(CALC_STATE_JSON, calcStateJson);
     }
 
     /**
@@ -533,11 +530,18 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         return selectedTypeIndex >= 0 ? POSSIBLE_WAYPOINT_TYPES.get(selectedTypeIndex) : waypoint.getWaypointType();
     }
 
-    private void toastOnChanged() {
+    private void finishConfirmDiscard() {
         final ActivityData currentState = getActivityData();
 
         if (currentState != null && isWaypointChanged(currentState)) {
-            ActivityMixin.showToast(this, R.string.warn_discard_changes);
+            Dialogs.confirm(this, R.string.confirm_unsaved_changes_title, R.string.confirm_discard_wp_changes, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(final DialogInterface dialog, final int which) {
+                    finish();
+                }
+            });
+        } else {
+            finish();
         }
     }
 
@@ -608,19 +612,20 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         currentState.userNoteText = userNote.getText().toString().trim();
         currentState.type = getSelectedWaypointType();
         currentState.visited = visitedCheckBox.isChecked();
+        currentState.calcStateJson = calcStateJson;
 
         return currentState;
     }
 
     private boolean isWaypointChanged(@NonNull final ActivityData currentState) {
         return waypoint == null
-                || !Geopoint.equals(currentState.coords, waypoint.getCoords())
+                || !Geopoint.equalsFormatted(currentState.coords, waypoint.getCoords(), GeopointFormatter.Format.LAT_LON_DECMINUTE)
                 || !StringUtils.equals(currentState.name, waypoint.getName())
                 || !StringUtils.equals(currentState.noteText, waypoint.getNote())
                 || !StringUtils.equals(currentState.userNoteText, waypoint.getUserNote())
                 || currentState.visited != waypoint.isVisited()
-                || currentState.type != waypoint.getWaypointType();
-
+                || currentState.type != waypoint.getWaypointType()
+                || !StringUtils.equals(currentState.calcStateJson, waypoint.getCalcStateJson());
     }
 
     private static class FinishWaypointSaveHandler extends WeakReferenceHandler<EditWaypointActivity> {
@@ -689,7 +694,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         waypoint.setVisited(currentState.visited);
         waypoint.setId(waypointId);
         waypoint.setOriginalCoordsEmpty(originalCoordsEmpty);
-        waypoint.setCalculatorStoredState(calcState);
+        waypoint.setCalcStateJson(currentState.calcStateJson);
 
         final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_WAYPOINTS);
         if (cache == null) {
@@ -745,6 +750,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         public String noteText;
         public String userNoteText;
         public boolean visited;
+        public String calcStateJson;
     }
 
     private static boolean uploadModifiedCoords(final Geocache cache, final Geopoint waypointUploaded) {

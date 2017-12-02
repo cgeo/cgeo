@@ -547,4 +547,16 @@ public final class Geopoint implements ICoordinates, Parcelable {
         return p1 == null ? p2 == null : p2 != null && p1.equals(p2);
     }
 
+    /**
+     * Check whether two geopoints represent the same String in the given format or are both <tt>null</tt>.
+     *
+     * @param p1 the first Geopoint, or <tt>null</tt>
+     * @param p2 the second Geopoint, or <tt>null</tt>
+     * @return <tt>true</tt> if both geopoints represent the same String in the given format or are both <tt>null</tt>,
+     *         <tt>false</tt> otherwise
+     */
+    public static boolean equalsFormatted(final Geopoint p1, final Geopoint p2, final GeopointFormatter.Format format) {
+        return p1 == null ? p2 == null : p2 != null && p1.format(format).equals(p2.format(format));
+    }
+
 }

@@ -64,6 +64,14 @@ public class GeopointTest {
     }
 
     @Test
+    public void testEqualsFormatted() {
+        final Geopoint gp1 = new Geopoint(48.559984, 2.713871);
+        final Geopoint gp2 = new Geopoint(48.559981, 2.713873);
+        assertThat(Geopoint.equals(gp1, gp2)).isFalse();
+        assertThat(Geopoint.equalsFormatted(gp1, gp2, GeopointFormatter.Format.LAT_LON_DECMINUTE)).isTrue();
+    }
+
+    @Test
     public void testBearingDistance() {
         final Geopoint gp1 = new Geopoint(-30.4, -1.2);
         final Geopoint gp2 = new Geopoint(-30.1, -2.3);
