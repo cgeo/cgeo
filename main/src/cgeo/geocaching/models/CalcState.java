@@ -5,6 +5,7 @@ import cgeo.geocaching.ui.CalculateButton;
 import cgeo.geocaching.ui.CalculatorVariable;
 import cgeo.geocaching.ui.JSONAble;
 import cgeo.geocaching.ui.JSONAbleFactory;
+import cgeo.geocaching.utils.Log;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -76,12 +77,17 @@ public class CalcState implements Serializable {
         return returnValue;
     }
 
-    public static CalcState fromJSON(final String json) throws JSONException {
+    public static CalcState fromJSON(final String json)  {
         if (json == null) {
             return null;
         }
 
-        return new CalcState(new JSONObject(json));
+        try {
+            return new CalcState(new JSONObject(json));
+        } catch (final JSONException e) {
+            Log.e("Unable to read calculator state information", e);
+        }
+        return null;
     }
 
     private JSONArray toJSON(final List<? extends JSONAble> items) throws JSONException {
@@ -94,18 +100,22 @@ public class CalcState implements Serializable {
         return returnValue;
     }
 
-    public JSONObject toJSON() throws JSONException {
+    public JSONObject toJSON() {
         final JSONObject returnValue = new JSONObject();
 
-        returnValue.put("format", format.ordinal());
-        returnValue.put("plainLat", plainLat);
-        returnValue.put("plainLon", plainLon);
-        returnValue.put("latHemisphere", latHemisphere);
-        returnValue.put("lonHemisphere", lonHemisphere);
-        returnValue.put("buttons", toJSON(buttons));
-        returnValue.put("equations", toJSON(equations));
-        returnValue.put("freeVariables", toJSON(freeVariables));
-        // "variableBank" intentionally left out.
+        try {
+            returnValue.put("format", format.ordinal());
+            returnValue.put("plainLat", plainLat);
+            returnValue.put("plainLon", plainLon);
+            returnValue.put("latHemisphere", latHemisphere);
+            returnValue.put("lonHemisphere", lonHemisphere);
+            returnValue.put("buttons", toJSON(buttons));
+            returnValue.put("equations", toJSON(equations));
+            returnValue.put("freeVariables", toJSON(freeVariables));
+            // "variableBank" intentionally left out.
+        } catch (final JSONException e) {
+            Log.e("Unable to write calculator state information", e);
+        }
 
         return returnValue;
     }

@@ -257,6 +257,8 @@
     <string name="warn_calculator_state_save">Be sure to save waypoint if you want to keep the calculator state.</string>
     <string name="err_trackable_log_not_anonymous">Logging %1$s from c:geo cannot be done anonymously. Do you want to open the settings to fill in your credentials from %2$s?</string>
     <string name="err_trackable_no_preference_activity">Sorry, cannot find a suitable preference screen.</string>
+    <string name="confirm_unsaved_changes_title">Unsaved changes</string>
+    <string name="confirm_discard_wp_changes">Discard unsaved waypoint changes?</string>
     <string name="warn_discard_changes">Unsaved waypoint changes discarded!</string>
     <string name="err_request_popup_info">c:geo failed to get cache popup info.</string>
 

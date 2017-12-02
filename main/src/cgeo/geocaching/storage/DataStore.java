@@ -20,7 +20,6 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
-import cgeo.geocaching.models.CalcState;
 import cgeo.geocaching.models.Destination;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
@@ -84,7 +83,6 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.json.JSONException;
 
 public class DataStore {
 
@@ -1377,32 +1375,16 @@ public class DataStore {
         final List<Waypoint> waypoints = cache.getWaypoints();
         if (CollectionUtils.isNotEmpty(waypoints)) {
             final List<String> currentWaypointIds = new ArrayList<>();
-            final ContentValues values = new ContentValues();
-            final long timeStamp = System.currentTimeMillis();
-            for (final Waypoint oneWaypoint : waypoints) {
+            for (final Waypoint waypoint : waypoints) {
+                final ContentValues values = createWaypointValues(geocode, waypoint);
 
-                values.clear();
-                values.put("geocode", geocode);
-                values.put("updated", timeStamp);
-                values.put("type", oneWaypoint.getWaypointType() != null ? oneWaypoint.getWaypointType().id : null);
-                values.put("prefix", oneWaypoint.getPrefix());
-                values.put("lookup", oneWaypoint.getLookup());
-                values.put("name", oneWaypoint.getName());
-                putCoords(values, oneWaypoint.getCoords());
-                values.put("note", oneWaypoint.getNote());
-                values.put("own", oneWaypoint.isUserDefined() ? 1 : 0);
-                values.put("visited", oneWaypoint.isVisited() ? 1 : 0);
-                values.put("user_note", oneWaypoint.getUserNote());
-                values.put("org_coords_empty", oneWaypoint.isOriginalCoordsEmpty() ? 1 : 0);
-                putCalcState(values, oneWaypoint.getCalculatorStoredState());
-
-                if (oneWaypoint.getId() < 0) {
+                if (waypoint.getId() < 0) {
                     final long rowId = database.insert(dbTableWaypoints, null, values);
-                    oneWaypoint.setId((int) rowId);
+                    waypoint.setId((int) rowId);
                 } else {
-                    database.update(dbTableWaypoints, values, "_id = ?", new String[] { Integer.toString(oneWaypoint.getId(), 10) });
+                    database.update(dbTableWaypoints, values, "_id = ?", new String[] { Integer.toString(waypoint.getId(), 10) });
                 }
-                currentWaypointIds.add(Integer.toString(oneWaypoint.getId()));
+                currentWaypointIds.add(Integer.toString(waypoint.getId()));
             }
 
             removeOutdatedWaypointsOfCache(cache, currentWaypointIds);
@@ -1431,16 +1413,6 @@ public class DataStore {
     private static void putCoords(final ContentValues values, final Geopoint coords) {
         values.put("latitude", coords == null ? null : coords.getLatitude());
         values.put("longitude", coords == null ? null : coords.getLongitude());
-    }
-
-    private static void putCalcState(final ContentValues values, final CalcState calcState) {
-        if (calcState != null) {
-            try {
-                values.put("calc_state", calcState.toJSON().toString());
-            } catch (final JSONException e) {
-                Log.e("Unable to write calculator state information", e);
-            }
-        }
     }
 
     /**
@@ -1473,20 +1445,7 @@ public class DataStore {
         database.beginTransaction();
         boolean ok = false;
         try {
-            final ContentValues values = new ContentValues();
-            values.put("geocode", geocode);
-            values.put("updated", System.currentTimeMillis());
-            values.put("type", waypoint.getWaypointType() != null ? waypoint.getWaypointType().id : null);
-            values.put("prefix", waypoint.getPrefix());
-            values.put("lookup", waypoint.getLookup());
-            values.put("name", waypoint.getName());
-            putCoords(values, waypoint.getCoords());
-            values.put("note", waypoint.getNote());
-            values.put("user_note", waypoint.getUserNote());
-            values.put("own", waypoint.isUserDefined() ? 1 : 0);
-            values.put("visited", waypoint.isVisited() ? 1 : 0);
-            values.put("org_coords_empty", waypoint.isOriginalCoordsEmpty() ? 1 : 0);
-            putCalcState(values, waypoint.getCalculatorStoredState());
+            final ContentValues values = createWaypointValues(geocode, waypoint);
 
             if (id <= 0) {
                 final long rowId = database.insert(dbTableWaypoints, null, values);
@@ -1502,6 +1461,25 @@ public class DataStore {
         }
 
         return ok;
+    }
+
+    @NonNull
+    private static ContentValues createWaypointValues(final String geocode, final Waypoint waypoint) {
+        final ContentValues values = new ContentValues();
+        values.put("geocode", geocode);
+        values.put("updated", System.currentTimeMillis());
+        values.put("type", waypoint.getWaypointType() != null ? waypoint.getWaypointType().id : null);
+        values.put("prefix", waypoint.getPrefix());
+        values.put("lookup", waypoint.getLookup());
+        values.put("name", waypoint.getName());
+        putCoords(values, waypoint.getCoords());
+        values.put("note", waypoint.getNote());
+        values.put("user_note", waypoint.getUserNote());
+        values.put("own", waypoint.isUserDefined() ? 1 : 0);
+        values.put("visited", waypoint.isVisited() ? 1 : 0);
+        values.put("org_coords_empty", waypoint.isOriginalCoordsEmpty() ? 1 : 0);
+        values.put("calc_state", waypoint.getCalcStateJson());
+        return values;
     }
 
     public static boolean deleteWaypoint(final int id) {
@@ -2028,11 +2006,7 @@ public class DataStore {
         waypoint.setNote(cursor.getString(cursor.getColumnIndex("note")));
         waypoint.setUserNote(cursor.getString(cursor.getColumnIndex("user_note")));
         waypoint.setOriginalCoordsEmpty(cursor.getInt(cursor.getColumnIndex("org_coords_empty")) != 0);
-        try {
-            waypoint.setCalculatorStoredState(CalcState.fromJSON(cursor.getString(cursor.getColumnIndex("calc_state"))));
-        } catch (final JSONException e) {
-            Log.e("Unable to read calculator state information", e);
-        }
+        waypoint.setCalcStateJson(cursor.getString(cursor.getColumnIndex("calc_state")));
 
         return waypoint;
     }

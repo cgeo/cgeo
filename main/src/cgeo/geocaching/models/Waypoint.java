@@ -47,7 +47,7 @@ public class Waypoint implements IWaypoint {
     private boolean visited = false;
     private boolean originalCoordsEmpty = false;
 
-    private CalcState calculatorSaveState = null;
+    private String calcStateJson = null;
 
     /**
      * require name and type for every waypoint
@@ -91,8 +91,8 @@ public class Waypoint implements IWaypoint {
         if (StringUtils.equals(note, userNote)) {
             userNote = "";
         }
-        if (calculatorSaveState == null) {
-            calculatorSaveState = old.calculatorSaveState;
+        if (calcStateJson == null) {
+            calcStateJson = old.calcStateJson;
         }
         if (id < 0) {
             id = old.id;
@@ -344,12 +344,12 @@ public class Waypoint implements IWaypoint {
         this.originalCoordsEmpty = originalCoordsEmpty;
     }
 
-    public CalcState getCalculatorStoredState() {
-        return calculatorSaveState;
+    public String getCalcStateJson() {
+        return calcStateJson;
     }
 
-    public void setCalculatorStoredState(final CalcState calculatorStoredState) {
-        this.calculatorSaveState = calculatorStoredState;
+    public void setCalcStateJson(final String calcStateJson) {
+        this.calcStateJson = calcStateJson;
     }
 
     /*
