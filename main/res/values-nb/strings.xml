@@ -854,7 +854,6 @@
   <string name="cache_owner">Eier</string>
   <string name="cache_hidden">Publisert</string>
   <string name="cache_event">Dato</string>
-  <string name="cache_location">Lokasjon</string>
   <string name="cache_coordinates">Koordinater</string>
   <string name="cache_coordinates_original">Opprinnelige koordinater</string>
   <string name="cache_spoiler_images_title">Spoiler-bilder</string>

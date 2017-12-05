@@ -230,6 +230,7 @@
   <string name="warn_rendertheme_missing">Nerasta žemėlapio tema.</string>
   <string name="warn_pocket_query_select">Nepasirinktas joks Pocket query.</string>
   <string name="warn_no_pocket_query_found">Nerastas Pocket query internete.</string>
+  <string name="warn_invalid_character">Simbolis turi būti raidė arba skaitmuo</string>
   <string name="err_read_pocket_query_list">Klaida skaitant Pocket query sąrašą.</string>
   <string name="info_log_posted">c:geo įrašą pateikė sėkmingai.</string>
   <string name="info_log_saved">c:geo įrašas sėkmingai išsaugotas.</string>
@@ -874,6 +875,7 @@
   <string name="cache_event">Data</string>
   <string name="cache_location">Vieta</string>
   <string name="cache_coordinates">Koordinatės</string>
+  <string name="cache_calculator">Skaičiuoklė</string>
   <string name="cache_coordinates_original">Originaliosios koordinatės</string>
   <string name="cache_spoiler_images_title">Užuominų nuotraukos</string>
   <string name="cache_log_types">Įrašų tipai</string>
@@ -937,6 +939,7 @@
   <string name="waypoint">Papildomas taškas</string>
   <string name="waypoint_coordinates">Koordinatės</string>
   <string name="waypoint_cache_coordinates">Slėptuvės koordinatės</string>
+  <string name="waypoint_calculate_coordinates">Skaičiuoti koordinates</string>
   <string name="waypoint_custom">Savas</string>
   <string name="waypoint_my_coordinates">Mano koordinates</string>
   <string name="waypoint_bearing">Azimutas °</string>
@@ -971,6 +974,7 @@
   <string name="waypoint_duplicate">Kopijuoti nuorodos tašką</string>
   <string name="waypoint_duplicated">Nuorodos taškas nukopijuotas</string>
   <string name="waypoint_copy_of">Kopija</string>
+  <string name="waypointcalc_notes_prompt">Įrašykite pastabas čia…</string>
   <string name="search_history">Istorija</string>
   <string name="search_history_empty">Nėra ankstesnių kelionės tikslų</string>
   <string name="search_remove_destination">Kelionės tikslas pašalintas</string>
@@ -1442,6 +1446,7 @@
   <string name="cgeo_shortcut">c:geo nuoroda</string>
   <string name="create_shortcut">Sukurti nuorodą</string>
   <string name="send">Siųsti</string>
+  <string name="confirm_log_title">Specialus įrašo tipas</string>
   <string name="confirm_log_message">Norite registruoti \'%s\'. Ar tikrai?</string>
   <!-- Geokrety -->
   <string name="settings_activate_geokrety">Aktyvuoti</string>
