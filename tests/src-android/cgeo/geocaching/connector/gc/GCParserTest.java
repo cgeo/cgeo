@@ -207,10 +207,10 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
 
     public void testWaypointParsing() {
         Geocache cache = parseCache(R.raw.gc366bq);
-        assertThat(cache.getWaypoints()).hasSize(13);
+        assertThat(cache.getWaypoints()).hasSize(14);
         //make sure that waypoints are not duplicated
         cache = parseCache(R.raw.gc366bq);
-        assertThat(cache.getWaypoints()).hasSize(13);
+        assertThat(cache.getWaypoints()).hasSize(14);
     }
 
     public static void testNoteParsingWaypointTypes() {
