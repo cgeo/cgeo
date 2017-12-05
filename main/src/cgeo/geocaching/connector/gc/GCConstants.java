@@ -181,9 +181,8 @@ public final class GCConstants {
     static final String STRING_UNPUBLISHED_OTHER = "you cannot view this cache listing until it has been published";
     static final String STRING_UNPUBLISHED_FROM_SEARCH = "class=\"UnpublishedCacheSearchWidget"; // do not include closing brace as the CSS can contain additional styles
     static final String STRING_UNKNOWN_ERROR = "An Error Has Occurred";
-    static final Pattern PATTERN_STATUS = Pattern.compile(Pattern.quote("<p class=\"OldWarning") + "(.*?)<div");
-    static final List<String> STATUS_DISABLED = Arrays.asList("This cache is temporarily unavailable", "Das Listing zu diesem Geocache ist momentan deaktiviert");
-    static final List<String> STATUS_ARCHIVED = Arrays.asList("This cache has been archived", "Dieser Geocache wurde archiviert");
+    static final String STRING_STATUS_DISABLED = "<div id=\"ctl00_ContentBody_uxDisabledMessageBody\"";
+    static final String STRING_STATUS_ARCHIVED = "<div id=\"ctl00_ContentBody_archivedMessage\"";
     static final String STRING_CACHEDETAILS = "id=\"cacheDetails\"";
 
     // Pages with such title seem to be returned with a 200 code instead of 404
