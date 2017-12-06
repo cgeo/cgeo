@@ -5,10 +5,11 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
 
-import org.apache.commons.lang3.StringUtils;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * This test is meant for performance measurements of different whitespace replacement implementations.
@@ -17,7 +18,7 @@ import java.util.regex.Pattern;
  */
 public class WhitespaceTest extends AbstractResourceInstrumentationTestCase {
 
-    private static final int EXPECTED_SIZE = 122907;
+    private static final int EXPECTED_SIZE = 122476;
     private String data;
 
     @Override
