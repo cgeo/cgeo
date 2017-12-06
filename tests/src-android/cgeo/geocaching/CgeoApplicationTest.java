@@ -23,7 +23,6 @@ import cgeo.geocaching.settings.Credentials;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.TestSettings;
 import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.test.mock.GC1ZXX2;
 import cgeo.geocaching.test.mock.GC2JVEH;
 import cgeo.geocaching.test.mock.GC3FJ5F;
 import cgeo.geocaching.test.mock.MockedCache;
@@ -179,27 +178,6 @@ public class CgeoApplicationTest extends CGeoTestCase {
                 deleteCacheFromDBAndLogout(cache.getGeocode());
 
                 search = Geocache.searchByGeocode(cache.getGeocode(), null, true, null);
-                assertThat(search).isNotNull();
-                assertThat(search.getGeocodes()).isEmpty();
-            }
-        });
-    }
-
-    /**
-     * Test {@link Geocache#searchByGeocode(String, String, boolean, DisposableHandler)}
-     */
-    @MediumTest
-    public static void testSearchErrorOccured() {
-        withMockedLoginDo(new Runnable() {
-
-            @Override
-            public void run() {
-                // non premium cache
-                final MockedCache cache = new GC1ZXX2();
-
-                deleteCacheFromDBAndLogout(cache.getGeocode());
-
-                final SearchResult search = Geocache.searchByGeocode(cache.getGeocode(), null, true, null);
                 assertThat(search).isNotNull();
                 assertThat(search.getGeocodes()).isEmpty();
             }
