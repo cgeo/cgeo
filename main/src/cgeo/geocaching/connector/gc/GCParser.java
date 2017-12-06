@@ -418,10 +418,8 @@ public final class GCParser {
         final String page = TextUtils.replaceWhitespace(pageIn);
 
         final Geocache cache = new Geocache();
-        final String status = TextUtils.getMatch(page, GCConstants.PATTERN_STATUS, "");
-        cache.setDisabled(containsStatus(status, GCConstants.STATUS_DISABLED));
-
-        cache.setArchived(containsStatus(status, GCConstants.STATUS_ARCHIVED));
+        cache.setDisabled(page.contains(GCConstants.STRING_STATUS_DISABLED));
+        cache.setArchived(page.contains(GCConstants.STRING_STATUS_ARCHIVED));
 
         cache.setPremiumMembersOnly(TextUtils.matches(page, GCConstants.PATTERN_PREMIUMMEMBERS));
 
@@ -729,28 +727,28 @@ public final class GCParser {
                 for (int j = 1; j < wpItems.length; j += 2) {
                     final String[] wp = StringUtils.splitByWholeSeparator(wpItems[j], "<td");
                     assert wp != null;
-                    if (wp.length < 8) {
+                    if (wp.length < 7) {
                         Log.e("GCParser.cacheParseFromText: not enough waypoint columns in table");
                         continue;
                     }
 
                     // waypoint name
                     // res is null during the unit tests
-                    final String name = TextUtils.getMatch(wp[6], GCConstants.PATTERN_WPNAME, true, 1, CgeoApplication.getInstance().getString(R.string.waypoint), true);
+                    final String name = TextUtils.getMatch(wp[5], GCConstants.PATTERN_WPNAME, true, 1, CgeoApplication.getInstance().getString(R.string.waypoint), true);
 
                     // waypoint type
-                    final String resulttype = TextUtils.getMatch(wp[3], GCConstants.PATTERN_WPTYPE, null);
+                    final String resulttype = TextUtils.getMatch(wp[2], GCConstants.PATTERN_WPTYPE, null);
 
                     final Waypoint waypoint = new Waypoint(name, WaypointType.findById(resulttype), false);
 
                     // waypoint prefix
-                    waypoint.setPrefix(TextUtils.getMatch(wp[4], GCConstants.PATTERN_WPPREFIXORLOOKUPORLATLON, true, 2, waypoint.getPrefix(), false));
+                    waypoint.setPrefix(TextUtils.getMatch(wp[3], GCConstants.PATTERN_WPPREFIXORLOOKUPORLATLON, true, 2, waypoint.getPrefix(), false));
 
                     // waypoint lookup
-                    waypoint.setLookup(TextUtils.getMatch(wp[5], GCConstants.PATTERN_WPPREFIXORLOOKUPORLATLON, true, 2, waypoint.getLookup(), false));
+                    waypoint.setLookup(TextUtils.getMatch(wp[4], GCConstants.PATTERN_WPPREFIXORLOOKUPORLATLON, true, 2, waypoint.getLookup(), false));
 
                     // waypoint latitude and longitude
-                    latlon = TextUtils.stripHtml(TextUtils.getMatch(wp[7], GCConstants.PATTERN_WPPREFIXORLOOKUPORLATLON, false, 2, "", false)).trim();
+                    latlon = TextUtils.stripHtml(TextUtils.getMatch(wp[6], GCConstants.PATTERN_WPPREFIXORLOOKUPORLATLON, false, 2, "", false)).trim();
                     if (!StringUtils.startsWith(latlon, "???")) {
                         waypoint.setCoords(new Geopoint(latlon));
                     } else {
