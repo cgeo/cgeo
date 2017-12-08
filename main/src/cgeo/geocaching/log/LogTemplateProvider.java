@@ -189,6 +189,26 @@ public final class LogTemplateProvider {
                 return StringUtils.EMPTY;
             }
         });
+        templates.add(new LogTemplate("DIFFICULTY", R.string.init_signature_template_difficulty) {
+            @Override
+            public String getValue(final LogContext context) {
+                final Geocache cache = context.getCache();
+                if (cache != null) {
+                    return cache.getDifficulty();
+                }
+                return StringUtils.EMPTY;
+            }
+        });
+        templates.add(new LogTemplate("TERRAIN", R.string.init_signature_template_terrain) {
+            @Override
+            public String getValue(final LogContext context) {
+                final Geocache cache = context.getCache();
+                if (cache != null) {
+                    return cache.getTerrain();
+                }
+                return StringUtils.EMPTY;
+            }
+        });
         templates.add(new LogTemplate("URL", R.string.init_signature_template_url) {
 
             @Override
