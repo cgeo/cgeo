@@ -62,6 +62,7 @@ import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.Extra;
 import org.androidannotations.annotations.InstanceState;
 import org.androidannotations.annotations.ViewById;
+import org.apache.commons.lang3.SerializationUtils;
 import org.apache.commons.lang3.StringUtils;
 
 @EActivity
@@ -74,6 +75,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
     public static final int UPLOAD_SUCCESS = 4;
     public static final int SAVE_ERROR = 5;
 
+    private static final String CALC_STATE = "calc_state";
     private static final ArrayList<WaypointType> POSSIBLE_WAYPOINT_TYPES = new ArrayList<>(WaypointType.ALL_TYPES_EXCEPT_OWN_AND_ORIGINAL);
 
     @ViewById(R.id.buttonLatitude) protected Button buttonLat;
@@ -232,6 +234,10 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
 
         if (savedInstanceState != null) {
             initViews = false;
+            final byte[] bytes = savedInstanceState.getByteArray(CALC_STATE);
+            calcState = bytes != null ? (CalcState) SerializationUtils.deserialize(bytes) : null;
+        } else {
+            calcState = null;
         }
 
         if (geocode != null) {
@@ -252,7 +258,6 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
             }
         }
 
-        calcState = null;
 
         initializeDistanceUnitSelector();
 
@@ -473,6 +478,15 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
     @Override
     public CalcState fetchCalculatorState() {
         return calcState;
+    }
+
+    /**
+     * Save the current state of the calculator such that it can be restored after screen rotation (or similar)
+     */
+    @Override
+    public void onSaveInstanceState(final Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putByteArray(CALC_STATE, SerializationUtils.serialize(calcState));
     }
 
     /**
