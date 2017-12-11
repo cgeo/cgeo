@@ -81,6 +81,7 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Queue;
 import java.util.Set;
@@ -271,8 +272,13 @@ public class NewMap extends AbstractActionBarActivity {
             }
             itemMapLive.setVisible(mapOptions.coords == null);
 
+            final Set<String> visibleGeocodes = caches.getVisibleGeocodes();
+
             menu.findItem(R.id.menu_store_caches).setVisible(false);
-            menu.findItem(R.id.menu_store_caches).setVisible(!caches.isDownloading() && caches.getVisibleItemsCount() > 0);
+            menu.findItem(R.id.menu_store_caches).setVisible(!caches.isDownloading() && !visibleGeocodes.isEmpty());
+
+            menu.findItem(R.id.menu_store_unsaved_caches).setVisible(false);
+            menu.findItem(R.id.menu_store_unsaved_caches).setVisible(!caches.isDownloading() && new SearchResult(visibleGeocodes).hasUnsavedCaches());
 
             menu.findItem(R.id.menu_mycaches_mode).setChecked(Settings.isExcludeMyCaches());
             menu.findItem(R.id.menu_disabled_mode).setChecked(Settings.isExcludeDisabledCaches());
@@ -361,28 +367,9 @@ public class NewMap extends AbstractActionBarActivity {
                 }
                 return true;
             case R.id.menu_store_caches:
-                if (!caches.isDownloading()) {
-                    final Set<String> geocodes = caches.getVisibleGeocodes();
-
-                    if (geocodes.isEmpty()) {
-                        ActivityMixin.showToast(this, res.getString(R.string.warn_save_nothing));
-
-                        return true;
-                    }
-
-                    if (Settings.getChooseList()) {
-                        // let user select list to store cache in
-                        new StoredList.UserInterface(this).promptForMultiListSelection(R.string.list_title, new Action1<Set<Integer>>() {
-                            @Override
-                            public void call(final Set<Integer> selectedListIds) {
-                                storeCaches(geocodes, selectedListIds);
-                            }
-                        }, true, Collections.singleton(StoredList.TEMPORARY_LIST.id), false);
-                    } else {
-                        storeCaches(geocodes, Collections.singleton(StoredList.STANDARD_LIST_ID));
-                    }
-                }
-                return true;
+                return storeCaches(caches.getVisibleGeocodes());
+            case R.id.menu_store_unsaved_caches:
+                return storeCaches(getUnsavedGeocodes(caches.getVisibleGeocodes()));
             case R.id.menu_circle_mode:
                 //                overlayCaches.switchCircles();
                 //                mapView.repaintRequired(overlayCaches);
@@ -465,6 +452,39 @@ public class NewMap extends AbstractActionBarActivity {
                 }
         }
         return false;
+    }
+
+    private Set<String> getUnsavedGeocodes(final Set<String> geocodes) {
+        final Set<String> unsavedGeocodes = new HashSet<>();
+
+        for (final String geocode : geocodes) {
+            if (!DataStore.isOffline(geocode, null)) {
+                unsavedGeocodes.add(geocode);
+            }
+        }
+        return unsavedGeocodes;
+    }
+
+    private boolean storeCaches(final Set<String> geocodes) {
+        if (!caches.isDownloading()) {
+            if (geocodes.isEmpty()) {
+                ActivityMixin.showToast(this, res.getString(R.string.warn_save_nothing));
+                return true;
+            }
+
+            if (Settings.getChooseList()) {
+                // let user select list to store cache in
+                new StoredList.UserInterface(this).promptForMultiListSelection(R.string.list_title, new Action1<Set<Integer>>() {
+                    @Override
+                    public void call(final Set<Integer> selectedListIds) {
+                        storeCaches(geocodes, selectedListIds);
+                    }
+                }, true, Collections.singleton(StoredList.TEMPORARY_LIST.id), false);
+            } else {
+                storeCaches(geocodes, Collections.singleton(StoredList.STANDARD_LIST_ID));
+            }
+        }
+        return true;
     }
 
     private void menuCompass() {

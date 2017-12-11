@@ -307,6 +307,8 @@
     </plurals>
 
     <string name="caches_store_offline">Store Offline</string>
+    <string name="caches_store_all">Store All</string>
+    <string name="caches_store_unsaved">Store Unsaved</string>
     <string name="caches_store_selected">Store Selected</string>
     <string name="caches_history">History</string>
     <string name="caches_on_map">Show on map</string>

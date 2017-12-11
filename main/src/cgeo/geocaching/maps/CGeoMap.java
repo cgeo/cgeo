@@ -586,9 +586,9 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
             itemMapLive.setTitle(res.getString(titleResource));
             itemMapLive.setVisible(mapOptions.coords == null);
 
-
             final Set<String> geocodesInViewport = getGeocodesForCachesInViewport();
             menu.findItem(R.id.menu_store_caches).setVisible(!isLoading() && CollectionUtils.isNotEmpty(geocodesInViewport));
+            menu.findItem(R.id.menu_store_unsaved_caches).setVisible(!isLoading() && CollectionUtils.isNotEmpty(getUnsavedGeocodes(geocodesInViewport)));
 
             menu.findItem(R.id.menu_mycaches_mode).setChecked(Settings.isExcludeMyCaches());
             menu.findItem(R.id.menu_disabled_mode).setChecked(Settings.isExcludeDisabledCaches());
@@ -669,31 +669,9 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
                 updateMapTitle();
                 return true;
             case R.id.menu_store_caches:
-                if (!isLoading()) {
-                    final Set<String> geocodesInViewport = getGeocodesForCachesInViewport();
-
-                    detailTotal = geocodesInViewport.size();
-                    detailProgress = 0;
-
-                    if (detailTotal == 0) {
-                        ActivityMixin.showToast(activity, res.getString(R.string.warn_save_nothing));
-
-                        return true;
-                    }
-
-                    if (Settings.getChooseList()) {
-                        // let user select list to store cache in
-                        new StoredList.UserInterface(activity).promptForMultiListSelection(R.string.list_title, new Action1<Set<Integer>>() {
-                                    @Override
-                            public void call(final Set<Integer> selectedListIds) {
-                                storeCaches(geocodesInViewport, selectedListIds);
-                                    }
-                        }, true, Collections.<Integer>emptySet(), false);
-                    } else {
-                        storeCaches(geocodesInViewport, Collections.singleton(StoredList.STANDARD_LIST_ID));
-                    }
-                }
-                return true;
+                return storeCaches(getGeocodesForCachesInViewport());
+            case R.id.menu_store_unsaved_caches:
+                return storeCaches(getUnsavedGeocodes(getGeocodesForCachesInViewport()));
             case R.id.menu_circle_mode:
                 overlayCaches.switchCircles();
                 mapView.repaintRequired(overlayCaches);
@@ -778,6 +756,33 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         return false;
     }
 
+    private boolean storeCaches(final Set<String> geocodesInViewport) {
+        if (!isLoading()) {
+
+            detailTotal = geocodesInViewport.size();
+            detailProgress = 0;
+
+            if (detailTotal == 0) {
+                ActivityMixin.showToast(activity, res.getString(R.string.warn_save_nothing));
+
+                return true;
+            }
+
+            if (Settings.getChooseList()) {
+                // let user select list to store cache in
+                new StoredList.UserInterface(activity).promptForMultiListSelection(R.string.list_title, new Action1<Set<Integer>>() {
+                            @Override
+                    public void call(final Set<Integer> selectedListIds) {
+                        storeCaches(geocodesInViewport, selectedListIds);
+                            }
+                }, true, Collections.<Integer>emptySet(), false);
+            } else {
+                storeCaches(geocodesInViewport, Collections.singleton(StoredList.STANDARD_LIST_ID));
+            }
+        }
+        return true;
+    }
+
     private void menuCompass() {
         final Geocache cache = getSingleModeCache();
         if (cache != null) {
@@ -855,6 +860,17 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
             }
         }
         return geocodes;
+    }
+
+    private Set<String> getUnsavedGeocodes(final Set<String> geocodes) {
+        final Set<String> unsavedGeocodes = new HashSet<>();
+
+        for (final String geocode : geocodes) {
+            if (!DataStore.isOffline(geocode, null)) {
+                    unsavedGeocodes.add(geocode);
+            }
+        }
+        return unsavedGeocodes;
     }
 
     /**
