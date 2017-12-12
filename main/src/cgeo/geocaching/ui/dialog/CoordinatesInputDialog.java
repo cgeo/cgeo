@@ -199,6 +199,12 @@ public class CoordinatesInputDialog extends DialogFragment {
             buttonCalculate.setVisibility(View.VISIBLE);
         }
 
+        final Button buttonClear = ButterKnife.findById(v, R.id.clear);
+        if (getActivity() instanceof CoordinateUpdate) {
+            buttonClear.setOnClickListener(new ClearCoordinatesListener());
+            buttonClear.setVisibility(View.VISIBLE);
+        }
+
         if (hasClipboardCoordinates()) {
             final Button buttonClipboard = ButterKnife.findById(v, R.id.clipboard);
             buttonClipboard.setOnClickListener(new ClipboardListener());
@@ -604,9 +610,16 @@ public class CoordinatesInputDialog extends DialogFragment {
             if (!areCurrentCoordinatesValid(true)) {
                 return;
             }
-            if (gp != null) {
-                ((CoordinateUpdate) getActivity()).updateCoordinates(gp);
-            }
+            ((CoordinateUpdate) getActivity()).updateCoordinates(gp);
+            dismiss();
+        }
+    }
+
+    private class ClearCoordinatesListener implements View.OnClickListener {
+
+        @Override
+        public void onClick(final View v) {
+            ((CoordinateUpdate) getActivity()).updateCoordinates(null);
             dismiss();
         }
     }

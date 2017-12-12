@@ -46,6 +46,14 @@
             android:visibility="gone" />
 
         <Button
+            android:id="@+id/clear"
+            style="@style/button_full"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/waypoint_clear_coordinates"
+            android:visibility="gone" />
+
+        <Button
             android:id="@+id/done"
             style="@style/button_full"
             android:layout_width="fill_parent"

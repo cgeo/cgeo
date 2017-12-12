@@ -1603,5 +1603,7 @@
     <string name="list_confirm_debug_message">The debug mode causes instabilities! Do you want to deactivate the debug mode?</string>
     <string name="err_select_logimage_upload_size">Image too big, please select a smaller scale.</string>
     <string name="err_logimage_caption_required">A caption is required for the image</string>
+    <string name="waypoint_latitude_null">N/S --° --.---</string>
+    <string name="waypoint_longitude_null">E/W --° --.---</string>
 
 </resources>
