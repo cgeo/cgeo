@@ -181,15 +181,13 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
             ((CoordinatesInputDialog.CalculateState) getActivity()).saveCalculatorState(currentState);
             ((EditWaypointActivity) getActivity()).getUserNotes().setText(notes.getText());
 
-            if (!areCurrentCoordinatesValid()) {
-                return;
-            }
 
-            if (gp != null) {
+            if (areCurrentCoordinatesValid()) {
                 ((CoordinatesInputDialog.CoordinateUpdate) getActivity()).updateCoordinates(gp);
+                close();
+            } else {
+                ((CoordinatesInputDialog.CoordinateUpdate) getActivity()).updateCoordinates(null);
             }
-
-            close();
         }
     }
 

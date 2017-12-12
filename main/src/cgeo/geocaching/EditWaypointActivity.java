@@ -14,9 +14,6 @@ import cgeo.geocaching.models.CalcState;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.network.SmileyImage;
-import cgeo.geocaching.sensors.GeoData;
-import cgeo.geocaching.sensors.GeoDirHandler;
-import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.staticmaps.StaticMapsProvider;
 import cgeo.geocaching.storage.DataStore;
@@ -111,7 +108,8 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
     private String lookup = "---";
     private boolean own = true;
     private boolean originalCoordsEmpty = false;
-    List<String> distanceUnits = null;
+    private List<String> distanceUnits = null;
+
     /**
      * {@code true} if the activity is newly created, {@code false} if it is restored from an instance state
      */
@@ -154,11 +152,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
 
                     if (activity.initViews) {
                         activity.visitedCheckBox.setChecked(waypoint.isVisited());
-                        final Geopoint coordinates = waypoint.getCoords();
-                        if (coordinates != null) {
-                            activity.buttonLat.setText(coordinates.format(GeopointFormatter.Format.LAT_DECMINUTE));
-                            activity.buttonLon.setText(coordinates.format(GeopointFormatter.Format.LON_DECMINUTE));
-                        }
+                        activity.updateCoordinates(waypoint.getCoords());
                         final AutoCompleteTextView waypointName = activity.waypointName;
                         waypointName.setText(TextUtils.stripHtml(StringUtils.trimToEmpty(waypoint.getName())));
                         Dialogs.moveCursorToEnd(waypointName);
@@ -253,16 +247,11 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         if (waypointId > 0) { // existing waypoint
             waitDialog = ProgressDialog.show(this, null, res.getString(R.string.waypoint_loading), true);
             waitDialog.setCancelable(true);
-
             (new LoadWaypointThread()).start();
-
         } else { // new waypoint
             initializeWaypointTypeSelector();
             note.setVisibility(View.GONE);
-
-            if (initialCoords != null) {
-                updateCoordinates(initialCoords);
-            }
+            updateCoordinates(initialCoords);
         }
 
 
@@ -273,11 +262,6 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
 
     private void setCoordsModificationVisibility(final IConnector con) {
         modifyBoth.setVisibility(con.supportsOwnCoordinates() ? View.VISIBLE : View.GONE);
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume(geoDirHandler.start(GeoDirHandler.UPDATE_GEODATA));
     }
 
     @Override
@@ -383,18 +367,6 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         }
     }
 
-    private final GeoDirHandler geoDirHandler = new GeoDirHandler() {
-        @Override
-        public void updateGeoData(final GeoData geo) {
-            try {
-                buttonLat.setHint(geo.getCoords().format(GeopointFormatter.Format.LAT_DECMINUTE_RAW));
-                buttonLon.setHint(geo.getCoords().format(GeopointFormatter.Format.LON_DECMINUTE_RAW));
-            } catch (final Exception e) {
-                Log.e("failed to update location", e);
-            }
-        }
-    };
-
     private class LoadWaypointThread extends Thread {
 
         @Override
@@ -476,8 +448,25 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
 
     @Override
     public void updateCoordinates(final Geopoint gp) {
-        buttonLat.setText(gp.format(GeopointFormatter.Format.LAT_DECMINUTE));
-        buttonLon.setText(gp.format(GeopointFormatter.Format.LON_DECMINUTE));
+        if (gp != null) {
+            buttonLat.setText(gp.format(GeopointFormatter.Format.LAT_DECMINUTE));
+            buttonLon.setText(gp.format(GeopointFormatter.Format.LON_DECMINUTE));
+            setProjectionEnabled(true);
+        } else {
+            buttonLat.setText(R.string.waypoint_latitude_null);
+            buttonLon.setText(R.string.waypoint_longitude_null);
+            setProjectionEnabled(false);
+        }
+    }
+
+    private void setProjectionEnabled(final boolean enabled) {
+        bearing.setEnabled(enabled);
+        distanceView.setEnabled(enabled);
+        distanceUnitSelector.setEnabled(enabled);
+        if (!enabled) {
+            bearing.setText("");
+            distanceView.setText("");
+        }
     }
 
     @Override
@@ -549,34 +538,28 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         return userNote;
     }
 
-    private ActivityData getActivityData() {
+    private boolean coordsTextsValid(final String latText, final String lonText) {
+        return !latText.equals(getResources().getString(R.string.waypoint_latitude_null))
+                && !lonText.equals(getResources().getString(R.string.waypoint_longitude_null));
+    }
 
-        final String bearingText = bearing.getText().toString();
-        // combine distance from EditText and distanceUnit saved from Spinner
-        final String distanceText = distanceView.getText().toString() + distanceUnits.get(distanceUnitSelector.getSelectedItemPosition());
+    private ActivityData getActivityData() {
         final String latText = buttonLat.getText().toString();
         final String lonText = buttonLon.getText().toString();
-
-        if (StringUtils.isBlank(bearingText) && StringUtils.isBlank(distanceText)
-                && StringUtils.isBlank(latText) && StringUtils.isBlank(lonText)) {
-            Dialogs.message(this, R.string.err_point_no_position_given_title, R.string.err_point_no_position_given);
-            return null;
-        }
-
-        Geopoint coords;
-
-        if (StringUtils.isNotBlank(latText) && StringUtils.isNotBlank(lonText)) {
+        Geopoint coords = null;
+        if (coordsTextsValid(latText, lonText)) {
             try {
                 coords = new Geopoint(latText, lonText);
             } catch (final Geopoint.ParseException e) {
                 showToast(res.getString(e.resource));
                 return null;
             }
-        } else {
-            coords = Sensors.getInstance().currentGeo().getCoords();
         }
 
-        if (StringUtils.isNotBlank(bearingText) && StringUtils.isNotBlank(distanceText)) {
+        final String bearingText = bearing.getText().toString();
+        // combine distance from EditText and distanceUnit saved from Spinner
+        final String distanceText = distanceView.getText().toString() + distanceUnits.get(distanceUnitSelector.getSelectedItemPosition());
+        if (coords != null && StringUtils.isNotBlank(bearingText) && StringUtils.isNotBlank(distanceText)) {
             // bearing & distance
             final double bearing;
             try {
@@ -634,7 +617,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
 
         FinishWaypointSaveHandler(final EditWaypointActivity activity, final Geopoint coords) {
             super(activity);
-            this.coords = new Geopoint(coords.getLatitude(), coords.getLongitude());
+            this.coords = coords != null ? new Geopoint(coords.getLatitude(), coords.getLongitude()) : null;
         }
 
         @Override
@@ -713,7 +696,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
                     StaticMapsProvider.storeWaypointStaticMap(cache, waypoint).subscribe();
                 }
             }
-            if (modifyLocal.isChecked() || modifyBoth.isChecked()) {
+            if (waypoint.getCoords() != null && (modifyLocal.isChecked() || modifyBoth.isChecked())) {
                 if (!cache.hasUserModifiedCoords()) {
                     final Waypoint origWaypoint = new Waypoint(CgeoApplication.getInstance().getString(R.string.cache_coordinates_original), WaypointType.ORIGINAL, false);
                     origWaypoint.setCoords(cache.getCoords());
@@ -723,7 +706,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
                 cache.setCoords(waypoint.getCoords());
                 DataStore.saveChangedCache(cache);
             }
-            if (modifyBoth.isChecked() && waypoint.getCoords() != null) {
+            if (waypoint.getCoords() != null && modifyBoth.isChecked()) {
                 finishHandler.sendEmptyMessage(UPLOAD_START);
 
                 if (cache.supportsOwnCoordinates()) {
