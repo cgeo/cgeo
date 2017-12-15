@@ -4,8 +4,6 @@ import cgeo.geocaching.log.LogType;
 
 import android.support.annotation.NonNull;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Locale;
 import java.util.regex.Pattern;
 
@@ -122,7 +120,7 @@ public final class GCConstants {
 
     // Patterns for parsing the result of a search (next)
 
-    static final Pattern PATTERN_SEARCH_TYPE = Pattern.compile("<img src=\"[^\"]*/images/wpttypes/(.*?)\\.");
+    static final Pattern PATTERN_SEARCH_TYPE = Pattern.compile("<img src=\"[^\"]*/images/WptTypes/(.*?)\\.", Pattern.CASE_INSENSITIVE);
     static final Pattern PATTERN_SEARCH_GUIDANDDISABLED = Pattern.compile("SearchResultsWptType.*?<a href=\"[^\"]*\" class=\"lnk ([^\"]*)\"><span>([^<]*)</span>[^|]*[|][^|]*[|]([^<]*)<");
     /** Two groups **/
     static final Pattern PATTERN_SEARCH_TRACKABLES = Pattern.compile("<a id=\"ctl00_ContentBody_dlResults_ctl[0-9]+_uxTravelBugList\" class=\"tblist\" data-tbcount=\"([0-9]+)\" data-id=\"[^\"]*\"[^>]*>(.*)</a>");

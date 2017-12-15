@@ -75,7 +75,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
         // fix data
         assertThat(tb.getGuid()).isEqualTo("aefffb86-099f-444f-b132-605436163aa8");
         assertThat(tb.getGeocode()).isEqualTo("TB2J1VZ");
-        assertThat(tb.getIconUrl()).endsWith("://www.geocaching.com/images/wpttypes/21.gif");
+        assertThat(tb.getIconUrl()).endsWith("://www.geocaching.com/images/WptTypes/21.gif");
         assertThat(tb.getName()).isEqualTo("blafoo's Children Music CD");
         assertThat(tb.getType()).isEqualTo("Travel Bug Dog Tag");
         assertThat(tb.getReleased()).isEqualTo(new GregorianCalendar(2009, 8 - 1, 24).getTime());
