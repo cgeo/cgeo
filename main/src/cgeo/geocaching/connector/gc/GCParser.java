@@ -139,7 +139,7 @@ public final class GCParser {
             final String row = rows[z];
 
             // check for cache type presence
-            if (!row.contains("images/wpttypes")) {
+            if (!GCConstants.PATTERN_SEARCH_TYPE.matcher(row).find()) {
                 continue;
             }
 
