@@ -4,9 +4,12 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.utils.CryptUtils;
+import cgeo.geocaching.utils.TextUtils;
 
 import java.util.Date;
+
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -52,6 +55,15 @@ public abstract class Compare {
             }
             for (final LogType logType : expected.getLogCounts().keySet()) {
                 assertThat(actual.getLogCounts().get(logType)).as("logcount of " + geocode + " for type " + logType.toString()).isGreaterThanOrEqualTo(expected.getLogCounts().get(logType));
+            }
+            for (final Waypoint expectedWpt : expected.getWaypoints()) {
+                final Waypoint actualWpt = actual.getWaypointByPrefix(expectedWpt.getPrefix());
+                assertThat(actualWpt).isNotNull();
+                assertThat(actualWpt.getLookup()).isEqualTo(expectedWpt.getLookup());
+                assertThat(actualWpt.getCoords()).isEqualTo(expectedWpt.getCoords());
+                assertThat(actualWpt.getName()).isEqualTo(expectedWpt.getName());
+                assertThat(TextUtils.stripHtml(actualWpt.getNote())).isEqualTo(expectedWpt.getNote());
+                assertThat(actualWpt.getWaypointType()).isEqualTo(expectedWpt.getWaypointType());
             }
 
             // The inventories can differ too often, therefore we don't compare them. Also, the personal note

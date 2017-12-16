@@ -3,14 +3,17 @@ package cgeo.geocaching.test.mock;
 import cgeo.geocaching.connector.gc.GCLogin;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Image;
+import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.settings.Settings;
 
 import android.support.annotation.NonNull;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.EnumMap;
@@ -134,7 +137,7 @@ public class GC2CJPF extends MockedCache {
     public Date getHiddenDate() {
         try {
             return GCLogin.parseGcCustomDate("2010-07-31", getDateFormat());
-        } catch (ParseException e) {
+        } catch (final ParseException e) {
             // intentionally left blank
         }
         return null;
@@ -182,4 +185,16 @@ public class GC2CJPF extends MockedCache {
     public List<Image> getSpoilers() {
         return Collections.singletonList(new Image.Builder().setUrl("http://www.blafoo.de/images/Kinderwald.jpg").setTitle("Cache listing background image").build());
     }
+
+    @NonNull
+    @Override
+    public List<Waypoint> getWaypoints() {
+        final List<Waypoint> waypoints = new ArrayList<>();
+        waypoints.add(new Waypoint("FINAL", null, "GC2CJPF Final", "FN", "", WaypointType.FINAL));
+        waypoints.add(new Waypoint("PARKNG", new Geopoint("N 52° 25.384 E 009° 39.023"), "GC2CJPF Parking", "PK", "Kein \"offizieller\" Parkplatz, Parken trotzdem möglich.", WaypointType.PARKING));
+        waypoints.add(new Waypoint("START", new Geopoint("N 52° 25.504 E 009° 39.852"), "GC2CJPF Start", "ST", "", WaypointType.PUZZLE));
+        waypoints.add(new Waypoint("SCENIC", new Geopoint("N 52° 25.488 E 009° 39.432"), "Aussichtspunkt", "WO", "Ehemalige Finallocation wo es gebrannt hat. Gleichzeitig netter Aussichtspunkt.", WaypointType.WAYPOINT));
+        return waypoints;
+    }
+
 }
