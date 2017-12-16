@@ -2,27 +2,9 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-    <b>2017.12.06</b>\n
-    · Fix: Waypoints of caches not loaded after website change\n
-    · Fix: Disabled and archived state not shown after website change\n
-    · New: Coordinate calculator (New Waypoint - Calculate Coordinates)\n
-    · New: Log image upload for Opencaching\n
-    · New: Detect certitude as checker and support opening it via menu\n
-    · New: Show as list menu now only active if more than one cache is on map\n
-    · New: Support OpenCaching GPX format extensions\n
-    · Fix: copy/move caches from history\n
-    · Fix: \'&lt;\' in waypoint notes\n
-    · Fix: html in waypoint popup\n
-    · Fix: Improve parsing of home coordinates\n
-    · Fix: Disabled caches might be shown with truncated title\n
-    · Fix: Some OC cache URL not detected correctly\n
-    · Fix: Some possible crashes on map\n
-    · Fix: Search caches by users with a \'+\' in the name\n
-    · Fix: Correctly display pictures with relative URLS\n
-    · Fix: Disable phone number linking in personal note field\n
-    · Fix: Possible crash when starting directory selection\n
-    · Fix: Improved detection of dark text to allow contrast improvement\n
-    · Fix: Improve creation of nomedia file in geocache data directories\n
+    <b>2017.12.16</b>\n
+    · Fix: GC Search website change\n
+    · Fix: Save calcState on rotate\n
     \n
 </string>
 </resources>
