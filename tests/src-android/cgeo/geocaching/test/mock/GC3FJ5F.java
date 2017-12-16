@@ -3,14 +3,17 @@ package cgeo.geocaching.test.mock;
 import cgeo.geocaching.connector.gc.GCLogin;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Image;
+import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.settings.Settings;
 
 import android.support.annotation.NonNull;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.EnumMap;
@@ -163,6 +166,25 @@ public class GC3FJ5F extends MockedCache {
     @NonNull
     public List<Image> getSpoilers() {
         return Collections.singletonList(Image.NONE);
+    }
+
+    @NonNull
+    @Override
+    public List<Waypoint> getWaypoints() {
+        final List<Waypoint> waypoints = new ArrayList<>();
+        waypoints.add(new Waypoint("PARKNG", new Geopoint("N 51° 20.448 E 007° 01.828"), "Parkplatz", "PK", "Parkplatz für PKW, Motorrad (kostenfrei) und Wohnmobile (kostenpflichtig)", WaypointType.PARKING));
+        waypoints.add(new Waypoint("STAGE1", new Geopoint("N 51° 20.393 E 007° 01.829"), "Wasserstrudel", "S1", "Quersumme der vierstelligen Jahreszahl der Stiftung an den Park = A", WaypointType.PUZZLE));
+        waypoints.add(new Waypoint("STAGE2", new Geopoint("N 51° 20.316 E 007° 01.825"), "Balancieren", "S2", "Anzahl der Metallstreben von der Mitte nach außen = B", WaypointType.PUZZLE));
+        waypoints.add(new Waypoint("STAGE3", new Geopoint("N 51° 20.271 E 007° 01.993"), "Klangstäbe", "S3", "Anzahl der Klangstäbe = C", WaypointType.PUZZLE));
+        waypoints.add(new Waypoint("STAGE4", new Geopoint("N 51° 20.402 E 007° 02.042"), "Farbscheiben", "S4", "Wie lange soll man laut der Anleitung auf die Scheiben schauen, bis der gewünschte Effekt eintritt. \nAnzahl Sekunden ist = D", WaypointType.PUZZLE));
+        waypoints.add(new Waypoint("STAGE5", new Geopoint("N 51° 20.352 E 007° 01.891"), "Kugelspiel", "S5", "Monat der Stiftung an den Park = E", WaypointType.PUZZLE));
+        waypoints.add(new Waypoint("STAGE6", new Geopoint("N 51° 20.392 E 007° 01.866"), "Bank", "S6", "Welche Nummer hat die Bank = F", WaypointType.PUZZLE));
+        waypoints.add(new Waypoint("TOILE1", new Geopoint("N 51° 20.362 E 007° 01.796"), "Toilette 1", "T1", "Öffentliche Toilette im Park", WaypointType.WAYPOINT));
+        waypoints.add(new Waypoint("TOILE2", new Geopoint("N 51° 20.387 E 007° 02.020"), "Toilette 2", "T2", "Öffentliche Toilette im Park", WaypointType.WAYPOINT));
+        waypoints.add(new Waypoint("TABLE", new Geopoint("N 51° 20.355 E 007° 01.979"), "Picknickplatz", "T3", "Picknicktische am Erlebnisspielplatz", WaypointType.WAYPOINT));
+        waypoints.add(new Waypoint("START2", new Geopoint("N 51° 20.375 E 007° 02.113"), "Alternativer Start", "Z1", "Zweiter Eingang zum Park", WaypointType.TRAILHEAD));
+        waypoints.add(new Waypoint("ZUGANG", new Geopoint("N 51° 20.370 E 007° 01.578"), "Abfahrt vom Panoramaradweg Niederbergbahn", "Z2", "Hier müsst ihr den Panoramaradweg verlassen um zum Herminghauspark zu gelangen.", WaypointType.TRAILHEAD));
+        return waypoints;
     }
 
 }

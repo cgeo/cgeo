@@ -59,6 +59,14 @@ public class Waypoint implements IWaypoint {
         this.own = own;
     }
 
+    public Waypoint(final String lookup, final Geopoint coords, final String name, final String prefix, final String note, final WaypointType type) {
+        this(name, type, false);
+        this.prefix = prefix;
+        this.lookup = lookup;
+        this.coords = coords;
+        this.note = note;
+    }
+
     /**
      * copy constructor
      *
