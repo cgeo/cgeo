@@ -2,7 +2,8 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-    <b>2017.12.16</b>\n
+    <b>2017.12.17</b>\n
+    · Fix: GC waypoint type recognition\n
     · Fix: GC Search website change\n
     · Fix: Save calcState on rotate\n
     \n
