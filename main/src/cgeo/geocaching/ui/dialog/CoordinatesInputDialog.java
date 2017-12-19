@@ -200,7 +200,7 @@ public class CoordinatesInputDialog extends DialogFragment {
         }
 
         final Button buttonClear = ButterKnife.findById(v, R.id.clear);
-        if (getActivity() instanceof CoordinateUpdate) {
+        if (getActivity() instanceof CalculateState) {
             buttonClear.setOnClickListener(new ClearCoordinatesListener());
             buttonClear.setVisibility(View.VISIBLE);
         }
