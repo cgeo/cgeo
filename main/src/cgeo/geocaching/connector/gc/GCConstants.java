@@ -181,6 +181,7 @@ public final class GCConstants {
     static final String STRING_UNKNOWN_ERROR = "An Error Has Occurred";
     static final String STRING_STATUS_DISABLED = "<div id=\"ctl00_ContentBody_uxDisabledMessageBody\"";
     static final String STRING_STATUS_ARCHIVED = "<div id=\"ctl00_ContentBody_archivedMessage\"";
+    static final String STRING_STATUS_LOCKED = "<div id=\"ctl00_ContentBody_lockedMessage\"";
     static final String STRING_CACHEDETAILS = "id=\"cacheDetails\"";
 
     // Pages with such title seem to be returned with a 200 code instead of 404
