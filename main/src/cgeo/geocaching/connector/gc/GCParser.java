@@ -419,7 +419,8 @@ public final class GCParser {
 
         final Geocache cache = new Geocache();
         cache.setDisabled(page.contains(GCConstants.STRING_STATUS_DISABLED));
-        cache.setArchived(page.contains(GCConstants.STRING_STATUS_ARCHIVED));
+        cache.setArchived(page.contains(GCConstants.STRING_STATUS_ARCHIVED)
+                        || page.contains(GCConstants.STRING_STATUS_LOCKED));
 
         cache.setPremiumMembersOnly(TextUtils.matches(page, GCConstants.PATTERN_PREMIUMMEMBERS));
 
