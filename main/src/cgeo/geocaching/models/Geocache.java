@@ -174,6 +174,7 @@ public class Geocache implements IWaypoint {
     private Handler changeNotificationHandler = null;
 
     private static final List<Pattern> EVENT_TIME_PATTERNS = new ArrayList<>();
+    private String alertMessage;
 
     public void setChangeNotificationHandler(final Handler newNotificationHandler) {
         changeNotificationHandler = newNotificationHandler;
@@ -2039,4 +2040,13 @@ public class Geocache implements IWaypoint {
                 .append(alternativeCode)
                 .append("</a><br /><br />").toString();
     }
+
+    public void setAlertMessage(final String alertMessage) {
+        this.alertMessage = alertMessage;
+    }
+
+    public String getAlertMessage() {
+        return alertMessage;
+    }
+
 }

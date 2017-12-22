@@ -1607,5 +1607,8 @@
     <string name="err_logimage_caption_required">A caption is required for the image</string>
     <string name="waypoint_latitude_null">N/S --° --.---</string>
     <string name="waypoint_longitude_null">E/W --° --.---</string>
+    <string name="DISABLED_CACHE">This cache is temporarily unavailable</string>
+    <string name="ARCHIVED_CACHE">This cache has been archived</string>
+    <string name="LOCKED_CACHE">This cache has been locked, but it is available for viewing</string>
 
 </resources>

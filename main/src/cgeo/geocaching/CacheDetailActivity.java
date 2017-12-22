@@ -1080,6 +1080,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     public class DetailsViewCreator extends AbstractCachingPageViewCreator<ScrollView> {
         // Reference to the details list and favorite line, so that the helper-method can access them without an additional argument
         private LinearLayout detailsList;
+        private TextView alertMessage;
         private ImmutablePair<RelativeLayout, TextView> favoriteLine;
 
         @Override
@@ -1104,6 +1105,12 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                             }
                         }
                     });
+
+            alertMessage = ButterKnife.findById(view, R.id.alert_message);
+            if (StringUtils.isNotBlank(cache.getAlertMessage())) {
+                alertMessage.setText(Html.fromHtml(cache.getAlertMessage()));
+                alertMessage.setVisibility(View.VISIBLE);
+            }
 
             detailsList = ButterKnife.findById(view, R.id.details_list);
             final CacheDetailsCreator details = new CacheDetailsCreator(CacheDetailActivity.this, detailsList);
