@@ -419,7 +419,21 @@ public final class GCParser {
 
         final Geocache cache = new Geocache();
         cache.setDisabled(page.contains(GCConstants.STRING_STATUS_DISABLED));
-        cache.setArchived(page.contains(GCConstants.STRING_STATUS_ARCHIVED));
+        if (cache.isDisabled()) {
+            cache.setAlertMessage("<b>" + CgeoApplication.getInstance().getString(R.string.DISABLED_CACHE) + "</b>"
+                    + TextUtils.getMatch(page, GCConstants.PATTERN_DISABLED_MESSAGE, true, ""));
+        }
+
+        if (page.contains(GCConstants.STRING_STATUS_ARCHIVED)) {
+            cache.setAlertMessage("<b>" + CgeoApplication.getInstance().getString(R.string.ARCHIVED_CACHE) + "</b>"
+                    + TextUtils.getMatch(page, GCConstants.PATTERN_ARCHIVED_MESSAGE, true, ""));
+            cache.setArchived(true);
+        }
+
+        if (page.contains(GCConstants.STRING_STATUS_LOCKED)) {
+            cache.setAlertMessage("<b>" + CgeoApplication.getInstance().getString(R.string.LOCKED_CACHE) + "</b>");
+            cache.setArchived(true);
+        }
 
         cache.setPremiumMembersOnly(TextUtils.matches(page, GCConstants.PATTERN_PREMIUMMEMBERS));
 

@@ -179,8 +179,11 @@ public final class GCConstants {
     static final String STRING_UNPUBLISHED_OTHER = "you cannot view this cache listing until it has been published";
     static final String STRING_UNPUBLISHED_FROM_SEARCH = "class=\"UnpublishedCacheSearchWidget"; // do not include closing brace as the CSS can contain additional styles
     static final String STRING_UNKNOWN_ERROR = "An Error Has Occurred";
-    static final String STRING_STATUS_DISABLED = "<div id=\"ctl00_ContentBody_uxDisabledMessageBody\"";
+    static final String STRING_STATUS_DISABLED = "<div id=\"ctl00_ContentBody_disabledMessage\"";
     static final String STRING_STATUS_ARCHIVED = "<div id=\"ctl00_ContentBody_archivedMessage\"";
+    static final String STRING_STATUS_LOCKED = "<div id=\"ctl00_ContentBody_lockedMessage\"";
+    static final Pattern PATTERN_DISABLED_MESSAGE = Pattern.compile("<div id=\"ctl00_ContentBody_uxDisabledMessageBody\"[^>]*>(.*?)</div>");
+    static final Pattern PATTERN_ARCHIVED_MESSAGE = Pattern.compile("<div id=\"ctl00_ContentBody_uxArchivedMessageBody\"[^>]*>(.*?)</div>");
     static final String STRING_CACHEDETAILS = "id=\"cacheDetails\"";
 
     // Pages with such title seem to be returned with a 200 code instead of 404

@@ -12,6 +12,29 @@
         android:orientation="vertical"
         android:padding="4dip" >
 
+        <!-- the scroll view doesn't scroll, it is just there to do the fade out at the bottom -->
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/cache_details_alert_height"
+            android:requiresFadingEdge="vertical"
+            android:fadingEdgeLength="40dp"
+            android:background="@drawable/alert_border"
+            android:paddingTop="10dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:visibility="gone"
+            tools:visiblity="visible">
+            <TextView
+                android:id="@+id/alert_message"
+                android:autoLink="web|map"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:focusable="false"
+                android:textColor="?text_color"
+                android:textSize="14sp"
+                tools:text="Disabled Message"/>
+        </ScrollView>
+
         <!-- Details list -->
 
         <LinearLayout
