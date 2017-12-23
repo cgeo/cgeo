@@ -1107,6 +1107,19 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     });
 
             alertMessage = ButterKnife.findById(view, R.id.alert_message);
+            alertMessage.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(final View v) {
+                    final int defaultHeight =  getResources().getDimensionPixelSize(R.dimen.cache_details_alert_height);
+                    final ViewGroup.LayoutParams layoutParams = alertMessage.getLayoutParams();
+                    if (layoutParams.height == defaultHeight) {
+                        alertMessage.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+                    } else {
+                        layoutParams.height = defaultHeight;
+                        alertMessage.setLayoutParams(layoutParams);
+                    }
+                }
+            });
             if (StringUtils.isNotBlank(cache.getAlertMessage())) {
                 alertMessage.setText(Html.fromHtml(cache.getAlertMessage()));
                 alertMessage.setVisibility(View.VISIBLE);

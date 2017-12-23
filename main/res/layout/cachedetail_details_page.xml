@@ -16,7 +16,7 @@
             android:id="@+id/alert_message"
             android:autoLink="web|map"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/cache_details_alert_height"
             android:focusable="false"
             android:textColor="?text_color"
             android:textSize="14sp"

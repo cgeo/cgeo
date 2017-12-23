@@ -11,4 +11,5 @@
 
     <dimen name="equation_name_width">40dip</dimen>
 
+    <dimen name="cache_details_alert_height">70dp</dimen>
 </resources>
