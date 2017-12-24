@@ -459,6 +459,11 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         }
     }
 
+    @Override
+    public boolean supportsNullCoordinates() {
+        return true;
+    }
+
     private void setProjectionEnabled(final boolean enabled) {
         bearing.setEnabled(enabled);
         distanceView.setEnabled(enabled);

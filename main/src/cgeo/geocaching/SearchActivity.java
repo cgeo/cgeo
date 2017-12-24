@@ -1,25 +1,5 @@
 package cgeo.geocaching;
 
-import android.app.Activity;
-import android.app.SearchManager;
-import android.content.Intent;
-import android.content.res.Configuration;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.AutoCompleteTextView;
-import android.widget.Button;
-
-import org.apache.commons.lang3.StringUtils;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-
-import java.util.Locale;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.address.AddressListActivity;
 import cgeo.geocaching.connector.ConnectorFactory;
@@ -38,6 +18,27 @@ import cgeo.geocaching.ui.dialog.CoordinatesInputDialog;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.EditUtils;
 import cgeo.geocaching.utils.functions.Func1;
+
+import android.app.Activity;
+import android.app.SearchManager;
+import android.content.Intent;
+import android.content.res.Configuration;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.AutoCompleteTextView;
+import android.widget.Button;
+
+import java.util.Locale;
+
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import org.apache.commons.lang3.StringUtils;
 
 public class SearchActivity extends AbstractActionBarActivity implements CoordinatesInputDialog.CoordinateUpdate {
 
@@ -313,6 +314,11 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
     public void updateCoordinates(final Geopoint gp) {
         buttonLatitude.setText(gp.format(GeopointFormatter.Format.LAT_DECMINUTE));
         buttonLongitude.setText(gp.format(GeopointFormatter.Format.LON_DECMINUTE));
+    }
+
+    @Override
+    public boolean supportsNullCoordinates() {
+        return false;
     }
 
     private void findByCoordsFn() {

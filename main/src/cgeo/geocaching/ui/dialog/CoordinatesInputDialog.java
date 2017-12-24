@@ -93,7 +93,7 @@ public class CoordinatesInputDialog extends DialogFragment {
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         gp = getArguments().getParcelable(GEOPOINT_ARG);
-        if (gp == null) {
+        if (gp == null && !supportsNullCoordinates()) {
             gp = currentCoords();
         }
         cacheCoords = getArguments().getParcelable(CACHECOORDS_ARG);
@@ -101,6 +101,10 @@ public class CoordinatesInputDialog extends DialogFragment {
         if (savedInstanceState != null && savedInstanceState.getParcelable(GEOPOINT_ARG) != null) {
             gp = savedInstanceState.getParcelable(GEOPOINT_ARG);
         }
+    }
+
+    private boolean supportsNullCoordinates() {
+        return ((CoordinateUpdate)getActivity()).supportsNullCoordinates();
     }
 
     @Override
@@ -200,7 +204,7 @@ public class CoordinatesInputDialog extends DialogFragment {
         }
 
         final Button buttonClear = ButterKnife.findById(v, R.id.clear);
-        if (getActivity() instanceof CalculateState) {
+        if (supportsNullCoordinates()) {
             buttonClear.setOnClickListener(new ClearCoordinatesListener());
             buttonClear.setVisibility(View.VISIBLE);
         }
@@ -238,20 +242,23 @@ public class CoordinatesInputDialog extends DialogFragment {
     }
 
     private void updateGUI() {
-        if (gp == null) {
-            return;
+        if (gp != null) {
+            bLat.setText(String.valueOf(gp.getLatDir()));
+            bLon.setText(String.valueOf(gp.getLonDir()));
+        } else {
+            bLat.setText(String.valueOf(currentCoords().getLatDir()));
+            bLon.setText(String.valueOf(currentCoords().getLonDir()));
         }
-
-        bLat.setText(String.valueOf(gp.getLatDir()));
-        bLon.setText(String.valueOf(gp.getLonDir()));
 
         switch (currentFormat) {
             case Plain:
                 setVisible(R.id.coordTable, View.GONE);
                 eLat.setVisibility(View.VISIBLE);
                 eLon.setVisibility(View.VISIBLE);
-                eLat.setText(gp.format(GeopointFormatter.Format.LAT_DECMINUTE));
-                eLon.setText(gp.format(GeopointFormatter.Format.LON_DECMINUTE));
+                if (gp != null) {
+                    eLat.setText(gp.format(GeopointFormatter.Format.LAT_DECMINUTE));
+                    eLon.setText(gp.format(GeopointFormatter.Format.LON_DECMINUTE));
+                }
                 break;
             case Deg: // DDD.DDDDD°
                 setVisible(R.id.coordTable, View.VISIBLE);
@@ -269,12 +276,15 @@ public class CoordinatesInputDialog extends DialogFragment {
                 tLatSep2.setText("°");
                 tLonSep2.setText("°");
 
-                eLatDeg.setText(addZeros(gp.getLatDeg(), 2));
-                eLatMin.setText(addZeros(gp.getLatDegFrac(), 5));
                 eLatMin.setGravity(Gravity.NO_GRAVITY);
-                eLonDeg.setText(addZeros(gp.getLonDeg(), 3));
-                eLonMin.setText(addZeros(gp.getLonDegFrac(), 5));
                 eLonMin.setGravity(Gravity.NO_GRAVITY);
+
+                if (gp != null) {
+                    eLatDeg.setText(addZeros(gp.getLatDeg(), 2));
+                    eLatMin.setText(addZeros(gp.getLatDegFrac(), 5));
+                    eLonDeg.setText(addZeros(gp.getLonDeg(), 3));
+                    eLonMin.setText(addZeros(gp.getLonDegFrac(), 5));
+                }
                 break;
             case Min: // DDD° MM.MMM
                 setVisible(R.id.coordTable, View.VISIBLE);
@@ -294,14 +304,17 @@ public class CoordinatesInputDialog extends DialogFragment {
                 tLatSep3.setText("'");
                 tLonSep3.setText("'");
 
-                eLatDeg.setText(addZeros(gp.getLatDeg(), 2));
-                eLatMin.setText(addZeros(gp.getLatMin(), 2));
                 eLatMin.setGravity(Gravity.RIGHT);
-                eLatSec.setText(addZeros(gp.getLatMinFrac(), 3));
-                eLonDeg.setText(addZeros(gp.getLonDeg(), 3));
-                eLonMin.setText(addZeros(gp.getLonMin(), 2));
                 eLonMin.setGravity(Gravity.RIGHT);
-                eLonSec.setText(addZeros(gp.getLonMinFrac(), 3));
+
+                if (gp != null) {
+                    eLatDeg.setText(addZeros(gp.getLatDeg(), 2));
+                    eLatMin.setText(addZeros(gp.getLatMin(), 2));
+                    eLatSec.setText(addZeros(gp.getLatMinFrac(), 3));
+                    eLonDeg.setText(addZeros(gp.getLonDeg(), 3));
+                    eLonMin.setText(addZeros(gp.getLonMin(), 2));
+                    eLonSec.setText(addZeros(gp.getLonMinFrac(), 3));
+                }
                 break;
             case Sec: // DDD° MM SS.SSS
                 setVisible(R.id.coordTable, View.VISIBLE);
@@ -321,16 +334,19 @@ public class CoordinatesInputDialog extends DialogFragment {
                 tLatSep3.setText(".");
                 tLonSep3.setText(".");
 
-                eLatDeg.setText(addZeros(gp.getLatDeg(), 2));
-                eLatMin.setText(addZeros(gp.getLatMin(), 2));
                 eLatMin.setGravity(Gravity.RIGHT);
-                eLatSec.setText(addZeros(gp.getLatSec(), 2));
-                eLatSub.setText(addZeros(gp.getLatSecFrac(), 3));
-                eLonDeg.setText(addZeros(gp.getLonDeg(), 3));
-                eLonMin.setText(addZeros(gp.getLonMin(), 2));
                 eLonMin.setGravity(Gravity.RIGHT);
-                eLonSec.setText(addZeros(gp.getLonSec(), 2));
-                eLonSub.setText(addZeros(gp.getLonSecFrac(), 3));
+
+                if (gp != null) {
+                    eLatDeg.setText(addZeros(gp.getLatDeg(), 2));
+                    eLatMin.setText(addZeros(gp.getLatMin(), 2));
+                    eLatSec.setText(addZeros(gp.getLatSec(), 2));
+                    eLatSub.setText(addZeros(gp.getLatSecFrac(), 3));
+                    eLonDeg.setText(addZeros(gp.getLonDeg(), 3));
+                    eLonMin.setText(addZeros(gp.getLonMin(), 2));
+                    eLonSec.setText(addZeros(gp.getLonSec(), 2));
+                    eLonSub.setText(addZeros(gp.getLonSecFrac(), 3));
+                }
                 break;
         }
 
@@ -526,7 +542,7 @@ public class CoordinatesInputDialog extends DialogFragment {
 
                 // Start new format with an acceptable value: either the current one
                 // entered by the user, or our current position.
-                if (!areCurrentCoordinatesValid(false)) {
+                if (!areCurrentCoordinatesValid(false) && !supportsNullCoordinates()) {
                     gp = currentCoords();
                 }
             }
@@ -587,6 +603,7 @@ public class CoordinatesInputDialog extends DialogFragment {
                 calculateDialog.setTargetFragment(CoordinatesInputDialog.this, 1);
                 calculateDialog.setCancelable(true);
                 calculateDialog.show(myContext.getSupportFragmentManager(), "wpcalcdialog");
+                CoordinatesInputDialog.this.dismiss();
             }
         }
     }
@@ -634,6 +651,7 @@ public class CoordinatesInputDialog extends DialogFragment {
 
     public interface CoordinateUpdate {
         void updateCoordinates(final Geopoint gp);
+        boolean supportsNullCoordinates();
     }
 
     // Interface used by the coordinate calculator dialog too preserve its state in the waypoint itself.
