@@ -425,6 +425,11 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
         geocache.setCoords(geopoint);
     }
 
+    @Override
+    public boolean supportsNullCoordinates() {
+        return false;
+    }
+
     private class DateListener implements View.OnClickListener {
 
         @Override

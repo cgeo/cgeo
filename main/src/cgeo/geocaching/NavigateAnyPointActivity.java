@@ -296,6 +296,11 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity implemen
         changed = true;
     }
 
+    @Override
+    public boolean supportsNullCoordinates() {
+        return false;
+    }
+
     private static class ChangeDistanceUnit implements OnItemSelectedListener {
 
         private ChangeDistanceUnit(final NavigateAnyPointActivity unitView) {
