@@ -104,7 +104,7 @@ public class CoordinatesInputDialog extends DialogFragment {
     }
 
     private boolean supportsNullCoordinates() {
-        return ((CoordinateUpdate)getActivity()).supportsNullCoordinates();
+        return ((CoordinateUpdate) getActivity()).supportsNullCoordinates();
     }
 
     @Override
