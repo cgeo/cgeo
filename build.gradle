@@ -72,10 +72,10 @@ buildscript {
 		// these dependencies are used by gradle plugins, not by our projects
 
 		// check for updates of gradle plugin dependencies
-		classpath 'com.github.ben-manes:gradle-versions-plugin:0.15.0'
+		classpath 'com.github.ben-manes:gradle-versions-plugin:0.17.0'
 
 		// Android gradle plugin
-        classpath 'com.android.tools.build:gradle:3.0.0'
+        classpath 'com.android.tools.build:gradle:3.0.1'
 
 		// un-mocking of portable Android classes
 		classpath 'de.mobilej.unmock:UnMockPlugin:0.6.4'
@@ -84,13 +84,13 @@ buildscript {
 		classpath 'com.google.gms:google-services:2.1.0'
 
 		// monitor our application method limit
-		classpath 'com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.8.1'
+		classpath 'com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.8.2'
 
 		// ribbonizer for easier distinction of non-release builds
 		classpath 'com.github.gfx.ribbonizer:plugin:1.0.0'
 
 		// gradle build script profiling
-		classpath 'com.gradle:build-scan-plugin:1.9'
+		classpath 'com.gradle:build-scan-plugin:1.11'
 	}
 }
 
@@ -162,7 +162,6 @@ buildScan {
  * common configuration for the Java projects
  */
 
-ext.buildToolsVersion = "26.0.2" // android-gradle 3.0 requires at least 26.0
 ext.minSdkVersion = 14
 
 subprojects {

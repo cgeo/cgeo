@@ -6,7 +6,6 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion project.buildToolsVersion
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_7
@@ -30,9 +29,9 @@ android {
     }
 
     lintOptions {
-    	// generally we accept lint errors when building 
+    	// generally we accept lint errors when building
         abortOnError false
-        
+
     	// abort release builds in case of FATAL errors
         checkReleaseBuilds true
     }
