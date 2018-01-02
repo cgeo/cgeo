@@ -219,14 +219,24 @@ android {
     // special version code for nightly and rc builds
     applicationVariants.all { variant ->
         if (variant.buildType.name == 'nightly') {
-            variant.mergedFlavor.versionCode = versionCodeFromDate(10000000)
+            variant.outputs.all {
+                setVersionCodeOverride(versionCodeFromDate(10000000))
+            }
         }
         if (variant.buildType.name == 'rc') {
-            variant.mergedFlavor.versionCode = versionCodeFromDate(-1)
+            variant.outputs.all {
+                setVersionCodeOverride(versionCodeFromDate(-1))
+            }
         }
         if (variant.buildType.name == 'legacy') {
-            variant.mergedFlavor.versionName = System.getenv('LEGACY_VERSION_NAME')
-            variant.mergedFlavor.versionCode = System.getenv('LEGACY_VERSION_CODE') as Integer
+            def legacyName = System.getenv('LEGACY_VERSION_NAME')
+            def legacyVersion = System.getenv('LEGACY_VERSION_CODE') as Integer
+            if (legacyName != null && legacyVersion != null) {
+                variant.outputs.all {
+                    setVersionNameOverride(legacyName)
+                    setVersionCodeOverride(legacyVersion)
+                }
+            }
         }
         // debug and release builds have offset zero, no special handling here
     }
