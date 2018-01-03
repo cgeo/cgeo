@@ -5,6 +5,7 @@ import static cgeo.geocaching.R.id.coordTable;
 import static cgeo.geocaching.models.CalcState.ERROR_CHAR;
 import static cgeo.geocaching.ui.dialog.CoordinatesInputDialog.GEOPOINT_ARG;
 
+import cgeo.geocaching.BuildConfig;
 import cgeo.geocaching.EditWaypointActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractActivity;
@@ -21,7 +22,6 @@ import cgeo.geocaching.utils.CalculationUtils;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
-import android.support.v4.BuildConfig;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayout;
@@ -49,7 +49,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 
 import butterknife.ButterKnife;
 import org.apache.commons.lang3.SerializationUtils;
