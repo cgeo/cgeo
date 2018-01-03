@@ -783,15 +783,6 @@ public final class GCParser {
         return ImmutablePair.of(StatusCode.NO_ERROR, cache);
     }
 
-    private static boolean containsStatus(final String status, @NonNull final List<String> patterns) {
-        for (final String pattern : patterns) {
-            if (StringUtils.contains(status, pattern)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     @Nullable
     private static String getNumberString(final String numberWithPunctuation) {
         return StringUtils.replaceChars(numberWithPunctuation, ".,", "");
