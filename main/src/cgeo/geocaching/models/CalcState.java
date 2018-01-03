@@ -21,6 +21,7 @@ import org.json.JSONObject;
  * All the relevant information is in a serializable form such that it can be stored as a bundle in waypoint's 'ContentValues'.
  */
 public class CalcState implements Serializable {
+    private static final long serialVersionUID = -6987510819097555283L;
     public static final char ERROR_CHAR = '#';
     public static final String ERROR_STRING = "???";
 

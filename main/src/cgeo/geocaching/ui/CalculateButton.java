@@ -110,6 +110,8 @@ public class CalculateButton extends EditButton {
      * Data used to capture the state of this particular button such that it can be restored again later
      */
     public static class ButtonData implements Serializable, JSONAble {
+        private static final long serialVersionUID = -9043775643928797403L;
+
         /** Character used to 'hide' button **/
         public static final char BLANK = ' ';
 

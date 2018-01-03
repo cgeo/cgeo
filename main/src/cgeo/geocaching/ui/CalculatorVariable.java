@@ -50,6 +50,7 @@ public class CalculatorVariable extends LinearLayout {
      * Data used to capture the state of this Variable such that it can be restored again later
      */
     public static class VariableData implements Serializable, JSONAble {
+        private static final long serialVersionUID = -5181457941802605249L;
         private final char name;
         /** Note, we have to use a String rather than an Editable as Editable's can't be serialized */
         private String expression;
