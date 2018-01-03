@@ -271,16 +271,16 @@ dependencies {
     }
 
     // GeographicLib
-    implementation "net.sf.geographiclib:GeographicLib-Java:1.48"
+    implementation "net.sf.geographiclib:GeographicLib-Java:1.49"
 
     // Jackson XML processing
-    def jacksonVersion = '2.9.1'
+    def jacksonVersion = '2.9.3'
     implementation "com.fasterxml.jackson.core:jackson-core:$jacksonVersion"
     implementation "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
     implementation "com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion"
 
     // Jsoup HTML parsing
-    implementation 'org.jsoup:jsoup:1.10.3'
+    implementation 'org.jsoup:jsoup:1.11.2'
 
     // Junit only needed for local unit tests
     testImplementation 'junit:junit:4.12'
@@ -295,8 +295,8 @@ dependencies {
     testImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
 
     // Locus Maps integration
-    implementation "com.asamm:locus-api:0.2.11"
-    implementation "com.asamm:locus-api-android:0.2.11"
+    implementation "com.asamm:locus-api:0.2.15"
+    implementation "com.asamm:locus-api-android:0.2.15"
 
     // Mapsforge old version
     implementation files('libs/mapsforge-map-0.3.0-jar-with-dependencies.jar')
@@ -317,10 +317,10 @@ dependencies {
     implementation project(":mapswithme-api")
 
     // Metadata Extractor, EXIF location extraction from images
-    implementation 'com.drewnoakes:metadata-extractor:2.10.1'
+    implementation 'com.drewnoakes:metadata-extractor:2.11.0'
 
     // Okhttp network access
-    implementation 'com.squareup.okhttp3:okhttp:3.9.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.9.1'
 
     // Play Services
     def playServicesVersion = '9.4.0'
@@ -333,7 +333,7 @@ dependencies {
     implementation 'com.jakewharton:process-phoenix:2.0.0'
 
     // RxJava
-    implementation "io.reactivex.rxjava2:rxjava:2.1.4"
+    implementation "io.reactivex.rxjava2:rxjava:2.1.8"
     implementation "io.reactivex.rxjava2:rxandroid:2.0.1"
 
     // Support Library. Appcompat
