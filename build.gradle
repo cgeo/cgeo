@@ -128,7 +128,14 @@ allprojects {
 						if (selection.candidate.group == 'org.apache.commons' && selection.candidate.module == 'commons-lang3' && selection.candidate.version.substring(0,1).toInteger()*10+selection.candidate.version.substring(2,3).toInteger() > 35) {
 							selection.reject("Apache Commons Lang3 3.6 or higher requires Java 7.")
 						}
-
+						// Apache Commons IO 2.6 requires Java7, https://commons.apache.org/proper/commons-io/upgradeto2_6.html
+						if (selection.candidate.group == 'commons-io' && selection.candidate.module == 'commons-io' && selection.candidate.version.substring(0,1).toInteger()*10+selection.candidate.version.substring(2,3).toInteger() > 25) {
+							selection.reject("Apache Commons IO 2.6 or higher requires Java 7.")
+						}
+						// Apache Commons Compress 1.15 requires Java7 Sun classes
+						if (selection.candidate.group == 'org.apache.commons' && selection.candidate.module == 'commons-compress' && selection.candidate.version.substring(0,1).toInteger()*100+selection.candidate.version.substring(2,4).toInteger() > 114) {
+							selection.reject("Apache Commons Compress 1.15 or higher requires Java 7.")
+						}
 					}
 				}
 			}
