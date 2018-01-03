@@ -351,6 +351,9 @@ final class OkapiClient {
         try {
             final Parameters params = new Parameters("log_uuid", logId);
             final File file = image.getFile();
+            if (file == null) {
+                return new ImageResult(StatusCode.LOGIMAGE_POST_ERROR, "");
+            }
             params.add("image", Base64.encodeToString(IOUtils.readFully(new FileInputStream(file), (int) file.length()), DEFAULT));
             params.add("caption", createImageCaption(image));
 

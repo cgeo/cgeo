@@ -173,7 +173,12 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
                     if (scaleImageResult != null) {
                         image = new Image.Builder().setUrl(scaleImageResult.getFilename()).build();
 
-                        if (maxImageUploadSize > 0 && image.getFile().length() > maxImageUploadSize) {
+                        final File imageFile = image.getFile();
+                        if (imageFile == null) {
+                            showToast(res.getString(R.string.err_select_logimage_failed));
+                            return;
+                        }
+                        if (maxImageUploadSize > 0 && imageFile.length() > maxImageUploadSize) {
                             showToast(res.getString(R.string.err_select_logimage_upload_size));
                             return;
                         }

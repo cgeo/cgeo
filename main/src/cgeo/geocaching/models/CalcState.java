@@ -67,7 +67,10 @@ public class CalcState implements Serializable {
     }
 
     private static <T extends JSONAble> ArrayList<T> createJSONAbleList(final JSONArray json, final JSONAbleFactory<T> factory) {
-        final int length = json != null ? json.length() : 0;
+        if (json == null) {
+            return new ArrayList<>();
+        }
+        final int length = json.length();
         final ArrayList<T> returnValue = new ArrayList<>(length);
 
         for (int i = 0; i < length; i++) {
