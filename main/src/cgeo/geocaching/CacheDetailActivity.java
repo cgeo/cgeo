@@ -81,7 +81,6 @@ import cgeo.geocaching.utils.UnknownTagsHandler;
 import cgeo.geocaching.utils.functions.Action1;
 
 import android.R.color;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
@@ -146,7 +145,6 @@ import java.util.Locale;
 import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.regex.Pattern;
-
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -603,11 +601,11 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         return onOptionsItemSelected(item);
     }
 
-    private abstract class WaypointModificationCommand extends AbstractCommand {
+    private static abstract class AbstractWaypointModificationCommand extends AbstractCommand {
         protected final Waypoint waypoint;
         protected final Geocache cache;
 
-        WaypointModificationCommand(final Activity context, final Geocache cache, final Waypoint waypoint) {
+        protected AbstractWaypointModificationCommand(final CacheDetailActivity context, final Geocache cache, final Waypoint waypoint) {
             super(context);
             this.cache = cache;
             this.waypoint = waypoint;
@@ -615,20 +613,20 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
         @Override
         protected void onFinished() {
-            notifyDataSetChanged();
+            ((CacheDetailActivity) getContext()).notifyDataSetChanged();
         }
 
         @Override
         protected void onFinishedUndo() {
-            notifyDataSetChanged();
+            ((CacheDetailActivity) getContext()).notifyDataSetChanged();
         }
     }
 
-    private final class ClearCoordinatesCommand extends WaypointModificationCommand {
+    private static final class ClearCoordinatesCommand extends AbstractWaypointModificationCommand {
 
         private Geopoint coords;
 
-        ClearCoordinatesCommand(final Activity context, final Geocache cache, final Waypoint waypoint) {
+        ClearCoordinatesCommand(final CacheDetailActivity context, final Geocache cache, final Waypoint waypoint) {
             super(context, cache, waypoint);
         }
 
