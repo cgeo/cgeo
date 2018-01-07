@@ -687,7 +687,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
             b = b.getNextButton();
         }
 
-        if (BuildConfig.DEBUG && b == null && i == buttons.size()) {
+        if (BuildConfig.DEBUG && b == null && i != buttons.size()) {
             throw new AssertionError("Number of ButtonData objects differ from the number of Buttons");
         }
 
