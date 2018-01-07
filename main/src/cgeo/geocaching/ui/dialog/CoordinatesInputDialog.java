@@ -607,11 +607,9 @@ public class CoordinatesInputDialog extends DialogFragment {
                 final CalculateState calculateState = (CalculateState) getActivity();
                 final CalcState theState = calculateState.fetchCalculatorState();
                 final CoordinatesCalculateDialog calculateDialog = CoordinatesCalculateDialog.getInstance(gp, theState);
-                // Assign this fragment as the target fragment so the calculate dialog can automatically close this one on completion
-                calculateDialog.setTargetFragment(CoordinatesInputDialog.this, 1);
                 calculateDialog.setCancelable(true);
                 calculateDialog.show(myContext.getSupportFragmentManager(), "wpcalcdialog");
-                CoordinatesInputDialog.this.dismiss();
+                dismiss();
             }
         }
     }

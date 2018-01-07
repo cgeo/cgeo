@@ -1356,8 +1356,6 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
             displayToast(R.string.warn_calculator_state_save);
         }
 
-        // Close the 'CoordinateInputDialog'
-        getTargetFragment().onActivityResult(0, 0, null);
         dismiss();
     }
 }
