@@ -1,13 +1,5 @@
 package cgeo.geocaching.apps;
 
-import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.enumerations.CacheSize;
-import cgeo.geocaching.enumerations.CacheType;
-import cgeo.geocaching.enumerations.WaypointType;
-import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.utils.Log;
-
 import android.content.Context;
 import android.os.Environment;
 import android.support.annotation.NonNull;
@@ -18,6 +10,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.enumerations.CacheSize;
+import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.enumerations.WaypointType;
+import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.utils.Log;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import locus.api.android.ActionDisplay;
 import locus.api.android.ActionDisplayPoints;
@@ -60,10 +59,10 @@ public abstract class AbstractLocusApp extends AbstractApp {
      * @param withCacheWaypoints
      *            Whether to give waypoints of caches to Locus or not
      */
-    protected static boolean showInLocus(final List<?> objectsToShow, final boolean withCacheWaypoints, final boolean export,
+    protected static void showInLocus(final List<?> objectsToShow, final boolean withCacheWaypoints, final boolean export,
             final Context context) {
         if (objectsToShow == null || objectsToShow.isEmpty()) {
-            return false;
+            return;
         }
 
         final boolean withCacheDetails = objectsToShow.size() < 200;
@@ -82,7 +81,7 @@ public abstract class AbstractLocusApp extends AbstractApp {
         }
 
         if (pd.getWaypoints().isEmpty()) {
-            return false;
+            return;
         }
 
         if (pd.getWaypoints().size() <= 1000) {
@@ -90,13 +89,13 @@ public abstract class AbstractLocusApp extends AbstractApp {
                 ActionDisplayPoints.sendPack(context, pd, export ? ActionDisplay.ExtraAction.IMPORT : ActionDisplay.ExtraAction.CENTER);
             } catch (final RequiredVersionMissingException e) {
                 Log.e("AbstractLocusApp.showInLocus: problem in sendPack", e);
-                return false;
+                return;
             }
         } else {
             final File externalDir = Environment.getExternalStorageDirectory();
             if (externalDir == null || !externalDir.exists()) {
                 Log.w("AbstractLocusApp.showInLocus: problem with obtain of External dir");
-                return false;
+                return;
             }
 
             String filePath = externalDir.getAbsolutePath();
@@ -112,11 +111,9 @@ public abstract class AbstractLocusApp extends AbstractApp {
                 ActionDisplayPoints.sendPacksFile(context, data, filePath, export ? ActionDisplay.ExtraAction.IMPORT : ActionDisplay.ExtraAction.CENTER);
             } catch (final RequiredVersionMissingException e) {
                 Log.e("AbstractLocusApp.showInLocus: problem in sendPacksFile", e);
-                return false;
+                return;
             }
         }
-
-        return true;
     }
 
     /**

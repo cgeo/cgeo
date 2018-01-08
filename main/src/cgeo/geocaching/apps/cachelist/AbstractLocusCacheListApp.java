@@ -5,13 +5,13 @@ import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.apps.AbstractLocusApp;
 import cgeo.geocaching.models.Geocache;
 
-import org.apache.commons.collections4.CollectionUtils;
-import android.support.annotation.NonNull;
-
 import android.app.Activity;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 
 import java.util.List;
+
+import org.apache.commons.collections4.CollectionUtils;
 
 abstract class AbstractLocusCacheListApp extends AbstractLocusApp implements CacheListApp {
 
@@ -28,14 +28,12 @@ abstract class AbstractLocusCacheListApp extends AbstractLocusApp implements Cac
      * @see AbstractLocusApp#showInLocus
      */
     @Override
-    public boolean invoke(@NonNull final List<Geocache> cacheList, @NonNull final Activity activity, @NonNull final SearchResult search) {
+    public void invoke(@NonNull final List<Geocache> cacheList, @NonNull final Activity activity, @NonNull final SearchResult search) {
         if (CollectionUtils.isEmpty(cacheList)) {
-            return false;
+            return;
         }
 
         showInLocus(cacheList, false, export, activity);
-
-        return true;
     }
 
 }

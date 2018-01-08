@@ -6,20 +6,19 @@ import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.apps.AbstractApp;
 import cgeo.geocaching.models.Geocache;
 
-import com.mapswithme.maps.api.MWMPoint;
-import com.mapswithme.maps.api.MWMResponse;
-import com.mapswithme.maps.api.MapsWithMeApi;
-
-import org.apache.commons.lang3.StringUtils;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-
 import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import java.util.List;
+
+import com.mapswithme.maps.api.MWMPoint;
+import com.mapswithme.maps.api.MWMResponse;
+import com.mapswithme.maps.api.MapsWithMeApi;
+import org.apache.commons.lang3.StringUtils;
 
 public class MapsMeCacheListApp extends AbstractApp implements CacheListApp {
 
@@ -28,14 +27,13 @@ public class MapsMeCacheListApp extends AbstractApp implements CacheListApp {
     }
 
     @Override
-    public boolean invoke(@NonNull final List<Geocache> caches, @NonNull final Activity activity, @NonNull final SearchResult search) {
+    public void invoke(@NonNull final List<Geocache> caches, @NonNull final Activity activity, @NonNull final SearchResult search) {
         final MWMPoint[] points = new MWMPoint[caches.size()];
         for (int i = 0; i < points.length; i++) {
             final Geocache geocache = caches.get(i);
             points[i] = new MWMPoint(geocache.getCoords().getLatitude(), geocache.getCoords().getLongitude(), geocache.getName(), geocache.getGeocode());
         }
         MapsWithMeApi.showPointsOnMap(activity, null, getPendingIntent(activity), points);
-        return true;
     }
 
     @Override

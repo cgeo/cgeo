@@ -32,8 +32,7 @@ class InternalCacheListMap extends AbstractApp implements CacheListApp {
     }
 
     @Override
-    public boolean invoke(@NonNull final List<Geocache> caches, @NonNull final Activity activity, @NonNull final SearchResult search) {
+    public void invoke(@NonNull final List<Geocache> caches, @NonNull final Activity activity, @NonNull final SearchResult search) {
         DefaultMap.startActivitySearch(activity, cls != null ? cls : Settings.getMapProvider().getMapClass(), search, null);
-        return true;
     }
 }

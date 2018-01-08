@@ -1,5 +1,10 @@
 package cgeo.geocaching.apps.navi;
 
+import android.content.Context;
+import android.support.annotation.NonNull;
+
+import org.apache.commons.lang3.StringUtils;
+
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.apps.AbstractApp;
@@ -9,11 +14,6 @@ import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.staticmaps.StaticMapsActivity_;
 import cgeo.geocaching.staticmaps.StaticMapsProvider;
 import cgeo.geocaching.storage.DataStore;
-
-import android.content.Context;
-import android.support.annotation.NonNull;
-
-import org.apache.commons.lang3.StringUtils;
 
 abstract class AbstractStaticMapsApp extends AbstractApp implements CacheNavigationApp, WaypointNavigationApp {
     protected AbstractStaticMapsApp(@NonNull final String name) {
@@ -38,12 +38,12 @@ abstract class AbstractStaticMapsApp extends AbstractApp implements CacheNavigat
         return false;
     }
 
-    protected static boolean invokeStaticMaps(final Context context, final Geocache cache, final Waypoint waypoint, final boolean download) {
+    protected static void invokeStaticMaps(final Context context, final Geocache cache, final Waypoint waypoint, final boolean download) {
         final ILogable logable = cache != null && !cache.getLists().isEmpty() ? cache : waypoint;
         // If the cache is not stored for offline, cache seems to be null and waypoint may be null too
         if (logable == null || logable.getGeocode() == null) {
             ActivityMixin.showToast(context, getString(R.string.err_detail_no_map_static));
-            return true;
+            return;
         }
         final String geocode = StringUtils.upperCase(logable.getGeocode());
 
@@ -52,6 +52,5 @@ abstract class AbstractStaticMapsApp extends AbstractApp implements CacheNavigat
             builder.waypointId(waypoint.getId());
         }
         builder.start();
-        return true;
     }
 }
