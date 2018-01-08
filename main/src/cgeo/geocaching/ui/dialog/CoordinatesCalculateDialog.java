@@ -1,24 +1,5 @@
 package cgeo.geocaching.ui.dialog;
 
-import static cgeo.geocaching.R.id.PlainFormat;
-import static cgeo.geocaching.R.id.coordTable;
-import static cgeo.geocaching.models.CalcState.ERROR_CHAR;
-import static cgeo.geocaching.ui.dialog.CoordinatesInputDialog.GEOPOINT_ARG;
-
-import cgeo.geocaching.BuildConfig;
-import cgeo.geocaching.EditWaypointActivity;
-import cgeo.geocaching.R;
-import cgeo.geocaching.activity.AbstractActivity;
-import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.location.GeopointFormatter;
-import cgeo.geocaching.models.CalcState;
-import cgeo.geocaching.sensors.Sensors;
-import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.ui.CalculateButton;
-import cgeo.geocaching.ui.CalculatorVariable;
-import cgeo.geocaching.ui.EditButton;
-import cgeo.geocaching.utils.CalculationUtils;
-
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
@@ -44,6 +25,9 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import org.apache.commons.lang3.SerializationUtils;
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -51,8 +35,24 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import butterknife.ButterKnife;
-import org.apache.commons.lang3.SerializationUtils;
-import org.apache.commons.lang3.StringUtils;
+import cgeo.geocaching.BuildConfig;
+import cgeo.geocaching.EditWaypointActivity;
+import cgeo.geocaching.R;
+import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.location.GeopointFormatter;
+import cgeo.geocaching.models.CalcState;
+import cgeo.geocaching.sensors.Sensors;
+import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.ui.CalculateButton;
+import cgeo.geocaching.ui.CalculatorVariable;
+import cgeo.geocaching.ui.EditButton;
+import cgeo.geocaching.utils.CalculationUtils;
+
+import static cgeo.geocaching.R.id.PlainFormat;
+import static cgeo.geocaching.R.id.coordTable;
+import static cgeo.geocaching.models.CalcState.ERROR_CHAR;
+import static cgeo.geocaching.ui.dialog.CoordinatesInputDialog.GEOPOINT_ARG;
 
 /**
  * Through out this implementation:
@@ -77,7 +77,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
     private static final String SYMBOL_SEC = "\"";
     private static final String SYMBOL_POINT = ".";
     private static final char BRACKET_OPENINGS[] = {'(', '[', '{'};
-    private static final char BRACKET_CLOSEINGS[] = {')', ']', '}'};
+    private static final char BRACKET_CLOSINGS[] = {')', ']', '}'};
 
     public static final String CALC_STATE = "calc_state";
 
@@ -137,7 +137,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
      * Class used for checking that a value is with in a given range.
      * This is used to check for upper-case an lower-case letters.
      */
-    private class CaseCheck {
+    private static class CaseCheck {
         final boolean useUpper;
 
         CaseCheck(final boolean upper) {
@@ -439,7 +439,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         notes = ButterKnife.findById(v, R.id.notes_text);
         notes.setText(((EditWaypointActivity) getActivity()).getUserNotes().getText());
 
-        latButtons = Arrays.asList(            bLatDeg[1], bLatDeg[0],
+        latButtons = Arrays.asList(bLatDeg[1], bLatDeg[0],
                                                bLatMin[1], bLatMin[0],
                                                bLatSec[1], bLatSec[0],
            bLatPnt[4], bLatPnt[3], bLatPnt[2], bLatPnt[1], bLatPnt[0]);
@@ -865,7 +865,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
 
                             if (ch == BRACKET_OPENINGS[bracketIndex]) {
                                 nestedBrackerCount++;
-                            } else if (ch == BRACKET_CLOSEINGS[bracketIndex]) {
+                            } else if (ch == BRACKET_CLOSINGS[bracketIndex]) {
                                 nestedBrackerCount--;
                             }
                         }
@@ -883,7 +883,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
                             // Reached end without finding enough closing brackets
                             throw new IllegalArgumentException("Unmatched opening bracket '" + returnValue.charAt(openIndex) + "' at index " + openIndex + " of \"" + returnValue + "\"/");
                         }
-                    } else if (ch == BRACKET_CLOSEINGS[bracketIndex]) {
+                    } else if (ch == BRACKET_CLOSINGS[bracketIndex]) {
                         // Negative nested bracket count.
                         throw new IllegalArgumentException("Unmatched closing bracket '" + ch + "' at index " + returnValueIndex + " of \"" + returnValue + "\"/");
                     }

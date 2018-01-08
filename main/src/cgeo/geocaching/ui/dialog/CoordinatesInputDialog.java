@@ -511,9 +511,8 @@ public class CoordinatesInputDialog extends DialogFragment {
         if (editText.length() < maxLength) {
             if ((editText.getGravity() & Gravity.HORIZONTAL_GRAVITY_MASK) == Gravity.RIGHT) {
                 return StringUtils.leftPad(editText.getText().toString(), maxLength, '0');
-            } else {
-                return StringUtils.rightPad(editText.getText().toString(), maxLength, '0');
             }
+            return StringUtils.rightPad(editText.getText().toString(), maxLength, '0');
         }
         return editText.getText().toString();
     }

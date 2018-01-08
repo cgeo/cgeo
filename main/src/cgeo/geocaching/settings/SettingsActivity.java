@@ -328,6 +328,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
                 return false;
             }
 
+            @SuppressWarnings("null")
             @NonNull
             @Override
             public View getView(final int position, @Nullable final View convertView, @NonNull final ViewGroup parent) {
