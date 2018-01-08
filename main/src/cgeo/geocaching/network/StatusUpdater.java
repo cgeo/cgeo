@@ -5,8 +5,6 @@ import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Version;
 
 import android.app.Application;
-import android.os.Build.VERSION;
-import android.os.Build.VERSION_CODES;
 import android.support.annotation.NonNull;
 
 import java.util.Locale;
@@ -32,9 +30,6 @@ public class StatusUpdater {
 
         public static final Status NO_STATUS = new Status(null, null, null, null);
 
-        static final Status CLOSEOUT_STATUS =
-                new Status("", "status_closeout_warning", "attribute_abandonedbuilding", "http://faq.cgeo.org/#legacy");
-
         public final String message;
         public final String messageId;
         public final String icon;
@@ -59,7 +54,7 @@ public class StatusUpdater {
             if (upToDate != null && upToDate.message != null) {
                 return upToDate;
             }
-            return VERSION.SDK_INT < VERSION_CODES.ICE_CREAM_SANDWICH ? CLOSEOUT_STATUS : NO_STATUS;
+            return NO_STATUS;
         }
     }
 
@@ -82,7 +77,7 @@ public class StatusUpdater {
                         }, new Consumer<Throwable>() {
                             @Override
                             public void accept(final Throwable throwable) {
-                                // Error has already been signalled during the request
+                                // Error has already been signaled during the request
                             }
                         });
             }
