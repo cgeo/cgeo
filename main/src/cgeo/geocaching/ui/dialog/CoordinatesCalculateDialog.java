@@ -1,5 +1,24 @@
 package cgeo.geocaching.ui.dialog;
 
+import static cgeo.geocaching.R.id.PlainFormat;
+import static cgeo.geocaching.R.id.coordTable;
+import static cgeo.geocaching.models.CalcState.ERROR_CHAR;
+import static cgeo.geocaching.ui.dialog.CoordinatesInputDialog.GEOPOINT_ARG;
+
+import cgeo.geocaching.BuildConfig;
+import cgeo.geocaching.EditWaypointActivity;
+import cgeo.geocaching.R;
+import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.location.GeopointFormatter;
+import cgeo.geocaching.models.CalcState;
+import cgeo.geocaching.sensors.Sensors;
+import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.ui.CalculateButton;
+import cgeo.geocaching.ui.CalculatorVariable;
+import cgeo.geocaching.ui.EditButton;
+import cgeo.geocaching.utils.CalculationUtils;
+
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
@@ -25,34 +44,16 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import org.apache.commons.lang3.SerializationUtils;
-import org.apache.commons.lang3.StringUtils;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import butterknife.ButterKnife;
-import cgeo.geocaching.BuildConfig;
-import cgeo.geocaching.EditWaypointActivity;
-import cgeo.geocaching.R;
-import cgeo.geocaching.activity.AbstractActivity;
-import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.location.GeopointFormatter;
-import cgeo.geocaching.models.CalcState;
-import cgeo.geocaching.sensors.Sensors;
-import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.ui.CalculateButton;
-import cgeo.geocaching.ui.CalculatorVariable;
-import cgeo.geocaching.ui.EditButton;
-import cgeo.geocaching.utils.CalculationUtils;
 
-import static cgeo.geocaching.R.id.PlainFormat;
-import static cgeo.geocaching.R.id.coordTable;
-import static cgeo.geocaching.models.CalcState.ERROR_CHAR;
-import static cgeo.geocaching.ui.dialog.CoordinatesInputDialog.GEOPOINT_ARG;
+import butterknife.ButterKnife;
+import org.apache.commons.lang3.SerializationUtils;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Through out this implementation:
@@ -183,10 +184,10 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
 
             if (areCurrentCoordinatesValid()) {
                 ((CoordinatesInputDialog.CoordinateUpdate) getActivity()).updateCoordinates(gp);
-                close();
             } else {
                 ((CoordinatesInputDialog.CoordinateUpdate) getActivity()).updateCoordinates(null);
             }
+            close();
         }
     }
 
@@ -667,10 +668,6 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
     private void setSavedState(final CalcState savedState) {
         this.savedState = savedState;
         stateSaved = true;
-
-        if (doneButton != null) {
-            doneButton.setImageResource(R.drawable.ic_menu_saved);
-        }
     }
 
     private void loadCalcState() {
@@ -1051,11 +1048,9 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         final int validColour = ContextCompat.getColor(getContext(), lightSkin ? R.color.text_light : R.color.text_dark);
         final int invalidColour = ContextCompat.getColor(getContext(), lightSkin ? R.color.text_hint_light : R.color.text_hint_dark);
         final int resultColour;
-        final int doneIcon;
 
         if (areCurrentCoordinatesValid()) {
             resultColour = validColour;
-            doneIcon = R.drawable.ic_menu_done_holo_dark;
 
             final String lat;
             final String lon;
@@ -1088,13 +1083,11 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
             lonFormatted = formatCoordinateString(lon, lonLeadingZerosAdded, invalidColour);
         } else {
             resultColour = invalidColour;
-            doneIcon = stateSaved ? R.drawable.ic_menu_saved : R.drawable.ic_menu_save;
 
             latFormatted = new SpannableString(getLatResult());
             lonFormatted = new SpannableString(getLonResult());
         }
 
-        doneButton.setImageResource(doneIcon);
         tLatResult.setText(latFormatted);
         tLonResult.setText(lonFormatted);
         tLatResult.setTextColor(resultColour);
