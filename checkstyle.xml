@@ -2,11 +2,6 @@
 <!DOCTYPE module PUBLIC "-//Puppy Crawl//DTD Check Configuration 1.2//EN" "http://www.puppycrawl.com/dtds/configuration_1_2.dtd">
 
 <module name="Checker">
-  <module name="SuppressWithNearbyCommentFilter">
-    <property name="commentFormat" value="CHECKSTYLE IGNORE (\w+) FOR NEXT (\d+) LINE"/>
-    <property name="checkFormat" value="$1"/>
-    <property name="influenceFormat" value="$2"/>
-  </module>
   <module name="SuppressionFilter">
     <property name="file" value="suppressions.xml"/>
   </module>

@@ -46,6 +46,7 @@ Here are instructions on how to setup the eclipse environment and clone the repo
 - Install Android Studio from https://developer.android.com/sdk/index.html
 - On first start, choose to clone a project from version control, and choose github afterwards. Supply your credentials.
 - Android Studio should detect that gradle is used for building cgeo. If it complains that this is not a gradle project, then close the project. Choose "Import project" and select the `build.gradle` or `settings.gradle` in the root directory of the git repository.
+- c:geo uses [Checkstyle](http://checkstyle.sourceforge.net/) to verify that coding standards are followed throughout the project. To see violations directly in Android Studio you need to install the `CheckStyle-IDEA` Plugin and configure the `checkstyle.xml` file available in the project root directory.
 
 ## Build
 
