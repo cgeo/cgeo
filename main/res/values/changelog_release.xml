@@ -2,10 +2,15 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-    <b>2017.12.17</b>\n
-    · Fix: GC waypoint type recognition\n
-    · Fix: GC Search website change\n
-    · Fix: Save calcState on rotate\n
+    <b>Next beta version:</b>\n
+    · New: Waypoint support for empty coordinates\n
+    · New: Store all or only unsaved caches from map\n
+    · New: Confirm discarding unsaved waypoint changes\n
+    · New: D/T rating in log signature\n
+    · New: PQ import in cachelist menu\n
+    · New: Waypoint notes streamlined\n
+    · New: Treat locked caches as archived\n
+    · Fix: lists sometimes forget number of caches loaded\n
     \n
 </string>
 </resources>

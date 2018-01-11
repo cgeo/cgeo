@@ -2,15 +2,5 @@
 <resources>
   <!-- changelog for the master branch -->
   <string name="changelog_master" translatable="false">
-    <b>Next feature release:</b>\n
-    · New: Waypoint support for empty coordinates\n
-    · New: Store all or only unsaved caches from map\n
-    · New: Confirm discarding unsaved waypoint changes\n
-    · New: D/T rating in log signature\n
-    · New: PQ import in cachelist menu\n
-    · New: Waypoint notes streamlined\n
-    · New: Treat locked caches ar archived\n
-    · Fix: lists sometimes forget number of caches loaded\n
-    \n
   </string>
 </resources>
