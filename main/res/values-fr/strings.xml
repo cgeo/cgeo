@@ -239,6 +239,7 @@
   <string name="info_log_post_retry">Réessayer</string>
   <string name="info_log_post_save">Sauver hors-ligne</string>
   <string name="info_log_cleared">La visite a été effacée.</string>
+  <string name="info_waypoint_coordinates_cleared">Coordonnées effacées.</string>
   <string name="info_log_type_changed">Le type de visite a été modifié !</string>
   <string name="info_select_logimage_cancelled">La sélection ou l\'acquisition de l\'image a été annulée.</string>
   <string name="info_stored_image">Nouvelle image sauvée dans :</string>
@@ -247,6 +248,8 @@
   <string name="warn_calculator_state_save">Veillez à enregistrer l\'étape si vous souhaitez conserver l\'état du calculateur.</string>
   <string name="err_trackable_log_not_anonymous">S\'identifier sur %1$s depuis c:geo ne peut se faire anonymement. Souhaitez-vous ouvrir les paramètres et remplir vos informations d\'identification pour %2$s ?</string>
   <string name="err_trackable_no_preference_activity">Désolé, impossible de trouver l\'écran de préférences.</string>
+  <string name="confirm_unsaved_changes_title">Modifications non enregistrées</string>
+  <string name="confirm_discard_wp_changes">Annuler les étapes non enregistrées ?</string>
   <string name="warn_discard_changes">Étape non enregistrée, vos modifications seront perdues !</string>
   <string name="err_request_popup_info">c:geo n\'a pas pu récupérer le contenu du popup de la cache.</string>
   <!-- location service -->
@@ -290,6 +293,8 @@
     <item quantity="other">%d minutes</item>
   </plurals>
   <string name="caches_store_offline">Enregistrer localement</string>
+  <string name="caches_store_all">Tout enregistrer</string>
+  <string name="caches_store_unsaved">Enregistrer les nouvelles</string>
   <string name="caches_store_selected">Enregistrer la sélection</string>
   <string name="caches_history">Historique</string>
   <string name="caches_on_map">Afficher sur la carte</string>
@@ -510,6 +515,8 @@
   <string name="init_signature_template_number">Numéro de visite</string>
   <string name="init_signature_template_owner">Propriétaire</string>
   <string name="init_signature_template_name">Nom de la cache</string>
+  <string name="init_signature_template_difficulty">Difficulté</string>
+  <string name="init_signature_template_terrain">Terrain</string>
   <string name="init_signature_template_url">URL</string>
   <string name="init_signature_template_log">Texte de la visite</string>
   <string name="init_ratingwanted">Vote GCvote.com</string>
@@ -954,6 +961,7 @@
   <string name="waypoint_name">Nom</string>
   <string name="waypoint_edit">Modifier</string>
   <string name="waypoint_copy_coordinates">Copier les coordonnées</string>
+  <string name="waypoint_clear_coordinates">Effacer les coordonnées</string>
   <string name="waypoint_delete">Supprimer</string>
   <string name="waypoint_edit_title">Modifier l\'étape</string>
   <string name="waypoint_add_title">Ajouter une étape</string>
@@ -1402,7 +1410,7 @@
   <string name="status_new_rc" tools:ignore="UnusedResources">Une nouvelle version candidate est disponible.\nAppuyez ici pour l\'installer.</string>
   <string name="status_geocaching_change" tools:ignore="UnusedResources">Des changements récents sur Geocaching.com ont cassé c:geo.\nNous sommes en train de corriger. Revenez plus tard.</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Des changements récents sur Geocaching.com ont cassé la carte temps-réel.\nNous sommes en train de corriger. Revenez plus tard.</string>
-  <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Maintenant en cours sur geocaching.com.\nIl se peut que vous rencontriez des problèmes.</string>
+  <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Maintenance en cours sur geocaching.com.\nIl se peut que vous rencontriez des problèmes.</string>
   <string name="status_closeout_warning" tools:ignore="UnusedResources">Vous utilisez une version d\'Android plus ancienne que 4.0. Les futures versions de c:geo pourraient ne pas être disponibles pour votre appareil.</string>
   <!-- text-to-speech for compass view -->
   <string name="tts_service">Boussole parlante</string>

@@ -239,6 +239,7 @@
   <string name="info_log_post_retry">Probeer opnieuw</string>
   <string name="info_log_post_save">Off line opslaan</string>
   <string name="info_log_cleared">Log is gewist.</string>
+  <string name="info_waypoint_coordinates_cleared">Coördinaten gewist.</string>
   <string name="info_log_type_changed">Type log is gewijzigd!</string>
   <string name="info_select_logimage_cancelled">Foto selectie of opname is geannuleerd.</string>
   <string name="info_stored_image">Nieuwe foto opgeslagen in:</string>
@@ -247,7 +248,9 @@
   <string name="warn_calculator_state_save">Zorg dat je een waypoint opslaat als je de staat van de rekenmachine wil behouden.</string>
   <string name="err_trackable_log_not_anonymous">Loggen van %1$s in c:geo kan niet anoniem worden gedaan. Wilt u de instellingen openen om uw referenties van %2$s in te vullen?</string>
   <string name="err_trackable_no_preference_activity">Sorry, kan geen geschikt voorkeuren scherm vinden.</string>
-  <string name="warn_discard_changes">Niet opgeslagen waypoint wijzigingen werden verwijderd!</string>
+  <string name="confirm_unsaved_changes_title">Niet opgeslagen wijzigingen</string>
+  <string name="confirm_discard_wp_changes">Waypoint wijzigingen niet opslaan?</string>
+  <string name="warn_discard_changes">Waypoint wijzigingen zijn niet opgeslagen!</string>
   <string name="err_request_popup_info">Het is c:geo niet gelukt om de cache popup info te verkrijgen.</string>
   <!-- location service -->
   <string name="loc_last">Laatst bekende</string>
@@ -290,6 +293,8 @@
     <item quantity="other">%d minuten</item>
   </plurals>
   <string name="caches_store_offline">Opslaan voor Offline gebruik</string>
+  <string name="caches_store_all">Alle opslaan</string>
+  <string name="caches_store_unsaved">Niet opgeslagen opslaan</string>
   <string name="caches_store_selected">Geselecteerden opslaan</string>
   <string name="caches_history">Geschiedenis</string>
   <string name="caches_on_map">Toon op kaart</string>
@@ -510,6 +515,8 @@
   <string name="init_signature_template_number">Nummer</string>
   <string name="init_signature_template_owner">Eigenaar</string>
   <string name="init_signature_template_name">Naam</string>
+  <string name="init_signature_template_difficulty">Moeilijkheid</string>
+  <string name="init_signature_template_terrain">Terrein</string>
   <string name="init_signature_template_url">URL</string>
   <string name="init_signature_template_log">Log tekst</string>
   <string name="init_ratingwanted">GCvote.com waardering</string>
@@ -822,7 +829,7 @@
   <string name="cache_menu_sygic_drive">Sygic (rijden)</string>
   <string name="cache_menu_radar">Radar</string>
   <string name="cache_menu_map">Toon op kaart</string>
-  <string name="cache_menu_mfbeta">Mapsforge Bèta</string>
+  <string name="cache_menu_mfbeta">Mapsforge Beta</string>
   <string name="cache_menu_map_static">Statische kaarten</string>
   <string name="cache_menu_download_map_static">Download statische kaarten</string>
   <string name="cache_menu_rmaps">Rmaps</string>
@@ -954,6 +961,7 @@
   <string name="waypoint_name">Naam</string>
   <string name="waypoint_edit">Bewerken</string>
   <string name="waypoint_copy_coordinates">Coördinaten kopiëren</string>
+  <string name="waypoint_clear_coordinates">Coördinaten wissen</string>
   <string name="waypoint_delete">Verwijderen</string>
   <string name="waypoint_edit_title">Waypoint bewerken</string>
   <string name="waypoint_add_title">Waypoint toevoegen</string>
@@ -1116,7 +1124,7 @@
   <string name="helper_sendtocgeo_description">Verzenden naar c:geo is een browserextensie <strong>voor uw PC</strong>. Tijdens het browsen op geocaching.com, kunt u caches verzenden naar uw smartphone met een klik direct in de browser.</string>
   <string name="helper_locus_title">Locus</string>
   <string name="helper_locus_description">Outdoor navigatie app voor uw telefoon of Tablet. Topo kaarten offline bekijken, uw route vastleggen, geocaches zoeken, gebruik een stem gids en meer.</string>
-  <string name="helper_gpsstatus_title">GPS Status &amp; Toolbox</string>
+  <string name="helper_gpsstatus_title">GPS-Status &amp; Toolbox</string>
   <string name="helper_gpsstatus_description">De radar van deze applicatie kan gebruikt worden samen met c:geo. Het bied ook vele andere GPS gerelateerde informatie.</string>
   <string name="helper_bluetoothgps_title">Bluetooth GPS</string>
   <string name="helper_bluetoothgps_description">Maakt het mogelijk om een externe GPS ontvanger te gebruiken voor betere ontvangst, betere locatiebepaling en kan gebruik van de telefoonbatterij verminderen.</string>
@@ -1521,4 +1529,6 @@
   <string name="list_confirm_debug_message">De debug-modus zorgt voor instabiliteit! Wil je de debug-modus uitschakelen?</string>
   <string name="err_select_logimage_upload_size">Afbeelding te groot, selecteer een kleinere schaal.</string>
   <string name="err_logimage_caption_required">Een bijschrift is vereist voor de afbeelding</string>
+  <string name="waypoint_latitude_null">N/Z --° --.---</string>
+  <string name="waypoint_longitude_null">O/W --° --.---</string>
 </resources>

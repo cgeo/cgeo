@@ -239,6 +239,7 @@
   <string name="info_log_post_retry">Reintentar</string>
   <string name="info_log_post_save">Guardar sin conexión</string>
   <string name="info_log_cleared">Registro borrado.</string>
+  <string name="info_waypoint_coordinates_cleared">Se limpiaron las coordenadas.</string>
   <string name="info_log_type_changed">¡El tipo de registro ha sido cambiado!</string>
   <string name="info_select_logimage_cancelled">La selección de imagen  o captura ha sido cancelada.</string>
   <string name="info_stored_image">Nueva imagen guardada en:</string>
@@ -247,6 +248,8 @@
   <string name="warn_calculator_state_save">Asegúrate de guardar el waypoint si quieres conservar el estado de la calculadora.</string>
   <string name="err_trackable_log_not_anonymous">No puedes registrar %1$s desde c:geo de manera anónima. ¿Quieres abrir los ajustes para rellenar tu identificación desde %2$s?</string>
   <string name="err_trackable_no_preference_activity">Disculpa, no se ha encontrado una pantalla de preferencia adecuada.</string>
+  <string name="confirm_unsaved_changes_title">Cambios sin guardar</string>
+  <string name="confirm_discard_wp_changes">¿Descartar los cambios en waypoints sin guardar?</string>
   <string name="warn_discard_changes">¡Cambios no guardados en el waypoint descartados!</string>
   <string name="err_request_popup_info">c:geo no ha podido obtener la información emergente del caché.</string>
   <!-- location service -->
@@ -290,6 +293,8 @@
     <item quantity="other">%d minutos</item>
   </plurals>
   <string name="caches_store_offline">Guardar sin conexión</string>
+  <string name="caches_store_all">Guardar todos</string>
+  <string name="caches_store_unsaved">Guardar los no guardados</string>
   <string name="caches_store_selected">Guardar seleccionados</string>
   <string name="caches_history">Historial</string>
   <string name="caches_on_map">Ver en mapa</string>
@@ -504,6 +509,8 @@
   <string name="init_signature_template_number">Número</string>
   <string name="init_signature_template_owner">Propietario</string>
   <string name="init_signature_template_name">Nombre</string>
+  <string name="init_signature_template_difficulty">Dificultad</string>
+  <string name="init_signature_template_terrain">Terreno</string>
   <string name="init_signature_template_url">URL</string>
   <string name="init_signature_template_log">Texto de registro</string>
   <string name="init_ratingwanted">Puntuación de GCvote</string>
@@ -942,6 +949,7 @@
   <string name="waypoint_name">Nombre</string>
   <string name="waypoint_edit">Editar</string>
   <string name="waypoint_copy_coordinates">Copiar coordenadas</string>
+  <string name="waypoint_clear_coordinates">Limpiar coordenadas</string>
   <string name="waypoint_delete">Borrar</string>
   <string name="waypoint_edit_title">Editar waypoint</string>
   <string name="waypoint_add_title">Añadir waypoint</string>

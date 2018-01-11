@@ -239,6 +239,7 @@
   <string name="info_log_post_retry">Försök igen</string>
   <string name="info_log_post_save">Spara offline</string>
   <string name="info_log_cleared">Loggen har rensats.</string>
+  <string name="info_waypoint_coordinates_cleared">Koordinater rensade.</string>
   <string name="info_log_type_changed">Typen av logg har ändrats!</string>
   <string name="info_select_logimage_cancelled">Val av bild avbröts.</string>
   <string name="info_stored_image">Ny bild sparad som:</string>
@@ -247,6 +248,8 @@
   <string name="warn_calculator_state_save">Glöm inte att spara punkten om du vill behålla kalkylatorläget.</string>
   <string name="err_trackable_log_not_anonymous">Loggning av %1$s från c:geo kan inte göras anonymt. Vill du öppna inställningarna för att fylla i din inloggningsinformation från %2$s?</string>
   <string name="err_trackable_no_preference_activity">Tyvärr kan inte en lämplig inställningsskärm hittas.</string>
+  <string name="confirm_unsaved_changes_title">Osparade ändringar</string>
+  <string name="confirm_discard_wp_changes">Ignorera osparade ändringar för punkten?</string>
   <string name="warn_discard_changes">Ej sparade ändringar av punkt slängdes!</string>
   <string name="err_request_popup_info">c:geo kunde inte hämta cachens popup-info.</string>
   <!-- location service -->
@@ -290,6 +293,8 @@
     <item quantity="other">%d minuter</item>
   </plurals>
   <string name="caches_store_offline">Spara för Offline</string>
+  <string name="caches_store_all">Spara alla</string>
+  <string name="caches_store_unsaved">Spara osparade</string>
   <string name="caches_store_selected">Spara valda</string>
   <string name="caches_history">Senast hittade cacher</string>
   <string name="caches_on_map">Visa på karta</string>
@@ -510,6 +515,8 @@
   <string name="init_signature_template_number">Nummer</string>
   <string name="init_signature_template_owner">Ägare</string>
   <string name="init_signature_template_name">Namn</string>
+  <string name="init_signature_template_difficulty">Svårighet</string>
+  <string name="init_signature_template_terrain">Terräng</string>
   <string name="init_signature_template_url">URL</string>
   <string name="init_signature_template_log">Loggtext</string>
   <string name="init_ratingwanted">GCvote.com</string>
@@ -676,7 +683,7 @@
   <string name="auth_authorize">Koppla c:geo mot Twitter</string>
   <string name="auth_check">Kolla autentisering</string>
   <string name="auth_check_again">Kolla autentisering igen</string>
-  <string name="auth_start">Påbörja koppling mot Twitter</string>
+  <string name="auth_start">Kolla autentisering</string>
   <string name="auth_again">Koppla mot Twitter igen</string>
   <string name="auth_register">Skapa ett konto</string>
   <string name="auth_connected">Ansluten</string>
@@ -954,6 +961,7 @@
   <string name="waypoint_name">Namn</string>
   <string name="waypoint_edit">Redigera</string>
   <string name="waypoint_copy_coordinates">Kopiera koordinater</string>
+  <string name="waypoint_clear_coordinates">Rensa koordinater</string>
   <string name="waypoint_delete">Ta bort</string>
   <string name="waypoint_edit_title">Redigera punkt</string>
   <string name="waypoint_add_title">Lägg till punkt</string>
@@ -1521,4 +1529,6 @@
   <string name="list_confirm_debug_message">Debug-läge kan orsaka instabilitet! Vill du återgå till normalläge?</string>
   <string name="err_select_logimage_upload_size">Bilden är för stor, vänligen välj en mindre skala.</string>
   <string name="err_logimage_caption_required">En text krävs till bilden</string>
+  <string name="waypoint_latitude_null">N/S --° --.---</string>
+  <string name="waypoint_longitude_null">E/W--°--.---</string>
 </resources>

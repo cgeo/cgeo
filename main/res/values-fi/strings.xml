@@ -794,7 +794,7 @@
   <string name="cache_menu_navigation_drive_select_target">Kätkö vai pysäköintialue?</string>
   <string name="cache_menu_navigation_walk">Navigointi (kävely)</string>
   <string name="cache_menu_navigation_transit">Navigointi (liikenteessä)</string>
-  <string name="cache_menu_navigation_bike">Navigointi (Pyöräily)</string>
+  <string name="cache_menu_navigation_bike">Navigointi (pyöräily)</string>
   <string name="cache_menu_maps_directions">Google Maps ajo-ohjeet</string>
   <string name="cache_menu_osmand">OsmAnd</string>
   <string name="cache_menu_sygic_walk">Sygic (kävellessä)</string>

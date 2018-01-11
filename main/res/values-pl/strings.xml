@@ -239,6 +239,7 @@
   <string name="info_log_post_retry">Spróbuj ponownie</string>
   <string name="info_log_post_save">Zapisz offline</string>
   <string name="info_log_cleared">Wpis został usunięty.</string>
+  <string name="info_waypoint_coordinates_cleared">Współrzędne wyczyszczone.</string>
   <string name="info_log_type_changed">Rodzaj wpisu w dzienniku został zmieniony!</string>
   <string name="info_select_logimage_cancelled">Wybór obrazu został anulowany.</string>
   <string name="info_stored_image">Nowy obraz zapisany w:</string>
@@ -247,6 +248,8 @@
   <string name="warn_calculator_state_save">Pamiętaj aby zapisać punkt orientacyjny jeśli chcesz zachować stan kalkulatora.</string>
   <string name="err_trackable_log_not_anonymous">Zalogowanie %1$s poprzez c:geo nie może być wykonane anonimowo. Czy chcesz otworzyć ustawienia, aby uzupełnić swoje dane do %2$s?</string>
   <string name="err_trackable_no_preference_activity">Przepraszamy, brak odpowiedniego ekranu preferencji.</string>
+  <string name="confirm_unsaved_changes_title">Niezapisane zmiany</string>
+  <string name="confirm_discard_wp_changes">Odrzucić niezapisane zmiany punktu nawigacyjnego?</string>
   <string name="warn_discard_changes">Niezapisane zmiany punktu nawigacji zostały odrzucone!</string>
   <string name="err_request_popup_info">c:geo nie mogło wyświetlić wyskakującego okienka z informacjami o skrzynce.</string>
   <!-- location service -->
@@ -291,6 +294,8 @@
     <item quantity="other">%d minut</item>
   </plurals>
   <string name="caches_store_offline">Zapisz offline</string>
+  <string name="caches_store_all">Zapisz wszystkie</string>
+  <string name="caches_store_unsaved">Zapisz niezapisane</string>
   <string name="caches_store_selected">Zapisz wybrane</string>
   <string name="caches_history">Historia</string>
   <string name="caches_on_map">Pokaż na mapie</string>
@@ -510,6 +515,8 @@
   <string name="init_signature_template_number">Numer</string>
   <string name="init_signature_template_owner">Właściciel</string>
   <string name="init_signature_template_name">Nazwa</string>
+  <string name="init_signature_template_difficulty">Trudność</string>
+  <string name="init_signature_template_terrain">Teren</string>
   <string name="init_signature_template_url">URL</string>
   <string name="init_signature_template_log">Wpis</string>
   <string name="init_ratingwanted">Załaduj ocenę skrzynki z GCvote.com</string>
@@ -956,6 +963,7 @@
   <string name="waypoint_name">Nazwa</string>
   <string name="waypoint_edit">Edytuj</string>
   <string name="waypoint_copy_coordinates">Kopiuj współrzędne</string>
+  <string name="waypoint_clear_coordinates">Wyczyść współrzędne</string>
   <string name="waypoint_delete">Usuń</string>
   <string name="waypoint_edit_title">Edytuj punkt nawigacji</string>
   <string name="waypoint_add_title">Dodaj punkt nawigacji</string>

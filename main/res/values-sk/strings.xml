@@ -239,6 +239,7 @@
   <string name="info_log_post_retry">Opakovať</string>
   <string name="info_log_post_save">Uložiť offline</string>
   <string name="info_log_cleared">Log bol vyprázdnený.</string>
+  <string name="info_waypoint_coordinates_cleared">Súradnice vymazané.</string>
   <string name="info_log_type_changed">Typ logu bol zmenený!</string>
   <string name="info_select_logimage_cancelled">Výber obrázka alebo fotenie bolo zrušené.</string>
   <string name="info_stored_image">Nový obrázok uložený do:</string>
@@ -247,6 +248,8 @@
   <string name="warn_calculator_state_save">Nezabudnite uložiť bod trasy, ak chcete zachovať stav kalkulačky.</string>
   <string name="err_trackable_log_not_anonymous">V c:geo nie je možné zalogovať %1$s anonymne. Chcete otvoriť nastavenia a vyplniť prihlasovacie údaje pre %2$s?</string>
   <string name="err_trackable_no_preference_activity">Prepáčte, c:geo nedokáže nájsť príslušnú obrazovku s nastaveniami.</string>
+  <string name="confirm_unsaved_changes_title">Neuložené zmeny</string>
+  <string name="confirm_discard_wp_changes">Zahodiť neuložené zmeny bodov trasy?</string>
   <string name="warn_discard_changes">Neuložené zmeny bodu trasy boli zrušené!</string>
   <string name="err_request_popup_info">c:geo sa nepodarilo otvoriť informácie o skrýši.</string>
   <!-- location service -->
@@ -291,6 +294,8 @@
     <item quantity="other">%d minút</item>
   </plurals>
   <string name="caches_store_offline">Uložiť offline</string>
+  <string name="caches_store_all">Uložiť všetko</string>
+  <string name="caches_store_unsaved">Uložiť neuložené</string>
   <string name="caches_store_selected">Uložiť vybraté</string>
   <string name="caches_history">História</string>
   <string name="caches_on_map">Zobraziť na mape</string>
@@ -513,6 +518,8 @@
   <string name="init_signature_template_number">Číslo nálezu</string>
   <string name="init_signature_template_owner">Vlastník</string>
   <string name="init_signature_template_name">Meno</string>
+  <string name="init_signature_template_difficulty">Náročnosť</string>
+  <string name="init_signature_template_terrain">Terén</string>
   <string name="init_signature_template_url">URL</string>
   <string name="init_signature_template_log">Pozícia pre zápis do logu</string>
   <string name="init_ratingwanted">GCvote hodnotenie</string>
@@ -622,7 +629,7 @@
   <string name="init_low_power_note">Režim nízkeho výkonu sa vyhýba používaniu GPS a gyroskopu, keď nie je nutná vysoká presnosť geolokácie, za cenu dlhšieho času pre učenie polohy.</string>
   <string name="init_low_power_mode">Aktivácia režimu nízkej spotreby</string>
   <string name="init_force_orientation_sensor_title">Senzor orientácie</string>
-  <string name="init_force_orientation_sensor_note">Na niektorých zariadeniach se bežný senzor otáčania chová nevypočítateľne a poskytuje zlý smer. V takom prípade môže alternatívny senzor (senzor orientácie) poskytnúť lepšie výsledky.</string>
+  <string name="init_force_orientation_sensor_note">Na niektorých zariadeniach sa bežný senzor otáčania chová nevypočítateľne a poskytuje zlý smer. V takom prípade môže alternatívny senzor (senzor orientácie) poskytnúť lepšie výsledky.</string>
   <string name="init_force_orientation_sensor">Vynútiť použitie senzoru orientácie</string>
   <string name="init_create_memory_dump">Vytvorenie výpisu pamäte</string>
   <string name="init_memory_dump">Výpis pamäte</string>
@@ -963,6 +970,7 @@
   <string name="waypoint_name">Názov</string>
   <string name="waypoint_edit">Upraviť</string>
   <string name="waypoint_copy_coordinates">Kopírovať súradnice</string>
+  <string name="waypoint_clear_coordinates">Vymazať súradnice</string>
   <string name="waypoint_delete">Zmazať</string>
   <string name="waypoint_edit_title">Úprava bodu trasy</string>
   <string name="waypoint_add_title">Nový bod trasy</string>

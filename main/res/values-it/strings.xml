@@ -239,6 +239,7 @@
   <string name="info_log_post_retry">Riprova</string>
   <string name="info_log_post_save">Salva offline</string>
   <string name="info_log_cleared">Il log è stato azzerato.</string>
+  <string name="info_waypoint_coordinates_cleared">Coordinate eliminate.</string>
   <string name="info_log_type_changed">Il tipo di log è cambiato!</string>
   <string name="info_select_logimage_cancelled">Selezione o cattura immagine annulata.</string>
   <string name="info_stored_image">Nuova immagine salvata su:</string>
@@ -247,6 +248,8 @@
   <string name="warn_calculator_state_save">Assicurarsi di salvare il waypoint se si desidera mantenere lo stato della calcolatrice.</string>
   <string name="err_trackable_log_not_anonymous">Log di %1$s da c:geo non può essere fatto in forma anonima. Si desidera aprire le impostazioni per completare le credenziali da %2$s?</string>
   <string name="err_trackable_no_preference_activity">La pagina di configurazione del servizio associato al trackable non è disponibile.</string>
+  <string name="confirm_unsaved_changes_title">Modifiche non salvate</string>
+  <string name="confirm_discard_wp_changes">Ignorare i waypoint non salvati?</string>
   <string name="warn_discard_changes">Le modifiche non salvate ai waypoint vengono annullate!</string>
   <string name="err_request_popup_info">c:geo non riesce ad ottenere le informazioni popup del cache.</string>
   <!-- location service -->
@@ -290,6 +293,8 @@
     <item quantity="other">%d minuti</item>
   </plurals>
   <string name="caches_store_offline">Salva per Offline</string>
+  <string name="caches_store_all">Archiviare tutto</string>
+  <string name="caches_store_unsaved">Archiviare non salvati</string>
   <string name="caches_store_selected">Salva selezionati</string>
   <string name="caches_history">Cronologia</string>
   <string name="caches_on_map">Visualizza sulla mappa</string>
@@ -460,7 +465,6 @@
   <string name="settings_activate_oc_pl">Attiva</string>
   <string name="init_summary_oc_pl">Carica cache da opencaching.pl</string>
   <string name="init_oc_pl_description">Autorizza c:geo a cercare cache ed accedere/filtrare i ritrovamenti su opencaching.pl.</string>
-  <string name="init_oc_nl">Opencaching.nl</string>
   <string name="settings_activate_oc_nl">Attiva</string>
   <string name="init_summary_oc_nl">Carica cache da opencaching.nl</string>
   <string name="init_oc_nl_description">Autorizza c:geo a cercare cache ed accedere/filtrare i ritrovamenti su opencaching.nl.</string>
@@ -508,6 +512,8 @@
   <string name="init_signature_template_number">Numero cache</string>
   <string name="init_signature_template_owner">Proprietario</string>
   <string name="init_signature_template_name">Nome</string>
+  <string name="init_signature_template_difficulty">Difficoltà</string>
+  <string name="init_signature_template_terrain">Terreno</string>
   <string name="init_signature_template_url">URL</string>
   <string name="init_signature_template_log">Testo di Log</string>
   <string name="init_ratingwanted">Rating da GCvote.com</string>
@@ -948,6 +954,7 @@
   <string name="waypoint_name">Nome</string>
   <string name="waypoint_edit">Modifica</string>
   <string name="waypoint_copy_coordinates">Copia le coordinate</string>
+  <string name="waypoint_clear_coordinates">Elimina coordinate</string>
   <string name="waypoint_delete">Elimina</string>
   <string name="waypoint_edit_title">Modifica waypoint</string>
   <string name="waypoint_add_title">Aggiungi waypoint</string>

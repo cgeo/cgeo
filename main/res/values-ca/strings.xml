@@ -239,6 +239,7 @@
   <string name="info_log_post_retry">Anterior</string>
   <string name="info_log_post_save">Guarda-ho  fora de línia</string>
   <string name="info_log_cleared">El registre ha estat esborrat.</string>
+  <string name="info_waypoint_coordinates_cleared">S\'ha eliminat les coordenades.</string>
   <string name="info_log_type_changed">El tipus de registre ha estat canviat.</string>
   <string name="info_select_logimage_cancelled">La selecció d\'imatge o captura s\'ha cancel·lat.</string>
   <string name="info_stored_image">La nova imatge s\'ha desat a:</string>
@@ -247,6 +248,8 @@
   <string name="warn_calculator_state_save">Assegura\'t de desar el punt de ruta si vols mantenir l\'estat de la calculadora.</string>
   <string name="err_trackable_log_not_anonymous">Entreu %1$s des de c:geo no es pot fer anònimament. Voleu obrir la configuració per omplir les vostres credencials de %2$s?</string>
   <string name="err_trackable_no_preference_activity">No es troba la pantalla indicada de preferència.</string>
+  <string name="confirm_unsaved_changes_title">Canvis sense desar</string>
+  <string name="confirm_discard_wp_changes">Descartar els canvis de punts de ruta sense desar?</string>
   <string name="warn_discard_changes">Descartat els canvis del punt de referència!</string>
   <string name="err_request_popup_info">El c:geo no ha pogut obtenir la informació emergent del catxé.</string>
   <!-- location service -->
@@ -290,6 +293,8 @@
     <item quantity="other">%d minuts</item>
   </plurals>
   <string name="caches_store_offline">Desa per usar fora de línia</string>
+  <string name="caches_store_all">Desar-ho tot</string>
+  <string name="caches_store_unsaved">Desa el que manca per desar</string>
   <string name="caches_store_selected">Desa els seleccionats</string>
   <string name="caches_history">Historial</string>
   <string name="caches_on_map">Mostra al mapa</string>
@@ -510,6 +515,8 @@
   <string name="init_signature_template_number">Número</string>
   <string name="init_signature_template_owner">Propietari</string>
   <string name="init_signature_template_name">Nom</string>
+  <string name="init_signature_template_difficulty">Dificultat</string>
+  <string name="init_signature_template_terrain">Terreny</string>
   <string name="init_signature_template_url">URL</string>
   <string name="init_signature_template_log">Text del registre</string>
   <string name="init_ratingwanted">Valoració del GCvote</string>
@@ -953,6 +960,7 @@
   <string name="waypoint_name">Nom</string>
   <string name="waypoint_edit">Edita</string>
   <string name="waypoint_copy_coordinates">Copiar coordenades</string>
+  <string name="waypoint_clear_coordinates">Eliminar coordenades</string>
   <string name="waypoint_delete">Esborra</string>
   <string name="waypoint_edit_title">Edita fita</string>
   <string name="waypoint_add_title">Afegeix fita</string>
