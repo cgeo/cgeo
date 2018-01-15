@@ -239,6 +239,7 @@
   <string name="info_log_post_retry">再試行</string>
   <string name="info_log_post_save">オフライン保存</string>
   <string name="info_log_cleared">ログを消去しました。</string>
+  <string name="info_waypoint_coordinates_cleared">座標をクリアしました。</string>
   <string name="info_log_type_changed">ログのタイプを変更しました。</string>
   <string name="info_select_logimage_cancelled">添付画像のファイル選択または撮影がキャンセルされました。</string>
   <string name="info_stored_image">新規画像ファイルの保存場所:</string>
@@ -247,6 +248,8 @@
   <string name="warn_calculator_state_save">計算した状態を保持したい場合は、ウェイポイントを保存してください。</string>
   <string name="err_trackable_log_not_anonymous">c:geoから%1$sに匿名によるログインはできません。設定を開き、%2$s からあなたの認証情報を入力しますか?</string>
   <string name="err_trackable_no_preference_activity">申し訳ありませんが、適切な環境設定の画面が見つかりませんでした。</string>
+  <string name="confirm_unsaved_changes_title">変更が保存されていません</string>
+  <string name="confirm_discard_wp_changes">保存されていないウェイポイントの変更を破棄しますか？</string>
   <string name="warn_discard_changes">保存されてないウェイポイントの変更が廃棄されました！</string>
   <string name="err_request_popup_info">c:geo がキャッシュ ポップアップ情報の取得に失敗しました。</string>
   <!-- location service -->
@@ -289,6 +292,8 @@
     <item quantity="other">%d 分</item>
   </plurals>
   <string name="caches_store_offline">オフライン用に保存</string>
+  <string name="caches_store_all">すべて保存</string>
+  <string name="caches_store_unsaved">未保存を保存</string>
   <string name="caches_store_selected">選択したキャッシュを保存</string>
   <string name="caches_history">履歴</string>
   <string name="caches_on_map">地図で表示</string>
@@ -502,6 +507,8 @@
   <string name="init_signature_template_number">キャッシュ数</string>
   <string name="init_signature_template_owner">オーナー</string>
   <string name="init_signature_template_name">名前</string>
+  <string name="init_signature_template_difficulty">難易度</string>
+  <string name="init_signature_template_terrain">地形</string>
   <string name="init_signature_template_url">URL</string>
   <string name="init_signature_template_log">ログの本文</string>
   <string name="init_ratingwanted">GCvote評価</string>
@@ -934,6 +941,7 @@
   <string name="waypoint_name">名前</string>
   <string name="waypoint_edit">編集</string>
   <string name="waypoint_copy_coordinates">座標をコピー</string>
+  <string name="waypoint_clear_coordinates">座標をクリア</string>
   <string name="waypoint_delete">削除</string>
   <string name="waypoint_edit_title">ウェイポイントを編集</string>
   <string name="waypoint_add_title">ウェイポイントを追加</string>

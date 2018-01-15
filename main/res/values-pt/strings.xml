@@ -414,10 +414,10 @@
   <string name="settings_summary_services">Configure a informação da conta de utilizador e o acesso a serviços opcionais.</string>
   <string name="settings_title_appearance">Aparência</string>
   <string name="settings_summary_appearance">Configurar unidades de distância, idioma e cores da Aplicação.</string>
-  <string name="settings_title_cachedetails">Detalhes da Cache</string>
+  <string name="settings_title_cachedetails">Detalhes da cache</string>
   <string name="settings_summary_cachedetails">Personalizar a exibição de informações da cache.</string>
-  <string name="settings_title_offlinedata">Dados Offline</string>
-  <string name="settings_summary_offlinedata">Configurar mapas estáticos e outros dados de armazenamento offline.</string>
+  <string name="settings_title_offlinedata">Dados em memória</string>
+  <string name="settings_summary_offlinedata">Configura mapas estáticos e outros dados armazenados na Memória.</string>
   <string name="settings_title_logging">Registos</string>
   <string name="settings_summary_logging">Configure a sua assinatura e as opções de registo.</string>
   <string name="settings_title_map">Mapa</string>
@@ -428,7 +428,7 @@
   <string name="settings_title_data_dir">Pasta de dados de geocache</string>
   <string name="settings_title_data_dir_usage">Pasta de dados de geocache (%1$s em uso)</string>
   <string name="calculate_dataDir_title">Utilização de dados de geocache</string>
-  <string name="calculate_dataDir">A calcular utilização de memória para Geocache</string>
+  <string name="calculate_dataDir">A determinar o armazenamento usado com Geocaches</string>
   <string name="settings_data_dir_item">%1$s (%2$s livres)</string>
   <string name="confirm_data_dir_move_title">Mover a pasta dos dados de geocaches?</string>
   <string name="confirm_data_dir_move">Mover pasta de dados de geocache pode demorar muito tempo, dependendo do seu dispositivo e volume de dados.</string>
