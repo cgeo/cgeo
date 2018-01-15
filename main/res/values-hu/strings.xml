@@ -239,6 +239,7 @@
   <string name="info_log_post_retry">Újra</string>
   <string name="info_log_post_save">Offline mentés</string>
   <string name="info_log_cleared">A bejegyzés törölve.</string>
+  <string name="info_waypoint_coordinates_cleared">Koordináták törölve.</string>
   <string name="info_log_type_changed">A bejegyzés típusa módosítva!</string>
   <string name="info_select_logimage_cancelled">A kép kiválasztása vagy készítése meg lett szakítva.</string>
   <string name="info_stored_image">Új kép mentési helyének megadása:</string>
@@ -247,6 +248,8 @@
   <string name="warn_calculator_state_save">Mentsd el az útpontot, ha meg akarod tartani a számológép aktuális állapotát!</string>
   <string name="err_trackable_log_not_anonymous">%1$s logolása a c:geo-ból nem végezhető el névtelenül. Meg akarod nyitni a beállításokat, hogy kitöltsd a %2$s-ra vonatkozó adatokat?</string>
   <string name="err_trackable_no_preference_activity">Sajnáljuk, de nem található megfelelő beállítási képernyő.</string>
+  <string name="confirm_unsaved_changes_title">Nem mentett változtatások</string>
+  <string name="confirm_discard_wp_changes">Elveted a nem mentett útpont változtatásokat?</string>
   <string name="warn_discard_changes">Nem mentett útpontmódosítások elvetve!</string>
   <string name="err_request_popup_info">A láda előnézeti adatainak letöltése sikertelen.</string>
   <!-- location service -->
@@ -290,6 +293,8 @@
     <item quantity="other">%d perc</item>
   </plurals>
   <string name="caches_store_offline">Összes mentése</string>
+  <string name="caches_store_all">Összes mentése</string>
+  <string name="caches_store_unsaved">Nem mentettek mentése</string>
   <string name="caches_store_selected">Kijelöltek mentése</string>
   <string name="caches_history">Előzmények</string>
   <string name="caches_on_map">Mutasd meg térképen</string>
@@ -957,6 +962,7 @@
   <string name="waypoint_name">Név</string>
   <string name="waypoint_edit">Szerkesztés</string>
   <string name="waypoint_copy_coordinates">Koordináták másolása</string>
+  <string name="waypoint_clear_coordinates">Koordináták törlése</string>
   <string name="waypoint_delete">Törlés</string>
   <string name="waypoint_edit_title">Útpont szerkesztése</string>
   <string name="waypoint_add_title">Útpont hozzáadása</string>
