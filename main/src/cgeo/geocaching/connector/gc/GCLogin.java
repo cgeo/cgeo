@@ -76,6 +76,14 @@ public class GCLogin extends AbstractLogin {
     @Override
     @NonNull
     protected StatusCode login(final boolean retry, @NonNull final Credentials credentials) {
+        final StatusCode status = loginInternal(retry, credentials);
+        if (status != StatusCode.NO_ERROR) {
+            resetLoginStatus();
+        }
+        return status;
+    }
+
+    private StatusCode loginInternal(final boolean retry, @NonNull final Credentials credentials) {
         if (credentials.isInvalid()) {
             clearLoginInfo();
             Log.w("Login.login: No login information stored");
