@@ -239,6 +239,7 @@
   <string name="info_log_post_retry">Încearcă din nou</string>
   <string name="info_log_post_save">Salvează local</string>
   <string name="info_log_cleared">Însemnarea a fost ştearsă.</string>
+  <string name="info_waypoint_coordinates_cleared">Coordonate anulate.</string>
   <string name="info_log_type_changed">Tipul însemnării a fost schimbat!</string>
   <string name="info_select_logimage_cancelled">Selecţia sau captura de imagine a fost anulată.</string>
   <string name="info_stored_image">Imaginea a fost salvată aici:</string>
@@ -247,6 +248,8 @@
   <string name="warn_calculator_state_save">Asigură-te că ai salvat punctul dacă vrei să păstrezi stearea în care se află calculatorul de coordonate.</string>
   <string name="err_trackable_log_not_anonymous">Prin intermediul c:geo nu se poate publica anonim însemnarea %1$s. Vrei să mergi la setări şi să-ţi configurezi contul la %2$s?</string>
   <string name="err_trackable_no_preference_activity">Ecranul de configurare adecvat nu a fost găsit.</string>
+  <string name="confirm_unsaved_changes_title">Modificări nesalvate</string>
+  <string name="confirm_discard_wp_changes">Renunţă la modificările nesalvate de la acest punct?</string>
   <string name="warn_discard_changes">Modificările nesalvate vor fi anulate!</string>
   <string name="err_request_popup_info">c:geo nu a reuşit să obţină informaţiile minime despre geocutie.</string>
   <!-- location service -->
@@ -291,6 +294,8 @@
     <item quantity="other">%d minute</item>
   </plurals>
   <string name="caches_store_offline">Salvează local</string>
+  <string name="caches_store_all">Salvează pe toate</string>
+  <string name="caches_store_unsaved">Salvează nesalvate</string>
   <string name="caches_store_selected">Salvează cutiile selectate</string>
   <string name="caches_history">Istoric</string>
   <string name="caches_on_map">Arată pe hartă</string>
@@ -513,6 +518,8 @@
   <string name="init_signature_template_number">Număr</string>
   <string name="init_signature_template_owner">Proprietar</string>
   <string name="init_signature_template_name">Nume</string>
+  <string name="init_signature_template_difficulty">Dificultate</string>
+  <string name="init_signature_template_terrain">Teren</string>
   <string name="init_signature_template_url">URL</string>
   <string name="init_signature_template_log">Text însemnare</string>
   <string name="init_ratingwanted">Voturi GCvote</string>
@@ -963,6 +970,7 @@
   <string name="waypoint_name">Nume</string>
   <string name="waypoint_edit">Modifică</string>
   <string name="waypoint_copy_coordinates">Copiază coordonatele</string>
+  <string name="waypoint_clear_coordinates">Şterge coordonate</string>
   <string name="waypoint_delete">Şterge</string>
   <string name="waypoint_edit_title">Modifică punct</string>
   <string name="waypoint_add_title">Adaugă punct</string>
@@ -1542,4 +1550,6 @@
   <string name="list_confirm_debug_message">Modul \"depanare\" poate cauza instabilitate. Vrei să revii la modul normal de funcţionare?</string>
   <string name="err_select_logimage_upload_size">Imaginea este prea mare, te rog alege o rezoluţie mai mică.</string>
   <string name="err_logimage_caption_required">Trebuie introdusă o scurtă descriere pentru această imagine</string>
+  <string name="waypoint_latitude_null">N/S --° --.---</string>
+  <string name="waypoint_longitude_null">E/W --° --.---</string>
 </resources>
