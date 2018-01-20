@@ -2,7 +2,8 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-    <b>2018.01.14-RC (Beta version):</b>\n
+    <b>2018.01.20-RC (Beta version):</b>\n
+    · New: Reset cookies on login fail to prevent permanent login errors\n
     · New: Waypoint support for empty coordinates\n
     · New: Store all or only unsaved caches from map\n
     · New: Confirm discarding unsaved waypoint changes\n
