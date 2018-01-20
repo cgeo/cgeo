@@ -14,7 +14,6 @@ import cgeo.geocaching.apps.navi.OruxMapsApp.OruxOnlineMapApp;
 import cgeo.geocaching.apps.navi.SygicNavigationApp.SygicNavigationDrivingApp;
 import cgeo.geocaching.apps.navi.SygicNavigationApp.SygicNavigationWalkingApp;
 import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.maps.mapsforge.v6.NewMap;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.settings.Settings;
@@ -43,8 +42,6 @@ public final class NavigationAppFactory {
         RADAR(new RadarApp(), 1, R.string.pref_navigation_menu_radar),
         /** The selected map */
         INTERNAL_MAP(new InternalMap(), 2, R.string.pref_navigation_menu_internal_map),
-        /** The new internal map */
-        INTERNAL_MAP_NEW(new InternalMap(NewMap.class, R.string.cache_menu_mfbeta), 25, R.string.pref_navigation_menu_internal_new_map),
         /** The internal static map activity, when stored */
         STATIC_MAP(new StaticMapApp(), 3, R.string.pref_navigation_menu_static_map),
         /** The internal static map activity, when not yet stored */
@@ -352,14 +349,6 @@ public final class NavigationAppFactory {
 
         for (final NavigationAppsEnum navigationApp : installedNavigationApps) {
             if (navigationApp.id == navigationAppId) {
-                // redirect navigation tools between old and new map on the fly.
-                // if the global checkbox and the selected tools don't match, then offline maps may not work due to different theme versions
-                if (navigationApp == NavigationAppsEnum.INTERNAL_MAP && Settings.useNewMapAsDefault()) {
-                    return NavigationAppsEnum.INTERNAL_MAP_NEW.app;
-                }
-                if (navigationApp == NavigationAppsEnum.INTERNAL_MAP_NEW && !Settings.useNewMapAsDefault()) {
-                    return NavigationAppsEnum.INTERNAL_MAP.app;
-                }
                 return navigationApp.app;
             }
         }

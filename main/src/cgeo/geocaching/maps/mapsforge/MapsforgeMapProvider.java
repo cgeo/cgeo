@@ -7,6 +7,7 @@ import cgeo.geocaching.maps.MapProviderFactory;
 import cgeo.geocaching.maps.interfaces.MapItemFactory;
 import cgeo.geocaching.maps.interfaces.MapProvider;
 import cgeo.geocaching.maps.interfaces.MapSource;
+import cgeo.geocaching.maps.mapsforge.v6.NewMap;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
@@ -18,6 +19,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -94,7 +96,7 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
     @Override
     public Class<? extends Activity> getMapClass() {
         mapItemFactory = new MapsforgeMapItemFactory();
-        return MapsforgeMapActivity.class;
+        return Settings.useOldMapsforgeAPI() ? MapsforgeMapActivity.class : NewMap.class;
     }
 
     @Override

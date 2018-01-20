@@ -26,8 +26,8 @@ import java.util.Set;
 import org.mapsforge.core.graphics.Bitmap;
 import org.mapsforge.core.model.LatLong;
 import org.mapsforge.map.android.graphics.AndroidGraphicFactory;
-import org.mapsforge.map.android.view.MapView;
 import org.mapsforge.map.layer.Layer;
+import org.mapsforge.map.layer.LayerManager;
 import org.mapsforge.map.layer.Layers;
 
 public abstract class AbstractCachesOverlay {
@@ -179,11 +179,10 @@ public abstract class AbstractCachesOverlay {
     }
 
     protected void addLayers() {
-        final MapView mapView = mapViewRef.get();
-        if (mapView == null) {
+        final Layers layers = getLayers();
+        if (layers == null) {
             return;
         }
-        final Layers layers = mapView.getLayerManager().getLayers();
         final int index = layers.indexOf(anchorLayer) + 1;
         layers.addAll(index, layerList.getAsLayers());
     }
@@ -222,11 +221,10 @@ public abstract class AbstractCachesOverlay {
     }
 
     protected void clearLayers() {
-        final MfMapView mapView = this.mapViewRef.get();
-        if (mapView == null) {
+        final Layers layers = getLayers();
+        if (layers == null) {
             return;
         }
-        final Layers layers = mapView.getLayerManager().getLayers();
 
         for (final GeoitemLayer layer : layerList) {
             geoEntries.remove(new GeoEntry(layer.getItemCode(), overlayId));
@@ -239,12 +237,12 @@ public abstract class AbstractCachesOverlay {
     }
 
     protected void syncLayers(final Collection<String> removeCodes, final Collection<String> newCodes) {
-        final MfMapView mapView = this.mapViewRef.get();
-        if (mapView == null) {
+        final Layers layers = getLayers();
+        if (layers == null) {
             return;
         }
+
         removeItems(removeCodes);
-        final Layers layers = mapView.getLayerManager().getLayers();
         final int index = layers.indexOf(anchorLayer) + 1;
         layers.addAll(index, layerList.getMatchingLayers(newCodes));
 
@@ -252,11 +250,10 @@ public abstract class AbstractCachesOverlay {
     }
 
     private void removeItems(final Collection<String> removeCodes) {
-        final MfMapView mapView = this.mapViewRef.get();
-        if (mapView == null) {
+        final Layers layers = getLayers();
+        if (layers == null) {
             return;
         }
-        final Layers layers = mapView.getLayerManager().getLayers();
         for (final String code : removeCodes) {
             final GeoitemLayer item = layerList.getItem(code);
             if (item != null) {
@@ -265,6 +262,18 @@ public abstract class AbstractCachesOverlay {
                 layerList.remove(item);
             }
         }
+    }
+
+    private Layers getLayers() {
+        final MfMapView mapView = this.mapViewRef.get();
+        if (mapView == null) {
+            return null;
+        }
+        final LayerManager layerManager = mapView.getLayerManager();
+        if (layerManager == null) {
+            return null;
+        }
+        return layerManager.getLayers();
     }
 
     static boolean mapMoved(final Viewport referenceViewport, final Viewport newViewport) {

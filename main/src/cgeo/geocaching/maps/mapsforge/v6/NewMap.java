@@ -28,7 +28,6 @@ import cgeo.geocaching.maps.MapState;
 import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.maps.interfaces.OnMapDragListener;
 import cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider;
-import cgeo.geocaching.maps.mapsforge.MapsforgeMapSource;
 import cgeo.geocaching.maps.mapsforge.v6.caches.CachesBundle;
 import cgeo.geocaching.maps.mapsforge.v6.caches.GeoitemRef;
 import cgeo.geocaching.maps.mapsforge.v6.layers.DownloadLayer;
@@ -205,7 +204,7 @@ public class NewMap extends AbstractActionBarActivity {
         // prepare initial settings of mapView
         if (mapOptions.mapState != null) {
             this.mapView.getModel().mapViewPosition.setCenter(MapsforgeUtils.toLatLong(mapOptions.mapState.getCenter()));
-            this.mapView.getModel().mapViewPosition.setZoomLevel((byte) mapOptions.mapState.getZoomLevel());
+            this.mapView.setMapZoomLevel((byte) mapOptions.mapState.getZoomLevel());
             this.targetGeocode = mapOptions.mapState.getTargetGeocode();
             this.lastNavTarget = mapOptions.mapState.getLastNavTarget();
             mapOptions.isLiveEnabled = mapOptions.mapState.isLiveEnabled();
@@ -254,13 +253,7 @@ public class NewMap extends AbstractActionBarActivity {
         for (final MapSource mapSource : MapProviderFactory.getMapSources()) {
             final MenuItem menuItem = menu.findItem(mapSource.getNumericalId());
             if (menuItem != null) {
-                if (mapSource instanceof MapsforgeMapProvider.OfflineMapSource) {
-                    menuItem.setVisible(mapSource.isAvailable());
-                } else if (mapSource instanceof MapsforgeMapSource) {
-                    menuItem.setVisible(mapSource.isAvailable());
-                } else {
-                    menuItem.setVisible(false);
-                }
+                menuItem.setVisible(mapSource.isAvailable());
             }
         }
 
@@ -448,7 +441,7 @@ public class NewMap extends AbstractActionBarActivity {
                 final MapSource mapSource = MapProviderFactory.getMapSource(id);
                 if (mapSource != null) {
                     item.setChecked(true);
-                    setMapSource(mapSource);
+                    changeMapSource(mapSource);
                     return true;
                 }
         }
@@ -606,18 +599,48 @@ public class NewMap extends AbstractActionBarActivity {
         rendererLayer.requestRedraw();
     }
 
-    private void setMapSource(@NonNull final MapSource mapSource) {
-        // Update mapsource in settings
-        Settings.setMapSource(mapSource);
+    private void changeMapSource(@NonNull final MapSource newSource) {
+        final MapSource oldSource = Settings.getMapSource();
+        final boolean restartRequired = !MapProviderFactory.isSameActivity(oldSource, newSource);
 
-        switchTileLayer(mapSource);
+        // Update mapsource in settings
+        Settings.setMapSource(newSource);
+
+        if (restartRequired) {
+            mapRestart();
+        } else if (mapView != null) {  // changeMapSource can be called by onCreate()
+            switchTileLayer(newSource);
+        }
     }
 
-    private void switchTileLayer(final MapSource mapSource) {
+    /**
+     * Restart the current activity with the default map source.
+     */
+    private void mapRestart() {
+        mapOptions.mapState = currentMapState();
+        finish();
+        mapOptions.startIntent(this, Settings.getMapProvider().getMapClass());
+    }
+
+    /**
+     * Get the current map state from the map view if it exists or from the mapStateIntent field otherwise.
+     *
+     * @return the current map state as an array of int, or null if no map state is available
+     */
+    private MapState currentMapState() {
+        if (mapView == null) {
+            return null;
+        }
+        final Geopoint mapCenter = mapView.getViewport().getCenter();
+        return new MapState(mapCenter.getCoords(), mapView.getMapZoomLevel(), followMyLocation, false, null, null, mapOptions.isLiveEnabled, false);
+    }
+
+
+    private void switchTileLayer(final MapSource newSource) {
         // Create new render layer, if mapfile exists
         final ITileLayer oldLayer = this.tileLayer;
         ITileLayer newLayer = null;
-        if (mapSource instanceof MapsforgeMapProvider.OfflineMapSource) {
+        if (newSource instanceof MapsforgeMapProvider.OfflineMapSource) {
             this.mapView.getModel().displayModel.setFixedTileSize(0);
             final File mapFile = NewMap.getMapFile();
             if (mapFile != null && mapFile.exists()) {
@@ -626,7 +649,7 @@ public class NewMap extends AbstractActionBarActivity {
             }
         } else {
             this.mapView.getModel().displayModel.setFixedTileSize(256);
-            if (mapSource.getNumericalId() == MapsforgeMapProvider.MAPSFORGE_MAPNIK_ID.hashCode()) {
+            if (newSource.getNumericalId() == MapsforgeMapProvider.MAPSFORGE_MAPNIK_ID.hashCode()) {
                 newLayer = new DownloadLayer(tileCache, this.mapView.getModel().mapViewPosition, OpenStreetMapMapnik.INSTANCE, AndroidGraphicFactory.INSTANCE);
             }
         }

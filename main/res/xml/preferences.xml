@@ -560,6 +560,15 @@
                 android:summary="@string/init_summary_maptrail"
                 android:title="@string/init_maptrail" />
         </PreferenceCategory>
+        <PreferenceCategory android:title="@string/init_mapsforge_api_title" >
+            <cgeo.geocaching.settings.TextPreference
+                android:layout="@layout/text_preference"
+                android:text="@string/init_mfold_api_description" />
+            <CheckBoxPreference
+                android:defaultValue="false"
+                android:key="@string/pref_old_mapsforge_api"
+                android:title="@string/init_mfold_api" />
+        </PreferenceCategory>
     </PreferenceScreen>
     <PreferenceScreen
         android:icon="?attr/settings_pen"
@@ -664,11 +673,6 @@
                     android:enabled="false"
                     android:key="@string/pref_navigation_menu_internal_map"
                     android:title="@string/cache_menu_map" />
-                <CheckBoxPreference
-                    android:defaultValue="true"
-                    android:enabled="false"
-                    android:key="@string/pref_navigation_menu_internal_new_map"
-                    android:title="@string/cache_menu_mfbeta" />
                 <CheckBoxPreference
                     android:defaultValue="true"
                     android:enabled="false"
@@ -876,15 +880,6 @@
             <Preference
                 android:key="@string/pref_memory_dump"
                 android:title="@string/init_create_memory_dump" />
-        </PreferenceCategory>
-        <PreferenceCategory android:title="@string/init_experimental_title" >
-            <cgeo.geocaching.settings.TextPreference
-                android:layout="@layout/text_preference"
-                android:text="@string/init_mfbeta_description" />
-            <CheckBoxPreference
-                android:defaultValue="false"
-                android:key="@string/pref_new_map_as_default"
-                android:title="@string/init_mfbeta" />
         </PreferenceCategory>
 </PreferenceScreen>
 

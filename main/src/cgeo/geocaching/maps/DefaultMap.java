@@ -3,7 +3,6 @@ package cgeo.geocaching.maps;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.maps.mapsforge.v6.NewMap;
 import cgeo.geocaching.settings.Settings;
 
 import android.app.Activity;
@@ -17,7 +16,7 @@ public final class DefaultMap {
     }
 
     private static Class<?> getDefaultMapClass() {
-        return Settings.useNewMapAsDefault() ? NewMap.class : Settings.getMapProvider().getMapClass();
+        return Settings.getMapProvider().getMapClass();
     }
 
     public static Intent getLiveMapIntent(final Activity fromActivity, final Class<?> cls) {
