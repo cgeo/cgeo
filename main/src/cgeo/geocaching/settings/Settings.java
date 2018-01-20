@@ -118,7 +118,7 @@ public class Settings {
     }
 
     private static void migrateSettings() {
-        final int latestPreferencesVersion = 3;
+        final int latestPreferencesVersion = 4;
         final int currentVersion = getInt(R.string.pref_settingsversion, 0);
 
         // No need to migrate if we are up to date.
@@ -277,6 +277,21 @@ public class Settings {
 
             e.putString(getKey(R.string.pref_dataDir), LocalStorage.getExternalPrivateCgeoDirectory().getAbsolutePath());
             e.putInt(getKey(R.string.pref_settingsversion), 3); // mark migrated
+            e.apply();
+        }
+
+        if (currentVersion < 4) {
+            final Editor e = sharedPrefs.edit();
+
+            if (Integer.parseInt(sharedPrefs.getString(getKey(R.string.pref_defaultNavigationTool), String.valueOf(NavigationAppsEnum.COMPASS.id))) == 25) {
+                e.putString(getKey(R.string.pref_defaultNavigationTool), prefsV0.getString(getKey(R.string.pref_defaultNavigationTool), String.valueOf(NavigationAppsEnum.INTERNAL_MAP.id)));
+            }
+
+            if (Integer.parseInt(sharedPrefs.getString(getKey(R.string.pref_defaultNavigationTool2), String.valueOf(NavigationAppsEnum.INTERNAL_MAP.id))) == 25) {
+                e.putString(getKey(R.string.pref_defaultNavigationTool2), prefsV0.getString(getKey(R.string.pref_defaultNavigationTool2), String.valueOf(NavigationAppsEnum.INTERNAL_MAP.id)));
+            }
+
+            e.putInt(getKey(R.string.pref_settingsversion), 4); // mark migrated
             e.apply();
         }
     }
@@ -1300,12 +1315,12 @@ public class Settings {
         putStringList(R.string.pref_caches_history, history);
     }
 
-    public static boolean useNewMapAsDefault() {
-        return getBoolean(R.string.pref_new_map_as_default, false);
+    public static boolean useOldMapsforgeAPI() {
+        return getBoolean(R.string.pref_old_mapsforge_api, false);
     }
 
-    static void setUseNewMapAsDefault(final boolean useNewMapAsDefault) {
-        putBoolean(R.string.pref_new_map_as_default, useNewMapAsDefault);
+    static void setOldMapsforgeAPI(final boolean useOldMapsforgeAPI) {
+        putBoolean(R.string.pref_old_mapsforge_api, useOldMapsforgeAPI);
     }
 
     public static boolean useHardwareAcceleration() {
