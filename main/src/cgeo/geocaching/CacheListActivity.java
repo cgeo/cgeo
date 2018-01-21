@@ -751,7 +751,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             }
             setVisibleEnabled(menu, R.id.menu_move_to_list, isHistory || isOffline, !isEmpty);
             setVisibleEnabled(menu, R.id.menu_copy_to_list, isHistory || isOffline, !isEmpty);
-            setVisibleEnabled(menu, R.id.menu_drop_caches, isHistory || isOffline, !isEmpty);
+            setVisibleEnabled(menu, R.id.menu_drop_caches, isHistory || containsStoredCaches(), !isEmpty);
             setVisibleEnabled(menu, R.id.menu_delete_events, isConcrete, !isEmpty && containsPastEvents());
             setVisibleEnabled(menu, R.id.menu_clear_offline_logs, isHistory || isOffline, !isEmpty && containsOfflineLogs());
             setVisibleEnabled(menu, R.id.menu_remove_from_history, isHistory, !isEmpty);
@@ -783,6 +783,15 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         }
 
         return true;
+    }
+
+    private boolean containsStoredCaches() {
+        for (final Geocache cache : adapter.getCheckedOrAllCaches()) {
+            if (cache.isOffline()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private boolean containsPastEvents() {
