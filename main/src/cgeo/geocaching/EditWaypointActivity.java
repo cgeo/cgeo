@@ -691,10 +691,6 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         }
         final Waypoint oldWaypoint = cache.getWaypointById(waypointId);
         if (cache.addOrChangeWaypoint(waypoint, true)) {
-            DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
-
-            LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(new Intent(Intents.INTENT_CACHE_CHANGED));
-
             if (!StaticMapsProvider.hasAllStaticMapsForWaypoint(geocode, waypoint)) {
                 StaticMapsProvider.removeWpStaticMaps(oldWaypoint, geocode);
                 if (Settings.isStoreOfflineWpMaps()) {
