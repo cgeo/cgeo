@@ -699,7 +699,7 @@ public final class GCParser {
         } catch (final Geopoint.GeopointException ignored) {
         }
 
-        int wpBegin = page.indexOf("<table class=\"Table\" id=\"ctl00_ContentBody_Waypoints\">");
+        int wpBegin = page.indexOf("id=\"ctl00_ContentBody_Waypoints\">");
         if (wpBegin != -1) { // parse waypoints
             if (DisposableHandler.isDisposed(handler)) {
                 return UNKNOWN_PARSE_ERROR;
