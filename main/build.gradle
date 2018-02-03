@@ -13,10 +13,9 @@ apply plugin: 'com.android.application'
  * https://github.com/KeepSafe/dexcount-gradle-plugin. dex counting can take several seconds, therefore do this only on the CI server
  */
 
-// if (isContinuousIntegrationServer()) {
-//     apply plugin: 'com.getkeepsafe.dexcount'
-// }
-// disabled due to https://github.com/KeepSafe/dexcount-gradle-plugin/issues/220
+if (isContinuousIntegrationServer()) {
+    apply plugin: 'com.getkeepsafe.dexcount'
+}
 
 android {
     compileSdkVersion "Google Inc.:Google APIs:23"
@@ -244,7 +243,7 @@ android {
 
 dependencies {
     // AndroidAnnotations, https://github.com/excilys/androidannotations/wiki/building-project-gradle
-    def androidAnnotationsVersion = '4.3.1'
+    def androidAnnotationsVersion = '4.4.0'
     annotationProcessor "org.androidannotations:androidannotations:$androidAnnotationsVersion"
     implementation "org.androidannotations:androidannotations-api:$androidAnnotationsVersion"
 
@@ -255,7 +254,7 @@ dependencies {
     implementation 'org.apache.commons:commons-lang3:3.5'
 
     // AssertJ for testing, needed both for local unit tests and Android instrumentation tests
-    def assertJVersion = '2.8.0'
+    def assertJVersion = '2.9.0'
     testImplementation "org.assertj:assertj-core:$assertJVersion"
     androidTestImplementation "org.assertj:assertj-core:$assertJVersion"
 
@@ -274,7 +273,7 @@ dependencies {
     implementation "net.sf.geographiclib:GeographicLib-Java:1.49"
 
     // Jackson XML processing
-    def jacksonVersion = '2.9.3'
+    def jacksonVersion = '2.9.4'
     implementation "com.fasterxml.jackson.core:jackson-core:$jacksonVersion"
     implementation "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
     implementation "com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion"
@@ -333,7 +332,7 @@ dependencies {
     implementation 'com.jakewharton:process-phoenix:2.0.0'
 
     // RxJava
-    implementation "io.reactivex.rxjava2:rxjava:2.1.8"
+    implementation "io.reactivex.rxjava2:rxjava:2.1.9"
     implementation "io.reactivex.rxjava2:rxandroid:2.0.1"
 
     // Support Library. Appcompat
