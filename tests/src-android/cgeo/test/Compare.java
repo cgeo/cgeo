@@ -58,12 +58,12 @@ public abstract class Compare {
             }
             for (final Waypoint expectedWpt : expected.getWaypoints()) {
                 final Waypoint actualWpt = actual.getWaypointByPrefix(expectedWpt.getPrefix());
-                assertThat(actualWpt).isNotNull();
-                assertThat(actualWpt.getLookup()).isEqualTo(expectedWpt.getLookup());
-                assertThat(actualWpt.getCoords()).isEqualTo(expectedWpt.getCoords());
-                assertThat(actualWpt.getName()).isEqualTo(expectedWpt.getName());
-                assertThat(TextUtils.stripHtml(actualWpt.getNote())).isEqualTo(expectedWpt.getNote());
-                assertThat(actualWpt.getWaypointType()).isEqualTo(expectedWpt.getWaypointType());
+                assertThat(actualWpt).as("waypoint " + expectedWpt.getPrefix() + " of " + geocode).isNotNull();
+                assertThat(actualWpt.getLookup()).as("waypoint lookup " + expectedWpt.getPrefix() + " of " + geocode).isEqualTo(expectedWpt.getLookup());
+                assertThat(actualWpt.getCoords()).as("waypoint coords " + expectedWpt.getPrefix() + " of " + geocode).isEqualTo(expectedWpt.getCoords());
+                assertThat(actualWpt.getName()).as("waypoint name " + expectedWpt.getPrefix() + " of " + geocode).isEqualTo(expectedWpt.getName());
+                assertThat(TextUtils.stripHtml(actualWpt.getNote())).as("waypoint note " + expectedWpt.getPrefix() + " of " + geocode).isEqualTo(expectedWpt.getNote());
+                assertThat(actualWpt.getWaypointType()).as("waypoint type " + expectedWpt.getPrefix() + " of " + geocode).isEqualTo(expectedWpt.getWaypointType());
             }
 
             // The inventories can differ too often, therefore we don't compare them. Also, the personal note
