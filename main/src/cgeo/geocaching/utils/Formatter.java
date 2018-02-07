@@ -1,5 +1,7 @@
 package cgeo.geocaching.utils;
 
+import static android.text.format.DateUtils.MINUTE_IN_MILLIS;
+
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.CacheSize;
@@ -26,6 +28,8 @@ public final class Formatter {
 
     /** Text separator used for formatting texts */
     public static final String SEPARATOR = " · ";
+    public static final int MINUTES_PER_DAY = 24 * 60;
+    public static final float DAYS_PER_MONTH = 365F / 12; // on average
 
     private Formatter() {
         // Utility class
@@ -251,6 +255,31 @@ public final class Formatter {
             default:
                 return CgeoApplication.getInstance().getResources().getQuantityString(R.plurals.days_ago, days, days);
         }
+    }
+
+    @NonNull
+    public static String formatStoredAgo(final long updatedTimeMillis) {
+        final long minutes = (System.currentTimeMillis() - updatedTimeMillis) / MINUTE_IN_MILLIS;
+        final long days = minutes / MINUTES_PER_DAY;
+
+        final String ago;
+        if (updatedTimeMillis == 0L) {
+            ago = "";
+        } else if (minutes < 15) {
+            ago = CgeoApplication.getInstance().getString(R.string.cache_offline_time_mins_few);
+        } else if (minutes < 60) {
+            ago = CgeoApplication.getInstance().getResources().getQuantityString(R.plurals.cache_offline_about_time_mins, (int) minutes, (int) minutes);
+        } else if (days < 2) {
+            ago = CgeoApplication.getInstance().getResources().getQuantityString(R.plurals.cache_offline_about_time_hours, (int) (minutes / 60), (int) (minutes / 60));
+        } else if (days < DAYS_PER_MONTH) {
+            ago = CgeoApplication.getInstance().getResources().getQuantityString(R.plurals.cache_offline_about_time_days, (int) days, (int) days);
+        } else if (days < 365) {
+            ago = CgeoApplication.getInstance().getResources().getQuantityString(R.plurals.cache_offline_about_time_months, (int) (days / DAYS_PER_MONTH), (int) (days / DAYS_PER_MONTH));
+        } else {
+            ago = CgeoApplication.getInstance().getString(R.string.cache_offline_about_time_year);
+        }
+
+        return CgeoApplication.getInstance().getString(R.string.cache_offline_stored) + "\n" + ago;
     }
 
     /**

@@ -2392,28 +2392,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         offlineRefresh.setOnClickListener(refreshCacheClickListener);
 
         if (cache.isOffline()) {
-            final long minutes = (System.currentTimeMillis() - cache.getUpdated()) / (60 * 1000);
-            final long days = minutes / (24 * 60);
-            final float daysPerMonth = 365F / 12; // on average
-
-            final String ago;
-            if (cache.getUpdated() == 0L) {
-                ago = "";
-            } else if (minutes < 15) {
-                ago = res.getString(R.string.cache_offline_time_mins_few);
-            } else if (minutes < 60) {
-                ago = res.getQuantityString(R.plurals.cache_offline_about_time_mins, (int) minutes, (int) minutes);
-            } else if (days < 2) {
-                ago = res.getQuantityString(R.plurals.cache_offline_about_time_hours, (int) (minutes / 60), (int) (minutes / 60));
-            } else if (days < daysPerMonth) {
-                ago = res.getQuantityString(R.plurals.cache_offline_about_time_days, (int) days, (int) days);
-            } else if (days < 365) {
-                ago = res.getQuantityString(R.plurals.cache_offline_about_time_months, (int) (days / daysPerMonth), (int) (days / daysPerMonth));
-            } else {
-                ago = res.getString(R.string.cache_offline_about_time_year);
-            }
-
-            offlineText.setText(res.getString(R.string.cache_offline_stored) + "\n" + ago);
+            offlineText.setText(Formatter.formatStoredAgo(cache.getUpdated()));
 
             offlineStoreDrop.setOnClickListener(dropCacheClickListener);
             offlineStoreDrop.setOnLongClickListener(null);
