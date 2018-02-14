@@ -145,7 +145,7 @@
   <string name="err_server">Échec de la connexion à Geocaching.com. Le site Web peut être indisponible ou votre connexion Internet ne fonctionne pas.</string>
   <string name="err_server_ec">Impossible de contacter Extremcaching.com. Le site web peut ne pas fonctionner ou votre connexion Internet ne fonctionne pas.</string>
   <string name="err_server_gk">Impossible de contacter GeoKrety.org. Le site Web peut être indisponible ou votre connexion Internet ne fonctionne pas.</string>
-  <string name="err_login">Pas d\'utilisateur ou de mot de passe enregistré</string>
+  <string name="err_login">Aucune compte renseigné</string>
   <string name="err_login_failed_toast">c:geo est en mode hors-ligne et ne peut pas se connecter. Vérifiez votre connexion Internet.</string>
   <string name="err_unknown">Erreur inconnue</string>
   <string name="err_unknown_address">c:geo n\'a pas réussi à trouver de coordonnées géographiques pour cette adresse</string>
@@ -255,7 +255,7 @@
   <!-- location service -->
   <string name="loc_last">Dernière position</string>
   <string name="loc_net">Réseau</string>
-  <string name="loc_fused">Fusionné</string>
+  <string name="loc_fused">Unifié</string>
   <string name="loc_low_power">Éco</string>
   <string name="loc_home">Domicile</string>
   <string name="loc_gps">GPS</string>

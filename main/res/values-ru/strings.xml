@@ -238,6 +238,7 @@
   <string name="info_log_post_retry">Повторить</string>
   <string name="info_log_post_save">Сохранить оффлайн</string>
   <string name="info_log_cleared">Запись очищена.</string>
+  <string name="info_waypoint_coordinates_cleared">Координаты очищены.</string>
   <string name="info_log_type_changed">Тип записи был изменен!</string>
   <string name="info_select_logimage_cancelled">Выбор изображения был отменен.</string>
   <string name="info_stored_image">Новое изображение сохранено в:</string>
@@ -246,6 +247,8 @@
   <string name="warn_calculator_state_save">Не забудьте сохранить точку, если вы хотите сохранить состояние калькулятора.</string>
   <string name="err_trackable_log_not_anonymous">Запись в %1$s из c:geo не может быть сделана анонимно. Вы хотите перейти в настройки и заполнить данные из %2$s?</string>
   <string name="err_trackable_no_preference_activity">Извините, не удается найти подходящую страницу настроек.</string>
+  <string name="confirm_unsaved_changes_title">Несохраненные изменения</string>
+  <string name="confirm_discard_wp_changes">Сбросить несохраненные изменения путевых точек?</string>
   <string name="warn_discard_changes">Несохраненные изменения отменены!</string>
   <string name="err_request_popup_info">c:geo не удалось загрузить информацию о тайнике.</string>
   <!-- location service -->
@@ -290,6 +293,8 @@
     <item quantity="other">%d минут</item>
   </plurals>
   <string name="caches_store_offline">Загрузить в память</string>
+  <string name="caches_store_all">Сохранить всё</string>
+  <string name="caches_store_unsaved">Сохранить несохранённое</string>
   <string name="caches_store_selected">Загрузить в память выбранные</string>
   <string name="caches_history">История</string>
   <string name="caches_on_map">Показать на карте</string>
@@ -504,6 +509,8 @@
   <string name="init_signature_template_number">Номер тайника</string>
   <string name="init_signature_template_owner">Создатель</string>
   <string name="init_signature_template_name">Название тайника</string>
+  <string name="init_signature_template_difficulty">Сложность</string>
+  <string name="init_signature_template_terrain">Местность</string>
   <string name="init_signature_template_url">URL</string>
   <string name="init_signature_template_log">Текст записи</string>
   <string name="init_ratingwanted">Рейтинг GCvote</string>
@@ -947,6 +954,7 @@
   <string name="waypoint_name">Название</string>
   <string name="waypoint_edit">Редактировать</string>
   <string name="waypoint_copy_coordinates">Скопировать координаты</string>
+  <string name="waypoint_clear_coordinates">Очистить координаты</string>
   <string name="waypoint_delete">Удалить</string>
   <string name="waypoint_edit_title">Редактирование путевой точки</string>
   <string name="waypoint_add_title">Добавление путевой точки</string>
@@ -1495,6 +1503,11 @@
     <item quantity="other">Рекомендовать тайники (%d осталось)</item>
   </plurals>
   <!-- distance units -->
+  <string name="unit_m">м</string>
+  <string name="unit_km">км</string>
+  <string name="unit_ft">фут</string>
+  <string name="unit_yd">ярд</string>
+  <string name="unit_mi">мил</string>
   <string name="pq_available_for_download">Выборка доступна для скачивания</string>
   <string name="pq_available_for_download_description">Эта выборка доступна для загрузки одним файлом (gpx). Вы хотите скачать и импортировать ее или посмотреть тайники списком?</string>
   <string name="pq_as_cache_list">Посмотреть как список</string>
