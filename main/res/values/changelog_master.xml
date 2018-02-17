@@ -3,7 +3,8 @@
   <!-- changelog for the master branch -->
   <string name="changelog_master" translatable="false">
     <b>Next feature release:</b>\n
-    · [nothing yet]\n
+    · New: New mapsforge library (former beta version) now used by default\n
+    · New: Days since cache has been saved now replaced by months or years when applicable\n
     \n
   </string>
 </resources>
