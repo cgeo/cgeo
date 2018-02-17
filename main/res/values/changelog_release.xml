@@ -2,6 +2,9 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
+    <b>Next bugfix release:</b>\n
+    · Fix: Turkish translation not working\n
+    \n
     <b>2018.02.05:</b>\n
     · New: Waypoint support for empty coordinates\n
     · New: Store all or only unsaved caches from map\n
