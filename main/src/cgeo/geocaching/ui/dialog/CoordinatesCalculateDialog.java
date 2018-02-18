@@ -50,7 +50,6 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
 import butterknife.ButterKnife;
 import org.apache.commons.lang3.SerializationUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -665,6 +664,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         return false;
     }
 
+    // FIXME: Why do we have this method? The field savedState is never evaluated anywhere...
     private void setSavedState(final CalcState savedState) {
         this.savedState = savedState;
         stateSaved = true;
