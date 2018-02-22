@@ -203,7 +203,7 @@
   <string name="err_log_post_failed_ec">Parece que o seu  registo não foi publicado. Por favor verifique-o em Extremcaching.com.</string>
   <string name="err_log_post_failed_gk">Parece que o seu registo não foi postado. Por favor verifique-o na GeoKrety.org.</string>
   <string name="err_logimage_post_failed">Parece que a imagem do seu registo não foi enviada. Por favor, verifique a página Web original da cache.</string>
-  <string name="err_search_address_forgot">O c:geo esqueceu o endereço que procura.</string>
+  <string name="err_search_address_forgot">O c:geo esqueceu a morada que tentou encontrar.</string>
   <string name="err_parse_lat">O c:geo não conseguiu extrair a latitude.</string>
   <string name="err_parse_lon">O c:geo não conseguiu extrair a longitude.</string>
   <string name="err_parse_dist">O c:geo não conseguiu calcular a distância.</string>
@@ -215,7 +215,7 @@
   <string name="warn_no_coordinates">Nenhumas coordenadas fornecidas.</string>
   <string name="warn_no_keyword">Nenhuma palavra-chave fornecida.</string>
   <string name="warn_no_username">Nenhum nome de utilizador fornecido.</string>
-  <string name="warn_no_connector">Nenhum dos serviços de geocaching atualmente ativados fornece esse tipo de pesquisa.</string>
+  <string name="warn_no_connector">Nenhum dos serviços de geocaching activados fornece, actualmente, esse tipo de pesquisa.</string>
   <string name="warn_search_help_title">Precisa de ajuda?</string>
   <string name="warn_search_help_address">Preencha o endereço ou o nome da localização. Por exemplo, use uma morada como \"Avenida da Liberdade 100, Lisboa, Portugal\", um nome de cidade como \"Coimbra\" ou simplesmente o nome de algum sítio como \"Parque das Nações\".</string>
   <string name="warn_search_help_gccode">Preencha o código da geocache. Por exemplo \"GC1VCAZ\".</string>
@@ -245,13 +245,13 @@
   <string name="info_stored_image">Nova imagem guardada em:</string>
   <string name="info_storing_static_maps">A tentar armazenar mapas estáticos</string>
   <string name="info_cache_saved">A cache foi armazenada localmente</string>
-  <string name="warn_calculator_state_save">Assegure que guarda um waypoint se quiser manter o estado da calculadora.</string>
+  <string name="warn_calculator_state_save">Assegure a gravação do ponto adicional caso pretenda manter os parâmetros da calculadora.</string>
   <string name="err_trackable_log_not_anonymous">Logar %1$s a partir do c:geo não pode ser feito de forma anónima. Quer abrir as configurações para preencher as suas credenciais de %2$s?</string>
   <string name="err_trackable_no_preference_activity">Desculpa, não posso encontrar uma tela de preferência apropriada.</string>
   <string name="confirm_unsaved_changes_title">Alterações não guardadas</string>
   <string name="confirm_discard_wp_changes">Descartar as alterações aos pontos adicionais não guardadas?</string>
   <string name="warn_discard_changes">As alterações ao ponto adicional não guardadas foram descartadas!</string>
-  <string name="err_request_popup_info">c:geo falhou ao obter o pop-up com as informações da cache.</string>
+  <string name="err_request_popup_info">O c:geo não conseguiu obter as informações resumidas da geocache.</string>
   <!-- location service -->
   <string name="loc_last">Última conhecida</string>
   <string name="loc_net">Rede</string>
@@ -295,7 +295,7 @@
   <string name="caches_store_offline">Guardar na Memória</string>
   <string name="caches_store_all">Guardar todas</string>
   <string name="caches_store_unsaved">Guardar não memorizadas</string>
-  <string name="caches_store_selected">Memorizar seleccionadas</string>
+  <string name="caches_store_selected">Memorizar seleccionada(s)</string>
   <string name="caches_history">Histórico</string>
   <string name="caches_on_map">Mostrar no mapa</string>
   <string name="caches_sort">Ordenar</string>
@@ -326,7 +326,7 @@
     <item quantity="one">Quer remover esta cache da lista actual?</item>
     <item quantity="other">Quer remover todas as %d caches da lista actual?</item>
   </plurals>
-  <string name="caches_remove_selected">Remover seleccionadas</string>
+  <string name="caches_remove_selected">Remover seleccionada(s)</string>
   <plurals name="caches_remove_selected_confirm">
     <item quantity="one">Quer remover esta cache do seu dispositivo?</item>
     <item quantity="other">Quer remover as %d caches seleccionadas do seu dispositivo?</item>
@@ -335,9 +335,9 @@
   <string name="caches_delete_events">Eliminar eventos passados</string>
   <string name="caches_refresh_selected">Actualizar seleccionada(s)</string>
   <string name="caches_refresh_all">Actualizar todas</string>
-  <string name="caches_move_selected">Mover seleccionadas</string>
+  <string name="caches_move_selected">Mover seleccionada(s)</string>
   <string name="caches_move_all">Mover todas</string>
-  <string name="caches_copy_selected">Copiar selecionada</string>
+  <string name="caches_copy_selected">Copiar seleccionada(s)</string>
   <string name="caches_copy_all">Copiar tudo</string>
   <string name="caches_map_locus">Locus</string>
   <string name="caches_map_locus_export">Exportar para Locus</string>
@@ -367,7 +367,7 @@
   <string name="caches_clear_offlinelogs">Limpar registos offline</string>
   <string name="caches_clear_offlinelogs_message">Quer apagar os registos offline?</string>
   <string name="caches_clear_offlinelogs_progress">A limpar registos offline</string>
-  <string name="caches_make_list_unique">Fazer uma única lista</string>
+  <string name="caches_make_list_unique">Definir como a única lista</string>
   <string name="caches_filter_missing_gcvote">Caches encontradas não votadas</string>
   <!-- caches lists -->
   <string name="menu_lists">Gerir listas</string>
@@ -403,7 +403,7 @@
   <string name="about_license">Licença</string>
   <string name="about_apache_license"><a href="">Apache License, Versão 2.0</a></string>
   <string name="about_help">Ajuda</string>
-  <string name="about_system_include">Por favor inclua as seguintes informações de sistema ao enviar um relatório de bug ou ao pedir mais informações sobre c:geo:</string>
+  <string name="about_system_include">Por favor inclua as seguintes informações de sistema ao enviar um relatório de erro ou ao ser pedido mais informações sobre o c:geo:</string>
   <string name="about_system_info_send_button">Enviar por email…</string>
   <string name="about_system_info">informação do sistema c:ceo</string>
   <string name="about_system_info_send_chooser">Enviar Informação sobre o sistema</string>
@@ -460,11 +460,11 @@
   <string name="init_oc">Opencaching.de</string>
   <string name="settings_activate_oc">Activar</string>
   <string name="init_summary_oc_de">Carregar caches de opencaching.de</string>
-  <string name="init_oc_de_description">Autorizar c:geo com opencaching.de para pesquisar por caches e aceder/filtrar as suas caches encontradas.</string>
+  <string name="init_oc_de_description">Autoriza o c:geo em opencaching.de para pesquisar por caches e aceder/filtrar as suas caches encontradas.</string>
   <string name="init_oc_pl">Opencaching.pl</string>
   <string name="settings_activate_oc_pl">Activar</string>
   <string name="init_summary_oc_pl">Carregar caches de opencaching.pl</string>
-  <string name="init_oc_pl_description">Autorizar c:geo com opencaching.pl para pesquisar por caches e aceder/filtrar as suas caches encontradas.</string>
+  <string name="init_oc_pl_description">Autoriza o c:geo em opencaching.pl para pesquisar por caches e aceder/filtrar as suas caches encontradas.</string>
   <string name="init_oc_nl">Opencaching.nl</string>
   <string name="settings_activate_oc_nl">Activar</string>
   <string name="init_summary_oc_nl">Carregar caches de opencaching.nl</string>
@@ -598,7 +598,7 @@
   <string name="init_default_navigation_tool_2_description">Aqui pode seleccionar a seu segundo instrumento de navegação preferido. Active-o com um toque longo no ícone de navegação ao lado do título da cache.</string>
   <string name="init_navigation_menu_description">Aqui pode seleccionar quais dos modos de navegação disponíveis serão mostrados no menu de navegação para uma geocache ou um ponto adicional. As opções a cinzento não estão instaladas neste dispositivo.</string>
   <string name="init_debug_title">Informação de depuração</string>
-  <string name="init_debug_note">c:Geo pode gerar uma grande quantidade de informações de depuração. Ativar essa configuração afetará a estabilidade do c:geo e só é recomendado se for solicitado o envio de um log para os programadores. Por favor, mantenha o registo de depuração desativado durante o uso normal do c:geo!</string>
+  <string name="init_debug_note">O c:geo pode gerar uma grande quantidade de informações de depuração. Activar essa definição afectará a estabilidade do c:geo e só é recomendado se for solicitado o envio do registo para os programadores. Por favor, mantenha o registo de depuração desactivado durante o uso normal do c:geo!</string>
   <string name="init_debug">Activar depuração</string>
   <string name="init_dbonsdcard_title">Localização da base de dados</string>
   <string name="init_dbonsdcard_note">Pode guardar a base de dados da aplicação c:geo na memória interna do sistema ou numa pasta do seu armazenamento pessoal. Guarda-la no seu armazenamento pessoal pode libertar alguma memória, mas pode reduzir um pouco o desempenho tal como o c:geo não funcionará se o armazenamento não estiver acessível ou remover o ficheiro de base de dados.</string>
@@ -692,7 +692,7 @@
   <string name="auth_dialog_waiting">Esperando por %s…</string>
   <string name="auth_explain_short">O processo seguinte permitirá que o <b>c:geo</b> aceda a %s.</string>
   <string name="auth_explain_long">Pressionar o botão \"autorizar c:geo\" vai iniciar o processo. Este processo vai abrir um navegador web com uma página %s. Entre nesta página e permita que o <b>c:geo</b> tenha acesso à sua conta. E já está.</string>
-  <string name="auth_forget_title">Esqueceu a autorização?</string>
+  <string name="auth_forget_title">Esquecer autorização?</string>
   <string name="auth_forget_message">Será desconectado deste serviço. As suas credenciais atualmente guardadas serão perdidas.</string>
   <!-- auth credentials -->
   <string name="auth_credentials_explain_short">O processo a seguir permitirá que o <b>c:geo</b> aceda a %s.</string>
