@@ -1,10 +1,15 @@
 package cgeo.geocaching.connector;
 
-import cgeo.geocaching.utils.functions.Action1;
-
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
+
+import java.lang.ref.WeakReference;
+
+import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.functions.Action1;
 
 public class UserAction {
 
@@ -14,12 +19,32 @@ public class UserAction {
     public static class Context {
         @NonNull
         public final String userName;
-        @NonNull
-        public final Activity activity;
+        public final String userId;
+        public WeakReference<Activity> activityRef;
 
-        public Context(@NonNull final String userName, @NonNull final Activity activity) {
+        public Context(@NonNull final String userName, @NonNull final String userId) {
             this.userName = userName;
-            this.activity = activity;
+            this.userId = userId;
+        }
+
+        public void startActivity(final Intent intent) {
+            final Activity activity = activityRef.get();
+            if (activity == null) {
+                return;
+            }
+            try {
+                activity.startActivity(intent);
+            } catch (final ActivityNotFoundException e) {
+                Log.e("Cannot find suitable activity", e);
+            }
+        }
+
+        public void setActivity(final Activity activity) {
+            activityRef = new WeakReference<>(activity);
+        }
+
+        public Activity getActivity() {
+            return activityRef.get();
         }
     }
 

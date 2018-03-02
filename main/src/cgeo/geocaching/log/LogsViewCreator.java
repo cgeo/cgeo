@@ -7,12 +7,9 @@ import cgeo.geocaching.network.SmileyImage;
 import cgeo.geocaching.ui.AbstractCachingListViewPageViewCreator;
 import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
 import cgeo.geocaching.ui.DecryptTextClickListener;
-import cgeo.geocaching.ui.UserActionsClickListener;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.UnknownTagsHandler;
-
-import org.apache.commons.lang3.StringEscapeUtils;
 
 import android.text.Html;
 import android.view.View;
@@ -23,6 +20,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.commons.lang3.StringEscapeUtils;
 
 public abstract class LogsViewCreator extends AbstractCachingListViewPageViewCreator {
 
@@ -111,13 +110,13 @@ public abstract class LogsViewCreator extends AbstractCachingListViewPageViewCre
             holder.marker.setVisibility(View.GONE);
         }
 
-        holder.author.setOnClickListener(createUserActionsListener());
+        holder.author.setOnClickListener(createUserActionsListener(log));
         holder.text.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
         holder.text.setOnClickListener(new DecryptTextClickListener(holder.text));
         activity.registerForContextMenu(holder.text);
     }
 
-    protected abstract UserActionsClickListener createUserActionsListener();
+    protected abstract View.OnClickListener createUserActionsListener(LogEntry log);
 
     protected abstract String getGeocode();
 

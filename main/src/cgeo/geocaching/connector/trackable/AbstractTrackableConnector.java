@@ -1,10 +1,10 @@
 package cgeo.geocaching.connector.trackable;
 
-import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.connector.AbstractConnector;
 import cgeo.geocaching.connector.UserAction;
 import cgeo.geocaching.log.AbstractLoggingActivity;
 import cgeo.geocaching.log.TrackableLog;
+import cgeo.geocaching.models.Trackable;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -53,7 +53,7 @@ public abstract class AbstractTrackableConnector implements TrackableConnector {
 
     @Override
     @NonNull
-    public List<UserAction> getUserActions() {
+    public List<UserAction> getUserActions(final UserAction.Context user) {
         return AbstractConnector.getDefaultUserActions();
     }
 

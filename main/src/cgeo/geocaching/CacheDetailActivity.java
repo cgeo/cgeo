@@ -60,8 +60,8 @@ import cgeo.geocaching.ui.EditNoteDialog.EditNoteDialogListener;
 import cgeo.geocaching.ui.ImagesList;
 import cgeo.geocaching.ui.IndexOutOfBoundsAvoidingTextView;
 import cgeo.geocaching.ui.NavigationActionProvider;
-import cgeo.geocaching.ui.OwnerActionsClickListener;
 import cgeo.geocaching.ui.TrackableListAdapter;
+import cgeo.geocaching.ui.UserClickListener;
 import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.recyclerview.RecyclerViewProvider;
@@ -1135,7 +1135,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 } else { // OwnerReal guaranteed to be not blank based on above
                     ownerView.setText(cache.getOwnerUserId(), TextView.BufferType.SPANNABLE);
                 }
-                ownerView.setOnClickListener(new OwnerActionsClickListener(cache));
+                ownerView.setOnClickListener(UserClickListener.forOwnerOf(cache));
             }
 
             // hidden or event date

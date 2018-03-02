@@ -273,7 +273,7 @@ public abstract class AbstractConnector implements IConnector {
 
     @Override
     @NonNull
-    public List<UserAction> getUserActions() {
+    public List<UserAction> getUserActions(final UserAction.Context user) {
         final List<UserAction> actions = getDefaultUserActions();
 
         if (this instanceof ISearchByOwner) {
@@ -281,7 +281,7 @@ public abstract class AbstractConnector implements IConnector {
 
                 @Override
                 public void call(final Context context) {
-                    CacheListActivity.startActivityOwner(context.activity, context.userName);
+                    CacheListActivity.startActivityOwner(context.getActivity(), context.userName);
                 }
             }));
         }
@@ -291,7 +291,7 @@ public abstract class AbstractConnector implements IConnector {
 
                 @Override
                 public void call(final Context context) {
-                    CacheListActivity.startActivityFinder(context.activity, context.userName);
+                    CacheListActivity.startActivityFinder(context.getActivity(), context.userName);
                 }
             }));
         }
@@ -300,7 +300,7 @@ public abstract class AbstractConnector implements IConnector {
             @Override
             public void call(final UserAction.Context context) {
                 ClipboardUtils.copyToClipboard(context.userName);
-                ActivityMixin.showToast(context.activity, R.string.clipboard_copy_ok);
+                ActivityMixin.showToast(context.getActivity(), R.string.clipboard_copy_ok);
             }
         }));
         return actions;
@@ -317,7 +317,7 @@ public abstract class AbstractConnector implements IConnector {
 
                 @Override
                 public void call(final Context context) {
-                    ContactsAddon.openContactCard(context.activity, context.userName);
+                    ContactsAddon.openContactCard(context.getActivity(), context.userName);
                 }
             }));
         }
