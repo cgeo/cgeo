@@ -4,7 +4,7 @@ import cgeo.geocaching.CacheDetailActivity;
 import cgeo.geocaching.TrackableActivity;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.models.Trackable;
-import cgeo.geocaching.ui.UserActionsClickListener;
+import cgeo.geocaching.ui.UserClickListener;
 import cgeo.geocaching.utils.TextUtils;
 
 import android.text.Html;
@@ -12,6 +12,7 @@ import android.view.View;
 
 import java.util.List;
 
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 
 public class TrackableLogsViewCreator extends LogsViewCreator {
@@ -75,8 +76,8 @@ public class TrackableLogsViewCreator extends LogsViewCreator {
     }
 
     @Override
-    protected UserActionsClickListener createUserActionsListener() {
-        return new UserActionsClickListener(trackable);
+    protected View.OnClickListener createUserActionsListener(final LogEntry log) {
+        return UserClickListener.forUser(trackable, StringEscapeUtils.unescapeHtml4(log.author));
     }
 
 }

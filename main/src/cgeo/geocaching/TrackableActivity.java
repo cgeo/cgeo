@@ -20,8 +20,7 @@ import cgeo.geocaching.ui.AbstractCachingPageViewCreator;
 import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
 import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.ui.ImagesList;
-import cgeo.geocaching.ui.UserActionsClickListener;
-import cgeo.geocaching.ui.UserNameClickListener;
+import cgeo.geocaching.ui.UserClickListener;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Formatter;
@@ -466,7 +465,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
             final TextView owner = details.add(R.string.trackable_owner, res.getString(R.string.trackable_unknown)).right;
             if (StringUtils.isNotBlank(trackable.getOwner())) {
                 owner.setText(Html.fromHtml(trackable.getOwner()), TextView.BufferType.SPANNABLE);
-                owner.setOnClickListener(new UserActionsClickListener(trackable));
+                owner.setOnClickListener(UserClickListener.forOwnerOf(trackable));
             }
 
             // trackable spotted
@@ -529,9 +528,9 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
                         }
                     });
                 } else if (trackable.getSpottedType() == Trackable.SPOTTED_USER) {
-                    spotted.setOnClickListener(new UserNameClickListener(trackable, TextUtils.stripHtml(trackable.getSpottedName())));
+                    spotted.setOnClickListener(UserClickListener.forUser(trackable, TextUtils.stripHtml(trackable.getSpottedName())));
                 } else if (trackable.getSpottedType() == Trackable.SPOTTED_OWNER) {
-                    spotted.setOnClickListener(new UserNameClickListener(trackable, TextUtils.stripHtml(trackable.getOwner())));
+                    spotted.setOnClickListener(UserClickListener.forUser(trackable, TextUtils.stripHtml(trackable.getOwner())));
                 }
             }
 

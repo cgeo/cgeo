@@ -1,6 +1,38 @@
 package cgeo.geocaching.connector.oc;
 
-import static android.util.Base64.DEFAULT;
+import android.net.Uri;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.util.Base64;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.Date;
+import java.util.EnumSet;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.TimeZone;
+import java.util.regex.Pattern;
 
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
@@ -35,40 +67,9 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.SynchronizedDateFormat;
-
-import android.net.Uri;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.util.Base64;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.Date;
-import java.util.EnumSet;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.TimeZone;
-import java.util.regex.Pattern;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import okhttp3.Response;
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.StringUtils;
+
+import static android.util.Base64.DEFAULT;
 
 /**
  * Client for the OpenCaching API (Okapi).
@@ -128,6 +129,7 @@ final class OkapiClient {
     private static final String CACHE_MY_NOTES = "my_notes";
     private static final String CACHE_TRACKABLES_COUNT = "trackables_count";
     private static final String CACHE_TRACKABLES = "trackables";
+    private static final String CACHE_USER_PROFILE = "profile_url";
 
     private static final String TRK_GEOCODE = "code";
     private static final String TRK_NAME = "name";
@@ -460,6 +462,13 @@ final class OkapiClient {
             cache.setOwnerDisplayName(owner);
             // OpenCaching has no distinction between user id and user display name. Set the ID anyway to simplify c:geo workflows.
             cache.setOwnerUserId(owner);
+            final String profile = response.get(CACHE_OWNER).get(CACHE_USER_PROFILE).asText();
+            if (StringUtils.isNotEmpty(profile)) {
+                final String id = StringUtils.substringAfter(profile, "userid=");
+                if (StringUtils.isNotEmpty(id)) {
+                    cache.setOwnerUserId(id);
+                }
+            }
 
             final Map<LogType, Integer> logCounts = cache.getLogCounts();
             logCounts.put(LogType.FOUND_IT, response.get(CACHE_FOUNDS).asInt());

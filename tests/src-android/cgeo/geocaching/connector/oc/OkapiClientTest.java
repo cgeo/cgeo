@@ -30,8 +30,8 @@ public class OkapiClientTest extends CGeoTestCase {
         assertThat(cache.getGeocode()).isEqualTo(geoCode);
         assertThat(cache.getName()).isEqualTo("Oshkosh Municipal Tank");
         assertThat(cache.isDetailed()).isTrue();
-        assertThat(cache.getOwnerDisplayName()).isNotEmpty();
-        assertThat(cache.getOwnerUserId()).isEqualTo(cache.getOwnerDisplayName());
+        assertThat(cache.getOwnerDisplayName()).isEqualTo("glorkar");
+        assertThat(cache.getOwnerUserId()).isEqualTo("19");
     }
 
     public static void testOCSearchMustWorkWithoutOAuthAccessTokens() {
