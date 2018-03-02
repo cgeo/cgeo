@@ -90,7 +90,7 @@ buildscript {
 		classpath 'com.github.gfx.ribbonizer:plugin:1.0.0'
 
 		// gradle build script profiling
-		classpath 'com.gradle:build-scan-plugin:1.11'
+		classpath 'com.gradle:build-scan-plugin:1.12.1'
 	}
 }
 
