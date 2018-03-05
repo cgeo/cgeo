@@ -94,6 +94,7 @@ import org.mapsforge.core.model.LatLong;
 import org.mapsforge.core.util.Parameters;
 import org.mapsforge.map.android.graphics.AndroidGraphicFactory;
 import org.mapsforge.map.android.graphics.AndroidResourceBitmap;
+import org.mapsforge.map.android.input.MapZoomControls;
 import org.mapsforge.map.android.util.AndroidUtil;
 import org.mapsforge.map.layer.Layers;
 import org.mapsforge.map.layer.cache.TileCache;
@@ -101,6 +102,7 @@ import org.mapsforge.map.layer.download.tilesource.OpenStreetMapMapnik;
 import org.mapsforge.map.layer.renderer.TileRendererLayer;
 import org.mapsforge.map.model.DisplayModel;
 import org.mapsforge.map.reader.MapFile;
+import org.mapsforge.map.reader.header.MapFileInfo;
 import org.mapsforge.map.rendertheme.ExternalRenderTheme;
 import org.mapsforge.map.rendertheme.InternalRenderTheme;
 import org.mapsforge.map.rendertheme.XmlRenderTheme;
@@ -190,8 +192,6 @@ public class NewMap extends AbstractActionBarActivity {
         mapView.setClickable(true);
         mapView.getMapScaleBar().setVisible(true);
         mapView.setBuiltInZoomControls(true);
-        mapView.getMapZoomControls().setZoomLevelMin((byte) 10);
-        mapView.getMapZoomControls().setZoomLevelMax((byte) 20);
 
         // create a tile cache of suitable size. always initialize it based on the smallest tile size to expect (256 for online tiles)
         tileCache = AndroidUtil.createTileCache(this, "mapcache", 256, 1f, this.mapView.getModel().frameBufferModel.getOverdrawFactor());
@@ -639,17 +639,23 @@ public class NewMap extends AbstractActionBarActivity {
         // Create new render layer, if mapfile exists
         final ITileLayer oldLayer = this.tileLayer;
         ITileLayer newLayer = null;
+        final MapZoomControls zoomControls = mapView.getMapZoomControls();
         if (newSource instanceof MapsforgeMapProvider.OfflineMapSource) {
             this.mapView.getModel().displayModel.setFixedTileSize(0);
             final File mapFile = NewMap.getMapFile();
             if (mapFile != null && mapFile.exists()) {
-                newLayer = new RendererLayer(tileCache, new MapFile(mapFile), this.mapView.getModel().mapViewPosition, false, true, false, AndroidGraphicFactory.INSTANCE);
-
+                final MapFile mapDataStore = new MapFile(mapFile);
+                newLayer = new RendererLayer(tileCache, mapDataStore, this.mapView.getModel().mapViewPosition, false, true, false, AndroidGraphicFactory.INSTANCE);
+                final MapFileInfo mapFileInfo = mapDataStore.getMapFileHeader().getMapFileInfo();
+                zoomControls.setZoomLevelMax(mapFileInfo.zoomLevelMax);
+                zoomControls.setZoomLevelMin(mapFileInfo.zoomLevelMin);
             }
         } else {
             this.mapView.getModel().displayModel.setFixedTileSize(256);
             if (newSource.getNumericalId() == MapsforgeMapProvider.MAPSFORGE_MAPNIK_ID.hashCode()) {
                 newLayer = new DownloadLayer(tileCache, this.mapView.getModel().mapViewPosition, OpenStreetMapMapnik.INSTANCE, AndroidGraphicFactory.INSTANCE);
+                zoomControls.setZoomLevelMax(OpenStreetMapMapnik.INSTANCE.getZoomLevelMax());
+                zoomControls.setZoomLevelMin(OpenStreetMapMapnik.INSTANCE.getZoomLevelMin());
             }
         }
         // Exchange layer
