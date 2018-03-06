@@ -11,7 +11,10 @@ public class DownloadLayer implements ITileLayer {
 
     private final TileDownloadLayer tileLayer;
 
+    private final TileSource tileSource;
+
     public DownloadLayer(final TileCache tileCache, final MapViewPosition mapViewPosition, final TileSource tileSource, final GraphicFactory graphicFactory) {
+        this.tileSource = tileSource;
         tileLayer = new TileDownloadLayer(tileCache, mapViewPosition, tileSource, graphicFactory);
     }
 
@@ -33,6 +36,21 @@ public class DownloadLayer implements ITileLayer {
     @Override
     public void onPause() {
         tileLayer.onPause();
+    }
+
+    @Override
+    public int getFixedTileSize() {
+        return 256;
+    }
+
+    @Override
+    public byte getZoomLevelMin() {
+        return tileSource.getZoomLevelMin();
+    }
+
+    @Override
+    public byte getZoomLevelMax() {
+        return tileSource.getZoomLevelMax();
     }
 
 }
