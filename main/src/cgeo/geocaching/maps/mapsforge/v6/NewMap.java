@@ -27,15 +27,13 @@ import cgeo.geocaching.maps.MapProviderFactory;
 import cgeo.geocaching.maps.MapState;
 import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.maps.interfaces.OnMapDragListener;
-import cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider;
+import cgeo.geocaching.maps.mapsforge.MapsforgeMapSource;
 import cgeo.geocaching.maps.mapsforge.v6.caches.CachesBundle;
 import cgeo.geocaching.maps.mapsforge.v6.caches.GeoitemRef;
-import cgeo.geocaching.maps.mapsforge.v6.layers.DownloadLayer;
 import cgeo.geocaching.maps.mapsforge.v6.layers.HistoryLayer;
 import cgeo.geocaching.maps.mapsforge.v6.layers.ITileLayer;
 import cgeo.geocaching.maps.mapsforge.v6.layers.NavigationLayer;
 import cgeo.geocaching.maps.mapsforge.v6.layers.PositionLayer;
-import cgeo.geocaching.maps.mapsforge.v6.layers.RendererLayer;
 import cgeo.geocaching.maps.mapsforge.v6.layers.TapHandlerLayer;
 import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.maps.routing.RoutingMode;
@@ -98,11 +96,8 @@ import org.mapsforge.map.android.input.MapZoomControls;
 import org.mapsforge.map.android.util.AndroidUtil;
 import org.mapsforge.map.layer.Layers;
 import org.mapsforge.map.layer.cache.TileCache;
-import org.mapsforge.map.layer.download.tilesource.OpenStreetMapMapnik;
 import org.mapsforge.map.layer.renderer.TileRendererLayer;
 import org.mapsforge.map.model.DisplayModel;
-import org.mapsforge.map.reader.MapFile;
-import org.mapsforge.map.reader.header.MapFileInfo;
 import org.mapsforge.map.rendertheme.ExternalRenderTheme;
 import org.mapsforge.map.rendertheme.InternalRenderTheme;
 import org.mapsforge.map.rendertheme.XmlRenderTheme;
@@ -636,30 +631,19 @@ public class NewMap extends AbstractActionBarActivity {
 
 
     private void switchTileLayer(final MapSource newSource) {
-        // Create new render layer, if mapfile exists
         final ITileLayer oldLayer = this.tileLayer;
         ITileLayer newLayer = null;
-        final MapZoomControls zoomControls = mapView.getMapZoomControls();
-        if (newSource instanceof MapsforgeMapProvider.OfflineMapSource) {
-            this.mapView.getModel().displayModel.setFixedTileSize(0);
-            final File mapFile = NewMap.getMapFile();
-            if (mapFile != null && mapFile.exists()) {
-                final MapFile mapDataStore = new MapFile(mapFile);
-                newLayer = new RendererLayer(tileCache, mapDataStore, this.mapView.getModel().mapViewPosition, false, true, false, AndroidGraphicFactory.INSTANCE);
-                final MapFileInfo mapFileInfo = mapDataStore.getMapFileHeader().getMapFileInfo();
-                zoomControls.setZoomLevelMax(mapFileInfo.zoomLevelMax);
-                zoomControls.setZoomLevelMin(mapFileInfo.zoomLevelMin);
-            }
-        } else {
-            this.mapView.getModel().displayModel.setFixedTileSize(256);
-            if (newSource.getNumericalId() == MapsforgeMapProvider.MAPSFORGE_MAPNIK_ID.hashCode()) {
-                newLayer = new DownloadLayer(tileCache, this.mapView.getModel().mapViewPosition, OpenStreetMapMapnik.INSTANCE, AndroidGraphicFactory.INSTANCE);
-                zoomControls.setZoomLevelMax(OpenStreetMapMapnik.INSTANCE.getZoomLevelMax());
-                zoomControls.setZoomLevelMin(OpenStreetMapMapnik.INSTANCE.getZoomLevelMin());
-            }
+        if (newSource instanceof MapsforgeMapSource) {
+            newLayer = ((MapsforgeMapSource)newSource).createTileLayer(tileCache, this.mapView.getModel().mapViewPosition);
         }
+
         // Exchange layer
         if (newLayer != null) {
+            this.mapView.getModel().displayModel.setFixedTileSize(newLayer.getFixedTileSize());
+            final MapZoomControls zoomControls = mapView.getMapZoomControls();
+            zoomControls.setZoomLevelMax(newLayer.getZoomLevelMax());
+            zoomControls.setZoomLevelMin(newLayer.getZoomLevelMin());
+
             final Layers layers = this.mapView.getLayerManager().getLayers();
             int index = 0;
             if (oldLayer != null) {
@@ -950,16 +934,6 @@ public class NewMap extends AbstractActionBarActivity {
         if (followMyLocation) {
             centerMap(geo.getCoords());
         }
-    }
-
-    @Nullable
-    private static File getMapFile() {
-        final String mapFileName = Settings.getMapFile();
-        if (StringUtils.isNotEmpty(mapFileName)) {
-            return new File(mapFileName);
-        }
-
-        return null;
     }
 
     private static final class DisplayHandler extends Handler {

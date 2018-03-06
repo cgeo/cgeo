@@ -11,4 +11,11 @@ public interface ITileLayer {
     void onResume();
 
     void onPause();
+
+    int getFixedTileSize();
+
+    byte getZoomLevelMin();
+
+    byte getZoomLevelMax();
+
 }
