@@ -705,7 +705,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
                     cache.setUserModifiedCoords(true);
                 }
                 cache.setCoords(waypoint.getCoords());
-                DataStore.saveChangedCache(cache);
+                DataStore.saveUserModifiedCoords(cache);
             }
             if (waypoint.getCoords() != null && modifyBoth.isChecked()) {
                 finishHandler.sendEmptyMessage(UPLOAD_START);

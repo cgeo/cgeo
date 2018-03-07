@@ -1134,6 +1134,27 @@ public class DataStore {
     }
 
     /**
+     * Save the cache for set/reset user modified coordinates
+     */
+    public static void saveUserModifiedCoords(final Geocache cache) {
+        database.beginTransaction();
+
+        final ContentValues values = new ContentValues();
+        try {
+            saveWaypointsWithoutTransaction(cache);
+            putCoords(values, cache.getCoords());
+            values.put("coordsChanged", cache.hasUserModifiedCoords() ? 1 : 0);
+
+            database.update(dbTableCaches, values, "geocode = ?", new String[] { cache.getGeocode() });
+            database.setTransactionSuccessful();
+        } catch (final Exception e) {
+            Log.e("SaveResetCoords", e);
+        } finally {
+            database.endTransaction();
+        }
+    }
+
+    /**
      * Save/store a cache to the CacheCache
      *
      * @param cache
