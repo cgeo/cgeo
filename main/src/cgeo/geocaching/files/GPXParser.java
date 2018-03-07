@@ -1,35 +1,5 @@
 package cgeo.geocaching.files;
 
-import android.sax.Element;
-import android.sax.EndElementListener;
-import android.sax.EndTextElementListener;
-import android.sax.RootElement;
-import android.sax.StartElementListener;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.util.Xml;
-
-import org.apache.commons.lang3.CharEncoding;
-import org.apache.commons.lang3.StringUtils;
-import org.xml.sax.Attributes;
-import org.xml.sax.SAXException;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Date;
-import java.util.EnumSet;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Locale;
-import java.util.Set;
-import java.util.regex.Pattern;
-
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.ConnectorFactory;
@@ -58,6 +28,36 @@ import cgeo.geocaching.utils.HtmlUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
 import cgeo.geocaching.utils.SynchronizedDateFormat;
+
+import android.sax.Element;
+import android.sax.EndElementListener;
+import android.sax.EndTextElementListener;
+import android.sax.RootElement;
+import android.sax.StartElementListener;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.util.Xml;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Date;
+import java.util.EnumSet;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Locale;
+import java.util.Set;
+import java.util.regex.Pattern;
+
+import org.apache.commons.lang3.CharEncoding;
+import org.apache.commons.lang3.StringUtils;
+import org.xml.sax.Attributes;
+import org.xml.sax.SAXException;
 
 abstract class GPXParser extends FileParser {
 
@@ -1081,12 +1081,23 @@ abstract class GPXParser extends FileParser {
             });
 
             final Element otherCode = ocCache.getChild(namespace, "other_code");
-
             otherCode.setEndTextElementListener(new EndTextElementListener() {
 
                 @Override
                 public void end(final String otherCode) {
                     descriptionPrefix = Geocache.getAlternativeListingText(otherCode.trim());
+                }
+            });
+
+            final Element ocSize = ocCache.getChild(namespace, "size");
+            ocSize.setEndTextElementListener(new EndTextElementListener() {
+
+                @Override
+                public void end(final String ocSize) {
+                    final CacheSize size = CacheSize.getById(ocSize);
+                    if (size != CacheSize.UNKNOWN) {
+                        cache.setSize(size);
+                    }
                 }
             });
         }

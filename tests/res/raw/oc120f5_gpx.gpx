@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<gpx xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" version="1.0" creator="Opencaching.de - https://www.opencaching.de/" xsi:schemaLocation="http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd http://www.groundspeak.com/cache/1/0/1 http://www.groundspeak.com/cache/1/0/1/cache.xsd https://github.com/opencaching/gpx-extension-v1 https://raw.githubusercontent.com/opencaching/gpx-extension-v1/master/schema.xsd http://www.gsak.net/xmlv1/4 http://www.gsak.net/xmlv1/4/gsak.xsd" xmlns="http://www.topografix.com/GPX/1/0">
+  <name>Cache listing generated from Opencaching.de</name>
+  <desc>This is a waypoint file generated from Opencaching.de</desc>
+  <author>Opencaching.de</author>
+  <email>kontakt@opencaching.de</email>
+  <url>www.opencaching.de</url>
+  <urlname>Opencaching.de - Geocaching in Deutschland, Österreich und der Schweiz</urlname>
+  <time>2018-03-07T19:11:05Z</time>
+  <keywords>cache, geocache, opencaching, waypoint</keywords>
+  <wpt lat="48.94037" lon="9.18038">
+    <time>2015-06-09T00:00:00Z</time>
+    <name>OC120F5</name>
+    <desc>Schwäbischer Wies´n Cache</desc>
+    <src>www.opencaching.de</src>
+    <url>https://www.opencaching.de/viewcache.php?cacheid=177062</url>
+    <urlname>Schwäbischer Wies´n Cache</urlname>
+    <sym>Geocache</sym>
+    <type>Geocache|Traditional Cache</type>
+    <groundspeak:cache id="177062" available="True" archived="False" xmlns:groundspeak="http://www.groundspeak.com/cache/1/0/1">
+      <groundspeak:name>Schwäbischer Wies´n Cache</groundspeak:name>
+      <groundspeak:placed_by>AndiSaschFreiberg</groundspeak:placed_by>
+      <groundspeak:owner id="318268">AndiSaschFreiberg</groundspeak:owner>
+      <groundspeak:type>Traditional Cache</groundspeak:type>
+      <groundspeak:container>Micro</groundspeak:container>
+      <groundspeak:attributes>
+           <groundspeak:attribute id="21" inc="1">Cliff / falling rocks</groundspeak:attribute>
+           <groundspeak:attribute id="27" inc="1">Drinking water nearby</groundspeak:attribute>
+           <groundspeak:attribute id="10" inc="1">Difficult climbing</groundspeak:attribute>
+           <groundspeak:attribute id="130" inc="1">Point of interest</groundspeak:attribute>
+           <groundspeak:attribute id="14" inc="0">Recommended at night</groundspeak:attribute>
+           <groundspeak:attribute id="62" inc="0">Seasonal access</groundspeak:attribute>
+           <groundspeak:attribute id="3" inc="1">Climbing gear</groundspeak:attribute>
+           <groundspeak:attribute id="6" inc="1">Recommended for kids</groundspeak:attribute>
+      </groundspeak:attributes>
+      <groundspeak:difficulty>1</groundspeak:difficulty>
+      <groundspeak:terrain>1</groundspeak:terrain>
+      <groundspeak:country>Germany</groundspeak:country>
+      <groundspeak:state>Baden-Württemberg</groundspeak:state>
+      <groundspeak:short_description html="True">Geisinger Wasserrückstaubecken mit integrierter Spielwiese</groundspeak:short_description>
+      <groundspeak:long_description html="True">&lt;p&gt;ene mene miste, es rappelt in der Kiste - nun sucht mal schön nach felsigem Gebiet - doch Vorsicht - es ist auch ungefährlicher Steinschlag möglich !&lt;/p&gt;
+&lt;p&gt;Achtung: Muggler-Alarm in unmittelbarer Höhlennähe ! &lt;/p&gt;
+&lt;p&gt;Falls Ihr nicht weiterkommt, sucht nach dem benachbarten Mugglerhaus mit der Nr. 43 und Ihr werdet Hilfen erhalten.&lt;/p&gt;
+&lt;p&gt; &lt;/p&gt;
+&lt;p&gt;Viel Erfolg.&lt;/p&gt;
+&lt;p&gt; &lt;/p&gt;
+&lt;p&gt;AndiSäschFreiberg&lt;/p&gt;&lt;p&gt;&lt;em&gt;© &lt;a href='https://www.opencaching.de/viewprofile.php?userid=318268' target='_blank'&gt;AndiSaschFreiberg&lt;/a&gt;, &lt;a href='https://www.opencaching.de/viewcache.php?cacheid=177062' target='_blank'&gt;Opencaching.de&lt;/a&gt;, &lt;a href='http://creativecommons.org/licenses/by-nc-nd/3.0/de/' target='_blank'&gt;CC BY-NC-ND&lt;/a&gt;, Stand: 07.03.2018; alle Logeinträge © jeweiliger Autor&lt;/em&gt;&lt;/p&gt;
+&lt;br /&gt;</groundspeak:long_description>
+      <groundspeak:logs>
+      <groundspeak:log id="1082844">
+        <groundspeak:date>2015-12-05T00:00:00Z</groundspeak:date>
+        <groundspeak:type>Found it</groundspeak:type>
+        <groundspeak:finder id="165774">steingesicht</groundspeak:finder>
+        <groundspeak:text encoded="False">&lt;p&gt;gut gefunden&lt;/p&gt;</groundspeak:text>
+      </groundspeak:log>
+      <groundspeak:log id="1093091">
+        <groundspeak:date>2015-11-01T00:00:00Z</groundspeak:date>
+        <groundspeak:type>Found it</groundspeak:type>
+        <groundspeak:finder id="282139">J_B</groundspeak:finder>
+        <groundspeak:text encoded="False">Hier war Frau J:B mit den Kindern am Sonttagnachmittag unterwegs. Dose gut gefunden.&lt;br /&gt;Vielen Dank für den Cache!</groundspeak:text>
+      </groundspeak:log>
+      <groundspeak:log id="1063625">
+        <groundspeak:date>2015-08-23T12:46:00Z</groundspeak:date>
+        <groundspeak:type>Found it</groundspeak:type>
+        <groundspeak:finder id="294563">gourangy</groundspeak:finder>
+        <groundspeak:text encoded="False">Trotz vieler Balkonmuggel entdeckt und die Spinnenweben entfernt &lt;br /&gt;
+Schnell und sicher geloggt!&lt;br /&gt;
+TFTC</groundspeak:text>
+      </groundspeak:log>
+      </groundspeak:logs>
+      <groundspeak:travelbugs>
+      </groundspeak:travelbugs>
+    </groundspeak:cache>
+    <oc:cache xmlns:oc="https://github.com/opencaching/gpx-extension-v1">
+      <oc:type>Traditional Cache</oc:type>
+      <oc:size>Nano</oc:size>
+      <oc:trip_time>0.25</oc:trip_time>
+      <oc:requires_password>false</oc:requires_password>
+      <oc:other_code>GC5X931</oc:other_code>
+      <oc:logs>
+        <oc:log id="1082844" uuid="8dbc4c4c-9b95-11e5-99e6-525400e33611">
+        </oc:log>
+        <oc:log id="1093091" uuid="2e9b5619-bad0-11e5-8c28-568baadf70bf">
+        </oc:log>
+        <oc:log id="1063625" uuid="2c90415f-628e-4d69-8b5b-68f8009a6ec7">
+        </oc:log>
+      </oc:logs>
+    </oc:cache>
+  </wpt>
+</gpx>

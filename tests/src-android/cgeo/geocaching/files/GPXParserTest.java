@@ -525,4 +525,12 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         assertThat(cache.isLogPasswordRequired()).isTrue();
     }
 
+    public void testOpenCachingGpxExtensionSize() throws Exception {
+        final List<Geocache> caches = readGPX10(R.raw.oc120f5_gpx);
+        assertThat(caches).hasSize(1);
+
+        final Geocache cache = caches.get(0);
+        assertThat(cache.getSize()).isEqualTo(CacheSize.NANO);
+    }
+
 }
