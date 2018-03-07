@@ -84,6 +84,7 @@ import java.util.Queue;
 import java.util.Set;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
+
 import butterknife.ButterKnife;
 import io.reactivex.disposables.CompositeDisposable;
 import org.apache.commons.collections4.CollectionUtils;
@@ -152,7 +153,6 @@ public class NewMap extends AbstractActionBarActivity {
     public static final int UPDATE_PROGRESS = 0;
     public static final int FINISHED_LOADING_DETAILS = 1;
 
-    @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -170,7 +170,7 @@ public class NewMap extends AbstractActionBarActivity {
             trailHistory = savedInstanceState.getParcelableArrayList(BUNDLE_TRAIL_HISTORY);
             followMyLocation = mapOptions.mapState.followsMyLocation();
         } else {
-            followMyLocation = followMyLocation && mapOptions.mapMode == MapMode.LIVE;
+            followMyLocation = followMyLocation && mapOptions.mapMode ==MapMode.LIVE;
         }
 
         ActivityMixin.onCreate(this, true);
@@ -198,7 +198,7 @@ public class NewMap extends AbstractActionBarActivity {
         // prepare initial settings of mapView
         if (mapOptions.mapState != null) {
             this.mapView.getModel().mapViewPosition.setCenter(MapsforgeUtils.toLatLong(mapOptions.mapState.getCenter()));
-            this.mapView.setMapZoomLevel((byte) mapOptions.mapState.getZoomLevel());
+            this.mapView.setMapZoomLevel((byte)mapOptions.mapState.getZoomLevel());
             this.targetGeocode = mapOptions.mapState.getTargetGeocode();
             this.lastNavTarget = mapOptions.mapState.getLastNavTarget();
             mapOptions.isLiveEnabled = mapOptions.mapState.isLiveEnabled();
