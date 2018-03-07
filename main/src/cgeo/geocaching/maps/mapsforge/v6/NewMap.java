@@ -634,7 +634,7 @@ public class NewMap extends AbstractActionBarActivity {
         final ITileLayer oldLayer = this.tileLayer;
         ITileLayer newLayer = null;
         if (newSource instanceof MapsforgeMapSource) {
-            newLayer = ((MapsforgeMapSource)newSource).createTileLayer(tileCache, this.mapView.getModel().mapViewPosition);
+            newLayer = ((MapsforgeMapSource) newSource).createTileLayer(tileCache, this.mapView.getModel().mapViewPosition);
         }
 
         // Exchange layer
