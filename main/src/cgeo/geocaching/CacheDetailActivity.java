@@ -2271,7 +2271,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     cache.setCoords(wpt.getCoords());
                     cache.setUserModifiedCoords(false);
                     cache.deleteWaypointForce(wpt);
-                    DataStore.saveChangedCache(cache);
+                    DataStore.saveUserModifiedCoords(cache);
                     handler.sendEmptyMessage(HandlerResetCoordinates.LOCAL);
                 }
 
