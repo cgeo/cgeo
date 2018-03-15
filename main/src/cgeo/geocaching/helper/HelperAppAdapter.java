@@ -2,12 +2,12 @@ package cgeo.geocaching.helper;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.compatibility.Compatibility;
-import cgeo.geocaching.ui.recyclerview.AbstractRecyclerViewAdapter;
 import cgeo.geocaching.ui.recyclerview.AbstractRecyclerViewHolder;
 
 import android.content.Context;
 import android.content.res.Resources;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,7 +20,7 @@ import java.util.List;
 
 import butterknife.BindView;
 
-final class HelperAppAdapter extends AbstractRecyclerViewAdapter<HelperAppAdapter.ViewHolder> {
+final class HelperAppAdapter extends RecyclerView.Adapter<HelperAppAdapter.ViewHolder> {
 
     @NonNull private final List<HelperApp> helperApps;
     @NonNull private final HelperAppClickListener clickListener;
@@ -55,7 +55,7 @@ final class HelperAppAdapter extends AbstractRecyclerViewAdapter<HelperAppAdapte
 
             @Override
             public void onClick(final View view) {
-                final HelperApp app = helperApps.get(viewHolder.getItemPosition());
+                final HelperApp app = helperApps.get(viewHolder.getAdapterPosition());
                 clickListener.onClickHelperApp(app);
             }
         });
@@ -65,8 +65,6 @@ final class HelperAppAdapter extends AbstractRecyclerViewAdapter<HelperAppAdapte
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-        super.onBindViewHolder(holder, position);
-
         final HelperApp app = helperApps.get(position);
         final Resources resources = context.getResources();
         holder.title.setText(resources.getString(app.titleId));
