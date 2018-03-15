@@ -1,11 +1,11 @@
 package cgeo.geocaching.files;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.ui.recyclerview.AbstractRecyclerViewAdapter;
 import cgeo.geocaching.ui.recyclerview.AbstractRecyclerViewHolder;
 
 import android.graphics.Typeface;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -17,7 +17,7 @@ import java.util.List;
 
 import butterknife.BindView;
 
-public class FileSelectionListAdapter extends AbstractRecyclerViewAdapter<FileSelectionListAdapter.ViewHolder> {
+public class FileSelectionListAdapter extends RecyclerView.Adapter<FileSelectionListAdapter.ViewHolder> {
 
     private final IFileSelectionView parentView;
     @NonNull private final List<File> files;
@@ -40,7 +40,7 @@ public class FileSelectionListAdapter extends AbstractRecyclerViewAdapter<FileSe
 
             @Override
             public void onClick(final View view) {
-                final File file = files.get(viewHolder.getItemPosition());
+                final File file = files.get(viewHolder.getAdapterPosition());
                 parentView.setCurrentFile(file.toString());
                 parentView.close();
             }
@@ -51,7 +51,6 @@ public class FileSelectionListAdapter extends AbstractRecyclerViewAdapter<FileSe
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-        super.onBindViewHolder(holder, position);
         final File file = files.get(position);
 
         final String currentFile = parentView.getCurrentFile();

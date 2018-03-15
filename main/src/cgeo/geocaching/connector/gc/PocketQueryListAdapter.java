@@ -3,11 +3,11 @@ package cgeo.geocaching.connector.gc;
 import cgeo.geocaching.CacheListActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.models.PocketQuery;
-import cgeo.geocaching.ui.recyclerview.AbstractRecyclerViewAdapter;
 import cgeo.geocaching.ui.recyclerview.AbstractRecyclerViewHolder;
 import cgeo.geocaching.utils.Formatter;
 
 import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 import butterknife.BindView;
 
-class PocketQueryListAdapter extends AbstractRecyclerViewAdapter<PocketQueryListAdapter.ViewHolder> {
+class PocketQueryListAdapter extends RecyclerView.Adapter<PocketQueryListAdapter.ViewHolder> {
 
     @NonNull private final PocketQueryListActivity activity;
 
@@ -47,7 +47,7 @@ class PocketQueryListAdapter extends AbstractRecyclerViewAdapter<PocketQueryList
         viewHolder.cachelist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
-                CacheListActivity.startActivityPocket(view.getContext(), activity.getQueries().get(viewHolder.getItemPosition()));
+                CacheListActivity.startActivityPocket(view.getContext(), activity.getQueries().get(viewHolder.getAdapterPosition()));
             }
         });
         viewHolder.cachelist.setVisibility(activity.onlyDownloadable() ? View.GONE : View.VISIBLE);
@@ -55,7 +55,7 @@ class PocketQueryListAdapter extends AbstractRecyclerViewAdapter<PocketQueryList
         viewHolder.download.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
-                final PocketQuery pocketQuery = activity.getQueries().get(viewHolder.getItemPosition());
+                final PocketQuery pocketQuery = activity.getQueries().get(viewHolder.getAdapterPosition());
                 if (activity.onlyDownloadable()) {
                     activity.returnResult(pocketQuery);
                 } else {
@@ -69,7 +69,6 @@ class PocketQueryListAdapter extends AbstractRecyclerViewAdapter<PocketQueryList
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-        super.onBindViewHolder(holder, position);
         final PocketQuery pocketQuery = activity.getQueries().get(position);
         holder.download.setVisibility(pocketQuery.isDownloadable() ? View.VISIBLE : View.GONE);
         holder.label.setText(pocketQuery.getName());
