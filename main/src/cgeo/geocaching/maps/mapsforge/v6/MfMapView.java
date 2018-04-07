@@ -14,8 +14,11 @@ import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
 
+import org.mapsforge.core.model.BoundingBox;
+import org.mapsforge.core.model.Dimension;
 import org.mapsforge.core.model.LatLong;
 import org.mapsforge.core.model.Point;
+import org.mapsforge.core.util.LatLongUtils;
 import org.mapsforge.core.util.MercatorProjection;
 import org.mapsforge.map.android.view.MapView;
 
@@ -88,21 +91,16 @@ public class MfMapView extends MapView {
 
     public void zoomToViewport(final Viewport viewport) {
 
+        getModel().mapViewPosition.setCenter(new LatLong(viewport.getCenter().getLatitude(), viewport.getCenter().getLongitude()));
+
         if (viewport.bottomLeft.equals(viewport.topRight)) {
             setMapZoomLevel(Settings.getMapZoom(MapMode.SINGLE));
         } else {
             final int tileSize = getModel().displayModel.getTileSize();
-            final long mapSize = MercatorProjection.getMapSize((byte) 0, tileSize);
-            final double dxMax = MercatorProjection.longitudeToPixelX(viewport.getLongitudeMax(), mapSize) / tileSize;
-            final double dxMin = MercatorProjection.longitudeToPixelX(viewport.getLongitudeMin(), mapSize) / tileSize;
-            final double zoomX = Math.floor(-Math.log(3.8) * Math.log(Math.abs(dxMax - dxMin)) + getWidth() / tileSize);
-            final double dyMax = MercatorProjection.longitudeToPixelX(viewport.getLatitudeMax(), mapSize) / tileSize;
-            final double dyMin = MercatorProjection.longitudeToPixelX(viewport.getLatitudeMin(), mapSize) / tileSize;
-            final double zoomY = Math.floor(-Math.log(3.8) * Math.log(Math.abs(dyMax - dyMin)) + getHeight() / tileSize);
-            final byte newZoom = (byte) Math.min(zoomX, zoomY);
+            final byte newZoom = LatLongUtils.zoomForBounds(new Dimension(getWidth(), getHeight()),
+                    new BoundingBox(viewport.getLatitudeMin(), viewport.getLongitudeMin(), viewport.getLatitudeMax(), viewport.getLongitudeMax()), tileSize);
             getModel().mapViewPosition.setZoomLevel(newZoom);
         }
-        getModel().mapViewPosition.setCenter(new LatLong(viewport.getCenter().getLatitude(), viewport.getCenter().getLongitude()));
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -123,7 +121,7 @@ public class MfMapView extends MapView {
 
         @Override
         public boolean onScroll(final MotionEvent e1, final MotionEvent e2,
-                final float distanceX, final float distanceY) {
+                                final float distanceX, final float distanceY) {
             if (onDragListener != null) {
                 onDragListener.onDrag();
             }
