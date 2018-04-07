@@ -86,6 +86,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 import butterknife.ButterKnife;
 import io.reactivex.disposables.CompositeDisposable;
+
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.mapsforge.core.model.LatLong;
@@ -207,22 +208,30 @@ public class NewMap extends AbstractActionBarActivity {
             final Viewport viewport = DataStore.getBounds(mapOptions.searchResult.getGeocodes());
 
             if (viewport != null) {
-                mapView.zoomToViewport(viewport);
+                postZoomToViewport(viewport);
             }
         } else if (StringUtils.isNotEmpty(mapOptions.geocode)) {
             final Viewport viewport = DataStore.getBounds(mapOptions.geocode);
 
             if (viewport != null) {
-                mapView.zoomToViewport(viewport);
+                postZoomToViewport(viewport);
             }
             targetGeocode = mapOptions.geocode;
         } else if (mapOptions.coords != null) {
-            mapView.zoomToViewport(new Viewport(mapOptions.coords, 0, 0));
+            postZoomToViewport(new Viewport(mapOptions.coords, 0, 0));
         } else {
-            mapView.zoomToViewport(new Viewport(Settings.getMapCenter().getCoords(), 0, 0));
+            postZoomToViewport(new Viewport(Settings.getMapCenter().getCoords(), 0, 0));
         }
         prepareFilterBar();
         Routing.connect();
+    }
+
+    private void postZoomToViewport(final Viewport viewport) {
+        mapView.post(new Runnable() {
+            public void run() {
+                mapView.zoomToViewport(viewport);
+            }
+        });
     }
 
     @Override
@@ -502,8 +511,7 @@ public class NewMap extends AbstractActionBarActivity {
     }
 
     /**
-     * @param view
-     *            Not used here, required by layout
+     * @param view Not used here, required by layout
      */
     public void showFilterMenu(final View view) {
         // do nothing, the filter bar only shows the global filter
@@ -799,8 +807,7 @@ public class NewMap extends AbstractActionBarActivity {
     /**
      * store caches, invoked by "store offline" menu item
      *
-     * @param listIds
-     *            the lists to store the caches in
+     * @param listIds the lists to store the caches in
      */
     private void storeCaches(final Set<String> geocodes, final Set<Integer> listIds) {
 
@@ -863,7 +870,7 @@ public class NewMap extends AbstractActionBarActivity {
     }
 
     private MapState prepareMapState() {
-        return new MapState(MapsforgeUtils.toGeopoint(mapView.getModel().mapViewPosition.getCenter()), mapView.getModel().mapViewPosition.getZoomLevel(), followMyLocation, false, targetGeocode, lastNavTarget, mapOptions.isLiveEnabled, mapOptions.isStoredEnabled);
+        return new MapState(MapsforgeUtils.toGeopoint(mapView.getModel().mapViewPosition.getCenter()), mapView.getMapZoomLevel(), followMyLocation, false, targetGeocode, lastNavTarget, mapOptions.isLiveEnabled, mapOptions.isStoredEnabled);
     }
 
     private void centerMap(final Geopoint geopoint) {
@@ -1042,11 +1049,14 @@ public class NewMap extends AbstractActionBarActivity {
         return caches != null ? caches.getItemsCount() : 0;
     }
 
-    /** Updates the progress. */
+    /**
+     * Updates the progress.
+     */
     private static final class ShowProgressHandler extends Handler {
         private int counter = 0;
 
-        @NonNull private final WeakReference<NewMap> mapRef;
+        @NonNull
+        private final WeakReference<NewMap> mapRef;
 
         ShowProgressHandler(@NonNull final NewMap map) {
             this.mapRef = new WeakReference<>(map);
@@ -1160,7 +1170,8 @@ public class NewMap extends AbstractActionBarActivity {
         /**
          * weak reference to the outer class
          */
-        @NonNull private final WeakReference<NewMap> mapRef;
+        @NonNull
+        private final WeakReference<NewMap> mapRef;
 
         UpdateLoc(@NonNull final NewMap map) {
             mapRef = new WeakReference<>(map);
@@ -1302,9 +1313,9 @@ public class NewMap extends AbstractActionBarActivity {
             };
 
             final AlertDialog dialog = new AlertDialog.Builder(this)
-                .setTitle(res.getString(R.string.map_select_multiple_items))
-                .setAdapter(adapter, new SelectionClickListener(sorted))
-                .create();
+                    .setTitle(res.getString(R.string.map_select_multiple_items))
+                    .setAdapter(adapter, new SelectionClickListener(sorted))
+                    .create();
             dialog.setCanceledOnTouchOutside(true);
             dialog.show();
 
@@ -1383,8 +1394,10 @@ public class NewMap extends AbstractActionBarActivity {
 
     private static class RequestDetailsThread extends Thread {
 
-        @NonNull private final Geocache cache;
-        @NonNull private final WeakReference<NewMap> map;
+        @NonNull
+        private final Geocache cache;
+        @NonNull
+        private final WeakReference<NewMap> map;
 
         RequestDetailsThread(@NonNull final Geocache cache, @NonNull final NewMap map) {
             this.cache = cache;
@@ -1403,7 +1416,8 @@ public class NewMap extends AbstractActionBarActivity {
             }
             if (requestRequired()) {
                 try {
-                /* final SearchResult search = */GCMap.searchByGeocodes(Collections.singleton(cache.getGeocode()));
+                    /* final SearchResult search = */
+                    GCMap.searchByGeocodes(Collections.singleton(cache.getGeocode()));
                 } catch (final Exception ex) {
                     Log.w("Error requesting cache popup info", ex);
                     ActivityMixin.showToast(map, R.string.err_request_popup_info);
