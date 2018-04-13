@@ -1,5 +1,6 @@
 package cgeo.geocaching.connector.gc;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.AbstractLoggingManager;
@@ -11,6 +12,7 @@ import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.loaders.UrlLoader;
 import cgeo.geocaching.log.LogCacheActivity;
 import cgeo.geocaching.log.LogType;
+import cgeo.geocaching.log.ReportProblemType;
 import cgeo.geocaching.log.TrackableLog;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
@@ -26,6 +28,7 @@ import android.support.v4.content.Loader;
 import android.widget.CheckBox;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
@@ -42,6 +45,8 @@ class GCLoggingManager extends AbstractLoggingManager implements LoaderManager.L
     private List<LogType> possibleLogTypes;
     private boolean hasLoaderError = true;
     private int premFavcount;
+
+    private static final List<ReportProblemType> REPORT_PROBLEM_TYPES = Arrays.asList(ReportProblemType.LOG_FULL, ReportProblemType.DAMAGED, ReportProblemType.MISSING, ReportProblemType.ARCHIVE, ReportProblemType.OTHER);
 
     GCLoggingManager(final LogCacheActivity activity, final Geocache cache) {
         this.activity = activity;
@@ -111,7 +116,7 @@ class GCLoggingManager extends AbstractLoggingManager implements LoaderManager.L
 
     @Override
     @NonNull
-    public LogResult postLog(@NonNull final LogType logType, @NonNull final Calendar date, @NonNull final String log, @Nullable final String logPassword, @NonNull final List<TrackableLog> trackableLogs) {
+    public LogResult postLog(@NonNull final LogType logType, @NonNull final Calendar date, @NonNull final String log, @Nullable final String logPassword, @NonNull final List<TrackableLog> trackableLogs, @NonNull final ReportProblemType reportProblem) {
 
         try {
             final CheckBox favCheck = (CheckBox) activity.findViewById(R.id.favorite_check);
@@ -134,6 +139,11 @@ class GCLoggingManager extends AbstractLoggingManager implements LoaderManager.L
                     cache.setFavoritePoints(cache.getFavoritePoints() + 1);
                 }
             }
+
+            if (reportProblem != ReportProblemType.NO_PROBLEM) {
+                GCWebAPI.postLog(cache, reportProblem.logType, date.getTime(), CgeoApplication.getInstance().getString(reportProblem.textId), Collections.<TrackableLog>emptyList(), false);
+            }
+
             return new LogResult(postResult.left, postResult.right);
         } catch (final Exception e) {
             Log.e("GCLoggingManager.postLog", e);
@@ -182,6 +192,21 @@ class GCLoggingManager extends AbstractLoggingManager implements LoaderManager.L
     @Override
     public int getPremFavoritePoints() {
         return hasLoaderError ? 0 : premFavcount;
+    }
+
+    @NonNull
+    @Override
+    public List<ReportProblemType> getReportProblemTypes(@NonNull final Geocache geocache) {
+        if (geocache.isArchived() || geocache.isOwner()) {
+            return Collections.emptyList();
+        }
+        final List<ReportProblemType> possibleReportProblemTypes = new ArrayList<>();
+        for (final ReportProblemType reportProblem : REPORT_PROBLEM_TYPES) {
+            if ((!geocache.isEventCache() && !geocache.isDisabled()) || reportProblem == ReportProblemType.ARCHIVE) {
+                possibleReportProblemTypes.add(reportProblem);
+            }
+        }
+        return possibleReportProblemTypes;
     }
 
 }

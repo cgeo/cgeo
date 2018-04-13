@@ -1,5 +1,6 @@
 package cgeo.geocaching.connector.ec;
 
+import cgeo.geocaching.log.ReportProblemType;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.connector.AbstractLoggingManager;
@@ -40,7 +41,7 @@ class ECLoggingManager extends AbstractLoggingManager {
 
     @Override
     @NonNull
-    public final LogResult postLog(@NonNull final LogType logType, @NonNull final Calendar date, @NonNull final String log, @Nullable final String logPassword, @NonNull final List<TrackableLog> trackableLogs) {
+    public final LogResult postLog(@NonNull final LogType logType, @NonNull final Calendar date, @NonNull final String log, @Nullable final String logPassword, @NonNull final List<TrackableLog> trackableLogs, @NonNull final ReportProblemType reportProblem) {
         return ECApi.postLog(cache, logType, date, log);
     }
 

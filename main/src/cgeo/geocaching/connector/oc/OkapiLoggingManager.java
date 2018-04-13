@@ -6,6 +6,7 @@ import cgeo.geocaching.connector.LogResult;
 import cgeo.geocaching.enumerations.Loaders;
 import cgeo.geocaching.log.LogCacheActivity;
 import cgeo.geocaching.log.LogType;
+import cgeo.geocaching.log.ReportProblemType;
 import cgeo.geocaching.log.TrackableLog;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
@@ -80,8 +81,8 @@ public class OkapiLoggingManager extends AbstractLoggingManager implements Loade
 
     @Override
     @NonNull
-    public final LogResult postLog(@NonNull final LogType logType, @NonNull final Calendar date, @NonNull final String log, @Nullable final String logPassword, @NonNull final List<TrackableLog> trackableLogs) {
-        final LogResult result = OkapiClient.postLog(cache, logType, date, log, logPassword, connector);
+    public final LogResult postLog(@NonNull final LogType logType, @NonNull final Calendar date, @NonNull final String log, @Nullable final String logPassword, @NonNull final List<TrackableLog> trackableLogs, @NonNull final ReportProblemType reportProblem) {
+        final LogResult result = OkapiClient.postLog(cache, logType, date, log, logPassword, connector, reportProblem);
         connector.login(null, null);
         return result;
     }
@@ -114,6 +115,16 @@ public class OkapiLoggingManager extends AbstractLoggingManager implements Loade
     @Override
     public boolean isImageCaptionMandatory() {
         return true;
+    }
+
+    @NonNull
+    @Override
+    public List<ReportProblemType> getReportProblemTypes(@NonNull final Geocache geocache) {
+        if (geocache.isEventCache()) {
+            return Collections.emptyList();
+        }
+
+        return Collections.singletonList(ReportProblemType.NEEDS_MAINTENANCE);
     }
 
 }
