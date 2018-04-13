@@ -20,6 +20,7 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
+import cgeo.geocaching.log.ReportProblemType;
 import cgeo.geocaching.models.Destination;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
@@ -168,7 +169,7 @@ public class DataStore {
      */
     private static final CacheCache cacheCache = new CacheCache();
     private static volatile SQLiteDatabase database = null;
-    private static final int dbVersion = 73;
+    private static final int dbVersion = 74;
     public static final int customListIdOffset = 10;
 
     @NonNull private static final String dbTableCaches = "cg_caches";
@@ -313,7 +314,8 @@ public class DataStore {
             + "updated LONG NOT NULL, " // date of save
             + "type INTEGER NOT NULL DEFAULT 4, "
             + "log TEXT, "
-            + "date LONG "
+            + "date LONG, "
+            + "report_problem TEXT"
             + "); ";
     private static final String dbCreateTrackables = ""
             + "CREATE TABLE " + dbTableTrackables + " ("
@@ -878,6 +880,15 @@ public class DataStore {
                             db.execSQL("ALTER TABLE " + dbTableWaypoints + " ADD COLUMN calc_state TEXT");
                         } catch (final Exception e) {
                             Log.e("Failed to upgrade to ver. 73", e);
+                        }
+                    }
+
+                    // Adds report problem to offline log
+                    if (oldVersion < 74) {
+                        try {
+                            db.execSQL("ALTER TABLE " + dbTableLogsOffline + " ADD COLUMN report_problem TEXT");
+                        } catch (final Exception e) {
+                            Log.e("Failed to upgrade to ver. 74", e);
                         }
                     }
                 }
@@ -2632,7 +2643,7 @@ public class DataStore {
         }
     }
 
-    public static boolean saveLogOffline(final String geocode, final Date date, final LogType type, final String log) {
+    public static boolean saveLogOffline(final String geocode, final Date date, final LogType type, final String log, final ReportProblemType reportProblem) {
         if (StringUtils.isBlank(geocode)) {
             Log.e("DataStore.saveLogOffline: cannot log a blank geocode");
             return false;
@@ -2650,6 +2661,7 @@ public class DataStore {
         values.put("type", type.id);
         values.put("log", log);
         values.put("date", date.getTime());
+        values.put("report_problem", reportProblem.code);
 
         if (hasLogOffline(geocode)) {
             final int rows = database.update(dbTableLogsOffline, values, "geocode = ?", new String[] { geocode });
@@ -2670,7 +2682,7 @@ public class DataStore {
 
         final Cursor cursor = database.query(
                 dbTableLogsOffline,
-                new String[]{"_id", "type", "log", "date"},
+                new String[]{"_id", "type", "log", "date", "report_problem"},
                 "geocode = ?",
                 new String[]{geocode},
                 null,
@@ -2685,6 +2697,7 @@ public class DataStore {
                     .setLogType(LogType.getById(cursor.getInt(1)))
                     .setLog(cursor.getString(2))
                     .setId(cursor.getInt(0))
+                    .setReportProblem(cursor.getString(4))
                     .build();
         }
 

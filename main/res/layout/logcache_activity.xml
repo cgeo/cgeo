@@ -77,6 +77,14 @@
                     android:maxLines="1" />
             </LinearLayout>
 
+            <Button
+                android:id="@+id/report_problem"
+                style="@style/button_full"
+                android:layout_width="match_parent"
+                tools:text="report problem"
+                android:visibility="gone"
+                />
+
             <include layout="@layout/gcvote_rating_bar"  android:layout_width="wrap_content" android:layout_height="wrap_content"/>
             <CheckBox
                 android:id="@+id/favorite_check"

@@ -134,7 +134,21 @@
     <string name="log_oc_team_comment">OC Team comment</string>
     <string name="log_your_saved_log">Your saved log</string>
     <string name="log_empty_logbook">The logbook of this cache is empty.</string>
-    
+
+    <string name="log_problem_none">No Problem</string>
+    <string name="log_problem_needs_maintenance_label">Needs Maintenance</string>
+    <string name="log_problem_needs_maintenance_text">This geocacher reported that there is a problem with this cache.</string>
+    <string name="log_problem_log_full_label">Logbook is full</string>
+    <string name="log_problem_log_full_text">This geocacher reported that the logbook is full.</string>
+    <string name="log_problem_damaged_label">Container is damaged</string>
+    <string name="log_problem_damaged_text">This geocacher reported that the container is damaged.</string>
+    <string name="log_problem_missing_label">Cache might be missing</string>
+    <string name="log_problem_missing_text">This geocacher reported that the cache might be missing.</string>
+    <string name="log_problem_other_label">Other</string>
+    <string name="log_problem_other_text">This geocacher reported that there is a problem with this cache.</string>
+    <string name="log_problem_archive_label">Cache should be archived</string>
+    <string name="log_problem_archive_text">This geocacher reported that this geocache should be archived. A community volunteer reviewer has been notified.</string>
+
     <string-array name="log_image_scales">
         <item>No scaling</item>
         <item>512 px</item>
@@ -250,6 +264,7 @@
     <string name="info_log_cleared">Log was cleared.</string>
     <string name="info_waypoint_coordinates_cleared">Coordinates cleared.</string>
     <string name="info_log_type_changed">Type of log has been changed!</string>
+    <string name="info_log_report_problem_changed">Report problem has changed!</string>
     <string name="info_select_logimage_cancelled">Image selection or capture was cancelled.</string>
     <string name="info_stored_image">New image saved to:</string>
     <string name="info_storing_static_maps">Trying to store static maps</string>

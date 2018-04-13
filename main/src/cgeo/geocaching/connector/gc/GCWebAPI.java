@@ -338,34 +338,6 @@ class GCWebAPI {
                     put("logText", logInfo).
                     put("usedFavoritePoint", formatBoolean(addToFavorites));
 
-            /* TODO: report (needs maintenance/archive)
-                "name": "problemReported[value]", "value": "logFull"
-                "name": "problemReported[label]", "value": "Logbook+is+full"
-
-                "log:problemTypes": {
-                    logFullLabel: "Logbook is full",
-                    logFullText: "This geocacher reported that the logbook is full.",
-                    damagedLabel: "Container is damaged",
-                    damagedText: "This geocacher reported that the container is damaged.",
-                    missingLabel: "Cache might be missing",
-                    missingText: "This geocacher reported that the cache might be missing.",
-                    archiveLabel: "Cache should be archived",
-                    archiveText: "This geocacher reported that this geocache should be archived. A community volunteer reviewer has been notified.",
-                    otherLabel: "Other",
-                    otherText: "This geocacher reported that there is a problem with this cache."
-                }
-
-                "name": "problemReported[logType]", "value": "45" NEEDS_MAINTENANCE, or 7 NEEDS_ARCHIVED
-                "name": "problemReported[logText]", "value": "This+geocacher+reported+that+the+logbook+is+full."
-                "name": "problemReported[checked]", "value": "true"
-                "name": "problemReported[excludefor][]", "value": "3"
-                "name": "problemReported[excludeForGeocacheType][]", "value": "4"
-                "name": "problemReported[excludeForGeocacheType][]", "value": "11"
-                "name": "problemReported[excludeForGeocacheType][]", "value": "137"
-                "name": "problemReported[isDisplayed]", "value": "true"
-                "name": "problemReported[isValid]", "value": "true"
-             */
-
             final PostLogResponse response = postAPI("/web/v1/geocache/" + StringUtils.lowerCase(geocache.getGeocode()) + "/GeocacheLog", params, PostLogResponse.class).blockingGet();
 
             if (response.referenceCode == null) {

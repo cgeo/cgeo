@@ -1,5 +1,7 @@
 package cgeo.geocaching.connector;
 
+import cgeo.geocaching.log.ReportProblemType;
+import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.log.TrackableLog;
@@ -23,7 +25,8 @@ public interface ILoggingManager {
             @NonNull Calendar date,
             @NonNull String log,
             @Nullable String logPassword,
-            @NonNull List<TrackableLog> trackableLogs);
+            @NonNull List<TrackableLog> trackableLogs,
+            @NonNull ReportProblemType reportProblem);
 
     @NonNull
     ImageResult postLogImage(String logId,
@@ -44,5 +47,8 @@ public interface ILoggingManager {
     Long getMaxImageUploadSize();
 
     boolean isImageCaptionMandatory();
+
+    @NonNull
+    List<ReportProblemType> getReportProblemTypes(@NonNull Geocache geocache);
 
 }

@@ -111,7 +111,22 @@ public final class LoggingUI extends AbstractUIFactory {
                             break;
                     }
                 } else {
-                    cache.logOffline(activity, logTypeEntry.logType);
+                    final ReportProblemType reportProblem;
+                    final LogType logType;
+                    switch (logTypeEntry.logType) {
+                        case NEEDS_MAINTENANCE:
+                            logType = LogType.NOTE;
+                            reportProblem = ReportProblemType.OTHER;
+                            break;
+                        case NEEDS_ARCHIVE:
+                            logType = LogType.NOTE;
+                            reportProblem = ReportProblemType.ARCHIVE;
+                            break;
+                        default:
+                            logType = logTypeEntry.logType;
+                            reportProblem = ReportProblemType.NO_PROBLEM;
+                    }
+                    cache.logOffline(activity, logType, reportProblem);
                 }
                 dialog.dismiss();
             }
