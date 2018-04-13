@@ -410,7 +410,7 @@ class GCWebAPI {
 
         for (final cgeo.geocaching.log.TrackableLog tb : trackables) {
             if (tb.action != LogTypeTrackable.DO_NOTHING && tb.brand == TrackableBrand.TRAVELBUG) {
-                trackableLogs.add(new TrackableLog(String.valueOf(tb.action.gcApiId), logDate, geocode, tb.trackCode));
+                trackableLogs.add(new TrackableLog(String.valueOf(tb.action.gcApiId), logDate, geocode, tb.geocode));
             }
         }
         return trackableLogs.isEmpty() || postAPI("/trackable/activities", trackableLogs).blockingGet().isSuccessful();
