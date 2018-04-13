@@ -68,7 +68,7 @@ class GCLoggingManager extends AbstractLoggingManager implements LoaderManager.L
             final GCWebAPI.TrackableInventoryEntry[] trackableInventoryItems = GCWebAPI.getTrackableInventory().blockingGet();
             if (trackableInventoryItems != null) {
                 for (final GCWebAPI.TrackableInventoryEntry entry : trackableInventoryItems) {
-                    trackables.add(new TrackableLog(cache.getGeocode(), entry.referenceCode, entry.name, 0, 0, TrackableBrand.TRAVELBUG));
+                    trackables.add(new TrackableLog(entry.referenceCode, entry.trackingNumber, entry.name, 0, 0, TrackableBrand.TRAVELBUG));
                 }
             }
 
