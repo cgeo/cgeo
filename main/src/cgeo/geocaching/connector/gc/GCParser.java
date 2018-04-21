@@ -1012,9 +1012,8 @@ public final class GCParser {
 
             try {
                 final Document document = Jsoup.parse(page);
-                final List<PocketQuery> list = new ArrayList<>();
                 final Map<String, PocketQuery> downloadablePocketQueries = getDownloadablePocketQueries(document);
-                list.addAll(downloadablePocketQueries.values());
+                final List<PocketQuery> list = new ArrayList<>(downloadablePocketQueries.values());
 
                 final Elements rows = document.select("#pqRepeater tr:has(td)");
                 for (final Element row : rows) {
