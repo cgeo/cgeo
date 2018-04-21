@@ -361,8 +361,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
     @Override
     protected void tearDown() throws Exception {
         final SearchResult search = DataStore.getBatchOfStoredCaches(null, CacheType.ALL, listId);
-        final List<Geocache> cachesInList = new ArrayList<>();
-        cachesInList.addAll(search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB));
+        final List<Geocache> cachesInList = new ArrayList<>(search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB));
         DataStore.markDropped(cachesInList);
         DataStore.removeList(listId);
         FileUtils.deleteDirectory(tempDir);
