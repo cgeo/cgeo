@@ -273,13 +273,13 @@ dependencies {
     implementation "net.sf.geographiclib:GeographicLib-Java:1.49"
 
     // Jackson XML processing
-    def jacksonVersion = '2.9.4'
+    def jacksonVersion = '2.9.5'
     implementation "com.fasterxml.jackson.core:jackson-core:$jacksonVersion"
     implementation "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
     implementation "com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion"
 
     // Jsoup HTML parsing
-    implementation 'org.jsoup:jsoup:1.11.2'
+    implementation 'org.jsoup:jsoup:1.11.3'
 
     // Junit only needed for local unit tests
     testImplementation 'junit:junit:4.12'
@@ -332,7 +332,7 @@ dependencies {
     implementation 'com.jakewharton:process-phoenix:2.0.0'
 
     // RxJava
-    implementation "io.reactivex.rxjava2:rxjava:2.1.10"
+    implementation "io.reactivex.rxjava2:rxjava:2.1.12"
     implementation "io.reactivex.rxjava2:rxandroid:2.0.2"
 
     // Support Library. Appcompat
