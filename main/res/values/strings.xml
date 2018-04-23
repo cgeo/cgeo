@@ -1549,6 +1549,8 @@
     
     <string name="confirm_log_title">Special log type</string>
     <string name="confirm_log_message">You want to log \'%s\'. Are you sure?</string>
+    <string name="confirm_report_problem_title">Report problem</string>
+    <string name="confirm_report_problem_message">You want to report \'%s\'. Are you sure?</string>
 
     <!-- Geokrety -->
     <string name="settings_activate_geokrety">Activate</string>

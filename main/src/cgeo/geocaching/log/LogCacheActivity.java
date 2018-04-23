@@ -177,7 +177,6 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
             reportProblemButton.setVisibility(View.VISIBLE);
         }
 
-
         if (!possibleReportProblemTypes.contains(reportProblemSelected)) {
             reportProblemSelected = possibleReportProblemTypes.get(0);
             setReportProblem(reportProblemSelected);
@@ -913,6 +912,14 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         }
         if (typeSelected.mustConfirmLog()) {
             Dialogs.confirm(this, R.string.confirm_log_title, res.getString(R.string.confirm_log_message, typeSelected.getL10n()), new OnClickListener() {
+
+                @Override
+                public void onClick(final DialogInterface dialog, final int which) {
+                    sendLogInternal();
+                }
+            });
+        } else if (reportProblemSelected != ReportProblemType.NO_PROBLEM) {
+            Dialogs.confirm(this, R.string.confirm_report_problem_title, res.getString(R.string.confirm_report_problem_message, reportProblemSelected.getL10n()), new OnClickListener() {
 
                 @Override
                 public void onClick(final DialogInterface dialog, final int which) {

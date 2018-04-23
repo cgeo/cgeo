@@ -1,5 +1,6 @@
 package cgeo.geocaching.log;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.CacheType;
 
@@ -62,6 +63,10 @@ public enum ReportProblemType {
             }
         }
         return NO_PROBLEM;
+    }
+
+    public String getL10n() {
+        return CgeoApplication.getInstance().getBaseContext().getString(labelId);
     }
 
 }
