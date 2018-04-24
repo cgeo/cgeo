@@ -170,11 +170,11 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
             }
         }
 
-        final Button reportProblemButton = ButterKnife.findById(this, R.id.report_problem);
+        final View reportProblemBox = ButterKnife.findById(this, R.id.report_problem_box);
         if (possibleReportProblemTypes.size() == 1) {
-            reportProblemButton.setVisibility(View.GONE);
+            reportProblemBox.setVisibility(View.GONE);
         } else {
-            reportProblemButton.setVisibility(View.VISIBLE);
+            reportProblemBox.setVisibility(View.VISIBLE);
         }
 
         if (!possibleReportProblemTypes.contains(reportProblemSelected)) {
@@ -338,8 +338,8 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         loggingManager = cache.getLoggingManager(this);
         loggingManager.init();
 
-        final Button problemButton = ButterKnife.findById(this, R.id.report_problem);
-        problemButton.setText(reportProblemSelected.labelId);
+        final TextView problemButton = ButterKnife.findById(this, R.id.report_problem);
+        problemButton.setText(getString(reportProblemSelected.labelId) + " ▼");
         problemButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
@@ -499,10 +499,10 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     }
 
     public void setReportProblem(final ReportProblemType reportProblem) {
-        final Button reportProblemButton = ButterKnife.findById(this, R.id.report_problem);
+        final TextView reportProblemButton = ButterKnife.findById(this, R.id.report_problem);
 
         reportProblemSelected = reportProblem;
-        reportProblemButton.setText(getString(reportProblemSelected.labelId));
+        reportProblemButton.setText(getString(reportProblemSelected.labelId) + " ▼");
     }
 
     private void updateTweetBox(final LogType type) {
