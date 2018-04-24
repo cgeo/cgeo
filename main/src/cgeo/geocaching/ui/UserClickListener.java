@@ -61,7 +61,7 @@ public abstract class UserClickListener implements View.OnClickListener {
         final CharSequence[] items = labels.toArray(new String[labels.size()]);
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-        builder.setTitle(res.getString(R.string.user_menu_title) + " " + user.userName);
+        builder.setTitle(res.getString(R.string.user_menu_title) + " " + user.userId);
         builder.setItems(items, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(final DialogInterface dialog, final int item) {
