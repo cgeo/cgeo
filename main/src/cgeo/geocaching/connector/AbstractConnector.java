@@ -281,7 +281,7 @@ public abstract class AbstractConnector implements IConnector {
 
                 @Override
                 public void call(final Context context) {
-                    CacheListActivity.startActivityOwner(context.getActivity(), context.userId);
+                    CacheListActivity.startActivityOwner(context.getActivity(), context.userName);
                 }
             }));
         }
@@ -291,7 +291,7 @@ public abstract class AbstractConnector implements IConnector {
 
                 @Override
                 public void call(final Context context) {
-                    CacheListActivity.startActivityFinder(context.getActivity(), context.userId);
+                    CacheListActivity.startActivityFinder(context.getActivity(), context.userName);
                 }
             }));
         }
@@ -299,7 +299,7 @@ public abstract class AbstractConnector implements IConnector {
 
             @Override
             public void call(final UserAction.Context context) {
-                ClipboardUtils.copyToClipboard(context.userId);
+                ClipboardUtils.copyToClipboard(context.userName);
                 ActivityMixin.showToast(context.getActivity(), R.string.clipboard_copy_ok);
             }
         }));
@@ -317,7 +317,7 @@ public abstract class AbstractConnector implements IConnector {
 
                 @Override
                 public void call(final Context context) {
-                    ContactsAddon.openContactCard(context.getActivity(), context.userId);
+                    ContactsAddon.openContactCard(context.getActivity(), context.userName);
                 }
             }));
         }

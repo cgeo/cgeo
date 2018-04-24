@@ -18,13 +18,13 @@ public class UserAction {
 
     public static class Context {
         @NonNull
+        public final String displayName;
         public final String userName;
-        public final String userId;
         public WeakReference<Activity> activityRef;
 
-        public Context(@NonNull final String userName, @NonNull final String userId) {
+        public Context(@NonNull final String displayName, @NonNull final String userName) {
+            this.displayName = displayName;
             this.userName = userName;
-            this.userId = userId;
         }
 
         public void startActivity(final Intent intent) {
