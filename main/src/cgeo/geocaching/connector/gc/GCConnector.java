@@ -462,14 +462,14 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
 
             @Override
             public void call(final UserAction.Context context) {
-                context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.geocaching.com/p/default.aspx?u=" + Network.encode(context.userId))));
+                context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.geocaching.com/p/default.aspx?u=" + Network.encode(context.userName))));
             }
         }));
         actions.add(new UserAction(R.string.user_menu_send_message, new Action1<UserAction.Context>() {
 
             @Override
             public void call(final UserAction.Context context) {
-                context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.geocaching.com/email/?u=" + Network.encode(context.userId))));
+                context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.geocaching.com/email/?u=" + Network.encode(context.userName))));
             }
         }));
         return actions;

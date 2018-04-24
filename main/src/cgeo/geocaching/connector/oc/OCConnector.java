@@ -168,19 +168,19 @@ public class OCConnector extends AbstractConnector implements SmileyCapability {
     public List<UserAction> getUserActions(final UserAction.Context user) {
         final List<UserAction> actions = super.getUserActions(user);
         // caches stored before parsing the UserId will not have the field set, so we must check for correct existence here
-        if (NumberUtils.isDigits(user.userId)) {
+        if (NumberUtils.isDigits(user.userName)) {
             actions.add(new UserAction(R.string.user_menu_open_browser, new Action1<UserAction.Context>() {
 
                 @Override
                 public void call(final UserAction.Context context) {
-                    context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getSchemeAndHost() + "/viewprofile.php?userid=" + Network.encode(context.userId))));
+                    context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getSchemeAndHost() + "/viewprofile.php?userid=" + Network.encode(context.userName))));
                 }
             }));
             actions.add(new UserAction(R.string.user_menu_send_message, new Action1<UserAction.Context>() {
 
                 @Override
                 public void call(final UserAction.Context context) {
-                    context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getSchemeAndHost() + "/mailto.php?userid=" + Network.encode(context.userId))));
+                    context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getSchemeAndHost() + "/mailto.php?userid=" + Network.encode(context.userName))));
                 }
             }));
         }
