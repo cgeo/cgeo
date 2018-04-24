@@ -77,13 +77,42 @@
                     android:maxLines="1" />
             </LinearLayout>
 
-            <Button
-                android:id="@+id/report_problem"
-                style="@style/button_full"
-                android:layout_width="match_parent"
-                tools:text="report problem"
+            <LinearLayout
+                android:id="@+id/report_problem_box"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dip"
+                android:paddingLeft="10dip"
+                android:paddingRight="10dip"
+                android:orientation="horizontal"
                 android:visibility="gone"
-                />
+                tools:visibility="visible">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:lines="1"
+                    android:maxLines="1"
+                    android:text="@string/log_report_problem"
+                    android:textIsSelectable="false"
+                    android:textColor="?text_color"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/report_problem"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:lines="1"
+                    android:maxLines="1"
+                    android:textColor="?text_color"
+                    android:textIsSelectable="false"
+                    tools:text="report problem"
+                    android:textSize="14sp"
+                    />
+
+            </LinearLayout>
 
             <include layout="@layout/gcvote_rating_bar"  android:layout_width="wrap_content" android:layout_height="wrap_content"/>
             <CheckBox
