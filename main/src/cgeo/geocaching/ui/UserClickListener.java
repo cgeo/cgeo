@@ -18,8 +18,6 @@ import android.view.View.OnClickListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
-
 public abstract class UserClickListener implements View.OnClickListener {
 
     @NonNull private final Context user;
@@ -81,7 +79,7 @@ public abstract class UserClickListener implements View.OnClickListener {
     }
 
     public static OnClickListener forUser(final Trackable trackable, final String userName) {
-        return new UserClickListener(new Context(userName, StringUtils.EMPTY)) {
+        return new UserClickListener(new Context(userName, userName)) {
 
             @Override
             protected List<UserAction> createUserActions(final UserAction.Context user) {
