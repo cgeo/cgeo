@@ -137,7 +137,8 @@ public class CacheLogsViewCreator extends LogsViewCreator {
 
     @Override
     protected UserClickListener createUserActionsListener(final LogEntry log) {
-        return UserClickListener.forUser(getCache(), StringEscapeUtils.unescapeHtml4(log.author), StringUtils.EMPTY);
+        final String userName = StringEscapeUtils.unescapeHtml4(log.author);
+        return UserClickListener.forUser(getCache(), userName, userName);
     }
 
 }
