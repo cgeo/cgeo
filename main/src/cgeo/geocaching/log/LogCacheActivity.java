@@ -527,6 +527,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         private LogType oldType;
         private Calendar oldDate;
         private ReportProblemType oldReportProblem;
+        private LogEntry oldOldLog;
 
         ClearLogCommand(final Activity context) {
             super(context);
@@ -538,6 +539,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
             oldType = typeSelected;
             oldDate = date;
             oldReportProblem = reportProblemSelected;
+            oldOldLog = oldLog;
             cache.clearOfflineLog();
         }
 
@@ -558,6 +560,8 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
             setType(typeSelected);
             setDate(date);
             logEditText.setText(StringUtils.EMPTY);
+            setReportProblem(ReportProblemType.NO_PROBLEM);
+            oldLog = null;
 
             final EditText logPasswordView = ButterKnife.findById(LogCacheActivity.this, R.id.log_password);
             logPasswordView.setText(StringUtils.EMPTY);
@@ -568,7 +572,9 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
             text = oldText;
             typeSelected = oldType;
             date = oldDate;
+            oldLog = oldOldLog;
             setType(typeSelected);
+            setReportProblem(oldReportProblem);
             setDate(date);
             setLogText();
         }
@@ -730,9 +736,11 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         // Do not erase the saved log if the user has removed all the characters
         // without using "Clear". This may be a manipulation mistake, and erasing
         // again will be easy using "Clear" while retyping the text may not be.
+        // But if date or the reportProblemType has changed, then save anyway.
         if (force ||
                 (StringUtils.isNotEmpty(log) && !StringUtils.equals(log, text) && !StringUtils.equals(log, Settings.getSignature()))
                 || (oldLog != null && (oldLog.reportProblem != reportProblemSelected || oldLog.date != date.getTime().getTime()))
+                || (oldLog == null && reportProblemSelected != ReportProblemType.NO_PROBLEM)
                 ) {
             new AsyncTask<Void, Void, Void>() {
                 @Override
