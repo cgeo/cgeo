@@ -86,7 +86,6 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 import butterknife.ButterKnife;
 import io.reactivex.disposables.CompositeDisposable;
-
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.mapsforge.core.model.LatLong;
@@ -228,6 +227,7 @@ public class NewMap extends AbstractActionBarActivity {
 
     private void postZoomToViewport(final Viewport viewport) {
         mapView.post(new Runnable() {
+            @Override
             public void run() {
                 mapView.zoomToViewport(viewport);
             }
