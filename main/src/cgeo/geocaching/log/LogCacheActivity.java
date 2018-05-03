@@ -637,6 +637,11 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
                     final List<LogEntry> newLogs = new ArrayList<>(cache.getLogs());
                     final LogEntry logNow = logBuilder.build();
                     newLogs.add(0, logNow);
+                    if (reportProblemSelected != ReportProblemType.NO_PROBLEM) {
+                        final LogEntry logProblem = logBuilder.setLog(getString(reportProblemSelected.textId)).setLogImages(null).setLogType(reportProblemSelected.logType).build();
+                        newLogs.add(0, logProblem);
+
+                    }
                     DataStore.saveLogs(cache.getGeocode(), newLogs);
 
                     // update offline log in DB
