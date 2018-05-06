@@ -80,7 +80,7 @@ public final class LogEntry {
         /** Friend's log entry */
         private boolean friend;
         /** report problem */
-        private ReportProblemType reportProblem;
+        @NonNull private ReportProblemType reportProblem;
         /** log {@link Image} List */
         @NonNull private List<Image> logImages;
         /** Spotted cache name */
@@ -282,7 +282,7 @@ public final class LogEntry {
             return this;
         }
 
-        public Builder setReportProblem(final String reportProblemCode) {
+        public Builder setReportProblem(@NonNull final String reportProblemCode) {
             this.reportProblem = ReportProblemType.findByCode(reportProblemCode);
             return this;
         }
