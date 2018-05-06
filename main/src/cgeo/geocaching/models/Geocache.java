@@ -40,6 +40,7 @@ import cgeo.geocaching.storage.DataStore.StorageLocation;
 import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.DisposableHandler;
+import cgeo.geocaching.utils.EventTimeParser;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.LazyInitializedList;
 import cgeo.geocaching.utils.Log;
@@ -73,7 +74,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.regex.Pattern;
-
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import io.reactivex.Scheduler;
@@ -173,8 +173,6 @@ public class Geocache implements IWaypoint {
     private static final Pattern NUMBER_PATTERN = Pattern.compile("\\d+");
 
     private Handler changeNotificationHandler = null;
-
-    private static final List<Pattern> EVENT_TIME_PATTERNS = new ArrayList<>();
 
     public void setChangeNotificationHandler(final Handler newNotificationHandler) {
         changeNotificationHandler = newNotificationHandler;
@@ -1817,46 +1815,7 @@ public class Geocache implements IWaypoint {
         }
 
         final String searchText = getShortDescription() + ' ' + getDescription();
-        int start = -1;
-        int eventTimeMinutes = -1;
-        for (final Pattern pattern : getEventTimePatterns()) {
-            final MatcherWrapper matcher = new MatcherWrapper(pattern, searchText);
-            while (matcher.find()) {
-                try {
-                    final int hours = Integer.parseInt(matcher.group(1));
-                    int minutes = 0;
-                    if (matcher.groupCount() >= 2 && StringUtils.isNotEmpty(matcher.group(2))) {
-                        minutes = Integer.parseInt(matcher.group(2));
-                    }
-                    if (hours >= 0 && hours < 24 && minutes >= 0 && minutes < 60
-                         && (eventTimeMinutes == -1 || matcher.start() < start)) {
-                            eventTimeMinutes = hours * 60 + minutes;
-                            start = matcher.start();
-                    }
-                } catch (final NumberFormatException ignored) {
-                    // cannot happen, but static code analysis doesn't know
-                }
-            }
-        }
-        return eventTimeMinutes;
-    }
-
-    private List<Pattern> getEventTimePatterns() {
-        if (EVENT_TIME_PATTERNS.isEmpty()) {
-            final String hourLocalized = CgeoApplication.getInstance().getString(R.string.cache_time_full_hours);
-
-            // 12:34
-            EVENT_TIME_PATTERNS.add(Pattern.compile("\\b(\\d{1,2})\\:(\\d\\d)\\b"));
-            if (StringUtils.isNotBlank(hourLocalized)) {
-                // 12:34o'clock
-                EVENT_TIME_PATTERNS.add(Pattern.compile("\\b(\\d{1,2})\\:(\\d\\d)" + Pattern.quote(hourLocalized), Pattern.CASE_INSENSITIVE));
-                // 17 - 20 o'clock
-                EVENT_TIME_PATTERNS.add(Pattern.compile("\\b(\\d{1,2})(?:\\.00)?" + "\\s*(?:-|[a-z]+)\\s?" + "(?:\\d{1,2})(?:\\.00)?" + "\\s?" + Pattern.quote(hourLocalized), Pattern.CASE_INSENSITIVE));
-                // 12 o'clock, 12.00 o'clock
-                EVENT_TIME_PATTERNS.add(Pattern.compile("\\b(\\d{1,2})(?:\\.(00|15|30|45))?\\s?" + Pattern.quote(hourLocalized), Pattern.CASE_INSENSITIVE));
-            }
-        }
-        return EVENT_TIME_PATTERNS;
+        return EventTimeParser.guessEventTimeMinutes(searchText);
     }
 
     public boolean hasStaticMap() {
