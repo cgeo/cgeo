@@ -638,7 +638,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
                     final LogEntry logNow = logBuilder.build();
                     newLogs.add(0, logNow);
                     if (reportProblemSelected != ReportProblemType.NO_PROBLEM) {
-                        final LogEntry logProblem = logBuilder.setLog(getString(reportProblemSelected.textId)).setLogImages(null).setLogType(reportProblemSelected.logType).build();
+                        final LogEntry logProblem = logBuilder.setLog(getString(reportProblemSelected.textId)).setLogImages(Collections.<Image>emptyList()).setLogType(reportProblemSelected.logType).build();
                         newLogs.add(0, logProblem);
 
                     }

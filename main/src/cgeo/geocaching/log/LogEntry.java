@@ -82,7 +82,7 @@ public final class LogEntry {
         /** report problem */
         private ReportProblemType reportProblem;
         /** log {@link Image} List */
-        private List<Image> logImages;
+        @NonNull private List<Image> logImages;
         /** Spotted cache name */
         @NonNull private String cacheName; // used for trackables
         /** Spotted cache guid */
@@ -103,7 +103,7 @@ public final class LogEntry {
             date = 0;
             found = -1;
             friend = false;
-            logImages = null;
+            logImages = Collections.emptyList();
             cacheName = "";
             cacheGuid = "";
             cacheGeocode = "";
@@ -116,9 +116,8 @@ public final class LogEntry {
          */
         @NonNull
         public LogEntry build() {
-            final List<Image> finalLogImage = logImages == null ? Collections.<Image>emptyList() : logImages;
             return new LogEntry(id, logType, StringUtils.defaultIfBlank(author, Settings.getUserName()),
-                    message, date, found, friend, finalLogImage, cacheName, cacheGuid, cacheGeocode, reportProblem);
+                    message, date, found, friend, logImages, cacheName, cacheGuid, cacheGeocode, reportProblem);
         }
 
         /**
@@ -276,7 +275,7 @@ public final class LogEntry {
                 return this;
             }
 
-            if (logImages == null || logImages.isEmpty()) {
+            if (logImages.isEmpty()) {
                 logImages = new ArrayList<>();
             }
             logImages.add(image);
