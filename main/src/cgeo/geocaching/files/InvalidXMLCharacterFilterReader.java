@@ -1,10 +1,10 @@
 package cgeo.geocaching.files;
 
-import org.apache.commons.lang3.StringUtils;
-
 import java.io.FilterReader;
 import java.io.IOException;
 import java.io.Reader;
+
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Filter reader which can filter out invalid XML characters and character references.
@@ -48,7 +48,7 @@ public class InvalidXMLCharacterFilterReader extends FilterReader {
                     pos++;
                     if (entityStart >= 0) {
                         final int entityLength = readPos - entityStart + 1;
-                        if (entityLength <= 5) {
+                        if (entityLength <= 8) { // &#xFFFD;
                             final String entity = new String(cbuf, entityStart, entityLength);
                             if (StringUtils.startsWith(entity, "&#")) {
                                 final String numberString = StringUtils.substringBetween(entity, "&#", ";");
