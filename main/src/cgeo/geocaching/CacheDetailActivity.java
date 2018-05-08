@@ -66,6 +66,7 @@ import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.recyclerview.RecyclerViewProvider;
 import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.CheckerUtils;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.CryptUtils;
@@ -1142,6 +1143,15 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             final TextView hiddenView = details.addHiddenDate(cache);
             if (hiddenView != null) {
                 addContextMenu(hiddenView);
+                if (cache.isEventCache()) {
+                    hiddenView.setOnClickListener(new OnClickListener() {
+
+                        @Override
+                        public void onClick(final View v) {
+                            CalendarUtils.openCalendar(CacheDetailActivity.this, cache.getHiddenDate());
+                        }
+                    });
+                }
             }
 
             // cache location
