@@ -2,6 +2,12 @@ package cgeo.geocaching.utils;
 
 import cgeo.geocaching.models.Geocache;
 
+import android.app.Activity;
+import android.content.ContentUris;
+import android.content.Intent;
+import android.net.Uri;
+import android.provider.CalendarContract;
+
 import java.util.Calendar;
 import java.util.Date;
 
@@ -45,6 +51,17 @@ public final class CalendarUtils {
      */
     public static boolean isFuture(final Calendar date) {
         return daysSince(date) < -1;
+    }
+
+    /**
+     * Open the calendar app on a specific date.
+     */
+    public static void openCalendar(final Activity activity, final Date date) {
+        final Uri.Builder builder = CalendarContract.CONTENT_URI.buildUpon();
+        builder.appendPath("time");
+        ContentUris.appendId(builder, date.getTime());
+        final Intent intent = new Intent(Intent.ACTION_VIEW).setData(builder.build());
+        activity.startActivity(intent);
     }
 
 }
