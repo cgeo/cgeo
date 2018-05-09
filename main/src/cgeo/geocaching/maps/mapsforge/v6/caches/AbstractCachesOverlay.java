@@ -215,6 +215,10 @@ public abstract class AbstractCachesOverlay {
         mapHandlers.sendEmptyProgressMessage(NewMap.HIDE_PROGRESS);
     }
 
+    protected void updateTitle()
+    {
+        mapHandlers.sendEmptyDisplayMessage(NewMap.UPDATE_TITLE);
+    }
     protected void repaint() {
         mapHandlers.sendEmptyDisplayMessage(NewMap.INVALIDATE_MAP);
         mapHandlers.sendEmptyDisplayMessage(NewMap.UPDATE_TITLE);
