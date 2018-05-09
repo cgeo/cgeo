@@ -14,6 +14,8 @@ import cgeo.geocaching.models.CalcState;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.network.SmileyImage;
+import cgeo.geocaching.sensors.GeoData;
+import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.staticmaps.StaticMapsProvider;
 import cgeo.geocaching.storage.DataStore;
@@ -284,6 +286,11 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
     }
 
     @Override
+    public void onResume() {
+        super.onResume(geoDirHandler.start(GeoDirHandler.UPDATE_GEODATA));
+    }
+
+    @Override
     public void onBackPressed() {
         finishConfirmDiscard();
     }
@@ -384,6 +391,18 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
             }
         }
     }
+
+    private final GeoDirHandler geoDirHandler = new GeoDirHandler() {
+        @Override
+        public void updateGeoData(final GeoData geo) {
+            try {
+                // keep updates coming while activity is visible, to have better coords when needed
+                Log.i("update geo data: " + geo);
+            } catch (final Exception e) {
+                Log.e("failed to update location", e);
+            }
+        }
+    };
 
     private class CoordDialogListener implements View.OnClickListener {
 
