@@ -136,7 +136,7 @@ public class NewMap extends AbstractActionBarActivity {
     private MapOptions mapOptions;
     private TargetView targetView;
 
-    private static boolean followMyLocation;
+    private static boolean followMyLocation = true;
 
     private static final String BUNDLE_MAP_STATE = "mapState";
     private static final String BUNDLE_TRAIL_HISTORY = "trailHistory";
