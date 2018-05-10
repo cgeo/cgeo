@@ -270,13 +270,13 @@ public class NewMap extends AbstractActionBarActivity {
             }
             itemMapLive.setVisible(mapOptions.coords == null);
 
-            final Set<String> visibleGeocodes = caches.getVisibleGeocodes();
+            final Set<String> visibleCacheGeocodes = caches.getVisibleCacheGeocodes();
 
             menu.findItem(R.id.menu_store_caches).setVisible(false);
-            menu.findItem(R.id.menu_store_caches).setVisible(!caches.isDownloading() && !visibleGeocodes.isEmpty());
+            menu.findItem(R.id.menu_store_caches).setVisible(!caches.isDownloading() && !visibleCacheGeocodes.isEmpty());
 
             menu.findItem(R.id.menu_store_unsaved_caches).setVisible(false);
-            menu.findItem(R.id.menu_store_unsaved_caches).setVisible(!caches.isDownloading() && new SearchResult(visibleGeocodes).hasUnsavedCaches());
+            menu.findItem(R.id.menu_store_unsaved_caches).setVisible(!caches.isDownloading() && new SearchResult(visibleCacheGeocodes).hasUnsavedCaches());
 
             menu.findItem(R.id.menu_mycaches_mode).setChecked(Settings.isExcludeMyCaches());
             menu.findItem(R.id.menu_disabled_mode).setChecked(Settings.isExcludeDisabledCaches());
@@ -287,7 +287,7 @@ public class NewMap extends AbstractActionBarActivity {
 
             menu.findItem(R.id.menu_theme_mode).setVisible(tileLayerHasThemes());
 
-            menu.findItem(R.id.menu_as_list).setVisible(!caches.isDownloading() && caches.getVisibleItemsCount() > 1);
+            menu.findItem(R.id.menu_as_list).setVisible(!caches.isDownloading() && caches.getVisibleCachesCount() > 1);
 
             menu.findItem(R.id.submenu_strategy).setVisible(mapOptions.isLiveEnabled);
 
@@ -365,9 +365,9 @@ public class NewMap extends AbstractActionBarActivity {
                 }
                 return true;
             case R.id.menu_store_caches:
-                return storeCaches(caches.getVisibleGeocodes());
+                return storeCaches(caches.getVisibleCacheGeocodes());
             case R.id.menu_store_unsaved_caches:
-                return storeCaches(getUnsavedGeocodes(caches.getVisibleGeocodes()));
+                return storeCaches(getUnsavedGeocodes(caches.getVisibleCacheGeocodes()));
             case R.id.menu_circle_mode:
                 //                overlayCaches.switchCircles();
                 //                mapView.repaintRequired(overlayCaches);
@@ -393,7 +393,7 @@ public class NewMap extends AbstractActionBarActivity {
                 selectMapTheme();
                 return true;
             case R.id.menu_as_list: {
-                CacheListActivity.startActivityMap(this, new SearchResult(caches.getVisibleGeocodes()));
+                CacheListActivity.startActivityMap(this, new SearchResult(caches.getVisibleCacheGeocodes()));
                 return true;
             }
             case R.id.menu_strategy_fast: {
@@ -1043,11 +1043,11 @@ public class NewMap extends AbstractActionBarActivity {
     }
 
     private int countVisibleCaches() {
-        return caches != null ? caches.getVisibleItemsCount() : 0;
+        return caches != null ? caches.getVisibleCachesCount() : 0;
     }
 
     private int countTotalCaches() {
-        return caches != null ? caches.getItemsCount() : 0;
+        return caches != null ? caches.getCachesCount() : 0;
     }
 
     /**
