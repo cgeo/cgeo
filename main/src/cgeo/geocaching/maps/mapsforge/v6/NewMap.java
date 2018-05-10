@@ -1308,10 +1308,10 @@ public class NewMap extends AbstractActionBarActivity {
                     tv.setCompoundDrawablesWithIntrinsicBounds(item.getMarkerId(), 0, 0, 0);
 
                     final TextView infoView = (TextView) view.findViewById(R.id.info);
-                    StringBuilder text = new StringBuilder(item.getItemCode());
+                    final StringBuilder text = new StringBuilder(item.getItemCode());
                     if (item.getType() == CoordinatesType.WAYPOINT && StringUtils.isNotEmpty(item.getGeocode())) {
                         text.append(Formatter.SEPARATOR).append(item.getGeocode());
-                        Geocache cache = DataStore.loadCache(item.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
+                        final Geocache cache = DataStore.loadCache(item.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
                         if (cache != null) {
                             text.append(Formatter.SEPARATOR).append(cache.getName());
                         }
