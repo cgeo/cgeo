@@ -86,6 +86,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 import butterknife.ButterKnife;
 import io.reactivex.disposables.CompositeDisposable;
+
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.mapsforge.core.model.LatLong;
@@ -605,7 +606,7 @@ public class NewMap extends AbstractActionBarActivity {
         final MapSource oldSource = Settings.getMapSource();
         final boolean restartRequired = !MapProviderFactory.isSameActivity(oldSource, newSource);
 
-        // Update mapsource in settings
+        // Update MapSource in settings
         Settings.setMapSource(newSource);
 
         if (restartRequired) {
@@ -1185,7 +1186,7 @@ public class NewMap extends AbstractActionBarActivity {
         }
 
         @NonNull
-        public Location getCurrenLocation() {
+        public Location getCurrentLocation() {
             return currentLocation;
         }
 
@@ -1293,8 +1294,9 @@ public class NewMap extends AbstractActionBarActivity {
 
             final LayoutInflater inflater = LayoutInflater.from(this);
             final ListAdapter adapter = new ArrayAdapter<GeoitemRef>(this, R.layout.cacheslist_item_select, sorted) {
+                @NonNull
                 @Override
-                public View getView(final int position, final View convertView, final ViewGroup parent) {
+                public View getView(final int position, final View convertView, @NonNull final ViewGroup parent) {
 
                     final View view = convertView == null ? inflater.inflate(R.layout.cacheslist_item_select, parent, false) : convertView;
                     final TextView tv = (TextView) view.findViewById(R.id.text);
@@ -1501,7 +1503,7 @@ public class NewMap extends AbstractActionBarActivity {
                     }
                     if (distanceView != null) {
                         distanceView.setDestination(targetInfo.coords);
-                        distanceView.setCoordinates(geoDirUpdate.getCurrenLocation());
+                        distanceView.setCoordinates(geoDirUpdate.getCurrentLocation());
                     }
                     if (StringUtils.isNotBlank(targetInfo.geocode)) {
                         targetGeocode = targetInfo.geocode;
