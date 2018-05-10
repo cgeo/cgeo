@@ -56,10 +56,10 @@ public abstract class AbstractCachesOverlay {
         final Set<String> geocodesInViewport = new HashSet<>();
         final MfMapView mapView = mapViewRef.get();
         if (mapView != null) {
-        final Collection<Geocache> cachesInViewport = mapView.getViewport().filter(DataStore.loadCaches(getGeocodes(), LoadFlags.LOAD_CACHE_OR_DB));
-        for (final Geocache cache : cachesInViewport) {
-            geocodesInViewport.add(cache.getGeocode());
-        }
+            final Collection<Geocache> cachesInViewport = mapView.getViewport().filter(DataStore.loadCaches(getGeocodes(), LoadFlags.LOAD_CACHE_OR_DB));
+            for (final Geocache cache : cachesInViewport) {
+                geocodesInViewport.add(cache.getGeocode());
+            }
 
         }
         return geocodesInViewport;
@@ -215,10 +215,10 @@ public abstract class AbstractCachesOverlay {
         mapHandlers.sendEmptyProgressMessage(NewMap.HIDE_PROGRESS);
     }
 
-    protected void updateTitle()
-    {
+    protected void updateTitle() {
         mapHandlers.sendEmptyDisplayMessage(NewMap.UPDATE_TITLE);
     }
+
     protected void repaint() {
         mapHandlers.sendEmptyDisplayMessage(NewMap.INVALIDATE_MAP);
         mapHandlers.sendEmptyDisplayMessage(NewMap.UPDATE_TITLE);
@@ -281,10 +281,7 @@ public abstract class AbstractCachesOverlay {
     }
 
     static boolean mapMoved(final Viewport referenceViewport, final Viewport newViewport) {
-        return Math.abs(newViewport.getLatitudeSpan() - referenceViewport.getLatitudeSpan()) > 50e-6 ||
-                Math.abs(newViewport.getLongitudeSpan() - referenceViewport.getLongitudeSpan()) > 50e-6 ||
-                Math.abs(newViewport.center.getLatitude() - referenceViewport.center.getLatitude()) > referenceViewport.getLatitudeSpan() / 4 ||
-                Math.abs(newViewport.center.getLongitude() - referenceViewport.center.getLongitude()) > referenceViewport.getLongitudeSpan() / 4;
+        return Math.abs(newViewport.getLatitudeSpan() - referenceViewport.getLatitudeSpan()) > 50e-6 || Math.abs(newViewport.getLongitudeSpan() - referenceViewport.getLongitudeSpan()) > 50e-6 || Math.abs(newViewport.center.getLatitude() - referenceViewport.center.getLatitude()) > referenceViewport.getLatitudeSpan() / 4 || Math.abs(newViewport.center.getLongitude() - referenceViewport.center.getLongitude()) > referenceViewport.getLongitudeSpan() / 4;
     }
 
     static synchronized void filter(final Collection<Geocache> caches) {
@@ -316,4 +313,4 @@ public abstract class AbstractCachesOverlay {
 
         return null;
     }
- }
+}
