@@ -8,7 +8,6 @@ import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.RemoveFlag;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.mapsforge.v6.MapHandlers;
-import cgeo.geocaching.maps.mapsforge.v6.MfMapView;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
@@ -24,6 +23,7 @@ import java.util.concurrent.TimeUnit;
 
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+
 import org.apache.commons.lang3.StringUtils;
 import org.mapsforge.map.layer.Layer;
 
@@ -34,8 +34,8 @@ public class LiveCachesOverlay extends AbstractCachesOverlay {
     public long loadThreadRun = -1;
     private MapTokens tokens;
 
-    public LiveCachesOverlay(final int overlayId, final Set<GeoEntry> geoEntries, final MfMapView mapView, final Layer anchorLayer, final MapHandlers mapHandlers) {
-        super(overlayId, geoEntries, mapView, anchorLayer, mapHandlers);
+    public LiveCachesOverlay(final int overlayId, final Set<GeoEntry> geoEntries, final CachesBundle bundle, final Layer anchorLayer, final MapHandlers mapHandlers) {
+        super(overlayId, geoEntries, bundle, anchorLayer, mapHandlers);
 
         this.timer = startTimer();
     }
@@ -46,7 +46,8 @@ public class LiveCachesOverlay extends AbstractCachesOverlay {
 
     private static final class LoadTimerAction implements Runnable {
 
-        @NonNull private final WeakReference<LiveCachesOverlay> overlayRef;
+        @NonNull
+        private final WeakReference<LiveCachesOverlay> overlayRef;
         private int previousZoom = -100;
         private Viewport previousViewport;
 
@@ -122,7 +123,7 @@ public class LiveCachesOverlay extends AbstractCachesOverlay {
             Log.d(String.format(Locale.ENGLISH, "Live caches found: %d", result.size()));
 
             //render
-            fill(result);
+            update(result);
 
         } finally {
             hideProgress();

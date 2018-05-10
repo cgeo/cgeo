@@ -5,7 +5,6 @@ import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.mapsforge.v6.MapHandlers;
-import cgeo.geocaching.maps.mapsforge.v6.MfMapView;
 import cgeo.geocaching.maps.mapsforge.v6.NewMap;
 import cgeo.geocaching.maps.mapsforge.v6.TapHandler;
 import cgeo.geocaching.models.Geocache;
@@ -34,16 +33,16 @@ public abstract class AbstractCachesOverlay {
 
     private final int overlayId;
     private final Set<GeoEntry> geoEntries;
-    private final WeakReference<MfMapView> mapViewRef;
+    private final WeakReference<CachesBundle> bundleRef;
     private final Layer anchorLayer;
     private final GeoitemLayers layerList = new GeoitemLayers();
     private final MapHandlers mapHandlers;
     private boolean invalidated = true;
 
-    public AbstractCachesOverlay(final int overlayId, final Set<GeoEntry> geoEntries, final MfMapView mapView, final Layer anchorLayer, final MapHandlers mapHandlers) {
+    public AbstractCachesOverlay(final int overlayId, final Set<GeoEntry> geoEntries, final CachesBundle bundle, final Layer anchorLayer, final MapHandlers mapHandlers) {
         this.overlayId = overlayId;
         this.geoEntries = geoEntries;
-        this.mapViewRef = new WeakReference<>(mapView);
+        this.bundleRef = new WeakReference<>(bundle);
         this.anchorLayer = anchorLayer;
         this.mapHandlers = mapHandlers;
     }
@@ -52,11 +51,11 @@ public abstract class AbstractCachesOverlay {
         clearLayers();
     }
 
-    public Set<String> getVisibleGeocodes() {
+    Set<String> getVisibleCacheGeocodes() {
         final Set<String> geocodesInViewport = new HashSet<>();
-        final MfMapView mapView = mapViewRef.get();
-        if (mapView != null) {
-            final Collection<Geocache> cachesInViewport = mapView.getViewport().filter(DataStore.loadCaches(getGeocodes(), LoadFlags.LOAD_CACHE_OR_DB));
+        final CachesBundle bundle = bundleRef.get();
+        if (bundle != null) {
+            final Collection<Geocache> cachesInViewport = bundle.getViewport().filter(DataStore.loadCaches(getCacheGeocodes(), LoadFlags.LOAD_CACHE_OR_DB));
             for (final Geocache cache : cachesInViewport) {
                 geocodesInViewport.add(cache.getGeocode());
             }
@@ -65,16 +64,24 @@ public abstract class AbstractCachesOverlay {
         return geocodesInViewport;
     }
 
-    public int getVisibleItemsCount() {
-        final MfMapView mapView = mapViewRef.get();
-        if (mapView == null) {
+    int getVisibleCachesCount() {
+        final CachesBundle bundle = bundleRef.get();
+        if (bundle == null) {
             return 0;
         }
-        return mapView.getViewport().count(DataStore.loadCaches(getGeocodes(), LoadFlags.LOAD_CACHE_OR_DB));
+        return bundle.getViewport().count(DataStore.loadCaches(getCacheGeocodes(), LoadFlags.LOAD_CACHE_OR_DB));
     }
 
-    public int getItemsCount() {
-        return layerList.size();
+    int getCachesCount() {
+        return layerList.getCacheCount();
+    }
+
+    protected int getAllVisibleCachesCount() {
+        final CachesBundle bundle = bundleRef.get();
+        if (bundle == null) {
+            return 0;
+        }
+        return bundle.getVisibleCachesCount();
     }
 
     public void invalidate() {
@@ -94,17 +101,25 @@ public abstract class AbstractCachesOverlay {
         invalidated = false;
     }
 
-    protected void fill(final Set<Geocache> caches) {
+    protected void update(final Set<Geocache> caches) {
+        // display caches
+        final Set<Geocache> cachesToDisplay = caches;
+        boolean showWaypoints = false;
+
+        if (!cachesToDisplay.isEmpty()) {
+            // Only show waypoints when less than showWaypointsthreshold Caches to be shown
+            final int newCachesCount = cachesToDisplay.size() - getVisibleCachesCount() + getAllVisibleCachesCount();
+            showWaypoints = newCachesCount < Settings.getWayPointsThreshold();
+        }
+        update(cachesToDisplay, showWaypoints);
+    }
+
+    protected void update(final Set<Geocache> cachesToDisplay, final boolean showWaypoints) {
 
         final Collection<String> removeCodes = getGeocodes();
         final Collection<String> newCodes = new HashSet<>();
 
-        // display caches
-        final Set<Geocache> cachesToDisplay = caches;
-
         if (!cachesToDisplay.isEmpty()) {
-            // Only show waypoints when less than showWaypointsthreshold Caches shown
-            final boolean showWaypoints = cachesToDisplay.size() < Settings.getWayPointsThreshold();
 
             Log.d(String.format(Locale.ENGLISH, "CachesToDisplay: %d, showWaypoints: %b", cachesToDisplay.size(), showWaypoints));
 
@@ -191,20 +206,24 @@ public abstract class AbstractCachesOverlay {
         return layerList.getGeocodes();
     }
 
+    protected Collection<String> getCacheGeocodes() {
+        return layerList.getCacheGeocodes();
+    }
+
     protected Viewport getViewport() {
-        final MfMapView mapView = this.mapViewRef.get();
-        if (mapView == null) {
+        final CachesBundle bundle = this.bundleRef.get();
+        if (bundle == null) {
             return null;
         }
-        return mapView.getViewport();
+        return bundle.getViewport();
     }
 
     protected int getMapZoomLevel() {
-        final MfMapView mapView = this.mapViewRef.get();
-        if (mapView == null) {
+        final CachesBundle bundle = this.bundleRef.get();
+        if (bundle == null) {
             return 0;
         }
-        return mapView.getMapZoomLevel();
+        return bundle.getMapZoomLevel();
     }
 
     protected void showProgress() {
@@ -269,11 +288,11 @@ public abstract class AbstractCachesOverlay {
     }
 
     private Layers getLayers() {
-        final MfMapView mapView = this.mapViewRef.get();
-        if (mapView == null) {
+        final CachesBundle bundle = this.bundleRef.get();
+        if (bundle == null) {
             return null;
         }
-        final LayerManager layerManager = mapView.getLayerManager();
+        final LayerManager layerManager = bundle.getLayerManager();
         if (layerManager == null) {
             return null;
         }

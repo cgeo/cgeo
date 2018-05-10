@@ -3,7 +3,6 @@ package cgeo.geocaching.maps.mapsforge.v6.caches;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.maps.mapsforge.v6.MapHandlers;
-import cgeo.geocaching.maps.mapsforge.v6.MfMapView;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.utils.AndroidRxUtils;
 
@@ -16,8 +15,8 @@ public class SinglePointOverlay extends AbstractCachesOverlay {
     private final Geopoint coords;
     private final WaypointType type;
 
-    public SinglePointOverlay(final Geopoint coords, final WaypointType type, final int overlayId, final Set<GeoEntry> geoEntries, final MfMapView mapView, final Layer anchorLayer, final MapHandlers mapHandlers) {
-        super(overlayId, geoEntries, mapView, anchorLayer, mapHandlers);
+    public SinglePointOverlay(final Geopoint coords, final WaypointType type, final int overlayId, final Set<GeoEntry> geoEntries, final CachesBundle bundle, final Layer anchorLayer, final MapHandlers mapHandlers) {
+        super(overlayId, geoEntries, bundle, anchorLayer, mapHandlers);
 
         this.coords = coords;
         this.type = type;
@@ -33,7 +32,7 @@ public class SinglePointOverlay extends AbstractCachesOverlay {
     }
 
     @Override
-    public int getVisibleItemsCount() {
+    public int getVisibleCachesCount() {
         // TODO: Check whether the waypoint is within the viewport
         return 1;
     }
