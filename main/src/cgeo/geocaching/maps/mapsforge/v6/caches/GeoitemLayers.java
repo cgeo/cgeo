@@ -1,5 +1,7 @@
 package cgeo.geocaching.maps.mapsforge.v6.caches;
 
+import cgeo.geocaching.enumerations.CoordinatesType;
+
 import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
@@ -12,15 +14,13 @@ import java.util.Set;
 
 import org.mapsforge.map.layer.Layer;
 
-import cgeo.geocaching.enumerations.CoordinatesType;
-
 public class GeoitemLayers implements Iterable<GeoitemLayer> {
 
     /**
      * ordered set of items to be displayed
      */
     private final HashMap<String, GeoitemLayer> geoitems = new LinkedHashMap<>();
-    private final Set<String> cacheCodes = new HashSet<String>();
+    private final Set<String> cacheCodes = new HashSet<>();
 
     public synchronized Collection<String> getGeocodes() {
         return new ArrayList<>(geoitems.keySet());
