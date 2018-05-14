@@ -5,7 +5,7 @@
     <issue id="DuplicateIds" severity="error" />
     <issue id="DuplicateIncludedIds" severity="error" />
     <issue id="ExportedContentProvider" severity="ignore" />
-    <issue id="GradleOverrides" severity="ignore"/>
+    <issue id="GradleOverrides" severity="ignore" />
     <issue id="IconDensities" severity="ignore" />
     <issue id="ImpliedQuantity" severity="ignore" />
     <issue id="InvalidPackage" severity="ignore" />
@@ -17,6 +17,9 @@
     <issue id="Registered" severity="ignore" />
     <issue id="RtlHardcoded" severity="ignore" />
     <issue id="RtlSymmetry" severity="ignore" />
+    <issue id="TypographyDashes">
+        <ignore path="res/values/strings.xml" />
+    </issue>
     <issue id="Typos" severity="ignore" />
     <issue id="UnusedAttribute" severity="ignore" />
     <issue id="UnusedQuantity">
