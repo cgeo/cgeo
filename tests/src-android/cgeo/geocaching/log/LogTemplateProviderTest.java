@@ -2,6 +2,7 @@ package cgeo.geocaching.log;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
+import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.log.LogTemplateProvider.LogContext;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
@@ -72,4 +73,16 @@ public class LogTemplateProviderTest extends TestCase {
         assertThat(Integer.parseInt(withIncrement) - Integer.parseInt(withoutIncrement)).isEqualTo(1);
     }
 
+    private static LogContext createCache() {
+        final Geocache cache = new Geocache();
+        cache.setGeocode("GC12345");
+        return new LogContext(cache, new LogEntry.Builder().build());
+    }
+
+    public static void testSizeTemplate() {
+        final LogContext context = createCache();
+        context.getCache().setSize(CacheSize.VERY_LARGE);
+        final String log = LogTemplateProvider.applyTemplates("[SIZE]", context);
+        assertThat(log).isEqualTo(CacheSize.VERY_LARGE.getL10n());
+    }
 }
