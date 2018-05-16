@@ -157,6 +157,8 @@ public class NewMap extends AbstractActionBarActivity {
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        Log.d("NewMap: onCreate");
+
         AndroidGraphicFactory.createInstance(this.getApplication());
 
         // some tiles are rather big, see https://github.com/mapsforge/mapsforge/issues/868
@@ -696,6 +698,7 @@ public class NewMap extends AbstractActionBarActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        Log.d("NewMap: onResume");
 
         resumeTileLayer();
     }
@@ -703,6 +706,7 @@ public class NewMap extends AbstractActionBarActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        Log.d("NewMap: onStart");
 
         initializeLayers();
     }
@@ -768,6 +772,7 @@ public class NewMap extends AbstractActionBarActivity {
 
     @Override
     public void onPause() {
+        Log.d("NewMap: onPause");
 
         savePrefs();
 
@@ -778,6 +783,7 @@ public class NewMap extends AbstractActionBarActivity {
 
     @Override
     protected void onStop() {
+        Log.d("NewMap: onStop");
 
         waitDialog = null;
         terminateLayers();
@@ -851,6 +857,7 @@ public class NewMap extends AbstractActionBarActivity {
 
     @Override
     protected void onDestroy() {
+        Log.d("NewMap: onDestroy");
         this.tileCache.destroy();
         this.mapView.getModel().mapViewPosition.destroy();
         this.mapView.destroy();

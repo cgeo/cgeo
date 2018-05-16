@@ -45,9 +45,11 @@ public abstract class AbstractCachesOverlay {
         this.bundleRef = new WeakReference<>(bundle);
         this.anchorLayer = anchorLayer;
         this.mapHandlers = mapHandlers;
+        Log.d(String.format(Locale.ENGLISH, "AbstractCacheOverlay: construct overlay %d", overlayId));
     }
 
     public void onDestroy() {
+        Log.d(String.format(Locale.ENGLISH, "AbtsractCacheOverlay: onDestroy overlay %d", overlayId));
         clearLayers();
     }
 
