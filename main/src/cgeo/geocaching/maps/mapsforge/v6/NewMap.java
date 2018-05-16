@@ -637,7 +637,7 @@ public class NewMap extends AbstractActionBarActivity {
             return null;
         }
         final Geopoint mapCenter = mapView.getViewport().getCenter();
-        return new MapState(mapCenter.getCoords(), mapView.getMapZoomLevel(), followMyLocation, false, null, null, mapOptions.isLiveEnabled, false);
+        return new MapState(mapCenter.getCoords(), mapView.getMapZoomLevel(), followMyLocation, false, targetGeocode, lastNavTarget, mapOptions.isLiveEnabled, mapOptions.isStoredEnabled);
     }
 
 
