@@ -518,8 +518,6 @@
   <string name="init_signature_template_number">Număr</string>
   <string name="init_signature_template_owner">Proprietar</string>
   <string name="init_signature_template_name">Nume</string>
-  <string name="init_signature_template_difficulty">Dificultate</string>
-  <string name="init_signature_template_terrain">Teren</string>
   <string name="init_signature_template_url">URL</string>
   <string name="init_signature_template_log">Text însemnare</string>
   <string name="init_ratingwanted">Voturi GCvote</string>

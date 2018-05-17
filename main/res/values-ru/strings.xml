@@ -287,11 +287,6 @@
   <string name="caches_more_caches_currently">Отображено</string>
   <string name="caches_downloading">Загружаю тайники…\nETA: </string>
   <string name="caches_eta_ltm">меньше минуты</string>
-  <plurals name="caches_eta_mins">
-    <item quantity="one">%d минута</item>
-    <item quantity="few">%d минуты</item>
-    <item quantity="other">%d минут</item>
-  </plurals>
   <string name="caches_store_offline">Загрузить в память</string>
   <string name="caches_store_all">Сохранить всё</string>
   <string name="caches_store_unsaved">Сохранить несохранённое</string>
@@ -322,17 +317,7 @@
   <string name="caches_nearby">Поблизости</string>
   <string name="caches_manage">Опции</string>
   <string name="caches_remove_all">Удалить все</string>
-  <plurals name="caches_remove_all_confirm">
-    <item quantity="one">Вы действительно хотите удалить этот тайник из текущего списка?</item>
-    <item quantity="few">Вы действительно хотите удалить %d тайника из текущего списка?</item>
-    <item quantity="other">Вы действительно хотите удалить все %d тайников из текущего списка?</item>
-  </plurals>
   <string name="caches_remove_selected">Удалить выбранные</string>
-  <plurals name="caches_remove_selected_confirm">
-    <item quantity="one">Вы действительно хотите удалить %d тайник с вашего устройства?</item>
-    <item quantity="few">Вы действительно хотите удалить %d тайника с вашего устройства?</item>
-    <item quantity="other">Вы действительно хотите удалить %d тайников с вашего устройства?</item>
-  </plurals>
   <string name="caches_remove_progress">Удаление тайников</string>
   <string name="caches_delete_events">Удалить прошедшие события</string>
   <string name="caches_refresh_selected">Обновить выбранные</string>
@@ -509,8 +494,6 @@
   <string name="init_signature_template_number">Номер тайника</string>
   <string name="init_signature_template_owner">Создатель</string>
   <string name="init_signature_template_name">Название тайника</string>
-  <string name="init_signature_template_difficulty">Сложность</string>
-  <string name="init_signature_template_terrain">Местность</string>
   <string name="init_signature_template_url">URL</string>
   <string name="init_signature_template_log">Текст записи</string>
   <string name="init_ratingwanted">Рейтинг GCvote</string>
@@ -705,17 +688,7 @@
   <string name="err_auth_geokrety_bad_password">Логин и\или пароль неверны.</string>
   <string name="err_auth_geokrety_unknown">%1$s вернуло: %2$s.</string>
   <!-- cache -->
-  <plurals name="cache_counts">
-    <item quantity="one">%1$d тайник</item>
-    <item quantity="few">%1$d тайника</item>
-    <item quantity="other">%1$d тайников</item>
-  </plurals>
   <!-- days remaining -->
-  <plurals name="days_remaining">
-    <item quantity="one">остался один день</item>
-    <item quantity="few">осталось %1$d дня</item>
-    <item quantity="other">осталось %1$d дней</item>
-  </plurals>
   <string name="last_day_available">остался один день</string>
   <string name="cache_offline">Оффлайн</string>
   <string name="cache_offline_refresh">Обновить</string>
@@ -728,21 +701,6 @@
   <string name="cache_offline_time_about">примерно</string>
   <string name="cache_offline_time_mins">минут назад</string>
   <string name="cache_offline_time_mins_few">несколько минут назад</string>
-  <plurals name="cache_offline_about_time_mins">
-    <item quantity="one">примерно %d минуту назад</item>
-    <item quantity="few">примерно %d минуты назад</item>
-    <item quantity="other">примерно %d минут назад</item>
-  </plurals>
-  <plurals name="cache_offline_about_time_hours">
-    <item quantity="one">примерно %d час назад</item>
-    <item quantity="few">примерно %d часа назад</item>
-    <item quantity="other">примерно %d часов назад</item>
-  </plurals>
-  <plurals name="cache_offline_about_time_days">
-    <item quantity="one">примерно %d день назад</item>
-    <item quantity="few">примерно %d дня назад</item>
-    <item quantity="other">примерно %d дней назад</item>
-  </plurals>
   <string name="cache_offline_time_hour">час назад</string>
   <string name="cache_offline_time_hours">часа (-ов) назад</string>
   <string name="cache_offline_time_days">дн. назад</string>
@@ -779,11 +737,6 @@
   <string name="cache_list_select_last">Посл. выбор</string>
   <string name="cache_images">Изображения</string>
   <string name="cache_waypoints">Путевые точки</string>
-  <plurals name="waypoints">
-    <item quantity="one">%d путевая точка</item>
-    <item quantity="few">%d путевые точки</item>
-    <item quantity="other">%d путевых точек</item>
-  </plurals>
   <string name="cache_waypoints_add">Добавить точку</string>
   <string name="cache_hint">Подсказка</string>
   <string name="cache_hint_not_available">Нет подсказок</string>
@@ -1155,11 +1108,6 @@
   <string name="export_confirm_message">В: %1$s\nИмя файла: %2$s</string>
   <string name="export_persnotes">Личные заметки</string>
   <string name="export_persnotes_uploading">Загрузка личной заметки %1$d</string>
-  <plurals name="export_persnotes_upload_success">
-    <item quantity="one">Успешно загружена одна заметка</item>
-    <item quantity="few">Успешно загружены %1$d заметки</item>
-    <item quantity="other">Успешно загружено %1$d заметок</item>
-  </plurals>
   <!-- GC attributes -->
   <string name="attribute_dogs_yes">Можно с собаками</string>
   <string name="attribute_dogs_no">Нельзя с собаками</string>
@@ -1413,43 +1361,13 @@
   <string name="tts_stopped">Речь закончилась</string>
   <string name="err_tts_lang_not_supported">Текущий язык не поддерживается TTS-движком.</string>
   <string name="tts_one_kilometer">один километр</string>
-  <plurals name="tts_kilometers">
-    <item quantity="one">%s километр</item>
-    <item quantity="few">%s километра</item>
-    <item quantity="other">%s километров</item>
-  </plurals>
   <string name="tts_one_meter">один метр</string>
-  <plurals name="tts_meters">
-    <item quantity="one">%s метр</item>
-    <item quantity="few">%s метра</item>
-    <item quantity="other">%s метров</item>
-  </plurals>
   <string name="tts_one_mile">одна миля</string>
-  <plurals name="tts_miles">
-    <item quantity="one">%s миля</item>
-    <item quantity="few">%s мили</item>
-    <item quantity="other">%s миль</item>
-  </plurals>
   <string name="tts_one_foot">один фут</string>
-  <plurals name="tts_feet">
-    <item quantity="one">%s фут</item>
-    <item quantity="few">%s фута</item>
-    <item quantity="other">%s футов</item>
-  </plurals>
   <string name="tts_one_oclock">один час</string>
   <string name="tts_oclock">%s часов</string>
   <!-- various -->
   <string name="clipboard_copy_ok">Скопировано в буфер</string>
-  <plurals name="days_ago">
-    <item quantity="one">%d день назад</item>
-    <item quantity="few">%d дня назад</item>
-    <item quantity="other">%d дней назад</item>
-  </plurals>
-  <plurals name="favorite_points">
-    <item quantity="one">%s рекомендация</item>
-    <item quantity="few">%s рекомендации</item>
-    <item quantity="other">%s рекомендаций</item>
-  </plurals>
   <string name="more_than_percent_favorite_points">&gt; %d%% рекомендаций</string>
   <!-- shortcuts -->
   <string name="cgeo_shortcut">Ярлык c:geo</string>
@@ -1477,31 +1395,11 @@
   <string name="settings_summary_map_direction">Показать линию направления к цели навигации</string>
   <string name="map_direction">Показать направление</string>
   <string name="command_move_caches_progress">Перемещение тайников в список %1s</string>
-  <plurals name="command_move_caches_result">
-    <item quantity="one">Перемещен %d тайник</item>
-    <item quantity="few">Перемещено %d тайника</item>
-    <item quantity="other">Перемещено %d тайников</item>
-  </plurals>
   <string name="command_copy_caches_progress">Копирование тайников в список %1s</string>
-  <plurals name="command_copy_caches_result">
-    <item quantity="one">Скопирован %d тайник</item>
-    <item quantity="few">Скопировано %d тайника</item>
-    <item quantity="other">Скопировано %d тайников</item>
-  </plurals>
   <string name="command_delete_caches_progress">Удаление тайников</string>
-  <plurals name="command_delete_caches_result">
-    <item quantity="one">Удален %d тайник</item>
-    <item quantity="few">Удалено %d тайника</item>
-    <item quantity="other">Удалено %d тайников</item>
-  </plurals>
   <string name="command_rename_list_result">Список переименован</string>
   <string name="command_delete_list_result">Список удален</string>
   <string name="command_unique_list_result">Удаленные тайники из других списков</string>
-  <plurals name="fav_points_remaining">
-    <item quantity="one">Рекомендовать тайник (%d осталось)</item>
-    <item quantity="few">Рекомендовать тайники (%d осталось)</item>
-    <item quantity="other">Рекомендовать тайники (%d осталось)</item>
-  </plurals>
   <!-- distance units -->
   <string name="unit_m">м</string>
   <string name="unit_km">км</string>
@@ -1520,11 +1418,6 @@
   <string name="cache_list_remove_from">Удалить из списка</string>
   <string name="list_list_headline">Списки:</string>
   <string name="cache_store_list">Сохранить в список</string>
-  <plurals name="extract_waypoints_result">
-    <item quantity="one">%d точка извлечена</item>
-    <item quantity="few">%d точки извлечены</item>
-    <item quantity="other">%d точек извлечено</item>
-  </plurals>
   <!-- calendar adder -->
   <string name="event_fail">Не удалось добавить событие в календарь</string>
   <string name="init_low_disk_space">Кончается место для хранения</string>

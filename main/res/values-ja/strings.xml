@@ -507,8 +507,6 @@
   <string name="init_signature_template_number">キャッシュ数</string>
   <string name="init_signature_template_owner">オーナー</string>
   <string name="init_signature_template_name">名前</string>
-  <string name="init_signature_template_difficulty">難易度</string>
-  <string name="init_signature_template_terrain">地形</string>
   <string name="init_signature_template_url">URL</string>
   <string name="init_signature_template_log">ログの本文</string>
   <string name="init_ratingwanted">GCvote評価</string>

@@ -515,8 +515,6 @@
   <string name="init_signature_template_number">Találatszám</string>
   <string name="init_signature_template_owner">Tulajdonos</string>
   <string name="init_signature_template_name">Név</string>
-  <string name="init_signature_template_difficulty">Nehézség</string>
-  <string name="init_signature_template_terrain">Terep</string>
   <string name="init_signature_template_url">URL</string>
   <string name="init_signature_template_log">Log szöveg</string>
   <string name="init_ratingwanted">GCVote értékelés</string>

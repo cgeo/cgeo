@@ -288,11 +288,6 @@
   <string name="caches_more_caches_currently">Obecnie</string>
   <string name="caches_downloading">Pobieram skrzynki…\nSzacowany czas: </string>
   <string name="caches_eta_ltm">Mniej niż minuta</string>
-  <plurals name="caches_eta_mins">
-    <item quantity="one">%d minuta</item>
-    <item quantity="few">%d minuty</item>
-    <item quantity="other">%d minut</item>
-  </plurals>
   <string name="caches_store_offline">Zapisz offline</string>
   <string name="caches_store_all">Zapisz wszystkie</string>
   <string name="caches_store_unsaved">Zapisz niezapisane</string>
@@ -323,17 +318,7 @@
   <string name="caches_nearby">Najbliższe</string>
   <string name="caches_manage">Zarządzaj</string>
   <string name="caches_remove_all">Usuń wszystkie</string>
-  <plurals name="caches_remove_all_confirm">
-    <item quantity="one">Czy chcesz usunąć wybraną skrzynkę z obecnej listy?</item>
-    <item quantity="few">Czy chcesz usunąć %d skrzynki z obecnej listy?</item>
-    <item quantity="other">Czy chcesz usunąć %d skrzynek z obecnej listy?</item>
-  </plurals>
   <string name="caches_remove_selected">Usuń wybrane</string>
-  <plurals name="caches_remove_selected_confirm">
-    <item quantity="one">Czy chcesz usunąć wybraną skrzynkę z urządzenia?</item>
-    <item quantity="few">Czy chcesz usunąć %d zaznaczone skrzynki z urządzenia?</item>
-    <item quantity="other">Czy chcesz usunąć %d zaznaczonych skrzynek z urządzenia?</item>
-  </plurals>
   <string name="caches_remove_progress">Usuwanie skrzynek</string>
   <string name="caches_delete_events">Usuń minione wydarzenia</string>
   <string name="caches_refresh_selected">Odśwież wybrane</string>
@@ -515,8 +500,6 @@
   <string name="init_signature_template_number">Numer</string>
   <string name="init_signature_template_owner">Właściciel</string>
   <string name="init_signature_template_name">Nazwa</string>
-  <string name="init_signature_template_difficulty">Trudność</string>
-  <string name="init_signature_template_terrain">Teren</string>
   <string name="init_signature_template_url">URL</string>
   <string name="init_signature_template_log">Wpis</string>
   <string name="init_ratingwanted">Załaduj ocenę skrzynki z GCvote.com</string>
@@ -713,17 +696,7 @@
   <string name="err_auth_geokrety_bad_password">Nazwa użytkownika lub hasło wygląda na nieprawidłowe.</string>
   <string name="err_auth_geokrety_unknown">%1$s zwrócił: %2$s.</string>
   <!-- cache -->
-  <plurals name="cache_counts">
-    <item quantity="one">Jedna skrzynka</item>
-    <item quantity="few">%1$d skrzynki</item>
-    <item quantity="other">%1$d skrzynek</item>
-  </plurals>
   <!-- days remaining -->
-  <plurals name="days_remaining">
-    <item quantity="one">został jeden dzień</item>
-    <item quantity="few">zostało %1$d dni</item>
-    <item quantity="other">zostało %1$d dni</item>
-  </plurals>
   <string name="last_day_available">dostępne ostatni dzień</string>
   <string name="cache_offline">Offline</string>
   <string name="cache_offline_refresh">Odśwież</string>
@@ -736,21 +709,6 @@
   <string name="cache_offline_time_about">około</string>
   <string name="cache_offline_time_mins">minut temu</string>
   <string name="cache_offline_time_mins_few">przed kilkoma minutami</string>
-  <plurals name="cache_offline_about_time_mins">
-    <item quantity="one">około %d minuty temu</item>
-    <item quantity="few">około %d minut temu</item>
-    <item quantity="other">około %d minut temu</item>
-  </plurals>
-  <plurals name="cache_offline_about_time_hours">
-    <item quantity="one">około %d godziny temu</item>
-    <item quantity="few">około %d godzin temu</item>
-    <item quantity="other">około %d godzin temu</item>
-  </plurals>
-  <plurals name="cache_offline_about_time_days">
-    <item quantity="one">około %d dnia temu</item>
-    <item quantity="few">około %d dni temu</item>
-    <item quantity="other">około %d dni temu</item>
-  </plurals>
   <string name="cache_offline_time_hour">przed jedną godziną</string>
   <string name="cache_offline_time_hours">godzin temu</string>
   <string name="cache_offline_time_days">dni temu</string>
@@ -787,11 +745,6 @@
   <string name="cache_list_select_last">Ostatni wybór</string>
   <string name="cache_images">Zdjęcia</string>
   <string name="cache_waypoints">Punkty nawigacji</string>
-  <plurals name="waypoints">
-    <item quantity="one">1 punkt</item>
-    <item quantity="few">%d punkty</item>
-    <item quantity="other">%d punktów nawigacji</item>
-  </plurals>
   <string name="cache_waypoints_add">Dodaj punkt nawigacji</string>
   <string name="cache_hint">Wskazówka</string>
   <string name="cache_hint_not_available">Brak podpowiedzi</string>
@@ -1163,11 +1116,6 @@
   <string name="export_confirm_message">Ścieżka: %1$s\nNazwa pliku: %2$s</string>
   <string name="export_persnotes">Notatki osobiste</string>
   <string name="export_persnotes_uploading">Wysyłam notatkę osobistą %1$d</string>
-  <plurals name="export_persnotes_upload_success">
-    <item quantity="one">Wysłano pomyślnie notatkę</item>
-    <item quantity="few">Wysłano pomyślnie %1$d notatki</item>
-    <item quantity="other">Wysłano pomyślnie %1$d notatek</item>
-  </plurals>
   <!-- GC attributes -->
   <string name="attribute_dogs_yes">Psy dozwolone</string>
   <string name="attribute_dogs_no">Psy niedozwolone</string>
@@ -1422,43 +1370,13 @@
   <string name="tts_stopped">Mówienie zakończone</string>
   <string name="err_tts_lang_not_supported">Aktualny język nie jest wspierany przez text-to-speech.</string>
   <string name="tts_one_kilometer">jeden kilometr</string>
-  <plurals name="tts_kilometers">
-    <item quantity="one">%s kilometr</item>
-    <item quantity="few">%s kilometry</item>
-    <item quantity="other">%s kilometrów</item>
-  </plurals>
   <string name="tts_one_meter">jeden metr</string>
-  <plurals name="tts_meters">
-    <item quantity="one">%s metr</item>
-    <item quantity="few">%s metry</item>
-    <item quantity="other">%s metrów</item>
-  </plurals>
   <string name="tts_one_mile">jedna mila</string>
-  <plurals name="tts_miles">
-    <item quantity="one">%s mila</item>
-    <item quantity="few">%s mile</item>
-    <item quantity="other">%s mil</item>
-  </plurals>
   <string name="tts_one_foot">jedna stopa</string>
-  <plurals name="tts_feet">
-    <item quantity="one">%s stopa</item>
-    <item quantity="few">%s stopy</item>
-    <item quantity="other">%s stóp</item>
-  </plurals>
   <string name="tts_one_oclock">pierwsza</string>
   <string name="tts_oclock">%s</string>
   <!-- various -->
   <string name="clipboard_copy_ok">Skopiowano do schowka</string>
-  <plurals name="days_ago">
-    <item quantity="one">wczoraj</item>
-    <item quantity="few">%d dni temu</item>
-    <item quantity="other">%d dni temu</item>
-  </plurals>
-  <plurals name="favorite_points">
-    <item quantity="one">%s ulubiony</item>
-    <item quantity="few">%s ulubione</item>
-    <item quantity="other">%s ulubionych</item>
-  </plurals>
   <string name="more_than_percent_favorite_points">&gt; %d%% ulubionych</string>
   <!-- shortcuts -->
   <string name="cgeo_shortcut">skrót do c:geo</string>
@@ -1486,31 +1404,11 @@
   <string name="settings_summary_map_direction">Pokazuj linię kierunku do punktu nawigacyjnego</string>
   <string name="map_direction">Pokaż kierunek</string>
   <string name="command_move_caches_progress">Przenoszę skrzynki do listy %1s</string>
-  <plurals name="command_move_caches_result">
-    <item quantity="one">Przeniesiono %d skrzynkę</item>
-    <item quantity="few">Przeniesiono %d skrzynki</item>
-    <item quantity="other">Przeniesiono %d skrzynek</item>
-  </plurals>
   <string name="command_copy_caches_progress">Kopiowanie skrzynek do listy %1s</string>
-  <plurals name="command_copy_caches_result">
-    <item quantity="one">Skopiowano %d skrzynkę</item>
-    <item quantity="few">Skopiowano %d skrzynki</item>
-    <item quantity="other">Skopiowano %d skrzynek</item>
-  </plurals>
   <string name="command_delete_caches_progress">Usuwanie skrzynek</string>
-  <plurals name="command_delete_caches_result">
-    <item quantity="one">Usunięto %d skrzynkę</item>
-    <item quantity="few">Usunięto %d skrzynki</item>
-    <item quantity="other">Usunięto %d skrzynek</item>
-  </plurals>
   <string name="command_rename_list_result">Zmieniono nazwę listy</string>
   <string name="command_delete_list_result">Usunięto listę</string>
   <string name="command_unique_list_result">Usunięte skrzynki z innych list</string>
-  <plurals name="fav_points_remaining">
-    <item quantity="one">Dodaj tę skrzynkę do ulubionych (pozostało %d)</item>
-    <item quantity="few">Dodaj tę skrzynkę do ulubionych (pozostało %d)</item>
-    <item quantity="other">Dodaj tę skrzynkę do ulubionych (pozostało %d)</item>
-  </plurals>
   <!-- distance units -->
   <string name="unit_m">m</string>
   <string name="unit_km">km</string>
@@ -1529,11 +1427,6 @@
   <string name="cache_list_remove_from">Usuń z listy</string>
   <string name="list_list_headline">Lista:</string>
   <string name="cache_store_list">Zapisz na liście</string>
-  <plurals name="extract_waypoints_result">
-    <item quantity="one">%d punkt orientacyjny został wyciągnięty</item>
-    <item quantity="few">%d punkty orientacyjne zostały wyciągnięte</item>
-    <item quantity="other">%d punktów orientacyjnych zostało wyciągniętych</item>
-  </plurals>
   <!-- calendar adder -->
   <string name="event_fail">Nie udało się dodać wydarzenia do kalendarza</string>
   <string name="init_low_disk_space">Zaczyna brakować miejsca</string>

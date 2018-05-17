@@ -128,6 +128,9 @@
   <string name="log_oc_team_comment">Commenti del Team OC</string>
   <string name="log_your_saved_log">I tuoi log salvati</string>
   <string name="log_empty_logbook">Il logbook di questo cache è vuota.</string>
+  <string name="log_problem_needs_maintenance_label">Ha bisogno di manutenzione</string>
+  <string name="log_problem_missing_label">La cache potrebbe non essere presente</string>
+  <string name="log_problem_other_label">Altro</string>
   <string-array name="log_image_scales">
     <item>Dimensioni originali</item>
     <item>512 px</item>
@@ -656,6 +659,9 @@
   <string name="feature_search_geocode">Cerca per geocode</string>
   <string name="feature_search_owner">Cerca per proprietario</string>
   <string name="feature_search_finder">Cerca per ricercatore</string>
+  <string name="init_mapsforge_api_title">API Mapsforge</string>
+  <string name="init_mfold_api">Vecchio Mapsforge V3</string>
+  <string name="init_mfold_api_description">La versione corrente contiene una versione beta della nostra nuova mappa Mapsforge. Se non trovi alcune caratteristiche o riscontri qualche problema puoi tornare indietro alla vecchia versione qui.</string>
   <string name="init_experimental_title">Funzioni sperimentali</string>
   <string name="init_mfbeta">Mapsforge beta come predefinito</string>
   <string name="init_mfbeta_description">La versione corrente contiene una versione beta della nostra mappa Mapsforge come funzione sperimentale. Questa mappa può essere attivata qui come default per il live ed elenco mappe.</string>
@@ -743,6 +749,11 @@
     <item quantity="one">circa %d giorno fa</item>
     <item quantity="other">circa %d giorni fa</item>
   </plurals>
+  <plurals name="cache_offline_about_time_months">
+    <item quantity="one">circa %d mesi fa</item>
+    <item quantity="other">circa %d mesi fa</item>
+  </plurals>
+  <string name="cache_offline_about_time_year">più di un anno fa</string>
   <string name="cache_offline_time_hour">un\'ora fa</string>
   <string name="cache_offline_time_hours">ore fa</string>
   <string name="cache_offline_time_days">giorni fa</string>
@@ -1450,6 +1461,8 @@
   <string name="send">Invia</string>
   <string name="confirm_log_title">Tipo di log speciale</string>
   <string name="confirm_log_message">Si desidera registrare \'%s\'. Sei sicuro?</string>
+  <string name="confirm_report_problem_title">Segnala un problema</string>
+  <string name="confirm_report_problem_message">Vuoi segnalare \'%s\'. Sei sicuro?</string>
   <!-- Geokrety -->
   <string name="settings_activate_geokrety">Attiva</string>
   <string name="init_geokrety">GeoKrety.org</string>
@@ -1521,4 +1534,6 @@
   <string name="list_confirm_debug_message">La modalità di debug può causare instabilità! Vuoi tornare alla modalità normale?</string>
   <string name="err_select_logimage_upload_size">Immagine troppo grande, si prega di selezionare una scala inferiore.</string>
   <string name="err_logimage_caption_required">Una didascalia è richiesta per l\'immagine</string>
+  <string name="waypoint_latitude_null">N/S --° --.---</string>
+  <string name="waypoint_longitude_null">E/O --° --.---</string>
 </resources>

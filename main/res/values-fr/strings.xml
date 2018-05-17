@@ -124,10 +124,24 @@
   <string name="log_image_description">Description</string>
   <string name="log_image_scale">Mise à l\'échelle</string>
   <string name="log_password_title">Mot de passe pour la visite :</string>
+  <string name="log_report_problem">Signaler un problème:</string>
   <string name="log_hint_log_password">Entrez votre mot de passe pour la visite</string>
   <string name="log_oc_team_comment">Commentaire de l\'équipe OC</string>
   <string name="log_your_saved_log">Visite enregistrée hors-ligne</string>
   <string name="log_empty_logbook">Le carnet de visites de cette cache est vide.</string>
+  <string name="log_problem_none">Aucun problème</string>
+  <string name="log_problem_needs_maintenance_label">Nécessite une maintenance</string>
+  <string name="log_problem_needs_maintenance_text">Ce géocacheur a signalé qu’il y a un problème avec cette cache.</string>
+  <string name="log_problem_log_full_label">Le journal de visites est plein</string>
+  <string name="log_problem_log_full_text">Ce géocacheur a signalé que le journal de visites est plein.</string>
+  <string name="log_problem_damaged_label">Le conteneur est abîmé</string>
+  <string name="log_problem_damaged_text">Ce géocacheur a signalé que le conteneur est abîmé.</string>
+  <string name="log_problem_missing_label">La cache peut être absente</string>
+  <string name="log_problem_missing_text">Cet géocacheur a signalé que le cache peut être absente.</string>
+  <string name="log_problem_other_label">Autre</string>
+  <string name="log_problem_other_text">Ce géocacheur a signalé qu’il y a un problème avec cette cache.</string>
+  <string name="log_problem_archive_label">La cache devrait être archivée</string>
+  <string name="log_problem_archive_text">Ce géocacheur a signalé que cette géocache doit être archivée. Un examinateur bénévole a été notifié.</string>
   <string-array name="log_image_scales">
     <item>Taille originale</item>
     <item>512 px</item>
@@ -628,7 +642,7 @@
   <string name="init_force_orientation_sensor_title">Capteur d\'orientation</string>
   <string name="init_force_orientation_sensor_note">Sur certains appareils le capteur de rotation vectorielle utilisé par défaut se comporte de manière erratique et indique la mauvaise direction. Dans ce cas, un capteur alternatif (le capteur d\'orientation) peut donner de meilleurs résultats.</string>
   <string name="init_force_orientation_sensor">Forcer l\'utilisation du capteur d\'orientation</string>
-  <string name="init_create_memory_dump">Créer une image mémoire</string>
+  <string name="init_create_memory_dump">création mémoire vidage</string>
   <string name="init_memory_dump">Image mémoire</string>
   <string name="init_memory_dumped">Mémoire copiée dans %s</string>
   <string name="init_hardware_acceleration_title">Accélération graphique</string>
@@ -659,6 +673,7 @@
   <string name="feature_search_geocode">Rechercher ce code</string>
   <string name="feature_search_owner">Rechercher par Propriétaire</string>
   <string name="feature_search_finder">Rechercher par Découvreur</string>
+  <string name="init_mapsforge_api_title">API Mapsforge</string>
   <string name="init_experimental_title">Fonctionnalités expérimentales</string>
   <string name="init_mfbeta">Carte Mapsforge beta par défaut</string>
   <string name="init_mfbeta_description">La version actuelle contient une version beta de notre nouvelle carte Mapsforge (fonctionnalité expérimentale). Cette nouvelle carte peut être activée ici par défaut pour la carte en temps réel et pour celle des listes.</string>
@@ -749,6 +764,7 @@
     <item quantity="one">il y a %d jour</item>
     <item quantity="other">il y a %d jours</item>
   </plurals>
+  <string name="cache_offline_about_time_year">il y a plus d\'un an</string>
   <string name="cache_offline_time_hour">une heure</string>
   <string name="cache_offline_time_hours">heures</string>
   <string name="cache_offline_time_days">jours</string>
@@ -1458,6 +1474,7 @@
   <string name="send">Envoyer</string>
   <string name="confirm_log_title">Type de visite spécial</string>
   <string name="confirm_log_message">Vous allez envoyer \'%s\'. Êtes-vous sûr(e) ?</string>
+  <string name="confirm_report_problem_title">Signaler un problème</string>
   <!-- Geokrety -->
   <string name="settings_activate_geokrety">Activer</string>
   <string name="init_geokrety">GeoKrety.org</string>

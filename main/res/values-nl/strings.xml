@@ -124,10 +124,24 @@
   <string name="log_image_description">Omschrijving</string>
   <string name="log_image_scale">Schalen</string>
   <string name="log_password_title">Log wachtwoord:</string>
+  <string name="log_report_problem">Probleem melden:</string>
   <string name="log_hint_log_password">Voer Login Wachtwoord</string>
   <string name="log_oc_team_comment">OC Team commentaar</string>
   <string name="log_your_saved_log">Je opgeslagen log</string>
   <string name="log_empty_logbook">Het logboek van deze cache is leeg.</string>
+  <string name="log_problem_none">Geen Probleem</string>
+  <string name="log_problem_needs_maintenance_label">Heeft onderhoud nodig</string>
+  <string name="log_problem_needs_maintenance_text">Deze geocacher meldt dat er een probleem is met deze cache.</string>
+  <string name="log_problem_log_full_label">Logboek is vol</string>
+  <string name="log_problem_log_full_text">Deze geocacher meldt dat het logboek vol is.</string>
+  <string name="log_problem_damaged_label">Container is beschadigd</string>
+  <string name="log_problem_damaged_text">Deze geocacher heeft gemeld dat de container beschadigd is.</string>
+  <string name="log_problem_missing_label">Cache zou weg kunnen zijn</string>
+  <string name="log_problem_missing_text">Deze geocacher heeft gemeld dat de cache weg zou kunnen zijn.</string>
+  <string name="log_problem_other_label">Anders</string>
+  <string name="log_problem_other_text">Deze geocacher heeft gemeld dat er een probleem is met deze cache.</string>
+  <string name="log_problem_archive_label">Cache zou moeten worden gearchiveerd</string>
+  <string name="log_problem_archive_text">Deze geocacher heeft gemeld dat deze geocache zou moeten worden gearchiveerd. Een reviewer is hiervan op de hoogte gesteld.</string>
   <string-array name="log_image_scales">
     <item>Niet schalen</item>
     <item>512 px</item>
@@ -241,6 +255,7 @@
   <string name="info_log_cleared">Log is gewist.</string>
   <string name="info_waypoint_coordinates_cleared">Coördinaten gewist.</string>
   <string name="info_log_type_changed">Type log is gewijzigd!</string>
+  <string name="info_log_report_problem_changed">Probleem melden is veranderd!</string>
   <string name="info_select_logimage_cancelled">Foto selectie of opname is geannuleerd.</string>
   <string name="info_stored_image">Nieuwe foto opgeslagen in:</string>
   <string name="info_storing_static_maps">Proberen statische kaarten op te slaan</string>
@@ -659,6 +674,9 @@
   <string name="feature_search_geocode">Zoek op geocode</string>
   <string name="feature_search_owner">Zoek op eigenaar</string>
   <string name="feature_search_finder">Zoek op vinder</string>
+  <string name="init_mapsforge_api_title">Mapsforge API</string>
+  <string name="init_mfold_api">Oude Mapsforge V3</string>
+  <string name="init_mfold_api_description">De huidige release bevat een beta versie van onze nieuwe Mapsforge kaart. Als je sommige functies mist of problemen ervaart kan je hier teruggaan naar de oude versie.</string>
   <string name="init_experimental_title">Experimentele functies</string>
   <string name="init_mfbeta">Mapsforge bèta als standaard</string>
   <string name="init_mfbeta_description">De huidige release bevat een beta versie van onze nieuwe Mapsforge-kaart als een experimentele functie. Deze nieuwe kaart kan hier geactiveerd worden als standaard voor de live en lijst kaarten.</string>
@@ -749,6 +767,11 @@
     <item quantity="one">over %d dag geleden</item>
     <item quantity="other">over %d dagen geleden</item>
   </plurals>
+  <plurals name="cache_offline_about_time_months">
+    <item quantity="one">ongeveer %d maand geleden</item>
+    <item quantity="other">ongeveer %d maanden geleden</item>
+  </plurals>
+  <string name="cache_offline_about_time_year">meer dan een jaar geleden</string>
   <string name="cache_offline_time_hour">een uur geleden</string>
   <string name="cache_offline_time_hours">uren geleden</string>
   <string name="cache_offline_time_days">dagen geleden</string>
@@ -1458,6 +1481,8 @@
   <string name="send">Verzenden</string>
   <string name="confirm_log_title">Speciaal log type</string>
   <string name="confirm_log_message">Je wilt \'%s\' loggen. Weet je het zeker?</string>
+  <string name="confirm_report_problem_title">Probleem melden</string>
+  <string name="confirm_report_problem_message">Je wilt \'%s\' melden. Weet je het zeker?</string>
   <!-- Geokrety -->
   <string name="settings_activate_geokrety">Activeren</string>
   <string name="init_geokrety">GeoKrety.org</string>
