@@ -123,10 +123,24 @@
   <string name="log_image_description">Açıklama</string>
   <string name="log_image_scale">Ölçekleme</string>
   <string name="log_password_title">Kayıt Şifresi:</string>
+  <string name="log_report_problem">Sorun Bildir:</string>
   <string name="log_hint_log_password">Kayıt şifrenizi giriniz</string>
   <string name="log_oc_team_comment">OC Ekibi Yorumu</string>
   <string name="log_your_saved_log">Saklanan kaydınız</string>
   <string name="log_empty_logbook">Bu Geocache\'in kayıt defteri boş.</string>
+  <string name="log_problem_none">Sorun Yok</string>
+  <string name="log_problem_needs_maintenance_label">Bakım Gerekli</string>
+  <string name="log_problem_needs_maintenance_text">Bu Geocacher bu kutu ile ilgili bir sorun olduğunu bildirdi.</string>
+  <string name="log_problem_log_full_label">Kayıt sayfası dolu</string>
+  <string name="log_problem_log_full_text">Bu Geocacher kayıt sayfasının dolu olduğunu bildirdi.</string>
+  <string name="log_problem_damaged_label">Kutu zarar görmüş</string>
+  <string name="log_problem_damaged_text">Bu Geocacher kutunun zarar görmüş olduğunu bildirdi.</string>
+  <string name="log_problem_missing_label">Geocache kaybolmuş olabilir</string>
+  <string name="log_problem_missing_text">Bu Geocacher kutunun kayıp olabileceğini bildirdi.</string>
+  <string name="log_problem_other_label">Diğer</string>
+  <string name="log_problem_other_text">Bu Geocacher kutu ile ilgili bir sorun olduğunu bildirdi.</string>
+  <string name="log_problem_archive_label">Geocache arşivlenmeli</string>
+  <string name="log_problem_archive_text">Bu Geocacher kutunun arşivlenmesi gerektiğini bildirdi. Bununla ilgili olarak Gönüllü Denetçi bilgilendirilecek.</string>
   <string-array name="log_image_scales">
     <item>Ölçeklendirme Yok</item>
     <item>512 Piksel</item>
@@ -240,6 +254,7 @@
   <string name="info_log_cleared">Kayıt temizlendi.</string>
   <string name="info_waypoint_coordinates_cleared">Koordinatlar silindi.</string>
   <string name="info_log_type_changed">Kaydın türü değiştirildi!</string>
+  <string name="info_log_report_problem_changed">Sorunun değiştiğini bildir!</string>
   <string name="info_select_logimage_cancelled">Görüntü seçimi veya çekimi iptal edildi.</string>
   <string name="info_stored_image">Yeni görsel kaydedildi:</string>
   <string name="info_storing_static_maps">Statik haritalar depolanmaya çalışılıyor</string>
@@ -650,6 +665,9 @@
   <string name="feature_search_geocode">Geocode\'a göre ara</string>
   <string name="feature_search_owner">Sahibine göre ara</string>
   <string name="feature_search_finder">Bulanlara göre ara</string>
+  <string name="init_mapsforge_api_title">Mapsforge API</string>
+  <string name="init_mfold_api">Eski Mapsforge V3</string>
+  <string name="init_mfold_api_description">Güncel versiyon Mapsforge haritalarının beta sürümünü içermektedir. Bazı özellikleri kullanamamanız veya sorunlar yaşamanız durumunda buradan eski versiyona geri dönebilirsiniz.</string>
   <string name="init_experimental_title">Deneysel özellikler</string>
   <string name="init_mfbeta">Mapsforge beta varsayılan olarak</string>
   <string name="init_mfbeta_description">Geçerli sürüm, yeni Mapsforge haritamızın beta sürümünü deneme amaçlı olarak içeriyor. Bu yeni harita canlı ve liste haritaları için varsayılan olarak etkinleştirilebilir.</string>
@@ -735,6 +753,11 @@
     <item quantity="one">yaklaşık %d gün önce</item>
     <item quantity="other">yaklaşık %d gün önce</item>
   </plurals>
+  <plurals name="cache_offline_about_time_months">
+    <item quantity="one">yaklaşık %d ay önce</item>
+    <item quantity="other">yaklaşık %d ay önce</item>
+  </plurals>
+  <string name="cache_offline_about_time_year">bir yıldan uzun süre önce</string>
   <string name="cache_offline_time_hour">bir saat önce</string>
   <string name="cache_offline_time_hours">saat önce</string>
   <string name="cache_offline_time_days">gün önce</string>
@@ -1440,6 +1463,8 @@
   <string name="send">Gönder</string>
   <string name="confirm_log_title">Özel kayıt tipi</string>
   <string name="confirm_log_message">%s\'i kayıt etmek istiyorsunuz. Emin misiniz?</string>
+  <string name="confirm_report_problem_title">Sorun bildir</string>
+  <string name="confirm_report_problem_message">Bunu bildirmek istiyorsunuz: \'%s\'. Emin misiniz?</string>
   <!-- Geokrety -->
   <string name="settings_activate_geokrety">Etkinleştir</string>
   <string name="init_geokrety">GeoKrety.org</string>
@@ -1506,4 +1531,6 @@
   <string name="list_confirm_debug_message">Hata ayıklama modu dengesizliklere sebep oluyor! Bu modu devre dışı bırakmak ister misiniz?</string>
   <string name="err_select_logimage_upload_size">Görsel çok büyük, lütfen daha küçük bir boyut seçiniz.</string>
   <string name="err_logimage_caption_required">Resim için bir başlık gerekli</string>
+  <string name="waypoint_latitude_null">K/G --° --.---</string>
+  <string name="waypoint_longitude_null">D/B --° --.---</string>
 </resources>

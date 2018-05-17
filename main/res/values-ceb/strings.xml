@@ -889,7 +889,7 @@
   <!-- editor dialog -->
   <!-- file list base -->
   <string name="file_searching_in">Nangita ug mga files\nin</string>
-  <string name="file_searching_sdcard_in">Walay mga files ang nakit-an sa naka-default na mga folder:\n%1$\n\nPagpangita sa tibouk nga mga files sa SD card:\n</string>
+  <string name="file_searching_sdcard_in">Walay mga files ang nakit-an sa naka-default nga mga folder:\n%1$s\n\nPagpangita sa tibouk nga mga files sa SD card:\n</string>
   <string name="file_list_no_files">ang c:geo walay nakita na angay sa mga files.</string>
   <string name="file_searching">Pagpangita alang sa kaparehong mga files</string>
   <string name="file_title_searching">Ang pagpangita sa</string>

@@ -122,14 +122,28 @@
   <string name="log_image_camera">Nova</string>
   <string name="log_image_caption">Título</string>
   <string name="log_image_description">Descrição</string>
-  <string name="log_image_scale">Dimensionamento</string>
+  <string name="log_image_scale">Dimensão</string>
   <string name="log_password_title">Palavra-passe do registo:</string>
+  <string name="log_report_problem">Reportar problema:</string>
   <string name="log_hint_log_password">Insira a palavra-passe do seu registo</string>
   <string name="log_oc_team_comment">Comentário da OC Team</string>
   <string name="log_your_saved_log">O seu registo gravado</string>
   <string name="log_empty_logbook">O logbook desta cache está vazio.</string>
+  <string name="log_problem_none">Sem problemas</string>
+  <string name="log_problem_needs_maintenance_label">Precisa de manutenção</string>
+  <string name="log_problem_needs_maintenance_text">Este geocacher reportou que existe um problema com esta cache.</string>
+  <string name="log_problem_log_full_label">O logbook está cheio</string>
+  <string name="log_problem_log_full_text">Este geocacher reportou que o logbook está cheio.</string>
+  <string name="log_problem_damaged_label">O recipiente está danificado</string>
+  <string name="log_problem_damaged_text">Este geocacher reportou que o recipiente está danificado.</string>
+  <string name="log_problem_missing_label">A geocache poderá não estar no local</string>
+  <string name="log_problem_missing_text">Este geocacher reportou que a geocache poderá não estar no local.</string>
+  <string name="log_problem_other_label">Outro</string>
+  <string name="log_problem_other_text">Este geocacher reportou que existe um problema com esta geocache.</string>
+  <string name="log_problem_archive_label">A geocache deve ser arquivada</string>
+  <string name="log_problem_archive_text">Este geocacher reportou que esta geocache deve ser arquivada. Um revisor voluntário da comunidade foi notificado.</string>
   <string-array name="log_image_scales">
-    <item>Não dimensionar</item>
+    <item>Não redimensionar</item>
     <item>512 px</item>
     <item>640 px</item>
     <item>800 px</item>
@@ -159,7 +173,7 @@
   <string name="err_cache_not_found">A cache solicitada não pôde ser encontrada.</string>
   <string name="err_premium_only">Esta cache só está disponível para membros premium do Geocaching.com.</string>
   <string name="err_detail_open">O c:geo não consegue abrir os detalhes da geocache.</string>
-  <string name="err_detail_cache">O c:geo não consegue mostrar a cache pretendida. É mesmo uma geocache?</string>
+  <string name="err_detail_cache">O c:geo não consegue mostrar a geocache pretendida. É mesmo uma geocache?</string>
   <string name="err_detail_cache_find">O c:geo não encontra a geocache</string>
   <string name="err_detail_cache_find_some">O c:geo não encontra essa geocache.</string>
   <string name="err_detail_cache_find_any">O c:geo não encontra qualquer geocache.</string>
@@ -177,7 +191,7 @@
   <string name="err_download_fail">O c:geo falhou o download das caches porque </string>
   <string name="err_dwld_details_failed">O c:geo falhou o download dos detalhes da cache.</string>
   <string name="err_load_descr_failed">O c:geo não consegue carregar a descrição.</string>
-  <string name="err_location_unknown">O c:geo não sabe a localização da cache.</string>
+  <string name="err_location_unknown">O c:geo desconhece a localização da geocache.</string>
   <string name="err_missing_device_name">Por favor insira um nome para este dispositivo antes de registar.</string>
   <string name="err_favorite_failed">Alteração do estado de favorito falhou.</string>
   <string name="err_select_logimage_failed">A selecção de imagem para o registo falhou.</string>
@@ -191,9 +205,9 @@
   <string name="err_waypoint_add_failed">O c:geo não conseguiu adicionar o seu ponto adicional.</string>
   <string name="err_point_unknown_position">O c:geo não conseguiu reconhecer a sua localização.</string>
   <string name="err_point_no_position_given_title">Informação requerida</string>
-  <string name="err_point_no_position_given">Preencha pelo menos a latitude, a longitude, a distância ou a direcção. Também pode preencher os quatro campos.</string>
+  <string name="err_point_no_position_given">Preencha pelo menos a latitude e longitude ou a distância e direcção. Pode também preencher os quatro campos.</string>
   <string name="err_point_bear_and_dist_title">Precisa de ajuda?</string>
-  <string name="err_point_bear_and_dist">Preencha a direcção e a distância. A direcção é o ângulo de 0 a 360 graus relativo ao norte. A distância pode ser introduzida com ou sem unidades.</string>
+  <string name="err_point_bear_and_dist">Preencha a direcção e a distância. A direcção é o ângulo de 0 a 360 graus relativo ao norte. A distância não necessita de unidades.</string>
   <string name="err_log_load_data">O c:geo não consegue carregar os dados necessários para registar a sua visita.</string>
   <string name="err_log_load_data_again">O c:geo não consegue carregar os dados necessários para registar a sua visita. A tentar de novo.</string>
   <string name="err_log_load_data_still">O c:geo ainda está a carregar dados necessários para publicar o registo. Por favor espere mais um pouco.</string>
@@ -241,13 +255,14 @@
   <string name="info_log_cleared">O registo foi limpo.</string>
   <string name="info_waypoint_coordinates_cleared">Coordenadas limpas.</string>
   <string name="info_log_type_changed">O tipo de registo foi alterado!</string>
+  <string name="info_log_report_problem_changed">O tipo de registo de relato de problemas foi alterado!</string>
   <string name="info_select_logimage_cancelled">A selecção ou captura de imagem foi cancelada.</string>
   <string name="info_stored_image">Nova imagem guardada em:</string>
   <string name="info_storing_static_maps">A tentar armazenar mapas estáticos</string>
   <string name="info_cache_saved">A cache foi armazenada localmente</string>
   <string name="warn_calculator_state_save">Assegure a gravação do ponto adicional caso pretenda manter os parâmetros da calculadora.</string>
-  <string name="err_trackable_log_not_anonymous">Logar %1$s a partir do c:geo não pode ser feito de forma anónima. Quer abrir as configurações para preencher as suas credenciais de %2$s?</string>
-  <string name="err_trackable_no_preference_activity">Desculpa, não posso encontrar uma tela de preferência apropriada.</string>
+  <string name="err_trackable_log_not_anonymous">Registar %1$s a partir do c:geo não pode ser feito de forma anónima. Quer abrir as definições para preencher as suas credenciais de %2$s?</string>
+  <string name="err_trackable_no_preference_activity">Lamentamos, não foi encontrada uma configuração válida para o serviço pretendido.</string>
   <string name="confirm_unsaved_changes_title">Alterações não guardadas</string>
   <string name="confirm_discard_wp_changes">Descartar as alterações aos pontos adicionais não guardadas?</string>
   <string name="warn_discard_changes">As alterações ao ponto adicional não guardadas foram descartadas!</string>
@@ -274,7 +289,7 @@
   <string name="menu_pocket_queries">Pocket queries</string>
   <string name="menu_scan_description">O c:geo pode interpretar códigos GC impressos num código QR. A aplicação necessária não está instalada. Deseja abrir o Google Play para a instalar?</string>
   <!-- main screen -->
-  <string name="live_map_button">Ao vivo</string>
+  <string name="live_map_button">Mapa</string>
   <string name="caches_nearby_button">Por perto</string>
   <string name="advanced_search_button">Pesquisar</string>
   <string name="stored_caches_button">Memória</string>
@@ -409,7 +424,7 @@
   <string name="about_system_info_send_chooser">Enviar Informação sobre o sistema</string>
   <string name="changelog_github">Lista de todas as alterações</string>
   <!-- settings -->
-  <string name="settings_title_open_settings">Abrir configurações?</string>
+  <string name="settings_title_open_settings">Abrir definições?</string>
   <string name="settings_title_services">Serviços</string>
   <string name="settings_summary_services">Configurar a informação da conta de utilizador e o acesso a serviços opcionais.</string>
   <string name="settings_title_appearance">Aparência</string>
@@ -450,10 +465,10 @@
   <string name="settings_activate_ec">Activar</string>
   <string name="settings_activate_ox">Activar</string>
   <string name="settings_gc_legal_note">Ao usar o serviço de geocaching.com, está a aceitar os Termos de Utilização da Groundspeak.</string>
-  <string name="settings_info_facebook_login_title">Facebook Login</string>
+  <string name="settings_info_facebook_login_title">Início de Sessão em Facebook</string>
   <string name="settings_info_facebook_login" tools:ignore="Typos">Não consegue que o c:geo inicie a sessão em geocaching.com com a sua conta do Facebook. Mas existe uma solução simples…</string>
   <string name="settings_authorize">Autorizar c:geo</string>
-  <string name="settings_reauthorize">Reautorizar c:geo</string>
+  <string name="settings_reauthorize">Voltar a autorizar c:geo</string>
   <string name="settings_gc_description">Autorize o c:geo a pesquisar caches em geocaching.com.</string>
   <string name="settings_ec_description">Autorize o c:geo a pesquisar caches em extremecaching.com.</string>
   <string name="settings_su_description">Autorize o c:geo a pesquisar caches em geocaching.su.</string>
@@ -640,7 +655,7 @@
   <string name="settings_open_geokretymap_website">Abrir a página web GeoKretyMap.org</string>
   <string name="settings_settings">Definições</string>
   <string name="settings_information">Informações</string>
-  <string name="settings_advanced">Configurações avançadas</string>
+  <string name="settings_advanced">Definições avançadas</string>
   <string name="settings_twitter_cache_message">Mensagem para cache encontrada</string>
   <string name="settings_twitter_trackable_message">Mensagem para trackable encontrado</string>
   <string name="init_ec_icons">Ícones do mapa</string>
@@ -659,6 +674,9 @@
   <string name="feature_search_geocode">Pesquisa por código GC</string>
   <string name="feature_search_owner">Procura por dono</string>
   <string name="feature_search_finder">Procura por quem encontrou</string>
+  <string name="init_mapsforge_api_title">Biblioteca Mapsforge</string>
+  <string name="init_mfold_api">Antigo Mapsforge V3</string>
+  <string name="init_mfold_api_description">O lançamento actual contém uma versão beta do novo mapa Mapsforge. Se tiver perdido alguma funcionalidade ou encontrar problemas poderá regressar à versão antiga aqui.</string>
   <string name="init_experimental_title">Funcionalidades experimentais</string>
   <string name="init_mfbeta">Predefinir o Mapsforge beta</string>
   <string name="init_mfbeta_description">A versão actual contém uma versão beta do nosso novo mapa da Mapsforge como uma funcionalidade experimental. Este novo mapa pode ser activado aqui como o predefinido para os mapas ao vivo e das listas.</string>
@@ -749,6 +767,11 @@
     <item quantity="one">à %d dia atrás</item>
     <item quantity="other">a cerca de %d dias atrás</item>
   </plurals>
+  <plurals name="cache_offline_about_time_months">
+    <item quantity="one">cerca de %d mês atrás</item>
+    <item quantity="other">cerca de %d meses atrás</item>
+  </plurals>
+  <string name="cache_offline_about_time_year">há mais de um ano</string>
   <string name="cache_offline_time_hour">uma hora atrás</string>
   <string name="cache_offline_time_hours">horas atrás</string>
   <string name="cache_offline_time_days">dias atrás</string>
@@ -792,7 +815,7 @@
   <string name="cache_waypoints_add">Adicionar Ponto Adicional</string>
   <string name="cache_hint">Pista</string>
   <string name="cache_hint_not_available">Nenhuma pista disponível</string>
-  <string name="cache_logs">Logbook</string>
+  <string name="cache_logs">Registos</string>
   <string name="cache_logs_friends_and_own">Registos de amigos/próprios</string>
   <string name="cache_dialog_loading_details">A carregar os detalhes da cache…</string>
   <string name="cache_dialog_loading_details_status_loadpage">A carregar a página</string>
@@ -1018,7 +1041,7 @@
   <string name="map_token_err">Como o c:geo apenas pode transferir dados parciais, as coordenadas das caches podem não ser precisas.</string>
   <string name="map_as_list">Mostrar como lista</string>
   <string name="map_strategy">Estratégia</string>
-  <string name="map_strategy_title">Mapa de estratégia ao vivo</string>
+  <string name="map_strategy_title">Modo do Mapa ao vivo</string>
   <string name="map_strategy_fastest">Mais rápido</string>
   <string name="map_strategy_fast">Rápido</string>
   <string name="map_strategy_auto">Dependente da velocidade</string>
@@ -1409,7 +1432,7 @@
   <string name="status_new_nightly" tools:ignore="UnusedResources">Nova \'nightly build\' disponível.\nClique para instalar.</string>
   <string name="status_new_rc" tools:ignore="UnusedResources">Nova \'release candidate\' disponível .\nClique para instalar.</string>
   <string name="status_geocaching_change" tools:ignore="UnusedResources">Alterações recentes em geocaching.com fizeram com que c:geo funcione mal.\nEstamos a trabalhar nisto, verifique de novo mais tarde.</string>
-  <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Alterações recentes em geocaching.com fizeram com o mapa ao vivo não funcione bem.\nEstamos a trabalhar nisto, verifique de novo mais tarde.</string>
+  <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Alterações recentes em geocaching.com fizeram com que o mapa ao vivo não funcione bem.\nEstamos a trabalhar nisso, verifique de novo mais tarde.</string>
   <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com está em manutenção.\nPode encontrar algumas dificuldades de comunicação.</string>
   <string name="status_closeout_warning" tools:ignore="UnusedResources">Parece estar a usar uma versão de Android inferior a 4.0. Versões futuras do c:geo poderão não estar disponíveis para o seu dispositivo.</string>
   <!-- text-to-speech for compass view -->
@@ -1458,6 +1481,8 @@
   <string name="send">Enviar</string>
   <string name="confirm_log_title">Tipo de registo especial</string>
   <string name="confirm_log_message">Quer fazer o registo \'%s\'. Tem a certeza?</string>
+  <string name="confirm_report_problem_title">Relatar Problema</string>
+  <string name="confirm_report_problem_message">Pretende reportar que \'%s\'. Tem a certeza?</string>
   <!-- Geokrety -->
   <string name="settings_activate_geokrety">Activar</string>
   <string name="init_geokrety">GeoKrety.org</string>
@@ -1529,4 +1554,6 @@
   <string name="list_confirm_debug_message">O modo de depuração provoca instabilidades! Quer desactivar o modo de depuração?</string>
   <string name="err_select_logimage_upload_size">Imagem muito grande, por favor, seleccione uma escala menor.</string>
   <string name="err_logimage_caption_required">É necessária uma legenda para a imagem</string>
+  <string name="waypoint_latitude_null">N/S --° --.---</string>
+  <string name="waypoint_longitude_null">E/O --° --.---</string>
 </resources>

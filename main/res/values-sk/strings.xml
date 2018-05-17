@@ -124,10 +124,24 @@
   <string name="log_image_description">Popis</string>
   <string name="log_image_scale">Mierka</string>
   <string name="log_password_title">Logovacie heslo:</string>
+  <string name="log_report_problem">Nahlásiť problém:</string>
   <string name="log_hint_log_password">Zadajte svoje logovacie heslo</string>
   <string name="log_oc_team_comment">Komentár tímu OC</string>
   <string name="log_your_saved_log">Tvoj uložený log</string>
   <string name="log_empty_logbook">Logbook tejto skrýše je prázdny.</string>
+  <string name="log_problem_none">Žiadny problém</string>
+  <string name="log_problem_needs_maintenance_label">Vyžaduje údržbu</string>
+  <string name="log_problem_needs_maintenance_text">Tento kešer nahlásil, že s touto keškou môže byť nejaký problém.</string>
+  <string name="log_problem_log_full_label">Logbook je plný</string>
+  <string name="log_problem_log_full_text">Tento kešer nahlásil, že logbook je plný.</string>
+  <string name="log_problem_damaged_label">Schránka je poškodená</string>
+  <string name="log_problem_damaged_text">Tento kešer nahlásil, že schránka je poškodená.</string>
+  <string name="log_problem_missing_label">Schránka asi zmizla</string>
+  <string name="log_problem_missing_text">Tento kešer nahlásil, že keška možno zmizla.</string>
+  <string name="log_problem_other_label">Iné</string>
+  <string name="log_problem_other_text">Tento kešer nahlásil, že s touto keškou je možno nejaký problém.</string>
+  <string name="log_problem_archive_label">Skrýša by mala byť archivovaná</string>
+  <string name="log_problem_archive_text">Tento kešer nahlásil, že keška by mala byť archivovaná. Dobrovoľný reviewer komunity dostal oznámenie.</string>
   <string-array name="log_image_scales">
     <item>Bez zmeny mierky</item>
     <item>512 px</item>
@@ -241,6 +255,7 @@
   <string name="info_log_cleared">Log bol vyprázdnený.</string>
   <string name="info_waypoint_coordinates_cleared">Súradnice vymazané.</string>
   <string name="info_log_type_changed">Typ logu bol zmenený!</string>
+  <string name="info_log_report_problem_changed">Nahlásený problém sa zmenil!</string>
   <string name="info_select_logimage_cancelled">Výber obrázka alebo fotenie bolo zrušené.</string>
   <string name="info_stored_image">Nový obrázok uložený do:</string>
   <string name="info_storing_static_maps">Pokus o uloženie statických máp</string>
@@ -291,6 +306,7 @@
   <plurals name="caches_eta_mins">
     <item quantity="one">%d minúta</item>
     <item quantity="few">%d minúty</item>
+    <item quantity="many">%d minút</item>
     <item quantity="other">%d minút</item>
   </plurals>
   <string name="caches_store_offline">Uložiť offline</string>
@@ -326,12 +342,14 @@
   <plurals name="caches_remove_all_confirm">
     <item quantity="one">Chcete odstrániť skrýšu z aktuálneho zoznamu?</item>
     <item quantity="few">Chcete odstrániť %d skrýše z aktuálneho zoznamu?</item>
+    <item quantity="many">Chcete odstrániť všetkých %d skrýš z aktuálneho zoznamu?</item>
     <item quantity="other">Chcete odstrániť všetkých %d skrýš z aktuálneho zoznamu?</item>
   </plurals>
   <string name="caches_remove_selected">Odstrániť vybraté</string>
   <plurals name="caches_remove_selected_confirm">
     <item quantity="one">Chcete odstrániť túto skrýšu zo zariadenia?</item>
     <item quantity="few">Chcete odstrániť tieto %d skrýše zo zariadenia?</item>
+    <item quantity="many">Chcete odstrániť týchto %d skrýš zo zariadenia?</item>
     <item quantity="other">Chcete odstrániť týchto %d skrýš zo zariadenia?</item>
   </plurals>
   <string name="caches_remove_progress">Odstraňovanie skrýše</string>
@@ -518,7 +536,7 @@
   <string name="init_signature_template_number">Číslo nálezu</string>
   <string name="init_signature_template_owner">Vlastník</string>
   <string name="init_signature_template_name">Meno</string>
-  <string name="init_signature_template_difficulty">Náročnosť</string>
+  <string name="init_signature_template_difficulty">Obtiažnosť</string>
   <string name="init_signature_template_terrain">Terén</string>
   <string name="init_signature_template_url">URL</string>
   <string name="init_signature_template_log">Pozícia pre zápis do logu</string>
@@ -662,6 +680,9 @@
   <string name="feature_search_geocode">Hľadať podľa geokódu</string>
   <string name="feature_search_owner">Hľadať podľa zakladateľa</string>
   <string name="feature_search_finder">Vyhľadávanie podľa nálezcu</string>
+  <string name="init_mapsforge_api_title">Mapsforge API</string>
+  <string name="init_mfold_api">Staré Mapsforge V3</string>
+  <string name="init_mfold_api_description">Aktuálne vydanie obsahuje beta verziu našej novej mapy Mapsforge. Ak vám chýbajú nejaké funkcie, prípadne sa stretnete s problémami, tu sa môžete vrátiť k starej verzii.</string>
   <string name="init_experimental_title">Experimentálne funkcie</string>
   <string name="init_mfbeta">Mapsforge beta ako predvolené</string>
   <string name="init_mfbeta_description">Aktuálne vydanie aplikácie obsahuje beta verziu našej novej Mapsforge mapy ako experimentálnu funkciu. Táto nová mapa sa tu dá nastaviť ako predvolená.</string>
@@ -722,12 +743,14 @@
   <plurals name="cache_counts">
     <item quantity="one">Jedna skrýša</item>
     <item quantity="few">%1$d skrýše</item>
+    <item quantity="many">%1$d skrýš</item>
     <item quantity="other">%1$d skrýš</item>
   </plurals>
   <!-- days remaining -->
   <plurals name="days_remaining">
     <item quantity="one">ostáva jeden deň</item>
     <item quantity="few">ostávajú %1$d dni</item>
+    <item quantity="many">ostáva %1$d dní</item>
     <item quantity="other">ostáva %1$d dní</item>
   </plurals>
   <string name="last_day_available">ostáva posledný deň</string>
@@ -744,19 +767,29 @@
   <string name="cache_offline_time_mins_few">niekoľkými minútami</string>
   <plurals name="cache_offline_about_time_mins">
     <item quantity="one">pred %d min.</item>
-    <item quantity="few">pred %d min.</item>
-    <item quantity="other">pred %d min.</item>
+    <item quantity="few">asi pred %d min.</item>
+    <item quantity="many">asi pred %d min.</item>
+    <item quantity="other">asi pred %d min.</item>
   </plurals>
   <plurals name="cache_offline_about_time_hours">
-    <item quantity="one">pred %d h.</item>
-    <item quantity="few">pred %d h.</item>
-    <item quantity="other">pred %d h.</item>
+    <item quantity="one">asi pred %d h.</item>
+    <item quantity="few">asi pred %d h.</item>
+    <item quantity="many">asi pred %d h.</item>
+    <item quantity="other">asi pred %d h.</item>
   </plurals>
   <plurals name="cache_offline_about_time_days">
-    <item quantity="one">pred %d dňom</item>
-    <item quantity="few">pred %d dňami</item>
-    <item quantity="other">pred %d dňami</item>
+    <item quantity="one">asi pred %d dňom</item>
+    <item quantity="few">asi pred %d dňami</item>
+    <item quantity="many">asi pred %d dňami</item>
+    <item quantity="other">asi pred %d dňami</item>
   </plurals>
+  <plurals name="cache_offline_about_time_months">
+    <item quantity="one">asi pred %d mesiacom</item>
+    <item quantity="few">asi pred %d mesiacmi</item>
+    <item quantity="many">asi pred %d mesiacmi</item>
+    <item quantity="other">asi pred %d mesiacmi</item>
+  </plurals>
+  <string name="cache_offline_about_time_year">pred viac ako rokom</string>
   <string name="cache_offline_time_hour">hodinou</string>
   <string name="cache_offline_time_hours">hodinami</string>
   <string name="cache_offline_time_days">dňami</string>
@@ -796,6 +829,7 @@
   <plurals name="waypoints">
     <item quantity="one">1 bod trasy</item>
     <item quantity="few">%d body trasy</item>
+    <item quantity="many">%d bodov trasy</item>
     <item quantity="other">%d bodov trasy</item>
   </plurals>
   <string name="cache_waypoints_add">Pridať bod</string>
@@ -1174,6 +1208,7 @@
   <plurals name="export_persnotes_upload_success">
     <item quantity="one">1 osobná poznámka bola úspešne nahraná</item>
     <item quantity="few">%1$d osobné poznámky boli úspešne nahrané</item>
+    <item quantity="many">%1$d osobných poznámok bolo úspešne nahraných</item>
     <item quantity="other">%1$d osobných poznámok bolo úspešne nahraných</item>
   </plurals>
   <!-- GC attributes -->
@@ -1433,24 +1468,28 @@
   <plurals name="tts_kilometers">
     <item quantity="one">%s kilometer</item>
     <item quantity="few">%s kilometre</item>
+    <item quantity="many">%s kilometrov</item>
     <item quantity="other">%s kilometrov</item>
   </plurals>
   <string name="tts_one_meter">jeden meter</string>
   <plurals name="tts_meters">
     <item quantity="one">%s meter</item>
     <item quantity="few">%s metre</item>
+    <item quantity="many">%s metrov</item>
     <item quantity="other">%s metrov</item>
   </plurals>
   <string name="tts_one_mile">jedna míľa</string>
   <plurals name="tts_miles">
     <item quantity="one">%s míľa</item>
     <item quantity="few">%s míle</item>
+    <item quantity="many">%s míľ</item>
     <item quantity="other">%s míľ</item>
   </plurals>
   <string name="tts_one_foot">jedna stopa</string>
   <plurals name="tts_feet">
     <item quantity="one">%s stopa</item>
     <item quantity="few">%s stopy</item>
+    <item quantity="many">%s stôp</item>
     <item quantity="other">%s stôp</item>
   </plurals>
   <string name="tts_one_oclock">jedna hodina</string>
@@ -1460,11 +1499,13 @@
   <plurals name="days_ago">
     <item quantity="one">včera</item>
     <item quantity="few">pred %d dňami</item>
+    <item quantity="many">pred %d dňami</item>
     <item quantity="other">pred %d dňami</item>
   </plurals>
   <plurals name="favorite_points">
     <item quantity="one">%s obľúbené</item>
     <item quantity="few">%s obľúbené</item>
+    <item quantity="many">%s obľúbených</item>
     <item quantity="other">%s obľúbených</item>
   </plurals>
   <string name="more_than_percent_favorite_points">&gt; %d %% obľúbených</string>
@@ -1474,6 +1515,8 @@
   <string name="send">Odoslať</string>
   <string name="confirm_log_title">Špeciálny typ logu</string>
   <string name="confirm_log_message">Chceš zalogovať \'%s\'. Určite?</string>
+  <string name="confirm_report_problem_title">Nahlásiť problém</string>
+  <string name="confirm_report_problem_message">Naozaj chcete nahlásiť „%s“?</string>
   <!-- Geokrety -->
   <string name="settings_activate_geokrety">Aktivovať</string>
   <string name="init_geokrety">GeoKrety.org</string>
@@ -1495,20 +1538,23 @@
   <string name="map_direction">Zobrazovať smer</string>
   <string name="command_move_caches_progress">Presúvanie skrýš do zoznamu %1s</string>
   <plurals name="command_move_caches_result">
-    <item quantity="one">Presunutá %d keš</item>
-    <item quantity="few">Presunuté %d keše</item>
-    <item quantity="other">Presunutých %d keší</item>
+    <item quantity="one">Presunutá %d skrýša</item>
+    <item quantity="few">Presunuté %d skrýše</item>
+    <item quantity="many">Presunutých %d skrýš</item>
+    <item quantity="other">Presunutých %d skrýš</item>
   </plurals>
   <string name="command_copy_caches_progress">Kopírovanie skrýš do zoznamu %1s</string>
   <plurals name="command_copy_caches_result">
     <item quantity="one">Skopírovaná %d skrýša</item>
     <item quantity="few">Skopírované %d skrýše</item>
+    <item quantity="many">Skopírovaných %d skrýš</item>
     <item quantity="other">Skopírovaných %d skrýš</item>
   </plurals>
   <string name="command_delete_caches_progress">Odstraňovanie skrýš</string>
   <plurals name="command_delete_caches_result">
     <item quantity="one">Odstránená %d skrýša</item>
     <item quantity="few">Odstránené %d skrýše</item>
+    <item quantity="many">Odstránených %d skrýš</item>
     <item quantity="other">Odstránených %d skrýš</item>
   </plurals>
   <string name="command_rename_list_result">Zoznam premenovaný</string>
@@ -1517,6 +1563,7 @@
   <plurals name="fav_points_remaining">
     <item quantity="one">Pridať túto skrýšu medzi obľúbené (%d zostáva)</item>
     <item quantity="few">Pridať túto skrýšu medzi obľúbené (%d zostávajú)</item>
+    <item quantity="many">Pridať túto skrýšu medzi obľúbené (%d zostáva)</item>
     <item quantity="other">Pridať túto skrýšu medzi obľúbené (%d zostáva)</item>
   </plurals>
   <!-- distance units -->
@@ -1540,6 +1587,7 @@
   <plurals name="extract_waypoints_result">
     <item quantity="one">Bol extrahovaný %d bod trasy</item>
     <item quantity="few">Boli extrahované %d body trasy</item>
+    <item quantity="many">Bolo extrahovaných %d bodov trasy</item>
     <item quantity="other">Bolo extrahovaných %d bodov trasy</item>
   </plurals>
   <!-- calendar adder -->
@@ -1550,4 +1598,6 @@
   <string name="list_confirm_debug_message">V režime ladenia dochádza k nestabilnému správaniu aplikácie! Chcete deaktivovať režim ladenia?</string>
   <string name="err_select_logimage_upload_size">Obrázok je príliš veľký, vyberte menší obrázok.</string>
   <string name="err_logimage_caption_required">Obrázok musí mať popis</string>
+  <string name="waypoint_latitude_null">S/J --° --.---</string>
+  <string name="waypoint_longitude_null">V/Z --° --.---</string>
 </resources>

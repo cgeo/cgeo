@@ -1530,5 +1530,5 @@
   <string name="err_select_logimage_upload_size">Bilden är för stor, vänligen välj en mindre skala.</string>
   <string name="err_logimage_caption_required">En text krävs till bilden</string>
   <string name="waypoint_latitude_null">N/S --° --.---</string>
-  <string name="waypoint_longitude_null">E/W--°--.---</string>
+  <string name="waypoint_longitude_null">E/W --° --.---</string>
 </resources>
