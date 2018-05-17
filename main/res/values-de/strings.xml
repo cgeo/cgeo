@@ -124,10 +124,24 @@
   <string name="log_image_description">Beschreibung</string>
   <string name="log_image_scale">Skalierung</string>
   <string name="log_password_title">Log-Passwort:</string>
+  <string name="log_report_problem">Ein Problem melden:</string>
   <string name="log_hint_log_password">Log-Passwort eingeben</string>
   <string name="log_oc_team_comment">OC-Team-Bemerkung</string>
   <string name="log_your_saved_log">Dein gespeichertes Log</string>
   <string name="log_empty_logbook">Das Logbuch dieses Caches ist leer.</string>
+  <string name="log_problem_none">Kein Problem</string>
+  <string name="log_problem_needs_maintenance_label">Wartung benötigt</string>
+  <string name="log_problem_needs_maintenance_text">Dieser Geocacher hat gemeldet, dass es ein Problem mit diesem Cache gibt.</string>
+  <string name="log_problem_log_full_label">Logbuch ist voll</string>
+  <string name="log_problem_log_full_text">Dieser Geocacher hat gemeldet, dass das Logbuch voll ist.</string>
+  <string name="log_problem_damaged_label">Behälter ist beschädigt</string>
+  <string name="log_problem_damaged_text">Dieser Geocacher hat gemeldet, dass der Behälter beschädigt ist.</string>
+  <string name="log_problem_missing_label">Cache ist evtl. verschwunden</string>
+  <string name="log_problem_missing_text">Dieser Geocacher hat gemeldet, dass der Cache evtl. verschwunden ist.</string>
+  <string name="log_problem_other_label">Anderes</string>
+  <string name="log_problem_other_text">Dieser Geocacher hat gemeldet, dass es ein Problem mit diesem Cache gibt.</string>
+  <string name="log_problem_archive_label">Cache sollte archiviert werden</string>
+  <string name="log_problem_archive_text">Dieser Geocacher hat gemeldet, dass dieser Cache archiviert werden sollte. Ein Reviewer wurde benachrichtigt.</string>
   <string-array name="log_image_scales">
     <item>Keine Skalierung</item>
     <item>512 px</item>
@@ -241,6 +255,7 @@
   <string name="info_log_cleared">Log wurde geleert.</string>
   <string name="info_waypoint_coordinates_cleared">Koordinaten gelöscht.</string>
   <string name="info_log_type_changed">Logtyp wurde verändert!</string>
+  <string name="info_log_report_problem_changed">Problem melden hat sich geändert!</string>
   <string name="info_select_logimage_cancelled">Fotoauswahl oder -erstellung abgebrochen.</string>
   <string name="info_stored_image">Neues Foto gespeichert nach:</string>
   <string name="info_storing_static_maps">Versuche, statische Karten zu speichern</string>
@@ -659,6 +674,9 @@
   <string name="feature_search_geocode">Suche mit Geocode</string>
   <string name="feature_search_owner">Suche nach Besitzer</string>
   <string name="feature_search_finder">Suche nach Finder</string>
+  <string name="init_mapsforge_api_title">Mapsforge API</string>
+  <string name="init_mfold_api">Alte Mapsforge V3</string>
+  <string name="init_mfold_api_description">Die aktuelle Programmversion enthält eine Beta-Version unserer neuen Mapsforge-Karte. Wenn du Funktionen vermisst oder Probleme auftreten, kannst du hier zur alten Version zurückkehren.</string>
   <string name="init_experimental_title">Experimentelle Funktionen</string>
   <string name="init_mfbeta">Mapsforge beta als Standard</string>
   <string name="init_mfbeta_description">Der aktuelle Release enthält eine Betaversion unserer neuen Mapsforge-Karte als experimentelles Feature. Dies neue Karte kann hier als Standard für Live-Karte und Listen aktiviert werden.</string>
@@ -749,6 +767,11 @@
     <item quantity="one">vor etwa %d Tag</item>
     <item quantity="other">vor etwa %d Tagen</item>
   </plurals>
+  <plurals name="cache_offline_about_time_months">
+    <item quantity="one">vor etwa einem Monat</item>
+    <item quantity="other">vor etwa %d Monaten</item>
+  </plurals>
+  <string name="cache_offline_about_time_year">vor über einem Jahr</string>
   <string name="cache_offline_time_hour">einer Stunde</string>
   <string name="cache_offline_time_hours">Stunden</string>
   <string name="cache_offline_time_days">Tagen</string>
@@ -1458,6 +1481,8 @@
   <string name="send">Senden</string>
   <string name="confirm_log_title">Spezieller Log Typ</string>
   <string name="confirm_log_message">Du möchtest „%s“ loggen. Bist du dir sicher?</string>
+  <string name="confirm_report_problem_title">Ein Problem melden</string>
+  <string name="confirm_report_problem_message">Du möchtest \'%s\' melden. Bist du sicher?</string>
   <!-- Geokrety -->
   <string name="settings_activate_geokrety">Aktivieren</string>
   <string name="init_geokrety">GeoKrety.org</string>
@@ -1529,4 +1554,6 @@
   <string name="list_confirm_debug_message">Der Debug-Modus verursacht Instabilität! Debug-Modus beenden?</string>
   <string name="err_select_logimage_upload_size">Das Bild ist zu groß, bitte wähle eine kleinere Größe.</string>
   <string name="err_logimage_caption_required">Ein Bildtitel ist erforderlich</string>
+  <string name="waypoint_latitude_null">N/S --° --.---</string>
+  <string name="waypoint_longitude_null">E/W --° --.---</string>
 </resources>

@@ -239,6 +239,7 @@
   <string name="info_log_post_retry">Prøv igen</string>
   <string name="info_log_post_save">Gem offline</string>
   <string name="info_log_cleared">Logbeskeden blev fjernet.</string>
+  <string name="info_waypoint_coordinates_cleared">Position nulstillet</string>
   <string name="info_log_type_changed">Typen af logbeskeden blev ændret!</string>
   <string name="info_select_logimage_cancelled">Valg af billede eller foto blev afbrudt.</string>
   <string name="info_stored_image">Nyt billede gemt til:</string>
@@ -247,6 +248,8 @@
   <string name="warn_calculator_state_save">Husk at gemme waypoint, hvis du vil beholde lommeregnerens tilstand.</string>
   <string name="err_trackable_log_not_anonymous">Logning af %1$s kan ikke udføres anonymt fra c:geo. Ønsker du at konfigurere dine legitimationsoplysninger til %2$s?</string>
   <string name="err_trackable_no_preference_activity">Der findes ingen egnet indstillingsskærm.</string>
+  <string name="confirm_unsaved_changes_title">Ikke-gemte ændringer</string>
+  <string name="confirm_discard_wp_changes">Vil du kassere ændringer, som ikke er gemt?</string>
   <string name="warn_discard_changes">Ændringer til waypoints kasseret!</string>
   <string name="err_request_popup_info">Det lykkedes ikke c:geo at hente popup info for cachen.</string>
   <!-- location service -->
@@ -290,6 +293,8 @@
     <item quantity="other">%d minutter</item>
   </plurals>
   <string name="caches_store_offline">Gem Offline</string>
+  <string name="caches_store_all">Gem alle</string>
+  <string name="caches_store_unsaved">Gem ændringer</string>
   <string name="caches_store_selected">Gem valgte</string>
   <string name="caches_history">Historik</string>
   <string name="caches_on_map">Vis på kort</string>
@@ -952,6 +957,7 @@
   <string name="waypoint_name">Navn</string>
   <string name="waypoint_edit">Rediger</string>
   <string name="waypoint_copy_coordinates">Kopiér koordinater</string>
+  <string name="waypoint_clear_coordinates">Nulstil position</string>
   <string name="waypoint_delete">Slet</string>
   <string name="waypoint_edit_title">Rediger waypoint</string>
   <string name="waypoint_add_title">Tilføj waypoint</string>
