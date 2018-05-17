@@ -159,6 +159,7 @@ public class NewMap extends AbstractActionBarActivity {
 
         Log.d("NewMap: onCreate");
 
+        ResourceBitmapCacheMonitor.addRef();
         AndroidGraphicFactory.createInstance(this.getApplication());
 
         // some tiles are rather big, see https://github.com/mapsforge/mapsforge/issues/868
@@ -861,7 +862,7 @@ public class NewMap extends AbstractActionBarActivity {
         this.tileCache.destroy();
         this.mapView.getModel().mapViewPosition.destroy();
         this.mapView.destroy();
-        AndroidResourceBitmap.clearResourceBitmaps();
+        ResourceBitmapCacheMonitor.release();
 
         Routing.disconnect();
         super.onDestroy();
@@ -1529,5 +1530,27 @@ public class NewMap extends AbstractActionBarActivity {
                 caches.invalidate(changedGeocodes);
             }
         }
+    }
+
+    private static class ResourceBitmapCacheMonitor {
+
+        private static int refCount = 0;
+
+        static synchronized void addRef() {
+            refCount++;
+            Log.d("ResourceBitmapCacheMonitor.addRef");
+        }
+
+        static synchronized void release() {
+            if (refCount > 0) {
+                refCount--;
+                Log.d("ResourceBitmapCacheMonitor.release");
+                if (refCount == 0) {
+                    Log.d("ResourceBitmapCacheMonitor.clearResourceBitmaps");
+                    AndroidResourceBitmap.clearResourceBitmaps();
+                }
+            }
+        }
+
     }
 }
