@@ -515,8 +515,6 @@
   <string name="init_signature_template_number">Número</string>
   <string name="init_signature_template_owner">Propietari</string>
   <string name="init_signature_template_name">Nom</string>
-  <string name="init_signature_template_difficulty">Dificultat</string>
-  <string name="init_signature_template_terrain">Terreny</string>
   <string name="init_signature_template_url">URL</string>
   <string name="init_signature_template_log">Text del registre</string>
   <string name="init_ratingwanted">Valoració del GCvote</string>

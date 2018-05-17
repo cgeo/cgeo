@@ -288,11 +288,6 @@
   <string name="caches_more_caches_currently">dabar</string>
   <string name="caches_downloading">Atsisiunčiamos slėptuvės…\nUžtruks: </string>
   <string name="caches_eta_ltm">mažiau nei minutę</string>
-  <plurals name="caches_eta_mins">
-    <item quantity="one">%d minutę</item>
-    <item quantity="few">%d minutes</item>
-    <item quantity="other">%d minučių</item>
-  </plurals>
   <string name="caches_store_offline">Išsaugoti slėptuves</string>
   <string name="caches_store_all">Išsaugoti visas</string>
   <string name="caches_store_unsaved">Išsaugoti neišsaugotas</string>
@@ -323,17 +318,7 @@
   <string name="caches_nearby">Netoliese</string>
   <string name="caches_manage">Valdyti</string>
   <string name="caches_remove_all">Pašalinti visas</string>
-  <plurals name="caches_remove_all_confirm">
-    <item quantity="one">Ar norite pašalinti šią slėptuvę iš dabartinio sąrašo?</item>
-    <item quantity="few">Ar norite pašalinti visas %d slėptuves iš dabartinio sąrašo?</item>
-    <item quantity="other">Ar norite pašalinti visas %d slėptuves iš dabartinio sąrašo?</item>
-  </plurals>
   <string name="caches_remove_selected">Pašalinti pasirinktas</string>
-  <plurals name="caches_remove_selected_confirm">
-    <item quantity="one">Ar norite pašalinti slėptuvę iš prietaiso?</item>
-    <item quantity="few">Ar norite pašalinti pasirinktas %d slėptuves iš prietaiso?</item>
-    <item quantity="other">Ar norite pašalinti pasirinktas %d slėptuvių iš prietaiso?</item>
-  </plurals>
   <string name="caches_remove_progress">Pašalinamos slėptuvės</string>
   <string name="caches_delete_events">Ištrinti praeities įvykius</string>
   <string name="caches_refresh_selected">Atnaujinti pasirinktas</string>
@@ -510,8 +495,6 @@
   <string name="init_signature_template_number">Skaičius</string>
   <string name="init_signature_template_owner">Savininkas</string>
   <string name="init_signature_template_name">Pavadinimas</string>
-  <string name="init_signature_template_difficulty">Sudėtingumas</string>
-  <string name="init_signature_template_terrain">Vietovė</string>
   <string name="init_signature_template_url">URL</string>
   <string name="init_signature_template_log">Įrašo tekstas</string>
   <string name="init_ratingwanted">GCvote reitingas</string>
@@ -706,17 +689,7 @@
   <string name="err_auth_geokrety_bad_password">Netinkamas Jūsų vartotojo vardas/slaptažodis.</string>
   <string name="err_auth_geokrety_unknown">%1$s gražinta: %2$s.</string>
   <!-- cache -->
-  <plurals name="cache_counts">
-    <item quantity="one">%1$d slėptuvė</item>
-    <item quantity="few">%1$d slėptuvės</item>
-    <item quantity="other">%1$d slėptuvių</item>
-  </plurals>
   <!-- days remaining -->
-  <plurals name="days_remaining">
-    <item quantity="one">liko viena diena</item>
-    <item quantity="few">liko %1$d dienos</item>
-    <item quantity="other">liko %1$d dienų</item>
-  </plurals>
   <string name="last_day_available">liko paskutine diena</string>
   <string name="cache_offline">Išsaugota</string>
   <string name="cache_offline_refresh">Naujinti</string>
@@ -729,21 +702,6 @@
   <string name="cache_offline_time_about">apie</string>
   <string name="cache_offline_time_mins">minučių atgal</string>
   <string name="cache_offline_time_mins_few">prieš kelias minutes</string>
-  <plurals name="cache_offline_about_time_mins">
-    <item quantity="one">prieš %d minutes</item>
-    <item quantity="few">prieš %d minutes</item>
-    <item quantity="other">prieš %d minučių</item>
-  </plurals>
-  <plurals name="cache_offline_about_time_hours">
-    <item quantity="one">prieš %d valandą</item>
-    <item quantity="few">prieš %d valandas</item>
-    <item quantity="other">prieš %d valandų</item>
-  </plurals>
-  <plurals name="cache_offline_about_time_days">
-    <item quantity="one">prieš %d dieną</item>
-    <item quantity="few">prieš %d dienas</item>
-    <item quantity="other">prieš %d dienų</item>
-  </plurals>
   <string name="cache_offline_time_hour">valandą atgal</string>
   <string name="cache_offline_time_hours">valandas atgal</string>
   <string name="cache_offline_time_days">dienų atgal</string>
@@ -780,11 +738,6 @@
   <string name="cache_list_select_last">Paskutinis pasirinkimas</string>
   <string name="cache_images">Nuotraukos</string>
   <string name="cache_waypoints">Papildomi taškai</string>
-  <plurals name="waypoints">
-    <item quantity="one">%d papildomas taškas</item>
-    <item quantity="few">%d papildomi taškai</item>
-    <item quantity="other">%d papildomų taškų</item>
-  </plurals>
   <string name="cache_waypoints_add">Pridėti papildomą tašką</string>
   <string name="cache_hint">Užuomina</string>
   <string name="cache_hint_not_available">Užuomina nepateikiama</string>
@@ -1155,11 +1108,6 @@
   <string name="export_confirm_message">Maršrutas: %1$s\nFailo vardas: %2$s</string>
   <string name="export_persnotes">Asmeninės pastabos</string>
   <string name="export_persnotes_uploading">Įkeliama asmeninė pastaba %1$d</string>
-  <plurals name="export_persnotes_upload_success">
-    <item quantity="one">Sėkmingai nusiųstas viena pastaba</item>
-    <item quantity="few">Sėkmingai nusiųstos %1$d pastabos</item>
-    <item quantity="other">Sėkmingai nusiųsta %1$d pastabų</item>
-  </plurals>
   <!-- GC attributes -->
   <string name="attribute_dogs_yes">Galima su šunimi</string>
   <string name="attribute_dogs_no">Negalima su šunimi</string>
@@ -1413,43 +1361,13 @@
   <string name="tts_stopped">Sustabdytas kalbėjimas</string>
   <string name="err_tts_lang_not_supported">Dabartinė kalba nepalaikoma teksto-į-kalbą.</string>
   <string name="tts_one_kilometer">vienas kilometras</string>
-  <plurals name="tts_kilometers">
-    <item quantity="one">%s kilometras</item>
-    <item quantity="few">%s kilometrai</item>
-    <item quantity="other">%s kilometrų</item>
-  </plurals>
   <string name="tts_one_meter">vienas metras</string>
-  <plurals name="tts_meters">
-    <item quantity="one">%s metras</item>
-    <item quantity="few">%s metrai</item>
-    <item quantity="other">%s metrų</item>
-  </plurals>
   <string name="tts_one_mile">viena mylia</string>
-  <plurals name="tts_miles">
-    <item quantity="one">%s mylia</item>
-    <item quantity="few">%s mylios</item>
-    <item quantity="other">%s mylių</item>
-  </plurals>
   <string name="tts_one_foot">viena pėda</string>
-  <plurals name="tts_feet">
-    <item quantity="one">%s pėda</item>
-    <item quantity="few">%s pėdos</item>
-    <item quantity="other">%s pėdų</item>
-  </plurals>
   <string name="tts_one_oclock">one o\'clock</string>
   <string name="tts_oclock">%s o\'clock</string>
   <!-- various -->
   <string name="clipboard_copy_ok">Nukopijuota į mainų sritį</string>
-  <plurals name="days_ago">
-    <item quantity="one">%d dieną atgal</item>
-    <item quantity="few">%d dienas atgal</item>
-    <item quantity="other">%d dienų atgal</item>
-  </plurals>
-  <plurals name="favorite_points">
-    <item quantity="one">%s mėgiama</item>
-    <item quantity="few">%s mėgiamos</item>
-    <item quantity="other">%s mėgiamų</item>
-  </plurals>
   <string name="more_than_percent_favorite_points">&gt; %d%% megstami</string>
   <!-- shortcuts -->
   <string name="cgeo_shortcut">c:geo nuoroda</string>
@@ -1477,31 +1395,11 @@
   <string name="settings_summary_map_direction">Rodyti krypties linija į tikslą</string>
   <string name="map_direction">Rodyti kryptį</string>
   <string name="command_move_caches_progress">Perkelti slėptuves į %1s sąrašą</string>
-  <plurals name="command_move_caches_result">
-    <item quantity="one">Perkelta %d slėptuvė</item>
-    <item quantity="few">Perkeltos %d slėptuvės</item>
-    <item quantity="other">Perkelta %d slėptuvių</item>
-  </plurals>
   <string name="command_copy_caches_progress">Kopijuojamos slėptuvės į %1s sąrašą</string>
-  <plurals name="command_copy_caches_result">
-    <item quantity="one">Nukopijuotos %d slėptuvės</item>
-    <item quantity="few">Nukopijuota %d slėptuvių</item>
-    <item quantity="other">Nukopijuota %d slėptuvių</item>
-  </plurals>
   <string name="command_delete_caches_progress">Ištrinamos slėptuvės</string>
-  <plurals name="command_delete_caches_result">
-    <item quantity="one">Ištrinta %d slėptuvė</item>
-    <item quantity="few">Ištrintos %d slėptuvės</item>
-    <item quantity="other">Ištrinta %d slėptuvių</item>
-  </plurals>
   <string name="command_rename_list_result">Pervadinti sąrašą</string>
   <string name="command_delete_list_result">Sąrašas ištrintas</string>
   <string name="command_unique_list_result">Ištrintos slėptuvės iš kitų sąrašų</string>
-  <plurals name="fav_points_remaining">
-    <item quantity="one">Pridėti šią slėptuvę prie mėgstamųjų (liko %d)</item>
-    <item quantity="few">Pridėti šias slėptuves prie mėgstamųjų (liko %d)</item>
-    <item quantity="other">Pridėti šią slėptuvę prie mėgstamųjų (liko %d)</item>
-  </plurals>
   <!-- distance units -->
   <string name="unit_m">m</string>
   <string name="unit_km">km</string>
@@ -1520,11 +1418,6 @@
   <string name="cache_list_remove_from">Pašalinti iš sąrašo</string>
   <string name="list_list_headline">Sąrašas:</string>
   <string name="cache_store_list">Išsaugoti sąraše</string>
-  <plurals name="extract_waypoints_result">
-    <item quantity="one">%d papildomas taškas išskleistas</item>
-    <item quantity="few">%d papildomi taškai išskleisti</item>
-    <item quantity="other">%d papildomų taškų išskleista</item>
-  </plurals>
   <!-- calendar adder -->
   <string name="event_fail">Nepavyko įtraukti renginio į kalendorių</string>
   <string name="init_low_disk_space">Mažai talpyklos vietos</string>

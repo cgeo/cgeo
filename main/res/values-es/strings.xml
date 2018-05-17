@@ -509,8 +509,6 @@
   <string name="init_signature_template_number">Número</string>
   <string name="init_signature_template_owner">Propietario</string>
   <string name="init_signature_template_name">Nombre</string>
-  <string name="init_signature_template_difficulty">Dificultad</string>
-  <string name="init_signature_template_terrain">Terreno</string>
   <string name="init_signature_template_url">URL</string>
   <string name="init_signature_template_log">Texto de registro</string>
   <string name="init_ratingwanted">Puntuación de GCvote</string>

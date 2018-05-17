@@ -250,7 +250,7 @@
   <string name="err_trackable_log_not_anonymous">Nevar pieteikties %1$s no c:geo anonīmi. Vai vēlies atvērt uzstādījumus, lai ievadītu akreditācijas datus no %2$s?</string>
   <string name="err_trackable_no_preference_activity">Atvainojiet, nevaru atrast piemērotus uzstādījumus ekrānam.</string>
   <string name="confirm_unsaved_changes_title">Izmaiņas nav saglabātas</string>
-  <string name="confirm_discard_wp_changes">Vai atsaukt starpposma izmaiņas?</string>
+  <string name="confirm_discard_wp_changes">Vai atsaukt Starpposma izmaiņas?</string>
   <string name="warn_discard_changes">Nesaglabāto starpposmu izmaiņas atceltas!</string>
   <string name="err_request_popup_info">c:Geo neizdevās iegūt slēpņa informāciju.</string>
   <!-- location service -->
@@ -513,8 +513,6 @@
   <string name="init_signature_template_number">Numurs</string>
   <string name="init_signature_template_owner">Īpašnieks</string>
   <string name="init_signature_template_name">Vārds</string>
-  <string name="init_signature_template_difficulty">Sarežģītība</string>
-  <string name="init_signature_template_terrain">Piekļuve</string>
   <string name="init_signature_template_url">URL</string>
   <string name="init_signature_template_log">Ieraksta teksts</string>
   <string name="init_ratingwanted">GCvote reitings</string>
@@ -1536,4 +1534,6 @@
   <string name="list_confirm_debug_message">Atkļūdošanas režīms var izraisīt nestabilu aplikācijas darbību! Vai vēlies šo režīmu deaktivizēt?</string>
   <string name="err_select_logimage_upload_size">Pārāk liels attēls, lūdzu, izvēlies mazāku izšķirtspēju.</string>
   <string name="err_logimage_caption_required">Attēlam ir nepieciešams pievienot parakstu</string>
+  <string name="waypoint_latitude_null">N/S --° --.---</string>
+  <string name="waypoint_longitude_null">E/W --° --.---</string>
 </resources>

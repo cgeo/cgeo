@@ -515,8 +515,6 @@
   <string name="init_signature_template_number">Nummer</string>
   <string name="init_signature_template_owner">Ägare</string>
   <string name="init_signature_template_name">Namn</string>
-  <string name="init_signature_template_difficulty">Svårighet</string>
-  <string name="init_signature_template_terrain">Terräng</string>
   <string name="init_signature_template_url">URL</string>
   <string name="init_signature_template_log">Loggtext</string>
   <string name="init_ratingwanted">GCvote.com</string>
@@ -1530,5 +1528,5 @@
   <string name="err_select_logimage_upload_size">Bilden är för stor, vänligen välj en mindre skala.</string>
   <string name="err_logimage_caption_required">En text krävs till bilden</string>
   <string name="waypoint_latitude_null">N/S --° --.---</string>
-  <string name="waypoint_longitude_null">E/W--°--.---</string>
+  <string name="waypoint_longitude_null">E/W --° --.---</string>
 </resources>

@@ -288,11 +288,6 @@
   <string name="caches_more_caches_currently">aktuálně</string>
   <string name="caches_downloading">Stahování keší…\nETA:</string>
   <string name="caches_eta_ltm">Méně než minuta</string>
-  <plurals name="caches_eta_mins">
-    <item quantity="one">%d minuta</item>
-    <item quantity="few">%d minuty</item>
-    <item quantity="other">%d minut</item>
-  </plurals>
   <string name="caches_store_offline">Uložit offline</string>
   <string name="caches_store_all">Uložit všechny</string>
   <string name="caches_store_unsaved">Uložit neuložené</string>
@@ -323,17 +318,7 @@
   <string name="caches_nearby">Nejbližší</string>
   <string name="caches_manage">Správa</string>
   <string name="caches_remove_all">Odstranit vše</string>
-  <plurals name="caches_remove_all_confirm">
-    <item quantity="one">Chceš odstranit tuto keš ze seznamu?</item>
-    <item quantity="few">Chceš odstranit všechny %d keše ze seznamu?</item>
-    <item quantity="other">Chceš odstranit všech %d keší ze seznamu?</item>
-  </plurals>
   <string name="caches_remove_selected">Odstranit vybrané</string>
-  <plurals name="caches_remove_selected_confirm">
-    <item quantity="one">Opravdu chceš tuto keš odstranit z tvého zařízení?</item>
-    <item quantity="few">Opravdu chceš odstranit vybrané keše (%d) z tvého zařízení?</item>
-    <item quantity="other">Opravdu chceš odstranit vybrané keše (%d) z tvého zařízení?</item>
-  </plurals>
   <string name="caches_remove_progress">Odstraňování keší</string>
   <string name="caches_delete_events">Vymazat staré události</string>
   <string name="caches_refresh_selected">Aktualizovat vybrané</string>
@@ -518,8 +503,6 @@
   <string name="init_signature_template_number">Číslo nálezu</string>
   <string name="init_signature_template_owner">Vlastník</string>
   <string name="init_signature_template_name">Název</string>
-  <string name="init_signature_template_difficulty">Obtížnost</string>
-  <string name="init_signature_template_terrain">Terén</string>
   <string name="init_signature_template_url">URL adresa</string>
   <string name="init_signature_template_log">Text logu</string>
   <string name="init_ratingwanted">Načítat hodnocení</string>
@@ -719,17 +702,7 @@
   <string name="err_auth_geokrety_bad_password">Zdá se, že tvé uživatelské jméno nebo heslo není správné.</string>
   <string name="err_auth_geokrety_unknown">%1$s hlásí: %2$s.</string>
   <!-- cache -->
-  <plurals name="cache_counts">
-    <item quantity="one">Jedna keš</item>
-    <item quantity="few">%1$d keše</item>
-    <item quantity="other">%1$d keší</item>
-  </plurals>
   <!-- days remaining -->
-  <plurals name="days_remaining">
-    <item quantity="one">zbývá jeden den</item>
-    <item quantity="few">zbývají %1$d dny</item>
-    <item quantity="other">zbývá %1$d dnů</item>
-  </plurals>
   <string name="last_day_available">zbývá poslední den</string>
   <string name="cache_offline">Offline</string>
   <string name="cache_offline_refresh">Obnovit</string>
@@ -742,21 +715,6 @@
   <string name="cache_offline_time_about">přibližně před</string>
   <string name="cache_offline_time_mins">minutami</string>
   <string name="cache_offline_time_mins_few">několika minutami</string>
-  <plurals name="cache_offline_about_time_mins">
-    <item quantity="one">asi před %d minutou</item>
-    <item quantity="few">asi před %d minutami</item>
-    <item quantity="other">asi před %d minutami</item>
-  </plurals>
-  <plurals name="cache_offline_about_time_hours">
-    <item quantity="one">asi před %d hodinou</item>
-    <item quantity="few">asi před %d hodinami</item>
-    <item quantity="other">asi před %d hodinami</item>
-  </plurals>
-  <plurals name="cache_offline_about_time_days">
-    <item quantity="one">asi před %d dnem</item>
-    <item quantity="few">asi před %d dny</item>
-    <item quantity="other">asi před %d dny</item>
-  </plurals>
   <string name="cache_offline_time_hour">hodinou</string>
   <string name="cache_offline_time_hours">hodinami</string>
   <string name="cache_offline_time_days">dny</string>
@@ -793,11 +751,6 @@
   <string name="cache_list_select_last">Poslední výběr</string>
   <string name="cache_images">Obrázky</string>
   <string name="cache_waypoints">Body trasy</string>
-  <plurals name="waypoints">
-    <item quantity="one">1 bod trasy</item>
-    <item quantity="few">%d body trasy</item>
-    <item quantity="other">%d bodů trasy</item>
-  </plurals>
   <string name="cache_waypoints_add">Přidat bod trasy</string>
   <string name="cache_hint">Nápověda</string>
   <string name="cache_hint_not_available">Nápověda není dostupná</string>
@@ -1170,11 +1123,6 @@
   <string name="export_confirm_message">Umístění: %1$s\nNázev souboru: %2$s</string>
   <string name="export_persnotes">Osobní poznámky</string>
   <string name="export_persnotes_uploading">Nahrávání osobní poznámky %1$d</string>
-  <plurals name="export_persnotes_upload_success">
-    <item quantity="one">Poznámka byla úspěšně nahrána</item>
-    <item quantity="few">Poznámky (%1$d) byly úspěšně nahrány</item>
-    <item quantity="other">Poznámky (%1$d) byly úspěšně nahrány</item>
-  </plurals>
   <!-- GC attributes -->
   <string name="attribute_dogs_yes">Vstup se psy povolen</string>
   <string name="attribute_dogs_no">Vstup se psy zakázán</string>
@@ -1429,43 +1377,13 @@
   <string name="tts_stopped">Řeč ukončena</string>
   <string name="err_tts_lang_not_supported">Převod textu na řeč není pro tento jazyk k dispozici.</string>
   <string name="tts_one_kilometer">jeden kilometr</string>
-  <plurals name="tts_kilometers">
-    <item quantity="one">%s kilometr</item>
-    <item quantity="few">%s kilometry</item>
-    <item quantity="other">%s kilometrů</item>
-  </plurals>
   <string name="tts_one_meter">jeden metr</string>
-  <plurals name="tts_meters">
-    <item quantity="one">%s metr</item>
-    <item quantity="few">%s metry</item>
-    <item quantity="other">%s metrů</item>
-  </plurals>
   <string name="tts_one_mile">jedna míle</string>
-  <plurals name="tts_miles">
-    <item quantity="one">%s míle</item>
-    <item quantity="few">%s míle</item>
-    <item quantity="other">%s mil</item>
-  </plurals>
   <string name="tts_one_foot">jedna stopa</string>
-  <plurals name="tts_feet">
-    <item quantity="one">%s stopa</item>
-    <item quantity="few">%s stopy</item>
-    <item quantity="other">%s stop</item>
-  </plurals>
   <string name="tts_one_oclock">jedna hodina</string>
   <string name="tts_oclock">%s hodin</string>
   <!-- various -->
   <string name="clipboard_copy_ok">Zkopírováno do schránky</string>
-  <plurals name="days_ago">
-    <item quantity="one">včera</item>
-    <item quantity="few">před %d dny</item>
-    <item quantity="other">před %d dny</item>
-  </plurals>
-  <plurals name="favorite_points">
-    <item quantity="one">%s oblíbená</item>
-    <item quantity="few">%s oblíbené</item>
-    <item quantity="other">%s oblíbených</item>
-  </plurals>
   <string name="more_than_percent_favorite_points">&gt; %d%% oblíbených položek</string>
   <!-- shortcuts -->
   <string name="cgeo_shortcut">c:geo zástupce</string>
@@ -1493,31 +1411,11 @@
   <string name="settings_summary_map_direction">Zobrazovat směrovou čáru k cíli</string>
   <string name="map_direction">Zobrazovat směr</string>
   <string name="command_move_caches_progress">Přesouvání keší do seznamu %1s</string>
-  <plurals name="command_move_caches_result">
-    <item quantity="one">Přesunuta %d keš</item>
-    <item quantity="few">Přesunuty %d keše</item>
-    <item quantity="other">Přesunuto %d keší</item>
-  </plurals>
   <string name="command_copy_caches_progress">Kopírování keší do seznamu %1s</string>
-  <plurals name="command_copy_caches_result">
-    <item quantity="one">Zkopírována %d keš</item>
-    <item quantity="few">Zkopírovány %d keše</item>
-    <item quantity="other">Zkopírováno %d keší</item>
-  </plurals>
   <string name="command_delete_caches_progress">Odstraňování keší</string>
-  <plurals name="command_delete_caches_result">
-    <item quantity="one">Odstraněna %d keš</item>
-    <item quantity="few">Odstraněny %d keše</item>
-    <item quantity="other">Odstraněno %d keší</item>
-  </plurals>
   <string name="command_rename_list_result">Seznam přejmenován</string>
   <string name="command_delete_list_result">Seznam odstraněn</string>
   <string name="command_unique_list_result">Keše smazány z ostatních seznamů</string>
-  <plurals name="fav_points_remaining">
-    <item quantity="one">Přidat tuto keš do oblíbených (zbývá %d)</item>
-    <item quantity="few">Přidat tuto keš do oblíbených (zbývá %d)</item>
-    <item quantity="other">Přidat tuto keš do oblíbených (zbývá %d)</item>
-  </plurals>
   <!-- distance units -->
   <string name="unit_m">m</string>
   <string name="unit_km">km</string>
@@ -1536,11 +1434,6 @@
   <string name="cache_list_remove_from">Odebrat ze seznamu</string>
   <string name="list_list_headline">Seznamy:</string>
   <string name="cache_store_list">Uložit do seznamu</string>
-  <plurals name="extract_waypoints_result">
-    <item quantity="one">%d bod trasy extrahován</item>
-    <item quantity="few">%d body trasy extrahovány</item>
-    <item quantity="other">%d bodů trasy extrahováno</item>
-  </plurals>
   <!-- calendar adder -->
   <string name="event_fail">Přidat událost do kalendáře se nepodařilo</string>
   <string name="init_low_disk_space">V úložišti dochází volné místo</string>
