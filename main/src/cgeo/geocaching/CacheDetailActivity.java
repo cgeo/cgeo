@@ -716,7 +716,8 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 ignoreCache();
                 return true;
             case R.id.menu_extract_waypoints:
-                extractWaypoints(cache.getDescription(), cache);
+                final String searchText = cache.getShortDescription() + ' ' + cache.getDescription();
+                extractWaypoints(searchText, cache);
                 return true;
             case R.id.menu_export_gpx:
                 new GpxExport().export(Collections.singletonList(cache), this);
