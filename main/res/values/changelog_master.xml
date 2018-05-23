@@ -11,6 +11,7 @@
     · New: Log template [SIZE]\n
     · Fix: Rest user modified coords did not restore cache coords locally\n
     · Fix: Avoid crash after deleting a GPX file on the import screen\n
+    · Fix: GPS was switched off when editing a waypoint\n
     · Change: Use new gc.com logging page for submitting logs\n
     \n
   </string>
