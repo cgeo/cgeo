@@ -9,6 +9,7 @@
     · New: Translation to Cebuano and Greek\n
     · New: Support OC GPX extensions\n
     · New: Log template [SIZE]\n
+    · New: Also extract waypoints from short description\n
     · Fix: Rest user modified coords did not restore cache coords locally\n
     · Fix: Avoid crash after deleting a GPX file on the import screen\n
     · Fix: GPS was switched off when editing a waypoint\n
