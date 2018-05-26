@@ -124,10 +124,13 @@
   <string name="log_image_description">Beskrivning</string>
   <string name="log_image_scale">Skalning</string>
   <string name="log_password_title">Logglösenord:</string>
+  <string name="log_report_problem">Rapportera problem:</string>
   <string name="log_hint_log_password">Ange ditt lösenord för loggning</string>
   <string name="log_oc_team_comment">Meddelande från OC Team</string>
   <string name="log_your_saved_log">Din sparade logg</string>
   <string name="log_empty_logbook">Cachens loggbok är tom.</string>
+  <string name="log_problem_none">Inga problem</string>
+  <string name="log_problem_needs_maintenance_text">Denna geocacharen rapporterade att det finns ett problem med denna cache.</string>
   <string-array name="log_image_scales">
     <item>Ingen skalning</item>
     <item>512 px</item>
