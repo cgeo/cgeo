@@ -2,21 +2,19 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-    <b>Next bugfix release:</b>\n
+    <b>Next feature release:</b>\n
+    · New: New mapsforge library (former beta version) now used by default\n
+    · New: Days since cache has been saved now replaced by months or years when applicable\n
+    · New: Contact owner by clicking on user name now also for OC caches\n
+    · New: Translation to Cebuano and Greek\n
+    · New: Support OC GPX extensions\n
+    · New: Log template [SIZE]\n
+    · New: Also extract waypoints from short description\n
     · Fix: Turkish translation not working\n
-    \n
-    <b>2018.02.05:</b>\n
-    · New: Waypoint support for empty coordinates\n
-    · New: Store all or only unsaved caches from map\n
-    · New: Confirm discarding unsaved waypoint changes\n
-    · New: D/T rating in log signature\n
-    · New: PQ import in cachelist menu\n
-    · New: Waypoint notes streamlined\n
-    · New: Treat locked caches as archived\n
-    · New: Translation to Turkish\n
-    · Fix: Waypoints of caches not loaded\n
-    · Fix: List sometimes forgets number of caches loaded\n
-    · Change: Reset cookies on login fail to prevent permanent login errors\n
+    · Fix: Rest user modified coords did not restore cache coords locally\n
+    · Fix: Avoid crash after deleting a GPX file on the import screen\n
+    · Fix: GPS was switched off when editing a waypoint\n
+    · Change: Use new gc.com logging page for submitting logs\n
     \n
 </string>
 </resources>
