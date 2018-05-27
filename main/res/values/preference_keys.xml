@@ -95,7 +95,7 @@
     <string translatable="false" name="pref_dbonsdcard">dbonsdcard</string>
     <string translatable="false" name="pref_debug">debug</string>
     <string translatable="false" name="pref_force_orientation_sensor">forceOrientationSensort</string>
-    <string translatable="false" name="pref_new_map_as_default">pref_new_map_as_default</string>
+    <string translatable="false" name="pref_old_mapsforge_api">pref_old_mapsforge_api</string>
     <!-- preferences used internally -->
     <string translatable="false" name="pref_temp_twitter_token_secret">temp-token-secret</string>
     <string translatable="false" name="pref_temp_twitter_token_public">temp-token-public</string>

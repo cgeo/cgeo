@@ -14,6 +14,8 @@ import cgeo.geocaching.models.CalcState;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.network.SmileyImage;
+import cgeo.geocaching.sensors.GeoData;
+import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.staticmaps.StaticMapsProvider;
 import cgeo.geocaching.storage.DataStore;
@@ -284,6 +286,11 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
     }
 
     @Override
+    public void onResume() {
+        super.onResume(geoDirHandler.start(GeoDirHandler.UPDATE_GEODATA));
+    }
+
+    @Override
     public void onBackPressed() {
         finishConfirmDiscard();
     }
@@ -384,6 +391,18 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
             }
         }
     }
+
+    private final GeoDirHandler geoDirHandler = new GeoDirHandler() {
+        @Override
+        public void updateGeoData(final GeoData geo) {
+            try {
+                // keep updates coming while activity is visible, to have better coords when needed
+                Log.i("update geo data: " + geo);
+            } catch (final Exception e) {
+                Log.e("failed to update location", e);
+            }
+        }
+    };
 
     private class CoordDialogListener implements View.OnClickListener {
 
@@ -691,10 +710,6 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         }
         final Waypoint oldWaypoint = cache.getWaypointById(waypointId);
         if (cache.addOrChangeWaypoint(waypoint, true)) {
-            DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
-
-            LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(new Intent(Intents.INTENT_CACHE_CHANGED));
-
             if (!StaticMapsProvider.hasAllStaticMapsForWaypoint(geocode, waypoint)) {
                 StaticMapsProvider.removeWpStaticMaps(oldWaypoint, geocode);
                 if (Settings.isStoreOfflineWpMaps()) {
@@ -709,7 +724,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
                     cache.setUserModifiedCoords(true);
                 }
                 cache.setCoords(waypoint.getCoords());
-                DataStore.saveChangedCache(cache);
+                DataStore.saveUserModifiedCoords(cache);
             }
             if (waypoint.getCoords() != null && modifyBoth.isChecked()) {
                 finishHandler.sendEmptyMessage(UPLOAD_START);

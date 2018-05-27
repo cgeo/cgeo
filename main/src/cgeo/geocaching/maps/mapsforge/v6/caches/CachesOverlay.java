@@ -2,94 +2,113 @@ package cgeo.geocaching.maps.mapsforge.v6.caches;
 
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.enumerations.LoadFlags;
+import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.mapsforge.v6.MapHandlers;
-import cgeo.geocaching.maps.mapsforge.v6.MfMapView;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.utils.Log;
+
+import android.support.annotation.NonNull;
+
+import java.lang.ref.WeakReference;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
+
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 import org.mapsforge.map.layer.Layer;
-
-import android.os.AsyncTask;
-
-import java.util.List;
-import java.util.Set;
 
 public class CachesOverlay extends AbstractCachesOverlay {
 
     private final SearchResult search;
+    private final Disposable timer;
+    private boolean showWaypoints = false;
+    private boolean firstRun = true;
+    private boolean updating = false;
 
-    public CachesOverlay(final SearchResult search, final int overlayId, final Set<GeoEntry> geoEntries, final MfMapView mapView, final Layer anchorLayer, final MapHandlers mapHandlers) {
-        super(overlayId, geoEntries, mapView, anchorLayer, mapHandlers);
+    CachesOverlay(final SearchResult search, final int overlayId, final Set<GeoEntry> geoEntries, final CachesBundle bundle, final Layer anchorLayer, final MapHandlers mapHandlers) {
+        super(overlayId, geoEntries, bundle, anchorLayer, mapHandlers);
 
         this.search = search;
-        startDisplay();
+        this.timer = startTimer();
     }
 
-    public CachesOverlay(final String geocode, final int overlayId, final Set<GeoEntry> geoEntries, final MfMapView mapView, final Layer layerAnchor, final MapHandlers mapHandlers) {
-        super(overlayId, geoEntries, mapView, layerAnchor, mapHandlers);
+    CachesOverlay(final String geocode, final int overlayId, final Set<GeoEntry> geoEntries, final CachesBundle bundle, final Layer layerAnchor, final MapHandlers mapHandlers) {
+        super(overlayId, geoEntries, bundle, layerAnchor, mapHandlers);
 
         this.search = new SearchResult();
         this.search.addGeocode(geocode);
-        startDisplay();
+        this.timer = startTimer();
     }
 
-    private void startDisplay() {
-        new Loader().execute(null, null, null);
+    private Disposable startTimer() {
+        return Schedulers.newThread().schedulePeriodicallyDirect(new CachesOverlay.LoadTimerAction(this), 0, 250, TimeUnit.MILLISECONDS);
     }
 
-    private void fill() {
+    private static final class LoadTimerAction implements Runnable {
+
+        @NonNull
+        private final WeakReference<CachesOverlay> overlayRef;
+        private Viewport previousViewport;
+
+        LoadTimerAction(@NonNull final CachesOverlay overlay) {
+            this.overlayRef = new WeakReference<>(overlay);
+        }
+
+        @Override
+        public void run() {
+            final CachesOverlay overlay = overlayRef.get();
+            if (overlay == null || overlay.updating) {
+                return;
+            }
+            overlay.updating = true;
+            try {
+                // Initially bring the main list in
+                if (overlay.firstRun) {
+                    final Set<Geocache> cachesToDisplay = overlay.search.getCachesFromSearchResult(LoadFlags.LOAD_WAYPOINTS);
+                    overlay.display(cachesToDisplay);
+                    overlay.firstRun = false;
+                }
+
+                // get current viewport
+                final Viewport viewportNow = overlay.getViewport();
+
+                // Switch waypoints on or off depending on visibility. Leave them always enabled for single cache views
+                final boolean showWaypointsNow = overlay.search.getCount() > 1 ? overlay.getAllVisibleCachesCount() < Settings.getWayPointsThreshold() : true;
+
+                if (showWaypointsNow != overlay.showWaypoints) {
+
+                    final Set<Geocache> cachesToDisplay = overlay.search.getCachesFromSearchResult(LoadFlags.LOAD_WAYPOINTS);
+                    previousViewport = viewportNow;
+                    overlay.showWaypoints = showWaypointsNow;
+                    overlay.display(cachesToDisplay);
+
+                } else if (previousViewport != null && !previousViewport.equals(viewportNow)) {
+
+                    overlay.updateTitle();
+                }
+            } catch (final Exception e) {
+                Log.w("CachesOverlay.LoadTimer.run", e);
+            } finally {
+                overlay.updating = false;
+            }
+        }
+    }
+
+    private void display(final Set<Geocache> cachesToDisplay) {
         try {
             showProgress();
-
-            clearLayers();
-
-            // display caches
-            final Set<Geocache> cachesToDisplay = search.getCachesFromSearchResult(LoadFlags.LOAD_WAYPOINTS);
-
-            if (!cachesToDisplay.isEmpty()) {
-                // Only show waypoints for single view or setting
-                // when less than showWaypointsthreshold Caches shown
-                final boolean showWaypoints = cachesToDisplay.size() == 1 || cachesToDisplay.size() < Settings.getWayPointsThreshold();
-
-                for (final Geocache cache : cachesToDisplay) {
-
-                    if (cache == null) {
-                        continue;
-                    }
-                    if (showWaypoints) {
-                        final List<Waypoint> waypoints = cache.getWaypoints();
-                        for (final Waypoint waypoint : waypoints) {
-                            if (waypoint == null || waypoint.getCoords() == null) {
-                                continue;
-                            }
-                            addItem(waypoint);
-                        }
-                    }
-
-                    if (cache.getCoords() == null) {
-                        continue;
-                    }
-                    addItem(cache);
-                }
-            }
-
-            addLayers();
-
-            repaint();
+            update(cachesToDisplay, showWaypoints);
         } finally {
             hideProgress();
         }
     }
 
-    private class Loader extends AsyncTask<Void, Void, Void> {
+    @Override
+    public void onDestroy() {
+        timer.dispose();
 
-        @Override
-        protected Void doInBackground(final Void... arg0) {
-            fill();
-            return null;
-        }
-
+        super.onDestroy();
     }
-
 }

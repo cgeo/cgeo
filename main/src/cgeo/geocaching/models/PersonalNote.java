@@ -33,24 +33,10 @@ public class PersonalNote {
             return mergeOnlyProviderNotes(other);
         }
         final PersonalNote result = new PersonalNote();
-        if (cgeoNote != null && other.cgeoNote != null) {
-            if (other.isOffline) {
-                result.cgeoNote = other.cgeoNote;
-            } else {
-                result.cgeoNote = cgeoNote;
-            }
-        }
         if (other.cgeoNote != null) {
             result.cgeoNote = other.cgeoNote;
         } else {
             result.cgeoNote = cgeoNote;
-        }
-        if (providerNote != null && other.providerNote != null) {
-            if (isOffline) {
-                result.providerNote = providerNote;
-            } else {
-                result.providerNote = other.providerNote;
-            }
         }
         if (providerNote != null) {
             result.providerNote = providerNote;

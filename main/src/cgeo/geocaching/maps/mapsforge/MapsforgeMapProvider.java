@@ -7,6 +7,9 @@ import cgeo.geocaching.maps.MapProviderFactory;
 import cgeo.geocaching.maps.interfaces.MapItemFactory;
 import cgeo.geocaching.maps.interfaces.MapProvider;
 import cgeo.geocaching.maps.interfaces.MapSource;
+import cgeo.geocaching.maps.mapsforge.v6.NewMap;
+import cgeo.geocaching.maps.mapsforge.v6.layers.ITileLayer;
+import cgeo.geocaching.maps.mapsforge.v6.layers.RendererLayer;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
@@ -21,6 +24,10 @@ import java.util.List;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.mapsforge.map.android.graphics.AndroidGraphicFactory;
+import org.mapsforge.map.layer.cache.TileCache;
+import org.mapsforge.map.model.MapViewPosition;
+import org.mapsforge.map.reader.MapFile;
 import org.mapsforge.v3.android.maps.mapgenerator.MapGeneratorInternal;
 import org.mapsforge.v3.map.reader.MapDatabase;
 import org.mapsforge.v3.map.reader.header.FileOpenResult;
@@ -94,7 +101,7 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
     @Override
     public Class<? extends Activity> getMapClass() {
         mapItemFactory = new MapsforgeMapItemFactory();
-        return MapsforgeMapActivity.class;
+        return Settings.useOldMapsforgeAPI() ? MapsforgeMapActivity.class : NewMap.class;
     }
 
     @Override
@@ -134,6 +141,19 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
         public String getFileName() {
             return fileName;
         }
+
+        /**
+         * Create new render layer, if mapfile exists
+         */
+        @Override
+        public ITileLayer createTileLayer(final TileCache tileCache, final MapViewPosition mapViewPosition) {
+            final File mapFile = new File(fileName);
+            if (mapFile.exists()) {
+                return new RendererLayer(tileCache, new MapFile(mapFile), mapViewPosition, false, true, false, AndroidGraphicFactory.INSTANCE);
+            }
+            return null;
+        }
+
     }
 
     public void updateOfflineMaps() {

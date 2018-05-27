@@ -1,6 +1,8 @@
 package cgeo.geocaching.connector;
 
+import cgeo.geocaching.log.ReportProblemType;
 import cgeo.geocaching.log.TrackableLog;
+import cgeo.geocaching.models.Geocache;
 
 import android.support.annotation.NonNull;
 
@@ -33,6 +35,12 @@ public abstract class AbstractLoggingManager implements ILoggingManager {
     @Override
     public boolean isImageCaptionMandatory() {
         return false;
+    }
+
+    @Override
+    @NonNull
+    public List<ReportProblemType> getReportProblemTypes(@NonNull final Geocache geocache) {
+        return Collections.emptyList();
     }
 
 }

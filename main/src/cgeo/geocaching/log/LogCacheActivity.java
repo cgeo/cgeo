@@ -78,6 +78,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     private static final String SAVED_STATE_DATE = "cgeo.geocaching.saved_state_date";
     private static final String SAVED_STATE_IMAGE = "cgeo.geocaching.saved_state_image";
     private static final String SAVED_STATE_FAVPOINTS = "cgeo.geocaching.saved_state_favpoints";
+    private static final String SAVED_STATE_PROBLEM = "cgeo.geocaching.saved_state_problem";
 
     private static final int SELECT_IMAGE = 101;
 
@@ -86,6 +87,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     private String text = null;
     private List<LogType> possibleLogTypes = new ArrayList<>();
     private final Set<TrackableLog> trackables = new HashSet<>();
+    private final List<ReportProblemType> possibleReportProblemTypes = new ArrayList<>();
 
     @BindView(R.id.tweet)
     protected CheckBox tweetCheck;
@@ -104,6 +106,8 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     private Image image;
     private boolean sendButtonEnabled;
     private int premFavPoints;
+    private ReportProblemType reportProblemSelected = ReportProblemType.NO_PROBLEM;
+    private LogEntry oldLog;
 
     /**
      * Hook called at the beginning of onCreateLoader().
@@ -131,6 +135,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         }
 
         verifySelectedLogType();
+        verifySelectedReportProblemType();
 
         initializeRatingBar();
 
@@ -153,6 +158,30 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
             setType(typeSelected);
 
             showToast(res.getString(R.string.info_log_type_changed));
+        }
+    }
+
+    private void verifySelectedReportProblemType() {
+        possibleReportProblemTypes.clear();
+        possibleReportProblemTypes.add(ReportProblemType.NO_PROBLEM);
+        for (final ReportProblemType reportProblem : loggingManager.getReportProblemTypes(cache)) {
+            if (reportProblem.isVisible(typeSelected, cache.getType())) {
+                possibleReportProblemTypes.add(reportProblem);
+            }
+        }
+
+        final View reportProblemBox = ButterKnife.findById(this, R.id.report_problem_box);
+        if (possibleReportProblemTypes.size() == 1) {
+            reportProblemBox.setVisibility(View.GONE);
+        } else {
+            reportProblemBox.setVisibility(View.VISIBLE);
+        }
+
+        if (!possibleReportProblemTypes.contains(reportProblemSelected)) {
+            reportProblemSelected = possibleReportProblemTypes.get(0);
+            setReportProblem(reportProblemSelected);
+
+            showToast(res.getString(R.string.info_log_report_problem_changed));
         }
     }
 
@@ -296,6 +325,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
             date.setTimeInMillis(savedInstanceState.getLong(SAVED_STATE_DATE));
             image = savedInstanceState.getParcelable(SAVED_STATE_IMAGE);
             premFavPoints = savedInstanceState.getInt(SAVED_STATE_FAVPOINTS);
+            reportProblemSelected = ReportProblemType.findByCode(savedInstanceState.getString(SAVED_STATE_PROBLEM));
         } else {
             // If log had been previously saved, load it now, otherwise initialize signature as needed
             loadLogFromDatabase();
@@ -304,6 +334,18 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
             image = Image.NONE;
         }
         enablePostButton(false);
+
+        loggingManager = cache.getLoggingManager(this);
+        loggingManager.init();
+
+        final TextView problemButton = ButterKnife.findById(this, R.id.report_problem);
+        problemButton.setText(getString(reportProblemSelected.labelId) + " ▼");
+        problemButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View view) {
+                selectProblemType();
+            }
+        });
 
         verifySelectedLogType();
         final Button typeButton = ButterKnife.findById(this, R.id.type);
@@ -327,9 +369,6 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         tweetCheck.setChecked(true);
         updateTweetBox(typeSelected);
         updateLogPasswordBox(typeSelected);
-
-        loggingManager = cache.getLoggingManager(this);
-        loggingManager.init();
 
         // Load Generic Trackables
         AndroidRxUtils.bindActivity(this,
@@ -366,11 +405,12 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     }
 
     private void loadLogFromDatabase() {
-        final LogEntry log = DataStore.loadLogOffline(geocode);
-        if (log != null) {
-            typeSelected = log.getType();
-            date.setTime(new Date(log.date));
-            text = log.log;
+        oldLog = DataStore.loadLogOffline(geocode);
+        if (oldLog != null) {
+            typeSelected = oldLog.getType();
+            date.setTime(new Date(oldLog.date));
+            text = oldLog.log;
+            reportProblemSelected = oldLog.reportProblem;
         } else if (StringUtils.isNotBlank(Settings.getSignature()) && Settings.isAutoInsertSignature() && StringUtils.isBlank(currentLogText())) {
             insertIntoLog(LogTemplateProvider.applyTemplates(Settings.getSignature(), new LogContext(cache, null)), false);
         }
@@ -435,6 +475,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         outState.putLong(SAVED_STATE_DATE, date.getTimeInMillis());
         outState.putParcelable(SAVED_STATE_IMAGE, image);
         outState.putInt(SAVED_STATE_FAVPOINTS, premFavPoints);
+        outState.putString(SAVED_STATE_PROBLEM, reportProblemSelected.code);
     }
 
     @Override
@@ -454,6 +495,14 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         updateTweetBox(type);
         updateLogPasswordBox(type);
         initializeFavoriteCheck();
+        verifySelectedReportProblemType();
+    }
+
+    public void setReportProblem(final ReportProblemType reportProblem) {
+        final TextView reportProblemButton = ButterKnife.findById(this, R.id.report_problem);
+
+        reportProblemSelected = reportProblem;
+        reportProblemButton.setText(getString(reportProblemSelected.labelId) + " ▼");
     }
 
     private void updateTweetBox(final LogType type) {
@@ -477,6 +526,8 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         private String oldText;
         private LogType oldType;
         private Calendar oldDate;
+        private ReportProblemType oldReportProblem;
+        private LogEntry oldOldLog;
 
         ClearLogCommand(final Activity context) {
             super(context);
@@ -487,12 +538,14 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
             oldText = currentLogText();
             oldType = typeSelected;
             oldDate = date;
+            oldReportProblem = reportProblemSelected;
+            oldOldLog = oldLog;
             cache.clearOfflineLog();
         }
 
         @Override
         protected void undoCommand() {
-            cache.logOffline(getContext(), oldText, oldDate, oldType);
+            cache.logOffline(getContext(), oldText, oldDate, oldType, oldReportProblem);
         }
 
         @Override
@@ -507,6 +560,8 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
             setType(typeSelected);
             setDate(date);
             logEditText.setText(StringUtils.EMPTY);
+            setReportProblem(ReportProblemType.NO_PROBLEM);
+            oldLog = null;
 
             final EditText logPasswordView = ButterKnife.findById(LogCacheActivity.this, R.id.log_password);
             logPasswordView.setText(StringUtils.EMPTY);
@@ -517,7 +572,9 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
             text = oldText;
             typeSelected = oldType;
             date = oldDate;
+            oldLog = oldOldLog;
             setType(typeSelected);
+            setReportProblem(oldReportProblem);
             setDate(date);
             setLogText();
         }
@@ -547,7 +604,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
             final String logPwd = logTexts.length > 1 ? logTexts[1] : null;
 
             try {
-                final LogResult logResult = loggingManager.postLog(typeSelected, date, log, logPwd, new ArrayList<>(trackables));
+                final LogResult logResult = loggingManager.postLog(typeSelected, date, log, logPwd, new ArrayList<>(trackables), reportProblemSelected);
                 ImageResult imageResult = null;
 
                 if (logResult.getPostLogResult() == StatusCode.NO_ERROR) {
@@ -580,6 +637,11 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
                     final List<LogEntry> newLogs = new ArrayList<>(cache.getLogs());
                     final LogEntry logNow = logBuilder.build();
                     newLogs.add(0, logNow);
+                    if (reportProblemSelected != ReportProblemType.NO_PROBLEM) {
+                        final LogEntry logProblem = logBuilder.setLog(getString(reportProblemSelected.textId)).setLogImages(Collections.<Image>emptyList()).setLogType(reportProblemSelected.logType).build();
+                        newLogs.add(0, logProblem);
+
+                    }
                     DataStore.saveLogs(cache.getGeocode(), newLogs);
 
                     // update offline log in DB
@@ -679,11 +741,16 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         // Do not erase the saved log if the user has removed all the characters
         // without using "Clear". This may be a manipulation mistake, and erasing
         // again will be easy using "Clear" while retyping the text may not be.
-        if (force || (StringUtils.isNotEmpty(log) && !StringUtils.equals(log, text) && !StringUtils.equals(log, Settings.getSignature()))) {
+        // But if date or the reportProblemType has changed, then save anyway.
+        if (force ||
+                (StringUtils.isNotEmpty(log) && !StringUtils.equals(log, text) && !StringUtils.equals(log, Settings.getSignature()))
+                || (oldLog != null && (oldLog.reportProblem != reportProblemSelected || oldLog.date != date.getTime().getTime()))
+                || (oldLog == null && reportProblemSelected != ReportProblemType.NO_PROBLEM)
+                ) {
             new AsyncTask<Void, Void, Void>() {
                 @Override
                 protected Void doInBackground(final Void... params) {
-                    cache.logOffline(LogCacheActivity.this, log, date, typeSelected);
+                    cache.logOffline(LogCacheActivity.this, log, date, typeSelected, reportProblemSelected);
                     Settings.setLastCacheLog(log);
                     return null;
                 }
@@ -749,6 +816,26 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
             @Override
             public void onClick(final DialogInterface dialog, final int position) {
                 setType(possible.get(position));
+                dialog.dismiss();
+            }
+        });
+        alert.create().show();
+    }
+
+    private void selectProblemType() {
+        // use a local copy of the possible problem types, as that one might be modified in the background by the loader
+        final List<ReportProblemType> possible = new ArrayList<>(possibleReportProblemTypes);
+
+        final Builder alert = new AlertDialog.Builder(this);
+        final String[] choices = new String[possible.size()];
+        for (int i = 0; i < choices.length; i++) {
+            choices[i] = getString(possible.get(i).labelId);
+        }
+        alert.setSingleChoiceItems(choices, possible.indexOf(reportProblemSelected), new OnClickListener() {
+
+            @Override
+            public void onClick(final DialogInterface dialog, final int position) {
+                setReportProblem(possible.get(position));
                 dialog.dismiss();
             }
         });
@@ -838,6 +925,14 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         }
         if (typeSelected.mustConfirmLog()) {
             Dialogs.confirm(this, R.string.confirm_log_title, res.getString(R.string.confirm_log_message, typeSelected.getL10n()), new OnClickListener() {
+
+                @Override
+                public void onClick(final DialogInterface dialog, final int which) {
+                    sendLogInternal();
+                }
+            });
+        } else if (reportProblemSelected != ReportProblemType.NO_PROBLEM) {
+            Dialogs.confirm(this, R.string.confirm_report_problem_title, res.getString(R.string.confirm_report_problem_message, reportProblemSelected.getL10n()), new OnClickListener() {
 
                 @Override
                 public void onClick(final DialogInterface dialog, final int which) {

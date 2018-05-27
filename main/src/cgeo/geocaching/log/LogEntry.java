@@ -1,8 +1,12 @@
 package cgeo.geocaching.log;
 
-import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
+import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.R;
+import cgeo.geocaching.models.Image;
+import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.utils.HtmlUtils;
+import cgeo.geocaching.utils.MatcherWrapper;
+
 import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
@@ -11,12 +15,10 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.R;
-import cgeo.geocaching.models.Image;
-import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.utils.HtmlUtils;
-import cgeo.geocaching.utils.MatcherWrapper;
+
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 /**
  * Entry in a log book.
@@ -45,6 +47,8 @@ public final class LogEntry {
     public final int found;
     /** Friend's log entry */
     public final boolean friend;
+    /** Report problem */
+    public final ReportProblemType reportProblem;
     /** log {@link Image} List */
     @NonNull private final List<Image> logImages;
     /** Spotted cache name */
@@ -75,8 +79,10 @@ public final class LogEntry {
         private int found;
         /** Friend's log entry */
         private boolean friend;
+        /** report problem */
+        @NonNull private ReportProblemType reportProblem;
         /** log {@link Image} List */
-        private List<Image> logImages;
+        @NonNull private List<Image> logImages;
         /** Spotted cache name */
         @NonNull private String cacheName; // used for trackables
         /** Spotted cache guid */
@@ -97,10 +103,11 @@ public final class LogEntry {
             date = 0;
             found = -1;
             friend = false;
-            logImages = null;
+            logImages = Collections.emptyList();
             cacheName = "";
             cacheGuid = "";
             cacheGeocode = "";
+            reportProblem = ReportProblemType.NO_PROBLEM;
         }
 
         /**
@@ -109,9 +116,8 @@ public final class LogEntry {
          */
         @NonNull
         public LogEntry build() {
-            final List<Image> finalLogImage = logImages == null ? Collections.<Image>emptyList() : logImages;
             return new LogEntry(id, logType, StringUtils.defaultIfBlank(author, Settings.getUserName()),
-                    message, date, found, friend, finalLogImage, cacheName, cacheGuid, cacheGeocode);
+                    message, date, found, friend, logImages, cacheName, cacheGuid, cacheGeocode, reportProblem);
         }
 
         /**
@@ -269,10 +275,15 @@ public final class LogEntry {
                 return this;
             }
 
-            if (logImages == null || logImages.isEmpty()) {
+            if (logImages.isEmpty()) {
                 logImages = new ArrayList<>();
             }
             logImages.add(image);
+            return this;
+        }
+
+        public Builder setReportProblem(@NonNull final String reportProblemCode) {
+            this.reportProblem = ReportProblemType.findByCode(reportProblemCode);
             return this;
         }
     }
@@ -295,7 +306,7 @@ public final class LogEntry {
     private LogEntry(final int id, @NonNull final LogType logType, @NonNull final String author, @NonNull final String log,
                      final long date, final int found, final boolean friend,
                      @NonNull final List<Image> logImages,
-                     @NonNull final String cacheName, @NonNull final String cacheGuid, @NonNull final String cacheGeocode) {
+                     @NonNull final String cacheName, @NonNull final String cacheGuid, @NonNull final String cacheGeocode, @NonNull final ReportProblemType reportProblem) {
         this.id = id;
         this.logType = logType;
         this.author = author;
@@ -307,6 +318,7 @@ public final class LogEntry {
         this.cacheName = cacheName;
         this.cacheGuid = cacheGuid;
         this.cacheGeocode = cacheGeocode;
+        this.reportProblem = reportProblem;
     }
 
     /**

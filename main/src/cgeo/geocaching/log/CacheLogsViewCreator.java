@@ -5,9 +5,7 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.ui.UserActionsClickListener;
-
-import org.apache.commons.lang3.StringUtils;
+import cgeo.geocaching.ui.UserClickListener;
 
 import android.content.res.Resources;
 import android.view.View;
@@ -19,6 +17,9 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import org.apache.commons.lang3.StringEscapeUtils;
+import org.apache.commons.lang3.StringUtils;
 
 public class CacheLogsViewCreator extends LogsViewCreator {
     private final boolean allLogs;
@@ -135,8 +136,9 @@ public class CacheLogsViewCreator extends LogsViewCreator {
     }
 
     @Override
-    protected UserActionsClickListener createUserActionsListener() {
-        return new UserActionsClickListener(getCache());
+    protected UserClickListener createUserActionsListener(final LogEntry log) {
+        final String userName = StringEscapeUtils.unescapeHtml4(log.author);
+        return UserClickListener.forUser(getCache(), userName, userName);
     }
 
 }

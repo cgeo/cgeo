@@ -1,5 +1,7 @@
 package cgeo.geocaching.maps.mapsforge.v6.caches;
 
+import org.mapsforge.map.layer.LayerManager;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -10,6 +12,7 @@ import java.util.Set;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.mapsforge.v6.MapHandlers;
 import cgeo.geocaching.maps.mapsforge.v6.MfMapView;
 
@@ -37,10 +40,8 @@ public class CachesBundle {
     /**
      * Base initialization without any caches up-front
      *
-     * @param mapView
-     *            the map view this bundle is displayed on
-     * @param mapHandlers
-     *            the handlers of the map to send events to
+     * @param mapView     the map view this bundle is displayed on
+     * @param mapHandlers the handlers of the map to send events to
      */
     public CachesBundle(final MfMapView mapView, final MapHandlers mapHandlers) {
         this.mapView = mapView;
@@ -61,55 +62,45 @@ public class CachesBundle {
     /**
      * Initialization with search result (nearby, list)
      *
-     * @param search
-     *            the SearchResult to display through this bundle
-     * @param mapView
-     *            the map view this bundle is displayed on
-     * @param mapHandlers
-     *            the handlers of the map to send events to
+     * @param search      the SearchResult to display through this bundle
+     * @param mapView     the map view this bundle is displayed on
+     * @param mapHandlers the handlers of the map to send events to
      */
     public CachesBundle(final SearchResult search, final MfMapView mapView, final MapHandlers mapHandlers) {
         this(mapView, mapHandlers);
-        this.baseOverlay = new CachesOverlay(search, BASE_OVERLAY_ID, this.geoEntries, this.mapView, separators.get(BASE_SEPARATOR), this.mapHandlers);
+        this.baseOverlay = new CachesOverlay(search, BASE_OVERLAY_ID, this.geoEntries, this, separators.get(BASE_SEPARATOR), this.mapHandlers);
     }
 
     /**
      * Initialization with single cache
      *
-     * @param geocode
-     *            the geocode for single cache display through this bundle
-     * @param mapView
-     *            the map view this bundle is displayed on
-     * @param mapHandlers
-     *            the handlers of the map to send events to
+     * @param geocode     the geocode for single cache display through this bundle
+     * @param mapView     the map view this bundle is displayed on
+     * @param mapHandlers the handlers of the map to send events to
      */
     public CachesBundle(final String geocode, final MfMapView mapView, final MapHandlers mapHandlers) {
         this(mapView, mapHandlers);
-        this.baseOverlay = new CachesOverlay(geocode, BASE_OVERLAY_ID, this.geoEntries, this.mapView, separators.get(BASE_SEPARATOR), this.mapHandlers);
+        this.baseOverlay = new CachesOverlay(geocode, BASE_OVERLAY_ID, this.geoEntries, this, separators.get(BASE_SEPARATOR), this.mapHandlers);
     }
 
     /**
      * Initialization with single waypoint
      *
-     * @param coords
-     *            coordinates for single waypoint to display through this bundle
-     * @param waypointType
-     *            type for single waypoint to display through this bundle
-     * @param mapView
-     *            the map view this bundle is displayed on
-     * @param mapHandlers
-     *            the handlers of the map to send events to
+     * @param coords       coordinates for single waypoint to display through this bundle
+     * @param waypointType type for single waypoint to display through this bundle
+     * @param mapView      the map view this bundle is displayed on
+     * @param mapHandlers  the handlers of the map to send events to
      */
     public CachesBundle(final Geopoint coords, final WaypointType waypointType, final MfMapView mapView, final MapHandlers mapHandlers) {
         this(mapView, mapHandlers);
-        this.baseOverlay = new SinglePointOverlay(coords, waypointType, BASE_OVERLAY_ID, this.geoEntries, this.mapView, separators.get(BASE_SEPARATOR), this.mapHandlers);
+        this.baseOverlay = new SinglePointOverlay(coords, waypointType, BASE_OVERLAY_ID, this.geoEntries, this, separators.get(BASE_SEPARATOR), this.mapHandlers);
     }
 
     public void handleLiveLayers(final boolean enable) {
         if (enable) {
             if (this.liveOverlay == null) {
                 final SeparatorLayer separator2 = this.separators.get(LIVE_SEPARATOR);
-                this.liveOverlay = new LiveCachesOverlay(LIVE_OVERLAY_ID, this.geoEntries, this.mapView, separator2, this.mapHandlers);
+                this.liveOverlay = new LiveCachesOverlay(LIVE_OVERLAY_ID, this.geoEntries, this, separator2, this.mapHandlers);
             }
         } else {
             // Disable only download, keep stored caches
@@ -122,8 +113,8 @@ public class CachesBundle {
 
     /**
      * Enables the stored cache layer. No disabling again!
-     * @param enable
-     *          true - enable stored layer, false - leave untouched
+     *
+     * @param enable true - enable stored layer, false - leave untouched
      */
     public void enableStoredLayers(final boolean enable) {
         if (!enable || this.storedOverlay != null) {
@@ -131,7 +122,7 @@ public class CachesBundle {
         }
 
         final SeparatorLayer separator1 = this.separators.get(STORED_SEPARATOR);
-        this.storedOverlay = new StoredCachesOverlay(STORED_OVERLAY_ID, this.geoEntries, this.mapView, separator1, this.mapHandlers);
+        this.storedOverlay = new StoredCachesOverlay(STORED_OVERLAY_ID, this.geoEntries, this, separator1, this.mapHandlers);
     }
 
     public void onDestroy() {
@@ -153,52 +144,52 @@ public class CachesBundle {
         this.separators.clear();
     }
 
-    public int getVisibleItemsCount() {
+    public int getVisibleCachesCount() {
 
         int result = 0;
 
         if (this.baseOverlay != null) {
-            result += this.baseOverlay.getVisibleItemsCount();
+            result += this.baseOverlay.getVisibleCachesCount();
         }
         if (this.storedOverlay != null) {
-            result += this.storedOverlay.getVisibleItemsCount();
+            result += this.storedOverlay.getVisibleCachesCount();
         }
         if (this.liveOverlay != null) {
-            result += this.liveOverlay.getVisibleItemsCount();
+            result += this.liveOverlay.getVisibleCachesCount();
         }
 
         return result;
     }
 
-    public Set<String> getVisibleGeocodes() {
+    public Set<String> getVisibleCacheGeocodes() {
 
         final Set<String> result = new HashSet<>();
 
         if (this.baseOverlay != null) {
-            result.addAll(this.baseOverlay.getVisibleGeocodes());
+            result.addAll(this.baseOverlay.getVisibleCacheGeocodes());
         }
         if (this.liveOverlay != null) {
-            result.addAll(this.liveOverlay.getVisibleGeocodes());
+            result.addAll(this.liveOverlay.getVisibleCacheGeocodes());
         }
         if (this.storedOverlay != null) {
-            result.addAll(this.storedOverlay.getVisibleGeocodes());
+            result.addAll(this.storedOverlay.getVisibleCacheGeocodes());
         }
 
         return result;
     }
 
-    public int getItemsCount() {
+    public int getCachesCount() {
 
         int result = 0;
 
         if (baseOverlay != null) {
-            result += baseOverlay.getItemsCount();
+            result += baseOverlay.getCachesCount();
         }
         if (storedOverlay != null) {
-            result += storedOverlay.getItemsCount();
+            result += storedOverlay.getCachesCount();
         }
         if (liveOverlay != null) {
-            result += liveOverlay.getItemsCount();
+            result += liveOverlay.getCachesCount();
         }
 
         return result;
@@ -224,5 +215,17 @@ public class CachesBundle {
 
     public boolean isDownloading() {
         return liveOverlay != null && liveOverlay.isDownloading();
+    }
+
+    Viewport getViewport() {
+        return mapView.getViewport();
+    }
+
+    int getMapZoomLevel() {
+        return mapView.getMapZoomLevel();
+    }
+
+    LayerManager getLayerManager() {
+        return mapView.getLayerManager();
     }
 }

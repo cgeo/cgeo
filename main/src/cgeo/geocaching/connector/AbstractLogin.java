@@ -8,9 +8,11 @@ import cgeo.geocaching.network.Network;
 import cgeo.geocaching.settings.Credentials;
 import cgeo.geocaching.settings.DiskCookieStore;
 
-import org.apache.commons.lang3.StringUtils;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+
+
+import org.apache.commons.lang3.StringUtils;
 
 public abstract class AbstractLogin {
 
@@ -93,5 +95,11 @@ public abstract class AbstractLogin {
 
     @NonNull
     protected abstract StatusCode login(final boolean retry, @NonNull final Credentials credentials);
+
+    public void increaseActualCachesFound() {
+        if (actualCachesFound >= 0) {
+            actualCachesFound++;
+        }
+    }
 
 }

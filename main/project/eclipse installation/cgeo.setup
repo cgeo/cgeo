@@ -236,7 +236,7 @@
         label="Eclipse Release Repository"
         licenseConfirmationDisabled="true">
       <repository
-          url="http://download.eclipse.org/releases/neon/"/>
+          url="http://download.eclipse.org/releases/oxygen"/>
     </setupTask>
     <setupTask
         xsi:type="setup.p2:P2Task"
@@ -269,7 +269,7 @@
       <requirement
           name="org.eclipse.buildship.feature.group"/>
       <repository
-          url="http://download.eclipse.org/buildship/updates/e46/releases"/>
+          url="http://download.eclipse.org/buildship/updates/e47/releases/"/>
       <description></description>
     </setupTask>
     <setupTask
@@ -310,12 +310,12 @@
     </setupTask>
     <setupTask
         xsi:type="setup.p2:P2Task"
-        label="Findbugs"
+        label="Spotbugs"
         licenseConfirmationDisabled="true">
       <requirement
-          name="edu.umd.cs.findbugs.plugin.eclipse.feature.group"/>
+          name="com.github.spotbugs.plugin.eclipse.feature.group"/>
       <repository
-          url="http://findbugs.cs.umd.edu/eclipse/"/>
+          url="https://spotbugs.github.io/eclipse/"/>
     </setupTask>
     <setupTask
         xsi:type="setup.p2:P2Task"

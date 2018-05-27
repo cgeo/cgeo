@@ -2,7 +2,6 @@ package cgeo.geocaching.files;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.ui.dialog.Dialogs;
-import cgeo.geocaching.ui.recyclerview.AbstractRecyclerViewAdapter;
 import cgeo.geocaching.ui.recyclerview.AbstractRecyclerViewHolder;
 import cgeo.geocaching.utils.FileUtils;
 
@@ -19,7 +18,7 @@ import java.util.List;
 
 import butterknife.BindView;
 
-class GPXListAdapter extends AbstractRecyclerViewAdapter<GPXListAdapter.ViewHolder> {
+class GPXListAdapter extends RecyclerView.Adapter<GPXListAdapter.ViewHolder> {
     private final GpxFileListActivity activity;
     @NonNull private final List<File> files;
 
@@ -50,7 +49,7 @@ class GPXListAdapter extends AbstractRecyclerViewAdapter<GPXListAdapter.ViewHold
 
             @Override
             public void onClick(final View view) {
-                final File file = files.get(viewHolder.getItemPosition());
+                final File file = files.get(viewHolder.getAdapterPosition());
                 (new GPXImporter(activity, activity.getListId(), null)).importGPX(file);
             }
         });
@@ -58,7 +57,7 @@ class GPXListAdapter extends AbstractRecyclerViewAdapter<GPXListAdapter.ViewHold
 
             @Override
             public boolean onLongClick(final View view) {
-                final File file = files.get(viewHolder.getItemPosition());
+                final File file = files.get(viewHolder.getAdapterPosition());
                 Dialogs.confirmYesNo(activity, R.string.gpx_import_delete_title, activity.getString(R.string.gpx_import_delete_message, file.getName()), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(final DialogInterface dialog, final int id) {
@@ -79,7 +78,6 @@ class GPXListAdapter extends AbstractRecyclerViewAdapter<GPXListAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-        super.onBindViewHolder(holder, position);
         final File file = files.get(position);
 
         holder.filepath.setText(file.getParent());

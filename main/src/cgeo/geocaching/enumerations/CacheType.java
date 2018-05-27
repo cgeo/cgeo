@@ -1,15 +1,16 @@
 package cgeo.geocaching.enumerations;
 
-import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.R;
-import cgeo.geocaching.models.Geocache;
+import android.support.annotation.NonNull;
 
 import org.apache.commons.lang3.StringUtils;
-import android.support.annotation.NonNull;
 
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+
+import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.R;
+import cgeo.geocaching.models.Geocache;
 
 /**
  * Enum listing all cache types
@@ -89,6 +90,12 @@ public enum CacheType {
         FIND_BY_PATTERN.put("Multistep Virtual cache".toLowerCase(Locale.US), MYSTERY);
         FIND_BY_PATTERN.put("Contest".toLowerCase(Locale.US), EVENT);
         FIND_BY_PATTERN.put("Event".toLowerCase(Locale.US), EVENT);
+
+        // OC, https://github.com/opencaching/gpx-extension-v1/blob/master/schema.xsd
+        FIND_BY_PATTERN.put("Quiz Cache".toLowerCase(Locale.US), MYSTERY);
+        FIND_BY_PATTERN.put("Moving Cache".toLowerCase(Locale.US), MYSTERY);
+        FIND_BY_PATTERN.put("Podcast Cache".toLowerCase(Locale.US), MYSTERY);
+        FIND_BY_PATTERN.put("Own Cache".toLowerCase(Locale.US), MYSTERY);
     }
 
     @NonNull

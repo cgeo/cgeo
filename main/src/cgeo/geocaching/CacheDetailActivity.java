@@ -60,12 +60,13 @@ import cgeo.geocaching.ui.EditNoteDialog.EditNoteDialogListener;
 import cgeo.geocaching.ui.ImagesList;
 import cgeo.geocaching.ui.IndexOutOfBoundsAvoidingTextView;
 import cgeo.geocaching.ui.NavigationActionProvider;
-import cgeo.geocaching.ui.OwnerActionsClickListener;
 import cgeo.geocaching.ui.TrackableListAdapter;
+import cgeo.geocaching.ui.UserClickListener;
 import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.recyclerview.RecyclerViewProvider;
 import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.CheckerUtils;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.CryptUtils;
@@ -715,7 +716,8 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 ignoreCache();
                 return true;
             case R.id.menu_extract_waypoints:
-                extractWaypoints(cache.getDescription(), cache);
+                final String searchText = cache.getShortDescription() + ' ' + cache.getDescription();
+                extractWaypoints(searchText, cache);
                 return true;
             case R.id.menu_export_gpx:
                 new GpxExport().export(Collections.singletonList(cache), this);
@@ -1135,13 +1137,22 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 } else { // OwnerReal guaranteed to be not blank based on above
                     ownerView.setText(cache.getOwnerUserId(), TextView.BufferType.SPANNABLE);
                 }
-                ownerView.setOnClickListener(new OwnerActionsClickListener(cache));
+                ownerView.setOnClickListener(UserClickListener.forOwnerOf(cache));
             }
 
             // hidden or event date
             final TextView hiddenView = details.addHiddenDate(cache);
             if (hiddenView != null) {
                 addContextMenu(hiddenView);
+                if (cache.isEventCache()) {
+                    hiddenView.setOnClickListener(new OnClickListener() {
+
+                        @Override
+                        public void onClick(final View v) {
+                            CalendarUtils.openCalendar(CacheDetailActivity.this, cache.getHiddenDate());
+                        }
+                    });
+                }
             }
 
             // cache location
@@ -2271,7 +2282,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     cache.setCoords(wpt.getCoords());
                     cache.setUserModifiedCoords(false);
                     cache.deleteWaypointForce(wpt);
-                    DataStore.saveChangedCache(cache);
+                    DataStore.saveUserModifiedCoords(cache);
                     handler.sendEmptyMessage(HandlerResetCoordinates.LOCAL);
                 }
 
@@ -2392,20 +2403,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         offlineRefresh.setOnClickListener(refreshCacheClickListener);
 
         if (cache.isOffline()) {
-            final long diff = (System.currentTimeMillis() / (60 * 1000)) - (cache.getUpdated() / (60 * 1000)); // minutes
-
-            final String ago;
-            if (diff < 15) {
-                ago = res.getString(R.string.cache_offline_time_mins_few);
-            } else if (diff < 50) {
-                ago = res.getQuantityString(R.plurals.cache_offline_about_time_mins, (int) diff, (int) diff);
-            } else if (diff < (48 * 60)) {
-                ago = res.getQuantityString(R.plurals.cache_offline_about_time_hours, (int) (diff / 60), (int) (diff / 60));
-            } else {
-                ago = res.getQuantityString(R.plurals.cache_offline_about_time_days, (int) (diff / (24 * 60)), (int) (diff / (24 * 60)));
-            }
-
-            offlineText.setText(res.getString(R.string.cache_offline_stored) + "\n" + ago);
+            offlineText.setText(Formatter.formatStoredAgo(cache.getUpdated()));
 
             offlineStoreDrop.setOnClickListener(dropCacheClickListener);
             offlineStoreDrop.setOnLongClickListener(null);

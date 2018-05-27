@@ -22,6 +22,7 @@ import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
+import cgeo.geocaching.log.ReportProblemType;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.models.Trackable;
@@ -58,6 +59,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
 import java.util.regex.Pattern;
+
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -128,6 +130,7 @@ final class OkapiClient {
     private static final String CACHE_MY_NOTES = "my_notes";
     private static final String CACHE_TRACKABLES_COUNT = "trackables_count";
     private static final String CACHE_TRACKABLES = "trackables";
+    private static final String CACHE_USER_PROFILE = "profile_url";
 
     private static final String TRK_GEOCODE = "code";
     private static final String TRK_NAME = "name";
@@ -315,7 +318,7 @@ final class OkapiClient {
     }
 
     @NonNull
-    public static LogResult postLog(@NonNull final Geocache cache, @NonNull final LogType logType, @NonNull final Calendar date, @NonNull final String log, @Nullable final String logPassword, @NonNull final OCApiConnector connector) {
+    public static LogResult postLog(@NonNull final Geocache cache, @NonNull final LogType logType, @NonNull final Calendar date, @NonNull final String log, @Nullable final String logPassword, @NonNull final OCApiConnector connector, @NonNull final ReportProblemType reportProblem) {
         final Parameters params = new Parameters("cache_code", cache.getGeocode());
         params.add("logtype", logType.ocType);
         params.add("comment", log);
@@ -326,6 +329,9 @@ final class OkapiClient {
         }
         if (logPassword != null) {
             params.add("password", logPassword);
+        }
+        if (reportProblem == ReportProblemType.NEEDS_MAINTENANCE) { // OKAPI only knows this one problem type
+            params.add("needs_maintenance2", "true");
         }
 
         final ObjectNode data = getRequest(connector, OkapiService.SERVICE_SUBMIT_LOG, params).data;
@@ -460,6 +466,13 @@ final class OkapiClient {
             cache.setOwnerDisplayName(owner);
             // OpenCaching has no distinction between user id and user display name. Set the ID anyway to simplify c:geo workflows.
             cache.setOwnerUserId(owner);
+            final String profile = response.get(CACHE_OWNER).get(CACHE_USER_PROFILE).asText();
+            if (StringUtils.isNotEmpty(profile)) {
+                final String id = StringUtils.substringAfter(profile, "userid=");
+                if (StringUtils.isNotEmpty(id)) {
+                    cache.setOwnerUserId(id);
+                }
+            }
 
             final Map<LogType, Integer> logCounts = cache.getLogCounts();
             logCounts.put(LogType.FOUND_IT, response.get(CACHE_FOUNDS).asInt());

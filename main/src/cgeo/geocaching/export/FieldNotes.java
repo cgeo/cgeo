@@ -1,6 +1,8 @@
 package cgeo.geocaching.export;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.log.LogEntry;
+import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.SynchronizedDateFormat;
@@ -36,6 +38,9 @@ class FieldNotes {
                 .append(",\"")
                 .append(StringUtils.replaceChars(log.log, '"', '\''))
                 .append("\"\n");
+        if (log.reportProblem.logType != LogType.UNKNOWN) {
+            add(cache, new LogEntry.Builder().setLog(CgeoApplication.getInstance().getString(log.reportProblem.textId)).setLogType(log.reportProblem.logType).setDate(log.date).build());
+        }
     }
 
     public String getContent() {

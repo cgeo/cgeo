@@ -1,7 +1,5 @@
 package cgeo.geocaching.models;
 
-import org.apache.commons.lang3.StringUtils;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -342,74 +340,6 @@ public class GeocacheTest extends CGeoTestCase {
         final Geocache cache = new Geocache();
         cache.setName("GR8 01-01");
         assertThat(cache.getNameForSorting()).isEqualTo("GR000008 000001-000001");
-    }
-
-    public static void testGuessEventTime() {
-        assertTime("text 14:20 text", 14, 20);
-
-        // illegal minute/hour values
-        assertNoTime("text 30:40 text");
-        assertNoTime("text 14:90 text");
-
-        final String timeHours = CgeoApplication.getInstance().getString(R.string.cache_time_full_hours);
-
-        // full hour only
-        assertTime("text 16 " + timeHours, 16, 0);
-
-        // full hour, lower case
-        assertTime("text 16 " + StringUtils.lowerCase(timeHours), 16, 0);
-
-        // hour and minutes, different separators
-        assertTime("text 16:00 " + timeHours, 16, 0);
-        assertTime("text 16.00 " + timeHours, 16, 0);
-
-        // at the end of a sentence
-        assertTime("text 14:20.", 14, 20);
-
-        // including formatting
-        assertTime("<b>14:20</b>", 14, 20);
-
-        // time ranges
-        assertTime("<u><em>Uhrzeit:</em></u> 17-20 " + timeHours + "</span></strong>", 17, 0);
-        assertTime("von 11 bis 13 " + timeHours, 11, 0);
-        assertTime("from 11 to 13 " + timeHours, 11, 0);
-        assertTime("von 19.15 " + timeHours + " bis ca.20.30 " + timeHours + " statt", 19, 15);
-
-        // same without space between time and time string
-        assertTime("text 16" + timeHours, 16, 0);
-        assertTime("text 16" + StringUtils.lowerCase(timeHours), 16, 0);
-        assertTime("text 16:00" + timeHours, 16, 0);
-        assertTime("text 16.00" + timeHours, 16, 0);
-        assertTime("<u><em>Uhrzeit:</em></u> 17-20" + timeHours + "</span></strong>", 17, 0);
-        assertTime("von 11 bis 13" + timeHours, 11, 0);
-        assertTime("from 11 to 13" + timeHours, 11, 0);
-        assertTime("von 19.15" + timeHours + " bis ca.20.30 " + timeHours + " statt", 19, 15);
-
-        // #6285
-        assertTime("Dienstag den 31. Januar ab 18:00" + timeHours + " (das Logbuch liegt bis mind. 20:30 " + timeHours + " aus)", 18, 0);
-    }
-
-    public static void testGuessEventTimeShortDescription() {
-        final Geocache cache = new Geocache();
-        cache.setType(CacheType.EVENT);
-        cache.setDescription(StringUtils.EMPTY);
-        cache.setShortDescription("text 14:20 text");
-        assertThat(cache.getEventTimeMinutes()).isEqualTo(14 * 60 + 20);
-    }
-
-    private static void assertTime(final String description, final int hours, final int minutes) {
-        final Geocache cache = new Geocache();
-        cache.setDescription(description);
-        cache.setType(CacheType.EVENT);
-        final int minutesAfterMidnight = hours * 60 + minutes;
-        assertThat(cache.getEventTimeMinutes()).isEqualTo(minutesAfterMidnight);
-    }
-
-    private static void assertNoTime(final String description) {
-        final Geocache cache = new Geocache();
-        cache.setDescription(description);
-        cache.setType(CacheType.EVENT);
-        assertThat(cache.getEventTimeMinutes()).isEqualTo(-1);
     }
 
     public static void testGetPossibleLogTypes() throws Exception {

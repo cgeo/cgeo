@@ -1,40 +1,5 @@
 package cgeo.geocaching.models;
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
-import android.content.res.Resources;
-import android.net.Uri;
-import android.os.Handler;
-import android.os.Message;
-import android.os.Parcelable;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.text.Html;
-
-import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.collections4.ListUtils;
-import org.apache.commons.lang3.BooleanUtils;
-import org.apache.commons.lang3.ObjectUtils;
-import org.apache.commons.lang3.StringUtils;
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Date;
-import java.util.EnumMap;
-import java.util.EnumSet;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-import java.util.regex.Pattern;
-
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
@@ -65,6 +30,7 @@ import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogTemplateProvider;
 import cgeo.geocaching.log.LogTemplateProvider.LogContext;
 import cgeo.geocaching.log.LogType;
+import cgeo.geocaching.log.ReportProblemType;
 import cgeo.geocaching.maps.mapsforge.v6.caches.GeoitemRef;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.settings.Settings;
@@ -74,14 +40,50 @@ import cgeo.geocaching.storage.DataStore.StorageLocation;
 import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.DisposableHandler;
+import cgeo.geocaching.utils.EventTimeParser;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.LazyInitializedList;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
+
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.content.res.Resources;
+import android.net.Uri;
+import android.os.Handler;
+import android.os.Message;
+import android.os.Parcelable;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.text.Html;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Date;
+import java.util.EnumMap;
+import java.util.EnumSet;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+import java.util.regex.Pattern;
+
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import io.reactivex.Scheduler;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.collections4.ListUtils;
+import org.apache.commons.lang3.BooleanUtils;
+import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Internal representation of a "cache"
@@ -171,8 +173,6 @@ public class Geocache implements IWaypoint {
     private static final Pattern NUMBER_PATTERN = Pattern.compile("\\d+");
 
     private Handler changeNotificationHandler = null;
-
-    private static final List<Pattern> EVENT_TIME_PATTERNS = new ArrayList<>();
 
     public void setChangeNotificationHandler(final Handler newNotificationHandler) {
         changeNotificationHandler = newNotificationHandler;
@@ -455,13 +455,13 @@ public class Geocache implements IWaypoint {
         fromActivity.startActivity(LogCacheActivity.getLogCacheIntent(fromActivity, cacheId, geocode));
     }
 
-    public void logOffline(final Activity fromActivity, final LogType logType) {
+    public void logOffline(final Activity fromActivity, final LogType logType, final ReportProblemType reportProblem) {
         final boolean mustIncludeSignature = StringUtils.isNotBlank(Settings.getSignature()) && Settings.isAutoInsertSignature();
         final String initial = mustIncludeSignature ? LogTemplateProvider.applyTemplates(Settings.getSignature(), new LogContext(this, null, true)) : "";
-        logOffline(fromActivity, initial, Calendar.getInstance(), logType);
+        logOffline(fromActivity, initial, Calendar.getInstance(), logType, reportProblem);
     }
 
-    public void logOffline(final Activity fromActivity, final String log, final Calendar date, final LogType logType) {
+    public void logOffline(final Activity fromActivity, final String log, final Calendar date, final LogType logType, final ReportProblemType reportProblem) {
         if (logType == LogType.UNKNOWN) {
             return;
         }
@@ -471,7 +471,7 @@ public class Geocache implements IWaypoint {
             DataStore.saveCache(this, LoadFlags.SAVE_ALL);
         }
 
-        final boolean status = DataStore.saveLogOffline(geocode, date.getTime(), logType, log);
+        final boolean status = DataStore.saveLogOffline(geocode, date.getTime(), logType, log, reportProblem);
 
         final Resources res = fromActivity.getResources();
         if (status) {
@@ -1815,46 +1815,7 @@ public class Geocache implements IWaypoint {
         }
 
         final String searchText = getShortDescription() + ' ' + getDescription();
-        int start = -1;
-        int eventTimeMinutes = -1;
-        for (final Pattern pattern : getEventTimePatterns()) {
-            final MatcherWrapper matcher = new MatcherWrapper(pattern, searchText);
-            while (matcher.find()) {
-                try {
-                    final int hours = Integer.parseInt(matcher.group(1));
-                    int minutes = 0;
-                    if (matcher.groupCount() >= 2 && StringUtils.isNotEmpty(matcher.group(2))) {
-                        minutes = Integer.parseInt(matcher.group(2));
-                    }
-                    if (hours >= 0 && hours < 24 && minutes >= 0 && minutes < 60
-                         && (eventTimeMinutes == -1 || matcher.start() < start)) {
-                            eventTimeMinutes = hours * 60 + minutes;
-                            start = matcher.start();
-                    }
-                } catch (final NumberFormatException ignored) {
-                    // cannot happen, but static code analysis doesn't know
-                }
-            }
-        }
-        return eventTimeMinutes;
-    }
-
-    private List<Pattern> getEventTimePatterns() {
-        if (EVENT_TIME_PATTERNS.isEmpty()) {
-            final String hourLocalized = CgeoApplication.getInstance().getString(R.string.cache_time_full_hours);
-
-            // 12:34
-            EVENT_TIME_PATTERNS.add(Pattern.compile("\\b(\\d{1,2})\\:(\\d\\d)\\b"));
-            if (StringUtils.isNotBlank(hourLocalized)) {
-                // 12:34o'clock
-                EVENT_TIME_PATTERNS.add(Pattern.compile("\\b(\\d{1,2})\\:(\\d\\d)" + Pattern.quote(hourLocalized), Pattern.CASE_INSENSITIVE));
-                // 17 - 20 o'clock
-                EVENT_TIME_PATTERNS.add(Pattern.compile("\\b(\\d{1,2})(?:\\.00)?" + "\\s*(?:-|[a-z]+)\\s?" + "(?:\\d{1,2})(?:\\.00)?" + "\\s?" + Pattern.quote(hourLocalized), Pattern.CASE_INSENSITIVE));
-                // 12 o'clock, 12.00 o'clock
-                EVENT_TIME_PATTERNS.add(Pattern.compile("\\b(\\d{1,2})(?:\\.(00|15|30|45))?\\s?" + Pattern.quote(hourLocalized), Pattern.CASE_INSENSITIVE));
-            }
-        }
-        return EVENT_TIME_PATTERNS;
+        return EventTimeParser.guessEventTimeMinutes(searchText);
     }
 
     public boolean hasStaticMap() {

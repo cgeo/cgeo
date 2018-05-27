@@ -89,6 +89,7 @@ import butterknife.ButterKnife;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -97,14 +98,18 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class CGeoMap extends AbstractMap implements ViewFactory {
 
-    /** max. number of caches displayed in the Live Map */
+    /**
+     * max. number of caches displayed in the Live Map
+     */
     public static final int MAX_CACHES = 500;
     /**
      * initialization with an empty subscription to make static code analysis tools more happy
      */
     private final CompositeDisposable resumeDisposables = new CompositeDisposable();
 
-    /** Handler Messages */
+    /**
+     * Handler Messages
+     */
     private static final int HIDE_PROGRESS = 0;
     private static final int SHOW_PROGRESS = 1;
     private static final int UPDATE_TITLE = 0;
@@ -128,7 +133,9 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
     private final GeoDirHandler geoDirUpdate = new UpdateLoc(this);
     // status data
-    /** Last search result used for displaying header */
+    /**
+     * Last search result used for displaying header
+     */
     private SearchResult lastSearchResult = null;
     private MapTokens tokens = null;
     private boolean noMapTokenShowed = false;
@@ -137,14 +144,20 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
     // threads
     private Disposable loadTimer;
     private LoadDetails loadDetailsThread = null;
-    /** Time of last {@link LoadRunnable} run */
+    /**
+     * Time of last {@link LoadRunnable} run
+     */
     private volatile long loadThreadRun = 0L;
     //Interthread communication flag
     private volatile boolean downloaded = false;
 
-    /** Count of caches currently visible */
+    /**
+     * Count of caches currently visible
+     */
     private int cachesCnt = 0;
-    /** List of waypoints in the viewport */
+    /**
+     * List of waypoints in the viewport
+     */
     private final LeastRecentlyUsedSet<Waypoint> waypoints = new LeastRecentlyUsedSet<>(MAX_CACHES);
     // storing for offline
     private ProgressDialog waitDialog = null;
@@ -173,7 +186,10 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
     private static final ThreadPoolExecutor loadExecutor = new ThreadPoolExecutor(1, 1, 60, TimeUnit.SECONDS, loadQueue, new ThreadPoolExecutor.DiscardOldestPolicy());
     private MapOptions mapOptions;
     // handlers
-    /** Updates the titles */
+
+    /**
+     * Updates the titles
+     */
 
     private static final class DisplayHandler extends WeakReferenceHandler<CGeoMap> {
 
@@ -279,11 +295,14 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         return actionBar;
     }
 
-    /** Updates the progress. */
+    /**
+     * Updates the progress.
+     */
     private static final class ShowProgressHandler extends Handler {
         private int counter = 0;
 
-        @NonNull private final WeakReference<CGeoMap> mapRef;
+        @NonNull
+        private final WeakReference<CGeoMap> mapRef;
 
         ShowProgressHandler(@NonNull final CGeoMap map) {
             this.mapRef = new WeakReference<>(map);
@@ -300,6 +319,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
                 showProgress(false);
             }
         }
+
         private void showProgress(final boolean show) {
             final CGeoMap map = mapRef.get();
             if (map == null) {
@@ -354,6 +374,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
                 }
             }
         }
+
         @Override
         public void handleDispose() {
             final CGeoMap map = mapRef.get();
@@ -485,7 +506,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
     /**
      * Set the zoom of the map. The zoom is restricted to a certain minimum in case of live map.
-     *
      */
     private void setZoom(final int zoom) {
         mapView.getMapController().setZoom(mapOptions.isLiveEnabled ? Math.max(zoom, MIN_LIVEMAP_ZOOM) : zoom);
@@ -518,7 +538,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
             AndroidRxUtils.refreshScheduler.scheduleDirect(new Runnable() {
                 @Override
                 public void run() {
-                    for (final String geocode: toRefresh) {
+                    for (final String geocode : toRefresh) {
                         final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_WAYPOINTS);
                         if (cache != null) {
                             // new collection type needs to remove first
@@ -561,7 +581,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         final SubMenu subMenuStrategy = menu.findItem(R.id.submenu_strategy).getSubMenu();
         subMenuStrategy.setHeaderTitle(res.getString(R.string.map_strategy_title));
 
-            /* if we have an Actionbar find the my position toggle */
+        /* if we have an Actionbar find the my position toggle */
         final MenuItem item = menu.findItem(R.id.menu_toggle_mypos);
         myLocSwitch = new CheckBox(activity);
         myLocSwitch.setButtonDrawable(R.drawable.ic_menu_myposition);
@@ -771,10 +791,10 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
             if (Settings.getChooseList()) {
                 // let user select list to store cache in
                 new StoredList.UserInterface(activity).promptForMultiListSelection(R.string.list_title, new Action1<Set<Integer>>() {
-                            @Override
+                    @Override
                     public void call(final Set<Integer> selectedListIds) {
                         storeCaches(geocodesInViewport, selectedListIds);
-                            }
+                    }
                 }, true, Collections.<Integer>emptySet(), false);
             } else {
                 storeCaches(geocodesInViewport, Collections.singleton(StoredList.STANDARD_LIST_ID));
@@ -867,7 +887,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
         for (final String geocode : geocodes) {
             if (!DataStore.isOffline(geocode, null)) {
-                    unsavedGeocodes.add(geocode);
+                unsavedGeocodes.add(geocode);
             }
         }
         return unsavedGeocodes;
@@ -876,8 +896,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
     /**
      * Restart the current activity if the map provider has changed, or change the map source if needed.
      *
-     * @param newSource
-     *            the new map source, which can be the same as the current one
+     * @param newSource the new map source, which can be the same as the current one
      * @return true if a restart is needed, false otherwise
      */
     private boolean changeMapSource(@NonNull final MapSource newSource) {
@@ -921,7 +940,8 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
             return null;
         }
         final GeoPointImpl mapCenter = mapView.getMapViewCenter();
-        return new MapState(mapCenter.getCoords(), mapView.getMapZoomLevel(), followMyLocation, overlayCaches.getCircles(), null, null, mapOptions.isLiveEnabled, false);
+        // For the 'old' map, isStoredEnabled == isLiveEnabled
+        return new MapState(mapCenter.getCoords(), mapView.getMapZoomLevel(), followMyLocation, overlayCaches.getCircles(), null, null, mapOptions.isLiveEnabled, mapOptions.isLiveEnabled);
     }
 
     private void savePrefs() {
@@ -1048,7 +1068,8 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
     private static final class LoadTimerAction implements Runnable {
 
-        @NonNull private final WeakReference<CGeoMap> mapRef;
+        @NonNull
+        private final WeakReference<CGeoMap> mapRef;
         private int previousZoom = -100;
         private Viewport previousViewport;
 
@@ -1099,7 +1120,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
     /**
      * get if map is loading something
-     *
      */
     private boolean isLoading() {
         return !loadTimer.isDisposed() &&
@@ -1334,8 +1354,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
     /**
      * store caches, invoked by "store offline" menu item
      *
-     * @param listIds
-     *            the lists to store the caches in
+     * @param listIds the lists to store the caches in
      */
     private void storeCaches(final Set<String> geocodes, final Set<Integer> listIds) {
         final LoadDetailsHandler loadDetailsHandler = new LoadDetailsHandler(this);

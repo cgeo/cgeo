@@ -1,19 +1,22 @@
 package cgeo.geocaching.utils;
 
+import static org.assertj.core.api.Java6Assertions.assertThat;
+
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.models.Waypoint;
 
 import android.annotation.SuppressLint;
+import android.text.format.DateUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+
 import junit.framework.TestCase;
-import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class FormatterTest extends TestCase {
 
@@ -89,6 +92,23 @@ public class FormatterTest extends TestCase {
 
         final List<CharSequence> truncated = Formatter.truncateCommonSubdir(dirs);
         assertThat(truncated.get(0)).isEqualTo("/data/data/cgeo.geocaching/files");
+    }
+
+    public static void testFormatStoredAgo() {
+        assertThat(Formatter.formatStoredAgo(0)).isEqualTo("Stored in device\n");
+        assertFormatStoredAgo(DateUtils.MINUTE_IN_MILLIS * 10, "Stored in device\na few minutes ago");
+        assertFormatStoredAgo(DateUtils.MINUTE_IN_MILLIS * 20, "Stored in device\nabout 20 minutes ago");
+        assertFormatStoredAgo(DateUtils.MINUTE_IN_MILLIS * 65, "Stored in device\nabout 1 hour ago");
+        assertFormatStoredAgo(DateUtils.HOUR_IN_MILLIS * 45, "Stored in device\nabout 45 hours ago");
+        assertFormatStoredAgo(DateUtils.HOUR_IN_MILLIS * 50, "Stored in device\nabout 2 days ago");
+        assertFormatStoredAgo(DateUtils.DAY_IN_MILLIS * 30, "Stored in device\nabout 30 days ago");
+        assertFormatStoredAgo(DateUtils.DAY_IN_MILLIS * 31, "Stored in device\nabout 1 month ago");
+        assertFormatStoredAgo(DateUtils.DAY_IN_MILLIS * 66, "Stored in device\nabout 2 months ago");
+        assertFormatStoredAgo(DateUtils.DAY_IN_MILLIS * 366, "Stored in device\nover a year ago");
+    }
+
+    private static void assertFormatStoredAgo(final long agoInMillis, final String expected) {
+        assertThat(Formatter.formatStoredAgo(System.currentTimeMillis() - agoInMillis)).isEqualTo(expected);
     }
 
 }

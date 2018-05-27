@@ -16,15 +16,4 @@ public abstract class AbstractRecyclerViewHolder extends RecyclerView.ViewHolder
         ButterKnife.bind(this, view);
     }
 
-    /**
-     * remember item position at view for retrieval in listeners
-     */
-    protected void setItemPosition(final int position) {
-        itemView.setTag(position);
-    }
-
-    public int getItemPosition() {
-        return (int) itemView.getTag();
-    }
-
 }

@@ -117,16 +117,25 @@
   <string name="log_smilies">Hymiöt</string>
   <string name="log_image">Kuva</string>
   <string name="log_image_attach">Liitä kuva</string>
-  <string name="log_image_stored">Voimassa</string>
+  <string name="log_image_stored">Selaa…</string>
   <string name="log_image_camera">Uusi</string>
   <string name="log_image_caption">Kuvateksti</string>
   <string name="log_image_description">Kuvaus</string>
   <string name="log_image_scale">Skaalaus</string>
   <string name="log_password_title">Salasana:</string>
+  <string name="log_report_problem">Ilmoita ongelmasta:</string>
   <string name="log_hint_log_password">Kirjoita salasanasi</string>
   <string name="log_oc_team_comment">OC-tiimin kommentti</string>
   <string name="log_your_saved_log">Tallennetut lokisi</string>
   <string name="log_empty_logbook">Tämän kätkön lokikirja on tyhjä.</string>
+  <string name="log_problem_none">Ei ongelmaa</string>
+  <string name="log_problem_needs_maintenance_label">Tarvitsee huoltoa</string>
+  <string name="log_problem_needs_maintenance_text">Tämä kätköilijä raportoi tällä kätköllä olevasta ongelmasta.</string>
+  <string name="log_problem_log_full_label">Loki on täynnä</string>
+  <string name="log_problem_log_full_text">Tämä kätköilijä raportoi täydestä lokista.</string>
+  <string name="log_problem_missing_label">Kätkö saattaa olla kadonnut</string>
+  <string name="log_problem_other_label">Muu</string>
+  <string name="log_problem_archive_label">Kätkö pitäisi arkistoida</string>
   <string-array name="log_image_scales">
     <item>Ei skaalausta</item>
     <item>512 p</item>
@@ -229,6 +238,7 @@
   <string name="warn_rendertheme_missing">Karttateemaa ei löytynyt.</string>
   <string name="warn_pocket_query_select">Ei pocket queryja valittuna.</string>
   <string name="warn_no_pocket_query_found">Yhtään Pocket querya ei löydetty.</string>
+  <string name="warn_invalid_character">Merkin täytyy olla kirjain tai numero</string>
   <string name="err_read_pocket_query_list">Virhe luettaessa Pocket Query -listausta.</string>
   <string name="info_log_posted">c:geo latasi lokin onnistuneesti.</string>
   <string name="info_log_saved">c:geo tallensi lokin onnistuneesti.</string>
@@ -237,13 +247,17 @@
   <string name="info_log_post_retry">Yritä uudelleen</string>
   <string name="info_log_post_save">Offline-tallennus</string>
   <string name="info_log_cleared">Loki tyhjennetty.</string>
+  <string name="info_waypoint_coordinates_cleared">Koordinaatit poistettu.</string>
   <string name="info_log_type_changed">Lokityyppi on muuttunut!</string>
   <string name="info_select_logimage_cancelled">Kuvan valinta tai kaappaus peruutettiin.</string>
   <string name="info_stored_image">Uusi kuva tallennettu paikkaan:</string>
   <string name="info_storing_static_maps">Yritetään tallentaa staattisia karttoja</string>
   <string name="info_cache_saved">Kätkö tallennettu paikallisesti</string>
+  <string name="warn_calculator_state_save">Muista tallentaa reittipiste jos haluat säilyttää laskimen tilan.</string>
   <string name="err_trackable_log_not_anonymous">Kirjautumista %1$s c:geosta ei voi tehdä anonyymisti. Haluatko avata asetukset täyttääksesi tarvittavat tiedot %2$s?</string>
   <string name="err_trackable_no_preference_activity">Valitettavasti ei löydy sopivaa asetusnäyttöä.</string>
+  <string name="confirm_unsaved_changes_title">Tallentamattomat muutokset</string>
+  <string name="confirm_discard_wp_changes">Hylätäänkö tallentamattomat muutokset?</string>
   <string name="warn_discard_changes">Tallentamattomat etappimuutokset hylätty!</string>
   <string name="err_request_popup_info">c:geo ei pystynyt lataamaan kätkön popupin tietoja.</string>
   <!-- location service -->
@@ -287,6 +301,8 @@
     <item quantity="other">%d minuuttia</item>
   </plurals>
   <string name="caches_store_offline">Tallenna offline</string>
+  <string name="caches_store_all">Tallenna kaikki</string>
+  <string name="caches_store_unsaved">Tallenna tallentamattomat</string>
   <string name="caches_store_selected">Tallenna valitut</string>
   <string name="caches_history">Historia</string>
   <string name="caches_on_map">Näytä kartalla</string>
@@ -419,6 +435,7 @@
   <string name="settings_title_gpx">GPX</string>
   <string name="settings_title_data_dir">Kätködatan kansio</string>
   <string name="settings_title_data_dir_usage">Kätködatan kansio (%1$s käytetty)</string>
+  <string name="calculate_dataDir_title">Geokätköjen käyttämä tila</string>
   <string name="calculate_dataDir">Lasketaan kätködatan määrä levyllä</string>
   <string name="settings_data_dir_item">%1$s (%2$s vapaana)</string>
   <string name="confirm_data_dir_move_title">Siirrä kätködatan kansio?</string>
@@ -498,6 +515,8 @@
   <string name="init_signature_template_number">Numero</string>
   <string name="init_signature_template_owner">Omistaja</string>
   <string name="init_signature_template_name">Nimi</string>
+  <string name="init_signature_template_difficulty">Vaikeusaste</string>
+  <string name="init_signature_template_terrain">Maasto</string>
   <string name="init_signature_template_url">URL</string>
   <string name="init_signature_template_log">Lokiteksti</string>
   <string name="init_ratingwanted">GCVote-arvostelu</string>
@@ -562,6 +581,7 @@
   <string name="init_gpx_exportdir">GPX:n vientikansio</string>
   <string name="init_gpx_importdir">GPX:n tuontikansio</string>
   <string name="init_dataDir">Valitse kätködatan kansio</string>
+  <string name="init_dataDir_note">Voit valita geokätköjen lisätietojen (spoilerit, lokien kuvat, …) tallentamisen ulkoiseen muistiin (emuloitu tai aito ulkoinen SD-kortti, riippuen laitteestasi).</string>
   <string name="init_maptrail">Näytä reitti</string>
   <string name="init_summary_maptrail">Näytä reitti kartalla</string>
   <string name="init_share_after_export">Avaa jakovalikko GPX-tiedoston tuomisen jälkeen</string>
@@ -581,6 +601,8 @@
   <string name="init_debug_note">c:geo voi tuottaa runsaasti vianmääritystietoja. Tämän asetuksen aktivointi voi vaikuttaa c:geon vakauteen ja se on suositeltavaa tehdä ainoastaan mikäli sinua on pyydetty lähettämään loki kehittäjille. Pidä vianjäljitysloki pois päältä c:geon normaalin käytön aikana!</string>
   <string name="init_debug">Aktivoi vianjäljitysloki</string>
   <string name="init_dbonsdcard_title">Tietokannan sijainti</string>
+  <string name="init_dbonsdcard_note">Voit tallentaa c:geon tietokannan joko järjestelmän muistiin tai ulkoisen muistin kansioon. Tietokannan sijoittaminen ulkoiseen muistiin saattaa säästää järjestelmän muistia, mutta suorituskyky saattaa hiukan heikentyä ja c:geo ei toimi jos ulkoinen muisti ei ole saatavilla tai poistat tietokantatiedoston.</string>
+  <string name="init_dbonsdcard">Ulkoisessa muistissa</string>
   <string name="init_dbmove_dbmove">Siirretään tietoja</string>
   <string name="init_dbmove_running">Siirretään tietoja</string>
   <string name="init_dbmove_success">Tiedot siirretty onnistuneesti.</string>
@@ -588,6 +610,7 @@
   <string name="init_datadirmove_datadirmove">Siirretään kätködataa toiseen kansioon</string>
   <string name="init_datadirmove_running">Siirretään kätködataa toiseen kansioon</string>
   <string name="init_datadirmove_success">Kätködatan kansion siirto onnistui.</string>
+  <string name="init_datadirmove_failed">Geokätköjen tiedot sisältävän kansion siirto epäonnistui osittain tai kokonaan. Tarkista vanha ja uusi kansio ja tee siirto tarvittaessa itse.</string>
   <string name="init_plain_logs">Yksinkertaiset lokit</string>
   <string name="init_summary_plain_logs">Näytä loki ilman värejä</string>
   <string name="init_use_native_ua">Android-selain</string>
@@ -636,6 +659,8 @@
   <string name="feature_search_geocode">Hae GC-koodilla</string>
   <string name="feature_search_owner">Etsi omistajan mukaan</string>
   <string name="feature_search_finder">Etsi löytäjän mukaan</string>
+  <string name="init_mapsforge_api_title">Mapsforge-rajapinta</string>
+  <string name="init_mfold_api">Vanha Mapsforge V3</string>
   <string name="init_experimental_title">Kokeelliset ominaisuudet</string>
   <string name="init_mfbeta">Mapsforge beta oletuksena</string>
   <string name="init_mfbeta_description">Nykyinen julkaisu sisältää kokeellisena ominaisuutena beetaversion uudesta Mapsforge kartasta. Tämä uusi kartta voidaan aktivoida täällä oletus live- ja listakartaksi.</string>
@@ -721,6 +746,11 @@
     <item quantity="one">noin %d päivä sitten</item>
     <item quantity="other">noin %d päivää sitten</item>
   </plurals>
+  <plurals name="cache_offline_about_time_months">
+    <item quantity="one">noin kuukausi sitten</item>
+    <item quantity="other">noin %d kuukautta sitten</item>
+  </plurals>
+  <string name="cache_offline_about_time_year">yli vuosi sitten</string>
   <string name="cache_offline_time_hour">Tunti sitten</string>
   <string name="cache_offline_time_hours">tunteja sitten</string>
   <string name="cache_offline_time_days">päiviä sitten</string>
@@ -859,6 +889,7 @@
   <string name="cache_event">Päivämäärä</string>
   <string name="cache_location">Sijainti</string>
   <string name="cache_coordinates">Koordinaatit</string>
+  <string name="cache_calculator">Laskin</string>
   <string name="cache_coordinates_original">Alkuperäiset koordinaatit</string>
   <string name="cache_spoiler_images_title">Spoiler-kuvat</string>
   <string name="cache_log_types">Lokityypit</string>
@@ -922,6 +953,7 @@
   <string name="waypoint">Reittipiste</string>
   <string name="waypoint_coordinates">Koordinaatit</string>
   <string name="waypoint_cache_coordinates">Kätkön koordinaatit</string>
+  <string name="waypoint_calculate_coordinates">Laske koordinaatit</string>
   <string name="waypoint_custom">Oma</string>
   <string name="waypoint_my_coordinates">Sijaintini</string>
   <string name="waypoint_bearing">Suunnassa</string>
@@ -929,6 +961,7 @@
   <string name="waypoint_name">Nimi</string>
   <string name="waypoint_edit">Muokkaa</string>
   <string name="waypoint_copy_coordinates">Kopioi koordinaatit</string>
+  <string name="waypoint_clear_coordinates">Poista koordinaatit</string>
   <string name="waypoint_delete">Poista</string>
   <string name="waypoint_edit_title">Muokkaa reittipistettä</string>
   <string name="waypoint_add_title">Lisää reittipiste</string>
@@ -956,6 +989,7 @@
   <string name="waypoint_duplicate">Monista reittipiste</string>
   <string name="waypoint_duplicated">Reittipiste monistettu</string>
   <string name="waypoint_copy_of">Kopio</string>
+  <string name="waypointcalc_notes_prompt">Kirjoita muistiinpano…</string>
   <string name="search_history">Historiatiedot</string>
   <string name="search_history_empty">Ei aikaisempia kohteita</string>
   <string name="search_remove_destination">Kohde poistettu</string>
@@ -1014,8 +1048,8 @@
   <string name="search_hbu">Piilottajan mukaan</string>
   <string name="search_hbu_prefill">Omistaja</string>
   <string name="search_hbu_button">Hae omistajan nimellä</string>
-  <string name="search_tb">Reissaaja/Kulkija</string>
-  <string name="search_tb_hint">Kulkevaisen koodi</string>
+  <string name="search_tb">Reissaaja</string>
+  <string name="search_tb_hint">Reissaajan koodi</string>
   <string name="search_tb_button">Etsi reissaajia</string>
   <string name="search_destination">Määränpää</string>
   <string name="search_direction_rel">Tästä sijainnista</string>
@@ -1026,7 +1060,7 @@
   <string name="search_pocket_loading">Ladataan Pocket Query -listaa</string>
   <string name="search_pocket_select">Valitse Pocket Query</string>
   <!-- trackable -->
-  <string name="trackable">Reissaaja/Kulkija</string>
+  <string name="trackable">Reissaaja</string>
   <string name="trackable_details_loading">Ladataan reissaajan tietoja…</string>
   <string name="trackable_log_touch">Lokkaa</string>
   <string name="trackable_browser_open">Avaa selaimessa</string>
@@ -1420,17 +1454,20 @@
   <string name="cgeo_shortcut">c:geo pikakuvake</string>
   <string name="create_shortcut">Luo pikakuvake</string>
   <string name="send">Lähetä</string>
+  <string name="confirm_log_title">Erikoinen lokityyppi</string>
   <string name="confirm_log_message">Haluat lokata \'%s\'. Oletko varma?</string>
+  <string name="confirm_report_problem_title">Ilmoita ongelmasta</string>
+  <string name="confirm_report_problem_message">Haluat ilmoittaa \"%s\". Oletko varma?</string>
   <!-- Geokrety -->
   <string name="settings_activate_geokrety">Aktivoi</string>
   <string name="init_geokrety">GeoKrety.org</string>
-  <string name="init_connectorGeokretyActive">Geokrety Matkalaiset</string>
-  <string name="init_summary_geokrety">Vahvista matkalaiset sivulla GeoKrety.org</string>
+  <string name="init_connectorGeokretyActive">Geokrety-reissaajat</string>
+  <string name="init_summary_geokrety">Vahvista reissaajat sivulla GeoKrety.org</string>
   <string name="init_summary_geokrety_account">Tunnusta ei ole asetettuna.</string>
   <string name="init_geokrety_register_ok">Kirjautuminen onnistui</string>
   <string name="init_geokrety_register_fail">Kirjautuminen epäonnistui</string>
-  <string name="init_geokrety_description">Valtuuta c:geo sivulla GeoKrety.org lokataksesi GeoKrety kulkevaisia.</string>
-  <string name="init_geokrety_cache_description">GeokretyMap.org tarjoaa välimuistissa olevaa tietoa GeoKrety kulkevaisille.\nAvailable aineisto sisältää enemmän GeoKrety tietoa kuin \'kuvaus\' tai \'puuttuva\' tila.\n\nDatas ei ole reaaliaikaista!\nPositions: ~ 30 min. \nDescriptions: ~ 24 h.</string>
+  <string name="init_geokrety_description">Valtuuta c:geo sivulla GeoKrety.org lokataksesi GeoKrety-reissaajia.</string>
+  <string name="init_geokrety_cache_description">GeokretyMap.org tarjoaa välimuistissa olevaa tietoa GeoKrety-reissaajille.\nAineisto sisältää enemmän tietoa GeoKretyistä kuin \'kuvaus\' tai kadonnut-tila.\n\nAineisto ei ole reaaliaikaista!\nSijainnit: ~ 30 min. \nKuvaukset: ~ 24 h.</string>
   <string name="init_geokrety_cache">Käytä GeoKretyMap.org</string>
   <string name="init_geokrety_userid">Käyttäjätunnus: %s</string>
   <string name="trackable_title_log_without_geocode">Koodi puuttuu</string>
@@ -1487,6 +1524,11 @@
   <!-- calendar adder -->
   <string name="event_fail">Tapahtumakätkön lisääminen kalenteriin epäonnistui</string>
   <string name="init_low_disk_space">Tallennustila on vähissä</string>
+  <string name="init_low_disk_space_message">Geokätköjen tietojen kansion tallennustila on vähissä. Tämä saattaa aiheuttaa häiriöitä c:geon toiminnassa. Vapauta tilaa puhelimestasi.</string>
   <string name="init_confirm_debug">c:geo on vianmääritystilassa!</string>
   <string name="list_confirm_debug_message">Vianmääritystila aiheuttaa epävakautta! Haluatko poistaa sen käytöstä?</string>
+  <string name="err_select_logimage_upload_size">Kuva on liian iso, ole hyvä ja valitse pienempi resoluutio.</string>
+  <string name="err_logimage_caption_required">Kuvateksti on pakollinen</string>
+  <string name="waypoint_latitude_null">N/S --° --.---</string>
+  <string name="waypoint_longitude_null">E/W --° --.---</string>
 </resources>

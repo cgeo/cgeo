@@ -13,10 +13,9 @@ apply plugin: 'com.android.application'
  * https://github.com/KeepSafe/dexcount-gradle-plugin. dex counting can take several seconds, therefore do this only on the CI server
  */
 
-// if (isContinuousIntegrationServer()) {
-//     apply plugin: 'com.getkeepsafe.dexcount'
-// }
-// disabled due to https://github.com/KeepSafe/dexcount-gradle-plugin/issues/220
+if (isContinuousIntegrationServer()) {
+    apply plugin: 'com.getkeepsafe.dexcount'
+}
 
 android {
     compileSdkVersion "Google Inc.:Google APIs:23"
@@ -51,7 +50,7 @@ android {
         applicationId = "cgeo.geocaching"
 
         // include only those language resources from libraries which we actively maintain ourself in the translation project
-        resConfigs "en","ca","cs","da","de","es","fi","fr","hu","it","ja","ko","lt","lv","nb","nl","pl","pt","ro","ru","sk","sl","sv","tr"
+        resConfigs "en","ca","ceb","cs","da","de","el","es","fi","fr","hu","it","ja","ko","lt","lv","nb","nl","pl","pt","ro","ru","sk","sl","sv","tr"
     }
 
     // signing is handled via private.properties
@@ -244,7 +243,7 @@ android {
 
 dependencies {
     // AndroidAnnotations, https://github.com/excilys/androidannotations/wiki/building-project-gradle
-    def androidAnnotationsVersion = '4.3.1'
+    def androidAnnotationsVersion = '4.4.0'
     annotationProcessor "org.androidannotations:androidannotations:$androidAnnotationsVersion"
     implementation "org.androidannotations:androidannotations-api:$androidAnnotationsVersion"
 
@@ -255,7 +254,7 @@ dependencies {
     implementation 'org.apache.commons:commons-lang3:3.5'
 
     // AssertJ for testing, needed both for local unit tests and Android instrumentation tests
-    def assertJVersion = '2.8.0'
+    def assertJVersion = '2.9.0'
     testImplementation "org.assertj:assertj-core:$assertJVersion"
     androidTestImplementation "org.assertj:assertj-core:$assertJVersion"
 
@@ -274,13 +273,13 @@ dependencies {
     implementation "net.sf.geographiclib:GeographicLib-Java:1.49"
 
     // Jackson XML processing
-    def jacksonVersion = '2.9.3'
+    def jacksonVersion = '2.9.5'
     implementation "com.fasterxml.jackson.core:jackson-core:$jacksonVersion"
     implementation "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
     implementation "com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion"
 
     // Jsoup HTML parsing
-    implementation 'org.jsoup:jsoup:1.11.2'
+    implementation 'org.jsoup:jsoup:1.11.3'
 
     // Junit only needed for local unit tests
     testImplementation 'junit:junit:4.12'
@@ -303,7 +302,7 @@ dependencies {
     implementation 'com.caverock:androidsvg:1.2.2-beta-1'
 
     // Mapsforge new version
-    def mapsforgeVersion = '0.8.0'
+    def mapsforgeVersion = '0.9.1'
     implementation "org.mapsforge:mapsforge-core:$mapsforgeVersion"
     implementation "org.mapsforge:mapsforge-map:$mapsforgeVersion"
     implementation "org.mapsforge:mapsforge-map-android:$mapsforgeVersion"
@@ -333,8 +332,8 @@ dependencies {
     implementation 'com.jakewharton:process-phoenix:2.0.0'
 
     // RxJava
-    implementation "io.reactivex.rxjava2:rxjava:2.1.8"
-    implementation "io.reactivex.rxjava2:rxandroid:2.0.1"
+    implementation "io.reactivex.rxjava2:rxjava:2.1.12"
+    implementation "io.reactivex.rxjava2:rxandroid:2.0.2"
 
     // Support Library. Appcompat
     implementation 'com.android.support:appcompat-v7:20.0.0'

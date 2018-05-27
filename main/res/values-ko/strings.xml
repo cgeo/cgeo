@@ -238,6 +238,7 @@
   <string name="info_log_post_retry">재시도</string>
   <string name="info_log_post_save">오프라인 저장</string>
   <string name="info_log_cleared">로그를 비웠습니다.</string>
+  <string name="info_waypoint_coordinates_cleared">좌표가 지워졌습니다.</string>
   <string name="info_log_type_changed">로그 유형이 변경되었습니다!</string>
   <string name="info_select_logimage_cancelled">사진 선택 또는 캡처가 취소되었습니다.</string>
   <string name="info_stored_image">새로운 사진 저장 위치 :</string>
@@ -246,6 +247,8 @@
   <string name="warn_calculator_state_save">계산기 상태를 유지하려면 웨이포인트를 저장해야 합니다.</string>
   <string name="err_trackable_log_not_anonymous">c:geo에서 익명으로 %1$s를 로그할 수 없습니다. 설정을 열어 %2$s 의 계정정보를 입력하시겠습니까?</string>
   <string name="err_trackable_no_preference_activity">죄송합니다만, 적절한 해당 서비스 설정화면이 없습니다.</string>
+  <string name="confirm_unsaved_changes_title">저장되지 않은 변경사항</string>
+  <string name="confirm_discard_wp_changes">저장되지 않은 지점 변경을 삭제하시겠습니까?</string>
   <string name="warn_discard_changes">저장되지 않은 웨이포인트 정보가 삭제됩니다!</string>
   <string name="err_request_popup_info">캐시 팝업 정보를 가져오지 못했습니다.</string>
   <!-- location service -->
@@ -288,6 +291,8 @@
     <item quantity="other">%d 분</item>
   </plurals>
   <string name="caches_store_offline">오프라인으로 저장</string>
+  <string name="caches_store_all">모두 저장</string>
+  <string name="caches_store_unsaved">저장 안된 것 저장</string>
   <string name="caches_store_selected">선택한 것 저장</string>
   <string name="caches_history">지난 기록</string>
   <string name="caches_on_map">지도에 표시</string>
@@ -929,6 +934,7 @@
   <string name="waypoint_name">이름</string>
   <string name="waypoint_edit">편집</string>
   <string name="waypoint_copy_coordinates">좌표 복사하기</string>
+  <string name="waypoint_clear_coordinates">좌표 삭제</string>
   <string name="waypoint_delete">삭제</string>
   <string name="waypoint_edit_title">지점 편집하기</string>
   <string name="waypoint_add_title">지점 추가</string>

@@ -2,7 +2,6 @@ package cgeo.geocaching.connector.gc;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.AbstractConnector;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.ILoggingManager;
@@ -41,7 +40,6 @@ import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.functions.Action1;
 
 import android.app.Activity;
-import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Handler;
@@ -458,25 +456,20 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
 
     @NonNull
     @Override
-    public List<UserAction> getUserActions() {
-        final List<UserAction> actions = super.getUserActions();
+    public List<UserAction> getUserActions(final UserAction.Context user) {
+        final List<UserAction> actions = super.getUserActions(user);
         actions.add(new UserAction(R.string.user_menu_open_browser, new Action1<UserAction.Context>() {
 
             @Override
             public void call(final UserAction.Context context) {
-                context.activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.geocaching.com/profile/?u=" + Network.encode(context.userName))));
+                context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.geocaching.com/p/default.aspx?u=" + Network.encode(context.userName))));
             }
         }));
         actions.add(new UserAction(R.string.user_menu_send_message, new Action1<UserAction.Context>() {
 
             @Override
             public void call(final UserAction.Context context) {
-                try {
-                    context.activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.geocaching.com/email/?u=" + Network.encode(context.userName))));
-                } catch (final ActivityNotFoundException e) {
-                    Log.e("Cannot find suitable activity", e);
-                    ActivityMixin.showToast(context.activity, R.string.err_application_no);
-                }
+                context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.geocaching.com/email/?u=" + Network.encode(context.userName))));
             }
         }));
         return actions;
@@ -520,7 +513,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
 
         GCLogin.putViewstates(uploadParams, viewstates);
 
-        Network.getResponseData(Network.postRequest(uri, uploadParams, "ctl00$ContentBody$FieldNoteLoader", "text/plain", exportFile));
+        Network.getResponseData(Network.postRequest(uri, uploadParams, null, "ctl00$ContentBody$FieldNoteLoader", "text/plain", exportFile));
 
         if (StringUtils.isBlank(page)) {
             Log.e("FieldNoteExport.ExportTask upload: No data from server");

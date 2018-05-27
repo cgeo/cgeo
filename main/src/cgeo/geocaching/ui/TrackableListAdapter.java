@@ -2,12 +2,12 @@ package cgeo.geocaching.ui;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.models.Trackable;
-import cgeo.geocaching.ui.recyclerview.AbstractRecyclerViewAdapter;
 import cgeo.geocaching.ui.recyclerview.AbstractRecyclerViewHolder;
 import cgeo.geocaching.utils.TextUtils;
 
 import android.graphics.Paint;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +18,7 @@ import java.util.List;
 
 import butterknife.BindView;
 
-public class TrackableListAdapter extends AbstractRecyclerViewAdapter<TrackableListAdapter.ViewHolder> {
+public class TrackableListAdapter extends RecyclerView.Adapter<TrackableListAdapter.ViewHolder> {
 
     public interface TrackableClickListener {
         void onTrackableClicked(final Trackable trackable);
@@ -54,7 +54,7 @@ public class TrackableListAdapter extends AbstractRecyclerViewAdapter<TrackableL
 
             @Override
             public void onClick(final View view) {
-                trackableClickListener.onTrackableClicked(trackables.get(viewHolder.getItemPosition()));
+                trackableClickListener.onTrackableClicked(trackables.get(viewHolder.getAdapterPosition()));
             }
         });
         return viewHolder;
@@ -62,7 +62,6 @@ public class TrackableListAdapter extends AbstractRecyclerViewAdapter<TrackableL
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-        super.onBindViewHolder(holder, position);
         final Trackable trackable = trackables.get(position);
 
         holder.imageBrand.setImageResource(trackable.getIconBrand());

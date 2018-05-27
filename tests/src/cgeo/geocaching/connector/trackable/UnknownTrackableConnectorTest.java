@@ -2,8 +2,10 @@ package cgeo.geocaching.connector.trackable;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
+import cgeo.geocaching.connector.UserAction;
 import cgeo.geocaching.models.Trackable;
 
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
 public class UnknownTrackableConnectorTest {
@@ -39,7 +41,7 @@ public class UnknownTrackableConnectorTest {
 
     @Test
     public void testGetUserActions() throws Exception {
-        assertThat(getConnector().getUserActions()).isEmpty();
+        assertThat(getConnector().getUserActions(new UserAction.Context(StringUtils.EMPTY, StringUtils.EMPTY))).isEmpty();
     }
 
     @Test

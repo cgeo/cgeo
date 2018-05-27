@@ -12,12 +12,13 @@ import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.settings.Settings;
 
-import org.apache.commons.lang3.StringUtils;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import java.util.List;
 import java.util.regex.Pattern;
+
+import org.apache.commons.lang3.StringUtils;
 
 public class TravelBugConnector extends AbstractTrackableConnector {
 
@@ -100,9 +101,9 @@ public class TravelBugConnector extends AbstractTrackableConnector {
 
     @Override
     @NonNull
-    public List<UserAction> getUserActions() {
+    public List<UserAction> getUserActions(final UserAction.Context user) {
         // travel bugs should have the same actions as GC caches
-        return GCConnector.getInstance().getUserActions();
+        return GCConnector.getInstance().getUserActions(user);
     }
 
     @Override
