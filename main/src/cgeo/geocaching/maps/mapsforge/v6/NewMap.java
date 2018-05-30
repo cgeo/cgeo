@@ -1488,8 +1488,8 @@ public class NewMap extends AbstractActionBarActivity {
                 }
             }
 
-            // we're done
-            caches.invalidate(geocodes);
+            // we're done, but map might even have been closed.
+            if (caches != null) caches.invalidate(geocodes);
             invalidateOptionsMenuCompatible();
             handler.sendEmptyMessage(FINISHED_LOADING_DETAILS);
         }
