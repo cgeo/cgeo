@@ -721,9 +721,8 @@
   <string name="err_auth_geokrety_unknown">%1$s επέστρεψε: %2$s.</string>
   <!-- cache -->
   <plurals name="cache_counts">
-    <item quantity="one">Μία κρύπτη
-%€1d κρύπτες</item>
-    <item quantity="other">%€1d κρύπτες</item>
+    <item quantity="one">Μία κρύπτη</item>
+    <item quantity="other">%1$d κρύπτες</item>
   </plurals>
   <!-- days remaining -->
   <plurals name="days_remaining">
