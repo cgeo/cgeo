@@ -395,6 +395,9 @@ public class MainActivity extends AbstractActionBarActivity {
             case R.id.menu_settings:
                 startActivityForResult(new Intent(this, SettingsActivity.class), Intents.SETTINGS_ACTIVITY_REQUEST_CODE);
                 return true;
+            case R.id.menu_backup:
+                DatabaseBackupUtils.createBackup(MainActivity.this, null);
+                return true;
             case R.id.menu_history:
                 startActivity(CacheListActivity.getHistoryIntent(this));
                 return true;
