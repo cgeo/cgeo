@@ -30,6 +30,12 @@
         app:showAsAction="ifRoom">
     </item>
     <item
+        android:id="@+id/menu_backup"
+        android:icon="@drawable/ic_menu_save"
+        android:title="@string/menu_backup"
+        app:showAsAction="ifRoom">
+    </item>
+    <item
         android:id="@+id/menu_helpers"
         android:icon="@drawable/ic_menu_shopping"
         android:title="@string/menu_helpers"
