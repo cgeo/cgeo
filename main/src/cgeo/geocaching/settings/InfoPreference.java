@@ -3,6 +3,7 @@ package cgeo.geocaching.settings;
 import cgeo.geocaching.R;
 import cgeo.geocaching.ui.UrlPopup;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.preference.Preference;
@@ -65,6 +66,7 @@ public class InfoPreference extends AbstractAttributeBasedPreference {
         return new int[] { android.R.attr.text, R.attr.url, R.attr.urlButton };
     }
 
+    @SuppressLint("ResourceType")
     @Override
     protected void processAttributeValues(final TypedArray values) {
         text = values.getString(0);
