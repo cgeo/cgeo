@@ -86,7 +86,6 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 import butterknife.ButterKnife;
 import io.reactivex.disposables.CompositeDisposable;
-
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.mapsforge.core.model.LatLong;
@@ -395,49 +394,41 @@ public class NewMap extends AbstractActionBarActivity {
             case R.id.menu_theme_mode:
                 selectMapTheme();
                 return true;
-            case R.id.menu_as_list: {
+            case R.id.menu_as_list:
                 CacheListActivity.startActivityMap(this, new SearchResult(caches.getVisibleCacheGeocodes()));
                 return true;
-            }
-            case R.id.menu_strategy_fast: {
+            case R.id.menu_strategy_fast:
                 item.setChecked(true);
                 Settings.setLiveMapStrategy(LivemapStrategy.FAST);
                 return true;
-            }
-            case R.id.menu_strategy_auto: {
+            case R.id.menu_strategy_auto:
                 item.setChecked(true);
                 Settings.setLiveMapStrategy(LivemapStrategy.AUTO);
                 return true;
-            }
-            case R.id.menu_strategy_detailed: {
+            case R.id.menu_strategy_detailed:
                 item.setChecked(true);
                 Settings.setLiveMapStrategy(LivemapStrategy.DETAILED);
                 return true;
-            }
-            case R.id.menu_routing_straight: {
+            case R.id.menu_routing_straight:
                 item.setChecked(true);
                 Settings.setRoutingMode(RoutingMode.STRAIGHT);
                 navigationLayer.requestRedraw();
                 return true;
-            }
-            case R.id.menu_routing_walk: {
+            case R.id.menu_routing_walk:
                 item.setChecked(true);
                 Settings.setRoutingMode(RoutingMode.WALK);
                 navigationLayer.requestRedraw();
                 return true;
-            }
-            case R.id.menu_routing_bike: {
+            case R.id.menu_routing_bike:
                 item.setChecked(true);
                 Settings.setRoutingMode(RoutingMode.BIKE);
                 navigationLayer.requestRedraw();
                 return true;
-            }
-            case R.id.menu_routing_car: {
+            case R.id.menu_routing_car:
                 item.setChecked(true);
                 Settings.setRoutingMode(RoutingMode.CAR);
                 navigationLayer.requestRedraw();
                 return true;
-            }
             case R.id.menu_hint:
                 menuShowHint();
                 return true;
@@ -1415,11 +1406,11 @@ public class NewMap extends AbstractActionBarActivity {
         @NonNull
         private final Geocache cache;
         @NonNull
-        private final WeakReference<NewMap> map;
+        private final WeakReference<NewMap> mapRef;
 
         RequestDetailsThread(@NonNull final Geocache cache, @NonNull final NewMap map) {
             this.cache = cache;
-            this.map = new WeakReference<>(map);
+            this.mapRef = new WeakReference<>(map);
         }
 
         public boolean requestRequired() {
@@ -1428,7 +1419,7 @@ public class NewMap extends AbstractActionBarActivity {
 
         @Override
         public void run() {
-            final NewMap map = this.map.get();
+            final NewMap map = this.mapRef.get();
             if (map == null) {
                 return;
             }
@@ -1489,7 +1480,9 @@ public class NewMap extends AbstractActionBarActivity {
             }
 
             // we're done, but map might even have been closed.
-            if (caches != null) caches.invalidate(geocodes);
+            if (caches != null) {
+                caches.invalidate(geocodes);
+            }
             invalidateOptionsMenuCompatible();
             handler.sendEmptyMessage(FINISHED_LOADING_DETAILS);
         }
