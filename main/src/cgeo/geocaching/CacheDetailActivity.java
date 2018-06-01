@@ -111,7 +111,10 @@ import android.text.Editable;
 import android.text.Html;
 import android.text.Spannable;
 import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
 import android.text.Spanned;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
 import android.text.style.StyleSpan;
 import android.text.style.URLSpan;
 import android.text.util.Linkify;
@@ -140,7 +143,6 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.EnumSet;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
@@ -2422,13 +2424,29 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     }
 
     static void updateCacheLists(final View view, final Geocache cache, final Resources res) {
-        final Set<String> listNames = new HashSet<>();
+        final SpannableStringBuilder builder = new SpannableStringBuilder();
         for (final Integer listId : cache.getLists()) {
-            final StoredList list = DataStore.getList(listId);
-            listNames.add(list.getTitle());
+            if (builder.length() > 0) {
+                builder.append(", ");
+            }
+            appendClickableList(builder, view, listId);
         }
+        builder.insert(0, res.getString(R.string.list_list_headline) + " ");
         final TextView offlineLists = ButterKnife.findById(view, R.id.offline_lists);
-        offlineLists.setText(res.getString(R.string.list_list_headline) + " " + StringUtils.join(listNames.toArray(), ", "));
+        offlineLists.setText(builder);
+        offlineLists.setMovementMethod(LinkMovementMethod.getInstance());
+    }
+
+    static void appendClickableList(final SpannableStringBuilder builder, final View view, final Integer listId) {
+        final int start = builder.length();
+        builder.append(DataStore.getList(listId).getTitle());
+        builder.setSpan(new ClickableSpan() {
+            @Override
+            public void onClick(final View widget) {
+                Settings.setLastDisplayedList(listId);
+                CacheListActivity.startActivityOffline(view.getContext());
+            }
+        }, start, builder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
     }
 
     public Geocache getCache() {
