@@ -37,8 +37,10 @@ build
 # build system user specific files
 main/gradle.properties
 
-# IDEA
+# ignore IDEA settings
 .idea/
+# but have a common checkstyle configuration
+!.idea/checkstyle-idea.xml
 *.iml
 
 main/usage.txt
