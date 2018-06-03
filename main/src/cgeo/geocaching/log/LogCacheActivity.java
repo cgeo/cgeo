@@ -315,6 +315,9 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
 
         initializeRatingBar();
 
+        loggingManager = cache.getLoggingManager(this);
+        loggingManager.init();
+
         // initialize with default values
         setDefaultValues();
 
@@ -334,9 +337,6 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
             image = Image.NONE;
         }
         enablePostButton(false);
-
-        loggingManager = cache.getLoggingManager(this);
-        loggingManager.init();
 
         final TextView problemButton = ButterKnife.findById(this, R.id.report_problem);
         problemButton.setText(getString(reportProblemSelected.labelId) + " ▼");
@@ -440,15 +440,25 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     }
 
     private void setDefaultValues() {
-        date = Calendar.getInstance();
         rating = GCVote.NO_RATING;
-        typeSelected = cache.getDefaultLogType();
+        setType(cache.getDefaultLogType());
+
+        final Calendar defaultDate = Calendar.getInstance();
         // it this is an attended event log, use the event date by default instead of the current date
         if (cache.isEventCache() && CalendarUtils.isPastEvent(cache) && typeSelected == LogType.ATTENDED) {
-            date.setTime(cache.getHiddenDate());
+            defaultDate.setTime(cache.getHiddenDate());
         }
+        setDate(defaultDate);
+
         text = null;
         image = Image.NONE;
+
+        logEditText.setText(StringUtils.EMPTY);
+        setReportProblem(ReportProblemType.NO_PROBLEM);
+        oldLog = null;
+
+        final EditText logPasswordView = ButterKnife.findById(LogCacheActivity.this, R.id.log_password);
+        logPasswordView.setText(StringUtils.EMPTY);
     }
 
     private void clearLog() {
@@ -556,15 +566,6 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         @Override
         protected void onFinished() {
             setDefaultValues();
-
-            setType(typeSelected);
-            setDate(date);
-            logEditText.setText(StringUtils.EMPTY);
-            setReportProblem(ReportProblemType.NO_PROBLEM);
-            oldLog = null;
-
-            final EditText logPasswordView = ButterKnife.findById(LogCacheActivity.this, R.id.log_password);
-            logPasswordView.setText(StringUtils.EMPTY);
         }
 
         @Override
@@ -640,7 +641,6 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
                     if (reportProblemSelected != ReportProblemType.NO_PROBLEM) {
                         final LogEntry logProblem = logBuilder.setLog(getString(reportProblemSelected.textId)).setLogImages(Collections.<Image>emptyList()).setLogType(reportProblemSelected.logType).build();
                         newLogs.add(0, logProblem);
-
                     }
                     DataStore.saveLogs(cache.getGeocode(), newLogs);
 
@@ -701,10 +701,11 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
             if (status == StatusCode.NO_ERROR) {
                 showToast(res.getString(R.string.info_log_posted));
                 // No need to save the log when quitting if it has been posted.
-                text = currentLogText();
+                setDefaultValues();
                 finish();
             } else if (status == StatusCode.LOG_SAVED) {
                 showToast(res.getString(R.string.info_log_saved));
+                setDefaultValues();
                 finish();
             } else {
                 Dialogs.confirmPositiveNegativeNeutral(activity, R.string.info_log_post_failed,
