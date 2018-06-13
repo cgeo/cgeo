@@ -109,6 +109,17 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     private ReportProblemType reportProblemSelected = ReportProblemType.NO_PROBLEM;
     private LogEntry oldLog;
 
+    private SaveMode saveMode = SaveMode.SMART;
+
+    private enum SaveMode {
+        /** save when relevant changes are detected */
+        SMART,
+        /** explicitly save, via menu or saveLog button */
+        FORCE,
+        /** when log was posted and offline log cleared*/
+        SKIP
+    }
+
     /**
      * Hook called at the beginning of onCreateLoader().
      */
@@ -459,6 +470,8 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
 
         final EditText logPasswordView = ButterKnife.findById(LogCacheActivity.this, R.id.log_password);
         logPasswordView.setText(StringUtils.EMPTY);
+
+        saveMode = SaveMode.SMART;
     }
 
     private void clearLog() {
@@ -467,13 +480,13 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
 
     @Override
     public void finish() {
-        saveLog(false);
+        saveLog();
         super.finish();
     }
 
     @Override
     public void onStop() {
-        saveLog(false);
+        saveLog();
         super.onStop();
     }
 
@@ -701,11 +714,11 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
             if (status == StatusCode.NO_ERROR) {
                 showToast(res.getString(R.string.info_log_posted));
                 // No need to save the log when quitting if it has been posted.
-                setDefaultValues();
+                saveMode = SaveMode.SKIP;
                 finish();
             } else if (status == StatusCode.LOG_SAVED) {
                 showToast(res.getString(R.string.info_log_saved));
-                setDefaultValues();
+                saveMode = SaveMode.SKIP;
                 finish();
             } else {
                 Dialogs.confirmPositiveNegativeNeutral(activity, R.string.info_log_post_failed,
@@ -728,7 +741,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
 
                         @Override
                         public void onClick(final DialogInterface dialogInterface, final int i) {
-                            saveLog(true);
+                            saveMode = SaveMode.FORCE;
                             finish();
                         }
                 });
@@ -736,14 +749,18 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         }
     }
 
-    private void saveLog(final boolean force) {
+    private void saveLog() {
+        if (saveMode == SaveMode.SKIP) {
+            return;
+        }
+
         final String log = currentLogText();
 
         // Do not erase the saved log if the user has removed all the characters
         // without using "Clear". This may be a manipulation mistake, and erasing
         // again will be easy using "Clear" while retyping the text may not be.
         // But if date or the reportProblemType has changed, then save anyway.
-        if (force ||
+        if (saveMode == SaveMode.FORCE ||
                 (StringUtils.isNotEmpty(log) && !StringUtils.equals(log, text) && !StringUtils.equals(log, Settings.getSignature()))
                 || (oldLog != null && (oldLog.reportProblem != reportProblemSelected || oldLog.date != date.getTime().getTime()))
                 || (oldLog == null && reportProblemSelected != ReportProblemType.NO_PROBLEM)
@@ -894,7 +911,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
                 selectImage();
                 return true;
             case R.id.save:
-                saveLog(true);
+                saveMode = SaveMode.FORCE;
                 finish();
                 return true;
             case R.id.clear:
