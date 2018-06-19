@@ -2,11 +2,13 @@ package cgeo.geocaching.connector;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
+import cgeo.geocaching.connector.gc.GCMemberState;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.network.Cookies;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.settings.Credentials;
 import cgeo.geocaching.settings.DiskCookieStore;
+import cgeo.geocaching.settings.Settings;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -61,6 +63,7 @@ public abstract class AbstractLogin {
     }
 
     protected void resetLoginStatus() {
+        Settings.setGCMemberStatus(GCMemberState.UNKNOWN);
         Cookies.clearCookies();
         DiskCookieStore.setCookieStore(null);
 
