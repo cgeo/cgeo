@@ -98,4 +98,16 @@ public class ParametersTest {
         params.usePercentEncoding();
         assertThat(params.toString()).isEqualTo("oauth_callback=callback%3A%2F%2Fwww.cgeo.org%2F");
     }
+
+    @Test
+    public void testMerge() {
+        final Parameters params1 = new Parameters("foo", "bar");
+        final Parameters params2 = new Parameters("baz", "xyzzy");
+        assertThat(Parameters.merge(params1)).isSameAs(params1);
+        assertThat(Parameters.merge(params1, null)).isSameAs(params1);
+        assertThat(Parameters.merge(null, params1)).isSameAs(params1);
+        assertThat(Parameters.merge(null, params1, null, params2, null)).isSameAs(params1);
+        assertThat(params1.size() == 4);
+        assertThat(params2.size() == 2);
+    }
 }
