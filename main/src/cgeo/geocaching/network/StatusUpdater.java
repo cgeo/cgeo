@@ -70,7 +70,7 @@ public class StatusUpdater {
                 final Parameters gcMembershipParameters;
                 if (Settings.isGCConnectorActive()) {
                     final GCMemberState memberState = Settings.getGCMemberStatus();
-                    gcMembershipParameters = new Parameters("gc_mmembership",
+                    gcMembershipParameters = new Parameters("gc_membership",
                             memberState == GCMemberState.PREMIUM || memberState == GCMemberState.CHARTER ? "premium" : "basic");
                 } else {
                     gcMembershipParameters = null;
