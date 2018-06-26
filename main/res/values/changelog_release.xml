@@ -2,8 +2,12 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-    <b>Next feature release:</b>\n
-    · New: New mapsforge library (former beta version) now used by default\n
+    <b>2018.06.26:</b>\n
+    · New: New mapsforge library (former beta version) now used by default for OSM and offline maps\n
+           Known regressions we are still working on (click for info):\n
+           <a href="http://faq.cge.org#5885">Circles around caches not yet implemented</a>\\
+           <a href="http://faq.cge.org#5900">Waypoints of caches might be already hidden below limit</a>\\
+           <a href="http://faq.cge.org#5902">More caches might be shown with orange circles</a>
     · New: Days since cache has been saved now replaced by months or years when applicable\n
     · New: Contact owner by clicking on user name now also for OC caches\n
     · New: Translation to Cebuano and Greek\n
