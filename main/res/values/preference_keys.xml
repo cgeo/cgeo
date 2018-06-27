@@ -153,7 +153,6 @@
     <string translatable="false" name="pref_navigation_menu_google_streetview">navigationStreetView</string>
     <string translatable="false" name="pref_navigation_menu_oruxmaps">navigationOruxmaps</string>
     <string translatable="false" name="pref_navigation_menu_oruxmaps_offline">navigationOruxmapsOffline</string>
-    <string translatable="false" name="pref_navigation_menu_navigon">navigationNavigon</string>
     <string translatable="false" name="pref_navigation_menu_sygic_walking">navigationSygicWalking</string>
     <string translatable="false" name="pref_navigation_menu_sygic_driving">navigationSygicDriving</string>
     <string translatable="false" name="pref_navigation_menu_osmand">navigationOsmAnd</string>

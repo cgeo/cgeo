@@ -2,6 +2,9 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
+    <b>Next bugfix release:</b>\n
+    · Fix: Remove outdated Navigon navigation application\n
+    \n
     <b>2018.06.26:</b>\n
     · New: New mapsforge library (former beta version) now used by default for OSM and offline maps\n
            Known regressions we are still working on (click for info):\n
