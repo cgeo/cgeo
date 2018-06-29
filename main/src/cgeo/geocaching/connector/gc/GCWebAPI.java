@@ -389,10 +389,10 @@ class GCWebAPI {
     }
 
     /**
-     * https://www.geocaching.com/api/proxy/trackables?inCollection=false&skip=0&take=20
+     * https://www.geocaching.com/api/proxy/trackables?inCollection=false&skip=0&take=50
      */
     static Single<TrackableInventoryEntry[]> getTrackableInventory() {
-        return getAPI("/trackables?inCollection=false&skip=0&take=20", TrackableInventoryEntry[].class);
+        return getAPI("/trackables?inCollection=false&skip=0&take=50", TrackableInventoryEntry[].class);
     }
 
     /**
