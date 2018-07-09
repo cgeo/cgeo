@@ -28,6 +28,7 @@ import org.mapsforge.map.android.graphics.AndroidGraphicFactory;
 import org.mapsforge.map.layer.cache.TileCache;
 import org.mapsforge.map.model.MapViewPosition;
 import org.mapsforge.map.reader.MapFile;
+import org.mapsforge.map.reader.header.MapFileException;
 import org.mapsforge.v3.android.maps.mapgenerator.MapGeneratorInternal;
 import org.mapsforge.v3.map.reader.MapDatabase;
 import org.mapsforge.v3.map.reader.header.FileOpenResult;
@@ -86,11 +87,14 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
             return false;
         }
 
-        final MapDatabase mapDB = new MapDatabase();
-        final FileOpenResult result = mapDB.openFile(new File(mapFileIn));
-        mapDB.closeFile();
-
-        return result.isSuccess();
+        try {
+            final MapFile mapFile = new MapFile(mapFileIn);
+            if (mapFile.getMapFileInfo().fileVersion > 3 && Settings.useOldMapsforgeAPI()) return false;
+            return true;
+        } catch (MapFileException ex){
+            Log.w(String.format("Exception reading mapfile '%s'", mapFileIn), ex);
+        }
+        return false;
     }
 
     @Override
