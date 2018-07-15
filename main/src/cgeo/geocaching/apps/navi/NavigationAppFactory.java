@@ -60,8 +60,6 @@ public final class NavigationAppFactory {
         ORUX_MAPS(new OruxOnlineMapApp(), 9, R.string.pref_navigation_menu_oruxmaps),
         /** The external OruxMaps app */
         ORUX_MAPS_OFFLINE(new OruxOfflineMapApp(), 24, R.string.pref_navigation_menu_oruxmaps_offline),
-        /** The external navigon app */
-        NAVIGON(new NavigonApp(), 10, R.string.pref_navigation_menu_navigon),
         /** The external Sygic app in walking mode */
         SYGIC_WALKING(new SygicNavigationWalkingApp(), 11, R.string.pref_navigation_menu_sygic_walking),
         /** The external Sygic app in driving mode */
