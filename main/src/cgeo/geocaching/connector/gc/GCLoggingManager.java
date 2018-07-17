@@ -70,7 +70,7 @@ class GCLoggingManager extends AbstractLoggingManager implements LoaderManager.L
             hasLoaderError = true;
         } else {
             trackables = new ArrayList<>();
-            final GCWebAPI.TrackableInventoryEntry[] trackableInventoryItems = GCWebAPI.getTrackableInventory().blockingGet();
+            final List<GCWebAPI.TrackableInventoryEntry> trackableInventoryItems = GCWebAPI.getTrackableInventory();
             if (trackableInventoryItems != null) {
                 for (final GCWebAPI.TrackableInventoryEntry entry : trackableInventoryItems) {
                     trackables.add(new TrackableLog(entry.referenceCode, entry.trackingNumber, entry.name, 0, 0, TrackableBrand.TRAVELBUG));

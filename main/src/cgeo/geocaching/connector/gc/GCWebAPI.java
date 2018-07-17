@@ -17,6 +17,7 @@ import android.support.annotation.NonNull;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -42,6 +43,10 @@ class GCWebAPI {
 
     private static final Object CACHE_LOCK = new Object();
     private static final String API_URL = "https://www.geocaching.com/api/proxy";
+
+    /** maximum number of elements to retrieve with one call */
+    private static final int MAX_TAKE = 50;
+
     private static Authorization cachedAuthorization;
     private static long cachedAuthorizationExpires;
 
@@ -391,8 +396,16 @@ class GCWebAPI {
     /**
      * https://www.geocaching.com/api/proxy/trackables?inCollection=false&skip=0&take=50
      */
-    static Single<TrackableInventoryEntry[]> getTrackableInventory() {
-        return getAPI("/trackables?inCollection=false&skip=0&take=50", TrackableInventoryEntry[].class);
+    static List<TrackableInventoryEntry> getTrackableInventory() {
+        final List<TrackableInventoryEntry> trackableInventoryEntries = new ArrayList<>();
+        int skip = 0;
+        TrackableInventoryEntry[] entries;
+        do {
+            entries = getAPI("/trackables?inCollection=false&take=" + MAX_TAKE + "&skip=" + skip, TrackableInventoryEntry[].class).blockingGet();
+            trackableInventoryEntries.addAll(Arrays.asList(entries));
+            skip += MAX_TAKE;
+        } while (entries.length == MAX_TAKE);
+        return trackableInventoryEntries;
     }
 
     /**
