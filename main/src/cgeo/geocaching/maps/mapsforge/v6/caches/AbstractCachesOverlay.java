@@ -1,6 +1,7 @@
 package cgeo.geocaching.maps.mapsforge.v6.caches;
 
 import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
@@ -131,7 +132,18 @@ public abstract class AbstractCachesOverlay {
                     continue;
                 }
                 if (showWaypoints) {
-                    final List<Waypoint> waypoints = cache.getWaypoints();
+
+                    final Set<Waypoint> waypoints = new HashSet<>(cache.getWaypoints());
+
+                    final CachesBundle bundle = bundleRef.get();
+                    if (bundle != null) {
+                        final boolean excludeMine = Settings.isExcludeMyCaches();
+                        final boolean excludeDisabled = Settings.isExcludeDisabledCaches();
+                        final CacheType type = Settings.getCacheType();
+
+                        final Set<Waypoint> waypointsInViewport = DataStore.loadWaypoints(bundle.getViewport(), excludeMine, excludeDisabled, type);
+                        waypoints.addAll(waypointsInViewport);
+                    }
                     for (final Waypoint waypoint : waypoints) {
                         if (waypoint == null || waypoint.getCoords() == null) {
                             continue;
