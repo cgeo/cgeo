@@ -3,6 +3,7 @@ package cgeo.geocaching.maps.mapsforge.v6.layers;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.maps.routing.Routing;
+import cgeo.geocaching.settings.Settings;
 
 import android.content.Context;
 import android.location.Location;
@@ -50,7 +51,7 @@ public class NavigationLayer extends Layer {
 
     @Override
     public void draw(final BoundingBox boundingBox, final byte zoomLevel, final Canvas canvas, final Point topLeftPoint) {
-        if (destinationCoords == null || currentCoords == null) {
+        if (destinationCoords == null || currentCoords == null || !Settings.isMapDirection()) {
             return;
         }
 
