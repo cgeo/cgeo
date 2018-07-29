@@ -38,11 +38,6 @@
         app:showAsAction="ifRoom|withText">
     </item>
     <item
-        android:id="@+id/menu_repeat_last"
-        android:title="@string/log_repeat"
-        app:showAsAction="ifRoom|withText">
-    </item>
-    <item
         android:id="@+id/menu_sort_trackables_by"
         android:title="@string/log_tb_sortby"
         app:showAsAction="ifRoom|withText">
@@ -61,6 +56,11 @@
 	            </item>
 	        </group>
         </menu>
+    </item>
+    <item
+        android:id="@+id/menu_repeat_last"
+        android:title="@string/log_repeat"
+        app:showAsAction="ifRoom|withText">
     </item>
     <item
         android:id="@+id/clear"
