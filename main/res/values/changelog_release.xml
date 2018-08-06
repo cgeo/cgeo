@@ -3,7 +3,14 @@
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
     <b>Next bugfix release:</b>\n
-    · Fix: only 20 trackables where shown when logging a cache (increased to 50)\n
+    · Fix: Only 20 trackables where shown when logging a cache\n
+    · Fix: Reorder menu items on logging screen to prevent accidental deletion of log\n
+    · Fix: Show closeout warning on Android below 4.1\n
+           <a href="http://faq.cgeo.org/#7078">Android 4.0 can no longer login to geocaching.com</a>\n
+    · Fix: Waypoints on mapsforge map hidden already below configured limit\n
+           Known issue:\n
+           Waypoints from other lists might leak onto the map....we are working on it\n
+    · Removed: Navigon support for Navigation (App discontinued)\n
     \n
     <b>2018.06.26:</b>\n
     · New: New mapsforge library (former beta version) now used by default for OSM and offline maps\n
