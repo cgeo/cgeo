@@ -4,6 +4,10 @@
   <string name="changelog_master" translatable="false">
     <b>Next feature release:</b>\n
     · Fix: Remove outdated Navigon navigation application\n
+    · Fix: Reorder menu items on logging screen to prevent accidental deletion of log\n
+    · Fix: Waypoints on mapsforge map hidden already below configured limit\n
+           Known issue:\n
+           Waypoints from other lists might leak onto the map....we are working on it\n  
     \n
   </string>
 </resources>
