@@ -192,7 +192,7 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
             final ScrollView view = (ScrollView) getLayoutInflater().inflate(R.layout.about_version_page, parentView, false);
             ButterKnife.bind(this, view);
             version.setText(Version.getVersionName(AboutActivity.this));
-            setClickListener(donateButton, "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=AQBS7UP76CXW2");
+            setClickListener(donateButton, "https://www.cgeo.org");
             if (StringUtils.isNotEmpty(BuildConfig.SPECIAL_BUILD)) {
                 specialBuild.setText(BuildConfig.SPECIAL_BUILD);
                 specialBuild.setVisibility(View.VISIBLE);
