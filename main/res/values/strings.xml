@@ -431,8 +431,8 @@
     <string name="about_version">Version</string>
     <string name="about_changelog">Changelog</string>
     <string name="about_system">System</string>
-    <string name="about_donate">Donate</string>
-    <string name="about_donation_more">Donate\ndevelopment</string>
+    <string name="about_donate">Support us</string>
+    <string name="about_donation_more">Support c:geo development\nMore info on our website</string>
     <string name="about_contributors">Contributors</string>
     <string name="about_license">License</string>
     <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
