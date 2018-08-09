@@ -124,10 +124,24 @@
   <string name="log_image_description">Popis</string>
   <string name="log_image_scale">Měřítko</string>
   <string name="log_password_title">Logovací heslo:</string>
+  <string name="log_report_problem">Nahlásit problém:</string>
   <string name="log_hint_log_password">Zadej své logovací heslo</string>
   <string name="log_oc_team_comment">Komentář týmu OC</string>
   <string name="log_your_saved_log">Tvé uložené logy</string>
   <string name="log_empty_logbook">Logbook této keše je prázdný.</string>
+  <string name="log_problem_none">Žádný problém</string>
+  <string name="log_problem_needs_maintenance_label">Vyžaduje údržbu</string>
+  <string name="log_problem_needs_maintenance_text">Tento hráč oznámil problém s keší.</string>
+  <string name="log_problem_log_full_label">Logbook je plný</string>
+  <string name="log_problem_log_full_text">Tento hráč oznámil plný logbook.</string>
+  <string name="log_problem_damaged_label">Schránka je poškozená</string>
+  <string name="log_problem_damaged_text">Tento hráč oznámil poškození schránky.</string>
+  <string name="log_problem_missing_label">Keš může být ztracená</string>
+  <string name="log_problem_missing_text">Tento hráč oznámil, že keš může být ztracená.</string>
+  <string name="log_problem_other_label">Jiná</string>
+  <string name="log_problem_other_text">Tento hráč oznámil problém s keší.</string>
+  <string name="log_problem_archive_label">Keš by měla být archivována</string>
+  <string name="log_problem_archive_text">Tento hráč oznámil, že keš by měla být archivována. Reviewer byl informován.</string>
   <string-array name="log_image_scales">
     <item>Bez měřítka</item>
     <item>512 px</item>
@@ -241,6 +255,7 @@
   <string name="info_log_cleared">Zápis byl vyprázdněn.</string>
   <string name="info_waypoint_coordinates_cleared">Souřadnice smazány.</string>
   <string name="info_log_type_changed">Typ logu byl změněn!</string>
+  <string name="info_log_report_problem_changed">Report problem has changed!</string>
   <string name="info_select_logimage_cancelled">Výběr nebo focení obrázku pro log bylo zrušeno.</string>
   <string name="info_stored_image">Nový obrázek uložen do:</string>
   <string name="info_storing_static_maps">Pokus o uložení statických map</string>
@@ -291,6 +306,7 @@
   <plurals name="caches_eta_mins">
     <item quantity="one">%d minuta</item>
     <item quantity="few">%d minuty</item>
+    <item quantity="many">%d minutes</item>
     <item quantity="other">%d minut</item>
   </plurals>
   <string name="caches_store_offline">Uložit offline</string>
@@ -326,12 +342,14 @@
   <plurals name="caches_remove_all_confirm">
     <item quantity="one">Chceš odstranit tuto keš ze seznamu?</item>
     <item quantity="few">Chceš odstranit všechny %d keše ze seznamu?</item>
+    <item quantity="many">Do you want to remove all %d caches from the current list?</item>
     <item quantity="other">Chceš odstranit všech %d keší ze seznamu?</item>
   </plurals>
   <string name="caches_remove_selected">Odstranit vybrané</string>
   <plurals name="caches_remove_selected_confirm">
     <item quantity="one">Opravdu chceš tuto keš odstranit z tvého zařízení?</item>
     <item quantity="few">Opravdu chceš odstranit vybrané keše (%d) z tvého zařízení?</item>
+    <item quantity="many">Do you want to remove the selected %d caches from your device?</item>
     <item quantity="other">Opravdu chceš odstranit vybrané keše (%d) z tvého zařízení?</item>
   </plurals>
   <string name="caches_remove_progress">Odstraňování keší</string>
@@ -400,8 +418,8 @@
   <string name="about_version">Verze</string>
   <string name="about_changelog">Změny</string>
   <string name="about_system">Systém</string>
-  <string name="about_donate">Podpora vývoje</string>
-  <string name="about_donation_more">Podpořit\nvývoj</string>
+  <string name="about_donate">Support us</string>
+  <string name="about_donation_more">Support c:geo development\nMore info on our website</string>
   <string name="about_contributors">Přispívající</string>
   <string name="about_license">Licence</string>
   <string name="about_apache_license"><a href=""> licence Apache, verze 2.0</a></string>
@@ -522,8 +540,9 @@
   <string name="init_signature_template_terrain">Terén</string>
   <string name="init_signature_template_url">URL adresa</string>
   <string name="init_signature_template_log">Text logu</string>
+  <string name="init_signature_template_size">Size</string>
   <string name="init_ratingwanted">Načítat hodnocení</string>
-  <string name="init_summary_ratingwanted">Načítat hodnocení keší z GCVote.com</string>
+  <string name="init_summary_ratingwanted">Načítat hodnocení keší z GCvote.com</string>
   <string name="init_friends_and_own_logs_wanted">Zobrazovat mé logy a logy přátel</string>
   <string name="init_summary_friends_and_own_logs_wanted">Zobrazovat další logbook s mými logy a logy přátel</string>
   <string name="init_openlastdetailspage">Otevřít poslední stránku</string>
@@ -662,6 +681,9 @@
   <string name="feature_search_geocode">Hledat podle geokódu</string>
   <string name="feature_search_owner">Hledat podle vlastníka</string>
   <string name="feature_search_finder">Hledat podle nálezce</string>
+  <string name="init_mapsforge_api_title">Mapsforge API</string>
+  <string name="init_mfold_api">Staré Mapsforge V3</string>
+  <string name="init_mfold_api_description">Aktuální verze obsahuje betaverzi našich našich Mapsforge map. Pokud ti některé funkce chybí nebo zaznamenáš problémy, můžeš se zde vrátit ke starší verzi.</string>
   <string name="init_experimental_title">Experimentální funkce</string>
   <string name="init_mfbeta">Mapsforge beta jako výchozí</string>
   <string name="init_mfbeta_description">Aktuální vydání aplikace obsahuje beta verzi naší nové Mapsforge mapy jako experimentální funkci. Zde lze novou mapu nastavit jako výchozí.</string>
@@ -722,12 +744,14 @@
   <plurals name="cache_counts">
     <item quantity="one">Jedna keš</item>
     <item quantity="few">%1$d keše</item>
+    <item quantity="many">%1$d caches</item>
     <item quantity="other">%1$d keší</item>
   </plurals>
   <!-- days remaining -->
   <plurals name="days_remaining">
     <item quantity="one">zbývá jeden den</item>
     <item quantity="few">zbývají %1$d dny</item>
+    <item quantity="many">%1$d days remaining</item>
     <item quantity="other">zbývá %1$d dnů</item>
   </plurals>
   <string name="last_day_available">zbývá poslední den</string>
@@ -745,18 +769,28 @@
   <plurals name="cache_offline_about_time_mins">
     <item quantity="one">asi před %d minutou</item>
     <item quantity="few">asi před %d minutami</item>
+    <item quantity="many">about %d minutes ago</item>
     <item quantity="other">asi před %d minutami</item>
   </plurals>
   <plurals name="cache_offline_about_time_hours">
     <item quantity="one">asi před %d hodinou</item>
     <item quantity="few">asi před %d hodinami</item>
+    <item quantity="many">about %d hours ago</item>
     <item quantity="other">asi před %d hodinami</item>
   </plurals>
   <plurals name="cache_offline_about_time_days">
     <item quantity="one">asi před %d dnem</item>
     <item quantity="few">asi před %d dny</item>
+    <item quantity="many">about %d days ago</item>
     <item quantity="other">asi před %d dny</item>
   </plurals>
+  <plurals name="cache_offline_about_time_months">
+    <item quantity="one">about %d month ago</item>
+    <item quantity="few">about %d months ago</item>
+    <item quantity="many">about %d months ago</item>
+    <item quantity="other">about %d months ago</item>
+  </plurals>
+  <string name="cache_offline_about_time_year">před více než rokem</string>
   <string name="cache_offline_time_hour">hodinou</string>
   <string name="cache_offline_time_hours">hodinami</string>
   <string name="cache_offline_time_days">dny</string>
@@ -796,6 +830,7 @@
   <plurals name="waypoints">
     <item quantity="one">1 bod trasy</item>
     <item quantity="few">%d body trasy</item>
+    <item quantity="many">%d Waypoints</item>
     <item quantity="other">%d bodů trasy</item>
   </plurals>
   <string name="cache_waypoints_add">Přidat bod trasy</string>
@@ -1133,6 +1168,7 @@
   <string name="helper_sendtocgeo_description">Poslat do c:geo je rozšíření prohlížeče <strong>pro tvůj počítač</strong>. Umožňuje zaslání keše do tvého mobilního zařízení jediným klepnutím, přímo z prohlížeče, při procházení webu Geocaching.com.</string>
   <string name="helper_locus_title">Locus</string>
   <string name="helper_locus_description">Outdoorová navigace pro telefon či tablet. Prohlížení offline topo map, záznam trasy, lov geokeší, hlasová navigace a mnohem více.</string>
+  <string name="helper_gpsstatus_title">GPS Status &amp; Toolbox</string>
   <string name="helper_gpsstatus_description">Můžeš použít radar z této aplikace pro c:geo. Také podporuje další funkce spojené s používáním GPS.</string>
   <string name="helper_bluetoothgps_title">Bluetooth GPS</string>
   <string name="helper_bluetoothgps_description">Umožňuje použít externí GPS přijímač pro přesnější lokalizaci a možná tak i ušetřit nějakou energii.</string>
@@ -1173,6 +1209,7 @@
   <plurals name="export_persnotes_upload_success">
     <item quantity="one">Poznámka byla úspěšně nahrána</item>
     <item quantity="few">Poznámky (%1$d) byly úspěšně nahrány</item>
+    <item quantity="many">Uploaded %1$d notes successfully</item>
     <item quantity="other">Poznámky (%1$d) byly úspěšně nahrány</item>
   </plurals>
   <!-- GC attributes -->
@@ -1420,7 +1457,7 @@
   <string name="status_geocaching_change" tools:ignore="UnusedResources">Nedávné změny na geocaching.com rozbily c:geo.\nPracujeme na opravě, proveď kontrolu později.</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Nedávné změny na geocaching.com rozbily Aktivní mapu c:geo.\nPracujeme na opravě, proveď kontrolu později.</string>
   <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Právě probíhá údržba geocaching.com.\nMohou se vyskytnout různé potíže.</string>
-  <string name="status_closeout_warning" tools:ignore="UnusedResources">Pravděpodobně používáš Android starší než 4.0. Budoucí verze c:geo nemusí být k dispozici pro tvoje zařízení.</string>
+  <string name="status_closeout_warning_41" tools:ignore="UnusedResources">You appear to be using a version of Android older than 4.1. Future releases of c:geo might no longer be available for your device.</string>
   <!-- text-to-speech for compass view -->
   <string name="tts_service">Mluvící kompas</string>
   <string name="tts_start">Začít mluvit</string>
@@ -1432,24 +1469,28 @@
   <plurals name="tts_kilometers">
     <item quantity="one">%s kilometr</item>
     <item quantity="few">%s kilometry</item>
+    <item quantity="many">%s kilometers</item>
     <item quantity="other">%s kilometrů</item>
   </plurals>
   <string name="tts_one_meter">jeden metr</string>
   <plurals name="tts_meters">
     <item quantity="one">%s metr</item>
     <item quantity="few">%s metry</item>
+    <item quantity="many">%s meters</item>
     <item quantity="other">%s metrů</item>
   </plurals>
   <string name="tts_one_mile">jedna míle</string>
   <plurals name="tts_miles">
     <item quantity="one">%s míle</item>
     <item quantity="few">%s míle</item>
+    <item quantity="many">%s miles</item>
     <item quantity="other">%s mil</item>
   </plurals>
   <string name="tts_one_foot">jedna stopa</string>
   <plurals name="tts_feet">
     <item quantity="one">%s stopa</item>
     <item quantity="few">%s stopy</item>
+    <item quantity="many">%s feet</item>
     <item quantity="other">%s stop</item>
   </plurals>
   <string name="tts_one_oclock">jedna hodina</string>
@@ -1459,11 +1500,13 @@
   <plurals name="days_ago">
     <item quantity="one">včera</item>
     <item quantity="few">před %d dny</item>
+    <item quantity="many">%d days ago</item>
     <item quantity="other">před %d dny</item>
   </plurals>
   <plurals name="favorite_points">
     <item quantity="one">%s oblíbená</item>
     <item quantity="few">%s oblíbené</item>
+    <item quantity="many">%s favorites</item>
     <item quantity="other">%s oblíbených</item>
   </plurals>
   <string name="more_than_percent_favorite_points">&gt; %d%% oblíbených položek</string>
@@ -1473,6 +1516,8 @@
   <string name="send">Odeslat</string>
   <string name="confirm_log_title">Speciální typ logu</string>
   <string name="confirm_log_message">Opravdu chceš zalogovat „%s“?</string>
+  <string name="confirm_report_problem_title">Nahlásit problém</string>
+  <string name="confirm_report_problem_message">Opravdu chceš nahlásit „%s“?</string>
   <!-- Geokrety -->
   <string name="settings_activate_geokrety">Aktivovat</string>
   <string name="init_geokrety">GeoKrety.org</string>
@@ -1496,18 +1541,21 @@
   <plurals name="command_move_caches_result">
     <item quantity="one">Přesunuta %d keš</item>
     <item quantity="few">Přesunuty %d keše</item>
+    <item quantity="many">Moved %d caches</item>
     <item quantity="other">Přesunuto %d keší</item>
   </plurals>
   <string name="command_copy_caches_progress">Kopírování keší do seznamu %1s</string>
   <plurals name="command_copy_caches_result">
     <item quantity="one">Zkopírována %d keš</item>
     <item quantity="few">Zkopírovány %d keše</item>
+    <item quantity="many">Copied %d caches</item>
     <item quantity="other">Zkopírováno %d keší</item>
   </plurals>
   <string name="command_delete_caches_progress">Odstraňování keší</string>
   <plurals name="command_delete_caches_result">
     <item quantity="one">Odstraněna %d keš</item>
     <item quantity="few">Odstraněny %d keše</item>
+    <item quantity="many">Deleted %d caches</item>
     <item quantity="other">Odstraněno %d keší</item>
   </plurals>
   <string name="command_rename_list_result">Seznam přejmenován</string>
@@ -1516,6 +1564,7 @@
   <plurals name="fav_points_remaining">
     <item quantity="one">Přidat tuto keš do oblíbených (zbývá %d)</item>
     <item quantity="few">Přidat tuto keš do oblíbených (zbývá %d)</item>
+    <item quantity="many">Add this cache to favorites (%d remaining)</item>
     <item quantity="other">Přidat tuto keš do oblíbených (zbývá %d)</item>
   </plurals>
   <!-- distance units -->
@@ -1539,6 +1588,7 @@
   <plurals name="extract_waypoints_result">
     <item quantity="one">%d bod trasy extrahován</item>
     <item quantity="few">%d body trasy extrahovány</item>
+    <item quantity="many">%d waypoints extracted</item>
     <item quantity="other">%d bodů trasy extrahováno</item>
   </plurals>
   <!-- calendar adder -->
@@ -1549,4 +1599,6 @@
   <string name="list_confirm_debug_message">Režim ladění může způsobit nestabilitu aplikace. Chceš režim ladění vypnout?</string>
   <string name="err_select_logimage_upload_size">Obrázek je příliš velký. Prosím, vyber menší.</string>
   <string name="err_logimage_caption_required">Obrázek musí mít titulek</string>
+  <string name="waypoint_latitude_null">S/J – ° –.---</string>
+  <string name="waypoint_longitude_null">V/Z – ° –.---</string>
 </resources>

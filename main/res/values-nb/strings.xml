@@ -255,6 +255,7 @@
   <string name="info_log_cleared">Loggen ble slettet.</string>
   <string name="info_waypoint_coordinates_cleared">Koordinater fjernet.</string>
   <string name="info_log_type_changed">Logg-typen har blitt forandret!</string>
+  <string name="info_log_report_problem_changed">Report problem has changed!</string>
   <string name="info_select_logimage_cancelled">Valg av bilde ble avbrutt.</string>
   <string name="info_stored_image">Nytt bilde lagret til:</string>
   <string name="info_storing_static_maps">Forsøker å lagre statisk kart</string>
@@ -411,8 +412,8 @@
   <string name="about_version">Versjon</string>
   <string name="about_changelog">Oppdateringslogg</string>
   <string name="about_system">System</string>
-  <string name="about_donate">Donér</string>
-  <string name="about_donation_more">Donér til\nutviklerne</string>
+  <string name="about_donate">Support us</string>
+  <string name="about_donation_more">Support c:geo development\nMore info on our website</string>
   <string name="about_contributors">Bidragsytere</string>
   <string name="about_license">Lisens</string>
   <string name="about_apache_license"><a href="">Apache-lisens, versjon 2.0</a></string>
@@ -533,6 +534,7 @@
   <string name="init_signature_template_terrain">Terrenggrad</string>
   <string name="init_signature_template_url">URL</string>
   <string name="init_signature_template_log">Loggtekst</string>
+  <string name="init_signature_template_size">Size</string>
   <string name="init_ratingwanted">GCvote-rangering</string>
   <string name="init_summary_ratingwanted">Last rangering for cachen fra GCvote.com</string>
   <string name="init_friends_and_own_logs_wanted">Vis venners / egne</string>
@@ -568,10 +570,10 @@
   <string name="init_livelist">Vis cachers retning i listen</string>
   <string name="init_summary_livelist">Vis cachers retning i listen</string>
   <string name="init_backup">Sikkerhetskopiering</string>
-  <string name="init_backup_backup">Lag sikkerhetskopi</string>
+  <string name="init_backup_backup">Sikkerhetskopi</string>
   <string name="init_backup_running">Oppretter sikkerhetskopi av database…</string>
   <string name="init_backup_note">Merk at denne funksjonen vil sikkerhetskopiere/gjenopprette en database som inneholder cacher og veipunkter, men ikke dine innstillinger. \nDin innloggingsinformasjon og passord vil aldri forlate dette programmet.</string>
-  <string name="init_backup_restore">Gjenopprett fra sikkerhetskopi</string>
+  <string name="init_backup_restore">Gjenopprett</string>
   <string name="init_backup_success">Databasen til c:geo ble kopiert til:</string>
   <string name="init_backup_failed">Sikkerhetskopi av databasen til c:geo mislyktes.</string>
   <string name="init_backup_unnecessary">Databasen er tom, sikkerhetskopiering er ikke nødvendig.</string>
@@ -615,6 +617,8 @@
   <string name="init_debug_note">c:geo kan generere masse feilsøkingsinformasjon. Aktivering av denne innstillingen påvirker stabiliteten i c:geo og anbefales bare hvis du blir bedt om å sende en logg til utviklerne. La den være deaktivert under normal bruk av c:geo!</string>
   <string name="init_debug">Aktiver logging av feilsøkingsinformasjon</string>
   <string name="init_dbonsdcard_title">Lagringssted for databasen</string>
+  <string name="init_dbonsdcard_note">You may store the database of c:geo either system internally or in a directory on your user storage. Having it on the user storage may free some memory, but you may lose a bit of performance and c:geo will not work if the storage is not accessible or you remove the database file.</string>
+  <string name="init_dbonsdcard">On user storage</string>
   <string name="init_dbmove_dbmove">Flytter databasen</string>
   <string name="init_dbmove_running">Flytter databasen</string>
   <string name="init_dbmove_success">Databasen er nå flyttet.</string>
@@ -632,10 +636,10 @@
   <string name="init_maintenance_directories_note">c:geo lagrer bilder, loggbilder og andre filer knyttet til en cache i en egen mappe. I noen situasjoner (som importering/eksportering av databasen) vil denne mappen inneholde utdaterte filer som kan slettes her.</string>
   <string name="init_maintenance_directories">Slett utdaterte filer</string>
   <string name="init_location">Geolokasjon</string>
-  <string name="init_location_note">På enheter utstyrt med Google Play-tjenester, kan c:geo automatisk bruke en bedre geolocation-leverandør. Men dette forhindrer bruk av en ekstern BlueTooth GPS-mottaker.</string>
+  <string name="init_location_note">På enheter utstyrt med Google Play-tjenester kan c:geo automatisk bruke en bedre posisjonstjeneste. Vær obs på at dette forhindrer bruk av en ekstern BlueTooth GPS-mottaker.</string>
   <string name="init_location_googleplayservices">Bruk Google Play Services</string>
   <string name="init_low_power">Strømsparingsmodus</string>
-  <string name="init_low_power_note">Strømsparingsmodus unngår GPS og gyroskop når en svært nøyaktig plassering ikke er strengt nødvendig, men det gir lengere behandlingstid.</string>
+  <string name="init_low_power_note">The low-power mode avoids using the GPS and the gyroscope when a highly accurate location is not strictly necessary, at the cost of longer fixing times.</string>
   <string name="init_low_power_mode">Aktivere strømsparingsmodus</string>
   <string name="init_force_orientation_sensor_title">Retningssensor</string>
   <string name="init_force_orientation_sensor_note">På noen enheter vil den normale retningssensoren feilaktig endre retning. Isåfall kan en alternativ sensor (orienteringssensor) gi bedre resultat.</string>
@@ -907,7 +911,7 @@
   <string name="cache_owner">Eier</string>
   <string name="cache_hidden">Publisert</string>
   <string name="cache_event">Dato</string>
-  <string name="cache_location">Sted</string>
+  <string name="cache_location">Location</string>
   <string name="cache_coordinates">Koordinater</string>
   <string name="cache_calculator">Kalkulator</string>
   <string name="cache_coordinates_original">Opprinnelige koordinater</string>
@@ -1431,7 +1435,7 @@
   <string name="status_geocaching_change" tools:ignore="UnusedResources">Nylige endringer på geocaching.com har medført at c:geo ikke virker.\nVi jobber med å løste problemet. Forsøk igjen senere.</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Nylige endringer på geocaching.com har gjort at live-kartet ikke fungerer.\nVi jobber med saken. Prøv igjen senere.</string>
   <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Geocaching.com er nede på grunn av vedlikehold. \nDet kan oppstå ymse problemer.</string>
-  <string name="status_closeout_warning" tools:ignore="UnusedResources">Det ser ut som du bruker Andoid 4.0 eller eldre. Fremtidige utgivelser av c:geo vil trolig ikke virke på din enhet.</string>
+  <string name="status_closeout_warning_41" tools:ignore="UnusedResources">You appear to be using a version of Android older than 4.1. Future releases of c:geo might no longer be available for your device.</string>
   <!-- text-to-speech for compass view -->
   <string name="tts_service">Talende kompass</string>
   <string name="tts_start">Start tale</string>

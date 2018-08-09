@@ -130,7 +130,18 @@
   <string name="log_your_saved_log">Din sparade logg</string>
   <string name="log_empty_logbook">Cachens loggbok är tom.</string>
   <string name="log_problem_none">Inga problem</string>
+  <string name="log_problem_needs_maintenance_label">Needs Maintenance</string>
   <string name="log_problem_needs_maintenance_text">Denna geocacharen rapporterade att det finns ett problem med denna cache.</string>
+  <string name="log_problem_log_full_label">Logbook is full</string>
+  <string name="log_problem_log_full_text">This geocacher reported that the logbook is full.</string>
+  <string name="log_problem_damaged_label">Container is damaged</string>
+  <string name="log_problem_damaged_text">This geocacher reported that the container is damaged.</string>
+  <string name="log_problem_missing_label">Cache might be missing</string>
+  <string name="log_problem_missing_text">This geocacher reported that the cache might be missing.</string>
+  <string name="log_problem_other_label">Other</string>
+  <string name="log_problem_other_text">This geocacher reported that there is a problem with this cache.</string>
+  <string name="log_problem_archive_label">Cache should be archived</string>
+  <string name="log_problem_archive_text">This geocacher reported that this geocache should be archived. A community volunteer reviewer has been notified.</string>
   <string-array name="log_image_scales">
     <item>Ingen skalning</item>
     <item>512 px</item>
@@ -244,6 +255,7 @@
   <string name="info_log_cleared">Loggen har rensats.</string>
   <string name="info_waypoint_coordinates_cleared">Koordinater rensade.</string>
   <string name="info_log_type_changed">Typen av logg har ändrats!</string>
+  <string name="info_log_report_problem_changed">Report problem has changed!</string>
   <string name="info_select_logimage_cancelled">Val av bild avbröts.</string>
   <string name="info_stored_image">Ny bild sparad som:</string>
   <string name="info_storing_static_maps">Försöker ladda ner statiska kartor</string>
@@ -400,8 +412,8 @@
   <string name="about_version">Version</string>
   <string name="about_changelog">Historik</string>
   <string name="about_system">System</string>
-  <string name="about_donate">Stöd c:geo</string>
-  <string name="about_donation_more">Donera till\nutveckling</string>
+  <string name="about_donate">Support us</string>
+  <string name="about_donation_more">Support c:geo development\nMore info on our website</string>
   <string name="about_contributors">Medarbetare</string>
   <string name="about_license">Licens</string>
   <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
@@ -518,10 +530,11 @@
   <string name="init_signature_template_number">Nummer</string>
   <string name="init_signature_template_owner">Ägare</string>
   <string name="init_signature_template_name">Namn</string>
-  <string name="init_signature_template_difficulty">Svårighet</string>
-  <string name="init_signature_template_terrain">Terräng</string>
+  <string name="init_signature_template_difficulty">Difficulty</string>
+  <string name="init_signature_template_terrain">Terrain</string>
   <string name="init_signature_template_url">URL</string>
   <string name="init_signature_template_log">Loggtext</string>
+  <string name="init_signature_template_size">Size</string>
   <string name="init_ratingwanted">GCvote.com</string>
   <string name="init_summary_ratingwanted">Ladda cache betyg från GCvote.com</string>
   <string name="init_friends_and_own_logs_wanted">Visa vänners/egna</string>
@@ -662,6 +675,9 @@
   <string name="feature_search_geocode">Sök med geo-kod</string>
   <string name="feature_search_owner">Sök baserat på ägare</string>
   <string name="feature_search_finder">Sök baserat på hittare</string>
+  <string name="init_mapsforge_api_title">Mapsforge API</string>
+  <string name="init_mfold_api">Old Mapsforge V3</string>
+  <string name="init_mfold_api_description">The current release contains a beta version of our new Mapsforge map. If you miss some features or encounter issues you can go back to the old version here.</string>
   <string name="init_experimental_title">Experimentella funktioner</string>
   <string name="init_mfbeta">Mapsforge beta som standard</string>
   <string name="init_mfbeta_description">Den nuvarande versionen innehåller en betaversion av vår nya Mapforge-karta som en experimentell funktion. Denna karta kan aktiveras här som standard för live- och listkartan.</string>
@@ -686,7 +702,7 @@
   <string name="auth_authorize">Koppla c:geo mot Twitter</string>
   <string name="auth_check">Kolla autentisering</string>
   <string name="auth_check_again">Kolla autentisering igen</string>
-  <string name="auth_start">Kolla autentisering</string>
+  <string name="auth_start">Påbörja koppling mot Twitter</string>
   <string name="auth_again">Koppla mot Twitter igen</string>
   <string name="auth_register">Skapa ett konto</string>
   <string name="auth_connected">Ansluten</string>
@@ -752,6 +768,11 @@
     <item quantity="one">för ca %d dag sedan</item>
     <item quantity="other">för ca %d dagar sedan</item>
   </plurals>
+  <plurals name="cache_offline_about_time_months">
+    <item quantity="one">about %d month ago</item>
+    <item quantity="other">about %d months ago</item>
+  </plurals>
+  <string name="cache_offline_about_time_year">over a year ago</string>
   <string name="cache_offline_time_hour">en timme sedan</string>
   <string name="cache_offline_time_hours">timmar sedan</string>
   <string name="cache_offline_time_days">dagar sedan</string>
@@ -1414,7 +1435,7 @@
   <string name="status_geocaching_change" tools:ignore="UnusedResources">Ändringar som gjorts på geocaching.com har gjort så att c:geo inte fungerar.\nVi jobbar för att lösa problemen, försök igen om en stund.</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Ändringar som gjorts på geocaching.com har gjort så att Live kartan inte fungerar.\nVi jobbar för att lösa problemen, försök igen om en stund.</string>
   <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com utför underhåll.\nDu kan råka ut för olika problem.</string>
-  <string name="status_closeout_warning" tools:ignore="UnusedResources">Du verkar använda en version av Android som är äldre än 4.0. Framtida versioner av c:geo kommer kanske inte vara tillgänglig för din enhet.</string>
+  <string name="status_closeout_warning_41" tools:ignore="UnusedResources">You appear to be using a version of Android older than 4.1. Future releases of c:geo might no longer be available for your device.</string>
   <!-- text-to-speech for compass view -->
   <string name="tts_service">Talande kompass</string>
   <string name="tts_start">Starta tal</string>
@@ -1461,6 +1482,8 @@
   <string name="send">Skicka</string>
   <string name="confirm_log_title">Särskild logtyp</string>
   <string name="confirm_log_message">Du vill logga \'%s\'. Är du säker?</string>
+  <string name="confirm_report_problem_title">Report problem</string>
+  <string name="confirm_report_problem_message">You want to report \'%s\'. Are you sure?</string>
   <!-- Geokrety -->
   <string name="settings_activate_geokrety">Aktivera</string>
   <string name="init_geokrety">GeoKrety.org</string>

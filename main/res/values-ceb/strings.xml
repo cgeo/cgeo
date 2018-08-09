@@ -4,72 +4,76 @@
   <string name="app_name">c:geo</string>
   <!-- basics -->
   <string name="cache">Cache</string>
-  <string name="detail">Mga Detalye</string>
+  <string name="detail">Mga detalye</string>
   <string name="search">Pangitaa</string>
   <string name="helpers">Gamit kaayo nga mga app</string>
-  <string name="about">Mahitungod sa c:geo</string>
+  <string name="about">Ang mahitungod sa c:geo</string>
+  <string name="latitude">Ang Latitud</string>
+  <string name="longitude">Ang longhitud</string>
   <!-- actionbar -->
-  <string name="settings_titlebar">Mga Setting sa c:geo</string>
+  <string name="settings_titlebar">ang mga Setting sa c:geo</string>
   <!-- caches -->
-  <string name="all_types">Tanan nga mga Klase sa Cache</string>
-  <string name="traditional">Kinaraan nga Cache</string>
-  <string name="multi">Dinaghan nga cache</string>
-  <string name="mystery">Misteryo nga Cache</string>
-  <string name="event">Cache sa Panghitabo</string>
-  <string name="mega">Cache sa Minilyon nga Panghitabo</string>
-  <string name="giga">Cache sa Binilyon nga Panghitabo</string>
-  <string name="earth">Earthcache</string>
-  <string name="webcam">Cache sa Webcam</string>
+  <string name="all_types">Tanang klase sa cache</string>
+  <string name="traditional">Tradisyonal na Cache</string>
+  <string name="multi">Ang dinaghan na cache</string>
+  <string name="mystery">Ang misteryo nga Cache</string>
+  <string name="letterbox">Hybrid nga letterbox</string>
+  <string name="event">Ang panghitabo sa Cache</string>
+  <string name="mega">Ang minilyon nga panghitabo sa cache</string>
+  <string name="giga">Binilyon nga panghitabo sa Cache</string>
+  <string name="earth">Ang Earthcache</string>
+  <string name="cito">Ang pagbasura sa panghitabo sa cache</string>
+  <string name="webcam">Ang Cache sa Webcam</string>
   <string name="virtual">Birtwal nga Cache</string>
-  <string name="wherigo">Cache nga Wherigo</string>
-  <string name="lostfound">Cache sa Panghitabo nga Nawala &amp; Nakit-an</string>
-  <string name="ape">Cache sa APE nga Proyekto</string>
-  <string name="gchq">HQ sa Groundspeak</string>
+  <string name="wherigo">Ang Cache nga Whereigo</string>
+  <string name="lostfound">Ang nawala nga &amp; Nakit-an ang panghitabo sa Cache</string>
+  <string name="ape">Ang Proyekto sa APE Cache</string>
+  <string name="gchq">Ang Groundspeak HQ</string>
   <string name="gps">Ang GPS sa mga panimpalad na pagpakita</string>
   <string name="block">Groundspeak ge-tabunan ang Party</string>
-  <string name="unknown">Wala nailhan nga Klase</string>
+  <string name="unknown">Ang wala mailhi nga klase</string>
   <!-- cache sizes -->
   <string name="cache_size_micro">Mikro</string>
-  <string name="cache_size_small">Gamay</string>
+  <string name="cache_size_small">Ang Gamay</string>
   <string name="cache_size_regular">Regular</string>
   <string name="cache_size_large">Dako</string>
-  <string name="cache_size_other">Uban</string>
-  <string name="cache_size_virtual">Birtwal</string>
-  <string name="cache_size_notchosen">Wala napili</string>
-  <string name="cache_size_unknown">Wala nailhan</string>
+  <string name="cache_size_other">Uban pa</string>
+  <string name="cache_size_virtual">Ang birtwal</string>
+  <string name="cache_size_notchosen">Wala napilian</string>
+  <string name="cache_size_unknown">Wala mailhan</string>
   <string name="cache_size_nano">Nano</string>
   <string name="cache_size_very_large">Labihan ka dako</string>
   <!-- waypoints -->
-  <string name="wp_final">Pinal nga Lokasyon</string>
-  <string name="wp_stage">Yugto sa usa ka Dinaghan nga cache</string>
-  <string name="wp_puzzle">Pangutana nga Tubagon</string>
-  <string name="wp_pkg">Parkinganan nga Lugar</string>
+  <string name="wp_final">Ang katapusan nga lokasyon</string>
+  <string name="wp_stage">Ang yugto sa dinaghan nga cache</string>
+  <string name="wp_puzzle">Ang pangutana nga tubagon</string>
+  <string name="wp_pkg">Parkinganan nga lugar</string>
   <string name="wp_trailhead">Trailhead</string>
   <string name="wp_waypoint">Ang punto sa reperensya</string>
   <string name="wp_original">Ang mga coordinate nga orihinal</string>
   <!-- logs -->
-  <string name="log_found">Nakit-an kana</string>
-  <string name="log_dnf">Wala kana nakit-an</string>
-  <string name="log_note">Pagsulat og notaryo</string>
-  <string name="log_published">Namantala</string>
+  <string name="log_found">Nakit-an na</string>
+  <string name="log_dnf">Wala na nakit-an</string>
+  <string name="log_note">Ang notaryo kay isuwat</string>
+  <string name="log_published">Ang gipatik</string>
   <string name="log_enabled">Gipagana</string>
   <string name="log_disabled">Wala gipagana</string>
   <string name="log_attend">Motambong</string>
-  <string name="log_attended">Nitambong</string>
-  <string name="log_retrieved">Gibawi</string>
-  <string name="log_placed">Nabutang</string>
-  <string name="log_grabbed">Nabira sa Usa ka Dapit</string>
-  <string name="log_movecollection">Nabalhin dadto sa Koleksyon</string>
-  <string name="log_moveinventory">Nabalhin ngadto sa Imbentaryo</string>
-  <string name="log_maintained">Nabuhat ang Pamintinar</string>
-  <string name="log_maintenance_needed">Nanginahanglan og Pagmintinar</string>
+  <string name="log_attended">Ningtambong</string>
+  <string name="log_retrieved">Gikuha</string>
+  <string name="log_placed">Ge-butang</string>
+  <string name="log_grabbed">Nabira sa usa ka dapit</string>
+  <string name="log_movecollection">Ang pagbalhin padung sa koleksyon</string>
+  <string name="log_moveinventory">Ang pagbalhin padulong sa Imbentaryo</string>
+  <string name="log_maintained">Ang pamintinar sa gibuhat</string>
+  <string name="log_maintenance_needed">Nanginahanglan ug mintinar</string>
   <string name="log_update">Ang mga na update na koordinado</string>
-  <string name="log_archived">Naarkibo</string>
-  <string name="log_unarchived">Wala naarkibo</string>
-  <string name="log_needs_archived">Nanginahanglan nga maarkibo</string>
-  <string name="log_discovered">Nadiskubre</string>
-  <string name="log_reviewer">Pagtuki sa Notaryo</string>
-  <string name="log_submit_for_review">Isumiter aron sa Pagtuki</string>
+  <string name="log_archived">Gitala</string>
+  <string name="log_unarchived">Wala na-arkibo</string>
+  <string name="log_needs_archived">Nanginahanglan ug mo-arkibo</string>
+  <string name="log_discovered">Ang nadiskobrehan</string>
+  <string name="log_reviewer">Ang pagsusi sa notaryo</string>
+  <string name="log_submit_for_review">Ang oag-sumitir sa gesusi</string>
   <string name="log_retractlisting">Ang gelista kay ibalik</string>
   <string name="log_marked_missing">Ang pagmarka kay nawagtang</string>
   <string name="log_tb_nothing">Walay kay buhaton</string>
@@ -120,10 +124,24 @@
   <string name="log_image_description">Paghulagway</string>
   <string name="log_image_scale">Pagsaka</string>
   <string name="log_password_title">I-log imong Password:</string>
+  <string name="log_report_problem">Report Problem:</string>
   <string name="log_hint_log_password">Pagsulod sa imong password sa log</string>
   <string name="log_oc_team_comment">Ang komentaryo sa OC Team</string>
   <string name="log_your_saved_log">Ang imohang na-save nga log</string>
   <string name="log_empty_logbook">Walay sulod ang logbook sa kini nga cache.</string>
+  <string name="log_problem_none">No Problem</string>
+  <string name="log_problem_needs_maintenance_label">Needs Maintenance</string>
+  <string name="log_problem_needs_maintenance_text">This geocacher reported that there is a problem with this cache.</string>
+  <string name="log_problem_log_full_label">Logbook is full</string>
+  <string name="log_problem_log_full_text">This geocacher reported that the logbook is full.</string>
+  <string name="log_problem_damaged_label">Container is damaged</string>
+  <string name="log_problem_damaged_text">This geocacher reported that the container is damaged.</string>
+  <string name="log_problem_missing_label">Cache might be missing</string>
+  <string name="log_problem_missing_text">This geocacher reported that the cache might be missing.</string>
+  <string name="log_problem_other_label">Other</string>
+  <string name="log_problem_other_text">This geocacher reported that there is a problem with this cache.</string>
+  <string name="log_problem_archive_label">Cache should be archived</string>
+  <string name="log_problem_archive_text">This geocacher reported that this geocache should be archived. A community volunteer reviewer has been notified.</string>
   <string-array name="log_image_scales">
     <item>Walay pagsaka</item>
     <item>512 px</item>
@@ -237,6 +255,7 @@
   <string name="info_log_cleared">Ang log kay gihawanan.</string>
   <string name="info_waypoint_coordinates_cleared">Nalimpyo nga mga tiganos.</string>
   <string name="info_log_type_changed">Ang matang sa log kay giusab!</string>
+  <string name="info_log_report_problem_changed">Report problem has changed!</string>
   <string name="info_select_logimage_cancelled">Gipakansela ang pagpili o pagdakop sa imahe.</string>
   <string name="info_stored_image">Ang bag-ong hulagway kay i-save sa:</string>
   <string name="info_storing_static_maps">Gipaninguha og pagpundo sa istatik nga mga mapa</string>
@@ -393,8 +412,8 @@
   <string name="about_version">Ang bersyon</string>
   <string name="about_changelog">Changelog</string>
   <string name="about_system">Ang Sistema</string>
-  <string name="about_donate">Paghatag</string>
-  <string name="about_donation_more">Paghatag\npagpalambo</string>
+  <string name="about_donate">Support us</string>
+  <string name="about_donation_more">Support c:geo development\nMore info on our website</string>
   <string name="about_contributors">Ang mga tagatampo</string>
   <string name="about_license">Ang Lisensya</string>
   <string name="about_apache_license"><a href="">Apache License, Bersyon 2.0</a></string>
@@ -435,10 +454,13 @@
   <string name="settings_summary_system">Buhata ang bak-ap og hiuli, i-anhay ang direktoryo nga app og lain nga himutangan sa espisipiko nga sistema.</string>
   <string name="settings_title_navigation_menu">Menu sa nabigasyon</string>
   <string name="settings_category_browser">Browser</string>
+  <string name="settings_category_geocaching">Geocaching</string>
   <string name="settings_category_social">Sosyal medya</string>
   <string name="settings_category_logging_other">Lain nga kapilian sa pag logging</string>
   <string name="settings_goto_url_button">dugang …</string>
+  <string name="settings_title_gc">Geocaching.com</string>
   <string name="settings_title_ec">Extremcaching.com</string>
+  <string name="settings_title_ox">Opencaching.com (Garmin)</string>
   <string name="settings_activate_gc">Pag-aktibo</string>
   <string name="settings_activate_ec">Pag-aktibo</string>
   <string name="settings_activate_ox">Pag-aktibo</string>
@@ -450,18 +472,23 @@
   <string name="settings_gc_description">Pagpasugot sa c:geo kuyog sa geocaching.com para mapangita ang mga cache.</string>
   <string name="settings_ec_description">Pagpatugot sa c:geo kuyog sa extremcaching.com para mapangita ang mga cache ug ma akses/filter nimo ang imong nakit-ang mga cache.</string>
   <string name="settings_su_description">Pagpatugot sa c:geo kuyog sa geocaching.su para magpangita sa mga cache.</string>
+  <string name="init_oc">Opencaching.de</string>
   <string name="settings_activate_oc">Pag-aktibo</string>
   <string name="init_summary_oc_de">I-load ang mga cache gikan sa opencaching.de</string>
   <string name="init_oc_de_description">I-awtorisar ang c:geo sa opencaching.de para maka kita sa mga cache og acess/filter ang nakit-an nimo na mga cache.</string>
+  <string name="init_oc_pl">Opencaching.pl</string>
   <string name="settings_activate_oc_pl">Pag-aktibo</string>
   <string name="init_summary_oc_pl">I-load ang mga cache gikan sa opencaching.pl</string>
   <string name="init_oc_pl_description">I-awtorisar ang c:geo sa opencaching.pl para makita ang cache og acess/filter ang mga nakit-an nimo na mga cache.</string>
+  <string name="init_oc_nl">Opencaching.nl</string>
   <string name="settings_activate_oc_nl">Pag-aktibo</string>
   <string name="init_summary_oc_nl">I-load ang mga cache gikan sa opencaching.nl</string>
   <string name="init_oc_nl_description">I-awtorisar ang c:geo sa opencaching.ni para makakita sa mga cache og access/filter ang mga nakit-an nimo na mga cache.</string>
+  <string name="init_oc_us">Opencaching.us</string>
   <string name="settings_activate_oc_us">Pag-aktibo</string>
   <string name="init_summary_oc_us">I-load ang mga cache gikan sa opencaching.us</string>
   <string name="init_oc_us_description">I-awtorisar ang c:geo sa opencaching.us para maka kita sa mga cache og access/filter ang mga nakit-an nimo na mga cache.</string>
+  <string name="init_oc_ro">Opencaching.ro</string>
   <string name="settings_activate_oc_ro">Pag-aktibo</string>
   <string name="init_summary_oc_ro">I-load ang mga cache gikan sa opencaching.ro</string>
   <string name="init_oc_ro_description">I-awtorisar ang c:geo sa opencaching.ro para maka kita sa mga cache og access/filter ang mga nakit-an nimo na mga cache.</string>
@@ -503,10 +530,11 @@
   <string name="init_signature_template_number">Numero</string>
   <string name="init_signature_template_owner">Tag-iya</string>
   <string name="init_signature_template_name">Pangalan</string>
-  <string name="init_signature_template_difficulty">Kalisud</string>
-  <string name="init_signature_template_terrain">Yuta</string>
+  <string name="init_signature_template_difficulty">Difficulty</string>
+  <string name="init_signature_template_terrain">Terrain</string>
   <string name="init_signature_template_url">URL</string>
   <string name="init_signature_template_log">Ang teksto sa log</string>
+  <string name="init_signature_template_size">Size</string>
   <string name="init_ratingwanted">Rating sa GCvote</string>
   <string name="init_summary_ratingwanted">Ang pag-load sa rating sa cache gikan sa GCvote.com</string>
   <string name="init_friends_and_own_logs_wanted">Ang pagpakita sa mga Higala/Kaugalingon</string>
@@ -647,6 +675,9 @@
   <string name="feature_search_geocode">Pagpangita pinaagi sa geocode</string>
   <string name="feature_search_owner">Pagpangita pinaagi sa tag-iya</string>
   <string name="feature_search_finder">Pagpangita pinaagi sa finder</string>
+  <string name="init_mapsforge_api_title">Mapsforge API</string>
+  <string name="init_mfold_api">Old Mapsforge V3</string>
+  <string name="init_mfold_api_description">The current release contains a beta version of our new Mapsforge map. If you miss some features or encounter issues you can go back to the old version here.</string>
   <string name="init_experimental_title">Mga eksperimentong bahin</string>
   <string name="init_mfbeta">I-default ang Mapsforge beta</string>
   <string name="init_mfbeta_description">Ang bag-o nga gawas adunay beta nga bersyon sa among bag-o nga Mapsforge nga mapa isip usa ka eksperimental na panagway. Ang kaning bag-o na mapa puwede ma-aktibo diri isip usa ka default para sa live nga mapa og mga lista sa mapa.</string>
@@ -692,6 +723,11 @@
   <!-- auth Twitter -->
   <string name="auth_dialog_completed_twitter">ang c:geo kay ge awtorisar nga maka-post sa Twitter.</string>
   <!-- auth opencaching -->
+  <string name="auth_ocde">opencaching.de</string>
+  <string name="auth_ocpl">opencaching.pl</string>
+  <string name="auth_ocnl">opencaching.nl</string>
+  <string name="auth_ocus">opencaching.us</string>
+  <string name="auth_ocro">opencaching.ro</string>
   <string name="auth_ocuk">opencache.uk</string>
   <string name="auth_dialog_completed_oc">ang c:geo kay ge awtorisar para makig-interact kauban ang %s.</string>
   <!-- auth geokrety -->
@@ -732,6 +768,11 @@
     <item quantity="one">mahitungod sa %d nga adlaw na ang milabay</item>
     <item quantity="other">mahitungod sa %d nga mga adlaw na ang milabay</item>
   </plurals>
+  <plurals name="cache_offline_about_time_months">
+    <item quantity="one">about %d month ago</item>
+    <item quantity="other">about %d months ago</item>
+  </plurals>
+  <string name="cache_offline_about_time_year">over a year ago</string>
   <string name="cache_offline_time_hour">usa ka oras ang milabay</string>
   <string name="cache_offline_time_hours">mga oras na ang milabay</string>
   <string name="cache_offline_time_days">mga adlaw na ang milabay</string>
@@ -835,7 +876,9 @@
   <string name="cache_menu_whereyougo">Asakapadung</string>
   <string name="cache_menu_oruxmaps_online">OruxMaps (Online)</string>
   <string name="cache_menu_oruxmaps_offline">OruxMaps (Offline)</string>
+  <string name="cache_menu_navigon">Navigon</string>
   <string name="cache_menu_pebble">Balas</string>
+  <string name="cache_menu_android_wear">Android Wear</string>
   <string name="cache_menu_vote">Boto</string>
   <string name="cache_menu_checker">Ablihi ang Geochecker</string>
   <string name="cache_menu_challenge_checker">Pagpangita sa hagit sa checker</string>
@@ -1105,6 +1148,7 @@
   <string name="helper_sendtocgeo_description">Ipadala sa c:geo ay usa ka browser na ekstenyon <strong>para sa imung PC</strong>.Kung kag-browse ug geocaching.com, pwede ka magpadala ug mga cache sa imong cellphone kauban sa pagpislit sa pislitanan diretso sa sulod na browser.</string>
   <string name="helper_locus_title">Locus</string>
   <string name="helper_locus_description">Gawas sa nabigasyon app para sa imung cellphone ug tablet.. Tan-awa ang mga topo na mapa, sunda ang imung rota, pangitaa ang mga geocache, mugamit ug sundaanan sa tingof ug magbuhat ug lain pa.</string>
+  <string name="helper_gpsstatus_title">GPS Status &amp; Toolbox</string>
   <string name="helper_gpsstatus_description">Pwede nimu gamiton ang radar sa aplikasyon ng conjuctionsa c:geo.  Silay ay nagtanyag ng daghan pang GPS na kaugalingong impormasyon</string>
   <string name="helper_bluetoothgps_title">GPS sa bluetooth</string>
   <string name="helper_bluetoothgps_description">Gisugtan ka na mugamit ug external GPS receiver para makuha paglaing nindot na lokasyong data, ug pwedeng makahabilin ug baterya sa imung device.</string>
@@ -1373,6 +1417,7 @@
   <string name="attribute_offset_cache_no">Dili timbang nga cache</string>
   <!-- next things -->
   <string name="quote">Para mas sayun ang geocaching, maghimo og lazier nga manggagamit.</string>
+  <string name="powered_by">carnero</string>
   <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
   <string name="support_title">Suporta</string>
   <string name="website_title">Websayt</string>
@@ -1390,7 +1435,7 @@
   <string name="status_geocaching_change" tools:ignore="UnusedResources">Ang mga bag-o nga nausab sa geocaching.com kay nakaguba sa c:geo.\nAmo kaning gi-trabaho, tan awa kini sa madayon.</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Ang mga bag-o nga nausab sa geocaching.com kay nakaguba sa live nga map nga panagway.\nAmo kaning gi-trabaho, tan awa kini sa madayon.</string>
   <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com kay gi-ayo pa.\nBasin makaagi ka og mga isyu.</string>
-  <string name="status_closeout_warning" tools:ignore="UnusedResources">Nigawas na ikaw naggamit og bersyon sa Andriod nga mas karaan sa 4.0. Ang damlag na paggawas sa c:geo kay mahimong di puwede magamit sa imong himan o kasangkapan.</string>
+  <string name="status_closeout_warning_41" tools:ignore="UnusedResources">You appear to be using a version of Android older than 4.1. Future releases of c:geo might no longer be available for your device.</string>
   <!-- text-to-speech for compass view -->
   <string name="tts_service">Mosturya na kompas</string>
   <string name="tts_start">Magsugod og isturya</string>
@@ -1437,6 +1482,8 @@
   <string name="send">Ipadala</string>
   <string name="confirm_log_title">Espesyal nga porma sa log</string>
   <string name="confirm_log_message">Ganahan ka i-log ang %s\'. Sigurado ka?</string>
+  <string name="confirm_report_problem_title">Report problem</string>
+  <string name="confirm_report_problem_message">You want to report \'%s\'. Are you sure?</string>
   <!-- Geokrety -->
   <string name="settings_activate_geokrety">I-aktibo</string>
   <string name="init_geokrety">GeoKrety.org</string>
@@ -1479,6 +1526,11 @@
     <item quantity="other">Ipuno kani nga cache adto sa mga paborito (%d nagpabilin)</item>
   </plurals>
   <!-- distance units -->
+  <string name="unit_m">m</string>
+  <string name="unit_km">km</string>
+  <string name="unit_ft">ft</string>
+  <string name="unit_yd">yd</string>
+  <string name="unit_mi">mi</string>
   <string name="pq_available_for_download">Ang Pocket query ay bakante para sa pag-download</string>
   <string name="pq_available_for_download_description">Ang Pocket query kay magamit para sa pag-download sa usa ka file. Ganahan ba ka na i-downalod ug i-import o tan-awon ang nga cache sa listahan?</string>
   <string name="pq_as_cache_list">Tan-awa ang listahan sa cache</string>
@@ -1503,4 +1555,6 @@
   <string name="list_confirm_debug_message">Ang debug na pamaagi kay maoy hinungdan para ma-instabilities! Ganahan ba ka nga mag-deactivate sa debug na pamaagi?</string>
   <string name="err_select_logimage_upload_size">Dako ra kaayo ang imahe, palihog ug pili sa mas gamay na scale.</string>
   <string name="err_logimage_caption_required">Ang kapsyon kay kinahanglan jod para sa imahe</string>
+  <string name="waypoint_latitude_null">N/S --° --.---</string>
+  <string name="waypoint_longitude_null">E/W --° --.---</string>
 </resources>
