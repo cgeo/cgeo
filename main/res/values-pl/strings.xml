@@ -124,10 +124,24 @@
   <string name="log_image_description">Opis</string>
   <string name="log_image_scale">Skalowanie obrazu</string>
   <string name="log_password_title">Hasło do logu:</string>
+  <string name="log_report_problem">Report Problem:</string>
   <string name="log_hint_log_password">Wpisz hasło do logu</string>
   <string name="log_oc_team_comment">Komentarz zespołu OC</string>
   <string name="log_your_saved_log">Twój zapisany wpis</string>
   <string name="log_empty_logbook">Logbook tej skrzynki jest pusty.</string>
+  <string name="log_problem_none">No Problem</string>
+  <string name="log_problem_needs_maintenance_label">Needs Maintenance</string>
+  <string name="log_problem_needs_maintenance_text">This geocacher reported that there is a problem with this cache.</string>
+  <string name="log_problem_log_full_label">Logbook is full</string>
+  <string name="log_problem_log_full_text">This geocacher reported that the logbook is full.</string>
+  <string name="log_problem_damaged_label">Container is damaged</string>
+  <string name="log_problem_damaged_text">This geocacher reported that the container is damaged.</string>
+  <string name="log_problem_missing_label">Cache might be missing</string>
+  <string name="log_problem_missing_text">This geocacher reported that the cache might be missing.</string>
+  <string name="log_problem_other_label">Other</string>
+  <string name="log_problem_other_text">This geocacher reported that there is a problem with this cache.</string>
+  <string name="log_problem_archive_label">Cache should be archived</string>
+  <string name="log_problem_archive_text">This geocacher reported that this geocache should be archived. A community volunteer reviewer has been notified.</string>
   <string-array name="log_image_scales">
     <item>Brak skalowania</item>
     <item>512 px</item>
@@ -241,6 +255,7 @@
   <string name="info_log_cleared">Wpis został usunięty.</string>
   <string name="info_waypoint_coordinates_cleared">Współrzędne wyczyszczone.</string>
   <string name="info_log_type_changed">Rodzaj wpisu w dzienniku został zmieniony!</string>
+  <string name="info_log_report_problem_changed">Report problem has changed!</string>
   <string name="info_select_logimage_cancelled">Wybór obrazu został anulowany.</string>
   <string name="info_stored_image">Nowy obraz zapisany w:</string>
   <string name="info_storing_static_maps">Próbuję zapisać mapy statyczne</string>
@@ -291,6 +306,7 @@
   <plurals name="caches_eta_mins">
     <item quantity="one">%d minuta</item>
     <item quantity="few">%d minuty</item>
+    <item quantity="many">%d minutes</item>
     <item quantity="other">%d minut</item>
   </plurals>
   <string name="caches_store_offline">Zapisz offline</string>
@@ -326,12 +342,14 @@
   <plurals name="caches_remove_all_confirm">
     <item quantity="one">Czy chcesz usunąć wybraną skrzynkę z obecnej listy?</item>
     <item quantity="few">Czy chcesz usunąć %d skrzynki z obecnej listy?</item>
+    <item quantity="many">Do you want to remove all %d caches from the current list?</item>
     <item quantity="other">Czy chcesz usunąć %d skrzynek z obecnej listy?</item>
   </plurals>
   <string name="caches_remove_selected">Usuń wybrane</string>
   <plurals name="caches_remove_selected_confirm">
     <item quantity="one">Czy chcesz usunąć wybraną skrzynkę z urządzenia?</item>
     <item quantity="few">Czy chcesz usunąć %d zaznaczone skrzynki z urządzenia?</item>
+    <item quantity="many">Do you want to remove the selected %d caches from your device?</item>
     <item quantity="other">Czy chcesz usunąć %d zaznaczonych skrzynek z urządzenia?</item>
   </plurals>
   <string name="caches_remove_progress">Usuwanie skrzynek</string>
@@ -400,8 +418,8 @@
   <string name="about_version">Wersja</string>
   <string name="about_changelog">Zmiany</string>
   <string name="about_system">System</string>
-  <string name="about_donate">Podaruj</string>
-  <string name="about_donation_more">Darowizna dla\nprogramisty</string>
+  <string name="about_donate">Support us</string>
+  <string name="about_donation_more">Support c:geo development\nMore info on our website</string>
   <string name="about_contributors">Współpracownicy</string>
   <string name="about_license">Licencja</string>
   <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
@@ -468,12 +486,15 @@
   <string name="settings_activate_oc_pl">Aktywuj</string>
   <string name="init_summary_oc_pl">Załaduj skrzynki z opencaching.pl</string>
   <string name="init_oc_pl_description">Autoryzuj c:geo z opencaching.pl aby wyszukiwać skrzynki i mieć dostęp/filtrować znalezione skrzynki.</string>
+  <string name="init_oc_nl">Opencaching.nl</string>
   <string name="settings_activate_oc_nl">Aktywuj</string>
   <string name="init_summary_oc_nl">Załaduj skrzynki z opencaching.nl</string>
   <string name="init_oc_nl_description">Autoryzuj c:geo z opencaching.nl aby wyszukiwać skrzynki i mieć dostęp/filtrować znalezione skrzynki.</string>
+  <string name="init_oc_us">Opencaching.us</string>
   <string name="settings_activate_oc_us">Aktywuj</string>
   <string name="init_summary_oc_us">Załaduj skrzynki z opencaching.us</string>
   <string name="init_oc_us_description">Autoryzuj c:geo z opencaching.us aby wyszukiwać skrzynki i mieć dostęp/filtrować znalezione skrzynki.</string>
+  <string name="init_oc_ro">Opencaching.ro</string>
   <string name="settings_activate_oc_ro">Aktywuj</string>
   <string name="init_summary_oc_ro">Załaduj skrzynki z opencaching.ro</string>
   <string name="init_oc_ro_description">Autoryzuj c:geo z opencaching.ro aby wyszukiwać skrzynki i mieć dostęp/filtrować znalezione skrzynki.</string>
@@ -515,10 +536,11 @@
   <string name="init_signature_template_number">Numer</string>
   <string name="init_signature_template_owner">Właściciel</string>
   <string name="init_signature_template_name">Nazwa</string>
-  <string name="init_signature_template_difficulty">Trudność</string>
-  <string name="init_signature_template_terrain">Teren</string>
+  <string name="init_signature_template_difficulty">Difficulty</string>
+  <string name="init_signature_template_terrain">Terrain</string>
   <string name="init_signature_template_url">URL</string>
   <string name="init_signature_template_log">Wpis</string>
+  <string name="init_signature_template_size">Size</string>
   <string name="init_ratingwanted">Załaduj ocenę skrzynki z GCvote.com</string>
   <string name="init_summary_ratingwanted">Załaduj ocenę skrzynki z GCvote.com</string>
   <string name="init_friends_and_own_logs_wanted">Pokaż przyjaciół/własne</string>
@@ -659,6 +681,9 @@
   <string name="feature_search_geocode">Szukanie po numerze skrzynki</string>
   <string name="feature_search_owner">Szukaj wg właściciela</string>
   <string name="feature_search_finder">Szukaj wg znalazcy</string>
+  <string name="init_mapsforge_api_title">Mapsforge API</string>
+  <string name="init_mfold_api">Old Mapsforge V3</string>
+  <string name="init_mfold_api_description">The current release contains a beta version of our new Mapsforge map. If you miss some features or encounter issues you can go back to the old version here.</string>
   <string name="init_experimental_title">Funkcje eksperymentalne</string>
   <string name="init_mfbeta">Mapsforge beta jako domyślne</string>
   <string name="init_mfbeta_description">Obecne wydanie zawiera wersję beta map Mapsforge jako eksperymentalną funkcję. Nowa mapa może być aktywowana tutaj jako domyślna dla map online i map z listy.</string>
@@ -706,6 +731,9 @@
   <!-- auth opencaching -->
   <string name="auth_ocde">opencaching.de</string>
   <string name="auth_ocpl">opencaching.pl</string>
+  <string name="auth_ocnl">opencaching.nl</string>
+  <string name="auth_ocus">opencaching.us</string>
+  <string name="auth_ocro">opencaching.ro</string>
   <string name="auth_ocuk">opencache.uk</string>
   <string name="auth_dialog_completed_oc">c:geo został zautoryzowany by komunikować się z %s.</string>
   <!-- auth geokrety -->
@@ -716,12 +744,14 @@
   <plurals name="cache_counts">
     <item quantity="one">Jedna skrzynka</item>
     <item quantity="few">%1$d skrzynki</item>
+    <item quantity="many">%1$d caches</item>
     <item quantity="other">%1$d skrzynek</item>
   </plurals>
   <!-- days remaining -->
   <plurals name="days_remaining">
     <item quantity="one">został jeden dzień</item>
     <item quantity="few">zostało %1$d dni</item>
+    <item quantity="many">%1$d days remaining</item>
     <item quantity="other">zostało %1$d dni</item>
   </plurals>
   <string name="last_day_available">dostępne ostatni dzień</string>
@@ -739,18 +769,28 @@
   <plurals name="cache_offline_about_time_mins">
     <item quantity="one">około %d minuty temu</item>
     <item quantity="few">około %d minut temu</item>
+    <item quantity="many">about %d minutes ago</item>
     <item quantity="other">około %d minut temu</item>
   </plurals>
   <plurals name="cache_offline_about_time_hours">
     <item quantity="one">około %d godziny temu</item>
     <item quantity="few">około %d godzin temu</item>
+    <item quantity="many">about %d hours ago</item>
     <item quantity="other">około %d godzin temu</item>
   </plurals>
   <plurals name="cache_offline_about_time_days">
     <item quantity="one">około %d dnia temu</item>
     <item quantity="few">około %d dni temu</item>
+    <item quantity="many">about %d days ago</item>
     <item quantity="other">około %d dni temu</item>
   </plurals>
+  <plurals name="cache_offline_about_time_months">
+    <item quantity="one">about %d month ago</item>
+    <item quantity="few">about %d months ago</item>
+    <item quantity="many">about %d months ago</item>
+    <item quantity="other">about %d months ago</item>
+  </plurals>
+  <string name="cache_offline_about_time_year">over a year ago</string>
   <string name="cache_offline_time_hour">przed jedną godziną</string>
   <string name="cache_offline_time_hours">godzin temu</string>
   <string name="cache_offline_time_days">dni temu</string>
@@ -790,6 +830,7 @@
   <plurals name="waypoints">
     <item quantity="one">1 punkt</item>
     <item quantity="few">%d punkty</item>
+    <item quantity="many">%d Waypoints</item>
     <item quantity="other">%d punktów nawigacji</item>
   </plurals>
   <string name="cache_waypoints_add">Dodaj punkt nawigacji</string>
@@ -857,6 +898,7 @@
   <string name="cache_menu_oruxmaps_offline">OruxMaps (Offline)</string>
   <string name="cache_menu_navigon">Navigon</string>
   <string name="cache_menu_pebble">Zegarek Pebble</string>
+  <string name="cache_menu_android_wear">Android Wear</string>
   <string name="cache_menu_vote">Głosuj</string>
   <string name="cache_menu_checker">Otwórz Geochecker\'a</string>
   <string name="cache_menu_challenge_checker">Szukaj Challenge-Checker</string>
@@ -1126,6 +1168,7 @@
   <string name="helper_sendtocgeo_description">Wyślij do c:geo jest rozszerzeniem do przeglądarki <strong>na komputer</strong>. Podczas przeglądania Geocaching.com pozwala na wysłanie skrzynek bezpośrednio do telefonu, za pomocą jednego przycisku w przeglądarce.</string>
   <string name="helper_locus_title">Locus</string>
   <string name="helper_locus_description">Program do nawigacji w terenie dla Twojego telefonu lub tabletu. Przeglądaj mapy topograficzne offiline, śledź swoją trasę, poluj na skrzynki geocache, używaj nawigacji głosowej i wiele więcej.</string>
+  <string name="helper_gpsstatus_title">GPS Status &amp; Toolbox</string>
   <string name="helper_gpsstatus_description">Można wywołać radar bezpośrednio z aplikacji c:geo. Oferuje on również wiele informacji związanych z GPS.</string>
   <string name="helper_bluetoothgps_title">Bluetooth GPS</string>
   <string name="helper_bluetoothgps_description">Umożliwia korzystanie z zewnętrznego odbiornika sygnału GPS, w celu uzyskania bardziej precyzyjnej lokalizacji i zaoszczędzenia baterii telefonu.</string>
@@ -1166,6 +1209,7 @@
   <plurals name="export_persnotes_upload_success">
     <item quantity="one">Wysłano pomyślnie notatkę</item>
     <item quantity="few">Wysłano pomyślnie %1$d notatki</item>
+    <item quantity="many">Uploaded %1$d notes successfully</item>
     <item quantity="other">Wysłano pomyślnie %1$d notatek</item>
   </plurals>
   <!-- GC attributes -->
@@ -1413,7 +1457,7 @@
   <string name="status_geocaching_change" tools:ignore="UnusedResources">Ostatnie zmiany na geocaching.com popsuły c:geo.\nPracujemy nad tym, sprawdź ponownie niedługo.</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Ostatnie zmiany na geocaching.com popsuły funkcjonalność map online.\nPracujemy nad tym, sprawdź ponownie niedługo.</string>
   <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com jest w trakcie konserwacji.\nMogą wystąpić różnorodne problemy.</string>
-  <string name="status_closeout_warning" tools:ignore="UnusedResources">Wygląda, że używasz wersji Android starszej niż 4.0. Następne wydania c:geo mogą być niedostępne dla Twojego urządzenia.</string>
+  <string name="status_closeout_warning_41" tools:ignore="UnusedResources">You appear to be using a version of Android older than 4.1. Future releases of c:geo might no longer be available for your device.</string>
   <!-- text-to-speech for compass view -->
   <string name="tts_service">Mówiący kompas</string>
   <string name="tts_start">Zacznij mówić</string>
@@ -1425,24 +1469,28 @@
   <plurals name="tts_kilometers">
     <item quantity="one">%s kilometr</item>
     <item quantity="few">%s kilometry</item>
+    <item quantity="many">%s kilometers</item>
     <item quantity="other">%s kilometrów</item>
   </plurals>
   <string name="tts_one_meter">jeden metr</string>
   <plurals name="tts_meters">
     <item quantity="one">%s metr</item>
     <item quantity="few">%s metry</item>
+    <item quantity="many">%s meters</item>
     <item quantity="other">%s metrów</item>
   </plurals>
   <string name="tts_one_mile">jedna mila</string>
   <plurals name="tts_miles">
     <item quantity="one">%s mila</item>
     <item quantity="few">%s mile</item>
+    <item quantity="many">%s miles</item>
     <item quantity="other">%s mil</item>
   </plurals>
   <string name="tts_one_foot">jedna stopa</string>
   <plurals name="tts_feet">
     <item quantity="one">%s stopa</item>
     <item quantity="few">%s stopy</item>
+    <item quantity="many">%s feet</item>
     <item quantity="other">%s stóp</item>
   </plurals>
   <string name="tts_one_oclock">pierwsza</string>
@@ -1452,11 +1500,13 @@
   <plurals name="days_ago">
     <item quantity="one">wczoraj</item>
     <item quantity="few">%d dni temu</item>
+    <item quantity="many">%d days ago</item>
     <item quantity="other">%d dni temu</item>
   </plurals>
   <plurals name="favorite_points">
     <item quantity="one">%s ulubiony</item>
     <item quantity="few">%s ulubione</item>
+    <item quantity="many">%s favorites</item>
     <item quantity="other">%s ulubionych</item>
   </plurals>
   <string name="more_than_percent_favorite_points">&gt; %d%% ulubionych</string>
@@ -1466,6 +1516,8 @@
   <string name="send">Wyślij</string>
   <string name="confirm_log_title">Specjalny typ wpisu</string>
   <string name="confirm_log_message">Chcesz wpisać \'%s\'. Czy jesteś pewien?</string>
+  <string name="confirm_report_problem_title">Report problem</string>
+  <string name="confirm_report_problem_message">You want to report \'%s\'. Are you sure?</string>
   <!-- Geokrety -->
   <string name="settings_activate_geokrety">Aktywuj</string>
   <string name="init_geokrety">GeoKrety.org</string>
@@ -1489,18 +1541,21 @@
   <plurals name="command_move_caches_result">
     <item quantity="one">Przeniesiono %d skrzynkę</item>
     <item quantity="few">Przeniesiono %d skrzynki</item>
+    <item quantity="many">Moved %d caches</item>
     <item quantity="other">Przeniesiono %d skrzynek</item>
   </plurals>
   <string name="command_copy_caches_progress">Kopiowanie skrzynek do listy %1s</string>
   <plurals name="command_copy_caches_result">
     <item quantity="one">Skopiowano %d skrzynkę</item>
     <item quantity="few">Skopiowano %d skrzynki</item>
+    <item quantity="many">Copied %d caches</item>
     <item quantity="other">Skopiowano %d skrzynek</item>
   </plurals>
   <string name="command_delete_caches_progress">Usuwanie skrzynek</string>
   <plurals name="command_delete_caches_result">
     <item quantity="one">Usunięto %d skrzynkę</item>
     <item quantity="few">Usunięto %d skrzynki</item>
+    <item quantity="many">Deleted %d caches</item>
     <item quantity="other">Usunięto %d skrzynek</item>
   </plurals>
   <string name="command_rename_list_result">Zmieniono nazwę listy</string>
@@ -1509,6 +1564,7 @@
   <plurals name="fav_points_remaining">
     <item quantity="one">Dodaj tę skrzynkę do ulubionych (pozostało %d)</item>
     <item quantity="few">Dodaj tę skrzynkę do ulubionych (pozostało %d)</item>
+    <item quantity="many">Add this cache to favorites (%d remaining)</item>
     <item quantity="other">Dodaj tę skrzynkę do ulubionych (pozostało %d)</item>
   </plurals>
   <!-- distance units -->
@@ -1532,6 +1588,7 @@
   <plurals name="extract_waypoints_result">
     <item quantity="one">%d punkt orientacyjny został wyciągnięty</item>
     <item quantity="few">%d punkty orientacyjne zostały wyciągnięte</item>
+    <item quantity="many">%d waypoints extracted</item>
     <item quantity="other">%d punktów orientacyjnych zostało wyciągniętych</item>
   </plurals>
   <!-- calendar adder -->
@@ -1542,4 +1599,6 @@
   <string name="list_confirm_debug_message">Tryb debugowania może powodować niestabilność. Czy chcesz wyłączyć ten tryb?</string>
   <string name="err_select_logimage_upload_size">Zbyt duże zdjęcie, wybierz mniejszą skalę.</string>
   <string name="err_logimage_caption_required">Podpis jest wymagany dla obrazu</string>
+  <string name="waypoint_latitude_null">N/S --° --.---</string>
+  <string name="waypoint_longitude_null">E/W --° --.---</string>
 </resources>

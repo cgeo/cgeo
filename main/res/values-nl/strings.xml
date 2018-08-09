@@ -412,8 +412,8 @@
   <string name="about_version">Versie</string>
   <string name="about_changelog">Changelog</string>
   <string name="about_system">Systeem</string>
-  <string name="about_donate">Doneren</string>
-  <string name="about_donation_more">Doneren aan\nontwikkeling</string>
+  <string name="about_donate">Support us</string>
+  <string name="about_donation_more">Support c:geo development\nMore info on our website</string>
   <string name="about_contributors">Bijdragers</string>
   <string name="about_license">Licentie</string>
   <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
@@ -534,6 +534,7 @@
   <string name="init_signature_template_terrain">Terrein</string>
   <string name="init_signature_template_url">URL</string>
   <string name="init_signature_template_log">Log tekst</string>
+  <string name="init_signature_template_size">Size</string>
   <string name="init_ratingwanted">GCvote.com waardering</string>
   <string name="init_summary_ratingwanted">Laad cachewaardering van GCvote.com</string>
   <string name="init_friends_and_own_logs_wanted">Toon eigen/van vrienden</string>
@@ -852,7 +853,7 @@
   <string name="cache_menu_sygic_drive">Sygic (rijden)</string>
   <string name="cache_menu_radar">Radar</string>
   <string name="cache_menu_map">Toon op kaart</string>
-  <string name="cache_menu_mfbeta">Mapsforge Beta</string>
+  <string name="cache_menu_mfbeta">Mapsforge Bèta</string>
   <string name="cache_menu_map_static">Statische kaarten</string>
   <string name="cache_menu_download_map_static">Download statische kaarten</string>
   <string name="cache_menu_rmaps">Rmaps</string>
@@ -1147,7 +1148,7 @@
   <string name="helper_sendtocgeo_description">Verzenden naar c:geo is een browserextensie <strong>voor uw PC</strong>. Tijdens het browsen op geocaching.com, kunt u caches verzenden naar uw smartphone met een klik direct in de browser.</string>
   <string name="helper_locus_title">Locus</string>
   <string name="helper_locus_description">Outdoor navigatie app voor uw telefoon of Tablet. Topo kaarten offline bekijken, uw route vastleggen, geocaches zoeken, gebruik een stem gids en meer.</string>
-  <string name="helper_gpsstatus_title">GPS-Status &amp; Toolbox</string>
+  <string name="helper_gpsstatus_title">GPS Status &amp; Toolbox</string>
   <string name="helper_gpsstatus_description">De radar van deze applicatie kan gebruikt worden samen met c:geo. Het bied ook vele andere GPS gerelateerde informatie.</string>
   <string name="helper_bluetoothgps_title">Bluetooth GPS</string>
   <string name="helper_bluetoothgps_description">Maakt het mogelijk om een externe GPS ontvanger te gebruiken voor betere ontvangst, betere locatiebepaling en kan gebruik van de telefoonbatterij verminderen.</string>
@@ -1434,7 +1435,7 @@
   <string name="status_geocaching_change" tools:ignore="UnusedResources">Recente aanpassingen op geocaching.com zorgen dat c:geo niet meer (100%) correct werkt.\nWe werken aan het probleem, controleer binnenkort nogmaals.</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Recente aanpassingen op geocaching.com zorgen dat de live-kaart niet meer werkt.\nWe werken aan het probleem, controleer binnenkort nogmaals.</string>
   <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com is in onderhoud.\nJe kan verschillende problemen ondervinden.</string>
-  <string name="status_closeout_warning" tools:ignore="UnusedResources">Je lijkt gebruik te maken van een Android versie ouder dan 4.0. Toekomstige versies van c:geo zijn mogelijk niet meer beschikbaar voor jouw apparaat.</string>
+  <string name="status_closeout_warning_41" tools:ignore="UnusedResources">You appear to be using a version of Android older than 4.1. Future releases of c:geo might no longer be available for your device.</string>
   <!-- text-to-speech for compass view -->
   <string name="tts_service">Pratend kompas</string>
   <string name="tts_start">Begin met praten</string>

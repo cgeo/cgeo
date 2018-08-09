@@ -79,7 +79,7 @@
   <string name="log_tb_nothing">Non fare nulla</string>
   <string name="log_tb_visit">Visitato</string>
   <string name="log_tb_drop">Lasciato</string>
-  <string name="log_tb_sortby">Sorteggia i trackable</string>
+  <string name="log_tb_sortby">Ordinamento Trackable</string>
   <string name="log_tb_changeall">Cambia tutto</string>
   <string name="log_tb_grabbed">Preso da qualche parte</string>
   <string name="log_tb_note">Nota</string>
@@ -94,7 +94,7 @@
   <string name="log_posting_image">Caricamento immagine…</string>
   <string name="log_posting_generic_trackable">Sto pubblicando %1$s %2$d/%3$d</string>
   <string name="log_clear">Azzera</string>
-  <string name="log_post_not_possible">Download dei dati in corso…\nRiprovare tra alcuni secondi o controlla la connessione a internet.</string>
+  <string name="log_post_not_possible">Download dei dati in corso…\nRiprovare tra alcuni secondi o controllare la connessione a internet.</string>
   <string name="log_post_geocode_missing">Geocode mancante…</string>
   <string name="log_date_future_not_allowed">Non sono ammesse date future per i log.</string>
   <string name="log_add">Aggiungi</string>
@@ -124,13 +124,24 @@
   <string name="log_image_description">Descrizione</string>
   <string name="log_image_scale">Ridimensiona</string>
   <string name="log_password_title">Log Password:</string>
+  <string name="log_report_problem">Segnala un problema:</string>
   <string name="log_hint_log_password">Inserisci la password per il log</string>
   <string name="log_oc_team_comment">Commenti del Team OC</string>
   <string name="log_your_saved_log">I tuoi log salvati</string>
-  <string name="log_empty_logbook">Il logbook di questo cache è vuota.</string>
+  <string name="log_empty_logbook">Il logbook di questo cache è vuoto.</string>
+  <string name="log_problem_none">Nessun problema</string>
   <string name="log_problem_needs_maintenance_label">Ha bisogno di manutenzione</string>
-  <string name="log_problem_missing_label">La cache potrebbe non essere presente</string>
+  <string name="log_problem_needs_maintenance_text">Questo geocacher ha segnalato che esiste un problema con questo cache.</string>
+  <string name="log_problem_log_full_label">Il logbook è pieno</string>
+  <string name="log_problem_log_full_text">Questo geocacher ha segnalato che il logbook è pieno.</string>
+  <string name="log_problem_damaged_label">Il contenitore è danneggiato</string>
+  <string name="log_problem_damaged_text">Questo geocacher ha segnalato che il contenitore è danneggiato.</string>
+  <string name="log_problem_missing_label">Il cache potrebbe non essere presente</string>
+  <string name="log_problem_missing_text">Questo geocacher ha segnalato che il cache potrebbe essere sparito.</string>
   <string name="log_problem_other_label">Altro</string>
+  <string name="log_problem_other_text">Questo geocacher ha segnalato che esiste un problema con questo cache.</string>
+  <string name="log_problem_archive_label">Questo cache dovrebbe essere archiviato</string>
+  <string name="log_problem_archive_text">Questo geocacher ha segnalato che il cache dovrebbe essere archiviato. Un recensore volontario della community ha ricevuto una notifica.</string>
   <string-array name="log_image_scales">
     <item>Dimensioni originali</item>
     <item>512 px</item>
@@ -244,6 +255,7 @@
   <string name="info_log_cleared">Il log è stato azzerato.</string>
   <string name="info_waypoint_coordinates_cleared">Coordinate eliminate.</string>
   <string name="info_log_type_changed">Il tipo di log è cambiato!</string>
+  <string name="info_log_report_problem_changed">La segnalazione del problema è cambiata!</string>
   <string name="info_select_logimage_cancelled">Selezione o cattura immagine annulata.</string>
   <string name="info_stored_image">Nuova immagine salvata su:</string>
   <string name="info_storing_static_maps">Tento di salvare le mappe statiche</string>
@@ -400,8 +412,8 @@
   <string name="about_version">Versione</string>
   <string name="about_changelog">Modifiche</string>
   <string name="about_system">Sistema</string>
-  <string name="about_donate">Donazioni</string>
-  <string name="about_donation_more">Fai una\nDonazione</string>
+  <string name="about_donate">Support us</string>
+  <string name="about_donation_more">Support c:geo development\nMore info on our website</string>
   <string name="about_contributors">Contributori</string>
   <string name="about_license">Licenza</string>
   <string name="about_apache_license"><a href="">Licenza Apache, versione 2.0</a></string>
@@ -468,12 +480,15 @@
   <string name="settings_activate_oc_pl">Attiva</string>
   <string name="init_summary_oc_pl">Carica cache da opencaching.pl</string>
   <string name="init_oc_pl_description">Autorizza c:geo a cercare cache ed accedere/filtrare i ritrovamenti su opencaching.pl.</string>
+  <string name="init_oc_nl">Opencaching.nl</string>
   <string name="settings_activate_oc_nl">Attiva</string>
   <string name="init_summary_oc_nl">Carica cache da opencaching.nl</string>
   <string name="init_oc_nl_description">Autorizza c:geo a cercare cache ed accedere/filtrare i ritrovamenti su opencaching.nl.</string>
+  <string name="init_oc_us">Opencaching.us</string>
   <string name="settings_activate_oc_us">Attiva</string>
   <string name="init_summary_oc_us">Carica cache da opencaching.us</string>
   <string name="init_oc_us_description">Autorizza c:geo a cercare cache ed accedere/filtrare i ritrovamenti su opencaching.us.</string>
+  <string name="init_oc_ro">Opencaching.ro</string>
   <string name="settings_activate_oc_ro">Attiva</string>
   <string name="init_summary_oc_ro">Carica cache da opencaching.ro</string>
   <string name="init_oc_ro_description">Autorizza c:geo a cercare cache ed accedere/filtrare i ritrovamenti su opencaching.ro.</string>
@@ -519,6 +534,7 @@
   <string name="init_signature_template_terrain">Terreno</string>
   <string name="init_signature_template_url">URL</string>
   <string name="init_signature_template_log">Testo di Log</string>
+  <string name="init_signature_template_size">Size</string>
   <string name="init_ratingwanted">Rating da GCvote.com</string>
   <string name="init_summary_ratingwanted">Carica il rating del cache da GCvote.com</string>
   <string name="init_friends_and_own_logs_wanted">Visualizza i tuoi/dei tuoi amici</string>
@@ -709,6 +725,9 @@
   <!-- auth opencaching -->
   <string name="auth_ocde">opencaching.de</string>
   <string name="auth_ocpl">opencaching.pl</string>
+  <string name="auth_ocnl">opencaching.nl</string>
+  <string name="auth_ocus">opencaching.us</string>
+  <string name="auth_ocro">opencaching.ro</string>
   <string name="auth_ocuk">opencache.uk</string>
   <string name="auth_dialog_completed_oc">c:geo è ora autorizzato ad accedere a %s.</string>
   <!-- auth geokrety -->
@@ -859,6 +878,7 @@
   <string name="cache_menu_oruxmaps_offline">OruxMaps (Offline)</string>
   <string name="cache_menu_navigon">Navigon</string>
   <string name="cache_menu_pebble">Pebble</string>
+  <string name="cache_menu_android_wear">Android Wear</string>
   <string name="cache_menu_vote">Vota</string>
   <string name="cache_menu_checker">Open Geochecker</string>
   <string name="cache_menu_challenge_checker">Cerca le sfide (challenge)</string>
@@ -1128,6 +1148,7 @@
   <string name="helper_sendtocgeo_description">Send to c:geo è un\'estensione del browser <strong>per il tuo PC</strong>. Durante la navigazione su geocaching.com, è possibile inviare i cache al vostro smartphone con il clic di un pulsante direttamente all\'interno del browser.</string>
   <string name="helper_locus_title">Locus</string>
   <string name="helper_locus_description">App per la navigazione in esterni per cellulare o tablet. Mostra mappe offline, traccia il tuo percorso, cerca geocache, usa una voce guida e molto altro.</string>
+  <string name="helper_gpsstatus_title">GPS Status &amp; Toolbox</string>
   <string name="helper_gpsstatus_description">Puoi usare il radar di questa applicazione con c:geo. Offre inoltre molte informazioni addizionali legate al GPS.</string>
   <string name="helper_bluetoothgps_title">Bluetooth GPS</string>
   <string name="helper_bluetoothgps_description">Permette di utilizzare un GPS esterno, garantendo maggiore precisione, migliore ricezione e prolungando la durata della batteria del tuo dispositivo.</string>
@@ -1414,7 +1435,7 @@
   <string name="status_geocaching_change" tools:ignore="UnusedResources">Modifiche recenti al sito geocaching hanno disattivato c:geo.\nCi stiamo lavorando, riprova più tardi.</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Modifiche recenti al sito geocaching hanno disattivato la mappa live.\nCi stiamo lavorando, riprova più tardi.</string>
   <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Geocaching.com è sotto manutenzione. \nCi potrebbero essere dei problemi di collegamento.</string>
-  <string name="status_closeout_warning" tools:ignore="UnusedResources">Sembra che tu stia utilizzando una versione di Android precedente alla 4.0. Le future versioni di c:geo potrebbero non supportare il tuo dispositivo.</string>
+  <string name="status_closeout_warning_41" tools:ignore="UnusedResources">You appear to be using a version of Android older than 4.1. Future releases of c:geo might no longer be available for your device.</string>
   <!-- text-to-speech for compass view -->
   <string name="tts_service">Bussola parlante</string>
   <string name="tts_start">Start voce</string>
