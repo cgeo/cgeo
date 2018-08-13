@@ -3,6 +3,7 @@
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
     <b>2018.08.13:</b>\n
+    · Fix: Personal note not downloaded from server\n
     · Fix: Only 20 trackables where shown when logging a cache\n
     · Fix: Show closeout warning on Android below 4.1\n
            <a href="http://faq.cgeo.org/#7078">Android 4.0 can no longer login to geocaching.com</a>\n
