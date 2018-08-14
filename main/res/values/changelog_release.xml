@@ -2,8 +2,8 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-    <b>Next bugfix release:</b>\n
-    · Fix:\n
+    <b>2018.08.14:</b>\n
+    · Fix: Login page changed on geocaching.com causing login problems\n
     \n
     <b>2018.08.13:</b>\n
     · Fix: Personal note not downloaded from server\n
