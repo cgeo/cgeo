@@ -2,6 +2,9 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
+    <b>Next bugfix release:</b>\n
+    · Fix:\n
+    \n
     <b>2018.08.13:</b>\n
     · Fix: Personal note not downloaded from server\n
     · Fix: Only 20 trackables where shown when logging a cache\n
