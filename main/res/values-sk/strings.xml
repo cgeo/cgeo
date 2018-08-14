@@ -418,8 +418,8 @@
   <string name="about_version">Verzia</string>
   <string name="about_changelog">Zmeny</string>
   <string name="about_system">Systém</string>
-  <string name="about_donate">Podpora vývoja</string>
-  <string name="about_donation_more">Podporte\nvývoj</string>
+  <string name="about_donate">Support us</string>
+  <string name="about_donation_more">Support c:geo development\nMore info on our website</string>
   <string name="about_contributors">Prispievatelia</string>
   <string name="about_license">Licencia</string>
   <string name="about_apache_license"><a href=""> Apache License, verzia 2.0</a></string>
@@ -540,6 +540,7 @@
   <string name="init_signature_template_terrain">Terén</string>
   <string name="init_signature_template_url">URL</string>
   <string name="init_signature_template_log">Pozícia pre zápis do logu</string>
+  <string name="init_signature_template_size">Size</string>
   <string name="init_ratingwanted">GCvote hodnotenie</string>
   <string name="init_summary_ratingwanted">Načítať hodnotenie skrýše z GCvote.com</string>
   <string name="init_friends_and_own_logs_wanted">Logy priateľov a vlastné</string>
@@ -1456,7 +1457,7 @@
   <string name="status_geocaching_change" tools:ignore="UnusedResources">Nedávne zmeny na geocaching.com znefunkčnili c:geo.\nPracujeme na tom, skúste onedlho skontrolovať aktualizácie.</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Nedávne zmeny na geocaching.com znefunkčnili aktívnu mapu.\nPracujeme na tom, skúste skontrolovať aktualizácie onedlho.</string>
   <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Prebieha údržba na Geocaching.com \n Môžu nastať rôzne problémy.</string>
-  <string name="status_closeout_warning" tools:ignore="UnusedResources">Zdá sa, že používate verziu Android staršiu ako 4.0. Budúce verzie c:geo už nemusia byť pre vaše zariadenie k dispozícii.</string>
+  <string name="status_closeout_warning_41" tools:ignore="UnusedResources">You appear to be using a version of Android older than 4.1. Future releases of c:geo might no longer be available for your device.</string>
   <!-- text-to-speech for compass view -->
   <string name="tts_service">Hovoriaci kompas</string>
   <string name="tts_start">Začať hovoriť</string>

@@ -159,7 +159,7 @@
   <string name="err_server">Échec de la connexion à Geocaching.com. Le site Web peut être indisponible ou votre connexion Internet ne fonctionne pas.</string>
   <string name="err_server_ec">Impossible de contacter Extremcaching.com. Le site web peut ne pas fonctionner ou votre connexion Internet ne fonctionne pas.</string>
   <string name="err_server_gk">Impossible de contacter GeoKrety.org. Le site Web peut être indisponible ou votre connexion Internet ne fonctionne pas.</string>
-  <string name="err_login">Aucune compte renseigné</string>
+  <string name="err_login">Pas d\'utilisateur ou de mot de passe enregistré</string>
   <string name="err_login_failed_toast">c:geo est en mode hors-ligne et ne peut pas se connecter. Vérifiez votre connexion Internet.</string>
   <string name="err_unknown">Erreur inconnue</string>
   <string name="err_unknown_address">c:geo n\'a pas réussi à trouver de coordonnées géographiques pour cette adresse</string>
@@ -255,6 +255,7 @@
   <string name="info_log_cleared">La visite a été effacée.</string>
   <string name="info_waypoint_coordinates_cleared">Coordonnées effacées.</string>
   <string name="info_log_type_changed">Le type de visite a été modifié !</string>
+  <string name="info_log_report_problem_changed">Report problem has changed!</string>
   <string name="info_select_logimage_cancelled">La sélection ou l\'acquisition de l\'image a été annulée.</string>
   <string name="info_stored_image">Nouvelle image sauvée dans :</string>
   <string name="info_storing_static_maps">Sauvegarde des cartes statiques</string>
@@ -269,7 +270,7 @@
   <!-- location service -->
   <string name="loc_last">Dernière position</string>
   <string name="loc_net">Réseau</string>
-  <string name="loc_fused">Unifié</string>
+  <string name="loc_fused">Fusionné</string>
   <string name="loc_low_power">Éco</string>
   <string name="loc_home">Domicile</string>
   <string name="loc_gps">GPS</string>
@@ -411,8 +412,8 @@
   <string name="about_version">Version</string>
   <string name="about_changelog">Versions</string>
   <string name="about_system">Système</string>
-  <string name="about_donate">Dons</string>
-  <string name="about_donation_more">Donner pour le\ndéveloppement de c:geo</string>
+  <string name="about_donate">Support us</string>
+  <string name="about_donation_more">Support c:geo development\nMore info on our website</string>
   <string name="about_contributors">Contributeurs</string>
   <string name="about_license">Licence</string>
   <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
@@ -533,6 +534,7 @@
   <string name="init_signature_template_terrain">Terrain</string>
   <string name="init_signature_template_url">URL</string>
   <string name="init_signature_template_log">Texte de la visite</string>
+  <string name="init_signature_template_size">Size</string>
   <string name="init_ratingwanted">Vote GCvote.com</string>
   <string name="init_summary_ratingwanted">Charger l\'évaluation de la cache depuis GCvote.com</string>
   <string name="init_friends_and_own_logs_wanted">Afficher vos visites / visites amis</string>
@@ -674,6 +676,8 @@
   <string name="feature_search_owner">Rechercher par Propriétaire</string>
   <string name="feature_search_finder">Rechercher par Découvreur</string>
   <string name="init_mapsforge_api_title">API Mapsforge</string>
+  <string name="init_mfold_api">Old Mapsforge V3</string>
+  <string name="init_mfold_api_description">The current release contains a beta version of our new Mapsforge map. If you miss some features or encounter issues you can go back to the old version here.</string>
   <string name="init_experimental_title">Fonctionnalités expérimentales</string>
   <string name="init_mfbeta">Carte Mapsforge beta par défaut</string>
   <string name="init_mfbeta_description">La version actuelle contient une version beta de notre nouvelle carte Mapsforge (fonctionnalité expérimentale). Cette nouvelle carte peut être activée ici par défaut pour la carte en temps réel et pour celle des listes.</string>
@@ -763,6 +767,10 @@
   <plurals name="cache_offline_about_time_days">
     <item quantity="one">il y a %d jour</item>
     <item quantity="other">il y a %d jours</item>
+  </plurals>
+  <plurals name="cache_offline_about_time_months">
+    <item quantity="one">about %d month ago</item>
+    <item quantity="other">about %d months ago</item>
   </plurals>
   <string name="cache_offline_about_time_year">il y a plus d\'un an</string>
   <string name="cache_offline_time_hour">une heure</string>
@@ -1426,8 +1434,8 @@
   <string name="status_new_rc" tools:ignore="UnusedResources">Une nouvelle version candidate est disponible.\nAppuyez ici pour l\'installer.</string>
   <string name="status_geocaching_change" tools:ignore="UnusedResources">Des changements récents sur Geocaching.com ont cassé c:geo.\nNous sommes en train de corriger. Revenez plus tard.</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Des changements récents sur Geocaching.com ont cassé la carte temps-réel.\nNous sommes en train de corriger. Revenez plus tard.</string>
-  <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Maintenance en cours sur geocaching.com.\nIl se peut que vous rencontriez des problèmes.</string>
-  <string name="status_closeout_warning" tools:ignore="UnusedResources">Vous utilisez une version d\'Android plus ancienne que 4.0. Les futures versions de c:geo pourraient ne pas être disponibles pour votre appareil.</string>
+  <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Maintenant en cours sur geocaching.com.\nIl se peut que vous rencontriez des problèmes.</string>
+  <string name="status_closeout_warning_41" tools:ignore="UnusedResources">You appear to be using a version of Android older than 4.1. Future releases of c:geo might no longer be available for your device.</string>
   <!-- text-to-speech for compass view -->
   <string name="tts_service">Boussole parlante</string>
   <string name="tts_start">Commencer à parler</string>
@@ -1475,6 +1483,7 @@
   <string name="confirm_log_title">Type de visite spécial</string>
   <string name="confirm_log_message">Vous allez envoyer \'%s\'. Êtes-vous sûr(e) ?</string>
   <string name="confirm_report_problem_title">Signaler un problème</string>
+  <string name="confirm_report_problem_message">You want to report \'%s\'. Are you sure?</string>
   <!-- Geokrety -->
   <string name="settings_activate_geokrety">Activer</string>
   <string name="init_geokrety">GeoKrety.org</string>
@@ -1546,4 +1555,6 @@
   <string name="list_confirm_debug_message">Le mode débogage génère de l\'instabilité ! Souhaitez-vous désactiver le mode débogage ?</string>
   <string name="err_select_logimage_upload_size">Image trop grande, merci de sélectionner une résolution inférieure.</string>
   <string name="err_logimage_caption_required">Une légende est requise pour l’image</string>
+  <string name="waypoint_latitude_null">N/S --° --.---</string>
+  <string name="waypoint_longitude_null">E/W --° --.---</string>
 </resources>

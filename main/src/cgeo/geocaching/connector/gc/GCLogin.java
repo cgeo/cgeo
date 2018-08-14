@@ -41,7 +41,7 @@ import org.jsoup.nodes.Element;
 
 public class GCLogin extends AbstractLogin {
 
-    private static final String LOGIN_URI = "https://www.geocaching.com/account/login";
+    private static final String LOGIN_URI = "https://www.geocaching.com/account/signin";
     private static final String REQUEST_VERIFICATION_TOKEN = "__RequestVerificationToken";
     private static final ObjectMapper MAPPER = new ObjectMapper();
 
@@ -201,7 +201,7 @@ public class GCLogin extends AbstractLogin {
                 return completeLoginProcess();
             }
 
-            if (loginData.contains("your username or password is incorrect")) {
+            if (loginData.contains("password is incorrect")) {
                 Log.i("Failed to log in Geocaching.com as " + username + " because of wrong username/password");
                 return resetGcCustomDate(StatusCode.WRONG_LOGIN_DATA); // wrong login
             }
@@ -260,7 +260,7 @@ public class GCLogin extends AbstractLogin {
     @Nullable
     private String extractRequestVerificationToken(final String page) {
         final Document document = Jsoup.parse(page);
-        final String value = document.select(".login > form > input[name=\"" + REQUEST_VERIFICATION_TOKEN + "\"]").attr("value");
+        final String value = document.select("form > input[name=\"" + REQUEST_VERIFICATION_TOKEN + "\"]").attr("value");
         return StringUtils.isNotEmpty(value) ? value : null;
     }
 

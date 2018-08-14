@@ -124,10 +124,24 @@
   <string name="log_image_description">Beskrivelse</string>
   <string name="log_image_scale">Skalering</string>
   <string name="log_password_title">Adgangskode til log:</string>
+  <string name="log_report_problem">Report Problem:</string>
   <string name="log_hint_log_password">Skriv adgangskode til log</string>
   <string name="log_oc_team_comment">OC Hold-meddelelse</string>
   <string name="log_your_saved_log">Din gemte log</string>
   <string name="log_empty_logbook">Logbogen for denne cache er tom.</string>
+  <string name="log_problem_none">No Problem</string>
+  <string name="log_problem_needs_maintenance_label">Needs Maintenance</string>
+  <string name="log_problem_needs_maintenance_text">This geocacher reported that there is a problem with this cache.</string>
+  <string name="log_problem_log_full_label">Logbook is full</string>
+  <string name="log_problem_log_full_text">This geocacher reported that the logbook is full.</string>
+  <string name="log_problem_damaged_label">Container is damaged</string>
+  <string name="log_problem_damaged_text">This geocacher reported that the container is damaged.</string>
+  <string name="log_problem_missing_label">Cache might be missing</string>
+  <string name="log_problem_missing_text">This geocacher reported that the cache might be missing.</string>
+  <string name="log_problem_other_label">Other</string>
+  <string name="log_problem_other_text">This geocacher reported that there is a problem with this cache.</string>
+  <string name="log_problem_archive_label">Cache should be archived</string>
+  <string name="log_problem_archive_text">This geocacher reported that this geocache should be archived. A community volunteer reviewer has been notified.</string>
   <string-array name="log_image_scales">
     <item>Ingen skalering</item>
     <item>512 px</item>
@@ -241,6 +255,7 @@
   <string name="info_log_cleared">Logbeskeden blev fjernet.</string>
   <string name="info_waypoint_coordinates_cleared">Position nulstillet</string>
   <string name="info_log_type_changed">Typen af logbeskeden blev ændret!</string>
+  <string name="info_log_report_problem_changed">Report problem has changed!</string>
   <string name="info_select_logimage_cancelled">Valg af billede eller foto blev afbrudt.</string>
   <string name="info_stored_image">Nyt billede gemt til:</string>
   <string name="info_storing_static_maps">Forsøger at gemme statiske kort</string>
@@ -308,7 +323,7 @@
   <string name="caches_sort_name">Navn</string>
   <string name="caches_sort_geocode">Geokode</string>
   <string name="caches_sort_rating">Vurdering</string>
-  <string name="caches_sort_vote">Bedømmelse (egen vurdering)</string>
+  <string name="caches_sort_vote">Afstemning (egen vurdering)</string>
   <string name="caches_sort_inventory">Antal Trackables</string>
   <string name="caches_sort_date_hidden">Dato for placering</string>
   <string name="caches_sort_date_logged">Dato for logbesked</string>
@@ -397,8 +412,8 @@
   <string name="about_version">Version</string>
   <string name="about_changelog">Ændringslog</string>
   <string name="about_system">System</string>
-  <string name="about_donate">Donér</string>
-  <string name="about_donation_more">Donér\nudvikling</string>
+  <string name="about_donate">Support us</string>
+  <string name="about_donation_more">Support c:geo development\nMore info on our website</string>
   <string name="about_contributors">Bidragsydere</string>
   <string name="about_license">Licens</string>
   <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
@@ -487,7 +502,7 @@
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_gcvote_password_description">For at kunne bedømme en cache skal du følge instruktionerne på GCVote.com og angive dit password til GCVote her.</string>
   <string name="err_gcvote_send_rating">Fejl under afsendelse af bedømmelse. Kontrollér eller fjern GCVote password under Indstillinger.</string>
-  <string name="gcvote_sent">Bedømmelse blev afsendt</string>
+  <string name="gcvote_sent">Stemme blev afsendt</string>
   <string name="init_twitter">Twitter</string>
   <string name="settings_activate_twitter">Aktivér</string>
   <string name="init_username">Brugernavn</string>
@@ -515,10 +530,13 @@
   <string name="init_signature_template_number">Antal fund</string>
   <string name="init_signature_template_owner">Ejer</string>
   <string name="init_signature_template_name">Navn</string>
+  <string name="init_signature_template_difficulty">Difficulty</string>
+  <string name="init_signature_template_terrain">Terrain</string>
   <string name="init_signature_template_url">URL</string>
   <string name="init_signature_template_log">Logtekst</string>
+  <string name="init_signature_template_size">Size</string>
   <string name="init_ratingwanted">GCVote vurdering</string>
-  <string name="init_summary_ratingwanted">Indlæs cachebedømmelser fra GCVote.com</string>
+  <string name="init_summary_ratingwanted">Indlæs cachevurdering fra GCVote.com</string>
   <string name="init_friends_and_own_logs_wanted">Vis venners/egne</string>
   <string name="init_summary_friends_and_own_logs_wanted">Vis en særskilt logbogsside med venners og egne logbeskeder</string>
   <string name="init_openlastdetailspage">Åbn sidste detaljeside</string>
@@ -571,7 +589,7 @@
   <string name="settings_info_offline_maps_title">Oplysninger om offline kort</string>
   <string name="settings_info_offline_maps">c:geo understøtter kort til offline brug. Du kan downloade kort fra Mapsforge eller lave dine egne kort ved hjælp af OSM data. Du skal vælge en mappe, som indeholder offline kort, før du kan bruge offline kort.</string>
   <string name="settings_info_themes_title">Oplysninger om korttemaer</string>
-  <string name="settings_info_themes">c:geo understøtter tilpassede temaer til offline kort. Temaer kan bruges til at ændre farvestil på kortet (f.eks. farver som egne sig til brug i mørke) eller til at fremhæve bestemte typer af objekter, som cykelstier eller højdekurver.</string>
+  <string name="settings_info_themes">c:geo understøtter tilpassede temaer til offline kort. Temaer kan bruges til at ændre farvestil på kortet (f.eks. farver som egne sig til brug i mørke) eller til at fremhæve bestemte typer af objekter, som cykelstier eller højdekurver, på kortet.</string>
   <string name="init_mapsource_select">Vælg kortkilde</string>
   <string name="settings_title_scale_map_text">Tilpas tekst på kort</string>
   <string name="settings_summary_scale_map_text">Tilpas størrelsen af tekster på offline kort, så de passer til enhedens skærmopløsning,</string>
@@ -595,9 +613,9 @@
   <string name="init_default_navigation_tool_select">Vælg metode</string>
   <string name="init_default_navigation_tool_2_description">Her kan du vælge din sekundære navigationsmetode. Aktivér den ved at holde på navigationssymbolet det vises i cachens titel.</string>
   <string name="init_navigation_menu_description">Her kan du vælge hvilke af de tilgængelige navigationsmetoder, der skal vises i navigationsmenuen for en cache eller et waypoint. Metoder som ikke er installeret på denne enhed kan ikke vælges.</string>
-  <string name="init_debug_title">Fejlfindingsinformation</string>
+  <string name="init_debug_title">Debug-information</string>
   <string name="init_debug_note">c:geo kan generere en stor mængde fejlfindingsoplysninger. Aktivering af denne indstilling vil påvirke stabiliteten af c:geo og kan kun anbefales, hvis du bliver bedt om at sende en fejlfindingslog til udviklerne. Denne indstilling bør være deaktiveret under normal brug af c:geo!</string>
-  <string name="init_debug">Aktivér fejlfindingslogning</string>
+  <string name="init_debug">Aktivér debug-log</string>
   <string name="init_dbonsdcard_title">Databaseplacering</string>
   <string name="init_dbonsdcard_note">Du kan vælge at gemme c:geo-databasen enten i systemhukommelsen eller i en mappe i din brugerhukommelse. Hvis databasen gemmes i brugerhukommelsen vil det frigøre noget systemhukommelse, men ydeevnen kan blive forringet og c:geo fungerer ikke hvis brugerhukommelsen ikke er tilgængelig eller hvis databasefilen fjernes.</string>
   <string name="init_dbonsdcard">På brugerlager</string>
@@ -657,6 +675,9 @@
   <string name="feature_search_geocode">Søg efter geokode</string>
   <string name="feature_search_owner">Søg efter ejer</string>
   <string name="feature_search_finder">Søg efter finder</string>
+  <string name="init_mapsforge_api_title">Mapsforge API</string>
+  <string name="init_mfold_api">Old Mapsforge V3</string>
+  <string name="init_mfold_api_description">The current release contains a beta version of our new Mapsforge map. If you miss some features or encounter issues you can go back to the old version here.</string>
   <string name="init_experimental_title">Eksperimentel funktionalitet</string>
   <string name="init_mfbeta">Mapsforge Beta som standard</string>
   <string name="init_mfbeta_description">c:geo indeholder eksperimentel understøttelse af Mapsforge-kort. Mapsforge-kort kan aktiveres her som standard for live og offline kort.</string>
@@ -747,6 +768,11 @@
     <item quantity="one">cirka %d dag siden</item>
     <item quantity="other">cirka %d dage siden</item>
   </plurals>
+  <plurals name="cache_offline_about_time_months">
+    <item quantity="one">about %d month ago</item>
+    <item quantity="other">about %d months ago</item>
+  </plurals>
+  <string name="cache_offline_about_time_year">over a year ago</string>
   <string name="cache_offline_time_hour">en time siden</string>
   <string name="cache_offline_time_hours">timer siden</string>
   <string name="cache_offline_time_days">dage siden</string>
@@ -850,8 +876,10 @@
   <string name="cache_menu_whereyougo">WhereYouGo</string>
   <string name="cache_menu_oruxmaps_online">OruxMaps (Online)</string>
   <string name="cache_menu_oruxmaps_offline">OruxMaps (Offline)</string>
+  <string name="cache_menu_navigon">Navigon</string>
   <string name="cache_menu_pebble">Pebble</string>
-  <string name="cache_menu_vote">Bedøm</string>
+  <string name="cache_menu_android_wear">Android Wear</string>
+  <string name="cache_menu_vote">Stem</string>
   <string name="cache_menu_checker">Åben Geochecker</string>
   <string name="cache_menu_challenge_checker">Søg efter cacher med geo-checker</string>
   <string name="cache_menu_ignore">Ignorér cache</string>
@@ -1120,6 +1148,7 @@
   <string name="helper_sendtocgeo_description">Send2c:geo (send til c:geo) er en browserudvidelse <strong>til din PC</strong>. Med send2c:geo kan du sende cacher direkte fra din browser til c:geo på din Android-enhed ved blot at klikke på en knap i din browser.</string>
   <string name="helper_locus_title">Locus</string>
   <string name="helper_locus_description">Udendørs navigationsapp til din telefon eller tablet. Vis topografiske kort offline, track din rute, find geocacher, brug stemmeguide og meget mere.</string>
+  <string name="helper_gpsstatus_title">GPS Status &amp; Toolbox</string>
   <string name="helper_gpsstatus_description">Du kan bruger radaren i denne app sammen med c:geo. Appen giver desuden en mængde GPS-relateret information.</string>
   <string name="helper_bluetoothgps_title">Bluetooth GPS</string>
   <string name="helper_bluetoothgps_description">Giver dig mulighed for at bruge en ekstern GPS-modtager som giver en mere præcis positionsbestemmelse og kan forlænge batteritiden på din enhed.</string>
@@ -1406,7 +1435,7 @@
   <string name="status_geocaching_change" tools:ignore="UnusedResources">Ændringer på geocaching.com forhindrer c:geo i at fungere.\nVi arbejder på at løse problemet. Prøv igen senere.</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Ændringer på geocaching.com forhindrer Live-kortet i at fungere.\nVi arbejder på at løse problemet. Prøv igen senere.</string>
   <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Geocaching.com er under vedligeholdelse.\nDu kan opleve uregelmæssigheder.</string>
-  <string name="status_closeout_warning" tools:ignore="UnusedResources">Du bruger en udgave af Android ældre end version 4.0. Kommende udgaver af c:geo vil måske ikke være understøttet på din enhed.</string>
+  <string name="status_closeout_warning_41" tools:ignore="UnusedResources">You appear to be using a version of Android older than 4.1. Future releases of c:geo might no longer be available for your device.</string>
   <!-- text-to-speech for compass view -->
   <string name="tts_service">Talende kompas</string>
   <string name="tts_start">Start tale</string>
@@ -1453,6 +1482,8 @@
   <string name="send">Send</string>
   <string name="confirm_log_title">Særlig logtype</string>
   <string name="confirm_log_message">Du er ved at logge \"%s\". Er du sikker?</string>
+  <string name="confirm_report_problem_title">Report problem</string>
+  <string name="confirm_report_problem_message">You want to report \'%s\'. Are you sure?</string>
   <!-- Geokrety -->
   <string name="settings_activate_geokrety">Aktivér</string>
   <string name="init_geokrety">GeoKrety.org</string>
@@ -1524,4 +1555,6 @@
   <string name="list_confirm_debug_message">Fejlfindingstilstand kan forårsage ustabilitet! Ønsker du at deaktivere fejlfindingstilstand?</string>
   <string name="err_select_logimage_upload_size">Billedfilen er for stor. Vælg en lavere billedopløsning.</string>
   <string name="err_logimage_caption_required">Der skal indtastes en billedtekst til billedet</string>
+  <string name="waypoint_latitude_null">N/S --° --.---</string>
+  <string name="waypoint_longitude_null">E/W --° --.---</string>
 </resources>
