@@ -265,7 +265,7 @@
     <string name="info_log_cleared">Log was cleared.</string>
     <string name="info_waypoint_coordinates_cleared">Coordinates cleared.</string>
     <string name="info_log_type_changed">Type of log has been changed!</string>
-    <string name="info_log_report_problem_changed">Report problem has changed!</string>
+    <string name="info_log_report_problem_changed">Available problem reports have changed!</string>
     <string name="info_select_logimage_cancelled">Image selection or capture was cancelled.</string>
     <string name="info_stored_image">New image saved to:</string>
     <string name="info_storing_static_maps">Trying to store static maps</string>
