@@ -52,7 +52,7 @@ public class GeocachingSuConnector extends AbstractConnector implements ISearchB
      */
     private static final String PARAMETER_RESULT_FIELDS = "istr";
     private static final String RESULT_FIELDS_SEARCH = "ms";
-    private static final String RESULT_FIELDS_DETAILED = "abcdefghiklmnopst";
+    private static final String RESULT_FIELDS_DETAILED = "abcdefghiklmnopstw";
 
     private GeocachingSuConnector() {
         // singleton

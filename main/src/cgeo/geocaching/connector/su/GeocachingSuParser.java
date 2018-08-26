@@ -20,12 +20,14 @@ import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
+import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.log.LogEntry.Builder;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
+import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.SynchronizedDateFormat;
@@ -49,6 +51,8 @@ public class GeocachingSuParser {
         public String latitude = null;
         public Builder logBuilder = new LogEntry.Builder();
         public final List<LogEntry> logs = new ArrayList<>();
+        public final List<Waypoint> waypoints = new ArrayList<>();
+        public Waypoint waypoint;
         public String type;
 
         void addDescription(final String text) {
@@ -96,6 +100,13 @@ public class GeocachingSuParser {
                             parsed.logBuilder.setAuthor(parser.getAttributeValue(null, "nick"));
                             parsed.logBuilder.setDate(parseDateTime(parser.getAttributeValue(null, "date")));
                             parsed.logBuilder.setLogType(parseLogType(parser.getAttributeValue(null, "status")));
+                        } else if ("waypoint".equalsIgnoreCase(tagname)) {
+                            WaypointType wpType = parseWaypointType(parser.getAttributeValue(null, "type"));
+                            String lat = parser.getAttributeValue(null, "lat");
+                            String lon = parser.getAttributeValue(null, "lon");
+                            Waypoint waypoint = new Waypoint(parser.getAttributeValue(null, "name"), wpType, false);
+                            waypoint.setCoords(new Geopoint(lat, lon));
+                            parsed.waypoint = waypoint;
                         }
                         break;
 
@@ -109,6 +120,7 @@ public class GeocachingSuParser {
                         } else if ("name".equalsIgnoreCase(tagname)) {
                             cache.setName(text);
                         } else if (endTag.equalsIgnoreCase(tagname)) {
+                            cache.setWaypoints(parsed.waypoints, true);
                             storeCache(cache, caches, parsed);
                         } else if ("lat".equalsIgnoreCase(tagname)) {
                             parsed.latitude = text;
@@ -140,6 +152,9 @@ public class GeocachingSuParser {
                         } else if ("note".equalsIgnoreCase(tagname)) {
                             parsed.logBuilder.setLog(StringUtils.trim(text));
                             parsed.logs.add(parsed.logBuilder.build());
+                        }  else if ("waypoint".equalsIgnoreCase(tagname)) {
+                            parsed.waypoint.setNote(StringUtils.trim(text));
+                            parsed.waypoints.add(parsed.waypoint);
                         } else if ("img".equalsIgnoreCase(tagname)) {
                             if (text.contains("photos/caches")) {
                                 cache.addSpoiler(new Image.Builder().setUrl(text).build());
@@ -215,6 +230,25 @@ public class GeocachingSuParser {
                 return CacheSize.OTHER;
             default:
                 return CacheSize.UNKNOWN;
+        }
+    }
+
+    private static WaypointType parseWaypointType(final String wpType) {
+        switch (wpType) {
+            case "1":
+                return WaypointType.PARKING;
+            case "2":
+                return WaypointType.STAGE;
+            case "3":
+                return WaypointType.PUZZLE;
+            case "4":
+                return WaypointType.TRAILHEAD;
+            case "5":
+                return WaypointType.FINAL;
+            case "6":
+                return WaypointType.WAYPOINT;
+            default:
+                return WaypointType.WAYPOINT;
         }
     }
 
