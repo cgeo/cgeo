@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Locale;
 
 import cgeo.geocaching.SearchResult;
+import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.location.Geopoint;
@@ -130,6 +131,8 @@ public class GeocachingSuParser {
                             parsed.addDescription(text);
                         } else if ("date".equalsIgnoreCase(tagname)) {
                             cache.setHidden(parseDate(text));
+                        }  else if ("size".equalsIgnoreCase(tagname)) {
+                            cache.setSize(parseSize(text));
                         } else if ("type".equalsIgnoreCase(tagname) || "ctype".equalsIgnoreCase(tagname)) {
                             // different tags used in single cache details and area search
                             parsed.type = text;
@@ -195,6 +198,23 @@ public class GeocachingSuParser {
                 return LogType.OWNER_MAINTENANCE;
             default:
                 return LogType.UNKNOWN;
+        }
+    }
+
+    private static CacheSize parseSize(final String size) {
+        switch (size) {
+            case "1":
+                return CacheSize.UNKNOWN;
+            case "2":
+                return CacheSize.MICRO;
+            case "3":
+                return CacheSize.SMALL;
+            case "4":
+                return CacheSize.REGULAR;
+            case "5":
+                return CacheSize.OTHER;
+            default:
+                return CacheSize.UNKNOWN;
         }
     }
 
