@@ -17,6 +17,16 @@ public abstract class AbstractLoggingManager implements ILoggingManager {
     }
 
     @Override
+    public boolean hasTrackableLoadError() {
+        return false;
+    }
+
+    @Override
+    public boolean hasFavPointLoadError() {
+        return false;
+    }
+
+    @Override
     @NonNull
     public List<TrackableLog> getTrackables() {
         return Collections.emptyList();

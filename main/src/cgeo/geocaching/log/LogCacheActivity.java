@@ -125,9 +125,18 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
             return;
         }
 
-        trackables.addAll(loggingManager.getTrackables());
+        if (!loggingManager.hasTrackableLoadError()) {
+            trackables.addAll(loggingManager.getTrackables());
+        } else {
+            showErrorLoadingAdditionalData();
+        }
+        if (!loggingManager.hasFavPointLoadError()) {
+            premFavPoints = loggingManager.getPremFavoritePoints();
+        } else {
+            showErrorLoadingAdditionalData();
+        }
+
         possibleLogTypes = loggingManager.getPossibleLogTypes();
-        premFavPoints = loggingManager.getPremFavoritePoints();
 
         if (possibleLogTypes.isEmpty()) {
             showErrorLoadingData();
@@ -188,6 +197,10 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     private void showErrorLoadingData() {
         showToast(res.getString(R.string.err_log_load_data));
         showProgress(false);
+    }
+
+    private void showErrorLoadingAdditionalData() {
+        showToast(res.getString(R.string.warn_log_load_additional_data));
     }
 
     private void initializeTrackablesAction() {
