@@ -233,12 +233,16 @@ public class GeocachingSuParser {
                 return GeocachingSuConnector.PREFIX_TRADITIONAL;
             case "Виртуальный":
                 return GeocachingSuConnector.PREFIX_VIRTUAL;
-            case "Сообщение о встрече":
+            case "Встреча":
                 return GeocachingSuConnector.PREFIX_EVENT;
             case "Пошаговый традиционный":
                 return GeocachingSuConnector.PREFIX_MULTISTEP;
             case "Конкурс":
                 return GeocachingSuConnector.PREFIX_CONTEST;
+            case "Логический":
+                return GeocachingSuConnector.PREFIX_MYSTERY;
+            case "Логический виртуальный":
+                return GeocachingSuConnector.PREFIX_MYSTERY_VIRTUAL;
             default:
                 return "SU"; // fallback solution to not use the numeric id only
         }
@@ -260,7 +264,7 @@ public class GeocachingSuParser {
         if (text.equalsIgnoreCase("Виртуальный")) {
             return CacheType.VIRTUAL;
         }
-        if (text.equalsIgnoreCase("Сообщение о встрече")) {
+        if (text.equalsIgnoreCase("Встреча")) {
             return CacheType.EVENT;
         }
         if (text.equalsIgnoreCase("Конкурс")) {
@@ -271,6 +275,12 @@ public class GeocachingSuParser {
         }
         if (text.equalsIgnoreCase("Пошаговый виртуальный")) {
             return CacheType.VIRTUAL;
+        }
+        if (text.equalsIgnoreCase("Логический")) {
+            return CacheType.MYSTERY;
+        }
+        if (text.equalsIgnoreCase("Логический виртуальный")) {
+            return CacheType.MYSTERY;
         }
         return CacheType.UNKNOWN;
     }

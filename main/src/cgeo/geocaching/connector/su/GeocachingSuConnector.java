@@ -31,6 +31,8 @@ public class GeocachingSuConnector extends AbstractConnector implements ISearchB
     static final CharSequence PREFIX_MULTISTEP = "MS";
     static final CharSequence PREFIX_EVENT = "EV";
     static final CharSequence PREFIX_CONTEST = "CT";
+    static final CharSequence PREFIX_MYSTERY = "LT";
+    static final CharSequence PREFIX_MYSTERY_VIRTUAL = "LV";
 
     /**
      * base URL for all API operations
@@ -110,7 +112,7 @@ public class GeocachingSuConnector extends AbstractConnector implements ISearchB
 
     @Override
     public boolean canHandle(@NonNull final String geocode) {
-        return StringUtils.startsWithAny(StringUtils.upperCase(geocode), PREFIX_TRADITIONAL, PREFIX_MULTISTEP_VIRTUAL, PREFIX_VIRTUAL, PREFIX_MULTISTEP, PREFIX_EVENT, PREFIX_CONTEST) && isNumericId(geocode.substring(2));
+        return StringUtils.startsWithAny(StringUtils.upperCase(geocode), PREFIX_TRADITIONAL, PREFIX_MULTISTEP_VIRTUAL, PREFIX_VIRTUAL, PREFIX_MULTISTEP, PREFIX_EVENT, PREFIX_CONTEST, PREFIX_MYSTERY, PREFIX_MYSTERY_VIRTUAL) && isNumericId(geocode.substring(2));
     }
 
     @Override
