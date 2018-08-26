@@ -29,12 +29,16 @@ public final class Routing {
     @Nullable private static Geopoint[] lastRoutingPoints = null;
     private static Geopoint lastDestination;
     private static long timeLastUpdate;
+    private static int connectCount = 0;
 
     private Routing() {
         // utility class
     }
 
-    public static void connect() {
+    public static synchronized void connect() {
+
+        connectCount++;
+
         if (brouter != null && brouter.isConnected()) {
             //already connected
             return;
@@ -46,6 +50,9 @@ public final class Routing {
 
         if (!getContext().bindService(intent, brouter, Context.BIND_AUTO_CREATE)) {
             brouter = null;
+            Log.d("Connecting brouter failed");
+        } else {
+            Log.d("brouter connected");
         }
     }
 
@@ -53,10 +60,18 @@ public final class Routing {
         return CgeoApplication.getInstance();
     }
 
-    public static void disconnect() {
-        if (brouter != null && brouter.isConnected()) {
-            getContext().unbindService(brouter);
-            brouter = null;
+    public static synchronized void disconnect() {
+
+        connectCount--;
+
+        if (connectCount <= 0) {
+            connectCount = 0;
+            if (brouter != null && brouter.isConnected()) {
+                getContext().unbindService(brouter);
+                brouter = null;
+
+                Log.d("brouter disconnected");
+            }
         }
     }
 
