@@ -736,9 +736,8 @@
   <string name="err_auth_geokrety_unknown">%1$s επέστρεψε: %2$s.</string>
   <!-- cache -->
   <plurals name="cache_counts">
-    <item quantity="one">Μία κρύπτη
-%€1d κρύπτες</item>
-    <item quantity="other">%€1d κρύπτες</item>
+    <item quantity="one">Μία κρύπτη</item>
+    <item quantity="other">%1$d κρύπτες</item>
   </plurals>
   <!-- days remaining -->
   <plurals name="days_remaining">
@@ -1189,7 +1188,7 @@
   <string name="export_persnotes_uploading">Φόρτωση προσωπικής σημείωσης %1$d</string>
   <plurals name="export_persnotes_upload_success">
     <item quantity="one">Επιτυχημένη φόρτωση μιας σημείωσης</item>
-    <item quantity="other">Επιτυχημένη φόρτωση %€1d σημειώσεων</item>
+    <item quantity="other">Επιτυχημένη φόρτωση %1$d σημειώσεων</item>
   </plurals>
   <!-- GC attributes -->
   <string name="attribute_dogs_yes">Επιτρέπονται οι σκύλοι</string>
