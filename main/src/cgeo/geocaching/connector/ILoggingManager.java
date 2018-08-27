@@ -51,4 +51,7 @@ public interface ILoggingManager {
     @NonNull
     List<ReportProblemType> getReportProblemTypes(@NonNull Geocache geocache);
 
+    boolean hasTrackableLoadError();
+
+    boolean hasFavPointLoadError();
 }

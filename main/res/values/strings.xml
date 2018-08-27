@@ -277,6 +277,7 @@
     <string name="confirm_discard_wp_changes">Discard unsaved waypoint changes?</string>
     <string name="warn_discard_changes">Unsaved waypoint changes discarded!</string>
     <string name="err_request_popup_info">c:geo failed to get cache popup info.</string>
+    <string name="warn_log_load_additional_data">c:geo failed to load additional data (trackables/favorite points) for logging.</string>
 
     <!-- location service -->
     <string name="loc_last">Last known</string>
