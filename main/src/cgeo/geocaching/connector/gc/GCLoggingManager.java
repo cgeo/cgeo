@@ -44,6 +44,8 @@ class GCLoggingManager extends AbstractLoggingManager implements LoaderManager.L
     @NonNull private List<TrackableLog> trackables = Collections.emptyList();
     private List<LogType> possibleLogTypes;
     private boolean hasLoaderError = true;
+    private boolean hasTrackableLoadError = true;
+    private boolean hasFavPointLoadError = true;
     private int premFavcount;
 
     private static final List<ReportProblemType> REPORT_PROBLEM_TYPES = Arrays.asList(ReportProblemType.LOG_FULL, ReportProblemType.DAMAGED, ReportProblemType.MISSING, ReportProblemType.ARCHIVE, ReportProblemType.OTHER);
@@ -70,18 +72,24 @@ class GCLoggingManager extends AbstractLoggingManager implements LoaderManager.L
             hasLoaderError = true;
         } else {
             trackables = new ArrayList<>();
-            final List<GCWebAPI.TrackableInventoryEntry> trackableInventoryItems = GCWebAPI.getTrackableInventory();
-            if (trackableInventoryItems != null) {
-                for (final GCWebAPI.TrackableInventoryEntry entry : trackableInventoryItems) {
-                    trackables.add(new TrackableLog(entry.referenceCode, entry.trackingNumber, entry.name, 0, 0, TrackableBrand.TRAVELBUG));
+            try {
+                final List<GCWebAPI.TrackableInventoryEntry> trackableInventoryItems = GCWebAPI.getTrackableInventory();
+                if (trackableInventoryItems != null) {
+                    for (final GCWebAPI.TrackableInventoryEntry entry : trackableInventoryItems) {
+                        trackables.add(new TrackableLog(entry.referenceCode, entry.trackingNumber, entry.name, 0, 0, TrackableBrand.TRAVELBUG));
+                    }
                 }
+                hasTrackableLoadError = false;
+            } catch (final Exception e) {
+                hasTrackableLoadError = true;
+                Log.w("GCLoggingManager.onLoadFinished: getTrackableInventory", e);
             }
 
             possibleLogTypes = GCParser.parseTypes(page);
 
             // TODO: also parse ProblemLogTypes: logSettings.problemLogTypes.push(45);
 
-            /* TODO: the GUID is not available in the new logpage
+            /* TODO: the GUID is not available in the new log page
             if (StringUtils.isBlank(cache.getGuid())) {
                 // Acquire the cache GUID from the log page. This will not only complete the information in the database,
                 // but also allow the user to post a rating using GCVote since it requires the GUID to do so.
@@ -95,9 +103,14 @@ class GCLoggingManager extends AbstractLoggingManager implements LoaderManager.L
                 }
             }*/
 
-            final GCLogin.ServerParameters params = GCLogin.getInstance().getServerParameters();
-            premFavcount = GCWebAPI.getAvailableFavoritePoints(params.userInfo.referenceCode).blockingGet();
-
+            try {
+                final GCLogin.ServerParameters params = GCLogin.getInstance().getServerParameters();
+                premFavcount = GCWebAPI.getAvailableFavoritePoints(params.userInfo.referenceCode).blockingGet();
+                hasFavPointLoadError = false;
+            } catch (final Exception e) {
+                hasFavPointLoadError = true;
+                Log.w("GCLoggingManager.onLoadFinished: getAvailableFavoritePoints", e);
+            }
             hasLoaderError = possibleLogTypes.isEmpty();
         }
 
@@ -172,9 +185,19 @@ class GCLoggingManager extends AbstractLoggingManager implements LoaderManager.L
     }
 
     @Override
+    public boolean hasTrackableLoadError() {
+        return hasTrackableLoadError;
+    }
+
+    @Override
+    public boolean hasFavPointLoadError() {
+        return hasFavPointLoadError;
+    }
+
+    @Override
     @NonNull
     public List<TrackableLog> getTrackables() {
-        if (hasLoaderError) {
+        if (hasLoaderError || hasTrackableLoadError) {
             return Collections.emptyList();
         }
         return trackables;
@@ -191,7 +214,7 @@ class GCLoggingManager extends AbstractLoggingManager implements LoaderManager.L
 
     @Override
     public int getPremFavoritePoints() {
-        return hasLoaderError ? 0 : premFavcount;
+        return (hasLoaderError || hasFavPointLoadError) ? 0 : premFavcount;
     }
 
     @NonNull
