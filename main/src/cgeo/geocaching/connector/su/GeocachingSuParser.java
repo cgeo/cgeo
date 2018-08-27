@@ -101,10 +101,10 @@ public class GeocachingSuParser {
                             parsed.logBuilder.setDate(parseDateTime(parser.getAttributeValue(null, "date")));
                             parsed.logBuilder.setLogType(parseLogType(parser.getAttributeValue(null, "status")));
                         } else if ("waypoint".equalsIgnoreCase(tagname)) {
-                            WaypointType wpType = parseWaypointType(parser.getAttributeValue(null, "type"));
-                            String lat = parser.getAttributeValue(null, "lat");
-                            String lon = parser.getAttributeValue(null, "lon");
-                            Waypoint waypoint = new Waypoint(parser.getAttributeValue(null, "name"), wpType, false);
+                            final WaypointType wpType = parseWaypointType(parser.getAttributeValue(null, "type"));
+                            final String lat = parser.getAttributeValue(null, "lat");
+                            final String lon = parser.getAttributeValue(null, "lon");
+                            final Waypoint waypoint = new Waypoint(parser.getAttributeValue(null, "name"), wpType, false);
                             waypoint.setCoords(new Geopoint(lat, lon));
                             parsed.waypoint = waypoint;
                         }

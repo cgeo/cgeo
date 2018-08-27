@@ -13,7 +13,7 @@ public class SUParserTest {
 
     @Test
     public void testCanHandle() throws Exception {
-        InputStream stubInputStream =
+        final InputStream stubInputStream =
                 IOUtils.toInputStream("<data>\n" +
                         "<cache>\n" +
                         "<id>4439</id>\n" +
@@ -31,7 +31,7 @@ public class SUParserTest {
                         "<last>2018-08-08 16:27:20</last>\n" +
                         "</cache>\n" +
                         "</data>", "UTF-8");
-        SearchResult caches = GeocachingSuParser.parseCaches("data", stubInputStream);
+        final SearchResult caches = GeocachingSuParser.parseCaches("data", stubInputStream);
 
         Assert.assertFalse(caches.isEmpty());
     }
