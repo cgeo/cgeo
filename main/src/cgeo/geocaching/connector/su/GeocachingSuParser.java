@@ -17,14 +17,17 @@ import java.util.List;
 import java.util.Locale;
 
 import cgeo.geocaching.SearchResult;
+import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
+import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.log.LogEntry.Builder;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
+import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.SynchronizedDateFormat;
@@ -48,6 +51,8 @@ public class GeocachingSuParser {
         public String latitude = null;
         public Builder logBuilder = new LogEntry.Builder();
         public final List<LogEntry> logs = new ArrayList<>();
+        public final List<Waypoint> waypoints = new ArrayList<>();
+        public Waypoint waypoint;
         public String type;
 
         void addDescription(final String text) {
@@ -95,6 +100,13 @@ public class GeocachingSuParser {
                             parsed.logBuilder.setAuthor(parser.getAttributeValue(null, "nick"));
                             parsed.logBuilder.setDate(parseDateTime(parser.getAttributeValue(null, "date")));
                             parsed.logBuilder.setLogType(parseLogType(parser.getAttributeValue(null, "status")));
+                        } else if ("waypoint".equalsIgnoreCase(tagname)) {
+                            final WaypointType wpType = parseWaypointType(parser.getAttributeValue(null, "type"));
+                            final String lat = parser.getAttributeValue(null, "lat");
+                            final String lon = parser.getAttributeValue(null, "lon");
+                            final Waypoint waypoint = new Waypoint(parser.getAttributeValue(null, "name"), wpType, false);
+                            waypoint.setCoords(new Geopoint(lat, lon));
+                            parsed.waypoint = waypoint;
                         }
                         break;
 
@@ -108,6 +120,7 @@ public class GeocachingSuParser {
                         } else if ("name".equalsIgnoreCase(tagname)) {
                             cache.setName(text);
                         } else if (endTag.equalsIgnoreCase(tagname)) {
+                            cache.setWaypoints(parsed.waypoints, true);
                             storeCache(cache, caches, parsed);
                         } else if ("lat".equalsIgnoreCase(tagname)) {
                             parsed.latitude = text;
@@ -130,6 +143,8 @@ public class GeocachingSuParser {
                             parsed.addDescription(text);
                         } else if ("date".equalsIgnoreCase(tagname)) {
                             cache.setHidden(parseDate(text));
+                        }  else if ("size".equalsIgnoreCase(tagname)) {
+                            cache.setSize(parseSize(text));
                         } else if ("type".equalsIgnoreCase(tagname) || "ctype".equalsIgnoreCase(tagname)) {
                             // different tags used in single cache details and area search
                             parsed.type = text;
@@ -137,6 +152,9 @@ public class GeocachingSuParser {
                         } else if ("note".equalsIgnoreCase(tagname)) {
                             parsed.logBuilder.setLog(StringUtils.trim(text));
                             parsed.logs.add(parsed.logBuilder.build());
+                        }  else if ("waypoint".equalsIgnoreCase(tagname)) {
+                            parsed.waypoint.setNote(StringUtils.trim(text));
+                            parsed.waypoints.add(parsed.waypoint);
                         } else if ("img".equalsIgnoreCase(tagname)) {
                             if (text.contains("photos/caches")) {
                                 cache.addSpoiler(new Image.Builder().setUrl(text).build());
@@ -198,6 +216,42 @@ public class GeocachingSuParser {
         }
     }
 
+    private static CacheSize parseSize(final String size) {
+        switch (size) {
+            case "1":
+                return CacheSize.UNKNOWN;
+            case "2":
+                return CacheSize.MICRO;
+            case "3":
+                return CacheSize.SMALL;
+            case "4":
+                return CacheSize.REGULAR;
+            case "5":
+                return CacheSize.OTHER;
+            default:
+                return CacheSize.UNKNOWN;
+        }
+    }
+
+    private static WaypointType parseWaypointType(final String wpType) {
+        switch (wpType) {
+            case "1":
+                return WaypointType.PARKING;
+            case "2":
+                return WaypointType.STAGE;
+            case "3":
+                return WaypointType.PUZZLE;
+            case "4":
+                return WaypointType.TRAILHEAD;
+            case "5":
+                return WaypointType.FINAL;
+            case "6":
+                return WaypointType.WAYPOINT;
+            default:
+                return WaypointType.WAYPOINT;
+        }
+    }
+
     private static boolean isDisabledStatus(final String status) {
         return !("1".equals(status) || "На сайте".equalsIgnoreCase(status));
     }
@@ -233,12 +287,16 @@ public class GeocachingSuParser {
                 return GeocachingSuConnector.PREFIX_TRADITIONAL;
             case "Виртуальный":
                 return GeocachingSuConnector.PREFIX_VIRTUAL;
-            case "Сообщение о встрече":
+            case "Встреча":
                 return GeocachingSuConnector.PREFIX_EVENT;
             case "Пошаговый традиционный":
                 return GeocachingSuConnector.PREFIX_MULTISTEP;
             case "Конкурс":
                 return GeocachingSuConnector.PREFIX_CONTEST;
+            case "Логический":
+                return GeocachingSuConnector.PREFIX_MYSTERY;
+            case "Логический виртуальный":
+                return GeocachingSuConnector.PREFIX_MYSTERY_VIRTUAL;
             default:
                 return "SU"; // fallback solution to not use the numeric id only
         }
@@ -260,7 +318,7 @@ public class GeocachingSuParser {
         if (text.equalsIgnoreCase("Виртуальный")) {
             return CacheType.VIRTUAL;
         }
-        if (text.equalsIgnoreCase("Сообщение о встрече")) {
+        if (text.equalsIgnoreCase("Встреча")) {
             return CacheType.EVENT;
         }
         if (text.equalsIgnoreCase("Конкурс")) {
@@ -271,6 +329,12 @@ public class GeocachingSuParser {
         }
         if (text.equalsIgnoreCase("Пошаговый виртуальный")) {
             return CacheType.VIRTUAL;
+        }
+        if (text.equalsIgnoreCase("Логический")) {
+            return CacheType.MYSTERY;
+        }
+        if (text.equalsIgnoreCase("Логический виртуальный")) {
+            return CacheType.MYSTERY;
         }
         return CacheType.UNKNOWN;
     }
