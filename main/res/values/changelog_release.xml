@@ -2,6 +2,11 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
+    <b>Next bugfix release:</b>\n
+    · Fix: Crashes on logging page during server instabilities\n
+    · Fix: Greek translation not working\n
+    · New: Notify the user if coordinate checker of geocaching.com is available via website\n
+    \n
     <b>2018.08.14:</b>\n
     · Fix: Login page changed on geocaching.com causing login problems\n
     \n

@@ -1,5 +1,7 @@
 package cgeo.geocaching.utils;
 
+import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.R;
 import cgeo.geocaching.models.Geocache;
 
 import android.support.annotation.NonNull;
@@ -36,6 +38,10 @@ public final class CheckerUtils {
                     return StringEscapeUtils.unescapeHtml4(url);
                 }
             }
+        }
+        // GC's own checker
+        if (cache.getDescription().contains(CgeoApplication.getInstance().getString(R.string.link_gc_checker))) {
+            return cache.getUrl();
         }
         return null;
     }
