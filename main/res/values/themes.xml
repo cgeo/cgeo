@@ -34,13 +34,13 @@
     </style>
 
 
-    <style name="cgeo.ActionBarStyle" parent="Widget.AppCompat.Base.ActionBar">
+    <style name="cgeo.ActionBarStyle" parent="@android:style/Widget.DeviceDefault.ActionBar">
         <item name="indeterminateProgressStyle">@style/cgeo.Widget.AppCompat.Base.ProgressBar.Medium</item>
         <item name="android:indeterminateProgressStyle" tools:ignore="NewApi">@style/cgeo.Widget.AppCompat.Base.ProgressBar.Medium</item>
     </style>
 
 
-    <style name="cgeo.ActionBarStyle.Light.Inverse" parent="Widget.AppCompat.Light.Base.ActionBar.Solid.Inverse">
+    <style name="cgeo.ActionBarStyle.Light.Inverse" parent="@android:style/Widget.DeviceDefault.Light.ActionBar.Solid.Inverse">
         <item name="indeterminateProgressStyle">@style/cgeo.Widget.AppCompat.Base.ProgressBar.Medium</item>
         <item name="android:indeterminateProgressStyle" tools:ignore="NewApi">@style/cgeo.Widget.AppCompat.Base.ProgressBar.Medium</item>
     </style>

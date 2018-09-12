@@ -29,7 +29,7 @@
             android:id="@+id/cachelist"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/abc_ic_search"
+            android:drawableLeft="@android:drawable/ic_menu_search"
             android:gravity="left|center_vertical"
             android:text="@null"/>
     </LinearLayout>
