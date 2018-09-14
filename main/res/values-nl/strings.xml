@@ -78,7 +78,7 @@
   <string name="log_marked_missing">Als ontbrekend gemarkeerd</string>
   <string name="log_tb_nothing">Niets doen</string>
   <string name="log_tb_visit">Bezoek</string>
-  <string name="log_tb_drop">Hier droppen</string>
+  <string name="log_tb_drop">Gedropt</string>
   <string name="log_tb_sortby">Trackable sorteren</string>
   <string name="log_tb_changeall">Wijzig alles</string>
   <string name="log_tb_grabbed">Ergens gepakt</string>
@@ -255,7 +255,7 @@
   <string name="info_log_cleared">Log is gewist.</string>
   <string name="info_waypoint_coordinates_cleared">Coördinaten gewist.</string>
   <string name="info_log_type_changed">Type log is gewijzigd!</string>
-  <string name="info_log_report_problem_changed">Probleem melden is veranderd!</string>
+  <string name="info_log_report_problem_changed">Available problem reports have changed!</string>
   <string name="info_select_logimage_cancelled">Foto selectie of opname is geannuleerd.</string>
   <string name="info_stored_image">Nieuwe foto opgeslagen in:</string>
   <string name="info_storing_static_maps">Proberen statische kaarten op te slaan</string>
@@ -267,6 +267,7 @@
   <string name="confirm_discard_wp_changes">Waypoint wijzigingen niet opslaan?</string>
   <string name="warn_discard_changes">Waypoint wijzigingen zijn niet opgeslagen!</string>
   <string name="err_request_popup_info">Het is c:geo niet gelukt om de cache popup info te verkrijgen.</string>
+  <string name="warn_log_load_additional_data">c:geo failed to load additional data (trackables/favorite points) for logging.</string>
   <!-- location service -->
   <string name="loc_last">Laatst bekende</string>
   <string name="loc_net">Netwerk</string>
@@ -412,8 +413,8 @@
   <string name="about_version">Versie</string>
   <string name="about_changelog">Changelog</string>
   <string name="about_system">Systeem</string>
-  <string name="about_donate">Support us</string>
-  <string name="about_donation_more">Support c:geo development\nMore info on our website</string>
+  <string name="about_donate">Steun ons</string>
+  <string name="about_donation_more">Visit website for info</string>
   <string name="about_contributors">Bijdragers</string>
   <string name="about_license">Licentie</string>
   <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
@@ -534,7 +535,7 @@
   <string name="init_signature_template_terrain">Terrein</string>
   <string name="init_signature_template_url">URL</string>
   <string name="init_signature_template_log">Log tekst</string>
-  <string name="init_signature_template_size">Size</string>
+  <string name="init_signature_template_size">Grootte</string>
   <string name="init_ratingwanted">GCvote.com waardering</string>
   <string name="init_summary_ratingwanted">Laad cachewaardering van GCvote.com</string>
   <string name="init_friends_and_own_logs_wanted">Toon eigen/van vrienden</string>
@@ -1429,13 +1430,13 @@
   <string name="about_twitter">Moet <b>c:geo</b> elke cache vondst publiceren naar Twitter?</string>
   <string name="faq_title">FAQ</string>
   <!-- status (used via string based resource loading) -->
-  <string name="status_new_release" tools:ignore="UnusedResources">Nieuwe release beschikbaar.\nTik om te installeren.</string>
+  <string name="status_new_release" tools:ignore="UnusedResources">Nieuwe versie beschikbaar.\nTik om te installeren.</string>
   <string name="status_new_nightly" tools:ignore="UnusedResources">Nieuwe nightly-release beschikbaar.\nTik om te installeren.</string>
-  <string name="status_new_rc" tools:ignore="UnusedResources">Nieuwe release-candidaad beschikbaar.\nTik om te installeren.</string>
+  <string name="status_new_rc" tools:ignore="UnusedResources">Nieuwe release-kandidaat beschikbaar.\nTik om te installeren.</string>
   <string name="status_geocaching_change" tools:ignore="UnusedResources">Recente aanpassingen op geocaching.com zorgen dat c:geo niet meer (100%) correct werkt.\nWe werken aan het probleem, controleer binnenkort nogmaals.</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Recente aanpassingen op geocaching.com zorgen dat de live-kaart niet meer werkt.\nWe werken aan het probleem, controleer binnenkort nogmaals.</string>
   <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com is in onderhoud.\nJe kan verschillende problemen ondervinden.</string>
-  <string name="status_closeout_warning_41" tools:ignore="UnusedResources">You appear to be using a version of Android older than 4.1. Future releases of c:geo might no longer be available for your device.</string>
+  <string name="status_closeout_warning_41" tools:ignore="UnusedResources">Je lijkt gebruik te maken van een Android versie ouder dan 4.1. Toekomstige releases zijn mogelijk niet beschikbaar voor je apparaat.</string>
   <!-- text-to-speech for compass view -->
   <string name="tts_service">Pratend kompas</string>
   <string name="tts_start">Begin met praten</string>
@@ -1547,6 +1548,7 @@
     <item quantity="one">%d waypoint geëxtraheerd</item>
     <item quantity="other">%d waypoints geëxtraheerd</item>
   </plurals>
+  <string name="link_gc_checker">geocaching.com coordinate checker available via browser</string>
   <!-- calendar adder -->
   <string name="event_fail">Niet gelukt om event cache toe te voegen aan kalender</string>
   <string name="init_low_disk_space">Weinig schijfruimte</string>

@@ -255,7 +255,7 @@
   <string name="info_log_cleared">Запись очищена.</string>
   <string name="info_waypoint_coordinates_cleared">Координаты очищены.</string>
   <string name="info_log_type_changed">Тип записи был изменен!</string>
-  <string name="info_log_report_problem_changed">Статус проблемы изменился!</string>
+  <string name="info_log_report_problem_changed">Available problem reports have changed!</string>
   <string name="info_select_logimage_cancelled">Выбор изображения был отменен.</string>
   <string name="info_stored_image">Новое изображение сохранено в:</string>
   <string name="info_storing_static_maps">Пытаемся сохранить статические карты</string>
@@ -267,6 +267,7 @@
   <string name="confirm_discard_wp_changes">Сбросить несохраненные изменения путевых точек?</string>
   <string name="warn_discard_changes">Несохраненные изменения отменены!</string>
   <string name="err_request_popup_info">c:geo не удалось загрузить информацию о тайнике.</string>
+  <string name="warn_log_load_additional_data">c:geo failed to load additional data (trackables/favorite points) for logging.</string>
   <!-- location service -->
   <string name="loc_last">Последнее местоположение</string>
   <string name="loc_net">Сеть</string>
@@ -418,8 +419,8 @@
   <string name="about_version">Версия</string>
   <string name="about_changelog">Изменения</string>
   <string name="about_system">Система</string>
-  <string name="about_donate">Support us</string>
-  <string name="about_donation_more">Support c:geo development\nMore info on our website</string>
+  <string name="about_donate">Поддержите нас</string>
+  <string name="about_donation_more">Visit website for info</string>
   <string name="about_contributors">Участники</string>
   <string name="about_license">Лицензия</string>
   <string name="about_apache_license"><a href="">Лицензия Apache, Version 2.0</a></string>
@@ -540,7 +541,7 @@
   <string name="init_signature_template_terrain">Terrain</string>
   <string name="init_signature_template_url">URL</string>
   <string name="init_signature_template_log">Текст записи</string>
-  <string name="init_signature_template_size">Size</string>
+  <string name="init_signature_template_size">Размер</string>
   <string name="init_ratingwanted">Рейтинг GCvote</string>
   <string name="init_summary_ratingwanted">Загружать рейтинг тайника с GCvote.com</string>
   <string name="init_friends_and_own_logs_wanted">Свои записи и записи друзей</string>
@@ -1457,7 +1458,7 @@
   <string name="status_geocaching_change" tools:ignore="UnusedResources">Последние изменения на geocaching.com сломали c:geo.\nМы работаем над этим, проверьте обновления через некоторое время.</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Последние изменения на geocaching.com сломали c:geo.\nМы работаем над этим, проверьте обновления через некоторое время.</string>
   <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com сейчас не работает.\nВозможны различные проблемы.</string>
-  <string name="status_closeout_warning_41" tools:ignore="UnusedResources">You appear to be using a version of Android older than 4.1. Future releases of c:geo might no longer be available for your device.</string>
+  <string name="status_closeout_warning_41" tools:ignore="UnusedResources">Вы используете Android 4.1 или старее. Будущие версии c:geo могут быть недоступны на вашем устройстве.</string>
   <!-- text-to-speech for compass view -->
   <string name="tts_service">Говорящий компас</string>
   <string name="tts_start">Начать говорить</string>
@@ -1591,6 +1592,7 @@
     <item quantity="many">%d точки извлечены</item>
     <item quantity="other">%d точек извлечено</item>
   </plurals>
+  <string name="link_gc_checker">geocaching.com coordinate checker available via browser</string>
   <!-- calendar adder -->
   <string name="event_fail">Не удалось добавить событие в календарь</string>
   <string name="init_low_disk_space">Кончается место для хранения</string>

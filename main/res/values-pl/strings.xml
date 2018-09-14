@@ -124,24 +124,24 @@
   <string name="log_image_description">Opis</string>
   <string name="log_image_scale">Skalowanie obrazu</string>
   <string name="log_password_title">Hasło do logu:</string>
-  <string name="log_report_problem">Report Problem:</string>
+  <string name="log_report_problem">Zgłoś problem:</string>
   <string name="log_hint_log_password">Wpisz hasło do logu</string>
   <string name="log_oc_team_comment">Komentarz zespołu OC</string>
   <string name="log_your_saved_log">Twój zapisany wpis</string>
   <string name="log_empty_logbook">Logbook tej skrzynki jest pusty.</string>
-  <string name="log_problem_none">No Problem</string>
-  <string name="log_problem_needs_maintenance_label">Needs Maintenance</string>
-  <string name="log_problem_needs_maintenance_text">This geocacher reported that there is a problem with this cache.</string>
-  <string name="log_problem_log_full_label">Logbook is full</string>
-  <string name="log_problem_log_full_text">This geocacher reported that the logbook is full.</string>
-  <string name="log_problem_damaged_label">Container is damaged</string>
-  <string name="log_problem_damaged_text">This geocacher reported that the container is damaged.</string>
-  <string name="log_problem_missing_label">Cache might be missing</string>
-  <string name="log_problem_missing_text">This geocacher reported that the cache might be missing.</string>
-  <string name="log_problem_other_label">Other</string>
-  <string name="log_problem_other_text">This geocacher reported that there is a problem with this cache.</string>
-  <string name="log_problem_archive_label">Cache should be archived</string>
-  <string name="log_problem_archive_text">This geocacher reported that this geocache should be archived. A community volunteer reviewer has been notified.</string>
+  <string name="log_problem_none">Brak problemów</string>
+  <string name="log_problem_needs_maintenance_label">Wymagany serwis skrzynki</string>
+  <string name="log_problem_needs_maintenance_text">Ten geocacher poinformował, że jest problem z tym cachem.</string>
+  <string name="log_problem_log_full_label">Logbook jest pełny</string>
+  <string name="log_problem_log_full_text">Ten geocacher poinformował, że logbook jest pełny.</string>
+  <string name="log_problem_damaged_label">Pojemnik jest uszkodzony</string>
+  <string name="log_problem_damaged_text">Ten geocacher poinformował, że pojemnik jest uszkodzony.</string>
+  <string name="log_problem_missing_label">Cache mógł zniknąć</string>
+  <string name="log_problem_missing_text">Ten geocacher poinformował, że cache mógł zniknąć.</string>
+  <string name="log_problem_other_label">Inne</string>
+  <string name="log_problem_other_text">Ten geocacher poinformował, że jest problem z tym cachem.</string>
+  <string name="log_problem_archive_label">Cache powinien zostać archiwizowany</string>
+  <string name="log_problem_archive_text">Ten geocacher poinformował, że ten cache powinien być archiwizowany. Recenzent został powiadomiony.</string>
   <string-array name="log_image_scales">
     <item>Brak skalowania</item>
     <item>512 px</item>
@@ -255,7 +255,7 @@
   <string name="info_log_cleared">Wpis został usunięty.</string>
   <string name="info_waypoint_coordinates_cleared">Współrzędne wyczyszczone.</string>
   <string name="info_log_type_changed">Rodzaj wpisu w dzienniku został zmieniony!</string>
-  <string name="info_log_report_problem_changed">Report problem has changed!</string>
+  <string name="info_log_report_problem_changed">Available problem reports have changed!</string>
   <string name="info_select_logimage_cancelled">Wybór obrazu został anulowany.</string>
   <string name="info_stored_image">Nowy obraz zapisany w:</string>
   <string name="info_storing_static_maps">Próbuję zapisać mapy statyczne</string>
@@ -267,6 +267,7 @@
   <string name="confirm_discard_wp_changes">Odrzucić niezapisane zmiany punktu nawigacyjnego?</string>
   <string name="warn_discard_changes">Niezapisane zmiany punktu nawigacji zostały odrzucone!</string>
   <string name="err_request_popup_info">c:geo nie mogło wyświetlić wyskakującego okienka z informacjami o skrzynce.</string>
+  <string name="warn_log_load_additional_data">c:geo failed to load additional data (trackables/favorite points) for logging.</string>
   <!-- location service -->
   <string name="loc_last">Ostatnia pozycja</string>
   <string name="loc_net">Sieć</string>
@@ -418,8 +419,8 @@
   <string name="about_version">Wersja</string>
   <string name="about_changelog">Zmiany</string>
   <string name="about_system">System</string>
-  <string name="about_donate">Support us</string>
-  <string name="about_donation_more">Support c:geo development\nMore info on our website</string>
+  <string name="about_donate">Wesprzyj nas</string>
+  <string name="about_donation_more">Visit website for info</string>
   <string name="about_contributors">Współpracownicy</string>
   <string name="about_license">Licencja</string>
   <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
@@ -536,11 +537,11 @@
   <string name="init_signature_template_number">Numer</string>
   <string name="init_signature_template_owner">Właściciel</string>
   <string name="init_signature_template_name">Nazwa</string>
-  <string name="init_signature_template_difficulty">Difficulty</string>
-  <string name="init_signature_template_terrain">Terrain</string>
+  <string name="init_signature_template_difficulty">Trudność</string>
+  <string name="init_signature_template_terrain">Teren</string>
   <string name="init_signature_template_url">URL</string>
   <string name="init_signature_template_log">Wpis</string>
-  <string name="init_signature_template_size">Size</string>
+  <string name="init_signature_template_size">Rozmiar</string>
   <string name="init_ratingwanted">Załaduj ocenę skrzynki z GCvote.com</string>
   <string name="init_summary_ratingwanted">Załaduj ocenę skrzynki z GCvote.com</string>
   <string name="init_friends_and_own_logs_wanted">Pokaż przyjaciół/własne</string>
@@ -681,9 +682,9 @@
   <string name="feature_search_geocode">Szukanie po numerze skrzynki</string>
   <string name="feature_search_owner">Szukaj wg właściciela</string>
   <string name="feature_search_finder">Szukaj wg znalazcy</string>
-  <string name="init_mapsforge_api_title">Mapsforge API</string>
-  <string name="init_mfold_api">Old Mapsforge V3</string>
-  <string name="init_mfold_api_description">The current release contains a beta version of our new Mapsforge map. If you miss some features or encounter issues you can go back to the old version here.</string>
+  <string name="init_mapsforge_api_title">MapsForge API</string>
+  <string name="init_mfold_api">Stary Mapsforge V3</string>
+  <string name="init_mfold_api_description">Obecne wydanie zawiera wersję beta naszej nowej mapy Mapsforge. Jeśli brakuje niektórych funkcji lub występują problemy można wrócić do starej wersji tutaj.</string>
   <string name="init_experimental_title">Funkcje eksperymentalne</string>
   <string name="init_mfbeta">Mapsforge beta jako domyślne</string>
   <string name="init_mfbeta_description">Obecne wydanie zawiera wersję beta map Mapsforge jako eksperymentalną funkcję. Nowa mapa może być aktywowana tutaj jako domyślna dla map online i map z listy.</string>
@@ -790,7 +791,7 @@
     <item quantity="many">about %d months ago</item>
     <item quantity="other">about %d months ago</item>
   </plurals>
-  <string name="cache_offline_about_time_year">over a year ago</string>
+  <string name="cache_offline_about_time_year">ponad rok temu</string>
   <string name="cache_offline_time_hour">przed jedną godziną</string>
   <string name="cache_offline_time_hours">godzin temu</string>
   <string name="cache_offline_time_days">dni temu</string>
@@ -1457,7 +1458,7 @@
   <string name="status_geocaching_change" tools:ignore="UnusedResources">Ostatnie zmiany na geocaching.com popsuły c:geo.\nPracujemy nad tym, sprawdź ponownie niedługo.</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Ostatnie zmiany na geocaching.com popsuły funkcjonalność map online.\nPracujemy nad tym, sprawdź ponownie niedługo.</string>
   <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com jest w trakcie konserwacji.\nMogą wystąpić różnorodne problemy.</string>
-  <string name="status_closeout_warning_41" tools:ignore="UnusedResources">You appear to be using a version of Android older than 4.1. Future releases of c:geo might no longer be available for your device.</string>
+  <string name="status_closeout_warning_41" tools:ignore="UnusedResources">Wygląda na to, że używasz wersji Androida starszej niż 4.1. Przyszłe wydania c:geo mogą być już niedostępne dla Twojego urządzenia.</string>
   <!-- text-to-speech for compass view -->
   <string name="tts_service">Mówiący kompas</string>
   <string name="tts_start">Zacznij mówić</string>
@@ -1516,8 +1517,8 @@
   <string name="send">Wyślij</string>
   <string name="confirm_log_title">Specjalny typ wpisu</string>
   <string name="confirm_log_message">Chcesz wpisać \'%s\'. Czy jesteś pewien?</string>
-  <string name="confirm_report_problem_title">Report problem</string>
-  <string name="confirm_report_problem_message">You want to report \'%s\'. Are you sure?</string>
+  <string name="confirm_report_problem_title">Zgłoś problem</string>
+  <string name="confirm_report_problem_message">Chcesz zgłosić \'%s\'. Czy na pewno?</string>
   <!-- Geokrety -->
   <string name="settings_activate_geokrety">Aktywuj</string>
   <string name="init_geokrety">GeoKrety.org</string>
@@ -1591,6 +1592,7 @@
     <item quantity="many">%d waypoints extracted</item>
     <item quantity="other">%d punktów orientacyjnych zostało wyciągniętych</item>
   </plurals>
+  <string name="link_gc_checker">geocaching.com coordinate checker available via browser</string>
   <!-- calendar adder -->
   <string name="event_fail">Nie udało się dodać wydarzenia do kalendarza</string>
   <string name="init_low_disk_space">Zaczyna brakować miejsca</string>
@@ -1599,6 +1601,6 @@
   <string name="list_confirm_debug_message">Tryb debugowania może powodować niestabilność. Czy chcesz wyłączyć ten tryb?</string>
   <string name="err_select_logimage_upload_size">Zbyt duże zdjęcie, wybierz mniejszą skalę.</string>
   <string name="err_logimage_caption_required">Podpis jest wymagany dla obrazu</string>
-  <string name="waypoint_latitude_null">N/S --° --.---</string>
-  <string name="waypoint_longitude_null">E/W --° --.---</string>
+  <string name="waypoint_latitude_null">N/S--°--.---</string>
+  <string name="waypoint_longitude_null">E/W--°--.---</string>
 </resources>

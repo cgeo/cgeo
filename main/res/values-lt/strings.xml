@@ -125,24 +125,24 @@
   <string name="log_image_description">Aprašymas</string>
   <string name="log_image_scale">Pritaikyti dydį</string>
   <string name="log_password_title">Įrašo slaptažodis:</string>
-  <string name="log_report_problem">Report Problem:</string>
+  <string name="log_report_problem">Pranešti problemą:</string>
   <string name="log_hint_log_password">Įveskite savo įrašo slaptažodį</string>
   <string name="log_oc_team_comment">OC komandos komentaras</string>
   <string name="log_your_saved_log">Jūsų išsaugotas įrašas</string>
   <string name="log_empty_logbook">Šios slėptuvės įrašų žurnalas yra tuščias.</string>
-  <string name="log_problem_none">No Problem</string>
+  <string name="log_problem_none">Jokių problemų</string>
   <string name="log_problem_needs_maintenance_label">Needs Maintenance</string>
-  <string name="log_problem_needs_maintenance_text">This geocacher reported that there is a problem with this cache.</string>
-  <string name="log_problem_log_full_label">Logbook is full</string>
-  <string name="log_problem_log_full_text">This geocacher reported that the logbook is full.</string>
-  <string name="log_problem_damaged_label">Container is damaged</string>
-  <string name="log_problem_damaged_text">This geocacher reported that the container is damaged.</string>
-  <string name="log_problem_missing_label">Cache might be missing</string>
-  <string name="log_problem_missing_text">This geocacher reported that the cache might be missing.</string>
+  <string name="log_problem_needs_maintenance_text">Šis lobiautojas pranešė, kad su šia slėptuve yra problema.</string>
+  <string name="log_problem_log_full_label">Įrašų žurnalas yra pilnas</string>
+  <string name="log_problem_log_full_text">Šis lobiautojas pranešė, kad irašų žurnalas yra pilnas.</string>
+  <string name="log_problem_damaged_label">Talpykla yra pažeista</string>
+  <string name="log_problem_damaged_text">Šis lobiautojas pranešė, kad talpykla yra pažeista.</string>
+  <string name="log_problem_missing_label">Slėptuvė gali būti dingusi</string>
+  <string name="log_problem_missing_text">Šis lobiautojas pranešė, kad slėptuvė gali būti dingusi.</string>
   <string name="log_problem_other_label">Other</string>
-  <string name="log_problem_other_text">This geocacher reported that there is a problem with this cache.</string>
-  <string name="log_problem_archive_label">Cache should be archived</string>
-  <string name="log_problem_archive_text">This geocacher reported that this geocache should be archived. A community volunteer reviewer has been notified.</string>
+  <string name="log_problem_other_text">Šis lobiautojas pranešė, kad su šia slėptuve yra problema.</string>
+  <string name="log_problem_archive_label">Slėptuvė turėtų būti archyvuota</string>
+  <string name="log_problem_archive_text">Šis lobiautojas pranešė, kad slėptuvė turėtų būti archyvuota. Savanoriui apžvalgininkui buvo pranešta.</string>
   <string-array name="log_image_scales">
     <item>Nekeisti dydžio</item>
     <item>512 px</item>
@@ -256,7 +256,7 @@
   <string name="info_log_cleared">Įrašas išvalytas.</string>
   <string name="info_waypoint_coordinates_cleared">Koordinatės išvalytos.</string>
   <string name="info_log_type_changed">Įrašo tipas buvo pakeistas!</string>
-  <string name="info_log_report_problem_changed">Report problem has changed!</string>
+  <string name="info_log_report_problem_changed">Available problem reports have changed!</string>
   <string name="info_select_logimage_cancelled">Nuotraukos pasirinkimas ar fotografavimas buvo atšauktas.</string>
   <string name="info_stored_image">Nauja nuotrauka įrašyta į:</string>
   <string name="info_storing_static_maps">Bandoma išsaugoti statinius žemėlapius</string>
@@ -268,6 +268,7 @@
   <string name="confirm_discard_wp_changes">Atsisakyti neišsaugotų kelio taškų pakeitimų?</string>
   <string name="warn_discard_changes">Neišsaugoti kelio taškai atmesti!</string>
   <string name="err_request_popup_info">c:geo nepavyko gauti slėptuvės iškylančios informacijos.</string>
+  <string name="warn_log_load_additional_data">c:geo failed to load additional data (trackables/favorite points) for logging.</string>
   <!-- location service -->
   <string name="loc_last">Paskutinė žinoma vieta</string>
   <string name="loc_net">Tinklas</string>
@@ -419,8 +420,8 @@
   <string name="about_version">Versija</string>
   <string name="about_changelog">Pakeitimų žurnalas</string>
   <string name="about_system">Sistema</string>
-  <string name="about_donate">Support us</string>
-  <string name="about_donation_more">Support c:geo development\nMore info on our website</string>
+  <string name="about_donate">Paremkite mus</string>
+  <string name="about_donation_more">Visit website for info</string>
   <string name="about_contributors">Bendraautoriai</string>
   <string name="about_license">Licencija</string>
   <string name="about_apache_license"><a href=""> Apache licencija, versija 2.0</a></string>
@@ -683,8 +684,8 @@
   <string name="feature_search_owner">Paieška pagal savininką</string>
   <string name="feature_search_finder">Paieška pagal radėją</string>
   <string name="init_mapsforge_api_title">Mapsforge API</string>
-  <string name="init_mfold_api">Old Mapsforge V3</string>
-  <string name="init_mfold_api_description">The current release contains a beta version of our new Mapsforge map. If you miss some features or encounter issues you can go back to the old version here.</string>
+  <string name="init_mfold_api">Senasis Mapsforge V3</string>
+  <string name="init_mfold_api_description">Dabartinė versija turi mūsų naują Mapsforge beta versijos žemėlapį. Jei pasigedote kai kurių funkcijų ar ištiko problemų, galite grįžti prie senesnios versijos čia.</string>
   <string name="init_experimental_title">Eksperimentinės funkcijos</string>
   <string name="init_mfbeta">Mapsforge beta kaip numatytasis</string>
   <string name="init_mfbeta_description">Kaip eksperimentinė funkciją dabartinė versija turi mūsų naują Mapsforge beta versijos žemėlapį. Šis naujas žemėlapis gali būti aktyvuota čia kaip numatytasis žemėlapis.</string>
@@ -752,7 +753,7 @@
   <plurals name="days_remaining">
     <item quantity="one">liko viena diena</item>
     <item quantity="few">liko %1$d dienos</item>
-    <item quantity="many">%1$d days remaining</item>
+    <item quantity="many">liko %1$d dienų</item>
     <item quantity="other">liko %1$d dienų</item>
   </plurals>
   <string name="last_day_available">liko paskutine diena</string>
@@ -786,12 +787,12 @@
     <item quantity="other">prieš %d dienų</item>
   </plurals>
   <plurals name="cache_offline_about_time_months">
-    <item quantity="one">about %d month ago</item>
-    <item quantity="few">about %d months ago</item>
-    <item quantity="many">about %d months ago</item>
-    <item quantity="other">about %d months ago</item>
+    <item quantity="one">maždaug prieš %d mėnesį</item>
+    <item quantity="few">maždaug prieš %d mėnesius</item>
+    <item quantity="many">maždaug prieš %d mėnesių</item>
+    <item quantity="other">maždaug prieš %d mėnesių</item>
   </plurals>
-  <string name="cache_offline_about_time_year">over a year ago</string>
+  <string name="cache_offline_about_time_year">daugiau nei prieš metus</string>
   <string name="cache_offline_time_hour">valandą atgal</string>
   <string name="cache_offline_time_hours">valandas atgal</string>
   <string name="cache_offline_time_days">dienų atgal</string>
@@ -1209,8 +1210,8 @@
   <string name="export_persnotes_uploading">Įkeliama asmeninė pastaba %1$d</string>
   <plurals name="export_persnotes_upload_success">
     <item quantity="one">Sėkmingai nusiųsta viena pastaba</item>
-    <item quantity="few">Uploaded %1$d notes successfully</item>
-    <item quantity="many">Uploaded %1$d notes successfully</item>
+    <item quantity="few">Sėkmingai nusiųstos %1$d pastabos</item>
+    <item quantity="many">Sėkmingai nusiųsta %1$d pastabų</item>
     <item quantity="other">Sėkmingai nusiųsta %1$d pastabų</item>
   </plurals>
   <!-- GC attributes -->
@@ -1458,7 +1459,7 @@
   <string name="status_geocaching_change" tools:ignore="UnusedResources">Geocaching.com svetainės pakeitimai sugadino c:geo.\nMes tai tvarkome, patikrinkite tai vėliau.</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Geocaching.com svetainės pakeitimai sugadino tiesioginio žemėlapio funkcijas.\nMes tai tvarkome, patikrinkite tai vėliau.</string>
   <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com tinklapyje vyksta priežiūros darbai.\nJums gali kilti įvairių problemų.</string>
-  <string name="status_closeout_warning_41" tools:ignore="UnusedResources">You appear to be using a version of Android older than 4.1. Future releases of c:geo might no longer be available for your device.</string>
+  <string name="status_closeout_warning_41" tools:ignore="UnusedResources">Panašu, kad jūs naudojate Android versiją, senesnę nei 4.1. Būsimos c:geo versijos gali būti nebepasiekiamos jūsų prietaise.</string>
   <!-- text-to-speech for compass view -->
   <string name="tts_service">Kalbantis kompasas</string>
   <string name="tts_start">Kalbėti</string>
@@ -1517,8 +1518,8 @@
   <string name="send">Siųsti</string>
   <string name="confirm_log_title">Specialus įrašo tipas</string>
   <string name="confirm_log_message">Norite registruoti \'%s\'. Ar tikrai?</string>
-  <string name="confirm_report_problem_title">Report problem</string>
-  <string name="confirm_report_problem_message">You want to report \'%s\'. Are you sure?</string>
+  <string name="confirm_report_problem_title">Pranešti problemą</string>
+  <string name="confirm_report_problem_message">Norite pranešti \'%s\'. Ar esate tikri?</string>
   <!-- Geokrety -->
   <string name="settings_activate_geokrety">Aktyvuoti</string>
   <string name="init_geokrety">Geokrety.org</string>
@@ -1549,7 +1550,7 @@
   <plurals name="command_copy_caches_result">
     <item quantity="one">Nukopijuotos %d slėptuvės</item>
     <item quantity="few">Nukopijuota %d slėptuvių</item>
-    <item quantity="many">Copied %d caches</item>
+    <item quantity="many">Nukopijuota %d slėptuvių</item>
     <item quantity="other">Nukopijuota %d slėptuvių</item>
   </plurals>
   <string name="command_delete_caches_progress">Ištrinamos slėptuvės</string>
@@ -1565,7 +1566,7 @@
   <plurals name="fav_points_remaining">
     <item quantity="one">Pridėti šią slėptuvę prie mėgstamųjų (liko %d)</item>
     <item quantity="few">Pridėti šias slėptuves prie mėgstamųjų (liko %d)</item>
-    <item quantity="many">Add this cache to favorites (%d remaining)</item>
+    <item quantity="many">Pridėti šią slėptuvę prie mėgstamųjų (liko %d)</item>
     <item quantity="other">Pridėti šią slėptuvę prie mėgstamųjų (liko %d)</item>
   </plurals>
   <!-- distance units -->
@@ -1589,9 +1590,10 @@
   <plurals name="extract_waypoints_result">
     <item quantity="one">%d papildomas taškas išskleistas</item>
     <item quantity="few">%d papildomi taškai išskleisti</item>
-    <item quantity="many">%d waypoints extracted</item>
+    <item quantity="many">%d papildomų taškų išskleista</item>
     <item quantity="other">%d papildomų taškų išskleista</item>
   </plurals>
+  <string name="link_gc_checker">geocaching.com coordinate checker available via browser</string>
   <!-- calendar adder -->
   <string name="event_fail">Nepavyko įtraukti renginio į kalendorių</string>
   <string name="init_low_disk_space">Mažai talpyklos vietos</string>
@@ -1600,6 +1602,6 @@
   <string name="list_confirm_debug_message">Derinimo režimas sukelia nestabilumų! Ar norite jį išjungti?</string>
   <string name="err_select_logimage_upload_size">Paveikslėlis per didelis, prašome pasirinkti mažesnius išmatavimus.</string>
   <string name="err_logimage_caption_required">Paveikslėliui būtina antraštė</string>
-  <string name="waypoint_latitude_null">N/S --° --.---</string>
-  <string name="waypoint_longitude_null">E/W --° --.---</string>
+  <string name="waypoint_latitude_null">Š/P --° --.---</string>
+  <string name="waypoint_longitude_null">R/V --° --.---</string>
 </resources>

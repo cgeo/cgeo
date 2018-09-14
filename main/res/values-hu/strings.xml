@@ -124,24 +124,24 @@
   <string name="log_image_description">Leírás</string>
   <string name="log_image_scale">Méretezés</string>
   <string name="log_password_title">Láda jelszó logoláshoz:</string>
-  <string name="log_report_problem">Report Problem:</string>
+  <string name="log_report_problem">Probléma jelentése:</string>
   <string name="log_hint_log_password">Írd be a láda (log) jelszavát</string>
   <string name="log_oc_team_comment">OC csapat kommentje</string>
   <string name="log_your_saved_log">Offline logod</string>
   <string name="log_empty_logbook">A ládát még nem logolták.</string>
-  <string name="log_problem_none">No Problem</string>
-  <string name="log_problem_needs_maintenance_label">Needs Maintenance</string>
-  <string name="log_problem_needs_maintenance_text">This geocacher reported that there is a problem with this cache.</string>
-  <string name="log_problem_log_full_label">Logbook is full</string>
-  <string name="log_problem_log_full_text">This geocacher reported that the logbook is full.</string>
-  <string name="log_problem_damaged_label">Container is damaged</string>
-  <string name="log_problem_damaged_text">This geocacher reported that the container is damaged.</string>
-  <string name="log_problem_missing_label">Cache might be missing</string>
-  <string name="log_problem_missing_text">This geocacher reported that the cache might be missing.</string>
-  <string name="log_problem_other_label">Other</string>
-  <string name="log_problem_other_text">This geocacher reported that there is a problem with this cache.</string>
-  <string name="log_problem_archive_label">Cache should be archived</string>
-  <string name="log_problem_archive_text">This geocacher reported that this geocache should be archived. A community volunteer reviewer has been notified.</string>
+  <string name="log_problem_none">Nincs probléma</string>
+  <string name="log_problem_needs_maintenance_label">Karbantartás szükséges</string>
+  <string name="log_problem_needs_maintenance_text">Ez a játékos azt jelezte, hogy probléma van a ládával.</string>
+  <string name="log_problem_log_full_label">Betelt logfüzet</string>
+  <string name="log_problem_log_full_text">Ez a játékos azt jelezte, hogy betelt a logfüzet.</string>
+  <string name="log_problem_damaged_label">Sérült doboz</string>
+  <string name="log_problem_damaged_text">Ez a játékos azt jelezte, hogy sérült a doboz.</string>
+  <string name="log_problem_missing_label">Eltűnt láda</string>
+  <string name="log_problem_missing_text">Ez a játékos azt jelezte, hogy eltűnhetett a láda.</string>
+  <string name="log_problem_other_label">Egyéb</string>
+  <string name="log_problem_other_text">Ez a játékos azt jelezte, hogy probléma van a ládával.</string>
+  <string name="log_problem_archive_label">Megszüntetendő láda</string>
+  <string name="log_problem_archive_text">Ez a játékos azt jelezte, hogy meg kell szüntetni a ládát. A ládaellenőr értesült erről.</string>
   <string-array name="log_image_scales">
     <item>Nincs átméretezés</item>
     <item>512 px</item>
@@ -255,7 +255,7 @@
   <string name="info_log_cleared">A bejegyzés törölve.</string>
   <string name="info_waypoint_coordinates_cleared">Koordináták törölve.</string>
   <string name="info_log_type_changed">A bejegyzés típusa módosítva!</string>
-  <string name="info_log_report_problem_changed">Report problem has changed!</string>
+  <string name="info_log_report_problem_changed">Elérhető problémajelentések megváltoztak!</string>
   <string name="info_select_logimage_cancelled">A kép kiválasztása vagy készítése meg lett szakítva.</string>
   <string name="info_stored_image">Új kép mentési helyének megadása:</string>
   <string name="info_storing_static_maps">Kísérlet a statikus térképek mentésére.</string>
@@ -267,6 +267,7 @@
   <string name="confirm_discard_wp_changes">Elveted a nem mentett útpont változtatásokat?</string>
   <string name="warn_discard_changes">Nem mentett útpontmódosítások elvetve!</string>
   <string name="err_request_popup_info">A láda előnézeti adatainak letöltése sikertelen.</string>
+  <string name="warn_log_load_additional_data">A c:geo nem tudta betölteni a kiegészítő adatokat (utazók/kedvenc pontok) a logoláshoz.</string>
   <!-- location service -->
   <string name="loc_last">Utolsó ismert</string>
   <string name="loc_net">Hálózat</string>
@@ -412,8 +413,8 @@
   <string name="about_version">Verzió</string>
   <string name="about_changelog">Változások</string>
   <string name="about_system">Rendszer</string>
-  <string name="about_donate">Support us</string>
-  <string name="about_donation_more">Support c:geo development\nMore info on our website</string>
+  <string name="about_donate">Támogass minket</string>
+  <string name="about_donation_more">Látogass el a honlapra információért</string>
   <string name="about_contributors">Közreműködők</string>
   <string name="about_license">Licenc</string>
   <string name="about_apache_license"><a href="">Apache licenc, 2.0 verzió</a></string>
@@ -530,11 +531,11 @@
   <string name="init_signature_template_number">Találatszám</string>
   <string name="init_signature_template_owner">Tulajdonos</string>
   <string name="init_signature_template_name">Név</string>
-  <string name="init_signature_template_difficulty">Difficulty</string>
-  <string name="init_signature_template_terrain">Terrain</string>
+  <string name="init_signature_template_difficulty">Nehézség</string>
+  <string name="init_signature_template_terrain">Terep</string>
   <string name="init_signature_template_url">URL</string>
   <string name="init_signature_template_log">Log szöveg</string>
-  <string name="init_signature_template_size">Size</string>
+  <string name="init_signature_template_size">Méret</string>
   <string name="init_ratingwanted">GCVote értékelés</string>
   <string name="init_summary_ratingwanted">Értékelés betöltése a GCvote.com-ról</string>
   <string name="init_friends_and_own_logs_wanted">Barátok/saját logok megjelenítése</string>
@@ -676,8 +677,8 @@
   <string name="feature_search_owner">Keresés tulajdonos alapján</string>
   <string name="feature_search_finder">Keresés megtalálók alapján</string>
   <string name="init_mapsforge_api_title">Mapsforge API</string>
-  <string name="init_mfold_api">Old Mapsforge V3</string>
-  <string name="init_mfold_api_description">The current release contains a beta version of our new Mapsforge map. If you miss some features or encounter issues you can go back to the old version here.</string>
+  <string name="init_mfold_api">Régi Mapsforge V3</string>
+  <string name="init_mfold_api_description">A jelenlegi kiadásban az új Mapsforge térképünk béta verziója található. Itt térhetsz vissza a régi verzióhoz, ha hiányzó funkcióval vagy más problémával találkozol.</string>
   <string name="init_experimental_title">Kísérleti funkciók</string>
   <string name="init_mfbeta">Mapsforge béta alapértelmezettként</string>
   <string name="init_mfbeta_description">A jelenlegi kiadásban megtalálható az új Mapsforge térképünk béta verziója kísérleti funkcióként. Itt állítható be, hogy ez a térkép legyen az alapértelmezett élő és ládatérkép.</string>
@@ -769,10 +770,10 @@
     <item quantity="other">%d nappal ezelőtt</item>
   </plurals>
   <plurals name="cache_offline_about_time_months">
-    <item quantity="one">about %d month ago</item>
-    <item quantity="other">about %d months ago</item>
+    <item quantity="one">kb. %d hónappal ezelőtt</item>
+    <item quantity="other">kb. %d hónappal ezelőtt</item>
   </plurals>
-  <string name="cache_offline_about_time_year">over a year ago</string>
+  <string name="cache_offline_about_time_year">több mint egy évvel ezelőtt</string>
   <string name="cache_offline_time_hour">egy órával ezelőtt</string>
   <string name="cache_offline_time_hours">órával ezelőtt</string>
   <string name="cache_offline_time_days">nappal ezelőtt</string>
@@ -1436,7 +1437,7 @@
   <string name="status_geocaching_change" tools:ignore="UnusedResources">A c:geo működésképtelen a geocaching.com-on történt aktuális változások miatt.\nDolgozunk a megoldáson. Nézz vissza minél hamarabb!</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Az élő térkép működésképtelen a geocaching.com-on történt aktuális változások miatt.\nDolgozunk a megoldáson. Nézz vissza minél hamarabb!</string>
   <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">A geocaching.com karbantartás alatt van. \nEsetleg egyéb hiba lépett fel.</string>
-  <string name="status_closeout_warning_41" tools:ignore="UnusedResources">You appear to be using a version of Android older than 4.1. Future releases of c:geo might no longer be available for your device.</string>
+  <string name="status_closeout_warning_41" tools:ignore="UnusedResources">Úgy tűnik, az Android 4.1-es verziójánál régebbit használsz. Lehetséges, hogy a c:geo jövőbeli frissítései nem lesznek elérhetők az eszközödre.</string>
   <!-- text-to-speech for compass view -->
   <string name="tts_service">Beszélő iránytű</string>
   <string name="tts_start">Beszéd indítása</string>
@@ -1482,9 +1483,9 @@
   <string name="create_shortcut">Parancsikon létrehozása</string>
   <string name="send">Küldés</string>
   <string name="confirm_log_title">Speciális bejegyzéstípus</string>
-  <string name="confirm_log_message">Logod a következő: \'%s\'. Biztosan ezt akarod?</string>
-  <string name="confirm_report_problem_title">Report problem</string>
-  <string name="confirm_report_problem_message">You want to report \'%s\'. Are you sure?</string>
+  <string name="confirm_log_message">Logod a következő: \'%s\'. Biztosan vagy benne?</string>
+  <string name="confirm_report_problem_title">Probléma jelentése</string>
+  <string name="confirm_report_problem_message">Jelenteni akarod: \'%s\'. Biztosan vagy benne?</string>
   <!-- Geokrety -->
   <string name="settings_activate_geokrety">Aktiválás</string>
   <string name="init_geokrety">geokrety.org</string>
@@ -1548,6 +1549,7 @@
     <item quantity="one">%d kigyűjtött útpont</item>
     <item quantity="other">%d kigyűjtött útpont</item>
   </plurals>
+  <string name="link_gc_checker">geocaching.com-os koordináta-ellenőrző érhető el böngészőn keresztül</string>
   <!-- calendar adder -->
   <string name="event_fail">Az esemény hozzáadása a naptárhoz sikertelen.</string>
   <string name="init_low_disk_space">A szabad hely kezd elfogyni</string>

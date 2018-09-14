@@ -255,7 +255,7 @@
   <string name="info_log_cleared">Kayıt temizlendi.</string>
   <string name="info_waypoint_coordinates_cleared">Koordinatlar silindi.</string>
   <string name="info_log_type_changed">Kaydın türü değiştirildi!</string>
-  <string name="info_log_report_problem_changed">Sorunun değiştiğini bildir!</string>
+  <string name="info_log_report_problem_changed">Available problem reports have changed!</string>
   <string name="info_select_logimage_cancelled">Görüntü seçimi veya çekimi iptal edildi.</string>
   <string name="info_stored_image">Yeni görsel kaydedildi:</string>
   <string name="info_storing_static_maps">Statik haritalar depolanmaya çalışılıyor</string>
@@ -267,6 +267,7 @@
   <string name="confirm_discard_wp_changes">Kaydedilmeyen Yol Noktası değişiklikleri silinsin mi?</string>
   <string name="warn_discard_changes">Kaydedilmemiş yol noktası değişiklikleri iptal edildi!</string>
   <string name="err_request_popup_info">c:Geo Geocache açılır pencere bilgisini alamadı.</string>
+  <string name="warn_log_load_additional_data">c:geo failed to load additional data (trackables/favorite points) for logging.</string>
   <!-- location service -->
   <string name="loc_last">Bilinen son</string>
   <string name="loc_net">İletişim Ağı</string>
@@ -412,8 +413,8 @@
   <string name="about_version">Versiyon</string>
   <string name="about_changelog">Changelog</string>
   <string name="about_system">Sistem</string>
-  <string name="about_donate">Support us</string>
-  <string name="about_donation_more">Support c:geo development\nMore info on our website</string>
+  <string name="about_donate">Bizi destekleyin</string>
+  <string name="about_donation_more">Visit website for info</string>
   <string name="about_contributors">Katkıda bulunanlar</string>
   <string name="about_license">Lisans</string>
   <string name="about_apache_license"><a href=""> Apache Lisansı, Sürüm 2.0 </a></string>
@@ -534,7 +535,7 @@
   <string name="init_signature_template_terrain">Arazi</string>
   <string name="init_signature_template_url">URL</string>
   <string name="init_signature_template_log">Kayıt metni</string>
-  <string name="init_signature_template_size">Size</string>
+  <string name="init_signature_template_size">Boyut</string>
   <string name="init_ratingwanted">GCvote Derecelendirme</string>
   <string name="init_summary_ratingwanted">GCvote.com\'dan Geocache derecelendirmesini yükle</string>
   <string name="init_friends_and_own_logs_wanted">Arkadaşlarının/Kendinin Loglarını Göster</string>
@@ -1435,7 +1436,7 @@
   <string name="status_geocaching_change" tools:ignore="UnusedResources">Geocaching.com üzerindeki son değişikler c:geo bozdu.\n Üstünde çalışıyoruz, sonra tekrar deneyin.</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Geocaching.com üzerindeki son değişikler canlı harita özelliğini bozdu.\n Üstünde çalışıyoruz, sonra tekrar deneyin.</string>
   <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com bakımda.\n Çeşitli sorunlarla karşılaşabilirsiniz.</string>
-  <string name="status_closeout_warning_41" tools:ignore="UnusedResources">You appear to be using a version of Android older than 4.1. Future releases of c:geo might no longer be available for your device.</string>
+  <string name="status_closeout_warning_41" tools:ignore="UnusedResources">Android 4.1 \'den daha eski bir sürüm kullanıyor olarak görünüyorsunuz. Gelecek c: geo sürümleri cihazınızda kullanılamayabilir.</string>
   <!-- text-to-speech for compass view -->
   <string name="tts_service">Konuşan pusula</string>
   <string name="tts_start">Konuşmaya başla</string>
@@ -1547,6 +1548,7 @@
     <item quantity="one">%d yol noktası çıkartıldı</item>
     <item quantity="other">%d yol noktaları çıkartıldı</item>
   </plurals>
+  <string name="link_gc_checker">geocaching.com coordinate checker available via browser</string>
   <!-- calendar adder -->
   <string name="event_fail">Etkinliğin takvime eklenmesinde başarısız olundu</string>
   <string name="init_low_disk_space">Depolama alanı yetersiz</string>

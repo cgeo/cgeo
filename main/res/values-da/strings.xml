@@ -33,12 +33,12 @@
   <string name="block">Groundspeak Block Party</string>
   <string name="unknown">Ukendt Type</string>
   <!-- cache sizes -->
-  <string name="cache_size_micro">Micro</string>
+  <string name="cache_size_micro">Mikro</string>
   <string name="cache_size_small">Lille</string>
-  <string name="cache_size_regular">Regulær</string>
+  <string name="cache_size_regular">Almindelig</string>
   <string name="cache_size_large">Stor</string>
   <string name="cache_size_other">Andre</string>
-  <string name="cache_size_virtual">Virtuelle</string>
+  <string name="cache_size_virtual">Virtuel</string>
   <string name="cache_size_notchosen">Ikke valgt</string>
   <string name="cache_size_unknown">Ukendt</string>
   <string name="cache_size_nano">Nano</string>
@@ -124,24 +124,24 @@
   <string name="log_image_description">Beskrivelse</string>
   <string name="log_image_scale">Skalering</string>
   <string name="log_password_title">Adgangskode til log:</string>
-  <string name="log_report_problem">Report Problem:</string>
+  <string name="log_report_problem">Rapportér problem:</string>
   <string name="log_hint_log_password">Skriv adgangskode til log</string>
   <string name="log_oc_team_comment">OC Hold-meddelelse</string>
   <string name="log_your_saved_log">Din gemte log</string>
   <string name="log_empty_logbook">Logbogen for denne cache er tom.</string>
-  <string name="log_problem_none">No Problem</string>
+  <string name="log_problem_none">Intet problem</string>
   <string name="log_problem_needs_maintenance_label">Needs Maintenance</string>
-  <string name="log_problem_needs_maintenance_text">This geocacher reported that there is a problem with this cache.</string>
-  <string name="log_problem_log_full_label">Logbook is full</string>
-  <string name="log_problem_log_full_text">This geocacher reported that the logbook is full.</string>
-  <string name="log_problem_damaged_label">Container is damaged</string>
-  <string name="log_problem_damaged_text">This geocacher reported that the container is damaged.</string>
-  <string name="log_problem_missing_label">Cache might be missing</string>
-  <string name="log_problem_missing_text">This geocacher reported that the cache might be missing.</string>
+  <string name="log_problem_needs_maintenance_text">Denne geocacher rapporterede, at der er et problem med denne geocache.</string>
+  <string name="log_problem_log_full_label">Logbogen er fuld</string>
+  <string name="log_problem_log_full_text">Denne geocacher rapporterede, at logbogen er fuld.</string>
+  <string name="log_problem_damaged_label">Beholder er beskadiget</string>
+  <string name="log_problem_damaged_text">Denne geocacher rapporterede, at beholderen er beskadiget.</string>
+  <string name="log_problem_missing_label">Geocachen kan være forsvundet</string>
+  <string name="log_problem_missing_text">Denne geocacher rapporterede, at cachen kan være forsvundet.</string>
   <string name="log_problem_other_label">Other</string>
-  <string name="log_problem_other_text">This geocacher reported that there is a problem with this cache.</string>
-  <string name="log_problem_archive_label">Cache should be archived</string>
-  <string name="log_problem_archive_text">This geocacher reported that this geocache should be archived. A community volunteer reviewer has been notified.</string>
+  <string name="log_problem_other_text">Denne geocacher rapporterede, at der er et problem med denne geocache.</string>
+  <string name="log_problem_archive_label">Geocache bør arkiveres</string>
+  <string name="log_problem_archive_text">Denne geocacher rapporterede, at geocachen skal arkiveres. En frivillig reviewer er blevet underrettet.</string>
   <string-array name="log_image_scales">
     <item>Ingen skalering</item>
     <item>512 px</item>
@@ -255,7 +255,7 @@
   <string name="info_log_cleared">Logbeskeden blev fjernet.</string>
   <string name="info_waypoint_coordinates_cleared">Position nulstillet</string>
   <string name="info_log_type_changed">Typen af logbeskeden blev ændret!</string>
-  <string name="info_log_report_problem_changed">Report problem has changed!</string>
+  <string name="info_log_report_problem_changed">Available problem reports have changed!</string>
   <string name="info_select_logimage_cancelled">Valg af billede eller foto blev afbrudt.</string>
   <string name="info_stored_image">Nyt billede gemt til:</string>
   <string name="info_storing_static_maps">Forsøger at gemme statiske kort</string>
@@ -267,6 +267,7 @@
   <string name="confirm_discard_wp_changes">Vil du kassere ændringer, som ikke er gemt?</string>
   <string name="warn_discard_changes">Ændringer til waypoints kasseret!</string>
   <string name="err_request_popup_info">Det lykkedes ikke c:geo at hente popup info for cachen.</string>
+  <string name="warn_log_load_additional_data">c:geo failed to load additional data (trackables/favorite points) for logging.</string>
   <!-- location service -->
   <string name="loc_last">Sidst kendte</string>
   <string name="loc_net">Netværk</string>
@@ -413,7 +414,7 @@
   <string name="about_changelog">Ændringslog</string>
   <string name="about_system">System</string>
   <string name="about_donate">Support us</string>
-  <string name="about_donation_more">Support c:geo development\nMore info on our website</string>
+  <string name="about_donation_more">Visit website for info</string>
   <string name="about_contributors">Bidragsydere</string>
   <string name="about_license">Licens</string>
   <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
@@ -530,7 +531,7 @@
   <string name="init_signature_template_number">Antal fund</string>
   <string name="init_signature_template_owner">Ejer</string>
   <string name="init_signature_template_name">Navn</string>
-  <string name="init_signature_template_difficulty">Difficulty</string>
+  <string name="init_signature_template_difficulty">Sværhedsgrad</string>
   <string name="init_signature_template_terrain">Terrain</string>
   <string name="init_signature_template_url">URL</string>
   <string name="init_signature_template_log">Logtekst</string>
@@ -614,7 +615,7 @@
   <string name="init_default_navigation_tool_2_description">Her kan du vælge din sekundære navigationsmetode. Aktivér den ved at holde på navigationssymbolet det vises i cachens titel.</string>
   <string name="init_navigation_menu_description">Her kan du vælge hvilke af de tilgængelige navigationsmetoder, der skal vises i navigationsmenuen for en cache eller et waypoint. Metoder som ikke er installeret på denne enhed kan ikke vælges.</string>
   <string name="init_debug_title">Debug-information</string>
-  <string name="init_debug_note">c:geo kan generere en stor mængde fejlfindingsoplysninger. Aktivering af denne indstilling vil påvirke stabiliteten af c:geo og kan kun anbefales, hvis du bliver bedt om at sende en fejlfindingslog til udviklerne. Denne indstilling bør være deaktiveret under normal brug af c:geo!</string>
+  <string name="init_debug_note">c:geo kan indsamle en mængde fejlfindingsoplysninger. Aktivering af denne indstilling vil påvirke stabiliteten af c:geo og kan kun anbefales, hvis du bliver bedt om at sende en fejlfindingslog til udviklerne. Denne indstilling bør være deaktiveret under normal brug af c:geo!</string>
   <string name="init_debug">Aktivér debug-log</string>
   <string name="init_dbonsdcard_title">Databaseplacering</string>
   <string name="init_dbonsdcard_note">Du kan vælge at gemme c:geo-databasen enten i systemhukommelsen eller i en mappe i din brugerhukommelse. Hvis databasen gemmes i brugerhukommelsen vil det frigøre noget systemhukommelse, men ydeevnen kan blive forringet og c:geo fungerer ikke hvis brugerhukommelsen ikke er tilgængelig eller hvis databasefilen fjernes.</string>
@@ -676,8 +677,8 @@
   <string name="feature_search_owner">Søg efter ejer</string>
   <string name="feature_search_finder">Søg efter finder</string>
   <string name="init_mapsforge_api_title">Mapsforge API</string>
-  <string name="init_mfold_api">Old Mapsforge V3</string>
-  <string name="init_mfold_api_description">The current release contains a beta version of our new Mapsforge map. If you miss some features or encounter issues you can go back to the old version here.</string>
+  <string name="init_mfold_api">Tidligere Mapsforge V3</string>
+  <string name="init_mfold_api_description">Den aktuelle udgave af c:geo benytter en beta version af vores nye Mapsforge map. Hvis du mangler funktionalitet eller oplever problemer kan du vælge at bruge den tidligere version af Mapsforge her.</string>
   <string name="init_experimental_title">Eksperimentel funktionalitet</string>
   <string name="init_mfbeta">Mapsforge Beta som standard</string>
   <string name="init_mfbeta_description">c:geo indeholder eksperimentel understøttelse af Mapsforge-kort. Mapsforge-kort kan aktiveres her som standard for live og offline kort.</string>
@@ -769,10 +770,10 @@
     <item quantity="other">cirka %d dage siden</item>
   </plurals>
   <plurals name="cache_offline_about_time_months">
-    <item quantity="one">about %d month ago</item>
-    <item quantity="other">about %d months ago</item>
+    <item quantity="one">cirka %d måned siden</item>
+    <item quantity="other">cirka %d måneder siden</item>
   </plurals>
-  <string name="cache_offline_about_time_year">over a year ago</string>
+  <string name="cache_offline_about_time_year">over et år siden</string>
   <string name="cache_offline_time_hour">en time siden</string>
   <string name="cache_offline_time_hours">timer siden</string>
   <string name="cache_offline_time_days">dage siden</string>
@@ -1482,7 +1483,7 @@
   <string name="send">Send</string>
   <string name="confirm_log_title">Særlig logtype</string>
   <string name="confirm_log_message">Du er ved at logge \"%s\". Er du sikker?</string>
-  <string name="confirm_report_problem_title">Report problem</string>
+  <string name="confirm_report_problem_title">Rapportér et problem</string>
   <string name="confirm_report_problem_message">You want to report \'%s\'. Are you sure?</string>
   <!-- Geokrety -->
   <string name="settings_activate_geokrety">Aktivér</string>
@@ -1547,6 +1548,7 @@
     <item quantity="one">%d waypoint udtrukket</item>
     <item quantity="other">%d waypoints udtrukket</item>
   </plurals>
+  <string name="link_gc_checker">geocaching.com coordinate checker available via browser</string>
   <!-- calendar adder -->
   <string name="event_fail">Kunne ikke tilføje eventcachen til kalenderen</string>
   <string name="init_low_disk_space">Datalageret er næsten fyldt</string>

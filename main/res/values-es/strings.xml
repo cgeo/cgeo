@@ -255,7 +255,7 @@
   <string name="info_log_cleared">Registro borrado.</string>
   <string name="info_waypoint_coordinates_cleared">Se limpiaron las coordenadas.</string>
   <string name="info_log_type_changed">¡El tipo de registro ha sido cambiado!</string>
-  <string name="info_log_report_problem_changed">Report problem has changed!</string>
+  <string name="info_log_report_problem_changed">Available problem reports have changed!</string>
   <string name="info_select_logimage_cancelled">La selección de imagen  o captura ha sido cancelada.</string>
   <string name="info_stored_image">Nueva imagen guardada en:</string>
   <string name="info_storing_static_maps">Intentando almacenar los mapas estáticos</string>
@@ -267,6 +267,7 @@
   <string name="confirm_discard_wp_changes">¿Descartar los cambios en waypoints sin guardar?</string>
   <string name="warn_discard_changes">¡Cambios no guardados en el waypoint descartados!</string>
   <string name="err_request_popup_info">c:geo no ha podido obtener la información emergente del caché.</string>
+  <string name="warn_log_load_additional_data">c:geo failed to load additional data (trackables/favorite points) for logging.</string>
   <!-- location service -->
   <string name="loc_last">Última conocida</string>
   <string name="loc_net">Red</string>
@@ -413,7 +414,7 @@
   <string name="about_changelog">Cambios</string>
   <string name="about_system">Sistema</string>
   <string name="about_donate">Support us</string>
-  <string name="about_donation_more">Support c:geo development\nMore info on our website</string>
+  <string name="about_donation_more">Visit website for info</string>
   <string name="about_contributors">Colaboradores</string>
   <string name="about_license">Licencia</string>
   <string name="about_apache_license"><a href="">Licencia Apache, Versión 2.0</a></string>
@@ -1548,6 +1549,7 @@ Nombre de archivo:%2$s</string>
     <item quantity="one">%d waypoint extraído</item>
     <item quantity="other">%d waypoints extraídos</item>
   </plurals>
+  <string name="link_gc_checker">geocaching.com coordinate checker available via browser</string>
   <!-- calendar adder -->
   <string name="event_fail">Error al añadir el evento al calendario</string>
   <string name="init_low_disk_space">Queda poco espacio de almacenamiento</string>

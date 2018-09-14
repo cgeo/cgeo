@@ -255,7 +255,7 @@
   <string name="info_log_cleared">Log wurde geleert.</string>
   <string name="info_waypoint_coordinates_cleared">Koordinaten gelöscht.</string>
   <string name="info_log_type_changed">Logtyp wurde verändert!</string>
-  <string name="info_log_report_problem_changed">Problem melden hat sich geändert!</string>
+  <string name="info_log_report_problem_changed">Verfügbare Problemberichte haben sich geändert!</string>
   <string name="info_select_logimage_cancelled">Fotoauswahl oder -erstellung abgebrochen.</string>
   <string name="info_stored_image">Neues Foto gespeichert nach:</string>
   <string name="info_storing_static_maps">Versuche, statische Karten zu speichern</string>
@@ -267,6 +267,7 @@
   <string name="confirm_discard_wp_changes">Wegpunktänderungen verwerfen?</string>
   <string name="warn_discard_changes">Wegpunktänderungen verworfen!</string>
   <string name="err_request_popup_info">c:geo konnte die Cache-Popup Informationen nicht herunterladen.</string>
+  <string name="warn_log_load_additional_data">c:geo konnte zusätzliche Daten zum Loggen (Trackables/Favoritenpunkte) nicht laden.</string>
   <!-- location service -->
   <string name="loc_last">Letzte Position</string>
   <string name="loc_net">Netzwerk</string>
@@ -413,7 +414,7 @@
   <string name="about_changelog">Änderungen</string>
   <string name="about_system">System</string>
   <string name="about_donate">Unterstütze uns</string>
-  <string name="about_donation_more">Unterstütze die c:geo Entwicklung\nMehr Infos auf unserer Webseite</string>
+  <string name="about_donation_more">Besuche Webseite für Infos</string>
   <string name="about_contributors">Mitwirkende</string>
   <string name="about_license">Lizenz</string>
   <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
@@ -1547,6 +1548,7 @@
     <item quantity="one">%d Wegpunkt extrahiert</item>
     <item quantity="other">%d Wegpunkte extrahiert</item>
   </plurals>
+  <string name="link_gc_checker">geocaching.com Koordinatenchecker im Browser verfügbar</string>
   <!-- calendar adder -->
   <string name="event_fail">Hinzufügen des Events zum Kalender fehlgeschlagen</string>
   <string name="init_low_disk_space">Wenig Speicherplatz verfügbar</string>

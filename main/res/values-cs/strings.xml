@@ -245,7 +245,7 @@
   <string name="warn_pocket_query_select">Nevybrána žádná Pocket Query.</string>
   <string name="warn_no_pocket_query_found">Na webu nebyla nalezena žádná Pocket Query.</string>
   <string name="warn_invalid_character">Znak musí být písmeno nebo číslice</string>
-  <string name="err_read_pocket_query_list">Chyba čtení seznamu databázových požadavků.</string>
+  <string name="err_read_pocket_query_list">Chyba čtení seznamu Pocket Queries.</string>
   <string name="info_log_posted">Log byl úspěšně odeslán.</string>
   <string name="info_log_saved">Log byl úspěšně uložen.</string>
   <string name="info_log_post_failed">Odeslání logu se nezdařilo.</string>
@@ -255,7 +255,7 @@
   <string name="info_log_cleared">Zápis byl vyprázdněn.</string>
   <string name="info_waypoint_coordinates_cleared">Souřadnice smazány.</string>
   <string name="info_log_type_changed">Typ logu byl změněn!</string>
-  <string name="info_log_report_problem_changed">Report problem has changed!</string>
+  <string name="info_log_report_problem_changed">Dostupná hlášení problémů se změnila!</string>
   <string name="info_select_logimage_cancelled">Výběr nebo focení obrázku pro log bylo zrušeno.</string>
   <string name="info_stored_image">Nový obrázek uložen do:</string>
   <string name="info_storing_static_maps">Pokus o uložení statických map</string>
@@ -267,6 +267,7 @@
   <string name="confirm_discard_wp_changes">Zahodit neuložené změny?</string>
   <string name="warn_discard_changes">Neuložené změny bodu trasy byly zahozeny!</string>
   <string name="err_request_popup_info">c:geu se nepodařilo otevřít informace o keši.</string>
+  <string name="warn_log_load_additional_data">c:geu se nepodařilo načíst dodatečná data (trackovatelné předměty/oblíbené) k logování.</string>
   <!-- location service -->
   <string name="loc_last">Poslední známá</string>
   <string name="loc_net">Síť</string>
@@ -418,8 +419,8 @@
   <string name="about_version">Verze</string>
   <string name="about_changelog">Změny</string>
   <string name="about_system">Systém</string>
-  <string name="about_donate">Support us</string>
-  <string name="about_donation_more">Support c:geo development\nMore info on our website</string>
+  <string name="about_donate">Podpoř nás</string>
+  <string name="about_donation_more">Navštivte webovou stránku pro informace</string>
   <string name="about_contributors">Přispívající</string>
   <string name="about_license">Licence</string>
   <string name="about_apache_license"><a href=""> licence Apache, verze 2.0</a></string>
@@ -540,7 +541,7 @@
   <string name="init_signature_template_terrain">Terén</string>
   <string name="init_signature_template_url">URL adresa</string>
   <string name="init_signature_template_log">Text logu</string>
-  <string name="init_signature_template_size">Size</string>
+  <string name="init_signature_template_size">Velikost</string>
   <string name="init_ratingwanted">Načítat hodnocení</string>
   <string name="init_summary_ratingwanted">Načítat hodnocení keší z GCvote.com</string>
   <string name="init_friends_and_own_logs_wanted">Zobrazovat mé logy a logy přátel</string>
@@ -785,8 +786,8 @@
     <item quantity="other">asi před %d dny</item>
   </plurals>
   <plurals name="cache_offline_about_time_months">
-    <item quantity="one">about %d month ago</item>
-    <item quantity="few">about %d months ago</item>
+    <item quantity="one">asi před měsícem</item>
+    <item quantity="few">asi před %d měsíci</item>
     <item quantity="many">about %d months ago</item>
     <item quantity="other">about %d months ago</item>
   </plurals>
@@ -1457,7 +1458,7 @@
   <string name="status_geocaching_change" tools:ignore="UnusedResources">Nedávné změny na geocaching.com rozbily c:geo.\nPracujeme na opravě, proveď kontrolu později.</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Nedávné změny na geocaching.com rozbily Aktivní mapu c:geo.\nPracujeme na opravě, proveď kontrolu později.</string>
   <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Právě probíhá údržba geocaching.com.\nMohou se vyskytnout různé potíže.</string>
-  <string name="status_closeout_warning_41" tools:ignore="UnusedResources">You appear to be using a version of Android older than 4.1. Future releases of c:geo might no longer be available for your device.</string>
+  <string name="status_closeout_warning_41" tools:ignore="UnusedResources">Pravděpodobně používáš Android starší než 4.1. Budoucí verze c:geo nemusí být k dispozici pro tvoje zařízení.</string>
   <!-- text-to-speech for compass view -->
   <string name="tts_service">Mluvící kompas</string>
   <string name="tts_start">Začít mluvit</string>
@@ -1591,6 +1592,7 @@
     <item quantity="many">%d waypoints extracted</item>
     <item quantity="other">%d bodů trasy extrahováno</item>
   </plurals>
+  <string name="link_gc_checker">geocaching.com ověřovač souřadnic dostupný přes prohlížeč</string>
   <!-- calendar adder -->
   <string name="event_fail">Přidat událost do kalendáře se nepodařilo</string>
   <string name="init_low_disk_space">V úložišti dochází volné místo</string>

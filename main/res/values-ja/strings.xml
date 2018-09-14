@@ -255,7 +255,7 @@
   <string name="info_log_cleared">ログを消去しました。</string>
   <string name="info_waypoint_coordinates_cleared">座標をクリアしました。</string>
   <string name="info_log_type_changed">ログのタイプを変更しました。</string>
-  <string name="info_log_report_problem_changed">Report problem has changed!</string>
+  <string name="info_log_report_problem_changed">Available problem reports have changed!</string>
   <string name="info_select_logimage_cancelled">添付画像のファイル選択または撮影がキャンセルされました。</string>
   <string name="info_stored_image">新規画像ファイルの保存場所:</string>
   <string name="info_storing_static_maps">オフライン用に地図を保存中</string>
@@ -267,6 +267,7 @@
   <string name="confirm_discard_wp_changes">保存されていないウェイポイントの変更を破棄しますか？</string>
   <string name="warn_discard_changes">保存されてないウェイポイントの変更が廃棄されました！</string>
   <string name="err_request_popup_info">c:geo がキャッシュ ポップアップ情報の取得に失敗しました。</string>
+  <string name="warn_log_load_additional_data">c:geo failed to load additional data (trackables/favorite points) for logging.</string>
   <!-- location service -->
   <string name="loc_last">判明した最後の位置</string>
   <string name="loc_net">ネットワーク</string>
@@ -410,7 +411,7 @@
   <string name="about_changelog">更新履歴</string>
   <string name="about_system">システム</string>
   <string name="about_donate">Support us</string>
-  <string name="about_donation_more">Support c:geo development\nMore info on our website</string>
+  <string name="about_donation_more">Visit website for info</string>
   <string name="about_contributors">貢献者</string>
   <string name="about_license">ライセンス</string>
   <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
@@ -1526,6 +1527,7 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
   <plurals name="extract_waypoints_result">
     <item quantity="other">%d ウェイポイントを抽出しました</item>
   </plurals>
+  <string name="link_gc_checker">geocaching.com coordinate checker available via browser</string>
   <!-- calendar adder -->
   <string name="event_fail">イベントキャッシュをカレンダーに追加できませんでした</string>
   <string name="init_low_disk_space">ストレージ容量が不足しています</string>

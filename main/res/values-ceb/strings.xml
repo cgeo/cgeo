@@ -255,7 +255,7 @@
   <string name="info_log_cleared">Ang log kay gihawanan.</string>
   <string name="info_waypoint_coordinates_cleared">Nalimpyo nga mga tiganos.</string>
   <string name="info_log_type_changed">Ang matang sa log kay giusab!</string>
-  <string name="info_log_report_problem_changed">Report problem has changed!</string>
+  <string name="info_log_report_problem_changed">Available problem reports have changed!</string>
   <string name="info_select_logimage_cancelled">Gipakansela ang pagpili o pagdakop sa imahe.</string>
   <string name="info_stored_image">Ang bag-ong hulagway kay i-save sa:</string>
   <string name="info_storing_static_maps">Gipaninguha og pagpundo sa istatik nga mga mapa</string>
@@ -267,6 +267,7 @@
   <string name="confirm_discard_wp_changes">Ipangsalikway ang mga kausaban sa waypoint nga wala gisave?</string>
   <string name="warn_discard_changes">Ang nailisan nga wala ma-save nga waypoint kay giwagtang!</string>
   <string name="err_request_popup_info">Napakyas sa pagkuha og impormasyon sa popup nga cache ang c:geo.</string>
+  <string name="warn_log_load_additional_data">c:geo failed to load additional data (trackables/favorite points) for logging.</string>
   <!-- location service -->
   <string name="loc_last">Ang kinalasan na nahibaloan</string>
   <string name="loc_net">Network</string>
@@ -413,7 +414,7 @@
   <string name="about_changelog">Changelog</string>
   <string name="about_system">Ang Sistema</string>
   <string name="about_donate">Support us</string>
-  <string name="about_donation_more">Support c:geo development\nMore info on our website</string>
+  <string name="about_donation_more">Visit website for info</string>
   <string name="about_contributors">Ang mga tagatampo</string>
   <string name="about_license">Ang Lisensya</string>
   <string name="about_apache_license"><a href="">Apache License, Bersyon 2.0</a></string>
@@ -1547,6 +1548,7 @@
     <item quantity="one">%d waypoint na kinuha</item>
     <item quantity="other">%d nga mga waypoint na kinuha</item>
   </plurals>
+  <string name="link_gc_checker">geocaching.com coordinate checker available via browser</string>
   <!-- calendar adder -->
   <string name="event_fail">Pakyas na pagpuno sa kalihokan na cache adto sa kalendaryo</string>
   <string name="init_low_disk_space">Hinay na pagpadagan sa espasyo sa imbakan</string>
