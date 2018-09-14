@@ -255,7 +255,7 @@
   <string name="info_log_cleared">Il log è stato azzerato.</string>
   <string name="info_waypoint_coordinates_cleared">Coordinate eliminate.</string>
   <string name="info_log_type_changed">Il tipo di log è cambiato!</string>
-  <string name="info_log_report_problem_changed">La segnalazione del problema è cambiata!</string>
+  <string name="info_log_report_problem_changed">Available problem reports have changed!</string>
   <string name="info_select_logimage_cancelled">Selezione o cattura immagine annulata.</string>
   <string name="info_stored_image">Nuova immagine salvata su:</string>
   <string name="info_storing_static_maps">Tento di salvare le mappe statiche</string>
@@ -267,6 +267,7 @@
   <string name="confirm_discard_wp_changes">Ignorare i waypoint non salvati?</string>
   <string name="warn_discard_changes">Le modifiche non salvate ai waypoint vengono annullate!</string>
   <string name="err_request_popup_info">c:geo non riesce ad ottenere le informazioni popup del cache.</string>
+  <string name="warn_log_load_additional_data">c:geo failed to load additional data (trackables/favorite points) for logging.</string>
   <!-- location service -->
   <string name="loc_last">Ultima nota</string>
   <string name="loc_net">Network</string>
@@ -412,8 +413,8 @@
   <string name="about_version">Versione</string>
   <string name="about_changelog">Modifiche</string>
   <string name="about_system">Sistema</string>
-  <string name="about_donate">Support us</string>
-  <string name="about_donation_more">Support c:geo development\nMore info on our website</string>
+  <string name="about_donate">Sostienici</string>
+  <string name="about_donation_more">Visit website for info</string>
   <string name="about_contributors">Contributori</string>
   <string name="about_license">Licenza</string>
   <string name="about_apache_license"><a href="">Licenza Apache, versione 2.0</a></string>
@@ -534,7 +535,7 @@
   <string name="init_signature_template_terrain">Terreno</string>
   <string name="init_signature_template_url">URL</string>
   <string name="init_signature_template_log">Testo di Log</string>
-  <string name="init_signature_template_size">Size</string>
+  <string name="init_signature_template_size">Dimensione</string>
   <string name="init_ratingwanted">Rating da GCvote.com</string>
   <string name="init_summary_ratingwanted">Carica il rating del cache da GCvote.com</string>
   <string name="init_friends_and_own_logs_wanted">Visualizza i tuoi/dei tuoi amici</string>
@@ -1435,7 +1436,7 @@
   <string name="status_geocaching_change" tools:ignore="UnusedResources">Modifiche recenti al sito geocaching hanno disattivato c:geo.\nCi stiamo lavorando, riprova più tardi.</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Modifiche recenti al sito geocaching hanno disattivato la mappa live.\nCi stiamo lavorando, riprova più tardi.</string>
   <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Geocaching.com è sotto manutenzione. \nCi potrebbero essere dei problemi di collegamento.</string>
-  <string name="status_closeout_warning_41" tools:ignore="UnusedResources">You appear to be using a version of Android older than 4.1. Future releases of c:geo might no longer be available for your device.</string>
+  <string name="status_closeout_warning_41" tools:ignore="UnusedResources">Sembra che tu stia utilizzando una versione di Android precedente alla 4.1. Le future versioni di c:geo potrebbero non supportare il tuo dispositivo.</string>
   <!-- text-to-speech for compass view -->
   <string name="tts_service">Bussola parlante</string>
   <string name="tts_start">Start voce</string>
@@ -1547,6 +1548,7 @@
     <item quantity="one">%d waypoint estratto</item>
     <item quantity="other">%d waypoint estratti</item>
   </plurals>
+  <string name="link_gc_checker">geocaching.com coordinate checker available via browser</string>
   <!-- calendar adder -->
   <string name="event_fail">Impossibile aggiungere l\'evento al calendario</string>
   <string name="init_low_disk_space">Sto esaurendo lo spazio su disco</string>

@@ -255,7 +255,7 @@
   <string name="info_log_cleared">Loki tyhjennetty.</string>
   <string name="info_waypoint_coordinates_cleared">Koordinaatit poistettu.</string>
   <string name="info_log_type_changed">Lokityyppi on muuttunut!</string>
-  <string name="info_log_report_problem_changed">Ilmoita ongelmasta on muuttunut!</string>
+  <string name="info_log_report_problem_changed">Available problem reports have changed!</string>
   <string name="info_select_logimage_cancelled">Kuvan valinta tai kaappaus peruutettiin.</string>
   <string name="info_stored_image">Uusi kuva tallennettu paikkaan:</string>
   <string name="info_storing_static_maps">Yritetään tallentaa staattisia karttoja</string>
@@ -267,6 +267,7 @@
   <string name="confirm_discard_wp_changes">Hylätäänkö tallentamattomat muutokset?</string>
   <string name="warn_discard_changes">Tallentamattomat etappimuutokset hylätty!</string>
   <string name="err_request_popup_info">c:geo ei pystynyt lataamaan kätkön popupin tietoja.</string>
+  <string name="warn_log_load_additional_data">c:geo failed to load additional data (trackables/favorite points) for logging.</string>
   <!-- location service -->
   <string name="loc_last">Viimeisin tunnettu</string>
   <string name="loc_net">Verkkoyhteys</string>
@@ -412,8 +413,8 @@
   <string name="about_version">Versio</string>
   <string name="about_changelog">Muutoshistoria</string>
   <string name="about_system">Järjestelmä</string>
-  <string name="about_donate">Support us</string>
-  <string name="about_donation_more">Support c:geo development\nMore info on our website</string>
+  <string name="about_donate">Tue meitä</string>
+  <string name="about_donation_more">Visit website for info</string>
   <string name="about_contributors">Avustajat</string>
   <string name="about_license">Lisenssi</string>
   <string name="about_apache_license"><a href="">Apache-lisenssi, versio 2.0</a></string>
@@ -534,7 +535,7 @@
   <string name="init_signature_template_terrain">Maasto</string>
   <string name="init_signature_template_url">URL</string>
   <string name="init_signature_template_log">Lokiteksti</string>
-  <string name="init_signature_template_size">Size</string>
+  <string name="init_signature_template_size">Koko</string>
   <string name="init_ratingwanted">GCVote-arvostelu</string>
   <string name="init_summary_ratingwanted">Lataa kätkön arvostelu GCVotesta</string>
   <string name="init_friends_and_own_logs_wanted">Näytä ystävien/omat</string>
@@ -1072,8 +1073,8 @@
   <string name="search_hbu">Piilottajan mukaan</string>
   <string name="search_hbu_prefill">Omistaja</string>
   <string name="search_hbu_button">Hae omistajan nimellä</string>
-  <string name="search_tb">Reissaaja/Kulkija</string>
-  <string name="search_tb_hint">Kulkevaisen koodi</string>
+  <string name="search_tb">Reissaaja</string>
+  <string name="search_tb_hint">Reissaajan koodi</string>
   <string name="search_tb_button">Etsi reissaajia</string>
   <string name="search_destination">Määränpää</string>
   <string name="search_direction_rel">Tästä sijainnista</string>
@@ -1084,7 +1085,7 @@
   <string name="search_pocket_loading">Ladataan Pocket Query -listaa</string>
   <string name="search_pocket_select">Valitse Pocket Query</string>
   <!-- trackable -->
-  <string name="trackable">Reissaaja/Kulkija</string>
+  <string name="trackable">Reissaaja</string>
   <string name="trackable_details_loading">Ladataan reissaajan tietoja…</string>
   <string name="trackable_log_touch">Lokkaa</string>
   <string name="trackable_browser_open">Avaa selaimessa</string>
@@ -1435,7 +1436,7 @@
   <string name="status_geocaching_change" tools:ignore="UnusedResources">Viimeaikaiset muutokset geocaching.com:issa rikkoivat c:geon. \n Korjaamme tilannetta, tarkistathan tilanteen pian uudestaan.</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Viimeaikaiset muutokset geocaching.com-sivulla hajoittivat livekartta-ominaisuuden.\nAsiaa korjataan, yritä lähiaikoina uudelleen.</string>
   <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com-sivua huolletaan.\nSaatat törmätä useisiin ongelmiin.</string>
-  <string name="status_closeout_warning_41" tools:ignore="UnusedResources">You appear to be using a version of Android older than 4.1. Future releases of c:geo might no longer be available for your device.</string>
+  <string name="status_closeout_warning_41" tools:ignore="UnusedResources">Käyttämäsi Android-versio näyttää olevan vanhempi kuin 4.1. Tulevat versiot c:geosta eivät ole välttämättä enää saatavissa sinun laitteellesi.</string>
   <!-- text-to-speech for compass view -->
   <string name="tts_service">Puhuva kompassi</string>
   <string name="tts_start">Aloita puhuminen</string>
@@ -1487,12 +1488,12 @@
   <!-- Geokrety -->
   <string name="settings_activate_geokrety">Aktivoi</string>
   <string name="init_geokrety">GeoKrety.org</string>
-  <string name="init_connectorGeokretyActive">Geokrety Matkalaiset</string>
+  <string name="init_connectorGeokretyActive">Geokrety-reissaajat</string>
   <string name="init_summary_geokrety">Vahvista matkalaiset sivulla GeoKrety.org</string>
   <string name="init_summary_geokrety_account">Tunnusta ei ole asetettuna.</string>
   <string name="init_geokrety_register_ok">Kirjautuminen onnistui</string>
   <string name="init_geokrety_register_fail">Kirjautuminen epäonnistui</string>
-  <string name="init_geokrety_description">Valtuuta c:geo sivulla GeoKrety.org lokataksesi GeoKrety kulkevaisia.</string>
+  <string name="init_geokrety_description">Valtuuta c:geo sivulla GeoKrety.org lokataksesi GeoKrety-reissaajia.</string>
   <string name="init_geokrety_cache_description">GeokretyMap.org tarjoaa välimuistissa olevaa tietoa GeoKrety kulkevaisille.\nAvailable aineisto sisältää enemmän GeoKrety tietoa kuin \'kuvaus\' tai \'puuttuva\' tila.\n\nDatas ei ole reaaliaikaista!\nPositions: ~ 30 min. \nDescriptions: ~ 24 h.</string>
   <string name="init_geokrety_cache">Käytä GeoKretyMap.org</string>
   <string name="init_geokrety_userid">Käyttäjätunnus: %s</string>
@@ -1547,6 +1548,7 @@
     <item quantity="one">%d reittipiste purettu</item>
     <item quantity="other">%d reittipistettä purettu</item>
   </plurals>
+  <string name="link_gc_checker">geocaching.com coordinate checker available via browser</string>
   <!-- calendar adder -->
   <string name="event_fail">Tapahtumakätkön lisääminen kalenteriin epäonnistui</string>
   <string name="init_low_disk_space">Tallennustila on vähissä</string>

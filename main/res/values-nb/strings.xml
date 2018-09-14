@@ -255,7 +255,7 @@
   <string name="info_log_cleared">Loggen ble slettet.</string>
   <string name="info_waypoint_coordinates_cleared">Koordinater fjernet.</string>
   <string name="info_log_type_changed">Logg-typen har blitt forandret!</string>
-  <string name="info_log_report_problem_changed">Report problem has changed!</string>
+  <string name="info_log_report_problem_changed">Available problem reports have changed!</string>
   <string name="info_select_logimage_cancelled">Valg av bilde ble avbrutt.</string>
   <string name="info_stored_image">Nytt bilde lagret til:</string>
   <string name="info_storing_static_maps">Forsøker å lagre statisk kart</string>
@@ -267,6 +267,7 @@
   <string name="confirm_discard_wp_changes">Forkaste ulagrede endringer i veipunktene?</string>
   <string name="warn_discard_changes">Ikke-lagrede endringer på veipunkt er forkastet.</string>
   <string name="err_request_popup_info">c:geo klarte ikke hente cachens popup-info.</string>
+  <string name="warn_log_load_additional_data">c:geo failed to load additional data (trackables/favorite points) for logging.</string>
   <!-- location service -->
   <string name="loc_last">Sist sett</string>
   <string name="loc_net">Nettverk</string>
@@ -412,8 +413,8 @@
   <string name="about_version">Versjon</string>
   <string name="about_changelog">Oppdateringslogg</string>
   <string name="about_system">System</string>
-  <string name="about_donate">Support us</string>
-  <string name="about_donation_more">Support c:geo development\nMore info on our website</string>
+  <string name="about_donate">Støtt oss</string>
+  <string name="about_donation_more">Visit website for info</string>
   <string name="about_contributors">Bidragsytere</string>
   <string name="about_license">Lisens</string>
   <string name="about_apache_license"><a href="">Apache-lisens, versjon 2.0</a></string>
@@ -639,7 +640,7 @@
   <string name="init_location_note">På enheter utstyrt med Google Play-tjenester kan c:geo automatisk bruke en bedre posisjonstjeneste. Vær obs på at dette forhindrer bruk av en ekstern BlueTooth GPS-mottaker.</string>
   <string name="init_location_googleplayservices">Bruk Google Play Services</string>
   <string name="init_low_power">Strømsparingsmodus</string>
-  <string name="init_low_power_note">The low-power mode avoids using the GPS and the gyroscope when a highly accurate location is not strictly necessary, at the cost of longer fixing times.</string>
+  <string name="init_low_power_note">I strømsparingsmodus brukes ikke GPS og gyroskop når en svært nøyaktig plassering ikke er strengt nødvendig, og det vil medføre lengre tid for posisjonering.</string>
   <string name="init_low_power_mode">Aktivere strømsparingsmodus</string>
   <string name="init_force_orientation_sensor_title">Retningssensor</string>
   <string name="init_force_orientation_sensor_note">På noen enheter vil den normale retningssensoren feilaktig endre retning. Isåfall kan en alternativ sensor (orienteringssensor) gi bedre resultat.</string>
@@ -911,7 +912,7 @@
   <string name="cache_owner">Eier</string>
   <string name="cache_hidden">Publisert</string>
   <string name="cache_event">Dato</string>
-  <string name="cache_location">Location</string>
+  <string name="cache_location">Sted</string>
   <string name="cache_coordinates">Koordinater</string>
   <string name="cache_calculator">Kalkulator</string>
   <string name="cache_coordinates_original">Opprinnelige koordinater</string>
@@ -1435,7 +1436,7 @@
   <string name="status_geocaching_change" tools:ignore="UnusedResources">Nylige endringer på geocaching.com har medført at c:geo ikke virker.\nVi jobber med å løste problemet. Forsøk igjen senere.</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Nylige endringer på geocaching.com har gjort at live-kartet ikke fungerer.\nVi jobber med saken. Prøv igjen senere.</string>
   <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Geocaching.com er nede på grunn av vedlikehold. \nDet kan oppstå ymse problemer.</string>
-  <string name="status_closeout_warning_41" tools:ignore="UnusedResources">You appear to be using a version of Android older than 4.1. Future releases of c:geo might no longer be available for your device.</string>
+  <string name="status_closeout_warning_41" tools:ignore="UnusedResources">Det ser ut som du bruker en versjon av Android som er eldre enn 4.1. Fremtidige utgivelser av c:geo vil trolig ikke virke på din enhet.</string>
   <!-- text-to-speech for compass view -->
   <string name="tts_service">Talende kompass</string>
   <string name="tts_start">Start tale</string>
@@ -1547,6 +1548,7 @@
     <item quantity="one">%d veipunkt trukket ut</item>
     <item quantity="other">%d veipunkter trukket ut</item>
   </plurals>
+  <string name="link_gc_checker">geocaching.com coordinate checker available via browser</string>
   <!-- calendar adder -->
   <string name="event_fail">Klarte ikke legge eventcachen til i kalenderen</string>
   <string name="init_low_disk_space">Lite lagringsplass</string>

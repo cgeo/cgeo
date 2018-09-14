@@ -255,7 +255,7 @@
   <string name="info_log_cleared">로그를 비웠습니다.</string>
   <string name="info_waypoint_coordinates_cleared">좌표가 지워졌습니다.</string>
   <string name="info_log_type_changed">로그 유형이 변경되었습니다!</string>
-  <string name="info_log_report_problem_changed">Report problem has changed!</string>
+  <string name="info_log_report_problem_changed">Available problem reports have changed!</string>
   <string name="info_select_logimage_cancelled">사진 선택 또는 캡처가 취소되었습니다.</string>
   <string name="info_stored_image">새로운 사진 저장 위치 :</string>
   <string name="info_storing_static_maps">정적 지도를 저장하는 중입니다.</string>
@@ -267,6 +267,7 @@
   <string name="confirm_discard_wp_changes">저장되지 않은 지점 변경을 삭제하시겠습니까?</string>
   <string name="warn_discard_changes">저장되지 않은 웨이포인트 정보가 삭제됩니다!</string>
   <string name="err_request_popup_info">캐시 팝업 정보를 가져오지 못했습니다.</string>
+  <string name="warn_log_load_additional_data">c:geo failed to load additional data (trackables/favorite points) for logging.</string>
   <!-- location service -->
   <string name="loc_last">마지막 알려진</string>
   <string name="loc_net">네트워크</string>
@@ -410,7 +411,7 @@
   <string name="about_changelog">변경내역</string>
   <string name="about_system">시스템</string>
   <string name="about_donate">Support us</string>
-  <string name="about_donation_more">Support c:geo development\nMore info on our website</string>
+  <string name="about_donation_more">Visit website for info</string>
   <string name="about_contributors">기여하신 분</string>
   <string name="about_license">라이센스</string>
   <string name="about_apache_license"><a href="">Apache 라이센스, 버전 2.0</a></string>
@@ -1525,6 +1526,7 @@
   <plurals name="extract_waypoints_result">
     <item quantity="other">%d 개의 웨이포인트가 추출됨</item>
   </plurals>
+  <string name="link_gc_checker">geocaching.com coordinate checker available via browser</string>
   <!-- calendar adder -->
   <string name="event_fail">이벤트 캐시를 캘린더에 추가하지 못했습니다.</string>
   <string name="init_low_disk_space">디스크 공간 부족</string>

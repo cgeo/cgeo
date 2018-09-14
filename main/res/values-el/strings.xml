@@ -255,7 +255,7 @@
   <string name="info_log_cleared">Το αρχείο καταγραφής διαγράφτηκε.</string>
   <string name="info_waypoint_coordinates_cleared">Οι συντεταγμένες εκκαθαρίστηκαν.</string>
   <string name="info_log_type_changed">Ο τύπος του αρχείου καταγραφής έχει αλλάξει!</string>
-  <string name="info_log_report_problem_changed">Η αναφορά προβλήματος έχει αλλάξει!</string>
+  <string name="info_log_report_problem_changed">Available problem reports have changed!</string>
   <string name="info_select_logimage_cancelled">Ακυρώθηκε η επιλογή/απαθανάτιση εικόνας.</string>
   <string name="info_stored_image">Η νέα εικόνα αποθηκεύτηκε στο:</string>
   <string name="info_storing_static_maps">Προσπάθεια αποθήκευσης στατικών χαρτών</string>
@@ -267,6 +267,7 @@
   <string name="confirm_discard_wp_changes">Απόρριψη αλλαγών των μη αποθηκευμένων σημείων διαδρομής;</string>
   <string name="warn_discard_changes">Αλλαγές σε σημεία που δεν έχουν αποθηκευτεί απορρίπτονται!</string>
   <string name="err_request_popup_info">το c:geo απέτυχε να ανακτήσει τις πληροφορίες της κρύπτης.</string>
+  <string name="warn_log_load_additional_data">c:geo failed to load additional data (trackables/favorite points) for logging.</string>
   <!-- location service -->
   <string name="loc_last">Τελευταία γνωστή</string>
   <string name="loc_net">Δίκτυο</string>
@@ -412,8 +413,8 @@
   <string name="about_version">Έκδοση</string>
   <string name="about_changelog">Τι νέο υπάρχει;</string>
   <string name="about_system">Σύστημα</string>
-  <string name="about_donate">Support us</string>
-  <string name="about_donation_more">Support c:geo development\nMore info on our website</string>
+  <string name="about_donate">Υποστηρίξτε μας</string>
+  <string name="about_donation_more">Visit website for info</string>
   <string name="about_contributors">Συντελεστές</string>
   <string name="about_license">Άδεια χρήσης</string>
   <string name="about_apache_license"><a href="">Άδεια Apache, Έκδοση 2.0</a></string>
@@ -1435,7 +1436,7 @@
   <string name="status_geocaching_change" tools:ignore="UnusedResources">Πρόσφατες αλλαγές στo geocaching.com χάλασαν το c:geo.\nΤο δουλεύουμε, ελέγξτε ξανά σύντομα.</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Πρόσφατες αλλαγές στo geocaching.com χάλασαν τον χάρτη πραγματικού χρόνου.\nΤο δουλεύουμε, ελέγξτε ξανά σύντομα.</string>
   <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Γίνεται συντήρηση στο geocaching.com.\nΜπορεί να αντιμετωπίσετε διάφορα θέματα.</string>
-  <string name="status_closeout_warning_41" tools:ignore="UnusedResources">You appear to be using a version of Android older than 4.1. Future releases of c:geo might no longer be available for your device.</string>
+  <string name="status_closeout_warning_41" tools:ignore="UnusedResources">Φαίνεται ότι χρησιμοποιείτε έκδοση Android παλαιότερη από την 4.1. Οι μελλοντικές εκδόσεις του c:geo ενδέχεται να μην είναι διαθέσιμες για την συσκευή σας.</string>
   <!-- text-to-speech for compass view -->
   <string name="tts_service">Ομιλούσα πυξίδα</string>
   <string name="tts_start">Αρχίστε να μιλάτε</string>
@@ -1547,6 +1548,7 @@
     <item quantity="one">Έγινε εξαγωγή %d σημείου αναφοράς</item>
     <item quantity="other">Έγινε εξαγωγή %d σημείων αναφοράς</item>
   </plurals>
+  <string name="link_gc_checker">geocaching.com coordinate checker available via browser</string>
   <!-- calendar adder -->
   <string name="event_fail">Απέτυχε η προσθήκη της εκδήλωσης στο ημερολόγιο</string>
   <string name="init_low_disk_space">Εξαντλείται ο αποθηκευτικός χώρος</string>
