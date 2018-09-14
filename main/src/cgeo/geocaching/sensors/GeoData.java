@@ -34,7 +34,7 @@ public class GeoData extends Location {
     }
 
     @Nullable
-    static Location best(@Nullable final Location gpsLocation, @Nullable final Location netLocation) {
+    static Location determineBestLocation(@Nullable final Location gpsLocation, @Nullable final Location netLocation) {
         if (gpsLocation == null) {
             return netLocation;
         }
@@ -75,7 +75,7 @@ public class GeoData extends Location {
                 // Try to find a sensible initial location from the last locations known to Android.
                 final Location lastGpsLocation = geoManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
                 final Location lastNetworkLocation = geoManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-                final Location bestLocation = best(lastGpsLocation, lastNetworkLocation);
+                final Location bestLocation = determineBestLocation(lastGpsLocation, lastNetworkLocation);
                 if (bestLocation != null) {
                     bestLocation.setProvider(INITIAL_PROVIDER);
                     return new GeoData(bestLocation);
