@@ -75,7 +75,7 @@ public class GeoDataProvider {
                 latestGPSLocation.set(location);
                 assign(latestGPSLocation.get());
             } else {
-                assign(GeoData.best(latestGPSLocation.get(), location));
+                assign(GeoData.determineBestLocation(latestGPSLocation.get(), location));
             }
         }
 
