@@ -255,7 +255,7 @@
   <string name="info_log_cleared">La visite a été effacée.</string>
   <string name="info_waypoint_coordinates_cleared">Coordonnées effacées.</string>
   <string name="info_log_type_changed">Le type de visite a été modifié !</string>
-  <string name="info_log_report_problem_changed">Rapports d\'anomalies disponibles ont changé !</string>
+  <string name="info_log_report_problem_changed">La liste des problèmes connus a été mise à jour !</string>
   <string name="info_select_logimage_cancelled">La sélection ou l\'acquisition de l\'image a été annulée.</string>
   <string name="info_stored_image">Nouvelle image sauvée dans :</string>
   <string name="info_storing_static_maps">Sauvegarde des cartes statiques</string>
@@ -267,7 +267,7 @@
   <string name="confirm_discard_wp_changes">Annuler les étapes non enregistrées ?</string>
   <string name="warn_discard_changes">Étape non enregistrée, vos modifications seront perdues !</string>
   <string name="err_request_popup_info">c:geo n\'a pas pu récupérer le contenu du popup de la cache.</string>
-  <string name="warn_log_load_additional_data">c:geo n\'a pas réussi à charger des données supplémentaires (trackables/points favoris) pour loguer.</string>
+  <string name="warn_log_load_additional_data">c:geo n\'a pas réussi à charger les données supplémentaires (objets voyageurs / points de favori) pour loguer.</string>
   <!-- location service -->
   <string name="loc_last">Dernière position</string>
   <string name="loc_net">Réseau</string>
@@ -1548,7 +1548,7 @@
     <item quantity="one">%d point de passage extrait</item>
     <item quantity="other">%d points de passage extraits</item>
   </plurals>
-  <string name="link_gc_checker">le checker de coordonnées de geocaching.com est disponible en utilisant un navigateur</string>
+  <string name="link_gc_checker">Le vérificateur de coordonnées de geocaching.com est disponible en utilisant un navigateur</string>
   <!-- calendar adder -->
   <string name="event_fail">Impossible d\'ajouter l\'Événement au calendrier</string>
   <string name="init_low_disk_space">Espace disque faible</string>
