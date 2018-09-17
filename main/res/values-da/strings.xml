@@ -130,7 +130,7 @@
   <string name="log_your_saved_log">Din gemte log</string>
   <string name="log_empty_logbook">Logbogen for denne cache er tom.</string>
   <string name="log_problem_none">Intet problem</string>
-  <string name="log_problem_needs_maintenance_label">Needs Maintenance</string>
+  <string name="log_problem_needs_maintenance_label">Kræver vedligeholdelse</string>
   <string name="log_problem_needs_maintenance_text">Denne geocacher rapporterede, at der er et problem med denne geocache.</string>
   <string name="log_problem_log_full_label">Logbogen er fuld</string>
   <string name="log_problem_log_full_text">Denne geocacher rapporterede, at logbogen er fuld.</string>
@@ -138,7 +138,7 @@
   <string name="log_problem_damaged_text">Denne geocacher rapporterede, at beholderen er beskadiget.</string>
   <string name="log_problem_missing_label">Geocachen kan være forsvundet</string>
   <string name="log_problem_missing_text">Denne geocacher rapporterede, at cachen kan være forsvundet.</string>
-  <string name="log_problem_other_label">Other</string>
+  <string name="log_problem_other_label">Anden</string>
   <string name="log_problem_other_text">Denne geocacher rapporterede, at der er et problem med denne geocache.</string>
   <string name="log_problem_archive_label">Geocache bør arkiveres</string>
   <string name="log_problem_archive_text">Denne geocacher rapporterede, at geocachen skal arkiveres. En frivillig reviewer er blevet underrettet.</string>
@@ -255,7 +255,7 @@
   <string name="info_log_cleared">Logbeskeden blev fjernet.</string>
   <string name="info_waypoint_coordinates_cleared">Position nulstillet</string>
   <string name="info_log_type_changed">Typen af logbeskeden blev ændret!</string>
-  <string name="info_log_report_problem_changed">Available problem reports have changed!</string>
+  <string name="info_log_report_problem_changed">Der er ændringer i tilgængelige problemrapporter!</string>
   <string name="info_select_logimage_cancelled">Valg af billede eller foto blev afbrudt.</string>
   <string name="info_stored_image">Nyt billede gemt til:</string>
   <string name="info_storing_static_maps">Forsøger at gemme statiske kort</string>
@@ -267,7 +267,7 @@
   <string name="confirm_discard_wp_changes">Vil du kassere ændringer, som ikke er gemt?</string>
   <string name="warn_discard_changes">Ændringer til waypoints kasseret!</string>
   <string name="err_request_popup_info">Det lykkedes ikke c:geo at hente popup info for cachen.</string>
-  <string name="warn_log_load_additional_data">c:geo failed to load additional data (trackables/favorite points) for logging.</string>
+  <string name="warn_log_load_additional_data">Det lykkedes ikke at hente data (trackables/favorit point) til logbesked.</string>
   <!-- location service -->
   <string name="loc_last">Sidst kendte</string>
   <string name="loc_net">Netværk</string>
@@ -413,8 +413,8 @@
   <string name="about_version">Version</string>
   <string name="about_changelog">Ændringslog</string>
   <string name="about_system">System</string>
-  <string name="about_donate">Support us</string>
-  <string name="about_donation_more">Visit website for info</string>
+  <string name="about_donate">Støt os</string>
+  <string name="about_donation_more">Besøg hjemmesiden for information</string>
   <string name="about_contributors">Bidragsydere</string>
   <string name="about_license">Licens</string>
   <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
@@ -532,10 +532,10 @@
   <string name="init_signature_template_owner">Ejer</string>
   <string name="init_signature_template_name">Navn</string>
   <string name="init_signature_template_difficulty">Sværhedsgrad</string>
-  <string name="init_signature_template_terrain">Terrain</string>
+  <string name="init_signature_template_terrain">Terræn</string>
   <string name="init_signature_template_url">URL</string>
   <string name="init_signature_template_log">Logtekst</string>
-  <string name="init_signature_template_size">Size</string>
+  <string name="init_signature_template_size">Størrelse</string>
   <string name="init_ratingwanted">GCVote vurdering</string>
   <string name="init_summary_ratingwanted">Indlæs cachevurdering fra GCVote.com</string>
   <string name="init_friends_and_own_logs_wanted">Vis venners/egne</string>
@@ -1436,7 +1436,7 @@
   <string name="status_geocaching_change" tools:ignore="UnusedResources">Ændringer på geocaching.com forhindrer c:geo i at fungere.\nVi arbejder på at løse problemet. Prøv igen senere.</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Ændringer på geocaching.com forhindrer Live-kortet i at fungere.\nVi arbejder på at løse problemet. Prøv igen senere.</string>
   <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Geocaching.com er under vedligeholdelse.\nDu kan opleve uregelmæssigheder.</string>
-  <string name="status_closeout_warning_41" tools:ignore="UnusedResources">You appear to be using a version of Android older than 4.1. Future releases of c:geo might no longer be available for your device.</string>
+  <string name="status_closeout_warning_41" tools:ignore="UnusedResources">Din enheds Androidinstallation er ældre end version 4.1 og fremtidige versioner af c:geo vil måske ikke længere være kompatible.</string>
   <!-- text-to-speech for compass view -->
   <string name="tts_service">Talende kompas</string>
   <string name="tts_start">Start tale</string>
@@ -1484,7 +1484,7 @@
   <string name="confirm_log_title">Særlig logtype</string>
   <string name="confirm_log_message">Du er ved at logge \"%s\". Er du sikker?</string>
   <string name="confirm_report_problem_title">Rapportér et problem</string>
-  <string name="confirm_report_problem_message">You want to report \'%s\'. Are you sure?</string>
+  <string name="confirm_report_problem_message">Du er ved at rapportere \'%s\'. Er du sikker?</string>
   <!-- Geokrety -->
   <string name="settings_activate_geokrety">Aktivér</string>
   <string name="init_geokrety">GeoKrety.org</string>
@@ -1548,7 +1548,7 @@
     <item quantity="one">%d waypoint udtrukket</item>
     <item quantity="other">%d waypoints udtrukket</item>
   </plurals>
-  <string name="link_gc_checker">geocaching.com coordinate checker available via browser</string>
+  <string name="link_gc_checker">geocaching.com positionschecker er tilgængelig via browser</string>
   <!-- calendar adder -->
   <string name="event_fail">Kunne ikke tilføje eventcachen til kalenderen</string>
   <string name="init_low_disk_space">Datalageret er næsten fyldt</string>
@@ -1558,5 +1558,5 @@
   <string name="err_select_logimage_upload_size">Billedfilen er for stor. Vælg en lavere billedopløsning.</string>
   <string name="err_logimage_caption_required">Der skal indtastes en billedtekst til billedet</string>
   <string name="waypoint_latitude_null">N/S --° --.---</string>
-  <string name="waypoint_longitude_null">E/W --° --.---</string>
+  <string name="waypoint_longitude_null">Ø/V --° --.---</string>
 </resources>

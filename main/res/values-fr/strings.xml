@@ -770,7 +770,7 @@
     <item quantity="other">il y a %d jours</item>
   </plurals>
   <plurals name="cache_offline_about_time_months">
-    <item quantity="one">about %d month ago</item>
+    <item quantity="one">il y a environ %d mois</item>
     <item quantity="other">about %d months ago</item>
   </plurals>
   <string name="cache_offline_about_time_year">il y a plus d\'un an</string>

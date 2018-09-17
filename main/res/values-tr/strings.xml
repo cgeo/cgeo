@@ -255,7 +255,7 @@
   <string name="info_log_cleared">Kayıt temizlendi.</string>
   <string name="info_waypoint_coordinates_cleared">Koordinatlar silindi.</string>
   <string name="info_log_type_changed">Kaydın türü değiştirildi!</string>
-  <string name="info_log_report_problem_changed">Available problem reports have changed!</string>
+  <string name="info_log_report_problem_changed">Mevcut sorun raporları değişti!</string>
   <string name="info_select_logimage_cancelled">Görüntü seçimi veya çekimi iptal edildi.</string>
   <string name="info_stored_image">Yeni görsel kaydedildi:</string>
   <string name="info_storing_static_maps">Statik haritalar depolanmaya çalışılıyor</string>
@@ -267,7 +267,7 @@
   <string name="confirm_discard_wp_changes">Kaydedilmeyen Yol Noktası değişiklikleri silinsin mi?</string>
   <string name="warn_discard_changes">Kaydedilmemiş yol noktası değişiklikleri iptal edildi!</string>
   <string name="err_request_popup_info">c:Geo Geocache açılır pencere bilgisini alamadı.</string>
-  <string name="warn_log_load_additional_data">c:geo failed to load additional data (trackables/favorite points) for logging.</string>
+  <string name="warn_log_load_additional_data">c:geo kayıt için ek bilgileri (trackable\'lar/favori puanları) yüklemede başarısız oldu.</string>
   <!-- location service -->
   <string name="loc_last">Bilinen son</string>
   <string name="loc_net">İletişim Ağı</string>
@@ -414,7 +414,7 @@
   <string name="about_changelog">Changelog</string>
   <string name="about_system">Sistem</string>
   <string name="about_donate">Bizi destekleyin</string>
-  <string name="about_donation_more">Visit website for info</string>
+  <string name="about_donation_more">Bilgi için web sitesini ziyaret edin</string>
   <string name="about_contributors">Katkıda bulunanlar</string>
   <string name="about_license">Lisans</string>
   <string name="about_apache_license"><a href=""> Apache Lisansı, Sürüm 2.0 </a></string>
@@ -538,7 +538,7 @@
   <string name="init_signature_template_size">Boyut</string>
   <string name="init_ratingwanted">GCvote Derecelendirme</string>
   <string name="init_summary_ratingwanted">GCvote.com\'dan Geocache derecelendirmesini yükle</string>
-  <string name="init_friends_and_own_logs_wanted">Arkadaşlarının/Kendinin Loglarını Göster</string>
+  <string name="init_friends_and_own_logs_wanted">Arkadaşının/Kendi Kaydını Göster</string>
   <string name="init_summary_friends_and_own_logs_wanted">Arkadaşlarınızın ve kendinizin kayıt sayfasını görüntüle</string>
   <string name="init_openlastdetailspage">Son Ayrıntılar Sayfası</string>
   <string name="init_summary_openlastdetailspage">Ayrıntıları son kullanılan sayfa ile açın</string>
@@ -573,7 +573,7 @@
   <string name="init_backup">Yedekle</string>
   <string name="init_backup_backup">Yedekle</string>
   <string name="init_backup_running">Geocache veritabanı yedeklemesi oluşturuluyor…</string>
-  <string name="init_backup_note">Bu özelliğin, Geocache\'leri ve yol noktaları içeren bir veritabanını yedekleyeceğini / geri yükleyeceğini, ancak ayarlarınızı değiştirmediğini unutmayın.\nGiriş verileriniz ve şifreleriniz bu uygulamada unutlmayacaktır.</string>
+  <string name="init_backup_note">Bu özelliğin, Geocache\'leri ve yol noktaları içeren bir veritabanını yedekleyeceğini / geri yükleyeceğini, ancak ayarlarınızı değiştirmediğini unutmayın.\nGiriş verileriniz ve şifreleriniz bu uygulamada unutulmayacaktır.</string>
   <string name="init_backup_restore">Geri Yükleme</string>
   <string name="init_backup_success">c:geo\'nun veritabanı başarıyla kopyalandı:</string>
   <string name="init_backup_failed">c:geo\'nun veritabanı yedeklemesi başarısız oldu.</string>
@@ -613,7 +613,7 @@
   <string name="init_default_navigation_tool_description">Burada tercih ettiğiniz navigasyon aracını seçebilirsiniz.</string>
   <string name="init_default_navigation_tool_select">Aracı seçin</string>
   <string name="init_default_navigation_tool_2_description">Burada ikinci tercih edilen navigasyon aracını seçebilirsiniz. Geocache başlığının yanındaki navigasyon simgesine uzun süre basarak etkinleştirin.</string>
-  <string name="init_navigation_menu_description">Burada kullanılabilir navigasyon yöntemlerinden hangisinin, bir Geocache veya yol noktası için, navigasyon menüsünde gösterilmesini seçebilirsiniz. Devre dışı bırakılmış araçlar bu aygıtta yüklü değil.</string>
+  <string name="init_navigation_menu_description">Burada kullanılabilir navigasyon yöntemlerinden hangisinin, bir Geocache veya yol noktası için, navigasyon menüsünde gösterilmesini istediğinizi seçebilirsiniz. Devre dışı bırakılmış araçlar bu araçta yüklü değildir.</string>
   <string name="init_debug_title">Hata ayıklama bilgileri</string>
   <string name="init_debug_note">c:geo çok fazla ayıklama bilgisi oluşturabilir. Bu ayarı aktif etmek c:geo\'nun dengesini etkileyebilir ve sadece geliştiricilere kayıt göndermeniz istenirse kullanılması önerilir. c:geo normal şekilde kullanılırken lütfen ayıklama günlüğünü devre dışı tutun!</string>
   <string name="init_debug">Hata ayıklama kaydını etkinleştir</string>
@@ -910,7 +910,7 @@
   <string name="cache_rating_of">üzerinden</string>
   <string name="cache_favorite">Favori</string>
   <string name="cache_owner">Sahibi</string>
-  <string name="cache_hidden">Yerleştirilme Tarihi</string>
+  <string name="cache_hidden">Yerleştirilme</string>
   <string name="cache_event">Tarih</string>
   <string name="cache_location">Konum</string>
   <string name="cache_coordinates">Koordinatlar</string>
@@ -1548,7 +1548,7 @@
     <item quantity="one">%d yol noktası çıkartıldı</item>
     <item quantity="other">%d yol noktaları çıkartıldı</item>
   </plurals>
-  <string name="link_gc_checker">geocaching.com coordinate checker available via browser</string>
+  <string name="link_gc_checker">geocaching.com koordinat denetleyicisi tarayıcı ile açılabilir</string>
   <!-- calendar adder -->
   <string name="event_fail">Etkinliğin takvime eklenmesinde başarısız olundu</string>
   <string name="init_low_disk_space">Depolama alanı yetersiz</string>
