@@ -255,7 +255,7 @@
   <string name="info_log_cleared">Il log è stato azzerato.</string>
   <string name="info_waypoint_coordinates_cleared">Coordinate eliminate.</string>
   <string name="info_log_type_changed">Il tipo di log è cambiato!</string>
-  <string name="info_log_report_problem_changed">Available problem reports have changed!</string>
+  <string name="info_log_report_problem_changed">La lista delle segnalazioni dei problemi è stata aggiornata!</string>
   <string name="info_select_logimage_cancelled">Selezione o cattura immagine annulata.</string>
   <string name="info_stored_image">Nuova immagine salvata su:</string>
   <string name="info_storing_static_maps">Tento di salvare le mappe statiche</string>
@@ -267,7 +267,7 @@
   <string name="confirm_discard_wp_changes">Ignorare i waypoint non salvati?</string>
   <string name="warn_discard_changes">Le modifiche non salvate ai waypoint vengono annullate!</string>
   <string name="err_request_popup_info">c:geo non riesce ad ottenere le informazioni popup del cache.</string>
-  <string name="warn_log_load_additional_data">c:geo failed to load additional data (trackables/favorite points) for logging.</string>
+  <string name="warn_log_load_additional_data">c:geo non riesce a caricare dati aggiuntivi (trackables/punti preferiti) per il logging.</string>
   <!-- location service -->
   <string name="loc_last">Ultima nota</string>
   <string name="loc_net">Network</string>
@@ -414,7 +414,7 @@
   <string name="about_changelog">Modifiche</string>
   <string name="about_system">Sistema</string>
   <string name="about_donate">Sostienici</string>
-  <string name="about_donation_more">Visit website for info</string>
+  <string name="about_donation_more">Visita il sito web per info</string>
   <string name="about_contributors">Contributori</string>
   <string name="about_license">Licenza</string>
   <string name="about_apache_license"><a href="">Licenza Apache, versione 2.0</a></string>
@@ -1548,7 +1548,7 @@
     <item quantity="one">%d waypoint estratto</item>
     <item quantity="other">%d waypoint estratti</item>
   </plurals>
-  <string name="link_gc_checker">geocaching.com coordinate checker available via browser</string>
+  <string name="link_gc_checker">Il check delle coordinate geocaching.com è disponibile tramite browser</string>
   <!-- calendar adder -->
   <string name="event_fail">Impossibile aggiungere l\'evento al calendario</string>
   <string name="init_low_disk_space">Sto esaurendo lo spazio su disco</string>
