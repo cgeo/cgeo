@@ -38,6 +38,7 @@ public class Trackable implements ILogable {
     private String type = null;
     @Nullable
     private Date released = null;
+    private Date retrieved = null;
     private float distance = -1;
     private String origin = null;
     private String owner = null;
@@ -69,6 +70,7 @@ public class Trackable implements ILogable {
 
         type = ObjectUtils.defaultIfNull(newTrackable.type, type);
         released = ObjectUtils.defaultIfNull(newTrackable.released, released);
+        retrieved = ObjectUtils.defaultIfNull(newTrackable.retrieved, retrieved);
         distance = newTrackable.distance == -1 ? distance : newTrackable.distance;
         origin = ObjectUtils.defaultIfNull(newTrackable.origin, origin);
         owner = ObjectUtils.defaultIfNull(newTrackable.owner, owner);
@@ -210,8 +212,20 @@ public class Trackable implements ILogable {
         return null;
     }
 
+    @Nullable
+    public Date getRetrieved() {
+        if (retrieved != null) {
+            return new Date(retrieved.getTime());
+        }
+        return null;
+    }
+
     public void setReleased(@Nullable final Date released) {
         this.released = released == null ? null : new Date(released.getTime()); // avoid storing external reference in this object
+    }
+
+    public void setRetrieved(@Nullable final Date retrieved) {
+        this.retrieved = retrieved == null ? null : new Date(retrieved.getTime()); // avoid storing external reference in this object
     }
 
     public float getDistance() {

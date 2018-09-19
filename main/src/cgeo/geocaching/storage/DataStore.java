@@ -169,7 +169,7 @@ public class DataStore {
      */
     private static final CacheCache cacheCache = new CacheCache();
     private static volatile SQLiteDatabase database = null;
-    private static final int dbVersion = 74;
+    private static final int dbVersion = 75;
     public static final int customListIdOffset = 10;
 
     @NonNull private static final String dbTableCaches = "cg_caches";
@@ -328,7 +328,8 @@ public class DataStore {
             + "released LONG, "
             + "goal TEXT, "
             + "description TEXT, "
-            + "geocode TEXT "
+            + "geocode TEXT, "
+            + "retrieved LONG "
             + "); ";
 
     private static final String dbCreateSearchDestinationHistory = ""
@@ -889,6 +890,15 @@ public class DataStore {
                             db.execSQL("ALTER TABLE " + dbTableLogsOffline + " ADD COLUMN report_problem TEXT");
                         } catch (final Exception e) {
                             Log.e("Failed to upgrade to ver. 74", e);
+                        }
+                    }
+
+                    // Adds retrieved date for trackables
+                    if (oldVersion < 75) {
+                        try {
+                            db.execSQL("ALTER TABLE " + dbTableTrackables + " ADD COLUMN retrieved LONG");
+                        } catch (final Exception e) {
+                            Log.e("Failed to upgrade to ver. 75", e);
                         }
                     }
                 }
@@ -1651,6 +1661,12 @@ public class DataStore {
                 } else {
                     values.put("released", 0L);
                 }
+                final Date retrievedDate = trackable.getRetrieved();
+                if (retrievedDate != null) {
+                    values.put("retrieved", retrievedDate.getTime());
+                } else {
+                    values.put("retrieved", 0L);
+                }
                 values.put("goal", trackable.getGoal());
                 values.put("description", trackable.getDetails());
 
@@ -2200,7 +2216,7 @@ public class DataStore {
 
         final Cursor cursor = database.query(
                 dbTableTrackables,
-                new String[]{"_id", "updated", "tbcode", "guid", "title", "owner", "released", "goal", "description"},
+                new String[]{"_id", "updated", "tbcode", "guid", "title", "owner", "released", "goal", "description", "retrieved"},
                 "geocode = ?",
                 new String[]{geocode},
                 null,
@@ -2254,6 +2270,15 @@ public class DataStore {
             try {
                 final long releaseMilliSeconds = Long.parseLong(released);
                 trackable.setReleased(new Date(releaseMilliSeconds));
+            } catch (final NumberFormatException e) {
+                Log.e("createTrackableFromDatabaseContent", e);
+            }
+        }
+        final String retrieved = cursor.getString(cursor.getColumnIndex("retrieved"));
+        if (retrieved != null) {
+            try {
+                final long retrievedMilliSeconds = Long.parseLong(retrieved);
+                trackable.setRetrieved(new Date(retrievedMilliSeconds));
             } catch (final NumberFormatException e) {
                 Log.e("createTrackableFromDatabaseContent", e);
             }

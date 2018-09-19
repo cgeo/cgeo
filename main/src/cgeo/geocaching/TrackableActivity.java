@@ -461,6 +461,12 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
             // trackable geocode
             addContextMenu(details.add(R.string.trackable_code, trackable.getGeocode()).right);
 
+            // retrieved status
+            final Date retrievedDate = trackable.getRetrieved();
+            if (retrievedDate != null) {
+                details.add(R.string.trackable_status, res.getString(R.string.trackable_found, Formatter.formatDate(retrievedDate.getTime())));
+            }
+
             // trackable owner
             final TextView owner = details.add(R.string.trackable_owner, res.getString(R.string.trackable_unknown)).right;
             if (StringUtils.isNotBlank(trackable.getOwner())) {

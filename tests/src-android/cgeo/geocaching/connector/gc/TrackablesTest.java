@@ -61,6 +61,12 @@ public class TrackablesTest extends AbstractResourceInstrumentationTestCase {
         assertThat(trackable.getOrigin()).isNull();
     }
 
+    public void testParseTrackableWithRetrievedDate() {
+        final Trackable trackable = parseTrackable(R.raw.tb11jzk);
+        assertThat(trackable).isNotNull();
+        assertThat(trackable.getRetrieved()).isNotNull();
+    }
+
     public void testParseRelativeLink() {
         final Trackable trackable = parseTrackable(R.raw.tb4cwjx);
         assertThat(trackable).isNotNull();
@@ -96,6 +102,7 @@ public class TrackablesTest extends AbstractResourceInstrumentationTestCase {
         assertThat(trackable.getSpottedGuid()).isNull();
         assertThat(trackable.getSpottedType()).isEqualTo(Trackable.SPOTTED_OWNER);
         assertThat(trackable.getReleased()).isNotNull();
+        assertThat(trackable.getRetrieved()).isNull();
         assertThat(trackable.getType()).isEqualTo("Travel Bug Dog Tag");
         final List<LogEntry> logs = trackable.getLogs();
         assertThat(logs).isNotNull();

@@ -92,6 +92,9 @@ public final class GCParser {
     private static final SynchronizedDateFormat DATE_TB_IN_2 = new SynchronizedDateFormat("EEEEE, MMMMM dd, yyyy", Locale.ENGLISH); // Saturday, March 28, 2009
 
     @NonNull
+    private static final SynchronizedDateFormat DATE_TB_IN_3 = new SynchronizedDateFormat("MM/dd/yyyy", Locale.ENGLISH); // 03/28/2009
+
+    @NonNull
     private static final ImmutablePair<StatusCode, Geocache> UNKNOWN_PARSE_ERROR = ImmutablePair.of(StatusCode.UNKNOWN_ERROR, null);
 
     private GCParser() {
@@ -1430,6 +1433,16 @@ public final class GCParser {
                         Log.e("Could not parse trackable release " + releaseString, e);
                     }
                 }
+            }
+        }
+
+        // retrieved date - can be missing on the page if trackable hasn't been found by the user
+        final String retrievedString = TextUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_RETRIEVED, false, null);
+        if (retrievedString != null) {
+            try {
+                trackable.setRetrieved(DATE_TB_IN_3.parse(retrievedString));
+            } catch (final ParseException e) {
+                Log.e("Could not parse trackable retrieved " + retrievedString, e);
             }
         }
 
