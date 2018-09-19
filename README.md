@@ -5,6 +5,11 @@ It does not require a web browser or exports - just download and start right awa
 
 Perfect! Please **tell us in the [issue tracker](https://github.com/cgeo/cgeo/issues) before hacking** on your great new feature. It would be bad if you have implemented something great, but we can't include it because it doesn't fit the remaining architecture and code. You might also want to chat with the developers on channel #cgeo on the freenode IRC network.
 
+### Starting points for contribution
+
+You can also take a look onto the [project page](https://github.com/cgeo/cgeo/projects) of our repository.
+For example we have a collection of [urgent issues](https://github.com/cgeo/cgeo/projects/6) and a list of [beginner topics](https://github.com/cgeo/cgeo/projects/7) which collects issues, which might be suitable for your first contribution.
+
 ## Project status
 
 [![Build Status](http://ci.cgeo.org/job/cgeo%20continuous%20integration/badge/icon)](http://ci.cgeo.org/job/cgeo%20continuous%20integration/)<br>
