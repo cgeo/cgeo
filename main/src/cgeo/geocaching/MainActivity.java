@@ -14,6 +14,8 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Units;
 import cgeo.geocaching.maps.DefaultMap;
 import cgeo.geocaching.network.Network;
+import cgeo.geocaching.permission.PermissionGrantedCallback;
+import cgeo.geocaching.permission.PermissionHandler;
 import cgeo.geocaching.playservices.AppInvite;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
@@ -34,6 +36,7 @@ import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.Version;
 import cgeo.geocaching.utils.functions.Action1;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.SearchManager;
 import android.content.BroadcastReceiver;
@@ -41,12 +44,14 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.location.Address;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.NonNull;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.SearchView.OnQueryTextListener;
@@ -242,7 +247,12 @@ public class MainActivity extends AbstractActionBarActivity {
 
         Log.i("Starting " + getPackageName() + ' ' + Version.getVersionCode(this) + " a.k.a " + Version.getVersionName(this));
 
-        init();
+        PermissionHandler.executeIfLocationPermissionGranted(this, 5555, new PermissionGrantedCallback() {
+            @Override
+            public void execute() {
+                init();
+            }
+        });
 
         checkShowChangelog();
 
@@ -252,6 +262,34 @@ public class MainActivity extends AbstractActionBarActivity {
         }
 
         confirmDebug();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(final int requestCode, @NonNull String[] permissions, @NonNull final int[] grantResults) {
+        if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            PermissionHandler.executeCallbackFor(requestCode);
+        } else {
+            final Activity activity = this;
+            new AlertDialog.Builder(this)
+                    //TODO: add translations for this text
+                    .setMessage("c:geo needs your permission to access the location of your device. This app cannot be used without this permission.")
+                    .setCancelable(false)
+                    .setPositiveButton("Ask again", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            PermissionHandler.askAgainFor(requestCode, activity);
+                        }
+                    })
+                    .setNegativeButton("Close app", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            // TODO: close app
+                        }
+                    })
+                    .setIcon(R.drawable.ic_menu_mylocation)
+                    .create()
+                    .show();
+        }
     }
 
     @SuppressWarnings("unused") // in Eclipse, BuildConfig.DEBUG is always true
