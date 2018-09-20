@@ -685,8 +685,7 @@ public class MainActivity extends AbstractActionBarActivity {
     }
 
     /**
-     * @param v
-     *            unused here but needed since this method is referenced from XML layout
+     * unused here but needed since this method is referenced from XML layout
      */
     public void cgeoFindOnMap(final View v) {
         findOnMap.setPressed(true);
@@ -694,8 +693,7 @@ public class MainActivity extends AbstractActionBarActivity {
     }
 
     /**
-     * @param v
-     *            unused here but needed since this method is referenced from XML layout
+     * unused here but needed since this method is referenced from XML layout
      */
     public void cgeoFindNearest(final View v) {
         nearestView.setPressed(true);
@@ -703,8 +701,7 @@ public class MainActivity extends AbstractActionBarActivity {
     }
 
     /**
-     * @param v
-     *            unused here but needed since this method is referenced from XML layout
+     * unused here but needed since this method is referenced from XML layout
      */
     public void cgeoFindByOffline(final View v) {
         findByOffline.setPressed(true);
@@ -712,8 +709,7 @@ public class MainActivity extends AbstractActionBarActivity {
     }
 
     /**
-     * @param v
-     *            unused here but needed since this method is referenced from XML layout
+     * unused here but needed since this method is referenced from XML layout
      */
     public void cgeoSearch(final View v) {
         advanced.setPressed(true);
@@ -721,8 +717,7 @@ public class MainActivity extends AbstractActionBarActivity {
     }
 
     /**
-     * @param v
-     *            unused here but needed since this method is referenced from XML layout
+     * unused here but needed since this method is referenced from XML layout
      */
     public void cgeoPoint(final View v) {
         any.setPressed(true);
@@ -730,8 +725,7 @@ public class MainActivity extends AbstractActionBarActivity {
     }
 
     /**
-     * @param v
-     *            unused here but needed since this method is referenced from XML layout
+     * unused here but needed since this method is referenced from XML layout
      */
     public void cgeoFilter(final View v) {
         filter.setPressed(true);
@@ -739,8 +733,7 @@ public class MainActivity extends AbstractActionBarActivity {
     }
 
     /**
-     * @param v
-     *            unused here but needed since this method is referenced from XML layout
+     * unused here but needed since this method is referenced from XML layout
      */
     public void cgeoNavSettings(final View v) {
         startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
@@ -763,8 +756,7 @@ public class MainActivity extends AbstractActionBarActivity {
     }
 
     /**
-     * @param view
-     *            unused here but needed since this method is referenced from XML layout
+     * unused here but needed since this method is referenced from XML layout
      */
     public void showAbout(final View view) {
         startActivity(new Intent(this, AboutActivity.class));
