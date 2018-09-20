@@ -248,6 +248,7 @@ public class MainActivity extends AbstractActionBarActivity {
         Log.i("Starting " + getPackageName() + ' ' + Version.getVersionCode(this) + " a.k.a " + Version.getVersionName(this));
 
         PermissionHandler.executeIfLocationPermissionGranted(this, 5555, new PermissionGrantedCallback() {
+            // TODO: go directly into execute if the device api level is below 26
             @Override
             public void execute() {
                 init();
