@@ -1,16 +1,19 @@
 package cgeo.geocaching.sensors;
 
+import android.Manifest;
+import android.content.Context;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationManager;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+
+import org.apache.commons.lang3.StringUtils;
+
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
-
-import org.apache.commons.lang3.StringUtils;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-
-import android.content.Context;
-import android.location.Location;
-import android.location.LocationManager;
 
 public class GeoData extends Location {
 
@@ -72,6 +75,12 @@ public class GeoData extends Location {
         final LocationManager geoManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         if (geoManager != null) {
             try {
+                if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                        && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    // we do not have permission to access the location of the user, therefore we return a dummy location
+                    return DUMMY_LOCATION;
+                }
+
                 // Try to find a sensible initial location from the last locations known to Android.
                 final Location lastGpsLocation = geoManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
                 final Location lastNetworkLocation = geoManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
