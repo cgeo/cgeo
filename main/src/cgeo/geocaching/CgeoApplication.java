@@ -1,10 +1,8 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.network.Cookies;
-import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.OOMDumpingUncaughtExceptionHandler;
 
@@ -61,13 +59,6 @@ public class CgeoApplication extends Application {
 
         // Restore cookies
         Cookies.restoreCookies();
-
-        final Sensors sensors = Sensors.getInstance();
-        sensors.setupGeoDataObservables(Settings.useGooglePlayServices(), Settings.useLowPowerMode());
-        sensors.setupDirectionObservable();
-
-        // Attempt to acquire an initial location before any real activity happens.
-        sensors.geoDataObservable(true).subscribeOn(AndroidRxUtils.looperCallbacksScheduler).take(1).subscribe();
     }
 
     /**

@@ -36,6 +36,7 @@ import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.Version;
 import cgeo.geocaching.utils.functions.Action1;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.SearchManager;
@@ -247,10 +248,17 @@ public class MainActivity extends AbstractActionBarActivity {
 
         Log.i("Starting " + getPackageName() + ' ' + Version.getVersionCode(this) + " a.k.a " + Version.getVersionName(this));
 
-        PermissionHandler.executeIfLocationPermissionGranted(this, 5555, new PermissionGrantedCallback() {
+        PermissionHandler.executeIfLocationPermissionGranted(this, new PermissionGrantedCallback(5555) {
             // TODO: go directly into execute if the device api level is below 26
             @Override
             public void execute() {
+                final Sensors sensors = Sensors.getInstance();
+                sensors.setupGeoDataObservables(Settings.useGooglePlayServices(), Settings.useLowPowerMode());
+                sensors.setupDirectionObservable();
+
+                // Attempt to acquire an initial location before any real activity happens.
+                sensors.geoDataObservable(true).subscribeOn(AndroidRxUtils.looperCallbacksScheduler).take(1).subscribe();
+
                 init();
             }
         });
@@ -266,25 +274,26 @@ public class MainActivity extends AbstractActionBarActivity {
     }
 
     @Override
-    public void onRequestPermissionsResult(final int requestCode, @NonNull String[] permissions, @NonNull final int[] grantResults) {
+    public void onRequestPermissionsResult(final int requestCode, @NonNull final String[] permissions, @NonNull final int[] grantResults) {
         if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            PermissionHandler.executeCallbackFor(requestCode);
+            PermissionHandler.executeCallbacksFor(permissions);
         } else {
             final Activity activity = this;
             new AlertDialog.Builder(this)
-                    //TODO: add translations for this text
+                    //TODO: add translations for the texts used by the following popup
                     .setMessage("c:geo needs your permission to access the location of your device. This app cannot be used without this permission.")
                     .setCancelable(false)
                     .setPositiveButton("Ask again", new DialogInterface.OnClickListener() {
                         @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            PermissionHandler.askAgainFor(requestCode, activity);
+                        public void onClick(final DialogInterface dialog, final int which) {
+                            PermissionHandler.askAgainFor(permissions, activity);
                         }
                     })
                     .setNegativeButton("Close app", new DialogInterface.OnClickListener() {
                         @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            // TODO: close app
+                        public void onClick(final DialogInterface dialog, final int which) {
+                            activity.finish();
+                            System.exit(0);
                         }
                     })
                     .setIcon(R.drawable.ic_menu_mylocation)
@@ -314,12 +323,19 @@ public class MainActivity extends AbstractActionBarActivity {
 
     @Override
     public void onResume() {
-        super.onResume(locationUpdater.start(GeoDirHandler.UPDATE_GEODATA | GeoDirHandler.LOW_POWER),
-                Sensors.getInstance().gpsStatusObservable().observeOn(AndroidSchedulers.mainThread()).subscribe(satellitesHandler));
-        updateUserInfoHandler.sendEmptyMessage(-1);
-        startBackgroundLogin();
-        init();
+        super.onResume();
+        PermissionHandler.executeIfLocationPermissionGranted(this, new PermissionGrantedCallback(1111) {
 
+            @SuppressLint("CheckResult")
+            @Override
+            public void execute() {
+                locationUpdater.start(GeoDirHandler.UPDATE_GEODATA | GeoDirHandler.LOW_POWER);
+                Sensors.getInstance().gpsStatusObservable().observeOn(AndroidSchedulers.mainThread()).subscribe(satellitesHandler);
+                updateUserInfoHandler.sendEmptyMessage(-1);
+                startBackgroundLogin();
+                init();
+            }
+        });
         connectivityChangeReceiver = new ConnectivityChangeReceiver();
         registerReceiver(connectivityChangeReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
     }
