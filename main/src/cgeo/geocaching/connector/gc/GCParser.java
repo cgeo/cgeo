@@ -92,9 +92,6 @@ public final class GCParser {
     private static final SynchronizedDateFormat DATE_TB_IN_2 = new SynchronizedDateFormat("EEEEE, MMMMM dd, yyyy", Locale.ENGLISH); // Saturday, March 28, 2009
 
     @NonNull
-    private static final SynchronizedDateFormat DATE_TB_IN_3 = new SynchronizedDateFormat("MM/dd/yyyy", Locale.ENGLISH); // 03/28/2009
-
-    @NonNull
     private static final ImmutablePair<StatusCode, Geocache> UNKNOWN_PARSE_ERROR = ImmutablePair.of(StatusCode.UNKNOWN_ERROR, null);
 
     private GCParser() {
@@ -1436,14 +1433,19 @@ public final class GCParser {
             }
         }
 
-        // retrieved date - can be missing on the page if trackable hasn't been found by the user
-        final String retrievedString = TextUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_RETRIEVED, false, null);
-        if (retrievedString != null) {
-            try {
-                trackable.setRetrieved(DATE_TB_IN_3.parse(retrievedString));
-            } catch (final ParseException e) {
-                Log.e("Could not parse trackable retrieved " + retrievedString, e);
+        // disposition - entire section can be missing on the page if trackable hasn't been found by the user
+        try {
+            final String dispositionType = TextUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_FOUND_DISPOSITION, false, null);
+            if (dispositionType != null) {
+                trackable.setDispositionType(StringUtils.trim(dispositionType));
             }
+            final MatcherWrapper retrievedMatcher = new MatcherWrapper(GCConstants.PATTERN_TRACKABLE_DISPOSITION_LOG, page);
+            if (retrievedMatcher.find()) {
+                trackable.setDisposition(GCLogin.parseGcCustomDate(StringUtils.trim(retrievedMatcher.group(2))));
+                trackable.setDispositionLogGuid(StringUtils.trim(retrievedMatcher.group(1)));
+            }
+        } catch (final Exception e) {
+            Log.e("GCParser.parseTrackable: Failed to parse retrieved", e);
         }
 
         // trackable distance

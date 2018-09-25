@@ -1167,7 +1167,7 @@
     <string name="trackable_geokrety">GeoKrety</string>
     <string name="trackable_geolutins">GeoLutins</string>
     <string name="trackable_status">Status</string>
-    <string name="trackable_found">Retrieved (%1$s)</string>
+    <string name="trackable_found">%1$s (%2$s)</string>
 
     <string name="geokret_type_traditional">Traditional</string>
     <string name="geokret_type_book_or_media">Book or electronic media</string>
