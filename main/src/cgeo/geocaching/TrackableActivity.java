@@ -461,6 +461,19 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
             // trackable geocode
             addContextMenu(details.add(R.string.trackable_code, trackable.getGeocode()).right);
 
+            // retrieved status
+            final Date disposition = trackable.getDisposition();
+            if (disposition != null) {
+                final Uri uri = new Uri.Builder().scheme("https").authority("www.geocaching.com").path("/track/log.aspx").encodedQuery("LUID=" + trackable.getDispositionLogGuid()).build();
+                final TextView dispositionView = details.add(R.string.trackable_status, res.getString(R.string.trackable_found, Html.fromHtml(trackable.getDispositionType()), Formatter.formatDate(disposition.getTime()))).right;
+                dispositionView.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startActivity(new Intent(Intent.ACTION_VIEW, uri));
+                    }
+                });
+            }
+
             // trackable owner
             final TextView owner = details.add(R.string.trackable_owner, res.getString(R.string.trackable_unknown)).right;
             if (StringUtils.isNotBlank(trackable.getOwner())) {

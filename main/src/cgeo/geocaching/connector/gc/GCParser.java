@@ -1433,6 +1433,21 @@ public final class GCParser {
             }
         }
 
+        // disposition - entire section can be missing on the page if trackable hasn't been found by the user
+        try {
+            final String dispositionType = TextUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_FOUND_DISPOSITION, false, null);
+            if (dispositionType != null) {
+                trackable.setDispositionType(StringUtils.trim(dispositionType));
+            }
+            final MatcherWrapper retrievedMatcher = new MatcherWrapper(GCConstants.PATTERN_TRACKABLE_DISPOSITION_LOG, page);
+            if (retrievedMatcher.find()) {
+                trackable.setDisposition(GCLogin.parseGcCustomDate(StringUtils.trim(retrievedMatcher.group(2))));
+                trackable.setDispositionLogGuid(StringUtils.trim(retrievedMatcher.group(1)));
+            }
+        } catch (final Exception e) {
+            Log.e("GCParser.parseTrackable: Failed to parse retrieved", e);
+        }
+
         // trackable distance
         final String distance = TextUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_DISTANCE, false, null);
         if (distance != null) {

@@ -61,6 +61,22 @@ public class TrackablesTest extends AbstractResourceInstrumentationTestCase {
         assertThat(trackable.getOrigin()).isNull();
     }
 
+    public void testParseTrackableWithRetrievedDate() {
+        final Trackable trackable = parseTrackable(R.raw.tb11jzk);
+        assertThat(trackable).isNotNull();
+        assertThat(trackable.getDisposition()).isNotNull();
+        assertThat(trackable.getDispositionType()).isEqualTo("Retrieved it");
+        assertThat(trackable.getDispositionLogGuid()).isEqualTo("2758cb91-a3b4-489f-9d99-1f5dd708c39f");
+    }
+
+    public void testParseTrackableWithDiscoveredDate() {
+        final Trackable trackable = parseTrackable(R.raw.tb84bz5);
+        assertThat(trackable).isNotNull();
+        assertThat(trackable.getDisposition()).isNotNull();
+        assertThat(trackable.getDispositionType()).isEqualTo("Discovered it");
+        assertThat(trackable.getDispositionLogGuid()).isEqualTo("c8093cd3-db0d-40db-b9f3-3d1671309d34");
+    }
+
     public void testParseRelativeLink() {
         final Trackable trackable = parseTrackable(R.raw.tb4cwjx);
         assertThat(trackable).isNotNull();
@@ -96,6 +112,9 @@ public class TrackablesTest extends AbstractResourceInstrumentationTestCase {
         assertThat(trackable.getSpottedGuid()).isNull();
         assertThat(trackable.getSpottedType()).isEqualTo(Trackable.SPOTTED_OWNER);
         assertThat(trackable.getReleased()).isNotNull();
+        assertThat(trackable.getDisposition()).isNull();
+        assertThat(trackable.getDispositionType()).isNull();
+        assertThat(trackable.getDispositionLogGuid()).isNull();
         assertThat(trackable.getType()).isEqualTo("Travel Bug Dog Tag");
         final List<LogEntry> logs = trackable.getLogs();
         assertThat(logs).isNotNull();
