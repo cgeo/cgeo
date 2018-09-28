@@ -27,9 +27,7 @@ android {
     }
 
     defaultConfig {
-        // TODO fill this section and remove the values from AndroidManifest only after the full switch to gradle
-        // As these values override the manifest, we might otherwise use different values in gradle and non-gradle builds.
-        minSdkVersion project.minSdkVersion
+        minSdkVersion 14
         targetSdkVersion 22
         versionName versionNameFromDate()
         versionCode versionCodeFromDate(0)
