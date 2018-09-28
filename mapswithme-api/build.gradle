@@ -6,7 +6,7 @@ android {
   compileSdkVersion 23
 
   defaultConfig {
-    minSdkVersion project.minSdkVersion
+    minSdkVersion 14
     targetSdkVersion 19
   }
 
