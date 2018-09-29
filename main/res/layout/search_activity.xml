@@ -73,7 +73,7 @@
             style="@style/edittext_full"
             android:hint="@string/search_geo"
             android:imeOptions="actionGo"
-            android:inputType="textCapCharacters"
+            android:inputType="textVisiblePassword"
             android:text="GC"
             tools:ignore="HardcodedText" />
 
@@ -160,7 +160,7 @@
             style="@style/edittext_full"
             android:hint="@string/search_tb_hint"
             android:imeOptions="actionGo"
-            android:inputType="textCapCharacters" />
+            android:inputType="textVisiblePassword" />
 
         <Button
             android:id="@+id/display_trackable"
