@@ -265,7 +265,7 @@ public class GCLogin extends AbstractLogin {
     }
 
     private String postCredentials(final Credentials credentials, final String requestVerificationToken) {
-        final Parameters params = new Parameters("Username", credentials.getUserName(),
+        final Parameters params = new Parameters("UsernameOrEmail", credentials.getUserName(),
                 "Password", credentials.getPassword(), REQUEST_VERIFICATION_TOKEN, requestVerificationToken);
         return getResponseBodyOrStatus(Network.postRequest(LOGIN_URI, params).blockingGet());
     }
