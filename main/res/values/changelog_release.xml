@@ -2,6 +2,9 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
+    <b>2018.10.13:</b>\n
+    · Fix: Login problems due to website change\n
+    \n
     <b>2018.09.17:</b>\n
     · Fix: Crashes on logging page during server instabilities\n
     · Fix: Greek translation not working\n
