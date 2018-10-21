@@ -280,16 +280,15 @@ public class MainActivity extends AbstractActionBarActivity {
         } else {
             final Activity activity = this;
             new AlertDialog.Builder(this)
-                    //TODO: add translations for the texts used by the following popup
-                    .setMessage("c:geo needs your permission to access the location of your device. This app cannot be used without this permission.")
+                    .setMessage(R.string.location_permission_request_explanation)
                     .setCancelable(false)
-                    .setPositiveButton("Ask again", new DialogInterface.OnClickListener() {
+                    .setPositiveButton(R.string.ask_again, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(final DialogInterface dialog, final int which) {
                             PermissionHandler.askAgainFor(permissions, activity);
                         }
                     })
-                    .setNegativeButton("Close app", new DialogInterface.OnClickListener() {
+                    .setNegativeButton(R.string.close_app, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(final DialogInterface dialog, final int which) {
                             activity.finish();
