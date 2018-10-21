@@ -915,6 +915,7 @@
     <string name="cache_menu_whereyougo">WhereYouGo</string>
     <string name="cache_menu_oruxmaps_online">OruxMaps (Online)</string>
     <string name="cache_menu_oruxmaps_offline">OruxMaps (Offline)</string>
+    <string name="cache_menu_navigon">Navigon</string>
     <string name="cache_menu_pebble">Pebble</string>
     <string name="cache_menu_android_wear">Android Wear</string>
     <string name="cache_menu_vote">Vote</string>
