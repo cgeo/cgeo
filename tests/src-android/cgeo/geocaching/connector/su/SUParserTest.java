@@ -8,8 +8,9 @@ import org.junit.Test;
 import java.io.InputStream;
 
 import cgeo.geocaching.SearchResult;
+import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 
-public class SUParserTest {
+public class SUParserTest extends AbstractResourceInstrumentationTestCase {
 
     @Test
     public void testCanHandle() throws Exception {
