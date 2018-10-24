@@ -19,7 +19,7 @@ import cgeo.geocaching.connector.oc.OCApiLiveConnector;
 import cgeo.geocaching.connector.oc.OCCZConnector;
 import cgeo.geocaching.connector.oc.OCConnector;
 import cgeo.geocaching.connector.oc.OCDEConnector;
-import cgeo.geocaching.connector.su.GeocachingSuConnector;
+import cgeo.geocaching.connector.su.SuConnector;
 import cgeo.geocaching.connector.tc.TerraCachingConnector;
 import cgeo.geocaching.connector.trackable.GeokretyConnector;
 import cgeo.geocaching.connector.trackable.GeolutinsConnector;
@@ -77,7 +77,7 @@ public final class ConnectorFactory {
             new GeopeitusConnector(),
             new TerraCachingConnector(),
             new WaymarkingConnector(),
-            GeocachingSuConnector.getInstance(),
+            SuConnector.getInstance(),
             UNKNOWN_CONNECTOR // the unknown connector MUST be the last one
     ));
 

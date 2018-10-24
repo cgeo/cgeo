@@ -33,6 +33,7 @@
     <string translatable="false" name="pref_fakekey_geokrety_authorization">fakekey_geokrety_authorization</string>
     <string translatable="false" name="pref_fakekey_gc_authorization">fakekey_gc_authorization</string>
     <string translatable="false" name="pref_fakekey_ec_authorization">fakekey_ec_authorization</string>
+    <string translatable="false" name="pref_fakekey_su_authorization">fakekey_su_authorization</string>
     <string translatable="false" name="pref_fakekey_gcvote_authorization">fakekey_gcvote_authorization</string>
     <string translatable="false" name="pref_connectorGCActive">connectorGCActive</string>
     <string translatable="false" name="pref_username">username</string>
@@ -44,6 +45,9 @@
     <string translatable="false" name="pref_connectorOCROActive">connectorOCROActive</string>
     <string translatable="false" name="pref_connectorOCUKActive">connectorOCUKActive</string>
     <string translatable="false" name="pref_connectorSUActive">connectorSUActive</string>
+    <string translatable="false" name="pref_suusername">suusername</string>
+    <string translatable="false" name="pref_supassword">supassword</string>
+    <string translatable="false" name="pref_su_avatar">su_avatar</string>
     <string translatable="false" name="pref_ecusername">ecusername</string>
     <string translatable="false" name="pref_ecpassword">ecpassword</string>
     <string translatable="false" name="pref_ec_avatar">ec_avatar</string>

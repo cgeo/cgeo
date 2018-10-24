@@ -168,6 +168,7 @@
     <string name="err_parse">Failed Login page parsing</string>
     <string name="err_server">Unable to contact Geocaching.com. The website may be down or your internet connection not working.</string>
     <string name="err_server_ec">Unable to contact Extremcaching.com. The website may be down or your internet connection not working.</string>
+    <string name="err_server_su">Unable to contact Geocaching.su. The website may be down or your internet connection not working.</string>
     <string name="err_server_gk">Unable to contact GeoKrety.org. The website may be down or your internet connection not working.</string>
     <string name="err_login">No Login information stored</string>
     <string name="err_login_failed_toast">c:geo can\'t log in. c:geo works offline with Stored caches. Check Login settings or enable your internet connection.</string>
@@ -488,6 +489,7 @@
 
     <string name="settings_title_gc">Geocaching.com</string>
     <string name="settings_title_ec">Extremcaching.com</string>
+    <string name="settings_title_su">Geocaching.su</string>
     <string name="settings_title_ox">Opencaching.com (Garmin)</string>
     <string name="settings_activate_gc">Activate</string>
     <string name="settings_activate_ec">Activate</string>

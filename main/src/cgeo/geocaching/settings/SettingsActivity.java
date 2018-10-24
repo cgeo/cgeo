@@ -11,7 +11,7 @@ import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.capability.ICredentials;
 import cgeo.geocaching.connector.ec.ECConnector;
 import cgeo.geocaching.connector.gc.GCConnector;
-import cgeo.geocaching.connector.su.GeocachingSuConnector;
+import cgeo.geocaching.connector.su.SuConnector;
 import cgeo.geocaching.files.SimpleDirChooser;
 import cgeo.geocaching.gcvote.GCVote;
 import cgeo.geocaching.maps.MapProviderFactory;
@@ -209,7 +209,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
         getPreference(R.string.preference_screen_ec).setSummary(getServiceSummary(Settings.isECConnectorActive()));
 
         getPreference(R.string.pref_connectorSUActive).setOnPreferenceChangeListener(this);
-        setWebsite(R.string.pref_fakekey_su_website, GeocachingSuConnector.getInstance().getHost());
+        setWebsite(R.string.pref_fakekey_su_website, SuConnector.getInstance().getHost());
         getPreference(R.string.preference_screen_su).setSummary(getServiceSummary(Settings.isSUConnectorActive()));
 
         getPreference(R.string.pref_ratingwanted).setOnPreferenceChangeListener(this);
@@ -671,6 +671,10 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
                 setAuthTitle(prefKeyId, ECConnector.getInstance());
                 setConnectedUsernameTitle(prefKeyId, ECConnector.getInstance());
                 break;
+            case R.string.pref_fakekey_su_authorization:
+                setAuthTitle(prefKeyId, SuConnector.getInstance());
+                setConnectedUsernameTitle(prefKeyId, SuConnector.getInstance());
+                break;
             case R.string.pref_fakekey_gcvote_authorization:
                 setAuthTitle(prefKeyId, GCVote.getInstance());
                 setConnectedUsernameTitle(prefKeyId, GCVote.getInstance());
@@ -821,6 +825,11 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
                 setGeokretyAuthTitle();
                 setConnectedTitle(requestCode, Settings.hasGeokretyAuthorization());
                 redrawScreen(R.string.preference_screen_geokrety);
+                break;
+            case R.string.pref_fakekey_su_authorization:
+                setAuthTitle(requestCode, SuConnector.getInstance());
+                setConnectedUsernameTitle(requestCode, SuConnector.getInstance());
+                redrawScreen(R.string.preference_screen_su);
                 break;
             default:
                 throw new IllegalArgumentException();
