@@ -73,7 +73,7 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity implemen
 
     private int contextMenuItemPosition;
 
-    private String distanceUnit = StringUtils.EMPTY;
+    private DistanceParser.UNIT distanceUnit = DistanceParser.UNIT.M;
 
     protected static class ViewHolder extends AbstractViewHolder {
         @BindView(R.id.simple_way_point_longitude) protected TextView longitude;
@@ -262,14 +262,12 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity implemen
     }
 
     private void initializeDistanceUnitSelector() {
-        if (StringUtils.isBlank(distanceUnit)) {
-            if (Settings.useImperialUnits()) {
-                getDistanceUnitSelector().setSelection(2); // ft
-                distanceUnit = res.getStringArray(R.array.distance_units)[2];
-            } else {
-                getDistanceUnitSelector().setSelection(0); // m
-                distanceUnit = res.getStringArray(R.array.distance_units)[0];
-            }
+        if (Settings.useImperialUnits()) {
+            getDistanceUnitSelector().setSelection(2); // ft
+            distanceUnit = DistanceParser.UNIT.getById(2);
+        } else {
+            getDistanceUnitSelector().setSelection(0); // m
+            distanceUnit = DistanceParser.UNIT.getById(0);
         }
 
         getDistanceUnitSelector().setOnItemSelectedListener(new ChangeDistanceUnit(this));
@@ -312,7 +310,7 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity implemen
         @Override
         public void onItemSelected(final AdapterView<?> arg0, final View arg1, final int arg2,
                 final long arg3) {
-            unitView.distanceUnit = (String) arg0.getItemAtPosition(arg2);
+            unitView.distanceUnit = DistanceParser.UNIT.getById(arg2);
         }
 
         @Override
@@ -486,8 +484,7 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity implemen
 
     private Geopoint getDestination() {
         final String bearingText = getBearingEditText().getText().toString();
-        // combine distance from EditText and distanceUnit saved from Spinner
-        final String distanceText = getDistanceEditText().getText().toString() + distanceUnit;
+        final String distanceText = getDistanceEditText().getText().toString();
         final String latText = getLatButton().getText().toString();
         final String lonText = getLonButton().getText().toString();
 
@@ -523,8 +520,8 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity implemen
 
             final double distance;
             try {
-                distance = DistanceParser.parseDistance(distanceText,
-                        !Settings.useImperialUnits());
+                final float srcDistance = Float.parseFloat(distanceText);
+                distance = DistanceParser.convertDistance(srcDistance, distanceUnit);
             } catch (final NumberFormatException ignored) {
                 showToast(res.getString(R.string.err_parse_dist));
                 return null;

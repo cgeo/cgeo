@@ -581,8 +581,9 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         }
 
         final String bearingText = bearing.getText().toString();
-        // combine distance from EditText and distanceUnit saved from Spinner
-        final String distanceText = distanceView.getText().toString() + distanceUnits.get(distanceUnitSelector.getSelectedItemPosition());
+        final String distanceText = distanceView.getText().toString();
+        final DistanceParser.UNIT distanceUnit = DistanceParser.UNIT.getById(distanceUnitSelector.getSelectedItemPosition());
+
         if (coords != null && StringUtils.isNotBlank(bearingText) && StringUtils.isNotBlank(distanceText)) {
             // bearing & distance
             final double bearing;
@@ -595,8 +596,8 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
 
             final double distance;
             try {
-                distance = DistanceParser.parseDistance(distanceText,
-                        !Settings.useImperialUnits());
+                final float srcDistance = Float.parseFloat(distanceText);
+                distance = DistanceParser.convertDistance(srcDistance, distanceUnit);
             } catch (final NumberFormatException ignored) {
                 showToast(res.getString(R.string.err_parse_dist));
                 return null;
