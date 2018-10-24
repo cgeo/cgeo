@@ -88,7 +88,7 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
         try {
             final MapFile mapFile = new MapFile(mapFileIn);
             return mapFile.getMapFileInfo().fileVersion <= 3 || !Settings.useOldMapsforgeAPI();
-        } catch (MapFileException ex){
+        } catch (MapFileException ex) {
             Log.w(String.format("Exception reading mapfile '%s'", mapFileIn), ex);
         }
         return false;
