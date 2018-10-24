@@ -30,8 +30,6 @@ import org.mapsforge.map.model.MapViewPosition;
 import org.mapsforge.map.reader.MapFile;
 import org.mapsforge.map.reader.header.MapFileException;
 import org.mapsforge.v3.android.maps.mapgenerator.MapGeneratorInternal;
-import org.mapsforge.v3.map.reader.MapDatabase;
-import org.mapsforge.v3.map.reader.header.FileOpenResult;
 
 public final class MapsforgeMapProvider extends AbstractMapProvider {
 
