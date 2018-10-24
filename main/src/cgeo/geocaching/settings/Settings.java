@@ -101,7 +101,11 @@ public class Settings {
     }
 
     private static final SharedPreferences sharedPrefs = PreferenceManager
-            .getDefaultSharedPreferences(CgeoApplication.getInstance().getBaseContext());
+            .getDefaultSharedPreferences(
+                    CgeoApplication
+                    .getInstance()
+                    .getBaseContext()
+                    );
     static {
         migrateSettings();
         Log.setDebug(sharedPrefs.getBoolean(getKey(R.string.pref_debug), false));
