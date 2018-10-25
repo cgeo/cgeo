@@ -1012,7 +1012,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         int id = startId;
 
         // If 'freeVariables' are to be displayed include a border around the tables
-        // such that it becomes apparent that their is a second table which may be off teh screen.
+        // such that it becomes apparent that their is a second table which may be off the screen.
         if (freeVariables.isEmpty()) {
             variablesScrollableContent.setBackgroundResource(0);
             variableDivider.setVisibility(View.GONE);
