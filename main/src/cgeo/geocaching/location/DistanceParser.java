@@ -1,32 +1,15 @@
 package cgeo.geocaching.location;
 
-import cgeo.geocaching.utils.MatcherWrapper;
-
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Locale;
 import java.util.regex.Pattern;
 
+import cgeo.geocaching.utils.MatcherWrapper;
+
 public final class DistanceParser {
 
     private static final Pattern pattern = Pattern.compile("^([0-9.,]+)[ ]*(m|km|ft|yd|mi|)?$", Pattern.CASE_INSENSITIVE);
-
-    public enum UNIT {
-        M(0), KM(1), FT(2), YD(3), MI(4);
-        private int value;
-
-        UNIT(int value) {
-            this.value = value;
-        }
-
-        public static UNIT getById(int id) {
-            for (final UNIT e : values()) {
-                if (e.value == id)
-                    return e;
-            }
-            return MI;
-        }
-    }
 
     private DistanceParser() {
         // utility class
@@ -79,7 +62,7 @@ public final class DistanceParser {
      * Converts distance from different units to kilometers
      *
      * @param distance source distance to convert
-     * @param unit   unit to convert from
+     * @param unit     unit to convert from
      * @return the distance in kilometers
      */
     public static float convertDistance(final float distance, final UNIT unit)
@@ -96,6 +79,24 @@ public final class DistanceParser {
             case KM:
             default:
                 return distance;
+        }
+    }
+
+    public enum UNIT {
+        M(0), KM(1), FT(2), YD(3), MI(4);
+        private int value;
+
+        UNIT(final int value) {
+            this.value = value;
+        }
+
+        public static UNIT getById(final int id) {
+            for (final UNIT e : values()) {
+                if (e.value == id) {
+                    return e;
+                }
+            }
+            return MI;
         }
     }
 
