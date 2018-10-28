@@ -223,7 +223,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
                     trackable.action = LogTypeTrackable.VISITED;
                 }
             } else { // refresh view
-                Integer tbStateId = trackableState.getInt(trackable.trackCode);
+                final Integer tbStateId = trackableState.getInt(trackable.trackCode);
                 if (tbStateId > 0) { // found in saved list
                     trackable.action = LogTypeTrackable.getById(tbStateId);
                 } else { // not found
