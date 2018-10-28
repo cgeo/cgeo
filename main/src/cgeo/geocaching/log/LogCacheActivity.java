@@ -79,6 +79,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     private static final String SAVED_STATE_IMAGE = "cgeo.geocaching.saved_state_image";
     private static final String SAVED_STATE_FAVPOINTS = "cgeo.geocaching.saved_state_favpoints";
     private static final String SAVED_STATE_PROBLEM = "cgeo.geocaching.saved_state_problem";
+    private static final String SAVED_STATE_TRACKABLES = "cgeo.geocaching.saved_state_trackables";
 
     private static final int SELECT_IMAGE = 101;
 
@@ -108,6 +109,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     private int premFavPoints;
     private ReportProblemType reportProblemSelected = ReportProblemType.NO_PROBLEM;
     private LogEntry oldLog;
+    private Bundle trackableState;
 
     private SaveMode saveMode = SaveMode.SMART;
 
@@ -215,8 +217,15 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     }
 
     private void initializeTrackablesAction() {
-        if (Settings.isTrackableAutoVisit()) {
-            for (final TrackableLog trackable : trackables) {
+        for (final TrackableLog trackable : trackables) {
+            if (trackableState != null) { // refresh view
+                final int tbStateId = trackableState.getInt(trackable.trackCode);
+                if (tbStateId > 0) { // found in saved list
+                    trackable.action = LogTypeTrackable.getById(tbStateId);
+                    continue;
+                }
+            }
+            if (Settings.isTrackableAutoVisit()) { // initial or new grabbed
                 trackable.action = LogTypeTrackable.VISITED;
             }
         }
@@ -353,6 +362,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
             image = savedInstanceState.getParcelable(SAVED_STATE_IMAGE);
             premFavPoints = savedInstanceState.getInt(SAVED_STATE_FAVPOINTS);
             reportProblemSelected = ReportProblemType.findByCode(savedInstanceState.getString(SAVED_STATE_PROBLEM));
+            trackableState = savedInstanceState.getBundle(SAVED_STATE_TRACKABLES);
         } else {
             // If log had been previously saved, load it now, otherwise initialize signature as needed
             loadLogFromDatabase();
@@ -512,6 +522,12 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         outState.putParcelable(SAVED_STATE_IMAGE, image);
         outState.putInt(SAVED_STATE_FAVPOINTS, premFavPoints);
         outState.putString(SAVED_STATE_PROBLEM, reportProblemSelected.code);
+        // save state of trackables
+        final Bundle outTrackables = new Bundle();
+        for (final TrackableLog trackable : trackables) {
+            outTrackables.putInt(trackable.trackCode, trackable.action.id);
+        }
+        outState.putBundle(SAVED_STATE_TRACKABLES, outTrackables);
     }
 
     @Override
