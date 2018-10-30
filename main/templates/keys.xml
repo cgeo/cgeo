@@ -26,4 +26,8 @@
     <!-- Opencache.uk -->
     <string name="oc_uk2_okapi_consumer_key" translatable="false">@ocuk.okapi.consumer.key@</string>
     <string name="oc_uk2_okapi_consumer_secret" translatable="false">@ocuk.okapi.consumer.secret@</string>
+
+    <!-- Geocaching.su -->
+    <string name="su_consumer_key" translatable="false">@su.consumer.key@</string>
+    <string name="su_consumer_secret" translatable="false">@su.consumer.secret@</string>
 </resources>
