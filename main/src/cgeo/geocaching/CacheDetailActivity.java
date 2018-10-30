@@ -69,19 +69,18 @@ import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.CheckerUtils;
 import cgeo.geocaching.utils.ClipboardUtils;
+import cgeo.geocaching.utils.ColorUtils;
 import cgeo.geocaching.utils.CryptUtils;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.MatcherWrapper;
 import cgeo.geocaching.utils.SimpleDisposableHandler;
 import cgeo.geocaching.utils.SimpleHandler;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.UnknownTagsHandler;
 import cgeo.geocaching.utils.functions.Action1;
 
-import android.R.color;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
@@ -91,6 +90,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -114,7 +114,9 @@ import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
+import android.text.style.BackgroundColorSpan;
 import android.text.style.ClickableSpan;
+import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
 import android.text.style.URLSpan;
 import android.text.util.Linkify;
@@ -147,7 +149,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 import java.util.concurrent.Callable;
-import java.util.regex.Pattern;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -175,21 +176,16 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
     private static final int MESSAGE_FAILED = -1;
     private static final int MESSAGE_SUCCEEDED = 1;
-    private static final String COLOR_END = "[;\"]";
 
-    private static final Pattern[] DARK_COLOR_PATTERNS = {
-            // html attributes
-            Pattern.compile("((?<!bg)color)=\"#" + "(0[0-9]){3}" + "\"", Pattern.CASE_INSENSITIVE),
-            Pattern.compile("((?<!bg)color)=\"" + "black" + "\"", Pattern.CASE_INSENSITIVE),
-            Pattern.compile("((?<!bg)color)=\"#" + "000080" + "\"", Pattern.CASE_INSENSITIVE),
-            // styles
-            Pattern.compile("((?<!background-)color):#" + "(0[0-9]){3}" + COLOR_END, Pattern.CASE_INSENSITIVE), Pattern.compile("((?<!background-)color):" + "black" + COLOR_END, Pattern.CASE_INSENSITIVE), Pattern.compile("((?<!background-)color):#" + "000080" + COLOR_END, Pattern.CASE_INSENSITIVE) };
-    private static final Pattern[] LIGHT_COLOR_PATTERNS = {
-            // html attributes
-            Pattern.compile("((?<!bg)color)=\"#" + "([F][6-9A-F]){3}" + "\"", Pattern.CASE_INSENSITIVE),
-            Pattern.compile("((?<!bg)color)=\"" + "white" + "\"", Pattern.CASE_INSENSITIVE),
-            // styles
-            Pattern.compile("((?<!background-)color):#" + "([F][6-9A-F]){3}" + COLOR_END, Pattern.CASE_INSENSITIVE), Pattern.compile("((?<!background-)color):" + "white" + COLOR_END, Pattern.CASE_INSENSITIVE) };
+    /**
+     * Minimal contrast ratio. If description:background contrast ratio is less than this value
+     * for some string, foreground color will be removed and gray background will be used
+     * in order to highlight the string
+     *
+     * @see <a href="https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html">W3 Minimum Contrast</a>
+     **/
+    private static final float CONTRAST_THRESHOLD = 4.5f;
+
     public static final String STATE_PAGE_INDEX = "cgeo.geocaching.pageIndex";
 
     // Store Geocode here, as 'cache' is loaded Async.
@@ -1714,10 +1710,16 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
          */
         private void loadDescription(final String descriptionString, final IndexOutOfBoundsAvoidingTextView descriptionView, final View loadingIndicatorView) {
             try {
+                final int backgroundColor = Settings.isLightSkin() ? Color.WHITE : Color.BLACK;
+                descriptionView.setBackgroundColor(backgroundColor);
+
                 final UnknownTagsHandler unknownTagsHandler = new UnknownTagsHandler();
-                final Spanned description = Html.fromHtml(descriptionString, new HtmlImage(cache.getGeocode(), true, false, descriptionView, false), unknownTagsHandler);
+                final Spannable description = new SpannableString(Html.fromHtml(descriptionString, new HtmlImage(cache.getGeocode(), true, false, descriptionView, false), unknownTagsHandler));
                 addWarning(unknownTagsHandler, description);
-                if (StringUtils.isNotBlank(descriptionString)) {
+                if (StringUtils.isNotBlank(description)) {
+                    fixRelativeLinks(description);
+                    fixTextColor(description, backgroundColor);
+
                     try {
                         if (descriptionView.getText().length() == 0) {
                             descriptionView.setText(description, TextView.BufferType.SPANNABLE);
@@ -1732,9 +1734,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                         descriptionView.append(description.toString());
                     }
 
-                    fixRelativeLinks(descriptionView);
                     descriptionView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
-                    fixTextColor(descriptionString, descriptionView);
                     descriptionView.setVisibility(View.VISIBLE);
                     addContextMenu(descriptionView);
                     potentiallyHideShortDescription();
@@ -1747,9 +1747,8 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             }
         }
 
-        private void fixRelativeLinks(final TextView descriptionView) {
+        private void fixRelativeLinks(final Spannable spannable) {
             final String baseUrl = ConnectorFactory.getConnector(cache).getHostUrl() + "/";
-            final Spannable spannable = (Spannable) descriptionView.getText();
             final URLSpan[] spans = spannable.getSpans(0, spannable.length(), URLSpan.class);
             for (final URLSpan span : spans) {
                 final Uri uri = Uri.parse(span.getURL());
@@ -1781,30 +1780,18 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         }
     }
 
-    private static void fixTextColor(final String descriptionString, final IndexOutOfBoundsAvoidingTextView descriptionView) {
-        final int backcolor;
-        if (Settings.isLightSkin()) {
-            backcolor = color.white;
+    private static void fixTextColor(final Spannable spannable, final int backgroundColor) {
+        final ForegroundColorSpan[] spans = spannable.getSpans(0, spannable.length(), ForegroundColorSpan.class);
 
-            for (final Pattern pattern : LIGHT_COLOR_PATTERNS) {
-                final MatcherWrapper matcher = new MatcherWrapper(pattern, descriptionString);
-                if (matcher.find()) {
-                    descriptionView.setBackgroundResource(color.darker_gray);
-                    return;
-                }
-            }
-        } else {
-            backcolor = color.black;
+        for (final ForegroundColorSpan span : spans) {
+            if (ColorUtils.getContrastRatio(span.getForegroundColor(), backgroundColor) < CONTRAST_THRESHOLD) {
+                final int start = spannable.getSpanStart(span);
+                final int end = spannable.getSpanEnd(span);
 
-            for (final Pattern pattern : DARK_COLOR_PATTERNS) {
-                final MatcherWrapper matcher = new MatcherWrapper(pattern, descriptionString);
-                if (matcher.find()) {
-                    descriptionView.setBackgroundResource(color.darker_gray);
-                    return;
-                }
+                spannable.removeSpan(span);
+                spannable.setSpan(new BackgroundColorSpan(Color.GRAY), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
         }
-        descriptionView.setBackgroundResource(backcolor);
     }
 
     /**
