@@ -18,7 +18,7 @@ public interface ILogin extends IConnector {
      *            Calling activity context
      * @return true in case of success, false in case of failure
      */
-    boolean login(Handler handler, @Nullable Activity fromActivity);
+    boolean login(final Handler handler, @Nullable final Activity fromActivity);
 
     /**
      * Log out of the connector if possible.
