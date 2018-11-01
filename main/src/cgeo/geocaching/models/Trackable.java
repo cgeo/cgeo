@@ -229,7 +229,8 @@ public class Trackable implements ILogable {
     }
 
     public void setDisposition(@Nullable final Date disposition) {
-        this.disposition = disposition == null ? null : new Date(disposition.getTime()); // avoid storing external reference in this object
+        // avoid storing external reference in this object
+        this.disposition = disposition != null ? new Date(disposition.getTime()) : null;
     }
 
     public String getDispositionType() {
