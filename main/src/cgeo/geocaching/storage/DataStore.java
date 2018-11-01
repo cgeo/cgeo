@@ -2223,7 +2223,7 @@ public class DataStore {
 
         final Cursor cursor = database.query(
                 dbTableTrackables,
-                new String[]{"_id", "updated", "tbcode", "guid", "title", "owner", "released", "goal", "description", "retrieved"},
+                new String[]{"_id", "updated", "tbcode", "guid", "title", "owner", "released", "goal", "description", "log_date", "log_type", "log_guid"},
                 "geocode = ?",
                 new String[]{geocode},
                 null,
