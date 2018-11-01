@@ -5,43 +5,43 @@
 defaultTasks 'cgeoHelp'
 
 task cgeoHelp {
-	doLast {
-		println ''
-		println 'These are some of the available commands for building cgeo.'
-		println ''
-		println 'cleaning all generated artifacts:'
-		println '    gradlew clean'
-		println ''
-		println 'build:'
-		println '    gradlew assembleDebug'
-		println ''
-		println 'install on connected device/emulator:'
-		println '    gradlew installBasicDebug'
-		println ''
-		println 'run app on connected device/emulator:'
-		println '    gradlew runBasicDebug'
-		println ''
-		println 'instrumentation tests on connected device/emulator:'
-		println '    gradlew connectedBasicDebugAndroidTest'
-		println ''
-		println 'pure unit tests WITHOUT device'
-		println '    gradlew testBasicDebugUnitTest'
-		println ''
-		println 'all unit tests (pure and instrumentation)'
-		println '    gradlew testDebug'
-		println ''
-		println 'check project dependencies for updates:'
-		println '    gradlew dependencies main:dependencies'
-		println ''
-		println 'check gradle dependencies for updates:'
-		println '    gradlew dependencyUpdates'
-		println ''
-		println 'Use "gradlew tasks" for more available tasks.'
-		println ''
-		println ''
-		println 'Available build types are: debug, nightly (requires an env var named NB), ' +
-				'rc (requires an env var named RC), release.'
-	}
+    doLast {
+        println ''
+        println 'These are some of the available commands for building cgeo.'
+        println ''
+        println 'cleaning all generated artifacts:'
+        println '    gradlew clean'
+        println ''
+        println 'build:'
+        println '    gradlew assembleDebug'
+        println ''
+        println 'install on connected device/emulator:'
+        println '    gradlew installBasicDebug'
+        println ''
+        println 'run app on connected device/emulator:'
+        println '    gradlew runBasicDebug'
+        println ''
+        println 'instrumentation tests on connected device/emulator:'
+        println '    gradlew connectedBasicDebugAndroidTest'
+        println ''
+        println 'pure unit tests WITHOUT device'
+        println '    gradlew testBasicDebugUnitTest'
+        println ''
+        println 'all unit tests (pure and instrumentation)'
+        println '    gradlew testDebug'
+        println ''
+        println 'check project dependencies for updates:'
+        println '    gradlew dependencies main:dependencies'
+        println ''
+        println 'check gradle dependencies for updates:'
+        println '    gradlew dependencyUpdates'
+        println ''
+        println 'Use "gradlew tasks" for more available tasks.'
+        println ''
+        println ''
+        println 'Available build types are: debug, nightly (requires an env var named NB), ' +
+                'rc (requires an env var named RC), release.'
+    }
 }
 
 configure(cgeoHelp) {
@@ -62,106 +62,106 @@ apply plugin: 'idea'
 buildscript {
     repositories {
         jcenter()
-		// gradle build-scan for profiling our build script
-		maven {
-			url 'https://plugins.gradle.org/m2'
-		}
-		google()
-	}
+        // gradle build-scan for profiling our build script
+        maven {
+            url 'https://plugins.gradle.org/m2'
+        }
+        google()
+    }
     dependencies {
-		// these dependencies are used by gradle plugins, not by our projects
+        // these dependencies are used by gradle plugins, not by our projects
 
-		// check for updates of gradle plugin dependencies
-		classpath 'com.github.ben-manes:gradle-versions-plugin:0.17.0'
+        // check for updates of gradle plugin dependencies
+        classpath 'com.github.ben-manes:gradle-versions-plugin:0.17.0'
 
-		// Android gradle plugin
+        // Android gradle plugin
         classpath 'com.android.tools.build:gradle:3.1.1'
 
-		// un-mocking of portable Android classes
-		classpath 'de.mobilej.unmock:UnMockPlugin:0.6.4'
+        // un-mocking of portable Android classes
+        classpath 'de.mobilej.unmock:UnMockPlugin:0.6.4'
 
-		// Google Services (App Invite) has its own Gradle plugin
-		classpath 'com.google.gms:google-services:2.1.0'
+        // Google Services (App Invite) has its own Gradle plugin
+        classpath 'com.google.gms:google-services:2.1.0'
 
-		// monitor our application method limit
-		classpath 'com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.8.2'
+        // monitor our application method limit
+        classpath 'com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.8.2'
 
-		// ribbonizer for easier distinction of non-release builds
-		classpath 'com.github.gfx.ribbonizer:ribbonizer-plugin:2.1.0'
+        // ribbonizer for easier distinction of non-release builds
+        classpath 'com.github.gfx.ribbonizer:ribbonizer-plugin:2.1.0'
 
-		// gradle build script profiling
-		classpath 'com.gradle:build-scan-plugin:1.13.1'
-	}
+        // gradle build script profiling
+        classpath 'com.gradle:build-scan-plugin:1.13.1'
+    }
 }
 
 // filter out non release version updates and other updates we cannot use
 allprojects {
-	configurations {
-		all {
-			resolutionStrategy {
-				componentSelection {
-					all { ComponentSelection selection ->
-						boolean rejected = ['alpha', 'beta', 'rc', 'cr', 'm', 'pr'].any { qualifier ->
-							selection.candidate.version.contains(qualifier)
-						}
-						// allow beta version of androidsvg
-						if (selection.candidate.group == 'com.caverock') {
-							rejected = false
-						}
-						// google auto service only available as rc2 right now
-						if (selection.candidate.group == 'com.google.auto.service') {
-							rejected = false
-						}
-						if (rejected) {
-							selection.reject('Release candidate')
-						}
+    configurations {
+        all {
+            resolutionStrategy {
+                componentSelection {
+                    all { ComponentSelection selection ->
+                        boolean rejected = ['alpha', 'beta', 'rc', 'cr', 'm', 'pr'].any { qualifier ->
+                            selection.candidate.version.contains(qualifier)
+                        }
+                        // allow beta version of androidsvg
+                        if (selection.candidate.group == 'com.caverock') {
+                            rejected = false
+                        }
+                        // google auto service only available as rc2 right now
+                        if (selection.candidate.group == 'com.google.auto.service') {
+                            rejected = false
+                        }
+                        if (rejected) {
+                            selection.reject('Release candidate')
+                        }
 
-						// https://github.com/joel-costigliola/assertj-core/issues/345
-						if (selection.candidate.group == 'org.assertj' && selection.candidate.module == 'assertj-core' && selection.candidate.version.substring(0,1).toInteger() > 2) {
-							selection.reject("assertj 3.x or higher require Java 7 SE classes not available in Android")
-						}
-						// findbugs team has some release trouble
-						if (selection.candidate.group == 'com.google.code.findbugs' && selection.candidate.module == 'annotations' && selection.candidate.version == '3.0.1') {
-							selection.reject("3.0.1 is not an upgrade of 3.0.1u2")
-						}
-						// Apache Commons Lang 3.6 requires Java7, https://github.com/apache/commons-lang/commit/9b481a97010a19e375cf423ffe25dda1b40e0e47
-						if (selection.candidate.group == 'org.apache.commons' && selection.candidate.module == 'commons-lang3' && selection.candidate.version.substring(0,1).toInteger()*10+selection.candidate.version.substring(2,3).toInteger() > 35) {
-							selection.reject("Apache Commons Lang3 3.6 or higher requires Java 7.")
-						}
-						// Apache Commons IO 2.6 requires Java7, https://commons.apache.org/proper/commons-io/upgradeto2_6.html
-						if (selection.candidate.group == 'commons-io' && selection.candidate.module == 'commons-io' && selection.candidate.version.substring(0,1).toInteger()*10+selection.candidate.version.substring(2,3).toInteger() > 25) {
-							selection.reject("Apache Commons IO 2.6 or higher requires Java 7.")
-						}
-						// Apache Commons Compress 1.15 requires Java7 Sun classes
-						if (selection.candidate.group == 'org.apache.commons' && selection.candidate.module == 'commons-compress' && selection.candidate.version.substring(0,1).toInteger()*100+selection.candidate.version.substring(2,4).toInteger() > 114) {
-							selection.reject("Apache Commons Compress 1.15 or higher requires Java 7.")
-						}
-					}
-				}
-			}
-		}
-	}
+                        // https://github.com/joel-costigliola/assertj-core/issues/345
+                        if (selection.candidate.group == 'org.assertj' && selection.candidate.module == 'assertj-core' && selection.candidate.version.substring(0,1).toInteger() > 2) {
+                            selection.reject("assertj 3.x or higher require Java 7 SE classes not available in Android")
+                        }
+                        // findbugs team has some release trouble
+                        if (selection.candidate.group == 'com.google.code.findbugs' && selection.candidate.module == 'annotations' && selection.candidate.version == '3.0.1') {
+                            selection.reject("3.0.1 is not an upgrade of 3.0.1u2")
+                        }
+                        // Apache Commons Lang 3.6 requires Java7, https://github.com/apache/commons-lang/commit/9b481a97010a19e375cf423ffe25dda1b40e0e47
+                        if (selection.candidate.group == 'org.apache.commons' && selection.candidate.module == 'commons-lang3' && selection.candidate.version.substring(0,1).toInteger()*10+selection.candidate.version.substring(2,3).toInteger() > 35) {
+                            selection.reject("Apache Commons Lang3 3.6 or higher requires Java 7.")
+                        }
+                        // Apache Commons IO 2.6 requires Java7, https://commons.apache.org/proper/commons-io/upgradeto2_6.html
+                        if (selection.candidate.group == 'commons-io' && selection.candidate.module == 'commons-io' && selection.candidate.version.substring(0,1).toInteger()*10+selection.candidate.version.substring(2,3).toInteger() > 25) {
+                            selection.reject("Apache Commons IO 2.6 or higher requires Java 7.")
+                        }
+                        // Apache Commons Compress 1.15 requires Java7 Sun classes
+                        if (selection.candidate.group == 'org.apache.commons' && selection.candidate.module == 'commons-compress' && selection.candidate.version.substring(0,1).toInteger()*100+selection.candidate.version.substring(2,4).toInteger() > 114) {
+                            selection.reject("Apache Commons Compress 1.15 or higher requires Java 7.")
+                        }
+                    }
+                }
+            }
+        }
+    }
 
-	repositories {
-		mavenCentral()
-		jcenter()
-		// hosts e.g. viewpagerindicator
-		maven {
-			url "https://jitpack.io"
-		}
-		// viewpager fork
-		maven {
-			url 'https://dl.bintray.com/alexeydanilov/maven'
-		}
-		// Android Support libraries are now in an online Maven repository
-		google()
-	}
+    repositories {
+        mavenCentral()
+        jcenter()
+        // hosts e.g. viewpagerindicator
+        maven {
+            url "https://jitpack.io"
+        }
+        // viewpager fork
+        maven {
+            url 'https://dl.bintray.com/alexeydanilov/maven'
+        }
+        // Android Support libraries are now in an online Maven repository
+        google()
+    }
 }
 
 
 buildScan {
-	licenseAgreementUrl = 'https://gradle.com/terms-of-service'
-	licenseAgree = 'yes'
+    licenseAgreementUrl = 'https://gradle.com/terms-of-service'
+    licenseAgree = 'yes'
 }
 
 
@@ -173,12 +173,12 @@ ext.minSdkVersion = 14
 
 subprojects {
     repositories {
-		mavenCentral()
-		jcenter()
-		// hosts e.g. viewpagerindicator
-		maven {
-			url "https://jitpack.io"
-		}
+        mavenCentral()
+        jcenter()
+        // hosts e.g. viewpagerindicator
+        maven {
+            url "https://jitpack.io"
+        }
     }
 
     // disable warning of annotation processor about annotation types with no registered processor (like @NonNull)
@@ -196,5 +196,5 @@ subprojects {
  * Make sure that we use the source distribution when updating the wrapper from the command line.
  */
 task wrapper(type: Wrapper) {
-	distributionType = "all"
+    distributionType = "all"
 }

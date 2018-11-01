@@ -29,10 +29,10 @@ android {
     }
 
     lintOptions {
-    	// generally we accept lint errors when building
+        // generally we accept lint errors when building
         abortOnError false
 
-    	// abort release builds in case of FATAL errors
+        // abort release builds in case of FATAL errors
         checkReleaseBuilds true
     }
 }

@@ -7,7 +7,8 @@
     · Fix: Reorder menu items on logging screen to prevent accidental deletion of log\n
     · Fix: Waypoints on mapsforge map hidden already below configured limit\n
            Known issue:\n
-           Waypoints from other lists might leak onto the map....we are working on it\n  
+           Waypoints from other lists might leak onto the map....we are working on it\n
+    · New: Better keyboard layout while searching for geocaches or trackables on the search activity\n
     \n
   </string>
 </resources>
