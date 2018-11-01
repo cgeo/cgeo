@@ -899,7 +899,7 @@ public class DataStore {
                     if (oldVersion < 75) {
                         try {
                             db.execSQL("ALTER TABLE " + dbTableTrackables + " ADD COLUMN disposition LONG");
-                            db.execSQL("ALTER TABLE " + dbTableTrackables + " ADD COLUMN disposition_type STRING");
+                            db.execSQL("ALTER TABLE " + dbTableTrackables + " ADD COLUMN disposition_type TEXT");
                             db.execSQL("ALTER TABLE " + dbTableTrackables + " ADD COLUMN disposition_log_guid STRING");
                         } catch (final Exception e) {
                             Log.e("Failed to upgrade to ver. 75", e);
