@@ -38,9 +38,9 @@ public class Trackable implements ILogable {
     private String type = null;
     @Nullable
     private Date released = null;
-    private Date disposition = null;
-    private String dispositionLogGuid;
-    private String dispositionType;
+    private Date logDate = null;
+    private String logGuid;
+    private String logType;
     private float distance = -1;
     private String origin = null;
     private String owner = null;
@@ -72,9 +72,9 @@ public class Trackable implements ILogable {
 
         type = ObjectUtils.defaultIfNull(newTrackable.type, type);
         released = ObjectUtils.defaultIfNull(newTrackable.released, released);
-        disposition = ObjectUtils.defaultIfNull(newTrackable.disposition, disposition);
-        dispositionType = ObjectUtils.defaultIfNull(newTrackable.dispositionType, dispositionType);
-        dispositionLogGuid = ObjectUtils.defaultIfNull(newTrackable.dispositionLogGuid, dispositionLogGuid);
+        logDate = ObjectUtils.defaultIfNull(newTrackable.logDate, logDate);
+        logType = ObjectUtils.defaultIfNull(newTrackable.logType, logType);
+        logGuid = ObjectUtils.defaultIfNull(newTrackable.logGuid, logGuid);
         distance = newTrackable.distance == -1 ? distance : newTrackable.distance;
         origin = ObjectUtils.defaultIfNull(newTrackable.origin, origin);
         owner = ObjectUtils.defaultIfNull(newTrackable.owner, owner);
@@ -221,32 +221,32 @@ public class Trackable implements ILogable {
     }
 
     @Nullable
-    public Date getDisposition() {
-        if (disposition != null) {
-            return new Date(disposition.getTime());
+    public Date getLogDate() {
+        if (logDate != null) {
+            return new Date(logDate.getTime());
         }
         return null;
     }
 
-    public void setDisposition(@Nullable final Date disposition) {
+    public void setLogDate(@Nullable final Date logDate) {
         // avoid storing external reference in this object
-        this.disposition = disposition != null ? new Date(disposition.getTime()) : null;
+        this.logDate = logDate != null ? new Date(logDate.getTime()) : null;
     }
 
-    public String getDispositionType() {
-        return dispositionType;
+    public String getLogType() {
+        return logType;
     }
 
-    public void setDispositionType(String dispositionType) {
-        this.dispositionType = dispositionType;
+    public void setLogType(String logType) {
+        this.logType = logType;
     }
 
-    public void setDispositionLogGuid(String dispositionLogGuid) {
-        this.dispositionLogGuid = dispositionLogGuid;
+    public void setLogGuid(String logGuid) {
+        this.logGuid = logGuid;
     }
 
-    public String getDispositionLogGuid() {
-        return dispositionLogGuid;
+    public String getLogGuid() {
+        return logGuid;
     }
 
     public float getDistance() {

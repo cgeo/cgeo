@@ -102,7 +102,7 @@ public final class GCConstants {
     /** Two groups ! */
     static final Pattern PATTERN_TRACKABLE_OWNER = Pattern.compile("<a id=\"ctl00_ContentBody_BugDetails_BugOwner\"[^>]+href=\"https?://www.geocaching.com/profile/\\?guid=(.*?)\">(.*?)</a>");
     static final Pattern PATTERN_TRACKABLE_RELEASES = Pattern.compile("<span id=\"ctl00_ContentBody_BugDetails_BugReleaseDate\">([^<]+)<\\/span>[^<]*</dd>");
-    static final Pattern PATTERN_TRACKABLE_FOUND_DISPOSITION = Pattern.compile("<span id=\"ctl00_ContentBody_InteractionLogTypeText\"[^>]*>(.*?)!</span>");
+    static final Pattern PATTERN_TRACKABLE_FOUND_LOG = Pattern.compile("<span id=\"ctl00_ContentBody_InteractionLogTypeText\"[^>]*>(.*?)!</span>");
     static final Pattern PATTERN_TRACKABLE_DISPOSITION_LOG = Pattern.compile("<a id=\"ctl00_ContentBody_InteractionLogLink\"[^>]*href=\"/track/log.aspx\\?LUID=([a-z0-9\\-]+)\">[^0-9]+(.*?)</a>");
     static final Pattern PATTERN_TRACKABLE_ORIGIN = Pattern.compile("<span id=\"ctl00_ContentBody_BugDetails_BugOrigin\">([^<]+)<\\/span>[^<]*</dd>");
     /** Two groups ! */

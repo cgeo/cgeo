@@ -79,9 +79,9 @@ public class CgeoApplicationTest extends CGeoTestCase {
         assertThat(tb.getName()).isEqualTo("blafoo's Children Music CD");
         assertThat(tb.getType()).isEqualTo("Travel Bug Dog Tag");
         assertThat(tb.getReleased()).isEqualTo(new GregorianCalendar(2009, 8 - 1, 24).getTime());
-        assertThat(tb.getDisposition()).isNull();
-        assertThat(tb.getDispositionType()).isNull();
-        assertThat(tb.getDispositionLogGuid()).isNull();
+        assertThat(tb.getLogDate()).isNull();
+        assertThat(tb.getLogType()).isNull();
+        assertThat(tb.getLogGuid()).isNull();
         assertThat(tb.getOrigin()).isEqualTo("Niedersachsen, Germany");
         assertThat(tb.getOwner()).isEqualTo("blafoo");
         assertThat(tb.getOwnerGuid()).isEqualTo("0564a940-8311-40ee-8e76-7e91b2cf6284");

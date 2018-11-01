@@ -329,9 +329,9 @@ public class DataStore {
             + "goal TEXT, "
             + "description TEXT, "
             + "geocode TEXT, "
-            + "disposition LONG, "
-            + "disposition_type TEXT, "
-            + "disposition_log_guid TEXT "
+            + "log_date LONG, "
+            + "log_type TEXT, "
+            + "log_guid TEXT "
             + "); ";
 
     private static final String dbCreateSearchDestinationHistory = ""
@@ -895,12 +895,12 @@ public class DataStore {
                         }
                     }
 
-                    // Adds disposition information for trackables
+                    // Adds log information for trackables
                     if (oldVersion < 75) {
                         try {
-                            db.execSQL("ALTER TABLE " + dbTableTrackables + " ADD COLUMN disposition LONG");
-                            db.execSQL("ALTER TABLE " + dbTableTrackables + " ADD COLUMN disposition_type TEXT");
-                            db.execSQL("ALTER TABLE " + dbTableTrackables + " ADD COLUMN disposition_log_guid TEXT");
+                            db.execSQL("ALTER TABLE " + dbTableTrackables + " ADD COLUMN log_date LONG");
+                            db.execSQL("ALTER TABLE " + dbTableTrackables + " ADD COLUMN log_type TEXT");
+                            db.execSQL("ALTER TABLE " + dbTableTrackables + " ADD COLUMN log_guid TEXT");
                         } catch (final Exception e) {
                             Log.e("Failed to upgrade to ver. 75", e);
                         }
@@ -1666,14 +1666,14 @@ public class DataStore {
                     values.put("released", 0L);
                 }
 
-                final Date disposition = trackable.getDisposition();
-                if (disposition != null) {
-                    values.put("disposition", disposition.getTime());
+                final Date logDate = trackable.getLogDate();
+                if (logDate != null) {
+                    values.put("log_date", logDate.getTime());
                 } else {
-                    values.put("disposition", 0L);
+                    values.put("log_date", 0L);
                 }
-                values.put("disposition_type", trackable.getDispositionType());
-                values.put("disposition_log_guid", trackable.getDispositionLogGuid());
+                values.put("log_type", trackable.getLogType());
+                values.put("log_guid", trackable.getLogGuid());
                 values.put("goal", trackable.getGoal());
                 values.put("description", trackable.getDetails());
 
@@ -2281,17 +2281,17 @@ public class DataStore {
                 Log.e("createTrackableFromDatabaseContent", e);
             }
         }
-        final String retrieved = cursor.getString(cursor.getColumnIndex("disposition"));
-        if (retrieved != null) {
+        final String logDate = cursor.getString(cursor.getColumnIndex("log_date"));
+        if (logDate != null) {
             try {
-                final long retrievedMilliSeconds = Long.parseLong(retrieved);
-                trackable.setDisposition(new Date(retrievedMilliSeconds));
+                final long logDateMillis = Long.parseLong(logDate);
+                trackable.setLogDate(new Date(logDateMillis));
             } catch (final NumberFormatException e) {
                 Log.e("createTrackableFromDatabaseContent", e);
             }
         }
-        trackable.setDispositionType(cursor.getString(cursor.getColumnIndex("disposition_type")));
-        trackable.setDispositionLogGuid(cursor.getString(cursor.getColumnIndex("disposition_log_guid")));
+        trackable.setLogType(cursor.getString(cursor.getColumnIndex("log_type")));
+        trackable.setLogGuid(cursor.getString(cursor.getColumnIndex("log_guid")));
         trackable.setGoal(cursor.getString(cursor.getColumnIndex("goal")));
         trackable.setDetails(cursor.getString(cursor.getColumnIndex("description")));
         trackable.setLogs(loadLogs(trackable.getGeocode()));
